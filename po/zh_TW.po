@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.0.2\n"
-"POT-Creation-Date: 2002-10-02 07:46+0800\n"
+"POT-Creation-Date: 2002-11-23 13:18-0500\n"
 "PO-Revision-Date: 2002-10-02 07:43+0800\n"
 "Last-Translator: Abel Cheung <maddog@linux.org.hk>\n"
 "Language-Team: traditional Chinese <zh-l10n@linux.org.tw>\n"
@@ -236,7 +236,7 @@ msgstr "不使用圖案(_N)"
 msgid "Select _picture:"
 msgstr "請選擇圖案(_P)："
 
-#: capplets/background/background-properties-capplet.c:561
+#: capplets/background/background-properties-capplet.c:567
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:712
 #: capplets/keyboard/gnome-keyboard-properties.c:293
@@ -245,7 +245,7 @@ msgstr "請選擇圖案(_P)："
 msgid "Retrieve and store legacy settings"
 msgstr "讀入舊版本的設定"
 
-#: capplets/background/background-properties-capplet.c:587
+#: capplets/background/background-properties-capplet.c:593
 #: capplets/background/background-properties.glade.h:2
 msgid "Background Preferences"
 msgstr "背景圖案偏好設定"
@@ -791,11 +791,11 @@ msgstr "舊式軟體"
 msgid "Legacy applications settings (grdb)"
 msgstr "舊式軟體設定（grdb）"
 
-#: capplets/file-types/file-types-capplet.c:214
+#: capplets/file-types/file-types-capplet.c:194
 msgid "Description"
 msgstr "說明"
 
-#: capplets/file-types/file-types-capplet.c:236
+#: capplets/file-types/file-types-capplet.c:216
 msgid "Extensions"
 msgstr "延伸檔名"
 
@@ -1154,22 +1154,27 @@ msgstr "桌面"
 msgid "Window Management"
 msgstr "視窗管理"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:568
+#: capplets/keybindings/gnome-keybinding-properties.c:593
+#, c-format
+msgid "That accelerator key is already in use by: %s\n"
+msgstr ""
+
+#: capplets/keybindings/gnome-keybinding-properties.c:620
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "在組態資料庫中設定新的快速鍵時出現錯誤：%s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:719
+#: capplets/keybindings/gnome-keybinding-properties.c:771
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:741
+#: capplets/keybindings/gnome-keybinding-properties.c:793
 msgid "Action"
 msgstr "行動"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:759
+#: capplets/keybindings/gnome-keybinding-properties.c:811
 msgid "Shortcut"
 msgstr "捷徑鍵"
 
@@ -1725,69 +1730,70 @@ msgid "Select the toolbar style."
 msgstr "選擇工具列樣式。"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:13
+#, fuzzy
+msgid "Show _icons in menus"
+msgstr "在選單中顯示圖示(_S)"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:14
 msgid "Text Below Icons"
 msgstr "圖示下加上文字"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:14
+#: capplets/ui-properties/gnome-ui-properties.glade.h:15
 msgid "Text Beside Icons"
 msgstr "圖示旁加文字"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:15
+#: capplets/ui-properties/gnome-ui-properties.glade.h:16
 msgid "Text Only"
 msgstr "僅顯示文字"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:16
+#: capplets/ui-properties/gnome-ui-properties.glade.h:17
 msgid "Toolbar"
 msgstr "工具列"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:17
+#: capplets/ui-properties/gnome-ui-properties.glade.h:18
 msgid "Toolbars can be _detached and moved around"
 msgstr "工具列可以卸離及四處移動(_D)"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:18
+#: capplets/ui-properties/gnome-ui-properties.glade.h:19
 msgid "_Button Labels: "
 msgstr ""
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:19
+#: capplets/ui-properties/gnome-ui-properties.glade.h:20
 msgid "_Copy"
 msgstr "複製(_C)"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:20
+#: capplets/ui-properties/gnome-ui-properties.glade.h:21
 msgid "_Edit"
 msgstr "編輯(_E)"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:21
+#: capplets/ui-properties/gnome-ui-properties.glade.h:22
 #: control-center/gnomecc-ui.xml.h:5
 msgid "_File"
 msgstr "檔案(_F)"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:22
+#: capplets/ui-properties/gnome-ui-properties.glade.h:23
 msgid "_New"
 msgstr "新增(_N)"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:23
+#: capplets/ui-properties/gnome-ui-properties.glade.h:24
 msgid "_Open"
 msgstr "開啟(_O)"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:24
+#: capplets/ui-properties/gnome-ui-properties.glade.h:25
 msgid "_Paste"
 msgstr "貼上(_P)"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:25
+#: capplets/ui-properties/gnome-ui-properties.glade.h:26
 msgid "_Print"
 msgstr "列印(_P)"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:26
+#: capplets/ui-properties/gnome-ui-properties.glade.h:27
 msgid "_Quit"
 msgstr "離開(_Q)"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:27
+#: capplets/ui-properties/gnome-ui-properties.glade.h:28
 msgid "_Save"
 msgstr "儲存(_S)"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:28
-msgid "_Show icons in menus"
-msgstr "在選單中顯示圖示(_S)"
 
 #: capplets/windows/gnome-window-properties.c:282
 #: capplets/windows/gnome-window-properties.glade.h:6
@@ -1890,7 +1896,7 @@ msgstr "GNOME 設定工具"
 msgid "Use shell even if nautilus is running."
 msgstr "即使 nautilus 正在運行仍然使用舊式介面。"
 
-#: gnome-settings-daemon/factory.c:29
+#: gnome-settings-daemon/factory.c:32
 msgid "Could not initialize Bonobo"
 msgstr "無法初始化 Bonobo"
 

@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2002-09-24 14:34-0400\n"
+"POT-Creation-Date: 2002-11-23 13:18-0500\n"
 "PO-Revision-Date: 2002-06-09 20:17+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -246,7 +246,7 @@ msgstr "B_rez slike"
 msgid "Select _picture:"
 msgstr "Izberi _sliko:"
 
-#: capplets/background/background-properties-capplet.c:561
+#: capplets/background/background-properties-capplet.c:567
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:712
 #: capplets/keyboard/gnome-keyboard-properties.c:293
@@ -255,7 +255,7 @@ msgstr "Izberi _sliko:"
 msgid "Retrieve and store legacy settings"
 msgstr "Prenesi in shrani zapuščene nastavitve"
 
-#: capplets/background/background-properties-capplet.c:587
+#: capplets/background/background-properties-capplet.c:593
 #: capplets/background/background-properties.glade.h:2
 msgid "Background Preferences"
 msgstr "Nastavitve ozadja"
@@ -821,11 +821,11 @@ msgstr "Starejši programi"
 msgid "Legacy applications settings (grdb)"
 msgstr "Nastavitev starejših programov (grdb)"
 
-#: capplets/file-types/file-types-capplet.c:214
+#: capplets/file-types/file-types-capplet.c:194
 msgid "Description"
 msgstr "Opis"
 
-#: capplets/file-types/file-types-capplet.c:236
+#: capplets/file-types/file-types-capplet.c:216
 msgid "Extensions"
 msgstr "Razširitve"
 
@@ -1203,14 +1203,19 @@ msgstr "Namizje"
 msgid "Window Management"
 msgstr "Upravljanje oken"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:568
+#: capplets/keybindings/gnome-keybinding-properties.c:593
+#, c-format
+msgid "That accelerator key is already in use by: %s\n"
+msgstr ""
+
+#: capplets/keybindings/gnome-keybinding-properties.c:620
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr ""
 "Napaka ob nastavljanju novega pospeševalnika v nastavitveni zbirki podatkov: "
 "%s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:719
+#: capplets/keybindings/gnome-keybinding-properties.c:771
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1218,11 +1223,11 @@ msgstr ""
 "Nisem našel teme tipkovnice  To pomeni, da je bila vaša namestitev GTK+ "
 "nepopolna."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:741
+#: capplets/keybindings/gnome-keybinding-properties.c:793
 msgid "Action"
 msgstr "Dejanje"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:759
+#: capplets/keybindings/gnome-keybinding-properties.c:811
 msgid "Shortcut"
 msgstr "Bližnjica"
 
@@ -1812,76 +1817,76 @@ msgid "Select the toolbar style."
 msgstr "Izberite slog orodjarn"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:13
+msgid "Show _icons in menus"
+msgstr ""
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:14
 msgid "Text Below Icons"
 msgstr "Besedilo pod ikonami"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:14
+#: capplets/ui-properties/gnome-ui-properties.glade.h:15
 #, fuzzy
 msgid "Text Beside Icons"
 msgstr "Poleg ikon tudi prednostno besedilo"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:15
+#: capplets/ui-properties/gnome-ui-properties.glade.h:16
 msgid "Text Only"
 msgstr "Le besedilo"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:16
+#: capplets/ui-properties/gnome-ui-properties.glade.h:17
 msgid "Toolbar"
 msgstr "Orodjarna"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:17
+#: capplets/ui-properties/gnome-ui-properties.glade.h:18
 msgid "Toolbars can be _detached and moved around"
 msgstr "Orodjarne je mogoče _odtrgati in premikati okoli"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:18
+#: capplets/ui-properties/gnome-ui-properties.glade.h:19
 #, fuzzy
 msgid "_Button Labels: "
 msgstr "Gumbi"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:19
+#: capplets/ui-properties/gnome-ui-properties.glade.h:20
 msgid "_Copy"
 msgstr ""
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:20
+#: capplets/ui-properties/gnome-ui-properties.glade.h:21
 #, fuzzy
 msgid "_Edit"
 msgstr "_Uredi..."
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:21
+#: capplets/ui-properties/gnome-ui-properties.glade.h:22
 #: control-center/gnomecc-ui.xml.h:5
 msgid "_File"
 msgstr "_Datoteka"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:22
+#: capplets/ui-properties/gnome-ui-properties.glade.h:23
 #, fuzzy
 msgid "_New"
 msgstr "_Ime"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:23
+#: capplets/ui-properties/gnome-ui-properties.glade.h:24
 #, fuzzy
 msgid "_Open"
 msgstr "Odpri"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:24
+#: capplets/ui-properties/gnome-ui-properties.glade.h:25
 #, fuzzy
 msgid "_Paste"
 msgstr "Hitro"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:25
+#: capplets/ui-properties/gnome-ui-properties.glade.h:26
 msgid "_Print"
 msgstr ""
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:26
+#: capplets/ui-properties/gnome-ui-properties.glade.h:27
 msgid "_Quit"
 msgstr ""
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:27
+#: capplets/ui-properties/gnome-ui-properties.glade.h:28
 #, fuzzy
 msgid "_Save"
 msgstr "Po_večano"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:28
-msgid "_Show icons in menus"
-msgstr ""
 
 #: capplets/windows/gnome-window-properties.c:282
 #: capplets/windows/gnome-window-properties.glade.h:6
@@ -1982,7 +1987,7 @@ msgstr "Nastavitveno orodje GNOME-a."
 msgid "Use shell even if nautilus is running."
 msgstr "Uporabi lupino tudi kadar nautilus teče."
 
-#: gnome-settings-daemon/factory.c:29
+#: gnome-settings-daemon/factory.c:32
 msgid "Could not initialize Bonobo"
 msgstr "Nisem mogel inicializirati bonoba"
 

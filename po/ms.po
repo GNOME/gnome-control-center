@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
-"POT-Creation-Date: 2002-09-24 14:34-0400\n"
+"POT-Creation-Date: 2002-11-23 13:18-0500\n"
 "PO-Revision-Date: 2002-09-13 10:03+0800\n"
 "Last-Translator: Hasbullah Bin Pit <sebol@ikhlas.com>\n"
 "Language-Team: Projek Gabai <gabai-penyumbang@lists.sourceforge.org>\n"
@@ -233,7 +233,7 @@ msgstr "_Tiada Gambar"
 msgid "Select _picture:"
 msgstr "_Pilih gambar:"
 
-#: capplets/background/background-properties-capplet.c:561
+#: capplets/background/background-properties-capplet.c:567
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:712
 #: capplets/keyboard/gnome-keyboard-properties.c:293
@@ -242,7 +242,7 @@ msgstr "_Pilih gambar:"
 msgid "Retrieve and store legacy settings"
 msgstr "Terima dan simpan tetapan warisan"
 
-#: capplets/background/background-properties-capplet.c:587
+#: capplets/background/background-properties-capplet.c:593
 #: capplets/background/background-properties.glade.h:2
 msgid "Background Preferences"
 msgstr "Keutamaan Latarbelakang"
@@ -802,11 +802,11 @@ msgstr "Aplikasi Warisan"
 msgid "Legacy applications settings (grdb)"
 msgstr "Tetapan aplikasi warisan (grdb)"
 
-#: capplets/file-types/file-types-capplet.c:214
+#: capplets/file-types/file-types-capplet.c:194
 msgid "Description"
 msgstr "Huraian"
 
-#: capplets/file-types/file-types-capplet.c:236
+#: capplets/file-types/file-types-capplet.c:216
 msgid "Extensions"
 msgstr "Penghujungan"
 
@@ -1167,12 +1167,17 @@ msgstr "Desktop"
 msgid "Window Management"
 msgstr "Pengurusan Tetingkap"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:568
+#: capplets/keybindings/gnome-keybinding-properties.c:593
+#, c-format
+msgid "That accelerator key is already in use by: %s\n"
+msgstr ""
+
+#: capplets/keybindings/gnome-keybinding-properties.c:620
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Ralat menetapkan pemecut baru pada pangkalandata konfigurasi: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:719
+#: capplets/keybindings/gnome-keybinding-properties.c:771
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1180,11 +1185,11 @@ msgstr ""
 "Tak dapat menjumpai tema papankekunci. Ini bermaksud pemasangan GTK+ tidak "
 "dipasang dengan sempurna."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:741
+#: capplets/keybindings/gnome-keybinding-properties.c:793
 msgid "Action"
 msgstr "Aksi"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:759
+#: capplets/keybindings/gnome-keybinding-properties.c:811
 msgid "Shortcut"
 msgstr "Pintasan"
 
@@ -1749,69 +1754,70 @@ msgid "Select the toolbar style."
 msgstr "Pilih gaya toolbar."
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:13
+#, fuzzy
+msgid "Show _icons in menus"
+msgstr "_Papar ikon pada menu"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:14
 msgid "Text Below Icons"
 msgstr "Teks Dibawah Ikon"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:14
+#: capplets/ui-properties/gnome-ui-properties.glade.h:15
 msgid "Text Beside Icons"
 msgstr "Teks di Sebelah Ikon"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:15
+#: capplets/ui-properties/gnome-ui-properties.glade.h:16
 msgid "Text Only"
 msgstr "Teks Sahaja"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:16
+#: capplets/ui-properties/gnome-ui-properties.glade.h:17
 msgid "Toolbar"
 msgstr "Toolbar"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:17
+#: capplets/ui-properties/gnome-ui-properties.glade.h:18
 msgid "Toolbars can be _detached and moved around"
 msgstr "Toolbar boleh di_pisahkan dan dipindahkan"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:18
+#: capplets/ui-properties/gnome-ui-properties.glade.h:19
 msgid "_Button Labels: "
 msgstr "Label _Butang: "
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:19
+#: capplets/ui-properties/gnome-ui-properties.glade.h:20
 msgid "_Copy"
 msgstr "_Salin"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:20
+#: capplets/ui-properties/gnome-ui-properties.glade.h:21
 msgid "_Edit"
 msgstr "_Edit"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:21
+#: capplets/ui-properties/gnome-ui-properties.glade.h:22
 #: control-center/gnomecc-ui.xml.h:5
 msgid "_File"
 msgstr "_Fail"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:22
+#: capplets/ui-properties/gnome-ui-properties.glade.h:23
 msgid "_New"
 msgstr "Ba_ru"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:23
+#: capplets/ui-properties/gnome-ui-properties.glade.h:24
 msgid "_Open"
 msgstr "_Buka"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:24
+#: capplets/ui-properties/gnome-ui-properties.glade.h:25
 msgid "_Paste"
 msgstr "_Tepek"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:25
+#: capplets/ui-properties/gnome-ui-properties.glade.h:26
 msgid "_Print"
 msgstr "_Cetak"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:26
+#: capplets/ui-properties/gnome-ui-properties.glade.h:27
 msgid "_Quit"
 msgstr "_Keluar"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:27
+#: capplets/ui-properties/gnome-ui-properties.glade.h:28
 msgid "_Save"
 msgstr "_Simpan"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:28
-msgid "_Show icons in menus"
-msgstr "_Papar ikon pada menu"
 
 #: capplets/windows/gnome-window-properties.c:282
 #: capplets/windows/gnome-window-properties.glade.h:6
@@ -1912,7 +1918,7 @@ msgstr "Radas Konfigurasi GNOME"
 msgid "Use shell even if nautilus is running."
 msgstr "Guna shell walaupun semasa nautilus terlaksana."
 
-#: gnome-settings-daemon/factory.c:29
+#: gnome-settings-daemon/factory.c:32
 msgid "Could not initialize Bonobo"
 msgstr "Tak dapat menginitialisasikan Bonobo"
 

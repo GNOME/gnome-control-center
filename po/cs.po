@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 2.0.2\n"
-"POT-Creation-Date: 2002-10-04 05:14+0200\n"
+"POT-Creation-Date: 2002-11-23 13:18-0500\n"
 "PO-Revision-Date: 2002-10-04 10:01GMT\n"
 "Last-Translator: Michal Bukovjan <bukm@centrum.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -241,7 +241,7 @@ msgstr "Žád_ný obrázek"
 msgid "Select _picture:"
 msgstr "Vyberte _obrázek:"
 
-#: capplets/background/background-properties-capplet.c:561
+#: capplets/background/background-properties-capplet.c:567
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:712
 #: capplets/keyboard/gnome-keyboard-properties.c:293
@@ -250,7 +250,7 @@ msgstr "Vyberte _obrázek:"
 msgid "Retrieve and store legacy settings"
 msgstr "Načíst a uložit zděděná nastavení"
 
-#: capplets/background/background-properties-capplet.c:587
+#: capplets/background/background-properties-capplet.c:593
 #: capplets/background/background-properties.glade.h:2
 msgid "Background Preferences"
 msgstr "Vlastnosti pozadí"
@@ -442,7 +442,8 @@ msgid "Change set"
 msgstr "Sada změn"
 
 #: capplets/common/gconf-property-editor.c:186
-msgid "GConf change set containing data to be forwarded to the gconf client on apply"
+msgid ""
+"GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr ""
 "Sada změn systému GConf obsahující data, která budou předána klientu systému "
 "GConf při jejich aplikaci"
@@ -452,7 +453,8 @@ msgid "Conversion to widget callback"
 msgstr "Zpětné volání konverze na prvek"
 
 #: capplets/common/gconf-property-editor.c:192
-msgid "Callback to be issued when data are to be converted from GConf to the widget"
+msgid ""
+"Callback to be issued when data are to be converted from GConf to the widget"
 msgstr ""
 "Zpětné volání, které se provede, když má dojít ke konverzi dat systému GConf "
 "na prvek"
@@ -462,7 +464,8 @@ msgid "Conversion from widget callback"
 msgstr "Zpětné volání konverze z prvku"
 
 #: capplets/common/gconf-property-editor.c:198
-msgid "Callback to be issued when data are to be converted to GConf from the widget"
+msgid ""
+"Callback to be issued when data are to be converted to GConf from the widget"
 msgstr ""
 "Zpětné volání, které se provede, když má dojít ke konverzi z prvku na data "
 "systému GConf"
@@ -822,7 +825,8 @@ msgstr "Typy souborů a programy"
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:2
 msgid "Specify which programs are used to open or view each file type"
-msgstr "Výběr programů pro otevírání nebo zobrazování jednotlivých typů souborů"
+msgstr ""
+"Výběr programů pro otevírání nebo zobrazování jednotlivých typů souborů"
 
 #: capplets/file-types/file-types-properties.glade.h:2
 msgid "Actions"
@@ -1172,12 +1176,17 @@ msgstr "Plocha"
 msgid "Window Management"
 msgstr "Správa oken"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:568
+#: capplets/keybindings/gnome-keybinding-properties.c:593
+#, c-format
+msgid "That accelerator key is already in use by: %s\n"
+msgstr ""
+
+#: capplets/keybindings/gnome-keybinding-properties.c:620
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Chyba při nastavení nové zkratky v databázi s nastavením: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:719
+#: capplets/keybindings/gnome-keybinding-properties.c:771
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1185,11 +1194,11 @@ msgstr ""
 "Nelze nalézt žádné téma pro klávesnici. To znamená, že vaše instalace GTK+ "
 "není úplná."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:741
+#: capplets/keybindings/gnome-keybinding-properties.c:793
 msgid "Action"
 msgstr "Akce"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:759
+#: capplets/keybindings/gnome-keybinding-properties.c:811
 msgid "Shortcut"
 msgstr "Zkratka"
 
@@ -1222,7 +1231,8 @@ msgstr "_Zpřístupnění"
 #: capplets/keyboard/gnome-keyboard-properties.c:291
 #: capplets/sound/sound-properties-capplet.c:145
 #: capplets/sound/sound-properties-capplet.c:147
-msgid "Just apply settings and quit (compatibility only; now handled by daemon)"
+msgid ""
+"Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
 "Pouze aplikovat nastavení a skončit (pouze pro kompatibilitu; nyní "
 "zpracovává démon)"
@@ -1453,7 +1463,8 @@ msgid "Drag and Drop"
 msgstr "Drag and Drop"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:14
-msgid "Left-handed mouse mode switches the left and right buttons on the mouse."
+msgid ""
+"Left-handed mouse mode switches the left and right buttons on the mouse."
 msgstr "Režim myši pro leváky zamění funkci levého a pravého tlačítka myši."
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:15
@@ -1915,7 +1926,7 @@ msgstr "Nástroj pro nastavení prostředí GNOME"
 msgid "Use shell even if nautilus is running."
 msgstr "Použít shell i pokud běží aplikace Nautilus."
 
-#: gnome-settings-daemon/factory.c:29
+#: gnome-settings-daemon/factory.c:32
 msgid "Could not initialize Bonobo"
 msgstr "Selhala inicializace systému Bonobo"
 
@@ -2110,4 +2121,3 @@ msgstr ""
 #: libwindow-settings/gnome-wm-manager.c:467
 msgid "OK"
 msgstr "OK"
-
