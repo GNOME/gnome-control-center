@@ -6,10 +6,23 @@ pixmap_DATA = \
 
 gnome_about_me_LDADD = $(GNOMECC_CAPPLETS_LIBS) $(LIBEBOOK_LIBS) -lutil
 gnome_about_me_SOURCES = 		\
-	gnome-about-me-password.c	\
 	e-util-marshal.c				\
+	e-util-marshal.h				\
+	gnome-about-me-password.c	\
 	e-image-chooser.c				\
 	gnome-about-me.c
+
+e-util-marshal.h: e-util-marshal.list
+	( @GLIB_GENMARSHAL@ --prefix=e_util_marshal $(srcdir)/e-util-marshal.list \
+	 							--header > util-marshal.tmp \
+			&& mv util-marshal.tmp e-util-marshal.h ) \
+		|| ( rm -f util-marshal.tmp && exit 1 )
+
+e-util-marshal.c: e-util-marshal.h
+	( @GLIB_GENMARSHAL@ --prefix=e_util_marshal $(srcdir)/e-util-marshal.list \
+	 							--body > util-marshal.tmp \
+			&& mv util-marshal.tmp e-util-marshal.c ) \
+		|| ( rm -f util-marshal.tmp && exit 1 )
 
 @INTLTOOL_DESKTOP_RULE@
 
@@ -20,13 +33,6 @@ desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 Gladedir   = $(GNOMECC_GLADE_DIR)
 Glade_DATA = gnome-about-me.glade
 
-e-util-marshal.h: e-util-marshal.list $(GLIB_GENMARSHAL)
-        $(GLIB_GENMARSHAL) $< --header --prefix=e_util_marshal > $@
-
-e-util-marshal.c: e-util-marshal.list $(GLIB_GENMARSHAL)
-        echo "#include \"e-util-marshal.h\"" > $@ && \
-        $(GLIB_GENMARSHAL) $< --body --prefix=e_util_marshal >> $@
-
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS) $(LIBEBOOK_CFLAGS)
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
-EXTRA_DIST = $(Glade_DATA) $(Desktop_in_files) $(pixmap_DATA)
+EXTRA_DIST = e-util-marshal.list $(Glade_DATA) $(Desktop_in_files) $(pixmap_DATA)

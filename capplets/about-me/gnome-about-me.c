@@ -146,7 +146,7 @@ about_me_commit (GnomeAboutMe *me)
 		e_book_set_self (me->book, me->contact, &error);
 	} else {
 		if (e_book_commit_contact (me->book, me->contact, &error) == FALSE)
-			g_print ("hubo error\n");
+			g_print ("There was an undeterminad error\n");
 	}
 
 	me->create_self = FALSE;
@@ -155,7 +155,7 @@ about_me_commit (GnomeAboutMe *me)
 static gboolean
 about_me_focus_out (GtkWidget *widget, GdkEventFocus *event, GnomeAboutMe *me)
 {
-	gchar *str;
+	gchar *str = NULL;
 	const gchar *wid;
 	gint i;
 	
@@ -238,6 +238,9 @@ about_me_get_address_field (EContactAddress *addr, guint cid)
 {
 	gchar *str = NULL;
 	
+	if (addr == NULL)
+		return NULL;
+
 	switch (cid) {
 		case ADDRESS_STREET:
 			str = addr->street;
@@ -317,6 +320,11 @@ about_me_load_string_field (GnomeAboutMe *me, const gchar *wid, guint cid, guint
 
 	widget = WID (wid);
 
+	if (me->create_self == TRUE) {
+		g_signal_connect (widget, "focus-out-event", G_CALLBACK (about_me_focus_out), me);
+		return;
+	}
+
 	if (aid >= ADDRESS_HOME && aid < ADDRESS_WORK) {
 		str = about_me_get_address_field (me->addr1, cid);
 	} else if (aid >= ADDRESS_WORK) {
@@ -375,8 +383,6 @@ about_me_update_photo (GnomeAboutMe *me)
 
 	dialog = me->dialog;
 
-	g_print ("updating image\n");
-
 	if (me->image_changed && me->have_image) {
 		widget = WID ("image-chooser");
 
@@ -416,8 +422,14 @@ about_me_load_info (GnomeAboutMe *me)
 {
 	gint i;
 	
-	me->addr1 = e_contact_get (me->contact, E_CONTACT_ADDRESS_HOME);
-	me->addr2 = e_contact_get (me->contact, E_CONTACT_ADDRESS_WORK);
+	if (me->create_self == FALSE) {
+		me->addr1 = e_contact_get (me->contact, E_CONTACT_ADDRESS_HOME);
+		if (me->addr1 == NULL)
+			me->addr1 = g_new0 (EContactAddress, 1);
+		me->addr2 = e_contact_get (me->contact, E_CONTACT_ADDRESS_WORK);
+		if (me->addr2 == NULL)
+			me->addr2 = g_new0 (EContactAddress, 1);
+	}
 
 	for (i = 0; ids[i].wid != NULL; i++) {
 		about_me_load_string_field (me, ids[i].wid, ids[i].cid, i);
@@ -614,14 +626,17 @@ about_me_setup_dialog (void)
 		me->create_self = TRUE;
 		
 		me->contact = e_contact_new ();
+		g_print ("%s\n", error->message);
 
 		g_clear_error (&error);
 
 		if (me->book == NULL) {
-			g_print ("me->book == NULL, tengo que conseguir un ebook\n");
 			me->book = e_book_new_system_addressbook (&error);
+			if (me->book == NULL)
+				g_print ("error message: %s\n", error->message);
+
 			if (e_book_open (me->book, FALSE, NULL) == FALSE)
-				g_print ("no pude obtener libro\n");
+				g_print ("unable to open book, bailing out\n");
 		} 
 	}
 
