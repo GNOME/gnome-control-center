@@ -774,6 +774,7 @@ render_to_screen (BGApplier *bg_applier, const BGPreferences *prefs)
 			gdk_colormap_alloc_colors (gdk_drawable_get_colormap (gdk_get_default_root_window ()),
 						   prefs->color1, 1, FALSE, TRUE, &success);
 #endif
+
 			gdk_gc_set_foreground (gc, prefs->color1);
 			gdk_draw_rectangle (bg_applier->p->pixmap, gc, TRUE,
 					    bg_applier->p->render_geom.x,
@@ -814,12 +815,19 @@ render_to_screen (BGApplier *bg_applier, const BGPreferences *prefs)
 			gdk_colormap_alloc_colors (gdk_drawable_get_colormap (gdk_get_default_root_window ()),
 						   prefs->color1, 1, FALSE, TRUE, &success);
 #endif
-			gdk_gc_set_foreground (gc, prefs->color1);
-			gdk_draw_rectangle (bg_applier->p->pixmap, gc, TRUE,
-					    bg_applier->p->render_geom.x,
-					    bg_applier->p->render_geom.y, 
-					    bg_applier->p->render_geom.width,
-					    bg_applier->p->render_geom.height);
+
+			if (bg_applier->p->type == BG_APPLIER_PREVIEW) {
+				gdk_gc_set_foreground (gc, prefs->color1);
+				gdk_draw_rectangle (bg_applier->p->pixmap, gc, TRUE,
+						    bg_applier->p->render_geom.x,
+						    bg_applier->p->render_geom.y, 
+						    bg_applier->p->render_geom.width,
+						    bg_applier->p->render_geom.height);
+			}
+			else if (bg_applier->p->type == BG_APPLIER_ROOT) {
+				gdk_window_set_back_pixmap (GDK_ROOT_PARENT (), NULL, FALSE);
+				gdk_window_set_background (GDK_ROOT_PARENT (), prefs->color1);
+			}
 		}
 	}
 
@@ -1251,7 +1259,11 @@ need_wallpaper_load_p (const BGApplier *bg_applier, const BGPreferences *prefs)
 static gboolean
 need_root_pixmap_p (const BGApplier *bg_applier, const BGPreferences *prefs) 
 {
-	if (bg_applier->p->last_prefs == NULL)
+	if (prefs->wallpaper_enabled == FALSE && prefs->gradient_enabled == FALSE)
+		return FALSE;
+	else if (bg_applier->p->last_prefs == NULL)
+		return TRUE;
+	else if (bg_applier->p->last_prefs->wallpaper_enabled == FALSE && bg_applier->p->last_prefs->gradient_enabled == FALSE)
 		return TRUE;
 	else if (render_small_pixmap_p (bg_applier->p->last_prefs) != render_small_pixmap_p (prefs))
 		return TRUE;

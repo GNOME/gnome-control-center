@@ -1,3 +1,12 @@
+2002-02-17  Bradford Hovinen  <hovinen@ximian.com>
+
+	* applier.c (need_root_pixmap_p): We don't need a root pixmap if
+	neither a wallpaper nor a gradient is enabled
+	(render_to_screen): Use set_back_pixmap/set_background when just
+	setting a color with a root applier
+	(need_root_pixmap_p): If the last preferences structure had
+	neither gradient nor wallpaper enabled, we need a new root pixmap
+
 2002-02-12  Lauris Kaplinski  <lauris@ximian.com>
 
 	* applier.c (draw_disabled_message): Use g_object_unref for GdkGC
