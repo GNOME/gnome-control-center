@@ -130,7 +130,7 @@ create_dialog (void)
 	GladeXML *dialog;
 	GtkWidget *widget, *pixmap;
 
-	dialog = glade_xml_new (GLADE_DATADIR "/keyboard-properties.glade", "prefs_widget");
+	dialog = glade_xml_new (GNOMECC_GLADE_DIR "/keyboard-properties.glade", "prefs_widget");
 	widget = glade_xml_get_widget (dialog, "prefs_widget");
 	gtk_object_set_data (GTK_OBJECT (widget), "glade-data", dialog);
 
