@@ -1,3 +1,9 @@
+2001-06-18  Bradford Hovinen  <hovinen@ximian.com>
+
+	* capplets/new-*/main.c (do_set_xml): Use read () rather than
+	fread () to make sure to catch end-of-file. Gracefully handle
+	no-data case.
+
 2001-06-07  Christian Rose  <menthos@menthos.com>
 
 	* capplets/desktop-links/Appearances.directory,

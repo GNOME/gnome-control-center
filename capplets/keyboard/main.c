@@ -146,28 +146,41 @@ do_set_xml (gboolean apply_settings)
 	int len = 0;
 	int bytes_read = 0;
 
-	while (!feof (stdin)) {
-		if (!len) buffer = g_new (char, 16385);
-		else buffer = g_renew (char, buffer, len + 16385);
-		bytes_read = fread (buffer + len, 1, 16384, stdin);
+	fflush (stdin);
+
+	do {
+		if (!len) buffer = g_new (char, 4097);
+		else buffer = g_renew (char, buffer, len + 4097);
+		bytes_read = read (fileno (stdin), buffer + len, 4096);
 		buffer[len + bytes_read] = '\0';
-		len += 16384;
-	}
+		len += 4096;
+	} while (bytes_read == 4096);
 
-	if (len > 0 && bytes_read + len - 16384 > 0) {
-		doc = xmlParseMemory (buffer, strlen (buffer));
-		prefs = preferences_read_xml (doc);
+	if (len >= 4096 && len > 0) {
+		doc = xmlParseMemory (buffer, len - 4096 + bytes_read);
+		g_free (buffer);
 
-		if (prefs) {
-			preferences_save (prefs);
+		if (doc != NULL) {
+			prefs = preferences_read_xml (doc);
 
-			if (apply_settings) 
-				preferences_apply_now (prefs);
-			return;
+			if (prefs != NULL) {
+				preferences_save (prefs);
+
+				if (apply_settings)
+					preferences_apply_now (prefs);
+
+				return;
+			}
+			else if (prefs != NULL) {
+				return;
+			}
+
+			xmlFreeDoc (doc);
 		}
+	} else {
+		g_critical ("No data to apply");
 	}
 
-	g_warning ("Error while reading the keyboard config file");
 	return;
 }
 
