@@ -48,8 +48,8 @@
 
 #include "nautilus-mime-type-capplet.h"
 
-#define DEFAULT_REGULAR_ICON "/nautilus/i-regular-24.png"
-#define DEFAULT_ACTION_ICON "/nautilus/i-executable.png"
+#define DEFAULT_REGULAR_ICON "nautilus/i-regular-24.png"
+#define DEFAULT_ACTION_ICON "nautilus/i-executable.png"
 
 #define MAX_ICON_WIDTH_IN_LIST	18
 #define MAX_ICON_HEIGHT_IN_LIST	18
@@ -379,26 +379,34 @@ get_selected_mime_type (void)
 static void
 really_change_icon (gpointer user_data)
 {
-
+	NautilusMimeIconEntry *icon_entry;
 	char *filename;
 	const char *mime_type;
+
+	g_assert (NAUTILUS_MIME_IS_ICON_ENTRY (user_data));
 
 	mime_type = get_selected_mime_type ();
 	if (mime_type == NULL) {
 		return;
 	}
-	
-	filename = nautilus_mime_type_icon_entry_get_relative_filename (NAUTILUS_MIME_ICON_ENTRY (user_data));
+
+	icon_entry = NAUTILUS_MIME_ICON_ENTRY (user_data);
+
+	filename = nautilus_mime_type_icon_entry_get_relative_filename (icon_entry);
+	if (filename == NULL) {
+		filename = nautilus_mime_type_icon_entry_get_full_filename (icon_entry);
+	}
 
 	gnome_vfs_mime_set_icon (mime_type, filename);
 
 	nautilus_mime_type_capplet_update_mime_list_icon_and_description (mime_type);
+	nautilus_mime_type_capplet_update_info (mime_type);
 
 	g_free (filename);
 }
 
 static void
-gil_icon_selected_cb (GnomeIconList *gil, gint num, GdkEvent *event, gpointer user_data)
+icon_chosen_callback (GnomeIconList *gil, gint num, GdkEvent *event, gpointer user_data)
 {
 	NautilusMimeIconEntry *icon_entry;
 	const gchar * icon;
@@ -422,6 +430,7 @@ gil_icon_selected_cb (GnomeIconList *gil, gint num, GdkEvent *event, gpointer us
 	if(event && event->type == GDK_2BUTTON_PRESS && ((GdkEventButton *)event)->button == 1) {
 		gnome_icon_selection_stop_loading(gis);
 		really_change_icon (user_data);
+		gtk_widget_hide(icon_entry->pick_dialog);
 	}
 
 
@@ -430,7 +439,7 @@ gil_icon_selected_cb (GnomeIconList *gil, gint num, GdkEvent *event, gpointer us
 static void
 change_icon_clicked_cb_real (GnomeDialog *dialog, gint button_number, gpointer user_data)
 {
-	if (button_number == 0) {
+	if (button_number == GNOME_OK) {
 		really_change_icon (user_data);
 	}
 }
@@ -442,13 +451,14 @@ change_icon_clicked (GtkWidget *entry, gpointer user_data)
 	GnomeIconSelection * gis;
 
 	nautilus_mime_type_show_icon_selection (NAUTILUS_MIME_ICON_ENTRY (user_data));
+
 	dialog = GNOME_DIALOG (NAUTILUS_MIME_ICON_ENTRY (user_data)->pick_dialog);
 
 	gtk_signal_connect (GTK_OBJECT (dialog), "clicked", change_icon_clicked_cb_real, user_data);
 
 	gis = gtk_object_get_user_data(GTK_OBJECT(user_data));
 	gtk_signal_connect_after (GTK_OBJECT(GNOME_ICON_SELECTION(gis)->gil), 
-				  "select_icon", gil_icon_selected_cb, user_data);
+				  "select_icon", icon_chosen_callback, user_data);
 
 }
 
@@ -872,6 +882,52 @@ init_mime_capplet (const char *scroll_to_mime_type)
 	capplet_widget_changes_are_immediate (CAPPLET_WIDGET (capplet));
 }
 
+static gboolean
+is_full_path (const char *path_or_name)
+{
+	return path_or_name[0] == '/';
+}
+
+static char *
+capplet_get_icon_path (const char *path_or_name)
+{
+	char *result;
+	char *alternate_relative_filename;
+
+	if (is_full_path (path_or_name) && g_file_exists (path_or_name)) {
+		return g_strdup (path_or_name);
+	}
+
+	result = gnome_vfs_icon_path_from_filename (path_or_name);
+	if (result != NULL) {
+		return result;
+	}
+
+	/* FIXME bugzilla.eazel.com 639:
+	 * It is somewhat evil to special-case the nautilus directory here.
+	 * We should clean this up if/when we come up with a way to handle
+	 * Nautilus themes here.
+	 */
+	alternate_relative_filename = g_strconcat ("nautilus/", path_or_name, NULL);
+	result = gnome_vfs_icon_path_from_filename (alternate_relative_filename);
+	g_free (alternate_relative_filename);
+	if (result != NULL) {
+		return result;
+	}
+
+	/* FIXME bugzilla.eazel.com 639:
+	 * To work correctly with Nautilus themed icons, if there's no
+	 * suffix we will also try looking in the nautilus dir for a ".png" name.
+	 * This will return the icon for the default theme; there is no
+	 * mechanism for getting a themed icon in the capplet.
+	 */
+	alternate_relative_filename = g_strconcat ("nautilus/", path_or_name, ".png", NULL);
+	result = gnome_vfs_icon_path_from_filename (alternate_relative_filename);
+	g_free (alternate_relative_filename);
+
+	return result;
+}
+
 /*
  *  nautilus_mime_type_capplet_update_info
  *
@@ -906,23 +962,16 @@ nautilus_mime_type_capplet_update_info (const char *mime_type) {
 
 	/* Set icon for mime type */
 	icon_name = gnome_vfs_mime_get_icon (mime_type);
+	path = NULL;
 	if (icon_name != NULL) {
-		path = gnome_vfs_icon_path_from_filename (icon_name);
-		if (path != NULL) {
-			nautilus_mime_type_icon_entry_set_icon (NAUTILUS_MIME_ICON_ENTRY (icon_entry), path);
-			g_free (path);
-		} else {
-			/* No icon */
-			nautilus_mime_type_icon_entry_set_icon (NAUTILUS_MIME_ICON_ENTRY (icon_entry), 
-								NULL);
-		}
-	} else {
-		/* No icon */
-		path = gnome_vfs_icon_path_from_filename (DEFAULT_REGULAR_ICON);
-		nautilus_mime_type_icon_entry_set_icon (NAUTILUS_MIME_ICON_ENTRY (icon_entry),
-							path);
-		g_free (path);
+		path = capplet_get_icon_path (icon_name);
 	}
+	if (path == NULL) {
+		/* No custom icon specified, or custom icon not found, use default */
+		path = capplet_get_icon_path (DEFAULT_REGULAR_ICON);
+	}
+	nautilus_mime_type_icon_entry_set_icon (NAUTILUS_MIME_ICON_ENTRY (icon_entry), path);
+	g_free (path);
 
 	/* Indicate default action */	
 	action = gnome_vfs_mime_get_default_action (mime_type);
@@ -1362,7 +1411,8 @@ add_mime_clicked (GtkWidget *widget, gpointer data)
 					g_free (text[3]);
 					text[3] = g_strdup (default_app->name);
 
-					pixbuf = capplet_get_icon_pixbuf (mime_string, TRUE);
+					filename = capplet_get_icon_path (DEFAULT_ACTION_ICON);
+					pixbuf = gdk_pixbuf_new_from_file (filename);
 
 					gnome_vfs_mime_application_free (default_app);
 					break;
@@ -1374,7 +1424,7 @@ add_mime_clicked (GtkWidget *widget, gpointer data)
 					tmp_text = name_from_oaf_server_info (default_component);
 					text[3] = g_strdup_printf (_("View as %s"), tmp_text);
 					g_free (tmp_text);
-					filename = gnome_vfs_icon_path_from_filename ("nautilus/gnome-library.png");
+					filename = capplet_get_icon_path ("nautilus/gnome-library.png");
 					pixbuf = gdk_pixbuf_new_from_file (filename);
 					g_free (filename);
 					CORBA_free (default_component);
@@ -1543,7 +1593,8 @@ update_mime_list_action (const char *mime_string)
 				default_app = gnome_vfs_mime_get_default_application (mime_string);
 				g_free (text);
 				text = g_strdup (default_app->name);							
-				pixbuf = capplet_get_icon_pixbuf (mime_string, TRUE);
+				icon_path = capplet_get_icon_path (DEFAULT_ACTION_ICON);
+				pixbuf = gdk_pixbuf_new_from_file (icon_path);
 				gnome_vfs_mime_application_free (default_app);
 				break;
 
@@ -1554,7 +1605,7 @@ update_mime_list_action (const char *mime_string)
 				tmp_text = name_from_oaf_server_info (default_component);
 				text = g_strdup_printf (_("View as %s"), tmp_text);
 				g_free (tmp_text);
-				icon_path = gnome_vfs_icon_path_from_filename ("nautilus/gnome-library.png");
+				icon_path = capplet_get_icon_path ("nautilus/gnome-library.png");
 				pixbuf = gdk_pixbuf_new_from_file (icon_path);
 				g_free (icon_path);
 				CORBA_free (default_component);
@@ -1579,30 +1630,30 @@ update_mime_list_action (const char *mime_string)
 	g_free (text);
 }
 
+/* FIXME:
+ * This routine is never called with is_executable TRUE anymore. It
+ * could be simplified, possibly out of existence.
+ */
 static GdkPixbuf *
 capplet_get_icon_pixbuf (const char *mime_string, gboolean is_executable)
 {
-	const char *description_icon_name;
-	char *description_icon_path;
+	const char *icon_name;
+	char *icon_path;
 	GdkPixbuf *pixbuf;
 
 	pixbuf = NULL;
 
-	description_icon_name = gnome_vfs_mime_get_icon (mime_string);
-	if (description_icon_name != NULL) {
-				/* Get custom icon */
-		description_icon_path = gnome_vfs_icon_path_from_filename (description_icon_name);
-		if (description_icon_path != NULL) {
-			pixbuf = gdk_pixbuf_new_from_file (description_icon_path);
-			g_free (description_icon_path);
-		}
-	} else {
-		if (!is_executable) {
-			description_icon_path = gnome_vfs_icon_path_from_filename (DEFAULT_REGULAR_ICON);
-		} else {
-			description_icon_path = gnome_vfs_icon_path_from_filename (DEFAULT_ACTION_ICON);
-		}
-		pixbuf = gdk_pixbuf_new_from_file (description_icon_path);
+	icon_name = gnome_vfs_mime_get_icon (mime_string);
+	if (icon_name == NULL) {
+		icon_name = is_executable
+			? DEFAULT_ACTION_ICON
+			: DEFAULT_REGULAR_ICON;
+	}
+
+	icon_path = capplet_get_icon_path (icon_name);
+	if (icon_path != NULL) {
+		pixbuf = gdk_pixbuf_new_from_file (icon_path);
+		g_free (icon_path);
 	}
 
 	return pixbuf;
@@ -1680,7 +1731,8 @@ populate_mime_list (GList *type_list, GtkCList *clist)
 				g_free (text[3]);
 				text[3] = g_strdup (default_app->name);
 				
-				pixbuf = capplet_get_icon_pixbuf (mime_string, TRUE);
+				icon_path = capplet_get_icon_path (DEFAULT_ACTION_ICON);
+				pixbuf = gdk_pixbuf_new_from_file (icon_path);
 				gnome_vfs_mime_application_free (default_app);
 				break;
 
@@ -1691,7 +1743,7 @@ populate_mime_list (GList *type_list, GtkCList *clist)
 				tmp_text = name_from_oaf_server_info (default_component);
 				text[3] = g_strdup_printf (_("View as %s"), tmp_text);
 				g_free (tmp_text);
-				icon_path = gnome_vfs_icon_path_from_filename ("nautilus/gnome-library.png");
+				icon_path = capplet_get_icon_path ("nautilus/gnome-library.png");
 				pixbuf = gdk_pixbuf_new_from_file (icon_path);
 				g_free (icon_path);
 				CORBA_free (default_component);

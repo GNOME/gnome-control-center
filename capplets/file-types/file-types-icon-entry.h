@@ -63,7 +63,7 @@ GtkWidget *nautilus_mime_type_icon_entry_gnome_entry (NautilusMimeIconEntry *ien
 GtkWidget *nautilus_mime_type_icon_entry_gtk_entry   (NautilusMimeIconEntry *ientry);
 
 /*only return a file if it was possible to load it with imlib*/
-gchar      *nautilus_mime_type_icon_entry_get_filename	(NautilusMimeIconEntry *ientry);
+gchar      *nautilus_mime_type_icon_entry_get_full_filename	(NautilusMimeIconEntry *ientry);
 gchar      *nautilus_mime_type_icon_entry_get_relative_filename	(NautilusMimeIconEntry *ientry);
 void	    nautilus_mime_type_show_icon_selection 	(NautilusMimeIconEntry * ientry);
 
