@@ -360,7 +360,7 @@ start_again :
 							 category_vert_pos);
 			ei->height = height;
 			gnome_canvas_item_set (ei->selection,
-				"x2", (double) ei->width,
+				"x2", (double) ei->width + 2 * PAD,
 				"y2", (double) ei->text_height,
 				NULL);
 			gnome_canvas_item_set (ei->cover,
@@ -375,7 +375,7 @@ start_again :
 				"clip_height", (double) ei->height,
 				NULL);
 
-			gnome_canvas_item_move_absolute (ei->selection, 0, max_icon_height);
+			gnome_canvas_item_move_absolute (ei->selection, -PAD, max_icon_height);
 			if (ei->text) /* text is centered by pango */
 				gnome_canvas_item_move_absolute (ei->text,
 					0, max_icon_height);
@@ -810,14 +810,11 @@ set_style (ControlCenter *cc, gboolean font_changed)
 		for (j = 0; j < cc->info->categories[i]->count; j++) {
 			ControlCenterEntry *entry = cc->info->categories[i]->entries[j];
 			EntryInfo *entryinfo = entry->user_data;
-			g_object_set (entryinfo->selection,
-				      "fill_color_gdk", &widget->style->base[GTK_STATE_SELECTED],
-				      NULL);
 			if (font_changed && entryinfo->text)
 				g_object_set (entryinfo->text,
 					      "font", NULL,
 					      NULL);
-			setup_entry (entry); /* Sets ei->text color */
+			setup_entry (entry);
 		}
 	}
 	if (font_changed)
