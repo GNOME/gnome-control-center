@@ -86,13 +86,12 @@ main (int argc, char *argv[])
 {
   GladeXML *dialog;
 
-  gtk_init (&argc, &argv);
-
   bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
   textdomain (GETTEXT_PACKAGE);
 
-  gnome_program_init (argv[0], VERSION, LIBGNOMEUI_MODULE, argc, argv,
+  gnome_program_init ("gnome-font-properties", VERSION,
+		      LIBGNOMEUI_MODULE, argc, argv,
 		      GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
 		      NULL);
 

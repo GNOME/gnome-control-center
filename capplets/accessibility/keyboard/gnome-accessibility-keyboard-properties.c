@@ -62,7 +62,8 @@ main (int argc, char **argv)
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 
-	gnome_program_init (argv[0], VERSION, LIBGNOMEUI_MODULE, argc, argv,
+	gnome_program_init ("gnome-accessibility-keyboard-properties", VERSION,
+			    LIBGNOMEUI_MODULE, argc, argv,
 			    GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
 			    NULL);
 	activate_settings_daemon ();
