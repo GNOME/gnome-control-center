@@ -1,3 +1,12 @@
+2001-09-07  Chema Celorio  <chema@celorio.com>
+
+	* mouse-properties-capplet.c (create_dialog): dont set the pixmaps
+	(capplet_fool_the_linker): 
+	(mouse_capplet_create_image_widget): 
+	(mouse_capplet_create_image_widget_canvas): implement.
+	This sets antialiased pixmaps for the mouse capplet. Maybe this
+	call should in common. Closes bug #58293
+
 2001-08-21  Bradford Hovinen  <hovinen@ximian.com>
 
 	* mouse-properties-capplet.c (apply_settings): Use a CORBA
