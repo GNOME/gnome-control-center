@@ -60,6 +60,7 @@ static edit_dialog_details *edit_component_details = NULL;
 
 /* Local prototypes */
 static void show_new_application_window (void);
+static void show_edit_application_window (void);
 
 static void
 edit_applications_dialog_destroy (GtkWidget *widget, gpointer data)
@@ -328,10 +329,15 @@ initialize_edit_applications_dialog (const char *mime_type)
 	/* Add edit buttons */
 	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
 	gtk_box_pack_start (GTK_BOX (main_vbox), hbox, FALSE, FALSE, 0);	
-	button = gtk_button_new_with_label (_("Add Application..."));
+
+	button = gtk_button_new_with_label (_("Add Application..."));	
+	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);	
 	gtk_signal_connect_object (GTK_OBJECT (button), "clicked", show_new_application_window, NULL);
 	
+	button = gtk_button_new_with_label (_("Edit Application..."));	
 	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
+	gtk_signal_connect_object (GTK_OBJECT (button), "clicked", show_edit_application_window, NULL);
+	
 	button = gtk_button_new_with_label (_("Delete Application"));
 	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
 
@@ -708,3 +714,69 @@ show_new_application_window (void)
 	        	break;
 	}        
 }
+
+static void
+show_edit_application_window (void)
+{
+        GtkWidget *app_entry, *command_entry;
+	GtkWidget *hbox, *vbox;
+	GtkWidget *dialog;
+	GtkWidget *label;
+	GtkWidget *behavior_frame, *frame_vbox;
+	GtkWidget *check_box;
+	
+        dialog = gnome_dialog_new (_("Edit Application"), GNOME_STOCK_BUTTON_OK, GNOME_STOCK_BUTTON_CANCEL, NULL);	
+
+	label = gtk_label_new (_("Application Name:"));
+	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
+	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
+	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+	app_entry = gtk_entry_new ();
+        gtk_box_pack_start (GTK_BOX (hbox), app_entry, TRUE, TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), hbox, FALSE, FALSE, 0);	
+
+	label = gtk_label_new (_("Application Command:"));
+	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
+	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
+	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+	command_entry = gtk_entry_new ();
+        gtk_box_pack_start (GTK_BOX (hbox), command_entry, TRUE, TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), hbox, FALSE, FALSE, 0);
+
+        /* Open Behavior frame */
+	vbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
+	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), vbox, FALSE, FALSE, 0);	
+	behavior_frame = gtk_frame_new (_("Open Behavior"));
+	gtk_box_pack_start (GTK_BOX (vbox), behavior_frame, FALSE, FALSE, 0);
+	
+	frame_vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
+	gtk_container_add (GTK_CONTAINER (behavior_frame), frame_vbox);
+
+	check_box = gtk_check_button_new_with_label (_("Can open multiple files"));
+	gtk_box_pack_start (GTK_BOX (frame_vbox), check_box, FALSE, FALSE, 0);
+
+	check_box = gtk_check_button_new_with_label (_("Can open from URI"));
+	gtk_box_pack_start (GTK_BOX (frame_vbox), check_box, FALSE, FALSE, 0);
+		
+
+        gtk_widget_show_all (GNOME_DIALOG (dialog)->vbox);
+
+	/* Set focus to text entry widget */
+	gtk_window_set_focus (GTK_WINDOW (dialog), app_entry);
+
+        switch (gnome_dialog_run (GNOME_DIALOG (dialog))) {
+	        case 0:
+			add_new_application (gtk_entry_get_text (GTK_ENTRY (app_entry)),
+					     gtk_entry_get_text (GTK_ENTRY (app_entry)),
+					     gtk_entry_get_text (GTK_ENTRY (command_entry)));
+	        	
+	        
+	        case 1:
+	                gtk_widget_destroy (dialog);
+	                break;
+	                
+	        default:
+	        	break;
+	}        
+}
+	

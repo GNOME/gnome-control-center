@@ -298,8 +298,6 @@ init_mime_capplet (void)
         GtkWidget *action_frame;
         GtkWidget *frame_hbox;
         GtkWidget *vbox1, *vbox2, *vbox3, *vbox4;
-	/*GtkWidget *action_frame, *behavior_frame;
-	 GtkWidget *check_box;*/
 	
         gchar *title[2] = {"Extensions"};
         
@@ -421,22 +419,6 @@ init_mime_capplet (void)
 	gtk_signal_connect (GTK_OBJECT (component_button), "toggled",
 			    GTK_SIGNAL_FUNC (component_button_toggled), NULL);
 
-
-	/* Open Behavior frame */
-	/*
-	behavior_frame = gtk_frame_new (_("Open Behavior"));
-	gtk_box_pack_start (GTK_BOX (vbox4), behavior_frame, FALSE, FALSE, 0);
-	
-	frame_vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
-	gtk_container_add (GTK_CONTAINER (behavior_frame), frame_vbox);
-
-	check_box = gtk_check_button_new_with_label (_("Can open multiple files"));
-	gtk_box_pack_start (GTK_BOX (frame_vbox), check_box, FALSE, FALSE, 0);
-
-	check_box = gtk_check_button_new_with_label (_("Can open from URI"));
-	gtk_box_pack_start (GTK_BOX (frame_vbox), check_box, FALSE, FALSE, 0);
-	*/
-	
 	/* Mime list Add and Delete buttons */
         button = left_aligned_button (_("Add..."));
         gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
