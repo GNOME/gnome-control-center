@@ -1,16 +1,20 @@
-Applicationsdir = $(datadir)/control-center/capplets
-Applications_in_files = keyboard-properties.desktop.in
-Applications_DATA = $(Applications_in_files:.desktop.in=.desktop)
 @XML_I18N_MERGE_DESKTOP_RULE@
 
-pApplicationsdir = $(datadir)/gnome/apps/Settings/Desktop
-pApplications_DATA = $(Applications_DATA)
+cappletname=keyboard
 
 Gladedir = $(datadir)/control-center-data
 Glade_DATA = \
 	keyboard-properties.glade
 
-EXTRA_DIST = ChangeLog $(Applications_DATA) $(Glade_DATA)
+iconsdir = $(GNOME_CONTROL_CENTER_ICONS_DIR)
+icons_DATA = keyboard-capplet.png
+
+EXTRA_DIST = \
+  ChangeLog \
+  $(Glade_DATA) \
+  $(cappletname)-properties.desktop \
+  $(cappletname)-properties.desktop.in \
+  $(cappletname)-properties.desktop.in.in 
 
 INCLUDES = \
         -DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\
@@ -29,3 +33,18 @@ keyboard_properties_SOURCES = \
 	main.c
 
 keyboard_properties_LDADD = @CAPPLET_LIBS@ $(XF86MISC_LIBS)
+
+# desktop.in.in -> desktop.in -> desktop
+#
+desktop = $(cappletname)-properties.desktop
+
+$(desktop).in: %.desktop.in: %.desktop.in.in
+	sed s#Icon=.\*#Icon=$(GNOME_CONTROL_CENTER_ICONS_DIR)/$(cappletname)-capplet.png# < $< > $(cappletname)-properties.desktop.in
+
+install-data-local:
+	$(mkinstalldirs) /home/chema/foo
+	$(INSTALL_DATA) $(srcdir)/$(desktop) $(datadir)/control-center/capplets/$(desktop)
+
+install-data-am: install-data-local
+
+all-local: $(desktop)
