@@ -63,9 +63,6 @@ acme_volume_alsa_finalize (GObject *object)
 {
 	AcmeVolumeAlsa *self;
 
-	g_return_if_fail (object != NULL);
-	g_return_if_fail (ACME_IS_VOLUME_ALSA (object));
-
 	self = ACME_VOLUME_ALSA (object);
 
 	if (self->_priv)
@@ -78,6 +75,7 @@ acme_volume_alsa_finalize (GObject *object)
 
 		acme_volume_alsa_close_real (self);
 		g_free (self->_priv);
+		self->_priv = NULL;
 	}
 
 	G_OBJECT_CLASS (parent_class)->finalize (object);
@@ -185,6 +183,9 @@ acme_volume_alsa_set_volume (AcmeVolume *vol, int val)
 static gboolean
 acme_volume_alsa_close_real (AcmeVolumeAlsa *self)
 {
+	if (self->_priv == NULL)
+		return FALSE;
+
 	if (self->_priv->handle != NULL)
 	{
 		snd_mixer_detach (self->_priv->handle, DEFAULT_CARD);
@@ -268,7 +269,7 @@ acme_volume_alsa_open (AcmeVolumeAlsa *self)
 	return TRUE;
 
 bail:
-	acme_volume_alsa_close (self);
+	acme_volume_alsa_close_real (self);
 	return FALSE;
 }
 
@@ -284,14 +285,17 @@ acme_volume_alsa_init (AcmeVolumeAlsa *self)
 {
 	self->_priv = g_new0 (AcmeVolumeAlsaPrivate, 1);
 
-	acme_volume_alsa_open (self);
-	if (self->_priv->handle != NULL) {
-		acme_volume_alsa_close (self);
+	if (acme_volume_alsa_open (self) == FALSE)
+	{
+		g_free (self->_priv);
+		self->_priv = NULL;
 		return;
 	}
 
-	g_free (self->_priv);
-	self->_priv = NULL;
+	if (self->_priv->handle != NULL) {
+		acme_volume_alsa_close_real (self);
+		return;
+	}
 }
 
 static void

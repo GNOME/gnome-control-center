@@ -1,3 +1,10 @@
+2004-07-16  Bastien Nocera  <hadess@hadess.net>
+
+	* actions/acme-volume-alsa.c: (acme_volume_alsa_finalize),
+	(acme_volume_alsa_close_real), (acme_volume_alsa_open),
+	(acme_volume_alsa_init): fix a crash when there aren't any ALSA mixers
+	(or soundcards) present on the system
+
 2004-07-15  Bastien Nocera  <hadess@hadess.net>
 
 	* actions/acme-volume-oss.c: fix OSS compilation on NetBSD
