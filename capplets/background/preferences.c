@@ -216,8 +216,13 @@ preferences_load (Preferences *prefs)
 		gnome_config_get_string 
 		("/Background/Default/wallpapers_dir=./");
 
-	prefs->auto_apply =
-		gnome_config_get_bool ("/Background/Default/autoApply=true");
+	string = gnome_config_get_string
+		("/Background/Default/autoApply=true");
+	if (!g_strcasecmp (string, "true"))
+		prefs->auto_apply = TRUE;
+	else if (g_strcasecmp (string, "false"))
+		prefs->auto_apply = FALSE;
+	g_free (string);
 
 	if (!g_strcasecmp (prefs->wallpaper_filename, "none")) {
 		g_free(prefs->wallpaper_filename);
@@ -263,8 +268,8 @@ preferences_save (Preferences *prefs)
 	gnome_config_set_int ("/Background/Default/wallpaperAlign", 
 			      prefs->wallpaper_type);
 
-	gnome_config_set_bool ("/Background/Default/autoApply", 
-			       prefs->auto_apply);
+	gnome_config_set_string ("/Background/Default/autoApply", 
+				 prefs->auto_apply ? "True" : "False");
 
 	gnome_config_sync ();
 }
