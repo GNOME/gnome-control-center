@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.5.1\n"
-"POT-Creation-Date: 2002-01-22 19:29+0100\n"
+"POT-Creation-Date: 2002-04-16 01:49-0500\n"
 "PO-Revision-Date: 2002-01-22 19:31CET\n"
 "Last-Translator: Stanislav Visnovsky <visnovsky@nenya.ms.mff.cuni.cz>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -16,10 +16,6 @@ msgstr ""
 
 #: archiver/archive.c:604
 msgid "Default location"
-msgstr "©tandardnÈ umiestnenie"
-
-#: archiver/config-archiver.c:307 archiver/location.c:460
-msgid "Default Location"
 msgstr "©tandardnÈ umiestnenie"
 
 #: archiver/config-archiver.c:81
@@ -154,6 +150,10 @@ msgstr "PlnÈ obsahovanie"
 msgid "Partial containment"
 msgstr "»iastoËnÈ obsahovanie"
 
+#: archiver/config-archiver.c:307 archiver/location.c:460
+msgid "Default Location"
+msgstr "©tandardnÈ umiestnenie"
+
 #: archiver/config-archiver.c:368
 msgid "Global archiver options"
 msgstr "Glob·lne nastavenie archiv·tora"
@@ -194,6 +194,14 @@ msgstr "Pozadie"
 #: capplets/background/background.desktop.in.in.h:2
 msgid "Configuration of the desktop's background"
 msgstr "Nastavenie pozadia plochy"
+
+#: capplets/background/background-properties-capplet.c:46
+msgid "Set background image."
+msgstr "Nastaviª obr·zok pozadia."
+
+#: capplets/background/background-properties-capplet.c:46
+msgid "IMAGE-FILE"
+msgstr "S⁄BOR-OBR¡ZKU"
 
 #: capplets/background/background-properties.glade.h:1
 msgid "Background colors"
@@ -251,27 +259,19 @@ msgstr "Pouæiª obr·zok ako pozadie"
 msgid "Vertical gradient"
 msgstr "Vertik·lny prechod"
 
-#: capplets/background/background-properties-capplet.c:47
-msgid "Set background image."
-msgstr "Nastaviª obr·zok pozadia."
-
-#: capplets/background/background-properties-capplet.c:47
-msgid "IMAGE-FILE"
-msgstr "S⁄BOR-OBR¡ZKU"
-
-#: capplets/common/capplet-util.c:477
+#: capplets/common/capplet-util.c:418
 msgid "Just apply settings and quit"
 msgstr "Iba pouæiª nastavenie a skonËiª"
 
-#: capplets/common/capplet-util.c:479
+#: capplets/common/capplet-util.c:420
 msgid "Initialize the session"
 msgstr "Inicializovaª sedenie"
 
-#: capplets/common/capplet-util.c:481
+#: capplets/common/capplet-util.c:422
 msgid "Retrieve and store legacy settings"
 msgstr "ZÌskaª a uloæiª predch·dzaj˙ce nastavenie"
 
-#: capplets/common/capplet-util.c:490
+#: capplets/common/capplet-util.c:431
 msgid "Capplet options"
 msgstr "Moænosti appletu ovl·dacieho centra"
 
@@ -473,262 +473,6 @@ msgstr "Nepodarilo sa n·jsª s˙bor pixmap: %s"
 msgid "Couldn't create pixmap from file: %s"
 msgstr "Neporadilo sa vytvoriª pixmap zo s˙boru: %s"
 
-#: capplets/desktop-links/gnome-hint-properties.desktop.in.h:1
-msgid "Options for the startup hint dialog"
-msgstr "Moænosti pre dialÛg r·d pri πtarte"
-
-#: capplets/desktop-links/gnome-hint-properties.desktop.in.h:2
-msgid "Startup Hint"
-msgstr "Rady pri πtarte"
-
-#: capplets/desktop-links/screensaver.desktop.in.in.h:1
-msgid "Configure the settings of the screensaver"
-msgstr "NastavÌ πetriË"
-
-#: capplets/desktop-links/screensaver.desktop.in.in.h:2
-msgid "Screensaver"
-msgstr "©etriË obrazovky"
-
-#: capplets/keyboard/keyboard-properties.glade.h:9
-#: capplets/keyboard/keyboard.desktop.in.in.h:1
-msgid "Keyboard"
-msgstr "Kl·vesnica"
-
-#: capplets/keyboard/keyboard.desktop.in.in.h:2
-msgid "Keyboard Properties"
-msgstr "Vlastnosti kl·vesnice"
-
-#: capplets/keyboard/keyboard-properties.glade.h:1
-msgid "Bell"
-msgstr "ZvonËek"
-
-#: capplets/keyboard/keyboard-properties.glade.h:2
-msgid "Click volume"
-msgstr "Hlasitosª stlaËenia kl·vesy"
-
-#: capplets/keyboard/keyboard-properties.glade.h:3
-msgid "Delay before repeat:"
-msgstr "Pauza pred opakovanÌm:"
-
-#: capplets/keyboard/keyboard-properties.glade.h:4
-msgid "Duration (ms)"
-msgstr "DÂæka (ms)"
-
-#: capplets/keyboard/keyboard-properties.glade.h:5
-msgid "Enable Keyboard Click"
-msgstr "Povoliª zvuk kl·vesnice"
-
-#: capplets/keyboard/keyboard-properties.glade.h:6
-msgid "Enable Keyboard Repeat"
-msgstr "Povoliª automatickÈ opakovanie"
-
-#: capplets/keyboard/keyboard-properties.glade.h:7
-#: capplets/mouse/mouse-properties.glade.h:1
-msgid "Fast"
-msgstr "R˝chlo"
-
-#: capplets/keyboard/keyboard-properties.glade.h:8
-msgid "Key repeat rate:"
-msgstr "R˝chlosª opakovania kl·ves:"
-
-#: capplets/keyboard/keyboard-properties.glade.h:10
-msgid "Long"
-msgstr "DlhÈ"
-
-#: capplets/keyboard/keyboard-properties.glade.h:11
-msgid "Medium"
-msgstr "StrednÈ"
-
-#: capplets/keyboard/keyboard-properties.glade.h:12
-msgid "Pitch (Hz)"
-msgstr "V˝πka (Hz)"
-
-#: capplets/keyboard/keyboard-properties.glade.h:13
-msgid "Short"
-msgstr "Kr·tke"
-
-#: capplets/keyboard/keyboard-properties.glade.h:14
-#: capplets/mouse/mouse-properties.glade.h:10
-msgid "Slow"
-msgstr "Pomaly"
-
-#: capplets/keyboard/keyboard-properties.glade.h:15
-msgid "Test"
-msgstr "Test"
-
-#: capplets/keyboard/keyboard-properties.glade.h:16
-msgid "Very fast"
-msgstr "Veµmi r˝chle"
-
-#: capplets/keyboard/keyboard-properties.glade.h:17
-msgid "Very long"
-msgstr "Veµmi dlhÈ"
-
-#: capplets/keyboard/keyboard-properties.glade.h:18
-msgid "Volume"
-msgstr "Hlasitosª"
-
-#: capplets/mouse/mouse.desktop.in.in.h:1
-msgid "Mouse"
-msgstr "Myπ"
-
-#: capplets/mouse/mouse.desktop.in.in.h:2
-msgid "Mouse Properties"
-msgstr "Vlastnosti myπi"
-
-#: capplets/mouse/mouse-properties.glade.h:2
-msgid "High"
-msgstr "Vysok·"
-
-#: capplets/mouse/mouse-properties.glade.h:3
-msgid "Left handed"
-msgstr "Pre µav·kov"
-
-#: capplets/mouse/mouse-properties.glade.h:4
-msgid "Low"
-msgstr "NÌzka"
-
-#: capplets/mouse/mouse-properties.glade.h:5
-msgid "Mouse Configuration"
-msgstr "Nastavenie myπi"
-
-#: capplets/mouse/mouse-properties.glade.h:6
-msgid "Mouse speed:"
-msgstr "R˝chlosª pohybu:"
-
-#: capplets/mouse/mouse-properties.glade.h:7
-msgid "My mouse is:"
-msgstr "Moja myπ je:"
-
-#: capplets/mouse/mouse-properties.glade.h:8
-msgid "Right handed"
-msgstr "Pre prav·kov"
-
-#: capplets/mouse/mouse-properties.glade.h:9
-msgid "Sensitivity:"
-msgstr "Citlivosª:"
-
-#: capplets/sound/sound.desktop.in.in.h:1
-msgid "Configure GNOME's use of sound"
-msgstr "Nastavenie zvuku v GNOME"
-
-#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
-#: capplets/sound/sound.desktop.in.in.h:2
-msgid "Sound"
-msgstr "Zvuk"
-
-#: capplets/sound/sound-properties.glade.h:1
-msgid "Enable sound server startup"
-msgstr "Povoliª spustenie zvukovÈho serveru"
-
-#: capplets/sound/sound-properties.glade.h:2
-msgid "General"
-msgstr "VπeobecnÈ"
-
-#: capplets/sound/sound-properties.glade.h:3
-msgid "Sound Events"
-msgstr "ZvukovÈ udalosti"
-
-#: capplets/sound/sound-properties.glade.h:4
-msgid "Sounds for events"
-msgstr "Zvuky pre udalosti"
-
-#: control-center/capplet-dir-view.c:298 control-center/gnomecc.desktop.in.h:1
-msgid "GNOME Control Center"
-msgstr "GNOME Ovl·dacie centrum"
-
-#: control-center/capplet-dir-view.c:299
-msgid "Desktop properties manager."
-msgstr "Spr·vca nastavenia."
-
-#: control-center/capplet-dir-view.c:413
-#, c-format
-msgid "Gnome Control Center : %s"
-msgstr "GNOME Ovl·dacie centrum: %s"
-
-#: control-center/capplet-dir-view.c:461
-msgid ""
-"No help is available/installed. Please make sure you\n"
-"have the GNOME User's Guide installed on your system."
-msgstr ""
-"Pre tieto nastavenia nie je pomocnÌk k dispozÌcii. ProsÌm, overte, æe\n"
-"m·te nainπtalovan˝ PouæÌvateµsk˝ manu·l GNOME."
-
-#: capplets/theme-switcher/gui.c:368
-#: capplets/wm-properties/wm-properties-capplet.c:671
-#: control-center/capplet-dir-view.c:464
-msgid "Close"
-msgstr "Zavrieª"
-
-#: control-center/capplet-dir-view-html.c:145
-msgid "GNOME Control Center:"
-msgstr "GNOME Ovl·dacie centrum:"
-
-#: control-center/gnomecc.desktop.in.h:2
-msgid "The GNOME configuration tool"
-msgstr "N·stroj pre nastavenie GNOME"
-
-#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
-#: control-center/gnomecc.glade.h:1
-msgid "Appearance"
-msgstr "Vzhµad"
-
-#: control-center/gnomecc.glade.h:2
-msgid "Browse with multiple windows"
-msgstr "Prehliadaª vo viacer˝ch okn·ch"
-
-#: control-center/gnomecc.glade.h:3
-msgid "Browse with single window"
-msgstr "Prehliadaª v jednom okne"
-
-#: control-center/gnomecc.glade.h:4
-msgid "Display control panels as HTML"
-msgstr "Zobraziª ovl·dacie panely ako HTML"
-
-#: control-center/gnomecc.glade.h:5
-msgid "Display control panels as a set of icons"
-msgstr "Zobraziª ovl·dacie panely ako skupinu ikon"
-
-#: control-center/gnomecc.glade.h:6
-msgid "Display control panels as a tree"
-msgstr "Zobraziª ovl·dacie panely ako strom"
-
-#: control-center/gnomecc.glade.h:7
-msgid "Launch control panels in separate windows"
-msgstr "Sp˙πªaª ovl·dacie panely v samostatn˝ch okn·ch"
-
-#: control-center/gnomecc.glade.h:8
-msgid "New-control-center"
-msgstr "NovÈ ovl·dacie centrum"
-
-#: control-center/gnomecc.glade.h:9
-msgid "Put control panels in the control center's window"
-msgstr "Vloæiª ovl·dacie panely do okna ovl·dacieho centra"
-
-#: control-center/Gnome.directory.in.in.h:1
-msgid "Main"
-msgstr "HlavnÈ"
-
-#: control-center/Gnome.directory.in.in.h:2
-msgid "Main Settings"
-msgstr "HlavnÈ nastavenie"
-
-#: control-center/main.c:46
-msgid "Configuration"
-msgstr "Nastavenie"
-
-#: control-center/main.c:72
-msgid "Run the capplet CAPPLET"
-msgstr "Spustiª applet pre ovl·dacie centrum CAPPLET"
-
-#: control-center/main.c:72
-msgid "CAPPLET"
-msgstr "CAPPLET"
-
-#: control-center/main.c:80
-msgid "GNOME Control Center options"
-msgstr "Moænosti pre GNOME Ovl·dacie centrum"
-
 #: capplets/desktop-links/Advanced.directory.in.in.h:1
 msgid "Advanced"
 msgstr "Pokroƒçil√©"
@@ -736,6 +480,14 @@ msgstr "Pokroƒçil√©"
 #: capplets/desktop-links/Advanced.directory.in.in.h:2
 msgid "Advanced Settings"
 msgstr "Pokroƒçil√© nastavenie"
+
+#: capplets/desktop-links/gnome-hint-properties.desktop.in.h:1
+msgid "Options for the startup hint dialog"
+msgstr "Moænosti pre dialÛg r·d pri πtarte"
+
+#: capplets/desktop-links/gnome-hint-properties.desktop.in.h:2
+msgid "Startup Hint"
+msgstr "Rady pri πtarte"
 
 #: capplets/desktop-links/panel.desktop.in.in.h:1
 msgid "Global panel properties"
@@ -745,6 +497,113 @@ msgstr "Glob√°lne vlasnosti panelu"
 msgid "Panel"
 msgstr "Panel"
 
+#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
+#: control-center/gnomecc.glade.h:1
+msgid "Appearance"
+msgstr "Vzhµad"
+
+#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:2
+msgid "Configure window appearance"
+msgstr "Nastavenie vzhƒæadu okien"
+
+#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:1
+msgid "Configure key shortcuts"
+msgstr "Nastavenie kl√°vesov√Ωch skratiek"
+
+#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:2
+msgid "Shortcuts"
+msgstr "Skratky"
+
+#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:1
+msgid "Configure window focusing"
+msgstr "Nastavenie fokusu okien"
+
+#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:2
+msgid "Focus behavior"
+msgstr "Chovanie fokusu"
+
+#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:1
+msgid "Configure window properties"
+msgstr "Nastavenie vlastnost√≠ okien"
+
+#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:2
+msgid "Matched Windows"
+msgstr "Odpovedaj√∫ce okn√°"
+
+#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:1
+msgid "Configure window minimization and maximization"
+msgstr "Nastavenie maximaliz√°cie a minimaliz√°cie okien"
+
+#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:2
+msgid "Minimizing and Maximizing"
+msgstr "Maximaliz√°cia a minimaliz√°cia"
+
+#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
+msgid "Configure window manager configuration properties"
+msgstr "Nastavenie vlastnost√≠ spr√°vcu okien"
+
+#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:2
+msgid "Meta"
+msgstr "Meta"
+
+#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:1
+msgid "Configure miscellaneous window features"
+msgstr "Nastavenie r√¥znych vlastnost√≠ okien"
+
+#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
+#: capplets/ui-properties/behavior-properties.glade.h:19
+msgid "Miscellaneous"
+msgstr "R√¥zne"
+
+#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:1
+msgid "Configure window move/resize"
+msgstr "Nastavenie presunu/zmeny veƒækosti"
+
+#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:2
+msgid "Moving and Resizing"
+msgstr "Presun a zmena veƒækosti"
+
+#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:1
+msgid "Configure window placement"
+msgstr "Nastavenie umiest≈àovania okien"
+
+#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:2
+msgid "Placement"
+msgstr "Umiestnenie"
+
+#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:1
+msgid "Control Center Menu"
+msgstr "Menu Ovl√°dacieho centra"
+
+#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:2
+msgid "Sawfish window manager"
+msgstr "Sawfish"
+
+#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:1
+msgid "Enable window manager sound events"
+msgstr "Povoli≈• zvukov√© udalosti spr√°vcu okien"
+
+#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
+#: capplets/sound/sound.desktop.in.in.h:2
+msgid "Sound"
+msgstr "Zvuk"
+
+#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:1
+msgid "Configure workspaces"
+msgstr "Nastavenie pracovn√Ωch priestorov"
+
+#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:2
+msgid "Workspaces"
+msgstr "Pracovn√© plochy"
+
+#: capplets/desktop-links/screensaver.desktop.in.in.h:1
+msgid "Configure the settings of the screensaver"
+msgstr "NastavÌ πetriË"
+
+#: capplets/desktop-links/screensaver.desktop.in.in.h:2
+msgid "Screensaver"
+msgstr "©etriË obrazovky"
+
 #: capplets/desktop-links/session.desktop.in.in.h:1
 msgid "Configure which non-session aware programs are started up"
 msgstr "Nastavenie, ktor√© programy sa maj√∫ spusti≈• a nepodporuj√∫ sedenia"
@@ -752,6 +611,89 @@ msgstr "Nastavenie, ktor√© programy sa maj√∫ spusti≈• a nepodporuj√∫ sedenia"
 #: capplets/desktop-links/session.desktop.in.in.h:2
 msgid "Startup Programs"
 msgstr "Sp√∫≈°≈•an√© programy"
+
+#: capplets/file-types/file-types-capplet.c:735
+#: capplets/file-types/file-types-capplet.c:1883
+msgid "MIME Type"
+msgstr "Typ MIME"
+
+#: capplets/file-types/file-types-capplet.c:742
+msgid "Change Icon"
+msgstr "Zmeni≈• ikonu"
+
+#: capplets/file-types/file-types-capplet.c:749
+msgid "Change File Extensions"
+msgstr "Zmeni≈• pr√≠pony s√∫borov"
+
+#: capplets/file-types/file-types-capplet.c:757
+msgid "Default Action:"
+msgstr "≈†tandardn√° akcia:"
+
+#: capplets/file-types/file-types-capplet.c:769
+msgid "Use Viewer"
+msgstr "Pou≈æi≈• prehliadaƒç"
+
+#: capplets/file-types/file-types-capplet.c:775
+msgid "Open With Application"
+msgstr "Otvori≈• aplik√°ciou"
+
+#: capplets/file-types/file-types-capplet.c:786
+msgid "Edit List"
+msgstr "Upravi≈• zoznam"
+
+#: capplets/file-types/file-types-capplet.c:811
+msgid "Add New MIME Type..."
+msgstr "Prida≈• nov√Ω typ MIME..."
+
+#: capplets/file-types/file-types-capplet.c:817
+msgid "Delete This MIME Type"
+msgstr "Odstr√°ni≈• teto typ MIME"
+
+#: capplets/file-types/file-types-capplet.c:828
+msgid "Revert to System Defaults"
+msgstr "Vr√°ti≈• sa k syst√©mov√©mu nastaveniu"
+
+#: capplets/file-types/file-types-capplet.c:1075
+#: capplets/file-types/file-types-capplet.c:1219
+msgid "None"
+msgstr "≈Ωiadne"
+
+#: capplets/file-types/file-types-capplet.c:1324
+msgid ""
+"Reverting to system settings will lose any changes\n"
+"you have ever made to File Types and Programs.\n"
+"Revert anyway?"
+msgstr ""
+"N√°vrat k syst√©mov√©mu nastaveniu zahod√≠ v≈°etky zmeny,\n"
+"ktor√© ste kedy urobili v nastaven√≠ typov s√∫borov a programov.\n"
+"Pokraƒçova≈• v n√°vrate k syst√©mov√©mu nastaveniu?"
+
+#. Add default action to fourth column
+#: capplets/file-types/file-types-capplet.c:1393
+#: capplets/file-types/file-types-capplet.c:1593
+#: capplets/file-types/file-types-capplet.c:1719
+msgid "none"
+msgstr "≈æiadna"
+
+#: capplets/file-types/file-types-capplet.c:1434
+#: capplets/file-types/file-types-capplet.c:1620
+#: capplets/file-types/file-types-capplet.c:1763
+#, c-format
+msgid "View as %s"
+msgstr "Zobrazi≈• ako %s"
+
+#: capplets/file-types/file-types-capplet.c:1882
+msgid "Description"
+msgstr "Popis"
+
+#: capplets/file-types/file-types-capplet.c:1884
+#: capplets/mime-type/mime-data.c:385
+msgid "Extension"
+msgstr "Pr√≠pona"
+
+#: capplets/file-types/file-types-capplet.c:1885
+msgid "Default Action"
+msgstr "≈†tandardn√° akcia"
 
 #: capplets/file-types/file-types-capplet-dialogs.c:387
 msgid "Edit Applications List"
@@ -910,89 +852,6 @@ msgstr "M√¥≈æe otv√°ra≈• viac s√∫borov"
 msgid "Can open from URI"
 msgstr "M√¥≈æe otv√°ra≈• URI"
 
-#: capplets/file-types/file-types-capplet.c:735
-#: capplets/file-types/file-types-capplet.c:1883
-msgid "MIME Type"
-msgstr "Typ MIME"
-
-#: capplets/file-types/file-types-capplet.c:742
-msgid "Change Icon"
-msgstr "Zmeni≈• ikonu"
-
-#: capplets/file-types/file-types-capplet.c:749
-msgid "Change File Extensions"
-msgstr "Zmeni≈• pr√≠pony s√∫borov"
-
-#: capplets/file-types/file-types-capplet.c:757
-msgid "Default Action:"
-msgstr "≈†tandardn√° akcia:"
-
-#: capplets/file-types/file-types-capplet.c:769
-msgid "Use Viewer"
-msgstr "Pou≈æi≈• prehliadaƒç"
-
-#: capplets/file-types/file-types-capplet.c:775
-msgid "Open With Application"
-msgstr "Otvori≈• aplik√°ciou"
-
-#: capplets/file-types/file-types-capplet.c:786
-msgid "Edit List"
-msgstr "Upravi≈• zoznam"
-
-#: capplets/file-types/file-types-capplet.c:811
-msgid "Add New MIME Type..."
-msgstr "Prida≈• nov√Ω typ MIME..."
-
-#: capplets/file-types/file-types-capplet.c:817
-msgid "Delete This MIME Type"
-msgstr "Odstr√°ni≈• teto typ MIME"
-
-#: capplets/file-types/file-types-capplet.c:828
-msgid "Revert to System Defaults"
-msgstr "Vr√°ti≈• sa k syst√©mov√©mu nastaveniu"
-
-#: capplets/file-types/file-types-capplet.c:1075
-#: capplets/file-types/file-types-capplet.c:1219
-msgid "None"
-msgstr "≈Ωiadne"
-
-#: capplets/file-types/file-types-capplet.c:1324
-msgid ""
-"Reverting to system settings will lose any changes\n"
-"you have ever made to File Types and Programs.\n"
-"Revert anyway?"
-msgstr ""
-"N√°vrat k syst√©mov√©mu nastaveniu zahod√≠ v≈°etky zmeny,\n"
-"ktor√© ste kedy urobili v nastaven√≠ typov s√∫borov a programov.\n"
-"Pokraƒçova≈• v n√°vrate k syst√©mov√©mu nastaveniu?"
-
-#. Add default action to fourth column
-#: capplets/file-types/file-types-capplet.c:1393
-#: capplets/file-types/file-types-capplet.c:1593
-#: capplets/file-types/file-types-capplet.c:1719
-msgid "none"
-msgstr "≈æiadna"
-
-#: capplets/file-types/file-types-capplet.c:1434
-#: capplets/file-types/file-types-capplet.c:1620
-#: capplets/file-types/file-types-capplet.c:1763
-#, c-format
-msgid "View as %s"
-msgstr "Zobrazi≈• ako %s"
-
-#: capplets/file-types/file-types-capplet.c:1882
-msgid "Description"
-msgstr "Popis"
-
-#: capplets/file-types/file-types-capplet.c:1884
-#: capplets/mime-type/mime-data.c:385
-msgid "Extension"
-msgstr "Pr√≠pona"
-
-#: capplets/file-types/file-types-capplet.c:1885
-msgid "Default Action"
-msgstr "≈†tandardn√° akcia"
-
 #: capplets/file-types/file-types.desktop.in.in.h:1
 msgid "File Types and Programs"
 msgstr "Typy s√∫borov a programy"
@@ -1008,13 +867,92 @@ msgid "Can't find an hbox, using a normal file selection"
 msgstr "Nepodarilo sa n√°js≈• hbox, pou≈æ√≠vam norm√°lny v√Ωber s√∫boru"
 
 #: capplets/file-types/file-types-icon-entry.c:264
-#: capplets/theme-switcher/gui.c:230 capplets/theme-switcher/gui.c:302
+#: capplets/theme-switcher/gui.c:232 capplets/theme-switcher/gui.c:304
 msgid "Preview"
 msgstr "Uk√°≈æka"
 
 #: capplets/file-types/file-types-icon-entry.c:381
 msgid "Select an icon"
 msgstr "Vyberte ikonu"
+
+#: capplets/keyboard/keyboard-properties.glade.h:9
+#: capplets/keyboard/keyboard.desktop.in.in.h:1
+msgid "Keyboard"
+msgstr "Kl·vesnica"
+
+#: capplets/keyboard/keyboard.desktop.in.in.h:2
+msgid "Keyboard Properties"
+msgstr "Vlastnosti kl·vesnice"
+
+#: capplets/keyboard/keyboard-properties.glade.h:1
+msgid "Bell"
+msgstr "ZvonËek"
+
+#: capplets/keyboard/keyboard-properties.glade.h:2
+msgid "Click volume"
+msgstr "Hlasitosª stlaËenia kl·vesy"
+
+#: capplets/keyboard/keyboard-properties.glade.h:3
+msgid "Delay before repeat:"
+msgstr "Pauza pred opakovanÌm:"
+
+#: capplets/keyboard/keyboard-properties.glade.h:4
+msgid "Duration (ms)"
+msgstr "DÂæka (ms)"
+
+#: capplets/keyboard/keyboard-properties.glade.h:5
+msgid "Enable Keyboard Click"
+msgstr "Povoliª zvuk kl·vesnice"
+
+#: capplets/keyboard/keyboard-properties.glade.h:6
+msgid "Enable Keyboard Repeat"
+msgstr "Povoliª automatickÈ opakovanie"
+
+#: capplets/keyboard/keyboard-properties.glade.h:7
+#: capplets/mouse/mouse-properties.glade.h:1
+msgid "Fast"
+msgstr "R˝chlo"
+
+#: capplets/keyboard/keyboard-properties.glade.h:8
+msgid "Key repeat rate:"
+msgstr "R˝chlosª opakovania kl·ves:"
+
+#: capplets/keyboard/keyboard-properties.glade.h:10
+msgid "Long"
+msgstr "DlhÈ"
+
+#: capplets/keyboard/keyboard-properties.glade.h:11
+msgid "Medium"
+msgstr "StrednÈ"
+
+#: capplets/keyboard/keyboard-properties.glade.h:12
+msgid "Pitch (Hz)"
+msgstr "V˝πka (Hz)"
+
+#: capplets/keyboard/keyboard-properties.glade.h:13
+msgid "Short"
+msgstr "Kr·tke"
+
+#: capplets/keyboard/keyboard-properties.glade.h:14
+#: capplets/mouse/mouse-properties.glade.h:10
+msgid "Slow"
+msgstr "Pomaly"
+
+#: capplets/keyboard/keyboard-properties.glade.h:15
+msgid "Test"
+msgstr "Test"
+
+#: capplets/keyboard/keyboard-properties.glade.h:16
+msgid "Very fast"
+msgstr "Veµmi r˝chle"
+
+#: capplets/keyboard/keyboard-properties.glade.h:17
+msgid "Very long"
+msgstr "Veµmi dlhÈ"
+
+#: capplets/keyboard/keyboard-properties.glade.h:18
+msgid "Volume"
+msgstr "Hlasitosª"
 
 #. icon box
 #: capplets/mime-type/edit-window.c:266
@@ -1216,6 +1154,66 @@ msgstr ""
 "MIME.\n"
 "Tieto polia s√∫ nepovinn√©."
 
+#: capplets/mouse/mouse.desktop.in.in.h:1
+msgid "Mouse"
+msgstr "Myπ"
+
+#: capplets/mouse/mouse.desktop.in.in.h:2
+msgid "Mouse Properties"
+msgstr "Vlastnosti myπi"
+
+#: capplets/mouse/mouse-properties.glade.h:2
+msgid "High"
+msgstr "Vysok·"
+
+#: capplets/mouse/mouse-properties.glade.h:3
+msgid "Left handed"
+msgstr "Pre µav·kov"
+
+#: capplets/mouse/mouse-properties.glade.h:4
+msgid "Low"
+msgstr "NÌzka"
+
+#: capplets/mouse/mouse-properties.glade.h:5
+msgid "Mouse Configuration"
+msgstr "Nastavenie myπi"
+
+#: capplets/mouse/mouse-properties.glade.h:6
+msgid "Mouse speed:"
+msgstr "R˝chlosª pohybu:"
+
+#: capplets/mouse/mouse-properties.glade.h:7
+msgid "My mouse is:"
+msgstr "Moja myπ je:"
+
+#: capplets/mouse/mouse-properties.glade.h:8
+msgid "Right handed"
+msgstr "Pre prav·kov"
+
+#: capplets/mouse/mouse-properties.glade.h:9
+msgid "Sensitivity:"
+msgstr "Citlivosª:"
+
+#: capplets/sound/sound.desktop.in.in.h:1
+msgid "Configure GNOME's use of sound"
+msgstr "Nastavenie zvuku v GNOME"
+
+#: capplets/sound/sound-properties.glade.h:1
+msgid "Enable sound server startup"
+msgstr "Povoliª spustenie zvukovÈho serveru"
+
+#: capplets/sound/sound-properties.glade.h:2
+msgid "General"
+msgstr "VπeobecnÈ"
+
+#: capplets/sound/sound-properties.glade.h:3
+msgid "Sound Events"
+msgstr "ZvukovÈ udalosti"
+
+#: capplets/sound/sound-properties.glade.h:4
+msgid "Sounds for events"
+msgstr "Zvuky pre udalosti"
+
 #: capplets/theme-switcher/demo.c:54
 msgid "One"
 msgstr "Jeden"
@@ -1294,7 +1292,15 @@ msgstr "R√°diov√© tlaƒçidlo 1"
 msgid "Radio Button 2"
 msgstr "R√°diov√© tlaƒçidlo 2"
 
-#: capplets/theme-switcher/gui.c:88
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:1
+msgid "Gtk+ Theme Selector"
+msgstr "V√Ωber t√©my Gtk+"
+
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:2
+msgid "Select which gtk+ theme to use"
+msgstr "Vyberte gtk+ t√©mu, ktor√∫ pou≈æi≈•"
+
+#: capplets/theme-switcher/gui.c:87
 #, c-format
 msgid ""
 "Error installing theme:\n"
@@ -1305,15 +1311,15 @@ msgstr ""
 "'%s'\n"
 "%s"
 
-#: capplets/theme-switcher/gui.c:119
+#: capplets/theme-switcher/gui.c:118
 msgid "Select a theme to install"
 msgstr "Vyberte t√©mu, ktor√∫ nain≈°talova≈•"
 
-#: capplets/theme-switcher/gui.c:196
+#: capplets/theme-switcher/gui.c:195
 msgid "Available Themes"
 msgstr "T√©my k dispoz√≠cii"
 
-#: capplets/theme-switcher/gui.c:221
+#: capplets/theme-switcher/gui.c:223
 msgid ""
 "Auto\n"
 "Preview"
@@ -1321,7 +1327,7 @@ msgstr ""
 "Automatick√°\n"
 "Uk√°≈æka"
 
-#: capplets/theme-switcher/gui.c:233
+#: capplets/theme-switcher/gui.c:235
 msgid ""
 "Install new\n"
 "theme..."
@@ -1331,21 +1337,21 @@ msgstr ""
 
 #. Font selector.
 #.
-#: capplets/theme-switcher/gui.c:239
+#: capplets/theme-switcher/gui.c:241
 msgid "User Font"
 msgstr "Pou≈æ√≠vateƒæsk√© p√≠smo"
 
 #. FIXME - should really get this from X somehow
 #. for now we just assume default gtk font
-#: capplets/theme-switcher/gui.c:257
+#: capplets/theme-switcher/gui.c:259
 msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
 msgstr "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
 
-#: capplets/theme-switcher/gui.c:276
+#: capplets/theme-switcher/gui.c:278
 msgid "Use custom font."
 msgstr "Pou≈æi≈• vlastn√© p√≠smo."
 
-#: capplets/theme-switcher/gui.c:366
+#: capplets/theme-switcher/gui.c:368
 #: capplets/wm-properties/wm-properties-capplet.c:669
 msgid ""
 "No help is available/installed for these settings. Please make sure you\n"
@@ -1353,6 +1359,12 @@ msgid ""
 msgstr ""
 "Pre tieto nastavenia nie je pomocn√≠k k dispoz√≠cii. Pros√≠m, overte, ≈æe\n"
 "m√°te nain≈°talovan√Ω Pou≈æ√≠vateƒæsk√Ω manu√°l GNOME."
+
+#: capplets/theme-switcher/gui.c:370
+#: capplets/wm-properties/wm-properties-capplet.c:671
+#: control-center/capplet-dir-view.c:464
+msgid "Close"
+msgstr "Zavrieª"
 
 #: capplets/theme-switcher/install.c:31
 msgid "Home directory doesn't exist!\n"
@@ -1370,60 +1382,6 @@ msgstr "Pr√≠kaz '%s' zlyhal"
 #: capplets/theme-switcher/install.c:78
 msgid "Unknown file format"
 msgstr "Nezn√°my form√°t s√∫boru"
-
-#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:1
-msgid "Gtk+ Theme Selector"
-msgstr "V√Ωber t√©my Gtk+"
-
-#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:2
-msgid "Select which gtk+ theme to use"
-msgstr "Vyberte gtk+ t√©mu, ktor√∫ pou≈æi≈•"
-
-#: capplets/url-properties/url.desktop.in.in.h:1
-msgid "Configure which programs are used to display URLs"
-msgstr "Nastavenie, ktor√© programy sa pou≈æ√≠vatej√∫ pre zobrazenie URL"
-
-#: capplets/url-properties/url.desktop.in.in.h:2
-msgid "URL Handlers"
-msgstr "Obsluha URL"
-
-#: capplets/url-properties/url-properties.c:49
-msgid "Error initializing the `url-properties' capplet."
-msgstr ""
-"Nastala inicializaƒçn√° chyba pri ≈°tarte appletu ovl√°dacieho centra pre URL."
-
-#: capplets/url-properties/url-properties.c:72
-msgid "Protocol"
-msgstr "Protokol"
-
-#: capplets/url-properties/url-properties.c:72
-msgid "Command"
-msgstr "Pr√≠kaz"
-
-#: capplets/url-properties/url-properties.c:89
-msgid "handler:"
-msgstr "obsluha:"
-
-#. set some commonly used handlers
-#: capplets/url-properties/url-properties.c:99
-msgid "Netscape"
-msgstr "Netscape"
-
-#: capplets/url-properties/url-properties.c:104
-msgid "Netscape (new window)"
-msgstr "Netscape (nov√© okno)"
-
-#: capplets/url-properties/url-properties.c:110
-msgid "Help browser"
-msgstr "Prehliadaƒç pomocn√≠ka"
-
-#: capplets/url-properties/url-properties.c:115
-msgid "Help browser (new window)"
-msgstr "Prehliadaƒç pomocn√≠ka (nov√© okno)"
-
-#: capplets/url-properties/url-properties.c:127
-msgid "Set"
-msgstr "Nastavi≈•"
 
 #: capplets/ui-properties/behavior.desktop.in.in.h:1
 msgid "Behavior"
@@ -1504,11 +1462,6 @@ msgstr "Menu"
 #: capplets/ui-properties/behavior-properties.glade.h:18
 msgid "Menus can be torn off"
 msgstr "Menu m√¥≈æu by≈• oddelen√©"
-
-#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
-#: capplets/ui-properties/behavior-properties.glade.h:19
-msgid "Miscellaneous"
-msgstr "R√¥zne"
 
 #: capplets/ui-properties/behavior-properties.glade.h:20
 msgid "Multiple Documents"
@@ -1617,6 +1570,72 @@ msgstr "Pri pou≈æit√≠ z√°lo≈æiek notesu, umiestni≈• ich"
 #: capplets/ui-properties/behavior-properties.glade.h:46
 msgid "Wherever the Window Manager places them"
 msgstr "Tam, kde ich umiestni Spr√°vca okien"
+
+#: capplets/url-properties/url.desktop.in.in.h:1
+msgid "Configure which programs are used to display URLs"
+msgstr "Nastavenie, ktor√© programy sa pou≈æ√≠vatej√∫ pre zobrazenie URL"
+
+#: capplets/url-properties/url.desktop.in.in.h:2
+msgid "URL Handlers"
+msgstr "Obsluha URL"
+
+#: capplets/url-properties/url-properties.c:49
+msgid "Error initializing the `url-properties' capplet."
+msgstr ""
+"Nastala inicializaƒçn√° chyba pri ≈°tarte appletu ovl√°dacieho centra pre URL."
+
+#: capplets/url-properties/url-properties.c:72
+msgid "Protocol"
+msgstr "Protokol"
+
+#: capplets/url-properties/url-properties.c:72
+msgid "Command"
+msgstr "Pr√≠kaz"
+
+#: capplets/url-properties/url-properties.c:89
+msgid "handler:"
+msgstr "obsluha:"
+
+#. set some commonly used handlers
+#: capplets/url-properties/url-properties.c:99
+msgid "Netscape"
+msgstr "Netscape"
+
+#: capplets/url-properties/url-properties.c:104
+msgid "Netscape (new window)"
+msgstr "Netscape (nov√© okno)"
+
+#: capplets/url-properties/url-properties.c:110
+msgid "Help browser"
+msgstr "Prehliadaƒç pomocn√≠ka"
+
+#: capplets/url-properties/url-properties.c:115
+msgid "Help browser (new window)"
+msgstr "Prehliadaƒç pomocn√≠ka (nov√© okno)"
+
+#: capplets/url-properties/url-properties.c:127
+msgid "Set"
+msgstr "Nastavi≈•"
+
+#: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.in.h:1
+msgid "Enlightenment"
+msgstr "Enlightenment"
+
+#: capplets/wm-properties/wm-desktops/IceWM.desktop.in.in.h:1
+msgid "Ice WM"
+msgstr "Ice WM"
+
+#: capplets/wm-properties/wm-desktops/Scwm.desktop.in.in.h:1
+msgid "Scwm"
+msgstr "Scwm"
+
+#: capplets/wm-properties/wm-desktops/twm.desktop.in.in.h:1
+msgid "twm"
+msgstr "twm"
+
+#: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.in.h:1
+msgid "Window Maker"
+msgstr "Window Maker"
 
 #: capplets/wm-properties/wm-properties-capplet.c:170
 #, c-format
@@ -1782,106 +1801,87 @@ msgstr ""
 "spr√°vcu okien.\n"
 "konƒç√≠m...\n"
 
-#: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.in.h:1
-msgid "Enlightenment"
-msgstr "Enlightenment"
+#: control-center/capplet-dir-view.c:298 control-center/gnomecc.desktop.in.h:1
+msgid "GNOME Control Center"
+msgstr "GNOME Ovl·dacie centrum"
 
-#: capplets/wm-properties/wm-desktops/IceWM.desktop.in.in.h:1
-msgid "Ice WM"
-msgstr "Ice WM"
+#: control-center/capplet-dir-view.c:299
+msgid "Desktop properties manager."
+msgstr "Spr·vca nastavenia."
 
-#: capplets/wm-properties/wm-desktops/Scwm.desktop.in.in.h:1
-msgid "Scwm"
-msgstr "Scwm"
+#: control-center/capplet-dir-view.c:413
+#, c-format
+msgid "Gnome Control Center : %s"
+msgstr "GNOME Ovl·dacie centrum: %s"
 
-#: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.in.h:1
-msgid "Window Maker"
-msgstr "Window Maker"
+#: control-center/capplet-dir-view.c:461
+msgid ""
+"No help is available/installed. Please make sure you\n"
+"have the GNOME User's Guide installed on your system."
+msgstr ""
+"Pre tieto nastavenia nie je pomocnÌk k dispozÌcii. ProsÌm, overte, æe\n"
+"m·te nainπtalovan˝ PouæÌvateµsk˝ manu·l GNOME."
 
-#: capplets/wm-properties/wm-desktops/twm.desktop.in.in.h:1
-msgid "twm"
-msgstr "twm"
+#: control-center/capplet-dir-view-html.c:145
+msgid "GNOME Control Center:"
+msgstr "GNOME Ovl·dacie centrum:"
 
-#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:1
-msgid "Control Center Menu"
-msgstr "Menu Ovl√°dacieho centra"
+#: control-center/gnomecc.desktop.in.h:2
+msgid "The GNOME configuration tool"
+msgstr "N·stroj pre nastavenie GNOME"
 
-#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:2
-msgid "Sawfish window manager"
-msgstr "Sawfish"
+#: control-center/gnomecc.glade.h:2
+msgid "Browse with multiple windows"
+msgstr "Prehliadaª vo viacer˝ch okn·ch"
 
-#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:2
-msgid "Configure window appearance"
-msgstr "Nastavenie vzhƒæadu okien"
+#: control-center/gnomecc.glade.h:3
+msgid "Browse with single window"
+msgstr "Prehliadaª v jednom okne"
 
-#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:1
-msgid "Configure key shortcuts"
-msgstr "Nastavenie kl√°vesov√Ωch skratiek"
+#: control-center/gnomecc.glade.h:4
+msgid "Display control panels as HTML"
+msgstr "Zobraziª ovl·dacie panely ako HTML"
 
-#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:2
-msgid "Shortcuts"
-msgstr "Skratky"
+#: control-center/gnomecc.glade.h:5
+msgid "Display control panels as a set of icons"
+msgstr "Zobraziª ovl·dacie panely ako skupinu ikon"
 
-#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:1
-msgid "Configure window focusing"
-msgstr "Nastavenie fokusu okien"
+#: control-center/gnomecc.glade.h:6
+msgid "Display control panels as a tree"
+msgstr "Zobraziª ovl·dacie panely ako strom"
 
-#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:2
-msgid "Focus behavior"
-msgstr "Chovanie fokusu"
+#: control-center/gnomecc.glade.h:7
+msgid "Launch control panels in separate windows"
+msgstr "Sp˙πªaª ovl·dacie panely v samostatn˝ch okn·ch"
 
-#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:1
-msgid "Configure window properties"
-msgstr "Nastavenie vlastnost√≠ okien"
+#: control-center/gnomecc.glade.h:8
+msgid "New-control-center"
+msgstr "NovÈ ovl·dacie centrum"
 
-#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:2
-msgid "Matched Windows"
-msgstr "Odpovedaj√∫ce okn√°"
+#: control-center/gnomecc.glade.h:9
+msgid "Put control panels in the control center's window"
+msgstr "Vloæiª ovl·dacie panely do okna ovl·dacieho centra"
 
-#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:1
-msgid "Configure window minimization and maximization"
-msgstr "Nastavenie maximaliz√°cie a minimaliz√°cie okien"
+#: control-center/Gnome.directory.in.in.h:1
+msgid "Main"
+msgstr "HlavnÈ"
 
-#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:2
-msgid "Minimizing and Maximizing"
-msgstr "Maximaliz√°cia a minimaliz√°cia"
+#: control-center/Gnome.directory.in.in.h:2
+msgid "Main Settings"
+msgstr "HlavnÈ nastavenie"
 
-#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
-msgid "Configure window manager configuration properties"
-msgstr "Nastavenie vlastnost√≠ spr√°vcu okien"
+#: control-center/main.c:46
+msgid "Configuration"
+msgstr "Nastavenie"
 
-#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:2
-msgid "Meta"
-msgstr "Meta"
+#: control-center/main.c:72
+msgid "Run the capplet CAPPLET"
+msgstr "Spustiª applet pre ovl·dacie centrum CAPPLET"
 
-#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:1
-msgid "Configure miscellaneous window features"
-msgstr "Nastavenie r√¥znych vlastnost√≠ okien"
+#: control-center/main.c:72
+msgid "CAPPLET"
+msgstr "CAPPLET"
 
-#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:1
-msgid "Configure window move/resize"
-msgstr "Nastavenie presunu/zmeny veƒækosti"
-
-#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:2
-msgid "Moving and Resizing"
-msgstr "Presun a zmena veƒækosti"
-
-#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:1
-msgid "Configure window placement"
-msgstr "Nastavenie umiest≈àovania okien"
-
-#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:2
-msgid "Placement"
-msgstr "Umiestnenie"
-
-#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:1
-msgid "Enable window manager sound events"
-msgstr "Povoli≈• zvukov√© udalosti spr√°vcu okien"
-
-#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:1
-msgid "Configure workspaces"
-msgstr "Nastavenie pracovn√Ωch priestorov"
-
-#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:2
-msgid "Workspaces"
-msgstr "Pracovn√© plochy"
+#: control-center/main.c:80
+msgid "GNOME Control Center options"
+msgstr "Moænosti pre GNOME Ovl·dacie centrum"

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2002-01-31 22:50+0200\n"
+"POT-Creation-Date: 2002-04-16 01:49-0500\n"
 "PO-Revision-Date: 2002-01-31 22:20+0200\n"
 "Last-Translator: Tıivo Leedj‰rv <leedjarv@interest.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
@@ -16,10 +16,6 @@ msgstr ""
 
 #: archiver/archive.c:604
 msgid "Default location"
-msgstr "Vaikimisi asukoht"
-
-#: archiver/config-archiver.c:307 archiver/location.c:460
-msgid "Default Location"
 msgstr "Vaikimisi asukoht"
 
 #: archiver/config-archiver.c:81
@@ -154,6 +150,10 @@ msgstr ""
 msgid "Partial containment"
 msgstr ""
 
+#: archiver/config-archiver.c:307 archiver/location.c:460
+msgid "Default Location"
+msgstr "Vaikimisi asukoht"
+
 #: archiver/config-archiver.c:368
 msgid "Global archiver options"
 msgstr ""
@@ -194,6 +194,14 @@ msgstr "Taust"
 #: capplets/background/background.desktop.in.in.h:2
 msgid "Configuration of the desktop's background"
 msgstr "Tˆˆlaua tausta h‰‰lestus"
+
+#: capplets/background/background-properties-capplet.c:46
+msgid "Set background image."
+msgstr "M‰‰rab taustapildi"
+
+#: capplets/background/background-properties-capplet.c:46
+msgid "IMAGE-FILE"
+msgstr "IMAGE-FILE"
 
 #: capplets/background/background-properties.glade.h:1
 msgid "Background colors"
@@ -251,28 +259,20 @@ msgstr "Kasuta taustana pilti"
 msgid "Vertical gradient"
 msgstr "Vertikaalne ¸leminek"
 
-#: capplets/background/background-properties-capplet.c:47
-msgid "Set background image."
-msgstr "M‰‰rab taustapildi"
-
-#: capplets/background/background-properties-capplet.c:47
-msgid "IMAGE-FILE"
-msgstr "IMAGE-FILE"
-
-#: capplets/common/capplet-util.c:477
+#: capplets/common/capplet-util.c:418
 msgid "Just apply settings and quit"
 msgstr ""
 
-#: capplets/common/capplet-util.c:479
+#: capplets/common/capplet-util.c:420
 #, fuzzy
 msgid "Initialize the session"
 msgstr "Algv‰‰rtusta sessiooni h‰‰lestus"
 
-#: capplets/common/capplet-util.c:481
+#: capplets/common/capplet-util.c:422
 msgid "Retrieve and store legacy settings"
 msgstr ""
 
-#: capplets/common/capplet-util.c:490
+#: capplets/common/capplet-util.c:431
 msgid "Capplet options"
 msgstr ""
 
@@ -478,273 +478,6 @@ msgstr ""
 msgid "Couldn't create pixmap from file: %s"
 msgstr ""
 
-#: capplets/desktop-links/gnome-hint-properties.desktop.in.h:1
-msgid "Options for the startup hint dialog"
-msgstr ""
-
-#: capplets/desktop-links/gnome-hint-properties.desktop.in.h:2
-#, fuzzy
-msgid "Startup Hint"
-msgstr "K‰ivituv"
-
-#: capplets/desktop-links/screensaver.desktop.in.in.h:1
-msgid "Configure the settings of the screensaver"
-msgstr "Ekraanis‰‰stja h‰‰lestus"
-
-#: capplets/desktop-links/screensaver.desktop.in.in.h:2
-msgid "Screensaver"
-msgstr "Ekraanis‰‰stja"
-
-#: capplets/keyboard/keyboard-properties.glade.h:9
-#: capplets/keyboard/keyboard.desktop.in.in.h:1
-msgid "Keyboard"
-msgstr "Klaviatuur"
-
-#: capplets/keyboard/keyboard.desktop.in.in.h:2
-msgid "Keyboard Properties"
-msgstr "Klaviatuuri h‰‰lestus"
-
-#: capplets/keyboard/keyboard-properties.glade.h:1
-#, fuzzy
-msgid "Bell"
-msgstr "Vabandust"
-
-#: capplets/keyboard/keyboard-properties.glade.h:2
-msgid "Click volume"
-msgstr "Klıpsu valjus"
-
-#: capplets/keyboard/keyboard-properties.glade.h:3
-msgid "Delay before repeat:"
-msgstr ""
-
-#: capplets/keyboard/keyboard-properties.glade.h:4
-msgid "Duration (ms)"
-msgstr "Kestus (ms)"
-
-#: capplets/keyboard/keyboard-properties.glade.h:5
-msgid "Enable Keyboard Click"
-msgstr "Luba klaviatuuri klıps"
-
-#: capplets/keyboard/keyboard-properties.glade.h:6
-#, fuzzy
-msgid "Enable Keyboard Repeat"
-msgstr "Korda m‰rke"
-
-#: capplets/keyboard/keyboard-properties.glade.h:7
-#: capplets/mouse/mouse-properties.glade.h:1
-msgid "Fast"
-msgstr "Kiire"
-
-#: capplets/keyboard/keyboard-properties.glade.h:8
-#, fuzzy
-msgid "Key repeat rate:"
-msgstr "Korduse kiirus"
-
-#: capplets/keyboard/keyboard-properties.glade.h:10
-msgid "Long"
-msgstr "Pikk"
-
-#: capplets/keyboard/keyboard-properties.glade.h:11
-msgid "Medium"
-msgstr "Keskmine"
-
-#: capplets/keyboard/keyboard-properties.glade.h:12
-msgid "Pitch (Hz)"
-msgstr "Kırgus (Hz)"
-
-#: capplets/keyboard/keyboard-properties.glade.h:13
-msgid "Short"
-msgstr "L¸hike"
-
-#: capplets/keyboard/keyboard-properties.glade.h:14
-#: capplets/mouse/mouse-properties.glade.h:10
-msgid "Slow"
-msgstr "Aeglane"
-
-#: capplets/keyboard/keyboard-properties.glade.h:15
-msgid "Test"
-msgstr "Proovi"
-
-#: capplets/keyboard/keyboard-properties.glade.h:16
-msgid "Very fast"
-msgstr "V‰ga kiire"
-
-#: capplets/keyboard/keyboard-properties.glade.h:17
-msgid "Very long"
-msgstr "V‰ga pikk"
-
-#: capplets/keyboard/keyboard-properties.glade.h:18
-msgid "Volume"
-msgstr "Valjus"
-
-#: capplets/mouse/mouse.desktop.in.in.h:1
-msgid "Mouse"
-msgstr "Hiir"
-
-#: capplets/mouse/mouse.desktop.in.in.h:2
-msgid "Mouse Properties"
-msgstr "Hiire h‰‰lestus"
-
-#: capplets/mouse/mouse-properties.glade.h:2
-msgid "High"
-msgstr "Kırge"
-
-#: capplets/mouse/mouse-properties.glade.h:3
-msgid "Left handed"
-msgstr "Vasakuk‰eline"
-
-#: capplets/mouse/mouse-properties.glade.h:4
-msgid "Low"
-msgstr "Madal"
-
-#: capplets/mouse/mouse-properties.glade.h:5
-msgid "Mouse Configuration"
-msgstr "Hiire h‰‰lestus"
-
-#: capplets/mouse/mouse-properties.glade.h:6
-msgid "Mouse speed:"
-msgstr "Hiire kiirus:"
-
-#: capplets/mouse/mouse-properties.glade.h:7
-msgid "My mouse is:"
-msgstr "Minu hiir on:"
-
-#: capplets/mouse/mouse-properties.glade.h:8
-msgid "Right handed"
-msgstr "Paremak‰eline"
-
-#: capplets/mouse/mouse-properties.glade.h:9
-msgid "Sensitivity:"
-msgstr "Tundlikkus:"
-
-#: capplets/sound/sound.desktop.in.in.h:1
-msgid "Configure GNOME's use of sound"
-msgstr "GNOME helide h‰‰lestus"
-
-#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
-#: capplets/sound/sound.desktop.in.in.h:2
-#, fuzzy
-msgid "Sound"
-msgstr "Heli"
-
-#: capplets/sound/sound-properties.glade.h:1
-msgid "Enable sound server startup"
-msgstr "K‰ivita heliserver"
-
-#: capplets/sound/sound-properties.glade.h:2
-msgid "General"
-msgstr "‹ldine"
-
-#: capplets/sound/sound-properties.glade.h:3
-msgid "Sound Events"
-msgstr "S¸ndmused"
-
-#: capplets/sound/sound-properties.glade.h:4
-msgid "Sounds for events"
-msgstr "Helitaust s¸ndmustele"
-
-#: control-center/capplet-dir-view.c:298 control-center/gnomecc.desktop.in.h:1
-msgid "GNOME Control Center"
-msgstr "GNOME juhtpaneel"
-
-#: control-center/capplet-dir-view.c:299
-#, fuzzy
-msgid "Desktop properties manager."
-msgstr "Vıimaldab h‰‰lestada mitmesuguseid tˆˆkeskkonna parameetreid"
-
-#: control-center/capplet-dir-view.c:413
-#, c-format
-msgid "Gnome Control Center : %s"
-msgstr "Gnome juhtpaneel : %s"
-
-#: control-center/capplet-dir-view.c:461
-msgid ""
-"No help is available/installed. Please make sure you\n"
-"have the GNOME User's Guide installed on your system."
-msgstr ""
-"Dokumentatsiooni ei ole/ei ole installeeritud. Veenduge,\n"
-"et GNOME kasutusjuhend on Teie s¸steemi installeeritud."
-
-#: capplets/theme-switcher/gui.c:368
-#: capplets/wm-properties/wm-properties-capplet.c:671
-#: control-center/capplet-dir-view.c:464
-msgid "Close"
-msgstr "Sulge"
-
-#: control-center/capplet-dir-view-html.c:145
-msgid "GNOME Control Center:"
-msgstr "GNOME juhtpaneel:"
-
-#: control-center/gnomecc.desktop.in.h:2
-msgid "The GNOME configuration tool"
-msgstr "GNOME kasutajaliidese h‰‰lestusprogramm"
-
-#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
-#: control-center/gnomecc.glade.h:1
-msgid "Appearance"
-msgstr "V‰limus"
-
-#: control-center/gnomecc.glade.h:2
-msgid "Browse with multiple windows"
-msgstr ""
-
-#: control-center/gnomecc.glade.h:3
-#, fuzzy
-msgid "Browse with single window"
-msgstr "Abimees (uues aknas)"
-
-#: control-center/gnomecc.glade.h:4
-msgid "Display control panels as HTML"
-msgstr ""
-
-#: control-center/gnomecc.glade.h:5
-msgid "Display control panels as a set of icons"
-msgstr ""
-
-#: control-center/gnomecc.glade.h:6
-msgid "Display control panels as a tree"
-msgstr ""
-
-#: control-center/gnomecc.glade.h:7
-msgid "Launch control panels in separate windows"
-msgstr ""
-
-#: control-center/gnomecc.glade.h:8
-#, fuzzy
-msgid "New-control-center"
-msgstr "Juhtpaneeli IOR"
-
-#: control-center/gnomecc.glade.h:9
-msgid "Put control panels in the control center's window"
-msgstr ""
-
-#: control-center/Gnome.directory.in.in.h:1
-#, fuzzy
-msgid "Main"
-msgstr "Salvestav"
-
-#: control-center/Gnome.directory.in.in.h:2
-#, fuzzy
-msgid "Main Settings"
-msgstr "H‰‰lestus"
-
-#: control-center/main.c:46
-#, fuzzy
-msgid "Configuration"
-msgstr "Hiire liikumine"
-
-#: control-center/main.c:72
-msgid "Run the capplet CAPPLET"
-msgstr ""
-
-#: control-center/main.c:72
-msgid "CAPPLET"
-msgstr "CAPPLET"
-
-#: control-center/main.c:80
-msgid "GNOME Control Center options"
-msgstr "GNOME juhtpaneeli h‰‰lestus"
-
 #: capplets/desktop-links/Advanced.directory.in.in.h:1
 msgid "Advanced"
 msgstr ""
@@ -753,6 +486,15 @@ msgstr ""
 #, fuzzy
 msgid "Advanced Settings"
 msgstr "H‰‰lestus"
+
+#: capplets/desktop-links/gnome-hint-properties.desktop.in.h:1
+msgid "Options for the startup hint dialog"
+msgstr ""
+
+#: capplets/desktop-links/gnome-hint-properties.desktop.in.h:2
+#, fuzzy
+msgid "Startup Hint"
+msgstr "K‰ivituv"
 
 #: capplets/desktop-links/panel.desktop.in.in.h:1
 msgid "Global panel properties"
@@ -763,6 +505,119 @@ msgstr ""
 msgid "Panel"
 msgstr "Vabandust"
 
+#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
+#: control-center/gnomecc.glade.h:1
+msgid "Appearance"
+msgstr "V‰limus"
+
+#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:2
+msgid "Configure window appearance"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:1
+msgid "Configure key shortcuts"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:2
+msgid "Shortcuts"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:1
+msgid "Configure window focusing"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:2
+#, fuzzy
+msgid "Focus behavior"
+msgstr "Rakendused"
+
+#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:1
+msgid "Configure window properties"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:2
+#, fuzzy
+msgid "Matched Windows"
+msgstr "Netscape (uues aknas)"
+
+#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:1
+msgid "Configure window minimization and maximization"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:2
+msgid "Minimizing and Maximizing"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
+msgid "Configure window manager configuration properties"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:2
+msgid "Meta"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:1
+msgid "Configure miscellaneous window features"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
+#: capplets/ui-properties/behavior-properties.glade.h:19
+msgid "Miscellaneous"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:1
+msgid "Configure window move/resize"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:2
+msgid "Moving and Resizing"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:1
+msgid "Configure window placement"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:2
+msgid "Placement"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:1
+#, fuzzy
+msgid "Control Center Menu"
+msgstr "Juhtpaneel"
+
+#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:2
+#, fuzzy
+msgid "Sawfish window manager"
+msgstr "M‰‰rab aknahalduri"
+
+#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:1
+#, fuzzy
+msgid "Enable window manager sound events"
+msgstr "Kasuta energias‰‰sturezhiimi."
+
+#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
+#: capplets/sound/sound.desktop.in.in.h:2
+#, fuzzy
+msgid "Sound"
+msgstr "Heli"
+
+#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:1
+msgid "Configure workspaces"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:2
+msgid "Workspaces"
+msgstr ""
+
+#: capplets/desktop-links/screensaver.desktop.in.in.h:1
+msgid "Configure the settings of the screensaver"
+msgstr "Ekraanis‰‰stja h‰‰lestus"
+
+#: capplets/desktop-links/screensaver.desktop.in.in.h:2
+msgid "Screensaver"
+msgstr "Ekraanis‰‰stja"
+
 #: capplets/desktop-links/session.desktop.in.in.h:1
 #, fuzzy
 msgid "Configure which non-session aware programs are started up"
@@ -771,6 +626,96 @@ msgstr "M‰‰rab, millised sessioonihalduseta programmid k‰ivitatakse"
 #: capplets/desktop-links/session.desktop.in.in.h:2
 msgid "Startup Programs"
 msgstr "Programmide k‰ivitus"
+
+#: capplets/file-types/file-types-capplet.c:735
+#: capplets/file-types/file-types-capplet.c:1883
+#, fuzzy
+msgid "MIME Type"
+msgstr "MIME t¸¸p"
+
+#: capplets/file-types/file-types-capplet.c:742
+#, fuzzy
+msgid "Change Icon"
+msgstr "Vabandust"
+
+#: capplets/file-types/file-types-capplet.c:749
+#, fuzzy
+msgid "Change File Extensions"
+msgstr "Laiendused"
+
+#: capplets/file-types/file-types-capplet.c:757
+#, fuzzy
+msgid "Default Action:"
+msgstr "Vaikimisi MDI rezhiim"
+
+#: capplets/file-types/file-types-capplet.c:769
+msgid "Use Viewer"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet.c:775
+msgid "Open With Application"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet.c:786
+#, fuzzy
+msgid "Edit List"
+msgstr "Redigeeri"
+
+#: capplets/file-types/file-types-capplet.c:811
+#, fuzzy
+msgid "Add New MIME Type..."
+msgstr "Lisa MIME t¸¸p"
+
+#: capplets/file-types/file-types-capplet.c:817
+msgid "Delete This MIME Type"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet.c:828
+msgid "Revert to System Defaults"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet.c:1075
+#: capplets/file-types/file-types-capplet.c:1219
+#, fuzzy
+msgid "None"
+msgstr "ei ole"
+
+#: capplets/file-types/file-types-capplet.c:1324
+msgid ""
+"Reverting to system settings will lose any changes\n"
+"you have ever made to File Types and Programs.\n"
+"Revert anyway?"
+msgstr ""
+
+#. Add default action to fourth column
+#: capplets/file-types/file-types-capplet.c:1393
+#: capplets/file-types/file-types-capplet.c:1593
+#: capplets/file-types/file-types-capplet.c:1719
+#, fuzzy
+msgid "none"
+msgstr "ei ole"
+
+#: capplets/file-types/file-types-capplet.c:1434
+#: capplets/file-types/file-types-capplet.c:1620
+#: capplets/file-types/file-types-capplet.c:1763
+#, c-format
+msgid "View as %s"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet.c:1882
+#, fuzzy
+msgid "Description"
+msgstr "Valige ikoon..."
+
+#: capplets/file-types/file-types-capplet.c:1884
+#: capplets/mime-type/mime-data.c:385
+msgid "Extension"
+msgstr "Laiendus"
+
+#: capplets/file-types/file-types-capplet.c:1885
+#, fuzzy
+msgid "Default Action"
+msgstr "Valige ikoon..."
 
 #: capplets/file-types/file-types-capplet-dialogs.c:387
 msgid "Edit Applications List"
@@ -932,96 +877,6 @@ msgstr ""
 msgid "Can open from URI"
 msgstr ""
 
-#: capplets/file-types/file-types-capplet.c:735
-#: capplets/file-types/file-types-capplet.c:1883
-#, fuzzy
-msgid "MIME Type"
-msgstr "MIME t¸¸p"
-
-#: capplets/file-types/file-types-capplet.c:742
-#, fuzzy
-msgid "Change Icon"
-msgstr "Vabandust"
-
-#: capplets/file-types/file-types-capplet.c:749
-#, fuzzy
-msgid "Change File Extensions"
-msgstr "Laiendused"
-
-#: capplets/file-types/file-types-capplet.c:757
-#, fuzzy
-msgid "Default Action:"
-msgstr "Vaikimisi MDI rezhiim"
-
-#: capplets/file-types/file-types-capplet.c:769
-msgid "Use Viewer"
-msgstr ""
-
-#: capplets/file-types/file-types-capplet.c:775
-msgid "Open With Application"
-msgstr ""
-
-#: capplets/file-types/file-types-capplet.c:786
-#, fuzzy
-msgid "Edit List"
-msgstr "Redigeeri"
-
-#: capplets/file-types/file-types-capplet.c:811
-#, fuzzy
-msgid "Add New MIME Type..."
-msgstr "Lisa MIME t¸¸p"
-
-#: capplets/file-types/file-types-capplet.c:817
-msgid "Delete This MIME Type"
-msgstr ""
-
-#: capplets/file-types/file-types-capplet.c:828
-msgid "Revert to System Defaults"
-msgstr ""
-
-#: capplets/file-types/file-types-capplet.c:1075
-#: capplets/file-types/file-types-capplet.c:1219
-#, fuzzy
-msgid "None"
-msgstr "ei ole"
-
-#: capplets/file-types/file-types-capplet.c:1324
-msgid ""
-"Reverting to system settings will lose any changes\n"
-"you have ever made to File Types and Programs.\n"
-"Revert anyway?"
-msgstr ""
-
-#. Add default action to fourth column
-#: capplets/file-types/file-types-capplet.c:1393
-#: capplets/file-types/file-types-capplet.c:1593
-#: capplets/file-types/file-types-capplet.c:1719
-#, fuzzy
-msgid "none"
-msgstr "ei ole"
-
-#: capplets/file-types/file-types-capplet.c:1434
-#: capplets/file-types/file-types-capplet.c:1620
-#: capplets/file-types/file-types-capplet.c:1763
-#, c-format
-msgid "View as %s"
-msgstr ""
-
-#: capplets/file-types/file-types-capplet.c:1882
-#, fuzzy
-msgid "Description"
-msgstr "Valige ikoon..."
-
-#: capplets/file-types/file-types-capplet.c:1884
-#: capplets/mime-type/mime-data.c:385
-msgid "Extension"
-msgstr "Laiendus"
-
-#: capplets/file-types/file-types-capplet.c:1885
-#, fuzzy
-msgid "Default Action"
-msgstr "Valige ikoon..."
-
 #: capplets/file-types/file-types.desktop.in.in.h:1
 msgid "File Types and Programs"
 msgstr ""
@@ -1035,7 +890,7 @@ msgid "Can't find an hbox, using a normal file selection"
 msgstr "Ei leia hbox-i, kasutame tavalist failiselektorit"
 
 #: capplets/file-types/file-types-icon-entry.c:264
-#: capplets/theme-switcher/gui.c:230 capplets/theme-switcher/gui.c:302
+#: capplets/theme-switcher/gui.c:232 capplets/theme-switcher/gui.c:304
 msgid "Preview"
 msgstr "N‰idis"
 
@@ -1043,6 +898,88 @@ msgstr "N‰idis"
 #, fuzzy
 msgid "Select an icon"
 msgstr "Valige ikoon..."
+
+#: capplets/keyboard/keyboard-properties.glade.h:9
+#: capplets/keyboard/keyboard.desktop.in.in.h:1
+msgid "Keyboard"
+msgstr "Klaviatuur"
+
+#: capplets/keyboard/keyboard.desktop.in.in.h:2
+msgid "Keyboard Properties"
+msgstr "Klaviatuuri h‰‰lestus"
+
+#: capplets/keyboard/keyboard-properties.glade.h:1
+#, fuzzy
+msgid "Bell"
+msgstr "Vabandust"
+
+#: capplets/keyboard/keyboard-properties.glade.h:2
+msgid "Click volume"
+msgstr "Klıpsu valjus"
+
+#: capplets/keyboard/keyboard-properties.glade.h:3
+msgid "Delay before repeat:"
+msgstr ""
+
+#: capplets/keyboard/keyboard-properties.glade.h:4
+msgid "Duration (ms)"
+msgstr "Kestus (ms)"
+
+#: capplets/keyboard/keyboard-properties.glade.h:5
+msgid "Enable Keyboard Click"
+msgstr "Luba klaviatuuri klıps"
+
+#: capplets/keyboard/keyboard-properties.glade.h:6
+#, fuzzy
+msgid "Enable Keyboard Repeat"
+msgstr "Korda m‰rke"
+
+#: capplets/keyboard/keyboard-properties.glade.h:7
+#: capplets/mouse/mouse-properties.glade.h:1
+msgid "Fast"
+msgstr "Kiire"
+
+#: capplets/keyboard/keyboard-properties.glade.h:8
+#, fuzzy
+msgid "Key repeat rate:"
+msgstr "Korduse kiirus"
+
+#: capplets/keyboard/keyboard-properties.glade.h:10
+msgid "Long"
+msgstr "Pikk"
+
+#: capplets/keyboard/keyboard-properties.glade.h:11
+msgid "Medium"
+msgstr "Keskmine"
+
+#: capplets/keyboard/keyboard-properties.glade.h:12
+msgid "Pitch (Hz)"
+msgstr "Kırgus (Hz)"
+
+#: capplets/keyboard/keyboard-properties.glade.h:13
+msgid "Short"
+msgstr "L¸hike"
+
+#: capplets/keyboard/keyboard-properties.glade.h:14
+#: capplets/mouse/mouse-properties.glade.h:10
+msgid "Slow"
+msgstr "Aeglane"
+
+#: capplets/keyboard/keyboard-properties.glade.h:15
+msgid "Test"
+msgstr "Proovi"
+
+#: capplets/keyboard/keyboard-properties.glade.h:16
+msgid "Very fast"
+msgstr "V‰ga kiire"
+
+#: capplets/keyboard/keyboard-properties.glade.h:17
+msgid "Very long"
+msgstr "V‰ga pikk"
+
+#: capplets/keyboard/keyboard-properties.glade.h:18
+msgid "Volume"
+msgstr "Valjus"
 
 #. icon box
 #: capplets/mime-type/edit-window.c:266
@@ -1244,6 +1181,66 @@ msgstr ""
 "Te vıite sisestada kuni kaks regulaaravaldist, mis m‰‰ravad MIME t¸¸bi.\n"
 "Need vıib ka ‰ra j‰tta."
 
+#: capplets/mouse/mouse.desktop.in.in.h:1
+msgid "Mouse"
+msgstr "Hiir"
+
+#: capplets/mouse/mouse.desktop.in.in.h:2
+msgid "Mouse Properties"
+msgstr "Hiire h‰‰lestus"
+
+#: capplets/mouse/mouse-properties.glade.h:2
+msgid "High"
+msgstr "Kırge"
+
+#: capplets/mouse/mouse-properties.glade.h:3
+msgid "Left handed"
+msgstr "Vasakuk‰eline"
+
+#: capplets/mouse/mouse-properties.glade.h:4
+msgid "Low"
+msgstr "Madal"
+
+#: capplets/mouse/mouse-properties.glade.h:5
+msgid "Mouse Configuration"
+msgstr "Hiire h‰‰lestus"
+
+#: capplets/mouse/mouse-properties.glade.h:6
+msgid "Mouse speed:"
+msgstr "Hiire kiirus:"
+
+#: capplets/mouse/mouse-properties.glade.h:7
+msgid "My mouse is:"
+msgstr "Minu hiir on:"
+
+#: capplets/mouse/mouse-properties.glade.h:8
+msgid "Right handed"
+msgstr "Paremak‰eline"
+
+#: capplets/mouse/mouse-properties.glade.h:9
+msgid "Sensitivity:"
+msgstr "Tundlikkus:"
+
+#: capplets/sound/sound.desktop.in.in.h:1
+msgid "Configure GNOME's use of sound"
+msgstr "GNOME helide h‰‰lestus"
+
+#: capplets/sound/sound-properties.glade.h:1
+msgid "Enable sound server startup"
+msgstr "K‰ivita heliserver"
+
+#: capplets/sound/sound-properties.glade.h:2
+msgid "General"
+msgstr "‹ldine"
+
+#: capplets/sound/sound-properties.glade.h:3
+msgid "Sound Events"
+msgstr "S¸ndmused"
+
+#: capplets/sound/sound-properties.glade.h:4
+msgid "Sounds for events"
+msgstr "Helitaust s¸ndmustele"
+
 #: capplets/theme-switcher/demo.c:54
 msgid "One"
 msgstr "‹ks"
@@ -1322,7 +1319,16 @@ msgstr "Valikunupp 1"
 msgid "Radio Button 2"
 msgstr "Valikunupp 2"
 
-#: capplets/theme-switcher/gui.c:88
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:1
+msgid "Gtk+ Theme Selector"
+msgstr ""
+
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:2
+#, fuzzy
+msgid "Select which gtk+ theme to use"
+msgstr "Valige teema"
+
+#: capplets/theme-switcher/gui.c:87
 #, c-format
 msgid ""
 "Error installing theme:\n"
@@ -1333,15 +1339,15 @@ msgstr ""
 "'%s'\n"
 "%s"
 
-#: capplets/theme-switcher/gui.c:119
+#: capplets/theme-switcher/gui.c:118
 msgid "Select a theme to install"
 msgstr "Valige teema"
 
-#: capplets/theme-switcher/gui.c:196
+#: capplets/theme-switcher/gui.c:195
 msgid "Available Themes"
 msgstr "Olemasolevad teemad"
 
-#: capplets/theme-switcher/gui.c:221
+#: capplets/theme-switcher/gui.c:223
 msgid ""
 "Auto\n"
 "Preview"
@@ -1349,7 +1355,7 @@ msgstr ""
 "N‰ita\n"
 "kohe"
 
-#: capplets/theme-switcher/gui.c:233
+#: capplets/theme-switcher/gui.c:235
 msgid ""
 "Install new\n"
 "theme..."
@@ -1359,21 +1365,21 @@ msgstr ""
 
 #. Font selector.
 #.
-#: capplets/theme-switcher/gui.c:239
+#: capplets/theme-switcher/gui.c:241
 msgid "User Font"
 msgstr "Shrift"
 
 #. FIXME - should really get this from X somehow
 #. for now we just assume default gtk font
-#: capplets/theme-switcher/gui.c:257
+#: capplets/theme-switcher/gui.c:259
 msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
 msgstr "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
 
-#: capplets/theme-switcher/gui.c:276
+#: capplets/theme-switcher/gui.c:278
 msgid "Use custom font."
 msgstr "Kasuta valitud shrifti"
 
-#: capplets/theme-switcher/gui.c:366
+#: capplets/theme-switcher/gui.c:368
 #: capplets/wm-properties/wm-properties-capplet.c:669
 msgid ""
 "No help is available/installed for these settings. Please make sure you\n"
@@ -1381,6 +1387,12 @@ msgid ""
 msgstr ""
 "Nende m‰‰rangute kohta dokumentatsiooni ei ole. Veenduge, et Teie\n"
 "arvutisse on GNOME kasutusjuhend installeeritud."
+
+#: capplets/theme-switcher/gui.c:370
+#: capplets/wm-properties/wm-properties-capplet.c:671
+#: control-center/capplet-dir-view.c:464
+msgid "Close"
+msgstr "Sulge"
 
 #: capplets/theme-switcher/install.c:31
 msgid "Home directory doesn't exist!\n"
@@ -1398,62 +1410,6 @@ msgstr "K‰sk '%s' ei l‰inud l‰bi"
 #: capplets/theme-switcher/install.c:78
 msgid "Unknown file format"
 msgstr "Tundmatu failiformaat"
-
-#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:1
-msgid "Gtk+ Theme Selector"
-msgstr ""
-
-#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:2
-#, fuzzy
-msgid "Select which gtk+ theme to use"
-msgstr "Valige teema"
-
-#: capplets/url-properties/url.desktop.in.in.h:1
-#, fuzzy
-msgid "Configure which programs are used to display URLs"
-msgstr "M‰‰rab, millised sessioonihalduseta programmid k‰ivitatakse"
-
-#: capplets/url-properties/url.desktop.in.in.h:2
-#, fuzzy
-msgid "URL Handlers"
-msgstr "K‰sitleja:"
-
-#: capplets/url-properties/url-properties.c:49
-msgid "Error initializing the `url-properties' capplet."
-msgstr "'url-properties-capplet' k‰ivitamisel juhtus algv‰‰rtustusviga."
-
-#: capplets/url-properties/url-properties.c:72
-msgid "Protocol"
-msgstr "Protokoll"
-
-#: capplets/url-properties/url-properties.c:72
-msgid "Command"
-msgstr "K‰sk"
-
-#: capplets/url-properties/url-properties.c:89
-msgid "handler:"
-msgstr "K‰sitleja:"
-
-#. set some commonly used handlers
-#: capplets/url-properties/url-properties.c:99
-msgid "Netscape"
-msgstr "Netscape"
-
-#: capplets/url-properties/url-properties.c:104
-msgid "Netscape (new window)"
-msgstr "Netscape (uues aknas)"
-
-#: capplets/url-properties/url-properties.c:110
-msgid "Help browser"
-msgstr "Abimees"
-
-#: capplets/url-properties/url-properties.c:115
-msgid "Help browser (new window)"
-msgstr "Abimees (uues aknas)"
-
-#: capplets/url-properties/url-properties.c:127
-msgid "Set"
-msgstr "M‰‰ra"
 
 #: capplets/ui-properties/behavior.desktop.in.in.h:1
 msgid "Behavior"
@@ -1544,11 +1500,6 @@ msgstr ""
 #, fuzzy
 msgid "Menus can be torn off"
 msgstr "Alammen¸¸sid saab lahti rebida"
-
-#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
-#: capplets/ui-properties/behavior-properties.glade.h:19
-msgid "Miscellaneous"
-msgstr ""
 
 #: capplets/ui-properties/behavior-properties.glade.h:20
 msgid "Multiple Documents"
@@ -1675,6 +1626,74 @@ msgstr ""
 #: capplets/ui-properties/behavior-properties.glade.h:46
 msgid "Wherever the Window Manager places them"
 msgstr ""
+
+#: capplets/url-properties/url.desktop.in.in.h:1
+#, fuzzy
+msgid "Configure which programs are used to display URLs"
+msgstr "M‰‰rab, millised sessioonihalduseta programmid k‰ivitatakse"
+
+#: capplets/url-properties/url.desktop.in.in.h:2
+#, fuzzy
+msgid "URL Handlers"
+msgstr "K‰sitleja:"
+
+#: capplets/url-properties/url-properties.c:49
+msgid "Error initializing the `url-properties' capplet."
+msgstr "'url-properties-capplet' k‰ivitamisel juhtus algv‰‰rtustusviga."
+
+#: capplets/url-properties/url-properties.c:72
+msgid "Protocol"
+msgstr "Protokoll"
+
+#: capplets/url-properties/url-properties.c:72
+msgid "Command"
+msgstr "K‰sk"
+
+#: capplets/url-properties/url-properties.c:89
+msgid "handler:"
+msgstr "K‰sitleja:"
+
+#. set some commonly used handlers
+#: capplets/url-properties/url-properties.c:99
+msgid "Netscape"
+msgstr "Netscape"
+
+#: capplets/url-properties/url-properties.c:104
+msgid "Netscape (new window)"
+msgstr "Netscape (uues aknas)"
+
+#: capplets/url-properties/url-properties.c:110
+msgid "Help browser"
+msgstr "Abimees"
+
+#: capplets/url-properties/url-properties.c:115
+msgid "Help browser (new window)"
+msgstr "Abimees (uues aknas)"
+
+#: capplets/url-properties/url-properties.c:127
+msgid "Set"
+msgstr "M‰‰ra"
+
+#: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.in.h:1
+msgid "Enlightenment"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/IceWM.desktop.in.in.h:1
+msgid "Ice WM"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/Scwm.desktop.in.in.h:1
+msgid "Scwm"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/twm.desktop.in.in.h:1
+msgid "twm"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.in.h:1
+#, fuzzy
+msgid "Window Maker"
+msgstr "Aknahaldur"
 
 #: capplets/wm-properties/wm-properties-capplet.c:170
 #, c-format
@@ -1827,112 +1846,93 @@ msgstr ""
 "'wm-properties-capplet' k‰ivitamisel juhtus algv‰‰rtustusviga.\n"
 "Lıpetame...\n"
 
-#: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.in.h:1
-msgid "Enlightenment"
-msgstr ""
+#: control-center/capplet-dir-view.c:298 control-center/gnomecc.desktop.in.h:1
+msgid "GNOME Control Center"
+msgstr "GNOME juhtpaneel"
 
-#: capplets/wm-properties/wm-desktops/IceWM.desktop.in.in.h:1
-msgid "Ice WM"
-msgstr ""
-
-#: capplets/wm-properties/wm-desktops/Scwm.desktop.in.in.h:1
-msgid "Scwm"
-msgstr ""
-
-#: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.in.h:1
+#: control-center/capplet-dir-view.c:299
 #, fuzzy
-msgid "Window Maker"
-msgstr "Aknahaldur"
+msgid "Desktop properties manager."
+msgstr "Vıimaldab h‰‰lestada mitmesuguseid tˆˆkeskkonna parameetreid"
 
-#: capplets/wm-properties/wm-desktops/twm.desktop.in.in.h:1
-msgid "twm"
+#: control-center/capplet-dir-view.c:413
+#, c-format
+msgid "Gnome Control Center : %s"
+msgstr "Gnome juhtpaneel : %s"
+
+#: control-center/capplet-dir-view.c:461
+msgid ""
+"No help is available/installed. Please make sure you\n"
+"have the GNOME User's Guide installed on your system."
+msgstr ""
+"Dokumentatsiooni ei ole/ei ole installeeritud. Veenduge,\n"
+"et GNOME kasutusjuhend on Teie s¸steemi installeeritud."
+
+#: control-center/capplet-dir-view-html.c:145
+msgid "GNOME Control Center:"
+msgstr "GNOME juhtpaneel:"
+
+#: control-center/gnomecc.desktop.in.h:2
+msgid "The GNOME configuration tool"
+msgstr "GNOME kasutajaliidese h‰‰lestusprogramm"
+
+#: control-center/gnomecc.glade.h:2
+msgid "Browse with multiple windows"
 msgstr ""
 
-#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:1
+#: control-center/gnomecc.glade.h:3
 #, fuzzy
-msgid "Control Center Menu"
-msgstr "Juhtpaneel"
+msgid "Browse with single window"
+msgstr "Abimees (uues aknas)"
 
-#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:2
+#: control-center/gnomecc.glade.h:4
+msgid "Display control panels as HTML"
+msgstr ""
+
+#: control-center/gnomecc.glade.h:5
+msgid "Display control panels as a set of icons"
+msgstr ""
+
+#: control-center/gnomecc.glade.h:6
+msgid "Display control panels as a tree"
+msgstr ""
+
+#: control-center/gnomecc.glade.h:7
+msgid "Launch control panels in separate windows"
+msgstr ""
+
+#: control-center/gnomecc.glade.h:8
 #, fuzzy
-msgid "Sawfish window manager"
-msgstr "M‰‰rab aknahalduri"
+msgid "New-control-center"
+msgstr "Juhtpaneeli IOR"
 
-#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:2
-msgid "Configure window appearance"
+#: control-center/gnomecc.glade.h:9
+msgid "Put control panels in the control center's window"
 msgstr ""
 
-#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:1
-msgid "Configure key shortcuts"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:2
-msgid "Shortcuts"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:1
-msgid "Configure window focusing"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:2
+#: control-center/Gnome.directory.in.in.h:1
 #, fuzzy
-msgid "Focus behavior"
-msgstr "Rakendused"
+msgid "Main"
+msgstr "Salvestav"
 
-#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:1
-msgid "Configure window properties"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:2
+#: control-center/Gnome.directory.in.in.h:2
 #, fuzzy
-msgid "Matched Windows"
-msgstr "Netscape (uues aknas)"
+msgid "Main Settings"
+msgstr "H‰‰lestus"
 
-#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:1
-msgid "Configure window minimization and maximization"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:2
-msgid "Minimizing and Maximizing"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
-msgid "Configure window manager configuration properties"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:2
-msgid "Meta"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:1
-msgid "Configure miscellaneous window features"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:1
-msgid "Configure window move/resize"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:2
-msgid "Moving and Resizing"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:1
-msgid "Configure window placement"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:2
-msgid "Placement"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:1
+#: control-center/main.c:46
 #, fuzzy
-msgid "Enable window manager sound events"
-msgstr "Kasuta energias‰‰sturezhiimi."
+msgid "Configuration"
+msgstr "Hiire liikumine"
 
-#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:1
-msgid "Configure workspaces"
+#: control-center/main.c:72
+msgid "Run the capplet CAPPLET"
 msgstr ""
 
-#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:2
-msgid "Workspaces"
-msgstr ""
+#: control-center/main.c:72
+msgid "CAPPLET"
+msgstr "CAPPLET"
+
+#: control-center/main.c:80
+msgid "GNOME Control Center options"
+msgstr "GNOME juhtpaneeli h‰‰lestus"

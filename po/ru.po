@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center\n"
-"POT-Creation-Date: 2001-12-10 23:24-0500\n"
+"POT-Creation-Date: 2002-04-16 01:49-0500\n"
 "PO-Revision-Date: 2001-10-13 16:45+0400\n"
 "Last-Translator: Valek Filippov <frob@df.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -13,10 +13,6 @@ msgstr ""
 
 #: archiver/archive.c:604
 msgid "Default location"
-msgstr "Исходное положение"
-
-#: archiver/config-archiver.c:307 archiver/location.c:460
-msgid "Default Location"
 msgstr "Исходное положение"
 
 #: archiver/config-archiver.c:81
@@ -151,6 +147,10 @@ msgstr ""
 msgid "Partial containment"
 msgstr ""
 
+#: archiver/config-archiver.c:307 archiver/location.c:460
+msgid "Default Location"
+msgstr "Исходное положение"
+
 #: archiver/config-archiver.c:368
 msgid "Global archiver options"
 msgstr ""
@@ -192,6 +192,14 @@ msgstr "Цвет фона"
 #: capplets/background/background.desktop.in.in.h:2
 msgid "Configuration of the desktop's background"
 msgstr ""
+
+#: capplets/background/background-properties-capplet.c:46
+msgid "Set background image."
+msgstr "Установить изображение для фона"
+
+#: capplets/background/background-properties-capplet.c:46
+msgid "IMAGE-FILE"
+msgstr "ФАЙЛ-ИЗОБРАЖЕНИЯ"
 
 #: capplets/background/background-properties.glade.h:1
 msgid "Background colors"
@@ -249,27 +257,19 @@ msgstr "Использовать картинку для фона"
 msgid "Vertical gradient"
 msgstr "Вертикальный переход"
 
-#: capplets/background/background-properties-capplet.c:47
-msgid "Set background image."
-msgstr "Установить изображение для фона"
-
-#: capplets/background/background-properties-capplet.c:47
-msgid "IMAGE-FILE"
-msgstr "ФАЙЛ-ИЗОБРАЖЕНИЯ"
-
-#: capplets/common/capplet-util.c:477
+#: capplets/common/capplet-util.c:418
 msgid "Just apply settings and quit"
 msgstr "Только применить установки и выйти"
 
-#: capplets/common/capplet-util.c:479
+#: capplets/common/capplet-util.c:420
 msgid "Initialize the session"
 msgstr "Инициализировать сеанс"
 
-#: capplets/common/capplet-util.c:481
+#: capplets/common/capplet-util.c:422
 msgid "Retrieve and store legacy settings"
 msgstr ""
 
-#: capplets/common/capplet-util.c:490
+#: capplets/common/capplet-util.c:431
 msgid "Capplet options"
 msgstr ""
 
@@ -475,6 +475,15 @@ msgstr "Не удалось найти файл изображения: %s"
 msgid "Couldn't create pixmap from file: %s"
 msgstr "Не удалось создать изображение из файла: %s"
 
+#: capplets/desktop-links/Advanced.directory.in.in.h:1
+msgid "Advanced"
+msgstr ""
+
+#: capplets/desktop-links/Advanced.directory.in.in.h:2
+#, fuzzy
+msgid "Advanced Settings"
+msgstr "Свойства"
+
 #: capplets/desktop-links/gnome-hint-properties.desktop.in.h:1
 msgid "Options for the startup hint dialog"
 msgstr "Параметры диалога советов при запуске"
@@ -483,2765 +492,103 @@ msgstr "Параметры диалога советов при запуске"
 msgid "Startup Hint"
 msgstr "Подсказка при запуске"
 
-#: capplets/keyboard/keyboard-properties.glade.h:9
-#: capplets/keyboard/keyboard.desktop.in.in.h:1
-msgid "Keyboard"
-msgstr "Клавиатура"
-
-#: capplets/keyboard/keyboard.desktop.in.in.h:2
+#: capplets/desktop-links/panel.desktop.in.in.h:1
 #, fuzzy
-msgid "Keyboard Properties"
+msgid "Global panel properties"
 msgstr "свойства %s"
 
-#: capplets/keyboard/keyboard-properties.glade.h:1
-msgid "Bell"
-msgstr "Колокольчик"
-
-#: capplets/keyboard/keyboard-properties.glade.h:2
-msgid "Click volume"
-msgstr "Громкость щелчка"
-
-#: capplets/keyboard/keyboard-properties.glade.h:3
-msgid "Delay before repeat:"
-msgstr "Задержка перед повтором:"
-
-#: capplets/keyboard/keyboard-properties.glade.h:4
-msgid "Duration (ms)"
-msgstr "Длительность (мс)"
-
-#: capplets/keyboard/keyboard-properties.glade.h:5
-msgid "Enable Keyboard Click"
-msgstr "Включить щелчки клавиш"
-
-#: capplets/keyboard/keyboard-properties.glade.h:6
-msgid "Enable Keyboard Repeat"
-msgstr "Включить автоповтор клавиатуры"
-
-#: capplets/keyboard/keyboard-properties.glade.h:7
-#: capplets/mouse/mouse-properties.glade.h:1
-#: capplets/screensaver/screensavers/3d_clock.xml.h:2
-#: capplets/screensaver/screensavers/ant.xml.h:3
-#: capplets/screensaver/screensavers/attraction.xml.h:4
-#: capplets/screensaver/screensavers/bsod.xml.h:3
-#: capplets/screensaver/screensavers/compass.xml.h:3
-#: capplets/screensaver/screensavers/flag.xml.h:2
-#: capplets/screensaver/screensavers/qix.xml.h:3
-#: capplets/screensaver/screensavers/starfish.xml.h:3
-msgid "Fast"
-msgstr "Быстро"
-
-#: capplets/keyboard/keyboard-properties.glade.h:8
-msgid "Key repeat rate:"
-msgstr "Скорость повтора клавиши:"
-
-#: capplets/keyboard/keyboard-properties.glade.h:10
-#: capplets/screensaver/screensavers/attraction.xml.h:15
-#: capplets/screensaver/screensavers/qix.xml.h:8
-#: capplets/screensaver/screensavers/rorschach.xml.h:3
-msgid "Long"
-msgstr "Длинный"
-
-#: capplets/keyboard/keyboard-properties.glade.h:11
-msgid "Medium"
-msgstr "Средний"
-
-#: capplets/keyboard/keyboard-properties.glade.h:12
-msgid "Pitch (Hz)"
-msgstr "Щелчок (Гц)"
-
-#: capplets/keyboard/keyboard-properties.glade.h:13
-#: capplets/screensaver/screensavers/attraction.xml.h:20
-#: capplets/screensaver/screensavers/qix.xml.h:16
-#: capplets/screensaver/screensavers/rorschach.xml.h:7
-msgid "Short"
-msgstr "Короткий"
-
-#: capplets/keyboard/keyboard-properties.glade.h:14
-#: capplets/mouse/mouse-properties.glade.h:10
-#: capplets/screensaver/screensavers/3d_clock.xml.h:7
-#: capplets/screensaver/screensavers/ant.xml.h:16
-#: capplets/screensaver/screensavers/attraction.xml.h:21
-#: capplets/screensaver/screensavers/bsod.xml.h:6
-#: capplets/screensaver/screensavers/compass.xml.h:6
-#: capplets/screensaver/screensavers/flag.xml.h:10
-#: capplets/screensaver/screensavers/qix.xml.h:17
-#: capplets/screensaver/screensavers/starfish.xml.h:7
-msgid "Slow"
-msgstr "Медлено"
-
-#: capplets/keyboard/keyboard-properties.glade.h:15
-msgid "Test"
-msgstr "Проверка"
-
-#: capplets/keyboard/keyboard-properties.glade.h:16
-msgid "Very fast"
-msgstr "Очень быстро"
-
-#: capplets/keyboard/keyboard-properties.glade.h:17
-msgid "Very long"
-msgstr "Очень длинный"
-
-#: capplets/keyboard/keyboard-properties.glade.h:18
-msgid "Volume"
-msgstr "Громкость"
-
-#: capplets/mouse/mouse.desktop.in.in.h:1
+#: capplets/desktop-links/panel.desktop.in.in.h:2
 #, fuzzy
-msgid "Mouse"
-msgstr "Мёбиус"
+msgid "Panel"
+msgstr "Отменить"
 
-#: capplets/mouse/mouse.desktop.in.in.h:2
+#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
+#: control-center/gnomecc.glade.h:1
+msgid "Appearance"
+msgstr "Внешний вид"
+
+#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:2
+msgid "Configure window appearance"
+msgstr "Настройка внешнего вида окна"
+
+#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:1
+msgid "Configure key shortcuts"
+msgstr "Настройка комбинаций клавиш"
+
+#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:2
+msgid "Shortcuts"
+msgstr "Комбинации клавиш"
+
+#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:1
+msgid "Configure window focusing"
+msgstr "Настройка фокусировки окна"
+
+#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:2
+msgid "Focus behavior"
+msgstr "Поведение фокуса"
+
+#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:1
+msgid "Configure window properties"
+msgstr "Настройка свойств окна"
+
+#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:2
+msgid "Matched Windows"
+msgstr "Совпадающие окна"
+
+#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:1
+msgid "Configure window minimization and maximization"
+msgstr "Настройка минимизации и максимизации окна"
+
+#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:2
+msgid "Minimizing and Maximizing"
+msgstr "Минимизация и максимизация"
+
+#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
+msgid "Configure window manager configuration properties"
+msgstr "Настройка свойств настройки диспетчера окон"
+
+#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:2
+msgid "Meta"
+msgstr "Мета"
+
+#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:1
+msgid "Configure miscellaneous window features"
+msgstr "Настройка разных свойств окна"
+
+#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
+#: capplets/ui-properties/behavior-properties.glade.h:19
+msgid "Miscellaneous"
+msgstr "Разное"
+
+#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:1
+msgid "Configure window move/resize"
+msgstr "Настройка перемещения/изменения размера окна"
+
+#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:2
+msgid "Moving and Resizing"
+msgstr "Перемещение и изменение размера"
+
+#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:1
+msgid "Configure window placement"
+msgstr "Настройка размещения окна"
+
+#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:2
+msgid "Placement"
+msgstr "Размещение"
+
+#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:1
 #, fuzzy
-msgid "Mouse Properties"
-msgstr "свойства %s"
+msgid "Control Center Menu"
+msgstr "Центр управления GNOME"
 
-#: capplets/mouse/mouse-properties.glade.h:2
-#: capplets/screensaver/screensavers/3d_clock.xml.h:3
-#: capplets/screensaver/screensavers/attraction.xml.h:6
-#: capplets/screensaver/screensavers/qix.xml.h:5
-msgid "High"
-msgstr "Высокий"
-
-#: capplets/mouse/mouse-properties.glade.h:3
-msgid "Left handed"
-msgstr "Под левую руку"
-
-#: capplets/mouse/mouse-properties.glade.h:4
-#: capplets/screensaver/screensavers/3d_clock.xml.h:5
-#: capplets/screensaver/screensavers/attraction.xml.h:16
-#: capplets/screensaver/screensavers/qix.xml.h:9
-msgid "Low"
-msgstr "Низкий "
-
-#: capplets/mouse/mouse-properties.glade.h:5
-msgid "Mouse Configuration"
-msgstr "Настройка мыши"
-
-#: capplets/mouse/mouse-properties.glade.h:6
-msgid "Mouse speed:"
-msgstr "Скорость мыши:"
-
-#: capplets/mouse/mouse-properties.glade.h:7
-msgid "My mouse is:"
-msgstr "Моя мышь это:"
-
-#: capplets/mouse/mouse-properties.glade.h:8
-msgid "Right handed"
-msgstr "Под правую руку"
-
-#: capplets/mouse/mouse-properties.glade.h:9
-msgid "Sensitivity:"
-msgstr "Чувствительность:"
-
-#: capplets/screensaver/preferences.c:786
-msgid "Custom screensaver. No description available"
-msgstr "Другой хранитель экрана. Описание не доступно"
-
-#: capplets/screensaver/prefs-widget.c:192
-#: capplets/screensaver/screensaver.desktop.in.in.h:2
-msgid "Screensaver"
-msgstr "Хранитель экрана"
-
-#: capplets/screensaver/prefs-widget.c:740
-#, c-format
-msgid "About %s\n"
-msgstr "О программе %s\n"
-
-#: capplets/screensaver/screensaver.desktop.in.in.h:1
+#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:2
 #, fuzzy
-msgid "Configure the settings of the screensaver"
-msgstr "Нет настроек для этого хранителя экрана."
-
-#: capplets/screensaver/screensaver-prefs-dialog.c:185
-#: capplets/wm-properties/wm-properties-capplet.c:793
-msgid "Name:"
-msgstr "Название:"
-
-#: capplets/screensaver/screensaver-prefs-dialog.c:197
-msgid "Settings"
-msgstr "Свойства"
-
-#: capplets/file-types/file-types-capplet.c:1882
-#: capplets/screensaver/screensaver-prefs-dialog.c:204
-msgid "Description"
-msgstr "Описание"
-
-#: capplets/screensaver/screensaver-prefs-dialog.c:207
-msgid "label1"
-msgstr "метка1"
-
-#: capplets/screensaver/screensaver-prefs-dialog.c:216
-msgid "Demo"
-msgstr "Демонстрация"
-
-#: capplets/screensaver/screensaver-prefs-dialog.c:274
-#, c-format
-msgid "%s properties"
-msgstr "свойства %s"
-
-#: capplets/screensaver/screensaver-prefs-dialog.c:1366
-msgid "There are no configurable settings for this screensaver."
-msgstr "Нет настроек для этого хранителя экрана."
-
-#: capplets/screensaver/screensaver-prefs-dialog.c:1375
-msgid ""
-"Cannot find the data to configure this screensaver. Please edit the command "
-"line below."
-msgstr ""
-"Не удалось найти данные для настройки этого хранителя экрана. Пожалуйста "
-"отредактируйте приведенную ниже командную строку."
-
-#: capplets/screensaver/screensaver-prefs-dialog.c:1380
-msgid "Please enter a command line below."
-msgstr "Пожалуйста, введите командную строку."
-
-#: capplets/screensaver/screensaver-prefs-dialog.c:1395
-msgid "Visual:"
-msgstr "Видимый:"
-
-#: capplets/screensaver/screensaver-prefs-dialog.c:1424
-#: capplets/screensaver/screensaver-prefs-dialog.c:1715
-msgid "Any"
-msgstr "Любой"
-
-#: capplets/screensaver/screensaver-properties.glade.h:1
-msgid " Configure..."
-msgstr "Настроить..."
-
-#: capplets/screensaver/screensaver-properties.glade.h:2
-msgid "About \"<Screensaver name>\""
-msgstr "О программе \"<Screensaver name>\""
-
-#: capplets/screensaver/screensaver-properties.glade.h:3
-msgid "Black screen only"
-msgstr "Просто черный экран"
-
-#: capplets/screensaver/screensaver-properties.glade.h:4
-msgid "Configure Power Management"
-msgstr "Настроить управление энергосбережением"
-
-#: capplets/screensaver/screensaver-properties.glade.h:5
-msgid "Disable screensaver"
-msgstr "Отключить хранитель экрана"
-
-#: capplets/screensaver/screensaver-properties.glade.h:6
-msgid ""
-"Draws quasiperiodic tilings; think of the implications on modern formica "
-"technology. Written by Time Korlove. In April 1997, Sir Roger Penrose, a "
-"British math professor who has worked with Stephen Hawking on such topics as "
-"relatvity, black holes, and whether time has a beginning, files a copyright-"
-"infringement lawsuit against Kimberly-Clark Corporation, wchih Penrose said "
-"copied a pattern he created ( apattern demonstrating that \"a nonrepeating "
-"pattern could exist in nature\") for its Kleenex quilted toilet paper. "
-msgstr ""
-
-#: capplets/screensaver/screensaver-properties.glade.h:7
-msgid "Enable _power management"
-msgstr "Использовать управление энергосбережение"
-
-#: capplets/screensaver/screensaver-properties.glade.h:8
-msgid "Go to standby mode after"
-msgstr "Переходит в режим \"сна\" через"
-
-#: capplets/screensaver/screensaver-properties.glade.h:9
-msgid "Go to suspend mode after"
-msgstr "Переходит в режим ожидания через"
-
-#: capplets/screensaver/screensaver-properties.glade.h:10
-msgid "One screensaver all the time"
-msgstr "Один и тот же хранитель экрана все время"
-
-#: capplets/file-types/file-types-icon-entry.c:264
-#: capplets/screensaver/screensaver-properties.glade.h:11
-#: capplets/theme-switcher/gui.c:232 capplets/theme-switcher/gui.c:304
-msgid "Preview"
-msgstr "Посмотреть"
-
-#: capplets/screensaver/screensaver-properties.glade.h:12
-msgid "R_equire password to unlock screen"
-msgstr "Запрашивать пароль для разблокирования"
-
-#: capplets/screensaver/screensaver-properties.glade.h:13
-msgid "Random (all screensavers)"
-msgstr "Выбирать случайно из всех"
-
-#: capplets/screensaver/screensaver-properties.glade.h:14
-msgid "Random (checked screensavers)"
-msgstr "Выбирать случайно из отмеченных"
-
-#: capplets/screensaver/screensaver-properties.glade.h:15
-msgid "S_tart screensaver after "
-msgstr "Запуск хранителя экрана через"
-
-#: capplets/screensaver/screensaver-properties.glade.h:16
-msgid "S_witch screensavers after "
-msgstr "Переключать хранитель экрана каждые"
-
-#: capplets/screensaver/screensaver-properties.glade.h:17
-msgid "Settings for \"<Screensaver name>\""
-msgstr "Установки для \"<Screensaver name>\""
-
-#: capplets/screensaver/screensaver-properties.glade.h:18
-msgid "Shut down monitor after"
-msgstr "Выключать монитор через"
-
-#: capplets/screensaver/screensaver-properties.glade.h:19
-msgid ""
-"There are no configurable settings for this\n"
-"screensaver. "
-msgstr ""
-"Для этого хранителя экрана\n"
-"нет изменяемых настроек"
-
-#: capplets/screensaver/screensaver-properties.glade.h:21
-msgid "_About this screensaver..."
-msgstr "Об этом хранителе экрана..."
-
-#: capplets/screensaver/screensaver-properties.glade.h:22
-msgid "_Add"
-msgstr "Добавить"
-
-#: capplets/screensaver/screensaver-properties.glade.h:23
-msgid "_Mode:"
-msgstr "Режим:"
-
-#: capplets/screensaver/screensaver-properties.glade.h:24
-msgid "_Remove"
-msgstr "Удалить"
-
-#: capplets/screensaver/screensaver-properties.glade.h:25
-msgid "_Settings"
-msgstr "Свойства"
-
-#: capplets/screensaver/screensaver-properties.glade.h:26
-msgid "minutes"
-msgstr "минут"
-
-#: capplets/screensaver/screensavers/3d_clock.xml.h:1
-msgid "3d clock"
-msgstr "Трёхмерные часы"
-
-#: capplets/screensaver/screensavers/3d_clock.xml.h:4
-#: capplets/screensaver/screensavers/ant.xml.h:6
-#: capplets/screensaver/screensavers/attraction.xml.h:7
-#: capplets/screensaver/screensavers/flag.xml.h:5
-#: capplets/screensaver/screensavers/rorschach.xml.h:2
-#, fuzzy
-msgid "Large"
-msgstr "Лазер"
-
-#: capplets/screensaver/screensavers/3d_clock.xml.h:6
-msgid "Size:"
-msgstr "Размер:"
-
-#: capplets/screensaver/screensavers/3d_clock.xml.h:8
-#: capplets/screensaver/screensavers/ant.xml.h:17
-#: capplets/screensaver/screensavers/attraction.xml.h:22
-#: capplets/screensaver/screensavers/flag.xml.h:11
-#: capplets/screensaver/screensavers/rorschach.xml.h:8
-#, fuzzy
-msgid "Small"
-msgstr "Шарики"
-
-#: capplets/screensaver/screensavers/3d_clock.xml.h:9
-msgid "Twist speed:"
-msgstr "Скорость скручивания:"
-
-#: capplets/screensaver/screensavers/3d_clock.xml.h:10
-msgid "Twist:"
-msgstr "Скручивание:"
-
-#: capplets/screensaver/screensavers/3d_clock.xml.h:11
-msgid "Wobble:"
-msgstr "Качание:"
-
-#: capplets/screensaver/screensavers/ant.xml.h:1
-msgid ""
-"A cellular automaton that is really a two-dimensional Turing machine: as the "
-"heads (``ants'') walk along the screen, they change pixel values in their "
-"path.  Then, as they pass over changed pixels, their behavior is "
-"influenced.  Written by David Bagley."
-msgstr ""
-
-#: capplets/screensaver/screensavers/ant.xml.h:2
-msgid "Ant"
-msgstr "Муравей"
-
-#: capplets/screensaver/screensavers/ant.xml.h:4
-msgid "Four Sided cells"
-msgstr "Четырехсторонние ячейки"
-
-#: capplets/screensaver/screensavers/ant.xml.h:5
-#: capplets/screensaver/screensavers/attraction.xml.h:5
-#: capplets/screensaver/screensavers/bsod.xml.h:4
-#: capplets/screensaver/screensavers/compass.xml.h:4
-#: capplets/screensaver/screensavers/flag.xml.h:4
-#: capplets/screensaver/screensavers/qix.xml.h:4
-msgid "Full Color"
-msgstr "Полноцветное"
-
-#: capplets/screensaver/screensavers/ant.xml.h:7
-#: capplets/screensaver/screensavers/flag.xml.h:6
-msgid "Many"
-msgstr ""
-
-#: capplets/screensaver/screensavers/ant.xml.h:8
-#: capplets/screensaver/screensavers/attraction.xml.h:17
-#: capplets/screensaver/screensavers/bsod.xml.h:5
-#: capplets/screensaver/screensavers/compass.xml.h:5
-#: capplets/screensaver/screensavers/flag.xml.h:7
-#: capplets/screensaver/screensavers/qix.xml.h:10
-msgid "Monochrome"
-msgstr "Одноцветное"
-
-#: capplets/screensaver/screensavers/ant.xml.h:9
-msgid "Nine Sided cells"
-msgstr "Девятисторонние ячейки"
-
-#: capplets/screensaver/screensavers/ant.xml.h:10
-#: capplets/screensaver/screensavers/flag.xml.h:8
-msgid "Number of colours"
-msgstr "Число цветов"
-
-#: capplets/screensaver/screensavers/ant.xml.h:11
-msgid "Random"
-msgstr "Случайное"
-
-#: capplets/screensaver/screensavers/ant.xml.h:12
-msgid "Random size upto"
-msgstr "Случайный размер до"
-
-#: capplets/screensaver/screensavers/ant.xml.h:13
-msgid "Randomize"
-msgstr "Рандомизировать"
-
-#: capplets/screensaver/screensavers/ant.xml.h:14
-msgid "Sharp turns"
-msgstr "Резкие повороты"
-
-#: capplets/screensaver/screensavers/ant.xml.h:15
-msgid "Six Sided cells"
-msgstr "Шестисторонние ячейки"
-
-#: capplets/screensaver/screensavers/ant.xml.h:18
-msgid "Specific"
-msgstr "Специальное"
-
-#: capplets/screensaver/screensavers/ant.xml.h:19
-#: capplets/screensaver/screensavers/flag.xml.h:12
-msgid "Specific size of"
-msgstr "Указанный размер"
-
-#: capplets/screensaver/screensavers/ant.xml.h:20
-#: capplets/screensaver/screensavers/attraction.xml.h:23
-#: capplets/screensaver/screensavers/bsod.xml.h:7
-#: capplets/screensaver/screensavers/compass.xml.h:7
-#: capplets/screensaver/screensavers/flag.xml.h:13
-#: capplets/screensaver/screensavers/qix.xml.h:19
-msgid "Speed"
-msgstr "Скорость"
-
-#: capplets/screensaver/screensavers/ant.xml.h:21
-msgid "Three Sided cells"
-msgstr "Трехсторонние ячейки"
-
-#: capplets/screensaver/screensavers/ant.xml.h:22
-#: capplets/screensaver/screensavers/flag.xml.h:16
-msgid "Timeout"
-msgstr "Задержка"
-
-#: capplets/screensaver/screensavers/ant.xml.h:23
-msgid "Truchet lines"
-msgstr "Линии Труше"
-
-#: capplets/screensaver/screensavers/ant.xml.h:24
-msgid "Twelve Sided cells"
-msgstr "Двенадцатисторонние ячейки"
-
-#: capplets/screensaver/screensavers/ant.xml.h:25
-#: capplets/screensaver/screensavers/flag.xml.h:17
-#: capplets/theme-switcher/demo.c:54
-msgid "Two"
-msgstr ""
-
-#: capplets/screensaver/screensavers/ant.xml.h:26
-msgid "number of Ants"
-msgstr "число муравьев"
-
-#: capplets/screensaver/screensavers/atlantis.xml.h:1
-msgid "Atlantis"
-msgstr "Атлантика"
-
-#: capplets/screensaver/screensavers/atlantis.xml.h:2
-msgid ""
-"This is xfishtank writ large: a GL animation of a number of sharks, "
-"dolphins, and whales.  The swimming motions are great.  Originally written "
-"by Mark Kilgard."
-msgstr ""
-
-#: capplets/screensaver/screensavers/attraction.xml.h:1
-msgid "Attraction (balls)"
-msgstr "Притяжение (шарики)"
-
-#: capplets/screensaver/screensavers/attraction.xml.h:2
-msgid "Balls"
-msgstr "Шарики"
-
-#: capplets/screensaver/screensavers/attraction.xml.h:3
-msgid "Color Contrast"
-msgstr "Контраст цветов"
-
-#: capplets/screensaver/screensavers/attraction.xml.h:8
-msgid "Length of Trail"
-msgstr "Длина цепочки"
-
-#: capplets/screensaver/screensavers/attraction.xml.h:9
-msgid ""
-"Like qix, this uses a simple motion model to generate many different display "
-"modes.  The control points attract each other up to a certain distance, and "
-"then begin to repel each other.  The attraction/repulsion is proportional to "
-"the distance between any two particles, similar to the strong and weak "
-"nuclear forces.  \n"
-"\n"
-"One of the most interesting ways to watch this hack is simply as bouncing "
-"balls, because their motions and interactions with each other are so odd.  "
-"Sometimes two balls will get into a tight orbit around each other, to be "
-"interrupted later by a third, or by the edge of the screen.  It looks quite "
-"chaotic.  \n"
-"\n"
-"Written by Jamie Zawinski, based on Lisp code by John Pezaris."
-msgstr ""
-
-#: capplets/screensaver/screensavers/attraction.xml.h:14
-#: capplets/screensaver/screensavers/qix.xml.h:7
-msgid "Lines"
-msgstr "Линии"
-
-#: capplets/screensaver/screensavers/attraction.xml.h:18
-#: capplets/screensaver/screensavers/braid.xml.h:5
-#: capplets/screensaver/screensavers/fadeplot.xml.h:9
-#: capplets/screensaver/screensavers/sierpinski.xml.h:4
-#: capplets/screensaver/screensavers/spiral.xml.h:6
-#: capplets/screensaver/screensavers/triangle.xml.h:4
-#: capplets/screensaver/screensavers/vines.xml.h:3
-msgid "Number of Colors"
-msgstr "Число цветов"
-
-#: capplets/screensaver/screensavers/attraction.xml.h:19
-#: capplets/screensaver/screensavers/qix.xml.h:14
-msgid "Polygons"
-msgstr "Многоугольники"
-
-#: capplets/screensaver/screensavers/attraction.xml.h:24
-msgid "Splines"
-msgstr "Сплайны"
-
-#: capplets/screensaver/screensavers/attraction.xml.h:25
-msgid "Tails"
-msgstr "Хвосты"
-
-#: capplets/screensaver/screensavers/attraction.xml.h:26
-msgid "Threshold of repulsion"
-msgstr "Предел отталкивания"
-
-#: capplets/screensaver/screensavers/blaster.xml.h:1
-msgid "Blaster"
-msgstr "Бластер"
-
-#: capplets/screensaver/screensavers/blaster.xml.h:2
-msgid ""
-"Draws a simulation of flying space-combat robots (cleverly disguised as "
-"colored circles) doing battle in front of a moving star field.  Written by "
-"Jonathan Lin."
-msgstr ""
-
-#: capplets/screensaver/screensavers/blitspin.xml.h:1
-msgid "BlitSpin"
-msgstr ""
-
-#: capplets/screensaver/screensavers/blitspin.xml.h:2
-#: capplets/screensaver/screensavers/bouboule.xml.h:4
-#: capplets/screensaver/screensavers/braid.xml.h:3
-#: capplets/screensaver/screensavers/bubbles.xml.h:3
-#: capplets/screensaver/screensavers/crystal.xml.h:6
-#: capplets/screensaver/screensavers/cynosure.xml.h:4
-#: capplets/screensaver/screensavers/decayscreen.xml.h:2
-#: capplets/screensaver/screensavers/discrete.xml.h:4
-#: capplets/screensaver/screensavers/drift.xml.h:3
-#: capplets/screensaver/screensavers/epicycle.xml.h:1
-#: capplets/screensaver/screensavers/fadeplot.xml.h:3
-#: capplets/screensaver/screensavers/flame.xml.h:2
-#: capplets/screensaver/screensavers/forest.xml.h:4
-#: capplets/screensaver/screensavers/goop.xml.h:2
-#: capplets/screensaver/screensavers/grav.xml.h:3
-#: capplets/screensaver/screensavers/greynetic.xml.h:1
-#: capplets/screensaver/screensavers/halo.xml.h:5
-#: capplets/screensaver/screensavers/helix.xml.h:1
-#: capplets/screensaver/screensavers/hopalong.xml.h:2
-#: capplets/screensaver/screensavers/hypercube.xml.h:2
-#: capplets/screensaver/screensavers/ifs.xml.h:2
-#: capplets/screensaver/screensavers/julia.xml.h:3
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:2
-#: capplets/screensaver/screensavers/laser.xml.h:1
-#: capplets/screensaver/screensavers/lightning.xml.h:2
-#: capplets/screensaver/screensavers/lisa.xml.h:3
-#: capplets/screensaver/screensavers/lmorph.xml.h:1
-#: capplets/screensaver/screensavers/moire.xml.h:2
-#: capplets/screensaver/screensavers/munch.xml.h:9
-#: capplets/screensaver/screensavers/pedal.xml.h:1
-#: capplets/screensaver/screensavers/sierpinski.xml.h:2
-#: capplets/screensaver/screensavers/spiral.xml.h:3
-#: capplets/screensaver/screensavers/triangle.xml.h:2
-#: capplets/screensaver/screensavers/vines.xml.h:2
-#: capplets/screensaver/screensavers/xroger.xml.h:1
-msgid "Display screensaver in monochrome."
-msgstr "Показывать одноцветный хранитель экрана."
-
-#: capplets/screensaver/screensavers/blitspin.xml.h:3
-#: capplets/screensaver/screensavers/bouboule.xml.h:5
-#: capplets/screensaver/screensavers/bubbles.xml.h:6
-#: capplets/screensaver/screensavers/coral.xml.h:4
-#: capplets/screensaver/screensavers/crystal.xml.h:7
-#: capplets/screensaver/screensavers/cynosure.xml.h:5
-#: capplets/screensaver/screensavers/decayscreen.xml.h:3
-#: capplets/screensaver/screensavers/discrete.xml.h:5
-#: capplets/screensaver/screensavers/drift.xml.h:5
-#: capplets/screensaver/screensavers/epicycle.xml.h:3
-#: capplets/screensaver/screensavers/fadeplot.xml.h:6
-#: capplets/screensaver/screensavers/flame.xml.h:3
-#: capplets/screensaver/screensavers/forest.xml.h:5
-#: capplets/screensaver/screensavers/goop.xml.h:3
-#: capplets/screensaver/screensavers/greynetic.xml.h:2
-#: capplets/screensaver/screensavers/halo.xml.h:6
-#: capplets/screensaver/screensavers/helix.xml.h:2
-#: capplets/screensaver/screensavers/hopalong.xml.h:3
-#: capplets/screensaver/screensavers/hypercube.xml.h:5
-#: capplets/screensaver/screensavers/julia.xml.h:4
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:3
-#: capplets/screensaver/screensavers/lisa.xml.h:4
-#: capplets/screensaver/screensavers/lmorph.xml.h:2
-#: capplets/screensaver/screensavers/moire.xml.h:3
-#: capplets/screensaver/screensavers/munch.xml.h:11
-#: capplets/screensaver/screensavers/pyro.xml.h:2
-#: capplets/screensaver/screensavers/sierpinski.xml.h:3
-#: capplets/screensaver/screensavers/spiral.xml.h:4
-#, fuzzy
-msgid "Faster"
-msgstr "Быстро"
-
-#: capplets/screensaver/screensavers/blitspin.xml.h:4
-#: capplets/screensaver/screensavers/bouboule.xml.h:8
-#: capplets/screensaver/screensavers/bubbles.xml.h:7
-#: capplets/screensaver/screensavers/coral.xml.h:8
-#: capplets/screensaver/screensavers/crystal.xml.h:12
-#: capplets/screensaver/screensavers/cynosure.xml.h:10
-#: capplets/screensaver/screensavers/decayscreen.xml.h:4
-#: capplets/screensaver/screensavers/discrete.xml.h:9
-#: capplets/screensaver/screensavers/drift.xml.h:10
-#: capplets/screensaver/screensavers/epicycle.xml.h:5
-#: capplets/screensaver/screensavers/fadeplot.xml.h:11
-#: capplets/screensaver/screensavers/flame.xml.h:10
-#: capplets/screensaver/screensavers/forest.xml.h:9
-#: capplets/screensaver/screensavers/goop.xml.h:7
-#: capplets/screensaver/screensavers/greynetic.xml.h:4
-#: capplets/screensaver/screensavers/halo.xml.h:10
-#: capplets/screensaver/screensavers/helix.xml.h:4
-#: capplets/screensaver/screensavers/hopalong.xml.h:9
-#: capplets/screensaver/screensavers/hypercube.xml.h:7
-#: capplets/screensaver/screensavers/julia.xml.h:8
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:10
-#: capplets/screensaver/screensavers/lisa.xml.h:10
-#: capplets/screensaver/screensavers/lmorph.xml.h:10
-#: capplets/screensaver/screensavers/moire.xml.h:8
-#: capplets/screensaver/screensavers/munch.xml.h:13
-#: capplets/screensaver/screensavers/pyro.xml.h:10
-#: capplets/screensaver/screensavers/sierpinski.xml.h:6
-#: capplets/screensaver/screensavers/spiral.xml.h:9
-#, fuzzy
-msgid "Slower"
-msgstr "Медлено"
-
-#: capplets/screensaver/screensavers/blitspin.xml.h:5
-msgid "Speed of rotation."
-msgstr "Скорость вращения"
-
-#: capplets/screensaver/screensavers/blitspin.xml.h:6
-msgid "Speed of the 90 degree rotation."
-msgstr "Скорость поворота на 90 градусов."
-
-#: capplets/screensaver/screensavers/blitspin.xml.h:7
-msgid ""
-"The ``blitspin'' hack repeatedly rotates a bitmap by 90 degrees by using "
-"logical operations: the bitmap is divided into quadrants, and the quadrants "
-"are shifted clockwise.  Then the same thing is done again with progressively "
-"smaller quadrants, except that all sub-quadrants of a given size are rotated "
-"in parallel.  Written by Jamie Zawinski based on some cool SmallTalk code "
-"seen in in Byte Magazine in 1981.  \n"
-"\n"
-"As you watch it, the image appears to dissolve into static and then "
-"reconstitute itself, but rotated.  You can provide the image to use, as an "
-"XBM or XPM file, or tell it to grab a screen image and rotate that."
-msgstr ""
-
-#: capplets/screensaver/screensavers/bouboule.xml.h:1
-msgid "Bouboule"
-msgstr ""
-
-#: capplets/screensaver/screensavers/bouboule.xml.h:2
-#: capplets/screensaver/screensavers/braid.xml.h:2
-#: capplets/screensaver/screensavers/crystal.xml.h:3
-#: capplets/screensaver/screensavers/cynosure.xml.h:2
-#: capplets/screensaver/screensavers/discrete.xml.h:1
-#: capplets/screensaver/screensavers/drift.xml.h:1
-#: capplets/screensaver/screensavers/fadeplot.xml.h:1
-#: capplets/screensaver/screensavers/forest.xml.h:1
-#: capplets/screensaver/screensavers/grav.xml.h:1
-#: capplets/screensaver/screensavers/halo.xml.h:2
-#: capplets/screensaver/screensavers/hopalong.xml.h:1
-#: capplets/screensaver/screensavers/ifs.xml.h:1
-#: capplets/screensaver/screensavers/julia.xml.h:1
-#: capplets/screensaver/screensavers/lightning.xml.h:1
-#: capplets/screensaver/screensavers/lisa.xml.h:1
-#: capplets/screensaver/screensavers/moire.xml.h:1
-#: capplets/screensaver/screensavers/sierpinski.xml.h:1
-#: capplets/screensaver/screensavers/spiral.xml.h:1
-#: capplets/screensaver/screensavers/triangle.xml.h:1
-#: capplets/screensaver/screensavers/vines.xml.h:1
-#, fuzzy
-msgid "Colors:"
-msgstr "Закрыть"
-
-#: capplets/screensaver/screensavers/bouboule.xml.h:3
-#: capplets/screensaver/screensavers/crystal.xml.h:4
-#: capplets/screensaver/screensavers/discrete.xml.h:2
-#: capplets/screensaver/screensavers/drift.xml.h:2
-#: capplets/screensaver/screensavers/fadeplot.xml.h:2
-#: capplets/screensaver/screensavers/forest.xml.h:2
-#: capplets/screensaver/screensavers/goop.xml.h:1
-#: capplets/screensaver/screensavers/grav.xml.h:2
-#: capplets/screensaver/screensavers/halo.xml.h:3
-#: capplets/screensaver/screensavers/julia.xml.h:2
-#: capplets/screensaver/screensavers/lisa.xml.h:2
-#: capplets/screensaver/screensavers/pyro.xml.h:1
-#: capplets/screensaver/screensavers/spiral.xml.h:2
-msgid "Count:"
-msgstr ""
-
-#: capplets/screensaver/screensavers/bouboule.xml.h:6
-#: capplets/screensaver/screensavers/crystal.xml.h:10
-#: capplets/screensaver/screensavers/cynosure.xml.h:8
-#: capplets/screensaver/screensavers/discrete.xml.h:7
-#: capplets/screensaver/screensavers/drift.xml.h:8
-#: capplets/screensaver/screensavers/forest.xml.h:7
-#: capplets/screensaver/screensavers/grav.xml.h:5
-#: capplets/screensaver/screensavers/halo.xml.h:8
-#: capplets/screensaver/screensavers/hopalong.xml.h:7
-#: capplets/screensaver/screensavers/ifs.xml.h:4
-#: capplets/screensaver/screensavers/julia.xml.h:6
-#: capplets/screensaver/screensavers/lightning.xml.h:4
-#: capplets/screensaver/screensavers/lisa.xml.h:7
-#: capplets/screensaver/screensavers/moire.xml.h:7
-msgid "Number of Colors."
-msgstr "Число цветов."
-
-#: capplets/screensaver/screensavers/bouboule.xml.h:7
-#: capplets/screensaver/screensavers/goop.xml.h:6
-msgid "Number of bubbles to use."
-msgstr "Число пузырей"
-
-#: capplets/screensaver/screensavers/bouboule.xml.h:9
-#: capplets/screensaver/screensavers/bubbles.xml.h:8
-#: capplets/screensaver/screensavers/coral.xml.h:9
-#: capplets/screensaver/screensavers/crystal.xml.h:13
-#: capplets/screensaver/screensavers/cynosure.xml.h:11
-#: capplets/screensaver/screensavers/decayscreen.xml.h:5
-#: capplets/screensaver/screensavers/discrete.xml.h:10
-#: capplets/screensaver/screensavers/drift.xml.h:11
-#: capplets/screensaver/screensavers/epicycle.xml.h:6
-#: capplets/screensaver/screensavers/flame.xml.h:11
-#: capplets/screensaver/screensavers/goop.xml.h:8
-#: capplets/screensaver/screensavers/greynetic.xml.h:5
-#: capplets/screensaver/screensavers/halo.xml.h:11
-#: capplets/screensaver/screensavers/hopalong.xml.h:10
-#: capplets/screensaver/screensavers/hypercube.xml.h:8
-#: capplets/screensaver/screensavers/jigsaw.xml.h:2
-#: capplets/screensaver/screensavers/julia.xml.h:9
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:11
-#: capplets/screensaver/screensavers/lisa.xml.h:12
-#: capplets/screensaver/screensavers/lmorph.xml.h:11
-#: capplets/screensaver/screensavers/moire.xml.h:10
-#: capplets/screensaver/screensavers/munch.xml.h:14
-#: capplets/screensaver/screensavers/spiral.xml.h:10
-msgid "Speed of Motion."
-msgstr "Скорость движения."
-
-#: capplets/screensaver/screensavers/bouboule.xml.h:10
-msgid ""
-"This draws what looks like a spinning, deforming baloon with varying-sized "
-"spots painted on its invisible surface.  Written by Jeremie Petit."
-msgstr ""
-
-#: capplets/screensaver/screensavers/bouboule.xml.h:11
-msgid "Use red/blue 3d seperation."
-msgstr "Использовать красно/синее 3-хмерное разделение."
-
-#: capplets/screensaver/screensavers/braid.xml.h:1
-msgid "Braid"
-msgstr ""
-
-#: capplets/screensaver/screensavers/braid.xml.h:4
-msgid ""
-"Draws random color-cycling inter-braided concentric circles.  Written by "
-"John Neil."
-msgstr ""
-
-#: capplets/screensaver/screensavers/bsod.xml.h:1
-msgid "BSOD"
-msgstr "Синий экран смерти"
-
-#: capplets/screensaver/screensavers/bsod.xml.h:2
-msgid ""
-"BSOD stands for ``Blue Screen of Death.''  The finest in personal computer "
-"emulation, this hack simulates popular screen savers from a number of less "
-"robust operating systems.  Written by Jamie Zawinski."
-msgstr ""
-
-#: capplets/screensaver/screensavers/bubble3d.xml.h:1
-msgid "Bubble3D"
-msgstr "Трёхмерные пузыри"
-
-#: capplets/screensaver/screensavers/bubble3d.xml.h:2
-msgid ""
-"Draws a stream of rising, undulating 3D bubbles, rising toward the top of "
-"the screen, with nice specular reflections.  Written by Richard Jones."
-msgstr ""
-
-#: capplets/screensaver/screensavers/bubbles.xml.h:1
-msgid "Bubbles"
-msgstr "Пузыри"
-
-#: capplets/screensaver/screensavers/bubbles.xml.h:2
-msgid "Bubbles exist in three dimensions."
-msgstr "Пузыри существуют в трех измерениях."
-
-#: capplets/screensaver/screensavers/bubbles.xml.h:4
-msgid "Don't hide bubbles when they pop."
-msgstr "Не скрывать пузыри когда они всплыли."
-
-#: capplets/screensaver/screensavers/bubbles.xml.h:5
-msgid "Draw circles instead of pixmap bubbles."
-msgstr "Рисовать круги вместо картинок пузырей."
-
-#: capplets/screensaver/screensavers/bubbles.xml.h:9
-msgid ""
-"This simulates the kind of bubble formation that happens when water boils:"
-"small bubbles appear, and as they get closer to each other, they combine to "
-"form larger bubbles, which eventually pop.  Written by James Macnicol."
-msgstr ""
-
-#: capplets/screensaver/screensavers/bumps.xml.h:1
-msgid ""
-"A bit like `Spotlight', except that instead of merely exposing part of your "
-"desktop, it creates a bump map from it.  Basically, it 3D-izes a roaming "
-"section of your desktop, based on color intensity.  Written by Shane Smit."
-msgstr ""
-
-#: capplets/screensaver/screensavers/bumps.xml.h:2
-msgid "Bumps"
-msgstr ""
-
-#: capplets/screensaver/screensavers/cage.xml.h:1
-msgid "Cage"
-msgstr ""
-
-#: capplets/screensaver/screensavers/cage.xml.h:2
-msgid ""
-"This draws Escher's ``Impossible Cage,'' a 3d analog of a moebius strip, and "
-"rotates it in three dimensions.  Written by Marcelo Vianna."
-msgstr ""
-
-#: capplets/screensaver/screensavers/ccurve.xml.h:1
-msgid "C Curve"
-msgstr ""
-
-#: capplets/screensaver/screensavers/ccurve.xml.h:2
-msgid ""
-"Generates self-similar linear fractals, including the classic ``C Curve.''  "
-"Written by Rick Campbell."
-msgstr ""
-
-#: capplets/screensaver/screensavers/compass.xml.h:1
-msgid "Compass"
-msgstr "Компас"
-
-#: capplets/screensaver/screensavers/compass.xml.h:2
-msgid "Don't use double bufferinge"
-msgstr "Не использовать двойную буферизацию"
-
-#: capplets/screensaver/screensavers/compass.xml.h:8
-msgid ""
-"This draws a compass, with all elements spinning about randomly, for that "
-"``lost and nauseous'' feeling.  Written by Jamie Zawinski."
-msgstr ""
-
-#: capplets/screensaver/screensavers/compass.xml.h:9
-msgid "Use double buffering"
-msgstr "Использовать двойную буферизацию"
-
-#: capplets/screensaver/screensavers/coral.xml.h:1
-msgid "Coral"
-msgstr "Корал"
-
-#: capplets/screensaver/screensavers/coral.xml.h:2
-#, fuzzy
-msgid "Denser"
-msgstr "Плотность"
-
-#: capplets/screensaver/screensavers/coral.xml.h:3
-msgid "Density"
-msgstr "Плотность"
-
-#: capplets/screensaver/screensavers/coral.xml.h:5
-msgid "Number of seeds"
-msgstr "Число зерен"
-
-#: capplets/screensaver/screensavers/coral.xml.h:6
-#, fuzzy
-msgid "Seeds"
-msgstr "Скорость"
-
-#: capplets/screensaver/screensavers/coral.xml.h:7
-msgid ""
-"Simulates coral growth, albeit somewhat slowly.  This image doesn't really "
-"do it justice.  Written by Frederick Roeber."
-msgstr ""
-
-#: capplets/screensaver/screensavers/coral.xml.h:10
-msgid "Thinner"
-msgstr ""
-
-#: capplets/screensaver/screensavers/cosmos.xml.h:1
-msgid "Cosmos"
-msgstr "Космос"
-
-#: capplets/screensaver/screensavers/cosmos.xml.h:2
-msgid ""
-"Draws fireworks and zooming, fading flares.  By Tom Campbell.  You can find "
-"it at <http://www.mindspring.com/~campbell/cosmos/>."
-msgstr ""
-
-#: capplets/screensaver/screensavers/critical.xml.h:1
-msgid "Critical"
-msgstr ""
-
-#: capplets/screensaver/screensavers/critical.xml.h:2
-msgid ""
-"Draws a system of self-organizing lines.  It starts out as random squiggles, "
-"but after a few iterations, order begins to appear.  Written by Martin Pool."
-msgstr ""
-
-#: capplets/screensaver/screensavers/crystal.xml.h:1
-msgid "Cell"
-msgstr "Ячейка"
-
-#: capplets/screensaver/screensavers/crystal.xml.h:2
-msgid "Center image."
-msgstr "Центрировать изображение."
-
-#: capplets/screensaver/screensavers/crystal.xml.h:5
-msgid "Crystal"
-msgstr "Кристал"
-
-#: capplets/screensaver/screensavers/crystal.xml.h:8
-msgid "Have at maximum size"
-msgstr "Максимизировать размер"
-
-#: capplets/screensaver/screensavers/crystal.xml.h:9
-msgid ""
-"Moving polygons, similar to a kaleidescope (more like a kaleidescope than "
-"the hack called `kaleid,' actually.) This one by Jouk Jansen."
-msgstr ""
-
-#: capplets/screensaver/screensavers/crystal.xml.h:11
-msgid "Number of polygons to use."
-msgstr "Число используемых многоугольников."
-
-#: capplets/screensaver/screensavers/cynosure.xml.h:1
-msgid ""
-"A hack similar to `greynetic', but less frenetic.  The first implementation "
-"was by Stephen Linhart; then Ozymandias G.  Desiderata wrote a Java applet "
-"clone.  That clone was discovered by Jamie Zawinski, and ported to C for "
-"inclusion here."
-msgstr ""
-
-#: capplets/screensaver/screensavers/cynosure.xml.h:3
-msgid "Cynosure"
-msgstr ""
-
-#: capplets/screensaver/screensavers/cynosure.xml.h:6
-#: capplets/screensaver/screensavers/flame.xml.h:6
-#: capplets/screensaver/screensavers/hopalong.xml.h:5
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:5
-#: capplets/screensaver/screensavers/lmorph.xml.h:4
-#: capplets/screensaver/screensavers/pedal.xml.h:2
-#: capplets/screensaver/screensavers/pyro.xml.h:4
-#, fuzzy
-msgid "Less"
-msgstr "Линии"
-
-#: capplets/screensaver/screensavers/cynosure.xml.h:7
-#: capplets/screensaver/screensavers/fadeplot.xml.h:7
-#: capplets/screensaver/screensavers/flame.xml.h:7
-#: capplets/screensaver/screensavers/hopalong.xml.h:6
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:6
-#: capplets/screensaver/screensavers/lmorph.xml.h:5
-#: capplets/screensaver/screensavers/pedal.xml.h:5
-#: capplets/screensaver/screensavers/pyro.xml.h:5
-#, fuzzy
-msgid "More"
-msgstr "Муар"
-
-#: capplets/screensaver/screensavers/cynosure.xml.h:9
-msgid "Number of iterations."
-msgstr "Число итераций."
-
-#: capplets/screensaver/screensavers/dangerball.xml.h:1
-msgid "DangerBall"
-msgstr ""
-
-#: capplets/screensaver/screensavers/dangerball.xml.h:2
-msgid ""
-"Draws a ball that periodically extrudes many random spikes.  Ouch! Written "
-"by Jamie Zawinski."
-msgstr ""
-
-#: capplets/screensaver/screensavers/decayscreen.xml.h:1
-msgid "DecayScreen"
-msgstr ""
-
-#: capplets/screensaver/screensavers/decayscreen.xml.h:6
-msgid ""
-"This grabs an image of whatever is on your screen, and makes it melt.  "
-"You've no doubt seen this effect before, but no screensaver would really be "
-"complete without it.  It works best if there's something colorful visible.  "
-"Warning, if the effect continues after the screen saver is off, seek medical "
-"attention.  Written by David Wald and Vivek Khera.  \n"
-"\n"
-"A number of these screenhacks have the ability to take an image of your "
-"desktop and manipulate it in some way.  On SGI systems, these programs are "
-"able to (at random) pull their source image from the system's video input "
-"instead!  This works nicely if you leave some some random television station "
-"plugged in."
-msgstr ""
-
-#: capplets/screensaver/screensavers/deco.xml.h:1
-msgid "Cycle through colors."
-msgstr "Цикл через цвета."
-
-#: capplets/screensaver/screensavers/deco.xml.h:2
-msgid "Deco"
-msgstr "Декор"
-
-#: capplets/screensaver/screensavers/deco.xml.h:3
-msgid ""
-"This one subdivides and colors rectangles randomly.  It looks kind of like "
-"Brady-Bunch-era rec-room wall paneling.  (Raven says: ``this screensaver is "
-"ugly enough to peel paint.'')  Written by Jamie Zawinski, inspired by Java "
-"code by Michael Bayne."
-msgstr ""
-
-#: capplets/screensaver/screensavers/deco.xml.h:4
-#: capplets/screensaver/screensavers/spiral.xml.h:12
-#, fuzzy
-msgid "Time between redraws:"
-msgstr "Время между перерисовками."
-
-#: capplets/screensaver/screensavers/deco.xml.h:5
-msgid "Use color when drawing."
-msgstr "Использовать цвет при рисовании."
-
-#: capplets/screensaver/screensavers/deco.xml.h:6
-msgid "seconds"
-msgstr ""
-
-#: capplets/screensaver/screensavers/deluxe.xml.h:1
-msgid "Deluxe"
-msgstr "Делюкс"
-
-#: capplets/screensaver/screensavers/deluxe.xml.h:2
-msgid ""
-"This draws a pulsing sequence of stars, circles, and lines.  It would look "
-"better if it was faster, but as far as I can tell, there is no way to make "
-"this be both: fast, and flicker-free.  Yet another reason X sucks.  Written "
-"by Jamie Zawinski."
-msgstr ""
-
-#: capplets/screensaver/screensavers/demon.xml.h:1
-msgid ""
-"A cellular automaton that starts with a random field, and organizes it into "
-"stripes and spirals.  Written by David Bagley."
-msgstr ""
-
-#: capplets/screensaver/screensavers/demon.xml.h:2
-msgid "Demon"
-msgstr "Демон"
-
-#: capplets/screensaver/screensavers/discrete.xml.h:3
-msgid "Discrete"
-msgstr "Дискретные линии"
-
-#: capplets/screensaver/screensavers/discrete.xml.h:6
-msgid ""
-"More ``discrete map'' systems, including new variants of Hopalong and Julia, "
-"and a few others.  Written by Tim Auckland."
-msgstr ""
-
-#: capplets/screensaver/screensavers/discrete.xml.h:8
-#: capplets/screensaver/screensavers/julia.xml.h:7
-#: capplets/screensaver/screensavers/lisa.xml.h:8
-#: capplets/screensaver/screensavers/spiral.xml.h:7
-msgid "Number to use."
-msgstr "Используемое число."
-
-#: capplets/screensaver/screensavers/distort.xml.h:1
-msgid "Distort"
-msgstr "Искажение"
-
-#: capplets/screensaver/screensavers/distort.xml.h:2
-msgid ""
-"This hack grabs an image of the screen, and then lets a transparent lens "
-"wander around the screen, magnifying whatever is underneath.  Written by "
-"Jonas Munsin."
-msgstr ""
-
-#: capplets/screensaver/screensavers/drift.xml.h:4
-msgid "Drift"
-msgstr ""
-
-#: capplets/screensaver/screensavers/drift.xml.h:6
-msgid "Fractals should grow."
-msgstr "Фракталы должны расти."
-
-#: capplets/screensaver/screensavers/drift.xml.h:7
-msgid ""
-"How could one possibly describe this except as ``drifting recursive fractal "
-"cosmic flames?''  Another fine hack from the Scott Draves collection of fine "
-"hacks."
-msgstr ""
-
-#: capplets/screensaver/screensavers/drift.xml.h:9
-msgid "Number of pixels to use."
-msgstr "Используемое число точек растра."
-
-#: capplets/screensaver/screensavers/drift.xml.h:12
-msgid "Use lissajous figures to get points."
-msgstr "Использовать для получения точек фигуры Лиссажу."
-
-#: capplets/screensaver/screensavers/electricsheep.xml.h:1
-msgid "ElectricSheep"
-msgstr "Электроовца"
-
-#: capplets/screensaver/screensavers/electricsheep.xml.h:2
-msgid ""
-"ElectricSheep is an xscreensaver module that displays mpeg video of an "
-"animated fractal flame.  In the background, it contributes render cycles to "
-"the next animation.  Periodically it uploades completed frames to the "
-"server, where they are compressed for distribution to all clients.  \n"
-"\n"
-"This program is recommended only if you have a high bandwidth connection to "
-"the Internet.  \n"
-"\n"
-"By Scott Draves.  You can find it at <http://www.electricsheep.org/>.  See "
-"that web site for configuration information."
-msgstr ""
-
-#: capplets/screensaver/screensavers/epicycle.xml.h:2
-msgid "Epicycle"
-msgstr "Эпицикл"
-
-#: capplets/screensaver/screensavers/epicycle.xml.h:4
-#: capplets/screensaver/screensavers/spiral.xml.h:8
-#: capplets/screensaver/screensavers/starfish.xml.h:5
-msgid "Seconds"
-msgstr ""
-
-#: capplets/screensaver/screensavers/epicycle.xml.h:7
-msgid ""
-"This program draws the path traced out by a point on the edge of a circle.  "
-"That circle rotates around a point on the rim of another circle, and so on, "
-"several times.  These were the basis for the pre-heliocentric model of "
-"planetary motion.  Written by James Youngman."
-msgstr ""
-
-#: capplets/screensaver/screensavers/epicycle.xml.h:8
-#: capplets/screensaver/screensavers/flame.xml.h:12
-msgid "Time finished product is shown."
-msgstr "Время отображения итогового результата."
-
-#: capplets/screensaver/screensavers/extrusion.xml.h:1
-msgid ""
-"Draws various rotating extruded shapes that twist around, lengthen, and turn "
-"inside out.  Created by David Konerding from the samples that come with the "
-"GL Extrusion library by Linas Vepstas."
-msgstr ""
-
-#: capplets/screensaver/screensavers/extrusion.xml.h:2
-msgid "Extrusion"
-msgstr ""
-
-#: capplets/screensaver/screensavers/fadeplot.xml.h:4
-msgid ""
-"Draws what looks like a waving ribbon following a sinusoidal path.  Written "
-"by Bas van Gaalen and Charles Vidal."
-msgstr ""
-
-#: capplets/screensaver/screensavers/fadeplot.xml.h:5
-msgid "FadePlot"
-msgstr ""
-
-#: capplets/screensaver/screensavers/fadeplot.xml.h:8
-msgid "Number"
-msgstr "Число"
-
-#: capplets/screensaver/screensavers/fadeplot.xml.h:10
-msgid "Number of cycles"
-msgstr "Число циклов"
-
-#: capplets/screensaver/screensavers/fadeplot.xml.h:12
-#: capplets/screensaver/screensavers/sierpinski.xml.h:7
-msgid "Speed of Motion"
-msgstr "Скорость движения"
-
-#: capplets/screensaver/screensavers/flag.xml.h:1
-msgid "Bitmap for flag"
-msgstr "Картинка для флага"
-
-#: capplets/screensaver/screensavers/flag.xml.h:3
-msgid "Flag"
-msgstr "Флаг"
-
-#: capplets/screensaver/screensavers/flag.xml.h:9
-msgid "Random size up to"
-msgstr "Случайный размер до"
-
-#: capplets/screensaver/screensavers/flag.xml.h:14
-msgid "Text for flag"
-msgstr "Текст для флага"
-
-#: capplets/screensaver/screensavers/flag.xml.h:15
-msgid ""
-"This draws a waving colored flag, that undulates its way around the screen.  "
-"The trick is the flag can contain arbitrary text and images.  By default, it "
-"displays either the current system name and OS type, or a picture of "
-"``Bob,'' but you can replace the text or the image with a command-line "
-"option.  Written by Charles Vidal and Jamie Zawinski."
-msgstr ""
-
-#: capplets/screensaver/screensavers/flame.xml.h:1
-msgid "Another iterative fractal generator.  Written by Scott Draves."
-msgstr "Ещё один итеративный генератор фракталов. Автор Scott Draves."
-
-#: capplets/screensaver/screensavers/flame.xml.h:4
-msgid "Flame"
-msgstr "Пламя"
-
-#: capplets/screensaver/screensavers/flame.xml.h:5
-#, fuzzy
-msgid "Iterations:"
-msgstr "Число итераций"
-
-#: capplets/screensaver/screensavers/flame.xml.h:8
-msgid "Number of fractals to generate."
-msgstr "Создаваемое число фракталов."
-
-#: capplets/screensaver/screensavers/flame.xml.h:9
-msgid "Pixels per fractal."
-msgstr "Точек растра на фрактал:"
-
-#: capplets/screensaver/screensavers/flow.xml.h:1
-msgid ""
-"Another series of strange attractors: a flowing series of points, making "
-"strange rotational shapes.  Written by Jeff Butterworth."
-msgstr ""
-
-#: capplets/screensaver/screensavers/flow.xml.h:2
-msgid "Flow"
-msgstr ""
-
-#: capplets/screensaver/screensavers/forest.xml.h:3
-msgid "Delay between redraws."
-msgstr "Задержка между перерисовками."
-
-#: capplets/screensaver/screensavers/forest.xml.h:6
-msgid "Forest"
-msgstr "Лес"
-
-#: capplets/screensaver/screensavers/forest.xml.h:8
-msgid "Number of trees to use."
-msgstr "Используемое число деревьев."
-
-#: capplets/screensaver/screensavers/forest.xml.h:10
-msgid ""
-"This draws fractal trees.  Written by Peter Baumung.  Everybody loves "
-"fractals, right?"
-msgstr ""
-
-#: capplets/screensaver/screensavers/galaxy.xml.h:1
-msgid "Galaxy"
-msgstr "Галактика"
-
-#: capplets/screensaver/screensavers/galaxy.xml.h:2
-msgid ""
-"This draws spinning galaxies, which then collide and scatter their stars to "
-"the, uh, four winds or something.  Originally an Amiga program by Uli "
-"Siegmund."
-msgstr ""
-
-#: capplets/screensaver/screensavers/gears.xml.h:1
-msgid "Gears"
-msgstr "Шестерёнки"
-
-#: capplets/screensaver/screensavers/gears.xml.h:2
-msgid ""
-"This draws sets of turning, interlocking gears, rotating in three "
-"dimensions.  Another GL hack, by Danny Sung, Brian Paul, Ed Mackey, and "
-"Jamie Zawinski."
-msgstr ""
-"Рисует несколько вращающихся шестерёнок в трёх измерениях. Ещё один GL-хак, "
-"авторы Danny Sung, Brian Paul, Ed Mackey и Jamie Zawinski."
-
-#: capplets/screensaver/screensavers/gflux.xml.h:1
-msgid ""
-"Draws a rippling waves on a rotating wireframe grid, using GL.  Written by "
-"Josiah Pease."
-msgstr ""
-
-#: capplets/screensaver/screensavers/gflux.xml.h:2
-msgid "GFlux"
-msgstr ""
-
-#: capplets/screensaver/screensavers/glplanet.xml.h:1
-msgid ""
-"Draws a planet bouncing around in space.  Written by David Konerding.  The "
-"built-in image is a map of the earth (extracted from `xearth'), but you can "
-"wrap any texture around the sphere, e.g., the planetary textures that come "
-"with `ssystem'."
-msgstr ""
-
-#: capplets/screensaver/screensavers/glplanet.xml.h:2
-msgid "GLPlanet"
-msgstr "Планета"
-
-#: capplets/screensaver/screensavers/gltext.xml.h:1
-msgid ""
-"Displays a few lines of text spinning around in a solid 3D font.  Written by "
-"Jamie Zawinski."
-msgstr ""
-
-#: capplets/screensaver/screensavers/gltext.xml.h:2
-msgid "GLText"
-msgstr "Текст GL"
-
-#: capplets/screensaver/screensavers/goban.xml.h:1
-msgid "Goban"
-msgstr "Го"
-
-#: capplets/screensaver/screensavers/goban.xml.h:2
-msgid ""
-"Replays historical games of go (aka wei-chi and baduk) on the screen.  By "
-"Scott Draves.  You can find it at <http://www.draves.org/goban/>."
-msgstr ""
-
-#: capplets/screensaver/screensavers/goop.xml.h:4
-msgid "Goop"
-msgstr ""
-
-#: capplets/screensaver/screensavers/goop.xml.h:5
-msgid "Have transparent bubbles."
-msgstr "Прозрачные пузыри."
-
-#: capplets/screensaver/screensavers/goop.xml.h:9
-msgid ""
-"This draws set of animating, transparent, amoeba-like blobs.  The blobs "
-"change shape as they wander around the screen, and they are translucent, so "
-"you can see the lower blobs through the higher ones, and when one passes "
-"over another, their colors merge.  Written by Jamie Zawinski.  I got the "
-"idea for this from a cool mouse pad I have, which achieves the same kind of "
-"effect in real life by having several layers plastic with colored oil "
-"between them.  Written by Jamie Zawinski."
-msgstr ""
-
-#: capplets/screensaver/screensavers/goop.xml.h:10
-msgid "Use additive color model."
-msgstr "Использовать аддитивную цветовую модель."
-
-#: capplets/screensaver/screensavers/grav.xml.h:4
-msgid "Grav"
-msgstr ""
-
-#: capplets/screensaver/screensavers/grav.xml.h:6
-msgid "Number of planets to use."
-msgstr "Используемое число планет."
-
-#: capplets/screensaver/screensavers/grav.xml.h:7
-msgid "Objects should leave trails behind them."
-msgstr "Объекты должны оставлять за собой хвост."
-
-#: capplets/screensaver/screensavers/grav.xml.h:8
-msgid "Orbit should decay."
-msgstr "Орбиты должны исчезать."
-
-#: capplets/screensaver/screensavers/grav.xml.h:9
-msgid ""
-"This program draws a simple orbital simulation.  If you turn on trails, it "
-"looks kind of like a cloud-chamber photograph.  Written by Greg Bowering."
-msgstr ""
-
-#: capplets/screensaver/screensavers/greynetic.xml.h:3
-msgid "Greynetic"
-msgstr ""
-
-#: capplets/screensaver/screensavers/greynetic.xml.h:6
-msgid ""
-"This draws random colored and stippled rectangles.  Written by Jamie "
-"Zawinski."
-msgstr ""
-
-#: capplets/screensaver/screensavers/halo.xml.h:1
-msgid "Animate circles."
-msgstr "Анимированные круги."
-
-#: capplets/screensaver/screensavers/halo.xml.h:4
-msgid "Cycle through colormap."
-msgstr "Цикл через цветовую карту."
-
-#: capplets/screensaver/screensavers/halo.xml.h:7
-msgid "Halo"
-msgstr "Гало"
-
-#: capplets/screensaver/screensavers/halo.xml.h:9
-msgid "Number of circles to use."
-msgstr "Используемое число кругов. "
-
-#: capplets/screensaver/screensavers/halo.xml.h:12
-msgid ""
-"This draws trippy psychedelic circular patterns that hurt to look at.  It "
-"can also animate the control-points, but that takes a lot of CPU and "
-"bandwidth.  Written by Jamie Zawinski."
-msgstr ""
-
-#: capplets/screensaver/screensavers/halo.xml.h:13
-msgid "Use a gradient of colors between circles."
-msgstr "Использовать цветовые переходы между кругами."
-
-#: capplets/screensaver/screensavers/helix.xml.h:3
-msgid "Helix"
-msgstr "Геликс"
-
-#: capplets/screensaver/screensavers/helix.xml.h:5
-msgid ""
-"This repeatedly generates spirally string-art-ish patterns.  Written by "
-"Jamie Zawinski."
-msgstr ""
-
-#: capplets/screensaver/screensavers/helix.xml.h:6
-msgid "Time between redraws."
-msgstr "Время между перерисовками."
-
-#: capplets/screensaver/screensavers/hopalong.xml.h:4
-msgid "Hopalong"
-msgstr ""
-
-#: capplets/screensaver/screensavers/hopalong.xml.h:8
-msgid "Number of pixels before a color change."
-msgstr "Число точек растра до изменения цвета."
-
-#: capplets/screensaver/screensavers/hopalong.xml.h:11
-msgid ""
-"This draws lacy fractal patterns, based on iteration in the imaginary plane, "
-"from a 1986 Scientific American article.  Mostly written by Patrick Naughton."
-msgstr ""
-
-#: capplets/screensaver/screensavers/hyperball.xml.h:1
-msgid "Hyperball"
-msgstr "Гипершар"
-
-#: capplets/screensaver/screensavers/hyperball.xml.h:2
-msgid ""
-"Hyperball is to hypercube as dodecahedron is to cube: this displays a 2D "
-"projection of the sequence of 3D objects which are the projections of the 4D "
-"analog to the dodecahedron.  Written by Joe Keane."
-msgstr ""
-
-#: capplets/screensaver/screensavers/hypercube.xml.h:1
-#, fuzzy
-msgid "Closer"
-msgstr "Закрыть"
-
-#: capplets/screensaver/screensavers/hypercube.xml.h:3
-msgid "Distance from center of cube"
-msgstr "Расстояние от центра куба"
-
-#: capplets/screensaver/screensavers/hypercube.xml.h:4
-#, fuzzy
-msgid "Farther"
-msgstr "Земля"
-
-#: capplets/screensaver/screensavers/hypercube.xml.h:6
-msgid "Hypercube"
-msgstr "Гиперкуб"
-
-#: capplets/screensaver/screensavers/hypercube.xml.h:9
-msgid ""
-"This displays 2D projections of the sequence of 3D objects which are the "
-"projections of the 4D analog to the cube: as a square is composed of four "
-"lines, each touching two others; and a cube is composed of six squares, each "
-"touching four others; a hypercube is composed of eight cubes, each touching "
-"six others.  To make it easier to visualize the rotation, it uses a "
-"different color for the edges of each face.  Don't think about it too long, "
-"or your brain will melt.  Written by Joe Keane, Fritz Mueller, and Jamie "
-"Zawinski."
-msgstr ""
-
-#: capplets/screensaver/screensavers/ifs.xml.h:3
-msgid "IFS"
-msgstr ""
-
-#: capplets/screensaver/screensavers/ifs.xml.h:5
-msgid ""
-"This one draws spinning, colliding iterated-function-system images.  Written "
-"by Massimino Pascal."
-msgstr ""
-
-#: capplets/screensaver/screensavers/imsmap.xml.h:1
-msgid "IMSmap"
-msgstr ""
-
-#: capplets/screensaver/screensavers/imsmap.xml.h:2
-msgid ""
-"This generates random cloud-like patterns.  It looks quite different in "
-"monochrome and color.  The basic idea is to take four points on the edge of "
-"the image, and assign each a random ``elevation''.  Then find the point "
-"between them, and give it a value which is the average of the other four, "
-"plus some small random offset.  Then coloration is done based on "
-"elevation.  \n"
-"\n"
-"The color selection is done by binding the elevation to either hue, "
-"saturation, or brightness, and assigning random values to the others.  The "
-"``brightness'' mode tends to yield cloudlike patterns, and the others tend "
-"to generate images that look like heat-maps or CAT-scans.  Written by "
-"Juergen Nickelsen and Jamie Zawinski."
-msgstr ""
-
-#: capplets/screensaver/screensavers/interference.xml.h:1
-msgid ""
-"Another color-field hack, this one works by computing decaying sinusoidal "
-"waves, and allowing them to interfere with each other as their origins "
-"move.  Written by Hannu Mallat."
-msgstr ""
-
-#: capplets/screensaver/screensavers/interference.xml.h:2
-msgid "Interference"
-msgstr "Интерференция"
-
-#: capplets/screensaver/screensavers/jigsaw.xml.h:1
-msgid "Jigsaw"
-msgstr "Головоломка"
-
-#: capplets/screensaver/screensavers/jigsaw.xml.h:3
-msgid ""
-"This grabs a screen image, carves it up into a jigsaw puzzle, shuffles it, "
-"and then solves the puzzle.  This works especially well when you feed it an "
-"external video signal instead of letting it grab the screen image (actually, "
-"I guess this is generally true...)\tWhen it is grabbing a video image, it is "
-"sometimes pretty hard to guess what the image is going to look like once the "
-"puzzle is solved.  Written by Jamie Zawinski."
-msgstr ""
-
-#: capplets/screensaver/screensavers/julia.xml.h:5
-msgid "Julia"
-msgstr "Жюлиа"
-
-#: capplets/screensaver/screensavers/julia.xml.h:10
-msgid ""
-"This one draws spinning, animating (are you detecting a pattern here yet?)  "
-"explorations of the Julia set.  You've probably seen static images of this "
-"fractal form before, but it's a lot of fun to watch in motion as well.  One "
-"interesting thing is that there is a small swinging dot passing in front of "
-"the image, which indicates the control point from which the rest of the "
-"image was generated.  Written by Sean McCullough."
-msgstr ""
-
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:1
-msgid ""
-"Another clone of an ancient meme, consisting largely of frenetic rotational "
-"motion of colored lines.  This one is by Ron Tapia.  The motion is nice, but "
-"I think it needs more solids, or perhaps just brighter colors.  More "
-"variations in the rotational speed might help, too."
-msgstr ""
-
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:4
-msgid "Kaleidescope"
-msgstr "Калейдоскоп"
-
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:7
-msgid "Number of segments."
-msgstr "Число сегментов."
-
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:8
-msgid "Number of trails."
-msgstr "Число хвостов."
-
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:9
-msgid "Segments"
-msgstr ""
-
-#: capplets/screensaver/screensavers/kumppa.xml.h:1
-msgid "Kumppa"
-msgstr ""
-
-#: capplets/screensaver/screensavers/kumppa.xml.h:2
-msgid ""
-"Spiraling, spinning, and very, very fast splashes of color rush toward the "
-"screen.  Written by Teemu Suutari."
-msgstr ""
-
-#: capplets/screensaver/screensavers/lament.xml.h:1
-msgid ""
-"Animates a simulation of Lemarchand's Box, repeatedly solving itself.  "
-"Requires OpenGL, and a machine with fast hardware support for texture maps.  "
-"Warning: occasionally opens doors.  Written by Jamie Zawinski."
-msgstr ""
-
-#: capplets/screensaver/screensavers/lament.xml.h:2
-msgid "Lament"
-msgstr ""
-
-#: capplets/screensaver/screensavers/laser.xml.h:2
-msgid "Duration of laser burst."
-msgstr "Длительность лазерной вспышки."
-
-#: capplets/screensaver/screensavers/laser.xml.h:3
-msgid "Laser"
-msgstr "Лазер"
-
-#: capplets/screensaver/screensavers/laser.xml.h:4
-#: capplets/screensaver/screensavers/pedal.xml.h:3
-#, fuzzy
-msgid "Longer"
-msgstr "Длинный"
-
-#: capplets/screensaver/screensavers/laser.xml.h:5
-msgid ""
-"Moving radiating lines, that look vaguely like scanning laser beams.  "
-"Written by Pascal Pensa.  (Frankie say: relax.)"
-msgstr ""
-
-#: capplets/screensaver/screensavers/laser.xml.h:6
-msgid "Segments:"
-msgstr ""
-
-#: capplets/screensaver/screensavers/laser.xml.h:7
-#: capplets/screensaver/screensavers/pedal.xml.h:7
-#, fuzzy
-msgid "Shorter"
-msgstr "Короткий"
-
-#: capplets/screensaver/screensavers/laser.xml.h:8
-msgid "Size of burst."
-msgstr "Размер вспышки."
-
-#: capplets/screensaver/screensavers/lightning.xml.h:3
-msgid "Lightning"
-msgstr "Молнии"
-
-#: capplets/screensaver/screensavers/lightning.xml.h:5
-msgid ""
-"This one draws crackling fractal lightning bolts.  It's simple, direct, and "
-"to the point.  If only it had sound...  Written by Keith Romberg."
-msgstr ""
-
-#: capplets/screensaver/screensavers/lisa.xml.h:5
-#: capplets/screensaver/screensavers/moire.xml.h:4
-#, fuzzy
-msgid "Larger"
-msgstr "Лазер"
-
-#: capplets/screensaver/screensavers/lisa.xml.h:6
-msgid "Lisa"
-msgstr "Лиза"
-
-#: capplets/screensaver/screensavers/lisa.xml.h:9
-msgid "Size of object."
-msgstr "Размер объекта."
-
-#: capplets/screensaver/screensavers/lisa.xml.h:11
-#: capplets/screensaver/screensavers/moire.xml.h:9
-msgid "Smaller"
-msgstr ""
-
-#: capplets/screensaver/screensavers/lisa.xml.h:13
-msgid ""
-"This draws Lisajous loops, by Caleb Cullen.  Remember that device they had "
-"the Phantom Zone prisoners in during their trial in Superman?  I think that "
-"was one of these."
-msgstr ""
-
-#: capplets/screensaver/screensavers/lissie.xml.h:1
-msgid ""
-"Another Lissajous figure.  This one draws the progress of circular shapes "
-"along a path.  Written by Alexander Jolk."
-msgstr ""
-
-#: capplets/screensaver/screensavers/lissie.xml.h:2
-msgid "Lissie"
-msgstr ""
-
-#: capplets/screensaver/screensavers/lmorph.xml.h:3
-msgid "LMorph"
-msgstr ""
-
-#: capplets/screensaver/screensavers/lmorph.xml.h:6
-msgid "Number of interpolation steps."
-msgstr "Число шагов интерполяции."
-
-#: capplets/screensaver/screensavers/lmorph.xml.h:7
-msgid "Number of points."
-msgstr "Число точек."
-
-#: capplets/screensaver/screensavers/lmorph.xml.h:8
-msgid "Open figures."
-msgstr "Открыть фигуры."
-
-#: capplets/screensaver/screensavers/lmorph.xml.h:9
-msgid "Points:"
-msgstr ""
-
-#: capplets/screensaver/screensavers/lmorph.xml.h:12
-msgid ""
-"This generates random spline-ish line drawings and morphs between them.  "
-"Written by Sverre H.  Huseby and Glenn T.  Lines."
-msgstr ""
-
-#: capplets/screensaver/screensavers/loop.xml.h:1
-msgid "Loop"
-msgstr "Цикл"
-
-#: capplets/screensaver/screensavers/loop.xml.h:2
-msgid ""
-"This one produces loop-shaped colonies that spawn, age, and eventually die.  "
-"Written by David Bagley."
-msgstr ""
-
-#: capplets/screensaver/screensavers/maze.xml.h:1
-msgid "Delay between drawing the maze and starting the solution."
-msgstr "Задержка между рисованием лабиринта и началом решения."
-
-#: capplets/screensaver/screensavers/maze.xml.h:2
-msgid "Delay between each step in the maze."
-msgstr "Задержка между каждым шагом в лабиринте."
-
-#: capplets/screensaver/screensavers/maze.xml.h:3
-msgid "Delay between finishing the maze and starting a new one."
-msgstr "Задержка между завершения лабиринта и началом нового."
-
-#: capplets/screensaver/screensavers/maze.xml.h:4
-msgid "Less Delay"
-msgstr ""
-
-#: capplets/screensaver/screensavers/maze.xml.h:5
-msgid "Maze"
-msgstr "Лабиринт"
-
-#: capplets/screensaver/screensavers/maze.xml.h:6
-msgid "More Delay"
-msgstr ""
-
-#: capplets/screensaver/screensavers/maze.xml.h:7
-msgid "Put a bridge over the logo?"
-msgstr "Положить мост через эмблему?"
-
-#: capplets/screensaver/screensavers/maze.xml.h:8
-msgid ""
-"This is the ancient X maze demo, modified to work with xscreensaver.  It "
-"generates a random maze, then solves it with visual feedback.  Originally by "
-"Jim Randell; modified by a cast of thousands."
-msgstr ""
-
-#: capplets/screensaver/screensavers/moebius.xml.h:1
-msgid ""
-"Another M.  C.  Escher hack by Marcelo Vianna, this one draws ``Moebius "
-"Strip II,'' a GL image of ants walking along the surface of a moebius strip."
-msgstr ""
-
-#: capplets/screensaver/screensavers/moebius.xml.h:2
-msgid "Moebius"
-msgstr "Мёбиус"
-
-#: capplets/screensaver/screensavers/moire2.xml.h:1
-msgid ""
-"Another example of the fun you can have with moire interference patterns; "
-"this hack generates fields of concentric circles or ovals, and combines the "
-"planes with various operations.  The planes are moving independently of one "
-"another, causing the interference lines to ``spray.''  Written by Jamie "
-"Zawinski."
-msgstr ""
-
-#: capplets/screensaver/screensavers/moire2.xml.h:2
-msgid "Moire2"
-msgstr "Муар 2"
-
-#: capplets/screensaver/screensavers/moire.xml.h:5
-msgid "Maximum radius increment"
-msgstr "Максимальное увеличение радиуса."
-
-#: capplets/screensaver/screensavers/moire.xml.h:6
-msgid "Moire"
-msgstr "Муар"
-
-#: capplets/screensaver/screensavers/moire.xml.h:11
-msgid ""
-"This one draws cool circular interference patterns.  Most of the circles you "
-"see aren't explicitly rendered, but show up as a result of interactions "
-"between the other pixels that were drawn.  Written by Jamie Zawinski, "
-"inspired by Java code by Michael Bayne.  As he pointed out, the beauty of "
-"this one is that the heart of the display algorithm can be expressed with "
-"just a pair of loops and a handful of arithmetic, giving it a high ``display "
-"hack metric''."
-msgstr ""
-
-#: capplets/screensaver/screensavers/molecule.xml.h:1
-msgid ""
-"Draws several different representations of molecules.  Some common molecules "
-"are built in, and it can also read PDB (Protein Data Base) files as input.  "
-"Written by Jamie Zawinski."
-msgstr ""
-
-#: capplets/screensaver/screensavers/molecule.xml.h:2
-msgid "Molecule"
-msgstr "Молекула"
-
-#: capplets/screensaver/screensavers/morph3d.xml.h:1
-msgid ""
-"Another 3d shape-changing GL hack, by Marcelo Vianna.  It has the same shiny-"
-"plastic feel as Superquadrics, as many computer-generated objects do..."
-msgstr ""
-
-#: capplets/screensaver/screensavers/morph3d.xml.h:2
-msgid "Morph3D"
-msgstr ""
-
-#: capplets/screensaver/screensavers/mountain.xml.h:1
-msgid ""
-"Generates random 3d plots that look vaguely mountainous.  Written by Pascal "
-"Pensa."
-msgstr ""
-
-#: capplets/screensaver/screensavers/mountain.xml.h:2
-msgid "Mountain"
-msgstr "Гора"
-
-#: capplets/screensaver/screensavers/munch.xml.h:1
-msgid ""
-"\n"
-"        DATAI 2\t\t\t\t\t\t\t      \n"
-"        ADDB 1,2\t\t\t\t\t\t      \n"
-"        ROTC 2,-22\t\t\t\t\t\t      \n"
-"        XOR 1,2\t\t\t\t\t\t\t      \n"
-"        JRST .-4\t\t\t\t\t\t      \n"
-"\t\t\t\t\t\t\t\t      \n"
-"As reported by HAKMEM, in 1962, Jackson Wright wrote the above PDP-1 code.  "
-"That code still lives on in this screenhack, some 35 years later.  The "
-"number of lines of enclosing code has increased substantially, however.  "
-"This version is by Tim Showalter."
-msgstr ""
-
-#: capplets/screensaver/screensavers/munch.xml.h:10
-msgid "Draw square at weird starting points."
-msgstr "Рисовать квадрат в случайной начальной точке."
-
-#: capplets/screensaver/screensavers/munch.xml.h:12
-msgid "Munch"
-msgstr ""
-
-#: capplets/screensaver/screensavers/munch.xml.h:15
-msgid "Use XOR drawing function."
-msgstr "Использовать для рисования функцию XOR."
-
-#: capplets/screensaver/screensavers/nerverot.xml.h:1
-msgid ""
-"Draws different shapes composed of nervously vibrating squiggles, as if seen "
-"through a camera operated by a monkey on crack.  By Dan Bornstein."
-msgstr ""
-
-#: capplets/screensaver/screensavers/nerverot.xml.h:2
-msgid "NerveRot"
-msgstr ""
-
-#: capplets/screensaver/screensavers/noseguy.xml.h:1
-msgid ""
-"A little man with a big nose wanders around your screen saying things.  The "
-"things which he says can come from a file, or from an external program like "
-"`zippy' or `fortune'.  This was extracted from `xnlock' by Dan Heller.  "
-"Colorized by Jamie Zawinski."
-msgstr ""
-
-#: capplets/screensaver/screensavers/noseguy.xml.h:2
-msgid "Noseguy"
-msgstr "Носач"
-
-#: capplets/screensaver/screensavers/pedal.xml.h:4
-msgid "Maximum number of lines."
-msgstr "Максимальное число линий."
-
-#: capplets/screensaver/screensavers/pedal.xml.h:6
-msgid "Pedal"
-msgstr ""
-
-#: capplets/screensaver/screensavers/pedal.xml.h:8
-msgid ""
-"This is sort of a combination spirograph/string-art.  It generates a large, "
-"complex polygon, and lets the X server do the bulk of the work by giving it "
-"an even/odd winding rule.  Written by Dale Moore, based on some ancient PDP-"
-"11 code."
-msgstr ""
-
-#: capplets/screensaver/screensavers/pedal.xml.h:9
-msgid "Time to fade away."
-msgstr "Время затухания."
-
-#: capplets/screensaver/screensavers/pedal.xml.h:10
-msgid "Time to show each picture."
-msgstr "Время отображения каждой картинки."
-
-#: capplets/screensaver/screensavers/penetrate.xml.h:1
-msgid "Penetrate"
-msgstr "Вторжение"
-
-#: capplets/screensaver/screensavers/penetrate.xml.h:2
-msgid ""
-"This hack simulates the classic arcade game Missile Command.  Written by "
-"Adam Miller."
-msgstr ""
-
-#: capplets/screensaver/screensavers/penrose.xml.h:1
-msgid ""
-"Draws quasiperiodic tilings; think of the implications on modern formica "
-"technology.  Written by Timo Korvola.  \n"
-"\n"
-"In April 1997, Sir Roger Penrose, a British math professor who has worked "
-"with Stephen Hawking on such topics as relativity, black holes, and whether "
-"time has a beginning, filed a copyright-infringement lawsuit against the "
-"Kimberly-Clark Corporation, which Penrose said copied a pattern he created "
-"(a pattern demonstrating that ``a nonrepeating pattern could exist in "
-"nature'') for its Kleenex quilted toilet paper.  Penrose said he doesn't "
-"like litigation but, ``When it comes to the population of Great Britain "
-"being invited by a multinational to wipe their bottoms on what appears to be "
-"the work of a Knight of the Realm, then a last stand must be taken.'' \t\t\t"
-"\t\t\t\t\t    \n"
-"\n"
-"As reported by News of the Weird #491, 4-jul-1997."
-msgstr ""
-
-#: capplets/screensaver/screensavers/penrose.xml.h:6
-msgid "Penrose"
-msgstr "Пенроуз"
-
-#: capplets/screensaver/screensavers/petri.xml.h:1
-msgid "Petri"
-msgstr "Петри"
-
-#: capplets/screensaver/screensavers/petri.xml.h:2
-msgid ""
-"This simulates colonies of mold growing in a petri dish.  Growing colored "
-"circles overlap and leave spiral interference in their wake.  Written by Dan "
-"Bornstein."
-msgstr ""
-
-#: capplets/screensaver/screensavers/phosphor.xml.h:1
-msgid ""
-"Draws a simulation of an old terminal, with large pixels and long-sustain "
-"phosphor.  It can run any program as a source of the text it displays.  "
-"Written by Jamie Zawinski."
-msgstr ""
-
-#: capplets/screensaver/screensavers/phosphor.xml.h:2
-msgid "Phosphor"
-msgstr "Фосфор"
-
-#: capplets/screensaver/screensavers/pipes.xml.h:1
-msgid ""
-"If you've ever been in the same room with a Windows NT machine, you've "
-"probably seen this GL hack.  This version is by Marcelo Vianna."
-msgstr ""
-
-#: capplets/screensaver/screensavers/pipes.xml.h:2
-msgid "Pipes"
-msgstr "Трубы"
-
-#: capplets/screensaver/screensavers/pulsar.xml.h:1
-msgid ""
-"Draws some intersecting planes, making use of alpha blending, fog, textures, "
-"and mipmaps, plus a ``frames per second'' meter so that you can tell how "
-"fast your graphics card is...  Requires OpenGL.  Written by David Konerding."
-msgstr ""
-
-#: capplets/screensaver/screensavers/pulsar.xml.h:2
-msgid "Pulsar"
-msgstr "Пульсар"
-
-#: capplets/screensaver/screensavers/pyro.xml.h:3
-msgid "Frequency of missile launch"
-msgstr "Частота запуска снарядов"
-
-#: capplets/screensaver/screensavers/pyro.xml.h:6
-msgid "Number of particles"
-msgstr "Число частиц"
-
-#: capplets/screensaver/screensavers/pyro.xml.h:7
-msgid "Particles on screen"
-msgstr "Частиц на экране"
-
-#: capplets/screensaver/screensavers/pyro.xml.h:8
-msgid "Pyro"
-msgstr "Пиро"
-
-#: capplets/screensaver/screensavers/pyro.xml.h:9
-msgid ""
-"Pyro draws exploding fireworks.  Blah blah blah.  Written by Jamie Zawinski."
-msgstr ""
-
-#: capplets/screensaver/screensavers/qix.xml.h:1
-msgid "Color contrast"
-msgstr "Контрастность цветов"
-
-#: capplets/screensaver/screensavers/qix.xml.h:2
-msgid "Discrete Lines"
-msgstr "Дискретные линии"
-
-#: capplets/screensaver/screensavers/qix.xml.h:6
-msgid "Length"
-msgstr "Длина"
-
-#: capplets/screensaver/screensavers/qix.xml.h:11
-msgid "Narrow"
-msgstr ""
-
-#: capplets/screensaver/screensavers/qix.xml.h:12
-msgid "Number of points:"
-msgstr "Число точек:"
-
-#: capplets/screensaver/screensavers/qix.xml.h:13
-msgid "Number of trails:"
-msgstr "Число хвостов:"
-
-#: capplets/screensaver/screensavers/qix.xml.h:15
-msgid "Qix (solid)"
-msgstr ""
-
-#: capplets/screensaver/screensavers/qix.xml.h:18
-msgid "Solid Trails"
-msgstr "Сплошные хвосты"
-
-#: capplets/screensaver/screensavers/qix.xml.h:20
-msgid "Spread between lines"
-msgstr "Рассеяние между линиями"
-
-#: capplets/screensaver/screensavers/qix.xml.h:21
-msgid ""
-"This is the swiss army chainsaw of qix programs.  It bounces a series of "
-"line segments around the screen, and uses variations on this basic motion "
-"pattern to produce all sorts of different presentations: line segments, "
-"filled polygons, overlapping translucent areas...  Written by Jamie Zawinski."
-msgstr ""
-
-#: capplets/screensaver/screensavers/qix.xml.h:22
-msgid "Trails attract each other"
-msgstr "Хвосты притягиваются друг к другу"
-
-#: capplets/screensaver/screensavers/qix.xml.h:23
-msgid "Transparent Trails"
-msgstr "Прозрачные хвосты"
-
-#: capplets/screensaver/screensavers/qix.xml.h:24
-#, fuzzy
-msgid "Wide"
-msgstr "Ширина"
-
-#: capplets/screensaver/screensavers/qix.xml.h:25
-msgid "Width"
-msgstr "Ширина"
-
-#: capplets/screensaver/screensavers/qix.xml.h:26
-msgid "XOR Trails"
-msgstr "XOR хвостов"
-
-#: capplets/screensaver/screensavers/rd-bomb.xml.h:1
-msgid ""
-"Another variation of the `Bomb' program by Scott Draves.  This draws a grid "
-"of growing square-like shapes that, once they overtake each other, react in "
-"unpredictable ways.  ``RD'' stands for reaction-diffusion."
-msgstr ""
-
-#: capplets/screensaver/screensavers/rd-bomb.xml.h:2
-msgid "RD-Bomb"
-msgstr ""
-
-#: capplets/screensaver/screensavers/ripples.xml.h:1
-msgid "Ripples (oily)"
-msgstr ""
-
-#: capplets/screensaver/screensavers/ripples.xml.h:2
-msgid ""
-"This draws rippling interference patterns like splashing water.  With the -"
-"water option, it manipulates your desktop image to look like something is "
-"dripping into it.  Written by Tom Hammersley."
-msgstr ""
-
-#: capplets/screensaver/screensavers/rocks.xml.h:1
-msgid "Rocks"
-msgstr ""
-
-#: capplets/screensaver/screensavers/rocks.xml.h:2
-msgid ""
-"This draws an animation of flight through an asteroid field, with changes in "
-"rotation and direction.  It can also display 3D separations for red/blue "
-"glasses!  Mostly written by Jamie Zawinski."
-msgstr ""
-
-#: capplets/screensaver/screensavers/rorschach.xml.h:1
-msgid "Delay before next redraw"
-msgstr "Задержка до следующей перерисовки"
-
-#: capplets/screensaver/screensavers/rorschach.xml.h:4
-msgid "Number of Iterations"
-msgstr "Число итераций"
-
-#: capplets/screensaver/screensavers/rorschach.xml.h:5
-msgid "Offset"
-msgstr "Смещение"
-
-#: capplets/screensaver/screensavers/rorschach.xml.h:6
-msgid "Rorschach"
-msgstr "Рошар"
-
-#: capplets/screensaver/screensavers/rorschach.xml.h:9
-msgid "Speed to clear the screen"
-msgstr "Скорость очистки экрана"
-
-#: capplets/screensaver/screensavers/rorschach.xml.h:10
-msgid ""
-"This generates random inkblot patterns.  The algorithm is deceptively simple "
-"for how well it works; it merely walks a dot around the screen randomly, and "
-"then reflects the image horizontally, vertically, or both.  Any deep-seated "
-"neurotic tendencies which this program reveals are your own problem.  "
-"Written by Jamie Zawinski."
-msgstr ""
-
-#: capplets/screensaver/screensavers/rorschach.xml.h:11
-msgid "With X-axis Symmetry"
-msgstr "С симметрией относительно оси X"
-
-#: capplets/screensaver/screensavers/rorschach.xml.h:12
-msgid "With Y-axis Symmetry"
-msgstr "С симметрией относительно оси Y"
-
-#: capplets/screensaver/screensavers/rotor.xml.h:1
-msgid ""
-"Another ancient xlock demo, this one by Tom Lawrence.  It draws a line "
-"segment moving along a complex spiraling curve.  I tweaked this to generate "
-"curvier lines, but still frames of it don't look like much."
-msgstr ""
-
-#: capplets/screensaver/screensavers/rotor.xml.h:2
-msgid "Rotor"
-msgstr "Ротор"
-
-#: capplets/screensaver/screensavers/rotzoomer.xml.h:1
-msgid ""
-"Creates a collage of rotated and scaled portions of the screen.  Written by "
-"Claudio Matsuoka."
-msgstr ""
-
-#: capplets/screensaver/screensavers/rotzoomer.xml.h:2
-msgid "RotZoomer"
-msgstr ""
-
-#: capplets/screensaver/screensavers/rubik.xml.h:1
-msgid ""
-"Draws a Rubik's Cube that rotates in three dimensions and repeatedly "
-"shuffles and solves itself.  Another fine GL hack by Marcelo Vianna."
-msgstr ""
-
-#: capplets/screensaver/screensavers/rubik.xml.h:2
-msgid "Rubik"
-msgstr "Рубик"
-
-#: capplets/screensaver/screensavers/shadebobs.xml.h:1
-msgid "ShadeBobs"
-msgstr ""
-
-#: capplets/screensaver/screensavers/shadebobs.xml.h:2
-msgid ""
-"This draws smoothly-shaded oscilating oval patterns, that look something "
-"like vapor trails or neon tubes.  Written by Shane Smit."
-msgstr ""
-
-#: capplets/screensaver/screensavers/sierpinski3d.xml.h:1
-msgid "Sierpinski3D"
-msgstr "Серпинский 3D"
-
-#: capplets/screensaver/screensavers/sierpinski3d.xml.h:2
-msgid ""
-"This draws the three-dimensional variant of the recursive Sierpinski "
-"triangle fractal, using GL.  Written by Tim Robinson and Jamie Zawinski."
-msgstr ""
-
-#: capplets/screensaver/screensavers/sierpinski.xml.h:5
-msgid "Sierpinski"
-msgstr "Серпинский"
-
-#: capplets/screensaver/screensavers/sierpinski.xml.h:8
-msgid ""
-"This draws the two-dimensional variant of the recursive Sierpinski triangle "
-"fractal.  Written by Desmond Daignault."
-msgstr ""
-
-#: capplets/screensaver/screensavers/slidescreen.xml.h:1
-msgid "SlideScreen"
-msgstr ""
-
-#: capplets/screensaver/screensavers/slidescreen.xml.h:2
-msgid ""
-"This grabs an image of whatever is on your screen, divides it into a grid, "
-"and then randomly shuffles the squares around as if it was one of those "
-"annoying ``16-puzzle'' games, where there is a grid of squares, one of which "
-"is missing.  I hate trying to solve those puzzles, but watching one permute "
-"itself is more amusing.  Written by Jamie Zawinski."
-msgstr ""
-
-#: capplets/screensaver/screensavers/slip.xml.h:1
-msgid "Slip"
-msgstr ""
-
-#: capplets/screensaver/screensavers/slip.xml.h:2
-msgid ""
-"This program throws some random bits on the screen, then sucks them through "
-"a jet engine and spews them out the other side.  To avoid turning the image "
-"completely to mush, every now and then it will and then it interjects some "
-"splashes of color into the scene, or go into a spin cycle, or stretch the "
-"image like taffy, or (this is my addition) grab an image of your current "
-"desktop to chew on.  Originally written by Scott Draves; whacked on by Jamie "
-"Zawinski."
-msgstr ""
-
-#: capplets/screensaver/screensavers/sonar.xml.h:1
-msgid "Sonar"
-msgstr "Радар"
-
-#: capplets/screensaver/screensavers/sonar.xml.h:2
-msgid ""
-"This program draws a simulation of a sonar screen.  Written by default, it "
-"displays a random assortment of ``bogies'' on the screen, but if compiled "
-"properly, it can ping (pun intended) your local network, and actually plot "
-"the proximity of the other hosts on your network to you.  It would be easy "
-"to make it monitor other sources of data, too.  (Processes?\t Active network "
-"connections?  CPU usage per user?)\tWritten by Stephen Martin."
-msgstr ""
-
-#: capplets/screensaver/screensavers/speedmine.xml.h:1
-msgid ""
-"Simulates speeding down a rocky mineshaft, or a funky dancing worm.  Written "
-"by Conrad Parker.\n"
-"\n"
-"\n"
-"!"
-"=============================================================================\n"
-"!\n"
-"! Documentation for some programs that are not bundled with XScreenSaver\n"
-"!\n"
-"!"
-"============================================================================="
-msgstr ""
-
-#: capplets/screensaver/screensavers/speedmine.xml.h:9
-msgid "SpeedMine"
-msgstr ""
-
-#: capplets/screensaver/screensavers/sphere.xml.h:1
-msgid ""
-"Another of the classic screenhacks of the distant past, this one draws "
-"shaded spheres in multiple colors.  This hack traces its lineage back to Tom "
-"Duff in 1982."
-msgstr ""
-
-#: capplets/screensaver/screensavers/sphere.xml.h:2
-msgid "Sphere"
-msgstr "Сфера"
-
-#: capplets/screensaver/screensavers/spiral.xml.h:5
-msgid ""
-"Moving circular patterns, by Peter Schmitzberger.  Moving circular patterns "
-"means moire; interference patterns, of course."
-msgstr ""
-
-#: capplets/screensaver/screensavers/spiral.xml.h:11
-msgid "Spiral"
-msgstr "Спираль"
-
-#: capplets/screensaver/screensavers/spotlight.xml.h:1
-msgid ""
-"Draws a spotlight scanning across a black screen, illumnating the underlying "
-"desktop when it passes.  Written by Rick Schultz."
-msgstr ""
-
-#: capplets/screensaver/screensavers/spotlight.xml.h:2
-msgid "Spotlight"
-msgstr "Луч фонаря"
-
-#: capplets/screensaver/screensavers/sproingies.xml.h:1
-msgid "Q-Bert meets Marble Madness!  Written by Ed Mackey."
-msgstr ""
-
-#: capplets/screensaver/screensavers/sproingies.xml.h:2
-msgid "Sproingies"
-msgstr ""
-
-#: capplets/screensaver/screensavers/squiral.xml.h:1
-msgid ""
-"Draws a set of interacting, square-spiral-producing automata.  The spirals "
-"grow outward until they hit something, then they go around it.  Written by "
-"Jeff Epler."
-msgstr ""
-
-#: capplets/screensaver/screensavers/squiral.xml.h:2
-msgid "Squiral"
-msgstr ""
-
-#: capplets/screensaver/screensavers/ssystem.xml.h:1
-msgid "SSystem"
-msgstr ""
-
-#: capplets/screensaver/screensavers/ssystem.xml.h:2
-msgid ""
-"SSystem is a GL Solar System simulator.  It simulates flybys of Sun, the "
-"nine planets and a few major satellites, with four camera modes.  Written by "
-"Raul Alonso.  This is not included with the XScreenSaver package, but if you "
-"don't have it already, you can find it at <http://www1.las.es/~amil/ssystem/"
-">."
-msgstr ""
-
-#: capplets/screensaver/screensavers/stairs.xml.h:1
-msgid "Stairs"
-msgstr ""
-
-#: capplets/screensaver/screensavers/stairs.xml.h:2
-msgid ""
-"by Marcelo Vianna's third Escher GL hack, this one draws an ``infinite'' "
-"staircase."
-msgstr ""
-
-#: capplets/screensaver/screensavers/starfish.xml.h:1
-msgid "Change to display in monochrome."
-msgstr "Изменить отображение в одноцветное."
-
-#: capplets/screensaver/screensavers/starfish.xml.h:2
-msgid "Duration of current shape."
-msgstr "Длительность текущей формы."
-
-#: capplets/screensaver/screensavers/starfish.xml.h:4
-msgid "Quickness of rotation at each step (0 = Random)"
-msgstr "Скорость вращения на каждом шаге (0 = Случайная)"
-
-#: capplets/screensaver/screensavers/starfish.xml.h:6
-msgid "Slim"
-msgstr ""
-
-#: capplets/screensaver/screensavers/starfish.xml.h:8
-msgid "Speed of animation."
-msgstr "Скорость анимации."
-
-#: capplets/screensaver/screensavers/starfish.xml.h:9
-msgid "Starfish"
-msgstr ""
-
-#: capplets/screensaver/screensavers/starfish.xml.h:10
-msgid "Thickness of color bands (0 = Random)"
-msgstr "Толщина границ цвета (0 = Случайная)"
-
-#: capplets/screensaver/screensavers/starfish.xml.h:11
-msgid ""
-"This generates a sequence of undulating, throbbing, star-like patterns which "
-"pulsate, rotate, and turn inside out.  Another display mode uses these "
-"shapes to lay down a field of colors, which are then cycled.  The motion is "
-"very organic.  Written by Jamie Zawinski."
-msgstr ""
-
-#: capplets/screensaver/screensavers/starfish.xml.h:12
-msgid "Use raw shapes "
-msgstr "Использовать простые формы"
-
-#: capplets/screensaver/screensavers/starwars.xml.h:1
-msgid ""
-"Draws a stream of text slowly scrolling into the distance at an angle, over "
-"a star field, like at the beginning of the movie of the same name.  Written "
-"by Jamie Zawinski and Claudio Matauoka."
-msgstr ""
-
-#: capplets/screensaver/screensavers/starwars.xml.h:2
-msgid "StarWars"
-msgstr "Звёздные войны"
-
-#: capplets/screensaver/screensavers/stonerview.xml.h:1
-msgid ""
-"Chains of colorful squares dance around each other in complex spiral "
-"patterns.  Written by Andrew Plotkin, based on SGI's `electropaint' "
-"screensaver."
-msgstr ""
-
-#: capplets/screensaver/screensavers/stonerview.xml.h:2
-msgid "StonerView"
-msgstr ""
-
-#: capplets/screensaver/screensavers/strange.xml.h:1
-msgid "Strange"
-msgstr ""
-
-#: capplets/screensaver/screensavers/strange.xml.h:2
-msgid ""
-"This draws strange attractors: it's a colorful, unpredictably-animating "
-"field of dots that swoops and twists around.  The motion is very nice.  "
-"Written by Massimino Pascal."
-msgstr ""
-
-#: capplets/screensaver/screensavers/superquadrics.xml.h:1
-msgid ""
-"Ed Mackey reports that he wrote the first version of this program in BASIC "
-"on a Commodore 64 in 1987, as a 320x200 black and white wireframe.  Now it "
-"is GL and has specular reflections."
-msgstr ""
-
-#: capplets/screensaver/screensavers/superquadrics.xml.h:2
-msgid "Superquadrics"
-msgstr ""
-
-#: capplets/screensaver/screensavers/swirl.xml.h:1
-msgid ""
-"More flowing, swirly patterns.  This version is by M.  Dobie and R.  Taylor, "
-"but you might have seen a Mac program similar to this called FlowFazer.  "
-"There is also a cool Java applet of a similar concept"
-msgstr ""
-
-#: capplets/screensaver/screensavers/swirl.xml.h:2
-msgid "Swirl"
-msgstr ""
-
-#: capplets/screensaver/screensavers/t3d.xml.h:1
-msgid "T3D"
-msgstr "T3D"
-
-#: capplets/screensaver/screensavers/t3d.xml.h:2
-msgid ""
-"This draws a working analog clock composed of floating, throbbing bubbles.  "
-"Written by Bernd Paysan."
-msgstr ""
-
-#: capplets/screensaver/screensavers/triangle.xml.h:3
-msgid ""
-"Generates random mountain ranges using iterative subdivision of triangles.  "
-"Written by Tobias Gloth."
-msgstr ""
-
-#: capplets/screensaver/screensavers/triangle.xml.h:5
-msgid "Triangle"
-msgstr "Треугольник"
-
-#: capplets/screensaver/screensavers/truchet.xml.h:1
-msgid ""
-"This draws line- and arc-based Truchet patterns that tile the screen.  "
-"Written by Adrian Likins."
-msgstr ""
-
-#: capplets/screensaver/screensavers/truchet.xml.h:2
-msgid "Truchet"
-msgstr "Труше"
-
-#: capplets/screensaver/screensavers/vidwhacker.xml.h:1
-msgid ""
-"This is actually just a shell script that grabs a frame of video from the "
-"system's video input, and then uses some PBM filters (chosen at random) to "
-"manipulate and recombine the video frame in various ways (edge detection, "
-"subtracting the image from a rotated version of itself, etc.)  Then it "
-"displays that image for a few seconds, and does it again.  This works really "
-"well if you just feed broadcast television into it.  \n"
-"\n"
-"Currently, the three lines of the script that actually grab the source "
-"picture are SGI specific, but it should be trivial to adapt it to work on "
-"other systems that can grab video (please send me the changes if you do "
-"this...)"
-msgstr ""
-
-#: capplets/screensaver/screensavers/vidwhacker.xml.h:4
-msgid "VidWhacker"
-msgstr ""
-
-#: capplets/screensaver/screensavers/vines.xml.h:4
-msgid ""
-"This one generates a continuous sequence of small, curvy geometric "
-"patterns.  It scatters them around your screen until it fills up, then it "
-"clears the screen and starts over.  Written by Tracy Camp and David Hansen."
-msgstr ""
-
-#: capplets/screensaver/screensavers/vines.xml.h:5
-msgid "Vines"
-msgstr "Лозы"
-
-#: capplets/screensaver/screensavers/wander.xml.h:1
-msgid ""
-"Draws a colorful random-walk, in various forms.  Written by Rick Campbell."
-msgstr ""
-
-#: capplets/screensaver/screensavers/wander.xml.h:2
-msgid "Wander"
-msgstr ""
-
-#: capplets/screensaver/screensavers/webcollage.xml.h:1
-msgid ""
-"This program makes collages out of random images pulled off of the World "
-"Wide Web.  It finds these images by doing random web searches, and then "
-"extracting images from the returned pages.  It can also be set up to filter "
-"the images through the `VidWhacker' program, above, which looks really "
-"great.  \n"
-"\n"
-"(Note that most of the images it finds are text, and not pictures.  This is "
-"because most of the web is pictures of text.  Which is pretty sad.)  Written "
-"by Jamie Zawinski."
-msgstr ""
-
-#: capplets/screensaver/screensavers/webcollage.xml.h:4
-msgid "WebCollage"
-msgstr ""
-
-#: capplets/screensaver/screensavers/whirlwindwarp.xml.h:1
-msgid ""
-"Floating stars are acted upon by a mixture of simple 2D forcefields.  The "
-"strength of each forcefield changes continuously, and it is also switched on "
-"and off at random.  By Paul 'Joey' Clark."
-msgstr ""
-
-#: capplets/screensaver/screensavers/whirlwindwarp.xml.h:2
-msgid "WhirlwindWarp"
-msgstr ""
-
-#: capplets/screensaver/screensavers/whirlygig.xml.h:1
-msgid ""
-"Draws zooming chains of sinusoidal spots.  Written by Ashton Trey Belew."
-msgstr ""
-
-#: capplets/screensaver/screensavers/whirlygig.xml.h:2
-msgid "WhirlyGig"
-msgstr ""
-
-#: capplets/screensaver/screensavers/worm.xml.h:1
-msgid ""
-"An ancient xlock hack that draws multicolored worms that crawl around the "
-"screen.  Written by Brad Taylor, Dave Lemke, Boris Putanec, and Henrik "
-"Theiling."
-msgstr ""
-
-#: capplets/screensaver/screensavers/worm.xml.h:2
-msgid "Worm"
-msgstr ""
-
-#: capplets/screensaver/screensavers/xaos.xml.h:1
-msgid "XaoS"
-msgstr ""
-
-#: capplets/screensaver/screensavers/xaos.xml.h:2
-msgid ""
-"XaoS generates fast fly-through animations of the Mandelbrot and other "
-"fractal sets.  Written by Thomas Marsh and Jan Hubicka.  This is not "
-"included with the XScreenSaver package, but if you don't have it already, "
-"you can find it at <http://limax.paru.cas.cz/~hubicka/XaoS/>."
-msgstr ""
-
-#: capplets/screensaver/screensavers/xdaliclock.xml.h:1
-msgid "XDaliClock"
-msgstr "Часы Дали"
-
-#: capplets/screensaver/screensavers/xdaliclock.xml.h:2
-msgid ""
-"XDaliClock draws a large digital clock, the numbers of which change by "
-"``melting'' into their new shapes.  Written by Jamie Zawinski.  This is not "
-"included with the XScreenSaver package, but if you don't have it already, "
-"you can find it at <http://www.jwz.org/xdaliclock/>."
-msgstr ""
-
-#: capplets/screensaver/screensavers/xearth.xml.h:1
-msgid ""
-"XEarth draws an image of the Earth, as seen from your favorite vantage point "
-"in space, correctly shaded for the current position of the Sun.  Written by "
-"Kirk Johnson.  This is not included with the XScreenSaver package, but if "
-"you don't have it already, you can find it at <http://www.cs.colorado.edu/"
-"~tuna/xearth/>."
-msgstr ""
-
-#: capplets/screensaver/screensavers/xearth.xml.h:2
-msgid "Xearth"
-msgstr "Земля"
-
-#: capplets/screensaver/screensavers/xfishtank.xml.h:1
-msgid ""
-"Fish!  This is not included with the XScreenSaver package, but if you don't "
-"have it already, you can find it at <http://metalab.unc.edu/pub/Linux/X11/"
-"demos/>."
-msgstr ""
-
-#: capplets/screensaver/screensavers/xfishtank.xml.h:2
-msgid "XFishTank"
-msgstr "Аквариум"
-
-#: capplets/screensaver/screensavers/xflame.xml.h:1
-msgid ""
-"Draws a simulation of pulsing fire.  It can also take an arbitrary image and "
-"set it on fire too.  Written by Carsten Haitzler, hacked on by many others."
-msgstr ""
-
-#: capplets/screensaver/screensavers/xflame.xml.h:2
-msgid "Xflame"
-msgstr "X-Пламя"
-
-#: capplets/screensaver/screensavers/xjack.xml.h:1
-msgid ""
-"This program behaves schizophrenically and makes a lot of typos.  Written by "
-"Jamie Zawinski.  If you haven't seen Stanley Kubrick's masterpiece, ``The "
-"Shining,'' you won't get it.  Those who have describe this hack as "
-"``inspired.''"
-msgstr ""
-
-#: capplets/screensaver/screensavers/xjack.xml.h:2
-msgid "Xjack"
-msgstr ""
-
-#: capplets/screensaver/screensavers/xlyap.xml.h:1
-msgid ""
-"This generates pretty fractal pictures by doing funky math involving the "
-"``Lyapunov exponent.''  It has a cool interactive mode, too.  Written by Ron "
-"Record."
-msgstr ""
-
-#: capplets/screensaver/screensavers/xlyap.xml.h:2
-msgid "Xlyap"
-msgstr ""
-
-#: capplets/screensaver/screensavers/xmatrix.xml.h:1
-msgid ""
-"A rendition of the text scrolls seen in the movie ``The Matrix.'' Written by "
-"Jamie Zawinski."
-msgstr ""
-
-#: capplets/screensaver/screensavers/xmatrix.xml.h:2
-msgid "Xmatrix"
-msgstr "Матрица"
-
-#: capplets/screensaver/screensavers/xmountains.xml.h:1
-msgid ""
-"XMountains generates realistic-looking fractal terrains of snow-capped "
-"mountains near water, with either a top view or a side view.  Written by "
-"Stephen Booth.  This is not included with the XScreenSaver package, but if "
-"you don't have it already, you can find it at <http://www.epcc.ed.ac.uk/~spb/"
-"xmountains/>.  \n"
-"\n"
-"Be sure to compile it with -DVROOT or it won't work right when launched by "
-"the xscreensaver daemon."
-msgstr ""
-
-#: capplets/screensaver/screensavers/xmountains.xml.h:4
-msgid "Xmountains"
-msgstr "X-Горы"
-
-#: capplets/screensaver/screensavers/xrayswarm.xml.h:1
-msgid ""
-"Draws a few swarms of critters flying around the screen, with nicely faded "
-"color trails behind them.  Written by Chris Leger."
-msgstr ""
-
-#: capplets/screensaver/screensavers/xrayswarm.xml.h:2
-msgid "XRaySwarm"
-msgstr ""
-
-#: capplets/screensaver/screensavers/xroger.xml.h:2
-msgid ""
-"The XScreenSaver logo.  Don't you hate it?  So do I.  Would you like to "
-"design a new logo for XScreenSaver?\tIf so, send jwz your submissions."
-msgstr ""
-
-#: capplets/screensaver/screensavers/xroger.xml.h:3
-msgid "Xroger"
-msgstr ""
-
-#: capplets/screensaver/screensavers/xsnow.xml.h:1
-msgid ""
-"Draws falling snow and the occasional tiny Santa.  By Rick Jansen.  You can "
-"find it at <http://www.euronet.nl/~rja/Xsnow/>."
-msgstr ""
-
-#: capplets/screensaver/screensavers/xsnow.xml.h:2
-msgid "Xsnow"
-msgstr "X-снег"
-
-#: capplets/screensaver/screensavers/xspirograph.xml.h:1
-msgid ""
-"Simulates that pen-in-nested-plastic-gears toy from your childhood.  By "
-"Rohit Singh."
-msgstr ""
-
-#: capplets/screensaver/screensavers/xspirograph.xml.h:2
-msgid "XSpiroGraph"
-msgstr ""
-
-#: capplets/screensaver/screensavers/xteevee.xml.h:1
-msgid "XTeeVee"
-msgstr "X-Телевизор"
-
-#: capplets/screensaver/screensavers/xteevee.xml.h:2
-msgid ""
-"XTeeVee simulates various television problems, including static, loss of "
-"vertical hold, and a test pattern.  By Greg Knauss."
-msgstr ""
-"Моделирует различные проблемы телевизора статику, потерю синхронизации, а "
-"также настроечную таблицу. Автор Greg Knauss."
-
-#: capplets/screensaver/screensavers/zoom.xml.h:1
-msgid "Zoom (Fatbits)"
-msgstr ""
-
-#: capplets/screensaver/screensavers/zoom.xml.h:2
-msgid ""
-"Zooms in on a part of the screen and then moves around.  With the -lenses "
-"option the result is like looking through many overlapping lenses rather "
-"than just a simple zoom.  Written by James Macnicol."
-msgstr ""
-
-#: capplets/screensaver/selection-dialog.c:99
-msgid "Add a new screensaver"
-msgstr "Добавить новый хранитель экрана"
-
-#: capplets/screensaver/selection-dialog.c:108
-msgid "Select the screensaver to run from the list below:"
-msgstr "Выбрать хранитель экрана для запуска из приведенного ниже списка:"
-
-#: capplets/screensaver/selection-dialog.c:194
-msgid "Custom"
-msgstr "Другой"
-
-#: capplets/screensaver/selection-dialog.c:220
-msgid "New screensaver"
-msgstr "Новый хранитель экрана"
-
-#: capplets/sound/sound.desktop.in.in.h:1
-msgid "Configure GNOME's use of sound"
-msgstr ""
+msgid "Sawfish window manager"
+msgstr "Изменение диспетчера окон"
+
+#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:1
+msgid "Enable window manager sound events"
+msgstr "Включить звуковые эффекты диспетчера окон"
 
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
 #: capplets/sound/sound.desktop.in.in.h:2
@@ -3249,121 +596,113 @@ msgstr ""
 msgid "Sound"
 msgstr "Радар"
 
-#: capplets/sound/sound-properties.glade.h:1
-msgid "Enable sound server startup"
-msgstr "Разрешить запуск сервера звука"
+#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:1
+msgid "Configure workspaces"
+msgstr "Настройка рабочих столов"
 
-#: capplets/sound/sound-properties.glade.h:2
+#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:2
+msgid "Workspaces"
+msgstr "Рабочие столы"
+
+#: capplets/desktop-links/screensaver.desktop.in.in.h:1
 #, fuzzy
-msgid "General"
-msgstr "Вторжение"
+msgid "Configure the settings of the screensaver"
+msgstr "Нет настроек для этого хранителя экрана."
 
-#: capplets/sound/sound-properties.glade.h:3
-#, fuzzy
-msgid "Sound Events"
-msgstr "Звуки событий"
+#: capplets/desktop-links/screensaver.desktop.in.in.h:2
+msgid "Screensaver"
+msgstr "Хранитель экрана"
 
-#: capplets/sound/sound-properties.glade.h:4
-msgid "Sounds for events"
-msgstr "Звуки событий"
+#: capplets/desktop-links/session.desktop.in.in.h:1
+msgid "Configure which non-session aware programs are started up"
+msgstr ""
 
-#: control-center/capplet-dir-view.c:298 control-center/gnomecc.desktop.in.h:1
-msgid "GNOME Control Center"
-msgstr "Центр управления GNOME"
+#: capplets/desktop-links/session.desktop.in.in.h:2
+msgid "Startup Programs"
+msgstr ""
 
-#: control-center/capplet-dir-view.c:299
-msgid "Desktop properties manager."
-msgstr "Диспетчер свойств рабочего стола."
+#: capplets/file-types/file-types-capplet.c:735
+#: capplets/file-types/file-types-capplet.c:1883
+msgid "MIME Type"
+msgstr "MIME-тип"
 
-#: control-center/capplet-dir-view.c:413
-#, c-format
-msgid "Gnome Control Center : %s"
-msgstr "Центр управления GNOME: %s"
+#: capplets/file-types/file-types-capplet.c:742
+msgid "Change Icon"
+msgstr "Изменить пиктограмму"
 
-#: control-center/capplet-dir-view.c:461
+#: capplets/file-types/file-types-capplet.c:749
+msgid "Change File Extensions"
+msgstr "Изменить расширения файла"
+
+#: capplets/file-types/file-types-capplet.c:757
+msgid "Default Action:"
+msgstr "Действие по умолчанию:"
+
+#: capplets/file-types/file-types-capplet.c:769
+msgid "Use Viewer"
+msgstr "Использовать программу просмотра"
+
+#: capplets/file-types/file-types-capplet.c:775
+msgid "Open With Application"
+msgstr "Открыть с помощью"
+
+#: capplets/file-types/file-types-capplet.c:786
+msgid "Edit List"
+msgstr "Правка списка"
+
+#: capplets/file-types/file-types-capplet.c:811
+msgid "Add New MIME Type..."
+msgstr "Добавление нового MIME-типа..."
+
+#: capplets/file-types/file-types-capplet.c:817
+msgid "Delete This MIME Type"
+msgstr "Удалить этот MIME-тип"
+
+#: capplets/file-types/file-types-capplet.c:828
+msgid "Revert to System Defaults"
+msgstr "Вернуть к исходным значениям"
+
+#: capplets/file-types/file-types-capplet.c:1075
+#: capplets/file-types/file-types-capplet.c:1219
+msgid "None"
+msgstr "Нет"
+
+#: capplets/file-types/file-types-capplet.c:1324
 msgid ""
-"No help is available/installed. Please make sure you\n"
-"have the GNOME User's Guide installed on your system."
+"Reverting to system settings will lose any changes\n"
+"you have ever made to File Types and Programs.\n"
+"Revert anyway?"
 msgstr ""
-"Справочная информация не доступна. Проверьте пожалуйста что\n"
-"Руководство пользователя GNOME установлено на вашей системе."
+"Восстановление системных установок приведёт к потере любых изменений\n"
+"которые вы сделали с типами файлов и программами.\n"
+"Всё равно восстановить?"
 
-#: capplets/theme-switcher/gui.c:370
-#: capplets/wm-properties/wm-properties-capplet.c:671
-#: control-center/capplet-dir-view.c:464
-msgid "Close"
-msgstr "Закрыть"
+#. Add default action to fourth column
+#: capplets/file-types/file-types-capplet.c:1393
+#: capplets/file-types/file-types-capplet.c:1593
+#: capplets/file-types/file-types-capplet.c:1719
+msgid "none"
+msgstr "нет"
 
-#: control-center/capplet-dir-view-html.c:145
-msgid "GNOME Control Center:"
-msgstr "Центр управления GNOME:"
+#: capplets/file-types/file-types-capplet.c:1434
+#: capplets/file-types/file-types-capplet.c:1620
+#: capplets/file-types/file-types-capplet.c:1763
+#, c-format
+msgid "View as %s"
+msgstr "Просмотр как %s"
 
-#: control-center/gnomecc.desktop.in.h:2
-msgid "The GNOME configuration tool"
-msgstr "Средство конфигурации GNOME"
+#: capplets/file-types/file-types-capplet.c:1882
+msgid "Description"
+msgstr "Описание"
 
-#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
-#: control-center/gnomecc.glade.h:1
-msgid "Appearance"
-msgstr "Внешний вид"
+#: capplets/file-types/file-types-capplet.c:1884
+#: capplets/mime-type/mime-data.c:385
+msgid "Extension"
+msgstr "Расширение"
 
-#: control-center/gnomecc.glade.h:2
-msgid "Browse with multiple windows"
-msgstr "Просмотр в нескольких окнах"
-
-#: control-center/gnomecc.glade.h:3
-msgid "Browse with single window"
-msgstr "Просмотр в одном окне"
-
-#: control-center/gnomecc.glade.h:4
-msgid "Display control panels as HTML"
-msgstr "Показать управлющие панели как HTML"
-
-#: control-center/gnomecc.glade.h:5
-msgid "Display control panels as a set of icons"
-msgstr "Показать управляющие панели как набор пиктограмм"
-
-#: control-center/gnomecc.glade.h:6
-msgid "Display control panels as a tree"
-msgstr "Показать управляющие панели как дерево"
-
-#: control-center/gnomecc.glade.h:7
-msgid "Launch control panels in separate windows"
-msgstr "Запустить управляющие панели в отдельных окнах"
-
-#: control-center/gnomecc.glade.h:8
-msgid "New-control-center"
-msgstr "Новый Центр Управления"
-
-#: control-center/gnomecc.glade.h:9
-msgid "Put control panels in the control center's window"
-msgstr "Поместить управляющие панели в окне управляющего центра"
-
-#: control-center/Gnome.directory.in.in.h:1
-#, fuzzy
-msgid "Main"
-msgstr "Гора"
-
-#: control-center/Gnome.directory.in.in.h:2
-#, fuzzy
-msgid "Main Settings"
-msgstr "Свойства"
-
-#: control-center/main.c:46
-msgid "Configuration"
-msgstr "Настройка"
-
-#: control-center/main.c:72
-msgid "Run the capplet CAPPLET"
-msgstr ""
-
-#: control-center/main.c:72
-msgid "CAPPLET"
-msgstr ""
-
-#: control-center/main.c:80
-msgid "GNOME Control Center options"
-msgstr "Параметры центра управления GNOME"
+#: capplets/file-types/file-types-capplet.c:1885
+msgid "Default Action"
+msgstr "Действие по умолчанию"
 
 #: capplets/file-types/file-types-capplet-dialogs.c:387
 msgid "Edit Applications List"
@@ -3522,92 +861,106 @@ msgstr "Может открыть несколько файлов"
 msgid "Can open from URI"
 msgstr "Может открыть по URI"
 
-#: capplets/file-types/file-types-capplet.c:735
-#: capplets/file-types/file-types-capplet.c:1883
-msgid "MIME Type"
-msgstr "MIME-тип"
-
-#: capplets/file-types/file-types-capplet.c:742
-msgid "Change Icon"
-msgstr "Изменить пиктограмму"
-
-#: capplets/file-types/file-types-capplet.c:749
-msgid "Change File Extensions"
-msgstr "Изменить расширения файла"
-
-#: capplets/file-types/file-types-capplet.c:757
-msgid "Default Action:"
-msgstr "Действие по умолчанию:"
-
-#: capplets/file-types/file-types-capplet.c:769
-msgid "Use Viewer"
-msgstr "Использовать программу просмотра"
-
-#: capplets/file-types/file-types-capplet.c:775
-msgid "Open With Application"
-msgstr "Открыть с помощью"
-
-#: capplets/file-types/file-types-capplet.c:786
-msgid "Edit List"
-msgstr "Правка списка"
-
-#: capplets/file-types/file-types-capplet.c:811
-msgid "Add New MIME Type..."
-msgstr "Добавление нового MIME-типа..."
-
-#: capplets/file-types/file-types-capplet.c:817
-msgid "Delete This MIME Type"
-msgstr "Удалить этот MIME-тип"
-
-#: capplets/file-types/file-types-capplet.c:828
-msgid "Revert to System Defaults"
-msgstr "Вернуть к исходным значениям"
-
-#: capplets/file-types/file-types-capplet.c:1075
-#: capplets/file-types/file-types-capplet.c:1219
-msgid "None"
-msgstr "Нет"
-
-#: capplets/file-types/file-types-capplet.c:1324
-msgid ""
-"Reverting to system settings will lose any changes\n"
-"you have ever made to File Types and Programs.\n"
-"Revert anyway?"
+#: capplets/file-types/file-types.desktop.in.in.h:1
+msgid "File Types and Programs"
 msgstr ""
-"Восстановление системных установок приведёт к потере любых изменений\n"
-"которые вы сделали с типами файлов и программами.\n"
-"Всё равно восстановить?"
 
-#. Add default action to fourth column
-#: capplets/file-types/file-types-capplet.c:1393
-#: capplets/file-types/file-types-capplet.c:1593
-#: capplets/file-types/file-types-capplet.c:1719
-msgid "none"
-msgstr "нет"
-
-#: capplets/file-types/file-types-capplet.c:1434
-#: capplets/file-types/file-types-capplet.c:1620
-#: capplets/file-types/file-types-capplet.c:1763
-#, c-format
-msgid "View as %s"
-msgstr "Просмотр как %s"
-
-#: capplets/file-types/file-types-capplet.c:1884
-#: capplets/mime-type/mime-data.c:385
-msgid "Extension"
-msgstr "Расширение"
-
-#: capplets/file-types/file-types-capplet.c:1885
-msgid "Default Action"
-msgstr "Действие по умолчанию"
+#: capplets/file-types/file-types.desktop.in.in.h:2
+msgid "Specify which programs are used to open or view each file type"
+msgstr ""
 
 #: capplets/file-types/file-types-icon-entry.c:258
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Невозможно найти hbox, используется обычный выбор файла"
 
+#: capplets/file-types/file-types-icon-entry.c:264
+#: capplets/theme-switcher/gui.c:232 capplets/theme-switcher/gui.c:304
+msgid "Preview"
+msgstr "Посмотреть"
+
 #: capplets/file-types/file-types-icon-entry.c:381
 msgid "Select an icon"
 msgstr "Выбрать пиктограмму"
+
+#: capplets/keyboard/keyboard-properties.glade.h:9
+#: capplets/keyboard/keyboard.desktop.in.in.h:1
+msgid "Keyboard"
+msgstr "Клавиатура"
+
+#: capplets/keyboard/keyboard.desktop.in.in.h:2
+#, fuzzy
+msgid "Keyboard Properties"
+msgstr "свойства %s"
+
+#: capplets/keyboard/keyboard-properties.glade.h:1
+msgid "Bell"
+msgstr "Колокольчик"
+
+#: capplets/keyboard/keyboard-properties.glade.h:2
+msgid "Click volume"
+msgstr "Громкость щелчка"
+
+#: capplets/keyboard/keyboard-properties.glade.h:3
+msgid "Delay before repeat:"
+msgstr "Задержка перед повтором:"
+
+#: capplets/keyboard/keyboard-properties.glade.h:4
+msgid "Duration (ms)"
+msgstr "Длительность (мс)"
+
+#: capplets/keyboard/keyboard-properties.glade.h:5
+msgid "Enable Keyboard Click"
+msgstr "Включить щелчки клавиш"
+
+#: capplets/keyboard/keyboard-properties.glade.h:6
+msgid "Enable Keyboard Repeat"
+msgstr "Включить автоповтор клавиатуры"
+
+#: capplets/keyboard/keyboard-properties.glade.h:7
+#: capplets/mouse/mouse-properties.glade.h:1
+msgid "Fast"
+msgstr "Быстро"
+
+#: capplets/keyboard/keyboard-properties.glade.h:8
+msgid "Key repeat rate:"
+msgstr "Скорость повтора клавиши:"
+
+#: capplets/keyboard/keyboard-properties.glade.h:10
+msgid "Long"
+msgstr "Длинный"
+
+#: capplets/keyboard/keyboard-properties.glade.h:11
+msgid "Medium"
+msgstr "Средний"
+
+#: capplets/keyboard/keyboard-properties.glade.h:12
+msgid "Pitch (Hz)"
+msgstr "Щелчок (Гц)"
+
+#: capplets/keyboard/keyboard-properties.glade.h:13
+msgid "Short"
+msgstr "Короткий"
+
+#: capplets/keyboard/keyboard-properties.glade.h:14
+#: capplets/mouse/mouse-properties.glade.h:10
+msgid "Slow"
+msgstr "Медлено"
+
+#: capplets/keyboard/keyboard-properties.glade.h:15
+msgid "Test"
+msgstr "Проверка"
+
+#: capplets/keyboard/keyboard-properties.glade.h:16
+msgid "Very fast"
+msgstr "Очень быстро"
+
+#: capplets/keyboard/keyboard-properties.glade.h:17
+msgid "Very long"
+msgstr "Очень длинный"
+
+#: capplets/keyboard/keyboard-properties.glade.h:18
+msgid "Volume"
+msgstr "Громкость"
 
 #. icon box
 #: capplets/mime-type/edit-window.c:266
@@ -3764,6 +1117,15 @@ msgstr "Удалить"
 msgid "Edit..."
 msgstr "Исправить..."
 
+#: capplets/mime-type/mime-type.desktop.in.in.h:1
+msgid "Configure how files are associated and started"
+msgstr ""
+
+#: capplets/mime-type/mime-type.desktop.in.in.h:2
+#, fuzzy
+msgid "Mime Types"
+msgstr "Mime тип"
+
 #: capplets/mime-type/new-mime-window.c:25
 msgid "Add Mime Type"
 msgstr "Добавление Mime типа"
@@ -3800,9 +1162,77 @@ msgstr ""
 "Можно задать до двух регулярных выражений идентифицирующих mime-тип.\n"
 "Заполнение этих двух полей необязательно."
 
+#: capplets/mouse/mouse.desktop.in.in.h:1
+#, fuzzy
+msgid "Mouse"
+msgstr "Мёбиус"
+
+#: capplets/mouse/mouse.desktop.in.in.h:2
+#, fuzzy
+msgid "Mouse Properties"
+msgstr "свойства %s"
+
+#: capplets/mouse/mouse-properties.glade.h:2
+msgid "High"
+msgstr "Высокий"
+
+#: capplets/mouse/mouse-properties.glade.h:3
+msgid "Left handed"
+msgstr "Под левую руку"
+
+#: capplets/mouse/mouse-properties.glade.h:4
+msgid "Low"
+msgstr "Низкий "
+
+#: capplets/mouse/mouse-properties.glade.h:5
+msgid "Mouse Configuration"
+msgstr "Настройка мыши"
+
+#: capplets/mouse/mouse-properties.glade.h:6
+msgid "Mouse speed:"
+msgstr "Скорость мыши:"
+
+#: capplets/mouse/mouse-properties.glade.h:7
+msgid "My mouse is:"
+msgstr "Моя мышь это:"
+
+#: capplets/mouse/mouse-properties.glade.h:8
+msgid "Right handed"
+msgstr "Под правую руку"
+
+#: capplets/mouse/mouse-properties.glade.h:9
+msgid "Sensitivity:"
+msgstr "Чувствительность:"
+
+#: capplets/sound/sound.desktop.in.in.h:1
+msgid "Configure GNOME's use of sound"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:1
+msgid "Enable sound server startup"
+msgstr "Разрешить запуск сервера звука"
+
+#: capplets/sound/sound-properties.glade.h:2
+#, fuzzy
+msgid "General"
+msgstr "Вторжение"
+
+#: capplets/sound/sound-properties.glade.h:3
+#, fuzzy
+msgid "Sound Events"
+msgstr "Звуки событий"
+
+#: capplets/sound/sound-properties.glade.h:4
+msgid "Sounds for events"
+msgstr "Звуки событий"
+
 #: capplets/theme-switcher/demo.c:54
 msgid "One"
 msgstr "Один"
+
+#: capplets/theme-switcher/demo.c:54
+msgid "Two"
+msgstr ""
 
 #. just 8 short names that will serve as samples for titles in demo
 #: capplets/theme-switcher/demo.c:56
@@ -3874,6 +1304,15 @@ msgstr "Кнопка переключателя 1"
 msgid "Radio Button 2"
 msgstr "Кнопка переключателя 2"
 
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:1
+msgid "Gtk+ Theme Selector"
+msgstr ""
+
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:2
+#, fuzzy
+msgid "Select which gtk+ theme to use"
+msgstr "Выберите тему для установки"
+
 #: capplets/theme-switcher/gui.c:87
 #, c-format
 msgid ""
@@ -3934,6 +1373,12 @@ msgstr ""
 "Справочная информация для этих настроек не доступна. Проверьте пожалуйста\n"
 "что Руководство пользователя GNOME установлено на вашей системе."
 
+#: capplets/theme-switcher/gui.c:370
+#: capplets/wm-properties/wm-properties-capplet.c:671
+#: control-center/capplet-dir-view.c:464
+msgid "Close"
+msgstr "Закрыть"
+
 #: capplets/theme-switcher/install.c:31
 msgid "Home directory doesn't exist!\n"
 msgstr "Домашнего каталога не существует!\n"
@@ -3951,42 +1396,14 @@ msgstr "Команда '%s' не прошла"
 msgid "Unknown file format"
 msgstr "Неизвестный формат файла"
 
-#: capplets/url-properties/url-properties.c:49
-msgid "Error initializing the `url-properties' capplet."
-msgstr "Ошибка инициализации 'url-properties' capplet."
+#: capplets/ui-properties/behavior.desktop.in.in.h:1
+#, fuzzy
+msgid "Behavior"
+msgstr "При открытии"
 
-#: capplets/url-properties/url-properties.c:72
-msgid "Protocol"
-msgstr "Протокол"
-
-#: capplets/url-properties/url-properties.c:72
-msgid "Command"
-msgstr "Команда"
-
-#: capplets/url-properties/url-properties.c:89
-msgid "handler:"
-msgstr "обработчик:"
-
-#. set some commonly used handlers
-#: capplets/url-properties/url-properties.c:99
-msgid "Netscape"
-msgstr "Netscape"
-
-#: capplets/url-properties/url-properties.c:104
-msgid "Netscape (new window)"
-msgstr "Netscape (в новом окне)"
-
-#: capplets/url-properties/url-properties.c:110
-msgid "Help browser"
-msgstr "Справочный навигатор"
-
-#: capplets/url-properties/url-properties.c:115
-msgid "Help browser (new window)"
-msgstr "Справочный навигатор (в новом окне)"
-
-#: capplets/url-properties/url-properties.c:127
-msgid "Set"
-msgstr "Установить"
+#: capplets/ui-properties/behavior.desktop.in.in.h:2
+msgid "Sets the default behavior of GNOME applications"
+msgstr ""
 
 #: capplets/ui-properties/behavior-properties.glade.h:1
 msgid "At the center of the screen"
@@ -4059,11 +1476,6 @@ msgstr "Меню"
 #: capplets/ui-properties/behavior-properties.glade.h:18
 msgid "Menus can be torn off"
 msgstr "Меню могут быть свернуты"
-
-#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
-#: capplets/ui-properties/behavior-properties.glade.h:19
-msgid "Miscellaneous"
-msgstr "Разное"
 
 #: capplets/ui-properties/behavior-properties.glade.h:20
 msgid "Multiple Documents"
@@ -4172,6 +1584,73 @@ msgstr "При использовании закладок блокнота помещать закладки"
 #: capplets/ui-properties/behavior-properties.glade.h:46
 msgid "Wherever the Window Manager places them"
 msgstr "Там где их помещает диспетчер окон"
+
+#: capplets/url-properties/url.desktop.in.in.h:1
+msgid "Configure which programs are used to display URLs"
+msgstr ""
+
+#: capplets/url-properties/url.desktop.in.in.h:2
+#, fuzzy
+msgid "URL Handlers"
+msgstr "обработчик:"
+
+#: capplets/url-properties/url-properties.c:49
+msgid "Error initializing the `url-properties' capplet."
+msgstr "Ошибка инициализации 'url-properties' capplet."
+
+#: capplets/url-properties/url-properties.c:72
+msgid "Protocol"
+msgstr "Протокол"
+
+#: capplets/url-properties/url-properties.c:72
+msgid "Command"
+msgstr "Команда"
+
+#: capplets/url-properties/url-properties.c:89
+msgid "handler:"
+msgstr "обработчик:"
+
+#. set some commonly used handlers
+#: capplets/url-properties/url-properties.c:99
+msgid "Netscape"
+msgstr "Netscape"
+
+#: capplets/url-properties/url-properties.c:104
+msgid "Netscape (new window)"
+msgstr "Netscape (в новом окне)"
+
+#: capplets/url-properties/url-properties.c:110
+msgid "Help browser"
+msgstr "Справочный навигатор"
+
+#: capplets/url-properties/url-properties.c:115
+msgid "Help browser (new window)"
+msgstr "Справочный навигатор (в новом окне)"
+
+#: capplets/url-properties/url-properties.c:127
+msgid "Set"
+msgstr "Установить"
+
+#: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.in.h:1
+msgid "Enlightenment"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/IceWM.desktop.in.in.h:1
+msgid "Ice WM"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/Scwm.desktop.in.in.h:1
+msgid "Scwm"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/twm.desktop.in.in.h:1
+msgid "twm"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.in.h:1
+#, fuzzy
+msgid "Window Maker"
+msgstr "Изменение диспетчера окон"
 
 #: capplets/wm-properties/wm-properties-capplet.c:170
 #, c-format
@@ -4292,6 +1771,10 @@ msgstr "Добавить новый диспетчер окон"
 msgid "Cancel"
 msgstr "Отменить"
 
+#: capplets/wm-properties/wm-properties-capplet.c:793
+msgid "Name:"
+msgstr "Название:"
+
 #: capplets/wm-properties/wm-properties-capplet.c:819
 msgid "Configuration Command:"
 msgstr "Команда настройки:"
@@ -4329,78 +1812,891 @@ msgstr ""
 "ошибка инициализации при запуске 'wm-properties-capplet'.\n"
 "исполнение прервано ...\n"
 
-#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:2
-msgid "Configure window appearance"
-msgstr "Настройка внешнего вида окна"
+#: control-center/capplet-dir-view.c:298 control-center/gnomecc.desktop.in.h:1
+msgid "GNOME Control Center"
+msgstr "Центр управления GNOME"
 
-#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:1
-msgid "Configure key shortcuts"
-msgstr "Настройка комбинаций клавиш"
+#: control-center/capplet-dir-view.c:299
+msgid "Desktop properties manager."
+msgstr "Диспетчер свойств рабочего стола."
 
-#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:2
-msgid "Shortcuts"
-msgstr "Комбинации клавиш"
+#: control-center/capplet-dir-view.c:413
+#, c-format
+msgid "Gnome Control Center : %s"
+msgstr "Центр управления GNOME: %s"
 
-#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:1
-msgid "Configure window focusing"
-msgstr "Настройка фокусировки окна"
+#: control-center/capplet-dir-view.c:461
+msgid ""
+"No help is available/installed. Please make sure you\n"
+"have the GNOME User's Guide installed on your system."
+msgstr ""
+"Справочная информация не доступна. Проверьте пожалуйста что\n"
+"Руководство пользователя GNOME установлено на вашей системе."
 
-#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:2
-msgid "Focus behavior"
-msgstr "Поведение фокуса"
+#: control-center/capplet-dir-view-html.c:145
+msgid "GNOME Control Center:"
+msgstr "Центр управления GNOME:"
 
-#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:1
-msgid "Configure window properties"
-msgstr "Настройка свойств окна"
+#: control-center/gnomecc.desktop.in.h:2
+msgid "The GNOME configuration tool"
+msgstr "Средство конфигурации GNOME"
 
-#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:2
-msgid "Matched Windows"
-msgstr "Совпадающие окна"
+#: control-center/gnomecc.glade.h:2
+msgid "Browse with multiple windows"
+msgstr "Просмотр в нескольких окнах"
 
-#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:1
-msgid "Configure window minimization and maximization"
-msgstr "Настройка минимизации и максимизации окна"
+#: control-center/gnomecc.glade.h:3
+msgid "Browse with single window"
+msgstr "Просмотр в одном окне"
 
-#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:2
-msgid "Minimizing and Maximizing"
-msgstr "Минимизация и максимизация"
+#: control-center/gnomecc.glade.h:4
+msgid "Display control panels as HTML"
+msgstr "Показать управлющие панели как HTML"
 
-#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
-msgid "Configure window manager configuration properties"
-msgstr "Настройка свойств настройки диспетчера окон"
+#: control-center/gnomecc.glade.h:5
+msgid "Display control panels as a set of icons"
+msgstr "Показать управляющие панели как набор пиктограмм"
 
-#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:2
-msgid "Meta"
-msgstr "Мета"
+#: control-center/gnomecc.glade.h:6
+msgid "Display control panels as a tree"
+msgstr "Показать управляющие панели как дерево"
 
-#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:1
-msgid "Configure miscellaneous window features"
-msgstr "Настройка разных свойств окна"
+#: control-center/gnomecc.glade.h:7
+msgid "Launch control panels in separate windows"
+msgstr "Запустить управляющие панели в отдельных окнах"
 
-#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:1
-msgid "Configure window move/resize"
-msgstr "Настройка перемещения/изменения размера окна"
+#: control-center/gnomecc.glade.h:8
+msgid "New-control-center"
+msgstr "Новый Центр Управления"
 
-#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:2
-msgid "Moving and Resizing"
-msgstr "Перемещение и изменение размера"
+#: control-center/gnomecc.glade.h:9
+msgid "Put control panels in the control center's window"
+msgstr "Поместить управляющие панели в окне управляющего центра"
 
-#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:1
-msgid "Configure window placement"
-msgstr "Настройка размещения окна"
+#: control-center/Gnome.directory.in.in.h:1
+#, fuzzy
+msgid "Main"
+msgstr "Гора"
 
-#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:2
-msgid "Placement"
-msgstr "Размещение"
+#: control-center/Gnome.directory.in.in.h:2
+#, fuzzy
+msgid "Main Settings"
+msgstr "Свойства"
 
-#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:1
-msgid "Enable window manager sound events"
-msgstr "Включить звуковые эффекты диспетчера окон"
+#: control-center/main.c:46
+msgid "Configuration"
+msgstr "Настройка"
 
-#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:1
-msgid "Configure workspaces"
-msgstr "Настройка рабочих столов"
+#: control-center/main.c:72
+msgid "Run the capplet CAPPLET"
+msgstr ""
 
-#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:2
-msgid "Workspaces"
-msgstr "Рабочие столы"
+#: control-center/main.c:72
+msgid "CAPPLET"
+msgstr ""
+
+#: control-center/main.c:80
+msgid "GNOME Control Center options"
+msgstr "Параметры центра управления GNOME"
+
+#~ msgid "Custom screensaver. No description available"
+#~ msgstr "Другой хранитель экрана. Описание не доступно"
+
+#~ msgid "About %s\n"
+#~ msgstr "О программе %s\n"
+
+#~ msgid "Settings"
+#~ msgstr "Свойства"
+
+#~ msgid "label1"
+#~ msgstr "метка1"
+
+#~ msgid "Demo"
+#~ msgstr "Демонстрация"
+
+#~ msgid "%s properties"
+#~ msgstr "свойства %s"
+
+#~ msgid "There are no configurable settings for this screensaver."
+#~ msgstr "Нет настроек для этого хранителя экрана."
+
+#~ msgid ""
+#~ "Cannot find the data to configure this screensaver. Please edit the "
+#~ "command line below."
+#~ msgstr ""
+#~ "Не удалось найти данные для настройки этого хранителя экрана. Пожалуйста "
+#~ "отредактируйте приведенную ниже командную строку."
+
+#~ msgid "Please enter a command line below."
+#~ msgstr "Пожалуйста, введите командную строку."
+
+#~ msgid "Visual:"
+#~ msgstr "Видимый:"
+
+#~ msgid "Any"
+#~ msgstr "Любой"
+
+#~ msgid " Configure..."
+#~ msgstr "Настроить..."
+
+#~ msgid "About \"<Screensaver name>\""
+#~ msgstr "О программе \"<Screensaver name>\""
+
+#~ msgid "Black screen only"
+#~ msgstr "Просто черный экран"
+
+#~ msgid "Configure Power Management"
+#~ msgstr "Настроить управление энергосбережением"
+
+#~ msgid "Disable screensaver"
+#~ msgstr "Отключить хранитель экрана"
+
+#~ msgid "Enable _power management"
+#~ msgstr "Использовать управление энергосбережение"
+
+#~ msgid "Go to standby mode after"
+#~ msgstr "Переходит в режим \"сна\" через"
+
+#~ msgid "Go to suspend mode after"
+#~ msgstr "Переходит в режим ожидания через"
+
+#~ msgid "One screensaver all the time"
+#~ msgstr "Один и тот же хранитель экрана все время"
+
+#~ msgid "R_equire password to unlock screen"
+#~ msgstr "Запрашивать пароль для разблокирования"
+
+#~ msgid "Random (all screensavers)"
+#~ msgstr "Выбирать случайно из всех"
+
+#~ msgid "Random (checked screensavers)"
+#~ msgstr "Выбирать случайно из отмеченных"
+
+#~ msgid "S_tart screensaver after "
+#~ msgstr "Запуск хранителя экрана через"
+
+#~ msgid "S_witch screensavers after "
+#~ msgstr "Переключать хранитель экрана каждые"
+
+#~ msgid "Settings for \"<Screensaver name>\""
+#~ msgstr "Установки для \"<Screensaver name>\""
+
+#~ msgid "Shut down monitor after"
+#~ msgstr "Выключать монитор через"
+
+#~ msgid ""
+#~ "There are no configurable settings for this\n"
+#~ "screensaver. "
+#~ msgstr ""
+#~ "Для этого хранителя экрана\n"
+#~ "нет изменяемых настроек"
+
+#~ msgid "_About this screensaver..."
+#~ msgstr "Об этом хранителе экрана..."
+
+#~ msgid "_Add"
+#~ msgstr "Добавить"
+
+#~ msgid "_Mode:"
+#~ msgstr "Режим:"
+
+#~ msgid "_Remove"
+#~ msgstr "Удалить"
+
+#~ msgid "_Settings"
+#~ msgstr "Свойства"
+
+#~ msgid "minutes"
+#~ msgstr "минут"
+
+#~ msgid "3d clock"
+#~ msgstr "Трёхмерные часы"
+
+#, fuzzy
+#~ msgid "Large"
+#~ msgstr "Лазер"
+
+#~ msgid "Size:"
+#~ msgstr "Размер:"
+
+#, fuzzy
+#~ msgid "Small"
+#~ msgstr "Шарики"
+
+#~ msgid "Twist speed:"
+#~ msgstr "Скорость скручивания:"
+
+#~ msgid "Twist:"
+#~ msgstr "Скручивание:"
+
+#~ msgid "Wobble:"
+#~ msgstr "Качание:"
+
+#~ msgid "Ant"
+#~ msgstr "Муравей"
+
+#~ msgid "Four Sided cells"
+#~ msgstr "Четырехсторонние ячейки"
+
+#~ msgid "Full Color"
+#~ msgstr "Полноцветное"
+
+#~ msgid "Monochrome"
+#~ msgstr "Одноцветное"
+
+#~ msgid "Nine Sided cells"
+#~ msgstr "Девятисторонние ячейки"
+
+#~ msgid "Number of colours"
+#~ msgstr "Число цветов"
+
+#~ msgid "Random"
+#~ msgstr "Случайное"
+
+#~ msgid "Random size upto"
+#~ msgstr "Случайный размер до"
+
+#~ msgid "Randomize"
+#~ msgstr "Рандомизировать"
+
+#~ msgid "Sharp turns"
+#~ msgstr "Резкие повороты"
+
+#~ msgid "Six Sided cells"
+#~ msgstr "Шестисторонние ячейки"
+
+#~ msgid "Specific"
+#~ msgstr "Специальное"
+
+#~ msgid "Specific size of"
+#~ msgstr "Указанный размер"
+
+#~ msgid "Speed"
+#~ msgstr "Скорость"
+
+#~ msgid "Three Sided cells"
+#~ msgstr "Трехсторонние ячейки"
+
+#~ msgid "Timeout"
+#~ msgstr "Задержка"
+
+#~ msgid "Truchet lines"
+#~ msgstr "Линии Труше"
+
+#~ msgid "Twelve Sided cells"
+#~ msgstr "Двенадцатисторонние ячейки"
+
+#~ msgid "number of Ants"
+#~ msgstr "число муравьев"
+
+#~ msgid "Atlantis"
+#~ msgstr "Атлантика"
+
+#~ msgid "Attraction (balls)"
+#~ msgstr "Притяжение (шарики)"
+
+#~ msgid "Balls"
+#~ msgstr "Шарики"
+
+#~ msgid "Color Contrast"
+#~ msgstr "Контраст цветов"
+
+#~ msgid "Length of Trail"
+#~ msgstr "Длина цепочки"
+
+#~ msgid "Lines"
+#~ msgstr "Линии"
+
+#~ msgid "Number of Colors"
+#~ msgstr "Число цветов"
+
+#~ msgid "Polygons"
+#~ msgstr "Многоугольники"
+
+#~ msgid "Splines"
+#~ msgstr "Сплайны"
+
+#~ msgid "Tails"
+#~ msgstr "Хвосты"
+
+#~ msgid "Threshold of repulsion"
+#~ msgstr "Предел отталкивания"
+
+#~ msgid "Blaster"
+#~ msgstr "Бластер"
+
+#~ msgid "Display screensaver in monochrome."
+#~ msgstr "Показывать одноцветный хранитель экрана."
+
+#, fuzzy
+#~ msgid "Faster"
+#~ msgstr "Быстро"
+
+#, fuzzy
+#~ msgid "Slower"
+#~ msgstr "Медлено"
+
+#~ msgid "Speed of rotation."
+#~ msgstr "Скорость вращения"
+
+#~ msgid "Speed of the 90 degree rotation."
+#~ msgstr "Скорость поворота на 90 градусов."
+
+#, fuzzy
+#~ msgid "Colors:"
+#~ msgstr "Закрыть"
+
+#~ msgid "Number of Colors."
+#~ msgstr "Число цветов."
+
+#~ msgid "Number of bubbles to use."
+#~ msgstr "Число пузырей"
+
+#~ msgid "Speed of Motion."
+#~ msgstr "Скорость движения."
+
+#~ msgid "Use red/blue 3d seperation."
+#~ msgstr "Использовать красно/синее 3-хмерное разделение."
+
+#~ msgid "BSOD"
+#~ msgstr "Синий экран смерти"
+
+#~ msgid "Bubble3D"
+#~ msgstr "Трёхмерные пузыри"
+
+#~ msgid "Bubbles"
+#~ msgstr "Пузыри"
+
+#~ msgid "Bubbles exist in three dimensions."
+#~ msgstr "Пузыри существуют в трех измерениях."
+
+#~ msgid "Don't hide bubbles when they pop."
+#~ msgstr "Не скрывать пузыри когда они всплыли."
+
+#~ msgid "Draw circles instead of pixmap bubbles."
+#~ msgstr "Рисовать круги вместо картинок пузырей."
+
+#~ msgid "Compass"
+#~ msgstr "Компас"
+
+#~ msgid "Don't use double bufferinge"
+#~ msgstr "Не использовать двойную буферизацию"
+
+#~ msgid "Use double buffering"
+#~ msgstr "Использовать двойную буферизацию"
+
+#~ msgid "Coral"
+#~ msgstr "Корал"
+
+#, fuzzy
+#~ msgid "Denser"
+#~ msgstr "Плотность"
+
+#~ msgid "Density"
+#~ msgstr "Плотность"
+
+#~ msgid "Number of seeds"
+#~ msgstr "Число зерен"
+
+#, fuzzy
+#~ msgid "Seeds"
+#~ msgstr "Скорость"
+
+#~ msgid "Cosmos"
+#~ msgstr "Космос"
+
+#~ msgid "Cell"
+#~ msgstr "Ячейка"
+
+#~ msgid "Center image."
+#~ msgstr "Центрировать изображение."
+
+#~ msgid "Crystal"
+#~ msgstr "Кристал"
+
+#~ msgid "Have at maximum size"
+#~ msgstr "Максимизировать размер"
+
+#~ msgid "Number of polygons to use."
+#~ msgstr "Число используемых многоугольников."
+
+#, fuzzy
+#~ msgid "Less"
+#~ msgstr "Линии"
+
+#, fuzzy
+#~ msgid "More"
+#~ msgstr "Муар"
+
+#~ msgid "Number of iterations."
+#~ msgstr "Число итераций."
+
+#~ msgid "Cycle through colors."
+#~ msgstr "Цикл через цвета."
+
+#~ msgid "Deco"
+#~ msgstr "Декор"
+
+#, fuzzy
+#~ msgid "Time between redraws:"
+#~ msgstr "Время между перерисовками."
+
+#~ msgid "Use color when drawing."
+#~ msgstr "Использовать цвет при рисовании."
+
+#~ msgid "Deluxe"
+#~ msgstr "Делюкс"
+
+#~ msgid "Demon"
+#~ msgstr "Демон"
+
+#~ msgid "Discrete"
+#~ msgstr "Дискретные линии"
+
+#~ msgid "Number to use."
+#~ msgstr "Используемое число."
+
+#~ msgid "Distort"
+#~ msgstr "Искажение"
+
+#~ msgid "Fractals should grow."
+#~ msgstr "Фракталы должны расти."
+
+#~ msgid "Number of pixels to use."
+#~ msgstr "Используемое число точек растра."
+
+#~ msgid "Use lissajous figures to get points."
+#~ msgstr "Использовать для получения точек фигуры Лиссажу."
+
+#~ msgid "ElectricSheep"
+#~ msgstr "Электроовца"
+
+#~ msgid "Epicycle"
+#~ msgstr "Эпицикл"
+
+#~ msgid "Time finished product is shown."
+#~ msgstr "Время отображения итогового результата."
+
+#~ msgid "Number"
+#~ msgstr "Число"
+
+#~ msgid "Number of cycles"
+#~ msgstr "Число циклов"
+
+#~ msgid "Speed of Motion"
+#~ msgstr "Скорость движения"
+
+#~ msgid "Bitmap for flag"
+#~ msgstr "Картинка для флага"
+
+#~ msgid "Flag"
+#~ msgstr "Флаг"
+
+#~ msgid "Random size up to"
+#~ msgstr "Случайный размер до"
+
+#~ msgid "Text for flag"
+#~ msgstr "Текст для флага"
+
+#~ msgid "Another iterative fractal generator.  Written by Scott Draves."
+#~ msgstr "Ещё один итеративный генератор фракталов. Автор Scott Draves."
+
+#~ msgid "Flame"
+#~ msgstr "Пламя"
+
+#, fuzzy
+#~ msgid "Iterations:"
+#~ msgstr "Число итераций"
+
+#~ msgid "Number of fractals to generate."
+#~ msgstr "Создаваемое число фракталов."
+
+#~ msgid "Pixels per fractal."
+#~ msgstr "Точек растра на фрактал:"
+
+#~ msgid "Delay between redraws."
+#~ msgstr "Задержка между перерисовками."
+
+#~ msgid "Forest"
+#~ msgstr "Лес"
+
+#~ msgid "Number of trees to use."
+#~ msgstr "Используемое число деревьев."
+
+#~ msgid "Galaxy"
+#~ msgstr "Галактика"
+
+#~ msgid "Gears"
+#~ msgstr "Шестерёнки"
+
+#~ msgid ""
+#~ "This draws sets of turning, interlocking gears, rotating in three "
+#~ "dimensions.  Another GL hack, by Danny Sung, Brian Paul, Ed Mackey, and "
+#~ "Jamie Zawinski."
+#~ msgstr ""
+#~ "Рисует несколько вращающихся шестерёнок в трёх измерениях. Ещё один GL-"
+#~ "хак, авторы Danny Sung, Brian Paul, Ed Mackey и Jamie Zawinski."
+
+#~ msgid "GLPlanet"
+#~ msgstr "Планета"
+
+#~ msgid "GLText"
+#~ msgstr "Текст GL"
+
+#~ msgid "Goban"
+#~ msgstr "Го"
+
+#~ msgid "Have transparent bubbles."
+#~ msgstr "Прозрачные пузыри."
+
+#~ msgid "Use additive color model."
+#~ msgstr "Использовать аддитивную цветовую модель."
+
+#~ msgid "Number of planets to use."
+#~ msgstr "Используемое число планет."
+
+#~ msgid "Objects should leave trails behind them."
+#~ msgstr "Объекты должны оставлять за собой хвост."
+
+#~ msgid "Orbit should decay."
+#~ msgstr "Орбиты должны исчезать."
+
+#~ msgid "Animate circles."
+#~ msgstr "Анимированные круги."
+
+#~ msgid "Cycle through colormap."
+#~ msgstr "Цикл через цветовую карту."
+
+#~ msgid "Halo"
+#~ msgstr "Гало"
+
+#~ msgid "Number of circles to use."
+#~ msgstr "Используемое число кругов. "
+
+#~ msgid "Use a gradient of colors between circles."
+#~ msgstr "Использовать цветовые переходы между кругами."
+
+#~ msgid "Helix"
+#~ msgstr "Геликс"
+
+#~ msgid "Time between redraws."
+#~ msgstr "Время между перерисовками."
+
+#~ msgid "Number of pixels before a color change."
+#~ msgstr "Число точек растра до изменения цвета."
+
+#~ msgid "Hyperball"
+#~ msgstr "Гипершар"
+
+#, fuzzy
+#~ msgid "Closer"
+#~ msgstr "Закрыть"
+
+#~ msgid "Distance from center of cube"
+#~ msgstr "Расстояние от центра куба"
+
+#, fuzzy
+#~ msgid "Farther"
+#~ msgstr "Земля"
+
+#~ msgid "Hypercube"
+#~ msgstr "Гиперкуб"
+
+#~ msgid "Interference"
+#~ msgstr "Интерференция"
+
+#~ msgid "Jigsaw"
+#~ msgstr "Головоломка"
+
+#~ msgid "Julia"
+#~ msgstr "Жюлиа"
+
+#~ msgid "Kaleidescope"
+#~ msgstr "Калейдоскоп"
+
+#~ msgid "Number of segments."
+#~ msgstr "Число сегментов."
+
+#~ msgid "Number of trails."
+#~ msgstr "Число хвостов."
+
+#~ msgid "Duration of laser burst."
+#~ msgstr "Длительность лазерной вспышки."
+
+#~ msgid "Laser"
+#~ msgstr "Лазер"
+
+#, fuzzy
+#~ msgid "Longer"
+#~ msgstr "Длинный"
+
+#, fuzzy
+#~ msgid "Shorter"
+#~ msgstr "Короткий"
+
+#~ msgid "Size of burst."
+#~ msgstr "Размер вспышки."
+
+#~ msgid "Lightning"
+#~ msgstr "Молнии"
+
+#, fuzzy
+#~ msgid "Larger"
+#~ msgstr "Лазер"
+
+#~ msgid "Lisa"
+#~ msgstr "Лиза"
+
+#~ msgid "Size of object."
+#~ msgstr "Размер объекта."
+
+#~ msgid "Number of interpolation steps."
+#~ msgstr "Число шагов интерполяции."
+
+#~ msgid "Number of points."
+#~ msgstr "Число точек."
+
+#~ msgid "Open figures."
+#~ msgstr "Открыть фигуры."
+
+#~ msgid "Loop"
+#~ msgstr "Цикл"
+
+#~ msgid "Delay between drawing the maze and starting the solution."
+#~ msgstr "Задержка между рисованием лабиринта и началом решения."
+
+#~ msgid "Delay between each step in the maze."
+#~ msgstr "Задержка между каждым шагом в лабиринте."
+
+#~ msgid "Delay between finishing the maze and starting a new one."
+#~ msgstr "Задержка между завершения лабиринта и началом нового."
+
+#~ msgid "Maze"
+#~ msgstr "Лабиринт"
+
+#~ msgid "Put a bridge over the logo?"
+#~ msgstr "Положить мост через эмблему?"
+
+#~ msgid "Moebius"
+#~ msgstr "Мёбиус"
+
+#~ msgid "Moire2"
+#~ msgstr "Муар 2"
+
+#~ msgid "Maximum radius increment"
+#~ msgstr "Максимальное увеличение радиуса."
+
+#~ msgid "Moire"
+#~ msgstr "Муар"
+
+#~ msgid "Molecule"
+#~ msgstr "Молекула"
+
+#~ msgid "Mountain"
+#~ msgstr "Гора"
+
+#~ msgid "Draw square at weird starting points."
+#~ msgstr "Рисовать квадрат в случайной начальной точке."
+
+#~ msgid "Use XOR drawing function."
+#~ msgstr "Использовать для рисования функцию XOR."
+
+#~ msgid "Noseguy"
+#~ msgstr "Носач"
+
+#~ msgid "Maximum number of lines."
+#~ msgstr "Максимальное число линий."
+
+#~ msgid "Time to fade away."
+#~ msgstr "Время затухания."
+
+#~ msgid "Time to show each picture."
+#~ msgstr "Время отображения каждой картинки."
+
+#~ msgid "Penetrate"
+#~ msgstr "Вторжение"
+
+#~ msgid "Penrose"
+#~ msgstr "Пенроуз"
+
+#~ msgid "Petri"
+#~ msgstr "Петри"
+
+#~ msgid "Phosphor"
+#~ msgstr "Фосфор"
+
+#~ msgid "Pipes"
+#~ msgstr "Трубы"
+
+#~ msgid "Pulsar"
+#~ msgstr "Пульсар"
+
+#~ msgid "Frequency of missile launch"
+#~ msgstr "Частота запуска снарядов"
+
+#~ msgid "Number of particles"
+#~ msgstr "Число частиц"
+
+#~ msgid "Particles on screen"
+#~ msgstr "Частиц на экране"
+
+#~ msgid "Pyro"
+#~ msgstr "Пиро"
+
+#~ msgid "Color contrast"
+#~ msgstr "Контрастность цветов"
+
+#~ msgid "Discrete Lines"
+#~ msgstr "Дискретные линии"
+
+#~ msgid "Length"
+#~ msgstr "Длина"
+
+#~ msgid "Number of points:"
+#~ msgstr "Число точек:"
+
+#~ msgid "Number of trails:"
+#~ msgstr "Число хвостов:"
+
+#~ msgid "Solid Trails"
+#~ msgstr "Сплошные хвосты"
+
+#~ msgid "Spread between lines"
+#~ msgstr "Рассеяние между линиями"
+
+#~ msgid "Trails attract each other"
+#~ msgstr "Хвосты притягиваются друг к другу"
+
+#~ msgid "Transparent Trails"
+#~ msgstr "Прозрачные хвосты"
+
+#, fuzzy
+#~ msgid "Wide"
+#~ msgstr "Ширина"
+
+#~ msgid "Width"
+#~ msgstr "Ширина"
+
+#~ msgid "XOR Trails"
+#~ msgstr "XOR хвостов"
+
+#~ msgid "Delay before next redraw"
+#~ msgstr "Задержка до следующей перерисовки"
+
+#~ msgid "Number of Iterations"
+#~ msgstr "Число итераций"
+
+#~ msgid "Offset"
+#~ msgstr "Смещение"
+
+#~ msgid "Rorschach"
+#~ msgstr "Рошар"
+
+#~ msgid "Speed to clear the screen"
+#~ msgstr "Скорость очистки экрана"
+
+#~ msgid "With X-axis Symmetry"
+#~ msgstr "С симметрией относительно оси X"
+
+#~ msgid "With Y-axis Symmetry"
+#~ msgstr "С симметрией относительно оси Y"
+
+#~ msgid "Rotor"
+#~ msgstr "Ротор"
+
+#~ msgid "Rubik"
+#~ msgstr "Рубик"
+
+#~ msgid "Sierpinski3D"
+#~ msgstr "Серпинский 3D"
+
+#~ msgid "Sierpinski"
+#~ msgstr "Серпинский"
+
+#~ msgid "Sonar"
+#~ msgstr "Радар"
+
+#~ msgid "Sphere"
+#~ msgstr "Сфера"
+
+#~ msgid "Spiral"
+#~ msgstr "Спираль"
+
+#~ msgid "Spotlight"
+#~ msgstr "Луч фонаря"
+
+#~ msgid "Change to display in monochrome."
+#~ msgstr "Изменить отображение в одноцветное."
+
+#~ msgid "Duration of current shape."
+#~ msgstr "Длительность текущей формы."
+
+#~ msgid "Quickness of rotation at each step (0 = Random)"
+#~ msgstr "Скорость вращения на каждом шаге (0 = Случайная)"
+
+#~ msgid "Speed of animation."
+#~ msgstr "Скорость анимации."
+
+#~ msgid "Thickness of color bands (0 = Random)"
+#~ msgstr "Толщина границ цвета (0 = Случайная)"
+
+#~ msgid "Use raw shapes "
+#~ msgstr "Использовать простые формы"
+
+#~ msgid "StarWars"
+#~ msgstr "Звёздные войны"
+
+#~ msgid "T3D"
+#~ msgstr "T3D"
+
+#~ msgid "Triangle"
+#~ msgstr "Треугольник"
+
+#~ msgid "Truchet"
+#~ msgstr "Труше"
+
+#~ msgid "Vines"
+#~ msgstr "Лозы"
+
+#~ msgid "XDaliClock"
+#~ msgstr "Часы Дали"
+
+#~ msgid "Xearth"
+#~ msgstr "Земля"
+
+#~ msgid "XFishTank"
+#~ msgstr "Аквариум"
+
+#~ msgid "Xflame"
+#~ msgstr "X-Пламя"
+
+#~ msgid "Xmatrix"
+#~ msgstr "Матрица"
+
+#~ msgid "Xmountains"
+#~ msgstr "X-Горы"
+
+#~ msgid "Xsnow"
+#~ msgstr "X-снег"
+
+#~ msgid "XTeeVee"
+#~ msgstr "X-Телевизор"
+
+#~ msgid ""
+#~ "XTeeVee simulates various television problems, including static, loss of "
+#~ "vertical hold, and a test pattern.  By Greg Knauss."
+#~ msgstr ""
+#~ "Моделирует различные проблемы телевизора статику, потерю синхронизации, а "
+#~ "также настроечную таблицу. Автор Greg Knauss."
+
+#~ msgid "Add a new screensaver"
+#~ msgstr "Добавить новый хранитель экрана"
+
+#~ msgid "Select the screensaver to run from the list below:"
+#~ msgstr "Выбрать хранитель экрана для запуска из приведенного ниже списка:"
+
+#~ msgid "Custom"
+#~ msgstr "Другой"
+
+#~ msgid "New screensaver"
+#~ msgstr "Новый хранитель экрана"

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.5.12\n"
-"POT-Creation-Date: 2002-01-25 10:46-0500\n"
+"POT-Creation-Date: 2002-04-16 01:49-0500\n"
 "PO-Revision-Date: 2002-01-26 02:51+0800\n"
 "Last-Translator: Abel Cheung <maddog@linux.org.hk>\n"
 "Language-Team: Chinese\n"
@@ -17,11 +17,6 @@ msgstr ""
 #: archiver/archive.c:604
 #, fuzzy
 msgid "Default location"
-msgstr "預設位置"
-
-#: archiver/config-archiver.c:307 archiver/location.c:460
-#, fuzzy
-msgid "Default Location"
 msgstr "預設位置"
 
 #: archiver/config-archiver.c:81
@@ -152,7 +147,7 @@ msgstr ""
 msgid "New name to assign to the location"
 msgstr "安排給該位置的新名稱"
 
-#: archiSTEPSver/config-archiver.c:142
+#: archiver/config-archiver.c:142
 msgid "NEW_NAME"
 msgstr "新名稱"
 
@@ -167,6 +162,11 @@ msgstr ""
 #: archiver/config-archiver.c:152
 msgid "Partial containment"
 msgstr ""
+
+#: archiver/config-archiver.c:307 archiver/location.c:460
+#, fuzzy
+msgid "Default Location"
+msgstr "預設位置"
 
 #: archiver/config-archiver.c:368
 msgid "Global archiver options"
@@ -209,6 +209,14 @@ msgstr "背景"
 #: capplets/background/background.desktop.in.in.h:2
 msgid "Configuration of the desktop's background"
 msgstr "桌面背景的組態"
+
+#: capplets/background/background-properties-capplet.c:46
+msgid "Set background image."
+msgstr "設定背景圖像。"
+
+#: capplets/background/background-properties-capplet.c:46
+msgid "IMAGE-FILE"
+msgstr "圖像檔"
 
 #: capplets/background/background-properties.glade.h:1
 msgid "Background colors"
@@ -266,27 +274,19 @@ msgstr "背景會使用圖像"
 msgid "Vertical gradient"
 msgstr "垂直漸變色"
 
-#: capplets/background/background-properties-capplet.c:47
-msgid "Set background image."
-msgstr "設定背景圖像。"
-
-#: capplets/background/background-properties-capplet.c:47
-msgid "IMAGE-FILE"
-msgstr "圖像檔"
-
-#: capplets/common/capplet-util.c:477
+#: capplets/common/capplet-util.c:418
 msgid "Just apply settings and quit"
 msgstr "只套用設定並離開"
 
-#: capplets/common/capplet-util.c:479
+#: capplets/common/capplet-util.c:420
 msgid "Initialize the session"
 msgstr "初始化該作業階段"
 
-#: capplets/common/capplet-util.c:481
+#: capplets/common/capplet-util.c:422
 msgid "Retrieve and store legacy settings"
 msgstr "復原以往的設定"
 
-#: capplets/common/capplet-util.c:490
+#: capplets/common/capplet-util.c:431
 msgid "Capplet options"
 msgstr "面板控制程式選項"
 
@@ -489,262 +489,6 @@ msgstr "找不到 pixmap 檔案：%s"
 msgid "Couldn't create pixmap from file: %s"
 msgstr "無法由檔案建立 pixmap：%s"
 
-#: capplets/desktop-links/gnome-hint-properties.desktop.in.h:1
-msgid "Options for the startup hint dialog"
-msgstr "啟動提示對話視窗的選項"
-
-#: capplets/desktop-links/gnome-hint-properties.desktop.in.h:2
-msgid "Startup Hint"
-msgstr "啟動提示"
-
-#: capplets/desktop-links/screensaver.desktop.in.in.h:1
-msgid "Configure the settings of the screensaver"
-msgstr "設定螢幕保護程式"
-
-#: capplets/desktop-links/screensaver.desktop.in.in.h:2
-msgid "Screensaver"
-msgstr "螢幕保護程式"
-
-#: capplets/keyboard/keyboard-properties.glade.h:9
-#: capplets/keyboard/keyboard.desktop.in.in.h:1
-msgid "Keyboard"
-msgstr "鍵盤"
-
-#: capplets/keyboard/keyboard.desktop.in.in.h:2
-msgid "Keyboard Properties"
-msgstr "鍵盤設定"
-
-#: capplets/keyboard/keyboard-properties.glade.h:1
-msgid "Bell"
-msgstr "響聲"
-
-#: capplets/keyboard/keyboard-properties.glade.h:2
-msgid "Click volume"
-msgstr "鍵盤敲擊聲音量"
-
-#: capplets/keyboard/keyboard-properties.glade.h:3
-msgid "Delay before repeat:"
-msgstr "按鍵重複前的延遲時間"
-
-#: capplets/keyboard/keyboard-properties.glade.h:4
-msgid "Duration (ms)"
-msgstr "持續時間（毫秒）"
-
-#: capplets/keyboard/keyboard-properties.glade.h:5
-msgid "Enable Keyboard Click"
-msgstr "使用鍵盤敲擊聲"
-
-#: capplets/keyboard/keyboard-properties.glade.h:6
-msgid "Enable Keyboard Repeat"
-msgstr "使用按鍵重複"
-
-#: capplets/keyboard/keyboard-properties.glade.h:7
-#: capplets/mouse/mouse-properties.glade.h:1
-msgid "Fast"
-msgstr "快"
-
-#: capplets/keyboard/keyboard-properties.glade.h:8
-msgid "Key repeat rate:"
-msgstr "按鍵重複速率："
-
-#: capplets/keyboard/keyboard-properties.glade.h:10
-msgid "Long"
-msgstr "長"
-
-#: capplets/keyboard/keyboard-properties.glade.h:11
-msgid "Medium"
-msgstr "中等"
-
-#: capplets/keyboard/keyboard-properties.glade.h:12
-msgid "Pitch (Hz)"
-msgstr "音高 (Hz)"
-
-#: capplets/keyboard/keyboard-properties.glade.h:13
-msgid "Short"
-msgstr "短"
-
-#: capplets/keyboard/keyboard-properties.glade.h:14
-#: capplets/mouse/mouse-properties.glade.h:10
-msgid "Slow"
-msgstr "慢"
-
-#: capplets/keyboard/keyboard-properties.glade.h:15
-msgid "Test"
-msgstr "測試"
-
-#: capplets/keyboard/keyboard-properties.glade.h:16
-msgid "Very fast"
-msgstr "非常快"
-
-#: capplets/keyboard/keyboard-properties.glade.h:17
-msgid "Very long"
-msgstr "非常長"
-
-#: capplets/keyboard/keyboard-properties.glade.h:18
-msgid "Volume"
-msgstr "音量"
-
-#: capplets/mouse/mouse.desktop.in.in.h:1
-msgid "Mouse"
-msgstr "滑鼠"
-
-#: capplets/mouse/mouse.desktop.in.in.h:2
-msgid "Mouse Properties"
-msgstr "滑鼠設定"
-
-#: capplets/mouse/mouse-properties.glade.h:2
-msgid "High"
-msgstr "高"
-
-#: capplets/mouse/mouse-properties.glade.h:3
-msgid "Left handed"
-msgstr "左手操作"
-
-#: capplets/mouse/mouse-properties.glade.h:4
-msgid "Low"
-msgstr "低"
-
-#: capplets/mouse/mouse-properties.glade.h:5
-msgid "Mouse Configuration"
-msgstr "滑鼠設定"
-
-#: capplets/mouse/mouse-properties.glade.h:6
-msgid "Mouse speed:"
-msgstr "滑鼠速度："
-
-#: capplets/mouse/mouse-properties.glade.h:7
-msgid "My mouse is:"
-msgstr "我的滑鼠是："
-
-#: capplets/mouse/mouse-properties.glade.h:8
-msgid "Right handed"
-msgstr "右手操作"
-
-#: capplets/mouse/mouse-properties.glade.h:9
-msgid "Sensitivity:"
-msgstr "敏感度："
-
-#: capplets/sound/sound.desktop.in.in.h:1
-msgid "Configure GNOME's use of sound"
-msgstr "設定 GNOME 所用的音效"
-
-#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
-#: capplets/sound/sound.desktop.in.in.h:2
-msgid "Sound"
-msgstr "音效"
-
-#: capplets/sound/sound-properties.glade.h:1
-msgid "Enable sound server startup"
-msgstr "啟動時同時啟用音效伺服程式"
-
-#: capplets/sound/sound-properties.glade.h:2
-msgid "General"
-msgstr "一般"
-
-#: capplets/sound/sound-properties.glade.h:3
-msgid "Sound Events"
-msgstr "音效事件"
-
-#: capplets/sound/sound-properties.glade.h:4
-msgid "Sounds for events"
-msgstr "事件音效"
-
-#: control-center/capplet-dir-view.c:298 control-center/gnomecc.desktop.in.h:1
-msgid "GNOME Control Center"
-msgstr "GNOME 控制台"
-
-#: control-center/capplet-dir-view.c:299
-msgid "Desktop properties manager."
-msgstr "桌面設定總管。"
-
-#: control-center/capplet-dir-view.c:413
-#, c-format
-msgid "Gnome Control Center : %s"
-msgstr "Gnome 控制台：%s"
-
-#: control-center/capplet-dir-view.c:461
-msgid ""
-"No help is available/installed. Please make sure you\n"
-"have the GNOME User's Guide installed on your system."
-msgstr ""
-"輔助說明尚未安裝或不存在，請確定你已經安裝\n"
-"GNOME 的使用者指南到你的系統中。"
-
-#: capplets/theme-switcher/gui.c:370
-#: capplets/wm-properties/wm-properties-capplet.c:671
-#: control-center/capplet-dir-view.c:464
-msgid "Close"
-msgstr "關閉"
-
-#: control-center/capplet-dir-view-html.c:145
-msgid "GNOME Control Center:"
-msgstr "GNOME 控制台："
-
-#: control-center/gnomecc.desktop.in.h:2
-msgid "The GNOME configuration tool"
-msgstr "GNOME 設定工具"
-
-#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
-#: control-center/gnomecc.glade.h:1
-msgid "Appearance"
-msgstr "外觀"
-
-#: control-center/gnomecc.glade.h:2
-msgid "Browse with multiple windows"
-msgstr "使用多個視窗瀏覽"
-
-#: control-center/gnomecc.glade.h:3
-msgid "Browse with single window"
-msgstr "使用單一的視窗瀏覽"
-
-#: control-center/gnomecc.glade.h:4
-msgid "Display control panels as HTML"
-msgstr "使用 HTML 方式顯示控制面板"
-
-#: control-center/gnomecc.glade.h:5
-msgid "Display control panels as a set of icons"
-msgstr "以圖示集的方式顯示控制面板"
-
-#: control-center/gnomecc.glade.h:6
-msgid "Display control panels as a tree"
-msgstr "以樹狀圖方式顯示控制面板"
-
-#: control-center/gnomecc.glade.h:7
-msgid "Launch control panels in separate windows"
-msgstr "使用其它視窗開啟控制面板"
-
-#: control-center/gnomecc.glade.h:8
-msgid "New-control-center"
-msgstr "新控制台"
-
-#: control-center/gnomecc.glade.h:9
-msgid "Put control panels in the control center's window"
-msgstr "將控制面板放在控制中心的視窗內"
-
-#: control-center/Gnome.directory.in.in.h:1
-msgid "Main"
-msgstr "主選項"
-
-#: control-center/Gnome.directory.in.in.h:2
-msgid "Main Settings"
-msgstr "主要設定"
-
-#: control-center/main.c:46
-msgid "Configuration"
-msgstr "設定組態"
-
-#: control-center/main.c:72
-msgid "Run the capplet CAPPLET"
-msgstr "執行 CAPPLET 面板控制程式"
-
-#: control-center/main.c:72
-msgid "CAPPLET"
-msgstr "CAPPLET"
-
-#: control-center/main.c:80
-msgid "GNOME Control Center options"
-msgstr "GNOME 控制台選項"
-
 #: capplets/desktop-links/Advanced.directory.in.in.h:1
 msgid "Advanced"
 msgstr "進階"
@@ -752,6 +496,14 @@ msgstr "進階"
 #: capplets/desktop-links/Advanced.directory.in.in.h:2
 msgid "Advanced Settings"
 msgstr "進階設定"
+
+#: capplets/desktop-links/gnome-hint-properties.desktop.in.h:1
+msgid "Options for the startup hint dialog"
+msgstr "啟動提示對話視窗的選項"
+
+#: capplets/desktop-links/gnome-hint-properties.desktop.in.h:2
+msgid "Startup Hint"
+msgstr "啟動提示"
 
 #: capplets/desktop-links/panel.desktop.in.in.h:1
 msgid "Global panel properties"
@@ -761,6 +513,113 @@ msgstr "一般面板設定內容"
 msgid "Panel"
 msgstr "面板"
 
+#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
+#: control-center/gnomecc.glade.h:1
+msgid "Appearance"
+msgstr "外觀"
+
+#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:2
+msgid "Configure window appearance"
+msgstr "設定視窗外觀"
+
+#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:1
+msgid "Configure key shortcuts"
+msgstr "設定捷徑鍵"
+
+#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:2
+msgid "Shortcuts"
+msgstr "捷徑"
+
+#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:1
+msgid "Configure window focusing"
+msgstr "設定視窗焦點模式"
+
+#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:2
+msgid "Focus behavior"
+msgstr "焦點處理"
+
+#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:1
+msgid "Configure window properties"
+msgstr "設定視窗特性"
+
+#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:2
+msgid "Matched Windows"
+msgstr "視窗吻合條件"
+
+#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:1
+msgid "Configure window minimization and maximization"
+msgstr "設定視窗最小化及最大化"
+
+#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:2
+msgid "Minimizing and Maximizing"
+msgstr "最小化及最大化"
+
+#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
+msgid "Configure window manager configuration properties"
+msgstr "設定視窗管理程式特性"
+
+#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:2
+msgid "Meta"
+msgstr "總體"
+
+#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:1
+msgid "Configure miscellaneous window features"
+msgstr "設定其它視窗特性"
+
+#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
+#: capplets/ui-properties/behavior-properties.glade.h:19
+msgid "Miscellaneous"
+msgstr "雜項"
+
+#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:1
+msgid "Configure window move/resize"
+msgstr "設定視窗移動及改變大小"
+
+#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:2
+msgid "Moving and Resizing"
+msgstr "移動及改變大小"
+
+#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:1
+msgid "Configure window placement"
+msgstr "設定視窗放置模式"
+
+#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:2
+msgid "Placement"
+msgstr "放置模式"
+
+#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:1
+msgid "Control Center Menu"
+msgstr "控制台選單"
+
+#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:2
+msgid "Sawfish window manager"
+msgstr "Sawfish 視窗管理程式"
+
+#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:1
+msgid "Enable window manager sound events"
+msgstr "啟用視窗管理程式事件音效"
+
+#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
+#: capplets/sound/sound.desktop.in.in.h:2
+msgid "Sound"
+msgstr "音效"
+
+#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:1
+msgid "Configure workspaces"
+msgstr "設定工作區"
+
+#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:2
+msgid "Workspaces"
+msgstr "工作區"
+
+#: capplets/desktop-links/screensaver.desktop.in.in.h:1
+msgid "Configure the settings of the screensaver"
+msgstr "設定螢幕保護程式"
+
+#: capplets/desktop-links/screensaver.desktop.in.in.h:2
+msgid "Screensaver"
+msgstr "螢幕保護程式"
+
 #: capplets/desktop-links/session.desktop.in.in.h:1
 msgid "Configure which non-session aware programs are started up"
 msgstr "設定哪些不受作業階段管理的程式會啟動"
@@ -768,6 +627,88 @@ msgstr "設定哪些不受作業階段管理的程式會啟動"
 #: capplets/desktop-links/session.desktop.in.in.h:2
 msgid "Startup Programs"
 msgstr "起始程式"
+
+#: capplets/file-types/file-types-capplet.c:735
+#: capplets/file-types/file-types-capplet.c:1883
+msgid "MIME Type"
+msgstr "Mime 類型"
+
+#: capplets/file-types/file-types-capplet.c:742
+msgid "Change Icon"
+msgstr "變更圖示"
+
+#: capplets/file-types/file-types-capplet.c:749
+msgid "Change File Extensions"
+msgstr "改變延伸檔名"
+
+#: capplets/file-types/file-types-capplet.c:757
+msgid "Default Action:"
+msgstr "預設行動："
+
+#: capplets/file-types/file-types-capplet.c:769
+msgid "Use Viewer"
+msgstr "使用檢視器"
+
+#: capplets/file-types/file-types-capplet.c:775
+msgid "Open With Application"
+msgstr "使用程式開啟"
+
+#: capplets/file-types/file-types-capplet.c:786
+msgid "Edit List"
+msgstr "編輯列表"
+
+#: capplets/file-types/file-types-capplet.c:811
+msgid "Add New MIME Type..."
+msgstr "新增 MIME 類型..."
+
+#: capplets/file-types/file-types-capplet.c:817
+msgid "Delete This MIME Type"
+msgstr "刪除此 MIME 類型"
+
+#: capplets/file-types/file-types-capplet.c:828
+msgid "Revert to System Defaults"
+msgstr "還原成系統預設值"
+
+#: capplets/file-types/file-types-capplet.c:1075
+#: capplets/file-types/file-types-capplet.c:1219
+msgid "None"
+msgstr "無"
+
+#: capplets/file-types/file-types-capplet.c:1324
+msgid ""
+"Reverting to system settings will lose any changes\n"
+"you have ever made to File Types and Programs.\n"
+"Revert anyway?"
+msgstr ""
+"還原成系統設定會失去所有你對檔案\n"
+"類型與程式的修改。是否確定還原？"
+
+#. Add default action to fourth column
+#: capplets/file-types/file-types-capplet.c:1393
+#: capplets/file-types/file-types-capplet.c:1593
+#: capplets/file-types/file-types-capplet.c:1719
+msgid "none"
+msgstr "無"
+
+#: capplets/file-types/file-types-capplet.c:1434
+#: capplets/file-types/file-types-capplet.c:1620
+#: capplets/file-types/file-types-capplet.c:1763
+#, c-format
+msgid "View as %s"
+msgstr "以 %s 方式觀看"
+
+#: capplets/file-types/file-types-capplet.c:1882
+msgid "Description"
+msgstr "描述"
+
+#: capplets/file-types/file-types-capplet.c:1884
+#: capplets/mime-type/mime-data.c:385
+msgid "Extension"
+msgstr "延伸檔名"
+
+#: capplets/file-types/file-types-capplet.c:1885
+msgid "Default Action"
+msgstr "預設行動"
 
 #: capplets/file-types/file-types-capplet-dialogs.c:387
 msgid "Edit Applications List"
@@ -922,88 +863,6 @@ msgstr "可開啟多個檔案"
 msgid "Can open from URI"
 msgstr "可以 URI 方式開啟"
 
-#: capplets/file-types/file-types-capplet.c:735
-#: capplets/file-types/file-types-capplet.c:1883
-msgid "MIME Type"
-msgstr "Mime 類型"
-
-#: capplets/file-types/file-types-capplet.c:742
-msgid "Change Icon"
-msgstr "變更圖示"
-
-#: capplets/file-types/file-types-capplet.c:749
-msgid "Change File Extensions"
-msgstr "改變延伸檔名"
-
-#: capplets/file-types/file-types-capplet.c:757
-msgid "Default Action:"
-msgstr "預設行動："
-
-#: capplets/file-types/file-types-capplet.c:769
-msgid "Use Viewer"
-msgstr "使用檢視器"
-
-#: capplets/file-types/file-types-capplet.c:775
-msgid "Open With Application"
-msgstr "使用程式開啟"
-
-#: capplets/file-types/file-types-capplet.c:786
-msgid "Edit List"
-msgstr "編輯列表"
-
-#: capplets/file-types/file-types-capplet.c:811
-msgid "Add New MIME Type..."
-msgstr "新增 MIME 類型..."
-
-#: capplets/file-types/file-types-capplet.c:817
-msgid "Delete This MIME Type"
-msgstr "刪除此 MIME 類型"
-
-#: capplets/file-types/file-types-capplet.c:828
-msgid "Revert to System Defaults"
-msgstr "還原成系統預設值"
-
-#: capplets/file-types/file-types-capplet.c:1075
-#: capplets/file-types/file-types-capplet.c:1219
-msgid "None"
-msgstr "無"
-
-#: capplets/file-types/file-types-capplet.c:1324
-msgid ""
-"Reverting to system settings will lose any changes\n"
-"you have ever made to File Types and Programs.\n"
-"Revert anyway?"
-msgstr ""
-"還原成系統設定會失去所有你對檔案\n"
-"類型與程式的修改。是否確定還原？"
-
-#. Add default action to fourth column
-#: capplets/file-types/file-types-capplet.c:1393
-#: capplets/file-types/file-types-capplet.c:1593
-#: capplets/file-types/file-types-capplet.c:1719
-msgid "none"
-msgstr "無"
-
-#: capplets/file-types/file-types-capplet.c:1434
-#: capplets/file-types/file-types-capplet.c:1620
-#: capplets/file-types/file-types-capplet.c:1763
-#, c-format
-msgid "View as %s"
-msgstr "以 %s 方式觀看"
-
-#: capplets/file-types/file-types-capplet.c:1882
-msgid "Description"
-msgstr "描述"
-
-#: capplets/file-types/file-types-capplet.c:1884
-#: capplets/mime-type/mime-data.c:385
-msgid "Extension"
-msgstr "延伸檔名"
-
-#: capplets/file-types/file-types-capplet.c:1885
-msgid "Default Action"
-msgstr "預設行動"
-
 #: capplets/file-types/file-types.desktop.in.in.h:1
 msgid "File Types and Programs"
 msgstr "檔案類型與程式"
@@ -1024,6 +883,85 @@ msgstr "預覽"
 #: capplets/file-types/file-types-icon-entry.c:381
 msgid "Select an icon"
 msgstr "選擇圖示"
+
+#: capplets/keyboard/keyboard-properties.glade.h:9
+#: capplets/keyboard/keyboard.desktop.in.in.h:1
+msgid "Keyboard"
+msgstr "鍵盤"
+
+#: capplets/keyboard/keyboard.desktop.in.in.h:2
+msgid "Keyboard Properties"
+msgstr "鍵盤設定"
+
+#: capplets/keyboard/keyboard-properties.glade.h:1
+msgid "Bell"
+msgstr "響聲"
+
+#: capplets/keyboard/keyboard-properties.glade.h:2
+msgid "Click volume"
+msgstr "鍵盤敲擊聲音量"
+
+#: capplets/keyboard/keyboard-properties.glade.h:3
+msgid "Delay before repeat:"
+msgstr "按鍵重複前的延遲時間"
+
+#: capplets/keyboard/keyboard-properties.glade.h:4
+msgid "Duration (ms)"
+msgstr "持續時間（毫秒）"
+
+#: capplets/keyboard/keyboard-properties.glade.h:5
+msgid "Enable Keyboard Click"
+msgstr "使用鍵盤敲擊聲"
+
+#: capplets/keyboard/keyboard-properties.glade.h:6
+msgid "Enable Keyboard Repeat"
+msgstr "使用按鍵重複"
+
+#: capplets/keyboard/keyboard-properties.glade.h:7
+#: capplets/mouse/mouse-properties.glade.h:1
+msgid "Fast"
+msgstr "快"
+
+#: capplets/keyboard/keyboard-properties.glade.h:8
+msgid "Key repeat rate:"
+msgstr "按鍵重複速率："
+
+#: capplets/keyboard/keyboard-properties.glade.h:10
+msgid "Long"
+msgstr "長"
+
+#: capplets/keyboard/keyboard-properties.glade.h:11
+msgid "Medium"
+msgstr "中等"
+
+#: capplets/keyboard/keyboard-properties.glade.h:12
+msgid "Pitch (Hz)"
+msgstr "音高 (Hz)"
+
+#: capplets/keyboard/keyboard-properties.glade.h:13
+msgid "Short"
+msgstr "短"
+
+#: capplets/keyboard/keyboard-properties.glade.h:14
+#: capplets/mouse/mouse-properties.glade.h:10
+msgid "Slow"
+msgstr "慢"
+
+#: capplets/keyboard/keyboard-properties.glade.h:15
+msgid "Test"
+msgstr "測試"
+
+#: capplets/keyboard/keyboard-properties.glade.h:16
+msgid "Very fast"
+msgstr "非常快"
+
+#: capplets/keyboard/keyboard-properties.glade.h:17
+msgid "Very long"
+msgstr "非常長"
+
+#: capplets/keyboard/keyboard-properties.glade.h:18
+msgid "Volume"
+msgstr "音量"
 
 #. icon box
 #: capplets/mime-type/edit-window.c:266
@@ -1224,6 +1162,66 @@ msgstr ""
 "您可以設定兩個正規表示式來識別這個 mime 類型，\n"
 "這些欄位可以不填。"
 
+#: capplets/mouse/mouse.desktop.in.in.h:1
+msgid "Mouse"
+msgstr "滑鼠"
+
+#: capplets/mouse/mouse.desktop.in.in.h:2
+msgid "Mouse Properties"
+msgstr "滑鼠設定"
+
+#: capplets/mouse/mouse-properties.glade.h:2
+msgid "High"
+msgstr "高"
+
+#: capplets/mouse/mouse-properties.glade.h:3
+msgid "Left handed"
+msgstr "左手操作"
+
+#: capplets/mouse/mouse-properties.glade.h:4
+msgid "Low"
+msgstr "低"
+
+#: capplets/mouse/mouse-properties.glade.h:5
+msgid "Mouse Configuration"
+msgstr "滑鼠設定"
+
+#: capplets/mouse/mouse-properties.glade.h:6
+msgid "Mouse speed:"
+msgstr "滑鼠速度："
+
+#: capplets/mouse/mouse-properties.glade.h:7
+msgid "My mouse is:"
+msgstr "我的滑鼠是："
+
+#: capplets/mouse/mouse-properties.glade.h:8
+msgid "Right handed"
+msgstr "右手操作"
+
+#: capplets/mouse/mouse-properties.glade.h:9
+msgid "Sensitivity:"
+msgstr "敏感度："
+
+#: capplets/sound/sound.desktop.in.in.h:1
+msgid "Configure GNOME's use of sound"
+msgstr "設定 GNOME 所用的音效"
+
+#: capplets/sound/sound-properties.glade.h:1
+msgid "Enable sound server startup"
+msgstr "啟動時同時啟用音效伺服程式"
+
+#: capplets/sound/sound-properties.glade.h:2
+msgid "General"
+msgstr "一般"
+
+#: capplets/sound/sound-properties.glade.h:3
+msgid "Sound Events"
+msgstr "音效事件"
+
+#: capplets/sound/sound-properties.glade.h:4
+msgid "Sounds for events"
+msgstr "事件音效"
+
 #: capplets/theme-switcher/demo.c:54
 msgid "One"
 msgstr "一"
@@ -1302,6 +1300,14 @@ msgstr "圓形按鈕 1"
 msgid "Radio Button 2"
 msgstr "圓形按鈕 2"
 
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:1
+msgid "Gtk+ Theme Selector"
+msgstr "Gtk+ 佈景主題選擇程式"
+
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:2
+msgid "Select which gtk+ theme to use"
+msgstr "選擇要使用的 gtk+ 佈景主題"
+
 #: capplets/theme-switcher/gui.c:87
 #, c-format
 msgid ""
@@ -1364,6 +1370,12 @@ msgstr ""
 "這些設定的說明不存在或未安裝，請確定你已經\n"
 "將 GNOME 使用者指南安裝到你的系統。"
 
+#: capplets/theme-switcher/gui.c:370
+#: capplets/wm-properties/wm-properties-capplet.c:671
+#: control-center/capplet-dir-view.c:464
+msgid "Close"
+msgstr "關閉"
+
 #: capplets/theme-switcher/install.c:31
 msgid "Home directory doesn't exist!\n"
 msgstr "使用者目錄不存在！\n"
@@ -1380,59 +1392,6 @@ msgstr "無法執行命令 '%s'"
 #: capplets/theme-switcher/install.c:78
 msgid "Unknown file format"
 msgstr "不明的檔案格式"
-
-#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:1
-msgid "Gtk+ Theme Selector"
-msgstr "Gtk+ 佈景主題選擇程式"
-
-#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:2
-msgid "Select which gtk+ theme to use"
-msgstr "選擇要使用的 gtk+ 佈景主題"
-
-#: capplets/url-properties/url.desktop.in.in.h:1
-msgid "Configure which programs are used to display URLs"
-msgstr "設定顯示 URL 所用的程式"
-
-#: capplets/url-properties/url.desktop.in.in.h:2
-msgid "URL Handlers"
-msgstr "URL 處理程式"
-
-#: capplets/url-properties/url-properties.c:49
-msgid "Error initializing the `url-properties' capplet."
-msgstr "初始化 'url-properties' 面板設定程式時發生錯誤。"
-
-#: capplets/url-properties/url-properties.c:72
-msgid "Protocol"
-msgstr "協定"
-
-#: capplets/url-properties/url-properties.c:72
-msgid "Command"
-msgstr "指令"
-
-#: capplets/url-properties/url-properties.c:89
-msgid "handler:"
-msgstr "處理器:"
-
-#. set some commonly used handlers
-#: capplets/url-properties/url-properties.c:99
-msgid "Netscape"
-msgstr "Netscape"
-
-#: capplets/url-properties/url-properties.c:104
-msgid "Netscape (new window)"
-msgstr "Netscape (新視窗)"
-
-#: capplets/url-properties/url-properties.c:110
-msgid "Help browser"
-msgstr "輔助說明瀏覽器"
-
-#: capplets/url-properties/url-properties.c:115
-msgid "Help browser (new window)"
-msgstr "輔助說明瀏覽器 (新視窗)"
-
-#: capplets/url-properties/url-properties.c:127
-msgid "Set"
-msgstr "設定"
 
 #: capplets/ui-properties/behavior.desktop.in.in.h:1
 msgid "Behavior"
@@ -1513,11 +1472,6 @@ msgstr "選單"
 #: capplets/ui-properties/behavior-properties.glade.h:18
 msgid "Menus can be torn off"
 msgstr "選單可被撕開"
-
-#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
-#: capplets/ui-properties/behavior-properties.glade.h:19
-msgid "Miscellaneous"
-msgstr "雜項"
 
 #: capplets/ui-properties/behavior-properties.glade.h:20
 msgid "Multiple Documents"
@@ -1626,6 +1580,71 @@ msgstr "當使用筆記本標籤時，將標籤置於："
 #: capplets/ui-properties/behavior-properties.glade.h:46
 msgid "Wherever the Window Manager places them"
 msgstr "由視窗管理程式指定"
+
+#: capplets/url-properties/url.desktop.in.in.h:1
+msgid "Configure which programs are used to display URLs"
+msgstr "設定顯示 URL 所用的程式"
+
+#: capplets/url-properties/url.desktop.in.in.h:2
+msgid "URL Handlers"
+msgstr "URL 處理程式"
+
+#: capplets/url-properties/url-properties.c:49
+msgid "Error initializing the `url-properties' capplet."
+msgstr "初始化 'url-properties' 面板設定程式時發生錯誤。"
+
+#: capplets/url-properties/url-properties.c:72
+msgid "Protocol"
+msgstr "協定"
+
+#: capplets/url-properties/url-properties.c:72
+msgid "Command"
+msgstr "指令"
+
+#: capplets/url-properties/url-properties.c:89
+msgid "handler:"
+msgstr "處理器:"
+
+#. set some commonly used handlers
+#: capplets/url-properties/url-properties.c:99
+msgid "Netscape"
+msgstr "Netscape"
+
+#: capplets/url-properties/url-properties.c:104
+msgid "Netscape (new window)"
+msgstr "Netscape (新視窗)"
+
+#: capplets/url-properties/url-properties.c:110
+msgid "Help browser"
+msgstr "輔助說明瀏覽器"
+
+#: capplets/url-properties/url-properties.c:115
+msgid "Help browser (new window)"
+msgstr "輔助說明瀏覽器 (新視窗)"
+
+#: capplets/url-properties/url-properties.c:127
+msgid "Set"
+msgstr "設定"
+
+#: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.in.h:1
+msgid "Enlightenment"
+msgstr "Enlightenment"
+
+#: capplets/wm-properties/wm-desktops/IceWM.desktop.in.in.h:1
+msgid "Ice WM"
+msgstr "Ice WM"
+
+#: capplets/wm-properties/wm-desktops/Scwm.desktop.in.in.h:1
+msgid "Scwm"
+msgstr "Scwm"
+
+#: capplets/wm-properties/wm-desktops/twm.desktop.in.in.h:1
+msgid "twm"
+msgstr "twm"
+
+#: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.in.h:1
+msgid "Window Maker"
+msgstr "Window Maker"
 
 #: capplets/wm-properties/wm-properties-capplet.c:170
 #, c-format
@@ -1784,106 +1803,87 @@ msgstr ""
 "啟動 'wm-properties-capplet' 時發生初始化錯誤。\n"
 "程式異常終止...\n"
 
-#: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.in.h:1
-msgid "Enlightenment"
-msgstr "Enlightenment"
+#: control-center/capplet-dir-view.c:298 control-center/gnomecc.desktop.in.h:1
+msgid "GNOME Control Center"
+msgstr "GNOME 控制台"
 
-#: capplets/wm-properties/wm-desktops/IceWM.desktop.in.in.h:1
-msgid "Ice WM"
-msgstr "Ice WM"
+#: control-center/capplet-dir-view.c:299
+msgid "Desktop properties manager."
+msgstr "桌面設定總管。"
 
-#: capplets/wm-properties/wm-desktops/Scwm.desktop.in.in.h:1
-msgid "Scwm"
-msgstr "Scwm"
+#: control-center/capplet-dir-view.c:413
+#, c-format
+msgid "Gnome Control Center : %s"
+msgstr "Gnome 控制台：%s"
 
-#: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.in.h:1
-msgid "Window Maker"
-msgstr "Window Maker"
+#: control-center/capplet-dir-view.c:461
+msgid ""
+"No help is available/installed. Please make sure you\n"
+"have the GNOME User's Guide installed on your system."
+msgstr ""
+"輔助說明尚未安裝或不存在，請確定你已經安裝\n"
+"GNOME 的使用者指南到你的系統中。"
 
-#: capplets/wm-properties/wm-desktops/twm.desktop.in.in.h:1
-msgid "twm"
-msgstr "twm"
+#: control-center/capplet-dir-view-html.c:145
+msgid "GNOME Control Center:"
+msgstr "GNOME 控制台："
 
-#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:1
-msgid "Control Center Menu"
-msgstr "控制台選單"
+#: control-center/gnomecc.desktop.in.h:2
+msgid "The GNOME configuration tool"
+msgstr "GNOME 設定工具"
 
-#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:2
-msgid "Sawfish window manager"
-msgstr "Sawfish 視窗管理程式"
+#: control-center/gnomecc.glade.h:2
+msgid "Browse with multiple windows"
+msgstr "使用多個視窗瀏覽"
 
-#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:2
-msgid "Configure window appearance"
-msgstr "設定視窗外觀"
+#: control-center/gnomecc.glade.h:3
+msgid "Browse with single window"
+msgstr "使用單一的視窗瀏覽"
 
-#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:1
-msgid "Configure key shortcuts"
-msgstr "設定捷徑鍵"
+#: control-center/gnomecc.glade.h:4
+msgid "Display control panels as HTML"
+msgstr "使用 HTML 方式顯示控制面板"
 
-#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:2
-msgid "Shortcuts"
-msgstr "捷徑"
+#: control-center/gnomecc.glade.h:5
+msgid "Display control panels as a set of icons"
+msgstr "以圖示集的方式顯示控制面板"
 
-#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:1
-msgid "Configure window focusing"
-msgstr "設定視窗焦點模式"
+#: control-center/gnomecc.glade.h:6
+msgid "Display control panels as a tree"
+msgstr "以樹狀圖方式顯示控制面板"
 
-#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:2
-msgid "Focus behavior"
-msgstr "焦點處理"
+#: control-center/gnomecc.glade.h:7
+msgid "Launch control panels in separate windows"
+msgstr "使用其它視窗開啟控制面板"
 
-#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:1
-msgid "Configure window properties"
-msgstr "設定視窗特性"
+#: control-center/gnomecc.glade.h:8
+msgid "New-control-center"
+msgstr "新控制台"
 
-#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:2
-msgid "Matched Windows"
-msgstr "視窗吻合條件"
+#: control-center/gnomecc.glade.h:9
+msgid "Put control panels in the control center's window"
+msgstr "將控制面板放在控制中心的視窗內"
 
-#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:1
-msgid "Configure window minimization and maximization"
-msgstr "設定視窗最小化及最大化"
+#: control-center/Gnome.directory.in.in.h:1
+msgid "Main"
+msgstr "主選項"
 
-#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:2
-msgid "Minimizing and Maximizing"
-msgstr "最小化及最大化"
+#: control-center/Gnome.directory.in.in.h:2
+msgid "Main Settings"
+msgstr "主要設定"
 
-#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
-msgid "Configure window manager configuration properties"
-msgstr "設定視窗管理程式特性"
+#: control-center/main.c:46
+msgid "Configuration"
+msgstr "設定組態"
 
-#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:2
-msgid "Meta"
-msgstr "總體"
+#: control-center/main.c:72
+msgid "Run the capplet CAPPLET"
+msgstr "執行 CAPPLET 面板控制程式"
 
-#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:1
-msgid "Configure miscellaneous window features"
-msgstr "設定其它視窗特性"
+#: control-center/main.c:72
+msgid "CAPPLET"
+msgstr "CAPPLET"
 
-#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:1
-msgid "Configure window move/resize"
-msgstr "設定視窗移動及改變大小"
-
-#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:2
-msgid "Moving and Resizing"
-msgstr "移動及改變大小"
-
-#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:1
-msgid "Configure window placement"
-msgstr "設定視窗放置模式"
-
-#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:2
-msgid "Placement"
-msgstr "放置模式"
-
-#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:1
-msgid "Enable window manager sound events"
-msgstr "啟用視窗管理程式事件音效"
-
-#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:1
-msgid "Configure workspaces"
-msgstr "設定工作區"
-
-#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:2
-msgid "Workspaces"
-msgstr "工作區"
+#: control-center/main.c:80
+msgid "GNOME Control Center options"
+msgstr "GNOME 控制台選項"

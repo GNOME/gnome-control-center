@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 1.5.0\n"
-"POT-Creation-Date: 2002-02-08 07:58-0500\n"
+"POT-Creation-Date: 2002-04-16 01:49-0500\n"
 "PO-Revision-Date: 2001-11-07 08:54+0200\n"
 "Last-Translator: Görkem Çetin <gorkem@gelecek.com.tr>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
@@ -14,107 +14,476 @@ msgstr ""
 "Content-Type: text/plain; charset=ISO-8859-9\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: capplets/background/background.desktop.in.h:1
+#: archiver/archive.c:604
+#, fuzzy
+msgid "Default location"
+msgstr "Öntanýmlý Eylem"
+
+#: archiver/config-archiver.c:81
+msgid "Store XML data in the archive"
+msgstr ""
+
+#: archiver/config-archiver.c:83
+msgid "Roll back the configuration to a given point"
+msgstr ""
+
+#: archiver/config-archiver.c:85
+msgid "Change the location profile to the given one"
+msgstr ""
+
+#: archiver/config-archiver.c:87
+msgid "Push configuration data out to client machines (UNIMPLEMENTED)"
+msgstr ""
+
+#: archiver/config-archiver.c:89
+msgid "Rename a location to a new name"
+msgstr ""
+
+#: archiver/config-archiver.c:91
+msgid "Add a new location to the archive"
+msgstr ""
+
+#: archiver/config-archiver.c:93
+msgid "Remove a location from the archive"
+msgstr ""
+
+#: archiver/config-archiver.c:95
+msgid "Add a given backend to the given location"
+msgstr ""
+
+#: archiver/config-archiver.c:97
+msgid "Remove the given backend from the given location"
+msgstr ""
+
+#: archiver/config-archiver.c:99
+msgid "Perform garbage collection on the given location"
+msgstr ""
+
+#: archiver/config-archiver.c:105
+msgid "Use the global repository"
+msgstr ""
+
+#: archiver/config-archiver.c:107
+msgid "Identifier of location profile on which to operate"
+msgstr ""
+
+#: archiver/config-archiver.c:108
+msgid "LOCATION"
+msgstr ""
+
+#: archiver/config-archiver.c:110
+msgid "Backend being used for this operation"
+msgstr ""
+
+#: archiver/config-archiver.c:110
+msgid "BACKEND_ID"
+msgstr ""
+
+#: archiver/config-archiver.c:116
+msgid "Store only the differences with the parent location's config"
+msgstr ""
+
+#: archiver/config-archiver.c:118
+msgid "Store only those settings set in the previous config"
+msgstr ""
+
+#: archiver/config-archiver.c:124
+msgid "Date to which to roll back"
+msgstr ""
+
+#: archiver/config-archiver.c:124
+msgid "DATE"
+msgstr ""
+
+#: archiver/config-archiver.c:126
+msgid "Roll back all configuration items"
+msgstr ""
+
+#: archiver/config-archiver.c:128
+msgid "Roll back to the revision REVISION_ID"
+msgstr ""
+
+#: archiver/config-archiver.c:128
+msgid "REVISION_ID"
+msgstr ""
+
+#: archiver/config-archiver.c:130
+msgid "Roll back to the last known revision"
+msgstr ""
+
+#: archiver/config-archiver.c:132
+msgid "Roll back by STEPS revisions"
+msgstr ""
+
+#: archiver/config-archiver.c:132
+msgid "STEPS"
+msgstr ""
+
+#: archiver/config-archiver.c:134
+msgid "Don't run the backend, just dump the output"
+msgstr ""
+
+#: archiver/config-archiver.c:140
+msgid "Parent location for the new location"
+msgstr ""
+
+#: archiver/config-archiver.c:140
+msgid "PARENT"
+msgstr ""
+
+#: archiver/config-archiver.c:142
+msgid "New name to assign to the location"
+msgstr ""
+
+#: archiver/config-archiver.c:142
+msgid "NEW_NAME"
+msgstr ""
+
+#: archiver/config-archiver.c:148
+msgid "Add/remove this backend to/from the master backend list"
+msgstr ""
+
+#: archiver/config-archiver.c:150
+msgid "Full containment"
+msgstr ""
+
+#: archiver/config-archiver.c:152
+msgid "Partial containment"
+msgstr ""
+
+#: archiver/config-archiver.c:307 archiver/location.c:460
+#, fuzzy
+msgid "Default Location"
+msgstr "Öntanýmlý Eylem"
+
+#: archiver/config-archiver.c:368
+#, fuzzy
+msgid "Global archiver options"
+msgstr "Genel panel özellikleri"
+
+#: archiver/config-archiver.c:370
+msgid "Archiver commands"
+msgstr ""
+
+#: archiver/config-archiver.c:372
+msgid "Options for storing data"
+msgstr ""
+
+#: archiver/config-archiver.c:374
+msgid "Options for rolling back"
+msgstr ""
+
+#: archiver/config-archiver.c:376
+msgid "Options for adding or renaming locations"
+msgstr ""
+
+#: archiver/config-archiver.c:379
+msgid "Options for adding and removing backends"
+msgstr ""
+
+#: capplets/background/applier.c:379
+#, c-format
+msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
+msgstr "\"%s\" resmi yüklenemedi; duvar kaðýdý iptal ediliyor."
+
+#: capplets/background/applier.c:518
+msgid "Disabled"
+msgstr "Kapalý"
+
+#: capplets/background/background.desktop.in.in.h:1
 msgid "Background"
 msgstr "Arkaplan"
 
-#: capplets/background/background.desktop.in.h:2
+#: capplets/background/background.desktop.in.in.h:2
 msgid "Configuration of the desktop's background"
 msgstr "Masaüstü arkaplan ayarlarý"
 
-#: capplets/background/background-properties-capplet.c:462
-#, c-format
-msgid ""
-"Couldn't find the file '%s'.\n"
-"\n"
-"Please make sure it exists and try again, or choose a different background "
-"picture."
+#: capplets/background/background-properties-capplet.c:46
+msgid "Set background image."
 msgstr ""
 
-#: capplets/background/background-properties-capplet.c:487
-#, c-format
-msgid ""
-"I don't know how to open the file '%s'.\n"
-"Perhaps its a kind of picture that is not yet supported.\n"
-"\n"
-"Please select a different picture instead."
+#: capplets/background/background-properties-capplet.c:46
+msgid "IMAGE-FILE"
 msgstr ""
 
-#: capplets/background/background-properties-capplet.c:794
-#: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:615
-#: capplets/keyboard/gnome-keyboard-properties.c:267
-#: capplets/mouse/gnome-mouse-properties.c:494
-#: capplets/sound/sound-properties-capplet.c:143
-msgid "Retrieve and store legacy settings"
-msgstr "Eski ayarlarý al ve sakla"
+#: capplets/background/background-properties.glade.h:1
+#, fuzzy
+msgid "Background colors"
+msgstr "Arkaplan"
 
-#: capplets/background/background-properties-capplet.c:830
-msgid "Background Properties"
+#: capplets/background/background-properties.glade.h:2
+#, fuzzy
+msgid "Background picture"
 msgstr "Arkaplan Özellikleri"
 
-#: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
+#: capplets/background/background-properties.glade.h:3
+msgid "Centered"
+msgstr ""
+
+#: capplets/background/background-properties.glade.h:4
+msgid "Horizontal gradient"
+msgstr ""
+
+#: capplets/background/background-properties.glade.h:5
+#, fuzzy
+msgid "Image:"
+msgstr "Resimler"
+
+#: capplets/background/background-properties.glade.h:6
+msgid "Opacity (percent):"
+msgstr ""
+
+#: capplets/background/background-properties.glade.h:7
+msgid "Pick a color"
+msgstr ""
+
+#: capplets/background/background-properties.glade.h:8
+msgid "Scaled (keep aspect ratio)"
+msgstr ""
+
+#: capplets/background/background-properties.glade.h:9
+msgid "Solid color"
+msgstr ""
+
+#: capplets/background/background-properties.glade.h:10
+msgid "Stretched"
+msgstr ""
+
+#: capplets/background/background-properties.glade.h:11
+msgid "Style:"
+msgstr ""
+
+#: capplets/background/background-properties.glade.h:12
+#, fuzzy
+msgid "Tiled"
+msgstr "Kapalý"
+
+#: capplets/background/background-properties.glade.h:13
+msgid "Use a picture for the background"
+msgstr ""
+
+#: capplets/background/background-properties.glade.h:14
+msgid "Vertical gradient"
+msgstr ""
+
+#: capplets/common/capplet-util.c:418
 msgid "Just apply settings and quit"
 msgstr "Ayarlarýn tamamýný uygula ve çýk"
 
-#: capplets/common/gconf-property-editor.c:144
-msgid "Key"
+#: capplets/common/capplet-util.c:420
+msgid "Initialize the session"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:145
-msgid "GConf key to which this property editor is attached"
+#: capplets/common/capplet-util.c:422
+msgid "Retrieve and store legacy settings"
+msgstr "Eski ayarlarý al ve sakla"
+
+#: capplets/common/capplet-util.c:431
+msgid "Capplet options"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:151
-msgid "Callback"
-msgstr ""
-
-#: capplets/common/gconf-property-editor.c:152
-msgid "Issue this callback when the value associated with key gets changed"
-msgstr ""
-
-#: capplets/common/gconf-property-editor.c:157
-msgid "Change set"
-msgstr ""
-
-#: capplets/common/gconf-property-editor.c:158
-msgid ""
-"GConf change set containing data to be forwarded to the gconf client on apply"
-msgstr ""
-
-#: capplets/common/gconf-property-editor.c:163
-msgid "Conversion to widget callback"
-msgstr ""
-
-#: capplets/common/gconf-property-editor.c:164
-msgid ""
-"Callback to be issued when data are to be converted from GConf to the widget"
-msgstr ""
-
-#: capplets/common/gconf-property-editor.c:169
-msgid "Conversion from widget callback"
-msgstr ""
-
-#: capplets/common/gconf-property-editor.c:170
-msgid ""
-"Callback to be issued when data are to be converted to GConf from the widget"
-msgstr ""
-
-#: capplets/common/gconf-property-editor.c:175
-msgid "UI Control"
-msgstr ""
-
-#: capplets/common/gconf-property-editor.c:176
-msgid "Object that controls the property (normally a widget)"
-msgstr ""
-
-#: capplets/default-applications/default-applications.desktop.in.h:1
+#: capplets/default-applications/default-applications.desktop.in.in.h:1
 msgid "Choose the applications used by default"
 msgstr "Öntanýmlý uygulamalarý seçiniz"
 
-#: capplets/default-applications/default-applications.desktop.in.h:2
+#: capplets/default-applications/default-applications.desktop.in.in.h:2
 msgid "Default Applications"
 msgstr "Öntanýmlý Uygulamalar"
+
+#: capplets/default-applications/interface.c:108
+msgid "Gnome Default Editor"
+msgstr ""
+
+#: capplets/default-applications/interface.c:125
+#, fuzzy
+msgid "Select an Editor"
+msgstr "Bir simge seç"
+
+#: capplets/default-applications/interface.c:134
+msgid "With this option, you can select a predefined Editor as your default"
+msgstr ""
+
+#: capplets/default-applications/interface.c:154
+#, fuzzy
+msgid "Custom Editor"
+msgstr "Özel"
+
+#: capplets/default-applications/interface.c:163
+msgid "With this option you can create your own default editor"
+msgstr ""
+
+#: capplets/default-applications/interface.c:174
+#: capplets/default-applications/interface.c:305
+#: capplets/default-applications/interface.c:436
+msgid "Start in Terminal"
+msgstr ""
+
+#: capplets/default-applications/interface.c:182
+msgid "Does this editor need to start in an xterm?"
+msgstr ""
+
+#: capplets/default-applications/interface.c:184
+msgid "Accepts Line Number"
+msgstr ""
+
+#: capplets/default-applications/interface.c:192
+msgid "Does this editor accept line numbers from the command line?"
+msgstr ""
+
+#: capplets/default-applications/interface.c:203
+#: capplets/default-applications/interface.c:334
+#: capplets/default-applications/interface.c:465
+#: capplets/default-applications/interface.c:576
+#: capplets/wm-properties/wm-properties-capplet.c:806
+msgid "Command:"
+msgstr "Komut:"
+
+#: capplets/default-applications/interface.c:221
+msgid "Please enter the command line used to start this editor"
+msgstr ""
+
+#: capplets/default-applications/interface.c:232
+msgid "Text Editor"
+msgstr ""
+
+#: capplets/default-applications/interface.c:239
+msgid "Gnome Default Web Browser"
+msgstr ""
+
+#: capplets/default-applications/interface.c:256
+#, fuzzy
+msgid "Select a Web Browser"
+msgstr "Yardým Gösterici"
+
+#: capplets/default-applications/interface.c:265
+msgid ""
+"With this option, you can select a predefined Web Browser as your default"
+msgstr ""
+
+#: capplets/default-applications/interface.c:285
+msgid "Custom Web Browser"
+msgstr ""
+
+#: capplets/default-applications/interface.c:294
+msgid "With this option you can create your own default web browser"
+msgstr ""
+
+#: capplets/default-applications/interface.c:313
+msgid "Does this web browser need to display in an xterm?"
+msgstr ""
+
+#: capplets/default-applications/interface.c:315
+msgid "Understands Netscape Remote Control"
+msgstr ""
+
+#: capplets/default-applications/interface.c:323
+msgid ""
+"Does this web browser support the netscape remote control protocol?  If in "
+"doubt, and this web browser isn't Netscape or Mozilla, it probably doesn't."
+msgstr ""
+
+#: capplets/default-applications/interface.c:352
+msgid "Please enter the command line used to start this web browser"
+msgstr ""
+
+#: capplets/default-applications/interface.c:363
+#, fuzzy
+msgid "Web Browser"
+msgstr "Yardým Gösterici"
+
+#: capplets/default-applications/interface.c:370
+msgid "Default Help Viewer"
+msgstr ""
+
+#: capplets/default-applications/interface.c:387
+#, fuzzy
+msgid "Select a Viewer"
+msgstr "Bir dosya seçin..."
+
+#: capplets/default-applications/interface.c:396
+msgid "With this option you can select a predefined help viewer."
+msgstr ""
+
+#: capplets/default-applications/interface.c:416
+#, fuzzy
+msgid "Custom Help Viewer"
+msgstr "Göstericiyi Kullan"
+
+#: capplets/default-applications/interface.c:425
+msgid "With this option you can create your own help viewer"
+msgstr ""
+
+#: capplets/default-applications/interface.c:444
+msgid "Does this help viewer need an xterm for display?"
+msgstr ""
+
+#: capplets/default-applications/interface.c:446
+msgid "Accepts URLs"
+msgstr ""
+
+#: capplets/default-applications/interface.c:454
+msgid "Does this help viewer allow URLs for help?"
+msgstr ""
+
+#: capplets/default-applications/interface.c:483
+msgid "Please enter the command line used to start this help viewer"
+msgstr ""
+
+#: capplets/default-applications/interface.c:494
+#, fuzzy
+msgid "Help Viewer"
+msgstr "Göstericiyi Kullan"
+
+#: capplets/default-applications/interface.c:501
+#, fuzzy
+msgid "Default Terminal"
+msgstr "Öntanýmlý Eylem"
+
+#: capplets/default-applications/interface.c:518
+#, fuzzy
+msgid "Select a Terminal"
+msgstr "Kurulacak bir tema seçiniz"
+
+#: capplets/default-applications/interface.c:527
+msgid "With this option you can select a predefined terminal."
+msgstr ""
+
+#: capplets/default-applications/interface.c:547
+msgid "Custom Terminal"
+msgstr ""
+
+#: capplets/default-applications/interface.c:556
+msgid "With this option you can create your own terminal"
+msgstr ""
+
+#: capplets/default-applications/interface.c:586
+msgid "Exec Flag:"
+msgstr ""
+
+#: capplets/default-applications/interface.c:604
+msgid ""
+"Please enter the flag used by this terminal to specify the command to run on "
+"startup.  For example, in 'xterm' this would be '-e'."
+msgstr ""
+
+#: capplets/default-applications/interface.c:614
+msgid "Please enter the command line used to start this terminal"
+msgstr ""
+
+#: capplets/default-applications/interface.c:625
+msgid "Terminal"
+msgstr ""
+
+#: capplets/default-applications/support.c:100
+#: capplets/default-applications/support.c:138
+#, c-format
+msgid "Couldn't find pixmap file: %s"
+msgstr ""
+
+#: capplets/default-applications/support.c:116
+#, c-format
+msgid "Couldn't create pixmap from file: %s"
+msgstr ""
 
 #: capplets/desktop-links/Advanced.directory.in.in.h:1
 msgid "Advanced"
@@ -124,24 +493,24 @@ msgstr "Geliþmiþ"
 msgid "Advanced Settings"
 msgstr "Geliþmiþ Ayarlar"
 
-#: capplets/desktop-links/cd.desktop.in.in.h:1
-msgid "CD Properties"
-msgstr "CD Özellikleri"
+#: capplets/desktop-links/gnome-hint-properties.desktop.in.h:1
+msgid "Options for the startup hint dialog"
+msgstr ""
 
-#: capplets/desktop-links/cd.desktop.in.in.h:2
-#, fuzzy
-msgid "Configure handling of CD devices"
-msgstr "Ekran koruyucu ayarlarýný yap"
+#: capplets/desktop-links/gnome-hint-properties.desktop.in.h:2
+msgid "Startup Hint"
+msgstr ""
 
-#: capplets/desktop-links/legacy-applications.desktop.in.in.h:1
-msgid "Legacy Applications"
-msgstr "Özel Uygulamalar"
+#: capplets/desktop-links/panel.desktop.in.in.h:1
+msgid "Global panel properties"
+msgstr "Genel panel özellikleri"
 
-#: capplets/desktop-links/legacy-applications.desktop.in.in.h:2
-msgid "Legacy applications settings (grdb)"
-msgstr "Özel uygulama ayarlarý (grdb)"
+#: capplets/desktop-links/panel.desktop.in.in.h:2
+msgid "Panel"
+msgstr "Panel"
 
 #: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
+#: control-center/gnomecc.glade.h:1
 msgid "Appearance"
 msgstr "Görünüm"
 
@@ -229,7 +598,7 @@ msgid "Enable window manager sound events"
 msgstr "_Güç yönetimini etkinleþtir"
 
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
-#: capplets/sound/sound.desktop.in.h:2
+#: capplets/sound/sound.desktop.in.in.h:2
 msgid "Sound"
 msgstr "Ses"
 
@@ -241,6 +610,15 @@ msgstr "Çalýþma alanlarýný yapýlandýr"
 msgid "Workspaces"
 msgstr "Çalýþma alanlarý"
 
+#: capplets/desktop-links/screensaver.desktop.in.in.h:1
+#, fuzzy
+msgid "Configure the settings of the screensaver"
+msgstr "Bu ekran koruyucu için ayarlama yok."
+
+#: capplets/desktop-links/screensaver.desktop.in.in.h:2
+msgid "Screensaver"
+msgstr "Ekran Koruyucusu"
+
 #: capplets/desktop-links/session.desktop.in.in.h:1
 msgid "Configure which non-session aware programs are started up"
 msgstr ""
@@ -249,536 +627,88 @@ msgstr ""
 msgid "Startup Programs"
 msgstr "Baþlangýç Programlarý"
 
-#.
-#. * Translatable strings file
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/file-types/category-names.h:7
-msgid "Documents"
-msgstr "Belgeler"
+#: capplets/file-types/file-types-capplet.c:735
+#: capplets/file-types/file-types-capplet.c:1883
+msgid "MIME Type"
+msgstr "MIME Türü"
 
-#: capplets/file-types/category-names.h:8
-msgid "Word Processor"
-msgstr "Kelime Ýþlemci"
+#: capplets/file-types/file-types-capplet.c:742
+msgid "Change Icon"
+msgstr "Simgeyi Deðiþtir"
 
-#: capplets/file-types/category-names.h:9
-msgid "Published Materials"
+#: capplets/file-types/file-types-capplet.c:749
+msgid "Change File Extensions"
+msgstr "Dosya Uzantýlarýný Deðiþtir"
+
+#: capplets/file-types/file-types-capplet.c:757
+msgid "Default Action:"
+msgstr "Öntanýmlý Eylem:"
+
+#: capplets/file-types/file-types-capplet.c:769
+msgid "Use Viewer"
+msgstr "Göstericiyi Kullan"
+
+#: capplets/file-types/file-types-capplet.c:775
+msgid "Open With Application"
+msgstr "Uygulama ile aç"
+
+#: capplets/file-types/file-types-capplet.c:786
+msgid "Edit List"
+msgstr "Listeyi Düzenle"
+
+#: capplets/file-types/file-types-capplet.c:811
+msgid "Add New MIME Type..."
+msgstr "Yeni MIME Türü Ekle..."
+
+#: capplets/file-types/file-types-capplet.c:817
+msgid "Delete This MIME Type"
+msgstr "Bu MIME Türünü Sil"
+
+#: capplets/file-types/file-types-capplet.c:828
+msgid "Revert to System Defaults"
+msgstr "Öntanýmlý Deðerlere Dön"
+
+#: capplets/file-types/file-types-capplet.c:1075
+#: capplets/file-types/file-types-capplet.c:1219
+msgid "None"
+msgstr "Hiçbiri"
+
+#: capplets/file-types/file-types-capplet.c:1324
+msgid ""
+"Reverting to system settings will lose any changes\n"
+"you have ever made to File Types and Programs.\n"
+"Revert anyway?"
 msgstr ""
+"Öntanýmlý deðerlere dönerek Dosya Türleri ve Uygulamalarda\n"
+"yaptýðýnýz tüm deðiþiklikleri kaybedeceksiniz.\n"
+"Öntanýmlý deðerlere dönülsün mü?"
 
-#: capplets/file-types/category-names.h:10
-msgid "Spreadsheet"
-msgstr "Hesap tablosu"
+#. Add default action to fourth column
+#: capplets/file-types/file-types-capplet.c:1393
+#: capplets/file-types/file-types-capplet.c:1593
+#: capplets/file-types/file-types-capplet.c:1719
+msgid "none"
+msgstr "yok"
 
-#: capplets/file-types/category-names.h:11
-msgid "Presentation"
-msgstr "Sunum"
+#: capplets/file-types/file-types-capplet.c:1434
+#: capplets/file-types/file-types-capplet.c:1620
+#: capplets/file-types/file-types-capplet.c:1763
+#, c-format
+msgid "View as %s"
+msgstr "%s olarak göster"
 
-#: capplets/file-types/category-names.h:12
-msgid "Diagram"
-msgstr "Diagram"
-
-#: capplets/file-types/category-names.h:13
-msgid "TeX"
-msgstr "TeX"
-
-#: capplets/file-types/category-names.h:14
-msgid "Vector Graphics"
-msgstr "Vektör Grafik"
-
-#: capplets/file-types/category-names.h:15
-msgid "World Wide Web"
-msgstr "WWW"
-
-#: capplets/file-types/category-names.h:16
-msgid "Plain Text"
-msgstr "Düz Metin"
-
-#: capplets/file-types/category-names.h:17
-msgid "Extended Markup Language (XML)"
-msgstr "XML"
-
-#: capplets/file-types/category-names.h:18
-msgid "Information"
-msgstr "Bilgi"
-
-#: capplets/file-types/category-names.h:19
-msgid "Financial"
-msgstr "Finans"
-
-#: capplets/file-types/category-names.h:20
-msgid "Calendar"
-msgstr "Takvim"
-
-#: capplets/file-types/category-names.h:21
-msgid "Contacts"
-msgstr "Baðlantýlar"
-
-#: capplets/file-types/category-names.h:22
-msgid "Packages"
-msgstr "Paketler"
-
-#: capplets/file-types/category-names.h:23
-msgid "Software Development"
-msgstr "Yazýlým Geliþtirme"
-
-#: capplets/file-types/category-names.h:24
-msgid "Source Code"
-msgstr "Kaynak Kodu"
-
-#: capplets/file-types/category-names.h:25
-msgid "Audio"
-msgstr "Ses"
-
-#: capplets/file-types/category-names.h:26
-msgid "Images"
-msgstr "Resimler"
-
-#: capplets/file-types/category-names.h:27
-msgid "Video"
-msgstr "Video"
-
-#: capplets/file-types/file-types-capplet.c:212
 #: capplets/file-types/file-types-capplet.c:1882
 msgid "Description"
 msgstr "Açýklama"
 
-#: capplets/file-types/file-types-capplet.c:219
-#: capplets/mime-type/new-mime-window.c:39
-msgid "Extensions"
-msgstr "Uzantýlar"
-
-#: capplets/file-types/file-types.desktop.in.h:1
-#: capplets/file-types/file-types.desktop.in.in.h:1
-msgid "File Types and Programs"
-msgstr "Dosya Türleri ve Programlar"
-
-#: capplets/file-types/file-types.desktop.in.h:2
-#: capplets/file-types/file-types.desktop.in.in.h:2
-msgid "Specify which programs are used to open or view each file type"
-msgstr ""
-
-#: capplets/file-types/mime-category-edit-dialog.c:137
-msgid "Edit file category"
-msgstr "Dosya kategorisini düzenle"
-
-#: capplets/file-types/mime-category-edit-dialog.c:171
-#: capplets/file-types/mime-edit-dialog.c:204
-#: capplets/file-types/service-edit-dialog.c:166
-#: capplets/file-types/service-edit-dialog.c:167
-msgid "Model"
-msgstr "Model"
-
-#: capplets/file-types/mime-category-edit-dialog.c:172
-msgid "GtkTreeModel that contains the category data"
-msgstr ""
-
-#: capplets/file-types/mime-category-edit-dialog.c:177
-msgid "MIME category info"
-msgstr "MIME kategori bilgisi"
-
-#: capplets/file-types/mime-category-edit-dialog.c:178
-msgid "Structure containing information on the MIME category"
-msgstr ""
-
-#: capplets/file-types/mime-category-edit-dialog.c:343
-#: capplets/file-types/mime-edit-dialog.c:392
-#: capplets/file-types/mime-edit-dialog.c:492
-#: capplets/file-types/service-edit-dialog.c:351
-#: capplets/file-types/service-edit-dialog.c:397
-msgid "Custom"
-msgstr "Özel"
-
 #: capplets/file-types/file-types-capplet.c:1884
-#: capplets/file-types/mime-edit-dialog.c:164
 #: capplets/mime-type/mime-data.c:385
 msgid "Extension"
 msgstr "Uzantý"
 
-#: capplets/file-types/mime-edit-dialog.c:167
-msgid "Edit file type"
-msgstr "Dosya türünü düzenle"
-
-#: capplets/file-types/mime-edit-dialog.c:205
-msgid "Underlying model to notify when Ok is clicked"
-msgstr ""
-
-#: capplets/file-types/mime-edit-dialog.c:212
-msgid "MIME type information"
-msgstr "MIME tür bilgisi"
-
-#: capplets/file-types/mime-edit-dialog.c:213
-msgid "Structure with data on the MIME type"
-msgstr ""
-
-#: capplets/file-types/mime-edit-dialog.c:219
-msgid "Is add dialog"
-msgstr ""
-
-#: capplets/file-types/mime-edit-dialog.c:220
-msgid "True if this dialog is for adding a MIME type"
-msgstr ""
-
-#: capplets/file-types/file-types-capplet.c:1075
-#: capplets/file-types/file-types-capplet.c:1219
-#: capplets/file-types/mime-edit-dialog.c:387
-#: capplets/file-types/mime-edit-dialog.c:442
-msgid "None"
-msgstr "Hiçbiri"
-
-#: capplets/file-types/mime-edit-dialog.c:673
-msgid ""
-"Invalid MIME type. Please enter a valid MIME type, or leave the field blank "
-"to have one generated for you."
-msgstr ""
-"Geçersiz MIME türü. Lütfen geçerli bir MIME türü yazýn, ya da boþ býrakýn."
-
-#: capplets/file-types/mime-edit-dialog.c:684
-msgid "There already exists a MIME type of that name."
-msgstr "Bu isimde bir MIME türü zaten var."
-
-#: capplets/file-types/mime-edit-dialog.c:748
-msgid "Category"
-msgstr "Kategori"
-
-#: capplets/file-types/mime-edit-dialog.c:753
-msgid "Choose a file category"
-msgstr "Bir dosya kategorisi seçin"
-
-#: capplets/file-types/mime-types-model.c:167
-#: capplets/file-types/mime-types-model.c:168
-msgid "Model for categories only"
-msgstr ""
-
-#: capplets/file-types/mime-types-model.c:420
-msgid "Internet Services"
-msgstr "Ýnternet Servisleri"
-
-#: capplets/file-types/service-edit-dialog.c:133
-msgid "Edit service information"
-msgstr "Servis bilgisini düzenle"
-
-#: capplets/file-types/service-edit-dialog.c:174
-msgid "Service info"
-msgstr "Servis bilgisi"
-
-#: capplets/file-types/service-edit-dialog.c:175
-msgid "Structure containing service information"
-msgstr ""
-
-#: capplets/file-types/service-edit-dialog.c:181
-msgid "Is add"
-msgstr ""
-
-#: capplets/file-types/service-edit-dialog.c:182
-msgid "TRUE if this is an add service dialog"
-msgstr ""
-
-#: capplets/file-types/service-edit-dialog.c:489
-#, fuzzy
-msgid "Please enter a protocol name."
-msgstr "Lütfen aþaðýdaki satýra bir komut girin."
-
-#: capplets/file-types/service-edit-dialog.c:502
-msgid ""
-"Invalid protocol name. Please enter a protocol name without any spaces or "
-"punctuation."
-msgstr ""
-
-#: capplets/file-types/service-edit-dialog.c:515
-msgid "There is already a protocol by that name."
-msgstr ""
-
-#: capplets/file-types/service-info.c:44
-msgid "Unknown service types"
-msgstr ""
-
-#: capplets/file-types/service-info.c:45
-msgid "World wide web"
-msgstr ""
-
-#: capplets/file-types/service-info.c:46
-msgid "File transfer protocol"
-msgstr "Dosya aktarým protokolü"
-
-#: capplets/file-types/service-info.c:47
-msgid "Detailed documentation"
-msgstr "Ayrýntýlý belge"
-
-#: capplets/file-types/service-info.c:48
-msgid "Manual pages"
-msgstr "Kýlavuz sayfalarý"
-
-#: capplets/file-types/service-info.c:49
-msgid "Electronic mail transmission"
-msgstr "Elektronik posta aktarýmý"
-
-#: capplets/keyboard/gnome-keyboard-properties.c:263
-#: capplets/keyboard/gnome-keyboard-properties.c:265
-#: capplets/sound/sound-properties-capplet.c:139
-#: capplets/sound/sound-properties-capplet.c:141
-msgid ""
-"Just apply settings and quit (compatibility only; now handled by daemon)"
-msgstr ""
-
-#: capplets/keyboard/keyboard.desktop.in.h:1
-msgid "Keyboard"
-msgstr "Klavye"
-
-#: capplets/keyboard/keyboard.desktop.in.h:2
-msgid "Keyboard Properties"
-msgstr "Klavye Özellikleri"
-
-#: capplets/mouse/gnome-mouse-properties.c:519
-#: capplets/mouse/mouse.desktop.in.h:2
-msgid "Mouse Properties"
-msgstr "Fare Özellikleri"
-
-#: capplets/mouse/mouse.desktop.in.h:1
-msgid "Mouse"
-msgstr "Fare"
-
-#: capplets/screensaver/screensaver.desktop.in.h:1
-#, fuzzy
-msgid "Configure the settings of the screensaver"
-msgstr "Bu ekran koruyucu için ayarlama yok."
-
-#: capplets/screensaver/screensaver.desktop.in.h:2
-msgid "Screensaver"
-msgstr "Ekran Koruyucusu"
-
-#: capplets/sound/sound.desktop.in.h:1
-msgid "Configure GNOME's use of sound"
-msgstr "GNOME ses kullaným ayarlarý"
-
-#: capplets/sound/sound-properties-capplet.c:171
-msgid "Sound properties"
-msgstr "Ses özellikleri"
-
-#. just 8 short names that will serve as samples for titles in demo
-#: capplets/theme-switcher/control/control.c:19
-#: capplets/theme-switcher/demo.c:56
-msgid "Eenie"
-msgstr "Gubarcýk"
-
-#: capplets/theme-switcher/control/control.c:19
-#: capplets/theme-switcher/demo.c:57
-msgid "Mynie"
-msgstr "Helvacýk"
-
-#: capplets/theme-switcher/control/control.c:19
-#: capplets/theme-switcher/demo.c:58
-msgid "Catcha"
-msgstr "Atili"
-
-#: capplets/theme-switcher/control/control.c:19
-#: capplets/theme-switcher/demo.c:59
-msgid "By Its"
-msgstr "Batili"
-
-#: capplets/theme-switcher/control/control.c:20
-#: capplets/theme-switcher/demo.c:56
-msgid "Meenie"
-msgstr "Voltran"
-
-#: capplets/theme-switcher/control/control.c:20
-#: capplets/theme-switcher/demo.c:57
-msgid "Moe"
-msgstr "Minnoþ"
-
-#: capplets/theme-switcher/control/control.c:20
-#: capplets/theme-switcher/demo.c:58
-msgid "Tiger"
-msgstr "Tiger"
-
-#: capplets/theme-switcher/control/control.c:20
-#: capplets/theme-switcher/demo.c:59
-msgid "Toe"
-msgstr "Enik"
-
-#: capplets/theme-switcher/control/control.c:38
-#: capplets/theme-switcher/demo.c:118
-msgid "Selected themes from above will be tested by previewing here."
-msgstr ""
-
-#. column one
-#: capplets/theme-switcher/control/control.c:43
-#: capplets/theme-switcher/demo.c:123
-msgid "Sample Button"
-msgstr "Örnek Düðme"
-
-#: capplets/theme-switcher/control/control.c:47
-#: capplets/theme-switcher/demo.c:127
-msgid "Sample Check Button"
-msgstr "Örnek Kontrol Düðmesi"
-
-#: capplets/theme-switcher/control/control.c:53
-#: capplets/theme-switcher/demo.c:132
-msgid "Sample Text Entry Field"
-msgstr "Örnek Metin Yazma Bölgesi"
-
-#: capplets/theme-switcher/control/control.c:64
-#: capplets/theme-switcher/demo.c:143
-msgid "Submenu"
-msgstr "Alt menü"
-
-#: capplets/theme-switcher/control/control.c:69
-#: capplets/theme-switcher/demo.c:150
-msgid "Item 1"
-msgstr "1. Öðe"
-
-#: capplets/theme-switcher/control/control.c:71
-#: capplets/theme-switcher/demo.c:153
-msgid "Another item"
-msgstr "Diðer bir öðe"
-
-#: capplets/theme-switcher/control/control.c:75
-#: capplets/theme-switcher/demo.c:158
-msgid "Radio Button 1"
-msgstr "1. Radyo Düðmesi"
-
-#: capplets/theme-switcher/control/control.c:81
-#: capplets/theme-switcher/demo.c:164
-msgid "Radio Button 2"
-msgstr "2. Radyo Düðmesi"
-
-#: capplets/theme-switcher/control/control.c:102
-#: capplets/theme-switcher/demo.c:54
-msgid "One"
-msgstr "Bir"
-
-#: capplets/theme-switcher/control/control.c:108
-#: capplets/theme-switcher/demo.c:54
-msgid "Two"
-msgstr "Ýki"
-
-#: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
-#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:1
-msgid "Gtk+ Theme Selector"
-msgstr "Gtk+ Tema Seçici"
-
-#: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
-#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:2
-msgid "Select which gtk+ theme to use"
-msgstr ""
-
-#: capplets/theme-switcher/gui.c:118 capplets/theme-switcher/main.c:213
-msgid "Select a theme to install"
-msgstr "Kurulacak bir tema seçiniz"
-
-#: capplets/ui-properties/behavior.desktop.in.h:1
-#: capplets/ui-properties/behavior.desktop.in.in.h:2
-msgid "Sets the default behavior of GNOME applications"
-msgstr ""
-
-#: capplets/ui-properties/behavior.desktop.in.h:2
-msgid "Toolbars & Menus"
-msgstr "Araç çubuklarý & Menüler"
-
-#: control-center/capplet-dir-view.c:146
-msgid "Layout"
-msgstr ""
-
-#: control-center/capplet-dir-view.c:147
-msgid "Layout to use for this view of the capplets"
-msgstr ""
-
-#: control-center/capplet-dir-view.c:153
-msgid "Capplet directory object"
-msgstr ""
-
-#: control-center/capplet-dir-view.c:154
-msgid "Capplet directory that this view is viewing"
-msgstr ""
-
-#: control-center/capplet-dir-view.c:308 control-center/gnomecc.desktop.in.h:1
-msgid "GNOME Control Center"
-msgstr "GNOME Kontrol Merkezi"
-
-#: control-center/capplet-dir-view.c:311
-msgid "Desktop properties manager."
-msgstr "Masaüstü özellikleri yöneticisi."
-
-#: control-center/capplet-dir-view.c:445
-#, c-format
-msgid "Gnome Control Center : %s"
-msgstr "Gnome Kontrol Merkezi: %s"
-
-#: control-center/capplet-dir-view.c:488
-msgid ""
-"No help is available/installed. Please make sure you\n"
-"have the GNOME User's Guide installed on your system."
-msgstr ""
-"Yardým yüklenmemiþ ya da yok. Lütfen GNOME Kullanýcý\n"
-"Kýlavuzunun yüklendiðine emin olun."
-
-#: capplets/theme-switcher/gui.c:370
-#: capplets/wm-properties/wm-properties-capplet.c:671
-#: control-center/capplet-dir-view.c:491
-msgid "Close"
-msgstr "Kapat"
-
-#: control-center/capplet-dir-view-list.c:325
-msgid "GNOME Control Center: %s"
-msgstr "GNOME Kontrol Merkezi: %s"
-
-#: control-center/gnomecc.desktop.in.h:2
-msgid "The GNOME configuration tool"
-msgstr "GNOME yapýlandýrma aracý"
-
-#: libbackground/applier.c:239
-msgid "Type"
-msgstr "Tür"
-
-#: libbackground/applier.c:240
-msgid ""
-"Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
-"for preview"
-msgstr ""
-
-#: libbackground/applier.c:402
-#, c-format
-msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
-msgstr "\"%s\" resmi yüklenemedi; duvar kaðýdý iptal ediliyor."
-
-#: libbackground/applier.c:475
-msgid "Disabled"
-msgstr "Kapalý"
-
-#: libsounds/sound-view.c:99
-msgid "The sound file for this event does not exist."
-msgstr ""
-
-#: libsounds/sound-view.c:101
-msgid ""
-"The sound file for this event does not exist.\n"
-"You may want to install the gnome-audio package\n"
-"for a set of default sounds."
-msgstr ""
-
-#: libsounds/sound-view.c:154
-msgid "Event"
-msgstr "Olay"
-
-#: libsounds/sound-view.c:154
-msgid "File to Play"
-msgstr "Çalýnacak Dosya"
-
-#: libsounds/sound-view.c:187
-msgid "Play"
-msgstr "Çal"
-
-#: libsounds/sound-view.c:193
-msgid "Select sound file"
-msgstr "Ses dosyasýný seçin"
-
-#: capplets/desktop-links/panel.desktop.in.in.h:1
-msgid "Global panel properties"
-msgstr "Genel panel özellikleri"
-
-#: capplets/desktop-links/panel.desktop.in.in.h:2
-msgid "Panel"
-msgstr "Panel"
+#: capplets/file-types/file-types-capplet.c:1885
+msgid "Default Action"
+msgstr "Öntanýmlý Eylem"
 
 #: capplets/file-types/file-types-capplet-dialogs.c:387
 msgid "Edit Applications List"
@@ -937,74 +867,13 @@ msgstr "Birden çok dosya açabilir"
 msgid "Can open from URI"
 msgstr "URI'den açýlabilir"
 
-#: capplets/file-types/file-types-capplet.c:735
-#: capplets/file-types/file-types-capplet.c:1883
-msgid "MIME Type"
-msgstr "MIME Türü"
+#: capplets/file-types/file-types.desktop.in.in.h:1
+msgid "File Types and Programs"
+msgstr "Dosya Türleri ve Programlar"
 
-#: capplets/file-types/file-types-capplet.c:742
-msgid "Change Icon"
-msgstr "Simgeyi Deðiþtir"
-
-#: capplets/file-types/file-types-capplet.c:749
-msgid "Change File Extensions"
-msgstr "Dosya Uzantýlarýný Deðiþtir"
-
-#: capplets/file-types/file-types-capplet.c:757
-msgid "Default Action:"
-msgstr "Öntanýmlý Eylem:"
-
-#: capplets/file-types/file-types-capplet.c:769
-msgid "Use Viewer"
-msgstr "Göstericiyi Kullan"
-
-#: capplets/file-types/file-types-capplet.c:775
-msgid "Open With Application"
-msgstr "Uygulama ile aç"
-
-#: capplets/file-types/file-types-capplet.c:786
-msgid "Edit List"
-msgstr "Listeyi Düzenle"
-
-#: capplets/file-types/file-types-capplet.c:811
-msgid "Add New MIME Type..."
-msgstr "Yeni MIME Türü Ekle..."
-
-#: capplets/file-types/file-types-capplet.c:817
-msgid "Delete This MIME Type"
-msgstr "Bu MIME Türünü Sil"
-
-#: capplets/file-types/file-types-capplet.c:828
-msgid "Revert to System Defaults"
-msgstr "Öntanýmlý Deðerlere Dön"
-
-#: capplets/file-types/file-types-capplet.c:1324
-msgid ""
-"Reverting to system settings will lose any changes\n"
-"you have ever made to File Types and Programs.\n"
-"Revert anyway?"
+#: capplets/file-types/file-types.desktop.in.in.h:2
+msgid "Specify which programs are used to open or view each file type"
 msgstr ""
-"Öntanýmlý deðerlere dönerek Dosya Türleri ve Uygulamalarda\n"
-"yaptýðýnýz tüm deðiþiklikleri kaybedeceksiniz.\n"
-"Öntanýmlý deðerlere dönülsün mü?"
-
-#. Add default action to fourth column
-#: capplets/file-types/file-types-capplet.c:1393
-#: capplets/file-types/file-types-capplet.c:1593
-#: capplets/file-types/file-types-capplet.c:1719
-msgid "none"
-msgstr "yok"
-
-#: capplets/file-types/file-types-capplet.c:1434
-#: capplets/file-types/file-types-capplet.c:1620
-#: capplets/file-types/file-types-capplet.c:1763
-#, c-format
-msgid "View as %s"
-msgstr "%s olarak göster"
-
-#: capplets/file-types/file-types-capplet.c:1885
-msgid "Default Action"
-msgstr "Öntanýmlý Eylem"
 
 #: capplets/file-types/file-types-icon-entry.c:258
 msgid "Can't find an hbox, using a normal file selection"
@@ -1018,6 +887,86 @@ msgstr "Önizleme"
 #: capplets/file-types/file-types-icon-entry.c:381
 msgid "Select an icon"
 msgstr "Bir simge seç"
+
+#: capplets/keyboard/keyboard-properties.glade.h:9
+#: capplets/keyboard/keyboard.desktop.in.in.h:1
+msgid "Keyboard"
+msgstr "Klavye"
+
+#: capplets/keyboard/keyboard.desktop.in.in.h:2
+msgid "Keyboard Properties"
+msgstr "Klavye Özellikleri"
+
+#: capplets/keyboard/keyboard-properties.glade.h:1
+msgid "Bell"
+msgstr ""
+
+#: capplets/keyboard/keyboard-properties.glade.h:2
+msgid "Click volume"
+msgstr ""
+
+#: capplets/keyboard/keyboard-properties.glade.h:3
+msgid "Delay before repeat:"
+msgstr ""
+
+#: capplets/keyboard/keyboard-properties.glade.h:4
+msgid "Duration (ms)"
+msgstr ""
+
+#: capplets/keyboard/keyboard-properties.glade.h:5
+msgid "Enable Keyboard Click"
+msgstr ""
+
+#: capplets/keyboard/keyboard-properties.glade.h:6
+msgid "Enable Keyboard Repeat"
+msgstr ""
+
+#: capplets/keyboard/keyboard-properties.glade.h:7
+#: capplets/mouse/mouse-properties.glade.h:1
+msgid "Fast"
+msgstr ""
+
+#: capplets/keyboard/keyboard-properties.glade.h:8
+msgid "Key repeat rate:"
+msgstr ""
+
+#: capplets/keyboard/keyboard-properties.glade.h:10
+msgid "Long"
+msgstr ""
+
+#: capplets/keyboard/keyboard-properties.glade.h:11
+msgid "Medium"
+msgstr ""
+
+#: capplets/keyboard/keyboard-properties.glade.h:12
+msgid "Pitch (Hz)"
+msgstr ""
+
+#: capplets/keyboard/keyboard-properties.glade.h:13
+#, fuzzy
+msgid "Short"
+msgstr "Kýsayollar"
+
+#: capplets/keyboard/keyboard-properties.glade.h:14
+#: capplets/mouse/mouse-properties.glade.h:10
+msgid "Slow"
+msgstr ""
+
+#: capplets/keyboard/keyboard-properties.glade.h:15
+msgid "Test"
+msgstr ""
+
+#: capplets/keyboard/keyboard-properties.glade.h:16
+msgid "Very fast"
+msgstr ""
+
+#: capplets/keyboard/keyboard-properties.glade.h:17
+msgid "Very long"
+msgstr ""
+
+#: capplets/keyboard/keyboard-properties.glade.h:18
+msgid "Volume"
+msgstr ""
 
 #. icon box
 #: capplets/mime-type/edit-window.c:266
@@ -1195,6 +1144,10 @@ msgstr ""
 "Yeni bir Mime tipi ekle\n"
 "Örneðin: image/tiff; text/x-scheme"
 
+#: capplets/mime-type/new-mime-window.c:39
+msgid "Extensions"
+msgstr "Uzantýlar"
+
 #: capplets/mime-type/new-mime-window.c:43
 msgid ""
 "Type in the extensions for this mime-type.\n"
@@ -1216,6 +1169,159 @@ msgstr ""
 "\n"
 "Bunlar mime tipini belirlemeye yarayacaktýr."
 
+#: capplets/mouse/mouse.desktop.in.in.h:1
+msgid "Mouse"
+msgstr "Fare"
+
+#: capplets/mouse/mouse.desktop.in.in.h:2
+msgid "Mouse Properties"
+msgstr "Fare Özellikleri"
+
+#: capplets/mouse/mouse-properties.glade.h:2
+#, fuzzy
+msgid "High"
+msgstr "Sað"
+
+#: capplets/mouse/mouse-properties.glade.h:3
+#, fuzzy
+msgid "Left handed"
+msgstr "Sola yanaþýk"
+
+#: capplets/mouse/mouse-properties.glade.h:4
+msgid "Low"
+msgstr ""
+
+#: capplets/mouse/mouse-properties.glade.h:5
+#, fuzzy
+msgid "Mouse Configuration"
+msgstr "Yapýlandýrma Komutu:"
+
+#: capplets/mouse/mouse-properties.glade.h:6
+#, fuzzy
+msgid "Mouse speed:"
+msgstr "Fare Özellikleri"
+
+#: capplets/mouse/mouse-properties.glade.h:7
+msgid "My mouse is:"
+msgstr ""
+
+#: capplets/mouse/mouse-properties.glade.h:8
+#, fuzzy
+msgid "Right handed"
+msgstr "Saða yanaþýk"
+
+#: capplets/mouse/mouse-properties.glade.h:9
+msgid "Sensitivity:"
+msgstr ""
+
+#: capplets/sound/sound.desktop.in.in.h:1
+msgid "Configure GNOME's use of sound"
+msgstr "GNOME ses kullaným ayarlarý"
+
+#: capplets/sound/sound-properties.glade.h:1
+msgid "Enable sound server startup"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:2
+msgid "General"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:3
+#, fuzzy
+msgid "Sound Events"
+msgstr "Ses özellikleri"
+
+#: capplets/sound/sound-properties.glade.h:4
+#, fuzzy
+msgid "Sounds for events"
+msgstr "Ses özellikleri"
+
+#: capplets/theme-switcher/demo.c:54
+msgid "One"
+msgstr "Bir"
+
+#: capplets/theme-switcher/demo.c:54
+msgid "Two"
+msgstr "Ýki"
+
+#. just 8 short names that will serve as samples for titles in demo
+#: capplets/theme-switcher/demo.c:56
+msgid "Eenie"
+msgstr "Gubarcýk"
+
+#: capplets/theme-switcher/demo.c:56
+msgid "Meenie"
+msgstr "Voltran"
+
+#: capplets/theme-switcher/demo.c:57
+msgid "Mynie"
+msgstr "Helvacýk"
+
+#: capplets/theme-switcher/demo.c:57
+msgid "Moe"
+msgstr "Minnoþ"
+
+#: capplets/theme-switcher/demo.c:58
+msgid "Catcha"
+msgstr "Atili"
+
+#: capplets/theme-switcher/demo.c:58
+msgid "Tiger"
+msgstr "Tiger"
+
+#: capplets/theme-switcher/demo.c:59
+msgid "By Its"
+msgstr "Batili"
+
+#: capplets/theme-switcher/demo.c:59
+msgid "Toe"
+msgstr "Enik"
+
+#: capplets/theme-switcher/demo.c:118
+msgid "Selected themes from above will be tested by previewing here."
+msgstr ""
+
+#. column one
+#: capplets/theme-switcher/demo.c:123
+msgid "Sample Button"
+msgstr "Örnek Düðme"
+
+#: capplets/theme-switcher/demo.c:127
+msgid "Sample Check Button"
+msgstr "Örnek Kontrol Düðmesi"
+
+#: capplets/theme-switcher/demo.c:132
+msgid "Sample Text Entry Field"
+msgstr "Örnek Metin Yazma Bölgesi"
+
+#: capplets/theme-switcher/demo.c:143
+msgid "Submenu"
+msgstr "Alt menü"
+
+#: capplets/theme-switcher/demo.c:150
+msgid "Item 1"
+msgstr "1. Öðe"
+
+#: capplets/theme-switcher/demo.c:153
+msgid "Another item"
+msgstr "Diðer bir öðe"
+
+#: capplets/theme-switcher/demo.c:158
+msgid "Radio Button 1"
+msgstr "1. Radyo Düðmesi"
+
+#: capplets/theme-switcher/demo.c:164
+msgid "Radio Button 2"
+msgstr "2. Radyo Düðmesi"
+
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:1
+msgid "Gtk+ Theme Selector"
+msgstr "Gtk+ Tema Seçici"
+
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:2
+msgid "Select which gtk+ theme to use"
+msgstr ""
+
 #: capplets/theme-switcher/gui.c:87
 #, c-format
 msgid ""
@@ -1226,6 +1332,10 @@ msgstr ""
 "Tema '%s' yüklenirken\n"
 "hata oldu:\n"
 "%s"
+
+#: capplets/theme-switcher/gui.c:118
+msgid "Select a theme to install"
+msgstr "Kurulacak bir tema seçiniz"
 
 #: capplets/theme-switcher/gui.c:195
 msgid "Available Themes"
@@ -1272,6 +1382,12 @@ msgstr ""
 "Bu ayarlar için yardým bilgisi yok. Lütfen Gnome kullanýcý kýlavuzunun\n"
 "yüklendiðinden emin olun."
 
+#: capplets/theme-switcher/gui.c:370
+#: capplets/wm-properties/wm-properties-capplet.c:671
+#: control-center/capplet-dir-view.c:464
+msgid "Close"
+msgstr "Kapat"
+
 #: capplets/theme-switcher/install.c:31
 msgid "Home directory doesn't exist!\n"
 msgstr "Ev dizininiz yok!\n"
@@ -1289,55 +1405,13 @@ msgstr "'%s' komutu baþarýsýz oldu"
 msgid "Unknown file format"
 msgstr "Tanýnamayan dosya türü"
 
-#: capplets/url-properties/url.desktop.in.in.h:1
-msgid "Configure which programs are used to display URLs"
-msgstr ""
-"URL'leri göstermek için hangi uygulamalarýn kullanýlacaðýnýn yapýlandýrýlmasý"
-
-#: capplets/url-properties/url.desktop.in.in.h:2
-msgid "URL Handlers"
-msgstr "URL Göstericileri"
-
-#: capplets/url-properties/url-properties.c:49
-msgid "Error initializing the `url-properties' capplet."
-msgstr "URL Göstericileri diyaloðu baþlatýlýrken hata oluþtu."
-
-#: capplets/url-properties/url-properties.c:72
-msgid "Protocol"
-msgstr "Protokol"
-
-#: capplets/url-properties/url-properties.c:72
-msgid "Command"
-msgstr "Komut"
-
-#: capplets/url-properties/url-properties.c:89
-msgid "handler:"
-msgstr "gösterici:"
-
-#. set some commonly used handlers
-#: capplets/url-properties/url-properties.c:99
-msgid "Netscape"
-msgstr "Netscape"
-
-#: capplets/url-properties/url-properties.c:104
-msgid "Netscape (new window)"
-msgstr "Netscape (yeni pencerede)"
-
-#: capplets/url-properties/url-properties.c:110
-msgid "Help browser"
-msgstr "Yardým Gösterici"
-
-#: capplets/url-properties/url-properties.c:115
-msgid "Help browser (new window)"
-msgstr "Yardým Gösterici (yeni pencerede)"
-
-#: capplets/url-properties/url-properties.c:127
-msgid "Set"
-msgstr "Uygula"
-
 #: capplets/ui-properties/behavior.desktop.in.in.h:1
 msgid "Behavior"
 msgstr "Davranýþ"
+
+#: capplets/ui-properties/behavior.desktop.in.in.h:2
+msgid "Sets the default behavior of GNOME applications"
+msgstr ""
 
 #: capplets/ui-properties/behavior-properties.glade.h:1
 msgid "At the center of the screen"
@@ -1519,6 +1593,72 @@ msgstr "Not defteri etiketlerinin yeri"
 msgid "Wherever the Window Manager places them"
 msgstr "Pencere Yöneticisinin yerleþtirilirken"
 
+#: capplets/url-properties/url.desktop.in.in.h:1
+msgid "Configure which programs are used to display URLs"
+msgstr ""
+"URL'leri göstermek için hangi uygulamalarýn kullanýlacaðýnýn yapýlandýrýlmasý"
+
+#: capplets/url-properties/url.desktop.in.in.h:2
+msgid "URL Handlers"
+msgstr "URL Göstericileri"
+
+#: capplets/url-properties/url-properties.c:49
+msgid "Error initializing the `url-properties' capplet."
+msgstr "URL Göstericileri diyaloðu baþlatýlýrken hata oluþtu."
+
+#: capplets/url-properties/url-properties.c:72
+msgid "Protocol"
+msgstr "Protokol"
+
+#: capplets/url-properties/url-properties.c:72
+msgid "Command"
+msgstr "Komut"
+
+#: capplets/url-properties/url-properties.c:89
+msgid "handler:"
+msgstr "gösterici:"
+
+#. set some commonly used handlers
+#: capplets/url-properties/url-properties.c:99
+msgid "Netscape"
+msgstr "Netscape"
+
+#: capplets/url-properties/url-properties.c:104
+msgid "Netscape (new window)"
+msgstr "Netscape (yeni pencerede)"
+
+#: capplets/url-properties/url-properties.c:110
+msgid "Help browser"
+msgstr "Yardým Gösterici"
+
+#: capplets/url-properties/url-properties.c:115
+msgid "Help browser (new window)"
+msgstr "Yardým Gösterici (yeni pencerede)"
+
+#: capplets/url-properties/url-properties.c:127
+msgid "Set"
+msgstr "Uygula"
+
+#: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.in.h:1
+msgid "Enlightenment"
+msgstr "Enlightenment"
+
+#: capplets/wm-properties/wm-desktops/IceWM.desktop.in.in.h:1
+msgid "Ice WM"
+msgstr "Ice WM"
+
+#: capplets/wm-properties/wm-desktops/Scwm.desktop.in.in.h:1
+msgid "Scwm"
+msgstr "Scwm"
+
+#: capplets/wm-properties/wm-desktops/twm.desktop.in.in.h:1
+msgid "twm"
+msgstr "twm"
+
+#: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.in.h:1
+msgid "Window Maker"
+msgstr "Window Maker"
+
 #: capplets/wm-properties/wm-properties-capplet.c:170
 #, c-format
 msgid ""
@@ -1640,10 +1780,6 @@ msgstr "Ýptal"
 msgid "Name:"
 msgstr "Ýsim:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:806
-msgid "Command:"
-msgstr "Komut:"
-
 #: capplets/wm-properties/wm-properties-capplet.c:819
 msgid "Configuration Command:"
 msgstr "Yapýlandýrma Komutu:"
@@ -1681,22 +1817,236 @@ msgstr ""
 "wm-properties-capplet baþlarken bir hata oluþtu...\n"
 "Ýþlem durduruluyor...\n"
 
-#: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.in.h:1
-msgid "Enlightenment"
-msgstr "Enlightenment"
+#: control-center/capplet-dir-view.c:298 control-center/gnomecc.desktop.in.h:1
+msgid "GNOME Control Center"
+msgstr "GNOME Kontrol Merkezi"
 
-#: capplets/wm-properties/wm-desktops/IceWM.desktop.in.in.h:1
-msgid "Ice WM"
-msgstr "Ice WM"
+#: control-center/capplet-dir-view.c:299
+msgid "Desktop properties manager."
+msgstr "Masaüstü özellikleri yöneticisi."
 
-#: capplets/wm-properties/wm-desktops/Scwm.desktop.in.in.h:1
-msgid "Scwm"
-msgstr "Scwm"
+#: control-center/capplet-dir-view.c:413
+#, c-format
+msgid "Gnome Control Center : %s"
+msgstr "Gnome Kontrol Merkezi: %s"
 
-#: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.in.h:1
-msgid "Window Maker"
-msgstr "Window Maker"
+#: control-center/capplet-dir-view.c:461
+msgid ""
+"No help is available/installed. Please make sure you\n"
+"have the GNOME User's Guide installed on your system."
+msgstr ""
+"Yardým yüklenmemiþ ya da yok. Lütfen GNOME Kullanýcý\n"
+"Kýlavuzunun yüklendiðine emin olun."
 
-#: capplets/wm-properties/wm-desktops/twm.desktop.in.in.h:1
-msgid "twm"
-msgstr "twm"
+#: control-center/capplet-dir-view-html.c:145
+#, fuzzy
+msgid "GNOME Control Center:"
+msgstr "GNOME Kontrol Merkezi"
+
+#: control-center/gnomecc.desktop.in.h:2
+msgid "The GNOME configuration tool"
+msgstr "GNOME yapýlandýrma aracý"
+
+#: control-center/gnomecc.glade.h:2
+msgid "Browse with multiple windows"
+msgstr ""
+
+#: control-center/gnomecc.glade.h:3
+#, fuzzy
+msgid "Browse with single window"
+msgstr "Yardým Gösterici (yeni pencerede)"
+
+#: control-center/gnomecc.glade.h:4
+msgid "Display control panels as HTML"
+msgstr ""
+
+#: control-center/gnomecc.glade.h:5
+msgid "Display control panels as a set of icons"
+msgstr ""
+
+#: control-center/gnomecc.glade.h:6
+msgid "Display control panels as a tree"
+msgstr ""
+
+#: control-center/gnomecc.glade.h:7
+msgid "Launch control panels in separate windows"
+msgstr ""
+
+#: control-center/gnomecc.glade.h:8
+#, fuzzy
+msgid "New-control-center"
+msgstr "GNOME Kontrol Merkezi"
+
+#: control-center/gnomecc.glade.h:9
+msgid "Put control panels in the control center's window"
+msgstr ""
+
+#: control-center/Gnome.directory.in.in.h:1
+msgid "Main"
+msgstr ""
+
+#: control-center/Gnome.directory.in.in.h:2
+#, fuzzy
+msgid "Main Settings"
+msgstr "Geliþmiþ Ayarlar"
+
+#: control-center/main.c:46
+#, fuzzy
+msgid "Configuration"
+msgstr "Yapýlandýrma Komutu:"
+
+#: control-center/main.c:72
+msgid "Run the capplet CAPPLET"
+msgstr ""
+
+#: control-center/main.c:72
+msgid "CAPPLET"
+msgstr ""
+
+#: control-center/main.c:80
+#, fuzzy
+msgid "GNOME Control Center options"
+msgstr "GNOME Kontrol Merkezi: %s"
+
+#~ msgid "CD Properties"
+#~ msgstr "CD Özellikleri"
+
+#, fuzzy
+#~ msgid "Configure handling of CD devices"
+#~ msgstr "Ekran koruyucu ayarlarýný yap"
+
+#~ msgid "Legacy Applications"
+#~ msgstr "Özel Uygulamalar"
+
+#~ msgid "Legacy applications settings (grdb)"
+#~ msgstr "Özel uygulama ayarlarý (grdb)"
+
+#~ msgid "Documents"
+#~ msgstr "Belgeler"
+
+#~ msgid "Word Processor"
+#~ msgstr "Kelime Ýþlemci"
+
+#~ msgid "Spreadsheet"
+#~ msgstr "Hesap tablosu"
+
+#~ msgid "Presentation"
+#~ msgstr "Sunum"
+
+#~ msgid "Diagram"
+#~ msgstr "Diagram"
+
+#~ msgid "TeX"
+#~ msgstr "TeX"
+
+#~ msgid "Vector Graphics"
+#~ msgstr "Vektör Grafik"
+
+#~ msgid "World Wide Web"
+#~ msgstr "WWW"
+
+#~ msgid "Plain Text"
+#~ msgstr "Düz Metin"
+
+#~ msgid "Extended Markup Language (XML)"
+#~ msgstr "XML"
+
+#~ msgid "Information"
+#~ msgstr "Bilgi"
+
+#~ msgid "Financial"
+#~ msgstr "Finans"
+
+#~ msgid "Calendar"
+#~ msgstr "Takvim"
+
+#~ msgid "Contacts"
+#~ msgstr "Baðlantýlar"
+
+#~ msgid "Packages"
+#~ msgstr "Paketler"
+
+#~ msgid "Software Development"
+#~ msgstr "Yazýlým Geliþtirme"
+
+#~ msgid "Source Code"
+#~ msgstr "Kaynak Kodu"
+
+#~ msgid "Audio"
+#~ msgstr "Ses"
+
+#~ msgid "Video"
+#~ msgstr "Video"
+
+#~ msgid "Edit file category"
+#~ msgstr "Dosya kategorisini düzenle"
+
+#~ msgid "Model"
+#~ msgstr "Model"
+
+#~ msgid "MIME category info"
+#~ msgstr "MIME kategori bilgisi"
+
+#~ msgid "Edit file type"
+#~ msgstr "Dosya türünü düzenle"
+
+#~ msgid "MIME type information"
+#~ msgstr "MIME tür bilgisi"
+
+#~ msgid ""
+#~ "Invalid MIME type. Please enter a valid MIME type, or leave the field "
+#~ "blank to have one generated for you."
+#~ msgstr ""
+#~ "Geçersiz MIME türü. Lütfen geçerli bir MIME türü yazýn, ya da boþ býrakýn."
+
+#~ msgid "There already exists a MIME type of that name."
+#~ msgstr "Bu isimde bir MIME türü zaten var."
+
+#~ msgid "Category"
+#~ msgstr "Kategori"
+
+#~ msgid "Choose a file category"
+#~ msgstr "Bir dosya kategorisi seçin"
+
+#~ msgid "Internet Services"
+#~ msgstr "Ýnternet Servisleri"
+
+#~ msgid "Edit service information"
+#~ msgstr "Servis bilgisini düzenle"
+
+#~ msgid "Service info"
+#~ msgstr "Servis bilgisi"
+
+#, fuzzy
+#~ msgid "Please enter a protocol name."
+#~ msgstr "Lütfen aþaðýdaki satýra bir komut girin."
+
+#~ msgid "File transfer protocol"
+#~ msgstr "Dosya aktarým protokolü"
+
+#~ msgid "Detailed documentation"
+#~ msgstr "Ayrýntýlý belge"
+
+#~ msgid "Manual pages"
+#~ msgstr "Kýlavuz sayfalarý"
+
+#~ msgid "Electronic mail transmission"
+#~ msgstr "Elektronik posta aktarýmý"
+
+#~ msgid "Toolbars & Menus"
+#~ msgstr "Araç çubuklarý & Menüler"
+
+#~ msgid "Type"
+#~ msgstr "Tür"
+
+#~ msgid "Event"
+#~ msgstr "Olay"
+
+#~ msgid "File to Play"
+#~ msgstr "Çalýnacak Dosya"
+
+#~ msgid "Play"
+#~ msgstr "Çal"
+
+#~ msgid "Select sound file"
+#~ msgstr "Ses dosyasýný seçin"

@@ -1,6 +1,6 @@
 always_built_SUBDIRS =		\
-	background 		\
 	common 			\
+	background 		\
 	default-applications 	\
 	desktop-links		\
 	file-types 		\

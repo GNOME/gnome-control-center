@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.4.0.1\n"
-"POT-Creation-Date: 2001-07-10 18:52-0500\n"
+"POT-Creation-Date: 2002-04-16 01:49-0500\n"
 "PO-Revision-Date: 2001-08-01 10:56+02:00\n"
 "Last-Translator: Marius Andreiana <mandreiana@yahoo.com>\n"
 "Language-Team: Romanian <ro@li.org>\n"
@@ -14,2631 +14,988 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: capplets/background/applier.c:352
-#: capplets/new-background-properties/applier.c:352
+#: archiver/archive.c:604
+#, fuzzy
+msgid "Default location"
+msgstr "Locaþie implicitã"
+
+#: archiver/config-archiver.c:81
+msgid "Store XML data in the archive"
+msgstr ""
+
+#: archiver/config-archiver.c:83
+msgid "Roll back the configuration to a given point"
+msgstr ""
+
+#: archiver/config-archiver.c:85
+msgid "Change the location profile to the given one"
+msgstr "Schimbã profilul locaþiei la cel dat"
+
+#: archiver/config-archiver.c:87
+msgid "Push configuration data out to client machines (UNIMPLEMENTED)"
+msgstr ""
+
+#: archiver/config-archiver.c:89
+msgid "Rename a location to a new name"
+msgstr "Renumeºte o locaþie"
+
+#: archiver/config-archiver.c:91
+msgid "Add a new location to the archive"
+msgstr "Adaugã o nouã locaþie la arhivã"
+
+#: archiver/config-archiver.c:93
+msgid "Remove a location from the archive"
+msgstr "Eliminã o locaþie din arhivã"
+
+#: archiver/config-archiver.c:95
+msgid "Add a given backend to the given location"
+msgstr ""
+
+#: archiver/config-archiver.c:97
+msgid "Remove the given backend from the given location"
+msgstr ""
+
+#: archiver/config-archiver.c:99
+msgid "Perform garbage collection on the given location"
+msgstr ""
+
+#: archiver/config-archiver.c:105
+msgid "Use the global repository"
+msgstr ""
+
+#: archiver/config-archiver.c:107
+msgid "Identifier of location profile on which to operate"
+msgstr ""
+
+#: archiver/config-archiver.c:108
+msgid "LOCATION"
+msgstr ""
+
+#: archiver/config-archiver.c:110
+msgid "Backend being used for this operation"
+msgstr ""
+
+#: archiver/config-archiver.c:110
+msgid "BACKEND_ID"
+msgstr ""
+
+#: archiver/config-archiver.c:116
+msgid "Store only the differences with the parent location's config"
+msgstr ""
+
+#: archiver/config-archiver.c:118
+msgid "Store only those settings set in the previous config"
+msgstr ""
+
+#: archiver/config-archiver.c:124
+msgid "Date to which to roll back"
+msgstr ""
+
+#: archiver/config-archiver.c:124
+msgid "DATE"
+msgstr ""
+
+#: archiver/config-archiver.c:126
+msgid "Roll back all configuration items"
+msgstr ""
+
+#: archiver/config-archiver.c:128
+msgid "Roll back to the revision REVISION_ID"
+msgstr ""
+
+#: archiver/config-archiver.c:128
+msgid "REVISION_ID"
+msgstr ""
+
+#: archiver/config-archiver.c:130
+msgid "Roll back to the last known revision"
+msgstr ""
+
+#: archiver/config-archiver.c:132
+msgid "Roll back by STEPS revisions"
+msgstr ""
+
+#: archiver/config-archiver.c:132
+msgid "STEPS"
+msgstr ""
+
+#: archiver/config-archiver.c:134
+msgid "Don't run the backend, just dump the output"
+msgstr ""
+
+#: archiver/config-archiver.c:140
+msgid "Parent location for the new location"
+msgstr ""
+
+#: archiver/config-archiver.c:140
+msgid "PARENT"
+msgstr ""
+
+#: archiver/config-archiver.c:142
+msgid "New name to assign to the location"
+msgstr ""
+
+#: archiver/config-archiver.c:142
+msgid "NEW_NAME"
+msgstr ""
+
+#: archiver/config-archiver.c:148
+msgid "Add/remove this backend to/from the master backend list"
+msgstr ""
+
+#: archiver/config-archiver.c:150
+msgid "Full containment"
+msgstr ""
+
+#: archiver/config-archiver.c:152
+msgid "Partial containment"
+msgstr ""
+
+#: archiver/config-archiver.c:307 archiver/location.c:460
+msgid "Default Location"
+msgstr "Locaþie implicitã"
+
+#: archiver/config-archiver.c:368
+msgid "Global archiver options"
+msgstr ""
+
+#: archiver/config-archiver.c:370
+msgid "Archiver commands"
+msgstr ""
+
+#: archiver/config-archiver.c:372
+msgid "Options for storing data"
+msgstr ""
+
+#: archiver/config-archiver.c:374
+msgid "Options for rolling back"
+msgstr ""
+
+#: archiver/config-archiver.c:376
+msgid "Options for adding or renaming locations"
+msgstr ""
+
+#: archiver/config-archiver.c:379
+msgid "Options for adding and removing backends"
+msgstr ""
+
+#: capplets/background/applier.c:379
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr "Nu s-a putut încãrca imaginea \"%s\"; dezactivez fundalul."
 
-#: capplets/background/applier.c:495
-#: capplets/new-background-properties/applier.c:495
+#: capplets/background/applier.c:518
 msgid "Disabled"
 msgstr "Dezactivat"
 
-#: capplets/background/background-properties.glade.h:27
-#: capplets/background/prefs-widget.c:361
-#: capplets/new-background-properties/background-properties.glade.h:27
-#: capplets/new-background-properties/prefs-widget.c:361
-#, fuzzy
-msgid "(None)"
-msgstr "(Nimic)"
-
-#: capplets/background/prefs-widget.c:615
-#: capplets/new-background-properties/prefs-widget.c:615
-msgid "Wallpaper Selection"
-msgstr "Selecþie fundal"
-
-#: capplets/background/prefs-widget.c:622
-#: capplets/new-background-properties/prefs-widget.c:622
-msgid "Can't find an hbox, using a normal file selection"
-msgstr "Nu pot gãsi un hbox, utilizez o selecþie normalã de fiºier"
-
-#: capplets/background/prefs-widget.c:628
-#: capplets/new-background-properties/prefs-widget.c:628
-#: capplets/new-screensaver-properties/prefs-widget.c:301
-#: capplets/screensaver/screensaver-properties.glade.h:31
-#: capplets/theme-switcher/gui.c:230 capplets/theme-switcher/gui.c:302
-msgid "Preview"
-msgstr "Previzualizare"
-
-#.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/background/background-properties.glade.h:7
-#: capplets/new-background-properties/background-properties.glade.h:7
-#: capplets/new-bell-properties/bell-properties.glade.h:7
-msgid "window2"
-msgstr ""
-
-#: capplets/background/background-properties.glade.h:8
-#: capplets/new-background-properties/background-properties.glade.h:8
-#, fuzzy
-msgid "Use GNOME for setting background"
-msgstr "Utilizeazã GNOME pentru setarea fundalului"
-
-#: capplets/background/background-properties.glade.h:9
-#: capplets/new-background-properties/background-properties.glade.h:9
-msgid "Colors"
-msgstr "Culori"
-
-#: capplets/background/background-properties.glade.h:10
-#: capplets/new-background-properties/background-properties.glade.h:10
-#, fuzzy
-msgid "Effect"
-msgstr "Efect"
-
-#: capplets/background/background-properties.glade.h:11
-#: capplets/new-background-properties/background-properties.glade.h:11
-#, fuzzy
-msgid "Primary color"
-msgstr "Culoare primarã"
-
-#: capplets/background/background-properties.glade.h:12
-#: capplets/new-background-properties/background-properties.glade.h:12
-msgid "Right or bottom color"
-msgstr ""
-
-#: capplets/background/background-properties.glade.h:13
-#: capplets/background/background-properties.glade.h:14
-#: capplets/new-background-properties/background-properties.glade.h:13
-#: capplets/new-background-properties/background-properties.glade.h:14
-msgid "Pick a color"
-msgstr "Alegeþi o culoare"
-
-#: capplets/background/background-properties.glade.h:15
-#: capplets/new-background-properties/background-properties.glade.h:15
-#, fuzzy
-msgid "Solid Color"
-msgstr "Culoare solidã"
-
-#: capplets/background/background-properties.glade.h:16
-#: capplets/new-background-properties/background-properties.glade.h:16
-msgid "Vertical Gradient"
-msgstr "Degrade vertical"
-
-#: capplets/background/background-properties.glade.h:17
-#: capplets/new-background-properties/background-properties.glade.h:17
-msgid "Horizontal Gradient"
-msgstr "Degrade orizontal"
-
-#: capplets/background/background-properties.glade.h:18
-#: capplets/new-background-properties/background-properties.glade.h:18
-msgid "Apply changes automatically"
-msgstr "Aplicã schimbãrile automat"
-
-#: capplets/background/background-properties.glade.h:19
-#: capplets/new-background-properties/background-properties.glade.h:19
-msgid "Wallpaper"
+#: capplets/background/background.desktop.in.in.h:1
+msgid "Background"
 msgstr "Fundal"
 
-#: capplets/background/background-properties.glade.h:20
-#: capplets/new-background-properties/background-properties.glade.h:20
+#: capplets/background/background.desktop.in.in.h:2
+msgid "Configuration of the desktop's background"
+msgstr "Configuraþia fundalului de desktop"
+
+#: capplets/background/background-properties-capplet.c:46
+msgid "Set background image."
+msgstr ""
+
+#: capplets/background/background-properties-capplet.c:46
+msgid "IMAGE-FILE"
+msgstr ""
+
+#: capplets/background/background-properties.glade.h:1
 #, fuzzy
-msgid "File"
-msgstr "Fiºier"
+msgid "Background colors"
+msgstr "Fundal"
 
-#: capplets/background/background-properties.glade.h:21
-#: capplets/new-background-properties/background-properties.glade.h:21
+#: capplets/background/background-properties.glade.h:2
 #, fuzzy
-msgid "Display Style"
-msgstr "Stil afiºare"
+msgid "Background picture"
+msgstr "Fundal"
 
-#: capplets/background/background-properties.glade.h:22
-#: capplets/new-background-properties/background-properties.glade.h:22
-msgid "Tiled"
-msgstr "Tapet"
-
-#: capplets/background/background-properties.glade.h:23
-#: capplets/new-background-properties/background-properties.glade.h:23
+#: capplets/background/background-properties.glade.h:3
 msgid "Centered"
 msgstr "Centratã"
 
-#: capplets/background/background-properties.glade.h:24
-#: capplets/new-background-properties/background-properties.glade.h:24
+#: capplets/background/background-properties.glade.h:4
+#, fuzzy
+msgid "Horizontal gradient"
+msgstr "Degrade orizontal"
+
+#: capplets/background/background-properties.glade.h:5
+msgid "Image:"
+msgstr ""
+
+#: capplets/background/background-properties.glade.h:6
+msgid "Opacity (percent):"
+msgstr ""
+
+#: capplets/background/background-properties.glade.h:7
+msgid "Pick a color"
+msgstr "Alegeþi o culoare"
+
+#: capplets/background/background-properties.glade.h:8
 #, fuzzy
 msgid "Scaled (keep aspect ratio)"
 msgstr "Scalatã (menþine aspectul)"
 
-#: capplets/background/background-properties.glade.h:25
-#: capplets/new-background-properties/background-properties.glade.h:25
-msgid "Stretched (change aspect ratio)"
-msgstr "Întins (schimbã aspectul)"
-
-#: capplets/background/background-properties.glade.h:26
-#: capplets/new-background-properties/background-properties.glade.h:26
+#: capplets/background/background-properties.glade.h:9
 #, fuzzy
-msgid "Browse..."
-msgstr "Navigheazã... "
+msgid "Solid color"
+msgstr "Culoare solidã"
 
-#: capplets/background/background-properties.glade.h:28
-#: capplets/new-background-properties/background-properties.glade.h:28
-#, fuzzy
-msgid "Adjust wallpaper's transparency"
-msgstr "Ajusteazã transparenþa fundalului"
-
-#: capplets/background/background-properties.glade.h:29
-#: capplets/new-background-properties/background-properties.glade.h:29
-#, fuzzy
-msgid "More Transparent"
-msgstr "Mai transparent"
-
-#: capplets/background/background-properties.glade.h:30
-#: capplets/new-background-properties/background-properties.glade.h:30
-#, fuzzy
-msgid "More Solid"
-msgstr "Mai solid"
-
-#.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/keyboard/keyboard-properties.glade.h:7
-#: capplets/new-keyboard-properties/keyboard-properties.glade.h:7
-#: capplets/new-mouse-properties/mouse-properties.glade.h:7
-#: capplets/new-sound-properties/sound-properties.glade.h:7
-#: capplets/screensaver/screensaver-properties.glade.h:23
-#: capplets/sound/sound-properties.glade.h:7
-msgid "window1"
+#: capplets/background/background-properties.glade.h:10
+msgid "Stretched"
 msgstr ""
 
-#: capplets/keyboard/keyboard-properties.glade.h:8
-#: capplets/new-keyboard-properties/keyboard-properties.glade.h:8
+#: capplets/background/background-properties.glade.h:11
+#, fuzzy
+msgid "Style:"
+msgstr "Stil: "
+
+#: capplets/background/background-properties.glade.h:12
+msgid "Tiled"
+msgstr "Tapet"
+
+#: capplets/background/background-properties.glade.h:13
+#, fuzzy
+msgid "Use a picture for the background"
+msgstr "Utilizeazã GNOME pentru setarea fundalului"
+
+#: capplets/background/background-properties.glade.h:14
+#, fuzzy
+msgid "Vertical gradient"
+msgstr "Degrade vertical"
+
+#: capplets/common/capplet-util.c:418
+msgid "Just apply settings and quit"
+msgstr "Aplicã setãrile ºi ieºi"
+
+#: capplets/common/capplet-util.c:420
+#, fuzzy
+msgid "Initialize the session"
+msgstr "Un membru normal al sesiunii"
+
+#: capplets/common/capplet-util.c:422
+msgid "Retrieve and store legacy settings"
+msgstr ""
+
+#: capplets/common/capplet-util.c:431
+msgid "Capplet options"
+msgstr "Opþiuni capplet"
+
+#: capplets/default-applications/default-applications.desktop.in.in.h:1
+msgid "Choose the applications used by default"
+msgstr ""
+
+#: capplets/default-applications/default-applications.desktop.in.in.h:2
+#, fuzzy
+msgid "Default Applications"
+msgstr "Locaþie implicitã"
+
+#: capplets/default-applications/interface.c:108
+#, fuzzy
+msgid "Gnome Default Editor"
+msgstr "Editor Gnome"
+
+#: capplets/default-applications/interface.c:125
+#, fuzzy
+msgid "Select an Editor"
+msgstr "Selecteazã un icon"
+
+#: capplets/default-applications/interface.c:134
+msgid "With this option, you can select a predefined Editor as your default"
+msgstr ""
+
+#: capplets/default-applications/interface.c:154
+#, fuzzy
+msgid "Custom Editor"
+msgstr "Editor Gnome"
+
+#: capplets/default-applications/interface.c:163
+msgid "With this option you can create your own default editor"
+msgstr ""
+
+#: capplets/default-applications/interface.c:174
+#: capplets/default-applications/interface.c:305
+#: capplets/default-applications/interface.c:436
+#, fuzzy
+msgid "Start in Terminal"
+msgstr "Ruleazã în Terminal"
+
+#: capplets/default-applications/interface.c:182
+msgid "Does this editor need to start in an xterm?"
+msgstr ""
+
+#: capplets/default-applications/interface.c:184
+msgid "Accepts Line Number"
+msgstr ""
+
+#: capplets/default-applications/interface.c:192
+msgid "Does this editor accept line numbers from the command line?"
+msgstr ""
+
+#: capplets/default-applications/interface.c:203
+#: capplets/default-applications/interface.c:334
+#: capplets/default-applications/interface.c:465
+#: capplets/default-applications/interface.c:576
+#: capplets/wm-properties/wm-properties-capplet.c:806
+msgid "Command:"
+msgstr "Comandã:"
+
+#: capplets/default-applications/interface.c:221
+#, fuzzy
+msgid "Please enter the command line used to start this editor"
+msgstr "Vã rugãm introduceþi o linie de comandã mai jos."
+
+#: capplets/default-applications/interface.c:232
+#, fuzzy
+msgid "Text Editor"
+msgstr "Editor Gnome"
+
+#: capplets/default-applications/interface.c:239
+msgid "Gnome Default Web Browser"
+msgstr ""
+
+#: capplets/default-applications/interface.c:256
+#, fuzzy
+msgid "Select a Web Browser"
+msgstr "Browser ajutor"
+
+#: capplets/default-applications/interface.c:265
+msgid ""
+"With this option, you can select a predefined Web Browser as your default"
+msgstr ""
+
+#: capplets/default-applications/interface.c:285
+msgid "Custom Web Browser"
+msgstr ""
+
+#: capplets/default-applications/interface.c:294
+msgid "With this option you can create your own default web browser"
+msgstr ""
+
+#: capplets/default-applications/interface.c:313
+msgid "Does this web browser need to display in an xterm?"
+msgstr ""
+
+#: capplets/default-applications/interface.c:315
+msgid "Understands Netscape Remote Control"
+msgstr ""
+
+#: capplets/default-applications/interface.c:323
+msgid ""
+"Does this web browser support the netscape remote control protocol?  If in "
+"doubt, and this web browser isn't Netscape or Mozilla, it probably doesn't."
+msgstr ""
+
+#: capplets/default-applications/interface.c:352
+#, fuzzy
+msgid "Please enter the command line used to start this web browser"
+msgstr "Vã rugãm introduceþi o linie de comandã mai jos."
+
+#: capplets/default-applications/interface.c:363
+#, fuzzy
+msgid "Web Browser"
+msgstr "Browser ajutor"
+
+#: capplets/default-applications/interface.c:370
+msgid "Default Help Viewer"
+msgstr ""
+
+#: capplets/default-applications/interface.c:387
+#, fuzzy
+msgid "Select a Viewer"
+msgstr "Selecteazã un fiºier..."
+
+#: capplets/default-applications/interface.c:396
+msgid "With this option you can select a predefined help viewer."
+msgstr ""
+
+#: capplets/default-applications/interface.c:416
+msgid "Custom Help Viewer"
+msgstr ""
+
+#: capplets/default-applications/interface.c:425
+msgid "With this option you can create your own help viewer"
+msgstr ""
+
+#: capplets/default-applications/interface.c:444
+msgid "Does this help viewer need an xterm for display?"
+msgstr ""
+
+#: capplets/default-applications/interface.c:446
+msgid "Accepts URLs"
+msgstr ""
+
+#: capplets/default-applications/interface.c:454
+msgid "Does this help viewer allow URLs for help?"
+msgstr ""
+
+#: capplets/default-applications/interface.c:483
+#, fuzzy
+msgid "Please enter the command line used to start this help viewer"
+msgstr "Vã rugãm introduceþi o linie de comandã mai jos."
+
+#: capplets/default-applications/interface.c:494
+#, fuzzy
+msgid "Help Viewer"
+msgstr "Browser ajutor"
+
+#: capplets/default-applications/interface.c:501
+#, fuzzy
+msgid "Default Terminal"
+msgstr "Ruleazã în Terminal"
+
+#: capplets/default-applications/interface.c:518
+#, fuzzy
+msgid "Select a Terminal"
+msgstr "Selectaþi o temã pentru instalare"
+
+#: capplets/default-applications/interface.c:527
+msgid "With this option you can select a predefined terminal."
+msgstr ""
+
+#: capplets/default-applications/interface.c:547
+#, fuzzy
+msgid "Custom Terminal"
+msgstr "Ruleazã în Terminal"
+
+#: capplets/default-applications/interface.c:556
+msgid "With this option you can create your own terminal"
+msgstr ""
+
+#: capplets/default-applications/interface.c:586
+msgid "Exec Flag:"
+msgstr ""
+
+#: capplets/default-applications/interface.c:604
+msgid ""
+"Please enter the flag used by this terminal to specify the command to run on "
+"startup.  For example, in 'xterm' this would be '-e'."
+msgstr ""
+
+#: capplets/default-applications/interface.c:614
+#, fuzzy
+msgid "Please enter the command line used to start this terminal"
+msgstr "Vã rugãm introduceþi o linie de comandã mai jos."
+
+#: capplets/default-applications/interface.c:625
+#, fuzzy
+msgid "Terminal"
+msgstr "Ruleazã în Terminal"
+
+#: capplets/default-applications/support.c:100
+#: capplets/default-applications/support.c:138
+#, c-format
+msgid "Couldn't find pixmap file: %s"
+msgstr ""
+
+#: capplets/default-applications/support.c:116
+#, c-format
+msgid "Couldn't create pixmap from file: %s"
+msgstr ""
+
+#: capplets/desktop-links/Advanced.directory.in.in.h:1
+msgid "Advanced"
+msgstr ""
+
+#: capplets/desktop-links/Advanced.directory.in.in.h:2
+#, fuzzy
+msgid "Advanced Settings"
+msgstr "Proprietãþi avansate"
+
+#: capplets/desktop-links/gnome-hint-properties.desktop.in.h:1
+msgid "Options for the startup hint dialog"
+msgstr "Opþiuni pentru dialogul de sugestii de la pornire"
+
+#: capplets/desktop-links/gnome-hint-properties.desktop.in.h:2
+msgid "Startup Hint"
+msgstr "Sugestia de la pornire"
+
+#: capplets/desktop-links/panel.desktop.in.in.h:1
+msgid "Global panel properties"
+msgstr "Proprietãþi globale ale panelului"
+
+#: capplets/desktop-links/panel.desktop.in.in.h:2
+msgid "Panel"
+msgstr "Panel"
+
+#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
+#: control-center/gnomecc.glade.h:1
+msgid "Appearance"
+msgstr "Aparenþã"
+
+#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:2
+msgid "Configure window appearance"
+msgstr "Configuraþi aparenþa ferestrelor"
+
+#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:1
+msgid "Configure key shortcuts"
+msgstr "Configuraþi tastele pentru scurtãturi"
+
+#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:2
+msgid "Shortcuts"
+msgstr "Scurtãturi"
+
+#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:1
+msgid "Configure window focusing"
+msgstr "Configuraþi comportamentul focusului ferestrelor"
+
+#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:2
+msgid "Focus behavior"
+msgstr "Comportament focus"
+
+#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:1
+msgid "Configure window properties"
+msgstr "Configuraþi proprietãþile ferestrelor"
+
+#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:2
+msgid "Matched Windows"
+msgstr "Potriviri ferestre"
+
+#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:1
+msgid "Configure window minimization and maximization"
+msgstr "Configuraþi minimizarea ºi maximizarea ferestrelor"
+
+#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:2
+msgid "Minimizing and Maximizing"
+msgstr "Minimizare ºi maximizare"
+
+#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
+msgid "Configure window manager configuration properties"
+msgstr "Configuraþi proprietãþile de configurare ale managerului de ferestre"
+
+#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:2
+msgid "Meta"
+msgstr "Meta"
+
+#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:1
+msgid "Configure miscellaneous window features"
+msgstr "Configuraþi diverse caracteristici ale ferestrelor"
+
+#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
+#: capplets/ui-properties/behavior-properties.glade.h:19
+msgid "Miscellaneous"
+msgstr "Diverse"
+
+#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:1
+msgid "Configure window move/resize"
+msgstr "Configuraþi mutarea/re-mãrirea ferestrelor"
+
+#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:2
+msgid "Moving and Resizing"
+msgstr "Mutare ºi re-mãrire"
+
+#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:1
+msgid "Configure window placement"
+msgstr "Configuraþi plasarea ferestrelor"
+
+#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:2
+msgid "Placement"
+msgstr "Plasare"
+
+#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:1
+#, fuzzy
+msgid "Control Center Menu"
+msgstr "Centrul de control"
+
+#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:2
+#, fuzzy
+msgid "Sawfish window manager"
+msgstr "Alegeþi un manager de ferestre"
+
+#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:1
+msgid "Enable window manager sound events"
+msgstr "Activaþi sunetele managerului de ferestre pentru evenimente"
+
+#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
+#: capplets/sound/sound.desktop.in.in.h:2
+msgid "Sound"
+msgstr "Sunet"
+
+#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:1
+msgid "Configure workspaces"
+msgstr "Configuraþi spaþiile de lucru"
+
+#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:2
+msgid "Workspaces"
+msgstr "Spaþii de lucru"
+
+#: capplets/desktop-links/screensaver.desktop.in.in.h:1
+msgid "Configure the settings of the screensaver"
+msgstr "Configuraþi setãrile protectorului de ecran"
+
+#: capplets/desktop-links/screensaver.desktop.in.in.h:2
+msgid "Screensaver"
+msgstr "Screensaver"
+
+#: capplets/desktop-links/session.desktop.in.in.h:1
+msgid "Configure which non-session aware programs are started up"
+msgstr "Configuraþi ce programe non-sesiune sunt pornite la început"
+
+#: capplets/desktop-links/session.desktop.in.in.h:2
+msgid "Startup Programs"
+msgstr "Programe de început"
+
+#: capplets/file-types/file-types-capplet.c:735
+#: capplets/file-types/file-types-capplet.c:1883
+#, fuzzy
+msgid "MIME Type"
+msgstr "Tip Mime:"
+
+#: capplets/file-types/file-types-capplet.c:742
+#, fuzzy
+msgid "Change Icon"
+msgstr "Schimbã icon"
+
+#: capplets/file-types/file-types-capplet.c:749
+#, fuzzy
+msgid "Change File Extensions"
+msgstr "Extensie"
+
+#: capplets/file-types/file-types-capplet.c:757
+#, fuzzy
+msgid "Default Action:"
+msgstr "Locaþie implicitã"
+
+#: capplets/file-types/file-types-capplet.c:769
+msgid "Use Viewer"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet.c:775
+msgid "Open With Application"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet.c:786
+#, fuzzy
+msgid "Edit List"
+msgstr "Editeazã"
+
+#: capplets/file-types/file-types-capplet.c:811
+#, fuzzy
+msgid "Add New MIME Type..."
+msgstr "Tip Mime:"
+
+#: capplets/file-types/file-types-capplet.c:817
+msgid "Delete This MIME Type"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet.c:828
+msgid "Revert to System Defaults"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet.c:1075
+#: capplets/file-types/file-types-capplet.c:1219
+#, fuzzy
+msgid "None"
+msgstr "(Nimic)"
+
+#: capplets/file-types/file-types-capplet.c:1324
+msgid ""
+"Reverting to system settings will lose any changes\n"
+"you have ever made to File Types and Programs.\n"
+"Revert anyway?"
+msgstr ""
+
+#. Add default action to fourth column
+#: capplets/file-types/file-types-capplet.c:1393
+#: capplets/file-types/file-types-capplet.c:1593
+#: capplets/file-types/file-types-capplet.c:1719
+#, fuzzy
+msgid "none"
+msgstr "Mai lung"
+
+#: capplets/file-types/file-types-capplet.c:1434
+#: capplets/file-types/file-types-capplet.c:1620
+#: capplets/file-types/file-types-capplet.c:1763
+#, c-format
+msgid "View as %s"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet.c:1882
+msgid "Description"
+msgstr "Descriere"
+
+#: capplets/file-types/file-types-capplet.c:1884
+#: capplets/mime-type/mime-data.c:385
+msgid "Extension"
+msgstr "Extensie"
+
+#: capplets/file-types/file-types-capplet.c:1885
+#, fuzzy
+msgid "Default Action"
+msgstr "Locaþie implicitã"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:387
+msgid "Edit Applications List"
+msgstr ""
+
+#. Add label
+#: capplets/file-types/file-types-capplet-dialogs.c:409
+#, c-format
+msgid "Select applications to appear in menu for MIME type \"%s\""
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:433
+msgid "Add Application..."
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:440
+msgid "Edit Application..."
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:446
+#, fuzzy
+msgid "Delete Application"
+msgstr "Locaþie implicitã"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:480
+msgid "Edit Components List"
+msgstr ""
+
+#. Add label
+#: capplets/file-types/file-types-capplet-dialogs.c:500
+#, c-format
+msgid "Select views to appear in menu for MIME type \"%s\""
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:720
+msgid ""
+"The MIME type entered contained upper case characters. Upper case characters "
+"were changed to lower case for you."
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:723
+#, fuzzy
+msgid "Add New MIME Type"
+msgstr "Tip Mime:"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:769
+#, fuzzy
+msgid "Add MIME Type"
+msgstr "Tip Mime:"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:773
+msgid "New MIME type (e.g. image/x-thumper):"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:780
+msgid "Description (e.g. Thumper image):"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:947
+#, fuzzy
+msgid "File Extensions "
+msgstr "Extensie"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:967
+#: capplets/mime-type/mime-type-capplet.c:93
+#: capplets/wm-properties/wm-properties-capplet.c:1117
+msgid "Add..."
+msgstr "Adaugã..."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:972
+#, fuzzy
+msgid "    Remove    "
+msgstr "Eliminã "
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1041
+#, fuzzy
+msgid "Add New Extension"
+msgstr "Extensie"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1045
+#, fuzzy
+msgid ""
+"Type in the extensions for this mime-type (without dot).\n"
+"You can enter several extensions seperated by a space,\n"
+"for example: html htm"
+msgstr ""
+"Introduceþi extensiile pentru acest tip MIME (fãrã punct).\n"
+"Puteþi introduce câteva extensii separate prin spaþiu,\n"
+"de exemplu: html htm"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1052
+#: capplets/mime-type/new-mime-window.c:50
+msgid "Extension:"
+msgstr "Extensie:"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1194
+#, fuzzy
+msgid "You must enter a name."
+msgstr "Trebuie sã introduceþi un nume."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1197
+#, fuzzy
+msgid "You must enter a command."
+msgstr "Trebuie sã introduceþi un nume."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1207
+#, c-format
+msgid ""
+"\"%s\" does not exist or is not executable.\n"
+"Check your spelling and make sure you have\n"
+"the right permissions to execute this file."
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1213
+#, c-format
+msgid ""
+"The command \"%s\" cannot be found.\n"
+"You must use a command that can work from any command line."
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1225
+msgid "Bad Application Name"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1226
+#, fuzzy
+msgid "Bad Application Command"
+msgstr "Comandã configurare:"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1258
+msgid "Add Application"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1259
+msgid "Edit Application"
+msgstr ""
+
+#. Application Name label and entry
+#: capplets/file-types/file-types-capplet-dialogs.c:1271
+msgid "Application Name:"
+msgstr ""
+
+#. Application Command label and entry
+#: capplets/file-types/file-types-capplet-dialogs.c:1282
+#, fuzzy
+msgid "Application Command:"
+msgstr "Comandã configurare:"
+
+#. Open Behavior frame
+#: capplets/file-types/file-types-capplet-dialogs.c:1293
+#, fuzzy
+msgid "Open Behavior"
+msgstr "Comportament"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1299
+msgid "Can open multiple files"
+msgstr ""
+
+#. FIXME bugzilla.eazel.com 6066: This needs to be three options now: "yes", "no", and "use uris for non-file locations"
+#: capplets/file-types/file-types-capplet-dialogs.c:1307
+msgid "Can open from URI"
+msgstr ""
+
+#: capplets/file-types/file-types.desktop.in.in.h:1
+msgid "File Types and Programs"
+msgstr ""
+
+#: capplets/file-types/file-types.desktop.in.in.h:2
+msgid "Specify which programs are used to open or view each file type"
+msgstr ""
+
+#: capplets/file-types/file-types-icon-entry.c:258
+msgid "Can't find an hbox, using a normal file selection"
+msgstr "Nu pot gãsi un hbox, utilizez o selecþie normalã de fiºier"
+
+#: capplets/file-types/file-types-icon-entry.c:264
+#: capplets/theme-switcher/gui.c:232 capplets/theme-switcher/gui.c:304
+msgid "Preview"
+msgstr "Previzualizare"
+
+#: capplets/file-types/file-types-icon-entry.c:381
+#, fuzzy
+msgid "Select an icon"
+msgstr "Selecteazã un icon"
+
+#: capplets/keyboard/keyboard-properties.glade.h:9
+#: capplets/keyboard/keyboard.desktop.in.in.h:1
+msgid "Keyboard"
+msgstr "Tastaturã"
+
+#: capplets/keyboard/keyboard.desktop.in.in.h:2
+msgid "Keyboard Properties"
+msgstr "Proprietãþi tastaturã"
+
+#: capplets/keyboard/keyboard-properties.glade.h:1
+#, fuzzy
+msgid "Bell"
+msgstr "Celulã"
+
+#: capplets/keyboard/keyboard-properties.glade.h:2
+msgid "Click volume"
+msgstr "Volum clic"
+
+#: capplets/keyboard/keyboard-properties.glade.h:3
+#, fuzzy
+msgid "Delay before repeat:"
+msgstr "Pauzã pânã se repetã"
+
+#: capplets/keyboard/keyboard-properties.glade.h:4
+msgid "Duration (ms)"
+msgstr "Durata (ms)"
+
+#: capplets/keyboard/keyboard-properties.glade.h:5
+msgid "Enable Keyboard Click"
+msgstr "Activeazã clic tastaturã"
+
+#: capplets/keyboard/keyboard-properties.glade.h:6
 #, fuzzy
 msgid "Enable Keyboard Repeat"
 msgstr "Activeazã repetarea tastelor"
 
-#: capplets/keyboard/keyboard-properties.glade.h:9
-#: capplets/new-keyboard-properties/keyboard-properties.glade.h:9
-msgid "Delay Until Repeat"
-msgstr "Pauzã pânã se repetã"
-
-#: capplets/keyboard/keyboard-properties.glade.h:10
-#: capplets/new-keyboard-properties/keyboard-properties.glade.h:10
-msgid "....a"
-msgstr "....a"
-
-#: capplets/keyboard/keyboard-properties.glade.h:11
-#: capplets/new-keyboard-properties/keyboard-properties.glade.h:11
-msgid "...a"
-msgstr "...a"
-
-#: capplets/keyboard/keyboard-properties.glade.h:12
-#: capplets/new-keyboard-properties/keyboard-properties.glade.h:12
-msgid "..a"
-msgstr "..a"
-
-#: capplets/keyboard/keyboard-properties.glade.h:13
-#: capplets/new-keyboard-properties/keyboard-properties.glade.h:13
-msgid ".a"
-msgstr ".a"
-
-#: capplets/keyboard/keyboard-properties.glade.h:14
-#: capplets/new-keyboard-properties/keyboard-properties.glade.h:14
-#, fuzzy
-msgid "Key Repeat Rate"
-msgstr "Ratã de repetare"
-
-#: capplets/keyboard/keyboard-properties.glade.h:15
-#: capplets/new-keyboard-properties/keyboard-properties.glade.h:15
-msgid "a....a"
-msgstr "a....a"
-
-#: capplets/keyboard/keyboard-properties.glade.h:16
-#: capplets/new-keyboard-properties/keyboard-properties.glade.h:16
-msgid "a...a"
-msgstr "a..a"
-
-#: capplets/keyboard/keyboard-properties.glade.h:17
-#: capplets/new-keyboard-properties/keyboard-properties.glade.h:17
-msgid "a..a"
-msgstr "a..a"
-
-#: capplets/keyboard/keyboard-properties.glade.h:18
-#: capplets/new-keyboard-properties/keyboard-properties.glade.h:18
-msgid "a.a"
-msgstr "a.a"
-
-#: capplets/keyboard/keyboard-properties.glade.h:19
-#: capplets/new-keyboard-properties/keyboard-properties.glade.h:19
-msgid "Enable Keyboard Click"
-msgstr "Activeazã clic tastaturã"
-
-#: capplets/keyboard/keyboard-properties.glade.h:20
-#: capplets/new-keyboard-properties/keyboard-properties.glade.h:20
-msgid "Keyboard click"
-msgstr "Clic tastaturã"
-
-#: capplets/keyboard/keyboard-properties.glade.h:21
-#: capplets/new-keyboard-properties/keyboard-properties.glade.h:21
-msgid "Click volume"
-msgstr "Volum clic"
-
-#: capplets/keyboard/keyboard-properties.glade.h:22
-#: capplets/new-keyboard-properties/keyboard-properties.glade.h:22
-msgid "Type here to test setting"
-msgstr "Tastaþi aici pentru a testa setãrile"
-
-#.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/mouse/mouse-properties.glade.h:7
-msgid "Mouse Configuration"
-msgstr "Configuraþie mouse"
-
-#: capplets/mouse/mouse-properties.glade.h:8
-msgid "My mouse is:"
-msgstr ""
-
-#: capplets/mouse/mouse-properties.glade.h:9
-#: capplets/new-mouse-properties/mouse-properties.glade.h:9
-msgid "Left handed"
-msgstr "Pentru stângaci"
-
-#: capplets/mouse/mouse-properties.glade.h:10
-#: capplets/new-mouse-properties/mouse-properties.glade.h:10
-msgid "Right handed"
-msgstr "Pentru dreptaci"
-
-#: capplets/mouse/mouse-properties.glade.h:11
-#: capplets/new-mouse-properties/mouse-properties.glade.h:14
-#: capplets/new-screensaver-properties/screensavers/3d_clock.xml.h:11
-#: capplets/new-screensaver-properties/screensavers/ant.xml.h:10
-#: capplets/new-screensaver-properties/screensavers/attraction.xml.h:19
-#: capplets/new-screensaver-properties/screensavers/bsod.xml.h:8
-#: capplets/new-screensaver-properties/screensavers/compass.xml.h:10
-#: capplets/new-screensaver-properties/screensavers/flag.xml.h:10
-#: capplets/new-screensaver-properties/screensavers/qix.xml.h:16
-#: capplets/new-screensaver-properties/screensavers/starfish.xml.h:9
-#: capplets/new-screensaver-properties/screensavers/starfish.xml.h:13
-#: capplets/screensaver/screensavers/3d_clock.xml.h:11
-#: capplets/screensaver/screensavers/ant.xml.h:10
-#: capplets/screensaver/screensavers/attraction.xml.h:19
-#: capplets/screensaver/screensavers/bsod.xml.h:8
-#: capplets/screensaver/screensavers/compass.xml.h:10
-#: capplets/screensaver/screensavers/flag.xml.h:10
-#: capplets/screensaver/screensavers/qix.xml.h:16
-#: capplets/screensaver/screensavers/starfish.xml.h:9
-#: capplets/screensaver/screensavers/starfish.xml.h:13
-msgid "Slow"
-msgstr "Înceatã"
-
-#: capplets/mouse/mouse-properties.glade.h:12
-#: capplets/new-mouse-properties/mouse-properties.glade.h:15
-#: capplets/new-screensaver-properties/screensavers/3d_clock.xml.h:12
-#: capplets/new-screensaver-properties/screensavers/ant.xml.h:11
-#: capplets/new-screensaver-properties/screensavers/attraction.xml.h:20
-#: capplets/new-screensaver-properties/screensavers/bsod.xml.h:9
-#: capplets/new-screensaver-properties/screensavers/compass.xml.h:11
-#: capplets/new-screensaver-properties/screensavers/flag.xml.h:11
-#: capplets/new-screensaver-properties/screensavers/qix.xml.h:17
-#: capplets/new-screensaver-properties/screensavers/starfish.xml.h:8
-#: capplets/screensaver/screensavers/3d_clock.xml.h:12
-#: capplets/screensaver/screensavers/ant.xml.h:11
-#: capplets/screensaver/screensavers/attraction.xml.h:20
-#: capplets/screensaver/screensavers/bsod.xml.h:9
-#: capplets/screensaver/screensavers/compass.xml.h:11
-#: capplets/screensaver/screensavers/flag.xml.h:11
-#: capplets/screensaver/screensavers/qix.xml.h:17
-#: capplets/screensaver/screensavers/starfish.xml.h:8
+#: capplets/keyboard/keyboard-properties.glade.h:7
+#: capplets/mouse/mouse-properties.glade.h:1
 msgid "Fast"
 msgstr "Rapidã"
 
-#: capplets/mouse/mouse-properties.glade.h:13
-msgid "Mouse speed:"
-msgstr "Vitezã mouse:"
-
-#: capplets/mouse/mouse-properties.glade.h:14
-#: capplets/new-screensaver-properties/prefs-widget.c:514
-#: capplets/new-screensaver-properties/screensavers/3d_clock.xml.h:8
-#: capplets/new-screensaver-properties/screensavers/3d_clock.xml.h:14
-#: capplets/new-screensaver-properties/screensavers/attraction.xml.h:25
-#: capplets/new-screensaver-properties/screensavers/qix.xml.h:31
-#: capplets/screensaver/screensavers/3d_clock.xml.h:8
-#: capplets/screensaver/screensavers/3d_clock.xml.h:14
-#: capplets/screensaver/screensavers/attraction.xml.h:25
-#: capplets/screensaver/screensavers/qix.xml.h:31
-msgid "Low"
-msgstr "Micã"
-
-#: capplets/mouse/mouse-properties.glade.h:15
-#: capplets/new-screensaver-properties/prefs-widget.c:521
-#: capplets/new-screensaver-properties/screensavers/3d_clock.xml.h:9
-#: capplets/new-screensaver-properties/screensavers/3d_clock.xml.h:15
-#: capplets/new-screensaver-properties/screensavers/attraction.xml.h:26
-#: capplets/new-screensaver-properties/screensavers/qix.xml.h:32
-#: capplets/screensaver/screensavers/3d_clock.xml.h:9
-#: capplets/screensaver/screensavers/3d_clock.xml.h:15
-#: capplets/screensaver/screensavers/attraction.xml.h:26
-#: capplets/screensaver/screensavers/qix.xml.h:32
-msgid "High"
-msgstr "Mare"
-
-#: capplets/mouse/mouse-properties.glade.h:16
-msgid "Sensitivity:"
-msgstr "Senzitivitate"
-
-#: capplets/new-screensaver-properties/preferences.c:508
-#: capplets/screensaver/preferences.c:508
-msgid "Custom screensaver. No description available"
-msgstr "Ecran personalizat. Nici o descriere disponibilã"
-
-#: capplets/screensaver/prefs-widget.c:160
-msgid "Use"
-msgstr "Foloseºte"
-
-#: capplets/screensaver/prefs-widget.c:160
-msgid "Screensaver"
-msgstr "Screensaver"
-
-#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:185
-#: capplets/screensaver/screensaver-prefs-dialog.c:185
-#: capplets/wm-properties/wm-properties-capplet.c:792
-msgid "Name:"
-msgstr "Nume:"
-
-#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:197
-#: capplets/screensaver/screensaver-prefs-dialog.c:197
-#: capplets/session-properties/gsm-client-row.c:62
-msgid "Settings"
-msgstr "Setãri"
-
-#: capplets/new-screensaver-properties/prefs-widget.c:318
-#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:204
-#: capplets/screensaver/screensaver-prefs-dialog.c:204
-msgid "Description"
-msgstr "Descriere"
-
-#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:207
-#: capplets/screensaver/screensaver-prefs-dialog.c:207
-msgid "label1"
-msgstr ""
-
-#: capplets/new-screensaver-properties/prefs-widget.c:284
-#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:216
-#: capplets/screensaver/screensaver-prefs-dialog.c:216
+#: capplets/keyboard/keyboard-properties.glade.h:8
 #, fuzzy
-msgid "Demo"
-msgstr "Demo"
+msgid "Key repeat rate:"
+msgstr "Ratã de repetare"
 
-#: capplets/screensaver/screensaver-prefs-dialog.c:1360
-msgid "There are no configurable settings for this screensaver."
-msgstr "Nu sunt setãri configurabile pentru acest screensaver"
-
-#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1362
-#: capplets/screensaver/screensaver-prefs-dialog.c:1369
-msgid ""
-"Cannot find the data to configure this screensaver. Please edit the command "
-"line below."
-msgstr ""
-"Nu pot gãsi date pentru a configura acest screensaver. Va rugãm editaþi "
-"linia de comandã de mai jos."
-
-#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1367
-#: capplets/screensaver/screensaver-prefs-dialog.c:1374
-msgid "Please enter a command line below."
-msgstr "Vã rugãm introduceþi o linie de comandã mai jos."
-
-#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1382
-#: capplets/screensaver/screensaver-prefs-dialog.c:1389
-msgid "Visual:"
-msgstr "Vizual:"
-
-#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1411
-#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1706
-#: capplets/screensaver/screensaver-prefs-dialog.c:1418
-#: capplets/screensaver/screensaver-prefs-dialog.c:1714
-#, fuzzy
-msgid "Any"
-msgstr "Oricare"
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/new-screensaver-properties/screensavers/3d_clock.xml.h:7
-#: capplets/screensaver/screensavers/3d_clock.xml.h:7
-msgid "Twist:"
-msgstr "Rãsuceºte"
-
-#: capplets/new-screensaver-properties/screensavers/3d_clock.xml.h:10
-#: capplets/screensaver/screensavers/3d_clock.xml.h:10
-msgid "Twist speed:"
-msgstr "Vitezã rãsucire:"
-
-#: capplets/new-screensaver-properties/screensavers/3d_clock.xml.h:13
-#: capplets/screensaver/screensavers/3d_clock.xml.h:13
-msgid "Wobble:"
-msgstr "Wobble:"
-
-#: capplets/new-screensaver-properties/screensavers/3d_clock.xml.h:16
-#: capplets/screensaver/screensavers/3d_clock.xml.h:16
-msgid "Size:"
-msgstr "Mãrime:"
-
-#: capplets/new-mouse-properties/mouse-properties.glade.h:17
-#: capplets/new-screensaver-properties/screensavers/3d_clock.xml.h:17
-#: capplets/new-screensaver-properties/screensavers/ant.xml.h:13
-#: capplets/new-screensaver-properties/screensavers/attraction.xml.h:13
-#: capplets/new-screensaver-properties/screensavers/flag.xml.h:13
-#: capplets/new-screensaver-properties/screensavers/rorschach.xml.h:8
-#: capplets/new-screensaver-properties/screensavers/rorschach.xml.h:11
-#: capplets/screensaver/screensavers/3d_clock.xml.h:17
-#: capplets/screensaver/screensavers/ant.xml.h:13
-#: capplets/screensaver/screensavers/attraction.xml.h:13
-#: capplets/screensaver/screensavers/flag.xml.h:13
-#: capplets/screensaver/screensavers/rorschach.xml.h:8
-#: capplets/screensaver/screensavers/rorschach.xml.h:11
-msgid "Small"
-msgstr "Micã"
-
-#: capplets/new-mouse-properties/mouse-properties.glade.h:16
-#: capplets/new-screensaver-properties/screensavers/3d_clock.xml.h:18
-#: capplets/new-screensaver-properties/screensavers/ant.xml.h:14
-#: capplets/new-screensaver-properties/screensavers/attraction.xml.h:14
-#: capplets/new-screensaver-properties/screensavers/flag.xml.h:14
-#: capplets/new-screensaver-properties/screensavers/rorschach.xml.h:9
-#: capplets/new-screensaver-properties/screensavers/rorschach.xml.h:12
-#: capplets/screensaver/screensavers/3d_clock.xml.h:18
-#: capplets/screensaver/screensavers/ant.xml.h:14
-#: capplets/screensaver/screensavers/attraction.xml.h:14
-#: capplets/screensaver/screensavers/flag.xml.h:14
-#: capplets/screensaver/screensavers/rorschach.xml.h:9
-#: capplets/screensaver/screensavers/rorschach.xml.h:12
-msgid "Large"
-msgstr "Mare"
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/new-screensaver-properties/screensavers/ant.xml.h:7
-#: capplets/screensaver/screensavers/ant.xml.h:7
-msgid "Sharp turns"
-msgstr "Întoarceri scurte"
-
-#: capplets/new-screensaver-properties/screensavers/ant.xml.h:8
-#: capplets/screensaver/screensavers/ant.xml.h:8
-#, fuzzy
-msgid "Truchet lines"
-msgstr "Linii Truchet"
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/new-screensaver-properties/screensavers/ant.xml.h:9
-#: capplets/new-screensaver-properties/screensavers/attraction.xml.h:18
-#: capplets/new-screensaver-properties/screensavers/bsod.xml.h:7
-#: capplets/new-screensaver-properties/screensavers/compass.xml.h:9
-#: capplets/new-screensaver-properties/screensavers/flag.xml.h:9
-#: capplets/new-screensaver-properties/screensavers/qix.xml.h:15
-#: capplets/screensaver/screensavers/ant.xml.h:9
-#: capplets/screensaver/screensavers/attraction.xml.h:18
-#: capplets/screensaver/screensavers/bsod.xml.h:7
-#: capplets/screensaver/screensavers/compass.xml.h:9
-#: capplets/screensaver/screensavers/flag.xml.h:9
-#: capplets/screensaver/screensavers/qix.xml.h:15
-msgid "Speed"
-msgstr "Vitezã"
-
-#: capplets/new-screensaver-properties/screensavers/ant.xml.h:12
-#: capplets/new-screensaver-properties/screensavers/flag.xml.h:12
-#: capplets/screensaver/screensavers/ant.xml.h:12
-#: capplets/screensaver/screensavers/flag.xml.h:12
-msgid "Timeout"
-msgstr "TImp expirare"
-
-#: capplets/new-screensaver-properties/screensavers/ant.xml.h:15
-#: capplets/screensaver/screensavers/ant.xml.h:15
-msgid "Random"
-msgstr "Aleator"
-
-#: capplets/new-screensaver-properties/screensavers/ant.xml.h:16
-#: capplets/screensaver/screensavers/ant.xml.h:16
-msgid "Specific"
-msgstr "Specific"
-
-#: capplets/new-screensaver-properties/screensavers/ant.xml.h:17
-#: capplets/screensaver/screensavers/ant.xml.h:17
-#, fuzzy
-msgid "number of Ants"
-msgstr "Numãr furnici"
-
-#: capplets/new-screensaver-properties/screensavers/ant.xml.h:18
-#: capplets/screensaver/screensavers/ant.xml.h:18
-msgid "Random size upto"
-msgstr ""
-
-#: capplets/new-screensaver-properties/screensavers/ant.xml.h:19
-#: capplets/new-screensaver-properties/screensavers/flag.xml.h:16
-#: capplets/screensaver/screensavers/ant.xml.h:19
-#: capplets/screensaver/screensavers/flag.xml.h:16
-msgid "Specific size of"
-msgstr ""
-
-#: capplets/new-screensaver-properties/screensavers/ant.xml.h:20
-#: capplets/new-screensaver-properties/screensavers/flag.xml.h:17
-#: capplets/screensaver/screensavers/ant.xml.h:20
-#: capplets/screensaver/screensavers/flag.xml.h:17
-#, fuzzy
-msgid "Number of colours"
-msgstr "Numãr de culori"
-
-#: capplets/new-screensaver-properties/screensavers/ant.xml.h:21
-#: capplets/new-screensaver-properties/screensavers/flag.xml.h:18
-#: capplets/screensaver/screensavers/ant.xml.h:21
-#: capplets/screensaver/screensavers/flag.xml.h:18
-#: capplets/theme-switcher/demo.c:54
-msgid "Two"
-msgstr "Doi"
-
-#: capplets/new-screensaver-properties/screensavers/ant.xml.h:22
-#: capplets/new-screensaver-properties/screensavers/flag.xml.h:19
-#: capplets/screensaver/screensavers/ant.xml.h:22
-#: capplets/screensaver/screensavers/flag.xml.h:19
-msgid "Many"
-msgstr ""
-
-#: capplets/new-screensaver-properties/screensavers/ant.xml.h:23
-#: capplets/screensaver/screensavers/ant.xml.h:23
-#, fuzzy
-msgid "Randomize"
-msgstr "Amestecã"
-
-#: capplets/new-screensaver-properties/screensavers/ant.xml.h:24
-#: capplets/screensaver/screensavers/ant.xml.h:24
-msgid "Three Sided cells"
-msgstr ""
-
-#: capplets/new-screensaver-properties/screensavers/ant.xml.h:25
-#: capplets/screensaver/screensavers/ant.xml.h:25
-msgid "Four Sided cells"
-msgstr ""
-
-#: capplets/new-screensaver-properties/screensavers/ant.xml.h:26
-#: capplets/screensaver/screensavers/ant.xml.h:26
-msgid "Six Sided cells"
-msgstr ""
-
-#: capplets/new-screensaver-properties/screensavers/ant.xml.h:27
-#: capplets/screensaver/screensavers/ant.xml.h:27
-msgid "Nine Sided cells"
-msgstr ""
-
-#: capplets/new-screensaver-properties/screensavers/ant.xml.h:28
-#: capplets/screensaver/screensavers/ant.xml.h:28
-msgid "Twelve Sided cells"
-msgstr ""
-
-#: capplets/new-screensaver-properties/screensavers/ant.xml.h:29
-#: capplets/new-screensaver-properties/screensavers/attraction.xml.h:22
-#: capplets/new-screensaver-properties/screensavers/bsod.xml.h:11
-#: capplets/new-screensaver-properties/screensavers/compass.xml.h:13
-#: capplets/new-screensaver-properties/screensavers/flag.xml.h:21
-#: capplets/new-screensaver-properties/screensavers/qix.xml.h:29
-#: capplets/screensaver/screensavers/ant.xml.h:29
-#: capplets/screensaver/screensavers/attraction.xml.h:22
-#: capplets/screensaver/screensavers/bsod.xml.h:11
-#: capplets/screensaver/screensavers/compass.xml.h:13
-#: capplets/screensaver/screensavers/flag.xml.h:21
-#: capplets/screensaver/screensavers/qix.xml.h:29
-msgid "Monochrome"
-msgstr "Monochrome"
-
-#: capplets/new-screensaver-properties/screensavers/ant.xml.h:30
-#: capplets/new-screensaver-properties/screensavers/attraction.xml.h:21
-#: capplets/new-screensaver-properties/screensavers/bsod.xml.h:10
-#: capplets/new-screensaver-properties/screensavers/compass.xml.h:12
-#: capplets/new-screensaver-properties/screensavers/flag.xml.h:20
-#: capplets/new-screensaver-properties/screensavers/qix.xml.h:28
-#: capplets/screensaver/screensavers/ant.xml.h:30
-#: capplets/screensaver/screensavers/attraction.xml.h:21
-#: capplets/screensaver/screensavers/bsod.xml.h:10
-#: capplets/screensaver/screensavers/compass.xml.h:12
-#: capplets/screensaver/screensavers/flag.xml.h:20
-#: capplets/screensaver/screensavers/qix.xml.h:28
-msgid "Full Color"
-msgstr "Culoare maximã"
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/new-screensaver-properties/screensavers/attraction.xml.h:7
-#: capplets/screensaver/screensavers/attraction.xml.h:7
-msgid "Balls"
-msgstr "Mingii"
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/new-screensaver-properties/screensavers/attraction.xml.h:8
-#: capplets/new-screensaver-properties/screensavers/qix.xml.h:7
-#: capplets/screensaver/screensavers/attraction.xml.h:8
-#: capplets/screensaver/screensavers/qix.xml.h:7
-#, fuzzy
-msgid "Lines"
-msgstr "Linii"
-
-#: capplets/new-screensaver-properties/screensavers/attraction.xml.h:9
-#: capplets/screensaver/screensavers/attraction.xml.h:9
-msgid "Tails"
-msgstr ""
-
-#: capplets/new-screensaver-properties/screensavers/attraction.xml.h:10
-#: capplets/new-screensaver-properties/screensavers/qix.xml.h:8
-#: capplets/screensaver/screensavers/attraction.xml.h:10
-#: capplets/screensaver/screensavers/qix.xml.h:8
-msgid "Polygons"
-msgstr ""
-
-#: capplets/new-screensaver-properties/screensavers/attraction.xml.h:11
-#: capplets/screensaver/screensavers/attraction.xml.h:11
-msgid "Splines"
-msgstr ""
-
-#: capplets/new-screensaver-properties/screensavers/attraction.xml.h:12
-#: capplets/screensaver/screensavers/attraction.xml.h:12
-msgid "Threshold of repulsion"
-msgstr ""
-
-#: capplets/new-screensaver-properties/screensavers/attraction.xml.h:15
-#: capplets/screensaver/screensavers/attraction.xml.h:15
-msgid "Length of Trail"
-msgstr ""
-
-#: capplets/new-screensaver-properties/prefs-widget.c:637
-#: capplets/new-screensaver-properties/screensavers/attraction.xml.h:16
-#: capplets/new-screensaver-properties/screensavers/qix.xml.h:19
-#: capplets/new-screensaver-properties/screensavers/qix.xml.h:25
-#: capplets/new-screensaver-properties/screensavers/rorschach.xml.h:16
-#: capplets/screensaver/screensavers/attraction.xml.h:16
-#: capplets/screensaver/screensavers/qix.xml.h:19
-#: capplets/screensaver/screensavers/qix.xml.h:25
-#: capplets/screensaver/screensavers/rorschach.xml.h:16
-#, fuzzy
-msgid "Short"
-msgstr "Scurt"
-
-#: capplets/new-screensaver-properties/prefs-widget.c:617
-#: capplets/new-screensaver-properties/screensavers/attraction.xml.h:17
-#: capplets/new-screensaver-properties/screensavers/qix.xml.h:20
-#: capplets/new-screensaver-properties/screensavers/qix.xml.h:26
-#: capplets/new-screensaver-properties/screensavers/rorschach.xml.h:17
-#: capplets/screensaver/screensavers/attraction.xml.h:17
-#: capplets/screensaver/screensavers/qix.xml.h:20
-#: capplets/screensaver/screensavers/qix.xml.h:26
-#: capplets/screensaver/screensavers/rorschach.xml.h:17
+#: capplets/keyboard/keyboard-properties.glade.h:10
 #, fuzzy
 msgid "Long"
 msgstr "Lung"
 
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/new-screensaver-properties/screensavers/attraction.xml.h:23
-#: capplets/new-screensaver-properties/screensavers/braid.xml.h:7
-#: capplets/new-screensaver-properties/screensavers/fadeplot.xml.h:7
-#: capplets/new-screensaver-properties/screensavers/sierpinski.xml.h:7
-#: capplets/new-screensaver-properties/screensavers/spiral.xml.h:12
-#: capplets/new-screensaver-properties/screensavers/triangle.xml.h:7
-#: capplets/new-screensaver-properties/screensavers/vines.xml.h:7
-#: capplets/screensaver/screensavers/attraction.xml.h:23
-#: capplets/screensaver/screensavers/braid.xml.h:7
-#: capplets/screensaver/screensavers/fadeplot.xml.h:7
-#: capplets/screensaver/screensavers/sierpinski.xml.h:7
-#: capplets/screensaver/screensavers/spiral.xml.h:12
-#: capplets/screensaver/screensavers/triangle.xml.h:7
-#: capplets/screensaver/screensavers/vines.xml.h:7
-msgid "Number of Colors"
-msgstr "Numãr culori"
+#: capplets/keyboard/keyboard-properties.glade.h:11
+msgid "Medium"
+msgstr ""
 
-#: capplets/new-screensaver-properties/screensavers/attraction.xml.h:24
-#: capplets/screensaver/screensavers/attraction.xml.h:24
+#: capplets/keyboard/keyboard-properties.glade.h:12
+msgid "Pitch (Hz)"
+msgstr "Înãlþime (Hz) "
+
+#: capplets/keyboard/keyboard-properties.glade.h:13
 #, fuzzy
-msgid "Color Contrast"
-msgstr "Culoare contrast"
+msgid "Short"
+msgstr "Scurt"
 
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/new-screensaver-properties/screensavers/blitspin.xml.h:7
-#: capplets/screensaver/screensavers/blitspin.xml.h:7
-msgid "Speed of rotation."
-msgstr ""
-
-#: capplets/new-screensaver-properties/screensavers/blitspin.xml.h:8
-#: capplets/new-screensaver-properties/screensavers/blitspin.xml.h:11
-#: capplets/new-screensaver-properties/screensavers/bouboule.xml.h:10
-#: capplets/new-screensaver-properties/screensavers/bubbles.xml.h:8
-#: capplets/new-screensaver-properties/screensavers/coral.xml.h:13
-#: capplets/new-screensaver-properties/screensavers/crystal.xml.h:10
-#: capplets/new-screensaver-properties/screensavers/cynosure.xml.h:13
-#: capplets/new-screensaver-properties/screensavers/decayscreen.xml.h:8
-#: capplets/new-screensaver-properties/screensavers/discrete.xml.h:10
-#: capplets/new-screensaver-properties/screensavers/drift.xml.h:10
-#: capplets/new-screensaver-properties/screensavers/epicycle.xml.h:8
-#: capplets/new-screensaver-properties/screensavers/fadeplot.xml.h:12
-#: capplets/new-screensaver-properties/screensavers/flame.xml.h:13
-#: capplets/new-screensaver-properties/screensavers/flame.xml.h:16
-#: capplets/new-screensaver-properties/screensavers/forest.xml.h:10
-#: capplets/new-screensaver-properties/screensavers/goop.xml.h:10
-#: capplets/new-screensaver-properties/screensavers/greynetic.xml.h:8
-#: capplets/new-screensaver-properties/screensavers/halo.xml.h:12
-#: capplets/new-screensaver-properties/screensavers/helix.xml.h:8
-#: capplets/new-screensaver-properties/screensavers/hopalong.xml.h:10
-#: capplets/new-screensaver-properties/screensavers/hypercube.xml.h:11
-#: capplets/new-screensaver-properties/screensavers/jigsaw.xml.h:8
-#: capplets/new-screensaver-properties/screensavers/julia.xml.h:10
-#: capplets/new-screensaver-properties/screensavers/kaleidescope.xml.h:13
-#: capplets/new-screensaver-properties/screensavers/lisa.xml.h:10
-#: capplets/new-screensaver-properties/screensavers/lmorph.xml.h:13
-#: capplets/new-screensaver-properties/screensavers/moire.xml.h:8
-#: capplets/new-screensaver-properties/screensavers/munch.xml.h:8
-#: capplets/new-screensaver-properties/screensavers/pyro.xml.h:11
-#: capplets/new-screensaver-properties/screensavers/sierpinski.xml.h:10
-#: capplets/new-screensaver-properties/screensavers/spiral.xml.h:10
-#: capplets/screensaver/screensavers/blitspin.xml.h:8
-#: capplets/screensaver/screensavers/blitspin.xml.h:11
-#: capplets/screensaver/screensavers/bouboule.xml.h:10
-#: capplets/screensaver/screensavers/bubbles.xml.h:8
-#: capplets/screensaver/screensavers/coral.xml.h:13
-#: capplets/screensaver/screensavers/crystal.xml.h:10
-#: capplets/screensaver/screensavers/cynosure.xml.h:13
-#: capplets/screensaver/screensavers/decayscreen.xml.h:8
-#: capplets/screensaver/screensavers/discrete.xml.h:10
-#: capplets/screensaver/screensavers/drift.xml.h:10
-#: capplets/screensaver/screensavers/epicycle.xml.h:8
-#: capplets/screensaver/screensavers/fadeplot.xml.h:12
-#: capplets/screensaver/screensavers/flame.xml.h:13
-#: capplets/screensaver/screensavers/flame.xml.h:16
-#: capplets/screensaver/screensavers/forest.xml.h:10
-#: capplets/screensaver/screensavers/goop.xml.h:10
-#: capplets/screensaver/screensavers/greynetic.xml.h:8
-#: capplets/screensaver/screensavers/halo.xml.h:12
-#: capplets/screensaver/screensavers/helix.xml.h:8
-#: capplets/screensaver/screensavers/hopalong.xml.h:10
-#: capplets/screensaver/screensavers/hypercube.xml.h:11
-#: capplets/screensaver/screensavers/jigsaw.xml.h:8
-#: capplets/screensaver/screensavers/julia.xml.h:10
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:13
-#: capplets/screensaver/screensavers/lisa.xml.h:10
-#: capplets/screensaver/screensavers/lmorph.xml.h:13
-#: capplets/screensaver/screensavers/moire.xml.h:8
-#: capplets/screensaver/screensavers/munch.xml.h:8
-#: capplets/screensaver/screensavers/pyro.xml.h:11
-#: capplets/screensaver/screensavers/sierpinski.xml.h:10
-#: capplets/screensaver/screensavers/spiral.xml.h:10
-msgid "Faster"
-msgstr "Mai repede"
-
-#: capplets/new-screensaver-properties/screensavers/blitspin.xml.h:9
-#: capplets/new-screensaver-properties/screensavers/blitspin.xml.h:12
-#: capplets/new-screensaver-properties/screensavers/bouboule.xml.h:11
-#: capplets/new-screensaver-properties/screensavers/bubbles.xml.h:9
-#: capplets/new-screensaver-properties/screensavers/coral.xml.h:14
-#: capplets/new-screensaver-properties/screensavers/crystal.xml.h:11
-#: capplets/new-screensaver-properties/screensavers/cynosure.xml.h:14
-#: capplets/new-screensaver-properties/screensavers/decayscreen.xml.h:9
-#: capplets/new-screensaver-properties/screensavers/discrete.xml.h:11
-#: capplets/new-screensaver-properties/screensavers/drift.xml.h:11
-#: capplets/new-screensaver-properties/screensavers/epicycle.xml.h:9
-#: capplets/new-screensaver-properties/screensavers/fadeplot.xml.h:13
-#: capplets/new-screensaver-properties/screensavers/fadeplot.xml.h:16
-#: capplets/new-screensaver-properties/screensavers/flame.xml.h:14
-#: capplets/new-screensaver-properties/screensavers/flame.xml.h:17
-#: capplets/new-screensaver-properties/screensavers/forest.xml.h:11
-#: capplets/new-screensaver-properties/screensavers/goop.xml.h:11
-#: capplets/new-screensaver-properties/screensavers/greynetic.xml.h:9
-#: capplets/new-screensaver-properties/screensavers/halo.xml.h:13
-#: capplets/new-screensaver-properties/screensavers/helix.xml.h:9
-#: capplets/new-screensaver-properties/screensavers/hopalong.xml.h:11
-#: capplets/new-screensaver-properties/screensavers/hypercube.xml.h:12
-#: capplets/new-screensaver-properties/screensavers/jigsaw.xml.h:9
-#: capplets/new-screensaver-properties/screensavers/julia.xml.h:11
-#: capplets/new-screensaver-properties/screensavers/kaleidescope.xml.h:14
-#: capplets/new-screensaver-properties/screensavers/lisa.xml.h:11
-#: capplets/new-screensaver-properties/screensavers/lmorph.xml.h:14
-#: capplets/new-screensaver-properties/screensavers/moire.xml.h:9
-#: capplets/new-screensaver-properties/screensavers/munch.xml.h:9
-#: capplets/new-screensaver-properties/screensavers/pyro.xml.h:10
-#: capplets/new-screensaver-properties/screensavers/sierpinski.xml.h:11
-#: capplets/new-screensaver-properties/screensavers/spiral.xml.h:11
-#: capplets/screensaver/screensavers/blitspin.xml.h:9
-#: capplets/screensaver/screensavers/blitspin.xml.h:12
-#: capplets/screensaver/screensavers/bouboule.xml.h:11
-#: capplets/screensaver/screensavers/bubbles.xml.h:9
-#: capplets/screensaver/screensavers/coral.xml.h:14
-#: capplets/screensaver/screensavers/crystal.xml.h:11
-#: capplets/screensaver/screensavers/cynosure.xml.h:14
-#: capplets/screensaver/screensavers/decayscreen.xml.h:9
-#: capplets/screensaver/screensavers/discrete.xml.h:11
-#: capplets/screensaver/screensavers/drift.xml.h:11
-#: capplets/screensaver/screensavers/epicycle.xml.h:9
-#: capplets/screensaver/screensavers/fadeplot.xml.h:13
-#: capplets/screensaver/screensavers/fadeplot.xml.h:16
-#: capplets/screensaver/screensavers/flame.xml.h:14
-#: capplets/screensaver/screensavers/flame.xml.h:17
-#: capplets/screensaver/screensavers/forest.xml.h:11
-#: capplets/screensaver/screensavers/goop.xml.h:11
-#: capplets/screensaver/screensavers/greynetic.xml.h:9
-#: capplets/screensaver/screensavers/halo.xml.h:13
-#: capplets/screensaver/screensavers/helix.xml.h:9
-#: capplets/screensaver/screensavers/hopalong.xml.h:11
-#: capplets/screensaver/screensavers/hypercube.xml.h:12
-#: capplets/screensaver/screensavers/jigsaw.xml.h:9
-#: capplets/screensaver/screensavers/julia.xml.h:11
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:14
-#: capplets/screensaver/screensavers/lisa.xml.h:11
-#: capplets/screensaver/screensavers/lmorph.xml.h:14
-#: capplets/screensaver/screensavers/moire.xml.h:9
-#: capplets/screensaver/screensavers/munch.xml.h:9
-#: capplets/screensaver/screensavers/pyro.xml.h:10
-#: capplets/screensaver/screensavers/sierpinski.xml.h:11
-#: capplets/screensaver/screensavers/spiral.xml.h:11
-msgid "Slower"
-msgstr "Mai încet"
-
-#: capplets/new-screensaver-properties/screensavers/blitspin.xml.h:10
-#: capplets/screensaver/screensavers/blitspin.xml.h:10
-msgid "Speed of the 90 degree rotation."
-msgstr "Speed of the 90 degree rotation."
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/new-screensaver-properties/screensavers/blitspin.xml.h:13
-#: capplets/new-screensaver-properties/screensavers/bouboule.xml.h:15
-#: capplets/new-screensaver-properties/screensavers/braid.xml.h:9
-#: capplets/new-screensaver-properties/screensavers/bubbles.xml.h:13
-#: capplets/new-screensaver-properties/screensavers/crystal.xml.h:15
-#: capplets/new-screensaver-properties/screensavers/cynosure.xml.h:15
-#: capplets/new-screensaver-properties/screensavers/decayscreen.xml.h:10
-#: capplets/new-screensaver-properties/screensavers/discrete.xml.h:14
-#: capplets/new-screensaver-properties/screensavers/drift.xml.h:15
-#: capplets/new-screensaver-properties/screensavers/epicycle.xml.h:12
-#: capplets/new-screensaver-properties/screensavers/fadeplot.xml.h:17
-#: capplets/new-screensaver-properties/screensavers/flame.xml.h:18
-#: capplets/new-screensaver-properties/screensavers/forest.xml.h:14
-#: capplets/new-screensaver-properties/screensavers/goop.xml.h:12
-#: capplets/new-screensaver-properties/screensavers/grav.xml.h:11
-#: capplets/new-screensaver-properties/screensavers/greynetic.xml.h:10
-#: capplets/new-screensaver-properties/screensavers/halo.xml.h:14
-#: capplets/new-screensaver-properties/screensavers/helix.xml.h:10
-#: capplets/new-screensaver-properties/screensavers/hopalong.xml.h:15
-#: capplets/new-screensaver-properties/screensavers/hypercube.xml.h:13
-#: capplets/new-screensaver-properties/screensavers/ifs.xml.h:9
-#: capplets/new-screensaver-properties/screensavers/julia.xml.h:14
-#: capplets/new-screensaver-properties/screensavers/kaleidescope.xml.h:15
-#: capplets/new-screensaver-properties/screensavers/laser.xml.h:12
-#: capplets/new-screensaver-properties/screensavers/lightning.xml.h:9
-#: capplets/new-screensaver-properties/screensavers/lisa.xml.h:17
-#: capplets/new-screensaver-properties/screensavers/lmorph.xml.h:16
-#: capplets/new-screensaver-properties/screensavers/moire.xml.h:15
-#: capplets/new-screensaver-properties/screensavers/munch.xml.h:12
-#: capplets/new-screensaver-properties/screensavers/pedal.xml.h:16
-#: capplets/new-screensaver-properties/screensavers/sierpinski.xml.h:12
-#: capplets/new-screensaver-properties/screensavers/spiral.xml.h:16
-#: capplets/new-screensaver-properties/screensavers/triangle.xml.h:9
-#: capplets/new-screensaver-properties/screensavers/vines.xml.h:9
-#: capplets/new-screensaver-properties/screensavers/xroger.xml.h:7
-#: capplets/screensaver/screensavers/blitspin.xml.h:13
-#: capplets/screensaver/screensavers/bouboule.xml.h:15
-#: capplets/screensaver/screensavers/braid.xml.h:9
-#: capplets/screensaver/screensavers/bubbles.xml.h:13
-#: capplets/screensaver/screensavers/crystal.xml.h:15
-#: capplets/screensaver/screensavers/cynosure.xml.h:15
-#: capplets/screensaver/screensavers/decayscreen.xml.h:10
-#: capplets/screensaver/screensavers/discrete.xml.h:14
-#: capplets/screensaver/screensavers/drift.xml.h:15
-#: capplets/screensaver/screensavers/epicycle.xml.h:12
-#: capplets/screensaver/screensavers/fadeplot.xml.h:17
-#: capplets/screensaver/screensavers/flame.xml.h:18
-#: capplets/screensaver/screensavers/forest.xml.h:14
-#: capplets/screensaver/screensavers/goop.xml.h:12
-#: capplets/screensaver/screensavers/grav.xml.h:11
-#: capplets/screensaver/screensavers/greynetic.xml.h:10
-#: capplets/screensaver/screensavers/halo.xml.h:14
-#: capplets/screensaver/screensavers/helix.xml.h:10
-#: capplets/screensaver/screensavers/hopalong.xml.h:15
-#: capplets/screensaver/screensavers/hypercube.xml.h:13
-#: capplets/screensaver/screensavers/ifs.xml.h:9
-#: capplets/screensaver/screensavers/julia.xml.h:14
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:15
-#: capplets/screensaver/screensavers/laser.xml.h:12
-#: capplets/screensaver/screensavers/lightning.xml.h:9
-#: capplets/screensaver/screensavers/lisa.xml.h:17
-#: capplets/screensaver/screensavers/lmorph.xml.h:16
-#: capplets/screensaver/screensavers/moire.xml.h:15
-#: capplets/screensaver/screensavers/munch.xml.h:12
-#: capplets/screensaver/screensavers/pedal.xml.h:16
-#: capplets/screensaver/screensavers/sierpinski.xml.h:12
-#: capplets/screensaver/screensavers/spiral.xml.h:16
-#: capplets/screensaver/screensavers/triangle.xml.h:9
-#: capplets/screensaver/screensavers/vines.xml.h:9
-#: capplets/screensaver/screensavers/xroger.xml.h:7
-msgid "Display screensaver in monochrome."
-msgstr "Afiºeazã screensaver-ul monocrom."
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/new-screensaver-properties/screensavers/bouboule.xml.h:7
-#: capplets/new-screensaver-properties/screensavers/crystal.xml.h:7
-#: capplets/new-screensaver-properties/screensavers/cynosure.xml.h:7
-#: capplets/new-screensaver-properties/screensavers/discrete.xml.h:7
-#: capplets/new-screensaver-properties/screensavers/drift.xml.h:7
-#: capplets/new-screensaver-properties/screensavers/forest.xml.h:7
-#: capplets/new-screensaver-properties/screensavers/grav.xml.h:7
-#: capplets/new-screensaver-properties/screensavers/halo.xml.h:7
-#: capplets/new-screensaver-properties/screensavers/hopalong.xml.h:7
-#: capplets/new-screensaver-properties/screensavers/ifs.xml.h:7
-#: capplets/new-screensaver-properties/screensavers/julia.xml.h:7
-#: capplets/new-screensaver-properties/screensavers/lightning.xml.h:7
-#: capplets/new-screensaver-properties/screensavers/lisa.xml.h:7
-#: capplets/new-screensaver-properties/screensavers/moire.xml.h:10
-#: capplets/screensaver/screensavers/bouboule.xml.h:7
-#: capplets/screensaver/screensavers/crystal.xml.h:7
-#: capplets/screensaver/screensavers/cynosure.xml.h:7
-#: capplets/screensaver/screensavers/discrete.xml.h:7
-#: capplets/screensaver/screensavers/drift.xml.h:7
-#: capplets/screensaver/screensavers/forest.xml.h:7
-#: capplets/screensaver/screensavers/grav.xml.h:7
-#: capplets/screensaver/screensavers/halo.xml.h:7
-#: capplets/screensaver/screensavers/hopalong.xml.h:7
-#: capplets/screensaver/screensavers/ifs.xml.h:7
-#: capplets/screensaver/screensavers/julia.xml.h:7
-#: capplets/screensaver/screensavers/lightning.xml.h:7
-#: capplets/screensaver/screensavers/lisa.xml.h:7
-#: capplets/screensaver/screensavers/moire.xml.h:10
-msgid "Number of Colors."
-msgstr "Numãr culori."
-
-#: capplets/new-screensaver-properties/screensavers/bouboule.xml.h:8
-#: capplets/new-screensaver-properties/screensavers/braid.xml.h:8
-#: capplets/new-screensaver-properties/screensavers/crystal.xml.h:8
-#: capplets/new-screensaver-properties/screensavers/cynosure.xml.h:8
-#: capplets/new-screensaver-properties/screensavers/discrete.xml.h:8
-#: capplets/new-screensaver-properties/screensavers/drift.xml.h:8
-#: capplets/new-screensaver-properties/screensavers/fadeplot.xml.h:8
-#: capplets/new-screensaver-properties/screensavers/forest.xml.h:8
-#: capplets/new-screensaver-properties/screensavers/grav.xml.h:8
-#: capplets/new-screensaver-properties/screensavers/halo.xml.h:8
-#: capplets/new-screensaver-properties/screensavers/hopalong.xml.h:8
-#: capplets/new-screensaver-properties/screensavers/ifs.xml.h:8
-#: capplets/new-screensaver-properties/screensavers/julia.xml.h:8
-#: capplets/new-screensaver-properties/screensavers/lightning.xml.h:8
-#: capplets/new-screensaver-properties/screensavers/lisa.xml.h:8
-#: capplets/new-screensaver-properties/screensavers/moire.xml.h:11
-#: capplets/new-screensaver-properties/screensavers/sierpinski.xml.h:8
-#: capplets/new-screensaver-properties/screensavers/spiral.xml.h:13
-#: capplets/new-screensaver-properties/screensavers/triangle.xml.h:8
-#: capplets/new-screensaver-properties/screensavers/vines.xml.h:8
-#: capplets/screensaver/screensavers/bouboule.xml.h:8
-#: capplets/screensaver/screensavers/braid.xml.h:8
-#: capplets/screensaver/screensavers/crystal.xml.h:8
-#: capplets/screensaver/screensavers/cynosure.xml.h:8
-#: capplets/screensaver/screensavers/discrete.xml.h:8
-#: capplets/screensaver/screensavers/drift.xml.h:8
-#: capplets/screensaver/screensavers/fadeplot.xml.h:8
-#: capplets/screensaver/screensavers/forest.xml.h:8
-#: capplets/screensaver/screensavers/grav.xml.h:8
-#: capplets/screensaver/screensavers/halo.xml.h:8
-#: capplets/screensaver/screensavers/hopalong.xml.h:8
-#: capplets/screensaver/screensavers/ifs.xml.h:8
-#: capplets/screensaver/screensavers/julia.xml.h:8
-#: capplets/screensaver/screensavers/lightning.xml.h:8
-#: capplets/screensaver/screensavers/lisa.xml.h:8
-#: capplets/screensaver/screensavers/moire.xml.h:11
-#: capplets/screensaver/screensavers/sierpinski.xml.h:8
-#: capplets/screensaver/screensavers/spiral.xml.h:13
-#: capplets/screensaver/screensavers/triangle.xml.h:8
-#: capplets/screensaver/screensavers/vines.xml.h:8
-msgid "Colors:"
-msgstr "Culori:"
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/new-screensaver-properties/screensavers/bouboule.xml.h:9
-#: capplets/new-screensaver-properties/screensavers/bubbles.xml.h:7
-#: capplets/new-screensaver-properties/screensavers/coral.xml.h:12
-#: capplets/new-screensaver-properties/screensavers/crystal.xml.h:9
-#: capplets/new-screensaver-properties/screensavers/cynosure.xml.h:12
-#: capplets/new-screensaver-properties/screensavers/decayscreen.xml.h:7
-#: capplets/new-screensaver-properties/screensavers/discrete.xml.h:9
-#: capplets/new-screensaver-properties/screensavers/drift.xml.h:9
-#: capplets/new-screensaver-properties/screensavers/epicycle.xml.h:7
-#: capplets/new-screensaver-properties/screensavers/flame.xml.h:12
-#: capplets/new-screensaver-properties/screensavers/goop.xml.h:9
-#: capplets/new-screensaver-properties/screensavers/greynetic.xml.h:7
-#: capplets/new-screensaver-properties/screensavers/halo.xml.h:11
-#: capplets/new-screensaver-properties/screensavers/hopalong.xml.h:9
-#: capplets/new-screensaver-properties/screensavers/hypercube.xml.h:10
-#: capplets/new-screensaver-properties/screensavers/jigsaw.xml.h:7
-#: capplets/new-screensaver-properties/screensavers/julia.xml.h:9
-#: capplets/new-screensaver-properties/screensavers/kaleidescope.xml.h:12
-#: capplets/new-screensaver-properties/screensavers/lisa.xml.h:9
-#: capplets/new-screensaver-properties/screensavers/lmorph.xml.h:12
-#: capplets/new-screensaver-properties/screensavers/moire.xml.h:7
-#: capplets/new-screensaver-properties/screensavers/munch.xml.h:7
-#: capplets/new-screensaver-properties/screensavers/spiral.xml.h:9
-#: capplets/screensaver/screensavers/bouboule.xml.h:9
-#: capplets/screensaver/screensavers/bubbles.xml.h:7
-#: capplets/screensaver/screensavers/coral.xml.h:12
-#: capplets/screensaver/screensavers/crystal.xml.h:9
-#: capplets/screensaver/screensavers/cynosure.xml.h:12
-#: capplets/screensaver/screensavers/decayscreen.xml.h:7
-#: capplets/screensaver/screensavers/discrete.xml.h:9
-#: capplets/screensaver/screensavers/drift.xml.h:9
-#: capplets/screensaver/screensavers/epicycle.xml.h:7
-#: capplets/screensaver/screensavers/flame.xml.h:12
-#: capplets/screensaver/screensavers/goop.xml.h:9
-#: capplets/screensaver/screensavers/greynetic.xml.h:7
-#: capplets/screensaver/screensavers/halo.xml.h:11
-#: capplets/screensaver/screensavers/hopalong.xml.h:9
-#: capplets/screensaver/screensavers/hypercube.xml.h:10
-#: capplets/screensaver/screensavers/jigsaw.xml.h:7
-#: capplets/screensaver/screensavers/julia.xml.h:9
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:12
-#: capplets/screensaver/screensavers/lisa.xml.h:9
-#: capplets/screensaver/screensavers/lmorph.xml.h:12
-#: capplets/screensaver/screensavers/moire.xml.h:7
-#: capplets/screensaver/screensavers/munch.xml.h:7
-#: capplets/screensaver/screensavers/spiral.xml.h:9
-msgid "Speed of Motion."
-msgstr "Speed of Motion."
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/new-screensaver-properties/screensavers/bouboule.xml.h:12
-#: capplets/new-screensaver-properties/screensavers/goop.xml.h:7
-#: capplets/screensaver/screensavers/bouboule.xml.h:12
-#: capplets/screensaver/screensavers/goop.xml.h:7
-msgid "Number of bubbles to use."
-msgstr "Number of bubbles to use."
-
-#: capplets/new-screensaver-properties/screensavers/bouboule.xml.h:13
-#: capplets/new-screensaver-properties/screensavers/crystal.xml.h:13
-#: capplets/new-screensaver-properties/screensavers/discrete.xml.h:13
-#: capplets/new-screensaver-properties/screensavers/drift.xml.h:13
-#: capplets/new-screensaver-properties/screensavers/fadeplot.xml.h:10
-#: capplets/new-screensaver-properties/screensavers/forest.xml.h:13
-#: capplets/new-screensaver-properties/screensavers/goop.xml.h:8
-#: capplets/new-screensaver-properties/screensavers/grav.xml.h:10
-#: capplets/new-screensaver-properties/screensavers/halo.xml.h:10
-#: capplets/new-screensaver-properties/screensavers/julia.xml.h:13
-#: capplets/new-screensaver-properties/screensavers/lisa.xml.h:13
-#: capplets/new-screensaver-properties/screensavers/pyro.xml.h:8
-#: capplets/new-screensaver-properties/screensavers/spiral.xml.h:15
-#: capplets/screensaver/screensavers/bouboule.xml.h:13
-#: capplets/screensaver/screensavers/crystal.xml.h:13
-#: capplets/screensaver/screensavers/discrete.xml.h:13
-#: capplets/screensaver/screensavers/drift.xml.h:13
-#: capplets/screensaver/screensavers/fadeplot.xml.h:10
-#: capplets/screensaver/screensavers/forest.xml.h:13
-#: capplets/screensaver/screensavers/goop.xml.h:8
-#: capplets/screensaver/screensavers/grav.xml.h:10
-#: capplets/screensaver/screensavers/halo.xml.h:10
-#: capplets/screensaver/screensavers/julia.xml.h:13
-#: capplets/screensaver/screensavers/lisa.xml.h:13
-#: capplets/screensaver/screensavers/pyro.xml.h:8
-#: capplets/screensaver/screensavers/spiral.xml.h:15
-msgid "Count:"
-msgstr "Numãr:"
-
-#: capplets/new-screensaver-properties/screensavers/bouboule.xml.h:14
-#: capplets/screensaver/screensavers/bouboule.xml.h:14
-msgid "Use red/blue 3d seperation."
-msgstr "Use red/blue 3d seperation."
-
-#: capplets/new-screensaver-properties/screensavers/bubbles.xml.h:10
-#: capplets/screensaver/screensavers/bubbles.xml.h:10
-msgid "Draw circles instead of pixmap bubbles."
-msgstr "Draw circles instead of pixmap bubbles."
-
-#: capplets/new-screensaver-properties/screensavers/bubbles.xml.h:11
-#: capplets/screensaver/screensavers/bubbles.xml.h:11
-msgid "Don't hide bubbles when they pop."
-msgstr "Don't hide bubbles when they pop."
-
-#: capplets/new-screensaver-properties/screensavers/bubbles.xml.h:12
-#: capplets/screensaver/screensavers/bubbles.xml.h:12
-msgid "Bubbles exist in three dimensions."
-msgstr "Bulele existã în trei dimensiuni."
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/new-screensaver-properties/screensavers/compass.xml.h:7
-#: capplets/screensaver/screensavers/compass.xml.h:7
-msgid "Use double buffering"
-msgstr ""
-
-#: capplets/new-screensaver-properties/screensavers/compass.xml.h:8
-#: capplets/screensaver/screensavers/compass.xml.h:8
-msgid "Don't use double bufferinge"
-msgstr ""
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/new-screensaver-properties/screensavers/coral.xml.h:7
-#: capplets/screensaver/screensavers/coral.xml.h:7
-msgid "Density"
-msgstr "Density"
-
-#: capplets/new-screensaver-properties/screensavers/coral.xml.h:8
-#: capplets/screensaver/screensavers/coral.xml.h:8
-msgid "Denser"
-msgstr "Mai dens"
-
-#: capplets/new-screensaver-properties/screensavers/coral.xml.h:9
-#: capplets/screensaver/screensavers/coral.xml.h:9
-msgid "Thinner"
-msgstr "Mai subþire"
-
-#: capplets/new-screensaver-properties/screensavers/coral.xml.h:10
-#: capplets/screensaver/screensavers/coral.xml.h:10
-msgid "Number of seeds"
-msgstr "Number of seeds"
-
-#: capplets/new-screensaver-properties/screensavers/coral.xml.h:11
-#: capplets/screensaver/screensavers/coral.xml.h:11
-msgid "Seeds"
-msgstr "Seeds"
-
-#: capplets/new-screensaver-properties/screensavers/crystal.xml.h:12
-#: capplets/screensaver/screensavers/crystal.xml.h:12
-msgid "Number of polygons to use."
-msgstr "Numãr de poligoane folosit."
-
-#: capplets/new-screensaver-properties/screensavers/crystal.xml.h:14
-#: capplets/screensaver/screensavers/crystal.xml.h:14
-msgid "Center image."
-msgstr "Centreazã imaginea."
-
-#: capplets/new-screensaver-properties/screensavers/crystal.xml.h:16
-#: capplets/screensaver/screensavers/crystal.xml.h:16
-msgid "Have at maximum size"
-msgstr "Have at maximum size"
-
-#: capplets/new-screensaver-properties/screensavers/crystal.xml.h:17
-#: capplets/screensaver/screensavers/crystal.xml.h:17
-msgid "Cell"
-msgstr "Celulã"
-
-#: capplets/new-screensaver-properties/screensavers/cynosure.xml.h:9
-#: capplets/screensaver/screensavers/cynosure.xml.h:9
-msgid "Number of iterations."
-msgstr "Number of iterations."
-
-#: capplets/new-screensaver-properties/screensavers/cynosure.xml.h:10
-#: capplets/new-screensaver-properties/screensavers/flame.xml.h:10
-#: capplets/new-screensaver-properties/screensavers/hopalong.xml.h:13
-#: capplets/new-screensaver-properties/screensavers/kaleidescope.xml.h:10
-#: capplets/new-screensaver-properties/screensavers/lmorph.xml.h:10
-#: capplets/new-screensaver-properties/screensavers/pedal.xml.h:11
-#: capplets/new-screensaver-properties/screensavers/pyro.xml.h:13
-#: capplets/screensaver/screensavers/cynosure.xml.h:10
-#: capplets/screensaver/screensavers/flame.xml.h:10
-#: capplets/screensaver/screensavers/hopalong.xml.h:13
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:10
-#: capplets/screensaver/screensavers/lmorph.xml.h:10
-#: capplets/screensaver/screensavers/pedal.xml.h:11
-#: capplets/screensaver/screensavers/pyro.xml.h:13
-msgid "Less"
-msgstr "Less"
-
-#: capplets/new-screensaver-properties/screensavers/cynosure.xml.h:11
-#: capplets/new-screensaver-properties/screensavers/fadeplot.xml.h:15
-#: capplets/new-screensaver-properties/screensavers/flame.xml.h:11
-#: capplets/new-screensaver-properties/screensavers/hopalong.xml.h:14
-#: capplets/new-screensaver-properties/screensavers/kaleidescope.xml.h:11
-#: capplets/new-screensaver-properties/screensavers/lmorph.xml.h:11
-#: capplets/new-screensaver-properties/screensavers/pedal.xml.h:12
-#: capplets/new-screensaver-properties/screensavers/pyro.xml.h:14
-#: capplets/screensaver/screensavers/cynosure.xml.h:11
-#: capplets/screensaver/screensavers/fadeplot.xml.h:15
-#: capplets/screensaver/screensavers/flame.xml.h:11
-#: capplets/screensaver/screensavers/hopalong.xml.h:14
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:11
-#: capplets/screensaver/screensavers/lmorph.xml.h:11
-#: capplets/screensaver/screensavers/pedal.xml.h:12
-#: capplets/screensaver/screensavers/pyro.xml.h:14
-msgid "More"
-msgstr "Mai mult"
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/new-screensaver-properties/screensavers/deco.xml.h:7
-#: capplets/new-screensaver-properties/screensavers/spiral.xml.h:7
-#: capplets/screensaver/screensavers/deco.xml.h:7
-#: capplets/screensaver/screensavers/spiral.xml.h:7
-msgid "Time between redraws:"
-msgstr "Time between redraws:"
-
-#: capplets/new-screensaver-properties/screensavers/deco.xml.h:8
-#: capplets/screensaver/screensavers/deco.xml.h:8
-msgid "seconds"
-msgstr "seconds"
-
-#: capplets/new-screensaver-properties/screensavers/deco.xml.h:9
-#: capplets/screensaver/screensavers/deco.xml.h:9
-msgid "Use color when drawing."
-msgstr "Use color when drawing."
-
-#: capplets/new-screensaver-properties/screensavers/deco.xml.h:10
-#: capplets/screensaver/screensavers/deco.xml.h:10
-msgid "Cycle through colors."
-msgstr "Cycle through colors."
-
-#: capplets/new-screensaver-properties/screensavers/discrete.xml.h:12
-#: capplets/new-screensaver-properties/screensavers/julia.xml.h:12
-#: capplets/new-screensaver-properties/screensavers/lisa.xml.h:12
-#: capplets/new-screensaver-properties/screensavers/spiral.xml.h:14
-#: capplets/screensaver/screensavers/discrete.xml.h:12
-#: capplets/screensaver/screensavers/julia.xml.h:12
-#: capplets/screensaver/screensavers/lisa.xml.h:12
-#: capplets/screensaver/screensavers/spiral.xml.h:14
-msgid "Number to use."
-msgstr "Numãr folosit."
-
-#: capplets/new-screensaver-properties/screensavers/drift.xml.h:12
-#: capplets/screensaver/screensavers/drift.xml.h:12
-msgid "Number of pixels to use."
-msgstr "Number of pixels to use."
-
-#: capplets/new-screensaver-properties/screensavers/drift.xml.h:14
-#: capplets/screensaver/screensavers/drift.xml.h:14
-msgid "Fractals should grow."
-msgstr "Fractals should grow."
-
-#: capplets/new-screensaver-properties/screensavers/drift.xml.h:16
-#: capplets/screensaver/screensavers/drift.xml.h:16
-msgid "Use lissajous figures to get points."
-msgstr "Use lissajous figures to get points."
-
-#: capplets/new-screensaver-properties/screensavers/epicycle.xml.h:10
-#: capplets/new-screensaver-properties/screensavers/flame.xml.h:15
-#: capplets/screensaver/screensavers/epicycle.xml.h:10
-#: capplets/screensaver/screensavers/flame.xml.h:15
-msgid "Time finished product is shown."
-msgstr "Time finished product is shown."
-
-#: capplets/new-screensaver-properties/screensavers/epicycle.xml.h:11
-#: capplets/new-screensaver-properties/screensavers/spiral.xml.h:8
-#: capplets/new-screensaver-properties/screensavers/starfish.xml.h:15
-#: capplets/screensaver/screensavers/epicycle.xml.h:11
-#: capplets/screensaver/screensavers/spiral.xml.h:8
-#: capplets/screensaver/screensavers/starfish.xml.h:15
-msgid "Seconds"
-msgstr "Secunde"
-
-#: capplets/new-screensaver-properties/screensavers/fadeplot.xml.h:9
-#: capplets/screensaver/screensavers/fadeplot.xml.h:9
-msgid "Number"
-msgstr "Number"
-
-#: capplets/new-screensaver-properties/screensavers/fadeplot.xml.h:11
-#: capplets/new-screensaver-properties/screensavers/sierpinski.xml.h:9
-#: capplets/screensaver/screensavers/fadeplot.xml.h:11
-#: capplets/screensaver/screensavers/sierpinski.xml.h:9
-msgid "Speed of Motion"
-msgstr "Speed of Motion"
-
-#: capplets/new-screensaver-properties/screensavers/fadeplot.xml.h:14
-#: capplets/screensaver/screensavers/fadeplot.xml.h:14
-msgid "Number of cycles"
-msgstr "Numãr de cicluri"
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/new-screensaver-properties/screensavers/flag.xml.h:7
-#: capplets/screensaver/screensavers/flag.xml.h:7
-msgid "Text for flag"
-msgstr ""
-
-#: capplets/new-screensaver-properties/screensavers/flag.xml.h:8
-#: capplets/screensaver/screensavers/flag.xml.h:8
-msgid "Bitmap for flag"
-msgstr ""
-
-#: capplets/new-screensaver-properties/screensavers/flag.xml.h:15
-#: capplets/screensaver/screensavers/flag.xml.h:15
-msgid "Random size up to"
-msgstr ""
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/new-screensaver-properties/screensavers/flame.xml.h:7
-#: capplets/screensaver/screensavers/flame.xml.h:7
-msgid "Number of fractals to generate."
-msgstr ""
-
-#: capplets/new-screensaver-properties/screensavers/flame.xml.h:8
-#: capplets/screensaver/screensavers/flame.xml.h:8
-#, fuzzy
-msgid "Iterations:"
-msgstr "Iteraþii:"
-
-#: capplets/new-screensaver-properties/screensavers/flame.xml.h:9
-#: capplets/screensaver/screensavers/flame.xml.h:9
-msgid "Pixels per fractal."
-msgstr ""
-
-#: capplets/new-screensaver-properties/screensavers/forest.xml.h:9
-#: capplets/screensaver/screensavers/forest.xml.h:9
-msgid "Delay between redraws."
-msgstr "Delay between redraws."
-
-#: capplets/new-screensaver-properties/screensavers/forest.xml.h:12
-#: capplets/screensaver/screensavers/forest.xml.h:12
-msgid "Number of trees to use."
-msgstr "Number of trees to use."
-
-#: capplets/new-screensaver-properties/screensavers/goop.xml.h:13
-#: capplets/screensaver/screensavers/goop.xml.h:13
-msgid "Have transparent bubbles."
-msgstr "Have transparent bubbles."
-
-#: capplets/new-screensaver-properties/screensavers/goop.xml.h:14
-#: capplets/screensaver/screensavers/goop.xml.h:14
-msgid "Use additive color model."
-msgstr "Use additive color model."
-
-#: capplets/new-screensaver-properties/screensavers/grav.xml.h:9
-#: capplets/screensaver/screensavers/grav.xml.h:9
-msgid "Number of planets to use."
-msgstr "Numãr de planete folosit."
-
-#: capplets/new-screensaver-properties/screensavers/grav.xml.h:12
-#: capplets/screensaver/screensavers/grav.xml.h:12
-msgid "Orbit should decay."
-msgstr "Orbit should decay."
-
-#: capplets/new-screensaver-properties/screensavers/grav.xml.h:13
-#: capplets/screensaver/screensavers/grav.xml.h:13
-msgid "Objects should leave trails behind them."
-msgstr "Objects should leave trails behind them."
-
-#: capplets/new-screensaver-properties/screensavers/halo.xml.h:9
-#: capplets/screensaver/screensavers/halo.xml.h:9
-msgid "Number of circles to use."
-msgstr "Number of circles to use."
-
-#: capplets/new-screensaver-properties/screensavers/halo.xml.h:15
-#: capplets/screensaver/screensavers/halo.xml.h:15
-msgid "Use a gradient of colors between circles."
-msgstr "Utilizeazã un gradient de culori între cicluri"
-
-#: capplets/new-screensaver-properties/screensavers/halo.xml.h:16
-#: capplets/screensaver/screensavers/halo.xml.h:16
-msgid "Animate circles."
-msgstr "Animate circles."
-
-#: capplets/new-screensaver-properties/screensavers/halo.xml.h:17
-#: capplets/screensaver/screensavers/halo.xml.h:17
-msgid "Cycle through colormap."
-msgstr "Cycle through colormap."
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/new-screensaver-properties/screensavers/helix.xml.h:7
-#: capplets/screensaver/screensavers/helix.xml.h:7
-msgid "Time between redraws."
-msgstr "Time between redraws."
-
-#: capplets/new-screensaver-properties/screensavers/hopalong.xml.h:12
-#: capplets/screensaver/screensavers/hopalong.xml.h:12
-msgid "Number of pixels before a color change."
-msgstr "Number of pixels before a color change."
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/new-screensaver-properties/screensavers/hypercube.xml.h:7
-#: capplets/screensaver/screensavers/hypercube.xml.h:7
-msgid "Distance from center of cube"
-msgstr "Distance from center of cube"
-
-#: capplets/new-screensaver-properties/screensavers/hypercube.xml.h:8
-#: capplets/screensaver/screensavers/hypercube.xml.h:8
-msgid "Closer"
-msgstr "Mai aproape"
-
-#: capplets/new-screensaver-properties/screensavers/hypercube.xml.h:9
-#: capplets/screensaver/screensavers/hypercube.xml.h:9
-msgid "Farther"
-msgstr "Farther"
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/new-screensaver-properties/screensavers/kaleidescope.xml.h:7
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:7
-msgid "Number of segments."
-msgstr "Numãr de segmente."
-
-#: capplets/new-screensaver-properties/screensavers/kaleidescope.xml.h:8
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:8
-msgid "Segments"
-msgstr "Segments"
-
-#: capplets/new-screensaver-properties/screensavers/kaleidescope.xml.h:9
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:9
-msgid "Number of trails."
-msgstr "Schimbã numãrul de urme."
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/new-screensaver-properties/screensavers/laser.xml.h:7
-#: capplets/screensaver/screensavers/laser.xml.h:7
-msgid "Duration of laser burst."
-msgstr "Duration of laser burst."
-
-#: capplets/new-screensaver-properties/screensavers/laser.xml.h:8
-#: capplets/new-screensaver-properties/screensavers/pedal.xml.h:8
-#: capplets/new-screensaver-properties/screensavers/pedal.xml.h:14
-#: capplets/screensaver/screensavers/laser.xml.h:8
-#: capplets/screensaver/screensavers/pedal.xml.h:8
-#: capplets/screensaver/screensavers/pedal.xml.h:14
-msgid "Shorter"
-msgstr "Mai scurt"
-
-#: capplets/new-screensaver-properties/screensavers/laser.xml.h:9
-#: capplets/new-screensaver-properties/screensavers/pedal.xml.h:9
-#: capplets/new-screensaver-properties/screensavers/pedal.xml.h:15
-#: capplets/screensaver/screensavers/laser.xml.h:9
-#: capplets/screensaver/screensavers/pedal.xml.h:9
-#: capplets/screensaver/screensavers/pedal.xml.h:15
-msgid "Longer"
-msgstr "Mai lung"
-
-#: capplets/new-screensaver-properties/screensavers/laser.xml.h:10
-#: capplets/screensaver/screensavers/laser.xml.h:10
-msgid "Size of burst."
-msgstr "Size of burst."
-
-#: capplets/new-screensaver-properties/screensavers/laser.xml.h:11
-#: capplets/screensaver/screensavers/laser.xml.h:11
-msgid "Segments:"
-msgstr "Segments:"
-
-#: capplets/new-screensaver-properties/screensavers/lisa.xml.h:14
-#: capplets/screensaver/screensavers/lisa.xml.h:14
-msgid "Size of object."
-msgstr "Size of object."
-
-#: capplets/new-screensaver-properties/screensavers/lisa.xml.h:15
-#: capplets/new-screensaver-properties/screensavers/moire.xml.h:13
-#: capplets/screensaver/screensavers/lisa.xml.h:15
-#: capplets/screensaver/screensavers/moire.xml.h:13
-msgid "Smaller"
-msgstr "Mai micã"
-
-#: capplets/new-screensaver-properties/screensavers/lisa.xml.h:16
-#: capplets/new-screensaver-properties/screensavers/moire.xml.h:14
-#: capplets/screensaver/screensavers/lisa.xml.h:16
-#: capplets/screensaver/screensavers/moire.xml.h:14
-msgid "Larger"
-msgstr "Mai mare"
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/new-screensaver-properties/screensavers/lmorph.xml.h:7
-#: capplets/screensaver/screensavers/lmorph.xml.h:7
-msgid "Number of points."
-msgstr "Numãr de puncte."
-
-#: capplets/new-screensaver-properties/screensavers/lmorph.xml.h:8
-#: capplets/screensaver/screensavers/lmorph.xml.h:8
-msgid "Points:"
-msgstr "Puncte:"
-
-#: capplets/new-screensaver-properties/screensavers/lmorph.xml.h:9
-#: capplets/screensaver/screensavers/lmorph.xml.h:9
-msgid "Number of interpolation steps."
-msgstr "Number of interpolation steps."
-
-#: capplets/new-screensaver-properties/screensavers/lmorph.xml.h:15
-#: capplets/screensaver/screensavers/lmorph.xml.h:15
-msgid "Open figures."
-msgstr "Open figures."
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/new-screensaver-properties/screensavers/maze.xml.h:7
-#: capplets/screensaver/screensavers/maze.xml.h:7
-msgid "Delay between each step in the maze."
-msgstr "Delay between each step in the maze."
-
-#: capplets/new-screensaver-properties/screensavers/maze.xml.h:8
-#: capplets/new-screensaver-properties/screensavers/maze.xml.h:11
-#: capplets/new-screensaver-properties/screensavers/maze.xml.h:14
-#: capplets/screensaver/screensavers/maze.xml.h:8
-#: capplets/screensaver/screensavers/maze.xml.h:11
-#: capplets/screensaver/screensavers/maze.xml.h:14
-msgid "Less Delay"
-msgstr "Less Delay"
-
-#: capplets/new-screensaver-properties/screensavers/maze.xml.h:9
-#: capplets/new-screensaver-properties/screensavers/maze.xml.h:12
-#: capplets/new-screensaver-properties/screensavers/maze.xml.h:15
-#: capplets/screensaver/screensavers/maze.xml.h:9
-#: capplets/screensaver/screensavers/maze.xml.h:12
-#: capplets/screensaver/screensavers/maze.xml.h:15
-msgid "More Delay"
-msgstr "More Delay"
-
-#: capplets/new-screensaver-properties/screensavers/maze.xml.h:10
-#: capplets/screensaver/screensavers/maze.xml.h:10
-msgid "Delay between drawing the maze and starting the solution."
-msgstr "Delay between drawing the maze and starting the solution."
-
-#: capplets/new-screensaver-properties/screensavers/maze.xml.h:13
-#: capplets/screensaver/screensavers/maze.xml.h:13
-msgid "Delay between finishing the maze and starting a new one."
-msgstr "Delay between finishing the maze and starting a new one."
-
-#: capplets/new-screensaver-properties/screensavers/maze.xml.h:16
-#: capplets/screensaver/screensavers/maze.xml.h:16
-msgid "Put a bridge over the logo?"
-msgstr "Put a bridge over the logo?"
-
-#: capplets/new-screensaver-properties/screensavers/moire.xml.h:12
-#: capplets/screensaver/screensavers/moire.xml.h:12
-msgid "Maximum radius increment"
-msgstr "Maximum radius increment"
-
-#: capplets/new-screensaver-properties/screensavers/munch.xml.h:10
-#: capplets/screensaver/screensavers/munch.xml.h:10
-msgid "Use XOR drawing function."
-msgstr "Use XOR drawing function."
-
-#: capplets/new-screensaver-properties/screensavers/munch.xml.h:11
-#: capplets/screensaver/screensavers/munch.xml.h:11
-msgid "Draw square at weird starting points."
-msgstr "Draw square at weird starting points."
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/new-screensaver-properties/screensavers/pedal.xml.h:7
-#: capplets/screensaver/screensavers/pedal.xml.h:7
-msgid "Time to show each picture."
-msgstr "Time to show each picture."
-
-#: capplets/new-screensaver-properties/screensavers/pedal.xml.h:10
-#: capplets/screensaver/screensavers/pedal.xml.h:10
-msgid "Maximum number of lines."
-msgstr "Numãr maxim de linii."
-
-#: capplets/new-screensaver-properties/screensavers/pedal.xml.h:13
-#: capplets/screensaver/screensavers/pedal.xml.h:13
-msgid "Time to fade away."
-msgstr "Time to fade away."
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/new-screensaver-properties/screensavers/pyro.xml.h:7
-#: capplets/screensaver/screensavers/pyro.xml.h:7
-msgid "Particles on screen"
-msgstr "Particles on screen"
-
-#: capplets/new-screensaver-properties/screensavers/pyro.xml.h:9
-#: capplets/screensaver/screensavers/pyro.xml.h:9
-msgid "Frequency of missile launch"
-msgstr "Frequency of missile launch"
-
-#: capplets/new-screensaver-properties/screensavers/pyro.xml.h:12
-#: capplets/screensaver/screensavers/pyro.xml.h:12
-msgid "Number of particles"
-msgstr "Numãr de particule"
-
-#: capplets/new-screensaver-properties/screensavers/qix.xml.h:9
-#: capplets/screensaver/screensavers/qix.xml.h:9
-#, fuzzy
-msgid "Number of points:"
-msgstr "Numãr de puncte:"
-
-#: capplets/new-screensaver-properties/screensavers/qix.xml.h:10
-#: capplets/screensaver/screensavers/qix.xml.h:10
-msgid "Discrete Lines"
-msgstr ""
-
-#: capplets/new-screensaver-properties/screensavers/qix.xml.h:11
-#: capplets/screensaver/screensavers/qix.xml.h:11
-msgid "Solid Trails"
-msgstr ""
-
-#: capplets/new-screensaver-properties/screensavers/qix.xml.h:12
-#: capplets/screensaver/screensavers/qix.xml.h:12
-msgid "Transparent Trails"
-msgstr ""
-
-#: capplets/new-screensaver-properties/screensavers/qix.xml.h:13
-#: capplets/screensaver/screensavers/qix.xml.h:13
-msgid "XOR Trails"
-msgstr ""
-
-#: capplets/new-screensaver-properties/screensavers/qix.xml.h:14
-#: capplets/screensaver/screensavers/qix.xml.h:14
-msgid "Trails attract each other"
-msgstr ""
-
-#: capplets/new-screensaver-properties/screensavers/qix.xml.h:18
-#: capplets/screensaver/screensavers/qix.xml.h:18
-msgid "Length"
-msgstr ""
-
-#: capplets/new-screensaver-properties/screensavers/qix.xml.h:21
-#: capplets/screensaver/screensavers/qix.xml.h:21
-msgid "Width"
-msgstr ""
-
-#: capplets/new-screensaver-properties/screensavers/qix.xml.h:22
-#: capplets/screensaver/screensavers/qix.xml.h:22
-msgid "Narrow"
-msgstr ""
-
-#: capplets/new-screensaver-properties/screensavers/qix.xml.h:23
-#: capplets/screensaver/screensavers/qix.xml.h:23
-msgid "Wide"
-msgstr "Wide"
-
-#: capplets/new-screensaver-properties/screensavers/qix.xml.h:24
-#: capplets/screensaver/screensavers/qix.xml.h:24
-msgid "Spread between lines"
-msgstr ""
-
-#: capplets/new-screensaver-properties/screensavers/qix.xml.h:27
-#: capplets/screensaver/screensavers/qix.xml.h:27
-msgid "Number of trails:"
-msgstr ""
-
-#: capplets/new-screensaver-properties/screensavers/qix.xml.h:30
-#: capplets/screensaver/screensavers/qix.xml.h:30
-msgid "Color contrast"
-msgstr ""
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/new-screensaver-properties/screensavers/rorschach.xml.h:7
-#: capplets/screensaver/screensavers/rorschach.xml.h:7
-msgid "Number of Iterations"
-msgstr ""
-
-#: capplets/new-screensaver-properties/screensavers/rorschach.xml.h:10
-#: capplets/screensaver/screensavers/rorschach.xml.h:10
-msgid "Offset"
-msgstr "Deplasament"
-
-#: capplets/new-screensaver-properties/screensavers/rorschach.xml.h:13
-#: capplets/screensaver/screensavers/rorschach.xml.h:13
-msgid "With X-axis Symmetry"
-msgstr ""
-
-#: capplets/new-screensaver-properties/screensavers/rorschach.xml.h:14
-#: capplets/screensaver/screensavers/rorschach.xml.h:14
-msgid "With Y-axis Symmetry"
-msgstr ""
-
-#: capplets/new-screensaver-properties/screensavers/rorschach.xml.h:15
-#: capplets/screensaver/screensavers/rorschach.xml.h:15
-msgid "Delay before next redraw"
-msgstr ""
-
-#: capplets/new-screensaver-properties/screensavers/rorschach.xml.h:18
-#: capplets/screensaver/screensavers/rorschach.xml.h:18
-msgid "Speed to clear the screen"
-msgstr ""
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/new-screensaver-properties/screensavers/starfish.xml.h:7
-#: capplets/screensaver/screensavers/starfish.xml.h:7
-msgid "Speed of animation."
-msgstr "Speed of animation."
-
-#: capplets/new-screensaver-properties/screensavers/starfish.xml.h:10
-#: capplets/screensaver/screensavers/starfish.xml.h:10
-msgid "Thickness of color bands (0 = Random)"
-msgstr ""
-
-#: capplets/new-screensaver-properties/screensavers/starfish.xml.h:11
-#: capplets/screensaver/screensavers/starfish.xml.h:11
-msgid "Slim"
-msgstr "Slim"
-
-#: capplets/new-screensaver-properties/screensavers/starfish.xml.h:12
-#: capplets/screensaver/screensavers/starfish.xml.h:12
-msgid "Quickness of rotation at each step (0 = Random)"
-msgstr ""
-
-#: capplets/new-screensaver-properties/screensavers/starfish.xml.h:14
-#: capplets/screensaver/screensavers/starfish.xml.h:14
-msgid "Duration of current shape."
-msgstr "Duration of current shape."
-
-#: capplets/new-screensaver-properties/screensavers/starfish.xml.h:16
-#: capplets/screensaver/screensavers/starfish.xml.h:16
-msgid "Use raw shapes "
-msgstr "Use raw shapes "
-
-#: capplets/new-screensaver-properties/screensavers/starfish.xml.h:17
-#: capplets/screensaver/screensavers/starfish.xml.h:17
-msgid "Change to display in monochrome."
-msgstr "Change to display in monochrome."
-
-#: capplets/new-screensaver-properties/selection-dialog.c:99
-#: capplets/screensaver/selection-dialog.c:99
-#, fuzzy
-msgid "Add a new screensaver"
-msgstr "Adaugã un nou screensaver"
-
-#: capplets/new-screensaver-properties/selection-dialog.c:108
-#: capplets/screensaver/selection-dialog.c:108
-msgid "Select the screensaver to run from the list below:"
-msgstr "Selectaþi screensaver-ul de rulat din lista de mai jos:"
-
-#: capplets/new-screensaver-properties/selection-dialog.c:194
-#: capplets/screensaver/selection-dialog.c:194
-msgid "Custom"
-msgstr "Personal"
-
-#: capplets/new-screensaver-properties/selection-dialog.c:220
-#: capplets/screensaver/selection-dialog.c:220
-#, fuzzy
-msgid "New screensaver"
-msgstr "Screensaver nou"
-
-#: capplets/new-sound-properties/prefs-widget.c:137
-#: capplets/sound/prefs-widget.c:137
-msgid "Play"
-msgstr "Redare"
-
-#: capplets/new-sound-properties/sound-properties.glade.h:8
-#: capplets/sound/sound-properties.glade.h:8
-msgid "Enable"
-msgstr "Activeazã"
-
-#: capplets/new-sound-properties/sound-properties.glade.h:9
-#: capplets/sound/sound-properties.glade.h:9
-msgid "Enable sound server startup"
-msgstr "Activeazã serverul de sunet la startup"
-
-#: capplets/new-sound-properties/sound-properties.glade.h:10
-#: capplets/sound/sound-properties.glade.h:10
-msgid "Sounds for events"
-msgstr "Sunete pentru evenimente"
-
-#: capplets/new-sound-properties/sound-properties.glade.h:11
-#: capplets/sound/sound-properties.glade.h:11
-msgid "General"
-msgstr "General"
-
-#: capplets/new-sound-properties/sound-properties.glade.h:12
-#: capplets/sound/sound-properties.glade.h:12
-msgid "Event"
-msgstr "Eveniment"
-
-#: capplets/new-sound-properties/sound-properties.glade.h:13
-#: capplets/sound/sound-properties.glade.h:13
-msgid "File to Play"
-msgstr "Fiºier de redat"
-
-#: capplets/new-sound-properties/sound-properties.glade.h:14
-#: capplets/sound/sound-properties.glade.h:14
-msgid "Sound Events"
-msgstr "Evenimente de sunet"
-
-#: control-center/capplet-dir-view.c:321
-#: new-control-center/capplet-dir-view.c:321
-msgid "GNOME Control Center"
-msgstr "Centrul de control GNOME"
-
-#: control-center/capplet-dir-view.c:322
-#: new-control-center/capplet-dir-view.c:322
-#, fuzzy
-msgid "Desktop properties manager."
-msgstr "Manager proprietãþi desktop."
-
-#: control-center/capplet-dir-view.c:519
-#: new-control-center/capplet-dir-view.c:519
-msgid ""
-"No help is available/installed. Please make sure you\n"
-"have the GNOME User's Guide installed on your system."
-msgstr ""
-"Nu existã ajutor disponibil/instalat pentru aceste setãri. Vã rog sã vã "
-"asiguraþi\n"
-"cã aþi instalat Ghidul Utilizatorului GNOME pe sistemul dvs."
-
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:238
-#: capplets/session-properties/session-properties.c:344
-#: capplets/theme-switcher/gui.c:368
-#: capplets/wm-properties/wm-properties-capplet.c:671
-#: control-center/capplet-dir-view.c:522
-#: new-control-center/capplet-dir-view.c:522
-msgid "Close"
-msgstr "Închide"
-
-#.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: control-center/gnomecc.glade.h:7 new-control-center/gnomecc.glade.h:7
-msgid "Launch control panels in separate windows"
-msgstr "Lanseazã panelele de control în ferestre separate"
-
-#: control-center/gnomecc.glade.h:8 new-control-center/gnomecc.glade.h:8
-msgid "Put control panels in the control center's window"
-msgstr "Pune panourile de control în ferestra Centrul de control"
-
-#: control-center/gnomecc.glade.h:9 new-control-center/gnomecc.glade.h:9
-msgid "Display control panels as HTML"
-msgstr "Afiºeazã panourile de control ca HTML"
-
-#: control-center/gnomecc.glade.h:10 new-control-center/gnomecc.glade.h:10
-msgid "Display control panels as a set of icons"
-msgstr "Afiºeazã panourile de control ca un set de iconuri "
-
-#: control-center/gnomecc.glade.h:11 new-control-center/gnomecc.glade.h:11
-msgid "Display control panels as a tree"
-msgstr "Afiºeazã panourile de control ca un copac"
-
-#: control-center/gnomecc.glade.h:12 new-control-center/gnomecc.glade.h:12
-msgid "Browse with single window"
-msgstr "Navigheazã cu o singurã fereastrã"
-
-#: control-center/gnomecc.glade.h:13 new-control-center/gnomecc.glade.h:13
-msgid "Browse with multiple windows"
-msgstr "Navigheazã cu ferestre multiple"
-
-#: control-center/gnomecc.glade.h:14 new-control-center/gnomecc.glade.h:14
-msgid "Appearance"
-msgstr "Aparenþã"
-
-#: control-center/gnomecc.glade.h:15 new-control-center/gnomecc.glade.h:15
-msgid "New-control-center"
-msgstr ""
-
-#: control-center/gnomecc.glade.h:16 new-control-center/gnomecc.glade.h:16
-msgid "HTML"
-msgstr "HTML"
-
-#: control-center/gnomecc.glade.h:17 new-control-center/gnomecc.glade.h:17
-msgid "Icon List"
-msgstr "Listã iconuri"
-
-#: control-center/gnomecc.glade.h:18 new-control-center/gnomecc.glade.h:18
-msgid "Tree"
-msgstr "Arbore"
-
-#: root-manager/root-manager.c:110
-#, c-format
-msgid "Got error %d.\n"
-msgstr "Eroare : %d.\n"
-
-#: root-manager/root-manager.c:206
-#, c-format
-msgid "Password for %s"
-msgstr "Parola pentru %s"
-
-#: root-manager/root-manager.c:401
-msgid "Consistency checking is not turned on."
-msgstr "Verificarea consistenþei nu este activatã."
-
-#: root-manager/root-manager.c:403
-msgid "Block is fine."
-msgstr "Blocul este bun."
-
-#: root-manager/root-manager.c:405
-msgid "Block freed twice."
-msgstr "Bloc eliberat de douã ori."
+#: capplets/keyboard/keyboard-properties.glade.h:14
+#: capplets/mouse/mouse-properties.glade.h:10
+msgid "Slow"
+msgstr "Înceatã"
 
-#: root-manager/root-manager.c:407
-msgid "Memory before the block was clobbered."
-msgstr "Memorie înainte de a folosi blocul."
+#: capplets/keyboard/keyboard-properties.glade.h:15
+msgid "Test"
+msgstr "Testeazã"
 
-#: root-manager/root-manager.c:409
-msgid "Memory after the block was clobbered."
-msgstr "Memorie dupã ce blocul a fost folosit."
-
-#: root-manager/root-manager.c:440
-msgid "userhelper must be setuid root\n"
-msgstr "userhelper trebuie sã fie rulat ca root\n"
-
-#: root-manager/root-manager.c:445 root-manager/root-manager.c:451
-msgid "Usage: root-helper fd\n"
-msgstr "Folosire: root-helper fd\n"
-
-#: root-manager/root-manager.c:555
-#, c-format
-msgid "PAM returned = %d\n"
-msgstr "PAM a întors = %d\n"
-
-#: root-manager/root-manager.c:556
-#, c-format
-msgid "about to authenticate \"%s\"\n"
-msgstr "pe cale de a autentifica \"%s\"\n"
-
-#: root-manager/root-manager.c:633 root-manager/root-manager.c:701
-#, c-format
-msgid "about to exec \"%s\"\n"
-msgstr "pe cale de a executa \"%s\"\n"
-
-#: root-manager/root-manager-wrap.c:56
-msgid "Pipe error.\n"
-msgstr "Eroare pipe.\n"
-
-#: root-manager/root-manager-wrap.c:62
-msgid "Cannot fork().\n"
-msgstr "Nu se poate face fork().\n"
-
-#: root-manager/root-manager-wrap.c:83 root-manager/root-manager-wrap.c:93
-msgid "dup2() error.\n"
-msgstr "Eroare dup2().\n"
-
-#: root-manager/root-manager-wrap.c:123
-#, c-format
-msgid "execl() error, errno=%d\n"
-msgstr "Eroare execl(), errno=%d\n"
-
-#: root-manager/root-manager-wrap.c:152
-msgid "Information updated."
-msgstr "Informaþia actualizatã."
-
-#: root-manager/root-manager-wrap.c:155
-msgid ""
-"The password you typed is invalid.\n"
-"Please try again."
-msgstr ""
-"Parola pe care aþi introdus-o este invalidã.\n"
-"Vã rugãm încercaþi din nou."
-
-#: root-manager/root-manager-wrap.c:158
-msgid ""
-"One or more of the changed fields is invalid.\n"
-"This is probably due to either colons or commas in one of the fields.\n"
-"Please remove those and try again."
-msgstr ""
-"Unul sau mai multe din câmpurile schimbate este invalid.\n"
-"Aceasta este probabil din cauza punctelor sau virgulelor într-unul din "
-"câmpuri.\n"
-"Vã rugãm sã le eliminaþi ºi încercaþi din nou."
-
-#: root-manager/root-manager-wrap.c:161
-msgid "Password resetting error."
-msgstr "Eroare la resetarea parolei."
-
-#: root-manager/root-manager-wrap.c:164
-msgid ""
-"Some systems files are locked.\n"
-"Please try again in a few moments."
-msgstr ""
-"Unele sisteme de fiºiere sunt blocate.\n"
-"Vã rugãm reîncercaþi în câteva momente."
-
-#: root-manager/root-manager-wrap.c:167
-msgid "Unknown user."
-msgstr "Utilizator necunoscut."
-
-#: root-manager/root-manager-wrap.c:170
-msgid "Insufficient rights."
-msgstr "Drepturi insuficiente"
-
-#: root-manager/root-manager-wrap.c:173
-msgid "Invalid call to sub process."
-msgstr "Chemare invalidã a subprocesului."
-
-#: root-manager/root-manager-wrap.c:176
-msgid ""
-"Your current shell is not listed in /etc/shells.\n"
-"You are not allowed to change your shell.\n"
-"Consult your system administrator."
-msgstr ""
-"Shell-ul dvs curent nu este listat în /etc/shells.\n"
-"Nu sunteþi autorizat sã vã schimbaþi shell-ul.\n"
-"Consultaþi administratorul sistemului dvs."
-
-#. well, this is unlikely to work either, but at least we tried...
-#: root-manager/root-manager-wrap.c:180
-msgid "Out of memory."
-msgstr "Nu mai este memorie."
-
-#: root-manager/root-manager-wrap.c:183
-msgid "The exec() call failed."
-msgstr "Chemarea exec() a eºuat."
-
-#: root-manager/root-manager-wrap.c:186
-msgid "Failed to find selected program."
-msgstr "Eºuare la gãsirea programului selectat."
-
-#: root-manager/root-manager-wrap.c:189
-msgid "Unknown error."
-msgstr "Eroare necunoscutã"
-
-#: root-manager/root-manager-wrap.c:192
-msgid "Unknown exit code."
-msgstr "Cod ieºire necunoscut."
-
-#: root-manager/root-manager-wrap.c:280
-msgid "Input"
-msgstr "Intrare"
-
-#: root-manager/root-manager-wrap.c:386
-#, c-format
-msgid "Need %d responses.\n"
-msgstr "Am nevoie de %d rãspunsuri.\n"
-
-#: root-manager/root-manager-wrap.c:411
-msgid ""
-"In order to make changes to your system, you\n"
-"must enter the administrator (root) password."
-msgstr ""
-"Pentru a face schimbãri ale sistemului dvs, trebuie\n"
-"sã introduceþi parola de administrator (root)."
-
-#: root-manager/root-manager-wrap.c:425
-msgid "Error"
-msgstr "Eroare"
-
-#: root-manager/root-manager-wrap.c:439
-#, c-format
-msgid "You want %d response(s) from %d entry fields!?!?!\n"
-msgstr "Doriþi %d rãspunsuri de la %d câmpuri de intrare!?!?!\n"
-
-#: root-manager/root-manager-wrap.c:445
-msgid "Run Unprivileged"
-msgstr "Ruleazã neprivilegiat"
-
-#: archiver/location.c:228
-msgid "Default Location"
-msgstr "Locaþie implicitã"
-
-#: archiver/main.c:77
-msgid "Store XML data in the archive"
-msgstr ""
-
-#: archiver/main.c:79
-msgid "Roll back the configuration to a given point"
-msgstr ""
-
-#: archiver/main.c:81
-msgid "Change the location profile to the given one"
-msgstr "Schimbã profilul locaþiei la cel dat"
-
-#: archiver/main.c:83
-msgid "Push configuration data out to client machines (UNIMPLEMENTED)"
-msgstr ""
-
-#: archiver/main.c:85
-msgid "Rename a location to a new name"
-msgstr "Renumeºte o locaþie"
-
-#: archiver/main.c:87
-msgid "Add a new location to the archive"
-msgstr "Adaugã o nouã locaþie la arhivã"
-
-#: archiver/main.c:89
-msgid "Remove a location from the archive"
-msgstr "Eliminã o locaþie din arhivã"
-
-#: archiver/main.c:91
-msgid "Add a given backend to the given location"
-msgstr ""
-
-#: archiver/main.c:93
-msgid "Remove the given backend from the given location"
-msgstr ""
-
-#: archiver/main.c:99
-msgid "Use the global repository"
-msgstr ""
-
-#: archiver/main.c:101
-msgid "Identifier of location profile on which to operate"
-msgstr ""
-
-#: archiver/main.c:102
-msgid "LOCATION"
-msgstr ""
-
-#: archiver/main.c:104
-msgid "Backend being used for this operation"
-msgstr ""
-
-#: archiver/main.c:104
-msgid "BACKEND_ID"
-msgstr ""
-
-#: archiver/main.c:110
-msgid "Store only the differences with the parent location's config"
-msgstr ""
-
-#: archiver/main.c:112
-msgid "Store only those settings set in the previous config"
-msgstr ""
-
-#: archiver/main.c:118
-msgid "Date to which to roll back"
-msgstr ""
-
-#: archiver/main.c:118
-msgid "DATE"
-msgstr ""
-
-#: archiver/main.c:120
-msgid "Roll back all configuration items"
-msgstr ""
-
-#: archiver/main.c:122
-msgid "Roll back to the revision REVISION_ID"
-msgstr ""
-
-#: archiver/main.c:122
-msgid "REVISION_ID"
-msgstr ""
-
-#: archiver/main.c:124
-msgid "Roll back to the last known revision"
-msgstr ""
-
-#: archiver/main.c:126
-msgid "Roll back by STEPS revisions"
-msgstr ""
-
-#: archiver/main.c:126
-msgid "STEPS"
-msgstr ""
-
-#: archiver/main.c:128
-msgid "Don't run the backend, just dump the output"
-msgstr ""
-
-#: archiver/main.c:134
-msgid "Parent location for the new location"
-msgstr ""
-
-#: archiver/main.c:134
-msgid "PARENT"
-msgstr ""
-
-#: archiver/main.c:136
-msgid "New name to assign to the location"
-msgstr ""
-
-#: archiver/main.c:136
-msgid "NEW_NAME"
-msgstr ""
-
-#: archiver/main.c:142
-msgid "Add/remove this backend to/from the master backend list"
+#: capplets/keyboard/keyboard-properties.glade.h:16
+msgid "Very fast"
 msgstr ""
 
-#: archiver/main.c:144
-msgid "Full containment"
+#: capplets/keyboard/keyboard-properties.glade.h:17
+msgid "Very long"
 msgstr ""
-
-#: archiver/main.c:146
-msgid "Partial containment"
-msgstr ""
-
-#: archiver/main.c:313
-msgid "Global archiver options"
-msgstr ""
-
-#: archiver/main.c:315
-msgid "Archiver commands"
-msgstr ""
-
-#: archiver/main.c:317
-msgid "Options for storing data"
-msgstr ""
-
-#: archiver/main.c:319
-msgid "Options for rolling back"
-msgstr ""
-
-#: archiver/main.c:321
-msgid "Options for adding or renaming locations"
-msgstr ""
-
-#: archiver/main.c:324
-msgid "Options for adding and removing backends"
-msgstr ""
-
-#: capplets/rollback/main.c:37
-msgid "Operate on global backends"
-msgstr ""
-
-#: capplets/rollback/main.c:50
-msgid "Options for the rollback GUI"
-msgstr ""
-
-#.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensaver-properties.glade.h:7
-msgid "About \"<Screensaver name>\""
-msgstr "Despre \"<Screensaver name>\""
-
-#: capplets/screensaver/screensaver-properties.glade.h:8
-msgid ""
-"Draws quasiperiodic tilings; think of the implications on modern formica "
-"technology. Written by Time Korlove. In April 1997, Sir Roger Penrose, a "
-"British math professor who has worked with Stephen Hawking on such topics as "
-"relatvity, black holes, and whether time has a beginning, files a copyright-"
-"infringement lawsuit against Kimberly-Clark Corporation, wchih Penrose said "
-"copied a pattern he created ( apattern demonstrating that \"a nonrepeating "
-"pattern could exist in nature\") for its Kleenex quilted toilet paper. "
-msgstr ""
-
-#: capplets/screensaver/screensaver-properties.glade.h:9
-msgid "Configure Power Management"
-msgstr "Configuraþie management putere"
-
-#: capplets/new-screensaver-properties/prefs-widget.c:475
-#: capplets/screensaver/screensaver-properties.glade.h:10
-#, fuzzy
-msgid "Shut down monitor after"
-msgstr "Închide monitorul dupã"
-
-#: capplets/new-screensaver-properties/prefs-widget.c:367
-#: capplets/new-screensaver-properties/prefs-widget.c:382
-#: capplets/new-screensaver-properties/prefs-widget.c:414
-#: capplets/new-screensaver-properties/prefs-widget.c:452
-#: capplets/new-screensaver-properties/prefs-widget.c:469
-#: capplets/new-screensaver-properties/prefs-widget.c:486
-#: capplets/screensaver/screensaver-properties.glade.h:11
-#: capplets/screensaver/screensaver-properties.glade.h:13
-#: capplets/screensaver/screensaver-properties.glade.h:15
-#: capplets/screensaver/screensaver-properties.glade.h:24
-#: capplets/screensaver/screensaver-properties.glade.h:25
-#, fuzzy
-msgid "minutes"
-msgstr "minute"
-
-#: capplets/new-screensaver-properties/prefs-widget.c:458
-#: capplets/screensaver/screensaver-properties.glade.h:12
-msgid "Go to suspend mode after"
-msgstr "Intrã în modul suspend dupã"
-
-#: capplets/new-screensaver-properties/prefs-widget.c:441
-#: capplets/screensaver/screensaver-properties.glade.h:14
-msgid "Go to standby mode after"
-msgstr "Intrã în modul standby dupã"
-
-#: capplets/screensaver/screensaver-properties.glade.h:16
-msgid "Settings for \"<Screensaver name>\""
-msgstr "Setãri pentru \"<Screensaver name>\""
-
-#: capplets/screensaver/screensaver-properties.glade.h:17
-msgid ""
-"There are no configurable settings for this\n"
-"screensaver. "
-msgstr ""
-
-#: capplets/screensaver/screensaver-properties.glade.h:19
-msgid "_Add"
-msgstr "_Adaugã"
-
-#: capplets/screensaver/screensaver-properties.glade.h:20
-msgid "_Settings"
-msgstr "_Setãri"
-
-#: capplets/screensaver/screensaver-properties.glade.h:21
-msgid "_Remove"
-msgstr "_Eliminã "
-
-#: capplets/screensaver/screensaver-properties.glade.h:22
-msgid "_About this screensaver..."
-msgstr "_Despre acest screensaver..."
-
-#: capplets/screensaver/screensaver-properties.glade.h:26
-msgid "S_tart screensaver after "
-msgstr "_Porneºte screensaver-ul dupã "
-
-#: capplets/screensaver/screensaver-properties.glade.h:27
-msgid "S_witch screensavers after "
-msgstr "_Schimbã scrensaver-ul dupã "
-
-#: capplets/screensaver/screensaver-properties.glade.h:28
-msgid "R_equire password to unlock screen"
-msgstr "_Necesitã parolã pentru a deschide ecranul"
-
-#: capplets/screensaver/screensaver-properties.glade.h:29
-msgid "Enable _power management"
-msgstr "_Foloseºte management putere"
-
-#: capplets/screensaver/screensaver-properties.glade.h:30
-msgid " Configure..."
-msgstr " Configureazã..."
-
-#: capplets/screensaver/screensaver-properties.glade.h:32
-msgid "_Mode:"
-msgstr "_Mod:"
-
-#: capplets/new-screensaver-properties/prefs-widget.c:199
-#: capplets/screensaver/screensaver-properties.glade.h:33
-#, fuzzy
-msgid "Disable screensaver"
-msgstr "Dezactiveazã screensaver-ul"
-
-#: capplets/new-screensaver-properties/prefs-widget.c:209
-#: capplets/screensaver/screensaver-properties.glade.h:34
-msgid "Black screen only"
-msgstr "Doar înnegreºte ecranul"
-
-#: capplets/new-screensaver-properties/prefs-widget.c:218
-#: capplets/screensaver/screensaver-properties.glade.h:35
-msgid "One screensaver all the time"
-msgstr "Un screensaver tot timpul"
-
-#: capplets/screensaver/screensaver-properties.glade.h:36
-msgid "Random (checked screensavers)"
-msgstr "Aleator (screensavere bifate)"
-
-#: capplets/screensaver/screensaver-properties.glade.h:37
-msgid "Random (all screensavers)"
-msgstr "Aleator (toate screensaverele)"
-
-#: capplets/sound/sound-properties-capplet.c:360
-msgid "Just apply settings and quit"
-msgstr "Aplicã setãrile ºi ieºi"
-
-#: capplets/sound/sound-properties-capplet.c:362
-msgid "Retrieve and store legacy settings"
-msgstr ""
-
-#: capplets/sound/sound-properties-capplet.c:372
-msgid "Capplet options"
-msgstr "Opþiuni capplet"
-
-#. FIXME: Use a human-readable capplet name here
-#: control-center/capplet-dir.c:453
-msgid "Capplet"
-msgstr ""
-
-#: root-manager/root-manager-helper.c:55
-msgid "Could not connect to X Display"
-msgstr ""
-
-#: root-manager/root-manager-helper.c:61
-msgid "Could not duplicate file descriptor"
-msgstr ""
-
-#: Gnome.directory.in:3
-#, fuzzy
-msgid "Control Center"
-msgstr "Centrul de control"
-
-#: control-center/gnomecc.desktop.in:4
-msgid "The GNOME configuration tool"
-msgstr "Unealta de configurare GNOME"
-
-#: capplets/sound/sound-properties.desktop.in:3
-msgid "Sound"
-msgstr "Sunet"
-
-#: capplets/sound/sound-properties.desktop.in:4
-msgid "Configure GNOME's use of sound"
-msgstr "Configuraþi folosirea sunetelor în GNOME"
-
-#: capplets/screensaver/screensaver-properties.desktop.in:4
-msgid "Configure the settings of the screensaver"
-msgstr "Configuraþi setãrile protectorului de ecran"
-
-#: capplets/mouse/mouse-properties.desktop.in:3
-msgid "Mouse"
-msgstr "Maus"
-
-#: capplets/mouse/mouse-properties.desktop.in:4
-msgid "Mouse Properties"
-msgstr "Proprietãþi maus"
-
-#: capplets/keyboard/keyboard-properties.desktop.in:3
-msgid "Keyboard"
-msgstr "Tastaturã"
-
-#: capplets/keyboard/keyboard-properties.desktop.in:4
-msgid "Keyboard Properties"
-msgstr "Proprietãþi tastaturã"
-
-#: capplets/background/background-properties.desktop.in:3
-msgid "Background"
-msgstr "Fundal"
-
-#: capplets/background/background-properties.desktop.in:4
-msgid "Configuration of the desktop's background"
-msgstr "Configuraþia fundalului de desktop"
-
-#: capplets/desktop-links/gnome-hint-properties.desktop.in:3
-msgid "Startup Hint"
-msgstr "Sugestia de la pornire"
-
-#: capplets/desktop-links/gnome-hint-properties.desktop.in:4
-msgid "Options for the startup hint dialog"
-msgstr "Opþiuni pentru dialogul de sugestii de la pornire"
-
-#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in:4
-msgid "Configure window appearance"
-msgstr "Configuraþi aparenþa ferestrelor"
-
-#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in:3
-msgid "Shortcuts"
-msgstr "Scurtãturi"
-
-#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in:4
-msgid "Configure key shortcuts"
-msgstr "Configuraþi tastele pentru scurtãturi"
-
-#: capplets/desktop-links/Sawfish/focus-properties.desktop.in:3
-msgid "Focus behavior"
-msgstr "Comportament focus"
-
-#: capplets/desktop-links/Sawfish/focus-properties.desktop.in:4
-msgid "Configure window focusing"
-msgstr "Configuraþi comportamentul focusului ferestrelor"
-
-#: capplets/desktop-links/Sawfish/match-properties.desktop.in:3
-msgid "Matched Windows"
-msgstr "Potriviri ferestre"
-
-#: capplets/desktop-links/Sawfish/match-properties.desktop.in:4
-msgid "Configure window properties"
-msgstr "Configuraþi proprietãþile ferestrelor"
-
-#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in:3
-msgid "Minimizing and Maximizing"
-msgstr "Minimizare ºi maximizare"
-
-#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in:4
-msgid "Configure window minimization and maximization"
-msgstr "Configuraþi minimizarea ºi maximizarea ferestrelor"
-
-#: capplets/desktop-links/Sawfish/meta-properties.desktop.in:3
-msgid "Meta"
-msgstr "Meta"
-
-#: capplets/desktop-links/Sawfish/meta-properties.desktop.in:4
-msgid "Configure window manager configuration properties"
-msgstr "Configuraþi proprietãþile de configurare ale managerului de ferestre"
-
-#: capplets/desktop-links/Sawfish/misc-properties.desktop.in:3
-#: capplets/new-ui-properties/ui-properties.glade.h:52
-msgid "Miscellaneous"
-msgstr "Diverse"
-
-#: capplets/desktop-links/Sawfish/misc-properties.desktop.in:4
-msgid "Configure miscellaneous window features"
-msgstr "Configuraþi diverse caracteristici ale ferestrelor"
-
-#: capplets/desktop-links/Sawfish/move-properties.desktop.in:3
-msgid "Moving and Resizing"
-msgstr "Mutare ºi re-mãrire"
-
-#: capplets/desktop-links/Sawfish/move-properties.desktop.in:4
-msgid "Configure window move/resize"
-msgstr "Configuraþi mutarea/re-mãrirea ferestrelor"
-
-#: capplets/desktop-links/Sawfish/placement-properties.desktop.in:3
-msgid "Placement"
-msgstr "Plasare"
-
-#: capplets/desktop-links/Sawfish/placement-properties.desktop.in:4
-msgid "Configure window placement"
-msgstr "Configuraþi plasarea ferestrelor"
-
-#: capplets/desktop-links/Sawfish/sound-properties.desktop.in:4
-msgid "Enable window manager sound events"
-msgstr "Activaþi sunetele managerului de ferestre pentru evenimente"
-
-#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in:3
-msgid "Workspaces"
-msgstr "Spaþii de lucru"
-
-#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in:4
-msgid "Configure workspaces"
-msgstr "Configuraþi spaþiile de lucru"
-
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:236
-#: capplets/session-properties/session-properties.c:342
-#: capplets/theme-switcher/gui.c:366
-#: capplets/wm-properties/wm-properties-capplet.c:669
-msgid ""
-"No help is available/installed for these settings. Please make sure you\n"
-"have the GNOME User's Guide installed on your system."
-msgstr ""
-"Nu existã ajutor disponibil/instalat pentru aceste setãri. Vã rog sã vã "
-"asiguraþi\n"
-"cã aþi instalat Ghidul Utilizatorului GNOME pe sistemul dvs."
-
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:379
-msgid "Gnome editor"
-msgstr "Editor Gnome"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:390
-msgid "Run In Terminal"
-msgstr "Ruleazã în Terminal"
+#: capplets/keyboard/keyboard-properties.glade.h:18
+msgid "Volume"
+msgstr "Volum"
 
 #. icon box
 #: capplets/mime-type/edit-window.c:266
@@ -2647,6 +1004,7 @@ msgid "Select an icon..."
 msgstr "Selecteazã un icon"
 
 #: capplets/mime-type/edit-window.c:276
+#: capplets/mime-type/new-mime-window.c:31
 msgid "Mime Type: "
 msgstr "Tip Mime: "
 
@@ -2655,8 +1013,7 @@ msgid "Add"
 msgstr "Adaugã"
 
 #: capplets/mime-type/edit-window.c:314
-#: capplets/new-screensaver-properties/prefs-widget.c:272
-#: capplets/url-properties/url-properties.c:134
+#: capplets/url-properties/url-properties.c:135
 msgid "Remove"
 msgstr "Eliminã "
 
@@ -2711,16 +1068,12 @@ msgstr "Seteazã acþiunile pentru %s"
 msgid "Mime Type"
 msgstr "Tip Mime:"
 
-#: capplets/mime-type/mime-data.c:385
-msgid "Extension"
-msgstr "Extensie"
-
-#: capplets/mime-type/mime-data.c:492
+#: capplets/mime-type/mime-data.c:493
 #, fuzzy
 msgid "You must enter a mime-type"
 msgstr "Trebuie sã introduceþi un nume."
 
-#: capplets/mime-type/mime-data.c:497
+#: capplets/mime-type/mime-data.c:498
 msgid ""
 "You must add either a regular-expression or\n"
 "a file-name extension"
@@ -2728,7 +1081,7 @@ msgstr ""
 "Trebuie sã adãugaþi fie o expresie regulatã sau\n"
 "o extensie de fiºier"
 
-#: capplets/mime-type/mime-data.c:501
+#: capplets/mime-type/mime-data.c:502
 msgid ""
 "Please put your mime-type in the format:\n"
 "CATEGORY/TYPE\n"
@@ -2742,11 +1095,11 @@ msgstr ""
 "De exemplu:\n"
 "image/png"
 
-#: capplets/mime-type/mime-data.c:506
+#: capplets/mime-type/mime-data.c:507
 msgid "This mime-type already exists"
 msgstr "Acest tip Mime existã deja"
 
-#: capplets/mime-type/mime-data.c:587
+#: capplets/mime-type/mime-data.c:588 capplets/mime-type/mime-info.c:427
 msgid ""
 "We are unable to create the directory\n"
 "~/.gnome/mime-info\n"
@@ -2758,7 +1111,7 @@ msgstr ""
 "\n"
 "Nu se va putea salva situaþia curentã."
 
-#: capplets/mime-type/mime-data.c:593
+#: capplets/mime-type/mime-data.c:594 capplets/mime-type/mime-info.c:433
 msgid ""
 "We are unable to access the directory\n"
 "~/.gnome/mime-info\n"
@@ -2770,7 +1123,7 @@ msgstr ""
 "\n"
 "Nu se va putea salva situaþia curentã."
 
-#: capplets/mime-type/mime-data.c:604
+#: capplets/mime-type/mime-data.c:605
 msgid ""
 "Cannot create the file\n"
 "~/.gnome/mime-info/user.mime\n"
@@ -2779,31 +1132,6 @@ msgid ""
 msgstr ""
 "Nu se poate crea fisierul\n"
 "~/.gnome/mime-info/user.mime\n"
-"\n"
-"Nu se va putea salva situaþia curentã."
-
-#: capplets/mime-type/mime-info.c:427
-msgid ""
-"We are unable to create the directory\n"
-"~/.gnome/mime-info.\n"
-"\n"
-"We will not be able to save the state."
-msgstr ""
-"Nu se poate crea directorul\n"
-"~/.gnome/mime-info\n"
-"\n"
-"Nu se va putea salva situaþia curentã."
-
-#: capplets/mime-type/mime-info.c:433
-#, fuzzy
-msgid ""
-"We are unable to access the directory\n"
-"~/.gnome/mime-info.\n"
-"\n"
-"We will not be able to save the state."
-msgstr ""
-"Nu se poate accesa directorul\n"
-"~/.gnome/mime-info\n"
 "\n"
 "Nu se va putea salva situaþia curentã."
 
@@ -2821,23 +1149,22 @@ msgstr ""
 "Nu se va putea salva situaþia curentã."
 
 #: capplets/mime-type/mime-type-capplet.c:83
-#: capplets/session-properties/session-properties.c:203
-#: capplets/wm-properties/wm-properties-capplet.c:1119
+#: capplets/wm-properties/wm-properties-capplet.c:1127
 msgid "Delete"
 msgstr "ªterge"
 
-#: capplets/mime-type/mime-type-capplet.c:93
-#: capplets/new-screensaver-properties/prefs-widget.c:266
-#: capplets/session-properties/session-properties.c:193
-#: capplets/wm-properties/wm-properties-capplet.c:1109
-msgid "Add..."
-msgstr "Adaugã..."
-
 #: capplets/mime-type/mime-type-capplet.c:97
-#: capplets/session-properties/session-properties.c:198
-#: capplets/wm-properties/wm-properties-capplet.c:1114
+#: capplets/wm-properties/wm-properties-capplet.c:1122
 msgid "Edit..."
 msgstr "Editeazã"
+
+#: capplets/mime-type/mime-type.desktop.in.in.h:1
+msgid "Configure how files are associated and started"
+msgstr "Configuraþi cum sunt asociate ºi deschise fiºierele"
+
+#: capplets/mime-type/mime-type.desktop.in.in.h:2
+msgid "Mime Types"
+msgstr "Tipuri MIME"
 
 #: capplets/mime-type/new-mime-window.c:25
 #, fuzzy
@@ -2851,10 +1178,6 @@ msgid ""
 msgstr ""
 "Adaugã un nou tip Mime\n"
 "De exemplu: image/tiff; text/x-scheme"
-
-#: capplets/mime-type/new-mime-window.c:31
-msgid "Mime Type:"
-msgstr "Tip Mime:"
 
 #: capplets/mime-type/new-mime-window.c:39
 #, fuzzy
@@ -2871,10 +1194,6 @@ msgstr ""
 "Puteþi introduce câteva extensii separate prin spaþiu,\n"
 "de exemplu: html htm"
 
-#: capplets/mime-type/new-mime-window.c:50
-msgid "Extension:"
-msgstr "Extensie:"
-
 #: capplets/mime-type/new-mime-window.c:55
 msgid "Regular Expressions"
 msgstr "Expresii regulate"
@@ -2887,583 +1206,73 @@ msgstr ""
 "Puteþi seta pânã la douã expresii regulate pentru a identifica tipul Mime\n"
 "Aceste câmpuri sunt opþionale."
 
-#: capplets/new-bell-properties/bell-properties.glade.h:8
-#, fuzzy
-msgid "Keyboard Bell"
-msgstr "Sunet tastaturã"
+#: capplets/mouse/mouse.desktop.in.in.h:1
+msgid "Mouse"
+msgstr "Maus"
 
-#: capplets/new-bell-properties/bell-properties.glade.h:9
-msgid "Volume"
-msgstr "Volum"
+#: capplets/mouse/mouse.desktop.in.in.h:2
+msgid "Mouse Properties"
+msgstr "Proprietãþi maus"
 
-#: capplets/new-bell-properties/bell-properties.glade.h:10
-msgid "Pitch (Hz)"
-msgstr "Înãlþime (Hz) "
+#: capplets/mouse/mouse-properties.glade.h:2
+msgid "High"
+msgstr "Mare"
 
-#: capplets/new-bell-properties/bell-properties.glade.h:11
-msgid "Duration (ms)"
-msgstr "Durata (ms)"
+#: capplets/mouse/mouse-properties.glade.h:3
+msgid "Left handed"
+msgstr "Pentru stângaci"
 
-#: capplets/new-bell-properties/bell-properties.glade.h:12
-msgid "Test"
-msgstr "Testeazã"
+#: capplets/mouse/mouse-properties.glade.h:4
+msgid "Low"
+msgstr "Micã"
 
-#: capplets/new-mouse-properties/mouse-properties.glade.h:8
-msgid "Mouse buttons"
-msgstr "Butoane mouse"
+#: capplets/mouse/mouse-properties.glade.h:5
+msgid "Mouse Configuration"
+msgstr "Configuraþie mouse"
 
-#: capplets/new-mouse-properties/mouse-properties.glade.h:11
-msgid "Mouse motion"
-msgstr "Miºcare mouse"
+#: capplets/mouse/mouse-properties.glade.h:6
+msgid "Mouse speed:"
+msgstr "Vitezã mouse:"
 
-#: capplets/new-mouse-properties/mouse-properties.glade.h:12
-msgid "Acceleration"
-msgstr "Accelerare"
-
-#: capplets/new-mouse-properties/mouse-properties.glade.h:13
-msgid "Threshold"
-msgstr "Limitã"
-
-#: capplets/new-screensaver-properties/prefs-widget.c:185
-#, fuzzy
-msgid "Selection"
-msgstr "Selecteazã un icon"
-
-#: capplets/new-screensaver-properties/prefs-widget.c:228
-msgid "Choose randomly from those checked off"
-msgstr "Alege aleator din cele selectate"
-
-#: capplets/new-screensaver-properties/prefs-widget.c:238
-msgid "Choose randomly among all screensavers"
-msgstr "Alege aleator din toate screensaver-urile"
-
-#: capplets/new-screensaver-properties/prefs-widget.c:279
-msgid "Settings..."
-msgstr "Setãri..."
-
-#: capplets/new-screensaver-properties/prefs-widget.c:289
-msgid "Demo Next"
-msgstr "Demo urmãtorul"
-
-#: capplets/new-screensaver-properties/prefs-widget.c:295
-msgid "Demo Previous"
-msgstr "Demo cel dinainte"
-
-#: capplets/new-screensaver-properties/prefs-widget.c:335
-#, fuzzy
-msgid "Screensaver Selection"
-msgstr "Selecþie screensaver"
-
-#: capplets/new-screensaver-properties/prefs-widget.c:344
-#, fuzzy
-msgid "Basic"
-msgstr "Bare"
-
-#: capplets/new-screensaver-properties/prefs-widget.c:356
-msgid "Start screensaver after"
-msgstr "Porneºte screensaver-ul dupã"
-
-#: capplets/new-screensaver-properties/prefs-widget.c:371
-msgid "Switch screensavers every"
-msgstr "Schimbã scrensaver-ul la fiecare"
-
-#: capplets/new-screensaver-properties/prefs-widget.c:386
-msgid "Security"
-msgstr "Securitate"
-
-#: capplets/new-screensaver-properties/prefs-widget.c:395
-#, fuzzy
-msgid "Require password to unlock"
-msgstr "Necesitã parolã"
-
-#: capplets/new-screensaver-properties/prefs-widget.c:404
-#, fuzzy
-msgid "Only after the screensaver has run for"
-msgstr " minute dupã ce screensaver-ul a pornit"
-
-#: capplets/new-screensaver-properties/prefs-widget.c:422
-msgid "Power Management"
-msgstr "Management putere"
-
-#: capplets/new-screensaver-properties/prefs-widget.c:430
-#, fuzzy
-msgid "Enable power management"
-msgstr "Foloseºte management putere."
-
-#: capplets/new-screensaver-properties/prefs-widget.c:492
-#, fuzzy
-msgid "General Properties"
-msgstr "Proprietãþi mouse"
-
-#: capplets/new-screensaver-properties/prefs-widget.c:507
-#: capplets/session-properties/session-properties.c:183
-#: capplets/session-properties/startup-programs.c:308
-#, fuzzy
-msgid "Priority"
-msgstr "Prioritate:"
-
-#: capplets/new-screensaver-properties/prefs-widget.c:539
-msgid "Be verbose"
-msgstr "Detaliat"
-
-#: capplets/new-screensaver-properties/prefs-widget.c:543
-msgid "Effects"
-msgstr "Efecte"
-
-#: capplets/new-screensaver-properties/prefs-widget.c:555
-msgid "Install colormap"
-msgstr "Instaleazã hartã culoare"
-
-#: capplets/new-screensaver-properties/prefs-widget.c:561
-msgid "Fade to black when activating screensaver"
-msgstr "Tranziþie la negru când activeazã screensaver-ul"
-
-#: capplets/new-screensaver-properties/prefs-widget.c:567
-msgid "Fade desktop back when deactivating screensaver"
-msgstr "Tranziþie înapoi la desktop când dezactiveazã screensaver-ul"
-
-#: capplets/new-screensaver-properties/prefs-widget.c:576
-msgid "Fade Duration"
-msgstr "Durata tranziþiei (ms)"
-
-#: capplets/new-screensaver-properties/prefs-widget.c:596
-msgid "Fade Smoothness"
-msgstr "Durata tranziþie"
-
-#: capplets/new-screensaver-properties/prefs-widget.c:627
-msgid "Smooth"
-msgstr "Medie"
-
-#: capplets/new-screensaver-properties/prefs-widget.c:647
-msgid "Jerky"
-msgstr "Rapidã"
-
-#: capplets/new-screensaver-properties/prefs-widget.c:658
-msgid "Advanced Properties"
-msgstr "Proprietãþi avansate"
-
-#.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/new-ui-properties/ui-properties.glade.h:7
-msgid "window4"
+#: capplets/mouse/mouse-properties.glade.h:7
+msgid "My mouse is:"
 msgstr ""
 
-#: capplets/new-ui-properties/ui-properties.glade.h:8
-#, fuzzy
-msgid "Menus"
-msgstr "Moebius"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:9
-msgid "Menu bars are detachable"
-msgstr "Barele meniuri sunt detaºabile"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:10
-#, fuzzy
-msgid "Menu bars have a border"
-msgstr "Meniurile au chenar vizibil"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:11
-#, fuzzy
-msgid "Menus can be torn off"
-msgstr "Submeniurile pot fi dezactivate"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:12
-msgid "Menu items have icons"
-msgstr "Elementele din meniu pot avea icon-uri"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:13
-msgid "Status Bar"
-msgstr "Barã status"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:14
-#, fuzzy
-msgid "Use status bar instead of dialog when possible"
-msgstr "Utilizeazã bara de status în locul dialogurilor când este posibil"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:15
-#, fuzzy
-msgid "Status bar is interactive when possible"
-msgstr "Bara de status este iteractivã când e posibil"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:16
-msgid "Progress bar is on the left"
-msgstr "Indicatorul de progres din bara de status este în stânga"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:17
-#, fuzzy
-msgid "Progress bar is on the right"
-msgstr "Indicatorul de progres din bara de status este în stânga"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:18
-msgid "Tool Bars"
-msgstr "Bare unelte"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:19
-#, fuzzy
-msgid "Tool bars have a border"
-msgstr "Barele de unelte au chenar vizibil"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:20
-msgid "Tool bar buttons pop up on mouse over"
-msgstr "Butoanele din barele de unelte au chenar vizibil"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:21
-#, fuzzy
-msgid "Tool bars have line separators"
-msgstr "Barele de unelte au linii de separare"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:22
-msgid "Tool bars are detachable"
-msgstr "Barele de unelte sunt detaºabile"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:23
-msgid "Tool bar buttons are icons only"
-msgstr "Butoanele din barele de unelte sunt doar iconuri"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:24
-msgid "Tool bar buttons are text below icons"
-msgstr "Barele de unelte sunt text sub iconuri"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:25
-#, fuzzy
-msgid "Interface"
-msgstr "Interfaþã utilizator"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:26
-msgid "Dialogs"
-msgstr "Dialoguri"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:27
-msgid "Dialog buttons have icons"
-msgstr "Butoanele de dialog au icon-uri"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:28
-msgid "Place dialogs over application window when possible"
-msgstr "Plaseazã dialogurile peste ferestrele aplicaþiilor când este posibil"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:29
-msgid "Dialogs open"
-msgstr "Dialoguri deschise"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:30
-msgid "Wherever the Window Manager places them"
-msgstr "Oriunde le plaseazã managerul de ferestre"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:31
-#, fuzzy
-msgid "At the center of the screen"
-msgstr "Centrul ecranului"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:32
-msgid "At the mouse pointer"
-msgstr "La cursorul mouse-ului"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:33
-#, fuzzy
-msgid "Dialogs are treated"
-msgstr "Dialogurile sunt ca alte ferestre"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:34
-msgid "Like any other window"
-msgstr "Ca ºi oricare altã fereastrã"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:35
-#, fuzzy
-msgid "Specially by the window manager"
-msgstr "Dialogurile sunt tratate special de cãtre managerul de ferestre"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:36
-#, fuzzy
-msgid "Dialog Buttons"
-msgstr "Butoane de dialog"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:37
-msgid "Default  (Spread out - big)"
-msgstr "Implicit  (Întins - mare)"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:38
-#, fuzzy
-msgid "Spread out"
-msgstr "Întins (mare)"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:39
-msgid "Spread out (big)"
-msgstr "Întins (mare)"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:40
-msgid "Left aligned"
-msgstr "Aliniat la stânga"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:41
-msgid "Right aligned"
-msgstr "Aliniat la dreapta"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:42
-msgid "Multiple Documents"
-msgstr "Documente multiple"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:43
-#, fuzzy
-msgid "Notebook tabs"
-msgstr "Notebook"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:44
-msgid "Seperate windows"
-msgstr "Ferestre separate"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:45
-msgid "The same window"
-msgstr "Aceeaºi fereastrã"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:46
-msgid "Left"
-msgstr "Stânga"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:47
-msgid "Right"
-msgstr "Dreapta"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:48
-msgid "Top"
-msgstr "Sus"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:49
-msgid "Bottom"
-msgstr "Jos"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:50
-msgid "When opening Multiple documents, use"
-msgstr "Când deshid documente multiple, foloseºte"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:51
-msgid "When using Notebook tabs, place the tabs on the"
-msgstr "Când folosesc taburi notebook, plaseazã taburile pe"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:53
-msgid "Settings will not take effect until applications restart"
-msgstr "Setãrile nu vor fi activate pânã când aplicaþiile sunt restartate"
-
-#: capplets/session-properties/chooser.c:61
-msgid "Session"
-msgstr "Sesiune"
-
-#. dialog
-#: capplets/session-properties/chooser.c:97
-msgid "Session Chooser"
-msgstr "Selector de sesiune"
-
-#: capplets/session-properties/chooser.c:100
-msgid "Start Session"
-msgstr "Porneºte sesiunea"
-
-#: capplets/session-properties/chooser.c:103
-#, fuzzy
-msgid "Cancel Login"
-msgstr "Schimbã icon"
-
-#: capplets/session-properties/gsm-client-editor.c:103
-msgid "Order: "
-msgstr "Ordine: "
-
-#: capplets/session-properties/gsm-client-editor.c:113
-msgid "Style: "
-msgstr "Stil: "
-
-#: capplets/session-properties/gsm-client-list.c:33
-msgid "This button sets the start order of the selected programs.\n"
-msgstr "Acest buton seteazã ordinea de start a programelor selectate.\n"
-
-#: capplets/session-properties/gsm-client-list.c:34
-msgid ""
-"This button sets the restart style of the selected programs:\n"
-"Normal programs are unaffected by logouts but can die;\n"
-"Respawn programs are never allowed to die;\n"
-"Trash programs are discarded on logout and can die;\n"
-"Settings programs are always started on every login."
-msgstr ""
-"Acest buton seteazã ordinea de restartare a programelor selectate:\n"
-"Programele normale nu vor fi afectate de logout-uri, însã pot muri;\n"
-"Programele repornite nu li se permite sã moarã ;)\n"
-"Programele \"gunoi\" nu sunt loate în seamã la logout ºi pot sã moarã;\n"
-"Programele de setãri sunt întotdeauna pornite la fiecare login."
-
-#: capplets/session-properties/gsm-client-list.c:39
-msgid ""
-"This button produces a key to the program states below:\n"
-"Inactive programs are waiting to start or have finished;\n"
-"Starting programs are being given time to get running;\n"
-"Running programs are normal members of the session;\n"
-"Saving programs are saving their session details;\n"
-"Programs which make no contact have Unknown states.\n"
-msgstr ""
-"Acest buton produce o cheie stãrilor de program de mai jos:\n"
-"Programele inactive aºteaptã sã porneascã sau au terminat;\n"
-"Programele ce pornesc le este dat timp sã înceapã sã ruleze;\n"
-"Programele ce ruleaza sunt membri normali ai sesiunii;\n"
-"Programele ce salveazã vor stoca detaliile lor de sesiune;\n"
-"Programele care nu au nici un contact vor avea status necunoscut.\n"
-
-#: capplets/session-properties/gsm-client-list.c:45
-msgid "This column gives the command used to start a program."
-msgstr "Aceastã coloanã indicã comanda utilizatã pentru pornirea unui program."
-
-#: capplets/session-properties/gsm-client-list.c:138
-msgid "Order"
-msgstr "Ordine"
-
-#: capplets/session-properties/gsm-client-list.c:139
-#, fuzzy
-msgid "Style"
-msgstr "Stil: "
-
-#: capplets/session-properties/gsm-client-list.c:140
-#, fuzzy
-msgid "State"
-msgstr "Static"
-
-#: capplets/session-properties/gsm-client-list.c:141
-#, fuzzy
-msgid "Program"
-msgstr "Eliminã program"
-
-#: capplets/session-properties/gsm-client-row.c:34
-msgid "Inactive"
-msgstr "Inactiv"
-
-#: capplets/session-properties/gsm-client-row.c:35
-msgid "Waiting to start or already finished."
-msgstr "Aºteaptã sã porneascã sau deja s-a terminat."
-
-#: capplets/session-properties/gsm-client-row.c:37
-#, fuzzy
-msgid "Starting"
-msgstr "Setãri"
-
-#: capplets/session-properties/gsm-client-row.c:38
-msgid "Started but has not yet reported state."
-msgstr "Pornit, însã nu a raportat încã status-ul"
-
-#: capplets/session-properties/gsm-client-row.c:40
-msgid "Running"
-msgstr "Ruleazã"
-
-#: capplets/session-properties/gsm-client-row.c:41
-msgid "A normal member of the session."
-msgstr "Un membru normal al sesiunii"
-
-#: capplets/session-properties/gsm-client-row.c:43
-msgid "Saving"
-msgstr "Salvez"
-
-#: capplets/session-properties/gsm-client-row.c:44
-msgid "Saving session details."
-msgstr "Salvez detaliile de sesiune."
-
-#: capplets/session-properties/gsm-client-row.c:46
-msgid "Unknown"
-msgstr "Necunoscut"
-
-#: capplets/session-properties/gsm-client-row.c:47
-msgid "State not reported within timeout."
-msgstr "Status "
-
-#: capplets/session-properties/gsm-client-row.c:53
-#, fuzzy
-msgid "Normal"
-msgstr " Normalã "
-
-#: capplets/session-properties/gsm-client-row.c:54
-msgid "Unaffected by logouts but can die."
-msgstr "Neafectat de logout-uri, însã poate muri."
-
-#: capplets/session-properties/gsm-client-row.c:56
-msgid "Respawn"
-msgstr "Restartat"
-
-#: capplets/session-properties/gsm-client-row.c:57
-msgid "Never allowed to die."
-msgstr "Nu i se permite sã moarã."
-
-#: capplets/session-properties/gsm-client-row.c:59
-#, fuzzy
-msgid "Trash"
-msgstr "Urme"
-
-#: capplets/session-properties/gsm-client-row.c:60
-msgid "Discarded on logout and can die."
-msgstr "Neluat în seamã la logout ºi poate muri"
-
-#: capplets/session-properties/gsm-client-row.c:63
-msgid "Always started on every login."
-msgstr "Pornit în totdeauna la fiecare login."
-
-#: capplets/session-properties/gsm-protocol.c:502
-msgid "Remove Program"
-msgstr "Eliminã program"
-
-#. frame for options
-#: capplets/session-properties/session-properties.c:143
-#, fuzzy
-msgid "Options"
-msgstr "Opþiuni meniu"
-
-#: capplets/session-properties/session-properties.c:154
-msgid "Prompt on logout"
-msgstr "Întreabã la logout"
-
-#: capplets/session-properties/session-properties.c:161
-msgid "Automatically save changes to session"
-msgstr "Salveazã automat schimbãrile sesiunii"
-
-#. frame for manually started programs
-#: capplets/session-properties/session-properties.c:166
-msgid "Non-session-managed Startup Programs"
-msgstr "Programe Startup, non-session-managed"
-
-#: capplets/session-properties/session-properties.c:184
-#: capplets/url-properties/url-properties.c:72
-msgid "Command"
-msgstr "Comandã "
-
-#: capplets/session-properties/session-properties.c:213
-msgid "Browse Currently Running Programs..."
-msgstr "Rãsfoieºte programele ce ruleazã în mod curent... "
-
-#: capplets/session-properties/session-properties.c:474
-msgid "Only display warnings."
-msgstr "Afiºeazã doar avertizãrile."
-
-#: capplets/session-properties/startup-programs.c:292
-#: capplets/session-properties/startup-programs.c:299
-msgid "Startup Command"
-msgstr "Comandã Startup"
-
-#: capplets/session-properties/startup-programs.c:323
-msgid ""
-"Programs with smaller values are started before programs with higher values. "
-"The default value should be OK"
-msgstr ""
-"Programele cu valori mai mici vor fi pornite înaintea programelor cu valori "
-"mai mari. Valoarea implicitã ar trebui sã fie OK"
-
-#: capplets/session-properties/startup-programs.c:342
-msgid "The startup command cannot be empty"
-msgstr "Comanda startup nu poate fi goalã"
-
-#: capplets/session-properties/startup-programs.c:382
-msgid "Add Startup Program"
-msgstr "Adaugã un program Startup"
-
-#: capplets/session-properties/startup-programs.c:400
-msgid "Edit Startup Program"
-msgstr "Editeazã programul Startup"
+#: capplets/mouse/mouse-properties.glade.h:8
+msgid "Right handed"
+msgstr "Pentru dreptaci"
+
+#: capplets/mouse/mouse-properties.glade.h:9
+msgid "Sensitivity:"
+msgstr "Senzitivitate"
+
+#: capplets/sound/sound.desktop.in.in.h:1
+msgid "Configure GNOME's use of sound"
+msgstr "Configuraþi folosirea sunetelor în GNOME"
+
+#: capplets/sound/sound-properties.glade.h:1
+msgid "Enable sound server startup"
+msgstr "Activeazã serverul de sunet la startup"
+
+#: capplets/sound/sound-properties.glade.h:2
+msgid "General"
+msgstr "General"
+
+#: capplets/sound/sound-properties.glade.h:3
+msgid "Sound Events"
+msgstr "Evenimente de sunet"
+
+#: capplets/sound/sound-properties.glade.h:4
+msgid "Sounds for events"
+msgstr "Sunete pentru evenimente"
 
 #: capplets/theme-switcher/demo.c:54
 msgid "One"
 msgstr "Unu"
+
+#: capplets/theme-switcher/demo.c:54
+msgid "Two"
+msgstr "Doi"
 
 #. just 8 short names that will serve as samples for titles in demo
 #: capplets/theme-switcher/demo.c:56
@@ -3535,7 +1344,16 @@ msgstr "Buton radio 1"
 msgid "Radio Button 2"
 msgstr "Buton radio 2"
 
-#: capplets/theme-switcher/gui.c:88
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:1
+msgid "Gtk+ Theme Selector"
+msgstr ""
+
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:2
+#, fuzzy
+msgid "Select which gtk+ theme to use"
+msgstr "Selectaþi o temã pentru instalare"
+
+#: capplets/theme-switcher/gui.c:87
 #, c-format
 msgid ""
 "Error installing theme:\n"
@@ -3546,15 +1364,15 @@ msgstr ""
 "'%s'\n"
 "%s"
 
-#: capplets/theme-switcher/gui.c:119
+#: capplets/theme-switcher/gui.c:118
 msgid "Select a theme to install"
 msgstr "Selectaþi o temã pentru instalare"
 
-#: capplets/theme-switcher/gui.c:196
+#: capplets/theme-switcher/gui.c:195
 msgid "Available Themes"
 msgstr "Teme disponibile"
 
-#: capplets/theme-switcher/gui.c:221
+#: capplets/theme-switcher/gui.c:223
 msgid ""
 "Auto\n"
 "Preview"
@@ -3562,7 +1380,7 @@ msgstr ""
 "Previzualizare\n"
 "automatã"
 
-#: capplets/theme-switcher/gui.c:233
+#: capplets/theme-switcher/gui.c:235
 msgid ""
 "Install new\n"
 "theme..."
@@ -3572,19 +1390,35 @@ msgstr ""
 
 #. Font selector.
 #.
-#: capplets/theme-switcher/gui.c:239
+#: capplets/theme-switcher/gui.c:241
 msgid "User Font"
 msgstr "Font utilizator"
 
 #. FIXME - should really get this from X somehow
 #. for now we just assume default gtk font
-#: capplets/theme-switcher/gui.c:257
+#: capplets/theme-switcher/gui.c:259
 msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
 msgstr "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-iso8859-2"
 
-#: capplets/theme-switcher/gui.c:276
+#: capplets/theme-switcher/gui.c:278
 msgid "Use custom font."
 msgstr "Utilizeazã un font specific"
+
+#: capplets/theme-switcher/gui.c:368
+#: capplets/wm-properties/wm-properties-capplet.c:669
+msgid ""
+"No help is available/installed for these settings. Please make sure you\n"
+"have the GNOME User's Guide installed on your system."
+msgstr ""
+"Nu existã ajutor disponibil/instalat pentru aceste setãri. Vã rog sã vã "
+"asiguraþi\n"
+"cã aþi instalat Ghidul Utilizatorului GNOME pe sistemul dvs."
+
+#: capplets/theme-switcher/gui.c:370
+#: capplets/wm-properties/wm-properties-capplet.c:671
+#: control-center/capplet-dir-view.c:464
+msgid "Close"
+msgstr "Închide"
 
 #: capplets/theme-switcher/install.c:31
 msgid "Home directory doesn't exist!\n"
@@ -3603,6 +1437,219 @@ msgstr "Comanda '%s' a eºuat"
 msgid "Unknown file format"
 msgstr "Format fiºier necunoscut"
 
+#: capplets/ui-properties/behavior.desktop.in.in.h:1
+msgid "Behavior"
+msgstr "Comportament"
+
+#: capplets/ui-properties/behavior.desktop.in.in.h:2
+msgid "Sets the default behavior of GNOME applications"
+msgstr "Setaþi comportamentul implicit al aplicaþiilor GNOME"
+
+#: capplets/ui-properties/behavior-properties.glade.h:1
+#, fuzzy
+msgid "At the center of the screen"
+msgstr "Centrul ecranului"
+
+#: capplets/ui-properties/behavior-properties.glade.h:2
+msgid "At the mouse pointer"
+msgstr "La cursorul mouse-ului"
+
+#: capplets/ui-properties/behavior-properties.glade.h:3
+msgid "Bottom"
+msgstr "Jos"
+
+#: capplets/ui-properties/behavior-properties.glade.h:4
+msgid "Default  (Spread out - big)"
+msgstr "Implicit  (Întins - mare)"
+
+#: capplets/ui-properties/behavior-properties.glade.h:5
+#, fuzzy
+msgid "Dialog Buttons"
+msgstr "Butoane de dialog"
+
+#: capplets/ui-properties/behavior-properties.glade.h:6
+msgid "Dialog buttons have icons"
+msgstr "Butoanele de dialog au icon-uri"
+
+#: capplets/ui-properties/behavior-properties.glade.h:7
+msgid "Dialogs"
+msgstr "Dialoguri"
+
+#: capplets/ui-properties/behavior-properties.glade.h:8
+#, fuzzy
+msgid "Dialogs are treated"
+msgstr "Dialogurile sunt ca alte ferestre"
+
+#: capplets/ui-properties/behavior-properties.glade.h:9
+msgid "Dialogs open"
+msgstr "Dialoguri deschise"
+
+#: capplets/ui-properties/behavior-properties.glade.h:10
+#, fuzzy
+msgid "Interface"
+msgstr "Interfaþã utilizator"
+
+#: capplets/ui-properties/behavior-properties.glade.h:11
+msgid "Left"
+msgstr "Stânga"
+
+#: capplets/ui-properties/behavior-properties.glade.h:12
+msgid "Left aligned"
+msgstr "Aliniat la stânga"
+
+#: capplets/ui-properties/behavior-properties.glade.h:13
+msgid "Like any other window"
+msgstr "Ca ºi oricare altã fereastrã"
+
+#: capplets/ui-properties/behavior-properties.glade.h:14
+msgid "Menu bars are detachable"
+msgstr "Barele meniuri sunt detaºabile"
+
+#: capplets/ui-properties/behavior-properties.glade.h:15
+#, fuzzy
+msgid "Menu bars have a border"
+msgstr "Meniurile au chenar vizibil"
+
+#: capplets/ui-properties/behavior-properties.glade.h:16
+msgid "Menu items have icons"
+msgstr "Elementele din meniu pot avea icon-uri"
+
+#: capplets/ui-properties/behavior-properties.glade.h:17
+#, fuzzy
+msgid "Menus"
+msgstr "Moebius"
+
+#: capplets/ui-properties/behavior-properties.glade.h:18
+#, fuzzy
+msgid "Menus can be torn off"
+msgstr "Submeniurile pot fi dezactivate"
+
+#: capplets/ui-properties/behavior-properties.glade.h:20
+msgid "Multiple Documents"
+msgstr "Documente multiple"
+
+#: capplets/ui-properties/behavior-properties.glade.h:21
+#, fuzzy
+msgid "Notebook tabs"
+msgstr "Notebook"
+
+#: capplets/ui-properties/behavior-properties.glade.h:22
+msgid "Place dialogs over application window when possible"
+msgstr "Plaseazã dialogurile peste ferestrele aplicaþiilor când este posibil"
+
+#: capplets/ui-properties/behavior-properties.glade.h:23
+msgid "Progress bar is on the left"
+msgstr "Indicatorul de progres din bara de status este în stânga"
+
+#: capplets/ui-properties/behavior-properties.glade.h:24
+#, fuzzy
+msgid "Progress bar is on the right"
+msgstr "Indicatorul de progres din bara de status este în stânga"
+
+#: capplets/ui-properties/behavior-properties.glade.h:25
+msgid "Right"
+msgstr "Dreapta"
+
+#: capplets/ui-properties/behavior-properties.glade.h:26
+msgid "Right aligned"
+msgstr "Aliniat la dreapta"
+
+#: capplets/ui-properties/behavior-properties.glade.h:27
+msgid "Seperate windows"
+msgstr "Ferestre separate"
+
+#: capplets/ui-properties/behavior-properties.glade.h:28
+msgid "Settings will not take effect until applications restart"
+msgstr "Setãrile nu vor fi activate pânã când aplicaþiile sunt restartate"
+
+#: capplets/ui-properties/behavior-properties.glade.h:29
+#, fuzzy
+msgid "Specially by the window manager"
+msgstr "Dialogurile sunt tratate special de cãtre managerul de ferestre"
+
+#: capplets/ui-properties/behavior-properties.glade.h:30
+#, fuzzy
+msgid "Spread out"
+msgstr "Întins (mare)"
+
+#: capplets/ui-properties/behavior-properties.glade.h:31
+msgid "Spread out (big)"
+msgstr "Întins (mare)"
+
+#: capplets/ui-properties/behavior-properties.glade.h:32
+msgid "Status Bar"
+msgstr "Barã status"
+
+#: capplets/ui-properties/behavior-properties.glade.h:33
+#, fuzzy
+msgid "Status bar is interactive when possible"
+msgstr "Bara de status este iteractivã când e posibil"
+
+#: capplets/ui-properties/behavior-properties.glade.h:34
+msgid "The same window"
+msgstr "Aceeaºi fereastrã"
+
+#: capplets/ui-properties/behavior-properties.glade.h:35
+msgid "Tool Bars"
+msgstr "Bare unelte"
+
+#: capplets/ui-properties/behavior-properties.glade.h:36
+msgid "Tool bar buttons are icons only"
+msgstr "Butoanele din barele de unelte sunt doar iconuri"
+
+#: capplets/ui-properties/behavior-properties.glade.h:37
+msgid "Tool bar buttons are text below icons"
+msgstr "Barele de unelte sunt text sub iconuri"
+
+#: capplets/ui-properties/behavior-properties.glade.h:38
+msgid "Tool bar buttons pop up on mouse over"
+msgstr "Butoanele din barele de unelte au chenar vizibil"
+
+#: capplets/ui-properties/behavior-properties.glade.h:39
+msgid "Tool bars are detachable"
+msgstr "Barele de unelte sunt detaºabile"
+
+#: capplets/ui-properties/behavior-properties.glade.h:40
+#, fuzzy
+msgid "Tool bars have a border"
+msgstr "Barele de unelte au chenar vizibil"
+
+#: capplets/ui-properties/behavior-properties.glade.h:41
+#, fuzzy
+msgid "Tool bars have line separators"
+msgstr "Barele de unelte au linii de separare"
+
+#: capplets/ui-properties/behavior-properties.glade.h:42
+msgid "Top"
+msgstr "Sus"
+
+#: capplets/ui-properties/behavior-properties.glade.h:43
+#, fuzzy
+msgid "Use status bar instead of dialog when possible"
+msgstr "Utilizeazã bara de status în locul dialogurilor când este posibil"
+
+#: capplets/ui-properties/behavior-properties.glade.h:44
+msgid "When opening Multiple documents, use"
+msgstr "Când deshid documente multiple, foloseºte"
+
+#: capplets/ui-properties/behavior-properties.glade.h:45
+msgid "When using Notebook tabs, place the tabs on the"
+msgstr "Când folosesc taburi notebook, plaseazã taburile pe"
+
+#: capplets/ui-properties/behavior-properties.glade.h:46
+msgid "Wherever the Window Manager places them"
+msgstr "Oriunde le plaseazã managerul de ferestre"
+
+#: capplets/url-properties/url.desktop.in.in.h:1
+#, fuzzy
+msgid "Configure which programs are used to display URLs"
+msgstr "Configuraþi ce programe non-sesiune sunt pornite la început"
+
+#: capplets/url-properties/url.desktop.in.in.h:2
+#, fuzzy
+msgid "URL Handlers"
+msgstr "handler:"
+
 #: capplets/url-properties/url-properties.c:49
 msgid "Error initializing the `url-properties' capplet."
 msgstr "Eroare la iniþializarea capplet-ului `url-properties'."
@@ -3611,30 +1658,55 @@ msgstr "Eroare la iniþializarea capplet-ului `url-properties'."
 msgid "Protocol"
 msgstr "Protocol"
 
-#: capplets/url-properties/url-properties.c:88
+#: capplets/url-properties/url-properties.c:72
+msgid "Command"
+msgstr "Comandã "
+
+#: capplets/url-properties/url-properties.c:89
 msgid "handler:"
 msgstr "handler:"
 
 #. set some commonly used handlers
-#: capplets/url-properties/url-properties.c:98
+#: capplets/url-properties/url-properties.c:99
 msgid "Netscape"
 msgstr "Netscape"
 
-#: capplets/url-properties/url-properties.c:103
+#: capplets/url-properties/url-properties.c:104
 msgid "Netscape (new window)"
 msgstr "Netscape (fereastrã nouã)"
 
-#: capplets/url-properties/url-properties.c:109
+#: capplets/url-properties/url-properties.c:110
 msgid "Help browser"
 msgstr "Browser ajutor"
 
-#: capplets/url-properties/url-properties.c:114
+#: capplets/url-properties/url-properties.c:115
 msgid "Help browser (new window)"
 msgstr "Browser ajutor (fereastrã nouã)"
 
-#: capplets/url-properties/url-properties.c:126
+#: capplets/url-properties/url-properties.c:127
 msgid "Set"
 msgstr "Seteazã "
+
+#: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.in.h:1
+msgid "Enlightenment"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/IceWM.desktop.in.in.h:1
+msgid "Ice WM"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/Scwm.desktop.in.in.h:1
+msgid "Scwm"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/twm.desktop.in.in.h:1
+msgid "twm"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.in.h:1
+#, fuzzy
+msgid "Window Maker"
+msgstr "Manager de ferestre"
 
 #: capplets/wm-properties/wm-properties-capplet.c:170
 #, c-format
@@ -3703,9 +1775,9 @@ msgstr ""
 
 #: capplets/wm-properties/wm-properties-capplet.c:526
 #: capplets/wm-properties/wm-properties-capplet.c:781
-#: capplets/wm-properties/wm-properties-capplet.c:889
-#: capplets/wm-properties/wm-properties-capplet.c:896
-#: capplets/wm-properties/wm-properties-capplet.c:1042
+#: capplets/wm-properties/wm-properties-capplet.c:890
+#: capplets/wm-properties/wm-properties-capplet.c:897
+#: capplets/wm-properties/wm-properties-capplet.c:1043
 msgid "OK"
 msgstr "OK"
 
@@ -3759,36 +1831,41 @@ msgstr "Adaugã un nou maanager de ferestre"
 msgid "Cancel"
 msgstr "Cuºcã"
 
-#: capplets/wm-properties/wm-properties-capplet.c:805
-msgid "Command:"
-msgstr "Comandã:"
+#: capplets/wm-properties/wm-properties-capplet.c:793
+msgid "Name:"
+msgstr "Nume:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:818
+#: capplets/wm-properties/wm-properties-capplet.c:819
 msgid "Configuration Command:"
 msgstr "Comandã configurare:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:837
+#: capplets/wm-properties/wm-properties-capplet.c:838
 msgid "Window manager is session managed"
 msgstr "Managerul de ferestre este \"session managed\""
 
-#: capplets/wm-properties/wm-properties-capplet.c:887
+#: capplets/wm-properties/wm-properties-capplet.c:888
 msgid "Name cannot be empty"
 msgstr "Numele nu poate fi vid"
 
-#: capplets/wm-properties/wm-properties-capplet.c:894
+#: capplets/wm-properties/wm-properties-capplet.c:895
 msgid "Command cannot be empty"
 msgstr "Comanda nu poate fi vidã"
 
-#: capplets/wm-properties/wm-properties-capplet.c:943
-#: capplets/wm-properties/wm-properties-capplet.c:985
+#: capplets/wm-properties/wm-properties-capplet.c:944
+#: capplets/wm-properties/wm-properties-capplet.c:986
 msgid "Edit Window Manager"
 msgstr "Editeazã managerul de ferestre"
 
-#: capplets/wm-properties/wm-properties-capplet.c:1041
+#: capplets/wm-properties/wm-properties-capplet.c:1042
 msgid "You cannot delete the current Window Manager"
 msgstr "Nu puteþi ºterge managerul de ferestre curent"
 
-#: capplets/wm-properties/wm-properties-capplet.c:1183
+#: capplets/wm-properties/wm-properties-capplet.c:1089
+#, fuzzy
+msgid "Window Manager Selector"
+msgstr "Manager de ferestre"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1191
 msgid ""
 "an initialization error occurred while starting 'wm-properties-capplet'.\n"
 "aborting...\n"
@@ -3796,50 +1873,1064 @@ msgstr ""
 "o eroare de iniþializare s-a produs la pornirea 'wm-properties-capplet'.\n"
 "renunþ...\n"
 
-#: capplets/wm-properties/wm.desktop.in:3
-msgid "Window Manager"
-msgstr "Manager de ferestre"
+#: control-center/capplet-dir-view.c:298 control-center/gnomecc.desktop.in.h:1
+msgid "GNOME Control Center"
+msgstr "Centrul de control GNOME"
 
-#: capplets/wm-properties/wm.desktop.in:4
-msgid "Choose a window manager"
-msgstr "Alegeþi un manager de ferestre"
+#: control-center/capplet-dir-view.c:299
+#, fuzzy
+msgid "Desktop properties manager."
+msgstr "Manager proprietãþi desktop."
 
-#: capplets/ui-properties/behavior.desktop.in:3
-msgid "Behavior"
-msgstr "Comportament"
+#: control-center/capplet-dir-view.c:413
+#, fuzzy, c-format
+msgid "Gnome Control Center : %s"
+msgstr "Centrul de control"
 
-#: capplets/ui-properties/behavior.desktop.in:4
-msgid "Sets the default behavior of GNOME applications"
-msgstr "Setaþi comportamentul implicit al aplicaþiilor GNOME"
+#: control-center/capplet-dir-view.c:461
+msgid ""
+"No help is available/installed. Please make sure you\n"
+"have the GNOME User's Guide installed on your system."
+msgstr ""
+"Nu existã ajutor disponibil/instalat pentru aceste setãri. Vã rog sã vã "
+"asiguraþi\n"
+"cã aþi instalat Ghidul Utilizatorului GNOME pe sistemul dvs."
 
-#: capplets/session-properties/session.desktop.in:3
-msgid "Startup Programs"
-msgstr "Programe de început"
+#: control-center/capplet-dir-view-html.c:145
+#, fuzzy
+msgid "GNOME Control Center:"
+msgstr "Centrul de control GNOME"
 
-#: capplets/session-properties/session.desktop.in:4
-msgid "Configure which non-session aware programs are started up"
-msgstr "Configuraþi ce programe non-sesiune sunt pornite la început"
+#: control-center/gnomecc.desktop.in.h:2
+msgid "The GNOME configuration tool"
+msgstr "Unealta de configurare GNOME"
 
-#: capplets/mime-type/mime-type.desktop.in:3
-msgid "Mime Types"
-msgstr "Tipuri MIME"
+#: control-center/gnomecc.glade.h:2
+msgid "Browse with multiple windows"
+msgstr "Navigheazã cu ferestre multiple"
 
-#: capplets/mime-type/mime-type.desktop.in:4
-msgid "Configure how files are associated and started"
-msgstr "Configuraþi cum sunt asociate ºi deschise fiºierele"
+#: control-center/gnomecc.glade.h:3
+msgid "Browse with single window"
+msgstr "Navigheazã cu o singurã fereastrã"
 
-#: capplets/desktop-links/panel.desktop.in:3
-msgid "Panel"
-msgstr "Panel"
+#: control-center/gnomecc.glade.h:4
+msgid "Display control panels as HTML"
+msgstr "Afiºeazã panourile de control ca HTML"
 
-#: capplets/desktop-links/panel.desktop.in:4
-msgid "Global panel properties"
-msgstr "Proprietãþi globale ale panelului"
+#: control-center/gnomecc.glade.h:5
+msgid "Display control panels as a set of icons"
+msgstr "Afiºeazã panourile de control ca un set de iconuri "
 
-#: capplets/desktop-links/cd.desktop.in:3
-msgid "CD Properties"
-msgstr "Proprietãþi CD"
+#: control-center/gnomecc.glade.h:6
+msgid "Display control panels as a tree"
+msgstr "Afiºeazã panourile de control ca un copac"
 
-#: capplets/desktop-links/cd.desktop.in:4
-msgid "Configure handling of CD devices"
-msgstr "Configureazã modul de operare a CDurilor"
+#: control-center/gnomecc.glade.h:7
+msgid "Launch control panels in separate windows"
+msgstr "Lanseazã panelele de control în ferestre separate"
+
+#: control-center/gnomecc.glade.h:8
+msgid "New-control-center"
+msgstr ""
+
+#: control-center/gnomecc.glade.h:9
+msgid "Put control panels in the control center's window"
+msgstr "Pune panourile de control în ferestra Centrul de control"
+
+#: control-center/Gnome.directory.in.in.h:1
+#, fuzzy
+msgid "Main"
+msgstr "Salvez"
+
+#: control-center/Gnome.directory.in.in.h:2
+#, fuzzy
+msgid "Main Settings"
+msgstr "Setãri"
+
+#: control-center/main.c:46
+#, fuzzy
+msgid "Configuration"
+msgstr "Configuraþie mouse"
+
+#: control-center/main.c:72
+msgid "Run the capplet CAPPLET"
+msgstr ""
+
+#: control-center/main.c:72
+msgid "CAPPLET"
+msgstr ""
+
+#: control-center/main.c:80
+#, fuzzy
+msgid "GNOME Control Center options"
+msgstr "Centrul de control GNOME"
+
+#~ msgid "Wallpaper Selection"
+#~ msgstr "Selecþie fundal"
+
+#~ msgid "Colors"
+#~ msgstr "Culori"
+
+#, fuzzy
+#~ msgid "Effect"
+#~ msgstr "Efect"
+
+#, fuzzy
+#~ msgid "Primary color"
+#~ msgstr "Culoare primarã"
+
+#~ msgid "Apply changes automatically"
+#~ msgstr "Aplicã schimbãrile automat"
+
+#~ msgid "Wallpaper"
+#~ msgstr "Fundal"
+
+#, fuzzy
+#~ msgid "File"
+#~ msgstr "Fiºier"
+
+#, fuzzy
+#~ msgid "Display Style"
+#~ msgstr "Stil afiºare"
+
+#~ msgid "Stretched (change aspect ratio)"
+#~ msgstr "Întins (schimbã aspectul)"
+
+#, fuzzy
+#~ msgid "Browse..."
+#~ msgstr "Navigheazã... "
+
+#, fuzzy
+#~ msgid "Adjust wallpaper's transparency"
+#~ msgstr "Ajusteazã transparenþa fundalului"
+
+#, fuzzy
+#~ msgid "More Transparent"
+#~ msgstr "Mai transparent"
+
+#, fuzzy
+#~ msgid "More Solid"
+#~ msgstr "Mai solid"
+
+#~ msgid "....a"
+#~ msgstr "....a"
+
+#~ msgid "...a"
+#~ msgstr "...a"
+
+#~ msgid "..a"
+#~ msgstr "..a"
+
+#~ msgid ".a"
+#~ msgstr ".a"
+
+#~ msgid "a....a"
+#~ msgstr "a....a"
+
+#~ msgid "a...a"
+#~ msgstr "a..a"
+
+#~ msgid "a..a"
+#~ msgstr "a..a"
+
+#~ msgid "a.a"
+#~ msgstr "a.a"
+
+#~ msgid "Keyboard click"
+#~ msgstr "Clic tastaturã"
+
+#~ msgid "Type here to test setting"
+#~ msgstr "Tastaþi aici pentru a testa setãrile"
+
+#~ msgid "Custom screensaver. No description available"
+#~ msgstr "Ecran personalizat. Nici o descriere disponibilã"
+
+#~ msgid "Use"
+#~ msgstr "Foloseºte"
+
+#, fuzzy
+#~ msgid "Demo"
+#~ msgstr "Demo"
+
+#~ msgid "There are no configurable settings for this screensaver."
+#~ msgstr "Nu sunt setãri configurabile pentru acest screensaver"
+
+#~ msgid ""
+#~ "Cannot find the data to configure this screensaver. Please edit the "
+#~ "command line below."
+#~ msgstr ""
+#~ "Nu pot gãsi date pentru a configura acest screensaver. Va rugãm editaþi "
+#~ "linia de comandã de mai jos."
+
+#~ msgid "Visual:"
+#~ msgstr "Vizual:"
+
+#, fuzzy
+#~ msgid "Any"
+#~ msgstr "Oricare"
+
+#~ msgid "Twist:"
+#~ msgstr "Rãsuceºte"
+
+#~ msgid "Twist speed:"
+#~ msgstr "Vitezã rãsucire:"
+
+#~ msgid "Wobble:"
+#~ msgstr "Wobble:"
+
+#~ msgid "Size:"
+#~ msgstr "Mãrime:"
+
+#~ msgid "Small"
+#~ msgstr "Micã"
+
+#~ msgid "Large"
+#~ msgstr "Mare"
+
+#~ msgid "Sharp turns"
+#~ msgstr "Întoarceri scurte"
+
+#, fuzzy
+#~ msgid "Truchet lines"
+#~ msgstr "Linii Truchet"
+
+#~ msgid "Speed"
+#~ msgstr "Vitezã"
+
+#~ msgid "Timeout"
+#~ msgstr "TImp expirare"
+
+#~ msgid "Random"
+#~ msgstr "Aleator"
+
+#~ msgid "Specific"
+#~ msgstr "Specific"
+
+#, fuzzy
+#~ msgid "number of Ants"
+#~ msgstr "Numãr furnici"
+
+#, fuzzy
+#~ msgid "Number of colours"
+#~ msgstr "Numãr de culori"
+
+#, fuzzy
+#~ msgid "Randomize"
+#~ msgstr "Amestecã"
+
+#~ msgid "Monochrome"
+#~ msgstr "Monochrome"
+
+#~ msgid "Full Color"
+#~ msgstr "Culoare maximã"
+
+#~ msgid "Balls"
+#~ msgstr "Mingii"
+
+#, fuzzy
+#~ msgid "Lines"
+#~ msgstr "Linii"
+
+#~ msgid "Number of Colors"
+#~ msgstr "Numãr culori"
+
+#, fuzzy
+#~ msgid "Color Contrast"
+#~ msgstr "Culoare contrast"
+
+#~ msgid "Faster"
+#~ msgstr "Mai repede"
+
+#~ msgid "Slower"
+#~ msgstr "Mai încet"
+
+#~ msgid "Speed of the 90 degree rotation."
+#~ msgstr "Speed of the 90 degree rotation."
+
+#~ msgid "Display screensaver in monochrome."
+#~ msgstr "Afiºeazã screensaver-ul monocrom."
+
+#~ msgid "Number of Colors."
+#~ msgstr "Numãr culori."
+
+#~ msgid "Colors:"
+#~ msgstr "Culori:"
+
+#~ msgid "Speed of Motion."
+#~ msgstr "Speed of Motion."
+
+#~ msgid "Number of bubbles to use."
+#~ msgstr "Number of bubbles to use."
+
+#~ msgid "Count:"
+#~ msgstr "Numãr:"
+
+#~ msgid "Use red/blue 3d seperation."
+#~ msgstr "Use red/blue 3d seperation."
+
+#~ msgid "Draw circles instead of pixmap bubbles."
+#~ msgstr "Draw circles instead of pixmap bubbles."
+
+#~ msgid "Don't hide bubbles when they pop."
+#~ msgstr "Don't hide bubbles when they pop."
+
+#~ msgid "Bubbles exist in three dimensions."
+#~ msgstr "Bulele existã în trei dimensiuni."
+
+#~ msgid "Density"
+#~ msgstr "Density"
+
+#~ msgid "Denser"
+#~ msgstr "Mai dens"
+
+#~ msgid "Thinner"
+#~ msgstr "Mai subþire"
+
+#~ msgid "Number of seeds"
+#~ msgstr "Number of seeds"
+
+#~ msgid "Seeds"
+#~ msgstr "Seeds"
+
+#~ msgid "Number of polygons to use."
+#~ msgstr "Numãr de poligoane folosit."
+
+#~ msgid "Center image."
+#~ msgstr "Centreazã imaginea."
+
+#~ msgid "Have at maximum size"
+#~ msgstr "Have at maximum size"
+
+#~ msgid "Number of iterations."
+#~ msgstr "Number of iterations."
+
+#~ msgid "Less"
+#~ msgstr "Less"
+
+#~ msgid "More"
+#~ msgstr "Mai mult"
+
+#~ msgid "Time between redraws:"
+#~ msgstr "Time between redraws:"
+
+#~ msgid "seconds"
+#~ msgstr "seconds"
+
+#~ msgid "Use color when drawing."
+#~ msgstr "Use color when drawing."
+
+#~ msgid "Cycle through colors."
+#~ msgstr "Cycle through colors."
+
+#~ msgid "Number to use."
+#~ msgstr "Numãr folosit."
+
+#~ msgid "Number of pixels to use."
+#~ msgstr "Number of pixels to use."
+
+#~ msgid "Fractals should grow."
+#~ msgstr "Fractals should grow."
+
+#~ msgid "Use lissajous figures to get points."
+#~ msgstr "Use lissajous figures to get points."
+
+#~ msgid "Time finished product is shown."
+#~ msgstr "Time finished product is shown."
+
+#~ msgid "Seconds"
+#~ msgstr "Secunde"
+
+#~ msgid "Number"
+#~ msgstr "Number"
+
+#~ msgid "Speed of Motion"
+#~ msgstr "Speed of Motion"
+
+#~ msgid "Number of cycles"
+#~ msgstr "Numãr de cicluri"
+
+#, fuzzy
+#~ msgid "Iterations:"
+#~ msgstr "Iteraþii:"
+
+#~ msgid "Delay between redraws."
+#~ msgstr "Delay between redraws."
+
+#~ msgid "Number of trees to use."
+#~ msgstr "Number of trees to use."
+
+#~ msgid "Have transparent bubbles."
+#~ msgstr "Have transparent bubbles."
+
+#~ msgid "Use additive color model."
+#~ msgstr "Use additive color model."
+
+#~ msgid "Number of planets to use."
+#~ msgstr "Numãr de planete folosit."
+
+#~ msgid "Orbit should decay."
+#~ msgstr "Orbit should decay."
+
+#~ msgid "Objects should leave trails behind them."
+#~ msgstr "Objects should leave trails behind them."
+
+#~ msgid "Number of circles to use."
+#~ msgstr "Number of circles to use."
+
+#~ msgid "Use a gradient of colors between circles."
+#~ msgstr "Utilizeazã un gradient de culori între cicluri"
+
+#~ msgid "Animate circles."
+#~ msgstr "Animate circles."
+
+#~ msgid "Cycle through colormap."
+#~ msgstr "Cycle through colormap."
+
+#~ msgid "Time between redraws."
+#~ msgstr "Time between redraws."
+
+#~ msgid "Number of pixels before a color change."
+#~ msgstr "Number of pixels before a color change."
+
+#~ msgid "Distance from center of cube"
+#~ msgstr "Distance from center of cube"
+
+#~ msgid "Closer"
+#~ msgstr "Mai aproape"
+
+#~ msgid "Farther"
+#~ msgstr "Farther"
+
+#~ msgid "Number of segments."
+#~ msgstr "Numãr de segmente."
+
+#~ msgid "Segments"
+#~ msgstr "Segments"
+
+#~ msgid "Number of trails."
+#~ msgstr "Schimbã numãrul de urme."
+
+#~ msgid "Duration of laser burst."
+#~ msgstr "Duration of laser burst."
+
+#~ msgid "Shorter"
+#~ msgstr "Mai scurt"
+
+#~ msgid "Size of burst."
+#~ msgstr "Size of burst."
+
+#~ msgid "Segments:"
+#~ msgstr "Segments:"
+
+#~ msgid "Size of object."
+#~ msgstr "Size of object."
+
+#~ msgid "Smaller"
+#~ msgstr "Mai micã"
+
+#~ msgid "Larger"
+#~ msgstr "Mai mare"
+
+#~ msgid "Number of points."
+#~ msgstr "Numãr de puncte."
+
+#~ msgid "Points:"
+#~ msgstr "Puncte:"
+
+#~ msgid "Number of interpolation steps."
+#~ msgstr "Number of interpolation steps."
+
+#~ msgid "Open figures."
+#~ msgstr "Open figures."
+
+#~ msgid "Delay between each step in the maze."
+#~ msgstr "Delay between each step in the maze."
+
+#~ msgid "Less Delay"
+#~ msgstr "Less Delay"
+
+#~ msgid "More Delay"
+#~ msgstr "More Delay"
+
+#~ msgid "Delay between drawing the maze and starting the solution."
+#~ msgstr "Delay between drawing the maze and starting the solution."
+
+#~ msgid "Delay between finishing the maze and starting a new one."
+#~ msgstr "Delay between finishing the maze and starting a new one."
+
+#~ msgid "Put a bridge over the logo?"
+#~ msgstr "Put a bridge over the logo?"
+
+#~ msgid "Maximum radius increment"
+#~ msgstr "Maximum radius increment"
+
+#~ msgid "Use XOR drawing function."
+#~ msgstr "Use XOR drawing function."
+
+#~ msgid "Draw square at weird starting points."
+#~ msgstr "Draw square at weird starting points."
+
+#~ msgid "Time to show each picture."
+#~ msgstr "Time to show each picture."
+
+#~ msgid "Maximum number of lines."
+#~ msgstr "Numãr maxim de linii."
+
+#~ msgid "Time to fade away."
+#~ msgstr "Time to fade away."
+
+#~ msgid "Particles on screen"
+#~ msgstr "Particles on screen"
+
+#~ msgid "Frequency of missile launch"
+#~ msgstr "Frequency of missile launch"
+
+#~ msgid "Number of particles"
+#~ msgstr "Numãr de particule"
+
+#, fuzzy
+#~ msgid "Number of points:"
+#~ msgstr "Numãr de puncte:"
+
+#~ msgid "Wide"
+#~ msgstr "Wide"
+
+#~ msgid "Offset"
+#~ msgstr "Deplasament"
+
+#~ msgid "Speed of animation."
+#~ msgstr "Speed of animation."
+
+#~ msgid "Slim"
+#~ msgstr "Slim"
+
+#~ msgid "Duration of current shape."
+#~ msgstr "Duration of current shape."
+
+#~ msgid "Use raw shapes "
+#~ msgstr "Use raw shapes "
+
+#~ msgid "Change to display in monochrome."
+#~ msgstr "Change to display in monochrome."
+
+#, fuzzy
+#~ msgid "Add a new screensaver"
+#~ msgstr "Adaugã un nou screensaver"
+
+#~ msgid "Select the screensaver to run from the list below:"
+#~ msgstr "Selectaþi screensaver-ul de rulat din lista de mai jos:"
+
+#~ msgid "Custom"
+#~ msgstr "Personal"
+
+#, fuzzy
+#~ msgid "New screensaver"
+#~ msgstr "Screensaver nou"
+
+#~ msgid "Play"
+#~ msgstr "Redare"
+
+#~ msgid "Enable"
+#~ msgstr "Activeazã"
+
+#~ msgid "Event"
+#~ msgstr "Eveniment"
+
+#~ msgid "File to Play"
+#~ msgstr "Fiºier de redat"
+
+#~ msgid "HTML"
+#~ msgstr "HTML"
+
+#~ msgid "Icon List"
+#~ msgstr "Listã iconuri"
+
+#~ msgid "Tree"
+#~ msgstr "Arbore"
+
+#~ msgid "Got error %d.\n"
+#~ msgstr "Eroare : %d.\n"
+
+#~ msgid "Password for %s"
+#~ msgstr "Parola pentru %s"
+
+#~ msgid "Consistency checking is not turned on."
+#~ msgstr "Verificarea consistenþei nu este activatã."
+
+#~ msgid "Block is fine."
+#~ msgstr "Blocul este bun."
+
+#~ msgid "Block freed twice."
+#~ msgstr "Bloc eliberat de douã ori."
+
+#~ msgid "Memory before the block was clobbered."
+#~ msgstr "Memorie înainte de a folosi blocul."
+
+#~ msgid "Memory after the block was clobbered."
+#~ msgstr "Memorie dupã ce blocul a fost folosit."
+
+#~ msgid "userhelper must be setuid root\n"
+#~ msgstr "userhelper trebuie sã fie rulat ca root\n"
+
+#~ msgid "Usage: root-helper fd\n"
+#~ msgstr "Folosire: root-helper fd\n"
+
+#~ msgid "PAM returned = %d\n"
+#~ msgstr "PAM a întors = %d\n"
+
+#~ msgid "about to authenticate \"%s\"\n"
+#~ msgstr "pe cale de a autentifica \"%s\"\n"
+
+#~ msgid "about to exec \"%s\"\n"
+#~ msgstr "pe cale de a executa \"%s\"\n"
+
+#~ msgid "Pipe error.\n"
+#~ msgstr "Eroare pipe.\n"
+
+#~ msgid "Cannot fork().\n"
+#~ msgstr "Nu se poate face fork().\n"
+
+#~ msgid "dup2() error.\n"
+#~ msgstr "Eroare dup2().\n"
+
+#~ msgid "execl() error, errno=%d\n"
+#~ msgstr "Eroare execl(), errno=%d\n"
+
+#~ msgid "Information updated."
+#~ msgstr "Informaþia actualizatã."
+
+#~ msgid ""
+#~ "The password you typed is invalid.\n"
+#~ "Please try again."
+#~ msgstr ""
+#~ "Parola pe care aþi introdus-o este invalidã.\n"
+#~ "Vã rugãm încercaþi din nou."
+
+#~ msgid ""
+#~ "One or more of the changed fields is invalid.\n"
+#~ "This is probably due to either colons or commas in one of the fields.\n"
+#~ "Please remove those and try again."
+#~ msgstr ""
+#~ "Unul sau mai multe din câmpurile schimbate este invalid.\n"
+#~ "Aceasta este probabil din cauza punctelor sau virgulelor într-unul din "
+#~ "câmpuri.\n"
+#~ "Vã rugãm sã le eliminaþi ºi încercaþi din nou."
+
+#~ msgid "Password resetting error."
+#~ msgstr "Eroare la resetarea parolei."
+
+#~ msgid ""
+#~ "Some systems files are locked.\n"
+#~ "Please try again in a few moments."
+#~ msgstr ""
+#~ "Unele sisteme de fiºiere sunt blocate.\n"
+#~ "Vã rugãm reîncercaþi în câteva momente."
+
+#~ msgid "Unknown user."
+#~ msgstr "Utilizator necunoscut."
+
+#~ msgid "Insufficient rights."
+#~ msgstr "Drepturi insuficiente"
+
+#~ msgid "Invalid call to sub process."
+#~ msgstr "Chemare invalidã a subprocesului."
+
+#~ msgid ""
+#~ "Your current shell is not listed in /etc/shells.\n"
+#~ "You are not allowed to change your shell.\n"
+#~ "Consult your system administrator."
+#~ msgstr ""
+#~ "Shell-ul dvs curent nu este listat în /etc/shells.\n"
+#~ "Nu sunteþi autorizat sã vã schimbaþi shell-ul.\n"
+#~ "Consultaþi administratorul sistemului dvs."
+
+#~ msgid "Out of memory."
+#~ msgstr "Nu mai este memorie."
+
+#~ msgid "The exec() call failed."
+#~ msgstr "Chemarea exec() a eºuat."
+
+#~ msgid "Failed to find selected program."
+#~ msgstr "Eºuare la gãsirea programului selectat."
+
+#~ msgid "Unknown error."
+#~ msgstr "Eroare necunoscutã"
+
+#~ msgid "Unknown exit code."
+#~ msgstr "Cod ieºire necunoscut."
+
+#~ msgid "Input"
+#~ msgstr "Intrare"
+
+#~ msgid "Need %d responses.\n"
+#~ msgstr "Am nevoie de %d rãspunsuri.\n"
+
+#~ msgid ""
+#~ "In order to make changes to your system, you\n"
+#~ "must enter the administrator (root) password."
+#~ msgstr ""
+#~ "Pentru a face schimbãri ale sistemului dvs, trebuie\n"
+#~ "sã introduceþi parola de administrator (root)."
+
+#~ msgid "Error"
+#~ msgstr "Eroare"
+
+#~ msgid "You want %d response(s) from %d entry fields!?!?!\n"
+#~ msgstr "Doriþi %d rãspunsuri de la %d câmpuri de intrare!?!?!\n"
+
+#~ msgid "Run Unprivileged"
+#~ msgstr "Ruleazã neprivilegiat"
+
+#~ msgid "About \"<Screensaver name>\""
+#~ msgstr "Despre \"<Screensaver name>\""
+
+#~ msgid "Configure Power Management"
+#~ msgstr "Configuraþie management putere"
+
+#, fuzzy
+#~ msgid "Shut down monitor after"
+#~ msgstr "Închide monitorul dupã"
+
+#, fuzzy
+#~ msgid "minutes"
+#~ msgstr "minute"
+
+#~ msgid "Go to suspend mode after"
+#~ msgstr "Intrã în modul suspend dupã"
+
+#~ msgid "Go to standby mode after"
+#~ msgstr "Intrã în modul standby dupã"
+
+#~ msgid "Settings for \"<Screensaver name>\""
+#~ msgstr "Setãri pentru \"<Screensaver name>\""
+
+#~ msgid "_Add"
+#~ msgstr "_Adaugã"
+
+#~ msgid "_Settings"
+#~ msgstr "_Setãri"
+
+#~ msgid "_Remove"
+#~ msgstr "_Eliminã "
+
+#~ msgid "_About this screensaver..."
+#~ msgstr "_Despre acest screensaver..."
+
+#~ msgid "S_tart screensaver after "
+#~ msgstr "_Porneºte screensaver-ul dupã "
+
+#~ msgid "S_witch screensavers after "
+#~ msgstr "_Schimbã scrensaver-ul dupã "
+
+#~ msgid "R_equire password to unlock screen"
+#~ msgstr "_Necesitã parolã pentru a deschide ecranul"
+
+#~ msgid "Enable _power management"
+#~ msgstr "_Foloseºte management putere"
+
+#~ msgid " Configure..."
+#~ msgstr " Configureazã..."
+
+#~ msgid "_Mode:"
+#~ msgstr "_Mod:"
+
+#, fuzzy
+#~ msgid "Disable screensaver"
+#~ msgstr "Dezactiveazã screensaver-ul"
+
+#~ msgid "Black screen only"
+#~ msgstr "Doar înnegreºte ecranul"
+
+#~ msgid "One screensaver all the time"
+#~ msgstr "Un screensaver tot timpul"
+
+#~ msgid "Random (checked screensavers)"
+#~ msgstr "Aleator (screensavere bifate)"
+
+#~ msgid "Random (all screensavers)"
+#~ msgstr "Aleator (toate screensaverele)"
+
+#~ msgid ""
+#~ "We are unable to create the directory\n"
+#~ "~/.gnome/mime-info.\n"
+#~ "\n"
+#~ "We will not be able to save the state."
+#~ msgstr ""
+#~ "Nu se poate crea directorul\n"
+#~ "~/.gnome/mime-info\n"
+#~ "\n"
+#~ "Nu se va putea salva situaþia curentã."
+
+#, fuzzy
+#~ msgid ""
+#~ "We are unable to access the directory\n"
+#~ "~/.gnome/mime-info.\n"
+#~ "\n"
+#~ "We will not be able to save the state."
+#~ msgstr ""
+#~ "Nu se poate accesa directorul\n"
+#~ "~/.gnome/mime-info\n"
+#~ "\n"
+#~ "Nu se va putea salva situaþia curentã."
+
+#~ msgid "Mime Type:"
+#~ msgstr "Tip Mime:"
+
+#, fuzzy
+#~ msgid "Keyboard Bell"
+#~ msgstr "Sunet tastaturã"
+
+#~ msgid "Mouse buttons"
+#~ msgstr "Butoane mouse"
+
+#~ msgid "Mouse motion"
+#~ msgstr "Miºcare mouse"
+
+#~ msgid "Acceleration"
+#~ msgstr "Accelerare"
+
+#~ msgid "Threshold"
+#~ msgstr "Limitã"
+
+#, fuzzy
+#~ msgid "Selection"
+#~ msgstr "Selecteazã un icon"
+
+#~ msgid "Choose randomly from those checked off"
+#~ msgstr "Alege aleator din cele selectate"
+
+#~ msgid "Choose randomly among all screensavers"
+#~ msgstr "Alege aleator din toate screensaver-urile"
+
+#~ msgid "Settings..."
+#~ msgstr "Setãri..."
+
+#~ msgid "Demo Next"
+#~ msgstr "Demo urmãtorul"
+
+#~ msgid "Demo Previous"
+#~ msgstr "Demo cel dinainte"
+
+#, fuzzy
+#~ msgid "Screensaver Selection"
+#~ msgstr "Selecþie screensaver"
+
+#, fuzzy
+#~ msgid "Basic"
+#~ msgstr "Bare"
+
+#~ msgid "Start screensaver after"
+#~ msgstr "Porneºte screensaver-ul dupã"
+
+#~ msgid "Switch screensavers every"
+#~ msgstr "Schimbã scrensaver-ul la fiecare"
+
+#~ msgid "Security"
+#~ msgstr "Securitate"
+
+#, fuzzy
+#~ msgid "Require password to unlock"
+#~ msgstr "Necesitã parolã"
+
+#, fuzzy
+#~ msgid "Only after the screensaver has run for"
+#~ msgstr " minute dupã ce screensaver-ul a pornit"
+
+#~ msgid "Power Management"
+#~ msgstr "Management putere"
+
+#, fuzzy
+#~ msgid "Enable power management"
+#~ msgstr "Foloseºte management putere."
+
+#, fuzzy
+#~ msgid "General Properties"
+#~ msgstr "Proprietãþi mouse"
+
+#, fuzzy
+#~ msgid "Priority"
+#~ msgstr "Prioritate:"
+
+#~ msgid "Be verbose"
+#~ msgstr "Detaliat"
+
+#~ msgid "Effects"
+#~ msgstr "Efecte"
+
+#~ msgid "Install colormap"
+#~ msgstr "Instaleazã hartã culoare"
+
+#~ msgid "Fade to black when activating screensaver"
+#~ msgstr "Tranziþie la negru când activeazã screensaver-ul"
+
+#~ msgid "Fade desktop back when deactivating screensaver"
+#~ msgstr "Tranziþie înapoi la desktop când dezactiveazã screensaver-ul"
+
+#~ msgid "Fade Duration"
+#~ msgstr "Durata tranziþiei (ms)"
+
+#~ msgid "Fade Smoothness"
+#~ msgstr "Durata tranziþie"
+
+#~ msgid "Smooth"
+#~ msgstr "Medie"
+
+#~ msgid "Jerky"
+#~ msgstr "Rapidã"
+
+#~ msgid "Session"
+#~ msgstr "Sesiune"
+
+#~ msgid "Session Chooser"
+#~ msgstr "Selector de sesiune"
+
+#~ msgid "Start Session"
+#~ msgstr "Porneºte sesiunea"
+
+#~ msgid "Order: "
+#~ msgstr "Ordine: "
+
+#~ msgid "This button sets the start order of the selected programs.\n"
+#~ msgstr "Acest buton seteazã ordinea de start a programelor selectate.\n"
+
+#~ msgid ""
+#~ "This button sets the restart style of the selected programs:\n"
+#~ "Normal programs are unaffected by logouts but can die;\n"
+#~ "Respawn programs are never allowed to die;\n"
+#~ "Trash programs are discarded on logout and can die;\n"
+#~ "Settings programs are always started on every login."
+#~ msgstr ""
+#~ "Acest buton seteazã ordinea de restartare a programelor selectate:\n"
+#~ "Programele normale nu vor fi afectate de logout-uri, însã pot muri;\n"
+#~ "Programele repornite nu li se permite sã moarã ;)\n"
+#~ "Programele \"gunoi\" nu sunt loate în seamã la logout ºi pot sã moarã;\n"
+#~ "Programele de setãri sunt întotdeauna pornite la fiecare login."
+
+#~ msgid ""
+#~ "This button produces a key to the program states below:\n"
+#~ "Inactive programs are waiting to start or have finished;\n"
+#~ "Starting programs are being given time to get running;\n"
+#~ "Running programs are normal members of the session;\n"
+#~ "Saving programs are saving their session details;\n"
+#~ "Programs which make no contact have Unknown states.\n"
+#~ msgstr ""
+#~ "Acest buton produce o cheie stãrilor de program de mai jos:\n"
+#~ "Programele inactive aºteaptã sã porneascã sau au terminat;\n"
+#~ "Programele ce pornesc le este dat timp sã înceapã sã ruleze;\n"
+#~ "Programele ce ruleaza sunt membri normali ai sesiunii;\n"
+#~ "Programele ce salveazã vor stoca detaliile lor de sesiune;\n"
+#~ "Programele care nu au nici un contact vor avea status necunoscut.\n"
+
+#~ msgid "This column gives the command used to start a program."
+#~ msgstr ""
+#~ "Aceastã coloanã indicã comanda utilizatã pentru pornirea unui program."
+
+#~ msgid "Order"
+#~ msgstr "Ordine"
+
+#, fuzzy
+#~ msgid "Style"
+#~ msgstr "Stil: "
+
+#, fuzzy
+#~ msgid "State"
+#~ msgstr "Static"
+
+#, fuzzy
+#~ msgid "Program"
+#~ msgstr "Eliminã program"
+
+#~ msgid "Inactive"
+#~ msgstr "Inactiv"
+
+#~ msgid "Waiting to start or already finished."
+#~ msgstr "Aºteaptã sã porneascã sau deja s-a terminat."
+
+#, fuzzy
+#~ msgid "Starting"
+#~ msgstr "Setãri"
+
+#~ msgid "Started but has not yet reported state."
+#~ msgstr "Pornit, însã nu a raportat încã status-ul"
+
+#~ msgid "Running"
+#~ msgstr "Ruleazã"
+
+#~ msgid "Saving session details."
+#~ msgstr "Salvez detaliile de sesiune."
+
+#~ msgid "Unknown"
+#~ msgstr "Necunoscut"
+
+#~ msgid "State not reported within timeout."
+#~ msgstr "Status "
+
+#, fuzzy
+#~ msgid "Normal"
+#~ msgstr " Normalã "
+
+#~ msgid "Unaffected by logouts but can die."
+#~ msgstr "Neafectat de logout-uri, însã poate muri."
+
+#~ msgid "Respawn"
+#~ msgstr "Restartat"
+
+#~ msgid "Never allowed to die."
+#~ msgstr "Nu i se permite sã moarã."
+
+#, fuzzy
+#~ msgid "Trash"
+#~ msgstr "Urme"
+
+#~ msgid "Discarded on logout and can die."
+#~ msgstr "Neluat în seamã la logout ºi poate muri"
+
+#~ msgid "Always started on every login."
+#~ msgstr "Pornit în totdeauna la fiecare login."
+
+#~ msgid "Remove Program"
+#~ msgstr "Eliminã program"
+
+#, fuzzy
+#~ msgid "Options"
+#~ msgstr "Opþiuni meniu"
+
+#~ msgid "Prompt on logout"
+#~ msgstr "Întreabã la logout"
+
+#~ msgid "Automatically save changes to session"
+#~ msgstr "Salveazã automat schimbãrile sesiunii"
+
+#~ msgid "Non-session-managed Startup Programs"
+#~ msgstr "Programe Startup, non-session-managed"
+
+#~ msgid "Browse Currently Running Programs..."
+#~ msgstr "Rãsfoieºte programele ce ruleazã în mod curent... "
+
+#~ msgid "Only display warnings."
+#~ msgstr "Afiºeazã doar avertizãrile."
+
+#~ msgid "Startup Command"
+#~ msgstr "Comandã Startup"
+
+#~ msgid ""
+#~ "Programs with smaller values are started before programs with higher "
+#~ "values. The default value should be OK"
+#~ msgstr ""
+#~ "Programele cu valori mai mici vor fi pornite înaintea programelor cu "
+#~ "valori mai mari. Valoarea implicitã ar trebui sã fie OK"
+
+#~ msgid "The startup command cannot be empty"
+#~ msgstr "Comanda startup nu poate fi goalã"
+
+#~ msgid "Add Startup Program"
+#~ msgstr "Adaugã un program Startup"
+
+#~ msgid "Edit Startup Program"
+#~ msgstr "Editeazã programul Startup"
+
+#~ msgid "CD Properties"
+#~ msgstr "Proprietãþi CD"
+
+#~ msgid "Configure handling of CD devices"
+#~ msgstr "Configureazã modul de operare a CDurilor"
