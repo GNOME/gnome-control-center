@@ -219,6 +219,9 @@ set_server_from_gconf (GConfEntry *ignored)
 			desc->ctrls->ax_options, XkbAX_SKRejectFBMask);
 		desc->ctrls->slow_keys_delay = get_int (client,
 			CONFIG_ROOT "/slowkeys_delay");
+		/* anything larger than 500 seems to loose all keyboard input */
+		if (desc->ctrls->slow_keys_delay > 500)
+			desc->ctrls->slow_keys_delay = 500;
 	}
 
 	/* sticky keys */
