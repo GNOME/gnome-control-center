@@ -1,3 +1,15 @@
+2004-11-30  Sebastien Bacher  <seb128@debian.org>
+
+	* actions/acme-volume-gstreamer.c:
+	(acme_volume_gstreamer_finalize), (acme_volume_gstreamer_set_mute),
+	(acme_volume_gstreamer_get_mute),
+	(acme_volume_gstreamer_get_volume),
+	(acme_volume_gstreamer_set_volume),
+	(acme_volume_gstreamer_close_real), (acme_volume_gstreamer_open),
+	(acme_volume_gstreamer_close), (acme_volume_gstreamer_init):
+	free the alsa device, after 4 seconds, with gstreamer too. 
+	Patch from Arnaud Patard <Arnaud Patard> (Closes: #141793).
+
 2004-11-30  Bastien Nocera  <hadess@hadess.net>
 
 	* gnome-settings-multimedia-keys.c: (do_exit_action): hack
