@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-control-center 1.99.6\n"
-"POT-Creation-Date: 2002-04-21 15:46-0500\n"
-"PO-Revision-Date: 2002-04-05 16:36+0800\n"
+"Project-Id-Version: gnome-control-center 1.99.7\n"
+"POT-Creation-Date: 2002-04-21 05:23+0800\n"
+"PO-Revision-Date: 2002-04-23 01:06+0800\n"
 "Last-Translator: Abel Cheung <maddog@linux.org.hk>\n"
 "Language-Team: traditional Chinese <zh-l10n@linux.org.tw>\n"
 "MIME-Version: 1.0\n"
@@ -16,12 +16,12 @@ msgstr ""
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:262
 msgid "_Enable keyboard accessibility"
-msgstr ""
+msgstr "啟用鍵盤輔助技術(_E)"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:329
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
-msgstr ""
+msgstr "無法由檔案‘%s’匯入 AccessX 設定"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:441
 msgid "Select CDE AccessX file"
@@ -34,7 +34,7 @@ msgstr "鍵盤"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:2
 msgid "Keyboard Accessibility Properties"
-msgstr ""
+msgstr "鍵盤輔助技術偏好設定"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:1
 msgid "&lt;b&gt;Test&lt;/b&gt;"
@@ -46,11 +46,11 @@ msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:3
 msgid "Beep when an LED is turned on and two beeps when one is turned off."
-msgstr ""
+msgstr "當某一顆 LED 亮起時響一下，而 LED 熄滅時響兩下。"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:4
 msgid "Beep when:"
-msgstr ""
+msgstr "在以下情況發出聲響："
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:5
 msgid "Enable Slo_w Keys"
@@ -80,7 +80,7 @@ msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:11
 msgid "Keyboard Accessibility Configuration (AccessX)"
-msgstr ""
+msgstr "鍵盤輔助技術設定 (AccessX)"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:12
 msgid "Ma_ximum pointer speed :"
@@ -133,7 +133,7 @@ msgstr "鍵盤(_K)"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:23
 msgid "_Misc"
-msgstr ""
+msgstr "其它(_M)"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:24
 msgid "_Only accept keypress after :"
@@ -167,7 +167,7 @@ msgstr "毫秒"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:32
 msgid "pixels/sec"
-msgstr ""
+msgstr "像素（每秒）"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:33
 msgid "seconds"
@@ -206,7 +206,7 @@ msgstr "底部顏色(_B)"
 
 #: capplets/background/background-properties-capplet.c:392
 msgid "_Wallpaper"
-msgstr "桌布(_W)"
+msgstr "桌布方式鋪排(_W)"
 
 #: capplets/background/background-properties-capplet.c:392
 msgid "C_entered"
@@ -222,11 +222,11 @@ msgstr "不依比例伸展(_H)"
 
 #: capplets/background/background-properties-capplet.c:392
 msgid "_No Picture"
-msgstr ""
+msgstr "不使用圖案(_N)"
 
 #: capplets/background/background-properties-capplet.c:427
 msgid "_Picture"
-msgstr ""
+msgstr "圖案(_P)"
 
 #: capplets/background/background-properties-capplet.c:531
 #: capplets/common/capplet-util.c:243
@@ -235,7 +235,7 @@ msgstr ""
 #: capplets/mouse/gnome-mouse-properties.c:691
 #: capplets/sound/sound-properties-capplet.c:148
 msgid "Retrieve and store legacy settings"
-msgstr ""
+msgstr "讀入舊版本的設定"
 
 #: capplets/background/background-properties-capplet.c:556
 #: capplets/background/background-properties.glade.h:1
@@ -244,7 +244,7 @@ msgstr "背景圖案偏好設定"
 
 #: capplets/background/background-properties.glade.h:2
 msgid "Bor_der the picture with a:"
-msgstr ""
+msgstr "包圍圖案用的顏色(_D)："
 
 #: capplets/background/background-properties.glade.h:3
 msgid "E-Mail"
@@ -260,19 +260,19 @@ msgstr "請選擇顏色"
 
 #: capplets/background/background-properties.glade.h:6
 msgid "Picture Options:"
-msgstr ""
+msgstr "有關圖案的選項："
 
 #: capplets/background/background-properties.glade.h:7
 msgid "Primary Color"
-msgstr ""
+msgstr "第一種顏色"
 
 #: capplets/background/background-properties.glade.h:8
 msgid "Secondary Color"
-msgstr ""
+msgstr "第二種顏色"
 
 #: capplets/background/background-properties.glade.h:9
 msgid "Solid color"
-msgstr ""
+msgstr "單色"
 
 #: capplets/background/background-properties.glade.h:10
 msgid "Vertical gradient"
@@ -284,6 +284,8 @@ msgid ""
 "into the window to set the \n"
 "background picture."
 msgstr ""
+"可以拖曳圖像至此視窗\n"
+"來設定背景圖案。"
 
 #: capplets/background/background-properties.glade.h:14
 msgid "radiobutton1"
@@ -313,10 +315,14 @@ msgid ""
 "settings manager may already be active and conflicting with the GNOME "
 "settings manager."
 msgstr ""
+"無法啟動設定管理程式‘gnome-settings-daemon’。\n"
+"因為 GNOME 設定管理程式未有執行，某部份偏好設定可能不會生效。這可能表示 "
+"Bonobo 出了問題；或是另一個 GNOME 以外 (例如 KDE) 的設定管理程式正在執行，和 "
+"GNOME 設定管理程式出現衝突。"
 
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
-msgstr "只套用設定並離開"
+msgstr "僅套用設定及離開"
 
 #: capplets/common/gconf-property-editor.c:172
 msgid "Key"
@@ -363,11 +369,11 @@ msgstr ""
 
 #: capplets/common/gconf-property-editor.c:203
 msgid "UI Control"
-msgstr ""
+msgstr "介面控制"
 
 #: capplets/common/gconf-property-editor.c:204
 msgid "Object that controls the property (normally a widget)"
-msgstr ""
+msgstr "控制該屬性的物件 (通常是視窗元件)"
 
 #: capplets/common/gconf-property-editor.c:219
 msgid "Property editor object data"
@@ -406,7 +412,7 @@ msgid ""
 "Please select a different picture instead."
 msgstr ""
 "不知應如何開啟檔案‘%s’。\n"
-"可能這種圖案仍未有支援。\n"
+"可能仍未支援這種圖案。\n"
 "\n"
 "請選擇另一個圖案。"
 
@@ -421,7 +427,7 @@ msgstr "選擇預設使用的應用軟件"
 #: capplets/default-applications/default-applications.desktop.in.h:2
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:15
 msgid "Preferred Applications"
-msgstr ""
+msgstr "首選應用軟件"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:1
 msgid "Acce_pts URLs"
@@ -437,7 +443,7 @@ msgstr "自行指定編輯器(_U)："
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:4
 msgid "C_ustom Help Browser:"
-msgstr "自行指定輔助說明瀏覽器(_U)："
+msgstr "自行指定說明文件瀏覽器(_U)："
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:5
 msgid "C_ustom Terminal:"
@@ -453,7 +459,7 @@ msgstr "指令(_M)："
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:8
 msgid "Default Help Browser"
-msgstr "預設的輔助說明瀏覽器"
+msgstr "預設的說明文件瀏覽器"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:9
 msgid "Default Terminal"
@@ -473,11 +479,11 @@ msgstr "預設的視窗管理程式"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:13
 msgid "E_xec Flag:"
-msgstr ""
+msgstr "執行時的參數(_X)："
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:14
 msgid "He_lp Browser"
-msgstr "輔助說明瀏覽器(_L)"
+msgstr "說明文件瀏覽器(_L)"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:16
 msgid ""
@@ -516,7 +522,7 @@ msgstr "編輯(_E)..."
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:24
 msgid "_Select a Help Browser:"
-msgstr "請選擇輔助說明瀏覽器(_S)："
+msgstr "請選擇說明文件瀏覽器(_S)："
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:25
 msgid "_Select a Terminal:"
@@ -541,11 +547,11 @@ msgstr "視窗管理程式(_W)"
 #: capplets/desktop-links/Accessibility.directory.in.in.h:1
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "Accessibility"
-msgstr "可用性"
+msgstr "輔助技術"
 
 #: capplets/desktop-links/Accessibility.directory.in.in.h:2
 msgid "Accessibility Settings"
-msgstr "可用性設定"
+msgstr "輔助技術設定"
 
 #: capplets/desktop-links/Advanced.directory.in.in.h:1
 msgid "Advanced"
@@ -572,9 +578,8 @@ msgid "Legacy applications settings (grdb)"
 msgstr "舊式軟體設定（grdb）"
 
 #: capplets/desktop-links/panel.desktop.in.in.h:1
-#, fuzzy
 msgid "Global panel properties"
-msgstr "字型屬性"
+msgstr "整體的面板屬性"
 
 #: capplets/desktop-links/panel.desktop.in.in.h:2
 msgid "Panel"
@@ -601,16 +606,14 @@ msgid "Configure window focusing"
 msgstr "設定視窗焦點模式"
 
 #: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:2
-#, fuzzy
 msgid "Focus behavior"
-msgstr "焦點表視"
+msgstr "焦點處理方式"
 
 #: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:1
 msgid "Configure window properties"
 msgstr "設定視窗屬性"
 
 #: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:2
-#, fuzzy
 msgid "Matched Windows"
 msgstr "視窗吻合條件"
 
@@ -704,7 +707,7 @@ msgstr "文書處理器"
 
 #: capplets/file-types/category-names.h:9
 msgid "Published Materials"
-msgstr ""
+msgstr "出版文件"
 
 #: capplets/file-types/category-names.h:10
 msgid "Spreadsheet"
@@ -802,21 +805,19 @@ msgstr "指定開啟或觀看每種檔案類型所用的程式"
 
 #: capplets/file-types/file-types-properties.glade.h:1
 msgid "Actions"
-msgstr ""
+msgstr "處理方式"
 
 #: capplets/file-types/file-types-properties.glade.h:2
-#, fuzzy
 msgid "Add _file type..."
-msgstr "新增檔案類型..."
+msgstr "新增檔案類型(_F)..."
 
 #: capplets/file-types/file-types-properties.glade.h:3
 msgid "Add _service..."
-msgstr ""
+msgstr "新增網絡服務(_S)..."
 
 #: capplets/file-types/file-types-properties.glade.h:4
-#, fuzzy
 msgid "Default action"
-msgstr "預設行動"
+msgstr "預設處理方式"
 
 #: capplets/file-types/file-types-properties.glade.h:5
 #: capplets/file-types/mime-edit-dialog.c:167
@@ -825,7 +826,7 @@ msgstr "編輯檔案類型"
 
 #: capplets/file-types/file-types-properties.glade.h:6
 msgid "File types and Internet Services"
-msgstr ""
+msgstr "檔案類型及網絡服務"
 
 #: capplets/file-types/file-types-properties.glade.h:7
 msgid "Filename extensions"
@@ -836,13 +837,12 @@ msgid "Look at content"
 msgstr ""
 
 #: capplets/file-types/file-types-properties.glade.h:9
-#, fuzzy
 msgid "Needs _terminal"
-msgstr "需要終端機"
+msgstr "需要終端機(_T)"
 
 #: capplets/file-types/file-types-properties.glade.h:10
 msgid "Program to run"
-msgstr "要執行的程式"
+msgstr "執行程式"
 
 #: capplets/file-types/file-types-properties.glade.h:11
 msgid "Run a program"
@@ -850,65 +850,55 @@ msgstr "執行程式"
 
 #: capplets/file-types/file-types-properties.glade.h:12
 msgid "Use category _defaults"
-msgstr ""
+msgstr "使用該分類的預設值(_D)"
 
 #: capplets/file-types/file-types-properties.glade.h:13
 msgid "Use parent category _defaults"
-msgstr ""
+msgstr "使用上層分類的預設值(_D)"
 
 #: capplets/file-types/file-types-properties.glade.h:14
 msgid "Viewing component"
-msgstr ""
+msgstr "檢視方式"
 
 #: capplets/file-types/file-types-properties.glade.h:15
-#, fuzzy
 msgid "_Add"
-msgstr "加入"
+msgstr "新增(_A)"
 
 #: capplets/file-types/file-types-properties.glade.h:16
-#, fuzzy
 msgid "_Category"
-msgstr "分類"
+msgstr "分類(_C)"
 
 #: capplets/file-types/file-types-properties.glade.h:17
-#, fuzzy
 msgid "_Choose..."
-msgstr "選擇..."
+msgstr "選擇(_C)..."
 
 #: capplets/file-types/file-types-properties.glade.h:18
-#, fuzzy
 msgid "_Description"
-msgstr "描述"
+msgstr "描述(_D)"
 
 #: capplets/file-types/file-types-properties.glade.h:20
-#, fuzzy
 msgid "_MIME Type"
-msgstr "MIME 類型"
+msgstr "_MIME 類型"
 
 #: capplets/file-types/file-types-properties.glade.h:21
-#, fuzzy
 msgid "_Name"
-msgstr "名稱"
+msgstr "名稱(_N)"
 
 #: capplets/file-types/file-types-properties.glade.h:22
-#, fuzzy
 msgid "_Program"
-msgstr "程式"
+msgstr "程式(_P)"
 
 #: capplets/file-types/file-types-properties.glade.h:23
-#, fuzzy
 msgid "_Program to execute"
-msgstr "要執行的程式"
+msgstr "執行的程式(_P)"
 
 #: capplets/file-types/file-types-properties.glade.h:24
-#, fuzzy
 msgid "_Protocol name"
-msgstr "協定名稱"
+msgstr "協定名稱(_P)"
 
 #: capplets/file-types/file-types-properties.glade.h:25
-#, fuzzy
 msgid "_Remove"
-msgstr "移除"
+msgstr "移除(_R)"
 
 #: capplets/file-types/mime-category-edit-dialog.c:137
 msgid "Edit file category"
@@ -931,7 +921,7 @@ msgstr "MIME 類別資訊"
 
 #: capplets/file-types/mime-category-edit-dialog.c:178
 msgid "Structure containing information on the MIME category"
-msgstr ""
+msgstr "含有有關該 MIME 分類的資訊的結構"
 
 #: capplets/file-types/mime-category-edit-dialog.c:343
 #: capplets/file-types/mime-edit-dialog.c:409
@@ -976,7 +966,7 @@ msgid ""
 "Invalid MIME type. Please enter a valid MIME type, or leave the field blank "
 "to have one generated for you."
 msgstr ""
-"無效的 MIME 類型。請輸入正確的 MIME 類型，或是留白，使之自動估計 MIME 類型。"
+"無效的 MIME 類型。請輸入正確的 MIME 類型，或是留空，使之自動估計 MIME 類型。"
 
 #: capplets/file-types/mime-edit-dialog.c:703
 msgid "There already exists a MIME type of that name."
@@ -997,7 +987,7 @@ msgstr ""
 
 #: capplets/file-types/mime-types-model.c:421
 msgid "Internet Services"
-msgstr "互聯網服務"
+msgstr "網絡服務"
 
 #: capplets/file-types/service-edit-dialog.c:133
 msgid "Edit service information"
@@ -1009,7 +999,7 @@ msgstr "服務資訊"
 
 #: capplets/file-types/service-edit-dialog.c:175
 msgid "Structure containing service information"
-msgstr "含有服務資訊的結構"
+msgstr "含有該服務的資訊的結構"
 
 #: capplets/file-types/service-edit-dialog.c:181
 msgid "Is add"
@@ -1075,7 +1065,7 @@ msgstr "字型屬性"
 
 #: capplets/font/font-properties.glade.h:2
 msgid "Font settings only apply to new programs."
-msgstr ""
+msgstr "已更改的字型設定只會對將來啟動的程式生效。"
 
 #: capplets/font/font-properties.glade.h:3
 msgid "Use a custom font."
@@ -1088,9 +1078,8 @@ msgstr ""
 
 #: capplets/keybindings/eggcellrendererkeys.c:161
 #: capplets/keybindings/eggcellrendererkeys.c:162
-#, fuzzy
 msgid "Accelerator key"
-msgstr "捷徑鍵"
+msgstr "快速鍵"
 
 #: capplets/keybindings/eggcellrendererkeys.c:199
 #: capplets/keybindings/gnome-keybinding-properties.c:101
@@ -1119,7 +1108,7 @@ msgstr ""
 
 #: capplets/keybindings/gnome-keybinding-properties.c:594
 msgid "_Action"
-msgstr ""
+msgstr "行動(_A)"
 
 #: capplets/keybindings/gnome-keybinding-properties.c:606
 msgid "_Shortcut"
@@ -1132,7 +1121,7 @@ msgstr "桌面捷徑鍵："
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:2
 #: capplets/keybindings/keybinding.desktop.in.h:2
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "捷徑鍵"
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:3
 msgid "Keyboard _Navigation scheme for use in applications:"
@@ -1150,7 +1139,7 @@ msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.c:338
 msgid "_Accessibility"
-msgstr "可用性(_A)"
+msgstr "輔助技術(_A)"
 
 #: capplets/keyboard/gnome-keyboard-properties.c:355
 #: capplets/keyboard/gnome-keyboard-properties.c:357
@@ -1173,11 +1162,11 @@ msgstr "&lt;i&gt;快&lt;/i&gt;"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:3
 msgid "&lt;i&gt;loud&lt;/i&gt;"
-msgstr ""
+msgstr "&lt;i&gt;響&lt;/i&gt;"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "&lt;i&gt;quiet&lt;/i&gt;"
-msgstr ""
+msgstr "&lt;i&gt;靜&lt;/i&gt;"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:5
 msgid "&lt;i&gt;slow&lt;/i&gt;"
@@ -1185,15 +1174,15 @@ msgstr "&lt;i&gt;慢&lt;/i&gt;"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "*"
-msgstr ""
+msgstr "*"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "Cursor"
-msgstr ""
+msgstr "游標"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "Key_press makes sound"
-msgstr ""
+msgstr "按鍵時會發出聲響(_P)"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:10
 msgid "Keyboard Bell"
@@ -1202,7 +1191,7 @@ msgstr "鍵盤聲響"
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 #: capplets/keyboard/keyboard.desktop.in.h:2
 msgid "Keyboard Properties"
-msgstr "鍵盤設定"
+msgstr "鍵盤屬性"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Keyboard _repeats when key is held down"
@@ -1226,15 +1215,15 @@ msgstr "重覆速率"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:17
 msgid "Repeat s_peed:"
-msgstr ""
+msgstr "重覆速度(_P)："
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:18
 msgid "Set the speed the cursor blinks in text fields."
-msgstr ""
+msgstr "設定游標在文字欄輸入欄中的閃爍頻率。"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:19
 msgid "Set the volume of the clicking sound made when pressing a key"
-msgstr ""
+msgstr "設定當按下鍵盤時發出的聲響的音量"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:20
 msgid ""
@@ -1244,9 +1233,8 @@ msgid ""
 msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:21
-#, fuzzy
 msgid "_Accessibility..."
-msgstr "可用性(_A)"
+msgstr "輔助技術(_A)..."
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:22
 msgid "_Blink speed:"
@@ -1254,7 +1242,7 @@ msgstr "閃爍速度(_B)："
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "_Cursor blinks in text fields"
-msgstr ""
+msgstr "游標會在文字輸入欄中閃爍(_C)"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:24
 msgid "_Custom keyboard bell:"
@@ -1262,7 +1250,7 @@ msgstr "自訂鍵盤聲響(_C)："
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "_Delay before repeating:"
-msgstr ""
+msgstr "重覆按鍵前的延長時間(_D)："
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:27
 msgid "_Sound"
@@ -1284,7 +1272,7 @@ msgstr "Mime 類型："
 
 #: capplets/mime-type/edit-window.c:306
 msgid "Add"
-msgstr "加入"
+msgstr "新增"
 
 #: capplets/mime-type/edit-window.c:314
 #: capplets/url-properties/url-properties.c:135
@@ -1305,7 +1293,7 @@ msgstr "第二個正規表示式："
 #. Actions box
 #: capplets/mime-type/edit-window.c:356
 msgid "Mime Type Actions"
-msgstr "Mime 類型的動作"
+msgstr "Mime 類型的處理方式"
 
 #: capplets/mime-type/edit-window.c:363
 #, c-format
@@ -1313,9 +1301,8 @@ msgid "Example: emacs %f"
 msgstr "例如：emacs %f"
 
 #: capplets/mime-type/edit-window.c:368
-#, fuzzy
 msgid "Open"
-msgstr "開啟檔案"
+msgstr "開啟"
 
 #: capplets/mime-type/edit-window.c:374 capplets/mime-type/edit-window.c:390
 #: capplets/mime-type/edit-window.c:405
@@ -1342,7 +1329,7 @@ msgstr "Mime 類型"
 
 #: capplets/mime-type/mime-data.c:493
 msgid "You must enter a mime-type"
-msgstr "你必須輸入 mime 類型"
+msgstr "必須輸入 mime 類型"
 
 #: capplets/mime-type/mime-data.c:498
 msgid ""
@@ -1397,15 +1384,13 @@ msgstr ""
 
 #: capplets/mime-type/mime-type-capplet.c:83
 #: capplets/wm-properties/wm-properties-capplet.c:1161
-#, fuzzy
 msgid "Delete"
-msgstr "刪除(_D)"
+msgstr "刪除"
 
 #: capplets/mime-type/mime-type-capplet.c:93
 #: capplets/wm-properties/wm-properties-capplet.c:1151
-#, fuzzy
 msgid "Add..."
-msgstr "新增(_A)..."
+msgstr "新增..."
 
 #: capplets/mime-type/mime-type-capplet.c:97
 #: capplets/wm-properties/wm-properties-capplet.c:1156
@@ -1429,12 +1414,16 @@ msgid ""
 "Add a new Mime Type\n"
 "For example:  image/tiff; text/x-scheme"
 msgstr ""
+"新增 Mime 類型\n"
+"例如： image/tiff; text/x-scheme"
 
 #: capplets/mime-type/new-mime-window.c:43
 msgid ""
 "Type in the extensions for this mime-type.\n"
 "For example:  .html, .htm"
 msgstr ""
+"請輸入此 mime 類型所用的延伸檔名。\n"
+"例如： .html .htm"
 
 #: capplets/mime-type/new-mime-window.c:50
 msgid "Extension:"
@@ -1462,60 +1451,76 @@ msgid ""
 "<b>Default Cursor - Current</b>\n"
 "The default cursor that ships with X"
 msgstr ""
+"<b>預設的鼠標 - 目前設定</b>\n"
+"X Window 預設使用的鼠標"
 
 #: capplets/mouse/gnome-mouse-properties.c:521
 msgid ""
 "<b>Default Cursor</b>\n"
 "The default cursor that ships with X"
 msgstr ""
+"<b>預設的鼠標</b>\n"
+"X Window 預設使用的鼠標"
 
 #: capplets/mouse/gnome-mouse-properties.c:539
 msgid ""
 "<b>White Cursor - Current</b>\n"
 "The default cursor inverted"
 msgstr ""
+"<b>白色鼠標 - 目前設定</b>\n"
+"和預設的鼠標顏色相反"
 
 #: capplets/mouse/gnome-mouse-properties.c:542
 msgid ""
 "<b>White Cursor</b>\n"
 "The default cursor inverted"
 msgstr ""
+"<b>白色鼠標</b>\n"
+"和預設的鼠標顏色相反"
 
 #: capplets/mouse/gnome-mouse-properties.c:560
 msgid ""
 "<b>Large Cursor - Current</b>\n"
 "Large version of normal cursor"
 msgstr ""
+"<b>大型鼠標 - 目前設定</b>\n"
+"比正常的鼠標較大"
 
 #: capplets/mouse/gnome-mouse-properties.c:563
 msgid ""
 "<b>Large Cursor</b>\n"
 "Large version of normal cursor"
 msgstr ""
+"<b>大型鼠標</b>\n"
+"比正常的鼠標較大"
 
 #: capplets/mouse/gnome-mouse-properties.c:581
 msgid ""
 "<b>Large White Cursor - Current</b>\n"
 "Large version of white cursor"
 msgstr ""
+"<b>大型白色鼠標 - 目前設定</b>\n"
+"比正常的白色鼠標較大"
 
 #: capplets/mouse/gnome-mouse-properties.c:584
 msgid ""
 "<b>Large White Cursor</b>\n"
 "Large version of white cursor"
 msgstr ""
+"<b>大型白色鼠標</b>\n"
+"比正常的白色鼠標較大"
 
 #: capplets/mouse/gnome-mouse-properties.c:718
 #: capplets/mouse/gnome-mouse-properties.glade.h:17
 #: capplets/mouse/mouse.desktop.in.h:2
 msgid "Mouse Properties"
-msgstr "滑鼠設定"
+msgstr "滑鼠屬性"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:1
 msgid ""
 "&lt;b&gt;Note:&lt;/b&gt; You will need to logout and log back in for this "
 "setting to take effect."
-msgstr ""
+msgstr "&lt;b&gt;注意：&lt;/b&gt; 必須登出後再登入才會令設定生效。"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:2
 msgid "&lt;i&gt;Fast&lt;/i&gt;"
@@ -1549,7 +1554,7 @@ msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:9
 msgid "C_ursors"
-msgstr ""
+msgstr "鼠標(_U)"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:10
 msgid "Cursor Theme"
@@ -1557,16 +1562,16 @@ msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:11
 msgid "Double-click Delay"
-msgstr ""
+msgstr "Double-click 延遲時間"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:12
 msgid "Drag and Drop"
-msgstr ""
+msgstr "拖曳"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:13
 msgid ""
 "Left-handed mouse mode switches the left and right buttons on the mouse."
-msgstr ""
+msgstr "左手操作滑鼠模式會交換滑鼠的左右按鈕的功能。"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:14
 msgid "Locate Pointer"
@@ -1577,8 +1582,10 @@ msgid ""
 "Maximum time allowed between clicks when double-clicking.   Use the box on "
 "the right to test."
 msgstr ""
+"區分按兩下滑鼠按鈕和一下 double-click 的最長時限。請使用右邊的方格測試。"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:16
+#, fuzzy
 msgid "Mouse Orientation"
 msgstr "滑鼠方向"
 
@@ -1608,7 +1615,7 @@ msgstr "延遲時間[秒](_D)："
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:24
 msgid "_Left-handed mouse"
-msgstr ""
+msgstr "左手操作滑鼠(_L)"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:25
 msgid "_Motion"
@@ -1639,9 +1646,8 @@ msgid "Sound preferences"
 msgstr "音效偏好設定"
 
 #: capplets/sound/sound-properties.glade.h:1
-#, fuzzy
 msgid "E_nable sound server startup"
-msgstr "啟動音效伺服程式"
+msgstr "啟動 GNOME 時啟用音效伺服程式(_N)"
 
 #: capplets/sound/sound-properties.glade.h:2
 msgid "Sound _Events"
@@ -1657,7 +1663,7 @@ msgstr "事件音效(_S)"
 
 #: capplets/theme-switcher/control/control.c:18
 msgid "Eenie Meenie Mynie Moe Catcha Tiger By Its Toe"
-msgstr ""
+msgstr "甲 乙 丙 丁 戊 己 庚 辛"
 
 #: capplets/theme-switcher/control/control.c:43
 msgid "Selected themes from above will be tested by previewing here."
@@ -1670,7 +1676,7 @@ msgstr "按鈕樣本"
 
 #: capplets/theme-switcher/control/control.c:52
 msgid "Sample Check Button"
-msgstr "核對按鈕樣本"
+msgstr "方形按鈕樣本"
 
 #: capplets/theme-switcher/control/control.c:58
 msgid "Sample Text Entry Field"
@@ -1774,7 +1780,7 @@ msgstr "選單項目 5"
 
 #: capplets/ui-properties/gnome2-ui-properties.glade.h:10
 msgid "Menu items have _icons"
-msgstr "選單項目具有圖示"
+msgstr "選單項目具有圖示(_I)"
 
 #: capplets/ui-properties/gnome2-ui-properties.glade.h:11
 #: capplets/ui-properties/ui-properties.glade.h:8
@@ -1827,7 +1833,7 @@ msgstr "選單(_M)"
 
 #: capplets/ui-properties/gnome2-ui-properties.glade.h:23
 msgid "_Toolbars have: "
-msgstr ""
+msgstr "工具列具有(_T)："
 
 #.
 #. * Translatable strings file generated by Glade.
@@ -1836,7 +1842,7 @@ msgstr ""
 #.
 #: capplets/ui-properties/ui-properties.glade.h:7
 msgid "window4"
-msgstr ""
+msgstr "window4"
 
 #: capplets/ui-properties/ui-properties.glade.h:9
 msgid "Menu bars are detachable"
@@ -1851,7 +1857,6 @@ msgid "Menus can be torn off"
 msgstr "選單可被撕開"
 
 #: capplets/ui-properties/ui-properties.glade.h:12
-#, fuzzy
 msgid "Menu items have icons"
 msgstr "選單項目具有圖示"
 
@@ -1876,14 +1881,12 @@ msgid "Progress bar is on the right"
 msgstr "進度列在右邊"
 
 #: capplets/ui-properties/ui-properties.glade.h:18
-#, fuzzy
 msgid "Tool Bars"
 msgstr "工具列"
 
 #: capplets/ui-properties/ui-properties.glade.h:19
-#, fuzzy
 msgid "Tool bars have a border"
-msgstr "選單列有邊框"
+msgstr "工具列有邊框"
 
 #: capplets/ui-properties/ui-properties.glade.h:20
 msgid "Tool bar buttons pop up on mouse over"
@@ -1894,9 +1897,8 @@ msgid "Tool bars have line separators"
 msgstr "工具列有分隔線"
 
 #: capplets/ui-properties/ui-properties.glade.h:22
-#, fuzzy
 msgid "Tool bars are detachable"
-msgstr "可以取出選單列"
+msgstr "可以取出工具列"
 
 #: capplets/ui-properties/ui-properties.glade.h:23
 msgid "Tool bar buttons are icons only"
@@ -1947,21 +1949,20 @@ msgid "Specially by the window manager"
 msgstr "由視窗管理程式特別處理"
 
 #: capplets/ui-properties/ui-properties.glade.h:35
-#, fuzzy
 msgid "Multiple Documents"
-msgstr "文件"
+msgstr "多文件介面"
 
 #: capplets/ui-properties/ui-properties.glade.h:36
 msgid "Notebook tabs"
-msgstr "筆記本標籤"
+msgstr "標簽頁方式"
 
 #: capplets/ui-properties/ui-properties.glade.h:37
 msgid "Seperate windows"
-msgstr "分離的視窗"
+msgstr "分離視窗"
 
 #: capplets/ui-properties/ui-properties.glade.h:38
 msgid "The same window"
-msgstr "同一個視窗"
+msgstr "同一視窗"
 
 #: capplets/ui-properties/ui-properties.glade.h:39
 msgid "Left"
@@ -1976,9 +1977,8 @@ msgid "Top"
 msgstr "頂端"
 
 #: capplets/ui-properties/ui-properties.glade.h:42
-#, fuzzy
 msgid "Bottom"
-msgstr "底部顏色(_B)"
+msgstr "底部"
 
 #: capplets/ui-properties/ui-properties.glade.h:43
 msgid "When opening Multiple documents, use"
@@ -1986,27 +1986,26 @@ msgstr "當開啟多個文件時，使用："
 
 #: capplets/ui-properties/ui-properties.glade.h:44
 msgid "When using Notebook tabs, place the tabs on the"
-msgstr "當使用筆記本標籤時，將標籤置於："
+msgstr "當使用標簽頁方式時，將標簽置於："
 
 #: capplets/ui-properties/ui-properties.glade.h:46
 msgid "Settings will not take effect until applications restart"
 msgstr "設定在應用程式重新啟動前不會生效"
 
-#: capplets/url-properties/url-properties.desktop.in.h:1
 #: capplets/url-properties/url.desktop.in.in.h:1
+#: capplets/url-properties/url-properties.desktop.in.h:1
 msgid "Configure which programs are used to display URLs"
 msgstr "設定顯示 URL 所用的程式"
 
+#: capplets/url-properties/url.desktop.in.in.h:2
 #: capplets/url-properties/url-properties.c:66
 #: capplets/url-properties/url-properties.desktop.in.h:2
-#: capplets/url-properties/url.desktop.in.in.h:2
 msgid "URL Handlers"
 msgstr "URL 處理程式"
 
 #: capplets/url-properties/url-properties.c:64
-#, fuzzy
 msgid "Protocol"
-msgstr "協定名稱"
+msgstr "協定"
 
 #: capplets/url-properties/url-properties.c:64
 msgid "Command"
@@ -2014,7 +2013,7 @@ msgstr "指令"
 
 #: capplets/url-properties/url-properties.c:89
 msgid "handler:"
-msgstr "處理器:"
+msgstr "處理器："
 
 #. set some commonly used handlers
 #: capplets/url-properties/url-properties.c:99
@@ -2026,13 +2025,12 @@ msgid "Netscape (new window)"
 msgstr "Netscape (新視窗)"
 
 #: capplets/url-properties/url-properties.c:110
-#, fuzzy
 msgid "Help browser"
-msgstr "輔助說明瀏覽器(_L)"
+msgstr "說明文件瀏覽器"
 
 #: capplets/url-properties/url-properties.c:115
 msgid "Help browser (new window)"
-msgstr "輔助說明瀏覽器 (新視窗)"
+msgstr "說明文件瀏覽器 (新視窗)"
 
 #: capplets/url-properties/url-properties.c:127
 msgid "Set"
@@ -2040,24 +2038,23 @@ msgstr "設定"
 
 #: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.in.h:1
 msgid "Enlightenment"
-msgstr ""
+msgstr "Enlightenment"
 
 #: capplets/wm-properties/wm-desktops/IceWM.desktop.in.in.h:1
 msgid "Ice WM"
-msgstr ""
+msgstr "Ice WM"
 
 #: capplets/wm-properties/wm-desktops/Scwm.desktop.in.in.h:1
 msgid "Scwm"
-msgstr ""
+msgstr "Scwm"
 
 #: capplets/wm-properties/wm-desktops/twm.desktop.in.in.h:1
 msgid "twm"
-msgstr ""
+msgstr "twm"
 
 #: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.in.h:1
-#, fuzzy
 msgid "Window Maker"
-msgstr "視窗管理程式(_W)"
+msgstr "Window Maker"
 
 #: capplets/wm-properties/wm-properties-capplet.c:135
 msgid "Initialize session settings"
@@ -2069,11 +2066,13 @@ msgid ""
 "Starting %s\n"
 "(%d seconds left before operation times out)"
 msgstr ""
+"正在啟動 %s\n"
+"（%d 秒後定為逾時）"
 
 #: capplets/wm-properties/wm-properties-capplet.c:367
 #, c-format
 msgid "%s (Current)"
-msgstr "%s (正在使用)"
+msgstr "%s (使用中)"
 
 #: capplets/wm-properties/wm-properties-capplet.c:370
 #, c-format
@@ -2089,6 +2088,8 @@ msgid ""
 "wm-properties-capplet: Unable to initialize window manager.\n"
 "\tAnother window manager is already running and could not be killed\n"
 msgstr ""
+"wm-properties-capplet：無法初始化視窗管理程式。\n"
+"\t另一個視窗管理程式已經在執行並且無法停止\n"
 
 #: capplets/wm-properties/wm-properties-capplet.c:424
 #, c-format
@@ -2096,6 +2097,8 @@ msgid ""
 "wm-properties-capplet: Unable to initialize window manager.\n"
 "\t'%s' didn't start\n"
 msgstr ""
+"wm-properties-capplet: 無法初始化視窗管理程式。\n"
+"\t‘%s’無法啟動\n"
 
 #: capplets/wm-properties/wm-properties-capplet.c:473
 msgid "Previous window manager did not die\n"
@@ -2107,6 +2110,8 @@ msgid ""
 "Could not start '%s'.\n"
 "Falling back to previous window manager '%s'\n"
 msgstr ""
+"無法啟動‘%s’。\n"
+"回到前一個視窗管理程式‘%s’\n"
 
 #: capplets/wm-properties/wm-properties-capplet.c:537
 msgid ""
@@ -2115,6 +2120,9 @@ msgid ""
 "do this by selecting \"Run Program\" in the\n"
 "foot menu\n"
 msgstr ""
+"無法啟動後備的視窗管理程式。請自行啟動\n"
+"視窗管理程式。你可以在腳印選單中選擇\n"
+"「執行程式」來進行。\n"
 
 #: capplets/wm-properties/wm-properties-capplet.c:562
 #: capplets/wm-properties/wm-properties-capplet.c:812
@@ -2134,6 +2142,10 @@ msgid ""
 "in the main menu, or by turning on \"Save Current Setup\" when\n"
 "you log out.\n"
 msgstr ""
+"現在的視窗管理程式已經改變了。要令設定生效，你必須儲存目前\n"
+"的作業階段。你可以選擇下方的「立刻儲存作業階段」按鈕或之後\n"
+"自行儲存。要自行儲存，可以在主選單的「設定」副選單中選取\n"
+"「立刻儲存作業階段」，或是在登出時選取「儲存目前設定」。\n"
 
 #: capplets/wm-properties/wm-properties-capplet.c:587
 msgid "Save Session Later"
@@ -2141,7 +2153,7 @@ msgstr "稍後再儲存作業階段"
 
 #: capplets/wm-properties/wm-properties-capplet.c:587
 msgid "Save Session Now"
-msgstr "現在儲存作業階段"
+msgstr "立刻儲存作業階段"
 
 #: capplets/wm-properties/wm-properties-capplet.c:590
 msgid ""
@@ -2151,6 +2163,9 @@ msgid ""
 "under \"Settings\" in the main menu, or by turning on\n"
 "\"Save Current Setup\" when you log out.\n"
 msgstr ""
+"現在的視窗管理程式已經改變了。要令設定生效，你必須儲存目前\n"
+"的作業階段。要自行儲存，可以在主選單的「設定」副選單中選取\n"
+"「立刻儲存作業階段」，或是在登出時選取「儲存目前設定」。\n"
 
 #: capplets/wm-properties/wm-properties-capplet.c:811
 msgid "Add New Window Manager"
@@ -2161,14 +2176,12 @@ msgid "Cancel"
 msgstr "取消"
 
 #: capplets/wm-properties/wm-properties-capplet.c:824
-#, fuzzy
 msgid "Name:"
-msgstr "名稱"
+msgstr "名稱："
 
 #: capplets/wm-properties/wm-properties-capplet.c:837
-#, fuzzy
 msgid "Command:"
-msgstr "指令(_M)："
+msgstr "指令："
 
 #: capplets/wm-properties/wm-properties-capplet.c:850
 msgid "Configuration Command:"
@@ -2180,17 +2193,16 @@ msgstr "視窗管理程式接受作業階段管理"
 
 #: capplets/wm-properties/wm-properties-capplet.c:919
 msgid "Name cannot be empty"
-msgstr "名稱欄不能為空白"
+msgstr "名稱欄不能留空"
 
 #: capplets/wm-properties/wm-properties-capplet.c:926
 msgid "Command cannot be empty"
-msgstr "指令欄不能為空白"
+msgstr "指令欄不能留空"
 
 #: capplets/wm-properties/wm-properties-capplet.c:974
 #: capplets/wm-properties/wm-properties-capplet.c:1012
-#, fuzzy
 msgid "Edit Window Manager"
-msgstr "視窗管理程式(_W)"
+msgstr "編輯視窗管理程式清單"
 
 #: capplets/wm-properties/wm-properties-capplet.c:1069
 msgid "You cannot delete the current Window Manager"
@@ -2312,6 +2324,9 @@ msgid ""
 "You may want to install the gnome-audio package\n"
 "for a set of default sounds."
 msgstr ""
+"代表此事件的音效檔不存在。\n"
+"請安裝 gnome-audio 套件來\n"
+"獲取一套預設的音效。"
 
 #: libsounds/sound-view.c:210
 msgid "Event"
@@ -2322,7 +2337,6 @@ msgid "File to play"
 msgstr "要播放的音效檔"
 
 #: libsounds/sound-view.c:232
-#, fuzzy
 msgid "_Sounds"
 msgstr "音效(_S)"
 
@@ -2358,10 +2372,6 @@ msgstr "選擇音效檔"
 #~ msgid "Background properties"
 #~ msgstr "背景圖屬性"
 
-#, fuzzy
-#~ msgid "Default Applications"
-#~ msgstr "刪除應用程式"
-
 #~ msgid "Configure the settings of the screensaver"
 #~ msgstr "修改螢幕保護程式的選項"
 
@@ -2375,7 +2385,7 @@ msgstr "選擇音效檔"
 #~ "No help is available/installed. Please make sure you\n"
 #~ "have the GNOME User's Guide installed on your system."
 #~ msgstr ""
-#~ "輔助說明尚未安裝或不存在，請確定你已經安裝\n"
+#~ "求助說明尚未安裝或不存在，請確定你已經安裝\n"
 #~ "GNOME 的使用者指南到你的系統中。"
 
 #~ msgid "Close"
@@ -2409,7 +2419,7 @@ msgstr "選擇音效檔"
 #~ msgstr "選擇要在選單中顯示並相關於 MIME 類型 \"%s\" 的應用程式"
 
 #~ msgid "Add Application..."
-#~ msgstr "加入應用程式..."
+#~ msgstr "新增應用程式..."
 
 #~ msgid "Edit Application..."
 #~ msgstr "編輯應用程式..."
@@ -2526,7 +2536,7 @@ msgstr "選擇音效檔"
 #~ msgstr "鍵盤敲擊聲"
 
 #~ msgid "Mouse buttons"
-#~ msgstr "滑鼠按鍵"
+#~ msgstr "滑鼠按鈕"
 
 #~ msgid "Right handed"
 #~ msgstr "右手操作"
