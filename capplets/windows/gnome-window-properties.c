@@ -54,7 +54,7 @@ static GtkWidget *double_click_titlebar_optionmenu;
 static GtkWidget *double_click_titlebar_hbox;
 static GtkWidget *alt_click_hbox;
 
-static GnomeWMSettings settings;
+static GnomeWMSettings *settings;
 static const GnomeWMDoubleClickAction *double_click_actions = NULL;
 static int n_double_click_actions = 0;
 
@@ -73,7 +73,7 @@ mouse_focus_toggled_callback (GtkWidget *button,
         new_settings.focus_follows_mouse =
                 gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
 
-        if (current_wm != NULL && new_settings.focus_follows_mouse != settings.focus_follows_mouse)
+        if (current_wm != NULL && new_settings.focus_follows_mouse != settings->focus_follows_mouse)
                 gnome_window_manager_change_settings (current_wm, &new_settings);
 }
 
@@ -87,7 +87,7 @@ autoraise_toggled_callback (GtkWidget *button,
         new_settings.autoraise =
                 gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
 
-        if (current_wm != NULL && new_settings.autoraise != settings.autoraise)
+        if (current_wm != NULL && new_settings.autoraise != settings->autoraise)
                 gnome_window_manager_change_settings (current_wm, &new_settings);
 
 }
@@ -102,7 +102,7 @@ autoraise_delay_value_changed_callback (GtkWidget *slider,
         new_settings.autoraise_delay =
                 gtk_range_get_value (GTK_RANGE (slider)) * 1000;
 
-        if (current_wm != NULL && new_settings.autoraise_delay != settings.autoraise_delay)
+        if (current_wm != NULL && new_settings.autoraise_delay != settings->autoraise_delay)
                 gnome_window_manager_change_settings (current_wm, &new_settings);
 }
 
@@ -116,7 +116,7 @@ double_click_titlebar_changed_callback (GtkWidget *optionmenu,
         new_settings.double_click_action =
                 gtk_option_menu_get_history (GTK_OPTION_MENU (optionmenu));
 
-        if (current_wm != NULL && new_settings.double_click_action != settings.double_click_action)
+        if (current_wm != NULL && new_settings.double_click_action != settings->double_click_action)
                 gnome_window_manager_change_settings (current_wm, &new_settings);
 }
 
@@ -154,12 +154,12 @@ alt_click_radio_toggled_callback (GtkWidget *radio,
         new_settings.flags = GNOME_WM_SETTING_MOUSE_MOVE_MODIFIER;
         active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (radio));
 
-        if (active) {
-                new_settings.mouse_move_modifier = modifier->value;
-        
-                if (current_wm != NULL &&
-                    strcmp (new_settings.mouse_move_modifier,
-                            settings.mouse_move_modifier) != 0)
+        if (active && current_wm != NULL) {
+                 new_settings.mouse_move_modifier = modifier->value;
+          
+                if ((settings->mouse_move_modifier == NULL) ||
+                    (strcmp (new_settings.mouse_move_modifier,
+                             settings->mouse_move_modifier) != 0))
                         gnome_window_manager_change_settings (current_wm, &new_settings);
         }
 }
@@ -169,10 +169,10 @@ static void
 update_sensitivity (void)
 {
         gtk_widget_set_sensitive (autoraise_checkbutton,
-                                  settings.focus_follows_mouse);
+                                  settings->focus_follows_mouse);
         
         gtk_widget_set_sensitive (autoraise_delay_hbox,
-                                  settings.focus_follows_mouse && settings.autoraise);
+                                  settings->focus_follows_mouse && settings->autoraise);
 
         gtk_widget_set_sensitive (double_click_titlebar_optionmenu,
                                   n_double_click_actions > 1);
@@ -209,20 +209,27 @@ init_settings_struct (GnomeWMSettings *settings)
 static void
 set_alt_click_value (const GnomeWMSettings *settings)
 {
-        int i;
-        
-        i = 0;
-        while (i < n_mouse_modifiers) {
-                if (strcmp (mouse_modifiers[i].value,
-                            settings->mouse_move_modifier) == 0)
-                        break;
-                ++i;
-        }
-        
-        if (i < n_mouse_modifiers) {
-                gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (mouse_modifiers[i].radio),
-                                              TRUE);
-        }
+	gboolean match_found = FALSE;
+	int i;
+
+	/* We look for a matching modifier and set it. */
+	if (settings->mouse_move_modifier != NULL) {
+		for (i = 0; i < n_mouse_modifiers; i ++)
+			if (strcmp (mouse_modifiers[i].value,
+				    settings->mouse_move_modifier) == 0) {
+				gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (mouse_modifiers[i].radio),
+							      TRUE);
+				match_found = TRUE;
+				break;
+			}
+	}
+
+	/* No matching modifier was found; we set all the toggle buttons to be
+	 * insensitive. */
+	for (i = 0; i < n_mouse_modifiers; i++) {
+		gtk_toggle_button_set_inconsistent (GTK_TOGGLE_BUTTON (mouse_modifiers[i].radio),
+						    ! match_found);
+	}
 }
 
 static void
@@ -271,32 +278,33 @@ reload_settings (void)
 
         init_settings_struct (&new_settings);
         
-        if (new_settings.focus_follows_mouse != settings.focus_follows_mouse)
+        if (new_settings.focus_follows_mouse != settings->focus_follows_mouse)
                 gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (focus_mode_checkbutton),
                                               new_settings.focus_follows_mouse);
 
-        if (new_settings.autoraise != settings.autoraise)
+        if (new_settings.autoraise != settings->autoraise)
                 gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (autoraise_checkbutton),
                                               new_settings.autoraise);
 
-        if (new_settings.autoraise_delay != settings.autoraise_delay)
+        if (new_settings.autoraise_delay != settings->autoraise_delay)
                 gtk_range_set_value (GTK_RANGE (autoraise_delay_slider),
                                      new_settings.autoraise_delay / 1000.0);
         
         if (n_double_click_actions > 0 &&
-            new_settings.double_click_action != settings.double_click_action) {
+            new_settings.double_click_action != settings->double_click_action) {
                 gtk_option_menu_set_history (GTK_OPTION_MENU (double_click_titlebar_optionmenu),
                                              new_settings.double_click_action);
         }
         
-
-        if (settings.mouse_move_modifier == NULL ||
-            strcmp (settings.mouse_move_modifier,
+        if (settings->mouse_move_modifier == NULL ||
+            new_settings.mouse_move_modifier == NULL ||
+            strcmp (settings->mouse_move_modifier,
                     new_settings.mouse_move_modifier) != 0) {
                 set_alt_click_value (&new_settings);
         }
 
-        settings = new_settings;
+	gnome_wm_settings_free (settings);
+        settings = gnome_wm_settings_copy (&new_settings);
 
         update_sensitivity ();
 }
@@ -411,6 +419,7 @@ int
 main (int argc, char **argv)
 {
         GdkScreen *screen;
+	GnomeWMSettings new_settings;
         int i;
         
         bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
@@ -464,18 +473,19 @@ main (int argc, char **argv)
         g_object_unref (G_OBJECT (size_group));
 #endif
         
-        settings.flags = 0;
-        init_settings_struct (&settings);
+        new_settings.flags = 0;
+        init_settings_struct (&new_settings);
+	settings = gnome_wm_settings_copy (&new_settings);
 
         reload_mouse_modifiers ();
         update_wm (screen, FALSE);
         
-        set_alt_click_value (&settings);
+        set_alt_click_value (&new_settings);
         gtk_range_set_value (GTK_RANGE (autoraise_delay_slider),
-                             settings.autoraise_delay / 1000.0);
+                             new_settings.autoraise_delay / 1000.0);
         gtk_option_menu_set_history (GTK_OPTION_MENU (double_click_titlebar_optionmenu),
-                                     settings.double_click_action);
-        
+                                     new_settings.double_click_action);
+
         reload_settings (); /* must come before below signal connections */
         
         g_signal_connect (G_OBJECT (dialog_win), "response",
