@@ -816,7 +816,7 @@ get_spinbutton (xmlNodePtr node, GtkWidget **widget)
 
 	if (label_str) {
 		hbox = gtk_hbox_new (FALSE, 5);
-		label = gtk_label_new (label_str);
+		label = gtk_label_new (_(label_str));
 		gtk_misc_set_alignment (GTK_MISC (label), 1.0, 0.5);
 		gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
 		gtk_box_pack_start (GTK_BOX (hbox), spinbutton, 
@@ -852,7 +852,7 @@ get_check_button (ScreensaverPrefsDialog *dialog, xmlNodePtr node,
 
 	if (!label) return NULL;
 
-	checkbutton = gtk_check_button_new_with_label (label);
+	checkbutton = gtk_check_button_new_with_label (_(label));
 
 	set = g_new0 (PrefsDialogWidgetSet, 1);
 	set->alias = FALSE;
@@ -902,7 +902,7 @@ get_select_widget (ScreensaverPrefsDialog *dialog, xmlNodePtr select_data,
 		option_str = xmlGetProp (node, "label");
 		if (!option_str) continue;
 
-		menu_item = gtk_menu_item_new_with_label (option_str);
+		menu_item = gtk_menu_item_new_with_label (_(option_str));
 		gtk_widget_show (menu_item);
 		gtk_object_set_data (GTK_OBJECT (menu_item), "dialog", dialog);
 		gtk_object_set_data (GTK_OBJECT (menu_item),
@@ -922,7 +922,7 @@ get_select_widget (ScreensaverPrefsDialog *dialog, xmlNodePtr select_data,
 
 	if (label_str) {
 		hbox = gtk_hbox_new (FALSE, 5);
-		label = gtk_label_new (label_str);
+		label = gtk_label_new (_(label_str));
 		gtk_misc_set_alignment (GTK_MISC (label), 1.0, 0.5);
 		gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
 		gtk_box_pack_start (GTK_BOX (hbox), option_menu, 
@@ -971,7 +971,7 @@ get_file_entry (ScreensaverPrefsDialog *dialog, xmlNodePtr node,
 
 	if (label_str) {
 		hbox = gtk_hbox_new (FALSE, 5);
-		label = gtk_label_new (label_str);
+		label = gtk_label_new (_(label_str));
 		gtk_misc_set_alignment (GTK_MISC (label), 1.0, 0.5);
 		gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
 		gtk_box_pack_start (GTK_BOX (hbox), entry, 
@@ -1018,7 +1018,7 @@ get_entry (ScreensaverPrefsDialog *dialog, xmlNodePtr node,
 
 	if (label_str) {
 		hbox = gtk_hbox_new (FALSE, 5);
-		label = gtk_label_new (label_str);
+		label = gtk_label_new (_(label_str));
 		gtk_misc_set_alignment (GTK_MISC (label), 1.0, 0.5);
 		gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, TRUE, 0);
 		gtk_box_pack_start (GTK_BOX (hbox), entry, 
@@ -1076,7 +1076,7 @@ place_number (GtkTable *table, xmlNodePtr node, gint *row)
 		set = g_new0 (PrefsDialogWidgetSet, 1);
 		set->alias = FALSE;
 		set->enabled = TRUE;
-		label = gtk_label_new (label_str);
+		label = gtk_label_new (_(label_str));
 		gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
 		gtk_table_attach (table, label, 0, 3, *row, *row + 1,
 				  GTK_FILL, 0, 0, 0);
@@ -1104,14 +1104,14 @@ place_number (GtkTable *table, xmlNodePtr node, gint *row)
 		list_tail = g_list_append (list_tail, hscale);
 		list_tail = list_tail->next;
 
-		label = gtk_label_new (low_str);
+		label = gtk_label_new (_(low_str));
 		gtk_misc_set_alignment (GTK_MISC (label), 1.0, 0.5);
 		gtk_table_attach (table, label, 0, 1, *row + 1, *row + 2,
 				  GTK_FILL, 0, 0, 0);
 		list_tail = g_list_append (list_tail, label);
 		list_tail = list_tail->next;
 
-		label = gtk_label_new (high_str);
+		label = gtk_label_new (_(high_str));
 		gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
 		gtk_table_attach (table, label, 2, 3, *row + 1, *row + 2,
 				  GTK_FILL, 0, 0, 0);
