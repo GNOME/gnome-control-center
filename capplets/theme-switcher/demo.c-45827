@@ -8,8 +8,8 @@ send_socket()
 {
   gchar buffer[256];
 
-  g_snprintf(buffer, sizeof(buffer), "%11x ", 
-	     GDK_WINDOW_XWINDOW (preview_socket->window));
+  g_snprintf(buffer, sizeof(buffer), "%11lx ", 
+	     (gulong)GDK_WINDOW_XWINDOW (preview_socket->window));
   write(prog_fd, buffer, strlen(buffer));
 }
 
@@ -41,7 +41,7 @@ static void
 demo_main(int argc, char **argv, gint in_fd)
 {
   gchar buf[256];
-  XID window;
+  Window window;
   GtkWidget *widget, *table, *hbox;
   GtkWidget *scrolled_window;
   GSList *group;
@@ -58,11 +58,11 @@ demo_main(int argc, char **argv, gint in_fd)
   gint i;
 
   if (read(in_fd, buf, 12) <= 0)
-    g_error ("Error reading socket descriptor from parent: %s",
-	     g_strerror (errno));
+    /* Assume this means that our parent exited or was killed */
+    exit(0);
   
   buf[12] = 0;
-  sscanf(buf, "%x", &window);
+  window = strtol (buf, NULL, 16);
 
   fcntl(0, F_SETFL, O_NONBLOCK);
 
@@ -161,7 +161,7 @@ demo_main(int argc, char **argv, gint in_fd)
   gtk_main ();
 }
 
-void
+gint
 do_demo(int argc, char **argv)
 {
   gint toProg[2];
@@ -173,15 +173,17 @@ do_demo(int argc, char **argv)
     {
       close(toProg[1]);
       demo_main(argc, argv, toProg[0]);
+      exit(0);
     }
   else if (pid > 0)
     {
       close(toProg[0]);
       prog_fd = toProg[1];
+      return pid;
     }
   else
     {
       /* baaaaaaaah eeeeek */
+      return -1;
     }
-  
 }

@@ -19,6 +19,21 @@ static GtkWidget *initial_theme = NULL;
 static GtkWidget *last_theme = NULL;
 
 static void
+click_preview(GtkWidget *widget, gpointer data);
+static void
+click_try(GtkWidget *widget, gpointer data);
+static void
+click_help(GtkWidget *widget, gpointer data);
+static void
+click_ok(GtkWidget *widget, gpointer data);
+static void
+click_revert(GtkWidget *widget, gpointer data);
+static void
+click_entry(GtkWidget *widget, gpointer data);
+static void
+delete_entry(GtkWidget *widget, gpointer data);
+
+static void
 auto_callback (GtkWidget *widget, gpointer data)
 {
   if (GTK_TOGGLE_BUTTON (auto_preview)->active)
@@ -121,6 +136,17 @@ install_theme_callback (GtkWidget *widget, gpointer data)
   gtk_widget_show (install_theme_file_sel);
 
 }
+
+gint
+delete_capplet (GtkWidget *widget, GdkEvent *event, gpointer data)
+{
+  /* We don't want the toplevel window destroyed until
+   * our child exits.
+   */
+  close(prog_fd);
+  return FALSE;
+}
+
 GtkWidget *
 make_main(void)
 {
@@ -211,6 +237,8 @@ make_main(void)
 		      GTK_SIGNAL_FUNC (click_revert), NULL);
   gtk_signal_connect (GTK_OBJECT (capplet_widget), "cancel",
 		      GTK_SIGNAL_FUNC (click_revert), NULL);
+  gtk_signal_connect (GTK_OBJECT (capplet_widget), "delete_event",
+		      GTK_SIGNAL_FUNC (delete_capplet), NULL);
   gtk_container_add (GTK_CONTAINER (capplet_widget), box);
 
   readme_current = NULL;
@@ -220,13 +248,13 @@ make_main(void)
   return capplet_widget;
 }
 
-void
+static void
 click_update(GtkWidget *widget, gpointer data)
 {
   update_theme_entries(theme_list);
 }
 
-void
+static void
 click_preview(GtkWidget *widget, gpointer data)
 {
   gchar *rc;
@@ -241,7 +269,7 @@ click_preview(GtkWidget *widget, gpointer data)
   send_reread();
 }
 
-void
+static void
 click_help(GtkWidget *widget, gpointer data)
 {
   gchar *tmp;
@@ -253,7 +281,7 @@ click_help(GtkWidget *widget, gpointer data)
   }
 
 }
-void
+static void
 click_try(GtkWidget *widget, gpointer data)
 {
   gchar *rc;
@@ -280,7 +308,7 @@ click_try(GtkWidget *widget, gpointer data)
   /* system(cmd); */
   gdk_error_warnings = 1;
 }
-void
+static void
 click_ok(GtkWidget *widget, gpointer data)
 {
   click_try (widget, data);
@@ -288,7 +316,7 @@ click_ok(GtkWidget *widget, gpointer data)
   gnome_config_set_string ("/theme-switcher-capplet/settings/theme", gtk_object_get_data (GTK_OBJECT (current_theme), "name"));
   gnome_config_sync ();
 }
-void
+static void
 click_revert(GtkWidget *widget, gpointer data)
 {
   gchar *rc;
@@ -317,7 +345,7 @@ click_revert(GtkWidget *widget, gpointer data)
   gdk_error_warnings = 1;
   gtk_list_select_child (GTK_LIST (theme_list), initial_theme);
 }
-void
+static void
 click_entry(GtkWidget *widget, gpointer data)
 {
   gchar *rc, *name, *readme, *new_readme, buf[1024];
@@ -365,7 +393,7 @@ click_entry(GtkWidget *widget, gpointer data)
     }
 }
 
-void
+static void
 delete_entry(GtkWidget *widget, gpointer data)
 {
   gchar *rc, *name, *readme, *icon, *dir;

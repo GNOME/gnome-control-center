@@ -1,3 +1,17 @@
+Fri Mar 12 10:53:10 1999  Owen Taylor  <otaylor@redhat.com>
+
+	* capplets/theme-switcher/main.c (main): Wait for
+	our child to exit before quitting. The prevents
+	us from pulling the socket window out from under
+	our child.
+
+	* capplets/theme-switcher/demo.c (demo_main): Clean
+	up some warnings about types in formats.
+
+	* capplets/theme-switcher/demo.c (demo_main): Exit
+	cleanly if read from parent fails - don't drop
+	a core.
+
 Fri Mar 12 02:21:55 1999  Owen Taylor  <otaylor@redhat.com>
 
 	* capplets/theme-switcher/gui.c (browse_dialog_close):

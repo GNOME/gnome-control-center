@@ -8,12 +8,13 @@ int
 main(int argc, char **argv)
 {
   GtkWidget *w;
+  gint child_pid;
 
   bindtextdomain (PACKAGE, GNOMELOCALEDIR);
   textdomain (PACKAGE);
 
   set_tmp_rc();
-  do_demo(argc, argv);
+  child_pid = do_demo(argc, argv);
   switch (gnome_capplet_init ("theme-switcher-capplet",
 			      THEME_SWITCHER_VERSION, argc, argv, NULL, 0, NULL)) {
   case -1:
@@ -26,5 +27,11 @@ main(int argc, char **argv)
   send_socket();
   
   gtk_main();
+  /* Pause here until our child exits and the socket can be safely
+   * destroyed
+   */
+  if (child_pid > 0)
+    waitpid(child_pid, NULL, 0);
+  
   return 0;
 }

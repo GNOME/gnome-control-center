@@ -59,23 +59,9 @@ list_user_themes(gint *number);
 GtkWidget *
 make_main(void);
 void
-click_entry(GtkWidget *widget, gpointer data);
-void
-delete_entry(GtkWidget *widget, gpointer data);
-void
 update_theme_entries(GtkWidget *disp_list);
 void
 signal_apply_theme(GtkWidget *widget);
-void
-click_preview(GtkWidget *widget, gpointer data);
-void
-click_try(GtkWidget *widget, gpointer data);
-void
-click_help(GtkWidget *widget, gpointer data);
-void
-click_ok(GtkWidget *widget, gpointer data);
-void
-click_revert(GtkWidget *widget, gpointer data);
 void
 edit_file_to_use(gchar *file, gchar *theme);
 void 
@@ -88,7 +74,7 @@ void
 click_update(GtkWidget *widget, gpointer data);
 gchar *
 install_theme(gchar *file);
-void
+gint
 do_demo(int argc, char **argv);
 void
 send_socket(void);
