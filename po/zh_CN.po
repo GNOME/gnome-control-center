@@ -4,24 +4,24 @@
 # by Abel Cheung <maddog@linuxhall.org>, 2001
 # He Qiangqiang <carton@linux.net.cn>, 2002
 # Sun G11n <gnome_int_l10n@ireland.sun.com>, 2002
+# Funda Wang <fundawang@en2china.com>, 2003
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2003-01-10 10:20-0500\n"
-"PO-Revision-Date: 2002-08-14 21:33+0800\n"
-"Last-Translator: He Qiangqiang <carton@linux.net.cn>\n"
+"POT-Creation-Date: 2003-01-17 12:02+0100\n"
+"PO-Revision-Date: 2003-01-18 16:41+0800\n"
+"Last-Translator: Funda Wang <fundawang@en2china.com>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:238
-#, fuzzy, c-format
+#, c-format
 msgid "There was an error launching the mouse preferences dialog: %s"
-msgstr "显示帮助时出错：%s"
+msgstr "调用鼠标首选项对话框出错：%s"
 
-# SUN NEW TRANSLATION
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:334
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:392
 #, c-format
@@ -46,9 +46,8 @@ msgstr "设置键盘的辅助功能"
 msgid ""
 "This system does not seem to have the XKB extension.  The keyboard "
 "accessibility features will not operate without it."
-msgstr ""
+msgstr "此系统好像没有 XKB 扩展。键盘辅助功能必须依赖该扩展才能实现。"
 
-# SUN NEW TRANSLATION
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:1
 #: capplets/file-types/file-types-properties.glade.h:1
@@ -61,91 +60,72 @@ msgstr "*"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
 msgid "Basic"
-msgstr ""
+msgstr "基本"
 
-# SUN NEW TRANSLATION
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
-#, fuzzy
 msgid "Beep if key is re_jected"
-msgstr "键弹起时鸣笛(_J)"
+msgstr "键被拒绝时鸣笛(_J)"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
 msgid "Beep when _features turned on or off from keyboard"
-msgstr ""
+msgstr "从键盘开关特性时鸣笛(_F)"
 
-# SUN NEW TRANSLATION
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
-#, fuzzy
 msgid "Beep when _modifier is pressed"
-msgstr "按下组合键时鸣笛(_E)"
+msgstr "按下组合键时鸣笛(_M)"
 
-# SUN NEW TRANSLATION
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
 msgid "Beep when an LED is turned on and two beeps when one is turned off."
 msgstr "当 LED 打开时鸣笛，当 LED 关闭时鸣笛两声。"
 
-# SUN NEW TRANSLATION
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
-#, fuzzy
 msgid "Beep when key is:"
-msgstr "键弹起时鸣笛(_J)"
+msgstr "当按指定键时鸣笛："
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
-#, fuzzy
 msgid "Del_ay:"
-msgstr "延时(_D)："
+msgstr "延时(_A)："
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
 msgid "Delay between keypress and pointer mo_vement:"
-msgstr ""
+msgstr "按键和指针移动的延时："
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
 msgid "Disa_ble if two keys pressed together"
-msgstr ""
+msgstr "若同时按两个键则禁用(_B)"
 
-# SUN NEW TRANSLATION
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:11
-#, fuzzy
 msgid "E_nable Toggle Keys"
-msgstr "启用切换键(_T)"
+msgstr "启用切换键(_N)"
 
-# SUN NEW TRANSLATION
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:12
-#, fuzzy
 msgid "Enable Bo_unce Keys"
-msgstr "启用回弹键(_B)"
+msgstr "启用回弹键(_U)"
 
-# SUN NEW TRANSLATION
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:13
 msgid "Enable Slo_w Keys"
 msgstr "启用慢速键(_W)"
 
-# SUN NEW TRANSLATION
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
 msgid "Enable _Mouse Keys"
 msgstr "启用鼠标键(_M)"
 
-# SUN NEW TRANSLATION
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
 msgid "Enable _Sticky Keys"
 msgstr "启用粘滞键(_S)"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:16
 msgid "Features"
-msgstr ""
+msgstr "特性"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:17
-#, fuzzy
 msgid "Filters"
-msgstr "文件(_F)"
+msgstr "过滤器"
 
-# SUN NEW TRANSLATION
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:18
-#, fuzzy
 msgid "I_gnore duplicate keypresses within:"
-msgstr "在此时间内忽略按键(_I)："
+msgstr "在此时间内忽略按键(_G)："
 
-# SUN NEW TRANSLATION
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:19
 msgid ""
 "Ignore all subsequent presses of the SAME key if they happen within a user "
@@ -154,15 +134,12 @@ msgstr ""
 "如果在一个用户可选择期间内多次按下同一键，则忽略所有后续按下该键的操作。"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:20
-#, fuzzy
 msgid "Keyboard Accessibility Preferences (AccessX)"
 msgstr "键盘辅助功能设置 (AccessX)"
 
-# SUN NEW TRANSLATION
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:21
-#, fuzzy
 msgid "Ma_ximum pointer speed:"
-msgstr "最高指针速度(_X):"
+msgstr "最高指针速度(_X)："
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:22
 #: capplets/mouse/mouse.desktop.in.h:1
@@ -170,18 +147,15 @@ msgid "Mouse"
 msgstr "鼠标"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:23
-#, fuzzy
 msgid "Mouse _Preferences..."
-msgstr "鼠标首选项"
+msgstr "鼠标首选项(_P)..."
 
-# SUN NEW TRANSLATION
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
 msgid ""
 "Only accept keys after they have been pressed and held for a user adjustable "
 "amount of time."
 msgstr "只接受用户按下并在可调整时间段内按住的按键操作。"
 
-# SUN NEW TRANSLATION
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
 msgid ""
 "Perform multiple simultaneous key press operations by pressing modifier keys "
@@ -193,122 +167,94 @@ msgstr "顺序按下组合键，可以产生同时按多个键的操作。"
 msgid "S_peed:"
 msgstr "速度(_P)："
 
-# SUN NEW TRANSLATION
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
-#, fuzzy
 msgid "Time to acce_lerate to maximum speed:"
-msgstr "加速到最高速度的时间(_A)："
+msgstr "加速到最高速度的时间(_L)："
 
-# SUN NEW TRANSLATION
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:28
-#, fuzzy
 msgid "Toggle Keys"
-msgstr "启用切换键(_T)"
+msgstr "切换键"
 
-# SUN NEW TRANSLATION
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
 msgid "Turn the numeric keypad into a mouse control pad."
 msgstr "将数字小键盘转变为鼠标控制盘。"
 
-# SUN NEW TRANSLATION
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:30
-#, fuzzy
 msgid "_Disable if unused for:"
-msgstr "禁用键盘辅助功能如果未使用时间超过(_D)"
+msgstr "禁用若未使用(_D)："
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:31
-#, fuzzy
 msgid "_Enable keyboard accessibility features"
 msgstr "启用键盘辅助功能(_E)"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:32
 msgid "_Import Feature Settings..."
-msgstr ""
+msgstr "导入特性设置(_I)..."
 
-# SUN NEW TRANSLATION
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
-#, fuzzy
 msgid "_Only accept keys held for:"
 msgstr "只接受下列对象之后的按键(_O)："
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
-#, fuzzy
 msgid "_Repeat Keys"
-msgstr "重复键"
+msgstr "重复键(_R)"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:35
 msgid "_Type to test settings:"
-msgstr ""
+msgstr "输入字符来测试设置(_T)："
 
-# SUN NEW TRANSLATION
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
-#, fuzzy
 msgid "_accepted"
-msgstr "键被接受(_A)"
+msgstr "接受(_A)"
 
-# SUN NEW TRANSLATION
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:37
-#, fuzzy
 msgid "_pressed"
-msgstr "键被按下(_P)"
+msgstr "按下(_P)"
 
-# SUN NEW TRANSLATION
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:38
-#, fuzzy
 msgid "_rejected"
-msgstr "键被拒绝(_R)"
+msgstr "拒绝(_R)"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:39
 msgid "characters/second"
-msgstr ""
+msgstr "字符/秒"
 
-# SUN NEW TRANSLATION
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:40
-#, fuzzy
 msgid "milliseconds"
-msgstr "秒"
+msgstr "毫秒"
 
-# SUN NEW TRANSLATION
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:41
-#, fuzzy
 msgid "pixels/second"
 msgstr "像素/秒"
 
-# SUN NEW TRANSLATION
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:42
 #: capplets/windows/gnome-window-properties.glade.h:7
 msgid "seconds"
 msgstr "秒"
 
-# SUN NEW TRANSLATION
 #. solid
 #: capplets/background/background-properties-capplet.c:228
 msgid "C_olor:"
 msgstr "颜色(_O)："
 
-# SUN NEW TRANSLATION
 #. horiz
 #: capplets/background/background-properties-capplet.c:232
 msgid "_Left Color:"
 msgstr "左侧颜色(_L):"
 
-# SUN NEW TRANSLATION
 #: capplets/background/background-properties-capplet.c:233
 msgid "_Right Color:"
 msgstr "右侧颜色(_R)："
 
-# SUN NEW TRANSLATION
 #. vert
 #: capplets/background/background-properties-capplet.c:236
 msgid "_Top Color:"
 msgstr "顶部颜色(_T)："
 
-# SUN NEW TRANSLATION
 #: capplets/background/background-properties-capplet.c:237
 msgid "_Bottom Color:"
 msgstr "底部颜色(_B)："
 
-# SUN NEW TRANSLATION
 #: capplets/background/background-properties-capplet.c:398
 msgid "_Wallpaper"
 msgstr "墙纸(_W)"
@@ -317,7 +263,6 @@ msgstr "墙纸(_W)"
 msgid "C_entered"
 msgstr "居中(_E)"
 
-# SUN NEW TRANSLATION
 #: capplets/background/background-properties-capplet.c:398
 msgid "_Scaled"
 msgstr "缩放(_S)"
@@ -326,7 +271,6 @@ msgstr "缩放(_S)"
 msgid "Stretc_hed"
 msgstr "拉伸(_H)"
 
-# SUN NEW TRANSLATION
 #: capplets/background/background-properties-capplet.c:398
 msgid "_No Picture"
 msgstr "无图片(_N)"
@@ -363,13 +307,12 @@ msgstr "背景风格(_S)："
 
 #: capplets/background/background-properties.glade.h:5
 msgid "Horizontal gradient"
-msgstr "水平梯度"
+msgstr "水平渐变"
 
 #: capplets/background/background-properties.glade.h:6
 msgid "Pick a color"
 msgstr "选取颜色"
 
-# SUN NEW TRANSLATION
 #: capplets/background/background-properties.glade.h:7
 msgid "Picture Options:"
 msgstr "图片选项："
@@ -385,7 +328,7 @@ msgstr "主要颜色"
 
 #: capplets/background/background-properties.glade.h:10
 msgid "Secondary Color"
-msgstr "次级颜色"
+msgstr "次要颜色"
 
 #: capplets/background/background-properties.glade.h:11
 msgid "Solid color"
@@ -401,9 +344,8 @@ msgstr "要设置背景图片，请将图像文件拖到这里或单击以浏览
 
 #: capplets/background/background-properties.glade.h:14
 msgid "Vertical gradient"
-msgstr "垂直梯度"
+msgstr "垂直渐变"
 
-# SUN NEW TRANSLATION
 #: capplets/background/background-properties.glade.h:15
 msgid ""
 "You can drag image files\n"
@@ -422,7 +364,6 @@ msgstr "背景"
 msgid "Customize your desktop background"
 msgstr "自定义您的桌面背景"
 
-# SUN NEW TRANSLATION
 #: capplets/common/activate-settings-daemon.c:18
 msgid ""
 "Unable to start the settings manager 'gnome-settings-daemon'.\n"
@@ -448,7 +389,7 @@ msgstr "显示帮助时出错：%s"
 #: capplets/common/file-transfer-dialog.c:95
 #, c-format
 msgid "%i of %i"
-msgstr ""
+msgstr "第 %i 个，共 %i 个"
 
 #: capplets/common/file-transfer-dialog.c:119
 #, c-format
@@ -483,11 +424,11 @@ msgstr "当前传输的目的 URI"
 
 #: capplets/common/file-transfer-dialog.c:201
 msgid "Fraction completed"
-msgstr ""
+msgstr "完成的比例"
 
 #: capplets/common/file-transfer-dialog.c:202
 msgid "Fraction of transfer currently completed"
-msgstr ""
+msgstr "目前完成的传输比例"
 
 #: capplets/common/file-transfer-dialog.c:209
 msgid "Current URI index"
@@ -743,7 +684,7 @@ msgstr "窗口管理器"
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:31
 #: capplets/file-types/file-types-properties.glade.h:22
 msgid "_Name:"
-msgstr "名字(_N)："
+msgstr "名称(_N)："
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:32
 msgid "_Properties..."
@@ -765,7 +706,6 @@ msgstr "选择 Web 浏览器(_S)："
 msgid "_Select an Editor:"
 msgstr "选择编辑器(_S)："
 
-# SUN NEW TRANSLATION
 #: capplets/desktop-links/Accessibility.directory.in.in.h:1
 msgid "Accessibility"
 msgstr "辅助功能"
@@ -911,34 +851,28 @@ msgid "Actions"
 msgstr "动作"
 
 #: capplets/file-types/file-types-properties.glade.h:3
-#, fuzzy
 msgid "Add _File Type..."
 msgstr "添加文件类型(_F)..."
 
 #: capplets/file-types/file-types-properties.glade.h:4
-#, fuzzy
 msgid "Add _Service..."
 msgstr "添加服务(_S)..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
-#, fuzzy
 msgid "C_hoose..."
-msgstr "选择(_C)..."
+msgstr "选择(_H)..."
 
 #: capplets/file-types/file-types-properties.glade.h:6
-#, fuzzy
 msgid "Cate_gory:"
-msgstr "类别"
+msgstr "类别(_G)："
 
 #: capplets/file-types/file-types-properties.glade.h:7
-#, fuzzy
 msgid "D_efault action:"
-msgstr "默认动作"
+msgstr "默认动作(_E)："
 
 #: capplets/file-types/file-types-properties.glade.h:8
-#, fuzzy
 msgid "Default _action:"
-msgstr "默认动作"
+msgstr "默认动作(_A)："
 
 #: capplets/file-types/file-types-properties.glade.h:9
 #: capplets/file-types/mime-edit-dialog.c:208
@@ -946,18 +880,16 @@ msgid "Edit file type"
 msgstr "编辑文件类型"
 
 #: capplets/file-types/file-types-properties.glade.h:11
-#, fuzzy
 msgid "Filename extensions:"
-msgstr "文件扩展名"
+msgstr "文件扩展名："
 
 #: capplets/file-types/file-types-properties.glade.h:12
 msgid "Look at content"
 msgstr "查看内容"
 
 #: capplets/file-types/file-types-properties.glade.h:13
-#, fuzzy
 msgid "P_rogram:"
-msgstr "程序(_P)"
+msgstr "程序(_R)："
 
 #: capplets/file-types/file-types-properties.glade.h:14
 msgid "Program to Run"
@@ -976,51 +908,42 @@ msgid "Use parent category _defaults"
 msgstr "使用父类别默认动作(_D)"
 
 #: capplets/file-types/file-types-properties.glade.h:18
-#, fuzzy
 msgid "_Add:"
-msgstr "添加"
+msgstr "添加(_A)："
 
 #: capplets/file-types/file-types-properties.glade.h:19
-#, fuzzy
 msgid "_Description:"
-msgstr "描述(_D)"
+msgstr "描述(_D)："
 
 #: capplets/file-types/file-types-properties.glade.h:20
 msgid "_Edit..."
 msgstr "编辑(_E)..."
 
 #: capplets/file-types/file-types-properties.glade.h:21
-#, fuzzy
 msgid "_MIME type:"
-msgstr "_MIME 类型"
+msgstr "_MIME 类型："
 
 #: capplets/file-types/file-types-properties.glade.h:23
-#, fuzzy
 msgid "_Program to run:"
-msgstr "要运行的程序(_P)"
+msgstr "要运行的程序(_P)："
 
 #: capplets/file-types/file-types-properties.glade.h:24
-#, fuzzy
 msgid "_Protocol:"
-msgstr "协议名(_P)"
+msgstr "协议(_P)："
 
 #: capplets/file-types/file-types-properties.glade.h:25
-#, fuzzy
 msgid "_Remove"
-msgstr "删除"
+msgstr "删除(_R)"
 
 #: capplets/file-types/file-types-properties.glade.h:26
-#, fuzzy
 msgid "_Viewer component:"
-msgstr "查看器部件"
+msgstr "查看器组件(_V)："
 
 #: capplets/file-types/file-types.desktop.in.h:1
-#, fuzzy
 msgid "File types and programs"
 msgstr "文件类型和相关程序"
 
 #: capplets/file-types/file-types.desktop.in.h:2
-#, fuzzy
 msgid "Specify which programs are used to open or view each type of file"
 msgstr "指定用于打开或查看每一种文件类型的程序"
 
@@ -1033,7 +956,7 @@ msgstr "编辑文件类型"
 #: capplets/file-types/service-edit-dialog.c:170
 #: capplets/file-types/service-edit-dialog.c:171
 msgid "Model"
-msgstr "Model"
+msgstr "模型"
 
 #: capplets/file-types/mime-category-edit-dialog.c:173
 msgid "GtkTreeModel that contains the category data"
@@ -1060,9 +983,8 @@ msgid "Extension"
 msgstr "扩展名"
 
 #: capplets/file-types/mime-edit-dialog.c:256
-#, fuzzy
 msgid "Underlying model to notify when Ok is clicked"
-msgstr "点击确定后要通知的底层 model"
+msgstr "点击确定后要通知的底层模型"
 
 #: capplets/file-types/mime-edit-dialog.c:263
 msgid "MIME type information"
@@ -1084,7 +1006,6 @@ msgstr "如果此对话框用于添加一个 MIME 类型则为真"
 msgid "Add File Type"
 msgstr "添加文件类型"
 
-# SUN NEW TRANSLATION
 #: capplets/file-types/mime-edit-dialog.c:434
 #: capplets/file-types/mime-type-info.c:673
 msgid "Misc"
@@ -1128,9 +1049,8 @@ msgstr "音频"
 
 #: capplets/file-types/mime-types-model.c:167
 #: capplets/file-types/mime-types-model.c:168
-#, fuzzy
 msgid "Model for categories only"
-msgstr "仅供类别使用的 Model"
+msgstr "仅供类别使用的模型"
 
 #: capplets/file-types/mime-types-model.c:421
 msgid "Internet Services"
@@ -1180,7 +1100,7 @@ msgstr "未知服务类型"
 
 #: capplets/file-types/service-info.c:45
 msgid "World wide web"
-msgstr "World wide web"
+msgstr "万维网"
 
 #: capplets/file-types/service-info.c:46
 msgid "File transfer protocol"
@@ -1210,49 +1130,45 @@ msgstr "字体"
 msgid "Select fonts for the desktop"
 msgstr "为桌面选择字体"
 
-# SUN NEW TRANSLATION
 #: capplets/font/font-properties.glade.h:1
-#, fuzzy
 msgid "Best _shapes"
-msgstr "Netscape"
+msgstr "最佳形状(_S)"
 
 #: capplets/font/font-properties.glade.h:2
 msgid "Best co_ntrast"
-msgstr ""
+msgstr "最佳对比(_N)"
 
 #: capplets/font/font-properties.glade.h:3
 msgid "De_tails..."
-msgstr ""
+msgstr "细节(_T)..."
 
 #: capplets/font/font-properties.glade.h:4
 msgid "Font Preferences"
 msgstr "字体首选项"
 
 #: capplets/font/font-properties.glade.h:5
-#, fuzzy
 msgid "Font Rendering"
-msgstr "字体首选项"
+msgstr "字体绘制"
 
 #: capplets/font/font-properties.glade.h:6
 msgid "Font Rendering Details"
-msgstr ""
+msgstr "字体绘制细节"
 
 #: capplets/font/font-properties.glade.h:7
 msgid "G_rayscale"
-msgstr ""
+msgstr "灰度(_R)"
 
 #: capplets/font/font-properties.glade.h:8
 msgid "Hinting:"
-msgstr ""
+msgstr "微调："
 
 #: capplets/font/font-properties.glade.h:9
-#, fuzzy
 msgid "N_one"
-msgstr "无"
+msgstr "无(_O)"
 
 #: capplets/font/font-properties.glade.h:10
 msgid "Resolution (_dots per inch):"
-msgstr ""
+msgstr "分辨率(每英寸点数)(_D)："
 
 #: capplets/font/font-properties.glade.h:11
 msgid "Set the font for applications"
@@ -1263,29 +1179,28 @@ msgid "Set the font for the icons on the desktop"
 msgstr "设置桌面图标的字体"
 
 #: capplets/font/font-properties.glade.h:13
-#, fuzzy
 msgid "Set the monospace font for terminals and similar applications"
-msgstr "设置应用程序的字体"
+msgstr "设置终端和类似程序的固定宽度字体"
 
 #: capplets/font/font-properties.glade.h:14
 msgid "Smoothing:"
-msgstr ""
+msgstr "平滑："
 
 #: capplets/font/font-properties.glade.h:15
 msgid "Sub_pixel (LCDs)"
-msgstr ""
+msgstr "次像素(LCD)(_P)"
 
 #: capplets/font/font-properties.glade.h:16
 msgid "Sub_pixel smoothing (LCDs)"
-msgstr ""
+msgstr "次像素平滑(LCD)(_P)"
 
 #: capplets/font/font-properties.glade.h:17
 msgid "Subpixel order:"
-msgstr ""
+msgstr "次像素顺序："
 
 #: capplets/font/font-properties.glade.h:18
 msgid "VB_GR"
-msgstr ""
+msgstr "VB_GR"
 
 #: capplets/font/font-properties.glade.h:19
 msgid "_Application font:"
@@ -1293,60 +1208,53 @@ msgstr "应用程序字体(_A)："
 
 #: capplets/font/font-properties.glade.h:20
 msgid "_BGR"
-msgstr ""
+msgstr "_BGR"
 
 #: capplets/font/font-properties.glade.h:21
 msgid "_Desktop font:"
 msgstr "桌面字体(_D)："
 
 #: capplets/font/font-properties.glade.h:22
-#, fuzzy
 msgid "_Full"
-msgstr "文件(_F)"
+msgstr "完全(_F)"
 
 #: capplets/font/font-properties.glade.h:23
-#, fuzzy
 msgid "_Medium"
-msgstr "中"
+msgstr "中等(_M)"
 
 #: capplets/font/font-properties.glade.h:24
 msgid "_Monochrome"
-msgstr ""
+msgstr "单色(_M)"
 
 #: capplets/font/font-properties.glade.h:25
-#, fuzzy
 msgid "_None"
-msgstr "无"
+msgstr "无(_N)"
 
 #: capplets/font/font-properties.glade.h:26
 msgid "_RGB"
-msgstr ""
+msgstr "_RGB"
 
-# SUN NEW TRANSLATION
 #: capplets/font/font-properties.glade.h:27
-#, fuzzy
 msgid "_Slight"
-msgstr "右"
+msgstr "轻微(_S)"
 
 #: capplets/font/font-properties.glade.h:28
-#, fuzzy
 msgid "_Terminal font:"
-msgstr "终端"
+msgstr "终端字体(_T)："
 
 #: capplets/font/font-properties.glade.h:29
 msgid "_VRGB"
-msgstr ""
+msgstr "_VRGB"
 
 #: capplets/font/font-properties.glade.h:30
 msgid "_Window title font:"
-msgstr ""
+msgstr "窗口标题字体(_W)："
 
 #: capplets/keybindings/eggcellrendererkeys.c:160
 #: capplets/keybindings/eggcellrendererkeys.c:161
 msgid "Accelerator key"
 msgstr "快捷键"
 
-# SUN NEW TRANSLATION
 #: capplets/keybindings/eggcellrendererkeys.c:170
 #: capplets/keybindings/eggcellrendererkeys.c:171
 msgid "Accelerator modifiers"
@@ -1354,11 +1262,11 @@ msgstr "快捷键修饰键"
 
 #: capplets/keybindings/eggcellrendererkeys.c:180
 msgid "Accel Mode"
-msgstr ""
+msgstr "加速模式"
 
 #: capplets/keybindings/eggcellrendererkeys.c:181
 msgid "The type of accelerator."
-msgstr ""
+msgstr "快捷键类型。"
 
 #: capplets/keybindings/eggcellrendererkeys.c:219
 #: capplets/keybindings/gnome-keybinding-properties.c:204
@@ -1366,19 +1274,15 @@ msgstr ""
 msgid "Disabled"
 msgstr "禁用"
 
-# SUN NEW TRANSLATION
 #: capplets/keybindings/eggcellrendererkeys.c:330
 #: capplets/keybindings/eggcellrendererkeys.c:563
 msgid "Type a new accelerator, or press Backspace to clear"
-msgstr "键入新的加速键，或按退格键清除"
+msgstr "键入新的快捷键，或按退格键清除"
 
-# SUN NEW TRANSLATION
 #: capplets/keybindings/eggcellrendererkeys.c:566
-#, fuzzy
 msgid "Type a new accelerator"
 msgstr "键入新的快捷键"
 
-# SUN NEW TRANSLATION
 #: capplets/keybindings/gnome-keybinding-properties.c:540
 msgid "<Unknown Action>"
 msgstr "<未知操作>"
@@ -1397,13 +1301,14 @@ msgid ""
 "The shortcut \"%s\" is already used for:\n"
 " \"%s\"\n"
 msgstr ""
+"快捷键“%s”已经用于：\n"
+"“%s”\n"
 
 #: capplets/keybindings/gnome-keybinding-properties.c:729
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "在配置数据库中设置新快捷键时出错：%s\n"
 
-# SUN NEW TRANSLATION
 #: capplets/keybindings/gnome-keybinding-properties.c:880
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
@@ -1442,7 +1347,7 @@ msgstr "为命令指定快捷键"
 #: capplets/keyboard/gnome-keyboard-properties.c:162
 #, c-format
 msgid "There was an error launching the keyboard capplet : %s"
-msgstr ""
+msgstr "调用键盘 capplet 出错：%s"
 
 #: capplets/keyboard/gnome-keyboard-properties.c:269
 msgid "_Accessibility"
@@ -1458,19 +1363,19 @@ msgstr "应用设置并退出 (仅为兼容，现在已由守护进程处理)"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:2
 msgid "<small><i>Fast</i></small>"
-msgstr ""
+msgstr "<small><i>快</i></small>"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:3
 msgid "<small><i>Long</i></small>"
-msgstr ""
+msgstr "<small><i>长</i></small>"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "<small><i>Short</i></small>"
-msgstr ""
+msgstr "<small><i>短</i></small>"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:5
 msgid "<small><i>Slow</i></small>"
-msgstr ""
+msgstr "<small><i>慢</i></small>"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "Bee_p"
@@ -1482,7 +1387,7 @@ msgstr "自定义(_U)："
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "Clic_k on keypress"
-msgstr ""
+msgstr "按键时单击(_K)"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "Cursor Blinks"
@@ -1502,7 +1407,7 @@ msgstr "按住某一键时重复该键(_R)"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Keypress Click"
-msgstr ""
+msgstr "按键单击"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:15
 msgid "Repeat Keys"
@@ -1706,7 +1611,7 @@ msgstr "设置在拖放项目前要光标移动的最小距离。"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:21
 msgid "Set the speed of your pointing device."
-msgstr "设置您的指针设备的速度。"
+msgstr "设置您的指点设备的速度。"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:22
 msgid "Speed"
@@ -1741,87 +1646,76 @@ msgid "Set your mouse preferences"
 msgstr "设置鼠标首选项"
 
 #: capplets/network/gnome-network-preferences.desktop.in.h:1
-#, fuzzy
 msgid "Network proxy"
 msgstr "网络代理"
 
 #: capplets/network/gnome-network-preferences.desktop.in.h:2
-#, fuzzy
 msgid "Network proxy preferences"
 msgstr "网络代理首选项"
 
 #: capplets/network/gnome-network-preferences.glade.h:1
 msgid "      "
-msgstr ""
+msgstr "      "
 
 #: capplets/network/gnome-network-preferences.glade.h:3
 msgid "<b>_Automatic proxy configuration</b>"
-msgstr ""
+msgstr "<b>自动代理配置(_A)</b>"
 
 #: capplets/network/gnome-network-preferences.glade.h:4
 msgid "<b>_Direct internet connection</b>"
-msgstr ""
+msgstr "<b>直接连接到互联网(_D)</b>"
 
 #: capplets/network/gnome-network-preferences.glade.h:5
 msgid "<b>_Manual proxy configuration</b>"
-msgstr ""
+msgstr "<b>手动配置代理服务器(_M)</b>"
 
 #: capplets/network/gnome-network-preferences.glade.h:6
 msgid "<b>_Use authentication</b>"
-msgstr ""
+msgstr "<b>需要身份验证(_U)</b>"
 
-# SUN NEW TRANSLATION
 #: capplets/network/gnome-network-preferences.glade.h:7
-#, fuzzy
 msgid "Autoconfiguration _URL:"
-msgstr "配置命令："
+msgstr "自动配置 _URL："
 
 #: capplets/network/gnome-network-preferences.glade.h:8
 msgid "HTTP Proxy Details"
-msgstr ""
+msgstr "HTTP 代理细节"
 
 #: capplets/network/gnome-network-preferences.glade.h:9
-#, fuzzy
 msgid "Network Proxy Configuration"
-msgstr "网络代理首选项"
+msgstr "网络代理配置"
 
 #: capplets/network/gnome-network-preferences.glade.h:10
-#, fuzzy
 msgid "Port:"
-msgstr "端口(_O)："
+msgstr "端口："
 
 #: capplets/network/gnome-network-preferences.glade.h:11
 msgid "S_ocks host:"
-msgstr ""
+msgstr "S_OCKS 主机："
 
 #: capplets/network/gnome-network-preferences.glade.h:12
 msgid "_Details"
-msgstr ""
+msgstr "细节(_D)"
 
 #: capplets/network/gnome-network-preferences.glade.h:13
-#, fuzzy
 msgid "_FTP proxy:"
-msgstr "使用 HTTP 代理(_U)"
+msgstr "_FTP 代理："
 
 #: capplets/network/gnome-network-preferences.glade.h:14
-#, fuzzy
 msgid "_HTTP proxy:"
-msgstr "使用 HTTP 代理(_U)"
+msgstr "_HTTP 代理："
 
 #: capplets/network/gnome-network-preferences.glade.h:15
-#, fuzzy
 msgid "_Password:"
-msgstr "密码(_W)："
+msgstr "密码(_P)："
 
 #: capplets/network/gnome-network-preferences.glade.h:16
-#, fuzzy
 msgid "_Secure HTTP proxy:"
-msgstr "使用 HTTP 代理(_U)"
+msgstr "安全 HTTP 代理(_S)："
 
 #: capplets/network/gnome-network-preferences.glade.h:17
-#, fuzzy
 msgid "_Username:"
-msgstr "用户名(_N)："
+msgstr "用户名(_U)："
 
 #: capplets/sound/sound-properties-capplet.c:180
 msgid "Sound preferences"
@@ -1836,9 +1730,8 @@ msgid "General"
 msgstr "常规"
 
 #: capplets/sound/sound-properties.glade.h:3
-#, fuzzy
 msgid "Sound Events"
-msgstr "事件音效(_E)"
+msgstr "事件音效"
 
 #: capplets/sound/sound-properties.glade.h:4
 msgid "Sound Preferences"
@@ -1852,7 +1745,6 @@ msgstr "事件产生音效(_S)"
 msgid "Enable sound and associate sounds with events"
 msgstr "启用窗口管理器的事件音效"
 
-# SUN NEW TRANSLATION
 #: capplets/theme-switcher/control/control.c:18
 msgid "Eenie Meenie Mynie Moe Catcha Tiger By Its Toe"
 msgstr "Eenie Meenie Mynie Moe Catcha Tiger By Its Toe"
@@ -1868,7 +1760,7 @@ msgstr "示例按钮"
 
 #: capplets/theme-switcher/control/control.c:52
 msgid "Sample Check Button"
-msgstr "示例复选按钮"
+msgstr "示例复选框"
 
 #: capplets/theme-switcher/control/control.c:58
 msgid "Sample Text Entry Field"
@@ -1912,93 +1804,87 @@ msgstr "主题"
 
 #: capplets/theme-switcher/theme-properties.glade.h:2
 msgid "<span size=\"larger\" weight=\"bold\">Save theme to disk</span>"
-msgstr ""
+msgstr "<span size=\"larger\" weight=\"bold\">将主题保存到磁盘</span>"
 
 #: capplets/theme-switcher/theme-properties.glade.h:3
-#, fuzzy
 msgid "Apply _Background"
-msgstr "背景"
+msgstr "应用背景(_B)"
 
 #: capplets/theme-switcher/theme-properties.glade.h:4
-#, fuzzy
 msgid "Apply _Font"
-msgstr "立即应用"
+msgstr "应用字体(_F)"
 
 #: capplets/theme-switcher/theme-properties.glade.h:5
-#, fuzzy
 msgid "Controls"
-msgstr "用户界面控件"
+msgstr "控件"
 
 #: capplets/theme-switcher/theme-properties.glade.h:6
-#, fuzzy
 msgid "Icons"
-msgstr "仅图标"
+msgstr "图标"
 
 #: capplets/theme-switcher/theme-properties.glade.h:7
 msgid "New themes can also be installed by dragging them into the window."
 msgstr "也可以通过拖动主题文件到本窗口中的方法来安装新主题。"
 
 #: capplets/theme-switcher/theme-properties.glade.h:8
-#, fuzzy
 msgid "Short _Description:"
-msgstr "描述(_D)"
+msgstr "简要描述(_D)："
 
 #: capplets/theme-switcher/theme-properties.glade.h:9
-#, fuzzy
 msgid "Theme Details"
-msgstr "CD 属性"
+msgstr "主题细节"
 
 #: capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Theme Preferences"
 msgstr "主题首选项"
 
 #: capplets/theme-switcher/theme-properties.glade.h:11
-#, fuzzy
 msgid ""
 "This theme suggests a\n"
 "background:"
-msgstr "自定义您的桌面背景"
+msgstr ""
+"该主题建议使用\n"
+"背景："
 
 #: capplets/theme-switcher/theme-properties.glade.h:13
 msgid ""
 "This theme suggests a\n"
 "font and background"
 msgstr ""
+"该主题建议使用指定的\n"
+"字体和背景"
 
 #: capplets/theme-switcher/theme-properties.glade.h:15
 msgid ""
 "This theme suggests a\n"
 "font:"
 msgstr ""
+"该主题建议使用\n"
+"字体："
 
 #: capplets/theme-switcher/theme-properties.glade.h:17
-#, fuzzy
 msgid "Window Border"
-msgstr "窗口管理器(_W)"
+msgstr "窗口边框"
 
 #: capplets/theme-switcher/theme-properties.glade.h:18
-#, fuzzy
 msgid "_Details..."
-msgstr "属性(_P)..."
+msgstr "细节(_D)..."
 
 #: capplets/theme-switcher/theme-properties.glade.h:19
 msgid "_Go to theme folder"
-msgstr "打开主题文件夹(_G)"
+msgstr "转到主题文件夹(_G)"
 
 #: capplets/theme-switcher/theme-properties.glade.h:20
-#, fuzzy
 msgid "_Install theme..."
-msgstr "安装新主题(_I)..."
+msgstr "安装主题(_I)..."
 
-# SUN NEW TRANSLATION
 #: capplets/theme-switcher/theme-properties.glade.h:21
-#, fuzzy
 msgid "_Save theme"
-msgstr "保存(_S)"
+msgstr "保存主题(_S)"
 
 #: capplets/theme-switcher/theme-properties.glade.h:22
 msgid "_Theme name:"
-msgstr ""
+msgstr "主题名称(_T)："
 
 #: capplets/theme-switcher/theme-install.glade.h:2
 msgid "Install new theme"
@@ -2012,24 +1898,25 @@ msgstr "安装(_I)"
 msgid "_Location of new theme:"
 msgstr "新主题的位置(_L)："
 
-#: capplets/theme-switcher/gnome-theme-details.c:329
-#: capplets/theme-switcher/gnome-theme-manager.c:606
+#: capplets/theme-switcher/gnome-theme-details.c:372
+#: capplets/theme-switcher/gnome-theme-manager.c:609
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
 "installed the \"gnome-themes\" package."
 msgstr ""
+"在您的系统中找不到主题。可能是您的“主题首选项”对话框安装不正确，或者没有安"
+"装“gnome-themes”包。"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:662
-#: capplets/theme-switcher/gnome-theme-manager.c:722
-#, fuzzy
+#: capplets/theme-switcher/gnome-theme-manager.c:665
+#: capplets/theme-switcher/gnome-theme-manager.c:725
 msgid "Custom theme"
-msgstr "光标主题"
+msgstr "自定义主题"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:662
-#: capplets/theme-switcher/gnome-theme-manager.c:722
+#: capplets/theme-switcher/gnome-theme-manager.c:665
+#: capplets/theme-switcher/gnome-theme-manager.c:725
 msgid "You can save this theme by pressing the Save Theme button."
-msgstr ""
+msgstr "按保存主题按钮可以保存此主题。"
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
@@ -2096,18 +1983,16 @@ msgid "Select the toolbar style."
 msgstr "选择工具栏风格。"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:13
-#, fuzzy
 msgid "Show _icons in menus"
-msgstr "在菜单中显示图标(_S)"
+msgstr "在菜单中显示图标(_I)"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:14
 msgid "Text Below Icons"
 msgstr "文字在图标之下"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:15
-#, fuzzy
 msgid "Text Beside Icons"
-msgstr "文字在图标之后"
+msgstr "文字在图标右侧"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:16
 msgid "Text Only"
@@ -2130,9 +2015,8 @@ msgid "_Copy"
 msgstr "复制(_C)"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:21
-#, fuzzy
 msgid "_Edit"
-msgstr "编辑(_E)..."
+msgstr "编辑(_E)"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:22
 #: control-center/gnomecc-ui.xml.h:5
@@ -2159,7 +2043,6 @@ msgstr "打印(_P)"
 msgid "_Quit"
 msgstr "退出(_Q)"
 
-# SUN NEW TRANSLATION
 #: capplets/ui-properties/gnome-ui-properties.glade.h:28
 msgid "_Save"
 msgstr "保存(_S)"
@@ -2171,28 +2054,29 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
+"<b>无法启动您窗口管理器的首选项程序</b>\n"
+"\n"
+"%s"
 
 #: capplets/windows/gnome-window-properties.c:624
-#, fuzzy
 msgid "Control"
-msgstr "用户界面控件"
+msgstr "Control"
 
 #: capplets/windows/gnome-window-properties.c:629
 msgid "Alt"
-msgstr ""
+msgstr "Alt"
 
 #: capplets/windows/gnome-window-properties.c:635
-#, fuzzy
 msgid "Hyper"
-msgstr "类型"
+msgstr "Hyper"
 
 #: capplets/windows/gnome-window-properties.c:642
 msgid "Super (or \"Windows logo\")"
-msgstr ""
+msgstr "Super (或“Windows 标志”)"
 
 #: capplets/windows/gnome-window-properties.glade.h:1
 msgid "To _move a window, press-and-hold this key then grab the window:"
-msgstr ""
+msgstr "要移动窗口，按住此键然后拖曳窗口(_M)："
 
 #: capplets/windows/gnome-window-properties.glade.h:2
 msgid "Window Preferences"
@@ -2200,21 +2084,19 @@ msgstr "窗口首选项"
 
 #: capplets/windows/gnome-window-properties.glade.h:3
 msgid "_Double-click titlebar to perform this action:"
-msgstr ""
+msgstr "双击标题栏执行此操作(_D)："
 
 #: capplets/windows/gnome-window-properties.glade.h:4
-#, fuzzy
 msgid "_Interval before raising:"
-msgstr "重复前延时(_D)："
+msgstr "提升前延时(_I)："
 
 #: capplets/windows/gnome-window-properties.glade.h:5
 msgid "_Raise selected windows after an interval"
-msgstr ""
+msgstr "一段间隔后提升选中窗口(_R)"
 
 #: capplets/windows/gnome-window-properties.glade.h:6
-#, fuzzy
 msgid "_Select windows when the mouse moves over them"
-msgstr "鼠标移动到窗口之上时选中该窗口"
+msgstr "鼠标移动到窗口之上时选中该窗口(_S)"
 
 #: capplets/windows/window-properties.desktop.in.h:1
 msgid "Window Properties"
@@ -2248,8 +2130,9 @@ msgstr "该视图正在查看的 Capplet 目录"
 #: control-center/capplet-dir-view.c:348
 msgid "translator_credits"
 msgstr ""
-"He Qiangqiang\n"
-"Sun G11n"
+"He Qiangqiang <carton@linux.net.cn>, 2002\n"
+"Sun G11n <gnome_int_l10n@ireland.sun.com>, 2002\n"
+"Funda Wang <fundawang@en2china.com>, 2003"
 
 #: control-center/capplet-dir-view.c:357 control-center/gnomecc.desktop.in.h:1
 msgid "GNOME Control Center"
@@ -2270,17 +2153,15 @@ msgstr "关于本程序"
 
 #: control-center/gnomecc-ui.xml.h:2
 msgid "Overview of the control center"
-msgstr "控制中心总览"
+msgstr "控制中心概览"
 
 #: control-center/gnomecc-ui.xml.h:3
-#, fuzzy
 msgid "_About"
-msgstr "关于(_A)..."
+msgstr "关于(_A)"
 
 #: control-center/gnomecc-ui.xml.h:4
-#, fuzzy
 msgid "_Contents"
-msgstr "内容(_C)..."
+msgstr "目录(_C)"
 
 #: control-center/gnomecc-ui.xml.h:6
 msgid "_Help"
@@ -2294,7 +2175,6 @@ msgstr "GNOME 配置工具"
 msgid "Use shell even if nautilus is running."
 msgstr "即使 nautilus 正在运行仍使用 shell。"
 
-# SUN NEW TRANSLATION
 #: gnome-settings-daemon/factory.c:32
 msgid "Could not initialize Bonobo"
 msgstr "无法能初始化 Bonobo"
@@ -2386,28 +2266,25 @@ msgstr ""
 msgid "Preview Width"
 msgstr "预览宽度"
 
-# SUN NEW TRANSLATION
 #: libbackground/applier.c:263
 msgid "Width if applier is a preview: Defaults to 64."
-msgstr "宽度（如果 applier 是预览）：默认值为 64。"
+msgstr "宽度(若应用于预览)：默认值为 64。"
 
 #: libbackground/applier.c:270
 msgid "Preview Height"
 msgstr "预览高度"
 
-# SUN NEW TRANSLATION
 #: libbackground/applier.c:271
 msgid "Height if applier is a preview: Defaults to 48."
-msgstr "高度（如果 applier 是预览）：默认值为 48。"
+msgstr "高度(若应用于预览)：默认值为 48。"
 
 #: libbackground/applier.c:279
-#, fuzzy
 msgid "Screen"
-msgstr "屏幕保护程序"
+msgstr "屏幕"
 
 #: libbackground/applier.c:280
 msgid "Screen on which BGApplier is to draw"
-msgstr ""
+msgstr "BGApplier 绘图的屏幕"
 
 #: libbackground/preview-file-selection.c:207
 msgid "Can't find an hbox, using a normal file selection"
@@ -2450,63 +2327,61 @@ msgstr "选择声音文件"
 #: libwindow-settings/gnome-wm-manager.c:320
 #, c-format
 msgid "Window manager \"%s\" has not registered a configuration tool\n"
-msgstr ""
+msgstr "窗口管理器“%s”没有注册配置工具\n"
 
 #: libwindow-settings/metacity-window-manager.c:373
 msgid "Maximize"
-msgstr ""
+msgstr "最大化"
 
 #: libwindow-settings/metacity-window-manager.c:374
 msgid "Roll up"
-msgstr ""
+msgstr "卷起"
 
 #: schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:1
 msgid ""
 "If true, the mime handlers for text/plain and text/* will be kept in sync"
-msgstr ""
+msgstr "如果是的话，text/plain 和 text/* 的 MIME 处理程序将会保持同步"
 
 #: schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:2
 msgid "Sync text/plain and text/* handlers"
-msgstr ""
+msgstr "同步 text/plain 和 text/* 的处理程序"
 
 #: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:1
 msgid "Display a dialog when there are errors running XScreenSaver"
-msgstr ""
+msgstr "运行 XScreenSaver 出错时显示对话框"
 
 #: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:2
 msgid "Run XScreenSaver at login"
-msgstr ""
+msgstr "登录时运行 XScreenSaver"
 
 #: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:3
-#, fuzzy
 msgid "Show Startup Errors"
-msgstr "程序"
+msgstr "显示启动错误"
 
 #: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:4
-#, fuzzy
 msgid "Start XScreenSaver"
-msgstr "屏幕保护程序"
+msgstr "启动 XScreenSaver"
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:1
 msgid "Antialiasing"
-msgstr ""
+msgstr "反锯齿"
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:2
 msgid "DPI"
-msgstr ""
+msgstr "DPI"
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:3
 msgid "Hinting"
-msgstr ""
+msgstr "微调"
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:4
 msgid "RGBA Order"
-msgstr ""
+msgstr "RGBA 顺序"
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:5
 msgid ""
 "Resolution used for converting font sizes to pixel sizes, in dots per inch"
-msgstr ""
+msgstr "用于将字体大小转换为像素大小的分辨率，单位每英寸点数"
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:6
 msgid ""
@@ -2514,6 +2389,9 @@ msgid ""
 "is set to \"rgba\". Possible values are: \"rgb\" - red on left, most common. "
 "\"bgr\" - blue on left. \"vrgb\" - red on top. \"vbgr\" - red on bottom."
 msgstr ""
+"LCD 屏幕上次像素的顺序；仅当反锯齿设置为“rgba”时使用。可供选用的值：“rgb” - "
+"红色在左侧，最常见。“bgr” - 蓝色在左侧。“vrgb” - 红色在上侧。“vbgr” - 红色在"
+"下侧。"
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:7
 msgid ""
@@ -2521,6 +2399,8 @@ msgid ""
 "\"none\" - no antialiasing. \"grayscale\" - standard grayscale antialiasing. "
 "\"rgba\" - subpixel antialiasing. (LCD screens only)."
 msgstr ""
+"绘制字体时所使用的反锯齿类型。可供选用的值：“无” - 没有反锯齿。“灰度” - 标准"
+"灰度反锯齿。“rgba” - 次像素反锯齿。(仅对 LCD 屏幕)。"
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:8
 msgid ""
@@ -2528,13 +2408,13 @@ msgid ""
 "\" - no hinting, \"slight\", \"medium\", and \"full\" - as much hinting as "
 "possible; may cause distortion of letter forms."
 msgstr ""
+"绘制字体时所使用的微调类型。可供选用的值：“无” - 没有提示，“轻微”，“中"
+"等”和“完全” - 尽可能微调；可能导致字母格式变形。"
 
-# SUN NEW TRANSLATION
 #, fuzzy
 #~ msgid "Beep when enabling/disabling _keyboard accessibility features"
 #~ msgstr "启用/禁用键盘辅助功能时鸣笛(_B)"
 
-# SUN NEW TRANSLATION
 #~ msgid "Beep when:"
 #~ msgstr "鸣笛条件："
 
@@ -2542,7 +2422,6 @@ msgstr ""
 #~ msgid "Repeat Key Pre_ferences"
 #~ msgstr "键重复首选项"
 
-# SUN NEW TRANSLATION
 #~ msgid "Start mo_ving this long after keypress :"
 #~ msgstr "长时间按键之后才开始移动此对象(_V)："
 
@@ -2552,11 +2431,9 @@ msgstr ""
 #~ msgid "Toggle and Repeat Keys"
 #~ msgstr "切换和重复键"
 
-# SUN NEW TRANSLATION
 #~ msgid "_Import CDE AccessX file"
 #~ msgstr "导入 CDE AccessX 文件(_I)"
 
-# SUN NEW TRANSLATION
 #~ msgid ""
 #~ "_Turn off Sticky Keys when\n"
 #~ "two keys pressed simultaneously"
@@ -2564,7 +2441,6 @@ msgstr ""
 #~ "当两键同时按下时\n"
 #~ "关闭粘滞键(_T)"
 
-# SUN NEW TRANSLATION
 #~ msgid "msecs"
 #~ msgstr "毫秒"
 
@@ -2610,7 +2486,6 @@ msgstr ""
 #~ msgid "Window Manager:"
 #~ msgstr "窗口管理器："
 
-# SUN NEW TRANSLATION
 #~ msgid ""
 #~ "Starting %s\n"
 #~ "(%d seconds left before operation times out)"
@@ -2618,7 +2493,6 @@ msgstr ""
 #~ "正在启动 %s\n"
 #~ "（距离操作超时还有 %d 秒）"
 
-# SUN NEW TRANSLATION
 #~ msgid ""
 #~ "wm-properties-capplet: Unable to initialize window manager.\n"
 #~ "\tAnother window manager is already running and could not be killed\n"
@@ -2626,7 +2500,6 @@ msgstr ""
 #~ "wm-properties-capplet：无法初始化窗口管理器。\n"
 #~ "\t另一个窗口管理器正在运行，不能杀死它\n"
 
-# SUN NEW TRANSLATION
 #~ msgid ""
 #~ "wm-properties-capplet: Unable to initialize window manager.\n"
 #~ "\t'%s' didn't start\n"
@@ -2634,11 +2507,9 @@ msgstr ""
 #~ "wm-properties-capplet：无法初始化窗口管理器。\n"
 #~ "\t'%s' 没有启动\n"
 
-# SUN CHANGED MESSAGE
 #~ msgid "Previous window manager did not die\n"
 #~ msgstr "上一个窗口管理器还没有中止运行\n"
 
-# SUN NEW TRANSLATION
 #~ msgid ""
 #~ "Could not start '%s'.\n"
 #~ "Falling back to previous window manager '%s'\n"
@@ -2646,7 +2517,6 @@ msgstr ""
 #~ "无法启动“%s”。\n"
 #~ "回退到前一个窗口管理器“%s”\n"
 
-# SUN NEW TRANSLATION
 #~ msgid ""
 #~ "Could not start fallback window manager.\n"
 #~ "Please run a window manager manually. You can\n"
@@ -2658,7 +2528,6 @@ msgstr ""
 #~ "选择脚印菜单中的“运行程序”来\n"
 #~ "完成\n"
 
-# SUN NEW TRANSLATION
 #~ msgid "OK"
 #~ msgstr "确定"
 
@@ -2728,19 +2597,15 @@ msgstr ""
 #~ msgid "_Keyboard"
 #~ msgstr "键盘(_K)"
 
-# SUN NEW TRANSLATION
 #~ msgid "_Misc"
 #~ msgstr "杂项(_M)"
 
-# SUN NEW TRANSLATION
 #~ msgid "_Picture"
 #~ msgstr "图片(_P)"
 
-# SUN NEW TRANSLATION
 #~ msgid "Bor_der the picture with a:"
 #~ msgstr "用以下对象设置图片边框(_D)："
 
-# SUN NEW TRANSLATION
 #~ msgid "E-Mail"
 #~ msgstr "电子邮件"
 
@@ -2792,11 +2657,9 @@ msgstr ""
 #~ msgid "Global panel properties"
 #~ msgstr "音效属性"
 
-# SUN NEW TRANSLATION
 #~ msgid "Panel"
 #~ msgstr "面板"
 
-# SUN NEW TRANSLATION
 #~ msgid "Configure which non-session aware programs are started up"
 #~ msgstr "配置启动哪些非会话识别程序"
 
@@ -2829,17 +2692,14 @@ msgstr ""
 #~ msgid "There already exists a MIME type of that name."
 #~ msgstr "已存在同名的 MIME 类型。"
 
-# SUN NEW TRANSLATION
 #~ msgid "Keyboard _Navigation scheme for use in applications:"
 #~ msgstr "用于应用程序的键盘导航方案(_N)："
 
-# SUN NEW TRANSLATION
 #~ msgid ""
 #~ "To assign a shortcut to an action, click in the shortcut column and press "
 #~ "the key combination you want to associate with it."
 #~ msgstr "要为操作分配快捷键，可单击快捷键列，然后按下要与之关联的按键组合。"
 
-# SUN NEW TRANSLATION
 #~ msgid "Associate keyboard shortcuts with panel actions"
 #~ msgstr "将键盘快捷键与面板操作关联"
 
@@ -2892,7 +2752,6 @@ msgstr ""
 #~ msgid "Very Short"
 #~ msgstr "短"
 
-# SUN NEW TRANSLATION
 #, fuzzy
 #~ msgid ""
 #~ "You can configure the keyboards accessibility features by bringing up the "
@@ -2922,19 +2781,15 @@ msgstr ""
 #~ msgid "Remove"
 #~ msgstr "删除"
 
-# SUN NEW TRANSLATION
 #~ msgid "First Regular Expression: "
 #~ msgstr "第一个正则表达式："
 
-# SUN NEW TRANSLATION
 #~ msgid "Second Regular Expression: "
 #~ msgstr "第二个正则表达式："
 
-# SUN NEW TRANSLATION
 #~ msgid "Mime Type Actions"
 #~ msgstr "MIME 类型操作"
 
-# SUN NEW TRANSLATION
 #~ msgid "Example: emacs %f"
 #~ msgstr "示例：emacs %f"
 
@@ -2946,7 +2801,6 @@ msgstr ""
 #~ msgid "View"
 #~ msgstr "视频"
 
-# SUN NEW TRANSLATION
 #~ msgid "Set actions for %s"
 #~ msgstr "设置 %s 的操作"
 
@@ -2954,11 +2808,9 @@ msgstr ""
 #~ msgid "Mime Type"
 #~ msgstr "MIME 类型"
 
-# SUN NEW TRANSLATION
 #~ msgid "You must enter a mime-type"
 #~ msgstr "必须输入一种 MIME 类型"
 
-# SUN NEW TRANSLATION
 #~ msgid ""
 #~ "You must add either a regular-expression or\n"
 #~ "a file-name extension"
@@ -2966,7 +2818,6 @@ msgstr ""
 #~ "必须添加一个正则表达式或者\n"
 #~ "一个文件扩展名"
 
-# SUN NEW TRANSLATION
 #~ msgid ""
 #~ "Please put your mime-type in the format:\n"
 #~ "CATEGORY/TYPE\n"
@@ -2980,11 +2831,9 @@ msgstr ""
 #~ "例如：\n"
 #~ "image/png"
 
-# SUN NEW TRANSLATION
 #~ msgid "This mime-type already exists"
 #~ msgstr "该 MIME 类型已经存在"
 
-# SUN NEW TRANSLATION
 #~ msgid ""
 #~ "We are unable to create the directory\n"
 #~ "~/.gnome/mime-info\n"
@@ -2996,7 +2845,6 @@ msgstr ""
 #~ "\n"
 #~ "我们将无法保存该状态。"
 
-# SUN NEW TRANSLATION
 #~ msgid ""
 #~ "We are unable to access the directory\n"
 #~ "~/.gnome/mime-info\n"
@@ -3008,7 +2856,6 @@ msgstr ""
 #~ "\n"
 #~ "我们将无法保存该状态。"
 
-# SUN NEW TRANSLATION
 #~ msgid ""
 #~ "Cannot create the file\n"
 #~ "~/.gnome/mime-info/user.mime\n"
@@ -3020,7 +2867,6 @@ msgstr ""
 #~ "\n"
 #~ "我们将无法保存该状态"
 
-# SUN NEW TRANSLATION
 #~ msgid ""
 #~ "Cannot create the file\n"
 #~ "~/.gnome/mime-info/user.keys.\n"
@@ -3032,7 +2878,6 @@ msgstr ""
 #~ "\n"
 #~ "我们将无法保存该状态"
 
-# SUN NEW TRANSLATION
 #~ msgid "Configure how files are associated and started"
 #~ msgstr "配置关联文件及启动文件的方式"
 
@@ -3040,7 +2885,6 @@ msgstr ""
 #~ msgid "Mime Types"
 #~ msgstr "MIME 类型"
 
-# SUN NEW TRANSLATION
 #~ msgid ""
 #~ "Add a new Mime Type\n"
 #~ "For example:  image/tiff; text/x-scheme"
@@ -3048,7 +2892,6 @@ msgstr ""
 #~ "添加新的 MIME 类型\n"
 #~ "例如：image/tiff; text/x-scheme"
 
-# SUN NEW TRANSLATION
 #~ msgid ""
 #~ "Type in the extensions for this mime-type.\n"
 #~ "For example:  .html, .htm"
@@ -3060,11 +2903,9 @@ msgstr ""
 #~ msgid "Extension:"
 #~ msgstr "扩展名"
 
-# SUN NEW TRANSLATION
 #~ msgid "Regular Expressions"
 #~ msgstr "正则表达式"
 
-# SUN NEW TRANSLATION
 #~ msgid ""
 #~ "You can set up two regular expressions here to identify the Mime Type\n"
 #~ "by.  These fields are optional."
@@ -3113,15 +2954,12 @@ msgstr ""
 #~ msgid "Command"
 #~ msgstr "命令："
 
-# SUN NEW TRANSLATION
 #~ msgid "URL Handlers"
 #~ msgstr "URL 处理程序"
 
-# SUN NEW TRANSLATION
 #~ msgid "handler:"
 #~ msgstr "处理程序："
 
-# SUN NEW TRANSLATION
 #~ msgid "Netscape (new window)"
 #~ msgstr "Netscape（新窗口）"
 
@@ -3133,47 +2971,36 @@ msgstr ""
 #~ msgid "Help browser (new window)"
 #~ msgstr "使用单个窗口浏览"
 
-# SUN NEW TRANSLATION
 #~ msgid "Set"
 #~ msgstr "设置"
 
-# SUN NEW TRANSLATION
 #~ msgid "Configure which programs are used to display URLs"
 #~ msgstr "配置哪些程序用于显示 URL"
 
-# SUN NEW TRANSLATION
 #~ msgid "Initialize session settings"
 #~ msgstr "初始化会话设置"
 
-# SUN NEW TRANSLATION
 #~ msgid " (Not found)"
 #~ msgstr "（找不到）"
 
-# SUN NEW TRANSLATION
 #~ msgid "Enlightenment"
 #~ msgstr "启发"
 
-# SUN NEW TRANSLATION
 #~ msgid "Ice WM"
 #~ msgstr "Ice WM"
 
-# SUN NEW TRANSLATION
 #~ msgid "Scwm"
 #~ msgstr "Scwm"
 
-# SUN NEW TRANSLATION
 #~ msgid "twm"
 #~ msgstr "twm"
 
-# SUN NEW TRANSLATION
 #~ msgid "%s (Current)"
 #~ msgstr "%s（当前）"
 
-# SUN NEW TRANSLATION
 #~ msgid "Run Configuration Tool for %s"
 #~ msgstr "运行 %s 的配置工具"
 
-# SUN NEW TRANSLATION
 #~ msgid ""
 #~ "Your current window manager has been changed. In order for\n"
 #~ "this change to be saved, you will need to save your current\n"
@@ -3191,15 +3018,12 @@ msgstr ""
 #~ "或者在注销时打开“保存当前设置”\n"
 #~ "均可实现此目的。\n"
 
-# SUN NEW TRANSLATION
 #~ msgid "Save Session Later"
 #~ msgstr "稍后保存会话"
 
-# SUN NEW TRANSLATION
 #~ msgid "Save Session Now"
 #~ msgstr "立即保存会话"
 
-# SUN NEW TRANSLATION
 #~ msgid ""
 #~ "Your current window manager has been changed. In order for\n"
 #~ "this change to be saved, you will need to save your current\n"
@@ -3217,7 +3041,6 @@ msgstr ""
 #~ msgid "Add New Window Manager"
 #~ msgstr "窗口管理器(_W)"
 
-# SUN NEW TRANSLATION
 #~ msgid "Cancel"
 #~ msgstr "取消"
 
@@ -3229,15 +3052,12 @@ msgstr ""
 #~ msgid "Command:"
 #~ msgstr "命令："
 
-# SUN NEW TRANSLATION
 #~ msgid "Window manager is session managed"
 #~ msgstr "窗口管理器受会话的管理"
 
-# SUN NEW TRANSLATION
 #~ msgid "Name cannot be empty"
 #~ msgstr "名称不能为空"
 
-# SUN NEW TRANSLATION
 #~ msgid "Command cannot be empty"
 #~ msgstr "命令不能为空"
 
@@ -3245,7 +3065,6 @@ msgstr ""
 #~ msgid "Edit Window Manager"
 #~ msgstr "窗口管理器(_W)"
 
-# SUN NEW TRANSLATION
 #~ msgid "You cannot delete the current Window Manager"
 #~ msgstr "不能删除当前的窗口管理器"
 
@@ -3317,11 +3136,9 @@ msgstr ""
 #~ msgid "At the center of the screen"
 #~ msgstr "配置此屏幕保护程序"
 
-# SUN NEW TRANSLATION
 #~ msgid "At the mouse pointer"
 #~ msgstr "在鼠标指针处"
 
-# SUN NEW TRANSLATION
 #~ msgid "Bottom"
 #~ msgstr "底部"
 
@@ -3333,35 +3150,27 @@ msgstr ""
 #~ msgid "Dialog buttons have icons"
 #~ msgstr "菜单项含有图标(_I)"
 
-# SUN NEW TRANSLATION
 #~ msgid "Dialogs"
 #~ msgstr "对话框"
 
-# SUN NEW TRANSLATION
 #~ msgid "Dialogs are treated"
 #~ msgstr "处理对话框"
 
-# SUN NEW TRANSLATION
 #~ msgid "Dialogs open"
 #~ msgstr "对话框打开"
 
-# SUN NEW TRANSLATION
 #~ msgid "Interface"
 #~ msgstr "界面"
 
-# SUN NEW TRANSLATION
 #~ msgid "Left"
 #~ msgstr "左"
 
-# SUN NEW TRANSLATION
 #~ msgid "Like any other window"
 #~ msgstr "像处理任何其它窗口一样"
 
-# SUN NEW TRANSLATION
 #~ msgid "Menu bars are detachable"
 #~ msgstr "菜单栏可分离"
 
-# SUN NEW TRANSLATION
 #~ msgid "Menu bars have a border"
 #~ msgstr "菜单栏有边框"
 
@@ -3369,7 +3178,6 @@ msgstr ""
 #~ msgid "Menu items have icons"
 #~ msgstr "菜单项含有图标(_I)"
 
-# SUN NEW TRANSLATION
 #~ msgid "Menus can be torn off"
 #~ msgstr "菜单可分开"
 
@@ -3377,19 +3185,15 @@ msgstr ""
 #~ msgid "Multiple Documents"
 #~ msgstr "文档"
 
-# SUN NEW TRANSLATION
 #~ msgid "Notebook tabs"
 #~ msgstr "笔记本选项卡"
 
-# SUN NEW TRANSLATION
 #~ msgid "Place dialogs over application window when possible"
 #~ msgstr "尽可能将对话框放在应用程序窗口上"
 
-# SUN NEW TRANSLATION
 #~ msgid "Progress bar is on the left"
 #~ msgstr "进度栏在左侧"
 
-# SUN NEW TRANSLATION
 #~ msgid "Progress bar is on the right"
 #~ msgstr "进度栏在右侧"
 
@@ -3397,7 +3201,6 @@ msgstr ""
 #~ msgid "Seperate windows"
 #~ msgstr "匹配的窗口"
 
-# SUN NEW TRANSLATION
 #~ msgid "Settings will not take effect until applications restart"
 #~ msgstr "设置将在应用程序重新启动后生效"
 
@@ -3409,15 +3212,12 @@ msgstr ""
 #~ msgid "Spread out"
 #~ msgstr "电子表格"
 
-# SUN NEW TRANSLATION
 #~ msgid "Status Bar"
 #~ msgstr "状态栏"
 
-# SUN NEW TRANSLATION
 #~ msgid "Status bar is interactive when possible"
 #~ msgstr "状态栏尽可能处于交互状态"
 
-# SUN NEW TRANSLATION
 #~ msgid "The same window"
 #~ msgstr "同一窗口"
 
@@ -3425,15 +3225,12 @@ msgstr ""
 #~ msgid "Tool Bars"
 #~ msgstr "工具栏"
 
-# SUN NEW TRANSLATION
 #~ msgid "Tool bar buttons are icons only"
 #~ msgstr "工具栏按钮只是图标"
 
-# SUN NEW TRANSLATION
 #~ msgid "Tool bar buttons are text below icons"
 #~ msgstr "工具栏按钮是图标下方的文本"
 
-# SUN NEW TRANSLATION
 #~ msgid "Tool bar buttons pop up on mouse over"
 #~ msgstr "工具栏按钮在鼠标滑过时弹出"
 
@@ -3453,19 +3250,15 @@ msgstr ""
 #~ msgid "Top"
 #~ msgstr "二"
 
-# SUN NEW TRANSLATION
 #~ msgid "Use status bar instead of dialog when possible"
 #~ msgstr "尽可能使用状态栏，而不要使用对话框"
 
-# SUN NEW TRANSLATION
 #~ msgid "When opening Multiple documents, use"
 #~ msgstr "当打开多个文档时，使用"
 
-# SUN NEW TRANSLATION
 #~ msgid "When using Notebook tabs, place the tabs on the"
 #~ msgstr "当使用笔记本选项卡时，将选项卡放置在如下对象之上"
 
-# SUN NEW TRANSLATION
 #~ msgid "Wherever the Window Manager places them"
 #~ msgstr "无论窗口管理器将它们放置在何处"
 
