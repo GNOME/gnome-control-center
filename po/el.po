@@ -17,7 +17,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.3.1\n"
-"POT-Creation-Date: 2001-01-13 17:12+0000\n"
+"POT-Creation-Date: 2001-03-02 23:36+0100\n"
 "PO-Revision-Date: 2001-02-18 23:12:25+0900\n"
 "Last-Translator: Simos Xenitellis <simos@hellug.gr>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
@@ -41,7 +41,7 @@ msgstr ""
 #: capplets/session-properties/session-properties.c:345
 #: capplets/theme-switcher/gui.c:368
 #: capplets/wm-properties/wm-properties-capplet.c:646
-#: new-control-center/capplet-dir-view.c:495
+#: new-control-center/capplet-dir-view.c:522
 msgid "Close"
 msgstr "Κλείσιμο"
 
@@ -2449,7 +2449,6 @@ msgstr ""
 #: capplets/wm-properties/wm-properties-capplet.c:859
 #: capplets/wm-properties/wm-properties-capplet.c:866
 #: capplets/wm-properties/wm-properties-capplet.c:1012
-#: root-manager/userdialogs.c:193
 msgid "OK"
 msgstr "Εντάξει"
 
@@ -2542,15 +2541,15 @@ msgstr ""
 "σφάλμα αρχικοποίησης κατά την εκκίνηση του 'wm-properties-capplet'.\n"
 "τερματισμός...\n"
 
-#: new-control-center/capplet-dir-view.c:289
+#: new-control-center/capplet-dir-view.c:321
 msgid "GNOME Control Center"
 msgstr "Κέντρο Ελέγχου GNOME"
 
-#: new-control-center/capplet-dir-view.c:290
+#: new-control-center/capplet-dir-view.c:322
 msgid "Desktop properties manager."
 msgstr "Διαχειρηστής ρυθμίσεων επιφάνειας εργασίας."
 
-#: new-control-center/capplet-dir-view.c:492
+#: new-control-center/capplet-dir-view.c:519
 msgid ""
 "No help is available/installed. Please make sure you\n"
 "have the GNOME User's Guide installed on your system."
@@ -2611,112 +2610,116 @@ msgstr "Λίστα Εικονιδίων"
 msgid "Tree"
 msgstr "Δέντρο"
 
-#: root-manager/root-manager.c:107
+#: root-manager/root-manager.c:110
 #, c-format
 msgid "Got error %d.\n"
 msgstr ""
 
-#: root-manager/root-manager.c:203
+#: root-manager/root-manager.c:206
 #, c-format
 msgid "Password for %s"
 msgstr ""
 
-#: root-manager/root-manager.c:398
+#: root-manager/root-manager.c:401
 msgid "Consistency checking is not turned on."
 msgstr ""
 
-#: root-manager/root-manager.c:400
+#: root-manager/root-manager.c:403
 msgid "Block is fine."
 msgstr ""
 
-#: root-manager/root-manager.c:402
+#: root-manager/root-manager.c:405
 msgid "Block freed twice."
 msgstr ""
 
-#: root-manager/root-manager.c:404
+#: root-manager/root-manager.c:407
 msgid "Memory before the block was clobbered."
 msgstr ""
 
-#: root-manager/root-manager.c:406
+#: root-manager/root-manager.c:409
 msgid "Memory after the block was clobbered."
 msgstr ""
 
-#: root-manager/root-manager.c:437
+#: root-manager/root-manager.c:440
 msgid "userhelper must be setuid root\n"
 msgstr ""
 
-#: root-manager/root-manager.c:548
+#: root-manager/root-manager.c:445 root-manager/root-manager.c:451
+msgid "Usage: root-helper fd\n"
+msgstr ""
+
+#: root-manager/root-manager.c:555
 #, c-format
 msgid "PAM returned = %d\n"
 msgstr ""
 
-#: root-manager/root-manager.c:549
+#: root-manager/root-manager.c:556
 #, c-format
 msgid "about to authenticate \"%s\"\n"
 msgstr ""
 
-#: root-manager/root-manager.c:625 root-manager/root-manager.c:693
+#: root-manager/root-manager.c:633 root-manager/root-manager.c:701
 #, c-format
 msgid "about to exec \"%s\"\n"
 msgstr ""
 
-#: root-manager/root-manager-wrap.c:49
+#: root-manager/root-manager-wrap.c:56
 msgid "Pipe error.\n"
 msgstr ""
 
-#: root-manager/root-manager-wrap.c:55
+#: root-manager/root-manager-wrap.c:62
 msgid "Cannot fork().\n"
 msgstr ""
 
-#: root-manager/root-manager-wrap.c:76 root-manager/root-manager-wrap.c:86
+#: root-manager/root-manager-wrap.c:83 root-manager/root-manager-wrap.c:93
 msgid "dup2() error.\n"
 msgstr ""
 
-#: root-manager/root-manager-wrap.c:116
+#: root-manager/root-manager-wrap.c:123
 #, c-format
 msgid "execl() error, errno=%d\n"
 msgstr ""
 
-#: root-manager/root-manager-wrap.c:145
+#: root-manager/root-manager-wrap.c:152
 msgid "Information updated."
 msgstr ""
 
-#: root-manager/root-manager-wrap.c:148
+#: root-manager/root-manager-wrap.c:155
 msgid ""
 "The password you typed is invalid.\n"
 "Please try again."
 msgstr ""
 
-#: root-manager/root-manager-wrap.c:151
+#: root-manager/root-manager-wrap.c:158
 msgid ""
 "One or more of the changed fields is invalid.\n"
 "This is probably due to either colons or commas in one of the fields.\n"
 "Please remove those and try again."
 msgstr ""
 
-#: root-manager/root-manager-wrap.c:154
+#: root-manager/root-manager-wrap.c:161
 msgid "Password resetting error."
 msgstr ""
 
-#: root-manager/root-manager-wrap.c:157
+#: root-manager/root-manager-wrap.c:164
 msgid ""
 "Some systems files are locked.\n"
 "Please try again in a few moments."
 msgstr ""
 
-#: root-manager/root-manager-wrap.c:160
+#: root-manager/root-manager-wrap.c:167
 msgid "Unknown user."
 msgstr "¶γνωστος χρήστης."
 
-#: root-manager/root-manager-wrap.c:163
+#: root-manager/root-manager-wrap.c:170
 msgid "Insufficient rights."
 msgstr ""
 
-#: root-manager/root-manager-wrap.c:166
+#: root-manager/root-manager-wrap.c:173
 msgid "Invalid call to sub process."
 msgstr ""
 
-#: root-manager/root-manager-wrap.c:169
+#: root-manager/root-manager-wrap.c:176
 msgid ""
 "Your current shell is not listed in /etc/shells.\n"
 "You are not allowed to change your shell.\n"
@@ -2724,59 +2727,56 @@ msgid ""
 msgstr ""
 
 #. well, this is unlikely to work either, but at least we tried...
-#: root-manager/root-manager-wrap.c:173
+#: root-manager/root-manager-wrap.c:180
 msgid "Out of memory."
 msgstr ""
 
-#: root-manager/root-manager-wrap.c:176
+#: root-manager/root-manager-wrap.c:183
 msgid "The exec() call failed."
 msgstr ""
 
-#: root-manager/root-manager-wrap.c:179
+#: root-manager/root-manager-wrap.c:186
 msgid "Failed to find selected program."
 msgstr ""
 
-#: root-manager/root-manager-wrap.c:182
+#: root-manager/root-manager-wrap.c:189
 msgid "Unknown error."
 msgstr "¶γνωστο σφάλμα."
 
-#: root-manager/root-manager-wrap.c:185
+#: root-manager/root-manager-wrap.c:192
 msgid "Unknown exit code."
 msgstr ""
 
-#: root-manager/root-manager-wrap.c:241
+#: root-manager/root-manager-wrap.c:280
 msgid "Input"
 msgstr ""
 
-#: root-manager/root-manager-wrap.c:350
+#: root-manager/root-manager-wrap.c:386
 #, c-format
 msgid "Need %d responses.\n"
 msgstr ""
 
-#: root-manager/root-manager-wrap.c:375
-#, c-format
+#: root-manager/root-manager-wrap.c:411
 msgid ""
-"In order to run \"%s\" with root's privileges, additional information is "
-"required."
+"In order to make changes to your system, you\n"
+"must enter the administrator (root) password."
 msgstr ""
 
-#: root-manager/root-manager-wrap.c:388 root-manager/userdialogs.c:81
+#: root-manager/root-manager-wrap.c:425
 msgid "Error"
 msgstr ""
 
-#: root-manager/root-manager-wrap.c:402
+#: root-manager/root-manager-wrap.c:439
 #, c-format
 msgid "You want %d response(s) from %d entry fields!?!?!\n"
 msgstr ""
 
-#: root-manager/userdialogs.c:35
-msgid "Message"
+#: root-manager/root-manager-wrap.c:445
+msgid "Run Unprivileged"
 msgstr ""
 
-#: root-manager/userdialogs.c:124 root-manager/userdialogs.c:126
-#: root-manager/userdialogs.c:185
-msgid "Prompt"
-msgstr "Προτροπή"
+#~ msgid "Prompt"
+#~ msgstr "Προτροπή"
 
 #~ msgid "Gradient"
 #~ msgstr "Διαβάθμιση"
