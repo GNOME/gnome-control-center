@@ -459,6 +459,8 @@ archive_set_current_location_id (Archive *archive, const gchar *locid)
 const gchar *
 archive_get_current_location_id (Archive *archive) 
 {
+	gboolean def;
+
 	g_return_val_if_fail (archive != NULL, NULL);
 	g_return_val_if_fail (IS_ARCHIVE (archive), NULL);
 
@@ -469,10 +471,16 @@ archive_get_current_location_id (Archive *archive)
 			gnome_config_push_prefix ("ximian-config/");
 
 		archive->current_location_id =
-			gnome_config_get_string
-			("config/current/location=default");
+			gnome_config_get_string_with_default
+			("config/current/location=default", &def);
 
 		gnome_config_pop_prefix ();
+
+		/* Create default location if it does not exist */
+		if (def && archive_get_location
+		    (archive, archive->current_location_id) == NULL)
+			location_new (archive, archive->current_location_id,
+				      NULL);
 	}
 
 	return archive->current_location_id;

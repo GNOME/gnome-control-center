@@ -55,6 +55,9 @@ static const gchar *location_id;
 
 static gchar *backend_id;
 
+static gboolean compare_parent;
+static gboolean mask_previous;
+
 static gchar *date_str;
 static gboolean all;
 static gchar *revision_id;
@@ -65,6 +68,8 @@ static gboolean show;
 static gchar *parent_str;
 static gchar *new_name;
 
+static gboolean contain_full;
+static gboolean contain_partial;
 static gboolean master;
 
 static struct poptOption archiver_operations[] = {
@@ -100,6 +105,14 @@ static struct poptOption global_options[] = {
         {NULL, '\0', 0, NULL, 0}
 };
 
+static struct poptOption store_options[] = {
+	{"compare-parent", '\0', POPT_ARG_NONE, &compare_parent, 0,
+	 N_("Store only the differences with the parent location's config")},
+	{"mask-previous", '\0', POPT_ARG_NONE, &mask_previous, 0,
+	 N_("Store only those settings set in the previous config")},
+	{NULL, '\0', 0, NULL, 0}
+};
+
 static struct poptOption rollback_options[] = {
 	{"date", 'd', POPT_ARG_STRING, &date_str, 0,
 	 N_("Date to which to roll back"), N_("DATE")},
@@ -127,18 +140,31 @@ static struct poptOption add_rename_location_options[] = {
 static struct poptOption add_remove_backend_options[] = {
 	{"master", '\0', POPT_ARG_NONE, &master, 0,
 	 N_("Add/remove this backend to/from the master backend list")},
+	{"full", '\0', POPT_ARG_NONE, &contain_full, 0,
+	 N_("Full containment")},
+	{"partial", '\0', POPT_ARG_NONE, &contain_partial, 0,
+	 N_("Partial containment")},
 	{NULL, '\0', 0, NULL, 0}
 };
 
 static void
 do_store (Location *location) 
 {
+	StoreType type;
+
 	if (!backend_id) {
-		g_message ("No backend specified");
+		fprintf (stderr, "No backend specified\n");
 		return;
 	}
 
-	location_store (location, backend_id, stdin);
+	if (mask_previous)
+		type = STORE_MASK_PREVIOUS;
+	else if (compare_parent)
+		type = STORE_COMPARE_PARENT;
+	else
+		type = STORE_FULL;
+
+	location_store (location, backend_id, stdin, type);
 }
 
 static void
@@ -152,7 +178,7 @@ do_rollback (Location *location)
 	else if (last || steps > 0)
 		date = NULL;
 	else if (!revision_id) {
-		g_message ("No date specified");
+		fprintf (stderr, "No date specified\n");
 		return;
 	}
 
@@ -181,9 +207,9 @@ do_rollback (Location *location)
 		if (id >= 0)
 			location_rollback_id (location, id);
 		else
-			g_message ("Bad id specified");
+			fprintf (stderr, "Bad id specified\n");
 	} else {
-		g_message ("No backend specified");
+		g_message ("No backend specified\n");
 		return;
 	}
 }
@@ -200,7 +226,8 @@ do_rename_location (Archive *archive, Location *location)
 	gboolean is_current;
 
 	if (new_name == NULL) {
-		g_message ("You did not specify a new name. Try --help");
+		fprintf (stderr,
+			 "You did not specify a new name. Try --help\n");
 	} else {
 		if (!strcmp (location_get_id (location),
 			     archive_get_current_location_id (archive)))
@@ -221,8 +248,20 @@ do_add_location (Archive *archive)
 	GtkObject *location;
 	Location *parent_location = NULL;
 
-	if (parent_str != NULL)
+	if (location_id == NULL) {
+		fprintf (stderr,
+			 "Error: You did not specify a location name\n");
+		return;
+	}
+
+	if (parent_str != NULL) {
 		parent_location = archive_get_location (archive, parent_str);
+
+		if (parent_location == NULL && !strcmp (parent_str, "default"))
+			parent_location =
+				location_new (archive, "default", NULL);
+	}
+
 	location = location_new (archive, location_id, parent_location);
 }
 
@@ -235,7 +274,20 @@ do_remove_location (Location *location)
 static void
 do_add_backend (Location *location) 
 {
-	location_add_backend (location, backend_id);
+	ContainmentType type;
+
+	if (contain_full && contain_partial) {
+		fprintf (stderr, "Error: Cannot have both full and partial "
+			 "containment\n");
+		return;
+	}
+	else if (contain_partial) {
+		type = CONTAIN_PARTIAL;
+	} else {
+		type = CONTAIN_FULL;
+	}
+
+	location_add_backend (location, backend_id, type);
 }
 
 static void
@@ -257,6 +309,8 @@ main (int argc, char **argv)
 				      _("Global archiver options"));
 	gnomelib_register_popt_table (archiver_operations, 
 				      _("Archiver commands"));
+	gnomelib_register_popt_table (store_options, 
+				      _("Options for storing data"));
 	gnomelib_register_popt_table (rollback_options, 
 				      _("Options for rolling back"));
 	gnomelib_register_popt_table (add_rename_location_options, 
@@ -272,24 +326,22 @@ main (int argc, char **argv)
 
 	archive = ARCHIVE (archive_load (global));
 
-	if (archive == NULL)
-		g_error ("Could not open archive");
-
-	if (location_id == NULL)
-		location_id = archive_get_current_location_id (archive);
+	if (archive == NULL) {
+		fprintf (stderr, "Could not open archive\n");
+		return -1;
+	}
 
 	if (!add_location) {
+		if (location_id == NULL)
+			location_id =
+				archive_get_current_location_id (archive);
+
 		location = archive_get_location (archive, location_id);
 
 		if (location == NULL) {
-			if (strcmp (location_id, "default")) {
-				g_message ("Could not open location");
-				return -1;
-			} else {
-				location = LOCATION
-					(location_new (archive, location_id,
-						       NULL));
-			}
+			fprintf (stderr, "Error: Could not open location %s\n",
+				 location_id);
+			return -1;
 		}
 	}
 

@@ -37,6 +37,9 @@ typedef struct _LocationClass LocationClass;
 typedef struct _LocationPrivate LocationPrivate;
 typedef struct _Archive Archive;
 
+typedef enum _ContainmentType ContainmentType;
+typedef enum _StoreType StoreType;
+
 typedef int (*LocationBackendCB) (Location *, gchar *, gpointer);
 
 struct _Location 
@@ -49,6 +52,16 @@ struct _Location
 struct _LocationClass 
 {
 	GtkObjectClass parent;
+};
+
+enum _ContainmentType
+{
+	CONTAIN_NONE, CONTAIN_PARTIAL, CONTAIN_FULL
+};
+
+enum _StoreType
+{
+	STORE_FULL, STORE_COMPARE_PARENT, STORE_MASK_PREVIOUS
 };
 
 guint location_get_type (void);
@@ -64,10 +77,12 @@ void location_delete               (Location *location);
 
 void location_store                (Location *location, 
 				    gchar *backend_id, 
-				    FILE *input);
+				    FILE *input,
+				    StoreType store_type);
 void location_store_xml            (Location *location, 
 				    gchar *backend_id, 
-				    xmlDocPtr xml_doc);
+				    xmlDocPtr xml_doc,
+				    StoreType store_type);
 
 void location_rollback_backend_to  (Location *location,
 				    struct tm *date, 
@@ -95,9 +110,15 @@ void location_dump_rollback_data   (Location *location,
 				    gchar *backend_id,
 				    gboolean parent_chain,
 				    FILE *output);
+xmlDocPtr location_load_rollback_data (Location *location,
+				       struct tm *date,
+				       guint steps,
+				       gchar *backend_id,
+				       gboolean parent_chain);
 
-gboolean location_contains         (Location *location, gchar *backend_id);
-gint location_add_backend          (Location *location, gchar *backend_id);
+ContainmentType location_contains  (Location *location, gchar *backend_id);
+gint location_add_backend          (Location *location, gchar *backend_id,
+				    ContainmentType type);
 void location_remove_backend       (Location *location, gchar *backend_id);
 
 void location_foreach_backend      (Location *location,

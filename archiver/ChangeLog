@@ -1,3 +1,88 @@
+2001-02-19  Bradford Hovinen  <hovinen@ximian.com>
+
+	* location.c (location_foreach_backend): Update to use BackendNote
+	(do_rollback): Don't do rollback if the doc is NULL
+	(location_store_xml): Return if this location does not contain the
+	backend specified
+	(location_store_xml): Use fprintf rather than g_warning
+	(subtract_xml_node): 
+	(merge_xml_nodes): Update child node while iterating
+
+	* config-log.c (config_log_get_rollback_ids_for_date): Remove
+
+	* location.c (location_set_arg): ref inherited object
+
+	* main.c (main): Don't check if the location is default; don't
+	create default location if non-existant
+	(main): Signal error if the user is adding a location and did not
+	specify a name
+	(main): Use fprintf to signal the error that a location could not
+	be opened
+	(main): Signal error and exit when archive cannot be opened,
+	rather than using g_error
+	(do_add_location): Check for NULL location_id
+	(do_add_location): Create default location if it does not exist
+	and it is specified as the parent
+
+	* archive.c (archive_get_current_location_id): Create the default
+	location if it does not exist
+
+	* backend-list.c (backend_list_contains): Use strcmp and iterate
+	through the list
+
+	* location.c (location_contains): Read whether the backend is in
+	the master list if this location is toplevel
+
+2001-02-18  Bradford Hovinen  <hovinen@ximian.com>
+
+	* main.c (do_add_backend): Support ContainmentType specification
+	(do_store): Support StoreType specification
+	(struct store_options): Add set of options to support
+	compare_parent, mask_previous, options
+	(struct add_remove_backend_options): Add option for partial
+	containment when adding backend
+
+	* location.c (subtract_xml_node):
+	(merge_xml_nodes):
+	(compare_xml_nodes):
+	(merge_xml_docs):
+	(subtract_xml_doc): Implement. XML node compare/merging operations
+	(location_store): Rewrite to call location_store_xml
+	(location_store_xml): Include support for diffing with
+	configuration data from parent config
+	(location_dump_rollback_data): Rewrite to use
+	location_load_rollback_data
+	(dump_xml_data): Remove
+	(do_rollback): Rewrite to use xmlDocDump; pass xmlDocPtr rather
+	than id number
+	(location_rollback_id): Add node merging support
+	(location_rollback_backend_by):
+	(location_rollback_backend_to): Rewrite to use
+	location_load_rollback_data
+	(location_rollback_backends_to): Rewrite to iterate through
+	backend list and call location_rollback_backend_to for each
+	element
+	(location_rollback_all_to): Ditto
+
+2001-02-14  Bradford Hovinen  <hovinen@ximian.com>
+
+	* location.h (_ContainmentType): Introduce. Specifies the type of
+	containment (full, partial, none), of a backend in a location
+
+	* location.c: Added struct BackendNote; have backend list include
+	type of containment as well as backend id
+	(location_contains): Use find_note
+	(find_note): Implement. Finds a note for the given backend id in
+	the backend list
+	(backend_note_new):
+	(backend_note_destroy): Implement. Convenience functions for
+	creating and destroying backend notes
+	(load_metadata_file):
+	(write_metadata_file): Read/write type of backend containment
+	(full or partial)
+	(location_add_backend): Pass parameter telling whether containment
+	is partial
+
 2001-01-25  Bradford Hovinen  <hovinen@ximian.com>
 
 	* config-log.c (get_current_date): Use local time rather than

@@ -284,54 +284,6 @@ config_log_get_rollback_id_for_date (ConfigLog *config_log,
 		return ((ConfigLogEntry *) node->data)->id;
 }
 
-/* Given a linked list of backend ids and a date, return an array of
- * ids corresponding to the most recent data written by each of the
- * backends prior to the given date. The array is in the same order as 
- * the backends and should be freed when done. If date is NULL, it is
- * assumed to be today.
- *
- * FIXME: This should really sort the ids by date.
- */
-
-gint *
-config_log_get_rollback_ids_for_date (ConfigLog *config_log,
-				      struct tm *date,
-				      GList *backend_ids) 
-{
-	GList *start_node, *node;
-	gint *id_array, i = 0;
-
-	g_return_val_if_fail (config_log != NULL, NULL);
-	g_return_val_if_fail (IS_CONFIG_LOG (config_log), NULL);
-	g_return_val_if_fail (backend_ids != NULL, NULL);
-
-	if (config_log->log_data == NULL)
-		config_log->log_data = 
-			load_next_log_entry (config_log, NULL);
-
-	if (date == NULL)
-		start_node = config_log->log_data;
-	else
-		start_node = find_config_log_entry_date (config_log,
-							 config_log->log_data,
-							 date);
-
-	id_array = g_new (gint, g_list_length (backend_ids));
-
-	for (; backend_ids; backend_ids = backend_ids->next) {
-		node = find_config_log_entry_backend (config_log, 
-						      start_node, 
-						      backend_ids->data);
-		if (!node)
-			id_array[i] = -1;
-		else
-			id_array[i] = ((ConfigLogEntry *) node->data)->id;
-		i++;
-	}
-
-	return id_array;
-}
-
 /* Return the rollback id that is the given number of steps back from the
  * current revision, or -1 if there is no such id
  */

@@ -25,6 +25,7 @@
 #  include <config.h>
 #endif
 
+#include <stdio.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <fcntl.h>
@@ -45,31 +46,41 @@ enum {
 	ARG_INHERITS
 };
 
-struct _LocationPrivate 
+/* Note about backend containment in this location */
+
+typedef struct _BackendNote BackendNote;
+
+struct _BackendNote 
 {
-	Archive *archive;
-	gchar *locid;
-	gchar *fullpath;
-	gchar *label;
-
-	Location *inherits_location;
-	GList *contains_list;
-	gboolean is_new;
-	gboolean contains_list_dirty;
-
-	ConfigLog *config_log;
+	gchar           *backend_id;
+	ContainmentType  type;
 };
 
-static void location_init (Location *location);
-static void location_class_init (LocationClass *klass);
+struct _LocationPrivate 
+{
+	Archive         *archive;
+	gchar           *locid;
+	gchar           *fullpath;
+	gchar           *label;
 
-static void location_set_arg (GtkObject *object,
-			      GtkArg *arg,
-			      guint arg_id);
+	Location        *inherits_location;
+	GList           *contains_list;      /* List of BackendNotes */
+	gboolean         is_new;
+	gboolean         contains_list_dirty;
 
-static void location_get_arg (GtkObject *object,
-			      GtkArg *arg,
-			      guint arg_id);
+	ConfigLog       *config_log;
+};
+
+static void location_init          (Location *location);
+static void location_class_init    (LocationClass *klass);
+
+static void location_set_arg       (GtkObject *object,
+				    GtkArg *arg,
+				    guint arg_id);
+
+static void location_get_arg       (GtkObject *object,
+				    GtkArg *arg,
+				    guint arg_id);
 
 static void location_destroy       (GtkObject *object);
 static void location_finalize      (GtkObject *object);
@@ -87,13 +98,25 @@ static void save_metadata          (Location *location);
 static void write_metadata_file    (Location *location, 
 				    gchar *filename);
 
-static gboolean do_rollback  (gchar *fullpath, 
-			      gchar *backend_id, 
-			      gint id);
-static gboolean dump_xml_data (gchar *fullpath, 
-			       gint id, 
-			       gint fd_output);
-static gint run_backend_proc (gchar *backend_id);
+static gboolean do_rollback        (gchar *backend_id, 
+				    xmlDocPtr xml_doc);
+static xmlDocPtr load_xml_data     (gchar *fullpath, gint id);
+static gint run_backend_proc       (gchar *backend_id);
+
+static BackendNote *backend_note_new (gchar *backend_id, 
+				      ContainmentType type);
+static void backend_note_destroy     (BackendNote *note);
+static const BackendNote *find_note  (Location *location, gchar *backend_id);
+
+static void merge_xml_docs         (xmlDocPtr child_doc,
+				    xmlDocPtr parent_doc);
+static void subtract_xml_doc       (xmlDocPtr child_doc,
+				    xmlDocPtr parent_doc,
+				    gboolean strict);
+static void merge_xml_nodes        (xmlNodePtr node1, xmlNodePtr node2);
+static xmlNodePtr subtract_xml_node (xmlNodePtr node1, xmlNodePtr node2,
+				     gboolean strict);
+static gboolean compare_xml_nodes  (xmlNodePtr node1, xmlNodePtr node2);
 
 guint
 location_get_type (void) 
@@ -198,6 +221,7 @@ location_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 					  (GTK_VALUE_POINTER (*arg)));
 			location->p->inherits_location =
 				GTK_VALUE_POINTER (*arg);
+			gtk_object_ref (GTK_VALUE_POINTER (*arg));
 		}
 	default:
 		break;
@@ -327,11 +351,16 @@ static void
 location_finalize (GtkObject *object) 
 {
 	Location *location;
+	GList *node;
 
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (IS_LOCATION (object));
 
 	location = LOCATION (object);
+
+	for (node = location->p->contains_list; node; node = node->next)
+		backend_note_destroy (node->data);
+	g_list_free (location->p->contains_list);
 
 	if (location->p->fullpath)
 		g_free (location->p->fullpath);
@@ -400,50 +429,40 @@ location_delete (Location *location)
  * @location: 
  * @backend_id: 
  * @input: 
+ * @store_type: STORE_FULL means blindly store the data, without
+ * modification. STORE_COMPARE_PARENT means subtract the settings the parent
+ * has that are different and store the result. STORE_MASK_PREVIOUS means
+ * store only those settings that are reflected in the previous logged data;
+ * if there do not exist such data, act as in STORE_COMPARE_PARENT
  * 
  * Store configuration data from the given stream in the location under the
  * given backend id
  **/
 
 void 
-location_store (Location *location, gchar *backend_id, FILE *input) 
+location_store (Location *location, gchar *backend_id, FILE *input,
+		StoreType store_type) 
 {
-	gint id;
-	FILE *output;
-	char buffer[16384];
-	char *filename;
-	size_t size;
+	xmlDocPtr doc;
+	char *buffer = NULL;
+	int len = 0;
 
 	g_return_if_fail (location != NULL);
 	g_return_if_fail (IS_LOCATION (location));
-	g_return_if_fail (location->p->config_log != NULL);
-	g_return_if_fail (IS_CONFIG_LOG (location->p->config_log));
-
-	if (!location_contains (location, backend_id)) {
-		if (!location->p->inherits_location)
-			g_warning ("Could not find a location in the " \
-				   "tree ancestry that stores this " \
-				   "backend.");
-		else
-			location_store (location->p->inherits_location,
-					backend_id, input);
-	}
-
-	id = config_log_write_entry (location->p->config_log, backend_id);
-
-	filename = g_strdup_printf ("%s/%08x.xml",
-				    location->p->fullpath, id);
-	output = fopen (filename, "w");
-	g_free (filename);
-
-	if (output == NULL) return;
 
 	while (!feof (input)) {
-		size = fread (buffer, sizeof (char), 16384, input);
-		fwrite (buffer, sizeof (char), size, output);
+		if (!len) buffer = g_new (char, 16384);
+		else buffer = g_renew (char, buffer, len + 16384);
+		fread (buffer + len, 1, 16384, input);
+		len += 16384;
 	}
 
-	fclose (output);
+	doc = xmlParseMemory (buffer, strlen (buffer));
+	g_free (buffer);
+
+	location_store_xml (location, backend_id, doc, store_type);
+
+	xmlFreeDoc (doc);
 }
 
 /**
@@ -451,30 +470,74 @@ location_store (Location *location, gchar *backend_id, FILE *input)
  * @location: 
  * @backend_id: 
  * @input: 
+ * @store_type: STORE_FULL means blindly store the data, without
+ * modification. STORE_COMPARE_PARENT means subtract the settings the parent
+ * has that are different and store the result. STORE_MASK_PREVIOUS means
+ * store only those settings that are reflected in the previous logged data;
+ * if there do not exist such data, act as in STORE_COMPARE_PARENT
  * 
  * Store configuration data from the given XML document object in the location
  * under the given backend id
  **/
 
 void 
-location_store_xml (Location *location, gchar *backend_id, xmlDocPtr xml_doc) 
+location_store_xml (Location *location, gchar *backend_id, xmlDocPtr xml_doc,
+		    StoreType store_type) 
 {
-	gint id;
+	gint id, prev_id = 0;
+	xmlDocPtr parent_doc, prev_doc = NULL;
 	char *filename;
+	ContainmentType contain_type;
 
 	g_return_if_fail (location != NULL);
 	g_return_if_fail (IS_LOCATION (location));
 	g_return_if_fail (location->p->config_log != NULL);
 	g_return_if_fail (IS_CONFIG_LOG (location->p->config_log));
 
-	if (!location_contains (location, backend_id)) {
+	contain_type = location_contains (location, backend_id);
+
+	if (contain_type == CONTAIN_NONE) {
 		if (!location->p->inherits_location)
-			g_warning ("Could not find a location in the " \
-				   "tree ancestry that stores this " \
-				   "backend.");
+			fprintf (stderr, "Could not find a location in the " \
+				 "tree ancestry that stores this " \
+				 "backend: %s.", backend_id);
 		else
 			location_store_xml (location->p->inherits_location,
-					    backend_id, xml_doc);
+					    backend_id, xml_doc, store_type);
+
+		return;
+	}
+
+	if (contain_type == CONTAIN_PARTIAL && store_type != STORE_FULL &&
+	    location->p->inherits_location != NULL)
+	{
+		g_assert (store_type == STORE_MASK_PREVIOUS ||
+			  store_type == STORE_COMPARE_PARENT);
+
+		parent_doc = location_load_rollback_data
+			(location->p->inherits_location, NULL, 0,
+			 backend_id, TRUE);
+
+		if (store_type == STORE_MASK_PREVIOUS) {
+			prev_id = config_log_get_rollback_id_by_steps
+				(location->p->config_log, 0, backend_id);
+
+			if (prev_id != -1)
+				prev_doc = load_xml_data
+					(location->p->fullpath, prev_id);
+		}
+
+		if (prev_id == -1 || store_type == STORE_COMPARE_PARENT) {
+			subtract_xml_doc (xml_doc, parent_doc, FALSE);
+		} else {
+			subtract_xml_doc (parent_doc, prev_doc, FALSE);
+			subtract_xml_doc (xml_doc, parent_doc, TRUE);
+		}
+
+		xmlFreeDoc (parent_doc);
+
+		if (prev_doc != NULL)
+			xmlFreeDoc (prev_doc);
 	}
 
 	id = config_log_write_entry (location->p->config_log, backend_id);
@@ -501,22 +564,15 @@ void
 location_rollback_backend_to (Location *location, struct tm *date, 
 			      gchar *backend_id, gboolean parent_chain) 
 {
-	gint id;
+	xmlDocPtr doc;
 
 	g_return_if_fail (location != NULL);
 	g_return_if_fail (IS_LOCATION (location));
-	g_return_if_fail (location->p->config_log != NULL);
-	g_return_if_fail (IS_CONFIG_LOG (location->p->config_log));
-	g_return_if_fail (backend_id != NULL);
 
-	id = config_log_get_rollback_id_for_date
-		(location->p->config_log, date, backend_id);
-
-	if (id != -1)
-		do_rollback (location->p->fullpath, backend_id, id);
-	else if (parent_chain && location->p->inherits_location != NULL)
-		location_rollback_backend_to (location->p->inherits_location,
-					      date, backend_id, TRUE);
+	doc = location_load_rollback_data (location, date, 0,
+					   backend_id, parent_chain);
+	do_rollback (backend_id, doc);
+	xmlFreeDoc (doc);
 }
 
 /**
@@ -528,13 +584,17 @@ location_rollback_backend_to (Location *location, struct tm *date,
  * 
  * Roll back the list of backends specified to the given date, optionally
  * chaining to the parent location. This destroys the list of backends given
+ *
+ * FIXME: To enforce some kind of ordering on backend application, just create
+ * a comparison function between backend ids that calls a BackendList method
+ * to see which item should go first, and then call g_list_sort with that on
+ * the backend list
  **/
 
 void 
 location_rollback_backends_to (Location *location, struct tm *date,
 			       GList *backends, gboolean parent_chain) 
 {
-	gint *id_array, i = 0;
 	GList *node;
 
 	g_return_if_fail (location != NULL);
@@ -542,26 +602,9 @@ location_rollback_backends_to (Location *location, struct tm *date,
 	g_return_if_fail (location->p->config_log != NULL);
 	g_return_if_fail (IS_CONFIG_LOG (location->p->config_log));
 
-	id_array = config_log_get_rollback_ids_for_date
-		(location->p->config_log, date, backends);
-
-	if (id_array == NULL) return;
-
-	for (node = backends; node; node = node->next) {
-		if (id_array[i] != -1) {
-			do_rollback (location->p->fullpath, node->data, 
-				     id_array[i]);
-			backends = g_list_remove_link (backends, node);
-		}
-
-		i++;
-	}
-
-	if (parent_chain && location->p->inherits_location != NULL)
-		location_rollback_backends_to (location->p->inherits_location,
-					       date, backends, TRUE);
-
-	g_free (id_array);
+	for (node = backends; node; node = node->next)
+		location_rollback_backend_to (location, date, node->data,
+					      parent_chain);
 }
 
 /**
@@ -578,29 +621,19 @@ void
 location_rollback_all_to (Location *location, struct tm *date, 
 			  gboolean parent_chain) 
 {
-	gint *id_array, i = 0;
 	GList *node;
+	BackendNote *note;
 
 	g_return_if_fail (location != NULL);
 	g_return_if_fail (IS_LOCATION (location));
 	g_return_if_fail (location->p->config_log != NULL);
 	g_return_if_fail (IS_CONFIG_LOG (location->p->config_log));
 
-	id_array = config_log_get_rollback_ids_for_date
-		(location->p->config_log, date, location->p->contains_list);
-
-	if (id_array == NULL) return;
-
 	for (node = location->p->contains_list; node; node = node->next) {
-		if (id_array[i] != -1)
-			do_rollback (location->p->fullpath, node->data, 
-				     id_array[i]);
-		i++;
+		note = node->data;
+		location_rollback_backend_to (location, date, note->backend_id,
+					      parent_chain);
 	}
-
-	if (parent_chain && location->p->inherits_location != NULL)
-		location_rollback_all_to (location->p->inherits_location,
-					  date, TRUE);
 }
 
 /**
@@ -617,22 +650,15 @@ void
 location_rollback_backend_by (Location *location, guint steps, 
 			      gchar *backend_id, gboolean parent_chain)
 {
-	gint id;
+	xmlDocPtr doc;
 
 	g_return_if_fail (location != NULL);
 	g_return_if_fail (IS_LOCATION (location));
-	g_return_if_fail (location->p->config_log != NULL);
-	g_return_if_fail (IS_CONFIG_LOG (location->p->config_log));
-	g_return_if_fail (backend_id != NULL);
 
-	id = config_log_get_rollback_id_by_steps
-		(location->p->config_log, steps, backend_id);
-
-	if (id != -1)
-		do_rollback (location->p->fullpath, backend_id, id);
-	else if (parent_chain && location->p->inherits_location != NULL)
-		location_rollback_backend_by (location->p->inherits_location,
-					      steps, backend_id, TRUE);
+	doc = location_load_rollback_data (location, NULL, steps,
+					   backend_id, parent_chain);
+	do_rollback (backend_id, doc);
+	xmlFreeDoc (doc);
 }
 
 /**
@@ -648,12 +674,28 @@ void
 location_rollback_id (Location *location, gint id) 
 {
 	gchar *backend_id;
+	struct tm *date;
+	xmlDocPtr xml_doc, parent_doc;
 
 	backend_id = config_log_get_backend_id_for_id
 		(location->p->config_log, id);
 
+	if (backend_id == NULL) return;
+
+	xml_doc = load_xml_data (location->p->fullpath, id);
+
+	if (location_contains (location, backend_id) == CONTAIN_PARTIAL) {
+		date = config_log_get_date_for_id
+			(location->p->config_log, id);
+		parent_doc = location_load_rollback_data
+			(location->p->inherits_location, date, 0,
+			 backend_id, TRUE);
+		merge_xml_docs (xml_doc, parent_doc);
+		xmlFreeDoc (parent_doc);
+	}
+
 	if (backend_id)
-		do_rollback (location->p->fullpath, backend_id, id);
+		do_rollback (backend_id, xml_doc);
 }
 
 /**
@@ -675,12 +717,47 @@ location_dump_rollback_data (Location *location, struct tm *date,
 			     guint steps, gchar *backend_id,
 			     gboolean parent_chain, FILE *output) 
 {
-	gint id;
+	xmlDocPtr doc;
 
 	g_return_if_fail (location != NULL);
 	g_return_if_fail (IS_LOCATION (location));
 	g_return_if_fail (location->p->config_log != NULL);
 	g_return_if_fail (IS_CONFIG_LOG (location->p->config_log));
+
+	doc = location_load_rollback_data (location, date, steps, backend_id,
+					   parent_chain);
+
+	if (doc != NULL) {
+		xmlDocDump (output, doc);
+		xmlFreeDoc (doc);
+	}
+}
+
+/**
+ * location_load_rollback_data
+ * @location:
+ * @date:
+ * @steps:
+ * @backend_id:
+ * @parent_chain:
+ *
+ * Loads the XML data for rolling back as specified and returns the document
+ * object
+ **/
+
+xmlDocPtr
+location_load_rollback_data (Location *location, struct tm *date,
+			     guint steps, gchar *backend_id,
+			     gboolean parent_chain)
+{
+	gint id;
+	xmlDocPtr doc = NULL, parent_doc = NULL;
+	ContainmentType type;
+
+	g_return_val_if_fail (location != NULL, NULL);
+	g_return_val_if_fail (IS_LOCATION (location), NULL);
+	g_return_val_if_fail (location->p->config_log != NULL, NULL);
+	g_return_val_if_fail (IS_CONFIG_LOG (location->p->config_log), NULL);
 
 	if (steps > 0)
 		id = config_log_get_rollback_id_by_steps
@@ -690,11 +767,22 @@ location_dump_rollback_data (Location *location, struct tm *date,
 			(location->p->config_log, date, backend_id);
 
 	if (id != -1)
-		dump_xml_data (location->p->fullpath, id, fileno (output));
-	else if (parent_chain && location->p->inherits_location != NULL)
-		location_dump_rollback_data (location->p->inherits_location,
-					     date, steps, backend_id,
-					     TRUE, output);
+		doc = load_xml_data (location->p->fullpath, id);
+
+	type = location_contains (location, backend_id);
+
+	if ((id == -1 || type == CONTAIN_PARTIAL) &&
+	    parent_chain && location->p->inherits_location != NULL)
+		parent_doc = location_load_rollback_data
+			(location->p->inherits_location,
+			 date, steps, backend_id, TRUE);
+
+	if (doc != NULL && parent_doc != NULL)
+		merge_xml_docs (doc, parent_doc);
+	else if (parent_doc != NULL)
+		doc = parent_doc;
+
+	return doc;
 }
 
 /**
@@ -704,22 +792,33 @@ location_dump_rollback_data (Location *location, struct tm *date,
  * 
  * Determine if a location specifies configuration for the given backend
  * 
- * Return value: TRUE iff the location specifies configuration for the given
- * backend, FALSE otherwise
+ * Return value: Containment type, as defined in the enum
  **/
 
-gboolean 
+ContainmentType
 location_contains (Location *location, gchar *backend_id) 
 {
-	GList *node;
+	BackendNote *note;
+	BackendList *list;
 
 	g_return_val_if_fail (location != NULL, FALSE);
 	g_return_val_if_fail (IS_LOCATION (location), FALSE);
 
-	for (node = location->p->contains_list; node; node = node->next)
-		if (!strcmp (node->data, backend_id)) return TRUE;
+	if (location->p->inherits_location == NULL) {
+		list = archive_get_backend_list (location->p->archive);
 
-	return FALSE;
+		if (backend_list_contains (list, backend_id))
+			return CONTAIN_FULL;
+		else
+			return CONTAIN_NONE;
+	} else {
+		note = find_note (location, backend_id);
+
+		if (note != NULL)
+			return note->type;
+		else
+			return CONTAIN_NONE;
+	}
 }
 
 /**
@@ -731,11 +830,12 @@ location_contains (Location *location, gchar *backend_id)
  * specifies configuration for that backend
  *
  * Returns: 0 on success, -1 if the location is toplevel, -2 if the backend is
- * not registered with the master list
+ * not registered with the master list, -3 if the type specified was "NONE"
  **/
 
 gint
-location_add_backend (Location *location, gchar *backend_id) 
+location_add_backend (Location *location, gchar *backend_id,
+		      ContainmentType type) 
 {
 	g_return_val_if_fail (location != NULL, -1);
 	g_return_val_if_fail (IS_LOCATION (location), -1);
@@ -743,13 +843,15 @@ location_add_backend (Location *location, gchar *backend_id)
 
 	if (location->p->inherits_location == NULL) return -1;
 
+	if (type == CONTAIN_NONE) return -3;
+
 	if (!backend_list_contains 
-	    (archive_get_backend_list (location->p->archive),
-	     backend_id))
+	    (archive_get_backend_list (location->p->archive), backend_id))
 		return -2;
 
 	location->p->contains_list =
-		g_list_append (location->p->contains_list, backend_id);
+		g_list_append (location->p->contains_list,
+			       backend_note_new (backend_id, type));
 	location->p->contains_list_dirty = TRUE;
 
 	return 0;
@@ -768,6 +870,7 @@ void
 location_remove_backend (Location *location, gchar *backend_id) 
 {
 	GList *node;
+	BackendNote *note;
 
 	g_return_if_fail (location != NULL);
 	g_return_if_fail (IS_LOCATION (location));
@@ -776,8 +879,10 @@ location_remove_backend (Location *location, gchar *backend_id)
 	if (location->p->inherits_location == NULL) return;
 
 	for (node = location->p->contains_list; node; node = node->next) {
-		if (!strcmp (node->data, backend_id)) {
-			g_free (node->data);
+		note = node->data;
+
+		if (!strcmp (note->backend_id, backend_id)) {
+			backend_note_destroy (note);
 			location->p->contains_list =
 				g_list_remove_link (location->p->contains_list,
 						    node);
@@ -925,13 +1030,16 @@ location_foreach_backend (Location *location, LocationBackendCB callback,
 			  gpointer data)
 {
 	GList *node;
+	BackendNote *note;
 
 	g_return_if_fail (location != NULL);
 	g_return_if_fail (IS_LOCATION (location));
 	g_return_if_fail (callback != NULL);
 
-	for (node = location->p->contains_list; node; node = node->next)
-		if (callback (location, (gchar *) node->data, data)) break;
+	for (node = location->p->contains_list; node; node = node->next) {
+		note = node->data;
+		if (callback (location, note->backend_id, data)) break;
+	}
 }
 
 /**
@@ -975,7 +1083,7 @@ get_backends_cb (BackendList *backend_list, gchar *backend_id,
 {
 	location->p->contains_list =
 		g_list_prepend (location->p->contains_list,
-				backend_id);
+				backend_note_new (backend_id, FALSE));
 	return 0;
 }
 
@@ -1073,8 +1181,10 @@ load_metadata_file (Location *location, char *filename, gboolean is_default)
 {
 	xmlDocPtr doc;
 	xmlNodePtr root_node, node;
-	char *inherits_str = NULL, *contains_str;
+	char *inherits_str = NULL, *contains_str, *type_str;
 	GList *list_head = NULL, *list_tail = NULL;
+	BackendNote *note;
+	ContainmentType type;
 
 	g_return_val_if_fail (location != NULL, FALSE);
 	g_return_val_if_fail (IS_LOCATION (location), FALSE);
@@ -1105,11 +1215,20 @@ load_metadata_file (Location *location, char *filename, gboolean is_default)
 		}
 		else if (!strcmp (node->name, "contains")) {
 			contains_str = xmlGetProp (node, "backend");
+			type_str = xmlGetProp (node, "type");
 
 			if (contains_str != NULL) {
-				contains_str = g_strdup (contains_str);
-				list_tail = g_list_append (list_tail, 
-							   contains_str);
+				if (!strcmp (type_str, "full"))
+					type = CONTAIN_FULL;
+				else if (!strcmp (type_str, "partial"))
+					type = CONTAIN_PARTIAL;
+				else {
+					type = CONTAIN_NONE;
+					g_warning ("Bad type attribute");
+				}
+
+				note = backend_note_new (contains_str, type);
+				list_tail = g_list_append (list_tail, note);
 				if (list_head == NULL)
 					list_head = list_tail;
 				else
@@ -1178,6 +1297,7 @@ write_metadata_file (Location *location, gchar *filename)
 	GList *node;
 	xmlDocPtr doc;
 	xmlNodePtr root_node, child_node;
+	BackendNote *note;
 
 	doc = xmlNewDoc ("1.0");
 	root_node = xmlNewDocNode (doc, NULL, "location", NULL);
@@ -1193,9 +1313,15 @@ write_metadata_file (Location *location, gchar *filename)
 		for (node = location->p->contains_list; node;
 		     node = node->next) 
 		{
+			note = node->data;
 			child_node = xmlNewChild (root_node, NULL, 
 						  "contains", NULL);
-			xmlNewProp (child_node, "backend", node->data);
+			xmlNewProp (child_node, "backend", note->backend_id);
+
+			if (note->type == CONTAIN_PARTIAL)
+				xmlNewProp (child_node, "type", "partial");
+			else if (note->type == CONTAIN_FULL)
+				xmlNewProp (child_node, "type", "full");
 		}
 	}
 
@@ -1213,38 +1339,37 @@ write_metadata_file (Location *location, gchar *filename)
  */
 
 static gboolean
-do_rollback (gchar *fullpath, gchar *backend_id, gint id) 
+do_rollback (gchar *backend_id, xmlDocPtr doc) 
 {
 	int fd;
+	FILE *output;
+
+	/* FIXME: Some mechanism for retrieving the factory defaults settings
+	 * would be useful here
+	 */
+	if (doc == NULL) return FALSE;
 
 	fd = run_backend_proc (backend_id);
 	if (fd == -1) return FALSE;
-	return dump_xml_data (fullpath, id, fd);
-}
 
-static gboolean
-dump_xml_data (gchar *fullpath, gint id, gint fd_output) 
-{
-	char *filename;
-	FILE *input;
-	char buffer[1024];
-	size_t size;
-
-	filename = g_strdup_printf ("%s/%08x.xml", fullpath, id);
-	input = fopen (filename, "r");
-	g_free (filename);
-
-	if (!input)
-		return FALSE;
-
-	while (!feof (input)) {
-		size = fread (buffer, sizeof (char), 1024, input);
-		write (fd_output, buffer, size);
-	}
-
-	close (fd_output);
+	output = fdopen (fd, "w");
+	xmlDocDump (output, doc);
+	fclose (output);
 
 	return TRUE;
+}
+
+static xmlDocPtr
+load_xml_data (gchar *fullpath, gint id) 
+{
+	char *filename;
+	xmlDocPtr xml_doc;
+
+	filename = g_strdup_printf ("%s/%08x.xml", fullpath, id);
+	xml_doc = xmlParseFile (filename);
+	g_free (filename);
+
+	return xml_doc;
 }
 
 /* Run the given backend and return the file descriptor used to write
@@ -1277,7 +1402,7 @@ run_backend_proc (gchar *backend_id)
 		args[2] = NULL;
 
 		if (!args[0]) {
-			g_warning ("Backend not in path");
+			g_warning ("Backend not in path: %s", backend_id);
 			exit (-1);
 		}
 			
@@ -1288,4 +1413,257 @@ run_backend_proc (gchar *backend_id)
 	} else {
 		return fd[1];
 	}
+}
+
+static BackendNote *
+backend_note_new (gchar *backend_id, ContainmentType type)
+{
+	BackendNote *note;
+
+	note = g_new0 (BackendNote, 1);
+	note->backend_id = g_strdup (backend_id);
+	note->type = type;
+
+	return note;
+}
+
+static void
+backend_note_destroy (BackendNote *note)
+{
+	g_free (note->backend_id);
+	g_free (note);
+}
+
+static const BackendNote *
+find_note (Location *location, gchar *backend_id)
+{
+	GList *node;
+
+	for (node = location->p->contains_list; node; node = node->next)
+		if (!strcmp (((BackendNote *)node->data)->backend_id,
+			     backend_id))
+			return node->data;
+
+	return NULL;
+}
+
+static void
+merge_xml_docs (xmlDocPtr child_doc, xmlDocPtr parent_doc)
+{
+	merge_xml_nodes (xmlDocGetRootElement (child_doc),
+			 xmlDocGetRootElement (parent_doc));
+}
+
+static void
+subtract_xml_doc (xmlDocPtr child_doc, xmlDocPtr parent_doc, gboolean strict) 
+{
+	subtract_xml_node (xmlDocGetRootElement (child_doc),
+			   xmlDocGetRootElement (parent_doc), strict);
+}
+
+/* Merge contents of node1 and node2, where node1 overrides node2 as
+ * appropriate
+ *
+ * Notes: Two XML nodes are considered to be "the same" iff their names and
+ * all names and values of their attributes are the same. If that is not the
+ * case, they are considered "different" and will both be present in the
+ * merged node. If nodes are "the same", then this algorithm is called
+ * recursively. If nodes are CDATA, then node1 overrides node2 and the
+ * resulting node is just node1. The node merging is order-independent; child
+ * node from one tree are compared with all child nodes of the other tree
+ * regardless of the order they appear in. Hence one may have documents with
+ * different node orderings and the algorithm should still run correctly. It
+ * will not, however, run correctly in cases when the agent using this
+ * facility depends on the nodes being in a particular order.
+ *
+ * This XML node merging/comparison facility requires that the following
+ * standard be set for DTDs:
+ *
+ * Attributes' sole purpose is to identify a node. For example, a network
+ * configuration DTD might have an element like <interface name="eth0"> with a
+ * bunch of child nodes to configure that interface. The attribute "name" does
+ * not specify the configuration for the interface. It differentiates the node
+ * from the configuration for, say, interface eth1. Conversely, a node must be
+ * completely identified by its attributes. One cannot include identification
+ * information in the node's children, since otherwise the merging and
+ * subtraction algorithms will not know what to look for.
+ *
+ * As a corollary to the above, all configuration information must ultimately
+ * be in text nodes. For example, a text string might be stored as
+ * <configuration-item>my-value</configuration-item> but never as
+ * <configuration-item value="my-value"/>. As an example, if the latter is
+ * used, a child location might override a parent's setting for
+ * configuration-item. This algorithm will interpret those as different nodes
+ * and include them both in the merged result, since it will not have any way
+ * of knowing that they are really the same node with different
+ * configuration.
+ */
+
+static void
+merge_xml_nodes (xmlNodePtr node1, xmlNodePtr node2) 
+{
+	xmlNodePtr child, tmp, iref;
+	GList *node1_children = NULL, *i;
+	gboolean found;
+
+	if (node1->type == XML_TEXT_NODE)
+		return;
+
+	for (child = node1->childs; child != NULL; child = child->next)
+		node1_children = g_list_prepend (node1_children, child);
+
+	node1_children = g_list_reverse (node1_children);
+
+	child = node2->childs;
+
+	while (child != NULL) {
+		tmp = child->next;
+
+		i = node1_children; found = FALSE;
+
+		while (i != NULL) {
+			iref = (xmlNodePtr) i->data;
+
+			if (compare_xml_nodes (iref, child)) {
+				merge_xml_nodes (iref, child);
+				if (i == node1_children)
+					node1_children = node1_children->next;
+				g_list_remove_link (node1_children, i);
+				g_list_free_1 (i);
+				found = TRUE;
+				break;
+			} else {
+				i = i->next;
+			}
+		}
+
+		if (found == FALSE) {
+			xmlUnlinkNode (child);
+			xmlAddChild (node1, child);
+		}
+
+		child = tmp;
+	}
+
+	g_list_free (node1_children);
+}
+
+/* Modifies node1 so that it only contains the parts different from node2;
+ * returns the modified node or NULL if the node should be destroyed
+ *
+ * strict determines whether the settings themselves are compared; it should
+ * be set to FALSE when the trees are being compared for the purpose of
+ * seeing what settings should be included in a tree and TRUE when one wants
+ * to restrict the settings included in a tree to those that have already been
+ * specified
+ */
+
+static xmlNodePtr
+subtract_xml_node (xmlNodePtr node1, xmlNodePtr node2, gboolean strict) 
+{
+	xmlNodePtr child, tmp, iref;
+	GList *node2_children = NULL, *i;
+	gboolean found, same, all_same;
+
+	if (node1->type == XML_TEXT_NODE) {
+		if (node2->type == XML_TEXT_NODE &&
+		    (strict || !strcmp (xmlNodeGetContent (node1),
+					xmlNodeGetContent (node2))))
+			return NULL;
+		else
+			return node1;
+	}
+
+	if (node1->childs == NULL && node2->childs == NULL)
+		return NULL;
+
+	for (child = node2->childs; child != NULL; child = child->next)
+		node2_children = g_list_prepend (node2_children, child);
+
+	node2_children = g_list_reverse (node2_children);
+
+	child = node1->childs;
+
+	while (child != NULL) {
+		tmp = child->next;
+		i = node2_children; found = FALSE; all_same = TRUE;
+
+		while (i != NULL) {
+			iref = (xmlNodePtr) i->data;
+
+			if (compare_xml_nodes (child, iref)) {
+				same = (subtract_xml_node
+					(child, iref, strict) == NULL);
+				all_same = all_same && same;
+
+				if (same) {
+					xmlUnlinkNode (child);
+					xmlFreeNode (child);
+				}
+
+				if (i == node2_children)
+					node2_children = node2_children->next;
+				g_list_remove_link (node2_children, i);
+				g_list_free_1 (i);
+				found = TRUE;
+				break;
+			} else {
+				i = i->next;
+			}
+		}
+
+		if (!found)
+			all_same = FALSE;
+
+		child = tmp;
+	}
+
+	g_list_free (node2_children);
+
+	if (all_same)
+		return NULL;
+	else
+		return node1;
+}
+
+/* Return TRUE iff node1 and node2 are "the same" in the sense defined above */
+
+static gboolean
+compare_xml_nodes (xmlNodePtr node1, xmlNodePtr node2) 
+{
+	xmlAttrPtr attr;
+	gint count = 0;
+
+	if (strcmp (node1->name, node2->name))
+		return FALSE;
+
+	/* FIXME: This is worst case O(n^2), which can add up. Could we
+	 * optimize for the case where people have attributes in the same
+	 * order, or does not not matter? It probably does not matter, though,
+	 * since people don't generally have more than one or two attributes
+	 * in a tag anyway.
+	 */
+
+	for (attr = node1->properties; attr != NULL; attr = attr->next) {
+		g_assert (xmlNodeIsText (attr->node));
+
+		if (strcmp (xmlNodeGetContent (attr->node),
+			    xmlGetProp (node2, attr->name)))
+			return FALSE;
+
+		count++;
+	}
+
+	/* FIXME: Is checking if the two nodes have the same number of
+	 * attributes the correct policy here? Should we instead merge the
+	 * attribute(s) that node1 is missing?
+	 */
+
+	for (attr = node2->properties; attr != NULL; attr = attr->next)
+		count--;
+
+	if (count == 0)
+		return TRUE;
+	else
+		return FALSE;
 }

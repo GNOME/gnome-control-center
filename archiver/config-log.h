@@ -67,10 +67,6 @@ void config_log_delete (ConfigLog *config_log);
 gint config_log_get_rollback_id_for_date    (ConfigLog *config_log,
 					     struct tm *date,
 					     gchar *backend_id);
-gint *config_log_get_rollback_ids_for_date  (ConfigLog *config_log,
-					     struct tm *date,
-					     GList *backend_ids);
-
 gint config_log_get_rollback_id_by_steps    (ConfigLog *config_log,
 					     guint steps,
 					     gchar *backend_id);

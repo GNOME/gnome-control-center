@@ -184,11 +184,17 @@ backend_list_new (gboolean is_global)
 gboolean
 backend_list_contains (BackendList *backend_list, gchar *backend_id)
 {
+	GList *node;
+
 	g_return_val_if_fail (backend_list != NULL, FALSE);
 	g_return_val_if_fail (IS_BACKEND_LIST (backend_list), FALSE);
 
-	return (g_list_find (backend_list->p->backend_ids, backend_id) !=
-		NULL);
+	for (node = backend_list->p->backend_ids; node != NULL;
+	     node = node->next)
+		if (!strcmp (node->data, backend_id))
+			return TRUE;
+
+	return FALSE;
 }
 
 /**
