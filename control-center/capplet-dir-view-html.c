@@ -23,6 +23,7 @@
 
 #include <config.h>
 #include <gtkhtml/gtkhtml.h>
+#include <gal/widgets/e-unicode.h>
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -66,6 +67,7 @@ handle_url_cb (GtkHTML *html, const gchar *url, GtkHTMLStream *stream, CappletDi
 	char buf[BUFLEN];
 	int fd;
 	ssize_t s;
+	char *utfs;
 
 	fd = open (url, O_RDONLY);
 	if (fd == -1)
@@ -82,7 +84,9 @@ handle_url_cb (GtkHTML *html, const gchar *url, GtkHTMLStream *stream, CappletDi
 			gtk_html_end (html, stream, GTK_HTML_STREAM_OK);
 			return;
 		default:
-			gtk_html_write (html, stream, buf, s);
+			utfs = e_utf8_from_locale_string_sized (buf, s);
+			gtk_html_write (html, stream, utfs, strlen(utfs));
+			g_free (utfs);
 			break;
 		}
 	}
@@ -107,7 +111,7 @@ handle_link_cb (GtkHTML *html, const gchar *url, CappletDirView *view)
 static void
 write_parent_html (CappletDir *dir, GtkHTML *html, GtkHTMLStream *stream)
 {
-	char *s;
+	char *s, *utfs;
 
 	if (!dir)
 		return;
@@ -117,8 +121,11 @@ write_parent_html (CappletDir *dir, GtkHTML *html, GtkHTMLStream *stream)
 
 	write_parent_html (dir->entry.dir, html, stream);
 
+	utfs = e_utf8_from_locale_string (dir->entry.label);
 	s = g_strdup_printf ("%s <a href=\"%s\">%s</a>", dir->entry.dir ? " |" : "", 
-			     dir->entry.path, dir->entry.label);
+			     dir->entry.path, utfs);
+	g_free (utfs);
+	
 	gtk_html_write (html, stream, s, strlen (s));
 	g_free (s);	
 }
@@ -133,11 +140,14 @@ header_populate (CappletDirView *view)
 {
 	GtkHTMLStream *stream;
 	HtmlViewData *data;
-	char *s;
+	char *s, *utf_title, *utf_path;
 
 	data = view->view_data;
 	stream = gtk_html_begin (data->top);
 
+	utf_title = e_utf8_from_locale_string (_("GNOME Control Center:"));
+	utf_path = e_utf8_from_locale_string (CAPPLET_DIR_ENTRY (view->capplet_dir)->label);
+	
 	s = g_strdup_printf (
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">"
 "<html>"
@@ -146,8 +156,10 @@ header_populate (CappletDirView *view)
 "<body background=\"" ART_DIR "/bcg_top.png\" marginheight=\"0\" marginwidth=\"0\">"
 "<table border=\"0\" width=\"100%%\" cellspacing=\"0\" cellpadding=\"0\"><tr valign=\"center\"><td width=\"48\"><img src=\"" ART_DIR "/title.png\" alt=\"\" width=\"48\" height=\"48\"></td>"
 "<td><b><font face=\"Trebuchet MS CE,Trebuchet MS, Verdana CE, Verdana, Sans-Serif CE, Sans-Serif\" color=\"white\" size=\"+2\">%s&nbsp;&nbsp;&nbsp;</font></b><font face=\"Trebuchet MS CE,Trebuchet MS, Verdana CE, Verdana, Sans-Serif CE, Sans-Serif\" color=\"white\" align=\"left\" valign=\"center\">%s</font></td></tr></table>"
-"</body></html>",
-	_("GNOME Control Center:"), CAPPLET_DIR_ENTRY (view->capplet_dir)->label);
+"</body></html>", utf_title, utf_path);
+	g_free (utf_title);
+	g_free (utf_path);
+	
 	gtk_html_write (data->top, stream, s, strlen (s));
 	g_free (s);
 
@@ -183,12 +195,13 @@ sidebar_populate (CappletDirView *view)
 	HtmlViewData *data;
 	CappletDirEntry *entry;
 	GSList *item;
-	char *s;
+	char *s, *utfs;
 
 	data = view->view_data;
 	
 	stream = gtk_html_begin (data->sidebar);
 
+	utfs = e_utf8_from_locale_string (CAPPLET_DIR_ENTRY (data->root_dir)->label);
 	s = g_strdup_printf (
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">"
 "<html>"
@@ -198,7 +211,8 @@ sidebar_populate (CappletDirView *view)
 "<body bgcolor=\"#d9d9d9\" marginheight=\"0\" marginwidth=\"0\">"
 "<table border=\"0\" width=\"100%%\" cellspacing=\"1\" cellpadding=\"4\">"
 "<tr><td colspan=\"3\">&nbsp;</td></tr>"
-"<tr valign=\"center\"><td width=\"48\"><a href=\"%s\"><img src=\"%s\" alt=\"\" border=\"0\" align=\"center\"/></a></td><td><a href=\"%s\"><b>%s</b></a></td><td width=\"8\"><img src=\"%s\" alt=\"\" border=\"0\" align=\"right\"></tr>", CAPPLET_DIR_ENTRY (data->root_dir)->path, CAPPLET_DIR_ENTRY (data->root_dir)->icon, CAPPLET_DIR_ENTRY (data->root_dir)->path, CAPPLET_DIR_ENTRY (data->root_dir)->label, (data->root_dir == view->capplet_dir) ? ART_DIR "/active.png" : ART_DIR "/blank.png");
+"<tr valign=\"center\"><td width=\"48\"><a href=\"%s\"><img src=\"%s\" alt=\"\" border=\"0\" align=\"center\"/></a></td><td><a href=\"%s\"><b>%s</b></a></td><td width=\"8\"><img src=\"%s\" alt=\"\" border=\"0\" align=\"right\"></tr>", CAPPLET_DIR_ENTRY (data->root_dir)->path, CAPPLET_DIR_ENTRY (data->root_dir)->icon, CAPPLET_DIR_ENTRY (data->root_dir)->path, utfs, (data->root_dir == view->capplet_dir) ? ART_DIR "/active.png" : ART_DIR "/blank.png");
+	g_free (utfs);
 	gtk_html_write (data->sidebar, stream, s, strlen (s));
 	g_free (s);
 
@@ -209,7 +223,10 @@ sidebar_populate (CappletDirView *view)
 		if (total_num_items (CAPPLET_DIR (entry)->entries) < 1)
 			continue;
 
-		s = g_strdup_printf ("<tr valign=\"center\"><td width=\"48\"><a href=\"%s\"><img src=\"%s\" alt=\"\" border=\"0\" align=\"center\"/></a></td><td><a href=\"%s\"><b>%s</b></a></td><td width=\"8\"><img src=\"%s\" alt=\"\" border=\"0\" align=\"center\"></tr>", entry->path, entry->icon, entry->path, entry->label, (CAPPLET_DIR (entry) == view->capplet_dir) ? ART_DIR "/active.png" : ART_DIR "/blank.png");
+		utfs = e_utf8_from_locale_string (entry->label);
+		
+		s = g_strdup_printf ("<tr valign=\"center\"><td width=\"48\"><a href=\"%s\"><img src=\"%s\" alt=\"\" border=\"0\" align=\"center\"/></a></td><td><a href=\"%s\"><b>%s</b></a></td><td width=\"8\"><img src=\"%s\" alt=\"\" border=\"0\" align=\"center\"></tr>", entry->path, entry->icon, entry->path, utfs, (CAPPLET_DIR (entry) == view->capplet_dir) ? ART_DIR "/active.png" : ART_DIR "/blank.png");
+		g_free (utfs);
 		gtk_html_write (data->sidebar, stream, s, strlen (s));
 		g_free (s);
 	}
@@ -225,7 +242,7 @@ html_write_row (GtkHTML *html, GtkHTMLStream *stream, GSList *list, int the_max)
 {
 	CappletDirEntry *entry;
 	int i;
-	char *s;
+	char *s, *utfs;
 	GSList *item;
 	
 	g_return_val_if_fail (list != NULL, NULL);
@@ -258,7 +275,9 @@ html_write_row (GtkHTML *html, GtkHTMLStream *stream, GSList *list, int the_max)
 		entry = CAPPLET_DIR_ENTRY (item->data);
 		if (entry->type != TYPE_CAPPLET)
 			continue;
-		s = g_strdup_printf ("<td><center><a href=\"%s\">%s</a></center></td><td><img src=\"" ART_DIR "/blank.png\" height=\"1\" width=\"8\"></td>", entry->path, entry->label);
+		utfs = e_utf8_from_locale_string (entry->label);
+		s = g_strdup_printf ("<td><center><a href=\"%s\">%s</a></center></td><td><img src=\"" ART_DIR "/blank.png\" height=\"1\" width=\"8\"></td>", entry->path, utfs);
+		g_free (utfs);
 		gtk_html_write (html, stream, s, strlen (s));
 		g_free (s);
 
@@ -360,6 +379,8 @@ html_create (CappletDirView *view)
 	vbox = gtk_vbox_new (FALSE, 0);
 	/* top widget */
 	data->top = GTK_HTML (gtk_html_new ());
+	gtk_html_set_default_content_type (GTK_HTML (data->top),
+					   "text/html; charset=utf-8");
 	sw = gtk_scrolled_window_new (NULL, NULL);
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
 					GTK_POLICY_NEVER,
@@ -373,6 +394,8 @@ html_create (CappletDirView *view)
 
 	/* sidebar */
 	data->sidebar = GTK_HTML (gtk_html_new ());
+	gtk_html_set_default_content_type (GTK_HTML (data->sidebar),
+					   "text/html; charset=utf-8");
 	sw = gtk_scrolled_window_new (NULL, NULL);
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
 					GTK_POLICY_NEVER,
@@ -383,6 +406,8 @@ html_create (CappletDirView *view)
 
 	/* main widget */
 	data->main = GTK_HTML (gtk_html_new ());
+	gtk_html_set_default_content_type (GTK_HTML (data->main),
+					   "text/html; charset=utf-8");
 	sw = gtk_scrolled_window_new (NULL, NULL);
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
 					GTK_POLICY_NEVER,

@@ -43,7 +43,7 @@ static gint
 real_launch_control (gchar *capplet)
 {
 	GtkWidget *app;
-	if ((app = capplet_control_launch (capplet, _("Configuraiton"))) == NULL)
+	if ((app = capplet_control_launch (capplet, _("Configuration"))) == NULL)
 	{
 		gtk_main_quit ();
 		return FALSE;
