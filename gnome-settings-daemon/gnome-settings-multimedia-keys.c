@@ -814,33 +814,36 @@ do_action (int type, Acme *acme)
 	}
 }
 
+static GdkScreen *
+acme_get_screen_from_event (Acme *acme, XAnyEvent *xanyev)
+{
+	GdkWindow *window;
+	GdkScreen *screen;
+	GSList *l;
+
+	/* Look for which screen we're receiving events */
+	for (l = acme->screens; l != NULL; l = l->next)
+	{
+		screen = (GdkScreen *) l->data;
+		window = gdk_screen_get_root_window (screen);
+
+		if (GDK_WINDOW_XID (window) == xanyev->window)
+		{
+			return screen;
+		}
+	}
+
+	return NULL;
+}
+
 static GdkFilterReturn
 acme_filter_events (GdkXEvent *xevent, GdkEvent *event, gpointer data)
 {
 	Acme *acme = (Acme *) data;
 	XEvent *xev = (XEvent *) xevent;
 	XAnyEvent *xanyev = (XAnyEvent *) xevent;
-	GdkScreen *event_screen = NULL;
 	guint keycode, state;
-	GSList *l;
 	int i;
-
-	/* Look for which screen we're receiving events */
-	for (l = acme->screens; (l != NULL) && (event_screen == NULL);
-	     l = l->next)
-	{
-		GdkWindow *window;
-		GdkScreen *screen;
-
-		screen = (GdkScreen *) l->data;
-		window = gdk_screen_get_root_window (screen);
-
-		if (GDK_WINDOW_XID (window) == xanyev->window)
-		{
-			event_screen = screen;
-			break;
-		}
-	}
 
 	keycode = xev->xkey.keycode;
 	state = xev->xkey.state;
@@ -869,7 +872,8 @@ acme_filter_events (GdkXEvent *xevent, GdkEvent *event, gpointer data)
 					return GDK_FILTER_CONTINUE;
 			}
 
-			acme->current_screen = event_screen;
+			acme->current_screen = acme_get_screen_from_event
+				(acme, xanyev);
 
 			do_action (keys[i].key_type, acme);
 			return GDK_FILTER_REMOVE;
@@ -890,7 +894,7 @@ gnome_settings_multimedia_keys_init (GConfClient *client)
 	acme->conf_client = client;
 
 	glade_gnome_init ();
-	acme->xml = glade_xml_new (DATADIR "control-center-2.0/interfaces/acme.glade", NULL, NULL);
+	acme->xml = glade_xml_new (DATADIR "/control-center-2.0/interfaces/acme.glade", NULL, NULL);
 
 	if (acme->xml == NULL) {
 		acme_error (_("Couldn't load the Glade file.\n"

@@ -72,7 +72,7 @@ static struct {
 	{ SLEEP_KEY, GCONF_BINDING_DIR "/sleep", NULL },
 	{ SCREENSAVER_KEY, GCONF_BINDING_DIR "/screensaver", NULL },
 	{ HELP_KEY, GCONF_BINDING_DIR "/help", NULL },
-	{ WWW_KEY, GCONF_BINDING_DIR "/www_key_str", NULL },
+	{ WWW_KEY, GCONF_BINDING_DIR "/www", NULL },
 #ifdef USE_FBLEVEL
 	{ BRIGHT_DOWN_KEY, GCONF_BINDING_DIR "/brightness_down", NULL },
 	{ BRIGHT_UP_KEY, GCONF_BINDING_DIR "/brightness_up", NULL },

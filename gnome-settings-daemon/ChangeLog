@@ -1,3 +1,12 @@
+2004-01-14  Bastien Nocera  <hadess@hadess.net>
+
+	* Makefile.am: fix compilation with FB Level enabled
+	* actions/acme.h: fix a stupid typo that made the WWW key not work
+	* gnome-settings-multimedia-keys.c: (acme_get_screen_from_event),
+	(acme_filter_events), (gnome_settings_multimedia_keys_init):
+	only get the current screen if we actually need to, fix locating the
+	glade file when compiling with a prefix not ending in '/'
+
 2004-01-13  Bastien Nocera  <hadess@hadess.net>
 
 	* gnome-settings-multimedia-keys.c: (acme_filter_events): let's
