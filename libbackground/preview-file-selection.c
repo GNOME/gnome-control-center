@@ -132,8 +132,8 @@ preview_file_selection_intelligent_scale (GdkPixbuf *buf, guint scale)
 {
 	GdkPixbuf *scaled;
 	int w, h;
-	int ow = gdk_pixbuf_get_width (buf);
-	int oh = gdk_pixbuf_get_height (buf);
+	guint ow = gdk_pixbuf_get_width (buf);
+	guint oh = gdk_pixbuf_get_height (buf);
 
 	if (ow <= scale && oh <= scale)
 		scaled = gdk_pixbuf_ref (buf);
