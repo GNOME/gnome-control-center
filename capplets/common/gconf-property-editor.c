@@ -1070,8 +1070,13 @@ gconf_peditor_widget_set_guard (GConfPropertyEditor *peditor,
 	client = gconf_client_get_default ();
 	
 	value = gconf_client_get (client, peditor->p->key, NULL);
-	gtk_widget_set_sensitive (widget, guard_get_bool (peditor, value));
-	gconf_value_free (value);
+
+	if (value) {
+		gtk_widget_set_sensitive (widget, guard_get_bool (peditor, value));
+        	gconf_value_free (value);
+	} else {
+                g_warning ("NULL GConf value: %s: possibly incomplete setup", peditor->p->key);
+	}
 
 	g_signal_connect (G_OBJECT (peditor), "value-changed", (GCallback) guard_value_changed, widget);
 }
