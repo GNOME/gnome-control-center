@@ -1,3 +1,4 @@
+# translation of gnome-control-center.HEAD.he.po to Hebrew
 # translation of gnome-control-center.gnome-2-0.he.po to Hebrew
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
@@ -5,29 +6,28 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-control-center.gnome-2-0.he\n"
-"POT-Creation-Date: 2002-11-30 05:40+0100\n"
-"PO-Revision-Date: 2002-10-19 21:04+0200\n"
+"Project-Id-Version: gnome-control-center.HEAD.he\n"
+"POT-Creation-Date: 2002-12-09 06:06+0100\n"
+"PO-Revision-Date: 2002-12-09 23:14+0200\n"
 "Last-Translator: Gil 'Dolfin' Osher <dolfin@rpg.org.il>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.0beta2\n"
+"X-Generator: KBabel 1.0\n"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:229
-#: capplets/keyboard/gnome-keyboard-properties.c:159
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:237
 #, c-format
-msgid "There was an error launching the keyboard capplet : %s"
-msgstr "ארעה שגיאה בהפעלת יישומון הבקרה מקלדת: %s"
+msgid "There was an error launching the mouse preferences dialog: %s"
+msgstr "ארעה שגיאה בהפעלת דו-שיח העדפות העכבר: %s"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:321
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:379
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:331
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:389
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "לא ניתן לייבא את הגדרות גישה מהקובץ '%s'"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:452
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:462
 msgid "Select CDE AccessX file"
 msgstr "בחר קובץ גישה CDE"
 
@@ -41,150 +41,194 @@ msgstr "מקלדת"
 msgid "Set your keyboard accessibility preferences"
 msgstr "קבע את העדפות נגישות המקלדת שלך"
 
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.c:57
+msgid ""
+"This system does not seem to have the XKB extension.  The keyboard "
+"accessibility features will not operate with it."
+msgstr ""
+"לא נראה כי למערכת יש את התוספת XKB.  אפשרויות נגישות "
+"המקלדת לא יפעלו."
+
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:1
+#: capplets/file-types/file-types-properties.glade.h:1
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:1
+#: capplets/network/gnome-network-preferences.glade.h:2
+#: capplets/theme-switcher/theme-properties.glade.h:1
+#: capplets/theme-switcher/theme-install.glade.h:1
+msgid "*"
+msgstr "*"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
+msgid "Basic"
+msgstr "בסיסי"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
+msgid "Beep if key is re_jected"
+msgstr "צפצף אם מקש _נדחה"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
+msgid "Beep when _features turned on or off from keyboard"
+msgstr "צפצף כאשר _אפשרויות מודלקות או מכובות מהמקלדת"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
+msgid "Beep when _modifier is pressed"
+msgstr "צפצף כאשר _משנה נלחץ"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
 msgid "Beep when an LED is turned on and two beeps when one is turned off."
 msgstr "צפצוף כשנורה נדלקת ושני צפצופים כשנורה נכבת."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
-msgid "Beep when enabling/disabling _keyboard accessibility features"
-msgstr "צפצף כאשר מאפשרים/מכבים אפשרויוץ נגישות _מקלדת"
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
+msgid "Beep when key is:"
+msgstr "צפצף כאשר המקש הוא:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
-msgid "Beep when key is re_jected"
-msgstr "צפצף כאשר מקש _נדחה"
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
+msgid "Del_ay:"
+msgstr "ה_שהייה:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
-msgid "Beep when:"
-msgstr "צפצף כאשר:"
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
+msgid "Delay between keypress and pointer mo_vement:"
+msgstr "השהייה בים לחיצת מקש לבין _תזוזת העכבר:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
+msgid "Disa_ble if two keys pressed together"
+msgstr "כ_בה אם שני מקשים נלחצים יחד"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:11
 msgid "E_nable Toggle Keys"
 msgstr "_אפשר מקשים מוארכים"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:12
 msgid "Enable Bo_unce Keys"
 msgstr "אפשר מקשים קופצים"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:13
 msgid "Enable Slo_w Keys"
 msgstr "אפשר מקשים אי_טיים"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
 msgid "Enable _Mouse Keys"
 msgstr "אפשר מקשי _עכבר"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
 msgid "Enable _Sticky Keys"
 msgstr "אפשר מקשים _דביקים"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
-msgid "General"
-msgstr "כללי"
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:16
+msgid "Features"
+msgstr "אפשרויות"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:11
-msgid "I_gnore keypresses within  :"
-msgstr "ה_תעלם מלחיצות מקש בתוך  :"
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:17
+msgid "Filters"
+msgstr "מסננים"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:12
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:18
+msgid "I_gnore duplicate keypresses within:"
+msgstr "ה_תעלם מלחיצות מקש כפולות תוך:"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:19
 msgid ""
 "Ignore all subsequent presses of the SAME key if they happen within a user "
 "selectable period of time."
-msgstr ""
-"התעלם מכל הלחיצות הרצופות על אותו המקש, אם הן מתרחשות בפרק הזמן שבחר המשתמש."
+msgstr "התעלם מכל הלחיצות הרצופות על אותו המקש, אם הן מתרחשות בפרק הזמן שבחר המשתמש."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:13
-msgid "Keyboard Accessibility Configuration (AccessX)"
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:20
+msgid "Keyboard Accessibility Preferences (AccessX)"
 msgstr "הגדרות נגישות מקלדת (AccessX)"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
-msgid "Ma_ximum pointer speed :"
-msgstr "מהירות סמן מ_קסימלית :"
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:21
+msgid "Ma_ximum pointer speed:"
+msgstr "מהירות סמן מ_קסימלית:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:22
+#: capplets/mouse/mouse.desktop.in.h:1
+msgid "Mouse"
+msgstr "עכבר"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:23
+msgid "Mouse _Preferences..."
+msgstr "_העדפות עכבר..."
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
 msgid ""
 "Only accept keys after they have been pressed and held for a user adjustable "
 "amount of time."
 msgstr "קבל מקשים רק לאחר שהם נלחצו והוחזקו בפרק הזמן שבחר המשתמש."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:16
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
 msgid ""
 "Perform multiple simultaneous key press operations by pressing modifier keys "
 "in sequence."
 msgstr ""
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:17
-msgid "Repeat Key Pre_ferences"
-msgstr "הע_דפות חזרת מקש"
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
+msgid "S_peed:"
+msgstr "_מהירות:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:18
-msgid "Start mo_ving this long after keypress :"
-msgstr "התחל ל_זוז בכזה זמן לאחר לחיצת המקש :"
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
+msgid "Time to acce_lerate to maximum speed:"
+msgstr "זמן ה_אצה למהירות המקסימלית:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:19
-msgid "Testing Area"
-msgstr "אזור בדיקה"
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:28
+msgid "Toggle Keys"
+msgstr ""
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:20
-msgid "Time to acce_lerate to max speed :"
-msgstr "זמן ה_אצה למהירות המקסימלית :"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:21
-msgid "Toggle and Repeat Keys"
-msgstr "מקשים מוארכים וחוזרים"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:22
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
 msgid "Turn the numeric keypad into a mouse control pad."
 msgstr "הפוך את לוח המקשים הספרתי ללוח בקרת עכבר."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:23
-msgid "_Beep when modifier is pressed"
-msgstr "_צפצף כאשר משנה נלחץ"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
-msgid "_Disable if unused for "
-msgstr "_כבה אם לא בשימוש ל"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
-msgid "_Enable keyboard accessibility"
-msgstr "_אפשר נגישות מקלדת"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
-msgid "_Import CDE AccessX file"
-msgstr "_ייבא קובץ AccessX של CDE"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
-msgid "_Only accept keypress after :"
-msgstr "_קבל לחיצת מקש רק לאחר :"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:28
-msgid ""
-"_Turn off Sticky Keys when\n"
-"two keys pressed simultaneously"
-msgstr ""
-"_הפעל מקשים דביקים כאשר\n"
-"שני מקשים נלחצו בו-זמנית"
-
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:30
-msgid "key is _accepted"
-msgstr "המקש _מתקבל"
+msgid "_Disable if unused for:"
+msgstr "_כבה אם לא בשימוש ל:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:31
-msgid "key is _pressed"
-msgstr "המקש _נלחץ"
+msgid "_Enable keyboard accessibility features"
+msgstr "_אפשר אפשרויות נגישות מקלדת"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:32
-msgid "key is _rejected"
-msgstr "המקש _נדחה"
+msgid "_Import Feature Settings..."
+msgstr "_יבא הגדרות אפשרויות..."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
-msgid "msecs"
-msgstr "מילי שניות"
+msgid "_Only accept keys held for:"
+msgstr "_קבל רק מקשים שנלחצו:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
-msgid "pixels/sec"
-msgstr "פיקסלים/שניות"
+msgid "_Repeat Keys"
+msgstr "_חזור על מקשים"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:35
+msgid "_Type to test settings:"
+msgstr "_כתוב כדי לבדוק את ההגדרות:"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
+msgid "_accepted"
+msgstr "_התקבל"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:37
+msgid "_pressed"
+msgstr "_נלחץ"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:38
+msgid "_rejected"
+msgstr "_נדחה"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:39
+msgid "characters/second"
+msgstr "תוים/שניה"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:40
+msgid "milliseconds"
+msgstr "מילי שניות"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:41
+msgid "pixels/second"
+msgstr "פיקסלים/שניה"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:42
+#: capplets/windows/gnome-window-properties.glade.h:7
 msgid "seconds"
 msgstr "שניות"
 
@@ -238,8 +282,8 @@ msgstr "בחר _תמונה:"
 #: capplets/background/background-properties-capplet.c:567
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:712
-#: capplets/keyboard/gnome-keyboard-properties.c:293
-#: capplets/mouse/gnome-mouse-properties.c:752
+#: capplets/keyboard/gnome-keyboard-properties.c:294
+#: capplets/mouse/gnome-mouse-properties.c:751
 #: capplets/sound/sound-properties-capplet.c:149
 msgid "Retrieve and store legacy settings"
 msgstr "קבל ושמור הגדרות מהזכרון"
@@ -274,7 +318,7 @@ msgid "Picture Options:"
 msgstr "אפשרויות תמונה:"
 
 #: capplets/background/background-properties.glade.h:8
-#: libbackground/preview-file-selection.c:198
+#: libbackground/preview-file-selection.c:212
 msgid "Preview"
 msgstr "תצוגה מקדימה"
 
@@ -433,8 +477,7 @@ msgid "Change set"
 msgstr "שנה ערכה"
 
 #: capplets/common/gconf-property-editor.c:186
-msgid ""
-"GConf change set containing data to be forwarded to the gconf client on apply"
+msgid "GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr ""
 
 #: capplets/common/gconf-property-editor.c:191
@@ -442,8 +485,7 @@ msgid "Conversion to widget callback"
 msgstr ""
 
 #: capplets/common/gconf-property-editor.c:192
-msgid ""
-"Callback to be issued when data are to be converted from GConf to the widget"
+msgid "Callback to be issued when data are to be converted from GConf to the widget"
 msgstr ""
 
 #: capplets/common/gconf-property-editor.c:197
@@ -451,8 +493,7 @@ msgid "Conversion from widget callback"
 msgstr ""
 
 #: capplets/common/gconf-property-editor.c:198
-msgid ""
-"Callback to be issued when data are to be converted to GConf from the widget"
+msgid "Callback to be issued when data are to be converted to GConf from the widget"
 msgstr ""
 
 #: capplets/common/gconf-property-editor.c:203
@@ -520,14 +561,6 @@ msgstr "בחר את יישומי ברירת המחדל שלך"
 #: capplets/default-applications/gnome-default-applications-properties.c:105
 msgid "Please specify a name and a command for this editor."
 msgstr "אנא ציין שם ופקודה לעורך זה."
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:1
-#: capplets/file-types/file-types-properties.glade.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:1
-#: capplets/network/gnome-network-preferences.glade.h:1
-#: capplets/theme-switcher/theme-install.glade.h:1
-msgid "*"
-msgstr "*"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:2
 msgid "Acce_pts URLs"
@@ -646,6 +679,7 @@ msgid "Window Manager"
 msgstr "מנהל חלונות"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:31
+#: capplets/file-types/file-types-properties.glade.h:22
 msgid "_Name:"
 msgstr "_שם:"
 
@@ -734,6 +768,7 @@ msgid "Minimizing and Maximizing"
 msgstr "מזעור והגדלה"
 
 #: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
+#: capplets/windows/gnome-window-properties.c:649
 msgid "Meta"
 msgstr "מטא"
 
@@ -791,17 +826,16 @@ msgstr "יישומי זכרון"
 msgid "Legacy applications settings (grdb)"
 msgstr "הגדרות יישומי זכרון (grdb)"
 
-#: capplets/file-types/file-types-capplet.c:194
+#: capplets/file-types/file-types-capplet.c:196
 msgid "Description"
 msgstr "תיאור"
 
-#: capplets/file-types/file-types-capplet.c:216
+#: capplets/file-types/file-types-capplet.c:218
 msgid "Extensions"
 msgstr "סיומות"
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:1
-#: capplets/file-types/file-types-properties.glade.h:8
-#: capplets/file-types/file-types.desktop.in.h:2
+#: capplets/file-types/file-types-properties.glade.h:10
 msgid "File Types and Programs"
 msgstr "סוגי קבצים ותוכניות"
 
@@ -822,89 +856,93 @@ msgid "Add _Service..."
 msgstr "הוסף _שירות..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
-msgid "Add:"
-msgstr "הוסף:"
+msgid "C_hoose..."
+msgstr "_בחר..."
 
 #: capplets/file-types/file-types-properties.glade.h:6
-msgid "Default action"
-msgstr "פעולה ברירת מחדל"
+msgid "Cate_gory:"
+msgstr "_קטגוריה:"
 
 #: capplets/file-types/file-types-properties.glade.h:7
+msgid "D_efault action:"
+msgstr "פעולת ברירת מחדל:"
+
+#: capplets/file-types/file-types-properties.glade.h:8
+msgid "Default _action:"
+msgstr "פעולת _ברירת מחדל:"
+
+#: capplets/file-types/file-types-properties.glade.h:9
 #: capplets/file-types/mime-edit-dialog.c:208
 msgid "Edit file type"
 msgstr "ערוך את סוג הקובץ"
 
-#: capplets/file-types/file-types-properties.glade.h:9
-msgid "Filename Extensions"
-msgstr "סיומות שם הקובץ"
+#: capplets/file-types/file-types-properties.glade.h:11
+msgid "Filename extensions:"
+msgstr "סיומות שם הקובץ:"
 
-#: capplets/file-types/file-types-properties.glade.h:10
+#: capplets/file-types/file-types-properties.glade.h:12
 msgid "Look at content"
 msgstr "הבט בתוכן"
 
-#: capplets/file-types/file-types-properties.glade.h:11
+#: capplets/file-types/file-types-properties.glade.h:13
+msgid "P_rogram:"
+msgstr "תו_כנית:"
+
+#: capplets/file-types/file-types-properties.glade.h:14
 msgid "Program to Run"
 msgstr "תוכנית להרצה"
 
-#: capplets/file-types/file-types-properties.glade.h:12
+#: capplets/file-types/file-types-properties.glade.h:15
 msgid "Run a program"
 msgstr "הרץ תוכנית"
 
-#: capplets/file-types/file-types-properties.glade.h:13
+#: capplets/file-types/file-types-properties.glade.h:16
 msgid "Run in _Terminal"
 msgstr "הרץ ב_מסוף"
 
-#: capplets/file-types/file-types-properties.glade.h:14
+#: capplets/file-types/file-types-properties.glade.h:17
 msgid "Use parent category _defaults"
 msgstr "השתמש בקטגוריית הורה כ_ברירת מחדל"
 
-#: capplets/file-types/file-types-properties.glade.h:15
-msgid "Viewer Component"
-msgstr "רכיב מציג"
-
-#: capplets/file-types/file-types-properties.glade.h:16
-msgid "_Category"
-msgstr "_קטגוריה"
-
-#: capplets/file-types/file-types-properties.glade.h:17
-msgid "_Choose..."
-msgstr "_בחר..."
-
 #: capplets/file-types/file-types-properties.glade.h:18
-msgid "_Delete"
-msgstr "_מחק"
+msgid "_Add:"
+msgstr "_הוסף:"
 
 #: capplets/file-types/file-types-properties.glade.h:19
-msgid "_Description"
-msgstr "_תיאור"
+msgid "_Description:"
+msgstr "_תיאור:"
 
 #: capplets/file-types/file-types-properties.glade.h:20
 msgid "_Edit..."
 msgstr "_ערוך..."
 
 #: capplets/file-types/file-types-properties.glade.h:21
-msgid "_MIME Type"
-msgstr "_סוג MIME"
-
-#: capplets/file-types/file-types-properties.glade.h:22
-msgid "_Name"
-msgstr "_שם"
+msgid "_MIME type:"
+msgstr "_סוג MIME:"
 
 #: capplets/file-types/file-types-properties.glade.h:23
-msgid "_Program"
-msgstr "_תוכנית"
+msgid "_Program to run:"
+msgstr "_תוכנית להרצה:"
 
 #: capplets/file-types/file-types-properties.glade.h:24
-msgid "_Program to Run"
-msgstr "_תוכנית להרצה"
+msgid "_Protocol:"
+msgstr "_פרוטוקול:"
 
 #: capplets/file-types/file-types-properties.glade.h:25
-msgid "_Protocol"
-msgstr "_פרוטוקול"
+msgid "_Remove"
+msgstr "ה_סר"
+
+#: capplets/file-types/file-types-properties.glade.h:26
+msgid "_Viewer component:"
+msgstr "רכיב _מציג:"
 
 #: capplets/file-types/file-types.desktop.in.h:1
-msgid "Associate applications with file types"
-msgstr "שייך יישומים לסוגי קבצים"
+msgid "File types and programs"
+msgstr "סוגי קבצים ותוכניות"
+
+#: capplets/file-types/file-types.desktop.in.h:2
+msgid "Specify which programs are used to open or view each type of file"
+msgstr "ציין אילו תוכניות משתמשות לפתיחה או צפיה בכל אחד מסוגי הקבצים"
 
 #: capplets/file-types/mime-category-edit-dialog.c:138
 msgid "Edit file category"
@@ -1091,24 +1129,124 @@ msgid "Select fonts for the desktop"
 msgstr "בחר גופן לשולחן העבודה"
 
 #: capplets/font/font-properties.glade.h:1
+msgid "Best _shapes"
+msgstr "ה_צורות הטובות ביותר"
+
+#: capplets/font/font-properties.glade.h:2
+msgid "Best co_ntrast"
+msgstr "ה_ניגוד הטוב ביותר"
+
+#: capplets/font/font-properties.glade.h:3
+msgid "De_tails..."
+msgstr "פ_רטים..."
+
+#: capplets/font/font-properties.glade.h:4
 msgid "Font Preferences"
 msgstr "העדפות גופן"
 
-#: capplets/font/font-properties.glade.h:2
+#: capplets/font/font-properties.glade.h:5
+msgid "Font Rendering"
+msgstr "ציור גופן"
+
+#: capplets/font/font-properties.glade.h:6
+msgid "Font Rendering Details"
+msgstr "פרטי ציור גופן"
+
+#: capplets/font/font-properties.glade.h:7
+msgid "G_rayscale"
+msgstr "גווני _אפור"
+
+#: capplets/font/font-properties.glade.h:8
+msgid "Hinting:"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:9
+msgid "N_one"
+msgstr "_ללא"
+
+#: capplets/font/font-properties.glade.h:10
+msgid "Resolution (_dots per inch):"
+msgstr "רזולוציה (_נקודות לאינץ'):"
+
+#: capplets/font/font-properties.glade.h:11
 msgid "Set the font for applications"
 msgstr "קובע את הגופן ליישומים"
 
-#: capplets/font/font-properties.glade.h:3
+#: capplets/font/font-properties.glade.h:12
 msgid "Set the font for the icons on the desktop"
 msgstr "קובע את הגופן לסמלים על שולחן העבודה"
 
-#: capplets/font/font-properties.glade.h:4
-msgid "_Application font:"
-msgstr "גופן היישום:"
+#: capplets/font/font-properties.glade.h:13
+msgid "Set the monospace font for terminals and similar applications"
+msgstr "קובע את הגופן הקבוע למסופים ויישומים דומים"
 
-#: capplets/font/font-properties.glade.h:5
+#: capplets/font/font-properties.glade.h:14
+msgid "Smoothing:"
+msgstr "החלקה:"
+
+#: capplets/font/font-properties.glade.h:15
+msgid "Sub_pixel (LCDs)"
+msgstr "תת _פיקסל (צגי LCD)"
+
+#: capplets/font/font-properties.glade.h:16
+msgid "Sub_pixel smoothing (LCDs)"
+msgstr "החלקת תת _פיקסל (לצגי LCD)"
+
+#: capplets/font/font-properties.glade.h:17
+msgid "Subpixel order:"
+msgstr "סדר תת-פיקסל:"
+
+#: capplets/font/font-properties.glade.h:18
+msgid "VB_GR"
+msgstr "VB_GR"
+
+#: capplets/font/font-properties.glade.h:19
+msgid "_Application font:"
+msgstr "גופן ה_יישום:"
+
+#: capplets/font/font-properties.glade.h:20
+msgid "_BGR"
+msgstr "_BGR"
+
+#: capplets/font/font-properties.glade.h:21
 msgid "_Desktop font:"
 msgstr "גופן _שולחן העבודה:"
+
+#: capplets/font/font-properties.glade.h:22
+msgid "_Full"
+msgstr "_מלא"
+
+#: capplets/font/font-properties.glade.h:23
+msgid "_Medium"
+msgstr "_בינוני"
+
+#: capplets/font/font-properties.glade.h:24
+msgid "_Monochrome"
+msgstr "מונו_כרום"
+
+#: capplets/font/font-properties.glade.h:25
+msgid "_None"
+msgstr "_ללא"
+
+#: capplets/font/font-properties.glade.h:26
+msgid "_RGB"
+msgstr "_RGB"
+
+#: capplets/font/font-properties.glade.h:27
+msgid "_Slight"
+msgstr "מ_עט"
+
+#: capplets/font/font-properties.glade.h:28
+msgid "_Terminal font:"
+msgstr "גופן _מסוף:"
+
+#: capplets/font/font-properties.glade.h:29
+msgid "_VRGB"
+msgstr "_VRGB"
+
+#: capplets/font/font-properties.glade.h:30
+msgid "_Window title font:"
+msgstr "גופן כותרת ה_חלון:"
 
 #: capplets/keybindings/eggcellrendererkeys.c:160
 #: capplets/keybindings/eggcellrendererkeys.c:161
@@ -1118,19 +1256,19 @@ msgstr "מקש קיצור"
 #: capplets/keybindings/eggcellrendererkeys.c:170
 #: capplets/keybindings/eggcellrendererkeys.c:171
 msgid "Accelerator modifiers"
-msgstr ""
+msgstr "משני מאיצים"
 
 #: capplets/keybindings/eggcellrendererkeys.c:180
 msgid "Accel Mode"
-msgstr ""
+msgstr "מצב האצה"
 
 #: capplets/keybindings/eggcellrendererkeys.c:181
 msgid "The type of accelerator."
 msgstr "סוג הקיצור."
 
 #: capplets/keybindings/eggcellrendererkeys.c:219
-#: capplets/keybindings/gnome-keybinding-properties.c:181
-#: libbackground/applier.c:521
+#: capplets/keybindings/gnome-keybinding-properties.c:202
+#: libbackground/applier.c:588
 msgid "Disabled"
 msgstr "כבוי"
 
@@ -1143,40 +1281,43 @@ msgstr "הזן קיצור חדש, או לחץ על מקש החזרה לניקו�
 msgid "Type a new accelerator"
 msgstr "הזן קיצרו חדש"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:448
+#: capplets/keybindings/gnome-keybinding-properties.c:538
 msgid "<Unknown Action>"
 msgstr "<פעולה לא ידועה>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:467
+#: capplets/keybindings/gnome-keybinding-properties.c:557
 msgid "Desktop"
 msgstr "שולחן עבודה"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:471
+#: capplets/keybindings/gnome-keybinding-properties.c:561
 msgid "Window Management"
 msgstr "ניהול חלון"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:593
+#: capplets/keybindings/gnome-keybinding-properties.c:696
 #, c-format
-msgid "That accelerator key is already in use by: %s\n"
+msgid ""
+"The shortcut \"%s\" is already used for:\n"
+" \"%s\"\n"
 msgstr ""
+"קיצור הדרך \"%s\" כבר משמש ל: "
+" \"%s\"\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:620
+#: capplets/keybindings/gnome-keybinding-properties.c:727
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "שגיאה בקביעת קיצור חדש במסד נתוני ההגדרות: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:771
+#: capplets/keybindings/gnome-keybinding-properties.c:878
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
-msgstr ""
-"לא ניתן למצוא ערכות נושא למקלדת.  זה אומר שהתקנת ה GTK+ לא הסתיימה לחלוטין."
+msgstr "לא ניתן למצוא ערכות נושא למקלדת.  זה אומר שהתקנת ה GTK+ לא הסתיימה לחלוטין."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:793
+#: capplets/keybindings/gnome-keybinding-properties.c:900
 msgid "Action"
 msgstr "פעולה"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:811
+#: capplets/keybindings/gnome-keybinding-properties.c:919
 msgid "Shortcut"
 msgstr "קיצור"
 
@@ -1201,16 +1342,20 @@ msgstr "קיצורי עריכת _מלל:"
 msgid "Assign shortcut keys to commands"
 msgstr "שייך מקשי קיצור לפקודות"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:272
+#: capplets/keyboard/gnome-keyboard-properties.c:160
+#, c-format
+msgid "There was an error launching the keyboard capplet : %s"
+msgstr "ארעה שגיאה בהפעלת יישומון הבקרה מקלדת: %s"
+
+#: capplets/keyboard/gnome-keyboard-properties.c:273
 msgid "_Accessibility"
 msgstr "_נגישות"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:289
-#: capplets/keyboard/gnome-keyboard-properties.c:291
+#: capplets/keyboard/gnome-keyboard-properties.c:290
+#: capplets/keyboard/gnome-keyboard-properties.c:292
 #: capplets/sound/sound-properties-capplet.c:145
 #: capplets/sound/sound-properties-capplet.c:147
-msgid ""
-"Just apply settings and quit (compatibility only; now handled by daemon)"
+msgid "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr "רק החל הגדרות וצא (תאימות בלבד; עכשיו מנוהל על-ידי תהליך שירות)"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:2
@@ -1265,10 +1410,6 @@ msgstr "לחיצה בלחיצת מקש"
 msgid "Repeat Keys"
 msgstr "חזור על מקשים"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
-msgid "S_peed:"
-msgstr "_מהירות:"
-
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:18
 msgid "_Accessibility..."
 msgstr "_נגישות..."
@@ -1305,7 +1446,7 @@ msgstr "שקט"
 msgid "Set your keyboard preferences"
 msgstr "קבע את העדפות המקלדת שלך"
 
-#: capplets/mouse/gnome-mouse-properties.c:477
+#: capplets/mouse/gnome-mouse-properties.c:476
 #, c-format
 msgid ""
 "<b>Unknown Cursor</b>\n"
@@ -1314,7 +1455,7 @@ msgstr ""
 "<b>סמן לא ידוע</b>\n"
 "%s"
 
-#: capplets/mouse/gnome-mouse-properties.c:578
+#: capplets/mouse/gnome-mouse-properties.c:577
 msgid ""
 "<b>Default Cursor - Current</b>\n"
 "The default cursor that ships with X"
@@ -1322,7 +1463,7 @@ msgstr ""
 "<b>סמן ברירת מחדל - נוכחי</b>\n"
 "סמן ברירת המחדל המגיע עם X"
 
-#: capplets/mouse/gnome-mouse-properties.c:581
+#: capplets/mouse/gnome-mouse-properties.c:580
 msgid ""
 "<b>Default Cursor</b>\n"
 "The default cursor that ships with X"
@@ -1330,7 +1471,7 @@ msgstr ""
 "<b>סמן ברירת מחדל</b>\n"
 "סמן ברירת המחדל המגיע עם X"
 
-#: capplets/mouse/gnome-mouse-properties.c:599
+#: capplets/mouse/gnome-mouse-properties.c:598
 msgid ""
 "<b>White Cursor - Current</b>\n"
 "The default cursor inverted"
@@ -1338,7 +1479,7 @@ msgstr ""
 "<b>סמן לבן - נוכחי</b>\n"
 "סמן ברירת המחדל הפוך"
 
-#: capplets/mouse/gnome-mouse-properties.c:602
+#: capplets/mouse/gnome-mouse-properties.c:601
 msgid ""
 "<b>White Cursor</b>\n"
 "The default cursor inverted"
@@ -1346,7 +1487,7 @@ msgstr ""
 "<b>סמן לבן</b>\n"
 "סמן ברירת המחדל הפוך"
 
-#: capplets/mouse/gnome-mouse-properties.c:620
+#: capplets/mouse/gnome-mouse-properties.c:619
 msgid ""
 "<b>Large Cursor - Current</b>\n"
 "Large version of normal cursor"
@@ -1354,7 +1495,7 @@ msgstr ""
 "<b>סמן גדול - נוכחי</b>\n"
 "גירסה גדולה של הסמן הרגיל"
 
-#: capplets/mouse/gnome-mouse-properties.c:623
+#: capplets/mouse/gnome-mouse-properties.c:622
 msgid ""
 "<b>Large Cursor</b>\n"
 "Large version of normal cursor"
@@ -1362,7 +1503,7 @@ msgstr ""
 "<b>סמן גדול</b>\n"
 "גירסה גדולה של הסמן הרגיל"
 
-#: capplets/mouse/gnome-mouse-properties.c:641
+#: capplets/mouse/gnome-mouse-properties.c:640
 msgid ""
 "<b>Large White Cursor - Current</b>\n"
 "Large version of white cursor"
@@ -1370,7 +1511,7 @@ msgstr ""
 "<b>סמן גדול לבן - נוכחי</b>\n"
 "גירסה גדולה של הסמן הלבן"
 
-#: capplets/mouse/gnome-mouse-properties.c:644
+#: capplets/mouse/gnome-mouse-properties.c:643
 msgid ""
 "<b>Large White Cursor</b>\n"
 "Large version of white cursor"
@@ -1435,8 +1576,7 @@ msgid "Drag and Drop"
 msgstr "גרור וזרוק"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:14
-msgid ""
-"Left-handed mouse mode switches the left and right buttons on the mouse."
+msgid "Left-handed mouse mode switches the left and right buttons on the mouse."
 msgstr "מצב עכבר לשמאליים מחליף בין הכפתור השמאלי והימיני בעכבר."
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:15
@@ -1447,8 +1587,7 @@ msgstr "מצא סמן"
 msgid ""
 "Maximum time allowed between clicks when double-clicking.   Use the box on "
 "the right to test."
-msgstr ""
-"הזמן המקסימלי המאופשר בין לחיצה ללחיצה-כפולה.  השתמש בתיבה בצד שמאל לבדיקה."
+msgstr "הזמן המקסימלי המאופשר בין לחיצה ללחיצה-כפולה.  השתמש בתיבה בצד שמאל לבדיקה."
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:17
 msgid "Motion"
@@ -1498,10 +1637,6 @@ msgstr "_הצג מיקום סמן כאשר המקש Control נלחץ"
 msgid "_Threshold:"
 msgstr "_סף:"
 
-#: capplets/mouse/mouse.desktop.in.h:1
-msgid "Mouse"
-msgstr "עכבר"
-
 #: capplets/mouse/mouse.desktop.in.h:2
 msgid "Set your mouse preferences"
 msgstr "קבע את העדפות העכבר שלך"
@@ -1514,37 +1649,69 @@ msgstr "מתווך רשת"
 msgid "Network proxy preferences"
 msgstr "העדפות מתווך רשת"
 
-#: capplets/network/gnome-network-preferences.glade.h:2
-msgid "Network Preferences"
-msgstr "העדפות רשת"
+#: capplets/network/gnome-network-preferences.glade.h:1
+msgid "      "
+msgstr "      "
 
 #: capplets/network/gnome-network-preferences.glade.h:3
-msgid "Network Proxy Preferences"
-msgstr "העדפות מתווך רשת"
+msgid "<b>_Automatic proxy configuration</b>"
+msgstr "<b>הגדרות מתווך _אוטומטיות</b>"
 
 #: capplets/network/gnome-network-preferences.glade.h:4
-msgid "P_ort:"
-msgstr "_יציאה:"
+msgid "<b>_Direct internet connection</b>"
+msgstr "<b>חיבור אינטרנט _ישיר</b>"
 
 #: capplets/network/gnome-network-preferences.glade.h:5
-msgid "Pass_word:"
-msgstr "_סיסמה:"
+msgid "<b>_Manual proxy configuration</b>"
+msgstr "<b>_הגדרות מתווך ידניות</b>"
 
 #: capplets/network/gnome-network-preferences.glade.h:6
-msgid "Pro_xy requires username and password"
-msgstr "ה_מתווך דורש שם משתמש וסיסמה"
+msgid "<b>_Use authentication</b>"
+msgstr "<b>ה_שתמש באימות</b>"
 
 #: capplets/network/gnome-network-preferences.glade.h:7
-msgid "User_name:"
-msgstr "_שם משתמש:"
+msgid "Autoconfiguration _URL:"
+msgstr "_כתובת הגדרות אוטומטיות:"
 
 #: capplets/network/gnome-network-preferences.glade.h:8
-msgid "_Location:"
-msgstr "_מיקום:"
+msgid "HTTP Proxy Details"
+msgstr "פרטי מתווך HTTP"
 
 #: capplets/network/gnome-network-preferences.glade.h:9
-msgid "_Use HTTP proxy"
-msgstr "_השתמש במתווך HTTP"
+msgid "Network Proxy Configuration"
+msgstr "הגדרות מתווך רשת"
+
+#: capplets/network/gnome-network-preferences.glade.h:10
+msgid "Port:"
+msgstr "פתחה:"
+
+#: capplets/network/gnome-network-preferences.glade.h:11
+msgid "S_ocks host:"
+msgstr "מארח _שקע:"
+
+#: capplets/network/gnome-network-preferences.glade.h:12
+msgid "_Details"
+msgstr "_פרטים"
+
+#: capplets/network/gnome-network-preferences.glade.h:13
+msgid "_FTP proxy:"
+msgstr "מתווך _FTP:"
+
+#: capplets/network/gnome-network-preferences.glade.h:14
+msgid "_HTTP proxy:"
+msgstr "מתווך _HTTP:"
+
+#: capplets/network/gnome-network-preferences.glade.h:15
+msgid "_Password:"
+msgstr "_סיסמה:"
+
+#: capplets/network/gnome-network-preferences.glade.h:16
+msgid "_Secure HTTP proxy:"
+msgstr "מתווך HTTP מ_אובטח"
+
+#: capplets/network/gnome-network-preferences.glade.h:17
+msgid "_Username:"
+msgstr "_שם משתמש:"
 
 #: capplets/sound/sound-properties-capplet.c:180
 msgid "Sound preferences"
@@ -1555,16 +1722,16 @@ msgid "E_nable sound server startup"
 msgstr "א_פשר שרת קול בהפעלה"
 
 #: capplets/sound/sound-properties.glade.h:2
-msgid "Sound Preferences"
-msgstr "העדפות קול"
+msgid "General"
+msgstr "כללי"
 
 #: capplets/sound/sound-properties.glade.h:3
-msgid "Sound _Events"
+msgid "Sound Events"
 msgstr "_ארועי קול"
 
 #: capplets/sound/sound-properties.glade.h:4
-msgid "_General"
-msgstr "_כללי"
+msgid "Sound Preferences"
+msgstr "העדפות קול"
 
 #: capplets/sound/sound-properties.glade.h:5
 msgid "_Sounds for events"
@@ -1631,29 +1798,89 @@ msgstr "בחר ערכת נושא לחלקים שונים של שולחן העב�
 msgid "Theme"
 msgstr "ערכת נושא"
 
-#: capplets/theme-switcher/theme-properties.glade.h:1
-msgid "Installed Themes"
-msgstr "ערכות נושא מותקנות"
-
 #: capplets/theme-switcher/theme-properties.glade.h:2
-msgid "List of available GTK+ themes"
-msgstr "רשימה של ערכות הנושא הזמינות של GTK+"
+msgid "<span size=\"larger\" weight=\"bold\">Save theme to disk</span>"
+msgstr "<span size=\"larger\" weight=\"bold\">שמור ערכת נושא לדיסק</span>"
 
 #: capplets/theme-switcher/theme-properties.glade.h:3
+msgid "Apply _Background"
+msgstr "החל _רקע"
+
+#: capplets/theme-switcher/theme-properties.glade.h:4
+msgid "Apply _Font"
+msgstr "החל _גופן"
+
+#: capplets/theme-switcher/theme-properties.glade.h:5
+msgid "Controls"
+msgstr "פקדים"
+
+#: capplets/theme-switcher/theme-properties.glade.h:6
+msgid "Icons"
+msgstr "סמלים"
+
+#: capplets/theme-switcher/theme-properties.glade.h:7
 msgid "New themes can also be installed by dragging them into the window."
 msgstr "ערכות נושא חדשות יכולות להיות מותקנות גם על-ידי גרירתם לתוך החלון."
 
-#: capplets/theme-switcher/theme-properties.glade.h:4
+#: capplets/theme-switcher/theme-properties.glade.h:8
+msgid "Short _Description:"
+msgstr "_תיאור קצר:"
+
+#: capplets/theme-switcher/theme-properties.glade.h:9
+msgid "Theme Details"
+msgstr "פרטי ערכת נושא"
+
+#: capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Theme Preferences"
 msgstr "העדפות ערכת נושא"
 
-#: capplets/theme-switcher/theme-properties.glade.h:5
+#: capplets/theme-switcher/theme-properties.glade.h:11
+msgid ""
+"This theme suggests a\n"
+"background:"
+msgstr ""
+"ערכת נושא זו מציעה\n"
+"רקע:"
+
+#: capplets/theme-switcher/theme-properties.glade.h:13
+msgid ""
+"This theme suggests a\n"
+"font and background"
+msgstr ""
+"ערכת נושא זו מציעה\n"
+"גופן ורקע"
+
+#: capplets/theme-switcher/theme-properties.glade.h:15
+msgid ""
+"This theme suggests a\n"
+"font:"
+msgstr ""
+"ערכת נושא זו מציעה\n"
+"גופן:"
+
+#: capplets/theme-switcher/theme-properties.glade.h:17
+msgid "Window Border"
+msgstr "מסגרת חלון"
+
+#: capplets/theme-switcher/theme-properties.glade.h:18
+msgid "_Details..."
+msgstr "_פרטים..."
+
+#: capplets/theme-switcher/theme-properties.glade.h:19
 msgid "_Go to theme folder"
 msgstr "_לך לתיקיית ערכת הנושא"
 
-#: capplets/theme-switcher/theme-properties.glade.h:6
-msgid "_Install New Theme..."
-msgstr "_התקן ערכת נושא חדשה..."
+#: capplets/theme-switcher/theme-properties.glade.h:20
+msgid "_Install theme..."
+msgstr "_התקן ערכת נושא..."
+
+#: capplets/theme-switcher/theme-properties.glade.h:21
+msgid "_Save theme"
+msgstr "_שמור ערכת נושא"
+
+#: capplets/theme-switcher/theme-properties.glade.h:22
+msgid "_Theme name:"
+msgstr "שם _ערכת הנושא:"
 
 #: capplets/theme-switcher/theme-install.glade.h:2
 msgid "Install new theme"
@@ -1666,6 +1893,25 @@ msgstr "_התקן"
 #: capplets/theme-switcher/theme-install.glade.h:4
 msgid "_Location of new theme:"
 msgstr "_מיקום ערכת הנושא החדשה:"
+
+#: capplets/theme-switcher/gnome-theme-details.c:319
+#: capplets/theme-switcher/gnome-theme-manager.c:463
+msgid ""
+"No themes could be found on your system.  This probably means that your "
+"\"Theme Preferences\" dialog was improperly installed, or you haven't "
+"installed the \"gnome-themes\" package."
+msgstr ""
+"לא נמצאו ערכות נושא על המערכת שלך.  זה כנראה אומר שתיבת "
+"דו-שיח \"העדפות ערכת נושא\" שלך לא הותקנה כראוי, או שלא "
+"התקנת את חבילת \"gnome-themes\"."
+
+#: capplets/theme-switcher/gnome-theme-manager.c:513
+msgid "Custom theme"
+msgstr "ערכת נושא מותאמת אישית"
+
+#: capplets/theme-switcher/gnome-theme-manager.c:513
+msgid "You can save this theme by pressing the Save Theme button."
+msgstr "אתה יכול לשמור את ערכת הנושא הזו על-ידי לחיצה על הכפותר שמור ערכת נושא."
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
@@ -1796,30 +2042,56 @@ msgstr "_יציאה"
 msgid "_Save"
 msgstr "_שמור"
 
-#: capplets/windows/gnome-window-properties.c:282
-#: capplets/windows/gnome-window-properties.glade.h:6
+#: capplets/windows/gnome-window-properties.c:378
+#, c-format
+msgid ""
+"<b>Cannot start the preferences application for your window manager</b>\n"
+"\n"
+"%s"
+msgstr ""
+"<b>לא יכול לפתוח את יישום ההעדפות של מנהל החלונות שלך</b>\n"
+"\n"
+"%s"
+
+#: capplets/windows/gnome-window-properties.c:624
+msgid "Control"
+msgstr "פקד"
+
+#: capplets/windows/gnome-window-properties.c:629
+msgid "Alt"
+msgstr "Alt"
+
+#: capplets/windows/gnome-window-properties.c:635
+msgid "Hyper"
+msgstr "היפר"
+
+#: capplets/windows/gnome-window-properties.c:642
+msgid "Super (or \"Windows logo\")"
+msgstr "סופר (או \"סמל חלונות\")"
+
+#: capplets/windows/gnome-window-properties.glade.h:1
+msgid "To _move a window, press-and-hold this key then grab the window:"
+msgstr "כדי לה_זיז חלון, לחץ והחזק מקש זה בזמן גרירת החלון:"
+
+#: capplets/windows/gnome-window-properties.glade.h:2
 msgid "Window Preferences"
 msgstr "העדפות חלון"
 
-#: capplets/windows/gnome-window-properties.glade.h:1
-msgid "Apply Now"
-msgstr "החל עכשיו"
-
-#: capplets/windows/gnome-window-properties.glade.h:2
-msgid "Select windows when the mouse moves over them"
-msgstr "בחר חלונות כאשר הסמן זז מעליו"
-
 #: capplets/windows/gnome-window-properties.glade.h:3
-msgid "Titlebar Font"
-msgstr "גופן פס הכותרת"
+msgid "_Double-click titlebar to perform this action:"
+msgstr "_לחיצה כפולה על הכותרת לביצוע פעולה זו:"
 
 #: capplets/windows/gnome-window-properties.glade.h:4
-msgid "Window Border Appearance"
-msgstr "תצוגת מסגרת חלון"
+msgid "_Interval before raising:"
+msgstr "ה_שהייה לפני העלאה:"
 
 #: capplets/windows/gnome-window-properties.glade.h:5
-msgid "Window Manager:"
-msgstr "מנהל חלונות:"
+msgid "_Raise selected windows after an interval"
+msgstr "ה_עלה חלונות נבחרים לאחר השהייה זו"
+
+#: capplets/windows/gnome-window-properties.glade.h:6
+msgid "_Select windows when the mouse moves over them"
+msgstr "_בחר חלונות כאשר הסמן זז מעליהם"
 
 #: capplets/windows/window-properties.desktop.in.h:1
 msgid "Window Properties"
@@ -1881,12 +2153,12 @@ msgid "Overview of the control center"
 msgstr "סקירה כללית של לוח הבקרה"
 
 #: control-center/gnomecc-ui.xml.h:3
-msgid "_About..."
-msgstr "_אודות..."
+msgid "_About"
+msgstr "_אודות"
 
 #: control-center/gnomecc-ui.xml.h:4
-msgid "_Contents..."
-msgstr "_תכנים..."
+msgid "_Contents"
+msgstr "_תכנים"
 
 #: control-center/gnomecc-ui.xml.h:6
 msgid "_Help"
@@ -1913,32 +2185,32 @@ msgstr ""
 "לא ניתן ליצור את התיקייה \"%s\".\n"
 "אשר הכרחית לאישור שינוי הסמן."
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:106
+#: gnome-settings-daemon/gnome-settings-keybindings.c:146
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr "לקיצור המקש (%s) ישנה פעולה שהוגדרה מספר פעמים\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:119
+#: gnome-settings-daemon/gnome-settings-keybindings.c:159
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr "לקיצור המקש (%s) ישנו קיצור שהוגדר מספר פעמים\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:125
+#: gnome-settings-daemon/gnome-settings-keybindings.c:165
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr "קיצור המקש (%s) אינו גמור\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:153
+#: gnome-settings-daemon/gnome-settings-keybindings.c:193
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr "קיצור המקש (%s) אינו תקני\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:241
+#: gnome-settings-daemon/gnome-settings-keybindings.c:281
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr "קיצור המקש (%s) כבר בשימוש\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:292
+#: gnome-settings-daemon/gnome-settings-keybindings.c:357
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -1971,38 +2243,46 @@ msgstr "_אל תציג הודעה זו שוב"
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "לא ניתן לטעון את קובץ הקול %s כדוגמה %s"
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:150
+#: gnome-settings-daemon/gnome-settings-xsettings.c:184
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "מפתח GConf %s נקבע לסוג %s אך הסוג הצפוי הינו %s\n"
 
-#: libbackground/applier.c:239
+#: libbackground/applier.c:254
 msgid "Type"
 msgstr "סוג"
 
-#: libbackground/applier.c:240
+#: libbackground/applier.c:255
 msgid ""
 "Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
 "for preview"
 msgstr ""
 
-#: libbackground/applier.c:247
+#: libbackground/applier.c:262
 msgid "Preview Width"
 msgstr "תצוגה מקדימה של אורך"
 
-#: libbackground/applier.c:248
+#: libbackground/applier.c:263
 msgid "Width if applier is a preview: Defaults to 64."
 msgstr ""
 
-#: libbackground/applier.c:255
+#: libbackground/applier.c:270
 msgid "Preview Height"
 msgstr "תצוגה מקדימה של גובה"
 
-#: libbackground/applier.c:256
+#: libbackground/applier.c:271
 msgid "Height if applier is a preview: Defaults to 48."
 msgstr ""
 
-#: libbackground/preview-file-selection.c:193
+#: libbackground/applier.c:279
+msgid "Screen"
+msgstr "צג"
+
+#: libbackground/applier.c:280
+msgid "Screen on which BGApplier is to draw"
+msgstr ""
+
+#: libbackground/preview-file-selection.c:207
 msgid "Can't find an hbox, using a normal file selection"
 msgstr ""
 
@@ -2040,57 +2320,201 @@ msgstr "_נגן"
 msgid "Select sound file"
 msgstr "בחר קובץ קול"
 
-#: libwindow-settings/gnome-wm-manager.c:171
+#: libwindow-settings/gnome-wm-manager.c:320
 #, c-format
-msgid ""
-"Starting %s\n"
-"(%d seconds left before operation times out)"
+msgid "Window manager \"%s\" has not registered a configuration tool\n"
+msgstr "מנהל החלונות \"%s\" לא רשם כלי הגדרות\n"
+
+#: libwindow-settings/metacity-window-manager.c:373
+msgid "Maximize"
+msgstr "הגדל"
+
+#: libwindow-settings/metacity-window-manager.c:374
+msgid "Roll up"
+msgstr "גלול מעלה"
+
+#: schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:1
+msgid "If true, the mime handlers for text/plain and text/* will be kept in sync"
 msgstr ""
-"מתחיל %s\n"
-"(%d שניות נותרו לפני שזמן הפעולה נגמר)"
 
-#: libwindow-settings/gnome-wm-manager.c:325
-msgid ""
-"wm-properties-capplet: Unable to initialize window manager.\n"
-"\tAnother window manager is already running and could not be killed\n"
+#: schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:2
+msgid "Sync text/plain and text/* handlers"
 msgstr ""
-"wm-properties-capplet: לא ניתן לאתחל את מנהל החלונות.\n"
-"\tמנהל חלונות אחר כבר פועל ולא יכול לההרג\n"
 
-#: libwindow-settings/gnome-wm-manager.c:329
-#, c-format
-msgid ""
-"wm-properties-capplet: Unable to initialize window manager.\n"
-"\t'%s' didn't start\n"
+#: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:1
+msgid "Display a dialog when there are errors running XScreenSaver"
+msgstr "הצג תיבת דו-שיח כאשר ישנן שגיאות בהפעלת XScreenSaver"
+
+#: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:2
+msgid "Run XScreenSaver at login"
+msgstr "הפעל את XScreenSaver בהתחברות"
+
+#: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:3
+msgid "Show Startup Errors"
+msgstr "הצג שגיאות הפעלה"
+
+#: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:4
+msgid "Start XScreenSaver"
+msgstr "התחל את XScreenSaver"
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:1
+msgid "Antialising"
+msgstr "החלקת קצוות"
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:2
+msgid "DPI"
+msgstr "DPI"
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:3
+msgid "Hinting"
 msgstr ""
-"wm-properties-capplet: לא ניתן לאתחל את מנהל החלונות.\n"
-"\t'%s' לא התחיל\n"
 
-#: libwindow-settings/gnome-wm-manager.c:378
-msgid "Previous window manager did not die\n"
-msgstr "מנהל החלונות הקודם לא מת\n"
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:4
+msgid "RGBA Order"
+msgstr "סדר RGBA"
 
-#: libwindow-settings/gnome-wm-manager.c:411
-#, c-format
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:5
+msgid "Resolution used for converting font sizes to pixel sizes, in dots per inch"
+msgstr "רזולוציה המשמשת להמרת גדלי הגופנים לגדלי פיקסלים, בנקודות לאינץ'"
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:6
 msgid ""
-"Could not start '%s'.\n"
-"Falling back to previous window manager '%s'\n"
+"The order of elements subpixel elements on an LCD screen; only used when "
+"antialising is set to \"rgba\". Possible values are: \"rgb\" - red on left, "
+"most common. \"bgr\" - blue on left. \"vrgb\" - red on top. \"vbgr\" - red "
+"on bottom."
 msgstr ""
-"לא ניתן להתחיל '%s'.\n"
-"חוזר למנהל החלונות הקודם '%s'\n"
+"הסדר של חלקיקי תת-הפיסקל בצגי LCD; בשימוש רק כאשר "
+"החלקת הקצוות נקבעה ל \"RGBA\". ערכים אפשריים הם: \"RGB\" - אדום בצד שמאל, "
+"הנפוץ ביותר. \"BGR\" - כחול בצד שמאל. \"VRGB\" - אדום מעלה. \"VBGR\" - אדום "
+"בתחתית."
 
-#: libwindow-settings/gnome-wm-manager.c:442
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:7
 msgid ""
-"Could not start fallback window manager.\n"
-"Please run a window manager manually. You can\n"
-"do this by selecting \"Run Program\" in the\n"
-"foot menu\n"
+"The type of antialiasing to use when rendering fonts. Possible values are: "
+"\"none\" - no antialiasing. \"grayscale\" - standard grayscale antialising. "
+"\"rgba\" - subpixel antialising. (LCD screens only)."
 msgstr ""
-"לא ניתן לחזור למנהל החלונות.\n"
-"אנא הרץ את מנהל החלונות ידנית. ניתן\n"
-"לעשות זאת על-ידי בחירת \"הרץ תוכנית...\"\n"
-"בתפריט הרגל\n"
+"סוג החלקת הקצוות לשימוש כאשר מציירים גופנים. ערכים אפשריים הם: "
+"\"ללא\" - בלי החלקת קצוות. \"גווני אפור\" - החלקת קצוות רגילה בגווני אפור. "
+"\"RGBA\" - החלקת קצוות באמצעות תת-פיקסלים (צגי LCD בלבד)."
 
-#: libwindow-settings/gnome-wm-manager.c:467
-msgid "OK"
-msgstr "אישור"
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:8
+msgid ""
+"The type of hinting to use when rendering fonts. Possible values are: \"none"
+"\" - no hinting, \"slight\", \"medium\", and \"full\" - as much hinting as "
+"possible; may cause distortion of letter forms."
+msgstr ""
+
+#~ msgid "Beep when enabling/disabling _keyboard accessibility features"
+#~ msgstr "צפצף כאשר מאפשרים/מכבים אפשרויוץ נגישות _מקלדת"
+
+#~ msgid "Beep when:"
+#~ msgstr "צפצף כאשר:"
+
+#~ msgid "Repeat Key Pre_ferences"
+#~ msgstr "הע_דפות חזרת מקש"
+
+#~ msgid "Start mo_ving this long after keypress :"
+#~ msgstr "התחל ל_זוז בכזה זמן לאחר לחיצת המקש :"
+
+#~ msgid "Testing Area"
+#~ msgstr "אזור בדיקה"
+
+#~ msgid "Toggle and Repeat Keys"
+#~ msgstr "מקשים מוארכים וחוזרים"
+
+#~ msgid "_Import CDE AccessX file"
+#~ msgstr "_ייבא קובץ AccessX של CDE"
+
+#~ msgid ""
+#~ "_Turn off Sticky Keys when\n"
+#~ "two keys pressed simultaneously"
+#~ msgstr ""
+#~ "_הפעל מקשים דביקים כאשר\n"
+#~ "שני מקשים נלחצו בו-זמנית"
+
+#~ msgid "msecs"
+#~ msgstr "מילי שניות"
+
+#~ msgid "_Category"
+#~ msgstr "_קטגוריה"
+
+#~ msgid "_Delete"
+#~ msgstr "_מחק"
+
+#~ msgid "_Name"
+#~ msgstr "_שם"
+
+#~ msgid "Associate applications with file types"
+#~ msgstr "שייך יישומים לסוגי קבצים"
+
+#~ msgid "Network Preferences"
+#~ msgstr "העדפות רשת"
+
+#~ msgid "Pro_xy requires username and password"
+#~ msgstr "ה_מתווך דורש שם משתמש וסיסמה"
+
+#~ msgid "_Location:"
+#~ msgstr "_מיקום:"
+
+#~ msgid "_General"
+#~ msgstr "_כללי"
+
+#~ msgid "Installed Themes"
+#~ msgstr "ערכות נושא מותקנות"
+
+#~ msgid "List of available GTK+ themes"
+#~ msgstr "רשימה של ערכות הנושא הזמינות של GTK+"
+
+#~ msgid "Titlebar Font"
+#~ msgstr "גופן פס הכותרת"
+
+#~ msgid "Window Manager:"
+#~ msgstr "מנהל חלונות:"
+
+#~ msgid ""
+#~ "Starting %s\n"
+#~ "(%d seconds left before operation times out)"
+#~ msgstr ""
+#~ "מתחיל %s\n"
+#~ "(%d שניות נותרו לפני שזמן הפעולה נגמר)"
+
+#~ msgid ""
+#~ "wm-properties-capplet: Unable to initialize window manager.\n"
+#~ "\tAnother window manager is already running and could not be killed\n"
+#~ msgstr ""
+#~ "wm-properties-capplet: לא ניתן לאתחל את מנהל החלונות.\n"
+#~ "\tמנהל חלונות אחר כבר פועל ולא יכול לההרג\n"
+
+#~ msgid ""
+#~ "wm-properties-capplet: Unable to initialize window manager.\n"
+#~ "\t'%s' didn't start\n"
+#~ msgstr ""
+#~ "wm-properties-capplet: לא ניתן לאתחל את מנהל החלונות.\n"
+#~ "\t'%s' לא התחיל\n"
+
+#~ msgid "Previous window manager did not die\n"
+#~ msgstr "מנהל החלונות הקודם לא מת\n"
+
+#~ msgid ""
+#~ "Could not start '%s'.\n"
+#~ "Falling back to previous window manager '%s'\n"
+#~ msgstr ""
+#~ "לא ניתן להתחיל '%s'.\n"
+#~ "חוזר למנהל החלונות הקודם '%s'\n"
+
+#~ msgid ""
+#~ "Could not start fallback window manager.\n"
+#~ "Please run a window manager manually. You can\n"
+#~ "do this by selecting \"Run Program\" in the\n"
+#~ "foot menu\n"
+#~ msgstr ""
+#~ "לא ניתן לחזור למנהל החלונות.\n"
+#~ "אנא הרץ את מנהל החלונות ידנית. ניתן\n"
+#~ "לעשות זאת על-ידי בחירת \"הרץ תוכנית...\"\n"
+#~ "בתפריט הרגל\n"
+
+#~ msgid "OK"
+#~ msgstr "אישור"
+
