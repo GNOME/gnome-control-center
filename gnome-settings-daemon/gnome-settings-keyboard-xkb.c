@@ -45,6 +45,9 @@
 static GSwitchItXkbConfig gswic;
 static gboolean initedOk;
 
+static PostActivationCallback paCallback = NULL;
+static void *paCallbackUserData = NULL;
+
 static const char DISABLE_XMM_WARNING_KEY[] =
     "/desktop/gnome/peripherals/keyboard/disable_xmm_and_xkb_warning";
 
@@ -105,7 +108,11 @@ apply_settings (void)
 		gswic.overrideSettings = FALSE;
 		GSwitchItXkbConfigSave (&gswic);
 	} else {
-		if (!GSwitchItXkbConfigActivate (&gswic)) {
+		if (GSwitchItXkbConfigActivate (&gswic)) {
+			if (paCallback != NULL) {
+				(*paCallback) (paCallbackUserData);
+			}
+		} else {
 			g_warning
 			    ("Could not activate the XKB configuration");
 			activation_error ();
@@ -228,6 +235,14 @@ gnome_settings_keyboard_xkb_chk_lcl_xmm (void)
 			break;
 		}
 	g_dir_close (homeDir);
+}
+
+void
+gnome_settings_keyboard_xkb_set_post_activation_callback
+    (PostActivationCallback fun, void *userData)
+{
+	paCallback = fun;
+	paCallbackUserData = userData;
 }
 
 void

@@ -31,4 +31,10 @@
 void gnome_settings_keyboard_xkb_init (GConfClient * client);
 void gnome_settings_keyboard_xkb_load (GConfClient * client);
 
+typedef void ( *PostActivationCallback ) ( void *userData );
+
+void gnome_settings_keyboard_xkb_set_post_activation_callback( 
+                                        PostActivationCallback fun,
+                                        void *userData );
+
 #endif
