@@ -93,11 +93,11 @@ case "x$vers" in
     ;;
 esac
 
-CAPPLET_CFLAGS=`gnome-config --cflags libglade capplet gdk_pixbuf`
-CAPPLET_LIBS=`gnome-config --libs libglade capplet gdk_pixbuf`
+CAPPLET_CFLAGS=`gnome-config --cflags libglade capplet gdk_pixbuf ximian_archiver`
+CAPPLET_LIBS=`gnome-config --libs libglade capplet gdk_pixbuf ximian_archiver`
 
-BG_CAPPLET_CFLAGS=`gnome-config --cflags libglade capplet gdk_pixbuf gdk_pixbuf_xlib`
-BG_CAPPLET_LIBS=`gnome-config --libs libglade capplet gdk_pixbuf gdk_pixbuf_xlib`
+BG_CAPPLET_CFLAGS=`gnome-config --cflags libglade capplet gdk_pixbuf gdk_pixbuf_xlib ximian_archiver`
+BG_CAPPLET_LIBS=`gnome-config --libs libglade capplet gdk_pixbuf gdk_pixbuf_xlib ximian_archiver`
 
 ROLLBACK_CAPPLET_CFLAGS=`gnome-config --cflags libglade capplet gdk_pixbuf ximian_archiver`
 ROLLBACK_CAPPLET_LIBS=`gnome-config --libs libglade capplet gdk_pixbuf ximian_archiver`
