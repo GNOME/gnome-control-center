@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-06-25 14:57+0200\n"
+"POT-Creation-Date: 2004-07-30 20:28-0400\n"
 "PO-Revision-Date: 2004-06-25 23:46+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
@@ -117,7 +117,7 @@ msgid "_Import"
 msgstr "导入(_I)"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "键盘"
@@ -262,7 +262,7 @@ msgid ""
 msgstr "顺序按下修饰键，可以产生同时按多个键的操作。"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:28
 msgid "S_peed:"
 msgstr "速度(_P)："
 
@@ -291,7 +291,7 @@ msgid "_Only accept keys held for:"
 msgstr "接受按键，仅当按键时间超过(_O)："
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:33
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:38
 msgid "_Type to test settings:"
 msgstr "输入字符来测试设置(_T)："
 
@@ -367,43 +367,43 @@ msgstr "样式(_S)："
 msgid "There was an error displaying help: %s"
 msgstr "显示帮助时出错：%s"
 
-#: capplets/background/gnome-wp-capplet.c:1276
-#: capplets/background/gnome-wp-capplet.c:1292
+#: capplets/background/gnome-wp-capplet.c:1047
+#: capplets/background/gnome-wp-capplet.c:1063
 msgid "Centered"
 msgstr "居中"
 
-#: capplets/background/gnome-wp-capplet.c:1300
-#: capplets/background/gnome-wp-capplet.c:1315
+#: capplets/background/gnome-wp-capplet.c:1071
+#: capplets/background/gnome-wp-capplet.c:1086
 msgid "Fill Screen"
 msgstr "填充屏幕"
 
-#: capplets/background/gnome-wp-capplet.c:1323
-#: capplets/background/gnome-wp-capplet.c:1336
+#: capplets/background/gnome-wp-capplet.c:1094
+#: capplets/background/gnome-wp-capplet.c:1107
 msgid "Scaled"
 msgstr "缩放"
 
-#: capplets/background/gnome-wp-capplet.c:1344
-#: capplets/background/gnome-wp-capplet.c:1357
+#: capplets/background/gnome-wp-capplet.c:1115
+#: capplets/background/gnome-wp-capplet.c:1128
 msgid "Tiled"
 msgstr "平铺"
 
-#: capplets/background/gnome-wp-capplet.c:1381
-#: capplets/background/gnome-wp-capplet.c:1390
+#: capplets/background/gnome-wp-capplet.c:1152
+#: capplets/background/gnome-wp-capplet.c:1161
 msgid "Solid Color"
 msgstr "纯色"
 
-#: capplets/background/gnome-wp-capplet.c:1398
-#: capplets/background/gnome-wp-capplet.c:1407
+#: capplets/background/gnome-wp-capplet.c:1169
+#: capplets/background/gnome-wp-capplet.c:1178
 msgid "Horizontal Gradient"
 msgstr "水平渐变"
 
-#: capplets/background/gnome-wp-capplet.c:1415
-#: capplets/background/gnome-wp-capplet.c:1424
+#: capplets/background/gnome-wp-capplet.c:1186
+#: capplets/background/gnome-wp-capplet.c:1195
 msgid "Vertical Gradient"
 msgstr "垂直渐变"
 
 #. Create the file chooser dialog stuff here
-#: capplets/background/gnome-wp-capplet.c:1460
+#: capplets/background/gnome-wp-capplet.c:1231
 msgid "Add Wallpaper"
 msgstr "添加壁纸"
 
@@ -434,7 +434,7 @@ msgid "Just apply settings and quit"
 msgstr "应用设置并退出"
 
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:723
+#: capplets/default-applications/gnome-default-applications-properties.c:735
 #: capplets/keyboard/gnome-keyboard-properties.c:224
 #: capplets/mouse/gnome-mouse-properties.c:812
 #: capplets/sound/sound-properties-capplet.c:244
@@ -951,7 +951,7 @@ msgid "Are you sure you want to permanently delete this entry?"
 msgstr "您确定想要永久删除此项吗？"
 
 #: capplets/file-types/file-types-capplet.c:210
-#: vfs-methods/themus/themus-properties-view.c:163
+#: vfs-methods/themus/themus-properties-view.c:167
 msgid "Description"
 msgstr "描述"
 
@@ -1453,7 +1453,7 @@ msgstr "加速键类型。"
 
 #: capplets/keybindings/eggcellrendererkeys.c:242
 #: capplets/keybindings/gnome-keybinding-properties.c:196
-#: libbackground/applier.c:768 typing-break/drwright.c:473
+#: libbackground/applier.c:757 typing-break/drwright.c:473
 msgid "Disabled"
 msgstr "禁用"
 
@@ -1538,124 +1538,148 @@ msgid "Start the page with the typing break settings showing"
 msgstr "以显示的打字间隔设置启动页面"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:3
+#, fuzzy
+msgid "..."
+msgstr "添加..."
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "<b>Cursor Blinking</b>"
 msgstr "<b>光标闪烁</b>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
 msgid "<b>Repeat Keys</b>"
 msgstr "<b>重复键</b>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "<b>_Lock screen to enforce typing break</b>"
 msgstr "<b>锁定屏幕来强制打字间断(_L)</b>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>快</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>长</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>短</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>慢</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "A_vailable layouts:"
 msgstr "可用布局(_V)："
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "A_vailable options:"
 msgstr "可用选项(_V)："
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "All_ow postponing of breaks"
 msgstr "允许推迟间断(_O)"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Check if breaks are allowed to be postponed"
 msgstr "检查是否允许推迟间断"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#, fuzzy
+msgid "Choose a keyboard model"
+msgstr "XKB 键盘型号"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
 msgid "Cursor _blinks in text boxes and fields"
 msgstr "文本框和文本域中的光标会闪烁(_B)"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
 msgid "Duration of the break when typing is disallowed"
 msgstr "不允许打字时间断持续时间"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
 msgid "Duration of work before forcing a break"
 msgstr "强制间断前的工作持续时间"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
 msgid "Key presses _repeat when key is held down"
 msgstr "按住某一键时重复该键(_R)"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
 msgid "Keyboard Preferences"
 msgstr "键盘首选项"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
 msgid "Keyboard _model:"
 msgstr "键盘型号(_M)："
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "Layout Options"
 msgstr "布局选项"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
 msgid "Layouts"
 msgstr "布局"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid ""
 "Lock screen after a certain duration to help prevent repetitive keyboard use "
 "injuries"
 msgstr "每隔一段时间锁定屏幕，以便重复性的键盘工作使手臂过度劳累"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
+msgid "Microsoft Natural Keyboard"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
 msgid "Reset to de_faults"
 msgstr "重置为默认值(_F)"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:29
 msgid "Typing Break"
 msgstr "打字间断"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:30
 msgid "_Accessibility..."
 msgstr "辅助功能(_A)..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:28
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:31
 msgid "_Break interval lasts:"
 msgstr "间断间隔持续(_B)："
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:29
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:32
 msgid "_Delay:"
 msgstr "延时(_D)："
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:30
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:33
+#, fuzzy
+msgid "_Models"
+msgstr "模态"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:34
+#, fuzzy
+msgid "_Preview"
+msgstr "预览宽度"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:35
 msgid "_Selected layouts:"
 msgstr "选择布局(_S)："
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:31
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:36
 msgid "_Selected options:"
 msgstr "选中的选项(_S)："
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:32
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:37
 msgid "_Speed:"
 msgstr "速度(_S)："
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:34
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:39
 msgid "_Work interval lasts:"
 msgstr "工作间隔持续(_W)："
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:35
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:40
 msgid "minutes"
 msgstr "分钟"
 
@@ -2014,6 +2038,10 @@ msgstr ""
 #: capplets/theme-switcher/gnome-theme-save.c:72
 msgid "Theme name must be present"
 msgstr "必须有主题名称"
+
+#: capplets/theme-switcher/gnome-theme-save.c:104
+msgid "The theme already exists. Would you like to replace it ?"
+msgstr ""
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
 msgid "Select themes for various parts of the desktop"
@@ -2374,7 +2402,7 @@ msgid "Others"
 msgstr "其它"
 
 #: control-center/control-center-categories.c:424
-#: control-center/control-center.c:1087
+#: control-center/control-center.c:1091
 msgid "Gnome Control Center"
 msgstr "Gnome 控制中心"
 
@@ -2616,11 +2644,11 @@ msgstr "预览高度"
 msgid "Height if applier is a preview: Defaults to 48."
 msgstr "高度(若应用于预览)：默认值为 48。"
 
-#: libbackground/applier.c:281
+#: libbackground/applier.c:280
 msgid "Screen"
 msgstr "屏幕"
 
-#: libbackground/applier.c:282
+#: libbackground/applier.c:281
 msgid "Screen on which BGApplier is to draw"
 msgstr "BGApplier 绘图的屏幕"
 
@@ -2776,11 +2804,11 @@ msgstr "XKB 选项"
 msgid "XKB settings in gconf will be overridden from the system ASAP"
 msgstr "gconf 中的 XKB 设置将会被系统立即覆盖"
 
-#: typing-break/drw-break-window.c:191
+#: typing-break/drw-break-window.c:214
 msgid "_Postpone break"
 msgstr "推迟间隔(_P)"
 
-#: typing-break/drw-break-window.c:239
+#: typing-break/drw-break-window.c:262
 msgid "Take a break!"
 msgstr "歇一会儿！"
 
@@ -2807,30 +2835,30 @@ msgstr[0] "距下次间隔还有 %d 分钟"
 msgid "Less than one minute until the next break"
 msgstr "距下次间隔还有不到一分钟。"
 
-#: typing-break/drwright.c:590
+#: typing-break/drwright.c:583
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
 "error: %s"
 msgstr "无法启动打字间隔属性对话框，错误如下：%s"
 
-#: typing-break/drwright.c:638
+#: typing-break/drwright.c:631
 msgid "About GNOME Typing Monitor"
 msgstr "关于 GNOME 打字监视器"
 
-#: typing-break/drwright.c:662
+#: typing-break/drwright.c:655
 msgid "A computer break reminder."
 msgstr "计算机间隔提醒程序。"
 
-#: typing-break/drwright.c:663
+#: typing-break/drwright.c:656
 msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
 msgstr "由 Richard Hult &lt;richard@imendio.com&gt; 编写"
 
-#: typing-break/drwright.c:664
+#: typing-break/drwright.c:657
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Anders Carlsson 添加了视觉效果"
 
-#: typing-break/drwright.c:839
+#: typing-break/drwright.c:832
 msgid "Break reminder"
 msgstr "间隔提醒程序"
 
@@ -3009,19 +3037,19 @@ msgstr "应用字体(_A)"
 msgid "Themes"
 msgstr "主题"
 
-#: vfs-methods/themus/themus-properties-view.c:168
+#: vfs-methods/themus/themus-properties-view.c:172
 msgid "Control theme"
 msgstr "控件主题"
 
-#: vfs-methods/themus/themus-properties-view.c:172
+#: vfs-methods/themus/themus-properties-view.c:176
 msgid "Window border theme"
 msgstr "窗口边框主题"
 
-#: vfs-methods/themus/themus-properties-view.c:176
+#: vfs-methods/themus/themus-properties-view.c:180
 msgid "Icon theme"
 msgstr "图标主题"
 
-#: vfs-methods/themus/themus-properties-view.c:215
+#: vfs-methods/themus/themus-properties-view.c:219
 msgid "URI currently displayed"
 msgstr "当前显示的 URI"
 

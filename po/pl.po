@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-06-23 19:10+0200\n"
+"POT-Creation-Date: 2004-07-30 20:28-0400\n"
 "PO-Revision-Date: 2003-07-12 01:00+0100\n"
 "Last-Translator: Gnome PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
@@ -123,7 +123,7 @@ msgid "_Import"
 msgstr "_Zaimportuj"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "Klawiatura"
@@ -277,7 +277,7 @@ msgstr ""
 "przyciśnięcie klawiszy modyfikatorów."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:28
 msgid "S_peed:"
 msgstr "Szy_bkość:"
 
@@ -308,7 +308,7 @@ msgid "_Only accept keys held for:"
 msgstr "Akc_eptowanie przyciśnięć klawiszy dopiero po:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:33
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:38
 msgid "_Type to test settings:"
 msgstr "_Wpisz tekst, aby przetestować ustawienia:"
 
@@ -384,43 +384,43 @@ msgstr "_Styl:"
 msgid "There was an error displaying help: %s"
 msgstr "Przy wyświetlaniu pomocy wystąpił błąd: %s"
 
-#: capplets/background/gnome-wp-capplet.c:1276
-#: capplets/background/gnome-wp-capplet.c:1292
+#: capplets/background/gnome-wp-capplet.c:1047
+#: capplets/background/gnome-wp-capplet.c:1063
 msgid "Centered"
 msgstr "Wyśrodkowany"
 
-#: capplets/background/gnome-wp-capplet.c:1300
-#: capplets/background/gnome-wp-capplet.c:1315
+#: capplets/background/gnome-wp-capplet.c:1071
+#: capplets/background/gnome-wp-capplet.c:1086
 msgid "Fill Screen"
 msgstr "Wypełnienie ekranu"
 
-#: capplets/background/gnome-wp-capplet.c:1323
-#: capplets/background/gnome-wp-capplet.c:1336
+#: capplets/background/gnome-wp-capplet.c:1094
+#: capplets/background/gnome-wp-capplet.c:1107
 msgid "Scaled"
 msgstr "Przeskalowany"
 
-#: capplets/background/gnome-wp-capplet.c:1344
-#: capplets/background/gnome-wp-capplet.c:1357
+#: capplets/background/gnome-wp-capplet.c:1115
+#: capplets/background/gnome-wp-capplet.c:1128
 msgid "Tiled"
 msgstr "Sąsiadująco"
 
-#: capplets/background/gnome-wp-capplet.c:1381
-#: capplets/background/gnome-wp-capplet.c:1390
+#: capplets/background/gnome-wp-capplet.c:1152
+#: capplets/background/gnome-wp-capplet.c:1161
 msgid "Solid Color"
 msgstr "Kolor jednolity"
 
-#: capplets/background/gnome-wp-capplet.c:1398
-#: capplets/background/gnome-wp-capplet.c:1407
+#: capplets/background/gnome-wp-capplet.c:1169
+#: capplets/background/gnome-wp-capplet.c:1178
 msgid "Horizontal Gradient"
 msgstr "Gradient poziomy"
 
-#: capplets/background/gnome-wp-capplet.c:1415
-#: capplets/background/gnome-wp-capplet.c:1424
+#: capplets/background/gnome-wp-capplet.c:1186
+#: capplets/background/gnome-wp-capplet.c:1195
 msgid "Vertical Gradient"
 msgstr "Gradient pionowy"
 
 #. Create the file chooser dialog stuff here
-#: capplets/background/gnome-wp-capplet.c:1460
+#: capplets/background/gnome-wp-capplet.c:1231
 msgid "Add Wallpaper"
 msgstr "Dodawanie tapety"
 
@@ -452,7 +452,7 @@ msgid "Just apply settings and quit"
 msgstr "Zastosowuje ustawienia i kończy"
 
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:723
+#: capplets/default-applications/gnome-default-applications-properties.c:735
 #: capplets/keyboard/gnome-keyboard-properties.c:224
 #: capplets/mouse/gnome-mouse-properties.c:812
 #: capplets/sound/sound-properties-capplet.c:244
@@ -985,7 +985,7 @@ msgid "Are you sure you want to permanently delete this entry?"
 msgstr "Czy na pewno chcesz trwale usunąć ten wpis?"
 
 #: capplets/file-types/file-types-capplet.c:210
-#: vfs-methods/themus/themus-properties-view.c:163
+#: vfs-methods/themus/themus-properties-view.c:167
 msgid "Description"
 msgstr "Opis"
 
@@ -1520,7 +1520,7 @@ msgstr "Tryb akceleratora."
 
 #: capplets/keybindings/eggcellrendererkeys.c:242
 #: capplets/keybindings/gnome-keybinding-properties.c:196
-#: libbackground/applier.c:768 typing-break/drwright.c:473
+#: libbackground/applier.c:757 typing-break/drwright.c:473
 msgid "Disabled"
 msgstr "Nieaktywny"
 
@@ -1611,82 +1611,92 @@ msgid "Start the page with the typing break settings showing"
 msgstr "Otwiera stronę z właściwościami przerwy w pisaniu na klawiaturze"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:3
+#, fuzzy
+msgid "..."
+msgstr "Dodaj..."
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "<b>Cursor Blinking</b>"
 msgstr "<b>Mruganie kursora</b>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
 msgid "<b>Repeat Keys</b>"
 msgstr "<b>Powtarzanie klawiszy</b>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "<b>_Lock screen to enforce typing break</b>"
 msgstr "<b>B_lokada ekranu wymuszająca przerwę w pisaniu</b>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>Szybko</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>Długie</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>Krótkie</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Wolno</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "A_vailable layouts:"
 msgstr "Dostępne _układy:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "A_vailable options:"
 msgstr "Dostępne _opcje:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "All_ow postponing of breaks"
 msgstr "Odr_aczanie przerw"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Check if breaks are allowed to be postponed"
 msgstr "Przerwy mogą być odraczane"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#, fuzzy
+msgid "Choose a keyboard model"
+msgstr "Model klawiatury XKB"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
 msgid "Cursor _blinks in text boxes and fields"
 msgstr "M_rugający kursor w polach tekstowych"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
 msgid "Duration of the break when typing is disallowed"
 msgstr "Czas trwania przerwy w pisaniu"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
 msgid "Duration of work before forcing a break"
 msgstr "Czas trwania pracy przed wymuszeniem przerwy"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
 msgid "Key presses _repeat when key is held down"
 msgstr "_Powtarzanie naciśnięcia klawisza przy jego przytrzymaniu"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
 msgid "Keyboard Preferences"
 msgstr "Ustawienia klawiatury"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
 msgid "Keyboard _model:"
 msgstr "_Model klawiatury:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "Layout Options"
 msgstr "Opcje ułożenia"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
 msgid "Layouts"
 msgstr "Układy"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid ""
 "Lock screen after a certain duration to help prevent repetitive keyboard use "
 "injuries"
@@ -1694,43 +1704,57 @@ msgstr ""
 "Blokada ekranu po określonym czasie, pomagająca zapobiegać urazom związanym "
 "z pisaniem na klawiaturze"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
+msgid "Microsoft Natural Keyboard"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
 msgid "Reset to de_faults"
 msgstr "P_rzywrócenie wartości domyślnych"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:29
 msgid "Typing Break"
 msgstr "Przerwa w pisaniu"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:30
 msgid "_Accessibility..."
 msgstr "_Dostępność..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:28
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:31
 msgid "_Break interval lasts:"
 msgstr "_Długość przerwy:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:29
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:32
 msgid "_Delay:"
 msgstr "_Opóźnienie:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:30
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:33
+#, fuzzy
+msgid "_Models"
+msgstr "Model"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:34
+#, fuzzy
+msgid "_Preview"
+msgstr "Szerokość podglądu"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:35
 msgid "_Selected layouts:"
 msgstr "Wybrane _układy:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:31
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:36
 msgid "_Selected options:"
 msgstr "Wy_brane opcje:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:32
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:37
 msgid "_Speed:"
 msgstr "_Szybkość:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:34
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:39
 msgid "_Work interval lasts:"
 msgstr "Długość czasu p_racy:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:35
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:40
 msgid "minutes"
 msgstr "minut"
 
@@ -2095,6 +2119,10 @@ msgstr ""
 msgid "Theme name must be present"
 msgstr "Motyw musi mieć nazwę"
 
+#: capplets/theme-switcher/gnome-theme-save.c:104
+msgid "The theme already exists. Would you like to replace it ?"
+msgstr ""
+
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
 msgid "Select themes for various parts of the desktop"
 msgstr "Wybór motywów różnych części środowiska"
@@ -2454,7 +2482,7 @@ msgid "Others"
 msgstr "Inne"
 
 #: control-center/control-center-categories.c:424
-#: control-center/control-center.c:1087
+#: control-center/control-center.c:1091
 msgid "Gnome Control Center"
 msgstr "Centrum Sterowania GNOME"
 
@@ -2707,11 +2735,11 @@ msgid "Height if applier is a preview: Defaults to 48."
 msgstr ""
 "Wysokość przycisku, jeśli zawiera podgląd. Domyślną wysokością jest 48."
 
-#: libbackground/applier.c:281
+#: libbackground/applier.c:280
 msgid "Screen"
 msgstr "Ekran"
 
-#: libbackground/applier.c:282
+#: libbackground/applier.c:281
 msgid "Screen on which BGApplier is to draw"
 msgstr "Okno, na którym ma być rysowany BGApplier"
 
@@ -2881,11 +2909,11 @@ msgstr ""
 "Ustawienia XKB w gconf będą nadpisane przez system najszybciej jak to tylko "
 "możliwe"
 
-#: typing-break/drw-break-window.c:191
+#: typing-break/drw-break-window.c:214
 msgid "_Postpone break"
 msgstr "O_droczenie przerwy"
 
-#: typing-break/drw-break-window.c:239
+#: typing-break/drw-break-window.c:262
 msgid "Take a break!"
 msgstr "Czas na przerwę!"
 
@@ -2914,7 +2942,7 @@ msgstr[2] "%d minut do przerwy"
 msgid "Less than one minute until the next break"
 msgstr "Mniej niż minuta do przerwy"
 
-#: typing-break/drwright.c:590
+#: typing-break/drwright.c:583
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
@@ -2922,23 +2950,23 @@ msgid ""
 msgstr ""
 "Nie można wyświetlić okna właściwości przerw w pisaniu z powodu błędu: %s"
 
-#: typing-break/drwright.c:638
+#: typing-break/drwright.c:631
 msgid "About GNOME Typing Monitor"
 msgstr "O monitorze pisania na klawiaturze "
 
-#: typing-break/drwright.c:662
+#: typing-break/drwright.c:655
 msgid "A computer break reminder."
 msgstr "Program do przypominania o przerwach w pracy z komputerem."
 
-#: typing-break/drwright.c:663
+#: typing-break/drwright.c:656
 msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
 msgstr "Napisany przez Richarda Hulta &lt;richard@imendio.com&gt;"
 
-#: typing-break/drwright.c:664
+#: typing-break/drwright.c:657
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Grafika autorstwa Andresa Carlssona"
 
-#: typing-break/drwright.c:839
+#: typing-break/drwright.c:832
 msgid "Break reminder"
 msgstr "Program do przypominania o przerwach"
 
@@ -3127,19 +3155,19 @@ msgstr "Zastosuj _czcionkę"
 msgid "Themes"
 msgstr "Motywy"
 
-#: vfs-methods/themus/themus-properties-view.c:168
+#: vfs-methods/themus/themus-properties-view.c:172
 msgid "Control theme"
 msgstr "Motyw kontrolny"
 
-#: vfs-methods/themus/themus-properties-view.c:172
+#: vfs-methods/themus/themus-properties-view.c:176
 msgid "Window border theme"
 msgstr "Motyw krawędzi okna"
 
-#: vfs-methods/themus/themus-properties-view.c:176
+#: vfs-methods/themus/themus-properties-view.c:180
 msgid "Icon theme"
 msgstr "Motyw ikony"
 
-#: vfs-methods/themus/themus-properties-view.c:215
+#: vfs-methods/themus/themus-properties-view.c:219
 msgid "URI currently displayed"
 msgstr "Aktualnie wyświetlany URI"
 

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.ta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-06-05 12:29-0500\n"
+"POT-Creation-Date: 2004-07-30 20:28-0400\n"
 "PO-Revision-Date: 2004-06-01 13:17+0530\n"
 "Last-Translator: Zhakanini <tamilpc@ambalam.com>\n"
 "Language-Team: Tamil <tamillinux-user@lists.sourceforge.net>\n"
@@ -114,7 +114,7 @@ msgid "_Import"
 msgstr "இறக்குமதி செய்"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "விசைப்பலகை"
@@ -260,7 +260,7 @@ msgid ""
 msgstr "மாற்றியமை விசைகள் வரிசையாக அழுத்தி உடன்நிகழ் விசை அழுத்து செயல்பாடு ஆற்றும்."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:28
 msgid "S_peed:"
 msgstr "வேகம்:்:"
 
@@ -289,7 +289,7 @@ msgid "_Only accept keys held for:"
 msgstr "இவ்வளவு நேரெற்ற விசை அமுத்தல ஏற்றுக்கொள் மட்டும் :"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:33
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:38
 msgid "_Type to test settings:"
 msgstr "அமைப்புகளை சோதிக்க உள்ளிடவும்:"
 
@@ -365,43 +365,43 @@ msgstr "பாணி:"
 msgid "There was an error displaying help: %s"
 msgstr "உதவியை காட்டும்போது பிழை ஏற்பட்டது: %s"
 
-#: capplets/background/gnome-wp-capplet.c:1276
-#: capplets/background/gnome-wp-capplet.c:1292
+#: capplets/background/gnome-wp-capplet.c:1047
+#: capplets/background/gnome-wp-capplet.c:1063
 msgid "Centered"
 msgstr "நடுவில்அமைக்கப்பட்ட"
 
-#: capplets/background/gnome-wp-capplet.c:1300
-#: capplets/background/gnome-wp-capplet.c:1315
+#: capplets/background/gnome-wp-capplet.c:1071
+#: capplets/background/gnome-wp-capplet.c:1086
 msgid "Fill Screen"
 msgstr "திரையை நிரப்பு"
 
-#: capplets/background/gnome-wp-capplet.c:1323
-#: capplets/background/gnome-wp-capplet.c:1336
+#: capplets/background/gnome-wp-capplet.c:1094
+#: capplets/background/gnome-wp-capplet.c:1107
 msgid "Scaled"
 msgstr "அளவுமாற்றப்பட்ட"
 
-#: capplets/background/gnome-wp-capplet.c:1344
-#: capplets/background/gnome-wp-capplet.c:1357
+#: capplets/background/gnome-wp-capplet.c:1115
+#: capplets/background/gnome-wp-capplet.c:1128
 msgid "Tiled"
 msgstr "அடுக்கப்பட்டப்பு"
 
-#: capplets/background/gnome-wp-capplet.c:1381
-#: capplets/background/gnome-wp-capplet.c:1390
+#: capplets/background/gnome-wp-capplet.c:1152
+#: capplets/background/gnome-wp-capplet.c:1161
 msgid "Solid Color"
 msgstr "நிலை நிறம்"
 
-#: capplets/background/gnome-wp-capplet.c:1398
-#: capplets/background/gnome-wp-capplet.c:1407
+#: capplets/background/gnome-wp-capplet.c:1169
+#: capplets/background/gnome-wp-capplet.c:1178
 msgid "Horizontal Gradient"
 msgstr "கிடைதிசை மாற்றம்"
 
-#: capplets/background/gnome-wp-capplet.c:1415
-#: capplets/background/gnome-wp-capplet.c:1424
+#: capplets/background/gnome-wp-capplet.c:1186
+#: capplets/background/gnome-wp-capplet.c:1195
 msgid "Vertical Gradient"
 msgstr "செங்குத்தான மாற்றம்"
 
 #. Create the file chooser dialog stuff here
-#: capplets/background/gnome-wp-capplet.c:1460
+#: capplets/background/gnome-wp-capplet.c:1231
 msgid "Add Wallpaper"
 msgstr "சுவர்-காகிதங்கள் சேர்."
 
@@ -428,10 +428,10 @@ msgid "Just apply settings and quit"
 msgstr "அமைப்புகளை செயல்படுத்தி விட்டு வெளியேறவும்"
 
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:723
+#: capplets/default-applications/gnome-default-applications-properties.c:735
 #: capplets/keyboard/gnome-keyboard-properties.c:224
 #: capplets/mouse/gnome-mouse-properties.c:812
-#: capplets/sound/sound-properties-capplet.c:212
+#: capplets/sound/sound-properties-capplet.c:244
 msgid "Retrieve and store legacy settings"
 msgstr "பழைய அமைவுகளை மீட்டு தேக்கு/சேமி"
 
@@ -919,19 +919,24 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: capplets/display/main.c:629
+#: capplets/display/main.c:626
+#, fuzzy
+msgid "Keep Resolution"
+msgstr "நுணுக்கத்தை வைத்திருக்கவும்"
+
+#: capplets/display/main.c:630
 msgid "Do you want to keep this resolution?"
 msgstr "இந்த நுணுக்கத்தை வைக்க விரும்புகிறீர்களா?"
 
-#: capplets/display/main.c:654
+#: capplets/display/main.c:655
 msgid "Use _previous resolution"
 msgstr "முந்தை நுணுக்கத்தை பயன்படுத்தவும்"
 
-#: capplets/display/main.c:654
+#: capplets/display/main.c:655
 msgid "_Keep resolution"
 msgstr "நுணுக்கத்தை வைத்திருக்கவும்"
 
-#: capplets/display/main.c:803
+#: capplets/display/main.c:806
 msgid ""
 "The X Server does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
@@ -939,7 +944,7 @@ msgstr ""
 " X வழங்கன் XRமற்றும்R விரிவாக்கத்திற்க்கு ஆதாரவலிக்காது.  கிடைக்காத காட்சி அளவுக்கான "
 "இயக்குநேர தீர்மானம் மாற்றங்கள் changes."
 
-#: capplets/display/main.c:811
+#: capplets/display/main.c:814
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
@@ -952,7 +957,7 @@ msgid "Are you sure you want to permanently delete this entry?"
 msgstr "இந்த உள்ளீடுகளை நிரந்திரமாக நீக்க வேண்டுமா?"
 
 #: capplets/file-types/file-types-capplet.c:210
-#: vfs-methods/themus/themus-properties-view.c:163
+#: vfs-methods/themus/themus-properties-view.c:167
 msgid "Description"
 msgstr "விவரணம்"
 
@@ -1457,7 +1462,7 @@ msgstr "ஆர்முடுகல் வகையினம்:"
 
 #: capplets/keybindings/eggcellrendererkeys.c:242
 #: capplets/keybindings/gnome-keybinding-properties.c:196
-#: libbackground/applier.c:768 typing-break/drwright.c:473
+#: libbackground/applier.c:757 typing-break/drwright.c:473
 msgid "Disabled"
 msgstr "முடக்கப்பட்டது"
 
@@ -1531,8 +1536,8 @@ msgstr "_அணுகல்"
 
 #: capplets/keyboard/gnome-keyboard-properties.c:220
 #: capplets/keyboard/gnome-keyboard-properties.c:222
-#: capplets/sound/sound-properties-capplet.c:208
-#: capplets/sound/sound-properties-capplet.c:210
+#: capplets/sound/sound-properties-capplet.c:240
+#: capplets/sound/sound-properties-capplet.c:242
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr "அமைவுகளை சேமித்து வெளிச்செல்லவும்"
@@ -1542,124 +1547,148 @@ msgid "Start the page with the typing break settings showing"
 msgstr "உள்ளிடல் முறிவு அமைப்புகளை காட்டி பக்கத்தை திறக்கவும்"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:3
+#, fuzzy
+msgid "..."
+msgstr "சேர்..."
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "<b>Cursor Blinking</b>"
 msgstr "<b>நிலை காட்டி சிமிட்டும்</b>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
 msgid "<b>Repeat Keys</b>"
 msgstr "<b>மறுசெயல் விசைகள்</b>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "<b>_Lock screen to enforce typing break</b>"
 msgstr "<b>_பூட்டு திரை அச்சிடுவதை தடுக்கும்</b>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>வேகமாக</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>நீண்ட</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>கட்டை</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>மெதுவாக</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "A_vailable layouts:"
 msgstr "இருக்கும் பக்கஅமைப்புகள்:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "A_vailable options:"
 msgstr "இருக்கும் விருப்பங்கள்:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "All_ow postponing of breaks"
 msgstr "இடைவேளைகளைுகளை தள்ளிப்போட அனுமதி"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Check if breaks are allowed to be postponed"
 msgstr "இடைவேளைகளைுகள் தள்ளிப்போட அனுமதி உள்ளதா என சோதிக்கவும்"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#, fuzzy
+msgid "Choose a keyboard model"
+msgstr "XKB விசைப்பலகை உருவரை"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
 msgid "Cursor _blinks in text boxes and fields"
 msgstr "உரை உள்ளீடப்படும் இடங்களிலும் புலங்களிலும் சிமிட்டும்"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
 msgid "Duration of the break when typing is disallowed"
 msgstr "உள்ளிடல் செயலிழக்கப்பட்டபோது இடைவேளையின்வின் காலஅளவு"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
 msgid "Duration of work before forcing a break"
 msgstr "இவ்வளவு வேலைக்குப் பிறகு இடைவேளையை கட்டாயமாக்கு"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
 msgid "Key presses _repeat when key is held down"
 msgstr "அமுக்கப்படும்போது விசை மறுபடியும் அச்சிடப்படும்."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
 msgid "Keyboard Preferences"
 msgstr "விசைப்பலகை விருப்பங்கள்"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
 msgid "Keyboard _model:"
 msgstr "விசைப்பலகை வகை"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "Layout Options"
 msgstr "பக்கஅமைப்பும் விருப்பங்கள்:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
 msgid "Layouts"
 msgstr "இடஅமைவுகள்"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid ""
 "Lock screen after a certain duration to help prevent repetitive keyboard use "
 "injuries"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
+msgid "Microsoft Natural Keyboard"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
 msgid "Reset to de_faults"
 msgstr "இயல்பானவற்றிற்கு மீள்அமைக்கவும்"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:29
 msgid "Typing Break"
 msgstr "உள்ளிடல் இடைவெளி"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:30
 msgid "_Accessibility..."
 msgstr "அணுகல்..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:28
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:31
 msgid "_Break interval lasts:"
 msgstr "இடைவெளி நீளம்"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:29
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:32
 msgid "_Delay:"
 msgstr "தாமதம்:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:30
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:33
+#, fuzzy
+msgid "_Models"
+msgstr "படிமம்"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:34
+#, fuzzy
+msgid "_Preview"
+msgstr "முன்காட்சி அகலம்"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:35
 msgid "_Selected layouts:"
 msgstr "இடஅமைவுகளை தேர்வுசெய்யவும்ுசெய்:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:31
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:36
 msgid "_Selected options:"
 msgstr "தேர்வுசெய்தம் விருப்பங்கள்:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:32
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:37
 msgid "_Speed:"
 msgstr "வேகம்்:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:34
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:39
 msgid "_Work interval lasts:"
 msgstr "இடைவெளி நீளம்ஜ்"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:35
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:40
 msgid "minutes"
 msgstr "நிமிடங்கள்"
 
@@ -1910,30 +1939,31 @@ msgid "Socks host port"
 msgstr "பள்ள ஆஸ்ட் துறை"
 
 #: capplets/network/gnome-network-preferences.glade.h:17
+#, fuzzy
+msgid "U_sername:"
+msgstr "பயனர் பெயர்."
+
+#: capplets/network/gnome-network-preferences.glade.h:18
 msgid "_Details"
 msgstr "_விவரங்கள்"
 
-#: capplets/network/gnome-network-preferences.glade.h:18
+#: capplets/network/gnome-network-preferences.glade.h:19
 msgid "_FTP proxy:"
 msgstr "HTTP பிரதிநிதி பழங்கவும்."
 
-#: capplets/network/gnome-network-preferences.glade.h:19
+#: capplets/network/gnome-network-preferences.glade.h:20
 msgid "_Password:"
 msgstr "கடவுச் சொல்:."
 
-#: capplets/network/gnome-network-preferences.glade.h:20
+#: capplets/network/gnome-network-preferences.glade.h:21
 msgid "_Secure HTTP proxy:"
 msgstr "HTTP பிரதிநிதி பழங்கவும்."
-
-#: capplets/network/gnome-network-preferences.glade.h:21
-msgid "_Username:"
-msgstr "பயனர் பெயர்."
 
 #: capplets/sound/gnome-settings-sound.desktop.in.h:1
 msgid "Enable sound and associate sounds with events"
 msgstr "ஒலிகளை இயலுமைப்படுத்தி அவைகளை நிகழ்வுகளுடன் இணைக்கவும்"
 
-#: capplets/sound/sound-properties-capplet.c:239
+#: capplets/sound/sound-properties-capplet.c:271
 msgid "Sound preferences"
 msgstr "ஒலி பண்புகள்"
 
@@ -1999,15 +2029,15 @@ msgid ""
 "selected as the source location"
 msgstr ""
 
-#: capplets/theme-switcher/gnome-theme-manager.c:642
+#: capplets/theme-switcher/gnome-theme-manager.c:677
 msgid "Custom theme"
 msgstr "சட்டி தோற்றம்."
 
-#: capplets/theme-switcher/gnome-theme-manager.c:642
+#: capplets/theme-switcher/gnome-theme-manager.c:677
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "இந்த பொருளை சேமிக்க பொருள் பொத்தானை அழுத்தவும்."
 
-#: capplets/theme-switcher/gnome-theme-manager.c:1403
+#: capplets/theme-switcher/gnome-theme-manager.c:1455
 msgid ""
 "The default theme schemas could not be found on your system.  This means "
 "that you probably don't have metacity installed, or that your gconf is "
@@ -2017,6 +2047,10 @@ msgstr ""
 #: capplets/theme-switcher/gnome-theme-save.c:72
 msgid "Theme name must be present"
 msgstr "பொருள் பெயர் இருக்க வேண்டும்"
+
+#: capplets/theme-switcher/gnome-theme-save.c:104
+msgid "The theme already exists. Would you like to replace it ?"
+msgstr ""
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
 msgid "Select themes for various parts of the desktop"
@@ -2120,14 +2154,19 @@ msgid "_Install Theme..."
 msgstr "புதிய உருகாறு நிறுவிக்கவும்...."
 
 #: capplets/theme-switcher/theme-properties.glade.h:21
+#, fuzzy
+msgid "_Revert"
+msgstr "_நீக்கு"
+
+#: capplets/theme-switcher/theme-properties.glade.h:22
 msgid "_Save Theme..."
 msgstr "பொருள்களை சேமி..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:22
+#: capplets/theme-switcher/theme-properties.glade.h:23
 msgid "_Theme name:"
 msgstr "பொருள் பெயர்கள்"
 
-#: capplets/theme-switcher/theme-properties.glade.h:23
+#: capplets/theme-switcher/theme-properties.glade.h:24
 msgid "theme selection tree"
 msgstr "மரப்பொருள்களை தேர்ந்தெடு"
 
@@ -2232,7 +2271,7 @@ msgstr "_வெளிச்செல்"
 msgid "_Save"
 msgstr "_சேமி"
 
-#: capplets/windows/gnome-window-properties.c:378
+#: capplets/windows/gnome-window-properties.c:388
 #, c-format
 msgid ""
 "<b>Cannot start the preferences application for your window manager</b>\n"
@@ -2243,23 +2282,23 @@ msgstr ""
 "\n"
 "%s"
 
-#: capplets/windows/gnome-window-properties.c:625
+#: capplets/windows/gnome-window-properties.c:637
 msgid "Control"
 msgstr "கட்டுப்பாடு"
 
-#: capplets/windows/gnome-window-properties.c:630
+#: capplets/windows/gnome-window-properties.c:642
 msgid "Alt"
 msgstr "Alt"
 
-#: capplets/windows/gnome-window-properties.c:636
+#: capplets/windows/gnome-window-properties.c:648
 msgid "Hyper"
 msgstr "இனம்."
 
-#: capplets/windows/gnome-window-properties.c:643
+#: capplets/windows/gnome-window-properties.c:655
 msgid "Super (or \"Windows logo\")"
 msgstr "சிறப்பான (or \"Windows logo\")"
 
-#: capplets/windows/gnome-window-properties.c:650
+#: capplets/windows/gnome-window-properties.c:662
 msgid "Meta"
 msgstr "மீ"
 
@@ -2373,7 +2412,7 @@ msgid "Others"
 msgstr "மற்றவைகள்"
 
 #: control-center/control-center-categories.c:424
-#: control-center/control-center.c:1087
+#: control-center/control-center.c:1091
 msgid "Gnome Control Center"
 msgstr "கனோம் கட்டுப்பாட்டு மையம்"
 
@@ -2568,7 +2607,7 @@ msgstr "ஒலி கோப்பு %s ஐ ஓர் மாதிரி %s ஆ�
 msgid "Cannot determine user's home directory"
 msgstr "பயனர் இல்ல அடைவை குறிப்பிட முடியாது"
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:206
+#: gnome-settings-daemon/gnome-settings-xsettings.c:208
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "GConf விசை %s, %s வகைக்கு அமைக்கப்பட்டுள்ளது ஆனால் எதிர்பார்த்து %s\n"
@@ -2605,11 +2644,11 @@ msgstr "முன்காட்சி உயரம்"
 msgid "Height if applier is a preview: Defaults to 48."
 msgstr "நீளம் முந்தோற்றம் அமைப்பதில்:48க்கு முன்னிருப்பு."
 
-#: libbackground/applier.c:281
+#: libbackground/applier.c:280
 msgid "Screen"
 msgstr "திரை"
 
-#: libbackground/applier.c:282
+#: libbackground/applier.c:281
 msgid "Screen on which BGApplier is to draw"
 msgstr "திரையில் வரையுவதற்க்கான BGஅமைப்பு"
 
@@ -2766,11 +2805,11 @@ msgstr "XKB  தேர்வுகள்"
 msgid "XKB settings in gconf will be overridden from the system ASAP"
 msgstr "gconf விலுள்ள XKB அமைப்புகள் ASAP முறைமையிலிருந்து அதிகமாக ஓட்டப்பட்டது"
 
-#: typing-break/drw-break-window.c:191
+#: typing-break/drw-break-window.c:214
 msgid "_Postpone break"
 msgstr "_ஒத்திவத்தல் முறிப்பு"
 
-#: typing-break/drw-break-window.c:239
+#: typing-break/drw-break-window.c:262
 msgid "Take a break!"
 msgstr "முறிவு எடுக்கவும்!"
 
@@ -2798,30 +2837,30 @@ msgstr[1] "ஒரு நிமிடத்திற்கு குறைவா�
 msgid "Less than one minute until the next break"
 msgstr "ஒரு நிமிடத்திற்கு குறைவான அடுத்த இடைவெளி வரை"
 
-#: typing-break/drwright.c:590
+#: typing-break/drwright.c:583
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
 "error: %s"
 msgstr "அச்சிடும் உடை குணங்கள் உரையாட பின்வரும் பிழையுடன் மேலே கொண்டுவர முடியாது:%s"
 
-#: typing-break/drwright.c:638
+#: typing-break/drwright.c:631
 msgid "About GNOME Typing Monitor"
 msgstr "GNOME அச்சிடும் திரையகம் பற்றி"
 
-#: typing-break/drwright.c:662
+#: typing-break/drwright.c:655
 msgid "A computer break reminder."
 msgstr "கணினி புறிவின் நினைவுகுறிப்பு."
 
-#: typing-break/drwright.c:663
+#: typing-break/drwright.c:656
 msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
 msgstr "எழுதியது ரிச்சர்டு ஹல்ட் &lt;richard@imendio.com&gt;"
 
-#: typing-break/drwright.c:664
+#: typing-break/drwright.c:657
 msgid "Eye candy added by Anders Carlsson"
 msgstr "ஆண்டிராஸ் கார்ல்சன் ஐய் காண்டியை சேர்த்தார்"
 
-#: typing-break/drwright.c:839
+#: typing-break/drwright.c:832
 msgid "Break reminder"
 msgstr "முறிவு நினைவுகுறிப்பு"
 
@@ -3003,19 +3042,19 @@ msgstr "_மாற்றங்களை பயன்படுத்து"
 msgid "Themes"
 msgstr "உருகாறுகள்"
 
-#: vfs-methods/themus/themus-properties-view.c:168
+#: vfs-methods/themus/themus-properties-view.c:172
 msgid "Control theme"
 msgstr "கட்டுப்பாட்டு தோற்றம்"
 
-#: vfs-methods/themus/themus-properties-view.c:172
+#: vfs-methods/themus/themus-properties-view.c:176
 msgid "Window border theme"
 msgstr "சாளர எல்லையின் தோற்றம்."
 
-#: vfs-methods/themus/themus-properties-view.c:176
+#: vfs-methods/themus/themus-properties-view.c:180
 msgid "Icon theme"
 msgstr "சட்டி தோற்றம்."
 
-#: vfs-methods/themus/themus-properties-view.c:215
+#: vfs-methods/themus/themus-properties-view.c:219
 msgid "URI currently displayed"
 msgstr "இதனைத அனுப்பும் URI முகவரி."
 

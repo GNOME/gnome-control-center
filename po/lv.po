@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-04-15 18:23-0400\n"
+"POT-Creation-Date: 2004-07-30 20:28-0400\n"
 "PO-Revision-Date: 2003-01-21 15:44+0200\n"
 "Last-Translator: Artis Trops <hornet@navigator.lv>\n"
 "Language-Team: Latvian <ll10nt@os.lv>\n"
@@ -110,7 +110,7 @@ msgid "_Import"
 msgstr ""
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "Tastatūra"
@@ -271,7 +271,7 @@ msgstr ""
 "modifikatora taustiņus citu aiz cita."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:28
 msgid "S_peed:"
 msgstr "Āt_rums:"
 
@@ -300,7 +300,7 @@ msgid "_Only accept keys held for:"
 msgstr "_Akceptēt taustiņnospiešanu pēc:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:33
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:38
 msgid "_Type to test settings:"
 msgstr "_Raksti, lai notestētu uzstādījumus:"
 
@@ -333,7 +333,7 @@ msgstr "pikseļi/sekunde"
 #: capplets/mouse/gnome-mouse-properties.c:133
 #: capplets/mouse/gnome-mouse-properties.c:578
 #: capplets/mouse/gnome-mouse-properties.glade.h:27
-#: capplets/windows/gnome-window-properties.glade.h:7
+#: capplets/windows/gnome-window-properties.glade.h:10
 msgid "seconds"
 msgstr "sekundes"
 
@@ -383,45 +383,52 @@ msgstr "Stils:"
 msgid "There was an error displaying help: %s"
 msgstr "Kļūda parādot palīdzību: %s"
 
-#: capplets/background/gnome-wp-capplet.c:1290
+#: capplets/background/gnome-wp-capplet.c:1047
+#: capplets/background/gnome-wp-capplet.c:1063
 #, fuzzy
 msgid "Centered"
 msgstr "C_entrēts"
 
-#: capplets/background/gnome-wp-capplet.c:1312
+#: capplets/background/gnome-wp-capplet.c:1071
+#: capplets/background/gnome-wp-capplet.c:1086
 #, fuzzy
 msgid "Fill Screen"
 msgstr "Ekrāns"
 
-#: capplets/background/gnome-wp-capplet.c:1332
+#: capplets/background/gnome-wp-capplet.c:1094
+#: capplets/background/gnome-wp-capplet.c:1107
 #, fuzzy
 msgid "Scaled"
 msgstr "_Mērogots"
 
-#: capplets/background/gnome-wp-capplet.c:1352
+#: capplets/background/gnome-wp-capplet.c:1115
+#: capplets/background/gnome-wp-capplet.c:1128
 #, fuzzy
 msgid "Tiled"
 msgstr "_Fails"
 
-#: capplets/background/gnome-wp-capplet.c:1384
+#: capplets/background/gnome-wp-capplet.c:1152
+#: capplets/background/gnome-wp-capplet.c:1161
 #, fuzzy
 msgid "Solid Color"
 msgstr "Viendabīga krāsa"
 
-#: capplets/background/gnome-wp-capplet.c:1400
+#: capplets/background/gnome-wp-capplet.c:1169
+#: capplets/background/gnome-wp-capplet.c:1178
 #, fuzzy
 msgid "Horizontal Gradient"
 msgstr "Horizontālā novirze"
 
-#: capplets/background/gnome-wp-capplet.c:1416
+#: capplets/background/gnome-wp-capplet.c:1186
+#: capplets/background/gnome-wp-capplet.c:1195
 #, fuzzy
 msgid "Vertical Gradient"
 msgstr "Vertikālā novirze"
 
-#: capplets/background/gnome-wp-capplet.c:1453
-#: capplets/background/gnome-wp-capplet.c:1464
+#. Create the file chooser dialog stuff here
+#: capplets/background/gnome-wp-capplet.c:1231
 #, fuzzy
-msgid "Add Wallpapers"
+msgid "Add Wallpaper"
 msgstr "_Tapete"
 
 #: capplets/background/gnome-wp-info.c:49
@@ -453,10 +460,10 @@ msgid "Just apply settings and quit"
 msgstr "Tikai attiecināt uzstādījumus un iziet"
 
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:723
+#: capplets/default-applications/gnome-default-applications-properties.c:735
 #: capplets/keyboard/gnome-keyboard-properties.c:224
 #: capplets/mouse/gnome-mouse-properties.c:812
-#: capplets/sound/sound-properties-capplet.c:212
+#: capplets/sound/sound-properties-capplet.c:244
 msgid "Retrieve and store legacy settings"
 msgstr "Iegūt un noglabāt mantotos uzstādījumus"
 
@@ -959,25 +966,30 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: capplets/display/main.c:629
+#: capplets/display/main.c:626
+#, fuzzy
+msgid "Keep Resolution"
+msgstr "A_praksts:"
+
+#: capplets/display/main.c:630
 msgid "Do you want to keep this resolution?"
 msgstr ""
 
-#: capplets/display/main.c:654
+#: capplets/display/main.c:655
 msgid "Use _previous resolution"
 msgstr ""
 
-#: capplets/display/main.c:654
+#: capplets/display/main.c:655
 msgid "_Keep resolution"
 msgstr ""
 
-#: capplets/display/main.c:803
+#: capplets/display/main.c:806
 msgid ""
-"The XServer does not support the XRandR extension.  Runtime resolution "
+"The X Server does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
 msgstr ""
 
-#: capplets/display/main.c:811
+#: capplets/display/main.c:814
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
@@ -988,7 +1000,7 @@ msgid "Are you sure you want to permanently delete this entry?"
 msgstr ""
 
 #: capplets/file-types/file-types-capplet.c:210
-#: vfs-methods/themus/themus-properties-view.c:163
+#: vfs-methods/themus/themus-properties-view.c:167
 msgid "Description"
 msgstr "Apraksts"
 
@@ -1175,7 +1187,7 @@ msgid "Add File Type"
 msgstr "Pievienot Faila Tipu"
 
 #: capplets/file-types/mime-edit-dialog.c:432
-#: capplets/file-types/mime-type-info.c:763
+#: capplets/file-types/mime-type-info.c:766
 msgid "Misc"
 msgstr "Dažādi"
 
@@ -1206,20 +1218,20 @@ msgstr "Kategorija"
 msgid "Choose a file category"
 msgstr "Izvēlieties faila kategoriju"
 
-#: capplets/file-types/mime-type-info.c:691
+#: capplets/file-types/mime-type-info.c:694
 #, c-format
 msgid "View as %s"
 msgstr ""
 
-#: capplets/file-types/mime-type-info.c:757
+#: capplets/file-types/mime-type-info.c:760
 msgid "Images"
 msgstr "Attēli"
 
-#: capplets/file-types/mime-type-info.c:759
+#: capplets/file-types/mime-type-info.c:762
 msgid "Video"
 msgstr "Video"
 
-#: capplets/file-types/mime-type-info.c:761
+#: capplets/file-types/mime-type-info.c:764
 msgid "Audio"
 msgstr "Audio"
 
@@ -1337,8 +1349,9 @@ msgid "Best co_ntrast"
 msgstr "Labākais ko_ntrasts"
 
 #: capplets/font/font-properties.glade.h:8
-msgid "De_tails..."
-msgstr "De_taļas..."
+#, fuzzy
+msgid "D_etails..."
+msgstr "_Detaļas..."
 
 #: capplets/font/font-properties.glade.h:9
 msgid "Font Preferences"
@@ -1349,13 +1362,14 @@ msgid "Font Rendering Details"
 msgstr "Fonta Attēlošanas Detaļas"
 
 #: capplets/font/font-properties.glade.h:11
-msgid "G_rayscale"
-msgstr "_Melnbalts"
-
-#: capplets/font/font-properties.glade.h:12
 #, fuzzy
 msgid "Go _to font folder"
 msgstr "_Doties uz tēmu mapi"
+
+#: capplets/font/font-properties.glade.h:12
+#, fuzzy
+msgid "Gra_yscale"
+msgstr "_Melnbalts"
 
 #: capplets/font/font-properties.glade.h:13
 msgid "N_one"
@@ -1481,7 +1495,7 @@ msgstr[1] ""
 
 #: capplets/keybindings/eggcellrendererkeys.c:21
 #, fuzzy
-msgid "<New accelerator...>"
+msgid "New accelerator..."
 msgstr "Ievediet jaunu paātrinātāju"
 
 #: capplets/keybindings/eggcellrendererkeys.c:163
@@ -1509,33 +1523,29 @@ msgid "The type of accelerator."
 msgstr "Paātrinātāja tips."
 
 #: capplets/keybindings/eggcellrendererkeys.c:242
-#: capplets/keybindings/gnome-keybinding-properties.c:239
-#: libbackground/applier.c:768 typing-break/drwright.c:473
+#: capplets/keybindings/gnome-keybinding-properties.c:196
+#: libbackground/applier.c:757 typing-break/drwright.c:473
 msgid "Disabled"
 msgstr "Deaktivizēts"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:206
-msgid "GNOME Default"
-msgstr ""
-
-#: capplets/keybindings/gnome-keybinding-properties.c:581
+#: capplets/keybindings/gnome-keybinding-properties.c:538
 msgid "<Unknown Action>"
 msgstr "<Nezināma Darbība>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:600
+#: capplets/keybindings/gnome-keybinding-properties.c:557
 msgid "Desktop"
 msgstr "Darba virsma"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:601
+#: capplets/keybindings/gnome-keybinding-properties.c:558
 #: capplets/sound/gnome-settings-sound.desktop.in.h:2
 msgid "Sound"
 msgstr "Skaņa"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:605
+#: capplets/keybindings/gnome-keybinding-properties.c:562
 msgid "Window Management"
 msgstr "Logu Pārvaldīšana"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:743
+#: capplets/keybindings/gnome-keybinding-properties.c:659
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1544,55 +1554,35 @@ msgstr ""
 "Saiīsne \"%s\" jau tiek lietota priekš:\n"
 " \"%s\"\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:773
+#: capplets/keybindings/gnome-keybinding-properties.c:691
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Kļūda uzstādot jaunu paātrinātāju konfigurācijas datubāzē: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:819
+#: capplets/keybindings/gnome-keybinding-properties.c:741
 #, fuzzy, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "Kļūda uzstādot jaunu paātrinātāju konfigurācijas datubāzē: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:967
-msgid ""
-"Unable to find any keyboard themes.  This means your GTK+ installation has "
-"been incompletely installed."
-msgstr ""
-"Nevaru atrast nekādas tastatūras tēmas. Tas nozīmē, ka jūsu GTK+ instalācija "
-"ir nepilnīgi uzstādīta."
-
-#: capplets/keybindings/gnome-keybinding-properties.c:989
+#: capplets/keybindings/gnome-keybinding-properties.c:830
 msgid "Action"
 msgstr "Darbība"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:1013
+#: capplets/keybindings/gnome-keybinding-properties.c:854
 msgid "Shortcut"
 msgstr "Saīsne"
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:1
-msgid "Click for a list of keyboard navigation schemes."
-msgstr "Klikšķiniet, lai iegūtu tastatūras navigācijas shēmu sarakstu."
-
-#: capplets/keybindings/gnome-keybinding-properties.glade.h:2
 #: capplets/keybindings/keybinding.desktop.in.h:2
 msgid "Keyboard Shortcuts"
 msgstr "Tastatūras Saīsnes"
 
-#: capplets/keybindings/gnome-keybinding-properties.glade.h:3
+#: capplets/keybindings/gnome-keybinding-properties.glade.h:2
 #, fuzzy
 msgid ""
-"To edit a shortcut, click on the corresponding row and type a new "
+"To edit a shortcut key, click on the corresponding row and type a new "
 "accelerator, or press backspace to clear."
 msgstr "Ievadiet jaunu paātrinātāju vai nospiediet Atpakaļatkāpi, lai attīrītu"
-
-#: capplets/keybindings/gnome-keybinding-properties.glade.h:4
-msgid "_Desktop shortcuts:"
-msgstr "_Darbavirsmas saīsnes:"
-
-#: capplets/keybindings/gnome-keybinding-properties.glade.h:5
-msgid "_Text editing shortcuts:"
-msgstr "_Teksta rediģēšanas saīsnes:"
 
 #: capplets/keybindings/keybinding.desktop.in.h:1
 msgid "Assign shortcut keys to commands"
@@ -1609,8 +1599,8 @@ msgstr "_Peejamība"
 
 #: capplets/keyboard/gnome-keyboard-properties.c:220
 #: capplets/keyboard/gnome-keyboard-properties.c:222
-#: capplets/sound/sound-properties-capplet.c:208
-#: capplets/sound/sound-properties-capplet.c:210
+#: capplets/sound/sound-properties-capplet.c:240
+#: capplets/sound/sound-properties-capplet.c:242
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
@@ -1623,134 +1613,158 @@ msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:3
 #, fuzzy
+msgid "..."
+msgstr "Pievienot..."
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+#, fuzzy
 msgid "<b>Cursor Blinking</b>"
 msgstr "Kursors Mirgo"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
 #, fuzzy
 msgid "<b>Repeat Keys</b>"
 msgstr "Aktivizēt _Peles Taustiņus"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "<b>_Lock screen to enforce typing break</b>"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>Ātri</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>Gari</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>Īsi</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Lēni</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "A_vailable layouts:"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 #, fuzzy
 msgid "A_vailable options:"
 msgstr "Attēla Opcijas:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "All_ow postponing of breaks"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Check if breaks are allowed to be postponed"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#, fuzzy
+msgid "Choose a keyboard model"
+msgstr "Tastatūras Zvans"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
 #, fuzzy
 msgid "Cursor _blinks in text boxes and fields"
 msgstr "_Mirgo tekstu kastītēs un laukos"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
 msgid "Duration of the break when typing is disallowed"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
 msgid "Duration of work before forcing a break"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
 #, fuzzy
 msgid "Key presses _repeat when key is held down"
 msgstr "Tastatūras _atkārtojumi, kad taustiņš tiek nospiests"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
 msgid "Keyboard Preferences"
 msgstr "Tastatūras Preferences"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
 #, fuzzy
 msgid "Keyboard _model:"
 msgstr "Tastatūras Zvans"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
 #, fuzzy
 msgid "Layout Options"
 msgstr "Attēla Opcijas:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
 #, fuzzy
 msgid "Layouts"
 msgstr "Izkārtojums"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid ""
 "Lock screen after a certain duration to help prevent repetitive keyboard use "
 "injuries"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
+msgid "Microsoft Natural Keyboard"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
 #, fuzzy
 msgid "Reset to de_faults"
 msgstr "Lietot pamatkategorijas _noklusējumus"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:29
 msgid "Typing Break"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:30
 msgid "_Accessibility..."
 msgstr "_Pieejamība..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:28
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:31
 msgid "_Break interval lasts:"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:29
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:32
 msgid "_Delay:"
 msgstr "Aizt_ure:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:30
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:33
+#, fuzzy
+msgid "_Models"
+msgstr "Modelis"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:34
+#, fuzzy
+msgid "_Preview"
+msgstr "Pirmsapskate"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:35
 #, fuzzy
 msgid "_Selected layouts:"
 msgstr "Iz_vēlēties Redaktoru:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:31
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:36
 #, fuzzy
 msgid "_Selected options:"
 msgstr "Attēla Opcijas:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:32
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:37
 msgid "_Speed:"
 msgstr "Ā_trums:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:34
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:39
 msgid "_Work interval lasts:"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:35
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:40
 msgid "minutes"
 msgstr ""
 
@@ -1990,51 +2004,72 @@ msgid "Autoconfiguration _URL:"
 msgstr "Autokonfigurācijas _URL:"
 
 #: capplets/network/gnome-network-preferences.glade.h:8
+#, fuzzy
+msgid "FTP proxy port"
+msgstr "_FTP starpserveris:"
+
+#: capplets/network/gnome-network-preferences.glade.h:9
 msgid "HTTP Proxy Details"
 msgstr "HTTP Starpservera Detaļas"
 
-#: capplets/network/gnome-network-preferences.glade.h:9
+#: capplets/network/gnome-network-preferences.glade.h:10
+#, fuzzy
+msgid "HTTP proxy port"
+msgstr "_HTTP starpserveris:"
+
+#: capplets/network/gnome-network-preferences.glade.h:11
 #, fuzzy
 msgid "H_TTP proxy:"
 msgstr "_HTTP starpserveris:"
 
-#: capplets/network/gnome-network-preferences.glade.h:10
+#: capplets/network/gnome-network-preferences.glade.h:12
 msgid "Network Proxy Configuration"
 msgstr "Tīkla Starpservera Konfigurācija"
 
-#: capplets/network/gnome-network-preferences.glade.h:11
+#: capplets/network/gnome-network-preferences.glade.h:13
 msgid "Port:"
 msgstr "Ports:"
 
-#: capplets/network/gnome-network-preferences.glade.h:12
+#: capplets/network/gnome-network-preferences.glade.h:14
 msgid "S_ocks host:"
 msgstr "S_ocks hosts:"
 
-#: capplets/network/gnome-network-preferences.glade.h:13
+#: capplets/network/gnome-network-preferences.glade.h:15
+#, fuzzy
+msgid "Secure HTTP proxy port"
+msgstr "_Drošais HTTP starpserveris:"
+
+#: capplets/network/gnome-network-preferences.glade.h:16
+#, fuzzy
+msgid "Socks host port"
+msgstr "S_ocks hosts:"
+
+#: capplets/network/gnome-network-preferences.glade.h:17
+#, fuzzy
+msgid "U_sername:"
+msgstr "Lietotāj_vārds:"
+
+#: capplets/network/gnome-network-preferences.glade.h:18
 msgid "_Details"
 msgstr "_Detaļas"
 
-#: capplets/network/gnome-network-preferences.glade.h:14
+#: capplets/network/gnome-network-preferences.glade.h:19
 msgid "_FTP proxy:"
 msgstr "_FTP starpserveris:"
 
-#: capplets/network/gnome-network-preferences.glade.h:15
+#: capplets/network/gnome-network-preferences.glade.h:20
 msgid "_Password:"
 msgstr "Pa_role:"
 
-#: capplets/network/gnome-network-preferences.glade.h:16
+#: capplets/network/gnome-network-preferences.glade.h:21
 msgid "_Secure HTTP proxy:"
 msgstr "_Drošais HTTP starpserveris:"
-
-#: capplets/network/gnome-network-preferences.glade.h:17
-msgid "_Username:"
-msgstr "Lietotāj_vārds:"
 
 #: capplets/sound/gnome-settings-sound.desktop.in.h:1
 msgid "Enable sound and associate sounds with events"
 msgstr "Aktivizēt skaņu un sasaistīt skaņas ar notikumiem"
 
-#: capplets/sound/sound-properties-capplet.c:239
+#: capplets/sound/sound-properties-capplet.c:271
 msgid "Sound preferences"
 msgstr "Skaņas preferences"
 
@@ -2103,15 +2138,15 @@ msgid ""
 "selected as the source location"
 msgstr ""
 
-#: capplets/theme-switcher/gnome-theme-manager.c:642
+#: capplets/theme-switcher/gnome-theme-manager.c:677
 msgid "Custom theme"
 msgstr "Pašizvēles tēma"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:642
+#: capplets/theme-switcher/gnome-theme-manager.c:677
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "Jūs variet saglabāt šo tēmu, nospiežot pogu Saglabāt Tēmu."
 
-#: capplets/theme-switcher/gnome-theme-manager.c:1403
+#: capplets/theme-switcher/gnome-theme-manager.c:1455
 msgid ""
 "The default theme schemas could not be found on your system.  This means "
 "that you probably don't have metacity installed, or that your gconf is "
@@ -2121,6 +2156,10 @@ msgstr ""
 #: capplets/theme-switcher/gnome-theme-save.c:72
 msgid "Theme name must be present"
 msgstr "Jābūt tēmas nosaukumam"
+
+#: capplets/theme-switcher/gnome-theme-save.c:104
+msgid "The theme already exists. Would you like to replace it ?"
+msgstr ""
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
 msgid "Select themes for various parts of the desktop"
@@ -2246,14 +2285,19 @@ msgstr "_Instalēt tēmu..."
 
 #: capplets/theme-switcher/theme-properties.glade.h:21
 #, fuzzy
+msgid "_Revert"
+msgstr "_Izņemt"
+
+#: capplets/theme-switcher/theme-properties.glade.h:22
+#, fuzzy
 msgid "_Save Theme..."
 msgstr "_Saglabāt tēmu"
 
-#: capplets/theme-switcher/theme-properties.glade.h:22
+#: capplets/theme-switcher/theme-properties.glade.h:23
 msgid "_Theme name:"
 msgstr "_Tēmas nosaukums:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:23
+#: capplets/theme-switcher/theme-properties.glade.h:24
 msgid "theme selection tree"
 msgstr ""
 
@@ -2365,7 +2409,7 @@ msgstr "_Iziet"
 msgid "_Save"
 msgstr "_Saglabāt"
 
-#: capplets/windows/gnome-window-properties.c:378
+#: capplets/windows/gnome-window-properties.c:388
 #, c-format
 msgid ""
 "<b>Cannot start the preferences application for your window manager</b>\n"
@@ -2376,48 +2420,63 @@ msgstr ""
 "\n"
 "%s"
 
-#: capplets/windows/gnome-window-properties.c:625
+#: capplets/windows/gnome-window-properties.c:637
 msgid "Control"
 msgstr "Kontrole"
 
-#: capplets/windows/gnome-window-properties.c:630
+#: capplets/windows/gnome-window-properties.c:642
 msgid "Alt"
 msgstr "Alt"
 
-#: capplets/windows/gnome-window-properties.c:636
+#: capplets/windows/gnome-window-properties.c:648
 msgid "Hyper"
 msgstr "Hiper"
 
-#: capplets/windows/gnome-window-properties.c:643
+#: capplets/windows/gnome-window-properties.c:655
 msgid "Super (or \"Windows logo\")"
 msgstr "Super (vai \"Windows logo\")"
 
-#: capplets/windows/gnome-window-properties.c:650
+#: capplets/windows/gnome-window-properties.c:662
 msgid "Meta"
 msgstr "Meta"
 
 #: capplets/windows/gnome-window-properties.glade.h:1
+#, fuzzy
+msgid "<b>Movement Key</b>"
+msgstr "Aktivizēt _Peles Taustiņus"
+
+#: capplets/windows/gnome-window-properties.glade.h:2
+#, fuzzy
+msgid "<b>Titlebar Action</b>"
+msgstr "Mantotās Aplikācijas"
+
+#: capplets/windows/gnome-window-properties.glade.h:3
+#, fuzzy
+msgid "<b>Window Selection</b>"
+msgstr "Hintēšana:"
+
+#: capplets/windows/gnome-window-properties.glade.h:4
 msgid "To _move a window, press-and-hold this key then grab the window:"
 msgstr ""
 "Lai _pārvietotu logu, nospiediet-un-turiet šo pogu, tad paķeriet logu::"
 
-#: capplets/windows/gnome-window-properties.glade.h:2
+#: capplets/windows/gnome-window-properties.glade.h:5
 msgid "Window Preferences"
 msgstr "Loga Preferences"
 
-#: capplets/windows/gnome-window-properties.glade.h:3
+#: capplets/windows/gnome-window-properties.glade.h:6
 msgid "_Double-click titlebar to perform this action:"
 msgstr "_Dubultklikšķis uz virsrakstjoslas, lai izdarītu šo  darbību:"
 
-#: capplets/windows/gnome-window-properties.glade.h:4
+#: capplets/windows/gnome-window-properties.glade.h:7
 msgid "_Interval before raising:"
 msgstr "_Intervāls pirms pacelšanas:"
 
-#: capplets/windows/gnome-window-properties.glade.h:5
+#: capplets/windows/gnome-window-properties.glade.h:8
 msgid "_Raise selected windows after an interval"
 msgstr "_Pacelt izvēlēto logu pēc intervāla"
 
-#: capplets/windows/gnome-window-properties.glade.h:6
+#: capplets/windows/gnome-window-properties.glade.h:9
 msgid "_Select windows when the mouse moves over them"
 msgstr "_Izvēlēties logus, kad peles kursors pārvietojas pār tiem"
 
@@ -2488,6 +2547,22 @@ msgstr "_Saturs"
 #: control-center/gnomecc-ui.xml.h:6
 msgid "_Help"
 msgstr "_Palīdzība"
+
+#: control-center/control-center-categories.c:333
+#, fuzzy
+msgid "Others"
+msgstr "Filtri"
+
+#: control-center/control-center-categories.c:424
+#: control-center/control-center.c:1091
+#, fuzzy
+msgid "Gnome Control Center"
+msgstr "GNOME Kontroles Centrs : %s"
+
+#: control-center/control-center.c:78
+#, fuzzy
+msgid "Use nautilus if it is running."
+msgstr "Lietot komandrindu ja pat nautilus strādā."
 
 #: control-center/gnomecc.desktop.in.h:2
 msgid "The GNOME configuration tool"
@@ -2592,7 +2667,7 @@ msgstr ""
 "Kļūda, mēģinot palaist (%s)\n"
 "kurš ir saistīts ar atslēgu (%s)"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:65
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:73
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2607,7 +2682,7 @@ msgid ""
 "- The result of <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/xkb</b>"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:75
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:83
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2615,7 +2690,22 @@ msgid ""
 "software."
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:151
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:170
+msgid ""
+"The X system keyboard settings differ from your current GNOME keyboard "
+"settings.  Which set would you like to use?"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:173
+#, fuzzy
+msgid "Use X settings"
+msgstr "Paplašinātie Uzstādījumi"
+
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:175
+msgid "Use GNOME settings"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:227
 #, c-format
 msgid ""
 "You have a keyboard remapping file (%s) in your home directory whose "
@@ -2652,7 +2742,7 @@ msgstr "Nevarēju ielādēt skaņas failu %s kā paraugu %s"
 msgid "Cannot determine user's home directory"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:206
+#: gnome-settings-daemon/gnome-settings-xsettings.c:208
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr ""
@@ -2690,11 +2780,11 @@ msgstr "Pirmsapskates Augstums"
 msgid "Height if applier is a preview: Defaults to 48."
 msgstr "Augstums ja attiecinātajs ir pirmsapskate: Noklusēti uz 48."
 
-#: libbackground/applier.c:281
+#: libbackground/applier.c:280
 msgid "Screen"
 msgstr "Ekrāns"
 
-#: libbackground/applier.c:282
+#: libbackground/applier.c:281
 msgid "Screen on which BGApplier is to draw"
 msgstr "Ekrāns, uz kura jāzīmē BGApplier"
 
@@ -2862,11 +2952,11 @@ msgstr "Darbības"
 msgid "XKB settings in gconf will be overridden from the system ASAP"
 msgstr ""
 
-#: typing-break/drw-break-window.c:191
+#: typing-break/drw-break-window.c:214
 msgid "_Postpone break"
 msgstr ""
 
-#: typing-break/drw-break-window.c:239
+#: typing-break/drw-break-window.c:262
 msgid "Take a break!"
 msgstr ""
 
@@ -2896,30 +2986,30 @@ msgstr[1] ""
 msgid "Less than one minute until the next break"
 msgstr ""
 
-#: typing-break/drwright.c:590
+#: typing-break/drwright.c:583
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
 "error: %s"
 msgstr ""
 
-#: typing-break/drwright.c:638
+#: typing-break/drwright.c:631
 msgid "About GNOME Typing Monitor"
 msgstr ""
 
-#: typing-break/drwright.c:662
+#: typing-break/drwright.c:655
 msgid "A computer break reminder."
 msgstr ""
 
-#: typing-break/drwright.c:663
+#: typing-break/drwright.c:656
 msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
 msgstr ""
 
-#: typing-break/drwright.c:664
+#: typing-break/drwright.c:657
 msgid "Eye candy added by Anders Carlsson"
 msgstr ""
 
-#: typing-break/drwright.c:839
+#: typing-break/drwright.c:832
 msgid "Break reminder"
 msgstr ""
 
@@ -2967,6 +3057,11 @@ msgstr "Autortiesības:"
 #: vfs-methods/fontilus/font-view.c:324
 msgid "Description:"
 msgstr "Apraksts:"
+
+#: vfs-methods/fontilus/font-view.c:394
+#, c-format
+msgid "usage: %s fontfile\n"
+msgstr ""
 
 #: vfs-methods/fontilus/fontilus-context-menu.c:131
 msgid "Font context menu items"
@@ -3101,19 +3196,19 @@ msgstr "Pielietot F_ontu"
 msgid "Themes"
 msgstr "Tēmas"
 
-#: vfs-methods/themus/themus-properties-view.c:168
+#: vfs-methods/themus/themus-properties-view.c:172
 msgid "Control theme"
 msgstr "Kontroles tēma"
 
-#: vfs-methods/themus/themus-properties-view.c:172
+#: vfs-methods/themus/themus-properties-view.c:176
 msgid "Window border theme"
 msgstr "Loga robežas tēma"
 
-#: vfs-methods/themus/themus-properties-view.c:176
+#: vfs-methods/themus/themus-properties-view.c:180
 msgid "Icon theme"
 msgstr "Ikonas tēma"
 
-#: vfs-methods/themus/themus-properties-view.c:215
+#: vfs-methods/themus/themus-properties-view.c:219
 msgid "URI currently displayed"
 msgstr "Pašlaik parāditais URI"
 
@@ -3223,48 +3318,53 @@ msgstr "_Darbavirsmas saīsnes:"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:9
 #, fuzzy
-msgid "Home Folder"
+msgid "Home folder"
 msgstr "_Doties uz tēmu mapi"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:10
 #, fuzzy
-msgid "Launch Help Browser"
-msgstr "Palīdzības Pārlūks"
+msgid "Home folder's shortcut."
+msgstr "Saīsne"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
-msgid "Launch Help Browser's shortcut."
-msgstr ""
+#, fuzzy
+msgid "Launch help browser"
+msgstr "Palīdzības Pārlūks"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:12
 #, fuzzy
-msgid "Launch Web Browser"
-msgstr "Tīmekļa Pārlūks"
+msgid "Launch help browser's shortcut."
+msgstr "Palīdzības Pārlūks"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:13
-msgid "Launch Web Browser's shortcut."
-msgstr ""
+#, fuzzy
+msgid "Launch web browser"
+msgstr "Tīmekļa Pārlūks"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:14
 #, fuzzy
-msgid "Lock Screen"
-msgstr "Ekrāns"
+msgid "Launch web browser's shortcut."
+msgstr "Tīmekļa Pārlūks"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
-msgid "Lock Screen's shortcut."
-msgstr ""
+#, fuzzy
+msgid "Lock screen"
+msgstr "Ekrāns"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
 #, fuzzy
-msgid "Log Out"
-msgstr "Izkārtojums"
+msgid "Lock screen's shortcut."
+msgstr "Saīsne"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
-msgid "Log Out's shortcut."
-msgstr ""
+#, fuzzy
+msgid "Log out"
+msgstr "Izkārtojums"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
-msgid "My Home Folder's shortcut."
-msgstr ""
+#, fuzzy
+msgid "Log out's shortcut."
+msgstr "_Darbavirsmas saīsnes:"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
 msgid "Next track key's shortcut."
@@ -3280,11 +3380,11 @@ msgid "Pause key's shortcut."
 msgstr ""
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
-msgid "Play (or Play/Pause)"
+msgid "Play (or play/pause)"
 msgstr ""
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
-msgid "Play (or Play/Pause) key's shortcut."
+msgid "Play (or play/pause) key's shortcut."
 msgstr ""
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
@@ -3301,11 +3401,11 @@ msgid "Search's shortcut."
 msgstr "Saīsne"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
-msgid "Skip to Next track"
+msgid "Skip to next track"
 msgstr ""
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
-msgid "Skip to Previous track"
+msgid "Skip to previous track"
 msgstr ""
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
@@ -3361,6 +3461,25 @@ msgstr "_Skaļums:"
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
 msgid "Volume up's shortcut."
 msgstr ""
+
+#~ msgid "De_tails..."
+#~ msgstr "De_taļas..."
+
+#~ msgid ""
+#~ "Unable to find any keyboard themes.  This means your GTK+ installation "
+#~ "has been incompletely installed."
+#~ msgstr ""
+#~ "Nevaru atrast nekādas tastatūras tēmas. Tas nozīmē, ka jūsu GTK+ "
+#~ "instalācija ir nepilnīgi uzstādīta."
+
+#~ msgid "Click for a list of keyboard navigation schemes."
+#~ msgstr "Klikšķiniet, lai iegūtu tastatūras navigācijas shēmu sarakstu."
+
+#~ msgid "_Desktop shortcuts:"
+#~ msgstr "_Darbavirsmas saīsnes:"
+
+#~ msgid "_Text editing shortcuts:"
+#~ msgstr "_Teksta rediģēšanas saīsnes:"
 
 #~ msgid "Control Center Menu"
 #~ msgstr "Kontroles Centra Izvēlne"
@@ -3555,9 +3674,6 @@ msgstr ""
 
 #~ msgid "Can't find an hbox, using a normal file selection"
 #~ msgstr "Nevar atrast hbox, lietoju normālu failu atlasīšanu"
-
-#~ msgid "Preview"
-#~ msgstr "Pirmsapskate"
 
 #, fuzzy
 #~ msgid "Desktop Wallpaper"
@@ -3759,9 +3875,6 @@ msgstr ""
 
 #~ msgid "_Location of new theme:"
 #~ msgstr "Jaunās _tēmas atrašanās vieta:"
-
-#~ msgid "_Details..."
-#~ msgstr "_Detaļas..."
 
 #~ msgid ""
 #~ "<b>Note:</b> You will need to logout and log back in for this setting to "

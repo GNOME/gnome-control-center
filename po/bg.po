@@ -11,13 +11,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-29 03:32+0200\n"
+"POT-Creation-Date: 2004-07-30 20:28-0400\n"
 "PO-Revision-Date: 2004-07-29 11:51+0300\n"
 "Last-Translator: Rostislav Raykov <zbrox@i-space.org>\n"
 "Language-Team: Bulgarian GNOME translation team <dict@linux.zonebg.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:1
 msgid "<b>Applications</b>"
@@ -302,7 +302,7 @@ msgid "_Only accept keys held for:"
 msgstr "Приемане само на клавиши задържани за:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:37
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:38
 msgid "_Type to test settings:"
 msgstr "Моля, пишете за да опитате настройките:"
 
@@ -928,16 +928,20 @@ msgid "Options"
 msgstr "Опции"
 
 #: capplets/display/main.c:580
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d second the previous "
 "settings will be restored."
+msgid_plural ""
 "Testing the new settings. If you don't respond in %d seconds the previous "
 "settings will be restored."
-msgstr ""
+msgstr[0] ""
 "Тестват се новите настройки. Ако не отговорите до %d секунда ще бъдат "
-"използвани старите."
-"Тестват се новите настройки. Ако не отговорите до %d "
+"използвани старите.Тестват се новите настройки. Ако не отговорите до %d "
+"секунди ще бъдат използвани старите."
+msgstr[1] ""
+"Тестват се новите настройки. Ако не отговорите до %d секунда ще бъдат "
+"използвани старите.Тестват се новите настройки. Ако не отговорите до %d "
 "секунди ще бъдат използвани старите."
 
 #: capplets/display/main.c:626
@@ -1433,33 +1437,45 @@ msgid "Font may be too large"
 msgstr "Шрифта може да е прекалено голям"
 
 #: capplets/font/main.c:507
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "The font selected is %d point large, and may make it difficult to "
 "effectively use the computer.  It is recommended that you select a size "
 "smaller than %d."
+msgid_plural ""
 "The font selected is %d points large, and may make it difficult to "
 "effectively use the computer.  It is recommended that you select a size "
 "smaller than %d."
-msgstr ""
+msgstr[0] ""
+"Избраният шрифт е голям %d точка, което може да затрудни ефективната работа "
+"на този компютър. Препоръчително е да·изберете размер по-малък от %d."
+"Избраният шрифт е голям %d точки, което може да затрудни ефективната работа "
+"на този компютър.  Препоръчително е да изберете размер по-малък от %d."
+msgstr[1] ""
 "Избраният шрифт е голям %d точка, което може да затрудни ефективната работа "
 "на този компютър. Препоръчително е да·изберете размер по-малък от %d."
 "Избраният шрифт е голям %d точки, което може да затрудни ефективната работа "
 "на този компютър.  Препоръчително е да изберете размер по-малък от %d."
 
 #: capplets/font/main.c:514
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "The font selected is %d point large, and may make it difficult to "
 "effectively use the computer.  It is recommended that you select a smaller "
 "sized font."
+msgid_plural ""
 "The font selected is %d points large, and may make it difficult to "
 "effectively use the computer.  It is recommended that you select a smaller "
 "sized font."
-msgstr ""
+msgstr[0] ""
 "Избраният шрифт е голям %d точка, което може да затрудни ефективната работа "
-"на този компютър.  Препоръчително е да изберете по-малък шрифт."
-"Избраният шрифт е голям %d точки, което може да затрудни ефективната работа на този "
+"на този компютър.  Препоръчително е да изберете по-малък шрифт.Избраният "
+"шрифт е голям %d точки, което може да затрудни ефективната работа на този "
+"компютър.  Препоръчително е да изберете по-малък шрифт."
+msgstr[1] ""
+"Избраният шрифт е голям %d точка, което може да затрудни ефективната работа "
+"на този компютър.  Препоръчително е да изберете по-малък шрифт.Избраният "
+"шрифт е голям %d точки, което може да затрудни ефективната работа на този "
 "компютър.  Препоръчително е да изберете по-малък шрифт."
 
 #: capplets/keybindings/eggcellrendererkeys.c:21
@@ -1695,26 +1711,31 @@ msgid "_Delay:"
 msgstr "_Закъснение:"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:33
+#, fuzzy
+msgid "_Models"
+msgstr "Модел"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:34
 msgid "_Preview"
 msgstr "Преглед"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:34
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:35
 msgid "_Selected layouts:"
 msgstr "Избрана подредба:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:35
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:36
 msgid "_Selected options:"
 msgstr "Избрани опции:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:36
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:37
 msgid "_Speed:"
 msgstr "_Скорост:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:38
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:39
 msgid "_Work interval lasts:"
 msgstr "Продължение на _работния интервал:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:39
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:40
 msgid "minutes"
 msgstr "минути"
 
@@ -2881,9 +2902,11 @@ msgid "/_Take a Break"
 msgstr "/_Взимане на Почивка"
 
 #: typing-break/drwright.c:491
-#, c-format
+#, fuzzy, c-format
 msgid "%d minute until the next break"
-msgstr "%d минута до следващата почивка"
+msgid_plural "%d minutes until the next break"
+msgstr[0] "%d минута до следващата почивка"
+msgstr[1] "%d минута до следващата почивка"
 
 #: typing-break/drwright.c:495
 msgid "Less than one minute until the next break"
