@@ -162,16 +162,28 @@ get_control_cb (BonoboPropertyControl *property_control, gint page_number)
 					 BONOBO_PROPERTY_WRITEABLE);
 
 		bonobo_control_set_automerge (control, TRUE);
-
-		gtk_signal_connect (GTK_OBJECT (widget), "destroy",
-				    GTK_SIGNAL_FUNC (gtk_main_quit), NULL);
-		gtk_signal_connect (GTK_OBJECT (control), "destroy",
-				    GTK_SIGNAL_FUNC (gtk_main_quit), NULL);
 	} else {
 		return NULL;
 	}
 
 	return BONOBO_OBJECT (control);
+}
+
+/* quit_cb
+ *
+ * Release all objects and close down
+ */
+
+static void
+quit_cb (BonoboPropertyControl *pc, Bonobo_ConfigDatabase db) 
+{
+	CORBA_Environment ev;
+
+	CORBA_exception_init (&ev);
+	bonobo_object_release_unref (db, &ev);
+	CORBA_exception_free (&ev);
+
+	gtk_main_quit ();
 }
 
 /* create_control_cb
@@ -195,6 +207,9 @@ create_control_cb (BonoboGenericFactory *factory, Bonobo_ConfigDatabase db)
 	bonobo_event_source_client_add_listener
 		(db, (BonoboListenerCallbackFn) changed_cb,
 		 "Bonobo/ConfigDatabase:change", &ev, db);
+
+	gtk_signal_connect (GTK_OBJECT (property_control), "destroy",
+			    GTK_SIGNAL_FUNC (quit_cb), db);
 
 	CORBA_exception_free (&ev);
 

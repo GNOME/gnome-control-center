@@ -10,8 +10,11 @@
 	associated with the capplet
 	(set_moniker_cb): Use GTK_BIN (pf)->child rather than
 	bonobo_control_get_widget
-	(get_control_cb): Quit the program when the control or the widget
-	are destroyed
+	(get_control_cb): Destroy the property control when the control or
+	the widget are destroyed
+	(quit_cb): Implement
+	(create_control_cb): Connect destroy signal of property control to
+	quit_cb
 
 	* Makefile.am (INCLUDES): Removed -DGLADE_DATADIR
 
