@@ -99,6 +99,9 @@ CAPPLET_LIBS=`gnome-config --libs libglade capplet gdk_pixbuf`
 BG_CAPPLET_CFLAGS=`gnome-config --cflags libglade capplet gdk_pixbuf gdk_pixbuf_xlib`
 BG_CAPPLET_LIBS=`gnome-config --libs libglade capplet gdk_pixbuf gdk_pixbuf_xlib`
 
+ROLLBACK_CAPPLET_CFLAGS=`gnome-config --cflags libglade capplet gdk_pixbuf ximian_archiver`
+ROLLBACK_CAPPLET_LIBS=`gnome-config --libs libglade capplet gdk_pixbuf ximian_archiver`
+
 GNOMECC_CFLAGS=`gnome-config --cflags gnomeui libglade xml gdk_pixbuf capplet gnomecanvaspixbuf gtkhtml`
 GNOMECC_LIBS=`gnome-config --libs gnomeui libglade xml gdk_pixbuf capplet gnomecanvaspixbuf gtkhtml`
 
@@ -107,6 +110,9 @@ AC_SUBST(CAPPLET_LIBS)
 
 AC_SUBST(BG_CAPPLET_CFLAGS)
 AC_SUBST(BG_CAPPLET_LIBS)
+
+AC_SUBST(ROLLBACK_CAPPLET_CFLAGS)
+AC_SUBST(ROLLBACK_CAPPLET_LIBS)
 
 AC_SUBST(GNOMECC_CFLAGS)
 AC_SUBST(GNOMECC_LIBS)
