@@ -260,8 +260,8 @@ append_keys_to_tree (GladeXML *dialog,
 	  continue;
 	}
 
-      if (entry->schema_name)
-	schema = gconf_client_get_schema (client, entry->schema_name, &error);
+      if (gconf_entry_get_schema_name (entry))
+	schema = gconf_client_get_schema (client, gconf_entry_get_schema_name (entry), &error);
       
       if (error || schema == NULL)
 	{
@@ -305,9 +305,10 @@ append_keys_to_tree (GladeXML *dialog,
 	}
       i++;
       gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-      if (schema->short_desc)
+      if (gconf_schema_get_short_desc (schema))
 	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
-			    DESCRIPTION_COLUMN, schema->short_desc,
+			    DESCRIPTION_COLUMN,
+                            gconf_schema_get_short_desc (schema),
 			    KEYENTRY_COLUMN, key_entry,
 			    -1);
       else
