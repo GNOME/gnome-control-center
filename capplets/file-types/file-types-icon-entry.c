@@ -11,8 +11,8 @@
  */
 #include <config.h>
 
-#include "nautilus-mime-type-icon-entry.h"
-#include "nautilus-mime-type-capplet.h"
+#include "file-types-icon-entry.h"
+#include "file-types-capplet.h"
 
 #include <gdk_imlib.h>
 #include <gnome.h>

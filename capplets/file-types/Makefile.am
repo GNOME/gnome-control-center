@@ -17,19 +17,18 @@ INCLUDES = -I. 						\
 bin_PROGRAMS = file-types-capplet
 
 file_types_capplet_SOURCES =			\
-	nautilus-mime-type-capplet.h 		\
-	nautilus-mime-type-capplet-dialogs.h 	\
-	nautilus-mime-type-icon-entry.h		\
-	nautilus-mime-type-capplet.c		\
-	nautilus-mime-type-capplet-dialogs.c 	\
-	nautilus-mime-type-icon-entry.c		\
+	file-types-capplet.h 		\
+	file-types-capplet-dialogs.h 	\
+	file-types-icon-entry.h		\
+	file-types-capplet.c		\
+	file-types-capplet-dialogs.c 	\
+	file-types-icon-entry.c		\
 	$(NULL)
 
 
 file_types_capplet_LDADD =						\
 			@VFS_CAPPLET_LIBS@				\
 			$(INTLLIBS) 					\
-			$(top_builddir)/libgnomevfs/libgnomevfs.la 	\
 			-lgdk_pixbuf					\
 			$/libuuid/libuuid.a				\
 			$(NULL)

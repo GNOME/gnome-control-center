@@ -22,6 +22,6 @@ libuuid_a_SOURCES = \
 	$(NULL)
 
 INCLUDES = \
-	$(GLIB_CFLAGS)	\
+	@GLIB_CFLAGS@	\
 	$(WERROR)	\
 	$(NULL)

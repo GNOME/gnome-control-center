@@ -43,10 +43,10 @@
 #include <libgnomevfs/gnome-vfs-init.h>
 #include <libgnomevfs/gnome-vfs-utils.h>
 
-#include "nautilus-mime-type-capplet-dialogs.h"
-#include "nautilus-mime-type-icon-entry.h"
+#include "file-types-capplet-dialogs.h"
+#include "file-types-icon-entry.h"
 
-#include "nautilus-mime-type-capplet.h"
+#include "file-types-capplet.h"
 
 #define DEFAULT_REGULAR_ICON "nautilus/i-regular-24.png"
 #define DEFAULT_ACTION_ICON "nautilus/i-executable.png"

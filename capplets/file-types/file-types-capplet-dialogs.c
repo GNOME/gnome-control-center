@@ -38,8 +38,8 @@
 #include <libgnomevfs/gnome-vfs-utils.h>
 
 #include "libuuid/uuid.h"
-#include "nautilus-mime-type-capplet.h"
-#include "nautilus-mime-type-capplet-dialogs.h"
+#include "file-types-capplet.h"
+#include "file-types-capplet-dialogs.h"
 
 /* gtk_window_set_default_width (and some other functions) use a
  * magic undocumented number of -2 to mean "ignore this parameter".
