@@ -491,13 +491,7 @@ bg_applier_get_preview_widget (BGApplier *bg_applier)
 {
 	if (bg_applier->p->preview_widget == NULL)
 	{
-		GdkPixmap *pixmap;
-
-		pixmap = gdk_pixmap_new (gdk_get_default_root_window (),
-					 bg_applier->p->render_geom.width,
-					 bg_applier->p->render_geom.height,
-					 -1);
-		bg_applier->p->preview_widget = gtk_image_new_from_pixmap (pixmap, NULL);
+		bg_applier->p->preview_widget = gtk_image_new ();
 
 		/* We need to initialize the pixmap, but this
 		 * needs GCs, so we have to wait until realize. */
@@ -771,7 +765,7 @@ render_to_screen (BGApplier *bg_applier, const BGPreferences *prefs)
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_BG_PREFERENCES (prefs));
 
-	gc = gdk_gc_new (gdk_get_default_root_window ());
+	gc = gdk_gc_new (bg_applier->p->pixmap);
 
 	if (bg_applier->p->pixbuf != NULL) {
 		if (bg_applier->p->pixbuf_render_geom.x != 0 ||
@@ -1354,8 +1348,9 @@ make_root_pixmap (gint width, gint height)
 {
 	Display *display;
 	Pixmap xpixmap;
+	GdkPixmap *gdkpixmap;
 	
-	display = XOpenDisplay (g_getenv ("DISPLAY"));
+	display = XOpenDisplay (gdk_get_display ());
 	XSetCloseDownMode (display, RetainPermanent);
 
 	xpixmap = XCreatePixmap (display,
@@ -1365,7 +1360,11 @@ make_root_pixmap (gint width, gint height)
 
 	XCloseDisplay (display);
 
-	return gdk_pixmap_foreign_new (xpixmap);
+	gdkpixmap = gdk_pixmap_foreign_new (xpixmap);
+	gdk_drawable_set_colormap (GDK_DRAWABLE (gdkpixmap),
+				   gdk_drawable_get_colormap (gdk_get_default_root_window ()));
+
+	return gdkpixmap;
 }
 
 /* Set the root pixmap, and properties pointing to it. We
@@ -1527,9 +1526,16 @@ preview_realized_cb (GtkWidget *preview, BGApplier *bg_applier)
 
 	/* Only draw clean image if no pref set yet */
 	if (bg_applier->p->last_prefs)
-		return;
+		return;       
 
 	gtk_image_get_pixmap (GTK_IMAGE (preview), &pixmap, NULL);
+	if (!pixmap) {
+		pixmap = gdk_pixmap_new (preview->window,
+					 bg_applier->p->render_geom.width,
+					 bg_applier->p->render_geom.height,
+					 -1);
+		gtk_image_set_from_pixmap (GTK_IMAGE (preview), pixmap, NULL);
+	}
 	
 	gdk_draw_rectangle (pixmap,
 			    preview->style->bg_gc[preview->state],

@@ -1,3 +1,16 @@
+2002-05-21  jacob berkman  <jacob@ximian.com>
+
+	* applier.c (render_to_screen): use a gc for the pixmap not the
+	root window
+	(bg_applier_get_preview_widget): don't create the pixmap until we
+	are realized
+	(make_root_pixmap): use gdk_get_display(), not getenv ("DISPLAY"),
+	and set the colormap for our GdkPixmap so we can draw on it
+	(preview_realized_cb): create the pixmap here, and set it on our
+	GtkImage
+
+	fixes #73496
+
 2002-05-16  jacob berkman  <jacob@ximian.com>
 
 	* applier.c (bg_applier_apply_prefs): don't spew a warning when
