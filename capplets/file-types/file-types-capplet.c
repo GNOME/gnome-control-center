@@ -383,20 +383,50 @@ viewer_button_toggled (GtkToggleButton *button, gpointer user_data)
 	}
 }
 
-static void
-really_change_icon (gpointer user_data)
+static int
+get_selected_row_number (void)
 {
-        gint row = 0;
-	char *filename;
-        const char *mime_type;
+	gint row;
 
 	if (GTK_CLIST (mime_list)->selection == NULL) {
-		return;
+		return -1;
 	}
 
 	row = GPOINTER_TO_INT ((GTK_CLIST (mime_list)->selection)->data);
+	return row;
+}
+static const char *
+get_selected_mime_type (void)
+{
+        gint row = 0;
+        const char *mime_type;
+
+
+	if (GTK_CLIST (mime_list)->selection == NULL) {
+		return NULL;
+	}
+
+	row = get_selected_row_number ();
+	if (row == -1) {
+		return NULL;
+	}
 
 	mime_type = (const char *) gtk_clist_get_row_data (GTK_CLIST (mime_list), row);
+	
+	return mime_type;
+}
+
+static void
+really_change_icon (gpointer user_data)
+{
+
+	char *filename;
+	const char *mime_type;
+
+	mime_type = get_selected_mime_type ();
+	if (mime_type == NULL) {
+		return;
+	}
 	
 	filename = nautilus_mime_type_icon_entry_get_relative_filename (NAUTILUS_MIME_ICON_ENTRY (user_data));
 
@@ -461,6 +491,41 @@ change_icon_clicked (GtkWidget *entry, gpointer user_data)
 				  "select_icon", gil_icon_selected_cb, user_data);
 
 }
+
+static void
+update_extensions_list (const char *mime_type) 
+{
+	int row;
+	char *pretty_string;
+
+	row = get_selected_row_number ();
+
+	pretty_string = gnome_vfs_mime_get_extensions_pretty_string (mime_type);
+	gtk_clist_set_text (GTK_CLIST (mime_list),
+			    row, 2, pretty_string);
+	g_free (pretty_string);
+
+}
+
+static void 
+change_file_extensions_clicked (GtkWidget *widget, gpointer user_data)
+{
+	const char *mime_type;
+	char *new_extensions;
+
+	mime_type = get_selected_mime_type ();
+	if (mime_type == NULL) {
+		return;
+	}
+
+	new_extensions = nautilus_mime_type_capplet_show_change_extension_window (mime_type);
+
+	gnome_vfs_mime_set_extensions_list (mime_type, new_extensions);
+
+	update_extensions_list (mime_type);
+}
+
+
 
 static void
 init_mime_capplet (void)
@@ -540,7 +605,7 @@ init_mime_capplet (void)
 		gtk_box_pack_start (GTK_BOX (hbox), gtk_vbox_new (FALSE, 0), FALSE, FALSE, 10);
 
 		button = gtk_button_new_with_label (_("Change File Extensions"));
-		gtk_signal_connect (GTK_OBJECT (button), "clicked", change_icon_clicked, icon_entry);
+		gtk_signal_connect (GTK_OBJECT (button), "clicked", change_file_extensions_clicked, NULL);
 		gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
 
 	}
@@ -727,6 +792,7 @@ nautilus_mime_type_capplet_update_info (const char *mime_type) {
 	} else {
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (application_button), TRUE);
 	}
+
 }
 
 static void 

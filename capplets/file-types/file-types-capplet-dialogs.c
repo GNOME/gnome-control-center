@@ -28,6 +28,9 @@
 #include <capplet-widget.h>
 #include <gnome.h>
 #include <gtk/gtk.h>
+#include <gtk/gtklist.h>
+#include <gtk/gtkbin.h>
+#include <gtk/gtklistitem.h>
 #include <libgnomevfs/gnome-vfs-mime-handlers.h>
 #include <libgnomevfs/gnome-vfs-application-registry.h>
 #include <libgnomevfs/gnome-vfs-mime-info.h>
@@ -676,15 +679,204 @@ nautilus_mime_type_capplet_show_new_mime_window (void)
         return mime_type;
 }
 
-void
+static void
+add_extension_clicked (GtkWidget *widget, gpointer data)
+{
+	GtkList *extension_list;
+	char *new_extension;
+	GtkWidget *new_list_item;
+	GList *items_list;
+
+	g_assert (GTK_IS_LIST (data));
+
+	extension_list = GTK_LIST (data);
+
+	new_extension = nautilus_mime_type_capplet_show_new_extension_window ();
+	new_list_item = gtk_list_item_new_with_label (new_extension);
+	gtk_widget_show (new_list_item);
+
+	items_list = g_list_append (NULL, new_list_item);
+	gtk_list_append_items (GTK_LIST (extension_list), items_list);
+	g_free (new_extension);
+	/* GtkList takes ownership of the List we append. DO NOT free it. */
+}
+
+static void
+remove_extension_clicked (GtkWidget *widget, gpointer data)
+{
+	GtkList *list;
+	GList *selection_copy, *temp;
+	
+	g_assert (GTK_IS_LIST (data));
+
+	list = GTK_LIST (data);
+
+	/* this is so fucking crapy !!! */
+	/* you have to make a copy of the selection list before 
+	   passing it to remove_items because before removing the
+	   widget from the List, it modifies the list.
+	   So, when you remove it, the list is not valid anymore */
+	selection_copy = NULL; 
+	for (temp = list->selection; temp != NULL; temp = temp->next) {
+		selection_copy = g_list_prepend (selection_copy, temp->data);
+	}
+
+	if (list->selection != NULL) {
+		gtk_list_remove_items (GTK_LIST (list), selection_copy);
+		gtk_list_select_item (GTK_LIST (list), 0);
+	}
+
+	g_list_free (selection_copy);
+}
+
+static void
+extension_list_selected (GtkWidget *list, GtkWidget *child, gpointer data)
+{
+	GtkWidget *button;
+
+	g_assert (GTK_IS_BUTTON (data));
+
+	button = GTK_WIDGET (data);
+
+	gtk_widget_set_sensitive (GTK_WIDGET (button), TRUE);
+}
+
+static void
+extension_list_deselected (GtkWidget *list, GtkWidget *child, gpointer data)
+{
+	GtkWidget *button;
+
+	g_assert (GTK_IS_BUTTON (data));
+
+	button = GTK_WIDGET (data);
+
+	gtk_widget_set_sensitive (GTK_WIDGET (button), FALSE);
+}
+
+static char *
+get_extensions_from_gtk_list (GtkList *list) 
+{
+	GList *temp;
+	GtkLabel *label;
+	char *extension, *extensions, *temp_text;
+	
+	extensions = NULL;
+	for (temp = list->children; temp != NULL; temp = temp->next) {
+		label = GTK_LABEL (GTK_BIN (temp->data)->child);
+		gtk_label_get (GTK_LABEL (label), &extension);
+		temp_text = g_strconcat (extension, " ", extensions, NULL);
+		g_free (extensions);
+		extensions = temp_text;
+	}
+
+	return extensions;
+}
+
+char *
+nautilus_mime_type_capplet_show_change_extension_window (const char *mime_type)
+{
+	GtkWidget *dialog;
+	GtkWidget *hbox;
+	GtkWidget *button;
+	GtkWidget *list;
+	char *extensions_list;
+
+        dialog = gnome_dialog_new (_("File Extensions "), 
+				   GNOME_STOCK_BUTTON_OK, 
+				   GNOME_STOCK_BUTTON_CANCEL, 
+				   NULL);
+	gnome_dialog_set_default (GNOME_DIALOG (dialog), 1);
+	gnome_dialog_set_close (GNOME_DIALOG (dialog), FALSE);
+
+	hbox = gtk_hbox_new (FALSE, GNOME_PAD_BIG);
+        gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), hbox, FALSE, FALSE, 0);
+
+
+	list = gtk_list_new ();
+
+	/* the right buttons */
+	{
+		GtkWidget *vbox;
+
+		vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
+		gtk_box_pack_end (GTK_BOX (hbox), vbox, FALSE, FALSE, 0);
+
+		button = gtk_button_new_with_label (_("Add..."));
+		gtk_signal_connect (GTK_OBJECT (button), "clicked", 
+				    add_extension_clicked, list);
+		gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
+
+		button = gtk_button_new_with_label (_("    Remove    "));
+		gtk_widget_set_sensitive (button, FALSE);
+		gtk_signal_connect (GTK_OBJECT (button), "clicked", 
+				    remove_extension_clicked, list);
+		gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
+
+		gtk_box_pack_start (GTK_BOX (vbox), gtk_label_new (""), FALSE, FALSE, 0);
+	}
+
+	/* The left list */
+	{
+		GtkWidget *viewport;
+		GList *extensions_list, *widget_list, *temp;
+
+		viewport = gtk_viewport_new (NULL, NULL);
+		gtk_box_pack_start (GTK_BOX (hbox), viewport, TRUE, TRUE, 0);
+
+		gtk_signal_connect (GTK_OBJECT (list), "select_child", 
+				    extension_list_selected, button);
+		gtk_signal_connect (GTK_OBJECT (list), "unselect_child", 
+				    extension_list_deselected, button);
+		gtk_list_set_selection_mode (GTK_LIST (list), GTK_SELECTION_SINGLE);
+		gtk_container_add (GTK_CONTAINER (viewport), list);
+
+
+		extensions_list = gnome_vfs_mime_get_extensions_list (mime_type);
+
+		if (extensions_list != NULL) {
+			widget_list = NULL;
+			for (temp = extensions_list; temp != NULL; temp = temp->next) {
+				widget_list = g_list_append (widget_list, 
+							     gtk_list_item_new_with_label ((char *) temp->data));
+			}
+			gtk_list_append_items (GTK_LIST (list), widget_list);
+		}
+
+		gtk_list_select_item (GTK_LIST (list), 0);
+	}
+
+
+
+        gtk_widget_show_all (GNOME_DIALOG (dialog)->vbox);
+
+        switch (gnome_dialog_run (GNOME_DIALOG (dialog))) {
+	        case 0:
+			extensions_list = get_extensions_from_gtk_list (GTK_LIST (list));
+			break;
+	        case 1:
+	        default:
+			extensions_list = g_strdup ("");
+	        	break;
+	}        
+	gnome_dialog_close (GNOME_DIALOG (dialog));
+
+	return extensions_list;
+}
+
+
+char *
 nautilus_mime_type_capplet_show_new_extension_window (void)
 {
         GtkWidget *mime_entry;
 	GtkWidget *label;
 	GtkWidget *hbox;
 	GtkWidget *dialog;
+	char *new_extension;
 	
-        dialog = gnome_dialog_new (_("Add New Extension"), GNOME_STOCK_BUTTON_OK, GNOME_STOCK_BUTTON_CANCEL, NULL);
+        dialog = gnome_dialog_new (_("Add New Extension"), GNOME_STOCK_BUTTON_OK, 
+				   GNOME_STOCK_BUTTON_CANCEL, NULL);
+	gnome_dialog_set_default (GNOME_DIALOG (dialog), 0);
+	gnome_dialog_set_close (GNOME_DIALOG (dialog), FALSE);
 	label = gtk_label_new (_("Type in the extensions for this mime-type.\nFor example:  .html, .htm"));
 	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
 	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
@@ -702,19 +894,20 @@ nautilus_mime_type_capplet_show_new_extension_window (void)
 
 	/* Set focus to text entry widget */
 	gtk_window_set_focus (GTK_WINDOW (dialog), mime_entry);
-
+	
+	new_extension = g_strdup ("");
         switch (gnome_dialog_run (GNOME_DIALOG (dialog))) {
 	        case 0:
-			nautilus_mime_type_capplet_add_extension (gtk_entry_get_text 
-							         (GTK_ENTRY (mime_entry)));
-
+			new_extension = g_strdup (gtk_entry_get_text (GTK_ENTRY (mime_entry)));
 	        case 1:
-	                gtk_widget_destroy (dialog);
 	                break;
-	                
 	        default:
 	        	break;
 	}        
+
+	gnome_dialog_close (GNOME_DIALOG (dialog));
+	
+	return new_extension;
 }
 
 /* add_or_update_application

@@ -27,8 +27,9 @@
 
 void 	show_edit_applications_dialog 				(const char 	*mime_type);
 void	show_edit_components_dialog 				(const char 	*mime_type);
-char 	*name_from_oaf_server_info 				(OAF_ServerInfo *server);
-char	*nautilus_mime_type_capplet_show_new_mime_window 	(void);
-void	nautilus_mime_type_capplet_show_new_extension_window 	(void);
+char   *name_from_oaf_server_info 				(OAF_ServerInfo *server);
+char   *nautilus_mime_type_capplet_show_new_mime_window 	(void);
+char   *nautilus_mime_type_capplet_show_new_extension_window 	(void);
+char   *nautilus_mime_type_capplet_show_change_extension_window (const char *mime_type);
 
 #endif /* NAUTILUS_MIME_TYPE_CAPPLET_DIALOGS_H */
