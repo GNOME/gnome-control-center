@@ -45,6 +45,8 @@ int main (int argc, char *argv [])
   gnome_client_set_restart_command (session, 2, restart_argv);
   gnome_client_set_restart_style (session, GNOME_RESTART_IMMEDIATELY);
   gnome_client_set_priority      (session, 5);
+  g_signal_connect (session, "die",
+		    G_CALLBACK (gtk_main_quit), NULL);
 
   gtk_main();
 
