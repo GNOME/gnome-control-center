@@ -2,7 +2,7 @@ bin_PROGRAMS = gnome-theme-properties
 
 gnome_theme_properties_LDADD = 						\
 	$(GNOMECC_CAPPLETS_LIBS) 					\
-	-L$(top_builddir)/libwindow-settings/ -lgnome-window-settings
+	$(top_builddir)/libwindow-settings/libgnome-window-settings.la
 
 gnome_theme_properties_SOURCES = \
 	theme-switcher.c
