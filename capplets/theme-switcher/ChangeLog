@@ -1,3 +1,37 @@
+2004-04-07  Jody Goldberg <jody@gnome.org>
+
+	* gnome-theme-manager.c (update_settings_from_gconf_idle) : fix the
+	  selection when not running metacity.  That was damn irritating.
+
+2004-03-10  Chris Lahey  <clahey@ximian.com> 
+
+	* gnome-theme-manager.c: (pixbuf_async_func): rename function. Use
+	broken_image.
+	(pixbuf_async_data_free): rename function. Use PixbufAsyncData instead
+	of a GList.
+	(pixbuf_idle_func): rename function. Handle the case that things
+	change again while we're updating.  Stop what it's doing and start
+	from the beginning. 
+	(add_pixbuf_idle): 
+	(load_meta_themes): clean up. Remove model_meta_theme_info. 
+	(update_themes_from_disk): Remove the code to check for
+	have_meta_theme here.  It works with no metathemes installed.
+	(add_custom_row_to_meta_theme): handle the initial case too.
+	(remove_custom_row_from_meta_theme): removed.
+	(themes_equal): helper function for a fairly complicated comparison.
+	(update_settings_from_gconf_idle), (update_settings_from_gconf):
+	reamed. Instead of custom_theme_found to mean that there should be a
+	custom theme, we use current_theme_saved.
+	This means that there's a metatheme for the current theme.  Its
+	meaning is almost exactly the boolean opposite of the old
+	one but it's more understandable.  initial_theme_saved tells us 
+	whether the initial theme has a metatheme for it now. 
+	(theme_changed_idle), (theme_changed_func): Made this idle to reduce
+	rerunning
+	(setup_dialog): Load broken image.
+	(gnome_theme_manager_sort_func): Make it symmetric. 
+	* gnome-theme-manager.h: Remove THEME_FLAG_INITIAL.
+
 2004-04-02  Padraig O'Briain <padraig.obriain@sun.com>
 
 	* gnome-theme-details.c (update_list_something): Check that cursor
