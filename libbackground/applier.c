@@ -1491,7 +1491,7 @@ set_root_pixmap (GdkPixmap *pixmap, GdkScreen *screen)
 	screen_num = DefaultScreen (GDK_DISPLAY ());
 #endif
 
-	if (pixmap != NULL && pixmap != (GdkPixmap *) -1)
+	if (pixmap != NULL)
 		pixmap_id = GDK_WINDOW_XWINDOW (pixmap);
 	else
 		pixmap_id = 0;
@@ -1516,16 +1516,16 @@ set_root_pixmap (GdkPixmap *pixmap, GdkScreen *screen)
 
 			old_pixmap = *((Pixmap *) data_esetroot);
 
-			if (pixmap != (GdkPixmap *) -1 && old_pixmap != pixmap_id)
+			if (pixmap != NULL && old_pixmap != pixmap_id)
 				XKillClient (display, old_pixmap);
-			else if (pixmap == (GdkPixmap *) -1)
+			else if (pixmap == NULL)
 				pixmap_id = old_pixmap;
 		}
 
 		XFree (data_esetroot);
 	}
 
-	if (pixmap != NULL && pixmap != (GdkPixmap *) -1) {
+	if (pixmap != NULL) {
 		XChangeProperty (display, RootWindow (display, screen_num),
 				 XInternAtom (display, "ESETROOT_PMAP_ID", FALSE),
 				 XA_PIXMAP, 32, PropModeReplace,
