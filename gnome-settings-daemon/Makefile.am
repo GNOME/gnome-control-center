@@ -22,6 +22,8 @@ gnome2_settings_daemon_SOURCES =	\
 	gnome-settings-sound.h		\
 	gnome-settings-accessibility-keyboard.h	\
 	gnome-settings-accessibility-keyboard.c	\
+	gnome-settings-screensaver.h	\
+	gnome-settings-screensaver.c	\
 	xsettings-common.c		\
 	xsettings-manager.c		\
 	xsettings-common.h		\

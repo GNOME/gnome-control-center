@@ -1,3 +1,12 @@
+2002-03-26  jacob berkman  <jacob@ximian.com>
+
+	* gnome-settings-screensaver.[ch]
+	(gnome_settings_screensaver_load): start xscreensaver, and display
+	an error dialog if it failed
+
+	* gnome-settings-daemon.c (gnome_settings_daemon_new): init/load
+	screensaver
+
 2002-03-25  jacob berkman  <jacob@ximian.com>
 
 	* factory.c (main): tell the SM to restart us only after we know

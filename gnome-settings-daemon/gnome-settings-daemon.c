@@ -41,6 +41,7 @@
 #include "gnome-settings-sound.h"
 #include "gnome-settings-wm.h"
 #include "gnome-settings-accessibility-keyboard.h"
+#include "gnome-settings-screensaver.h"
 
 #include "GNOME_SettingsDaemon.h"
 
@@ -228,7 +229,8 @@ gnome_settings_daemon_new (void)
   gnome_settings_sound_init (client);
   gnome_settings_wm_init (client);
   gnome_settings_accessibility_keyboard_init (client);
-  
+  gnome_settings_screensaver_init (client);
+
   for (list = directories; list; list = list->next)
     {
       GError *error = NULL;
@@ -261,6 +263,7 @@ gnome_settings_daemon_new (void)
   gnome_settings_background_load (client);
   gnome_settings_wm_load (client);
   gnome_settings_accessibility_keyboard_load (client);
+  gnome_settings_screensaver_load (client);
   
   return G_OBJECT (daemon);
 }
