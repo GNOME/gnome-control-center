@@ -1,3 +1,14 @@
+2005-02-03  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* gnome-theme-info.c: (update_theme_index),
+	(top_theme_dir_changed), (top_icon_theme_dir_changed),
+	(real_add_top_theme_dir_monitor): Revert the previous
+	two commits. It looks like the fix in gnome-vfs to make
+	sure gnome_vfs_uri_extract_short_name() doesn't return
+	NULL was what we really needed. Please retest to see if
+	you can still reproduce the crashes in the theme-manager
+	after this change and with the latest gnome-vfs from CVS.
+
 2005-02-02  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* gnome-theme-info.c: (update_theme_index),
