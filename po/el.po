@@ -26,20 +26,23 @@
 # Nikos: 30May2004, some fixes.
 # Nikos: 31Jul2004, some fixes.
 # Nikos 17Sep2004, some fixes.
+# Simos: 723 messages, 20Dec2004, fixes/updates.
+#
 # Spiros Papadimitriou <spapadim+@cs.cmu.edu>, 2000.
 # Simos Xenitellis <simos@hellug.gr>, 2000, 2001, 2002.
 # Nikos Charonitakis <charosn@her.forthnet.gr>, 2002, 2003, 2004.
 # Τα πάντα ρει <ta_panta_rei@flashmail.com>, 2002.
 # Kostas Papadimas <pkst@gnome.org>, 2002,2003, 2004.
+# Simos Xenitellis <simos74@gmx.net>, 2004.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: el\n"
+"Project-Id-Version: gnome-control-center 2.9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-14 14:59-0400\n"
-"PO-Revision-Date: 2004-09-17 22:24-0300\n"
-"Last-Translator:  Nikos Charonitakis <charosn@her.forthnet.gr>\n"
-"Language-Team:  <nls@tux.hellug.gr>\n"
+"POT-Creation-Date: 2004-12-20 20:07+0000\n"
+"PO-Revision-Date: 2004-12-20 20:22+0000\n"
+"Last-Translator: Simos Xenitellis <simos74@gmx.net>\n"
+"Language-Team: Greek <nls@tux.hellug.gr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -90,11 +93,11 @@ msgstr "Πληκτρολόγιο ο_θόνης"
 msgid "_Screenreader"
 msgstr "Ανα_γνώστης οθόνης"
 
-#: capplets/accessibility/at-properties/at-properties.desktop.in.h:1
+#: capplets/accessibility/at-properties/at-properties.desktop.in.in.h:1
 msgid "Assistive Technology Support"
 msgstr "Υποστήριξη Βοηθητικής Τεχνολογίας"
 
-#: capplets/accessibility/at-properties/at-properties.desktop.in.h:2
+#: capplets/accessibility/at-properties/at-properties.desktop.in.in.h:2
 msgid "Enable support for GNOME assistive technologies at login"
 msgstr ""
 "Ενεργοποίηση υποστήριξης για τις βοηθητικές τεχνολογίες του Gnome κατά την "
@@ -148,13 +151,13 @@ msgstr "Εισαγωγή Αρχείου Ρυθμίσεων Χαρακτηρισ�
 msgid "_Import"
 msgstr "Ε_ισαγωγή"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
+#: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.in.h:1
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:20
-#: capplets/keyboard/keyboard.desktop.in.h:1
+#: capplets/keyboard/keyboard.desktop.in.in.h:1
 msgid "Keyboard"
 msgstr "Πληκτρολόγιο"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:2
+#: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.in.h:2
 msgid "Set your keyboard accessibility preferences"
 msgstr "Ρύθμιση των προτιμήσεων προσβασιμότητας πληκτρολογίου"
 
@@ -369,11 +372,11 @@ msgstr "εικονοστοιχεία/δευτερόλεπτο"
 msgid "seconds"
 msgstr "δευτερόλεπτα"
 
-#: capplets/background/background.desktop.in.h:1
+#: capplets/background/background.desktop.in.in.h:1
 msgid "Change your Desktop Background settings"
 msgstr "Αλλαγή των ρυθμίσεων παρασκηνίου της επιφάνειας εργασίας σας"
 
-#: capplets/background/background.desktop.in.h:2
+#: capplets/background/background.desktop.in.in.h:2
 msgid "Desktop Background"
 msgstr "Παρασκήνιο επιφάνειας εργασίας"
 
@@ -452,6 +455,13 @@ msgstr "Προσθήκη Ταπετσαρίας"
 #: capplets/background/gnome-wp-info.c:49
 msgid "No Wallpaper"
 msgstr "Χωρίς Ταπετσαρία"
+
+#: capplets/background/gnome-wp-item.c:287
+#: capplets/background/gnome-wp-item.c:289
+msgid "pixel"
+msgid_plural "pixels"
+msgstr[0] "εικονοστοιχείο"
+msgstr[1] "εικονοστοιχεία"
 
 #: capplets/common/activate-settings-daemon.c:18
 msgid ""
@@ -577,8 +587,7 @@ msgid "Change set"
 msgstr "Ορισμός αλλαγής"
 
 #: capplets/common/gconf-property-editor.c:184
-msgid ""
-"GConf change set containing data to be forwarded to the gconf client on apply"
+msgid "GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr ""
 "Ομάδα αλλαγών GConf που περιέχει δεδομένα και θα προωθηθεί στον πελάτη gconf "
 "κατα την εφαρμογή"
@@ -588,8 +597,7 @@ msgid "Conversion to widget callback"
 msgstr "Μετατροπή σε επανάκληση γραφικού συστατικού"
 
 #: capplets/common/gconf-property-editor.c:190
-msgid ""
-"Callback to be issued when data are to be converted from GConf to the widget"
+msgid "Callback to be issued when data are to be converted from GConf to the widget"
 msgstr ""
 "Επανάκληση που θα εκδοθεί όταν μετατραπούν δεδομένα από το  GConf στο "
 "γραφικό συστατικό"
@@ -599,8 +607,7 @@ msgid "Conversion from widget callback"
 msgstr "Μετατροπή από την επανάκληση γραφικού συστατικού"
 
 #: capplets/common/gconf-property-editor.c:196
-msgid ""
-"Callback to be issued when data are to be converted to GConf from the widget"
+msgid "Callback to be issued when data are to be converted to GConf from the widget"
 msgstr ""
 "Επανάκληση που θα εκδοθεί  όταν μετατραπούν δεδομένα από το γραφικό "
 "συστατικό στο  GConf"
@@ -667,104 +674,14 @@ msgstr "Παρακαλώ επιλέξτε μια εικόνα."
 msgid "_Select"
 msgstr "Επιλο_γή"
 
-#: capplets/default-applications/default-applications.desktop.in.h:1
+#: capplets/default-applications/default-applications.desktop.in.in.h:1
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:18
 msgid "Preferred Applications"
 msgstr "Προτιμώμενες Εφαρμογές"
 
-#: capplets/default-applications/default-applications.desktop.in.h:2
+#: capplets/default-applications/default-applications.desktop.in.in.h:2
 msgid "Select your default applications"
 msgstr "Καθορισμός των προεπιλεγμένων εφαρμογών"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:9
-msgid "Epiphany"
-msgstr "Epiphany"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:10
-msgid "Galeon"
-msgstr "Galeon"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:11
-msgid "Encompass"
-msgstr "Encompass"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:12
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:13
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:14
-msgid "Firebird/FireFox"
-msgstr "Firebird/FireFox"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:15
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:16
-msgid "Mozilla/Netscape 6"
-msgstr "Mozilla/Netscape 6"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:17
-msgid "Netscape Communicator"
-msgstr "Netscape Communicator"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:18
-msgid "Konqueror"
-msgstr "Konqueror"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:19
-msgid "W3M Text Browser"
-msgstr "Περιηγητής Κειμένου W3M"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:20
-msgid "Lynx Text Browser"
-msgstr "Περιηγητής Κειμένου Lynx"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:21
-msgid "Links Text Browser"
-msgstr "Περιηγητής Κειμένου Links"
-
-#. The code in gnome-default-applications-properties.c makes sure
-#. * there is only one (the first entry in this list) Evolution entry
-#. * in the list shown to the user
-#.
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:36
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:37
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:38
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:39
-msgid "Evolution Mail Reader"
-msgstr "Εφαρμογή Αλληλογραφίας Evolution"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:40
-msgid "Balsa"
-msgstr "Balsa"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:41
-msgid "KMail"
-msgstr "KMail"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:42
-msgid "Mozilla Mail"
-msgstr "Mozilla Mail"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:43
-msgid "Mutt"
-msgstr "Mutt"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:54
-msgid "Gnome Terminal"
-msgstr "Τερματικό του Gnome"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:55
-msgid "Standard XTerminal"
-msgstr "Standard XTerminal"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:56
-msgid "NXterm"
-msgstr "NXterm"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:57
-msgid "RXVT"
-msgstr "RXVT"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:58
-msgid "ETerm"
-msgstr "ETerm"
 
 #: capplets/default-applications/gnome-default-applications-properties.c:123
 msgid "Please specify a name and a command for this editor."
@@ -775,20 +692,20 @@ msgid "Add..."
 msgstr "Προσθήκη..."
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:3
-msgid "C_ustom Editor"
-msgstr "Επεξεργαστής Κειμένου Επιλεγμένος από το _Χρήστη"
+msgid "C_ustom"
+msgstr "Παραμετροποιη_μένο"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:4
-msgid "C_ustom Mail Reader:"
-msgstr "Εφαρμογή Αλληλογραφίας Επιλεγμένη από το _Χρήστη:"
+msgid "C_ustom:"
+msgstr "Παραμετροποιη_μένο:"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:5
-msgid "C_ustom Terminal:"
-msgstr "Τερματικό Επιλεγμένο από το _Χρήστη:"
+msgid "Can open _URIs"
+msgstr "Μπορεί να ανοίξει _URI"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:6
-msgid "C_ustom Web Browser:"
-msgstr "Περιηγητής Ιστοσελίδων Επιλεγμένος από το _Χρήστη:"
+msgid "Can open multiple _files"
+msgstr "Μπορεί να ανοίγει πολλα_πλά αρχεία"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:7
 msgid "Co_mmand:"
@@ -835,6 +752,14 @@ msgid "Mail Reader"
 msgstr "Εφαρμογή Αλληλογραφίας"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:19
+msgid "Run in a _terminal"
+msgstr "Εκτέλεση εντός _τερματικού"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:20
+msgid "Run in a t_erminal"
+msgstr "Εκτέλεση εντός τ_ερματικού"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:21
 msgid ""
 "Select the window manager you want.  You will need to hit apply, wave the "
 "magic wand, and do a magic dance for it to work."
@@ -843,94 +768,162 @@ msgstr ""
 "εφαρμογή, τάμα στην Παναγιά τη Λινουξιώτισα και το μαγικό χορό για να "
 "δουλέψει."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:20
-msgid "Start in T_erminal"
-msgstr "Εκκίνηση εντός Τ_ερματικού"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:21
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:22
 msgid "Terminal"
 msgstr "Τερματικό"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:22
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:23
 msgid "Text Editor"
 msgstr "Επεξεργαστής Κειμένου"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:23
-msgid "This application can open _URIs"
-msgstr "Αυτή η εφαρμογή μπορεί να ανοίγει _URIs"
-
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:24
-msgid "This application can open _multiple files"
-msgstr "Αυτή η εφαρμογή μπορεί να ανοίγει_πολλαπλά αρχεία"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:25
-msgid "This application needs to be run in a _shell"
-msgstr "Αυτή η εφαρμογή μπορεί χρειάζεται να τρέχει σε_κέλυφος"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:26
 msgid "Understands _Netscape Remote Control"
 msgstr "Κατανοεί _Netscape Remote Control"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:27
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:25
 msgid "Use this _editor to open text files in the file manager"
 msgstr ""
 "Χρήση αυτού του _επεξεργαστή για το άνοιγμα αρχείων κειμένου στο διαχειριστή "
 "αρχείων."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:28
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:26
 msgid "Web Browser"
 msgstr "Περιηγητής Ιστοσελίδων"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:29
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:27
 msgid "Window Manager"
 msgstr "Διαχειριστής Παραθύρων"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:30
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:28
+msgid "_Command:"
+msgstr "Εν_τολή:"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:29
 #: capplets/file-types/file-types-properties.glade.h:23
 msgid "_Name:"
 msgstr "_Όνομα:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:31
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:30
 msgid "_Properties..."
 msgstr "_Ιδιότητες..."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:32
-msgid "_Select a Mail Reader:"
-msgstr "_Επιλογή Εφαρμογής Αλληλογραφίας:"
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:31
+msgid "_Select:"
+msgstr "Επιλο_γή:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:33
-msgid "_Select a Terminal:"
-msgstr "_Επιλογή Τερματικού:"
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:9
+msgid "Debian Sensible Browser"
+msgstr "Φυλλομετρητής Sensible Debian"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:34
-msgid "_Select a Web Browser:"
-msgstr "_Επιλογή Περιηγητή Ιστοσελίδων:"
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:10
+msgid "Epiphany"
+msgstr "Epiphany"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:35
-msgid "_Select an Editor:"
-msgstr "_Επιλογή Κειμενογράφου:"
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:11
+msgid "Galeon"
+msgstr "Galeon"
 
-#: capplets/desktop-links/Accessibility.directory.in.h:1
-msgid "Accessibility"
-msgstr "Προσβασιμότητα"
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:12
+msgid "Encompass"
+msgstr "Encompass"
 
-#: capplets/desktop-links/Accessibility.directory.in.h:2
-msgid "Accessibility Settings"
-msgstr "Ρυθμίσεις Προσβασιμότητας"
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:13
+msgid "Firebird"
+msgstr "Firebird"
 
-#: capplets/desktop-links/Advanced.directory.in.h:1
-msgid "Advanced"
-msgstr "Για προχωρημένους"
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:14
+msgid "Firefox"
+msgstr "Firefox"
 
-#: capplets/desktop-links/Advanced.directory.in.h:2
-msgid "Advanced Settings"
-msgstr "Προχωρημένες Ρυθμίσεις"
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:15
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:16
+msgid "Mozilla"
+msgstr "Mozilla"
 
-#: capplets/display/display-properties.desktop.in.h:1
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:17
+msgid "Netscape Communicator"
+msgstr "Netscape Communicator"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:18
+msgid "Konqueror"
+msgstr "Konqueror"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:19
+msgid "W3M Text Browser"
+msgstr "Περιηγητής Κειμένου W3M"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:20
+msgid "Lynx Text Browser"
+msgstr "Περιηγητής Κειμένου Lynx"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:21
+msgid "Links Text Browser"
+msgstr "Περιηγητής Κειμένου Links"
+
+#. The code in gnome-default-applications-properties.c makes sure
+#. * there is only one (the first entry in this list) Evolution entry
+#. * in the list shown to the user
+#.
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:36
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:37
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:38
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:39
+msgid "Evolution Mail Reader"
+msgstr "Εφαρμογή Αλληλογραφίας Evolution"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:40
+msgid "Balsa"
+msgstr "Balsa"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:41
+msgid "KMail"
+msgstr "KMail"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:42
+msgid "Thunderbird"
+msgstr "Thunderbird"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:43
+msgid "Mozilla Mail"
+msgstr "Mozilla Mail"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:44
+msgid "Mutt"
+msgstr "Mutt"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:55
+msgid "Debian Terminal Emulator"
+msgstr "Προσομοίωση Τερματικού Debian"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:56
+msgid "GNOME Terminal"
+msgstr "Τερματικό GNOME"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:57
+msgid "Standard XTerminal"
+msgstr "Standard XTerminal"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:58
+msgid "NXterm"
+msgstr "NXterm"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:59
+msgid "RXVT"
+msgstr "RXVT"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:60
+msgid "aterm"
+msgstr "aterm"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:61
+msgid "ETerm"
+msgstr "ETerm"
+
+#: capplets/display/display-properties.desktop.in.in.h:1
 msgid "Change screen resolution"
 msgstr "Αλλαγή ανάλυσης οθόνης"
 
-#: capplets/display/display-properties.desktop.in.h:2
+#: capplets/display/display-properties.desktop.in.in.h:2
 msgid "Screen Resolution"
 msgstr "Ανάλυση Οθόνης"
 
@@ -1021,7 +1014,7 @@ msgid "Are you sure you want to permanently delete this entry?"
 msgstr "Είστε σίγουροι ότι θέλετε να διαγράψετε αυτήν την καταχώρηση;"
 
 #: capplets/file-types/file-types-capplet.c:210
-#: vfs-methods/themus/themus-properties-view.c:167
+#: vfs-methods/themus/themus-properties-view.c:126
 msgid "Description"
 msgstr "Περιγραφή"
 
@@ -1029,16 +1022,24 @@ msgstr "Περιγραφή"
 msgid "Extensions"
 msgstr "Επεκτάσεις"
 
-#: capplets/file-types/file-types-capplet.desktop.in.h:1
+#: capplets/file-types/file-types-capplet.desktop.in.in.h:1
 #: capplets/file-types/file-types-properties.glade.h:11
 msgid "File Types and Programs"
 msgstr "Τύποι Αρχείων και Προγράμματα"
 
-#: capplets/file-types/file-types-capplet.desktop.in.h:2
+#: capplets/file-types/file-types-capplet.desktop.in.in.h:2
 msgid "Specify which programs are used to open or view each file type"
 msgstr ""
 "Ορισμός των προγραμμάτων που θα χρησιμοποιούνται για το άνοιγμα και προβολή "
 "κάθε τύπου αρχείου"
+
+#: capplets/file-types/file-types.desktop.in.in.h:1
+msgid "File types and programs"
+msgstr "Τύποι αρχείων και προγράμματα"
+
+#: capplets/file-types/file-types.desktop.in.in.h:2
+msgid "Specify which programs are used to open or view each type of file"
+msgstr "Καθορισμός των προγραμμάτων που ανοίγουν ή εμφανίζουν κάθε είδος αρχείων"
 
 #: capplets/file-types/file-types-properties.glade.h:2
 msgid "Actions"
@@ -1130,21 +1131,13 @@ msgid "_Protocol:"
 msgstr "_Πρωτόκολλο:"
 
 #: capplets/file-types/file-types-properties.glade.h:26
+#: libsounds/sound-view.c:366
 msgid "_Remove"
 msgstr "_Απομάκρυνση"
 
 #: capplets/file-types/file-types-properties.glade.h:27
 msgid "_Viewer component:"
 msgstr "Συστατικό εφαρμογής προ_βολής:"
-
-#: capplets/file-types/file-types.desktop.in.h:1
-msgid "File types and programs"
-msgstr "Τύποι αρχείων και προγράμματα"
-
-#: capplets/file-types/file-types.desktop.in.h:2
-msgid "Specify which programs are used to open or view each type of file"
-msgstr ""
-"Καθορισμός των προγραμμάτων που ανοίγουν ή εμφανίζουν κάθε είδος αρχείων"
 
 #: capplets/file-types/mime-category-edit-dialog.c:138
 msgid "Edit file category"
@@ -1327,14 +1320,14 @@ msgid "Electronic mail transmission"
 msgstr "Μετάδοση ηλεκτρονικής αλληλογραφίας"
 
 #: capplets/file-types/service-info.c:50
-msgid "Gnome documentation"
-msgstr "Τεκμηρίωση του Gnome"
+msgid "GNOME documentation"
+msgstr "Τεκμηρίωση GNOME"
 
-#: capplets/font/font-properties.desktop.in.h:1
+#: capplets/font/font-properties.desktop.in.in.h:1
 msgid "Font"
 msgstr "Γραμματοσειρά"
 
-#: capplets/font/font-properties.desktop.in.h:2
+#: capplets/font/font-properties.desktop.in.in.h:2
 msgid "Select fonts for the desktop"
 msgstr "Επιλογή γραμματοσειρών για την επιφάνεια εργασίας"
 
@@ -1541,29 +1534,29 @@ msgid "The type of accelerator."
 msgstr "Το είδος της συντόμευσης."
 
 #: capplets/keybindings/eggcellrendererkeys.c:242
-#: capplets/keybindings/gnome-keybinding-properties.c:196
+#: capplets/keybindings/gnome-keybinding-properties.c:197
 #: libbackground/applier.c:757 typing-break/drwright.c:473
 msgid "Disabled"
 msgstr "Ανενεργό"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:538
+#: capplets/keybindings/gnome-keybinding-properties.c:539
 msgid "<Unknown Action>"
 msgstr "<Άγνωστη Ενέργεια>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:557
+#: capplets/keybindings/gnome-keybinding-properties.c:558
 msgid "Desktop"
 msgstr "Επιφάνεια Eργασίας"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:558
-#: capplets/sound/gnome-settings-sound.desktop.in.h:2
+#: capplets/keybindings/gnome-keybinding-properties.c:559
+#: capplets/sound/gnome-settings-sound.desktop.in.in.h:2
 msgid "Sound"
 msgstr "Ήχος"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:562
+#: capplets/keybindings/gnome-keybinding-properties.c:563
 msgid "Window Management"
 msgstr "Διαχείριση Παραθύρων"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:659
+#: capplets/keybindings/gnome-keybinding-properties.c:660
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1572,29 +1565,28 @@ msgstr ""
 "Η συντόμευση \"%s\" χρησιμοποιείται ήδη για:\n"
 " \"%s\"\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:691
+#: capplets/keybindings/gnome-keybinding-properties.c:692
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
-msgstr ""
-"Σφάλμα κατά τη ρύθμιση νέας συντόμευσης στη βάση δεδομένων ρυθμίσεων: %s\n"
+msgstr "Σφάλμα κατά τη ρύθμιση νέας συντόμευσης στη βάση δεδομένων ρυθμίσεων: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:741
+#: capplets/keybindings/gnome-keybinding-properties.c:742
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr ""
 "Σφάλμα κατά τη κατάργηση ρύθμισης συντόμευσης στη βάση δεδομένων ρυθμίσεων: %"
 "s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:830
+#: capplets/keybindings/gnome-keybinding-properties.c:831
 msgid "Action"
 msgstr "Ενέργεια"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:854
+#: capplets/keybindings/gnome-keybinding-properties.c:855
 msgid "Shortcut"
 msgstr "Συντόμευση"
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:1
-#: capplets/keybindings/keybinding.desktop.in.h:2
+#: capplets/keybindings/keybinding.desktop.in.in.h:2
 msgid "Keyboard Shortcuts"
 msgstr "Συντομεύσεις Πληκτρολογίου"
 
@@ -1606,22 +1598,9 @@ msgstr ""
 "Για να επεξεργαστείτε μια νέα συντόμευση πατήστε στην αντίστοιχη σειρά η "
 "πατήστε Backspace για εκκαθάριση."
 
-#: capplets/keybindings/keybinding.desktop.in.h:1
+#: capplets/keybindings/keybinding.desktop.in.in.h:1
 msgid "Assign shortcut keys to commands"
 msgstr "Ορισμός πλήκτρων συντόμευσης σε εντολές"
-
-#: capplets/keyboard/gnome-keyboard-properties-xkb.c:69
-#: capplets/keyboard/gnome-keyboard-properties-xkb.c:95
-msgid "Unknown"
-msgstr "Άγνωστο"
-
-#: capplets/keyboard/gnome-keyboard-properties-xkbmc.c:80
-msgid "Models"
-msgstr "Μοντέλα"
-
-#: capplets/keyboard/gnome-keyboard-properties-xkbpv.c:59
-msgid "Keyboard layout preview"
-msgstr "Προεπισκόπηση διάταξης πληκτρολογίου"
 
 #: capplets/keyboard/gnome-keyboard-properties.c:106
 #, c-format
@@ -1636,8 +1615,7 @@ msgstr "_Προσβασιμότητα"
 #: capplets/keyboard/gnome-keyboard-properties.c:222
 #: capplets/sound/sound-properties-capplet.c:240
 #: capplets/sound/sound-properties-capplet.c:242
-msgid ""
-"Just apply settings and quit (compatibility only; now handled by daemon)"
+msgid "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
 "Εφαρμογή μόνο των ρυθμίσεων και έξοδος (συμβατότητα μόνο; now handled by "
 "daemon)"
@@ -1792,9 +1770,30 @@ msgstr "Η ερ_γασία διαρκεί:"
 msgid "minutes"
 msgstr "λεπτά"
 
-#: capplets/keyboard/keyboard.desktop.in.h:2
+#: capplets/keyboard/gnome-keyboard-properties-xkb.c:69
+#: capplets/keyboard/gnome-keyboard-properties-xkb.c:95
+msgid "Unknown"
+msgstr "Άγνωστο"
+
+#: capplets/keyboard/gnome-keyboard-properties-xkbmc.c:80
+msgid "Models"
+msgstr "Μοντέλα"
+
+#: capplets/keyboard/gnome-keyboard-properties-xkbpv.c:66
+msgid "Keyboard layout preview"
+msgstr "Προεπισκόπηση διάταξης πληκτρολογίου"
+
+#: capplets/keyboard/keyboard.desktop.in.in.h:2
 msgid "Set your keyboard preferences"
 msgstr "Καθορισμός των προτιμήσεων πληκτρολογίου"
+
+#: capplets/localization/localization.desktop.in.in.h:1
+msgid "Language and Culture"
+msgstr "Γλώσσα και Κουλτούρα"
+
+#: capplets/localization/localization.desktop.in.in.h:2
+msgid "Set your language and culture preferences"
+msgstr "Καθορισμός προτιμήσεων γλώσσας και κουλτούρας"
 
 #: capplets/mouse/gnome-mouse-properties.c:496
 msgid "Unknown Cursor"
@@ -1960,21 +1959,21 @@ msgstr "_Κατώφλι:"
 msgid "_Timeout:"
 msgstr "_Διάρκεια:"
 
-#: capplets/mouse/gnome-settings-mouse.desktop.in.h:1
+#: capplets/mouse/gnome-settings-mouse.desktop.in.in.h:1
 msgid "Mouse"
 msgstr "Ποντίκι"
 
-#: capplets/mouse/gnome-settings-mouse.desktop.in.h:2
+#: capplets/mouse/gnome-settings-mouse.desktop.in.in.h:2
 msgid "Set your mouse preferences"
 msgstr "Καθορισμός προτιμήσεων ποντικιού"
 
-#: capplets/network/gnome-network-preferences.desktop.in.h:1
+#: capplets/network/gnome-network-preferences.desktop.in.in.h:1
 msgid "Network Proxy"
 msgstr "Διαμεσολαβητής Δικτύου"
 
-#: capplets/network/gnome-network-preferences.desktop.in.h:2
-msgid "Network proxy preferences"
-msgstr "Προτιμήσεις Διαμεσολαβητή Δικτύου"
+#: capplets/network/gnome-network-preferences.desktop.in.in.h:2
+msgid "Set your network proxy preferences"
+msgstr "Καθορισμός προτιμήσεων διαμεσολαβητή δικτύου"
 
 #: capplets/network/gnome-network-preferences.glade.h:1
 msgid "      "
@@ -2017,8 +2016,8 @@ msgid "H_TTP proxy:"
 msgstr "Διαμεσολαβητής _HTTP:"
 
 #: capplets/network/gnome-network-preferences.glade.h:12
-msgid "Network Proxy Configuration"
-msgstr "Ρύθμιση Διαμεσολαβητή Δικτύου"
+msgid "Network Proxy Preferences"
+msgstr "Προτιμήσεις Διαμεσολαβητή Δικτύου"
 
 #: capplets/network/gnome-network-preferences.glade.h:13
 msgid "Port:"
@@ -2056,7 +2055,7 @@ msgstr "_Κωδικός:"
 msgid "_Secure HTTP proxy:"
 msgstr "_Ασφαλής διαμεσολαβητής HTTP:"
 
-#: capplets/sound/gnome-settings-sound.desktop.in.h:1
+#: capplets/sound/gnome-settings-sound.desktop.in.in.h:1
 msgid "Enable sound and associate sounds with events"
 msgstr "Ενεργοποίηση ήχων και αντιστοίχιση ήχων με συμβάντα"
 
@@ -2114,15 +2113,26 @@ msgstr ""
 "\"Προτιμήσεις Θέματος\" δεν εγκαταστάθηκε σωστά, ή ότι δεν έχετε "
 "εγκαταστήσει το πακέτο \"gnome-themes\"."
 
-#: capplets/theme-switcher/gnome-theme-installer.c:127
+#: capplets/theme-switcher/gnome-theme-installer.c:104
+msgid "This theme is not in a supported format."
+msgstr "Αυτό το θέμα δεν είναι σε υποστηριζόμενη μορφή."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:140
 msgid "No theme file location specified to install"
 msgstr "Δεν καθορίστηκε τοποθεσία αρχείου θέματος για εγκατάσταση"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:146
+#: capplets/theme-switcher/gnome-theme-installer.c:157
 msgid "The theme file location specified to install is invalid"
 msgstr "Η οποθεσία αρχείου θέματος για εγκατάσταση δεν είναι έγκυρη"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:173
+#: capplets/theme-switcher/gnome-theme-installer.c:177
+#, c-format
+msgid ""
+"Insufficient permissions to install the theme in:\n"
+"%s"
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-installer.c:196
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
@@ -2137,8 +2147,7 @@ msgstr "Προσαρμοσμένο θέμα"
 
 #: capplets/theme-switcher/gnome-theme-manager.c:677
 msgid "You can save this theme by pressing the Save Theme button."
-msgstr ""
-"Μπορείτε να αποθηκεύσετε το θέμα πατώντας το κουμπί Αποθήκευση Θέματος."
+msgstr "Μπορείτε να αποθηκεύσετε το θέμα πατώντας το κουμπί Αποθήκευση Θέματος."
 
 #: capplets/theme-switcher/gnome-theme-manager.c:1455
 msgid ""
@@ -2158,12 +2167,12 @@ msgstr "Το όνομα θέματος πρέπει να υπάρχει"
 msgid "The theme already exists. Would you like to replace it?"
 msgstr "Το θέμα υπάρχει ήδη. Θέλετε να το αντικαταστήσετε ;"
 
-#: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:1
 msgid "Select themes for various parts of the desktop"
 msgstr "Επιλέξτε θέματα για διάφορα κομμάτια της επιφάνειας εργασίας"
 
-#: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
-#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:1
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:2
+#: vfs-methods/themus/themus-properties-main.c:92
 msgid "Theme"
 msgstr "Θέμα"
 
@@ -2185,8 +2194,7 @@ msgstr "_Τοποθεσία:"
 
 #: capplets/theme-switcher/theme-properties.glade.h:2
 msgid "<span size=\"larger\" weight=\"bold\">Save Theme to Disk</span>"
-msgstr ""
-"<span size=\"larger\" weight=\"bold\">Αποθήκευση Θέματος στο Δίσκο</span>"
+msgstr "<span size=\"larger\" weight=\"bold\">Αποθήκευση Θέματος στο Δίσκο</span>"
 
 #: capplets/theme-switcher/theme-properties.glade.h:3
 msgid "Apply _Background"
@@ -2206,8 +2214,7 @@ msgstr "Εικονίδια"
 
 #: capplets/theme-switcher/theme-properties.glade.h:7
 msgid "New themes can also be installed by dragging them into the window."
-msgstr ""
-"Νέα θέματα μπορούν να εγκατασταθούν και με το σύρσιμο τους πάνω στο παράθυρο."
+msgstr "Νέα θέματα μπορούν να εγκατασταθούν και με το σύρσιμο τους πάνω στο παράθυρο."
 
 # For lack of a better term...?  Anaklimakwsh ???
 #: capplets/theme-switcher/theme-properties.glade.h:8
@@ -2236,8 +2243,7 @@ msgstr "Λεπ_τομέρειες θέματος"
 
 #: capplets/theme-switcher/theme-properties.glade.h:14
 msgid "This theme does not suggest any particular font or background."
-msgstr ""
-"Αυτό το θέμα δεν προτείνει κανένα ιδιαίτερο παρασκήνιο ή γραμματοσειρά."
+msgstr "Αυτό το θέμα δεν προτείνει κανένα ιδιαίτερο παρασκήνιο ή γραμματοσειρά."
 
 #: capplets/theme-switcher/theme-properties.glade.h:15
 msgid "This theme suggests a background:"
@@ -2280,11 +2286,11 @@ msgstr "Όνομα _θέματος:"
 msgid "theme selection tree"
 msgstr "δένδρο επιλογής θέματος"
 
-#: capplets/ui-properties/gnome-ui-properties.desktop.in.h:1
+#: capplets/ui-properties/gnome-ui-properties.desktop.in.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
 msgstr "Προσαρμογή της εμφάνισης των εργαλειοθήκων και των μενού σε εφαρμογές"
 
-#: capplets/ui-properties/gnome-ui-properties.desktop.in.h:2
+#: capplets/ui-properties/gnome-ui-properties.desktop.in.in.h:2
 msgid "Menus & Toolbars"
 msgstr "Μενού & Εργαλειοθήκες"
 
@@ -2353,7 +2359,6 @@ msgid "_Edit"
 msgstr "_Επεξεργασία"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:18
-#: control-center/gnomecc-ui.xml.h:5
 msgid "_File"
 msgstr "_Αρχείο"
 
@@ -2382,6 +2387,14 @@ msgstr "Έ_ξοδος"
 msgid "_Save"
 msgstr "_Αποθήκευση"
 
+#: capplets/url-properties/url-properties.desktop.in.in.h:1
+msgid "Configure which programs are used to display URLs"
+msgstr ""
+
+#: capplets/url-properties/url-properties.desktop.in.in.h:2
+msgid "URL Handlers"
+msgstr "Χειριστές URL"
+
 #: capplets/windows/gnome-window-properties.c:388
 #, c-format
 msgid ""
@@ -2394,23 +2407,23 @@ msgstr ""
 "\n"
 "%s"
 
-#: capplets/windows/gnome-window-properties.c:637
+#: capplets/windows/gnome-window-properties.c:648
 msgid "Control"
 msgstr "Control"
 
-#: capplets/windows/gnome-window-properties.c:642
+#: capplets/windows/gnome-window-properties.c:653
 msgid "Alt"
 msgstr "Alt"
 
-#: capplets/windows/gnome-window-properties.c:648
+#: capplets/windows/gnome-window-properties.c:659
 msgid "Hyper"
 msgstr "Hyper"
 
-#: capplets/windows/gnome-window-properties.c:655
+#: capplets/windows/gnome-window-properties.c:666
 msgid "Super (or \"Windows logo\")"
 msgstr "Super (ή \"Windows logo\")"
 
-#: capplets/windows/gnome-window-properties.c:662
+#: capplets/windows/gnome-window-properties.c:673
 msgid "Meta"
 msgstr "Μετά-ρύθμιση"
 
@@ -2452,13 +2465,31 @@ msgstr "_Ανασήκωση επιλεγμένων παραθύρων μετά �
 msgid "_Select windows when the mouse moves over them"
 msgstr "_Επιλογή παραθύρων όταν το ποντίκι περνάει από επάνω τους"
 
-#: capplets/windows/window-properties.desktop.in.h:1
-msgid "Window Properties"
-msgstr "Ιδιότητες Παραθύρων"
+#: capplets/windows/window-properties.desktop.in.in.h:1
+msgid "Set your window properties"
+msgstr "Καθορισμός ιδιοτήτων παραθύρων"
 
-#: capplets/windows/window-properties.desktop.in.h:2
+#: capplets/windows/window-properties.desktop.in.in.h:2
 msgid "Windows"
 msgstr "Παράθυρα"
+
+#: control-center/control-center.c:1005
+#: control-center/gnomecc.desktop.in.in.h:1
+msgid "GNOME Control Center"
+msgstr "Κέντρο Ελέγχου GNOME"
+
+#: control-center/control-center.c:1121
+msgid "Desktop Preferences"
+msgstr "Προτιμήσεις Επιφάνειας Εργασίας"
+
+#: control-center/control-center-categories.c:248
+msgid "Others"
+msgstr "Άλλα"
+
+#: control-center/gnomecc.desktop.in.in.h:2
+#: vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:2
+msgid "The GNOME configuration tool"
+msgstr "Το εργαλείο ρύθμισης του GNOME"
 
 #: control-center/GNOME_ControlCenter.server.in.h:1
 msgid "Control Center"
@@ -2487,89 +2518,6 @@ msgstr "Εργοστάσιο προβολής κέντρου ελέγχου"
 #: control-center/GNOME_ControlCenter.server.in.h:7
 msgid "View as Control Center"
 msgstr "Εμφάνιση ως Κέντρο Ελέγχου"
-
-#: control-center/capplet-dir-view-list.c:319
-#, c-format
-msgid "GNOME Control Center: %s"
-msgstr "Κέντρο Ελέγχου GNOME: %s"
-
-#: control-center/capplet-dir-view.c:158
-msgid "Layout"
-msgstr "Διάταξη"
-
-#: control-center/capplet-dir-view.c:159
-msgid "Layout to use for this view of the capplets"
-msgstr "Διάταξη που θα χρησιμοποιείται για την προβολή των capplets"
-
-#: control-center/capplet-dir-view.c:165
-msgid "Capplet directory object"
-msgstr "Αντικείμενο καταλόγου capplet"
-
-#: control-center/capplet-dir-view.c:166
-msgid "Capplet directory that this view is viewing"
-msgstr "Κατάλογος capplet που βλέπει αυτή η προβολή"
-
-#: control-center/capplet-dir-view.c:348
-msgid "translator_credits"
-msgstr ""
-"Σίμος Ξενιτέλλης <simos@hellug.gr>\n"
-"Σπύρος Παπαδημητρίου <spapadim+@cs.smu,edu>\n"
-"Νίκος Χαρωνιτάκης <charosn@her.forthnet.gr>\n"
-"Κώστας Παπαδήμας <pkst@gnome.org>"
-
-#: control-center/capplet-dir-view.c:357 control-center/gnomecc.desktop.in.h:1
-msgid "GNOME Control Center"
-msgstr "Κέντρο Ελέγχου GNOME"
-
-#: control-center/capplet-dir-view.c:360
-msgid "Desktop properties manager."
-msgstr "Διαχειριστής ιδιοτήτων επιφάνειας εργασίας."
-
-#: control-center/capplet-dir-view.c:498
-#, c-format
-msgid "Gnome Control Center : %s"
-msgstr "Κέντρο Ελέγχου Gnome : %s"
-
-#: control-center/control-center-categories.c:333
-msgid "Others"
-msgstr "Άλλα"
-
-#: control-center/control-center-categories.c:424
-#: control-center/control-center.c:1091
-msgid "Gnome Control Center"
-msgstr "Κέντρο Ελέγχου Gnome"
-
-#: control-center/control-center.c:78
-msgid "Use nautilus if it is running."
-msgstr "Χρήση ναυτίλου αν εκτελείται."
-
-#: control-center/gnomecc-ui.xml.h:1
-msgid "About this application"
-msgstr "Περί αυτής της εφαρμογής"
-
-#: control-center/gnomecc-ui.xml.h:2
-msgid "Overview of the control center"
-msgstr "Σύνοψη του κέντρου ελέγχου"
-
-#: control-center/gnomecc-ui.xml.h:3
-msgid "_About"
-msgstr "_Περί"
-
-#: control-center/gnomecc-ui.xml.h:4
-msgid "_Contents"
-msgstr "_Περιεχόμενα"
-
-#: control-center/gnomecc-ui.xml.h:6
-msgid "_Help"
-msgstr "_Βοήθεια"
-
-#: control-center/gnomecc.desktop.in.h:2
-msgid "The GNOME configuration tool"
-msgstr "Το εργαλείο ρύθμισης του GNOME"
-
-#: control-center/main.c:43
-msgid "Use shell even if nautilus is running."
-msgstr "Χρήση κέλυφους ακόμα και αν τρέχει ο nautilus."
 
 #: gnome-settings-daemon/actions/acme.glade.h:1
 msgid "Volume"
@@ -2679,7 +2627,7 @@ msgstr ""
 "Σφάλμα κατα την προσπάθεια εκτέλεσης (%s)\n"
 "που συνδέεται με το κλειδί (%s)"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:73
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:91
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2705,7 +2653,7 @@ msgstr ""
 "- Το αποτέλεσμα του <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/"
 "xkb</b>"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:83
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:101
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2717,7 +2665,7 @@ msgstr ""
 "Προσπαθείστε να χρησιμοποιήσετε μια πιό απλή ρύθμιση ή να εγκταστήσετε μια "
 "νεότερη έκδοση του  XFree."
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:172
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:190
 msgid ""
 "The X system keyboard settings differ from your current GNOME keyboard "
 "settings.  Which set would you like to use?"
@@ -2725,15 +2673,15 @@ msgstr ""
 "Οι ρυθμίσεις του πληκτρολογίου του  X system διαφέρουν από τις τρέχουσες "
 "ρυθμίσεις του πληκτρολογίου GNOME. Ποιές ρυθμίσεις θέλετε να χρησιμοποιήσετε;"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:175
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:193
 msgid "Use X settings"
 msgstr "Ρυθμίσεις ρυθμίσεων X"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:177
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:195
 msgid "Use GNOME settings"
 msgstr "Χρήση ρυθμίσεων GNOME"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:231
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:249
 #, c-format
 msgid ""
 "You have a keyboard remapping file (%s) in your home directory whose "
@@ -2799,8 +2747,8 @@ msgstr "_Να μην εμφανιστεί ξανά αυτό το μήνυμα"
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Αδυναμία φόρτωσης αρχείου ήχου %s ώς δείγμα %s"
 
-#: gnome-settings-daemon/gnome-settings-xrdb.c:212
-#: gnome-settings-daemon/gnome-settings-xrdb.c:260
+#: gnome-settings-daemon/gnome-settings-xrdb.c:213
+#: gnome-settings-daemon/gnome-settings-xrdb.c:261
 msgid "Cannot determine user's home directory"
 msgstr "Δεν είναι δυνατός ο εντοπισμός του αρχικού καταλόγου χρήστη"
 
@@ -2849,11 +2797,11 @@ msgstr "Οθόνη"
 msgid "Screen on which BGApplier is to draw"
 msgstr "Οθόνη στην οποία θα σχεδιάζεται το BGApplier"
 
-#: libsounds/sound-view.c:121 libsounds/sound-view.c:146
+#: libsounds/sound-view.c:122 libsounds/sound-view.c:147
 msgid "The sound file for this event does not exist."
 msgstr "Το αρχείο ήχου για το παρόν συμβάν δεν υπάρχει."
 
-#: libsounds/sound-view.c:148
+#: libsounds/sound-view.c:149
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package\n"
@@ -2863,40 +2811,39 @@ msgstr ""
 "Εάν επιθυμείτε, μπορείτε να εγκαταστήσετε το πακέτο\n"
 "gnome-audio, με συλλογή μερικών ήχων."
 
-#: libsounds/sound-view.c:192
+#: libsounds/sound-view.c:224
 #, c-format
 msgid "The file %s is not a valid wav file"
 msgstr "Το αρχείο %s δεν είναι ένα έγκυρο αρχείο wav"
 
-#: libsounds/sound-view.c:257
+#: libsounds/sound-view.c:289
 msgid "Event"
 msgstr "Συμβάν"
 
-#: libsounds/sound-view.c:266
+#: libsounds/sound-view.c:298
 msgid "Sound File"
 msgstr "Αρχείο ήχου"
 
-#: libsounds/sound-view.c:282
+#: libsounds/sound-view.c:314
 msgid "_Sounds:"
 msgstr "_Ήχοι:"
 
-#: libsounds/sound-view.c:296
+#: libsounds/sound-view.c:328
 msgid "Sound _file:"
 msgstr "Αρχείο ή_χου:"
 
-#: libsounds/sound-view.c:300
+#: libsounds/sound-view.c:332
 msgid "Select Sound File"
 msgstr "Επιλογή Αρχείου Ήχου"
 
-#: libsounds/sound-view.c:324
+#: libsounds/sound-view.c:356
 msgid "_Play"
 msgstr "_Αναπαραγωγή"
 
 #: libwindow-settings/gnome-wm-manager.c:320
 #, c-format
 msgid "Window manager \"%s\" has not registered a configuration tool\n"
-msgstr ""
-"Ο διαχειριστής παραθύρων \"%s\"  δεν έχει εγγράψει ένα εργαλείο ρυθμίσεων\n"
+msgstr "Ο διαχειριστής παραθύρων \"%s\"  δεν έχει εγγράψει ένα εργαλείο ρυθμίσεων\n"
 
 #: libwindow-settings/metacity-window-manager.c:378
 msgid "Maximize"
@@ -2907,8 +2854,7 @@ msgid "Roll up"
 msgstr "Δίπλωση πάνω"
 
 #: schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:1
-msgid ""
-"If true, the mime handlers for text/plain and text/* will be kept in sync"
+msgid "If true, the mime handlers for text/plain and text/* will be kept in sync"
 msgstr ""
 "Αν true, οι χειριστές mime για text/plain και text/* θα διατηρούνται "
 "συγχρονισμένοι"
@@ -3079,8 +3025,7 @@ msgstr "Συντόμευση αύξησης έντασης."
 
 #: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:1
 msgid "Display a dialog when there are errors running XScreenSaver"
-msgstr ""
-"Προβολή διαλόγου όταν υπάρχουν σφάλματα κατά την εκτέλεση του XScreenSaver"
+msgstr "Προβολή διαλόγου όταν υπάρχουν σφάλματα κατά την εκτέλεση του XScreenSaver"
 
 #: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:2
 msgid "Run XScreenSaver at login"
@@ -3111,8 +3056,7 @@ msgid "RGBA Order"
 msgstr "Σειρά RGBA"
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:5
-msgid ""
-"Resolution used for converting font sizes to pixel sizes, in dots per inch"
+msgid "Resolution used for converting font sizes to pixel sizes, in dots per inch"
 msgstr ""
 "Ανάλυση που χρησιμοποείται για την μετατροπή μεγέθους γραμματοσειράς σε "
 "μέγεθος εικονοστοιχείων, σε κουκίδες ανά ίντσα"
@@ -3152,33 +3096,73 @@ msgstr ""
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:1
 msgid ""
-"Very soon, XKB settings in gconf will be overridden (from the system "
-"configuration)"
+"A collection of scripts to run whenever the keyboard state is reloaded. "
+"Useful for re-applying xmodmap based adjustments"
 msgstr ""
-"Πολύ σύντομα, οι ρυθμίσεις XKB στο gconf θα αντικατασταθούν (από τη ρύθμιση "
-"συστήματος)"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
-msgid "XKB keyboard layout"
-msgstr "Διάταξη πληκτρολογίου XKB"
+msgid "Default group, assigned on window creation"
+msgstr "Εξ ορισμού ομάδα, καθορίζεται κατά τη δημιουργία παραθύρου"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
-msgid "XKB keyboard model"
-msgstr "Μοντέλο πληκτρολογίου XKB"
+msgid "Keep and manage separate group per window"
+msgstr ""
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
-msgid "XKB options"
-msgstr "Επιλογές XKB"
+msgid "Keyboard Update Handlers"
+msgstr "Χειριστές Ενημέρωσης Πληκτρολογίου"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
-msgid "XKB settings in gconf will be overridden from the system ASAP"
+msgid "Keyboard layout"
+msgstr "Διάταξη πληκτρολογίου"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:6
+msgid "Keyboard model"
+msgstr "Μοντέλο πληκτρολογίου"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:7
+msgid "Keyboard options"
+msgstr "Επιλογές πληκτρολογίου"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:8
+msgid "Keyboard settings in gconf will be overridden from the system ASAP"
 msgstr ""
-"Οι ρυθμίσεις XKB στο gconf θα αντικατασταθούν από το σύστημα όσον το δυνατόν "
-"πιό γρήγορα."
+"Οι ρυθμίσεις στο gconf θα αντικατασταθούν από το σύστημα όσον το δυνατόν "
+"πιο σύντομα."
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:9
+msgid "Save/restore indicators together with layout groups"
+msgstr "Αποθήκευση/επαναφορά ενδείξεων μαζί με τις ομάδες διάταξης"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:10
+msgid "Show layout names instead of group names"
+msgstr "Εμφάνιση ονομάτων διάταξης αντί ονομάτων ομάδας"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:11
+msgid ""
+"Show layout names instead of group names (only for versions of XFree "
+"supporting multiple layouts)"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:12
+msgid ""
+"Very soon, keyboard settings in gconf will be overridden (from the system "
+"configuration)"
+msgstr ""
+"Πολύ σύντομα, οι ρυθμίσεις πληκτρολογίου στο gconf θα αντικατασταθούν (από τη ρύθμιση "
+"συστήματος)"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:13
+msgid "keyboard layout"
+msgstr "διάταξη πληκτρολογίου"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:14
+msgid "keyboard model"
+msgstr "μοντέλο πληκτρολογίου"
 
 #: typing-break/drw-break-window.c:209
 msgid "_Postpone break"
-msgstr "Ανα_βολή διαλείμματος"
+msgstr "Αναβο_λή διαλείμματος"
 
 #: typing-break/drw-break-window.c:256
 msgid "Take a break!"
@@ -3201,8 +3185,8 @@ msgstr "/_Κάντε διάλειμμα"
 #, c-format
 msgid "%d minute until the next break"
 msgid_plural "%d minutes until the next break"
-msgstr[0] "%d  λεπτό μέχρι το επόμενο διάλειμμα"
-msgstr[1] "%d  λεπτά μέχρι το επόμενο διάλειμμα"
+msgstr[0] "%d λεπτό μέχρι το επόμενο διάλειμμα"
+msgstr[1] "%d λεπτά μέχρι το επόμενο διάλειμμα"
 
 #: typing-break/drwright.c:495
 msgid "Less than one minute until the next break"
@@ -3253,47 +3237,13 @@ msgstr ""
 "ταμπλώ σας. Μπορείτε να την προσθέσετε κάνοντας δεξί κλικ στο ταμπλώ και "
 "επιλέγοντας 'Προσθήκη στο ταμπλώ ->Βοηθήματα ->Περιοχή ειδοποίησης' ."
 
-#: vfs-methods/fontilus/font-view.c:102
-msgid "The quick brown fox jumps over the lazy dog. 0123456789"
-msgstr ""
-"Και ο νους του σαν τον αχνό του λιβανιού στης Παναγιάς την όψη. 0123456789"
+#: vfs-methods/fontilus/fontilus-context-menu.c:132
+msgid "Set as Application Font"
+msgstr "Ορισμός ως Γραμματοσειρά Εφαρμογής"
 
-#: vfs-methods/fontilus/font-view.c:253
-msgid "Name:"
-msgstr "Όνομα:"
-
-#: vfs-methods/fontilus/font-view.c:256
-msgid "Style:"
-msgstr "Στυλ:"
-
-#: vfs-methods/fontilus/font-view.c:265
-msgid "Type:"
-msgstr "Τύπος:"
-
-#: vfs-methods/fontilus/font-view.c:272
-msgid "Size:"
-msgstr "Μέγεθος:"
-
-#: vfs-methods/fontilus/font-view.c:316 vfs-methods/fontilus/font-view.c:329
-msgid "Version:"
-msgstr "Έκδοση:"
-
-#: vfs-methods/fontilus/font-view.c:320 vfs-methods/fontilus/font-view.c:331
-msgid "Copyright:"
-msgstr "Πνευματικά δικαιώματα:"
-
-#: vfs-methods/fontilus/font-view.c:324
-msgid "Description:"
-msgstr "Περιγραφή:"
-
-#: vfs-methods/fontilus/font-view.c:394
-#, c-format
-msgid "usage: %s fontfile\n"
-msgstr "χρήση: %s fontfile\n"
-
-#: vfs-methods/fontilus/fontilus-context-menu.c:131
-msgid "Font context menu items"
-msgstr "Γραμματοσειρά αντικειμένων μενού περιεχομένου"
+#: vfs-methods/fontilus/fontilus-context-menu.c:133
+msgid "Sets the default application font"
+msgstr "Καθορισμός της προεπιλεγμένης γραμματοσειράς εφαρμογών"
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:1
 msgid "If set to true, then OpenType fonts will be thumbnailed."
@@ -3320,8 +3270,7 @@ msgstr ""
 "μικρογραφία."
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:5
-msgid ""
-"Set this key to the command used to create thumbnails for OpenType fonts."
+msgid "Set this key to the command used to create thumbnails for OpenType fonts."
 msgstr ""
 "Ορισμός αυτού του κλειδιού για την εντολή που χρησιμοποιείται για την "
 "δημιουργία μικρογραφίας για γραμματοσειρές OpenType."
@@ -3333,8 +3282,7 @@ msgstr ""
 "δημιουργία μικρογραφίας για γραμματοσειρές PCF."
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:7
-msgid ""
-"Set this key to the command used to create thumbnails for TrueType fonts."
+msgid "Set this key to the command used to create thumbnails for TrueType fonts."
 msgstr ""
 "Ορισμός αυτού του κλειδιού για την εντολή που χρησιμοποιείται για την "
 "δημιουργία μικρογραφίας για γραμματοσειρές TrueType."
@@ -3377,33 +3325,46 @@ msgstr "Αν θα εμφανίζονται σε μικρογραφία γραμ�
 msgid "Whether to thumbnail Type1 fonts"
 msgstr "Αν θα εμφανίζονται σε μικρογραφία γραμματοσειρές Type1 "
 
-#: vfs-methods/fontilus/fontilus.server.in.in.h:1
-msgid "Factory for the fontilus context menu"
-msgstr "Εργοστάσιο για το μενού περιεχομένου του fontilus"
+#: vfs-methods/fontilus/font-view.c:125
+msgid "The quick brown fox jumps over the lazy dog. 0123456789"
+msgstr "Και ο νους του σαν τον αχνό του λιβανιού στης Παναγιάς την όψη. 0123456789"
 
-#: vfs-methods/fontilus/fontilus.server.in.in.h:2
-msgid "Fontilus context menu"
-msgstr "Μενού περιεχομένου fontilus"
+#: vfs-methods/fontilus/font-view.c:285
+msgid "Name:"
+msgstr "Όνομα:"
 
-#: vfs-methods/fontilus/fontilus.server.in.in.h:3
-msgid "Fontilus context menu factory"
-msgstr "Εργοστάσιο για το μενού περιεχομένου του fontilus"
+#: vfs-methods/fontilus/font-view.c:288
+msgid "Style:"
+msgstr "Στυλ:"
 
-#: vfs-methods/fontilus/fontilus.server.in.in.h:4
-msgid "Nautilus context menu entries for fonts"
-msgstr "Καταχωρήσεις μενού περιεχομένου του Ναυτίλου για γραμματοσειρές"
+#: vfs-methods/fontilus/font-view.c:297
+msgid "Type:"
+msgstr "Τύπος:"
 
-#: vfs-methods/fontilus/fontilus.server.in.in.h:5
-msgid "Set as Application Font"
-msgstr "Ορισμός ως Γραμματοσειρά Εφαρμογής"
+#: vfs-methods/fontilus/font-view.c:304
+msgid "Size:"
+msgstr "Μέγεθος:"
 
-#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
-msgid "Theme Properties content view component"
-msgstr "Συστατικό όψης περιεχομένου ιδιοτήτων θέματος"
+#: vfs-methods/fontilus/font-view.c:348 vfs-methods/fontilus/font-view.c:361
+msgid "Version:"
+msgstr "Έκδοση:"
 
-#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
-msgid "Themus Theme Properties view"
-msgstr "Όψη ιδιοτήτων εικόνας του Themus"
+#: vfs-methods/fontilus/font-view.c:352 vfs-methods/fontilus/font-view.c:363
+msgid "Copyright:"
+msgstr "Πνευματικά δικαιώματα:"
+
+#: vfs-methods/fontilus/font-view.c:356
+msgid "Description:"
+msgstr "Περιγραφή:"
+
+#: vfs-methods/fontilus/font-view.c:417
+#, c-format
+msgid "usage: %s fontfile\n"
+msgstr "χρήση: %s fontfile\n"
+
+#: vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:1
+msgid "GNOME Font Viewer"
+msgstr "Πρόγραμμα Εμφάνισης Γραμματοσειρών GNOME"
 
 #: vfs-methods/themus/apply-font.glade.h:1
 msgid " "
@@ -3411,8 +3372,7 @@ msgstr " "
 
 #: vfs-methods/themus/apply-font.glade.h:2
 msgid "<span weight=\"bold\" size=\"larger\">Apply new font?</span>"
-msgstr ""
-"<span weight=\"bold\" size=\"larger\">Εφαρμογή νέας γραμματοσειράς;</span>"
+msgstr "<span weight=\"bold\" size=\"larger\">Εφαρμογή νέας γραμματοσειράς;</span>"
 
 #: vfs-methods/themus/apply-font.glade.h:3
 msgid "Do _not apply font"
@@ -3434,39 +3394,28 @@ msgstr "_Εφαρμογή γραμματοσειράς"
 msgid "Themes"
 msgstr "Θέματα"
 
-#: vfs-methods/themus/themus-properties-view.c:172
+#: vfs-methods/themus/themus-properties-view.c:133
 msgid "Control theme"
 msgstr "Έλεγχος θέματος"
 
-#: vfs-methods/themus/themus-properties-view.c:176
+#: vfs-methods/themus/themus-properties-view.c:139
 msgid "Window border theme"
 msgstr "Θέμα πλαισίου παραθύρου"
 
-#: vfs-methods/themus/themus-properties-view.c:180
+#: vfs-methods/themus/themus-properties-view.c:145
 msgid "Icon theme"
 msgstr "Θέμα εικονιδίου"
 
-#: vfs-methods/themus/themus-properties-view.c:219
-msgid "URI currently displayed"
-msgstr "URI που εμφανίζεται τώρα"
-
-#. translators: you may want to include non-western chars here
-#: vfs-methods/themus/themus-theme-applier.c:83
-msgid "ABCDEFG"
-msgstr "ΑΒΓΔΕΖΗΘ"
-
 #: vfs-methods/themus/themus.schemas.in.h:1
 msgid "If set to true, then installed themes will be thumbnailed."
-msgstr ""
-"Αν ορισθεί σε true, τότε θα γίνεται προεπισκόπηση των εγκατεστημένων θεμάτων."
+msgstr "Αν ορισθεί σε true, τότε θα γίνεται προεπισκόπηση των εγκατεστημένων θεμάτων."
 
 #: vfs-methods/themus/themus.schemas.in.h:2
 msgid "If set to true, then themes will be thumbnailed."
 msgstr "Αν ορισθεί σε true, τότε θα γίνεται προεπισκόπηση των θεμάτων."
 
 #: vfs-methods/themus/themus.schemas.in.h:3
-msgid ""
-"Set this key to the command used to create thumbnails for installed themes."
+msgid "Set this key to the command used to create thumbnails for installed themes."
 msgstr ""
 "Ορισμός αυτού του κλειδιού στην εντολή που χρησιμοποιείται για την "
 "δημιουργία προεπισκόπησης για τα εγκατεστημένα θέματα."
@@ -3492,3 +3441,150 @@ msgstr "Αν θα γίνεται προεπισκόπηση εγκατεστημ
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Αν θα γίνεται προεπισκόπηση θεμάτων"
+
+#. translators: you may want to include non-western chars here
+#: vfs-methods/themus/themus-theme-applier.c:78
+msgid "ABCDEFG"
+msgstr "ΑΒΓΔΕΖΗΘ"
+
+#: vfs-methods/themus/themus-theme-applier.desktop.in.in.h:1
+msgid "Apply theme"
+msgstr "Εφαρμογή θέματος"
+
+#: vfs-methods/themus/themus-theme-applier.desktop.in.in.h:2
+msgid "Sets the default theme"
+msgstr "Καθορισμός εξορισμού θέματος"
+
+#~ msgid "Mozilla/Netscape 6"
+#~ msgstr "Mozilla/Netscape 6"
+
+#~ msgid "Gnome Terminal"
+#~ msgstr "Τερματικό του Gnome"
+
+#~ msgid "C_ustom Editor"
+#~ msgstr "Επεξεργαστής Κειμένου Επιλεγμένος από το _Χρήστη"
+
+#~ msgid "C_ustom Mail Reader:"
+#~ msgstr "Εφαρμογή Αλληλογραφίας Επιλεγμένη από το _Χρήστη:"
+
+#~ msgid "C_ustom Terminal:"
+#~ msgstr "Τερματικό Επιλεγμένο από το _Χρήστη:"
+
+#~ msgid "C_ustom Web Browser:"
+#~ msgstr "Περιηγητής Ιστοσελίδων Επιλεγμένος από το _Χρήστη:"
+
+#~ msgid "Start in T_erminal"
+#~ msgstr "Εκκίνηση εντός Τ_ερματικού"
+
+#~ msgid "This application can open _URIs"
+#~ msgstr "Αυτή η εφαρμογή μπορεί να ανοίγει _URIs"
+
+#~ msgid "This application needs to be run in a _shell"
+#~ msgstr "Αυτή η εφαρμογή μπορεί χρειάζεται να τρέχει σε_κέλυφος"
+
+#~ msgid "_Select a Mail Reader:"
+#~ msgstr "_Επιλογή Εφαρμογής Αλληλογραφίας:"
+
+#~ msgid "_Select a Terminal:"
+#~ msgstr "_Επιλογή Τερματικού:"
+
+#~ msgid "_Select a Web Browser:"
+#~ msgstr "_Επιλογή Περιηγητή Ιστοσελίδων:"
+
+#~ msgid "_Select an Editor:"
+#~ msgstr "_Επιλογή Κειμενογράφου:"
+
+#~ msgid "Accessibility"
+#~ msgstr "Προσβασιμότητα"
+
+#~ msgid "Accessibility Settings"
+#~ msgstr "Ρυθμίσεις Προσβασιμότητας"
+
+#~ msgid "Advanced"
+#~ msgstr "Για προχωρημένους"
+
+#~ msgid "Advanced Settings"
+#~ msgstr "Προχωρημένες Ρυθμίσεις"
+
+#~ msgid "Network Proxy Configuration"
+#~ msgstr "Ρύθμιση Διαμεσολαβητή Δικτύου"
+
+#~ msgid "GNOME Control Center: %s"
+#~ msgstr "Κέντρο Ελέγχου GNOME: %s"
+
+#~ msgid "Layout"
+#~ msgstr "Διάταξη"
+
+#~ msgid "Layout to use for this view of the capplets"
+#~ msgstr "Διάταξη που θα χρησιμοποιείται για την προβολή των capplets"
+
+#~ msgid "Capplet directory object"
+#~ msgstr "Αντικείμενο καταλόγου capplet"
+
+#~ msgid "Capplet directory that this view is viewing"
+#~ msgstr "Κατάλογος capplet που βλέπει αυτή η προβολή"
+
+#~ msgid "translator_credits"
+#~ msgstr ""
+#~ "Σίμος Ξενιτέλλης <simos@hellug.gr>\n"
+#~ "Σπύρος Παπαδημητρίου <spapadim+@cs.smu,edu>\n"
+#~ "Νίκος Χαρωνιτάκης <charosn@her.forthnet.gr>\n"
+#~ "Κώστας Παπαδήμας <pkst@gnome.org>"
+
+#~ msgid "Desktop properties manager."
+#~ msgstr "Διαχειριστής ιδιοτήτων επιφάνειας εργασίας."
+
+#~ msgid "Gnome Control Center : %s"
+#~ msgstr "Κέντρο Ελέγχου Gnome : %s"
+
+#~ msgid "Gnome Control Center"
+#~ msgstr "Κέντρο Ελέγχου Gnome"
+
+#~ msgid "Use nautilus if it is running."
+#~ msgstr "Χρήση ναυτίλου αν εκτελείται."
+
+#~ msgid "About this application"
+#~ msgstr "Περί αυτής της εφαρμογής"
+
+#~ msgid "Overview of the control center"
+#~ msgstr "Σύνοψη του κέντρου ελέγχου"
+
+#~ msgid "_About"
+#~ msgstr "_Περί"
+
+#~ msgid "_Contents"
+#~ msgstr "_Περιεχόμενα"
+
+#~ msgid "_Help"
+#~ msgstr "_Βοήθεια"
+
+#~ msgid "Use shell even if nautilus is running."
+#~ msgstr "Χρήση κέλυφους ακόμα και αν τρέχει ο nautilus."
+
+#~ msgid "XKB options"
+#~ msgstr "Επιλογές XKB"
+
+#~ msgid "Font context menu items"
+#~ msgstr "Γραμματοσειρά αντικειμένων μενού περιεχομένου"
+
+#~ msgid "Factory for the fontilus context menu"
+#~ msgstr "Εργοστάσιο για το μενού περιεχομένου του fontilus"
+
+#~ msgid "Fontilus context menu"
+#~ msgstr "Μενού περιεχομένου fontilus"
+
+#~ msgid "Fontilus context menu factory"
+#~ msgstr "Εργοστάσιο για το μενού περιεχομένου του fontilus"
+
+#~ msgid "Nautilus context menu entries for fonts"
+#~ msgstr "Καταχωρήσεις μενού περιεχομένου του Ναυτίλου για γραμματοσειρές"
+
+#~ msgid "Theme Properties content view component"
+#~ msgstr "Συστατικό όψης περιεχομένου ιδιοτήτων θέματος"
+
+#~ msgid "Themus Theme Properties view"
+#~ msgstr "Όψη ιδιοτήτων εικόνας του Themus"
+
+#~ msgid "URI currently displayed"
+#~ msgstr "URI που εμφανίζεται τώρα"
+
