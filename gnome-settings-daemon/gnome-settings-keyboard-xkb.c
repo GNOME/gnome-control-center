@@ -53,10 +53,9 @@ activation_error (void)
 	    && (release / 100000 == 403);
 
 	GtkWidget *msg = gtk_message_dialog_new (NULL,
-						 GTK_DIALOG_MODAL |
-						 GTK_DIALOG_DESTROY_WITH_PARENT,
+						 0,
 						 GTK_MESSAGE_ERROR,
-						 GTK_BUTTONS_OK,
+						 GTK_BUTTONS_CLOSE,
 						 _
 						 ("Error activating XKB configuration.\n"
 						  "Probably internal X server problem.\n\nX server version data:\n%s\n%d\n%s"),
@@ -68,8 +67,9 @@ activation_error (void)
 						  "There are known problems with complex XKB configurations.\n"
 						  "Try using simpler configuration or taking more fresh version of XFree software.")
 						 : "");
-	gtk_dialog_run (GTK_DIALOG (msg));
-	gtk_widget_destroy (msg);
+	g_signal_connect (msg, "response",
+			  G_CALLBACK (gtk_widget_destroy), NULL);
+	gtk_widget_show (msg);
 }
 
 static void
@@ -99,6 +99,7 @@ void
 gnome_settings_keyboard_xkb_init (GConfClient * client)
 {
 	if (!XklInit (GDK_DISPLAY ())) {
+		XklBackupNamesProp ();
 		initedOk = TRUE;
 		gnome_settings_daemon_register_callback
 		    ("/desktop/gnome/peripherals/keyboard/xkb",
