@@ -1,7 +1,7 @@
 confexecdir = $(libdir)
 confexec_DATA = ximian_archiverConf.sh
 
-Locationmetadir = $(datadir)/hcm/default
+Locationmetadir = $(datadir)/ximian-config/default
 Locationmeta_DATA = default-user.xml default-global.xml
 
 gladedir = $(prefix)/share/hcm/glade
@@ -14,8 +14,8 @@ INCLUDES = 			\
 	-I$(includedir) $(GNOME_INCLUDEDIR)		\
 	-DVERSION=\""$(VERSION)"\"			\
 	-DCONFIGDIR=\""/etc"\"				\
-	-DLOCATION_DIR=\""$(datadir)/hcm/default"\"	\
-	-DGLADE_DIR=\""$(datadir)/hcm/glade"\"		\
+	-DLOCATION_DIR=\""$(datadir)/ximian-config/default"\"	\
+	-DGLADE_DIR=\""$(datadir)/ximian-config/glade"\"		\
 	$(GNOME_XML_CFLAGS)				\
 	$(LIBGLADE_CFLAGS)
 
