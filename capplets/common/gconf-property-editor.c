@@ -113,6 +113,10 @@ gconf_property_editor_class_init (GConfPropertyEditorClass *class)
 
 	object_class = G_OBJECT_CLASS (class);
 
+	object_class->finalize = gconf_property_editor_finalize;
+	object_class->set_property = gconf_property_editor_set_prop;
+	object_class->get_property = gconf_property_editor_get_prop;
+
 	g_object_class_install_property
 		(object_class, PROP_KEY,
 		 g_param_spec_string ("key",
@@ -148,10 +152,6 @@ gconf_property_editor_class_init (GConfPropertyEditorClass *class)
 			      NULL, NULL,
 			      (GSignalCMarshaller) gconf_property_editor_marshal_VOID__STRING_POINTER,
 			      G_TYPE_NONE, 2, G_TYPE_STRING, G_TYPE_POINTER);
-
-	object_class->finalize = gconf_property_editor_finalize;
-	object_class->set_property = gconf_property_editor_set_prop;
-	object_class->get_property = gconf_property_editor_get_prop;
 
 	parent_class = G_OBJECT_CLASS
 		(g_type_class_ref (G_TYPE_OBJECT));

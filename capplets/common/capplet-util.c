@@ -177,7 +177,7 @@ get_property_name (const gchar *binary)
  * logs in
  */
 
-static void
+void
 setup_session_mgmt (const gchar *binary_name) 
 {
 /* Disabled. I never really understood this code anyway, and I am absolutely

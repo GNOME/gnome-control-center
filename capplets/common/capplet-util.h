@@ -63,6 +63,12 @@ typedef void (*SetupPropertyEditorsFn) (GtkWidget *dialog, GConfChangeSet *chang
  * database */
 typedef void (*GetLegacySettingsFn) (void);
 
+/* Set up the session management so that this capplet will apply its
+ * settings on every startup
+ */
+
+void setup_session_mgmt (const gchar *binary_name);
+
 /* Wrapper function for the entire capplet. This handles all initialization and
  * runs the capplet for you. Just supply the appropriate callbacks and your argc
  * and argv from main()
