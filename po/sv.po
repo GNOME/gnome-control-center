@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2002-12-04 17:00+0100\n"
-"PO-Revision-Date: 2002-12-04 17:03+0100\n"
+"POT-Creation-Date: 2002-12-17 10:56+0100\n"
+"PO-Revision-Date: 2002-12-17 10:56+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1939,7 +1939,8 @@ msgstr "_Installera"
 msgid "_Location of new theme:"
 msgstr "_Plats för nytt tema:"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:467
+#: capplets/theme-switcher/gnome-theme-details.c:319
+#: capplets/theme-switcher/gnome-theme-manager.c:463
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -1949,11 +1950,11 @@ msgstr ""
 "\"Temainställningar\"-dialog inte installerades korrekt, eller att du inte "
 "har installerat paketet \"gnome-themes\"."
 
-#: capplets/theme-switcher/gnome-theme-manager.c:517
+#: capplets/theme-switcher/gnome-theme-manager.c:513
 msgid "Custom theme"
 msgstr "Anpassat tema"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:517
+#: capplets/theme-switcher/gnome-theme-manager.c:513
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "Du kan spara detta tema genom att trycka på knappen Spara tema."
 
@@ -2412,7 +2413,7 @@ msgstr "Starta XScreenSaver"
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:1
 msgid "Antialising"
-msgstr "Antialiasing"
+msgstr "Kantutjämning"
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:2
 msgid "DPI"
@@ -2435,25 +2436,24 @@ msgstr ""
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:6
 msgid ""
-"The order of elements subpixel elements on an LCD screen; only used when "
-"antialising is set to \"rgba\". Possible values are: \"rgb\" - red on left, "
-"most common. \"bgr\" - blue on left. \"vrgb\" - red on top. \"vbgr\" - red "
-"on bottom."
+"The order of subpixel elements on an LCD screen; only used when antialising "
+"is set to \"rgba\". Possible values are: \"rgb\" - red on left, most common. "
+"\"bgr\" - blue on left. \"vrgb\" - red on top. \"vbgr\" - red on bottom."
 msgstr ""
-"Ordningen för element underbildpunktselement på en LCD-skärm. Används endast "
-"då alntialiasing är satt till \"rgba\". Möjliga värden är: \"rgb\" - röd "
-"till vänster, vanligast. \"bgr\" - blå till vänster. \"vrgb\" - röd överst. "
-"\"vbgr\" - röd nederst."
+"Ordningen för underbildpunktselement på en LCD-skärm. Används endast då "
+"alntialiasing är satt till \"rgba\". Möjliga värden är: \"rgb\" - röd till "
+"vänster, vanligast. \"bgr\" - blå till vänster. \"vrgb\" - röd överst. \"vbgr"
+"\" - röd nederst."
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:7
 msgid ""
 "The type of antialiasing to use when rendering fonts. Possible values are: "
-"\"none\" - no antialiasing. \"grayscale\" - standard grayscale antialising. "
+"\"none\" - no antialiasing. \"grayscale\" - standard grayscale antialiasing. "
 "\"rgba\" - subpixel antialising. (LCD screens only)."
 msgstr ""
-"Typen av antialiasing att använda vid rendering av typsnitt. Möjliga värden "
-"är: \"none\" - ingen antialiasing. \"grayscale\" - standard "
-"gråskaleantialiasing. \"rgba\" - underbildpunktsantialiasing (endast LCD-"
+"Typen av kantutjämning att använda vid rendering av typsnitt. Möjliga värden "
+"är: \"none\" - ingen kantutjämning. \"grayscale\" - standard "
+"gråskalekantutjämning. \"rgba\" - underbildpunktskantutjämning (endast LCD-"
 "skärmar)."
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:8
@@ -2466,6 +2466,30 @@ msgstr ""
 "\"none\" - inget tipsande, \"slight\", \"medium\" och \"full\" - så mycket "
 "tipsande som möjligt; kan orsaka förvrängning av bokstavsformer."
 
+#~ msgid "Theme name must be present"
+#~ msgstr "Det måste finnas ett temanamn"
+
+#~ msgid ""
+#~ "The type of antialiasing to use when rendering fonts. Possible values "
+#~ "are: \"none\" - no antialiasing. \"grayscale\" - standard grayscale "
+#~ "antialiasing. \"rgba\" - subpixel antialiasing. (LCD screens only)."
+#~ msgstr ""
+#~ "Typen av kantutjämning att använda vid rendering av typsnitt. Möjliga "
+#~ "värden är: \"none\" - ingen kantutjämning. \"grayscale\" - standard "
+#~ "gråskalekantutjämning. \"rgba\" - underbildpunktskantutjämning (endast "
+#~ "LCD-skärmar)."
+
+#~ msgid ""
+#~ "The order of elements subpixel elements on an LCD screen; only used when "
+#~ "antialising is set to \"rgba\". Possible values are: \"rgb\" - red on "
+#~ "left, most common. \"bgr\" - blue on left. \"vrgb\" - red on top. \"vbgr"
+#~ "\" - red on bottom."
+#~ msgstr ""
+#~ "Ordningen för element underbildpunktselement på en LCD-skärm. Används "
+#~ "endast då alntialiasing är satt till \"rgba\". Möjliga värden är: \"rgb\" "
+#~ "- röd till vänster, vanligast. \"bgr\" - blå till vänster. \"vrgb\" - röd "
+#~ "överst. \"vbgr\" - röd nederst."
+
 #~ msgid "Save theme to disk"
 #~ msgstr "Spara tema till disk"
 
@@ -2474,17 +2498,6 @@ msgstr ""
 
 #~ msgid "Current modified"
 #~ msgstr "Aktuellt ändrat"
-
-#~ msgid ""
-#~ "The order of subpixel elements on an LCD screen; only used when "
-#~ "antialising is set to \"rgba\". Possible values are: \"rgb\" - red on "
-#~ "left, most common. \"bgr\" - blue on left. \"vrgb\" - red on top. \"vbgr"
-#~ "\" - red on bottom."
-#~ msgstr ""
-#~ "Ordningen för underbildpunktselement på en LCD-skärm. Används endast då "
-#~ "alntialiasing är satt till \"rgba\". Möjliga värden är: \"rgb\" - röd "
-#~ "till vänster, vanligast. \"bgr\" - blå till vänster. \"vrgb\" - röd "
-#~ "överst. \"vbgr\" - röd nederst."
 
 #~ msgid "Super"
 #~ msgstr "Super"
