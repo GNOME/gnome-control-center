@@ -1,3 +1,12 @@
+2002-03-08  Seth Nickell  <snickell@stanford.edu>
+
+	* Makefile.am:
+
+	Don't install cd properties capplet .desktop file. It should
+	be picked up by the vfolder legacy support if installed on
+	the system, and otherwise we shouldn't display it anyway
+	since the person doesn't have the capplet.
+
 2002-03-06  Richard Hestilow  <hestilow@ximian.com>
 
 	* Makefile.am: Remove legacy-applications. Fixes bug #72997.
