@@ -35,6 +35,7 @@
 #include "capplet-util.h"
 #include "gconf-property-editor.h"
 #include "applier.h"
+#include "preview-file-selection.h"
 
 /* Retrieve legacy gnome_config settings and store them in the GConf
  * database. This involves some translation of the settings' meanings.
@@ -233,6 +234,8 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset, BGApplier *bg_applier
 	else
 		g_signal_connect_after (G_OBJECT (bg_applier_get_preview_widget (bg_applier)), "realize",
 					(GCallback) realize_cb, prefs);
+
+	preview_file_selection_hookup_file_entry (GNOME_FILE_ENTRY (WID ("image_fileentry")), _("Please select a background image"));
 
 	/* Make sure the preferences object gets destroyed when the dialog is
 	   closed */
