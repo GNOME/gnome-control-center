@@ -162,13 +162,13 @@ apply_settings (void)
 }
 
 void
-gnome_settings_sound_init (GConfEngine *engine)
+gnome_settings_sound_init (GConfClient *client)
 {
 	gnome_settings_daemon_register_callback ("/desktop/gnome/sound", (KeyCallbackFunc) apply_settings);
 }
 
 void
-gnome_settings_sound_load (GConfEngine *engine)
+gnome_settings_sound_load (GConfClient *client)
 {
 	apply_settings ();
 }

@@ -47,7 +47,7 @@ background_callback (GConfEntry *entry)
 }
 
 void
-gnome_settings_background_init (GConfEngine *engine)
+gnome_settings_background_init (GConfClient *client)
 {
 	bg_applier = BG_APPLIER (bg_applier_new (BG_APPLIER_ROOT));
 
@@ -58,7 +58,7 @@ gnome_settings_background_init (GConfEngine *engine)
 }
 
 void
-gnome_settings_background_load (GConfEngine *engine)
+gnome_settings_background_load (GConfClient *client)
 {
 	bg_applier_apply_prefs (bg_applier, prefs);
 }

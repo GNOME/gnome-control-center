@@ -85,7 +85,7 @@ gnome_settings_daemon_get_invisible (void)
 }
 
 static void
-config_notify (GConfEngine *client,
+config_notify (GConfClient *client,
                guint        cnxn_id,
                GConfEntry  *entry,
                gpointer     user_data)
@@ -131,7 +131,7 @@ int
 main (int argc, char **argv)
 {
   gboolean terminated = FALSE;
-  GConfEngine *engine;
+  GConfClient *client;
   GSList *list;
   gtk_init (&argc, &argv);  
   
@@ -154,25 +154,26 @@ main (int argc, char **argv)
 
   gconf_init (argc, argv, NULL); /* exits w/ message on failure */  
 
-  /* We use GConfEngine not GConfClient because a cache isn't useful
+  /* We use GConfClient not GConfClient because a cache isn't useful
    * for us
    */
-  engine = gconf_engine_get_default ();
-  gnome_settings_xsettings_init (engine);
-  gnome_settings_mouse_init (engine);
-  gnome_settings_keyboard_init (engine);
-  gnome_settings_background_init (engine);
-  gnome_settings_sound_init (engine);
+  client = gconf_client_get_default ();
+  gnome_settings_xsettings_init (client);
+  gnome_settings_mouse_init (client);
+  gnome_settings_keyboard_init (client);
+  gnome_settings_background_init (client);
+  gnome_settings_sound_init (client);
 
   for (list = directories; list; list = list->next)
     {
       GError *error = NULL;
       DirElement *dir_element = list->data;
       
-      gconf_engine_notify_add (engine,
+      gconf_client_notify_add (client,
                                dir_element->dir,
                                config_notify,
                                NULL,
+			       NULL,
                                &error);
 
       if (error)
@@ -185,14 +186,13 @@ main (int argc, char **argv)
   
   gdk_window_add_filter (NULL, manager_event_filter, NULL);
 
-  gnome_settings_xsettings_load (engine);
-  gnome_settings_mouse_load (engine);
+  gnome_settings_xsettings_load (client);
+  gnome_settings_mouse_load (client);
   
   if (!terminated)
     gtk_main ();
   
   xsettings_manager_destroy (manager);
-  gconf_engine_unref (engine);
 
   return 0;
 }

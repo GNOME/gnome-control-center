@@ -26,8 +26,8 @@
 
 #include <gconf/gconf.h>
 
-void gnome_settings_xsettings_init (GConfEngine *engine);
-void gnome_settings_xsettings_load (GConfEngine *engine);
+void gnome_settings_xsettings_init (GConfClient *client);
+void gnome_settings_xsettings_load (GConfClient *client);
 
 
 #endif /* GNOME_SETTINGS_XSETTINGS_H */

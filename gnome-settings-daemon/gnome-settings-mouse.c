@@ -162,13 +162,13 @@ mouse_callback (GConfEntry *entry)
 }
 
 void
-gnome_settings_mouse_init (GConfEngine *engine)
+gnome_settings_mouse_init (GConfClient *client)
 {
   gnome_settings_daemon_register_callback ("/desktop/gnome/peripherals/mouse", mouse_callback);
 }
 
 
 void
-gnome_settings_mouse_load (GConfEngine *engine)
+gnome_settings_mouse_load (GConfClient *client)
 {
 }

@@ -26,7 +26,7 @@
 
 #include <gconf/gconf.h>
 
-void gnome_settings_mouse_init (GConfEngine *engine);
-void gnome_settings_mouse_load (GConfEngine *engine);
+void gnome_settings_mouse_init (GConfClient *client);
+void gnome_settings_mouse_load (GConfClient *client);
 
 #endif

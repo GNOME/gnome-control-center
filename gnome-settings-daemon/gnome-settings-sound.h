@@ -27,7 +27,7 @@
 
 #include <gconf/gconf.h>
 
-void gnome_settings_sound_init (GConfEngine *engine);
-void gnome_settings_sound_load (GConfEngine *engine);
+void gnome_settings_sound_init (GConfClient *client);
+void gnome_settings_sound_load (GConfClient *client);
 
 #endif /* __GNOME_SETTINGS_SOUND_H__ */

@@ -27,7 +27,7 @@
 
 #include <gconf/gconf.h>
 
-void gnome_settings_background_init (GConfEngine *engine);
-void gnome_settings_background_load (GConfEngine *engine);
+void gnome_settings_background_init (GConfClient *client);
+void gnome_settings_background_load (GConfClient *client);
 
 #endif

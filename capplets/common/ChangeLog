@@ -1,3 +1,11 @@
+2002-01-04  Bradford Hovinen  <hovinen@ximian.com>
+
+	* gconf-property-editor.c (peditor_set_gconf_value):
+	Implement. Sets the GConf value either in the changeset, or if
+	changeset is NULL, directly
+	(peditor_*_widget_changed): Use peditor_set_gconf_value
+	(gconf_peditor_new_*): Don't complain if changeset is NULL
+
 2001-12-20  Bradford Hovinen  <hovinen@ximian.com>
 
 	* gconf-property-editor.c: Eliminate compiler warnings

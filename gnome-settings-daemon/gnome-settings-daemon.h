@@ -25,6 +25,7 @@
 #define __GNOME_SETTINGS_DAEMON_H
 
 #include <gconf/gconf.h>
+#include <gconf/gconf-client.h>
 #include <gtk/gtk.h>
 
 

@@ -26,8 +26,9 @@
 #define __GNOME_SETTINGS_KEYBOARD_H
 
 #include <gconf/gconf.h>
+#include <gconf/gconf-client.h>
 
-void gnome_settings_keyboard_init (GConfEngine *engine);
-void gnome_settings_keyboard_load (GConfEngine *engine);
+void gnome_settings_keyboard_init (GConfClient *client);
+void gnome_settings_keyboard_load (GConfClient *client);
 
 #endif

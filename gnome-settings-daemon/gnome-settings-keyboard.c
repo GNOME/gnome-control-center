@@ -94,13 +94,13 @@ apply_settings (void)
 }
 
 void
-gnome_settings_keyboard_init (GConfEngine *engine)
+gnome_settings_keyboard_init (GConfClient *client)
 {
 	gnome_settings_daemon_register_callback ("/desktop/gnome/peripherals/keyboard", (KeyCallbackFunc) apply_settings);
 }
 
 void
-gnome_settings_keyboard_load (GConfEngine *engine)
+gnome_settings_keyboard_load (GConfClient *client)
 {
 	apply_settings ();
 }

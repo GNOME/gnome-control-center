@@ -151,14 +151,14 @@ xsettings_callback (GConfEntry *entry)
 }
 
 void
-gnome_settings_xsettings_init (GConfEngine *engine)
+gnome_settings_xsettings_init (GConfClient *client)
 {
   gnome_settings_daemon_register_callback ("/desktop/gnome/peripherals/mouse", xsettings_callback);
   gnome_settings_daemon_register_callback ("/desktop/gtk", xsettings_callback);
 }
 
 void
-gnome_settings_xsettings_load (GConfEngine *engine)
+gnome_settings_xsettings_load (GConfClient *client)
 {
   int i;
 
@@ -169,7 +169,7 @@ gnome_settings_xsettings_load (GConfEngine *engine)
       GError *err;
 
       err = NULL;
-      val = gconf_engine_get (engine,
+      val = gconf_client_get (client,
                               translations[i].gconf_key,
                               &err);
 
