@@ -1,4 +1,3 @@
-
 /* gnome-network-preferences.c: network preferences capplet
  *
  * Copyright (C) 2002 Sun Microsystems Inc.
@@ -53,6 +52,7 @@ static GEnumValue proxytype_values[] = {
 #define HTTP_USE_AUTH_KEY    "/system/http_proxy/use_authentication"
 #define HTTP_AUTH_USER_KEY   "/system/http_proxy/authentication_user"
 #define HTTP_AUTH_PASSWD_KEY "/system/http_proxy/authentication_password"
+#define IGNORE_HOSTS_KEY	 "/system/http_proxy/ignore_hosts"
 #define PROXY_MODE_KEY "/system/proxy/mode"
 #define SECURE_PROXY_HOST_KEY  "/system/proxy/secure_host"
 #define SECURE_PROXY_PORT_KEY  "/system/proxy/secure_port"
@@ -63,6 +63,95 @@ static GEnumValue proxytype_values[] = {
 #define PROXY_AUTOCONFIG_URL_KEY  "/system/proxy/autoconfig_url"
 
 static GtkWidget *details_dialog = NULL;
+static GSList *ignore_hosts = NULL;
+static GtkTreeModel *model = NULL;
+
+static GtkTreeModel *
+create_listmodel()
+{
+	GtkListStore *store;
+
+	store = gtk_list_store_new(1, G_TYPE_STRING);
+	
+	return GTK_TREE_MODEL(store);
+}
+
+static GtkTreeModel *
+populate_listmodel(GtkListStore *store, GSList *list)
+{
+	GtkTreeIter iter;
+	GSList *pointer;
+
+	gtk_list_store_clear(store);
+
+	pointer = list;
+	while(pointer)
+	{
+		gtk_list_store_append(store, &iter);
+		gtk_list_store_set(store, &iter, 0, (char *) pointer->data, -1);
+		pointer = g_slist_next(pointer);
+	}
+
+	return GTK_TREE_MODEL(store);
+}
+
+static GtkWidget *
+config_treeview(GtkTreeView *tree, GtkTreeModel *model)
+{
+	GtkCellRenderer *renderer;
+
+	renderer = gtk_cell_renderer_text_new();
+	gtk_tree_view_insert_column_with_attributes(GTK_TREE_VIEW(tree),
+												-1, "Hosts", renderer,
+												"text", 0, NULL);
+
+	gtk_tree_view_set_model(GTK_TREE_VIEW(tree), model);
+
+	return GTK_WIDGET(tree);
+}
+
+static void
+cb_add_url (GtkButton *button, gpointer data)
+{
+	GladeXML *dialog = (GladeXML *) data;
+	gchar *new_url = NULL;
+
+	new_url = g_strdup(gtk_entry_get_text(GTK_ENTRY(WID("entry_url"))));
+	g_slist_append(ignore_hosts, new_url);
+	populate_listmodel(GTK_LIST_STORE(model), ignore_hosts);
+	gtk_entry_set_text(GTK_ENTRY(WID("entry_url")), "");
+}
+
+static void
+cb_remove_url (GtkButton *button, gpointer data)
+{
+	GladeXML *dialog = (GladeXML *) data;
+	GtkTreeSelection *selection;
+	GtkTreeIter       iter;
+
+	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(WID("treeview_ignore_host")));
+	if (gtk_tree_selection_get_selected(selection, &model, &iter))
+	{
+		gchar *url;
+		GSList *pointer;
+
+		gtk_tree_model_get (model, &iter, 0, &url, -1);
+
+		pointer = ignore_hosts;
+		while(pointer)
+		{
+			if(strcmp(url, (char *) pointer->data) == 0)
+			{
+				ignore_hosts = g_slist_delete_link(ignore_hosts, pointer);
+				break;
+			}
+			pointer = g_slist_next(pointer);
+		}
+
+		g_free(url);
+		populate_listmodel(GTK_LIST_STORE(model), ignore_hosts);
+	}
+}
 
 static void
 cb_dialog_response (GtkDialog *dialog, gint response_id)
@@ -72,7 +161,17 @@ cb_dialog_response (GtkDialog *dialog, gint response_id)
 			"user-guide.xml",
 			"goscustdesk-50");
 	else
+	{
+		GConfClient *client;
+		
+		client = gconf_client_get_default ();
+		gconf_client_set_list(client, IGNORE_HOSTS_KEY, GCONF_VALUE_STRING, ignore_hosts, NULL);
+
+		if(ignore_hosts)
+			g_slist_free(ignore_hosts);
+
 		gtk_main_quit ();
+	}
 }
 
 static void
@@ -286,6 +385,20 @@ setup_dialog (GladeXML *dialog)
 
 	g_signal_connect (WID ("network_dialog"), "response",
 			  G_CALLBACK (cb_dialog_response), NULL);
+
+
+	gtk_label_set_use_markup (GTK_LABEL (WID ("label_ignore_host")), TRUE);
+	ignore_hosts = gconf_client_get_list(client, IGNORE_HOSTS_KEY, GCONF_VALUE_STRING, NULL);
+	model = create_listmodel();
+	populate_listmodel(GTK_LIST_STORE(model), ignore_hosts);
+	config_treeview(GTK_TREE_VIEW(WID("treeview_ignore_host")), model);
+
+	g_signal_connect (WID ("button_add_url"), "clicked", 
+						G_CALLBACK (cb_add_url), dialog);
+	g_signal_connect (WID ("entry_url"), "activate", 
+						G_CALLBACK (cb_add_url), dialog);
+	g_signal_connect (WID ("button_remove_url"), "clicked", 
+						G_CALLBACK (cb_remove_url), dialog);
 }
 
 int
