@@ -85,13 +85,19 @@ gnome_settings_keyboard_log_appender (const char file[], const char function[],
 static void
 activation_error (void)
 {
-	char *vendor = ServerVendor (GDK_DISPLAY ());
+	char const *vendor = ServerVendor (GDK_DISPLAY ());
 	int release = VendorRelease (GDK_DISPLAY ());
-	gboolean badXFree430Release = (!strcmp (vendor,
-						"The XFree86 Project, Inc"))
+	gboolean badXFree430Release = (vendor != NULL)
+	    && (0 == strcmp (vendor, "The XFree86 Project, Inc"))
 	    && (release / 100000 == 403);
 
-	GtkWidget *msg = gtk_message_dialog_new_with_markup (NULL,
+	GtkWidget *dialog;
+	
+	/* VNC viewers will not work, do not barrage them with warnings */
+	if (NULL != vendor && NULL != strstr (vendor, "VNC"))
+	    return;
+
+	dialog = gtk_message_dialog_new_with_markup (NULL,
 							     0,
 							     GTK_MESSAGE_ERROR,
 							     GTK_BUTTONS_CLOSE,
@@ -116,9 +122,9 @@ activation_error (void)
 							     : "",
 							     "<b>xprop -root | grep XKB</b>",
 							     "<b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/kbd</b>");
-	g_signal_connect (msg, "response",
+	g_signal_connect (dialog, "response",
 			  G_CALLBACK (gtk_widget_destroy), NULL);
-	gtk_widget_show (msg);
+	gtk_widget_show (dialog);
 }
 
 static void
