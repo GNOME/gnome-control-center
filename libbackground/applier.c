@@ -447,6 +447,7 @@ applier_get_preview_widget (Applier *applier)
 				 gdk_pixbuf_get_width (pixbuf),
 				 gdk_pixbuf_get_height (pixbuf),
 				 visual->depth);
+	gc = gdk_gc_new (GDK_ROOT_PARENT ());
 
 	gdk_pixbuf_render_to_drawable (pixbuf, pixmap, gc,
 				       0, 0, 0, 0,
