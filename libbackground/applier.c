@@ -1407,7 +1407,7 @@ render_small_pixmap_p (const BGPreferences *prefs)
 	return prefs->gradient_enabled && !prefs->wallpaper_enabled;
 }
 
-/* Create a persistant pixmap. We create a separate display
+/* Create a persistent pixmap. We create a separate display
  * and set the closedown mode on it to RetainPermanent
  */
 static GdkPixmap *
