@@ -342,7 +342,9 @@ peditor_boolean_value_changed (GConfClient         *client,
 {
 	GConfValue *value, *value_wid;
 
-	gconf_change_set_remove (peditor->p->changeset, peditor->p->key);
+	if (peditor->p->changeset != NULL)
+		gconf_change_set_remove (peditor->p->changeset, peditor->p->key);
+
 	value = gconf_entry_get_value (entry);
 
 	if (value != NULL) {
@@ -408,7 +410,9 @@ peditor_string_value_changed (GConfClient         *client,
 {
 	GConfValue *value, *value_wid;
 
-	gconf_change_set_remove (peditor->p->changeset, peditor->p->key);
+	if (peditor->p->changeset != NULL)
+		gconf_change_set_remove (peditor->p->changeset, peditor->p->key);
+
 	value = gconf_entry_get_value (entry);
 
 	if (value != NULL) {
@@ -517,7 +521,8 @@ peditor_color_value_changed (GConfClient         *client,
 	GConfValue *value, *value_wid;
 	GdkColor color;
 
-	gconf_change_set_remove (peditor->p->changeset, peditor->p->key);
+	if (peditor->p->changeset != NULL)
+		gconf_change_set_remove (peditor->p->changeset, peditor->p->key);
 
 	value = gconf_entry_get_value (entry);
 
@@ -596,7 +601,9 @@ peditor_select_menu_value_changed (GConfClient         *client,
 {
 	GConfValue *value, *value_wid;
 
-	gconf_change_set_remove (peditor->p->changeset, peditor->p->key);
+	if (peditor->p->changeset != NULL)
+		gconf_change_set_remove (peditor->p->changeset, peditor->p->key);
+
 	value = gconf_entry_get_value (entry);
 
 	if (value != NULL) {
@@ -663,7 +670,9 @@ peditor_select_radio_value_changed (GConfClient         *client,
 	GSList *group;
 	GConfValue *value, *value_wid;
 
-	gconf_change_set_remove (peditor->p->changeset, peditor->p->key);
+	if (peditor->p->changeset != NULL)
+		gconf_change_set_remove (peditor->p->changeset, peditor->p->key);
+
 	value = gconf_entry_get_value (entry);
 
 	if (value != NULL) {
@@ -741,7 +750,8 @@ peditor_numeric_range_value_changed (GConfClient         *client,
 {
 	GConfValue *value, *value_wid;
 
-	gconf_change_set_remove (peditor->p->changeset, peditor->p->key);
+	if (peditor->p->changeset != NULL)
+		gconf_change_set_remove (peditor->p->changeset, peditor->p->key);
 
 	value = gconf_entry_get_value (entry);
 
