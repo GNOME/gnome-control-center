@@ -1,3 +1,9 @@
+2002-01-27  Richard Hestilow  <hestilow@ximian.com>
+
+	* control/control.c: Include string.h.
+	(create_form): Defer modifying default rc files until property is set.
+	(set_prop_cb): Set default files here instead.
+	
 2002-01-21  Anders Carlsson  <andersca@gnu.org>
 
 	* main.c: Get the theme name right.

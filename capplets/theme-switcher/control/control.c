@@ -1,9 +1,9 @@
 #include <config.h>
 #include <libbonoboui.h>
+#include <string.h>
 
 static gchar* current_theme = NULL;
 static gchar **new_rc_files = NULL;
-static gint new_count = 0;
 
 #define GNOME_PAD_SMALL 4
 
@@ -18,9 +18,6 @@ create_form (void)
   /* just 8 short names that will serve as samples for titles in demo */
   char *column1[4] = { N_("Eenie"),  N_("Mynie"), N_("Catcha"), N_("By Its") };
   char *column2[4] = { N_("Meenie"), N_("Moe"),   N_("Tiger"),  N_("Toe") };
-  gchar **rc_files;
-  gint rc_file_count;
-  const gchar *home_dir;
   gint i;
 
   store = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_STRING);
@@ -36,29 +33,6 @@ create_form (void)
 
   }
   
-  /* Strip out ~/.gtkrc from the set of initial default files.
-   * to suppress reading of the previous rc file.
-   */
-
-  rc_files = gtk_rc_get_default_files();
-  for (rc_file_count = 0; rc_files[rc_file_count]; rc_file_count++)
-    /* Nothing */;
-
-  new_rc_files = g_new (gchar *, rc_file_count + 2);
-
-  home_dir = g_get_home_dir();
-  new_count = 0;
-  
-  for (i = 0; i<rc_file_count; i++)
-    {
-      if (strncmp (rc_files[i], home_dir, strlen (home_dir)) != 0)
-	new_rc_files[new_count++] = g_strdup (rc_files[i]);
-    }
-  new_rc_files[new_count++] = NULL;
-  new_rc_files[new_count] = NULL;
-
-  gtk_rc_set_default_files (new_rc_files);
-
   table = gtk_table_new (5, 3, FALSE);
   
   widget = gtk_label_new (_("Selected themes from above will be tested by previewing here."));
@@ -151,17 +125,43 @@ static void
 set_prop_cb (BonoboPropertyBag *bag, const BonoboArg *arg, guint arg_id,
 	     CORBA_Environment *ev, gpointer data)
 {
-	GtkWidget *form;
-
-	form = GTK_WIDGET (data);
+	GtkWidget *form = GTK_WIDGET (data);
 	
-	if (current_theme)
-		g_free (current_theme);
-	current_theme = g_strdup (BONOBO_ARG_GET_STRING (arg));
-	g_print ("Set to: %s\n", current_theme);
-	g_free (new_rc_files[new_count - 1]);
-	new_rc_files[new_count - 1] = g_strdup (current_theme);
+	if (!new_rc_files)
+	{
+		gchar **rc_files = gtk_rc_get_default_files ();
+		int i, j;
+		for (i = 0; rc_files[i] != NULL; i++)
+		{
+		}
+		new_rc_files = g_new0 (gchar *, i + 2);
+		for (j = 0; j < i; j++)
+			new_rc_files[j] = g_strdup (rc_files[j]);
+		current_theme = g_strdup (BONOBO_ARG_GET_STRING (arg));
+		new_rc_files[j] = current_theme;
+	}
+	else
+	{
+		gchar **rc_files = gtk_rc_get_default_files ();
+		int i;
+		for (i = 0; rc_files[i] != NULL; i++)
+		{
+			if (!strcmp (rc_files[i], current_theme))
+			{
+				g_free (current_theme);
+				current_theme = g_strdup (BONOBO_ARG_GET_STRING (arg));
+				new_rc_files[i] = current_theme;
+			}
+			else
+			{
+				g_free (new_rc_files[i]);
+				new_rc_files[i] = g_strdup (rc_files[i]);
+			}
+		}
+	}
+	
 	gtk_rc_set_default_files (new_rc_files);
+
 	gtk_rc_reparse_all_for_settings (gtk_settings_get_default (), TRUE);
 	gtk_widget_reset_rc_styles (form);
 }
