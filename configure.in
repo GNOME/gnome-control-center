@@ -290,7 +290,7 @@ AC_SUBST(GDK_PIXBUF_CSOURCE)
 
 AC_PATH_PROG(GLIB_GENMARSHAL, glib-genmarshal, no)
 
-if text x"$GLIB_GENMARSHAL" = xno; then
+if test x"$GLIB_GENMARSHAL" = xno; then
   AC_MSG_ERROR([glib-genmarshal executable not found in your path - should be installed with glib])
 fi
 
@@ -519,6 +519,7 @@ gnome-settings-daemon/Makefile
 gnome-settings-daemon/xrdb/Makefile
 gnome-settings-daemon/actions/Makefile
 control-center/Makefile
+control-center/GNOME_ControlCenter.server
 libbackground/Makefile
 libwindow-settings/Makefile
 libwindow-settings/gnome-window-settings-2.0.pc

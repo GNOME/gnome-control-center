@@ -48,8 +48,8 @@ static gboolean initedOk;
 static PostActivationCallback paCallback = NULL;
 static void *paCallbackUserData = NULL;
 
-static const char DISABLE_XMM_WARNING_KEY[] =
-    "/desktop/gnome/peripherals/keyboard/disable_xmm_and_xkb_warning";
+#define DISABLE_XMM_WARNING_KEY \
+    "/desktop/gnome/peripherals/keyboard/disable_xmm_and_xkb_warning"
 
 typedef enum {
 	RESPONSE_USE_X,
@@ -217,16 +217,14 @@ gnome_settings_keyboard_xkb_chk_lcl_xmm (void)
 	if (homeDir == NULL)
 		return;
 	while ((fname = g_dir_read_name (homeDir)) != NULL)
-		if (strlen (fname) >= 8
-		    && !g_ascii_strncasecmp (fname, ".xmodmap", 8)) {
-			GtkWidget *msg =
-			    gtk_message_dialog_new_with_markup (NULL, 0,
-								GTK_MESSAGE_WARNING,
-								GTK_BUTTONS_OK,
-								_
-								("You have a keyboard remapping file (%s) in your home directory whose contents will now be ignored."
-								 " You can use the keyboard preferences to restore them."),
-								fname);
+		if (strlen (fname) >= 8 &&
+		    !g_ascii_strncasecmp (fname, ".xmodmap", 8)) {
+			GtkWidget *msg = gtk_message_dialog_new_with_markup (NULL, 0,
+				GTK_MESSAGE_WARNING, GTK_BUTTONS_OK,
+				_("You have a keyboard remapping file (%s) in "
+				  "your home directory whose contents are ignored by default. "
+				  "Add it to /desktop/gnome/peripherals/keyboard/xkb/update_handlers"),
+				fname);
 			g_signal_connect (msg, "response",
 					  G_CALLBACK
 					  (gnome_settings_keyboard_xkb_chk_lcl_xmm_response),

@@ -2,15 +2,10 @@
   <schemalist>
     <schema>
       <key>/schemas/desktop/gnome/peripherals/keyboard/xkb/overrideSettings</key>
-
       <applyto>/desktop/gnome/peripherals/keyboard/xkb/overrideSettings</applyto>
-
       <owner>gnome</owner>    
-
       <type>bool</type>
-
       <default>true</default>
-
       <locale name="C">
         <short>XKB settings in gconf will be overridden from the system ASAP</short>
         <long>Very soon, XKB settings in gconf will be overridden (from the system configuration)</long>
@@ -19,15 +14,10 @@
 
     <schema>
       <key>/schemas/desktop/gnome/peripherals/keyboard/xkb/model</key>
-
       <applyto>/desktop/gnome/peripherals/keyboard/xkb/model</applyto>
-
       <owner>gnome</owner>    
-
       <type>string</type>
-
       <default>pc105</default>
-
       <locale name="C">
         <short>XKB keyboard model</short>
         <long>XKB keyboard model</long>
@@ -36,17 +26,11 @@
 
     <schema>
       <key>/schemas/desktop/gnome/peripherals/keyboard/xkb/layouts</key>
-
       <applyto>/desktop/gnome/peripherals/keyboard/xkb/layouts</applyto>
-
       <owner>gnome</owner>    
-
       <type>list</type>
-
       <list_type>string</list_type>
-
       <default>[us]</default>
-
       <locale name="C">
         <short>XKB keyboard layout</short>
         <long>XKB keyboard layout</long>
@@ -55,20 +39,28 @@
 
     <schema>
       <key>/schemas/desktop/gnome/peripherals/keyboard/xkb/options</key>
-
       <applyto>/desktop/gnome/peripherals/keyboard/xkb/options</applyto>
-
       <owner>gnome</owner>    
-
       <type>list</type>
-
       <list_type>string</list_type>
-
       <default>[]</default>
-
       <locale name="C">
         <short>XKB options</short>
         <long>XKB options</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/desktop/gnome/peripherals/keyboard/xkb/update_handlers</key>
+      <applyto>/desktop/gnome/peripherals/keyboard/xkb/update_handlers</applyto>
+      <owner>gnome</owner>    
+      <type>list</type>
+      <list_type>string</list_type>
+      <default>[]</default>
+      <locale name="C">
+        <short>XKB Update Handlers</short>
+	<long>A collection of scripts to run whenever the XKB state is
+		reloaded.  Useful for re-applying xmodmap based adjustments</long>
       </locale>
     </schema>
 
