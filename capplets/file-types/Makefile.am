@@ -1,7 +1,8 @@
 INCLUDES = -I. -I$(srcdir) 				\
 	-I$(top_srcdir)/intl -I$(top_builddir)/intl	\
-	$(CAPPLET_INCLUDEDIR) \
-	$(GNOME_INCLUDEDIR) \
+	-I$(top_srcdir)/libgnomevfs			\
+	$(CAPPLET_INCLUDEDIR)				\
+	$(GNOME_INCLUDEDIR)				\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"	\
 	-I$(includedir)
 
