@@ -116,10 +116,12 @@ do_set_xml (void)
 
 	prefs = preferences_read_xml (doc);
 
-	if (prefs)
+	if (prefs) {
 		preferences_save (prefs);
-	else
+		preferences_apply_now (prefs);
+	} else {
 		g_warning ("Error while reading the screensaver config file");
+	}
 }
 
 int

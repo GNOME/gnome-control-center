@@ -409,7 +409,7 @@ preferences_read_xml (xmlDocPtr xml_doc)
 		else if (!strcmp (node->name, "auto-apply"))
 			prefs->auto_apply = TRUE;
 		else if (!strcmp (node->name, "adjust-opacity"))
-			prefs->auto_apply = TRUE;
+			prefs->adjust_opacity = TRUE;
 		else if (!strcmp (node->name, "opacity"))
 			prefs->opacity = xml_read_int (node, NULL);
 	}
