@@ -1,3 +1,9 @@
+
+pixmapdir = $(datadir)/pixmaps
+pixmap_DATA = \
+	mouse-left.png	\
+	mouse-right.png
+
 Applicationsdir = $(datadir)/control-center/Desktop
 Applications_DATA = \
 	mouse-properties.desktop

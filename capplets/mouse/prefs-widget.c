@@ -30,6 +30,7 @@
 #include "prefs-widget.h"
 
 #define WID(str) (glade_xml_get_widget (prefs_widget->dialog_data, str))
+#define THRESHOLD_CONVERT(t) (7 - t)
 
 enum {
 	ARG_0,
@@ -61,6 +62,10 @@ static void acceleration_changed_cb       (GtkAdjustment *adjustment,
 static void threshold_changed_cb          (GtkAdjustment *adjustment,
 					   PrefsWidget *prefs_widget);
 
+static void set_pixmap_file               (PrefsWidget *prefs_widget,
+					   const gchar *widget_name,
+					   const gchar *filename);
+		
 guint
 prefs_widget_get_type (void)
 {
@@ -90,10 +95,6 @@ prefs_widget_init (PrefsWidget *prefs_widget)
 {
 	GtkWidget *widget;
 	GtkAdjustment *adjustment;
-	GdkPixbuf *pixbuf;
-	GdkPixmap *pixmap;
-	GdkBitmap *mask;
-	char *filename;
 
 	prefs_widget->dialog_data = 
 		glade_xml_new (GLADE_DATADIR "/mouse-properties.glade",
@@ -103,17 +104,8 @@ prefs_widget_init (PrefsWidget *prefs_widget)
 				       "prefs_widget");
 	gtk_container_add (GTK_CONTAINER (prefs_widget), widget);
 
-	filename = gnome_pixmap_file ("gnome-mouse.png");
-	pixbuf = gdk_pixbuf_new_from_file (filename);
-	g_free (filename);
-
-	if (pixbuf) {
-		gdk_pixbuf_render_pixmap_and_mask (pixbuf, &pixmap, &mask, 
-						   100);
-		gtk_pixmap_set (GTK_PIXMAP (WID ("mouse_pixmap")),
-				pixmap, mask);
-		gdk_pixbuf_unref (pixbuf);
-	}
+	set_pixmap_file (prefs_widget, "mouse_left_pixmap", "mouse-left.png");
+	set_pixmap_file (prefs_widget, "mouse_right_pixmap", "mouse-right.png");
 
 	glade_xml_signal_connect_data
 		(prefs_widget->dialog_data, "left_handed_selected_cb",
@@ -129,7 +121,7 @@ prefs_widget_init (PrefsWidget *prefs_widget)
 			    acceleration_changed_cb, prefs_widget);
 
 	adjustment = gtk_range_get_adjustment 
-		(GTK_RANGE (WID ("threshold_entry")));
+		(GTK_RANGE (WID ("sensitivity_entry")));
 	gtk_signal_connect (GTK_OBJECT (adjustment), "value_changed",
 			    threshold_changed_cb, prefs_widget);
 }
@@ -249,8 +241,8 @@ read_preferences (PrefsWidget *prefs_widget, Preferences *prefs)
 	gtk_adjustment_set_value (adjustment, prefs->acceleration);
 
 	adjustment = gtk_range_get_adjustment 
-		(GTK_RANGE (WID ("threshold_entry")));
-	gtk_adjustment_set_value (adjustment, prefs->threshold);
+		(GTK_RANGE (WID ("sensitivity_entry")));
+	gtk_adjustment_set_value (adjustment, THRESHOLD_CONVERT (prefs->threshold));
 }
 
 static void
@@ -312,8 +304,37 @@ threshold_changed_cb (GtkAdjustment *adjustment, PrefsWidget *prefs_widget)
 	g_return_if_fail (adjustment != NULL);
 	g_return_if_fail (GTK_IS_ADJUSTMENT (adjustment));
 
-	prefs_widget->prefs->threshold = adjustment->value;
+	prefs_widget->prefs->threshold = THRESHOLD_CONVERT (adjustment->value);
 
 	preferences_changed (prefs_widget->prefs);
 	capplet_widget_state_changed (CAPPLET_WIDGET (prefs_widget), TRUE);
+}
+
+static void
+set_pixmap_file (PrefsWidget *prefs_widget, const gchar *widget_name, const gchar *filename)
+{
+	GtkWidget *widget;
+	GdkPixbuf *pixbuf;
+	GdkPixmap *pixmap;
+	GdkBitmap *mask;
+	gchar *path;
+
+	g_return_if_fail (IS_PREFS_WIDGET (prefs_widget));
+	g_return_if_fail (widget_name != NULL);
+	g_return_if_fail (filename != NULL);
+
+	widget = WID (widget_name);
+	g_return_if_fail (widget != NULL);
+	
+	path = gnome_pixmap_file (filename);
+	pixbuf = gdk_pixbuf_new_from_file (path);
+	g_free (path);
+
+	if (pixbuf) {
+		gdk_pixbuf_render_pixmap_and_mask (pixbuf, &pixmap, &mask, 
+						   100);
+		gtk_pixmap_set (GTK_PIXMAP (widget),
+				pixmap, mask);
+		gdk_pixbuf_unref (pixbuf);
+	}
 }

@@ -1,0 +1,16 @@
+2001-06-27  Richard Hestilow  <hestilow@ximian.com:
+
+	* ChangeLog added.
+
+	* mouse-properties.glade: New GUI by Anna Dirks.
+
+	* mouse-left.png, mouse-right.png: Added.
+
+	* Makefile.am: Install pixmaps.
+
+	* prefs-widget.c (set_pixmap_file): Added function.
+	  (threshold_changed_cb, read_preferences): Call new macro
+	  THRESHOLD_CONVERT, as sensitivity is the reverse of threshold.
+	  (read_preferences, prefs_widget_init): Change "threshold_entry" to
+	  sensitivity_entry.
+	  (prefs_widget_init): Call set_pixmap_file for the new pixmaps.

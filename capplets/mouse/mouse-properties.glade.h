@@ -4,14 +4,13 @@
  * DO NOT compile it as part of your application.
  */
 
-gchar *s = N_("window1");
-gchar *s = N_("Mouse buttons");
+gchar *s = N_("Mouse Configuration");
+gchar *s = N_("My mouse is:");
 gchar *s = N_("Left handed");
 gchar *s = N_("Right handed");
-gchar *s = N_("Mouse motion");
-gchar *s = N_("Acceleration");
-gchar *s = N_("Threshold");
 gchar *s = N_("Slow");
 gchar *s = N_("Fast");
-gchar *s = N_("Large");
-gchar *s = N_("Small");
+gchar *s = N_("Mouse speed:");
+gchar *s = N_("Low");
+gchar *s = N_("High");
+gchar *s = N_("Sensitivity:");
