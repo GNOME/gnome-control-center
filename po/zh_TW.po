@@ -10,9 +10,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-control-center 2.2.0.1\n"
-"POT-Creation-Date: 2003-06-01 15:47-0400\n"
-"PO-Revision-Date: 2003-05-31 00:10+0800\n"
+"Project-Id-Version: gnome-control-center 2.2.2\n"
+"POT-Creation-Date: 2003-06-12 10:29+0800\n"
+"PO-Revision-Date: 2003-06-10 06:52+0800\n"
 "Last-Translator: Abel Cheung <maddog@linux.org.hk>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
 "MIME-Version: 1.0\n"
@@ -219,7 +219,7 @@ msgstr "拒絕按鍵(_R)"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:39
 msgid "characters/second"
-msgstr "字元(每秒)"
+msgstr "字符(每秒)"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:40
 msgid "milliseconds"
@@ -489,12 +489,12 @@ msgstr ""
 
 #: capplets/common/gconf-property-editor.c:191
 msgid "Conversion to widget callback"
-msgstr ""
+msgstr "轉化為視窗元件的改變所需的 callback"
 
 #: capplets/common/gconf-property-editor.c:192
 msgid ""
 "Callback to be issued when data are to be converted from GConf to the widget"
-msgstr ""
+msgstr "需要將更改後的 GConf 資料轉化為視窗元件的改變時，所發出的 callback"
 
 #: capplets/common/gconf-property-editor.c:197
 msgid "Conversion from widget callback"
@@ -1401,7 +1401,7 @@ msgstr "按鍵時發出響聲(_K)"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "Cursor Blinks"
-msgstr "鼠標"
+msgstr "鼠標會閃爍"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "Keyboard Bell"
@@ -1650,7 +1650,7 @@ msgstr "當按下 Control 鍵時顯示鼠標位置(_S)"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:28
 msgid "_Threshold:"
-msgstr "臨界距離(_T)："
+msgstr "分辨距離(_T)："
 
 #: capplets/mouse/mouse.desktop.in.h:2
 msgid "Set your mouse preferences"
@@ -1762,7 +1762,7 @@ msgstr "甲 乙 丙 丁 戊 己 庚 辛"
 
 #: capplets/theme-switcher/control/control.c:43
 msgid "Selected themes from above will be tested by previewing here."
-msgstr "可在這裡測試已選取的佈景主題。"
+msgstr "可在這裡測試選定的佈景主題。"
 
 #. column one
 #: capplets/theme-switcher/control/control.c:48
@@ -2429,11 +2429,29 @@ msgstr ""
 "“none”(不使用 hinting)、“slight”、“medium”及“full”(完整 hinting；可能會令字體"
 "變型)。"
 
+#~ msgid "<b>Enable Bo_unce Keys</b>"
+#~ msgstr "<b>啟用篩選鍵</b>(_U)"
+
+#~ msgid "<b>Enable Slo_w Keys</b>"
+#~ msgstr "<b>啟用遲緩按鍵</b>(_W)"
+
+#~ msgid "<b>Enable _Mouse Keys</b>"
+#~ msgstr "<b>啟用滑鼠控制鍵</b>(_M)"
+
 #~ msgid "<b>Enable _Repeat Keys</b>"
 #~ msgstr "<b>啟用自動重複按鍵</b>(_R)"
 
+#~ msgid "<b>Enable _Sticky Keys</b>"
+#~ msgstr "<b>啟用黏性特殊鍵</b>(_S)"
+
+#~ msgid "<b>Features</b>"
+#~ msgstr "<b>功能</b>"
+
 #~ msgid "<b>Mouse</b>"
 #~ msgstr "<b>滑鼠</b>"
+
+#~ msgid "<b>Toggle Keys</b>"
+#~ msgstr "<b>切換鍵</b>"
 
 #~ msgid "Change screen resolution"
 #~ msgstr "更改螢幕解析度"
@@ -2496,6 +2514,9 @@ msgstr ""
 #~ msgid "GNOME Default"
 #~ msgstr "GNOME 預設設定"
 
+#~ msgid "Key presses _repeat when key is held down"
+#~ msgstr "當按下某鍵不放時重複輸出該字符(_R)"
+
 #~ msgid "    "
 #~ msgstr "    "
 
@@ -2504,6 +2525,15 @@ msgstr ""
 
 #~ msgid "<b>Double-Click Timeout </b>"
 #~ msgstr "<b>雙擊分辨時間</b>"
+
+#~ msgid "<b>Drag and Drop</b>"
+#~ msgstr "<b>拖曳</b>"
+
+#~ msgid "<b>Locate Pointer</b>"
+#~ msgstr "<b>顯示鼠標位置</b>"
+
+#~ msgid "<b>Mouse Orientation</b>"
+#~ msgstr "<b>左右手模式</b>"
 
 #~ msgid "<b>Speed</b>"
 #~ msgstr "<b>速度</b>"
@@ -2514,8 +2544,32 @@ msgstr ""
 #~ msgstr ""
 #~ "<i><small><b>注意：</b>更改本設定後，需要等下次登入方會生效。</small></i>"
 
+#~ msgid "Cursor _themes:"
+#~ msgstr "鼠標主題(_T)："
+
 #~ msgid "Highlight the _pointer when you press Ctrl"
 #~ msgstr "當按下 Ctrl 時加強顯示鼠標(_P)"
+
+#~ msgid "_Timeout:"
+#~ msgstr "時限(_T)："
+
+#~ msgid "Network Proxy"
+#~ msgstr "網路代理伺服器"
+
+#~ msgid "Flash _window titlebar"
+#~ msgstr "閃動視窗標題列(_W)"
+
+#~ msgid "Flash entire _screen"
+#~ msgstr "閃動整個畫面(_S)"
+
+#~ msgid "System Bell"
+#~ msgstr "系統鈴聲"
+
+#~ msgid "_Sound an audible bell"
+#~ msgstr "發出可聽見的聲響(_S)"
+
+#~ msgid "_Visual feedback:"
+#~ msgstr "視覺方式回饋(_V)："
 
 #~ msgid ""
 #~ "The default theme schemas could not be found on your system.  This means "
@@ -2534,11 +2588,35 @@ msgstr ""
 #~ msgid "_Location:"
 #~ msgstr "位置(_L)："
 
+#~ msgid "<span size=\"larger\" weight=\"bold\">Save Theme to Disk</span>"
+#~ msgstr "<span size=\"larger\" weight=\"bold\">儲存佈景主題</span>"
+
+#~ msgid "Save Theme"
+#~ msgstr "儲存佈景主題"
+
+#~ msgid "Short _description:"
+#~ msgstr "簡短說明(_D)："
+
 #~ msgid "Theme _Details"
 #~ msgstr "佈景主題詳細設定(_D)"
 
 #~ msgid "This theme does not suggest any particular font or background."
 #~ msgstr "本佈景主題不建議使用任何特定的字型及背景。"
+
+#~ msgid "This theme suggests a background:"
+#~ msgstr "本佈景主題建議使用指定的背景："
+
+#~ msgid "This theme suggests a font and a background:"
+#~ msgstr "本佈景主題建議使用指定的字型及背景："
+
+#~ msgid "This theme suggests a font:"
+#~ msgstr "本佈景主題建議使用指定的字型："
+
+#~ msgid "_Go To Theme Folder"
+#~ msgstr "前往佈景主題資料夾(_G)"
+
+#~ msgid "_Install Theme..."
+#~ msgstr "安裝佈景主題(_I)..."
 
 #~ msgid "_Save Theme..."
 #~ msgstr "儲存佈景主題(_S)..."
