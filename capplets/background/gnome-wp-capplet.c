@@ -931,9 +931,9 @@ static void wallpaper_properties_init (poptContext ctx) {
 					 WP_DELAY_KEY,
 					 NULL);
   gconf_client_add_dir (capplet->client, WP_KEYBOARD_PATH,
-			GCONF_CLIENT_PRELOAD_NONE, NULL);
+			GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
   gconf_client_add_dir (capplet->client, WP_PATH_KEY,
-			GCONF_CLIENT_PRELOAD_NONE, NULL);
+			GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 
   gconf_client_notify_add (capplet->client,
 			   WP_DELAY_KEY,
