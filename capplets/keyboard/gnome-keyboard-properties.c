@@ -101,13 +101,13 @@ delay_to_widget (GConfPropertyEditor *peditor, const GConfValue *value)
 	new_value = gconf_value_new (GCONF_VALUE_INT);
 
 	if (delay >= (1000 + 700) / 2)
-		gconf_value_set_int (new_value, 0);
-	else if (delay >= (700 + 300) / 2)
-		gconf_value_set_int (new_value, 1);
-	else if (delay >= (300) / 2)
-		gconf_value_set_int (new_value, 2);
-	else
 		gconf_value_set_int (new_value, 3);
+	else if (delay >= (700 + 300) / 2)
+		gconf_value_set_int (new_value, 2);
+	else if (delay >= (300 + 150) / 2)
+		gconf_value_set_int (new_value, 1);
+	else
+		gconf_value_set_int (new_value, 0);
 
 	return new_value;
 }
@@ -116,7 +116,7 @@ static GConfValue *
 delay_from_widget (GConfPropertyEditor *peditor, GConfValue *value) 
 {
 	static int delays[] = {
-		1000, 700, 300, 0
+		150, 300, 700, 1000
 	};
 
 	GConfValue *new_value;

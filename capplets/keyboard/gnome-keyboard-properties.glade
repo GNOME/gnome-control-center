@@ -5,7 +5,7 @@
 <requires lib="gnome"/>
 
 <widget class="GtkDialog" id="keyboard_dialog">
-  <property name="title" translatable="yes">Keyboard Properties</property>
+  <property name="title" translatable="yes">Keyboard Preferences</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_NONE</property>
   <property name="modal">False</property>
@@ -81,8 +81,8 @@
 	      <child>
 		<widget class="GtkFrame" id="frame3">
 		  <property name="visible">True</property>
-		  <property name="label" translatable="yes">Repeat Rate</property>
 		  <property name="label_xalign">0</property>
+		  <property name="label_yalign">0.5</property>
 		  <property name="shadow_type">GTK_SHADOW_ETCHED_IN</property>
 
 		  <child>
@@ -166,6 +166,7 @@
 				  <property name="yalign">0.5</property>
 				  <property name="xpad">0</property>
 				  <property name="ypad">0</property>
+				  <property name="mnemonic_widget">repeat_delay_omenu</property>
 				</widget>
 				<packing>
 				  <property name="left_attach">0</property>
@@ -190,6 +191,7 @@
 				  <property name="yalign">0.5</property>
 				  <property name="xpad">0</property>
 				  <property name="ypad">0</property>
+				  <property name="mnemonic_widget">repeat_speed_omenu</property>
 				</widget>
 				<packing>
 				  <property name="left_attach">0</property>
@@ -205,7 +207,7 @@
 				<widget class="GtkOptionMenu" id="repeat_delay_omenu">
 				  <property name="visible">True</property>
 				  <property name="can_focus">True</property>
-				  <property name="history">-1</property>
+				  <property name="history">0</property>
 
 				  <child internal-child="menu">
 				    <widget class="GtkMenu" id="convertwidget1">
@@ -214,61 +216,33 @@
 				      <child>
 					<widget class="GtkMenuItem" id="convertwidget2">
 					  <property name="visible">True</property>
-					  <child>
-					    <widget class="GtkAccelLabel" id="convertwidget6">
-					      <property name="label" translatable="yes">Very long</property>
-					      <property name="xalign">0.0</property>
-					      <property name="accel-widget">convertwidget2</property>
-					      <property name="use-underline">yes</property>
-					      <property name="visible">yes</property>
-					    </widget> 
-					  </child> 
-					</widget> 
+					  <property name="label" translatable="yes">Very Short</property>
+					  <property name="use_underline">True</property>
+					</widget>
 				      </child>
 
 				      <child>
 					<widget class="GtkMenuItem" id="convertwidget3">
 					  <property name="visible">True</property>
-					  <child>
-					    <widget class="GtkAccelLabel" id="convertwidget7">
-					      <property name="label" translatable="yes">Long</property>
-					      <property name="xalign">0.0</property>
-					      <property name="accel-widget">convertwidget3</property>
-					      <property name="use-underline">yes</property>
-					      <property name="visible">yes</property>
-					    </widget> 
-					  </child> 
-					</widget> 
+					  <property name="label" translatable="yes">Short</property>
+					  <property name="use_underline">True</property>
+					</widget>
 				      </child>
 
 				      <child>
 					<widget class="GtkMenuItem" id="convertwidget4">
 					  <property name="visible">True</property>
-					  <child>
-					    <widget class="GtkAccelLabel" id="convertwidget8">
-					      <property name="label" translatable="yes">Medium</property>
-					      <property name="xalign">0.0</property>
-					      <property name="accel-widget">convertwidget4</property>
-					      <property name="use-underline">yes</property>
-					      <property name="visible">yes</property>
-					    </widget> 
-					  </child> 
-					</widget> 
+					  <property name="label" translatable="yes">Medium</property>
+					  <property name="use_underline">True</property>
+					</widget>
 				      </child>
 
 				      <child>
 					<widget class="GtkMenuItem" id="convertwidget5">
 					  <property name="visible">True</property>
-					  <child>
-					    <widget class="GtkAccelLabel" id="convertwidget9">
-					      <property name="label" translatable="yes">Short</property>
-					      <property name="xalign">0.0</property>
-					      <property name="accel-widget">convertwidget5</property>
-					      <property name="use-underline">yes</property>
-					      <property name="visible">yes</property>
-					    </widget> 
-					  </child> 
-					</widget> 
+					  <property name="label" translatable="yes">Long</property>
+					  <property name="use_underline">True</property>
+					</widget>
 				      </child>
 				    </widget>
 				  </child>
@@ -286,7 +260,7 @@
 				<widget class="GtkOptionMenu" id="repeat_speed_omenu">
 				  <property name="visible">True</property>
 				  <property name="can_focus">True</property>
-				  <property name="history">-1</property>
+				  <property name="history">0</property>
 
 				  <child internal-child="menu">
 				    <widget class="GtkMenu" id="convertwidget10">
@@ -295,60 +269,32 @@
 				      <child>
 					<widget class="GtkMenuItem" id="convertwidget11">
 					  <property name="visible">True</property>
-					  <child>
-					    <widget class="GtkAccelLabel" id="convertwidget15">
-					      <property name="label" translatable="yes">Very fast</property>
-					      <property name="xalign">0.0</property>
-					      <property name="accel-widget">convertwidget11</property>
-					      <property name="use-underline">yes</property>
-					      <property name="visible">yes</property>
-					    </widget> 
-					  </child> 
+					  <property name="label" translatable="yes">Very Fast</property>
+					  <property name="use_underline">True</property>
 					</widget>
 				      </child>
 
 				      <child>
 					<widget class="GtkMenuItem" id="convertwidget12">
 					  <property name="visible">True</property>
-					  <child>
-					    <widget class="GtkAccelLabel" id="convertwidget16">
-					      <property name="label" translatable="yes">Fast</property>
-					      <property name="xalign">0.0</property>
-					      <property name="accel-widget">convertwidget12</property>
-					      <property name="use-underline">yes</property>
-					      <property name="visible">yes</property>
-					    </widget> 
-					  </child> 
+					  <property name="label" translatable="yes">Fast</property>
+					  <property name="use_underline">True</property>
 					</widget>
 				      </child>
 
 				      <child>
 					<widget class="GtkMenuItem" id="convertwidget13">
 					  <property name="visible">True</property>
-					  <child>
-					    <widget class="GtkAccelLabel" id="convertwidget17">
-					      <property name="label" translatable="yes">Medium</property>
-					      <property name="xalign">0.0</property>
-					      <property name="accel-widget">convertwidget13</property>
-					      <property name="use-underline">yes</property>
-					      <property name="visible">yes</property>
-					    </widget> 
-					  </child> 
+					  <property name="label" translatable="yes">Medium</property>
+					  <property name="use_underline">True</property>
 					</widget>
 				      </child>
 
 				      <child>
 					<widget class="GtkMenuItem" id="convertwidget14">
 					  <property name="visible">True</property>
-					  <child>
-					    <widget class="GtkAccelLabel" id="convertwidget18">
-					      <property name="label" translatable="yes">Slow</property>
-					      <property name="xalign">0.0</property>
-					      <property name="accel-widget">convertwidget14</property>
-					      <property name="use-underline">yes</property>
-					      <property name="visible">yes</property>
-					    </widget> 
-					  </child> 
+					  <property name="label" translatable="yes">Slow</property>
+					  <property name="use_underline">True</property>
 					</widget>
 				      </child>
 				    </widget>
@@ -379,6 +325,25 @@
 		      </child>
 		    </widget>
 		  </child>
+
+		  <child>
+		    <widget class="GtkLabel" id="label1">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">Repeat Rate</property>
+		      <property name="use_underline">False</property>
+		      <property name="use_markup">False</property>
+		      <property name="justify">GTK_JUSTIFY_LEFT</property>
+		      <property name="wrap">False</property>
+		      <property name="selectable">False</property>
+		      <property name="xalign">0.5</property>
+		      <property name="yalign">0.5</property>
+		      <property name="xpad">0</property>
+		      <property name="ypad">0</property>
+		    </widget>
+		    <packing>
+		      <property name="type">label_item</property>
+		    </packing>
+		  </child>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
@@ -390,8 +355,8 @@
 	      <child>
 		<widget class="GtkFrame" id="frame4">
 		  <property name="visible">True</property>
-		  <property name="label" translatable="yes">Cursor</property>
 		  <property name="label_xalign">0</property>
+		  <property name="label_yalign">0.5</property>
 		  <property name="shadow_type">GTK_SHADOW_ETCHED_IN</property>
 
 		  <child>
@@ -604,6 +569,25 @@
 		      </child>
 		    </widget>
 		  </child>
+
+		  <child>
+		    <widget class="GtkLabel" id="label5">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">Cursor</property>
+		      <property name="use_underline">False</property>
+		      <property name="use_markup">False</property>
+		      <property name="justify">GTK_JUSTIFY_LEFT</property>
+		      <property name="wrap">False</property>
+		      <property name="selectable">False</property>
+		      <property name="xalign">0.5</property>
+		      <property name="yalign">0.5</property>
+		      <property name="xpad">0</property>
+		      <property name="ypad">0</property>
+		    </widget>
+		    <packing>
+		      <property name="type">label_item</property>
+		    </packing>
+		  </child>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
@@ -615,8 +599,8 @@
 	      <child>
 		<widget class="GtkFrame" id="frame5">
 		  <property name="visible">True</property>
-		  <property name="label" translatable="yes">Accessibility</property>
 		  <property name="label_xalign">0</property>
+		  <property name="label_yalign">0.5</property>
 		  <property name="shadow_type">GTK_SHADOW_ETCHED_IN</property>
 
 		  <child>
@@ -690,6 +674,25 @@
 		      </child>
 		    </widget>
 		  </child>
+
+		  <child>
+		    <widget class="GtkLabel" id="label6">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">Accessibility</property>
+		      <property name="use_underline">False</property>
+		      <property name="use_markup">False</property>
+		      <property name="justify">GTK_JUSTIFY_LEFT</property>
+		      <property name="wrap">False</property>
+		      <property name="selectable">False</property>
+		      <property name="xalign">0.5</property>
+		      <property name="yalign">0.5</property>
+		      <property name="xpad">0</property>
+		      <property name="ypad">0</property>
+		    </widget>
+		    <packing>
+		      <property name="type">label_item</property>
+		    </packing>
+		  </child>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
@@ -707,8 +710,8 @@
 	  <child>
 	    <widget class="GtkLabel" id="label1">
 	      <property name="visible">True</property>
-	      <property name="label" translatable="yes">_Keyboard</property>
-	      <property name="use_underline">True</property>
+	      <property name="label" translatable="yes">Keyboard</property>
+	      <property name="use_underline">False</property>
 	      <property name="use_markup">False</property>
 	      <property name="justify">GTK_JUSTIFY_CENTER</property>
 	      <property name="wrap">False</property>
@@ -733,8 +736,8 @@
 	      <child>
 		<widget class="GtkFrame" id="frame1">
 		  <property name="visible">True</property>
-		  <property name="label" translatable="yes">Keyclick Volume</property>
 		  <property name="label_xalign">0</property>
+		  <property name="label_yalign">0.5</property>
 		  <property name="shadow_type">GTK_SHADOW_ETCHED_IN</property>
 
 		  <child>
@@ -935,6 +938,25 @@
 		      </child>
 		    </widget>
 		  </child>
+
+		  <child>
+		    <widget class="GtkLabel" id="label17">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">Keyclick Volume</property>
+		      <property name="use_underline">False</property>
+		      <property name="use_markup">False</property>
+		      <property name="justify">GTK_JUSTIFY_LEFT</property>
+		      <property name="wrap">False</property>
+		      <property name="selectable">False</property>
+		      <property name="xalign">0.5</property>
+		      <property name="yalign">0.5</property>
+		      <property name="xpad">0</property>
+		      <property name="ypad">0</property>
+		    </widget>
+		    <packing>
+		      <property name="type">label_item</property>
+		    </packing>
+		  </child>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
@@ -946,8 +968,8 @@
 	      <child>
 		<widget class="GtkFrame" id="frame2">
 		  <property name="visible">True</property>
-		  <property name="label" translatable="yes">Keyboard Bell</property>
 		  <property name="label_xalign">0</property>
+		  <property name="label_yalign">0.5</property>
 		  <property name="shadow_type">GTK_SHADOW_ETCHED_IN</property>
 
 		  <child>
@@ -1131,6 +1153,25 @@
 		      </child>
 		    </widget>
 		  </child>
+
+		  <child>
+		    <widget class="GtkLabel" id="label18">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">Keyboard Bell</property>
+		      <property name="use_underline">False</property>
+		      <property name="use_markup">False</property>
+		      <property name="justify">GTK_JUSTIFY_LEFT</property>
+		      <property name="wrap">False</property>
+		      <property name="selectable">False</property>
+		      <property name="xalign">0.5</property>
+		      <property name="yalign">0.5</property>
+		      <property name="xpad">0</property>
+		      <property name="ypad">0</property>
+		    </widget>
+		    <packing>
+		      <property name="type">label_item</property>
+		    </packing>
+		  </child>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
@@ -1148,8 +1189,8 @@
 	  <child>
 	    <widget class="GtkLabel" id="label2">
 	      <property name="visible">True</property>
-	      <property name="label" translatable="yes">_Sound</property>
-	      <property name="use_underline">True</property>
+	      <property name="label" translatable="yes">Sound</property>
+	      <property name="use_underline">False</property>
 	      <property name="use_markup">False</property>
 	      <property name="justify">GTK_JUSTIFY_CENTER</property>
 	      <property name="wrap">False</property>
