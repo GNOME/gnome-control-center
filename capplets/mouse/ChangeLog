@@ -1,3 +1,10 @@
+2002-05-10  Anders Carlsson  <andersca@gnu.org>
+
+	* gnome-mouse-properties.c: (get_default_mouse_info),
+	(motion_acceleration_from_gconf), (threshold_from_gconf):
+	If the threshold or acceleration value is -1, just set the slider
+	to the default X value.
+	
 2002-05-09  Jody Goldberg <jody@gnome.org>
 
 	* gnome-mouse-properties.c (dialog_button_clicked_cb) : enable help.

@@ -31,6 +31,7 @@
 #include <gnome.h>
 #include <gconf/gconf-client.h>
 #include <glade/glade.h>
+#include <gdk/gdkx.h>
 #include <math.h>
 
 #include "capplet-util.h"
@@ -98,6 +99,32 @@ double_click_to_gconf (GConfPropertyEditor *peditor, const GConfValue *value)
 	return new_value;
 }
 
+
+static void
+get_default_mouse_info (int *default_numerator, int *default_denominator, int *default_threshold)
+{
+	int numerator, denominator;
+	int threshold;
+	int tmp_num, tmp_den, tmp_threshold;
+	
+	/* Query X for the default value */
+	XGetPointerControl (GDK_DISPLAY (), &numerator, &denominator,
+			    &threshold);
+	XChangePointerControl (GDK_DISPLAY (), True, True, -1, -1, -1);
+	XGetPointerControl (GDK_DISPLAY (), &tmp_num, &tmp_den, &tmp_threshold);
+	XChangePointerControl (GDK_DISPLAY (), True, True, numerator, denominator, threshold);
+
+	if (default_numerator)
+		*default_numerator = tmp_num;
+
+	if (default_denominator)
+		*default_denominator = tmp_den;
+
+	if (default_threshold)
+		*default_threshold = tmp_threshold;
+
+}
+
 static GConfValue *
 motion_acceleration_from_gconf (GConfPropertyEditor *peditor, 
 				const GConfValue *value)
@@ -106,7 +133,17 @@ motion_acceleration_from_gconf (GConfPropertyEditor *peditor,
 	gfloat motion_acceleration;
 
 	new_value = gconf_value_new (GCONF_VALUE_FLOAT);
-	motion_acceleration = CLAMP (gconf_value_get_float (value), 0.2, 6.0);
+	
+	if (gconf_value_get_float (value) == -1.0) {
+		int numerator, denominator;
+		
+		get_default_mouse_info (&numerator, &denominator, NULL);
+
+		motion_acceleration = CLAMP ((gfloat)(numerator / denominator), 0.2, 6.0);
+	}
+	else {
+		motion_acceleration = CLAMP (gconf_value_get_float (value), 0.2, 6.0);
+	}
 
 	if (motion_acceleration >= 1)
 		gconf_value_set_float (new_value, motion_acceleration + 4);
@@ -141,7 +178,17 @@ threshold_from_gconf (GConfPropertyEditor *peditor,
 	GConfValue *new_value;
 
 	new_value = gconf_value_new (GCONF_VALUE_FLOAT);
-	gconf_value_set_float (new_value, CLAMP (gconf_value_get_int (value), 1, 10));
+
+	if (gconf_value_get_int (value) == -1) {
+		int threshold;
+
+		get_default_mouse_info (NULL, NULL, &threshold);
+		gconf_value_set_float (new_value, CLAMP (threshold, 1, 10));
+	}
+	else {
+		gconf_value_set_float (new_value, CLAMP (gconf_value_get_int (value), 1, 10));
+	}
+
 	return new_value;
 }
 
