@@ -58,6 +58,8 @@ static TranslationEntry translations [] = {
     translate_string_string },
   { "/desktop/gnome/interface/gtk_theme", "Net/ThemeName", GCONF_VALUE_STRING,
     translate_string_string },
+  { "/desktop/gnome/interface/font_name", "Gtk/FontName", GCONF_VALUE_STRING,
+    translate_string_string }
 };
 
 static TranslationEntry*

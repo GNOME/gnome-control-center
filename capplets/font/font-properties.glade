@@ -1,0 +1,62 @@
+<?xml version="1.0" standalone="no"?> <!--*- mode: xml -*-->
+<!DOCTYPE glade-interface SYSTEM "../glade-2.0.dtd" >
+
+<glade-interface>
+  <requires lib="gnome"/>
+  
+  <widget class="GtkDialog" id="window1">
+    <property name="title" translatable="yes">Font properties</property>
+    <property name="visible">yes</property>
+
+    <signal name="destroy" handler="gtk_main_quit" />
+    <signal name="response" handler="response_cb" />
+    
+    <child internal-child="vbox">
+      <widget class="GtkVBox" id="vbox1">
+        <property name="spacing">4</property>
+        <child>
+	  <widget class="GtkCheckButton" id="custom_check">
+	    <property name="label" translatable="yes">Use a custom font.</property>
+	    <property name="visible">yes</property>
+	  </widget>
+	  <packing>
+	    <property name="expand">no</property>
+	  </packing>
+	 </child>
+        <child>
+	  <widget class="GnomeFontPicker" id="font_picker">
+	    <property name="mode">font-info</property>
+	    <property name="use-font-in-label">yes</property>
+	    <property name="visible">yes</property>
+	  </widget>
+	  <packing>
+	    <property name="expand">no</property>
+	  </packing>
+	 </child>
+      </widget>
+    </child> 
+
+    <child internal-child="action_area">
+      <widget class="GtkHButtonBox" id="buttonbox1">
+        <child>	   
+          <widget class="GtkButton" id="button1">
+            <property name="label">gtk-apply</property>
+            <property name="use_stock">yes</property>
+            <property name="use_underline">yes</property>
+            <property name="response_id">1</property>
+            <property name="visible">yes</property>
+          </widget>
+        </child>
+	<child>
+          <widget class="GtkButton" id="button2">
+            <property name="label">gtk-close</property>
+            <property name="use_stock">yes</property>
+            <property name="use_underline">yes</property>
+            <property name="response_id">2</property>
+            <property name="visible">yes</property>
+          </widget>
+        </child>
+      </widget>
+    </child> 
+  </widget>
+</glade-interface>
