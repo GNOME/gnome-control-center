@@ -123,7 +123,7 @@ main (int argc, char **argv)
 	textdomain (PACKAGE);
 
 	glade_gnome_init ();
-	res = gnome_capplet_init ("background-properties-capplet",
+	res = gnome_capplet_init ("mouse-properties",
 				  VERSION, argc, argv, NULL,
 				  0, NULL);
 
@@ -144,7 +144,7 @@ main (int argc, char **argv)
 
 	if (flags & GNOME_CLIENT_IS_CONNECTED) {
 		token = gnome_startup_acquire_token
-			("GNOME_BACKGROUND_PROPERTIES",
+			("GNOME_MOUSE_PROPERTIES",
 			 gnome_client_get_id (client));
 
 		if (token) {
@@ -165,7 +165,7 @@ main (int argc, char **argv)
 	}
 
 	gnome_window_icon_set_default_from_file
-		(GNOME_ICONDIR"/gnome-ccbackground.png");
+		(GNOME_ICONDIR"/gnome-mouse.png");
 
 	prefs = PREFERENCES (preferences_new ());
 	preferences_load (prefs);

@@ -3,7 +3,10 @@
 /* preferences.c
  * Copyright (C) 2000 Helix Code, Inc.
  *
- * Written by Bradford Hovinen <hovinen@helixcode.com>
+ * Written by Bradford Hovinen <hovinen@helixcode.com>,
+ *            Jaka Mocnik <jaka.mocnik@kiss.uni-lj.si>
+ *
+ * Based on gnome-core/desktop-properties/property-keyboard.c
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -120,8 +123,11 @@ preferences_clone (Preferences *prefs)
 	object = preferences_new ();
 
 	new_prefs = PREFERENCES (object);
-
-	/* Code to copy data from old preferences object to new one */
+	new_prefs->rate = prefs->rate;
+	new_prefs->delay = prefs->delay;
+	new_prefs->repeat = prefs->repeat;
+	new_prefs->click_volume = prefs->click_volume;
+	new_prefs->click_on_keypress = prefs->click_on_keypress;
 
 	return object;
 }
