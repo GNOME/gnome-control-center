@@ -5,6 +5,7 @@
 #include <gdk/gdk.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>
+#include <libgnome/gnome-i18n.h>
 #include "gnome-settings-daemon.h"
 #include "gnome-settings-keybindings.h"
 
@@ -102,7 +103,7 @@ bindings_get_entry (char *subdir)
 	      action = g_strdup (gconf_value_get_string (value));
 	    }
 	  else
-	    g_warning ("Key Binding (%s) has its action defined multiple times\n",
+	    g_warning (_("Key Binding (%s) has its action defined multiple times\n"),
 		       gconf_key);
 	}
       if (strcmp (key_name, "binding") == 0)
@@ -115,13 +116,13 @@ bindings_get_entry (char *subdir)
 	      key = g_strdup (gconf_value_get_string (value));
 	    }
 	  else
-	    g_warning ("Key Binding (%s) has its binding defined multiple times\n",
+	    g_warning (_("Key Binding (%s) has its binding defined multiple times\n"),
 		       gconf_key);
 	}
     }
   if (!action || !key)
     { 
-      g_warning ("Key Binding (%s) is incomplete\n", gconf_key);
+      g_warning (_("Key Binding (%s) is incomplete\n"), gconf_key);
       return FALSE;
     }
     
@@ -149,7 +150,7 @@ bindings_get_entry (char *subdir)
       binding_list = g_slist_append (binding_list, new_binding);
   else
     {
-      g_warning ("Binding (%s) is invalid\n", gconf_key);
+      g_warning (_("Binding (%s) is invalid\n"), gconf_key);
       g_free (new_binding->binding_str);
       g_free (new_binding->action);
       return FALSE;
@@ -237,7 +238,7 @@ binding_register_keys ()
 	      binding->previous_key.keycode = binding->key.keycode;
             }
           else
-            g_warning ("Key Binding (%s) is already in use\n", binding->binding_str);
+            g_warning (_("Key Binding (%s) is already in use\n"), binding->binding_str);
         }
     }
   gdk_flush ();
@@ -288,18 +289,14 @@ keybindings_filter (GdkXEvent *gdk_xevent,
 	    {
 	      GtkWidget *dialog = gtk_message_dialog_new (NULL, 0, GTK_MESSAGE_WARNING,
 							  GTK_BUTTONS_CLOSE,
-							  "Error while executing key action action\n"
-							  " (%s) (%s)",binding->action,
+							  _("Error while trying to run (%s)\n"\
+							  "which is linked to the key (%s)"),
+							  binding->action,
 							  binding->binding_str);
-	      gtk_signal_connect_object (GTK_OBJECT (dialog),
-					 "response",
-					 GTK_SIGNAL_FUNC (gtk_widget_destroy),
-					 GTK_OBJECT (dialog));
-	      gtk_signal_connect (GTK_OBJECT (dialog),
-				  "destroy",
-				  GTK_SIGNAL_FUNC (gtk_widget_destroyed),
-				  dialog);
-	      gtk_widget_show (dialog);
+	      	g_signal_connect (dialog, "response",
+				  G_CALLBACK (gtk_widget_destroy),
+				  NULL);
+		gtk_widget_show (dialog);
 	    }
           return GDK_FILTER_REMOVE;
         }
