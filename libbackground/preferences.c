@@ -240,6 +240,7 @@ bg_preferences_merge_entry (BGPreferences    *prefs,
 	}
 	else if (!strcmp (entry->key, "/desktop/gnome/background/wallpaper-enabled")) {
 		if (gconf_value_get_bool (value) &&
+				(prefs->wallpaper_filename != NULL) &&
 		    strcmp (prefs->wallpaper_filename, "") != 0 &&
 		    strcmp (prefs->wallpaper_filename, "(none)") != 0)
 			prefs->wallpaper_enabled = TRUE;
