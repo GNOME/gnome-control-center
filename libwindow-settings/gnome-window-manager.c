@@ -19,7 +19,7 @@ gnome_window_manager_new (GnomeDesktopItem *item)
   GModule *module;
   gboolean success;
 
-  settings_lib = gnome_desktop_item_get_string (item, "GnomeSettingsLibrary");
+  settings_lib = gnome_desktop_item_get_string (item, "X-GnomeWMSettingsLibrary");
 
   module_name = g_module_build_path (GNOME_WINDOW_MANAGER_MODULE_PATH,
 				     settings_lib);
