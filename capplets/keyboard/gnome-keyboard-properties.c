@@ -148,12 +148,15 @@ static GConfValue *
 bell_to_widget (GConfPropertyEditor *peditor, const GConfValue *value)
 {
 	GConfValue *new_value;
+	const gchar *str;
 	gint val = 2;
+
+	str = (value && (value->type == GCONF_VALUE_STRING)) ? gconf_value_get_string (value) : NULL;
 
 	new_value = gconf_value_new (GCONF_VALUE_INT);
 	if (value->type == GCONF_VALUE_STRING) {
 		gconf_string_to_enum (bell_enums,
-				      gconf_value_get_string (value),
+				      str,
 				      &val);
 	}
 	gconf_value_set_int (new_value, val);
