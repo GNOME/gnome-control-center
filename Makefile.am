@@ -1,5 +1,5 @@
 
-always_built_SUBDIRS = control-center capplets idl doc
+always_built_SUBDIRS = control-center capplets idl doc omf-install
 
 SUBDIRS = intl po macros \
 	 $(always_built_SUBDIRS)
@@ -8,6 +8,7 @@ SUBDIRS = intl po macros \
 
 
 EXTRA_DIST = \
+	sgmldocs.make		\
 	control-center.spec.in	\
 	xml-i18n-extract.in	\
 	xml-i18n-merge.in	\
