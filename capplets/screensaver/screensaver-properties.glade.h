@@ -19,7 +19,6 @@ gchar *s = N_("There are no configurable settings for this\n"
 gchar *s = N_("_Add");
 gchar *s = N_("_Settings");
 gchar *s = N_("_Remove");
-gchar *s = N_("_Demo");
 gchar *s = N_("_About this screensaver...");
 gchar *s = N_("window1");
 gchar *s = N_("minutes");

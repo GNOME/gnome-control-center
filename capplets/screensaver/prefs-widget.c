@@ -5,6 +5,7 @@
 #include "prefs-widget.h"
 #include "preview.h"
 #include "screensaver-prefs-dialog.h"
+#include "selection-dialog.h" 
 #include "rc-parse.h"
 #include <gal/e-table/e-table.h>
 #include <gal/e-table/e-table-simple.h>
@@ -65,28 +66,37 @@ static void popup_item_menu               (ETable *table,
 					   int row, int col, GdkEvent *event,
 					   PrefsWidget *prefs_widget);
 
-static void about_cb                       (GtkWidget *widget,
-					    PrefsWidget *prefs_widget);
-static void settings_cb                    (GtkWidget *button,
-					    PrefsWidget *widget);
-static void pwr_manage_toggled_cb          (GtkWidget *button,
-					    PrefsWidget *prefs_widget);
-static void pwr_conf_cb                    (GtkWidget *button,
-					    PrefsWidget *prefs_widget);
-static void pwr_conf_button_cb             (GnomeDialog *dlg,
-					    gint button,
-					    PrefsWidget *prefs_widget);
-static void pwr_save_prefs		   (PrefsWidget *prefs_widget);
-static void pwr_restore_prefs              (PrefsWidget *prefs_widget);
-static time_t pwr_get_toggled_entry        (PrefsWidget *prefs_widget,
-					    const gchar *enable_str,
-					    const gchar *entry_str);
-static void pwr_set_toggled_entry          (PrefsWidget *prefs_widget,
-					    const gchar *enable_str,
-					    const gchar *entry_str,
-					    time_t value);
+static void about_cb                      (GtkWidget *widget,
+					   PrefsWidget *prefs_widget);
+static void settings_cb                   (GtkWidget *button,
+					   PrefsWidget *widget);
+static void pwr_manage_toggled_cb         (GtkWidget *button,
+					   PrefsWidget *prefs_widget);
+static void pwr_conf_cb                   (GtkWidget *button,
+					   PrefsWidget *prefs_widget);
+static void pwr_conf_button_cb            (GnomeDialog *dlg,
+					   gint button,
+					   PrefsWidget *prefs_widget);
+static void pwr_save_prefs		  (PrefsWidget *prefs_widget);
+static void pwr_restore_prefs             (PrefsWidget *prefs_widget);
+static time_t pwr_get_toggled_entry       (PrefsWidget *prefs_widget,
+					   const gchar *enable_str,
+					   const gchar *entry_str);
+static void pwr_set_toggled_entry         (PrefsWidget *prefs_widget,
+					   const gchar *enable_str,
+					   const gchar *entry_str,
+					   time_t value);
 
-static const gchar *table_compute_state    (SelectionMode mode);
+static const gchar *table_compute_state   (SelectionMode mode);
+
+static void add_select_cb                 (GtkWidget *widget,
+					   Screensaver *saver,
+					   PrefsWidget *prefs_widget);
+static void screensaver_add_cb            (GtkWidget *button,
+					   PrefsWidget *prefs_widget);
+static void screensaver_remove_cb         (GtkWidget *button,
+					   PrefsWidget *prefs_widget);
+
 /* Model declarations */
 static int model_col_count                (ETableModel *etm, void *data);
 static int model_row_count                (ETableModel *etm, void *data);
@@ -281,6 +291,16 @@ prefs_widget_init (PrefsWidget *prefs_widget)
 	widget = WID ("popup_settings");
 	gtk_signal_connect (GTK_OBJECT (widget), "activate",
 			    GTK_SIGNAL_FUNC (settings_cb),
+			    prefs_widget);
+	
+	widget = WID ("popup_add");
+	gtk_signal_connect (GTK_OBJECT (widget), "activate",
+			    GTK_SIGNAL_FUNC (screensaver_add_cb),
+			    prefs_widget);
+
+	widget = WID ("popup_remove");
+	gtk_signal_connect (GTK_OBJECT (widget), "activate",
+			    GTK_SIGNAL_FUNC (screensaver_remove_cb),
 			    prefs_widget);
 }
 
@@ -502,7 +522,7 @@ set_random_timeout (PrefsWidget *prefs_widget, gboolean do_random)
 static const gchar *
 table_compute_state (SelectionMode mode)
 {
-	if (mode == SM_ONE_SCREENSAVER_ONLY)
+	if (mode != SM_CHOOSE_FROM_LIST)
 		return "<ETableState><column source=\"1\"/><grouping></grouping></ETableState>";
 	else return "<ETableState><column source=\"0\"/><column source=\"1\"/><grouping></grouping></ETableState>";
 }
@@ -944,4 +964,71 @@ pwr_state_changed_cb (GtkWidget *widget, PrefsWidget *prefs_widget)
 	
 	gnome_dialog_set_sensitive (GNOME_DIALOG (dlg), GNOME_OK, TRUE);
 	state_changed_cb (widget, prefs_widget);
+}
+	
+static void 
+screensaver_add_cb (GtkWidget *button, PrefsWidget *prefs_widget) 
+{
+	GtkWidget *dialog;
+
+	dialog = selection_dialog_new (prefs_widget);
+
+	gtk_signal_connect (GTK_OBJECT (dialog), "ok-clicked",
+			    GTK_SIGNAL_FUNC (add_select_cb), prefs_widget);
+}
+
+static void 
+screensaver_remove_cb (GtkWidget *button, PrefsWidget *prefs_widget)
+{
+	Screensaver *rm;
+	GList *l;
+	gint row;
+
+	if (!prefs_widget->selected_saver) return;
+
+	rm = prefs_widget->selected_saver;
+
+	/* Find another screensaver to select */
+	row = 0;
+	for (l = prefs_widget->screensavers; l != NULL; l = l->next)
+	{
+		if (l->data == rm)
+			break;
+		row++;
+	}
+	
+	prefs_widget->screensavers =
+		screensaver_remove (rm, prefs_widget->screensavers);
+	screensaver_destroy (rm);
+
+	if (!prefs_widget->screensavers)
+		prefs_widget->selected_saver = NULL;
+	else
+	{
+		if (row < 0)
+			row = 0;
+		else
+			row--;
+		
+		e_selection_model_select_single_row (
+			E_SELECTION_MODEL (E_TABLE (prefs_widget->priv->table)->selection), row);
+	}
+
+	state_changed_cb (button, prefs_widget);
+}
+
+static void
+add_select_cb (GtkWidget *widget, Screensaver *saver, 
+	       PrefsWidget *prefs_widget) 
+{
+	gint row;
+
+	prefs_widget->screensavers = 
+		screensaver_add (saver, prefs_widget->screensavers);
+
+	row = g_list_length (prefs_widget->screensavers) - 1;
+	e_selection_model_select_single_row (
+		E_SELECTION_MODEL (E_TABLE (prefs_widget->priv->table)->selection), row);
+
+	settings_cb (widget, prefs_widget);
 }

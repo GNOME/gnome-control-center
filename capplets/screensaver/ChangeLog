@@ -1,4 +1,17 @@
 2001-07-03  Richard Hestilow  <hestilow@ximian.com>
+
+	* prefs-widget.c:
+	  (add_select_cb, screensaver_add_cb, screensaver_remove_cb): Added.
+	  (prefs_widget_init): Connect to "Add" and "Remove"
+
+	* screensaver-prefs-dialog.c (get_basic_screensaver_widget): Replace
+	confusing stuff with ultra-simple dialog.
+
+	* screensaver-properties.glade[.h]: Remove "Demo" popup item, as it
+	is on the settings dialogs and is not easy to manage with
+	menu selection anyway. (Too much mouse movement).
+
+2001-07-03  Richard Hestilow  <hestilow@ximian.com>
 	
 	* screensaver-properties.glade[.h]: Added.
 	

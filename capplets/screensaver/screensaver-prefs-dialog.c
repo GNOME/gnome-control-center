@@ -285,7 +285,7 @@ screensaver_prefs_dialog_new (Screensaver *saver)
 				xmlDocGetRootElement (dialog->argument_doc);
 	}
 
-	if (dialog->cli_args_db && dialog->argument_data) {
+	if (dialog->cli_args_db && dialog->argument_data && dialog->argument_data->childs && dialog->argument_data->childs->next) {
 		settings_widget = 
 			get_screensaver_widget (dialog);
 	} else {
@@ -1357,6 +1357,13 @@ get_basic_screensaver_widget (ScreensaverPrefsDialog *dialog)
 	vbox = gtk_vbox_new (FALSE, 10);
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), 5);
 
+	label = gtk_label_new (_("There are no configurable settings for this screensaver."));
+
+	gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
+	gtk_box_pack_start (GTK_BOX (vbox), label, TRUE, TRUE, 5);
+	gtk_widget_show (label);
+
+#if 0
 	if (dialog->saver->name) {
 		label = gtk_label_new 
 			(_("Cannot find the data to configure this " \
@@ -1412,6 +1419,7 @@ get_basic_screensaver_widget (ScreensaverPrefsDialog *dialog)
 
 	gtk_box_pack_start (GTK_BOX (vbox), dialog->visual_combo,
 			    TRUE, FALSE, 5);
+#endif
 	return vbox;
 }
 
