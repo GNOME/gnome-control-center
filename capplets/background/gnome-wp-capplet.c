@@ -577,6 +577,8 @@ static void gnome_wp_remove_wallpaper (GtkWidget * widget,
     item->deleted = TRUE;
 
     gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
+
+    g_free (wpfile);
   }
   first = gtk_tree_path_new_first ();
   gtk_tree_view_set_cursor (GTK_TREE_VIEW (capplet->treeview),
@@ -671,17 +673,25 @@ static gint gnome_wp_list_sort (GtkTreeModel * model,
 				GnomeWPCapplet * capplet) {
   gchar * foo, * bar;
   gchar * desca, * descb;
+  gint retval;
 
   gtk_tree_model_get (model, a, 1, &desca, 2, &foo, -1);
   gtk_tree_model_get (model, b, 1, &descb, 2, &bar, -1);
 
   if (!strcmp (foo, "(none)")) {
-    return -1;
+    retval =  -1;
   } else if (!strcmp (bar, "(none)")) {
-    return 1;
+    retval =  1;
   } else {
-    return g_utf8_collate (desca, descb);
+    retval = g_utf8_collate (desca, descb);
   }
+
+  g_free (desca);
+  g_free (descb);
+  g_free (foo);
+  g_free (bar);
+
+  return retval;
 }
 
 static void gnome_wp_file_changed (GConfClient * client, guint id,
