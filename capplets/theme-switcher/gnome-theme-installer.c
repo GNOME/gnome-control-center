@@ -163,9 +163,9 @@ install_dialog_response (GtkWidget *widget, int response_id, gpointer data)
 		base = gnome_vfs_uri_extract_short_name (src_uri);
 		src = g_list_append (NULL, src_uri);
 		if (icon_theme)
-			path = g_build_filename (g_get_home_dir (), ".icons", base, NULL);
+			path = g_build_filename (g_get_home_dir (), ".icons", NULL);
 		else
-			path = g_build_filename (g_get_home_dir (), ".themes", base, NULL);
+			path = g_build_filename (g_get_home_dir (), ".themes", NULL);
 
 		if (access (path, X_OK | W_OK) != 0) {
                         GtkWidget *dialog;
