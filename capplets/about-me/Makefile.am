@@ -20,6 +20,13 @@ desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 Gladedir   = $(GNOMECC_GLADE_DIR)
 Glade_DATA = gnome-about-me.glade
 
+e-util-marshal.h: e-util-marshal.list $(GLIB_GENMARSHAL)
+        $(GLIB_GENMARSHAL) $< --header --prefix=e_util_marshal > $@
+
+e-util-marshal.c: e-util-marshal.list $(GLIB_GENMARSHAL)
+        echo "#include \"e-util-marshal.h\"" > $@ && \
+        $(GLIB_GENMARSHAL) $< --body --prefix=e_util_marshal >> $@
+
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS) $(LIBEBOOK_CFLAGS)
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
 EXTRA_DIST = $(Glade_DATA) $(Desktop_in_files) $(pixmap_DATA)
