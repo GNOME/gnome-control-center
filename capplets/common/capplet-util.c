@@ -430,24 +430,23 @@ legacy_is_modified (Bonobo_ConfigDatabase db, const gchar *filename)
 	struct stat stbuf;
 	gchar *realfile;
 	struct tm *legacy_tm;
+	gboolean ret;
 	
 	g_return_val_if_fail (db != CORBA_OBJECT_NIL, FALSE);
 
 	CORBA_exception_init (&ev);
 
 	pb = Bonobo_Unknown_queryInterface (db, "IDL:Bonobo/PropertyBag:1.0", &ev);
-	if (BONOBO_EX (&ev)) {
-		CORBA_exception_free (&ev);
+
+	if (pb == CORBA_OBJECT_NIL || BONOBO_EX (&ev))
 		return FALSE;
-	}
 
 	arg = bonobo_property_bag_client_get_value_any (pb, "last_modified", &ev);
-	if (BONOBO_EX (&ev)) {
-		CORBA_exception_free (&ev);
-		return FALSE;
-	}
 
-	bonobo_object_release_unref (pb, &ev);
+	bonobo_object_release_unref (pb, NULL);
+
+	if (arg == NULL || BONOBO_EX (&ev))
+		return FALSE;
 
 	log_val = BONOBO_ARG_GET_GENERAL (arg, TC_ulonglong, CORBA_unsigned_long_long, NULL);
 	bonobo_arg_release (arg);
@@ -461,16 +460,18 @@ legacy_is_modified (Bonobo_ConfigDatabase db, const gchar *filename)
 					NULL);
 
 	if (stat (realfile, &stbuf) != 0) {
-		CORBA_exception_free (&ev);
-		g_free (realfile);
-		return FALSE;
+		ret = FALSE;
+	} else {
+		legacy_tm = localtime (&stbuf.st_mtime);
+		legacy_val = mktime (legacy_tm);
+		ret = (legacy_val > log_val);
 	}
-	
-	CORBA_exception_free (&ev);
+
 	g_free (realfile);
-	legacy_tm = localtime (&stbuf.st_mtime);
-	legacy_val = mktime (legacy_tm);
-	return (legacy_val > log_val);
+
+	CORBA_exception_free (&ev);
+
+	return ret;
 }
 
 /* capplet_init -- see documentation in capplet-util.h
