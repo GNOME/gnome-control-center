@@ -29,9 +29,9 @@
 
 #include <glade/glade.h>
 
-#include <ximian-archiver/archive.h>
-#include <ximian-archiver/location.h>
-#include <ximian-archiver/backend-list.h>
+#include <archive.h>
+#include <location.h>
+#include <backend-list.h>
 
 #include "config-manager-dialog.h"
 #include "rollback-widget.h"

@@ -34,5 +34,5 @@ rollback_capplet_SOURCES = \
 	main.c
 
 rollback_capplet_LDADD = \
-	$(top_builddir)/archiver/libximian_archiver.la		\
+	$(top_builddir)/archiver/libconfig_archiver.la		\
 	@ROLLBACK_CAPPLET_LIBS@

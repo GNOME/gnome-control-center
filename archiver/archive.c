@@ -240,7 +240,7 @@ archive_load (gboolean is_global)
 		prefix = "/var/ximian-setup-tools";
 	else
 		prefix = g_concat_dir_and_file (g_get_home_dir (),
-						".gnome/ximian-setup-tools");
+						".gnome/control-center");
 
 	object = gtk_object_new (archive_get_type (),
 				 "prefix", prefix,
@@ -478,7 +478,7 @@ archive_set_current_location_id (Archive *archive, const gchar *locid)
 			 archive->current_location_id);
 	else
 		gnome_config_set_string
-			("/ximian-setup-tools/config/current/location",
+			("/control-center/config/current/location",
 			 archive->current_location_id);
 
 	gnome_config_sync ();
@@ -512,7 +512,7 @@ archive_get_current_location_id (Archive *archive)
 		else
 			archive->current_location_id =
 				gnome_config_get_string_with_default
-				("/ximian-setup-tools/config/current/location=default", &def);
+				("/control-center/config/current/location=default", &def);
 
 		/* Create default location if it does not exist */
 		if (def && archive_get_location

@@ -25,9 +25,9 @@
 # include "config.h"
 #endif
 
-#include <ximian-archiver/archive.h>
-#include <ximian-archiver/location.h>
-#include <ximian-archiver/config-log.h>
+#include <archive.h>
+#include <location.h>
+#include <config-log.h>
 
 #include "rollback-control.h"
 #include "rollback-widget.h"
