@@ -308,17 +308,25 @@ start_capplet_through_root_manager (GnomeDesktopEntry *gde)
 		}
 		else if (pid == 0) {
 			char *arg[2];
+			int i;
 
 			dup2 (pipe_fd[0], 0);
+      
+			for (i = 3; i < OPEN_MAX; i++) close(i);
 
 			arg[0] = gnome_is_program_in_path ("root-manager");
 			arg[1] = NULL;
 			execv (arg[0], arg);
 		}
+		else
+		{
+			output = fdopen(pipe_fd[1], "a");
+		}
 	}
 
 	cmdline = g_strjoinv (" ", gde->exec + 1);
 	fprintf (output, "%s\n", cmdline);
+	fflush (output);
 	g_free (cmdline);
 }
 

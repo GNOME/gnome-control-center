@@ -42,13 +42,14 @@ main (int argc, char **argv)
 	pid_t pid;
 
 	if (argc > 1) {
-		execv (gnome_is_program_in_path (args[1]), argv + 1);
+		execv (gnome_is_program_in_path (argv[1]), argv + 1);
 		g_error ("%s", g_strerror (errno));
 	}
 
 	buffer = g_new (char, buf_size);
 
-	while (1) {
+	while (!feof(stdin)) {
+		buffer[0] = buffer[1] = 0;
 		tmp = buffer;
 		fgets (tmp, 1023, stdin);
 
@@ -58,6 +59,8 @@ main (int argc, char **argv)
 			tmp += 1023;
 			fgets (tmp, 1023, stdin);
 		}
+
+		if (!strlen(buffer)) continue;
 
 		pid = fork ();
 
