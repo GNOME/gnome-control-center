@@ -25,8 +25,6 @@
 #define __CAPPLET_UTIL_H
 
 #include <gnome.h>
-#include <bonobo.h>
-#include <bonobo/bonobo-property-control.h>
 #include <gconf/gconf.h>
 #include <gconf/gconf-changeset.h>
 
@@ -44,11 +42,11 @@
 
 /* Copy a setting from the legacy gnome-config settings to the ConfigDatabase */
 
-#define COPY_FROM_LEGACY(type, key, legacy_type, legacy_key)                           \
-	val_##type = gnome_config_get_##legacy_type##_with_default (legacy_key, &def); \
-                                                                                       \
-	if (!def)                                                                      \
-		gconf_engine_set_##type (engine, key, val_##type, NULL);
+#define COPY_FROM_LEGACY(type, key, legacy_key)                                 \
+	val_##type = gnome_config_get_##type##_with_default (legacy_key, &def); \
+                                                                                \
+	if (!def)                                                               \
+		gconf_client_set_##type (client, key, val_##type, NULL);
 
 /* Callback to apply the settings in the given database */
 typedef void (*ApplySettingsFn) (void);
