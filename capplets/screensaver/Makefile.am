@@ -2,10 +2,10 @@ SUBDIRS = screensavers
 
 cappletname = screensaver
 cappletgroup =
-bin_PROGRAMS = screensaver-properties
+bin_PROGRAMS = screensaver-properties-capplet
 
-screensaver_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS) -lXt
-screensaver_properties_SOURCES = \
+screensaver_properties_capplet_LDADD = $(GNOMECC_CAPPLETS_LIBS) -lXt
+screensaver_properties_capplet_SOURCES = \
 	main.c \
 	prefs-widget.c				prefs-widget.h\
 	preferences.c				preferences.h\
