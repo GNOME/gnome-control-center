@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <glib.h>
 #include <libgnome/gnome-i18n.h>
+#include <locale.h>
 
 #include "gnome-settings-daemon.h"
 #include "gnome-settings-xsettings.h"
@@ -348,7 +349,9 @@ gnome_xft_settings_set_xresources (GnomeXftSettings *settings)
 {
   char *add[] = { "xrdb", "-merge", NULL };
   GString *add_string = g_string_new (NULL);
+  char *old_locale = g_strdup (setlocale (LC_NUMERIC, NULL));
 
+  setlocale (LC_NUMERIC, "C");
   g_string_append_printf (add_string,
 			  "Xft.dpi: %f\n", settings->dpi / 1024.);
   g_string_append_printf (add_string,
@@ -363,6 +366,8 @@ gnome_xft_settings_set_xresources (GnomeXftSettings *settings)
   gnome_settings_daemon_spawn_with_input (add, add_string->str);
 
   g_string_free (add_string, TRUE);
+  setlocale (LC_NUMERIC, old_locale);
+  g_free (old_locale);
 }
 
 /* We mirror the Xft properties both through XSETTINGS and through
