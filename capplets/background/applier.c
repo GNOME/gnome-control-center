@@ -251,7 +251,6 @@ applier_class_init (ApplierClass *class)
 	parent_class = 
 		GTK_OBJECT_CLASS (gtk_type_class (gtk_object_get_type ()));
 
-	g_print ("Entering class_init\n");
 	if (!gdk_pixbuf_xlib_inited) {
 		gdk_pixbuf_xlib_inited = TRUE;
 
@@ -344,7 +343,6 @@ applier_apply_prefs (Applier *applier, Bonobo_PropertyBag pb, Bonobo_ConfigDatab
 
 	g_return_if_fail (applier != NULL);
 	g_return_if_fail (IS_APPLIER (applier));
-	g_return_if_fail (pb != NULL);
 
 	if (do_root && applier->private->nautilus_running) {
 		set_root_pixmap (-1);
@@ -876,7 +874,6 @@ renderer_render_wallpaper (Renderer *renderer)
 					(gdouble) renderer->pwidth;
 				scaley = (gdouble) renderer->wheight / 
 					(gdouble) renderer->pheight;
- g_print ("%i %i:\n", gdk_pixbuf_get_width (renderer->pixbuf), gdk_pixbuf_get_height (renderer->pixbuf));
 				gdk_pixbuf_scale 
 					(renderer->wallpaper_pixbuf,
 					 renderer->pixbuf,
@@ -899,12 +896,10 @@ renderer_render_wallpaper (Renderer *renderer)
 						 renderer->wwidth,
 						 renderer->wheight,
 						 GDK_INTERP_BILINEAR);
-		PDEBUG (renderer->pixbuf); 
 				} else {
 					renderer->pixbuf =
 						renderer->prescaled_pixbuf;
 					gdk_pixbuf_ref (renderer->pixbuf);
-		PDEBUG (renderer->pixbuf); 
 				}
 			}
 		} else {

@@ -33,7 +33,7 @@
 #include "capplet-util.h"
 #include "applier.h"
 
-static Applier *applier;
+static Applier *applier = NULL;
 
 static void
 apply_settings (Bonobo_ConfigDatabase db)
@@ -41,6 +41,9 @@ apply_settings (Bonobo_ConfigDatabase db)
 	CORBA_Environment ev;
 	
 	CORBA_exception_init (&ev);
+	if (!applier)
+		applier = APPLIER (applier_new ());
+
 	applier_apply_prefs (applier, CORBA_OBJECT_NIL, db, &ev, TRUE, FALSE);
 	CORBA_exception_free (&ev);
 }
@@ -101,13 +104,27 @@ copy_color_from_legacy (Bonobo_ConfigDatabase db,
 }
 
 static void
+bonobo_config_set_filename (Bonobo_ConfigDatabase db,
+			    const char *key,
+			    const char *value,
+			    CORBA_Environment *opt_ev)
+{
+	CORBA_any *any;
+	
+	any = bonobo_arg_new (TC_Bonobo_Config_FileName);
+	*((CORBA_char **)(any->_value)) = CORBA_string_dup ((value)?(value):"");
+	bonobo_config_set_value (db, key, any, opt_ev);
+	bonobo_arg_release (any);	
+}
+
+static void
 get_legacy_settings (Bonobo_ConfigDatabase db) 
 {
 	gboolean val_boolean, def;
-	gchar *val_string;
+	gchar *val_string, *val_filename;
 	int val_ulong, val_long;
 
-	COPY_FROM_LEGACY (string, "/main/wallpaper_filename", string, "/Background/Default/wallpaper=none");
+	COPY_FROM_LEGACY (filename, "/main/wallpaper_filename", string, "/Background/Default/wallpaper=none");
 	COPY_FROM_LEGACY (ulong, "/main/wallpaper_type", int, "/Background/Default/wallpaperAlign=0");
 	copy_color_from_legacy (db, "/main/color1", "/Background/Default/color1");
 	copy_color_from_legacy (db, "/main/color2", "/Background/Default/color2");
