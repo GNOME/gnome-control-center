@@ -6,27 +6,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.99.0\n"
-"POT-Creation-Date: 2002-01-28 21:49-0600\n"
+"POT-Creation-Date: 2002-02-12 00:27-0600\n"
 "PO-Revision-Date: 2001-12-03 13:26+0800\n"
 "Last-Translator: Abel Cheung <maddog@linux.org.hk>\n"
 "Language-Team: Chinese\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: capplets/background/background-properties-capplet.c:291
-#: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:614
-#: capplets/keyboard/gnome-keyboard-properties.c:267
-#: capplets/mouse/gnome-mouse-properties.c:474
-#: capplets/sound/sound-properties-capplet.c:144
-msgid "Retrieve and store legacy settings"
-msgstr "復原以往的設定"
-
-#: capplets/background/background-properties-capplet.c:315
-#, fuzzy
-msgid "Background properties"
-msgstr "背景顏色"
 
 #: capplets/background/background.desktop.in.h:1
 msgid "Background"
@@ -35,6 +21,20 @@ msgstr "背景"
 #: capplets/background/background.desktop.in.h:2
 msgid "Configuration of the desktop's background"
 msgstr "桌面背景的組態"
+
+#: capplets/background/background-properties-capplet.c:291
+#: capplets/common/capplet-util.c:243
+#: capplets/default-applications/gnome-default-applications-properties.c:575
+#: capplets/keyboard/gnome-keyboard-properties.c:319
+#: capplets/mouse/gnome-mouse-properties.c:493
+#: capplets/sound/sound-properties-capplet.c:139
+msgid "Retrieve and store legacy settings"
+msgstr "復原以往的設定"
+
+#: capplets/background/background-properties-capplet.c:315
+#, fuzzy
+msgid "Background properties"
+msgstr "背景顏色"
 
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
@@ -99,317 +99,147 @@ msgstr "選擇預設使用的應用軟件"
 msgid "Default Applications"
 msgstr "預設應用軟件"
 
-#: capplets/keyboard/keyboard.desktop.in.h:1
-msgid "Keyboard"
-msgstr "鍵盤"
-
-#: capplets/keyboard/keyboard.desktop.in.h:2
-msgid "Keyboard Properties"
-msgstr "鍵盤設定"
-
-#: capplets/keyboard/gnome-keyboard-properties.c:263
-#: capplets/keyboard/gnome-keyboard-properties.c:265
-#: capplets/sound/sound-properties-capplet.c:140
-#: capplets/sound/sound-properties-capplet.c:142
-msgid ""
-"Just apply settings and quit (compatibility only; now handled by daemon)"
+#: capplets/desktop-links/Advanced.directory.in.in.h:1
+msgid "Advanced"
 msgstr ""
 
-#: capplets/mouse/mouse.desktop.in.h:1
-msgid "Mouse"
-msgstr "滑鼠"
-
-#: capplets/mouse/gnome-mouse-properties.c:499
-#: capplets/mouse/mouse.desktop.in.h:2
-msgid "Mouse Properties"
-msgstr "滑鼠設定"
-
-#: capplets/sound/sound-properties-capplet.c:172
+#: capplets/desktop-links/Advanced.directory.in.in.h:2
 #, fuzzy
-msgid "Sound properties"
+msgid "Advanced Settings"
+msgstr "主要設定"
+
+#: capplets/desktop-links/cd.desktop.in.in.h:1
+#, fuzzy
+msgid "CD Properties"
+msgstr "%s 的特性"
+
+#: capplets/desktop-links/cd.desktop.in.in.h:2
+#, fuzzy
+msgid "Configure handling of CD devices"
+msgstr "設定螢幕保護程式"
+
+#: capplets/desktop-links/legacy-applications.desktop.in.in.h:1
+#, fuzzy
+msgid "Legacy Applications"
+msgstr "預設應用軟件"
+
+#: capplets/desktop-links/legacy-applications.desktop.in.in.h:2
+msgid "Legacy applications settings (grdb)"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
+msgid "Appearance"
+msgstr "外觀"
+
+#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:2
+#, fuzzy
+msgid "Configure window appearance"
+msgstr "電源管理設定"
+
+#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:1
+msgid "Configure key shortcuts"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:2
+#, fuzzy
+msgid "Shortcuts"
+msgstr "短"
+
+#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:1
+msgid "Configure window focusing"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:2
+msgid "Focus behavior"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:1
+#, fuzzy
+msgid "Configure window properties"
 msgstr "背景顏色"
 
-#: capplets/sound/sound.desktop.in.h:1
-msgid "Configure GNOME's use of sound"
-msgstr "設定 GNOME 所用的音效"
+#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:2
+#, fuzzy
+msgid "Matched Windows"
+msgstr "分開的視窗"
+
+#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:1
+msgid "Configure window minimization and maximization"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:2
+msgid "Minimizing and Maximizing"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
+msgid "Configure window manager configuration properties"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:2
+msgid "Meta"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:1
+msgid "Configure miscellaneous window features"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
+msgid "Miscellaneous"
+msgstr "雜項"
+
+#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:1
+msgid "Configure window move/resize"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:2
+msgid "Moving and Resizing"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:1
+#, fuzzy
+msgid "Configure window placement"
+msgstr "電源管理設定"
+
+#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:2
+msgid "Placement"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:1
+msgid "Control Center Menu"
+msgstr "控制台選單"
+
+#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:2
+#, fuzzy
+msgid "Sawfish window manager"
+msgstr "編輯視窗管理程式"
+
+#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:1
+#, fuzzy
+msgid "Enable window manager sound events"
+msgstr "啟用電源管理(_p)"
 
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
 #: capplets/sound/sound.desktop.in.h:2
 msgid "Sound"
 msgstr "音效"
 
-#: control-center/Gnome.directory.in.in.h:1
-msgid "Main"
-msgstr "主要"
-
-#: control-center/Gnome.directory.in.in.h:2
-msgid "Main Settings"
-msgstr "主要設定"
-
-#: control-center/capplet-dir-view-list.c:325
-#, fuzzy, c-format
-msgid "GNOME Control Center: %s"
-msgstr "GNOME 控制台："
-
-#: control-center/capplet-dir-view.c:146
-msgid "Layout"
-msgstr ""
-
-#: control-center/capplet-dir-view.c:147
-msgid "Layout to use for this view of the capplets"
-msgstr ""
-
-#: control-center/capplet-dir-view.c:153
-msgid "Capplet directory object"
-msgstr ""
-
-#: control-center/capplet-dir-view.c:154
-msgid "Capplet directory that this view is viewing"
-msgstr ""
-
-#: control-center/capplet-dir-view.c:308 control-center/gnomecc.desktop.in.h:1
-msgid "GNOME Control Center"
-msgstr "GNOME 控制台"
-
-#: control-center/capplet-dir-view.c:311
-msgid "Desktop properties manager."
-msgstr "桌面設定總管。"
-
-#: control-center/capplet-dir-view.c:445
-#, c-format
-msgid "Gnome Control Center : %s"
-msgstr "Gnome 控制台：%s"
-
-#: control-center/capplet-dir-view.c:488
-msgid ""
-"No help is available/installed. Please make sure you\n"
-"have the GNOME User's Guide installed on your system."
-msgstr ""
-"輔助說明尚未安裝或不存在，請確定你已經安裝\n"
-"GNOME 的使用者指南到你的系統中。"
-
-#: control-center/capplet-dir-view.c:491
-msgid "Close"
-msgstr "關閉"
-
-#: control-center/gnomecc.desktop.in.h:2
-msgid "The GNOME configuration tool"
-msgstr "GNOME 設定工具"
-
-#: libbackground/applier.c:228
+#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:1
 #, fuzzy
-msgid "Type"
-msgstr "Mime 類型"
+msgid "Configure workspaces"
+msgstr "電源管理設定"
 
-#: libbackground/applier.c:229
-msgid ""
-"Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
-"for preview"
+#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:2
+msgid "Workspaces"
 msgstr ""
 
-#: libbackground/applier.c:388
-#, c-format
-msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
-msgstr "無法載入 pixbuf \"%s\"；不使用桌布。"
-
-#: libbackground/applier.c:505
-msgid "Disabled"
-msgstr "不使用"
-
-#: libsounds/sound-view.c:98
-msgid "The sound file for this event does not exist."
-msgstr "這個事件所用的音效檔不存在。"
-
-#: libsounds/sound-view.c:100
-msgid ""
-"The sound file for this event does not exist.\n"
-"You may want to install the gnome-audio package\n"
-"for a set of default sounds."
+#: capplets/desktop-links/session.desktop.in.in.h:1
+msgid "Configure which non-session aware programs are started up"
 msgstr ""
-"這個事件所用的音效檔不存在,\n"
-"你可以安裝 gnome-audio 套件\n"
-"來取得一些預設音效。"
 
-#: libsounds/sound-view.c:152
-msgid "Event"
-msgstr "事件"
-
-#: libsounds/sound-view.c:152
-msgid "File to Play"
-msgstr "播放的音效檔"
-
-#: libsounds/sound-view.c:185
-msgid "Play"
-msgstr "播放"
-
-#: libsounds/sound-view.c:191
+#: capplets/desktop-links/session.desktop.in.in.h:2
 #, fuzzy
-msgid "Select sound file"
-msgstr "選擇檢視器"
-
-#: capplets/file-types/file-types.desktop.in.h:1
-msgid "File Types and Programs"
-msgstr ""
-
-#: capplets/file-types/file-types.desktop.in.h:2
-msgid "Specify which programs are used to open or view each file type"
-msgstr ""
-
-#: capplets/file-types/mime-types-model.c:167
-#: capplets/file-types/mime-types-model.c:168
-msgid "Model for categories only"
-msgstr ""
-
-#: capplets/file-types/mime-types-model.c:420
-#, fuzzy
-msgid "Internet Services"
-msgstr "干擾"
-
-#: capplets/file-types/mime-edit-dialog.c:163
-#, fuzzy
-msgid "Extension"
-msgstr "延伸檔名："
-
-#: capplets/file-types/mime-edit-dialog.c:166
-msgid "Edit file type"
-msgstr ""
-
-#: capplets/file-types/mime-category-edit-dialog.c:170
-#: capplets/file-types/mime-edit-dialog.c:203
-#: capplets/file-types/service-edit-dialog.c:165
-#: capplets/file-types/service-edit-dialog.c:166
-#, fuzzy
-msgid "Model"
-msgstr "模式(_M)："
-
-#: capplets/file-types/mime-edit-dialog.c:204
-msgid "Underlying model to notify when Ok is clicked"
-msgstr ""
-
-#: capplets/file-types/mime-edit-dialog.c:211
-msgid "MIME type information"
-msgstr ""
-
-#: capplets/file-types/mime-edit-dialog.c:212
-msgid "Structure with data on the MIME type"
-msgstr ""
-
-#: capplets/file-types/mime-edit-dialog.c:218
-msgid "Is add dialog"
-msgstr ""
-
-#: capplets/file-types/mime-edit-dialog.c:219
-msgid "True if this dialog is for adding a MIME type"
-msgstr ""
-
-#: capplets/file-types/mime-edit-dialog.c:386
-#: capplets/file-types/mime-edit-dialog.c:441
-#, fuzzy
-msgid "None"
-msgstr "(無)"
-
-#: capplets/file-types/mime-category-edit-dialog.c:342
-#: capplets/file-types/mime-edit-dialog.c:391
-#: capplets/file-types/mime-edit-dialog.c:491
-#: capplets/file-types/service-edit-dialog.c:350
-#: capplets/file-types/service-edit-dialog.c:396
-msgid "Custom"
-msgstr "自訂"
-
-#: capplets/file-types/mime-edit-dialog.c:670
-msgid ""
-"Invalid MIME type. Please enter a valid MIME type, or leave the field blank "
-"to have one generated for you."
-msgstr ""
-
-#: capplets/file-types/mime-edit-dialog.c:680
-msgid "There already exists a MIME type of that name."
-msgstr ""
-
-#: capplets/file-types/mime-edit-dialog.c:745
-msgid "Category"
-msgstr ""
-
-#: capplets/file-types/mime-edit-dialog.c:750
-msgid "Choose a file category"
-msgstr ""
-
-#: capplets/file-types/mime-category-edit-dialog.c:136
-msgid "Edit file category"
-msgstr ""
-
-#: capplets/file-types/mime-category-edit-dialog.c:171
-msgid "GtkTreeModel that contains the category data"
-msgstr ""
-
-#: capplets/file-types/mime-category-edit-dialog.c:176
-msgid "MIME category info"
-msgstr ""
-
-#: capplets/file-types/mime-category-edit-dialog.c:177
-msgid "Structure containing information on the MIME category"
-msgstr ""
-
-#: capplets/file-types/service-info.c:43
-#, fuzzy
-msgid "Unknown service types"
-msgstr "不明的使用者。"
-
-#: capplets/file-types/service-info.c:44
-msgid "World wide web"
-msgstr ""
-
-#: capplets/file-types/service-info.c:45
-msgid "File transfer protocol"
-msgstr ""
-
-#: capplets/file-types/service-info.c:46
-#, fuzzy
-msgid "Detailed documentation"
-msgstr "預設位置"
-
-#: capplets/file-types/service-info.c:47
-msgid "Manual pages"
-msgstr ""
-
-#: capplets/file-types/service-info.c:48
-msgid "Electronic mail transmission"
-msgstr ""
-
-#: capplets/file-types/service-edit-dialog.c:132
-msgid "Edit service information"
-msgstr ""
-
-#: capplets/file-types/service-edit-dialog.c:173
-msgid "Service info"
-msgstr ""
-
-#: capplets/file-types/service-edit-dialog.c:174
-msgid "Structure containing service information"
-msgstr ""
-
-#: capplets/file-types/service-edit-dialog.c:180
-msgid "Is add"
-msgstr ""
-
-#: capplets/file-types/service-edit-dialog.c:181
-msgid "TRUE if this is an add service dialog"
-msgstr ""
-
-#: capplets/file-types/service-edit-dialog.c:486
-#, fuzzy
-msgid "Please enter a protocol name."
-msgstr "請在以下欄位輸入指令。"
-
-#: capplets/file-types/service-edit-dialog.c:497
-msgid ""
-"Invalid protocol name. Please enter a protocol name without any spaces or "
-"punctuation."
-msgstr ""
-
-#: capplets/file-types/service-edit-dialog.c:509
-msgid "There is already a protocol by that name."
-msgstr ""
+msgid "Startup Programs"
+msgstr "新增起始程式"
 
 #.
 #. * Translatable strings file
@@ -506,10 +336,313 @@ msgstr "圖像："
 msgid "Video"
 msgstr "檢視"
 
-#: capplets/theme-switcher/main.c:209
+#: capplets/file-types/file-types-capplet.c:212
+msgid "Description"
+msgstr "描述"
+
+#: capplets/file-types/file-types-capplet.c:219
+msgid "Extensions"
+msgstr "延伸檔名"
+
+#: capplets/file-types/file-types.desktop.in.h:1
+msgid "File Types and Programs"
+msgstr ""
+
+#: capplets/file-types/file-types.desktop.in.h:2
+msgid "Specify which programs are used to open or view each file type"
+msgstr ""
+
+#: capplets/file-types/mime-category-edit-dialog.c:137
+msgid "Edit file category"
+msgstr ""
+
+#: capplets/file-types/mime-category-edit-dialog.c:171
+#: capplets/file-types/mime-edit-dialog.c:204
+#: capplets/file-types/service-edit-dialog.c:166
+#: capplets/file-types/service-edit-dialog.c:167
 #, fuzzy
-msgid "Select a theme to install"
-msgstr "選擇終端機"
+msgid "Model"
+msgstr "模式(_M)："
+
+#: capplets/file-types/mime-category-edit-dialog.c:172
+msgid "GtkTreeModel that contains the category data"
+msgstr ""
+
+#: capplets/file-types/mime-category-edit-dialog.c:177
+msgid "MIME category info"
+msgstr ""
+
+#: capplets/file-types/mime-category-edit-dialog.c:178
+msgid "Structure containing information on the MIME category"
+msgstr ""
+
+#: capplets/file-types/mime-category-edit-dialog.c:343
+#: capplets/file-types/mime-edit-dialog.c:392
+#: capplets/file-types/mime-edit-dialog.c:492
+#: capplets/file-types/service-edit-dialog.c:351
+#: capplets/file-types/service-edit-dialog.c:397
+msgid "Custom"
+msgstr "自訂"
+
+#: capplets/file-types/mime-edit-dialog.c:164
+#, fuzzy
+msgid "Extension"
+msgstr "延伸檔名："
+
+#: capplets/file-types/mime-edit-dialog.c:167
+msgid "Edit file type"
+msgstr ""
+
+#: capplets/file-types/mime-edit-dialog.c:205
+msgid "Underlying model to notify when Ok is clicked"
+msgstr ""
+
+#: capplets/file-types/mime-edit-dialog.c:212
+msgid "MIME type information"
+msgstr ""
+
+#: capplets/file-types/mime-edit-dialog.c:213
+msgid "Structure with data on the MIME type"
+msgstr ""
+
+#: capplets/file-types/mime-edit-dialog.c:219
+msgid "Is add dialog"
+msgstr ""
+
+#: capplets/file-types/mime-edit-dialog.c:220
+msgid "True if this dialog is for adding a MIME type"
+msgstr ""
+
+#: capplets/file-types/mime-edit-dialog.c:387
+#: capplets/file-types/mime-edit-dialog.c:442
+#, fuzzy
+msgid "None"
+msgstr "(無)"
+
+#: capplets/file-types/mime-edit-dialog.c:673
+msgid ""
+"Invalid MIME type. Please enter a valid MIME type, or leave the field blank "
+"to have one generated for you."
+msgstr ""
+
+#: capplets/file-types/mime-edit-dialog.c:684
+msgid "There already exists a MIME type of that name."
+msgstr ""
+
+#: capplets/file-types/mime-edit-dialog.c:748
+msgid "Category"
+msgstr ""
+
+#: capplets/file-types/mime-edit-dialog.c:753
+msgid "Choose a file category"
+msgstr ""
+
+#: capplets/file-types/mime-types-model.c:167
+#: capplets/file-types/mime-types-model.c:168
+msgid "Model for categories only"
+msgstr ""
+
+#: capplets/file-types/mime-types-model.c:420
+#, fuzzy
+msgid "Internet Services"
+msgstr "干擾"
+
+#: capplets/file-types/service-edit-dialog.c:133
+msgid "Edit service information"
+msgstr ""
+
+#: capplets/file-types/service-edit-dialog.c:174
+msgid "Service info"
+msgstr ""
+
+#: capplets/file-types/service-edit-dialog.c:175
+msgid "Structure containing service information"
+msgstr ""
+
+#: capplets/file-types/service-edit-dialog.c:181
+msgid "Is add"
+msgstr ""
+
+#: capplets/file-types/service-edit-dialog.c:182
+msgid "TRUE if this is an add service dialog"
+msgstr ""
+
+#: capplets/file-types/service-edit-dialog.c:489
+#, fuzzy
+msgid "Please enter a protocol name."
+msgstr "請在以下欄位輸入指令。"
+
+#: capplets/file-types/service-edit-dialog.c:502
+msgid ""
+"Invalid protocol name. Please enter a protocol name without any spaces or "
+"punctuation."
+msgstr ""
+
+#: capplets/file-types/service-edit-dialog.c:515
+msgid "There is already a protocol by that name."
+msgstr ""
+
+#: capplets/file-types/service-info.c:44
+#, fuzzy
+msgid "Unknown service types"
+msgstr "不明的使用者。"
+
+#: capplets/file-types/service-info.c:45
+msgid "World wide web"
+msgstr ""
+
+#: capplets/file-types/service-info.c:46
+msgid "File transfer protocol"
+msgstr ""
+
+#: capplets/file-types/service-info.c:47
+#, fuzzy
+msgid "Detailed documentation"
+msgstr "預設位置"
+
+#: capplets/file-types/service-info.c:48
+msgid "Manual pages"
+msgstr ""
+
+#: capplets/file-types/service-info.c:49
+msgid "Electronic mail transmission"
+msgstr ""
+
+#: capplets/font/font-properties.desktop.in.h:1
+#, fuzzy
+msgid "Font"
+msgstr "使用者字形"
+
+#: capplets/font/font-properties.desktop.in.h:2
+msgid "Select which font to use"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.c:315
+#: capplets/keyboard/gnome-keyboard-properties.c:317
+#: capplets/sound/sound-properties-capplet.c:135
+#: capplets/sound/sound-properties-capplet.c:137
+msgid ""
+"Just apply settings and quit (compatibility only; now handled by daemon)"
+msgstr ""
+
+#: capplets/keyboard/keyboard.desktop.in.h:1
+msgid "Keyboard"
+msgstr "鍵盤"
+
+#: capplets/keyboard/keyboard.desktop.in.h:2
+msgid "Keyboard Properties"
+msgstr "鍵盤設定"
+
+#: capplets/mouse/gnome-mouse-properties.c:518
+#: capplets/mouse/mouse.desktop.in.h:2
+msgid "Mouse Properties"
+msgstr "滑鼠設定"
+
+#: capplets/mouse/mouse.desktop.in.h:1
+msgid "Mouse"
+msgstr "滑鼠"
+
+#: capplets/screensaver/screensaver.desktop.in.h:1
+#, fuzzy
+msgid "Configure the settings of the screensaver"
+msgstr "此螢幕保護程式沒有任何可設定的選項。"
+
+#: capplets/screensaver/screensaver.desktop.in.h:2
+msgid "Screensaver"
+msgstr "螢幕保護程式"
+
+#: capplets/sound/sound.desktop.in.h:1
+msgid "Configure GNOME's use of sound"
+msgstr "設定 GNOME 所用的音效"
+
+#: capplets/sound/sound-properties-capplet.c:167
+#, fuzzy
+msgid "Sound properties"
+msgstr "背景顏色"
+
+#. just 8 short names that will serve as samples for titles in demo
+#: capplets/theme-switcher/control/control.c:19
+#, fuzzy
+msgid "Eenie"
+msgstr "事件"
+
+#: capplets/theme-switcher/control/control.c:19
+msgid "Mynie"
+msgstr ""
+
+#: capplets/theme-switcher/control/control.c:19
+msgid "Catcha"
+msgstr ""
+
+#: capplets/theme-switcher/control/control.c:19
+msgid "By Its"
+msgstr ""
+
+#: capplets/theme-switcher/control/control.c:20
+msgid "Meenie"
+msgstr ""
+
+#: capplets/theme-switcher/control/control.c:20
+#, fuzzy
+msgid "Moe"
+msgstr "較多"
+
+#: capplets/theme-switcher/control/control.c:20
+#, fuzzy
+msgid "Tiger"
+msgstr "較稀疏"
+
+#: capplets/theme-switcher/control/control.c:20
+#, fuzzy
+msgid "Toe"
+msgstr "頂端"
+
+#: capplets/theme-switcher/control/control.c:38
+msgid "Selected themes from above will be tested by previewing here."
+msgstr "所選擇的佈景主題可在這邊測試預覽。"
+
+#. column one
+#: capplets/theme-switcher/control/control.c:43
+msgid "Sample Button"
+msgstr "按鈕樣品"
+
+#: capplets/theme-switcher/control/control.c:47
+msgid "Sample Check Button"
+msgstr "核對按鈕樣品"
+
+#: capplets/theme-switcher/control/control.c:53
+msgid "Sample Text Entry Field"
+msgstr "文字欄位樣品"
+
+#: capplets/theme-switcher/control/control.c:64
+msgid "Submenu"
+msgstr "副選單"
+
+#: capplets/theme-switcher/control/control.c:69
+msgid "Item 1"
+msgstr ""
+
+#: capplets/theme-switcher/control/control.c:71
+msgid "Another item"
+msgstr ""
+
+#: capplets/theme-switcher/control/control.c:75
+#, fuzzy
+msgid "Radio Button 1"
+msgstr "對話窗按鈕"
+
+#: capplets/theme-switcher/control/control.c:81
+#, fuzzy
+msgid "Radio Button 2"
+msgstr "對話窗按鈕"
+
+#: capplets/theme-switcher/control/control.c:102
+msgid "One"
+msgstr "一"
+
+#: capplets/theme-switcher/control/control.c:108
+msgid "Two"
+msgstr "二"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
 msgid "Gtk+ Theme Selector"
@@ -519,165 +652,141 @@ msgstr ""
 msgid "Select which gtk+ theme to use"
 msgstr ""
 
-#: capplets/ui-properties/behavior.desktop.in.h:1
-msgid "Behavior"
-msgstr ""
+#: capplets/theme-switcher/main.c:217
+#, fuzzy
+msgid "Select a theme to install"
+msgstr "選擇終端機"
 
-#: capplets/ui-properties/behavior.desktop.in.h:2
+#: capplets/ui-properties/behavior.desktop.in.h:1
 msgid "Sets the default behavior of GNOME applications"
 msgstr ""
 
-#: capplets/ui-properties/main.c:47
-#, fuzzy
-msgid "Initialize session settings"
-msgstr "初始化該作業階段"
-
-#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:1
-msgid "Control Center Menu"
-msgstr "控制台選單"
-
-#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:2
-#, fuzzy
-msgid "Sawfish window manager"
-msgstr "編輯視窗管理程式"
-
-#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
-msgid "Appearance"
-msgstr "外觀"
-
-#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:2
-#, fuzzy
-msgid "Configure window appearance"
-msgstr "電源管理設定"
-
-#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:1
-msgid "Configure key shortcuts"
+#: capplets/ui-properties/behavior.desktop.in.h:2
+msgid "Toolbars & Menus"
 msgstr ""
 
-#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:2
+#: control-center/capplet-dir-view.c:146
+msgid "Layout"
+msgstr ""
+
+#: control-center/capplet-dir-view.c:147
+msgid "Layout to use for this view of the capplets"
+msgstr ""
+
+#: control-center/capplet-dir-view.c:153
+msgid "Capplet directory object"
+msgstr ""
+
+#: control-center/capplet-dir-view.c:154
+msgid "Capplet directory that this view is viewing"
+msgstr ""
+
+#: control-center/capplet-dir-view.c:308 control-center/gnomecc.desktop.in.h:1
+msgid "GNOME Control Center"
+msgstr "GNOME 控制台"
+
+#: control-center/capplet-dir-view.c:311
+msgid "Desktop properties manager."
+msgstr "桌面設定總管。"
+
+#: control-center/capplet-dir-view.c:445
+#, c-format
+msgid "Gnome Control Center : %s"
+msgstr "Gnome 控制台：%s"
+
+#: control-center/capplet-dir-view.c:488
+msgid ""
+"No help is available/installed. Please make sure you\n"
+"have the GNOME User's Guide installed on your system."
+msgstr ""
+"輔助說明尚未安裝或不存在，請確定你已經安裝\n"
+"GNOME 的使用者指南到你的系統中。"
+
+#: control-center/capplet-dir-view.c:491
+msgid "Close"
+msgstr "關閉"
+
+#: control-center/capplet-dir-view-list.c:325
+#, fuzzy, c-format
+msgid "GNOME Control Center: %s"
+msgstr "GNOME 控制台："
+
+#: control-center/gnomecc.desktop.in.h:2
+msgid "The GNOME configuration tool"
+msgstr "GNOME 設定工具"
+
+#: control-center/main.c:44
+msgid "Use shell even if nautilus is running."
+msgstr ""
+
+#: libbackground/applier.c:239
 #, fuzzy
-msgid "Shortcuts"
-msgstr "短"
+msgid "Type"
+msgstr "Mime 類型"
 
-#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:1
-msgid "Configure window focusing"
+#: libbackground/applier.c:240
+msgid ""
+"Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
+"for preview"
 msgstr ""
 
-#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:2
-msgid "Focus behavior"
-msgstr ""
+#: libbackground/applier.c:399
+#, c-format
+msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
+msgstr "無法載入 pixbuf \"%s\"；不使用桌布。"
 
-#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:1
+#: libbackground/applier.c:522
+msgid "Disabled"
+msgstr "不使用"
+
+#: libsounds/sound-view.c:99
+msgid "The sound file for this event does not exist."
+msgstr "這個事件所用的音效檔不存在。"
+
+#: libsounds/sound-view.c:101
+msgid ""
+"The sound file for this event does not exist.\n"
+"You may want to install the gnome-audio package\n"
+"for a set of default sounds."
+msgstr ""
+"這個事件所用的音效檔不存在,\n"
+"你可以安裝 gnome-audio 套件\n"
+"來取得一些預設音效。"
+
+#: libsounds/sound-view.c:154
+msgid "Event"
+msgstr "事件"
+
+#: libsounds/sound-view.c:154
+msgid "File to Play"
+msgstr "播放的音效檔"
+
+#: libsounds/sound-view.c:187
+msgid "Play"
+msgstr "播放"
+
+#: libsounds/sound-view.c:193
 #, fuzzy
-msgid "Configure window properties"
-msgstr "背景顏色"
+msgid "Select sound file"
+msgstr "選擇檢視器"
 
-#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:2
+#~ msgid "Main"
+#~ msgstr "主要"
+
+#~ msgid "Main Settings"
+#~ msgstr "主要設定"
+
 #, fuzzy
-msgid "Matched Windows"
-msgstr "分開的視窗"
+#~ msgid "Initialize session settings"
+#~ msgstr "初始化該作業階段"
 
-#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:1
-msgid "Configure window minimization and maximization"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:2
-msgid "Minimizing and Maximizing"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
-msgid "Configure window manager configuration properties"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:2
-msgid "Meta"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:1
-msgid "Configure miscellaneous window features"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
-msgid "Miscellaneous"
-msgstr "雜項"
-
-#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:1
-msgid "Configure window move/resize"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:2
-msgid "Moving and Resizing"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:1
 #, fuzzy
-msgid "Configure window placement"
-msgstr "電源管理設定"
+#~ msgid "Global panel properties"
+#~ msgstr "一般偏好設定"
 
-#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:2
-msgid "Placement"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:1
 #, fuzzy
-msgid "Enable window manager sound events"
-msgstr "啟用電源管理(_p)"
-
-#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:1
-#, fuzzy
-msgid "Configure workspaces"
-msgstr "電源管理設定"
-
-#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:2
-msgid "Workspaces"
-msgstr ""
-
-#: capplets/desktop-links/Advanced.directory.in.in.h:1
-msgid "Advanced"
-msgstr ""
-
-#: capplets/desktop-links/Advanced.directory.in.in.h:2
-#, fuzzy
-msgid "Advanced Settings"
-msgstr "主要設定"
-
-#: capplets/desktop-links/cd.desktop.in.in.h:1
-#, fuzzy
-msgid "CD Properties"
-msgstr "%s 的特性"
-
-#: capplets/desktop-links/cd.desktop.in.in.h:2
-#, fuzzy
-msgid "Configure handling of CD devices"
-msgstr "設定螢幕保護程式"
-
-#: capplets/desktop-links/legacy-applications.desktop.in.in.h:1
-#, fuzzy
-msgid "Legacy Applications"
-msgstr "預設應用軟件"
-
-#: capplets/desktop-links/legacy-applications.desktop.in.in.h:2
-msgid "Legacy applications settings (grdb)"
-msgstr ""
-
-#: capplets/desktop-links/panel.desktop.in.in.h:1
-#, fuzzy
-msgid "Global panel properties"
-msgstr "一般偏好設定"
-
-#: capplets/desktop-links/panel.desktop.in.in.h:2
-#, fuzzy
-msgid "Panel"
-msgstr "取消"
-
-#: capplets/desktop-links/session.desktop.in.in.h:1
-msgid "Configure which non-session aware programs are started up"
-msgstr ""
-
-#: capplets/desktop-links/session.desktop.in.in.h:2
-#, fuzzy
-msgid "Startup Programs"
-msgstr "新增起始程式"
+#~ msgid "Panel"
+#~ msgstr "取消"
 
 #~ msgid "Default location"
 #~ msgstr "預設位置"
@@ -954,9 +1063,6 @@ msgstr "新增起始程式"
 #~ msgid "Custom screensaver. No description available"
 #~ msgstr "自訂螢幕保護程式。沒有描述"
 
-#~ msgid "Screensaver"
-#~ msgstr "螢幕保護程式"
-
 #~ msgid "About %s\n"
 #~ msgstr "關於 %s\n"
 
@@ -966,17 +1072,11 @@ msgstr "新增起始程式"
 #~ msgid "Settings"
 #~ msgstr "設定"
 
-#~ msgid "Description"
-#~ msgstr "描述"
-
 #~ msgid "label1"
 #~ msgstr "標籤 1"
 
 #~ msgid "Demo"
 #~ msgstr "示範"
-
-#~ msgid "There are no configurable settings for this screensaver."
-#~ msgstr "此螢幕保護程式沒有任何可設定的選項。"
 
 #~ msgid ""
 #~ "Cannot find the data to configure this screensaver. Please edit the "
@@ -1083,9 +1183,6 @@ msgstr "新增起始程式"
 
 #~ msgid "Twelve Sided cells"
 #~ msgstr "十二邊格子"
-
-#~ msgid "Two"
-#~ msgstr "二"
 
 #~ msgid "number of Ants"
 #~ msgstr "螞蟻的數目"
@@ -1268,9 +1365,6 @@ msgstr "新增起始程式"
 #~ msgid "Seeds"
 #~ msgstr "起始點"
 
-#~ msgid "Thinner"
-#~ msgstr "較稀疏"
-
 #~ msgid "Center image."
 #~ msgstr "中央顯示。"
 
@@ -1297,9 +1391,6 @@ msgstr "新增起始程式"
 
 #~ msgid "Less"
 #~ msgstr "較少"
-
-#~ msgid "More"
-#~ msgstr "較多"
 
 #~ msgid "Number of iterations."
 #~ msgstr "計算的周期數目。"
@@ -2189,9 +2280,6 @@ msgstr "新增起始程式"
 #~ msgid "Mime Type:"
 #~ msgstr "Mime 類型："
 
-#~ msgid "Extensions"
-#~ msgstr "延伸檔名"
-
 #~ msgid ""
 #~ "Type in the extensions for this mime-type.\n"
 #~ "For example:  .html, .htm"
@@ -2401,9 +2489,6 @@ msgstr "新增起始程式"
 #~ msgid "Specially by the window manager"
 #~ msgstr "由視窗管理程式處理"
 
-#~ msgid "Dialog Buttons"
-#~ msgstr "對話窗按鈕"
-
 #~ msgid "Default  (Spread out - big)"
 #~ msgstr "預設（伸展 - 大）"
 
@@ -2427,9 +2512,6 @@ msgstr "新增起始程式"
 
 #~ msgid "Right"
 #~ msgstr "右邊"
-
-#~ msgid "Top"
-#~ msgstr "頂端"
 
 #~ msgid "Bottom"
 #~ msgstr "底端"
@@ -2565,24 +2647,6 @@ msgstr "新增起始程式"
 #~ msgid "Edit Startup Program"
 #~ msgstr "編輯起始程式"
 
-#~ msgid "One"
-#~ msgstr "一"
-
-#~ msgid "Selected themes from above will be tested by previewing here."
-#~ msgstr "所選擇的佈景主題可在這邊測試預覽。"
-
-#~ msgid "Sample Button"
-#~ msgstr "按鈕樣品"
-
-#~ msgid "Sample Check Button"
-#~ msgstr "核對按鈕樣品"
-
-#~ msgid "Sample Text Entry Field"
-#~ msgstr "文字欄位樣品"
-
-#~ msgid "Submenu"
-#~ msgstr "副選單"
-
 #~ msgid ""
 #~ "Error installing theme:\n"
 #~ "'%s'\n"
@@ -2608,9 +2672,6 @@ msgstr "新增起始程式"
 #~ msgstr ""
 #~ "安裝新的\n"
 #~ "佈景主題..."
-
-#~ msgid "User Font"
-#~ msgstr "使用者字形"
 
 #~ msgid "Use custom font."
 #~ msgstr "使用自訂字形。"

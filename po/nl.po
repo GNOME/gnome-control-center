@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center CVS\n"
-"POT-Creation-Date: 2002-02-08 07:58-0500\n"
+"POT-Creation-Date: 2002-02-12 00:27-0600\n"
 "PO-Revision-Date: 2000-02-19 20:35+0100\n"
 "Last-Translator: Jan-Willem Harmanny <jwharmanny@hotmail.com>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -24,44 +24,19 @@ msgstr "Achtergrond"
 msgid "Configuration of the desktop's background"
 msgstr "Configuratie van de bureaublad achtergrond"
 
-#: capplets/background/background-properties-capplet.c:462
-#, c-format
-msgid ""
-"Couldn't find the file '%s'.\n"
-"\n"
-"Please make sure it exists and try again, or choose a different background "
-"picture."
-msgstr ""
-"Kan bestand '%s' niet vinden.\n"
-"\n"
-"Controleer of het bestaat en probeer opnieuw, of kies een andere "
-"achtergrond figuur."
-
-#: capplets/background/background-properties-capplet.c:487
-#, c-format
-msgid ""
-"I don't know how to open the file '%s'.\n"
-"Perhaps its a kind of picture that is not yet supported.\n"
-"\n"
-"Please select a different picture instead."
-msgstr ""
-"Ik weet niet hoe ik het bestand '%s' moet openen.\n"
-"Misschien is het bestandsformaat nog niet ondersteund.\n"
-"\n"
-"Selecteer een andere figuur."
-
-#: capplets/background/background-properties-capplet.c:794
+#: capplets/background/background-properties-capplet.c:291
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:615
-#: capplets/keyboard/gnome-keyboard-properties.c:267
-#: capplets/mouse/gnome-mouse-properties.c:494
-#: capplets/sound/sound-properties-capplet.c:143
+#: capplets/default-applications/gnome-default-applications-properties.c:575
+#: capplets/keyboard/gnome-keyboard-properties.c:319
+#: capplets/mouse/gnome-mouse-properties.c:493
+#: capplets/sound/sound-properties-capplet.c:139
 msgid "Retrieve and store legacy settings"
 msgstr "Ga terug naar de standaard instellingen"
 
-#: capplets/background/background-properties-capplet.c:830
 #
-msgid "Background Properties"
+#: capplets/background/background-properties-capplet.c:315
+#, fuzzy
+msgid "Background properties"
 msgstr "Achtergrond Instellingen"
 
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
@@ -92,7 +67,8 @@ msgstr "Change set"
 msgid ""
 "GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr ""
-"GConf change set met gegevens die naar de gconf client worden gestuurd bij toepassen"
+"GConf change set met gegevens die naar de gconf client worden gestuurd bij "
+"toepassen"
 
 #: capplets/common/gconf-property-editor.c:163
 msgid "Conversion to widget callback"
@@ -102,7 +78,8 @@ msgstr "Conversie naar widget callback"
 msgid ""
 "Callback to be issued when data are to be converted from GConf to the widget"
 msgstr ""
-"Callback die wordt gestuurd wanneer gegevens moeten worden omgezet van GConf naar de widget"
+"Callback die wordt gestuurd wanneer gegevens moeten worden omgezet van GConf "
+"naar de widget"
 
 #: capplets/common/gconf-property-editor.c:169
 msgid "Conversion from widget callback"
@@ -112,7 +89,8 @@ msgstr "Conversie vanuit widget callback"
 msgid ""
 "Callback to be issued when data are to be converted to GConf from the widget"
 msgstr ""
-"Callback die wordt gestuurd wanneer gegevens moeten worden omgezet naar GConf vanuit de widget"
+"Callback die wordt gestuurd wanneer gegevens moeten worden omgezet naar "
+"GConf vanuit de widget"
 
 #: capplets/common/gconf-property-editor.c:175
 msgid "UI Control"
@@ -362,7 +340,8 @@ msgstr "Bestandstypen en programma's"
 
 #: capplets/file-types/file-types.desktop.in.h:2
 msgid "Specify which programs are used to open or view each file type"
-msgstr "Instellen welke programma's worden gebruikt om elk bestandstype te openen"
+msgstr ""
+"Instellen welke programma's worden gebruikt om elk bestandstype te openen"
 
 #: capplets/file-types/mime-category-edit-dialog.c:137
 msgid "Edit file category"
@@ -486,8 +465,7 @@ msgid ""
 "Invalid protocol name. Please enter a protocol name without any spaces or "
 "punctuation."
 msgstr ""
-"Ongeldige protocol naam. Geef een protocol naam zonder spaties of "
-"leestekens."
+"Ongeldige protocol naam. Geef een protocol naam zonder spaties of leestekens."
 
 #: capplets/file-types/service-edit-dialog.c:515
 msgid "There is already a protocol by that name."
@@ -517,14 +495,25 @@ msgstr "Handleiding pagina's"
 msgid "Electronic mail transmission"
 msgstr "Electronische post overbrenging"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:263
-#: capplets/keyboard/gnome-keyboard-properties.c:265
-#: capplets/sound/sound-properties-capplet.c:139
-#: capplets/sound/sound-properties-capplet.c:141
+#: capplets/font/font-properties.desktop.in.h:1
+#, fuzzy
+msgid "Font"
+msgstr "Keuze Lettertype"
+
+#: capplets/font/font-properties.desktop.in.h:2
+#, fuzzy
+msgid "Select which font to use"
+msgstr "Kies welk gtk+ thema wordt gebruikt"
+
+#: capplets/keyboard/gnome-keyboard-properties.c:315
+#: capplets/keyboard/gnome-keyboard-properties.c:317
+#: capplets/sound/sound-properties-capplet.c:135
+#: capplets/sound/sound-properties-capplet.c:137
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
-"Instellingen toepassen en sluiten (enkel voor compatibiliteit, wordt nu door een daemon gedaan)"
+"Instellingen toepassen en sluiten (enkel voor compatibiliteit, wordt nu door "
+"een daemon gedaan)"
 
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
@@ -534,7 +523,7 @@ msgstr "Toetsenbord"
 msgid "Keyboard Properties"
 msgstr "Toetsenbord Instellingen"
 
-#: capplets/mouse/gnome-mouse-properties.c:519
+#: capplets/mouse/gnome-mouse-properties.c:518
 #: capplets/mouse/mouse.desktop.in.h:2
 msgid "Mouse Properties"
 msgstr "Muis Instellingen"
@@ -555,7 +544,7 @@ msgstr "Schermbeveiliging"
 msgid "Configure GNOME's use of sound"
 msgstr "Configureer het gebruik van geluid in GNOME"
 
-#: capplets/sound/sound-properties-capplet.c:171
+#: capplets/sound/sound-properties-capplet.c:167
 msgid "Sound properties"
 msgstr "Geluid Instellingen"
 
@@ -645,7 +634,7 @@ msgstr "Gtk+ Thema Selectie"
 msgid "Select which gtk+ theme to use"
 msgstr "Kies welk gtk+ thema wordt gebruikt"
 
-#: capplets/theme-switcher/main.c:213
+#: capplets/theme-switcher/main.c:217
 msgid "Select a theme to install"
 msgstr "Selecteer een te installeren thema"
 
@@ -707,6 +696,10 @@ msgstr "GNOME Configuratie Centrum: %s"
 msgid "The GNOME configuration tool"
 msgstr "Het GNOME configuratie gereedschap"
 
+#: control-center/main.c:44
+msgid "Use shell even if nautilus is running."
+msgstr ""
+
 #: libbackground/applier.c:239
 msgid "Type"
 msgstr "Type"
@@ -719,12 +712,12 @@ msgstr ""
 "Type bg_applier: BG_APPLIER_ROOT voor root venster of BG_APPLIER_PREVIEW "
 "voor een voorbeeld"
 
-#: libbackground/applier.c:402
+#: libbackground/applier.c:399
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr "Kon pixbuf \"%s\" niet laden; achtergrond uitgeschakeld."
 
-#: libbackground/applier.c:475
+#: libbackground/applier.c:522
 msgid "Disabled"
 msgstr "Uitgeschakeld"
 
@@ -757,6 +750,28 @@ msgstr "Afspelen"
 #: libsounds/sound-view.c:193
 msgid "Select sound file"
 msgstr "Selecteer geluidsbestand"
+
+#~ msgid ""
+#~ "Couldn't find the file '%s'.\n"
+#~ "\n"
+#~ "Please make sure it exists and try again, or choose a different "
+#~ "background picture."
+#~ msgstr ""
+#~ "Kan bestand '%s' niet vinden.\n"
+#~ "\n"
+#~ "Controleer of het bestaat en probeer opnieuw, of kies een andere "
+#~ "achtergrond figuur."
+
+#~ msgid ""
+#~ "I don't know how to open the file '%s'.\n"
+#~ "Perhaps its a kind of picture that is not yet supported.\n"
+#~ "\n"
+#~ "Please select a different picture instead."
+#~ msgstr ""
+#~ "Ik weet niet hoe ik het bestand '%s' moet openen.\n"
+#~ "Misschien is het bestandsformaat nog niet ondersteund.\n"
+#~ "\n"
+#~ "Selecteer een andere figuur."
 
 #~ msgid "Default location"
 #~ msgstr "Standaard locatie"
@@ -801,7 +816,8 @@ msgstr "Selecteer geluidsbestand"
 #~ msgstr "Selecteer een Web Browser"
 
 #~ msgid "Please enter the command line used to start this web browser"
-#~ msgstr "Geef hieronder een commando lijn waarmee deze web browser wordt gestart"
+#~ msgstr ""
+#~ "Geef hieronder een commando lijn waarmee deze web browser wordt gestart"
 
 #~ msgid "Web Browser"
 #~ msgstr "Web Browser"
@@ -810,7 +826,8 @@ msgstr "Selecteer geluidsbestand"
 #~ msgstr "Selecteer een Viewer"
 
 #~ msgid "Please enter the command line used to start this help viewer"
-#~ msgstr "Geef hieronder een commando lijn waarmee deze help viewer wordt gestart"
+#~ msgstr ""
+#~ "Geef hieronder een commando lijn waarmee deze help viewer wordt gestart"
 
 #~ msgid "Help Viewer"
 #~ msgstr "Help Viewer"
@@ -822,7 +839,8 @@ msgstr "Selecteer geluidsbestand"
 #~ msgstr "Aangepaste Terminal"
 
 #~ msgid "Please enter the command line used to start this terminal"
-#~ msgstr "Geef hieronder een commando lijn waarmee deze terminal wordt gestart"
+#~ msgstr ""
+#~ "Geef hieronder een commando lijn waarmee deze terminal wordt gestart"
 
 #~ msgid "Terminal"
 #~ msgstr "Terminal"
@@ -2346,9 +2364,6 @@ msgstr "Selecteer geluidsbestand"
 #~ msgstr ""
 #~ "Installeer nieuw\n"
 #~ "thema..."
-
-#~ msgid "User Font"
-#~ msgstr "Keuze Lettertype"
 
 #~ msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
 #~ msgstr "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"

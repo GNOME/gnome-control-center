@@ -19,7 +19,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 1.99.0\n"
-"POT-Creation-Date: 2002-02-05 23:17+0200\n"
+"POT-Creation-Date: 2002-02-12 00:27-0600\n"
 "PO-Revision-Date: 2002-02-09 22:41+0200\n"
 "Last-Translator: Pauli Virtanen <pauli.virtanen@saunalahti.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -35,42 +35,18 @@ msgstr "Tausta"
 msgid "Configuration of the desktop's background"
 msgstr "Työpöydän taustan asetukset"
 
-#: capplets/background/background-properties-capplet.c:459
-#, c-format
-msgid ""
-"Couldn't find the file '%s'.\n"
-"\n"
-"Please make sure it exists and try again, or choose a different background "
-"picture."
-msgstr ""
-"Ei löytänyt tiedostoa \"%s\".\n"
-"\n"
-"Varmista, että se on olemassa ja yritä uudelleen, tai valitse toinen taustakuva."
-
-#: capplets/background/background-properties-capplet.c:484
-#, c-format
-msgid ""
-"I don't know how to open the file '%s'.\n"
-"Perhaps its a kind of picture that is not yet supported.\n"
-"\n"
-"Please select a different picture instead."
-msgstr ""
-"Ei tiedä, miten tiedosto \"%s\" avataan.\n"
-"Ehkäpä tämäntyyppisiä kuvia ei vielä tueta.\n"
-"\n"
-"Valitse toinen kuva."
-
-#: capplets/background/background-properties-capplet.c:779
+#: capplets/background/background-properties-capplet.c:291
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:615
-#: capplets/keyboard/gnome-keyboard-properties.c:267
-#: capplets/mouse/gnome-mouse-properties.c:473
-#: capplets/sound/sound-properties-capplet.c:143
+#: capplets/default-applications/gnome-default-applications-properties.c:575
+#: capplets/keyboard/gnome-keyboard-properties.c:319
+#: capplets/mouse/gnome-mouse-properties.c:493
+#: capplets/sound/sound-properties-capplet.c:139
 msgid "Retrieve and store legacy settings"
 msgstr "Hae ja tallenna aikaisempien versioiden asetukset"
 
-#: capplets/background/background-properties-capplet.c:815
-msgid "Background Properties"
+#: capplets/background/background-properties-capplet.c:315
+#, fuzzy
+msgid "Background properties"
 msgstr "Taustan ominaisuudet"
 
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
@@ -439,7 +415,9 @@ msgstr "Ei mikään"
 msgid ""
 "Invalid MIME type. Please enter a valid MIME type, or leave the field blank "
 "to have one generated for you."
-msgstr "Virheellinen MIME-tyyppi. Syötä kelvollinen MIME-tyyppi, tai jätä kenttä tyhjäksi, niin sellainen syntyy."
+msgstr ""
+"Virheellinen MIME-tyyppi. Syötä kelvollinen MIME-tyyppi, tai jätä kenttä "
+"tyhjäksi, niin sellainen syntyy."
 
 #: capplets/file-types/mime-edit-dialog.c:684
 msgid "There already exists a MIME type of that name."
@@ -490,7 +468,9 @@ msgstr "Kirjoita protokollan nimi."
 msgid ""
 "Invalid protocol name. Please enter a protocol name without any spaces or "
 "punctuation."
-msgstr "Virheellinen protokollan nimi. Anna protokollan nimi ilman välilyöntejä tai -merkkejä."
+msgstr ""
+"Virheellinen protokollan nimi. Anna protokollan nimi ilman välilyöntejä tai -"
+"merkkejä."
 
 #: capplets/file-types/service-edit-dialog.c:515
 msgid "There is already a protocol by that name."
@@ -520,10 +500,20 @@ msgstr "Manuaalisivut"
 msgid "Electronic mail transmission"
 msgstr "Sähköpostin välitys"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:263
-#: capplets/keyboard/gnome-keyboard-properties.c:265
-#: capplets/sound/sound-properties-capplet.c:139
-#: capplets/sound/sound-properties-capplet.c:141
+#: capplets/font/font-properties.desktop.in.h:1
+#, fuzzy
+msgid "Font"
+msgstr "Metsä"
+
+#: capplets/font/font-properties.desktop.in.h:2
+#, fuzzy
+msgid "Select which font to use"
+msgstr "Valitse, mitä gtk+:n teemaa käytetään"
+
+#: capplets/keyboard/gnome-keyboard-properties.c:315
+#: capplets/keyboard/gnome-keyboard-properties.c:317
+#: capplets/sound/sound-properties-capplet.c:135
+#: capplets/sound/sound-properties-capplet.c:137
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
@@ -538,7 +528,7 @@ msgstr "Näppäimistö"
 msgid "Keyboard Properties"
 msgstr "Näppäimistöasetukset"
 
-#: capplets/mouse/gnome-mouse-properties.c:498
+#: capplets/mouse/gnome-mouse-properties.c:518
 #: capplets/mouse/mouse.desktop.in.h:2
 msgid "Mouse Properties"
 msgstr "Hiiriasetukset"
@@ -559,7 +549,7 @@ msgstr "Näytönsäästäjä"
 msgid "Configure GNOME's use of sound"
 msgstr "Muokkaa Gnomen ääniasetuksia"
 
-#: capplets/sound/sound-properties-capplet.c:171
+#: capplets/sound/sound-properties-capplet.c:167
 msgid "Sound properties"
 msgstr "Ääniominaisuudet"
 
@@ -649,7 +639,7 @@ msgstr "Gtk+:n teeman valitsin"
 msgid "Select which gtk+ theme to use"
 msgstr "Valitse, mitä gtk+:n teemaa käytetään"
 
-#: capplets/theme-switcher/main.c:213
+#: capplets/theme-switcher/main.c:217
 msgid "Select a theme to install"
 msgstr "Valitse asennettava teema"
 
@@ -713,11 +703,15 @@ msgstr "GNOMEn hallintakeskus: %s"
 msgid "The GNOME configuration tool"
 msgstr "Gnomen hallintatyökalu"
 
-#: libbackground/applier.c:233
+#: control-center/main.c:44
+msgid "Use shell even if nautilus is running."
+msgstr ""
+
+#: libbackground/applier.c:239
 msgid "Type"
 msgstr "Tyyppi"
 
-#: libbackground/applier.c:234
+#: libbackground/applier.c:240
 msgid ""
 "Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
 "for preview"
@@ -725,12 +719,12 @@ msgstr ""
 "bg_applierin tyyppi: BG_APPLIER_ROOT juuri-ikkunalle ja BG_APPLIER_PREVIEW "
 "esikatselulle"
 
-#: libbackground/applier.c:396
+#: libbackground/applier.c:399
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr "Ei voinut ladata kuvaa \"%s\", joten taustakuvaa ei ole."
 
-#: libbackground/applier.c:461
+#: libbackground/applier.c:522
 msgid "Disabled"
 msgstr "Pois käytöstä"
 
@@ -763,6 +757,28 @@ msgstr "Soita"
 #: libsounds/sound-view.c:193
 msgid "Select sound file"
 msgstr "Valitse äänitiedosto"
+
+#~ msgid ""
+#~ "Couldn't find the file '%s'.\n"
+#~ "\n"
+#~ "Please make sure it exists and try again, or choose a different "
+#~ "background picture."
+#~ msgstr ""
+#~ "Ei löytänyt tiedostoa \"%s\".\n"
+#~ "\n"
+#~ "Varmista, että se on olemassa ja yritä uudelleen, tai valitse toinen "
+#~ "taustakuva."
+
+#~ msgid ""
+#~ "I don't know how to open the file '%s'.\n"
+#~ "Perhaps its a kind of picture that is not yet supported.\n"
+#~ "\n"
+#~ "Please select a different picture instead."
+#~ msgstr ""
+#~ "Ei tiedä, miten tiedosto \"%s\" avataan.\n"
+#~ "Ehkäpä tämäntyyppisiä kuvia ei vielä tueta.\n"
+#~ "\n"
+#~ "Valitse toinen kuva."
 
 #~ msgid "Main"
 #~ msgstr "Pää"
@@ -1578,9 +1594,6 @@ msgstr "Valitse äänitiedosto"
 
 #~ msgid "Delay between redraws."
 #~ msgstr "Piirtojen välinen viive."
-
-#~ msgid "Forest"
-#~ msgstr "Metsä"
 
 #~ msgid "Number of trees to use."
 #~ msgstr "Puiden määrä."

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.99.2\n"
-"POT-Creation-Date: 2002-02-06 18:28+0900\n"
+"POT-Creation-Date: 2002-02-12 00:27-0600\n"
 "PO-Revision-Date: 2002-02-06 10:03+0900\n"
 "Last-Translator: Young-Ho Cha <ganadist@chollian.net>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -17,42 +17,18 @@ msgstr "배경"
 msgid "Configuration of the desktop's background"
 msgstr "바탕화면의 배경을 설정합니다"
 
-#: capplets/background/background-properties-capplet.c:459
-#, c-format
-msgid ""
-"Couldn't find the file '%s'.\n"
-"\n"
-"Please make sure it exists and try again, or choose a different background "
-"picture."
-msgstr ""
-"파일 '%s'를 찾을 수 없습니다.\n"
-"\n"
-"파일이 있는지 확인하고 다시 시도하거나, 다른 배경 그림을 선택하십시오."
-
-#: capplets/background/background-properties-capplet.c:484
-#, c-format
-msgid ""
-"I don't know how to open the file '%s'.\n"
-"Perhaps its a kind of picture that is not yet supported.\n"
-"\n"
-"Please select a different picture instead."
-msgstr ""
-"파일 '%s'를 열수 있는 방법이 없습니다.\n"
-"이러한 그림형식을 아직 지원하지 않습니다.\n"
-"\n"
-"대신 다른 그림을 선택하십시오."
-
-#: capplets/background/background-properties-capplet.c:779
+#: capplets/background/background-properties-capplet.c:291
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:615
-#: capplets/keyboard/gnome-keyboard-properties.c:267
-#: capplets/mouse/gnome-mouse-properties.c:473
-#: capplets/sound/sound-properties-capplet.c:143
+#: capplets/default-applications/gnome-default-applications-properties.c:575
+#: capplets/keyboard/gnome-keyboard-properties.c:319
+#: capplets/mouse/gnome-mouse-properties.c:493
+#: capplets/sound/sound-properties-capplet.c:139
 msgid "Retrieve and store legacy settings"
 msgstr "물려받은 설정을 되찾아서 저장합니다"
 
-#: capplets/background/background-properties-capplet.c:815
-msgid "Background Properties"
+#: capplets/background/background-properties-capplet.c:315
+#, fuzzy
+msgid "Background properties"
 msgstr "배경 설정"
 
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
@@ -503,14 +479,22 @@ msgstr "설명서 페이지"
 msgid "Electronic mail transmission"
 msgstr "전자 메일 전송"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:263
-#: capplets/keyboard/gnome-keyboard-properties.c:265
-#: capplets/sound/sound-properties-capplet.c:139
-#: capplets/sound/sound-properties-capplet.c:141
+#: capplets/font/font-properties.desktop.in.h:1
+msgid "Font"
+msgstr ""
+
+#: capplets/font/font-properties.desktop.in.h:2
+#, fuzzy
+msgid "Select which font to use"
+msgstr "사용할 gtk+ 테마를 선택합니다"
+
+#: capplets/keyboard/gnome-keyboard-properties.c:315
+#: capplets/keyboard/gnome-keyboard-properties.c:317
+#: capplets/sound/sound-properties-capplet.c:135
+#: capplets/sound/sound-properties-capplet.c:137
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
-msgstr ""
-"설정을 적용하고 마칩니다 (호환성; 이제 데몬이 처리합니다)"
+msgstr "설정을 적용하고 마칩니다 (호환성; 이제 데몬이 처리합니다)"
 
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
@@ -520,7 +504,7 @@ msgstr "글쇠판"
 msgid "Keyboard Properties"
 msgstr "글쇠판 설정"
 
-#: capplets/mouse/gnome-mouse-properties.c:498
+#: capplets/mouse/gnome-mouse-properties.c:518
 #: capplets/mouse/mouse.desktop.in.h:2
 msgid "Mouse Properties"
 msgstr "마우스 설정"
@@ -541,7 +525,7 @@ msgstr "화면 보호기"
 msgid "Configure GNOME's use of sound"
 msgstr "그놈에서 사용되는 소리를 설정합니다"
 
-#: capplets/sound/sound-properties-capplet.c:171
+#: capplets/sound/sound-properties-capplet.c:167
 msgid "Sound properties"
 msgstr "소리 설정"
 
@@ -631,7 +615,7 @@ msgstr "Gtk+ 테마 선택기"
 msgid "Select which gtk+ theme to use"
 msgstr "사용할 gtk+ 테마를 선택합니다"
 
-#: capplets/theme-switcher/main.c:213
+#: capplets/theme-switcher/main.c:217
 msgid "Select a theme to install"
 msgstr "설치할 테마 선택"
 
@@ -693,22 +677,26 @@ msgstr "그놈 조정 센터: %s"
 msgid "The GNOME configuration tool"
 msgstr "그놈 설정 도구"
 
-#: libbackground/applier.c:233
+#: control-center/main.c:44
+msgid "Use shell even if nautilus is running."
+msgstr ""
+
+#: libbackground/applier.c:239
 msgid "Type"
 msgstr ""
 
-#: libbackground/applier.c:234
+#: libbackground/applier.c:240
 msgid ""
 "Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
 "for preview"
 msgstr ""
 
-#: libbackground/applier.c:396
+#: libbackground/applier.c:399
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr "pixbuf \"%s\"를 읽을수 없음; 배경그림을 사용할수 없습니다."
 
-#: libbackground/applier.c:461
+#: libbackground/applier.c:522
 msgid "Disabled"
 msgstr "사용 않음"
 
@@ -738,3 +726,24 @@ msgstr "연주"
 #: libsounds/sound-view.c:193
 msgid "Select sound file"
 msgstr "소리 파일 선택"
+
+#~ msgid ""
+#~ "Couldn't find the file '%s'.\n"
+#~ "\n"
+#~ "Please make sure it exists and try again, or choose a different "
+#~ "background picture."
+#~ msgstr ""
+#~ "파일 '%s'를 찾을 수 없습니다.\n"
+#~ "\n"
+#~ "파일이 있는지 확인하고 다시 시도하거나, 다른 배경 그림을 선택하십시오."
+
+#~ msgid ""
+#~ "I don't know how to open the file '%s'.\n"
+#~ "Perhaps its a kind of picture that is not yet supported.\n"
+#~ "\n"
+#~ "Please select a different picture instead."
+#~ msgstr ""
+#~ "파일 '%s'를 열수 있는 방법이 없습니다.\n"
+#~ "이러한 그림형식을 아직 지원하지 않습니다.\n"
+#~ "\n"
+#~ "대신 다른 그림을 선택하십시오."

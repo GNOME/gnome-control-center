@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 2.0\n"
-"POT-Creation-Date: 2002-02-06 00:14+0000\n"
+"POT-Creation-Date: 2002-02-12 00:27-0600\n"
 "PO-Revision-Date: 2002-02-06 00:05+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <none@none.none>\n"
@@ -22,43 +22,18 @@ msgstr "Fundo"
 msgid "Configuration of the desktop's background"
 msgstr "Configuração do fundo do ambiente de trabalho"
 
-#: capplets/background/background-properties-capplet.c:458
-#, c-format
-msgid ""
-"Couldn't find the file '%s'.\n"
-"\n"
-"Please make sure it exists and try again, or choose a different background "
-"picture."
-msgstr ""
-"Incapaz de encontrar o ficheiro '%s'.\n"
-"\n"
-"Certifique-se de que ele existe e tente novamente, ou seleccione uma imagem "
-"de fundo diferente."
-
-#: capplets/background/background-properties-capplet.c:483
-#, c-format
-msgid ""
-"I don't know how to open the file '%s'.\n"
-"Perhaps its a kind of picture that is not yet supported.\n"
-"\n"
-"Please select a different picture instead."
-msgstr ""
-"Desconhece-se forma de abrir o ficheiro '%s'.\n"
-"Talvez seja um tipo de imagem ainda não suportado.\n"
-"\n"
-"Seleccione outra imagem diferente."
-
-#: capplets/background/background-properties-capplet.c:778
+#: capplets/background/background-properties-capplet.c:291
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:615
-#: capplets/keyboard/gnome-keyboard-properties.c:267
-#: capplets/mouse/gnome-mouse-properties.c:473
-#: capplets/sound/sound-properties-capplet.c:143
+#: capplets/default-applications/gnome-default-applications-properties.c:575
+#: capplets/keyboard/gnome-keyboard-properties.c:319
+#: capplets/mouse/gnome-mouse-properties.c:493
+#: capplets/sound/sound-properties-capplet.c:139
 msgid "Retrieve and store legacy settings"
 msgstr "Recuperar e armazenar configurações obsoletas"
 
-#: capplets/background/background-properties-capplet.c:814
-msgid "Background Properties"
+#: capplets/background/background-properties-capplet.c:315
+#, fuzzy
+msgid "Background properties"
 msgstr "Propriedades Fundo"
 
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
@@ -521,10 +496,19 @@ msgstr "Páginas manual"
 msgid "Electronic mail transmission"
 msgstr "Transmissão de correio electrónico"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:263
-#: capplets/keyboard/gnome-keyboard-properties.c:265
-#: capplets/sound/sound-properties-capplet.c:139
-#: capplets/sound/sound-properties-capplet.c:141
+#: capplets/font/font-properties.desktop.in.h:1
+msgid "Font"
+msgstr ""
+
+#: capplets/font/font-properties.desktop.in.h:2
+#, fuzzy
+msgid "Select which font to use"
+msgstr "Seleccione que tema gtk+ utilizar"
+
+#: capplets/keyboard/gnome-keyboard-properties.c:315
+#: capplets/keyboard/gnome-keyboard-properties.c:317
+#: capplets/sound/sound-properties-capplet.c:135
+#: capplets/sound/sound-properties-capplet.c:137
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
@@ -539,7 +523,7 @@ msgstr "Teclado"
 msgid "Keyboard Properties"
 msgstr "Propriedades do Teclado"
 
-#: capplets/mouse/gnome-mouse-properties.c:498
+#: capplets/mouse/gnome-mouse-properties.c:518
 #: capplets/mouse/mouse.desktop.in.h:2
 msgid "Mouse Properties"
 msgstr "Propriedades do Rato"
@@ -560,7 +544,7 @@ msgstr "Protecção de Ecrã"
 msgid "Configure GNOME's use of sound"
 msgstr "Configurar a utilização de som pelo GNOME"
 
-#: capplets/sound/sound-properties-capplet.c:171
+#: capplets/sound/sound-properties-capplet.c:167
 msgid "Sound properties"
 msgstr "Propriedades do som"
 
@@ -650,7 +634,7 @@ msgstr "Selector de Temas Gtk+"
 msgid "Select which gtk+ theme to use"
 msgstr "Seleccione que tema gtk+ utilizar"
 
-#: capplets/theme-switcher/main.c:213
+#: capplets/theme-switcher/main.c:217
 msgid "Select a theme to install"
 msgstr "Seleccione o tema a instalar"
 
@@ -712,11 +696,15 @@ msgstr "Centro de Controlo GNOME: %s"
 msgid "The GNOME configuration tool"
 msgstr "A ferramenta de configuração GNOME"
 
-#: libbackground/applier.c:233
+#: control-center/main.c:44
+msgid "Use shell even if nautilus is running."
+msgstr ""
+
+#: libbackground/applier.c:239
 msgid "Type"
 msgstr "Tipo"
 
-#: libbackground/applier.c:234
+#: libbackground/applier.c:240
 msgid ""
 "Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
 "for preview"
@@ -724,12 +712,12 @@ msgstr ""
 "Tipo de bg_applier: BG_APPLIER_ROOT para janela raiz ou BG_APPLIER_PREVIEW "
 "para prever"
 
-#: libbackground/applier.c:396
+#: libbackground/applier.c:399
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr "Incapaz de ler pixbuf \"%s\"; a desabilitar papel de parede."
 
-#: libbackground/applier.c:461
+#: libbackground/applier.c:522
 msgid "Disabled"
 msgstr "Desabilitado"
 
@@ -762,3 +750,25 @@ msgstr "Ouvir"
 #: libsounds/sound-view.c:193
 msgid "Select sound file"
 msgstr "Seleccione ficheiro de som"
+
+#~ msgid ""
+#~ "Couldn't find the file '%s'.\n"
+#~ "\n"
+#~ "Please make sure it exists and try again, or choose a different "
+#~ "background picture."
+#~ msgstr ""
+#~ "Incapaz de encontrar o ficheiro '%s'.\n"
+#~ "\n"
+#~ "Certifique-se de que ele existe e tente novamente, ou seleccione uma "
+#~ "imagem de fundo diferente."
+
+#~ msgid ""
+#~ "I don't know how to open the file '%s'.\n"
+#~ "Perhaps its a kind of picture that is not yet supported.\n"
+#~ "\n"
+#~ "Please select a different picture instead."
+#~ msgstr ""
+#~ "Desconhece-se forma de abrir o ficheiro '%s'.\n"
+#~ "Talvez seja um tipo de imagem ainda não suportado.\n"
+#~ "\n"
+#~ "Seleccione outra imagem diferente."

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.5.8\n"
-"POT-Creation-Date: 2002-02-10 14:30+0100\n"
+"POT-Creation-Date: 2002-02-12 00:27-0600\n"
 "PO-Revision-Date: 2002-02-10 14:30+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
@@ -21,43 +21,18 @@ msgstr "Bakgrunn"
 msgid "Configuration of the desktop's background"
 msgstr "Konfigurasjon av skrivebordsbakgrunn"
 
-#: capplets/background/background-properties-capplet.c:462
-#, c-format
-msgid ""
-"Couldn't find the file '%s'.\n"
-"\n"
-"Please make sure it exists and try again, or choose a different background "
-"picture."
-msgstr ""
-"Kunne ikke finne filen «%s».\n"
-"\n"
-"Vennligst sjekk at denne eksisterer og prøv på nytt, eller velg et annet "
-"bakgrunnsbilde."
-
-#: capplets/background/background-properties-capplet.c:487
-#, c-format
-msgid ""
-"I don't know how to open the file '%s'.\n"
-"Perhaps its a kind of picture that is not yet supported.\n"
-"\n"
-"Please select a different picture instead."
-msgstr ""
-"Vet ikke hvordan jeg skal åpne filen «%s».\n"
-"Kanskje det er en bildetype som ikke er støttet ennå.\n"
-"\n"
-"Vennligst velg et annet bilde i stedet."
-
-#: capplets/background/background-properties-capplet.c:794
+#: capplets/background/background-properties-capplet.c:291
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:615
-#: capplets/keyboard/gnome-keyboard-properties.c:279
-#: capplets/mouse/gnome-mouse-properties.c:494
-#: capplets/sound/sound-properties-capplet.c:143
+#: capplets/default-applications/gnome-default-applications-properties.c:575
+#: capplets/keyboard/gnome-keyboard-properties.c:319
+#: capplets/mouse/gnome-mouse-properties.c:493
+#: capplets/sound/sound-properties-capplet.c:139
 msgid "Retrieve and store legacy settings"
 msgstr "Hent og lagre gamle innstillinger"
 
-#: capplets/background/background-properties-capplet.c:830
-msgid "Background Properties"
+#: capplets/background/background-properties-capplet.c:315
+#, fuzzy
+msgid "Background properties"
 msgstr "Egenskaper for bakgrunn"
 
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
@@ -518,10 +493,18 @@ msgstr "Manualsider"
 msgid "Electronic mail transmission"
 msgstr "Overføring av elektronisk post"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:275
-#: capplets/keyboard/gnome-keyboard-properties.c:277
-#: capplets/sound/sound-properties-capplet.c:139
-#: capplets/sound/sound-properties-capplet.c:141
+#: capplets/font/font-properties.desktop.in.h:1
+msgid "Font"
+msgstr "Skrift"
+
+#: capplets/font/font-properties.desktop.in.h:2
+msgid "Select which font to use"
+msgstr "Velg skrift som skal brukes"
+
+#: capplets/keyboard/gnome-keyboard-properties.c:315
+#: capplets/keyboard/gnome-keyboard-properties.c:317
+#: capplets/sound/sound-properties-capplet.c:135
+#: capplets/sound/sound-properties-capplet.c:137
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
@@ -536,7 +519,7 @@ msgstr "Tastatur"
 msgid "Keyboard Properties"
 msgstr "Egenskaper for tastatur"
 
-#: capplets/mouse/gnome-mouse-properties.c:519
+#: capplets/mouse/gnome-mouse-properties.c:518
 #: capplets/mouse/mouse.desktop.in.h:2
 msgid "Mouse Properties"
 msgstr "Egenskaper for mus"
@@ -557,7 +540,7 @@ msgstr "Skjermsparer"
 msgid "Configure GNOME's use of sound"
 msgstr "Konfigurér bruk av lyd i GNOME."
 
-#: capplets/sound/sound-properties-capplet.c:171
+#: capplets/sound/sound-properties-capplet.c:167
 msgid "Sound properties"
 msgstr "Egenskaper for lyd"
 
@@ -647,7 +630,7 @@ msgstr "Gtk+ temavelger"
 msgid "Select which gtk+ theme to use"
 msgstr "Velg gtk+-tema som skal brukes"
 
-#: capplets/theme-switcher/main.c:213
+#: capplets/theme-switcher/main.c:217
 msgid "Select a theme to install"
 msgstr "Velg et tema som skal installeres"
 
@@ -725,12 +708,12 @@ msgstr ""
 "Type bg_applier: BG_APPLIER_ROOT for rotvinduet eller BG_APPLIER_PREVIEW for "
 "forhåndsvisning"
 
-#: libbackground/applier.c:402
+#: libbackground/applier.c:399
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr "Kunne ikke laste pixbuf \"%s\"; slår av bakgrunn."
 
-#: libbackground/applier.c:475
+#: libbackground/applier.c:522
 msgid "Disabled"
 msgstr "Slått av"
 
@@ -764,13 +747,27 @@ msgstr "Spill"
 msgid "Select sound file"
 msgstr "Velg lydfil"
 
-#: capplets/font/font-properties.desktop.in.h:1
-msgid "Font"
-msgstr "Skrift"
+#~ msgid ""
+#~ "Couldn't find the file '%s'.\n"
+#~ "\n"
+#~ "Please make sure it exists and try again, or choose a different "
+#~ "background picture."
+#~ msgstr ""
+#~ "Kunne ikke finne filen «%s».\n"
+#~ "\n"
+#~ "Vennligst sjekk at denne eksisterer og prøv på nytt, eller velg et annet "
+#~ "bakgrunnsbilde."
 
-#: capplets/font/font-properties.desktop.in.h:2
-msgid "Select which font to use"
-msgstr "Velg skrift som skal brukes"
+#~ msgid ""
+#~ "I don't know how to open the file '%s'.\n"
+#~ "Perhaps its a kind of picture that is not yet supported.\n"
+#~ "\n"
+#~ "Please select a different picture instead."
+#~ msgstr ""
+#~ "Vet ikke hvordan jeg skal åpne filen «%s».\n"
+#~ "Kanskje det er en bildetype som ikke er støttet ennå.\n"
+#~ "\n"
+#~ "Vennligst velg et annet bilde i stedet."
 
 #~ msgid "Main"
 #~ msgstr "Hoved"
