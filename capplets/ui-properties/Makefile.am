@@ -1,5 +1,3 @@
-cappletname = behavior
-cappletgroup = "Advanced/"
 bin_PROGRAMS = ui-properties
 
 ui_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
@@ -11,21 +9,11 @@ ui_properties_SOURCES = \
 	preferences.c			preferences.h\
 	main.c
 
-pixmap_DATA = 
-
-##
-## You should not need to modify anything below this line
-##
 @INTLTOOL_DESKTOP_RULE@
-@GNOMECC_CAPPLETS_DESKTOP_IN_RULE@
+
+desktopdir = $(GNOMECC_DATA_DIR)/capplets/Advanced
+desktop_DATA = behavior.desktop
 
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
-EXTRA_DIST = $(GNOMECC_CAPPLETS_EXTRA_DIST)
-iconsdir   = $(GNOMECC_ICONS_DIR)
-Gladedir   = $(GNOMECC_GLADE_DIR)
-pixmapdir  = $(GNOMECC_PIXMAPS_DIR)
-Glade_DATA = $(cappletname)-properties.glade
-icons_DATA = $(cappletname)-capplet.png
-desktop    = $(cappletname).desktop
-all-local: $(desktop)
+EXTRA_DIST = $(Glade_DATA) $(desktop_DATA)
