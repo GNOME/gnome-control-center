@@ -198,7 +198,13 @@ create_image (ThemeThumbnailData *theme_thumbnail_data,
   /* Handle the icon theme */
   icon_theme = gnome_icon_theme_new ();
   gnome_icon_theme_set_custom_theme (icon_theme, (char *) theme_thumbnail_data->icon_theme_name->data);
-  folder_icon_name = gnome_icon_theme_lookup_icon (icon_theme, "folder", 48, NULL, NULL);
+
+  /* Have to try both "folder" and "gnome-fs-directory" seems themes seem to use either name */
+  folder_icon_name = gnome_icon_theme_lookup_icon (icon_theme, "gnome-fs-directory", 48, NULL, NULL);
+  if (folder_icon_name == NULL) {
+    folder_icon_name = gnome_icon_theme_lookup_icon (icon_theme, "folder", 48, NULL, NULL);
+  }
+  
   if (folder_icon_name != NULL)
     {
       folder_icon = gdk_pixbuf_new_from_file (folder_icon_name, NULL);
