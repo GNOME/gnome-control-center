@@ -580,11 +580,13 @@ append_keys_to_tree (GladeXML           *dialog,
 
   if (i == 0)
     {
-      gtk_widget_hide (WID ("shortcuts_frame"));
+      gtk_widget_hide (WID ("shortcuts_vbox"));
+      gtk_widget_hide (WID ("shortcuts_hbox"));
     }
   else
     {
-      gtk_widget_show (WID ("shortcuts_frame"));
+      gtk_widget_show (WID ("shortcuts_vbox"));
+      gtk_widget_show (WID ("shortcuts_hbox"));
     }
 }
 
@@ -749,12 +751,6 @@ theme_changed_func (gpointer  uri,
   key_theme_changed (client, 0, entry, omenu);
 }
 
-static gboolean
-disable_collapsing_cb (GtkTreeView *tree_view, GtkTreeIter *iter, GtkTreePath *path, gpointer data)
-{
-  return TRUE;
-}
-
 
 typedef struct
 {
@@ -818,6 +814,8 @@ setup_dialog (GladeXML *dialog)
   GtkWidget *widget;
   gboolean found_keys = FALSE;
   GList *list;
+  GdkPixbuf *icon_pixbuf;
+  gchar *filename;
 
   client = gconf_client_get_default ();
 
@@ -857,15 +855,13 @@ setup_dialog (GladeXML *dialog)
     }
 
 
-  g_signal_connect (WID ("shortcut_treeview"), "test_collapse_row",
-		    G_CALLBACK (disable_collapsing_cb), NULL),
   g_signal_connect (GTK_TREE_VIEW (WID ("shortcut_treeview")),
 		    "button_press_event",
 		    G_CALLBACK (start_editing_cb), dialog),
 		    
   gtk_tree_view_insert_column_with_attributes (GTK_TREE_VIEW (WID ("shortcut_treeview")),
 					       -1,
-					       _("_Action"),
+					       _("Action"),
 					       gtk_cell_renderer_text_new (),
 					       "text", DESCRIPTION_COLUMN,
 					       NULL);
@@ -877,7 +873,7 @@ setup_dialog (GladeXML *dialog)
                     G_CALLBACK (accel_edited_callback),
                     WID ("shortcut_treeview"));
   gtk_tree_view_insert_column_with_data_func (GTK_TREE_VIEW (WID ("shortcut_treeview")),
-					      -1, _("_Shortcut"),
+					      -1, _("Shortcut"),
 					      renderer,
 					      accel_set_func, NULL, NULL);
   gconf_client_add_dir (client, "/apps/gnome_keybinding_properties", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
@@ -886,11 +882,16 @@ setup_dialog (GladeXML *dialog)
 			   "/apps/metacity/general/num_workspaces",
 			   (GConfClientNotifyFunc) &key_entry_controlling_key_changed,
 			   dialog, NULL, NULL);
-  
+
   /* set up the dialog */
   reload_key_entries (dialog);
 
   widget = WID ("gnome-keybinding-dialog");
+  filename = gnome_program_locate_file (NULL, GNOME_FILE_DOMAIN_APP_PIXMAP, "keyboard-shortcut.png", TRUE, NULL);
+  icon_pixbuf = gdk_pixbuf_new_from_file ("keyboard-shortcut.png", NULL);
+  gtk_window_set_icon (GTK_WINDOW (widget), icon_pixbuf);
+  g_free (filename);
+  g_object_unref (icon_pixbuf);
   gtk_widget_show (widget);
 
   g_signal_connect (G_OBJECT (widget), "response", gtk_main_quit, NULL);
