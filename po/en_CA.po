@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-04-25 00:29-0400\n"
-"PO-Revision-Date: 2004-04-25 11:06-0400\n"
-"Last-Translator: Adam Weinberger <adamw@gnome.org>\n"
+"POT-Creation-Date: 2004-05-15 13:51-0400\n"
+"PO-Revision-Date: 2004-05-15 13:55-0400\n"
+"Last-Translator: Alexander Winston <alexander.winston@comcast.net>\n"
 "Language-Team: English/Canada <adamw@FreeBSD.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -376,36 +376,36 @@ msgstr "_Style:"
 msgid "There was an error displaying help: %s"
 msgstr "There was an error displaying help: %s"
 
-#: capplets/background/gnome-wp-capplet.c:1290
+#: capplets/background/gnome-wp-capplet.c:1281
 msgid "Centered"
 msgstr "Centred"
 
-#: capplets/background/gnome-wp-capplet.c:1312
+#: capplets/background/gnome-wp-capplet.c:1303
 msgid "Fill Screen"
 msgstr "Fill Screen"
 
-#: capplets/background/gnome-wp-capplet.c:1332
+#: capplets/background/gnome-wp-capplet.c:1323
 msgid "Scaled"
 msgstr "Scaled"
 
-#: capplets/background/gnome-wp-capplet.c:1352
+#: capplets/background/gnome-wp-capplet.c:1343
 msgid "Tiled"
 msgstr "Tiled"
 
-#: capplets/background/gnome-wp-capplet.c:1384
+#: capplets/background/gnome-wp-capplet.c:1375
 msgid "Solid Color"
 msgstr "Solid Colour"
 
-#: capplets/background/gnome-wp-capplet.c:1400
+#: capplets/background/gnome-wp-capplet.c:1391
 msgid "Horizontal Gradient"
 msgstr "Horizontal Gradient"
 
-#: capplets/background/gnome-wp-capplet.c:1416
+#: capplets/background/gnome-wp-capplet.c:1407
 msgid "Vertical Gradient"
 msgstr "Vertical Gradient"
 
-#: capplets/background/gnome-wp-capplet.c:1453
-#: capplets/background/gnome-wp-capplet.c:1464
+#. Create the file chooser dialog stuff here
+#: capplets/background/gnome-wp-capplet.c:1443
 msgid "Add Wallpaper"
 msgstr "Add Wallpaper"
 
@@ -944,11 +944,9 @@ msgstr "_Keep resolution"
 
 #: capplets/display/main.c:803
 msgid ""
-"The XServer does not support the XRandR extension.  Runtime resolution "
+"The X Server does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
-msgstr ""
-"The XServer does not support the XRandR extension.  Runtime resolution "
-"changes to the display size are not available."
+msgstr "The X Server does not support the XRandR extension.  Runtime resolution changes to the display size are not available."
 
 #: capplets/display/main.c:811
 msgid ""
@@ -2508,7 +2506,7 @@ msgstr ""
 "Error while trying to run (%s)\n"
 "which is linked to the key (%s)"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:65
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:70
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2533,7 +2531,7 @@ msgstr ""
 "- The result of <b>xprop -root | grep XKB</b>\n"
 "- The result of <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/xkb</b>"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:75
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:80
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2545,7 +2543,21 @@ msgstr ""
 "Try using simpler configuration or taking more fresh version of XFree "
 "software."
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:151
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:163
+msgid ""
+"The X system keyboard settings differ from your current GNOME keyboard "
+"settings.  Which set would you like to use?"
+msgstr "The X system keyboard settings differ from your current GNOME keyboard settings.  Which set would you like to use?"
+
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:166
+msgid "Use X settings"
+msgstr "Use X settings"
+
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:168
+msgid "Use GNOME settings"
+msgstr "Use GNOME settings"
+
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:220
 #, c-format
 msgid ""
 "You have a keyboard remapping file (%s) in your home directory whose "
@@ -3273,4 +3285,3 @@ msgstr "Volume up"
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
 msgid "Volume up's shortcut."
 msgstr "Volume up's shortcut."
-
