@@ -936,7 +936,7 @@ top_theme_dir_changed (GnomeVFSMonitorHandle *handle,
       if (result == GNOME_VFS_OK && file_info->type == GNOME_VFS_FILE_TYPE_DIRECTORY)
 	{
 	  add_common_theme_dir_monitor (common_theme_dir_uri, NULL, monitor_data, NULL);
-	  g_hash_table_insert (handle_hash, file_info->name, monitor_data);
+	  g_hash_table_insert (handle_hash, g_strdup(file_info->name), monitor_data);
 	}
       gnome_vfs_file_info_unref (file_info);
     }
@@ -988,7 +988,7 @@ top_icon_theme_dir_changed (GnomeVFSMonitorHandle    *handle,
       if (result == GNOME_VFS_OK && file_info->type == GNOME_VFS_FILE_TYPE_DIRECTORY)
 	{
 	  add_common_icon_theme_dir_monitor (common_icon_theme_dir_uri, NULL, monitor_data, NULL);
-	  g_hash_table_insert (handle_hash, file_info->name, monitor_data);
+	  g_hash_table_insert (handle_hash, g_strdup(file_info->name), monitor_data);
 	}
       gnome_vfs_file_info_unref (file_info);
     }
@@ -1187,7 +1187,7 @@ real_add_top_theme_dir_monitor (GnomeVFSURI  *uri,
    * use it to remove the monitor handles when a dir is removed.
    */
   tuple = g_new0 (CallbackTuple, 1);
-  tuple->handle_hash = g_hash_table_new (g_str_hash, g_str_equal);
+  tuple->handle_hash = g_hash_table_new_full (g_str_hash, g_str_equal, (GDestroyNotify)g_free, NULL);
   tuple->priority = priority;
 
   /* Check the URI */
@@ -1251,7 +1251,7 @@ real_add_top_theme_dir_monitor (GnomeVFSURI  *uri,
 	}
 
 
-      g_hash_table_insert (tuple->handle_hash, file_info->name, monitor_data);
+      g_hash_table_insert (tuple->handle_hash, g_strdup(file_info->name), monitor_data);
       gnome_vfs_file_info_clear (file_info);
       gnome_vfs_uri_unref (theme_dir_uri);
     }

@@ -1,3 +1,9 @@
+2003-04-29  Kjartan Maraas  <set EMAIL_ADDRESS environment variable>
+
+	* mime-type-info.c: (mime_category_info_get_full_name),
+	(mime_category_info_get_full_description): Use g_string_new (NULL)
+	instead of g_string_new (""). Reported to be more efficient.
+
 Tue Feb  4 17:09:18 2003  Jonathan Blandford  <jrb@redhat.com>
 
 	* Release 2.2.0.1

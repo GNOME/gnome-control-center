@@ -374,7 +374,8 @@ gconf_peditor_new (gchar                 *key,
 	GCONF_PROPERTY_EDITOR (obj)->p->callback (client, 0, gconf_entry, obj);
 	GCONF_PROPERTY_EDITOR (obj)->p->inited = TRUE;
 	gconf_entry_free (gconf_entry);
-	
+	g_object_unref (G_OBJECT (client));
+
 	return obj;
 }
 

@@ -528,7 +528,7 @@ mime_category_info_get_full_name (MimeCategoryInfo *info)
 	ModelEntry *tmp;
 	gchar *ret, *s;
 
-	string = g_string_new ("");
+	string = g_string_new (NULL);
 
 	for (tmp = MODEL_ENTRY (info); tmp != NULL && tmp->type != MODEL_ENTRY_NONE; tmp = tmp->parent) {
 		g_string_prepend (string, MIME_CATEGORY_INFO (tmp)->name);
@@ -550,7 +550,7 @@ mime_category_info_get_full_description (MimeCategoryInfo *info)
 	ModelEntry *tmp;
 	gchar *ret, *s;
 
-	string = g_string_new ("");
+	string = g_string_new (NULL);
 
 	for (tmp = MODEL_ENTRY (info); tmp != NULL && tmp->type != MODEL_ENTRY_NONE; tmp = tmp->parent) {
 		g_string_prepend (string, MIME_CATEGORY_INFO (tmp)->description);

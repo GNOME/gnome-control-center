@@ -1,3 +1,9 @@
+2003-04-29  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* theme-thumbnail.c: (message_from_capplet), (message_from_child),
+	(generate_theme_thumbnail), (theme_thumbnail_factory_init): Plug
+	leaks and guard against invalid reads reported by valgrind.
+
 Tue Feb  4 17:09:18 2003  Jonathan Blandford  <jrb@redhat.com>
 
 	* Release 2.2.0.1
