@@ -105,7 +105,10 @@ GdkPixbuf * gnome_wp_pixbuf_new_solid (GdkColor * color,
 }
 
 GdkPixbuf * gnome_wp_pixbuf_tile (GdkPixbuf * src_pixbuf,
-				  GdkPixbuf * dest_pixbuf) {
+				  GdkPixbuf * dest_pixbuf,
+				  gint scaled_width,
+				  gint scaled_height) {
+  GdkPixbuf * tmpbuf;
   gdouble cx, cy;
   gint dwidth, dheight;
   gint swidth, sheight;
@@ -115,47 +118,81 @@ GdkPixbuf * gnome_wp_pixbuf_tile (GdkPixbuf * src_pixbuf,
     return gdk_pixbuf_copy (src_pixbuf);
   }
 
-  swidth = gdk_pixbuf_get_width (src_pixbuf);
-  sheight = gdk_pixbuf_get_height (src_pixbuf);
+  tmpbuf = gdk_pixbuf_scale_simple (src_pixbuf, scaled_width, scaled_height,
+				    GDK_INTERP_BILINEAR);
+
+  swidth = gdk_pixbuf_get_width (tmpbuf);
+  sheight = gdk_pixbuf_get_height (tmpbuf);
 
   dwidth = gdk_pixbuf_get_width (dest_pixbuf);
   dheight = gdk_pixbuf_get_height (dest_pixbuf);
 
   for (cy = 0; cy < dheight; cy += sheight) {
     for (cx = 0; cx < dwidth; cx += swidth) {
-      gdk_pixbuf_composite (src_pixbuf, dest_pixbuf, cx, cy,
+      gdk_pixbuf_composite (tmpbuf, dest_pixbuf, cx, cy,
 			    MIN (swidth, dwidth - cx),
 			    MIN (sheight, dheight - cy),
-			    cx, cy, 1.0, 1.0, GDK_INTERP_BILINEAR, alpha);
+			    cx, cy, 1.0, 1.0,
+			    GDK_INTERP_BILINEAR, alpha);
     }
   }
+  g_object_unref (tmpbuf);
 
   return gdk_pixbuf_copy (dest_pixbuf);
 }
 
 GdkPixbuf * gnome_wp_pixbuf_center (GdkPixbuf * src_pixbuf,
-				    GdkPixbuf * dest_pixbuf) {
-  gdouble cx, cy;
+				    GdkPixbuf * dest_pixbuf,
+				    gint scaled_width,
+				    gint scaled_height) {
+  GdkPixbuf * tmpbuf;
+  gint ox, oy, cx, cy;
   gint dwidth, dheight;
   gint swidth, sheight;
+  gint cwidth, cheight;
   guint alpha = 255;
 
   if (dest_pixbuf == NULL) {
     return gdk_pixbuf_copy (src_pixbuf);
   }
 
-  swidth = gdk_pixbuf_get_width (src_pixbuf);
-  sheight = gdk_pixbuf_get_height (src_pixbuf);
+  ox = cx = oy = cy = 0;
+
+  tmpbuf = gdk_pixbuf_scale_simple (src_pixbuf, scaled_width, scaled_height,
+				    GDK_INTERP_BILINEAR);
+
+  swidth = gdk_pixbuf_get_width (tmpbuf);
+  sheight = gdk_pixbuf_get_height (tmpbuf);
 
   dwidth = gdk_pixbuf_get_width (dest_pixbuf);
   dheight = gdk_pixbuf_get_height (dest_pixbuf);
 
-  cx = (dwidth - swidth) / 2;
-  cy = (dheight - sheight) / 2;
+  if (dwidth > swidth) {
+    ox = (dwidth - swidth) / 2;
+    cx = 0;
+    cwidth = swidth;
+  } else {
+    cx = (swidth - dwidth) / 2;
+    oy = 0;
+    cwidth = dwidth;
+  }
 
-  gdk_pixbuf_composite (src_pixbuf, dest_pixbuf, cx, cy,
-			swidth, sheight,
-			cx, cy, 1.0, 1.0, GDK_INTERP_BILINEAR, alpha);
+  if (dheight > sheight) {
+    oy = ((dheight - sheight) / 2);
+    cy = 0;
+    cheight = sheight;
+  } else {
+    cy = (sheight - dheight) / 2;
+    oy = 0;
+    cheight = dheight;
+  }
+
+  gdk_pixbuf_composite (tmpbuf, dest_pixbuf, ox, oy,
+			cwidth, cheight,
+			ox - cx, oy - cy, 1.0, 1.0,
+			GDK_INTERP_BILINEAR, alpha);
+
+  g_object_unref (tmpbuf);
   return gdk_pixbuf_copy (dest_pixbuf);
 }
 

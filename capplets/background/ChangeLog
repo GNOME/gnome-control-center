@@ -1,3 +1,36 @@
+2004-04-05  Rodney Dawes  <dobey@ximian.com>
+
+	* gnome-wp-capplet.c (gnome_wp_scale_type_changed): Regenerate the
+	thumbnail in the list when we change scaling type now
+	(wallpaper_properties_init): Add GtkFileFilter support (needs love)
+	TreeView is buggy, so we need to not set the vertical-separator
+	style property for it
+	* gnome-wp-item.c: Include <config.h> and <gnome.h> here
+	(collect_save_options): Add a function to set all of the pixbuf options
+	for the thumbnail pixbuf properly, so we can save them back out
+	(gnome_wp_item_get_thumbnail): Fix up the code to
+	generate the thumbnails for the list a bit, so that we have sexy
+	thumbnails that look exactly like how the image would, on-screen
+	Initialize all of the width/height variables to 0
+	Add a new pixbuf variable for loading the original image to get the
+	dimensions of it, so we can do thumbnailing more properly
+	Use a LIST_IMAGE_WIDTH define, for the width of the images in the list
+	Just return the bgpixbuf if we are creating the "No Wallpaper" thumb
+	Save the thumbnail back out with the dimensions for the original image
+	If our image is smaller than the list thumbnail, then just use 1.0 as
+	the ratio for scaling the image for tiling/etc...
+	Use the new API to do scaling inside the center/tile functions
+	Reload the thumbnail pixbuf after generating it with the thumbnail
+	system, so that we get all of the pixbuf options set correctly
+	* gnome-wp-item.h (GnomeWPItem): store the original image's width
+	and height in the item, so we can avoid reopening the original image
+	every time we generate the thumbnail, on systems where the thumbnail
+	doesn't contain the appropriate information
+	* gnome-wp-utils.c (gnome_wp_pixbuf_tile):
+	(gnome_wp_pixbuf_center): Add API to do the scaling inside these calls
+
+	Fixes #136691
+
 2004-04-01  Jody Goldberg <jody@gnome.org>
 
 	* Release 2.6.0.3

@@ -18,10 +18,14 @@
  *
  */
 
-#include "gnome-wp-item.h"
-#include "gnome-wp-utils.h"
+#include <config.h>
+
+#include <gnome.h>
 #include <string.h>
 #include <libgnomevfs/gnome-vfs-mime-handlers.h>
+
+#include "gnome-wp-item.h"
+#include "gnome-wp-utils.h"
 
 void gnome_wp_item_free (GnomeWPItem * item) {
   if (item == NULL) {
@@ -49,38 +53,92 @@ void gnome_wp_item_free (GnomeWPItem * item) {
   item = NULL;
 }
 
+static void collect_save_options (GdkPixbuf * pixbuf,
+				  gchar *** keys,
+				  gchar *** vals,
+				  gint width,
+				  gint height) {
+  gchar ** options;
+  gint n, count;
+
+  count = 0;
+
+  options = g_object_get_qdata (G_OBJECT (pixbuf),
+				g_quark_from_static_string ("gdk_pixbuf_options"));
+  if (options) {
+    for (n = 0; options[2 * n]; n++) {
+      ++count;
+      
+      *keys = g_realloc (*keys, sizeof (gchar *) * (count + 1));
+      *vals = g_realloc (*vals, sizeof (gchar *) * (count + 1));
+
+      (*keys)[count - 1] = g_strdup (options[2 * n]);
+      (*vals)[count - 1] = g_strdup (options[2 * n + 1]);
+      
+      (*keys)[count] = NULL;
+      (*vals)[count] = NULL;
+    }
+  }
+  ++count;
+
+  *keys = g_realloc (*keys, sizeof (gchar *) * (count + 1));
+  *vals = g_realloc (*vals, sizeof (gchar *) * (count + 1));
+
+  (*keys)[count - 1] = g_strdup ("tEXt::Thumb::Image::Width");
+  (*vals)[count - 1] = g_strdup_printf ("%d", width);
+
+  (*keys)[count] = NULL;
+  (*vals)[count] = NULL;
+
+  ++count;
+
+  *keys = g_realloc (*keys, sizeof (gchar *) * (count + 1));
+  *vals = g_realloc (*vals, sizeof (gchar *) * (count + 1));
+
+  (*keys)[count - 1] = g_strdup ("tEXt::Thumb::Image::Height");
+  (*vals)[count - 1] = g_strdup_printf ("%d", height);
+
+  (*keys)[count] = NULL;
+  (*vals)[count] = NULL;
+}
+
+#define LIST_IMAGE_WIDTH 64
+
 GdkPixbuf * gnome_wp_item_get_thumbnail (GnomeWPItem * item,
 					 GnomeThumbnailFactory * thumbs) {
   GdkPixbuf * pixbuf, * bgpixbuf;
+  GdkPixbuf * tmpbuf;
   GdkPixbuf * scaled = NULL;
-  gint w, h, ratio;
-  gint bw, bh;
+  gint sw, sh, bw, bh, pw, ph, tw, th;
+  gdouble ratio;
+
+  sw = sh = bw = bh = pw = ph = tw = th = 0;
 
   /*
      Get the size of the screen and calculate our aspect ratio divisor
      We do this, so that images are thumbnailed as they would look on
      the screen in reality
   */
-  w = gdk_screen_get_width (gdk_screen_get_default ());
-  h = gdk_screen_get_height (gdk_screen_get_default ());
-  ratio = h / 48;
-  bw = w / ratio;
-  bh = h / ratio;
+  sw = gdk_screen_get_width (gdk_screen_get_default ());
+  sh = gdk_screen_get_height (gdk_screen_get_default ());
+  ratio = (gdouble) sw / (gdouble) LIST_IMAGE_WIDTH;
+  bw = sw / ratio;
+  bh = sh / ratio;
 
   /*
      Create the pixbuf for the background colors, which will show up for
      oddly sized images, smaller images that are centered, or alpha images
   */
   if (!strcmp (item->shade_type, "solid")) {
-    bgpixbuf = gnome_wp_pixbuf_new_solid (item->pcolor, w / ratio, h / ratio);
+    bgpixbuf = gnome_wp_pixbuf_new_solid (item->pcolor, bw, bh);
   } else if (!strcmp (item->shade_type, "vertical-gradient")) {
     bgpixbuf = gnome_wp_pixbuf_new_gradient (GTK_ORIENTATION_VERTICAL,
 					     item->pcolor, item->scolor,
-					     w / ratio, h / ratio);
+					     bw, bh);
   } else {
     bgpixbuf = gnome_wp_pixbuf_new_gradient (GTK_ORIENTATION_HORIZONTAL,
 					     item->pcolor, item->scolor,
-					     w / ratio, h / ratio);
+					     bw, bh);
   }
 
   /*
@@ -93,7 +151,7 @@ GdkPixbuf * gnome_wp_item_get_thumbnail (GnomeWPItem * item,
       g_file_test (item->fileinfo->thumburi, G_FILE_TEST_EXISTS)) {
     pixbuf = gdk_pixbuf_new_from_file (item->fileinfo->thumburi, NULL);
   } else if (!strcmp (item->filename, "(none)")) {
-    pixbuf = gdk_pixbuf_copy (bgpixbuf);
+    return bgpixbuf;
   } else {
     pixbuf = gnome_thumbnail_factory_generate_thumbnail (thumbs,
 							 gnome_vfs_escape_path_string (item->filename),
@@ -101,50 +159,65 @@ GdkPixbuf * gnome_wp_item_get_thumbnail (GnomeWPItem * item,
     gnome_thumbnail_factory_save_thumbnail (thumbs, pixbuf,
 					    gnome_vfs_escape_path_string (item->filename),
 					    item->fileinfo->mtime);
+    g_object_unref (pixbuf);
+    pixbuf = gdk_pixbuf_new_from_file (item->fileinfo->thumburi, NULL);
   }
 
   if (pixbuf != NULL) {
-    w = gdk_pixbuf_get_width (pixbuf);
-    h = gdk_pixbuf_get_height (pixbuf);
+    const gchar * w_val, * h_val;
 
-    /*
-       Handle images large and small. We default to 1, since images smaller
-       than 64x48 don't need to be scaled down, and the tiled thumbnails
-       will look correct for really small pattern images
-    */
-    if (h >= 48)
-      ratio = h / 48;
-    else if (w >= 64)
-      ratio = w / 64;
-    else
-      ratio = 1;
+    w_val = gdk_pixbuf_get_option (pixbuf, "tEXt::Thumb::Image::Width");
+    h_val = gdk_pixbuf_get_option (pixbuf, "tEXt::Thumb::Image::Height");
+    if (item->width <= 0 || item->height <= 0) {
+      if (w_val && h_val) {
+	item->width = atoi (w_val);
+	item->height = atoi (h_val);
+      } else {
+	gchar ** keys = NULL;
+	gchar ** vals = NULL;
 
-    scaled = gnome_thumbnail_scale_down_pixbuf (pixbuf, w / ratio, h / ratio);
+	tmpbuf = gdk_pixbuf_new_from_file (item->filename, NULL);
+
+	item->width = gdk_pixbuf_get_width (tmpbuf);
+	item->height = gdk_pixbuf_get_height (tmpbuf);
+
+	collect_save_options (pixbuf, &keys, &vals, item->width, item->height);
+	gdk_pixbuf_savev (pixbuf, item->fileinfo->thumburi, "png",
+			  keys, vals, NULL);
+
+	g_object_unref (tmpbuf);
+	g_strfreev (keys);
+	g_strfreev (vals);
+      }
+    }
+
+    pw = gdk_pixbuf_get_width (pixbuf);
+    ph = gdk_pixbuf_get_height (pixbuf);
+
+    if (item->width <= bw && item->height <= bh)
+      ratio = 1.0;
+
+    tw = item->width / ratio;
+    th = item->height / ratio;
 
     if (!strcmp (item->options, "wallpaper")) {
-      w = gdk_pixbuf_get_width (scaled);
-      h = gdk_pixbuf_get_height (scaled);
-
-      scaled = gnome_wp_pixbuf_tile (scaled, bgpixbuf);
+      scaled = gnome_wp_pixbuf_tile (pixbuf, bgpixbuf, tw, th);
     } else if (!strcmp (item->options, "centered")) {
-      w = gdk_pixbuf_get_width (scaled);
-      h = gdk_pixbuf_get_height (scaled);
-
-      /*
-	 This is for alpha centered images like gnome-logo-transparent.jpg
-	 It's an ugly hack, that can potentially be removed when round() or
-	 something like it decides to work
-	 We scale it down again so that it looks proper, instead of the off-
-	 center look that seems to appear without this hack
-      */
-      if (gdk_pixbuf_get_has_alpha (pixbuf) && (w > bw || h > bh))
-	scaled = gnome_thumbnail_scale_down_pixbuf (scaled, w / 2, h / 2);
-
-      scaled = gnome_wp_pixbuf_center (scaled, bgpixbuf);
+      scaled = gnome_wp_pixbuf_center (pixbuf, bgpixbuf, tw, th);
+    } else if (!strcmp (item->options, "stretched")) {
+      scaled = gnome_wp_pixbuf_center (pixbuf, bgpixbuf, bw, bh);
+    } else if (!strcmp (item->options, "scaled")) {
+      if ((gdouble) ph * (gdouble) bw > (gdouble) pw * (gdouble) bh) {
+	tw = 0.5 + (gdouble) pw * (gdouble) bh / (gdouble) ph;
+	th = bh;
+      } else {
+	th = 0.5 + (gdouble) ph * (gdouble) bw / (gdouble) pw;
+	tw = bw;
+      }
+      scaled = gnome_wp_pixbuf_center (pixbuf, bgpixbuf, tw, th);
     }
-  } else {
-    scaled = gdk_pixbuf_copy (bgpixbuf);
   }
+
   g_object_unref (pixbuf);
   g_object_unref (bgpixbuf);
 
@@ -155,7 +228,8 @@ void gnome_wp_item_update_description (GnomeWPItem * item) {
   if (!strcmp (item->filename, "(none)")) {
     item->description = g_strdup_printf ("<b>%s</b>", item->name);
   } else {
-    item->description = g_strdup_printf ("<b>%s</b>\n%s (%LuK)",
+    item->description = g_strdup_printf ("<b>%s</b>\n"
+					 "%s (%LuK)",
 					 item->name,
 					 gnome_vfs_mime_get_description (item->fileinfo->mime_type),
 					 item->fileinfo->size / 1024);

@@ -30,12 +30,19 @@ GdkPixbuf * gnome_wp_pixbuf_new_gradient (GtkOrientation orientation,
 					  GdkColor * c1,
 					  GdkColor * c2,
 					  gint width, gint height);
+
 GdkPixbuf * gnome_wp_pixbuf_new_solid (GdkColor * color,
 				       gint width, gint height);
+
 GdkPixbuf * gnome_wp_pixbuf_tile (GdkPixbuf * src_pixbuf,
-				  GdkPixbuf * dest_pixbuf);
+				  GdkPixbuf * dest_pixbuf,
+				  gint scaled_width,
+				  gint scaled_height);
+
 GdkPixbuf * gnome_wp_pixbuf_center (GdkPixbuf * src_pixbuf,
-				    GdkPixbuf * dest_pixbuf);
+				    GdkPixbuf * dest_pixbuf,
+				    gint scaled_width,
+				    gint scaled_height);
 
 G_END_DECLS
 

@@ -332,6 +332,7 @@ static void wp_props_load_wallpaper (gchar * key,
   gtk_list_store_append (GTK_LIST_STORE (capplet->model), &iter);
 
   pixbuf = gnome_wp_item_get_thumbnail (item, capplet->thumbs);
+  gnome_wp_item_update_description (item);
 
   if (pixbuf != NULL) {
     gtk_list_store_set (GTK_LIST_STORE (capplet->model), &iter,
@@ -525,6 +526,7 @@ static void wallpaper_properties_clicked (GtkWidget * dialog,
 static void gnome_wp_scale_type_changed (GtkMenuShell * shell,
 					 GnomeWPCapplet * capplet) {
   GnomeWPItem * item = NULL;
+  GdkPixbuf * pixbuf;
   GtkTreeIter iter;
   GtkTreeModel * model;
   GtkTreeSelection * selection;
@@ -558,6 +560,11 @@ static void gnome_wp_scale_type_changed (GtkMenuShell * shell,
   default:
     break;
   }
+  pixbuf = gnome_wp_item_get_thumbnail (item, capplet->thumbs);
+  gtk_list_store_set (GTK_LIST_STORE (capplet->model), &iter,
+		      0, pixbuf,
+		      -1);
+  g_object_unref (pixbuf);
   gconf_client_set_string (capplet->client, WP_OPTIONS_KEY,
 			   item->options, NULL);
 }
@@ -1145,7 +1152,6 @@ static void wallpaper_properties_init (void) {
 
   gtk_rc_parse_string ("style \"wp-tree-defaults\" {\n"
 		       "  GtkTreeView::horizontal-separator = 6\n"
-		       "  GtkTreeView::vertical-separator = 6\n"
 		       "} widget_class \"*TreeView*\""
 		       " style \"wp-tree-defaults\"\n\n"
 		       "style \"wp-dialog-defaults\" {\n"

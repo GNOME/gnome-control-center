@@ -52,6 +52,10 @@ struct _GnomeWPItem {
 
   /* Did the user remove us? */
   gboolean deleted;
+
+  /* Width and Height of the original image */
+  gint width;
+  gint height;
 };
 
 void gnome_wp_item_free (GnomeWPItem * item);
