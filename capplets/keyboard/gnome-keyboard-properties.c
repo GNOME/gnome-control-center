@@ -166,11 +166,9 @@ setup_dialog (GladeXML       *dialog,
 	gconf_peditor_new_numeric_range
 		(changeset, "/desktop/gnome/typing_break/type_time", WID ("break_enabled_spin"), NULL);
 	gconf_peditor_new_numeric_range
-		(changeset, "/desktop/gnome/typing_break/warn_time", WID ("break_warning_spin"), NULL);
-	gconf_peditor_new_numeric_range
 		(changeset, "/desktop/gnome/typing_break/break_time", WID ("break_interval_spin"), NULL);
 	gconf_peditor_new_boolean
-		(changeset, "/desktop/gnome/typing_break/allow_unlock", WID ("break_postponement_toggle"), NULL);
+		(changeset, "/desktop/gnome/typing_break/allow_postpone", WID ("break_postponement_toggle"), NULL);
 	g_signal_connect (G_OBJECT (WID ("keyboard_dialog")), "response", (GCallback) dialog_response, changeset);
 }
 
