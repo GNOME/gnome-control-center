@@ -2,24 +2,26 @@ INCLUDES = -I. -I$(srcdir) 				\
 	-I$(top_srcdir)/intl -I$(top_builddir)/intl	\
 	-I$(top_srcdir)/libgnomevfs			\
 	$(CAPPLET_INCLUDEDIR)				\
+	$(OAF_CFLAGS)					\
 	$(GNOME_INCLUDEDIR)				\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"	\
 	-I$(includedir)
 
 bin_PROGRAMS = nautilus-mime-type-capplet
 
-nautilus_mime_type_capplet_SOURCES =\
-	nautilus-mime-type-capplet.h \
-	nautilus-mime-type-capplet-dialogs.h \
-	nautilus-mime-type-capplet.c\
+nautilus_mime_type_capplet_SOURCES =		\
+	nautilus-mime-type-capplet.h 		\
+	nautilus-mime-type-capplet-dialogs.h 	\
+	nautilus-mime-type-capplet.c		\
 	nautilus-mime-type-capplet-dialogs.c
 
-nautilus_mime_type_capplet_LDADD =\
-			$(CAPPLET_LIBDIR) \
-			$(CAPPLET_LIBS) \
-			$(ORBIT_LIBS) \
-			$(INTLLIBS) \
-			$(top_builddir)/libgnomevfs/libgnomevfs.la \
+nautilus_mime_type_capplet_LDADD =					\
+			$(CAPPLET_LIBDIR) 				\
+			$(CAPPLET_LIBS) 				\
+			$(ORBIT_LIBS) 					\
+			$(OAF_LIBS)					\
+			$(INTLLIBS) 					\
+			$(top_builddir)/libgnomevfs/libgnomevfs.la 	\
 			-lgdk_pixbuf
 
 
