@@ -63,15 +63,13 @@ update_theme_entries(GtkWidget *disp_list);
 void
 signal_apply_theme(GtkWidget *widget);
 void
-edit_file_to_use(gchar *file, gchar *theme);
+edit_file_to_use(gchar *file, gchar *theme, gchar *font);
 void 
 set_tmp_rc(void);
 void
-use_theme(gchar *theme);
+use_theme(gchar *theme, gchar *font);
 void
-test_theme(gchar *theme);
-void
-click_update(GtkWidget *widget, gpointer data);
+test_theme(gchar *theme, gchar *font);
 gchar *
 install_theme(gchar *file);
 gint

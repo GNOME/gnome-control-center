@@ -1,9 +1,19 @@
 #include "da.h"
 #include <sys/types.h>
 #include <utime.h>
-
+#define MARK_STRING "# -- THEME AUTO-WRITTEN DO NOT EDIT\n"
+static void
+print_standard_stuff(FILE *fout, gchar *theme, gchar *font)
+{
+      fprintf(fout, MARK_STRING);
+      fprintf(fout, "include \"%s\"\n\n", theme);
+      if (font)
+	      fprintf(fout, "style \"user-font\"\n{\n  font=\"%s\"\n}\nwidget_class \"*\" style \"user-font\"\n\n", font);
+      fprintf(fout, "include \"~/.gtkrc.mine\"\n\n");
+      fprintf(fout, MARK_STRING);
+}
 void
-edit_file_to_use(gchar *file, gchar *theme)
+edit_file_to_use(gchar *file, gchar *theme, gchar *font)
 {
   FILE *fin, *fout;
   gchar tmp[4096], buf[4096];
@@ -17,38 +27,58 @@ edit_file_to_use(gchar *file, gchar *theme)
   fin = fopen(file, "r");
   if (!fin)
     {
-      fprintf(fout, "# -- THEME AUTO-WRITTEN DO NOT EDIT\n");
-      fprintf(fout, "include \"%s\"\n\n", theme);
+      print_standard_stuff (fout, theme, font);
       fclose(fout);
       cp(tmp, file);
       return;
     }
   while (fgets(buf, sizeof(buf), fin))
-    {
-      if (!strcmp("# -- THEME AUTO-WRITTEN DO NOT EDIT\n", buf))
-	hastheme = 1;
+    { 
+      if (!strcmp(MARK_STRING, buf))
+	hastheme += 1;
     }
   rewind(fin);
   if (!hastheme)
     {
-      fprintf(fout, "# -- THEME AUTO-WRITTEN DO NOT EDIT\n");
-      fprintf(fout, "include \"%s\"\n\n", theme);
+      print_standard_stuff (fout, theme, font);
       while (fgets(buf, sizeof(buf), fin))
 	fprintf(fout, "%s", buf);
     }
-  else
+  else if (hastheme == 1)
+	  /* we keep this in for backwards compatability. */
     {
+      nextline = 0;
       while (fgets(buf, sizeof(buf), fin))
 	{
-	  if (!nextline)
-	    fprintf(fout, "%s", buf);
-	  else
+	  if (nextline == 1)
+	    nextline = 0;
+	  else if (!strcmp(MARK_STRING, buf))
 	    {
-	      nextline = 0;
-	      fprintf(fout, "include \"%s\"\n\n", theme);
+	      print_standard_stuff (fout, theme, font);
+	      nextline = 1;
 	    }
-	  if (!strcmp("# -- THEME AUTO-WRITTEN DO NOT EDIT\n", buf))
-	    nextline = 1;
+	  else if (nextline == 0)
+	    fprintf(fout, "%s", buf);
+	}
+    }
+  else
+    {
+      nextline = 0;
+      while (fgets(buf, sizeof(buf), fin))
+	{
+	  if (!strcmp(MARK_STRING, buf))
+	    {
+	      if (nextline == 0)
+		{
+		  nextline = 1;
+		  print_standard_stuff (fout, theme, font);
+		}
+	      else
+		{
+		  nextline = 0;
+		}
+	    } else if (nextline == 0)
+	      fprintf(fout, "%s", buf);
 	}
     }
   fclose(fin);
@@ -72,7 +102,7 @@ set_tmp_rc(void)
 }
 
 void
-use_theme(gchar *theme)
+use_theme(gchar *theme, gchar *font)
 {
   gchar s[4096], *home;
   
@@ -80,17 +110,17 @@ use_theme(gchar *theme)
   if (!home)
     return;
   g_snprintf(s, sizeof(s), "%s/.gtkrc", home);
-  edit_file_to_use(s, theme);
+  edit_file_to_use(s, theme, font);
 }
 
 void
-test_theme(gchar *theme)
+test_theme(gchar *theme, gchar *font)
 {
   static time_t last_written_time = 0;
   time_t current_time = time (NULL);
   struct utimbuf buf;
 
-  edit_file_to_use(gtkrc_tmp, theme);
+  edit_file_to_use(gtkrc_tmp, theme, font);
 
   if (last_written_time >= current_time)
     {

@@ -4,11 +4,9 @@
 #include <signal.h>
 
 static gboolean   ignore_change = FALSE;
-static gchar     *readme_current;
 
 static GtkWidget *install_theme_file_sel;
 
-static GtkWidget *readme_display;
 static GtkWidget *capplet_widget;
 static GtkWidget *theme_list;
 static GtkWidget *auto_preview;
@@ -17,7 +15,11 @@ static GtkWidget *current_theme = NULL;
 static GtkWidget *current_global_theme = NULL;
 static GtkWidget *initial_theme = NULL;
 static GtkWidget *last_theme = NULL;
-
+static GtkWidget *font_sel;
+static GtkWidget *font_cbox;
+static gboolean initial_preview;
+static gboolean initial_font_cbox;
+static gchar *initial_font;
 static void
 click_preview(GtkWidget *widget, gpointer data);
 static void
@@ -36,9 +38,34 @@ delete_entry(GtkWidget *widget, gpointer data);
 static void
 auto_callback (GtkWidget *widget, gpointer data)
 {
-  if (GTK_TOGGLE_BUTTON (auto_preview)->active)
-    click_preview (widget,NULL);
+  if (ignore_change == FALSE) {
+	  if (GTK_TOGGLE_BUTTON (auto_preview)->active)
+		  click_preview (widget,NULL);
+	  capplet_widget_state_changed(CAPPLET_WIDGET (capplet_widget), TRUE);
+  }
   
+}
+static void
+font_callback (GtkWidget *widget, gchar *font, gpointer data)
+{
+  if (ignore_change == FALSE) {
+	capplet_widget_state_changed(CAPPLET_WIDGET (capplet_widget), TRUE);
+	if (GTK_TOGGLE_BUTTON (auto_preview)->active)
+	  click_preview (widget,NULL);
+  }	
+}
+static void
+use_theme_font_callback (GtkWidget *widget, gpointer data)
+{
+  if (ignore_change == FALSE) {
+	capplet_widget_state_changed(CAPPLET_WIDGET (capplet_widget), TRUE);
+	if (GTK_TOGGLE_BUTTON (auto_preview)->active)
+		click_preview (widget,NULL);
+	if (!GTK_TOGGLE_BUTTON (font_cbox)->active)
+	  gtk_widget_set_sensitive (font_sel, FALSE);
+	else
+	  gtk_widget_set_sensitive (font_sel, TRUE);
+  }
 }
 static void
 browse_dialog_ok (GtkWidget *widget, gpointer data)
@@ -151,9 +178,10 @@ GtkWidget *
 make_main(void)
 {
   void *sw, *label;
-  GtkWidget *box, *hbox, *hbox2;
+  GtkWidget *box, *hbox, *hbox2, *vbox;
   GtkWidget *text, *frame, *frame2, *button;
   GtkWidget *button_vbox;
+  gboolean default_used;
   
   capplet_widget = capplet_widget_new();
   gtk_container_set_border_width(GTK_CONTAINER(capplet_widget), 5);
@@ -188,8 +216,9 @@ make_main(void)
   label = gtk_label_new (_("Auto\nPreview"));
   gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
   auto_preview = gtk_check_button_new ();
-  
-  gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (auto_preview), gnome_config_get_bool ("/theme-switcher-capplet/settings/auto=TRUE"));
+  initial_preview = gnome_config_get_bool ("/theme-switcher-capplet/settings/auto=TRUE");
+  gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (auto_preview),
+			       initial_preview);
   gtk_signal_connect (GTK_OBJECT (auto_preview), "toggled", GTK_SIGNAL_FUNC (auto_callback), NULL);
   gtk_container_add (GTK_CONTAINER (auto_preview), label);
   gtk_box_pack_start (GTK_BOX (button_vbox), auto_preview, FALSE, FALSE, 0);
@@ -200,18 +229,51 @@ make_main(void)
   gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (install_theme_callback), NULL);
   gtk_box_pack_start (GTK_BOX (button_vbox), button, FALSE, FALSE, 0);
 
-  /* HTML widget describing themes
+  /* Font selector.
    */
-  frame = gtk_frame_new (_("Theme Information"));
-  frame2 = gtk_frame_new (NULL);
-  gtk_frame_set_shadow_type (GTK_FRAME (frame2), GTK_SHADOW_IN);
-  gtk_container_add (GTK_CONTAINER (frame), frame2);
-  gtk_container_set_border_width (GTK_CONTAINER (frame2), GNOME_PAD_SMALL);
+  frame = gtk_frame_new (_("User Font"));
   gtk_box_pack_start(GTK_BOX(hbox), frame, TRUE, TRUE, 0);
-  
-  readme_display = gtk_xmhtml_new();
-  gtk_container_add(GTK_CONTAINER(frame2), readme_display);
+  font_sel = gnome_font_picker_new ();
+  gnome_font_picker_set_mode (GNOME_FONT_PICKER (font_sel),
+			      GNOME_FONT_PICKER_MODE_FONT_INFO);
+  initial_font = gnome_config_get_string_with_default ("/theme-switcher-capplet/settings/font",&default_used);
+  if (initial_font == NULL) {
+	  gnome_font_picker_set_font_name (GNOME_FONT_PICKER (font_sel),
+					   initial_font);
+  }
+  gnome_font_picker_fi_set_use_font_in_label (GNOME_FONT_PICKER (font_sel),
+					      TRUE,
+					      12);
+  gnome_font_picker_fi_set_show_size (GNOME_FONT_PICKER (font_sel), FALSE);
+  gtk_signal_connect (GTK_OBJECT (font_sel),
+		      "font_set",
+		      font_callback,
+		      NULL);
+  vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
+  gtk_container_set_border_width (GTK_CONTAINER (vbox), GNOME_PAD_SMALL);
+  gtk_container_add (GTK_CONTAINER (frame), vbox);
+  font_cbox = gtk_check_button_new_with_label (_("Use custom font."));
+  initial_font_cbox = gnome_config_get_bool ("/theme-switcher-capplet/settings/use_theme_font=FALSE");
+  gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (font_cbox),
+			       initial_font_cbox);
+  gtk_signal_connect (GTK_OBJECT (font_cbox),
+		      "toggled",
+		      GTK_SIGNAL_FUNC (use_theme_font_callback),
+		      NULL);
+  gtk_box_pack_start (GTK_BOX (vbox), font_cbox, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (vbox), font_sel, FALSE, FALSE, 0);
+  if (!GTK_TOGGLE_BUTTON (font_cbox)->active)
+    gtk_widget_set_sensitive (font_sel, FALSE);
+  else
+    gtk_widget_set_sensitive (font_sel, TRUE);
 
+  gtk_widget_show_all (vbox);
+  
+  
+#if 0  
+  readme_display = gtk_xmhtml_new();
+  gtk_container_add(GTK_CONTAINER(frame2), readme_display) ;
+#endif
   /* Preview of theme
    */
   hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
@@ -241,17 +303,9 @@ make_main(void)
 		      GTK_SIGNAL_FUNC (delete_capplet), NULL);
   gtk_container_add (GTK_CONTAINER (capplet_widget), box);
 
-  readme_current = NULL;
-  current_theme = NULL;
   last_theme = NULL;
   
   return capplet_widget;
-}
-
-static void
-click_update(GtkWidget *widget, gpointer data)
-{
-  update_theme_entries(theme_list);
 }
 
 static void
@@ -259,18 +313,23 @@ click_preview(GtkWidget *widget, gpointer data)
 {
   gchar *rc;
 
-  if (current_theme == last_theme) {
-	  return;
-  }
+/*  if (current_theme == last_theme)
+    return;*/
   last_theme = current_theme;
   if (!current_theme) {
-	  return;
+    return;
   }
   rc = (gchar *)gtk_object_get_data(GTK_OBJECT(current_theme), "rc");
-  test_theme(rc);
+  if (GTK_TOGGLE_BUTTON (font_cbox)->active)
+    test_theme(rc,
+	      gnome_font_picker_get_font_name (GNOME_FONT_PICKER (font_sel)));
+  else
+    {
+      test_theme(rc, NULL);
+    }
+
   send_reread();
 }
-
 static void
 click_help(GtkWidget *widget, gpointer data)
 {
@@ -289,8 +348,8 @@ click_try(GtkWidget *widget, gpointer data)
   gchar *rc;
   gchar *dir, cmd[10240];
 
-  if (current_theme == current_global_theme)
-    return;
+/*  if (current_theme == current_global_theme)
+    return;*/
   widget = current_theme;
   if (!widget) 
     return;
@@ -303,7 +362,15 @@ click_try(GtkWidget *widget, gpointer data)
   /*g_snprintf(cmd, sizeof(cmd), "eesh -e \"restart %s/e\"", dir);*/
   /* printf("%s\n", cmd); */
   send_reread();
-  use_theme(rc);
+  if (GTK_TOGGLE_BUTTON (font_cbox)->active)
+    {
+      use_theme(rc,
+		gnome_font_picker_get_font_name (GNOME_FONT_PICKER (font_sel)));
+    }
+  else
+    {
+      use_theme(rc, NULL);
+    }
   gdk_error_warnings = 0;
   signal_apply_theme(widget);
   gdk_flush();
@@ -316,6 +383,10 @@ click_ok(GtkWidget *widget, gpointer data)
   click_try (widget, data);
   gnome_config_set_bool ("/theme-switcher-capplet/settings/auto",GTK_TOGGLE_BUTTON (auto_preview)->active);
   gnome_config_set_string ("/theme-switcher-capplet/settings/theme", gtk_object_get_data (GTK_OBJECT (current_theme), "name"));
+  gnome_config_set_bool ("/theme-switcher-capplet/settings/use_theme_font",
+			 GTK_TOGGLE_BUTTON (font_cbox)->active);
+  gnome_config_set_string ("/theme-switcher-capplet/settings/font",
+			   gnome_font_picker_get_font_name (GNOME_FONT_PICKER (font_sel)));
   gnome_config_sync ();
 }
 static void
@@ -324,48 +395,62 @@ click_revert(GtkWidget *widget, gpointer data)
   gchar *rc;
   gchar *dir, cmd[10240];
 
-  if ((current_global_theme == initial_theme) || (!current_global_theme))
-    return;
-  last_theme = current_global_theme;
   widget = initial_theme;
-  if (!widget) 
+  if (!widget)
+    /* we hope this doesn't happen, but it could if things
+     * are mis-installed -jrb */
+    /* Damn, I hate this code... )-: */
     return;
-
-  current_theme = widget;
-  current_global_theme = widget;
+  
   rc = (gchar *)gtk_object_get_data(GTK_OBJECT(widget), "rc");
   dir = (gchar *)gtk_object_get_data(GTK_OBJECT(widget), "dir");
-
-  /* hack for enlightenment only!!!! */
-  /* FIXME: restart what ever windowmanager you have! */
-  /*  g_snprintf(cmd, sizeof(cmd), "eesh -e \"restart %s/e\"", dir);*/
-  /* printf("%s\n", cmd); */
-  send_reread();
-  use_theme(rc);
-  gdk_error_warnings = 0;
-  signal_apply_theme(widget);
-  gdk_flush();
-  /* system(cmd); */
-  gdk_error_warnings = 1;
+    
+  if ((current_global_theme != initial_theme) ||
+	(initial_font_cbox != GTK_TOGGLE_BUTTON (font_cbox)->active) ||
+	(strcmp (initial_font,
+		 gnome_font_picker_get_font_name (GNOME_FONT_PICKER (font_sel)))))
+    {
+      
+      /* This if statement is magic to determine if we want to reset the system theme.
+       * It can almost certainly be cleaned up if needed.  Basicly, it sees if anything has
+       * or if the theme has been set.. */
+      send_reread();
+      use_theme(rc, initial_font);
+      gdk_error_warnings = 0;
+      signal_apply_theme(widget);
+      gdk_flush();
+      gdk_error_warnings = 1;
+    }
+  current_global_theme = widget;
   ignore_change = TRUE;
+  gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (auto_preview),
+			       initial_preview);
+  gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (font_cbox),
+			       initial_font_cbox);
+  gnome_font_picker_set_font_name (GNOME_FONT_PICKER (font_sel),
+				   initial_font);
   gtk_list_select_child (GTK_LIST (theme_list), initial_theme);
-  ignore_change = FALSE;
-  rc = (gchar *)gtk_object_get_data(GTK_OBJECT(current_theme), "rc");
-  test_theme(rc);
+  test_theme(rc, initial_font);
   send_reread();
+  if (!GTK_TOGGLE_BUTTON (font_cbox)->active)
+    gtk_widget_set_sensitive (font_sel, FALSE);
+  else
+    gtk_widget_set_sensitive (font_sel, TRUE);
+  ignore_change = FALSE;
+  current_theme = initial_theme;
 }
 static void
 click_entry(GtkWidget *widget, gpointer data)
 {
-  gchar *rc, *name, *readme, *new_readme, buf[1024];
+  gchar *rc, *name, *new_readme, buf[1024];
   FILE *f;
   
   
   name = (gchar *)gtk_object_get_data(GTK_OBJECT(widget), "name");
   rc = (gchar *)gtk_object_get_data(GTK_OBJECT(widget), "rc");
-  readme = (gchar *)gtk_object_get_data(GTK_OBJECT(widget), "readme");
 
   /* Load in the README file */
+#if 0
   if (readme_current)
     {
       g_free(readme_current);
@@ -386,7 +471,7 @@ click_entry(GtkWidget *widget, gpointer data)
     }
   else
     gtk_xmhtml_source(GTK_XMHTML(readme_display), "");
-
+#endif
   if (!ignore_change)
     {
       current_theme = widget;
@@ -395,25 +480,24 @@ click_entry(GtkWidget *widget, gpointer data)
 	capplet_widget_state_changed(CAPPLET_WIDGET (capplet_widget), TRUE);
       else
 	capplet_widget_state_changed(CAPPLET_WIDGET (capplet_widget), FALSE);
-    }      
+      
       if (GTK_TOGGLE_BUTTON (auto_preview)->active)
 	click_preview (widget,NULL);
+    }
 }
 
 static void
 delete_entry(GtkWidget *widget, gpointer data)
 {
-  gchar *rc, *name, *readme, *icon, *dir;
+  gchar *rc, *name, *icon, *dir;
 
   name = (gchar *)gtk_object_get_data(GTK_OBJECT(widget), "name");
   rc = (gchar *)gtk_object_get_data(GTK_OBJECT(widget), "rc");
   dir = (gchar *)gtk_object_get_data(GTK_OBJECT(widget), "dir");
-  readme = (gchar *)gtk_object_get_data(GTK_OBJECT(widget), "readme");
   icon = (gchar *)gtk_object_get_data(GTK_OBJECT(widget), "icon");
   g_free(name);
   g_free(rc);
   g_free(dir);
-  g_free(readme);
   g_free(icon);
   
   if (current_theme == widget)
@@ -442,6 +526,8 @@ update_theme_entries(GtkWidget *disp_list)
 
   if (current_theme)
     current_name = g_strdup(gtk_object_get_data(GTK_OBJECT(current_theme), "name"));
+  else
+    current_name = d_theme;
 
   current_theme = NULL;
   initial_theme = NULL;
@@ -456,12 +542,13 @@ update_theme_entries(GtkWidget *disp_list)
       if (strcmp (d_theme, te[i].name) == 0)
 	initial_theme = item;
       if (current_name && (strcmp (current_name, te[i].name) == 0))
-	current_theme = item;
+	{
+	  current_theme = item;
+	}
       
       gtk_object_set_data(GTK_OBJECT(item), "name", g_strdup(te[i].name));
       gtk_object_set_data(GTK_OBJECT(item), "rc", g_strdup(te[i].rc));
       gtk_object_set_data(GTK_OBJECT(item), "dir", g_strdup(te[i].dir));
-      gtk_object_set_data(GTK_OBJECT(item), "readme", g_strdup(te[i].readme));
       gtk_object_set_data(GTK_OBJECT(item), "icon", g_strdup(te[i].icon));
       gtk_signal_connect(GTK_OBJECT(item), "select",
 			 GTK_SIGNAL_FUNC(click_entry), NULL);
@@ -484,7 +571,6 @@ update_theme_entries(GtkWidget *disp_list)
       gtk_object_set_data(GTK_OBJECT(item), "name", g_strdup(te[i].name));
       gtk_object_set_data(GTK_OBJECT(item), "rc", g_strdup(te[i].rc));
       gtk_object_set_data(GTK_OBJECT(item), "dir", g_strdup(te[i].dir));
-      gtk_object_set_data(GTK_OBJECT(item), "readme", g_strdup(te[i].readme));
       gtk_object_set_data(GTK_OBJECT(item), "icon", g_strdup(te[i].icon));
       gtk_signal_connect(GTK_OBJECT(item), "select",
 			 GTK_SIGNAL_FUNC(click_entry), NULL);
@@ -523,6 +609,10 @@ update_theme_entries(GtkWidget *disp_list)
 	}
     }
 
-  g_free (current_name);
-  g_free (d_theme);
+  if (current_name != d_theme) {
+    g_free (current_name);
+    g_free (d_theme);
+  } else
+    g_free (d_theme);
+  if (current_theme == NULL)
 }
