@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0.5\n"
-"POT-Creation-Date: 1999-08-16 11:59-0400\n"
+"POT-Creation-Date: 1999-09-06 11:51+0200\n"
 "PO-Revision-Date: 1999-08-05 18:32+0100\n"
 "Last-Translator: Richard Hult <rhult@hem2.passagen.se>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -14,12 +14,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8-bit\n"
 
 #: capplets/background-properties/app-background.c:13
-msgid "Set background image."
-msgstr "Ställ in bakgrundsbild."
-
-#: capplets/background-properties/app-background.c:13
 msgid "IMAGE-FILE"
 msgstr "IMAGE-FILE"
+
+#: capplets/background-properties/app-background.c:13
+msgid "Set background image."
+msgstr "Ställ in bakgrundsbild."
 
 #: capplets/background-properties/app-background.c:34
 #, fuzzy
@@ -74,7 +74,7 @@ msgid "Can't find an hbox, using a normal file selection"
 msgstr "Kan inte hitta hbox, använder en vanlig filväljare"
 
 #: capplets/background-properties/property-background.c:888
-#: capplets/keyboard-properties/keyboard-properties.c:257
+#: capplets/keyboard-properties/keyboard-properties.c:265
 #: capplets/screensaver-properties/screensaver-dialog.c:25
 #: capplets/theme-switcher/gui.c:225 capplets/theme-switcher/gui.c:297
 msgid "Preview"
@@ -108,80 +108,112 @@ msgstr "Centrerad"
 msgid "Tiled"
 msgstr "Sida-vid-sida"
 
-#: capplets/background-properties/property-background.c:1353
+#: capplets/background-properties/property-background.c:1134
+#: capplets/bell-properties/bell-properties.c:61
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:179
+#: capplets/keyboard-properties/keyboard-properties.c:81
+#: capplets/mouse-properties/mouse-properties.c:111
+#: capplets/screensaver-properties/callbacks.c:798
+#: capplets/session-properties/session-properties.c:295
+#: capplets/sound-properties/sound-properties.c:685
+#: capplets/theme-switcher/gui.c:361
+#: capplets/ui-properties/ui-properties.c:513
+#: capplets/wm-properties/wm-properties-capplet.c:605
+msgid ""
+"No help is available/installed for these settings. Please make sure you\n"
+"have the GNOME User's Guide installed on your system."
+msgstr ""
+
+#: capplets/background-properties/property-background.c:1136
+#: capplets/bell-properties/bell-properties.c:63
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:181
+#: capplets/keyboard-properties/keyboard-properties.c:83
+#: capplets/mouse-properties/mouse-properties.c:113
+#: capplets/screensaver-properties/callbacks.c:800
+#: capplets/session-properties/session-properties.c:297
+#: capplets/sound-properties/sound-properties.c:687
+#: capplets/sound-properties/sound-properties.c:748
+#: capplets/theme-switcher/gui.c:363
+#: capplets/ui-properties/ui-properties.c:515
+#: capplets/wm-properties/wm-properties-capplet.c:607
+#: control-center/callbacks.c:74 control-center/capplet-widget.c:263
+msgid "Close"
+msgstr "Stäng"
+
+#: capplets/background-properties/property-background.c:1361
 msgid "Disable background selection"
 msgstr "Stäng av val av bakgrund"
 
-#: capplets/background-properties/property-background.c:1482
+#: capplets/background-properties/property-background.c:1490
 msgid "Set parameters from saved state and exit"
 msgstr "Sätt parametrar från det lagrade läget och avsluta"
 
-#: capplets/background-properties/property-background.c:1483
+#: capplets/background-properties/property-background.c:1491
 msgid "IMAGE"
 msgstr "IMAGE"
 
-#: capplets/background-properties/property-background.c:1483
+#: capplets/background-properties/property-background.c:1491
 msgid "Sets the wallpaper to the value specified"
 msgstr "Sätter bakgrunden till det specificerade värdet"
 
-#: capplets/background-properties/property-background.c:1484
-#: capplets/background-properties/property-background.c:1485
+#: capplets/background-properties/property-background.c:1492
+#: capplets/background-properties/property-background.c:1493
 msgid "COLOR"
 msgstr "COLOR"
 
-#: capplets/background-properties/property-background.c:1484
+#: capplets/background-properties/property-background.c:1492
 msgid "Specifies the background color"
 msgstr "Specificerar bakgrundsfärgen"
 
-#: capplets/background-properties/property-background.c:1485
+#: capplets/background-properties/property-background.c:1493
 msgid "Specifies end background color for gradient"
 msgstr "Specificerar bakgrundsfärgen för gradienten"
 
-#: capplets/background-properties/property-background.c:1486
-msgid "ORIENT"
-msgstr "ORIENT"
-
-#: capplets/background-properties/property-background.c:1486
+#: capplets/background-properties/property-background.c:1494
 msgid "Gradient orientation: vertical or horizontal"
 msgstr "Graderingsriktning: vertikal eller horisontell?"
 
-#: capplets/background-properties/property-background.c:1487
+#: capplets/background-properties/property-background.c:1494
+msgid "ORIENT"
+msgstr "ORIENT"
+
+#: capplets/background-properties/property-background.c:1495
 msgid "Use a solid fill for the background"
 msgstr "Använd solid bakgrundsfärg"
 
-#: capplets/background-properties/property-background.c:1488
+#: capplets/background-properties/property-background.c:1496
 msgid "Use a gradient fill for the background"
 msgstr "Använd gradient för bakgrunden"
 
-#: capplets/background-properties/property-background.c:1489
-msgid "MODE"
-msgstr "MODE"
-
-#: capplets/background-properties/property-background.c:1489
+#: capplets/background-properties/property-background.c:1497
 msgid "Display wallpaper: tiled, centered, scaled or ratio"
 msgstr "Visa bakgrund: sida vid sida, centrerad, skalad eller ratio"
 
-#: capplets/bell-properties/bell-properties.c:170
+#: capplets/background-properties/property-background.c:1497
+msgid "MODE"
+msgstr "MODE"
+
+#: capplets/bell-properties/bell-properties.c:178
 msgid "Keyboard Bell"
 msgstr "Tangentbordsljud"
 
-#: capplets/bell-properties/bell-properties.c:181
+#: capplets/bell-properties/bell-properties.c:189
 msgid "Volume"
 msgstr "Volym"
 
-#: capplets/bell-properties/bell-properties.c:184
+#: capplets/bell-properties/bell-properties.c:192
 msgid "Pitch (Hz)"
 msgstr "Tonläge (Hz)"
 
-#: capplets/bell-properties/bell-properties.c:187
+#: capplets/bell-properties/bell-properties.c:195
 msgid "Duration (ms)"
 msgstr "Längd (ms)"
 
-#: capplets/bell-properties/bell-properties.c:217
+#: capplets/bell-properties/bell-properties.c:225
 msgid "Test"
 msgstr "Test"
 
-#: capplets/bell-properties/bell-properties.c:239
+#: capplets/bell-properties/bell-properties.c:247
 #, fuzzy
 msgid ""
 "an initialization error occurred while starting 'bell-properties-capplet'.\n"
@@ -190,47 +222,47 @@ msgstr ""
 "ett fel uppstod vid start av 'wm-properties-capplet'.\n"
 "avbryter...\n"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:229
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:237
 msgid "Gnome editor"
 msgstr "Gnome-editor"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:240
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:248
 msgid "Run In Terminal"
 msgstr "Kör i Terminal"
 
-#: capplets/keyboard-properties/keyboard-properties.c:208
+#: capplets/keyboard-properties/keyboard-properties.c:216
 msgid "Auto-repeat"
 msgstr "Auto-repetering"
 
-#: capplets/keyboard-properties/keyboard-properties.c:219
+#: capplets/keyboard-properties/keyboard-properties.c:227
 msgid "Enable auto-repeat"
 msgstr "Aktivera auto-repetering"
 
-#: capplets/keyboard-properties/keyboard-properties.c:229
+#: capplets/keyboard-properties/keyboard-properties.c:237
 msgid "Repeat rate"
 msgstr "Repeteringshastighet"
 
-#: capplets/keyboard-properties/keyboard-properties.c:232
+#: capplets/keyboard-properties/keyboard-properties.c:240
 msgid "Repeat Delay"
 msgstr "Tid innan repetering"
 
-#: capplets/keyboard-properties/keyboard-properties.c:234
+#: capplets/keyboard-properties/keyboard-properties.c:242
 msgid "Keyboard click"
 msgstr "Tangentbordsklick"
 
-#: capplets/keyboard-properties/keyboard-properties.c:245
+#: capplets/keyboard-properties/keyboard-properties.c:253
 msgid "Click on keypress"
 msgstr "Klicka vid tangentnedslag"
 
-#: capplets/keyboard-properties/keyboard-properties.c:255
+#: capplets/keyboard-properties/keyboard-properties.c:263
 msgid "Click volume"
 msgstr "Klickvolym"
 
-#: capplets/keyboard-properties/keyboard-properties.c:265
+#: capplets/keyboard-properties/keyboard-properties.c:273
 msgid "Test settings"
 msgstr "Prova inställningar"
 
-#: capplets/keyboard-properties/keyboard-properties.c:307
+#: capplets/keyboard-properties/keyboard-properties.c:315
 #, fuzzy
 msgid ""
 "an initialization error occurred while starting "
@@ -383,21 +415,21 @@ msgstr ""
 "\n"
 "Inställningarna kommer inte att kunna sparas"
 
-#: capplets/mime-type/mime-type-capplet.c:77
+#: capplets/mime-type/mime-type-capplet.c:79
 #: capplets/session-properties/session-properties.c:203
-#: capplets/wm-properties/wm-properties-capplet.c:1041
+#: capplets/wm-properties/wm-properties-capplet.c:1049
 msgid "Delete"
 msgstr "Radera"
 
-#: capplets/mime-type/mime-type-capplet.c:87
+#: capplets/mime-type/mime-type-capplet.c:89
 #: capplets/session-properties/session-properties.c:193
-#: capplets/wm-properties/wm-properties-capplet.c:1031
+#: capplets/wm-properties/wm-properties-capplet.c:1039
 msgid "Add..."
 msgstr "Lägg till..."
 
-#: capplets/mime-type/mime-type-capplet.c:91
+#: capplets/mime-type/mime-type-capplet.c:93
 #: capplets/session-properties/session-properties.c:198
-#: capplets/wm-properties/wm-properties-capplet.c:1036
+#: capplets/wm-properties/wm-properties-capplet.c:1044
 msgid "Edit..."
 msgstr "Redigera..."
 
@@ -445,48 +477,48 @@ msgstr ""
 "Du kan använda två stycken reg-exp för att identifiera mime-typen.\n"
 "Dessa fält är valfria."
 
-#: capplets/mouse-properties/mouse-properties.c:259
+#: capplets/mouse-properties/mouse-properties.c:267
 msgid "Mouse buttons"
 msgstr "Musknappar"
 
-#: capplets/mouse-properties/mouse-properties.c:268
+#: capplets/mouse-properties/mouse-properties.c:276
 msgid "Left handed"
 msgstr "Vänsterhänt"
 
-#: capplets/mouse-properties/mouse-properties.c:270
+#: capplets/mouse-properties/mouse-properties.c:278
 msgid "Right handed"
 msgstr "Högerhänt"
 
 #. Mouse motion
-#: capplets/mouse-properties/mouse-properties.c:296
+#: capplets/mouse-properties/mouse-properties.c:304
 msgid "Mouse motion"
 msgstr "Musrörelse"
 
-#: capplets/mouse-properties/mouse-properties.c:306
+#: capplets/mouse-properties/mouse-properties.c:314
 msgid "Acceleration"
 msgstr "Acceleration"
 
-#: capplets/mouse-properties/mouse-properties.c:306
+#: capplets/mouse-properties/mouse-properties.c:314
 msgid "Fast"
 msgstr "Fort"
 
-#: capplets/mouse-properties/mouse-properties.c:306
+#: capplets/mouse-properties/mouse-properties.c:314
 msgid "Slow"
 msgstr "Långsamt"
 
-#: capplets/mouse-properties/mouse-properties.c:317
-msgid "Threshold"
-msgstr "Tröskel"
-
-#: capplets/mouse-properties/mouse-properties.c:317
+#: capplets/mouse-properties/mouse-properties.c:325
 msgid "Large"
 msgstr "Stor"
 
-#: capplets/mouse-properties/mouse-properties.c:317
+#: capplets/mouse-properties/mouse-properties.c:325
 msgid "Small"
 msgstr "Liten"
 
-#: capplets/mouse-properties/mouse-properties.c:341
+#: capplets/mouse-properties/mouse-properties.c:325
+msgid "Threshold"
+msgstr "Tröskel"
+
+#: capplets/mouse-properties/mouse-properties.c:349
 #, fuzzy
 msgid ""
 "an initialization error occurred while starting 'mouse-properties-capplet'.\n"
@@ -763,17 +795,9 @@ msgstr "Kommando"
 msgid "Browse Currently Running Programs..."
 msgstr "Visa aktuella program..."
 
-#: capplets/session-properties/session-properties.c:379
+#: capplets/session-properties/session-properties.c:388
 msgid "Only display warnings."
 msgstr "Visa bara varningar."
-
-#: capplets/session-properties/session-properties.c:405
-#, fuzzy
-msgid ""
-"an initialization error occurred while starting 'session-properties-capplet'."
-msgstr ""
-"ett fel uppstod vid start av 'wm-properties-capplet'.\n"
-"avbryter...\n"
 
 #: capplets/session-properties/startup-programs.c:288
 #: capplets/session-properties/startup-programs.c:295
@@ -854,11 +878,11 @@ msgid ""
 "This copy of the GNOME control center was not compiled with sound support"
 msgstr "Denna kopia av GNOME-kontrollpanelen är inte kompilerad med ljudstöd"
 
-#: capplets/sound-properties/sound-properties.c:732
+#: capplets/sound-properties/sound-properties.c:740
 msgid "The sound file for this event does not exist."
 msgstr "Ljudfilen för aktuell händelse finns inte."
 
-#: capplets/sound-properties/sound-properties.c:734
+#: capplets/sound-properties/sound-properties.c:742
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package\n"
@@ -867,10 +891,6 @@ msgstr ""
 "Ljud-filen för aktuell händelse finns inte.\n"
 "Du kan installera gnome-audio-paketet\n"
 "för en uppsättning standardljud."
-
-#: capplets/sound-properties/sound-properties.c:740
-msgid "Close"
-msgstr "Stäng"
 
 #: capplets/theme-switcher/demo.c:50
 msgid "One"
@@ -890,12 +910,12 @@ msgid "Meenie"
 msgstr "Två"
 
 #: capplets/theme-switcher/demo.c:53
-msgid "Mynie"
-msgstr "Tre"
-
-#: capplets/theme-switcher/demo.c:53
 msgid "Moe"
 msgstr "Fyra"
+
+#: capplets/theme-switcher/demo.c:53
+msgid "Mynie"
+msgstr "Tre"
 
 #: capplets/theme-switcher/demo.c:54
 msgid "Catcha"
@@ -1293,57 +1313,57 @@ msgstr ""
 "göra det genom att välja \"Kör program\" i\n"
 "fot-menyn\n"
 
-#: capplets/wm-properties/wm-properties-capplet.c:703
+#: capplets/wm-properties/wm-properties-capplet.c:711
 msgid "Add New Window Manager"
 msgstr "Lägg till ny fönsterhanterare"
 
-#: capplets/wm-properties/wm-properties-capplet.c:704
-#: capplets/wm-properties/wm-properties-capplet.c:812
-#: capplets/wm-properties/wm-properties-capplet.c:819
-#: capplets/wm-properties/wm-properties-capplet.c:964
-#: control-center/capplet-manager.c:180
-msgid "OK"
-msgstr "OK"
-
-#: capplets/wm-properties/wm-properties-capplet.c:704
+#: capplets/wm-properties/wm-properties-capplet.c:712
 #: control-center/capplet-manager.c:185
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: capplets/wm-properties/wm-properties-capplet.c:715
+#: capplets/wm-properties/wm-properties-capplet.c:712
+#: capplets/wm-properties/wm-properties-capplet.c:820
+#: capplets/wm-properties/wm-properties-capplet.c:827
+#: capplets/wm-properties/wm-properties-capplet.c:972
+#: control-center/capplet-manager.c:180
+msgid "OK"
+msgstr "OK"
+
+#: capplets/wm-properties/wm-properties-capplet.c:723
 msgid "Name:"
 msgstr "Namn:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:728
+#: capplets/wm-properties/wm-properties-capplet.c:736
 msgid "Command:"
 msgstr "Kommando:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:741
+#: capplets/wm-properties/wm-properties-capplet.c:749
 msgid "Configuration Command:"
 msgstr "Kommando för konfiguration:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:760
+#: capplets/wm-properties/wm-properties-capplet.c:768
 msgid "Window manager is session managed"
 msgstr "Fönsterhanterare använder sessionshantering"
 
-#: capplets/wm-properties/wm-properties-capplet.c:810
+#: capplets/wm-properties/wm-properties-capplet.c:818
 msgid "Name cannot be empty"
 msgstr "Du måste skriva in ett namn"
 
-#: capplets/wm-properties/wm-properties-capplet.c:817
+#: capplets/wm-properties/wm-properties-capplet.c:825
 msgid "Command cannot be empty"
 msgstr "Du måste skriva in ett kommando"
 
-#: capplets/wm-properties/wm-properties-capplet.c:866
-#: capplets/wm-properties/wm-properties-capplet.c:908
+#: capplets/wm-properties/wm-properties-capplet.c:874
+#: capplets/wm-properties/wm-properties-capplet.c:916
 msgid "Edit Window Manager"
 msgstr "Redigera fönsterhanterare"
 
-#: capplets/wm-properties/wm-properties-capplet.c:963
+#: capplets/wm-properties/wm-properties-capplet.c:971
 msgid "You cannot delete the current Window Manager"
 msgstr "Du kan inte ta bort den aktuella fönsterhanteraren"
 
-#: capplets/wm-properties/wm-properties-capplet.c:1076
+#: capplets/wm-properties/wm-properties-capplet.c:1084
 msgid ""
 "an initialization error occurred while starting 'wm-properties-capplet'.\n"
 "aborting...\n"
@@ -1351,11 +1371,17 @@ msgstr ""
 "ett fel uppstod vid start av 'wm-properties-capplet'.\n"
 "avbryter...\n"
 
-#: control-center/callbacks.c:85
+#: control-center/callbacks.c:72
+msgid ""
+"No help is available/installed. Please make sure you\n"
+"have the GNOME User's Guide installed on your system."
+msgstr ""
+
+#: control-center/callbacks.c:94
 msgid "GNOME Control Center"
 msgstr "GNOME kontrollpanel"
 
-#: control-center/callbacks.c:88
+#: control-center/callbacks.c:97
 msgid "Desktop Properties manager."
 msgstr "Egenskaper för skrivbordet."
 
@@ -1371,66 +1397,70 @@ msgstr "Återgå"
 msgid "Help"
 msgstr "Hjälp"
 
-#: control-center/capplet-widget-libs.c:49
-msgid "id of the capplet -- assigned by the control-center"
-msgstr "id av capplet -- tilldelad av kontrollpanelen"
-
-#: control-center/capplet-widget-libs.c:49
+#: control-center/capplet-widget-libs.c:46
 msgid "ID"
 msgstr "ID"
 
-#: control-center/capplet-widget-libs.c:50
-msgid "Multi-capplet id."
-msgstr "Multi-capplet id"
+#: control-center/capplet-widget-libs.c:46
+msgid "id of the capplet -- assigned by the control-center"
+msgstr "id av capplet -- tilldelad av kontrollpanelen"
 
-#: control-center/capplet-widget-libs.c:50
+#: control-center/capplet-widget-libs.c:47
 msgid "CAPID"
 msgstr "CAPID"
 
-#: control-center/capplet-widget-libs.c:51
+#: control-center/capplet-widget-libs.c:47
+msgid "Multi-capplet id."
+msgstr "Multi-capplet id"
+
+#: control-center/capplet-widget-libs.c:48
 msgid "X ID of the socket it's plugged into"
 msgstr "X ID för socketen den är pluggad i"
 
-#: control-center/capplet-widget-libs.c:51
+#: control-center/capplet-widget-libs.c:48
 msgid "XID"
 msgstr "XID"
 
-#: control-center/capplet-widget-libs.c:52
-msgid "IOR of the control-center"
-msgstr "IOR för kontrollpanelen"
-
-#: control-center/capplet-widget-libs.c:52
+#: control-center/capplet-widget-libs.c:49
 msgid "IOR"
 msgstr "IOR"
 
-#: control-center/capplet-widget-libs.c:53
+#: control-center/capplet-widget-libs.c:49
+msgid "IOR of the control-center"
+msgstr "IOR för kontrollpanelen"
+
+#: control-center/capplet-widget-libs.c:50
 msgid "Initialize session settings"
 msgstr "Initialisera inställningar för session"
 
-#: control-center/capplet-widget-libs.c:54
+#: control-center/capplet-widget-libs.c:51
 msgid "Ignore default action.  Used for custom init-session cases"
 msgstr "Ignorera standard-händelse. Används för valfria init-session-fall"
 
-#: control-center/corba-glue.c:75
-msgid "capplet-command to be run."
-msgstr "capplet-kommando som ska köras."
+#: control-center/capplet-widget.c:262
+msgid "Sorry, no help is available for these settings."
+msgstr ""
 
 #: control-center/corba-glue.c:75
 msgid "CAPPLET"
 msgstr "CAPPLET"
 
+#: control-center/corba-glue.c:75
+msgid "capplet-command to be run."
+msgstr "capplet-kommando som ska köras."
+
 #: control-center/main.c:31
 msgid "Help with the GNOME control-center."
 msgstr "Hjälp med GNOME kontrollpanelen."
+
+#: control-center/main.c:59
+msgid "Discard all changes"
+msgstr "Återställ alla ändringar"
 
 #. we create the widgets
 #: control-center/main.c:59
 msgid "Warning:"
 msgstr "Varning:"
-
-#: control-center/main.c:59
-msgid "Discard all changes"
-msgstr "Återställ alla ändringar"
 
 #. ...labels, etc
 #: control-center/main.c:68
@@ -1448,3 +1478,10 @@ msgstr "Kontrollpanelen"
 
 #~ msgid "Default Gtk setting"
 #~ msgstr "Standard Gtk-inställning"
+
+#, fuzzy
+#~ msgid ""
+#~ "an initialization error occurred while starting 'session-properties-capplet'."
+#~ msgstr ""
+#~ "ett fel uppstod vid start av 'wm-properties-capplet'.\n"
+#~ "avbryter...\n"

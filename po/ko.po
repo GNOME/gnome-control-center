@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0.5\n"
-"POT-Creation-Date: 1999-08-16 11:59-0400\n"
+"POT-Creation-Date: 1999-09-06 11:51+0200\n"
 "PO-Revision-Date: 1999-08-13 12:20:27+0900\n"
 "Last-Translator: Sung-Hyun Nam <namsh@lgic.co.kr>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -14,12 +14,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: capplets/background-properties/app-background.c:13
-msgid "Set background image."
-msgstr "배경 그림 정하기"
-
-#: capplets/background-properties/app-background.c:13
 msgid "IMAGE-FILE"
 msgstr "<그림-파일>"
+
+#: capplets/background-properties/app-background.c:13
+msgid "Set background image."
+msgstr "배경 그림 정하기"
 
 #: capplets/background-properties/app-background.c:34
 #, fuzzy
@@ -74,7 +74,7 @@ msgid "Can't find an hbox, using a normal file selection"
 msgstr "정상적인 파일선택 대화상자에서, hbox를 찾을 수 없습니다."
 
 #: capplets/background-properties/property-background.c:888
-#: capplets/keyboard-properties/keyboard-properties.c:257
+#: capplets/keyboard-properties/keyboard-properties.c:265
 #: capplets/screensaver-properties/screensaver-dialog.c:25
 #: capplets/theme-switcher/gui.c:225 capplets/theme-switcher/gui.c:297
 msgid "Preview"
@@ -108,82 +108,114 @@ msgstr "중앙"
 msgid "Tiled"
 msgstr "타일"
 
-#: capplets/background-properties/property-background.c:1353
+#: capplets/background-properties/property-background.c:1134
+#: capplets/bell-properties/bell-properties.c:61
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:179
+#: capplets/keyboard-properties/keyboard-properties.c:81
+#: capplets/mouse-properties/mouse-properties.c:111
+#: capplets/screensaver-properties/callbacks.c:798
+#: capplets/session-properties/session-properties.c:295
+#: capplets/sound-properties/sound-properties.c:685
+#: capplets/theme-switcher/gui.c:361
+#: capplets/ui-properties/ui-properties.c:513
+#: capplets/wm-properties/wm-properties-capplet.c:605
+msgid ""
+"No help is available/installed for these settings. Please make sure you\n"
+"have the GNOME User's Guide installed on your system."
+msgstr ""
+
+#: capplets/background-properties/property-background.c:1136
+#: capplets/bell-properties/bell-properties.c:63
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:181
+#: capplets/keyboard-properties/keyboard-properties.c:83
+#: capplets/mouse-properties/mouse-properties.c:113
+#: capplets/screensaver-properties/callbacks.c:800
+#: capplets/session-properties/session-properties.c:297
+#: capplets/sound-properties/sound-properties.c:687
+#: capplets/sound-properties/sound-properties.c:748
+#: capplets/theme-switcher/gui.c:363
+#: capplets/ui-properties/ui-properties.c:515
+#: capplets/wm-properties/wm-properties-capplet.c:607
+#: control-center/callbacks.c:74 control-center/capplet-widget.c:263
+msgid "Close"
+msgstr "닫기"
+
+#: capplets/background-properties/property-background.c:1361
 msgid "Disable background selection"
 msgstr "배경 선택 안 하기"
 
-#: capplets/background-properties/property-background.c:1482
+#: capplets/background-properties/property-background.c:1490
 msgid "Set parameters from saved state and exit"
 msgstr "저장된 상태에서 하고 종료"
 
-#: capplets/background-properties/property-background.c:1483
+#: capplets/background-properties/property-background.c:1491
 msgid "IMAGE"
 msgstr "그림"
 
-#: capplets/background-properties/property-background.c:1483
+#: capplets/background-properties/property-background.c:1491
 msgid "Sets the wallpaper to the value specified"
 msgstr "벽지를 지정된 값으로 맞춘다"
 
-#: capplets/background-properties/property-background.c:1484
-#: capplets/background-properties/property-background.c:1485
+#: capplets/background-properties/property-background.c:1492
+#: capplets/background-properties/property-background.c:1493
 msgid "COLOR"
 msgstr "<색깔>"
 
-#: capplets/background-properties/property-background.c:1484
+#: capplets/background-properties/property-background.c:1492
 msgid "Specifies the background color"
 msgstr "배경색 지정"
 
-#: capplets/background-properties/property-background.c:1485
+#: capplets/background-properties/property-background.c:1493
 msgid "Specifies end background color for gradient"
 msgstr "단계적인 배경색의 마지막 색 지정"
 
-#: capplets/background-properties/property-background.c:1486
-msgid "ORIENT"
-msgstr "<방향>"
-
-#: capplets/background-properties/property-background.c:1486
+#: capplets/background-properties/property-background.c:1494
 msgid "Gradient orientation: vertical or horizontal"
 msgstr "단계적인 색을 사용할 방향: 수직 또는 수평"
 
-#: capplets/background-properties/property-background.c:1487
+#: capplets/background-properties/property-background.c:1494
+msgid "ORIENT"
+msgstr "<방향>"
+
+#: capplets/background-properties/property-background.c:1495
 msgid "Use a solid fill for the background"
 msgstr "배경을 한가지 색으로 채우기"
 
-#: capplets/background-properties/property-background.c:1488
+#: capplets/background-properties/property-background.c:1496
 msgid "Use a gradient fill for the background"
 msgstr "배경에 단계적인 색 사용"
 
-#: capplets/background-properties/property-background.c:1489
-msgid "MODE"
-msgstr "<모드>"
-
-#: capplets/background-properties/property-background.c:1489
+#: capplets/background-properties/property-background.c:1497
 msgid "Display wallpaper: tiled, centered, scaled or ratio"
 msgstr ""
 "배경그림 표시방법: tiled(바둑판), centered(중앙), scaled(그림크기조정), 혹은 "
 "ratio(그림 가로세로비율 고정)"
 
-#: capplets/bell-properties/bell-properties.c:170
+#: capplets/background-properties/property-background.c:1497
+msgid "MODE"
+msgstr "<모드>"
+
+#: capplets/bell-properties/bell-properties.c:178
 msgid "Keyboard Bell"
 msgstr "키보드 삑소리"
 
-#: capplets/bell-properties/bell-properties.c:181
+#: capplets/bell-properties/bell-properties.c:189
 msgid "Volume"
 msgstr "크기"
 
-#: capplets/bell-properties/bell-properties.c:184
+#: capplets/bell-properties/bell-properties.c:192
 msgid "Pitch (Hz)"
 msgstr "진동수 (헤르쯔)"
 
-#: capplets/bell-properties/bell-properties.c:187
+#: capplets/bell-properties/bell-properties.c:195
 msgid "Duration (ms)"
 msgstr "길이 (천분의 일초)"
 
-#: capplets/bell-properties/bell-properties.c:217
+#: capplets/bell-properties/bell-properties.c:225
 msgid "Test"
 msgstr "테스트"
 
-#: capplets/bell-properties/bell-properties.c:239
+#: capplets/bell-properties/bell-properties.c:247
 #, fuzzy
 msgid ""
 "an initialization error occurred while starting 'bell-properties-capplet'.\n"
@@ -192,47 +224,47 @@ msgstr ""
 "'wm-properties-capplet'을 시작할 때 초기화 애러.\n"
 "중지...\n"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:229
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:237
 msgid "Gnome editor"
 msgstr "그놈 편집기"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:240
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:248
 msgid "Run In Terminal"
 msgstr "터미널에서 실행"
 
-#: capplets/keyboard-properties/keyboard-properties.c:208
+#: capplets/keyboard-properties/keyboard-properties.c:216
 msgid "Auto-repeat"
 msgstr "자동반복"
 
-#: capplets/keyboard-properties/keyboard-properties.c:219
+#: capplets/keyboard-properties/keyboard-properties.c:227
 msgid "Enable auto-repeat"
 msgstr "자동반복하기"
 
-#: capplets/keyboard-properties/keyboard-properties.c:229
+#: capplets/keyboard-properties/keyboard-properties.c:237
 msgid "Repeat rate"
 msgstr "반복정도"
 
-#: capplets/keyboard-properties/keyboard-properties.c:232
+#: capplets/keyboard-properties/keyboard-properties.c:240
 msgid "Repeat Delay"
 msgstr "반복 지연"
 
-#: capplets/keyboard-properties/keyboard-properties.c:234
+#: capplets/keyboard-properties/keyboard-properties.c:242
 msgid "Keyboard click"
 msgstr "키보드 누를때 소리"
 
-#: capplets/keyboard-properties/keyboard-properties.c:245
+#: capplets/keyboard-properties/keyboard-properties.c:253
 msgid "Click on keypress"
 msgstr "누를때 소리 내기"
 
-#: capplets/keyboard-properties/keyboard-properties.c:255
+#: capplets/keyboard-properties/keyboard-properties.c:263
 msgid "Click volume"
 msgstr "누를때 소리 크기"
 
-#: capplets/keyboard-properties/keyboard-properties.c:265
+#: capplets/keyboard-properties/keyboard-properties.c:273
 msgid "Test settings"
 msgstr "설정 테스트"
 
-#: capplets/keyboard-properties/keyboard-properties.c:307
+#: capplets/keyboard-properties/keyboard-properties.c:315
 #, fuzzy
 msgid ""
 "an initialization error occurred while starting "
@@ -387,21 +419,21 @@ msgstr ""
 "\n"
 "현재 상태를 저장할 수 없을 것입니다"
 
-#: capplets/mime-type/mime-type-capplet.c:77
+#: capplets/mime-type/mime-type-capplet.c:79
 #: capplets/session-properties/session-properties.c:203
-#: capplets/wm-properties/wm-properties-capplet.c:1041
+#: capplets/wm-properties/wm-properties-capplet.c:1049
 msgid "Delete"
 msgstr "지우기"
 
-#: capplets/mime-type/mime-type-capplet.c:87
+#: capplets/mime-type/mime-type-capplet.c:89
 #: capplets/session-properties/session-properties.c:193
-#: capplets/wm-properties/wm-properties-capplet.c:1031
+#: capplets/wm-properties/wm-properties-capplet.c:1039
 msgid "Add..."
 msgstr "추가..."
 
-#: capplets/mime-type/mime-type-capplet.c:91
+#: capplets/mime-type/mime-type-capplet.c:93
 #: capplets/session-properties/session-properties.c:198
-#: capplets/wm-properties/wm-properties-capplet.c:1036
+#: capplets/wm-properties/wm-properties-capplet.c:1044
 msgid "Edit..."
 msgstr "편집..."
 
@@ -449,48 +481,48 @@ msgstr ""
 "MIME 타입을 판별하는 데 쓰이도록 두 개의 정규식을 쓸 수\n"
 "있습니다.  사용하지 않을 수도 있습니다."
 
-#: capplets/mouse-properties/mouse-properties.c:259
+#: capplets/mouse-properties/mouse-properties.c:267
 msgid "Mouse buttons"
 msgstr "마우스 버튼"
 
-#: capplets/mouse-properties/mouse-properties.c:268
+#: capplets/mouse-properties/mouse-properties.c:276
 msgid "Left handed"
 msgstr "왼손잡이"
 
-#: capplets/mouse-properties/mouse-properties.c:270
+#: capplets/mouse-properties/mouse-properties.c:278
 msgid "Right handed"
 msgstr "오른손잡이"
 
 #. Mouse motion
-#: capplets/mouse-properties/mouse-properties.c:296
+#: capplets/mouse-properties/mouse-properties.c:304
 msgid "Mouse motion"
 msgstr "마우스 움직임"
 
-#: capplets/mouse-properties/mouse-properties.c:306
+#: capplets/mouse-properties/mouse-properties.c:314
 msgid "Acceleration"
 msgstr "마우스 속도"
 
-#: capplets/mouse-properties/mouse-properties.c:306
+#: capplets/mouse-properties/mouse-properties.c:314
 msgid "Fast"
 msgstr "빠르게"
 
-#: capplets/mouse-properties/mouse-properties.c:306
+#: capplets/mouse-properties/mouse-properties.c:314
 msgid "Slow"
 msgstr "느리게"
 
-#: capplets/mouse-properties/mouse-properties.c:317
-msgid "Threshold"
-msgstr "처음 움직임"
-
-#: capplets/mouse-properties/mouse-properties.c:317
+#: capplets/mouse-properties/mouse-properties.c:325
 msgid "Large"
 msgstr "크게"
 
-#: capplets/mouse-properties/mouse-properties.c:317
+#: capplets/mouse-properties/mouse-properties.c:325
 msgid "Small"
 msgstr "작게"
 
-#: capplets/mouse-properties/mouse-properties.c:341
+#: capplets/mouse-properties/mouse-properties.c:325
+msgid "Threshold"
+msgstr "처음 움직임"
+
+#: capplets/mouse-properties/mouse-properties.c:349
 #, fuzzy
 msgid ""
 "an initialization error occurred while starting 'mouse-properties-capplet'.\n"
@@ -766,17 +798,9 @@ msgstr "명령어"
 msgid "Browse Currently Running Programs..."
 msgstr "현재 실행중인 프로그램 보기..."
 
-#: capplets/session-properties/session-properties.c:379
+#: capplets/session-properties/session-properties.c:388
 msgid "Only display warnings."
 msgstr "경고만 표시."
-
-#: capplets/session-properties/session-properties.c:405
-#, fuzzy
-msgid ""
-"an initialization error occurred while starting 'session-properties-capplet'."
-msgstr ""
-"'wm-properties-capplet'을 시작할 때 초기화 애러.\n"
-"중지...\n"
 
 #: capplets/session-properties/startup-programs.c:288
 #: capplets/session-properties/startup-programs.c:295
@@ -858,11 +882,11 @@ msgid ""
 "This copy of the GNOME control center was not compiled with sound support"
 msgstr "이 그놈 조종판은 소리 기능이 컴파일 과정에서 빠졌습니다."
 
-#: capplets/sound-properties/sound-properties.c:732
+#: capplets/sound-properties/sound-properties.c:740
 msgid "The sound file for this event does not exist."
 msgstr "이 이벤트에 대한 사운드 파일이 없습니다."
 
-#: capplets/sound-properties/sound-properties.c:734
+#: capplets/sound-properties/sound-properties.c:742
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package\n"
@@ -871,10 +895,6 @@ msgstr ""
 "이 이벤트에 대한 사운드 파일이 없습니다.\n"
 "기본적인 소리가 들어 있는 gnome-audio 패키지를\n"
 "설치해야 할 것입니다."
-
-#: capplets/sound-properties/sound-properties.c:740
-msgid "Close"
-msgstr "닫기"
 
 #: capplets/theme-switcher/demo.c:50
 msgid "One"
@@ -895,12 +915,12 @@ msgid "Meenie"
 msgstr "Meenie"
 
 #: capplets/theme-switcher/demo.c:53
-msgid "Mynie"
-msgstr "Mynie"
-
-#: capplets/theme-switcher/demo.c:53
 msgid "Moe"
 msgstr "Moe"
+
+#: capplets/theme-switcher/demo.c:53
+msgid "Mynie"
+msgstr "Mynie"
 
 #: capplets/theme-switcher/demo.c:54
 msgid "Catcha"
@@ -1290,57 +1310,57 @@ msgstr ""
 "메뉴에서 \"Run Program\"을 선택하면\n"
 "수동으로 실행할 수 있습니다.\n"
 
-#: capplets/wm-properties/wm-properties-capplet.c:703
+#: capplets/wm-properties/wm-properties-capplet.c:711
 msgid "Add New Window Manager"
 msgstr "새 창 관리자 시작"
 
-#: capplets/wm-properties/wm-properties-capplet.c:704
-#: capplets/wm-properties/wm-properties-capplet.c:812
-#: capplets/wm-properties/wm-properties-capplet.c:819
-#: capplets/wm-properties/wm-properties-capplet.c:964
-#: control-center/capplet-manager.c:180
-msgid "OK"
-msgstr "확인"
-
-#: capplets/wm-properties/wm-properties-capplet.c:704
+#: capplets/wm-properties/wm-properties-capplet.c:712
 #: control-center/capplet-manager.c:185
 msgid "Cancel"
 msgstr "취소"
 
-#: capplets/wm-properties/wm-properties-capplet.c:715
+#: capplets/wm-properties/wm-properties-capplet.c:712
+#: capplets/wm-properties/wm-properties-capplet.c:820
+#: capplets/wm-properties/wm-properties-capplet.c:827
+#: capplets/wm-properties/wm-properties-capplet.c:972
+#: control-center/capplet-manager.c:180
+msgid "OK"
+msgstr "확인"
+
+#: capplets/wm-properties/wm-properties-capplet.c:723
 msgid "Name:"
 msgstr "이름:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:728
+#: capplets/wm-properties/wm-properties-capplet.c:736
 msgid "Command:"
 msgstr "명령어:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:741
+#: capplets/wm-properties/wm-properties-capplet.c:749
 msgid "Configuration Command:"
 msgstr "설정 명령어:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:760
+#: capplets/wm-properties/wm-properties-capplet.c:768
 msgid "Window manager is session managed"
 msgstr "창 관리자가 세션 관리됩니다."
 
-#: capplets/wm-properties/wm-properties-capplet.c:810
+#: capplets/wm-properties/wm-properties-capplet.c:818
 msgid "Name cannot be empty"
 msgstr "이름은 비어있으면 안 됩니다"
 
-#: capplets/wm-properties/wm-properties-capplet.c:817
+#: capplets/wm-properties/wm-properties-capplet.c:825
 msgid "Command cannot be empty"
 msgstr "명령어는 비어있으면 안 됩니다"
 
-#: capplets/wm-properties/wm-properties-capplet.c:866
-#: capplets/wm-properties/wm-properties-capplet.c:908
+#: capplets/wm-properties/wm-properties-capplet.c:874
+#: capplets/wm-properties/wm-properties-capplet.c:916
 msgid "Edit Window Manager"
 msgstr "창 관리자 편집"
 
-#: capplets/wm-properties/wm-properties-capplet.c:963
+#: capplets/wm-properties/wm-properties-capplet.c:971
 msgid "You cannot delete the current Window Manager"
 msgstr "현재 창관리자를 지울 수 없습니다"
 
-#: capplets/wm-properties/wm-properties-capplet.c:1076
+#: capplets/wm-properties/wm-properties-capplet.c:1084
 msgid ""
 "an initialization error occurred while starting 'wm-properties-capplet'.\n"
 "aborting...\n"
@@ -1348,11 +1368,17 @@ msgstr ""
 "'wm-properties-capplet'을 시작할 때 초기화 애러.\n"
 "중지...\n"
 
-#: control-center/callbacks.c:85
+#: control-center/callbacks.c:72
+msgid ""
+"No help is available/installed. Please make sure you\n"
+"have the GNOME User's Guide installed on your system."
+msgstr ""
+
+#: control-center/callbacks.c:94
 msgid "GNOME Control Center"
 msgstr "그놈 조종판"
 
-#: control-center/callbacks.c:88
+#: control-center/callbacks.c:97
 msgid "Desktop Properties manager."
 msgstr "데스크탑 속성 관리자."
 
@@ -1368,66 +1394,70 @@ msgstr "되돌리기"
 msgid "Help"
 msgstr "도움말"
 
-#: control-center/capplet-widget-libs.c:49
-msgid "id of the capplet -- assigned by the control-center"
-msgstr "캐플릿 id -- 콘트롤 센터에 의해 지정됨"
-
-#: control-center/capplet-widget-libs.c:49
+#: control-center/capplet-widget-libs.c:46
 msgid "ID"
 msgstr "아이디"
 
-#: control-center/capplet-widget-libs.c:50
-msgid "Multi-capplet id."
-msgstr "멀티-캐플릿 id."
+#: control-center/capplet-widget-libs.c:46
+msgid "id of the capplet -- assigned by the control-center"
+msgstr "캐플릿 id -- 콘트롤 센터에 의해 지정됨"
 
-#: control-center/capplet-widget-libs.c:50
+#: control-center/capplet-widget-libs.c:47
 msgid "CAPID"
 msgstr "캐플릿아이디"
 
-#: control-center/capplet-widget-libs.c:51
+#: control-center/capplet-widget-libs.c:47
+msgid "Multi-capplet id."
+msgstr "멀티-캐플릿 id."
+
+#: control-center/capplet-widget-libs.c:48
 msgid "X ID of the socket it's plugged into"
 msgstr "플러그인된 소켓의 X 아이디"
 
-#: control-center/capplet-widget-libs.c:51
+#: control-center/capplet-widget-libs.c:48
 msgid "XID"
 msgstr "X아이디"
 
-#: control-center/capplet-widget-libs.c:52
-msgid "IOR of the control-center"
-msgstr "콘트롤 센터의 IOR"
-
-#: control-center/capplet-widget-libs.c:52
+#: control-center/capplet-widget-libs.c:49
 msgid "IOR"
 msgstr "IOR"
 
-#: control-center/capplet-widget-libs.c:53
+#: control-center/capplet-widget-libs.c:49
+msgid "IOR of the control-center"
+msgstr "콘트롤 센터의 IOR"
+
+#: control-center/capplet-widget-libs.c:50
 msgid "Initialize session settings"
 msgstr "세션 설정 초기화"
 
-#: control-center/capplet-widget-libs.c:54
+#: control-center/capplet-widget-libs.c:51
 msgid "Ignore default action.  Used for custom init-session cases"
 msgstr "기본 동작 무시.  세션을 초기화하는 특수한 경우 사용됨"
 
-#: control-center/corba-glue.c:75
-msgid "capplet-command to be run."
-msgstr "실행할 캐플릿 명령."
+#: control-center/capplet-widget.c:262
+msgid "Sorry, no help is available for these settings."
+msgstr ""
 
 #: control-center/corba-glue.c:75
 msgid "CAPPLET"
 msgstr "<캐플릿>"
 
+#: control-center/corba-glue.c:75
+msgid "capplet-command to be run."
+msgstr "실행할 캐플릿 명령."
+
 #: control-center/main.c:31
 msgid "Help with the GNOME control-center."
 msgstr "그놈 조종판의 도움말."
+
+#: control-center/main.c:59
+msgid "Discard all changes"
+msgstr "변경 사항 모두 버리기"
 
 #. we create the widgets
 #: control-center/main.c:59
 msgid "Warning:"
 msgstr "경고:"
-
-#: control-center/main.c:59
-msgid "Discard all changes"
-msgstr "변경 사항 모두 버리기"
 
 #. ...labels, etc
 #: control-center/main.c:68
@@ -1442,3 +1472,10 @@ msgstr ""
 #: control-center/main.c:187
 msgid "Control Center"
 msgstr "조종판"
+
+#, fuzzy
+#~ msgid ""
+#~ "an initialization error occurred while starting 'session-properties-capplet'."
+#~ msgstr ""
+#~ "'wm-properties-capplet'을 시작할 때 초기화 애러.\n"
+#~ "중지...\n"

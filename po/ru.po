@@ -3,8 +3,8 @@
 # Sergey Panov <sipan@mit.edu> 1999
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 1999-08-16 22:24-0400\n"
+"Project-Id-Version: control-center 1.0.6\n"
+"POT-Creation-Date: 1999-09-06 11:51+0200\n"
 "PO-Revision-Date: 1999-08-18 00:39:42 EDT\n"
 "Last-Translator: Sergey Panov <sipan@mit.edu>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -13,12 +13,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: capplets/background-properties/app-background.c:13
-msgid "Set background image."
-msgstr "Установить фоновое изображение."
-
-#: capplets/background-properties/app-background.c:13
 msgid "IMAGE-FILE"
 msgstr "ФАЙЛ-ИЗОБРАЖЕНИЕ"
+
+#: capplets/background-properties/app-background.c:13
+msgid "Set background image."
+msgstr "Установить фоновое изображение."
 
 #: capplets/background-properties/app-background.c:34
 msgid ""
@@ -26,8 +26,7 @@ msgid ""
 "'background-properties-capplet'.\n"
 "aborting...\n"
 msgstr ""
-"ошибка инициализации при запуске "
-"'background-properties-capplet'.\n"
+"ошибка инициализации при запуске 'background-properties-capplet'.\n"
 "исполнение прервано ...\n"
 
 #: capplets/background-properties/property-background.c:244
@@ -73,7 +72,7 @@ msgid "Can't find an hbox, using a normal file selection"
 msgstr "Не найден hbox, используется обычный выбор файлов"
 
 #: capplets/background-properties/property-background.c:888
-#: capplets/keyboard-properties/keyboard-properties.c:257
+#: capplets/keyboard-properties/keyboard-properties.c:265
 #: capplets/screensaver-properties/screensaver-dialog.c:25
 #: capplets/theme-switcher/gui.c:225 capplets/theme-switcher/gui.c:297
 msgid "Preview"
@@ -107,80 +106,112 @@ msgstr "В центре"
 msgid "Tiled"
 msgstr "Мозаика"
 
-#: capplets/background-properties/property-background.c:1353
+#: capplets/background-properties/property-background.c:1134
+#: capplets/bell-properties/bell-properties.c:61
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:179
+#: capplets/keyboard-properties/keyboard-properties.c:81
+#: capplets/mouse-properties/mouse-properties.c:111
+#: capplets/screensaver-properties/callbacks.c:798
+#: capplets/session-properties/session-properties.c:295
+#: capplets/sound-properties/sound-properties.c:685
+#: capplets/theme-switcher/gui.c:361
+#: capplets/ui-properties/ui-properties.c:513
+#: capplets/wm-properties/wm-properties-capplet.c:605
+msgid ""
+"No help is available/installed for these settings. Please make sure you\n"
+"have the GNOME User's Guide installed on your system."
+msgstr ""
+
+#: capplets/background-properties/property-background.c:1136
+#: capplets/bell-properties/bell-properties.c:63
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:181
+#: capplets/keyboard-properties/keyboard-properties.c:83
+#: capplets/mouse-properties/mouse-properties.c:113
+#: capplets/screensaver-properties/callbacks.c:800
+#: capplets/session-properties/session-properties.c:297
+#: capplets/sound-properties/sound-properties.c:687
+#: capplets/sound-properties/sound-properties.c:748
+#: capplets/theme-switcher/gui.c:363
+#: capplets/ui-properties/ui-properties.c:515
+#: capplets/wm-properties/wm-properties-capplet.c:607
+#: control-center/callbacks.c:74 control-center/capplet-widget.c:263
+msgid "Close"
+msgstr "Закрыть"
+
+#: capplets/background-properties/property-background.c:1361
 msgid "Disable background selection"
 msgstr "Не устанавливать фон"
 
-#: capplets/background-properties/property-background.c:1482
+#: capplets/background-properties/property-background.c:1490
 msgid "Set parameters from saved state and exit"
 msgstr "Установить параметры из сохраненного состояния и выйти"
 
-#: capplets/background-properties/property-background.c:1483
+#: capplets/background-properties/property-background.c:1491
 msgid "IMAGE"
 msgstr "ИЗОБРАЖЕНИЕ"
 
-#: capplets/background-properties/property-background.c:1483
+#: capplets/background-properties/property-background.c:1491
 msgid "Sets the wallpaper to the value specified"
 msgstr "Установить обои в указанное значение"
 
-#: capplets/background-properties/property-background.c:1484
-#: capplets/background-properties/property-background.c:1485
+#: capplets/background-properties/property-background.c:1492
+#: capplets/background-properties/property-background.c:1493
 msgid "COLOR"
 msgstr "ЦВЕТ"
 
-#: capplets/background-properties/property-background.c:1484
+#: capplets/background-properties/property-background.c:1492
 msgid "Specifies the background color"
 msgstr "Указывает цвет обоев"
 
-#: capplets/background-properties/property-background.c:1485
+#: capplets/background-properties/property-background.c:1493
 msgid "Specifies end background color for gradient"
 msgstr "Указывает конечный цвет для градиента"
 
-#: capplets/background-properties/property-background.c:1486
-msgid "ORIENT"
-msgstr "ОРИЕНТ"
-
-#: capplets/background-properties/property-background.c:1486
+#: capplets/background-properties/property-background.c:1494
 msgid "Gradient orientation: vertical or horizontal"
 msgstr "Ориентация градиента: вертикальная или горизонтальная"
 
-#: capplets/background-properties/property-background.c:1487
+#: capplets/background-properties/property-background.c:1494
+msgid "ORIENT"
+msgstr "ОРИЕНТ"
+
+#: capplets/background-properties/property-background.c:1495
 msgid "Use a solid fill for the background"
 msgstr "Использовать плотное заполнение как фон"
 
-#: capplets/background-properties/property-background.c:1488
+#: capplets/background-properties/property-background.c:1496
 msgid "Use a gradient fill for the background"
 msgstr "Использовать градиентное заполнение как фон"
 
-#: capplets/background-properties/property-background.c:1489
-msgid "MODE"
-msgstr "РЕЖИМ"
-
-#: capplets/background-properties/property-background.c:1489
+#: capplets/background-properties/property-background.c:1497
 msgid "Display wallpaper: tiled, centered, scaled or ratio"
 msgstr "Размещение обоев: мозаика, в центре, растянутое"
 
-#: capplets/bell-properties/bell-properties.c:170
+#: capplets/background-properties/property-background.c:1497
+msgid "MODE"
+msgstr "РЕЖИМ"
+
+#: capplets/bell-properties/bell-properties.c:178
 msgid "Keyboard Bell"
 msgstr "Звонок клавиатуры"
 
-#: capplets/bell-properties/bell-properties.c:181
+#: capplets/bell-properties/bell-properties.c:189
 msgid "Volume"
 msgstr "Громкость"
 
-#: capplets/bell-properties/bell-properties.c:184
+#: capplets/bell-properties/bell-properties.c:192
 msgid "Pitch (Hz)"
 msgstr "Высота (Гц)"
 
-#: capplets/bell-properties/bell-properties.c:187
+#: capplets/bell-properties/bell-properties.c:195
 msgid "Duration (ms)"
 msgstr "Продолжительность (милл сек)"
 
-#: capplets/bell-properties/bell-properties.c:217
+#: capplets/bell-properties/bell-properties.c:225
 msgid "Test"
 msgstr "Проверить"
 
-#: capplets/bell-properties/bell-properties.c:239
+#: capplets/bell-properties/bell-properties.c:247
 msgid ""
 "an initialization error occurred while starting 'bell-properties-capplet'.\n"
 "aborting...\n"
@@ -188,54 +219,53 @@ msgstr ""
 "ошибка инициализации при запуске 'bell-properties-capplet'.\n"
 "исполнение прервано ...\n"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:229
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:237
 msgid "Gnome editor"
 msgstr "Редактор GNOME"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:240
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:248
 msgid "Run In Terminal"
 msgstr "Запускать в терминале"
 
-#: capplets/keyboard-properties/keyboard-properties.c:208
+#: capplets/keyboard-properties/keyboard-properties.c:216
 msgid "Auto-repeat"
 msgstr "Авто-повтор"
 
-#: capplets/keyboard-properties/keyboard-properties.c:219
+#: capplets/keyboard-properties/keyboard-properties.c:227
 msgid "Enable auto-repeat"
 msgstr "Включить авто-повтор"
 
-#: capplets/keyboard-properties/keyboard-properties.c:229
+#: capplets/keyboard-properties/keyboard-properties.c:237
 msgid "Repeat rate"
 msgstr "Скорость повтора"
 
-#: capplets/keyboard-properties/keyboard-properties.c:232
+#: capplets/keyboard-properties/keyboard-properties.c:240
 msgid "Repeat Delay"
 msgstr "Задержка повтора"
 
-#: capplets/keyboard-properties/keyboard-properties.c:234
+#: capplets/keyboard-properties/keyboard-properties.c:242
 msgid "Keyboard click"
 msgstr "Щелчки клавиш"
 
-#: capplets/keyboard-properties/keyboard-properties.c:245
+#: capplets/keyboard-properties/keyboard-properties.c:253
 msgid "Click on keypress"
 msgstr "Щелкать при нажатии"
 
-#: capplets/keyboard-properties/keyboard-properties.c:255
+#: capplets/keyboard-properties/keyboard-properties.c:263
 msgid "Click volume"
 msgstr "Громкость щелчка"
 
-#: capplets/keyboard-properties/keyboard-properties.c:265
+#: capplets/keyboard-properties/keyboard-properties.c:273
 msgid "Test settings"
 msgstr "Проверка установок"
 
-#: capplets/keyboard-properties/keyboard-properties.c:307
+#: capplets/keyboard-properties/keyboard-properties.c:315
 msgid ""
 "an initialization error occurred while starting "
 "'keyboard-properties-capplet'.\n"
 "aborting...\n"
 msgstr ""
-"ошибка инициализации при запуске "
-"'keyboard-properties-capplet'.\n"
+"ошибка инициализации при запуске 'keyboard-properties-capplet'.\n"
 "исполнение прервано ...\n"
 
 #. icon box
@@ -329,7 +359,6 @@ msgstr ""
 "Например:\n"
 "image/png"
 
-
 #: capplets/mime-type/mime-data.c:463
 msgid "This mime-type already exists"
 msgstr "Этот mime-тип уже существует"
@@ -370,7 +399,6 @@ msgstr ""
 "\n"
 "Состояние не будет сохранено."
 
-
 #: capplets/mime-type/mime-info.c:440
 msgid ""
 "Cannot create the file\n"
@@ -383,21 +411,21 @@ msgstr ""
 "\n"
 "Состояние не будет сохранено."
 
-#: capplets/mime-type/mime-type-capplet.c:77
+#: capplets/mime-type/mime-type-capplet.c:79
 #: capplets/session-properties/session-properties.c:203
-#: capplets/wm-properties/wm-properties-capplet.c:1041
+#: capplets/wm-properties/wm-properties-capplet.c:1049
 msgid "Delete"
 msgstr "Удалить"
 
-#: capplets/mime-type/mime-type-capplet.c:87
+#: capplets/mime-type/mime-type-capplet.c:89
 #: capplets/session-properties/session-properties.c:193
-#: capplets/wm-properties/wm-properties-capplet.c:1031
+#: capplets/wm-properties/wm-properties-capplet.c:1039
 msgid "Add..."
 msgstr "Добавить..."
 
-#: capplets/mime-type/mime-type-capplet.c:91
+#: capplets/mime-type/mime-type-capplet.c:93
 #: capplets/session-properties/session-properties.c:198
-#: capplets/wm-properties/wm-properties-capplet.c:1036
+#: capplets/wm-properties/wm-properties-capplet.c:1044
 msgid "Edit..."
 msgstr "Исправить..."
 
@@ -409,7 +437,8 @@ msgstr "Добавление Mime типа"
 msgid ""
 "Add a new Mime Type\n"
 "For example:  image/tiff; text/x-scheme"
-msgstr "Добавить новый Mime тип\n"
+msgstr ""
+"Добавить новый Mime тип\n"
 "Например: image/tiff; text/x-scheme"
 
 #: capplets/mime-type/new-mime-window.c:27
@@ -444,54 +473,53 @@ msgstr ""
 "Можно задать до двух регулярных выражений идентифицирующих mime-тип.\n"
 "Заполнение этих двух полей необязательно."
 
-#: capplets/mouse-properties/mouse-properties.c:259
+#: capplets/mouse-properties/mouse-properties.c:267
 msgid "Mouse buttons"
 msgstr "Кнопки мыши"
 
-#: capplets/mouse-properties/mouse-properties.c:268
+#: capplets/mouse-properties/mouse-properties.c:276
 msgid "Left handed"
 msgstr "Под левую руку"
 
-#: capplets/mouse-properties/mouse-properties.c:270
+#: capplets/mouse-properties/mouse-properties.c:278
 msgid "Right handed"
 msgstr "Под правую руку"
 
 #. Mouse motion
-#: capplets/mouse-properties/mouse-properties.c:296
+#: capplets/mouse-properties/mouse-properties.c:304
 msgid "Mouse motion"
 msgstr "Движение мыши"
 
-#: capplets/mouse-properties/mouse-properties.c:306
+#: capplets/mouse-properties/mouse-properties.c:314
 msgid "Acceleration"
 msgstr "Ускорение"
 
-#: capplets/mouse-properties/mouse-properties.c:306
+#: capplets/mouse-properties/mouse-properties.c:314
 msgid "Fast"
 msgstr "Быстро"
 
-#: capplets/mouse-properties/mouse-properties.c:306
+#: capplets/mouse-properties/mouse-properties.c:314
 msgid "Slow"
 msgstr "Медлено"
 
-#: capplets/mouse-properties/mouse-properties.c:317
-msgid "Threshold"
-msgstr "Порог"
-
-#: capplets/mouse-properties/mouse-properties.c:317
+#: capplets/mouse-properties/mouse-properties.c:325
 msgid "Large"
 msgstr "Большой"
 
-#: capplets/mouse-properties/mouse-properties.c:317
+#: capplets/mouse-properties/mouse-properties.c:325
 msgid "Small"
 msgstr "Маленький"
 
-#: capplets/mouse-properties/mouse-properties.c:341
+#: capplets/mouse-properties/mouse-properties.c:325
+msgid "Threshold"
+msgstr "Порог"
+
+#: capplets/mouse-properties/mouse-properties.c:349
 msgid ""
 "an initialization error occurred while starting 'mouse-properties-capplet'.\n"
 "aborting...\n"
 msgstr ""
-"ошибка инициализации при запуске "
-"'mouse-properties-capplet'.\n"
+"ошибка инициализации при запуске 'mouse-properties-capplet'.\n"
 "исполнение прервано ...\n"
 
 #: capplets/screensaver-properties/callbacks.c:102
@@ -750,16 +778,9 @@ msgstr "Команда"
 msgid "Browse Currently Running Programs..."
 msgstr "Просмотр запущенных программ..."
 
-#: capplets/session-properties/session-properties.c:379
+#: capplets/session-properties/session-properties.c:388
 msgid "Only display warnings."
 msgstr ""
-
-#: capplets/session-properties/session-properties.c:405
-msgid ""
-"an initialization error occurred while starting 'session-properties-capplet'."
-msgstr ""
-"ошибка инициализации при запуске 'session-properties-capplet'."
-
 
 #: capplets/session-properties/startup-programs.c:288
 #: capplets/session-properties/startup-programs.c:295
@@ -789,8 +810,7 @@ msgstr "Изменений команды запуска"
 #: capplets/sound-properties/sound-properties.c:94
 msgid ""
 "an initialization error occurred while starting 'sound-properties-capplet'."
-msgstr ""
-"ошибка инициализации при запуске 'sound-properties-capplet'."
+msgstr "ошибка инициализации при запуске 'sound-properties-capplet'."
 
 #: capplets/sound-properties/sound-properties.c:184
 msgid "Category"
@@ -837,20 +857,16 @@ msgid ""
 "This copy of the GNOME control center was not compiled with sound support"
 msgstr ""
 
-#: capplets/sound-properties/sound-properties.c:732
+#: capplets/sound-properties/sound-properties.c:740
 msgid "The sound file for this event does not exist."
 msgstr ""
 
-#: capplets/sound-properties/sound-properties.c:734
+#: capplets/sound-properties/sound-properties.c:742
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package\n"
 "for a set of default sounds."
 msgstr ""
-
-#: capplets/sound-properties/sound-properties.c:740
-msgid "Close"
-msgstr "Закрыть"
 
 #: capplets/theme-switcher/demo.c:50
 msgid "One"
@@ -872,11 +888,11 @@ msgid "Meenie"
 msgstr ""
 
 #: capplets/theme-switcher/demo.c:53
-msgid "Mynie"
+msgid "Moe"
 msgstr ""
 
 #: capplets/theme-switcher/demo.c:53
-msgid "Moe"
+msgid "Mynie"
 msgstr ""
 
 #: capplets/theme-switcher/demo.c:54
@@ -1170,8 +1186,7 @@ msgstr ""
 
 #: capplets/url-properties/url-properties.c:48
 msgid "Error initializing the `url-properties' capplet."
-msgstr ""
-"Ошибка инициализации 'url-properties' capplet."
+msgstr "Ошибка инициализации 'url-properties' capplet."
 
 #: capplets/url-properties/url-properties.c:71
 msgid "Protocol"
@@ -1240,8 +1255,7 @@ msgstr ""
 msgid ""
 "wm-properties-capplet: Unable to initialize window manager.\n"
 "\t'%s' didn't start\n"
-msgstr ""
-"wm-properties-capplet: Невозможно инициализировать диспетчер окон.\n"
+msgstr "wm-properties-capplet: Невозможно инициализировать диспетчер окон.\n"
 
 #: capplets/wm-properties/wm-properties-capplet.c:407
 msgid "Previous window manager did not die\n"
@@ -1262,70 +1276,75 @@ msgid ""
 "foot menu\n"
 msgstr ""
 
-#: capplets/wm-properties/wm-properties-capplet.c:703
+#: capplets/wm-properties/wm-properties-capplet.c:711
 msgid "Add New Window Manager"
 msgstr "Добавить новый диспетчер окон"
 
-#: capplets/wm-properties/wm-properties-capplet.c:704
-#: capplets/wm-properties/wm-properties-capplet.c:812
-#: capplets/wm-properties/wm-properties-capplet.c:819
-#: capplets/wm-properties/wm-properties-capplet.c:964
-#: control-center/capplet-manager.c:180
-msgid "OK"
-msgstr "OK"
-
-#: capplets/wm-properties/wm-properties-capplet.c:704
+#: capplets/wm-properties/wm-properties-capplet.c:712
 #: control-center/capplet-manager.c:185
 msgid "Cancel"
 msgstr "Отменить"
 
-#: capplets/wm-properties/wm-properties-capplet.c:715
+#: capplets/wm-properties/wm-properties-capplet.c:712
+#: capplets/wm-properties/wm-properties-capplet.c:820
+#: capplets/wm-properties/wm-properties-capplet.c:827
+#: capplets/wm-properties/wm-properties-capplet.c:972
+#: control-center/capplet-manager.c:180
+msgid "OK"
+msgstr "OK"
+
+#: capplets/wm-properties/wm-properties-capplet.c:723
 msgid "Name:"
 msgstr "Имя: "
 
-#: capplets/wm-properties/wm-properties-capplet.c:728
+#: capplets/wm-properties/wm-properties-capplet.c:736
 msgid "Command:"
 msgstr "Команда:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:741
+#: capplets/wm-properties/wm-properties-capplet.c:749
 msgid "Configuration Command:"
 msgstr "Команда настройки:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:760
+#: capplets/wm-properties/wm-properties-capplet.c:768
 msgid "Window manager is session managed"
 msgstr "Диспетчер окон также и диспетчер сеансов"
 
-#: capplets/wm-properties/wm-properties-capplet.c:810
+#: capplets/wm-properties/wm-properties-capplet.c:818
 msgid "Name cannot be empty"
 msgstr "Имя не может быть пустым"
 
-#: capplets/wm-properties/wm-properties-capplet.c:817
+#: capplets/wm-properties/wm-properties-capplet.c:825
 msgid "Command cannot be empty"
 msgstr "Команда не может быть пустой"
 
-#: capplets/wm-properties/wm-properties-capplet.c:866
-#: capplets/wm-properties/wm-properties-capplet.c:908
+#: capplets/wm-properties/wm-properties-capplet.c:874
+#: capplets/wm-properties/wm-properties-capplet.c:916
 msgid "Edit Window Manager"
 msgstr "Изменение диспетчера окон"
 
-#: capplets/wm-properties/wm-properties-capplet.c:963
+#: capplets/wm-properties/wm-properties-capplet.c:971
 msgid "You cannot delete the current Window Manager"
 msgstr "Используемый диспетчер окон удалить нельзя"
 
-#: capplets/wm-properties/wm-properties-capplet.c:1076
+#: capplets/wm-properties/wm-properties-capplet.c:1084
 msgid ""
 "an initialization error occurred while starting 'wm-properties-capplet'.\n"
 "aborting...\n"
 msgstr ""
-"ошибка инициализации при запуске "
-"'wm-properties-capplet'.\n"
+"ошибка инициализации при запуске 'wm-properties-capplet'.\n"
 "исполнение прервано ...\n"
 
-#: control-center/callbacks.c:85
+#: control-center/callbacks.c:72
+msgid ""
+"No help is available/installed. Please make sure you\n"
+"have the GNOME User's Guide installed on your system."
+msgstr ""
+
+#: control-center/callbacks.c:94
 msgid "GNOME Control Center"
 msgstr "Центр управления GNOME"
 
-#: control-center/callbacks.c:88
+#: control-center/callbacks.c:97
 msgid "Desktop Properties manager."
 msgstr "Диспетчер свойств рабочего стола."
 
@@ -1341,66 +1360,70 @@ msgstr "Вернуть"
 msgid "Help"
 msgstr "Справка"
 
-#: control-center/capplet-widget-libs.c:49
-msgid "id of the capplet -- assigned by the control-center"
-msgstr ""
-
-#: control-center/capplet-widget-libs.c:49
+#: control-center/capplet-widget-libs.c:46
 msgid "ID"
 msgstr ""
 
-#: control-center/capplet-widget-libs.c:50
-msgid "Multi-capplet id."
+#: control-center/capplet-widget-libs.c:46
+msgid "id of the capplet -- assigned by the control-center"
 msgstr ""
 
-#: control-center/capplet-widget-libs.c:50
+#: control-center/capplet-widget-libs.c:47
 msgid "CAPID"
 msgstr ""
 
-#: control-center/capplet-widget-libs.c:51
+#: control-center/capplet-widget-libs.c:47
+msgid "Multi-capplet id."
+msgstr ""
+
+#: control-center/capplet-widget-libs.c:48
 msgid "X ID of the socket it's plugged into"
 msgstr ""
 
-#: control-center/capplet-widget-libs.c:51
+#: control-center/capplet-widget-libs.c:48
 msgid "XID"
 msgstr ""
 
-#: control-center/capplet-widget-libs.c:52
-msgid "IOR of the control-center"
-msgstr ""
-
-#: control-center/capplet-widget-libs.c:52
+#: control-center/capplet-widget-libs.c:49
 msgid "IOR"
 msgstr ""
 
-#: control-center/capplet-widget-libs.c:53
+#: control-center/capplet-widget-libs.c:49
+msgid "IOR of the control-center"
+msgstr ""
+
+#: control-center/capplet-widget-libs.c:50
 msgid "Initialize session settings"
 msgstr "Инициализировать свойства сеанса"
 
-#: control-center/capplet-widget-libs.c:54
+#: control-center/capplet-widget-libs.c:51
 msgid "Ignore default action.  Used for custom init-session cases"
 msgstr ""
 
-#: control-center/corba-glue.c:75
-msgid "capplet-command to be run."
+#: control-center/capplet-widget.c:262
+msgid "Sorry, no help is available for these settings."
 msgstr ""
 
 #: control-center/corba-glue.c:75
 msgid "CAPPLET"
 msgstr ""
 
+#: control-center/corba-glue.c:75
+msgid "capplet-command to be run."
+msgstr ""
+
 #: control-center/main.c:31
 msgid "Help with the GNOME control-center."
 msgstr "Справка по центру управления GNOME"
+
+#: control-center/main.c:59
+msgid "Discard all changes"
+msgstr "Забыть все изменения"
 
 #. we create the widgets
 #: control-center/main.c:59
 msgid "Warning:"
 msgstr "Предупреждение:"
-
-#: control-center/main.c:59
-msgid "Discard all changes"
-msgstr "Забыть все изменения"
 
 #. ...labels, etc
 #: control-center/main.c:68
@@ -1413,3 +1436,7 @@ msgstr ""
 #: control-center/main.c:187
 msgid "Control Center"
 msgstr "Центр управления GNOME"
+
+#~ msgid ""
+#~ "an initialization error occurred while starting 'session-properties-capplet'."
+#~ msgstr "ошибка инициализации при запуске 'session-properties-capplet'."

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center\n"
-"POT-Creation-Date: 1999-08-29 16:46+0200\n"
+"POT-Creation-Date: 1999-09-06 11:51+0200\n"
 "PO-Revision-Date: 1999-08-14 20:16+0200\n"
 "Last-Translator: GNOME PL Team\n"
 "Language-Team: Polish <gnomepl@pandora.info.bielsko.pl>\n"
@@ -10,12 +10,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: capplets/background-properties/app-background.c:13
-msgid "Set background image."
-msgstr "Ustaw tapetê."
-
-#: capplets/background-properties/app-background.c:13
 msgid "IMAGE-FILE"
 msgstr "PLIK-Z-OBRAZEM"
+
+#: capplets/background-properties/app-background.c:13
+msgid "Set background image."
+msgstr "Ustaw tapetê."
 
 #: capplets/background-properties/app-background.c:34
 msgid ""
@@ -70,7 +70,7 @@ msgid "Can't find an hbox, using a normal file selection"
 msgstr "Nie mo¿na odnale¼æ widgetu hbox, wywo³anie zwyk³ego wyboru pliku"
 
 #: capplets/background-properties/property-background.c:888
-#: capplets/keyboard-properties/keyboard-properties.c:257
+#: capplets/keyboard-properties/keyboard-properties.c:265
 #: capplets/screensaver-properties/screensaver-dialog.c:25
 #: capplets/theme-switcher/gui.c:225 capplets/theme-switcher/gui.c:297
 msgid "Preview"
@@ -104,80 +104,112 @@ msgstr "Wy¶rodkowana"
 msgid "Tiled"
 msgstr "Kafelka"
 
-#: capplets/background-properties/property-background.c:1353
+#: capplets/background-properties/property-background.c:1134
+#: capplets/bell-properties/bell-properties.c:61
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:179
+#: capplets/keyboard-properties/keyboard-properties.c:81
+#: capplets/mouse-properties/mouse-properties.c:111
+#: capplets/screensaver-properties/callbacks.c:798
+#: capplets/session-properties/session-properties.c:295
+#: capplets/sound-properties/sound-properties.c:685
+#: capplets/theme-switcher/gui.c:361
+#: capplets/ui-properties/ui-properties.c:513
+#: capplets/wm-properties/wm-properties-capplet.c:605
+msgid ""
+"No help is available/installed for these settings. Please make sure you\n"
+"have the GNOME User's Guide installed on your system."
+msgstr ""
+
+#: capplets/background-properties/property-background.c:1136
+#: capplets/bell-properties/bell-properties.c:63
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:181
+#: capplets/keyboard-properties/keyboard-properties.c:83
+#: capplets/mouse-properties/mouse-properties.c:113
+#: capplets/screensaver-properties/callbacks.c:800
+#: capplets/session-properties/session-properties.c:297
+#: capplets/sound-properties/sound-properties.c:687
+#: capplets/sound-properties/sound-properties.c:748
+#: capplets/theme-switcher/gui.c:363
+#: capplets/ui-properties/ui-properties.c:515
+#: capplets/wm-properties/wm-properties-capplet.c:607
+#: control-center/callbacks.c:74 control-center/capplet-widget.c:263
+msgid "Close"
+msgstr "Zamknij"
+
+#: capplets/background-properties/property-background.c:1361
 msgid "Disable background selection"
 msgstr "Deaktywacja wyboru t³a"
 
-#: capplets/background-properties/property-background.c:1482
+#: capplets/background-properties/property-background.c:1490
 msgid "Set parameters from saved state and exit"
 msgstr "Ustaw parametry z zapisnego stanu i zakoñcz"
 
-#: capplets/background-properties/property-background.c:1483
+#: capplets/background-properties/property-background.c:1491
 msgid "IMAGE"
 msgstr "OBRAZ"
 
-#: capplets/background-properties/property-background.c:1483
+#: capplets/background-properties/property-background.c:1491
 msgid "Sets the wallpaper to the value specified"
 msgstr "Ustawia tapetê na okre¶lon± wrto¶æ"
 
-#: capplets/background-properties/property-background.c:1484
-#: capplets/background-properties/property-background.c:1485
+#: capplets/background-properties/property-background.c:1492
+#: capplets/background-properties/property-background.c:1493
 msgid "COLOR"
 msgstr "KOLOR"
 
-#: capplets/background-properties/property-background.c:1484
+#: capplets/background-properties/property-background.c:1492
 msgid "Specifies the background color"
 msgstr "Okre¶la kolor t³a"
 
-#: capplets/background-properties/property-background.c:1485
+#: capplets/background-properties/property-background.c:1493
 msgid "Specifies end background color for gradient"
 msgstr "Okre¶la koñcowy kolor t³a dla gradientu"
 
-#: capplets/background-properties/property-background.c:1486
-msgid "ORIENT"
-msgstr "KIERUNEK"
-
-#: capplets/background-properties/property-background.c:1486
+#: capplets/background-properties/property-background.c:1494
 msgid "Gradient orientation: vertical or horizontal"
 msgstr "Kierunek gradientu: pionowo lub poziomo"
 
-#: capplets/background-properties/property-background.c:1487
+#: capplets/background-properties/property-background.c:1494
+msgid "ORIENT"
+msgstr "KIERUNEK"
+
+#: capplets/background-properties/property-background.c:1495
 msgid "Use a solid fill for the background"
 msgstr "U¿yj jednolitego wype³nienia dla t³a"
 
-#: capplets/background-properties/property-background.c:1488
+#: capplets/background-properties/property-background.c:1496
 msgid "Use a gradient fill for the background"
 msgstr "U¿yj gradientu dla t³a"
 
-#: capplets/background-properties/property-background.c:1489
-msgid "MODE"
-msgstr "TRYB"
-
-#: capplets/background-properties/property-background.c:1489
+#: capplets/background-properties/property-background.c:1497
 msgid "Display wallpaper: tiled, centered, scaled or ratio"
 msgstr "Wy¶wietlanie tapety: kafelka, wycentrowana, skalowana, proporcjonalna"
 
-#: capplets/bell-properties/bell-properties.c:170
+#: capplets/background-properties/property-background.c:1497
+msgid "MODE"
+msgstr "TRYB"
+
+#: capplets/bell-properties/bell-properties.c:178
 msgid "Keyboard Bell"
 msgstr "D¼wiêk klawiatury"
 
-#: capplets/bell-properties/bell-properties.c:181
+#: capplets/bell-properties/bell-properties.c:189
 msgid "Volume"
 msgstr "G³o¶no¶æ"
 
-#: capplets/bell-properties/bell-properties.c:184
+#: capplets/bell-properties/bell-properties.c:192
 msgid "Pitch (Hz)"
 msgstr "Wysoko¶æ (Hz)"
 
-#: capplets/bell-properties/bell-properties.c:187
+#: capplets/bell-properties/bell-properties.c:195
 msgid "Duration (ms)"
 msgstr "Czas trwania (ms)"
 
-#: capplets/bell-properties/bell-properties.c:217
+#: capplets/bell-properties/bell-properties.c:225
 msgid "Test"
 msgstr "Test"
 
-#: capplets/bell-properties/bell-properties.c:239
+#: capplets/bell-properties/bell-properties.c:247
 msgid ""
 "an initialization error occurred while starting 'bell-properties-capplet'.\n"
 "aborting...\n"
@@ -186,47 +218,47 @@ msgstr ""
 "'bell-properties-capplet'.\n"
 "Rezygnacja...\n"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:229
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:237
 msgid "Gnome editor"
 msgstr "Edytor GNOME"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:240
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:248
 msgid "Run In Terminal"
 msgstr "Uruchamianie w terminalu"
 
-#: capplets/keyboard-properties/keyboard-properties.c:208
+#: capplets/keyboard-properties/keyboard-properties.c:216
 msgid "Auto-repeat"
 msgstr "Automatyczne powtarzanie"
 
-#: capplets/keyboard-properties/keyboard-properties.c:219
+#: capplets/keyboard-properties/keyboard-properties.c:227
 msgid "Enable auto-repeat"
 msgstr "Automatyczne powtarzanie"
 
-#: capplets/keyboard-properties/keyboard-properties.c:229
+#: capplets/keyboard-properties/keyboard-properties.c:237
 msgid "Repeat rate"
 msgstr "Czêstotliwo¶æ powtarzania"
 
-#: capplets/keyboard-properties/keyboard-properties.c:232
+#: capplets/keyboard-properties/keyboard-properties.c:240
 msgid "Repeat Delay"
 msgstr "Opó¼nienie powtarzania"
 
-#: capplets/keyboard-properties/keyboard-properties.c:234
+#: capplets/keyboard-properties/keyboard-properties.c:242
 msgid "Keyboard click"
 msgstr "Klikniêcia klawiatury"
 
-#: capplets/keyboard-properties/keyboard-properties.c:245
+#: capplets/keyboard-properties/keyboard-properties.c:253
 msgid "Click on keypress"
 msgstr "Klikniêcie przy naci¶niêciu klawisza"
 
-#: capplets/keyboard-properties/keyboard-properties.c:255
+#: capplets/keyboard-properties/keyboard-properties.c:263
 msgid "Click volume"
 msgstr "G³o¶no¶æ klikniêcia"
 
-#: capplets/keyboard-properties/keyboard-properties.c:265
+#: capplets/keyboard-properties/keyboard-properties.c:273
 msgid "Test settings"
 msgstr "Wypróbuj ustawienia"
 
-#: capplets/keyboard-properties/keyboard-properties.c:307
+#: capplets/keyboard-properties/keyboard-properties.c:315
 msgid ""
 "an initialization error occurred while starting "
 "'keyboard-properties-capplet'.\n"
@@ -379,21 +411,21 @@ msgstr ""
 "\n"
 "Zapisanie stanu nie bêdzie mo¿liwe"
 
-#: capplets/mime-type/mime-type-capplet.c:77
+#: capplets/mime-type/mime-type-capplet.c:79
 #: capplets/session-properties/session-properties.c:203
-#: capplets/wm-properties/wm-properties-capplet.c:1041
+#: capplets/wm-properties/wm-properties-capplet.c:1049
 msgid "Delete"
 msgstr "Usuñ"
 
-#: capplets/mime-type/mime-type-capplet.c:87
+#: capplets/mime-type/mime-type-capplet.c:89
 #: capplets/session-properties/session-properties.c:193
-#: capplets/wm-properties/wm-properties-capplet.c:1031
+#: capplets/wm-properties/wm-properties-capplet.c:1039
 msgid "Add..."
 msgstr "Dodaj..."
 
-#: capplets/mime-type/mime-type-capplet.c:91
+#: capplets/mime-type/mime-type-capplet.c:93
 #: capplets/session-properties/session-properties.c:198
-#: capplets/wm-properties/wm-properties-capplet.c:1036
+#: capplets/wm-properties/wm-properties-capplet.c:1044
 msgid "Edit..."
 msgstr "Modyfikuj..."
 
@@ -442,48 +474,48 @@ msgstr ""
 "MIME\n"
 "Pola te s± opcjonalne."
 
-#: capplets/mouse-properties/mouse-properties.c:259
+#: capplets/mouse-properties/mouse-properties.c:267
 msgid "Mouse buttons"
 msgstr "Przyciski myszy"
 
-#: capplets/mouse-properties/mouse-properties.c:268
+#: capplets/mouse-properties/mouse-properties.c:276
 msgid "Left handed"
 msgstr "Dla leworêcznych"
 
-#: capplets/mouse-properties/mouse-properties.c:270
+#: capplets/mouse-properties/mouse-properties.c:278
 msgid "Right handed"
 msgstr "Dla praworêcznych"
 
 #. Mouse motion
-#: capplets/mouse-properties/mouse-properties.c:296
+#: capplets/mouse-properties/mouse-properties.c:304
 msgid "Mouse motion"
 msgstr "Ruch myszy"
 
-#: capplets/mouse-properties/mouse-properties.c:306
+#: capplets/mouse-properties/mouse-properties.c:314
 msgid "Acceleration"
 msgstr "Przy¶pieszenie"
 
-#: capplets/mouse-properties/mouse-properties.c:306
+#: capplets/mouse-properties/mouse-properties.c:314
 msgid "Fast"
 msgstr "Szybko"
 
-#: capplets/mouse-properties/mouse-properties.c:306
+#: capplets/mouse-properties/mouse-properties.c:314
 msgid "Slow"
 msgstr "Wolno"
 
-#: capplets/mouse-properties/mouse-properties.c:317
-msgid "Threshold"
-msgstr "Próg"
-
-#: capplets/mouse-properties/mouse-properties.c:317
+#: capplets/mouse-properties/mouse-properties.c:325
 msgid "Large"
 msgstr "Du¿y"
 
-#: capplets/mouse-properties/mouse-properties.c:317
+#: capplets/mouse-properties/mouse-properties.c:325
 msgid "Small"
 msgstr "Ma³y"
 
-#: capplets/mouse-properties/mouse-properties.c:341
+#: capplets/mouse-properties/mouse-properties.c:325
+msgid "Threshold"
+msgstr "Próg"
+
+#: capplets/mouse-properties/mouse-properties.c:349
 msgid ""
 "an initialization error occurred while starting 'mouse-properties-capplet'.\n"
 "aborting...\n"
@@ -761,7 +793,7 @@ msgstr "Polecenie"
 msgid "Browse Currently Running Programs..."
 msgstr "Przegl±daj aktualnie uruchomione programy..."
 
-#: capplets/session-properties/session-properties.c:379
+#: capplets/session-properties/session-properties.c:388
 msgid "Only display warnings."
 msgstr "Wy¶wietlaj tylko ostrze¿enia."
 
@@ -844,11 +876,11 @@ msgstr ""
 "Wykorzystywana kopia Centrum Sterowania GNOME nie zosta³a skompilowana z "
 "obs³ug± d¼wiêku"
 
-#: capplets/sound-properties/sound-properties.c:732
+#: capplets/sound-properties/sound-properties.c:740
 msgid "The sound file for this event does not exist."
 msgstr "Plik z d¼wiêkiem dla tego zdarzenia nie istnieje."
 
-#: capplets/sound-properties/sound-properties.c:734
+#: capplets/sound-properties/sound-properties.c:742
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package\n"
@@ -856,10 +888,6 @@ msgid ""
 msgstr ""
 "Plik z d¼wiêkiem dla tego zdarzenia nie istnieje.\n"
 "Proszê zainstalowaæ pakiet gnome-audio ze zbiorem domy¶lnych d¼wiêków."
-
-#: capplets/sound-properties/sound-properties.c:740
-msgid "Close"
-msgstr "Zamknij"
 
 #: capplets/theme-switcher/demo.c:50
 msgid "One"
@@ -879,12 +907,12 @@ msgid "Meenie"
 msgstr "kózka"
 
 #: capplets/theme-switcher/demo.c:53
-msgid "Mynie"
-msgstr "nie"
-
-#: capplets/theme-switcher/demo.c:53
 msgid "Moe"
 msgstr "skaka³a"
+
+#: capplets/theme-switcher/demo.c:53
+msgid "Mynie"
+msgstr "nie"
 
 #: capplets/theme-switcher/demo.c:54
 msgid "Catcha"
@@ -1276,57 +1304,57 @@ msgstr ""
 "Proszê samodzielnie uruchomiæ mened¿era okien\n"
 "(na przyk³ad wybieraj±c \"Wykonaj polecenie\" z menu g³ównego).\n"
 
-#: capplets/wm-properties/wm-properties-capplet.c:703
+#: capplets/wm-properties/wm-properties-capplet.c:711
 msgid "Add New Window Manager"
 msgstr "Dodaj mened¿era okien"
 
-#: capplets/wm-properties/wm-properties-capplet.c:704
-#: capplets/wm-properties/wm-properties-capplet.c:812
-#: capplets/wm-properties/wm-properties-capplet.c:819
-#: capplets/wm-properties/wm-properties-capplet.c:964
-#: control-center/capplet-manager.c:180
-msgid "OK"
-msgstr "OK"
-
-#: capplets/wm-properties/wm-properties-capplet.c:704
+#: capplets/wm-properties/wm-properties-capplet.c:712
 #: control-center/capplet-manager.c:185
 msgid "Cancel"
 msgstr "Anuluj"
 
-#: capplets/wm-properties/wm-properties-capplet.c:715
+#: capplets/wm-properties/wm-properties-capplet.c:712
+#: capplets/wm-properties/wm-properties-capplet.c:820
+#: capplets/wm-properties/wm-properties-capplet.c:827
+#: capplets/wm-properties/wm-properties-capplet.c:972
+#: control-center/capplet-manager.c:180
+msgid "OK"
+msgstr "OK"
+
+#: capplets/wm-properties/wm-properties-capplet.c:723
 msgid "Name:"
 msgstr "Nazwa:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:728
+#: capplets/wm-properties/wm-properties-capplet.c:736
 msgid "Command:"
 msgstr "Polecenie:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:741
+#: capplets/wm-properties/wm-properties-capplet.c:749
 msgid "Configuration Command:"
 msgstr "Polecenie konfiguracyjne:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:760
+#: capplets/wm-properties/wm-properties-capplet.c:768
 msgid "Window manager is session managed"
 msgstr "Mened¿er okien wspó³pracuj±cy z mened¿erem sesji"
 
-#: capplets/wm-properties/wm-properties-capplet.c:810
+#: capplets/wm-properties/wm-properties-capplet.c:818
 msgid "Name cannot be empty"
 msgstr "Nazwa nie mo¿e byæ pusta"
 
-#: capplets/wm-properties/wm-properties-capplet.c:817
+#: capplets/wm-properties/wm-properties-capplet.c:825
 msgid "Command cannot be empty"
 msgstr "Polecenie nie mo¿e byc puste"
 
-#: capplets/wm-properties/wm-properties-capplet.c:866
-#: capplets/wm-properties/wm-properties-capplet.c:908
+#: capplets/wm-properties/wm-properties-capplet.c:874
+#: capplets/wm-properties/wm-properties-capplet.c:916
 msgid "Edit Window Manager"
 msgstr "Modyfikuj w³a¶ciwo¶ci mened¿era okien"
 
-#: capplets/wm-properties/wm-properties-capplet.c:963
+#: capplets/wm-properties/wm-properties-capplet.c:971
 msgid "You cannot delete the current Window Manager"
 msgstr "Nie mo¿na usun±æ bie¿±cego mened¿era okien"
 
-#: capplets/wm-properties/wm-properties-capplet.c:1076
+#: capplets/wm-properties/wm-properties-capplet.c:1084
 msgid ""
 "an initialization error occurred while starting 'wm-properties-capplet'.\n"
 "aborting...\n"
@@ -1334,11 +1362,17 @@ msgstr ""
 "Wyst±pi³ b³±d inicjalizacji w trakcie uruchamiania 'wm-properties-capplet'.\n"
 "Rezygnacja...\n"
 
-#: control-center/callbacks.c:85
+#: control-center/callbacks.c:72
+msgid ""
+"No help is available/installed. Please make sure you\n"
+"have the GNOME User's Guide installed on your system."
+msgstr ""
+
+#: control-center/callbacks.c:94
 msgid "GNOME Control Center"
 msgstr "Centrum Sterowania GNOME"
 
-#: control-center/callbacks.c:88
+#: control-center/callbacks.c:97
 msgid "Desktop Properties manager."
 msgstr "Mened¿er w³a¶ciwo¶ci ¶rodowiska"
 
@@ -1355,20 +1389,20 @@ msgid "Help"
 msgstr "Pomoc"
 
 #: control-center/capplet-widget-libs.c:46
-msgid "id of the capplet -- assigned by the control-center"
-msgstr "identyfikator c-apletu -- przypisane przez Centrum Sterowania"
-
-#: control-center/capplet-widget-libs.c:46
 msgid "ID"
 msgstr "ID"
 
-#: control-center/capplet-widget-libs.c:47
-msgid "Multi-capplet id."
-msgstr "Identyfikator Multi-c-apletu"
+#: control-center/capplet-widget-libs.c:46
+msgid "id of the capplet -- assigned by the control-center"
+msgstr "identyfikator c-apletu -- przypisane przez Centrum Sterowania"
 
 #: control-center/capplet-widget-libs.c:47
 msgid "CAPID"
 msgstr "CAPID"
+
+#: control-center/capplet-widget-libs.c:47
+msgid "Multi-capplet id."
+msgstr "Identyfikator Multi-c-apletu"
 
 #: control-center/capplet-widget-libs.c:48
 msgid "X ID of the socket it's plugged into"
@@ -1379,12 +1413,12 @@ msgid "XID"
 msgstr "XID"
 
 #: control-center/capplet-widget-libs.c:49
-msgid "IOR of the control-center"
-msgstr "IOR Panela Sterowanie"
-
-#: control-center/capplet-widget-libs.c:49
 msgid "IOR"
 msgstr "IOR"
+
+#: control-center/capplet-widget-libs.c:49
+msgid "IOR of the control-center"
+msgstr "IOR Panela Sterowanie"
 
 #: control-center/capplet-widget-libs.c:50
 msgid "Initialize session settings"
@@ -1396,26 +1430,30 @@ msgstr ""
 "Ignoruj domy¶ln± akcjê. Wykorzystywane dla specjalnych przypadków "
 "init-session"
 
-#: control-center/corba-glue.c:75
-msgid "capplet-command to be run."
-msgstr "polecenie - c-aplet do uruchomienia."
+#: control-center/capplet-widget.c:262
+msgid "Sorry, no help is available for these settings."
+msgstr ""
 
 #: control-center/corba-glue.c:75
 msgid "CAPPLET"
 msgstr "CAPLET"
 
+#: control-center/corba-glue.c:75
+msgid "capplet-command to be run."
+msgstr "polecenie - c-aplet do uruchomienia."
+
 #: control-center/main.c:31
 msgid "Help with the GNOME control-center."
 msgstr "Pomoc na temat Centrum Sterowania GNOME"
+
+#: control-center/main.c:59
+msgid "Discard all changes"
+msgstr "Porzuæ wszystkie zmiany"
 
 #. we create the widgets
 #: control-center/main.c:59
 msgid "Warning:"
 msgstr "Ostrze¿enie:"
-
-#: control-center/main.c:59
-msgid "Discard all changes"
-msgstr "Porzuæ wszystkie zmiany"
 
 #. ...labels, etc
 #: control-center/main.c:68
