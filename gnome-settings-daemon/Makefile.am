@@ -34,8 +34,9 @@ gnome_settings_daemon_SOURCES =	\
 	xsettings-manager.h		\
 	gnome-settings-keybindings.c    \
 	gnome-settings-keybindings.h    \
-	$(AccessX_files)		\
 	$(CORBA_GENERATED)
+
+#	$(AccessX_files)		\
 
 gnome_settings_daemon_LDADD = \
 	$(GNOME_SETTINGS_DAEMON_LIBS)			\
