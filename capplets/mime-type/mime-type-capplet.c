@@ -75,7 +75,7 @@ help_callback ()
   } else {
           GtkWidget *mbox;
           
-          mbox = gnome_message_box_new(_("No help is available/installed for these settings. Please make sure you\nhave the GNOME User's Guide installed on your system."),
+          mbox = gnome_message_box_new(_("No help is available/installed for these settings. Please make sure you\nhave the Control Center documentation installed on your system."),
 				 GNOME_MESSAGE_BOX_ERROR,
 				 _("Close"), NULL);
     
