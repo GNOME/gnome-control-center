@@ -18,9 +18,9 @@ URL: http://www.gnome.org
 Docdir: %{prefix}/doc
 
 
-Requires: xscreensaver >= 2.34
-Requires: gnome-libs >= 0.99.8
-Requires: ORBit >= 0.3.97
+Requires: xscreensaver >= 3.00
+Requires: gnome-libs >= 1.0.0
+Requires: ORBit >= 0.4.0
 
 %description
 Control-center is a configuration tool for easily
@@ -46,6 +46,10 @@ Control-center-devel helps you create the 'capplets'
 which are used in the control center.
 
 %changelog
+* Sat Feb 27 1999 Gregory McLean <gregm@comstar.net>
+- version 1.0.0
+- updated the requirements to match the current released versions of packages.
+- Added an alpha specfic rule as libtool don't understand _all_ alpha models.
 
 * Mon Feb 15 1999 Michael Fulbright <drmike@redhat.com>
 - version 0.99.8.1
@@ -82,8 +86,13 @@ which are used in the control center.
 %setup
 
 %build
-
-CFLAGS="$RPM_OPT_FLAGS" ./configure --prefix=%prefix 
+# libtool can't deal with all the alpha variations but and alpha is an alpha
+# in this context.
+%ifarch alpha
+   CFLAGS="$RPM_OPT_FLAGS" ./configure --host=alpha-redhat-linux --prefix=%prefix 
+%else
+   CFLAGS="$RPM_OPT_FLAGS" ./configure --prefix=%prefix 
+%endif
 make
 
 %install
