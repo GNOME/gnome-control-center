@@ -1,7 +1,9 @@
 bin_PROGRAMS = gnome2-keyboard-properties
 
-gnome2_keyboard_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
 gnome2_keyboard_properties_SOURCES = gnome-keyboard-properties.c
+gnome2_keyboard_properties_LDADD =				\
+	../accessibility/keyboard/libaccessibility-keyboard.a 	\
+	$(GNOMECC_CAPPLETS_LIBS)
 
 @INTLTOOL_DESKTOP_RULE@
 

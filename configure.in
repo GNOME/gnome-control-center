@@ -39,6 +39,7 @@ AC_CHECK_FUNCS(setenv,[AC_DEFINE(HAVE_SETENV)])
 dnl keyboard-properties-capplet
 AC_CHECK_HEADERS(X11/extensions/xf86misc.h, XF86MISC_LIBS="-lXxf86misc")
 AC_SUBST(XF86MISC_LIBS)
+AC_CHECK_HEADERS(X11/extensions/XKB.h)
 
 dnl ==============================================
 dnl Check that we meet the  dependencies
@@ -205,5 +206,7 @@ capplets/sound/Makefile
 capplets/theme-switcher/Makefile
 capplets/theme-switcher/control/Makefile
 capplets/ui-properties/Makefile
+capplets/accessibility/Makefile
+capplets/accessibility/keyboard/Makefile
 schemas/Makefile
 libsounds/Makefile])

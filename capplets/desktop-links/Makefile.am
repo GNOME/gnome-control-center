@@ -6,7 +6,7 @@ capplets =
 ## Pixmaps
 
 pixmaps_pre = $(capplets:=-capplet.png)
-pixmaps_DATA = $(pixmaps_pre) advanced-directory.png
+pixmaps_DATA = $(pixmaps_pre) advanced-directory.png accessibility-directory.png
 pixmapsdir = $(GNOMECC_ICONS_DIR)
 
 ##
@@ -40,7 +40,7 @@ all-local: $(desktop_files) $(groups_files)
 ## foo.directory.in is merged with the translations to create foo.directory
 ## foo.directory is installed and renamed
 ##
-groups = Advanced
+groups = Advanced Accessibility
 groups_files = $(groups:=.directory)
 groups_in_files = $(groups_files:.directory=.directory.in)
 groups_in_in_files = $(groups_files:.directory=.directory.in.in)

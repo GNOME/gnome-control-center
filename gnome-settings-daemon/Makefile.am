@@ -20,6 +20,8 @@ gnome2_settings_daemon_SOURCES =	\
 	gnome-settings-locate-pointer.h	\
 	gnome-settings-sound.c		\
 	gnome-settings-sound.h		\
+	gnome-settings-accessibility-keyboard.h	\
+	gnome-settings-accessibility-keyboard.c	\
 	xsettings-common.c		\
 	xsettings-manager.c		\
 	xsettings-common.h		\

@@ -974,6 +974,9 @@ peditor_numeric_range_value_changed (GConfClient         *client,
 
 	if (value != NULL) {
 		value_wid = peditor->p->conv_to_widget_cb (peditor, value);
+
+		g_return_if_fail  (value_wid->type == GCONF_VALUE_FLOAT);
+
 		gtk_adjustment_set_value (GTK_ADJUSTMENT (peditor->p->ui_control), gconf_value_get_float (value_wid));
 		gconf_value_free (value_wid);
 	}

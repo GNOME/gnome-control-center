@@ -35,6 +35,7 @@
 #include "capplet-util.h"
 #include "gconf-property-editor.h"
 #include "activate-settings-daemon.h"
+#include <../accessibility/keyboard/accessibility-keyboard.h>
 
 enum
 {
@@ -53,7 +54,7 @@ create_dialog (void)
 }
 
 static GConfValue *
-rate_to_widget (GConfPropertyEditor *peditor, GConfValue *value) 
+rate_to_widget (GConfPropertyEditor *peditor, const GConfValue *value)
 {
 	GConfValue *new_value;
 	int rate;
@@ -75,7 +76,7 @@ rate_to_widget (GConfPropertyEditor *peditor, GConfValue *value)
 }
 
 static GConfValue *
-rate_from_widget (GConfPropertyEditor *peditor, GConfValue *value) 
+rate_from_widget (GConfPropertyEditor *peditor, const GConfValue *value)
 {
 	static int rates[] = {
 		255, 192, 64, 1
@@ -90,7 +91,7 @@ rate_from_widget (GConfPropertyEditor *peditor, GConfValue *value)
 }
 
 static GConfValue *
-delay_to_widget (GConfPropertyEditor *peditor, GConfValue *value) 
+delay_to_widget (GConfPropertyEditor *peditor, const GConfValue *value)
 {
 	GConfValue *new_value;
 	int delay;
@@ -132,7 +133,7 @@ static GConfEnumStringPair bell_enums[] = {
 };
 
 static GConfValue *
-bell_from_widget (GConfPropertyEditor *peditor, GConfValue *value) 
+bell_from_widget (GConfPropertyEditor *peditor, const GConfValue *value)
 {
 	GConfValue *new_value;
 
@@ -144,7 +145,7 @@ bell_from_widget (GConfPropertyEditor *peditor, GConfValue *value)
 }
 
 static GConfValue *
-bell_to_widget (GConfPropertyEditor *peditor, GConfValue *value) 
+bell_to_widget (GConfPropertyEditor *peditor, const GConfValue *value)
 {
 	GConfValue *new_value;
 	gint val = 2;
@@ -162,7 +163,7 @@ bell_to_widget (GConfPropertyEditor *peditor, GConfValue *value)
 
 
 static GConfValue *
-blink_from_widget (GConfPropertyEditor *peditor, GConfValue *value) 
+blink_from_widget (GConfPropertyEditor *peditor, const GConfValue *value)
 {
 	GConfValue *new_value;
 
@@ -173,7 +174,7 @@ blink_from_widget (GConfPropertyEditor *peditor, GConfValue *value)
 }
 
 static GConfValue *
-blink_to_widget (GConfPropertyEditor *peditor, GConfValue *value) 
+blink_to_widget (GConfPropertyEditor *peditor, const GConfValue *value)
 {
 	GConfValue *new_value;
 	gint current_rate;
@@ -303,6 +304,14 @@ get_legacy_settings (void)
 	COPY_FROM_LEGACY (int,  "/gnome/desktop/peripherals/keyboard/bell_duration", "/Desktop/Bell/duration=100");
 }
 
+static void
+setup_accessibility (GladeXML *dialog, GConfChangeSet *changeset)
+{
+	GtkWidget *notebook = WID ("notebook1");
+	GtkWidget *label = gtk_label_new (_("Accessibility"));
+	GtkWidget *page = setup_accessX_dialog (changeset, FALSE);
+	gtk_notebook_append_page (GTK_NOTEBOOK (notebook), page, label);
+}
 
 int
 main (int argc, char **argv) 
@@ -344,6 +353,7 @@ main (int argc, char **argv)
 		changeset = NULL;
 		dialog = create_dialog ();
 		setup_dialog (dialog, changeset);
+		setup_accessibility (dialog, changeset);
 
 		gtk_widget_show_all (WID ("keyboard_dialog"));
 		gtk_main ();
