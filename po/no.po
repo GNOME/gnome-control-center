@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.5.8\n"
-"POT-Creation-Date: 2002-04-29 14:47-0500\n"
-"PO-Revision-Date: 2002-04-29 14:18+0200\n"
+"POT-Creation-Date: 2002-04-30 12:57+0200\n"
+"PO-Revision-Date: 2002-04-30 12:59+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -36,8 +36,8 @@ msgid "Keyboard Accessibility Properties"
 msgstr "Egenskaper for tilgjengelighet for tastatur"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:1
-msgid "&lt;b&gt;Test&lt;/b&gt;"
-msgstr ""
+msgid "<b>Test</b>"
+msgstr "<b>Eksempel</b>"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:2
 msgid "B_eep when modifier is pressed"
@@ -332,6 +332,76 @@ msgstr ""
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr "Bare aktiver innstillingene og avslutt"
+
+#: capplets/common/file-transfer-dialog.c:95
+#, c-format
+msgid "%i of %i"
+msgstr "%i av %i"
+
+#: capplets/common/file-transfer-dialog.c:119
+#, c-format
+msgid "Transferring: %s"
+msgstr "Overfører: %s"
+
+#: capplets/common/file-transfer-dialog.c:126
+#, c-format
+msgid "From: %s"
+msgstr "Fra: %s"
+
+#: capplets/common/file-transfer-dialog.c:134
+#, c-format
+msgid "To: %s"
+msgstr "Til: %s"
+
+#: capplets/common/file-transfer-dialog.c:185
+msgid "From URI"
+msgstr "Fra URI"
+
+#: capplets/common/file-transfer-dialog.c:186
+msgid "URI currently transferring from"
+msgstr "URI det overføres fra"
+
+#: capplets/common/file-transfer-dialog.c:193
+msgid "To URI"
+msgstr "Til URI"
+
+#: capplets/common/file-transfer-dialog.c:194
+msgid "URI currently transferring to"
+msgstr "URI det overføres til"
+
+#: capplets/common/file-transfer-dialog.c:201
+msgid "Fraction completed"
+msgstr "Andel fullført"
+
+#: capplets/common/file-transfer-dialog.c:202
+msgid "Fraction of transfer currently completed"
+msgstr "Andel av overføringen som er fullført"
+
+#: capplets/common/file-transfer-dialog.c:209
+msgid "Current URI index"
+msgstr "Aktiv URI-indeks"
+
+#: capplets/common/file-transfer-dialog.c:210
+msgid "Current URI index - starts from 1"
+msgstr "Aktiv URI-indeks - starter på 1"
+
+#: capplets/common/file-transfer-dialog.c:217
+msgid "Total URIs"
+msgstr "Totalt antall URIer"
+
+#: capplets/common/file-transfer-dialog.c:218
+msgid "Total number of URIs"
+msgstr "Totalt antall URIer"
+
+#: capplets/common/file-transfer-dialog.c:372
+#: capplets/common/file-transfer-dialog.c:374
+msgid "Connecting..."
+msgstr "Kobler til..."
+
+#: capplets/common/file-transfer-dialog.c:379
+#: capplets/common/file-transfer-dialog.c:381
+msgid "Downloading..."
+msgstr "Laster ned..."
 
 #: capplets/common/gconf-property-editor.c:172
 msgid "Key"
@@ -1188,36 +1258,36 @@ msgstr ""
 "en daemon nå)"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:1
-#, fuzzy
+#: capplets/network/gnome-network-preferences.glade.h:1
+#: capplets/theme-switcher/theme-properties.glade.h:1
+msgid "*"
+msgstr "*"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:2
 msgid ""
-"&lt;b&gt;Tip:&lt;/b&gt; You can configure the keyboards accessibility "
-"features by bringing up the 'Accessibility Settings' property dialog, or "
-"pressing the button on the right."
+"<b>Tip:</b> You can configure the keyboards accessibility features by "
+"bringing up the 'Accessibility Settings' property dialog, or pressing the "
+"button on the right."
 msgstr ""
 "<b>Tips:</b> Du kan konfigurere funksjoner for tilgjengelighet for "
 "tastaturet ved å hente opp dialogen «Innstillinger for tilgjengelighet», "
 "eller ved å trykke på knappen til høyre."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:2
-msgid "&lt;i&gt;fast&lt;/i&gt;"
-msgstr ""
-
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:3
-msgid "&lt;i&gt;loud&lt;/i&gt;"
-msgstr ""
+msgid "<i>fast</i>"
+msgstr "<i>rask</i>"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:4
-msgid "&lt;i&gt;quiet&lt;/i&gt;"
-msgstr ""
+msgid "<i>loud</i>"
+msgstr "<i>høy</i>"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:5
-msgid "&lt;i&gt;slow&lt;/i&gt;"
-msgstr ""
+msgid "<i>quiet</i>"
+msgstr "<i>stille</i>"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:6
-#: capplets/network/gnome-network-preferences.glade.h:1
-msgid "*"
-msgstr "*"
+msgid "<i>slow</i>"
+msgstr "<i>treg</i>"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "Cursor"
@@ -1289,11 +1359,10 @@ msgid "Slow"
 msgstr "Sakte"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:25
-#, fuzzy
 msgid ""
-"The keyboard bell is the &lt;i&gt;beep&lt;/i&gt; sound heard when the system "
-"wants to get your attention.  You can select a custom sound file to play "
-"instead of the traditional beeping noise."
+"The keyboard bell is the <i>beep</i> sound heard when the system wants to "
+"get your attention.  You can select a custom sound file to play instead of "
+"the traditional beeping noise."
 msgstr ""
 "Tastaturpip er <i>pip</i>-lyden du hører når systemet vil ha din "
 "oppmerksomhet. Du kan velge en egendefinert lydfil som skal spilles i stedet "
@@ -1619,37 +1688,36 @@ msgid "Mouse Properties"
 msgstr "Egenskaper for mus"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:1
-#, fuzzy
 msgid ""
-"&lt;b&gt;Note:&lt;/b&gt; You will need to logout and log back in for this "
-"setting to take effect."
+"<b>Note:</b> You will need to logout and log back in for this setting to "
+"take effect."
 msgstr ""
 "<b>Merk:</b> Du vil måtte logge inn på nytt igjen for at denne innstillingen "
 "skal tre i kraft."
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:2
-msgid "&lt;i&gt;Fast&lt;/i&gt;"
-msgstr ""
+msgid "<i>Fast</i>"
+msgstr "<i>Rask</i>"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:3
-msgid "&lt;i&gt;High&lt;/i&gt;"
-msgstr ""
+msgid "<i>High</i>"
+msgstr "<i>Høy</i>"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:4
-msgid "&lt;i&gt;Large&lt;/i&gt;"
-msgstr ""
+msgid "<i>Large</i>"
+msgstr "<i>Stor</i>"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:5
-msgid "&lt;i&gt;Low&lt;/i&gt;"
-msgstr ""
+msgid "<i>Low</i>"
+msgstr "<i>Lav</i>"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:6
-msgid "&lt;i&gt;Slow&lt;/i&gt;"
-msgstr ""
+msgid "<i>Slow</i>"
+msgstr "<i>Treg</i>"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:7
-msgid "&lt;i&gt;Small&lt;/i&gt;"
-msgstr ""
+msgid "<i>Small</i>"
+msgstr "<i>Liten</i>"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid ""
@@ -1826,13 +1894,49 @@ msgstr "Endre utseende for knapper, rullefelt osv."
 msgid "Theme"
 msgstr "Tema"
 
-#: capplets/theme-switcher/theme-properties.glade.h:1
+#: capplets/theme-switcher/theme-properties.glade.h:2
+msgid "Go to theme folder..."
+msgstr "Gå til temamappen..."
+
+#: capplets/theme-switcher/theme-properties.glade.h:3
+msgid "Install new theme"
+msgstr "Installer nytt tema"
+
+#: capplets/theme-switcher/theme-properties.glade.h:4
+msgid "Install new theme..."
+msgstr "Installer nytt tema..."
+
+#: capplets/theme-switcher/theme-properties.glade.h:5
+msgid "Install theme:"
+msgstr "Installer tema:"
+
+#: capplets/theme-switcher/theme-properties.glade.h:6
+msgid "Installed themes"
+msgstr "Installerte tema"
+
+#: capplets/theme-switcher/theme-properties.glade.h:7
+msgid "New themes can also be installed by dragging them into the window."
+msgstr "Nye tema kan også installeres ved å dra dem inn i vinduet."
+
+#: capplets/theme-switcher/theme-properties.glade.h:8
+msgid "Remove theme..."
+msgstr "Fjern tema..."
+
+#: capplets/theme-switcher/theme-properties.glade.h:9
 msgid "Theme Properties"
 msgstr "Egenskaper for tema"
 
-#: capplets/theme-switcher/theme-properties.glade.h:2
-msgid "Themes"
-msgstr "Tema"
+#: capplets/theme-switcher/theme-properties.glade.h:10
+msgid "To rename or remove a theme, click \"Manage themes\"."
+msgstr "For å endre navn på eller fjerne et tema, klikk «Håndter tema»."
+
+#: capplets/theme-switcher/theme-properties.glade.h:11
+msgid "_Install"
+msgstr "_Installer"
+
+#: capplets/theme-switcher/theme-properties.glade.h:12
+msgid "_Use this for my current theme."
+msgstr "Br_uk dette som aktivt tema."
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
 msgid "Change how toolbars and menus are displayed"
@@ -2266,6 +2370,12 @@ msgid ""
 "in the main menu, or by turning on \"Save Current Setup\" when\n"
 "you log out.\n"
 msgstr ""
+"Din aktive vindushåndterer er endret. For at denne endringen\n"
+"skal bli lagret må du lagre din aktive sesjon. Du kan gjøre dette\n"
+"ved å velge «Lagre sesjonen nå» under, eller du kan lagre den\n"
+"senere. Dette kan gjøres ved å velge «Lagre aktiv sesjon» under\n"
+"«Innstillinger» i hovedmenyen, eller ved å krysse av for «Lagre\n"
+"aktivt oppsett» når du loggger ut.\n"
 
 #: capplets/wm-properties/wm-properties-capplet.c:587
 msgid "Save Session Later"
@@ -2283,6 +2393,11 @@ msgid ""
 "under \"Settings\" in the main menu, or by turning on\n"
 "\"Save Current Setup\" when you log out.\n"
 msgstr ""
+"Din aktive vindushåndterer er endret. For at denne endringen\n"
+"skal lagres må du lagre din aktive sesjon. Dette kan gjøres ved\n"
+"å velge «Lagre aktiv sesjon» under «Innstillinger» i hovedmenyen,\n"
+"eller ved å krysse av for «Lagre aktivt oppsett» når du\n"
+"logger ut.\n"
 
 #: capplets/wm-properties/wm-properties-capplet.c:811
 msgid "Add New Window Manager"
@@ -2503,74 +2618,6 @@ msgstr "S_pill"
 #: libsounds/sound-view.c:255
 msgid "Select sound file"
 msgstr "Velg lydfil"
-
-#~ msgid "<b>Test</b>"
-#~ msgstr "<b>Eksempel</b>"
-
-#~ msgid "<i>fast</i>"
-#~ msgstr "<i>rask</i>"
-
-#~ msgid "<i>loud</i>"
-#~ msgstr "<i>høy</i>"
-
-#~ msgid "<i>quiet</i>"
-#~ msgstr "<i>stille</i>"
-
-#~ msgid "<i>slow</i>"
-#~ msgstr "<i>treg</i>"
-
-#~ msgid "<i>Fast</i>"
-#~ msgstr "<i>Rask</i>"
-
-#~ msgid "<i>High</i>"
-#~ msgstr "<i>Høy</i>"
-
-#~ msgid "<i>Large</i>"
-#~ msgstr "<i>Stor</i>"
-
-#~ msgid "<i>Low</i>"
-#~ msgstr "<i>Lav</i>"
-
-#~ msgid "<i>Slow</i>"
-#~ msgstr "<i>Treg</i>"
-
-#~ msgid "<i>Small</i>"
-#~ msgstr "<i>Liten</i>"
-
-#~ msgid "Select which font to use"
-#~ msgstr "Velg skrift som skal brukes"
-
-#~ msgid "Font settings only apply to new programs."
-#~ msgstr "Innstillinger for skrift blir bare brukt for nye programmer."
-
-#~ msgid "Use a custom font."
-#~ msgstr "Bruk en egendefinert skrift."
-
-#~ msgid "Gtk+ Theme Selector"
-#~ msgstr "Gtk+ temavelger"
-
-#~ msgid "Select which gtk+ theme to use"
-#~ msgstr "Velg gtk+-tema som skal brukes"
-
-#~ msgid "Install new theme..."
-#~ msgstr "Installer nytt tema..."
-
-#~ msgid "Select a theme to install"
-#~ msgstr "Velg et tema som skal installeres"
-
-#~ msgid "_Program to execute"
-#~ msgstr "_Program som skal kjøres"
-
-#~ msgid ""
-#~ "MouseKeys can benefit StickyKey users or anyone unable to use the "
-#~ "pointing device or in need of 'pixel by pixel' position control of the "
-#~ "pointer.  When activated, MouseKeys turns the numeric keypad into a mouse "
-#~ "control pad."
-#~ msgstr ""
-#~ "MusTaster kan være nyttig for brukere av KlebrigeTaster eller alle som "
-#~ "ikke kan bruke pekerenheten eller som trenger «piksel for piksel» "
-#~ "posisjonskontroll over pekeren. Når denne er aktivert endres "
-#~ "nummertastaturet til en muskontroll. "
 
 #~ msgid ""
 #~ "StickyKeys can benefit users who type with only one finger or who might "
@@ -2947,9 +2994,6 @@ msgstr "Velg lydfil"
 #~ msgid "1 minute ago"
 #~ msgstr "1 minutt siden"
 
-#~ msgid "Current time"
-#~ msgstr "Nå"
-
 #~ msgid "Custom screensaver. No description available"
 #~ msgstr "Egendefinert skjermsparer. Ingen beskrivelse tilgjengelig"
 
@@ -3055,9 +3099,6 @@ msgstr "Velg lydfil"
 
 #~ msgid "Twelve Sided cells"
 #~ msgstr "Tolvsidede celler"
-
-#~ msgid "number of Ants"
-#~ msgstr "antall maur"
 
 #~ msgid "Atlantis"
 #~ msgstr "Atlantis"
@@ -3687,9 +3728,6 @@ msgstr "Velg lydfil"
 #~ msgid "Change to display in monochrome."
 #~ msgstr "Endre til monokrom visning."
 
-#~ msgid "Duration of current shape."
-#~ msgstr "Varighet av aktiv form."
-
 #~ msgid "Quickness of rotation at each step (0 = Random)"
 #~ msgstr "Rotasjonshastighet for hvert steg (0 = tilfeldig)"
 
@@ -3993,9 +4031,6 @@ msgstr "Velg lydfil"
 
 #~ msgid "Use"
 #~ msgstr "Bruk"
-
-#~ msgid " Configure..."
-#~ msgstr " Konfigurer..."
 
 #~ msgid "About \"<Screensaver name>\""
 #~ msgstr "Om \"<Navn på skjermsparer>\""
