@@ -308,7 +308,7 @@ static void
 setup_accessibility (GladeXML *dialog, GConfChangeSet *changeset)
 {
 	GtkWidget *notebook = WID ("notebook1");
-	GtkWidget *label = gtk_label_new (_("Accessibility"));
+	GtkWidget *label = gtk_label_new_with_mnemonic (_("_Accessibility"));
 	GtkWidget *page = setup_accessX_dialog (changeset, FALSE);
 	gtk_notebook_append_page (GTK_NOTEBOOK (notebook), page, label);
 }
