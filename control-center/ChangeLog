@@ -1,3 +1,15 @@
+2002-09-26  jacob berkman  <jacob@ximian.com>
+
+	* capplet-dir.c (find_icon): fix the macro
+
+	* capplet-dir-view.c (capplet_dir_view_init): use control-center2.png
+
+	* Makefile.am: remove control-center.png which conflicts with the
+	gnome 1 package and define different macros for $datadir/pixmaps
+	and $gnomecc_icon_dir
+
+	(pulled from HEAD)
+
 2002-09-24  Jody Goldber <jody@gnome.org>
 
 	* Release 2.0.2.91

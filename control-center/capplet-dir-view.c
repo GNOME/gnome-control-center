@@ -128,7 +128,7 @@ capplet_dir_view_init (CappletDirView *view, CappletDirViewClass *class)
 
 	gtk_window_set_default_size (GTK_WINDOW (view->app), 620, 430);
 	gnome_window_icon_set_from_file (GTK_WINDOW (view->app), 
-					 PIXMAPS_DIR "/control-center.png");
+					 PIXMAP_DIR "/control-center2.png");
 
 	ui_component = bonobo_ui_component_new ("gnomecc");
 	bonobo_ui_component_set_container (ui_component, bonobo_object_corba_objref (BONOBO_OBJECT (ui_container)), NULL);
