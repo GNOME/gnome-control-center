@@ -109,14 +109,28 @@ static gchar* get_selected_theme (void)
 	return theme;
 }
 
+
+static gchar* get_selected_theme_name (void)
+{
+	int index = -1;
+	gchar *theme;
+	GtkTreeView *view = GTK_TREE_VIEW (glade_xml_get_widget (xml, "tree1"));
+	
+	gtk_tree_selection_selected_foreach (gtk_tree_view_get_selection (view), (GtkTreeSelectionForeachFunc) select_foreach_cb, &index);
+	
+	if (index == -1)
+		return NULL;
+
+	return g_basename (themes[index]);
+}
+
 static void
 apply_cb (void)
 {
-	gchar *filename = get_selected_theme ();
-	if (filename)
+	gchar *name = get_selected_theme_name ();
+	if (name)
 	{
-		gconf_client_set_string (gconf_client_get_default (), "/desktop/gnome/interface/gtk_theme", filename);
-		g_free (filename);
+		gconf_client_set_string (gconf_client_get_default (), "/desktop/gnome/interface/gtk_theme", name);
 	}
 }
 
