@@ -1,3 +1,33 @@
+2001-02-22  Gene Z. Ragan  <gzr@eazel.com>
+
+	reviewed by: Jacob Berkman <jacob@ximian.com>
+	
+	Added a new interface so that capplets that do direct manipulation
+	of parameters can work in the control center environment.  Without
+	this interface, the control-center assumes that changes made
+	are lost when the control-center is closed.  The control center
+	also enables the Try and Revert button which do not apply
+	to an immediate change capplet that has no rollback state.
+	
+	* idl/control-center.idl:
+	Add new changes_are_imediate interface
+
+	* control-center/capplet-widget-libs.c: (do_quit),
+	(capplet_corba_gtk_main_quit),
+	(capplet_corba_changes_are_immediate), (capplet_widget_corba_init):
+	New interface implementation.
+	
+	* control-center/capplet-widget-libs.h:
+	* control-center/capplet-widget.c:
+	* control-center/capplet-widget.h:
+	(capplet_widget_init),
+	(capplet_widget_changes_are_immediate):
+	New interface implementation.
+	
+	* control-center/corba-glue.c: (server_state_changed),
+	(server_changes_are_immediate):
+	New interface implementation.
+	
 2001-02-05  Simos Xenitellis  <simos@hellug.gr>
 
 	* */*/*.desktop, */*/*.directory: Added Greek
