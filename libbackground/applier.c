@@ -416,7 +416,7 @@ GtkWidget *
 applier_get_preview_widget (Applier *applier) 
 {
 	GdkPixbuf *pixbuf;
-	GdkPixmap *pixmap, *pixmap1;
+	GdkPixmap *pixmap;
 	GdkBitmap *mask;
 	GdkVisual *visual;
 	GdkColormap *colormap;
@@ -447,15 +447,26 @@ applier_get_preview_widget (Applier *applier)
 				 gdk_pixbuf_get_width (pixbuf),
 				 gdk_pixbuf_get_height (pixbuf),
 				 visual->depth);
+	mask = gdk_pixmap_new (GDK_ROOT_PARENT (),
+			       gdk_pixbuf_get_width (pixbuf),
+			       gdk_pixbuf_get_height (pixbuf),
+			       1);
+
 	gc = gdk_gc_new (GDK_ROOT_PARENT ());
+
+	gdk_pixbuf_render_threshold_alpha (pixbuf, mask,
+					   0, 0, 0, 0,
+					   gdk_pixbuf_get_width (pixbuf),
+					   gdk_pixbuf_get_height (pixbuf),
+					   1);
+
+	gdk_gc_set_clip_mask (gc, mask);
 
 	gdk_pixbuf_render_to_drawable (pixbuf, pixmap, gc,
 				       0, 0, 0, 0,
 				       gdk_pixbuf_get_width (pixbuf),
 				       gdk_pixbuf_get_height (pixbuf),
 				       GDK_RGB_DITHER_MAX, 0, 0);
-
-	gdk_pixbuf_render_pixmap_and_mask (pixbuf, &pixmap1, &mask, 0);
 
 	applier->p->preview_widget = gtk_pixmap_new (pixmap, mask);
 	gtk_widget_show (applier->p->preview_widget);
@@ -464,8 +475,6 @@ applier_get_preview_widget (Applier *applier)
 
 	gtk_widget_pop_visual ();
 	gtk_widget_pop_colormap ();
-
-	gdk_pixmap_unref (pixmap1);
 
 	return applier->p->preview_widget;
 }
