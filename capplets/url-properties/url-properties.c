@@ -226,6 +226,7 @@ void url_capplet_commit(void) {
     gnome_config_set_string(key, col2);
     g_free(key);
   }
+  gnome_config_sync();
   gtk_main_quit();
 }
 
