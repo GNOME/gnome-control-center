@@ -177,6 +177,7 @@ void url_capplet_refill_clist(void) {
     GConfEntry *e = l->data;
     gchar *key = g_strdup (e->key);
     gchar *value = g_strdup (gconf_value_get_string (gconf_entry_get_value (e)));
+    gchar *filename = g_path_get_basename (key);
     int len = strlen(key);
 
     if (len > 5 && !strcmp(&key[len-5], "-show")) {
@@ -184,7 +185,7 @@ void url_capplet_refill_clist(void) {
       gint id;
       /* it is a *-show key */
       key[len-5] = '\0';
-      row[0] = g_basename (key);
+      row[0] = filename;
       row[1] = value;
 
       id = gtk_clist_append(GTK_CLIST(clist), row);
@@ -193,6 +194,7 @@ void url_capplet_refill_clist(void) {
     }
     g_free(key);
     g_free(value);
+    g_free(filename);
     gconf_entry_free (e);
   }
   gtk_clist_thaw(GTK_CLIST(clist));

@@ -252,7 +252,7 @@ nautilus_mime_type_show_icon_selection (NautilusMimeIconEntry *icon_entry)
 {
 	GnomeFileEntry *fe;
 	gchar *p;
-	gchar *curfile;
+	gchar *curfile, *filename;
 	GtkWidget *tl;
 
 	g_return_if_fail (icon_entry != NULL);
@@ -281,7 +281,7 @@ nautilus_mime_type_show_icon_selection (NautilusMimeIconEntry *icon_entry)
 	/* figure out the directory */
 	if (!g_file_test (p, G_FILE_TEST_IS_DIR)) {
 		gchar *d;
-		d = g_dirname (p);
+		d = g_path_get_dirname (p);
 		g_free (p);
 		p = d;
 		if (!g_file_test (p, G_FILE_TEST_IS_DIR)) {
@@ -348,8 +348,11 @@ nautilus_mime_type_show_icon_selection (NautilusMimeIconEntry *icon_entry)
 		gnome_icon_selection_show_icons(GNOME_ICON_SELECTION(iconsel));
 
 		if(curfile)
+			filename = g_path_get_basename(curfile);
+
+		if(filename)
 			gnome_icon_selection_select_icon(GNOME_ICON_SELECTION(iconsel), 
-							 g_basename(curfile));
+							 filename);
 
 		/* FIXME:
 		 * OK button is handled by caller, Cancel button is handled here.
