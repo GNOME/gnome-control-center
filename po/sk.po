@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.5.1\n"
-"POT-Creation-Date: 2001-09-22 14:29+0200\n"
+"POT-Creation-Date: 2001-10-11 14:12-0600\n"
 "PO-Revision-Date: 2001-09-22 14:59CET\n"
 "Last-Translator: Stanislav Visnovsky <visnovsky@nenya.ms.mff.cuni.cz>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -13,6 +13,11 @@ msgstr ""
 "Content-Type: text/plain; charset=ISO-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.9.5\n"
+
+#: archiver/archive.c:614
+#, fuzzy
+msgid "Default location"
+msgstr "©tandardné umiestnenie"
 
 #: archiver/config-archiver.c:307 archiver/location.c:460
 msgid "Default Location"
@@ -174,12 +179,12 @@ msgstr "Mo¾nosti pre pridanie a premenovanie umiestnení"
 msgid "Options for adding and removing backends"
 msgstr "Mo¾nosti pre pridanie a odstránenie strojov"
 
-#: capplets/background/applier.c:381
+#: capplets/background/applier.c:379
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr "Nie je mo¾né naèíta» obrázok \"%s\", zakazujem tapetu."
 
-#: capplets/background/applier.c:520
+#: capplets/background/applier.c:518
 msgid "Disabled"
 msgstr "Vypnuté"
 
@@ -247,36 +252,28 @@ msgstr "Pou¾i» obrázok ako pozadie"
 msgid "Vertical gradient"
 msgstr "Vertikálny prechod"
 
-#: capplets/background/prefs-widget.c:362
-msgid "(None)"
-msgstr "(®iadna)"
+#: capplets/background/background-properties-capplet.c:47
+#, fuzzy
+msgid "Set background image."
+msgstr "Obrázok pozadia"
 
-#: capplets/background/prefs-widget.c:611
-msgid "Wallpaper Selection"
-msgstr "Výber tapety"
+#: capplets/background/background-properties-capplet.c:47
+msgid "IMAGE-FILE"
+msgstr ""
 
-#: capplets/background/prefs-widget.c:618
-msgid "Can't find an hbox, using a normal file selection"
-msgstr "Nie je mo¾né nájs» hbox, pou¾ijem normálny výber súboru"
-
-#: capplets/background/prefs-widget.c:624
-#: capplets/screensaver/screensaver-properties.glade.h:11
-msgid "Preview"
-msgstr "Uká¾ka"
-
-#: capplets/common/capplet-util.c:500
+#: capplets/common/capplet-util.c:506
 msgid "Just apply settings and quit"
 msgstr "Iba pou¾i» nastavenie a skonèi»"
 
-#: capplets/common/capplet-util.c:502
+#: capplets/common/capplet-util.c:508
 msgid "Initialize the session"
 msgstr "Inicializova» sedenie"
 
-#: capplets/common/capplet-util.c:504
+#: capplets/common/capplet-util.c:510
 msgid "Retrieve and store legacy settings"
 msgstr "Získa» a ulo¾i» predchádzajúce nastavenie"
 
-#: capplets/common/capplet-util.c:513
+#: capplets/common/capplet-util.c:519
 msgid "Capplet options"
 msgstr "Mo¾nosti pre Capplet"
 
@@ -350,7 +347,8 @@ msgid "Select a Web Browser"
 msgstr "Vyberte prehliadaè WWW"
 
 #: capplets/default-applications/interface.c:265
-msgid "With this option, you can select a predefined Web Browser as your default"
+msgid ""
+"With this option, you can select a predefined Web Browser as your default"
 msgstr "Táto voµba umo¾òuje vybra» ¹tandardný prehliadaè WWW"
 
 #: capplets/default-applications/interface.c:285
@@ -616,7 +614,7 @@ msgstr "Pou¾i»"
 msgid "Screensaver"
 msgstr "©etriè obrazovky"
 
-#: capplets/screensaver/prefs-widget.c:920
+#: capplets/screensaver/prefs-widget.c:924
 #, c-format
 msgid "About %s\n"
 msgstr "O %s\n"
@@ -728,6 +726,10 @@ msgstr "Suspendova» po "
 msgid "One screensaver all the time"
 msgstr "Jeden ¹etriè"
 
+#: capplets/screensaver/screensaver-properties.glade.h:11
+msgid "Preview"
+msgstr "Uká¾ka"
+
 #: capplets/screensaver/screensaver-properties.glade.h:12
 msgid "R_equire password to unlock screen"
 msgstr "_Po¾adova» heslo pre odomknutie"
@@ -813,9 +815,9 @@ msgid ""
 "path.  Then, as they pass over changed pixels, their behavior is "
 "influenced.  Written by David Bagley."
 msgstr ""
-"Celulárny automat, ktorý je vlastne dvojrozmerný Turingov stroj: ako sa hlavy "
-"(\"mravce\") pohybujú po obrazovke, menia hodnoty bodov. Potom, ked sa dostanú "
-"nad zmenené body, ovplyvní to ich chovanie. Napísal David Bagley."
+"Celulárny automat, ktorý je vlastne dvojrozmerný Turingov stroj: ako sa "
+"hlavy (\"mravce\") pohybujú po obrazovke, menia hodnoty bodov. Potom, ked sa "
+"dostanú nad zmenené body, ovplyvní to ich chovanie. Napísal David Bagley."
 
 #: capplets/screensaver/screensavers/ant.xml.h:2
 msgid "Ant"
@@ -921,8 +923,8 @@ msgid ""
 "dolphins, and whales.  The swimming motions are great.  Originally written "
 "by Mark Kilgard."
 msgstr ""
-"Toto je prepis xfishtank: animácia GL niekoµkých ¾ralokov, delfínov a veµrýb. "
-"Pohyby sú fantastické. Pôvodne napísal Mark Kilgard."
+"Toto je prepis xfishtank: animácia GL niekoµkých ¾ralokov, delfínov a "
+"veµrýb. Pohyby sú fantastické. Pôvodne napísal Mark Kilgard."
 
 #: capplets/screensaver/screensavers/attraction.xml.h:1
 msgid "Attraction (balls)"
@@ -2091,8 +2093,8 @@ msgstr ""
 "        JRST .-4\t\t\t\t\t\t      \n"
 "\t\t\t\t\t\t\t\t      \n"
 "Ako oznámil v roku 1962 HAKMEM, Jackson Wright napísal tento kód pre PDP-1. "
-"Kód stále ¾ije v tomto ¹etrièi, u¾ 35 rokov. Poèet èiar bol ale výrazne zvý¹ený. "
-"Túto verziu vytvoril Tim Showalter."
+"Kód stále ¾ije v tomto ¹etrièi, u¾ 35 rokov. Poèet èiar bol ale výrazne "
+"zvý¹ený. Túto verziu vytvoril Tim Showalter."
 
 #: capplets/screensaver/screensavers/munch.xml.h:10
 msgid "Draw square at weird starting points."
@@ -2111,8 +2113,8 @@ msgid ""
 "Draws different shapes composed of nervously vibrating squiggles, as if seen "
 "through a camera operated by a monkey on crack.  By Dan Bornstein."
 msgstr ""
-"Kreslí rôzne tvary zlo¾ené z vibrujúcich èastí, ako keby ste sa dívali cez kameru "
-"v rukách ¹ialenej opice. Vytvoril Dan Bornstein."
+"Kreslí rôzne tvary zlo¾ené z vibrujúcich èastí, ako keby ste sa dívali cez "
+"kameru v rukách ¹ialenej opice. Vytvoril Dan Bornstein."
 
 #: capplets/screensaver/screensavers/nerverot.xml.h:2
 msgid "NerveRot"
@@ -2187,11 +2189,11 @@ msgid ""
 msgstr ""
 "Kreslí kváziperiodické dla¾dice. Vytvoril Timo Korvola.\n"
 "\n"
-"V aprili 1997, Sir Roger Penrose, anglický profesor matematiky, ktorý spolupracoval so "
-"Stephenom Hawkingom na témach ako relativita, èierne diery, poèiatok èasu, "
-"za¾aloval Kimberly-Clark Corporation, ktorá vraj okopírovala vzorku, ktorú "
-"vytvoril (vzorka, kde je vidie», ¾e \"neopakujúca sa vzorka v prírode mô¾e "
-"existova»\"), pre toaletný papier Kleenex.\n"
+"V aprili 1997, Sir Roger Penrose, anglický profesor matematiky, ktorý "
+"spolupracoval so Stephenom Hawkingom na témach ako relativita, èierne diery, "
+"poèiatok èasu, za¾aloval Kimberly-Clark Corporation, ktorá vraj okopírovala "
+"vzorku, ktorú vytvoril (vzorka, kde je vidie», ¾e \"neopakujúca sa vzorka v "
+"prírode mô¾e existova»\"), pre toaletný papier Kleenex.\n"
 "\n"
 "Prebrané z \"News of the Weird\" #491, 4-jul-1997."
 
@@ -2209,8 +2211,8 @@ msgid ""
 "circles overlap and leave spiral interference in their wake.  Written by Dan "
 "Bornstein."
 msgstr ""
-"Toto simuluje kolónie pliesne rastúce v petriho miske. Farebné rastúce kruhy sa "
-"prekrývajú a nechávajú ¹pirálovitú interferenciu. Napísal Dan Bornstein."
+"Toto simuluje kolónie pliesne rastúce v petriho miske. Farebné rastúce kruhy "
+"sa prekrývajú a nechávajú ¹pirálovitú interferenciu. Napísal Dan Bornstein."
 
 #: capplets/screensaver/screensavers/phosphor.xml.h:1
 msgid ""
@@ -2219,8 +2221,8 @@ msgid ""
 "Written by Jamie Zawinski."
 msgstr ""
 "Kreslí simuláciu starého terminálu s veµkými bodmi a dlhotrvajúcim "
-"fosforeskovaním. Ako zdroj textu doká¾e pou¾íva» µubovoµný program. "
-"Vytvoril Jamie Zawinski."
+"fosforeskovaním. Ako zdroj textu doká¾e pou¾íva» µubovoµný program. Vytvoril "
+"Jamie Zawinski."
 
 #: capplets/screensaver/screensavers/phosphor.xml.h:2
 msgid "Phosphor"
@@ -2231,8 +2233,8 @@ msgid ""
 "If you've ever been in the same room with a Windows NT machine, you've "
 "probably seen this GL hack.  This version is by Marcelo Vianna."
 msgstr ""
-"Ak ste u¾ niekedy videli Windows NT, asi ste tento ¹etriè u¾ poznali. Táto verzia "
-"je od Marcela Vianna."
+"Ak ste u¾ niekedy videli Windows NT, asi ste tento ¹etriè u¾ poznali. Táto "
+"verzia je od Marcela Vianna."
 
 #: capplets/screensaver/screensavers/pipes.xml.h:2
 msgid "Pipes"
@@ -2266,7 +2268,8 @@ msgid "Pyro"
 msgstr "Pyro"
 
 #: capplets/screensaver/screensavers/pyro.xml.h:5
-msgid "Pyro draws exploding fireworks.  Blah blah blah.  Written by Jamie Zawinski."
+msgid ""
+"Pyro draws exploding fireworks.  Blah blah blah.  Written by Jamie Zawinski."
 msgstr ""
 
 #: capplets/screensaver/screensavers/qix.xml.h:1
@@ -2742,7 +2745,8 @@ msgid "Vines"
 msgstr "Vines"
 
 #: capplets/screensaver/screensavers/wander.xml.h:1
-msgid "Draws a colorful random-walk, in various forms.  Written by Rick Campbell."
+msgid ""
+"Draws a colorful random-walk, in various forms.  Written by Rick Campbell."
 msgstr ""
 
 #: capplets/screensaver/screensavers/wander.xml.h:2
@@ -2778,7 +2782,8 @@ msgid "WhirlwindWarp"
 msgstr "WhirlwindWarp"
 
 #: capplets/screensaver/screensavers/whirlygig.xml.h:1
-msgid "Draws zooming chains of sinusoidal spots.  Written by Ashton Trey Belew."
+msgid ""
+"Draws zooming chains of sinusoidal spots.  Written by Ashton Trey Belew."
 msgstr ""
 
 #: capplets/screensaver/screensavers/whirlygig.xml.h:2
@@ -2908,8 +2913,8 @@ msgid ""
 "Draws a few swarms of critters flying around the screen, with nicely faded "
 "color trails behind them.  Written by Chris Leger."
 msgstr ""
-"Kreslí malé kàdle lietajúce po obrazovke, ich stopa krásne mizne. Napísal Chris "
-"Leger."
+"Kreslí malé kàdle lietajúce po obrazovke, ich stopa krásne mizne. Napísal "
+"Chris Leger."
 
 #: capplets/screensaver/screensavers/xrayswarm.xml.h:2
 msgid "XRaySwarm"
@@ -2932,8 +2937,8 @@ msgid ""
 "Draws falling snow and the occasional tiny Santa.  By Rick Jansen.  You can "
 "find it at <http://www.euronet.nl/~rja/Xsnow/>."
 msgstr ""
-"Kreslí padajúci sned a niekedy malého Santa Klausa. Vytvoril Rick Jansen. Nájdete ho "
-"na <http://www.euronet.nl/~rja/Xsnow/>."
+"Kreslí padajúci sned a niekedy malého Santa Klausa. Vytvoril Rick Jansen. "
+"Nájdete ho na <http://www.euronet.nl/~rja/Xsnow/>."
 
 #: capplets/screensaver/screensavers/xsnow.xml.h:2
 msgid "Xsnow"
@@ -2958,8 +2963,8 @@ msgid ""
 "XTeeVee simulates various television problems, including static, loss of "
 "vertical hold, and a test pattern.  By Greg Knauss."
 msgstr ""
-"XTeeVee simuluje rôzne problémy s televízorom. Napríklad statické výboje, stratu "
-"vertikálnej synchronizácia a testovaciu vzorku. Vytvoril Greg Knauss."
+"XTeeVee simuluje rôzne problémy s televízorom. Napríklad statické výboje, "
+"stratu vertikálnej synchronizácia a testovaciu vzorku. Vytvoril Greg Knauss."
 
 #: capplets/screensaver/screensavers/zoom.xml.h:1
 msgid "Zoom (Fatbits)"
@@ -2971,8 +2976,8 @@ msgid ""
 "option the result is like looking through many overlapping lenses rather "
 "than just a simple zoom.  Written by James Macnicol."
 msgstr ""
-"Zväè¹í èas» obrazovky a potom sa posúva. Pomocou voµby -lenses mô¾ete "
-"zmeni» vzhµad, napríklad na pohµad cez viacero ¹o¹oviek. Napísal James Macnicol."
+"Zväè¹í èas» obrazovky a potom sa posúva. Pomocou voµby -lenses mô¾ete zmeni» "
+"vzhµad, napríklad na pohµad cez viacero ¹o¹oviek. Napísal James Macnicol."
 
 #: capplets/screensaver/selection-dialog.c:99
 msgid "Add a new screensaver"
@@ -3031,7 +3036,7 @@ msgstr ""
 msgid "Close"
 msgstr "Zavrie»"
 
-#: control-center/capplet-dir-view-html.c:150
+#: control-center/capplet-dir-view-html.c:145
 msgid "GNOME Control Center:"
 msgstr "GNOME Ovládacie centrum:"
 
@@ -3099,3 +3104,11 @@ msgstr "CAPPLET"
 msgid "GNOME Control Center options"
 msgstr "Nastavenie GNOME Ovládacieho centra"
 
+#~ msgid "(None)"
+#~ msgstr "(®iadna)"
+
+#~ msgid "Wallpaper Selection"
+#~ msgstr "Výber tapety"
+
+#~ msgid "Can't find an hbox, using a normal file selection"
+#~ msgstr "Nie je mo¾né nájs» hbox, pou¾ijem normálny výber súboru"

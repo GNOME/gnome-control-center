@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.5.6\n"
-"POT-Creation-Date: 2001-08-29 12:59-0400\n"
+"POT-Creation-Date: 2001-10-11 14:12-0600\n"
 "PO-Revision-Date: 2001-08-22 18:01-03:00\n"
 "Last-Translator: Gustavo Maciel Dias Vieira <gdvieira@zaz.com.br>\n"
 "Language-Team: Brazilian Portuguese <ldp-br@bazar.conectiva.com.br>\n"
@@ -15,7 +15,12 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: archiver/config-archiver.c:307 archiver/location.c:445
+#: archiver/archive.c:614
+#, fuzzy
+msgid "Default location"
+msgstr "Executar em um terminal"
+
+#: archiver/config-archiver.c:307 archiver/location.c:460
 msgid "Default Location"
 msgstr ""
 
@@ -176,12 +181,12 @@ msgstr ""
 msgid "Options for adding and removing backends"
 msgstr ""
 
-#: capplets/background/applier.c:355
+#: capplets/background/applier.c:379
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr "Não foi possível carregar imagem \"%s\"; desativando papel de parede."
 
-#: capplets/background/applier.c:501
+#: capplets/background/applier.c:518
 msgid "Disabled"
 msgstr "Desativado"
 
@@ -245,41 +250,36 @@ msgid "Tiled"
 msgstr "Mosaico"
 
 #: capplets/background/background-properties.glade.h:13
+msgid "Use a picture for the background"
+msgstr ""
+
+#: capplets/background/background-properties.glade.h:14
 #, fuzzy
 msgid "Vertical gradient"
 msgstr "Gradiente vertical"
 
-#: capplets/background/prefs-widget.c:362
-msgid "(None)"
-msgstr "(Nenhum)"
+#: capplets/background/background-properties-capplet.c:47
+msgid "Set background image."
+msgstr ""
 
-#: capplets/background/prefs-widget.c:611
-msgid "Wallpaper Selection"
-msgstr "Seleção de papel de parede"
+#: capplets/background/background-properties-capplet.c:47
+msgid "IMAGE-FILE"
+msgstr ""
 
-#: capplets/background/prefs-widget.c:618
-msgid "Can't find an hbox, using a normal file selection"
-msgstr "Não é possível achar um `hbox', usando o seletor normal de arquivos"
-
-#: capplets/background/prefs-widget.c:624
-#: capplets/screensaver/screensaver-properties.glade.h:11
-msgid "Preview"
-msgstr "Visualização prévia"
-
-#: capplets/common/capplet-util.c:490
+#: capplets/common/capplet-util.c:506
 msgid "Just apply settings and quit"
 msgstr ""
 
-#: capplets/common/capplet-util.c:492
+#: capplets/common/capplet-util.c:508
 #, fuzzy
 msgid "Initialize the session"
 msgstr "Membro normal da sessão."
 
-#: capplets/common/capplet-util.c:494
+#: capplets/common/capplet-util.c:510
 msgid "Retrieve and store legacy settings"
 msgstr ""
 
-#: capplets/common/capplet-util.c:503
+#: capplets/common/capplet-util.c:519
 msgid "Capplet options"
 msgstr ""
 
@@ -641,7 +641,7 @@ msgstr "Usar"
 msgid "Screensaver"
 msgstr "Propriedades da proteção de tela"
 
-#: capplets/screensaver/prefs-widget.c:920
+#: capplets/screensaver/prefs-widget.c:924
 #, c-format
 msgid "About %s\n"
 msgstr ""
@@ -750,6 +750,10 @@ msgstr ""
 #, fuzzy
 msgid "One screensaver all the time"
 msgstr "Novo protetor de tela"
+
+#: capplets/screensaver/screensaver-properties.glade.h:11
+msgid "Preview"
+msgstr "Visualização prévia"
 
 #: capplets/screensaver/screensaver-properties.glade.h:12
 msgid "R_equire password to unlock screen"
@@ -3066,7 +3070,7 @@ msgstr ""
 msgid "Close"
 msgstr "Fechar"
 
-#: control-center/capplet-dir-view-html.c:150
+#: control-center/capplet-dir-view-html.c:145
 #, fuzzy
 msgid "GNOME Control Center:"
 msgstr "Central de Controle GNOME"
@@ -3138,3 +3142,12 @@ msgstr ""
 #, fuzzy
 msgid "GNOME Control Center options"
 msgstr "Central de Controle GNOME"
+
+#~ msgid "(None)"
+#~ msgstr "(Nenhum)"
+
+#~ msgid "Wallpaper Selection"
+#~ msgstr "Seleção de papel de parede"
+
+#~ msgid "Can't find an hbox, using a normal file selection"
+#~ msgstr "Não é possível achar um `hbox', usando o seletor normal de arquivos"

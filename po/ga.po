@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center CVS\n"
-"POT-Creation-Date: 2001-08-29 12:59-0400\n"
+"POT-Creation-Date: 2001-10-11 14:12-0600\n"
 "PO-Revision-Date: 2000-03-11 01:02+0000\n"
 "Last-Translator:Alastair McKinstry <mckinstry@computer.org>\n"
 "Language-Team: Alastair McKinstry <mckinstry@computer.org>\n"
@@ -13,7 +13,12 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: archiver/config-archiver.c:307 archiver/location.c:445
+#: archiver/archive.c:614
+#, fuzzy
+msgid "Default location"
+msgstr "Tóg comhad..."
+
+#: archiver/config-archiver.c:307 archiver/location.c:460
 msgid "Default Location"
 msgstr ""
 
@@ -177,12 +182,12 @@ msgstr ""
 msgid "Options for adding and removing backends"
 msgstr ""
 
-#: capplets/background/applier.c:355
+#: capplets/background/applier.c:379
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr ""
 
-#: capplets/background/applier.c:501
+#: capplets/background/applier.c:518
 msgid "Disabled"
 msgstr "Míchumasach"
 
@@ -250,42 +255,35 @@ msgid "Tiled"
 msgstr "Leacaithe"
 
 #: capplets/background/background-properties.glade.h:13
+msgid "Use a picture for the background"
+msgstr ""
+
+#: capplets/background/background-properties.glade.h:14
 #, fuzzy
 msgid "Vertical gradient"
 msgstr "Gradan"
 
-#: capplets/background/prefs-widget.c:362
-#, fuzzy
-msgid "(None)"
-msgstr "tada"
+#: capplets/background/background-properties-capplet.c:47
+msgid "Set background image."
+msgstr "Cuir pictiúr culra."
 
-#: capplets/background/prefs-widget.c:611
-#, fuzzy
-msgid "Wallpaper Selection"
-msgstr "Rogha Paipiar balla"
+#: capplets/background/background-properties-capplet.c:47
+msgid "IMAGE-FILE"
+msgstr "COMHAD-IOMHA"
 
-#: capplets/background/prefs-widget.c:618
-msgid "Can't find an hbox, using a normal file selection"
-msgstr ""
-
-#: capplets/background/prefs-widget.c:624
-#: capplets/screensaver/screensaver-properties.glade.h:11
-msgid "Preview"
-msgstr ""
-
-#: capplets/common/capplet-util.c:490
+#: capplets/common/capplet-util.c:506
 msgid "Just apply settings and quit"
 msgstr ""
 
-#: capplets/common/capplet-util.c:492
+#: capplets/common/capplet-util.c:508
 msgid "Initialize the session"
 msgstr ""
 
-#: capplets/common/capplet-util.c:494
+#: capplets/common/capplet-util.c:510
 msgid "Retrieve and store legacy settings"
 msgstr ""
 
-#: capplets/common/capplet-util.c:503
+#: capplets/common/capplet-util.c:519
 #, fuzzy
 msgid "Capplet options"
 msgstr "Uirlisîn"
@@ -646,7 +644,7 @@ msgstr ""
 msgid "Screensaver"
 msgstr "Rogha Paipiar balla"
 
-#: capplets/screensaver/prefs-widget.c:920
+#: capplets/screensaver/prefs-widget.c:924
 #, fuzzy, c-format
 msgid "About %s\n"
 msgstr "Faoi:"
@@ -752,6 +750,10 @@ msgstr ""
 
 #: capplets/screensaver/screensaver-properties.glade.h:10
 msgid "One screensaver all the time"
+msgstr ""
+
+#: capplets/screensaver/screensaver-properties.glade.h:11
+msgid "Preview"
 msgstr ""
 
 #: capplets/screensaver/screensaver-properties.glade.h:12
@@ -3059,7 +3061,7 @@ msgstr ""
 msgid "Close"
 msgstr "Dún"
 
-#: control-center/capplet-dir-view-html.c:150
+#: control-center/capplet-dir-view-html.c:145
 msgid "GNOME Control Center:"
 msgstr ""
 
@@ -3130,6 +3132,14 @@ msgstr "CAPPLET"
 #: control-center/main.c:80
 msgid "GNOME Control Center options"
 msgstr ""
+
+#, fuzzy
+#~ msgid "(None)"
+#~ msgstr "tada"
+
+#, fuzzy
+#~ msgid "Wallpaper Selection"
+#~ msgstr "Rogha Paipiar balla"
 
 #, fuzzy
 #~ msgid "Configure window properties"
@@ -3414,12 +3424,6 @@ msgstr ""
 
 #~ msgid "IOR"
 #~ msgstr "IOR"
-
-#~ msgid "Set background image."
-#~ msgstr "Cuir pictiúr culra."
-
-#~ msgid "IMAGE-FILE"
-#~ msgstr "COMHAD-IOMHA"
 
 #~ msgid "IMAGE"
 #~ msgstr "ÍOMHA"

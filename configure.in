@@ -1,7 +1,7 @@
 AC_INIT(control-center)
 
 AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE(control-center, 1.5.8)
+AM_INIT_AUTOMAKE(control-center, 1.5.9)
 
 AM_MAINTAINER_MODE
 
@@ -128,7 +128,7 @@ dnl Check that we meet the  dependencies
 dnl ==============================================
 capplet_modules="libcapplet >= 1.5.4 libglade-gnome gdk_pixbuf gdk_pixbuf_xlib gal >= 0.12"
 PKG_CHECK_MODULES(CAPPLET, $capplet_modules $PKG_BONOBO_CONF_CHECK)
-PKG_CHECK_MODULES(GNOMECC, gnomeui libglade xml gdk_pixbuf gnomecanvaspixbuf $PKG_BONOBO_CHECK gtkhtml >= 0.9)
+PKG_CHECK_MODULES(GNOMECC, gnomeui libglade xml gdk_pixbuf gnomecanvaspixbuf $PKG_BONOBO_CHECK gtkhtml >= 0.15.0)
 PKG_CHECK_MODULES(RMHELPER, gnomeui gnomecanvaspixbuf)
 PKG_CHECK_MODULES(ARCHIVER, $PKG_BONOBO_CONF_CHECK xml)
 PKG_CHECK_MODULES(CONFIG_ARCHIVER, bonobo gnome xml)
@@ -200,19 +200,19 @@ else
 fi
 
 AC_DEFINE_UNQUOTED(GNOMECC_ICONS_DIR, "${real_prefix}/share/${PACKAGE}/icons")
-GNOMECC_ICONS_DIR=""${real_prefix}/share/${PACKAGE}/icons""
+GNOMECC_ICONS_DIR=""${datadir}/${PACKAGE}/icons""
 AC_SUBST(GNOMECC_ICONS_DIR)
 AC_DEFINE_UNQUOTED(GNOMECC_GLADE_DIR, "${real_prefix}/share/${PACKAGE}/interfaces")
-GNOMECC_GLADE_DIR=""${real_prefix}/share/${PACKAGE}/interfaces""
+GNOMECC_GLADE_DIR=""${datadir}/${PACKAGE}/interfaces""
 AC_SUBST(GNOMECC_GLADE_DIR)
 AC_DEFINE_UNQUOTED(GNOMECC_PIXMAPS_DIR, "${real_prefix}/share/${PACKAGE}/pixmaps")
-GNOMECC_PIXMAPS_DIR=""${real_prefix}/share/${PACKAGE}/pixmaps""
+GNOMECC_PIXMAPS_DIR=""${datadir}/${PACKAGE}/pixmaps""
 AC_SUBST(GNOMECC_PIXMAPS_DIR)
 AC_DEFINE_UNQUOTED(GNOMECC_DEFAULTS_DIR, "${real_prefix}/share/${PACKAGE}/defaults")
-GNOMECC_DEFAULTS_DIR=""${real_prefix}/share/${PACKAGE}/defaults""
+GNOMECC_DEFAULTS_DIR=""${datadir}/${PACKAGE}/defaults""
 AC_SUBST(GNOMECC_DEFAULTS_DIR)
 AC_DEFINE_UNQUOTED(GNOMECC_SCREENSAVERS_DIR, "${real_prefix}/share/${PACKAGE}/screensavers")
-GNOMECC_SCREENSAVERS_DIR=""${real_prefix}/share/${PACKAGE}/screensavers""
+GNOMECC_SCREENSAVERS_DIR=""${datadir}/${PACKAGE}/screensavers""
 AC_SUBST(GNOMECC_SCREENSAVERS_DIR)
 dnl ==============================================
 dnl End: Define the directories 

@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.5.4\n"
-"POT-Creation-Date: 2001-08-29 12:59-0400\n"
+"POT-Creation-Date: 2001-10-11 14:12-0600\n"
 "PO-Revision-Date: 2001-08-07 09:39+0200\n"
 "Last-Translator: Christophe Merlet (RedFox) <christophe@merlet.net>\n"
 "Language-Team: Gnome French Team <gnomefr@gnomefr.traduc.org>\n"
@@ -17,7 +17,12 @@ msgstr ""
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: archiver/config-archiver.c:307 archiver/location.c:445
+#: archiver/archive.c:614
+#, fuzzy
+msgid "Default location"
+msgstr "Emplacement par défaut"
+
+#: archiver/config-archiver.c:307 archiver/location.c:460
 msgid "Default Location"
 msgstr "Emplacement par défaut"
 
@@ -178,12 +183,12 @@ msgstr ""
 msgid "Options for adding and removing backends"
 msgstr ""
 
-#: capplets/background/applier.c:355
+#: capplets/background/applier.c:379
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr "Ne peut charger le pixbuf « %s » ; désactivation du papier peint."
 
-#: capplets/background/applier.c:501
+#: capplets/background/applier.c:518
 msgid "Disabled"
 msgstr "Désactivé"
 
@@ -244,40 +249,35 @@ msgid "Tiled"
 msgstr "Mosaïque"
 
 #: capplets/background/background-properties.glade.h:13
+#, fuzzy
+msgid "Use a picture for the background"
+msgstr "Utiliser GNOME pour définir le fond d'écran"
+
+#: capplets/background/background-properties.glade.h:14
 msgid "Vertical gradient"
 msgstr "Dégradé vertical"
 
-#: capplets/background/prefs-widget.c:362
-msgid "(None)"
-msgstr "(Aucun)"
+#: capplets/background/background-properties-capplet.c:47
+msgid "Set background image."
+msgstr "Définir l'image de fond."
 
-#: capplets/background/prefs-widget.c:611
-msgid "Wallpaper Selection"
-msgstr "Sélectionnez le papier peint"
+#: capplets/background/background-properties-capplet.c:47
+msgid "IMAGE-FILE"
+msgstr "FICHIER-IMAGE"
 
-#: capplets/background/prefs-widget.c:618
-msgid "Can't find an hbox, using a normal file selection"
-msgstr ""
-"Impossible de trouver une hbox, utilisation d'un sélecteur de fichier normal"
-
-#: capplets/background/prefs-widget.c:624
-#: capplets/screensaver/screensaver-properties.glade.h:11
-msgid "Preview"
-msgstr "Prévisualisation"
-
-#: capplets/common/capplet-util.c:490
+#: capplets/common/capplet-util.c:506
 msgid "Just apply settings and quit"
 msgstr ""
 
-#: capplets/common/capplet-util.c:492
+#: capplets/common/capplet-util.c:508
 msgid "Initialize the session"
 msgstr "Initialiser la session"
 
-#: capplets/common/capplet-util.c:494
+#: capplets/common/capplet-util.c:510
 msgid "Retrieve and store legacy settings"
 msgstr ""
 
-#: capplets/common/capplet-util.c:503
+#: capplets/common/capplet-util.c:519
 msgid "Capplet options"
 msgstr ""
 
@@ -617,7 +617,7 @@ msgstr ""
 msgid "Screensaver"
 msgstr "Économiseur d'écran"
 
-#: capplets/screensaver/prefs-widget.c:920
+#: capplets/screensaver/prefs-widget.c:924
 #, fuzzy, c-format
 msgid "About %s\n"
 msgstr "À propos"
@@ -722,6 +722,10 @@ msgstr "Aller en mode « suspend » aprés"
 #: capplets/screensaver/screensaver-properties.glade.h:10
 msgid "One screensaver all the time"
 msgstr "Un économiseur d'écran tout le temps"
+
+#: capplets/screensaver/screensaver-properties.glade.h:11
+msgid "Preview"
+msgstr "Prévisualisation"
 
 #: capplets/screensaver/screensaver-properties.glade.h:12
 msgid "R_equire password to unlock screen"
@@ -3033,7 +3037,7 @@ msgstr ""
 msgid "Close"
 msgstr "Fermer"
 
-#: control-center/capplet-dir-view-html.c:150
+#: control-center/capplet-dir-view-html.c:145
 msgid "GNOME Control Center:"
 msgstr "Centre de contrôle GNOME :"
 
@@ -3101,11 +3105,19 @@ msgstr "CAPPLET"
 msgid "GNOME Control Center options"
 msgstr "Options du centre de contrôle GNOME"
 
+#~ msgid "(None)"
+#~ msgstr "(Aucun)"
+
+#~ msgid "Wallpaper Selection"
+#~ msgstr "Sélectionnez le papier peint"
+
+#~ msgid "Can't find an hbox, using a normal file selection"
+#~ msgstr ""
+#~ "Impossible de trouver une hbox, utilisation d'un sélecteur de fichier "
+#~ "normal"
+
 #~ msgid "window2"
 #~ msgstr "window2"
-
-#~ msgid "Use GNOME for setting background"
-#~ msgstr "Utiliser GNOME pour définir le fond d'écran"
 
 #~ msgid "Effect"
 #~ msgstr "Effet"
@@ -4409,12 +4421,6 @@ msgstr "Options du centre de contrôle GNOME"
 
 #~ msgid "Control Center Preferences"
 #~ msgstr "Préférences du Centre de contrôle"
-
-#~ msgid "Set background image."
-#~ msgstr "Définir l'image de fond."
-
-#~ msgid "IMAGE-FILE"
-#~ msgstr "FICHIER-IMAGE"
 
 #~ msgid ""
 #~ "an initialization error occurred while starting 'background-properties-"
