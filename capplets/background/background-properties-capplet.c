@@ -507,6 +507,7 @@ main (int argc, char **argv)
 	GladeXML       *dialog;
 	GtkWidget      *dialog_win;
 	ApplierSet     *set;
+	GdkPixbuf      *pixbuf;
 
 	static gboolean get_legacy;
 	static struct poptOption cap_options[] = {
@@ -539,6 +540,10 @@ main (int argc, char **argv)
 			(_("Background properties"), NULL, -1,
 			 GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
 			 NULL);
+
+		pixbuf = gdk_pixbuf_new_from_file (GNOMECC_DATA_DIR "/icons/background-capplet.png", NULL);
+		gtk_window_set_icon (GTK_WINDOW(dialog_win), pixbuf);
+		gdk_pixbuf_unref (pixbuf);
 
 		g_signal_connect (G_OBJECT (dialog_win), "response", (GCallback) dialog_button_clicked_cb, NULL);
 
