@@ -26,6 +26,7 @@
 #include <config.h>
 
 #include <capplet-widget.h>
+#include <ctype.h>
 #include <gnome.h>
 #include <gtk/gtk.h>
 #include <gtk/gtklist.h>
@@ -66,7 +67,10 @@ static edit_dialog_details *edit_component_details = NULL;
 static void 	show_new_application_window  (GtkWidget *button, GtkWidget *list);
 static void 	show_edit_application_window (GtkWidget *button, GtkWidget *list);
 static void 	delete_selected_application  (GtkWidget *button, GtkWidget *list);
-static void	add_item_to_application_list (GtkWidget *list, const char *name, const char *mime_type, int position);
+static void	add_item_to_application_list (GtkWidget *list, 	const char *name, const char *mime_type, int position);
+static void	find_message_label_callback  (GtkWidget *widget, gpointer callback_data);
+static void	find_message_label 	     (GtkWidget *widget, const char *message);
+
 
 static void
 edit_applications_dialog_destroy (GtkWidget *widget, gpointer data)
@@ -606,6 +610,85 @@ name_from_oaf_server_info (OAF_ServerInfo *server)
         return g_strdup(view_as_name);
 }
 
+
+static void
+find_message_label_callback (GtkWidget *widget, gpointer callback_data)
+{
+	find_message_label (widget, callback_data);
+}
+
+static void
+find_message_label (GtkWidget *widget, const char *message)
+{
+	char *text;
+
+	/* Turn on the flag if we find a label with the message
+	 * in it.
+	 */
+	if (GTK_IS_LABEL (widget)) {
+		gtk_label_get (GTK_LABEL (widget), &text);
+		if (strcmp (text, message) == 0) {
+			gtk_object_set_data (GTK_OBJECT (gtk_widget_get_toplevel (widget)),
+					     "message label", widget);
+		}
+	}
+
+	/* Recurse for children. */
+	if (GTK_IS_CONTAINER (widget)) {
+		gtk_container_foreach (GTK_CONTAINER (widget),
+				       find_message_label_callback,
+				       (char *) message);
+	}
+}
+
+static GnomeDialog *
+show_message_box (const char *message,
+		  const char *dialog_title,
+		  const char *type,
+		  const char *button_one,
+		  const char *button_two,
+		  GtkWindow *parent)
+{  
+	GtkWidget *box;
+	GtkLabel *message_label;
+
+	g_assert (dialog_title != NULL);
+
+	box = gnome_message_box_new (message, type, button_one, button_two, NULL);
+	gtk_window_set_title (GTK_WINDOW (box), dialog_title);
+	
+	/* A bit of a hack. We want to use gnome_message_box_new,
+	 * but we want the message to be wrapped. So, we search
+	 * for the label with this message so we can mark it.
+	 */
+	find_message_label (box, message);
+	message_label = GTK_LABEL (gtk_object_get_data (GTK_OBJECT (box), "message label"));
+	gtk_label_set_line_wrap (message_label, TRUE);
+
+	if (parent != NULL) {
+		gnome_dialog_set_parent (GNOME_DIALOG (box), parent);
+	}
+	gtk_widget_show (box);
+	return GNOME_DIALOG (box);
+}
+
+static void
+display_upper_case_dialog (void)
+{
+	char *message;
+	GtkWidget *dialog;
+
+	message = _("The MIME type entered contained upper case characters. "
+		    "Upper case characters were changed to lower case for you.");
+	
+	dialog = show_message_box (message, _("Add New MIME Type"), 
+				   GNOME_MESSAGE_BOX_INFO, GNOME_STOCK_BUTTON_OK, 
+				   NULL, NULL);	
+
+	gnome_dialog_run_and_close (dialog);
+}
+
+
 char *
 nautilus_mime_type_capplet_show_new_mime_window (void)
 {
@@ -616,9 +699,11 @@ nautilus_mime_type_capplet_show_new_mime_window (void)
 	GtkWidget *hbox;
 	GtkWidget *vbox;
 	const char *description;
-	char *mime_type;
-
+	char *mime_type, *tmp_str, c;
+	gboolean upper_case_alert;
+	
 	mime_type = NULL;
+	upper_case_alert = FALSE;
 	
         dialog = gnome_dialog_new (_("Add Mime Type"), GNOME_STOCK_BUTTON_OK, 
 				   GNOME_STOCK_BUTTON_CANCEL, NULL);
@@ -658,8 +743,18 @@ nautilus_mime_type_capplet_show_new_mime_window (void)
         gtk_widget_show_all (GNOME_DIALOG (dialog)->vbox);
 
         switch (gnome_dialog_run (GNOME_DIALOG (dialog))) {
-	        case 0:
+	        case 0:			
 			mime_type = g_strdup (gtk_entry_get_text (GTK_ENTRY (mime_entry)));
+			g_assert (mime_type != NULL);
+									
+			/* Handle illegal mime types as best we can */
+			for (tmp_str = mime_type; (c = *tmp_str) != '\0'; tmp_str++) {
+				if (isascii (c) && isupper (c)) {
+					*tmp_str = tolower (c);
+					upper_case_alert = TRUE;
+				}
+			}
+			
 			description = gtk_entry_get_text (GTK_ENTRY (desc_entry));
 			
 			/* Add new mime type here */
@@ -669,8 +764,8 @@ nautilus_mime_type_capplet_show_new_mime_window (void)
 							  description);
 			}
 			/* Fall through to close dialog */
-
 			break;
+			
 	        case 1:
 		default:
 			break;
@@ -678,6 +773,10 @@ nautilus_mime_type_capplet_show_new_mime_window (void)
 
 	gnome_dialog_close (GNOME_DIALOG (dialog));
 
+	if (upper_case_alert) {
+		display_upper_case_dialog ();
+	}
+	
         return mime_type;
 }
 

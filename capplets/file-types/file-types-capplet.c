@@ -1742,4 +1742,3 @@ capplet_gdk_pixbuf_scale_to_fit (GdkPixbuf *pixbuf, int max_width, int max_heigh
 	
 	return pixbuf;
 }
-
