@@ -662,6 +662,7 @@ create_dialog (GConfClient *client)
 	GList *strings = NULL, *li;
 	gint i;
 	dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/gnome-default-applications-properties.glade", NULL, NULL);
+	capplet_set_icon (WID ("default_applications_dialog"), "default-applications-capplet.png");
 	
 	setup_peditors (client, dialog);
 
