@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<gconfschemafile>
+    <schemalist>
+	<schema>
+	    <key>/schemas/desktop/gnome/font_rendering/dpi</key>
+	    <applyto>/desktop/gnome/font_rendering/dpi</applyto>
+            <owner>gnome</owner>
+	    <type>float</type>
+            <default>96</default>
+            <locale name="C">
+	        <short>DPI</short>
+                <long>
+	          Resolution used for converting font sizes to pixel sizes, 
+                  in dots per inch
+		</long>
+            </locale>
+        </schema>
+	<schema>
+	    <key>/schemas/desktop/gnome/font_rendering/antialiasing</key>
+	    <applyto>/desktop/gnome/font_rendering/antialiasing</applyto>
+            <owner>gnome</owner>
+	    <type>string</type>
+            <default>grayscale</default>
+            <locale name="C">
+	        <short>Antialising</short>
+                <long>
+		  The type of antialiasing to use when rendering fonts.
+                  Possible values are: "none" - no antialiasing. 
+                  "grayscale" - standard grayscale antialising.
+                  "rgba" - subpixel antialising. (LCD screens only).
+		</long>
+            </locale>
+        </schema>
+	<schema>
+	    <key>/schemas/desktop/gnome/font_rendering/hinting</key>
+	    <applyto>/desktop/gnome/font_rendering/hinting</applyto>
+            <owner>gnome</owner>
+	    <type>string</type>
+            <default>medium</default>
+            <locale name="C">
+	        <short>Hinting</short>
+                <long>
+		  The type of hinting to use when rendering fonts.
+                  Possible values are: "none" - no hinting,
+		  "slight", "medium", and
+                  "full" - as much hinting as possible; may cause
+                   distortion of letter forms.
+		</long>
+            </locale>
+        </schema>
+	<schema>
+	    <key>/schemas/desktop/gnome/font_rendering/rgba_order</key>
+	    <applyto>/desktop/gnome/font_rendering/rgba_order</applyto>
+            <owner>gnome</owner>
+	    <type>string</type>
+            <default>rgb</default>
+            <locale name="C">
+	        <short>RGBA Order</short>
+                <long>
+                  The order of elements subpixel elements on an LCD
+                  screen; only used when antialising is set to "rgba".
+                  Possible values are: "rgb" - red on left, most common.
+                  "bgr" - blue on left. "vrgb" - red on top. "vbgr" - 
+                  red on bottom.
+		</long>
+            </locale>
+        </schema>
+    </schemalist>
+</gconfschemafile>

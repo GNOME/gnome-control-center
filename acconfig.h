@@ -20,6 +20,9 @@
 #undef u_int64_t
 #undef int64_t
 
+/* Define if the system has Xft version 2 and fontconfig */
+#undef HAVE_XFT2
+
 #undef HAVE_DEVGTK
 
 #undef WITH_SYMBOL_UNDERSCORE

@@ -57,6 +57,21 @@ PKG_CHECK_MODULES(GNOME, libgnomeui-2.0)
 PKG_CHECK_MODULES(VFS_CAPPLET, $COMMON_MODULES gnome-vfs-module-2.0 gnome-vfs-2.0)
 PKG_CHECK_MODULES(SOUND_CAPPLET, esound)
 
+dnl
+dnl Check for Xft version 2; we build in extra functionality to the font capplet
+dnl when we have it.
+dnl
+have_xft2=false
+xft_modules=""
+if $PKG_CONFIG --exists xft ; then
+  have_xft2=true
+  xft_modules="xft"
+fi
+
+AC_DEFINE(HAVE_XFT2)
+
+PKG_CHECK_MODULES(FONT_CAPPLET, $COMMON_MODULES $xft_modules)
+
 CAPPLET_LIBS="$CAPPLET_LIBS $x_libs"
 GNOMECC_LIBS="$GNOMECC_LIBS $x_libs"
 GNOME_SETTINGS_DAEMON_LIBS="$GNOME_SETTINGS_DAEMON_LIBS $x_libs"
@@ -130,6 +145,9 @@ AC_SUBST(VFS_CAPPLET_LIBS)
 
 AC_SUBST(SOUND_CAPPLET_CFLAGS)
 AC_SUBST(SOUND_CAPPLET_LIBS)
+
+AC_SUBST(FONT_CAPPLET_CFLAGS)
+AC_SUBST(FONT_CAPPLET_LIBS)
 
 AC_SUBST(GNOMECC_CFLAGS)
 AC_SUBST(GNOMECC_LIBS)

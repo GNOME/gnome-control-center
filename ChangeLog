@@ -1,3 +1,18 @@
+Tue Jul 23 22:35:10 2002  Owen Taylor  <otaylor@redhat.com>
+
+	* acconfig.h configure.in: Check for Xft2.
+
+	* capplets/font/main.c capplets/font/Makefile.am
+	capplets/font/font-properties.glade: If XFt2 is present, 
+	allow the user to control various font rendering attributes.
+
+	* gnome-settings-daemon/gnome-settings-xsettings.c:
+	Mirror the Xft rendering attributes from the font
+	capplet to XSETTINGS and Xrdb.
+
+	* schemas/Makefile.am schemas/desktop_gnome_font_rendering.schemas:
+	Add schemas for the new GConf settings.
+
 Tue Jul 23 22:06:08 2002  Owen Taylor  <otaylor@redhat.com>
 
 	* capplets/keyboard/gnome-keyboard-properties.c: Fix 
