@@ -1,6 +1,8 @@
 Locationmetadir = $(datadir)/hcm/default
 Locationmeta_DATA = default-user.xml default-global.xml
 
+includedir = $(prefix)/include/helix-archiver
+
 INCLUDES = 			\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\
 	-I$(includedir) $(GNOME_INCLUDEDIR)		\
@@ -18,6 +20,9 @@ libhelix_archiver_a_SOURCES = \
 	config-log.c	config-log.h			\
 	backend-list.c	backend-list.h			\
 	util.c		util.h
+
+include_HEADERS = \
+	archive.h location.h config-log.h backend-list.h util.h
 
 helix_archiver_SOURCES = \
 	main.c
