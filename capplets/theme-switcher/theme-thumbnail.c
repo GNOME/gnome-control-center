@@ -463,7 +463,7 @@ generate_theme_thumbnail (GnomeThemeMetaInfo *meta_theme_info,
   if (pixbuf != NULL)
     {
       if (clear_cache)
-	;//g_hash_table_remove (theme_hash, meta_theme_info->name);
+	g_hash_table_remove (theme_hash, meta_theme_info->name);
       else
 	return pixbuf;
     }

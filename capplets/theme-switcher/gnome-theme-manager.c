@@ -336,6 +336,8 @@ load_meta_themes (GtkTreeView *tree_view,
 			      -1);
 	  if (flag & THEME_FLAG_CUSTOM)
 	    model_meta_theme_info = &custom_meta_theme_info;
+	  else if (flag & THEME_FLAG_INITIAL)
+	    model_meta_theme_info = &initial_meta_theme_info;
 	  else
 	    model_meta_theme_info = gnome_theme_meta_info_find (name);
 	  g_free (name);
@@ -346,7 +348,7 @@ load_meta_themes (GtkTreeView *tree_view,
 	{
 	  gint compare_val;
 
-	  if (flag & THEME_FLAG_CUSTOM)
+	  if (flag & THEME_FLAG_CUSTOM || flag & THEME_FLAG_INITIAL)
 	    {
 	      /* We can always skip the custom row, as it's never in the list */
 	      valid = gtk_tree_model_iter_next (model, &iter);
@@ -629,7 +631,7 @@ add_custom_row_to_meta_theme (const gchar  *current_gtk_theme,
   g_free (custom_meta_theme_info.icon_theme_name);
   custom_meta_theme_info.icon_theme_name = g_strdup (current_icon_theme);
   g_free (custom_meta_theme_info.name);
-  custom_meta_theme_info.name = g_strdup ("Custom Theme");
+  custom_meta_theme_info.name = g_strdup ("__Custom Theme__");
 
   for (valid = gtk_tree_model_get_iter_first (model, &iter);
        valid;
@@ -640,7 +642,7 @@ add_custom_row_to_meta_theme (const gchar  *current_gtk_theme,
       gtk_tree_model_get (model, &iter,
 			  META_THEME_FLAG_COLUMN, &theme_flags,
 			  -1);
-      if (theme_flags & THEME_FLAG_CUSTOM)
+      if (theme_flags & THEME_FLAG_CUSTOM || theme_flags & THEME_FLAG_INITIAL)
 	break;
 
     }
@@ -660,9 +662,8 @@ add_custom_row_to_meta_theme (const gchar  *current_gtk_theme,
   /*theme_thumbnail_invalidate_cache (&custom_meta_theme_info);*/
 
   pixbuf = generate_theme_thumbnail (&custom_meta_theme_info, TRUE);
-  g_print ("%d %d\n" ,gdk_pixbuf_get_width (pixbuf), gdk_pixbuf_get_height (pixbuf));
-  gdk_pixbuf_save (pixbuf, "/tmp/out.png", "png", NULL, NULL);
-
+  if (pixbuf == NULL)
+    pixbuf = default_image;
   gtk_list_store_set (GTK_LIST_STORE (model), &iter,
 		      META_THEME_PIXBUF_COLUMN, pixbuf,
 		      META_THEME_NAME_COLUMN, blurb,
@@ -678,14 +679,78 @@ add_custom_row_to_meta_theme (const gchar  *current_gtk_theme,
 
 
 static void
-remove_custom_row_from_meta_theme (GtkTreeModel *model)
+add_initial_row_to_meta_theme (void)
 {
   GladeXML *dialog;
+  GtkWidget *tree_view;
+  GtkTreeModel *model;
+  GtkTreePath *path;
+  GtkTreeIter iter;
+  gboolean valid;
+  gchar *blurb;
+  GdkPixbuf *pixbuf;
+
+  dialog = gnome_theme_manager_get_theme_dialog ();
+  tree_view = WID ("meta_theme_treeview");
+  model = gtk_tree_view_get_model (GTK_TREE_VIEW (tree_view));
+
+  for (valid = gtk_tree_model_get_iter_first (model, &iter);
+       valid;
+       valid = gtk_tree_model_iter_next (model, &iter))
+    {
+      guint theme_flags = 0;
+
+      gtk_tree_model_get (model, &iter,
+			  META_THEME_FLAG_COLUMN, &theme_flags,
+			  -1);
+      if (theme_flags & THEME_FLAG_CUSTOM || theme_flags & THEME_FLAG_INITIAL)
+	break;
+    }
+
+  /* if we found a custom row and broke out of the list above, valid will be
+   * TRUE.  If we didn't, we need to add a new iter.
+   */
+  if (!valid)
+    gtk_list_store_prepend (GTK_LIST_STORE (model), &iter);
+
+  /* set the values of the Custom theme. */
+  blurb = g_strdup_printf ("<span size=\"larger\" weight=\"bold\">%s</span>\n%s",
+			   _("Custom theme"), _("You can save this theme by pressing the Save Theme button."));
+
+  /* Invalidate the cache because the custom theme has potentially changed */
+  /* Commented out because it does odd things */
+  /*theme_thumbnail_invalidate_cache (&custom_meta_theme_info);*/
+
+  pixbuf = generate_theme_thumbnail (&initial_meta_theme_info, TRUE);
+  if (pixbuf == NULL)
+    pixbuf = default_image;
+
+  gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+		      META_THEME_PIXBUF_COLUMN, pixbuf,
+		      META_THEME_NAME_COLUMN, blurb,
+		      META_THEME_FLAG_COLUMN, THEME_FLAG_INITIAL,
+		      -1);
+
+  gtk_widget_set_sensitive (WID ("meta_theme_save_button"), TRUE);
+  path = gtk_tree_model_get_path (model, &iter);
+  gtk_tree_path_free (path);
+  g_free (blurb);
+}
+
+
+static void
+remove_custom_row_from_meta_theme (void)
+{
+  GladeXML *dialog;
+  GtkWidget *tree_view;
+  GtkTreeModel *model;
   GtkTreeIter iter;
   GtkTreeIter next_iter;
   gboolean valid;
 
   dialog = gnome_theme_manager_get_theme_dialog ();
+  tree_view = WID ("meta_theme_treeview");
+  model = gtk_tree_view_get_model (GTK_TREE_VIEW (tree_view));
 
   valid = gtk_tree_model_get_iter_first (model, &iter);
   while (valid)
@@ -699,7 +764,7 @@ remove_custom_row_from_meta_theme (GtkTreeModel *model)
 			  META_THEME_FLAG_COLUMN, &theme_flags,
 			  -1);
 
-      if (theme_flags & THEME_FLAG_CUSTOM)
+      if (theme_flags & THEME_FLAG_CUSTOM || theme_flags & THEME_FLAG_INITIAL)
 	{
 	  gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
 	}
@@ -736,6 +801,7 @@ update_settings_from_gconf (void)
   GladeXML *dialog;
   gboolean valid;
   gboolean custom_theme_found;
+  static gboolean first_time_run = TRUE;
 
   client = gconf_client_get_default ();
 
@@ -775,6 +841,10 @@ update_settings_from_gconf (void)
 	{
 	  meta_theme_info = &custom_meta_theme_info;
 	}
+      else if (row_theme_flags & THEME_FLAG_INITIAL)
+	{
+	  meta_theme_info = &initial_meta_theme_info;
+	}
       else if (row_theme_id)
 	{
 	  meta_theme_info = gnome_theme_meta_info_find (row_theme_id);
@@ -802,11 +872,29 @@ update_settings_from_gconf (void)
 	}
     }
 
-  if (custom_theme_found)
-    add_custom_row_to_meta_theme (current_gtk_theme, current_window_theme, current_icon_theme);
-  else
-    remove_custom_row_from_meta_theme (model);
+  if (custom_theme_found && first_time_run)
+    {
+      initial_meta_theme_set = TRUE;
+      initial_meta_theme_info.name = g_strdup ("__Initial Theme__");
+      initial_meta_theme_info.gtk_theme_name = g_strdup (current_gtk_theme);
+      initial_meta_theme_info.metacity_theme_name = g_strdup (current_window_theme);
+      initial_meta_theme_info.icon_theme_name = g_strdup (current_icon_theme);
+    }
+  first_time_run = FALSE;
+  
 
+  if (custom_theme_found)
+    {
+      add_custom_row_to_meta_theme (current_gtk_theme, current_window_theme, current_icon_theme);
+    }
+  else if (initial_meta_theme_set)
+    {
+      add_initial_row_to_meta_theme ();
+    }      
+  else
+    {
+      remove_custom_row_from_meta_theme ();
+    }
   g_free (current_gtk_theme);
   g_free (current_window_theme);
   g_free (current_icon_theme);
@@ -1020,9 +1108,9 @@ gnome_theme_manager_sort_func (const gchar *a_str,
 {
   gint retval;
 
-  if (a_flag & THEME_FLAG_CUSTOM)
+  if (a_flag & (THEME_FLAG_CUSTOM | THEME_FLAG_INITIAL))
     retval = -1;
-  else if (b_flag & THEME_FLAG_CUSTOM)
+  else if (b_flag & (THEME_FLAG_CUSTOM | THEME_FLAG_INITIAL))
     retval = 1;
   else if (a_flag & THEME_FLAG_DEFAULT)
     retval = -1;

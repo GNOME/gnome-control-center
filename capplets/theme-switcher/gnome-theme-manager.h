@@ -37,6 +37,7 @@ enum
 {
   THEME_FLAG_DEFAULT = 1 << 0,
   THEME_FLAG_CUSTOM  = 1 << 1,
+  THEME_FLAG_INITIAL  = 1 << 2,
 };
 
 extern GtkTargetEntry drop_types[];

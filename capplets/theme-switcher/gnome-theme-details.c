@@ -56,8 +56,6 @@ path_to_theme_id (const char *path)
   return result;
 }
 
-
-
 static void
 cb_dialog_response (GtkDialog *dialog, gint response_id)
 {
@@ -66,7 +64,6 @@ cb_dialog_response (GtkDialog *dialog, gint response_id)
   else
     gtk_widget_hide (GTK_WIDGET (dialog));
 }
-
 
 static void
 setup_tree_view (GtkTreeView *tree_view,
