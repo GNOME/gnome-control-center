@@ -36,13 +36,6 @@
 
 #include <glade/glade.h>
 
-#include <capplet-widget.h>
-
-#ifdef HAVE_XIMIAN_ARCHIVER
-#  include <bonobo.h>
-#  include <ximian-archiver/archiver-client.h>
-#endif /* HAVE_XIMIAN_ARCHIVER */
-
 #include "preferences.h"
 #include "prefs-widget.h"
 #include "preview.h"
@@ -55,22 +48,6 @@ static PrefsWidget *prefs_widget;
 
 static GtkWidget *capplet;
 
-static gint cap_session_init = 0;
-static struct poptOption cap_options[] = {
-	{"init-session-settings", '\0', POPT_ARG_NONE, &cap_session_init, 0,
-	 N_("Initialize session settings"), NULL},
-	{NULL, '\0', 0, NULL, 0}
-};
-
-static void 
-state_changed_cb (GtkWidget *widget) 
-{
-#if 0
-	if (!prefs->frozen)
-		capplet_widget_state_changed (capplet, TRUE);
-#endif
-}
-
 static void
 try_cb (GtkWidget *widget)
 {
@@ -78,17 +55,9 @@ try_cb (GtkWidget *widget)
 
 	old_sm = prefs->selection_mode;
 
-#ifdef HAVE_XIMIAN_ARCHIVER
-	if (!outside_location) {
-		prefs_widget_store_prefs (prefs_widget, prefs);
-		preferences_save (prefs);
-		setup_dpms (prefs);
-	}
-#else /* !HAVE_XIMIAN_ARCHIVER */
 	prefs_widget_store_prefs (prefs_widget, prefs);
 	preferences_save (prefs);
 	setup_dpms (prefs);
-#endif /* HAVE_XIMIAN_ARCHIVER */
 
 	if (old_sm == SM_DISABLE_SCREENSAVER && 
 	    prefs->selection_mode != SM_DISABLE_SCREENSAVER)
@@ -105,15 +74,8 @@ revert_cb (GtkWidget *widget)
 
 	old_sm = old_prefs->selection_mode;
 
-#ifdef HAVE_XIMIAN_ARCHIVER
-	if (!outside_location) {
-		preferences_save (old_prefs);
-		preferences_destroy (prefs);
-	}
-#else /* !HAVE_XIMIAN_ARCHIVER */
 	preferences_save (old_prefs);
 	preferences_destroy (prefs);
-#endif /* HAVE_XIMIAN_ARCHIVER */
 
 	prefs = preferences_new ();
 	preferences_load (prefs);
@@ -141,23 +103,15 @@ ok_cb (GtkWidget *widget)
 
 	close_preview ();
 
-#ifdef HAVE_XIMIAN_ARCHIVER
-	if (!outside_location) {
-#endif /* HAVE_XIMIAN_ARCHIVER */
-		prefs_widget_store_prefs (prefs_widget, prefs);
-		preferences_save (prefs);
-		setup_dpms (prefs);
-		if (old_sm == SM_DISABLE_SCREENSAVER && 
-		    prefs->selection_mode != SM_DISABLE_SCREENSAVER)
-			start_xscreensaver ();
-		else if (old_sm != SM_DISABLE_SCREENSAVER && 
-			 prefs->selection_mode == SM_DISABLE_SCREENSAVER)
-			stop_xscreensaver ();
-#ifdef HAVE_XIMIAN_ARCHIVER
-	}
-
-	store_archive_data ();
-#endif /* HAVE_XIMIAN_ARCHIVER */
+	prefs_widget_store_prefs (prefs_widget, prefs);
+	preferences_save (prefs);
+	setup_dpms (prefs);
+	if (old_sm == SM_DISABLE_SCREENSAVER && 
+	    prefs->selection_mode != SM_DISABLE_SCREENSAVER)
+		start_xscreensaver ();
+	else if (old_sm != SM_DISABLE_SCREENSAVER && 
+		 prefs->selection_mode == SM_DISABLE_SCREENSAVER)
+		stop_xscreensaver ();
 }
 
 static void
@@ -169,21 +123,15 @@ cancel_cb (GtkWidget *widget)
 
 	close_preview ();
 
-#ifdef HAVE_XIMIAN_ARCHIVER
-	if (!outside_location) {
-#endif /* HAVE_XIMIAN_ARCHIVER */
-		preferences_save (old_prefs);
-		setup_dpms (old_prefs);
+	preferences_save (old_prefs);
+	setup_dpms (old_prefs);
 
-		if (old_sm == SM_DISABLE_SCREENSAVER && 
-		    prefs->selection_mode != SM_DISABLE_SCREENSAVER)
-			start_xscreensaver ();
-		else if (old_sm != SM_DISABLE_SCREENSAVER && 
-			 prefs->selection_mode == SM_DISABLE_SCREENSAVER)
-			stop_xscreensaver ();
-#ifdef HAVE_XIMIAN_ARCHIVER
-	}
-#endif /* HAVE_XIMIAN_ARCHIVER */
+	if (old_sm == SM_DISABLE_SCREENSAVER && 
+	    prefs->selection_mode != SM_DISABLE_SCREENSAVER)
+		start_xscreensaver ();
+	else if (old_sm != SM_DISABLE_SCREENSAVER && 
+		 prefs->selection_mode == SM_DISABLE_SCREENSAVER)
+		stop_xscreensaver ();
 }
 
 static void
@@ -238,8 +186,6 @@ setup_capplet_widget (void)
 
 	prefs_widget_get_prefs (prefs_widget, prefs);
 
-	gtk_signal_connect (GTK_OBJECT (prefs_widget), "pref-changed",
-			    GTK_SIGNAL_FUNC (state_changed_cb), NULL);
 	gtk_signal_connect (GTK_OBJECT (prefs_widget), "activate-demo",
 			    GTK_SIGNAL_FUNC (demo_cb), NULL);
 
@@ -247,66 +193,6 @@ setup_capplet_widget (void)
 
 	prefs->frozen--;
 }
-
-#ifdef HAVE_XIMIAN_ARCHIVER
-
-static void
-do_get_xml (void) 
-{
-	Preferences *prefs;
-	xmlDocPtr doc;
-
-	prefs = preferences_new ();
-	preferences_load (prefs);
-	doc = preferences_write_xml (prefs);
-	xmlDocDump (stdout, doc);
-	preferences_destroy (prefs);
-}
-
-static void
-do_set_xml (gboolean apply_settings) 
-{
-	xmlDocPtr doc;
-	char buffer[16384];
-	GString *doc_str;
-	int t = 0;
-
-	fflush (stdin);
-
-	fcntl (fileno (stdin), F_SETFL, 0);
-
-	doc_str = g_string_new ("");
-
-	while ((t = read (fileno (stdin), buffer, sizeof (buffer) - 1)) != 0) {
-		buffer[t] = '\0';
-		g_string_append (doc_str, buffer);
-	}
-
-	if (doc_str->len > 0) {
-		doc = xmlParseDoc (doc_str->str);
-		g_string_free (doc_str, TRUE);
-
-		if (doc != NULL) {
-			prefs = preferences_read_xml (doc);
-
-			if (prefs && apply_settings) {
-				preferences_save (prefs);
-				return;
-			}
-			else if (prefs != NULL) {
-				return;
-			}
-
-			xmlFreeDoc (doc);
-		}
-	} else {
-		g_critical ("No data to apply");
-	}
-
-	return;
-}
-
-#endif /* HAVE_XIMIAN_ARCHIVER */
 
 static void
 do_restore_from_defaults (void) 
@@ -329,7 +215,6 @@ main (int argc, char **argv)
 
 	gnome_program_init ("screensaver-properties", VERSION,
 			    LIBGNOMEUI_MODULE, argc, argv,
-			    GNOME_PARAM_POPT_TABLE, &cap_options,
 			    NULL);
 
 	client = gnome_master_client ();
@@ -370,12 +255,10 @@ main (int argc, char **argv)
 		setup_dpms (prefs);
 	}
 
-	if (!cap_session_init) {
-		old_prefs = preferences_clone (prefs);
-		setup_capplet_widget ();
+	old_prefs = preferences_clone (prefs);
+	setup_capplet_widget ();
 
-		capplet_gtk_main ();
-	}
+	gtk_main ();
 
 	return 0;
 }

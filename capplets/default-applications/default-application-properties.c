@@ -356,7 +356,7 @@ main (int argc, char **argv)
 
         ignore_changes = FALSE;
 
-        capplet_gtk_main ();
+        gtk_main ();
 
 	return 0;
 }

@@ -41,10 +41,6 @@
 #include <gdk/gdkx.h>
 #include <X11/X.h>
 
-#ifdef HAVE_X11_EXTENSIONS_XF86MISC_H
-#  include <X11/extensions/xf86misc.h>
-#endif
-
 /* Conversion between GConf values and widget values */
 
 static GConfValue *
@@ -118,66 +114,6 @@ delay_from_widget (GConfValue *value)
 	gconf_value_set_int (new_value, delays[gconf_value_get_int (value)]);
 	return new_value;
 }
-
-#if 0
-
-static void
-apply_settings (void)
-{
-	GConfClient *client;
-
-	gboolean repeat, click;
-	int rate, delay, volume;
-	int bell_volume, bell_pitch, bell_duration;
-
-#ifdef HAVE_X11_EXTENSIONS_XF86MISC_H
-	XF86MiscKbdSettings kbdsettings;
-#endif
-	XKeyboardControl kbdcontrol;
-        int event_base_return, error_base_return;
-
-	client = gconf_client_get_default ();
-
-	repeat        = gconf_client_get_bool (client, "/gnome/desktop/peripherals/keyboard/repeat",        NULL);
-	click         = gconf_client_get_bool (client, "/gnome/desktop/peripherals/keyboard/click",         NULL);
-	rate          = gconf_client_get_int  (client, "/gnome/desktop/peripherals/keyboard/rate",          NULL);
-	delay         = gconf_client_get_int  (client, "/gnome/desktop/peripherals/keyboard/delay",         NULL);
-	volume        = gconf_client_get_int  (client, "/gnome/desktop/peripherals/keyboard/volume",        NULL);
-	bell_volume   = gconf_client_get_int  (client, "/gnome/desktop/peripherals/keyboard/bell_volume",   NULL);
-	bell_pitch    = gconf_client_get_int  (client, "/gnome/desktop/peripherals/keyboard/bell_pitch",    NULL);
-	bell_duration = gconf_client_get_int  (client, "/gnome/desktop/peripherals/keyboard/bell_duration", NULL);
-
-        if (repeat) {
-		XAutoRepeatOn (GDK_DISPLAY ());
-#ifdef HAVE_X11_EXTENSIONS_XF86MISC_H
-		if (XF86MiscQueryExtension (GDK_DISPLAY (),
-					    &event_base_return,
-					    &error_base_return) == True)
-		{
-			kbdsettings.type = 0;
-                        kbdsettings.rate = rate;
-			g_message ("Setting rate to %d", kbdsettings.rate);
-                        kbdsettings.delay = delay;
-			kbdsettings.servnumlock = False;
-                        XF86MiscSetKbdSettings (GDK_DISPLAY (), &kbdsettings);
-                } else {
-                        XAutoRepeatOff (GDK_DISPLAY ());
-                }
-#endif
-	} else {
-		XAutoRepeatOff (GDK_DISPLAY ());
-	}
-
-	kbdcontrol.key_click_percent = 
-		click ? volume : 0;
-	kbdcontrol.bell_percent = bell_volume;
-	kbdcontrol.bell_pitch = bell_pitch;
-	kbdcontrol.bell_duration = bell_duration;
-	XChangeKeyboardControl (GDK_DISPLAY (), KBKeyClickPercent, 
-				&kbdcontrol);
-}
-
-#endif
 
 static void
 get_legacy_settings (void)

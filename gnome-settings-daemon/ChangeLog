@@ -1,0 +1,11 @@
+2001-12-19  Bradford Hovinen  <hovinen@ximian.com>
+
+	* Makefile.am
+	(gnome_settings_daemon_SOURCES): Add
+	gnome-settings-{keyboard|background}.[ch]
+	(INCLUDES): Add -I$(top_srcdir)/libbackground
+	(gnome_settings_daemon_LDADD): Add
+	$(top_builddir)/libbackground/libbackground.a
+
+	* gnome-settings-daemon.c (main): Initialize keyboard and
+	background subsystems

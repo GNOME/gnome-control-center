@@ -3,7 +3,7 @@ cappletgroup =
 bin_PROGRAMS = keyboard-properties-control
 bin_SCRIPTS = keyboard-properties
 
-keyboard_properties_control_LDADD = $(GNOMECC_CAPPLETS_LIBS) $(XF86MISC_LIBS)
+keyboard_properties_control_LDADD = $(GNOMECC_CAPPLETS_LIBS)
 
 keyboard_properties_control_SOURCES =		\
 	keyboard-properties.c

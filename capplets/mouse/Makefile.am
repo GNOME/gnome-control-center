@@ -10,8 +10,9 @@ pixmap_DATA = \
 	double-click-on.png	\
 	double-click-off.png	\
 	double-click-maybe.png	\
-	mouse-left-2.png	\
-	mouse-right-2.png
+	mouse-left.png		\
+	mouse-right.png
+
 Gladedir   = $(GNOMECC_GLADE_DIR)
 Glade_DATA = gnome-mouse-properties.glade
 

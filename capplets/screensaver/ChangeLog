@@ -1,3 +1,12 @@
+2001-12-20  Bradford Hovinen  <hovinen@ximian.com>
+
+	* main.c: Don't #include capplet-widget.h or the archiver stuff
+	(main): Call gtk_main rather than capplet_gtk_main
+	Remove archiver stuff
+	(setup_capplet_widget): Don't connect to state_changed_cb
+	(state_changed_cb): Remove
+	(main): Don't pass cap_options
+
 2001-12-19  Seth Nickell  <snickell@stanford.edu>
 
 	* screensaver.desktop.in.in:

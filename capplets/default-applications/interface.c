@@ -13,7 +13,6 @@
 
 #include <gnome.h>
 
-#include "capplet-widget.h"
 #include "callbacks.h"
 #include "interface.h"
 #include "support.h"

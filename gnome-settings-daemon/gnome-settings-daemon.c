@@ -154,6 +154,8 @@ main (int argc, char **argv)
   engine = gconf_engine_get_default ();
   gnome_settings_xsettings_init (engine);
   gnome_settings_mouse_init (engine);
+  gnome_settings_keyboard_init (engine);
+  gnome_settings_background_init (engine);
 
   for (list = directories; list; list = list->next)
     {

@@ -37,20 +37,11 @@ dnl ==============================================
 dnl Check that we meet the  dependencies
 dnl ==============================================
 COMMON_MODULES="gtk+-2.0 gconf-2.0 libgnomeui-2.0 libglade-2.0 libbonobo-2.0 libbonoboui-2.0 libglade-2.0 gconf-2.0"
-PKG_CHECK_MODULES(GCONF, gconf-2.0)
-PKG_CHECK_MODULES(GTK, gtk+-2.0)
-PKG_CHECK_MODULES(CAPPLET, $COMMON_MODULES bonobo-config-2.0)
+PKG_CHECK_MODULES(CAPPLET, $COMMON_MODULES)
 PKG_CHECK_MODULES(GNOMECC, $COMMON_MODULES libxml-2.0 gnome-desktop-2.0)
-PKG_CHECK_MODULES(ARCHIVER, libbonobo-2.0 bonobo-config-2.0 libxml-2.0)
-PKG_CHECK_MODULES(CONFIG_ARCHIVER, libbonobo-2.0 libgnome-2.0 libxml-2.0)
-PKG_CHECK_MODULES(MONIKER, libbonobo-2.0 bonobo-config-2.0 libxml-2.0)
-PKG_CHECK_MODULES(OLD_CAPPLET, libgnomeui-2.0 libglade-2.0 libcapplet-2.0)
+PKG_CHECK_MODULES(GNOME_SETTINGS_DAEMON, gtk+-2.0 gconf-2.0 libgnome-2.0)
+PKG_CHECK_MODULES(OLD_CAPPLET, libgnomeui-2.0 libglade-2.0)
 PKG_CHECK_MODULES(GNOME, libgnomeui-2.0)
-
-AC_SUBST(GTK_CFLAGS)
-AC_SUBST(GCONF_CFLAGS)
-AC_SUBST(GTK_LIBS)
-AC_SUBST(GCONF_LIBS)
 
 SCREENSAVER=screensaver
 AC_PATH_PROG(XSCREENSAVER, xscreensaver, no)
@@ -112,6 +103,10 @@ AC_SUBST(GNOMECC_CAPPLETS_EXTRA_DIST)
 AC_SUBST(GNOMECC_CAPPLETS_CLEANFILES)
 AC_SUBST(GNOMECC_CAPPLETS_CFLAGS)
 AC_SUBST(GNOMECC_CAPPLETS_LIBS)
+
+AC_SUBST(GNOME_SETTINGS_DAEMON_CFLAGS)
+AC_SUBST(GNOME_SETTINGS_DAEMON_LIBS)
+
 dnl ==============================================
 dnl End: Define the main variables
 dnl ==============================================

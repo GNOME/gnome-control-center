@@ -34,27 +34,6 @@
 #include "gconf-property-editor.h"
 #include "applier.h"
 
-/* Apply settings to the root window. This will be moved to
- * gnome-settings-daemon shortly.
- */
-
-static void
-apply_settings ()
-{
-	GObject           *prefs;
-	Applier           *applier;
-
-	applier = APPLIER (applier_new (APPLIER_ROOT));
-
-	prefs = preferences_new ();
-	preferences_load (PREFERENCES (prefs));
-
-	applier_apply_prefs (applier, PREFERENCES (prefs));
-
-	g_object_unref (G_OBJECT (prefs));
-	g_object_unref (G_OBJECT (applier));
-}
-
 /* Retrieve legacy gnome_config settings and store them in the GConf
  * database. This involves some translation of the settings' meanings.
  */
@@ -288,13 +267,10 @@ create_dialog (Applier *applier)
 static void
 dialog_button_clicked_cb (GnomeDialog *dialog, gint button_number, GConfChangeSet *changeset) 
 {
-	if (button_number == 0) {
+	if (button_number == 0)
 		gconf_client_commit_change_set (gconf_client_get_default (), changeset, TRUE, NULL);
-		apply_settings ();
-	}
-	else if (button_number == 1) {
+	else if (button_number == 1)
 		gnome_dialog_close (dialog);
-	}
 }
 
 int
@@ -306,13 +282,8 @@ main (int argc, char **argv)
 	GtkWidget      *dialog_win;
 	GObject        *applier;
 
-	static gboolean apply_only;
 	static gboolean get_legacy;
 	static struct poptOption cap_options[] = {
-		{ "apply", '\0', POPT_ARG_NONE, &apply_only, 0,
-		  N_("Just apply settings and quit"), NULL },
-		{ "init-session-settings", '\0', POPT_ARG_NONE, &apply_only, 0,
-		  N_("Just apply settings and quit"), NULL },
 		{ "get-legacy", '\0', POPT_ARG_NONE, &get_legacy, 0,
 		  N_("Retrieve and store legacy settings"), NULL },
 		{ NULL, '\0', 0, NULL, 0, NULL, NULL }
@@ -331,10 +302,7 @@ main (int argc, char **argv)
 	client = gconf_client_get_default ();
 	gconf_client_add_dir (client, "/desktop/gnome/background", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 
-	if (apply_only) {
-		apply_settings ();
-	}
-	else if (get_legacy) {
+	if (get_legacy) {
 		get_legacy_settings ();
 	} else {
 		changeset = gconf_change_set_new ();
