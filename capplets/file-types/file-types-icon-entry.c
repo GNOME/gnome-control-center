@@ -100,11 +100,11 @@ entry_changed(GtkWidget *widget, NautilusMimeIconEntry *ientry)
 
 	child = GTK_BIN(ientry->frame)->child;
 	
-	if(!t || !g_file_test (t,G_FILE_TEST_ISLINK|G_FILE_TEST_ISFILE) ||
+	if (!t || !g_file_test (t, G_FILE_TEST_ISLINK|G_FILE_TEST_ISFILE) ||
 	   !(im = gdk_imlib_load_image (t))) {
-		if (GNOME_IS_PIXMAP(child)) {
+		if (GNOME_IS_PIXMAP (child)) {
 			gtk_drag_source_unset (ientry->frame);
-			gtk_widget_destroy(child);
+			gtk_widget_destroy (child);
 		}
 		g_free(t);
 		return;
@@ -126,9 +126,12 @@ entry_changed(GtkWidget *widget, NautilusMimeIconEntry *ientry)
 	if(GNOME_IS_PIXMAP (child)) {
 		gnome_pixmap_load_imlib_at_size (GNOME_PIXMAP(child),im, w, h);
 	} else {
-		gtk_widget_destroy(child);
+		if (child != NULL) {
+			gtk_widget_destroy (child);
+		}
+		
 		child = gnome_pixmap_new_from_imlib_at_size (im, w, h);
-		gtk_widget_show(child);
+		gtk_widget_show (child);
 		gtk_container_add (GTK_CONTAINER(ientry->frame), child);
 
 		if(!GTK_WIDGET_NO_WINDOW(child)) {
@@ -141,10 +144,12 @@ entry_changed(GtkWidget *widget, NautilusMimeIconEntry *ientry)
 		}
 	}
 	gdk_imlib_destroy_image(im);
-	gtk_drag_source_set (ientry->frame,
+	
+	/*gtk_drag_source_set (ientry->frame,
 			     GDK_BUTTON1_MASK|GDK_BUTTON3_MASK,
 			     drop_types, 1,
 			     GDK_ACTION_COPY);
+	*/			     
 }
 
 static void
