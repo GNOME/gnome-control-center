@@ -111,6 +111,42 @@ apply_settings (void)
 }
 
 static void
+gnome_settings_keyboard_xkb_analyze_sysconfig (void)
+{
+	GConfClient *confClient;
+	GSwitchItXkbConfig gswicWas, gswicNow;
+
+	if (!initedOk)
+		return;
+
+	confClient = gconf_client_get_default ();
+	GSwitchItXkbConfigInit (&gswicWas, confClient);
+	GSwitchItXkbConfigInit (&gswicNow, confClient);
+	g_object_unref (confClient);
+	GSwitchItXkbConfigLoadSysBackup (&gswicWas);
+	GSwitchItXkbConfigLoadInitial (&gswicNow);
+
+	// config was changed!!!
+	if (g_slist_length (gswicWas.layouts) &&
+	    !GSwitchItXkbConfigEquals (&gswicNow, &gswicWas)) {
+		GtkWidget *msg = gtk_message_dialog_new_with_markup (NULL,
+								     0,
+								     GTK_MESSAGE_ERROR,
+								     GTK_BUTTONS_CLOSE,
+//!! temporary one
+								     _
+								     ("System-wide XKB configuration has changed. "
+								      "You may want to adjust your local configuration as well."));
+		g_signal_connect (msg, "response",
+				  G_CALLBACK (gtk_widget_destroy), NULL);
+		gtk_widget_show (msg);
+	}
+	GSwitchItXkbConfigSaveSysBackup (&gswicNow);
+	GSwitchItXkbConfigTerm (&gswicWas);
+	GSwitchItXkbConfigTerm (&gswicNow);
+}
+
+static void
 gnome_settings_keyboard_xkb_chk_lcl_xmm_response (GtkDialog * dlg,
 						  gint response)
 {
@@ -165,8 +201,9 @@ void
 gnome_settings_keyboard_xkb_init (GConfClient * client)
 {
 	if (!XklInit (GDK_DISPLAY ())) {
-		XklBackupNamesProp ();
 		initedOk = TRUE;
+		XklBackupNamesProp ();
+		gnome_settings_keyboard_xkb_analyze_sysconfig ();
 		gnome_settings_keyboard_xkb_chk_lcl_xmm ();
 		gnome_settings_daemon_register_callback
 		    ("/desktop/gnome/peripherals/keyboard/xkb",
