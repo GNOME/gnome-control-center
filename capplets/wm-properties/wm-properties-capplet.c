@@ -518,7 +518,7 @@ show_restart_info (void)
                           "done either selecting \"Save Current Session\" under \"Settings\"\n"
                           "in the main menu, or by turning on \"Save Current Setup\" when\n"
                           "you log out.\n"),
-                        GNOME_MESSAGE_BOX_INFO, "Save Session Later", "Save Session Now", NULL);
+                        GNOME_MESSAGE_BOX_INFO, _("Save Session Later"), _("Save Session Now"), NULL);
         } else {
                 dialog = gnome_message_box_new (
                         _("Your current window manager has been changed. In order for\n"
