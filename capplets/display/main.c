@@ -442,7 +442,7 @@ create_dialog (struct DisplayInfo *info)
 					
   gtk_window_set_resizable(GTK_WINDOW (dialog), FALSE);
   gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
-  gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dialog)->vbox), 6);
+  gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dialog)->vbox), 2);
   capplet_set_icon (dialog, "display-capplet.png");
   
   for (i = 0; i < info->n_screens; i++)
