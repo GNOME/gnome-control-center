@@ -136,7 +136,7 @@ main(int argc, char **argv)
 		return 1;
 	}
 	
-	gnome_theme_init (FALSE);
+	gnome_theme_init (NULL);
 	uri = gnome_vfs_uri_new (argv[1]);
 	theme = gnome_theme_read_meta_theme (uri);
 	gnome_vfs_uri_unref (uri);

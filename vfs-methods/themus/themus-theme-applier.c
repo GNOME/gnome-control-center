@@ -53,7 +53,7 @@ int main (int argc, char **argv)
 	if (!args) return 1;
 
 	gnome_vfs_init ();
-	gnome_theme_init (FALSE);
+	gnome_theme_init (NULL);
 		
 	uri = gnome_vfs_uri_new (args[0]);
 	g_assert (uri != NULL);
