@@ -35,6 +35,12 @@
 #include "capplet-util.h"
 #include "gconf-property-editor.h"
 
+enum
+{
+	RESPONSE_APPLY = 1,
+	RESPONSE_CLOSE
+};
+
 static GladeXML *
 create_dialog (void)
 {
@@ -170,13 +176,20 @@ mnemonic_activate (GtkWidget *toggle,
 
 static void
 dialog_response (GtkWidget *widget,
-		 gint       response,
-		 GladeXML  *dialog)
+		 gint       response_id,
+		 GConfChangeSet *changeset)
 {
-	if (response == GTK_RESPONSE_HELP)
-		return;
-
-	gtk_main_quit ();
+	switch (response_id)
+	{
+	case RESPONSE_APPLY:
+		gconf_client_commit_change_set (gconf_client_get_default (), changeset, TRUE, NULL);
+		break;
+	case RESPONSE_CLOSE:
+	case GTK_RESPONSE_DELETE_EVENT:
+	default:
+		gtk_main_quit ();
+		break;
+	}
 }
 
 static void
@@ -239,7 +252,7 @@ setup_dialog (GladeXML       *dialog,
 		 "conv-from-widget-cb", bell_from_widget,
 		 NULL);
 	g_signal_connect (G_OBJECT (WID ("bell_custom_radio")), "mnemonic_activate", (GCallback) mnemonic_activate, WID ("bell_custom_entry"));
-	g_signal_connect (G_OBJECT (WID ("keyboard_dialog")), "response", (GCallback) dialog_response, dialog);
+	g_signal_connect (G_OBJECT (WID ("keyboard_dialog")), "response", (GCallback) dialog_response, changeset);
 }
 
 static void
@@ -266,6 +279,7 @@ int
 main (int argc, char **argv) 
 {
 	GConfClient    *client;
+	GConfChangeSet *changeset;
 	GladeXML       *dialog;
 
 	static gboolean apply_only;
@@ -296,11 +310,13 @@ main (int argc, char **argv)
 	if (get_legacy) {
 		get_legacy_settings ();
 	} else {
+		changeset = gconf_change_set_new ();
 		dialog = create_dialog ();
-		setup_dialog (dialog, NULL);
+		setup_dialog (dialog, changeset);
 
 		gtk_widget_show_all (WID ("keyboard_dialog"));
 		gtk_main ();
+		gconf_change_set_unref (changeset);
 	}
 
 	return 0;
