@@ -13,5 +13,3 @@ noinst_LTLIBRARIES = libwindow-settings.la
 libwindow_settings_la_SOURCES = \
 	gnome-window-manager.c	\
 	gnome-window-manager.h
-
-libwindow_settings_la_LIBADD = $(GNOMECC_CAPPLETS_LIBS)
