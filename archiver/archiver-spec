@@ -1,0 +1,77 @@
+Rollback archiving internals
+Copyright (C) 2000 Helix Code, Inc.
+Written by Bradford Hovinen <hovinen@helixcode.com>
+
+1. Directory format
+
+Diagram:
+
+	 + toplevel
+	 |-+ Location 1
+	 | |- CCYYMMDD-hhmm-<id>.xml
+	 | |  .
+	 | |  .
+	 | |  .
+	 | |- metadata.log:
+	 | |  [<id> <date> <time> <backend>         ] ^
+	 | |  [ .                                   ] | Time
+	 | |  [ .                                   ] |
+	 | |  [ .                                   ] |
+	 | \- metadata.xml:
+	 |    [...                                  ]
+	 |    [<inherits>location</inherits>        ]
+	 |    [<valid-config>backend</valid-config> ]
+	 |    [...                                  ]
+	 |-+ Location 2
+	 |   ...
+
+There is one toplevel directory for each archive. This directory
+contains one or more location directories. Each location directory
+must contain two files: an XML file describing the location and a log
+of changes made in that location. Each change corresponds to an XML
+file containing a snapshot of the configuration as modified. There is
+one XML file per backend. Each change has an id number that is
+incremented atomicall by the archiving script when it stores
+configuration changes. The id number, as well as the date and time of
+storage, form a filename that uniquely identifies each configuration
+change. The archiving script must also store in the log file a line
+with the id number, date and time of storage, and backend used
+whenever it stores XML data. New entries are stored at the head of the 
+file, so that during rollback, the file may be foreward scanned to
+find the appropriate identifier for the configuration file. The
+per-location XML configuration file contains information on what the
+location's parent is and what configurations that location defines.
+
+For now, the backend shall be referred to by its executable name. When 
+the backends gain CORBA interfaces, I suggest that the OAF id be used
+instead. This reduces the problem of setting a backend's configuration 
+to a simple object activation and method invocation. The OAF id may
+also be used to resolve the backend's human-readable name.
+
+2. Meta-configuration details
+
+In order that this system be complete, there must be a way to
+ascertain the current location and to roll back changes in location. I 
+propose that there be a special archive in the configuration hierarchy 
+that contains location history in the same format as other
+locations. The archiver can then be a single script that accepts
+command-line arguments describing the request action: `archive this
+data', `roll back this backend's configuration', and `switch to this
+location'. It then handles all the details of interfacing with the
+archive and applying the changes in the correct order. Conceptually,
+the archiver becomes a backend in and of itself, where the frontend is 
+located in the GUI of HCM. It would therefore be adviseable to use the 
+same standards for the archiver as for other backends and hence make
+it a CORBA service, where the tool-specific interface is as described
+above.
+
+3. Future directions
+
+The metafile log structure may run into scalability problems for
+installations have have been in place for a long time. An alternative
+structure that uses binary indexing might be in order. A command line
+utility (with GUI interface) could be written to recover the file in
+the case of corruption; such a utility could simply introspect each of 
+the XML files in a directory. Provided that each XML file contains
+enough information to create a file entry, which is trivial, recovery
+is assured.

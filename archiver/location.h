@@ -1,0 +1,112 @@
+/* -*- mode: c; style: linux -*- */
+
+/* location.h
+ * Copyright (C) 2000 Helix Code, Inc.
+ *
+ * Written by Bradford Hovinen (hovinen@helixcode.com)
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2, or (at your option)
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
+ * 02111-1307, USA.
+ */
+
+#ifndef __LOCATION_H
+#define __LOCATION_H
+
+#include <gnome.h>
+
+#include "config-log.h"
+
+#define LOCATION(obj)          GTK_CHECK_CAST (obj, location_get_type (), Location)
+#define LOCATION_CLASS(klass)  GTK_CHECK_CLASS_CAST (klass, location_get_type (), LocationClass)
+#define IS_LOCATION(obj)       GTK_CHECK_TYPE (obj, location_get_type ())
+
+typedef struct _LocationClass LocationClass;
+typedef struct _LocationPrivate LocationPrivate;
+typedef struct _Archive Archive;
+
+typedef int (*LocationBackendCB) (Location *, gchar *, gpointer);
+
+struct _Location 
+{
+	GtkObject object;
+
+	LocationPrivate *p;
+};
+
+struct _LocationClass 
+{
+	GtkObjectClass parent;
+};
+
+guint location_get_type (void);
+
+GtkObject *location_new            (Archive *archive, 
+				    const gchar *locid, 
+				    Location *inherits);
+GtkObject *location_open           (Archive *archive, 
+				    const gchar *locid);
+
+void location_close                (Location *location);
+void location_delete               (Location *location);
+
+void location_store                (Location *location, 
+				    gchar *backend_id, 
+				    FILE *input);
+
+void location_rollback_backend_to  (Location *location,
+				    struct tm *date, 
+				    gchar *backend_id,
+				    gboolean parent_chain);
+void location_rollback_backends_to (Location *location,
+				    struct tm *date,
+				    GList *backends,
+				    gboolean parent_chain);
+void location_rollback_all_to      (Location *location,
+				    struct tm *date,
+				    gboolean parent_chain);
+
+void location_rollback_backend_by  (Location *location,
+				    guint steps, 
+				    gchar *backend_id,
+				    gboolean parent_chain);
+
+void location_rollback_id          (Location *location,
+				    gint id);
+
+void location_dump_rollback_data   (Location *location,
+				    struct tm *date,
+				    guint steps,
+				    gchar *backend_id,
+				    gboolean parent_chain,
+				    FILE *output);
+
+gboolean location_contains         (Location *location, gchar *backend_id);
+gint location_add_backend          (Location *location, gchar *backend_id);
+void location_remove_backend       (Location *location, gchar *backend_id);
+
+void location_foreach_backend      (Location *location,
+				    LocationBackendCB callback,
+				    gpointer data);
+
+GList *location_find_path_from_common_parent (Location *location, 
+					      Location *location2);
+
+const gchar *location_get_path     (Location *location);
+const gchar *location_get_label    (Location *location);
+const gchar *location_get_id       (Location *location);
+
+void location_set_id               (Location *location, const gchar *locid);
+
+#endif /* __LOCATION */
