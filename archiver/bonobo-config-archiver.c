@@ -216,12 +216,17 @@ real_sync (BonoboConfigDatabase *db,
 	   CORBA_Environment    *ev)
 {
 	BonoboConfigArchiver *archiver_db = BONOBO_CONFIG_ARCHIVER (db);
+	BonoboArg *arg;
 
 	if (!db->writeable)
 		return;
 
 	location_store_xml (archiver_db->location, archiver_db->backend_id, 
 			    archiver_db->doc, STORE_MASK_PREVIOUS);
+
+	arg = bonobo_arg_new (BONOBO_ARG_NULL);
+	bonobo_event_source_notify_listeners (archiver_db->es, "Bonobo/ConfigDatabase:sync", arg, &ev);
+	bonobo_arg_release (arg);
 }
 
 static void
