@@ -55,14 +55,15 @@ main (int argc, char **argv)
 
 	gnomelib_register_popt_table (gnomecc_options, _("GNOME Control Center options"));
 	gnome_init ("control-center", VERSION, argc, argv);
-#ifdef GTKHTML_HAVE_GCONF
-	gconf_init (argc, argv, NULL);
-#endif
 	glade_gnome_init ();
 
 	orb = oaf_init (argc, argv);
 	if (bonobo_init (orb, CORBA_OBJECT_NIL, CORBA_OBJECT_NIL) == FALSE)
 		g_error ("Cannot initialize bonobo");
+
+#ifdef GTKHTML_HAVE_GCONF
+	gconf_init (argc, argv, NULL);
+#endif
 
 	if (capplet == NULL) {
 		gnomecc_init ();
