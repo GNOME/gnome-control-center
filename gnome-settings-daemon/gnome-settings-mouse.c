@@ -199,9 +199,31 @@ set_locate_pointer (gboolean locate_pointer)
 			    False,
 			    GrabModeAsync,
 			    GrabModeSync);
+	          XGrabKey (GDK_DISPLAY_XDISPLAY (display),
+			    keys[i].keycode,
+			    Mod2Mask,
+			    xroot,
+			    False,
+			    GrabModeAsync,
+			    GrabModeSync);
+	          XGrabKey (GDK_DISPLAY_XDISPLAY (display),
+			    keys[i].keycode,
+			    Mod4Mask,
+			    xroot,
+			    False,
+			    GrabModeAsync,
+			    GrabModeSync);
 	        }
 	      else 
 	        {
+	          XUngrabKey (GDK_DISPLAY_XDISPLAY (display),
+			      keys[i].keycode,
+			      Mod4Mask,
+			      xroot);
+	          XUngrabKey (GDK_DISPLAY_XDISPLAY (display),
+			      keys[i].keycode,
+			      Mod2Mask,
+			      xroot);
 	          XUngrabKey (GDK_DISPLAY_XDISPLAY (display),
 			      keys[i].keycode,
 			      LockMask,
