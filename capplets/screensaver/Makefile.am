@@ -24,6 +24,9 @@ pixmaps_DATA = no-hack.png blank-screen.png checked.xpm unchecked.xpm
 
 @INTLTOOL_DESKTOP_RULE@
 
+desktopdir = $(GNOMECC_DESKTOP_DIR)
+desktop_DATA = screensaver.desktop
+
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS) @OLD_CAPPLET_CFLAGS@
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
 EXTRA_DIST = $(GNOMECC_CAPPLETS_EXTRA_DIST) $(pixmaps_DATA)
