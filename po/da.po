@@ -20,14 +20,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2003-08-27 15:02-0400\n"
-"PO-Revision-Date: 2003-08-23 20:00+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-10-25 14:06+0200\n"
+"PO-Revision-Date: 2003-10-25 14:09+0200\n"
 "Last-Translator: Ole Laursen <olau@hardworking.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:1
 msgid "<b>Applications</b>"
@@ -691,10 +692,6 @@ msgstr "Foretrukne programmer"
 msgid "Select your default applications"
 msgstr "Vælg hvilke programmer der foreslås som standard"
 
-#: capplets/default-applications/gnome-default-applications-properties.c:108
-msgid "Please specify a name and a command for this editor."
-msgstr "Angiv et navn og en kommando til dette redigeringsprogram"
-
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:39
 msgid "Epiphany"
 msgstr "Epiphany"
@@ -771,6 +768,10 @@ msgstr "RXVT"
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:70
 msgid "ETerm"
 msgstr "ETerm"
+
+#: capplets/default-applications/gnome-default-applications-properties.c:108
+msgid "Please specify a name and a command for this editor."
+msgstr "Angiv et navn og en kommando til dette redigeringsprogram"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:2
 msgid "Add..."
@@ -887,7 +888,7 @@ msgid "Window Manager"
 msgstr "Vindueshåndtering"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:30
-#: capplets/file-types/file-types-properties.glade.h:22
+#: capplets/file-types/file-types-properties.glade.h:23
 msgid "_Name:"
 msgstr "_Navn:"
 
@@ -1047,37 +1048,37 @@ msgstr "Skærmopløsning"
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: capplets/display/main.c:376
+#: capplets/display/main.c:377
 msgid "_Resolution:"
 msgstr "_Opløsning:"
 
-#: capplets/display/main.c:395
+#: capplets/display/main.c:396
 msgid "Re_fresh rate:"
 msgstr "Optegnings_frekvens:"
 
-#: capplets/display/main.c:416
+#: capplets/display/main.c:417
 msgid "Default Settings"
 msgstr "Forvalgte indstillinger"
 
-#: capplets/display/main.c:418
+#: capplets/display/main.c:419
 #, c-format
 msgid "Screen %d Settings\n"
 msgstr "Indstillinger for skærm %d\n"
 
-#: capplets/display/main.c:443
+#: capplets/display/main.c:444
 msgid "Screen Resolution Preferences"
 msgstr "Indstillinger for skærmopløsning"
 
-#: capplets/display/main.c:475
+#: capplets/display/main.c:476
 #, c-format
 msgid "Make default for this _computer (%s) only"
 msgstr "Gør til forvalg for denne _maskine (%s) kun"
 
-#: capplets/display/main.c:493
+#: capplets/display/main.c:494
 msgid "Options"
 msgstr "Indstillinger"
 
-#: capplets/display/main.c:514
+#: capplets/display/main.c:515
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d seconds the previous "
@@ -1086,19 +1087,19 @@ msgstr ""
 "Tester de nye indstillinger. Hvis du ikke svarer inden for %d sekunder, vil "
 "de foregående indstillinger blive gendannet."
 
-#: capplets/display/main.c:563
+#: capplets/display/main.c:564
 msgid "Do you want to keep this resolution?"
 msgstr "Vil du beholde denne opløsning?"
 
-#: capplets/display/main.c:588
+#: capplets/display/main.c:589
 msgid "Use _previous resolution"
 msgstr "Benyt _foregående opløsning"
 
-#: capplets/display/main.c:588
+#: capplets/display/main.c:589
 msgid "_Keep resolution"
 msgstr "_Behold opløsning"
 
-#: capplets/display/main.c:739
+#: capplets/display/main.c:740
 msgid ""
 "The XServer does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
@@ -1106,7 +1107,7 @@ msgstr ""
 "X-serveren understøtter ikke XRandR-udvidelsen. Skift af opløsning under "
 "kørsel er ikke muligt."
 
-#: capplets/display/main.c:747
+#: capplets/display/main.c:748
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
@@ -1124,7 +1125,7 @@ msgid "Extensions"
 msgstr "Endelser"
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:1
-#: capplets/file-types/file-types-properties.glade.h:10
+#: capplets/file-types/file-types-properties.glade.h:11
 msgid "File Types and Programs"
 msgstr "Filtypeassocieringer"
 
@@ -1146,83 +1147,87 @@ msgid "Add _Service..."
 msgstr "Tilføj _tjeneste..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
+msgid "Browse icons"
+msgstr "Gennemse ikoner"
+
+#: capplets/file-types/file-types-properties.glade.h:6
 msgid "C_hoose..."
 msgstr "_Vælg..."
 
-#: capplets/file-types/file-types-properties.glade.h:6
+#: capplets/file-types/file-types-properties.glade.h:7
 msgid "Cate_gory:"
 msgstr "Kate_gori:"
 
-#: capplets/file-types/file-types-properties.glade.h:7
+#: capplets/file-types/file-types-properties.glade.h:8
 msgid "D_efault action:"
 msgstr "_Forvalgt handling:"
 
-#: capplets/file-types/file-types-properties.glade.h:8
+#: capplets/file-types/file-types-properties.glade.h:9
 msgid "Default _action:"
 msgstr "Forvalgt _handling:"
 
-#: capplets/file-types/file-types-properties.glade.h:9
+#: capplets/file-types/file-types-properties.glade.h:10
 #: capplets/file-types/mime-edit-dialog.c:208
 msgid "Edit file type"
 msgstr "Redigér filtype"
 
-#: capplets/file-types/file-types-properties.glade.h:11
+#: capplets/file-types/file-types-properties.glade.h:12
 msgid "Filename extensions:"
 msgstr "Filendelser:"
 
-#: capplets/file-types/file-types-properties.glade.h:12
+#: capplets/file-types/file-types-properties.glade.h:13
 msgid "Look at content"
 msgstr "Undersøg indhold"
 
-#: capplets/file-types/file-types-properties.glade.h:13
+#: capplets/file-types/file-types-properties.glade.h:14
 msgid "P_rogram:"
 msgstr "P_rogram"
 
-#: capplets/file-types/file-types-properties.glade.h:14
+#: capplets/file-types/file-types-properties.glade.h:15
 msgid "Program to Run"
 msgstr "Program der skal køres"
 
-#: capplets/file-types/file-types-properties.glade.h:15
+#: capplets/file-types/file-types-properties.glade.h:16
 msgid "Run a program"
 msgstr "Kør et program"
 
-#: capplets/file-types/file-types-properties.glade.h:16
+#: capplets/file-types/file-types-properties.glade.h:17
 msgid "Run in _Terminal"
 msgstr "Start i t_erminal"
 
-#: capplets/file-types/file-types-properties.glade.h:17
+#: capplets/file-types/file-types-properties.glade.h:18
 msgid "Use parent category _defaults"
 msgstr "Benyt forælderkategoriens _forvalg"
 
-#: capplets/file-types/file-types-properties.glade.h:18
+#: capplets/file-types/file-types-properties.glade.h:19
 msgid "_Add:"
 msgstr "_Tilføj:"
 
-#: capplets/file-types/file-types-properties.glade.h:19
+#: capplets/file-types/file-types-properties.glade.h:20
 msgid "_Description:"
 msgstr "_Beskrivelse:"
 
-#: capplets/file-types/file-types-properties.glade.h:20
+#: capplets/file-types/file-types-properties.glade.h:21
 msgid "_Edit..."
 msgstr "_Redigér..."
 
-#: capplets/file-types/file-types-properties.glade.h:21
+#: capplets/file-types/file-types-properties.glade.h:22
 msgid "_MIME type:"
 msgstr "_MIME-type"
 
-#: capplets/file-types/file-types-properties.glade.h:23
+#: capplets/file-types/file-types-properties.glade.h:24
 msgid "_Program to run:"
 msgstr "_Program der skal køres:"
 
-#: capplets/file-types/file-types-properties.glade.h:24
+#: capplets/file-types/file-types-properties.glade.h:25
 msgid "_Protocol:"
 msgstr "_Protokol:"
 
-#: capplets/file-types/file-types-properties.glade.h:25
+#: capplets/file-types/file-types-properties.glade.h:26
 msgid "_Remove"
 msgstr "_Fjern"
 
-#: capplets/file-types/file-types-properties.glade.h:26
+#: capplets/file-types/file-types-properties.glade.h:27
 msgid "_Viewer component:"
 msgstr "_Fremviserkomponent:"
 
@@ -1458,12 +1463,12 @@ msgstr "_Gråtone"
 
 #: capplets/font/font-properties.glade.h:9
 msgid "Go to font folder"
-msgstr "Gå til temamappen"
+msgstr "Gå til skrifttypemappen"
 
 # hinting er svært at oversætte, dette dækker vist
 #: capplets/font/font-properties.glade.h:10
 msgid "Hinting:"
-msgstr "Yderligere tilpasning:"
+msgstr "Justering:"
 
 #: capplets/font/font-properties.glade.h:11
 msgid "N_one"
@@ -1557,6 +1562,26 @@ msgstr "_VRGB"
 #: capplets/font/font-properties.glade.h:33
 msgid "_Window title font:"
 msgstr "Skrifttype for _vinduestitler:"
+
+#: capplets/font/main.c:494 capplets/font/main.c:499
+msgid "Font may be too large"
+msgstr "Skrifttype er muligvis for stor"
+
+#: capplets/font/main.c:495
+#, c-format
+msgid ""
+"The font selected is %d points large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a size "
+"smaller than %d."
+msgstr "Den valgte skrifttype er %d punkter stor og kan gøre det svært at benytte systemet. Det anbefales at du vælger en størrelse der er mindre end %d."
+
+#: capplets/font/main.c:500
+#, c-format
+msgid ""
+"The font selected is %d points large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a smaller "
+"sized font."
+msgstr "Den valgte skrifttype er %d punkter stor og kan gøre det svært at benytte systemet. Det anbefales at du vælger en skrifttype med en mindre størrelse."
 
 #: capplets/keybindings/eggcellrendererkeys.c:160
 #: capplets/keybindings/eggcellrendererkeys.c:161
@@ -2789,18 +2814,16 @@ msgstr "/_Tag en pause"
 
 #: typing-break/drwright.c:466
 #, c-format
-msgid "%d minutes until the next break"
-msgstr "%d minutter til næste pause"
+msgid "%d minute until the next break"
+msgid_plural "%d minutes until the next break"
+msgstr[0] "%d minut til næste pause"
+msgstr[1] "%d minutter til næste pause"
 
-#: typing-break/drwright.c:469
-msgid "One minute until the next break"
-msgstr "Et minut til næste pause"
-
-#: typing-break/drwright.c:471
+#: typing-break/drwright.c:470
 msgid "Less than one minute until the next break"
 msgstr "Mindre end et minut til næste pause"
 
-#: typing-break/drwright.c:566
+#: typing-break/drwright.c:565
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
@@ -2808,23 +2831,23 @@ msgid ""
 msgstr ""
 "Kunne ikke vise vinduet for tastepauseindstillinger med den følgende fejl: %s"
 
-#: typing-break/drwright.c:606
+#: typing-break/drwright.c:605
 msgid "About GNOME Typing Monitor"
 msgstr "Om tasteovervåger"
 
-#: typing-break/drwright.c:630
+#: typing-break/drwright.c:629
 msgid "A computer break reminder."
 msgstr "Et program til at påminde om tastepauser."
 
-#: typing-break/drwright.c:631
+#: typing-break/drwright.c:630
 msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
 msgstr "Skrevet af Richard Hult &lt;richard@imendio.com&gt;"
 
-#: typing-break/drwright.c:632
+#: typing-break/drwright.c:631
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Guf for øjnene tilføjet af Anders Carlsson"
 
-#: typing-break/drwright.c:805
+#: typing-break/drwright.c:804
 msgid "Break reminder"
 msgstr "Pausepåminder"
 
@@ -2979,6 +3002,14 @@ msgstr "Kontekstmenupunkter for skriftyper"
 msgid "Set as Application Font"
 msgstr "Vælg som programskrifttype"
 
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
+msgid "Theme Properties content view component"
+msgstr "Indholdsvisningskomponent til temaegenskaber"
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
+msgid "Themus Theme Properties view"
+msgstr "Temaegenskaber-visning"
+
 #: vfs-methods/themus/apply-font.glade.h:1
 msgid " "
 msgstr " "
@@ -3002,14 +3033,6 @@ msgstr ""
 #: vfs-methods/themus/apply-font.glade.h:5
 msgid "_Apply font"
 msgstr "_Anvend skrifttype"
-
-#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
-msgid "Theme Properties content view component"
-msgstr "Indholdsvisningskomponent til temaegenskaber"
-
-#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
-msgid "Themus Theme Properties view"
-msgstr "Temaegenskaber-visning"
 
 #: vfs-methods/themus/theme-method.c:514
 msgid "Themes"
@@ -3074,6 +3097,9 @@ msgstr "Generér miniaturer for installerede temaer"
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Generér miniaturer for temaer"
+
+#~ msgid "One minute until the next break"
+#~ msgstr "Et minut til næste pause"
 
 #~ msgid "Select CDE AccessX file"
 #~ msgstr "Vælg CDE AccessX-fil"
