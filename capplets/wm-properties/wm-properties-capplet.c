@@ -298,12 +298,11 @@ update_gui (void)
                 wm = tmp_list->data;
 
                 if (wm == current_wm) {
-                        row_text = g_strconcat (wm->dentry->name,
-                                                _(" (Current)"), NULL);
+                        row_text = g_strdup_printf (_("%s (Current)"),
+                                              wm->dentry->name);
 
-                        tmpstr = g_strconcat (_("Run Configuration Tool for "),
-                                              wm->dentry->name,
-                                              NULL);
+                        tmpstr = g_strdup_printf (_("Run Configuration Tool for %s"),
+                                              wm->dentry->name);
                                               
                         gtk_label_set_text (GTK_LABEL (GTK_BIN (config_button)->child),
                                             tmpstr);
@@ -352,12 +351,12 @@ init_callback (WMResult result, gpointer data)
         case WM_SUCCESS:
                 break;
         case WM_ALREADY_RUNNING:
-                g_warning ("wm-properties-capplet: Unable to initialize window manager.\n"
-                           "\tAnother window manager is already running and could not be killed\n");
+                g_warning (_("wm-properties-capplet: Unable to initialize window manager.\n"
+                           "\tAnother window manager is already running and could not be killed\n"));
                 break;
         case WM_CANT_START:
-                g_warning ("wm-properties-capplet: Unable to initialize window manager.\n"
-                           "\t'%s' didn't start\n", (gchar *)data);
+                g_warning (_("wm-properties-capplet: Unable to initialize window manager.\n"
+                           "\t'%s' didn't start\n"), (gchar *)data);
                 break;
         }
 
