@@ -6,6 +6,9 @@
 	setting a color with a root applier
 	(need_root_pixmap_p): If the last preferences structure had
 	neither gradient nor wallpaper enabled, we need a new root pixmap
+	(need_wallpaper_load_p): We need to reload the wallpaper pixbuf if
+	it is enabled and not loaded
+	(cleanup_cb): Free bg_applier->p->pixbuf too
 
 2002-02-12  Lauris Kaplinski  <lauris@ximian.com>
 

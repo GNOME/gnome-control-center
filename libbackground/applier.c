@@ -1244,6 +1244,8 @@ need_wallpaper_load_p (const BGApplier *bg_applier, const BGPreferences *prefs)
 {
 	if (bg_applier->p->last_prefs == NULL)
 		return TRUE;
+	else if (prefs->wallpaper_enabled && bg_applier->p->wallpaper_pixbuf == NULL)
+		return TRUE;
 	else if (bg_applier->p->last_prefs->wallpaper_enabled != prefs->wallpaper_enabled)
 		return TRUE;
 	else if (!bg_applier->p->last_prefs->wallpaper_enabled && !prefs->wallpaper_enabled)
@@ -1485,11 +1487,18 @@ is_nautilus_running (void)
 static gboolean
 cleanup_cb (BGApplier *bg_applier)
 {
-	if (bg_applier->p->wallpaper_pixbuf != NULL)
-	{
+	g_message ("cleanup_cb: Enter");
+
+	if (bg_applier->p->wallpaper_pixbuf != NULL) {
 		g_object_unref (G_OBJECT (bg_applier->p->wallpaper_pixbuf));
 		bg_applier->p->wallpaper_pixbuf = NULL;	
 	}
+
+	if (bg_applier->p->pixbuf != NULL) {
+		g_object_unref (G_OBJECT (bg_applier->p->pixbuf));
+		bg_applier->p->pixbuf = NULL;
+	}
+
 	bg_applier->p->timeout = 0;
 	
 	return FALSE;
