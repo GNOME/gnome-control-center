@@ -366,6 +366,7 @@ create_screen_widgets (struct ScreenInfo *screen_info, int nr, gboolean no_heade
   GtkWidget *table;
   GtkWidget *label;
   GtkWidget *option_menu;
+  GtkWidget *ret;
   char *str;
 
   table = gtk_table_new (2, 2, FALSE);
@@ -416,9 +417,9 @@ create_screen_widgets (struct ScreenInfo *screen_info, int nr, gboolean no_heade
     str = g_strdup (_("Default Settings"));
   else
     str = g_strdup_printf (_("Screen %d Settings\n"), nr+1);
-  return wrap_in_label (table, str);
-  
+  ret = wrap_in_label (table, str);
   g_free (str);
+  return ret;
 }
 
 
