@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2003-05-07 14:06-0400\n"
-"PO-Revision-Date: 2003-01-26 22:47+0100\n"
+"POT-Creation-Date: 2003-05-13 22:38+0200\n"
+"PO-Revision-Date: 2003-05-13 22:39+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -54,50 +54,42 @@ msgstr ""
 #: capplets/file-types/file-types-properties.glade.h:1
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: capplets/network/gnome-network-preferences.glade.h:2
-#: capplets/theme-switcher/theme-properties.glade.h:1
 #: capplets/theme-switcher/theme-install.glade.h:1
+#: capplets/theme-switcher/theme-properties.glade.h:1
 msgid "*"
 msgstr "*"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
-#, fuzzy
 msgid "<b>Enable Bo_unce Keys</b>"
-msgstr "Aktivera st_udsande tangenter"
+msgstr "<b>Aktivera st_udsande tangenter</b>"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
-#, fuzzy
 msgid "<b>Enable Slo_w Keys</b>"
-msgstr "Aktivera l_ångsamma tangenter"
+msgstr "<b>Aktivera l_ångsamma tangenter</b>"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
-#, fuzzy
 msgid "<b>Enable _Mouse Keys</b>"
-msgstr "Aktivera _mustangenter"
+msgstr "<b>Aktivera _mustangenter</b>"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
-#, fuzzy
 msgid "<b>Enable _Repeat Keys</b>"
-msgstr "Aktivera _mustangenter"
+msgstr "<b>Aktivera _repeteringstangenter</b>"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
-#, fuzzy
 msgid "<b>Enable _Sticky Keys</b>"
-msgstr "Aktivera _klistriga tangenter"
+msgstr "<b>Aktivera _klistriga tangenter</b>"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
-#, fuzzy
 msgid "<b>Features</b>"
-msgstr "Funktioner"
+msgstr "<b>Funktioner</b>"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
-#, fuzzy
 msgid "<b>Mouse</b>"
-msgstr "<b>Test</b>"
+msgstr "<b>Mus</b>"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
-#, fuzzy
 msgid "<b>Toggle Keys</b>"
-msgstr "Växlingsknappar"
+msgstr "<b>Växlingsknappar</b>"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
 msgid "Basic"
@@ -399,6 +391,11 @@ msgstr ""
 "inställningshanterare från något annat än GNOME (t.ex. KDE) redan kör och är "
 "i konflikt med GNOME-inställningshanteraren."
 
+#: capplets/common/capplet-stock-icons.c:94
+#, c-format
+msgid "Unable to load capplet stock icon '%s'\n"
+msgstr "Kan inte läsa in standardikon \"%s\" för kontrollpanelsprogram\n"
+
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr "Verkställ ändringarna och avsluta"
@@ -407,11 +404,6 @@ msgstr "Verkställ ändringarna och avsluta"
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "Ett fel inträffade vid visande av hjälp: %s"
-
-#: capplets/common/capplet-stock-icons.c:94
-#, c-format
-msgid "Unable to load capplet stock icon '%s'\n"
-msgstr "Kan inte läsa in standardikon \"%s\" för kontrollpanelsprogram\n"
 
 #: capplets/common/file-transfer-dialog.c:95
 #, c-format
@@ -864,49 +856,46 @@ msgstr "Inställningar för gamla program (grdb)"
 
 #: capplets/display/display-properties.desktop.in.h:1
 msgid "Change screen resolution"
-msgstr ""
+msgstr "Ändra skärmupplösning"
 
 #: capplets/display/display-properties.desktop.in.h:2
 msgid "Screen Resolution"
-msgstr ""
+msgstr "Skärmupplösning"
 
 #: capplets/display/main.c:261
 #, c-format
 msgid "%d Hz"
-msgstr ""
+msgstr "%d Hz"
 
 #: capplets/display/main.c:367
 msgid "Resolution:"
-msgstr ""
+msgstr "Upplösning:"
 
 #: capplets/display/main.c:385
 msgid "Refresh rate:"
-msgstr ""
+msgstr "Uppdateringsfrekvens:"
 
 #: capplets/display/main.c:405
-#, fuzzy
 msgid "Default Settings"
-msgstr "Huvudinställningar"
+msgstr "Standardinställningar"
 
 #: capplets/display/main.c:407
-#, fuzzy, c-format
+#, c-format
 msgid "Screen %d Settings\n"
-msgstr "Avancerade inställningar"
+msgstr "Inställningar för skärm %d\n"
 
 #: capplets/display/main.c:432
-#, fuzzy
 msgid "Screen Resolution Preferences"
-msgstr "Ljudinställningar"
+msgstr "Inställningar för skärmupplösning"
 
 #: capplets/display/main.c:460
 #, c-format
 msgid "Make default for this _computer (%s) only"
-msgstr ""
+msgstr "Gör till standard endast för denna _dator (%s)"
 
 #: capplets/display/main.c:478
-#, fuzzy
 msgid "Options"
-msgstr "Åtgärder"
+msgstr "Alternativ"
 
 #: capplets/display/main.c:499
 #, c-format
@@ -914,32 +903,39 @@ msgid ""
 "Testing the new settings. If you don't respond in %d seconds the previous "
 "settings will be restored."
 msgstr ""
+"Testar de nya inställningarna. Om du inte svarar inom %d sekunder kommer de "
+"föregående inställningarna att återställas."
 
 #: capplets/display/main.c:549
 msgid "Do you want to keep this resolution?"
-msgstr ""
+msgstr "Vill du behålla denna upplösning?"
 
 #: capplets/display/main.c:586
 msgid "Use _previous resolution"
-msgstr ""
+msgstr "Använd _föregående upplösning"
 
 #: capplets/display/main.c:588
 msgid "_Keep resolution"
-msgstr ""
+msgstr "_Behåll upplösning"
 
 #: capplets/display/main.c:747
 msgid ""
 "The Xserver doesn't support the XRandR extension, runtime resolution changes "
 "aren't possible."
 msgstr ""
+"X-servern stöder inte XRandR-tillägget. Ändringar av upplösning under "
+"körning är inte möjligt."
 
 #: capplets/display/main.c:759
 msgid ""
 "The version of the XRandR extension is incompatible with this program, "
 "runtime resolution changes aren't possible."
 msgstr ""
+"Versionen av XRandR-tillägget är inkompatibelt med detta program. Ändringar "
+"av upplösning under körning är inte möjligt."
 
 #: capplets/file-types/file-types-capplet.c:196
+#: vfs-methods/themus/themus-properties-view.c:165
 msgid "Description"
 msgstr "Beskrivning"
 
@@ -1154,7 +1150,7 @@ msgstr "Välj en filkategori"
 #: capplets/file-types/mime-type-info.c:602
 #, c-format
 msgid "View as %s"
-msgstr ""
+msgstr "Visa som %s"
 
 #: capplets/file-types/mime-type-info.c:668
 msgid "Images"
@@ -1282,9 +1278,8 @@ msgid "G_rayscale"
 msgstr "G_råskala"
 
 #: capplets/font/font-properties.glade.h:8
-#, fuzzy
 msgid "Go to font folder"
-msgstr "_Gå till temamappen"
+msgstr "Gå till typsnittsmappen"
 
 #: capplets/font/font-properties.glade.h:9
 msgid "Hinting:"
@@ -1415,7 +1410,7 @@ msgstr "Tryck en ny snabbtangent"
 
 #: capplets/keybindings/gnome-keybinding-properties.c:172
 msgid "GNOME Default"
-msgstr ""
+msgstr "GNOME-standard"
 
 #: capplets/keybindings/gnome-keybinding-properties.c:540
 msgid "<Unknown Action>"
@@ -1943,13 +1938,61 @@ msgstr "Ett"
 msgid "Two"
 msgstr "Två"
 
+#: capplets/theme-switcher/gnome-theme-details.c:372
+#: capplets/theme-switcher/gnome-theme-manager.c:590
+msgid ""
+"No themes could be found on your system.  This probably means that your "
+"\"Theme Preferences\" dialog was improperly installed, or you haven't "
+"installed the \"gnome-themes\" package."
+msgstr ""
+"Inga teman kunde hittas på ditt system. Detta betyder troligtvis att din "
+"\"Temainställningar\"-dialog inte installerades korrekt, eller att du inte "
+"har installerat paketet \"gnome-themes\"."
+
+#: capplets/theme-switcher/gnome-theme-manager.c:646
+#: capplets/theme-switcher/gnome-theme-manager.c:706
+msgid "Custom theme"
+msgstr "Anpassat tema"
+
+#: capplets/theme-switcher/gnome-theme-manager.c:646
+#: capplets/theme-switcher/gnome-theme-manager.c:706
+msgid "You can save this theme by pressing the Save Theme button."
+msgstr "Du kan spara detta tema genom att trycka på knappen Spara tema."
+
+#: capplets/theme-switcher/gnome-theme-manager.c:1399
+msgid ""
+"The default theme schemas could not be found on your system.  This means "
+"that you probably don't have metacity installed, or that your gconf is "
+"configured incorrectly."
+msgstr ""
+"Scheman för standardtemat kunde inte hittas på ditt system. Detta betyder "
+"att du troligtvis inte har metacity installerat, eller att ditt gconf är "
+"felaktigt konfigurerat."
+
+#: capplets/theme-switcher/gnome-theme-save.c:72
+msgid "Theme name must be present"
+msgstr "Det måste finnas ett temanamn"
+
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
 msgid "Select themes for various parts of the desktop"
 msgstr "Välj teman för diverse delar av skrivbordet"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:1
 msgid "Theme"
 msgstr "Tema"
+
+#: capplets/theme-switcher/theme-install.glade.h:2
+msgid "Install new theme"
+msgstr "Installera nytt tema"
+
+#: capplets/theme-switcher/theme-install.glade.h:3
+msgid "_Install"
+msgstr "_Installera"
+
+#: capplets/theme-switcher/theme-install.glade.h:4
+msgid "_Location of new theme:"
+msgstr "_Plats för nytt tema:"
 
 #: capplets/theme-switcher/theme-properties.glade.h:2
 msgid "<span size=\"larger\" weight=\"bold\">Save theme to disk</span>"
@@ -1996,13 +2039,12 @@ msgstr ""
 "bakgrund:"
 
 #: capplets/theme-switcher/theme-properties.glade.h:13
-#, fuzzy
 msgid ""
 "This theme suggests a\n"
 "font and background:"
 msgstr ""
 "Detta tema föreslår ett\n"
-"typsnitt och en bakgrund"
+"typsnitt och en bakgrund:"
 
 #: capplets/theme-switcher/theme-properties.glade.h:15
 msgid ""
@@ -2035,50 +2077,6 @@ msgstr "_Spara tema"
 #: capplets/theme-switcher/theme-properties.glade.h:22
 msgid "_Theme name:"
 msgstr "_Temanamn:"
-
-#: capplets/theme-switcher/theme-install.glade.h:2
-msgid "Install new theme"
-msgstr "Installera nytt tema"
-
-#: capplets/theme-switcher/theme-install.glade.h:3
-msgid "_Install"
-msgstr "_Installera"
-
-#: capplets/theme-switcher/theme-install.glade.h:4
-msgid "_Location of new theme:"
-msgstr "_Plats för nytt tema:"
-
-#: capplets/theme-switcher/gnome-theme-details.c:372
-#: capplets/theme-switcher/gnome-theme-manager.c:626
-msgid ""
-"No themes could be found on your system.  This probably means that your "
-"\"Theme Preferences\" dialog was improperly installed, or you haven't "
-"installed the \"gnome-themes\" package."
-msgstr ""
-"Inga teman kunde hittas på ditt system. Detta betyder troligtvis att din "
-"\"Temainställningar\"-dialog inte installerades korrekt, eller att du inte "
-"har installerat paketet \"gnome-themes\"."
-
-#: capplets/theme-switcher/gnome-theme-save.c:72
-msgid "Theme name must be present"
-msgstr "Det måste finnas ett temanamn"
-
-#: capplets/theme-switcher/gnome-theme-manager.c:682
-#: capplets/theme-switcher/gnome-theme-manager.c:742
-msgid "Custom theme"
-msgstr "Anpassat tema"
-
-#: capplets/theme-switcher/gnome-theme-manager.c:682
-#: capplets/theme-switcher/gnome-theme-manager.c:742
-msgid "You can save this theme by pressing the Save Theme button."
-msgstr "Du kan spara detta tema genom att trycka på knappen Spara tema."
-
-#: capplets/theme-switcher/gnome-theme-manager.c:1435
-msgid ""
-"The default theme schemas could not be found on your system.  This means "
-"that you probably don't have metacity installed, or that your gconf is "
-"configured incorrectly."
-msgstr ""
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
@@ -2411,6 +2409,11 @@ msgstr "_Visa inte detta meddelande igen"
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Kunde inte läsa in ljudfilen %s som prov %s"
 
+#: gnome-settings-daemon/gnome-settings-xrdb.c:212
+#: gnome-settings-daemon/gnome-settings-xrdb.c:259
+msgid "Cannot determine user's home directory"
+msgstr "Kan inte avgöra användarens hemkatalog"
+
 #: gnome-settings-daemon/gnome-settings-xsettings.c:179
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
@@ -2587,6 +2590,120 @@ msgstr ""
 "Typen av hintning att använda vid rendering av typsnitt. Möjliga värden är: "
 "\"none\" - ingen hintning, \"slight\", \"medium\" och \"full\" - så mycket "
 "hintning som möjligt; kan orsaka förvrängning av bokstavsformer."
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:1
+msgid "Apply theme..."
+msgstr "Använd tema..."
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:2
+msgid "Themus component"
+msgstr "Themus-komponent"
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:3
+msgid "Themus component apply theme operations"
+msgstr "Themus-komponent för användande av tema"
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
+msgid "Theme Properties content view component"
+msgstr "Innehållsvykomponent för temaegenskaper"
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
+msgid "Themus Theme Properties view"
+msgstr "Temaegenskapsvy för Themus"
+
+#: vfs-methods/themus/theme-method.c:513
+msgid "Themes"
+msgstr "Teman"
+
+#: vfs-methods/themus/themus-properties-view.c:170
+msgid "Control theme"
+msgstr "Kontrolltema"
+
+#: vfs-methods/themus/themus-properties-view.c:174
+msgid "Window border theme"
+msgstr "Fönsterkantstema"
+
+#: vfs-methods/themus/themus-properties-view.c:178
+msgid "Icon theme"
+msgstr "Ikontema"
+
+#: vfs-methods/themus/themus-properties-view.c:217
+msgid "URI currently displayed"
+msgstr "URI som visas för tillfället"
+
+#: vfs-methods/themus/themus.schemas.in.h:1
+msgid "If set to true, then installed themes will be thumbnailed."
+msgstr "Om detta är sant kommer installerade teman att få miniatyrbilder."
+
+#: vfs-methods/themus/themus.schemas.in.h:2
+msgid "If set to true, then themes will be thumbnailed."
+msgstr "Om detta är sant kommer teman att få miniatyrbilder."
+
+#: vfs-methods/themus/themus.schemas.in.h:3
+msgid ""
+"Set this key to the command used to create thumbnails for installed themes."
+msgstr ""
+"Ställ in denna nyckel till kommandot som ska användas för att skapa "
+"miniatyrbilder för installerade teman."
+
+#: vfs-methods/themus/themus.schemas.in.h:4
+msgid "Set this key to the command used to create thumbnails for themes."
+msgstr ""
+"Ställ in denna nyckel till kommandot som ska användas för att skapa "
+"miniatyrbilder för teman."
+
+#: vfs-methods/themus/themus.schemas.in.h:5
+msgid "Thumbnail command for installed themes"
+msgstr "Miniatyrbildskommando för installerade teman"
+
+#: vfs-methods/themus/themus.schemas.in.h:6
+msgid "Thumbnail command for themes"
+msgstr "Miniatyrbildskommando för teman"
+
+#: vfs-methods/themus/themus.schemas.in.h:7
+msgid "Whether to thumbnail installed themes"
+msgstr "Huruvida det ska skapas miniatyrbilder för installerade teman"
+
+#: vfs-methods/themus/themus.schemas.in.h:8
+msgid "Whether to thumbnail themes"
+msgstr "Huruvida det ska skapas miniatyrbilder för teman"
+
+#~ msgid "Enable Bo_unce Keys"
+#~ msgstr "Aktivera st_udsande tangenter"
+
+#~ msgid "Enable Slo_w Keys"
+#~ msgstr "Aktivera l_ångsamma tangenter"
+
+#~ msgid "Enable _Mouse Keys"
+#~ msgstr "Aktivera _mustangenter"
+
+#~ msgid "Enable _Repeat Keys"
+#~ msgstr "Aktivera _repeteringstangenter"
+
+#~ msgid "Enable _Sticky Keys"
+#~ msgstr "Aktivera _klistriga tangenter"
+
+#~ msgid "Features"
+#~ msgstr "Funktioner"
+
+#~ msgid "Toggle Keys"
+#~ msgstr "Växlingsknappar"
+
+#~ msgid "Resolution"
+#~ msgstr "Upplösning"
+
+#~ msgid "Screen %d Settings"
+#~ msgstr "Inställningar för skärm %d"
+
+#~ msgid ""
+#~ "This theme suggests a\n"
+#~ "font and background"
+#~ msgstr ""
+#~ "Detta tema föreslår ett\n"
+#~ "typsnitt och en bakgrund"
+
+#~ msgid "Cannot determine user's home folder"
+#~ msgstr "Kan inte avgöra användarens hemmapp"
 
 #~ msgid "_Repeat Keys"
 #~ msgstr "_Repeteringstangenter"
@@ -3669,9 +3786,6 @@ msgstr ""
 
 #~ msgid "Stopping esd\n"
 #~ msgstr "Stoppar esd\n"
-
-#~ msgid "Themes"
-#~ msgstr "Teman"
 
 #~ msgid "_Program to execute"
 #~ msgstr "_Program att köra"
@@ -5145,3 +5259,18 @@ msgstr ""
 
 #~ msgid "Delay until repeat:"
 #~ msgstr "Fördröjning innan repetering:"
+
+#~ msgid "GNOME desktop theme"
+#~ msgstr "GNOME-skrivbordstema"
+
+#~ msgid "Installed GNOME desktop theme"
+#~ msgstr "Installerat GNOME-skrivbordstema"
+
+#~ msgid "User Interface"
+#~ msgstr "Användargränssnitt"
+
+#~ msgid "GNOME desktop themes"
+#~ msgstr "GNOME-skrivbordsteman"
+
+#~ msgid "Installed GNOME desktop themes"
+#~ msgstr "Installerade GNOME-skrivbordsteman"
