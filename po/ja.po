@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center CVS-20010216\n"
-"POT-Creation-Date: 2001-07-25 05:03-0500\n"
+"POT-Creation-Date: 2001-07-27 11:23-0400\n"
 "PO-Revision-Date: 2001-07-20 13:55+0900\n"
 "Last-Translator: Akira TAGOH <tagoh@gnome.gr.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
@@ -172,12 +172,12 @@ msgstr ""
 msgid "Options for adding and removing backends"
 msgstr ""
 
-#: capplets/background/applier.c:386
+#: capplets/background/applier.c:354
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr "pixbuf \"%s\" をロードすることが出来ませんでした; 壁紙を無効にします"
 
-#: capplets/background/applier.c:539
+#: capplets/background/applier.c:500
 msgid "Disabled"
 msgstr "無設定"
 
@@ -239,6 +239,40 @@ msgstr "タイル"
 
 #: capplets/background/background-properties.glade.h:13
 msgid "Vertical gradient"
+msgstr ""
+
+#: capplets/background/prefs-widget.c:362
+msgid "(None)"
+msgstr "(なし)"
+
+#: capplets/background/prefs-widget.c:611
+msgid "Wallpaper Selection"
+msgstr "壁紙選択"
+
+#: capplets/background/prefs-widget.c:618
+msgid "Can't find an hbox, using a normal file selection"
+msgstr "hboxが見つからないので、普通のファイル選択を使います"
+
+#: capplets/background/prefs-widget.c:624
+#: capplets/screensaver/screensaver-properties.glade.h:11
+msgid "Preview"
+msgstr "試写"
+
+#: capplets/common/capplet-util.c:490
+msgid "Just apply settings and quit"
+msgstr ""
+
+#: capplets/common/capplet-util.c:492
+#, fuzzy
+msgid "Initialize the session"
+msgstr "セッションの普通のメンバーです。"
+
+#: capplets/common/capplet-util.c:494
+msgid "Retrieve and store legacy settings"
+msgstr ""
+
+#: capplets/common/capplet-util.c:503
+msgid "Capplet options"
 msgstr ""
 
 #: capplets/default-applications/default-applications.desktop.in.in.h:1
@@ -436,6 +470,17 @@ msgstr "下にコマンドラインを入力してください"
 msgid "Terminal"
 msgstr "端末内で動かす"
 
+#: capplets/default-applications/support.c:100
+#: capplets/default-applications/support.c:138
+#, c-format
+msgid "Couldn't find pixmap file: %s"
+msgstr ""
+
+#: capplets/default-applications/support.c:116
+#, c-format
+msgid "Couldn't create pixmap from file: %s"
+msgstr ""
+
 #: capplets/keyboard/keyboard-properties.glade.h:9
 #: capplets/keyboard/keyboard.desktop.in.in.h:1
 msgid "Keyboard"
@@ -456,7 +501,7 @@ msgstr "クリック音の大きさ"
 
 #: capplets/keyboard/keyboard-properties.glade.h:3
 #, fuzzy
-msgid "Delay until repeat:"
+msgid "Delay before repeat:"
 msgstr "リピートまでの間隔"
 
 #: capplets/keyboard/keyboard-properties.glade.h:4
@@ -674,10 +719,6 @@ msgstr "サスペンドモードまで"
 #: capplets/screensaver/screensaver-properties.glade.h:10
 msgid "One screensaver all the time"
 msgstr "常に一つのスクリーンセーバー"
-
-#: capplets/screensaver/screensaver-properties.glade.h:11
-msgid "Preview"
-msgstr "試写"
 
 #: capplets/screensaver/screensaver-properties.glade.h:12
 #, fuzzy
@@ -1373,6 +1414,16 @@ msgstr "起動時に音サーバーを使う"
 msgid "Sounds for events"
 msgstr "イベントに対して効果音を鳴らす"
 
+#: control-center/Gnome.directory.in.in.h:1
+#, fuzzy
+msgid "Main"
+msgstr "保存中"
+
+#: control-center/Gnome.directory.in.in.h:2
+#, fuzzy
+msgid "Main Settings"
+msgstr "設定"
+
 #: control-center/capplet-dir-view.c:296 control-center/gnomecc.desktop.in.h:1
 msgid "GNOME Control Center"
 msgstr "GNOMEコントロールセンター"
@@ -1397,6 +1448,11 @@ msgstr ""
 #: control-center/capplet-dir-view.c:459
 msgid "Close"
 msgstr "閉じる"
+
+#: control-center/capplet-dir-view-html.c:150
+#, fuzzy
+msgid "GNOME Control Center:"
+msgstr "GNOMEコントロールセンター"
 
 #: control-center/gnomecc.desktop.in.h:2
 msgid "The GNOME configuration tool"
@@ -1437,6 +1493,24 @@ msgstr ""
 #: control-center/gnomecc.glade.h:9
 msgid "Put control panels in the control center's window"
 msgstr ""
+
+#: control-center/main.c:46
+#, fuzzy
+msgid "Configuraiton"
+msgstr "マウスの動き"
+
+#: control-center/main.c:72
+msgid "Run the capplet CAPPLET"
+msgstr ""
+
+#: control-center/main.c:72
+msgid "CAPPLET"
+msgstr ""
+
+#: control-center/main.c:80
+#, fuzzy
+msgid "GNOME Control Center options"
+msgstr "GNOMEコントロールセンター"
 
 #: capplets/desktop-links/gnome-hint-properties.desktop.in.h:1
 msgid "Options for the startup hint dialog"
@@ -1512,9 +1586,6 @@ msgstr "スタートアップヒント"
 #~ msgid "Workspaces"
 #~ msgstr "ワークスペース"
 
-#~ msgid "(None)"
-#~ msgstr "(なし)"
-
 #, fuzzy
 #~ msgid "Adjust wallpaper's transparency"
 #~ msgstr "壁紙の不透明度を調整"
@@ -1549,12 +1620,6 @@ msgstr "スタートアップヒント"
 
 #~ msgid "Wallpaper"
 #~ msgstr "壁紙"
-
-#~ msgid "Wallpaper Selection"
-#~ msgstr "壁紙選択"
-
-#~ msgid "Can't find an hbox, using a normal file selection"
-#~ msgstr "hboxが見つからないので、普通のファイル選択を使います"
 
 #~ msgid "....a"
 #~ msgstr "....a"
@@ -2205,12 +2270,6 @@ msgstr "スタートアップヒント"
 
 #~ msgid "Running"
 #~ msgstr "実行中"
-
-#~ msgid "A normal member of the session."
-#~ msgstr "セッションの普通のメンバーです。"
-
-#~ msgid "Saving"
-#~ msgstr "保存中"
 
 #~ msgid "Saving session details."
 #~ msgstr "セッションの詳細を保存中。"

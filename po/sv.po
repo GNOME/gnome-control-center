@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2001-07-26 19:43+0200\n"
+"POT-Creation-Date: 2001-07-27 11:23-0400\n"
 "PO-Revision-Date: 2001-07-26 20:11+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -173,12 +173,12 @@ msgstr "Flaggor för tillägg eller namnbyte av platser"
 msgid "Options for adding and removing backends"
 msgstr "Flaggor för tillägg och borttagande av backend"
 
-#: capplets/background/applier.c:388
+#: capplets/background/applier.c:354
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr "Kunde inte läsa in bilden \"%s\"; slår av bakgrundsbild."
 
-#: capplets/background/applier.c:543
+#: capplets/background/applier.c:500
 msgid "Disabled"
 msgstr "Avslagen"
 
@@ -259,19 +259,19 @@ msgstr "Kan inte hitta en hbox, använder normal filmarkering"
 msgid "Preview"
 msgstr "Förhandsgranska"
 
-#: capplets/common/capplet-util.c:487
+#: capplets/common/capplet-util.c:490
 msgid "Just apply settings and quit"
 msgstr "Verkställ ändringarna och avsluta"
 
-#: capplets/common/capplet-util.c:489
+#: capplets/common/capplet-util.c:492
 msgid "Initialize the session"
 msgstr "Initiera sessionen"
 
-#: capplets/common/capplet-util.c:491
+#: capplets/common/capplet-util.c:494
 msgid "Retrieve and store legacy settings"
 msgstr "Hämta och lagra föråldrade inställningar"
 
-#: capplets/common/capplet-util.c:500
+#: capplets/common/capplet-util.c:503
 msgid "Capplet options"
 msgstr "Alternativ för kontrollpanelsprogram"
 
@@ -374,9 +374,8 @@ msgid ""
 "Does this web browser support the netscape remote control protocol?  If in "
 "doubt, and this web browser isn't Netscape or Mozilla, it probably doesn't."
 msgstr ""
-"Förstår denna webbläsare Netscapes fjärrstyrningsprotokoll? Om du är "
-"osäker, och webbläsaren inte är Netscape eller Mozilla, är det troligtvis "
-"inte så."
+"Förstår denna webbläsare Netscapes fjärrstyrningsprotokoll? Om du är osäker, "
+"och webbläsaren inte är Netscape eller Mozilla, är det troligtvis inte så."
 
 #: capplets/default-applications/interface.c:352
 msgid "Please enter the command line used to start this web browser"
@@ -492,8 +491,9 @@ msgid "Click volume"
 msgstr "Klickvolym"
 
 #: capplets/keyboard/keyboard-properties.glade.h:3
-msgid "Delay until repeat:"
-msgstr "Fördröjning innan repetering:"
+#, fuzzy
+msgid "Delay before repeat:"
+msgstr "Fördröjning innan näxta omritning"
 
 #: capplets/keyboard/keyboard-properties.glade.h:4
 msgid "Duration (ms)"
@@ -1397,6 +1397,15 @@ msgstr "Slå på uppstart av ljudserver"
 msgid "Sounds for events"
 msgstr "Ljud för händelser"
 
+#: control-center/Gnome.directory.in.in.h:1
+msgid "Main"
+msgstr ""
+
+#: control-center/Gnome.directory.in.in.h:2
+#, fuzzy
+msgid "Main Settings"
+msgstr "Inställningar"
+
 #: control-center/capplet-dir-view.c:296 control-center/gnomecc.desktop.in.h:1
 msgid "GNOME Control Center"
 msgstr "GNOME-kontrollpanelen"
@@ -1490,6 +1499,9 @@ msgstr "Inställningar för uppstartstips-dialogen"
 #: capplets/desktop-links/gnome-hint-properties.desktop.in.h:2
 msgid "Startup Hint"
 msgstr "Uppstartstips"
+
+#~ msgid "Delay until repeat:"
+#~ msgstr "Fördröjning innan repetering:"
 
 #~ msgid "Operate on global backends"
 #~ msgstr "Verka på globala backender"

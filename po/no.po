@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.3.0\n"
-"POT-Creation-Date: 2001-07-25 21:13+0200\n"
+"POT-Creation-Date: 2001-07-27 11:23-0400\n"
 "PO-Revision-Date: 2001-07-25 21:13+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
@@ -171,12 +171,12 @@ msgstr "Alternativer for å legge til eller endre navn på lokasjoner"
 msgid "Options for adding and removing backends"
 msgstr "Alternativer for å legge til og fjerne undersystemer"
 
-#: capplets/background/applier.c:386
+#: capplets/background/applier.c:354
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr "Kunne ikke laste pixbuf \"%s\"; slår av bakgrunn."
 
-#: capplets/background/applier.c:539
+#: capplets/background/applier.c:500
 msgid "Disabled"
 msgstr "Slått av"
 
@@ -257,19 +257,19 @@ msgstr "Kan ikke finne en hbox, bruker vanlig filvalg"
 msgid "Preview"
 msgstr "Forhåndsvisning"
 
-#: capplets/common/capplet-util.c:487
+#: capplets/common/capplet-util.c:490
 msgid "Just apply settings and quit"
 msgstr "Bare aktiver innstillingene og avslutt"
 
-#: capplets/common/capplet-util.c:489
+#: capplets/common/capplet-util.c:492
 msgid "Initialize the session"
 msgstr "Initier sesjonen"
 
-#: capplets/common/capplet-util.c:491
+#: capplets/common/capplet-util.c:494
 msgid "Retrieve and store legacy settings"
 msgstr "Hent og lagre gamle innstillinger"
 
-#: capplets/common/capplet-util.c:500
+#: capplets/common/capplet-util.c:503
 msgid "Capplet options"
 msgstr "Alternativer for capplet"
 
@@ -419,8 +419,8 @@ msgstr "Godtar denne hjelp-leseren URLer for hjelp?"
 #: capplets/default-applications/interface.c:483
 msgid "Please enter the command line used to start this help viewer"
 msgstr ""
-"Vennligst skriv inn kommandolinjen som brukes for å starte denne hjelp-"
-"leseren"
+"Vennligst skriv inn kommandolinjen som brukes for å starte denne "
+"hjelp-leseren"
 
 #: capplets/default-applications/interface.c:494
 msgid "Help Viewer"
@@ -493,8 +493,9 @@ msgid "Click volume"
 msgstr "Klikkvolum"
 
 #: capplets/keyboard/keyboard-properties.glade.h:3
-msgid "Delay until repeat:"
-msgstr "Pause før gjentakelse:"
+#, fuzzy
+msgid "Delay before repeat:"
+msgstr "Pause før neste opptegning"
 
 #: capplets/keyboard/keyboard-properties.glade.h:4
 msgid "Duration (ms)"
@@ -594,14 +595,6 @@ msgstr "Høyrehendt"
 msgid "Sensitivity:"
 msgstr "Følsomhet:"
 
-#: capplets/rollback/main.c:37
-msgid "Operate on global backends"
-msgstr "Arbeid på globale undersystemer"
-
-#: capplets/rollback/main.c:50
-msgid "Options for the rollback GUI"
-msgstr "Alternativer for GUI for gjenoppretting"
-
 #: capplets/screensaver/preferences.c:508
 msgid "Custom screensaver. No description available"
 msgstr "Egendefinert skjermsparer. Ingen beskrivelse tilgjengelig"
@@ -690,13 +683,14 @@ msgid ""
 "Draws quasiperiodic tilings; think of the implications on modern formica "
 "technology. Written by Time Korlove. In April 1997, Sir Roger Penrose, a "
 "British math professor who has worked with Stephen Hawking on such topics as "
-"relatvity, black holes, and whether time has a beginning, files a copyright-"
-"infringement lawsuit against Kimberly-Clark Corporation, wchih Penrose said "
-"copied a pattern he created ( apattern demonstrating that \"a nonrepeating "
-"pattern could exist in nature\") for its Kleenex quilted toilet paper. "
+"relatvity, black holes, and whether time has a beginning, files a "
+"copyright-infringement lawsuit against Kimberly-Clark Corporation, wchih "
+"Penrose said copied a pattern he created ( apattern demonstrating that \"a "
+"nonrepeating pattern could exist in nature\") for its Kleenex quilted toilet "
+"paper. "
 msgstr ""
-"Tegner kvasiperiodiske fliser; tenk på implikasjonene av moderne formica-"
-"teknologi. Skrevet av Time Korlove. I april 1997"
+"Tegner kvasiperiodiske fliser; tenk på implikasjonene av moderne "
+"formica-teknologi. Skrevet av Time Korlove. I april 1997"
 
 #: capplets/screensaver/screensaver-properties.glade.h:7
 msgid "Enable _power management"
@@ -1399,6 +1393,15 @@ msgstr "Slå på oppstart av lydtjener"
 msgid "Sounds for events"
 msgstr "Slå på lyd for hendelser"
 
+#: control-center/Gnome.directory.in.in.h:1
+msgid "Main"
+msgstr ""
+
+#: control-center/Gnome.directory.in.in.h:2
+#, fuzzy
+msgid "Main Settings"
+msgstr "Innstillinger"
+
 #: control-center/capplet-dir-view.c:296 control-center/gnomecc.desktop.in.h:1
 msgid "GNOME Control Center"
 msgstr "GNOME Kontrollsenter"
@@ -1491,6 +1494,15 @@ msgstr "Alternativer for dialogen for hint ved oppstart"
 #: capplets/desktop-links/gnome-hint-properties.desktop.in.h:2
 msgid "Startup Hint"
 msgstr "Hint ved oppstart"
+
+#~ msgid "Delay until repeat:"
+#~ msgstr "Pause før gjentakelse:"
+
+#~ msgid "Operate on global backends"
+#~ msgstr "Arbeid på globale undersystemer"
+
+#~ msgid "Options for the rollback GUI"
+#~ msgstr "Alternativer for GUI for gjenoppretting"
 
 #~ msgid "Set background image."
 #~ msgstr "Sett bakgrunnsbilde."

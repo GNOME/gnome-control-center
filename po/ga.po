@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center CVS\n"
-"POT-Creation-Date: 2001-07-25 05:03-0500\n"
+"POT-Creation-Date: 2001-07-27 11:23-0400\n"
 "PO-Revision-Date: 2000-03-11 01:02+0000\n"
 "Last-Translator:Alastair McKinstry <mckinstry@computer.org>\n"
 "Language-Team: Alastair McKinstry <mckinstry@computer.org>\n"
@@ -173,12 +173,12 @@ msgstr ""
 msgid "Options for adding and removing backends"
 msgstr ""
 
-#: capplets/background/applier.c:386
+#: capplets/background/applier.c:354
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr ""
 
-#: capplets/background/applier.c:539
+#: capplets/background/applier.c:500
 msgid "Disabled"
 msgstr "Míchumasach"
 
@@ -249,6 +249,42 @@ msgstr "Leacaithe"
 #, fuzzy
 msgid "Vertical gradient"
 msgstr "Gradan"
+
+#: capplets/background/prefs-widget.c:362
+#, fuzzy
+msgid "(None)"
+msgstr "tada"
+
+#: capplets/background/prefs-widget.c:611
+#, fuzzy
+msgid "Wallpaper Selection"
+msgstr "Rogha Paipiar balla"
+
+#: capplets/background/prefs-widget.c:618
+msgid "Can't find an hbox, using a normal file selection"
+msgstr ""
+
+#: capplets/background/prefs-widget.c:624
+#: capplets/screensaver/screensaver-properties.glade.h:11
+msgid "Preview"
+msgstr ""
+
+#: capplets/common/capplet-util.c:490
+msgid "Just apply settings and quit"
+msgstr ""
+
+#: capplets/common/capplet-util.c:492
+msgid "Initialize the session"
+msgstr ""
+
+#: capplets/common/capplet-util.c:494
+msgid "Retrieve and store legacy settings"
+msgstr ""
+
+#: capplets/common/capplet-util.c:503
+#, fuzzy
+msgid "Capplet options"
+msgstr "Uirlisîn"
 
 #: capplets/default-applications/default-applications.desktop.in.in.h:1
 msgid "Choose the applications used by default"
@@ -437,6 +473,17 @@ msgstr ""
 msgid "Terminal"
 msgstr "Triall ina bhfuinneog fiin"
 
+#: capplets/default-applications/support.c:100
+#: capplets/default-applications/support.c:138
+#, c-format
+msgid "Couldn't find pixmap file: %s"
+msgstr ""
+
+#: capplets/default-applications/support.c:116
+#, c-format
+msgid "Couldn't create pixmap from file: %s"
+msgstr ""
+
 #: capplets/keyboard/keyboard-properties.glade.h:9
 #: capplets/keyboard/keyboard.desktop.in.in.h:1
 #, fuzzy
@@ -458,7 +505,7 @@ msgid "Click volume"
 msgstr "Laine Cnioga"
 
 #: capplets/keyboard/keyboard-properties.glade.h:3
-msgid "Delay until repeat:"
+msgid "Delay before repeat:"
 msgstr ""
 
 #: capplets/keyboard/keyboard-properties.glade.h:4
@@ -680,10 +727,6 @@ msgstr ""
 
 #: capplets/screensaver/screensaver-properties.glade.h:10
 msgid "One screensaver all the time"
-msgstr ""
-
-#: capplets/screensaver/screensaver-properties.glade.h:11
-msgid "Preview"
 msgstr ""
 
 #: capplets/screensaver/screensaver-properties.glade.h:12
@@ -1383,6 +1426,16 @@ msgstr ""
 msgid "Sounds for events"
 msgstr ""
 
+#: control-center/Gnome.directory.in.in.h:1
+#, fuzzy
+msgid "Main"
+msgstr "ag Sábháil"
+
+#: control-center/Gnome.directory.in.in.h:2
+#, fuzzy
+msgid "Main Settings"
+msgstr "Cumriagh"
+
 #: control-center/capplet-dir-view.c:296 control-center/gnomecc.desktop.in.h:1
 msgid "GNOME Control Center"
 msgstr ""
@@ -1405,6 +1458,10 @@ msgstr ""
 #: control-center/capplet-dir-view.c:459
 msgid "Close"
 msgstr "Dún"
+
+#: control-center/capplet-dir-view-html.c:150
+msgid "GNOME Control Center:"
+msgstr ""
 
 #: control-center/gnomecc.desktop.in.h:2
 msgid "The GNOME configuration tool"
@@ -1447,6 +1504,23 @@ msgstr ""
 msgid "Put control panels in the control center's window"
 msgstr ""
 
+#: control-center/main.c:46
+#, fuzzy
+msgid "Configuraiton"
+msgstr "Cumramocht painial go leor"
+
+#: control-center/main.c:72
+msgid "Run the capplet CAPPLET"
+msgstr ""
+
+#: control-center/main.c:72
+msgid "CAPPLET"
+msgstr "CAPPLET"
+
+#: control-center/main.c:80
+msgid "GNOME Control Center options"
+msgstr ""
+
 #: capplets/desktop-links/gnome-hint-properties.desktop.in.h:1
 msgid "Options for the startup hint dialog"
 msgstr ""
@@ -1461,14 +1535,6 @@ msgstr ""
 
 #~ msgid "Miscellaneous"
 #~ msgstr "Teibi."
-
-#, fuzzy
-#~ msgid "(None)"
-#~ msgstr "tada"
-
-#, fuzzy
-#~ msgid "Wallpaper Selection"
-#~ msgstr "Rogha Paipiar balla"
 
 #~ msgid "Colors"
 #~ msgstr "Dathanna"
@@ -1581,10 +1647,6 @@ msgstr ""
 #~ msgid "Wide"
 #~ msgstr "Fan"
 
-#, fuzzy
-#~ msgid "Capplet"
-#~ msgstr "Uirlisîn"
-
 #~ msgid "Mime Type: "
 #~ msgstr "Saghas MIME:"
 
@@ -1688,9 +1750,6 @@ msgstr ""
 
 #~ msgid "Running"
 #~ msgstr "Ag rith"
-
-#~ msgid "Saving"
-#~ msgstr "ag Sábháil"
 
 #~ msgid "Unknown"
 #~ msgstr "Gan aithne"
@@ -1824,9 +1883,6 @@ msgstr ""
 
 #~ msgid "Help"
 #~ msgstr "Cabhair"
-
-#~ msgid "CAPPLET"
-#~ msgstr "CAPPLET"
 
 #~ msgid "Warning:"
 #~ msgstr "Rabhadh:"

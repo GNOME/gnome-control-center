@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.3.10\n"
-"POT-Creation-Date: 2001-07-25 05:03-0500\n"
+"POT-Creation-Date: 2001-07-27 11:23-0400\n"
 "PO-Revision-Date: 2001-07-14 22:00+0200\n"
 "Last-Translator: Carlos Perelló Marín <carlos@gnome-db.org>\n"
 "Language-Team: Spanish\n"
@@ -171,12 +171,12 @@ msgstr "Opciones para añadir o renombrar localizaciones"
 msgid "Options for adding and removing backends"
 msgstr "Opciones para añadir y eliminar backends"
 
-#: capplets/background/applier.c:386
+#: capplets/background/applier.c:354
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr "No pude cargar la imágen «%s»; desactivando imágen de fondo."
 
-#: capplets/background/applier.c:539
+#: capplets/background/applier.c:500
 msgid "Disabled"
 msgstr "Desactivado"
 
@@ -244,6 +244,39 @@ msgstr "Mosaico"
 #, fuzzy
 msgid "Vertical gradient"
 msgstr "Degradado vertical"
+
+#: capplets/background/prefs-widget.c:362
+msgid "(None)"
+msgstr "(Ninguno)"
+
+#: capplets/background/prefs-widget.c:611
+msgid "Wallpaper Selection"
+msgstr "Selección del fondo"
+
+#: capplets/background/prefs-widget.c:618
+msgid "Can't find an hbox, using a normal file selection"
+msgstr "No puedo encontrar un hbox, se usará una selección de archivos normal"
+
+#: capplets/background/prefs-widget.c:624
+#: capplets/screensaver/screensaver-properties.glade.h:11
+msgid "Preview"
+msgstr "Previsualizar"
+
+#: capplets/common/capplet-util.c:490
+msgid "Just apply settings and quit"
+msgstr ""
+
+#: capplets/common/capplet-util.c:492
+msgid "Initialize the session"
+msgstr ""
+
+#: capplets/common/capplet-util.c:494
+msgid "Retrieve and store legacy settings"
+msgstr ""
+
+#: capplets/common/capplet-util.c:503
+msgid "Capplet options"
+msgstr ""
 
 #: capplets/default-applications/default-applications.desktop.in.in.h:1
 msgid "Choose the applications used by default"
@@ -431,6 +464,17 @@ msgstr "Introduzca, a continuación, una línea de comando."
 msgid "Terminal"
 msgstr ""
 
+#: capplets/default-applications/support.c:100
+#: capplets/default-applications/support.c:138
+#, c-format
+msgid "Couldn't find pixmap file: %s"
+msgstr ""
+
+#: capplets/default-applications/support.c:116
+#, c-format
+msgid "Couldn't create pixmap from file: %s"
+msgstr ""
+
 #: capplets/keyboard/keyboard-properties.glade.h:9
 #: capplets/keyboard/keyboard.desktop.in.in.h:1
 msgid "Keyboard"
@@ -449,8 +493,9 @@ msgid "Click volume"
 msgstr "Volumen del clic"
 
 #: capplets/keyboard/keyboard-properties.glade.h:3
-msgid "Delay until repeat:"
-msgstr "Retraso antes de la repetición:"
+#, fuzzy
+msgid "Delay before repeat:"
+msgstr "Retardo antes de dibujar de nuevo"
 
 #: capplets/keyboard/keyboard-properties.glade.h:4
 msgid "Duration (ms)"
@@ -660,10 +705,6 @@ msgstr "Cambiar al modo suspendido despues"
 #: capplets/screensaver/screensaver-properties.glade.h:10
 msgid "One screensaver all the time"
 msgstr "Un solo salvapantalla"
-
-#: capplets/screensaver/screensaver-properties.glade.h:11
-msgid "Preview"
-msgstr "Previsualizar"
 
 #: capplets/screensaver/screensaver-properties.glade.h:12
 msgid "R_equire password to unlock screen"
@@ -1350,6 +1391,15 @@ msgstr "Activar el lanzamiento del servidor de sonido"
 msgid "Sounds for events"
 msgstr "Sonidos para los eventos"
 
+#: control-center/Gnome.directory.in.in.h:1
+msgid "Main"
+msgstr ""
+
+#: control-center/Gnome.directory.in.in.h:2
+#, fuzzy
+msgid "Main Settings"
+msgstr "Parámetros"
+
 #: control-center/capplet-dir-view.c:296 control-center/gnomecc.desktop.in.h:1
 msgid "GNOME Control Center"
 msgstr "Centro de Control de GNOME"
@@ -1374,6 +1424,11 @@ msgstr ""
 #: control-center/capplet-dir-view.c:459
 msgid "Close"
 msgstr "Cerrar"
+
+#: control-center/capplet-dir-view-html.c:150
+#, fuzzy
+msgid "GNOME Control Center:"
+msgstr "Centro de Control de GNOME"
 
 #: control-center/gnomecc.desktop.in.h:2
 msgid "The GNOME configuration tool"
@@ -1415,6 +1470,24 @@ msgstr "Nuevo-centro-de-control"
 msgid "Put control panels in the control center's window"
 msgstr "Poner los paneles de control en la ventana del centro de control"
 
+#: control-center/main.c:46
+#, fuzzy
+msgid "Configuraiton"
+msgstr "Configuración del ratón"
+
+#: control-center/main.c:72
+msgid "Run the capplet CAPPLET"
+msgstr ""
+
+#: control-center/main.c:72
+msgid "CAPPLET"
+msgstr ""
+
+#: control-center/main.c:80
+#, fuzzy
+msgid "GNOME Control Center options"
+msgstr "Centro de Control de GNOME"
+
 #: capplets/desktop-links/gnome-hint-properties.desktop.in.h:1
 msgid "Options for the startup hint dialog"
 msgstr "Opciones del diálogo de consejos de inicio"
@@ -1422,6 +1495,9 @@ msgstr "Opciones del diálogo de consejos de inicio"
 #: capplets/desktop-links/gnome-hint-properties.desktop.in.h:2
 msgid "Startup Hint"
 msgstr "Consejos de inicio"
+
+#~ msgid "Delay until repeat:"
+#~ msgstr "Retraso antes de la repetición:"
 
 #~ msgid "Control Center Menu"
 #~ msgstr "Menú del Centro de Control de Gnome"
@@ -1488,16 +1564,6 @@ msgstr "Consejos de inicio"
 
 #~ msgid "Workspaces"
 #~ msgstr "Escritorios"
-
-#~ msgid "(None)"
-#~ msgstr "(Ninguno)"
-
-#~ msgid "Wallpaper Selection"
-#~ msgstr "Selección del fondo"
-
-#~ msgid "Can't find an hbox, using a normal file selection"
-#~ msgstr ""
-#~ "No puedo encontrar un hbox, se usará una selección de archivos normal"
 
 #~ msgid "Adjust wallpaper's transparency"
 #~ msgstr "Ajusta la transparencia de la imágen de fondo"

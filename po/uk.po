@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0.6\n"
-"POT-Creation-Date: 2001-07-25 05:03-0500\n"
+"POT-Creation-Date: 2001-07-27 11:23-0400\n"
 "PO-Revision-Date: 1999-10-27 09:02+0200\n"
 "Last-Translator: Yuri Syrota <rasta@renome.rovno.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -169,12 +169,12 @@ msgstr ""
 msgid "Options for adding and removing backends"
 msgstr ""
 
-#: capplets/background/applier.c:386
+#: capplets/background/applier.c:354
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr ""
 
-#: capplets/background/applier.c:539
+#: capplets/background/applier.c:500
 msgid "Disabled"
 msgstr "Нема╓"
 
@@ -242,6 +242,41 @@ msgstr "Моза╖ка"
 
 #: capplets/background/background-properties.glade.h:13
 msgid "Vertical gradient"
+msgstr ""
+
+#: capplets/background/prefs-widget.c:362
+#, fuzzy
+msgid "(None)"
+msgstr "нема╓"
+
+#: capplets/background/prefs-widget.c:611
+msgid "Wallpaper Selection"
+msgstr "Виб╕р шпалер"
+
+#: capplets/background/prefs-widget.c:618
+msgid "Can't find an hbox, using a normal file selection"
+msgstr "Не знайдено hbox, використову╓ться звичайний виб╕р файл╕в"
+
+#: capplets/background/prefs-widget.c:624
+#: capplets/screensaver/screensaver-properties.glade.h:11
+msgid "Preview"
+msgstr "Перегляд"
+
+#: capplets/common/capplet-util.c:490
+msgid "Just apply settings and quit"
+msgstr ""
+
+#: capplets/common/capplet-util.c:492
+#, fuzzy
+msgid "Initialize the session"
+msgstr "Звичайний учасник сеанса."
+
+#: capplets/common/capplet-util.c:494
+msgid "Retrieve and store legacy settings"
+msgstr ""
+
+#: capplets/common/capplet-util.c:503
+msgid "Capplet options"
 msgstr ""
 
 #: capplets/default-applications/default-applications.desktop.in.in.h:1
@@ -438,6 +473,17 @@ msgstr "Цей стовпчик визнача╓ команду для запуску програми."
 msgid "Terminal"
 msgstr "Запускати в терм╕нал╕"
 
+#: capplets/default-applications/support.c:100
+#: capplets/default-applications/support.c:138
+#, c-format
+msgid "Couldn't find pixmap file: %s"
+msgstr ""
+
+#: capplets/default-applications/support.c:116
+#, c-format
+msgid "Couldn't create pixmap from file: %s"
+msgstr ""
+
 #: capplets/keyboard/keyboard-properties.glade.h:9
 #: capplets/keyboard/keyboard.desktop.in.in.h:1
 msgid "Keyboard"
@@ -457,7 +503,7 @@ msgid "Click volume"
 msgstr "Гучн╕сть клацання"
 
 #: capplets/keyboard/keyboard-properties.glade.h:3
-msgid "Delay until repeat:"
+msgid "Delay before repeat:"
 msgstr ""
 
 #: capplets/keyboard/keyboard-properties.glade.h:4
@@ -678,10 +724,6 @@ msgstr ""
 #: capplets/screensaver/screensaver-properties.glade.h:10
 msgid "One screensaver all the time"
 msgstr ""
-
-#: capplets/screensaver/screensaver-properties.glade.h:11
-msgid "Preview"
-msgstr "Перегляд"
 
 #: capplets/screensaver/screensaver-properties.glade.h:12
 #, fuzzy
@@ -1392,6 +1434,16 @@ msgstr "Дозволити запуск сервера звуку"
 msgid "Sounds for events"
 msgstr "Звуки для под╕й"
 
+#: control-center/Gnome.directory.in.in.h:1
+#, fuzzy
+msgid "Main"
+msgstr "Збереження"
+
+#: control-center/Gnome.directory.in.in.h:2
+#, fuzzy
+msgid "Main Settings"
+msgstr "Установки"
+
 #: control-center/capplet-dir-view.c:296 control-center/gnomecc.desktop.in.h:1
 msgid "GNOME Control Center"
 msgstr "Центр керування GNOME"
@@ -1416,6 +1468,11 @@ msgstr ""
 #: control-center/capplet-dir-view.c:459
 msgid "Close"
 msgstr "Закрити"
+
+#: control-center/capplet-dir-view-html.c:150
+#, fuzzy
+msgid "GNOME Control Center:"
+msgstr "Центр керування GNOME"
 
 #: control-center/gnomecc.desktop.in.h:2
 msgid "The GNOME configuration tool"
@@ -1458,6 +1515,24 @@ msgstr ""
 msgid "Put control panels in the control center's window"
 msgstr ""
 
+#: control-center/main.c:46
+#, fuzzy
+msgid "Configuraiton"
+msgstr "Рух миш╕"
+
+#: control-center/main.c:72
+msgid "Run the capplet CAPPLET"
+msgstr ""
+
+#: control-center/main.c:72
+msgid "CAPPLET"
+msgstr ""
+
+#: control-center/main.c:80
+#, fuzzy
+msgid "GNOME Control Center options"
+msgstr "Центр керування GNOME"
+
 #: capplets/desktop-links/gnome-hint-properties.desktop.in.h:1
 msgid "Options for the startup hint dialog"
 msgstr "Параметри д╕алогу стартових порад"
@@ -1492,16 +1567,6 @@ msgstr "Стартов╕ поради"
 #, fuzzy
 #~ msgid "Configure workspaces"
 #~ msgstr "Використовувати енергозбереження."
-
-#, fuzzy
-#~ msgid "(None)"
-#~ msgstr "нема╓"
-
-#~ msgid "Wallpaper Selection"
-#~ msgstr "Виб╕р шпалер"
-
-#~ msgid "Can't find an hbox, using a normal file selection"
-#~ msgstr "Не знайдено hbox, використову╓ться звичайний виб╕р файл╕в"
 
 #, fuzzy
 #~ msgid "Browse..."
@@ -2097,12 +2162,6 @@ msgstr "Стартов╕ поради"
 
 #~ msgid "Running"
 #~ msgstr "Виконання"
-
-#~ msgid "A normal member of the session."
-#~ msgstr "Звичайний учасник сеанса."
-
-#~ msgid "Saving"
-#~ msgstr "Збереження"
 
 #~ msgid "Saving session details."
 #~ msgstr "Збереження подробиць сеанса."

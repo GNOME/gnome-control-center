@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Gnome kontrolcenter 1.3.0\n"
-"POT-Creation-Date: 2001-07-25 05:03-0500\n"
+"POT-Creation-Date: 2001-07-27 11:23-0400\n"
 "PO-Revision-Date: 2000-06-19 19:28GMT +0200\n"
 "Last-Translator: Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>\n"
 "Language-Team: Azerbaijani Turkish <linuxaz@azerimal.net>\n"
@@ -173,14 +173,14 @@ msgstr ""
 msgid "Options for adding and removing backends"
 msgstr ""
 
-#: capplets/background/applier.c:386
+#: capplets/background/applier.c:354
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr ""
 "Rəsm buferi '%s' yüklənə bilmədi; divar kağızı fəaliyyəti "
 "dayandırılır."
 
-#: capplets/background/applier.c:539
+#: capplets/background/applier.c:500
 msgid "Disabled"
 msgstr "Bağlı"
 
@@ -247,6 +247,40 @@ msgstr "Döşənmiş"
 #, fuzzy
 msgid "Vertical gradient"
 msgstr "Şaquli Meyl"
+
+#: capplets/background/prefs-widget.c:362
+msgid "(None)"
+msgstr "(Heç Biri)"
+
+#: capplets/background/prefs-widget.c:611
+msgid "Wallpaper Selection"
+msgstr "Divar Kağızı Seçkisi"
+
+#: capplets/background/prefs-widget.c:618
+msgid "Can't find an hbox, using a normal file selection"
+msgstr "Heç bir hbox tapılmadı, sıravi fayl seçkisini istifadə edəcəm"
+
+#: capplets/background/prefs-widget.c:624
+#: capplets/screensaver/screensaver-properties.glade.h:11
+msgid "Preview"
+msgstr "Nümayiş"
+
+#: capplets/common/capplet-util.c:490
+msgid "Just apply settings and quit"
+msgstr ""
+
+#: capplets/common/capplet-util.c:492
+#, fuzzy
+msgid "Initialize the session"
+msgstr "İclasın normal üzvü."
+
+#: capplets/common/capplet-util.c:494
+msgid "Retrieve and store legacy settings"
+msgstr ""
+
+#: capplets/common/capplet-util.c:503
+msgid "Capplet options"
+msgstr ""
 
 #: capplets/default-applications/default-applications.desktop.in.in.h:1
 msgid "Choose the applications used by default"
@@ -443,6 +477,17 @@ msgstr "Xahiş edirik, aşaǧıdakı əmr sətirini girin."
 msgid "Terminal"
 msgstr "Terminalda Başlat"
 
+#: capplets/default-applications/support.c:100
+#: capplets/default-applications/support.c:138
+#, c-format
+msgid "Couldn't find pixmap file: %s"
+msgstr ""
+
+#: capplets/default-applications/support.c:116
+#, c-format
+msgid "Couldn't create pixmap from file: %s"
+msgstr ""
+
 #: capplets/keyboard/keyboard-properties.glade.h:9
 #: capplets/keyboard/keyboard.desktop.in.in.h:1
 #, fuzzy
@@ -465,8 +510,8 @@ msgstr "Tıqlama səviyyəsi"
 
 #: capplets/keyboard/keyboard-properties.glade.h:3
 #, fuzzy
-msgid "Delay until repeat:"
-msgstr "Təkrarlamaya Qədərki Gecikmə"
+msgid "Delay before repeat:"
+msgstr "Yenilənmələr arasındakı gecikmə"
 
 #: capplets/keyboard/keyboard-properties.glade.h:4
 msgid "Duration (ms)"
@@ -687,10 +732,6 @@ msgstr "Asılı hala keçmə müddəti: "
 #: capplets/screensaver/screensaver-properties.glade.h:10
 msgid "One screensaver all the time"
 msgstr "Həmişə tək ekran qoruyucu"
-
-#: capplets/screensaver/screensaver-properties.glade.h:11
-msgid "Preview"
-msgstr "Nümayiş"
 
 #: capplets/screensaver/screensaver-properties.glade.h:12
 #, fuzzy
@@ -1388,6 +1429,16 @@ msgstr "Səsli başlanǧıcı fəallaşdır"
 msgid "Sounds for events"
 msgstr "Hadisələr üçün səslər"
 
+#: control-center/Gnome.directory.in.in.h:1
+#, fuzzy
+msgid "Main"
+msgstr "Çox"
+
+#: control-center/Gnome.directory.in.in.h:2
+#, fuzzy
+msgid "Main Settings"
+msgstr "Qurğular"
+
 #: control-center/capplet-dir-view.c:296 control-center/gnomecc.desktop.in.h:1
 msgid "GNOME Control Center"
 msgstr "GNOME İdarə Mərkəzi"
@@ -1413,6 +1464,11 @@ msgstr ""
 #: control-center/capplet-dir-view.c:459
 msgid "Close"
 msgstr "Qapat"
+
+#: control-center/capplet-dir-view-html.c:150
+#, fuzzy
+msgid "GNOME Control Center:"
+msgstr "GNOME İdarə Mərkəzi"
 
 #: control-center/gnomecc.desktop.in.h:2
 msgid "The GNOME configuration tool"
@@ -1454,6 +1510,24 @@ msgstr "Yeni-idarə-mərkəzi"
 msgid "Put control panels in the control center's window"
 msgstr "İdarə paneləərini idarə mərkəzi pəncərəsinə qoy"
 
+#: control-center/main.c:46
+#, fuzzy
+msgid "Configuraiton"
+msgstr "Siçan hərəkətləri"
+
+#: control-center/main.c:72
+msgid "Run the capplet CAPPLET"
+msgstr ""
+
+#: control-center/main.c:72
+msgid "CAPPLET"
+msgstr ""
+
+#: control-center/main.c:80
+#, fuzzy
+msgid "GNOME Control Center options"
+msgstr "GNOME İdarə Mərkəzi"
+
 #: capplets/desktop-links/gnome-hint-properties.desktop.in.h:1
 msgid "Options for the startup hint dialog"
 msgstr ""
@@ -1462,6 +1536,10 @@ msgstr ""
 #, fuzzy
 msgid "Startup Hint"
 msgstr "Başladılır"
+
+#, fuzzy
+#~ msgid "Delay until repeat:"
+#~ msgstr "Təkrarlamaya Qədərki Gecikmə"
 
 #, fuzzy
 #~ msgid "Control Center Menu"
@@ -1501,16 +1579,6 @@ msgstr "Başladılır"
 #, fuzzy
 #~ msgid "Configure workspaces"
 #~ msgstr "Güc İdarəsi"
-
-#~ msgid "(None)"
-#~ msgstr "(Heç Biri)"
-
-#~ msgid "Wallpaper Selection"
-#~ msgstr "Divar Kağızı Seçkisi"
-
-#~ msgid "Can't find an hbox, using a normal file selection"
-#~ msgstr ""
-#~ "Heç bir hbox tapılmadı, sıravi fayl seçkisini istifadə edəcəm"
 
 #~ msgid "Adjust wallpaper's transparency"
 #~ msgstr "Divar kağızı şəffaflığını yaxşılaşdır"
@@ -1782,9 +1850,6 @@ msgstr "Başladılır"
 
 #~ msgid "Two"
 #~ msgstr "İki"
-
-#~ msgid "Many"
-#~ msgstr "Çox"
 
 #~ msgid "Faster"
 #~ msgstr "Daha Sür'ətli"
@@ -2317,9 +2382,6 @@ msgstr "Başladılır"
 
 #~ msgid "Running"
 #~ msgstr "İşləyir"
-
-#~ msgid "A normal member of the session."
-#~ msgstr "İclasın normal üzvü."
 
 #~ msgid "Saving"
 #~ msgstr "Qeyd edilir"
