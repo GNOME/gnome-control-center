@@ -59,7 +59,7 @@ typedef enum {
 	RESPONSE_USE_GNOME
 } SysConfigChangedMsgResponse;
 
-#define GSDKX
+#define noGSDKX
 
 #ifdef GSDKX
 static FILE *logfile;
