@@ -233,6 +233,8 @@ setup_xkb_tabs (GladeXML * dialog, GConfChangeSet * changeset)
   GSwitchItXkbConfigLoadInitial (&initialConfig);
 
   enable_disable_restoring (dialog);
+
+  init_preview(dialog);
 }
 
 void

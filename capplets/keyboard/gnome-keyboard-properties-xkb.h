@@ -58,5 +58,7 @@ extern void sort_tree_content (GtkWidget * treeView);
 
 extern void enable_disable_restoring(GladeXML * dialog);
 
+extern void init_preview(GladeXML * dialog);
+
 G_END_DECLS
 #endif				/* __GNOME_KEYBOARD_PROPERTY_XKB_H */
