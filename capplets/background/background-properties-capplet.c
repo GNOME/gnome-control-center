@@ -270,11 +270,11 @@ realize_cb (GtkWidget *widget, Preferences *prefs)
 static void
 setup_dialog (GtkWidget *widget, Bonobo_PropertyBag bag)
 {
-	GladeXML          *dialog;
-	Applier           *applier;
-	GtkObject         *prefs;
+	GladeXML                      *dialog;
+	Applier                       *applier;
+	GtkObject                     *prefs;
 
-	CORBA_Environment  ev;
+	CORBA_Environment              ev;
 
 	CORBA_exception_init (&ev);
 
@@ -304,6 +304,7 @@ setup_dialog (GtkWidget *widget, Bonobo_PropertyBag bag)
 		g_error ("Could not retrieve configuration from property bag (%s)", ev._repo_id);
 
 	gtk_object_set_data (prefs, "glade-data", dialog);
+
 	bonobo_event_source_client_add_listener (bag, (BonoboListenerCallbackFn) property_change_cb,
 						 NULL, NULL, prefs);
 
