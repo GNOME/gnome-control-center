@@ -1,5 +1,5 @@
 INCLUDES = 								\
-        -DGNOMELOCALEDIR=\""$(datadir)/locale"\" 			\
+        -DGNOMELOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\" 		\
 	-DGNOME_ICONDIR=\""${prefix}/share/pixmaps"\"			\
 	-DG_LOG_DOMAIN=\"capplet-common\"				\
 	-DGNOME_WINDOW_MANAGER_MODULE_PATH=\""$(libdir)/window-manager-settings"\" \

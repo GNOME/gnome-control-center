@@ -17,8 +17,8 @@ uidir = $(datadir)/gnome-2.0/ui
 ui_DATA = gnomecc-ui.xml
 
 INCLUDES = 							\
-	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" 		\
-	-DSETTINGS_DIR=\""$(GNOMECC_DESKTOP_DIR)"\"	\
+	-DGNOMELOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\" 	\
+	-DSETTINGS_DIR=\""$(GNOMECC_DESKTOP_DIR)"\"		\
 	-DPIXMAPS_DIR=\""$(appicondir)"\"			\
 	-DART_DIR=\""$(splashdir)"\"				\
 	-DGNOME_SBINDIR=\""$(sbindir)"\"			\

@@ -2,7 +2,7 @@ pixmapdir = $(datadir)/pixmaps
 pixmap_DATA = xst-keys.png
 
 INCLUDES = \
-	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"		\
+	-DGNOMELOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"	\
 	@RMHELPER_CFLAGS@					\
 	-DUH_PATH=\""$(sbindir)/root-manager"\"			\
 	-DUH_KEY_PIXMAP_PATH=\""$(pixmapdir)/xst-keys.png"\"	\

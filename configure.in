@@ -99,7 +99,7 @@ dnl ==============================================
 COMMON_CFLAGS="-I\$(top_srcdir)/capplets/common"
 COMMON_LIBS="\$(top_builddir)/capplets/common/libcommon.la"
 
-EXTRA_CFLAGS="-I\$(top_srcdir)/ -DG_LOG_DOMAIN=\"\\\"\$(cappletname)-properties\\\"\" -DGNOMELOCALEDIR=\"\\\"${datadir}/locale\\\"\""
+EXTRA_CFLAGS="-I\$(top_srcdir)/ -DG_LOG_DOMAIN=\"\\\"\$(cappletname)-properties\\\"\" -DGNOMELOCALEDIR=\"\\\"${prefix}/${DATADIRNAME}/locale\\\"\""
 
 GNOMECC_CAPPLETS_CFLAGS="${CAPPLET_CFLAGS} ${EXTRA_CFLAGS} ${COMMON_CFLAGS}"
 GNOMECC_CAPPLETS_LIBS="${CAPPLET_LIBS} ${COMMON_LIBS}"

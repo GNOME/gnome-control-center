@@ -7,7 +7,7 @@ Locationmeta_DATA = default-user.xml default-global.xml
 includedir = $(prefix)/include/config-archiver
 
 INCLUDES = 			\
-	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" 				\
+	-DGNOMELOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\" 				\
 	-I$(includedir)								\
 	$(GNOME_INCLUDEDIR)							\
 	-DVERSION=\""$(VERSION)"\"						\
