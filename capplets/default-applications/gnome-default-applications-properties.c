@@ -41,7 +41,7 @@ typedef struct _EditorDescription EditorDescription;
 typedef struct _HelpViewDescription HelpViewDescription;
 typedef struct _TerminalDesciption TerminalDescription;
 /* All defined below */
-#include "default-application-structs.c"
+#include "gnome-default-applications-properties-structs.c"
 
 static GConfClient *client = NULL;
 
