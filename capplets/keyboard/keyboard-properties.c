@@ -46,10 +46,10 @@ apply_settings (Bonobo_ConfigDatabase db)
 	int bell_volume, bell_pitch, bell_duration;
 
 	static int rates[] = {
-		255, 192, 128, 64
+		255, 192, 64, 1
 	};
 	static int delays[] = {
-		10000, 6000, 3000, 0
+		1000, 700, 300, 0
 	};
 
 #ifdef HAVE_X11_EXTENSIONS_XF86MISC_H
@@ -76,6 +76,7 @@ apply_settings (Bonobo_ConfigDatabase db)
 		{
 			kbdsettings.type = 0;
                         kbdsettings.rate = rates[rate];
+			g_message ("Setting rate to %d", kbdsettings.rate);
                         kbdsettings.delay = delays[delay];
 			kbdsettings.servnumlock = False;
                         XF86MiscSetKbdSettings (GDK_DISPLAY (), &kbdsettings);
