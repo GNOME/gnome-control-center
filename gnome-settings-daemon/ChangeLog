@@ -1,3 +1,17 @@
+2002-04-24  Jody Goldberg <jody@gnome.org>
+
+	* gnome-settings-accessibility-keyboard.c (set_server_from_gconf) :
+	  max speed is in pixels per _event_ not relative to time.  double
+	  check that we don't set 0.
+
+2002-04-24  Jody Goldberg <jody@gnome.org>
+
+	* gnome-settings-accessibility-keyboard.c
+	(gnome_settings_accessibility_keyboard_init) : we're only interested
+	  in control changes.
+	(set_gconf_from_server) : set both XkbAccessXKeysMask|XkbAccessXFeedbackMask
+	  when we enable accessX, and fix typo.
+
 2002-04-23  Jody Goldberg <jody@gnome.org>
 
 	* gnome-settings-accessibility-keyboard.c (get_xkb_desc_rec) :
@@ -12,6 +26,11 @@ Tue Apr 16 17:09:02 2002  Jonathan Blandford  <jrb@redhat.com>
 	* factory.c (main): Patch from Akira Tagoh <tagoh@gnome-db.org> to
 	change the restart command from gnome2-settings-daemon to
 	gnome-settings-daemon.
+
+2002-04-12  Jody Goldberg <jody@gnome.org>
+
+	* gnome-settings-accessibility-keyboard.c (set_server_from_gconf) :
+	  Doh! We need to clear the flags if they are disabled.
 
 2002-04-11  jacob berkman  <jacob@ximian.com>
 

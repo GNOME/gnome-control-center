@@ -1,8 +1,9 @@
+/* vim: set sw=8: -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /* gnome-settings-keyboard.c
  *
  * Copyright © 2001 Ximian, Inc.
  *
- * Written by Bradford Hovinen <hovinen@ximian.com>
+ * Written by Jody Goldberg <jody@gnome.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -35,6 +36,7 @@
 
 #define CONFIG_ROOT "/desktop/gnome/accessibility/keyboard"
 
+#undef DEBUG_ACCESSIBILITY
 #ifdef DEBUG_ACCESSIBILITY
 #define d(str)		fprintf (stderr, str)
 #else
@@ -119,13 +121,30 @@ set_bool (GConfClient *client, char const *key, int val)
 	}
 }
 
+static unsigned long
+set_clear (gboolean flag, unsigned long value, unsigned long mask)
+{
+    if (flag)
+	    return value | mask;
+    return value & ~mask;
+}
+
+static gboolean
+set_ctrl_from_gconf (XkbDescRec *desc, GConfClient *client,
+		     char const *key, unsigned long mask, gboolean flag)
+{
+    gboolean result = flag && gconf_client_get_bool (client, key, NULL);
+    desc->ctrls->enabled_ctrls =
+	    set_clear (result, desc->ctrls->enabled_ctrls, mask);
+    return result;
+}
+
 static void
 set_server_from_gconf (GConfEntry *ignored)
 {
 	GConfClient	*client = gconf_client_get_default ();
 	XkbDescRec	*desc;
-	gint32 		 enabled, enable_mask;
-	unsigned long	 which;
+	gboolean	 enable_accessX;
 
 	desc = get_xkb_desc_rec ();
 	if (!desc) {
@@ -139,9 +158,98 @@ set_server_from_gconf (GConfEntry *ignored)
 	} else
 		d ("Someone changed gconf accessibility state\n");
 
-	desc->ctrls->ax_options = XkbAX_LatchToLockMask;
+	/* general */
+	enable_accessX = gconf_client_get_bool (client, CONFIG_ROOT "/enable", NULL);
 
-	enable_mask =   XkbAccessXKeysMask	|
+	desc->ctrls->enabled_ctrls = set_clear (enable_accessX,
+		desc->ctrls->enabled_ctrls,
+		XkbAccessXKeysMask | XkbAccessXFeedbackMask);
+
+	if (set_ctrl_from_gconf (desc, client, CONFIG_ROOT "/timeout_enable",
+		XkbAccessXTimeoutMask, enable_accessX)) {
+		desc->ctrls->ax_timeout = get_int (client,
+			CONFIG_ROOT "/timeout");
+		desc->ctrls->ax_options = set_clear (
+			gconf_client_get_bool (client, CONFIG_ROOT "/feature_state_change_beep", NULL),
+			desc->ctrls->ax_options, XkbAX_FeatureFBMask | XkbAX_SlowWarnFBMask);
+	}
+
+	/* bounce keys */
+	if (set_ctrl_from_gconf (desc, client, CONFIG_ROOT "/bouncekeys_enable",
+		XkbBounceKeysMask, enable_accessX)) {
+		desc->ctrls->debounce_delay  = get_int (client,
+			CONFIG_ROOT "/bouncekeys_delay");
+		desc->ctrls->ax_options = set_clear (
+			gconf_client_get_bool (client, CONFIG_ROOT "/bouncekeys_beep_reject", NULL),
+			desc->ctrls->ax_options, XkbAX_BKRejectFBMask);
+	}
+
+	/* mouse keys */
+	if (set_ctrl_from_gconf (desc, client, CONFIG_ROOT "/mousekeys_enable",
+		XkbMouseKeysMask | XkbMouseKeysAccelMask, enable_accessX)) {
+		desc->ctrls->mk_interval     = 100;	/* msec between mousekey events */
+		desc->ctrls->mk_curve	     = 50;
+
+		/* We store pixels / sec, XKB wants pixels / event */
+		desc->ctrls->mk_max_speed    = get_int (client,
+			CONFIG_ROOT "/mousekeys_max_speed") / (1000 / desc->ctrls->mk_interval);
+		if (desc->ctrls->mk_max_speed <= 0)
+			desc->ctrls->mk_max_speed = 1;
+
+		desc->ctrls->mk_time_to_max  = get_int (client,	/* events before max */
+			CONFIG_ROOT "/mousekeys_accel_time") / desc->ctrls->mk_interval;
+		if (desc->ctrls->mk_time_to_max <= 0)
+			desc->ctrls->mk_time_to_max = 1;
+
+		desc->ctrls->mk_delay	     = get_int (client,	/* ms before 1st event */
+			CONFIG_ROOT "/mousekeys_init_delay");
+	}
+
+	/* slow keys */
+	if (set_ctrl_from_gconf (desc, client, CONFIG_ROOT "/slowkeys_enable",
+		XkbSlowKeysMask, enable_accessX)) {
+		desc->ctrls->ax_options = set_clear (
+			gconf_client_get_bool (client, CONFIG_ROOT "/slowkeys_beep_press", NULL),
+			desc->ctrls->ax_options, XkbAX_SKPressFBMask);
+		desc->ctrls->ax_options = set_clear (
+			gconf_client_get_bool (client, CONFIG_ROOT "/slowkeys_beep_accept", NULL),
+			desc->ctrls->ax_options, XkbAX_SKAcceptFBMask);
+		desc->ctrls->ax_options = set_clear (
+			gconf_client_get_bool (client, CONFIG_ROOT "/slowkeys_beep_reject", NULL),
+			desc->ctrls->ax_options, XkbAX_SKRejectFBMask);
+		desc->ctrls->slow_keys_delay = get_int (client,
+			CONFIG_ROOT "/slowkeys_delay");
+	}
+
+	/* sticky keys */
+	if (set_ctrl_from_gconf (desc, client, CONFIG_ROOT "/stickykeys_enable",
+		XkbStickyKeysMask, enable_accessX)) {
+		desc->ctrls->ax_options |= XkbAX_LatchToLockMask;
+		desc->ctrls->ax_options = set_clear (
+			gconf_client_get_bool (client, CONFIG_ROOT "/stickykeys_two_key_off", NULL),
+			desc->ctrls->ax_options, XkbAX_TwoKeysMask);
+		desc->ctrls->ax_options = set_clear (
+			gconf_client_get_bool (client, CONFIG_ROOT "/stickykeys_modifier_beep", NULL),
+			desc->ctrls->ax_options, XkbAX_StickyKeysFBMask);
+	}
+
+	/* toggle keys */
+	desc->ctrls->ax_options = set_clear (enable_accessX &&
+		gconf_client_get_bool (client, CONFIG_ROOT "/togglekeys_enable", NULL),
+		desc->ctrls->ax_options, XkbAX_IndicatorFBMask);
+
+#if 0
+	fprintf (stderr, "CHANGE to : 0x%x\n", desc->ctrls->enabled_ctrls);
+	fprintf (stderr, "CHANGE to : 0x%x (2)\n", desc->ctrls->ax_options);
+#endif
+	/* guard against reloading gconf when the X server notices that the XKB
+	 * state has changed and calls us.
+	 */
+	g_return_if_fail (!we_are_changing_xkb_state);
+
+	gdk_error_trap_push ();
+	we_are_changing_xkb_state = TRUE;
+	XkbSetControls (GDK_DISPLAY (),
 			XkbSlowKeysMask		|
 			XkbBounceKeysMask	|
 			XkbStickyKeysMask	|
@@ -149,79 +257,9 @@ set_server_from_gconf (GConfEntry *ignored)
 			XkbMouseKeysAccelMask	|
 			XkbAccessXKeysMask	|
 			XkbAccessXTimeoutMask	|
-			XkbAccessXFeedbackMask;
-
-	enabled = XkbAccessXFeedbackMask;
-
-	/* general */
-	if (gconf_client_get_bool (client, CONFIG_ROOT "/enable", NULL))
-		enabled |= XkbAccessXKeysMask;
-	if (gconf_client_get_bool (client, CONFIG_ROOT "/feature_state_change_beep", NULL))
-		desc->ctrls->ax_options |= XkbAX_FeatureFBMask | XkbAX_SlowWarnFBMask;
-	if (gconf_client_get_bool (client, CONFIG_ROOT "/timeout_enable", NULL))
-		enabled |= XkbAccessXTimeoutMask;
-	desc->ctrls->ax_timeout      = get_int (client,
-		CONFIG_ROOT "/timeout");
-
-	/* bounce keys */
-	if (gconf_client_get_bool (client, CONFIG_ROOT "/bouncekeys_enable", NULL))
-		enabled |= XkbBounceKeysMask;
-	if (gconf_client_get_bool (client, CONFIG_ROOT "/bouncekeys_beep_reject", NULL))
-		enabled |= XkbAX_BKRejectFBMask;
-	desc->ctrls->debounce_delay  = get_int (client,
-		CONFIG_ROOT "/bouncekeys_delay");
-
-	/* mouse keys */
-	if (gconf_client_get_bool (client, CONFIG_ROOT "/mousekeys_enable", NULL))
-		enabled |= XkbMouseKeysMask | XkbMouseKeysAccelMask;
-	desc->ctrls->mk_interval     = 10;	/* msec between mousekey events */
-	desc->ctrls->mk_curve	     = 50;
-	desc->ctrls->mk_max_speed    = get_int (client, /* pixels / event */
-		CONFIG_ROOT "/mousekeys_max_speed");
-	desc->ctrls->mk_time_to_max  = get_int (client,	/* events before max */
-		CONFIG_ROOT "/mousekeys_accel_time") / desc->ctrls->mk_interval;
-	desc->ctrls->mk_delay	     = get_int (client,	/* ms before 1st event */
-		CONFIG_ROOT "/mousekeys_init_delay");
-
-	/* slow keys */
-	if (gconf_client_get_bool (client, CONFIG_ROOT "/slowkeys_enable", NULL))
-		enabled |= XkbSlowKeysMask;
-	if (gconf_client_get_bool (client, CONFIG_ROOT "/slowkeys_beep_press", NULL))
-		desc->ctrls->ax_options |= XkbAX_SKPressFBMask;
-	if (gconf_client_get_bool (client, CONFIG_ROOT "/slowkeys_beep_accept", NULL))
-		desc->ctrls->ax_options |= XkbAX_SKAcceptFBMask;
-	if (gconf_client_get_bool (client, CONFIG_ROOT "/slowkeys_beep_reject", NULL))
-		enabled |= XkbAX_SKRejectFBMask;
-	desc->ctrls->slow_keys_delay = get_int (client,
-		CONFIG_ROOT "/slowkeys_delay");
-
-	/* sticky keys */
-	if (gconf_client_get_bool (client, CONFIG_ROOT "/stickykeys_enable", NULL))
-		enabled |= XkbStickyKeysMask;
-	if (gconf_client_get_bool (client, CONFIG_ROOT "/stickykeys_two_key_off", NULL))
-		desc->ctrls->ax_options |= XkbAX_TwoKeysMask;
-	if (gconf_client_get_bool (client, CONFIG_ROOT "/stickykeys_modifier_beep", NULL))
-		desc->ctrls->ax_options |= XkbAX_StickyKeysFBMask;
-
-	/* toggle keys */
-	if (gconf_client_get_bool (client, CONFIG_ROOT "/togglekeys_enable", NULL))
-		desc->ctrls->ax_options |= XkbAX_IndicatorFBMask;
-	desc->ctrls->enabled_ctrls &= ~enable_mask;
-	desc->ctrls->enabled_ctrls |= (enable_mask & enabled);
-
-	/* guard against reloading gconf when the X server notices that the XKB
-	 * state has changed and calls us.
-	 */
-	g_return_if_fail (!we_are_changing_xkb_state);
-
-	which = XkbAccessXKeysMask | XkbAccessXTimeoutMask |
-		XkbControlsEnabledMask |
-		XkbMouseKeysMask | XkbMouseKeysAccelMask |
-		XkbSlowKeysMask | XkbBounceKeysMask;
-
-	gdk_error_trap_push ();
-	we_are_changing_xkb_state = TRUE;
-	XkbSetControls (GDK_DISPLAY (), which, desc);
+			XkbAccessXFeedbackMask	|
+			XkbControlsEnabledMask,
+			desc);
 	XSync (GDK_DISPLAY (), FALSE);
 	we_are_changing_xkb_state = FALSE;
 	gdk_error_trap_pop ();
@@ -239,7 +277,10 @@ set_gconf_from_server (GConfEntry *ignored)
 		return;
 	}
 
-	desc->ctrls->ax_options = XkbAX_LatchToLockMask;
+#if 0
+	fprintf (stderr, "changed to : 0x%x\n", desc->ctrls->enabled_ctrls);
+	fprintf (stderr, "changed to : 0x%x (2)\n", desc->ctrls->ax_options);
+#endif
 
 	/* guard against reloading the server when gconf notices that the state
 	 * has changed and calls us.
@@ -248,7 +289,7 @@ set_gconf_from_server (GConfEntry *ignored)
 	we_are_changing_xkb_state = TRUE;
 
 	set_bool (client, CONFIG_ROOT "/enable",
-		desc->ctrls->enabled_ctrls & XkbAccessXKeysMask);
+		desc->ctrls->enabled_ctrls & (XkbAccessXKeysMask | XkbAccessXFeedbackMask));
 	set_bool (client, CONFIG_ROOT "/feature_state_change_beep",
 		desc->ctrls->ax_options & (XkbAX_FeatureFBMask | XkbAX_SlowWarnFBMask));
 	set_bool (client, CONFIG_ROOT "/timeout_enable",
@@ -261,12 +302,12 @@ set_gconf_from_server (GConfEntry *ignored)
 	set_int (client, CONFIG_ROOT "/bouncekeys_delay",
 		desc->ctrls->debounce_delay);
 	set_bool (client, CONFIG_ROOT "/bouncekeys_beep_reject",
-		desc->ctrls->enabled_ctrls & XkbAX_BKRejectFBMask);
+		desc->ctrls->ax_options & XkbAX_BKRejectFBMask);
 
 	set_bool (client, CONFIG_ROOT "/mousekeys_enable",
 		desc->ctrls->enabled_ctrls & XkbMouseKeysMask);
 	set_int (client, CONFIG_ROOT "/mousekeys_max_speed",
-		desc->ctrls->mk_max_speed);
+		desc->ctrls->mk_max_speed * (1000 / desc->ctrls->mk_interval));
 	/* NOTE : mk_time_to_max is measured in events not time */
 	set_int (client, CONFIG_ROOT "/mousekeys_accel_time",
 		desc->ctrls->mk_time_to_max * desc->ctrls->mk_interval);
@@ -280,7 +321,7 @@ set_gconf_from_server (GConfEntry *ignored)
 	set_bool (client, CONFIG_ROOT "/slowkeys_beep_accept",
 		desc->ctrls->ax_options & XkbAX_SKAcceptFBMask);
 	set_bool (client, CONFIG_ROOT "/slowkeys_beep_reject",
-		desc->ctrls->enabled_ctrls & XkbAX_SKRejectFBMask);
+		desc->ctrls->ax_options & XkbAX_SKRejectFBMask);
 	set_int (client, CONFIG_ROOT "/slowkeys_delay",
 		desc->ctrls->slow_keys_delay);
 
@@ -298,20 +339,17 @@ set_gconf_from_server (GConfEntry *ignored)
 }
 
 static GdkFilterReturn 
-cb_xkb_event_filter (GdkXEvent *xevent, GdkEvent *event, gpointer user)
+cb_xkb_event_filter (GdkXEvent *xevent, GdkEvent *ignored1, gpointer ignored2)
 {
-	XEvent *xev = (XEvent *)xevent;
-	if (xev->xany.type == (xkbEventBase + XkbEventCode)) {
-		XkbEvent *xkbEv = (XkbEvent *) event;
-		d ("xkb event\n");
-		if(xkbEv->any.xkb_type == XkbControlsNotify) {
-			if (!we_are_changing_xkb_state) {
-				d ("Someone changed XKB state\n");
-				set_gconf_from_server (NULL);
-			} else
-				d ("We changed XKB state\n");
-		}
-		return GDK_FILTER_REMOVE;
+	XEvent   *xev   = (XEvent *) xevent;
+	XkbEvent *xkbEv = (XkbEvent *) xevent;
+	if (xev->xany.type == (xkbEventBase + XkbEventCode) &&
+	    xkbEv->any.xkb_type == XkbControlsNotify) {
+		if (!we_are_changing_xkb_state) {
+			d ("Someone changed XKB state\n");
+			set_gconf_from_server (NULL);
+		} else
+			d ("We changed XKB state\n");
 	}
 
 	return GDK_FILTER_CONTINUE;
@@ -330,7 +368,7 @@ gnome_settings_accessibility_keyboard_init (GConfClient *client)
 
 	gdk_error_trap_push ();
 	XkbSelectEvents (GDK_DISPLAY (),
-		XkbUseCoreKbd, XkbAllEventsMask, XkbAllEventsMask);
+		XkbUseCoreKbd, XkbControlsNotifyMask, XkbControlsNotifyMask);
 
 	XSync (GDK_DISPLAY (), FALSE);
 	gdk_error_trap_pop ();
