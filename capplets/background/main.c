@@ -35,6 +35,9 @@
 
 #include <capplet-widget.h>
 
+#include <ximian-archiver/archive.h>
+#include <ximian-archiver/location.h>
+
 #include "preferences.h"
 #include "prefs-widget.h"
 
@@ -46,6 +49,22 @@ static guint ok_handler_id;
 static guint cancel_handler_id;
 
 static void
+store_archive_data (void) 
+{
+	Archive *archive;
+	Location *location;
+	xmlDocPtr xml_doc;
+
+	archive = ARCHIVE (archive_load (FALSE));
+	location = archive_get_current_location (archive);
+	xml_doc = preferences_write_xml (prefs);
+	location_store_xml (location, "background-properties-capplet",
+			    xml_doc);
+	xmlFreeDoc (xml_doc);
+	archive_close (archive);
+}
+
+static void
 ok_cb (GtkWidget *widget) 
 {
 	preferences_save (prefs);
@@ -53,6 +72,7 @@ ok_cb (GtkWidget *widget)
 	gtk_signal_disconnect (GTK_OBJECT (prefs_widget), ok_handler_id);
 	gtk_signal_disconnect (GTK_OBJECT (prefs_widget), cancel_handler_id);
 	gtk_object_destroy (GTK_OBJECT (prefs_widget));
+	store_archive_data ();
 }
 
 static void
