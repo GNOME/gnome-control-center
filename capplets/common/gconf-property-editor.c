@@ -663,28 +663,23 @@ gconf_peditor_new_color (GConfChangeSet *changeset,
 }
 
 static int
-peditor_enum_int_from_string (GType type, const gchar *str, gboolean *use_nick)
+peditor_enum_int_from_string (GType type, const gchar *str, gboolean use_nick)
 {
 	GEnumClass *klass;
 	GEnumValue *val;
 	int ret = -1;
 
-	if (use_nick)
-		*use_nick = FALSE;
-	
 	klass = g_type_class_ref (type);
-	val = g_enum_get_value_by_name (klass, str);
-	if (!val)
-	{
+	if (use_nick)
 		val = g_enum_get_value_by_nick (klass, str);
-		if (use_nick)
-			*use_nick = TRUE;
-	}
-	if (val)
-		ret = val->value;
-
+	else
+		val = g_enum_get_value_by_name (klass, str);
+	
 	g_type_class_unref (klass);
 
+	if (val)
+		ret = val->value;
+	
 	return ret;
 }
 
@@ -725,7 +720,7 @@ peditor_enum_conv_to_widget (GConfPropertyEditor *peditor,
 	
 	index = peditor_enum_int_from_string (data->enum_type,
 		    		    	      gconf_value_get_string (value),
-					      &data->use_nick);
+					      data->use_nick);
 	
 	gconf_value_set_int (ret, index);
 
@@ -826,6 +821,7 @@ gconf_peditor_new_select_menu_with_enum	(GConfChangeSet *changeset,
 					 gchar 	        *key,
 					 GtkWidget      *option_menu,
 					 GType          enum_type,
+					 gboolean	use_nick,
 					 gchar          *first_property_name,
 					 ...)
 {
@@ -840,6 +836,7 @@ gconf_peditor_new_select_menu_with_enum	(GConfChangeSet *changeset,
 
 	data = g_new0 (GConfPropertyEditorEnumData, 1);
 	data->enum_type = enum_type;
+	data->use_nick = use_nick;
 
 	va_start (var_args, first_property_name);
 
@@ -1041,7 +1038,7 @@ guard_get_bool (GConfPropertyEditor *peditor, const GConfValue *value)
 	else
 	{
 		GConfPropertyEditorEnumData *data = peditor->p->data;
-		int index = peditor_enum_int_from_string (data->enum_type, gconf_value_get_string (value), &data->use_nick);
+		int index = peditor_enum_int_from_string (data->enum_type, gconf_value_get_string (value), data->use_nick);
 		return (index != data->enum_val_false);
 	}
 }
@@ -1285,7 +1282,7 @@ peditor_enum_toggle_conv_to_widget (GConfPropertyEditor *peditor,
 	
 	index = peditor_enum_int_from_string (data->enum_type,
 		    		    	      gconf_value_get_string (value),
-					      &data->use_nick);
+					      data->use_nick);
 	gconf_value_set_bool (ret, (index != data->enum_val_false));
 
 	return ret;
@@ -1323,6 +1320,7 @@ gconf_peditor_new_enum_toggle  (GConfChangeSet 	 *changeset,
 				GType			 enum_type,
 				GConfPEditorGetValueFn   val_true_fn,
 				guint			 val_false,
+				gboolean		 use_nick,
 				gpointer		 data,
 				gchar 			 *first_property_name,
 				...)
@@ -1340,6 +1338,7 @@ gconf_peditor_new_enum_toggle  (GConfChangeSet 	 *changeset,
 	enum_data->enum_val_true_fn = val_true_fn;
 	enum_data->enum_val_true_fn_data = data;
 	enum_data->enum_val_false = val_false;
+	enum_data->use_nick = use_nick;
 
 	va_start (var_args, first_property_name);
 
@@ -1578,6 +1577,7 @@ gconf_peditor_new_select_radio_with_enum (GConfChangeSet *changeset,
 					  gchar		 *key,
 					  GSList 	 *radio_group,
 					  GType 	 enum_type,
+					  gboolean	 use_nick,
 					  gchar          *first_property_name,
 					  ...)
 {
@@ -1594,6 +1594,7 @@ gconf_peditor_new_select_radio_with_enum (GConfChangeSet *changeset,
 
 	enum_data = g_new0 (GConfPropertyEditorEnumData, 1);
 	enum_data->enum_type = enum_type;
+	enum_data->use_nick = use_nick;
 
 	first_button = GTK_RADIO_BUTTON (radio_group->data);
 

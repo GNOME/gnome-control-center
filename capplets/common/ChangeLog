@@ -1,3 +1,17 @@
+2002-04-21  Rachel Hestilow  <hestilow@ximian.com>
+
+	* gconf-property-editor.c
+	(gconf_peditor_new_select_menu_with_enum,
+	 gconf_peditor_new_enum_toggle,
+	 gconf_peditor_new_select_radio_with_enum): Add in an explicit
+	 'use_nick' parameter. Implicit guessing can break badly if
+	 the gconf data gets corrupted.
+	(peditor_enum_int_from_string): Change use_nick to copy-by-value,
+	do not try to guess it.
+	(peditor_enum_conv_to_widget, guard_get_bool,
+	 peditor_enum_toggle_conv_to_widget): Do not pass in use_nick
+	 as a reference.
+
 Thu Apr 18 17:56:25 2002  Jonathan Blandford  <jrb@redhat.com>
 
 	* theme-common.c: Notify when the theme changes.

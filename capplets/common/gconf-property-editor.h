@@ -78,6 +78,7 @@ GObject *gconf_peditor_new_enum_toggle  (GConfChangeSet 	 *changeset,
 					 GType			 enum_type,
 					 GConfPEditorGetValueFn  val_true_fn,
 					 guint			 val_false,
+					 gboolean	 	 use_nick,
 					 gpointer		 data,
 					 gchar 			 *first_property_name,
 					 ...);
@@ -109,6 +110,7 @@ GObject *gconf_peditor_new_select_menu_with_enum	(GConfChangeSet *changeset,
 							 gchar 	        *key,
 							 GtkWidget      *option_menu,
 							 GType          enum_type,
+							 gboolean  	use_nick,
 							 gchar          *first_property_name,
 							 ...);
 
@@ -122,6 +124,7 @@ GObject *gconf_peditor_new_select_radio_with_enum	 (GConfChangeSet *changeset,
 							  gchar		 *key,
 							  GSList 	 *radio_group,
 							  GType 	 enum_type,
+							  gboolean	 use_nick,
 							  gchar          *first_property_name,
 							  ...);
 
