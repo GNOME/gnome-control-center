@@ -1,6 +1,6 @@
 cappletname = background
 cappletgroup = 
-bin_PROGRAMS = background-properties
+bin_PROGRAMS = background-properties-capplet
 
 background_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
 background_properties_SOURCES = \
