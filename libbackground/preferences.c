@@ -86,7 +86,7 @@ bg_preferences_init (BGPreferences      *prefs,
 	prefs->wallpaper_sel_path = g_strdup (g_get_home_dir ());
 	prefs->auto_apply         = TRUE;
 	prefs->wallpapers         = NULL;
-	prefs->adjust_opacity     = TRUE;
+	prefs->adjust_opacity     = FALSE;
 	prefs->opacity            = 255;
 }
 
