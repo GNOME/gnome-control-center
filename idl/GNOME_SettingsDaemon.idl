@@ -1,0 +1,13 @@
+#ifndef GNOME_SETTINGS_DAEMON_IDL
+#define GNOME_SETTINGS_DAEMON_IDL
+
+#include <Bonobo.idl>
+
+module GNOME {
+
+  interface SettingsDaemon : Bonobo::Unknown {
+    boolean awake (in string service);
+  };
+};
+
+#endif
