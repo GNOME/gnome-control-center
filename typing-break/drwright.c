@@ -135,7 +135,7 @@ static GtkItemFactoryEntry popup_items[] = {
 /*	{ N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },*/
 	{ N_("/_Preferences"),  NULL, GIF_CB (popup_preferences_cb), 0,                  "<StockItem>",  GTK_STOCK_PREFERENCES },
 	{ N_("/_About"),        NULL, GIF_CB (popup_about_cb),       0,                  "<StockItem>",  GNOME_STOCK_ABOUT },
-	{ "/sep1",              NULL, 0,                             0,                  "<Separator>",  NULL },
+	{ "/sep1",              NULL, NULL,                          0,                  "<Separator>",  NULL },
 	{ N_("/_Take a Break"), NULL, GIF_CB (popup_break_cb),       POPUP_ITEM_BREAK,   "<Item>",       NULL }
 };
 

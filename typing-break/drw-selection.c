@@ -164,7 +164,7 @@ drw_selection_filter (GdkXEvent *xevent,
 }
 
 DrwSelection *
-drw_selection_start ()
+drw_selection_start (void)
 {
 	DrwSelection *drw_selection = g_new (DrwSelection, 1);
   
