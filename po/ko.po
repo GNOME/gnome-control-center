@@ -4,38 +4,39 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.99.2\n"
-"POT-Creation-Date: 2002-03-28 09:22-0500\n"
-"PO-Revision-Date: 2002-03-29 01:27+0900\n"
+"POT-Creation-Date: 2002-04-01 12:26+0900\n"
+"PO-Revision-Date: 2002-04-01 12:45+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: Korean <gnome-kr-translation@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:259
-msgid "_Enable keyboard accesibility"
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:260
+msgid "_Enable keyboard accessibility"
 msgstr "키보드 접근 기능 사용(_E)"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:326
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:327
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "AccessX 설정사항을 '%s' 파일에서 가져 올 수 없습니다"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:438
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:439
 msgid "Select CDE AccessX file"
 msgstr "CDE AccessX 파일 선택"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-msgid "AccessX"
-msgstr "AccessX"
+#: capplets/keyboard/keyboard.desktop.in.h:1
+msgid "Keyboard"
+msgstr "키보드"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:2
 msgid "Keyboard Accessibility Properties"
 msgstr "키보드 접근 기능 등록 정보"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:1
-msgid "&lt;b&gt;Sample&lt;/b&gt;"
-msgstr "&lt;i&gt;예제&lt;/i&gt;"
+msgid "&lt;b&gt;Test&lt;/b&gt;"
+msgstr "&lt;b&gt;테스트&lt;/b&gt;"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:2
 msgid "B_eep when modifier is pressed"
@@ -86,21 +87,14 @@ msgstr "최대 포인터 속도(_X):"
 msgid ""
 "MouseKeys can benefit StickyKey users or anyone unable to use the pointing "
 "device or in need of 'pixel by pixel' position control of the pointer.  When "
-"activated, MouseKeys turns the numeric keypad into a mouse control pad. "
-msgstr ""
-"MouseKey는 StickyKey 사용자 혹은 포인팅 장치를 사용할 수 없는 사람들 혹은 포"
-"인터를 픽셀 단위로 움직이고 싶을 경우에 도움이 될 수 있습니다. 사용할 경우"
-"에, Mouse 키는 숫자 키패드를 마우스 컨트롤 판으로 사용합니다. "
+"activated, MouseKeys turns the numeric keypad into a mouse control pad."
+msgstr "MouseKey는 StickyKey 사용자 혹은 포인팅 장치를 사용할 수 없는 사람들 혹은 포인터를 \"픽셀 단위\"로 움직이고 싶을 경우에 도움이 될 수 있습니다. 사용할 경우에, Mouse 키는 숫자 키패드를 마우스 컨트롤 판으로 사용합니다. "
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:13
 msgid ""
-"SlowKeys can benefit users who hit unwanted keys as they type.  SlowKeys "
-"instructs the system not to accept keys as pressed, unless the key has been "
-"pressed and held for a user adjustable amount of time (i.e., the key delay)."
-msgstr ""
-"SlowKeys는 타이프할 때 원하지 않는 키를 누르는 사람들에게 도움이 될 수 있습니"
-"다. SlowKeys는 키가 지정한 시간만큼 눌러져 있는 상태로 있는 경우를 제외하고 "
-"키 눌림을 무시합니다 (키 지연)."
+"Only accept keys after they have been pressed and held for a user adjustable "
+"amount of time."
+msgstr "키를 누른 후에 사용자가 설정한 만큼의 시간동안 누르고 있어야 그 키를 받아들입니다."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:14
 msgid "Start mo_ving this long after keypress :"
@@ -129,7 +123,7 @@ msgstr "최대 속도로 가속할 시간(_A) :"
 msgid ""
 "ToggleKeys can benefit the visually impaired user who has difficulty seeing "
 "the small LED keyboard indicators.  ToggleKeys provides one beep when an LED "
-"(e.g., the Caps Lock LED) is turned on and two beeps when it is turned off"
+"(e.g., the Caps Lock LED) is turned on and two beeps when it is turned off."
 msgstr ""
 "Toggle 키는 시력이 좋지 않아 작은 LED 키보드 지시등을 보는 데 어려운 사용자에"
 "게 도움이 될 수 있습니다.  ToggleKeys는 LED가 켜질 때 삑 소리를 내고 (예를 들"
@@ -245,14 +239,18 @@ msgid "_Scaled"
 msgstr "크기 조정(_S)"
 
 #: capplets/background/background-properties-capplet.c:392
-msgid "S_tretched"
-msgstr "늘임(_T)"
+msgid "Stretc_hed"
+msgstr "늘임(_H)"
 
 #: capplets/background/background-properties-capplet.c:392
 msgid "_No Picture"
 msgstr "그림 없음(_N)"
 
-#: capplets/background/background-properties-capplet.c:515
+#: capplets/background/background-properties-capplet.c:427
+msgid "_Picture"
+msgstr "그림(_P)"
+
+#: capplets/background/background-properties-capplet.c:530
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:592
 #: capplets/keyboard/gnome-keyboard-properties.c:348
@@ -261,17 +259,14 @@ msgstr "그림 없음(_N)"
 msgid "Retrieve and store legacy settings"
 msgstr "물려받은 설정을 되찾아서 저장합니다"
 
-#: capplets/background/background-properties-capplet.c:540
-msgid "Background properties"
-msgstr "배경 등록 정보"
-
+#: capplets/background/background-properties-capplet.c:555
 #: capplets/background/background-properties.glade.h:1
-msgid "Background Properties"
-msgstr "배경 등록 정보"
+msgid "Background Preferences"
+msgstr "배경 기본 설정"
 
 #: capplets/background/background-properties.glade.h:2
-msgid "Border the picture with a:"
-msgstr "그림의 테두리를 다음으로 두릅니다:"
+msgid "Bor_der the picture with a:"
+msgstr "그림의 테두리를 다음으로 두릅니다(_D):"
 
 #: capplets/background/background-properties.glade.h:3
 msgid "E-Mail"
@@ -290,26 +285,22 @@ msgid "Picture Options:"
 msgstr "그림 옵션:"
 
 #: capplets/background/background-properties.glade.h:7
-msgid "Picture:"
-msgstr "그림:"
-
-#: capplets/background/background-properties.glade.h:8
 msgid "Primary Color"
 msgstr "주요 색"
 
-#: capplets/background/background-properties.glade.h:9
+#: capplets/background/background-properties.glade.h:8
 msgid "Secondary Color"
 msgstr "보조 색"
 
-#: capplets/background/background-properties.glade.h:10
+#: capplets/background/background-properties.glade.h:9
 msgid "Solid color"
 msgstr "단색"
 
-#: capplets/background/background-properties.glade.h:11
+#: capplets/background/background-properties.glade.h:10
 msgid "Vertical gradient"
 msgstr "세로 그라데이션"
 
-#: capplets/background/background-properties.glade.h:12
+#: capplets/background/background-properties.glade.h:11
 msgid ""
 "You can drag image files\n"
 "into the window to set the \n"
@@ -319,23 +310,23 @@ msgstr ""
 "끌어와서 배경 그림으로\n"
 "설정할 수 있습니다"
 
-#: capplets/background/background-properties.glade.h:15
+#: capplets/background/background-properties.glade.h:14
 msgid "radiobutton1"
 msgstr "라디오단추1"
 
-#: capplets/background/background-properties.glade.h:16
+#: capplets/background/background-properties.glade.h:15
 msgid "radiobutton2"
 msgstr "라디오단추2"
 
-#: capplets/background/background-properties.glade.h:17
+#: capplets/background/background-properties.glade.h:16
 msgid "radiobutton3"
 msgstr "라디오단추3"
 
-#: capplets/background/background-properties.glade.h:18
+#: capplets/background/background-properties.glade.h:17
 msgid "radiobutton4"
 msgstr "라디오단추4"
 
-#: capplets/background/background-properties.glade.h:19
+#: capplets/background/background-properties.glade.h:18
 msgid "radiobutton5"
 msgstr "라디오단추5"
 
@@ -458,6 +449,7 @@ msgid "Choose the applications used by default"
 msgstr "기본값으로 사용될 응용프로그램을 선택합니다"
 
 #: capplets/default-applications/default-applications.desktop.in.h:2
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:15
 msgid "Preferred Applications"
 msgstr "기본 프로그램"
 
@@ -490,34 +482,30 @@ msgid "Co_mmand:"
 msgstr "명령어(_M):"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:8
-msgid "Default Applications"
-msgstr "기본 응용프로그램"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:9
 msgid "Default Help Browser"
 msgstr "기본 도움말 브라우저"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:10
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:9
 msgid "Default Terminal"
 msgstr "기본 터미널"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:11
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:10
 msgid "Default Text Editor"
 msgstr "기본 문서 편집기"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:12
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:11
 msgid "Default Web Browser"
 msgstr "기본 웹 브라우저"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:13
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:12
 msgid "Default Window Manager"
 msgstr "기본 창 관리자"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:14
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:13
 msgid "E_xec Flag:"
 msgstr "실행 플래그(_X):"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:15
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:14
 msgid "He_lp Browser"
 msgstr "도움말 보기 프로그램(_L)"
 
@@ -837,7 +825,7 @@ msgid "Add service..."
 msgstr "서비스 추가..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
-#: capplets/file-types/mime-edit-dialog.c:750
+#: capplets/file-types/mime-edit-dialog.c:755
 msgid "Category"
 msgstr "범주"
 
@@ -943,7 +931,7 @@ msgstr "MIME 범주에 정보를 포함하는 구조"
 
 #: capplets/file-types/mime-category-edit-dialog.c:343
 #: capplets/file-types/mime-edit-dialog.c:392
-#: capplets/file-types/mime-edit-dialog.c:492
+#: capplets/file-types/mime-edit-dialog.c:496
 #: capplets/file-types/service-edit-dialog.c:351
 #: capplets/file-types/service-edit-dialog.c:397
 msgid "Custom"
@@ -974,11 +962,11 @@ msgid "True if this dialog is for adding a MIME type"
 msgstr "대화 상자가 MIME 타입을 추가하기 위한 것이면 참"
 
 #: capplets/file-types/mime-edit-dialog.c:387
-#: capplets/file-types/mime-edit-dialog.c:442
+#: capplets/file-types/mime-edit-dialog.c:446
 msgid "None"
 msgstr "없음"
 
-#: capplets/file-types/mime-edit-dialog.c:675
+#: capplets/file-types/mime-edit-dialog.c:680
 msgid ""
 "Invalid MIME type. Please enter a valid MIME type, or leave the field blank "
 "to have one generated for you."
@@ -986,11 +974,11 @@ msgstr ""
 "잘못된 MIME 타입. 올바른 MIME 타입을 입력하십시오. 아니면 빈 칸으로 남겨 두"
 "면 자동으로 만들어 드릴 것입니다."
 
-#: capplets/file-types/mime-edit-dialog.c:686
+#: capplets/file-types/mime-edit-dialog.c:691
 msgid "There already exists a MIME type of that name."
 msgstr "이미 그 이름의 MIME 타입이 존재합니다."
 
-#: capplets/file-types/mime-edit-dialog.c:755
+#: capplets/file-types/mime-edit-dialog.c:760
 msgid "Choose a file category"
 msgstr "파일 분류 선택"
 
@@ -1062,6 +1050,10 @@ msgstr "설명서 페이지"
 msgid "Electronic mail transmission"
 msgstr "전자 메일 전송"
 
+#: capplets/file-types/service-info.c:50
+msgid "Gnome documentation"
+msgstr "그놈 문서"
+
 #: capplets/font/font-properties.desktop.in.h:1
 msgid "Font"
 msgstr "글꼴"
@@ -1093,8 +1085,8 @@ msgid "Accelerator key"
 msgstr "단축 키"
 
 #: capplets/keybindings/eggcellrendererkeys.c:199
-#: capplets/keybindings/gnome-keybinding-properties.c:88
-#: libbackground/applier.c:466
+#: capplets/keybindings/gnome-keybinding-properties.c:86
+#: libbackground/applier.c:522
 msgid "Disabled"
 msgstr "사용 않음"
 
@@ -1107,21 +1099,21 @@ msgstr "새 단축 키를 타이프하거나, 지우려면 백스페이스를 �
 msgid "Type a new accelerator"
 msgstr "새 단축 키를 타이프하세요"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:284
+#: capplets/keybindings/gnome-keybinding-properties.c:282
 msgid "<Unknown Action>"
 msgstr "<알 수 없는 동작>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:443
+#: capplets/keybindings/gnome-keybinding-properties.c:444
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
 msgstr "키보드 테마를 찾을 수 없습니다.  GTK+ 설치가 불완전하기 때문입니다."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:506
+#: capplets/keybindings/gnome-keybinding-properties.c:507
 msgid "_Action"
 msgstr "동작(_A)"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:518
+#: capplets/keybindings/gnome-keybinding-properties.c:519
 msgid "_Shortcut"
 msgstr "바로 가기(_S)"
 
@@ -1288,10 +1280,6 @@ msgstr "사운드(_S)"
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:31
 msgid "_Volume:"
 msgstr "볼륨(_V):"
-
-#: capplets/keyboard/keyboard.desktop.in.h:1
-msgid "Keyboard"
-msgstr "키보드"
 
 #: capplets/mouse/gnome-mouse-properties.c:420
 #, c-format
@@ -1517,82 +1505,53 @@ msgstr "사운드 이벤트(_E)"
 msgid "_Sounds for events"
 msgstr "상황에 따른 소리(_S)"
 
-#. just 8 short names that will serve as samples for titles in demo
-#: capplets/theme-switcher/control/control.c:19
-msgid "Eenie"
-msgstr "눈이 부시네"
+#: capplets/theme-switcher/control/control.c:18
+msgid "Eenie Meenie Mynie Moe Catcha Tiger By Its Toe"
+msgstr "송알송알 싸리 잎에 은구슬 조롱조롱 거미줄에 옥구슬"
 
-#: capplets/theme-switcher/control/control.c:19
-msgid "Mynie"
-msgstr "저기"
-
-#: capplets/theme-switcher/control/control.c:19
-msgid "Catcha"
-msgstr "난만히"
-
-#: capplets/theme-switcher/control/control.c:19
-msgid "By Its"
-msgstr "멧등마다"
-
-#: capplets/theme-switcher/control/control.c:20
-msgid "Meenie"
-msgstr "그 날"
-
-#: capplets/theme-switcher/control/control.c:20
-msgid "Moe"
-msgstr "쓰러져간"
-
-#: capplets/theme-switcher/control/control.c:20
-msgid "Tiger"
-msgstr "젊음같은"
-
-#: capplets/theme-switcher/control/control.c:20
-msgid "Toe"
-msgstr "꽃사태가"
-
-#: capplets/theme-switcher/control/control.c:38
+#: capplets/theme-switcher/control/control.c:43
 msgid "Selected themes from above will be tested by previewing here."
 msgstr "위에서 선택한 테마는 여기에서 미리 보기로 테스트할 수 있습니다."
 
 #. column one
-#: capplets/theme-switcher/control/control.c:43
+#: capplets/theme-switcher/control/control.c:48
 msgid "Sample Button"
 msgstr "예제 단추"
 
-#: capplets/theme-switcher/control/control.c:47
+#: capplets/theme-switcher/control/control.c:52
 msgid "Sample Check Button"
 msgstr "예제 체크 단추"
 
-#: capplets/theme-switcher/control/control.c:53
+#: capplets/theme-switcher/control/control.c:58
 msgid "Sample Text Entry Field"
 msgstr "예제 텍스트 항목 필드"
 
-#: capplets/theme-switcher/control/control.c:64
+#: capplets/theme-switcher/control/control.c:69
 msgid "Submenu"
 msgstr "하위 메뉴"
 
-#: capplets/theme-switcher/control/control.c:69
+#: capplets/theme-switcher/control/control.c:74
 #: capplets/ui-properties/gnome2-ui-properties.glade.h:2
 msgid "Item 1"
 msgstr "항목 1"
 
-#: capplets/theme-switcher/control/control.c:71
+#: capplets/theme-switcher/control/control.c:76
 msgid "Another item"
 msgstr "다른 항목"
 
-#: capplets/theme-switcher/control/control.c:75
+#: capplets/theme-switcher/control/control.c:80
 msgid "Radio Button 1"
 msgstr "라디오 단추 1"
 
-#: capplets/theme-switcher/control/control.c:81
+#: capplets/theme-switcher/control/control.c:86
 msgid "Radio Button 2"
 msgstr "라디오 단추 2"
 
-#: capplets/theme-switcher/control/control.c:102
+#: capplets/theme-switcher/control/control.c:107
 msgid "One"
 msgstr "하나"
 
-#: capplets/theme-switcher/control/control.c:108
+#: capplets/theme-switcher/control/control.c:113
 msgid "Two"
 msgstr "둘"
 
@@ -1774,11 +1733,11 @@ msgstr "노틸러스 실행중이라도 쉘 사용"
 msgid "Could not initialize Bonobo"
 msgstr "보노보를 초기화할 수 없습니다"
 
-#: libbackground/applier.c:230
+#: libbackground/applier.c:236
 msgid "Type"
 msgstr "형식"
 
-#: libbackground/applier.c:231
+#: libbackground/applier.c:237
 msgid ""
 "Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
 "for preview"
@@ -1786,7 +1745,23 @@ msgstr ""
 "bg_applier의 형식: 루트 윈도우의 BG_APPLIER_ROOT 혹은 미리 보기의 "
 "BG_APPLIER_PREVIEW"
 
-#: libbackground/applier.c:398
+#: libbackground/applier.c:244
+msgid "Preview Width"
+msgstr "미리 보기 너비"
+
+#: libbackground/applier.c:245
+msgid "Width if applier is a preview: Defaults to 64."
+msgstr "미리 보기의 너비: 기본 값은 64입니다."
+
+#: libbackground/applier.c:252
+msgid "Preview Height"
+msgstr "미리 보기 높이"
+
+#: libbackground/applier.c:253
+msgid "Height if applier is a preview: Defaults to 48."
+msgstr "미리 보기의 높이: 기본 값은 48입니다."
+
+#: libbackground/applier.c:451
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr "pixbuf \"%s\"를 읽을수 없음; 배경그림을 사용할수 없습니다."
@@ -1813,19 +1788,18 @@ msgstr ""
 "기본 사운드 파일을 설치하려면 gnome-audio 패키지를\n"
 "설치해야 합니다."
 
-#: libsounds/sound-view.c:209
+#: libsounds/sound-view.c:210
 msgid "Event"
 msgstr "상황"
 
-#: libsounds/sound-view.c:216
+#: libsounds/sound-view.c:217
 msgid "File to play"
 msgstr "연주할 파일"
 
-#: libsounds/sound-view.c:238
-#, fuzzy
-msgid "Play"
-msgstr "연주(_P)"
+#: libsounds/sound-view.c:245
+msgid "_Play"
+msgstr "재생(_P)"
 
-#: libsounds/sound-view.c:244
+#: libsounds/sound-view.c:251
 msgid "Select sound file"
 msgstr "소리 파일 선택"
