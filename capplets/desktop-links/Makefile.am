@@ -2,7 +2,6 @@ SUBDIRS = Sawfish
 
 capplets = \
 	cd \
-	panel \
 	legacy-applications \
 	session
 
