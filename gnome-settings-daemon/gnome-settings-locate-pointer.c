@@ -165,12 +165,12 @@ setup_window (void)
 }
 
 static void
-create_window (void)
+create_window (GdkScreen *screen)
 {
   GdkWindowAttr attributes;
   GtkWidget *invisible;
 
-  invisible = gnome_settings_daemon_get_invisible ();
+  invisible = gtk_invisible_new_for_screen (screen);
 
   attributes.window_type = GDK_WINDOW_TEMP;
   attributes.wclass = GDK_INPUT_OUTPUT;
@@ -179,7 +179,7 @@ create_window (void)
   attributes.event_mask = GDK_VISIBILITY_NOTIFY_MASK | GDK_EXPOSURE_MASK;
   attributes.width = 1;
   attributes.height = 1;
-  window = gdk_window_new (gdk_get_default_root_window (),
+  window = gdk_window_new (gdk_screen_get_root_window (screen),
 			   &attributes,
 			   GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL | GDK_WA_COLORMAP);
   gdk_window_set_user_data (window, invisible);
@@ -204,14 +204,21 @@ locate_pointer_timeout (gpointer data)
 }
 
 void
-gnome_settings_locate_pointer (void)
+gnome_settings_locate_pointer (GdkScreen *screen)
 {
-  gdk_window_get_pointer (gdk_get_default_root_window (), &cursor_x, &cursor_y, NULL);
+  gdk_window_get_pointer (gdk_screen_get_root_window (screen), &cursor_x, &cursor_y, NULL);
 
   if (locate_pointer_id)
     gtk_timeout_remove (locate_pointer_id);
+
+  /* Create the window if it is not created OR if it is not for the
+   * current screen.
+   */
+
   if (window == NULL)
-    create_window ();
+    create_window (screen);
+  else if( gdk_screen_get_number (screen) != gdk_screen_get_number (gdk_drawable_get_screen (window)))
+    create_window (screen);
 
   stage = STAGE_ONE;
   setup_window ();

@@ -76,6 +76,28 @@ translate_string_string (TranslationEntry *trans,
                                   gconf_value_get_string (value));
 }
 
+static void
+translate_string_string_toolbar (TranslationEntry *trans,
+				 GConfValue       *value)
+{
+  int i;
+  const char *tmp;
+  
+  g_assert (value->type == trans->gconf_type);
+
+  /* This is kind of a workaround since GNOME expects the key value to be
+   * "both_horiz" and gtk+ wants the XSetting to be "both-horiz".
+   */
+  tmp = gconf_value_get_string (value);
+  if (tmp && strcmp (tmp, "both_horiz") == 0)
+	  tmp = "both-horiz";
+
+  for (i = 0; managers [i]; i++) 
+    xsettings_manager_set_string (managers [i],
+                                  trans->xsetting_name,
+                                  tmp);
+}
+
 static TranslationEntry translations [] = {
   { "/desktop/gnome/peripherals/mouse/double_click",	"Net/DoubleClickTime",
       GCONF_VALUE_INT,		translate_int_int },
@@ -88,7 +110,7 @@ static TranslationEntry translations [] = {
   { "/desktop/gnome/interface/gtk_key_theme",		"Gtk/KeyThemeName",
       GCONF_VALUE_STRING,	translate_string_string },
   { "/desktop/gnome/interface/toolbar_style",			"Gtk/ToolbarStyle",
-      GCONF_VALUE_STRING,	translate_string_string },
+      GCONF_VALUE_STRING,	translate_string_string_toolbar },
   { "/desktop/gnome/interface/toolbar_icon_size",		"Gtk/ToolbarIconSize",
       GCONF_VALUE_STRING,	translate_string_string },
   { "/desktop/gnome/interface/can_change_accels",		"Gtk/CanChangeAccels",

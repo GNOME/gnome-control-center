@@ -109,6 +109,8 @@ filter (GdkXEvent *xevent,
   XEvent *xev = (XEvent *) xevent;
   guint keyval;
   gint group;
+
+  GdkScreen *screen = (GdkScreen *)data;
 	
   if (xev->type == KeyPress ||
       xev->type == KeyRelease)
@@ -134,7 +136,7 @@ filter (GdkXEvent *xevent,
 	      XAllowEvents (gdk_x11_get_default_xdisplay (),
 			    AsyncKeyboard,
 			    xev->xkey.time);
-	      gnome_settings_locate_pointer ();
+	      gnome_settings_locate_pointer (screen);
 	    }
 	}
       else
@@ -155,8 +157,14 @@ static void
 set_locate_pointer (gboolean locate_pointer)
 {
   GdkKeymapKey *keys;
+  GdkDisplay *display;
+  int n_screens;
   int n_keys;
   gboolean has_entries;
+
+  display = gdk_display_get_default ();
+  n_screens = gdk_display_get_n_screens (display);
+
   static const guint keyvals[] = { GDK_Control_L, GDK_Control_R };
   unsigned j;
 
@@ -167,44 +175,68 @@ set_locate_pointer (gboolean locate_pointer)
 							   &n_keys);
     if (has_entries)
     {
-      gint i;
+      gint i, j;
 
       for (i = 0; i < n_keys; i++)
 	{
-	  if (locate_pointer) 
+	  for(j=0; j< n_screens; j++)
 	    {
-	      XGrabKey (gdk_x11_get_default_xdisplay (),
-			keys[i].keycode,
-			0,
-			GDK_ROOT_WINDOW (),
-			False,
-			GrabModeAsync,
-			GrabModeSync);
-	      XGrabKey (gdk_x11_get_default_xdisplay (),
-			keys[i].keycode,
-			LockMask,
-			GDK_ROOT_WINDOW (),
-			False,
-			GrabModeAsync,
-			GrabModeSync);
-	    }
-	  else 
-	    {
-	      XUngrabKey (gdk_x11_get_default_xdisplay (),
-			  keys[i].keycode,
-			  LockMask,
-			  GDK_ROOT_WINDOW ());
-	      XUngrabKey (gdk_x11_get_default_xdisplay (),
-			  keys[i].keycode,
-			  0,
-			  GDK_ROOT_WINDOW ());
+		GdkScreen *screen = gdk_display_get_screen (display, j);
+		Window xroot = gdk_x11_drawable_get_xid (gdk_screen_get_root_window (screen));
+
+	      if (locate_pointer) 
+	        {
+	          XGrabKey (GDK_DISPLAY_XDISPLAY (display),
+		    	    keys[i].keycode,
+			    0,
+			    xroot,
+			    False,
+			    GrabModeAsync,
+			    GrabModeSync);
+	          XGrabKey (GDK_DISPLAY_XDISPLAY (display),
+			    keys[i].keycode,
+			    LockMask,
+			    xroot,
+			    False,
+			    GrabModeAsync,
+			    GrabModeSync);
+	        }
+	      else 
+	        {
+	          XUngrabKey (GDK_DISPLAY_XDISPLAY (display),
+			      keys[i].keycode,
+			      LockMask,
+			      xroot);
+	          XUngrabKey (GDK_DISPLAY_XDISPLAY (display),
+			      keys[i].keycode,
+			      0,
+			      xroot);
+	        }
 	    }
 	}
       g_free (keys);
       if (locate_pointer)
-	gdk_window_add_filter (gdk_get_default_root_window (), filter, NULL);
+	{
+	  for (i = 0; i < n_screens; i++)
+	    {
+		GdkScreen *screen;
+		screen = gdk_display_get_screen (display, i);
+		gdk_window_add_filter (gdk_screen_get_root_window (screen),
+				       filter,
+				       screen);
+	    }
+	}        
       else
-	gdk_window_remove_filter (gdk_get_default_root_window (), filter, NULL);
+	{
+	  for (i = 0; i < n_screens; i++)
+	    {
+		GdkScreen *screen;
+		screen = gdk_display_get_screen (display, i);
+		gdk_window_remove_filter (gdk_screen_get_root_window (screen),
+					  filter,
+					  screen);
+	    }
+	}        
     }
   }
 }
