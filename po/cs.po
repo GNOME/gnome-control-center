@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-07-02 04:45+0200\n"
-"PO-Revision-Date: 2003-07-02 10:13+0200\n"
+"POT-Creation-Date: 2003-07-04 04:40+0200\n"
+"PO-Revision-Date: 2003-07-04 09:25+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -601,7 +601,7 @@ msgstr ""
 "Zpětné volání, které se provede, když mají být uvolněna data objektu editoru "
 "vlastnosti"
 
-#: capplets/common/gconf-property-editor.c:1523
+#: capplets/common/gconf-property-editor.c:1531
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -614,7 +614,7 @@ msgstr ""
 "Ujistěte se, že existuje, a zkuste to znovu, nebo vyberte jiný obrázek "
 "pozadí."
 
-#: capplets/common/gconf-property-editor.c:1531
+#: capplets/common/gconf-property-editor.c:1539
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -627,7 +627,7 @@ msgstr ""
 "\n"
 "Vyberte prosím místo něj jiný obrázek."
 
-#: capplets/common/gconf-property-editor.c:1622
+#: capplets/common/gconf-property-editor.c:1630
 msgid "Please select an image."
 msgstr "Vyberte prosím obrázek."
 
@@ -2006,7 +2006,7 @@ msgid "Two"
 msgstr "Tvar 2"
 
 #: capplets/theme-switcher/gnome-theme-details.c:372
-#: capplets/theme-switcher/gnome-theme-manager.c:590
+#: capplets/theme-switcher/gnome-theme-manager.c:589
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -2016,17 +2016,17 @@ msgstr ""
 "váš dialog \"Nastavení témat\" byl nesprávně nainstalován nebo jste "
 "nenainstalovali balíček \"gnome-themes\"."
 
-#: capplets/theme-switcher/gnome-theme-manager.c:646
-#: capplets/theme-switcher/gnome-theme-manager.c:706
+#: capplets/theme-switcher/gnome-theme-manager.c:645
+#: capplets/theme-switcher/gnome-theme-manager.c:705
 msgid "Custom theme"
 msgstr "Vlastní téma"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:646
-#: capplets/theme-switcher/gnome-theme-manager.c:706
+#: capplets/theme-switcher/gnome-theme-manager.c:645
+#: capplets/theme-switcher/gnome-theme-manager.c:705
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "Toto téma můžete uložit stisknutím tlačítka Uložit téma."
 
-#: capplets/theme-switcher/gnome-theme-manager.c:1399
+#: capplets/theme-switcher/gnome-theme-manager.c:1398
 msgid ""
 "The default theme schemas could not be found on your system.  This means "
 "that you probably don't have metacity installed, or that your gconf is "
@@ -2415,32 +2415,37 @@ msgstr ""
 "Nelze vytvořit adresář \"%s\".\n"
 "To je nutné, má-li být možné změnit kurzory."
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:146
+#: gnome-settings-daemon/gnome-settings-keybindings.c:165
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr "Svázání s klávesami (%s) má svoji akci definovanou vícekrát\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:159
+#: gnome-settings-daemon/gnome-settings-keybindings.c:178
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr "Svázání s klávesami (%s) má svoji vazbu definovanou vícekrát\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:165
+#: gnome-settings-daemon/gnome-settings-keybindings.c:184
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr "Svázání s klávesami (%s) není úplné\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:193
+#: gnome-settings-daemon/gnome-settings-keybindings.c:212
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr "Svázání s klávesami (%s) není platné\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:281
+#: gnome-settings-daemon/gnome-settings-keybindings.c:248
+#, c-format
+msgid "It seems that another application already has access to key '%d'."
+msgstr "Zdá se, že ke klávese '%d' již má přístup jiná aplikace."
+
+#: gnome-settings-daemon/gnome-settings-keybindings.c:317
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr "Svázání s klávesami (%s) se již používá\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:357
+#: gnome-settings-daemon/gnome-settings-keybindings.c:393
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -2478,7 +2483,7 @@ msgstr "Nelze načíst soubor se zvukem %s jako vzorek %s"
 msgid "Cannot determine user's home directory"
 msgstr "Nemohu určit domovský adresář uživatele"
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:179
+#: gnome-settings-daemon/gnome-settings-xsettings.c:180
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "Klíč systému GConf %s je typu %s, ale byl očekáván typ %s\n"
