@@ -19,6 +19,10 @@ struct ScreenInfo
   SizeID current_size;
   short current_rate;
   Rotation current_rotation;
+
+  SizeID old_size;
+  short old_rate;
+  Rotation old_rotation;
   
   XRRScreenConfiguration *config;
   XRRScreenSize *sizes;
@@ -71,6 +75,40 @@ read_display_info (GdkDisplay *display)
     }
 
   return info;
+}
+
+void
+update_display_info (struct DisplayInfo *info, GdkDisplay *display)
+{
+  struct ScreenInfo *screen_info;
+  GdkScreen *screen;
+  GdkWindow *root_window;
+  int i;
+
+  g_assert (info->n_screens == gdk_display_get_n_screens (display));
+  
+  for (i = 0; i < info->n_screens; i++)
+    {
+      screen = gdk_display_get_screen (display, i);
+      
+      screen_info = &info->screens[i];
+
+      screen_info->old_rate = screen_info->current_rate;
+      screen_info->old_size = screen_info->current_size;
+      screen_info->old_rotation = screen_info->current_rotation;
+      
+      screen_info->current_width = gdk_screen_get_width (screen);
+      screen_info->current_height = gdk_screen_get_height (screen);
+
+      root_window = gdk_screen_get_root_window (screen);
+      XRRFreeScreenConfigInfo (screen_info->config);
+      screen_info->config = XRRGetScreenInfo (gdk_x11_display_get_xdisplay (display),
+					      gdk_x11_drawable_get_xid (GDK_DRAWABLE (root_window)));
+
+      screen_info->current_rate = XRRConfigCurrentRate (screen_info->config);
+      screen_info->current_size = XRRConfigCurrentConfiguration (screen_info->config, &screen_info->current_rotation);
+      screen_info->sizes = XRRConfigSizes (screen_info->config, &screen_info->n_sizes);
+    }
 }
 
 static int
@@ -150,6 +188,8 @@ apply_config (struct DisplayInfo *info)
 					      GDK_CURRENT_TIME);
 	}
     }
+
+  update_display_info (info, display);
   
   /* xscreensaver should handle this itself, but does not currently so we hack
    * it.  Ignore failures in case xscreensaver is not installed */
@@ -182,14 +222,28 @@ revert_config (struct DisplayInfo *info)
       status = XRRSetScreenConfigAndRate (xdisplay, 
 					  screen_info->config,
 					  gdk_x11_drawable_get_xid (GDK_DRAWABLE (root_window)),
-					  screen_info->current_size,
-					  screen_info->current_rotation,
-					  screen_info->current_rate,
+					  screen_info->old_size,
+					  screen_info->old_rotation,
+					  screen_info->old_rate,
 					  GDK_CURRENT_TIME);
-
-		generate_resolution_menu(screen_info);
-		generate_rate_menu(screen_info);
+      
     }
+
+  update_display_info (info, display);
+
+  /* Need to update the menus to the new settings */
+  for (i = 0; i < info->n_screens; i++)
+    {
+      struct ScreenInfo *screen_info = &info->screens[i];
+      
+      generate_resolution_menu (screen_info);
+      generate_rate_menu (screen_info);
+    }
+
+  /* xscreensaver should handle this itself, but does not currently so we hack
+   * it.  Ignore failures in case xscreensaver is not installed */
+  g_spawn_command_line_async ("xscreensaver-command -restart", NULL);
+  
   return 0;
 }
 
