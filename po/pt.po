@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 2.4\n"
-"POT-Creation-Date: 2003-07-20 02:32+0100\n"
-"PO-Revision-Date: 2003-07-20 03:00+0000\n"
+"POT-Creation-Date: 2003-07-26 16:26+0100\n"
+"PO-Revision-Date: 2003-07-26 16:30+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -67,6 +67,38 @@ msgstr "Suporte Tecnologias Assistivas"
 #: capplets/accessibility/at-properties/at-properties.desktop.in.h:2
 msgid "Enable support for GNOME assistive technologies at login"
 msgstr "Activar suporte para tecnologias assistivas GNOME ao iniciar sessão"
+
+#: capplets/accessibility/at-properties/main.c:59
+msgid ""
+"<i>No Assistive Technology is available on your system.  The 'gok' package "
+"must be installed in order to get on-screen keyboard support, and the "
+"'gnopernicus' package must be installed for screenreading and magnifying "
+"capabilities.</i>"
+msgstr ""
+"<i>Não existe nenhuma Tecnologia Assistiva disponível no seu sistema. O "
+"pacote 'gok' tem de ser instalado para obter suporte para teclado no ecrã, "
+"e o pacote 'gnopernicus' tem de ser instalado para funcionalidades de "
+"ampliação e locução de ecrã.</i>"
+
+#: capplets/accessibility/at-properties/main.c:62
+msgid ""
+"<i>Not all available assistive technologies are installed on your system.  "
+"The 'gok' package must be installed in order to get on-screen keyboard "
+"support.</i>"
+msgstr ""
+"<i>Nem todas as tecnologias assistivas disponíveis estão instaladas no seu "
+"sistema. O pacote 'gok' tem de ser instalado para obter suporte para teclado "
+"no ecrã.</i>"
+
+#: capplets/accessibility/at-properties/main.c:65
+msgid ""
+"<i>Not all available assistive technologies are installed on your system.  "
+"The 'gnopernicus' package must be installed for screenreading and magnifying "
+"capabilities.</i>"
+msgstr ""
+"<i>Nem todas as tecnologias assistivas disponíveis estão instaladas no seu "
+"sistema. O pacote 'gnopernicus' tem de ser instalado para funcionalidades de "
+"ampliação e locução de ecrã.</i>"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:238
 #, c-format
@@ -344,9 +376,9 @@ msgstr "Sem _Imagem"
 
 #: capplets/background/background-properties-capplet.c:559
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:851
+#: capplets/default-applications/gnome-default-applications-properties.c:852
 #: capplets/keyboard/gnome-keyboard-properties.c:220
-#: capplets/mouse/gnome-mouse-properties.c:716
+#: capplets/mouse/gnome-mouse-properties.c:714
 #: capplets/sound/sound-properties-capplet.c:212
 msgid "Retrieve and store legacy settings"
 msgstr "Recuperar e armazenar configurações obsoletas"
@@ -404,8 +436,8 @@ msgstr "Gradiente vertical"
 #: capplets/background/background-properties.glade.h:13
 msgid "You can drag image files into the window to set the background picture."
 msgstr ""
-"Pode arrastar ficheiros de imagens para dentro da janela para definir a imagem "
-"de fundo."
+"Pode arrastar ficheiros de imagens para dentro da janela para definir a "
+"imagem de fundo."
 
 #: capplets/background/background-properties.glade.h:14
 msgid "radiobutton1"
@@ -2648,8 +2680,8 @@ msgid ""
 "\"rgba\" - subpixel antialiasing. (LCD screens only)."
 msgstr ""
 "O tipo de antialiasinf a utilizar ao renderizar fontes. Valores possíveis "
-"são: \"none\" - sem antialiasing. \"grayscale\" - antialiasing standard "
-"em escalas cinza. \"rgba\" - antialiasing de subpixel. (apenas ecrãs LCD)."
+"são: \"none\" - sem antialiasing. \"grayscale\" - antialiasing standard em "
+"escalas cinza. \"rgba\" - antialiasing de subpixel. (apenas ecrãs LCD)."
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:8
 msgid ""
@@ -2743,9 +2775,9 @@ msgid ""
 "Notification area'."
 msgstr ""
 "O monitor de utilização utiliza a área de notificação para apresentar "
-"informação. Não parece que tenha uma área de notificação no seu painel. "
-"Pode adiciona-la clicando com o botão direito do rato e seleccionando "
-"'Adicionar ao painel -> Utilitários -> Área de notificação'."
+"informação. Não parece que tenha uma área de notificação no seu painel. Pode "
+"adiciona-la clicando com o botão direito do rato e seleccionando 'Adicionar "
+"ao painel -> Utilitários -> Área de notificação'."
 
 #: vfs-methods/fontilus/font-view.c:101
 msgid "The quick brown fox jumps over the lazy dog. 0123456789"
@@ -2876,17 +2908,29 @@ msgstr "Entradas de menu de contexto nautilus para fontes"
 msgid "Set as Application Font"
 msgstr "Definir como Fonte da Aplicação"
 
-#: vfs-methods/themus/Themus_Component.server.in.in.h:1
-msgid "Apply theme..."
-msgstr "Aplicar tema..."
+#: vfs-methods/themus/apply-font.glade.h:1
+msgid " "
+msgstr " "
 
-#: vfs-methods/themus/Themus_Component.server.in.in.h:2
-msgid "Themus component"
-msgstr "Componente Themus"
+#: vfs-methods/themus/apply-font.glade.h:2
+msgid "<span weight=\"bold\" size=\"larger\">Apply new font?</span>"
+msgstr "<span weight=\"bold\" size=\"larger\">Aplicar nova fonte?</span>"
 
-#: vfs-methods/themus/Themus_Component.server.in.in.h:3
-msgid "Themus component apply theme operations"
-msgstr "Compontente Themus aplica operações de tema"
+#: vfs-methods/themus/apply-font.glade.h:3
+msgid "Do _not apply font"
+msgstr "_Não aplicar fonte"
+
+#: vfs-methods/themus/apply-font.glade.h:4
+msgid ""
+"The theme you have selected suggests a new font. A preview of the font is "
+"shown below."
+msgstr ""
+"O tema que seleccionou sugere uma nova fonte. Uma antevisão da fonte é "
+"apresentada abaixo."
+
+#: vfs-methods/themus/apply-font.glade.h:5
+msgid "_Apply font"
+msgstr "_Aplicar fonte"
 
 #: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
 msgid "Theme Properties content view component"
@@ -2915,6 +2959,11 @@ msgstr "Tema ícone"
 #: vfs-methods/themus/themus-properties-view.c:217
 msgid "URI currently displayed"
 msgstr "URI actualmente apresentado"
+
+#. translators: you may want to include non-western chars here
+#: vfs-methods/themus/themus-theme-applier.c:83
+msgid "ABCDEFG"
+msgstr "ABCDEFG"
 
 #: vfs-methods/themus/themus.schemas.in.h:1
 msgid "If set to true, then installed themes will be thumbnailed."
@@ -2951,6 +3000,15 @@ msgstr "Se amostrar ou não temas instalados"
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Se amostrar ou não temas"
+
+#~ msgid "Apply theme..."
+#~ msgstr "Aplicar tema..."
+
+#~ msgid "Themus component"
+#~ msgstr "Componente Themus"
+
+#~ msgid "Themus component apply theme operations"
+#~ msgstr "Compontente Themus aplica operações de tema"
 
 #~ msgid "Select CDE AccessX file"
 #~ msgstr "Seleccione ficheiro AccessX CDE"
