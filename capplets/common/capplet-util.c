@@ -131,6 +131,7 @@ set_moniker_cb (BonoboPropertyBag *bag,
 	BonoboPropertyFrame   *pf;
 	Bonobo_PropertyBag     proxy;
 	Bonobo_ConfigDatabase  db;
+	gboolean               need_setup_cb = TRUE;
 
 	if (arg_id != 1) return;
 
@@ -154,6 +155,7 @@ set_moniker_cb (BonoboPropertyBag *bag,
 		gtk_signal_disconnect_by_func (GTK_OBJECT (pf),
 					       GTK_SIGNAL_FUNC (pf_destroy_cb), db);
 		bonobo_object_release_unref (db, ev);
+		need_setup_cb = FALSE;
 	}
 
 	db = bonobo_get_object (moniker, "IDL:Bonobo/ConfigDatabase:1.0", ev);
@@ -165,7 +167,7 @@ set_moniker_cb (BonoboPropertyBag *bag,
 	gtk_signal_connect (GTK_OBJECT (pf), "destroy",
 			    GTK_SIGNAL_FUNC (pf_destroy_cb), db);
 
-	if (setup_cb != NULL)
+	if (setup_cb != NULL && need_setup_cb)
 		setup_cb (GTK_BIN (pf)->child, proxy);
 }
 
