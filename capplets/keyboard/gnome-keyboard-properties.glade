@@ -5,7 +5,7 @@
 <requires lib="gnome"/>
 
 <widget class="GtkDialog" id="keyboard_dialog">
-  <property name="border_width">5</property>
+  <property name="border_width">6</property>
   <property name="title" translatable="yes">Keyboard Preferences</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_NONE</property>
@@ -138,7 +138,7 @@
 
       <child>
 	<widget class="GtkNotebook" id="keyboard_notebook">
-	  <property name="border_width">6</property>
+	  <property name="border_width">5</property>
 	  <property name="visible">True</property>
 	  <property name="can_focus">True</property>
 	  <property name="show_tabs">True</property>
@@ -1165,7 +1165,7 @@
 				  <child>
 				    <widget class="GtkLabel" id="label51">
 				      <property name="visible">True</property>
-				      <property name="label" translatable="yes">Reset to de_faults</property>
+				      <property name="label" translatable="yes">Reset To De_faults</property>
 				      <property name="use_underline">True</property>
 				      <property name="use_markup">False</property>
 				      <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -1807,8 +1807,9 @@
 </widget>
 
 <widget class="GtkDialog" id="xkb_model_chooser">
+  <property name="border_width">5</property>
   <property name="visible">True</property>
-  <property name="title" translatable="yes">Choose a keyboard model</property>
+  <property name="title" translatable="yes">Choose A Keyboard Model</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_NONE</property>
   <property name="modal">True</property>
@@ -1821,13 +1822,13 @@
   <property name="skip_pager_hint">False</property>
   <property name="type_hint">GDK_WINDOW_TYPE_HINT_DIALOG</property>
   <property name="gravity">GDK_GRAVITY_NORTH_WEST</property>
-  <property name="has_separator">True</property>
+  <property name="has_separator">False</property>
 
   <child internal-child="vbox">
     <widget class="GtkVBox" id="dialog-vbox2">
       <property name="visible">True</property>
       <property name="homogeneous">False</property>
-      <property name="spacing">0</property>
+      <property name="spacing">2</property>
 
       <child internal-child="action_area">
 	<widget class="GtkHButtonBox" id="dialog-action_area1">
@@ -1870,7 +1871,7 @@
 
       <child>
 	<widget class="GtkVBox" id="xkb_model_chooser_pane">
-	  <property name="border_width">12</property>
+	  <property name="border_width">5</property>
 	  <property name="visible">True</property>
 	  <property name="homogeneous">False</property>
 	  <property name="spacing">6</property>
@@ -1878,7 +1879,7 @@
 	  <child>
 	    <widget class="GtkLabel" id="label58">
 	      <property name="visible">True</property>
-	      <property name="label" translatable="yes">_Models</property>
+	      <property name="label" translatable="yes">_Models:</property>
 	      <property name="use_underline">True</property>
 	      <property name="use_markup">False</property>
 	      <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -1934,8 +1935,9 @@
 </widget>
 
 <widget class="GtkDialog" id="xkb_layout_chooser">
+  <property name="border_width">5</property>
   <property name="visible">True</property>
-  <property name="title" translatable="yes">Choose a layout</property>
+  <property name="title" translatable="yes">Choose A Layout</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_NONE</property>
   <property name="modal">False</property>
@@ -1948,13 +1950,13 @@
   <property name="skip_pager_hint">False</property>
   <property name="type_hint">GDK_WINDOW_TYPE_HINT_DIALOG</property>
   <property name="gravity">GDK_GRAVITY_NORTH_WEST</property>
-  <property name="has_separator">True</property>
+  <property name="has_separator">False</property>
 
   <child internal-child="vbox">
     <widget class="GtkVBox" id="dialog-vbox3">
       <property name="visible">True</property>
       <property name="homogeneous">False</property>
-      <property name="spacing">0</property>
+      <property name="spacing">2</property>
 
       <child internal-child="action_area">
 	<widget class="GtkHButtonBox" id="dialog-action_area2">
@@ -2002,7 +2004,7 @@
 
 	  <child>
 	    <widget class="GtkVBox" id="vbox43">
-	      <property name="border_width">12</property>
+	      <property name="border_width">5</property>
 	      <property name="visible">True</property>
 	      <property name="homogeneous">False</property>
 	      <property name="spacing">6</property>
@@ -2064,7 +2066,7 @@
 
 	  <child>
 	    <widget class="GtkVBox" id="vboxPreview">
-	      <property name="border_width">12</property>
+	      <property name="border_width">5</property>
 	      <property name="visible">True</property>
 	      <property name="homogeneous">False</property>
 	      <property name="spacing">6</property>
