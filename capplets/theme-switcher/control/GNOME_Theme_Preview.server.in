@@ -1,0 +1,23 @@
+<oaf_info>
+
+<oaf_server iid="OAFIID:GNOME_Theme_PreviewFactory" type="exe"
+	location="gnome-theme-preview">
+	<oaf_attribute name="repo_ids" type="stringv">
+		<item value="IDL:Bonobo/GenericFactory:1.0"/>
+	</oaf_attribute>
+	<oaf_attribute name="name" type="string" value="GNOME Theme Preview Factory"/>
+	<oaf_attribute name="description" type="string" value="Factory for gnome theme preview controls"/>
+</oaf_server>
+
+<oaf_server iid="OAFIID:Bonobo_Sample_Entry" type="factory"
+	location="OAFIID:Bonobo_Sample_ControlFactory">
+	<oaf_attribute name="repo_ids" type="stringv">
+		<item value="IDL:Bonobo/Unknown:1.0"/>
+		<item value="IDL:Bonobo/Control:1.0"/>
+	</oaf_attribute>
+	<oaf_attribute name="name" type="string" value="Gnome Theme Preview"/>
+	<oaf_attribute name="description" type="string" value="A preview for gtk themes"/>
+</oaf_server>
+
+</oaf_info>
+

@@ -4,8 +4,9 @@
 #endif
 
 #include "da.h"
-#include "capplet-widget.h"
 #include <signal.h>
+
+GtkWidget *preview_control;
 
 static gboolean   ignore_change = FALSE;
 
@@ -38,6 +39,21 @@ click_revert(GtkWidget *widget, gpointer data);
 static void
 click_entry(GtkWidget *clist, gint row, gint col, GdkEvent *event,
 	    gpointer data);
+static void
+state_changed (gboolean state);
+static void
+response_cb (GtkDialog *dialog, GtkResponseType response, gpointer data);
+
+void
+send_reread(void)
+{
+	if (!(current_theme && current_theme->rc))
+		return;
+
+	bonobo_widget_set_property (BONOBO_WIDGET (preview_control),
+				    "theme", TC_CORBA_string,
+				    gtkrc_tmp, NULL);
+}
 
 static void
 auto_callback (GtkWidget *widget, gpointer data)
@@ -45,7 +61,7 @@ auto_callback (GtkWidget *widget, gpointer data)
   if (ignore_change == FALSE) {
 	  if (GTK_TOGGLE_BUTTON (auto_preview)->active)
 		  click_preview (widget,NULL);
-	  capplet_widget_state_changed(CAPPLET_WIDGET (capplet_widget), TRUE);
+	  state_changed (TRUE);
   }
   
 }
@@ -53,7 +69,7 @@ static void
 font_callback (GtkWidget *widget, gchar *font, gpointer data)
 {
   if (ignore_change == FALSE) {
-	capplet_widget_state_changed(CAPPLET_WIDGET (capplet_widget), TRUE);
+	state_changed (TRUE);
 	if (GTK_TOGGLE_BUTTON (auto_preview)->active)
 	  click_preview (widget,NULL);
   }	
@@ -62,7 +78,7 @@ static void
 use_theme_font_callback (GtkWidget *widget, gpointer data)
 {
   if (ignore_change == FALSE) {
-	capplet_widget_state_changed(CAPPLET_WIDGET (capplet_widget), TRUE);
+	state_changed (TRUE);
 	if (GTK_TOGGLE_BUTTON (auto_preview)->active)
 		click_preview (widget,NULL);
 	if (!GTK_TOGGLE_BUTTON (font_cbox)->active)
@@ -170,16 +186,6 @@ install_theme_callback (GtkWidget *widget, gpointer data)
 
 }
 
-static gint
-delete_capplet (GtkWidget *widget, GdkEvent *event, gpointer data)
-{
-  /* We don't want the toplevel window destroyed until
-   * our child exits.
-   */
-  close(prog_fd);
-  return FALSE;
-}
-
 GtkWidget *
 make_main(void)
 {
@@ -188,9 +194,16 @@ make_main(void)
   GtkWidget *frame, *button;
   GtkWidget *button_vbox;
   gboolean default_used;
+  BonoboUIContainer *container;
   
-  capplet_widget = capplet_widget_new();
-  gtk_container_set_border_width(GTK_CONTAINER(capplet_widget), 5);
+  capplet_widget = gtk_dialog_new_with_buttons (_("Gtk+ Theme Selector"),
+					 NULL, -1,
+					 GTK_STOCK_HELP, GTK_RESPONSE_HELP,
+					 GTK_STOCK_APPLY, GTK_RESPONSE_APPLY,
+					 GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
+					 NULL);
+  gtk_dialog_set_response_sensitive (GTK_DIALOG (capplet_widget),
+		  		     GTK_RESPONSE_APPLY, FALSE);
 
   box = gtk_vbox_new(FALSE, GNOME_PAD);
   hbox = gtk_hbox_new(TRUE, GNOME_PAD);
@@ -310,23 +323,17 @@ make_main(void)
   frame = gtk_frame_new (NULL);
   gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN); 
   gtk_box_pack_start(GTK_BOX(hbox), frame, TRUE, TRUE, 0);
-  preview_socket = gtk_socket_new();
-  gtk_container_add(GTK_CONTAINER(frame), preview_socket);
+  container = bonobo_ui_container_new ();
+  preview_control = bonobo_widget_new_control ("OAFIID:GNOME_Theme_Preview",
+		  			       BONOBO_OBJREF (container));
+  bonobo_object_unref (BONOBO_OBJECT (container));
+
+  gtk_container_add(GTK_CONTAINER(frame), preview_control);
   update_theme_entries(theme_list);
 
-  gtk_signal_connect (GTK_OBJECT (capplet_widget), "help",
-		      GTK_SIGNAL_FUNC (click_help), NULL);
-  gtk_signal_connect (GTK_OBJECT (capplet_widget), "try",
-		      GTK_SIGNAL_FUNC (click_try), NULL);
-  gtk_signal_connect (GTK_OBJECT (capplet_widget), "ok",
-		      GTK_SIGNAL_FUNC (click_ok), NULL);
-  gtk_signal_connect (GTK_OBJECT (capplet_widget), "revert",
-		      GTK_SIGNAL_FUNC (click_revert), NULL);
-  gtk_signal_connect (GTK_OBJECT (capplet_widget), "cancel",
-		      GTK_SIGNAL_FUNC (click_revert), NULL);
-  gtk_signal_connect (GTK_OBJECT (capplet_widget), "delete_event",
-		      GTK_SIGNAL_FUNC (delete_capplet), NULL);
-  gtk_container_add (GTK_CONTAINER (capplet_widget), box);
+  g_signal_connect (G_OBJECT (capplet_widget), "response", response_cb, NULL);
+  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (capplet_widget)->vbox), box,
+		      TRUE, TRUE, 0);
 
   last_theme = NULL;
   
@@ -390,7 +397,7 @@ click_try(GtkWidget *widget, gpointer data)
       use_theme(rc, NULL);
     }
   gdk_error_trap_push ();
-  signal_apply_theme(widget);
+  signal_apply_theme(capplet_widget);
   gdk_flush();
   /* system(cmd); */
   gdk_error_trap_pop ();
@@ -489,9 +496,9 @@ click_entry(GtkWidget *clist, gint row, gint col, GdkEvent *event,
       current_theme = gtk_clist_get_row_data (GTK_CLIST (clist), row);
 
       if (initial_theme)
-	capplet_widget_state_changed(CAPPLET_WIDGET (capplet_widget), TRUE);
+	state_changed (TRUE);
       else
-	capplet_widget_state_changed(CAPPLET_WIDGET (capplet_widget), FALSE);
+	state_changed (FALSE);
       
       if (GTK_TOGGLE_BUTTON (auto_preview)->active)
 	click_preview (NULL,NULL);
@@ -613,4 +620,25 @@ update_theme_entries(GtkWidget *disp_list)
     g_free (d_theme);
   if (current_theme == NULL)
     ;
+}
+
+static void
+response_cb (GtkDialog *dialog, GtkResponseType response, gpointer data)
+{
+	switch (response)
+	{
+	case GTK_RESPONSE_NONE:
+	case GTK_RESPONSE_CLOSE:
+		gtk_main_quit ();
+		break;
+	case GTK_RESPONSE_APPLY:
+		click_ok (NULL, NULL);
+		break;
+	}
+}
+
+static void state_changed (gboolean state)
+{
+  gtk_dialog_set_response_sensitive (GTK_DIALOG (capplet_widget),
+		  		     GTK_RESPONSE_APPLY, state);
 }

@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <limits.h>
 #include <fcntl.h>
+#include <bonobo.h>
 
 typedef struct _theme_entry
 {
@@ -61,8 +62,6 @@ make_main(void);
 void
 update_theme_entries(GtkWidget *disp_list);
 void
-signal_apply_theme(GtkWidget *widget);
-void
 edit_file_to_use(gchar *file, gchar *theme, gchar *font);
 void 
 set_tmp_rc(void);
@@ -72,14 +71,6 @@ void
 test_theme(gchar *theme, gchar *font);
 gchar *
 install_theme(gchar *file);
-gint
-do_demo(int argc, char **argv);
-void
-send_socket(void);
-void
-send_reread(void);
 
-
-extern GtkWidget *preview_socket;
-extern gint       prog_fd;
+extern GtkWidget *preview_control;
 extern gchar      gtkrc_tmp[1024];

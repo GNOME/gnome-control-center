@@ -1,3 +1,5 @@
+SUBDIRS = control
+
 cappletname = gtk-theme-selector
 cappletgroup = "Advanced/"
 bin_PROGRAMS = gtk-theme-selector-capplet
@@ -10,7 +12,6 @@ gtk_theme_selector_capplet_SOURCES = \
 	lister.c		\
 	main.c		\
 	signals.c		\
-	demo.c		\
 	gui.c		\
 	install.c
 
