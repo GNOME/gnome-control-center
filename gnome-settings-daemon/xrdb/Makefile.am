@@ -6,3 +6,5 @@ xrdb_DATA = \
 	Motif.ad \
 	Tk.ad \
 	Xaw.ad
+
+EXTRA_DIST = $(xrdb_DATA)

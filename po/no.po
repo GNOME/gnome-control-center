@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.5.8\n"
-"POT-Creation-Date: 2003-04-29 19:57+0200\n"
+"POT-Creation-Date: 2003-05-07 14:06-0400\n"
 "PO-Revision-Date: 2003-04-29 20:39+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
@@ -38,7 +38,7 @@ msgstr "Tastatur"
 msgid "Set your keyboard accessibility preferences"
 msgstr "Brukervalg for tilgjengelighet for tastatur"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.c:57
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.c:60
 msgid ""
 "This system does not seem to have the XKB extension.  The keyboard "
 "accessibility features will not operate without it."
@@ -797,7 +797,7 @@ msgid "Minimizing and Maximizing"
 msgstr "Minimering og maksimering"
 
 #: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
-#: capplets/windows/gnome-window-properties.c:649
+#: capplets/windows/gnome-window-properties.c:650
 msgid "Meta"
 msgstr "Meta"
 
@@ -903,7 +903,9 @@ msgstr "Alternativer"
 msgid ""
 "Testing the new settings. If you don't respond in %d seconds the previous "
 "settings will be restored."
-msgstr "Prøver de nye innstillingene. Hvis du ikke svarer innen %d sekunder vil de tidligere innstillingene bli gjenopprettet."
+msgstr ""
+"Prøver de nye innstillingene. Hvis du ikke svarer innen %d sekunder vil de "
+"tidligere innstillingene bli gjenopprettet."
 
 #: capplets/display/main.c:549
 msgid "Do you want to keep this resolution?"
@@ -921,13 +923,17 @@ msgstr "_Behold oppløsning"
 msgid ""
 "The Xserver doesn't support the XRandR extension, runtime resolution changes "
 "aren't possible."
-msgstr "X-tjeneren støtter ikke XRandR-utvidelsen. Endringer i oppløsning kan ikke utføres mens den kjører."
+msgstr ""
+"X-tjeneren støtter ikke XRandR-utvidelsen. Endringer i oppløsning kan ikke "
+"utføres mens den kjører."
 
 #: capplets/display/main.c:759
 msgid ""
 "The version of the XRandR extension is incompatible with this program, "
 "runtime resolution changes aren't possible."
-msgstr "Versjonen av XRandR-utvidelsen er inkompatibel med dette programmet. Endring av oppløsning kan ikke utføres under kjøring."
+msgstr ""
+"Versjonen av XRandR-utvidelsen er inkompatibel med dette programmet. Endring "
+"av oppløsning kan ikke utføres under kjøring."
 
 #: capplets/file-types/file-types-capplet.c:196
 msgid "Description"
@@ -1138,6 +1144,11 @@ msgstr "Kategori"
 #: capplets/file-types/mime-edit-dialog.c:932
 msgid "Choose a file category"
 msgstr "Velg en filkategori"
+
+#: capplets/file-types/mime-type-info.c:602
+#, c-format
+msgid "View as %s"
+msgstr ""
 
 #: capplets/file-types/mime-type-info.c:668
 msgid "Images"
@@ -1393,6 +1404,10 @@ msgstr "Skriv inn en ny aksellerator, eller trykk slett for å tømme"
 #: capplets/keybindings/eggcellrendererkeys.c:566
 msgid "Type a new accelerator"
 msgstr "Skriv inn en ny aksellerator"
+
+#: capplets/keybindings/gnome-keybinding-properties.c:172
+msgid "GNOME Default"
+msgstr ""
 
 #: capplets/keybindings/gnome-keybinding-properties.c:540
 msgid "<Unknown Action>"
@@ -1838,7 +1853,7 @@ msgstr "_Sikker HTTP-proxy:"
 msgid "_Username:"
 msgstr "Br_ukernavn:"
 
-#: capplets/sound/sound-properties-capplet.c:180
+#: capplets/sound/sound-properties-capplet.c:175
 msgid "Sound preferences"
 msgstr "Brukervalg for lyd"
 
@@ -1968,9 +1983,10 @@ msgstr ""
 "bakgrunn:"
 
 #: capplets/theme-switcher/theme-properties.glade.h:13
+#, fuzzy
 msgid ""
 "This theme suggests a\n"
-"font and background"
+"font and background:"
 msgstr ""
 "Dette temaet foreslår en\n"
 "skrift og en bakgrunn"
@@ -2045,11 +2061,14 @@ msgid "You can save this theme by pressing the Save Theme button."
 msgstr "Du kan lagre dette temaet ved å klikke på «Lagre tema»-knappen."
 
 #: capplets/theme-switcher/gnome-theme-manager.c:1435
+#, fuzzy
 msgid ""
-"The default theme schemas could not be found on.  This means that you "
-"probably don't have metacity installed, or that your gconf is configured "
-"incorrectly."
-msgstr "Forvalgt schema for tema ble ikke funnet. Dette betyr sannsynligvis at du ikke har metacity installert eller at GConf er feilkonfigurert."
+"The default theme schemas could not be found on your system.  This means "
+"that you probably don't have metacity installed, or that your gconf is "
+"configured incorrectly."
+msgstr ""
+"Forvalgt schema for tema ble ikke funnet. Dette betyr sannsynligvis at du "
+"ikke har metacity installert eller at GConf er feilkonfigurert."
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
@@ -2192,19 +2211,19 @@ msgstr ""
 "\n"
 "%s"
 
-#: capplets/windows/gnome-window-properties.c:624
+#: capplets/windows/gnome-window-properties.c:625
 msgid "Control"
 msgstr "Kontroll"
 
-#: capplets/windows/gnome-window-properties.c:629
+#: capplets/windows/gnome-window-properties.c:630
 msgid "Alt"
 msgstr "Alt"
 
-#: capplets/windows/gnome-window-properties.c:635
+#: capplets/windows/gnome-window-properties.c:636
 msgid "Hyper"
 msgstr "Hyper"
 
-#: capplets/windows/gnome-window-properties.c:642
+#: capplets/windows/gnome-window-properties.c:643
 msgid "Super (or \"Windows logo\")"
 msgstr "Super (eller «Windows-tast»)"
 
@@ -2461,11 +2480,11 @@ msgstr "Velg lydfil"
 msgid "Window manager \"%s\" has not registered a configuration tool\n"
 msgstr "Vindushåndterer «%s» har ikke registrert et konfigurasjonsverktøy\n"
 
-#: libwindow-settings/metacity-window-manager.c:374
+#: libwindow-settings/metacity-window-manager.c:378
 msgid "Maximize"
 msgstr "Maksimer"
 
-#: libwindow-settings/metacity-window-manager.c:375
+#: libwindow-settings/metacity-window-manager.c:379
 msgid "Roll up"
 msgstr "Rull opp"
 
