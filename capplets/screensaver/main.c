@@ -28,6 +28,9 @@
 #include <gtk/gtk.h>
 #include <gnome.h>
 #include <libgnomeui/gnome-window-icon.h>
+#include <tree.h>
+#include <parser.h>
+#include <xmlIO.h>
 
 #include <glade/glade.h>
 
@@ -44,6 +47,8 @@ static Preferences *old_prefs;
 static PrefsWidget *prefs_widget;
 
 static CappletWidget *capplet;
+
+static gboolean do_get, do_set;
 
 static void 
 state_changed_cb (GtkWidget *widget) 
@@ -179,6 +184,50 @@ setup_capplet_widget (void)
 	prefs->frozen = FALSE;
 }
 
+static void
+do_get_xml (void) 
+{
+	Preferences *prefs;
+	xmlDocPtr doc;
+
+	prefs = preferences_new ();
+	preferences_load (prefs);
+	doc = preferences_write_xml (prefs);
+	xmlDocDump (stdout, doc);
+	preferences_destroy (prefs);
+}
+
+static void
+do_set_xml (void) 
+{
+	Preferences *prefs;
+	xmlDocPtr doc;
+	Preferences *old_prefs, *new_prefs;
+	char *buffer;
+	int len = 0;
+
+	while (!feof (stdin)) {
+		if (!len) buffer = g_new (char, 16384);
+		else buffer = g_renew (char, buffer, len + 16384);
+		fread (buffer + len, 1, 16384, stdin);
+		len += 16384;
+	}
+
+	doc = xmlParseMemory (buffer, strlen (buffer));
+
+	old_prefs = preferences_new ();
+	preferences_load (old_prefs);
+
+	new_prefs = preferences_read_xml (doc);
+
+	if (new_prefs) {
+		new_prefs->config_db = old_prefs->config_db;
+		preferences_save (new_prefs);
+	} else {
+		g_warning ("Error while reading the screensaver config file");
+	}
+}
+
 int
 main (int argc, char **argv)
 {
@@ -196,6 +245,14 @@ main (int argc, char **argv)
 
 	if (res < 0) {
 		g_error ("Could not initialize the capplet.");
+	}
+	else if (res == 3) {
+		do_get_xml ();
+		return 0;
+	}
+	else if (res == 4) {
+		do_set_xml ();
+		return 0;
 	}
 
 	client = gnome_master_client ();

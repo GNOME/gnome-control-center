@@ -217,6 +217,145 @@ preferences_save (Preferences *prefs)
 	gnome_config_sync ();
 }
 
+static gint
+xml_get_number (xmlNodePtr node) 
+{
+	return atoi (xmlNodeGetContent (node));
+}
+
+static GList *
+xml_get_programs_list (xmlNodePtr programs_node) 
+{
+	GList *list_head = NULL, *list_tail = NULL;
+	xmlNodePtr node;
+	Screensaver *saver;
+	gint id = 0;
+
+	for (node = programs_node->childs; node; node = node->next) {
+		saver = screensaver_read_xml (node);
+		if (!saver) continue;
+		saver->id = id++;
+		list_tail = g_list_append (list_tail, saver);
+		if (list_head)
+			list_tail = list_tail->next;
+		else
+			list_head = list_tail;
+	}
+
+	return list_head;
+}
+
+Preferences *
+preferences_read_xml (xmlDocPtr xml_doc) 
+{
+	Preferences *prefs;
+	xmlNodePtr root_node, node;
+
+	prefs = preferences_new ();
+
+	root_node = xmlDocGetRootElement (xml_doc);
+
+	if (strcmp (root_node->name, "screensaver-prefs"))
+		return NULL;
+
+	for (node = root_node->childs; node; node = node->next) {
+		if (!strcmp (node->name, "verbose"))
+			prefs->verbose = TRUE;
+		else if (!strcmp (node->name, "lock"))
+			prefs->lock = TRUE;
+		else if (!strcmp (node->name, "fade"))
+			prefs->fade = TRUE;
+		else if (!strcmp (node->name, "unfade"))
+			prefs->unfade = TRUE;
+		else if (!strcmp (node->name, "fade-seconds"))
+			prefs->fade_seconds = xml_get_number (node);
+		else if (!strcmp (node->name, "fade-ticks"))
+			prefs->fade_ticks = xml_get_number (node);
+		else if (!strcmp (node->name, "install-colormap"))
+			prefs->install_colormap = TRUE;
+		else if (!strcmp (node->name, "nice"))
+			prefs->nice = xml_get_number (node);
+		else if (!strcmp (node->name, "timeout"))
+			prefs->timeout = xml_get_number (node);
+		else if (!strcmp (node->name, "lock-timeout"))
+			prefs->lock_timeout = xml_get_number (node);
+		else if (!strcmp (node->name, "cycle"))
+			prefs->cycle = xml_get_number (node);
+		else if (!strcmp (node->name, "programs"))
+			prefs->screensavers = xml_get_programs_list (node);
+	}
+
+	return prefs;
+}
+
+static xmlNodePtr
+xml_write_programs_list (GList *screensavers) 
+{
+	xmlNodePtr node;
+
+	node = xmlNewNode (NULL, "programs");
+
+	for (; screensavers; screensavers = screensavers->next)
+		xmlAddChild (node, screensaver_write_xml 
+			     (SCREENSAVER (screensavers->data)));
+
+	return node;
+}
+
+xmlDocPtr 
+preferences_write_xml (Preferences *prefs) 
+{
+	xmlDocPtr doc;
+	xmlNodePtr node;
+	char *tmp;
+
+	doc = xmlNewDoc ("1.0");
+
+	node = xmlNewDocNode (doc, NULL, "screensaver-prefs", NULL);
+
+	if (prefs->verbose)
+		xmlNewChild (node, NULL, "verbose", NULL);
+	if (prefs->lock)
+		xmlNewChild (node, NULL, "lock", NULL);
+	if (prefs->fade)
+		xmlNewChild (node, NULL, "fade", NULL);
+	if (prefs->unfade)
+		xmlNewChild (node, NULL, "unfade", NULL);
+
+	tmp = g_strdup_printf ("%d", prefs->fade_seconds);
+	xmlNewChild (node, NULL, "fade-seconds", tmp);
+	g_free (tmp);
+
+	tmp = g_strdup_printf ("%d", prefs->fade_ticks);
+	xmlNewChild (node, NULL, "fade-ticks", tmp);
+	g_free (tmp);
+
+	if (prefs->install_colormap)
+		xmlNewChild (node, NULL, "install-colormap", NULL);
+
+	tmp = g_strdup_printf ("%d", prefs->nice);
+	xmlNewChild (node, NULL, "nice", tmp);
+	g_free (tmp);
+
+	tmp = g_strdup_printf ("%d", prefs->timeout);
+	xmlNewChild (node, NULL, "timeout", tmp);
+	g_free (tmp);
+
+	tmp = g_strdup_printf ("%d", prefs->lock_timeout);
+	xmlNewChild (node, NULL, "lock-timeout", tmp);
+	g_free (tmp);
+
+	tmp = g_strdup_printf ("%d", prefs->cycle);
+	xmlNewChild (node, NULL, "cycle", tmp);
+	g_free (tmp);
+
+	xmlAddChild (node, xml_write_programs_list (prefs->screensavers));
+
+	xmlDocSetRootElement (doc, node);
+
+	return doc;
+}
+
 Screensaver *
 screensaver_new (void) 
 {
@@ -272,6 +411,52 @@ screensaver_remove (Screensaver *saver, GList *screensavers)
 		SCREENSAVER (node->data)->id--;
 
 	return g_list_remove_link (screensavers, saver->link);
+}
+
+Screensaver *
+screensaver_read_xml (xmlNodePtr saver_node) 
+{
+	Screensaver *saver;
+	xmlNodePtr node;
+
+	if (strcmp (saver_node->name, "screensaver"))
+		return NULL;
+
+	saver = screensaver_new ();
+
+	for (node = saver_node->childs; node; node = node->next) {
+		if (!strcmp (node->name, "name"))
+			saver->name = g_strdup (xmlNodeGetContent (node));
+		else if (!strcmp (node->name, "label"))
+			saver->label = g_strdup (xmlNodeGetContent (node));
+		else if (!strcmp (node->name, "command-line"))
+			saver->command_line =
+				g_strdup (xmlNodeGetContent (node));
+		else if (!strcmp (node->name, "visual"))
+			saver->visual = g_strdup (xmlNodeGetContent (node));
+		else if (!strcmp (node->name, "enabled"))
+			saver->enabled = TRUE;
+	}
+
+	return saver;
+}
+
+xmlNodePtr 
+screensaver_write_xml (Screensaver *saver) 
+{
+	xmlNodePtr saver_node;
+
+	saver_node = xmlNewNode (NULL, "screensaver");
+
+	xmlNewChild (saver_node, NULL, "name", saver->name);
+	xmlNewChild (saver_node, NULL, "label", saver->label);
+	xmlNewChild (saver_node, NULL, "command-line", saver->command_line);
+	xmlNewChild (saver_node, NULL, "visual", saver->visual);
+
+	if (saver->enabled)
+		xmlNewChild (saver_node, NULL, "enabled", NULL);
+
+	return saver_node;
 }
 
 char *

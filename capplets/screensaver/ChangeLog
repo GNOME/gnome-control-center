@@ -1,5 +1,28 @@
 2000-08-16  Bradford Hovinen  <hovinen@helixcode.com>
 
+	* rc-parse.c (write_screensaver_list): Don't try to write string
+	if the screensaver has no command line
+
+	* main.c (main): Register Popt table containing get and set
+	options; call do_get_xml and do_set_xml when necessary
+	(do_get_xml): 
+	(do_set_xml): Implement
+
+	* preferences.c (xml_get_number): Implement. Interpret the XML
+	content of a node as a number and return it
+	(xml_get_programs_list): Implement. Iterate through a programs
+	node and form a list of screensavers
+	(preferences_read_xml): Implement. Read an XML description of the
+	screensaver's state and put it in a preferences object
+	(xml_write_programs_list): Implement. Write out an XML node
+	corresponding to a list of screensavers
+	(preferences_write_xml): Implement. Write out an XML document with 
+	the state of the screensaver system
+	(screensaver_read_xml): Implement. Read an XML node describing a
+	screensaver 
+	(screensaver_write_xml): Implement. Write an XML node describing a 
+	screensaver
+
 	* screensaver-prefs-dialog.c (get_select_widget): Remove
 	extraneous precondition check 
 	(read_command_line): Rewrote to support quoted strings in the

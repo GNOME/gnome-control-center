@@ -612,14 +612,13 @@ write_screensaver_list (GList *screensavers)
 	gchar *str;
 
 	hack_string = g_string_new (NULL);
-	node = screensavers;
 
-	while (node) {
+	for (node = screensavers; node; node = node->next) {
 		saver = SCREENSAVER (node->data);
+		if (!saver->command_line) continue;
 		str = format_hack (saver, TRUE);
 		g_string_append (hack_string, str);
 		g_string_append (hack_string, "\n");
-		node = node->next;
 		g_free (str);
 	}
 

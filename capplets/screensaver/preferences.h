@@ -26,6 +26,7 @@
 
 #include <sys/time.h>
 #include <gtk/gtk.h>
+#include <tree.h>
 
 enum _SelectionMode {
 	SM_DISABLE_SCREENSAVER,
@@ -99,11 +100,17 @@ void preferences_destroy (Preferences *prefs);
 void preferences_load (Preferences *prefs);
 void preferences_save (Preferences *prefs);
 
+Preferences *preferences_read_xml (xmlDocPtr xml_doc);
+xmlDocPtr preferences_write_xml (Preferences *prefs);
+
 Screensaver *screensaver_new (void);
 void screensaver_destroy (Screensaver *saver);
 
 GList *screensaver_add (Screensaver *saver, GList *screensavers);
 GList *screensaver_remove (Screensaver *saver, GList *screensavers);
+
+Screensaver *screensaver_read_xml (xmlNodePtr node);
+xmlNodePtr screensaver_write_xml (Screensaver *saver);
 
 char *screensaver_get_desc (Screensaver *saver);
 
