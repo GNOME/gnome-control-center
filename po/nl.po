@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center CVS\n"
-"POT-Creation-Date: 2002-12-08 06:16+0100\n"
+"POT-Creation-Date: 2003-01-05 06:15+0100\n"
 "PO-Revision-Date: 2002-12-08 20:01+0100\n"
 "Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
@@ -1308,7 +1308,7 @@ msgid "The type of accelerator."
 msgstr "Het type sneltoets"
 
 #: capplets/keybindings/eggcellrendererkeys.c:219
-#: capplets/keybindings/gnome-keybinding-properties.c:202
+#: capplets/keybindings/gnome-keybinding-properties.c:204
 #: libbackground/applier.c:588
 msgid "Disabled"
 msgstr "Uitgeschakeld"
@@ -1322,19 +1322,19 @@ msgstr "Geef een nieuwe sneltoets in, of druk op Backspace om te wissen"
 msgid "Type a new accelerator"
 msgstr "Geef een nieuwe sneltoets in"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:538
+#: capplets/keybindings/gnome-keybinding-properties.c:540
 msgid "<Unknown Action>"
 msgstr "<Onbekende actie>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:557
+#: capplets/keybindings/gnome-keybinding-properties.c:559
 msgid "Desktop"
 msgstr "Bureaublad"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:561
+#: capplets/keybindings/gnome-keybinding-properties.c:563
 msgid "Window Management"
 msgstr "Vensterbeheer"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:696
+#: capplets/keybindings/gnome-keybinding-properties.c:698
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1343,13 +1343,13 @@ msgstr ""
 "De sneltoets \"%s\" is reeds in gebruik voor:\n"
 " \"%s\"\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:727
+#: capplets/keybindings/gnome-keybinding-properties.c:729
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr ""
 "Fout bij het instellen van nieuwe sneltoets in configuratiedatabase: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:878
+#: capplets/keybindings/gnome-keybinding-properties.c:880
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1357,11 +1357,11 @@ msgstr ""
 "Kon geen enkel toetsenbord-thema vinden. Dit betekent dat uw GTK+-"
 "installatie incompleet is."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:900
+#: capplets/keybindings/gnome-keybinding-properties.c:902
 msgid "Action"
 msgstr "Actie"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:919
+#: capplets/keybindings/gnome-keybinding-properties.c:921
 msgid "Shortcut"
 msgstr "Sneltoets"
 
@@ -1956,7 +1956,8 @@ msgstr "_Installeren"
 msgid "_Location of new theme:"
 msgstr "_Locatie van nieuw thema:"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:463
+#: capplets/theme-switcher/gnome-theme-details.c:331
+#: capplets/theme-switcher/gnome-theme-manager.c:604
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -1966,11 +1967,11 @@ msgstr ""
 "\"Thema-voorkeuren\"-venster onjuist is geïnstalleerd, of dat u het \"gnome-"
 "themes\"-pakket niet geïnstalleerd hebt."
 
-#: capplets/theme-switcher/gnome-theme-manager.c:513
+#: capplets/theme-switcher/gnome-theme-manager.c:654
 msgid "Custom theme"
 msgstr "Aangepast thema"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:513
+#: capplets/theme-switcher/gnome-theme-manager.c:654
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "U kunt dit thema opslaan door op de knop \"Thema opslaan\" te drukken."
 
@@ -2431,7 +2432,7 @@ msgid "Start XScreenSaver"
 msgstr "XScreenSaver starten"
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:1
-msgid "Antialising"
+msgid "Antialiasing"
 msgstr "Anti-aliasing"
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:2
@@ -2455,10 +2456,9 @@ msgstr ""
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:6
 msgid ""
-"The order of elements subpixel elements on an LCD screen; only used when "
-"antialising is set to \"rgba\". Possible values are: \"rgb\" - red on left, "
-"most common. \"bgr\" - blue on left. \"vrgb\" - red on top. \"vbgr\" - red "
-"on bottom."
+"The order of subpixel elements on an LCD screen; only used when antialiasing "
+"is set to \"rgba\". Possible values are: \"rgb\" - red on left, most common. "
+"\"bgr\" - blue on left. \"vrgb\" - red on top. \"vbgr\" - red on bottom."
 msgstr ""
 "De volgorde van subpixel-elementen op een LCD-scherm; alleen van toepassing "
 "wanneer anti-aliasing is ingesteld op \"rgba\". Mogelijke waarden zijn: \"rgb"
@@ -2469,8 +2469,8 @@ msgstr ""
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:7
 msgid ""
 "The type of antialiasing to use when rendering fonts. Possible values are: "
-"\"none\" - no antialiasing. \"grayscale\" - standard grayscale antialising. "
-"\"rgba\" - subpixel antialising. (LCD screens only)."
+"\"none\" - no antialiasing. \"grayscale\" - standard grayscale antialiasing. "
+"\"rgba\" - subpixel antialiasing. (LCD screens only)."
 msgstr ""
 "Het type anti-aliasing voor lettertypenweergave. Mogelijke waarden zijn: "
 "\"geen\" - geen anti-aliasing. \"grijswaarden\" - standaard grijswaarden- "
