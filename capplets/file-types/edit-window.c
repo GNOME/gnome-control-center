@@ -424,7 +424,7 @@ static void
 populate_application_menu (GtkWidget *application_menu, const char *mime_type)
 {
 	GtkWidget *new_menu, *menu_item;
-	GList *mime_list;
+	GList *app_list, *copy_list;
 	GnomeVFSMimeApplication *default_app, *application;
 	gboolean has_none, found_match;
 	char *mime_copy;
@@ -443,10 +443,11 @@ populate_application_menu (GtkWidget *application_menu, const char *mime_type)
 	default_app = gnome_vfs_mime_get_default_application (mime_type);
 
 	/* Get the application short list */
-	for (mime_list = gnome_vfs_mime_get_short_list_applications (mime_type); mime_list != NULL; mime_list = mime_list->next) {
+	app_list = gnome_vfs_mime_get_short_list_applications (mime_type);
+	for (copy_list = app_list; copy_list != NULL; copy_list = copy_list->next) {
 		has_none = FALSE;
 
-		application = mime_list->data;
+		application = copy_list->data;
 		menu_item = gtk_menu_item_new_with_label (application->name);
 
 		/* Store copy of application name in item; free when item destroyed. */
@@ -458,13 +459,41 @@ populate_application_menu (GtkWidget *application_menu, const char *mime_type)
 		gtk_menu_append (GTK_MENU (new_menu), menu_item);
 		gtk_widget_show (menu_item);
 	}
-	gnome_vfs_mime_application_list_free (mime_list);
 
-	/* Add None menu item */
+	if (app_list != NULL) {
+		gnome_vfs_mime_application_list_free (app_list);
+		app_list = NULL;
+	}
+
+	/* Find all appliactions or add a "None" item */
 	if (has_none && default_app == NULL) {
-		menu_item = gtk_menu_item_new_with_label (_("None"));
-		gtk_menu_append (GTK_MENU (new_menu), menu_item);
-		gtk_widget_show (menu_item);
+		/* Add all applications */
+		app_list = gnome_vfs_mime_get_all_applications (mime_type);
+		for (copy_list = app_list; copy_list != NULL; copy_list = copy_list->next) {
+			has_none = FALSE;
+
+			application = copy_list->data;
+			menu_item = gtk_menu_item_new_with_label (application->name);
+
+			/* Store copy of application name in item; free when item destroyed. */
+			gtk_object_set_data_full (GTK_OBJECT (menu_item),
+						  "application",
+						  g_strdup (application->name),
+						  g_free);
+
+			gtk_menu_append (GTK_MENU (new_menu), menu_item);
+			gtk_widget_show (menu_item);
+		}
+
+		if (app_list != NULL) {
+			gnome_vfs_mime_application_list_free (app_list);
+			app_list = NULL;
+		} else {
+			menu_item = gtk_menu_item_new_with_label (_("None"));
+			gtk_menu_append (GTK_MENU (new_menu), menu_item);
+			gtk_widget_show (menu_item);
+		}
+
 	} else {
 		/* Check and see if default is in the short list */
 		if (default_app != NULL) {

@@ -20,7 +20,7 @@
  *  Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *  Authors: Jonathan Blandford <jbr@redhat.com>
- *  	     Gene Z. Ragan <gzr@eazel.com>
+ *  	     Gene Z. Ragan 	<gzr@eazel.com>
  *
  */
 
