@@ -22,7 +22,6 @@ gboolean
 wm_is_running (void)
 {
         gboolean result;
-        guint old_mask;
         XWindowAttributes attrs;
         
 	gdk_error_trap_push ();
