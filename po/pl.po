@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-07-21 21:44+0200\n"
+"POT-Creation-Date: 2003-07-25 07:38+0200\n"
 "PO-Revision-Date: 2003-07-12 01:00+0100\n"
 "Last-Translator: Gnome PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
@@ -384,7 +384,7 @@ msgstr "_Bez obrazu"
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:852
 #: capplets/keyboard/gnome-keyboard-properties.c:220
-#: capplets/mouse/gnome-mouse-properties.c:716
+#: capplets/mouse/gnome-mouse-properties.c:714
 #: capplets/sound/sound-properties-capplet.c:212
 msgid "Retrieve and store legacy settings"
 msgstr "Pobiera i zapisuje tradycyjne ustawienia"
@@ -2917,17 +2917,27 @@ msgstr "Wpisy menu kontekstowego dla czcionek w programie Nautilus"
 msgid "Set as Application Font"
 msgstr "Ustaw jako czcionkę aplikacji"
 
-#: vfs-methods/themus/Themus_Component.server.in.in.h:1
-msgid "Apply theme..."
-msgstr "Zastosuj motyw..."
+#: vfs-methods/themus/apply-font.glade.h:1
+msgid " "
+msgstr " "
 
-#: vfs-methods/themus/Themus_Component.server.in.in.h:2
-msgid "Themus component"
-msgstr "Komponent Themus"
+#: vfs-methods/themus/apply-font.glade.h:2
+msgid "<span weight=\"bold\" size=\"larger\">Apply new font?</span>"
+msgstr "<span weight=\"bold\" size=\"larger\">Zastosować nowe czcionki?</span>"
 
-#: vfs-methods/themus/Themus_Component.server.in.in.h:3
-msgid "Themus component apply theme operations"
-msgstr "Komponent Themus operujący na motywach"
+#: vfs-methods/themus/apply-font.glade.h:3
+msgid "Do _not apply font"
+msgstr "_Nie stosuj czcionki"
+
+#: vfs-methods/themus/apply-font.glade.h:4
+msgid ""
+"The theme you have selected suggests a new font. A preview of the font is "
+"shown below."
+msgstr "Wybrany motyw proponuje nową czcionkę. Jej podgląd jest poniżej."
+
+#: vfs-methods/themus/apply-font.glade.h:5
+msgid "_Apply font"
+msgstr "Zastosuj _czcionkę"
 
 #: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
 msgid "Theme Properties content view component"
@@ -2956,6 +2966,11 @@ msgstr "Motyw ikony"
 #: vfs-methods/themus/themus-properties-view.c:217
 msgid "URI currently displayed"
 msgstr "Aktualnie wyświetlany URI"
+
+#. translators: you may want to include non-western chars here
+#: vfs-methods/themus/themus-theme-applier.c:83
+msgid "ABCDEFG"
+msgstr "aąbcćdeęfghi AĄBCĆDEĘFGHI"
 
 #: vfs-methods/themus/themus.schemas.in.h:1
 msgid "If set to true, then installed themes will be thumbnailed."
@@ -2993,6 +3008,15 @@ msgstr "Tworzenie miniaturek zainstalowanych motywów"
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Tworzenie miniaturek motywów"
+
+#~ msgid "Apply theme..."
+#~ msgstr "Zastosuj motyw..."
+
+#~ msgid "Themus component"
+#~ msgstr "Komponent Themus"
+
+#~ msgid "Themus component apply theme operations"
+#~ msgstr "Komponent Themus operujący na motywach"
 
 #~ msgid "_Wallpaper"
 #~ msgstr "_Tapeta"
