@@ -73,7 +73,10 @@ gnome_wm_manager_set_current  (GnomeWindowManager *wm)
 GnomeWindowManager *
 gnome_wm_manager_get_current (void)
 {
-  return GNOME_WINDOW_MANAGER (gnome_window_manager_new (wm_list_get_current()->dentry));
+  WindowManager *current_wm = wm_list_get_current();
+  if (current_wm == NULL)
+    return NULL;
+  return GNOME_WINDOW_MANAGER (gnome_window_manager_new (current_wm->dentry));
 }
 
 void gnome_wm_manager_change_wm_to_settings (void)
