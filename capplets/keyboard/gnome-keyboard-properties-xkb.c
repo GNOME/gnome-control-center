@@ -143,6 +143,7 @@ void
 setup_xkb_tabs (GladeXML * dialog, GConfChangeSet * changeset)
 {
   GConfClient *confClient = gconf_client_get_default ();
+  gboolean isXkb;
 
   XklInit (GDK_DISPLAY ());
   XklConfigInit ();
@@ -187,6 +188,10 @@ setup_xkb_tabs (GladeXML * dialog, GConfChangeSet * changeset)
   GSwitchItXkbConfigLoadInitial (&initialConfig);
 
   enable_disable_restoring (dialog);
+
+  isXkb = !strcmp (XklGetBackendName(), "XKB");
+  if (!isXkb)
+    gtk_widget_hide (WID ("enable_preview"));
 
   g_signal_connect_swapped (G_OBJECT (WID ("enable_preview")), "toggled",
 		            G_CALLBACK (preview_toggled), dialog);
