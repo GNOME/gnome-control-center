@@ -25,8 +25,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2002-03-08 22:35+0100\n"
-"PO-Revision-Date: 2002-03-08 22:34+0100\n"
+"POT-Creation-Date: 2002-03-19 20:53+0100\n"
+"PO-Revision-Date: 2002-03-19 20:53+0100\n"
 "Last-Translator: Ole Laursen <olau@hardworking.dk>\n"
 "Language-Team: danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -41,16 +41,20 @@ msgstr "Baggrund"
 msgid "Configuration of the desktop's background"
 msgstr "Konfigurér skrivebordsbaggrunden"
 
-#: capplets/background/background-properties-capplet.c:289
+#: capplets/background/background-properties-capplet.c:260
+msgid "Please select a background image"
+msgstr "Vælg venligst et baggrundsbillede"
+
+#: capplets/background/background-properties-capplet.c:314
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:575
-#: capplets/keyboard/gnome-keyboard-properties.c:319
-#: capplets/mouse/gnome-mouse-properties.c:678
-#: capplets/sound/sound-properties-capplet.c:138
+#: capplets/default-applications/gnome-default-applications-properties.c:622
+#: capplets/keyboard/gnome-keyboard-properties.c:320
+#: capplets/mouse/gnome-mouse-properties.c:681
+#: capplets/sound/sound-properties-capplet.c:140
 msgid "Retrieve and store legacy settings"
 msgstr "Indhent og gem gamle indstillinger"
 
-#: capplets/background/background-properties-capplet.c:312
+#: capplets/background/background-properties-capplet.c:339
 msgid "Background properties"
 msgstr "Indstillinger for baggrund"
 
@@ -63,6 +67,7 @@ msgid "Background picture"
 msgstr "Baggrundsbillede"
 
 #: capplets/background/background-properties.glade.h:3
+#: libbackground/preferences.c:49
 msgid "Centered"
 msgstr "Centreret"
 
@@ -88,6 +93,7 @@ msgid "Solid color"
 msgstr "Ensfarvet"
 
 #: capplets/background/background-properties.glade.h:9
+#: libbackground/preferences.c:51
 msgid "Stretched"
 msgstr "Udstrakt"
 
@@ -96,6 +102,7 @@ msgid "Style:"
 msgstr "Stil: "
 
 #: capplets/background/background-properties.glade.h:11
+#: libbackground/preferences.c:48
 msgid "Tiled"
 msgstr "Side-om-side"
 
@@ -111,64 +118,83 @@ msgstr "Lodret farveovergang"
 msgid "Just apply settings and quit"
 msgstr "Anvend indstillingerne og afslut"
 
-#: capplets/common/gconf-property-editor.c:145
+#: capplets/common/gconf-property-editor.c:169
 msgid "Key"
 msgstr "Nøgle"
 
-#: capplets/common/gconf-property-editor.c:146
+#: capplets/common/gconf-property-editor.c:170
 msgid "GConf key to which this property editor is attached"
 msgstr "GConf-nøgle som dette egenskabsredigeringsprogram er tilknyttet til"
 
-#: capplets/common/gconf-property-editor.c:152
+#: capplets/common/gconf-property-editor.c:176
 msgid "Callback"
 msgstr "Tilbagekald"
 
-#: capplets/common/gconf-property-editor.c:153
+#: capplets/common/gconf-property-editor.c:177
 msgid "Issue this callback when the value associated with key gets changed"
 msgstr ""
 "Udfør dette tilbagekald når værdien der er associeret med nøglen, ændres"
 
 # RETMIG: find ud af hvad dette er
-#: capplets/common/gconf-property-editor.c:158
+#: capplets/common/gconf-property-editor.c:182
 msgid "Change set"
 msgstr "Skiftesæt"
 
-#: capplets/common/gconf-property-editor.c:159
+#: capplets/common/gconf-property-editor.c:183
 msgid ""
 "GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr ""
 "GConf-skiftesæt som indeholder data der skal videresendes til GConf-klienten "
 "ved anvendelse"
 
-#: capplets/common/gconf-property-editor.c:164
+#: capplets/common/gconf-property-editor.c:188
 msgid "Conversion to widget callback"
 msgstr "Konvertering til kontrol-tilbagekald"
 
-#: capplets/common/gconf-property-editor.c:165
+#: capplets/common/gconf-property-editor.c:189
 msgid ""
 "Callback to be issued when data are to be converted from GConf to the widget"
 msgstr ""
 "Tilbagekald som bliver udført når data skal konverteres fra GConf til "
 "kontrollen"
 
-#: capplets/common/gconf-property-editor.c:170
+#: capplets/common/gconf-property-editor.c:194
 msgid "Conversion from widget callback"
 msgstr "Konvertering fra kontrol-tilbagekald"
 
-#: capplets/common/gconf-property-editor.c:171
+#: capplets/common/gconf-property-editor.c:195
 msgid ""
 "Callback to be issued when data are to be converted to GConf from the widget"
 msgstr ""
 "Tilbagekald som bliver udført når data skal konverteres til GConf fra "
 "kontrollen"
 
-#: capplets/common/gconf-property-editor.c:176
+#: capplets/common/gconf-property-editor.c:200
 msgid "UI Control"
 msgstr "Grænsefladekontrol"
 
-#: capplets/common/gconf-property-editor.c:177
+#: capplets/common/gconf-property-editor.c:201
 msgid "Object that controls the property (normally a widget)"
 msgstr "Objekt der kontrollerer egenskaben (normalt en kontrol)"
+
+#: capplets/common/gconf-property-editor.c:216
+msgid "Property editor object data"
+msgstr "Objektdata for egenskabsredigering"
+
+#: capplets/common/gconf-property-editor.c:217
+msgid "Custom data required by the specific property editor"
+msgstr ""
+"Brugerdefinerede data som behøves af den specifikke egenskabsredigering"
+
+#: capplets/common/gconf-property-editor.c:223
+msgid "Property editor data freeing callback"
+msgstr "Datafrigørelsestilbagekald for egenskabsredigering"
+
+#: capplets/common/gconf-property-editor.c:224
+msgid "Callback to be issued when property editor object data is to be freed"
+msgstr ""
+"Tilbagekald som bliver udført når objektdata for egenskabsredigeringen skal "
+"frigøres"
 
 #: capplets/default-applications/default-applications.desktop.in.h:1
 msgid "Choose the applications used by default"
@@ -324,7 +350,6 @@ msgid "Legacy applications settings (grdb)"
 msgstr "Indstillinger for ældre programmer (grdb)"
 
 #: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
-#: control-center/gnomecc.glade.h:1
 msgid "Appearance"
 msgstr "Udseende"
 
@@ -550,7 +575,7 @@ msgid "Add service..."
 msgstr "Tilføj tjeneste..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
-#: capplets/file-types/mime-edit-dialog.c:748
+#: capplets/file-types/mime-edit-dialog.c:750
 msgid "Category"
 msgstr "Kategori"
 
@@ -689,11 +714,11 @@ msgid "True if this dialog is for adding a MIME type"
 msgstr "TRUE hvis dette vindue er til alt tilføje en MIME-type"
 
 #: capplets/file-types/mime-edit-dialog.c:387
-#: capplets/file-types/mime-edit-dialog.c:442
+#: capplets/file-types/mime-edit-dialog.c:442 libbackground/preferences.c:53
 msgid "None"
 msgstr "Ingen"
 
-#: capplets/file-types/mime-edit-dialog.c:673
+#: capplets/file-types/mime-edit-dialog.c:675
 msgid ""
 "Invalid MIME type. Please enter a valid MIME type, or leave the field blank "
 "to have one generated for you."
@@ -701,11 +726,11 @@ msgstr ""
 "Ugyldig MIME-type. Indtast venligst en gyldig MIME-type eller lad feltet "
 "være tomt for at få en genereret for dig."
 
-#: capplets/file-types/mime-edit-dialog.c:684
+#: capplets/file-types/mime-edit-dialog.c:686
 msgid "There already exists a MIME type of that name."
 msgstr "Der eksisterer allerede en MIME-type med det navn."
 
-#: capplets/file-types/mime-edit-dialog.c:753
+#: capplets/file-types/mime-edit-dialog.c:755
 msgid "Choose a file category"
 msgstr "Vælg en filkategori"
 
@@ -779,14 +804,6 @@ msgstr "Manualsider"
 msgid "Electronic mail transmission"
 msgstr "Epost-overførsel"
 
-#: capplets/font/font-properties.glade.h:1
-msgid "Font properties"
-msgstr "Indstillinger for skrifttype"
-
-#: capplets/font/font-properties.glade.h:2
-msgid "Use a custom font."
-msgstr "Benyt en selvvalgt skrifttype."
-
 #: capplets/font/font-properties.desktop.in.h:1
 msgid "Font"
 msgstr "Skrifttype"
@@ -795,10 +812,91 @@ msgstr "Skrifttype"
 msgid "Select which font to use"
 msgstr "Vælg hvilken skrifttype der skal bruges"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:315
-#: capplets/keyboard/gnome-keyboard-properties.c:317
-#: capplets/sound/sound-properties-capplet.c:134
+#: capplets/font/font-properties.glade.h:1
+msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZzÆæØøÅå"
+
+#: capplets/font/font-properties.glade.h:2
+msgid "Desktop Font"
+msgstr "Skrivebordsskrifttype"
+
+#: capplets/font/font-properties.glade.h:3
+msgid "File Manager Font"
+msgstr "Filhåndteringsskrifttype"
+
+#: capplets/font/font-properties.glade.h:4
+msgid "Font Preferences"
+msgstr "Skrifttypeindstillinger"
+
+#: capplets/font/font-properties.glade.h:5
+msgid "Pick a Font"
+msgstr "Vælg en skrifttype"
+
+#: capplets/font/font-properties.glade.h:6
+msgid "Select the desktop font"
+msgstr "Vælg skrivebordets skrifttype"
+
+#: capplets/font/font-properties.glade.h:7
+msgid "Set to Default"
+msgstr "Sæt til standardværdier"
+
+#: capplets/keybindings/eggcellrendererkeys.c:152
+#: capplets/keybindings/eggcellrendererkeys.c:153
+msgid "Accelerator modifiers"
+msgstr "Genvejsmodifikationer"
+
+#: capplets/keybindings/eggcellrendererkeys.c:161
+#: capplets/keybindings/eggcellrendererkeys.c:162
+msgid "Accelerator key"
+msgstr "Genvejstast"
+
+#: capplets/keybindings/eggcellrendererkeys.c:199
+#: capplets/keybindings/gnome-keybinding-properties.c:54
+#: libbackground/applier.c:515
+msgid "Disabled"
+msgstr "Deaktiveret"
+
+#: capplets/keybindings/eggcellrendererkeys.c:302
+#: capplets/keybindings/eggcellrendererkeys.c:489
+msgid "Type a new accelerator, or press Backspace to clear"
+msgstr "Indtast en ny genvej eller tryk på slet tilbage for at rydde"
+
+#: capplets/keybindings/eggcellrendererkeys.c:492
+msgid "Type a new accelerator"
+msgstr "Indtast en ny genvej"
+
+#: capplets/keybindings/gnome-keybinding-properties.c:250
+msgid "<Unknown Action>"
+msgstr "<ukendt handling>"
+
+#: capplets/keybindings/gnome-keybinding-properties.c:411
+msgid ""
+"Unable to find any keyboard themes.  This means your GTK+ installation has "
+"been incompletely installed."
+msgstr ""
+"Kunne ikke finde nogen tastaturtemaer. Dette betyder at Gtk+-installationen "
+"er ufuldstændig."
+
+#: capplets/keybindings/gnome-keybinding-properties.c:465
+msgid "_Action"
+msgstr "_Handling"
+
+#: capplets/keybindings/gnome-keybinding-properties.c:477
+msgid "_Shortcut"
+msgstr "_Genvej"
+
+#: capplets/keybindings/keybinding.desktop.in.h:1
+msgid "Keybinding"
+msgstr "Tastebinding"
+
+#: capplets/keybindings/keybinding.desktop.in.h:2
+msgid "Keybinding Properties"
+msgstr "Indstillinger for tastaturbindinger"
+
+#: capplets/keyboard/gnome-keyboard-properties.c:316
+#: capplets/keyboard/gnome-keyboard-properties.c:318
 #: capplets/sound/sound-properties-capplet.c:136
+#: capplets/sound/sound-properties-capplet.c:138
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
@@ -941,7 +1039,7 @@ msgstr "_Lydstyrke:"
 msgid "Keyboard"
 msgstr "Tastatur"
 
-#: capplets/mouse/gnome-mouse-properties.c:407
+#: capplets/mouse/gnome-mouse-properties.c:410
 #, c-format
 msgid ""
 "<b>Unknown Cursor</b>\n"
@@ -950,7 +1048,7 @@ msgstr ""
 "<b>Ukendt markør</b>\n"
 "%s"
 
-#: capplets/mouse/gnome-mouse-properties.c:505
+#: capplets/mouse/gnome-mouse-properties.c:508
 msgid ""
 "<b>Default Cursor - Current</b>\n"
 "The default cursor that ships with X"
@@ -958,7 +1056,7 @@ msgstr ""
 "<b>Standardmarkør - nuværende</b>\n"
 "Den standardmarkør der følger med X"
 
-#: capplets/mouse/gnome-mouse-properties.c:508
+#: capplets/mouse/gnome-mouse-properties.c:511
 msgid ""
 "<b>Default Cursor</b>\n"
 "The default cursor that ships with X"
@@ -966,7 +1064,7 @@ msgstr ""
 "<b>Standardmarkør</b>\n"
 "Den standardmarkør der følger med X"
 
-#: capplets/mouse/gnome-mouse-properties.c:526
+#: capplets/mouse/gnome-mouse-properties.c:529
 msgid ""
 "<b>White Cursor - Current</b>\n"
 "The default cursor inverted"
@@ -974,7 +1072,7 @@ msgstr ""
 "<b>Hvid markør - nuværende</b>\n"
 "Inverteret standardmarkør"
 
-#: capplets/mouse/gnome-mouse-properties.c:529
+#: capplets/mouse/gnome-mouse-properties.c:532
 msgid ""
 "<b>White Cursor</b>\n"
 "The default cursor inverted"
@@ -982,7 +1080,7 @@ msgstr ""
 "<b>Hvid markør</b>\n"
 "Inverteret standardmarkør"
 
-#: capplets/mouse/gnome-mouse-properties.c:547
+#: capplets/mouse/gnome-mouse-properties.c:550
 msgid ""
 "<b>Large Cursor - Current</b>\n"
 "Large version of normal cursor"
@@ -990,7 +1088,7 @@ msgstr ""
 "<b>Stor markør - nuværende</b>\n"
 "Stor udgave af den normale markør"
 
-#: capplets/mouse/gnome-mouse-properties.c:550
+#: capplets/mouse/gnome-mouse-properties.c:553
 msgid ""
 "<b>Large Cursor</b>\n"
 "Large version of normal cursor"
@@ -998,7 +1096,7 @@ msgstr ""
 "<b>Stor markør</b>\n"
 "Stor udgave af den normale markør"
 
-#: capplets/mouse/gnome-mouse-properties.c:568
+#: capplets/mouse/gnome-mouse-properties.c:571
 msgid ""
 "<b>Large White Cursor - Current</b>\n"
 "Large version of white cursor"
@@ -1006,7 +1104,7 @@ msgstr ""
 "<b>Stor hvid markør - nuværende</b>\n"
 "Stor udgave af den hvide markør"
 
-#: capplets/mouse/gnome-mouse-properties.c:571
+#: capplets/mouse/gnome-mouse-properties.c:574
 msgid ""
 "<b>Large White Cursor</b>\n"
 "Large version of white cursor"
@@ -1014,7 +1112,7 @@ msgstr ""
 "<b>Stor hvid markør</b>\n"
 "Stor udgave af den hvide markør"
 
-#: capplets/mouse/gnome-mouse-properties.c:703
+#: capplets/mouse/gnome-mouse-properties.c:708
 #: capplets/mouse/gnome-mouse-properties.glade.h:18
 #: capplets/mouse/mouse.desktop.in.h:2
 msgid "Mouse Properties"
@@ -1159,7 +1257,7 @@ msgstr "Pauseskærm"
 msgid "Configure GNOME's use of sound"
 msgstr "Konfigurér brugen af lyd i Gnome"
 
-#: capplets/sound/sound-properties-capplet.c:166
+#: capplets/sound/sound-properties-capplet.c:170
 msgid "Sound properties"
 msgstr "Indstillinger for lyd"
 
@@ -1268,26 +1366,14 @@ msgid "Select which gtk+ theme to use"
 msgstr "Vælg hvilket Gtk+-tema der skal bruges"
 
 #: capplets/theme-switcher/gtk-theme-selector.glade.h:1
-msgid "Auto Preview"
-msgstr "Automatisk test"
-
-#: capplets/theme-switcher/gtk-theme-selector.glade.h:2
-msgid "Available Themes"
-msgstr "Tilgængelige temaer"
-
-#: capplets/theme-switcher/gtk-theme-selector.glade.h:3
 msgid "Gtk+ Theme"
 msgstr "Gtk+-tema"
 
-#: capplets/theme-switcher/gtk-theme-selector.glade.h:4
+#: capplets/theme-switcher/gtk-theme-selector.glade.h:2
 msgid "Install new theme..."
 msgstr "Installér nyt tema..."
 
-#: capplets/theme-switcher/gtk-theme-selector.glade.h:5
-msgid "Preview"
-msgstr "Eksempel"
-
-#: capplets/theme-switcher/main.c:218
+#: capplets/theme-switcher/main.c:211
 msgid "Select a theme to install"
 msgstr "Vælg et tema der skal installeres"
 
@@ -1387,48 +1473,36 @@ msgstr "_Menu"
 msgid "_Toolbars have: "
 msgstr "_Værktøjslinjer har: "
 
-#: control-center/capplet-dir-view.c:148
+#: control-center/capplet-dir-view.c:153
 msgid "Layout"
 msgstr "Layout"
 
-#: control-center/capplet-dir-view.c:149
+#: control-center/capplet-dir-view.c:154
 msgid "Layout to use for this view of the capplets"
 msgstr "Layout der skal bruges for denne visning af kontrolcenterprogrammerne"
 
-#: control-center/capplet-dir-view.c:155
+#: control-center/capplet-dir-view.c:160
 msgid "Capplet directory object"
 msgstr "Mappeobjekt for kontrolcenterprogram"
 
-#: control-center/capplet-dir-view.c:156
+#: control-center/capplet-dir-view.c:161
 msgid "Capplet directory that this view is viewing"
 msgstr "Mappe for kontrolcenterprogram som denne visning viser"
 
-#: control-center/capplet-dir-view.c:313 control-center/gnomecc.desktop.in.h:1
+#: control-center/capplet-dir-view.c:318 control-center/gnomecc.desktop.in.h:1
 msgid "GNOME Control Center"
 msgstr "Kontrolcenter"
 
-#: control-center/capplet-dir-view.c:316
+#: control-center/capplet-dir-view.c:321
 msgid "Desktop properties manager."
 msgstr "Håndtering af skrivebordsindstillinger"
 
-#: control-center/capplet-dir-view.c:450
+#: control-center/capplet-dir-view.c:457
 #, c-format
 msgid "Gnome Control Center : %s"
 msgstr "Kontrolcenter: %s"
 
-#: control-center/capplet-dir-view.c:503
-msgid ""
-"No help is available/installed. Please make sure you\n"
-"have the GNOME User's Guide installed on your system."
-msgstr ""
-"Ingen hjælp tilgængelig/installeret. Sørg venligst for\n"
-"at du har Gnomes brugervejledning installeret på systemet."
-
-#: control-center/capplet-dir-view.c:506
-msgid "Close"
-msgstr "Luk"
-
-#: control-center/capplet-dir-view-list.c:325
+#: control-center/capplet-dir-view-list.c:324
 #, c-format
 msgid "GNOME Control Center: %s"
 msgstr "Kontrolcenter: %s"
@@ -1437,41 +1511,29 @@ msgstr "Kontrolcenter: %s"
 msgid "The GNOME configuration tool"
 msgstr "Et centralt opsætningsværktøj til Gnome"
 
-#: control-center/gnomecc.glade.h:2
-msgid "Browse with multiple windows"
-msgstr "Benyt flere vinduer"
+#: control-center/gnomecc-ui.xml.h:1
+msgid "About this application"
+msgstr "Om dette program"
 
-#: control-center/gnomecc.glade.h:3
-msgid "Browse with single window"
-msgstr "Benyt enkelt vindue"
+#: control-center/gnomecc-ui.xml.h:2
+msgid "_About..."
+msgstr "_Om..."
 
-#: control-center/gnomecc.glade.h:4
-msgid "Display control panels as HTML"
-msgstr "Vis kontrolpaneler som HTML"
+#: control-center/gnomecc-ui.xml.h:3
+msgid "_File"
+msgstr "_Fil"
 
-#: control-center/gnomecc.glade.h:5
-msgid "Display control panels as a set of icons"
-msgstr "Vis kontrolpaneler som et sæt af ikoner"
-
-#: control-center/gnomecc.glade.h:6
-msgid "Display control panels as a tree"
-msgstr "Vis kontrolpaneler som et træ"
-
-#: control-center/gnomecc.glade.h:7
-msgid "Launch control panels in separate windows"
-msgstr "Start kontrolpaneler i separate vinduer"
-
-#: control-center/gnomecc.glade.h:8
-msgid "New-control-center"
-msgstr "Nyt kontrolcenter"
-
-#: control-center/gnomecc.glade.h:9
-msgid "Put control panels in the control center's window"
-msgstr "Put kontrolpaneler i kontrolcentrets vindue"
+#: control-center/gnomecc-ui.xml.h:4
+msgid "_Help"
+msgstr "_Hjælp"
 
 #: control-center/main.c:43
 msgid "Use shell even if nautilus is running."
-msgstr "Brug skal også selvom Nautilus kører"
+msgstr "Benyt skal også selvom Nautilus kører"
+
+#: gnome-settings-daemon/factory.c:30
+msgid "Could not initialize Bonobo"
+msgstr "Kunne ikke klargøre Bonobo"
 
 #: libbackground/applier.c:235
 msgid "Type"
@@ -1490,9 +1552,33 @@ msgstr ""
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr "Kunne ikke indlæse billedet '%s'; deaktiverer baggrundsbillede."
 
-#: libbackground/applier.c:515
-msgid "Disabled"
-msgstr "Deaktiveret"
+#: libbackground/preferences.c:50
+msgid "Scaled"
+msgstr "Skaleret"
+
+#: libbackground/preferences.c:52
+msgid "Embossed"
+msgstr "Indgraveret"
+
+#: libbackground/preferences.c:58
+msgid "Solid"
+msgstr "Ensfarvet"
+
+#: libbackground/preferences.c:59
+msgid "Horizontal Gradient"
+msgstr "Vandret farveovergang"
+
+#: libbackground/preferences.c:60
+msgid "Vertical Gradient"
+msgstr "Lodret farveovergang"
+
+#: libbackground/preview-file-selection.c:186
+msgid "Can't find an hbox, using a normal file selection"
+msgstr "Kunne ikke finde en hbox, bruger en almindelig filvælger"
+
+#: libbackground/preview-file-selection.c:191
+msgid "Preview"
+msgstr "Eksempel"
 
 #: libsounds/sound-view.c:116
 msgid "The sound file for this event does not exist."
@@ -1523,6 +1609,49 @@ msgstr "Spil"
 #: libsounds/sound-view.c:244
 msgid "Select sound file"
 msgstr "Vælg en lydfil"
+
+#~ msgid "Use a custom font."
+#~ msgstr "Benyt en selvvalgt skrifttype."
+
+#~ msgid "Auto Preview"
+#~ msgstr "Automatisk test"
+
+#~ msgid "Available Themes"
+#~ msgstr "Tilgængelige temaer"
+
+#~ msgid ""
+#~ "No help is available/installed. Please make sure you\n"
+#~ "have the GNOME User's Guide installed on your system."
+#~ msgstr ""
+#~ "Ingen hjælp tilgængelig/installeret. Sørg venligst for\n"
+#~ "at du har Gnomes brugervejledning installeret på systemet."
+
+#~ msgid "Close"
+#~ msgstr "Luk"
+
+#~ msgid "Browse with multiple windows"
+#~ msgstr "Benyt flere vinduer"
+
+#~ msgid "Browse with single window"
+#~ msgstr "Benyt enkelt vindue"
+
+#~ msgid "Display control panels as HTML"
+#~ msgstr "Vis kontrolpaneler som HTML"
+
+#~ msgid "Display control panels as a set of icons"
+#~ msgstr "Vis kontrolpaneler som et sæt af ikoner"
+
+#~ msgid "Display control panels as a tree"
+#~ msgstr "Vis kontrolpaneler som et træ"
+
+#~ msgid "Launch control panels in separate windows"
+#~ msgstr "Start kontrolpaneler i separate vinduer"
+
+#~ msgid "New-control-center"
+#~ msgstr "Nyt kontrolcenter"
+
+#~ msgid "Put control panels in the control center's window"
+#~ msgstr "Put kontrolpaneler i kontrolcentrets vindue"
 
 #~ msgid "Configure which non-session aware programs are started up"
 #~ msgstr ""
@@ -2706,9 +2835,6 @@ msgstr "Vælg en lydfil"
 #~ msgid "Use a gradient of colors between circles."
 #~ msgstr "Tegn en farveovergang mellem cirklerne"
 
-#~ msgid "Helix"
-#~ msgstr "Sneglehus"
-
 #, fuzzy
 #~ msgid ""
 #~ "This repeatedly generates spirally string-art-ish patterns. Written by "
@@ -2963,9 +3089,6 @@ msgstr "Vælg en lydfil"
 
 #~ msgid "Size of object."
 #~ msgstr "Størrelsen af objekterne"
-
-#~ msgid "Smaller"
-#~ msgstr "Mindre"
 
 #, fuzzy
 #~ msgid ""
@@ -3698,9 +3821,6 @@ msgstr "Vælg en lydfil"
 #~ msgid "Quickness of rotation at each step (0 = Random)"
 #~ msgstr "Hurtighed for rotation ved hvert trin (0 = tilfældig)"
 
-#~ msgid "Slim"
-#~ msgstr "Tynd"
-
 #~ msgid "Speed of animation."
 #~ msgstr "Animationshastighed"
 
@@ -4280,9 +4400,6 @@ msgstr "Vælg en lydfil"
 
 #~ msgid "GNOME Control Center options"
 #~ msgstr "Kontrolcentertilvalg"
-
-#~ msgid "Set background image."
-#~ msgstr "Angivn baggrundsbillede"
 
 #~ msgid "IMAGE-FILE"
 #~ msgstr "BILLEDFIL"
