@@ -442,8 +442,8 @@ capplet_control_launch (const gchar *capplet_name, gchar *window_title)
 
 	control_ref = Bonobo_PropertyControl_getControl (property_control, 0, &ev);
 
-	if (BONOBO_EX (&ev) || property_control == CORBA_OBJECT_NIL) {
-		g_critical ("Could not extract control from PropertyControl");
+	if (BONOBO_EX (&ev) || control_ref == CORBA_OBJECT_NIL) {
+		/* Capplet is already running in this case */
 		bonobo_object_release_unref (property_control, &ev);
 		g_free (moniker);
 		return NULL;

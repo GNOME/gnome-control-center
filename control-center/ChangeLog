@@ -3,6 +3,8 @@
 	* capplet-dir.c (capplet_control_launch): Accept window_title
 	parameter and use it as the title
 	(capplet_activate): Pass entry->name to capplet_control_launch
+	(capplet_control_launch): Don't print error and use correct test
+	for control_ref == CORBA_OBJECT_NIL
 
 2001-07-13  Kai Lahmann  <kl@linuxfaqs.de>
 

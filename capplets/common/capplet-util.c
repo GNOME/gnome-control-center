@@ -194,7 +194,7 @@ create_dialog_cb (BonoboPropertyControl *property_control, gint page_number)
 		gtk_signal_connect (GTK_OBJECT (control), "destroy",
 				    GTK_SIGNAL_FUNC (close_cb), NULL);
 	} else {
-		gtk_widget_show_all (widget);
+		return NULL;
 	}
 
 	return BONOBO_OBJECT (control);
