@@ -1,3 +1,10 @@
+2002-03-26  Dave Camp  <dave@ximian.com>
+
+	* applier.c: (bg_applier_init): Don't initialize
+	is_nautilus_running here (check it each time in appy_prefs).
+	(bg_applier_apply_prefs): Don't try to apply the background if
+	nautilus is running.
+
 2002-03-19  Richard Hestilow  <hestilow@ximian.com>
 
 	* preferences.h (wallpaper_type_t): Remove EMBOSSED since we

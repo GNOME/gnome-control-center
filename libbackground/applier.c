@@ -60,10 +60,6 @@ struct _BGApplierPrivate
 
 	GdkPixbuf          *wallpaper_pixbuf;      /* The "raw" wallpaper pixbuf */
 
-	gboolean            nautilus_running;      /* TRUE iff nautilus is
-						    * running, in which case we
-						    * block the renderer */
-
 	BGApplierType         type;                  /* Whether we render to the
 						    * root or the preview */
 
@@ -213,7 +209,6 @@ bg_applier_init (BGApplier *bg_applier, BGApplierClass *class)
 	bg_applier->p->last_prefs       = NULL;
 	bg_applier->p->pixbuf           = NULL;
 	bg_applier->p->wallpaper_pixbuf = NULL;
-	bg_applier->p->nautilus_running = is_nautilus_running ();
 	bg_applier->p->timeout          = 0;
 }
 
@@ -376,8 +371,10 @@ bg_applier_apply_prefs (BGApplier           *bg_applier,
 		new_prefs->wallpaper_type = WPTYPE_CENTERED;
 	}
 
-	if (bg_applier->p->type == BG_APPLIER_ROOT && bg_applier->p->nautilus_running)
+	if (bg_applier->p->type == BG_APPLIER_ROOT && is_nautilus_running ()) {
 		set_root_pixmap ((GdkPixmap *) -1);
+		return;
+	}
 
 	if (!new_prefs->enabled) {
 		if (bg_applier->p->type == BG_APPLIER_PREVIEW)
