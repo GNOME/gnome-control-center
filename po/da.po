@@ -22,8 +22,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2001-11-07 12:06+0100\n"
-"PO-Revision-Date: 2001-11-07 12:42+0100\n"
+"POT-Creation-Date: 2001-11-12 22:40+0100\n"
+"PO-Revision-Date: 2001-11-12 22:49+0100\n"
 "Last-Translator: Ole Laursen <olau@hardworking.dk>\n"
 "Language-Team: danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -200,12 +200,21 @@ msgstr "Tilvalg til at tilføje eller omdøbe steder"
 msgid "Options for adding and removing backends"
 msgstr "Tilvalg til at tilføje eller fjerne bagender"
 
-#: capplets/background/applier.c:379
+#: capplets/background/applier.c:223
+msgid "Type"
+msgstr "Type"
+
+#: capplets/background/applier.c:224
+msgid ""
+"Type of applier: APPLIER_ROOT for root window or APPLIER_PREVIEW for preview"
+msgstr "Anvendelsestype: APPLIER_ROOT for rodvinduet eller APPLIER_PREVIEW for eksempel"
+
+#: capplets/background/applier.c:385
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr "Kunne ikke indlæse billedet '%s'; deaktiverer baggrundsbillede"
 
-#: capplets/background/applier.c:518
+#: capplets/background/applier.c:491
 msgid "Disabled"
 msgstr "Deaktiveret"
 
@@ -274,29 +283,13 @@ msgstr "Benyt et billede til baggrunden"
 msgid "Vertical gradient"
 msgstr "Lodret farveovergang"
 
-#: capplets/background/background-properties-capplet.c:47
-msgid "Set background image."
-msgstr "Angivn baggrundsbillede"
-
-#: capplets/background/background-properties-capplet.c:47
-msgid "IMAGE-FILE"
-msgstr "BILLEDFIL"
-
-#: capplets/common/capplet-util.c:477
+#: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr "Anvend indstillingerne og afslut"
 
-#: capplets/common/capplet-util.c:479
-msgid "Initialize the session"
-msgstr "Klargør sessionen"
-
-#: capplets/common/capplet-util.c:481
+#: capplets/common/capplet-util.c:243
 msgid "Retrieve and store legacy settings"
 msgstr "Skaf og gem gamle indstillinger"
-
-#: capplets/common/capplet-util.c:490
-msgid "Capplet options"
-msgstr "Kontrolcenterprogramtilvalg"
 
 #: capplets/default-applications/default-applications.desktop.in.in.h:1
 msgid "Choose the applications used by default"
@@ -3647,9 +3640,14 @@ msgid ""
 "Be sure to compile it with -DVROOT or it won't work right when launched by "
 "the xscreensaver daemon."
 msgstr ""
-"Genererer realistisk udseende fraktale landskaber med snedækkede bjerge nær vand - enten fra siden eller ovenfra. Skrevet af Stephen Booth. Det bagvedliggende program er ikke inkluderet i denne pakke, men hvis du ikke allerede har det, kan du finde det på <http://www.epcc.ed.ac.uk/~spb/xmountains/>\n"
+"Genererer realistisk udseende fraktale landskaber med snedækkede bjerge nær "
+"vand - enten fra siden eller ovenfra. Skrevet af Stephen Booth. Det "
+"bagvedliggende program er ikke inkluderet i denne pakke, men hvis du ikke "
+"allerede har det, kan du finde det på <http://www.epcc.ed.ac.uk/~spb/"
+"xmountains/>\n"
 "\n"
-"Hvis du selv oversætter det, så sikr dig at du oversætter det med -DVROOT, ellers virker det ikke korrekt når det bliver kørt af pauseskærmsdæmonen."
+"Hvis du selv oversætter det, så sikr dig at du oversætter det med -DVROOT, "
+"ellers virker det ikke korrekt når det bliver kørt af pauseskærmsdæmonen."
 
 #: capplets/screensaver/screensavers/xmountains.xml.h:4
 msgid "Xmountains"
@@ -3660,7 +3658,9 @@ msgstr "Bjerge"
 msgid ""
 "Draws a few swarms of critters flying around the screen, with nicely faded "
 "color trails behind them.  Written by Chris Leger."
-msgstr "Tegne sværme af stråler der flyver omkring på skærmen med smukt falmende farvespor efter dem. Skrevet af Chris Leger."
+msgstr ""
+"Tegne sværme af stråler der flyver omkring på skærmen med smukt falmende "
+"farvespor efter dem. Skrevet af Chris Leger."
 
 #: capplets/screensaver/screensavers/xrayswarm.xml.h:2
 msgid "XRaySwarm"
@@ -3670,7 +3670,9 @@ msgstr "Strålesværm"
 msgid ""
 "The XScreenSaver logo.  Don't you hate it?  So do I.  Would you like to "
 "design a new logo for XScreenSaver?\tIf so, send jwz your submissions."
-msgstr "Logoet for pauseskærmsprogrammet. Hader du det ikke? Det gør jeg også. Vil du gerne designe et nyt? Hvis du vil, så send jwz@jwz.org dit bidrag."
+msgstr ""
+"Logoet for pauseskærmsprogrammet. Hader du det ikke? Det gør jeg også. Vil "
+"du gerne designe et nyt? Hvis du vil, så send jwz@jwz.org dit bidrag."
 
 #: capplets/screensaver/screensavers/xroger.xml.h:3
 msgid "Xroger"
@@ -3680,7 +3682,9 @@ msgstr "Xroger"
 msgid ""
 "Draws falling snow and the occasional tiny Santa.  By Rick Jansen.  You can "
 "find it at <http://www.euronet.nl/~rja/Xsnow/>."
-msgstr "Tegner dalende sne og en lejlighedsvis lille julemand. Af Rick Jansen. Du kan finde det bagvedliggende program på <http://www.euronet.nl/~rja/Xsnow/>."
+msgstr ""
+"Tegner dalende sne og en lejlighedsvis lille julemand. Af Rick Jansen. Du "
+"kan finde det bagvedliggende program på <http://www.euronet.nl/~rja/Xsnow/>."
 
 #: capplets/screensaver/screensavers/xsnow.xml.h:2
 msgid "Xsnow"
@@ -3690,7 +3694,9 @@ msgstr "Sne"
 msgid ""
 "Simulates that pen-in-nested-plastic-gears toy from your childhood.  By "
 "Rohit Singh."
-msgstr "Simulerer pind i indlejrede plastictandhjul-legetøj fra din barndom. Af Rohit Singh."
+msgstr ""
+"Simulerer pind i indlejrede plastictandhjul-legetøj fra din barndom. Af "
+"Rohit Singh."
 
 #: capplets/screensaver/screensavers/xspirograph.xml.h:2
 msgid "XSpiroGraph"
@@ -3718,7 +3724,11 @@ msgid ""
 "Zooms in on a part of the screen and then moves around.  With the -lenses "
 "option the result is like looking through many overlapping lenses rather "
 "than just a simple zoom.  Written by James Macnicol."
-msgstr "Zoomer ind på en del af skærmen og bevæger sig derefter omkring. Med linseeffekten slået til bliver resultatet som hvis man kigger gennem mange overlappende linser snarere end blot en simpel zoom. Skrevet af James Macnicol."
+msgstr ""
+"Zoomer ind på en del af skærmen og bevæger sig derefter omkring. Med "
+"linseeffekten slået til bliver resultatet som hvis man kigger gennem mange "
+"overlappende linser snarere end blot en simpel zoom. Skrevet af James "
+"Macnicol."
 
 #: capplets/screensaver/selection-dialog.c:99
 msgid "Add a new screensaver"
@@ -3829,21 +3839,33 @@ msgstr "Hoved"
 msgid "Main Settings"
 msgstr "Hovedindstillinger"
 
-#: control-center/main.c:44
+#: control-center/main.c:40
 msgid "Configuration"
 msgstr "Opsætning"
 
-#: control-center/main.c:67
+#: control-center/main.c:63
 msgid "Run the capplet CAPPLET"
 msgstr "Kør kontrolcenterprogrammet KCPROG"
 
-#: control-center/main.c:67
+#: control-center/main.c:63
 msgid "CAPPLET"
 msgstr "KCPROG"
 
-#: control-center/main.c:74
+#: control-center/main.c:70
 msgid "GNOME Control Center options"
 msgstr "Kontrolcentertilvalg"
+
+#~ msgid "Set background image."
+#~ msgstr "Angivn baggrundsbillede"
+
+#~ msgid "IMAGE-FILE"
+#~ msgstr "BILLEDFIL"
+
+#~ msgid "Initialize the session"
+#~ msgstr "Klargør sessionen"
+
+#~ msgid "Capplet options"
+#~ msgstr "Kontrolcenterprogramtilvalg"
 
 #~ msgid "Wallpaper Selection"
 #~ msgstr "Billedvælger"
