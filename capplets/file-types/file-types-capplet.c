@@ -179,10 +179,9 @@ remove_cb (GtkButton *button, GladeXML *dialog)
 static void
 cb_file_type_dialog_response (GtkDialog *dialog, gint response_id)
 {
-	if (response_id == GTK_RESPONSE_APPLY) {
+	if (response_id == GTK_RESPONSE_APPLY)
 		model_entry_commit_dirty_list ();
-		model_entry_commit_delete_list ();
-	} else
+	else
 		gtk_main_quit ();
 }
 

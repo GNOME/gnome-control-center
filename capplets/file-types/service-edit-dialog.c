@@ -137,7 +137,9 @@ service_edit_dialog_init (ServiceEditDialog *dialog, ServiceEditDialogClass *cla
 
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog->p->dialog_win)->vbox), WID ("service_edit_widget"), TRUE, TRUE, 0);
 
+#ifdef SUPPORT_CHECK_CONTENT
 	g_signal_connect_swapped (G_OBJECT (WID ("run_program_toggle")), "toggled", (GCallback) program_sensitive_cb, dialog);
+#endif /* SUPPORT_CHECK_CONTENT */
 	g_signal_connect_swapped (G_OBJECT (WID ("program_select")), "changed", (GCallback) program_changed_cb, dialog);
 
 	g_signal_connect_swapped (G_OBJECT (dialog->p->dialog_win), "response", (GCallback) response_cb, dialog);
@@ -330,15 +332,13 @@ fill_dialog (ServiceEditDialog *dialog)
 		gtk_widget_set_sensitive (WID ("protocol_entry"), FALSE);
 	}
 
-#if 0  /* Keep the look at content toggle disabled until we support that in libgnome */
+#ifdef SUPPORT_CHECK_CONTENT 
+	/* Keep the look at content toggle disabled until we support that in libgnome */
 	if (gnome_vfs_method_get (dialog->p->info->protocol) == NULL)
 		gtk_widget_set_sensitive (WID ("look_at_content_toggle"), FALSE);
-#else
-		gtk_widget_set_sensitive (WID ("look_at_content_toggle"), FALSE);
-#endif
-
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("look_at_content_toggle")), !dialog->p->info->run_program);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("run_program_toggle")), dialog->p->info->run_program);
+#endif
 
 	if (!dialog->p->info->run_program && strcmp (dialog->p->info->protocol, "ftp"))
 		gtk_widget_set_sensitive (WID ("program_frame"), FALSE);
@@ -358,8 +358,11 @@ setup_add_dialog (ServiceEditDialog *dialog)
 
 	gtk_widget_set_sensitive (WID ("program_select"), FALSE);
 
+#ifdef SUPPORT_CHECK_CONTENT 
+	/* Disabled above so ignore it here */
 	gtk_widget_set_sensitive (WID ("look_at_content_toggle"), FALSE);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("run_program_toggle")), TRUE);
+#endif
 }
 
 static void
@@ -434,8 +437,12 @@ store_data (ServiceEditDialog *dialog)
 	g_free (dialog->p->info->description);
 	dialog->p->info->description = g_strdup (gtk_entry_get_text (GTK_ENTRY (WID ("description_entry"))));
 
-	dialog->p->info->run_program =
+#ifdef SUPPORT_CHECK_CONTENT 
+	dialog->p->info->run_program = 
 		gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (WID ("run_program_toggle")));
+#else
+	dialog->p->info->run_program = TRUE;
+#endif
 
 	option_menu = GTK_OPTION_MENU (WID ("program_select"));
 	menu_shell = GTK_MENU_SHELL (gtk_option_menu_get_menu (option_menu));

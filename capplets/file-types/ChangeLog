@@ -1,3 +1,20 @@
+2002-04-21  Jody Goldberg <jody@gnome.org>
+
+	* service-info.c (fill_service_apps) : Use the new hook in
+	  gnome_vfs_application_registry_get_applications to actually retrieve
+	  all the applications rather than just pretending.
+
+2002-04-21  Jody Goldberg <jody@gnome.org>
+
+	* service-edit-dialog.c (service_edit_dialog_init) : fully disable the
+	  already disable 'check content' field.  What the heck is this supposed
+	  to do ?
+	(fill_dialog) : ditto.
+	(setup_add_dialog) : ditto.
+	(store_data) : ditto.
+	* file-types-properties.glade : ditto.  Having user visible widgets
+	  that don't do anything is not a good idea.
+
 2002-04-18  Jody Goldberg <jody@gnome.org>
 
 	* file-types-capplet-dialogs.c (initialize_edit_applications_dialog) :

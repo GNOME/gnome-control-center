@@ -300,13 +300,15 @@ fill_service_apps (void)
 	if (service_apps == NULL)
 		service_apps = g_hash_table_new (g_str_hash, g_str_equal);
 
-	/* FIXME: This currently returns NULL. We need a way to retrieve all
-	   apps in the registry */
-	apps = gnome_vfs_application_registry_get_applications ("*/*");
-
+	apps = gnome_vfs_application_registry_get_applications (NULL);
 	for (tmp = apps; tmp != NULL; tmp = tmp->next) {
 		uri_schemes_str = gnome_vfs_application_registry_peek_value (tmp->data, "supported_uri_schemes");
+		if (uri_schemes_str == NULL)
+			continue;
+
 		uri_schemes = g_strsplit (uri_schemes_str, ",", -1);
+		if (uri_schemes == NULL)
+			continue;
 
 		for (i = 0; uri_schemes[i] != NULL; i++) {
 			tmp1 = g_hash_table_lookup (service_apps, uri_schemes[i]);
