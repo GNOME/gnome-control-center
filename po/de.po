@@ -9,10 +9,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-control-center 2.6.1\n"
+"Project-Id-Version: gnome-control-center 2.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-04-15 18:23-0400\n"
-"PO-Revision-Date: 2004-04-07 11:51+0200\n"
+"POT-Creation-Date: 2004-05-17 17:51+0200\n"
+"PO-Revision-Date: 2004-05-17 17:51+0200\n"
 "Last-Translator: Christian Neumair <chris@gnome-de.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -81,7 +81,7 @@ msgid ""
 msgstr ""
 "Auf Ihrem System ist keine Unterstützung für Hilfstechnologien verfügbar. "
 "Installieren Sie das Paket »gok«, um eine Bildschimrtastatur zu erhalten "
-"sowie das Paket »gnopernicus«, um über Bildschirmlese und -"
+"sowie das Paket »gnopernicus«, um über Bildschirmlese- und "
 "vergrößerungsfunktionen zu verfügen."
 
 #: capplets/accessibility/at-properties/main.c:62
@@ -345,7 +345,7 @@ msgstr "Pixel/Sekunde"
 #: capplets/mouse/gnome-mouse-properties.c:133
 #: capplets/mouse/gnome-mouse-properties.c:578
 #: capplets/mouse/gnome-mouse-properties.glade.h:27
-#: capplets/windows/gnome-window-properties.glade.h:7
+#: capplets/windows/gnome-window-properties.glade.h:10
 msgid "seconds"
 msgstr "Sekunden"
 
@@ -359,7 +359,7 @@ msgstr "Desktop-Hintergrund"
 
 #: capplets/background/gnome-background-properties.glade.h:1
 msgid "<b>Desktop _Wallpaper</b>"
-msgstr "<b>Desktop-_Tapete</b>"
+msgstr "<b>Desktop-_Hintergrund</b>"
 
 #: capplets/background/gnome-background-properties.glade.h:2
 msgid "<b>_Desktop Colors</b>"
@@ -375,7 +375,7 @@ msgstr "Wählen Sie eine Farbe"
 
 #: capplets/background/gnome-background-properties.glade.h:5
 msgid "_Add Wallpaper"
-msgstr "Tapete _hinzufügen"
+msgstr "_Hintergrund hinzufügen"
 
 #: capplets/background/gnome-background-properties.glade.h:6
 msgid "_Style:"
@@ -388,42 +388,49 @@ msgstr "_Stil:"
 msgid "There was an error displaying help: %s"
 msgstr "Fehler beim Anzeigen der Hilfe: %s"
 
-#: capplets/background/gnome-wp-capplet.c:1290
+#: capplets/background/gnome-wp-capplet.c:1037
+#: capplets/background/gnome-wp-capplet.c:1053
 msgid "Centered"
 msgstr "Zentrieren"
 
-#: capplets/background/gnome-wp-capplet.c:1312
+#: capplets/background/gnome-wp-capplet.c:1061
+#: capplets/background/gnome-wp-capplet.c:1076
 msgid "Fill Screen"
 msgstr "Bildschirm füllen"
 
-#: capplets/background/gnome-wp-capplet.c:1332
+#: capplets/background/gnome-wp-capplet.c:1084
+#: capplets/background/gnome-wp-capplet.c:1097
 msgid "Scaled"
 msgstr "Skalieren"
 
-#: capplets/background/gnome-wp-capplet.c:1352
+#: capplets/background/gnome-wp-capplet.c:1105
+#: capplets/background/gnome-wp-capplet.c:1118
 msgid "Tiled"
 msgstr "Kacheln"
 
-#: capplets/background/gnome-wp-capplet.c:1384
+#: capplets/background/gnome-wp-capplet.c:1142
+#: capplets/background/gnome-wp-capplet.c:1151
 msgid "Solid Color"
 msgstr "Einfarbig"
 
-#: capplets/background/gnome-wp-capplet.c:1400
+#: capplets/background/gnome-wp-capplet.c:1159
+#: capplets/background/gnome-wp-capplet.c:1168
 msgid "Horizontal Gradient"
 msgstr "Horizontaler Verlauf"
 
-#: capplets/background/gnome-wp-capplet.c:1416
+#: capplets/background/gnome-wp-capplet.c:1176
+#: capplets/background/gnome-wp-capplet.c:1185
 msgid "Vertical Gradient"
 msgstr "Vertikaler Verlauf"
 
-#: capplets/background/gnome-wp-capplet.c:1453
-#: capplets/background/gnome-wp-capplet.c:1464
-msgid "Add Wallpapers"
-msgstr "Tapeten hinzufügen"
+#. Create the file chooser dialog stuff here
+#: capplets/background/gnome-wp-capplet.c:1221
+msgid "Add Wallpaper"
+msgstr "Hintergrund hinzufügen"
 
 #: capplets/background/gnome-wp-info.c:49
 msgid "No Wallpaper"
-msgstr "Keine Tapete"
+msgstr "Kein Hintergrund"
 
 #: capplets/common/activate-settings-daemon.c:18
 msgid ""
@@ -454,7 +461,7 @@ msgstr "Nur Einstellungen anwenden und beenden"
 #: capplets/default-applications/gnome-default-applications-properties.c:723
 #: capplets/keyboard/gnome-keyboard-properties.c:224
 #: capplets/mouse/gnome-mouse-properties.c:812
-#: capplets/sound/sound-properties-capplet.c:212
+#: capplets/sound/sound-properties-capplet.c:244
 msgid "Retrieve and store legacy settings"
 msgstr "Übernommene Einstellungen finden und speichern"
 
@@ -949,32 +956,36 @@ msgid_plural ""
 "settings will be restored."
 msgstr[0] ""
 "Die neuen Einstellungen werden getestet. Falls Sie nicht innerhalb von %d "
-"Sekunde reagieren, werden die vorherigen Einstellungen wiederhergestellt."
+"Sekunde reagieren, werden die vorherigen Einstellungen wiederhergestellt.Die "
 msgstr[1] ""
-"Die neuen Einstellungen werden getestet. Falls Sie nicht innerhalb von %d "
+"neuen Einstellungen werden getestet. Falls Sie nicht innerhalb von %d "
 "Sekunden reagieren, werden die vorherigen Einstellungen wiederhergestellt."
 
-#: capplets/display/main.c:629
+#: capplets/display/main.c:626
+msgid "Keep Resolution"
+msgstr "Auflösung beibehalten"
+
+#: capplets/display/main.c:630
 msgid "Do you want to keep this resolution?"
 msgstr "Wollen Sie diese Auflösung beibehalten?"
 
-#: capplets/display/main.c:654
+#: capplets/display/main.c:655
 msgid "Use _previous resolution"
 msgstr "_Vorherige Auflösung verwenden"
 
-#: capplets/display/main.c:654
+#: capplets/display/main.c:655
 msgid "_Keep resolution"
 msgstr "Auflösung _beibehalten"
 
-#: capplets/display/main.c:803
+#: capplets/display/main.c:806
 msgid ""
-"The XServer does not support the XRandR extension.  Runtime resolution "
+"The X Server does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
 msgstr ""
-"Der Xserver unterstützt die XRandR-Erweiterung nicht, Änderungen an der "
+"Der X-Server unterstützt die XRandR-Erweiterung nicht. Änderungen an der "
 "Auflösung sind während des Betriebs nicht möglich."
 
-#: capplets/display/main.c:811
+#: capplets/display/main.c:814
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
@@ -1176,7 +1187,7 @@ msgid "Add File Type"
 msgstr "Dateityp hinzufügen"
 
 #: capplets/file-types/mime-edit-dialog.c:432
-#: capplets/file-types/mime-type-info.c:763
+#: capplets/file-types/mime-type-info.c:766
 msgid "Misc"
 msgstr "Verschiedenes"
 
@@ -1206,20 +1217,20 @@ msgstr "Kategorie"
 msgid "Choose a file category"
 msgstr "Eine Dateikategorie wählen"
 
-#: capplets/file-types/mime-type-info.c:691
+#: capplets/file-types/mime-type-info.c:694
 #, c-format
 msgid "View as %s"
 msgstr "Als %s anzeigen"
 
-#: capplets/file-types/mime-type-info.c:757
+#: capplets/file-types/mime-type-info.c:760
 msgid "Images"
 msgstr "Bilder"
 
-#: capplets/file-types/mime-type-info.c:759
+#: capplets/file-types/mime-type-info.c:762
 msgid "Video"
 msgstr "Video"
 
-#: capplets/file-types/mime-type-info.c:761
+#: capplets/file-types/mime-type-info.c:764
 msgid "Audio"
 msgstr "Audio"
 
@@ -1333,7 +1344,7 @@ msgid "Best co_ntrast"
 msgstr "Bester _Kontrast"
 
 #: capplets/font/font-properties.glade.h:8
-msgid "De_tails..."
+msgid "D_etails..."
 msgstr "De_tails..."
 
 #: capplets/font/font-properties.glade.h:9
@@ -1345,12 +1356,12 @@ msgid "Font Rendering Details"
 msgstr "Details zur Schriftwiedergabe"
 
 #: capplets/font/font-properties.glade.h:11
-msgid "G_rayscale"
-msgstr "_Graustufen"
-
-#: capplets/font/font-properties.glade.h:12
 msgid "Go _to font folder"
 msgstr "Zum Sc_hriftordner gehen"
+
+#: capplets/font/font-properties.glade.h:12
+msgid "Gra_yscale"
+msgstr "_Graustufen"
 
 #: capplets/font/font-properties.glade.h:13
 msgid "N_one"
@@ -1485,8 +1496,8 @@ msgstr[1] ""
 "empfehlenswert."
 
 #: capplets/keybindings/eggcellrendererkeys.c:21
-msgid "<New accelerator...>"
-msgstr "<Neue Tastenkombination>"
+msgid "New accelerator..."
+msgstr "Neue Tastenkombination..."
 
 #: capplets/keybindings/eggcellrendererkeys.c:163
 #: capplets/keybindings/eggcellrendererkeys.c:164
@@ -1512,33 +1523,29 @@ msgid "The type of accelerator."
 msgstr "Der Tastenkombinationstyp."
 
 #: capplets/keybindings/eggcellrendererkeys.c:242
-#: capplets/keybindings/gnome-keybinding-properties.c:239
-#: libbackground/applier.c:768 typing-break/drwright.c:473
+#: capplets/keybindings/gnome-keybinding-properties.c:196
+#: libbackground/applier.c:757 typing-break/drwright.c:473
 msgid "Disabled"
 msgstr "Deaktiviert"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:206
-msgid "GNOME Default"
-msgstr "GNOME-Vorgabe"
-
-#: capplets/keybindings/gnome-keybinding-properties.c:581
+#: capplets/keybindings/gnome-keybinding-properties.c:538
 msgid "<Unknown Action>"
 msgstr "<Unbekannte AKtion>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:600
+#: capplets/keybindings/gnome-keybinding-properties.c:557
 msgid "Desktop"
 msgstr "Desktop"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:601
+#: capplets/keybindings/gnome-keybinding-properties.c:558
 #: capplets/sound/gnome-settings-sound.desktop.in.h:2
 msgid "Sound"
 msgstr "Audio"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:605
+#: capplets/keybindings/gnome-keybinding-properties.c:562
 msgid "Window Management"
 msgstr "Fensterverwaltung"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:743
+#: capplets/keybindings/gnome-keybinding-properties.c:659
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1548,61 +1555,41 @@ msgstr ""
 " »%s«\n"
 "verwendet.\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:773
+#: capplets/keybindings/gnome-keybinding-properties.c:691
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr ""
 "Fehler beim Speichern der neuen Tastenkombination in der Konfigurations-"
 "Datenbank: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:819
+#: capplets/keybindings/gnome-keybinding-properties.c:741
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr ""
 "Fehler beim Entfernen der neuen Tastenkombination aus der Konfigurations-"
 "Datenbank: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:967
-msgid ""
-"Unable to find any keyboard themes.  This means your GTK+ installation has "
-"been incompletely installed."
-msgstr ""
-"Es konnten keine Tastaturthemen gefunden werden. Dies bedeutet, dass GTK+ "
-"unvollständig installiert wurde."
-
-#: capplets/keybindings/gnome-keybinding-properties.c:989
+#: capplets/keybindings/gnome-keybinding-properties.c:830
 msgid "Action"
 msgstr "Aktion"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:1013
+#: capplets/keybindings/gnome-keybinding-properties.c:854
 msgid "Shortcut"
 msgstr "Tastenkombination"
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:1
-msgid "Click for a list of keyboard navigation schemes."
-msgstr "Schemata für die Tastaturnavigation auflisten"
-
-#: capplets/keybindings/gnome-keybinding-properties.glade.h:2
 #: capplets/keybindings/keybinding.desktop.in.h:2
 msgid "Keyboard Shortcuts"
 msgstr "Tastenkombinationen"
 
 # extrem gekürzt, wirkt sich auf Fensterbreite aus
-#: capplets/keybindings/gnome-keybinding-properties.glade.h:3
+#: capplets/keybindings/gnome-keybinding-properties.glade.h:2
 msgid ""
-"To edit a shortcut, click on the corresponding row and type a new "
+"To edit a shortcut key, click on the corresponding row and type a new "
 "accelerator, or press backspace to clear."
 msgstr ""
 "Klicken Sie auf eine Zeile und geben Sie eine neue Tastenkombination ein, um "
 "diese zu übernehmen, oder drücken Sie die Rücktaste, um sie zu löschen."
-
-#: capplets/keybindings/gnome-keybinding-properties.glade.h:4
-msgid "_Desktop shortcuts:"
-msgstr "_Desktop-Tastenkombinationen:"
-
-#: capplets/keybindings/gnome-keybinding-properties.glade.h:5
-msgid "_Text editing shortcuts:"
-msgstr "Tastenkombinationen bei der _Texteingabe:"
 
 #: capplets/keybindings/keybinding.desktop.in.h:1
 msgid "Assign shortcut keys to commands"
@@ -1620,8 +1607,8 @@ msgstr "_Barrierefreiheit"
 
 #: capplets/keyboard/gnome-keyboard-properties.c:220
 #: capplets/keyboard/gnome-keyboard-properties.c:222
-#: capplets/sound/sound-properties-capplet.c:208
-#: capplets/sound/sound-properties-capplet.c:210
+#: capplets/sound/sound-properties-capplet.c:240
+#: capplets/sound/sound-properties-capplet.c:242
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
@@ -1966,50 +1953,66 @@ msgid "Autoconfiguration _URL:"
 msgstr "_URL für Auto-Konfiguration:"
 
 #: capplets/network/gnome-network-preferences.glade.h:8
+msgid "FTP proxy port"
+msgstr "FTP-Proxy-Port"
+
+#: capplets/network/gnome-network-preferences.glade.h:9
 msgid "HTTP Proxy Details"
 msgstr "HTTP-Proxy-Details"
 
-#: capplets/network/gnome-network-preferences.glade.h:9
+#: capplets/network/gnome-network-preferences.glade.h:10
+msgid "HTTP proxy port"
+msgstr "HTTP-Proxy-Port"
+
+#: capplets/network/gnome-network-preferences.glade.h:11
 msgid "H_TTP proxy:"
 msgstr "H_TTP-Proxy:"
 
-#: capplets/network/gnome-network-preferences.glade.h:10
+#: capplets/network/gnome-network-preferences.glade.h:12
 msgid "Network Proxy Configuration"
 msgstr "Konfiguration der Netzwerk-Proxys"
 
-#: capplets/network/gnome-network-preferences.glade.h:11
+#: capplets/network/gnome-network-preferences.glade.h:13
 msgid "Port:"
 msgstr "Port:"
 
-#: capplets/network/gnome-network-preferences.glade.h:12
+#: capplets/network/gnome-network-preferences.glade.h:14
 msgid "S_ocks host:"
 msgstr "S_ocks-Rechner:"
 
-#: capplets/network/gnome-network-preferences.glade.h:13
+#: capplets/network/gnome-network-preferences.glade.h:15
+msgid "Secure HTTP proxy port"
+msgstr "Sicherer HTTP-Proxy-Port"
+
+#: capplets/network/gnome-network-preferences.glade.h:16
+msgid "Socks host port"
+msgstr "Socks-Rechner-Port"
+
+#: capplets/network/gnome-network-preferences.glade.h:17
+msgid "U_sername:"
+msgstr "_Benutzername:"
+
+#: capplets/network/gnome-network-preferences.glade.h:18
 msgid "_Details"
 msgstr "_Details"
 
-#: capplets/network/gnome-network-preferences.glade.h:14
+#: capplets/network/gnome-network-preferences.glade.h:19
 msgid "_FTP proxy:"
 msgstr "_FTP-Proxy:"
 
-#: capplets/network/gnome-network-preferences.glade.h:15
+#: capplets/network/gnome-network-preferences.glade.h:20
 msgid "_Password:"
 msgstr "_Passwort:"
 
-#: capplets/network/gnome-network-preferences.glade.h:16
+#: capplets/network/gnome-network-preferences.glade.h:21
 msgid "_Secure HTTP proxy:"
 msgstr "_Sicherer HTTP-Proxy:"
-
-#: capplets/network/gnome-network-preferences.glade.h:17
-msgid "_Username:"
-msgstr "_Benutzername:"
 
 #: capplets/sound/gnome-settings-sound.desktop.in.h:1
 msgid "Enable sound and associate sounds with events"
 msgstr "Klänge aktivieren und mit Ereignissen verknüpfen"
 
-#: capplets/sound/sound-properties-capplet.c:239
+#: capplets/sound/sound-properties-capplet.c:271
 msgid "Sound preferences"
 msgstr "Audio-Einstellungen"
 
@@ -2081,17 +2084,17 @@ msgstr ""
 "%s ist der Pfad, in dem die Themendateien installiert werden. Er kann daher "
 "nicht als Quellort verwendet werden"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:642
+#: capplets/theme-switcher/gnome-theme-manager.c:677
 msgid "Custom theme"
 msgstr "Benutzerdefiniertes Thema"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:642
+#: capplets/theme-switcher/gnome-theme-manager.c:677
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr ""
 "Sie können dieses Thema speichern, indem Sie den »Thema speichern«-Knopf "
 "anklicken."
 
-#: capplets/theme-switcher/gnome-theme-manager.c:1403
+#: capplets/theme-switcher/gnome-theme-manager.c:1455
 msgid ""
 "The default theme schemas could not be found on your system.  This means "
 "that you probably don't have metacity installed, or that your gconf is "
@@ -2210,14 +2213,18 @@ msgid "_Install Theme..."
 msgstr "Thema _installieren..."
 
 #: capplets/theme-switcher/theme-properties.glade.h:21
+msgid "_Revert"
+msgstr "_Rückgängig machen"
+
+#: capplets/theme-switcher/theme-properties.glade.h:22
 msgid "_Save Theme..."
 msgstr "Thema _speichern..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:22
+#: capplets/theme-switcher/theme-properties.glade.h:23
 msgid "_Theme name:"
 msgstr "_Themenname:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:23
+#: capplets/theme-switcher/theme-properties.glade.h:24
 msgid "theme selection tree"
 msgstr "Themenauswahlbaum"
 
@@ -2322,7 +2329,7 @@ msgstr "_Beenden"
 msgid "_Save"
 msgstr "_Speichern"
 
-#: capplets/windows/gnome-window-properties.c:378
+#: capplets/windows/gnome-window-properties.c:388
 #, c-format
 msgid ""
 "<b>Cannot start the preferences application for your window manager</b>\n"
@@ -2334,48 +2341,60 @@ msgstr ""
 "\n"
 "%s"
 
-#: capplets/windows/gnome-window-properties.c:625
+#: capplets/windows/gnome-window-properties.c:637
 msgid "Control"
 msgstr "Strg"
 
-#: capplets/windows/gnome-window-properties.c:630
+#: capplets/windows/gnome-window-properties.c:642
 msgid "Alt"
 msgstr "Alt"
 
-#: capplets/windows/gnome-window-properties.c:636
+#: capplets/windows/gnome-window-properties.c:648
 msgid "Hyper"
 msgstr "Hyper"
 
-#: capplets/windows/gnome-window-properties.c:643
+#: capplets/windows/gnome-window-properties.c:655
 msgid "Super (or \"Windows logo\")"
 msgstr "Super (»Windows-Taste«)"
 
-#: capplets/windows/gnome-window-properties.c:650
+#: capplets/windows/gnome-window-properties.c:662
 msgid "Meta"
 msgstr "Meta"
 
 #: capplets/windows/gnome-window-properties.glade.h:1
+msgid "<b>Movement Key</b>"
+msgstr "<b>Bewegungstasten</b>"
+
+#: capplets/windows/gnome-window-properties.glade.h:2
+msgid "<b>Titlebar Action</b>"
+msgstr "<b>Titelleisten-Aktionen</b>"
+
+#: capplets/windows/gnome-window-properties.glade.h:3
+msgid "<b>Window Selection</b>"
+msgstr "<b>Fensterauswahl</b>"
+
+#: capplets/windows/gnome-window-properties.glade.h:4
 msgid "To _move a window, press-and-hold this key then grab the window:"
 msgstr ""
 "Zum _Verschieben eines Fensters folgende Taste beim Klicken gedrückt halten:"
 
-#: capplets/windows/gnome-window-properties.glade.h:2
+#: capplets/windows/gnome-window-properties.glade.h:5
 msgid "Window Preferences"
 msgstr "Fenstereinstellungen"
 
-#: capplets/windows/gnome-window-properties.glade.h:3
+#: capplets/windows/gnome-window-properties.glade.h:6
 msgid "_Double-click titlebar to perform this action:"
 msgstr "_Doppelklick auf Titelleisten, um diese Aktion auszuführen:"
 
-#: capplets/windows/gnome-window-properties.glade.h:4
+#: capplets/windows/gnome-window-properties.glade.h:7
 msgid "_Interval before raising:"
 msgstr "_Verzögerung vor dem Anheben:"
 
-#: capplets/windows/gnome-window-properties.glade.h:5
+#: capplets/windows/gnome-window-properties.glade.h:8
 msgid "_Raise selected windows after an interval"
 msgstr "Aktivierte Fenster nach einer bestimmten Zeit an_heben"
 
-#: capplets/windows/gnome-window-properties.glade.h:6
+#: capplets/windows/gnome-window-properties.glade.h:9
 msgid "_Select windows when the mouse moves over them"
 msgstr "Fenster _aktivieren, wenn sich die Maus darüber befindet"
 
@@ -2454,13 +2473,26 @@ msgstr "I_nhalt"
 msgid "_Help"
 msgstr "_Hilfe"
 
+#: control-center/control-center-categories.c:333
+msgid "Others"
+msgstr "Sonstige"
+
+#: control-center/control-center-categories.c:424
+#: control-center/control-center.c:1091
+msgid "Gnome Control Center"
+msgstr "GNOME-Kontrollzentrum"
+
+#: control-center/control-center.c:78
+msgid "Use nautilus if it is running."
+msgstr "Nautilus verwenden, falls er läuft."
+
 #: control-center/gnomecc.desktop.in.h:2
 msgid "The GNOME configuration tool"
 msgstr "Das GNOME-Konfigurationswerkzeug"
 
 #: control-center/main.c:43
 msgid "Use shell even if nautilus is running."
-msgstr "Befehlszeile benutzen, sogar wenn Nautilus läuft."
+msgstr "Befehlszeile verwenden, sogar wenn Nautilus läuft."
 
 #: gnome-settings-daemon/factory.c:34
 msgid "Could not initialize Bonobo"
@@ -2568,7 +2600,7 @@ msgstr ""
 "Fehler beim Ausführen von (%s),\n"
 "das mit der Taste (%s) verknüpft ist"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:65
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:73
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2595,7 +2627,7 @@ msgstr ""
 "- Das Ergebnis von <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/"
 "xkb</b>"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:75
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:83
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2607,7 +2639,23 @@ msgstr ""
 "Versuchen Sie, eine einfachere Konfiguration zu verwenden oder eine neuere "
 "Version der XFree-Software zu beziehen."
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:151
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:170
+msgid ""
+"The X system keyboard settings differ from your current GNOME keyboard "
+"settings.  Which set would you like to use?"
+msgstr ""
+"Die Einstellungen der X-Systemtastatur weichen von Ihren momentanen GNOME-"
+"Tastatureinstellungen ab. Welchen Satz wollen Sie verwenden?"
+
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:173
+msgid "Use X settings"
+msgstr "X-Einstellungen verwenden"
+
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:175
+msgid "Use GNOME settings"
+msgstr "GNOME-Einstellungen verwenden"
+
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:227
 #, c-format
 msgid ""
 "You have a keyboard remapping file (%s) in your home directory whose "
@@ -2647,7 +2695,7 @@ msgstr "Audiodatei %s konnte nicht als Beispiel %s geladen werden"
 msgid "Cannot determine user's home directory"
 msgstr "Heimverzeichnis des Benutzers konnte nicht ermittelt werden"
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:206
+#: gnome-settings-daemon/gnome-settings-xsettings.c:208
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "GConf-Schlüssel %s ist vom Typ %s, es wurde jedoch %s erwartet\n"
@@ -2684,11 +2732,11 @@ msgstr "Vorschauhöhe"
 msgid "Height if applier is a preview: Defaults to 48."
 msgstr "Höhe, falls Anwender eine Vorschau ist: Vorgabe ist 48."
 
-#: libbackground/applier.c:281
+#: libbackground/applier.c:280
 msgid "Screen"
 msgstr "Bildschirm"
 
-#: libbackground/applier.c:282
+#: libbackground/applier.c:281
 msgid "Screen on which BGApplier is to draw"
 msgstr "Bildschirm, auf dem der BGApplier gezeichnet werden soll"
 
@@ -2969,6 +3017,11 @@ msgstr "Copyright:"
 msgid "Description:"
 msgstr "Beschreibung:"
 
+#: vfs-methods/fontilus/font-view.c:394
+#, c-format
+msgid "usage: %s fontfile\n"
+msgstr "Aufruf: %s Schriftddatei\n"
+
 #: vfs-methods/fontilus/fontilus-context-menu.c:131
 msgid "Font context menu items"
 msgstr "Objekte im Schrift-Kontextmenü"
@@ -3231,44 +3284,44 @@ msgid "Eject's shortcut."
 msgstr "Auswerfen-Tastenkombination."
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:9
-msgid "Home Folder"
+msgid "Home folder"
 msgstr "Persönlicher Ordner"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:10
-msgid "Launch Help Browser"
-msgstr "Hilfe-Browser starten"
+msgid "Home folder's shortcut."
+msgstr "Persönlicher Ordner-Tastenkombination."
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
-msgid "Launch Help Browser's shortcut."
-msgstr "Tastenkombination zum Starten des Hilfe-Browsers"
+msgid "Launch help browser"
+msgstr "Hilfe-Browser starten"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:12
-msgid "Launch Web Browser"
-msgstr "Webbrowser starten"
+msgid "Launch help browser's shortcut."
+msgstr "Tastenkombination zum Starten des Hilfe-Browsers"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:13
-msgid "Launch Web Browser's shortcut."
-msgstr "Tastenkombination zum Starten des Webbrowsers"
+msgid "Launch web browser"
+msgstr "Webbrowser starten"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:14
-msgid "Lock Screen"
-msgstr "Bildschirm sperren"
+msgid "Launch web browser's shortcut."
+msgstr "Tastenkombination zum Starten des Webbrowsers"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
-msgid "Lock Screen's shortcut."
-msgstr "Tastenkombination zum Sperren des Bildschirms."
+msgid "Lock screen"
+msgstr "Bildschirm sperren"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
-msgid "Log Out"
-msgstr "Abmelden"
+msgid "Lock screen's shortcut."
+msgstr "Tastenkombination zum Sperren des Bildschirms."
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
-msgid "Log Out's shortcut."
-msgstr "Abmelden-Tastenkombination."
+msgid "Log out"
+msgstr "Abmelden"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
-msgid "My Home Folder's shortcut."
-msgstr "Persönlicher Ordner-Tastenkombination."
+msgid "Log out's shortcut."
+msgstr "Abmelden-Tastenkombination."
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
 msgid "Next track key's shortcut."
@@ -3283,11 +3336,11 @@ msgid "Pause key's shortcut."
 msgstr "Unterbrechen-Tastenkombination."
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
-msgid "Play (or Play/Pause)"
+msgid "Play (or play/pause)"
 msgstr "Wiedergabe (bzw. Wiedergabe/Unterbrechen)"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
-msgid "Play (or Play/Pause) key's shortcut."
+msgid "Play (or play/pause) key's shortcut."
 msgstr "Wiedergabe- (bzw. Wiedergabe/Unterbrechen-)Tastenkombination"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
@@ -3303,12 +3356,12 @@ msgid "Search's shortcut."
 msgstr "Suchen-Tastenkombination."
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
-msgid "Skip to Next track"
+msgid "Skip to next track"
 msgstr "Zum nächsten Titel springen"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
-msgid "Skip to Previous track"
-msgstr "Zum nächsten Titel springen"
+msgid "Skip to previous track"
+msgstr "Zum vorherigen Titel springen"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
 msgid "Sleep"
@@ -3357,6 +3410,25 @@ msgstr "Lauter"
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
 msgid "Volume up's shortcut."
 msgstr "Lauter-Tastenkombination."
+
+#~ msgid "GNOME Default"
+#~ msgstr "GNOME-Vorgabe"
+
+#~ msgid ""
+#~ "Unable to find any keyboard themes.  This means your GTK+ installation "
+#~ "has been incompletely installed."
+#~ msgstr ""
+#~ "Es konnten keine Tastaturthemen gefunden werden. Dies bedeutet, dass GTK+ "
+#~ "unvollständig installiert wurde."
+
+#~ msgid "Click for a list of keyboard navigation schemes."
+#~ msgstr "Schemata für die Tastaturnavigation auflisten"
+
+#~ msgid "_Desktop shortcuts:"
+#~ msgstr "_Desktop-Tastenkombinationen:"
+
+#~ msgid "_Text editing shortcuts:"
+#~ msgstr "Tastenkombinationen bei der _Texteingabe:"
 
 #~ msgid "Failed to open file '%s': %s"
 #~ msgstr "Die Datei »%s« konnte nicht geöffnet werden: %s"
@@ -3570,10 +3642,10 @@ msgstr "Lauter-Tastenkombination."
 #~ msgstr "Vorschau"
 
 #~ msgid "Desktop Wallpaper"
-#~ msgstr "Desktop-Tapete"
+#~ msgstr "Desktop-Hintergrund"
 
 #~ msgid "Desktop Wallpaper Preferences"
-#~ msgstr "Desktop-Tapeteneinstellungen"
+#~ msgstr "Desktop-hintergrundeinstellungen"
 
 #~ msgid "Show"
 #~ msgstr "Anzeigen"
