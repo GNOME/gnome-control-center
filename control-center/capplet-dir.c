@@ -27,7 +27,6 @@
 
 #include <string.h>
 #include <glib.h>
-#include <bonobo.h>
 
 #include <sys/stat.h>
 #include <sys/types.h>

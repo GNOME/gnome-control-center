@@ -40,8 +40,9 @@ gnome2_control_center_SOURCES = \
 	capplet-dir.c 		capplet-dir.h 		\
 	capplet-dir-view.c	capplet-dir-view.h	\
 	preferences.c		preferences.h		\
-	capplet-dir-view-tree.c				\
 	capplet-dir-view-list.c
+
+#	capplet-dir-view-tree.c				\
 
 gnome2_control_center_LDADD = \
 	@GNOMECC_LIBS@ \

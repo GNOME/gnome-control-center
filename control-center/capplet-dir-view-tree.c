@@ -22,10 +22,6 @@
  * 02111-1307, USA.
  */
 
-#ifdef GTK_DISABLE_DEPRECATED
-#undef GTK_DISABLE_DEPRECATED
-#endif
-
 #include <config.h>
 
 #include "capplet-dir-view.h"

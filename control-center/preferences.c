@@ -183,7 +183,9 @@ place_preferences (GladeXML *prefs_data, GnomeCCPreferences *prefs)
 #ifdef USE_HTML
 	case LAYOUT_HTML: w = "html_widget"; break;
 #endif
+#if 0
 	case LAYOUT_TREE: w = "tree_widget"; break;
+#endif
 	case LAYOUT_ICON_LIST: w = "icon_list_widget"; break;
 	default: w = NULL; break;
 	}
@@ -209,7 +211,7 @@ read_preferences (GladeXML *prefs_data, GnomeCCPreferences *prefs)
 
 	widget = glade_xml_get_widget (prefs_data, "tree_widget");
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)))
-		prefs->layout = LAYOUT_TREE;
+		prefs->layout = LAYOUT_ICON_LIST;
 	else {
 #ifdef USE_HTML
 		widget = glade_xml_get_widget (prefs_data, "html_widget");

@@ -1,3 +1,22 @@
+2002-02-14  Lauris Kaplinski  <lauris@ximian.com>
+
+	* capplet-dir-view-tree.c: Remove #undef GTK_DISABLE_DEPRECATED,
+	so if included again we see warnings
+
+	* capplet-dir.c: Remove <bonobo.h> which was unused
+
+	* main.c: Remove <bonobo.h> which was unused
+
+	* preferences.c (read_preferences): Remove LAYOUT_TREE
+	(place_preferences): Ditto
+
+	* preferences.h: Remove LAYOUT_TREE from preferences
+
+	* capplet-dir-view.c: Removed capplet_dir_view_tree
+	(capplet_dir_view_set_prop): Ditto
+
+	* Makefile.am: Remove capplet-dir-view-tree from SOURCES
+
 2002-02-12  Lauris Kaplinski  <lauris@ximian.com>
 
 	* preferences.c (prefs_dialog_ok_cb): Destroy widget instead of

@@ -27,7 +27,9 @@
 typedef enum _CappletDirViewLayout {
 	LAYOUT_NONE,
 	LAYOUT_ICON_LIST,
+#if 0
 	LAYOUT_TREE,
+#endif
 #ifdef USE_HTML
 	LAYOUT_HTML
 #endif

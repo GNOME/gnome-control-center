@@ -28,7 +28,6 @@
 #include <string.h>
 #include <gnome.h>
 #include <glade/glade.h>
-#include <bonobo.h>
 #include <gconf/gconf.h>
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>

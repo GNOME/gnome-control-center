@@ -32,12 +32,16 @@
 #include "capplet-dir-view.h"
 
 extern CappletDirViewImpl capplet_dir_view_list;
+#if 0
 extern CappletDirViewImpl capplet_dir_view_tree;
+#endif
 
 CappletDirViewImpl *capplet_dir_view_impl[] = {
 	NULL,
 	&capplet_dir_view_list,
+#if 0
 	&capplet_dir_view_tree,
+#endif
 };
 
 static GObjectClass *parent_class;
@@ -174,7 +178,7 @@ capplet_dir_view_set_prop (GObject *object, guint prop_id, const GValue *value, 
 #ifdef USE_HTML
 		layout = CLAMP (g_value_get_int (value), 0, LAYOUT_HTML);
 #else
-		layout = CLAMP (g_value_get_int (value), 0, LAYOUT_TREE);
+		layout = CLAMP (g_value_get_int (value), 0, LAYOUT_ICON_LIST);
 #endif
 
 		if (layout == view->layout)
