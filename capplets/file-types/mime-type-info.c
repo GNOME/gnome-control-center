@@ -92,8 +92,6 @@ mime_type_info_new (const gchar *mime_type, GtkTreeModel *model)
 void
 mime_type_info_load_all (MimeTypeInfo *info)
 {
-	gchar *tmp;
-
 	mime_type_info_get_description (info);
 	mime_type_info_get_file_extensions (info);
 
@@ -103,21 +101,11 @@ mime_type_info_load_all (MimeTypeInfo *info)
 	if (info->icon_pixbuf == NULL)
 		get_icon_pixbuf (info, info->icon_name, TRUE);
 
-	if (info->default_action == NULL && info->custom_line == NULL) {
+	if (info->default_action == NULL)
 		info->default_action = gnome_vfs_mime_get_default_application (info->mime_type);
 
-		tmp = g_strdup_printf ("Custom %s", info->mime_type);
-
-		if (info->default_action != NULL && !strcmp (info->default_action->name, tmp)) {
-			info->custom_line = g_strdup (info->default_action->command);
-			info->needs_terminal = gnome_vfs_application_registry_get_bool_value
-				(info->default_action->id, "requires_terminal", NULL);
-			gnome_vfs_mime_application_free (info->default_action);
-			info->default_action = NULL;
-		}
-
-		g_free (tmp);
-	}
+	if (info->default_action == NULL)
+		info->default_action = g_new0 (GnomeVFSMimeApplication, 1);
 
 	if (info->default_component == NULL)
 		info->default_component = gnome_vfs_mime_get_default_component (info->mime_type);
@@ -226,6 +214,22 @@ mime_type_info_get_category_name (const MimeTypeInfo *info)
 	return mime_category_info_get_full_name (MIME_CATEGORY_INFO (info->entry.parent));
 }
 
+gboolean
+mime_type_info_using_custom_app (const MimeTypeInfo *info)
+{
+	gchar *tmp;
+	gboolean ret;
+
+	if (info->default_action->name == NULL)
+		return TRUE;
+
+	tmp = g_strdup_printf ("Custom %s", info->mime_type);
+	ret = !strcmp (tmp, info->default_action->name);
+	g_free (tmp);
+
+	return ret;
+}
+
 void
 mime_type_info_set_category_name (const MimeTypeInfo *info, const gchar *category_name, GtkTreeModel *model) 
 {
@@ -252,34 +256,38 @@ mime_type_info_set_file_extensions (MimeTypeInfo *info, GList *list)
 void
 mime_type_info_save (const MimeTypeInfo *info)
 {
-	gchar                   *tmp;
-	uuid_t                   app_uuid;
-	gchar                    app_uuid_str[100];
-	GnomeVFSMimeApplication  app;
+	gchar  *tmp;
+	uuid_t  app_uuid;
+	gchar   app_uuid_str[100];
 
 	gnome_vfs_mime_set_description (info->mime_type, info->description);
 	gnome_vfs_mime_set_icon (info->mime_type, info->icon_name);
 
-	if (info->default_action != NULL) {
+	if (info->default_action != NULL && info->default_action->command != NULL && *info->default_action->command != '\0') {
+		tmp = g_strdup_printf ("Custom %s", info->mime_type);
+
+		if (info->default_action->name == NULL)
+			info->default_action->name = tmp;
+
+		if (info->default_action->id == NULL) {
+			uuid_generate (app_uuid);
+			uuid_unparse (app_uuid, app_uuid_str);
+
+			info->default_action->id = g_strdup (app_uuid_str);
+
+			gnome_vfs_application_registry_save_mime_application (info->default_action);
+			gnome_vfs_application_registry_sync ();
+		}
+		else if (!strcmp (tmp, info->default_action->name)) {
+			gnome_vfs_application_registry_set_value (info->default_action->id, "command",
+								  info->default_action->command);
+			gnome_vfs_application_registry_set_bool_value (info->default_action->id, "requires_terminal",
+								       info->default_action->requires_terminal);
+		}
+
 		gnome_vfs_mime_set_default_application (info->mime_type, info->default_action->id);
-	}
-	else if (info->custom_line != NULL && *info->custom_line != '\0') {
-		uuid_generate (app_uuid);
-		uuid_unparse (app_uuid, app_uuid_str);
-
-		app.id = app_uuid_str;
-		app.name = g_strdup_printf ("Custom %s", info->mime_type);
-		app.command = info->custom_line;
-		app.can_open_multiple_files = FALSE;
-		app.expects_uris = FALSE;
-		app.supported_uri_schemes = NULL;
-		app.requires_terminal = info->needs_terminal;
-
-		gnome_vfs_application_registry_save_mime_application (&app);
-		gnome_vfs_application_registry_sync ();
-
-		gnome_vfs_mime_set_default_application (info->mime_type, app.id);
-		g_free (app.name);
+	} else {
+		gnome_vfs_mime_set_default_application (info->mime_type, NULL);
 	}
 
 	tmp = form_extensions_string (info, " ", NULL);
@@ -308,7 +316,6 @@ mime_type_info_free (MimeTypeInfo *info)
 	gnome_vfs_mime_extensions_list_free (info->file_extensions);
 	CORBA_free (info->default_component);
 	gnome_vfs_mime_application_free (info->default_action);
-	g_free (info->custom_line);
 
 	if (info->icon_pixbuf != NULL)
 		g_object_unref (G_OBJECT (info->icon_pixbuf));
@@ -357,31 +364,18 @@ mime_category_info_load_all (MimeCategoryInfo *category)
 {
 	gchar *tmp, *tmp1;
 	gchar *appid;
-	GnomeVFSMimeApplication *app;
 
 	tmp1 = get_gconf_base_name (category);
 
-	if (category->default_action == NULL && category->custom_line == NULL) {
+	if (category->default_action == NULL) {
 		tmp = g_strconcat (tmp1, "/default-action-id", NULL);
 		appid = gconf_client_get_string (gconf_client_get_default (), tmp, NULL);
 		g_free (tmp);
 
-		if (appid != NULL && *appid != '\0') {
-			tmp = g_strdup_printf ("Custom %s", category->name);
-			app = gnome_vfs_application_registry_get_mime_application (appid);
-			if (!strcmp (app->name, tmp)) {
-				category->default_action = NULL;
-				category->custom_line = g_strdup (app->command);
-				category->needs_terminal = app->requires_terminal;
-				gnome_vfs_mime_application_free (app);
-			} else {
-				category->default_action = app;
-				category->custom_line = NULL;
-			}
-		} else {
-			category->default_action = NULL;
-			category->custom_line = NULL;
-		}
+		if (appid != NULL && *appid != '\0')
+			category->default_action = gnome_vfs_application_registry_get_mime_application (appid);
+		else
+			category->default_action = g_new0 (GnomeVFSMimeApplication, 1);
 	}
 
 	if (!category->use_parent_cat_loaded) {
@@ -397,6 +391,22 @@ mime_category_info_load_all (MimeCategoryInfo *category)
 	}
 
 	g_free (tmp1);
+}
+
+gboolean
+mime_category_info_using_custom_app (const MimeCategoryInfo *category)
+{
+	gchar *tmp;
+	gboolean ret;
+
+	if (category->default_action->name == NULL)
+		return TRUE;
+
+	tmp = g_strdup_printf ("Custom %s", category->name);
+	ret = !strcmp (tmp, category->default_action->name);
+	g_free (tmp);
+
+	return ret;
 }
 
 static void
@@ -425,41 +435,46 @@ set_subcategory_ids (ModelEntry *entry, MimeCategoryInfo *category, gchar *app_i
 void
 mime_category_info_save (MimeCategoryInfo *category) 
 {
-	gchar                   *tmp, *tmp1;
-	gchar                   *app_id;
-	uuid_t                   app_uuid;
-	gchar                    app_uuid_str[100];
-	GnomeVFSMimeApplication  app;
+	gchar   *tmp, *tmp1, *tmp2;
+	uuid_t   app_uuid;
+	gchar    app_uuid_str[100];
+	gboolean set_ids;
 
 	tmp1 = get_gconf_base_name (category);
+
 	tmp = g_strconcat (tmp1, "/default-action-id", NULL);
 
-	if (category->default_action != NULL) {
+	if (category->default_action != NULL &&
+	    category->default_action->command != NULL &&
+	    *category->default_action->command != '\0')
+	{
+		tmp2 = g_strdup_printf ("Custom %s", category->name);
+
+		if (category->default_action->name == NULL)
+			category->default_action->name = tmp2;
+
+		if (category->default_action->id == NULL) {
+			uuid_generate (app_uuid);
+			uuid_unparse (app_uuid, app_uuid_str);
+
+			category->default_action->id = g_strdup (app_uuid_str);
+
+			gnome_vfs_application_registry_save_mime_application (category->default_action);
+			gnome_vfs_application_registry_sync ();
+		}
+		else if (!strcmp (tmp, category->default_action->name)) {
+			gnome_vfs_application_registry_set_value (category->default_action->id, "command",
+								  category->default_action->command);
+			gnome_vfs_application_registry_set_bool_value (category->default_action->id, "requires_terminal",
+								       category->default_action->requires_terminal);
+		}
+
 		gconf_client_set_string (gconf_client_get_default (),
 					 tmp, category->default_action->id, NULL);
-		app_id = category->default_action->id;
-	}
-	else if (category->custom_line != NULL && *category->custom_line != '\0') {
-		uuid_generate (app_uuid);
-		uuid_unparse (app_uuid, app_uuid_str);
-
-		app.id = app_uuid_str;
-		app.name = g_strdup_printf ("Custom %s", category->name);
-		app.command = category->custom_line;
-		app.can_open_multiple_files = FALSE;
-		app.expects_uris = FALSE;
-		app.supported_uri_schemes = NULL;
-		app.requires_terminal = category->needs_terminal;
-
-		gnome_vfs_application_registry_save_mime_application (&app);
-		gnome_vfs_application_registry_sync ();
-
-		gconf_client_set_string (gconf_client_get_default (),
-					 tmp, app.id, NULL);
-		g_free (app.name);
-		app_id = app_uuid_str;
+		set_ids = TRUE;
 	} else {
-		app_id = NULL;
+		gconf_client_unset (gconf_client_get_default (), tmp, NULL);
+		set_ids = FALSE;
 	}
 
 	g_free (tmp);
@@ -469,8 +484,8 @@ mime_category_info_save (MimeCategoryInfo *category)
 	g_free (tmp);
 	g_free (tmp1);
 
-	if (app_id != NULL)
-		set_subcategory_ids (MODEL_ENTRY (category), category, app_id);
+	if (set_ids)
+		set_subcategory_ids (MODEL_ENTRY (category), category, category->default_action->id);
 }
 
 static void
@@ -487,15 +502,6 @@ update_subcategories (ModelEntry *entry, MimeCategoryInfo *category)
 				MIME_TYPE_INFO (entry)->default_action = NULL;
 			else
 				MIME_TYPE_INFO (entry)->default_action = gnome_vfs_mime_application_copy (category->default_action);
-
-			g_free (MIME_TYPE_INFO (entry)->custom_line);
-
-			if (category->custom_line == NULL)
-				MIME_TYPE_INFO (entry)->custom_line = NULL;
-			else
-				MIME_TYPE_INFO (entry)->custom_line = g_strdup (category->custom_line);
-
-			MIME_TYPE_INFO (entry)->needs_terminal = category->needs_terminal;
 		}
 
 		break;

@@ -1,10 +1,24 @@
 2002-01-28  Bradford Hovinen  <hovinen@ximian.com>
 
+	* mime-type-info.c (mime_type_info_using_custom_app) 
+	(mime_category_info_using_custom_app): Implement
+
+	* mime-edit-dialog.c (store_data): Update: don't use custom_line,
+	needs_terminal
+
+	* mime-type-info.[ch]: Eliminate custom_line and needs_terminal;
+	will use default_action for that now
+
+	* mime-category-edit-dialog.c (store_data): Set fields in
+	default_action from custom_line
+
 	* mime-type-info.c (mime_category_info_save): Don't set tmp1 with
 	the full category name, free tmp too
 	(mime_category_info_load_all): strdup app->command
 	(get_gconf_base_name): Don't put /default-action-id after the key
 	name
+	(mime_category_info_load_all): Set default_action even if the app
+	is custom
 
 	* category-names.h: Update category names
 

@@ -367,11 +367,6 @@ fill_dialog (MimeEditDialog *dialog)
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("use_category_defaults_toggle")), dialog->p->use_cat_dfl);
 	update_sensitivity (dialog);
 
-	if (dialog->p->info->custom_line != NULL)
-		gnome_file_entry_set_filename (GNOME_FILE_ENTRY (WID ("program_entry")), dialog->p->info->custom_line);
-
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("needs_terminal_toggle")), dialog->p->info->needs_terminal);
-
 	if (dialog->p->info->mime_type != NULL && *dialog->p->info->mime_type != '\0')
 		gtk_widget_set_sensitive (WID ("mime_type_entry"), FALSE);
 
@@ -474,6 +469,7 @@ populate_application_list (MimeEditDialog *dialog)
 		app = tmp->data;
 
 		if (dialog->p->info->default_action != NULL &&
+		    dialog->p->info->default_action->id != NULL &&
 		    !strcmp (app->id, dialog->p->info->default_action->id))
 			found_idx = i;
 
@@ -495,9 +491,13 @@ populate_application_list (MimeEditDialog *dialog)
 
 	if (found_idx < 0) {
 		found_idx = i;
-		if (dialog->p->info->custom_line != NULL)
+		if (dialog->p->info->default_action->command != NULL)
 			gnome_file_entry_set_filename (GNOME_FILE_ENTRY (WID ("program_entry")),
-						       dialog->p->info->custom_line);
+						       dialog->p->info->default_action->command);
+
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("needs_terminal_toggle")),
+					      dialog->p->info->default_action->requires_terminal);
+
 	} else {
 		gtk_widget_set_sensitive (WID ("program_entry_box"), FALSE);
 	}
@@ -614,17 +614,24 @@ store_data (MimeEditDialog *dialog)
 	idx = gtk_option_menu_get_history (option_menu);
 	menu_item = (g_list_nth (menu_shell->children, idx))->data;
 
-	gnome_vfs_mime_application_free (dialog->p->info->default_action);
 	app = g_object_get_data (menu_item, "app");
-	if (app != NULL)
+	if (app != NULL) {
+		gnome_vfs_mime_application_free (dialog->p->info->default_action);
 		dialog->p->info->default_action = gnome_vfs_mime_application_copy (app);
-	else
-		dialog->p->info->default_action = NULL;
+	} else {
+		if (!mime_type_info_using_custom_app (dialog->p->info)) {
+			gnome_vfs_mime_application_free (dialog->p->info->default_action);
+			dialog->p->info->default_action = g_new0 (GnomeVFSMimeApplication, 1);
+		}
 
-	g_free (dialog->p->info->custom_line);
-	dialog->p->info->custom_line = g_strdup (gnome_file_entry_get_full_path (GNOME_FILE_ENTRY (WID ("program_entry")), FALSE));
-
-	dialog->p->info->needs_terminal = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (WID ("needs_terminal_toggle")));
+		g_free (dialog->p->info->default_action->command);
+		dialog->p->info->default_action->command
+			= g_strdup (gtk_entry_get_text (GTK_ENTRY
+							(gnome_file_entry_gtk_entry
+							 (GNOME_FILE_ENTRY (WID ("program_entry"))))));
+		dialog->p->info->default_action->requires_terminal
+			= gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (WID ("needs_terminal_toggle")));
+	}
 
 	ext_list = collect_filename_extensions (dialog);
 	mime_type_info_set_file_extensions (dialog->p->info, ext_list);

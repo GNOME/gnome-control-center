@@ -58,8 +58,6 @@ struct _MimeTypeInfo
 
 	Bonobo_ServerInfo       *default_component;
 	GnomeVFSMimeApplication *default_action;
-	gchar                   *custom_line;
-	gboolean                 needs_terminal;
 };
 
 struct _MimeCategoryInfo
@@ -68,8 +66,6 @@ struct _MimeCategoryInfo
 
 	gchar                   *name;
 	GnomeVFSMimeApplication *default_action;
-	gchar                   *custom_line;
-	gboolean                 needs_terminal;
 
 	gboolean                 use_parent_category;
 	gboolean                 use_parent_cat_loaded;
@@ -94,6 +90,8 @@ gchar        *mime_type_info_get_file_extensions_pretty_string
                                                    (MimeTypeInfo *info);
 gchar        *mime_type_info_get_category_name     (const MimeTypeInfo *info);
 
+gboolean      mime_type_info_using_custom_app      (const MimeTypeInfo *info);
+
 void          mime_type_info_set_category_name     (const MimeTypeInfo *info,
 						    const gchar        *category_name,
 						    GtkTreeModel       *model);
@@ -104,6 +102,7 @@ MimeCategoryInfo *mime_category_info_new           (MimeCategoryInfo   *parent,
 						    const gchar        *name,
 						    GtkTreeModel       *model);
 void          mime_category_info_load_all          (MimeCategoryInfo   *category);
+gboolean      mime_category_info_using_custom_app  (const MimeCategoryInfo *category);
 void          mime_category_info_save              (MimeCategoryInfo   *category);
 void          mime_category_info_update            (MimeCategoryInfo   *info);
 

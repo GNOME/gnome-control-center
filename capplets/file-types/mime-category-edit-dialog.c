@@ -321,6 +321,7 @@ populate_application_list (MimeCategoryEditDialog *dialog)
 	for (tmp = app_list, i = 0; tmp != NULL; tmp = tmp->next, i++) {
 		app = gnome_vfs_application_registry_get_mime_application (tmp->data);
 		if (dialog->p->info->default_action != NULL &&
+		    dialog->p->info->default_action->id != NULL &&
 		    !strcmp (tmp->data, dialog->p->info->default_action->id))
 			found_idx = i;
 
@@ -342,13 +343,12 @@ populate_application_list (MimeCategoryEditDialog *dialog)
 
 	if (found_idx < 0) {
 		found_idx = i;
-		if (dialog->p->info->custom_line != NULL) {
+		if (dialog->p->info->default_action->command != NULL)
 			gnome_file_entry_set_filename (GNOME_FILE_ENTRY (WID ("program_entry")),
-						       dialog->p->info->custom_line);
+						       dialog->p->info->default_action->command);
 
-			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("needs_terminal_toggle")),
-						      dialog->p->info->needs_terminal);
-		}
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("needs_terminal_toggle")),
+					      dialog->p->info->default_action->requires_terminal);
 	} else {
 		gtk_widget_set_sensitive (WID ("program_entry_box"), FALSE);
 	}
@@ -377,17 +377,24 @@ store_data (MimeCategoryEditDialog *dialog)
 	idx = gtk_option_menu_get_history (option_menu);
 	menu_item = (g_list_nth (menu_shell->children, idx))->data;
 
-	gnome_vfs_mime_application_free (dialog->p->info->default_action);
 	app = g_object_get_data (menu_item, "app");
-	if (app != NULL)
+	if (app != NULL) {
+		gnome_vfs_mime_application_free (dialog->p->info->default_action);
 		dialog->p->info->default_action = gnome_vfs_mime_application_copy (app);
-	else
-		dialog->p->info->default_action = NULL;
+	} else {
+		if (!mime_category_info_using_custom_app (dialog->p->info)) {
+			gnome_vfs_mime_application_free (dialog->p->info->default_action);
+			dialog->p->info->default_action = g_new0 (GnomeVFSMimeApplication, 1);
+		}
 
-	dialog->p->info->custom_line = g_strdup (gtk_entry_get_text (GTK_ENTRY
-								     (gnome_file_entry_gtk_entry
-								      (GNOME_FILE_ENTRY (WID ("program_entry"))))));
-	dialog->p->info->needs_terminal = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (WID ("needs_terminal_toggle")));
+		g_free (dialog->p->info->default_action->command);
+		dialog->p->info->default_action->command
+			= g_strdup (gtk_entry_get_text (GTK_ENTRY
+							(gnome_file_entry_gtk_entry
+							 (GNOME_FILE_ENTRY (WID ("program_entry"))))));
+		dialog->p->info->default_action->requires_terminal
+			= gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (WID ("needs_terminal_toggle")));
+	}
 
 	dialog->p->info->use_parent_category =
 		gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (WID ("use_category_toggle")));
