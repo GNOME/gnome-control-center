@@ -63,7 +63,10 @@ static struct {
 		{ NULL, NULL, NULL } },
 	{ "timeout_enable", NULL, NULL,
 		CONFIG_ROOT "/timeout_enable",
-		{ "timeout_slide", "timeout_spin", "timeout_label" } }
+		{ "timeout_slide", "timeout_spin", "timeout_label" } },
+	{ "feature_state_change_beep", NULL, NULL,
+		CONFIG_ROOT "/feature_state_change_beep",
+		{ NULL, NULL, NULL } }
 };
 
 static struct {
@@ -77,7 +80,7 @@ static struct {
 } const ranges [] = {
 	{ "bouncekeys_delay_slide",	"bouncekeys_delay_spin",     300,  10,  900,   10,
 	  CONFIG_ROOT "/bouncekeys_delay" },
-	{ "slowkeys_delay_slide",	"slowkeys_delay_spin",	     300,  10,  900,   10,
+	{ "slowkeys_delay_slide",	"slowkeys_delay_spin",	     300,  10,  500,   10,
 	  CONFIG_ROOT "/slowkeys_delay" },
 	  /* WARNING anything larger than approx 512 seems to loose all keyboard input */
 	{ "mousekeys_max_speed_slide",	"mousekeys_max_speed_spin",  300,  10, 500,   20,
@@ -148,7 +151,6 @@ setup_simple_toggles (GladeXML *dialog, GConfChangeSet *changeset)
 		char const *gconf_key;
 		char const *checkbox;
 	} const simple_toggles [] = {
-		{ CONFIG_ROOT "/feature_state_change_beep","feature_state_change_beep" },
 		{ CONFIG_ROOT "/bouncekeys_beep_reject",  "bouncekeys_beep_reject" },
 
 		{ CONFIG_ROOT "/slowkeys_beep_press",      "slowkeys_beep_press" },
@@ -269,11 +271,11 @@ xrm_get_bool (GConfClient *client, XrmDatabase *db, char const *gconf_key,
 
 static void
 xrm_get_int (GConfClient *client, XrmDatabase *db, char const *gconf_key,
-	     char const *res_str, char const *class_str)
+	     char const *res_str, char const *class_str, float scale)
 {
 	XrmValue	resourceValue;
 	char		*res;
-	int		value;
+	int		value, log_scale;
 	char		resource [256];
 
 	snprintf (resource, sizeof (resource), "%s.value", res_str);
@@ -281,17 +283,17 @@ xrm_get_int (GConfClient *client, XrmDatabase *db, char const *gconf_key,
 		return;
 	value = atoi (resourceValue.addr);
 
-#if 0
-	{
-	int decimal;
 	snprintf (resource, sizeof (resource), "%s.decimalPoints", res_str);
 	if (!XrmGetResource (*db, resource, class_str, &res, &resourceValue))
 		return;
-	decimal = atoi (resourceValue.addr);
-	}
-#endif
+	log_scale = atoi (resourceValue.addr);
+
+	while (log_scale-- > 0)
+		scale /= 10.;
 
 	gconf_client_set_int (client, gconf_key, value, NULL);
+
+	printf ("%f * %d\n", scale, value);
 }
 
 /* This loads the current users XKB settings from their file */
@@ -316,8 +318,8 @@ load_CDE_file (GtkFileSelection *fsel)
 	}
 
 	client = gconf_client_get_default ();
-	xrm_get_bool (client, &db, CONFIG_ROOT "/enable",
-		"*EnableAccessXToggle.set",	"AccessX*ToggleButtonGadget.XmCSet");
+	gconf_client_set_bool (client, CONFIG_ROOT "/enable", TRUE, NULL);
+
 	xrm_get_bool (client, &db, CONFIG_ROOT "/feature_state_change_beep",
 		"*SoundOnOffToggle.set",	"AccessX*ToggleButtonGadget.XmCSet");
 	xrm_get_bool (client, &db, CONFIG_ROOT "/timeout_enable",
@@ -341,17 +343,21 @@ load_CDE_file (GtkFileSelection *fsel)
 	xrm_get_bool (client, &db, CONFIG_ROOT "/slowkeys_beep_accept",
 		"*SlowKeysOnAcceptToggle.set",	"AccessX*ToggleButtonGadget.XmCSet");
 	xrm_get_int  (client, &db, CONFIG_ROOT "/timeout",
-		"*TimeOutScale",		"AccessX*XmScale");
+		"*TimeOutScale",		"AccessX*XmScale", 60);
 	xrm_get_int  (client, &db, CONFIG_ROOT "/mousekeys_max_speed",
-		"*MouseMaxSpeedScale",		"AccessX*XmScale");
+		"*MouseMaxSpeedScale",		"AccessX*XmScale", 1);
 	xrm_get_int  (client, &db, CONFIG_ROOT "/mousekeys_accel_time",
-		"*MouseAccelScale",		"AccessX*XmScale");
+		"*MouseAccelScale",		"AccessX*XmScale", 1);
 	xrm_get_int  (client, &db, CONFIG_ROOT "/mousekeys_init_delay",
-		"*MouseDelayScale",		"AccessX*XmScale");
+		"*MouseDelayScale",		"AccessX*XmScale", 1);
 	xrm_get_int  (client, &db, CONFIG_ROOT "/slowkeys_delay",
-		"*KRGSlowKeysDelayScale",	"AccessX*XmScale");
+		"*KRGSlowKeysDelayScale",	"AccessX*XmScale", 1000);
 	xrm_get_int  (client, &db, CONFIG_ROOT "/bouncekeys_delay",
-		"*KRGDebounceScale",		"AccessX*XmScale");
+		"*KRGDebounceScale",		"AccessX*XmScale", 1000);
+
+	/* Set the master enable flag last */
+	xrm_get_bool (client, &db, CONFIG_ROOT "/enable",
+		"*EnableAccessXToggle.set",	"AccessX*ToggleButtonGadget.XmCSet");
 
 	return TRUE;
 }

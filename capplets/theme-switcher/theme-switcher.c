@@ -10,6 +10,7 @@
 #include <glade/glade.h>
 #include <libgnomevfs/gnome-vfs-async-ops.h>
 #include <libgnomevfs/gnome-vfs-ops.h>
+#include <libgnomevfs/gnome-vfs-utils.h>
 
 #include "theme-common.h"
 #include "capplet-util.h"
@@ -413,19 +414,19 @@ drag_data_received_cb (GtkWidget *widget, GdkDragContext *context,
 {
 	GList *uris;
 	GladeXML *dialog = data;
-	gchar *filename;
+	gchar *filename = NULL;
 
 	if (!(info == TARGET_URI_LIST || info == TARGET_NS_URL))
 		return;
 
 	uris = gnome_vfs_uri_list_parse ((gchar *) selection_data->data);
-
-	filename = gnome_vfs_uri_to_string (uris->data, GNOME_VFS_URI_HIDE_NONE);
-	if (strncmp (filename, "http://", 7) && strncmp (filename, "ftp://", 6))
-	{
-		g_free (filename);
-		filename = gnome_vfs_uri_to_string (uris->data, GNOME_VFS_URI_HIDE_TOPLEVEL_METHOD);
+	if (uris != NULL && uris->data != NULL) {
+		GnomeVFSURI *uri = (GnomeVFSURI *) uris->data;
+		filename = gnome_vfs_unescape_string (
+			gnome_vfs_uri_get_path (uri), G_DIR_SEPARATOR_S);
+		gnome_vfs_uri_list_unref (uris);
 	}
+
 	gnome_file_entry_set_filename (GNOME_FILE_ENTRY (WID ("install_theme_picker")), filename);
 	g_free (filename);
 	gnome_vfs_uri_list_unref (uris);

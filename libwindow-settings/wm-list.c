@@ -51,7 +51,7 @@ wm_compare (gconstpointer a, gconstpointer b)
         const WindowManager *wm_a = (const WindowManager *)a;
         const WindowManager *wm_b = (const WindowManager *)b;
 
-        return g_strcasecmp (gnome_desktop_item_get_string (wm_a->dentry, GNOME_DESKTOP_ITEM_NAME), gnome_desktop_item_get_string (wm_b->dentry, GNOME_DESKTOP_ITEM_NAME));
+        return g_ascii_strcasecmp (gnome_desktop_item_get_string (wm_a->dentry, GNOME_DESKTOP_ITEM_NAME), gnome_desktop_item_get_string (wm_b->dentry, GNOME_DESKTOP_ITEM_NAME));
 }
 
 static void
@@ -551,7 +551,7 @@ xml_read_bool (xmlNodePtr node)
 
 	text = xmlNodeGetContent (node);
 
-	if (!g_strcasecmp (text, "true")) 
+	if (!g_ascii_strcasecmp (text, "true")) 
 		return TRUE;
 	else
 		return FALSE;

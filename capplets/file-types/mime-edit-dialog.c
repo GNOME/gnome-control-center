@@ -66,7 +66,6 @@ struct _MimeEditDialogPrivate
 	gboolean      component_active         : 1;
 	gboolean      default_action_active    : 1;
 	gboolean      custom_action            : 1;
-	gboolean      use_cat_dfl              : 1;
 };
 
 static guint dialog_signals[LAST_SIGNAL];
@@ -467,7 +466,6 @@ fill_dialog (MimeEditDialog *dialog)
 	safe_set_entry (dialog, "category_entry",
 		mime_type_info_get_category_name (dialog->p->info));
 
-	dialog->p->use_cat_dfl = dialog->p->info->use_category;
 	update_sensitivity (dialog);
 
 	gnome_icon_entry_set_filename (GNOME_ICON_ENTRY (WID ("icon_entry")), mime_type_info_get_icon_path (dialog->p->info));
@@ -990,8 +988,8 @@ response_cb (MimeEditDialog *dialog, gint response_id)
 static void
 update_sensitivity (MimeEditDialog *dialog) 
 {
-	gtk_widget_set_sensitive (WID ("component_box"), dialog->p->component_active && !dialog->p->use_cat_dfl);
-	gtk_widget_set_sensitive (WID ("default_action_box"), dialog->p->default_action_active && !dialog->p->use_cat_dfl);
-	gtk_widget_set_sensitive (WID ("program_entry_box"), dialog->p->custom_action && !dialog->p->use_cat_dfl);
-	gtk_widget_set_sensitive (WID ("needs_terminal_toggle"), dialog->p->custom_action && !dialog->p->use_cat_dfl);
+	gtk_widget_set_sensitive (WID ("component_box"), dialog->p->component_active);
+	gtk_widget_set_sensitive (WID ("default_action_box"), dialog->p->default_action_active);
+	gtk_widget_set_sensitive (WID ("program_entry_box"), dialog->p->custom_action);
+	gtk_widget_set_sensitive (WID ("needs_terminal_toggle"), dialog->p->custom_action);
 }

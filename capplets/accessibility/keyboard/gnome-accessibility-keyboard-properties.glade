@@ -235,7 +235,7 @@
 		      <property name="visible">True</property>
 		      <property name="tooltip" translatable="yes">Beep when an LED is turned on and two beeps when one is turned off.</property>
 		      <property name="can_focus">True</property>
-		      <property name="label" translatable="yes">Enable _Toggle Keys</property>
+		      <property name="label" translatable="yes">E_nable Toggle Keys</property>
 		      <property name="use_underline">True</property>
 		      <property name="relief">GTK_RELIEF_NORMAL</property>
 		      <property name="active">True</property>
@@ -451,6 +451,7 @@ two keys pressed simultaneously</property>
 		      <property name="yalign">0.5</property>
 		      <property name="xpad">9</property>
 		      <property name="ypad">0</property>
+		      <property name="mnemonic_widget">slowkeys_delay_spin</property>
 		      <accessibility>
 			<atkrelation target="slowkeys_delay_spin" type="label-for"/>
 		      </accessibility>
@@ -730,6 +731,7 @@ two keys pressed simultaneously</property>
 		      <property name="yalign">0.5</property>
 		      <property name="xpad">10</property>
 		      <property name="ypad">0</property>
+		      <property name="mnemonic_widget">bouncekeys_delay_spin</property>
 		      <accessibility>
 			<atkrelation target="bouncekeys_delay_spin" type="label-for"/>
 		      </accessibility>
@@ -857,7 +859,7 @@ two keys pressed simultaneously</property>
 		  <property name="visible">True</property>
 		  <property name="tooltip" translatable="yes">Ignore all subsequent presses of the SAME key if they happen within a user selectable period of time.</property>
 		  <property name="can_focus">True</property>
-		  <property name="label" translatable="yes">Enable _Bounce Keys</property>
+		  <property name="label" translatable="yes">Enable Bo_unce Keys</property>
 		  <property name="use_underline">True</property>
 		  <property name="relief">GTK_RELIEF_NORMAL</property>
 		  <property name="active">True</property>
@@ -908,6 +910,7 @@ two keys pressed simultaneously</property>
 		      <property name="yalign">0.5</property>
 		      <property name="xpad">0</property>
 		      <property name="ypad">0</property>
+		      <property name="mnemonic_widget">mousekeys_max_speed_spin</property>
 		      <accessibility>
 			<atkrelation target="mousekeys_max_speed_spin" type="label-for"/>
 		      </accessibility>
@@ -1066,8 +1069,9 @@ two keys pressed simultaneously</property>
 		      <property name="yalign">0.5</property>
 		      <property name="xpad">0</property>
 		      <property name="ypad">0</property>
+		      <property name="mnemonic_widget">mousekeys_accel_time_spin</property>
 		      <accessibility>
-			<atkrelation target="mousekeys_accel_time_title" type="label-for"/>
+			<atkrelation target="mousekeys_accel_time_spin" type="label-for"/>
 		      </accessibility>
 		    </widget>
 		    <packing>
@@ -1193,6 +1197,7 @@ two keys pressed simultaneously</property>
 		      <property name="yalign">0.5</property>
 		      <property name="xpad">2</property>
 		      <property name="ypad">0</property>
+		      <property name="mnemonic_widget">mousekeys_init_delay_spin</property>
 		      <accessibility>
 			<atkrelation target="mousekeys_init_delay_spin" type="label-for"/>
 		      </accessibility>
@@ -1297,7 +1302,7 @@ two keys pressed simultaneously</property>
 			<widget class="GtkCheckButton" id="feature_state_change_beep">
 			  <property name="visible">True</property>
 			  <property name="can_focus">True</property>
-			  <property name="label" translatable="yes">_Beep when enabling/disabling keyboard accessibility features</property>
+			  <property name="label" translatable="yes">Beep when enabling/disabling _keyboard accessibility features</property>
 			  <property name="use_underline">True</property>
 			  <property name="relief">GTK_RELIEF_NORMAL</property>
 			  <property name="active">False</property>
