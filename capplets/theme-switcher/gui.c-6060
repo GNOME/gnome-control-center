@@ -4,6 +4,7 @@
 #include <signal.h>
 
 static GtkWidget *w;
+GtkWidget *install_theme_file_sel;
 extern gint pid;
 
 
@@ -19,7 +20,81 @@ auto_callback (GtkWidget *widget, gpointer data)
     click_preview (widget,NULL);
   
 }
+static void
+browse_dialog_ok (GtkWidget *widget, gpointer data)
+{
+  GtkWidget *filesel = gtk_widget_get_toplevel (widget);
+  install_theme (gtk_file_selection_get_filename (GTK_FILE_SELECTION (filesel)));
+  gtk_widget_set_sensitive (GTK_WIDGET (data), TRUE);
+  gtk_widget_destroy (filesel);
+}
+static void
+browse_dialog_close (GtkWidget *widget, gpointer data)
+{
+  gtk_widget_set_sensitive (GTK_WIDGET (data), TRUE);
+  gtk_widget_destroy (gtk_widget_get_toplevel (widget));
+}
+static void
+browse_dialog_kill (GtkWidget *widget, gpointer data)
+{
+  gtk_widget_set_sensitive (GTK_WIDGET (data), TRUE);
+}
 
+static void
+install_theme_callback (GtkWidget *widget, gpointer data)
+{
+  GtkWidget *parent;
+  gtk_widget_set_sensitive (widget, FALSE);
+
+  install_theme_file_sel = gtk_file_selection_new (_("Select a theme to install"));
+  gtk_file_selection_hide_fileop_buttons (GTK_FILE_SELECTION (install_theme_file_sel));
+  /* BEGIN UGLINESS.  This code is stolen from gnome_dialog_set_parent.
+   * We want its functionality, but it takes a GnomeDialog as its argument.
+   * So we copy it )-: */
+  parent = gtk_widget_get_toplevel (GTK_WIDGET (widget));
+  gtk_window_set_transient_for (GTK_WINDOW(install_theme_file_sel), GTK_WINDOW (parent));
+
+  if ( gnome_preferences_get_dialog_centered() ) {
+	  /* User wants us to center over parent */
+
+	  gint x, y, w, h, dialog_x, dialog_y;
+
+	  if (GTK_WIDGET_VISIBLE(parent)) {
+		  /* Throw out other positioning */
+		  gtk_window_set_position(GTK_WINDOW(install_theme_file_sel),
+					  GTK_WIN_POS_NONE);
+
+		  gdk_window_get_origin (GTK_WIDGET(parent)->window, &x, &y);
+		  gdk_window_get_size   (GTK_WIDGET(parent)->window, &w, &h);
+
+		/* The problem here is we don't know how big the dialog is.
+		   So "centered" isn't really true. We'll go with 
+		   "kind of more or less on top" */
+		  dialog_x = x + w/4;
+		  dialog_y = y + h/4;
+		
+		  gtk_widget_set_uposition(GTK_WIDGET(install_theme_file_sel),
+					   dialog_x, dialog_y);
+	  }
+  }
+  gtk_signal_connect (GTK_OBJECT (GTK_FILE_SELECTION (install_theme_file_sel)
+				  ->ok_button), "clicked",
+		      (GtkSignalFunc) browse_dialog_ok,
+		      widget);
+  gtk_signal_connect (GTK_OBJECT (GTK_FILE_SELECTION (install_theme_file_sel)->cancel_button),
+		      "clicked",
+		      GTK_SIGNAL_FUNC(browse_dialog_close),
+		      widget);
+  gtk_signal_connect (GTK_OBJECT (install_theme_file_sel), "destroy",
+		      GTK_SIGNAL_FUNC(browse_dialog_kill),
+		      widget);
+
+  if (gtk_grab_get_current ())
+	  gtk_grab_add (install_theme_file_sel);
+
+  gtk_widget_show (install_theme_file_sel);
+
+}
 GtkWidget *
 make_main(void)
 {
@@ -57,6 +132,7 @@ make_main(void)
   gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (click_preview), NULL);
   gtk_box_pack_start (GTK_BOX (hbxo), button, FALSE, FALSE, 0);
   button = gtk_button_new_with_label (_("Install new\ntheme..."));
+  gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (install_theme_callback), NULL);
   
   /* FIXME: this needs ot actually do something. */
   gtk_box_pack_start (GTK_BOX (hbxo), button, FALSE, FALSE, 0);
@@ -302,7 +378,6 @@ update_theme_entries(GtkWidget *disp_list)
       item = gtk_list_item_new_with_label(te[i].name);
       gtk_widget_show(item);
       if (strcmp (d_theme, te[i].name) == 0) {
-	g_print ("woo hoo -- gotta match %s\n",te[i].name);
 	initial_theme = item;
       }
       gtk_object_set_data(GTK_OBJECT(item), "name", g_strdup(te[i].name));
