@@ -14,7 +14,7 @@
 #include <libgnomevfs/gnome-vfs-cancellable-ops.h>
 #include <libgnomevfs/gnome-vfs-module.h>
 
-#define FONT_METHOD_DIRECTORY "/home/james/cvs/gnome2/fontilus/src/font-method.directory"
+#define FONT_METHOD_DIRECTORY DIRECTORY_DIR "/font-method.directory"
 
 /* this is from gnome-vfs-monitor-private.h */
 void gnome_vfs_monitor_callback (GnomeVFSMethodHandle *method_handle,
