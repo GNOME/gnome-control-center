@@ -18,12 +18,14 @@ defaults_DATA = sound-properties.xml
 
 oafdir = $(datadir)/oaf
 oaf_DATA = Bonobo_Control_Capplet_sound_properties.oaf
+oaffile = $(oaf_DATA)
 
 ##
 ## You should not need to modify anything below this line
 ##
 @XML_I18N_MERGE_DESKTOP_RULE@
 @GNOMECC_CAPPLETS_DESKTOP_IN_RULE@
+@GNOMECC_CAPPLETS_OAF_FILE_IN_RULE@
 
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
@@ -34,4 +36,4 @@ pixmapdir  = $(GNOMECC_PIXMAPS_DIR)
 Glade_DATA = $(cappletname)-properties.glade
 icons_DATA = $(cappletname)-capplet.png
 desktop    = $(cappletname).desktop
-all-local: $(desktop)
+all-local: $(desktop) $(oaffile)
