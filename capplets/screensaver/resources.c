@@ -129,7 +129,7 @@ screensaver_get_desc_from_xrdb (Screensaver *saver)
 	desc = get_resource (s, s);
 	g_free (s);
 
-	saver->description = g_new (char, strlen (desc));
+	saver->description = g_new (char, strlen (desc) + 1);
 	flag = FALSE;
 	for (i = 0, j = 0; desc[i]; i++) {
 		if (!isspace(desc[i])) {
