@@ -534,7 +534,7 @@ nautilus_mime_type_capplet_update_info (const char *mime_type) {
 	gtk_label_set_text (GTK_LABEL (mime_label), mime_type);
 
 	/* Add description to first column */
-	description = gnome_vfs_mime_description (mime_type);	
+	description = gnome_vfs_mime_get_description (mime_type);	
 	if (description != NULL && strlen (description) > 0) {
 		gtk_entry_set_text (GTK_ENTRY (description_entry), description);
 	} else {
@@ -984,7 +984,7 @@ populate_mime_list (GList *type_list, GtkCList *clist)
 		if (mime_string[0] != '#') {
 
 			/* Add description to first column */
-			description = gnome_vfs_mime_description (mime_string);	
+			description = gnome_vfs_mime_get_description (mime_string);	
 			if (description != NULL && strlen (description) > 0) {
 				text[0] = g_strdup (description);
 			} else {
