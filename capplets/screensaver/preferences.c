@@ -393,7 +393,7 @@ preferences_load (Preferences *prefs)
 	clean_saver_list (prefs);
 
 	prefs->selection_mode =
-		gnome_config_get_int ("/Screensaver/Default/selection_mode=3");
+		gnome_config_get_int ("/Screensaver/Default/selection_mode=2");
 	prefs->power_management = 
 		gnome_config_get_bool ("/Screensaver/Default/use_dpms=FALSE");
 	prefs->standby_time = 
