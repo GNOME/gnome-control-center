@@ -31,6 +31,40 @@ typedef struct
 
 GList *signals = NULL;
 
+static void
+menu_item_activate (GtkWidget *menu_item,
+		    gpointer   unused)
+{
+  gchar *key_theme;
+  gchar *current_key_theme;
+  GConfClient *client;
+  GError *error = NULL;
+
+  client = gconf_client_get_default ();
+
+  key_theme = g_object_get_data (G_OBJECT (menu_item), LABEL_DATA);
+  g_return_if_fail (key_theme != NULL);
+
+  current_key_theme = gconf_client_get_string (client, "/desktop/gnome/interface/gtk_key_theme", &error);
+  if (current_key_theme && strcmp (current_key_theme, key_theme))
+    {
+      gconf_client_set_string (client, "/desktop/gnome/interface/gtk_key_theme", key_theme, NULL);
+    }
+}
+
+static GtkWidget *
+make_key_theme_menu_item (const gchar *key_theme)
+{
+  GtkWidget *retval;
+
+  retval = gtk_menu_item_new_with_label (key_theme);
+  g_object_set_data_full (G_OBJECT (retval), LABEL_DATA, g_strdup (key_theme), g_free);
+  g_signal_connect (G_OBJECT (retval), "activate", G_CALLBACK (menu_item_activate), NULL);
+  gtk_widget_show (retval);
+
+  return retval;
+}
+
 static GladeXML *
 create_dialog (void)
 {
@@ -329,10 +363,8 @@ key_theme_changed (GConfClient *client,
     }
 
   /* We didn't find our theme.  Add it to our list. */
-  menu_item = gtk_menu_item_new_with_label (new_key_theme);
-  g_object_set_data_full (G_OBJECT (menu_item), LABEL_DATA, g_strdup (new_key_theme), g_free);
-  gtk_widget_show (menu_item);
-  gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
+  menu_item = make_key_theme_menu_item (new_key_theme);
+  gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);  
   gtk_option_menu_set_history (GTK_OPTION_MENU (omenu), i);
 }
 
@@ -420,6 +452,7 @@ setup_dialog (GladeXML *dialog)
       GtkWidget *omenu;
       GtkWidget *menu;
       GtkWidget *menu_item;
+      GConfEntry *entry;
       GList *list;
 
       omenu = WID ("key_theme_omenu");
@@ -428,12 +461,13 @@ setup_dialog (GladeXML *dialog)
 	{
 	  ThemeInfo *info = list->data;
 
+	  if (! info->has_keybinding)
+	    continue;
+
 	  /* Make sure we have a default */
 	  if (!strcasecmp (info->name, "default"))
 	    {
-	      menu_item = gtk_menu_item_new_with_label (info->name);
-	      g_object_set_data_full (G_OBJECT (menu_item), LABEL_DATA, g_strdup (info->name), g_free);
-	      gtk_widget_show (menu_item);
+	      menu_item = make_key_theme_menu_item (info->name);
 	      gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
 	    }
 	}
@@ -441,11 +475,12 @@ setup_dialog (GladeXML *dialog)
 	{
 	  ThemeInfo *info = list->data;
 
+	  if (! info->has_keybinding)
+	    continue;
+
 	  if (strcasecmp (info->name, "default"))
 	    {
-	      menu_item = gtk_menu_item_new_with_label (info->name);
-	      g_object_set_data_full (G_OBJECT (menu_item), LABEL_DATA, g_strdup (info->name), g_free);
-	      gtk_widget_show (menu_item);
+	      menu_item = make_key_theme_menu_item (info->name);
 	      gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
 	    }
 	}
@@ -457,6 +492,12 @@ setup_dialog (GladeXML *dialog)
 			       "/desktop/gnome/interface/gtk_key_theme",
 			       (GConfClientNotifyFunc) &key_theme_changed,
 			       omenu, NULL, NULL);
+      /* Initialize the option menu */
+      entry = gconf_client_get_entry (client,
+                                      "/desktop/gnome/interface/gtk_key_theme",
+				      NULL, TRUE, NULL);
+
+      key_theme_changed (client, 0, entry, omenu);
     }
 
 
