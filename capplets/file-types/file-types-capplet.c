@@ -296,8 +296,7 @@ init_mime_capplet (void)
         GtkWidget *mime_list_container;
         GtkWidget *extension_scroller;
         GtkWidget *action_frame;
-        GtkWidget *frame_hbox;
-        GtkWidget *vbox1, *vbox2, *vbox3, *vbox4;
+        GtkWidget *table;
 	
         gchar *title[2] = {"Extensions"};
         
@@ -321,47 +320,40 @@ init_mime_capplet (void)
         info_frame = gtk_frame_new ("");
         gtk_box_pack_start (GTK_BOX (main_vbox), info_frame, FALSE, FALSE, 0);
 
-	frame_hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);        
-	gtk_container_add (GTK_CONTAINER (info_frame), frame_hbox);
-
-	vbox1 = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);        
-	gtk_box_pack_start (GTK_BOX (frame_hbox), vbox1, FALSE, FALSE, 0);
-	vbox2 = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);        
-	gtk_box_pack_start (GTK_BOX (frame_hbox), vbox2, FALSE, FALSE, 0);
-	vbox3 = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);        
-	gtk_box_pack_start (GTK_BOX (frame_hbox), vbox3, FALSE, FALSE, 0);
-	vbox4 = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);        
-	gtk_box_pack_start (GTK_BOX (frame_hbox), vbox4, FALSE, FALSE, 0);
+	/* Create table */
+	table = gtk_table_new (4, 4, FALSE);
+	gtk_container_add (GTK_CONTAINER (info_frame), table);	
+	gtk_table_set_row_spacings (GTK_TABLE (table), GNOME_PAD_SMALL);
+	gtk_table_set_col_spacings (GTK_TABLE (table), GNOME_PAD_SMALL);
 	
  	/* Create label, menu and edit button for default applications */
 	label = gtk_label_new (_("Default Application:"));
 	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-	gtk_box_pack_start (GTK_BOX (hbox), frame_hbox, FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (vbox1), label, FALSE, FALSE, 0);
-
+	gtk_table_attach_defaults ( GTK_TABLE (table), label, 0, 1, 0, 1);
+	
 	application_menu = gtk_option_menu_new();
-	gtk_box_pack_start (GTK_BOX (vbox2), application_menu, FALSE, FALSE, 0);
+	gtk_table_attach_defaults ( GTK_TABLE (table), application_menu, 1, 2, 0, 1);
 
         button = left_aligned_button (_("Edit List"));
-        gtk_box_pack_start (GTK_BOX (vbox3), button, FALSE, FALSE, 0);
+        gtk_table_attach_defaults ( GTK_TABLE (table), button, 2, 3, 0, 1);
 	gtk_signal_connect (GTK_OBJECT (button), "clicked", edit_applications_clicked, mime_list);
 	
 	/* Create label, menu and edit button for default components */
 	label = gtk_label_new (_("Default Viewer:"));
-	gtk_box_pack_start (GTK_BOX (vbox1), label, FALSE, FALSE, 0);
+	gtk_table_attach_defaults ( GTK_TABLE (table), label, 0, 1, 1, 2);
 
 	component_menu = gtk_option_menu_new();
-	gtk_box_pack_start (GTK_BOX (vbox2), component_menu, FALSE, FALSE, 0);
+	gtk_table_attach_defaults ( GTK_TABLE (table), component_menu, 1, 2, 1, 2);
 
         button = left_aligned_button (_("Edit List"));
-        gtk_box_pack_start (GTK_BOX (vbox3), button, FALSE, FALSE, 0);
+	gtk_table_attach_defaults ( GTK_TABLE (table), button, 2, 3, 1, 2);
 	gtk_signal_connect (GTK_OBJECT (button), "clicked", edit_components_clicked, mime_list);
 
 	/* Add icon box */
 	icon_entry = gnome_icon_entry_new ("mime_icon_entry", _("Select an icon..."));
 	/*gtk_signal_connect (GTK_OBJECT (gnome_icon_entry_gtk_entry (GNOME_ICON_ENTRY (icon_entry))),
 			    "changed", icon_changed, NULL);*/
-	gtk_box_pack_start (GTK_BOX (vbox1), icon_entry, FALSE, FALSE, 0);
+	gtk_table_attach_defaults ( GTK_TABLE (table), icon_entry, 0, 1, 2, 4);
 
 	/* Add extension list and buttons */
 	extension_list = gtk_clist_new_with_titles (1, title);
@@ -376,15 +368,15 @@ init_mime_capplet (void)
 	gtk_container_add (GTK_CONTAINER (extension_scroller), extension_list);
 
 	gtk_widget_set_usize (extension_scroller, 150, 60);
-	gtk_box_pack_start (GTK_BOX (vbox2), extension_scroller, FALSE, FALSE, 0);
+	gtk_table_attach_defaults ( GTK_TABLE (table), extension_scroller, 1, 2, 2, 4);
 
         add_button = gtk_button_new_with_label (_("Add"));
-	gtk_box_pack_start (GTK_BOX (vbox3), add_button, FALSE, FALSE, 0);
 	gtk_widget_set_sensitive (add_button, TRUE);
+	gtk_table_attach_defaults ( GTK_TABLE (table), add_button, 2, 3, 2, 3);
 
         remove_button = gtk_button_new_with_label (_("Remove"));
-	gtk_box_pack_start (GTK_BOX (vbox3), remove_button, FALSE, FALSE, 0);
 	gtk_widget_set_sensitive (remove_button, FALSE);
+	gtk_table_attach_defaults ( GTK_TABLE (table), remove_button, 2, 3, 3, 4);
 
 	gtk_signal_connect (GTK_OBJECT (remove_button), "clicked",
 			    GTK_SIGNAL_FUNC (remove_extension_clicked), NULL);
@@ -397,12 +389,12 @@ init_mime_capplet (void)
 
 	/* Default Action frame */
 	action_frame = gtk_frame_new (_("Default Action"));
-	gtk_box_pack_start (GTK_BOX (vbox4), action_frame, FALSE, FALSE, 0);
+	gtk_table_attach_defaults ( GTK_TABLE (table), action_frame, 3, 4, 0, 4);
 
 	frame_vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
 	gtk_container_add (GTK_CONTAINER (action_frame), frame_vbox);
 
-	none_button = gtk_radio_button_new_with_label (NULL, _("Use None"));
+	none_button = gtk_radio_button_new_with_label (NULL, _("No Default"));
 	gtk_box_pack_start (GTK_BOX (frame_vbox), none_button, FALSE, FALSE, 0);
 	gtk_signal_connect (GTK_OBJECT (none_button), "toggled",
 			    GTK_SIGNAL_FUNC (none_button_toggled), NULL);
