@@ -624,6 +624,7 @@ run_revert_dialog (struct DisplayInfo *info,
   gtk_container_set_border_width (GTK_CONTAINER (dialog), 12);
   gtk_dialog_set_has_separator (GTK_DIALOG (dialog), FALSE);
   gtk_window_set_title (GTK_WINDOW (dialog), _("Keep Resolution"));
+  gtk_window_set_position(GTK_WINDOW(dialog),GTK_WIN_POS_CENTER_ALWAYS);
   
   label = gtk_label_new (NULL);
   str = g_strdup_printf ("<b>%s</b>", _("Do you want to keep this resolution?"));
@@ -757,8 +758,10 @@ cb_dialog_response (GtkDialog *dialog, gint response_id, struct DisplayInfo *inf
 	  
       if (apply_config (info))
 	{
+	  gtk_widget_hide(GTK_WIDGET(dialog));
 	  if (!run_revert_dialog (info, GTK_WIDGET (dialog)))
 	    {
+	      gtk_widget_show(GTK_WIDGET(dialog));
 	      revert_config (info);
 	      return;
 	    }
