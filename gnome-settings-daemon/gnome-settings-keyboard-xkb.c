@@ -32,6 +32,7 @@
 #include <gconf/gconf-client.h>
 
 #include <string.h>
+#include <time.h>
 
 #include <libgnome/gnome-i18n.h>
 
@@ -55,6 +56,23 @@ typedef enum {
 	RESPONSE_USE_X,
 	RESPONSE_USE_GNOME
 } SysConfigChangedMsgResponse;
+
+/* #define GSDKX */
+
+#ifdef GSDKX
+static FILE *logfile;
+
+static void
+gnome_settings_keyboard_log_appender (const char file[], const char function[],
+                      int level, const char format[], va_list args)
+{
+        time_t now = time (NULL);
+        fprintf (logfile, "[%08ld,%03d,%s:%s/] \t", now,
+               level, file, function);
+        vfprintf (logfile, format, args);
+	fflush(logfile);
+}
+#endif
 
 static void
 activation_error (void)
@@ -252,6 +270,12 @@ gnome_settings_keyboard_xkb_set_post_activation_callback
 void
 gnome_settings_keyboard_xkb_init (GConfClient * client)
 {
+#ifdef GSDKX
+	XklSetDebugLevel (200);
+	logfile = fopen ("/tmp/gsdkx.log", "a");
+        XklSetLogAppender (gnome_settings_keyboard_log_appender);
+#endif
+
 	if (!XklInit (GDK_DISPLAY ())) {
 		initedOk = TRUE;
 		XklBackupNamesProp ();
@@ -260,6 +284,18 @@ gnome_settings_keyboard_xkb_init (GConfClient * client)
 		gnome_settings_daemon_register_callback
 		    ("/desktop/gnome/peripherals/keyboard/xkb",
 		     (KeyCallbackFunc) apply_settings);
+
+		if (XklGetBackendFeatures() & 
+		    XKLF_REQUIRES_MANUAL_LAYOUT_MANAGEMENT)
+		{
+			gdk_window_add_filter (NULL,
+					       (GdkFilterFunc) XklFilterEvents,
+					       NULL);
+			gdk_window_add_filter (gdk_get_default_root_window(),
+					       (GdkFilterFunc) XklFilterEvents,
+					       NULL);
+			XklStartListen (XKLL_MANAGE_LAYOUTS);
+		}
 	}
 }
 
