@@ -44,6 +44,7 @@
 #include "gnome-settings-font.h"
 #include "gnome-settings-xsettings.h"
 #include "gnome-settings-mouse.h"
+#include "gnome-settings-keyboard-xkb.h"
 #include "gnome-settings-keyboard.h"
 #include "gnome-settings-background.h"
 #include "gnome-settings-sound.h"
@@ -272,7 +273,10 @@ gnome_settings_daemon_new (void)
   gnome_settings_font_init (client);
   gnome_settings_xsettings_init (client);
   gnome_settings_mouse_init (client);
+/* Essential - xkb initialization should happen before */
+  gnome_settings_keyboard_xkb_init (client);
   gnome_settings_keyboard_init (client);
+/* */
   gnome_settings_sound_init (client);
   gnome_settings_accessibility_keyboard_init (client);
   gnome_settings_screensaver_init (client);
@@ -322,7 +326,10 @@ gnome_settings_daemon_new (void)
   gnome_settings_font_load (client);
   gnome_settings_xsettings_load (client);
   gnome_settings_mouse_load (client);
+/* Essential - xkb initialization should happen before */
+  gnome_settings_keyboard_xkb_load (client);
   gnome_settings_keyboard_load (client);
+/* */
   gnome_settings_sound_load (client);
   gnome_settings_accessibility_keyboard_load (client);
   gnome_settings_screensaver_load (client);

@@ -1,6 +1,6 @@
 SUBDIRS = xrdb
 
-INCLUDES=$(GNOME_SETTINGS_DAEMON_CFLAGS) -I$(top_srcdir)/libbackground -I$(top_srcdir) \
+INCLUDES=$(LIBXKLAVIER_CFLAGS) $(GNOME_SETTINGS_DAEMON_CFLAGS) -I$(top_srcdir)/libbackground -I$(top_srcdir) \
   -DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
   -DESD_SERVER="\"$(ESD_SERVER)\""	\
   -DDATADIR="\"$(datadir)\""
@@ -14,6 +14,8 @@ gnome_settings_daemon_SOURCES =	\
 	gnome-settings-font.c		\
 	gnome-settings-mouse.h		\
 	gnome-settings-mouse.c		\
+	gnome-settings-keyboard-xkb.h	\
+	gnome-settings-keyboard-xkb.c	\
 	gnome-settings-keyboard.h	\
 	gnome-settings-keyboard.c	\
 	gnome-settings-background.h	\
@@ -49,9 +51,11 @@ gnome_settings_daemon_SOURCES =	\
 #	$(AccessX_files)		
 
 gnome_settings_daemon_LDADD = \
+	$(LIBXKLAVIER_LIBS)					\
 	$(GNOME_SETTINGS_DAEMON_LIBS)					\
 	$(top_builddir)/libbackground/libbackground.la			\
 	$(top_builddir)/libsounds/libsounds.a				\
+	$(top_builddir)/libgswitchit/libgswitchit.a			\
 	-L$(top_builddir)/libwindow-settings/ -lgnome-window-settings 	\
 	$(XF86MISC_LIBS)
 
