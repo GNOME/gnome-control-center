@@ -129,7 +129,7 @@ idle_async_func (GdkPixbuf *pixbuf,
       if (test_theme_id && !strcmp (theme_id, test_theme_id))
 	{
 	  gtk_list_store_set (GTK_LIST_STORE (model), &iter,
-			      META_THEME_PIXBUF_COLUMN, pixbuf,
+			      META_THEME_PIXBUF_COLUMN, pixbuf ? pixbuf : default_image,
 			      -1);
 	  g_free (test_theme_id);
 	  break;
@@ -442,13 +442,12 @@ load_meta_themes (GtkTreeView *tree_view,
 
 	  blurb = g_strdup_printf ("<span size=\"larger\" weight=\"bold\">%s</span>\n%s",
 				   list_meta_theme_info->readable_name, list_meta_theme_info->comment);
+	  pixbuf = NULL;
 	  if (i <= MAX_ELEMENTS_BEFORE_SCROLLING)
 	    pixbuf = generate_theme_thumbnail (list_meta_theme_info, FALSE);
-	  else
-	    pixbuf = default_image;
 
 	  gtk_list_store_set (GTK_LIST_STORE (model), &iter,
-			      META_THEME_PIXBUF_COLUMN, pixbuf,
+			      META_THEME_PIXBUF_COLUMN, pixbuf ? pixbuf : default_image,
 			      META_THEME_NAME_COLUMN, blurb,
 			      META_THEME_ID_COLUMN, list_meta_theme_info->name,
 			      META_THEME_FLAG_COLUMN, list_is_default ? THEME_FLAG_DEFAULT : 0,
