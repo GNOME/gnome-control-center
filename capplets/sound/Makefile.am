@@ -1,24 +1,14 @@
 cappletname = sound
 cappletgroup = 
-bin_PROGRAMS = sound-properties
+bin_PROGRAMS = sound-properties-control
+bin_SCRIPTS = sound-properties
 
-sound_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
+sound_properties_control_LDADD = $(GNOMECC_CAPPLETS_LIBS)
 
-bonobo_sources =				\
+sound_properties_control_SOURCES =		\
 	sound-properties-capplet.c
 
-legacy_sources =				\
-	main.c					\
-	prefs-widget.c		prefs-widget.h	\
-	preferences.c		preferences.h
-
-if BONOBO_CONF_ENABLE
 DESKTOP_EXEC_LINE = gnomecc --run-capplet sound-properties
-sound_properties_SOURCES = $(bonobo_sources)
-else
-DESKTOP_EXEC_LINE = sound-properties
-sound_properties_SOURCES = $(legacy_sources)
-endif
 
 pixmap_DATA =
 
@@ -41,6 +31,10 @@ $(oaffile): %.oaf: %.oaf.in
 ##
 @XML_I18N_MERGE_DESKTOP_RULE@
 
+$(bin_SCRIPTS): $(top_srcdir)/capplets/common/wrapper-script.in
+	sed -e "s#@BINDIR@#$(bindir)#" -e "s#@CAPPLET_NAME@#$(cappletname)-properties#" < $< > $@
+	chmod a+x $@
+
 ####@###GNOMECC_CAPPLETS_DESKTOP_IN_RULE@
 $(desktop).in: %.desktop.in: %.desktop.in.in
 	sed -e "s#@DESKTOP_EXEC_LINE@#$(DESKTOP_EXEC_LINE)#" -e "s#Icon=.*#Icon=$(GNOMECC_ICONS_DIR)/${cappletname}-capplet.png#" < $< > ${cappletname}.desktop.in
@@ -54,7 +48,7 @@ install-data-am: install-data-local
 
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
-EXTRA_DIST = $(GNOMECC_CAPPLETS_EXTRA_DIST) $(defaults_DATA) $(oaf_DATA).in $(bonobo_sources) $(legacy_sources)
+EXTRA_DIST = $(GNOMECC_CAPPLETS_EXTRA_DIST) $(defaults_DATA) $(oaf_DATA).in
 iconsdir   = $(GNOMECC_ICONS_DIR)
 Gladedir   = $(GNOMECC_GLADE_DIR)
 pixmapdir  = $(GNOMECC_PIXMAPS_DIR)

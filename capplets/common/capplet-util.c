@@ -322,6 +322,7 @@ get_factory_name (const gchar *binary)
 	tmp = strrchr (s, '/');
 	if (tmp == NULL) tmp = s;
 	else tmp++;
+	if ((tmp1 = strstr (tmp, "-control")) != NULL) *tmp1 = '\0';
 	if ((tmp1 = strstr (tmp, "-capplet")) != NULL) *tmp1 = '\0';
 	while ((tmp1 = strchr (tmp, '-')) != NULL) *tmp1 = '_';
 
@@ -344,6 +345,7 @@ get_default_moniker (const gchar *binary)
 	tmp = strrchr (s, '/');
 	if (tmp == NULL) tmp = s;
 	else tmp++;
+	if ((tmp1 = strstr (tmp, "-control")) != NULL) *tmp1 = '\0';
 	if ((tmp1 = strstr (tmp, "-capplet")) != NULL) *tmp1 = '\0';
 
 	res = g_strconcat ("archive:user-archive#archiverdb:", tmp, NULL);
@@ -365,6 +367,7 @@ get_property_name (const gchar *binary)
 	tmp = strrchr (s, '/');
 	if (tmp == NULL) tmp = s;
 	else tmp++;
+	if ((tmp1 = strstr (tmp, "-control")) != NULL) *tmp1 = '\0';
 	if ((tmp1 = strstr (tmp, "-capplet")) != NULL) *tmp1 = '\0';
 
 	for (tmp1 = tmp; *tmp1 != '\0'; tmp1++) {

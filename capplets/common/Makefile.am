@@ -1,4 +1,4 @@
-EXTRA_DIST = ChangeLog
+EXTRA_DIST = ChangeLog wrapper-script.in
 
 INCLUDES = \
         -DGNOMELOCALEDIR=\""$(datadir)/locale"\" 			\

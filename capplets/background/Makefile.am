@@ -1,29 +1,17 @@
 cappletname = background
 cappletgroup = 
-bin_PROGRAMS = background-properties-capplet
+bin_PROGRAMS = background-properties-control
+bin_SCRIPTS = background-properties-capplet
 
-background_properties_capplet_LDADD = $(GNOMECC_CAPPLETS_LIBS)
+background_properties_control_LDADD = $(GNOMECC_CAPPLETS_LIBS)
 
-bonobo_sources =				\
+background_properties_control_SOURCES =		\
 	background-properties-capplet.c		\
 	preferences.c		preferences.h   \
-	applier.c applier.h
+	applier.c		applier.h
 
-legacy_sources =				\
-	main.c					\
-	applier.c		applier.h	\
-	prefs-widget.c		prefs-widget.h	\
-	preferences.c		preferences.h
-
-if BONOBO_CONF_ENABLE
 DESKTOP_EXEC_LINE = gnomecc --run-capplet background-properties
-background_properties_capplet_SOURCES = $(bonobo_sources)
 BONOBO_CONF_DEFINE=-DBONOBO_CONF_ENABLE
-else
-DESKTOP_EXEC_LINE = background-properties-capplet
-background_properties_capplet_SOURCES = $(legacy_sources)
-BONOBO_CONF_DEFINE=
-endif
 
 pixmap_DATA = 
 
@@ -42,6 +30,10 @@ $(oaffile): %.oaf: %.oaf.in
 ##
 @XML_I18N_MERGE_DESKTOP_RULE@
 
+$(bin_SCRIPTS): $(top_srcdir)/capplets/common/wrapper-script.in
+	sed -e "s#@BINDIR@#$(bindir)#" -e "s#@CAPPLET_NAME@#$(cappletname)-properties#" < $< > $@
+	chmod a+x $@
+
 ####@###GNOMECC_CAPPLETS_DESKTOP_IN_RULE@
 $(desktop).in: %.desktop.in: %.desktop.in.in
 	sed -e "s#@DESKTOP_EXEC_LINE@#$(DESKTOP_EXEC_LINE)#" -e "s#Icon=.*#Icon=$(GNOMECC_ICONS_DIR)/${cappletname}-capplet.png#" < $< > ${cappletname}.desktop.in
@@ -55,7 +47,7 @@ install-data-am: install-data-local
 
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS) $(BONOBO_CONF_DEFINE)
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
-EXTRA_DIST = $(GNOMECC_CAPPLETS_EXTRA_DIST) $(defaults_DATA) $(oaf_DATA).in $(bonobo_sources) $(legacy_sources)
+EXTRA_DIST = $(GNOMECC_CAPPLETS_EXTRA_DIST) $(defaults_DATA) $(oaf_DATA).in
 iconsdir   = $(GNOMECC_ICONS_DIR)
 Gladedir   = $(GNOMECC_GLADE_DIR)
 pixmapdir  = $(GNOMECC_PIXMAPS_DIR)
