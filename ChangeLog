@@ -1,3 +1,56 @@
+2004-11-24  Christoffer Olsen  <co@deworks.net>
+	
+	* All the 20 *.desktop.in files that contain Bugzilla information
+	have been moved to *.desktop.in.in, with an added 
+	X-GNOME-Bugzilla-Version header to make bug-buddy autocomplete
+	version numbers in bug reports.
+
+	* configure.in: Added the *.desktop.in.in's mentioned
+	above to AC_OUTPUT, to generate *.desktop.in
+	* po/POTFILES.in: Changed the *.desktop.in's mentioned above
+	to *.desktop.in.in
+	
+	* capplets/accessibility/at-properties/at-properties.desktop.in:
+	* capplets/accessibility/at-properties/at-properties.desktop.in.in:
+	* capplets/accessibility/keyboard/accessibility-keyboard.desktop.in: 
+	* capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.in:
+	* capplets/background/background.desktop.in:
+	* capplets/background/background.desktop.in.in:
+	* capplets/default-applications/default-applications.desktop.in:
+	* capplets/default-applications/default-applications.desktop.in.in:
+	* capplets/display/display-properties.desktop.in:
+	* capplets/display/display-properties.desktop.in.in:
+	* capplets/file-types/file-types-capplet.desktop.in:
+	* capplets/file-types/file-types-capplet.desktop.in.in:
+	* capplets/file-types/file-types.desktop.in:
+	* capplets/file-types/file-types.desktop.in.in:
+	* capplets/font/font-properties.desktop.in:
+	* capplets/font/font-properties.desktop.in.in:
+	* capplets/keybindings/keybinding.desktop.in:
+	* capplets/keybindings/keybinding.desktop.in.in:
+	* capplets/keyboard/keyboard.desktop.in:
+	* capplets/keyboard/keyboard.desktop.in.in:
+	* capplets/localization/localization.desktop.in:
+	* capplets/localization/localization.desktop.in.in:
+	* capplets/mouse/gnome-settings-mouse.desktop.in:
+	* capplets/mouse/gnome-settings-mouse.desktop.in.in:
+	* capplets/network/gnome-network-preferences.desktop.in:
+	* capplets/network/gnome-network-preferences.desktop.in.in:
+	* capplets/sound/gnome-settings-sound.desktop.in:
+	* capplets/sound/gnome-settings-sound.desktop.in.in:
+	* capplets/theme-switcher/gtk-theme-selector.desktop.in:
+	* capplets/theme-switcher/gtk-theme-selector.desktop.in.in:
+	* capplets/ui-properties/gnome-ui-properties.desktop.in:
+	* capplets/ui-properties/gnome-ui-properties.desktop.in.in:
+	* capplets/url-properties/url-properties.desktop.in:
+	* capplets/url-properties/url-properties.desktop.in.in:
+	* capplets/windows/window-properties.desktop.in:
+	* capplets/windows/window-properties.desktop.in.in:
+	* control-center/gnomecc.desktop.in:
+	* control-center/gnomecc.desktop.in.in:
+	* vfs-methods/fontilus/gnome-font-viewer.desktop.in:
+	* vfs-methods/fontilus/gnome-font-viewer.desktop.in.in:
+
 2004-11-10  Mark McLoughlin  <mark@skynet.ie>
 
 	* configure.in: require libgnome-menu for the shell, fixup

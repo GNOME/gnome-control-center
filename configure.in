@@ -90,7 +90,7 @@ dnl ==============================================
 
 COMMON_MODULES="gtk+-2.0 >= 2.3.0 gconf-2.0 libgnomeui-2.0 >= 2.2.0 libglade-2.0 >= 1.99.12 libbonobo-2.0 libbonoboui-2.0 libglade-2.0 gconf-2.0 gnome-desktop-2.0 >= 2.2.0"
 PKG_CHECK_MODULES(CAPPLET, $COMMON_MODULES)
-PKG_CHECK_MODULES(GNOMECC, $COMMON_MODULES libgnome-menu >= 2.9.1)
+PKG_CHECK_MODULES(GNOMECC, $COMMON_MODULES)
 PKG_CHECK_MODULES(GNOME_SETTINGS_DAEMON, gtk+-2.0 gconf-2.0 libgnomeui-2.0 esound gnome-desktop-2.0 libglade-2.0)
 PKG_CHECK_MODULES(OLD_CAPPLET, libgnomeui-2.0 libglade-2.0)
 PKG_CHECK_MODULES(GNOME, libgnomeui-2.0)
@@ -541,5 +541,25 @@ vfs-methods/Makefile
 vfs-methods/themus/Makefile
 vfs-methods/fontilus/Makefile
 control-center.spec
+vfs-methods/fontilus/gnome-font-viewer.desktop.in
+capplets/font/font-properties.desktop.in
+capplets/keybindings/keybinding.desktop.in
+capplets/display/display-properties.desktop.in
+capplets/mouse/gnome-settings-mouse.desktop.in
+capplets/sound/gnome-settings-sound.desktop.in
+capplets/theme-switcher/gtk-theme-selector.desktop.in
+capplets/default-applications/default-applications.desktop.in
+capplets/accessibility/at-properties/at-properties.desktop.in
+capplets/accessibility/keyboard/accessibility-keyboard.desktop.in
+capplets/background/background.desktop.in
+capplets/url-properties/url-properties.desktop.in
+capplets/ui-properties/gnome-ui-properties.desktop.in
+capplets/network/gnome-network-preferences.desktop.in
+capplets/file-types/file-types-capplet.desktop.in
+capplets/file-types/file-types.desktop.in
+capplets/windows/window-properties.desktop.in
+capplets/localization/localization.desktop.in
+capplets/keyboard/keyboard.desktop.in
+control-center/gnomecc.desktop.in
 ])
 dnl due to a bug in intltool we need to expand something from the root last control-center.spec
