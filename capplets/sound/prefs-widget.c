@@ -29,6 +29,7 @@
 
 #include "prefs-widget.h"
 
+
 #define WID(str) (glade_xml_get_widget (prefs_widget->dialog_data, str))
 
 enum {

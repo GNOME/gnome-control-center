@@ -3,7 +3,7 @@ cappletgroup =
 bin_PROGRAMS = sound-properties-control
 bin_SCRIPTS = sound-properties
 
-sound_properties_control_LDADD = $(GNOMECC_CAPPLETS_LIBS)
+sound_properties_control_LDADD = $(GNOMECC_CAPPLETS_LIBS) $(top_srcdir)/libsounds/libsounds.a
 
 sound_properties_control_SOURCES =		\
 	sound-properties-capplet.c
