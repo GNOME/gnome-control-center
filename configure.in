@@ -43,29 +43,9 @@ PKG_CHECK_MODULES(GNOME_SETTINGS_DAEMON, gtk+-2.0 gconf-2.0 libgnomeui-2.0)
 PKG_CHECK_MODULES(OLD_CAPPLET, libgnomeui-2.0 libglade-2.0)
 PKG_CHECK_MODULES(GNOME, libgnomeui-2.0)
 
-dnlSCREENSAVER=screensaver
-dnlAC_PATH_PROG(XSCREENSAVER, xscreensaver, no)
-dnlif test "$XSCREENSAVER" = no ; then
-dnl	AC_MSG_WARN(xscreensaver was not found. It can be downloaded from http://www.jwz.org/xscreensaver/.)
-dnl	SCREENSAVER=
-dnlfi
-dnlXSCREENSAVER_BIN_DIR=`dirname $XSCREENSAVER`
-dnl # sigh, lame 
-dnlif test "$XSCREENSAVER_BIN_DIR" = "/usr/bin/X11"; then
-dnl	XSCREENSAVER_BIN_DIR="/usr/X11R6/bin";
-dnlfi
- 
-dnlXSCREENSAVER_PREFIX=`dirname $XSCREENSAVER_BIN_DIR`
-dnlAC_SUBST(XSCREENSAVER_PREFIX)
-
-dnlAC_PATH_PROG(PERL, perl, no)
-dnlif test "$PERL" = no ; then
-dnl	AC_MSG_WARN(Perl was not found. Disabling screensaver capplet)
-dnl	SCREENSAVER=
-dnlfi
-dnlAC_SUBST(PERL)
-
-dnlAC_SUBST(SCREENSAVER)
+if test "$XSCREENSAVER" = no ; then
+ 	AC_MSG_ERROR(xscreensaver was not found. It can be downloaded from http://www.jwz.org/xscreensaver/.)
+fi
 
 AC_PATH_PROG(GCONFTOOL, gconftool-2)
 
@@ -142,8 +122,6 @@ GNOMECC_GLADE_DIR=""${datadir}/${PACKAGE}/interfaces""
 AC_SUBST(GNOMECC_GLADE_DIR)
 GNOMECC_PIXMAPS_DIR=""${datadir}/${PACKAGE}/pixmaps""
 AC_SUBST(GNOMECC_PIXMAPS_DIR)
-dnlGNOMECC_SCREENSAVERS_DIR=""${datadir}/${PACKAGE}/screensavers""
-dnlAC_SUBST(GNOMECC_SCREENSAVERS_DIR)
 dnl ==============================================
 dnl End: Define the directories 
 dnl ==============================================
