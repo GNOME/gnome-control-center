@@ -1,3 +1,5 @@
+#include <config.h>
+
 #include "gnome-settings-daemon.h"
 
 #include <bonobo.h>
@@ -7,8 +9,6 @@
 #include <libgnome/gnome-init.h>
 #include <libgnomeui/gnome-ui-init.h>
 #include <libgnomeui/gnome-client.h>
-
-#include <config.h>
 
 static BonoboObject *services_server = NULL;
 
