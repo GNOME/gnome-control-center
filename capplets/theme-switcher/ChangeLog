@@ -1,3 +1,12 @@
+2004-04-02  Padraig O'Briain <padraig.obriain@sun.com>
+
+	* gnome-theme-details.c (update_list_something): Check that cursor
+	position has changed before calling gtk_tree_view_set_cursor.
+	* gnome-theme-manager.c (update_settings_from_gconf): Check that 
+	cursor position has changed before calling gtk_tree_view_set_cursor.
+
+	Fixes bug #131538.
+
 2004-04-01  Jody Goldberg <jody@gnome.org>
 
 	* Release 2.6.0.3

@@ -860,9 +860,20 @@ update_settings_from_gconf (void)
 	       ! strcmp (current_icon_theme, meta_theme_info->icon_theme_name))
 	{
 	  GtkTreePath *path;
+	  GtkTreePath *cursor_path;
+	  gboolean cursor_same = FALSE;
 
+	  gtk_tree_view_get_cursor (GTK_TREE_VIEW (tree_view), &cursor_path, NULL);
 	  path = gtk_tree_model_get_path (model, &iter);
-	  gtk_tree_view_set_cursor (GTK_TREE_VIEW (tree_view), path, NULL, FALSE);
+	  if (cursor_path && gtk_tree_path_compare (path, cursor_path) == 0)
+	    cursor_same = TRUE;
+
+	  gtk_tree_path_free (cursor_path);
+
+	  if (!cursor_same)
+	    {
+	      gtk_tree_view_set_cursor (GTK_TREE_VIEW (tree_view), path, NULL, FALSE);
+	    }
 	  gtk_tree_path_free (path);
 	  custom_theme_found = FALSE;
 

@@ -508,8 +508,20 @@ update_list_something (GtkWidget *tree_view, const gchar *theme)
       if (! strcmp (theme, theme_id))
 	{
 	  GtkTreePath *path;
+	  GtkTreePath *cursor_path;
+	  gboolean cursor_same = FALSE;
+
+	  gtk_tree_view_get_cursor (GTK_TREE_VIEW (tree_view), &cursor_path, NULL);
 	  path = gtk_tree_model_get_path (model, &iter);
-	  gtk_tree_view_set_cursor (GTK_TREE_VIEW (tree_view), path, NULL, FALSE);
+	  if (cursor_path && gtk_tree_path_compare (path, cursor_path) == 0)
+	    cursor_same = TRUE;
+
+	  gtk_tree_path_free (cursor_path);
+
+	  if (!cursor_same)
+	    {
+	      gtk_tree_view_set_cursor (GTK_TREE_VIEW (tree_view), path, NULL, FALSE);
+	    }
 	  gtk_tree_path_free (path);
 	  theme_found = TRUE;
 	}
