@@ -1,5 +1,12 @@
 2002-02-17  Bradford Hovinen  <hovinen@ximian.com>
 
+	* mime-types-model.c (mime_types_model_get_value): Set the object
+	value to NULL if the icon is NULL
+
+	* mime-type-info.c (get_icon_pixbuf): Give up if it can't find
+	nautilus/i-regular-24.png
+	(mime_type_info_get_icon): Only ref the pixbuf if non-NULL
+
 	* mime-category-edit-dialog.c (fill_dialog): Fill the name entry
 	with the description, not the name field
 

@@ -373,6 +373,7 @@ mime_types_model_get_value (GtkTreeModel *tree_model, GtkTreeIter *iter, gint co
 {
 	MimeTypesModel *model;
 	ModelEntry *entry;
+	GdkPixbuf *icon;
 
 	g_return_if_fail (tree_model != NULL);
 	g_return_if_fail (IS_MIME_TYPES_MODEL (tree_model));
@@ -432,7 +433,13 @@ mime_types_model_get_value (GtkTreeModel *tree_model, GtkTreeIter *iter, gint co
 
 		switch (entry->type) {
 		case MODEL_ENTRY_MIME_TYPE:
-			g_value_set_object (value, G_OBJECT (mime_type_info_get_icon (MIME_TYPE_INFO (entry))));
+			icon = mime_type_info_get_icon (MIME_TYPE_INFO (entry));
+
+			if (icon != NULL)
+				g_value_set_object (value, G_OBJECT (icon));
+			else
+				g_value_set_object (value, NULL);
+
 			break;
 
 		default:
