@@ -1,6 +1,8 @@
 bin_PROGRAMS = gnome-font-properties
 
-gnome_font_properties_LDADD = $(FONT_CAPPLET_LIBS) $(top_builddir)/capplets/common/libcommon.la
+gnome_font_properties_LDADD = \
+	$(top_builddir)/capplets/common/libcommon.la \
+	$(FONT_CAPPLET_LIBS)
 gnome_font_properties_SOURCES = \
 	main.c		
 gnome_font_properties_LDFLAGS = -export-dynamic

@@ -16,7 +16,7 @@ Desktop_in_files = window-properties.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)					\
-	     -I $(top_srcdir)/libwindow-settings \
+	     -I$(top_srcdir)/libwindow-settings \
 	     -DGNOME_WINDOW_MANAGER_MODULE_PATH=\""$(libdir)/window-manager-settings"\" \
 	     -DGLADEDIR=\""$(gladedir)"\"  	\
 	     -DPIXMAPDIR=\""$(pixmapdir)"\"

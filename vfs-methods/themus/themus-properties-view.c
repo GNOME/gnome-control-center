@@ -40,7 +40,7 @@ struct ThemusThemePropertiesViewDetails {
 };
 
 enum {
-	PROP_URI,
+	PROP_URI
 };
 
 static GObjectClass *parent_class = NULL;

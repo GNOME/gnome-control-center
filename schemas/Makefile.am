@@ -22,4 +22,4 @@ else
 install-data-local:
 endif
 
-EXTRA_DIST=$(schema_DATA)
+EXTRA_DIST=$(schema_in_files) $(schema_DATA)

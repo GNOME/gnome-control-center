@@ -343,7 +343,7 @@ is_modifier (guint keycode)
   return retval;
 }
 
-void
+static void
 egg_cell_renderer_keys_get_size (GtkCellRenderer *cell,
 				 GtkWidget       *widget,
 				 GdkRectangle    *cell_area,
@@ -351,6 +351,7 @@ egg_cell_renderer_keys_get_size (GtkCellRenderer *cell,
 				 gint            *y_offset,
 				 gint            *width,
 				 gint            *height)
+
 {
   EggCellRendererKeys *keys = (EggCellRendererKeys *) cell;
   GtkRequisition requisition;
@@ -620,7 +621,7 @@ void
 egg_cell_renderer_keys_set_accelerator (EggCellRendererKeys *keys,
                                         guint                keyval,
 					guint		     keycode,
-                                        GdkModifierType      mask)
+					EggVirtualModifierType  mask)
 {
   char *text;
   gboolean changed;
@@ -668,9 +669,9 @@ egg_cell_renderer_keys_set_accelerator (EggCellRendererKeys *keys,
 }
 
 void
-egg_cell_renderer_keys_get_accelerator (EggCellRendererKeys *keys,
-                                        guint               *keyval,
-                                        GdkModifierType     *mask)
+egg_cell_renderer_keys_get_accelerator (EggCellRendererKeys     *keys,
+                                        guint                   *keyval,
+                                        EggVirtualModifierType  *mask)
 {
   g_return_if_fail (EGG_IS_CELL_RENDERER_KEYS (keys));
 

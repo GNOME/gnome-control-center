@@ -16,7 +16,9 @@ int main (int argc, char *argv [])
 {
   GnomeClient *session;
   Bonobo_RegistrationResult ret;
-  gchar *restart_argv[] = { "gnome-settings-daemon", *argv, 0 };
+  gchar *restart_argv[] = { "gnome-settings-daemon", NULL, 0 };
+
+  restart_argv[1] = *argv;
 
   bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");

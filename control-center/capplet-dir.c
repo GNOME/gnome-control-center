@@ -342,7 +342,7 @@ read_entries (CappletDir *dir)
 		if (child->type == GNOME_VFS_FILE_TYPE_DIRECTORY) {
 		        entry = capplet_dir_new (dir, fullpath);
 		} else {
-			test = rindex(child->name, '.');
+			test = strrchr(child->name, '.');
 
 			/* if it's a .desktop file, it's interesting for sure! */
 			if (test && !strcmp (".desktop", test))

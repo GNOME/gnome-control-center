@@ -9,7 +9,7 @@
 static GQuark error_quark;
 enum
 {
-  INVALID_THEME_NAME,
+  INVALID_THEME_NAME
 };
 
 /* taken from gnome-desktop-item.c */

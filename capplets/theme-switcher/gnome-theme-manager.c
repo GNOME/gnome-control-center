@@ -58,8 +58,8 @@ static gboolean idle_running = FALSE;
 static gboolean initial_meta_theme_set = FALSE;
 static GdkPixbuf *default_image = NULL;
 
-static GnomeThemeMetaInfo custom_meta_theme_info = {};
-static GnomeThemeMetaInfo initial_meta_theme_info = {};
+static GnomeThemeMetaInfo custom_meta_theme_info;
+static GnomeThemeMetaInfo initial_meta_theme_info;
 
 const char *meta_theme_default_name = NULL; 
 const char *gtk_theme_default_name = NULL; 

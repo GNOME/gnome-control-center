@@ -767,25 +767,32 @@ do_monitor_cancel(GnomeVFSMethod *method,
 static GnomeVFSMethod method = {
     sizeof(GnomeVFSMethod),
 
-    .open     = do_open,
-    .create   = do_create,
-    .close    = do_close,
-    .read     = do_read,
-    .write    = do_write,
-    .seek     = do_seek,
-    .tell     = do_tell,
-    .get_file_info_from_handle = do_get_file_info_from_handle,
-
-    .open_directory  = do_open_directory,
-    .close_directory = do_close_directory,
-    .read_directory  = do_read_directory,
-
-    .get_file_info = do_get_file_info,
-    .is_local      = do_is_local,
-    .unlink        = do_unlink,
-
-    .monitor_add = do_monitor_add,
-    .monitor_cancel = do_monitor_cancel
+    do_open,
+    do_create,
+    do_close,
+    do_read,
+    do_write,
+    do_seek,
+    do_tell,
+    NULL,
+    do_open_directory,
+    do_close_directory,
+    do_read_directory,
+    do_get_file_info,
+    do_get_file_info_from_handle,
+    do_is_local,
+    NULL,
+    NULL,
+    NULL,
+    do_unlink,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    do_monitor_add,
+    do_monitor_cancel,
+    NULL
 };
 
 GnomeVFSMethod *

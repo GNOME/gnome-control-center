@@ -33,7 +33,7 @@ at_startup_string_compare (gconstpointer s1, gconstpointer s2)
 		return strcmp (s1, s2);
 	}
 	else
-		return (s2-s1);
+		return ((char *)s2-(char *)s1);
 }
 
 static GSList *

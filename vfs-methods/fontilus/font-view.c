@@ -38,6 +38,7 @@
 #include FT_TYPE1_TABLES_H
 #include FT_SFNT_NAMES_H
 #include FT_TRUETYPE_IDS_H
+#include <X11/Xlib.h>
 #include <X11/Xft/Xft.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>

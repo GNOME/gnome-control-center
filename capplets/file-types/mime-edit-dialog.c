@@ -37,7 +37,7 @@
 
 #include "libuuid/uuid.h"
 
-#undef WID(x)
+#undef WID
 #define WID(x) (glade_xml_get_widget (dialog->p->dialog_xml, x))
 
 enum {

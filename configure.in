@@ -41,8 +41,8 @@ AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [Gettext package])
 AM_GLIB_GNU_GETTEXT
 
 AC_CHECK_FUNCS(usleep)
-AC_CHECK_FUNCS(putenv,[AC_DEFINE(HAVE_PUTENV,,[putenv])])
-AC_CHECK_FUNCS(setenv,[AC_DEFINE(HAVE_SETENV,,[setenv])])
+AC_CHECK_FUNCS(putenv)
+AC_CHECK_FUNCS(setenv)
 AC_CHECK_FUNCS(ngettext, have_ngettext=yes)
 
 if test x"$have_ngettext" != "xyes"; then
@@ -51,6 +51,24 @@ fi;
 
 AC_PATH_XTRA
 x_libs="$X_PRE_LIBS $X_LIBS -lX11 $X_EXTRA_LIBS"
+
+AC_CHECK_FUNC(XScreenSaverQueryInfo, [
+  TYPING_BREAK="typing-break"],[
+  AC_MSG_CHECKING([for XScreenSaverQueryInfo in -lXss])
+  save_LDFLAGS=$LDFLAGS
+  save_LIBS=$LIBS
+  LIBS="$LIBS $X_PRE_LIBS $X_LIBS -lXss -lXext -lX11"
+  AC_TRY_LINK([#include <X11/Xlib.h>
+#include <X11/extensions/scrnsaver.h>],[
+XScreenSaverQueryInfo(NULL, 0, NULL);],[
+  AC_MSG_RESULT(yes)
+  TYPING_BREAK="typing-break"
+  SCREENSAVER_LIBS="$X_PRE_LIBS $X_LIBS -lXss -lXext -lX11"],[
+  AC_MSG_RESULT(no)])
+  LIBS=$save_LIBS
+  LDFLAGS=$save_LDFLAGS])
+AC_SUBST(TYPING_BREAK)
+AC_SUBST(SCREENSAVER_LIBS)
 
 dnl keyboard-properties-capplet
 savecppflags=$CPPFLAGS
@@ -65,7 +83,7 @@ AC_SUBST(XF86MISC_LIBS)
 AC_CHECK_HEADERS(X11/extensions/XKB.h)
 CPPFLAGS=$savecppflags
 
-	
+
 dnl ==============================================
 dnl Check that we meet the  dependencies
 dnl ==============================================
@@ -364,8 +382,8 @@ COMMON_LIBS="\$(top_builddir)/capplets/common/libcommon.la"
 
 EXTRA_CFLAGS="-I\$(top_srcdir)/ -DG_LOG_DOMAIN=\"\\\"\$(cappletname)-properties\\\"\" -DGNOMELOCALEDIR=\"\\\"${prefix}/${DATADIRNAME}/locale\\\"\""
 
-GNOMECC_CAPPLETS_CFLAGS="${CAPPLET_CFLAGS} ${EXTRA_CFLAGS} ${COMMON_CFLAGS}"
-GNOMECC_CAPPLETS_LIBS="${CAPPLET_LIBS} ${COMMON_LIBS}"
+GNOMECC_CAPPLETS_CFLAGS="${COMMON_CFLAGS} ${CAPPLET_CFLAGS} ${EXTRA_CFLAGS}"
+GNOMECC_CAPPLETS_LIBS="${COMMON_LIBS} ${CAPPLET_LIBS}"
 
 GNOMECC_CAPPLETS_CLEANFILES="\$(desktop) \$(desktop).in"
 GNOMECC_CAPPLETS_EXTRA_DIST="ChangeLog \$(desktop).in.in \$(cappletname)-capplet.png \$(cappletname)-properties.glade \$(pixmaps_DATA)"

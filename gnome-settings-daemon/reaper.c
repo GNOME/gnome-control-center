@@ -29,12 +29,6 @@
 #include <gtk/gtkmarshal.h>
 #include "reaper.h"
 
-#ifdef HAVE_LOCALE_H
-#include <locale.h>
-#else
-#define bindtextdomain(package,dir)
-#endif
-
 #ifdef ENABLE_NLS
 #include <libintl.h>
 #define _(String) dgettext(PACKAGE, String)

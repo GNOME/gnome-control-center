@@ -22,7 +22,7 @@ gnome_typing_monitor_SOURCES =			\
 	egg-spawn.c				\
 	egg-spawn.h
 
-gnome_typing_monitor_LDADD = @GNOME_LIBS@ -L/usr/X11R6/lib -lXss
+gnome_typing_monitor_LDADD = @GNOME_LIBS@ @SCREENSAVER_LIBS@
 gnome_typing_monitor_LDFLAGS = -export-dynamic
 
 imagedir = $(GNOMECC_PIXMAPS_DIR)

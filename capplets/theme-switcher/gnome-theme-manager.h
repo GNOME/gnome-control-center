@@ -22,7 +22,7 @@ extern const char *icon_theme_default_name;
 enum
 {
   TARGET_URI_LIST,
-  TARGET_NS_URL,
+  TARGET_NS_URL
 };
 
 /* model info */
@@ -38,7 +38,7 @@ enum
 {
   THEME_FLAG_DEFAULT = 1 << 0,
   THEME_FLAG_CUSTOM  = 1 << 1,
-  THEME_FLAG_INITIAL  = 1 << 2,
+  THEME_FLAG_INITIAL  = 1 << 2
 };
 
 extern GtkTargetEntry drop_types[];

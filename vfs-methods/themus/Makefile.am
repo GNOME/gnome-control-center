@@ -6,8 +6,6 @@ INCLUDES = $(THEME_METHOD_CFLAGS) \
   -DDIRECTORY_DIR=\"$(vfsdirectorydir)\" \
   -DDATA_DIR=\"$(datadir)/themus\"
 
-AM_CFLAGS = -g
-
 bin_PROGRAMS = gnome-theme-thumbnailer themus-theme-applier
 
 vfsmoduledir = $(libdir)/gnome-vfs-2.0/modules
