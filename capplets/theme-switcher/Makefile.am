@@ -2,14 +2,18 @@ bin_PROGRAMS = gnome-theme-manager
 
 gnome_theme_manager_LDADD = 						\
 	$(GNOMECC_CAPPLETS_LIBS) 					\
+	$(METACITY_LIBS)						\
 	$(top_builddir)/libwindow-settings/libgnome-window-settings.la
 
 gnome_theme_manager_SOURCES =	\
 	gnome-theme-manager.c	\
+	theme-thumbnail.c	\
+	theme-thumbnail.h	\
 	gnome-theme-installer.c	\
 	gnome-theme-installer.h
 
 gnome_theme_manager_LDFLAGS = -export-dynamic
+
 
 @INTLTOOL_DESKTOP_RULE@
 
@@ -22,6 +26,7 @@ glade_DATA = theme-properties.glade theme-install.glade
 
 INCLUDES   = 				\
 	-I$(top_srcdir)			\
+	$(METACITY_CFLAGS)		\
 	$(GNOMECC_CAPPLETS_CFLAGS)	\
 	-DGLADEDIR=\""$(gladedir)"\"
 

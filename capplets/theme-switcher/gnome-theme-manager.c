@@ -20,6 +20,7 @@
 #include "gconf-property-editor.h"
 #include "file-transfer-dialog.h"
 #include "gnome-theme-installer.h"
+#include "theme-thumbnail.h"
 
 #define GTK_THEME_KEY      "/desktop/gnome/interface/gtk_theme"
 #define WINDOW_THEME_KEY   "/desktop/gnome/applications/window_manager/theme"
@@ -40,6 +41,7 @@ enum
 {
   THEME_NAME_COLUMN,
   THEME_ID_COLUMN,
+  PIXBUF_COLUMN,
   DEFAULT_THEME_COLUMN,
   N_COLUMNS
 };
@@ -101,7 +103,7 @@ load_meta_themes (GtkTreeView *tree_view,
       gchar *blurb;
       GtkTreeIter iter;
       gboolean is_default;
-
+      GdkPixbuf *pixbuf;
       gtk_list_store_prepend (GTK_LIST_STORE (model), &iter);
 
       if (strcmp (default_theme, meta_theme_info->name) == 0)
@@ -117,7 +119,9 @@ load_meta_themes (GtkTreeView *tree_view,
 	  current_theme_found = TRUE;
 	}
       blurb = g_strdup_printf ("<span size=\"larger\" weight=\"bold\">%s</span>\n\n%s", meta_theme_info->name, meta_theme_info->comment);
+      pixbuf = generate_theme_thumbnail (meta_theme_info);
       gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+			  PIXBUF_COLUMN, pixbuf,
 			  THEME_NAME_COLUMN, blurb,
 			  DEFAULT_THEME_COLUMN, is_default,
 			  -1);
@@ -859,14 +863,19 @@ setup_tree_view (GtkTreeView *tree_view,
 {
   GtkTreeModel *model;
   GtkTreeSelection *selection;
- 
+
+  gtk_tree_view_insert_column_with_attributes (tree_view,
+ 					       -1, NULL,
+ 					       gtk_cell_renderer_pixbuf_new (),
+ 					       "pixbuf", PIXBUF_COLUMN,
+ 					       NULL);
   gtk_tree_view_insert_column_with_attributes (tree_view,
  					       -1, NULL,
  					       gtk_cell_renderer_text_new (),
  					       "markup", THEME_NAME_COLUMN,
  					       NULL);
 
-  model = (GtkTreeModel *) gtk_list_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_BOOLEAN);
+  model = (GtkTreeModel *) gtk_list_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_STRING, GDK_TYPE_PIXBUF, G_TYPE_BOOLEAN);
   gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (model), 0, sort_func, NULL, NULL);
   gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (model), 0, GTK_SORT_ASCENDING);
   gtk_tree_view_set_model (tree_view, model);
@@ -973,6 +982,9 @@ main (int argc, char *argv[])
   bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
   textdomain (GETTEXT_PACKAGE);
+
+  setup_theme_thumbnail_factory (argc, argv);
+  
   gnome_program_init ("gnome-theme-properties", VERSION,
 		      LIBGNOMEUI_MODULE, argc, argv,
 		      GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
