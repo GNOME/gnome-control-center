@@ -1,3 +1,41 @@
+2001-08-27  Bradford Hovinen  <hovinen@ximian.com>
+
+	* background-properties-capplet.c (setup_dialog): Initialize/free
+	the CORBA environment structure
+	(real_realize_cb): Put into an idle handler, called by
+	realize_2_cb, the new timeout handler
+
+	* preferences.c (preferences_load_from_bonobo_pbag): 
+	(preferences_load_from_bonobo_db): Extract from preferences_new_*
+
+	* background-properties-capplet.c (property_change_cb):
+	(realize_cb): Accept prefs structure in lieu of
+	Bonobo_PropertyBag; don't reload the preferences structure from
+	the property bag
+	(property_change_cb): Call preferences_apply_event to modify the
+	preferences structure appropriately
+	(property_change_cb):
+	(realize_cb): If the preferences structure is marked destroyed,
+	just return
+	(setup_dialog): Create a preferences structure from the property
+	bag given and use that as the extra data passed to callbacks
+	(realize_cb): Put into an idle handler real_realize_cb
+
+	* preferences.c (preferences_apply_event): Implement
+
+	* applier.c (output_compat_prefs): Make prefs const
+
+	* applier.[ch]: Have applier_apply_prefs take a const Preferences
+	structure
+
+	* preferences.[ch]: Make preferences_clone take a const
+	Preferences structure
+
+2001-08-26  Bradford Hovinen  <hovinen@ximian.com>
+
+	* applier.c (renderer_render_background): Remove debugging message
+	(renderer_render_wallpaper): Ditto
+
 2001-08-17  Bradford Hovinen  <hovinen@ximian.com>
 
 	* applier.c (renderer_render_wallpaper): Adjust opacity value to

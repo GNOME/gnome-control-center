@@ -45,8 +45,6 @@
 #define MONITOR_CONTENTS_WIDTH 157
 #define MONITOR_CONTENTS_HEIGHT 111
 
-#define PDEBUG(pix) (g_print ("file %s: line %d (%s): Setting pixbuf to %i %i\n", __FILE__, __LINE__, __PRETTY_FUNCTION__, gdk_pixbuf_get_width (pix), gdk_pixbuf_get_height (pix)))
-
 static gboolean gdk_pixbuf_xlib_inited = FALSE;
 
 typedef struct _Renderer Renderer;
@@ -165,7 +163,7 @@ static void set_root_pixmap          (Pixmap pixmap);
 
 static gboolean is_nautilus_running  (void);
 
-static void output_compat_prefs (Preferences *prefs);
+static void output_compat_prefs      (const Preferences *prefs);
 
 guint
 applier_get_type (void)
@@ -302,8 +300,10 @@ applier_destroy (GtkObject *object)
 }
 
 void
-applier_apply_prefs (Applier *applier, Preferences *prefs,
-		     gboolean do_root, gboolean do_preview)
+applier_apply_prefs (Applier           *applier, 
+		     const Preferences *prefs,
+		     gboolean           do_root,
+		     gboolean           do_preview)
 {
 	Preferences *new_prefs;
 
@@ -719,7 +719,6 @@ renderer_render_background (Renderer *renderer)
 						  (GdkPixbufDestroyNotify) 
 						  g_free, 
 						  NULL);
-		PDEBUG (renderer->pixbuf); 
 	}
 }
 
@@ -828,7 +827,6 @@ renderer_render_wallpaper (Renderer *renderer)
 					 GDK_INTERP_BILINEAR,
 					 alpha_value, 65536,
 					 colorv, colorv);
-		PDEBUG (renderer->pixbuf); 
 			}
 		}
 		else if (renderer->wwidth != renderer->pwidth ||
@@ -882,7 +880,6 @@ renderer_render_wallpaper (Renderer *renderer)
 					gdk_pixbuf_unref (renderer->pixbuf);
 
 				renderer->pixbuf = renderer->wallpaper_pixbuf;
-		PDEBUG (renderer->pixbuf); 
 
 				gdk_pixbuf_ref (renderer->pixbuf);
 			}
@@ -1382,10 +1379,10 @@ is_nautilus_running (void)
 
 
 static void
-output_compat_prefs (Preferences *prefs)
+output_compat_prefs (const Preferences *prefs)
 {
 	gchar *color;
-	
+
 	gnome_config_pop_prefix ();
 	gnome_config_set_bool ("/Background/Default/Enabled", prefs->enabled);
 	gnome_config_set_string ("/Background/Default/wallpaper",

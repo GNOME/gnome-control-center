@@ -79,30 +79,44 @@ struct _PreferencesClass
 	GtkObjectClass klass;
 };
 
-guint        preferences_get_type   (void);
+guint        preferences_get_type             (void);
 
-GtkObject   *preferences_new        (void);
-GtkObject   *preferences_clone      (Preferences *prefs);
+GtkObject   *preferences_new                  (void);
+GtkObject   *preferences_clone                (const Preferences     *prefs);
 
-void         preferences_destroy    (GtkObject *object);
+void         preferences_destroy              (GtkObject             *object);
 
 #ifdef BONOBO_CONF_ENABLE
-GtkObject   *preferences_new_from_bonobo_pbag (Bonobo_PropertyBag pb,
-					       CORBA_Environment *ev);
-GtkObject   *preferences_new_from_bonobo_db   (Bonobo_ConfigDatabase db,
-					       CORBA_Environment *ev);
-#else
-void         preferences_load       (Preferences *prefs);
-void         preferences_save       (Preferences *prefs);
-void         preferences_changed    (Preferences *prefs);
-void         preferences_apply_now  (Preferences *prefs);
-void         preferences_apply_preview (Preferences *prefs);
 
-void         preferences_freeze     (Preferences *prefs);
-void         preferences_thaw       (Preferences *prefs);
+GtkObject   *preferences_new_from_bonobo_pbag (Bonobo_PropertyBag     pb,
+					       CORBA_Environment     *ev);
+GtkObject   *preferences_new_from_bonobo_db   (Bonobo_ConfigDatabase  db,
+					       CORBA_Environment     *ev);
+void         preferences_load_from_bonobo_pbag (Preferences           *prefs,
+						Bonobo_ConfigDatabase  db,
+						CORBA_Environment     *ev);
+void         preferences_load_from_bonobo_db  (Preferences           *prefs,
+					       Bonobo_ConfigDatabase  db,
+					       CORBA_Environment     *ev);
 
-Preferences *preferences_read_xml   (xmlDocPtr xml_doc);
-xmlDocPtr    preferences_write_xml  (Preferences *prefs);
+void         preferences_apply_event          (Preferences           *prefs,
+					       const gchar           *event_name,
+					       const CORBA_any       *value);
+
+#else /* !BONOBO_CONF_ENABLE */
+
+void         preferences_load                 (Preferences           *prefs);
+void         preferences_save                 (Preferences           *prefs);
+void         preferences_changed              (Preferences           *prefs);
+void         preferences_apply_now            (Preferences           *prefs);
+void         preferences_apply_preview        (Preferences           *prefs);
+
+void         preferences_freeze               (Preferences           *prefs);
+void         preferences_thaw                 (Preferences           *prefs);
+
+Preferences *preferences_read_xml             (xmlDocPtr              xml_doc);
+xmlDocPtr    preferences_write_xml            (Preferences           *prefs);
+
 #endif /* BONOBO_CONF_ENABLE */
 
 #endif /* __PREFERENCES_H */

@@ -466,7 +466,7 @@ location_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 					  (GTK_VALUE_POINTER (*arg)));
 			location->p->parent =
 				GTK_VALUE_POINTER (*arg);
-			bonobo_object_ref (GTK_VALUE_POINTER (*arg));
+			bonobo_object_ref (BONOBO_OBJECT (location->p->parent));
 		}
 
 	default:
@@ -1355,12 +1355,13 @@ location_store_full_snapshot (Location *location)
 	return 0;
 }
 
-/* location_garbage_collect:
+/**
+ * location_garbage_collect:
  * @location:
  *
  * Iterates through backends and eliminates excess archived data from the
  * configuration log and the XML archive
- */
+ **/
 
 static void
 garbage_collect_cb (ConfigLog *config_log, gchar *backend_id, gint id, Location *location) 
@@ -1389,6 +1390,19 @@ location_garbage_collect (Location *location)
 					    (GarbageCollectCB) garbage_collect_cb,
 					    location);
 	}
+}
+
+/**
+ * location_is_deleted:
+ * @location:
+ *
+ * Returns TRUE iff the location is marked deleted
+ **/
+
+gboolean
+location_is_deleted (const Location *location) 
+{
+	return location->p->deleted;
 }
 
 static gint

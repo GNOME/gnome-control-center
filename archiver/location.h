@@ -136,4 +136,6 @@ ConfigLog      *location_get_config_log               (Location        *location
 
 void            location_garbage_collect              (Location        *location);
 
+gboolean        location_is_deleted                   (const Location  *location);
+
 #endif /* __LOCATION */

@@ -1,3 +1,12 @@
+2001-08-27  Bradford Hovinen  <hovinen@ximian.com>
+
+	* archive.c (foreach_build_list_cb): Don't add the location to the
+	list if it is marked deleted
+	(impl_ConfigArchiver_Archive_createLocation): Do
+	CORBA_Object_duplicate rather than bonobo_object_dup_ref
+
+	* location.c (location_is_deleted): Implement
+
 2001-08-23  Bradford Hovinen  <hovinen@ximian.com>
 
 	* config-log.c (do_unload): Make sure we don't try to do this if

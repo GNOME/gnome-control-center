@@ -91,7 +91,7 @@ impl_ConfigArchiver_Archive_createLocation (PortableServer_Servant         serva
 	loc = archive_create_location (ARCHIVE_FROM_SERVANT (servant), locid, label,
 				       LOCATION (bonobo_object_from_servant (parent_ref->servant)));
 
-	return bonobo_object_dup_ref (BONOBO_OBJREF (loc), ev);
+	return CORBA_Object_duplicate (BONOBO_OBJREF (loc), ev);
 }
 
 static ConfigArchiver_LocationSeq *
@@ -699,7 +699,9 @@ archive_get_backend_list (Archive *archive)
 static gint
 foreach_build_list_cb (gchar *key, Location *value, GList **node) 
 {
-	*node = g_list_prepend (*node, value);
+	if (!location_is_deleted (value))
+		*node = g_list_prepend (*node, value);
+
 	return 0;
 }
 

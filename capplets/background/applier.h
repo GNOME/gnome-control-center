@@ -56,7 +56,7 @@ guint        applier_get_type    (void);
 GtkObject   *applier_new         (void);
 void         applier_destroy     (GtkObject *object);
 
-void         applier_apply_prefs (Applier *applier, Preferences *prefs,
+void         applier_apply_prefs (Applier *applier, const Preferences *prefs,
 				  gboolean do_root, gboolean do_preview);
 
 GtkWidget   *applier_get_preview_widget (Applier *applier);
