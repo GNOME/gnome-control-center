@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 2.4\n"
-"POT-Creation-Date: 2003-05-12 23:20+0000\n"
+"POT-Creation-Date: 2003-05-14 10:37+0800\n"
 "PO-Revision-Date: 2003-05-12 23:25+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
@@ -53,8 +53,8 @@ msgstr ""
 #: capplets/file-types/file-types-properties.glade.h:1
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: capplets/network/gnome-network-preferences.glade.h:2
-#: capplets/theme-switcher/theme-properties.glade.h:1
 #: capplets/theme-switcher/theme-install.glade.h:1
+#: capplets/theme-switcher/theme-properties.glade.h:1
 msgid "*"
 msgstr "*"
 
@@ -388,6 +388,11 @@ msgstr ""
 "definições não-GNOME (por ex. KDE) pode estar já activo e entrar em conflito "
 "com o gestor de definições GNOME."
 
+#: capplets/common/capplet-stock-icons.c:94
+#, c-format
+msgid "Unable to load capplet stock icon '%s'\n"
+msgstr "Incapaz de ler ícone '%s' da capplet de cotações bolsa\n"
+
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr "Aplicar definições e sair"
@@ -396,11 +401,6 @@ msgstr "Aplicar definições e sair"
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "Ocorreu um erro ao mostrar a ajuda: %s"
-
-#: capplets/common/capplet-stock-icons.c:94
-#, c-format
-msgid "Unable to load capplet stock icon '%s'\n"
-msgstr "Incapaz de ler ícone '%s' da capplet de cotações bolsa\n"
 
 #: capplets/common/file-transfer-dialog.c:95
 #, c-format
@@ -939,6 +939,7 @@ msgstr ""
 "possíveis alterações de resolução durante a execução."
 
 #: capplets/file-types/file-types-capplet.c:196
+#: vfs-methods/themus/themus-properties-view.c:165
 msgid "Description"
 msgstr "Descrição"
 
@@ -1935,13 +1936,61 @@ msgstr "Um"
 msgid "Two"
 msgstr "Dois"
 
+#: capplets/theme-switcher/gnome-theme-details.c:372
+#: capplets/theme-switcher/gnome-theme-manager.c:590
+msgid ""
+"No themes could be found on your system.  This probably means that your "
+"\"Theme Preferences\" dialog was improperly installed, or you haven't "
+"installed the \"gnome-themes\" package."
+msgstr ""
+"Não foram encontrados temas no seu sistema. Provavelmente tal significa que "
+"o seu diálogo \"Preferências de Temas\" foi incorrectamente instalado ou que "
+"não instalou o pacote \"gnome-themes\"."
+
+#: capplets/theme-switcher/gnome-theme-manager.c:646
+#: capplets/theme-switcher/gnome-theme-manager.c:706
+msgid "Custom theme"
+msgstr "Tema Costumizado"
+
+#: capplets/theme-switcher/gnome-theme-manager.c:646
+#: capplets/theme-switcher/gnome-theme-manager.c:706
+msgid "You can save this theme by pressing the Save Theme button."
+msgstr "Pode gravar este tema primindo o botão Gravar Tema."
+
+#: capplets/theme-switcher/gnome-theme-manager.c:1399
+msgid ""
+"The default theme schemas could not be found on your system.  This means "
+"that you probably don't have metacity installed, or that your gconf is "
+"configured incorrectly."
+msgstr ""
+"Os esquemas de tema por omissão não foram encontrados no seu sistema. Isto "
+"significa que provavelmente não tem o metacity instalado, ou que o seu gconf "
+"está incorrectamente configurado."
+
+#: capplets/theme-switcher/gnome-theme-save.c:72
+msgid "Theme name must be present"
+msgstr "Nome do tema tem de existir"
+
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
 msgid "Select themes for various parts of the desktop"
 msgstr "Seleccionar temas para várias partes do ambiente de trabalho"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:1
 msgid "Theme"
 msgstr "Tema"
+
+#: capplets/theme-switcher/theme-install.glade.h:2
+msgid "Install new theme"
+msgstr "Instalar novo tema"
+
+#: capplets/theme-switcher/theme-install.glade.h:3
+msgid "_Install"
+msgstr "_Instalar"
+
+#: capplets/theme-switcher/theme-install.glade.h:4
+msgid "_Location of new theme:"
+msgstr "_Localização do novo tema:"
 
 #: capplets/theme-switcher/theme-properties.glade.h:2
 msgid "<span size=\"larger\" weight=\"bold\">Save theme to disk</span>"
@@ -2026,53 +2075,6 @@ msgstr "_Gravar tema"
 #: capplets/theme-switcher/theme-properties.glade.h:22
 msgid "_Theme name:"
 msgstr "Nome _tema:"
-
-#: capplets/theme-switcher/theme-install.glade.h:2
-msgid "Install new theme"
-msgstr "Instalar novo tema"
-
-#: capplets/theme-switcher/theme-install.glade.h:3
-msgid "_Install"
-msgstr "_Instalar"
-
-#: capplets/theme-switcher/theme-install.glade.h:4
-msgid "_Location of new theme:"
-msgstr "_Localização do novo tema:"
-
-#: capplets/theme-switcher/gnome-theme-details.c:372
-#: capplets/theme-switcher/gnome-theme-manager.c:626
-msgid ""
-"No themes could be found on your system.  This probably means that your "
-"\"Theme Preferences\" dialog was improperly installed, or you haven't "
-"installed the \"gnome-themes\" package."
-msgstr ""
-"Não foram encontrados temas no seu sistema. Provavelmente tal significa que "
-"o seu diálogo \"Preferências de Temas\" foi incorrectamente instalado ou que "
-"não instalou o pacote \"gnome-themes\"."
-
-#: capplets/theme-switcher/gnome-theme-save.c:72
-msgid "Theme name must be present"
-msgstr "Nome do tema tem de existir"
-
-#: capplets/theme-switcher/gnome-theme-manager.c:682
-#: capplets/theme-switcher/gnome-theme-manager.c:742
-msgid "Custom theme"
-msgstr "Tema Costumizado"
-
-#: capplets/theme-switcher/gnome-theme-manager.c:682
-#: capplets/theme-switcher/gnome-theme-manager.c:742
-msgid "You can save this theme by pressing the Save Theme button."
-msgstr "Pode gravar este tema primindo o botão Gravar Tema."
-
-#: capplets/theme-switcher/gnome-theme-manager.c:1435
-msgid ""
-"The default theme schemas could not be found on your system.  This means "
-"that you probably don't have metacity installed, or that your gconf is "
-"configured incorrectly."
-msgstr ""
-"Os esquemas de tema por omissão não foram encontrados no seu sistema. Isto "
-"significa que provavelmente não tem o metacity instalado, ou que o seu "
-"gconf está incorrectamente configurado."
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
@@ -2402,6 +2404,11 @@ msgstr "_Não mostrar esta mensagem novamente"
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Incapaz de ler ficheiro de som %s como amostra %s"
 
+#: gnome-settings-daemon/gnome-settings-xrdb.c:212
+#: gnome-settings-daemon/gnome-settings-xrdb.c:259
+msgid "Cannot determine user's home directory"
+msgstr ""
+
 #: gnome-settings-daemon/gnome-settings-xsettings.c:179
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
@@ -2574,6 +2581,82 @@ msgstr ""
 "O tipo de dicas a utilizar ao renderizar fontes. Valores possíveis são: "
 "\"nenhum\" - sem dicas, \"suave\", \"médio\", e \"completo\" - tantas dicas "
 "quantas as possíveis; poderá causar distorção em formulários carta."
+
+#: vfs-methods/themus/theme-method.c:513
+msgid "Themes"
+msgstr "Temas"
+
+#: vfs-methods/themus/themus-properties-view.c:170
+msgid "Control theme"
+msgstr "Tema controlo"
+
+#: vfs-methods/themus/themus-properties-view.c:174
+msgid "Window border theme"
+msgstr "Tema margem janela"
+
+#: vfs-methods/themus/themus-properties-view.c:178
+msgid "Icon theme"
+msgstr "Tema ícone"
+
+#: vfs-methods/themus/themus-properties-view.c:217
+msgid "URI currently displayed"
+msgstr "URI actualmente apresentado"
+
+#: vfs-methods/themus/themus.schemas.in.h:1
+msgid "If set to true, then installed themes will be thumbnailed."
+msgstr "Se definido como verdadeiro, temas instalados serão amostrados."
+
+#: vfs-methods/themus/themus.schemas.in.h:2
+msgid "If set to true, then themes will be thumbnailed."
+msgstr "Se definido como verdadeiro, temas serão amostrados."
+
+#: vfs-methods/themus/themus.schemas.in.h:3
+msgid ""
+"Set this key to the command used to create thumbnails for installed themes."
+msgstr ""
+"Defina esta chave como o comando utilizado para gerar amostras dos temas "
+"instalados."
+
+#: vfs-methods/themus/themus.schemas.in.h:4
+msgid "Set this key to the command used to create thumbnails for themes."
+msgstr ""
+"Defina esta chave como o comando utilizado para gerar amostras dos temas."
+
+#: vfs-methods/themus/themus.schemas.in.h:5
+msgid "Thumbnail command for installed themes"
+msgstr "Comando de amostragem para os temas instalados"
+
+#: vfs-methods/themus/themus.schemas.in.h:6
+msgid "Thumbnail command for themes"
+msgstr "Comando de amostragem para os temas"
+
+#: vfs-methods/themus/themus.schemas.in.h:7
+msgid "Whether to thumbnail installed themes"
+msgstr "Se amostrar ou não temas instalados"
+
+#: vfs-methods/themus/themus.schemas.in.h:8
+msgid "Whether to thumbnail themes"
+msgstr "Se amostrar ou não temas"
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
+msgid "Theme Properties content view component"
+msgstr "Componente de vista de conteudo de Propriedades de Tema"
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
+msgid "Themus Theme Properties view"
+msgstr "Vista Propriedades Tema Themus"
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:1
+msgid "Apply theme..."
+msgstr "Aplicar tema..."
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:2
+msgid "Themus component"
+msgstr "Componente Themus"
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:3
+msgid "Themus component apply theme operations"
+msgstr "Compontente Themus aplica operações de tema"
 
 #~ msgid "_Repeat Keys"
 #~ msgstr "_Repetir Teclas"
@@ -3437,9 +3520,6 @@ msgstr ""
 
 #~ msgid "_Use this for my current theme."
 #~ msgstr "_Ustilizar este como omeu tema actual."
-
-#~ msgid "Themes"
-#~ msgstr "Temas"
 
 #~ msgid "_Program to execute"
 #~ msgstr "A_plicação a executar"

@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center2 2.1.x\n"
-"POT-Creation-Date: 2003-05-07 14:06-0400\n"
+"POT-Creation-Date: 2003-05-14 10:37+0800\n"
 "PO-Revision-Date: 2003-01-08 14:48-0300\n"
 "Last-Translator: Pablo Gonzalo del Campo <pablodc@bigfoot.com>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
@@ -58,8 +58,8 @@ msgstr ""
 #: capplets/file-types/file-types-properties.glade.h:1
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: capplets/network/gnome-network-preferences.glade.h:2
-#: capplets/theme-switcher/theme-properties.glade.h:1
 #: capplets/theme-switcher/theme-install.glade.h:1
+#: capplets/theme-switcher/theme-properties.glade.h:1
 msgid "*"
 msgstr "*"
 
@@ -405,6 +405,11 @@ msgstr ""
 "(por ejemplo KDE) ya esté activo y en conflicto con el gestor de "
 "configuración de GNOME."
 
+#: capplets/common/capplet-stock-icons.c:94
+#, c-format
+msgid "Unable to load capplet stock icon '%s'\n"
+msgstr "No se puede cargar el icono de almacén del capplet «%s»\n"
+
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr "Aplicar los cambios y salir"
@@ -413,11 +418,6 @@ msgstr "Aplicar los cambios y salir"
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "Ha ocurrido un error al mostrar la ayuda: %s"
-
-#: capplets/common/capplet-stock-icons.c:94
-#, c-format
-msgid "Unable to load capplet stock icon '%s'\n"
-msgstr "No se puede cargar el icono de almacén del capplet «%s»\n"
 
 #: capplets/common/file-transfer-dialog.c:95
 #, c-format
@@ -953,6 +953,7 @@ msgid ""
 msgstr ""
 
 #: capplets/file-types/file-types-capplet.c:196
+#: vfs-methods/themus/themus-properties-view.c:165
 msgid "Description"
 msgstr "Descripción"
 
@@ -1957,13 +1958,58 @@ msgstr "Uno"
 msgid "Two"
 msgstr "Dos"
 
+#: capplets/theme-switcher/gnome-theme-details.c:372
+#: capplets/theme-switcher/gnome-theme-manager.c:590
+msgid ""
+"No themes could be found on your system.  This probably means that your "
+"\"Theme Preferences\" dialog was improperly installed, or you haven't "
+"installed the \"gnome-themes\" package."
+msgstr ""
+"No se han podido encontrar temas en su sistema. Probablemente esto "
+"signifique que su diálogo de «Preferencias del tema» fue instalado "
+"incorrectamente, o no se haya instalado el paquete «gnome-themes»."
+
+#: capplets/theme-switcher/gnome-theme-manager.c:646
+#: capplets/theme-switcher/gnome-theme-manager.c:706
+msgid "Custom theme"
+msgstr "Tema personalizado"
+
+#: capplets/theme-switcher/gnome-theme-manager.c:646
+#: capplets/theme-switcher/gnome-theme-manager.c:706
+msgid "You can save this theme by pressing the Save Theme button."
+msgstr "Puede guardar este tema presionando al botón «Guardar tema»."
+
+#: capplets/theme-switcher/gnome-theme-manager.c:1399
+msgid ""
+"The default theme schemas could not be found on your system.  This means "
+"that you probably don't have metacity installed, or that your gconf is "
+"configured incorrectly."
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-save.c:72
+msgid "Theme name must be present"
+msgstr "El nombre del tema debe estar presente"
+
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
 msgid "Select themes for various parts of the desktop"
 msgstr "Selecciona temas para varias partes del escritorio"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:1
 msgid "Theme"
 msgstr "Tema"
+
+#: capplets/theme-switcher/theme-install.glade.h:2
+msgid "Install new theme"
+msgstr "Instalar nuevo tema"
+
+#: capplets/theme-switcher/theme-install.glade.h:3
+msgid "_Install"
+msgstr "_Instalar"
+
+#: capplets/theme-switcher/theme-install.glade.h:4
+msgid "_Location of new theme:"
+msgstr "_Ubicación del nuevo tema:"
 
 #: capplets/theme-switcher/theme-properties.glade.h:2
 msgid "<span size=\"larger\" weight=\"bold\">Save theme to disk</span>"
@@ -2050,50 +2096,6 @@ msgstr "G_uardar tema"
 #: capplets/theme-switcher/theme-properties.glade.h:22
 msgid "_Theme name:"
 msgstr "Nombre del _tema:"
-
-#: capplets/theme-switcher/theme-install.glade.h:2
-msgid "Install new theme"
-msgstr "Instalar nuevo tema"
-
-#: capplets/theme-switcher/theme-install.glade.h:3
-msgid "_Install"
-msgstr "_Instalar"
-
-#: capplets/theme-switcher/theme-install.glade.h:4
-msgid "_Location of new theme:"
-msgstr "_Ubicación del nuevo tema:"
-
-#: capplets/theme-switcher/gnome-theme-details.c:372
-#: capplets/theme-switcher/gnome-theme-manager.c:626
-msgid ""
-"No themes could be found on your system.  This probably means that your "
-"\"Theme Preferences\" dialog was improperly installed, or you haven't "
-"installed the \"gnome-themes\" package."
-msgstr ""
-"No se han podido encontrar temas en su sistema. Probablemente esto "
-"signifique que su diálogo de «Preferencias del tema» fue instalado "
-"incorrectamente, o no se haya instalado el paquete «gnome-themes»."
-
-#: capplets/theme-switcher/gnome-theme-save.c:72
-msgid "Theme name must be present"
-msgstr "El nombre del tema debe estar presente"
-
-#: capplets/theme-switcher/gnome-theme-manager.c:682
-#: capplets/theme-switcher/gnome-theme-manager.c:742
-msgid "Custom theme"
-msgstr "Tema personalizado"
-
-#: capplets/theme-switcher/gnome-theme-manager.c:682
-#: capplets/theme-switcher/gnome-theme-manager.c:742
-msgid "You can save this theme by pressing the Save Theme button."
-msgstr "Puede guardar este tema presionando al botón «Guardar tema»."
-
-#: capplets/theme-switcher/gnome-theme-manager.c:1435
-msgid ""
-"The default theme schemas could not be found on your system.  This means "
-"that you probably don't have metacity installed, or that your gconf is "
-"configured incorrectly."
-msgstr ""
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
@@ -2433,6 +2435,11 @@ msgstr "_No mostrar este mensaje otra vez"
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "No se pudo cargar el archivo de sonido %s como evento %s"
 
+#: gnome-settings-daemon/gnome-settings-xrdb.c:212
+#: gnome-settings-daemon/gnome-settings-xrdb.c:259
+msgid "Cannot determine user's home directory"
+msgstr ""
+
 #: gnome-settings-daemon/gnome-settings-xsettings.c:179
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
@@ -2616,6 +2623,86 @@ msgstr ""
 "posibles son: «none» - sin contorno, «slight», «medium» y «full» - demasiado "
 "contorno como sea posible puede causar una distorsión en las formas de las "
 "letras."
+
+#: vfs-methods/themus/theme-method.c:513
+msgid "Themes"
+msgstr "Temas"
+
+#: vfs-methods/themus/themus-properties-view.c:170
+msgid "Control theme"
+msgstr "Tema de control"
+
+#: vfs-methods/themus/themus-properties-view.c:174
+msgid "Window border theme"
+msgstr "Tema del borde de la ventana"
+
+#: vfs-methods/themus/themus-properties-view.c:178
+msgid "Icon theme"
+msgstr "Tema de iconos"
+
+#: vfs-methods/themus/themus-properties-view.c:217
+msgid "URI currently displayed"
+msgstr "URI actualmente mostrada"
+
+#: vfs-methods/themus/themus.schemas.in.h:1
+msgid "If set to true, then installed themes will be thumbnailed."
+msgstr ""
+"Si se establece como verdadero, entonces los temas instalados serán "
+"miniaturizados."
+
+#: vfs-methods/themus/themus.schemas.in.h:2
+msgid "If set to true, then themes will be thumbnailed."
+msgstr ""
+"Si se establece como verdadero entonces los temas serán miniaturizados."
+
+#: vfs-methods/themus/themus.schemas.in.h:3
+msgid ""
+"Set this key to the command used to create thumbnails for installed themes."
+msgstr ""
+"Defina esta clave con el comando utilizado para crear las miniaturas de los "
+"temas instalados."
+
+#: vfs-methods/themus/themus.schemas.in.h:4
+msgid "Set this key to the command used to create thumbnails for themes."
+msgstr ""
+"Defina esta clave con el comando utilizado para crear las miniaturas de los "
+"temas."
+
+#: vfs-methods/themus/themus.schemas.in.h:5
+msgid "Thumbnail command for installed themes"
+msgstr "Comando para miniaturizar los temas instalados"
+
+#: vfs-methods/themus/themus.schemas.in.h:6
+msgid "Thumbnail command for themes"
+msgstr "Comando para miniaturizar los temas"
+
+#: vfs-methods/themus/themus.schemas.in.h:7
+msgid "Whether to thumbnail installed themes"
+msgstr "Define si se deben miniaturizar los temas instalados"
+
+#: vfs-methods/themus/themus.schemas.in.h:8
+msgid "Whether to thumbnail themes"
+msgstr "Define si hay que miniaturizar los temas"
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
+msgid "Theme Properties content view component"
+msgstr "Componente de vista de contenidos de propiedades del tema"
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
+msgid "Themus Theme Properties view"
+msgstr "Vista de Propiedades del Tema de Themus"
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:1
+msgid "Apply theme..."
+msgstr "Aplicar el tema..."
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:2
+msgid "Themus component"
+msgstr "Componente Themus"
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:3
+msgid "Themus component apply theme operations"
+msgstr "Componente themus que aplica las operaciones de tema"
 
 #~ msgid "_Repeat Keys"
 #~ msgstr "_Repetición de las teclas"

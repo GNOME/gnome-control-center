@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
-"POT-Creation-Date: 2003-05-07 14:06-0400\n"
+"POT-Creation-Date: 2003-05-14 10:37+0800\n"
 "PO-Revision-Date: 2002-12-16 01:04+0800\n"
 "Last-Translator: Hasbullah Bin Pit <sebol@ikhlas.com>\n"
 "Language-Team: Projek Gabai <gabai-penyumbang@lists.sourceforge.org>\n"
@@ -51,8 +51,8 @@ msgstr ""
 #: capplets/file-types/file-types-properties.glade.h:1
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: capplets/network/gnome-network-preferences.glade.h:2
-#: capplets/theme-switcher/theme-properties.glade.h:1
 #: capplets/theme-switcher/theme-install.glade.h:1
+#: capplets/theme-switcher/theme-properties.glade.h:1
 msgid "*"
 msgstr "*"
 
@@ -395,6 +395,11 @@ msgstr ""
 "bukan-GNOME (ie. KDE) sudah tersedia aktif dan konflik dengan pengurus "
 "tetapan GNOME."
 
+#: capplets/common/capplet-stock-icons.c:94
+#, c-format
+msgid "Unable to load capplet stock icon '%s'\n"
+msgstr ""
+
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr "Hanya terapkan tetapan dan keluar"
@@ -403,11 +408,6 @@ msgstr "Hanya terapkan tetapan dan keluar"
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "Terdapat ralat memapar bantuan: %s"
-
-#: capplets/common/capplet-stock-icons.c:94
-#, c-format
-msgid "Unable to load capplet stock icon '%s'\n"
-msgstr ""
 
 #: capplets/common/file-transfer-dialog.c:95
 #, c-format
@@ -939,6 +939,7 @@ msgid ""
 msgstr ""
 
 #: capplets/file-types/file-types-capplet.c:196
+#: vfs-methods/themus/themus-properties-view.c:165
 msgid "Description"
 msgstr "Huraian"
 
@@ -1932,13 +1933,55 @@ msgstr "Satu"
 msgid "Two"
 msgstr "Dua"
 
+#: capplets/theme-switcher/gnome-theme-details.c:372
+#: capplets/theme-switcher/gnome-theme-manager.c:590
+msgid ""
+"No themes could be found on your system.  This probably means that your "
+"\"Theme Preferences\" dialog was improperly installed, or you haven't "
+"installed the \"gnome-themes\" package."
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-manager.c:646
+#: capplets/theme-switcher/gnome-theme-manager.c:706
+msgid "Custom theme"
+msgstr "Tema tersendiri"
+
+#: capplets/theme-switcher/gnome-theme-manager.c:646
+#: capplets/theme-switcher/gnome-theme-manager.c:706
+msgid "You can save this theme by pressing the Save Theme button."
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-manager.c:1399
+msgid ""
+"The default theme schemas could not be found on your system.  This means "
+"that you probably don't have metacity installed, or that your gconf is "
+"configured incorrectly."
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-save.c:72
+msgid "Theme name must be present"
+msgstr ""
+
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
 msgid "Select themes for various parts of the desktop"
 msgstr "PIlih tema bagi pelbagai bahagian pada dekstop"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:1
 msgid "Theme"
 msgstr "Tema"
+
+#: capplets/theme-switcher/theme-install.glade.h:2
+msgid "Install new theme"
+msgstr "Pasang tema baru"
+
+#: capplets/theme-switcher/theme-install.glade.h:3
+msgid "_Install"
+msgstr "_Pasang"
+
+#: capplets/theme-switcher/theme-install.glade.h:4
+msgid "_Location of new theme:"
+msgstr "_Lokasi bagi tema baru:"
 
 #: capplets/theme-switcher/theme-properties.glade.h:2
 msgid "<span size=\"larger\" weight=\"bold\">Save theme to disk</span>"
@@ -2025,47 +2068,6 @@ msgstr "_Simpan tema"
 #: capplets/theme-switcher/theme-properties.glade.h:22
 msgid "_Theme name:"
 msgstr "Nama _Tema: "
-
-#: capplets/theme-switcher/theme-install.glade.h:2
-msgid "Install new theme"
-msgstr "Pasang tema baru"
-
-#: capplets/theme-switcher/theme-install.glade.h:3
-msgid "_Install"
-msgstr "_Pasang"
-
-#: capplets/theme-switcher/theme-install.glade.h:4
-msgid "_Location of new theme:"
-msgstr "_Lokasi bagi tema baru:"
-
-#: capplets/theme-switcher/gnome-theme-details.c:372
-#: capplets/theme-switcher/gnome-theme-manager.c:626
-msgid ""
-"No themes could be found on your system.  This probably means that your "
-"\"Theme Preferences\" dialog was improperly installed, or you haven't "
-"installed the \"gnome-themes\" package."
-msgstr ""
-
-#: capplets/theme-switcher/gnome-theme-save.c:72
-msgid "Theme name must be present"
-msgstr ""
-
-#: capplets/theme-switcher/gnome-theme-manager.c:682
-#: capplets/theme-switcher/gnome-theme-manager.c:742
-msgid "Custom theme"
-msgstr "Tema tersendiri"
-
-#: capplets/theme-switcher/gnome-theme-manager.c:682
-#: capplets/theme-switcher/gnome-theme-manager.c:742
-msgid "You can save this theme by pressing the Save Theme button."
-msgstr ""
-
-#: capplets/theme-switcher/gnome-theme-manager.c:1435
-msgid ""
-"The default theme schemas could not be found on your system.  This means "
-"that you probably don't have metacity installed, or that your gconf is "
-"configured incorrectly."
-msgstr ""
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
@@ -2389,6 +2391,11 @@ msgstr "_Jangan papar mesej ini lagi"
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Tak dapat memuatkan fail bunyi %s sebagai contoh %s"
 
+#: gnome-settings-daemon/gnome-settings-xrdb.c:212
+#: gnome-settings-daemon/gnome-settings-xrdb.c:259
+msgid "Cannot determine user's home directory"
+msgstr ""
+
 #: gnome-settings-daemon/gnome-settings-xsettings.c:179
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
@@ -2549,6 +2556,83 @@ msgid ""
 "\" - no hinting, \"slight\", \"medium\", and \"full\" - as much hinting as "
 "possible; may cause distortion of letter forms."
 msgstr ""
+
+#: vfs-methods/themus/theme-method.c:513
+msgid "Themes"
+msgstr "Tema"
+
+#: vfs-methods/themus/themus-properties-view.c:170
+msgid "Control theme"
+msgstr "Tema Kawalan"
+
+#: vfs-methods/themus/themus-properties-view.c:174
+msgid "Window border theme"
+msgstr "Tema sempadan tetingkap"
+
+#: vfs-methods/themus/themus-properties-view.c:178
+msgid "Icon theme"
+msgstr "Tema ikon"
+
+#: vfs-methods/themus/themus-properties-view.c:217
+msgid "URI currently displayed"
+msgstr "URI yang dipaparkan"
+
+#: vfs-methods/themus/themus.schemas.in.h:1
+msgid "If set to true, then installed themes will be thumbnailed."
+msgstr "Jika ditetapkan, tema dipasang akan di'thumbnail'kan."
+
+#: vfs-methods/themus/themus.schemas.in.h:2
+msgid "If set to true, then themes will be thumbnailed."
+msgstr "Jika ditetapkan, tema akan di'thumbnail'kan."
+
+#: vfs-methods/themus/themus.schemas.in.h:3
+msgid ""
+"Set this key to the command used to create thumbnails for installed themes."
+msgstr ""
+"Tetapkan kekunci ini dengan arahan digunakan untuk mencipta thumbnail bagi "
+"tema dipasang."
+
+#: vfs-methods/themus/themus.schemas.in.h:4
+msgid "Set this key to the command used to create thumbnails for themes."
+msgstr ""
+"tetapkan kekunci ini dengan arahan digunakan untuk imencipta thumbnail bagi "
+"tema"
+
+#: vfs-methods/themus/themus.schemas.in.h:5
+msgid "Thumbnail command for installed themes"
+msgstr "arahan thumbnail bagi tema dipasang"
+
+#: vfs-methods/themus/themus.schemas.in.h:6
+msgid "Thumbnail command for themes"
+msgstr "Arahan thumbnail bagi tema"
+
+#: vfs-methods/themus/themus.schemas.in.h:7
+msgid "Whether to thumbnail installed themes"
+msgstr "Samada untuk meng'thumbnail'kan tema dipasang"
+
+#: vfs-methods/themus/themus.schemas.in.h:8
+msgid "Whether to thumbnail themes"
+msgstr "Samada untuk meng'thumbnail'kan tema"
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
+msgid "Theme Properties content view component"
+msgstr "Komponen paparan kandungan Ciri-ciri Tema"
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
+msgid "Themus Theme Properties view"
+msgstr "Paparan Ciri-ciri Tema Themus"
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:1
+msgid "Apply theme..."
+msgstr "Terap Tema..."
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:2
+msgid "Themus component"
+msgstr "Komponen Themus"
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:3
+msgid "Themus component apply theme operations"
+msgstr "Komponen Themus menerapkan operasi tema"
 
 #~ msgid "_Repeat Keys"
 #~ msgstr "Kekunci _Ulangan"

@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 2.2.0.1\n"
-"POT-Creation-Date: 2003-05-07 14:06-0400\n"
+"POT-Creation-Date: 2003-05-14 10:37+0800\n"
 "PO-Revision-Date: 2003-05-03 01:59+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: GTP Korean <gnome-kr-translation@gnome.or.kr>\n"
@@ -50,8 +50,8 @@ msgstr ""
 #: capplets/file-types/file-types-properties.glade.h:1
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: capplets/network/gnome-network-preferences.glade.h:2
-#: capplets/theme-switcher/theme-properties.glade.h:1
 #: capplets/theme-switcher/theme-install.glade.h:1
+#: capplets/theme-switcher/theme-properties.glade.h:1
 msgid "*"
 msgstr "*"
 
@@ -380,6 +380,11 @@ msgstr ""
 "다. 이는 보노보의 문제이거나, GNOME이 아닌 (예를 들어, KDE) 설정 관리자가 이"
 "미 실행중이어서 그놈 설정 관리자와 충돌하기 때문일 것입니다."
 
+#: capplets/common/capplet-stock-icons.c:94
+#, c-format
+msgid "Unable to load capplet stock icon '%s'\n"
+msgstr "스톡 아이콘 '%s' 캐플릿을 읽을 수 없습니다\n"
+
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr "설정을 적용하고 마칩니다"
@@ -388,11 +393,6 @@ msgstr "설정을 적용하고 마칩니다"
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "도움말을 보여주는데 오류가 발생했습니다: %s"
-
-#: capplets/common/capplet-stock-icons.c:94
-#, c-format
-msgid "Unable to load capplet stock icon '%s'\n"
-msgstr "스톡 아이콘 '%s' 캐플릿을 읽을 수 없습니다\n"
 
 #: capplets/common/file-transfer-dialog.c:95
 #, c-format
@@ -920,6 +920,7 @@ msgstr ""
 "를 바꿀 수 없습니다."
 
 #: capplets/file-types/file-types-capplet.c:196
+#: vfs-methods/themus/themus-properties-view.c:165
 msgid "Description"
 msgstr "설명"
 
@@ -1903,13 +1904,59 @@ msgstr "하나"
 msgid "Two"
 msgstr "둘"
 
+#: capplets/theme-switcher/gnome-theme-details.c:372
+#: capplets/theme-switcher/gnome-theme-manager.c:590
+msgid ""
+"No themes could be found on your system.  This probably means that your "
+"\"Theme Preferences\" dialog was improperly installed, or you haven't "
+"installed the \"gnome-themes\" package."
+msgstr ""
+"시스템에서 테마를 찾을 수 없습니다. \"테마 기본 설정\" 대화상자가 잘못 설치되"
+"었거나 \"gnome-themes\"꾸러미가 설치 되지 않았을 것입니다."
+
+#: capplets/theme-switcher/gnome-theme-manager.c:646
+#: capplets/theme-switcher/gnome-theme-manager.c:706
+msgid "Custom theme"
+msgstr "사용자 테마"
+
+#: capplets/theme-switcher/gnome-theme-manager.c:646
+#: capplets/theme-switcher/gnome-theme-manager.c:706
+msgid "You can save this theme by pressing the Save Theme button."
+msgstr "테마 저장 단추를 누르면 이 테마를 저장할 수 있습니다."
+
+#: capplets/theme-switcher/gnome-theme-manager.c:1399
+msgid ""
+"The default theme schemas could not be found on your system.  This means "
+"that you probably don't have metacity installed, or that your gconf is "
+"configured incorrectly."
+msgstr ""
+"이 시스템에서 기본 테마 스킴을 찾을 수 없습니다. metacity를 설치하지 않았거"
+"나, gconf가 제대로 설정되어 있지 않았을 것입니다."
+
+#: capplets/theme-switcher/gnome-theme-save.c:72
+msgid "Theme name must be present"
+msgstr "테마 이름이 없습니다"
+
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
 msgid "Select themes for various parts of the desktop"
 msgstr "바탕 화면의 여러 곳에 쓰일 테마를 선택합니다"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:1
 msgid "Theme"
 msgstr "테마"
+
+#: capplets/theme-switcher/theme-install.glade.h:2
+msgid "Install new theme"
+msgstr "새 테마 설치"
+
+#: capplets/theme-switcher/theme-install.glade.h:3
+msgid "_Install"
+msgstr "설치(_I)"
+
+#: capplets/theme-switcher/theme-install.glade.h:4
+msgid "_Location of new theme:"
+msgstr "새 테마의 위치(_L):"
 
 #: capplets/theme-switcher/theme-properties.glade.h:2
 msgid "<span size=\"larger\" weight=\"bold\">Save theme to disk</span>"
@@ -1995,51 +2042,6 @@ msgstr "테마 저장(_S)"
 #: capplets/theme-switcher/theme-properties.glade.h:22
 msgid "_Theme name:"
 msgstr "테마 이름(_T):"
-
-#: capplets/theme-switcher/theme-install.glade.h:2
-msgid "Install new theme"
-msgstr "새 테마 설치"
-
-#: capplets/theme-switcher/theme-install.glade.h:3
-msgid "_Install"
-msgstr "설치(_I)"
-
-#: capplets/theme-switcher/theme-install.glade.h:4
-msgid "_Location of new theme:"
-msgstr "새 테마의 위치(_L):"
-
-#: capplets/theme-switcher/gnome-theme-details.c:372
-#: capplets/theme-switcher/gnome-theme-manager.c:626
-msgid ""
-"No themes could be found on your system.  This probably means that your "
-"\"Theme Preferences\" dialog was improperly installed, or you haven't "
-"installed the \"gnome-themes\" package."
-msgstr ""
-"시스템에서 테마를 찾을 수 없습니다. \"테마 기본 설정\" 대화상자가 잘못 설치되"
-"었거나 \"gnome-themes\"꾸러미가 설치 되지 않았을 것입니다."
-
-#: capplets/theme-switcher/gnome-theme-save.c:72
-msgid "Theme name must be present"
-msgstr "테마 이름이 없습니다"
-
-#: capplets/theme-switcher/gnome-theme-manager.c:682
-#: capplets/theme-switcher/gnome-theme-manager.c:742
-msgid "Custom theme"
-msgstr "사용자 테마"
-
-#: capplets/theme-switcher/gnome-theme-manager.c:682
-#: capplets/theme-switcher/gnome-theme-manager.c:742
-msgid "You can save this theme by pressing the Save Theme button."
-msgstr "테마 저장 단추를 누르면 이 테마를 저장할 수 있습니다."
-
-#: capplets/theme-switcher/gnome-theme-manager.c:1435
-msgid ""
-"The default theme schemas could not be found on your system.  This means "
-"that you probably don't have metacity installed, or that your gconf is "
-"configured incorrectly."
-msgstr ""
-"이 시스템에서 기본 테마 스킴을 찾을 수 없습니다. metacity를 설치하지 않았거"
-"나, gconf가 제대로 설정되어 있지 않았을 것입니다."
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
@@ -2368,6 +2370,11 @@ msgstr "이 메세지를 다시 표시하지 않기(_D)"
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "사운드 파일 %s을(를) 샘플 %s(으)로 읽어들일 수 없습니다"
 
+#: gnome-settings-daemon/gnome-settings-xrdb.c:212
+#: gnome-settings-daemon/gnome-settings-xrdb.c:259
+msgid "Cannot determine user's home directory"
+msgstr ""
+
 #: gnome-settings-daemon/gnome-settings-xsettings.c:179
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
@@ -2536,6 +2543,81 @@ msgstr ""
 "글꼴을 그릴 때 쓰이는 힌팅의 형식. 쓸 수 있는 값은: \"none\" - 힌팅 쓰지 않"
 "음. \"slight\", \"medium\", \"full\" - 정한 만큼 힌팅하기; 글자 모양이 흐려집"
 "니다."
+
+#: vfs-methods/themus/theme-method.c:513
+msgid "Themes"
+msgstr "테마"
+
+#: vfs-methods/themus/themus-properties-view.c:170
+msgid "Control theme"
+msgstr "컨트롤 테마"
+
+#: vfs-methods/themus/themus-properties-view.c:174
+msgid "Window border theme"
+msgstr "창 가장자리 테마"
+
+#: vfs-methods/themus/themus-properties-view.c:178
+msgid "Icon theme"
+msgstr "아이콘 테마"
+
+#: vfs-methods/themus/themus-properties-view.c:217
+msgid "URI currently displayed"
+msgstr "현재 보이는 URI"
+
+#: vfs-methods/themus/themus.schemas.in.h:1
+msgid "If set to true, then installed themes will be thumbnailed."
+msgstr "참이면 설치된 테마의 미리보기를 만듭니다."
+
+#: vfs-methods/themus/themus.schemas.in.h:2
+msgid "If set to true, then themes will be thumbnailed."
+msgstr "참이면 테마의 미리보기를 만듭니다."
+
+#: vfs-methods/themus/themus.schemas.in.h:3
+msgid ""
+"Set this key to the command used to create thumbnails for installed themes."
+msgstr "설치된 테마의 미리보기를 만드는데 쓰이는 명령으로 키를 설정합니다."
+
+#: vfs-methods/themus/themus.schemas.in.h:4
+msgid "Set this key to the command used to create thumbnails for themes."
+msgstr "테마의 미리보기를 만드는데 쓰이는 명령으로 키를 설정합니다."
+
+#: vfs-methods/themus/themus.schemas.in.h:5
+msgid "Thumbnail command for installed themes"
+msgstr "설치된 테마의 미리보기 만들기 명령"
+
+#: vfs-methods/themus/themus.schemas.in.h:6
+msgid "Thumbnail command for themes"
+msgstr "테마의 미리보기 만들기 명령"
+
+#: vfs-methods/themus/themus.schemas.in.h:7
+msgid "Whether to thumbnail installed themes"
+msgstr "설치된 테마를 미리보기"
+
+#: vfs-methods/themus/themus.schemas.in.h:8
+msgid "Whether to thumbnail themes"
+msgstr "테마를 미리보기"
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
+msgid "Theme Properties content view component"
+msgstr "테마 등록 정보 내용 보기 컴포넌트"
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
+msgid "Themus Theme Properties view"
+msgstr "Themus 테마 등록 정보 보기"
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:1
+#, fuzzy
+msgid "Apply theme..."
+msgstr "테마 설치(_I)..."
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:2
+#, fuzzy
+msgid "Themus component"
+msgstr "보여주기 컴포넌트(_V):"
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:3
+msgid "Themus component apply theme operations"
+msgstr ""
 
 #~ msgid "_Repeat Keys"
 #~ msgstr "글쇠 반복(_R)"

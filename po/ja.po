@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center HEAD\n"
-"POT-Creation-Date: 2003-05-07 14:06-0400\n"
+"POT-Creation-Date: 2003-05-14 10:37+0800\n"
 "PO-Revision-Date: 2003-05-06 20:57+0900\n"
 "Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
@@ -55,8 +55,8 @@ msgstr ""
 #: capplets/file-types/file-types-properties.glade.h:1
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: capplets/network/gnome-network-preferences.glade.h:2
-#: capplets/theme-switcher/theme-properties.glade.h:1
 #: capplets/theme-switcher/theme-install.glade.h:1
+#: capplets/theme-switcher/theme-properties.glade.h:1
 msgid "*"
 msgstr "*"
 
@@ -390,6 +390,11 @@ msgstr ""
 "の問題、あるいは GNOME ではない (KDE など) 別の設定マネージャが既に起動されて"
 "いて GNOME 設定マネージャと衝突していることが原因かもしれません。"
 
+#: capplets/common/capplet-stock-icons.c:94
+#, c-format
+msgid "Unable to load capplet stock icon '%s'\n"
+msgstr "Capplet のストック・アイコン '%s' を読み込めません\n"
+
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr "設定を適用して終了する"
@@ -398,11 +403,6 @@ msgstr "設定を適用して終了する"
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "次のヘルプを表示する際にエラーが発生しました: %s"
-
-#: capplets/common/capplet-stock-icons.c:94
-#, c-format
-msgid "Unable to load capplet stock icon '%s'\n"
-msgstr "Capplet のストック・アイコン '%s' を読み込めません\n"
 
 #: capplets/common/file-transfer-dialog.c:95
 #, c-format
@@ -933,6 +933,7 @@ msgstr ""
 "はできません。"
 
 #: capplets/file-types/file-types-capplet.c:196
+#: vfs-methods/themus/themus-properties-view.c:165
 msgid "Description"
 msgstr "説明"
 
@@ -1922,13 +1923,63 @@ msgstr "壱"
 msgid "Two"
 msgstr "弐"
 
+#: capplets/theme-switcher/gnome-theme-details.c:372
+#: capplets/theme-switcher/gnome-theme-manager.c:590
+msgid ""
+"No themes could be found on your system.  This probably means that your "
+"\"Theme Preferences\" dialog was improperly installed, or you haven't "
+"installed the \"gnome-themes\" package."
+msgstr ""
+"お使いのシステムからテーマが見つかりませんでした。これは \"テーマ設定\" ダイ"
+"アログを正しくインストールしていないか、あるいは \"gnome-themes\" パッケージ"
+"をインストールしていないことが原因かもしれません。"
+
+#: capplets/theme-switcher/gnome-theme-manager.c:646
+#: capplets/theme-switcher/gnome-theme-manager.c:706
+msgid "Custom theme"
+msgstr "カスタム・テーマ"
+
+#: capplets/theme-switcher/gnome-theme-manager.c:646
+#: capplets/theme-switcher/gnome-theme-manager.c:706
+msgid "You can save this theme by pressing the Save Theme button."
+msgstr ""
+"[テーマの保存] をクリックすると  \n"
+"このテーマを保存できます。"
+
+#: capplets/theme-switcher/gnome-theme-manager.c:1399
+msgid ""
+"The default theme schemas could not be found on your system.  This means "
+"that you probably don't have metacity installed, or that your gconf is "
+"configured incorrectly."
+msgstr ""
+"お使いのシステムの中にデフォルト・テーマのスキーマが見つかりませんでした。お"
+"そらく 'metacity' がインストールされていないか、あるいは GConf が正しく設定さ"
+"れていないと思われます。"
+
+#: capplets/theme-switcher/gnome-theme-save.c:72
+msgid "Theme name must be present"
+msgstr "テーマの名前を指定して下さい"
+
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
 msgid "Select themes for various parts of the desktop"
 msgstr "デスクトップのさまざまな部分に使用するテーマを選択します"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:1
 msgid "Theme"
 msgstr "テーマ"
+
+#: capplets/theme-switcher/theme-install.glade.h:2
+msgid "Install new theme"
+msgstr "新しいテーマのインストール"
+
+#: capplets/theme-switcher/theme-install.glade.h:3
+msgid "_Install"
+msgstr "インストール(_I)"
+
+#: capplets/theme-switcher/theme-install.glade.h:4
+msgid "_Location of new theme:"
+msgstr "新しいテーマの格納場所(_L):"
 
 #: capplets/theme-switcher/theme-properties.glade.h:2
 msgid "<span size=\"larger\" weight=\"bold\">Save theme to disk</span>"
@@ -2015,55 +2066,6 @@ msgstr "テーマの保存(_S)"
 #: capplets/theme-switcher/theme-properties.glade.h:22
 msgid "_Theme name:"
 msgstr "テーマの名前(_T):"
-
-#: capplets/theme-switcher/theme-install.glade.h:2
-msgid "Install new theme"
-msgstr "新しいテーマのインストール"
-
-#: capplets/theme-switcher/theme-install.glade.h:3
-msgid "_Install"
-msgstr "インストール(_I)"
-
-#: capplets/theme-switcher/theme-install.glade.h:4
-msgid "_Location of new theme:"
-msgstr "新しいテーマの格納場所(_L):"
-
-#: capplets/theme-switcher/gnome-theme-details.c:372
-#: capplets/theme-switcher/gnome-theme-manager.c:626
-msgid ""
-"No themes could be found on your system.  This probably means that your "
-"\"Theme Preferences\" dialog was improperly installed, or you haven't "
-"installed the \"gnome-themes\" package."
-msgstr ""
-"お使いのシステムからテーマが見つかりませんでした。これは \"テーマ設定\" ダイ"
-"アログを正しくインストールしていないか、あるいは \"gnome-themes\" パッケージ"
-"をインストールしていないことが原因かもしれません。"
-
-#: capplets/theme-switcher/gnome-theme-save.c:72
-msgid "Theme name must be present"
-msgstr "テーマの名前を指定して下さい"
-
-#: capplets/theme-switcher/gnome-theme-manager.c:682
-#: capplets/theme-switcher/gnome-theme-manager.c:742
-msgid "Custom theme"
-msgstr "カスタム・テーマ"
-
-#: capplets/theme-switcher/gnome-theme-manager.c:682
-#: capplets/theme-switcher/gnome-theme-manager.c:742
-msgid "You can save this theme by pressing the Save Theme button."
-msgstr ""
-"[テーマの保存] をクリックすると  \n"
-"このテーマを保存できます。"
-
-#: capplets/theme-switcher/gnome-theme-manager.c:1435
-msgid ""
-"The default theme schemas could not be found on your system.  This means "
-"that you probably don't have metacity installed, or that your gconf is "
-"configured incorrectly."
-msgstr ""
-"お使いのシステムの中にデフォルト・テーマのスキーマが見つかりませんでした。お"
-"そらく 'metacity' がインストールされていないか、あるいは GConf が正しく設定さ"
-"れていないと思われます。"
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
@@ -2390,6 +2392,11 @@ msgstr "次回からこのメッセージを表示しない(_D)"
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "効果音ファイル %s をサンプル %s で読み込めませんでした"
 
+#: gnome-settings-daemon/gnome-settings-xrdb.c:212
+#: gnome-settings-daemon/gnome-settings-xrdb.c:259
+msgid "Cannot determine user's home directory"
+msgstr ""
+
 #: gnome-settings-daemon/gnome-settings-xsettings.c:179
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
@@ -2561,3 +2568,81 @@ msgstr ""
 "フォントをレンダリングする際の画面ピクセルの種類 (Hinting) です。利用可能な"
 "値: \"none\" - Hinting 無効、\"slight\", \"medium\", と \"full\" - 可能な限"
 "り Hinting する; 文字の形態が歪む可能性あり。"
+
+#: vfs-methods/themus/theme-method.c:513
+msgid "Themes"
+msgstr "Themus"
+
+#: vfs-methods/themus/themus-properties-view.c:170
+msgid "Control theme"
+msgstr ""
+
+#: vfs-methods/themus/themus-properties-view.c:174
+msgid "Window border theme"
+msgstr ""
+
+#: vfs-methods/themus/themus-properties-view.c:178
+msgid "Icon theme"
+msgstr ""
+
+#: vfs-methods/themus/themus-properties-view.c:217
+msgid "URI currently displayed"
+msgstr ""
+
+#: vfs-methods/themus/themus.schemas.in.h:1
+msgid "If set to true, then installed themes will be thumbnailed."
+msgstr ""
+"true に設定すると、インストールされてたテーマがサムネイル表示されます。"
+
+#: vfs-methods/themus/themus.schemas.in.h:2
+msgid "If set to true, then themes will be thumbnailed."
+msgstr "true に設定すると、テーマがサムネイル表示されます。"
+
+#: vfs-methods/themus/themus.schemas.in.h:3
+msgid ""
+"Set this key to the command used to create thumbnails for installed themes."
+msgstr ""
+"インストールされたテーマのサムネイルを作成するためのコマンドを設定してくださ"
+"い。"
+
+#: vfs-methods/themus/themus.schemas.in.h:4
+msgid "Set this key to the command used to create thumbnails for themes."
+msgstr "テーマのサムネイルを作成するためのコマンドを設定してください。"
+
+#: vfs-methods/themus/themus.schemas.in.h:5
+msgid "Thumbnail command for installed themes"
+msgstr "インストールされたテーマのサムネイルコマンド"
+
+#: vfs-methods/themus/themus.schemas.in.h:6
+msgid "Thumbnail command for themes"
+msgstr "テーマのサムネイルコマンド"
+
+#: vfs-methods/themus/themus.schemas.in.h:7
+msgid "Whether to thumbnail installed themes"
+msgstr "インストールされたテーマをサムネイル表示するか否か"
+
+#: vfs-methods/themus/themus.schemas.in.h:8
+msgid "Whether to thumbnail themes"
+msgstr "テーマをサムネイル表示するか否か"
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
+msgid "Theme Properties content view component"
+msgstr ""
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
+msgid "Themus Theme Properties view"
+msgstr ""
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:1
+#, fuzzy
+msgid "Apply theme..."
+msgstr "テーマのインストール(_I)..."
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:2
+#, fuzzy
+msgid "Themus component"
+msgstr "表示コンポーネント(_V):"
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:3
+msgid "Themus component apply theme operations"
+msgstr ""

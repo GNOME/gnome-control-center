@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center CVS\n"
-"POT-Creation-Date: 2003-05-09 09:22+0100\n"
+"POT-Creation-Date: 2003-05-14 10:37+0800\n"
 "PO-Revision-Date: 2003-04-29 14:20+0100\n"
 "Last-Translator:Paul Duffy <dubhthach@frink.nuigalway.ie>\n"
 "Language-Team: Irish\n"
@@ -408,6 +408,11 @@ msgid ""
 "settings manager."
 msgstr ""
 
+#: capplets/common/capplet-stock-icons.c:94
+#, c-format
+msgid "Unable to load capplet stock icon '%s'\n"
+msgstr ""
+
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr ""
@@ -415,11 +420,6 @@ msgstr ""
 #: capplets/common/capplet-util.c:340
 #, c-format
 msgid "There was an error displaying help: %s"
-msgstr ""
-
-#: capplets/common/capplet-stock-icons.c:94
-#, c-format
-msgid "Unable to load capplet stock icon '%s'\n"
 msgstr ""
 
 #: capplets/common/file-transfer-dialog.c:95
@@ -963,6 +963,7 @@ msgid ""
 msgstr ""
 
 #: capplets/file-types/file-types-capplet.c:196
+#: vfs-methods/themus/themus-properties-view.c:165
 #, fuzzy
 msgid "Description"
 msgstr "Áit"
@@ -1984,13 +1985,57 @@ msgstr "Aon"
 msgid "Two"
 msgstr "Do"
 
+#: capplets/theme-switcher/gnome-theme-details.c:372
+#: capplets/theme-switcher/gnome-theme-manager.c:590
+msgid ""
+"No themes could be found on your system.  This probably means that your "
+"\"Theme Preferences\" dialog was improperly installed, or you haven't "
+"installed the \"gnome-themes\" package."
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-manager.c:646
+#: capplets/theme-switcher/gnome-theme-manager.c:706
+#, fuzzy
+msgid "Custom theme"
+msgstr "Tóg comhad..."
+
+#: capplets/theme-switcher/gnome-theme-manager.c:646
+#: capplets/theme-switcher/gnome-theme-manager.c:706
+msgid "You can save this theme by pressing the Save Theme button."
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-manager.c:1399
+msgid ""
+"The default theme schemas could not be found on your system.  This means "
+"that you probably don't have metacity installed, or that your gconf is "
+"configured incorrectly."
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-save.c:72
+msgid "Theme name must be present"
+msgstr ""
+
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
 msgid "Select themes for various parts of the desktop"
 msgstr ""
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:1
 msgid "Theme"
+msgstr "TÃ©ma"
+
+#: capplets/theme-switcher/theme-install.glade.h:2
+msgid "Install new theme"
 msgstr ""
+
+#: capplets/theme-switcher/theme-install.glade.h:3
+msgid "_Install"
+msgstr ""
+
+#: capplets/theme-switcher/theme-install.glade.h:4
+#, fuzzy
+msgid "_Location of new theme:"
+msgstr "Brostú"
 
 #: capplets/theme-switcher/theme-properties.glade.h:2
 msgid "<span size=\"larger\" weight=\"bold\">Save theme to disk</span>"
@@ -2081,49 +2126,6 @@ msgstr "Ainm"
 #, fuzzy
 msgid "_Theme name:"
 msgstr "Ainm"
-
-#: capplets/theme-switcher/theme-install.glade.h:2
-msgid "Install new theme"
-msgstr ""
-
-#: capplets/theme-switcher/theme-install.glade.h:3
-msgid "_Install"
-msgstr ""
-
-#: capplets/theme-switcher/theme-install.glade.h:4
-#, fuzzy
-msgid "_Location of new theme:"
-msgstr "Brostú"
-
-#: capplets/theme-switcher/gnome-theme-details.c:372
-#: capplets/theme-switcher/gnome-theme-manager.c:626
-msgid ""
-"No themes could be found on your system.  This probably means that your "
-"\"Theme Preferences\" dialog was improperly installed, or you haven't "
-"installed the \"gnome-themes\" package."
-msgstr ""
-
-#: capplets/theme-switcher/gnome-theme-save.c:72
-msgid "Theme name must be present"
-msgstr ""
-
-#: capplets/theme-switcher/gnome-theme-manager.c:682
-#: capplets/theme-switcher/gnome-theme-manager.c:742
-#, fuzzy
-msgid "Custom theme"
-msgstr "Tóg comhad..."
-
-#: capplets/theme-switcher/gnome-theme-manager.c:682
-#: capplets/theme-switcher/gnome-theme-manager.c:742
-msgid "You can save this theme by pressing the Save Theme button."
-msgstr ""
-
-#: capplets/theme-switcher/gnome-theme-manager.c:1435
-msgid ""
-"The default theme schemas could not be found on your system.  This means "
-"that you probably don't have metacity installed, or that your gconf is "
-"configured incorrectly."
-msgstr ""
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
@@ -2445,6 +2447,11 @@ msgstr ""
 msgid "Couldn't load sound file %s as sample %s"
 msgstr ""
 
+#: gnome-settings-daemon/gnome-settings-xrdb.c:212
+#: gnome-settings-daemon/gnome-settings-xrdb.c:259
+msgid "Cannot determine user's home directory"
+msgstr ""
+
 #: gnome-settings-daemon/gnome-settings-xsettings.c:179
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
@@ -2601,4 +2608,84 @@ msgid ""
 "The type of hinting to use when rendering fonts. Possible values are: \"none"
 "\" - no hinting, \"slight\", \"medium\", and \"full\" - as much hinting as "
 "possible; may cause distortion of letter forms."
+msgstr ""
+
+#: vfs-methods/themus/theme-method.c:513
+msgid "Themes"
+msgstr "TÃ©amaÃ­"
+
+#: vfs-methods/themus/themus-properties-view.c:170
+msgid "Control theme"
+msgstr "tÃ©ama an smacht"
+
+#: vfs-methods/themus/themus-properties-view.c:174
+msgid "Window border theme"
+msgstr "tÃ©ama le haighaidh taobh an fuinneog"
+
+#: vfs-methods/themus/themus-properties-view.c:178
+msgid "Icon theme"
+msgstr "tÃ©ama le haighaidh dealbh"
+
+#: vfs-methods/themus/themus-properties-view.c:217
+msgid "URI currently displayed"
+msgstr "URI ar taispeÃ¡nt"
+
+#: vfs-methods/themus/themus.schemas.in.h:1
+msgid "If set to true, then installed themes will be thumbnailed."
+msgstr "Mar bhfuil sÃ© fÃ­or, bheidh na TÃ©amaÃ­ feice mar ionga do ordÃ³g"
+
+#: vfs-methods/themus/themus.schemas.in.h:2
+msgid "If set to true, then themes will be thumbnailed."
+msgstr "Mar bhfuil sÃ© fÃ­or, bheidh na TÃ©amaÃ­ feice mar ionga do ordÃ³g"
+
+#: vfs-methods/themus/themus.schemas.in.h:3
+msgid ""
+"Set this key to the command used to create thumbnails for installed themes."
+msgstr ""
+"Chuir an cnaipe seo go dtÃ­ an ceannas chun <b>ionga do ordÃ³g</b> a "
+"dhÃ©antÃ¡ le haighaidh na TÃ©amaÃ­ a bhfuil insealbhach. "
+
+#: vfs-methods/themus/themus.schemas.in.h:4
+msgid "Set this key to the command used to create thumbnails for themes."
+msgstr ""
+"Chuir an cnaipe seo go dtÃ­ an ceannas chun <b>ionga do ordÃ³g</b> a "
+"dhÃ©antÃ¡ le haighaidh na TÃ©amaÃ­"
+
+#: vfs-methods/themus/themus.schemas.in.h:5
+msgid "Thumbnail command for installed themes"
+msgstr ""
+"Ceannas le haighaidh <b>ionga do ordÃ³g</b> a dhÃ©antÃ¡ as na TÃ©amaÃ­ a "
+"bhfuil insealbhach."
+
+#: vfs-methods/themus/themus.schemas.in.h:6
+msgid "Thumbnail command for themes"
+msgstr "Ceannas le haighaidh <b>ionga do ordÃ³g</b> a dhÃ©antÃ¡ as na TÃ©amaÃ­"
+
+#: vfs-methods/themus/themus.schemas.in.h:7
+msgid "Whether to thumbnail installed themes"
+msgstr ""
+"CÃ© acu na TÃ©amaÃ­ a bhfuil insealbhach a chuir mar<b>ionga do ordÃ³g</b>"
+
+#: vfs-methods/themus/themus.schemas.in.h:8
+msgid "Whether to thumbnail themes"
+msgstr "CÃ© acu na TÃ©amaÃ­ a chuir mar<b>ionga do ordÃ³g</b>"
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
+msgid "Theme Properties content view component"
+msgstr "comhpháirt le haighaidh feicÃ¡int ar eilimint na tÃ©ama"
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
+msgid "Themus Theme Properties view"
+msgstr "Radharc eilimint na tÃ©ama do Themus"
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:1
+msgid "Apply theme..."
+msgstr ""
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:2
+msgid "Themus component"
+msgstr ""
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:3
+msgid "Themus component apply theme operations"
 msgstr ""

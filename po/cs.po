@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 2.0.2\n"
-"POT-Creation-Date: 2003-05-07 14:06-0400\n"
+"POT-Creation-Date: 2003-05-14 10:37+0800\n"
 "PO-Revision-Date: 2003-05-03 19:03+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -53,8 +53,8 @@ msgstr ""
 #: capplets/file-types/file-types-properties.glade.h:1
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: capplets/network/gnome-network-preferences.glade.h:2
-#: capplets/theme-switcher/theme-properties.glade.h:1
 #: capplets/theme-switcher/theme-install.glade.h:1
+#: capplets/theme-switcher/theme-properties.glade.h:1
 msgid "*"
 msgstr "*"
 
@@ -389,6 +389,11 @@ msgstr ""
 "nebo je již možná aktivní správce nastavení jiného prostředí (např. KDE) a "
 "ten je v konfliktu se správcem nastavení prostředí GNOME."
 
+#: capplets/common/capplet-stock-icons.c:94
+#, c-format
+msgid "Unable to load capplet stock icon '%s'\n"
+msgstr "Nelze načíst ikonu capletu '%s'\n"
+
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr "Pouze aplikovat nastavení a skončit"
@@ -397,11 +402,6 @@ msgstr "Pouze aplikovat nastavení a skončit"
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "Nastala chyba při zobrazení nápovědy: %s"
-
-#: capplets/common/capplet-stock-icons.c:94
-#, c-format
-msgid "Unable to load capplet stock icon '%s'\n"
-msgstr "Nelze načíst ikonu capletu '%s'\n"
 
 #: capplets/common/file-transfer-dialog.c:95
 #, c-format
@@ -936,6 +936,7 @@ msgstr ""
 "za běhu nejsou možné."
 
 #: capplets/file-types/file-types-capplet.c:196
+#: vfs-methods/themus/themus-properties-view.c:165
 msgid "Description"
 msgstr "Popis"
 
@@ -1930,13 +1931,61 @@ msgstr "Tvar 1"
 msgid "Two"
 msgstr "Tvar 2"
 
+#: capplets/theme-switcher/gnome-theme-details.c:372
+#: capplets/theme-switcher/gnome-theme-manager.c:590
+msgid ""
+"No themes could be found on your system.  This probably means that your "
+"\"Theme Preferences\" dialog was improperly installed, or you haven't "
+"installed the \"gnome-themes\" package."
+msgstr ""
+"Na vašem systému nebyla nalezena žádná témata. To pravděpodobně znamená, že "
+"váš dialog \"Nastavení témat\" byl nesprávně nainstalován nebo jste "
+"nenainstalovali balíček \"gnome-themes\"."
+
+#: capplets/theme-switcher/gnome-theme-manager.c:646
+#: capplets/theme-switcher/gnome-theme-manager.c:706
+msgid "Custom theme"
+msgstr "Vlastní téma"
+
+#: capplets/theme-switcher/gnome-theme-manager.c:646
+#: capplets/theme-switcher/gnome-theme-manager.c:706
+msgid "You can save this theme by pressing the Save Theme button."
+msgstr "Toto téma můžete uložit stisknutím tlačítka Uložit téma."
+
+#: capplets/theme-switcher/gnome-theme-manager.c:1399
+msgid ""
+"The default theme schemas could not be found on your system.  This means "
+"that you probably don't have metacity installed, or that your gconf is "
+"configured incorrectly."
+msgstr ""
+"Schémata implicitního tématu nebyla nalezena na vašem systému. To znamená, "
+"že pravděpodobně nemáte nainstalováno metacity nebo váš gconf je nesprávně "
+"nastaven."
+
+#: capplets/theme-switcher/gnome-theme-save.c:72
+msgid "Theme name must be present"
+msgstr "Musí být vyplněn název tématu"
+
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
 msgid "Select themes for various parts of the desktop"
 msgstr "Vybrat témata pro různé části pracovní plochy"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:1
 msgid "Theme"
 msgstr "Téma"
+
+#: capplets/theme-switcher/theme-install.glade.h:2
+msgid "Install new theme"
+msgstr "Instalovat nové téma"
+
+#: capplets/theme-switcher/theme-install.glade.h:3
+msgid "_Install"
+msgstr "_Instalovat"
+
+#: capplets/theme-switcher/theme-install.glade.h:4
+msgid "_Location of new theme:"
+msgstr "_Umístění nového tématu:"
 
 #: capplets/theme-switcher/theme-properties.glade.h:2
 msgid "<span size=\"larger\" weight=\"bold\">Save theme to disk</span>"
@@ -2021,53 +2070,6 @@ msgstr "_Uložit téma"
 #: capplets/theme-switcher/theme-properties.glade.h:22
 msgid "_Theme name:"
 msgstr "_Jméno tématu:"
-
-#: capplets/theme-switcher/theme-install.glade.h:2
-msgid "Install new theme"
-msgstr "Instalovat nové téma"
-
-#: capplets/theme-switcher/theme-install.glade.h:3
-msgid "_Install"
-msgstr "_Instalovat"
-
-#: capplets/theme-switcher/theme-install.glade.h:4
-msgid "_Location of new theme:"
-msgstr "_Umístění nového tématu:"
-
-#: capplets/theme-switcher/gnome-theme-details.c:372
-#: capplets/theme-switcher/gnome-theme-manager.c:626
-msgid ""
-"No themes could be found on your system.  This probably means that your "
-"\"Theme Preferences\" dialog was improperly installed, or you haven't "
-"installed the \"gnome-themes\" package."
-msgstr ""
-"Na vašem systému nebyla nalezena žádná témata. To pravděpodobně znamená, že "
-"váš dialog \"Nastavení témat\" byl nesprávně nainstalován nebo jste "
-"nenainstalovali balíček \"gnome-themes\"."
-
-#: capplets/theme-switcher/gnome-theme-save.c:72
-msgid "Theme name must be present"
-msgstr "Musí být vyplněn název tématu"
-
-#: capplets/theme-switcher/gnome-theme-manager.c:682
-#: capplets/theme-switcher/gnome-theme-manager.c:742
-msgid "Custom theme"
-msgstr "Vlastní téma"
-
-#: capplets/theme-switcher/gnome-theme-manager.c:682
-#: capplets/theme-switcher/gnome-theme-manager.c:742
-msgid "You can save this theme by pressing the Save Theme button."
-msgstr "Toto téma můžete uložit stisknutím tlačítka Uložit téma."
-
-#: capplets/theme-switcher/gnome-theme-manager.c:1435
-msgid ""
-"The default theme schemas could not be found on your system.  This means "
-"that you probably don't have metacity installed, or that your gconf is "
-"configured incorrectly."
-msgstr ""
-"Schémata implicitního tématu nebyla nalezena na vašem systému. To znamená, "
-"že pravděpodobně nemáte nainstalováno metacity nebo váš gconf je nesprávně "
-"nastaven."
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
@@ -2397,6 +2399,11 @@ msgstr "Příště už tuto zprávu _neukazovat"
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Nelze načíst soubor se zvukem %s jako vzorek %s"
 
+#: gnome-settings-daemon/gnome-settings-xrdb.c:212
+#: gnome-settings-daemon/gnome-settings-xrdb.c:259
+msgid "Cannot determine user's home directory"
+msgstr ""
+
 #: gnome-settings-daemon/gnome-settings-xsettings.c:179
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
@@ -2569,3 +2576,79 @@ msgstr ""
 "Typ hinting, který použít pro vykreslování písem. Možné hodnoty jsou: \"none"
 "\" - žádný hinting, \"slight\", \"medium\" a \"full\" - takový hinting, jak "
 "je možný; může způsobit poškození tvaru písmen."
+
+#: vfs-methods/themus/theme-method.c:513
+msgid "Themes"
+msgstr "Témata"
+
+#: vfs-methods/themus/themus-properties-view.c:170
+msgid "Control theme"
+msgstr "Téma ovládacích prvků"
+
+#: vfs-methods/themus/themus-properties-view.c:174
+msgid "Window border theme"
+msgstr "Téma okraje oken"
+
+#: vfs-methods/themus/themus-properties-view.c:178
+msgid "Icon theme"
+msgstr "Téma ikon"
+
+#: vfs-methods/themus/themus-properties-view.c:217
+msgid "URI currently displayed"
+msgstr "Momentálně zobrazované URI"
+
+#: vfs-methods/themus/themus.schemas.in.h:1
+msgid "If set to true, then installed themes will be thumbnailed."
+msgstr ""
+"Je-li nastaveno na true, budou zobrazovány náhledy nainstalovaných témat."
+
+#: vfs-methods/themus/themus.schemas.in.h:2
+msgid "If set to true, then themes will be thumbnailed."
+msgstr "Je-li nastaveno na true, budou zobrazovány náhledy témat."
+
+#: vfs-methods/themus/themus.schemas.in.h:3
+msgid ""
+"Set this key to the command used to create thumbnails for installed themes."
+msgstr ""
+"Nastavte tento klíč na příkaz používaný pro vytváření náhledů "
+"nainstalovaných témat."
+
+#: vfs-methods/themus/themus.schemas.in.h:4
+msgid "Set this key to the command used to create thumbnails for themes."
+msgstr "Nastavte tento klíč na příkaz používaný pro vytváření náhledů témat."
+
+#: vfs-methods/themus/themus.schemas.in.h:5
+msgid "Thumbnail command for installed themes"
+msgstr "Příkaz pro vytváření náhledů nainstalovaných témat"
+
+#: vfs-methods/themus/themus.schemas.in.h:6
+msgid "Thumbnail command for themes"
+msgstr "Příkaz pro vytváření náhledů témat"
+
+#: vfs-methods/themus/themus.schemas.in.h:7
+msgid "Whether to thumbnail installed themes"
+msgstr "Jestli zobrazovat náhledy nainstalovaných témat"
+
+#: vfs-methods/themus/themus.schemas.in.h:8
+msgid "Whether to thumbnail themes"
+msgstr "Jestli zobrazovat náhledy témat"
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
+msgid "Theme Properties content view component"
+msgstr "Kokmponenta pohledu obsahu Vlastnosti tématu"
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
+msgid "Themus Theme Properties view"
+msgstr "Pohled Themus Vlastnosti tématu"
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:1
+msgid "Apply theme..."
+msgstr "Použít téma..."
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:2
+msgid "Themus component"
+msgstr "Komponenta Themus"
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:3
+msgid "Themus component apply theme operations"
+msgstr "Operace použití tématu komponenty Themus"

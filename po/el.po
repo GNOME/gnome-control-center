@@ -27,7 +27,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.0.2.92\n"
-"POT-Creation-Date: 2003-05-07 14:06-0400\n"
+"POT-Creation-Date: 2003-05-14 10:37+0800\n"
 "PO-Revision-Date: 2003-01-26 12:06+0200\n"
 "Last-Translator: Kostas Papadimas <pkst@gmx.net>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
@@ -74,8 +74,8 @@ msgstr ""
 #: capplets/file-types/file-types-properties.glade.h:1
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: capplets/network/gnome-network-preferences.glade.h:2
-#: capplets/theme-switcher/theme-properties.glade.h:1
 #: capplets/theme-switcher/theme-install.glade.h:1
+#: capplets/theme-switcher/theme-properties.glade.h:1
 msgid "*"
 msgstr "*"
 
@@ -420,6 +420,11 @@ msgstr ""
 "Bonobo, ή ένας εκτός- GNOME διαχειριστής ρυθμίσεων  (π.χ. KDE)  είναι ήδη "
 "ενεργός και είναι σε σύγκρουση με το διαχειριστή ρυθμίσεων GNOME "
 
+#: capplets/common/capplet-stock-icons.c:94
+#, c-format
+msgid "Unable to load capplet stock icon '%s'\n"
+msgstr "Αδυναμία φόρτωσης εικονιδίου εφαρμογιδίου stock '%s'\n"
+
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr "Εφαρμογή των ρυθμίσεων και έξοδος"
@@ -428,11 +433,6 @@ msgstr "Εφαρμογή των ρυθμίσεων και έξοδος"
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "Σφάλμα προβολής βοήθειας: %s "
-
-#: capplets/common/capplet-stock-icons.c:94
-#, c-format
-msgid "Unable to load capplet stock icon '%s'\n"
-msgstr "Αδυναμία φόρτωσης εικονιδίου εφαρμογιδίου stock '%s'\n"
 
 #: capplets/common/file-transfer-dialog.c:95
 #, c-format
@@ -975,6 +975,7 @@ msgid ""
 msgstr ""
 
 #: capplets/file-types/file-types-capplet.c:196
+#: vfs-methods/themus/themus-properties-view.c:165
 msgid "Description"
 msgstr "Περιγραφή"
 
@@ -1977,13 +1978,59 @@ msgstr "Ένα"
 msgid "Two"
 msgstr "Δύο"
 
+#: capplets/theme-switcher/gnome-theme-details.c:372
+#: capplets/theme-switcher/gnome-theme-manager.c:590
+msgid ""
+"No themes could be found on your system.  This probably means that your "
+"\"Theme Preferences\" dialog was improperly installed, or you haven't "
+"installed the \"gnome-themes\" package."
+msgstr ""
+"Δεν βρέθηκαν θέματα στο σύστημα σας. Αυτό πιθανόν να σημαίνει ότι ο διάλογος "
+"\"Προτιμήσεις Θέματος\" δεν εγκαταστάθηκε σωστά, ή ότι δεν έχετε "
+"εγκαταστήσει το πακέτο \"gnome-themes\"."
+
+#: capplets/theme-switcher/gnome-theme-manager.c:646
+#: capplets/theme-switcher/gnome-theme-manager.c:706
+msgid "Custom theme"
+msgstr "Προσαρμοσμένο θέμα"
+
+#: capplets/theme-switcher/gnome-theme-manager.c:646
+#: capplets/theme-switcher/gnome-theme-manager.c:706
+msgid "You can save this theme by pressing the Save Theme button."
+msgstr ""
+"Μπορείτε να αποθηκεύσετε το θέμα πατώντας το κουμπί Αποθήκευση θέματος."
+
+#: capplets/theme-switcher/gnome-theme-manager.c:1399
+msgid ""
+"The default theme schemas could not be found on your system.  This means "
+"that you probably don't have metacity installed, or that your gconf is "
+"configured incorrectly."
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-save.c:72
+msgid "Theme name must be present"
+msgstr "Το όνομα θέματος πρέπει να υπάρχει"
+
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
 msgid "Select themes for various parts of the desktop"
 msgstr "Επιλέξτε θέματα για διάφορα κομμάτια της επιφάνειας εργασίας"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:1
 msgid "Theme"
 msgstr "Θέμα"
+
+#: capplets/theme-switcher/theme-install.glade.h:2
+msgid "Install new theme"
+msgstr "Εγκατάσταση νέου θέματος"
+
+#: capplets/theme-switcher/theme-install.glade.h:3
+msgid "_Install"
+msgstr "_Εγκατάσταση"
+
+#: capplets/theme-switcher/theme-install.glade.h:4
+msgid "_Location of new theme:"
+msgstr "_Τοποθεσία του νέου θέματος:"
 
 #: capplets/theme-switcher/theme-properties.glade.h:2
 msgid "<span size=\"larger\" weight=\"bold\">Save theme to disk</span>"
@@ -2072,51 +2119,6 @@ msgstr "Απο_θήκευση θέματος"
 #: capplets/theme-switcher/theme-properties.glade.h:22
 msgid "_Theme name:"
 msgstr "Όνομα _θέματος: "
-
-#: capplets/theme-switcher/theme-install.glade.h:2
-msgid "Install new theme"
-msgstr "Εγκατάσταση νέου θέματος"
-
-#: capplets/theme-switcher/theme-install.glade.h:3
-msgid "_Install"
-msgstr "_Εγκατάσταση"
-
-#: capplets/theme-switcher/theme-install.glade.h:4
-msgid "_Location of new theme:"
-msgstr "_Τοποθεσία του νέου θέματος:"
-
-#: capplets/theme-switcher/gnome-theme-details.c:372
-#: capplets/theme-switcher/gnome-theme-manager.c:626
-msgid ""
-"No themes could be found on your system.  This probably means that your "
-"\"Theme Preferences\" dialog was improperly installed, or you haven't "
-"installed the \"gnome-themes\" package."
-msgstr ""
-"Δεν βρέθηκαν θέματα στο σύστημα σας. Αυτό πιθανόν να σημαίνει ότι ο διάλογος "
-"\"Προτιμήσεις Θέματος\" δεν εγκαταστάθηκε σωστά, ή ότι δεν έχετε "
-"εγκαταστήσει το πακέτο \"gnome-themes\"."
-
-#: capplets/theme-switcher/gnome-theme-save.c:72
-msgid "Theme name must be present"
-msgstr "Το όνομα θέματος πρέπει να υπάρχει"
-
-#: capplets/theme-switcher/gnome-theme-manager.c:682
-#: capplets/theme-switcher/gnome-theme-manager.c:742
-msgid "Custom theme"
-msgstr "Προσαρμοσμένο θέμα"
-
-#: capplets/theme-switcher/gnome-theme-manager.c:682
-#: capplets/theme-switcher/gnome-theme-manager.c:742
-msgid "You can save this theme by pressing the Save Theme button."
-msgstr ""
-"Μπορείτε να αποθηκεύσετε το θέμα πατώντας το κουμπί Αποθήκευση θέματος."
-
-#: capplets/theme-switcher/gnome-theme-manager.c:1435
-msgid ""
-"The default theme schemas could not be found on your system.  This means "
-"that you probably don't have metacity installed, or that your gconf is "
-"configured incorrectly."
-msgstr ""
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
@@ -2454,6 +2456,11 @@ msgstr "_Να μην εμφανιστεί ξανά αυτό το μήνυμα "
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Αδυναμία φόρτωσης αρχείου ήχου %s ώς δείγμα %s"
 
+#: gnome-settings-daemon/gnome-settings-xrdb.c:212
+#: gnome-settings-daemon/gnome-settings-xrdb.c:259
+msgid "Cannot determine user's home directory"
+msgstr ""
+
 #: gnome-settings-daemon/gnome-settings-xsettings.c:179
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
@@ -2631,6 +2638,84 @@ msgstr ""
 "πιθανές τιμές είναι:  \"καμμία\" - όχι hinting, \"ελαφρύ\", \"μέτριο\", and "
 "\"πλήρες\" - όσον το δυνατόν περισσότερο; μπορεί να προκαλέσει παραμόρφωση "
 "της φόρμας των γραμμάτων."
+
+#: vfs-methods/themus/theme-method.c:513
+msgid "Themes"
+msgstr "Θέματα"
+
+#: vfs-methods/themus/themus-properties-view.c:170
+msgid "Control theme"
+msgstr "Έλεγχος Θέματος"
+
+#: vfs-methods/themus/themus-properties-view.c:174
+msgid "Window border theme"
+msgstr "Θέμα πλαισίου παραθύρου"
+
+#: vfs-methods/themus/themus-properties-view.c:178
+msgid "Icon theme"
+msgstr "Θέμα εικονιδίου"
+
+#: vfs-methods/themus/themus-properties-view.c:217
+msgid "URI currently displayed"
+msgstr "URI το οποίο προβάλλεται"
+
+#: vfs-methods/themus/themus.schemas.in.h:1
+msgid "If set to true, then installed themes will be thumbnailed."
+msgstr ""
+"Αν ορισθεί σε true, τότε θα γίνεται προεπισκόπηση των εγκατεστημένων θεμάτων."
+
+#: vfs-methods/themus/themus.schemas.in.h:2
+msgid "If set to true, then themes will be thumbnailed."
+msgstr "Αν ορισθεί σε true, τότε θα γίνεται προεπισκόπηση των θεμάτων."
+
+#: vfs-methods/themus/themus.schemas.in.h:3
+msgid ""
+"Set this key to the command used to create thumbnails for installed themes."
+msgstr ""
+"Ορισμός αυτού του κλειδιού στην εντολή που χρησιμοποιείται για την "
+"δημιουργία προεπισκόπησης για τα εγκατεστημένα θέματα."
+
+#: vfs-methods/themus/themus.schemas.in.h:4
+msgid "Set this key to the command used to create thumbnails for themes."
+msgstr ""
+"Ορισμός αυτού του κλειδιού στην εντολή που χρησιμοποιείται για την "
+"δημιουργία προεπισκόπησης των θεμάτων."
+
+#: vfs-methods/themus/themus.schemas.in.h:5
+msgid "Thumbnail command for installed themes"
+msgstr "Εντολή προεπσικόπησης για τα εγκατεστημένα θέματα"
+
+#: vfs-methods/themus/themus.schemas.in.h:6
+msgid "Thumbnail command for themes"
+msgstr "Εντολή προεπσικόπησης για τα θέματα"
+
+#: vfs-methods/themus/themus.schemas.in.h:7
+msgid "Whether to thumbnail installed themes"
+msgstr "Αν θα γίνεται προεπισκόπηση εγκατεστημένων θεμάτων"
+
+#: vfs-methods/themus/themus.schemas.in.h:8
+msgid "Whether to thumbnail themes"
+msgstr "Αν θα γίνεται προεπισκόπηση θεμάτων"
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
+msgid "Theme Properties content view component"
+msgstr "Συστατικό όψης περιεχομένου ιδιοτήτων θέματος"
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
+msgid "Themus Theme Properties view"
+msgstr "Όψη ιδιοτήτων εικόνας του Themus"
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:1
+msgid "Apply theme..."
+msgstr "Εφαρμογή θέματος..."
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:2
+msgid "Themus component"
+msgstr "Συστατικό Themus"
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:3
+msgid "Themus component apply theme operations"
+msgstr "Λειτουργίες εφαρμογής θέματος συστατικού του Themus"
 
 #~ msgid "_Repeat Keys"
 #~ msgstr "Πλήκτ_ρα επανάληψης"
