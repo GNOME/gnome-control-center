@@ -70,9 +70,7 @@ create_dialog (void)
 {
   GladeXML *dialog;
 
-  dialog = glade_xml_new ("gnome-keybinding-properties.glade", "gnome-keybinding-dialog", NULL);
-  if (dialog == NULL)
-    dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/gnome-keybinding-properties.glade", "gnome-keybinding-dialog", NULL);
+  dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/gnome-keybinding-properties.glade", "gnome-keybinding-dialog", NULL);
 
   return dialog;
 }
@@ -346,6 +344,9 @@ key_theme_changed (GConfClient *client,
 
   menu = gtk_option_menu_get_menu (GTK_OPTION_MENU (omenu));
   value = gconf_entry_get_value (entry);
+
+  g_return_if_fail (value != NULL);
+
   new_key_theme = gconf_value_get_string (value);
 
   for (list = GTK_MENU_SHELL (menu)->children; list; list = list->next, i++)
