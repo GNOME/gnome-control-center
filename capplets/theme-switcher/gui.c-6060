@@ -62,7 +62,7 @@ make_main(void)
   gtk_box_pack_start (GTK_BOX (hbxo), button, FALSE, FALSE, 0);
   
   sw = gtk_scrolled_window_new(NULL, NULL);
-  gtk_container_add(GTK_CONTAINER(sw), l2);
+  gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(sw), l2);
   gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(sw), GTK_POLICY_AUTOMATIC,
 				 GTK_POLICY_AUTOMATIC);
   gtk_widget_set_usize (sw, 120, -1);
