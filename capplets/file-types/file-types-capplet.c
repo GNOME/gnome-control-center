@@ -699,6 +699,7 @@ populate_application_menu (GtkWidget *application_menu, const char *mime_type)
 				/* Set it as active */
 				gtk_menu_set_active (GTK_MENU (new_menu), index);
 			}
+			gnome_vfs_mime_application_free (default_app);
 		}
 	}
 	
@@ -844,6 +845,7 @@ populate_viewer_menu (GtkWidget *component_menu, const char *mime_type)
 				/* Set it as active */
 				gtk_menu_set_active (GTK_MENU (new_menu), index);
 			}
+			CORBA_free (default_component);
 		}
 	}
 	
@@ -899,7 +901,7 @@ add_mime_clicked (GtkWidget *widget, gpointer data)
 		if (description != NULL && strlen (description) > 0) {
 			text[0] = g_strdup (description);
 		} else {
-			text[0] = g_strdup ("");
+			text[0] = "";
 		}
 
 		/* Add mime type to second column */
@@ -914,7 +916,7 @@ add_mime_clicked (GtkWidget *widget, gpointer data)
 		}
 
 		/* Add default action to fourth column */
-		text[3] = _("None");
+		text[3] = g_strdup(_("None"));
 
 		/* Insert item into list */
 		row = gtk_clist_insert (GTK_CLIST (mime_list), 1, text);
@@ -949,8 +951,8 @@ add_mime_clicked (GtkWidget *widget, gpointer data)
 				case GNOME_VFS_MIME_ACTION_TYPE_APPLICATION:
 					/* Get the default application */
 					default_app = gnome_vfs_mime_get_default_application (mime_string);
-					text[3] = default_app->name;
-
+					g_free (text[3]);
+					text[3] = g_strdup (default_app->name);
 					action_icon_name = gnome_vfs_mime_get_icon (mime_string);			
 					if (action_icon_name != NULL) {
 						/* Get custom icon */
@@ -963,13 +965,16 @@ add_mime_clicked (GtkWidget *widget, gpointer data)
 						/* Use default icon */
 						pixbuf = gdk_pixbuf_new_from_file ("/gnome/share/pixmaps/nautilus/i-executable.png");
 					}
+					gnome_vfs_mime_application_free (default_app);
 					break;
 
 				case GNOME_VFS_MIME_ACTION_TYPE_COMPONENT:
 					/* Get the default component */
 					default_component = gnome_vfs_mime_get_default_component (mime_string);
+					g_free (text[3]);
 					text[3] = name_from_oaf_server_info (default_component);
 					pixbuf = gdk_pixbuf_new_from_file ("/gnome/share/pixmaps/nautilus/gnome-library.png");
+					CORBA_free (default_component);
 					break;
 					
 				default:
@@ -977,7 +982,7 @@ add_mime_clicked (GtkWidget *widget, gpointer data)
 					break;
 			}
 		}
-		
+				
 		/* Set column icon */
 		if (pixbuf != NULL) {
 			pixbuf = capplet_gdk_pixbuf_scale_to_fit (pixbuf, 18, 18);
@@ -987,6 +992,7 @@ add_mime_clicked (GtkWidget *widget, gpointer data)
 		}
 		
 		g_free (text[0]);
+		g_free (text[3]);
 		g_free (extensions);
 	}
 }
@@ -1056,9 +1062,11 @@ nautilus_mime_type_capplet_update_viewer_info (const char *mime_type)
 static void
 populate_mime_list (GList *type_list, GtkCList *clist)
 {
-	static gchar *text[3];        
-	const char *description, *action_icon_name, *description_icon_name;
-	char *extensions, *mime_string, *action_icon_path, *description_icon_path;
+	static gchar *text[4];        
+	const char *description, *description_icon_name;
+	const char *action_icon_name;
+	char *extensions, *mime_string, *description_icon_path;
+	char *action_icon_path;
         gint row;
 	GList *element;
 	GdkPixbuf *pixbuf;
@@ -1097,7 +1105,7 @@ populate_mime_list (GList *type_list, GtkCList *clist)
 			}
 
 			/* Add default action to fourth column */
-			text[3] = _("None");
+			text[3] = g_strdup(_("None"));
 
 			/* Insert item into list */
 			row = gtk_clist_insert (GTK_CLIST (clist), 1, text);
@@ -1127,13 +1135,14 @@ populate_mime_list (GList *type_list, GtkCList *clist)
 			/* Set up action column */
 			pixbuf = NULL;
 			action = gnome_vfs_mime_get_default_action (mime_string);
-			if (action != NULL) {
+			if (action != NULL) {				
 				switch (action->action_type) {
 					case GNOME_VFS_MIME_ACTION_TYPE_APPLICATION:
 						/* Get the default application */
-						default_app = gnome_vfs_mime_get_default_application (mime_string);
-						text[3] = default_app->name;
-
+						default_app = gnome_vfs_mime_get_default_application (mime_string);						
+						g_free (text[3]);
+						text[3] = g_strdup (default_app->name);
+												
 						action_icon_name = gnome_vfs_mime_get_icon (mime_string);			
 						if (action_icon_name != NULL) {
 							/* Get custom icon */
@@ -1146,13 +1155,16 @@ populate_mime_list (GList *type_list, GtkCList *clist)
 							/* Use default icon */
 							pixbuf = gdk_pixbuf_new_from_file ("/gnome/share/pixmaps/nautilus/i-executable.png");
 						}
+						gnome_vfs_mime_application_free (default_app);
 						break;
 
 					case GNOME_VFS_MIME_ACTION_TYPE_COMPONENT:
 						/* Get the default component */
 						default_component = gnome_vfs_mime_get_default_component (mime_string);
+						g_free (text[3]);
 						text[3] = name_from_oaf_server_info (default_component);
 						pixbuf = gdk_pixbuf_new_from_file ("/gnome/share/pixmaps/nautilus/gnome-library.png");
+						CORBA_free (default_component);
 						break;
 						
 					default:
@@ -1168,9 +1180,10 @@ populate_mime_list (GList *type_list, GtkCList *clist)
 				gtk_clist_set_pixtext (clist, row, 3, text[3], 5, pixmap, bitmap);
 				gdk_pixbuf_unref (pixbuf);
 			}
-			
+												
 			g_free (text[0]);
-			g_free (extensions);
+			g_free (text[3]);
+			g_free (extensions);			
 		}
 	}
 }
