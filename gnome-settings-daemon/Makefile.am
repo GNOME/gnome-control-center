@@ -73,7 +73,7 @@ IDL_FLAGS = -D__GNOME_SettingsDaemon_COMPILATION -I $(idl_dir) -I $(datadir)/idl
         -I $(LIBBONOBO_IDL_DIR)                                 \
         -I $(BONOBO_ACTIVATION_IDL_DIR)
 
-$(CORBA_GENERATED): $(idl_dir)/GNOME_SettingsDaemon.idl
+$(CORBA_GENERATED): $(idl_dir)/GNOME_SettingsDaemon.idl $(ORBIT_IDL)
 	$(ORBIT_IDL) $(IDL_FLAGS) $(idl_dir)/GNOME_SettingsDaemon.idl
 
 serverdir	= $(libdir)/bonobo/servers
