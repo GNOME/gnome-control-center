@@ -1396,7 +1396,7 @@ main (int argc, char *argv[])
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
   textdomain (GETTEXT_PACKAGE);
 
-  gnome_program_init ("gnome-theme-properties", VERSION,
+  gnome_program_init ("gnome-theme-manager", VERSION,
 		      LIBGNOMEUI_MODULE, argc, argv,
 		      GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
 		      NULL);
