@@ -189,8 +189,8 @@ prefs_widget_destroy (PrefsWidget *prefs_widget)
 
 	g_free (prefs_widget->priv);
 
-	if (GTK_OBJECT_CLASS (prefs_widget_parent_class)->destroy)
-		(*GTK_OBJECT_CLASS (prefs_widget_parent_class)->destroy) (GTK_OBJECT (prefs_widget));
+	if (prefs_widget_parent_class != NULL && GTK_OBJECT_CLASS (prefs_widget_parent_class)->destroy != NULL)
+		GTK_OBJECT_CLASS (prefs_widget_parent_class)->destroy (GTK_OBJECT (prefs_widget));
 }
 
 static void
@@ -382,6 +382,8 @@ prefs_widget_class_init (PrefsWidgetClass *class)
 
 	class->state_changed = NULL;
 	object_class->destroy = prefs_widget_destroy;
+
+	prefs_widget_parent_class = gtk_type_class (gtk_vbox_get_type ());
 }
 
 GtkWidget *
