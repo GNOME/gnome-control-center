@@ -126,6 +126,7 @@ install_theme_callback (GtkWidget *widget, gpointer data)
   /* We'd like to set a transient_for hint here, but it isn't
    * worth the bother, since our parent window isn't in this process
    */
+#if 0
   if ( gnome_preferences_get_dialog_centered() ) {
 	  /* User wants us to center over parent */
 
@@ -149,6 +150,7 @@ install_theme_callback (GtkWidget *widget, gpointer data)
 					   dialog_x, dialog_y);
 	  }
   }
+#endif
   gtk_signal_connect (GTK_OBJECT (GTK_FILE_SELECTION (install_theme_file_sel)
 				  ->ok_button), "clicked",
 		      (GtkSignalFunc) browse_dialog_ok,
@@ -258,7 +260,7 @@ make_main(void)
       /*         for now we just assume default gtk font */
       initial_font = g_strdup(_("-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"));
     } else {
-      initial_font = style->rc_style->font_name;
+      initial_font = pango_font_description_to_string (style->rc_style->font_desc);
     }
   }
 
@@ -356,22 +358,7 @@ click_preview(GtkWidget *widget, gpointer data)
 static void
 click_help(GtkWidget *widget, gpointer data)
 {
-  gchar *tmp;
-
-  tmp = gnome_help_file_find_file ("users-guide", "gccdesktop.html#GCCTHEME");
-  if (tmp) {
-    gnome_help_goto(0, tmp);
-    g_free(tmp);
-  } else {
-    GtkWidget *mbox;
-
-    mbox = gnome_message_box_new(_("No help is available/installed for these settings. Please make sure you\nhave the GNOME User's Guide installed on your system."),
-				 GNOME_MESSAGE_BOX_ERROR,
-				 _("Close"), NULL);
-    
-    gtk_widget_show(mbox);
-  }
-
+  gnome_help_display_with_doc_id (gnome_program_get (), "users-guide", "gccdesktop.html", "#GCCTHEME", NULL);
 }
 static void
 click_try(GtkWidget *widget, gpointer data)
@@ -402,11 +389,11 @@ click_try(GtkWidget *widget, gpointer data)
     {
       use_theme(rc, NULL);
     }
-  gdk_error_warnings = 0;
+  gdk_error_trap_push ();
   signal_apply_theme(widget);
   gdk_flush();
   /* system(cmd); */
-  gdk_error_warnings = 1;
+  gdk_error_trap_pop ();
 }
 static void
 click_ok(GtkWidget *widget, gpointer data)
@@ -444,10 +431,10 @@ click_revert(GtkWidget *widget, gpointer data)
        * or if the theme has been set.. */
       send_reread();
       use_theme(rc, initial_font);
-      gdk_error_warnings = 0;
+      gdk_error_trap_push ();
       signal_apply_theme(widget);
       gdk_flush();
-      gdk_error_warnings = 1;
+      gdk_error_trap_pop ();
     }
   current_global_theme = initial_theme;
   ignore_change = TRUE;

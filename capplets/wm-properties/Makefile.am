@@ -9,14 +9,16 @@ wm_properties_capplet_SOURCES = \
 	wm-properties.h         \
 	wm-properties-capplet.c \
 	wm-list.c               \
-	wm-exec.c
+	wm-exec.c		\
+	gnome-startup.c		\
+	gnome-startup.h		
 
 pixmap_DATA = 
 
 ##
 ## You should not need to modify anything below this line
 ##
-@XML_I18N_MERGE_DESKTOP_RULE@
+@INTLTOOL_DESKTOP_RULE@
 @GNOMECC_CAPPLETS_DESKTOP_IN_RULE@
 
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)

@@ -27,7 +27,7 @@
 #include <gtk/gtk.h>
 #include <gnome.h>
 
-#include <tree.h>
+#include <libxml/tree.h>
 
 #define PREFERENCES(obj)          GTK_CHECK_CAST (obj, preferences_get_type (), Preferences)
 #define PREFERENCES_CLASS(klass)  GTK_CHECK_CLASS_CAST (klass, preferences_get_type (), PreferencesClass)

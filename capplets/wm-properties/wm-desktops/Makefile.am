@@ -18,4 +18,4 @@ $(desktop_in_files): %.desktop.in: %.desktop.in.in
 	    sed s#Icon=#Icon=$(GNOMECC_ICONS_DIR)/# < $< > $@
 
 $(desktop_files): %.desktop: %.desktop.in
-	$(top_builddir)/xml-i18n-merge -d $(top_srcdir)/po $< $@
+	$(top_builddir)/intltool-merge -d $(top_srcdir)/po $< $@

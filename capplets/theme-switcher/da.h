@@ -1,5 +1,4 @@
 #include <gnome.h>
-#include <gtk-xmhtml/gtk-xmhtml.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>
 #include <sys/types.h>

@@ -36,7 +36,7 @@ capplets_DATA = $(desktop_files)
 EXTRA_DIST = $(desktop_in_files) Sawfish.directory.in.in $(pixmaps_DATA)
 
 $(desktop_files): %.desktop: %.desktop.in
-	$(top_builddir)/xml-i18n-merge -d $(top_srcdir)/po $< $@
+	$(top_builddir)/intltool-merge -d $(top_srcdir)/po $< $@
 
 
 ## Create the .directory file
@@ -58,7 +58,7 @@ $(groups_in_files): %.directory.in: %.directory.in.in
 	    sed s#Icon=\.*#Icon=$(GNOMECC_ICONS_DIR)/${group_icon}# < $< > $@
 
 $(groups_files): %.directory: %.directory.in
-	$(top_builddir)/xml-i18n-merge -d $(top_srcdir)/po $< $@
+	$(top_builddir)/intltool-merge -d $(top_srcdir)/po $< $@
 
 ## We need to install this ourselves cause we change the name of the
 ## file to .directory. 

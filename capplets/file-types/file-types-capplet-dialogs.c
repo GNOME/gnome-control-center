@@ -241,7 +241,7 @@ static gboolean
 component_is_in_list (const char *search_name, GList *component_list)
 {
 	GList *list_element;
-	OAF_ServerInfo *info;
+	Bonobo_ServerInfo *info;
 	gchar *component_name;
 
 	if (component_list == NULL || search_name == NULL) {
@@ -299,7 +299,7 @@ populate_default_components_box (GtkWidget *box, const char *mime_type)
 {
 	GList *short_component_list;
 	GList *all_component_list, *list_element;
-	OAF_ServerInfo *info;
+	Bonobo_ServerInfo *info;
 	gchar *component_name;
 	GtkWidget *button;
 		
@@ -613,7 +613,7 @@ str_has_prefix (const char *haystack, const char *needle)
 }
 
 char *
-name_from_oaf_server_info (OAF_ServerInfo *server)
+name_from_oaf_server_info (Bonobo_ServerInfo *server)
 {
         const char *view_as_name;       
 	char *display_name;
@@ -622,10 +622,10 @@ name_from_oaf_server_info (OAF_ServerInfo *server)
         display_name = NULL;
 
         langs = get_lang_list ();
-        view_as_name = oaf_server_info_prop_lookup (server, "nautilus:view_as_name", langs);
+        view_as_name = bonobo_server_info_prop_lookup (server, "nautilus:view_as_name", langs);
 		
         if (view_as_name == NULL) {
-                view_as_name = oaf_server_info_prop_lookup (server, "name", langs);
+                view_as_name = bonobo_server_info_prop_lookup (server, "name", langs);
         }
 
         if (view_as_name == NULL) {

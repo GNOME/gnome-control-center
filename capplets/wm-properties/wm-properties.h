@@ -7,13 +7,14 @@
 
 #include <gdk/gdk.h>
 #include <libgnome/libgnome.h>
+#include <libgnome/gnome-desktop-item.h>
 
-#include <tree.h>
+#include <libxml/tree.h>
 
 typedef struct _WindowManager WindowManager;
 
 struct _WindowManager {
-        GnomeDesktopEntry *dentry;
+        GnomeDesktopItem *dentry;
         gchar *config_exec;
         gchar *config_tryexec;
         gboolean session_managed : 1;

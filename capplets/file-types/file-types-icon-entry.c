@@ -53,8 +53,8 @@ nautilus_mime_type_icon_entry_get_type (void)
 			sizeof (GnomeIconEntryClass),
 			(GtkClassInitFunc) nautilus_mime_type_icon_entry_class_init,
 			(GtkObjectInitFunc) nautilus_mime_type_icon_entry_init,
-			(GtkArgSetFunc) NULL,
-			(GtkArgGetFunc) NULL
+			NULL,
+			NULL
 		};
 
 		icon_entry_type = gtk_type_unique (gtk_vbox_get_type (),
@@ -74,7 +74,6 @@ static void
 entry_changed(GtkWidget *widget, NautilusMimeIconEntry *ientry)
 {
 	gchar *t;
-	GdkImlibImage *im;
 	GtkWidget *child;
 	int w,h;
 
@@ -86,37 +85,14 @@ entry_changed(GtkWidget *widget, NautilusMimeIconEntry *ientry)
 
 	child = GTK_BIN(ientry->frame)->child;
 	
-	if (!t || !g_file_test (t, G_FILE_TEST_ISLINK|G_FILE_TEST_ISFILE) ||
-	   !(im = gdk_imlib_load_image (t))) {
-		if (GNOME_IS_PIXMAP (child)) {
-			gtk_drag_source_unset (ientry->frame);
-			gtk_widget_destroy (child);
-		}
-		g_free(t);
-		return;
-	}
-	g_free(t);
-	w = im->rgb_width;
-	h = im->rgb_height;
-	if(w>h) {
-		if(w>48) {
-			h = h*(48.0/w);
-			w = 48;
-		}
-	} else {
-		if(h>48) {
-			w = w*(48.0/h);
-			h = 48;
-		}
-	}
 	if(GNOME_IS_PIXMAP (child)) {
-		gnome_pixmap_load_imlib_at_size (GNOME_PIXMAP(child),im, w, h);
+		gnome_pixmap_load_file (GNOME_PIXMAP(child), t);
 	} else {
 		if (child != NULL) {
 			gtk_widget_destroy (child);
 		}
 		
-		child = gnome_pixmap_new_from_imlib_at_size (im, w, h);
+		child = gnome_pixmap_new_from_file (t);
 		gtk_widget_show (child);
 		gtk_container_add (GTK_CONTAINER(ientry->frame), child);
 
@@ -127,7 +103,6 @@ entry_changed(GtkWidget *widget, NautilusMimeIconEntry *ientry)
 					     GDK_ACTION_COPY);
 		}
 	}
-	gdk_imlib_destroy_image(im);
 	
 	/*gtk_drag_source_set (ientry->frame,
 			     GDK_BUTTON1_MASK|GDK_BUTTON3_MASK,
@@ -159,7 +134,7 @@ entry_activated(GtkWidget *widget, NautilusMimeIconEntry *ientry)
 		gis = gtk_object_get_user_data(GTK_OBJECT(ientry));
 		gnome_icon_selection_clear (gis, TRUE);
 		gnome_icon_selection_add_directory (gis, filename);
-		if (gis->file_list)
+/*		if (gis->file_list) */
 			gnome_icon_selection_show_icons(gis);
 	} else {
 		/* FIXME: This is a hack to act exactly like we've clicked the
@@ -176,7 +151,6 @@ setup_preview(GtkWidget *widget)
 	gchar *p;
 	GList *l;
 	GtkWidget *pp = NULL;
-	GdkImlibImage *im;
 	int w,h;
 	GtkWidget *frame;
 	GtkFileSelection *fs;
@@ -196,28 +170,12 @@ setup_preview(GtkWidget *widget)
 		gtk_widget_destroy(pp);
 	
 	p = gtk_file_selection_get_filename(fs);
-	if(!p || !g_file_test (p,G_FILE_TEST_ISLINK|G_FILE_TEST_ISFILE) ||
-	   !(im = gdk_imlib_load_image (p)))
+	if(!p || !g_file_test (p,G_FILE_TEST_IS_SYMLINK|G_FILE_TEST_IS_REGULAR))
 		return;
 
-	w = im->rgb_width;
-	h = im->rgb_height;
-	if(w>h) {
-		if(w>100) {
-			h = h*(100.0/w);
-			w = 100;
-		}
-	} else {
-		if(h>100) {
-			w = w*(100.0/h);
-			h = 100;
-		}
-	}
-	pp = gnome_pixmap_new_from_imlib_at_size (im, w, h);
+	pp = gnome_pixmap_new_from_file (p);
 	gtk_widget_show(pp);
 	gtk_container_add(GTK_CONTAINER(frame),pp);
-
-	gdk_imlib_destroy_image(im);
 }
 
 static void
@@ -322,12 +280,12 @@ nautilus_mime_type_show_icon_selection (NautilusMimeIconEntry *icon_entry)
 	}
 
 	/* figure out the directory */
-	if (!g_file_test (p, G_FILE_TEST_ISDIR)) {
+	if (!g_file_test (p, G_FILE_TEST_IS_DIR)) {
 		gchar *d;
 		d = g_dirname (p);
 		g_free (p);
 		p = d;
-		if (!g_file_test (p, G_FILE_TEST_ISDIR)) {
+		if (!g_file_test (p, G_FILE_TEST_IS_DIR)) {
 			g_free (p);
 			if (fe->default_path) {
 				p = g_strdup (fe->default_path);
@@ -339,7 +297,7 @@ nautilus_mime_type_show_icon_selection (NautilusMimeIconEntry *icon_entry)
 			}
 			gtk_entry_set_text (GTK_ENTRY (gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (icon_entry->fentry))),
 				    p);
-			g_return_if_fail (g_file_test (p,G_FILE_TEST_ISDIR));
+			g_return_if_fail (g_file_test (p,G_FILE_TEST_IS_DIR));
 		}
 	}
 	
@@ -358,7 +316,7 @@ nautilus_mime_type_show_icon_selection (NautilusMimeIconEntry *icon_entry)
 
 		icon_entry->pick_dialog_dir = p;
 		icon_entry->pick_dialog = 
-			gnome_dialog_new(GNOME_FILE_ENTRY(icon_entry->fentry)->browse_dialog_title,
+			gnome_dialog_new("",
 					 GNOME_STOCK_BUTTON_OK,
 					 GNOME_STOCK_BUTTON_CANCEL,
 					 NULL);
@@ -392,7 +350,7 @@ nautilus_mime_type_show_icon_selection (NautilusMimeIconEntry *icon_entry)
 
 		if(curfile)
 			gnome_icon_selection_select_icon(GNOME_ICON_SELECTION(iconsel), 
-							 g_filename_pointer(curfile));
+							 g_basename(curfile));
 
 		/* FIXME:
 		 * OK button is handled by caller, Cancel button is handled here.
@@ -519,7 +477,7 @@ nautilus_mime_type_icon_entry_new (const gchar *history_id, const gchar *browse_
 	gentry = gnome_file_entry_gnome_entry(GNOME_FILE_ENTRY(ientry->fentry));
 
 	gnome_entry_set_history_id (GNOME_ENTRY (gentry), history_id);
-	gnome_entry_load_history (GNOME_ENTRY (gentry));
+	/* gnome_entry_load_history (GNOME_ENTRY (gentry)); */
 	gnome_file_entry_set_title (GNOME_FILE_ENTRY(ientry->fentry),
 				    browse_dialog_title);
 	

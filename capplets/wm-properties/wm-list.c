@@ -45,13 +45,13 @@ wm_compare (gconstpointer a, gconstpointer b)
         const WindowManager *wm_a = (const WindowManager *)a;
         const WindowManager *wm_b = (const WindowManager *)b;
 
-        return g_strcasecmp (wm_a->dentry->name, wm_b->dentry->name);
+        return g_strcasecmp (gnome_desktop_item_get_string (wm_a->dentry, GNOME_DESKTOP_ITEM_NAME), gnome_desktop_item_get_string (wm_b->dentry, GNOME_DESKTOP_ITEM_NAME));
 }
 
 static void
 wm_free (WindowManager *wm)
 {
-        gnome_desktop_entry_free (wm->dentry);
+        gnome_desktop_item_unref (wm->dentry);
         g_free (wm->config_exec);
         g_free (wm->config_tryexec);;
         g_free (wm);
@@ -62,9 +62,9 @@ wm_check_present (WindowManager *wm)
 {
         gchar *path;
 
-        if (wm->dentry->exec) {
-                if (wm->dentry->tryexec) {
-                        path = gnome_is_program_in_path (wm->dentry->tryexec);
+        if (gnome_desktop_item_get_string (wm->dentry, GNOME_DESKTOP_ITEM_EXEC)) {
+                if (gnome_desktop_item_get_string (wm->dentry, GNOME_DESKTOP_ITEM_TRY_EXEC)) {
+                        path = gnome_is_program_in_path (gnome_desktop_item_get_string (wm->dentry, GNOME_DESKTOP_ITEM_TRY_EXEC));
                         wm->is_present = (path != NULL);
                         if (path)
                                 g_free (path);
@@ -95,7 +95,7 @@ wm_copy (WindowManager *wm)
 {
         WindowManager *result = g_new (WindowManager, 1);
 
-        result->dentry = gnome_desktop_entry_copy (wm->dentry);
+        result->dentry = gnome_desktop_item_copy (wm->dentry);
         result->config_exec = g_strdup (wm->config_exec);
         result->config_tryexec = g_strdup (wm->config_tryexec);
 
@@ -114,7 +114,7 @@ wm_list_find (GList *list, gchar *name)
         GList *tmp_list = list;
         while (tmp_list) {
                 WindowManager *wm = tmp_list->data;
-                if (strcmp (wm->dentry->name, name) == 0)
+                if (strcmp (gnome_desktop_item_get_string (wm->dentry, GNOME_DESKTOP_ITEM_EXEC), name) == 0)
                         return wm;
 
                 tmp_list = tmp_list->next;
@@ -129,9 +129,9 @@ wm_list_find_exec (GList *list, gchar *name)
         GList *tmp_list = list;
         while (tmp_list) {
                 WindowManager *wm = tmp_list->data;
-                if (!wm->dentry->exec || !wm->dentry->exec[0])
-                        continue;
-                if (strcmp (wm->dentry->exec[0], name) == 0)
+		if (!gnome_desktop_item_get_string (wm->dentry, GNOME_DESKTOP_ITEM_EXEC))
+			continue;
+                if (strcmp (gnome_desktop_item_get_string (wm->dentry, GNOME_DESKTOP_ITEM_EXEC), name) == 0)
                         return wm;
 
                 tmp_list = tmp_list->next;
@@ -186,14 +186,15 @@ wm_list_read_dir (gchar *directory, gboolean is_user)
         while (tmp_list) {
                 wm = g_new (WindowManager, 1);
 
-                wm->dentry = gnome_desktop_entry_load_unconditional (tmp_list->data);
+                wm->dentry = gnome_desktop_item_new_from_file (tmp_list->data, GNOME_DESKTOP_ITEM_TYPE_APPLICATION, NULL);
+
                 if (!wm->dentry) {
                         g_free (wm);
                         tmp_list = tmp_list->next;
                         continue;
                 }
 
-                prefix = g_strconcat ("=", wm->dentry->location, "=/Window Manager/", NULL);
+                prefix = g_strconcat ("=", gnome_desktop_item_get_location (wm->dentry), "=/Window Manager/", NULL);
                 gnome_config_push_prefix (prefix);
                 g_free (prefix);
 
@@ -216,7 +217,7 @@ wm_list_read_dir (gchar *directory, gboolean is_user)
 
                 wm_check_present (wm);
 
-                if (wm->dentry->name && wm->dentry->exec &&
+                if (gnome_desktop_item_get_string (wm->dentry, GNOME_DESKTOP_ITEM_NAME) && gnome_desktop_item_get_string (wm->dentry, GNOME_DESKTOP_ITEM_EXEC) &&
                     (wm->is_user || wm->is_present)) {
                         window_managers = 
                                 g_list_insert_sorted (window_managers, 
@@ -285,7 +286,7 @@ wm_list_init (void)
                 current_wm = window_managers->data;
 
         if(current_wm)
-                current_wm_save = wm_list_find (window_managers_save, current_wm->dentry->name);
+                current_wm_save = wm_list_find (window_managers_save, gnome_desktop_item_get_string (current_wm->dentry, GNOME_DESKTOP_ITEM_NAME));
 }
 
 void
@@ -324,9 +325,9 @@ wm_list_save (void)
                 wm = tmp_list->data;
 
                 if (wm->is_user) {
-                        gnome_desktop_entry_save (wm->dentry);
+                        gnome_desktop_item_save (wm->dentry, NULL, TRUE, NULL);
                         
-                        prefix = g_strconcat ("=", wm->dentry->location, "=/Window Manager/", NULL);
+                        prefix = g_strconcat ("=", gnome_desktop_item_get_location (wm->dentry), "=/Window Manager/", NULL);
                         gnome_config_push_prefix (prefix);
                         g_free (prefix);
 
@@ -345,7 +346,7 @@ wm_list_save (void)
          */
         if(current_wm)
                 gnome_config_set_string ("wm-properties/Config/Config/Current",
-                                         current_wm->dentry->name);
+                                         gnome_desktop_item_get_string (current_wm->dentry, GNOME_DESKTOP_ITEM_NAME));
         gnome_config_sync ();
 }
 
@@ -356,7 +357,7 @@ wm_list_revert (void)
         gchar *old_name = NULL;
 
         if(current_wm)
-                old_name = g_strdup (current_wm->dentry->name);
+                old_name = g_strdup (gnome_desktop_item_get_string (current_wm->dentry, GNOME_DESKTOP_ITEM_NAME));
         
         g_list_foreach (window_managers, (GFunc)wm_free, NULL);
         g_list_free (window_managers);
@@ -414,7 +415,7 @@ WindowManager *
 wm_list_get_revert (void)
 {
         if(current_wm_save)
-                return wm_list_find (window_managers, current_wm_save->dentry->name);
+                return wm_list_find (window_managers, gnome_desktop_item_get_string (current_wm_save->dentry, GNOME_DESKTOP_ITEM_NAME));
         else
                 return NULL;
 }
@@ -430,10 +431,11 @@ wm_read_from_xml (xmlNodePtr wm_node)
 
         wm = g_new0 (WindowManager, 1);
 
-        wm->dentry = gnome_desktop_entry_load_unconditional
-                (xmlGetProp (wm_node, "desktop-entry"));
+        wm->dentry = gnome_desktop_item_new_from_file
+                (xmlGetProp (wm_node, "desktop-entry"),
+		 GNOME_DESKTOP_ITEM_TYPE_APPLICATION, NULL);
 
-        for (node = wm_node->childs; node; node = node->next) {
+        for (node = wm_node->children; node; node = node->next) {
                 if (!strcmp (node->name, "config-exec"))
                         wm->config_exec = xmlNodeGetContent (node);
                 else if (!strcmp (node->name, "config-tryexec"))
@@ -450,7 +452,7 @@ wm_read_from_xml (xmlNodePtr wm_node)
 
         if (wm->dentry == NULL || 
             (wm->config_exec != NULL && is_blank (wm->config_exec)) ||
-            wm->dentry->name == NULL || wm->dentry->exec == NULL || 
+            gnome_desktop_item_get_string (wm->dentry, GNOME_DESKTOP_ITEM_NAME) == NULL || gnome_desktop_item_get_string (wm->dentry, GNOME_DESKTOP_ITEM_EXEC) == NULL || 
             !(wm->is_user || wm->is_present)) 
         {
                 g_free (wm);
@@ -488,7 +490,7 @@ wm_write_to_xml (WindowManager *wm)
 
         node = xmlNewNode (NULL, "window-manager");
 
-        xmlNewProp (node, "desktop-entry", wm->dentry->location);
+        xmlNewProp (node, "desktop-entry", gnome_desktop_item_get_location (wm->dentry));
 
         if (wm->config_exec != NULL)
                 xmlNewChild (node, NULL, "config-exec", wm->config_exec);

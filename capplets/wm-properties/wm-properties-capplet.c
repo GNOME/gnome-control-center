@@ -10,7 +10,7 @@
 #endif
 
 #include <ctype.h>
-#include <parser.h>
+#include <libxml/parser.h>
 #include "wm-properties.h"
 #include "capplet-widget.h"
 #include "gnome.h"
@@ -19,6 +19,8 @@
 #  include <ximian-archiver/archive.h>
 #  include <ximian-archiver/location.h>
 #endif /* HAVE_XIMIAN_ARCHIVER */
+
+#include "gnome-startup.h"
 
 /* prototypes */
 static void restart         (gboolean force);
@@ -329,10 +331,10 @@ update_gui (void)
 
                 if (wm == current_wm) {
                         row_text = g_strdup_printf (_("%s (Current)"),
-                                              wm->dentry->name);
+                                              gnome_desktop_item_get_string (wm->dentry, GNOME_DESKTOP_ITEM_NAME));
 
                         tmpstr = g_strdup_printf (_("Run Configuration Tool for %s"),
-                                              wm->dentry->name);
+                                              gnome_desktop_item_get_string (wm->dentry, GNOME_DESKTOP_ITEM_NAME));
                                               
                         gtk_label_set_text (GTK_LABEL (GTK_BIN (config_button)->child),
                                             tmpstr);
@@ -341,10 +343,10 @@ update_gui (void)
 
                         g_free (tmpstr);
                 } else if (wm->is_user && !wm->is_present) {
-                        row_text = g_strconcat (wm->dentry->name,
+                        row_text = g_strconcat (gnome_desktop_item_get_string (wm->dentry, GNOME_DESKTOP_ITEM_NAME),
                                                 _(" (Not found)"), NULL);
                 } else {
-                        row_text = g_strdup (wm->dentry->name);
+                        row_text = g_strdup (gnome_desktop_item_get_string (wm->dentry, GNOME_DESKTOP_ITEM_NAME));
                 }
                 
                 new_row = gtk_clist_append (GTK_CLIST (clist), &row_text);
@@ -469,8 +471,8 @@ restart_failure (WMResult reason)
                 case STATE_CANCEL:
                         msg = g_strdup_printf (_("Could not start '%s'.\n"
                                                  "Falling back to previous window manager '%s'\n"),
-                                               selected_wm?selected_wm->dentry->name:"Unknown",
-                                               current_wm?current_wm->dentry->name:"Unknown");
+                                               selected_wm?gnome_desktop_item_get_string (selected_wm->dentry, GNOME_DESKTOP_ITEM_NAME):"Unknown",
+                                               current_wm?gnome_desktop_item_get_string (current_wm->dentry, GNOME_DESKTOP_ITEM_NAME):"Unknown");
                         selected_wm = current_wm;
                         restart(TRUE);
                         break;
@@ -610,12 +612,15 @@ restart (gboolean force)
 {
         WindowManager *current_wm = wm_list_get_current(), *mywm;
         static gboolean last_try_was_twm = FALSE;
-        const char *twm_argv[] = {"twm", NULL};
-        const GnomeDesktopEntry twm_dentry = {"twm", "twm",
-                                              1, (char **)twm_argv, NULL,
-                                              NULL, NULL, 0, NULL,
-                                              NULL, NULL, 0, 0};
-        WindowManager twm_fallback = {(GnomeDesktopEntry*)&twm_dentry, "twm", "twm", 0, 0, 1, 0};
+        GnomeDesktopItem *twm_dentry = gnome_desktop_item_new ();
+        WindowManager twm_fallback = {twm_dentry, "twm", "twm", 0, 0, 1, 0};
+
+	gnome_desktop_item_set_string (twm_dentry,
+				       GNOME_DESKTOP_ITEM_NAME, "twm");
+	gnome_desktop_item_set_string (twm_dentry,
+				       GNOME_DESKTOP_ITEM_COMMENT, "twm");
+	gnome_desktop_item_set_string (twm_dentry,
+				       GNOME_DESKTOP_ITEM_EXEC, "twm");
 
         if(selected_wm) {
                 last_try_was_twm = FALSE;
@@ -625,11 +630,12 @@ restart (gboolean force)
                 mywm = (WindowManager*)&twm_fallback;
         } else {
                 restart_finalize();
+		gnome_desktop_item_unref (twm_dentry);
                 return;
         }
 
         if (force || current_wm != mywm) {
-                show_restart_dialog (mywm->dentry->name);
+                show_restart_dialog (gnome_desktop_item_get_string (mywm->dentry, GNOME_DESKTOP_ITEM_NAME));
                 if (state != STATE_OK && state != STATE_CANCEL)
                         gtk_widget_set_sensitive (capplet, FALSE);
                 restart_pending = TRUE;
@@ -640,6 +646,8 @@ restart (gboolean force)
         } else {
                 restart_finalize ();
         }
+	
+	gnome_desktop_item_unref (twm_dentry);
 }
 
 static void
@@ -659,19 +667,7 @@ help_callback (void)
 {
   gchar *tmp;
 
-  tmp = gnome_help_file_find_file ("users-guide", "gccdesktop.html#GCCWM");
-  if (tmp) {
-    gnome_help_goto(0, tmp);
-    g_free(tmp);
-  } else {
-    GtkWidget *mbox;
-
-    mbox = gnome_message_box_new(_("No help is available/installed for these settings. Please make sure you\nhave the GNOME User's Guide installed on your system."),
-				 GNOME_MESSAGE_BOX_ERROR,
-				 _("Close"), NULL);
-
-    gtk_widget_show(mbox);
-  }
+  gnome_help_display_with_doc_id (gnome_program_get (), "users-guide", "gccdesktop.html", "#GCCWM", NULL);
 }
 
 static void
@@ -906,25 +902,24 @@ static void
 get_dialog_contents (WMDialog *dialog, WindowManager *wm)
 {
         gchar *tmp;
-        
-        if (wm->dentry->name)
-                g_free (wm->dentry->name);
-        wm->dentry->name = extract_entry (dialog->name_entry);
+       
+	tmp = extract_entry (dialog->name_entry);
+	gnome_desktop_item_set_string (wm->dentry, GNOME_DESKTOP_ITEM_NAME,
+				       tmp);
+	g_free (tmp);
 
-        if (wm->dentry->exec)
-                g_strfreev (wm->dentry->exec);
         tmp = extract_entry (dialog->exec_entry);
-        gnome_config_make_vector (tmp, &wm->dentry->exec_length,
-                                  &wm->dentry->exec);
+	gnome_desktop_item_set_string (wm->dentry, GNOME_DESKTOP_ITEM_EXEC,
+				       tmp);
         g_free (tmp);
         
         if (wm->config_exec)
                 g_free (wm->config_exec);
         wm->config_exec = extract_entry (dialog->config_entry);
 
-        if (wm->dentry->location)
-                g_free (wm->dentry->location);
-        wm->dentry->location = make_filename (wm->dentry->name);
+        tmp = make_filename (gnome_desktop_item_get_string (wm->dentry, GNOME_DESKTOP_ITEM_NAME));
+	gnome_desktop_item_set_location (wm->dentry, tmp);
+	g_free (tmp);
 
         wm->session_managed = !!GTK_TOGGLE_BUTTON (dialog->sm_toggle)->active;
 
@@ -943,15 +938,11 @@ edit_dialog (void)
 
         dialog = create_dialog (_("Edit Window Manager"));
 
-        if (selected_wm->dentry->name)
-                gtk_entry_set_text (GTK_ENTRY (dialog->name_entry), selected_wm->dentry->name);
+        if (gnome_desktop_item_get_string (selected_wm->dentry, GNOME_DESKTOP_ITEM_NAME))
+                gtk_entry_set_text (GTK_ENTRY (dialog->name_entry), gnome_desktop_item_get_string (selected_wm->dentry, GNOME_DESKTOP_ITEM_NAME));
                 
-        if (selected_wm->dentry->exec) {
-                tmp = gnome_config_assemble_vector (selected_wm->dentry->exec_length,
-                                                    (const char **)selected_wm->dentry->exec);
-                gtk_entry_set_text (GTK_ENTRY (dialog->exec_entry), tmp);
-                g_free (tmp);
-        }
+        if (gnome_desktop_item_get_string (selected_wm->dentry, GNOME_DESKTOP_ITEM_EXEC))
+                gtk_entry_set_text (GTK_ENTRY (dialog->exec_entry), gnome_desktop_item_get_string (selected_wm->dentry, GNOME_DESKTOP_ITEM_EXEC));
         
         if (selected_wm->config_exec)
                 gtk_entry_set_text (GTK_ENTRY (dialog->config_entry), selected_wm->config_exec);
@@ -993,7 +984,7 @@ add_dialog (void)
 
         if (result == 0) {
                 wm = g_new0 (WindowManager, 1);
-                wm->dentry = g_new0 (GnomeDesktopEntry, 1);
+                wm->dentry = gnome_desktop_item_new ();
                 get_dialog_contents (dialog, wm);
 
                 wm->is_user = TRUE;
@@ -1241,7 +1232,7 @@ main (int argc, char **argv)
                     !wm_is_running()) {
 
                         wm_restart (selected_wm, NULL, init_callback, 
-                                    g_strdup (selected_wm->dentry->name));
+                                    g_strdup (gnome_desktop_item_get_string (selected_wm->dentry, GNOME_DESKTOP_ITEM_NAME)));
                         gtk_main ();
                 }
 

@@ -12,7 +12,7 @@
 typedef struct _RestartInfo RestartInfo;
 
 struct _RestartInfo {
-        GnomeDesktopEntry *dentry;
+        GnomeDesktopItem *dentry;
         gint retries;
         WMResultFunc callback;
         gpointer data;
@@ -22,26 +22,24 @@ gboolean
 wm_is_running (void)
 {
         gboolean result;
-        gboolean old_warnings = gdk_error_warnings;
         guint old_mask;
         XWindowAttributes attrs;
         
-        gdk_error_warnings = FALSE;
-        gdk_error_code = 0;
+	gdk_error_trap_push ();
 
         XGetWindowAttributes (GDK_DISPLAY(), GDK_ROOT_WINDOW(), &attrs);
         
         XSelectInput (GDK_DISPLAY(), GDK_ROOT_WINDOW(),
                       SubstructureRedirectMask);
         XSync (GDK_DISPLAY(), False);
-        if (gdk_error_code == 0) {
+        if (gdk_error_trap_pop () == 0) {
                 result = FALSE;
                 XSelectInput (GDK_DISPLAY(), GDK_ROOT_WINDOW(), 
                               attrs.your_event_mask);
         } else
                 result = TRUE;
 
-        gdk_error_warnings = old_warnings;
+
         return result;
 }
 
@@ -56,31 +54,29 @@ find_gnome_wm_window(void)
   unsigned long count;
   unsigned long bytes_remain;
   unsigned char *prop, *prop2;
-  gint prev_error;
   GdkAtom cardinal_atom = gdk_atom_intern ("CARDINAL", FALSE);
   
-  prev_error = gdk_error_warnings;
-  gdk_error_warnings = 0;  
+  gdk_error_trap_push ();
   if (XGetWindowProperty(GDK_DISPLAY(), GDK_ROOT_WINDOW(),
-                         gdk_atom_intern ("_WIN_SUPPORTING_WM_CHECK", FALSE),
-                         0, 1, False, cardinal_atom,
+                         gdk_x11_atom_to_xatom (gdk_atom_intern ("_WIN_SUPPORTING_WM_CHECK", FALSE)),
+                         0, 1, False, gdk_x11_atom_to_xatom (cardinal_atom),
 			 &r_type, &r_format,
 			 &count, &bytes_remain, &prop) == Success && prop)
     {
-      if (r_type == cardinal_atom && r_format == 32 && count == 1)
+      if (r_type == gdk_x11_atom_to_xatom (cardinal_atom) && r_format == 32 && count == 1)
         {
 	  Window n = *(long *)prop;
 	  if (XGetWindowProperty(GDK_DISPLAY(), n,
-                                 gdk_atom_intern ("_WIN_SUPPORTING_WM_CHECK", FALSE),
-                                 0, 1, False, cardinal_atom,
+                                 gdk_x11_atom_to_xatom (gdk_atom_intern ("_WIN_SUPPORTING_WM_CHECK", FALSE)),
+                                 0, 1, False, gdk_x11_atom_to_xatom (cardinal_atom),
 				 &r_type, &r_format, &count, &bytes_remain, 
 				 &prop2) == Success && prop)
 	    {
-	      if (r_type == cardinal_atom && r_format == 32 && count == 1)
+	      if (r_type == gdk_x11_atom_to_xatom (cardinal_atom) && r_format == 32 && count == 1)
 		{
 		  XFree(prop);
 		  XFree(prop2);
-		  gdk_error_warnings = prev_error;
+		  gdk_error_trap_pop ();
 		  return n;
 		}
 	      XFree(prop2);
@@ -88,7 +84,7 @@ find_gnome_wm_window(void)
         }
       XFree(prop);
     }       
-  gdk_error_warnings = prev_error;
+  gdk_error_trap_pop ();
   return None;
 }
 
@@ -98,7 +94,7 @@ find_wm_window_from_client (GdkWindow *client)
         Window window, frame, parent, root;
         Window *children;
         unsigned int nchildren;
-        gboolean old_warnings;
+	gboolean needs_pop = TRUE;
 
         if (!client)
                 return None;
@@ -106,14 +102,19 @@ find_wm_window_from_client (GdkWindow *client)
         frame = None;
         window = GDK_WINDOW_XWINDOW (client);
         
-        old_warnings = gdk_error_warnings;
-        gdk_error_warnings = FALSE;
-        gdk_error_code = 0;
+	gdk_error_trap_push ();
 
         while (XQueryTree (GDK_DISPLAY(), window,
-                           &root, &parent, &children, &nchildren) &&
-               (gdk_error_code == 0)) {
-                
+                           &root, &parent, &children, &nchildren))
+	{
+		if (gdk_error_trap_pop != 0)
+		{
+			needs_pop = FALSE;
+			break;
+		}
+		
+               	gdk_error_trap_push ();
+		
                 if (children)
                         XFree(children);
 
@@ -127,7 +128,8 @@ find_wm_window_from_client (GdkWindow *client)
                 window = parent;
         }
         
-        gdk_error_warnings = old_warnings;
+	if (needs_pop)
+		gdk_error_trap_pop ();
 
         return frame;
 }
@@ -142,7 +144,7 @@ window_has_wm_state (Window window)
   unsigned char *prop;
   
   if (XGetWindowProperty(GDK_DISPLAY(), window,
-                         gdk_atom_intern ("WM_STATE", FALSE),
+                         gdk_x11_atom_to_xatom (gdk_atom_intern ("WM_STATE", FALSE)),
                          0, 0, False, AnyPropertyType,
 			 &r_type, &r_format,
 			 &count, &bytes_remain, &prop) == Success) {
@@ -191,16 +193,13 @@ find_wm_window_from_hunt (void)
         Window parent, root, frame;
         Window *children;
         unsigned int nchildren;
-        gboolean old_warnings;
         gint i;
 
         frame = None;
         
-        old_warnings = gdk_error_warnings;
-        gdk_error_warnings = FALSE;
-        gdk_error_code = 0;
+	gdk_error_trap_push ();
 
-        XQueryTree (GDK_DISPLAY(), gdk_root_window,
+        XQueryTree (GDK_DISPLAY(), GDK_ROOT_WINDOW (),
                     &root, &parent, &children, &nchildren);
 
         /* We are looking for a window that doesn't have WIN_STATE
@@ -217,7 +216,7 @@ find_wm_window_from_hunt (void)
         if (children)
                 XFree (children);
         
-        gdk_error_warnings = old_warnings;
+	gdk_error_trap_pop ();
 
         return frame;
 }
@@ -248,7 +247,7 @@ start_timeout (gpointer data)
         RestartInfo *info = data;
         if (wm_is_running ()) {
                 info->callback(WM_SUCCESS, info->data);
-                gnome_desktop_entry_free (info->dentry);
+                gnome_desktop_item_unref (info->dentry);
                 g_free (info);
                 return FALSE;
         } else {
@@ -257,7 +256,7 @@ start_timeout (gpointer data)
                         return TRUE;
                 else {                         
                         info->callback(WM_CANT_START, info->data);
-                        gnome_desktop_entry_free (info->dentry);
+                        gnome_desktop_item_unref (info->dentry);
                         g_free (info);
                         return FALSE;
                 }
@@ -267,7 +266,7 @@ start_timeout (gpointer data)
 static void
 start_do (RestartInfo *info)
 {
-        gnome_desktop_entry_launch (info->dentry);
+        gnome_desktop_item_launch (info->dentry, 0, NULL, NULL);
 
         info->retries = 10;
         gtk_timeout_add (1000, start_timeout, info);
@@ -286,7 +285,7 @@ kill_timeout (gpointer data)
                         return TRUE;
                 else {                         
                         info->callback(WM_ALREADY_RUNNING, info->data);
-                        gnome_desktop_entry_free (info->dentry);
+                        gnome_desktop_item_unref (info->dentry);
                         g_free (info);
                         return FALSE;
                 }
@@ -305,7 +304,7 @@ wm_restart (WindowManager *new,
         g_return_if_fail (new->is_present);
         
         info = g_new (RestartInfo, 1);
-        info->dentry = gnome_desktop_entry_copy (new->dentry);
+        info->dentry = gnome_desktop_item_copy (new->dentry);
         info->callback = callback;
         info->data = data;
         info->retries = 10;
@@ -314,7 +313,7 @@ wm_restart (WindowManager *new,
                 wm_window = find_wm_window (client);
                 if (!wm_window) {
                         (*callback) (WM_ALREADY_RUNNING, data);
-                        gnome_desktop_entry_free (info->dentry);
+                        gnome_desktop_item_unref (info->dentry);
                         g_free (info);
                 } else {
                         XKillClient (GDK_DISPLAY(), wm_window);

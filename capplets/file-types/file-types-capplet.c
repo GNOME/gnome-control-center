@@ -82,8 +82,6 @@ static void	 gtk_widget_make_bold 			(GtkWidget 	*widget);
 static GdkFont 	 *gdk_font_get_bold 			(const GdkFont  *plain_font);
 static void	 gtk_widget_set_font 			(GtkWidget 	*widget, 
 						 	 GdkFont 	*font);
-static void	 gtk_style_set_font 			(GtkStyle 	*style, 
-						 	 GdkFont 	*font);
 static GdkPixbuf *capplet_gdk_pixbuf_scale_to_fit 	(GdkPixbuf 	*pixbuf, 
 							 int 		max_width, 
 							 int 		max_height);
@@ -192,22 +190,6 @@ main (int argc, char **argv)
 
 	gnome_vfs_init ();
 
-#ifdef MATHIEU_DEBUG
-	nautilus_make_warnings_and_criticals_stop_in_debugger (G_LOG_DOMAIN, g_log_domain_glib,
-							       "Bonobo",
-							       "Gdk",
-							       "GnomeUI",
-							       "GnomeVFS",
-							       "GnomeVFS-CORBA",
-							       "GnomeVFS-pthread",
-							       "Gtk",
-							       "Nautilus",
-							       "Nautilus-Authenticate",
-							       "Nautilus-Tree",
-							       "ORBit",
-							       NULL);
-							       
-#endif /* MATHIEU_DEBUG */
 	if (init_results == 0) {
 		init_mime_capplet (mime_type);
 	        capplet_gtk_main ();
@@ -457,7 +439,7 @@ change_icon_clicked (GtkWidget *entry, gpointer user_data)
 	gtk_signal_connect (GTK_OBJECT (dialog), "clicked", change_icon_clicked_cb_real, user_data);
 
 	gis = gtk_object_get_user_data(GTK_OBJECT(user_data));
-	gtk_signal_connect_after (GTK_OBJECT(GNOME_ICON_SELECTION(gis)->gil), 
+	gtk_signal_connect_after (GTK_OBJECT(gnome_icon_selection_get_gil(GNOME_ICON_SELECTION(gis))), 
 				  "select_icon", icon_chosen_callback, user_data);
 
 }
@@ -1164,8 +1146,8 @@ populate_viewer_menu (GtkWidget *component_menu, const char *mime_type)
 {
 	GtkWidget *new_menu, *menu_item;
 	GList *component_list, *copy_list;
-	OAF_ServerInfo *default_component;
-	OAF_ServerInfo *info;
+	Bonobo_ServerInfo *default_component;
+	Bonobo_ServerInfo *info;
 	gboolean has_none, found_match;
 	char *mime_copy, *component_name;
 	const char *iid;
@@ -1362,7 +1344,7 @@ add_mime_clicked (GtkWidget *widget, gpointer data)
 	GdkBitmap *bitmap;
 	GnomeVFSMimeAction *action;
 	GnomeVFSMimeApplication *default_app;
-	OAF_ServerInfo *default_component;
+	Bonobo_ServerInfo *default_component;
 	int found_index;
 	
 	mime_string = nautilus_mime_type_capplet_show_new_mime_window ();
@@ -1419,7 +1401,7 @@ add_mime_clicked (GtkWidget *widget, gpointer data)
 
 					filename = capplet_get_icon_path (DEFAULT_ACTION_ICON);
 					if (filename != NULL) {
-						pixbuf = gdk_pixbuf_new_from_file (filename);
+						pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
 						g_free (filename);
 					}
 
@@ -1435,7 +1417,7 @@ add_mime_clicked (GtkWidget *widget, gpointer data)
 					g_free (tmp_text);
 					filename = capplet_get_icon_path ("nautilus/gnome-library.png");
 					if (filename != NULL) {
-						pixbuf = gdk_pixbuf_new_from_file (filename);
+						pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
 						g_free (filename);
 					}
 					CORBA_free (default_component);
@@ -1583,7 +1565,7 @@ update_mime_list_action (const char *mime_string)
 	GdkBitmap *bitmap;
 	GnomeVFSMimeAction *action;
 	GnomeVFSMimeApplication *default_app;
-	OAF_ServerInfo *default_component;
+	Bonobo_ServerInfo *default_component;
 	char *text, *tmp_text, *icon_path;
 	int row;
 	
@@ -1606,7 +1588,7 @@ update_mime_list_action (const char *mime_string)
 				text = g_strdup (default_app->name);							
 				icon_path = capplet_get_icon_path (DEFAULT_ACTION_ICON);
 				if (icon_path != NULL) {
-					pixbuf = gdk_pixbuf_new_from_file (icon_path);
+					pixbuf = gdk_pixbuf_new_from_file (icon_path, NULL);
 					g_free (icon_path);
 				}
 				gnome_vfs_mime_application_free (default_app);
@@ -1621,7 +1603,7 @@ update_mime_list_action (const char *mime_string)
 				g_free (tmp_text);
 				icon_path = capplet_get_icon_path ("nautilus/gnome-library.png");
 				if (icon_path != NULL) {
-					pixbuf = gdk_pixbuf_new_from_file (icon_path);
+					pixbuf = gdk_pixbuf_new_from_file (icon_path, NULL);
 					g_free (icon_path);
 				}
 				CORBA_free (default_component);
@@ -1668,7 +1650,7 @@ capplet_get_icon_pixbuf (const char *mime_string, gboolean is_executable)
 
 	icon_path = capplet_get_icon_path (icon_name);
 	if (icon_path != NULL) {
-		pixbuf = gdk_pixbuf_new_from_file (icon_path);
+		pixbuf = gdk_pixbuf_new_from_file (icon_path, NULL);
 		g_free (icon_path);
 	}
 
@@ -1689,7 +1671,7 @@ populate_mime_list (GList *type_list, GtkCList *clist)
 	GdkBitmap *bitmap;
 	GnomeVFSMimeAction *action;
 	GnomeVFSMimeApplication *default_app;
-	OAF_ServerInfo *default_component;
+	Bonobo_ServerInfo *default_component;
 
 	for (element = type_list; element != NULL; element= element->next) {
 		mime_string = (char *)element->data;
@@ -1749,7 +1731,7 @@ populate_mime_list (GList *type_list, GtkCList *clist)
 				
 				icon_path = capplet_get_icon_path (DEFAULT_ACTION_ICON);
 				if (icon_path != NULL) {
-					pixbuf = gdk_pixbuf_new_from_file (icon_path);
+					pixbuf = gdk_pixbuf_new_from_file (icon_path, NULL);
 					g_free (icon_path);
 				}
 				gnome_vfs_mime_application_free (default_app);
@@ -1764,7 +1746,7 @@ populate_mime_list (GList *type_list, GtkCList *clist)
 				g_free (tmp_text);
 				icon_path = capplet_get_icon_path ("nautilus/gnome-library.png");
 				if (icon_path != NULL) {
-					pixbuf = gdk_pixbuf_new_from_file (icon_path);
+					pixbuf = gdk_pixbuf_new_from_file (icon_path, NULL);
 					g_free (icon_path);
 				}
 				CORBA_free (default_component);
@@ -1866,8 +1848,8 @@ mime_list_reset_row_height (GtkCList *list)
 	guint height_for_text;
 
 	height_for_icon = MAX_ICON_HEIGHT_IN_LIST + 1;
-	height_for_text = GTK_WIDGET (list)->style->font->ascent +
-			  GTK_WIDGET (list)->style->font->descent + 1;
+	height_for_text = gtk_style_get_font (GTK_WIDGET (list)->style)->ascent +
+			  gtk_style_get_font (GTK_WIDGET (list)->style)->descent + 1;
 	gtk_clist_set_row_height (list, MAX (height_for_icon, height_for_text));
 }
 
@@ -1963,7 +1945,7 @@ gtk_widget_make_bold (GtkWidget *widget)
 	g_return_if_fail (GTK_IS_WIDGET (widget));
 	style = gtk_widget_get_style (widget);
 
-	bold_font = gdk_font_get_bold (style->font);
+	bold_font = gdk_font_get_bold (gtk_style_get_font (style));
 
 	if (bold_font == NULL) {
 		return;
@@ -1997,24 +1979,6 @@ gtk_widget_set_font (GtkWidget *widget, GdkFont *font)
 }
 
 /**
- * gtk_style_set_font
- *
- * Sets the font in a style object, managing the ref. counts.
- * @style: The style to change.
- * @font: The new font.
- **/
-static void
-gtk_style_set_font (GtkStyle *style, GdkFont *font)
-{
-	g_return_if_fail (style != NULL);
-	g_return_if_fail (font != NULL);
-	
-	gdk_font_ref (font);
-	gdk_font_unref (style->font);
-	style->font = font;
-}
-
-/**
  * gdk_font_get_bold
  * @plain_font: A font.
  * Returns: A bold variant of @plain_font or NULL.
@@ -2024,63 +1988,7 @@ gtk_style_set_font (GtkStyle *style, GdkFont *font)
 static GdkFont *
 gdk_font_get_bold (const GdkFont *plain_font)
 {
-	const char *plain_name;
-	const char *scanner;
-	char *bold_name;
-	int count;
-	GSList *p;
-	GdkFont *result;
-	GdkFontPrivate *private_plain;
-
-	private_plain = (GdkFontPrivate *)plain_font;
-
-	if (private_plain->names == NULL) {
-		return NULL;
-	}
-
-
-	/* -foundry-family-weight-slant-sel_width-add-style-pixels-points-hor_res-ver_res-spacing-average_width-char_set_registry-char_set_encoding */
-
-	bold_name = NULL;
-	for (p = private_plain->names; p != NULL; p = p->next) {
-		plain_name = (const char *)p->data;
-		scanner = plain_name;
-
-		/* skip past foundry and family to weight */
-		for (count = 2; count > 0; count--) {
-			scanner = strchr (scanner + 1, '-');
-			if (!scanner) {
-				break;
-			}
-		}
-
-		if (!scanner) {
-			/* try the other names in the list */
-			continue;
-		}
-		g_assert (*scanner == '-');
-
-		/* copy "-foundry-family-" over */
-		scanner++;
-		bold_name = g_strndup (plain_name, scanner - plain_name);
-
-		/* skip weight */
-		scanner = strchr (scanner, '-');
-		g_assert (scanner != NULL);
-
-		/* add "bold" and copy everything past weight over */
-		bold_name = g_strconcat (bold_name, "bold", scanner, NULL);
-		break;
-	}
-	
-	if (bold_name == NULL) {
-		return NULL;
-	}
-	
-	result = gdk_font_load (bold_name);
-	g_free (bold_name);
-
-	return result;
+	return gdk_font_ref (plain_font);
 }
 
 
