@@ -48,9 +48,9 @@ main (int argc, char **argv)
 	CORBA_ORB orb;
 	GtkObject *dialog;
 
-        bindtextdomain (PACKAGE, GNOMELOCALEDIR);
-	bind_textdomain_codeset (PACKAGE, "UTF-8");
-        textdomain (PACKAGE);
+        bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
+	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+        textdomain (GETTEXT_PACKAGE);
 
 	gnomelib_register_popt_table (rollback_options,
 				      _("Options for the rollback GUI"));
