@@ -546,16 +546,17 @@
 		      </child>
 
 		      <child>
-			<widget class="GtkFrame" id="toolbar_frame">
+			<widget class="GtkAlignment" id="toolbar_align">
 			  <property name="visible">True</property>
-			  <property name="label_xalign">0</property>
-			  <property name="label_yalign">0.5</property>
-			  <property name="shadow_type">GTK_SHADOW_NONE</property>
+			  <property name="xalign">0.5</property>
+			  <property name="yalign">0.5</property>
+			  <property name="xscale">1</property>
+			  <property name="yscale">1</property>
 
 			  <child>
 			    <widget class="GtkHandleBox" id="toolbar_handlebox">
 			      <property name="visible">True</property>
-			      <property name="shadow_type">GTK_SHADOW_IN</property>
+			      <property name="shadow_type">GTK_SHADOW_OUT</property>
 			      <property name="handle_position">GTK_POS_LEFT</property>
 			      <property name="snap_edge">GTK_POS_TOP</property>
 

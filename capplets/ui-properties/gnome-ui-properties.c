@@ -98,28 +98,28 @@ show_handlebar (GladeXML *dialog, gboolean show)
 {
   GtkWidget *handlebox;
   GtkWidget *toolbar;
-  GtkWidget *frame;
+  GtkWidget *align;
 
   handlebox = WID ("toolbar_handlebox");
   toolbar = WID ("toolbar_toolbar");
-  frame = WID ("toolbar_frame");
+  align = WID ("toolbar_align");
 
   g_object_ref (handlebox);
   g_object_ref (toolbar);
 
-  if (GTK_BIN (frame)->child)
-    gtk_container_remove (GTK_CONTAINER (frame), GTK_BIN (frame)->child);
+  if (GTK_BIN (align)->child)
+    gtk_container_remove (GTK_CONTAINER (align), GTK_BIN (align)->child);
   if (GTK_BIN (handlebox)->child)
     gtk_container_remove (GTK_CONTAINER (handlebox), GTK_BIN (handlebox)->child);
   if (show)
     {
-      gtk_container_add (GTK_CONTAINER (frame), handlebox);
+      gtk_container_add (GTK_CONTAINER (align), handlebox);
       gtk_container_add (GTK_CONTAINER (handlebox), toolbar);
       g_object_unref (handlebox);
     }
   else
     {
-      gtk_container_add (GTK_CONTAINER (frame), toolbar);
+      gtk_container_add (GTK_CONTAINER (align), toolbar);
     }
   g_object_unref (toolbar);
 
