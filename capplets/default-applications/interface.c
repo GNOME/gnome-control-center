@@ -498,7 +498,7 @@ edit_create (void)
   gtk_widget_show (label6);
   gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook1), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook1), 2), label6);
 
-  frame4 = gtk_frame_new (_("Default Help Viewer"));
+  frame4 = gtk_frame_new (_("Default Terminal"));
   gtk_widget_ref (frame4);
   gtk_object_set_data_full (GTK_OBJECT (capplet), "frame4", frame4,
                             (GtkDestroyNotify) gtk_widget_unref);
