@@ -50,7 +50,12 @@ x_libs="$X_PRE_LIBS $X_LIBS -lX11 $X_EXTRA_LIBS"
 dnl keyboard-properties-capplet
 savecppflags=$CPPFLAGS
 CPPFLAGS="$CPPFLAGS $X_CFLAGS"
-AC_CHECK_HEADERS(X11/extensions/xf86misc.h, XF86MISC_LIBS="-lXxf86misc")
+AC_CHECK_HEADERS([X11/Xlib.h])
+AC_CHECK_HEADERS([X11/extensions/xf86misc.h], [XF86MISC_LIBS="-lXxf86misc"],[],
+[#if HAVE_X11_XLIB_H
+#include <X11/Xlib.h>
+#endif
+])
 AC_SUBST(XF86MISC_LIBS)
 AC_CHECK_HEADERS(X11/extensions/XKB.h)
 CPPFLAGS=$savecppflags
