@@ -49,111 +49,151 @@ FT_Error FT_New_Face_From_URI(FT_Library library,
 			      FT_Long face_index,
 			      FT_Face *aface);
 
-/* height is a little more than needed to display all sizes */
-#define FONTAREA_WIDTH 500
-#define FONTAREA_HEIGHT 262
+static const gchar lowercase_text[] = "abcdefghijklmnopqrstuvwxyz";
+static const gchar uppercase_text[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+static const gchar punctuation_text[] = "0123456789.:,;(*!?')";
 
-static void
-draw_text(Display *xdisplay, XftDraw *draw, FT_Face face, gint pixel_size,
-	  XftColor *colour, const gchar *text, gint textlen, gint *pos_y)
+static inline XftFont *
+get_font(Display *xdisplay, FT_Face face, gint size)
 {
     FcPattern *pattern;
     XftFont *font;
 
     pattern = FcPatternBuild(NULL,
 			     FC_FT_FACE, FcTypeFTFace, face,
-			     FC_PIXEL_SIZE, FcTypeDouble, (double)pixel_size,
+			     FC_PIXEL_SIZE, FcTypeDouble, (double)size,
 			     NULL);
     font = XftFontOpenPattern(xdisplay, pattern);
     FcPatternDestroy(pattern);
-    if (!font) {
-	g_printerr("could not load Xft face\n");
-	goto end;
-    }
 
-    // g_message("target size=%d, ascent=%d, descent=%d, height=%d",
-    //      pixel_size, font->ascent, font->descent, font->height);
+    return font;
+}
 
-    XftDrawString8(draw, colour, font, 5, *pos_y + font->ascent,
-		   (gchar *)text, textlen);
-    XftFontClose(xdisplay, font);
- end:
-    *pos_y += pixel_size;
+static inline void
+draw_string(Display *xdisplay, XftDraw *draw, XftFont *font, XftColor *colour,
+	    const gchar *text, gint *pos_y)
+{
+    XGlyphInfo extents;
+    gint len = strlen(text);
+
+    XftTextExtentsUtf8(xdisplay, font, text, len, &extents);
+    XftDrawStringUtf8(draw, colour, font, 4, *pos_y + extents.y, text, len);
+    *pos_y += extents.height + 4;
 }
 
 static GdkPixmap *
 create_text_pixmap(GtkWidget *drawing_area, FT_Face face)
 {
-    gint i, pos_y, textlen, alpha_size;
-    GdkPixmap *pixmap;
+    gint i, pixmap_width, pixmap_height, pos_y, textlen;
+    GdkPixmap *pixmap = NULL;
     gchar *text;
-
     Display *xdisplay;
     Drawable xdrawable;
     Visual *xvisual;
     Colormap xcolormap;
     XftDraw *draw;
     XftColor colour;
+    XGlyphInfo extents;
+    XftFont *font;
+    gint *sizes = NULL, n_sizes, alpha_size;
 
     text = _("The quick brown fox jumps over the lazy dog. 0123456789");
     textlen = strlen(text);
 
     /* create pixmap */
-    gtk_widget_set_size_request(drawing_area, FONTAREA_WIDTH, FONTAREA_HEIGHT);
     gtk_widget_realize(drawing_area);
-    pixmap = gdk_pixmap_new(drawing_area->window,
-			    FONTAREA_WIDTH, FONTAREA_HEIGHT, -1);
-    if (!pixmap)
-	return NULL;
-    gdk_draw_rectangle(pixmap, drawing_area->style->white_gc,
-		       TRUE, 0, 0, FONTAREA_WIDTH, FONTAREA_HEIGHT);
 
     /* create the XftDraw */
-    xdisplay = GDK_PIXMAP_XDISPLAY(pixmap);
-    xdrawable = GDK_DRAWABLE_XID(pixmap);
-    xvisual = GDK_VISUAL_XVISUAL(gdk_drawable_get_visual(pixmap));
-    xcolormap = GDK_COLORMAP_XCOLORMAP(gdk_drawable_get_colormap(pixmap));
-
-    draw = XftDrawCreate(xdisplay, xdrawable, xvisual, xcolormap);
+    xdisplay = GDK_PIXMAP_XDISPLAY(drawing_area->window);
+    xvisual = GDK_VISUAL_XVISUAL(gdk_drawable_get_visual(drawing_area->window));
+    xcolormap = GDK_COLORMAP_XCOLORMAP(gdk_drawable_get_colormap(drawing_area->window));
     XftColorAllocName(xdisplay, xvisual, xcolormap, "black", &colour);
 
-    pos_y = 4;
-
+    /* work out what sizes to render */
     if (FT_IS_SCALABLE(face)) {
+	n_sizes = 6;
+	sizes = g_new(gint, n_sizes);
+	sizes[0] = 8;
+	sizes[1] = 10;
+	sizes[2] = 12;
+	sizes[3] = 24;
+	sizes[4] = 48;
+	sizes[5] = 72;
 	alpha_size = 24;
     } else {
-	alpha_size = face->available_sizes[0].height;
+	/* use fixed sizes */
+	n_sizes = face->num_fixed_sizes;
+	sizes = g_new(gint, n_sizes);
+	alpha_size = 0;
 	for (i = 0; i < face->num_fixed_sizes; i++) {
+	    sizes[i] = face->available_sizes[i].height;
+
+	    /* work out which font size to render */
 	    if (face->available_sizes[i].height <= 24)
 		alpha_size = face->available_sizes[i].height;
-	    else
-		break;
 	}
     }
-    draw_text(xdisplay, draw, face, alpha_size, &colour,
-	      "abcdefghijklmnopqrstuvwxyz", 26, &pos_y);
-    draw_text(xdisplay, draw, face, alpha_size, &colour,
-	      "ABCDEFGHIJKLMNOPQRSTUVWXYZ", 26, &pos_y);
-    draw_text(xdisplay, draw, face, alpha_size, &colour,
-	      "0123456789.:,;(*!?')", 20, &pos_y);
+
+    /* calculate size of pixmap to use (with 4 pixels padding) ... */
+    pixmap_width = 8;
+    pixmap_height = 8;
+    
+    font = get_font(xdisplay, face, alpha_size);
+    XftTextExtentsUtf8(xdisplay, font,
+		       lowercase_text, strlen(lowercase_text), &extents);
+    pixmap_height += extents.height + 4;
+    pixmap_width = MAX(pixmap_width, 8 + extents.width);
+    XftTextExtentsUtf8(xdisplay, font,
+		       uppercase_text, strlen(uppercase_text), &extents);
+    pixmap_height += extents.height + 4;
+    pixmap_width = MAX(pixmap_width, 8 + extents.width);
+    XftTextExtentsUtf8(xdisplay, font,
+		       punctuation_text, strlen(punctuation_text), &extents);
+    pixmap_height += extents.height + 4;
+    pixmap_width = MAX(pixmap_width, 8 + extents.width);
+    XftFontClose(xdisplay, font);
+
+    pixmap_height += 8;
+
+    for (i = 0; i < n_sizes; i++) {
+	font = get_font(xdisplay, face, sizes[i]);
+	if (!font) continue;
+	XftTextExtentsUtf8(xdisplay, font, text, textlen, &extents);
+	pixmap_height += extents.height + 4;
+	pixmap_width = MAX(pixmap_width, 8 + extents.width);
+	XftFontClose(xdisplay, font);
+    }
+
+    /* create pixmap */
+    gtk_widget_set_size_request(drawing_area, pixmap_width, pixmap_height);
+    pixmap = gdk_pixmap_new(drawing_area->window,
+			    pixmap_width, pixmap_height, -1);
+    if (!pixmap)
+	goto end;
+    gdk_draw_rectangle(pixmap, drawing_area->style->white_gc,
+		       TRUE, 0, 0, pixmap_width, pixmap_height);
+
+    xdrawable = GDK_DRAWABLE_XID(pixmap);
+    draw = XftDrawCreate(xdisplay, xdrawable, xvisual, xcolormap);
+
+    /* draw text */
+    pos_y = 4;
+    font = get_font(xdisplay, face, alpha_size);
+    draw_string(xdisplay, draw, font, &colour, lowercase_text, &pos_y);
+    draw_string(xdisplay, draw, font, &colour, uppercase_text, &pos_y);
+    draw_string(xdisplay, draw, font, &colour, punctuation_text, &pos_y);
+    XftFontClose(xdisplay, font);
 
     pos_y += 8;
-
-    /* bitmap fonts */
-    if (!FT_IS_SCALABLE(face)) {
-	for (i = 0; i < face->num_fixed_sizes; i++) {
-	    draw_text(xdisplay, draw, face, face->available_sizes[i].height,
-		      &colour, text, textlen, &pos_y);
-	}
-    } else {
-	static const gint sizes[] = { 8, 10, 12, 24, 48, 72 };
-
-	for (i = 0; i < G_N_ELEMENTS(sizes); i++) {
-	    draw_text(xdisplay, draw, face, sizes[i],
-		      &colour, text, textlen, &pos_y);
-	}
+    for (i = 0; i < n_sizes; i++) {
+	font = get_font(xdisplay, face, sizes[i]);
+	if (!font) continue;
+	draw_string(xdisplay, draw, font, &colour, text, &pos_y);
+	XftFontClose(xdisplay, font);
     }
 
+ end:
+    g_free(sizes);
     return pixmap;
 }
 
@@ -310,7 +350,7 @@ main(int argc, char **argv)
     FT_Face face;
     gchar *title;
     gint row;
-    GtkWidget *window, *vbox, *table, *frame, *drawing_area;
+    GtkWidget *window, *vbox, *table, *swin, *drawing_area;
     GdkPixmap *pixmap;
     GdkColor white = { 0, 0xffff, 0xffff, 0xffff };
 
@@ -353,14 +393,14 @@ main(int argc, char **argv)
 			face->style_name, NULL);
     gtk_window_set_title(GTK_WINDOW(window), title);
     g_free(title);
-    gtk_window_set_resizable(GTK_WINDOW(window), FALSE);
+    gtk_window_set_resizable(GTK_WINDOW(window), TRUE);
 
     vbox = gtk_vbox_new(FALSE, 0);
     gtk_container_add(GTK_CONTAINER(window), vbox);
 
     table = gtk_table_new(1, 2, FALSE);
     gtk_container_set_border_width(GTK_CONTAINER(table), 5);
-    gtk_box_pack_start(GTK_BOX(vbox), table, TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(vbox), table, FALSE, TRUE, 0);
 
     row = 0;
     add_face_info(table, &row, argv[1], face);
@@ -368,13 +408,16 @@ main(int argc, char **argv)
     gtk_table_set_col_spacings(GTK_TABLE(table), 8);
     gtk_table_set_row_spacings(GTK_TABLE(table), 2);
 
-    frame = gtk_frame_new(NULL);
-    gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
-    gtk_box_pack_start(GTK_BOX(vbox), frame, FALSE, FALSE, 0);
+    swin = gtk_scrolled_window_new(NULL, NULL);
+    gtk_widget_set_size_request(swin, 500, 200);
+    gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(swin),
+				   GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+    gtk_box_pack_start(GTK_BOX(vbox), swin, TRUE, TRUE, 0);
 
     drawing_area = gtk_drawing_area_new();
     gtk_widget_modify_bg(drawing_area, GTK_STATE_NORMAL, &white);
-    gtk_container_add(GTK_CONTAINER(frame), drawing_area);
+    gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(swin),
+					  drawing_area);
 
     pixmap = create_text_pixmap(drawing_area, face);
 
