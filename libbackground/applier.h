@@ -62,6 +62,8 @@ GObject   *bg_applier_new                  (BGApplierType          type);
 GObject   *bg_applier_new_at_size          (BGApplierType          type,
 					    const guint width,
 					    const guint height);
+GObject   *bg_applier_new_for_screen       (BGApplierType          type,
+					    GdkScreen             *screen);
 
 void       bg_applier_apply_prefs          (BGApplier             *bg_applier,
 					    const BGPreferences *prefs);

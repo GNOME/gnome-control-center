@@ -47,7 +47,8 @@ enum {
 	PROP_0,
 	PROP_TYPE,
 	PROP_PREVIEW_WIDTH,
-	PROP_PREVIEW_HEIGHT
+	PROP_PREVIEW_HEIGHT,
+	PROP_SCREEN
 };
 
 struct _BGApplierPrivate 
@@ -104,6 +105,10 @@ struct _BGApplierPrivate
 	guint               timeout;           /* "Cleanup" timeout handler;
 						* reset to 30 seconds every
 						* time apply is called. */
+	GdkWindow          *root_window;       /* Root window on which to
+						* render the background */
+	GdkScreen          *screen;            /* Screen on which to render
+						* the background */
 };
 
 static GObjectClass *parent_class;
@@ -170,9 +175,11 @@ static gboolean wallpaper_full_cover_p (const BGApplier     *bg_applier,
 					const BGPreferences *prefs);
 static gboolean render_small_pixmap_p  (const BGPreferences *prefs);
 
-static GdkPixmap *make_root_pixmap   (gint               width,
+static GdkPixmap *make_root_pixmap   (GdkScreen         *screen,
+				      gint               width,
 				      gint               height);
-static void set_root_pixmap          (GdkPixmap         *pixmap);
+static void set_root_pixmap          (GdkPixmap         *pixmap,
+				      GdkScreen         *screen);
 
 static gboolean is_nautilus_running  (void);
 
@@ -219,6 +226,14 @@ bg_applier_init (BGApplier *bg_applier, BGApplierClass *class)
 	bg_applier->p->timeout          = 0;
 	bg_applier->p->render_geom.width = -1;
 	bg_applier->p->render_geom.height = -1;
+
+#ifdef HAVE_GTK_MULTIHEAD
+	bg_applier->p->screen      = gdk_screen_get_default ();
+	bg_applier->p->root_window = gdk_screen_get_root_window (bg_applier->p->screen);
+#else
+	bg_applier->p->screen      = NULL;
+	bg_applier->p->root_window = gdk_get_default_root_window ();
+#endif
 }
 
 static void
@@ -257,6 +272,16 @@ bg_applier_class_init (BGApplierClass *class)
 				    1, 65535, MONITOR_CONTENTS_DEFAULT_HEIGHT,
 				    G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 
+#ifdef HAVE_GTK_MULTIHEAD
+	g_object_class_install_property
+		(object_class, PROP_SCREEN,
+		 g_param_spec_object ("screen",
+				      _("Screen"),
+				      _("Screen on which BGApplier is to draw"),
+				      GDK_TYPE_SCREEN,
+				      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+#endif
+
 	parent_class = 
 		G_OBJECT_CLASS (g_type_class_ref (G_TYPE_OBJECT));
 }
@@ -284,8 +309,13 @@ bg_applier_set_prop (GObject *object, guint prop_id, const GValue *value, GParam
 		case BG_APPLIER_ROOT:
 			bg_applier->p->render_geom.x = 0;
 			bg_applier->p->render_geom.y = 0;
+#ifdef HAVE_GTK_MULTIHEAD
+			bg_applier->p->render_geom.width = gdk_screen_get_width (bg_applier->p->screen);
+			bg_applier->p->render_geom.height = gdk_screen_get_height (bg_applier->p->screen);
+#else
 			bg_applier->p->render_geom.width = gdk_screen_width ();
 			bg_applier->p->render_geom.height = gdk_screen_height ();
+#endif
 			bg_applier->p->pixmap = NULL;
 			bg_applier->p->pixmap_is_set = FALSE;
 			break;
@@ -318,6 +348,17 @@ bg_applier_set_prop (GObject *object, guint prop_id, const GValue *value, GParam
 		if (bg_applier->p->type == BG_APPLIER_PREVIEW)
 			bg_applier->p->render_geom.height = g_value_get_uint (value);
 		break;
+
+#ifdef HAVE_GTK_MULTIHEAD
+	case PROP_SCREEN:
+		if (bg_applier->p->type == BG_APPLIER_ROOT) {
+			bg_applier->p->screen            = g_value_get_object (value);
+			bg_applier->p->root_window       = gdk_screen_get_root_window (bg_applier->p->screen);
+			bg_applier->p->render_geom.width = gdk_screen_get_width (bg_applier->p->screen);
+			bg_applier->p->render_geom.height = gdk_screen_get_height (bg_applier->p->screen);
+		}
+		break;
+#endif
 		
 	default:
 		g_warning ("Bad property set");
@@ -339,6 +380,12 @@ bg_applier_get_prop (GObject *object, guint prop_id, GValue *value, GParamSpec *
 	case PROP_TYPE:
 		g_value_set_int (value, bg_applier->p->type);
 		break;
+
+#ifdef HAVE_GTK_MULTIHEAD
+	case PROP_SCREEN:
+		g_value_set_object (value, bg_applier->p->screen);
+		break;
+#endif
 
 	default:
 		g_warning ("Bad property get");
@@ -406,6 +453,26 @@ bg_applier_new_at_size (BGApplierType type,
 			       "preview_width", width,
 			       "preview_height", height,
 			       NULL);
+
+	return object;
+}
+
+GObject *
+bg_applier_new_for_screen (BGApplierType  type,
+			   GdkScreen     *screen)
+{
+	GObject *object;
+
+	g_return_val_if_fail (type == BG_APPLIER_ROOT, NULL);
+
+#ifdef HAVE_GTK_MULTIHEAD
+	object = g_object_new (bg_applier_get_type (),
+			       "type", type,
+			       "screen", screen,
+			       NULL);
+#else
+	object = bg_applier_new (type);
+#endif
 
 	return object;
 }
@@ -672,7 +739,7 @@ render_wallpaper (BGApplier *bg_applier, const BGPreferences *prefs)
 		if (bg_applier->p->wallpaper_pixbuf == NULL)
 			return;
 
-		gdk_drawable_get_size (gdk_get_default_root_window (), &tmp1, &tmp2);
+		gdk_drawable_get_size (bg_applier->p->root_window, &tmp1, &tmp2);
 		virtual_geom.x = virtual_geom.y = 0;
 		virtual_geom.width = tmp1;
 		virtual_geom.height = tmp2;
@@ -776,9 +843,9 @@ render_to_screen (BGApplier *bg_applier, const BGPreferences *prefs)
 			gboolean success;
 
 #if 0
-			gdk_color_alloc (gdk_window_get_colormap (gdk_get_default_root_window ()), prefs->color1);
+			gdk_color_alloc (gdk_window_get_colormap (bg_applier->p->root_window), prefs->color1);
 #else
-			gdk_colormap_alloc_colors (gdk_drawable_get_colormap (gdk_get_default_root_window ()),
+			gdk_colormap_alloc_colors (gdk_drawable_get_colormap (bg_applier->p->root_window),
 						   prefs->color1, 1, FALSE, TRUE, &success);
 #endif
 
@@ -805,13 +872,13 @@ render_to_screen (BGApplier *bg_applier, const BGPreferences *prefs)
 			gboolean success;
 
 #if 0
-			gdk_color_alloc (gdk_window_get_colormap (gdk_get_default_root_window()), prefs->color1);
+			gdk_color_alloc (gdk_window_get_colormap (bg_applier->p->root_window), prefs->color1);
 #else
-			gdk_colormap_alloc_colors (gdk_drawable_get_colormap (gdk_get_default_root_window ()),
+			gdk_colormap_alloc_colors (gdk_drawable_get_colormap (bg_applier->p->root_window),
 						   prefs->color1, 1, FALSE, TRUE, &success);
 #endif
-			gdk_window_set_background (gdk_get_default_root_window (), prefs->color1);
-			gdk_window_clear (gdk_get_default_root_window ());
+			gdk_window_set_background (bg_applier->p->root_window, prefs->color1);
+			gdk_window_clear (bg_applier->p->root_window);
 		}
 		else if (bg_applier->p->type == BG_APPLIER_PREVIEW) {
 			gboolean success;
@@ -819,7 +886,7 @@ render_to_screen (BGApplier *bg_applier, const BGPreferences *prefs)
 #if 0
 			gdk_color_alloc (gdk_window_get_colormap (bg_applier->p->preview_widget->window), prefs->color1);
 #else
-			gdk_colormap_alloc_colors (gdk_drawable_get_colormap (gdk_get_default_root_window ()),
+			gdk_colormap_alloc_colors (gdk_drawable_get_colormap (bg_applier->p->root_window),
 						   prefs->color1, 1, FALSE, TRUE, &success);
 #endif
 
@@ -832,17 +899,17 @@ render_to_screen (BGApplier *bg_applier, const BGPreferences *prefs)
 						    bg_applier->p->render_geom.height);
 			}
 			else if (bg_applier->p->type == BG_APPLIER_ROOT) {
-				gdk_window_set_back_pixmap (gdk_get_default_root_window (), NULL, FALSE);
-				gdk_window_set_background (gdk_get_default_root_window (), prefs->color1);
+				gdk_window_set_back_pixmap (bg_applier->p->root_window, NULL, FALSE);
+				gdk_window_set_background (bg_applier->p->root_window, prefs->color1);
 			}
 		}
 	}
 
 	if (bg_applier->p->type == BG_APPLIER_ROOT && !bg_applier->p->pixmap_is_set &&
 	    (prefs->wallpaper_enabled || prefs->gradient_enabled))
-		set_root_pixmap (bg_applier->p->pixmap);
+		set_root_pixmap (bg_applier->p->pixmap, bg_applier->p->screen);
 	else if (bg_applier->p->type == BG_APPLIER_ROOT && !bg_applier->p->pixmap_is_set)
-		set_root_pixmap (NULL);
+		set_root_pixmap (NULL, bg_applier->p->screen);
 
 	g_object_unref (G_OBJECT (gc));
 }
@@ -871,7 +938,7 @@ create_pixmap (BGApplier *bg_applier, const BGPreferences *prefs)
 			height = bg_applier->p->render_geom.height;
 		}
 
-		bg_applier->p->pixmap = make_root_pixmap (width, height);
+		bg_applier->p->pixmap = make_root_pixmap (bg_applier->p->screen, width, height);
 		bg_applier->p->pixmap_is_set = FALSE;
 		break;
 
@@ -1309,7 +1376,7 @@ wallpaper_full_cover_p (const BGApplier *bg_applier, const BGPreferences *prefs)
 	else if (prefs->wallpaper_type == WPTYPE_STRETCHED)
 		return TRUE;
 
-	gdk_drawable_get_size (gdk_get_default_root_window (), &swidth, &sheight);
+	gdk_drawable_get_size (bg_applier->p->root_window, &swidth, &sheight);
 	pwidth = gdk_pixbuf_get_width (bg_applier->p->wallpaper_pixbuf);
 	pheight = gdk_pixbuf_get_height (bg_applier->p->wallpaper_pixbuf);
 
@@ -1344,27 +1411,50 @@ render_small_pixmap_p (const BGPreferences *prefs)
  * and set the closedown mode on it to RetainPermanent
  */
 static GdkPixmap *
-make_root_pixmap (gint width, gint height)
+make_root_pixmap (GdkScreen *screen, gint width, gint height)
 {
 	Display *display;
-	Pixmap xpixmap;
-	GdkPixmap *gdkpixmap;
-	
-	display = XOpenDisplay (gdk_get_display ());
+	char *display_name;
+	Pixmap result;
+	GdkPixmap *gdk_pixmap;
+	int screen_num;
+
+#ifdef HAVE_GTK_MULTIHEAD
+	screen_num = gdk_screen_get_number (screen);
+#else
+	screen_num = DefaultScreen (GDK_DISPLAY ());
+#endif
+
+	gdk_flush ();
+
+	display_name = DisplayString (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()));
+	display = XOpenDisplay (display_name);
+
+        if (display == NULL) {
+                g_warning ("Unable to open display '%s' when setting background pixmap\n",
+                           (display_name) ? display_name : "NULL");
+                return NULL;
+        }
+
 	XSetCloseDownMode (display, RetainPermanent);
 
-	xpixmap = XCreatePixmap (display,
-				 DefaultRootWindow (display),
-				 width, height,
-				 DefaultDepthOfScreen (DefaultScreenOfDisplay (GDK_DISPLAY ())));
+	result = XCreatePixmap (display,
+				RootWindow (display, screen_num),
+				width, height,
+				DefaultDepth (display, screen_num));
 
 	XCloseDisplay (display);
 
-	gdkpixmap = gdk_pixmap_foreign_new (xpixmap);
-	gdk_drawable_set_colormap (GDK_DRAWABLE (gdkpixmap),
+	gdk_pixmap = gdk_pixmap_foreign_new (result);
+#ifdef HAVE_GTK_MULTIHEAD
+	gdk_drawable_set_colormap (GDK_DRAWABLE (gdk_pixmap),
+				   gdk_drawable_get_colormap (gdk_screen_get_root_window (screen)));
+#else
+	gdk_drawable_set_colormap (GDK_DRAWABLE (gdk_pixmap),
 				   gdk_drawable_get_colormap (gdk_get_default_root_window ()));
+#endif
 
-	return gdkpixmap;
+	return gdk_pixmap;
 }
 
 /* Set the root pixmap, and properties pointing to it. We
@@ -1375,28 +1465,38 @@ make_root_pixmap (gint width, gint height)
  */
 
 static void 
-set_root_pixmap (GdkPixmap *pixmap) 
+set_root_pixmap (GdkPixmap *pixmap, GdkScreen *screen) 
 {
 	Atom type;
 	gulong nitems, bytes_after;
 	gint format;
 	guchar *data_esetroot;
 	Pixmap pixmap_id;
+	Display *display;
+	int screen_num;
 
 	/* Final check to see if nautilus is running. If it is, we don't
 	   touch the root pixmap at all. */
 	if (is_nautilus_running ())
 		return;
 
+#ifdef HAVE_GTK_MULTIHEAD
+	screen_num = gdk_screen_get_number (screen);
+#else
+	screen_num = DefaultScreen (GDK_DISPLAY ());
+#endif
+
 	if (pixmap != NULL && pixmap != (GdkPixmap *) -1)
 		pixmap_id = GDK_WINDOW_XWINDOW (pixmap);
 	else
 		pixmap_id = 0;
 
-	XGrabServer (GDK_DISPLAY ());
+	display = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
 
-	XGetWindowProperty (GDK_DISPLAY (), GDK_ROOT_WINDOW (),
-			    XInternAtom (GDK_DISPLAY (), "ESETROOT_PMAP_ID", False),
+	XGrabServer (display);
+
+	XGetWindowProperty (display, RootWindow (display, screen_num),
+			    XInternAtom (display, "ESETROOT_PMAP_ID", False),
 			    0L, 1L, False, XA_PIXMAP,
 			    &type, &format, &nitems, &bytes_after,
 			    &data_esetroot);
@@ -1408,7 +1508,7 @@ set_root_pixmap (GdkPixmap *pixmap)
 			old_pixmap = *((Pixmap *) data_esetroot);
 
 			if (pixmap != (GdkPixmap *) -1 && old_pixmap != pixmap_id)
-				XKillClient (GDK_DISPLAY (), old_pixmap);
+				XKillClient (display, old_pixmap);
 			else if (pixmap == (GdkPixmap *) -1)
 				pixmap_id = old_pixmap;
 		}
@@ -1417,27 +1517,27 @@ set_root_pixmap (GdkPixmap *pixmap)
 	}
 
 	if (pixmap != NULL && pixmap != (GdkPixmap *) -1) {
-		XChangeProperty (GDK_DISPLAY (), GDK_ROOT_WINDOW (),
-				 XInternAtom (GDK_DISPLAY (), "ESETROOT_PMAP_ID", FALSE),
+		XChangeProperty (display, RootWindow (display, screen_num),
+				 XInternAtom (display, "ESETROOT_PMAP_ID", FALSE),
 				 XA_PIXMAP, 32, PropModeReplace,
 				 (guchar *) &pixmap_id, 1);
-		XChangeProperty (GDK_DISPLAY (), GDK_ROOT_WINDOW (),
-				 XInternAtom (GDK_DISPLAY (), "_XROOTPMAP_ID", FALSE),
+		XChangeProperty (display, RootWindow (display, screen_num),
+				 XInternAtom (display, "_XROOTPMAP_ID", FALSE),
 				 XA_PIXMAP, 32, PropModeReplace,
 				 (guchar *) &pixmap_id, 1);
 
-		XSetWindowBackgroundPixmap (GDK_DISPLAY (), GDK_ROOT_WINDOW (),
+		XSetWindowBackgroundPixmap (display, RootWindow (display, screen_num),
 					    pixmap_id);
 	} else if (pixmap == NULL) {
-		XDeleteProperty (GDK_DISPLAY (), GDK_ROOT_WINDOW (),
-				 XInternAtom (GDK_DISPLAY (), "ESETROOT_PMAP_ID", FALSE));
-		XDeleteProperty (GDK_DISPLAY (), GDK_ROOT_WINDOW (),
-				 XInternAtom (GDK_DISPLAY (), "_XROOTPMAP_ID", FALSE));
+		XDeleteProperty (display, RootWindow (display, screen_num),
+				 XInternAtom (display, "ESETROOT_PMAP_ID", FALSE));
+		XDeleteProperty (display, RootWindow (display, screen_num),
+				 XInternAtom (display, "_XROOTPMAP_ID", FALSE));
 	}
 
-	XClearWindow (GDK_DISPLAY (), GDK_ROOT_WINDOW ());
-	XUngrabServer (GDK_DISPLAY ());
-	XFlush (GDK_DISPLAY ());
+	XClearWindow (display, RootWindow (display, screen_num));
+	XUngrabServer (display);
+	XFlush (display);
 }
 
 static gboolean

@@ -1,3 +1,22 @@
+2002-07-27  Mark McLoughlin  <mark@skynet.ie>
+
+	Add support for rendering the wallpaper on
+	a particular physical screen.
+
+	* applier.[ch]:
+	(bg_applier_init): init screen and root_window.
+	(bg_applier_class_init), (bg_applier_set_prop),
+	(bg_applier_get_prop): add "screen" property.
+	(bg_applier_new_for_screen): implement.
+	(render_wallpaper), (render_to_screen),
+	(create_pixmap), (wallpaper_full_cover_p): use the
+	screen and root window information.
+	(make_root_pixmap): add a GdkScreen arg, actually
+	use the display we opened, use the correct root
+	window and not the default one
+	(set_root_pixmap): add a GdkScreen arg, use the
+	default display, use the correct root window.
+
 2002-06-18  Jody Goldberg <jody@gnome.org>
 
 	http://bugzilla.gnome.org/show_bug.cgi?id=85224

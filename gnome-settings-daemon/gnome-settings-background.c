@@ -36,20 +36,54 @@
 #include "preferences.h"
 #include "applier.h"
 
+#ifdef HAVE_GTK_MULTIHEAD
+static BGApplier **bg_appliers;
+#else
 static BGApplier *bg_applier;
+#endif
 static BGPreferences *prefs;
 
 static void
 background_callback (GConfEntry *entry) 
 {
+#ifdef HAVE_GTK_MULTIHEAD
+	int i;
+#endif
+
 	bg_preferences_merge_entry (prefs, entry);
+
+#ifdef HAVE_GTK_MULTIHEAD
+	for (i = 0; bg_appliers [i]; i++)
+		bg_applier_apply_prefs (bg_appliers [i], prefs);
+#else
 	bg_applier_apply_prefs (bg_applier, prefs);
+#endif
 }
 
 void
 gnome_settings_background_init (GConfClient *client)
 {
+#ifdef HAVE_GTK_MULTIHEAD
+	GdkDisplay *display;
+	int         n_screens;
+	int         i;
+
+	display = gdk_display_get_default ();
+	n_screens = gdk_display_get_n_screens (display);
+
+	bg_appliers = g_new (BGApplier *, n_screens + 1);
+
+	for (i = 0; i < n_screens; i++) {
+		GdkScreen *screen;
+
+		screen = gdk_display_get_screen (display, i);
+
+		bg_appliers [i] = BG_APPLIER (bg_applier_new_for_screen (BG_APPLIER_ROOT, screen));
+	}
+	bg_appliers [i] = NULL;
+#else
 	bg_applier = BG_APPLIER (bg_applier_new (BG_APPLIER_ROOT));
+#endif
 
 	prefs = BG_PREFERENCES (bg_preferences_new ());
 	bg_preferences_load (prefs);
@@ -60,6 +94,10 @@ gnome_settings_background_init (GConfClient *client)
 void
 gnome_settings_background_load (GConfClient *client)
 {
+#ifdef HAVE_GTK_MULTIHEAD
+	int i;
+#endif
+
 	/* If this is set, nautilus will draw the background and is
 	 * almost definitely in our session.  however, it may not be
 	 * running yet (so is_nautilus_running() will fail).  so, on
@@ -71,5 +109,10 @@ gnome_settings_background_load (GConfClient *client)
 	if (gconf_client_get_bool (client, "/apps/nautilus/preferences/show_desktop", NULL))
 		return;
 
+#ifdef HAVE_GTK_MULTIHEAD
+	for (i = 0; bg_appliers [i]; i++)
+		bg_applier_apply_prefs (bg_appliers [i], prefs);
+#else
 	bg_applier_apply_prefs (bg_applier, prefs);
+#endif
 }
