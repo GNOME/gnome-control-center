@@ -238,10 +238,8 @@ set_server_from_gconf (GConfEntry *ignored)
 		gconf_client_get_bool (client, CONFIG_ROOT "/togglekeys_enable", NULL),
 		desc->ctrls->ax_options, XkbAX_IndicatorFBMask);
 
-#if 0
 	fprintf (stderr, "CHANGE to : 0x%x\n", desc->ctrls->enabled_ctrls);
 	fprintf (stderr, "CHANGE to : 0x%x (2)\n", desc->ctrls->ax_options);
-#endif
 	/* guard against reloading gconf when the X server notices that the XKB
 	 * state has changed and calls us.
 	 */
@@ -277,10 +275,8 @@ set_gconf_from_server (GConfEntry *ignored)
 		return;
 	}
 
-#if 0
 	fprintf (stderr, "changed to : 0x%x\n", desc->ctrls->enabled_ctrls);
 	fprintf (stderr, "changed to : 0x%x (2)\n", desc->ctrls->ax_options);
-#endif
 
 	/* guard against reloading the server when gconf notices that the state
 	 * has changed and calls us.

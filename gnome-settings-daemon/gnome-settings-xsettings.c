@@ -30,9 +30,6 @@ translate_bool_int (TranslationEntry *trans,
 {
   g_assert (value->type == trans->gconf_type);
   
-  g_print ("setting %s %d\n", 
-	   trans->xsetting_name,
-	   gconf_value_get_bool (value));
   xsettings_manager_set_int (manager, trans->xsetting_name,
                              gconf_value_get_bool (value));
 }
@@ -43,9 +40,6 @@ translate_int_int (TranslationEntry *trans,
 {
   g_assert (value->type == trans->gconf_type);
   
-  g_print ("setting %s %d\n", 
-	   trans->xsetting_name,
-	   gconf_value_get_int (value));
   xsettings_manager_set_int (manager, trans->xsetting_name,
                              gconf_value_get_int (value));
 }
@@ -56,9 +50,6 @@ translate_string_string (TranslationEntry *trans,
 {
   g_assert (value->type == trans->gconf_type);
 
-  g_print ("setting %s %s\n", 
-	   trans->xsetting_name,
-	   gconf_value_get_string (value));
   xsettings_manager_set_string (manager,
                                 trans->xsetting_name,
                                 gconf_value_get_string (value));
@@ -204,7 +195,7 @@ gnome_settings_xsettings_load (GConfClient *client)
 
       if (err != NULL)
         {
-          fprintf (stderr, "Error getting value for %s: %s\n",
+	  fprintf (stderr, "Error getting value for %s: %s\n",
                    translations[i].gconf_key, err->message);
           g_error_free (err);
         }

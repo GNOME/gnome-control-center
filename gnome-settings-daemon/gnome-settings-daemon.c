@@ -147,7 +147,9 @@ awake_impl (PortableServer_Servant servant,
 	    const CORBA_char      *service,
 	    CORBA_Environment     *ev)
 {
+#if 0
   printf ("I received an activate request for %s\n", service);
+#endif
   return TRUE;
 }
 

@@ -78,7 +78,7 @@ set_motion_acceleration (gfloat motion_acceleration)
       numerator = -1;
       denominator = -1;
     }
-  g_print ("%d/%d\n", numerator, denominator);
+
   XChangePointerControl (GDK_DISPLAY (), True, False,
 			 numerator, denominator,
 			 0);
