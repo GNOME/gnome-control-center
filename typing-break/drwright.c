@@ -462,11 +462,10 @@ update_tooltip (DrWright *dr)
 		break;
 	}
 
-	if (min > 1) {
-		str = g_strdup_printf (_("%d minutes until the next break"), min);
-	}
-	else if (min == 1) {
-		str = g_strdup_printf (_("One minute until the next break"));
+	if (min >= 1) {
+		str = g_strdup_printf (ngettext("%d minute until the next break",
+						"%d minutes until the next break", 
+						min), min);
 	} else {
 		str = g_strdup_printf (_("Less than one minute until the next break"));
 	}
