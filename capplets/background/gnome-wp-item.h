@@ -57,6 +57,7 @@ struct _GnomeWPItem {
 void gnome_wp_item_free (GnomeWPItem * item);
 GdkPixbuf * gnome_wp_item_get_thumbnail (GnomeWPItem * item,
 					 GnomeThumbnailFactory * thumbs);
+void gnome_wp_item_update_description (GnomeWPItem * item);
 
 #endif
 

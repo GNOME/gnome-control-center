@@ -1,16 +1,18 @@
-WALLPAPER_DATADIR = $(datadir)/gnome-wallpaper-properties
+WALLPAPER_DATADIR = $(datadir)/gnome-background-properties
 
-INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS) -DWALLPAPER_DATADIR=\""$(WALLPAPER_DATADIR)"\"
+INCLUDES = \
+	$(GNOMECC_CAPPLETS_CFLAGS) \
+	-DWALLPAPER_DATADIR=\""$(WALLPAPER_DATADIR)"\"
 
-bin_PROGRAMS = gnome-wallpaper-properties
+bin_PROGRAMS = gnome-background-properties
 
 noinst_LTLIBRARIES = libgnomewp.la
 
-gnome_wallpaper_properties_LDADD = \
+gnome_background_properties_LDADD = \
 	$(GNOMECC_CAPPLETS_LIBS) \
 	libgnomewp.la
 
-gnome_wallpaper_properties_SOURCES = \
+gnome_background_properties_SOURCES = \
 	gnome-wp-capplet.c gnome-wp-capplet.h \
 	gnome-wp-info.c gnome-wp-info.h
 

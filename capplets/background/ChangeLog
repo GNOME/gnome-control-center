@@ -1,3 +1,27 @@
+2004-02-01  Rodney Dawes  <dobey@ximian.com>
+
+	* Makefile.am: Switch the binary name to gnome-background-properties,
+	  Based on patch from Seth Nickell
+	* background.desktop.in: Use gnome-background-properties here also,
+	  based on patch from Seth Nickell
+	* gnome-wp-capplet.c: Fix a bug where you can't re-add a wallpaper
+	  after you remove it
+	  Use the new gnome_wp_item_update_description () call
+	  Use a GConfChangeSet to change the gconf keys, based on a patch
+	  from Seth Nickell
+	  Select the first item in the list ("No Wallpaper") when the wallpaper
+	  is removed, based on a patch from Seth Nickell
+	  Do the rc string parsing before creating the window, and change some
+	  defaults so we can fix the spacing between widgets and the border
+	  Fix spacing between widgets and window border
+	* gnome-wp-item.[ch]: Add update_description function to clean up
+	  code, based on patch from Seth Nickell
+	  Fix a crash when trying to thumbnail very wide images that are very
+	  short, while trying to maintain aspect ratio
+	* gnome-wp-xml.c: Use backgrounds.xml instead of wp-list.xml, and
+	  migrate the old wp-list.xml over if backgrounds.xml doesn't exist
+	  yet, based on patch from Seth Nickell
+
 2004-01-18  Rodney Dawes  <dobey@ximian.com>
 
 	* gnome-wp-capplet.c: Enable the Help button (#131286)

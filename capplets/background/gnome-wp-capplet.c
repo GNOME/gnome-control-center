@@ -81,6 +81,7 @@ static void gnome_wp_file_open_cancel (GtkWidget * widget, gpointer data) {
 static void gnome_wp_file_open_get_files (GtkWidget * widget,
 					  GnomeWPCapplet * capplet) {
   GtkWidget * filesel;
+  GnomeWPItem * selected;
   GdkColor color1, color2;
   gchar ** files;
   GdkCursor * cursor;
@@ -100,7 +101,12 @@ static void gnome_wp_file_open_get_files (GtkWidget * widget,
 
     item = g_hash_table_lookup (capplet->wphash, files[i]);
     if (item != NULL) {
-      GtkTreePath * path;
+	GtkTreePath * path;
+
+      if (item->deleted) {
+	item->deleted = FALSE;
+	wp_props_load_wallpaper (item->filename, item, capplet);
+      }
 
       path = gtk_tree_row_reference_get_path (item->rowref);
       gtk_tree_view_set_cursor (GTK_TREE_VIEW (capplet->treeview), path,
@@ -139,10 +145,7 @@ static void gnome_wp_file_open_get_files (GtkWidget * widget,
 					      WP_OPTIONS_KEY,
 					      NULL);
 
-     item->description = g_strdup_printf ("<b>%s</b>\n%s (%LuK)",
-					  item->name,
-					  gnome_vfs_mime_get_description (item->fileinfo->mime_type),
-					  item->fileinfo->size / 1024);
+     gnome_wp_item_update_description (item);
      
      g_hash_table_insert (capplet->wphash, g_strdup (item->filename), item);
      wp_props_load_wallpaper (item->filename, item, capplet);
@@ -211,10 +214,7 @@ static void bg_add_multiple_files (GnomeVFSURI * uri,
   item->pcolor = gdk_color_copy (&color1);
   item->scolor = gdk_color_copy (&color2);
 
-  item->description = g_strdup_printf ("<b>%s</b>\n%s (%LuK)",
-				       item->name,
-				       gnome_vfs_mime_get_description (item->fileinfo->mime_type),
-				       item->fileinfo->size / 1024);
+  gnome_wp_item_update_description (item);
   
   g_hash_table_insert (capplet->wphash, g_strdup (item->filename), item);
   wp_props_load_wallpaper (item->filename, item, capplet);
@@ -266,10 +266,7 @@ static void bg_properties_dragged_image (GtkWidget * widget,
 	  item->pcolor = gdk_color_copy (&color1);
 	  item->scolor = gdk_color_copy (&color2);
 
-	  item->description = g_strdup_printf ("<b>%s</b>\n%s (%LuK)",
-					       item->name,
-					       gnome_vfs_mime_get_description (item->fileinfo->mime_type),
-					       item->fileinfo->size / 1024);
+	  gnome_wp_item_update_description (item);
 
 	  g_hash_table_insert (capplet->wphash, g_strdup (item->filename),
 			       item);
@@ -389,6 +386,7 @@ static gboolean gnome_wp_props_wp_set (GnomeWPCapplet * capplet) {
   GtkTreeModel * model;
   GtkTreeSelection * selection;
   GnomeWPItem * item;
+  GConfChangeSet * cs;
   gchar * wpfile;
   GdkPixbuf * pixbuf;
 
@@ -398,29 +396,29 @@ static gboolean gnome_wp_props_wp_set (GnomeWPCapplet * capplet) {
 
     item = g_hash_table_lookup (capplet->wphash, wpfile);
 
+    cs = gconf_change_set_new ();
+
     if (!strcmp (item->filename, "(none)")) {
-      gconf_client_set_string (capplet->client, WP_OPTIONS_KEY,
-			       "none", NULL);
+      gconf_change_set_set_string (cs, WP_OPTIONS_KEY, "none");
       gtk_widget_set_sensitive (capplet->wp_opts, FALSE);
       gtk_widget_set_sensitive (capplet->rm_button, FALSE);
     } else {
       gtk_widget_set_sensitive (capplet->wp_opts, TRUE);
       gtk_widget_set_sensitive (capplet->rm_button, TRUE);
-      gconf_client_set_string (capplet->client, WP_FILE_KEY,
-			       item->filename, NULL);
-      gconf_client_set_string (capplet->client, WP_OPTIONS_KEY,
-			       item->options, NULL);
+      gconf_change_set_set_string (cs, WP_FILE_KEY, item->filename);
+      gconf_change_set_set_string (cs, WP_OPTIONS_KEY, item->options);
       gnome_wp_option_menu_set (capplet, item->options, FALSE);
     }
 
-    gconf_client_set_string (capplet->client, WP_SHADING_KEY,
-			     item->shade_type, NULL);
+    gconf_change_set_set_string (cs, WP_SHADING_KEY, item->shade_type);
     gnome_wp_option_menu_set (capplet, item->shade_type, TRUE);
 
-    gconf_client_set_string (capplet->client, WP_PCOLOR_KEY,
-			     item->pri_color, NULL);
-    gconf_client_set_string (capplet->client, WP_SCOLOR_KEY,
-			     item->sec_color, NULL);
+    gconf_change_set_set_string (cs, WP_PCOLOR_KEY, item->pri_color);
+    gconf_change_set_set_string (cs, WP_SCOLOR_KEY, item->sec_color);
+
+    gconf_client_commit_change_set (capplet->client, cs, TRUE, NULL);
+
+    gconf_change_set_unref (cs);
 
     gnome_color_picker_set_i16 (GNOME_COLOR_PICKER (capplet->pc_picker),
 				item->pcolor->red,
@@ -672,6 +670,7 @@ static void gnome_wp_remove_wallpaper (GtkWidget * widget,
 				       GnomeWPCapplet * capplet) {
   GtkTreeIter iter;
   GtkTreeModel * model;
+  GtkTreePath * first;
   GtkTreeSelection * selection;
   gchar * wpfile;
 
@@ -690,6 +689,10 @@ static void gnome_wp_remove_wallpaper (GtkWidget * widget,
 
     gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
   }
+  first = gtk_tree_path_new_first ();
+  gtk_tree_view_set_cursor (GTK_TREE_VIEW (capplet->treeview),
+			    first, NULL, FALSE);
+  gtk_tree_path_free (first);
 }
 
 static gboolean gnome_wp_load_stuffs (void * data) {
@@ -760,10 +763,7 @@ static gboolean gnome_wp_load_stuffs (void * data) {
 					       NULL);
       item->deleted = FALSE;
 
-      item->description = g_strdup_printf ("<b>%s</b>\n%s (%LuK)",
-					   item->name,
-					   gnome_vfs_mime_get_description (item->fileinfo->mime_type),
-					   item->fileinfo->size / 1024);
+      gnome_wp_item_update_description (item);
 
       g_hash_table_insert (capplet->wphash, g_strdup (item->filename), item);
       wp_props_load_wallpaper (item->filename, item, capplet);
@@ -820,7 +820,7 @@ static gboolean gnome_wp_load_stuffs (void * data) {
 					     WP_OPTIONS_KEY,
 					     NULL);
 
-    item->description = g_strdup_printf ("<b>%s</b>", item->name);
+    gnome_wp_item_update_description (item);
 
     g_hash_table_insert (capplet->wphash, g_strdup (item->filename), item);
     wp_props_load_wallpaper (item->filename, item, capplet);
@@ -903,11 +903,7 @@ static void gnome_wp_file_changed (GConfClient * client, guint id,
 						   WP_OPTIONS_KEY,
 						   NULL);
       
-	  item->description = g_strdup_printf ("<b>%s</b>\n%s (%LuK)",
-					       item->name,
-					       gnome_vfs_mime_get_description (item->fileinfo->mime_type),
-					       item->fileinfo->size / 1024);
-      
+	  gnome_wp_item_update_description (item);
 	  g_hash_table_insert (capplet->wphash,
 			       g_strdup (item->filename), item);
 	  wp_props_load_wallpaper (item->filename, item, capplet);
@@ -1090,6 +1086,17 @@ static void wallpaper_properties_init (void) {
   GdkCursor * cursor;
   gchar * icofile;
 
+  gtk_rc_parse_string ("style \"wp-tree-defaults\" {\n"
+		       "  GtkTreeView::horizontal-separator = 6\n"
+		       "  GtkTreeView::vertical-separator = 6\n"
+		       "} widget_class \"*TreeView*\""
+		       " style \"wp-tree-defaults\"\n\n"
+		       "style \"wp-dialog-defaults\" {\n"
+		       "  GtkDialog::action-area-border = 0\n"
+		       "  GtkDialog::content-area-border = 0\n"
+		       "} widget_class \"*GtkDialog*\""
+		       " style \"wp-dialog-defaults\"");
+
   capplet = g_new0 (GnomeWPCapplet, 1);
 
   if (capplet->client == NULL) {
@@ -1178,9 +1185,11 @@ static void wallpaper_properties_init (void) {
 				GTK_RESPONSE_CLOSE);
   gtk_widget_show (label);
 
+  gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (capplet->window)->action_area), 12);
+
   /* Main Contents */
   vbox = gtk_vbox_new (FALSE, 6);
-  gtk_container_set_border_width (GTK_CONTAINER (vbox), 6);
+  gtk_container_set_border_width (GTK_CONTAINER (vbox), 12);
   gtk_box_pack_start (GTK_BOX (GTK_DIALOG (capplet->window)->vbox), vbox,
 		      TRUE, TRUE, 0);
   gtk_widget_show (vbox);
@@ -1192,13 +1201,9 @@ static void wallpaper_properties_init (void) {
   gtk_widget_show (clabel);
 
   /* Treeview stuff goes in here */
-  hbox = gtk_hbox_new (FALSE, 6);
+  hbox = gtk_hbox_new (FALSE, 12);
   gtk_box_pack_start (GTK_BOX (vbox), hbox, TRUE, TRUE, 0);
   gtk_widget_show (hbox);
-
-  label = gtk_label_new ("");
-  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-  gtk_widget_show (label);
 
   label = gtk_label_new ("");
   gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
@@ -1247,12 +1252,6 @@ static void wallpaper_properties_init (void) {
 
   gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (capplet->model),
 					2, GTK_SORT_ASCENDING);
-
-  gtk_rc_parse_string ("style \"wp-tree-defaults\" {\n"
-		       "  GtkTreeView::horizontal-separator = 6\n"
-		       "  GtkTreeView::vertical-separator = 6\n"
-		       "} widget_class \"*TreeView*\""
-		       " style \"wp-tree-defaults\"");
 
   /* Need to add sorting stuff and whatnot */
   gtk_widget_show (swin);

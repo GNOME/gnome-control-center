@@ -109,11 +109,7 @@ static void gnome_wp_load_legacy (GnomeWPCapplet * capplet) {
 						   WP_OPTIONS_KEY,
 						   NULL);
 
-	  item->description = g_strdup_printf ("<b>%s</b>\n%s (%LuK)",
-					       item->name,
-					       gnome_vfs_mime_get_description (item->fileinfo->mime_type),
-					       item->fileinfo->size / 1024);
-     
+	  gnome_wp_item_update_description (item);
 	  g_hash_table_insert (capplet->wphash, g_strdup (item->filename), item);
 	} else {
 	  gnome_wp_item_free (item);
@@ -209,18 +205,12 @@ static void gnome_wp_xml_load_xml (GnomeWPCapplet * capplet,
 	   g_file_test (wp->filename, G_FILE_TEST_EXISTS)) ||
 	  !strcmp (wp->filename, "(none)")) {
 	wp->fileinfo = gnome_wp_info_new (wp->filename, capplet->thumbs);
-	if (wp->name == NULL) {
+
+	if (wp->name == NULL || !strcmp (wp->filename, "(none)")) {
 	  wp->name = g_strdup (wp->fileinfo->name);
 	}
 
-	if (!strcmp (wp->filename, "(none)")) {
-	  wp->description = g_strdup_printf ("<b>%s</b>", wp->name);
-	} else {
-	  wp->description = g_strdup_printf ("<b>%s</b>\n%s (%LuK)",
-					     wp->name,
-					     gnome_vfs_mime_get_description (wp->fileinfo->mime_type),
-					     wp->fileinfo->size / 1024);
-	}
+	gnome_wp_item_update_description (wp);
 	g_hash_table_insert (capplet->wphash, g_strdup (wp->filename), wp);
       } else {
 	gnome_wp_item_free (wp);
@@ -257,11 +247,19 @@ void gnome_wp_xml_load_list (GnomeWPCapplet * capplet) {
 
   wpdbfile = g_build_filename (g_get_home_dir (),
 			       ".gnome2",
-			       "wp-list.xml",
+			       "backgrounds.xml",
 			       NULL);
 
   if (g_file_test (wpdbfile, G_FILE_TEST_EXISTS)) {
     gnome_wp_xml_load_xml (capplet, wpdbfile);
+  } else {
+    wpdbfile = g_build_filename (g_get_home_dir (),
+				 ".gnome2",
+				 "wp-list.xml",
+				 NULL);
+    if (g_file_test (wpdbfile, G_FILE_TEST_EXISTS)) {
+      gnome_wp_xml_load_xml (capplet, wpdbfile);
+    }
   }
   g_free (wpdbfile);
 
@@ -345,7 +343,10 @@ void gnome_wp_xml_save_list (GnomeWPCapplet * capplet) {
   g_hash_table_foreach (capplet->wphash,
 			(GHFunc) gnome_wp_list_flatten, &list);
 
-  wpfile = g_strconcat (g_get_home_dir (), "/.gnome2/wp-list.xml", NULL);
+  wpfile = g_build_filename (g_get_home_dir (),
+			     "/.gnome2",
+			     "backgrounds.xml",
+			     NULL);
 
   xmlKeepBlanksDefault (0);
 

@@ -89,6 +89,9 @@ GdkPixbuf * gnome_wp_item_get_thumbnail (GnomeWPItem * item,
     h = gdk_pixbuf_get_height (pixbuf);
     ratio = h / 48;
 
+    if (ratio == 0)
+      ratio = w / 64;
+
     if (ratio == 1)
       ratio = 2;
 
@@ -132,4 +135,15 @@ GdkPixbuf * gnome_wp_item_get_thumbnail (GnomeWPItem * item,
   g_object_unref (bgpixbuf);
 
   return scaled;
+}
+
+void gnome_wp_item_update_description (GnomeWPItem * item) {
+  if (!strcmp (item->filename, "(none)")) {
+    item->description = g_strdup_printf ("<b>%s</b>", item->name);
+  } else {
+    item->description = g_strdup_printf ("<b>%s</b>\n%s (%LuK)",
+					 item->name,
+					 gnome_vfs_mime_get_description (item->fileinfo->mime_type),
+					 item->fileinfo->size / 1024);
+  }
 }
