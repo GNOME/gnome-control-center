@@ -239,7 +239,12 @@ bg_preferences_merge_entry (BGPreferences    *prefs,
 			prefs->gradient_enabled = TRUE;
 	}
 	else if (!strcmp (entry->key, "/desktop/gnome/background/wallpaper-enabled")) {
-		prefs->wallpaper_enabled = gconf_value_get_bool (value);
+		if (gconf_value_get_bool (value) &&
+		    strcmp (prefs->wallpaper_filename, "") != 0 &&
+		    strcmp (prefs->wallpaper_filename, "(none)") != 0)
+			prefs->wallpaper_enabled = TRUE;
+		else
+			prefs->wallpaper_enabled = FALSE;
 	}
 	else if (!strcmp (entry->key, "/desktop/gnome/background/wallpaper-type")) {
 		prefs->wallpaper_type = gconf_value_get_int (value);

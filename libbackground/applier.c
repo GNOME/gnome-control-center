@@ -354,47 +354,53 @@ bg_applier_new (BGApplierType type)
 
 void
 bg_applier_apply_prefs (BGApplier           *bg_applier, 
-		     const BGPreferences *prefs)
+			const BGPreferences *prefs)
 {
+	BGPreferences *new_prefs;
+
 	g_return_if_fail (bg_applier != NULL);
 	g_return_if_fail (IS_BG_APPLIER (bg_applier));
+
+	new_prefs = BG_PREFERENCES (bg_preferences_clone (prefs));
 
 	if (bg_applier->p->type == BG_APPLIER_ROOT && bg_applier->p->nautilus_running)
 		set_root_pixmap ((GdkPixmap *) -1);
 
-	if (!prefs->enabled) {
+	if (!new_prefs->enabled) {
 		if (bg_applier->p->type == BG_APPLIER_PREVIEW)
 			draw_disabled_message (bg_applier_get_preview_widget (bg_applier));
 		return;
 	}
 
-	if (need_wallpaper_load_p (bg_applier, prefs)) {
+	if (need_wallpaper_load_p (bg_applier, new_prefs)) {
 		if (bg_applier->p->wallpaper_pixbuf != NULL)
 			gdk_pixbuf_unref (bg_applier->p->wallpaper_pixbuf);
 
 		bg_applier->p->wallpaper_pixbuf = NULL;
 
-		if (prefs->wallpaper_enabled) {
-			g_return_if_fail (prefs->wallpaper_filename != NULL);
+		if (new_prefs->wallpaper_enabled) {
+			g_return_if_fail (new_prefs->wallpaper_filename != NULL);
 
 			bg_applier->p->wallpaper_pixbuf = 
-				gdk_pixbuf_new_from_file (prefs->wallpaper_filename, NULL);
+				gdk_pixbuf_new_from_file (new_prefs->wallpaper_filename, NULL);
 
-			if (bg_applier->p->wallpaper_pixbuf == NULL)
+			if (bg_applier->p->wallpaper_pixbuf == NULL) {
 				g_warning (_("Could not load pixbuf \"%s\"; disabling wallpaper."),
-					   prefs->wallpaper_filename);
+					   new_prefs->wallpaper_filename);
+				new_prefs->wallpaper_enabled = FALSE;
+			}
 		}
 	}
 
 	if (bg_applier->p->type == BG_APPLIER_ROOT)
 		nice (20);
 
-	run_render_pipeline (bg_applier, prefs);
+	run_render_pipeline (bg_applier, new_prefs);
 
 	if (bg_applier->p->last_prefs != NULL)
 		g_object_unref (G_OBJECT (bg_applier->p->last_prefs));
 
-	bg_applier->p->last_prefs = BG_PREFERENCES (bg_preferences_clone (prefs));
+	bg_applier->p->last_prefs = new_prefs;
 
 	if (bg_applier->p->type == BG_APPLIER_PREVIEW && bg_applier->p->preview_widget != NULL)
 		gtk_widget_queue_draw (bg_applier->p->preview_widget);
@@ -1229,11 +1235,7 @@ wallpaper_full_cover_p (const BGApplier *bg_applier, const BGPreferences *prefs)
 	gint pwidth, pheight;
 	gdouble asp1, asp2;
 
-	/* We can't make this determination until the wallpaper is loaded, if
-	 * wallpaper is enabled */
-	g_return_val_if_fail (!prefs->wallpaper_enabled || bg_applier->p->wallpaper_pixbuf != NULL, TRUE);
-
-	if (!prefs->wallpaper_enabled)
+	if (bg_applier->p->wallpaper_pixbuf == NULL)
 		return FALSE;
 	else if (gdk_pixbuf_get_has_alpha (bg_applier->p->wallpaper_pixbuf))
 		return FALSE;

@@ -1,5 +1,14 @@
 2001-12-20  Bradford Hovinen  <hovinen@ximian.com>
 
+	* applier.c (bg_applier_apply_prefs): Disable the wallpaper if we
+	couldn't load it
+	(bg_applier_apply_prefs): Create a clone of the preferences
+	structure first and work off of that
+	(wallpaper_full_cover_p): Return FALSE if the wallpaper pixbuf is NULL
+
+	* preferences.c (bg_preferences_merge_entry): Don't actually set
+	the wallpaper to "enabled" unless we can load the thing
+
 	* applier.c: Eliminate compiler warnings
 
 	* applier.[ch]: Rename applier to bg_applier to avoid possible
