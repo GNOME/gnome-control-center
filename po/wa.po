@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 1.5.5\n"
-"POT-Creation-Date: 2002-10-01 14:18-0400\n"
+"POT-Creation-Date: 2002-10-21 12:31-0400\n"
 "PO-Revision-Date: 2002-04-29 18:39MET\n"
 "Last-Translator: Pablo Saratxaga <pablo@mandrakesoft.com>\n"
 "Language-Team: Walon <linux-wa@chanae.alphanet.ch>\n"
@@ -88,6 +88,7 @@ msgid "Enable _Sticky Keys"
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
+#: capplets/sound/sound-properties.glade.h:2
 #, fuzzy
 msgid "General"
 msgstr "_Djenerå"
@@ -292,7 +293,7 @@ msgid "Picture Options:"
 msgstr "Tchuzes po les imådjes:"
 
 #: capplets/background/background-properties.glade.h:8
-#: libbackground/preview-file-selection.c:198
+#: libbackground/preview-file-selection.c:212
 msgid "Preview"
 msgstr "Vey divant"
 
@@ -657,6 +658,7 @@ msgid "Window Manager"
 msgstr "Manaedjeu di _purneas"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:31
+#: capplets/file-types/file-types-properties.glade.h:22
 #, fuzzy
 msgid "_Name:"
 msgstr "No:"
@@ -807,16 +809,16 @@ msgstr ""
 msgid "Legacy applications settings (grdb)"
 msgstr ""
 
-#: capplets/file-types/file-types-capplet.c:214
+#: capplets/file-types/file-types-capplet.c:196
 msgid "Description"
 msgstr "Discrijhaedje"
 
-#: capplets/file-types/file-types-capplet.c:236
+#: capplets/file-types/file-types-capplet.c:218
 msgid "Extensions"
 msgstr "Egztensions"
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:1
-#: capplets/file-types/file-types-properties.glade.h:8
+#: capplets/file-types/file-types-properties.glade.h:10
 msgid "File Types and Programs"
 msgstr "Sôres di fitchîs et programes"
 
@@ -842,63 +844,69 @@ msgstr "Radjouter._siervice..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
 #, fuzzy
-msgid "Add:"
-msgstr "Radjouter"
+msgid "C_hoose..."
+msgstr "_Tchoezi..."
 
 #: capplets/file-types/file-types-properties.glade.h:6
-msgid "Default action"
-msgstr "Prémetowe accion"
+#, fuzzy
+msgid "Cate_gory:"
+msgstr "Categoreye"
 
 #: capplets/file-types/file-types-properties.glade.h:7
+#, fuzzy
+msgid "D_efault action:"
+msgstr "Prémetowe accion"
+
+#: capplets/file-types/file-types-properties.glade.h:8
+#, fuzzy
+msgid "Default _action:"
+msgstr "Prémetowe accion"
+
+#: capplets/file-types/file-types-properties.glade.h:9
 #: capplets/file-types/mime-edit-dialog.c:208
 msgid "Edit file type"
 msgstr "Candjî sôre di fitchî"
 
-#: capplets/file-types/file-types-properties.glade.h:9
+#: capplets/file-types/file-types-properties.glade.h:11
 #, fuzzy
-msgid "Filename Extensions"
+msgid "Filename extensions:"
 msgstr "Egztensions"
 
-#: capplets/file-types/file-types-properties.glade.h:10
+#: capplets/file-types/file-types-properties.glade.h:12
 msgid "Look at content"
 msgstr ""
 
-#: capplets/file-types/file-types-properties.glade.h:11
+#: capplets/file-types/file-types-properties.glade.h:13
+#, fuzzy
+msgid "P_rogram:"
+msgstr "_Programe"
+
+#: capplets/file-types/file-types-properties.glade.h:14
 #, fuzzy
 msgid "Program to Run"
 msgstr "Programe a-z enonder"
 
-#: capplets/file-types/file-types-properties.glade.h:12
+#: capplets/file-types/file-types-properties.glade.h:15
 msgid "Run a program"
 msgstr "Enonder on programe"
 
-#: capplets/file-types/file-types-properties.glade.h:13
+#: capplets/file-types/file-types-properties.glade.h:16
 #, fuzzy
 msgid "Run in _Terminal"
 msgstr "Enonder dins on t_erminå"
 
-#: capplets/file-types/file-types-properties.glade.h:14
+#: capplets/file-types/file-types-properties.glade.h:17
 msgid "Use parent category _defaults"
 msgstr ""
 
-#: capplets/file-types/file-types-properties.glade.h:15
-msgid "Viewer Component"
-msgstr ""
-
-#: capplets/file-types/file-types-properties.glade.h:16
-msgid "_Category"
-msgstr ""
-
-#: capplets/file-types/file-types-properties.glade.h:17
-msgid "_Choose..."
-msgstr "_Tchoezi..."
-
 #: capplets/file-types/file-types-properties.glade.h:18
-msgid "_Delete"
-msgstr "_Disfacer"
+#, fuzzy
+msgid "_Add:"
+msgstr "_Radjouter"
 
 #: capplets/file-types/file-types-properties.glade.h:19
-msgid "_Description"
+#, fuzzy
+msgid "_Description:"
 msgstr "_Discrijhaedje"
 
 #: capplets/file-types/file-types-properties.glade.h:20
@@ -906,26 +914,27 @@ msgid "_Edit..."
 msgstr "_Aspougnî..."
 
 #: capplets/file-types/file-types-properties.glade.h:21
-msgid "_MIME Type"
+#, fuzzy
+msgid "_MIME type:"
 msgstr "Sôre _MIME"
 
-#: capplets/file-types/file-types-properties.glade.h:22
-msgid "_Name"
-msgstr "_No"
-
 #: capplets/file-types/file-types-properties.glade.h:23
-msgid "_Program"
-msgstr "_Programe"
+#, fuzzy
+msgid "_Program to run:"
+msgstr "Programe a-z enonder"
 
 #: capplets/file-types/file-types-properties.glade.h:24
 #, fuzzy
-msgid "_Program to Run"
-msgstr "Programe a-z enonder"
+msgid "_Protocol:"
+msgstr "Protocole"
 
 #: capplets/file-types/file-types-properties.glade.h:25
-#, fuzzy
-msgid "_Protocol"
-msgstr "Protocole"
+msgid "_Remove"
+msgstr "_Bodjî"
+
+#: capplets/file-types/file-types-properties.glade.h:26
+msgid "_Viewer component:"
+msgstr ""
 
 #: capplets/file-types/file-types.desktop.in.h:1
 #, fuzzy
@@ -1692,18 +1701,15 @@ msgstr "Preferinces pol son"
 msgid "E_nable sound server startup"
 msgstr "Mete en _ouve li sierveu di sons a l' enondaedje"
 
-#: capplets/sound/sound-properties.glade.h:2
-#, fuzzy
-msgid "Sound Preferences"
-msgstr "Preferinces pol son"
-
 #: capplets/sound/sound-properties.glade.h:3
-msgid "Sound _Events"
+#, fuzzy
+msgid "Sound Events"
 msgstr "Sons po ls _evenmints"
 
 #: capplets/sound/sound-properties.glade.h:4
-msgid "_General"
-msgstr "_Djenerå"
+#, fuzzy
+msgid "Sound Preferences"
+msgstr "Preferinces pol son"
 
 #: capplets/sound/sound-properties.glade.h:5
 msgid "_Sounds for events"
@@ -2055,7 +2061,7 @@ msgstr "L' usteye d' apontiaedje di GNOME"
 msgid "Use shell even if nautilus is running."
 msgstr ""
 
-#: gnome-settings-daemon/factory.c:29
+#: gnome-settings-daemon/factory.c:32
 msgid "Could not initialize Bonobo"
 msgstr "Dji n' a savou inicyî Bonobo"
 
@@ -2066,32 +2072,32 @@ msgid ""
 "This is needed to allow changing cursors."
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:106
+#: gnome-settings-daemon/gnome-settings-keybindings.c:146
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:119
+#: gnome-settings-daemon/gnome-settings-keybindings.c:159
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:125
+#: gnome-settings-daemon/gnome-settings-keybindings.c:165
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:153
+#: gnome-settings-daemon/gnome-settings-keybindings.c:193
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:241
+#: gnome-settings-daemon/gnome-settings-keybindings.c:281
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:292
+#: gnome-settings-daemon/gnome-settings-keybindings.c:357
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -2156,7 +2162,7 @@ msgstr ""
 msgid "Screen on which BGApplier is to draw"
 msgstr ""
 
-#: libbackground/preview-file-selection.c:193
+#: libbackground/preview-file-selection.c:207
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Dji n' trove nou hbox; dji prind ene tchuze di fitchîs normåle"
 
@@ -2237,6 +2243,19 @@ msgid "OK"
 msgstr "I Va"
 
 #, fuzzy
+#~ msgid "Add:"
+#~ msgstr "Radjouter"
+
+#~ msgid "_Delete"
+#~ msgstr "_Disfacer"
+
+#~ msgid "_Name"
+#~ msgstr "_No"
+
+#~ msgid "_General"
+#~ msgstr "_Djenerå"
+
+#, fuzzy
 #~ msgid "Edit Menu"
 #~ msgstr "Candjî"
 
@@ -2276,14 +2295,8 @@ msgstr "I Va"
 #~ msgid "File types and Internet Services"
 #~ msgstr "Sôres di fitchîs eyet siervices rantoele"
 
-#~ msgid "_Add"
-#~ msgstr "_Radjouter"
-
 #~ msgid "_Protocol name"
 #~ msgstr "No do _protocole"
-
-#~ msgid "_Remove"
-#~ msgstr "_Bodjî"
 
 #, fuzzy
 #~ msgid "Add file type"

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 2.0\n"
-"POT-Creation-Date: 2002-10-01 14:18-0400\n"
+"POT-Creation-Date: 2002-10-21 12:31-0400\n"
 "PO-Revision-Date: 2002-06-15 21:20+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
@@ -88,6 +88,7 @@ msgid "Enable _Sticky Keys"
 msgstr "Activar Teclas _Coladas"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
+#: capplets/sound/sound-properties.glade.h:2
 msgid "General"
 msgstr "Geral"
 
@@ -305,7 +306,7 @@ msgid "Picture Options:"
 msgstr "Opções Imagem:"
 
 #: capplets/background/background-properties.glade.h:8
-#: libbackground/preview-file-selection.c:198
+#: libbackground/preview-file-selection.c:212
 msgid "Preview"
 msgstr "Prever"
 
@@ -693,6 +694,7 @@ msgid "Window Manager"
 msgstr "Gestor de Janelas"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:31
+#: capplets/file-types/file-types-properties.glade.h:22
 msgid "_Name:"
 msgstr "_Nome:"
 
@@ -844,16 +846,16 @@ msgstr "Aplicações Antiquadas"
 msgid "Legacy applications settings (grdb)"
 msgstr "Configurações de aplicações antiquadas (grdb)"
 
-#: capplets/file-types/file-types-capplet.c:214
+#: capplets/file-types/file-types-capplet.c:196
 msgid "Description"
 msgstr "Descrição"
 
-#: capplets/file-types/file-types-capplet.c:236
+#: capplets/file-types/file-types-capplet.c:218
 msgid "Extensions"
 msgstr "Extensões"
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:1
-#: capplets/file-types/file-types-properties.glade.h:8
+#: capplets/file-types/file-types-properties.glade.h:10
 msgid "File Types and Programs"
 msgstr "Tipos de Ficheiros e Aplicações"
 
@@ -879,64 +881,69 @@ msgstr "Adicionar _serviço..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
 #, fuzzy
-msgid "Add:"
-msgstr "Adicionar"
+msgid "C_hoose..."
+msgstr "Sele_ccionar..."
 
 #: capplets/file-types/file-types-properties.glade.h:6
-msgid "Default action"
-msgstr "Acção defeito"
+#, fuzzy
+msgid "Cate_gory:"
+msgstr "Categoria"
 
 #: capplets/file-types/file-types-properties.glade.h:7
+#, fuzzy
+msgid "D_efault action:"
+msgstr "Acção defeito"
+
+#: capplets/file-types/file-types-properties.glade.h:8
+#, fuzzy
+msgid "Default _action:"
+msgstr "Acção defeito"
+
+#: capplets/file-types/file-types-properties.glade.h:9
 #: capplets/file-types/mime-edit-dialog.c:208
 msgid "Edit file type"
 msgstr "Editar tipo ficheiro"
 
-#: capplets/file-types/file-types-properties.glade.h:9
+#: capplets/file-types/file-types-properties.glade.h:11
 #, fuzzy
-msgid "Filename Extensions"
+msgid "Filename extensions:"
 msgstr "Extensões de ficheiros"
 
-#: capplets/file-types/file-types-properties.glade.h:10
+#: capplets/file-types/file-types-properties.glade.h:12
 msgid "Look at content"
 msgstr "Ver o conteudo"
 
-#: capplets/file-types/file-types-properties.glade.h:11
+#: capplets/file-types/file-types-properties.glade.h:13
+#, fuzzy
+msgid "P_rogram:"
+msgstr "A_plicação"
+
+#: capplets/file-types/file-types-properties.glade.h:14
 #, fuzzy
 msgid "Program to Run"
 msgstr "Aplicação a correr"
 
-#: capplets/file-types/file-types-properties.glade.h:12
+#: capplets/file-types/file-types-properties.glade.h:15
 msgid "Run a program"
 msgstr "Correr uma aplicação"
 
-#: capplets/file-types/file-types-properties.glade.h:13
+#: capplets/file-types/file-types-properties.glade.h:16
 #, fuzzy
 msgid "Run in _Terminal"
 msgstr "Iniciar na Cons_ola"
 
-#: capplets/file-types/file-types-properties.glade.h:14
+#: capplets/file-types/file-types-properties.glade.h:17
 msgid "Use parent category _defaults"
 msgstr "Utilizar _defeitos da categoria pai"
 
-#: capplets/file-types/file-types-properties.glade.h:15
-#, fuzzy
-msgid "Viewer Component"
-msgstr "A ver componente"
-
-#: capplets/file-types/file-types-properties.glade.h:16
-msgid "_Category"
-msgstr "_Categoria"
-
-#: capplets/file-types/file-types-properties.glade.h:17
-msgid "_Choose..."
-msgstr "Sele_ccionar..."
-
 #: capplets/file-types/file-types-properties.glade.h:18
-msgid "_Delete"
-msgstr "Apa_gar"
+#, fuzzy
+msgid "_Add:"
+msgstr "_Adicionar"
 
 #: capplets/file-types/file-types-properties.glade.h:19
-msgid "_Description"
+#, fuzzy
+msgid "_Description:"
 msgstr "_Descrição"
 
 #: capplets/file-types/file-types-properties.glade.h:20
@@ -944,26 +951,28 @@ msgid "_Edit..."
 msgstr "_Editar..."
 
 #: capplets/file-types/file-types-properties.glade.h:21
-msgid "_MIME Type"
+#, fuzzy
+msgid "_MIME type:"
 msgstr "Tipo _MIME"
 
-#: capplets/file-types/file-types-properties.glade.h:22
-msgid "_Name"
-msgstr "_Nome"
-
 #: capplets/file-types/file-types-properties.glade.h:23
-msgid "_Program"
-msgstr "A_plicação"
+#, fuzzy
+msgid "_Program to run:"
+msgstr "A_plicação a executar"
 
 #: capplets/file-types/file-types-properties.glade.h:24
 #, fuzzy
-msgid "_Program to Run"
-msgstr "A_plicação a executar"
+msgid "_Protocol:"
+msgstr "Protocolo"
 
 #: capplets/file-types/file-types-properties.glade.h:25
+msgid "_Remove"
+msgstr "_Remover"
+
+#: capplets/file-types/file-types-properties.glade.h:26
 #, fuzzy
-msgid "_Protocol"
-msgstr "Protocolo"
+msgid "_Viewer component:"
+msgstr "A ver componente"
 
 #: capplets/file-types/file-types.desktop.in.h:1
 #, fuzzy
@@ -1759,18 +1768,15 @@ msgstr "Preferências de som"
 msgid "E_nable sound server startup"
 msgstr "Activar arra_nque do servidor de som"
 
-#: capplets/sound/sound-properties.glade.h:2
-#, fuzzy
-msgid "Sound Preferences"
-msgstr "Preferências de som"
-
 #: capplets/sound/sound-properties.glade.h:3
-msgid "Sound _Events"
+#, fuzzy
+msgid "Sound Events"
 msgstr "Som de _Eventos"
 
 #: capplets/sound/sound-properties.glade.h:4
-msgid "_General"
-msgstr "_Geral"
+#, fuzzy
+msgid "Sound Preferences"
+msgstr "Preferências de som"
 
 #: capplets/sound/sound-properties.glade.h:5
 msgid "_Sounds for events"
@@ -2118,7 +2124,7 @@ msgstr "A ferramenta de configuração GNOME"
 msgid "Use shell even if nautilus is running."
 msgstr "Utilizar consola mesmo se o nautilus estiver a correr."
 
-#: gnome-settings-daemon/factory.c:29
+#: gnome-settings-daemon/factory.c:32
 msgid "Could not initialize Bonobo"
 msgstr "Incapaz de inicializar o Bonobo"
 
@@ -2131,32 +2137,32 @@ msgstr ""
 "Incapaz de criar o directório \"%s\".\n"
 "Isto é necessário para permitir alterar cursores."
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:106
+#: gnome-settings-daemon/gnome-settings-keybindings.c:146
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr "Atalho de Teclado (%s) tem a sua acção definida múltiplas vezes\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:119
+#: gnome-settings-daemon/gnome-settings-keybindings.c:159
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr "Atalho de Teclado (%s) tem a sua associação definida múltiplas vezes\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:125
+#: gnome-settings-daemon/gnome-settings-keybindings.c:165
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr "Atalho de Teclado (%s) está incompleto\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:153
+#: gnome-settings-daemon/gnome-settings-keybindings.c:193
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr "Atalho de Teclado (%s) é inválido\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:241
+#: gnome-settings-daemon/gnome-settings-keybindings.c:281
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr "Atalho de Teclado (%s) já está a ser utilizado\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:292
+#: gnome-settings-daemon/gnome-settings-keybindings.c:357
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -2231,7 +2237,7 @@ msgstr "Protecção de Ecrã"
 msgid "Screen on which BGApplier is to draw"
 msgstr ""
 
-#: libbackground/preview-file-selection.c:193
+#: libbackground/preview-file-selection.c:207
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Incapaz de encontrar uma hbox, a utilizar selecção de ficheiro normal"
 
@@ -2323,6 +2329,22 @@ msgstr ""
 #: libwindow-settings/gnome-wm-manager.c:467
 msgid "OK"
 msgstr "OK"
+
+#, fuzzy
+#~ msgid "Add:"
+#~ msgstr "Adicionar"
+
+#~ msgid "_Category"
+#~ msgstr "_Categoria"
+
+#~ msgid "_Delete"
+#~ msgstr "Apa_gar"
+
+#~ msgid "_Name"
+#~ msgstr "_Nome"
+
+#~ msgid "_General"
+#~ msgstr "_Geral"
 
 #, fuzzy
 #~ msgid "Edit Menu"
@@ -2427,14 +2449,8 @@ msgstr "OK"
 #~ msgid "Use category _defaults"
 #~ msgstr "Utilizar _defeitos da categoria"
 
-#~ msgid "_Add"
-#~ msgstr "_Adicionar"
-
 #~ msgid "_Protocol name"
 #~ msgstr "Nome do _protocolo"
-
-#~ msgid "_Remove"
-#~ msgstr "_Remover"
 
 #~ msgid "Add file type"
 #~ msgstr "Adicionar tipo ficheiro"

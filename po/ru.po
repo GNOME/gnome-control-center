@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2002-10-01 14:18-0400\n"
+"POT-Creation-Date: 2002-10-21 12:31-0400\n"
 "PO-Revision-Date: 2002-07-18 14:47+04:00\n"
 "Last-Translator: Dmitry G. Mastrukov <dmitry@taurussoft.org>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
@@ -88,6 +88,7 @@ msgid "Enable _Sticky Keys"
 msgstr "Включить \"за_липающие\" клавиши"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
+#: capplets/sound/sound-properties.glade.h:2
 msgid "General"
 msgstr "Общие"
 
@@ -298,7 +299,7 @@ msgid "Picture Options:"
 msgstr "Параметры картинки:"
 
 #: capplets/background/background-properties.glade.h:8
-#: libbackground/preview-file-selection.c:198
+#: libbackground/preview-file-selection.c:212
 msgid "Preview"
 msgstr "Посмотреть образец"
 
@@ -685,6 +686,7 @@ msgid "Window Manager"
 msgstr "Диспетчер окон"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:31
+#: capplets/file-types/file-types-properties.glade.h:22
 msgid "_Name:"
 msgstr "Наи_менование:"
 
@@ -831,16 +833,16 @@ msgstr "Унаследованные приложения"
 msgid "Legacy applications settings (grdb)"
 msgstr "Настроить унаследованные приложения (grdb)"
 
-#: capplets/file-types/file-types-capplet.c:214
+#: capplets/file-types/file-types-capplet.c:196
 msgid "Description"
 msgstr "Описание"
 
-#: capplets/file-types/file-types-capplet.c:236
+#: capplets/file-types/file-types-capplet.c:218
 msgid "Extensions"
 msgstr "Расширения"
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:1
-#: capplets/file-types/file-types-properties.glade.h:8
+#: capplets/file-types/file-types-properties.glade.h:10
 msgid "File Types and Programs"
 msgstr "Типы файлов и программы"
 
@@ -865,60 +867,68 @@ msgid "Add _Service..."
 msgstr "Добавить с_ервис..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
-msgid "Add:"
-msgstr "Добавить:"
+#, fuzzy
+msgid "C_hoose..."
+msgstr "_Выбрать..."
 
 #: capplets/file-types/file-types-properties.glade.h:6
-msgid "Default action"
-msgstr "Действие по умолчанию"
+#, fuzzy
+msgid "Cate_gory:"
+msgstr "Категория"
 
 #: capplets/file-types/file-types-properties.glade.h:7
+#, fuzzy
+msgid "D_efault action:"
+msgstr "Действие по умолчанию"
+
+#: capplets/file-types/file-types-properties.glade.h:8
+#, fuzzy
+msgid "Default _action:"
+msgstr "Действие по умолчанию"
+
+#: capplets/file-types/file-types-properties.glade.h:9
 #: capplets/file-types/mime-edit-dialog.c:208
 msgid "Edit file type"
 msgstr "Изменить тип файла"
 
-#: capplets/file-types/file-types-properties.glade.h:9
-msgid "Filename Extensions"
+#: capplets/file-types/file-types-properties.glade.h:11
+#, fuzzy
+msgid "Filename extensions:"
 msgstr "Расширения имён файлов"
 
-#: capplets/file-types/file-types-properties.glade.h:10
+#: capplets/file-types/file-types-properties.glade.h:12
 msgid "Look at content"
 msgstr "Смотреть содержимое"
 
-#: capplets/file-types/file-types-properties.glade.h:11
+#: capplets/file-types/file-types-properties.glade.h:13
+#, fuzzy
+msgid "P_rogram:"
+msgstr "_Программа"
+
+#: capplets/file-types/file-types-properties.glade.h:14
 msgid "Program to Run"
 msgstr "Запускаемая программа"
 
-#: capplets/file-types/file-types-properties.glade.h:12
+#: capplets/file-types/file-types-properties.glade.h:15
 msgid "Run a program"
 msgstr "Запустить программу"
 
-#: capplets/file-types/file-types-properties.glade.h:13
+#: capplets/file-types/file-types-properties.glade.h:16
 msgid "Run in _Terminal"
 msgstr "Запустить в _терминале"
 
-#: capplets/file-types/file-types-properties.glade.h:14
+#: capplets/file-types/file-types-properties.glade.h:17
 msgid "Use parent category _defaults"
 msgstr "Использовать _умолчания для родительской категории"
 
-#: capplets/file-types/file-types-properties.glade.h:15
-msgid "Viewer Component"
-msgstr "Компонент просмотра"
-
-#: capplets/file-types/file-types-properties.glade.h:16
-msgid "_Category"
-msgstr "_Категория"
-
-#: capplets/file-types/file-types-properties.glade.h:17
-msgid "_Choose..."
-msgstr "_Выбрать..."
-
 #: capplets/file-types/file-types-properties.glade.h:18
-msgid "_Delete"
-msgstr "У_далить"
+#, fuzzy
+msgid "_Add:"
+msgstr "Доб_авить"
 
 #: capplets/file-types/file-types-properties.glade.h:19
-msgid "_Description"
+#, fuzzy
+msgid "_Description:"
 msgstr "_Описание"
 
 #: capplets/file-types/file-types-properties.glade.h:20
@@ -926,24 +936,28 @@ msgid "_Edit..."
 msgstr "_Изменить..."
 
 #: capplets/file-types/file-types-properties.glade.h:21
-msgid "_MIME Type"
+#, fuzzy
+msgid "_MIME type:"
 msgstr "Тип _MIME"
 
-#: capplets/file-types/file-types-properties.glade.h:22
-msgid "_Name"
-msgstr "На_именование"
-
 #: capplets/file-types/file-types-properties.glade.h:23
-msgid "_Program"
-msgstr "_Программа"
-
-#: capplets/file-types/file-types-properties.glade.h:24
-msgid "_Program to Run"
+#, fuzzy
+msgid "_Program to run:"
 msgstr "Запускаемая _программа"
 
-#: capplets/file-types/file-types-properties.glade.h:25
-msgid "_Protocol"
+#: capplets/file-types/file-types-properties.glade.h:24
+#, fuzzy
+msgid "_Protocol:"
 msgstr "П_ротокол"
+
+#: capplets/file-types/file-types-properties.glade.h:25
+msgid "_Remove"
+msgstr "У_брать"
+
+#: capplets/file-types/file-types-properties.glade.h:26
+#, fuzzy
+msgid "_Viewer component:"
+msgstr "Компонент просмотра"
 
 #: capplets/file-types/file-types.desktop.in.h:1
 #, fuzzy
@@ -1724,17 +1738,14 @@ msgstr "Настроить звук"
 msgid "E_nable sound server startup"
 msgstr "_Включать сервер звука при запуске"
 
-#: capplets/sound/sound-properties.glade.h:2
-msgid "Sound Preferences"
-msgstr "Настроить звук"
-
 #: capplets/sound/sound-properties.glade.h:3
-msgid "Sound _Events"
+#, fuzzy
+msgid "Sound Events"
 msgstr "Звуки _событий"
 
 #: capplets/sound/sound-properties.glade.h:4
-msgid "_General"
-msgstr "_Общие"
+msgid "Sound Preferences"
+msgstr "Настроить звук"
 
 #: capplets/sound/sound-properties.glade.h:5
 msgid "_Sounds for events"
@@ -2080,7 +2091,7 @@ msgstr "Средство конфигурации среды GNOME"
 msgid "Use shell even if nautilus is running."
 msgstr "Использовать оболочку, даже если запущен Nautilus."
 
-#: gnome-settings-daemon/factory.c:29
+#: gnome-settings-daemon/factory.c:32
 msgid "Could not initialize Bonobo"
 msgstr "Не удалось инициализировать Bonobo"
 
@@ -2093,32 +2104,32 @@ msgstr ""
 "Невозможно создать каталог \"%s\".\n"
 "Это необходимо для возможности изменения курсора."
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:106
+#: gnome-settings-daemon/gnome-settings-keybindings.c:146
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr "Комбинация клавиш (%s) определена для нескольких действий\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:119
+#: gnome-settings-daemon/gnome-settings-keybindings.c:159
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr "Комбинация клавиш (%s) определена несколько раз\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:125
+#: gnome-settings-daemon/gnome-settings-keybindings.c:165
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr "Комбинация клавиш (%s) полностью не определена\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:153
+#: gnome-settings-daemon/gnome-settings-keybindings.c:193
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr "Комбинация клавиш (%s) недопустима\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:241
+#: gnome-settings-daemon/gnome-settings-keybindings.c:281
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr "Комбинация клавиш (%s) уже используется\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:292
+#: gnome-settings-daemon/gnome-settings-keybindings.c:357
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -2192,7 +2203,7 @@ msgstr ""
 msgid "Screen on which BGApplier is to draw"
 msgstr ""
 
-#: libbackground/preview-file-selection.c:193
+#: libbackground/preview-file-selection.c:207
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Нвозможно найти hbox, используется обычное выделение файла"
 
@@ -2284,6 +2295,21 @@ msgstr ""
 #: libwindow-settings/gnome-wm-manager.c:467
 msgid "OK"
 msgstr "OK"
+
+#~ msgid "Add:"
+#~ msgstr "Добавить:"
+
+#~ msgid "_Category"
+#~ msgstr "_Категория"
+
+#~ msgid "_Delete"
+#~ msgstr "У_далить"
+
+#~ msgid "_Name"
+#~ msgstr "На_именование"
+
+#~ msgid "_General"
+#~ msgstr "_Общие"
 
 #, fuzzy
 #~ msgid "Edit Menu"
@@ -2494,14 +2520,8 @@ msgstr "OK"
 #~ msgid "Use category _defaults"
 #~ msgstr "Использовать _умолчания для категории"
 
-#~ msgid "_Add"
-#~ msgstr "Доб_авить"
-
 #~ msgid "_Protocol name"
 #~ msgstr "На_именование протокола"
-
-#~ msgid "_Remove"
-#~ msgstr "У_брать"
 
 #~ msgid "Add file type"
 #~ msgstr "Добавить тип файла..."

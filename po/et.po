@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 2.0.0\n"
-"POT-Creation-Date: 2002-10-01 14:18-0400\n"
+"POT-Creation-Date: 2002-10-21 12:31-0400\n"
 "PO-Revision-Date: 2002-07-17 21:15+0300\n"
 "Last-Translator: Tõivo Leedjärv <toivo@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
@@ -87,6 +87,7 @@ msgid "Enable _Sticky Keys"
 msgstr "Luba _Kleepuvad Klahvid"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
+#: capplets/sound/sound-properties.glade.h:2
 msgid "General"
 msgstr "Üldine"
 
@@ -295,7 +296,7 @@ msgid "Picture Options:"
 msgstr "Pildi häälestus:"
 
 #: capplets/background/background-properties.glade.h:8
-#: libbackground/preview-file-selection.c:198
+#: libbackground/preview-file-selection.c:212
 msgid "Preview"
 msgstr "Eelvaade"
 
@@ -664,6 +665,7 @@ msgid "Window Manager"
 msgstr "Aknahaldur"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:31
+#: capplets/file-types/file-types-properties.glade.h:22
 msgid "_Name:"
 msgstr "_Nimi:"
 
@@ -809,16 +811,16 @@ msgstr "Pärandrakendused"
 msgid "Legacy applications settings (grdb)"
 msgstr ""
 
-#: capplets/file-types/file-types-capplet.c:214
+#: capplets/file-types/file-types-capplet.c:196
 msgid "Description"
 msgstr "Kirjeldus"
 
-#: capplets/file-types/file-types-capplet.c:236
+#: capplets/file-types/file-types-capplet.c:218
 msgid "Extensions"
 msgstr "Laiendused"
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:1
-#: capplets/file-types/file-types-properties.glade.h:8
+#: capplets/file-types/file-types-properties.glade.h:10
 msgid "File Types and Programs"
 msgstr "Failitüübid ja programmid"
 
@@ -843,60 +845,68 @@ msgid "Add _Service..."
 msgstr "Lisa _teenus..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
-msgid "Add:"
-msgstr "Lisa:"
+#, fuzzy
+msgid "C_hoose..."
+msgstr "_Vali..."
 
 #: capplets/file-types/file-types-properties.glade.h:6
-msgid "Default action"
-msgstr "Vaiketegevus"
+#, fuzzy
+msgid "Cate_gory:"
+msgstr "Kategooria"
 
 #: capplets/file-types/file-types-properties.glade.h:7
+#, fuzzy
+msgid "D_efault action:"
+msgstr "Vaiketegevus"
+
+#: capplets/file-types/file-types-properties.glade.h:8
+#, fuzzy
+msgid "Default _action:"
+msgstr "Vaiketegevus"
+
+#: capplets/file-types/file-types-properties.glade.h:9
 #: capplets/file-types/mime-edit-dialog.c:208
 msgid "Edit file type"
 msgstr "Muuda failitüüpi"
 
-#: capplets/file-types/file-types-properties.glade.h:9
-msgid "Filename Extensions"
+#: capplets/file-types/file-types-properties.glade.h:11
+#, fuzzy
+msgid "Filename extensions:"
 msgstr "Failinime laiendid"
 
-#: capplets/file-types/file-types-properties.glade.h:10
+#: capplets/file-types/file-types-properties.glade.h:12
 msgid "Look at content"
 msgstr "Vaata faili sisu"
 
-#: capplets/file-types/file-types-properties.glade.h:11
+#: capplets/file-types/file-types-properties.glade.h:13
+#, fuzzy
+msgid "P_rogram:"
+msgstr "_Programm"
+
+#: capplets/file-types/file-types-properties.glade.h:14
 msgid "Program to Run"
 msgstr "Käivitatav programm"
 
-#: capplets/file-types/file-types-properties.glade.h:12
+#: capplets/file-types/file-types-properties.glade.h:15
 msgid "Run a program"
 msgstr "Käivita programm"
 
-#: capplets/file-types/file-types-properties.glade.h:13
+#: capplets/file-types/file-types-properties.glade.h:16
 msgid "Run in _Terminal"
 msgstr "Käivita t_erminalis"
 
-#: capplets/file-types/file-types-properties.glade.h:14
+#: capplets/file-types/file-types-properties.glade.h:17
 msgid "Use parent category _defaults"
 msgstr "Kasuta vanemkategooria _vaikeväärtusi"
 
-#: capplets/file-types/file-types-properties.glade.h:15
-msgid "Viewer Component"
-msgstr ""
-
-#: capplets/file-types/file-types-properties.glade.h:16
-msgid "_Category"
-msgstr "_Kategooria"
-
-#: capplets/file-types/file-types-properties.glade.h:17
-msgid "_Choose..."
-msgstr "_Vali..."
-
 #: capplets/file-types/file-types-properties.glade.h:18
-msgid "_Delete"
-msgstr "_Kustuta"
+#, fuzzy
+msgid "_Add:"
+msgstr "_Lisa"
 
 #: capplets/file-types/file-types-properties.glade.h:19
-msgid "_Description"
+#, fuzzy
+msgid "_Description:"
 msgstr "K_irjeldus"
 
 #: capplets/file-types/file-types-properties.glade.h:20
@@ -904,24 +914,27 @@ msgid "_Edit..."
 msgstr "_Muuda..."
 
 #: capplets/file-types/file-types-properties.glade.h:21
-msgid "_MIME Type"
+#, fuzzy
+msgid "_MIME type:"
 msgstr "_MIME tüüp"
 
-#: capplets/file-types/file-types-properties.glade.h:22
-msgid "_Name"
-msgstr "_Nimi"
-
 #: capplets/file-types/file-types-properties.glade.h:23
-msgid "_Program"
-msgstr "_Programm"
-
-#: capplets/file-types/file-types-properties.glade.h:24
-msgid "_Program to Run"
+#, fuzzy
+msgid "_Program to run:"
 msgstr "_Käivitatav programm"
 
-#: capplets/file-types/file-types-properties.glade.h:25
-msgid "_Protocol"
+#: capplets/file-types/file-types-properties.glade.h:24
+#, fuzzy
+msgid "_Protocol:"
 msgstr "_Protokoll"
+
+#: capplets/file-types/file-types-properties.glade.h:25
+msgid "_Remove"
+msgstr "_Eemalda"
+
+#: capplets/file-types/file-types-properties.glade.h:26
+msgid "_Viewer component:"
+msgstr ""
 
 #: capplets/file-types/file-types.desktop.in.h:1
 #, fuzzy
@@ -1695,17 +1708,14 @@ msgstr "Heli häälestus"
 msgid "E_nable sound server startup"
 msgstr "_Luba heliserveri käivitamine"
 
-#: capplets/sound/sound-properties.glade.h:2
-msgid "Sound Preferences"
-msgstr "Heli häälestus"
-
 #: capplets/sound/sound-properties.glade.h:3
-msgid "Sound _Events"
+#, fuzzy
+msgid "Sound Events"
 msgstr "Heli_sündmused"
 
 #: capplets/sound/sound-properties.glade.h:4
-msgid "_General"
-msgstr "_Üldine"
+msgid "Sound Preferences"
+msgstr "Heli häälestus"
 
 #: capplets/sound/sound-properties.glade.h:5
 msgid "_Sounds for events"
@@ -2048,7 +2058,7 @@ msgstr "GNOME kasutajaliidese häälestusprogramm"
 msgid "Use shell even if nautilus is running."
 msgstr "Kasuta kesta isegi siis, kui nautilus töötab."
 
-#: gnome-settings-daemon/factory.c:29
+#: gnome-settings-daemon/factory.c:32
 msgid "Could not initialize Bonobo"
 msgstr ""
 
@@ -2061,32 +2071,32 @@ msgstr ""
 "Ei saa luua kataloogi \"%s\".\n"
 "See on kursorite vahetamiseks vajalik."
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:106
+#: gnome-settings-daemon/gnome-settings-keybindings.c:146
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr "Klahviseose (%s) tegevus on mitu korda defineeritud\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:119
+#: gnome-settings-daemon/gnome-settings-keybindings.c:159
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr "Klahviseose (%s) seos on mitu korda defineeritud\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:125
+#: gnome-settings-daemon/gnome-settings-keybindings.c:165
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr "Klahviseos (%s) on poolik\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:153
+#: gnome-settings-daemon/gnome-settings-keybindings.c:193
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr "Klahviseos (%s) on vigane\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:241
+#: gnome-settings-daemon/gnome-settings-keybindings.c:281
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr "Klahviseos (%s) on juba kasutusel\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:292
+#: gnome-settings-daemon/gnome-settings-keybindings.c:357
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -2157,7 +2167,7 @@ msgstr "Ekraanisäästja"
 msgid "Screen on which BGApplier is to draw"
 msgstr ""
 
-#: libbackground/preview-file-selection.c:193
+#: libbackground/preview-file-selection.c:207
 msgid "Can't find an hbox, using a normal file selection"
 msgstr ""
 
@@ -2249,6 +2259,21 @@ msgstr ""
 #: libwindow-settings/gnome-wm-manager.c:467
 msgid "OK"
 msgstr "Olgu"
+
+#~ msgid "Add:"
+#~ msgstr "Lisa:"
+
+#~ msgid "_Category"
+#~ msgstr "_Kategooria"
+
+#~ msgid "_Delete"
+#~ msgstr "_Kustuta"
+
+#~ msgid "_Name"
+#~ msgstr "_Nimi"
+
+#~ msgid "_General"
+#~ msgstr "_Üldine"
 
 #, fuzzy
 #~ msgid "Edit Menu"
@@ -2368,14 +2393,8 @@ msgstr "Olgu"
 #~ msgid "Use category _defaults"
 #~ msgstr "Kasuta kategooria _vaikeväärtusi"
 
-#~ msgid "_Add"
-#~ msgstr "_Lisa"
-
 #~ msgid "_Protocol name"
 #~ msgstr "_Protokolli nimi"
-
-#~ msgid "_Remove"
-#~ msgstr "_Eemalda"
 
 #~ msgid "Add file type"
 #~ msgstr "Lisa failitüüp"

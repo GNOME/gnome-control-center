@@ -19,7 +19,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2002-10-01 14:18-0400\n"
+"POT-Creation-Date: 2002-10-21 12:31-0400\n"
 "PO-Revision-Date: 2002-07-13 15:32+0200\n"
 "Last-Translator: Ole Laursen <olau@hardworking.dk>\n"
 "Language-Team: danish <dansk@klid.dk>\n"
@@ -99,6 +99,7 @@ msgid "Enable _Sticky Keys"
 msgstr "Aktivér _klæbrige taster"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
+#: capplets/sound/sound-properties.glade.h:2
 msgid "General"
 msgstr "Generelt"
 
@@ -310,7 +311,7 @@ msgid "Picture Options:"
 msgstr "Billedindstillinger:"
 
 #: capplets/background/background-properties.glade.h:8
-#: libbackground/preview-file-selection.c:198
+#: libbackground/preview-file-selection.c:212
 msgid "Preview"
 msgstr "Eksempel"
 
@@ -699,6 +700,7 @@ msgid "Window Manager"
 msgstr "Vindueshåndtering"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:31
+#: capplets/file-types/file-types-properties.glade.h:22
 msgid "_Name:"
 msgstr "_Navn:"
 
@@ -845,16 +847,16 @@ msgstr "Gamle programmer"
 msgid "Legacy applications settings (grdb)"
 msgstr "Indstillinger for ældre programmer (grdb)"
 
-#: capplets/file-types/file-types-capplet.c:214
+#: capplets/file-types/file-types-capplet.c:196
 msgid "Description"
 msgstr "Beskrivelse"
 
-#: capplets/file-types/file-types-capplet.c:236
+#: capplets/file-types/file-types-capplet.c:218
 msgid "Extensions"
 msgstr "Endelser"
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:1
-#: capplets/file-types/file-types-properties.glade.h:8
+#: capplets/file-types/file-types-properties.glade.h:10
 msgid "File Types and Programs"
 msgstr "Filtypeassocieringer"
 
@@ -879,60 +881,67 @@ msgstr "Tilføj _tjeneste..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
 #, fuzzy
-msgid "Add:"
-msgstr "Tilføj"
+msgid "C_hoose..."
+msgstr "_Vælg..."
 
 #: capplets/file-types/file-types-properties.glade.h:6
-msgid "Default action"
-msgstr "Forvalgt handling"
+#, fuzzy
+msgid "Cate_gory:"
+msgstr "Kategori"
 
 #: capplets/file-types/file-types-properties.glade.h:7
+#, fuzzy
+msgid "D_efault action:"
+msgstr "Forvalgt handling"
+
+#: capplets/file-types/file-types-properties.glade.h:8
+#, fuzzy
+msgid "Default _action:"
+msgstr "Forvalgt handling"
+
+#: capplets/file-types/file-types-properties.glade.h:9
 #: capplets/file-types/mime-edit-dialog.c:208
 msgid "Edit file type"
 msgstr "Redigér filtype"
 
-#: capplets/file-types/file-types-properties.glade.h:9
-msgid "Filename Extensions"
+#: capplets/file-types/file-types-properties.glade.h:11
+#, fuzzy
+msgid "Filename extensions:"
 msgstr "Filendelser"
 
-#: capplets/file-types/file-types-properties.glade.h:10
+#: capplets/file-types/file-types-properties.glade.h:12
 msgid "Look at content"
 msgstr "Undersøg indhold"
 
-#: capplets/file-types/file-types-properties.glade.h:11
+#: capplets/file-types/file-types-properties.glade.h:13
+#, fuzzy
+msgid "P_rogram:"
+msgstr "_Program"
+
+#: capplets/file-types/file-types-properties.glade.h:14
 msgid "Program to Run"
 msgstr "Program der skal køres"
 
-#: capplets/file-types/file-types-properties.glade.h:12
+#: capplets/file-types/file-types-properties.glade.h:15
 msgid "Run a program"
 msgstr "Kør et program"
 
-#: capplets/file-types/file-types-properties.glade.h:13
+#: capplets/file-types/file-types-properties.glade.h:16
 msgid "Run in _Terminal"
 msgstr "Start i t_erminal"
 
-#: capplets/file-types/file-types-properties.glade.h:14
+#: capplets/file-types/file-types-properties.glade.h:17
 msgid "Use parent category _defaults"
 msgstr "Benyt forælderkategoriens _forvalg"
 
-#: capplets/file-types/file-types-properties.glade.h:15
-msgid "Viewer Component"
-msgstr "Fremviserkomponent"
-
-#: capplets/file-types/file-types-properties.glade.h:16
-msgid "_Category"
-msgstr "_Kategori"
-
-#: capplets/file-types/file-types-properties.glade.h:17
-msgid "_Choose..."
-msgstr "_Vælg..."
-
 #: capplets/file-types/file-types-properties.glade.h:18
-msgid "_Delete"
-msgstr "_Slet"
+#, fuzzy
+msgid "_Add:"
+msgstr "_Tilføj"
 
 #: capplets/file-types/file-types-properties.glade.h:19
-msgid "_Description"
+#, fuzzy
+msgid "_Description:"
 msgstr "_Beskrivelse"
 
 #: capplets/file-types/file-types-properties.glade.h:20
@@ -940,24 +949,28 @@ msgid "_Edit..."
 msgstr "_Redigér..."
 
 #: capplets/file-types/file-types-properties.glade.h:21
-msgid "_MIME Type"
+#, fuzzy
+msgid "_MIME type:"
 msgstr "_MIME-type"
 
-#: capplets/file-types/file-types-properties.glade.h:22
-msgid "_Name"
-msgstr "_Navn"
-
 #: capplets/file-types/file-types-properties.glade.h:23
-msgid "_Program"
-msgstr "_Program"
-
-#: capplets/file-types/file-types-properties.glade.h:24
-msgid "_Program to Run"
+#, fuzzy
+msgid "_Program to run:"
 msgstr "_Program der skal køres"
 
-#: capplets/file-types/file-types-properties.glade.h:25
-msgid "_Protocol"
+#: capplets/file-types/file-types-properties.glade.h:24
+#, fuzzy
+msgid "_Protocol:"
 msgstr "_Protokol"
+
+#: capplets/file-types/file-types-properties.glade.h:25
+msgid "_Remove"
+msgstr "_Fjern"
+
+#: capplets/file-types/file-types-properties.glade.h:26
+#, fuzzy
+msgid "_Viewer component:"
+msgstr "Fremviserkomponent"
 
 #: capplets/file-types/file-types.desktop.in.h:1
 #, fuzzy
@@ -1746,17 +1759,14 @@ msgstr "Lydindstillinger"
 msgid "E_nable sound server startup"
 msgstr "A_ktivér lydserveropstart"
 
-#: capplets/sound/sound-properties.glade.h:2
-msgid "Sound Preferences"
-msgstr "Lydindstillinger"
-
 #: capplets/sound/sound-properties.glade.h:3
-msgid "Sound _Events"
+#, fuzzy
+msgid "Sound Events"
 msgstr "Lyd_hændelser"
 
 #: capplets/sound/sound-properties.glade.h:4
-msgid "_General"
-msgstr "_Generelt"
+msgid "Sound Preferences"
+msgstr "Lydindstillinger"
 
 #: capplets/sound/sound-properties.glade.h:5
 msgid "_Sounds for events"
@@ -2102,7 +2112,7 @@ msgstr "Et centralt opsætningsværktøj til Gnome"
 msgid "Use shell even if nautilus is running."
 msgstr "Benyt skal også selvom Nautilus kører"
 
-#: gnome-settings-daemon/factory.c:29
+#: gnome-settings-daemon/factory.c:32
 msgid "Could not initialize Bonobo"
 msgstr "Kunne ikke klargøre Bonobo"
 
@@ -2115,32 +2125,32 @@ msgstr ""
 "Kan ikke oprette mappen \"%s\".\n"
 "Dette er nødvendigt for at kunne skifte markør."
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:106
+#: gnome-settings-daemon/gnome-settings-keybindings.c:146
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr "Tastegenvejen %s har sin handling defineret flere gange\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:119
+#: gnome-settings-daemon/gnome-settings-keybindings.c:159
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr "Tastegenvejen %s har sin binding defineret flere gange\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:125
+#: gnome-settings-daemon/gnome-settings-keybindings.c:165
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr "Tastegenvejen %s er ufuldstændig\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:153
+#: gnome-settings-daemon/gnome-settings-keybindings.c:193
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr "Tastegenvejen %s er ugyldig\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:241
+#: gnome-settings-daemon/gnome-settings-keybindings.c:281
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr "Tastegenvejen %s er allerede i brug\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:292
+#: gnome-settings-daemon/gnome-settings-keybindings.c:357
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -2214,7 +2224,7 @@ msgstr ""
 msgid "Screen on which BGApplier is to draw"
 msgstr ""
 
-#: libbackground/preview-file-selection.c:193
+#: libbackground/preview-file-selection.c:207
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Kunne ikke finde en hbox, bruger en almindelig filvælger"
 
@@ -2305,6 +2315,22 @@ msgstr ""
 #: libwindow-settings/gnome-wm-manager.c:467
 msgid "OK"
 msgstr "O.k."
+
+#, fuzzy
+#~ msgid "Add:"
+#~ msgstr "Tilføj"
+
+#~ msgid "_Category"
+#~ msgstr "_Kategori"
+
+#~ msgid "_Delete"
+#~ msgstr "_Slet"
+
+#~ msgid "_Name"
+#~ msgstr "_Navn"
+
+#~ msgid "_General"
+#~ msgstr "_Generelt"
 
 #, fuzzy
 #~ msgid "Edit Menu"
@@ -2527,15 +2553,9 @@ msgstr "O.k."
 #~ msgid "Use category _defaults"
 #~ msgstr "Benyt kategori_forvalg"
 
-#~ msgid "_Add"
-#~ msgstr "_Tilføj"
-
 # ditto
 #~ msgid "_Protocol name"
 #~ msgstr "_Protokolnavn"
-
-#~ msgid "_Remove"
-#~ msgstr "_Fjern"
 
 #~ msgid "Add file type"
 #~ msgstr "Tilføj filtype"

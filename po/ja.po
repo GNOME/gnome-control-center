@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center CVS-20010216\n"
-"POT-Creation-Date: 2002-10-01 14:18-0400\n"
+"POT-Creation-Date: 2002-10-21 12:31-0400\n"
 "PO-Revision-Date: 2001-07-20 13:55+0900\n"
 "Last-Translator: Akira TAGOH <tagoh@gnome.gr.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
@@ -88,6 +88,7 @@ msgid "Enable _Sticky Keys"
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
+#: capplets/sound/sound-properties.glade.h:2
 #, fuzzy
 msgid "General"
 msgstr "一般"
@@ -299,7 +300,7 @@ msgid "Picture Options:"
 msgstr "オプション"
 
 #: capplets/background/background-properties.glade.h:8
-#: libbackground/preview-file-selection.c:198
+#: libbackground/preview-file-selection.c:212
 msgid "Preview"
 msgstr "試写"
 
@@ -680,6 +681,7 @@ msgid "Window Manager"
 msgstr "ウィンドウマネージャのエディット"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:31
+#: capplets/file-types/file-types-properties.glade.h:22
 #, fuzzy
 msgid "_Name:"
 msgstr "名前:"
@@ -841,16 +843,16 @@ msgstr ""
 msgid "Legacy applications settings (grdb)"
 msgstr ""
 
-#: capplets/file-types/file-types-capplet.c:214
+#: capplets/file-types/file-types-capplet.c:196
 msgid "Description"
 msgstr "説明"
 
-#: capplets/file-types/file-types-capplet.c:236
+#: capplets/file-types/file-types-capplet.c:218
 msgid "Extensions"
 msgstr "拡張子"
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:1
-#: capplets/file-types/file-types-properties.glade.h:8
+#: capplets/file-types/file-types-properties.glade.h:10
 msgid "File Types and Programs"
 msgstr ""
 
@@ -875,68 +877,69 @@ msgstr "MIME型の追加"
 
 #: capplets/file-types/file-types-properties.glade.h:5
 #, fuzzy
-msgid "Add:"
-msgstr "追加"
+msgid "C_hoose..."
+msgstr "参照..."
 
 #: capplets/file-types/file-types-properties.glade.h:6
-#, fuzzy
-msgid "Default action"
-msgstr "インストールするテーマを選択"
+msgid "Cate_gory:"
+msgstr ""
 
 #: capplets/file-types/file-types-properties.glade.h:7
+#, fuzzy
+msgid "D_efault action:"
+msgstr "インストールするテーマを選択"
+
+#: capplets/file-types/file-types-properties.glade.h:8
+#, fuzzy
+msgid "Default _action:"
+msgstr "インストールするテーマを選択"
+
+#: capplets/file-types/file-types-properties.glade.h:9
 #: capplets/file-types/mime-edit-dialog.c:208
 msgid "Edit file type"
 msgstr ""
 
-#: capplets/file-types/file-types-properties.glade.h:9
+#: capplets/file-types/file-types-properties.glade.h:11
 #, fuzzy
-msgid "Filename Extensions"
+msgid "Filename extensions:"
 msgstr "拡張子"
 
-#: capplets/file-types/file-types-properties.glade.h:10
+#: capplets/file-types/file-types-properties.glade.h:12
 msgid "Look at content"
 msgstr ""
 
-#: capplets/file-types/file-types-properties.glade.h:11
+#: capplets/file-types/file-types-properties.glade.h:13
+#, fuzzy
+msgid "P_rogram:"
+msgstr "プログラム"
+
+#: capplets/file-types/file-types-properties.glade.h:14
 #, fuzzy
 msgid "Program to Run"
 msgstr "プログラム"
 
-#: capplets/file-types/file-types-properties.glade.h:12
+#: capplets/file-types/file-types-properties.glade.h:15
 #, fuzzy
 msgid "Run a program"
 msgstr "プログラム"
 
-#: capplets/file-types/file-types-properties.glade.h:13
+#: capplets/file-types/file-types-properties.glade.h:16
 #, fuzzy
 msgid "Run in _Terminal"
 msgstr "端末内で動かす"
 
-#: capplets/file-types/file-types-properties.glade.h:14
+#: capplets/file-types/file-types-properties.glade.h:17
 msgid "Use parent category _defaults"
 msgstr ""
 
-#: capplets/file-types/file-types-properties.glade.h:15
-msgid "Viewer Component"
-msgstr ""
-
-#: capplets/file-types/file-types-properties.glade.h:16
-msgid "_Category"
-msgstr ""
-
-#: capplets/file-types/file-types-properties.glade.h:17
-#, fuzzy
-msgid "_Choose..."
-msgstr "参照..."
-
 #: capplets/file-types/file-types-properties.glade.h:18
 #, fuzzy
-msgid "_Delete"
-msgstr "削除"
+msgid "_Add:"
+msgstr "追加"
 
 #: capplets/file-types/file-types-properties.glade.h:19
 #, fuzzy
-msgid "_Description"
+msgid "_Description:"
 msgstr "説明"
 
 #: capplets/file-types/file-types-properties.glade.h:20
@@ -946,28 +949,27 @@ msgstr "編集..."
 
 #: capplets/file-types/file-types-properties.glade.h:21
 #, fuzzy
-msgid "_MIME Type"
+msgid "_MIME type:"
 msgstr "MIME型:"
-
-#: capplets/file-types/file-types-properties.glade.h:22
-#, fuzzy
-msgid "_Name"
-msgstr "名前:"
 
 #: capplets/file-types/file-types-properties.glade.h:23
 #, fuzzy
-msgid "_Program"
+msgid "_Program to run:"
 msgstr "プログラム"
 
 #: capplets/file-types/file-types-properties.glade.h:24
 #, fuzzy
-msgid "_Program to Run"
-msgstr "プログラム"
+msgid "_Protocol:"
+msgstr "プロトコル"
 
 #: capplets/file-types/file-types-properties.glade.h:25
 #, fuzzy
-msgid "_Protocol"
-msgstr "プロトコル"
+msgid "_Remove"
+msgstr "削除"
+
+#: capplets/file-types/file-types-properties.glade.h:26
+msgid "_Viewer component:"
+msgstr ""
 
 #: capplets/file-types/file-types.desktop.in.h:1
 #, fuzzy
@@ -1766,20 +1768,15 @@ msgstr "バックグラウンドの色"
 msgid "E_nable sound server startup"
 msgstr "起動時に音サーバーを使う"
 
-#: capplets/sound/sound-properties.glade.h:2
-#, fuzzy
-msgid "Sound Preferences"
-msgstr "バックグラウンドの色"
-
 #: capplets/sound/sound-properties.glade.h:3
 #, fuzzy
-msgid "Sound _Events"
+msgid "Sound Events"
 msgstr "サウンドイベント"
 
 #: capplets/sound/sound-properties.glade.h:4
 #, fuzzy
-msgid "_General"
-msgstr "一般"
+msgid "Sound Preferences"
+msgstr "バックグラウンドの色"
 
 #: capplets/sound/sound-properties.glade.h:5
 #, fuzzy
@@ -2145,7 +2142,7 @@ msgstr "GNOMEの設定ツールです"
 msgid "Use shell even if nautilus is running."
 msgstr ""
 
-#: gnome-settings-daemon/factory.c:29
+#: gnome-settings-daemon/factory.c:32
 msgid "Could not initialize Bonobo"
 msgstr ""
 
@@ -2156,32 +2153,32 @@ msgid ""
 "This is needed to allow changing cursors."
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:106
+#: gnome-settings-daemon/gnome-settings-keybindings.c:146
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:119
+#: gnome-settings-daemon/gnome-settings-keybindings.c:159
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:125
+#: gnome-settings-daemon/gnome-settings-keybindings.c:165
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:153
+#: gnome-settings-daemon/gnome-settings-keybindings.c:193
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:241
+#: gnome-settings-daemon/gnome-settings-keybindings.c:281
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:292
+#: gnome-settings-daemon/gnome-settings-keybindings.c:357
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -2250,7 +2247,7 @@ msgstr "新しいスクリーンセーバー"
 msgid "Screen on which BGApplier is to draw"
 msgstr ""
 
-#: libbackground/preview-file-selection.c:193
+#: libbackground/preview-file-selection.c:207
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "hboxが見つからないので、普通のファイル選択を使います"
 
@@ -2346,6 +2343,22 @@ msgid "OK"
 msgstr "適用"
 
 #, fuzzy
+#~ msgid "Add:"
+#~ msgstr "追加"
+
+#, fuzzy
+#~ msgid "_Delete"
+#~ msgstr "削除"
+
+#, fuzzy
+#~ msgid "_Name"
+#~ msgstr "名前:"
+
+#, fuzzy
+#~ msgid "_General"
+#~ msgstr "一般"
+
+#, fuzzy
 #~ msgid "Edit Menu"
 #~ msgstr "編集"
 
@@ -2389,16 +2402,8 @@ msgstr "適用"
 #~ msgstr "端末内で動かす"
 
 #, fuzzy
-#~ msgid "_Add"
-#~ msgstr "追加"
-
-#, fuzzy
 #~ msgid "_Protocol name"
 #~ msgstr "プロトコル"
-
-#, fuzzy
-#~ msgid "_Remove"
-#~ msgstr "削除"
 
 #, fuzzy
 #~ msgid "Add file type"

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-centre CVS\n"
-"POT-Creation-Date: 2002-10-01 14:18-0400\n"
+"POT-Creation-Date: 2002-10-21 12:31-0400\n"
 "PO-Revision-Date: 2000-07-15\n"
 "Last-Translator: Robert Brady <rwb197@ecs.soton.ac.uk>\n"
 "Language-Team: \n"
@@ -82,6 +82,7 @@ msgid "Enable _Sticky Keys"
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
+#: capplets/sound/sound-properties.glade.h:2
 msgid "General"
 msgstr ""
 
@@ -287,7 +288,7 @@ msgid "Picture Options:"
 msgstr ""
 
 #: capplets/background/background-properties.glade.h:8
-#: libbackground/preview-file-selection.c:198
+#: libbackground/preview-file-selection.c:212
 msgid "Preview"
 msgstr ""
 
@@ -646,6 +647,7 @@ msgid "Window Manager"
 msgstr ""
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:31
+#: capplets/file-types/file-types-properties.glade.h:22
 msgid "_Name:"
 msgstr ""
 
@@ -793,16 +795,16 @@ msgstr ""
 msgid "Legacy applications settings (grdb)"
 msgstr ""
 
-#: capplets/file-types/file-types-capplet.c:214
+#: capplets/file-types/file-types-capplet.c:196
 msgid "Description"
 msgstr ""
 
-#: capplets/file-types/file-types-capplet.c:236
+#: capplets/file-types/file-types-capplet.c:218
 msgid "Extensions"
 msgstr ""
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:1
-#: capplets/file-types/file-types-properties.glade.h:8
+#: capplets/file-types/file-types-properties.glade.h:10
 msgid "File Types and Programs"
 msgstr ""
 
@@ -823,60 +825,60 @@ msgid "Add _Service..."
 msgstr ""
 
 #: capplets/file-types/file-types-properties.glade.h:5
-msgid "Add:"
+msgid "C_hoose..."
 msgstr ""
 
 #: capplets/file-types/file-types-properties.glade.h:6
-msgid "Default action"
+msgid "Cate_gory:"
 msgstr ""
 
 #: capplets/file-types/file-types-properties.glade.h:7
+msgid "D_efault action:"
+msgstr ""
+
+#: capplets/file-types/file-types-properties.glade.h:8
+msgid "Default _action:"
+msgstr ""
+
+#: capplets/file-types/file-types-properties.glade.h:9
 #: capplets/file-types/mime-edit-dialog.c:208
 msgid "Edit file type"
 msgstr ""
 
-#: capplets/file-types/file-types-properties.glade.h:9
-msgid "Filename Extensions"
-msgstr ""
-
-#: capplets/file-types/file-types-properties.glade.h:10
-msgid "Look at content"
-msgstr ""
-
 #: capplets/file-types/file-types-properties.glade.h:11
-msgid "Program to Run"
+msgid "Filename extensions:"
 msgstr ""
 
 #: capplets/file-types/file-types-properties.glade.h:12
-msgid "Run a program"
+msgid "Look at content"
 msgstr ""
 
 #: capplets/file-types/file-types-properties.glade.h:13
-msgid "Run in _Terminal"
+msgid "P_rogram:"
 msgstr ""
 
 #: capplets/file-types/file-types-properties.glade.h:14
-msgid "Use parent category _defaults"
+msgid "Program to Run"
 msgstr ""
 
 #: capplets/file-types/file-types-properties.glade.h:15
-msgid "Viewer Component"
+msgid "Run a program"
 msgstr ""
 
 #: capplets/file-types/file-types-properties.glade.h:16
-msgid "_Category"
+msgid "Run in _Terminal"
 msgstr ""
 
 #: capplets/file-types/file-types-properties.glade.h:17
-msgid "_Choose..."
+msgid "Use parent category _defaults"
 msgstr ""
 
 #: capplets/file-types/file-types-properties.glade.h:18
-msgid "_Delete"
+msgid "_Add:"
 msgstr ""
 
 #: capplets/file-types/file-types-properties.glade.h:19
-msgid "_Description"
+msgid "_Description:"
 msgstr ""
 
 #: capplets/file-types/file-types-properties.glade.h:20
@@ -884,23 +886,23 @@ msgid "_Edit..."
 msgstr ""
 
 #: capplets/file-types/file-types-properties.glade.h:21
-msgid "_MIME Type"
-msgstr ""
-
-#: capplets/file-types/file-types-properties.glade.h:22
-msgid "_Name"
+msgid "_MIME type:"
 msgstr ""
 
 #: capplets/file-types/file-types-properties.glade.h:23
-msgid "_Program"
+msgid "_Program to run:"
 msgstr ""
 
 #: capplets/file-types/file-types-properties.glade.h:24
-msgid "_Program to Run"
+msgid "_Protocol:"
 msgstr ""
 
 #: capplets/file-types/file-types-properties.glade.h:25
-msgid "_Protocol"
+msgid "_Remove"
+msgstr ""
+
+#: capplets/file-types/file-types-properties.glade.h:26
+msgid "_Viewer component:"
 msgstr ""
 
 #: capplets/file-types/file-types.desktop.in.h:1
@@ -1643,18 +1645,15 @@ msgstr "Control Centre"
 msgid "E_nable sound server startup"
 msgstr ""
 
-#: capplets/sound/sound-properties.glade.h:2
+#: capplets/sound/sound-properties.glade.h:3
+#, fuzzy
+msgid "Sound Events"
+msgstr "Control Centre"
+
+#: capplets/sound/sound-properties.glade.h:4
 #, fuzzy
 msgid "Sound Preferences"
 msgstr "Control Centre"
-
-#: capplets/sound/sound-properties.glade.h:3
-msgid "Sound _Events"
-msgstr ""
-
-#: capplets/sound/sound-properties.glade.h:4
-msgid "_General"
-msgstr ""
 
 #: capplets/sound/sound-properties.glade.h:5
 msgid "_Sounds for events"
@@ -1991,7 +1990,7 @@ msgstr ""
 msgid "Use shell even if nautilus is running."
 msgstr ""
 
-#: gnome-settings-daemon/factory.c:29
+#: gnome-settings-daemon/factory.c:32
 msgid "Could not initialize Bonobo"
 msgstr ""
 
@@ -2002,32 +2001,32 @@ msgid ""
 "This is needed to allow changing cursors."
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:106
+#: gnome-settings-daemon/gnome-settings-keybindings.c:146
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:119
+#: gnome-settings-daemon/gnome-settings-keybindings.c:159
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:125
+#: gnome-settings-daemon/gnome-settings-keybindings.c:165
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:153
+#: gnome-settings-daemon/gnome-settings-keybindings.c:193
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:241
+#: gnome-settings-daemon/gnome-settings-keybindings.c:281
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:292
+#: gnome-settings-daemon/gnome-settings-keybindings.c:357
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -2092,7 +2091,7 @@ msgstr ""
 msgid "Screen on which BGApplier is to draw"
 msgstr ""
 
-#: libbackground/preview-file-selection.c:193
+#: libbackground/preview-file-selection.c:207
 msgid "Can't find an hbox, using a normal file selection"
 msgstr ""
 

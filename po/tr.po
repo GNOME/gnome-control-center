@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 1.5.0\n"
-"POT-Creation-Date: 2002-10-01 14:18-0400\n"
+"POT-Creation-Date: 2002-10-21 12:31-0400\n"
 "PO-Revision-Date: 2002-06-25 00:23+0300\n"
 "Last-Translator: Görkem Çetin <gorkem@gelecek.com.tr>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
@@ -87,6 +87,7 @@ msgid "Enable _Sticky Keys"
 msgstr "_Yapışkan Tuşları Etkinleştir"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
+#: capplets/sound/sound-properties.glade.h:2
 #, fuzzy
 msgid "General"
 msgstr "_Genel"
@@ -295,7 +296,7 @@ msgid "Picture Options:"
 msgstr "Resim Seçenekleri:"
 
 #: capplets/background/background-properties.glade.h:8
-#: libbackground/preview-file-selection.c:198
+#: libbackground/preview-file-selection.c:212
 msgid "Preview"
 msgstr "Önizleme"
 
@@ -654,6 +655,7 @@ msgid "Window Manager"
 msgstr "Pencere Yöneticisi"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:31
+#: capplets/file-types/file-types-properties.glade.h:22
 msgid "_Name:"
 msgstr "İ_sim:"
 
@@ -804,16 +806,16 @@ msgstr "Özel Uygulamalar"
 msgid "Legacy applications settings (grdb)"
 msgstr "Özel uygulama ayarları (grdb)"
 
-#: capplets/file-types/file-types-capplet.c:214
+#: capplets/file-types/file-types-capplet.c:196
 msgid "Description"
 msgstr "Açıklama"
 
-#: capplets/file-types/file-types-capplet.c:236
+#: capplets/file-types/file-types-capplet.c:218
 msgid "Extensions"
 msgstr "Uzantılar"
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:1
-#: capplets/file-types/file-types-properties.glade.h:8
+#: capplets/file-types/file-types-properties.glade.h:10
 msgid "File Types and Programs"
 msgstr "Dosya Türleri ve Programlar"
 
@@ -837,65 +839,69 @@ msgstr "Servis _ekle..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
 #, fuzzy
-msgid "Add:"
-msgstr "_Ekle"
+msgid "C_hoose..."
+msgstr "_Seç..."
 
 #: capplets/file-types/file-types-properties.glade.h:6
-msgid "Default action"
-msgstr "Öntanımlı eylem"
+#, fuzzy
+msgid "Cate_gory:"
+msgstr "Kategori"
 
 #: capplets/file-types/file-types-properties.glade.h:7
+#, fuzzy
+msgid "D_efault action:"
+msgstr "Öntanımlı eylem"
+
+#: capplets/file-types/file-types-properties.glade.h:8
+#, fuzzy
+msgid "Default _action:"
+msgstr "Öntanımlı eylem"
+
+#: capplets/file-types/file-types-properties.glade.h:9
 #: capplets/file-types/mime-edit-dialog.c:208
 msgid "Edit file type"
 msgstr "Dosya türünü düzenle"
 
-#: capplets/file-types/file-types-properties.glade.h:9
+#: capplets/file-types/file-types-properties.glade.h:11
 #, fuzzy
-msgid "Filename Extensions"
+msgid "Filename extensions:"
 msgstr "Dosya adı uzantıları"
 
-#: capplets/file-types/file-types-properties.glade.h:10
+#: capplets/file-types/file-types-properties.glade.h:12
 msgid "Look at content"
 msgstr "İçeriğe bak"
 
-#: capplets/file-types/file-types-properties.glade.h:11
+#: capplets/file-types/file-types-properties.glade.h:13
+#, fuzzy
+msgid "P_rogram:"
+msgstr "_Program"
+
+#: capplets/file-types/file-types-properties.glade.h:14
 #, fuzzy
 msgid "Program to Run"
 msgstr "Çalıştırılacak program"
 
-#: capplets/file-types/file-types-properties.glade.h:12
+#: capplets/file-types/file-types-properties.glade.h:15
 msgid "Run a program"
 msgstr "Bir program çalıştır"
 
-#: capplets/file-types/file-types-properties.glade.h:13
+#: capplets/file-types/file-types-properties.glade.h:16
 #, fuzzy
 msgid "Run in _Terminal"
 msgstr "_Terminalde Başlat"
 
-#: capplets/file-types/file-types-properties.glade.h:14
+#: capplets/file-types/file-types-properties.glade.h:17
 msgid "Use parent category _defaults"
 msgstr ""
 
-#: capplets/file-types/file-types-properties.glade.h:15
-#, fuzzy
-msgid "Viewer Component"
-msgstr "İzleme bileşeni"
-
-#: capplets/file-types/file-types-properties.glade.h:16
-msgid "_Category"
-msgstr "_Kategori"
-
-#: capplets/file-types/file-types-properties.glade.h:17
-msgid "_Choose..."
-msgstr "_Seç..."
-
 #: capplets/file-types/file-types-properties.glade.h:18
 #, fuzzy
-msgid "_Delete"
-msgstr "Sil"
+msgid "_Add:"
+msgstr "_Ekle"
 
 #: capplets/file-types/file-types-properties.glade.h:19
-msgid "_Description"
+#, fuzzy
+msgid "_Description:"
 msgstr "_Açıklama"
 
 #: capplets/file-types/file-types-properties.glade.h:20
@@ -903,26 +909,28 @@ msgid "_Edit..."
 msgstr "_Düzenleme..."
 
 #: capplets/file-types/file-types-properties.glade.h:21
-msgid "_MIME Type"
+#, fuzzy
+msgid "_MIME type:"
 msgstr "_MIME Türü"
 
-#: capplets/file-types/file-types-properties.glade.h:22
-msgid "_Name"
-msgstr "İ_sim"
-
 #: capplets/file-types/file-types-properties.glade.h:23
-msgid "_Program"
-msgstr "_Program"
+#, fuzzy
+msgid "_Program to run:"
+msgstr "Ç_alıştırılacak program"
 
 #: capplets/file-types/file-types-properties.glade.h:24
 #, fuzzy
-msgid "_Program to Run"
-msgstr "Ç_alıştırılacak program"
+msgid "_Protocol:"
+msgstr "Lütfen bir protokol adı verin."
 
 #: capplets/file-types/file-types-properties.glade.h:25
+msgid "_Remove"
+msgstr "_Sil"
+
+#: capplets/file-types/file-types-properties.glade.h:26
 #, fuzzy
-msgid "_Protocol"
-msgstr "Lütfen bir protokol adı verin."
+msgid "_Viewer component:"
+msgstr "İzleme bileşeni"
 
 #: capplets/file-types/file-types.desktop.in.h:1
 #, fuzzy
@@ -1711,18 +1719,15 @@ msgstr "Ses tercihleri"
 msgid "E_nable sound server startup"
 msgstr "_Başlangıçta ses sunucusunu çalıştır"
 
-#: capplets/sound/sound-properties.glade.h:2
-#, fuzzy
-msgid "Sound Preferences"
-msgstr "Ses tercihleri"
-
 #: capplets/sound/sound-properties.glade.h:3
-msgid "Sound _Events"
+#, fuzzy
+msgid "Sound Events"
 msgstr "Ses _Olayları"
 
 #: capplets/sound/sound-properties.glade.h:4
-msgid "_General"
-msgstr "_Genel"
+#, fuzzy
+msgid "Sound Preferences"
+msgstr "Ses tercihleri"
 
 #: capplets/sound/sound-properties.glade.h:5
 msgid "_Sounds for events"
@@ -2072,7 +2077,7 @@ msgstr "GNOME yapılandırma aracı"
 msgid "Use shell even if nautilus is running."
 msgstr ""
 
-#: gnome-settings-daemon/factory.c:29
+#: gnome-settings-daemon/factory.c:32
 msgid "Could not initialize Bonobo"
 msgstr "Bonobo başlatılamadı"
 
@@ -2083,32 +2088,32 @@ msgid ""
 "This is needed to allow changing cursors."
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:106
+#: gnome-settings-daemon/gnome-settings-keybindings.c:146
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:119
+#: gnome-settings-daemon/gnome-settings-keybindings.c:159
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:125
+#: gnome-settings-daemon/gnome-settings-keybindings.c:165
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:153
+#: gnome-settings-daemon/gnome-settings-keybindings.c:193
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:241
+#: gnome-settings-daemon/gnome-settings-keybindings.c:281
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:292
+#: gnome-settings-daemon/gnome-settings-keybindings.c:357
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -2174,7 +2179,7 @@ msgstr "Ekran Koruyucusu"
 msgid "Screen on which BGApplier is to draw"
 msgstr ""
 
-#: libbackground/preview-file-selection.c:193
+#: libbackground/preview-file-selection.c:207
 msgid "Can't find an hbox, using a normal file selection"
 msgstr ""
 
@@ -2255,6 +2260,19 @@ msgstr ""
 #: libwindow-settings/gnome-wm-manager.c:467
 msgid "OK"
 msgstr "Tamam"
+
+#~ msgid "_Category"
+#~ msgstr "_Kategori"
+
+#, fuzzy
+#~ msgid "_Delete"
+#~ msgstr "Sil"
+
+#~ msgid "_Name"
+#~ msgstr "İ_sim"
+
+#~ msgid "_General"
+#~ msgstr "_Genel"
 
 #~ msgid "_Menu"
 #~ msgstr "_Menü"
@@ -2354,9 +2372,6 @@ msgstr "Tamam"
 
 #~ msgid "_Protocol name"
 #~ msgstr "_Protokol adı"
-
-#~ msgid "_Remove"
-#~ msgstr "_Sil"
 
 #~ msgid "Add file type"
 #~ msgstr "Dosya türü ekle"

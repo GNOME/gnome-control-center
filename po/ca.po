@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.0.0\n"
-"POT-Creation-Date: 2002-10-01 14:18-0400\n"
+"POT-Creation-Date: 2002-10-21 12:31-0400\n"
 "PO-Revision-Date: 2002-07-22 12:46+0200\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <gnome@softcatala.net>\n"
@@ -91,6 +91,7 @@ msgstr "Habilita les tecles en_ganxoses"
 
 #
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
+#: capplets/sound/sound-properties.glade.h:2
 msgid "General"
 msgstr "General"
 
@@ -311,7 +312,7 @@ msgid "Picture Options:"
 msgstr "Opcions d'imatge:"
 
 #: capplets/background/background-properties.glade.h:8
-#: libbackground/preview-file-selection.c:198
+#: libbackground/preview-file-selection.c:212
 msgid "Preview"
 msgstr "Previsualització"
 
@@ -724,6 +725,7 @@ msgstr "Gestor de finestres"
 
 #
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:31
+#: capplets/file-types/file-types-properties.glade.h:22
 msgid "_Name:"
 msgstr "_Nom:"
 
@@ -883,16 +885,16 @@ msgstr "Aplicacions originals"
 msgid "Legacy applications settings (grdb)"
 msgstr "Configuracions d'aplicacions originals (grdb)"
 
-#: capplets/file-types/file-types-capplet.c:214
+#: capplets/file-types/file-types-capplet.c:196
 msgid "Description"
 msgstr "Descripció"
 
-#: capplets/file-types/file-types-capplet.c:236
+#: capplets/file-types/file-types-capplet.c:218
 msgid "Extensions"
 msgstr "Extensions"
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:1
-#: capplets/file-types/file-types-properties.glade.h:8
+#: capplets/file-types/file-types-properties.glade.h:10
 msgid "File Types and Programs"
 msgstr "Tipus de fitxers i programes"
 
@@ -918,67 +920,75 @@ msgstr "Afegeix un _servei..."
 
 #
 #: capplets/file-types/file-types-properties.glade.h:5
-msgid "Add:"
-msgstr "Afegeix:"
+#, fuzzy
+msgid "C_hoose..."
+msgstr "Es_cull..."
+
+#: capplets/file-types/file-types-properties.glade.h:6
+#, fuzzy
+msgid "Cate_gory:"
+msgstr "Categoria"
 
 #
-#: capplets/file-types/file-types-properties.glade.h:6
-msgid "Default action"
+#: capplets/file-types/file-types-properties.glade.h:7
+#, fuzzy
+msgid "D_efault action:"
 msgstr "Acció per defecte"
 
-#: capplets/file-types/file-types-properties.glade.h:7
+#
+#: capplets/file-types/file-types-properties.glade.h:8
+#, fuzzy
+msgid "Default _action:"
+msgstr "Acció per defecte"
+
+#: capplets/file-types/file-types-properties.glade.h:9
 #: capplets/file-types/mime-edit-dialog.c:208
 msgid "Edit file type"
 msgstr "Edita el tipus de fitxer"
 
 #
-#: capplets/file-types/file-types-properties.glade.h:9
-msgid "Filename Extensions"
+#: capplets/file-types/file-types-properties.glade.h:11
+#, fuzzy
+msgid "Filename extensions:"
 msgstr "Extensions de noms de fitxer"
 
-#: capplets/file-types/file-types-properties.glade.h:10
+#: capplets/file-types/file-types-properties.glade.h:12
 msgid "Look at content"
 msgstr "Visualitza el contingut"
 
-#: capplets/file-types/file-types-properties.glade.h:11
+#
+#: capplets/file-types/file-types-properties.glade.h:13
+#, fuzzy
+msgid "P_rogram:"
+msgstr "_Programa"
+
+#: capplets/file-types/file-types-properties.glade.h:14
 msgid "Program to Run"
 msgstr "Programa a executar"
 
-#: capplets/file-types/file-types-properties.glade.h:12
+#: capplets/file-types/file-types-properties.glade.h:15
 msgid "Run a program"
 msgstr "Executa un programa"
 
 #
-#: capplets/file-types/file-types-properties.glade.h:13
+#: capplets/file-types/file-types-properties.glade.h:16
 msgid "Run in _Terminal"
 msgstr "Executa a un _Terminal"
 
-#: capplets/file-types/file-types-properties.glade.h:14
+#: capplets/file-types/file-types-properties.glade.h:17
 msgid "Use parent category _defaults"
 msgstr "Utilitza les categories pare per _defecte"
 
-#: capplets/file-types/file-types-properties.glade.h:15
-msgid "Viewer Component"
-msgstr "Component de visualització"
-
-#
-#: capplets/file-types/file-types-properties.glade.h:16
-msgid "_Category"
-msgstr "_Categoria"
-
-#
-#: capplets/file-types/file-types-properties.glade.h:17
-msgid "_Choose..."
-msgstr "Es_cull..."
-
 #
 #: capplets/file-types/file-types-properties.glade.h:18
-msgid "_Delete"
-msgstr "_Esborra"
+#, fuzzy
+msgid "_Add:"
+msgstr "_Afegeix"
 
 #
 #: capplets/file-types/file-types-properties.glade.h:19
-msgid "_Description"
+#, fuzzy
+msgid "_Description:"
 msgstr "_Descripció"
 
 #
@@ -988,28 +998,31 @@ msgstr "_Edita..."
 
 #
 #: capplets/file-types/file-types-properties.glade.h:21
-msgid "_MIME Type"
+#, fuzzy
+msgid "_MIME type:"
 msgstr "Tipus de _MIME"
 
 #
-#: capplets/file-types/file-types-properties.glade.h:22
-msgid "_Name"
-msgstr "_Nom"
-
-#
 #: capplets/file-types/file-types-properties.glade.h:23
-msgid "_Program"
-msgstr "_Programa"
-
-#
-#: capplets/file-types/file-types-properties.glade.h:24
-msgid "_Program to Run"
+#, fuzzy
+msgid "_Program to run:"
 msgstr "_Programa a executar"
 
 #
-#: capplets/file-types/file-types-properties.glade.h:25
-msgid "_Protocol"
+#: capplets/file-types/file-types-properties.glade.h:24
+#, fuzzy
+msgid "_Protocol:"
 msgstr "_Protocol"
+
+#
+#: capplets/file-types/file-types-properties.glade.h:25
+msgid "_Remove"
+msgstr "_Suprimeix"
+
+#: capplets/file-types/file-types-properties.glade.h:26
+#, fuzzy
+msgid "_Viewer component:"
+msgstr "Component de visualització"
 
 #: capplets/file-types/file-types.desktop.in.h:1
 #, fuzzy
@@ -1821,19 +1834,15 @@ msgid "E_nable sound server startup"
 msgstr "Habilita l'i_nici del servidor de so"
 
 #
-#: capplets/sound/sound-properties.glade.h:2
-msgid "Sound Preferences"
-msgstr "Preferències de so"
-
-#
 #: capplets/sound/sound-properties.glade.h:3
-msgid "Sound _Events"
+#, fuzzy
+msgid "Sound Events"
 msgstr "Events de _so"
 
 #
 #: capplets/sound/sound-properties.glade.h:4
-msgid "_General"
-msgstr "_General"
+msgid "Sound Preferences"
+msgstr "Preferències de so"
 
 #
 #: capplets/sound/sound-properties.glade.h:5
@@ -2194,7 +2203,7 @@ msgstr "L'eina de configuració del GNOME"
 msgid "Use shell even if nautilus is running."
 msgstr "Utilitza la shell encara que nautilus estigui en marxa."
 
-#: gnome-settings-daemon/factory.c:29
+#: gnome-settings-daemon/factory.c:32
 msgid "Could not initialize Bonobo"
 msgstr "No puc inicialitzar Bonobo"
 
@@ -2207,34 +2216,34 @@ msgstr ""
 "No s'ha pogut crear el directori «%s».\n"
 "Es necessita per a poder canviar els cursors."
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:106
+#: gnome-settings-daemon/gnome-settings-keybindings.c:146
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr ""
 "L'assignació de tecla (%s) te la seua acció definida múltiples vegades\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:119
+#: gnome-settings-daemon/gnome-settings-keybindings.c:159
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr ""
 "L'assignació de tecla (%s) te el seu enllaç definit múltiples vegades\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:125
+#: gnome-settings-daemon/gnome-settings-keybindings.c:165
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr "L'assignació de tecla (%s) és incompleta\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:153
+#: gnome-settings-daemon/gnome-settings-keybindings.c:193
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr "L'assignació de tecla (%s) és invàlida\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:241
+#: gnome-settings-daemon/gnome-settings-keybindings.c:281
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr "L'assignació de tecla (%s) ja està en ús\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:292
+#: gnome-settings-daemon/gnome-settings-keybindings.c:357
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -2312,7 +2321,7 @@ msgstr ""
 msgid "Screen on which BGApplier is to draw"
 msgstr ""
 
-#: libbackground/preview-file-selection.c:193
+#: libbackground/preview-file-selection.c:207
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "No es pot trobar una hbox, s'usarà una selecció de fitxers normal"
 
@@ -2404,6 +2413,26 @@ msgstr ""
 #: libwindow-settings/gnome-wm-manager.c:467
 msgid "OK"
 msgstr "D'acord"
+
+#
+#~ msgid "Add:"
+#~ msgstr "Afegeix:"
+
+#
+#~ msgid "_Category"
+#~ msgstr "_Categoria"
+
+#
+#~ msgid "_Delete"
+#~ msgstr "_Esborra"
+
+#
+#~ msgid "_Name"
+#~ msgstr "_Nom"
+
+#
+#~ msgid "_General"
+#~ msgstr "_General"
 
 #~ msgid "Edit Menu"
 #~ msgstr "Edita el menú"
@@ -2638,16 +2667,8 @@ msgstr "D'acord"
 #~ msgstr "Necessita un _terminal"
 
 #
-#~ msgid "_Add"
-#~ msgstr "_Afegeix"
-
-#
 #~ msgid "_Protocol name"
 #~ msgstr "Nom del _protocol"
-
-#
-#~ msgid "_Remove"
-#~ msgstr "_Suprimeix"
 
 #~ msgid "Add file type"
 #~ msgstr "Afegeix un tipus de fitxer"

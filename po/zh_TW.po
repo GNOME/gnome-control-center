@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 1.99.10\n"
-"POT-Creation-Date: 2002-10-01 14:18-0400\n"
+"POT-Creation-Date: 2002-10-21 12:31-0400\n"
 "PO-Revision-Date: 2002-06-13 00:51+0800\n"
 "Last-Translator: Abel Cheung <maddog@linux.org.hk>\n"
 "Language-Team: traditional Chinese <zh-l10n@linux.org.tw>\n"
@@ -93,6 +93,7 @@ msgid "Enable _Sticky Keys"
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
+#: capplets/sound/sound-properties.glade.h:2
 msgid "General"
 msgstr "一般"
 
@@ -302,7 +303,7 @@ msgid "Picture Options:"
 msgstr "有關圖案的選項："
 
 #: capplets/background/background-properties.glade.h:8
-#: libbackground/preview-file-selection.c:198
+#: libbackground/preview-file-selection.c:212
 msgid "Preview"
 msgstr "預覽"
 
@@ -673,6 +674,7 @@ msgid "Window Manager"
 msgstr "視窗管理程式"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:31
+#: capplets/file-types/file-types-properties.glade.h:22
 msgid "_Name:"
 msgstr "名稱(_N)："
 
@@ -825,16 +827,16 @@ msgstr "舊式軟體"
 msgid "Legacy applications settings (grdb)"
 msgstr "舊式軟體設定（grdb）"
 
-#: capplets/file-types/file-types-capplet.c:214
+#: capplets/file-types/file-types-capplet.c:196
 msgid "Description"
 msgstr "說明"
 
-#: capplets/file-types/file-types-capplet.c:236
+#: capplets/file-types/file-types-capplet.c:218
 msgid "Extensions"
 msgstr "延伸檔名"
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:1
-#: capplets/file-types/file-types-properties.glade.h:8
+#: capplets/file-types/file-types-properties.glade.h:10
 msgid "File Types and Programs"
 msgstr "檔案類型及程式"
 
@@ -858,64 +860,69 @@ msgstr "新增網絡服務(_S)..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
 #, fuzzy
-msgid "Add:"
-msgstr "新增"
+msgid "C_hoose..."
+msgstr "選擇(_C)..."
 
 #: capplets/file-types/file-types-properties.glade.h:6
-msgid "Default action"
-msgstr "預設處理方式"
+#, fuzzy
+msgid "Cate_gory:"
+msgstr "分類"
 
 #: capplets/file-types/file-types-properties.glade.h:7
+#, fuzzy
+msgid "D_efault action:"
+msgstr "預設處理方式"
+
+#: capplets/file-types/file-types-properties.glade.h:8
+#, fuzzy
+msgid "Default _action:"
+msgstr "預設處理方式"
+
+#: capplets/file-types/file-types-properties.glade.h:9
 #: capplets/file-types/mime-edit-dialog.c:208
 msgid "Edit file type"
 msgstr "編輯檔案類型"
 
-#: capplets/file-types/file-types-properties.glade.h:9
+#: capplets/file-types/file-types-properties.glade.h:11
 #, fuzzy
-msgid "Filename Extensions"
+msgid "Filename extensions:"
 msgstr "延伸檔名"
 
-#: capplets/file-types/file-types-properties.glade.h:10
+#: capplets/file-types/file-types-properties.glade.h:12
 msgid "Look at content"
 msgstr "檢查檔案內容"
 
-#: capplets/file-types/file-types-properties.glade.h:11
+#: capplets/file-types/file-types-properties.glade.h:13
+#, fuzzy
+msgid "P_rogram:"
+msgstr "程式(_P)"
+
+#: capplets/file-types/file-types-properties.glade.h:14
 #, fuzzy
 msgid "Program to Run"
 msgstr "執行的程式"
 
-#: capplets/file-types/file-types-properties.glade.h:12
+#: capplets/file-types/file-types-properties.glade.h:15
 msgid "Run a program"
 msgstr "執行程式"
 
-#: capplets/file-types/file-types-properties.glade.h:13
+#: capplets/file-types/file-types-properties.glade.h:16
 #, fuzzy
 msgid "Run in _Terminal"
 msgstr "在終端機中執行(_E)"
 
-#: capplets/file-types/file-types-properties.glade.h:14
+#: capplets/file-types/file-types-properties.glade.h:17
 msgid "Use parent category _defaults"
 msgstr "使用上層分類的預設值(_D)"
 
-#: capplets/file-types/file-types-properties.glade.h:15
-#, fuzzy
-msgid "Viewer Component"
-msgstr "檢視方式"
-
-#: capplets/file-types/file-types-properties.glade.h:16
-msgid "_Category"
-msgstr "分類(_C)"
-
-#: capplets/file-types/file-types-properties.glade.h:17
-msgid "_Choose..."
-msgstr "選擇(_C)..."
-
 #: capplets/file-types/file-types-properties.glade.h:18
-msgid "_Delete"
-msgstr "刪除(_D)"
+#, fuzzy
+msgid "_Add:"
+msgstr "新增(_A)"
 
 #: capplets/file-types/file-types-properties.glade.h:19
-msgid "_Description"
+#, fuzzy
+msgid "_Description:"
 msgstr "說明(_D)"
 
 #: capplets/file-types/file-types-properties.glade.h:20
@@ -923,26 +930,28 @@ msgid "_Edit..."
 msgstr "編輯(_E)..."
 
 #: capplets/file-types/file-types-properties.glade.h:21
-msgid "_MIME Type"
+#, fuzzy
+msgid "_MIME type:"
 msgstr "_MIME 類型"
 
-#: capplets/file-types/file-types-properties.glade.h:22
-msgid "_Name"
-msgstr "名稱(_N)"
-
 #: capplets/file-types/file-types-properties.glade.h:23
-msgid "_Program"
-msgstr "程式(_P)"
+#, fuzzy
+msgid "_Program to run:"
+msgstr "執行的程式(_P)"
 
 #: capplets/file-types/file-types-properties.glade.h:24
 #, fuzzy
-msgid "_Program to Run"
-msgstr "執行的程式(_P)"
+msgid "_Protocol:"
+msgstr "協定"
 
 #: capplets/file-types/file-types-properties.glade.h:25
+msgid "_Remove"
+msgstr "移除(_R)"
+
+#: capplets/file-types/file-types-properties.glade.h:26
 #, fuzzy
-msgid "_Protocol"
-msgstr "協定"
+msgid "_Viewer component:"
+msgstr "檢視方式"
 
 #: capplets/file-types/file-types.desktop.in.h:1
 #, fuzzy
@@ -1725,18 +1734,15 @@ msgstr "音效偏好設定"
 msgid "E_nable sound server startup"
 msgstr "啟動 GNOME 時啟用音效伺服程式(_N)"
 
-#: capplets/sound/sound-properties.glade.h:2
-#, fuzzy
-msgid "Sound Preferences"
-msgstr "音效偏好設定"
-
 #: capplets/sound/sound-properties.glade.h:3
-msgid "Sound _Events"
+#, fuzzy
+msgid "Sound Events"
 msgstr "事件音效(_E)"
 
 #: capplets/sound/sound-properties.glade.h:4
-msgid "_General"
-msgstr "一般(_G)"
+#, fuzzy
+msgid "Sound Preferences"
+msgstr "音效偏好設定"
 
 #: capplets/sound/sound-properties.glade.h:5
 msgid "_Sounds for events"
@@ -2086,7 +2092,7 @@ msgstr "GNOME 設定工具"
 msgid "Use shell even if nautilus is running."
 msgstr "即使 nautilus 正在運行仍然使用舊式介面。"
 
-#: gnome-settings-daemon/factory.c:29
+#: gnome-settings-daemon/factory.c:32
 msgid "Could not initialize Bonobo"
 msgstr "無法初始化 Bonobo"
 
@@ -2099,32 +2105,32 @@ msgstr ""
 "無法建立目錄“%s”。\n"
 "更改鼠標時需要建立此目錄。"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:106
+#: gnome-settings-daemon/gnome-settings-keybindings.c:146
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr "按鍵組合 (%s) 所代表的行動已經被其它按鍵組合定義了\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:119
+#: gnome-settings-daemon/gnome-settings-keybindings.c:159
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr "出現了多次同樣的按鍵組合 (%s)\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:125
+#: gnome-settings-daemon/gnome-settings-keybindings.c:165
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr "按鍵組合 (%s) 不完整\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:153
+#: gnome-settings-daemon/gnome-settings-keybindings.c:193
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr "按鍵組合 (%s) 無效\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:241
+#: gnome-settings-daemon/gnome-settings-keybindings.c:281
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr "按鍵組合 (%s) 已經正在使用\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:292
+#: gnome-settings-daemon/gnome-settings-keybindings.c:357
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -2197,7 +2203,7 @@ msgstr "螢幕保護程式"
 msgid "Screen on which BGApplier is to draw"
 msgstr ""
 
-#: libbackground/preview-file-selection.c:193
+#: libbackground/preview-file-selection.c:207
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "找不到 hbox 視窗元件，使用普通的檔案選擇模式"
 
@@ -2288,6 +2294,22 @@ msgstr ""
 #: libwindow-settings/gnome-wm-manager.c:467
 msgid "OK"
 msgstr "確定"
+
+#, fuzzy
+#~ msgid "Add:"
+#~ msgstr "新增"
+
+#~ msgid "_Category"
+#~ msgstr "分類(_C)"
+
+#~ msgid "_Delete"
+#~ msgstr "刪除(_D)"
+
+#~ msgid "_Name"
+#~ msgstr "名稱(_N)"
+
+#~ msgid "_General"
+#~ msgstr "一般(_G)"
 
 #, fuzzy
 #~ msgid "Edit Menu"
@@ -2392,14 +2414,8 @@ msgstr "確定"
 #~ msgid "Use category _defaults"
 #~ msgstr "使用該分類的預設值(_D)"
 
-#~ msgid "_Add"
-#~ msgstr "新增(_A)"
-
 #~ msgid "_Protocol name"
 #~ msgstr "協定名稱(_P)"
-
-#~ msgid "_Remove"
-#~ msgstr "移除(_R)"
 
 #~ msgid "Add file type"
 #~ msgstr "新增檔案類型"

@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2002-10-01 14:18-0400\n"
+"POT-Creation-Date: 2002-10-21 12:31-0400\n"
 "PO-Revision-Date: 2002-07-17 10:54+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -93,6 +93,7 @@ msgid "Enable _Sticky Keys"
 msgstr "Använd _klistriga tangenter"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
+#: capplets/sound/sound-properties.glade.h:2
 msgid "General"
 msgstr "Allmänt"
 
@@ -305,7 +306,7 @@ msgid "Picture Options:"
 msgstr "Bildalternativ:"
 
 #: capplets/background/background-properties.glade.h:8
-#: libbackground/preview-file-selection.c:198
+#: libbackground/preview-file-selection.c:212
 msgid "Preview"
 msgstr "Förhandsgranska"
 
@@ -685,6 +686,7 @@ msgid "Window Manager"
 msgstr "Fönsterhanterare"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:31
+#: capplets/file-types/file-types-properties.glade.h:22
 msgid "_Name:"
 msgstr "_Namn:"
 
@@ -831,16 +833,16 @@ msgstr "Gamla program"
 msgid "Legacy applications settings (grdb)"
 msgstr "Inställningar för gamla program (grdb)"
 
-#: capplets/file-types/file-types-capplet.c:214
+#: capplets/file-types/file-types-capplet.c:196
 msgid "Description"
 msgstr "Beskrivning"
 
-#: capplets/file-types/file-types-capplet.c:236
+#: capplets/file-types/file-types-capplet.c:218
 msgid "Extensions"
 msgstr "Tillägg"
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:1
-#: capplets/file-types/file-types-properties.glade.h:8
+#: capplets/file-types/file-types-properties.glade.h:10
 msgid "File Types and Programs"
 msgstr "Filtyper och program"
 
@@ -863,60 +865,68 @@ msgid "Add _Service..."
 msgstr "Lägg till _tjänst..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
-msgid "Add:"
-msgstr "Lägg till:"
+#, fuzzy
+msgid "C_hoose..."
+msgstr "_Välj..."
 
 #: capplets/file-types/file-types-properties.glade.h:6
-msgid "Default action"
-msgstr "Standardåtgärd"
+#, fuzzy
+msgid "Cate_gory:"
+msgstr "Kategori"
 
 #: capplets/file-types/file-types-properties.glade.h:7
+#, fuzzy
+msgid "D_efault action:"
+msgstr "Standardåtgärd"
+
+#: capplets/file-types/file-types-properties.glade.h:8
+#, fuzzy
+msgid "Default _action:"
+msgstr "Standardåtgärd"
+
+#: capplets/file-types/file-types-properties.glade.h:9
 #: capplets/file-types/mime-edit-dialog.c:208
 msgid "Edit file type"
 msgstr "Redigera filtyp"
 
-#: capplets/file-types/file-types-properties.glade.h:9
-msgid "Filename Extensions"
+#: capplets/file-types/file-types-properties.glade.h:11
+#, fuzzy
+msgid "Filename extensions:"
 msgstr "Filnamnstillägg"
 
-#: capplets/file-types/file-types-properties.glade.h:10
+#: capplets/file-types/file-types-properties.glade.h:12
 msgid "Look at content"
 msgstr "Titta på innehåll"
 
-#: capplets/file-types/file-types-properties.glade.h:11
+#: capplets/file-types/file-types-properties.glade.h:13
+#, fuzzy
+msgid "P_rogram:"
+msgstr "_Program"
+
+#: capplets/file-types/file-types-properties.glade.h:14
 msgid "Program to Run"
 msgstr "Program att köra"
 
-#: capplets/file-types/file-types-properties.glade.h:12
+#: capplets/file-types/file-types-properties.glade.h:15
 msgid "Run a program"
 msgstr "Kör ett program"
 
-#: capplets/file-types/file-types-properties.glade.h:13
+#: capplets/file-types/file-types-properties.glade.h:16
 msgid "Run in _Terminal"
 msgstr "Kör i _terminal"
 
-#: capplets/file-types/file-types-properties.glade.h:14
+#: capplets/file-types/file-types-properties.glade.h:17
 msgid "Use parent category _defaults"
 msgstr "Använd _kategoristandardvärden för förälder"
 
-#: capplets/file-types/file-types-properties.glade.h:15
-msgid "Viewer Component"
-msgstr "Visarkomponent"
-
-#: capplets/file-types/file-types-properties.glade.h:16
-msgid "_Category"
-msgstr "_Kategori"
-
-#: capplets/file-types/file-types-properties.glade.h:17
-msgid "_Choose..."
-msgstr "_Välj..."
-
 #: capplets/file-types/file-types-properties.glade.h:18
-msgid "_Delete"
-msgstr "_Ta bort"
+#, fuzzy
+msgid "_Add:"
+msgstr "_Lägg till"
 
 #: capplets/file-types/file-types-properties.glade.h:19
-msgid "_Description"
+#, fuzzy
+msgid "_Description:"
 msgstr "_Beskrivning"
 
 #: capplets/file-types/file-types-properties.glade.h:20
@@ -924,24 +934,28 @@ msgid "_Edit..."
 msgstr "_Redigera..."
 
 #: capplets/file-types/file-types-properties.glade.h:21
-msgid "_MIME Type"
+#, fuzzy
+msgid "_MIME type:"
 msgstr "_MIME-typ"
 
-#: capplets/file-types/file-types-properties.glade.h:22
-msgid "_Name"
-msgstr "_Namn"
-
 #: capplets/file-types/file-types-properties.glade.h:23
-msgid "_Program"
-msgstr "_Program"
-
-#: capplets/file-types/file-types-properties.glade.h:24
-msgid "_Program to Run"
+#, fuzzy
+msgid "_Program to run:"
 msgstr "_Program att köra"
 
-#: capplets/file-types/file-types-properties.glade.h:25
-msgid "_Protocol"
+#: capplets/file-types/file-types-properties.glade.h:24
+#, fuzzy
+msgid "_Protocol:"
 msgstr "_Protokoll"
+
+#: capplets/file-types/file-types-properties.glade.h:25
+msgid "_Remove"
+msgstr "_Ta bort"
+
+#: capplets/file-types/file-types-properties.glade.h:26
+#, fuzzy
+msgid "_Viewer component:"
+msgstr "Visarkomponent"
 
 #: capplets/file-types/file-types.desktop.in.h:1
 #, fuzzy
@@ -1730,17 +1744,14 @@ msgstr "Ljudegenskaper"
 msgid "E_nable sound server startup"
 msgstr "A_ktivera uppstart av ljudserver"
 
-#: capplets/sound/sound-properties.glade.h:2
-msgid "Sound Preferences"
-msgstr "Ljudinställningar"
-
 #: capplets/sound/sound-properties.glade.h:3
-msgid "Sound _Events"
+#, fuzzy
+msgid "Sound Events"
 msgstr "Ljud_händelser"
 
 #: capplets/sound/sound-properties.glade.h:4
-msgid "_General"
-msgstr "_Allmänt"
+msgid "Sound Preferences"
+msgstr "Ljudinställningar"
 
 #: capplets/sound/sound-properties.glade.h:5
 msgid "_Sounds for events"
@@ -2085,7 +2096,7 @@ msgstr "Konfigurationsverktyget för GNOME"
 msgid "Use shell even if nautilus is running."
 msgstr "Använd skal även om nautilus kör."
 
-#: gnome-settings-daemon/factory.c:29
+#: gnome-settings-daemon/factory.c:32
 msgid "Could not initialize Bonobo"
 msgstr "Kunde inte initiera Bonobo"
 
@@ -2098,32 +2109,32 @@ msgstr ""
 "Kan inte skapa katalogen \"%s\".\n"
 "Detta krävs för att möjliggöra ändring av muspekare."
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:106
+#: gnome-settings-daemon/gnome-settings-keybindings.c:146
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr "Tangentbindningen (%s) har dess åtgärd definierad flera gånger\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:119
+#: gnome-settings-daemon/gnome-settings-keybindings.c:159
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr "Tangentbindningen (%s) har dess bindning definierad flera gånger\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:125
+#: gnome-settings-daemon/gnome-settings-keybindings.c:165
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr "Tangentbindningen (%s) är ofullständig\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:153
+#: gnome-settings-daemon/gnome-settings-keybindings.c:193
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr "Tangentbindningen (%s) är ogiltig\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:241
+#: gnome-settings-daemon/gnome-settings-keybindings.c:281
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr "Tangentbindningen (%s) används redan\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:292
+#: gnome-settings-daemon/gnome-settings-keybindings.c:357
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -2199,7 +2210,7 @@ msgstr "Skärmsläckare"
 msgid "Screen on which BGApplier is to draw"
 msgstr ""
 
-#: libbackground/preview-file-selection.c:193
+#: libbackground/preview-file-selection.c:207
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Kan inte hitta en hbox, använder normal filmarkering"
 
@@ -2311,6 +2322,21 @@ msgstr ""
 #: libwindow-settings/gnome-wm-manager.c:467
 msgid "OK"
 msgstr "OK"
+
+#~ msgid "Add:"
+#~ msgstr "Lägg till:"
+
+#~ msgid "_Category"
+#~ msgstr "_Kategori"
+
+#~ msgid "_Delete"
+#~ msgstr "_Ta bort"
+
+#~ msgid "_Name"
+#~ msgstr "_Namn"
+
+#~ msgid "_General"
+#~ msgstr "_Allmänt"
 
 #, fuzzy
 #~ msgid "Edit Menu"
@@ -2551,14 +2577,8 @@ msgstr "OK"
 #~ msgid "Use category _defaults"
 #~ msgstr "Använd _kategoristandardvärden"
 
-#~ msgid "_Add"
-#~ msgstr "_Lägg till"
-
 #~ msgid "_Protocol name"
 #~ msgstr "_Protokollnamn"
-
-#~ msgid "_Remove"
-#~ msgstr "_Ta bort"
 
 #~ msgid "Add file type"
 #~ msgstr "Lägg till filtyp"

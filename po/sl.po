@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2002-10-01 14:18-0400\n"
+"POT-Creation-Date: 2002-10-21 12:31-0400\n"
 "PO-Revision-Date: 2002-06-09 20:17+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -87,6 +87,7 @@ msgid "Enable _Sticky Keys"
 msgstr "Vključi _lepljive tipke"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
+#: capplets/sound/sound-properties.glade.h:2
 msgid "General"
 msgstr "Splošno"
 
@@ -297,7 +298,7 @@ msgid "Picture Options:"
 msgstr "Možnosti slike:"
 
 #: capplets/background/background-properties.glade.h:8
-#: libbackground/preview-file-selection.c:198
+#: libbackground/preview-file-selection.c:212
 msgid "Preview"
 msgstr "Predogled"
 
@@ -681,6 +682,7 @@ msgid "Window Manager"
 msgstr "Upravljalnik oken"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:31
+#: capplets/file-types/file-types-properties.glade.h:22
 msgid "_Name:"
 msgstr "_Ime:"
 
@@ -832,16 +834,16 @@ msgstr "Starejši programi"
 msgid "Legacy applications settings (grdb)"
 msgstr "Nastavitev starejših programov (grdb)"
 
-#: capplets/file-types/file-types-capplet.c:214
+#: capplets/file-types/file-types-capplet.c:196
 msgid "Description"
 msgstr "Opis"
 
-#: capplets/file-types/file-types-capplet.c:236
+#: capplets/file-types/file-types-capplet.c:218
 msgid "Extensions"
 msgstr "Razširitve"
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:1
-#: capplets/file-types/file-types-properties.glade.h:8
+#: capplets/file-types/file-types-properties.glade.h:10
 msgid "File Types and Programs"
 msgstr "Vrste datotek in programi"
 
@@ -867,64 +869,69 @@ msgstr "Dodaj _storitev..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
 #, fuzzy
-msgid "Add:"
-msgstr "Dodaj"
+msgid "C_hoose..."
+msgstr "_Izberi..."
 
 #: capplets/file-types/file-types-properties.glade.h:6
-msgid "Default action"
-msgstr "Privzeto dejanje"
+#, fuzzy
+msgid "Cate_gory:"
+msgstr "Kategorija"
 
 #: capplets/file-types/file-types-properties.glade.h:7
+#, fuzzy
+msgid "D_efault action:"
+msgstr "Privzeto dejanje"
+
+#: capplets/file-types/file-types-properties.glade.h:8
+#, fuzzy
+msgid "Default _action:"
+msgstr "Privzeto dejanje"
+
+#: capplets/file-types/file-types-properties.glade.h:9
 #: capplets/file-types/mime-edit-dialog.c:208
 msgid "Edit file type"
 msgstr "Uredi vrsto datoteke"
 
-#: capplets/file-types/file-types-properties.glade.h:9
+#: capplets/file-types/file-types-properties.glade.h:11
 #, fuzzy
-msgid "Filename Extensions"
+msgid "Filename extensions:"
 msgstr "Pripone datotek"
 
-#: capplets/file-types/file-types-properties.glade.h:10
+#: capplets/file-types/file-types-properties.glade.h:12
 msgid "Look at content"
 msgstr "Poglej vsebino"
 
-#: capplets/file-types/file-types-properties.glade.h:11
+#: capplets/file-types/file-types-properties.glade.h:13
+#, fuzzy
+msgid "P_rogram:"
+msgstr "_Program"
+
+#: capplets/file-types/file-types-properties.glade.h:14
 #, fuzzy
 msgid "Program to Run"
 msgstr "Program, ki naj se požene"
 
-#: capplets/file-types/file-types-properties.glade.h:12
+#: capplets/file-types/file-types-properties.glade.h:15
 msgid "Run a program"
 msgstr "Poženi program"
 
-#: capplets/file-types/file-types-properties.glade.h:13
+#: capplets/file-types/file-types-properties.glade.h:16
 #, fuzzy
 msgid "Run in _Terminal"
 msgstr "Poženi v t_erminalu"
 
-#: capplets/file-types/file-types-properties.glade.h:14
+#: capplets/file-types/file-types-properties.glade.h:17
 msgid "Use parent category _defaults"
 msgstr "Uporabi _privzete nastavitve starševske kategorije"
 
-#: capplets/file-types/file-types-properties.glade.h:15
-#, fuzzy
-msgid "Viewer Component"
-msgstr "Komponenta pogleda"
-
-#: capplets/file-types/file-types-properties.glade.h:16
-msgid "_Category"
-msgstr "_Kategorija"
-
-#: capplets/file-types/file-types-properties.glade.h:17
-msgid "_Choose..."
-msgstr "_Izberi..."
-
 #: capplets/file-types/file-types-properties.glade.h:18
-msgid "_Delete"
-msgstr "_Zbriši"
+#, fuzzy
+msgid "_Add:"
+msgstr "_Dodaj"
 
 #: capplets/file-types/file-types-properties.glade.h:19
-msgid "_Description"
+#, fuzzy
+msgid "_Description:"
 msgstr "_Opis"
 
 #: capplets/file-types/file-types-properties.glade.h:20
@@ -932,26 +939,28 @@ msgid "_Edit..."
 msgstr "_Uredi..."
 
 #: capplets/file-types/file-types-properties.glade.h:21
-msgid "_MIME Type"
+#, fuzzy
+msgid "_MIME type:"
 msgstr "Vrsta _MIME"
 
-#: capplets/file-types/file-types-properties.glade.h:22
-msgid "_Name"
-msgstr "_Ime"
-
 #: capplets/file-types/file-types-properties.glade.h:23
-msgid "_Program"
-msgstr "_Program"
+#, fuzzy
+msgid "_Program to run:"
+msgstr "_Program, ki naj se požene"
 
 #: capplets/file-types/file-types-properties.glade.h:24
 #, fuzzy
-msgid "_Program to Run"
-msgstr "_Program, ki naj se požene"
+msgid "_Protocol:"
+msgstr "Protokol"
 
 #: capplets/file-types/file-types-properties.glade.h:25
+msgid "_Remove"
+msgstr "_Odstrani"
+
+#: capplets/file-types/file-types-properties.glade.h:26
 #, fuzzy
-msgid "_Protocol"
-msgstr "Protokol"
+msgid "_Viewer component:"
+msgstr "Komponenta pogleda"
 
 #: capplets/file-types/file-types.desktop.in.h:1
 #, fuzzy
@@ -1751,18 +1760,15 @@ msgstr "Nastavitve zvoka"
 msgid "E_nable sound server startup"
 msgstr "V_ključi zagon strežnika za zvok"
 
-#: capplets/sound/sound-properties.glade.h:2
-#, fuzzy
-msgid "Sound Preferences"
-msgstr "Nastavitve zvoka"
-
 #: capplets/sound/sound-properties.glade.h:3
-msgid "Sound _Events"
+#, fuzzy
+msgid "Sound Events"
 msgstr "Zvočni _dogodki"
 
 #: capplets/sound/sound-properties.glade.h:4
-msgid "_General"
-msgstr "_Splošno"
+#, fuzzy
+msgid "Sound Preferences"
+msgstr "Nastavitve zvoka"
 
 #: capplets/sound/sound-properties.glade.h:5
 msgid "_Sounds for events"
@@ -2110,7 +2116,7 @@ msgstr "Nastavitveno orodje GNOME-a."
 msgid "Use shell even if nautilus is running."
 msgstr "Uporabi lupino tudi kadar nautilus teče."
 
-#: gnome-settings-daemon/factory.c:29
+#: gnome-settings-daemon/factory.c:32
 msgid "Could not initialize Bonobo"
 msgstr "Nisem mogel inicializirati bonoba"
 
@@ -2123,32 +2129,32 @@ msgstr ""
 "Nisem uspel ustvariti imenik \"%s\".\n"
 "To je potrebno za spreminjanje kazalcev."
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:106
+#: gnome-settings-daemon/gnome-settings-keybindings.c:146
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr "Tipkovnična povezava (%s) ima nastavljenih več različnih dejanj\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:119
+#: gnome-settings-daemon/gnome-settings-keybindings.c:159
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr "Tipkovnična povezava (%s) ima nastavljenih več različnih dejanj\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:125
+#: gnome-settings-daemon/gnome-settings-keybindings.c:165
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr "Tipkovnična povezava (%s) ni popolna\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:153
+#: gnome-settings-daemon/gnome-settings-keybindings.c:193
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr "Tipkovnična povezava (%s) je neveljavna\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:241
+#: gnome-settings-daemon/gnome-settings-keybindings.c:281
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr "Tipkovnična povezava (%s) je že v uporabi\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:292
+#: gnome-settings-daemon/gnome-settings-keybindings.c:357
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -2224,7 +2230,7 @@ msgstr "Ohranjevalnik zaslona"
 msgid "Screen on which BGApplier is to draw"
 msgstr ""
 
-#: libbackground/preview-file-selection.c:193
+#: libbackground/preview-file-selection.c:207
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Ne najdem hbox, uporabljam običajno izbiro datotek"
 
@@ -2318,6 +2324,22 @@ msgid "OK"
 msgstr "V redu"
 
 #, fuzzy
+#~ msgid "Add:"
+#~ msgstr "Dodaj"
+
+#~ msgid "_Category"
+#~ msgstr "_Kategorija"
+
+#~ msgid "_Delete"
+#~ msgstr "_Zbriši"
+
+#~ msgid "_Name"
+#~ msgstr "_Ime"
+
+#~ msgid "_General"
+#~ msgstr "_Splošno"
+
+#, fuzzy
 #~ msgid "Edit Menu"
 #~ msgstr "Uredi"
 
@@ -2408,14 +2430,8 @@ msgstr "V redu"
 #~ msgid "Use category _defaults"
 #~ msgstr "Uporabi _privzete nastavitve kategorije"
 
-#~ msgid "_Add"
-#~ msgstr "_Dodaj"
-
 #~ msgid "_Protocol name"
 #~ msgstr "Ime _protokola"
-
-#~ msgid "_Remove"
-#~ msgstr "_Odstrani"
 
 #~ msgid "Add file type"
 #~ msgstr "Dodaj vrsto datoteke"

@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: sk\n"
-"POT-Creation-Date: 2002-10-01 14:18-0400\n"
+"POT-Creation-Date: 2002-10-21 12:31-0400\n"
 "PO-Revision-Date: 2002-06-10 13:59+0200\n"
 "Last-Translator: Stanislav Višňovský <visnovsky@nenya.ms.mff.cuni.cz>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -91,6 +91,7 @@ msgid "Enable _Sticky Keys"
 msgstr "Povoliť _lepkavé klávesy"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
+#: capplets/sound/sound-properties.glade.h:2
 #, fuzzy
 msgid "General"
 msgstr "_Všeobecné"
@@ -307,7 +308,7 @@ msgid "Picture Options:"
 msgstr "Možnosti obrázku:"
 
 #: capplets/background/background-properties.glade.h:8
-#: libbackground/preview-file-selection.c:198
+#: libbackground/preview-file-selection.c:212
 msgid "Preview"
 msgstr "Náhľad"
 
@@ -684,6 +685,7 @@ msgid "Window Manager"
 msgstr "Správca okien"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:31
+#: capplets/file-types/file-types-properties.glade.h:22
 msgid "_Name:"
 msgstr "_Meno:"
 
@@ -835,16 +837,16 @@ msgstr "Staršie aplikácie"
 msgid "Legacy applications settings (grdb)"
 msgstr "Nastavenie starších aplikácií (grdb)"
 
-#: capplets/file-types/file-types-capplet.c:214
+#: capplets/file-types/file-types-capplet.c:196
 msgid "Description"
 msgstr "Popis"
 
-#: capplets/file-types/file-types-capplet.c:236
+#: capplets/file-types/file-types-capplet.c:218
 msgid "Extensions"
 msgstr "Rozšírenia"
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:1
-#: capplets/file-types/file-types-properties.glade.h:8
+#: capplets/file-types/file-types-properties.glade.h:10
 msgid "File Types and Programs"
 msgstr "Typy súborov a programy"
 
@@ -870,65 +872,69 @@ msgstr "Pridať _službu..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
 #, fuzzy
-msgid "Add:"
-msgstr "_Pridať"
+msgid "C_hoose..."
+msgstr "_Vybrať..."
 
 #: capplets/file-types/file-types-properties.glade.h:6
-msgid "Default action"
-msgstr "Štandardná akcia"
+#, fuzzy
+msgid "Cate_gory:"
+msgstr "Kategória"
 
 #: capplets/file-types/file-types-properties.glade.h:7
+#, fuzzy
+msgid "D_efault action:"
+msgstr "Štandardná akcia"
+
+#: capplets/file-types/file-types-properties.glade.h:8
+#, fuzzy
+msgid "Default _action:"
+msgstr "Štandardná akcia"
+
+#: capplets/file-types/file-types-properties.glade.h:9
 #: capplets/file-types/mime-edit-dialog.c:208
 msgid "Edit file type"
 msgstr "Upraviť typ súboru"
 
-#: capplets/file-types/file-types-properties.glade.h:9
+#: capplets/file-types/file-types-properties.glade.h:11
 #, fuzzy
-msgid "Filename Extensions"
+msgid "Filename extensions:"
 msgstr "Prípony súborov"
 
-#: capplets/file-types/file-types-properties.glade.h:10
+#: capplets/file-types/file-types-properties.glade.h:12
 msgid "Look at content"
 msgstr "Pozrieť sa na obsah"
 
-#: capplets/file-types/file-types-properties.glade.h:11
+#: capplets/file-types/file-types-properties.glade.h:13
+#, fuzzy
+msgid "P_rogram:"
+msgstr "_Program"
+
+#: capplets/file-types/file-types-properties.glade.h:14
 #, fuzzy
 msgid "Program to Run"
 msgstr "Spustiť program"
 
-#: capplets/file-types/file-types-properties.glade.h:12
+#: capplets/file-types/file-types-properties.glade.h:15
 msgid "Run a program"
 msgstr "Spustiť program"
 
-#: capplets/file-types/file-types-properties.glade.h:13
+#: capplets/file-types/file-types-properties.glade.h:16
 #, fuzzy
 msgid "Run in _Terminal"
 msgstr "Spustiť v t_ermináli"
 
-#: capplets/file-types/file-types-properties.glade.h:14
+#: capplets/file-types/file-types-properties.glade.h:17
 msgid "Use parent category _defaults"
 msgstr "Použiť š_tandardné nastavenie rodičovskej kategórie"
 
-#: capplets/file-types/file-types-properties.glade.h:15
-#, fuzzy
-msgid "Viewer Component"
-msgstr "Komponent pre zobrazenie"
-
-#: capplets/file-types/file-types-properties.glade.h:16
-msgid "_Category"
-msgstr "_Kategória"
-
-#: capplets/file-types/file-types-properties.glade.h:17
-msgid "_Choose..."
-msgstr "_Vybrať..."
-
 #: capplets/file-types/file-types-properties.glade.h:18
 #, fuzzy
-msgid "_Delete"
-msgstr "Odstrániť"
+msgid "_Add:"
+msgstr "_Pridať"
 
 #: capplets/file-types/file-types-properties.glade.h:19
-msgid "_Description"
+#, fuzzy
+msgid "_Description:"
 msgstr "_Popis"
 
 #: capplets/file-types/file-types-properties.glade.h:20
@@ -936,26 +942,28 @@ msgid "_Edit..."
 msgstr "_Upraviť..."
 
 #: capplets/file-types/file-types-properties.glade.h:21
-msgid "_MIME Type"
+#, fuzzy
+msgid "_MIME type:"
 msgstr "Typ _MIME"
 
-#: capplets/file-types/file-types-properties.glade.h:22
-msgid "_Name"
-msgstr "_Meno"
-
 #: capplets/file-types/file-types-properties.glade.h:23
-msgid "_Program"
-msgstr "_Program"
+#, fuzzy
+msgid "_Program to run:"
+msgstr "Sp_ustiť program"
 
 #: capplets/file-types/file-types-properties.glade.h:24
 #, fuzzy
-msgid "_Program to Run"
-msgstr "Sp_ustiť program"
+msgid "_Protocol:"
+msgstr "_Meno protokolu"
 
 #: capplets/file-types/file-types-properties.glade.h:25
+msgid "_Remove"
+msgstr "_Odstrániť"
+
+#: capplets/file-types/file-types-properties.glade.h:26
 #, fuzzy
-msgid "_Protocol"
-msgstr "_Meno protokolu"
+msgid "_Viewer component:"
+msgstr "Komponent pre zobrazenie"
 
 #: capplets/file-types/file-types.desktop.in.h:1
 #, fuzzy
@@ -1745,18 +1753,15 @@ msgstr "Nastavenie zvuku"
 msgid "E_nable sound server startup"
 msgstr "_Povoliť spustenie zvukového serveru"
 
-#: capplets/sound/sound-properties.glade.h:2
-#, fuzzy
-msgid "Sound Preferences"
-msgstr "Nastavenie zvuku"
-
 #: capplets/sound/sound-properties.glade.h:3
-msgid "Sound _Events"
+#, fuzzy
+msgid "Sound Events"
 msgstr "Zvukové _udalosti"
 
 #: capplets/sound/sound-properties.glade.h:4
-msgid "_General"
-msgstr "_Všeobecné"
+#, fuzzy
+msgid "Sound Preferences"
+msgstr "Nastavenie zvuku"
 
 #: capplets/sound/sound-properties.glade.h:5
 msgid "_Sounds for events"
@@ -2104,7 +2109,7 @@ msgstr "Nástroj pre nastavenie GNOME"
 msgid "Use shell even if nautilus is running."
 msgstr "Použiť shell aj keď nautilus beží."
 
-#: gnome-settings-daemon/factory.c:29
+#: gnome-settings-daemon/factory.c:32
 msgid "Could not initialize Bonobo"
 msgstr "Nepodarilo sa inicializovať Bonobo"
 
@@ -2117,32 +2122,32 @@ msgstr ""
 "Nepodarilo sa vytvoriť priečinok \"%s\".\n"
 "To je nutné pre zmenu kurzorov."
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:106
+#: gnome-settings-daemon/gnome-settings-keybindings.c:146
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr "Klávesová skratka (%s) má viackrát definovanú akciu.\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:119
+#: gnome-settings-daemon/gnome-settings-keybindings.c:159
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr "Klávesová skratka (%s) je viackrát definovaná.\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:125
+#: gnome-settings-daemon/gnome-settings-keybindings.c:165
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr "Klávesová skratka (%s) je neúplná\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:153
+#: gnome-settings-daemon/gnome-settings-keybindings.c:193
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr "Klávesová skratka (%s) je neplatná\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:241
+#: gnome-settings-daemon/gnome-settings-keybindings.c:281
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr "Klávesová skratka (%s) sa už používa.\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:292
+#: gnome-settings-daemon/gnome-settings-keybindings.c:357
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -2216,7 +2221,7 @@ msgstr ""
 msgid "Screen on which BGApplier is to draw"
 msgstr ""
 
-#: libbackground/preview-file-selection.c:193
+#: libbackground/preview-file-selection.c:207
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Nepodarilo sa nájsť hbox, použijem normálny výber súboru"
 
@@ -2307,6 +2312,19 @@ msgstr ""
 #: libwindow-settings/gnome-wm-manager.c:467
 msgid "OK"
 msgstr "OK"
+
+#~ msgid "_Category"
+#~ msgstr "_Kategória"
+
+#, fuzzy
+#~ msgid "_Delete"
+#~ msgstr "Odstrániť"
+
+#~ msgid "_Name"
+#~ msgstr "_Meno"
+
+#~ msgid "_General"
+#~ msgstr "_Všeobecné"
 
 #~ msgid "_Menu"
 #~ msgstr "_Menu"
@@ -2406,9 +2424,6 @@ msgstr "OK"
 
 #~ msgid "Use category _defaults"
 #~ msgstr "Použiť š_tandardné nastavenie kategórie"
-
-#~ msgid "_Remove"
-#~ msgstr "_Odstrániť"
 
 #~ msgid ""
 #~ "Invalid MIME type. Please enter a valid MIME type, or leave the field "

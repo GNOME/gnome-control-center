@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center VERSION\n"
-"POT-Creation-Date: 2002-10-01 14:18-0400\n"
+"POT-Creation-Date: 2002-10-21 12:31-0400\n"
 "PO-Revision-Date: 2002-08-17 18:23+0700\n"
 "Last-Translator: pclouds <pclouds@gmx.net>\n"
 "Language-Team: GnomeVI <gnomevi-list@lists.sourceforge.net>\n"
@@ -87,6 +87,7 @@ msgid "Enable _Sticky Keys"
 msgstr "Bật _Sticky Key"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
+#: capplets/sound/sound-properties.glade.h:2
 #, fuzzy
 msgid "General"
 msgstr "_Chung"
@@ -303,7 +304,7 @@ msgid "Picture Options:"
 msgstr "Tùy chọn ảnh:"
 
 #: capplets/background/background-properties.glade.h:8
-#: libbackground/preview-file-selection.c:198
+#: libbackground/preview-file-selection.c:212
 msgid "Preview"
 msgstr "Xem thử"
 
@@ -681,6 +682,7 @@ msgid "Window Manager"
 msgstr "Bộ quản lý cửa sổ"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:31
+#: capplets/file-types/file-types-properties.glade.h:22
 msgid "_Name:"
 msgstr "Tên:"
 
@@ -833,16 +835,16 @@ msgstr "Ứng dụng truyền thống"
 msgid "Legacy applications settings (grdb)"
 msgstr "Thiết lập ứng dụng truyền thống (grdb)"
 
-#: capplets/file-types/file-types-capplet.c:214
+#: capplets/file-types/file-types-capplet.c:196
 msgid "Description"
 msgstr "Mô tả"
 
-#: capplets/file-types/file-types-capplet.c:236
+#: capplets/file-types/file-types-capplet.c:218
 msgid "Extensions"
 msgstr "Phần mở rộng"
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:1
-#: capplets/file-types/file-types-properties.glade.h:8
+#: capplets/file-types/file-types-properties.glade.h:10
 msgid "File Types and Programs"
 msgstr "Loại tập tin và chương trình"
 
@@ -866,65 +868,69 @@ msgstr "_Thêm dịch vụ..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
 #, fuzzy
-msgid "Add:"
-msgstr "Thêm"
+msgid "C_hoose..."
+msgstr "_Chọn..."
 
 #: capplets/file-types/file-types-properties.glade.h:6
-msgid "Default action"
-msgstr "Hành động mặc định"
+#, fuzzy
+msgid "Cate_gory:"
+msgstr "Phân loại"
 
 #: capplets/file-types/file-types-properties.glade.h:7
+#, fuzzy
+msgid "D_efault action:"
+msgstr "Hành động mặc định"
+
+#: capplets/file-types/file-types-properties.glade.h:8
+#, fuzzy
+msgid "Default _action:"
+msgstr "Hành động mặc định"
+
+#: capplets/file-types/file-types-properties.glade.h:9
 #: capplets/file-types/mime-edit-dialog.c:208
 msgid "Edit file type"
 msgstr "Sửa loại tập tin"
 
-#: capplets/file-types/file-types-properties.glade.h:9
+#: capplets/file-types/file-types-properties.glade.h:11
 #, fuzzy
-msgid "Filename Extensions"
+msgid "Filename extensions:"
 msgstr "Phần mở rộng tên tập tin"
 
-#: capplets/file-types/file-types-properties.glade.h:10
+#: capplets/file-types/file-types-properties.glade.h:12
 msgid "Look at content"
 msgstr "Xem nội dung"
 
-#: capplets/file-types/file-types-properties.glade.h:11
+#: capplets/file-types/file-types-properties.glade.h:13
+#, fuzzy
+msgid "P_rogram:"
+msgstr "_Chương trình"
+
+#: capplets/file-types/file-types-properties.glade.h:14
 #, fuzzy
 msgid "Program to Run"
 msgstr "Chương trình cần chạy"
 
-#: capplets/file-types/file-types-properties.glade.h:12
+#: capplets/file-types/file-types-properties.glade.h:15
 msgid "Run a program"
 msgstr "Chạy chương trình"
 
-#: capplets/file-types/file-types-properties.glade.h:13
+#: capplets/file-types/file-types-properties.glade.h:16
 #, fuzzy
 msgid "Run in _Terminal"
 msgstr "Chạy trong t_erminal"
 
-#: capplets/file-types/file-types-properties.glade.h:14
+#: capplets/file-types/file-types-properties.glade.h:17
 msgid "Use parent category _defaults"
 msgstr "Dùng phân loại _cha mặc định"
 
-#: capplets/file-types/file-types-properties.glade.h:15
-#, fuzzy
-msgid "Viewer Component"
-msgstr "Thành phần xem"
-
-#: capplets/file-types/file-types-properties.glade.h:16
-msgid "_Category"
-msgstr "_Phân loại"
-
-#: capplets/file-types/file-types-properties.glade.h:17
-msgid "_Choose..."
-msgstr "_Chọn..."
-
 #: capplets/file-types/file-types-properties.glade.h:18
 #, fuzzy
-msgid "_Delete"
-msgstr "Xóa"
+msgid "_Add:"
+msgstr "_Thêm"
 
 #: capplets/file-types/file-types-properties.glade.h:19
-msgid "_Description"
+#, fuzzy
+msgid "_Description:"
 msgstr "_Mô tả"
 
 #: capplets/file-types/file-types-properties.glade.h:20
@@ -932,26 +938,28 @@ msgid "_Edit..."
 msgstr "_Sửa..."
 
 #: capplets/file-types/file-types-properties.glade.h:21
-msgid "_MIME Type"
+#, fuzzy
+msgid "_MIME type:"
 msgstr "Loại _MIME"
 
-#: capplets/file-types/file-types-properties.glade.h:22
-msgid "_Name"
-msgstr "_Tên"
-
 #: capplets/file-types/file-types-properties.glade.h:23
-msgid "_Program"
-msgstr "_Chương trình"
+#, fuzzy
+msgid "_Program to run:"
+msgstr "_Chương trình cần chạy"
 
 #: capplets/file-types/file-types-properties.glade.h:24
 #, fuzzy
-msgid "_Program to Run"
-msgstr "_Chương trình cần chạy"
+msgid "_Protocol:"
+msgstr "Giao thức"
 
 #: capplets/file-types/file-types-properties.glade.h:25
+msgid "_Remove"
+msgstr "_Loại bỏ"
+
+#: capplets/file-types/file-types-properties.glade.h:26
 #, fuzzy
-msgid "_Protocol"
-msgstr "Giao thức"
+msgid "_Viewer component:"
+msgstr "Thành phần xem"
 
 #: capplets/file-types/file-types.desktop.in.h:1
 #, fuzzy
@@ -1748,18 +1756,15 @@ msgstr "Thông số âm thanh"
 msgid "E_nable sound server startup"
 msgstr "_Bật server âm thanh lúc khởi động"
 
-#: capplets/sound/sound-properties.glade.h:2
-#, fuzzy
-msgid "Sound Preferences"
-msgstr "Thông số âm thanh"
-
 #: capplets/sound/sound-properties.glade.h:3
-msgid "Sound _Events"
+#, fuzzy
+msgid "Sound Events"
 msgstr "_Sự kiện âm thanh"
 
 #: capplets/sound/sound-properties.glade.h:4
-msgid "_General"
-msgstr "_Chung"
+#, fuzzy
+msgid "Sound Preferences"
+msgstr "Thông số âm thanh"
 
 #: capplets/sound/sound-properties.glade.h:5
 msgid "_Sounds for events"
@@ -2107,7 +2112,7 @@ msgstr "Công cụ cấu hình GNOME"
 msgid "Use shell even if nautilus is running."
 msgstr "Dùng shell kể cả khi Nautilus đang chạy."
 
-#: gnome-settings-daemon/factory.c:29
+#: gnome-settings-daemon/factory.c:32
 msgid "Could not initialize Bonobo"
 msgstr "Không thể khởi động Bonobo"
 
@@ -2120,32 +2125,32 @@ msgstr ""
 "Không thể tạo thư mục \"%s\".\n"
 "Việc này là cần thiết để thay đổi con trỏ."
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:106
+#: gnome-settings-daemon/gnome-settings-keybindings.c:146
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:119
+#: gnome-settings-daemon/gnome-settings-keybindings.c:159
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:125
+#: gnome-settings-daemon/gnome-settings-keybindings.c:165
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:153
+#: gnome-settings-daemon/gnome-settings-keybindings.c:193
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:241
+#: gnome-settings-daemon/gnome-settings-keybindings.c:281
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:292
+#: gnome-settings-daemon/gnome-settings-keybindings.c:357
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -2217,7 +2222,7 @@ msgstr ""
 msgid "Screen on which BGApplier is to draw"
 msgstr ""
 
-#: libbackground/preview-file-selection.c:193
+#: libbackground/preview-file-selection.c:207
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Không thể tìm thấy hbox, dùng hộp thoại chọn tập tin bình thường."
 
@@ -2309,6 +2314,23 @@ msgstr ""
 #: libwindow-settings/gnome-wm-manager.c:467
 msgid "OK"
 msgstr "Đồng ý"
+
+#, fuzzy
+#~ msgid "Add:"
+#~ msgstr "Thêm"
+
+#~ msgid "_Category"
+#~ msgstr "_Phân loại"
+
+#, fuzzy
+#~ msgid "_Delete"
+#~ msgstr "Xóa"
+
+#~ msgid "_Name"
+#~ msgstr "_Tên"
+
+#~ msgid "_General"
+#~ msgstr "_Chung"
 
 #~ msgid "<b>Test</b>"
 #~ msgstr "<b>Kiểm tra</b>"
@@ -2406,14 +2428,8 @@ msgstr "Đồng ý"
 #~ msgid "Use category _defaults"
 #~ msgstr "Dùng phân loại _mặc định"
 
-#~ msgid "_Add"
-#~ msgstr "_Thêm"
-
 #~ msgid "_Protocol name"
 #~ msgstr "Tên _giao thức"
-
-#~ msgid "_Remove"
-#~ msgstr "_Loại bỏ"
 
 #~ msgid "Add file type"
 #~ msgstr "Thêm loại tập tin"

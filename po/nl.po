@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center CVS\n"
-"POT-Creation-Date: 2002-10-01 14:18-0400\n"
+"POT-Creation-Date: 2002-10-21 12:31-0400\n"
 "PO-Revision-Date: 2002-06-12 00:14+0200\n"
 "Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
@@ -97,6 +97,7 @@ msgid "Enable _Sticky Keys"
 msgstr "_PlakToetsen inschakelen"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
+#: capplets/sound/sound-properties.glade.h:2
 #, fuzzy
 msgid "General"
 msgstr "_Algemeen"
@@ -317,7 +318,7 @@ msgid "Picture Options:"
 msgstr "Afbeeldingsopties:"
 
 #: capplets/background/background-properties.glade.h:8
-#: libbackground/preview-file-selection.c:198
+#: libbackground/preview-file-selection.c:212
 msgid "Preview"
 msgstr "Voorbeeld"
 
@@ -707,6 +708,7 @@ msgid "Window Manager"
 msgstr "Window Manager"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:31
+#: capplets/file-types/file-types-properties.glade.h:22
 msgid "_Name:"
 msgstr "_Naam:"
 
@@ -858,16 +860,16 @@ msgstr "Bestaande toepassingen"
 msgid "Legacy applications settings (grdb)"
 msgstr "Instellingen van bestaande toepassingen (grdb)"
 
-#: capplets/file-types/file-types-capplet.c:214
+#: capplets/file-types/file-types-capplet.c:196
 msgid "Description"
 msgstr "Beschrijving"
 
-#: capplets/file-types/file-types-capplet.c:236
+#: capplets/file-types/file-types-capplet.c:218
 msgid "Extensions"
 msgstr "Achtervoegsels"
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:1
-#: capplets/file-types/file-types-properties.glade.h:8
+#: capplets/file-types/file-types-properties.glade.h:10
 msgid "File Types and Programs"
 msgstr "Bestandstypen en programma's"
 
@@ -893,64 +895,69 @@ msgstr "_Service toevoegen..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
 #, fuzzy
-msgid "Add:"
-msgstr "Toevoegen"
+msgid "C_hoose..."
+msgstr "_Bladeren..."
 
 #: capplets/file-types/file-types-properties.glade.h:6
-msgid "Default action"
-msgstr "Standaardactie"
+#, fuzzy
+msgid "Cate_gory:"
+msgstr "Categorie"
 
 #: capplets/file-types/file-types-properties.glade.h:7
+#, fuzzy
+msgid "D_efault action:"
+msgstr "Standaardactie"
+
+#: capplets/file-types/file-types-properties.glade.h:8
+#, fuzzy
+msgid "Default _action:"
+msgstr "Standaardactie"
+
+#: capplets/file-types/file-types-properties.glade.h:9
 #: capplets/file-types/mime-edit-dialog.c:208
 msgid "Edit file type"
 msgstr "Bestandstype bewerken"
 
-#: capplets/file-types/file-types-properties.glade.h:9
+#: capplets/file-types/file-types-properties.glade.h:11
 #, fuzzy
-msgid "Filename Extensions"
+msgid "Filename extensions:"
 msgstr "Bestandsnaam-achtervoegsels"
 
-#: capplets/file-types/file-types-properties.glade.h:10
+#: capplets/file-types/file-types-properties.glade.h:12
 msgid "Look at content"
 msgstr "Inhoud bekijken"
 
-#: capplets/file-types/file-types-properties.glade.h:11
+#: capplets/file-types/file-types-properties.glade.h:13
+#, fuzzy
+msgid "P_rogram:"
+msgstr "_Programma"
+
+#: capplets/file-types/file-types-properties.glade.h:14
 #, fuzzy
 msgid "Program to Run"
 msgstr "Uit te voeren programma"
 
-#: capplets/file-types/file-types-properties.glade.h:12
+#: capplets/file-types/file-types-properties.glade.h:15
 msgid "Run a program"
 msgstr "Draai een programma"
 
-#: capplets/file-types/file-types-properties.glade.h:13
+#: capplets/file-types/file-types-properties.glade.h:16
 #, fuzzy
 msgid "Run in _Terminal"
 msgstr "Activeren in Terminal"
 
-#: capplets/file-types/file-types-properties.glade.h:14
+#: capplets/file-types/file-types-properties.glade.h:17
 msgid "Use parent category _defaults"
 msgstr "Standaardinstellingen _oudercategorie gebruiken"
 
-#: capplets/file-types/file-types-properties.glade.h:15
-#, fuzzy
-msgid "Viewer Component"
-msgstr "Bekijk-onderdeel"
-
-#: capplets/file-types/file-types-properties.glade.h:16
-msgid "_Category"
-msgstr "_Categorie"
-
-#: capplets/file-types/file-types-properties.glade.h:17
-msgid "_Choose..."
-msgstr "_Bladeren..."
-
 #: capplets/file-types/file-types-properties.glade.h:18
-msgid "_Delete"
-msgstr "_Verwijderen"
+#, fuzzy
+msgid "_Add:"
+msgstr "_Toevoegen"
 
 #: capplets/file-types/file-types-properties.glade.h:19
-msgid "_Description"
+#, fuzzy
+msgid "_Description:"
 msgstr "_Beschrijving"
 
 #: capplets/file-types/file-types-properties.glade.h:20
@@ -958,26 +965,28 @@ msgid "_Edit..."
 msgstr "_Bewerken..."
 
 #: capplets/file-types/file-types-properties.glade.h:21
-msgid "_MIME Type"
+#, fuzzy
+msgid "_MIME type:"
 msgstr "_MIME-type"
 
-#: capplets/file-types/file-types-properties.glade.h:22
-msgid "_Name"
-msgstr "_Naam"
-
 #: capplets/file-types/file-types-properties.glade.h:23
-msgid "_Program"
-msgstr "_Programma"
+#, fuzzy
+msgid "_Program to run:"
+msgstr "Uit te voeren _programma"
 
 #: capplets/file-types/file-types-properties.glade.h:24
 #, fuzzy
-msgid "_Program to Run"
-msgstr "Uit te voeren _programma"
+msgid "_Protocol:"
+msgstr "Protocol"
 
 #: capplets/file-types/file-types-properties.glade.h:25
+msgid "_Remove"
+msgstr "_Verwijderen"
+
+#: capplets/file-types/file-types-properties.glade.h:26
 #, fuzzy
-msgid "_Protocol"
-msgstr "Protocol"
+msgid "_Viewer component:"
+msgstr "Bekijk-onderdeel"
 
 #: capplets/file-types/file-types.desktop.in.h:1
 #, fuzzy
@@ -1775,18 +1784,15 @@ msgstr "Geluidsvoorkeuren"
 msgid "E_nable sound server startup"
 msgstr "S_tarten van geluidsserver inschakelen"
 
-#: capplets/sound/sound-properties.glade.h:2
-#, fuzzy
-msgid "Sound Preferences"
-msgstr "Geluidsvoorkeuren"
-
 #: capplets/sound/sound-properties.glade.h:3
-msgid "Sound _Events"
+#, fuzzy
+msgid "Sound Events"
 msgstr "Geluid-_gebeurtenissen"
 
 #: capplets/sound/sound-properties.glade.h:4
-msgid "_General"
-msgstr "_Algemeen"
+#, fuzzy
+msgid "Sound Preferences"
+msgstr "Geluidsvoorkeuren"
 
 #: capplets/sound/sound-properties.glade.h:5
 msgid "_Sounds for events"
@@ -2136,7 +2142,7 @@ msgstr "Het GNOME configuratieprogramma"
 msgid "Use shell even if nautilus is running."
 msgstr "Gebruik 'shell' zelfs wanneer nautilus draait."
 
-#: gnome-settings-daemon/factory.c:29
+#: gnome-settings-daemon/factory.c:32
 msgid "Could not initialize Bonobo"
 msgstr "Kon Bonobo niet initialiseren"
 
@@ -2149,36 +2155,36 @@ msgstr ""
 "Kan map \"%s\" niet maken.\n"
 "Dit is nodig om het veranderen van cursors mogelijk te maken."
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:106
+#: gnome-settings-daemon/gnome-settings-keybindings.c:146
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr ""
 "De bij toetsenbord-snelkoppeling (%s) behorende actie is meerdere keren "
 "gedefiniëerd\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:119
+#: gnome-settings-daemon/gnome-settings-keybindings.c:159
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr ""
 "De bij toetsenbord-snelkoppeling (%s) behorende toetscombinatie is meerdere "
 "keren gedefiniëerd\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:125
+#: gnome-settings-daemon/gnome-settings-keybindings.c:165
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr "Toetsenbord-snelkoppeling (%s) is incompleet\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:153
+#: gnome-settings-daemon/gnome-settings-keybindings.c:193
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr "Toetsenbord-snelkoppeling (%s) is ongeldig\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:241
+#: gnome-settings-daemon/gnome-settings-keybindings.c:281
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr "Toetsenbord-snelkoppeling (%s) is reeds in gebruik\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:292
+#: gnome-settings-daemon/gnome-settings-keybindings.c:357
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -2252,7 +2258,7 @@ msgstr ""
 msgid "Screen on which BGApplier is to draw"
 msgstr ""
 
-#: libbackground/preview-file-selection.c:193
+#: libbackground/preview-file-selection.c:207
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Kan geen \"hbox\" vinden, normale bestandsselectie wordt gebruikt"
 
@@ -2344,6 +2350,22 @@ msgstr ""
 #: libwindow-settings/gnome-wm-manager.c:467
 msgid "OK"
 msgstr "OK"
+
+#, fuzzy
+#~ msgid "Add:"
+#~ msgstr "Toevoegen"
+
+#~ msgid "_Category"
+#~ msgstr "_Categorie"
+
+#~ msgid "_Delete"
+#~ msgstr "_Verwijderen"
+
+#~ msgid "_Name"
+#~ msgstr "_Naam"
+
+#~ msgid "_General"
+#~ msgstr "_Algemeen"
 
 #, fuzzy
 #~ msgid "Edit Menu"
@@ -2448,14 +2470,8 @@ msgstr "OK"
 #~ msgid "Use category _defaults"
 #~ msgstr "_Standaardinstellingen per categorie gebruiken"
 
-#~ msgid "_Add"
-#~ msgstr "_Toevoegen"
-
 #~ msgid "_Protocol name"
 #~ msgstr "_Protocolnaam"
-
-#~ msgid "_Remove"
-#~ msgstr "_Verwijderen"
 
 #~ msgid "Add file type"
 #~ msgstr "Bestandstype toevoegen"

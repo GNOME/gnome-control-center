@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0.5\n"
-"POT-Creation-Date: 2002-10-01 14:18-0400\n"
+"POT-Creation-Date: 2002-10-21 12:31-0400\n"
 "PO-Revision-Date: 2000-10-11 13:47+02:00\n"
 "Last-Translator: David Sauer <davids@penguin.cz>\n"
 "Language-Team: czech <cs@li.org>\n"
@@ -86,6 +86,7 @@ msgid "Enable _Sticky Keys"
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
+#: capplets/sound/sound-properties.glade.h:2
 #, fuzzy
 msgid "General"
 msgstr "Obecné"
@@ -291,7 +292,7 @@ msgid "Picture Options:"
 msgstr "Mo¾nosti obrázku:"
 
 #: capplets/background/background-properties.glade.h:8
-#: libbackground/preview-file-selection.c:198
+#: libbackground/preview-file-selection.c:212
 msgid "Preview"
 msgstr "Náhled"
 
@@ -659,6 +660,7 @@ msgid "Window Manager"
 msgstr "Správce oken"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:31
+#: capplets/file-types/file-types-properties.glade.h:22
 msgid "_Name:"
 msgstr "_Jméno:"
 
@@ -816,16 +818,16 @@ msgstr "Standardní nastavení Gtk"
 msgid "Legacy applications settings (grdb)"
 msgstr ""
 
-#: capplets/file-types/file-types-capplet.c:214
+#: capplets/file-types/file-types-capplet.c:196
 msgid "Description"
 msgstr "Popis"
 
-#: capplets/file-types/file-types-capplet.c:236
+#: capplets/file-types/file-types-capplet.c:218
 msgid "Extensions"
 msgstr "Pøípony"
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:1
-#: capplets/file-types/file-types-properties.glade.h:8
+#: capplets/file-types/file-types-properties.glade.h:10
 msgid "File Types and Programs"
 msgstr "Typy souborù a programy"
 
@@ -849,64 +851,69 @@ msgstr "Pøidat _slu¾bu..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
 #, fuzzy
-msgid "Add:"
-msgstr "Pøidat"
+msgid "C_hoose..."
+msgstr "_Vybrat... "
 
 #: capplets/file-types/file-types-properties.glade.h:6
-msgid "Default action"
-msgstr "Implicitní akce"
+#, fuzzy
+msgid "Cate_gory:"
+msgstr "Kategorie"
 
 #: capplets/file-types/file-types-properties.glade.h:7
+#, fuzzy
+msgid "D_efault action:"
+msgstr "Implicitní akce"
+
+#: capplets/file-types/file-types-properties.glade.h:8
+#, fuzzy
+msgid "Default _action:"
+msgstr "Implicitní akce"
+
+#: capplets/file-types/file-types-properties.glade.h:9
 #: capplets/file-types/mime-edit-dialog.c:208
 msgid "Edit file type"
 msgstr "Upravit typ souboru"
 
-#: capplets/file-types/file-types-properties.glade.h:9
+#: capplets/file-types/file-types-properties.glade.h:11
 #, fuzzy
-msgid "Filename Extensions"
+msgid "Filename extensions:"
 msgstr "Pøípony souborù"
 
-#: capplets/file-types/file-types-properties.glade.h:10
+#: capplets/file-types/file-types-properties.glade.h:12
 msgid "Look at content"
 msgstr ""
 
-#: capplets/file-types/file-types-properties.glade.h:11
+#: capplets/file-types/file-types-properties.glade.h:13
+#, fuzzy
+msgid "P_rogram:"
+msgstr "Program:"
+
+#: capplets/file-types/file-types-properties.glade.h:14
 #, fuzzy
 msgid "Program to Run"
 msgstr "Program který spustit"
 
-#: capplets/file-types/file-types-properties.glade.h:12
+#: capplets/file-types/file-types-properties.glade.h:15
 msgid "Run a program"
 msgstr "Spustit program"
 
-#: capplets/file-types/file-types-properties.glade.h:13
+#: capplets/file-types/file-types-properties.glade.h:16
 #, fuzzy
 msgid "Run in _Terminal"
 msgstr "Spustit v t_erminálu"
 
-#: capplets/file-types/file-types-properties.glade.h:14
+#: capplets/file-types/file-types-properties.glade.h:17
 msgid "Use parent category _defaults"
 msgstr ""
 
-#: capplets/file-types/file-types-properties.glade.h:15
-msgid "Viewer Component"
-msgstr ""
-
-#: capplets/file-types/file-types-properties.glade.h:16
-msgid "_Category"
-msgstr "_Kategorie"
-
-#: capplets/file-types/file-types-properties.glade.h:17
-msgid "_Choose..."
-msgstr "_Vybrat... "
-
 #: capplets/file-types/file-types-properties.glade.h:18
 #, fuzzy
-msgid "_Delete"
-msgstr "Vymazat"
+msgid "_Add:"
+msgstr "_Pøidat"
 
 #: capplets/file-types/file-types-properties.glade.h:19
-msgid "_Description"
+#, fuzzy
+msgid "_Description:"
 msgstr "P_opis"
 
 #: capplets/file-types/file-types-properties.glade.h:20
@@ -914,26 +921,27 @@ msgid "_Edit..."
 msgstr "Úp_ravy..."
 
 #: capplets/file-types/file-types-properties.glade.h:21
-msgid "_MIME Type"
+#, fuzzy
+msgid "_MIME type:"
 msgstr "_MIME typ"
 
-#: capplets/file-types/file-types-properties.glade.h:22
-msgid "_Name"
-msgstr "_Jméno"
-
 #: capplets/file-types/file-types-properties.glade.h:23
-msgid "_Program"
-msgstr "_Program"
+#, fuzzy
+msgid "_Program to run:"
+msgstr "_Program ke spu¹tìní"
 
 #: capplets/file-types/file-types-properties.glade.h:24
 #, fuzzy
-msgid "_Program to Run"
-msgstr "_Program ke spu¹tìní"
+msgid "_Protocol:"
+msgstr "Protokol"
 
 #: capplets/file-types/file-types-properties.glade.h:25
-#, fuzzy
-msgid "_Protocol"
-msgstr "Protokol"
+msgid "_Remove"
+msgstr "_Odstranit"
+
+#: capplets/file-types/file-types-properties.glade.h:26
+msgid "_Viewer component:"
+msgstr ""
 
 #: capplets/file-types/file-types.desktop.in.h:1
 #, fuzzy
@@ -1718,18 +1726,15 @@ msgstr "Vlastnosti zvuku"
 msgid "E_nable sound server startup"
 msgstr "_Povolit start zvukového serveru"
 
-#: capplets/sound/sound-properties.glade.h:2
-#, fuzzy
-msgid "Sound Preferences"
-msgstr "Vlastnosti zvuku"
-
 #: capplets/sound/sound-properties.glade.h:3
-msgid "Sound _Events"
+#, fuzzy
+msgid "Sound Events"
 msgstr "Zvukové _události"
 
 #: capplets/sound/sound-properties.glade.h:4
-msgid "_General"
-msgstr "_Obecné"
+#, fuzzy
+msgid "Sound Preferences"
+msgstr "Vlastnosti zvuku"
 
 #: capplets/sound/sound-properties.glade.h:5
 msgid "_Sounds for events"
@@ -2081,7 +2086,7 @@ msgstr "Konfiguraèní nástroj Gnome"
 msgid "Use shell even if nautilus is running."
 msgstr ""
 
-#: gnome-settings-daemon/factory.c:29
+#: gnome-settings-daemon/factory.c:32
 msgid "Could not initialize Bonobo"
 msgstr ""
 
@@ -2092,32 +2097,32 @@ msgid ""
 "This is needed to allow changing cursors."
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:106
+#: gnome-settings-daemon/gnome-settings-keybindings.c:146
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:119
+#: gnome-settings-daemon/gnome-settings-keybindings.c:159
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:125
+#: gnome-settings-daemon/gnome-settings-keybindings.c:165
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:153
+#: gnome-settings-daemon/gnome-settings-keybindings.c:193
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:241
+#: gnome-settings-daemon/gnome-settings-keybindings.c:281
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:292
+#: gnome-settings-daemon/gnome-settings-keybindings.c:357
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -2183,7 +2188,7 @@ msgstr "©etøiè obrazovky"
 msgid "Screen on which BGApplier is to draw"
 msgstr ""
 
-#: libbackground/preview-file-selection.c:193
+#: libbackground/preview-file-selection.c:207
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Nelze najít hbox, bude pou¾it normální výbìr souboru"
 
@@ -2277,6 +2282,26 @@ msgid "OK"
 msgstr "Budi¾"
 
 #, fuzzy
+#~ msgid "Add:"
+#~ msgstr "Pøidat"
+
+#~ msgid "_Category"
+#~ msgstr "_Kategorie"
+
+#, fuzzy
+#~ msgid "_Delete"
+#~ msgstr "Vymazat"
+
+#~ msgid "_Name"
+#~ msgstr "_Jméno"
+
+#~ msgid "_Program"
+#~ msgstr "_Program"
+
+#~ msgid "_General"
+#~ msgstr "_Obecné"
+
+#, fuzzy
 #~ msgid "Edit Menu"
 #~ msgstr "Ùpravy"
 
@@ -2356,14 +2381,8 @@ msgstr "Budi¾"
 #~ msgid "Needs _terminal"
 #~ msgstr "Potøebuje terminál"
 
-#~ msgid "_Add"
-#~ msgstr "_Pøidat"
-
 #~ msgid "_Protocol name"
 #~ msgstr "Jméno _protokolu"
-
-#~ msgid "_Remove"
-#~ msgstr "_Odstranit"
 
 #~ msgid "Add file type"
 #~ msgstr "Pøidat typ souboru"
@@ -3839,6 +3858,3 @@ msgstr "Budi¾"
 
 #~ msgid "GNOME sound support"
 #~ msgstr "Podpora zvuku pro GNOME"
-
-#~ msgid "Program:"
-#~ msgstr "Program:"

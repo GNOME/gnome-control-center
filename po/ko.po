@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.99.10\n"
-"POT-Creation-Date: 2002-10-01 14:18-0400\n"
+"POT-Creation-Date: 2002-10-21 12:31-0400\n"
 "PO-Revision-Date: 2002-07-15 18:57+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: Korean <gnome-kr-translation@lists.sourceforge.net>\n"
@@ -84,6 +84,7 @@ msgid "Enable _Sticky Keys"
 msgstr "Sticky 키 사용(_M)"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
+#: capplets/sound/sound-properties.glade.h:2
 msgid "General"
 msgstr "일반"
 
@@ -291,7 +292,7 @@ msgid "Picture Options:"
 msgstr "그림 옵션:"
 
 #: capplets/background/background-properties.glade.h:8
-#: libbackground/preview-file-selection.c:198
+#: libbackground/preview-file-selection.c:212
 msgid "Preview"
 msgstr "미리 보기"
 
@@ -665,6 +666,7 @@ msgid "Window Manager"
 msgstr "창 관리자"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:31
+#: capplets/file-types/file-types-properties.glade.h:22
 msgid "_Name:"
 msgstr "이름"
 
@@ -810,16 +812,16 @@ msgstr "기존 응용프로그램"
 msgid "Legacy applications settings (grdb)"
 msgstr "기존 응용프로그램 설정(grdb)"
 
-#: capplets/file-types/file-types-capplet.c:214
+#: capplets/file-types/file-types-capplet.c:196
 msgid "Description"
 msgstr "설명"
 
-#: capplets/file-types/file-types-capplet.c:236
+#: capplets/file-types/file-types-capplet.c:218
 msgid "Extensions"
 msgstr "확장자"
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:1
-#: capplets/file-types/file-types-properties.glade.h:8
+#: capplets/file-types/file-types-properties.glade.h:10
 msgid "File Types and Programs"
 msgstr "파일 형식과 프로그램"
 
@@ -843,60 +845,67 @@ msgstr "서비스 추가(_S)..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
 #, fuzzy
-msgid "Add:"
-msgstr "추가..."
+msgid "C_hoose..."
+msgstr "선택(_C)..."
 
 #: capplets/file-types/file-types-properties.glade.h:6
-msgid "Default action"
-msgstr "기본 동작"
+#, fuzzy
+msgid "Cate_gory:"
+msgstr "범주"
 
 #: capplets/file-types/file-types-properties.glade.h:7
+#, fuzzy
+msgid "D_efault action:"
+msgstr "기본 동작"
+
+#: capplets/file-types/file-types-properties.glade.h:8
+#, fuzzy
+msgid "Default _action:"
+msgstr "기본 동작"
+
+#: capplets/file-types/file-types-properties.glade.h:9
 #: capplets/file-types/mime-edit-dialog.c:208
 msgid "Edit file type"
 msgstr "파일 형식 편집"
 
-#: capplets/file-types/file-types-properties.glade.h:9
-msgid "Filename Extensions"
+#: capplets/file-types/file-types-properties.glade.h:11
+#, fuzzy
+msgid "Filename extensions:"
 msgstr "파일 이름 확장자"
 
-#: capplets/file-types/file-types-properties.glade.h:10
+#: capplets/file-types/file-types-properties.glade.h:12
 msgid "Look at content"
 msgstr "내용 들여다 보기"
 
-#: capplets/file-types/file-types-properties.glade.h:11
+#: capplets/file-types/file-types-properties.glade.h:13
+#, fuzzy
+msgid "P_rogram:"
+msgstr "프로그램(_P)"
+
+#: capplets/file-types/file-types-properties.glade.h:14
 msgid "Program to Run"
 msgstr "실행할 프로그램"
 
-#: capplets/file-types/file-types-properties.glade.h:12
+#: capplets/file-types/file-types-properties.glade.h:15
 msgid "Run a program"
 msgstr "프로그램 실행"
 
-#: capplets/file-types/file-types-properties.glade.h:13
+#: capplets/file-types/file-types-properties.glade.h:16
 msgid "Run in _Terminal"
 msgstr "터미널에서 시작(_ㅆ)"
 
-#: capplets/file-types/file-types-properties.glade.h:14
+#: capplets/file-types/file-types-properties.glade.h:17
 msgid "Use parent category _defaults"
 msgstr "상위 범주의 기본값 사용(_D)"
 
-#: capplets/file-types/file-types-properties.glade.h:15
-msgid "Viewer Component"
-msgstr "보여주기 컴포넌트"
-
-#: capplets/file-types/file-types-properties.glade.h:16
-msgid "_Category"
-msgstr "범주(_C)"
-
-#: capplets/file-types/file-types-properties.glade.h:17
-msgid "_Choose..."
-msgstr "선택(_C)..."
-
 #: capplets/file-types/file-types-properties.glade.h:18
-msgid "_Delete"
-msgstr "지우기(_D)"
+#, fuzzy
+msgid "_Add:"
+msgstr "추가..."
 
 #: capplets/file-types/file-types-properties.glade.h:19
-msgid "_Description"
+#, fuzzy
+msgid "_Description:"
 msgstr "설명(_D)"
 
 #: capplets/file-types/file-types-properties.glade.h:20
@@ -904,24 +913,28 @@ msgid "_Edit..."
 msgstr "편집(_E)..."
 
 #: capplets/file-types/file-types-properties.glade.h:21
-msgid "_MIME Type"
+#, fuzzy
+msgid "_MIME type:"
 msgstr "MIME 형식(_M)"
 
-#: capplets/file-types/file-types-properties.glade.h:22
-msgid "_Name"
-msgstr "이름(_N)"
-
 #: capplets/file-types/file-types-properties.glade.h:23
-msgid "_Program"
-msgstr "프로그램(_P)"
-
-#: capplets/file-types/file-types-properties.glade.h:24
-msgid "_Program to Run"
+#, fuzzy
+msgid "_Program to run:"
 msgstr "실행할 프로그램(_P)"
 
-#: capplets/file-types/file-types-properties.glade.h:25
-msgid "_Protocol"
+#: capplets/file-types/file-types-properties.glade.h:24
+#, fuzzy
+msgid "_Protocol:"
 msgstr "프로토콜(_P)"
+
+#: capplets/file-types/file-types-properties.glade.h:25
+msgid "_Remove"
+msgstr ""
+
+#: capplets/file-types/file-types-properties.glade.h:26
+#, fuzzy
+msgid "_Viewer component:"
+msgstr "보여주기 컴포넌트"
 
 #: capplets/file-types/file-types.desktop.in.h:1
 #, fuzzy
@@ -1698,17 +1711,14 @@ msgstr "사운드 기본 설정"
 msgid "E_nable sound server startup"
 msgstr "사운드 서버 시작하기(_N)"
 
-#: capplets/sound/sound-properties.glade.h:2
-msgid "Sound Preferences"
-msgstr "사운드 기본 설정"
-
 #: capplets/sound/sound-properties.glade.h:3
-msgid "Sound _Events"
+#, fuzzy
+msgid "Sound Events"
 msgstr "사운드 이벤트(_E)"
 
 #: capplets/sound/sound-properties.glade.h:4
-msgid "_General"
-msgstr "일반(_G)"
+msgid "Sound Preferences"
+msgstr "사운드 기본 설정"
 
 #: capplets/sound/sound-properties.glade.h:5
 msgid "_Sounds for events"
@@ -2054,7 +2064,7 @@ msgstr "그놈 설정 도구"
 msgid "Use shell even if nautilus is running."
 msgstr "노틸러스 실행중이라도 쉘 사용"
 
-#: gnome-settings-daemon/factory.c:29
+#: gnome-settings-daemon/factory.c:32
 msgid "Could not initialize Bonobo"
 msgstr "보노보를 초기화할 수 없습니다"
 
@@ -2067,32 +2077,32 @@ msgstr ""
 "\"%s\" 디렉토리를 만들 수 없습니다.\n"
 "커서를 변경하려면 이 디렉토리를 만들어야 합니다."
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:106
+#: gnome-settings-daemon/gnome-settings-keybindings.c:146
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr "키 바인딩에 (%s) 대한 행동이 여러 번 정의되어 있습니다\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:119
+#: gnome-settings-daemon/gnome-settings-keybindings.c:159
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr "키 바인딩에 (%s) 대한 바인딩이 여러 번 정의되어 있습니다\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:125
+#: gnome-settings-daemon/gnome-settings-keybindings.c:165
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr "키 바인딩이 (%s) 불완전합니다\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:153
+#: gnome-settings-daemon/gnome-settings-keybindings.c:193
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr "키 바인딩이 (%s) 잘못되었습니다\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:241
+#: gnome-settings-daemon/gnome-settings-keybindings.c:281
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr "키 바인딩이 (%s) 이미 사용중입니다\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:292
+#: gnome-settings-daemon/gnome-settings-keybindings.c:357
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -2166,7 +2176,7 @@ msgstr ""
 msgid "Screen on which BGApplier is to draw"
 msgstr ""
 
-#: libbackground/preview-file-selection.c:193
+#: libbackground/preview-file-selection.c:207
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "hbox를 찾을 수 없어, 보통 파일 선택 대화상자를 사용합니다"
 
@@ -2258,6 +2268,18 @@ msgstr ""
 #: libwindow-settings/gnome-wm-manager.c:467
 msgid "OK"
 msgstr "확인"
+
+#~ msgid "_Category"
+#~ msgstr "범주(_C)"
+
+#~ msgid "_Delete"
+#~ msgstr "지우기(_D)"
+
+#~ msgid "_Name"
+#~ msgstr "이름(_N)"
+
+#~ msgid "_General"
+#~ msgstr "일반(_G)"
 
 #~ msgid "_Menu"
 #~ msgstr "메뉴(_M)"

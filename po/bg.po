@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2002-10-01 14:18-0400\n"
+"POT-Creation-Date: 2002-10-21 12:31-0400\n"
 "PO-Revision-Date: 2002-06-24 08:10+0200\n"
 "Last-Translator: Borislav Aleksandrov <B.Aleksandrov@cnsys.bg>\n"
 "Language-Team: Bulgarian GNOME translation team <dict@linux.zonebg.com>\n"
@@ -90,6 +90,7 @@ msgid "Enable _Sticky Keys"
 msgstr "Разрешава _Прилепени Клавиши"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
+#: capplets/sound/sound-properties.glade.h:2
 msgid "General"
 msgstr "Основни"
 
@@ -300,7 +301,7 @@ msgid "Picture Options:"
 msgstr "Опции на Картинка:"
 
 #: capplets/background/background-properties.glade.h:8
-#: libbackground/preview-file-selection.c:198
+#: libbackground/preview-file-selection.c:212
 msgid "Preview"
 msgstr "Преглед"
 
@@ -683,6 +684,7 @@ msgid "Window Manager"
 msgstr "Мениджър на Прозорци"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:31
+#: capplets/file-types/file-types-properties.glade.h:22
 msgid "_Name:"
 msgstr "_Име:"
 
@@ -834,16 +836,16 @@ msgstr "Стари Приложения"
 msgid "Legacy applications settings (grdb)"
 msgstr "Настройки на стари приложения (grdb)"
 
-#: capplets/file-types/file-types-capplet.c:214
+#: capplets/file-types/file-types-capplet.c:196
 msgid "Description"
 msgstr "Описание"
 
-#: capplets/file-types/file-types-capplet.c:236
+#: capplets/file-types/file-types-capplet.c:218
 msgid "Extensions"
 msgstr "Разширения"
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:1
-#: capplets/file-types/file-types-properties.glade.h:8
+#: capplets/file-types/file-types-properties.glade.h:10
 msgid "File Types and Programs"
 msgstr "Фалови Типове и Програми"
 
@@ -868,65 +870,69 @@ msgstr "Добав_я обслужване..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
 #, fuzzy
-msgid "Add:"
-msgstr "Добавя"
+msgid "C_hoose..."
+msgstr "_Избор..."
 
 #: capplets/file-types/file-types-properties.glade.h:6
-msgid "Default action"
-msgstr "Подразбиращо се действие"
+#, fuzzy
+msgid "Cate_gory:"
+msgstr "Категория"
 
 #: capplets/file-types/file-types-properties.glade.h:7
+#, fuzzy
+msgid "D_efault action:"
+msgstr "Подразбиращо се действие"
+
+#: capplets/file-types/file-types-properties.glade.h:8
+#, fuzzy
+msgid "Default _action:"
+msgstr "Подразбиращо се действие"
+
+#: capplets/file-types/file-types-properties.glade.h:9
 #: capplets/file-types/mime-edit-dialog.c:208
 msgid "Edit file type"
 msgstr "Редактиране тип на файл"
 
-#: capplets/file-types/file-types-properties.glade.h:9
+#: capplets/file-types/file-types-properties.glade.h:11
 #, fuzzy
-msgid "Filename Extensions"
+msgid "Filename extensions:"
 msgstr "Разширение Име на файл"
 
-#: capplets/file-types/file-types-properties.glade.h:10
+#: capplets/file-types/file-types-properties.glade.h:12
 msgid "Look at content"
 msgstr "Преглед в съдържанието"
 
-#: capplets/file-types/file-types-properties.glade.h:11
+#: capplets/file-types/file-types-properties.glade.h:13
+#, fuzzy
+msgid "P_rogram:"
+msgstr "_Програма"
+
+#: capplets/file-types/file-types-properties.glade.h:14
 #, fuzzy
 msgid "Program to Run"
 msgstr "Програма за изпълнение"
 
-#: capplets/file-types/file-types-properties.glade.h:12
+#: capplets/file-types/file-types-properties.glade.h:15
 msgid "Run a program"
 msgstr "Изпълнява програма"
 
-#: capplets/file-types/file-types-properties.glade.h:13
+#: capplets/file-types/file-types-properties.glade.h:16
 #, fuzzy
 msgid "Run in _Terminal"
 msgstr "Старти_ра в Терминал"
 
-#: capplets/file-types/file-types-properties.glade.h:14
+#: capplets/file-types/file-types-properties.glade.h:17
 msgid "Use parent category _defaults"
 msgstr "Използва родителската категория по подразбиране"
 
-#: capplets/file-types/file-types-properties.glade.h:15
-#, fuzzy
-msgid "Viewer Component"
-msgstr "Преглежда компонент"
-
-#: capplets/file-types/file-types-properties.glade.h:16
-msgid "_Category"
-msgstr "_Категория"
-
-#: capplets/file-types/file-types-properties.glade.h:17
-msgid "_Choose..."
-msgstr "_Избор..."
-
 #: capplets/file-types/file-types-properties.glade.h:18
 #, fuzzy
-msgid "_Delete"
-msgstr "Изтрива"
+msgid "_Add:"
+msgstr "_Добавя"
 
 #: capplets/file-types/file-types-properties.glade.h:19
-msgid "_Description"
+#, fuzzy
+msgid "_Description:"
 msgstr "_Описание"
 
 #: capplets/file-types/file-types-properties.glade.h:20
@@ -934,26 +940,28 @@ msgid "_Edit..."
 msgstr "_Редактиране..."
 
 #: capplets/file-types/file-types-properties.glade.h:21
-msgid "_MIME Type"
+#, fuzzy
+msgid "_MIME type:"
 msgstr "_MIME Тип"
 
-#: capplets/file-types/file-types-properties.glade.h:22
-msgid "_Name"
-msgstr "_Име"
-
 #: capplets/file-types/file-types-properties.glade.h:23
-msgid "_Program"
-msgstr "_Програма"
+#, fuzzy
+msgid "_Program to run:"
+msgstr "_Програма за изпълнение"
 
 #: capplets/file-types/file-types-properties.glade.h:24
 #, fuzzy
-msgid "_Program to Run"
-msgstr "_Програма за изпълнение"
+msgid "_Protocol:"
+msgstr "Протокол"
 
 #: capplets/file-types/file-types-properties.glade.h:25
+msgid "_Remove"
+msgstr "_Премахва"
+
+#: capplets/file-types/file-types-properties.glade.h:26
 #, fuzzy
-msgid "_Protocol"
-msgstr "Протокол"
+msgid "_Viewer component:"
+msgstr "Преглежда компонент"
 
 #: capplets/file-types/file-types.desktop.in.h:1
 #, fuzzy
@@ -1749,18 +1757,15 @@ msgstr "Настройка за звук"
 msgid "E_nable sound server startup"
 msgstr "_Разрешава звъков сървър при стартиране"
 
-#: capplets/sound/sound-properties.glade.h:2
-#, fuzzy
-msgid "Sound Preferences"
-msgstr "Настройка за звук"
-
 #: capplets/sound/sound-properties.glade.h:3
-msgid "Sound _Events"
+#, fuzzy
+msgid "Sound Events"
 msgstr "З_вукови събития"
 
 #: capplets/sound/sound-properties.glade.h:4
-msgid "_General"
-msgstr "_Основни"
+#, fuzzy
+msgid "Sound Preferences"
+msgstr "Настройка за звук"
 
 #: capplets/sound/sound-properties.glade.h:5
 msgid "_Sounds for events"
@@ -2111,7 +2116,7 @@ msgstr "Конфигурационен инструмент на ГНОМЕ"
 msgid "Use shell even if nautilus is running."
 msgstr "Използва shell дори при стартиран nautilus."
 
-#: gnome-settings-daemon/factory.c:29
+#: gnome-settings-daemon/factory.c:32
 msgid "Could not initialize Bonobo"
 msgstr "Не мога да инициализирам Bonobo"
 
@@ -2124,32 +2129,32 @@ msgstr ""
 "Не мога да създам директория \"%s\".\n"
 "Това е необходимо за да позволи промяната на показалеца."
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:106
+#: gnome-settings-daemon/gnome-settings-keybindings.c:146
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr "Клавишна комбинация (%s) има операция дефинирана многократно\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:119
+#: gnome-settings-daemon/gnome-settings-keybindings.c:159
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr "Клавишна комбинация (%s) има комбинация дефинирана многократно\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:125
+#: gnome-settings-daemon/gnome-settings-keybindings.c:165
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr "Клавишна комбинация (%s) е непълна\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:153
+#: gnome-settings-daemon/gnome-settings-keybindings.c:193
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr "Клавишна комбинация (%s) е невалидна\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:241
+#: gnome-settings-daemon/gnome-settings-keybindings.c:281
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr "Клавишна комбинация (%s) е вече използвана\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:292
+#: gnome-settings-daemon/gnome-settings-keybindings.c:357
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -2223,7 +2228,7 @@ msgstr ""
 msgid "Screen on which BGApplier is to draw"
 msgstr ""
 
-#: libbackground/preview-file-selection.c:193
+#: libbackground/preview-file-selection.c:207
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Не мога да намеря hbox, използвам нормален избор на файл"
 
@@ -2317,6 +2322,23 @@ msgid "OK"
 msgstr "OK"
 
 #, fuzzy
+#~ msgid "Add:"
+#~ msgstr "Добавя"
+
+#~ msgid "_Category"
+#~ msgstr "_Категория"
+
+#, fuzzy
+#~ msgid "_Delete"
+#~ msgstr "Изтрива"
+
+#~ msgid "_Name"
+#~ msgstr "_Име"
+
+#~ msgid "_General"
+#~ msgstr "_Основни"
+
+#, fuzzy
 #~ msgid "Edit Menu"
 #~ msgstr "Редактиране"
 
@@ -2407,14 +2429,8 @@ msgstr "OK"
 #~ msgid "Use category _defaults"
 #~ msgstr "Използва категория по подразбиране"
 
-#~ msgid "_Add"
-#~ msgstr "_Добавя"
-
 #~ msgid "_Protocol name"
 #~ msgstr "Име на _Протокол"
-
-#~ msgid "_Remove"
-#~ msgstr "_Премахва"
 
 #~ msgid "Add file type"
 #~ msgstr "Добавя тип файл"

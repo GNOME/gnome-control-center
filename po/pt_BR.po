@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.5.6\n"
-"POT-Creation-Date: 2002-10-01 14:18-0400\n"
+"POT-Creation-Date: 2002-10-21 12:31-0400\n"
 "PO-Revision-Date: 2002-09-04 19:06-0300\n"
 "Last-Translator: Gustavo Noronha Silva <kov@debian.org>\n"
 "Language-Team: Debian-BR <debian-l10n-portuguese@lists.debian.org>, "
@@ -103,6 +103,7 @@ msgid "Enable _Sticky Keys"
 msgstr "Habilitar Teclas de _Aderência"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
+#: capplets/sound/sound-properties.glade.h:2
 msgid "General"
 msgstr "Geral"
 
@@ -343,7 +344,7 @@ msgid "Picture Options:"
 msgstr "Opções de Figura:"
 
 #: capplets/background/background-properties.glade.h:8
-#: libbackground/preview-file-selection.c:198
+#: libbackground/preview-file-selection.c:212
 msgid "Preview"
 msgstr "Visualização prévia"
 
@@ -768,6 +769,7 @@ msgid "Window Manager"
 msgstr "Gerenciador de Janelas"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:31
+#: capplets/file-types/file-types-properties.glade.h:22
 msgid "_Name:"
 msgstr "_Nome:"
 
@@ -934,17 +936,17 @@ msgstr "Aplicações Legadas"
 msgid "Legacy applications settings (grdb)"
 msgstr "Configurações das aplicações legadas (grdb)"
 
-#: capplets/file-types/file-types-capplet.c:214
+#: capplets/file-types/file-types-capplet.c:196
 msgid "Description"
 msgstr "Descrição"
 
-#: capplets/file-types/file-types-capplet.c:236
+#: capplets/file-types/file-types-capplet.c:218
 msgid "Extensions"
 msgstr "Extensões"
 
 # SUN NEW TRANSLATION
 #: capplets/file-types/file-types-capplet.desktop.in.h:1
-#: capplets/file-types/file-types-properties.glade.h:8
+#: capplets/file-types/file-types-properties.glade.h:10
 msgid "File Types and Programs"
 msgstr "Programas e Tipos de Arquivo"
 
@@ -971,68 +973,75 @@ msgstr "Adicionar _Serviço..."
 
 # SUN NEW TRANSLATION
 #: capplets/file-types/file-types-properties.glade.h:5
-msgid "Add:"
-msgstr "Adicionar:"
+#, fuzzy
+msgid "C_hoose..."
+msgstr "_Escolher..."
 
+# SUN NEW TRANSLATION
 #: capplets/file-types/file-types-properties.glade.h:6
-msgid "Default action"
+#, fuzzy
+msgid "Cate_gory:"
+msgstr "Categoria"
+
+#: capplets/file-types/file-types-properties.glade.h:7
+#, fuzzy
+msgid "D_efault action:"
+msgstr "Ação padrão"
+
+#: capplets/file-types/file-types-properties.glade.h:8
+#, fuzzy
+msgid "Default _action:"
 msgstr "Ação padrão"
 
 # SUN NEW TRANSLATION
-#: capplets/file-types/file-types-properties.glade.h:7
+#: capplets/file-types/file-types-properties.glade.h:9
 #: capplets/file-types/mime-edit-dialog.c:208
 msgid "Edit file type"
 msgstr "Editar tipo de arquivo"
 
-#: capplets/file-types/file-types-properties.glade.h:9
-msgid "Filename Extensions"
+#: capplets/file-types/file-types-properties.glade.h:11
+#, fuzzy
+msgid "Filename extensions:"
 msgstr "Extensões de Arquivos"
 
 # SUN NEW TRANSLATION
-#: capplets/file-types/file-types-properties.glade.h:10
+#: capplets/file-types/file-types-properties.glade.h:12
 msgid "Look at content"
 msgstr "Examinar o conteúdo"
 
+#: capplets/file-types/file-types-properties.glade.h:13
+#, fuzzy
+msgid "P_rogram:"
+msgstr "_Programa"
+
 # MODIFIED SUN NEW TRANSLATION
-#: capplets/file-types/file-types-properties.glade.h:11
+#: capplets/file-types/file-types-properties.glade.h:14
 msgid "Program to Run"
 msgstr "Programa a ser Executado"
 
 # SUN NEW TRANSLATION
-#: capplets/file-types/file-types-properties.glade.h:12
+#: capplets/file-types/file-types-properties.glade.h:15
 msgid "Run a program"
 msgstr "Executar um programa"
 
-#: capplets/file-types/file-types-properties.glade.h:13
+#: capplets/file-types/file-types-properties.glade.h:16
 msgid "Run in _Terminal"
 msgstr "Executar em um T_erminal"
 
 # SUN NEW TRANSLATION
-#: capplets/file-types/file-types-properties.glade.h:14
+#: capplets/file-types/file-types-properties.glade.h:17
 msgid "Use parent category _defaults"
 msgstr "Usar pa_drões da categoria pai"
 
-# MODIFIED SUN NEW TRANSLATION
-#: capplets/file-types/file-types-properties.glade.h:15
-msgid "Viewer Component"
-msgstr "Componente de Visualização"
-
 # SUN NEW TRANSLATION
-#: capplets/file-types/file-types-properties.glade.h:16
-msgid "_Category"
-msgstr "_Categoria"
-
-# SUN NEW TRANSLATION
-#: capplets/file-types/file-types-properties.glade.h:17
-msgid "_Choose..."
-msgstr "_Escolher..."
-
 #: capplets/file-types/file-types-properties.glade.h:18
-msgid "_Delete"
-msgstr "_Excluir"
+#, fuzzy
+msgid "_Add:"
+msgstr "_Adicionar"
 
 #: capplets/file-types/file-types-properties.glade.h:19
-msgid "_Description"
+#, fuzzy
+msgid "_Description:"
 msgstr "_Descrição"
 
 # SUN NEW TRANSLATION
@@ -1042,24 +1051,29 @@ msgstr "_Editar..."
 
 # SUN NEW TRANSLATION
 #: capplets/file-types/file-types-properties.glade.h:21
-msgid "_MIME Type"
+#, fuzzy
+msgid "_MIME type:"
 msgstr "Tipo _MIME"
 
-#: capplets/file-types/file-types-properties.glade.h:22
-msgid "_Name"
-msgstr "_Nome:"
-
 #: capplets/file-types/file-types-properties.glade.h:23
-msgid "_Program"
-msgstr "_Programa"
-
-#: capplets/file-types/file-types-properties.glade.h:24
-msgid "_Program to Run"
+#, fuzzy
+msgid "_Program to run:"
 msgstr "_Programa a ser Executado"
 
-#: capplets/file-types/file-types-properties.glade.h:25
-msgid "_Protocol"
+#: capplets/file-types/file-types-properties.glade.h:24
+#, fuzzy
+msgid "_Protocol:"
 msgstr "_Protocolo"
+
+#: capplets/file-types/file-types-properties.glade.h:25
+msgid "_Remove"
+msgstr "_Remover"
+
+# MODIFIED SUN NEW TRANSLATION
+#: capplets/file-types/file-types-properties.glade.h:26
+#, fuzzy
+msgid "_Viewer component:"
+msgstr "Componente de Visualização"
 
 # MODIFIED SUN NEW TRANSLATION
 #: capplets/file-types/file-types.desktop.in.h:1
@@ -1902,18 +1916,14 @@ msgstr "Preferências de Som"
 msgid "E_nable sound server startup"
 msgstr "_Habilitar a inicialização do servidor de som"
 
-#: capplets/sound/sound-properties.glade.h:2
-msgid "Sound Preferences"
-msgstr "Preferências de Som"
-
 #: capplets/sound/sound-properties.glade.h:3
-msgid "Sound _Events"
+#, fuzzy
+msgid "Sound Events"
 msgstr "_Eventos de Som"
 
-# SUN NEW TRANSLATION
 #: capplets/sound/sound-properties.glade.h:4
-msgid "_General"
-msgstr "_Geral"
+msgid "Sound Preferences"
+msgstr "Preferências de Som"
 
 #: capplets/sound/sound-properties.glade.h:5
 msgid "_Sounds for events"
@@ -2296,7 +2306,7 @@ msgid "Use shell even if nautilus is running."
 msgstr "Usar o shell mesmo que o nautilus esteja em execução."
 
 # SUN NEW TRANSLATION
-#: gnome-settings-daemon/factory.c:29
+#: gnome-settings-daemon/factory.c:32
 msgid "Could not initialize Bonobo"
 msgstr "Não foi possível inicializar o Bonobo"
 
@@ -2309,32 +2319,32 @@ msgstr ""
 "Não é possível criar o diretório \"%s\".\n"
 "Ele é necessário para a mudança de cursores."
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:106
+#: gnome-settings-daemon/gnome-settings-keybindings.c:146
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr "Tecla de Atalho (%s) tem múltiplas ações definidas\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:119
+#: gnome-settings-daemon/gnome-settings-keybindings.c:159
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr "Tecla de Atalho (%s) tem múltiplos atalhos definidos\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:125
+#: gnome-settings-daemon/gnome-settings-keybindings.c:165
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr "Tecla de Atalho (%s) está incompleta\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:153
+#: gnome-settings-daemon/gnome-settings-keybindings.c:193
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr "Tecla de Atalho (%s) é inválida\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:241
+#: gnome-settings-daemon/gnome-settings-keybindings.c:281
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr "Tecla de Atalho (%s) já está em uso\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:292
+#: gnome-settings-daemon/gnome-settings-keybindings.c:357
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -2412,7 +2422,7 @@ msgstr "Tela"
 msgid "Screen on which BGApplier is to draw"
 msgstr "Tela em que o BGApplier deve desenhar"
 
-#: libbackground/preview-file-selection.c:193
+#: libbackground/preview-file-selection.c:207
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Não é possível achar um `hbox', usando o seletor normal de arquivos"
 
@@ -2515,6 +2525,24 @@ msgstr ""
 #: libwindow-settings/gnome-wm-manager.c:467
 msgid "OK"
 msgstr "OK"
+
+# SUN NEW TRANSLATION
+#~ msgid "Add:"
+#~ msgstr "Adicionar:"
+
+# SUN NEW TRANSLATION
+#~ msgid "_Category"
+#~ msgstr "_Categoria"
+
+#~ msgid "_Delete"
+#~ msgstr "_Excluir"
+
+#~ msgid "_Name"
+#~ msgstr "_Nome:"
+
+# SUN NEW TRANSLATION
+#~ msgid "_General"
+#~ msgstr "_Geral"
 
 # MODIFIED SUN NEW TRANSLATION
 #~ msgid "Edit Menu"
@@ -2659,15 +2687,8 @@ msgstr "OK"
 #~ msgid "Use category _defaults"
 #~ msgstr "Usar pa_drões da categoria"
 
-# SUN NEW TRANSLATION
-#~ msgid "_Add"
-#~ msgstr "_Adicionar"
-
 #~ msgid "_Protocol name"
 #~ msgstr "Nome do _protocolo"
-
-#~ msgid "_Remove"
-#~ msgstr "_Remover"
 
 #~ msgid "Add file type"
 #~ msgstr "Adicionar tipo de arquivo"

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center (Gnome 2.0.0) 1.5.1\n"
-"POT-Creation-Date: 2002-10-01 14:18-0400\n"
+"POT-Creation-Date: 2002-10-21 12:31-0400\n"
 "PO-Revision-Date: 2002-06-20 12:53+0200\n"
 "Last-Translator: Xabi García <xabigf@gmx.net>\n"
 "Language-Team: Galician <proxecto@trasno.net>\n"
@@ -92,6 +92,7 @@ msgid "Enable _Sticky Keys"
 msgstr "Activar teclas _adheribles"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
+#: capplets/sound/sound-properties.glade.h:2
 msgid "General"
 msgstr "Xeral"
 
@@ -310,7 +311,7 @@ msgid "Picture Options:"
 msgstr "Opcións da imaxe"
 
 #: capplets/background/background-properties.glade.h:8
-#: libbackground/preview-file-selection.c:198
+#: libbackground/preview-file-selection.c:212
 msgid "Preview"
 msgstr "Vista previa"
 
@@ -694,6 +695,7 @@ msgid "Window Manager"
 msgstr "Xestor de fiestras"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:31
+#: capplets/file-types/file-types-properties.glade.h:22
 msgid "_Name:"
 msgstr "N_ome:"
 
@@ -845,16 +847,16 @@ msgstr "Aplicacións heredadas"
 msgid "Legacy applications settings (grdb)"
 msgstr "Configuración das aplicacións heredadas (grdb)"
 
-#: capplets/file-types/file-types-capplet.c:214
+#: capplets/file-types/file-types-capplet.c:196
 msgid "Description"
 msgstr "Descrición"
 
-#: capplets/file-types/file-types-capplet.c:236
+#: capplets/file-types/file-types-capplet.c:218
 msgid "Extensions"
 msgstr "Extensións"
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:1
-#: capplets/file-types/file-types-properties.glade.h:8
+#: capplets/file-types/file-types-properties.glade.h:10
 msgid "File Types and Programs"
 msgstr "Tipos de ficheiros e programas"
 
@@ -880,65 +882,69 @@ msgstr "Engadir _servicio"
 
 #: capplets/file-types/file-types-properties.glade.h:5
 #, fuzzy
-msgid "Add:"
-msgstr "_Engadir"
+msgid "C_hoose..."
+msgstr "_Escoller..."
 
 #: capplets/file-types/file-types-properties.glade.h:6
-msgid "Default action"
-msgstr "Acción por defecto"
+#, fuzzy
+msgid "Cate_gory:"
+msgstr "Categoría"
 
 #: capplets/file-types/file-types-properties.glade.h:7
+#, fuzzy
+msgid "D_efault action:"
+msgstr "Acción por defecto"
+
+#: capplets/file-types/file-types-properties.glade.h:8
+#, fuzzy
+msgid "Default _action:"
+msgstr "Acción por defecto"
+
+#: capplets/file-types/file-types-properties.glade.h:9
 #: capplets/file-types/mime-edit-dialog.c:208
 msgid "Edit file type"
 msgstr "Editar tipo de ficheiro"
 
-#: capplets/file-types/file-types-properties.glade.h:9
+#: capplets/file-types/file-types-properties.glade.h:11
 #, fuzzy
-msgid "Filename Extensions"
+msgid "Filename extensions:"
 msgstr "Extensións do nome de ficheiro"
 
-#: capplets/file-types/file-types-properties.glade.h:10
+#: capplets/file-types/file-types-properties.glade.h:12
 msgid "Look at content"
 msgstr "Mirar no contido"
 
-#: capplets/file-types/file-types-properties.glade.h:11
+#: capplets/file-types/file-types-properties.glade.h:13
+#, fuzzy
+msgid "P_rogram:"
+msgstr "_Programa"
+
+#: capplets/file-types/file-types-properties.glade.h:14
 #, fuzzy
 msgid "Program to Run"
 msgstr "Programa a executar"
 
-#: capplets/file-types/file-types-properties.glade.h:12
+#: capplets/file-types/file-types-properties.glade.h:15
 msgid "Run a program"
 msgstr "Executar un programa"
 
-#: capplets/file-types/file-types-properties.glade.h:13
+#: capplets/file-types/file-types-properties.glade.h:16
 #, fuzzy
 msgid "Run in _Terminal"
 msgstr "Iniciar nunha _terminal"
 
-#: capplets/file-types/file-types-properties.glade.h:14
+#: capplets/file-types/file-types-properties.glade.h:17
 msgid "Use parent category _defaults"
 msgstr "Empregar valores por _defecto da categoría pai"
 
-#: capplets/file-types/file-types-properties.glade.h:15
-#, fuzzy
-msgid "Viewer Component"
-msgstr "Compoñente de visualización"
-
-#: capplets/file-types/file-types-properties.glade.h:16
-msgid "_Category"
-msgstr "_Categoría"
-
-#: capplets/file-types/file-types-properties.glade.h:17
-msgid "_Choose..."
-msgstr "_Escoller..."
-
 #: capplets/file-types/file-types-properties.glade.h:18
 #, fuzzy
-msgid "_Delete"
-msgstr "Borrar"
+msgid "_Add:"
+msgstr "_Engadir"
 
 #: capplets/file-types/file-types-properties.glade.h:19
-msgid "_Description"
+#, fuzzy
+msgid "_Description:"
 msgstr "_Descrición"
 
 #: capplets/file-types/file-types-properties.glade.h:20
@@ -946,26 +952,28 @@ msgid "_Edit..."
 msgstr "_Editar..."
 
 #: capplets/file-types/file-types-properties.glade.h:21
-msgid "_MIME Type"
+#, fuzzy
+msgid "_MIME type:"
 msgstr "Tipo _MIME"
 
-#: capplets/file-types/file-types-properties.glade.h:22
-msgid "_Name"
-msgstr "_Nome"
-
 #: capplets/file-types/file-types-properties.glade.h:23
-msgid "_Program"
-msgstr "_Programa"
+#, fuzzy
+msgid "_Program to run:"
+msgstr "_Programa a executar"
 
 #: capplets/file-types/file-types-properties.glade.h:24
 #, fuzzy
-msgid "_Program to Run"
-msgstr "_Programa a executar"
+msgid "_Protocol:"
+msgstr "Nome do _Protocolo"
 
 #: capplets/file-types/file-types-properties.glade.h:25
+msgid "_Remove"
+msgstr "_Borrar"
+
+#: capplets/file-types/file-types-properties.glade.h:26
 #, fuzzy
-msgid "_Protocol"
-msgstr "Nome do _Protocolo"
+msgid "_Viewer component:"
+msgstr "Compoñente de visualización"
 
 #: capplets/file-types/file-types.desktop.in.h:1
 #, fuzzy
@@ -1759,18 +1767,15 @@ msgstr "Preferencias de son"
 msgid "E_nable sound server startup"
 msgstr "_Activa-lo servidor de son ó inicio"
 
-#: capplets/sound/sound-properties.glade.h:2
-#, fuzzy
-msgid "Sound Preferences"
-msgstr "Preferencias de son"
-
 #: capplets/sound/sound-properties.glade.h:3
-msgid "Sound _Events"
+#, fuzzy
+msgid "Sound Events"
 msgstr "_Eventos de son"
 
 #: capplets/sound/sound-properties.glade.h:4
-msgid "_General"
-msgstr "_Xeral"
+#, fuzzy
+msgid "Sound Preferences"
+msgstr "Preferencias de son"
 
 #: capplets/sound/sound-properties.glade.h:5
 msgid "_Sounds for events"
@@ -2120,7 +2125,7 @@ msgstr "A ferramenta de configuración de GNOME"
 msgid "Use shell even if nautilus is running."
 msgstr "Emprega-la shell anque se esté a executar Nautilus."
 
-#: gnome-settings-daemon/factory.c:29
+#: gnome-settings-daemon/factory.c:32
 msgid "Could not initialize Bonobo"
 msgstr "Non se puido iniciar Bonobo"
 
@@ -2133,34 +2138,34 @@ msgstr ""
 "Non se puido crea-lo directorio \"%s\".\n"
 "Isto é preciso para atura-los cambios de punteiros."
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:106
+#: gnome-settings-daemon/gnome-settings-keybindings.c:146
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr ""
 "A combinación de teclas (%s) ten a súa acción definida múltiples veces\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:119
+#: gnome-settings-daemon/gnome-settings-keybindings.c:159
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr ""
 "A combinación de teclas (%s) ten a súa combinación definida múltiples veces\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:125
+#: gnome-settings-daemon/gnome-settings-keybindings.c:165
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr "A combinación de teclas (%s) está incompleta\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:153
+#: gnome-settings-daemon/gnome-settings-keybindings.c:193
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr "A combinación de teclas (%s) é inválida\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:241
+#: gnome-settings-daemon/gnome-settings-keybindings.c:281
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr "A combinación de teclas (%s) xa está empregada\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:292
+#: gnome-settings-daemon/gnome-settings-keybindings.c:357
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -2235,7 +2240,7 @@ msgstr ""
 msgid "Screen on which BGApplier is to draw"
 msgstr ""
 
-#: libbackground/preview-file-selection.c:193
+#: libbackground/preview-file-selection.c:207
 msgid "Can't find an hbox, using a normal file selection"
 msgstr ""
 "Non se puido atopar un cadro hbox, empregarase unha selección normal do "
@@ -2330,6 +2335,19 @@ msgstr ""
 msgid "OK"
 msgstr "Aceptar"
 
+#~ msgid "_Category"
+#~ msgstr "_Categoría"
+
+#, fuzzy
+#~ msgid "_Delete"
+#~ msgstr "Borrar"
+
+#~ msgid "_Name"
+#~ msgstr "_Nome"
+
+#~ msgid "_General"
+#~ msgstr "_Xeral"
+
 #~ msgid "_Menu"
 #~ msgstr "_Menú"
 
@@ -2417,9 +2435,6 @@ msgstr "Aceptar"
 
 #~ msgid "Use category _defaults"
 #~ msgstr "Empregar valores por _defecto da categoría"
-
-#~ msgid "_Remove"
-#~ msgstr "_Borrar"
 
 #~ msgid "Change the default fonts used by the desktop and applications"
 #~ msgstr ""
