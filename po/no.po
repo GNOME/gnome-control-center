@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: control-center 2.5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-04-08 13:47+0200\n"
+"POT-Creation-Date: 2004-04-15 18:23-0400\n"
 "PO-Revision-Date: 2004-04-08 13:50+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <i18n-nb@lister.ping.uio.no>\n"
@@ -401,7 +401,8 @@ msgstr "Vertikal gradient"
 
 #: capplets/background/gnome-wp-capplet.c:1453
 #: capplets/background/gnome-wp-capplet.c:1464
-msgid "Add Wallpaper"
+#, fuzzy
+msgid "Add Wallpapers"
 msgstr "Legg til bakgrunn"
 
 #: capplets/background/gnome-wp-info.c:49
@@ -883,42 +884,42 @@ msgstr "Endre oppløsning for skjermen"
 msgid "Screen Resolution"
 msgstr "Skjermoppløsning"
 
-#: capplets/display/main.c:279
+#: capplets/display/main.c:333
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: capplets/display/main.c:382
+#: capplets/display/main.c:436
 msgid "_Resolution:"
 msgstr "_Oppløsning:"
 
-#: capplets/display/main.c:401
+#: capplets/display/main.c:455
 msgid "Re_fresh rate:"
 msgstr "Opp_friskingsrate:"
 
-#: capplets/display/main.c:422
+#: capplets/display/main.c:476
 msgid "Default Settings"
 msgstr "Forvalgte innstillinger"
 
-#: capplets/display/main.c:424
+#: capplets/display/main.c:478
 #, c-format
 msgid "Screen %d Settings\n"
 msgstr "Innstillinger for skjerm %d\n"
 
-#: capplets/display/main.c:450
+#: capplets/display/main.c:504
 msgid "Screen Resolution Preferences"
 msgstr "Brukervalg skjermoppløsing"
 
-#: capplets/display/main.c:487
+#: capplets/display/main.c:541
 #, c-format
 msgid "_Make default for this computer (%s) only"
 msgstr "Gjør forvalgt _kun for denne datamaskinen (%s)"
 
-#: capplets/display/main.c:505
+#: capplets/display/main.c:559
 msgid "Options"
 msgstr "Alternativer"
 
-#: capplets/display/main.c:526
+#: capplets/display/main.c:580
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d second the previous "
@@ -933,19 +934,19 @@ msgstr[1] ""
 "Prøver de nye innstillingene. Hvis du ikke svarer innen %d sekunder vil de "
 "tidligere innstillingene bli gjenopprettet."
 
-#: capplets/display/main.c:575
+#: capplets/display/main.c:629
 msgid "Do you want to keep this resolution?"
 msgstr "Vil du beholde denne oppløsningen?"
 
-#: capplets/display/main.c:600
+#: capplets/display/main.c:654
 msgid "Use _previous resolution"
 msgstr "Bruk _forrige oppløsning"
 
-#: capplets/display/main.c:600
+#: capplets/display/main.c:654
 msgid "_Keep resolution"
 msgstr "_Behold oppløsning"
 
-#: capplets/display/main.c:749
+#: capplets/display/main.c:803
 msgid ""
 "The XServer does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
@@ -953,7 +954,7 @@ msgstr ""
 "X-tjeneren støtter ikke XRandR-utvidelsen. Endringer i oppløsning kan ikke "
 "utføres mens den kjører."
 
-#: capplets/display/main.c:757
+#: capplets/display/main.c:811
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
@@ -1484,7 +1485,7 @@ msgstr "Type hurtigtast."
 
 #: capplets/keybindings/eggcellrendererkeys.c:242
 #: capplets/keybindings/gnome-keybinding-properties.c:239
-#: libbackground/applier.c:766 typing-break/drwright.c:473
+#: libbackground/applier.c:768 typing-break/drwright.c:473
 msgid "Disabled"
 msgstr "Slått av"
 
@@ -1557,7 +1558,9 @@ msgstr "Tastatursnarveier"
 msgid ""
 "To edit a shortcut, click on the corresponding row and type a new "
 "accelerator, or press backspace to clear."
-msgstr "Klikk på korresponderende rad og skriv inn en ny hurtigtast eller trykk slett for å fjerne."
+msgstr ""
+"Klikk på korresponderende rad og skriv inn en ny hurtigtast eller trykk "
+"slett for å fjerne."
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:4
 msgid "_Desktop shortcuts:"
@@ -2630,17 +2633,6 @@ msgstr "Skjerm"
 msgid "Screen on which BGApplier is to draw"
 msgstr "Skjerm hvor BGApplier skal tegne"
 
-#: libbackground/applier.c:577
-#, c-format
-msgid "Failed to open file '%s': %s"
-msgstr "Kunne ikke åpne fil «%s»: %s"
-
-#: libbackground/applier.c:615
-#, c-format
-msgid ""
-"Failed to load image '%s': reason not known, probably a corrupt image file"
-msgstr "Kunne ikke laste bildet «%s»: årsak ikke kjent - sannsynligvis en korrupt bildefil"
-
 #: libsounds/sound-view.c:121 libsounds/sound-view.c:146
 msgid "The sound file for this event does not exist."
 msgstr "Lydfilen for denne hendelsen eksisterer ikke."
@@ -3293,6 +3285,15 @@ msgstr "Volum opp"
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
 msgid "Volume up's shortcut."
 msgstr "Snarvei for volum opp."
+
+#~ msgid "Failed to open file '%s': %s"
+#~ msgstr "Kunne ikke åpne fil «%s»: %s"
+
+#~ msgid ""
+#~ "Failed to load image '%s': reason not known, probably a corrupt image file"
+#~ msgstr ""
+#~ "Kunne ikke laste bildet «%s»: årsak ikke kjent - sannsynligvis en korrupt "
+#~ "bildefil"
 
 #~ msgid "Control Center Menu"
 #~ msgstr "Kontrollsenter meny"
