@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: control-center 2.2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-12-31 12:13-0500\n"
-"PO-Revision-Date: 2003-12-14 20:07+0100\n"
+"POT-Creation-Date: 2004-01-06 19:24+0100\n"
+"PO-Revision-Date: 2004-01-06 19:30+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1041,16 +1041,14 @@ msgid "Options"
 msgstr "Alternativer"
 
 #: capplets/display/main.c:515
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d second the previous "
 "settings will be restored."
 msgid_plural ""
 "Testing the new settings. If you don't respond in %d seconds the previous "
 "settings will be restored."
-msgstr[0] ""
-"Prøver de nye innstillingene. Hvis du ikke svarer innen %d sekunder vil de "
-"tidligere innstillingene bli gjenopprettet."
+msgstr[0] "Prøver de nye innstillingene. Hvis du ikke svarer innen %d sekund vil de tidligere innstillingene bli gjenopprettet."
 msgstr[1] ""
 "Prøver de nye innstillingene. Hvis du ikke svarer innen %d sekunder vil de "
 "tidligere innstillingene bli gjenopprettet."
@@ -1540,7 +1538,7 @@ msgid "Font may be too large"
 msgstr "Skriften kan være for stor"
 
 #: capplets/font/main.c:507
-#, fuzzy, c-format
+#, c-format, fuzzy
 msgid ""
 "The font selected is %d point large, and may make it difficult to "
 "effectively use the computer.  It is recommended that you select a size "
@@ -1549,9 +1547,7 @@ msgid_plural ""
 "The font selected is %d points large, and may make it difficult to "
 "effectively use the computer.  It is recommended that you select a size "
 "smaller than %d."
-msgstr[0] ""
-"Valgt skrift har størrelse %d punkter, og det kan gjøre det vanskelig å "
-"bruke datamaskinen. Det anbefales at du bruker en størrelse mindre enn %d."
+msgstr[0] "Valgt skrift har størrelse %d punkt, og det kan gjøre det vanskelig å bruke datamaskinen. Det anbefales at du bruker en størrelse mindre enn %d."
 msgstr[1] ""
 "Valgt skrift har størrelse %d punkter, og det kan gjøre det vanskelig å "
 "bruke datamaskinen. Det anbefales at du bruker en størrelse mindre enn %d."
@@ -2272,56 +2268,64 @@ msgid "Save Theme"
 msgstr "Lagre tema"
 
 #: capplets/theme-switcher/theme-properties.glade.h:9
+msgid "Select theme for the desktop"
+msgstr "Velg tema for skrivebordet"
+
+#: capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Short _description:"
 msgstr "Kort _beskrivelse:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:10
+#: capplets/theme-switcher/theme-properties.glade.h:11
 msgid "Theme Details"
 msgstr "Detaljer for tema"
 
-#: capplets/theme-switcher/theme-properties.glade.h:11
+#: capplets/theme-switcher/theme-properties.glade.h:12
 msgid "Theme Preferences"
 msgstr "Brukervalg for tema"
 
-#: capplets/theme-switcher/theme-properties.glade.h:12
+#: capplets/theme-switcher/theme-properties.glade.h:13
 msgid "Theme _Details"
 msgstr "_Detaljer for tema"
 
-#: capplets/theme-switcher/theme-properties.glade.h:13
+#: capplets/theme-switcher/theme-properties.glade.h:14
 msgid "This theme does not suggest any particular font or background."
 msgstr "Dette temaet foreslår ikke en skrift eller en bakgrunn."
 
-#: capplets/theme-switcher/theme-properties.glade.h:14
+#: capplets/theme-switcher/theme-properties.glade.h:15
 msgid "This theme suggests a background:"
 msgstr "Dette temaet foreslår en bakgrunn:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:15
+#: capplets/theme-switcher/theme-properties.glade.h:16
 msgid "This theme suggests a font and a background:"
 msgstr "Dette temaet foreslår en skrift og en bakgrunn:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:16
+#: capplets/theme-switcher/theme-properties.glade.h:17
 msgid "This theme suggests a font:"
 msgstr "Dette temaet foreslår en skrift:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:17
+#: capplets/theme-switcher/theme-properties.glade.h:18
 msgid "Window Border"
 msgstr "Vinduskant"
 
-#: capplets/theme-switcher/theme-properties.glade.h:18
+#: capplets/theme-switcher/theme-properties.glade.h:19
 msgid "_Go To Theme Folder"
 msgstr "_Gå til temamappen"
 
-#: capplets/theme-switcher/theme-properties.glade.h:19
+#: capplets/theme-switcher/theme-properties.glade.h:20
 msgid "_Install Theme..."
 msgstr "_Installer tema..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:20
+#: capplets/theme-switcher/theme-properties.glade.h:21
 msgid "_Save Theme..."
 msgstr "_Lagre tema..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:21
+#: capplets/theme-switcher/theme-properties.glade.h:22
 msgid "_Theme name:"
 msgstr "_Temanavn:"
+
+#: capplets/theme-switcher/theme-properties.glade.h:23
+msgid "theme selection tree"
+msgstr "tre for temavalg"
 
 #: capplets/ui-properties/gnome-ui-properties.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
@@ -3165,9 +3169,3 @@ msgstr "Om miniatyrer for installerte tema skal brukes"
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Om miniatyrer for tema skal brukes"
-
-#~ msgid "Behavior"
-#~ msgstr "Oppførsel"
-
-#~ msgid "Sets the default behavior of GNOME applications"
-#~ msgstr "Setter forvalgt oppførsel for GNOME-applikasjoner"
