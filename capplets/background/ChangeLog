@@ -1,5 +1,13 @@
 2004-02-24  Rodney Dawes  <dobey@ximian.com>
 
+	* gnome-wp-info.c (gnome_wp_info_new):
+	* gnome-wp-item.c (gnome_wp_item_get_thumbnail): Escape the path for
+	thumbnails and fileinfo (#135089)
+
+	Fixes #135089
+
+2004-02-24  Rodney Dawes  <dobey@ximian.com>
+
 	* gnome-wp-xml.c (gnome_wp_oad_legacy): Check that the file exists,
 	and continue through the loop if it doesn't (#135251)
 

@@ -95,10 +95,10 @@ GdkPixbuf * gnome_wp_item_get_thumbnail (GnomeWPItem * item,
     pixbuf = gdk_pixbuf_copy (bgpixbuf);
   } else {
     pixbuf = gnome_thumbnail_factory_generate_thumbnail (thumbs,
-							 item->filename,
+							 gnome_vfs_escape_path_string (item->filename),
 							 item->fileinfo->mime_type);
     gnome_thumbnail_factory_save_thumbnail (thumbs, pixbuf,
-					    item->filename,
+					    gnome_vfs_escape_path_string (item->filename),
 					    item->fileinfo->mtime);
   }
 
