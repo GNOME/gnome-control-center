@@ -309,7 +309,7 @@ applier_apply_prefs (Applier *applier, Preferences *prefs,
 	g_return_if_fail (IS_PREFERENCES (prefs));
 
 	if (do_root && applier->private->nautilus_running) {
-		set_root_pixmap (None);
+		set_root_pixmap (-1);
 		do_root = FALSE;
 	}
 
@@ -1244,7 +1244,7 @@ make_root_pixmap (gint width, gint height)
  * do this atomically with XGrabServer to make sure that
  * we won't leak the pixmap if somebody else it setting
  * it at the same time. (This assumes that they follow the
- * same conventions we do
+ * same conventions we do)
  */
 
 static void 
@@ -1269,14 +1269,16 @@ set_root_pixmap (Pixmap pixmap)
 
 			old_pixmap = *((Pixmap *) data_esetroot);
 
-			if (old_pixmap != pixmap)
+			if (pixmap != -1 && old_pixmap != pixmap)
 				XKillClient(GDK_DISPLAY (), old_pixmap);
+			else if (pixmap == -1)
+				pixmap = old_pixmap;
 		}
 
 		XFree (data_esetroot);
 	}
 
-	if (pixmap != None) {
+	if (pixmap != None && pixmap != -1) {
 		XChangeProperty (GDK_DISPLAY (), GDK_ROOT_WINDOW (),
 				 gdk_atom_intern ("ESETROOT_PMAP_ID", FALSE),
 				 XA_PIXMAP, 32, PropModeReplace,
@@ -1288,7 +1290,7 @@ set_root_pixmap (Pixmap pixmap)
 
 		XSetWindowBackgroundPixmap (GDK_DISPLAY (), GDK_ROOT_WINDOW (),
 					    pixmap);
-	} else {
+	} else if (pixmap == None) {
 		XDeleteProperty (GDK_DISPLAY (), GDK_ROOT_WINDOW (),
 				 gdk_atom_intern ("ESETROOT_PMAP_ID", FALSE));
 		XDeleteProperty (GDK_DISPLAY (), GDK_ROOT_WINDOW (),
@@ -1348,7 +1350,7 @@ is_nautilus_running (void)
 	if (error == BadWindow) return FALSE;
 
 	if (actual_type == XA_STRING &&
-	    nitems == 2 &&
+	    nitems == 24 &&
 	    bytes_after == 0 &&
 	    actual_format == 8 &&
 	    data != NULL &&
