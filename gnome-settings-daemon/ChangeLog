@@ -1,3 +1,11 @@
+2002-10-31  Jody Goldberg <jody@gnome.org>
+
+	* gnome-settings-accessibility-keyboard.c
+	(gnome_settings_accessibility_keyboard_init) : register the gconf
+	  handler early.
+	(gnome_settings_accessibility_keyboard_load) : not here where it is
+	  too late.
+
 2002-10-26  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-settings-wm.c, gnome-settings-wm.h: blow this away
