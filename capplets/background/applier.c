@@ -1381,13 +1381,14 @@ is_nautilus_running (void)
 static void
 output_compat_prefs (const Preferences *prefs)
 {
+	static const gint wallpaper_types[] = { 0, 1, 3, 2 };
 	gchar *color;
 
 	gnome_config_pop_prefix ();
 	gnome_config_set_bool ("/Background/Default/Enabled", prefs->enabled);
 	gnome_config_set_string ("/Background/Default/wallpaper",
 				 (prefs->wallpaper_filename) ? prefs->wallpaper_filename : "none");
-	gnome_config_set_int ("/Background/Default/wallpaperAlign", prefs->wallpaper_type);
+	gnome_config_set_int ("/Background/Default/wallpaperAlign", wallpaper_types[prefs->wallpaper_type]);
 
 	color = g_strdup_printf ("#%02x%02x%02x",
 		prefs->color1->red >> 8,
