@@ -590,6 +590,7 @@ main (int argc, char **argv)
 			GTK_RESPONSE_CLOSE);
 		gtk_dialog_set_has_separator (GTK_DIALOG (dialog_win), FALSE);
 		gtk_container_set_border_width (GTK_CONTAINER (dialog_win), 5);
+		gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dialog_win)->vbox), 2);
 		gtk_window_set_resizable (GTK_WINDOW (dialog_win), FALSE);
 
 		g_signal_connect (G_OBJECT (dialog_win),
@@ -608,7 +609,7 @@ main (int argc, char **argv)
 				  set);
 
 		g_object_weak_ref (G_OBJECT (dialog_win), (GWeakNotify) applier_set_free, set);
-		gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog_win)->vbox), WID ("prefs_widget"), TRUE, TRUE, GNOME_PAD_SMALL);
+		gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog_win)->vbox), WID ("prefs_widget"), TRUE, TRUE, 0);
 		capplet_set_icon (dialog_win, "background-capplet.png");
 		gtk_widget_show (dialog_win);
 
