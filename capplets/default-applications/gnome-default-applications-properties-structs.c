@@ -35,7 +35,7 @@ MailerDescription possible_mailers[] = {
 	{ N_("Evolution Mail Reader"),		"evolution-1.5",	"evolution-1.5 %s",	FALSE, FALSE, },
         { N_("Evolution Mail Reader"),		"evolution-1.4",	"evolution-1.4 %s",	FALSE, FALSE, },
         { N_("Evolution Mail Reader"),		"evolution",		"evolution %s",		FALSE, FALSE, },
-	{ N_("Balsa"),        			"balsa",		"balsa --compose=%s",	FALSE, FALSE },
+	{ N_("Balsa"),        			"balsa",		"balsa -m %s",		FALSE, FALSE },
 	{ N_("KMail"),        			"kmail",		"kmail %s",		FALSE, FALSE },
 	{ N_("Mozilla Mail"), 			"mozilla",		"mozilla -mail %s",	FALSE, FALSE},
         { N_("Mutt") , 	  			"mutt",			"mutt %s",		TRUE,  FALSE },
