@@ -421,6 +421,8 @@ capplet_dir_view_load_dir (CappletDirView *view, CappletDir *dir)
 	if (view->impl && view->impl->populate)
 		view->impl->populate (view);
 
+	gtk_window_set_title (GTK_WINDOW (view->app), dir->entry.entry->name);
+
 	menu = gtk_menu_new ();
 
 	for (entry = CAPPLET_DIR_ENTRY (dir); entry; entry = CAPPLET_DIR_ENTRY (entry->dir), parents++) {
