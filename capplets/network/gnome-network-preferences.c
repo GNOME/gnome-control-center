@@ -170,6 +170,7 @@ proxy_mode_radiobutton_clicked_cb (GtkWidget *widget,
 {
 	GSList *mode_group;
 	int mode;
+	GConfClient *client;
 	
 	if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(widget)))
 		return;
@@ -184,6 +185,10 @@ proxy_mode_radiobutton_clicked_cb (GtkWidget *widget,
 				  mode == PROXYMODE_MANUAL);
 	gtk_widget_set_sensitive (WID ("auto_box"),
 				  mode == PROXYMODE_AUTO);
+	client = gconf_client_get_default ();
+	gconf_client_set_bool (client, USE_PROXY_KEY,
+				  mode == PROXYMODE_AUTO || mode == PROXYMODE_MANUAL, NULL);
+	g_object_unref (client);
 }
 
 static void
