@@ -209,8 +209,10 @@ main (int argc, char **argv)
 	GConfChangeSet *changeset;
 	GladeXML       *dialog;
 
-	static gboolean apply_only;
-	static gboolean get_legacy;
+	static gboolean apply_only = FALSE;
+	static gboolean get_legacy = FALSE;
+	static gboolean switch_to_typing_break_page = FALSE;
+
 	static struct poptOption cap_options[] = {
 		{ "apply", '\0', POPT_ARG_NONE, &apply_only, 0,
 		  N_("Just apply settings and quit (compatibility only; now handled by daemon)"), NULL },
@@ -218,7 +220,8 @@ main (int argc, char **argv)
 		  N_("Just apply settings and quit (compatibility only; now handled by daemon)"), NULL },
 		{ "get-legacy", '\0', POPT_ARG_NONE, &get_legacy, 0,
 		  N_("Retrieve and store legacy settings"), NULL },
-//		{ "set_page",
+		{ "typing-break", '\0', POPT_ARG_NONE, &switch_to_typing_break_page, 0,
+		  N_("Start the page with the typing break settings showing"), NULL },
 		{ NULL, '\0', 0, NULL, 0, NULL, NULL }
 	};
 
@@ -243,8 +246,11 @@ main (int argc, char **argv)
 		changeset = NULL;
 		dialog = create_dialog ();
 		setup_dialog (dialog, changeset);
+		if (switch_to_typing_break_page) {
+			gtk_notebook_set_current_page (GTK_NOTEBOOK (WID ("keyboard_notebook")), 1);
+		}
 		capplet_set_icon (WID ("keyboard_dialog"),
-			"keyboard-capplet.png");
+				  "keyboard-capplet.png");
 		gtk_widget_show (WID ("keyboard_dialog"));
 		gtk_main ();
 	}
