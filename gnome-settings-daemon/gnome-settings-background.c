@@ -60,5 +60,16 @@ gnome_settings_background_init (GConfClient *client)
 void
 gnome_settings_background_load (GConfClient *client)
 {
+	/* If this is set, nautilus will draw the background and is
+	 * almost definitely in our session.  however, it may not be
+	 * running yet (so is_nautilus_running() will fail).  so, on
+	 * startup, just don't do anything if this key is set so we
+	 * don't waste time setting the background only to have
+	 * nautilus overwrite it.
+	 */
+
+	if (gconf_client_get_bool (client, "/apps/nautilus/preferences/show_desktop", NULL))
+		return;
+
 	bg_applier_apply_prefs (bg_applier, prefs);
 }
