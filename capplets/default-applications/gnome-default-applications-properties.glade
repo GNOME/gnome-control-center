@@ -97,6 +97,9 @@
 		      <property name="active">False</property>
 		      <property name="inconsistent">False</property>
 		      <property name="draw_indicator">True</property>
+		      <accessibility>
+			<atkrelation target="web_select_combo" type="label-for"/>
+		      </accessibility>
 		    </widget>
 		    <packing>
 		      <property name="left_attach">0</property>
@@ -117,6 +120,9 @@
 		      <property name="case_sensitive">False</property>
 		      <property name="enable_arrow_keys">True</property>
 		      <property name="enable_arrows_always">False</property>
+		      <accessibility>
+			<atkrelation target="web_select_radio" type="labelled-by"/>
+		      </accessibility>
 
 		      <child internal-child="entry">
 			<widget class="GtkEntry" id="web_select_combo_entry">
@@ -382,6 +388,9 @@
 		      <property name="active">False</property>
 		      <property name="inconsistent">False</property>
 		      <property name="draw_indicator">True</property>
+		      <accessibility>
+			<atkrelation target="mail_select_combo" type="label-for"/>
+		      </accessibility>
 		    </widget>
 		    <packing>
 		      <property name="left_attach">0</property>
@@ -402,6 +411,9 @@
 		      <property name="case_sensitive">False</property>
 		      <property name="enable_arrow_keys">True</property>
 		      <property name="enable_arrows_always">False</property>
+		      <accessibility>
+			<atkrelation target="mail_select_radio" type="labelled-by"/>
+		      </accessibility>
 
 		      <child internal-child="entry">
 			<widget class="GtkEntry" id="mail_select_combo_entry">
@@ -481,7 +493,7 @@
 			      <property name="yalign">0.5</property>
 			      <property name="xpad">0</property>
 			      <property name="ypad">0</property>
-			      <property name="mnemonic_widget">web_custom_command_entry</property>
+			      <property name="mnemonic_widget">mail_custom_command_entry</property>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -654,6 +666,9 @@
 		      <property name="active">False</property>
 		      <property name="inconsistent">False</property>
 		      <property name="draw_indicator">True</property>
+		      <accessibility>
+			<atkrelation target="text_select_combo" type="label-for"/>
+		      </accessibility>
 		    </widget>
 		    <packing>
 		      <property name="left_attach">0</property>
@@ -674,6 +689,9 @@
 		      <property name="case_sensitive">False</property>
 		      <property name="enable_arrow_keys">True</property>
 		      <property name="enable_arrows_always">False</property>
+		      <accessibility>
+			<atkrelation target="text_select_radio" type="labelled-by"/>
+		      </accessibility>
 
 		      <child internal-child="entry">
 			<widget class="GtkEntry" id="text_select_combo_entry">
@@ -885,6 +903,9 @@
 		      <property name="active">False</property>
 		      <property name="inconsistent">False</property>
 		      <property name="draw_indicator">True</property>
+		      <accessibility>
+			<atkrelation target="terminal_select_combo" type="label-for"/>
+		      </accessibility>
 		    </widget>
 		    <packing>
 		      <property name="left_attach">0</property>
@@ -905,6 +926,9 @@
 		      <property name="case_sensitive">False</property>
 		      <property name="enable_arrow_keys">True</property>
 		      <property name="enable_arrows_always">False</property>
+		      <accessibility>
+			<atkrelation target="terminal_select_radio" type="labelled-by"/>
+		      </accessibility>
 
 		      <child internal-child="entry">
 			<widget class="GtkEntry" id="terminal_select_combo_entry">
@@ -1011,6 +1035,9 @@
 			  <property name="has_frame">True</property>
 			  <property name="invisible_char" translatable="yes">*</property>
 			  <property name="activates_default">False</property>
+			  <accessibility>
+				<atkrelation target="label13" type="labelled-by"/>
+			  </accessibility>
 			</widget>
 			<packing>
 			  <property name="left_attach">1</property>
@@ -1032,6 +1059,9 @@
 			  <property name="has_frame">True</property>
 			  <property name="invisible_char" translatable="yes">*</property>
 			  <property name="activates_default">False</property>
+			  <accessibility>
+				<atkrelation target="label14" type="labelled-by"/>
+			  </accessibility>
 			</widget>
 			<packing>
 			  <property name="left_attach">1</property>
@@ -1545,6 +1575,9 @@
 	      <property name="has_frame">True</property>
 	      <property name="invisible_char" translatable="yes">*</property>
 	      <property name="activates_default">False</property>
+	      <accessibility>
+		<atkrelation target="label5" type="labelled-by"/>
+	      </accessibility>
 	    </widget>
 	    <packing>
 	      <property name="left_attach">1</property>
@@ -1566,6 +1599,9 @@
 	      <property name="has_frame">True</property>
 	      <property name="invisible_char" translatable="yes">*</property>
 	      <property name="activates_default">False</property>
+	      <accessibility>
+		<atkrelation target="label16" type="labelled-by"/>
+	      </accessibility>
 	    </widget>
 	    <packing>
 	      <property name="left_attach">1</property>
