@@ -53,6 +53,7 @@ PKG_CHECK_MODULES(GNOME, libgnomeui-2.0)
 PKG_CHECK_MODULES(VFS_CAPPLET, $COMMON_MODULES gnome-vfs-module-2.0 gnome-vfs-2.0)
 PKG_CHECK_MODULES(SOUND_CAPPLET, esound)
 
+AC_PATH_PROG(XSCREENSAVER, xscreensaver, no)
 if test "$XSCREENSAVER" = no ; then
  	AC_MSG_ERROR(xscreensaver was not found. It can be downloaded from http://www.jwz.org/xscreensaver/.)
 fi
