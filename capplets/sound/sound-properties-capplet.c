@@ -139,6 +139,10 @@ main (int argc, char **argv)
 		{ NULL, '\0', 0, NULL, 0, NULL, NULL }
 	};
 
+	bindtextdomain (PACKAGE, GNOMELOCALEDIR);
+	bind_textdomain_codeset (PACKAGE, "UTF-8");
+	textdomain (PACKAGE);
+
 	gnome_program_init (argv[0], VERSION, LIBGNOMEUI_MODULE, argc, argv,
 			    GNOME_PARAM_POPT_TABLE, cap_options,
 			    NULL);
