@@ -236,3 +236,40 @@ gnome_window_manager_settings_changed (GnomeWindowManager *wm)
 {
         g_signal_emit (wm, signals[SETTINGS_CHANGED], 0);
 }
+
+/* Helper functions for GnomeWMSettings */
+GnomeWMSettings *
+gnome_wm_settings_copy (GnomeWMSettings *settings)
+{
+        GnomeWMSettings *retval;
+
+        g_return_val_if_fail (settings != NULL, NULL);
+
+        retval = g_new (GnomeWMSettings, 1);
+        *retval = *settings;
+
+        if (retval->flags & GNOME_WM_SETTING_FONT)
+                retval->font = g_strdup (retval->font);
+        if (retval->flags & GNOME_WM_SETTING_MOUSE_MOVE_MODIFIER)
+                retval->mouse_move_modifier = g_strdup (retval->mouse_move_modifier);
+        if (retval->flags & GNOME_WM_SETTING_THEME)
+                retval->theme = g_strdup (retval->theme);
+
+        return retval;
+}
+
+void
+gnome_wm_settings_free (GnomeWMSettings *settings)
+{
+        g_return_if_fail (settings != NULL);
+
+        if (settings->flags & GNOME_WM_SETTING_FONT)
+                g_free ((void *) settings->font);
+        if (settings->flags & GNOME_WM_SETTING_MOUSE_MOVE_MODIFIER)
+                g_free ((void *) settings->mouse_move_modifier);
+        if (settings->flags & GNOME_WM_SETTING_THEME)
+                g_free ((void *)settings->theme);
+
+        g_free (settings);
+}
+

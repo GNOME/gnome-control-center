@@ -155,6 +155,9 @@ void gnome_window_manager_get_double_click_actions (GnomeWindowManager          
                                                     const GnomeWMDoubleClickAction **actions,
                                                     int                             *n_actions);
 
+/* Helper functions for GnomeWMSettings */
+GnomeWMSettings *gnome_wm_settings_copy (GnomeWMSettings *settings);
+void             gnome_wm_settings_free (GnomeWMSettings *settings);
 
 G_END_DECLS
 
