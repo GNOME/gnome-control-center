@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-06-24 16:13-0400\n"
-"PO-Revision-Date: 2003-06-17 19:49+0200\n"
+"POT-Creation-Date: 2003-06-26 04:31+0200\n"
+"PO-Revision-Date: 2003-06-26 14:12+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -292,7 +292,7 @@ msgstr "Vyberte _obrázek:"
 
 #: capplets/background/background-properties-capplet.c:567
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:724
+#: capplets/default-applications/gnome-default-applications-properties.c:834
 #: capplets/keyboard/gnome-keyboard-properties.c:290
 #: capplets/mouse/gnome-mouse-properties.c:716
 #: capplets/sound/sound-properties-capplet.c:214
@@ -581,7 +581,7 @@ msgid "Please select an image."
 msgstr "Vyberte prosím obrázek."
 
 #: capplets/default-applications/default-applications.desktop.in.h:1
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:19
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:22
 msgid "Preferred Applications"
 msgstr "Preferované aplikace"
 
@@ -589,7 +589,7 @@ msgstr "Preferované aplikace"
 msgid "Select your default applications"
 msgstr "Vyberte své výchozí aplikace"
 
-#: capplets/default-applications/gnome-default-applications-properties.c:105
+#: capplets/default-applications/gnome-default-applications-properties.c:114
 msgid "Please specify a name and a command for this editor."
 msgstr "Zadejte prosím název a příkaz pro tento editor."
 
@@ -610,58 +610,70 @@ msgid "C_ustom Help Browser:"
 msgstr "Vlastní prohlížeč _nápovědy:"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:6
+msgid "C_ustom Mail Reader:"
+msgstr "Vlastní _poštovní program:"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:7
 msgid "C_ustom Terminal:"
 msgstr "Vlastní _terminál:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:7
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:8
 msgid "C_ustom Web Browser:"
 msgstr "Vlastní prohlížeč _WWW:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:8
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:9
 msgid "Co_mmand:"
 msgstr "_Příkaz:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:9
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:10
 msgid "Custom Editor Properties"
 msgstr "Možnosti vlastního editoru"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:10
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:11
 msgid "Default Help Browser"
 msgstr "Implicitní prohlížeč nápovědy"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:11
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:12
+msgid "Default Mail Reader"
+msgstr "Implicitní poštovní program"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:13
 msgid "Default Terminal"
 msgstr "Implicitní terminál"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:12
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:14
 msgid "Default Text Editor"
 msgstr "Implicitní textový editor"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:13
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:15
 msgid "Default Web Browser"
 msgstr "Implicitní prohlížeč WWW"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:14
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:16
 msgid "Default Window Manager"
 msgstr "Implicitní správce oken"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:15
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:17
 msgid "Delete"
 msgstr "Smazat"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:16
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:18
 msgid "E_xec Flag:"
 msgstr "Volba _spuštění:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:17
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:19
 msgid "Edit..."
 msgstr "Upravit..."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:18
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:20
 msgid "Help Browser"
 msgstr "Prohlížeč nápovědy"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:20
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:21
+msgid "Mail Reader"
+msgstr "Poštovní program"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:23
 msgid ""
 "Select the window manager you want.  You will need to hit apply, wave the "
 "magic wand, and do a magic dance for it to work."
@@ -669,68 +681,72 @@ msgstr ""
 "Vyberte požadovaného správce oken. Poté stiskněte tlačítko Použít, mávněte "
 "kouzelnou hůlkou, a zatancujte kouzelný tanec; pak to bude fungovat."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:21
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:24
 msgid "Start in T_erminal"
 msgstr "Spustit v _terminálu"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:22
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:25
 msgid "Terminal"
 msgstr "Terminál"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:23
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:26
 msgid "Text Editor"
 msgstr "Textový editor"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:24
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:27
 msgid "This application can open _URIs"
 msgstr "Tato aplikace umí otevřít _URI"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:25
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:28
 msgid "This application can open _multiple files"
 msgstr "Tato aplikace _umí otevřít více souborů"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:26
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:29
 msgid "This application needs to be run in a _shell"
 msgstr "Tato aplikace musí být spuštěna v _shellu"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:27
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:30
 msgid "Understands _Netscape Remote Control"
 msgstr "Rozumí Vzdálenému ovládání _Netscape"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:28
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:31
 msgid "Use this _editor to open text files in the file manager"
 msgstr "Použít _editor k otevírání textových souborů ve správci souborů"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:29
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:32
 msgid "Web Browser"
 msgstr "WWW prohlížeč"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:30
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:33
 msgid "Window Manager"
 msgstr "Správce oken"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:31
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:34
 #: capplets/file-types/file-types-properties.glade.h:22
 msgid "_Name:"
 msgstr "_Název:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:32
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:35
 msgid "_Properties..."
 msgstr "_Vlastnosti..."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:33
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:36
 msgid "_Select a Help Browser:"
 msgstr "_Vyberte prohlížeč nápovědy:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:34
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:37
+msgid "_Select a Mail Reader:"
+msgstr "_Vyberte poštovní program:"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:38
 msgid "_Select a Terminal:"
 msgstr "_Vyberte terminál:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:35
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:39
 msgid "_Select a Web Browser:"
 msgstr "_Vyberte prohlížeč WWW:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:36
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:40
 msgid "_Select an Editor:"
 msgstr "_Vyberte editor:"
 
