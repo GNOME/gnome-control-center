@@ -1,3 +1,20 @@
+2001-09-29  Richard Hestilow  <hestilow@ximian.com>
+
+	* lister.c: (list_themes, list_system_themes, list_user_themes):
+	Return a GList of ThemeEntry*, and remove extraneous number argument.
+	Also, use g_strdup_printf instead of g_snprintf.
+	
+	* da.h (ThemeEntry): Add a "row" data member.
+	* gui.c: Change variables current_theme, current_global_theme,
+	initial_theme, and last_theme to ThemeEntry*.
+	(make_main): Change GtkList to a GtkCList to avoid scrolling bug.
+	(click_entry): Changed to "select_row" callback prototype.
+	(delete_entry): Removed.
+	(item_destroy_notify): Added in lieu of delete_entry.
+	(sort_alpha): Accept ThemeEntry* and not GtkBin*.
+	(add_theme_list): Added.
+	(update_theme_entries): Use clist functions.
+	
 2001-07-27  Bradford Hovinen  <hovinen@ximian.com>
 
 	* RELEASE : 1.5.2

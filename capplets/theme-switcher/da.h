@@ -16,6 +16,7 @@ typedef struct _theme_entry
   gchar *dir;
   gchar *readme;
   gchar *icon;
+  int row;
 } ThemeEntry;
 
 void                md(char *s);
@@ -50,12 +51,12 @@ void                mkdirs(char *s);
 
 void
 free_theme_list(ThemeEntry *list, gint number);
-ThemeEntry *
-list_themes(gchar *dir, gint *number);
-ThemeEntry *
-list_system_themes(gint *number);
-ThemeEntry *
-list_user_themes(gint *number);
+GList*
+list_themes(gchar *dir);
+GList*
+list_system_themes(void);
+GList*
+list_user_themes(void);
 GtkWidget *
 make_main(void);
 void

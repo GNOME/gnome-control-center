@@ -154,53 +154,51 @@ free_theme_list(ThemeEntry *list, gint number)
   g_free(list);
 }
 
-ThemeEntry *
-list_themes(gchar *dir, gint *number)
+GList *
+list_themes(gchar *dir)
 {
-  gchar **dir_listing = NULL, tmp[4096];
-  ThemeEntry *list = NULL;
-  gint  i = 0, j = 0, num = 0;
+  gchar **dir_listing = NULL, *tmp;
+  GList *list = NULL;
+  gint  i = 0, num = 0;
   
   dir_listing = ls(dir, &num);
   for(i = 0; i < num; i++)
     {
-      g_snprintf(tmp, sizeof(tmp), "%s/%s/gtk/gtkrc", dir, dir_listing[i]);
+      tmp = g_strdup_printf ("%s/%s/gtk/gtkrc", dir, dir_listing[i]);
       if (isfile(tmp))
 	{
-	  list = g_realloc(list, sizeof(ThemeEntry) * ++j);
-	  list[j - 1].name = g_strdup(dir_listing[i]);
-	  list[j - 1].rc = g_strdup(tmp);
-	  g_snprintf(tmp, sizeof(tmp), "%s/%s", dir, dir_listing[i]);
-	  list[j - 1].dir = g_strdup(tmp);
-	  g_snprintf(tmp, sizeof(tmp), "%s/%s/README.html", dir, dir_listing[i]);
-	  list[j - 1].readme = g_strdup(tmp);
-	  g_snprintf(tmp, sizeof(tmp), "%s/%s/ICON.png", dir, dir_listing[i]);
-	  list[j - 1].icon = g_strdup(tmp);
+  	  ThemeEntry *item = g_new0 (ThemeEntry, 1);
+	  item->name = g_strdup(dir_listing[i]);
+	  item->rc = g_strdup (tmp);
+	  item->dir = g_strdup_printf ("%s/%s", dir, dir_listing[i]);
+	  item->readme = g_strdup_printf ("%s/%s/README.html", dir, dir_listing[i]);
+	  item->icon = g_strdup_printf ("%s/%s/ICON.png", dir, dir_listing[i]);
+	  list = g_list_prepend (list, item); 
 	}
+      g_free (tmp);
     }
   freestrlist(dir_listing, num);
-  *number = j;
-  return list;
+  return g_list_reverse (list);
 }
 
-ThemeEntry *
-list_system_themes(gint *number)
+GList *
+list_system_themes(void)
 {
   gchar *theme_dir = NULL;
-  ThemeEntry *list  = NULL;
+  GList *list  = NULL;
   
   theme_dir = gtk_rc_get_theme_dir();
-  list = list_themes(theme_dir, number);
+  list = list_themes(theme_dir);
   g_free(theme_dir);
   return list;
 }
 
-ThemeEntry *
-list_user_themes(gint *number)
+GList *
+list_user_themes()
 {
   gchar *home = NULL;
   gchar *theme_dir = NULL;
-  ThemeEntry *list  = NULL;
+  GList *list  = NULL;
   
   home = g_get_home_dir ();
   if (!home)
@@ -211,7 +209,7 @@ list_user_themes(gint *number)
   
   theme_dir = g_malloc(strlen(home) + strlen("/.themes") + 1);
   sprintf(theme_dir, "%s%s", home, "/.themes");
-  list = list_themes(theme_dir, number);
+  list = list_themes(theme_dir);
   g_free(theme_dir);
   return list;
 }

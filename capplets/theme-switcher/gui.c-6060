@@ -15,10 +15,10 @@ static GtkWidget *capplet_widget;
 static GtkWidget *theme_list;
 static GtkWidget *auto_preview;
 
-static GtkWidget *current_theme = NULL;
-static GtkWidget *current_global_theme = NULL;
-static GtkWidget *initial_theme = NULL;
-static GtkWidget *last_theme = NULL;
+static ThemeEntry *current_theme = NULL;
+static ThemeEntry *current_global_theme = NULL;
+static ThemeEntry *initial_theme = NULL;
+static ThemeEntry *last_theme = NULL;
 static GtkWidget *font_sel;
 static GtkWidget *font_cbox;
 static gboolean initial_preview;
@@ -36,9 +36,8 @@ click_ok(GtkWidget *widget, gpointer data);
 static void
 click_revert(GtkWidget *widget, gpointer data);
 static void
-click_entry(GtkWidget *widget, gpointer data);
-static void
-delete_entry(GtkWidget *widget, gpointer data);
+click_entry(GtkWidget *clist, gint row, gint col, GdkEvent *event,
+	    gpointer data);
 
 static void
 auto_callback (GtkWidget *widget, gpointer data)
@@ -202,11 +201,14 @@ make_main(void)
 
   /* List of available themes
    */
-  theme_list = gtk_list_new();
-  gtk_list_set_selection_mode(GTK_LIST(theme_list), GTK_SELECTION_BROWSE);
+  theme_list = gtk_clist_new (1);
+  gtk_signal_connect (GTK_OBJECT (theme_list), "select_row", click_entry,
+		      NULL);
+  gtk_clist_set_selection_mode(GTK_CLIST(theme_list), GTK_SELECTION_BROWSE);
   sw = gtk_scrolled_window_new(NULL, NULL);
-  gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(sw), theme_list);
-  gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(sw), GTK_POLICY_AUTOMATIC,
+  gtk_container_add (GTK_CONTAINER(sw), theme_list);
+  /* Mysterious allocation bug keeps shrinking hscrollbar during browse */
+  gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(sw), GTK_POLICY_NEVER,
 				 GTK_POLICY_AUTOMATIC);
   gtk_widget_set_usize (sw, 120, -1);
 
@@ -340,7 +342,7 @@ click_preview(GtkWidget *widget, gpointer data)
   if (!current_theme) {
     return;
   }
-  rc = (gchar *)gtk_object_get_data(GTK_OBJECT(current_theme), "rc");
+  rc = current_theme->rc;
   if (GTK_TOGGLE_BUTTON (font_cbox)->active)
     test_theme(rc,
 	      gnome_font_picker_get_font_name (GNOME_FONT_PICKER (font_sel)));
@@ -379,12 +381,12 @@ click_try(GtkWidget *widget, gpointer data)
 
 /*  if (current_theme == current_global_theme)
     return;*/
-  widget = current_theme;
-  if (!widget) 
-    return;
+  if (!current_theme)
+	  return;
+
   current_global_theme = current_theme;
-  rc = (gchar *)gtk_object_get_data(GTK_OBJECT(widget), "rc");
-  dir = (gchar *)gtk_object_get_data(GTK_OBJECT(widget), "dir");
+  rc = current_theme->rc;
+  dir = current_theme->dir;
 
   /* hack for enlightenment only!!!! */
   /* FIXME: restart what ever windowmanager you have! */
@@ -411,7 +413,7 @@ click_ok(GtkWidget *widget, gpointer data)
 {
   click_try (widget, data);
   gnome_config_set_bool ("/theme-switcher-capplet/settings/auto",GTK_TOGGLE_BUTTON (auto_preview)->active);
-  gnome_config_set_string ("/theme-switcher-capplet/settings/theme", gtk_object_get_data (GTK_OBJECT (current_theme), "name"));
+  gnome_config_set_string ("/theme-switcher-capplet/settings/theme", current_theme->name);
   gnome_config_set_bool ("/theme-switcher-capplet/settings/use_theme_font",
 			 GTK_TOGGLE_BUTTON (font_cbox)->active);
   gnome_config_set_string ("/theme-switcher-capplet/settings/font",
@@ -423,14 +425,13 @@ click_revert(GtkWidget *widget, gpointer data)
 {
   gchar *rc;
 
-  widget = initial_theme;
-  if (!widget)
+  if (!initial_theme)
     /* we hope this doesn't happen, but it could if things
      * are mis-installed -jrb */
     /* Damn, I hate this code... )-: */
     return;
   
-  rc = (gchar *)gtk_object_get_data(GTK_OBJECT(widget), "rc");
+  rc = initial_theme->rc;
     
   if ((current_global_theme != initial_theme) ||
 	(initial_font_cbox != GTK_TOGGLE_BUTTON (font_cbox)->active) ||
@@ -448,7 +449,7 @@ click_revert(GtkWidget *widget, gpointer data)
       gdk_flush();
       gdk_error_warnings = 1;
     }
-  current_global_theme = widget;
+  current_global_theme = initial_theme;
   ignore_change = TRUE;
   gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (auto_preview),
 			       initial_preview);
@@ -458,7 +459,7 @@ click_revert(GtkWidget *widget, gpointer data)
   if (initial_font)
     gnome_font_picker_set_font_name (GNOME_FONT_PICKER (font_sel),
 				     initial_font);
-  gtk_list_select_child (GTK_LIST (theme_list), initial_theme);
+  gtk_clist_select_row (GTK_CLIST (theme_list), initial_theme->row, -1);
   test_theme(rc, initial_font);
   send_reread();
   if (!GTK_TOGGLE_BUTTON (font_cbox)->active)
@@ -468,14 +469,11 @@ click_revert(GtkWidget *widget, gpointer data)
   ignore_change = FALSE;
   current_theme = initial_theme;
 }
-static void
-click_entry(GtkWidget *widget, gpointer data)
-{
-  gchar *rc, *name;
-  
-  name = (gchar *)gtk_object_get_data(GTK_OBJECT(widget), "name");
-  rc = (gchar *)gtk_object_get_data(GTK_OBJECT(widget), "rc");
 
+static void
+click_entry(GtkWidget *clist, gint row, gint col, GdkEvent *event,
+	    gpointer data)
+{
   /* Load in the README file */
 #if 0
   if (readme_current)
@@ -501,7 +499,7 @@ click_entry(GtkWidget *widget, gpointer data)
 #endif
   if (!ignore_change)
     {
-      current_theme = widget;
+      current_theme = gtk_clist_get_row_data (GTK_CLIST (clist), row);
 
       if (initial_theme)
 	capplet_widget_state_changed(CAPPLET_WIDGET (capplet_widget), TRUE);
@@ -509,112 +507,94 @@ click_entry(GtkWidget *widget, gpointer data)
 	capplet_widget_state_changed(CAPPLET_WIDGET (capplet_widget), FALSE);
       
       if (GTK_TOGGLE_BUTTON (auto_preview)->active)
-	click_preview (widget,NULL);
+	click_preview (NULL,NULL);
     }
 }
 
 static void
-delete_entry(GtkWidget *widget, gpointer data)
+item_destroy_notify (gpointer data)
 {
-  gchar *rc, *name, *icon, *dir;
+  ThemeEntry *item = data;
 
-  name = (gchar *)gtk_object_get_data(GTK_OBJECT(widget), "name");
-  rc = (gchar *)gtk_object_get_data(GTK_OBJECT(widget), "rc");
-  dir = (gchar *)gtk_object_get_data(GTK_OBJECT(widget), "dir");
-  icon = (gchar *)gtk_object_get_data(GTK_OBJECT(widget), "icon");
-  g_free(name);
-  g_free(rc);
-  g_free(dir);
-  g_free(icon);
+  g_free(item->name);
+  g_free(item->rc);
+  g_free(item->dir);
+  g_free(item->icon);
   
-  if (current_theme == widget)
+  if (current_theme == item)
     current_theme = NULL;
+
+  g_free (item);
 }
 static gint sort_alpha(const void *a, const void *b)
 {
-  GtkBin *A, *B;
+  const ThemeEntry *A, *B;
 
-  A = GTK_BIN (a);
-  B = GTK_BIN (b);
+  A = a;
+  B = b;
   
-  return strcmp((char *)GTK_LABEL (A->child)->label, (char *)GTK_LABEL (B->child)->label);
+  return strcmp(A->name, B->name);
+}
+
+static void
+add_theme_list (GtkWidget *disp_list, GList *themes, gchar *d_theme, gchar *current_name)
+{
+  ThemeEntry *item;
+  GList *l;
+
+  for (l = themes; l != NULL; l = l->next)
+    {
+      gchar *text[1] = { NULL };
+     
+      item = l->data;
+      text[0] = item->name;
+      item->row = gtk_clist_append (GTK_CLIST(disp_list), text);
+
+      gtk_clist_set_row_data_full (GTK_CLIST(disp_list), item->row, item,
+		      		   item_destroy_notify);
+
+      if (strcmp (d_theme, item->name) == 0)
+	{
+	  current_global_theme = item;
+	  initial_theme = item;
+	}
+      if (current_name && (strcmp (current_name, item->name) == 0))
+	{
+	  current_theme = item;
+	}
+    }
 }
 
 void
 update_theme_entries(GtkWidget *disp_list)
 {
-  ThemeEntry *te;
-  gint         num;
-  GList      *list;
-  int         i;
-  GtkWidget  *item;
+  GList      *themes;
   gchar *d_theme = gnome_config_get_string ("/theme-switcher-capplet/settings/theme=Default");
   gchar *current_name = NULL;
 
   if (current_theme)
-    current_name = g_strdup(gtk_object_get_data(GTK_OBJECT(current_theme), "name"));
+    current_name = g_strdup (current_theme->name);
   else
     current_name = d_theme;
 
   current_theme = NULL;
   initial_theme = NULL;
-  
-  list = NULL;
-  gtk_list_clear_items(GTK_LIST(disp_list), 0, -1);
-  te = list_system_themes(&num);
-  for (i = 0; i < num; i++)
-    {
-      item = gtk_list_item_new_with_label(te[i].name);
-      gtk_widget_show(item);
-      if (strcmp (d_theme, te[i].name) == 0)
-	{
-	  current_global_theme = item;
-	  initial_theme = item;
-	}
-      if (current_name && (strcmp (current_name, te[i].name) == 0))
-	{
-	  current_theme = item;
-	}
-      
-      gtk_object_set_data(GTK_OBJECT(item), "name", g_strdup(te[i].name));
-      gtk_object_set_data(GTK_OBJECT(item), "rc", g_strdup(te[i].rc));
-      gtk_object_set_data(GTK_OBJECT(item), "dir", g_strdup(te[i].dir));
-      gtk_object_set_data(GTK_OBJECT(item), "icon", g_strdup(te[i].icon));
-      gtk_signal_connect(GTK_OBJECT(item), "select",
-			 GTK_SIGNAL_FUNC(click_entry), NULL);
-      gtk_signal_connect(GTK_OBJECT(item), "destroy",
-			 GTK_SIGNAL_FUNC(delete_entry), NULL);
-      list = g_list_insert_sorted(list, item, sort_alpha);
-    }
-  free_theme_list(te, num);
-
-  te = list_user_themes(&num);
-  for (i = 0; i < num; i++)
-    {
-      item = gtk_list_item_new_with_label(te[i].name);
-      gtk_widget_show(item);
-      if (strcmp (d_theme, te[i].name) == 0)
-	initial_theme = item;
-      if (current_name && (strcmp (current_name, te[i].name) == 0))
-	current_theme = item;
-
-      gtk_object_set_data(GTK_OBJECT(item), "name", g_strdup(te[i].name));
-      gtk_object_set_data(GTK_OBJECT(item), "rc", g_strdup(te[i].rc));
-      gtk_object_set_data(GTK_OBJECT(item), "dir", g_strdup(te[i].dir));
-      gtk_object_set_data(GTK_OBJECT(item), "icon", g_strdup(te[i].icon));
-      gtk_signal_connect(GTK_OBJECT(item), "select",
-			 GTK_SIGNAL_FUNC(click_entry), NULL);
-      gtk_signal_connect(GTK_OBJECT(item), "destroy",
-			 GTK_SIGNAL_FUNC(delete_entry), NULL);
-      list = g_list_insert_sorted(list, item, sort_alpha);
-    }
-  free_theme_list(te, num);
-
+ 
   /* Suppress an update here, because the BROWSE mode will
    * cause a false initial selection
    */
   ignore_change = TRUE;
-  gtk_list_append_items(GTK_LIST(disp_list), list);
+ 
+  gtk_clist_clear (GTK_CLIST(disp_list));
+  
+  themes = list_system_themes();
+  themes = g_list_sort (themes, sort_alpha);
+  add_theme_list (disp_list, themes, d_theme, current_name);
+
+  themes = list_user_themes();
+  themes = g_list_sort (themes, sort_alpha);
+  add_theme_list (disp_list, themes, d_theme, current_name);
+
   ignore_change = FALSE;
 
   if (!current_theme)
@@ -626,15 +606,15 @@ update_theme_entries(GtkWidget *disp_list)
   if (current_theme)
     {
       if (current_name &&
-	  strcmp (gtk_object_get_data(GTK_OBJECT(current_theme), "name"),
+	  strcmp (current_theme->name,
 		  current_name) != 0)
 	{
-	  gtk_list_select_child (GTK_LIST (disp_list), current_theme);
+	  gtk_clist_select_row (GTK_CLIST (disp_list), current_theme->row, 0);
 	}
       else
 	{
 	  ignore_change = TRUE;
-	  gtk_list_select_child (GTK_LIST (disp_list), current_theme);
+	  gtk_clist_select_row (GTK_CLIST (disp_list), current_theme->row, 0);
 	  ignore_change = FALSE;
 	}
     }
