@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<screensaver name="bubbles">
+
+    <command arg="-root"/>
+
+    <number label="Speed of Motion." low-label="Faster" id="delay"
+            type="slider" default="2" arg="-delay %" low="1"
+            high-label="Slower" high="500000"/>
+
+    <boolean label="Draw circles instead of pixmap bubbles."
+             arg-unset="" id="simple" arg-set="-simple"/>
+
+    <boolean label="Don't hide bubbles when they pop." arg-unset=""
+             id="broken" arg-set="-broken"/>
+
+    <boolean label="Bubbles exist in three dimensions." arg-unset=""
+             id="3d" arg-set="-3D"/>
+
+    <boolean label="Display screensaver in monochrome." arg-unset=""
+             id="monochrome" arg-set="-mono"/>
+
+</screensaver>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<screensaver name="forest">
+
+    <command arg="-root"/>
+
+    <number label="Number of Colors." low-label="Colors:" id="colors"
+            type="spinbutton" default="100" arg="-ncolors %" low="1"
+            high="256"/>
+
+    <number label="Delay between redraws." low-label="Faster"
+            id="cycles" type="slider" default="2" arg="-cycles %"
+            low="1" high-label="Slower" high="500000"/>
+
+    <number label="Number of trees to use." low-label="Count:"
+            id="count" type="spinbutton" default="100" arg="-count %"
+            low="1" high="1000"/>
+
+    <boolean label="Display screensaver in monochrome." arg-unset=""
+             id="monochrome" arg-set="-mono"/>
+
+</screensaver>

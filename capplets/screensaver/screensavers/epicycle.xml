@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<screensaver name="epicycle">
+
+    <command arg="-root"/>
+
+    <number label="Speed of Motion." low-label="Faster" id="delay"
+            type="slider" default="2" arg="-delay %" low="1"
+            high-label="Slower" high="500000"/>
+
+    <number label="Time finished product is shown."
+            low-label="Seconds" id="holdtime" type="spinbutton"
+            default="3" arg="-holdtime %" low="1" high="15"/>
+
+    <boolean label="Display screensaver in monochrome." arg-unset=""
+             id="monochrome" arg-set="-mono"/>
+
+</screensaver>

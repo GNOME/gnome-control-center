@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<screensaver name="deco">
+
+    <command arg="-root"/>
+
+    <number low-label="Time between redraws:" id="delay" type="slider"
+            default="2" arg="-delay %" low="1" high-label="seconds"
+            high="20"/>
+
+    <boolean label="Use color when drawing." arg-unset="-mono"
+             id="color" arg-set=""/>
+
+    <boolean label="Cycle through colors." arg-unset="-no-cycle"
+             id="color-cycle" arg-set="-cycle"/>
+
+</screensaver>

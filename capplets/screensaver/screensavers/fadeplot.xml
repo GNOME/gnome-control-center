@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<screensaver name="fadeplot">
+
+    <command arg="-root"/>
+
+    <number label="Number of Colors" low-label="Colors:" id="colors"
+            type="spinbutton" default="100" arg="-ncolors %" low="1"
+            high="256"/>
+
+    <number label="Number" low-label="Count:" id="count"
+            type="spinbutton" default="20" arg="-count %" low="1"
+            high="50"/>
+
+    <number label="Speed of Motion" low-label="Faster" id="delay"
+            type="slider" default="2" arg="-delay %" low="1"
+            high-label="Slower" high="500000"/>
+
+    <number label="Number of cycles" low-label="More" id="cycles"
+            type="slider" default="50" arg="-cycles %" low="10"
+            high-label="Slower" high="1000"/>
+
+    <boolean label="Display screensaver in monochrome." arg-unset=""
+             id="monochrome" arg-set="-mono"/>
+
+</screensaver>

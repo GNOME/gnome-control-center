@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<screensaver name="sierpinski">
+
+    <command arg="-root"/>
+
+    <number label="Number of Colors" low-label="Colors:" id="colors"
+            type="spinbutton" default="64" arg="-ncolors %" low="1"
+            high="256"/>
+
+    <number label="Speed of Motion" low-label="Faster" id="cycles"
+            type="slider" default="20" arg="-cycles %" low="1"
+            high-label="Slower" high="50"/>
+
+    <boolean label="Display screensaver in monochrome." arg-unset=""
+             id="monochrome" arg-set="-mono"/>
+
+</screensaver>
