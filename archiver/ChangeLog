@@ -1,3 +1,21 @@
+2001-08-03  Bradford Hovinen  <hovinen@ximian.com>
+
+	* config-log.c (load_log_entry): Return NULL if fgets returns NULL
+	(dump_log): If both first_old and log_data are NULL, go ahead and
+	dump the file, since nothing has been loaded yet
+	(config_log_garbage_collect): Don't bother dumping the log file or
+	reloading
+
+2001-08-02  Bradford Hovinen  <hovinen@ximian.com>
+
+	* config-log.c (config_log_garbage_collect): Implement
+	(dump_log): Don't dump the old file if first_old is NULL
+
+	* main.c (main): Support --garbage_collect
+
+	* location.c (location_garbage_collect): 
+	(garbage_collect_cb): Implement
+
 2001-07-31  Bradford Hovinen  <hovinen@ximian.com>
 
 	* config-log.c: Remove socket-based synchronization system

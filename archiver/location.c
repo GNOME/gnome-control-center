@@ -1280,6 +1280,42 @@ location_get_config_log (Location *location)
 	return location->p->config_log;
 }
 
+/* location_garbage_collect:
+ * @location:
+ *
+ * Iterates through backends and eliminates excess archived data from the
+ * configuration log and the XML archive
+ */
+
+static void
+garbage_collect_cb (ConfigLog *config_log, gchar *backend_id, gint id, Location *location) 
+{
+	gchar *filename;
+
+	filename = g_strdup_printf ("%s/%08x.xml", location->p->fullpath, id);
+	DEBUG_MSG ("Removing %s", filename);
+	unlink (filename);
+	g_free (filename);
+}
+
+void
+location_garbage_collect (Location *location)
+{
+	GList *node;
+	BackendNote *note;
+
+	g_return_if_fail (location != NULL);
+	g_return_if_fail (IS_LOCATION (location));
+
+	for (node = location->p->contains_list; node != NULL; node = node->next) {
+		note = node->data;
+		config_log_garbage_collect (location->p->config_log,
+					    note->backend_id,
+					    (GarbageCollectCB) garbage_collect_cb,
+					    location);
+	}
+}
+
 static gint
 get_backends_cb (BackendList *backend_list, gchar *backend_id,
 		 Location *location) 
@@ -1292,8 +1328,7 @@ get_backends_cb (BackendList *backend_list, gchar *backend_id,
 
 /* Construct the directory structure for a given location 
  *
- * FIXME: Better error reporting
- */
+ * FIXME: Better error reporting */
 
 static gboolean
 do_create (Location *location) 

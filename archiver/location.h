@@ -149,4 +149,6 @@ gboolean location_does_backend_change (Location *location,
 
 ConfigLog *location_get_config_log (Location *location);
 
+void location_garbage_collect      (Location *location);
+
 #endif /* __LOCATION */

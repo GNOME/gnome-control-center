@@ -44,6 +44,7 @@ static gboolean rollback;
 static gboolean change_location;
 static gboolean rename_location;
 static gboolean push_config;
+static gboolean garbage_collect;
 
 static gboolean add_location;
 static gboolean remove_location;
@@ -91,6 +92,8 @@ static struct poptOption archiver_operations[] = {
 	 N_("Add a given backend to the given location")},
 	{"remove-backend", '\0', POPT_ARG_NONE, &remove_backend, 0,
 	 N_("Remove the given backend from the given location")},
+	{"garbage-collect", '\0', POPT_ARG_NONE, &garbage_collect, 0,
+	 N_("Perform garbage collection on the given location")},
 	{NULL, '\0', 0, NULL, 0}
 };
 
@@ -297,6 +300,12 @@ do_remove_backend (Location *location)
 	location_remove_backend (location, backend_id);
 }
 
+static void
+do_garbage_collect (Location *location) 
+{
+	location_garbage_collect (location);
+}
+
 int
 main (int argc, char **argv) 
 {
@@ -365,6 +374,8 @@ main (int argc, char **argv)
 		do_add_backend (location);
 	else if (remove_backend)
 		do_remove_backend (location);
+	else if (garbage_collect)
+		do_garbage_collect (location);
 
 	archive_close (archive);
 

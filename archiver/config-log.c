@@ -518,7 +518,7 @@ config_log_reset_filenames (ConfigLog *config_log)
 }
 
 /**
- * config_log_reload
+ * config_log_reload:
  * @config_log:
  *
  * Reloads the entire config log, throwing out any newly created entries
@@ -533,6 +533,84 @@ config_log_reload (ConfigLog *config_log)
 	do_unload (config_log, FALSE);
 	config_log_reset_filenames (config_log);
 	do_load (config_log);
+}
+
+/**
+ * config_log_garbage_collect:
+ * @config_log:
+ * @backend_id: Backend on which to iterate
+ * @callback: Callback to issue on any log entry to be culled
+ * @data: Arbitrary data to pass to callback
+ *
+ * Iterates through the configuration log and culls excess entries for the given
+ * backend.
+ *
+ * The algorithm we use is the following: We scan entries in temporal order. For
+ * each consecutive pair of entries, let t1 be the time at which the former was
+ * made and t2 be the time of the latter. If K_CONST * (t2 - t1) < t2, then we
+ * delete the former entry and issue the callback. We select K_CONST
+ * appropriately, i.e. a user will likely not want to keep entries separated by
+ * under five minutes for very long, while she may want to keep entries
+ * separated by two weeks for much longer.
+ */
+
+#define K_CONST 15
+
+void
+config_log_garbage_collect (ConfigLog        *config_log,
+			    gchar            *backend_id,
+			    GarbageCollectCB  callback,
+			    gpointer          data)
+{
+	GList *node, *list = NULL;
+	ConfigLogEntry *e1, *e2;
+	time_t t1, t2, now;
+
+	g_return_if_fail (config_log != NULL);
+	g_return_if_fail (IS_CONFIG_LOG (config_log));
+
+	if (config_log->p->log_data == NULL)
+		config_log->p->log_data = 
+			load_log_entry (config_log, NULL);
+
+	node = config_log->p->log_data;
+
+	/* We build a list of config log nodes to facilitate removing the nodes
+	 * from the main cache at a later point
+	 */
+
+	while (1) {
+		node = find_config_log_entry_backend
+			(config_log, node, backend_id);
+
+		if (node == NULL)
+			break;
+
+		list = g_list_prepend (list, node);
+		node = node->next;
+	}
+
+	if (list == NULL) return;
+
+	now = time (NULL);
+
+	for (node = list; node->next != NULL; node = node->next) {
+		e1 = ((GList *) node->data)->data;
+		e2 = ((GList *) node->next->data)->data;
+
+		t1 = mktime (e1->date);
+		t2 = mktime (e2->date);
+
+		if (K_CONST * (t2 - t1) < now - t2) {
+			config_log->p->log_data =
+				g_list_remove_link (config_log->p->log_data, node->data);
+			callback (config_log, backend_id, e1->id, data);
+		}
+	}
+
+	g_list_free (list);
+
+	config_log->p->first_old = NULL;
 }
 
 /* Find the config log entry with the id given, starting at the given
@@ -663,7 +741,8 @@ load_log_entry (ConfigLog *config_log,
 	if (feof (config_log->p->file_stream))
 		return NULL;
 
-	fgets (buffer, 1024, config_log->p->file_stream);
+	if (fgets (buffer, 1024, config_log->p->file_stream) == NULL)
+		return NULL;
 
 	entry = g_new0 (ConfigLogEntry, 1);
 	entry->date = g_new0 (struct tm, 1);
@@ -780,6 +859,7 @@ do_load (ConfigLog *config_log)
 	g_return_val_if_fail (IS_CONFIG_LOG (config_log), FALSE);
 
 	config_log->p->file_stream = fopen (config_log->p->filename, "r");
+	config_log->p->first_old = NULL;
 
 	return TRUE;
 }
@@ -791,8 +871,6 @@ do_load (ConfigLog *config_log)
 static void
 do_unload (ConfigLog *config_log, gboolean write_log) 
 {
-	GList *tmp;
-
 	g_return_if_fail (config_log != NULL);
 	g_return_if_fail (IS_CONFIG_LOG (config_log));
 
@@ -808,13 +886,9 @@ do_unload (ConfigLog *config_log, gboolean write_log)
 		config_log->p->filename = NULL;
 	}
 
-	while (config_log->p->log_data != NULL) {
-		tmp = config_log->p->log_data->next;
-		config_log_entry_destroy
-			((ConfigLogEntry *) config_log->p->log_data->data);
-		g_list_free_1 (config_log->p->log_data);
-		config_log->p->log_data = tmp;
-	}
+	g_list_foreach (config_log->p->log_data, (GFunc) config_log_entry_destroy, NULL);
+	g_list_free (config_log->p->log_data);
+	config_log->p->log_data = NULL;
 }
 
 /* Returns the next id number in the sequence */
@@ -905,12 +979,15 @@ dump_log (ConfigLog *config_log)
 	     first = first->next)
 		write_log (output, first->data);
 
-	config_log->p->first_old = config_log->p->log_data;
-
-	if (config_log->p->file_stream) {
+	if (config_log->p->file_stream != NULL &&
+	    ((config_log->p->first_old == NULL && config_log->p->log_data == NULL) ||
+	     (config_log->p->first_old != NULL && config_log->p->log_data != NULL)))
+	{
 		rewind (config_log->p->file_stream);
 		dump_file (config_log->p->file_stream, output);
 	}
+
+	config_log->p->first_old = config_log->p->log_data;
 
 	fclose (output);
 
