@@ -1,5 +1,5 @@
 # Serbian translation of gnome-control-center
-# Courtesy of Prevod.org team (http://www.prevod.org/) -- 2003, 2004.
+# Courtesy of Prevod.org team (http://prevod.org/) -- 2003, 2004.
 #
 # This file is distributed under the same license as the gnome-control-center package.
 #
@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-01 19:28+0100\n"
-"PO-Revision-Date: 2004-02-01 19:29+0100\n"
+"POT-Creation-Date: 2004-02-12 02:05+0100\n"
+"PO-Revision-Date: 2004-02-12 02:23+0100\n"
 "Last-Translator: Veljko M. Stanojevic <veljko@vms.homelinux.net>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
 "MIME-Version: 1.0\n"
@@ -443,13 +443,37 @@ msgstr ""
 "Možete dovući datoteke sa slikama u prozor i tako postaviti sliku za pozadinu"
 
 #: capplets/background/background.desktop.in.h:1
-msgid "Desktop Wallpaper"
-msgstr "Pozadina radne površi"
+msgid "Change your Desktop Background settings"
+msgstr "Izmenite izgled pozadine vaše radne površi"
 
 #: capplets/background/background.desktop.in.h:2
-#: capplets/background/gnome-wp-capplet.c:1146
-msgid "Desktop Wallpaper Preferences"
+msgid "Desktop Background"
+msgstr "Pozadina radne površi"
+
+#: capplets/background/gnome-background-properties.glade.h:1
+msgid "<b>Desktop _Wallpaper</b>"
+msgstr "<b>_Pozadina radne površi</b>"
+
+#: capplets/background/gnome-background-properties.glade.h:2
+msgid "<b>_Desktop Colors</b>"
+msgstr "<b>_Boje radne površi</b> "
+
+#: capplets/background/gnome-background-properties.glade.h:3
+msgid "Desktop Background Preferences"
 msgstr "Postavke pozadine radne površi"
+
+# bug: Albanian is not used in messages that I know of (yet) -- try "Pick a color"
+#: capplets/background/gnome-background-properties.glade.h:4
+msgid "Zgjidh një ngjyrë"
+msgstr "Odaberite boju"
+
+#: capplets/background/gnome-background-properties.glade.h:5
+msgid "_Add Wallpaper"
+msgstr "_Dodaj pozadinu"
+
+#: capplets/background/gnome-background-properties.glade.h:6
+msgid "_Style:"
+msgstr "_Stil:"
 
 #: capplets/background/gnome-wp-capplet.c:72
 #: capplets/common/capplet-util.c:340
@@ -457,52 +481,35 @@ msgstr "Postavke pozadine radne površi"
 msgid "There was an error displaying help: %s"
 msgstr "Došlo je do greške prilikom prikazivanja pomoći: %s"
 
-#: capplets/background/gnome-wp-capplet.c:169
+#: capplets/background/gnome-wp-capplet.c:171
 msgid "Add Wallpapers"
 msgstr "Dodaj pozadinu radne površi"
 
-#: capplets/background/gnome-wp-capplet.c:1188
-msgid "<b>Desktop _Wallpaper</b>"
-msgstr "<b>_Pozadina radne površi</b>"
-
-#: capplets/background/gnome-wp-capplet.c:1273
-msgid "_Style:"
-msgstr "_Stil:"
-
-#: capplets/background/gnome-wp-capplet.c:1300
+#: capplets/background/gnome-wp-capplet.c:1265
 msgid "Centered"
 msgstr "Centrirano"
 
-#: capplets/background/gnome-wp-capplet.c:1322
+#: capplets/background/gnome-wp-capplet.c:1287
 msgid "Fill Screen"
 msgstr "Ispuni ekran"
 
-#: capplets/background/gnome-wp-capplet.c:1342
+#: capplets/background/gnome-wp-capplet.c:1307
 msgid "Scaled"
 msgstr "Srazmerno"
 
-#: capplets/background/gnome-wp-capplet.c:1362
+#: capplets/background/gnome-wp-capplet.c:1327
 msgid "Tiled"
 msgstr "Popločano"
 
-#: capplets/background/gnome-wp-capplet.c:1399
-msgid "_Add Wallpaper"
-msgstr "_Dodaj pozadinu"
-
-#. The Wallpaper Background Colors Section
-#: capplets/background/gnome-wp-capplet.c:1430
-msgid "<b>_Desktop Colors</b> "
-msgstr "<b>_Boje radne površi</b> "
-
-#: capplets/background/gnome-wp-capplet.c:1462
+#: capplets/background/gnome-wp-capplet.c:1359
 msgid "Solid Color"
 msgstr "Puna boja"
 
-#: capplets/background/gnome-wp-capplet.c:1478
+#: capplets/background/gnome-wp-capplet.c:1375
 msgid "Horizontal Gradient"
 msgstr "Vodoravno nijansirano"
 
-#: capplets/background/gnome-wp-capplet.c:1494
+#: capplets/background/gnome-wp-capplet.c:1391
 msgid "Vertical Gradient"
 msgstr "Uspravno nijansirano"
 
@@ -1352,8 +1359,8 @@ msgstr ""
 "biti razmaka."
 
 #: capplets/file-types/mime-edit-dialog.c:857
-msgid "A MIME type with that name already exists, overwrite ?."
-msgstr "MIME vrsta sa tim imenom već postoji, da li da prepišem?"
+msgid "A MIME type with that name already exists, overwrite?"
+msgstr "MIME vrsta sa tim imenom već postoji, presnimiti?"
 
 #: capplets/file-types/mime-edit-dialog.c:929
 msgid "Category"
@@ -1667,7 +1674,7 @@ msgstr "Vrsta prečice."
 
 #: capplets/keybindings/eggcellrendererkeys.c:240
 #: capplets/keybindings/gnome-keybinding-properties.c:235
-#: libbackground/applier.c:588 typing-break/drwright.c:448
+#: libbackground/applier.c:588 typing-break/drwright.c:464
 msgid "Disabled"
 msgstr "Onemogućeno"
 
@@ -1902,144 +1909,6 @@ msgstr "minuta"
 #: capplets/keyboard/keyboard.desktop.in.h:2
 msgid "Set your keyboard preferences"
 msgstr "Podesite vašu tastaturu"
-
-#: capplets/localization/gnome-localization-properties.c:184
-msgid "Show"
-msgstr "Prikaži"
-
-#: capplets/localization/gnome-localization-properties.c:195
-#: capplets/localization/gnome-localization-properties.glade.h:25
-msgid "Language"
-msgstr "Jezik"
-
-#: capplets/localization/gnome-localization-properties.glade.h:1
-msgid "$1,234.56"
-msgstr "1.234,56 din."
-
-#: capplets/localization/gnome-localization-properties.glade.h:2
-msgid "1/2/03"
-msgstr "02.01.2003."
-
-#: capplets/localization/gnome-localization-properties.glade.h:3
-msgid "12:34 AM"
-msgstr "12:34"
-
-#: capplets/localization/gnome-localization-properties.glade.h:4
-msgid "4:56 PM"
-msgstr "16:56"
-
-#: capplets/localization/gnome-localization-properties.glade.h:5
-msgid "<b>Dates</b>"
-msgstr "<b>Datumi</b>"
-
-#: capplets/localization/gnome-localization-properties.glade.h:6
-msgid "<b>Languages in use:</b>"
-msgstr "<b>Jezici koje koristite:</b>"
-
-#: capplets/localization/gnome-localization-properties.glade.h:7
-msgid "<b>Numbers</b>"
-msgstr "<b>Brojevi</b>"
-
-#: capplets/localization/gnome-localization-properties.glade.h:8
-msgid "<b>Times</b>"
-msgstr "<b>Vreme</b>"
-
-#: capplets/localization/gnome-localization-properties.glade.h:9
-msgid "Available Languages"
-msgstr "Dostupni jezici"
-
-#: capplets/localization/gnome-localization-properties.glade.h:10
-msgid "C_hange languages in use..."
-msgstr "I_zmenite jezike koje koristite..."
-
-#: capplets/localization/gnome-localization-properties.glade.h:11
-msgid ""
-"Changes will not take effect for the\n"
-"desktop's bars and menus before\n"
-"next time you log in. Changes take\n"
-"effect in applications next time you\n"
-"run them."
-msgstr ""
-"Izmene menija i traga u okruženju \n"
-"neće uzeti maha dok se ne prijavite\n"
-"sledeći put.  Za programe će izmene \n"
-"uzeti maha kada ih naredni put\n"
-"pokrenete."
-
-#: capplets/localization/gnome-localization-properties.glade.h:16
-msgid "Customize _dates..."
-msgstr "Prilagodi _datume..."
-
-#: capplets/localization/gnome-localization-properties.glade.h:17
-msgid "Customize _numbers..."
-msgstr "Prilagodi _brojeve..."
-
-#: capplets/localization/gnome-localization-properties.glade.h:18
-msgid "Customize _times..."
-msgstr "Prilagodi _vreme..."
-
-#: capplets/localization/gnome-localization-properties.glade.h:19
-msgid ""
-"Drag languages to set the preferred\n"
-"order of use; If there exists a\n"
-"translation in the first language it will\n"
-"be used, otherwise the next will be tried"
-msgstr ""
-"Prevucite jezike da postavite željeni\n"
-"redosled upotrebe; ako postoji prevod \n"
-"u prvom jeziku, koristiće ga, a inače \n"
-"će pokušati sa sledećim"
-
-#: capplets/localization/gnome-localization-properties.glade.h:23
-msgid "Formats"
-msgstr "Oblici"
-
-#: capplets/localization/gnome-localization-properties.glade.h:24
-msgid "Jan 2, 2003"
-msgstr "2. januar, 2003"
-
-#: capplets/localization/gnome-localization-properties.glade.h:26
-msgid "Language and Culture Preferences"
-msgstr "Postavke jezika i podneblja"
-
-#: capplets/localization/gnome-localization-properties.glade.h:27
-msgid "Measurement _Units:"
-msgstr "_Jedinice mera:"
-
-#: capplets/localization/gnome-localization-properties.glade.h:28
-msgid "Select the items that appear in the Languages list:"
-msgstr "Izaberite stavke koje se pojavljuju u spisku jezika:"
-
-#: capplets/localization/gnome-localization-properties.glade.h:29
-msgid "Show _all regions"
-msgstr "Prikaži _sve oblasti"
-
-#: capplets/localization/gnome-localization-properties.glade.h:30
-msgid "Thursday, January 2, 2003"
-msgstr "četvrtak, 2. januar 2003."
-
-#: capplets/localization/gnome-localization-properties.glade.h:31
-msgid ""
-"Your preferred language differs\n"
-"from that of your currently\n"
-"selected date, time, and number\n"
-"formats. You can change your\n"
-"formats in the Formats tab."
-msgstr ""
-"Vaš željeni jezik se razlikuje od vašeg trenutno izabranog oblika datuma, "
-"vremena i brojeva. Možete izmeniti vaše oblike u listu Oblici. "
-
-#: capplets/localization/gnome-localization-properties.glade.h:36
-msgid "_Region:"
-msgstr "_Oblast:"
-
-#: capplets/localization/localization.desktop.in.h:1
-msgid "Language and Culture"
-msgstr "Jezik i podneblje"
-
-#: capplets/localization/localization.desktop.in.h:2
-msgid "Set your language and culture preferences"
-msgstr "Podesite vaš jezik i podneblje"
 
 #: capplets/mouse/gnome-mouse-properties.c:496
 msgid "Unknown Cursor"
@@ -2383,7 +2252,7 @@ msgid "Two"
 msgstr "Dva"
 
 #: capplets/theme-switcher/gnome-theme-details.c:372
-#: capplets/theme-switcher/gnome-theme-manager.c:589
+#: capplets/theme-switcher/gnome-theme-manager.c:609
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -2410,17 +2279,23 @@ msgstr ""
 "%s je putanja gde će se postaviti datoteke teme. Ovo se ne može koristiti kao "
 "izvorna putanja"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:645
-#: capplets/theme-switcher/gnome-theme-manager.c:705
+#: capplets/theme-switcher/gnome-theme-manager.c:301
+msgid ""
+"The gnome-theme-manager does not know how to change the themes on the "
+"current window manager."
+msgstr "Program gnome-theme-manager ne ume da menja teme tekućeg upravnika prozorima."
+
+#: capplets/theme-switcher/gnome-theme-manager.c:665
+#: capplets/theme-switcher/gnome-theme-manager.c:725
 msgid "Custom theme"
 msgstr "Prilagođena tema"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:645
-#: capplets/theme-switcher/gnome-theme-manager.c:705
+#: capplets/theme-switcher/gnome-theme-manager.c:665
+#: capplets/theme-switcher/gnome-theme-manager.c:725
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "Možete sačuvati ovu temu pritiskom na „Snimi temu“ dugme."
 
-#: capplets/theme-switcher/gnome-theme-manager.c:1398
+#: capplets/theme-switcher/gnome-theme-manager.c:1418
 msgid ""
 "The default theme schemas could not be found on your system.  This means "
 "that you probably don't have metacity installed, or that your gconf is "
@@ -2998,11 +2873,11 @@ msgstr "Ne mogu da pronađem hbox, koristim normalni odbir datoteke"
 msgid "Preview"
 msgstr "Pregled"
 
-#: libsounds/sound-view.c:130
+#: libsounds/sound-view.c:121 libsounds/sound-view.c:146
 msgid "The sound file for this event does not exist."
 msgstr "Zvučna datoteka za ovaj događaj ne postoji."
 
-#: libsounds/sound-view.c:132
+#: libsounds/sound-view.c:148
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package\n"
@@ -3012,32 +2887,32 @@ msgstr ""
 "Možda bi trebali instalirati gnomov paket sa zvukovima\n"
 "da biste imali osnovne zvukove."
 
-#: libsounds/sound-view.c:176
+#: libsounds/sound-view.c:192
 #, c-format
 msgid "The file %s is not a valid wav file"
 msgstr "Datoteka %s ne predstavlja ispravnu WAV datoteku"
 
-#: libsounds/sound-view.c:241
+#: libsounds/sound-view.c:257
 msgid "Event"
 msgstr "Događaj"
 
-#: libsounds/sound-view.c:250
+#: libsounds/sound-view.c:266
 msgid "Sound File"
 msgstr "Datoteka sa zvukom"
 
-#: libsounds/sound-view.c:266
+#: libsounds/sound-view.c:282
 msgid "_Sounds:"
 msgstr "_Zvuci:"
 
-#: libsounds/sound-view.c:280
+#: libsounds/sound-view.c:296
 msgid "Sound _file:"
 msgstr "_Datoteka sa zvukom:"
 
-#: libsounds/sound-view.c:284
+#: libsounds/sound-view.c:300
 msgid "Select Sound File"
 msgstr "Odaberite datoteku sa zvukom"
 
-#: libsounds/sound-view.c:307
+#: libsounds/sound-view.c:323
 msgid "_Play"
 msgstr "_Pokreni"
 
@@ -3160,8 +3035,8 @@ msgid "XKB settings in gconf will be overridden from the system ASAP"
 msgstr "Podešavanja XKB-a u GKonfu će ubrzo biti prevaziđena od strane sistema"
 
 #: typing-break/drw-break-window.c:189
-msgid "Postpone break"
-msgstr "Odloži odmor"
+msgid "_Postpone break"
+msgstr "Od_loži odmor"
 
 #: typing-break/drw-break-window.c:227
 msgid "Take a break!"
@@ -3180,7 +3055,7 @@ msgstr "/_O programu"
 msgid "/_Take a Break"
 msgstr "/_Uzmi odmor!"
 
-#: typing-break/drwright.c:466
+#: typing-break/drwright.c:482
 #, c-format
 msgid "%d minute until the next break"
 msgid_plural "%d minutes until the next break"
@@ -3188,11 +3063,11 @@ msgstr[0] "%d minut do sledećeg odmora"
 msgstr[1] "%d minuta do sledećeg odmora"
 msgstr[2] "%d minuta do sledećeg odmora"
 
-#: typing-break/drwright.c:470
+#: typing-break/drwright.c:486
 msgid "Less than one minute until the next break"
 msgstr "Manje od jednog minuta do sledećeg odmora"
 
-#: typing-break/drwright.c:565
+#: typing-break/drwright.c:581
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
@@ -3201,23 +3076,23 @@ msgstr ""
 "Ne može da prikaže prozorče za podešavanje odmora od kucanja usled sledeće "
 "greške: %s"
 
-#: typing-break/drwright.c:605
+#: typing-break/drwright.c:621
 msgid "About GNOME Typing Monitor"
 msgstr "O Gnomovom praćenju kucanja"
 
-#: typing-break/drwright.c:629
+#: typing-break/drwright.c:645
 msgid "A computer break reminder."
 msgstr "Podsetnik za uzimanje odmora."
 
-#: typing-break/drwright.c:630
+#: typing-break/drwright.c:646
 msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
 msgstr "Napisao Ričard Hult &lt;richard@imendio.com&gt;"
 
-#: typing-break/drwright.c:631
+#: typing-break/drwright.c:647
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Ulepšao Anders Karlsson"
 
-#: typing-break/drwright.c:804
+#: typing-break/drwright.c:820
 msgid "Break reminder"
 msgstr "Podsetnik za odmore"
 
@@ -3401,7 +3276,7 @@ msgstr ""
 msgid "_Apply font"
 msgstr "_Primeni font"
 
-#: vfs-methods/themus/theme-method.c:519
+#: vfs-methods/themus/theme-method.c:520
 msgid "Themes"
 msgstr "Teme"
 
@@ -3658,6 +3533,121 @@ msgstr "Pojačaj"
 msgid "Volume up's shortcut."
 msgstr "Prečica za pojačavanje zvuka."
 
+#~ msgid "Desktop Wallpaper"
+#~ msgstr "Pozadina radne površi"
+
+#~ msgid "Desktop Wallpaper Preferences"
+#~ msgstr "Postavke pozadine radne površi"
+
+#~ msgid "Show"
+#~ msgstr "Prikaži"
+
+#~ msgid "Language"
+#~ msgstr "Jezik"
+
+#~ msgid "$1,234.56"
+#~ msgstr "1.234,56 din."
+
+#~ msgid "1/2/03"
+#~ msgstr "02.01.2003."
+
+#~ msgid "12:34 AM"
+#~ msgstr "12:34"
+
+#~ msgid "4:56 PM"
+#~ msgstr "16:56"
+
+#~ msgid "<b>Dates</b>"
+#~ msgstr "<b>Datumi</b>"
+
+#~ msgid "<b>Languages in use:</b>"
+#~ msgstr "<b>Jezici koje koristite:</b>"
+
+#~ msgid "<b>Numbers</b>"
+#~ msgstr "<b>Brojevi</b>"
+
+#~ msgid "<b>Times</b>"
+#~ msgstr "<b>Vreme</b>"
+
+#~ msgid "Available Languages"
+#~ msgstr "Dostupni jezici"
+
+#~ msgid "C_hange languages in use..."
+#~ msgstr "I_zmenite jezike koje koristite..."
+
+#~ msgid ""
+#~ "Changes will not take effect for the\n"
+#~ "desktop's bars and menus before\n"
+#~ "next time you log in. Changes take\n"
+#~ "effect in applications next time you\n"
+#~ "run them."
+#~ msgstr ""
+#~ "Izmene menija i traga u okruženju \n"
+#~ "neće uzeti maha dok se ne prijavite\n"
+#~ "sledeći put.  Za programe će izmene \n"
+#~ "uzeti maha kada ih naredni put\n"
+#~ "pokrenete."
+
+#~ msgid "Customize _dates..."
+#~ msgstr "Prilagodi _datume..."
+
+#~ msgid "Customize _numbers..."
+#~ msgstr "Prilagodi _brojeve..."
+
+#~ msgid "Customize _times..."
+#~ msgstr "Prilagodi _vreme..."
+
+#~ msgid ""
+#~ "Drag languages to set the preferred\n"
+#~ "order of use; If there exists a\n"
+#~ "translation in the first language it will\n"
+#~ "be used, otherwise the next will be tried"
+#~ msgstr ""
+#~ "Prevucite jezike da postavite željeni\n"
+#~ "redosled upotrebe; ako postoji prevod \n"
+#~ "u prvom jeziku, koristiće ga, a inače \n"
+#~ "će pokušati sa sledećim"
+
+#~ msgid "Formats"
+#~ msgstr "Oblici"
+
+#~ msgid "Jan 2, 2003"
+#~ msgstr "2. januar, 2003"
+
+#~ msgid "Language and Culture Preferences"
+#~ msgstr "Postavke jezika i podneblja"
+
+#~ msgid "Measurement _Units:"
+#~ msgstr "_Jedinice mera:"
+
+#~ msgid "Select the items that appear in the Languages list:"
+#~ msgstr "Izaberite stavke koje se pojavljuju u spisku jezika:"
+
+#~ msgid "Show _all regions"
+#~ msgstr "Prikaži _sve oblasti"
+
+#~ msgid "Thursday, January 2, 2003"
+#~ msgstr "četvrtak, 2. januar 2003."
+
+#~ msgid ""
+#~ "Your preferred language differs\n"
+#~ "from that of your currently\n"
+#~ "selected date, time, and number\n"
+#~ "formats. You can change your\n"
+#~ "formats in the Formats tab."
+#~ msgstr ""
+#~ "Vaš željeni jezik se razlikuje od vašeg trenutno izabranog oblika datuma, "
+#~ "vremena i brojeva. Možete izmeniti vaše oblike u listu Oblici. "
+
+#~ msgid "_Region:"
+#~ msgstr "_Oblast:"
+
+#~ msgid "Language and Culture"
+#~ msgstr "Jezik i podneblje"
+
+#~ msgid "Set your language and culture preferences"
+#~ msgstr "Podesite vaš jezik i podneblje"
+
 #~ msgid "Layout _options:"
 #~ msgstr "_Opcije rasporeda:"
 
@@ -3686,12 +3676,6 @@ msgstr "Prečica za pojačavanje zvuka."
 #~ "%s\n"
 #~ "%d\n"
 #~ "%s"
-
-#~ msgid "Background"
-#~ msgstr "Pozadina"
-
-#~ msgid "Customize your desktop background"
-#~ msgstr "Podesite izgled pozadine"
 
 #~ msgid "_Ignore system configuration"
 #~ msgstr "_Zanemari podešavanja sistema"
