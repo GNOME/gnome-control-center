@@ -867,13 +867,9 @@ init_mime_capplet (const char *scroll_to_mime_type)
 		gtk_clist_select_row (GTK_CLIST (mime_list), 0, 0);
 		list_reveal_row (GTK_CLIST (mime_list), 0);
 	}
-	
-	capplet_widget_state_changed (CAPPLET_WIDGET (capplet), TRUE);
-#if 0
-	/* Enable this and remove previous line when the control center patch is checked in */
+		
+	/* Inform control center that our changes are immediate */
 	capplet_widget_changes_are_immediate (CAPPLET_WIDGET (capplet));
-#endif
-
 }
 
 /*
