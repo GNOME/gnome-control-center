@@ -5,6 +5,7 @@
 <requires lib="gnome"/>
 
 <widget class="GtkDialog" id="default_applications_dialog">
+  <property name="border_width">5</property>
   <property name="title" translatable="yes">Preferred Applications</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_NONE</property>
@@ -17,7 +18,7 @@
     <widget class="GtkVBox" id="dialog-vbox1">
       <property name="visible">True</property>
       <property name="homogeneous">False</property>
-      <property name="spacing">8</property>
+      <property name="spacing">0</property>
 
       <child internal-child="action_area">
 	<widget class="GtkHButtonBox" id="dialog-action_area1">
@@ -28,6 +29,7 @@
 	    <widget class="GtkButton" id="button5">
 	      <property name="visible">True</property>
 	      <property name="can_default">True</property>
+	      <property name="has_default">True</property>
 	      <property name="can_focus">True</property>
 	      <property name="label">gtk-close</property>
 	      <property name="use_stock">True</property>
@@ -58,6 +60,7 @@
 
       <child>
 	<widget class="GtkNotebook" id="notebook">
+	  <property name="border_width">5</property>
 	  <property name="visible">True</property>
 	  <property name="can_focus">True</property>
 	  <property name="show_tabs">True</property>
@@ -68,11 +71,11 @@
 
 	  <child>
 	    <widget class="GtkFrame" id="frame3">
-	      <property name="border_width">4</property>
+	      <property name="border_width">12</property>
 	      <property name="visible">True</property>
 	      <property name="label_xalign">0</property>
 	      <property name="label_yalign">0.5</property>
-	      <property name="shadow_type">GTK_SHADOW_ETCHED_IN</property>
+	      <property name="shadow_type">GTK_SHADOW_NONE</property>
 
 	      <child>
 		<widget class="GtkTable" id="table2">
@@ -353,11 +356,11 @@
 
 	  <child>
 	    <widget class="GtkFrame" id="frame6">
-	      <property name="border_width">4</property>
+	      <property name="border_width">12</property>
 	      <property name="visible">True</property>
 	      <property name="label_xalign">0</property>
 	      <property name="label_yalign">0.5</property>
-	      <property name="shadow_type">GTK_SHADOW_ETCHED_IN</property>
+	      <property name="shadow_type">GTK_SHADOW_NONE</property>
 
 	      <child>
 		<widget class="GtkTable" id="table6">
@@ -625,11 +628,11 @@
 
 	  <child>
 	    <widget class="GtkFrame" id="frame1">
-	      <property name="border_width">4</property>
+	      <property name="border_width">12</property>
 	      <property name="visible">True</property>
 	      <property name="label_xalign">0</property>
 	      <property name="label_yalign">0.5</property>
-	      <property name="shadow_type">GTK_SHADOW_ETCHED_IN</property>
+	      <property name="shadow_type">GTK_SHADOW_NONE</property>
 
 	      <child>
 		<widget class="GtkTable" id="table1">
@@ -856,10 +859,10 @@
 
 	  <child>
 	    <widget class="GtkFrame" id="help_frame">
-	      <property name="border_width">4</property>
+	      <property name="border_width">12</property>
 	      <property name="label_xalign">0</property>
 	      <property name="label_yalign">0.5</property>
-	      <property name="shadow_type">GTK_SHADOW_ETCHED_IN</property>
+	      <property name="shadow_type">GTK_SHADOW_NONE</property>
 
 	      <child>
 		<widget class="GtkTable" id="table3">
@@ -1141,11 +1144,11 @@
 
 	  <child>
 	    <widget class="GtkFrame" id="frame5">
-	      <property name="border_width">4</property>
+	      <property name="border_width">12</property>
 	      <property name="visible">True</property>
 	      <property name="label_xalign">0</property>
 	      <property name="label_yalign">0.5</property>
-	      <property name="shadow_type">GTK_SHADOW_ETCHED_IN</property>
+	      <property name="shadow_type">GTK_SHADOW_NONE</property>
 
 	      <child>
 		<widget class="GtkTable" id="table4">
@@ -1430,10 +1433,10 @@
 
 	  <child>
 	    <widget class="GtkFrame" id="wm_frame">
-	      <property name="border_width">4</property>
+	      <property name="border_width">12</property>
 	      <property name="label_xalign">0</property>
 	      <property name="label_yalign">0.5</property>
-	      <property name="shadow_type">GTK_SHADOW_ETCHED_IN</property>
+	      <property name="shadow_type">GTK_SHADOW_NONE</property>
 
 	      <child>
 		<widget class="GtkVBox" id="vbox2">
