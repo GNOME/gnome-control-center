@@ -1,8 +1,8 @@
 cappletname = mouse
-bin_PROGRAMS = mouse-properties-capplet
+bin_PROGRAMS = mouse-properties
 
-mouse_properties_capplet_LDADD = @CAPPLET_LIBS@
-mouse_properties_capplet_SOURCES = \
+mouse_properties_LDADD = @CAPPLET_LIBS@
+mouse_properties_SOURCES = \
 	main.c\
 	prefs-widget.c		prefs-widget.h \
 	preferences.c		preferences.h
