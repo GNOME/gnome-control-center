@@ -278,7 +278,7 @@ gnome_xft_settings_get (GConfClient      *client,
   settings->antialias = TRUE;
   settings->hinting = TRUE;
   settings->hintstyle = "hintfull";
-  settings->dpi = 96;
+  settings->dpi = 96 * 1024;
   settings->rgba = "rgb";
 
   if ((int)(1024 * dpi + 0.5) > 0)
