@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.5.8\n"
-"POT-Creation-Date: 2002-04-30 12:57+0200\n"
-"PO-Revision-Date: 2002-04-30 12:59+0200\n"
+"POT-Creation-Date: 2002-04-30 13:47+0200\n"
+"PO-Revision-Date: 2002-04-30 13:50+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -2540,7 +2540,7 @@ msgstr "_Hjelp"
 msgid "Use shell even if nautilus is running."
 msgstr "Bruk skall selv om nautilus kjører."
 
-#: gnome-settings-daemon/factory.c:25
+#: gnome-settings-daemon/factory.c:29
 msgid "Could not initialize Bonobo"
 msgstr "Kunne ikke initiere Bonobo"
 
@@ -2619,32 +2619,55 @@ msgstr "S_pill"
 msgid "Select sound file"
 msgstr "Velg lydfil"
 
-#~ msgid ""
-#~ "StickyKeys can benefit users who type with only one finger or who might "
-#~ "use a mouth or head mounted-stick.  StickyKeys allows users to perform "
-#~ "multiple simultaneous key press operations by pressing the keys in "
-#~ "sequence.  For example, if an application requires a user to "
-#~ "simultaneously press the 'Ctrl' and 'Tab' key, a StickyKeys user can "
-#~ "press the 'Ctrl' key, release it, and then press the 'Tab' key and "
-#~ "release it, achieving the same result."
-#~ msgstr ""
-#~ "KlebrigeTaster kan være nyttig for brukere som skriver med bare én finger "
-#~ "eller som kanskje bruker en styrepinne med munnen eller hodet. "
-#~ "KlebrigeTaster lar brukere utføre flere samtidige tastetrykkoperasjoner "
-#~ "ved å trykke tastene i etter hverandre. For eksempel, hvis en applikasjon "
-#~ "krever at brukeren må trykke «Ctrl» og «Tab»-tastene, kan en bruker av "
-#~ "KlebrigeTaster trykke «Ctrl»-tasten, slippe den, og så trykke «Tab»-"
-#~ "tasten og slippe den, for å oppnå samme resultat."
+#: gnome-settings-daemon/gnome-settings-font.c:74
+#, c-format
+msgid ""
+"Cannot create the directory \"%s\".\n"
+"This is needed to allow changing cursors."
+msgstr ""
+"Kan ikke opprette katalog «%s».\n"
+"Dette kreves for å tillate endring av markører."
 
-#~ msgid ""
-#~ "ToggleKeys can benefit the visually impaired user who has difficulty "
-#~ "seeing the small LED keyboard indicators.  ToggleKeys provides one beep "
-#~ "when an LED (e.g., the Caps Lock LED) is turned on and two beeps when it "
-#~ "is turned off."
-#~ msgstr ""
-#~ "BryterTaster kan være nyttig for brukere med dårlig syn som har problemer "
-#~ "med å se lysene på tastaturet. BryterTaster gir et pip når et lys (f.eks. "
-#~ "Caps Lock) slås på og to pip når den skrus av."
+#: gnome-settings-daemon/gnome-settings-screensaver.c:92
+#, c-format
+msgid ""
+"There was an error starting up the screensaver:\n"
+"\n"
+"%s\n"
+"\n"
+"Screensaver functionality will not work in this session."
+msgstr ""
+"Det oppsto en feil ved oppstart av skjermspareren:\n"
+"\n"
+"%s\n"
+"\n"
+"Skjermsparerfunksjonen vil ikke fungere i denne sesjonen."
+
+#: gnome-settings-daemon/gnome-settings-screensaver.c:102
+msgid "_Do not show this message again"
+msgstr "_Ikke vis denne meldingen igjen"
+
+#: gnome-settings-daemon/gnome-settings-sound.c:59
+msgid "Starting esd\n"
+msgstr "Starter esd\n"
+
+#: gnome-settings-daemon/gnome-settings-sound.c:84
+msgid "Stopping esd\n"
+msgstr "Stopper esd\n"
+
+#: gnome-settings-daemon/gnome-settings-sound.c:127
+#, c-format
+msgid "Couldn't load sound file %s as sample %s"
+msgstr "Kunne ikke laste lydfil %s som sample %s"
+
+#: gnome-settings-daemon/gnome-settings-sound.c:159
+msgid "Reloading events\n"
+msgstr "Laster hendelser på nytt\n"
+
+#: gnome-settings-daemon/gnome-settings-xsettings.c:157
+#, c-format
+msgid "GConf key %s set to type %s but its expected type was %s\n"
+msgstr "GConf-nøkkel %s satt til type %s men forventet type var %s\n"
 
 #~ msgid "_Beep on state change"
 #~ msgstr "_Pip ved endring i tilstand"
@@ -2999,9 +3022,6 @@ msgstr "Velg lydfil"
 
 #~ msgid "About %s\n"
 #~ msgstr "Om %s\n"
-
-#~ msgid "Settings"
-#~ msgstr "Innstillinger"
 
 #~ msgid "label1"
 #~ msgstr "etikett1"
@@ -3715,9 +3735,6 @@ msgstr "Velg lydfil"
 
 #~ msgid "Spotlight"
 #~ msgstr "Følgelys"
-
-#~ msgid "Sproingies"
-#~ msgstr "Sproingies"
 
 #~ msgid "SSystem"
 #~ msgstr "SSystem"
