@@ -67,7 +67,8 @@ static edit_dialog_details *edit_component_details = NULL;
 static void 	show_new_application_window  (GtkWidget *button, GtkWidget *list);
 static void 	show_edit_application_window (GtkWidget *button, GtkWidget *list);
 static void 	delete_selected_application  (GtkWidget *button, GtkWidget *list);
-static void	add_item_to_application_list (GtkWidget *list, 	const char *name, const char *mime_type, int position);
+static void	add_item_to_application_list (GtkWidget *list, 	const char *name, const char *mime_type,
+					      gboolean user_owned, int position);
 static void	find_message_label_callback  (GtkWidget *widget, gpointer callback_data);
 static void	find_message_label 	     (GtkWidget *widget, const char *message);
 
@@ -163,7 +164,8 @@ insert_item (GtkList *list_widget, GtkListItem *item, int position)
 }
 
 static GtkListItem *
-create_application_list_item (const char *id, const char *name, const char *mime_type, GList *short_list)
+create_application_list_item (const char *id, const char *name, const char *mime_type,
+			      gboolean user_owned, GList *short_list)
 {
 	GtkWidget *list_item;
 	GtkWidget *hbox, *check_button, *label;
@@ -186,6 +188,7 @@ create_application_list_item (const char *id, const char *name, const char *mime
 	gtk_object_set_data_full (GTK_OBJECT (check_button), "mime_type", g_strdup (mime_type), g_free);
 	gtk_object_set_data_full (GTK_OBJECT (list_item), "application_id", g_strdup (id), g_free);
 	gtk_object_set_data_full (GTK_OBJECT (list_item), "mime_type", g_strdup (mime_type), g_free);
+	gtk_object_set_data (GTK_OBJECT (list_item), "user_owned", GINT_TO_POINTER(user_owned));
 
 	/* Check and see if component is in preferred list */
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check_button),
@@ -215,10 +218,13 @@ populate_default_applications_list (GtkWidget *list, const char *mime_type)
 			application = list_element->data;
 
 			/* Create list item */
-			list_item = create_application_list_item 
-				(application->id, application->name, mime_type, short_list);
+			list_item = create_application_list_item (application->id, application->name,
+								  mime_type,
+								  gnome_vfs_application_is_user_owned_application (application),
+								  short_list);
 
-			insert_item (GTK_LIST (list), list_item, -1);
+			insert_item (GTK_LIST (list), list_item, -1);			
+			
 			}
 
 		gnome_vfs_mime_application_list_free (app_list);
@@ -347,9 +353,15 @@ check_button_status (GtkList *list, GtkWidget *widget, ButtonHolder *button_hold
 		gtk_widget_set_sensitive (button_holder->delete_button, FALSE);
 		gtk_widget_set_sensitive (button_holder->edit_button, FALSE);
 	} else {
-		gtk_widget_set_sensitive (button_holder->delete_button, TRUE);
 		gtk_widget_set_sensitive (button_holder->edit_button, TRUE);
 	}
+}
+
+static void
+update_delete_button (GtkList *list, GtkWidget *widget, ButtonHolder *button_holder)
+{
+	gtk_widget_set_sensitive (button_holder->delete_button,
+				  GPOINTER_TO_INT (gtk_object_get_data (GTK_OBJECT (widget), "user_owned")));
 }
 
 
@@ -436,7 +448,8 @@ initialize_edit_applications_dialog (const char *mime_type)
 	/* Watch container so we can update buttons */
 	gtk_signal_connect (GTK_OBJECT (list), "add", check_button_status, button_holder);
 	gtk_signal_connect_full (GTK_OBJECT (list), "remove", check_button_status, NULL, button_holder,
-			    	 g_free, FALSE, FALSE);
+			    	 g_free, FALSE, FALSE);			    	 
+	gtk_signal_connect (GTK_OBJECT (list), "select_child", update_delete_button, button_holder);
 			    	 
 	gtk_widget_show_all (main_vbox);
 
@@ -1107,7 +1120,7 @@ add_or_update_application (GtkWidget *list, const char *name, const char *comman
 			if (original_id == NULL) {
 				return;
 			}
-
+			
 			/* Remove original application data */
 			gnome_vfs_application_registry_remove_mime_type (original_id, mime_type);		
 			gnome_vfs_application_registry_sync ();
@@ -1118,7 +1131,9 @@ add_or_update_application (GtkWidget *list, const char *name, const char *comman
 			gtk_container_remove (GTK_CONTAINER (list), GTK_WIDGET (item));
 
 			/* Add new widget and restore position */
-			add_item_to_application_list (list, name, mime_type, position);
+			add_item_to_application_list (list, name, mime_type,
+						      gnome_vfs_application_is_user_owned_application (original),
+						      position);
 		}
 	}
 	
@@ -1130,7 +1145,8 @@ add_or_update_application (GtkWidget *list, const char *name, const char *comman
 }
 
 static void
-add_item_to_application_list (GtkWidget *list, const char *name, const char *mime_type, int position)
+add_item_to_application_list (GtkWidget *list, const char *name, const char *mime_type,
+			      gboolean user_owned, int position)
 {
 	GtkListItem *list_item;
 	GList *short_list;
@@ -1138,7 +1154,7 @@ add_item_to_application_list (GtkWidget *list, const char *name, const char *mim
 	short_list = gnome_vfs_mime_get_short_list_applications (mime_type);
 
 	/* FIXME: Is it safe to use the name as the ID? Won't this allow naming conflicts? */
-	list_item = create_application_list_item (name, name, mime_type, short_list);
+	list_item = create_application_list_item (name, name, mime_type, user_owned,  short_list);
 
 	gnome_vfs_mime_application_list_free (short_list);
 
@@ -1214,7 +1230,7 @@ show_new_application_window (GtkWidget *button, GtkWidget *list)
 	        			     	   gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (multiple_check_box)),
 	        			     	   gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (uri_check_box)),
 	        			     	   FALSE);				
-			add_item_to_application_list (list, name, mime_type, -1);
+			add_item_to_application_list (list, name, mime_type, TRUE, -1);
 		}
 	}
 
@@ -1321,7 +1337,7 @@ static void
 delete_selected_application (GtkWidget *button, GtkWidget *list)
 {
 	GtkListItem *item;
-	const char *mime_type, *name;
+	const char *mime_type, *id;
 	GList *selection;
 	
 	/* Get selected list item */
@@ -1335,14 +1351,16 @@ delete_selected_application (GtkWidget *button, GtkWidget *list)
 		return;
 	}
 	
-	name = gtk_object_get_data (GTK_OBJECT (item), "application_id");
+	g_return_if_fail (GPOINTER_TO_INT (gtk_object_get_data (GTK_OBJECT (item), "user_owned")));
+	
+	id = gtk_object_get_data (GTK_OBJECT (item), "application_id");
 	mime_type = gtk_object_get_data (GTK_OBJECT (item), "mime_type");
 
-	/* Remove mime data */
-	if (name != NULL && mime_type != NULL) {
-		gnome_vfs_application_registry_remove_mime_type (name, mime_type);		
+	/* Remove application if it is user owned */
+	if (id != NULL && mime_type != NULL) {
+		gnome_vfs_application_registry_remove_mime_type (id, mime_type);
 		gnome_vfs_application_registry_sync ();
-		gnome_vfs_mime_remove_application_from_short_list (mime_type, name);
+		gnome_vfs_mime_remove_application_from_short_list (mime_type, id);
 	}
 	
 	/* Remove widget from list */
