@@ -3,33 +3,21 @@
 cappletname=keyboard
 
 Gladedir = $(datadir)/control-center-data
-Glade_DATA = \
-	keyboard-properties.glade
-
-iconsdir = $(GNOME_CONTROL_CENTER_ICONS_DIR)
-icons_DATA = keyboard-capplet.png
+Glade_DATA = $(cappletname)-properties.glade
 
 EXTRA_DIST = \
-  ChangeLog \
   $(Glade_DATA) \
-  $(cappletname)-properties.desktop \
-  $(cappletname)-properties.desktop.in \
-  $(cappletname)-properties.desktop.in.in 
+  $(GNOMECC_CAPPLETS_EXTRA_DIST)
 
 INCLUDES = \
-        -DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\
-	-DGNOME_ICONDIR=\""${prefix}/share/pixmaps"\"	\
-	-DG_LOG_DOMAIN=\"keyboard-properties\"		\
-	-DGLADE_DATADIR=\""$(Gladedir)"\"		\
-	@CAPPLET_CFLAGS@				\
-	-I$(top_srcdir)/				\
-	-I$(top_srcdir)/intl				
+     -DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\
+	@GNOMECC_CAPPLETS_CFLAGS@
 
 bin_PROGRAMS = keyboard-properties
 
 keyboard_properties_SOURCES = \
 	prefs-widget.c prefs-widget.h \
-	preferences.c preferences.h \
+	preferences.c  preferences.h \
 	main.c
 
 keyboard_properties_LDADD = @CAPPLET_LIBS@ $(XF86MISC_LIBS)

@@ -115,6 +115,14 @@ PKG_CHECK_MODULES(ARCHIVER, bonobo bonobo_conf xml)
 PKG_CHECK_MODULES(MONIKER, bonobo bonobo_conf xml)
 PKG_CHECK_MODULES(CONFIG_ARCHIVER, gnome xml)
 
+GNOMECC_CAPPLETS_CFLAGS="${CAPPLET_CFLAGS} -I\$(top_srcdir)/intl -I\$(top_srcdir)/ -DG_LOG_DOMAIN=\"\\\"keyboard-properties\\\"\" -DGLADE_DATADIR=\"\\\"${datadir}/control-center\\\"\""
+
+AC_DEFINE_UNQUOTED(GNOMECC_ICONS_DIR, "${datadir}/${PACKAGE}/icons")
+GNOMECC_ICONS_DIR=""${datadir}/${PACKAGE}/icons""
+AC_SUBST(GNOMECC_ICONS_DIR)
+
+AC_SUBST(GNOMECC_CAPPLETS_CFLAGS)
+
 AC_SUBST(CFLAGS)
 AC_SUBST(LDFLAGS)
 
@@ -130,8 +138,9 @@ AC_SUBST(CONFIG_ARCHIVER_LIBDIR)
 AC_SUBST(CONFIG_ARCHIVER_LIBS)
 AC_SUBST(CONFIG_ARCHIVER_INCLUDEDIR)
 
-GNOME_CONTROL_CENTER_ICONS_DIR="${datadir}/${PACKAGE}/icons"
-AC_SUBST(GNOME_CONTROL_CENTER_ICONS_DIR)
+GNOMECC_CAPPLETS_EXTRA_DIST="ChangeLog \$(cappletname)-properties.desktop \$(cappletname)-properties.desktop.in \$(cappletname)-properties.desktop.in.in"
+
+AC_SUBST(GNOMECC_CAPPLETS_EXTRA_DIST)
 
 AC_OUTPUT([
 control-center.spec
