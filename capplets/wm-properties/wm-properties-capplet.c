@@ -6,6 +6,7 @@
  */
 #include <ctype.h>
 #include <config.h>
+#include <parser.h>
 #include "wm-properties.h"
 #include "capplet-widget.h"
 #include "gnome.h"
@@ -1103,6 +1104,35 @@ wm_setup (void)
         update_gui();
 }
 
+static void do_get_xml (void) 
+{
+        xmlDocPtr doc;
+
+        doc = wm_list_write_to_xml ();
+        xmlDocDump (stdout, doc);
+}
+
+static void do_set_xml (void) 
+{
+        xmlDocPtr doc;
+	char *buffer;
+	int len = 0;
+
+	while (!feof (stdin)) {
+		if (!len) buffer = g_new (char, 16384);
+		else buffer = g_renew (char, buffer, len + 16384);
+		fread (buffer + len, 1, 16384, stdin);
+		len += 16384;
+	}
+
+	doc = xmlParseMemory (buffer, strlen (buffer));
+
+        init_session ();
+	wm_list_read_from_xml (doc);
+        wm_list_save ();
+        update_session ();
+}
+
 int
 main (int argc, char **argv)
 {
@@ -1156,7 +1186,14 @@ main (int argc, char **argv)
                         update_session ();
                 }
                 
-        } else {
+        } 
+        else if (init_results == 3) {
+                do_get_xml ();
+        }
+        else if (init_results == 4) {
+                do_set_xml ();
+        }
+        else {
                 if (selected_wm && 
                     !selected_wm->session_managed && 
                     !wm_is_running()) {

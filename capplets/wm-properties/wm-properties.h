@@ -1,11 +1,14 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 /* Copyright (C) 1998 Redhat Software Inc.
  * Code available under the Gnu GPL.
- * Authors: Owen Taylor <otaylor@redhat.com>
+ * Authors: Owen Taylor <otaylor@redhat.com>,
+ *          Bradford Hovinen <hovinen@helixcode.com>
  */
 
 #include <gdk/gdk.h>
 #include <libgnome/libgnome.h>
+
+#include <tree.h>
 
 typedef struct _WindowManager WindowManager;
 
@@ -35,6 +38,9 @@ void           wm_list_delete (WindowManager *window_manager);
 void           wm_list_set_current (WindowManager *window_manager);
 WindowManager *wm_list_get_current (void);
 WindowManager *wm_list_get_revert  (void);
+
+void           wm_list_read_from_xml (xmlDocPtr doc);
+xmlDocPtr      wm_list_write_to_xml (void);
 
 extern GList *window_managers;
 

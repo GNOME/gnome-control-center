@@ -1,7 +1,8 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 /* Copyright (C) 1998 Redhat Software Inc.
  * Code available under the Gnu GPL.
- * Authors: Owen Taylor <otaylor@redhat.com>
+ * Authors: Owen Taylor <otaylor@redhat.com>,
+ *          Bradford Hovinen <hovinen@helixcode.com>
  */
 
 #include <sys/types.h>
@@ -405,3 +406,109 @@ wm_list_get_revert (void)
                 return NULL;
 }
 
+static WindowManager *
+wm_read_from_xml (xmlNodePtr wm_node) 
+{
+        xmlNodePtr node;
+        WindowManager *wm;
+        gboolean is_current = FALSE;
+
+        if (strcmp (wm_node->name, "window-manager")) return NULL;
+
+        wm = g_new0 (WindowManager, 1);
+
+        for (node = wm_node->childs; node; node = node->next) {
+                if (!strcmp (node->name, "desktop-entry"))
+                        wm->dentry =
+                                gnome_desktop_entry_load_unconditional
+                                (xmlNodeGetContent (node));
+                else if (!strcmp (node->name, "config-exec"))
+                        wm->config_exec = xmlNodeGetContent (node);
+                else if (!strcmp (node->name, "config-tryexec"))
+                        wm->config_tryexec = xmlNodeGetContent (node);
+                else if (!strcmp (node->name, "session-managed"))
+                        wm->session_managed = TRUE;
+                else if (!strcmp (node->name, "is-user"))
+                        wm->is_user = TRUE;
+                else if (!strcmp (node->name, "is-current"))
+                        is_current = TRUE;  /* FIXME: sanity check */
+        }
+
+        wm_check_present (wm);
+
+        if (wm->dentry == NULL || 
+            (wm->config_exec != NULL && is_blank (wm->config_exec)) ||
+            wm->dentry->name == NULL || wm->dentry->exec == NULL || 
+            !(wm->is_user || wm->is_present)) 
+        {
+                g_free (wm);
+                return NULL;
+        }
+
+        if (is_current) current_wm = wm;
+
+        return wm;
+}
+
+void
+wm_list_read_from_xml (xmlDocPtr doc) 
+{
+        xmlNodePtr root_node, node;
+        WindowManager *wm;
+
+        root_node = xmlDocGetRootElement (doc);
+        if (strcmp (root_node->name, "wm-prefs")) return;
+
+        for (node = root_node; node; node = node->next) {
+                if (!strcmp (node->name, "window-manager")) {
+                        wm = wm_read_from_xml (node);
+                        if (wm) window_managers = 
+                                        g_list_insert_sorted
+                                        (window_managers, wm, wm_compare);
+                }
+        }
+}
+
+static xmlNodePtr
+wm_write_to_xml (WindowManager *wm) 
+{
+        xmlNodePtr node;
+
+        node = xmlNewNode (NULL, "window-manager");
+
+        xmlNewChild (node, NULL, "desktop-entry", wm->dentry->location);
+
+        if (wm->config_exec != NULL)
+                xmlNewChild (node, NULL, "config-exec", wm->config_exec);
+
+        if (wm->session_managed)
+                xmlNewChild (node, NULL, "session-managed", NULL);
+
+        if (wm->is_user)
+                xmlNewChild (node, NULL, "is-user", NULL);
+
+        if (wm == current_wm)
+                xmlNewChild (node, NULL, "is-current", NULL);
+
+        return node;
+}
+
+xmlDocPtr
+wm_list_write_to_xml (void) 
+{
+        xmlDocPtr doc;
+        xmlNodePtr root_node, node;
+        GList *wm_node;
+
+        doc = xmlNewDoc ("1.0");
+        root_node = xmlNewDocNode (doc, NULL, "wm-prefs", NULL);
+
+        for (wm_node = window_managers; wm_node; wm_node = wm_node->next) {
+                node = wm_write_to_xml ((WindowManager *) wm_node->data);
+                if (node) xmlAddChild (root_node, node);
+        }
+
+        xmlDocSetRootElement (doc, root_node);
+
+        return doc;
+}
