@@ -32,12 +32,12 @@
 #include "capplet-util.h"
 #include "gconf-property-editor.h"
 
-#define USE_PROXY_KEY   "/system/gnome-vfs/use-http-proxy"
-#define PROXY_HOST_KEY  "/system/gnome-vfs/http-proxy-host"
-#define PROXY_PORT_KEY  "/system/gnome-vfs/http-proxy-port"
-#define USE_AUTH_KEY    "/system/gnome-vfs/use-http-proxy-authorization"
-#define AUTH_USER_KEY   "/system/gnome-vfs/http-proxy-authorization-user"
-#define AUTH_PASSWD_KEY "/system/gnome-vfs/http-proxy-authorization-password"
+#define USE_PROXY_KEY   "/system/http_proxy/use_http_proxy"
+#define PROXY_HOST_KEY  "/system/http_proxy/host"
+#define PROXY_PORT_KEY  "/system/http_proxy/port"
+#define USE_AUTH_KEY    "/system/http_proxy/use_authentication"
+#define AUTH_USER_KEY   "/system/http_proxy/authentication_user"
+#define AUTH_PASSWD_KEY "/system/http_proxy/authentication_password"
 
 static void
 dialog_response (GtkWidget *widget,
