@@ -95,6 +95,7 @@ static void gnome_wp_xml_load_xml (GnomeWPCapplet * capplet,
   xmlDoc * wplist;
   xmlNode * root, * list, * wpa;
   GdkColor color1, color2;
+  GnomeWPItem * item;
 
   wplist = xmlParseFile (filename);
 
@@ -149,6 +150,14 @@ static void gnome_wp_xml_load_xml (GnomeWPCapplet * capplet,
 	} else {
 	  g_warning ("Unknown Tag: %s\n", wpa->name);
 	}
+      }
+
+      /* Make sure we don't already have this one */
+      item = g_hash_table_lookup (capplet->wphash, wp->filename);
+
+      if (item != NULL) {
+	gnome_wp_item_free (wp);
+	continue;
       }
 
       /* Verify the colors and alloc some GdkColors here */
@@ -240,7 +249,7 @@ void gnome_wp_xml_load_list (GnomeWPCapplet * capplet) {
   for (i = 0; xdgdirs && xdgdirs[i]; i++) {
     gchar * datadir;
 
-    datadir = g_build_filename (xdgdirs[i], "gnome-wallpaper-properties",
+    datadir = g_build_filename (xdgdirs[i], "gnome-background-properties",
 				NULL);
     if (g_file_test (datadir, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_DIR)) {
       gnome_vfs_directory_list_load (&list, datadir,

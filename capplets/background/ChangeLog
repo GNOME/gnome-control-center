@@ -1,3 +1,13 @@
+2004-09-22  Rodney Dawes  <dobey@novell.com>
+
+	* gnome-wp-item.c (gnome_wp_item_free):
+	Check that the colors aren't NULL before calling gdk_color_free
+
+	* gnome-wp-xml.c (gnome_wp_xml_load_xml):
+	Check that the item isn't already listed, before we try to add
+	the wallpaper to the list
+	(gnome_wp_xml_load_list): Load XML files from the correct directory 
+
 2004-08-20  Frederic Crozat  <fcrozat@mandrakesoft.com>
 
 	* gnome-wp-capplet.c: (gnome_wp_icon_theme_changed),

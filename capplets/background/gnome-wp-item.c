@@ -89,8 +89,11 @@ void gnome_wp_item_free (GnomeWPItem * item) {
   g_free (item->pri_color);
   g_free (item->sec_color);
 
-  gdk_color_free (item->pcolor);
-  gdk_color_free (item->scolor);
+  if (item->pcolor != NULL)
+    gdk_color_free (item->pcolor);
+
+  if (item->scolor != NULL)
+    gdk_color_free (item->scolor);
 
   gnome_wp_info_free (item->fileinfo);
   gnome_wp_info_free (item->uriinfo);
