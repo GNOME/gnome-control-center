@@ -505,34 +505,33 @@ location_store (Location *location, gchar *backend_id, FILE *input,
 		StoreType store_type) 
 {
 	xmlDocPtr doc;
-	char *buffer = NULL;
-	int len = 0, bytes_read = 0;
+	char buffer[2048];
+	int t = 0;
+	GString *doc_str;
 
 	g_return_if_fail (location != NULL);
 	g_return_if_fail (IS_LOCATION (location));
 
 	fflush (input);
 
-	do {
-		DEBUG_MSG ("Iteration");
-		if (!len) buffer = g_new (char, 4097);
-		else buffer = g_renew (char, buffer, len + 4097);
-		bytes_read = read (fileno (input), buffer + len, 4096);
-		buffer[len + bytes_read] = '\0';
-		len += 4096;
-	} while (bytes_read == 4096);
+	fcntl (fileno (input), F_SETFL, 0);
 
-	if (len >= 4096 && len > 0) {
-		DEBUG_MSG ("Data found; parsing");
-		doc = xmlParseMemory (buffer, len - 4096 + bytes_read);
-		g_free (buffer);
+	doc_str = g_string_new ("");
 
+	while ((t = read (fileno (input), buffer, sizeof (buffer) - 1)) != 0) {
+		buffer[t] = '\0';
+		g_string_append (doc_str, buffer);
+	}
+
+	if (doc_str->len > 0) {
+		doc = xmlParseDoc (doc_str->str);
 		location_store_xml (location, backend_id, doc, store_type);
-
 		xmlFreeDoc (doc);
 	} else {
-		g_error ("No data to store");
+		g_critical ("No data to store");
 	}
+
+	g_string_free (doc_str, TRUE);
 }
 
 /**
@@ -1486,31 +1485,32 @@ run_backend_proc (gchar *backend_id, gboolean do_get)
 		gchar *path, *path1;
 
 		dup2 (fd[c_fd], c_fd);
+		close (fd[p_fd]);
 		for (i = 3; i < FOPEN_MAX; i++) close (i);
 
-		path = g_getenv ("PATH");
+		if (strstr (backend_id, "-conf"))
+			args[0] = g_concat_dir_and_file (XST_BACKEND_LOCATION,
+							 backend_id);
+		else
+			args[0] = gnome_is_program_in_path (backend_id);
 
-		if (!strstr (path, XST_BACKEND_LOCATION)) {
-			path1 = g_strconcat ("PATH=", XST_BACKEND_LOCATION, 
-					     ":", path, NULL);
-			putenv (path1);
-		}
-
-		args[0] = gnome_is_program_in_path (backend_id);
 		args[1] = do_get ? "--get" : "--set";
 		args[2] = NULL;
 
-		if (!args[0]) {
+		if (args[0] == NULL) {
 			g_warning ("Backend not in path: %s", backend_id);
 			close (c_fd);
 			exit (-1);
 		}
-			
-		execv (args[0], args);
-		exit (-1);
 
+		execv (args[0], args);
+
+		g_warning ("Could not launch backend %s: %s",
+			   args[0], g_strerror (errno));
+		exit (-1);
 		return 0;
 	} else {
+ 		close (fd[c_fd]);
 		return fd[p_fd];
 	}
 }

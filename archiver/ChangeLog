@@ -1,4 +1,23 @@
+2001-06-19  Bradford Hovinen  <hovinen@ximian.com>
+
+	* archive.c (archive_set_current_location): Free the location path
+	as we walk down it.
+	(create_backends_list): Implement
+	(merge_backend_lists): Implement
+	(archive_set_current_location): Call above functions
+	(create_backends_list): Get rid of dummy first element
+	(archive_set_current_location): Don't use backends->next when
+	calling rollback_backends_to
+
+	* location.c (run_backend_proc): Remember to close the writing end
+	(location_store): Change g_error to g_critical
+	(run_backend_proc): Don't getenv PATH
+	(run_backend_proc): Make sure to close other end of pipe in child
+	process
+
 2001-06-18  Bradford Hovinen  <hovinen@ximian.com>
+
+	* location.c (location_store): Use GString API
 
 	* config-log.c (slave_data_cb): Don't use == to test IO conditions
 
