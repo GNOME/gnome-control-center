@@ -10,9 +10,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-control-center 2.3.1\n"
-"POT-Creation-Date: 2003-05-23 16:20+0800\n"
-"PO-Revision-Date: 2003-05-15 09:13+0800\n"
+"Project-Id-Version: gnome-control-center 2.3.2\n"
+"POT-Creation-Date: 2003-05-30 20:49+0800\n"
+"PO-Revision-Date: 2003-05-31 00:13+0800\n"
 "Last-Translator: Abel Cheung <maddog@linux.org.hk>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
 "MIME-Version: 1.0\n"
@@ -42,13 +42,13 @@ msgstr "鍵盤"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:2
 msgid "Set your keyboard accessibility preferences"
-msgstr "修改鍵盤輔助功能設定"
+msgstr "修改無障礙鍵盤功能設定"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.c:60
 msgid ""
 "This system does not seem to have the XKB extension.  The keyboard "
 "accessibility features will not operate without it."
-msgstr "本系統似乎沒有 XKB 擴展功能。沒有了該功能，鍵盤輔助功能將無法使用。"
+msgstr "本系統似乎沒有 XKB 擴展功能。沒有了該功能，無障礙鍵盤功能將無法使用。"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:1
@@ -62,7 +62,7 @@ msgstr "*"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
 msgid "<b>Enable Bo_unce Keys</b>"
-msgstr "<b>啟用篩選鍵<b>(_U)"
+msgstr "<b>啟用篩選鍵</b>(_U)"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
 msgid "<b>Enable Slo_w Keys</b>"
@@ -78,7 +78,7 @@ msgstr "<b>啟用自動重複按鍵</b>(_R)"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
 msgid "<b>Enable _Sticky Keys</b>"
-msgstr ""
+msgstr "<b>啟用黏性特殊鍵</b>(_S)"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
 msgid "<b>Features</b>"
@@ -106,7 +106,7 @@ msgstr "當開啟或關閉功能時發出聲響(_F)"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:13
 msgid "Beep when _modifier is pressed"
-msgstr "當按下輔助按鍵[例如 Alt、Ctrl]時發出聲響(_M)"
+msgstr "當按下特殊按鍵[例如 Alt、Ctrl]時發出聲響(_M)"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
 msgid "Beep when an LED is turned on and two beeps when one is turned off."
@@ -148,7 +148,7 @@ msgstr "在指定的時間內，如果重複按下同一個鍵，則忽略第一
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:23
 msgid "Keyboard Accessibility Preferences (AccessX)"
-msgstr "鍵盤輔助功能設定 (AccessX)"
+msgstr "無障礙鍵盤功能設定 (AccessX)"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
 msgid "Ma_ximum pointer speed:"
@@ -174,7 +174,7 @@ msgid ""
 "Perform multiple simultaneous key press operations by pressing modifier keys "
 "in sequence."
 msgstr ""
-"順序按下個別的輔助按鍵 (例如 Alt、Ctrl) 的效果等於同時按下多個輔助按鍵。"
+"順序按下個別的特殊按鍵 (例如 Alt、Ctrl) 的效果等於同時按下多個特殊按鍵。"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:16
@@ -195,11 +195,11 @@ msgstr "指定時間內沒有使用本功能則停止功能(_D)："
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
 msgid "_Enable keyboard accessibility features"
-msgstr "啟用鍵盤輔助功能(_E)"
+msgstr "啟用無障礙鍵盤功能(_E)"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
 msgid "_Import Feature Settings..."
-msgstr "匯入輔助功能的設定(_I)..."
+msgstr "匯入無障礙環境設定(_I)..."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:35
 msgid "_Only accept keys held for:"
@@ -1352,7 +1352,7 @@ msgstr "捷徑鍵"
 #: capplets/keybindings/eggcellrendererkeys.c:170
 #: capplets/keybindings/eggcellrendererkeys.c:171
 msgid "Accelerator modifiers"
-msgstr "捷徑鍵的輔助按鍵 (例如 Alt、Ctrl)"
+msgstr "捷徑鍵的特殊按鍵 (例如 Alt、Ctrl)"
 
 #: capplets/keybindings/eggcellrendererkeys.c:180
 msgid "Accel Mode"
@@ -1449,7 +1449,7 @@ msgstr "啟動鍵盤 capplet 時發生錯誤：%s"
 
 #: capplets/keyboard/gnome-keyboard-properties.c:269
 msgid "_Accessibility"
-msgstr "輔助功能(_A)"
+msgstr "無障礙環境(_A)"
 
 #: capplets/keyboard/gnome-keyboard-properties.c:286
 #: capplets/keyboard/gnome-keyboard-properties.c:288
@@ -1513,7 +1513,7 @@ msgstr "按鍵自動重複"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:18
 msgid "_Accessibility..."
-msgstr "輔助功能(_A)..."
+msgstr "無障礙環境(_A)..."
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:19
 msgid "_Blinks in text boxes and fields"
@@ -1621,44 +1621,39 @@ msgstr ""
 "比正常的白色鼠標較大"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:1
-#, fuzzy
 msgid "    "
-msgstr "      "
+msgstr "    "
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:2
-#, fuzzy
 msgid "<b>Cursor Theme</b>"
-msgstr "鼠標主題"
+msgstr "<b>鼠標主題</b>"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:3
 msgid "<b>Double-Click Timeout </b>"
-msgstr ""
+msgstr "<b>雙擊分辨時間</b>"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:4
-#, fuzzy
 msgid "<b>Drag and Drop</b>"
-msgstr "拖曳"
+msgstr "<b>拖曳</b>"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:5
-#, fuzzy
 msgid "<b>Locate Pointer</b>"
-msgstr "顯示鼠標位置"
+msgstr "<b>顯示鼠標位置</b>"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:6
-#, fuzzy
 msgid "<b>Mouse Orientation</b>"
-msgstr "左右手模式"
+msgstr "<b>左右手模式</b>"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:7
-#, fuzzy
 msgid "<b>Speed</b>"
-msgstr "<b>功能</b>"
+msgstr "<b>速度</b>"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid ""
 "<i><small><b>Note:</b> Changes to this setting will not take effect until "
 "you next log in.</small></i>"
 msgstr ""
+"<i><small><b>注意：</b>更改本設定後，需要等下次登入方會生效。</small></i>"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:9
 msgid "<i>Fast</i>"
@@ -1689,9 +1684,8 @@ msgid "Buttons"
 msgstr "按鈕"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:16
-#, fuzzy
 msgid "Cursor _themes:"
-msgstr "鼠標主題"
+msgstr "鼠標主題(_T)："
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:17
 msgid "Cursors"
@@ -1699,7 +1693,7 @@ msgstr "鼠標"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:18
 msgid "Highlight the _pointer when you press Ctrl"
-msgstr ""
+msgstr "當按下 Ctrl 時加強顯示鼠標(_P)"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:19
 msgid "Motion"
@@ -1925,20 +1919,24 @@ msgid "Theme"
 msgstr "佈景主題"
 
 #: capplets/theme-switcher/theme-install.glade.h:2
-msgid "Install new theme"
-msgstr "安裝新的佈景主題"
+msgid "<span size=\"larger\" weight=\"bold\">Install a Theme</span>"
+msgstr "<span size=\"larger\" weight=\"bold\">安裝佈景主題</span>"
 
 #: capplets/theme-switcher/theme-install.glade.h:3
+msgid "Theme Installation"
+msgstr "安裝佈景主題"
+
+#: capplets/theme-switcher/theme-install.glade.h:4
 msgid "_Install"
 msgstr "安裝(_I)"
 
-#: capplets/theme-switcher/theme-install.glade.h:4
-msgid "_Location of new theme:"
-msgstr "新佈景主題的位置(_L)："
+#: capplets/theme-switcher/theme-install.glade.h:5
+msgid "_Location:"
+msgstr "位置(_L)："
 
 #: capplets/theme-switcher/theme-properties.glade.h:2
-msgid "<span size=\"larger\" weight=\"bold\">Save theme to disk</span>"
-msgstr "<span size=\"larger\" weight=\"bold\">將佈景主題儲存至磁碟</span>"
+msgid "<span size=\"larger\" weight=\"bold\">Save Theme to Disk</span>"
+msgstr "<span size=\"larger\" weight=\"bold\">儲存佈景主題</span>"
 
 #: capplets/theme-switcher/theme-properties.glade.h:3
 msgid "Apply _Background"
@@ -1961,68 +1959,64 @@ msgid "New themes can also be installed by dragging them into the window."
 msgstr "可以將佈景主題檔案拖曳至本視窗來安裝佈景主題。"
 
 #: capplets/theme-switcher/theme-properties.glade.h:8
-msgid "Short _Description:"
-msgstr "簡短描述(_D)："
+msgid "Save Theme"
+msgstr "儲存佈景主題"
 
 #: capplets/theme-switcher/theme-properties.glade.h:9
-msgid "Theme Details"
-msgstr "佈景主題細節"
+msgid "Short _description:"
+msgstr "簡短說明(_D)："
 
 #: capplets/theme-switcher/theme-properties.glade.h:10
+msgid "Theme Details"
+msgstr "佈景主題詳細設定"
+
+#: capplets/theme-switcher/theme-properties.glade.h:11
 msgid "Theme Preferences"
 msgstr "佈景主題偏好設定"
 
-#: capplets/theme-switcher/theme-properties.glade.h:11
-msgid ""
-"This theme suggests a\n"
-"background:"
-msgstr ""
-"本佈景主題建議使用\n"
-"指定的背景："
+#: capplets/theme-switcher/theme-properties.glade.h:12
+msgid "Theme _Details"
+msgstr "佈景主題詳細設定(_D)"
 
 #: capplets/theme-switcher/theme-properties.glade.h:13
-msgid ""
-"This theme suggests a\n"
-"font and background:"
-msgstr ""
-"本佈景主題建議使用\n"
-"指定的字型及背景："
+msgid "This theme does not suggest any particular font or background."
+msgstr "本佈景主題不建議使用任何特定的字型及背景。"
+
+#: capplets/theme-switcher/theme-properties.glade.h:14
+msgid "This theme suggests a background:"
+msgstr "本佈景主題建議使用指定的背景："
 
 #: capplets/theme-switcher/theme-properties.glade.h:15
-msgid ""
-"This theme suggests a\n"
-"font:"
-msgstr ""
-"本佈景主題建議使用\n"
-"指定的字型："
+msgid "This theme suggests a font and a background:"
+msgstr "本佈景主題建議使用指定的字型及背景："
+
+#: capplets/theme-switcher/theme-properties.glade.h:16
+msgid "This theme suggests a font:"
+msgstr "本佈景主題建議使用指定的字型："
 
 #: capplets/theme-switcher/theme-properties.glade.h:17
 msgid "Window Border"
 msgstr "視窗邊框"
 
 #: capplets/theme-switcher/theme-properties.glade.h:18
-msgid "_Details..."
-msgstr "細節(_D)..."
+msgid "_Go To Theme Folder"
+msgstr "前往佈景主題資料夾(_G)"
 
 #: capplets/theme-switcher/theme-properties.glade.h:19
-msgid "_Go to theme folder"
-msgstr "開啟佈景主題資料夾(_G)"
+msgid "_Install Theme..."
+msgstr "安裝佈景主題(_I)..."
 
 #: capplets/theme-switcher/theme-properties.glade.h:20
-msgid "_Install theme..."
-msgstr "安裝新的佈景主題(_I)..."
+msgid "_Save Theme..."
+msgstr "儲存佈景主題(_S)..."
 
 #: capplets/theme-switcher/theme-properties.glade.h:21
-msgid "_Save theme"
-msgstr "儲存佈景主題(_S)"
-
-#: capplets/theme-switcher/theme-properties.glade.h:22
 msgid "_Theme name:"
 msgstr "儲存佈景名稱(_T)："
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
-msgstr "自行指定應用程式中工具列及選單列的外觀。"
+msgstr "自行指定應用程式中工具列及選單列的外觀"
 
 #: capplets/ui-properties/behavior.desktop.in.h:2
 msgid "Menus & Toolbars"
@@ -2186,7 +2180,7 @@ msgstr "視窗偏好設定"
 
 #: capplets/windows/gnome-window-properties.glade.h:3
 msgid "_Double-click titlebar to perform this action:"
-msgstr "_Double-click 視窗標題後會進行指定的動作："
+msgstr "雙擊視窗標題後會進行指定的動作(_D)："
 
 #: capplets/windows/gnome-window-properties.glade.h:4
 msgid "_Interval before raising:"
@@ -2722,6 +2716,12 @@ msgstr "是否為已安裝的佈景主題製作縮圖"
 msgid "Whether to thumbnail themes"
 msgstr "是否為佈景主題製作縮圖"
 
+#~ msgid "Install new theme"
+#~ msgstr "安裝新的佈景主題"
+
+#~ msgid "_Location of new theme:"
+#~ msgstr "新佈景主題的位置(_L)："
+
 #~ msgid ""
 #~ "<b>Note:</b> You will need to logout and log back in for this setting to "
 #~ "take effect."
@@ -2731,9 +2731,6 @@ msgstr "是否為佈景主題製作縮圖"
 #~ "Animates a quick marker around the cursor when the Control key has been "
 #~ "pressed and released."
 #~ msgstr "當按下及放開 Control 鍵時，在鼠標周圍顯示標記來確認鼠標位置。"
-
-#~ msgid "Double-click Delay"
-#~ msgstr "Double-click 延遲時間"
 
 #~ msgid ""
 #~ "Left-handed mouse mode switches the left and right buttons on the mouse."
@@ -2763,9 +2760,6 @@ msgstr "是否為佈景主題製作縮圖"
 
 #~ msgid "_Repeat Keys"
 #~ msgstr "按鍵自動重複(_R)"
-
-#~ msgid "_Location:"
-#~ msgstr "位置(_L)："
 
 #~ msgid "Titlebar Font"
 #~ msgstr "視窗標題字型"
@@ -2974,12 +2968,6 @@ msgstr "是否為佈景主題製作縮圖"
 #~ msgid "Bottom"
 #~ msgstr "底部"
 
-#~ msgid "Dialog Buttons"
-#~ msgstr "對話方塊按鈕"
-
-#~ msgid "Dialog buttons have icons"
-#~ msgstr "對話方塊按鈕具有圖示"
-
 #~ msgid "Dialogs"
 #~ msgstr "對話方塊"
 
@@ -3171,9 +3159,6 @@ msgstr "是否為佈景主題製作縮圖"
 
 #~ msgid "Auto-repeat"
 #~ msgstr "鍵盤自動重複"
-
-#~ msgid "%s Settings..."
-#~ msgstr "%s 設定..."
 
 #~ msgid "Toolbar Options"
 #~ msgstr "工具列選項"
