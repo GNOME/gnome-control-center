@@ -738,7 +738,7 @@ load_log_entry (ConfigLog *config_log,
 	g_return_val_if_fail (config_log != NULL, NULL);
 	g_return_val_if_fail (IS_CONFIG_LOG (config_log), NULL);
 
-	if (feof (config_log->p->file_stream))
+	if (config_log->p->file_stream == NULL || feof (config_log->p->file_stream))
 		return NULL;
 
 	if (fgets (buffer, 1024, config_log->p->file_stream) == NULL)
