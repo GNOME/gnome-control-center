@@ -278,10 +278,23 @@ AC_SUBST(ESD_SERVER)
 AC_PATH_PROG(GDK_PIXBUF_CSOURCE, gdk-pixbuf-csource, no)
 
 if test x"$GDK_PIXBUF_CSOURCE" = xno; then
-  AC_MSG_ERROR([gdk-pixbuf-csource executable not found in your path - should be installed with GTK])
+  AC_PATH_PROG(GDK_PIXBUF_CSOURCE_32, gdk-pixbuf-csource-32, no)
+  if test x"$GDK_PIXBUF_CSOURCE_32" = xno; then
+    AC_MSG_ERROR([gdk-pixbuf-csource executable not found in your path - should be installed with GTK])
+  else
+    GDK_PIXBUF_CSOURCE=$GDK_PIXBUF_CSOURCE_32
+  fi
 fi 
   
 AC_SUBST(GDK_PIXBUF_CSOURCE)
+
+AC_PATH_PROG(GLIB_GENMARSHAL, glib-genmarshal, no)
+
+if text x"$GLIB_GENMARSHAL" = xno; then
+  AC_MSG_ERROR([glib-genmarshal executable not found in your path - should be installed with glib])
+fi
+
+AC_SUBST(GLIB_GENMARSHAL)
 
 dnl ==============================================
 dnl Special GConf section 
