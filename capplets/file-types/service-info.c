@@ -29,6 +29,8 @@
 #include <gconf/gconf-client.h>
 #include <libgnomevfs/gnome-vfs-application-registry.h>
 
+#include "libuuid/uuid.h"
+
 #include "service-info.h"
 #include "mime-types-model.h"
 
@@ -119,15 +121,15 @@ service_info_load_all (ServiceInfo *info)
 	info->run_program = TRUE;
 #endif
 
-	if (info->custom_line == NULL)
-		info->custom_line = get_string (info, "command");
-
-	info->need_terminal = get_bool (info, "need-terminal");
-
 	if (info->app == NULL) {
 		id = get_string (info, "command-id");
 		if (id != NULL)
 			info->app = gnome_vfs_mime_application_new_from_id (id);
+		else {
+			info->app = g_new0 (GnomeVFSMimeApplication, 1);
+			info->app->command = get_string (info, "command");
+			info->app->requires_terminal = get_bool (info, "needs-terminal");
+		}
 		g_free (id);
 	}
 }
@@ -151,21 +153,61 @@ service_info_get_description (ServiceInfo *info)
 	return info->description;
 }
 
+gboolean
+service_info_using_custom_app (const ServiceInfo *info)
+{
+	gchar *tmp;
+	gboolean ret;
+
+	if (info->app->name == NULL)
+		return TRUE;
+
+	tmp = g_strdup_printf ("Custom %s", info->protocol);
+	ret = !strcmp (tmp, info->app->name);
+	g_free (tmp);
+
+	return ret;
+}
+
 void
 service_info_save (const ServiceInfo *info)
 {
+	gchar  *tmp;
+	uuid_t  app_uuid;
+	gchar   app_uuid_str[100];
+
 	set_string (info, "description", info->description);
 
-	if (info->app == NULL) {
-		set_string (info, "command", info->custom_line);
-		set_string (info, "command-id", "");
-	} else {
+	if (info->app != NULL && info->app->command != NULL && *info->app->command != '\0') {
+		tmp = g_strdup_printf ("Custom %s", info->protocol);
+
+		if (info->app->name == NULL)
+			info->app->name = tmp;
+
+		if (info->app->id == NULL) {
+			uuid_generate (app_uuid);
+			uuid_unparse (app_uuid, app_uuid_str);
+
+			info->app->id = g_strdup (app_uuid_str);
+
+			gnome_vfs_application_registry_save_mime_application (info->app);
+			gnome_vfs_application_registry_sync ();
+		}
+		else if (!strcmp (tmp, info->app->name)) {
+			gnome_vfs_application_registry_set_value (info->app->id, "command",
+								  info->app->command);
+			gnome_vfs_application_registry_set_bool_value (info->app->id, "requires_terminal",
+								       info->app->requires_terminal);
+		}
+
 		set_string (info, "command", info->app->command);
 		set_string (info, "command-id", info->app->id);
+	} else {
+		set_string (info, "command", NULL);
+		set_string (info, "command-id", NULL);
 	}
 
 	set_bool (info, "type", info->run_program);
-	set_bool (info, "need-terminal", info->need_terminal);
 }
 
 void
@@ -200,7 +242,6 @@ service_info_free (ServiceInfo *info)
 	g_free (info->protocol);
 	g_free (info->description);
 	gnome_vfs_mime_application_free (info->app);
-	g_free (info->custom_line);
 	g_free (info);
 }
 

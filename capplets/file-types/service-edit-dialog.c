@@ -339,9 +339,6 @@ fill_dialog (ServiceEditDialog *dialog)
 	if (!dialog->p->info->run_program && strcmp (dialog->p->info->protocol, "ftp"))
 		gtk_widget_set_sensitive (WID ("program_frame"), FALSE);
 
-	if (dialog->p->info->custom_line != NULL)
-		gnome_file_entry_set_filename (GNOME_FILE_ENTRY (WID ("custom_program_entry")), dialog->p->info->custom_line);
-
 	populate_app_list (dialog);
 }
 
@@ -367,6 +364,7 @@ populate_app_list (ServiceEditDialog *dialog)
 	GtkOptionMenu *option_menu;
 	GtkMenu       *menu;
 	GtkWidget     *item;
+	gint           found_idx = -1, i = 0;
 
 	const GList   *service_apps;
 	GnomeVFSMimeApplication *app;
@@ -380,16 +378,35 @@ populate_app_list (ServiceEditDialog *dialog)
 
 	while (service_apps != NULL) {
 		app = service_apps->data;
+
+		if (dialog->p->info->app != NULL &&
+		    dialog->p->info->app->id != NULL &&
+		    !strcmp (dialog->p->info->app->id, app->id))
+			found_idx = i;
+
 		item = gtk_menu_item_new_with_label (app->name);
-		g_object_set_data (G_OBJECT (item), "app", app);
+		g_object_set_data_full (G_OBJECT (item), "app", app, (GDestroyNotify) gnome_vfs_mime_application_free);
 		gtk_widget_show (item);
 		gtk_menu_append (menu, item);
+
 		service_apps = service_apps->next;
+		i++;
 	}
 
 	item = gtk_menu_item_new_with_label (_("Custom"));
 	gtk_widget_show (item);
 	gtk_menu_append (menu, item);
+
+	if (found_idx < 0) {
+		if (dialog->p->info->app != NULL) {
+			if (dialog->p->info->app->command != NULL)
+				gnome_file_entry_set_filename (GNOME_FILE_ENTRY (WID ("custom_program_entry")),
+							       dialog->p->info->app->command);
+
+			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("needs_terminal_toggle")),
+						      dialog->p->info->app->requires_terminal);
+		}
+	}
 
 	gtk_option_menu_set_menu (option_menu, GTK_WIDGET (menu));
 }
@@ -401,6 +418,8 @@ store_data (ServiceEditDialog *dialog)
 	GtkMenuShell  *menu_shell;
 	GObject       *menu_item;
 	gint           idx;
+
+	GnomeVFSMimeApplication *app;
 
 	GtkTreePath   *path;
 	GtkTreeIter    iter;
@@ -414,18 +433,29 @@ store_data (ServiceEditDialog *dialog)
 	dialog->p->info->run_program =
 		gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (WID ("run_program_toggle")));
 
-	g_free (dialog->p->info->custom_line);
-	dialog->p->info->custom_line =
-		g_strdup (gnome_file_entry_get_full_path (GNOME_FILE_ENTRY (WID ("custom_program_entry")), FALSE));
-
 	option_menu = GTK_OPTION_MENU (WID ("program_select"));
 	menu_shell = GTK_MENU_SHELL (gtk_option_menu_get_menu (option_menu));
 	idx = gtk_option_menu_get_history (option_menu);
 	menu_item = (g_list_nth (menu_shell->children, idx))->data;
 
-	gnome_vfs_mime_application_free (dialog->p->info->app);
-	dialog->p->info->app =
-		gnome_vfs_mime_application_copy (g_object_get_data (menu_item, "app"));
+	app = g_object_get_data (menu_item, "app");
+	if (app != NULL) {
+		gnome_vfs_mime_application_free (dialog->p->info->app);
+		dialog->p->info->app = gnome_vfs_mime_application_copy (app);
+	} else {
+		if (!service_info_using_custom_app (dialog->p->info)) {
+			gnome_vfs_mime_application_free (dialog->p->info->app);
+			dialog->p->info->app = g_new0 (GnomeVFSMimeApplication, 1);
+		}
+
+		g_free (dialog->p->info->app->command);
+		dialog->p->info->app->command
+			= g_strdup (gtk_entry_get_text (GTK_ENTRY
+							(gnome_file_entry_gtk_entry
+							 (GNOME_FILE_ENTRY (WID ("custom_program_entry"))))));
+		dialog->p->info->app->requires_terminal
+			= gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (WID ("needs_terminal_toggle")));
+	}
 
 	model_entry_append_to_dirty_list (MODEL_ENTRY (dialog->p->info));
 

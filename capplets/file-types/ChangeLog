@@ -1,5 +1,16 @@
 2002-01-28  Bradford Hovinen  <hovinen@ximian.com>
 
+	* service-edit-dialog.c (populate_app_list): Set custom program
+	entry and needs terminal here
+
+	* service-info.c (service_info_using_custom_app): Implement
+
+	* service-edit-dialog.c (populate_app_list): Add destroy notify
+	for app
+
+	* service-info.[ch]: Eliminate custom_line and needs_terminal; use
+	app for that
+
 	* mime-edit-dialog.c (populate_application_list): Use
 	gnome_vfs_application_registry_get_applications
 

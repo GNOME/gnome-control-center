@@ -45,8 +45,6 @@ struct _ServiceInfo {
 	gboolean                 run_program;
 
 	GnomeVFSMimeApplication *app;
-	gchar                   *custom_line;
-	gboolean                 need_terminal;
 };
 
 void         load_all_services            (GtkTreeModel      *model);
@@ -55,6 +53,7 @@ ServiceInfo *service_info_new             (const gchar       *protocol,
 					   GtkTreeModel      *model);
 void         service_info_load_all        (ServiceInfo       *info);
 const gchar *service_info_get_description (ServiceInfo       *info);
+gboolean     service_info_using_custom_app (const ServiceInfo *info);
 void         service_info_save            (const ServiceInfo *info);
 void         service_info_delete          (const ServiceInfo *info);
 void         service_info_free            (ServiceInfo       *info);
