@@ -83,7 +83,10 @@ location_client_load_rollback_data (ConfigArchiver_Location  location,
 
 	if (date != NULL) {
 		date_c = dup_date (date);
-		time_g = mktime (date_c) + date_c->tm_gmtoff;
+		time_g = mktime (date_c);
+#ifdef __USE_BSD
+		time_g += date_c->tm_gmtoff;
+#endif /* __USE_BSD */
 		if (date_c->tm_isdst) time_g -= 3600;
 		g_free (date_c);
 	} else {

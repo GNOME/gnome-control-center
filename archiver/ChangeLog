@@ -1,3 +1,8 @@
+2001-10-05  Shaun Merrigan  <shaun.merrigan@sun.com>
+
+	* archiver-client.c (location_client_load_rollback_data):
+	Only use tm_gmtoffm if __USE_BSD is defined.
+
 2001-09-28  Bradford Hovinen  <hovinen@ximian.com>
 
 	* config-log.c (parse_line): Only set tm_gmtoff and tm_zone fields
