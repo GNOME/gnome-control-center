@@ -73,6 +73,7 @@ void build_capplet(void) {
 
   capplet = capplet_widget_new();
   vbox = gtk_vbox_new(FALSE, 5);
+  gtk_widget_set_usize (vbox, 400, 250);
   gtk_container_add(GTK_CONTAINER(capplet), vbox);
   gtk_widget_show(vbox);
 
