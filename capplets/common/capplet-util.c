@@ -352,16 +352,22 @@ capplet_help (GtkWindow *parent, char const *helpfile, char const *section)
 void
 capplet_set_icon (GtkWidget *window, char const *icon_file_name)
 {
-	char *path = gnome_program_locate_file (NULL,
-		GNOME_FILE_DOMAIN_APP_PIXMAP,
-		icon_file_name, TRUE, NULL);
+	char *path;
+	GdkPixbuf *icon_pixbuf;
 
-	if (path != NULL) {
-		GdkPixbuf *icon_pixbuf = gdk_pixbuf_new_from_file (path, NULL);
-		if (icon_pixbuf != NULL) {
-			gtk_window_set_icon (GTK_WINDOW (window), icon_pixbuf);
-			g_object_unref (icon_pixbuf);
+	path = g_strconcat (GNOMECC_DATA_DIR "/icons/", icon_file_name, NULL);
+	icon_pixbuf = gdk_pixbuf_new_from_file (path, NULL);
+	g_free (path);
+	if (icon_pixbuf == NULL) {
+		path = gnome_pixmap_file (icon_file_name);
+		if (path != NULL) {
+			icon_pixbuf = gdk_pixbuf_new_from_file (path, NULL);
+			g_free (path);
 		}
-		g_free (path);
+	}
+
+	if (icon_pixbuf != NULL) {
+		gtk_window_set_icon (GTK_WINDOW (window), icon_pixbuf);
+		g_object_unref (icon_pixbuf);
 	}
 }

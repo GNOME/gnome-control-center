@@ -1504,7 +1504,7 @@ peditor_image_set_filename (GConfPropertyEditor *peditor, const gchar *filename)
 		{	
 			if (GTK_IS_IMAGE (l->data))
 				image = GTK_IMAGE (l->data);
-			else if (GTK_IS_LABEL (l->data))
+			else if (GTK_IS_LABEL (l->data) && message == NULL)
 			{
 				gchar *base = g_path_get_basename (filename);
 				gtk_label_set_text (GTK_LABEL (l->data), base);

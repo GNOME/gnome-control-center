@@ -306,7 +306,7 @@ egg_cell_renderer_keys_get_size (GtkCellRenderer *cell,
   GtkRequisition requisition;
 
   if (keys->sizing_label == NULL)
-    keys->sizing_label = gtk_label_new (_("Type a new accelerator, or press Backspace to clear"));
+    keys->sizing_label = gtk_label_new (_("Type a new shortcut"));
 
   gtk_widget_size_request (keys->sizing_label, &requisition);
   (* GTK_CELL_RENDERER_CLASS (parent_class)->get_size) (cell, widget, cell_area, x_offset, y_offset, width, height);
@@ -503,10 +503,10 @@ egg_cell_renderer_keys_start_editing (GtkCellRenderer      *cell,
   
   if (keys->accel_key != 0)
     gtk_label_set_text (GTK_LABEL (label),
-			_("Type a new accelerator, or press Backspace to clear"));
+			_("Type a new shortcut"));
   else
     gtk_label_set_text (GTK_LABEL (label),
-                        _("Type a new accelerator"));
+                        _("Type a new shortcut"));
 
   gtk_container_add (GTK_CONTAINER (eventbox), label);
   

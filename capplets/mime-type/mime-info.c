@@ -325,7 +325,7 @@ init_mime_info (void)
 	initial_specific_types = g_hash_table_new (g_str_hash, g_str_equal);
 	initial_generic_types  = g_hash_table_new (g_str_hash, g_str_equal);
 
-	filename = g_concat_dir_and_file (gnome_util_user_home (), "/.gnome/mime-info/user.keys");
+	filename = g_build_filename (gnome_util_user_home (), "/.gnome/mime-info/user.keys", NULL);
 	load_mime_type_info_from (filename);
 	g_free (filename);
 }
@@ -420,7 +420,7 @@ write_keys (GHashTable *spec_hash, GHashTable *generic_hash)
 	FILE *file;
 	GtkWidget *error_box;
 
-	dirname = g_concat_dir_and_file (gnome_util_user_home (), ".gnome/mime-info");
+	dirname = g_build_filename (gnome_util_user_home (), ".gnome/mime-info", NULL);
 	if ((stat (dirname, &s) < 0) || !(S_ISDIR (s.st_mode))){
 		if (errno == ENOENT) {
 			if (mkdir (dirname, S_IRWXU) < 0) {
@@ -436,7 +436,7 @@ write_keys (GHashTable *spec_hash, GHashTable *generic_hash)
 			return;
 		}
 	}
-	filename = g_concat_dir_and_file (dirname, "user.keys");
+	filename = g_build_filename (dirname, "user.keys", NULL);
         
         remove (filename);
 	file = fopen (filename, "w");
@@ -479,7 +479,7 @@ discard_key_info (void)
 	specific_types = g_hash_table_new (g_str_hash, g_str_equal);
 	generic_types  = g_hash_table_new (g_str_hash, g_str_equal);
 
-	filename = g_concat_dir_and_file (gnome_util_user_home (), "/.gnome/mime-info/user.keys");
+	filename = g_build_filename (gnome_util_user_home (), "/.gnome/mime-info/user.keys", NULL);
 	load_mime_type_info_from (filename);
         reread_list ();
 	g_free (filename);

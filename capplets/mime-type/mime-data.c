@@ -223,7 +223,7 @@ mime_load_from_dir (const char *mime_info_dir, gboolean system_dir)
 	if (!dir)
 		return;
 	if (system_dir) {
-		filename = g_concat_dir_and_file (mime_info_dir, "gnome.mime");
+		filename = g_build_filename (mime_info_dir, "gnome.mime", NULL);
 		mime_fill_from_file (filename, FALSE);
 		g_free (filename);
 	}
@@ -241,12 +241,12 @@ mime_load_from_dir (const char *mime_info_dir, gboolean system_dir)
 		if (!system_dir && !strcmp (dent->d_name, "user.mime"))
 			continue;
 		
-		filename = g_concat_dir_and_file (mime_info_dir, dent->d_name);
+		filename = g_build_filename (mime_info_dir, dent->d_name, NULL);
 		mime_fill_from_file (filename, FALSE);
 		g_free (filename);
 	}
 	if (!system_dir) {
-		filename = g_concat_dir_and_file (mime_info_dir, "user.mime");
+		filename = g_build_filename (mime_info_dir, "user.mime", NULL);
 		mime_fill_from_file (filename, TRUE);
 		g_free (filename);
 	}
@@ -473,7 +473,7 @@ init_mime_type (void)
 	mime_load_from_dir (mime_info_dir, TRUE);
 	g_free (mime_info_dir);
 
-	mime_info_dir = g_concat_dir_and_file (gnome_util_user_home (), ".gnome/mime-info");
+	mime_info_dir = g_build_filename (gnome_util_user_home (), ".gnome/mime-info", NULL);
 	mime_load_from_dir (mime_info_dir, FALSE);
 	g_free (mime_info_dir);
         finalize_user_mime ();
@@ -581,7 +581,7 @@ write_mime (GHashTable *hash)
 	FILE *file;
 	GtkWidget *error_box;
 
-	dirname = g_concat_dir_and_file (gnome_util_user_home (), ".gnome/mime-info");
+	dirname = g_build_filename (gnome_util_user_home (), ".gnome/mime-info", NULL);
 	if ((stat (dirname, &s) < 0) || !(S_ISDIR (s.st_mode))){
 		if (errno == ENOENT) {
 			if (mkdir (dirname, S_IRWXU) < 0) {
@@ -597,7 +597,7 @@ write_mime (GHashTable *hash)
 			return;
 		}
 	}
-	filename = g_concat_dir_and_file (dirname, "user.mime");
+	filename = g_build_filename (dirname, "user.mime", NULL);
         
         remove (filename);
 	file = fopen (filename, "w");
@@ -646,7 +646,7 @@ discard_mime_info ()
 	user_mime_types = g_hash_table_new (g_str_hash, g_str_equal);
         initial_user_mime_types = g_hash_table_new (g_str_hash, g_str_equal);
         
-	filename = g_concat_dir_and_file (gnome_util_user_home (), "/.gnome/mime-info/user.keys");
+	filename = g_build_filename (gnome_util_user_home (), "/.gnome/mime-info/user.keys", NULL);
 	mime_fill_from_file (filename, TRUE);
         finalize_user_mime ();
         reread_list ();

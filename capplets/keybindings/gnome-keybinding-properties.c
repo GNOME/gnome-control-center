@@ -136,8 +136,16 @@ make_key_theme_menu_item (const gchar *key_theme)
 {
   GtkWidget *retval;
 
-  retval = gtk_menu_item_new_with_label (key_theme);
-  g_object_set_data_full (G_OBJECT (retval), LABEL_DATA, g_strdup (key_theme), g_free);
+  if (!strcmp (key_theme, "Default"))
+    {
+      retval = gtk_menu_item_new_with_label ("GNOME Default");
+      g_object_set_data_full (G_OBJECT (retval), LABEL_DATA, g_strdup ("Default"), g_free);
+    }
+  else
+    {
+      retval = gtk_menu_item_new_with_label (key_theme);
+      g_object_set_data_full (G_OBJECT (retval), LABEL_DATA, g_strdup (key_theme), g_free);
+    }
   g_signal_connect (G_OBJECT (retval), "activate", G_CALLBACK (menu_item_activate), NULL);
   gtk_widget_show (retval);
 
@@ -438,15 +446,9 @@ append_keys_to_tree (GladeXML           *dialog,
     }
 
   if (i == 0)
-    {
       gtk_widget_hide (WID ("shortcuts_vbox"));
-      gtk_widget_hide (WID ("shortcuts_hbox"));
-    }
   else
-    {
       gtk_widget_show (WID ("shortcuts_vbox"));
-      gtk_widget_show (WID ("shortcuts_hbox"));
-    }
 }
 
 static void
@@ -594,10 +596,10 @@ theme_changed_func (gpointer  uri,
 
       menu_item = make_key_theme_menu_item (info->name);
       if (!strcmp (info->name, "Default"))
-	/* Put default first, always */
-	gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), menu_item);
+      /* Put default first, always */
+        gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), menu_item);
       else
-	gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
+        gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
     }
 
   gtk_widget_show (menu);
@@ -682,6 +684,7 @@ setup_dialog (GladeXML *dialog)
   GConfClient *client;
   GList *key_theme_list;
   GtkCellRenderer *renderer;
+  GtkTreeViewColumn *column;
   GtkWidget *widget;
   gboolean found_keys = FALSE;
   GList *list;
@@ -710,7 +713,6 @@ setup_dialog (GladeXML *dialog)
       gtk_dialog_run (GTK_DIALOG (msg_dialog));
       gtk_widget_destroy (msg_dialog);
 
-      gtk_widget_hide (WID ("shortcut_hbox"));
     }
   else
     {
@@ -728,12 +730,14 @@ setup_dialog (GladeXML *dialog)
 		    "button_press_event",
 		    G_CALLBACK (start_editing_cb), dialog),
 		    
-  gtk_tree_view_insert_column_with_attributes (GTK_TREE_VIEW (WID ("shortcut_treeview")),
-					       -1,
-					       _("Action"),
-					       gtk_cell_renderer_text_new (),
-					       "text", DESCRIPTION_COLUMN,
-					       NULL);
+  column = gtk_tree_view_column_new_with_attributes (_("Action"),
+						     gtk_cell_renderer_text_new (),
+						     "text", DESCRIPTION_COLUMN,
+						     NULL);
+  gtk_tree_view_column_set_resizable (column, TRUE);
+
+  gtk_tree_view_append_column (GTK_TREE_VIEW (WID ("shortcut_treeview")), column);
+
   renderer = (GtkCellRenderer *) g_object_new (EGG_TYPE_CELL_RENDERER_KEYS,
 					       "editable", TRUE,
 					       NULL);
@@ -741,10 +745,13 @@ setup_dialog (GladeXML *dialog)
 		    "keys_edited",
                     G_CALLBACK (accel_edited_callback),
                     WID ("shortcut_treeview"));
-  gtk_tree_view_insert_column_with_data_func (GTK_TREE_VIEW (WID ("shortcut_treeview")),
-					      -1, _("Shortcut"),
-					      renderer,
-					      accel_set_func, NULL, NULL);
+
+  column = gtk_tree_view_column_new_with_attributes (_("Shortcut"), renderer, NULL);
+  gtk_tree_view_column_set_cell_data_func (column, renderer, accel_set_func, NULL, NULL);
+  gtk_tree_view_column_set_resizable (column, TRUE);
+
+  gtk_tree_view_append_column (GTK_TREE_VIEW (WID ("shortcut_treeview")), column);
+
   gconf_client_add_dir (client, "/apps/gnome_keybinding_properties", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
   gconf_client_add_dir (client, "/apps/metacity/general", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
   gconf_client_notify_add (client,
