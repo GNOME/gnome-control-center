@@ -142,6 +142,7 @@ entry_activated(GtkWidget *widget, NautilusMimeIconEntry *ientry)
 	struct stat buf;
 	GnomeIconSelection * gis;
 	gchar *filename;
+	GtkButton *OK_button;
 
 	g_return_if_fail (widget != NULL);
 	g_return_if_fail (GTK_IS_ENTRY (widget));
@@ -161,9 +162,11 @@ entry_activated(GtkWidget *widget, NautilusMimeIconEntry *ientry)
 		if (gis->file_list)
 			gnome_icon_selection_show_icons(gis);
 	} else {
-		/* We pretend like ok has been called */
-		entry_changed (NULL, ientry);
-		gtk_widget_hide (ientry->pick_dialog);
+		/* FIXME: This is a hack to act exactly like we've clicked the
+		 * OK button. This should be structured more cleanly.
+		 */
+		OK_button = GTK_BUTTON (GNOME_DIALOG (ientry->pick_dialog)->buttons->data);
+		gtk_button_clicked (OK_button);
 	}
 }
 
@@ -275,41 +278,6 @@ browse_clicked (GnomeFileEntry *fentry, NautilusMimeIconEntry *ientry)
 }
 
 static void
-icon_selected_cb (GtkButton *button, NautilusMimeIconEntry *icon_entry)
-{
-	const gchar *icon;
-	GnomeIconSelection *gis;
-	gchar *path, *filename;
-	const char *mime_type;
-	GtkWidget *entry;
-
-	g_return_if_fail (icon_entry != NULL);
-	g_return_if_fail (NAUTILUS_MIME_IS_ICON_ENTRY (icon_entry));
-
-	gis =  gtk_object_get_user_data (GTK_OBJECT (icon_entry));
-	gnome_icon_selection_stop_loading (gis);
-	icon = gnome_icon_selection_get_icon (gis, TRUE);
-
-	if (icon != NULL) {
-		entry = nautilus_mime_type_icon_entry_gtk_entry (icon_entry);
-		gtk_entry_set_text (GTK_ENTRY (entry), icon);
-		entry_changed (NULL, icon_entry);
-	
-		path = nautilus_mime_type_icon_entry_get_relative_filename (NAUTILUS_MIME_ICON_ENTRY (icon_entry));
-		if (path != NULL) {
-			filename = strrchr (path, '/');			
-			if (filename != NULL) {
-				filename++;
-				mime_type = nautilus_mime_type_capplet_get_selected_item_mime_type ();
-				gnome_vfs_mime_set_icon (mime_type, filename);
-				nautilus_mime_type_capplet_update_mime_list_icon (mime_type);
-			}
-			g_free (path);
-		}
-	}
-}
-
-static void
 cancel_pressed (GtkButton * button, NautilusMimeIconEntry * icon_entry)
 {
 	GnomeIconSelection * gis;
@@ -321,31 +289,6 @@ cancel_pressed (GtkButton * button, NautilusMimeIconEntry * icon_entry)
 	gnome_icon_selection_stop_loading(gis);
 }
 
-
-static void
-gil_icon_selected_cb (GnomeIconList *gil, gint num, GdkEvent *event, NautilusMimeIconEntry *icon_entry)
-{
-	const gchar * icon;
-	GnomeIconSelection * gis;
-
-	g_return_if_fail (icon_entry != NULL);
-	g_return_if_fail (NAUTILUS_MIME_IS_ICON_ENTRY (icon_entry));
-
-	gis =  gtk_object_get_user_data(GTK_OBJECT(icon_entry));
-	icon = gnome_icon_selection_get_icon(gis, TRUE);
-
-	if (icon != NULL) {
-		GtkWidget *e = nautilus_mime_type_icon_entry_gtk_entry(icon_entry);
-		gtk_entry_set_text(GTK_ENTRY(e),icon);
-		
-	}
-
-	if(event && event->type == GDK_2BUTTON_PRESS && ((GdkEventButton *)event)->button == 1) {
-		gnome_icon_selection_stop_loading(gis);
-		entry_changed (NULL, icon_entry);
-		gtk_widget_hide(icon_entry->pick_dialog);
-	}
-}
 
 void
 nautilus_mime_type_show_icon_selection (NautilusMimeIconEntry *icon_entry)
@@ -360,7 +303,7 @@ nautilus_mime_type_show_icon_selection (NautilusMimeIconEntry *icon_entry)
 
 	fe = GNOME_FILE_ENTRY (icon_entry->fentry);
 	p = gnome_file_entry_get_full_path (fe, FALSE);
-	curfile = nautilus_mime_type_icon_entry_get_filename (icon_entry);
+	curfile = nautilus_mime_type_icon_entry_get_full_filename (icon_entry);
 
 	/* Are we part of a modal window?  If so, we need to be modal too. */
 	tl = gtk_widget_get_toplevel (GTK_WIDGET (icon_entry->frame));
@@ -434,12 +377,12 @@ nautilus_mime_type_show_icon_selection (NautilusMimeIconEntry *icon_entry)
 		gtk_object_set_user_data(GTK_OBJECT(icon_entry), iconsel);
 
 		gnome_icon_selection_add_directory (GNOME_ICON_SELECTION(iconsel), icon_entry->pick_dialog_dir);
-		
-		/* Hide the file entry until we figure out how to deal with icon paths
-		outside of the standard gnome paths */
-		/*gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (icon_entry->pick_dialog)->vbox),
+
+		gtk_window_set_title (GTK_WINDOW (icon_entry->pick_dialog), _("Select an icon"));
+
+		gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (icon_entry->pick_dialog)->vbox),
 				    icon_entry->fentry, FALSE, FALSE, 0);
-		*/
+		
 		gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(icon_entry->pick_dialog)->vbox),
 				   iconsel, TRUE, TRUE, 0);
 
@@ -451,17 +394,15 @@ nautilus_mime_type_show_icon_selection (NautilusMimeIconEntry *icon_entry)
 			gnome_icon_selection_select_icon(GNOME_ICON_SELECTION(iconsel), 
 							 g_filename_pointer(curfile));
 
-		gnome_dialog_button_connect(GNOME_DIALOG (icon_entry->pick_dialog), 
-					    0, /* OK button */
-					    GTK_SIGNAL_FUNC (icon_selected_cb),
-					    icon_entry);
+		/* FIXME:
+		 * OK button is handled by caller, Cancel button is handled here.
+		 * This could be cleaned up further.
+		 */
 		gnome_dialog_button_connect(GNOME_DIALOG(icon_entry->pick_dialog), 
 					    1, /* Cancel button */
 					    GTK_SIGNAL_FUNC(cancel_pressed),
 					    icon_entry);
-		gtk_signal_connect_after(GTK_OBJECT(GNOME_ICON_SELECTION(iconsel)->gil), "select_icon",
-					 GTK_SIGNAL_FUNC(gil_icon_selected_cb),
-					 icon_entry);
+
 	} else {
 		GnomeIconSelection *gis =
 			gtk_object_get_user_data(GTK_OBJECT(icon_entry));
@@ -476,27 +417,24 @@ nautilus_mime_type_show_icon_selection (NautilusMimeIconEntry *icon_entry)
 gchar *
 nautilus_mime_type_icon_entry_get_relative_filename (NautilusMimeIconEntry *ientry)
 {
-  char *filename;
-  char **path_parts;
+  	char *filename;
+  	char *result;
+  	char **path_parts;
 
+	result = NULL;
+	filename = nautilus_mime_type_icon_entry_get_full_filename (NAUTILUS_MIME_ICON_ENTRY (ientry));
+	if (filename != NULL) {
+		path_parts = g_strsplit (filename, "/share/pixmaps/", 0);
+		g_free (filename);
 
-	filename = nautilus_mime_type_icon_entry_get_filename (NAUTILUS_MIME_ICON_ENTRY (ientry));
+		if (path_parts[1] != NULL) {
+			result = g_strdup (path_parts[1]);
+		}
 
-	path_parts = g_strsplit (filename, "/share/pixmaps/", 0);
-	g_free (filename);
-	filename = NULL;
-
-	if (path_parts[1] != NULL) {
-	  filename = g_strdup (path_parts[1]);
-	} else {
-	  /* FIXME: bugzilla.eazel.com 4797 */
-	  g_warning ("user picked up an icon not in $(prefix)/share/pixmaps\n");
-	  filename = g_strdup ("");
+		g_strfreev (path_parts);
 	}
 
-	g_strfreev (path_parts);
-
-	return filename;
+	return result;
 }
 
 static void
@@ -690,7 +628,7 @@ nautilus_mime_type_icon_entry_set_icon (NautilusMimeIconEntry *ientry, const gch
 }
 
 /**
- * nautilus_mime_type_icon_entry_get_filename:
+ * nautilus_mime_type_icon_entry_get_full_filename:
  * @ientry: the NautilusMimeIconEntry to work with
  *
  * Description: Gets the file name of the image if it was possible
@@ -701,7 +639,7 @@ nautilus_mime_type_icon_entry_set_icon (NautilusMimeIconEntry *ientry, const gch
  * couldn't load the file
  **/
 gchar *
-nautilus_mime_type_icon_entry_get_filename (NautilusMimeIconEntry *ientry)
+nautilus_mime_type_icon_entry_get_full_filename (NautilusMimeIconEntry *ientry)
 {
 	GtkWidget *child;
 
