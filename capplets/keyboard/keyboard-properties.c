@@ -111,10 +111,12 @@ apply_settings (void)
 static void
 get_legacy_settings (void)
 {
-	gboolean val_boolean, def;
-	gulong val_ulong;
+	GConfClient *client;
+	gboolean val_bool, def;
+	gulong val_int;
 
-#if 0
+	client = gconf_client_get_default ();
+
 	COPY_FROM_LEGACY (bool, "/gnome/desktop/peripherals/keyboard/repeat",        "/Desktop/Keyboard/repeat=true");
 	COPY_FROM_LEGACY (bool, "/gnome/desktop/peripherals/keyboard/click",         "/Desktop/Keyboard/click=true");
 	COPY_FROM_LEGACY (int,  "/gnome/desktop/peripherals/keyboard/rate",          "/Desktop/Keyboard/rate=30");
@@ -123,7 +125,6 @@ get_legacy_settings (void)
 	COPY_FROM_LEGACY (int,  "/gnome/desktop/peripherals/keyboard/bell_volume",   "/Desktop/Bell/percent=50");
 	COPY_FROM_LEGACY (int,  "/gnome/desktop/peripherals/keyboard/bell_pitch",    "/Desktop/Bell/pitch=50");
 	COPY_FROM_LEGACY (int,  "/gnome/desktop/peripherals/keyboard/bell_duration", "/Desktop/Bell/duration=100");
-#endif
 }
 
 static int
@@ -152,6 +153,7 @@ bell_cb (GtkWidget *widget, GConfChangeSet *changeset)
 	XChangeKeyboardControl (GDK_DISPLAY (),
 				KBBellPercent | KBBellPitch | KBBellDuration, 
 				&kbdcontrol);
+
 	XBell (GDK_DISPLAY (), 0);
 
 	kbdcontrol.bell_percent = backup.bell_percent;
