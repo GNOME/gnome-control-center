@@ -314,7 +314,7 @@ ax_response_callback (gint response_id, guint revert_controls_mask, gboolean ena
 	    case GTK_RESPONSE_HELP:
 		    gnome_help_display_desktop (NULL,
 						"user-guide",
-						"wgoscustaccess.xml",
+						"user-guide.xml",
 						"goscustaccess-6",
 						&err);
 		    if (err != NULL) {

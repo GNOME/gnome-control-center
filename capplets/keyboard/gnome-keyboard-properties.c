@@ -114,7 +114,7 @@ dialog_response (GtkWidget *widget,
 {
 	if (response_id == GTK_RESPONSE_HELP)
 		capplet_help (GTK_WINDOW (widget),
-			"wgoscustdesk.xml",
+			"user-guide.xml",
 			"goscustperiph-2");
 	else if (response_id == 0)
 		accessibility_button_clicked (NULL, NULL);

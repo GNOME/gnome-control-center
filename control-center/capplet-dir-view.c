@@ -304,7 +304,7 @@ help_menu_cb (BonoboUIComponent *uic, gpointer data, const char *cname)
 
 	gnome_help_display_desktop (NULL,
 				    "user-guide",
-				    "wgoscustdesk.xml",
+				    "user-guide.xml",
 				    NULL, &error);
 	if (error) {
 		GtkWidget *dialog;

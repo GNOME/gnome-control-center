@@ -69,7 +69,7 @@ cb_dialog_response (GtkDialog *dialog, gint response_id)
 {
 	if (response_id == GTK_RESPONSE_HELP)
 		capplet_help (GTK_WINDOW (dialog),
-			"wgoscustdesk.xml",
+			"user-guide.xml",
 			"goscustdesk-50");
 	else
 		gtk_main_quit ();
@@ -80,7 +80,7 @@ cb_details_dialog_response (GtkDialog *dialog, gint response_id)
 {
 	if (response_id == GTK_RESPONSE_HELP)
 		capplet_help (GTK_WINDOW (dialog),
-			      "wgoscustdesk.xml",
+			      "user-guide.xml",
 			      "goscustdesk-50");
 	else {
 		gtk_widget_destroy (GTK_WIDGET (dialog));

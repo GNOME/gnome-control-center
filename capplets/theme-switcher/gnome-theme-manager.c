@@ -1016,7 +1016,7 @@ static void
 cb_dialog_response (GtkDialog *dialog, gint response_id)
 {
   if (response_id == GTK_RESPONSE_HELP)
-    capplet_help (GTK_WINDOW (dialog), "wgoscustdesk.xml", "goscustdesk-12");
+    capplet_help (GTK_WINDOW (dialog), "user-guide.xml", "goscustdesk-12");
   else
     gtk_main_quit ();
 }

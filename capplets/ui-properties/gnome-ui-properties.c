@@ -78,7 +78,7 @@ dialog_button_clicked_cb (GtkDialog *dialog, gint response_id, GConfChangeSet *c
 {
 	if (response_id == GTK_RESPONSE_HELP)
 		capplet_help (GTK_WINDOW (dialog),
-			"wgoscustdesk.xml",
+			"user-guide.xml",
 			"goscustuserinter-2");
 	else
 		gtk_main_quit ();

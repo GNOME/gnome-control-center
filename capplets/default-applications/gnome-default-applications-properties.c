@@ -559,7 +559,7 @@ dialog_response (GtkDialog *widget,
 		 GladeXML  *dialog)
 {
 	if (response_id == GTK_RESPONSE_HELP)
-		capplet_help (GTK_WINDOW (widget), "wgoscustlookandfeel.xml", "goscustdoc-2");
+		capplet_help (GTK_WINDOW (widget), "user-guide.xml", "goscustdoc-2");
 	else
 		gtk_main_quit ();
 }

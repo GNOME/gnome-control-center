@@ -109,7 +109,7 @@ install_dialog_response (GtkWidget *widget, int response_id, gpointer data)
 	
 	if (response_id == GTK_RESPONSE_HELP) {
 		capplet_help (GTK_WINDOW (widget),
-			"wgoscustdesk.xml",
+			"user-guide.xml",
 			"goscustdesk-12");
 		return;
 	}

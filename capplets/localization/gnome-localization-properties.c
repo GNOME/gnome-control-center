@@ -999,7 +999,7 @@ dialog_response (GtkWidget *widget,
 	if (response_id == GTK_RESPONSE_HELP) {
 		/* FIXME: What should we add here? */
 /*		capplet_help (GTK_WINDOW (widget),
-			"wgoscustdesk.xml",
+			"user-guide.xml",
 			"goscustperiph-2");*/
 	} else {
 		gtk_main_quit ();

@@ -62,7 +62,7 @@ cb_dialog_response (GtkDialog *dialog, gint response_id)
 {
 	if (response_id == GTK_RESPONSE_HELP)
 		capplet_help (GTK_WINDOW (dialog),
-			"wgoscustdesk.xml",
+			"user-guide.xml",
 			"goscustdesk-38");
 	else
 		gtk_main_quit ();
@@ -791,7 +791,7 @@ cb_details_response (GtkDialog *dialog, gint response_id)
 {
 	if (response_id == GTK_RESPONSE_HELP)
 		capplet_help (GTK_WINDOW (dialog),
-			      "wgoscustdesk.xml",
+			      "user-guide.xml",
 			      "goscustdesk-38");
 	else if (response_id == 1) {
 		/* "Go to font folder" was clicked */

@@ -70,7 +70,7 @@ dialog_response (GtkWidget *widget,
 	switch (response_id) {
 	case GTK_RESPONSE_HELP:
 		capplet_help (GTK_WINDOW (widget),
-			      "wgoscustaccess.xml",
+			      "user-guide.xml",
 			      "goscustaccess-6");
 		break;
 	case GTK_RESPONSE_DELETE_EVENT:
