@@ -21,8 +21,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 1.99.0\n"
-"POT-Creation-Date: 2002-05-14 14:18+0300\n"
-"PO-Revision-Date: 2002-05-14 22:22+0300\n"
+"POT-Creation-Date: 2002-05-21 17:27+0300\n"
+"PO-Revision-Date: 2002-05-21 19:17+0300\n"
 "Last-Translator: Pauli Virtanen <pauli.virtanen@hut.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -196,71 +196,63 @@ msgstr "kuvapistettä/s"
 msgid "seconds"
 msgstr "sekuntia"
 
-#: capplets/background/background.desktop.in.h:1
-msgid "Background"
-msgstr "Tausta"
-
-#: capplets/background/background.desktop.in.h:2
-msgid "Change the desktop background"
-msgstr "Muuta työpöydän taustaa"
-
 #. solid
-#: capplets/background/background-properties-capplet.c:222
+#: capplets/background/background-properties-capplet.c:228
 msgid "C_olor"
 msgstr "V_äri"
 
 #. horiz
-#: capplets/background/background-properties-capplet.c:226
+#: capplets/background/background-properties-capplet.c:232
 msgid "_Left Color"
 msgstr "_Vasen väri"
 
-#: capplets/background/background-properties-capplet.c:227
+#: capplets/background/background-properties-capplet.c:233
 msgid "_Right Color"
 msgstr "_Oikea väri"
 
 #. vert
-#: capplets/background/background-properties-capplet.c:230
+#: capplets/background/background-properties-capplet.c:236
 msgid "_Top Color"
 msgstr "_Yläväri"
 
-#: capplets/background/background-properties-capplet.c:231
+#: capplets/background/background-properties-capplet.c:237
 msgid "_Bottom Color"
 msgstr "_Alaväri"
 
-#: capplets/background/background-properties-capplet.c:392
+#: capplets/background/background-properties-capplet.c:398
 msgid "_Wallpaper"
 msgstr "_Taustakuva"
 
-#: capplets/background/background-properties-capplet.c:392
+#: capplets/background/background-properties-capplet.c:398
 msgid "C_entered"
 msgstr "_Keskellä"
 
-#: capplets/background/background-properties-capplet.c:392
+#: capplets/background/background-properties-capplet.c:398
 msgid "_Scaled"
 msgstr "_Skaalattu"
 
-#: capplets/background/background-properties-capplet.c:392
+#: capplets/background/background-properties-capplet.c:398
 msgid "Stretc_hed"
 msgstr "Ve_nytetty"
 
-#: capplets/background/background-properties-capplet.c:392
+#: capplets/background/background-properties-capplet.c:398
 msgid "_No Picture"
 msgstr "_Ei kuvaa"
 
-#: capplets/background/background-properties-capplet.c:427
+#: capplets/background/background-properties-capplet.c:433
 msgid "_Picture"
 msgstr "_Kuva"
 
-#: capplets/background/background-properties-capplet.c:537
+#: capplets/background/background-properties-capplet.c:566
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:592
-#: capplets/keyboard/gnome-keyboard-properties.c:365
+#: capplets/default-applications/gnome-default-applications-properties.c:719
+#: capplets/keyboard/gnome-keyboard-properties.c:367
 #: capplets/mouse/gnome-mouse-properties.c:735
 #: capplets/sound/sound-properties-capplet.c:156
 msgid "Retrieve and store legacy settings"
 msgstr "Hae ja tallenna aikaisempien versioiden asetukset"
 
-#: capplets/background/background-properties-capplet.c:562
+#: capplets/background/background-properties-capplet.c:591
 #: capplets/background/background-properties.glade.h:2
 msgid "Background Preferences"
 msgstr "Taustan asetukset"
@@ -316,7 +308,7 @@ msgstr "Taustan kuvatiedoston nimi."
 
 #: capplets/background/background-properties.glade.h:14
 msgid "To set the background picture, drop an image or click to browse."
-msgstr "Aseta taustakuva pudottamalla kuvatiedosto tai napsauttamalla selataksesi niitä."
+msgstr "Aseta taustakuva pudottamalla kuvatiedosto tai napsauta selataksesi niitä."
 
 #: capplets/background/background-properties.glade.h:15
 msgid "Vertical gradient"
@@ -351,6 +343,14 @@ msgstr "Valintanappi 4"
 #: capplets/background/background-properties.glade.h:23
 msgid "radiobutton5"
 msgstr "Valintanappi 5"
+
+#: capplets/background/background.desktop.in.h:1
+msgid "Background"
+msgstr "Tausta"
+
+#: capplets/background/background.desktop.in.h:2
+msgid "Change the desktop background"
+msgstr "Muuta työpöydän taustaa"
 
 #: capplets/common/activate-settings-daemon.c:18
 msgid ""
@@ -463,7 +463,9 @@ msgstr "Muutosjoukko"
 #: capplets/common/gconf-property-editor.c:186
 msgid ""
 "GConf change set containing data to be forwarded to the gconf client on apply"
-msgstr "GConf-muutosjoukko, joka sisältää datan, joka lähtee asetukset toteutettaessa gconf-asiakkaalle"
+msgstr ""
+"GConf-muutosjoukko, joka sisältää datan, joka lähtee asetukset "
+"toteutettaessa gconf-asiakkaalle"
 
 #: capplets/common/gconf-property-editor.c:191
 msgid "Conversion to widget callback"
@@ -505,9 +507,11 @@ msgstr "Ominaisuusmuokkaimen datan vapauttamisen paluukutsu"
 
 #: capplets/common/gconf-property-editor.c:227
 msgid "Callback to be issued when property editor object data is to be freed"
-msgstr "Funktio, joka saa kutsun kun ominaisuusmuokkainolion dataa ollaan vapauttamassa"
+msgstr ""
+"Funktio, joka saa kutsun kun ominaisuusmuokkainolion dataa ollaan "
+"vapauttamassa"
 
-#: capplets/common/gconf-property-editor.c:1479
+#: capplets/common/gconf-property-editor.c:1484
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -520,7 +524,7 @@ msgstr ""
 "Varmista, että se on olemassa ja yritä uudelleen tai valitse toinen "
 "taustakuva."
 
-#: capplets/common/gconf-property-editor.c:1487
+#: capplets/common/gconf-property-editor.c:1492
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -533,7 +537,7 @@ msgstr ""
 "\n"
 "Valitse toinen kuva."
 
-#: capplets/common/gconf-property-editor.c:1571
+#: capplets/common/gconf-property-editor.c:1583
 msgid "Please select an image."
 msgstr "Valitse jokin kuva"
 
@@ -542,67 +546,96 @@ msgid "Choose the applications used by default"
 msgstr "Valitse oletuksena käytettävät sovellukset"
 
 #: capplets/default-applications/default-applications.desktop.in.h:2
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:15
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:19
 msgid "Preferred Applications"
 msgstr "Suositut sovellukset"
 
+#: capplets/default-applications/gnome-default-applications-properties.c:105
+msgid "Please specify a name and a command for this editor."
+msgstr "Anna tämän editorin nimi ja komento."
+
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:1
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:1
+#: capplets/network/gnome-network-preferences.glade.h:1
+#: capplets/theme-switcher/theme-properties.glade.h:1
+msgid "*"
+msgstr "*"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:2
 msgid "Acce_pts URLs"
 msgstr "_Hyväksyy URL:eja"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:2
-msgid "Accepts Line _Number"
-msgstr "Hyväksyy _rivinumeron"
-
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:3
-msgid "C_ustom Editor:"
-msgstr "M_uu muokkain:"
+#: capplets/mime-type/mime-type-capplet.c:93
+#: capplets/wm-properties/wm-properties-capplet.c:1151
+msgid "Add..."
+msgstr "Lisää..."
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:4
+msgid "C_ustom Editor"
+msgstr "M_uu editori:"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:5
 msgid "C_ustom Help Browser:"
 msgstr "M_uu ohjeselain:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:5
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:6
 msgid "C_ustom Terminal:"
 msgstr "M_uu pääte:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:6
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:7
 msgid "C_ustom Web Browser:"
 msgstr "M_uu Internet-selain:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:7
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:8
 msgid "Co_mmand:"
 msgstr "Ko_mento:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:8
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:9
+msgid "Custom Editor Properties"
+msgstr "Muun editorin ominaisuudet"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:10
 msgid "Default Help Browser"
 msgstr "Oletusohjeselain"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:9
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:11
 msgid "Default Terminal"
 msgstr "Oletuspääte"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:10
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:12
 msgid "Default Text Editor"
 msgstr "Oletustekstieditori"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:11
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:13
 msgid "Default Web Browser"
 msgstr "Oletus-Internetselain"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:12
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:14
 msgid "Default Window Manager"
 msgstr "Oletusikkunointiohjelma"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:13
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:15
+#: capplets/mime-type/mime-type-capplet.c:83
+#: capplets/wm-properties/wm-properties-capplet.c:1161
+msgid "Delete"
+msgstr "Poista"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:16
 msgid "E_xec Flag:"
 msgstr "_Valitsin:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:14
-msgid "He_lp Browser"
-msgstr "Oh_jeselain"
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:17
+#: capplets/mime-type/mime-type-capplet.c:97
+#: capplets/wm-properties/wm-properties-capplet.c:1156
+msgid "Edit..."
+msgstr "Muokkaa..."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:16
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:18
+msgid "Help Browser"
+msgstr "Ohjeselain"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:20
 msgid ""
 "Select the window manager you want.  You will need to hit apply, wave the "
 "magic wand, and do a magic dance for it to work."
@@ -610,61 +643,72 @@ msgstr ""
 "Valitse haluamasi ikkunointiohjelma. Lisäksi täytyy napsauttaa toteuta-"
 "painiketta, heiluttaa taikasauvaa ja tanssia sadetanssi, jotta se toimisi."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:17
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:21
 msgid "Start in T_erminal"
 msgstr "Käynnistä _päätteessä"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:18
-msgid "Te_rminal"
-msgstr "_Pääte"
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:22
+msgid "Terminal"
+msgstr "Pääte"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:19
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:23
+msgid "Text Editor"
+msgstr "Tekstieditori"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:24
+msgid "This application can open _URIs"
+msgstr "Tämä sovellus voi avata _URI:eja"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:25
+msgid "This application can open _multiple files"
+msgstr "Tämä sovellus voi _avata useita tiedostoja"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:26
+msgid "This application needs to be run in a _shell"
+msgstr "Tämä sovellus tarvitsee _komentotulkin toimiakseen"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:27
 msgid "Understands _Netscape Remote Control"
 msgstr "Ymmärtää _Netscape-etäohjauskomentoja"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:20
-msgid "Web _Browser"
-msgstr "Internet-_selain"
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:28
+msgid "Use this _editor to open text files in the file manager"
+msgstr "Avaa tekstitiedostot tällä _editorilla tiedostonhallinnasta"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:21
-msgid "_Add..."
-msgstr "_Lisää..."
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:29
+msgid "Web Browser"
+msgstr "Internet-selain"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:22
-msgid "_Delete"
-msgstr "_Poista"
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:30
+msgid "Window Manager"
+msgstr "Ikkunointiohjelma"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:23
-#: capplets/file-types/file-types-properties.glade.h:19
-msgid "_Edit..."
-msgstr "_Muokkaa..."
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:31
+msgid "_Name:"
+msgstr "_Nimi:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:24
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:32
+msgid "_Properties..."
+msgstr "_Ominaisuudet..."
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:33
 msgid "_Select a Help Browser:"
 msgstr "_Valitse ohjeselain:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:25
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:34
 msgid "_Select a Terminal:"
 msgstr "_Valitse pääte:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:26
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:35
 msgid "_Select a Web Browser:"
 msgstr "_Valitse Internet-selain:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:27
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:36
 msgid "_Select an Editor:"
 msgstr "_Valitse editori:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:28
-msgid "_Text Editor"
-msgstr "_Tekstieditori"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:29
-msgid "_Window Manager"
-msgstr "_Ikkunointiohjelma"
-
 #: capplets/desktop-links/Accessibility.directory.in.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "Accessibility"
 msgstr "Esteettömyys"
 
@@ -680,29 +724,13 @@ msgstr "Lisäasetukset"
 msgid "Advanced Settings"
 msgstr "Lisäasetukset"
 
-#: capplets/desktop-links/cd.desktop.in.in.h:1
-msgid "CD Properties"
-msgstr "CD-asetukset"
+#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:1
+msgid "Control Center Menu"
+msgstr "Hallintakeskuksen valikko"
 
-#: capplets/desktop-links/cd.desktop.in.in.h:2
-msgid "Configure handling of CD devices"
-msgstr "Muuta CD-asemien käsittelytapaa"
-
-#: capplets/desktop-links/legacy-applications.desktop.in.in.h:1
-msgid "Legacy Applications"
-msgstr "Vanhat sovellukset"
-
-#: capplets/desktop-links/legacy-applications.desktop.in.in.h:2
-msgid "Legacy applications settings (grdb)"
-msgstr "Vanhojen sovellusten asetukset (grdb)"
-
-#: capplets/desktop-links/panel.desktop.in.in.h:1
-msgid "Global panel properties"
-msgstr "Yleiset paneelin ominaisuudet"
-
-#: capplets/desktop-links/panel.desktop.in.in.h:2
-msgid "Panel"
-msgstr "Paneeli"
+#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:2
+msgid "Sawfish window manager"
+msgstr "Sawfish-ikkunointiohjelma"
 
 #: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
 msgid "Appearance"
@@ -757,7 +785,6 @@ msgid "Configure miscellaneous window features"
 msgstr "Muuta sekalaisia ikkunaominaisuuksia"
 
 #: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
-#: capplets/ui-properties/ui-properties.glade.h:19
 msgid "Miscellaneous"
 msgstr "Sekalaiset"
 
@@ -777,14 +804,6 @@ msgstr "Muuta ikkunoiden sijoittelua"
 msgid "Placement"
 msgstr "Sijoittelu"
 
-#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:1
-msgid "Control Center Menu"
-msgstr "Hallintakeskuksen valikko"
-
-#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:2
-msgid "Sawfish window manager"
-msgstr "Sawfish-ikkunointiohjelma"
-
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:1
 msgid "Enable window manager sound events"
 msgstr "Käytä ääniä ikkunointiohjelmassa"
@@ -802,6 +821,30 @@ msgstr "Muuta työpöytiä"
 #: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:2
 msgid "Workspaces"
 msgstr "Työpöydät"
+
+#: capplets/desktop-links/cd.desktop.in.in.h:1
+msgid "CD Properties"
+msgstr "CD-asetukset"
+
+#: capplets/desktop-links/cd.desktop.in.in.h:2
+msgid "Configure handling of CD devices"
+msgstr "Muuta CD-asemien käsittelytapaa"
+
+#: capplets/desktop-links/legacy-applications.desktop.in.in.h:1
+msgid "Legacy Applications"
+msgstr "Vanhat sovellukset"
+
+#: capplets/desktop-links/legacy-applications.desktop.in.in.h:2
+msgid "Legacy applications settings (grdb)"
+msgstr "Vanhojen sovellusten asetukset (grdb)"
+
+#: capplets/desktop-links/panel.desktop.in.in.h:1
+msgid "Global panel properties"
+msgstr "Yleiset paneelin ominaisuudet"
+
+#: capplets/desktop-links/panel.desktop.in.in.h:2
+msgid "Panel"
+msgstr "Paneeli"
 
 #: capplets/desktop-links/session.desktop.in.in.h:1
 msgid "Configure which non-session aware programs are started up"
@@ -889,17 +932,17 @@ msgid "Source Code"
 msgstr "Lähdekoodi"
 
 #: capplets/file-types/category-names.h:25
-#: capplets/file-types/mime-type-info.c:752
+#: capplets/file-types/mime-type-info.c:753
 msgid "Audio"
 msgstr "Ääni"
 
 #: capplets/file-types/category-names.h:26
-#: capplets/file-types/mime-type-info.c:748
+#: capplets/file-types/mime-type-info.c:749
 msgid "Images"
 msgstr "Kuvat"
 
 #: capplets/file-types/category-names.h:27
-#: capplets/file-types/mime-type-info.c:750
+#: capplets/file-types/mime-type-info.c:751
 msgid "Video"
 msgstr "Video"
 
@@ -994,6 +1037,10 @@ msgstr "_Valitse..."
 #: capplets/file-types/file-types-properties.glade.h:18
 msgid "_Description"
 msgstr "_Kuvaus"
+
+#: capplets/file-types/file-types-properties.glade.h:19
+msgid "_Edit..."
+msgstr "_Muokkaa..."
 
 #: capplets/file-types/file-types-properties.glade.h:20
 msgid "_MIME Type"
@@ -1213,7 +1260,7 @@ msgstr "Pikanäppäin"
 
 #: capplets/keybindings/eggcellrendererkeys.c:203
 #: capplets/keybindings/gnome-keybinding-properties.c:306
-#: libbackground/applier.c:533
+#: libbackground/applier.c:531
 msgid "Disabled"
 msgstr "Pois käytöstä"
 
@@ -1226,24 +1273,24 @@ msgstr "Näppäile uusi pikanäppäin, tai paina askelpalautinta tyhjentääkses
 msgid "Type a new accelerator"
 msgstr "Näppäile uusi pikanäppäin"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:569
+#: capplets/keybindings/gnome-keybinding-properties.c:573
 msgid "<Unknown Action>"
 msgstr "<Tuntematon toiminto>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:592
+#: capplets/keybindings/gnome-keybinding-properties.c:598
 msgid "Desktop"
 msgstr "Työpöytä"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:596
+#: capplets/keybindings/gnome-keybinding-properties.c:602
 msgid "Window Management"
 msgstr "Ikkunointi"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:692
+#: capplets/keybindings/gnome-keybinding-properties.c:698
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Virhe asettaessa uutta pikanäppäintä asetustietokantaan: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:783
+#: capplets/keybindings/gnome-keybinding-properties.c:839
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1251,36 +1298,28 @@ msgstr ""
 "Ei löytänyt näppäimistöteemoja. Tämä merkitsee, että GTK+ on asennettu "
 "puutteellisesti."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:807
-msgid "_Action"
-msgstr "_Toiminto"
+#: capplets/keybindings/gnome-keybinding-properties.c:864
+msgid "Action"
+msgstr "Toiminto"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:819
-msgid "_Shortcut"
-msgstr "_Oikotie"
+#: capplets/keybindings/gnome-keybinding-properties.c:876
+msgid "Shortcut"
+msgstr "Pikanäppäin"
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:1
 msgid "Click for a list of keyboard navigation schemes."
 msgstr "Napsauta saadaksesi luettelo näppäimistönavigointityyleistä."
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:2
-msgid "Desktop Shortcuts:"
-msgstr "Työpöydän pikanäppäimet:"
-
-#: capplets/keybindings/gnome-keybinding-properties.glade.h:3
 #: capplets/keybindings/keybinding.desktop.in.h:2
 msgid "Keyboard Shortcuts"
 msgstr "Pikanäppäimet"
 
-#: capplets/keybindings/gnome-keybinding-properties.glade.h:4
+#: capplets/keybindings/gnome-keybinding-properties.glade.h:3
 msgid "Keyboard _Navigation scheme for use in applications:"
 msgstr "Ohjelmien näppäimistö_navigointityyli:"
 
-#: capplets/keybindings/gnome-keybinding-properties.glade.h:5
-msgid "The list of keybindings."
-msgstr "Luettelo pikanäppäimistä."
-
-#: capplets/keybindings/gnome-keybinding-properties.glade.h:6
+#: capplets/keybindings/gnome-keybinding-properties.glade.h:4
 msgid ""
 "To assign a shortcut to an action, click in the shortcut column and press "
 "the key combination you want to associate with it."
@@ -1288,16 +1327,20 @@ msgstr ""
 "Liittääksesi pikanäppäimen toimintoon napsauta kohtaa pikanäppäinsarakkeessa "
 "ja näppäile haluamasi näppäinyhdistelmä."
 
+#: capplets/keybindings/gnome-keybinding-properties.glade.h:5
+msgid "_Desktop shortcuts:"
+msgstr "_Työpöydän pikanäppäimet:"
+
 #: capplets/keybindings/keybinding.desktop.in.h:1
 msgid "Associate keyboard shortcuts with panel actions"
 msgstr "Liitä pikanäppäimiä paneelitoimintoihin"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:344
+#: capplets/keyboard/gnome-keyboard-properties.c:346
 msgid "_Accessibility"
 msgstr "_Esteettömyys"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:361
 #: capplets/keyboard/gnome-keyboard-properties.c:363
+#: capplets/keyboard/gnome-keyboard-properties.c:365
 #: capplets/sound/sound-properties-capplet.c:152
 #: capplets/sound/sound-properties-capplet.c:154
 msgid ""
@@ -1306,40 +1349,29 @@ msgstr ""
 "Pelkästään ota muutokset käyttöön ja lopeta (vain yhteensopivuuden vuoksi; "
 "nyt tämän tekee daemon)"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:1
-#: capplets/network/gnome-network-preferences.glade.h:1
-#: capplets/theme-switcher/theme-properties.glade.h:1
-msgid "*"
-msgstr "*"
-
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:2
-msgid ""
-"<b>Tip:</b> You can configure the keyboards accessibility features by "
-"bringing up the 'Accessibility Settings' property dialog, or pressing the "
-"button on the right."
-msgstr ""
-"<b>Vihje:</b> Voit muuttaa näppäimistön esteettömyysominaisuuksia avaamalla "
-"esteettömyysasetukset-ikkunan tai napsauttamalla oikealla olevaa painiketta."
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
 msgid "<i>fast</i>"
 msgstr "<i>nopea</i>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
 msgid "<i>loud</i>"
 msgstr "<i>äänekäs</i>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "<i>quiet</i>"
 msgstr "<i>hiljainen</i>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
 msgid "<i>slow</i>"
 msgstr "<i>hidas</i>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "Cursor"
 msgstr "Osoitin"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
+msgid "Cursor _blinks in text fields"
+msgstr "_Kohdistin vilkkuu tekstikentissä"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "Fast"
@@ -1408,12 +1440,8 @@ msgstr "Hidas"
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:27
 msgid ""
 "The keyboard bell is the <i>beep</i> sound heard when the system wants to "
-"get your attention.  You can select a custom sound file to play instead of "
-"the traditional beeping noise."
-msgstr ""
-"Näppäinääni on <i>piippaus</i>, joka kuuluu kun järjestelmä vaatii "
-"huomiotasi.  Voit valita oman äänitiedostosi soitettavaksi tavallisen "
-"piippauksen sijaan."
+"get your attention."
+msgstr "Näppäinääni on <i>piippaus</i>, joka kuuluu kun järjestelmä vaatii huomiotasi."
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:28
 msgid "Very Fast"
@@ -1424,16 +1452,19 @@ msgid "Very Short"
 msgstr "Hyvin lyhyt"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:30
+msgid ""
+"You can configure the keyboards accessibility features by bringing up the "
+"'Accessibility Settings' property dialog, or pressing the button on the "
+"right."
+msgstr "Voit muuttaa näppäimistön esteettömyysominaisuuksia avaamalla esteettömyysasetukset-ikkunan tai napsauttamalla oikealla olevaa painiketta."
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:31
 msgid "_Accessibility..."
 msgstr "_Esteettömyys..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:31
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:32
 msgid "_Blink speed:"
 msgstr "_Vilkkumisnopeus:"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:32
-msgid "_Cursor blinks in text fields"
-msgstr "_Kohdistin vilkkuu tekstikentissä"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:33
 msgid "_Custom keyboard bell:"
@@ -1595,21 +1626,6 @@ msgstr ""
 "\n"
 "Nykyistä tilaa ei voi tallentaa."
 
-#: capplets/mime-type/mime-type-capplet.c:83
-#: capplets/wm-properties/wm-properties-capplet.c:1161
-msgid "Delete"
-msgstr "Poista"
-
-#: capplets/mime-type/mime-type-capplet.c:93
-#: capplets/wm-properties/wm-properties-capplet.c:1151
-msgid "Add..."
-msgstr "Lisää..."
-
-#: capplets/mime-type/mime-type-capplet.c:97
-#: capplets/wm-properties/wm-properties-capplet.c:1156
-msgid "Edit..."
-msgstr "Muokkaa..."
-
 #: capplets/mime-type/mime-type.desktop.in.in.h:1
 msgid "Configure how files are associated and started"
 msgstr "Määritä tiedostojen kytkennät, avaaminen ja käynnistäminen"
@@ -1693,7 +1709,7 @@ msgid ""
 "The default cursor inverted"
 msgstr ""
 "<b>Valkoinen osoitin</b>\n"
-"Oletusosoitin käänteisin värein<"
+"Oletusosoitin käänteisin värein"
 
 #: capplets/mouse/gnome-mouse-properties.c:598
 msgid ""
@@ -1862,9 +1878,42 @@ msgstr "Hiiri"
 msgid "Mouse Properties"
 msgstr "Hiiriasetukset"
 
-#: capplets/sound/sound.desktop.in.h:1
-msgid "Configure GNOME's use of sound"
-msgstr "Muokkaa Gnomen ääniasetuksia"
+#: capplets/network/gnome-network-preferences.desktop.in.h:1
+msgid "Network"
+msgstr "Verkko"
+
+#: capplets/network/gnome-network-preferences.desktop.in.h:2
+#: capplets/network/gnome-network-preferences.glade.h:3
+msgid "Network Preferences"
+msgstr "Verkkoasetukset"
+
+#: capplets/network/gnome-network-preferences.glade.h:2
+msgid "HTTP Proxy Settings"
+msgstr "HTTP-välipalvelinasetukset"
+
+#: capplets/network/gnome-network-preferences.glade.h:4
+msgid "P_ort:"
+msgstr "P_ortti:"
+
+#: capplets/network/gnome-network-preferences.glade.h:5
+msgid "Pass_word:"
+msgstr "_Salasana:"
+
+#: capplets/network/gnome-network-preferences.glade.h:6
+msgid "Pro_xy requires a username and password"
+msgstr "_Välipalvelin vaatii tunnuksen ja salasanan"
+
+#: capplets/network/gnome-network-preferences.glade.h:7
+msgid "User_name:"
+msgstr "_Tunnus:"
+
+#: capplets/network/gnome-network-preferences.glade.h:8
+msgid "_Location:"
+msgstr "Si_jainti:"
+
+#: capplets/network/gnome-network-preferences.glade.h:9
+msgid "_Use HTTP proxy"
+msgstr "_Käytä HTTP-välipalvelinta"
 
 #: capplets/sound/sound-properties-capplet.c:186
 msgid "Sound preferences"
@@ -1885,6 +1934,10 @@ msgstr "_Yleistä"
 #: capplets/sound/sound-properties.glade.h:4
 msgid "_Sounds for events"
 msgstr "_Tapahtumien äänet"
+
+#: capplets/sound/sound.desktop.in.h:1
+msgid "Configure GNOME's use of sound"
+msgstr "Muokkaa Gnomen ääniasetuksia"
 
 #: capplets/theme-switcher/control/control.c:18
 msgid "Eenie Meenie Mynie Moe Catcha Tiger By Its Toe"
@@ -1912,7 +1965,7 @@ msgid "Submenu"
 msgstr "Alivalikko"
 
 #: capplets/theme-switcher/control/control.c:74
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:2
+#: capplets/ui-properties/gnome-ui-properties.glade.h:4
 msgid "Item 1"
 msgstr "Kohta 1"
 
@@ -1945,34 +1998,38 @@ msgid "Theme"
 msgstr "Teema"
 
 #: capplets/theme-switcher/theme-properties.glade.h:2
+msgid "Gtk+ Theme Preferences"
+msgstr "Gtk+:n teeman valinta"
+
+#: capplets/theme-switcher/theme-properties.glade.h:3
 msgid "Install new theme"
 msgstr "Asenna uusi teema"
 
-#: capplets/theme-switcher/theme-properties.glade.h:3
+#: capplets/theme-switcher/theme-properties.glade.h:4
 msgid "Installed Themes"
 msgstr "Asennetut teemat"
 
-#: capplets/theme-switcher/theme-properties.glade.h:4
+#: capplets/theme-switcher/theme-properties.glade.h:5
+msgid "List of available GTK+ themes"
+msgstr "Luettelo saatavilla olevista GTK+:n teemoista"
+
+#: capplets/theme-switcher/theme-properties.glade.h:6
 msgid "New themes can also be installed by dragging them into the window."
 msgstr "Uusia teemoja voi asentaa myös pudottamalla ne tähän ikkunaan."
 
-#: capplets/theme-switcher/theme-properties.glade.h:5
-msgid "Theme Properties"
-msgstr "Teeman ominaisuudet"
-
-#: capplets/theme-switcher/theme-properties.glade.h:6
+#: capplets/theme-switcher/theme-properties.glade.h:7
 msgid "_Go to theme folder"
 msgstr "_Siirry teemahakemistoon"
 
-#: capplets/theme-switcher/theme-properties.glade.h:7
+#: capplets/theme-switcher/theme-properties.glade.h:8
 msgid "_Install"
 msgstr "_Asenna"
 
-#: capplets/theme-switcher/theme-properties.glade.h:8
+#: capplets/theme-switcher/theme-properties.glade.h:9
 msgid "_Install new theme..."
 msgstr "_Asenna uusi teema..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:9
+#: capplets/theme-switcher/theme-properties.glade.h:10
 msgid "_Location of new theme:"
 msgstr "Uuden teeman si_jainti:"
 
@@ -1992,282 +2049,105 @@ msgstr "Toiminta"
 msgid "Sets the default behavior of GNOME applications"
 msgstr "Asettaa GNOME-ohjelmien oletustoiminnan"
 
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:1
-msgid "Icons and Text"
-msgstr "Kuvakkeet ja teksti"
+#: capplets/ui-properties/gnome-ui-properties.glade.h:1
+msgid "A preview of what a menubar looks like with these settings."
+msgstr "Miltä valikkopalkki näyttäisi, jos nämä asetukset pätisivät."
 
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:3
+#: capplets/ui-properties/gnome-ui-properties.glade.h:2
+msgid "A preview of what a toolbar looks like with these settings."
+msgstr "Miltä työkalupalkki näyttäisi, jos nämä asetukset pätisivät."
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:3
+msgid "Icons Only"
+msgstr "Vain kuvakkeet"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:5
 msgid "Item 2"
 msgstr "Kohta 2"
 
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:4
+#: capplets/ui-properties/gnome-ui-properties.glade.h:6
 msgid "Item 3"
 msgstr "Kohta 3"
 
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:5
+#: capplets/ui-properties/gnome-ui-properties.glade.h:7
 msgid "Menu Item 1"
 msgstr "Valikon kohta 1"
 
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:6
+#: capplets/ui-properties/gnome-ui-properties.glade.h:8
 msgid "Menu Item 2"
 msgstr "Valikon kohta 2"
 
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:7
+#: capplets/ui-properties/gnome-ui-properties.glade.h:9
 msgid "Menu Item 3"
 msgstr "Valikon kohta 3"
 
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:8
+#: capplets/ui-properties/gnome-ui-properties.glade.h:10
 msgid "Menu Item 4"
 msgstr "Valikon kohta 4"
 
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:9
+#: capplets/ui-properties/gnome-ui-properties.glade.h:11
 msgid "Menu Item 5"
 msgstr "Valikon kohta 5"
 
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:10
-msgid "Menu items have _icons"
-msgstr "Valikon kohdissa on _kuvakkeita"
+#: capplets/ui-properties/gnome-ui-properties.glade.h:12
+msgid "Menu items can have _icons"
+msgstr "Valikon kohdissa voi olla _kuvakkeita"
 
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:11
-#: capplets/ui-properties/ui-properties.glade.h:17
+#: capplets/ui-properties/gnome-ui-properties.glade.h:13
 msgid "Menus"
 msgstr "Valikot"
 
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:12
+#: capplets/ui-properties/gnome-ui-properties.glade.h:14
 msgid "New File"
 msgstr "Uusi tiedosto"
 
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:13
-msgid "Only Icons"
-msgstr "Vain kuvakkeet"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:14
-msgid "Only Text"
-msgstr "Pelkkä teksti"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:15
+#: capplets/ui-properties/gnome-ui-properties.glade.h:15
 msgid "Open File"
 msgstr "Avaa tiedosto"
 
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:16
+#: capplets/ui-properties/gnome-ui-properties.glade.h:16
+msgid "Priority Text Beside Icons"
+msgstr "Oleellinen teksti kuvakkeiden vierellä"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:17
 msgid "Sample Menubar"
 msgstr "Valikkopalkkiesimerkki"
 
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:17
+#: capplets/ui-properties/gnome-ui-properties.glade.h:18
 msgid "Sample Toolbar"
 msgstr "Esimerkkityökalupalkki"
 
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:18
+#: capplets/ui-properties/gnome-ui-properties.glade.h:19
 msgid "Save File"
 msgstr "Tallenna tiedosto"
 
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:19
+#: capplets/ui-properties/gnome-ui-properties.glade.h:20
+msgid "Text Below Icons"
+msgstr "Teksti kuvakkeiden alla"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:21
+msgid "Text Only"
+msgstr "Pelkkä teksti"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:22
 msgid "Toolbar"
 msgstr "Työkalupalkki"
 
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:20
-msgid "Toolbar and Menu Properties"
+#: capplets/ui-properties/gnome-ui-properties.glade.h:23
+msgid "Toolbar and Menu Preferences"
 msgstr "Työkalupalkki- ja valikkoasetukset"
 
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:21
+#: capplets/ui-properties/gnome-ui-properties.glade.h:24
 msgid "Toolbars can be _detached and moved around"
 msgstr "Työkalupalkkeja voi _irrottaa ja liikuttaa"
 
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:22
+#: capplets/ui-properties/gnome-ui-properties.glade.h:25
 msgid "_Menu"
 msgstr "_Valikko"
 
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:23
+#: capplets/ui-properties/gnome-ui-properties.glade.h:26
 msgid "_Toolbars have: "
 msgstr "_Työkalupalkeissa on: "
-
-#: capplets/ui-properties/ui-properties.glade.h:1
-msgid "At the center of the screen"
-msgstr "Näytön keskellä"
-
-#: capplets/ui-properties/ui-properties.glade.h:2
-msgid "At the mouse pointer"
-msgstr "Hiiren osoittimen kohdalla"
-
-#: capplets/ui-properties/ui-properties.glade.h:3
-msgid "Bottom"
-msgstr "Alla"
-
-#: capplets/ui-properties/ui-properties.glade.h:4
-msgid "Default  (Spread out - big)"
-msgstr "Oletus (levitetyt, suuret)"
-
-#: capplets/ui-properties/ui-properties.glade.h:5
-msgid "Dialog Buttons"
-msgstr "Valintaikkunan painikkeet"
-
-#: capplets/ui-properties/ui-properties.glade.h:6
-msgid "Dialog buttons have icons"
-msgstr "Valintaikkunoiden painikkeissa on kuvat"
-
-#: capplets/ui-properties/ui-properties.glade.h:7
-msgid "Dialogs"
-msgstr "Valintaikkunat"
-
-#: capplets/ui-properties/ui-properties.glade.h:8
-msgid "Dialogs are treated"
-msgstr "Valintaikkunat toimivat"
-
-#: capplets/ui-properties/ui-properties.glade.h:9
-msgid "Dialogs open"
-msgstr "Valintaikkunat aukeavat"
-
-#: capplets/ui-properties/ui-properties.glade.h:10
-msgid "Interface"
-msgstr "Käyttöliittymä"
-
-#: capplets/ui-properties/ui-properties.glade.h:11
-msgid "Left"
-msgstr "Vasemmalla"
-
-#: capplets/ui-properties/ui-properties.glade.h:12
-msgid "Left aligned"
-msgstr "Vasemmalle kohdistunut"
-
-#: capplets/ui-properties/ui-properties.glade.h:13
-msgid "Like any other window"
-msgstr "Kuten tavalliset ikkunat"
-
-#: capplets/ui-properties/ui-properties.glade.h:14
-msgid "Menu bars are detachable"
-msgstr "Valikkopalkit voi irrottaa"
-
-#: capplets/ui-properties/ui-properties.glade.h:15
-msgid "Menu bars have a border"
-msgstr "Valikkopalkeilla on reuna"
-
-#: capplets/ui-properties/ui-properties.glade.h:16
-msgid "Menu items have icons"
-msgstr "Valikkokohdissa on kuvakkeet"
-
-#: capplets/ui-properties/ui-properties.glade.h:18
-msgid "Menus can be torn off"
-msgstr "Valikot voi irrottaa"
-
-#: capplets/ui-properties/ui-properties.glade.h:20
-msgid "Multiple Documents"
-msgstr "Monta asiakirjaa"
-
-#: capplets/ui-properties/ui-properties.glade.h:21
-msgid "Notebook tabs"
-msgstr "Selainmuistiossa"
-
-#: capplets/ui-properties/ui-properties.glade.h:22
-msgid "Place dialogs over application window when possible"
-msgstr "Pidä valintaikkunat sovelluksen päällä jos mahdollista"
-
-#: capplets/ui-properties/ui-properties.glade.h:23
-msgid "Progress bar is on the left"
-msgstr "Edistymismittari tilarivin vasemmalla puolella"
-
-#: capplets/ui-properties/ui-properties.glade.h:24
-msgid "Progress bar is on the right"
-msgstr "Edistymismittari tilarivin oikealla puolella"
-
-#: capplets/ui-properties/ui-properties.glade.h:25
-msgid "Right"
-msgstr "Oikealla"
-
-#: capplets/ui-properties/ui-properties.glade.h:26
-msgid "Right aligned"
-msgstr "Oikealle kohdistunut"
-
-#: capplets/ui-properties/ui-properties.glade.h:27
-msgid "Seperate windows"
-msgstr "Eri ikkunoissa"
-
-#: capplets/ui-properties/ui-properties.glade.h:28
-msgid "Settings will not take effect until applications restart"
-msgstr ""
-"Asetukset eivät tule voimaan ennen kuin käynnistät sovellukset uudestaan"
-
-#: capplets/ui-properties/ui-properties.glade.h:29
-msgid "Specially by the window manager"
-msgstr "Erityisesti ikkunointiohjelman mukaan"
-
-#: capplets/ui-properties/ui-properties.glade.h:30
-msgid "Spread out"
-msgstr "Levitetyt"
-
-#: capplets/ui-properties/ui-properties.glade.h:31
-msgid "Spread out (big)"
-msgstr "Levitetyt (suuret)"
-
-#: capplets/ui-properties/ui-properties.glade.h:32
-msgid "Status Bar"
-msgstr "Tilarivi"
-
-#: capplets/ui-properties/ui-properties.glade.h:33
-msgid "Status bar is interactive when possible"
-msgstr "Tilarivi on vuorovaikutteinen kun mahdollista"
-
-#: capplets/ui-properties/ui-properties.glade.h:34
-msgid "The same window"
-msgstr "Samassa ikkunassa"
-
-#: capplets/ui-properties/ui-properties.glade.h:35
-msgid "Tool Bars"
-msgstr "Työkalupalkit"
-
-#: capplets/ui-properties/ui-properties.glade.h:36
-msgid "Tool bar buttons are icons only"
-msgstr "Työkalupalkkien painikkeissa on vain kuvat"
-
-#: capplets/ui-properties/ui-properties.glade.h:37
-msgid "Tool bar buttons are text below icons"
-msgstr "Työkalupalkkien painikkeissa on sekä tekstit että kuvat"
-
-#: capplets/ui-properties/ui-properties.glade.h:38
-msgid "Tool bar buttons pop up on mouse over"
-msgstr "Työkalupalkkien painikkeet ponnahtavat ylös kun hiiri on niiden päällä"
-
-#: capplets/ui-properties/ui-properties.glade.h:39
-msgid "Tool bars are detachable"
-msgstr "Työkalupalkit voi irrottaa"
-
-#: capplets/ui-properties/ui-properties.glade.h:40
-msgid "Tool bars have a border"
-msgstr "Työkalupalkeilla on reuna"
-
-#: capplets/ui-properties/ui-properties.glade.h:41
-msgid "Tool bars have line separators"
-msgstr "Työkalupalkeissa on viivaerottimet"
-
-#: capplets/ui-properties/ui-properties.glade.h:42
-msgid "Top"
-msgstr "Yllä"
-
-#: capplets/ui-properties/ui-properties.glade.h:43
-msgid "Use status bar instead of dialog when possible"
-msgstr "Käytä tilariviä valintaikkunan sijaan kun mahdollista"
-
-#: capplets/ui-properties/ui-properties.glade.h:44
-msgid "When opening Multiple documents, use"
-msgstr "Avattaessa useita asiakirjoja avaa ne"
-
-#: capplets/ui-properties/ui-properties.glade.h:45
-msgid "When using Notebook tabs, place the tabs on the"
-msgstr "Käytettäessä selainmuistiota aseta välilehdet"
-
-#: capplets/ui-properties/ui-properties.glade.h:46
-msgid "Wherever the Window Manager places them"
-msgstr "Minne ikkunointiohjelma ne sijoittaa"
-
-#: capplets/url-properties/url-properties.desktop.in.h:1
-#: capplets/url-properties/url.desktop.in.in.h:1
-msgid "Configure which programs are used to display URLs"
-msgstr "Aseta URL:ien näyttämiseen käytettävät ohjelmat"
-
-#: capplets/url-properties/url-properties.c:66
-#: capplets/url-properties/url-properties.desktop.in.h:2
-#: capplets/url-properties/url.desktop.in.in.h:2
-msgid "URL Handlers"
-msgstr "URL-käsittelimet"
 
 #: capplets/url-properties/url-properties.c:64
 msgid "Protocol"
@@ -2276,6 +2156,12 @@ msgstr "Protokolla"
 #: capplets/url-properties/url-properties.c:64
 msgid "Command"
 msgstr "Komento"
+
+#: capplets/url-properties/url-properties.c:66
+#: capplets/url-properties/url-properties.desktop.in.h:2
+#: capplets/url-properties/url.desktop.in.in.h:2
+msgid "URL Handlers"
+msgstr "URL-käsittelimet"
 
 #: capplets/url-properties/url-properties.c:89
 msgid "handler:"
@@ -2301,6 +2187,11 @@ msgstr "Ohjeselain (uusi ikkuna)"
 #: capplets/url-properties/url-properties.c:127
 msgid "Set"
 msgstr "Aseta"
+
+#: capplets/url-properties/url-properties.desktop.in.h:1
+#: capplets/url-properties/url.desktop.in.in.h:1
+msgid "Configure which programs are used to display URLs"
+msgstr "Aseta URL:ien näyttämiseen käytettävät ohjelmat"
 
 #: capplets/windows/gnome-window-properties.c:133
 #: capplets/wm-properties/wm-properties-capplet.c:135
@@ -2421,13 +2312,13 @@ msgstr "Ice WM"
 msgid "Scwm"
 msgstr "Scwm"
 
-#: capplets/wm-properties/wm-desktops/twm.desktop.in.in.h:1
-msgid "twm"
-msgstr "twm"
-
 #: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.in.h:1
 msgid "Window Maker"
 msgstr "Window Maker"
+
+#: capplets/wm-properties/wm-desktops/twm.desktop.in.in.h:1
+msgid "twm"
+msgstr "twm"
 
 #: capplets/wm-properties/wm-properties-capplet.c:367
 #, c-format
@@ -2524,98 +2415,71 @@ msgstr "Et voi poistaa nykyistä ikkunointiohjelmaa"
 msgid "Window Manager Selector"
 msgstr "Ikkunointiohjelman valinta"
 
-#: capplets/network/gnome-network-preferences.glade.h:2
-msgid "HTTP Proxy Settings"
-msgstr "HTTP-välipalvelinasetukset"
-
-#: capplets/network/gnome-network-preferences.desktop.in.h:2
-#: capplets/network/gnome-network-preferences.glade.h:3
-msgid "Network Preferences"
-msgstr "Verkkoasetukset"
-
-#: capplets/network/gnome-network-preferences.glade.h:4
-msgid "P_ort:"
-msgstr "P_ortti:"
-
-#: capplets/network/gnome-network-preferences.glade.h:5
-msgid "Pass_word:"
-msgstr "_Salasana:"
-
-#: capplets/network/gnome-network-preferences.glade.h:6
-msgid "Pro_xy requires a username and password"
-msgstr "_Välipalvelin vaatii tunnuksen ja salasanan"
-
-#: capplets/network/gnome-network-preferences.glade.h:7
-msgid "User_name:"
-msgstr "_Tunnus:"
-
-#: capplets/network/gnome-network-preferences.glade.h:8
-msgid "_Location:"
-msgstr "Si_jainti:"
-
-#: capplets/network/gnome-network-preferences.glade.h:9
-msgid "_Use HTTP proxy"
-msgstr "_Käytä HTTP-välipalvelinta"
-
-#: capplets/network/gnome-network-preferences.desktop.in.h:1
-msgid "Network"
-msgstr "Verkko"
-
-#: control-center/capplet-dir-view.c:153
-msgid "Layout"
-msgstr "Asettelu"
-
-#: control-center/capplet-dir-view.c:154
-msgid "Layout to use for this view of the capplets"
-msgstr "Tämän hallintasovelmien näkymän asettelu"
-
-#: control-center/capplet-dir-view.c:160
-msgid "Capplet directory object"
-msgstr "Hallintasovelmien hakemisto-olio"
-
-#: control-center/capplet-dir-view.c:161
-msgid "Capplet directory that this view is viewing"
-msgstr "Tämän näkymän näyttämä hallintasovelmien hakemisto"
-
-#: control-center/capplet-dir-view.c:318 control-center/gnomecc.desktop.in.h:1
-msgid "GNOME Control Center"
-msgstr "GNOMEn hallintakeskus"
-
-#: control-center/capplet-dir-view.c:321
-msgid "Desktop properties manager."
-msgstr ""
-"Työpöydän asetusten hallinta.\n"
-"Suomennos: http://gnome-fi.sourceforge.net/"
-
-#: control-center/capplet-dir-view.c:457
-#, c-format
-msgid "Gnome Control Center : %s"
-msgstr "Gnomen hallintakeskus : %s"
-
 #: control-center/capplet-dir-view-list.c:324
 #, c-format
 msgid "GNOME Control Center: %s"
 msgstr "GNOMEn hallintakeskus: %s"
 
-#: control-center/gnomecc.desktop.in.h:2
-msgid "The GNOME configuration tool"
-msgstr "Gnomen hallintatyökalu"
+#: control-center/capplet-dir-view.c:158
+msgid "Layout"
+msgstr "Asettelu"
+
+#: control-center/capplet-dir-view.c:159
+msgid "Layout to use for this view of the capplets"
+msgstr "Tämän hallintasovelmien näkymän asettelu"
+
+#: control-center/capplet-dir-view.c:165
+msgid "Capplet directory object"
+msgstr "Hallintasovelmien hakemisto-olio"
+
+#: control-center/capplet-dir-view.c:166
+msgid "Capplet directory that this view is viewing"
+msgstr "Tämän näkymän näyttämä hallintasovelmien hakemisto"
+
+#: control-center/capplet-dir-view.c:335
+msgid "translator_credits"
+msgstr "Suomennos: http://gnome-fi.sourceforge.net/"
+
+#: control-center/capplet-dir-view.c:344 control-center/gnomecc.desktop.in.h:1
+msgid "GNOME Control Center"
+msgstr "GNOMEn hallintakeskus"
+
+#: control-center/capplet-dir-view.c:347
+msgid "Desktop properties manager."
+msgstr "Työpöydän asetusten hallinta."
+
+#: control-center/capplet-dir-view.c:485
+#, c-format
+msgid "Gnome Control Center : %s"
+msgstr "Gnomen hallintakeskus : %s"
 
 #: control-center/gnomecc-ui.xml.h:1
 msgid "About this application"
 msgstr "Tietoja tästä sovelluksesta"
 
 #: control-center/gnomecc-ui.xml.h:2
+msgid "Overview of the control center"
+msgstr "Hallintakeskuksen yleiskatsaus"
+
+#: control-center/gnomecc-ui.xml.h:3
 msgid "_About..."
 msgstr "_Tietoja..."
 
-#: control-center/gnomecc-ui.xml.h:3
+#: control-center/gnomecc-ui.xml.h:4
+msgid "_Contents..."
+msgstr "_Sisältö..."
+
+#: control-center/gnomecc-ui.xml.h:5
 msgid "_File"
 msgstr "_Tiedosto"
 
-#: control-center/gnomecc-ui.xml.h:4
+#: control-center/gnomecc-ui.xml.h:6
 msgid "_Help"
 msgstr "_Ohje"
+
+#: control-center/gnomecc.desktop.in.h:2
+msgid "The GNOME configuration tool"
+msgstr "Gnomen hallintatyökalu"
 
 #: control-center/main.c:43
 msgid "Use shell even if nautilus is running."
@@ -2624,6 +2488,44 @@ msgstr "Käytä omaa ikkunaa vaikka Nautilus olisi käynnissä"
 #: gnome-settings-daemon/factory.c:29
 msgid "Could not initialize Bonobo"
 msgstr "Ei voinut alustaa Bonoboa"
+
+#: gnome-settings-daemon/gnome-settings-font.c:74
+#, c-format
+msgid ""
+"Cannot create the directory \"%s\".\n"
+"This is needed to allow changing cursors."
+msgstr ""
+"Ei voi luoda hakemistoa \"%s\".\n"
+"Tätä tarvittaisiin osoittimien vaihtamiseksi."
+
+#: gnome-settings-daemon/gnome-settings-screensaver.c:92
+#, c-format
+msgid ""
+"There was an error starting up the screensaver:\n"
+"\n"
+"%s\n"
+"\n"
+"Screensaver functionality will not work in this session."
+msgstr ""
+"Virhe käynnistäessä näytönsäästäjää:\n"
+"\n"
+"%s\n"
+"\n"
+"Näytönsäästäjät eivät toimi tämän istunnon aikana."
+
+#: gnome-settings-daemon/gnome-settings-screensaver.c:102
+msgid "_Do not show this message again"
+msgstr "_Älä näytä tätä viestiä uudestaan"
+
+#: gnome-settings-daemon/gnome-settings-sound.c:125
+#, c-format
+msgid "Couldn't load sound file %s as sample %s"
+msgstr "Ei voinut ladata äänitiedostoa %s ääneksi %s"
+
+#: gnome-settings-daemon/gnome-settings-xsettings.c:150
+#, c-format
+msgid "GConf key %s set to type %s but its expected type was %s\n"
+msgstr "GConf-avain %s on tyyppiä %s, vaikka ohjelma odotti tyyppiä %s\n"
 
 #: libbackground/applier.c:239
 msgid "Type"
@@ -2652,11 +2554,6 @@ msgstr "Esikatselukorkeus"
 #: libbackground/applier.c:256
 msgid "Height if applier is a preview: Defaults to 48."
 msgstr "Korkeus jos käyttöönotin on esikatselin: oletus 48"
-
-#: libbackground/applier.c:454
-#, c-format
-msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
-msgstr "Ei voinut ladata kuvaa \"%s\", joten taustakuvaa ei ole."
 
 #: libbackground/preview-file-selection.c:193
 msgid "Can't find an hbox, using a normal file selection"
@@ -2697,55 +2594,178 @@ msgstr "_Soita"
 msgid "Select sound file"
 msgstr "Valitse äänitiedosto"
 
-#: gnome-settings-daemon/gnome-settings-font.c:74
-#, c-format
-msgid ""
-"Cannot create the directory \"%s\".\n"
-"This is needed to allow changing cursors."
-msgstr ""
-"Ei voi luoda hakemistoa \"%s\".\n"
-"Tätä tarvittaisiin osoittimien vaihtamiseksi."
+#~ msgid "Accepts Line _Number"
+#~ msgstr "Hyväksyy _rivinumeron"
 
-#: gnome-settings-daemon/gnome-settings-screensaver.c:92
-#, c-format
-msgid ""
-"There was an error starting up the screensaver:\n"
-"\n"
-"%s\n"
-"\n"
-"Screensaver functionality will not work in this session."
-msgstr ""
-"Virhe käynnistäessä näytönsäästäjää:\n"
-"\n"
-"%s\n"
-"\n"
-"Näytönsäästäjät eivät toimi tämän istunnon aikana."
+#~ msgid "_Add..."
+#~ msgstr "_Lisää..."
 
-#: gnome-settings-daemon/gnome-settings-screensaver.c:102
-msgid "_Do not show this message again"
-msgstr "_Älä näytä tätä viestiä uudestaan"
+#~ msgid "_Delete"
+#~ msgstr "_Poista"
 
-#: gnome-settings-daemon/gnome-settings-sound.c:59
-msgid "Starting esd\n"
-msgstr "Käynnistää esd:n\n"
+#~ msgid "_Action"
+#~ msgstr "_Toiminto"
 
-#: gnome-settings-daemon/gnome-settings-sound.c:84
-msgid "Stopping esd\n"
-msgstr "Pysäyttää esd:n\n"
+#~ msgid "The list of keybindings."
+#~ msgstr "Luettelo pikanäppäimistä."
 
-#: gnome-settings-daemon/gnome-settings-sound.c:127
-#, c-format
-msgid "Couldn't load sound file %s as sample %s"
-msgstr "Ei voinut ladata äänitiedostoa %s ääneksi %s"
+#~ msgid "Theme Properties"
+#~ msgstr "Teeman ominaisuudet"
 
-#: gnome-settings-daemon/gnome-settings-sound.c:159
-msgid "Reloading events\n"
-msgstr "Päivittää tapahtumat\n"
+#~ msgid "Icons and Text"
+#~ msgstr "Kuvakkeet ja teksti"
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:159
-#, c-format
-msgid "GConf key %s set to type %s but its expected type was %s\n"
-msgstr "GConf-avain %s on tyyppiä %s, vaikka ohjelma odotti tyyppiä %s\n"
+#~ msgid "Only Icons"
+#~ msgstr "Vain kuvakkeet"
+
+#~ msgid "Only Text"
+#~ msgstr "Pelkkä teksti"
+
+#~ msgid "At the center of the screen"
+#~ msgstr "Näytön keskellä"
+
+#~ msgid "At the mouse pointer"
+#~ msgstr "Hiiren osoittimen kohdalla"
+
+#~ msgid "Bottom"
+#~ msgstr "Alla"
+
+#~ msgid "Default  (Spread out - big)"
+#~ msgstr "Oletus (levitetyt, suuret)"
+
+#~ msgid "Dialog Buttons"
+#~ msgstr "Valintaikkunan painikkeet"
+
+#~ msgid "Dialog buttons have icons"
+#~ msgstr "Valintaikkunoiden painikkeissa on kuvat"
+
+#~ msgid "Dialogs"
+#~ msgstr "Valintaikkunat"
+
+#~ msgid "Dialogs are treated"
+#~ msgstr "Valintaikkunat toimivat"
+
+#~ msgid "Dialogs open"
+#~ msgstr "Valintaikkunat aukeavat"
+
+#~ msgid "Interface"
+#~ msgstr "Käyttöliittymä"
+
+#~ msgid "Left"
+#~ msgstr "Vasemmalla"
+
+#~ msgid "Left aligned"
+#~ msgstr "Vasemmalle kohdistunut"
+
+#~ msgid "Like any other window"
+#~ msgstr "Kuten tavalliset ikkunat"
+
+#~ msgid "Menu bars are detachable"
+#~ msgstr "Valikkopalkit voi irrottaa"
+
+#~ msgid "Menu bars have a border"
+#~ msgstr "Valikkopalkeilla on reuna"
+
+#~ msgid "Menu items have icons"
+#~ msgstr "Valikkokohdissa on kuvakkeet"
+
+#~ msgid "Menus can be torn off"
+#~ msgstr "Valikot voi irrottaa"
+
+#~ msgid "Multiple Documents"
+#~ msgstr "Monta asiakirjaa"
+
+#~ msgid "Notebook tabs"
+#~ msgstr "Selainmuistiossa"
+
+#~ msgid "Place dialogs over application window when possible"
+#~ msgstr "Pidä valintaikkunat sovelluksen päällä jos mahdollista"
+
+#~ msgid "Progress bar is on the left"
+#~ msgstr "Edistymismittari tilarivin vasemmalla puolella"
+
+#~ msgid "Progress bar is on the right"
+#~ msgstr "Edistymismittari tilarivin oikealla puolella"
+
+#~ msgid "Right"
+#~ msgstr "Oikealla"
+
+#~ msgid "Right aligned"
+#~ msgstr "Oikealle kohdistunut"
+
+#~ msgid "Seperate windows"
+#~ msgstr "Eri ikkunoissa"
+
+#~ msgid "Settings will not take effect until applications restart"
+#~ msgstr ""
+#~ "Asetukset eivät tule voimaan ennen kuin käynnistät sovellukset uudestaan"
+
+#~ msgid "Specially by the window manager"
+#~ msgstr "Erityisesti ikkunointiohjelman mukaan"
+
+#~ msgid "Spread out"
+#~ msgstr "Levitetyt"
+
+#~ msgid "Spread out (big)"
+#~ msgstr "Levitetyt (suuret)"
+
+#~ msgid "Status Bar"
+#~ msgstr "Tilarivi"
+
+#~ msgid "Status bar is interactive when possible"
+#~ msgstr "Tilarivi on vuorovaikutteinen kun mahdollista"
+
+#~ msgid "The same window"
+#~ msgstr "Samassa ikkunassa"
+
+#~ msgid "Tool Bars"
+#~ msgstr "Työkalupalkit"
+
+#~ msgid "Tool bar buttons are icons only"
+#~ msgstr "Työkalupalkkien painikkeissa on vain kuvat"
+
+#~ msgid "Tool bar buttons are text below icons"
+#~ msgstr "Työkalupalkkien painikkeissa on sekä tekstit että kuvat"
+
+#~ msgid "Tool bar buttons pop up on mouse over"
+#~ msgstr ""
+#~ "Työkalupalkkien painikkeet ponnahtavat ylös kun hiiri on niiden päällä"
+
+#~ msgid "Tool bars are detachable"
+#~ msgstr "Työkalupalkit voi irrottaa"
+
+#~ msgid "Tool bars have a border"
+#~ msgstr "Työkalupalkeilla on reuna"
+
+#~ msgid "Tool bars have line separators"
+#~ msgstr "Työkalupalkeissa on viivaerottimet"
+
+#~ msgid "Top"
+#~ msgstr "Yllä"
+
+#~ msgid "Use status bar instead of dialog when possible"
+#~ msgstr "Käytä tilariviä valintaikkunan sijaan kun mahdollista"
+
+#~ msgid "When opening Multiple documents, use"
+#~ msgstr "Avattaessa useita asiakirjoja avaa ne"
+
+#~ msgid "When using Notebook tabs, place the tabs on the"
+#~ msgstr "Käytettäessä selainmuistiota aseta välilehdet"
+
+#~ msgid "Wherever the Window Manager places them"
+#~ msgstr "Minne ikkunointiohjelma ne sijoittaa"
+
+#~ msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
+#~ msgstr "Ei voinut ladata kuvaa \"%s\", joten taustakuvaa ei ole."
+
+#~ msgid "Starting esd\n"
+#~ msgstr "Käynnistää esd:n\n"
+
+#~ msgid "Stopping esd\n"
+#~ msgstr "Pysäyttää esd:n\n"
+
+#~ msgid "Reloading events\n"
+#~ msgstr "Päivittää tapahtumat\n"
 
 #~ msgid "Very long"
 #~ msgstr "Hyvin pitkä"
