@@ -1,10 +1,10 @@
 /* -*- mode: c; style: linux -*- */
 
 /* capplet-dir-view-list.c
- * Copyright (C) 2000 Helix Code, Inc.
+ * Copyright (C) 2000, 2001 Ximian, Inc.
  *
- * Authors: Jacob Berkman <jacob@helixcode.com>
- *          Bradford Hovinen <hovinen@helixcode.com>
+ * Authors: Jacob Berkman <jacob@ximian.com>
+ *          Bradford Hovinen <hovinen@ximian.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

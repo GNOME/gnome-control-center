@@ -1,9 +1,9 @@
 /* -*- mode: c; style: linux -*- */
 
 /* capplet-dir-view-html.c
- * Copyright (C) 2000 Helix Code, Inc.
+ * Copyright (C) 2000, 2001 Ximian, Inc.
  *
- * Written by Jacob Berkman <jacob@helixcode.com>
+ * Written by Jacob Berkman <jacob@ximian.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
