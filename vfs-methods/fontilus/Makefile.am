@@ -49,7 +49,7 @@ else
 install-gconf-schemas:
 endif
 
-install-desktop-database:
+install-desktop-database: install-desktopDATA
 	update-desktop-database $(DESTDIR)$(desktopdir)
 
 @INTLTOOL_DESKTOP_RULE@
