@@ -8,31 +8,25 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-07-07 00:27-0400\n"
-"PO-Revision-Date: 2003-06-23 15:42+0200\n"
+"POT-Creation-Date: 2003-08-08 16:40+0200\n"
+"PO-Revision-Date: 2003-08-08 16:39+0200\n"
 "Last-Translator: Veljko M. Stanojevic <veljko@vms.homelinux.net>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"#-#-#-#-#  gnome-control-center.po (gnome-control-center)  #-#-#-#-#\n"
-"X-Generator: KBabel 1.0\n"
-"#-#-#-#-#  sr.po (gnome-control-center)  #-#-#-#-#\n"
+"Report-Msgid-Bugs-To: \n"
 "X-Generator: KBabel 1.0\n"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:1
-#, fuzzy
 msgid "<b>Applications</b>"
-msgstr "Наслеђени програми"
+msgstr "<b>Програми</b>"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:2
-#, fuzzy
 msgid "<b>Support</b>"
-msgstr "<b>Брзина</b>"
+msgstr "<b>Подршка</b>"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:3
-#, fuzzy
 msgid ""
 "<small><i><b>Note:</b> Changes to this setting will not take effect until "
 "you next log in.</i></small>"
@@ -41,42 +35,69 @@ msgstr ""
 "не пријавите изнова.</small></i>"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:4
-#, fuzzy
 msgid "Assistive Technology Preferences"
-msgstr "Подешења прозора"
+msgstr "Поставке технологије за испомоћ"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:5
 msgid "Close and _Log Out"
-msgstr ""
+msgstr "Затвори и _одјави се"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:6
 msgid "Start these assistive technologies every time you log in:"
-msgstr ""
+msgstr "Покрени ове технологије за испомоћ при свакој вашој пријави:"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:7
 msgid "_Enable assistive technologies"
-msgstr ""
+msgstr "_Укључи технологије за испомоћ"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:8
 msgid "_Magnifier"
-msgstr ""
+msgstr "_Лупа"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:9
 msgid "_On-screen keyboard"
-msgstr ""
+msgstr "_Тастатура на екрану"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:10
-#, fuzzy
 msgid "_Screenreader"
-msgstr "Екран"
+msgstr "_Читач екрана"
 
 #: capplets/accessibility/at-properties/at-properties.desktop.in.h:1
 msgid "Assistive Technology Support"
-msgstr ""
+msgstr "Подршка технологијама за испомоћ"
 
 #: capplets/accessibility/at-properties/at-properties.desktop.in.h:2
 msgid "Enable support for GNOME assistive technologies at login"
+msgstr "Укључи при пријави подршку за Гномове технологије за испомоћ"
+
+#: capplets/accessibility/at-properties/main.c:60
+msgid ""
+"No Assistive Technology is available on your system.  The 'gok' package must "
+"be installed in order to get on-screen keyboard support, and the "
+"'gnopernicus' package must be installed for screenreading and magnifying "
+"capabilities."
 msgstr ""
+"Нема доступних технологија за испомоћ на вашем систему. Неопходно је "
+"инсталирати „gok“ пакет за тастатуру на екрану и „gnopernicus“ пакет за "
+"могућности читања екрана и увећавања."
+
+#: capplets/accessibility/at-properties/main.c:62
+msgid ""
+"Not all available assistive technologies are installed on your system.  The "
+"'gok' package must be installed in order to get on-screen keyboard support."
+msgstr ""
+"Нису присутне све доступне технологије за испомоћ на вашем систему. "
+"Неопходно је инсталирати „gok“ пакет за тастатуру на екрану."
+
+#: capplets/accessibility/at-properties/main.c:64
+msgid ""
+"Not all available assistive technologies are installed on your system.  The "
+"'gnopernicus' package must be installed for screenreading and magnifying "
+"capabilities."
+msgstr ""
+"Нису присутне све доступне технологије за испомоћ на вашем систему. "
+"Неопходно је инсталирати „gnopernicus“ пакет за могућности читања екрана и "
+"увећавања."
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:238
 #, c-format
@@ -90,11 +111,11 @@ msgid "Unable to import AccessX settings from file '%s'"
 msgstr "Не могу да увезем AccessX подешења из датотеке '%s'"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:465
-msgid "Select CDE AccessX file"
-msgstr "Одаберите CDE AccessX датотеку"
+msgid "Import Feature Settings File"
+msgstr "Увези датотеку са подешавањима могућности"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "Тастатура"
@@ -112,41 +133,46 @@ msgstr ""
 "тастатуре неће радити."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
+#: capplets/font/font-properties.glade.h:1
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:1
+#: capplets/mouse/gnome-mouse-properties.glade.h:1
+#: capplets/ui-properties/gnome-ui-properties.glade.h:1
+msgid "    "
+msgstr "    "
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:1
 #: capplets/file-types/file-types-properties.glade.h:1
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:2
 #: capplets/network/gnome-network-preferences.glade.h:2
 #: capplets/theme-switcher/theme-install.glade.h:1
 #: capplets/theme-switcher/theme-properties.glade.h:1
 msgid "*"
 msgstr "*"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
 msgid "<b>Enable Bo_unce Keys</b>"
 msgstr "<b>Омогући тастере за одбацивање</b>"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
 msgid "<b>Enable Slo_w Keys</b>"
 msgstr "<b>Омогући споре тастере</b>"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
 msgid "<b>Enable _Mouse Keys</b>"
 msgstr "<b>Омогући тастере на мишу</b>"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
 msgid "<b>Enable _Repeat Keys</b>"
 msgstr "<b>Омогући тастере за понављање</b>"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
 msgid "<b>Enable _Sticky Keys</b>"
 msgstr "<b>Омогући лепљиве тастере</b>"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
 msgid "<b>Features</b>"
 msgstr "<b>Карактеристике</b>"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
-msgid "<b>Mouse</b>"
-msgstr "<b>Миш</b>"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
 msgid "<b>Toggle Keys</b>"
@@ -217,13 +243,12 @@ msgid "Ma_ximum pointer speed:"
 msgstr "Највећа брзина показивача:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
-#: capplets/mouse/mouse.desktop.in.h:1
-msgid "Mouse"
-msgstr "Миш"
+msgid "Mouse Keys"
+msgstr "Тастери миша"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
 msgid "Mouse _Preferences..."
-msgstr "Подешавање миша..."
+msgstr "_Поставке миша..."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
 msgid ""
@@ -242,7 +267,7 @@ msgstr ""
 "притискањем измењивача"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
 msgid "S_peed:"
 msgstr "Брзина:"
 
@@ -271,6 +296,7 @@ msgid "_Only accept keys held for:"
 msgstr "Прихвати само тастере притиснуте:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "_Type to test settings:"
 msgstr "Куцај ради провере подешења:"
 
@@ -299,136 +325,138 @@ msgid "pixels/second"
 msgstr "пиксела у секунди"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
-#: capplets/mouse/gnome-mouse-properties.glade.h:26
+#: capplets/mouse/gnome-mouse-properties.glade.h:27
 #: capplets/windows/gnome-window-properties.glade.h:7
 msgid "seconds"
 msgstr "секунди"
 
 #. solid
 #: capplets/background/background-properties-capplet.c:228
-msgid "C_olor:"
-msgstr "Боја:"
+msgid "Co_lor:"
+msgstr "_Боја:"
 
 #. horiz
 #: capplets/background/background-properties-capplet.c:232
-msgid "_Left Color:"
-msgstr "Боја за леву страну:"
+msgid "_Left color:"
+msgstr "Боја _лево:"
 
 #: capplets/background/background-properties-capplet.c:233
-msgid "_Right Color:"
-msgstr "Боја за десну страну:"
+msgid "_Right color:"
+msgstr "Боја _десно:"
 
 #. vert
 #: capplets/background/background-properties-capplet.c:236
-msgid "_Top Color:"
-msgstr "Боја за врх:"
+msgid "Top co_lor:"
+msgstr "Боја за _врх:"
 
 #: capplets/background/background-properties-capplet.c:237
-msgid "_Bottom Color:"
-msgstr "Боја за дно:"
+msgid "_Bottom color:"
+msgstr "Боја за д_но:"
 
 #: capplets/background/background-properties-capplet.c:398
-msgid "_Wallpaper"
-msgstr "Постер"
+msgid "_Tile"
+msgstr "_Поплочано"
 
 #: capplets/background/background-properties-capplet.c:398
-msgid "C_entered"
-msgstr "Центрирано"
+msgid "C_enter"
+msgstr "Ц_ентрирано"
 
 #: capplets/background/background-properties-capplet.c:398
-msgid "_Scaled"
-msgstr "Сразмерно"
+msgid "Sc_ale"
+msgstr "Ср_азмерно"
 
 #: capplets/background/background-properties-capplet.c:398
-msgid "Stretc_hed"
-msgstr "Растегнуто"
+msgid "_Stretch"
+msgstr "Ра_стегнуто"
 
 #: capplets/background/background-properties-capplet.c:398
 msgid "_No Picture"
-msgstr "Без слике"
+msgstr "_Без слике"
 
-#: capplets/background/background-properties-capplet.c:433
-msgid "Select _picture:"
-msgstr "Одаберите слику:"
-
-#: capplets/background/background-properties-capplet.c:567
+#: capplets/background/background-properties-capplet.c:559
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:834
+#: capplets/default-applications/gnome-default-applications-properties.c:730
 #: capplets/keyboard/gnome-keyboard-properties.c:222
-#: capplets/mouse/gnome-mouse-properties.c:716
-#: capplets/sound/sound-properties-capplet.c:214
+#: capplets/mouse/gnome-mouse-properties.c:808
+#: capplets/sound/sound-properties-capplet.c:212
 msgid "Retrieve and store legacy settings"
 msgstr "Поврати и ускладишти почетна подешења"
 
-#: capplets/background/background-properties-capplet.c:593
+#: capplets/background/background-properties-capplet.c:585
 #: capplets/background/background-properties.glade.h:2
 msgid "Background Preferences"
 msgstr "Подешавање позадине"
 
 #: capplets/background/background-properties.glade.h:1
-msgid "A preview of the background picture."
-msgstr "Преглед слике за позадину."
+msgid "Bac_kground style:"
+msgstr "Изглед по_задине:"
 
 #: capplets/background/background-properties.glade.h:3
-msgid "Background Preview"
-msgstr "Преглед позадине"
+msgid "E-Mail"
+msgstr "Е-пошта"
 
 #: capplets/background/background-properties.glade.h:4
-msgid "Background _Style:"
-msgstr "Изглед позадине:"
-
-#: capplets/background/background-properties.glade.h:5
 msgid "Horizontal gradient"
 msgstr "Водоравно нијансирано"
 
-#: capplets/background/background-properties.glade.h:6
+#: capplets/background/background-properties.glade.h:5
 msgid "Pick a color"
 msgstr "Одаберите боју"
 
+#: capplets/background/background-properties.glade.h:6
+msgid "Picture _options:"
+msgstr "_Опције за слику:"
+
 #: capplets/background/background-properties.glade.h:7
-msgid "Picture Options:"
-msgstr "Опције за слику:"
-
-#: capplets/background/background-properties.glade.h:8
-#: libbackground/preview-file-selection.c:212
-msgid "Preview"
-msgstr "Преглед"
-
-#: capplets/background/background-properties.glade.h:9
 msgid "Primary Color"
 msgstr "Основна боја"
 
-#: capplets/background/background-properties.glade.h:10
+#: capplets/background/background-properties.glade.h:8
 msgid "Secondary Color"
 msgstr "Споредна боја"
 
-#: capplets/background/background-properties.glade.h:11
+#: capplets/background/background-properties.glade.h:9
+msgid "Select _picture:"
+msgstr "Одаберите слику:"
+
+#: capplets/background/background-properties.glade.h:10
 msgid "Solid color"
 msgstr "Постојана боја"
 
-#: capplets/background/background-properties.glade.h:12
-msgid "The background picture's file name."
-msgstr "Име датотеке слике за позадину."
-
-#: capplets/background/background-properties.glade.h:13
+#: capplets/background/background-properties.glade.h:11
 msgid "To set the background picture, drop an image or click to browse."
 msgstr ""
 "Да бисте поставили слику за позадину убаците слику или притисните за "
 "претрагу."
 
-#: capplets/background/background-properties.glade.h:14
+#: capplets/background/background-properties.glade.h:12
 msgid "Vertical gradient"
 msgstr "Усправно нијансирано"
 
-#: capplets/background/background-properties.glade.h:15
-msgid ""
-"You can drag image files\n"
-"into the window to set the \n"
-"background picture."
+#: capplets/background/background-properties.glade.h:13
+msgid "You can drag image files into the window to set the background picture."
 msgstr ""
-"Можете довући датотеке са сликама\n"
-"у прозор и тако поставити\n"
-"слику за позадину"
+"Можете довући датотеке са сликама у прозор и тако поставити слику за позадину"
+
+#: capplets/background/background-properties.glade.h:14
+msgid "radiobutton1"
+msgstr "Опционо дугме 1"
+
+#: capplets/background/background-properties.glade.h:15
+msgid "radiobutton2"
+msgstr "Опционо дугме 2"
+
+#: capplets/background/background-properties.glade.h:16
+msgid "radiobutton3"
+msgstr "Опционо дугме 3"
+
+#: capplets/background/background-properties.glade.h:17
+msgid "radiobutton4"
+msgstr "Опционо дугме 4"
+
+#: capplets/background/background-properties.glade.h:18
+msgid "radiobutton5"
+msgstr "Опционо дугме 5"
 
 #: capplets/background/background.desktop.in.h:1
 msgid "Background"
@@ -612,7 +640,7 @@ msgstr ""
 "Повратни позив који треба издати када треба ослободити податке из објекта "
 "уређивача особина"
 
-#: capplets/common/gconf-property-editor.c:1531
+#: capplets/common/gconf-property-editor.c:1541
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -625,7 +653,7 @@ msgstr ""
 "Уверите са да иста постоји и покушајте изнова или одаберите другу слику "
 "позадине."
 
-#: capplets/common/gconf-property-editor.c:1539
+#: capplets/common/gconf-property-editor.c:1549
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -638,12 +666,12 @@ msgstr ""
 "\n"
 "Молиим да одаберете другу слику."
 
-#: capplets/common/gconf-property-editor.c:1630
+#: capplets/common/gconf-property-editor.c:1640
 msgid "Please select an image."
 msgstr "Одаберите слику."
 
 #: capplets/default-applications/default-applications.desktop.in.h:1
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:22
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:18
 msgid "Preferred Applications"
 msgstr "Омиљени програми"
 
@@ -651,168 +679,222 @@ msgstr "Омиљени програми"
 msgid "Select your default applications"
 msgstr "Одаберите ваше основне програме"
 
-#: capplets/default-applications/gnome-default-applications-properties.c:114
+#: capplets/default-applications/gnome-default-applications-properties.c:108
 msgid "Please specify a name and a command for this editor."
 msgstr "Наведите име и наредбу за овај уређивач."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:2
-msgid "Acce_pts URLs"
-msgstr "Прихвата URL"
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:39
+msgid "Epiphany"
+msgstr "Спознаја"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:3
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:40
+msgid "Galeon"
+msgstr "Галеон"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:41
+msgid "Encompass"
+msgstr "Encompass"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:42
+msgid "Mozilla/Netscape 6"
+msgstr "Мозила/Нетскејп 6"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:43
+msgid "Netscape Communicator"
+msgstr "Нетскејп Комуникатор"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:44
+msgid "Konqueror"
+msgstr "Конкверор"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:45
+msgid "Lynx Text Browser"
+msgstr "Lynx текстуални веб читач"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:46
+msgid "Links Text Browser"
+msgstr "Линкс текстуални веб читач"
+
+#. The code in gnome-default-applications-properties.c makes sure
+#. * there is only one (the first entry in this list) Evolution entry
+#. * in the list shown to the user
+#.
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:55
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:56
+msgid "Evolution Mail Reader"
+msgstr "Програм за пошту Еволуција"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:57
+msgid "Balsa"
+msgstr "Балса"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:58
+msgid "KMail"
+msgstr "КМејл"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:59
+msgid "Mozilla Mail"
+msgstr "Мозила Пошта"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:60
+msgid "Mutt"
+msgstr "Mutt"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:66
+msgid "Gnome Terminal"
+msgstr "Гномов терминал"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:67
+msgid "Standard XTerminal"
+msgstr "Стандардни X терминал"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:68
+msgid "NXterm"
+msgstr "NXterm"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:69
+msgid "RXVT"
+msgstr "RXVT"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:70
+msgid "ETerm"
+msgstr "ETerm"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:2
 msgid "Add..."
 msgstr "Додај..."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:4
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:3
 msgid "C_ustom Editor"
-msgstr "Прилагођени уређивач"
+msgstr "Уређивач текста по _избору:"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:4
+msgid "C_ustom Mail Reader:"
+msgstr "Читач поште по _избору:"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:5
-msgid "C_ustom Help Browser:"
-msgstr "Прилагођени претраживач помоћи:"
+msgid "C_ustom Terminal:"
+msgstr "Терминал по _избору:"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:6
-#, fuzzy
-msgid "C_ustom Mail Reader:"
-msgstr "Прилагођени претраживач помоћи:"
+msgid "C_ustom Web Browser:"
+msgstr "Веб читач по _избору:"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:7
-msgid "C_ustom Terminal:"
-msgstr "Прилагођени терминал:"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:8
-msgid "C_ustom Web Browser:"
-msgstr "Прилагођени интернет претраживач:"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:9
 msgid "Co_mmand:"
 msgstr "Наредба:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:10
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:8
 msgid "Custom Editor Properties"
 msgstr "Особине прилагођеног уређивача"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:11
-msgid "Default Help Browser"
-msgstr "Основни претраживач помоћи"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:12
-#, fuzzy
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:9
 msgid "Default Mail Reader"
-msgstr "Основни управник прозора"
+msgstr "Основни читач поште"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:13
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:10
 msgid "Default Terminal"
 msgstr "Основни терминал"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:14
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:11
 msgid "Default Text Editor"
 msgstr "Основни уређивач текста"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:15
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:12
 msgid "Default Web Browser"
-msgstr "Основни интернет претраживач"
+msgstr "Основни веб читач"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:16
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:13
 msgid "Default Window Manager"
 msgstr "Основни управник прозора"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:17
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:14
 msgid "Delete"
 msgstr "Избриши"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:18
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:15
 msgid "E_xec Flag:"
 msgstr "Извршна заставица:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:19
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:16
 msgid "Edit..."
 msgstr "Уреди..."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:20
-msgid "Help Browser"
-msgstr "Претраживач помоћи"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:21
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:17
 msgid "Mail Reader"
-msgstr ""
+msgstr "Читач поште"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:23
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:19
 msgid ""
 "Select the window manager you want.  You will need to hit apply, wave the "
 "magic wand, and do a magic dance for it to work."
 msgstr "Одаберите управника прозора."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:24
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:20
 msgid "Start in T_erminal"
 msgstr "Покрени у терминалу"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:25
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:21
 msgid "Terminal"
 msgstr "Терминал"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:26
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:22
 msgid "Text Editor"
 msgstr "Уређивач текста"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:27
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:23
 msgid "This application can open _URIs"
 msgstr "Овај програм може да отвара URI-е"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:28
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:24
 msgid "This application can open _multiple files"
 msgstr "Овај програм може да отвара вишеструке датотеке"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:29
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:25
 msgid "This application needs to be run in a _shell"
 msgstr "Овај програм се мора изнова покренути из љуске"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:30
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:26
 msgid "Understands _Netscape Remote Control"
 msgstr "Разуме Netscape-ове даљинске контроле"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:31
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:27
 msgid "Use this _editor to open text files in the file manager"
 msgstr ""
 "Користти овај уређивач текста за отварање текст датотека у управнику датотека"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:32
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:28
 msgid "Web Browser"
-msgstr "Интернет претраживач"
+msgstr "Веб читач"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:33
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:29
 msgid "Window Manager"
 msgstr "Управник прозора"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:34
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:30
 #: capplets/file-types/file-types-properties.glade.h:22
 msgid "_Name:"
-msgstr "Име:"
+msgstr "_Име:"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:31
+msgid "_Properties..."
+msgstr "Осо_бине..."
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:32
+msgid "_Select a Mail Reader:"
+msgstr "_Одаберите читача поште:"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:33
+msgid "_Select a Terminal:"
+msgstr "_Одаберите терминал:"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:34
+msgid "_Select a Web Browser:"
+msgstr "_Одаберите веб читач:"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:35
-msgid "_Properties..."
-msgstr "Особине..."
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:36
-msgid "_Select a Help Browser:"
-msgstr "Одаберите претраживач помоћи:"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:37
-#, fuzzy
-msgid "_Select a Mail Reader:"
-msgstr "Одаберите претраживач помоћи:"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:38
-msgid "_Select a Terminal:"
-msgstr "Одаберите терминал:"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:39
-msgid "_Select a Web Browser:"
-msgstr "Одаберите интернет претраживач:"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:40
 msgid "_Select an Editor:"
-msgstr "Одаберите уређивач:"
+msgstr "_Одаберите уређивач:"
 
 #: capplets/desktop-links/Accessibility.directory.in.in.h:1
 msgid "Accessibility"
@@ -944,42 +1026,42 @@ msgstr "Промена резолуције екрана"
 msgid "Screen Resolution"
 msgstr "Резолуција екрана"
 
-#: capplets/display/main.c:261
+#: capplets/display/main.c:274
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: capplets/display/main.c:367
-msgid "Resolution:"
-msgstr "Резолуција:"
+#: capplets/display/main.c:376
+msgid "_Resolution:"
+msgstr "_Резолуција:"
 
-#: capplets/display/main.c:385
-msgid "Refresh rate:"
-msgstr "Учесталост освежења"
+#: capplets/display/main.c:395
+msgid "Re_fresh rate:"
+msgstr "Учесталост ос_вежавања:"
 
-#: capplets/display/main.c:405
+#: capplets/display/main.c:416
 msgid "Default Settings"
 msgstr "Основне поставке"
 
-#: capplets/display/main.c:407
+#: capplets/display/main.c:418
 #, c-format
 msgid "Screen %d Settings\n"
-msgstr "Поставке екрана %d \n"
+msgstr "Поставке екрана %d\n"
 
-#: capplets/display/main.c:432
+#: capplets/display/main.c:443
 msgid "Screen Resolution Preferences"
 msgstr "Подешавање резолуције екрана"
 
-#: capplets/display/main.c:460
+#: capplets/display/main.c:475
 #, c-format
 msgid "Make default for this _computer (%s) only"
 msgstr "Нека ово буде подразумевана вредност само за овај рачунар (%s)"
 
-#: capplets/display/main.c:478
+#: capplets/display/main.c:493
 msgid "Options"
 msgstr "Опције"
 
-#: capplets/display/main.c:499
+#: capplets/display/main.c:514
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d seconds the previous "
@@ -988,11 +1070,11 @@ msgstr ""
 "Проверавам нове поставке. Уколико не одговорите у року од %d секунди "
 "враћамна претходне поставке"
 
-#: capplets/display/main.c:549
+#: capplets/display/main.c:563
 msgid "Do you want to keep this resolution?"
 msgstr "Желите ли да оставите ову резолуцију?"
 
-#: capplets/display/main.c:586
+#: capplets/display/main.c:588
 msgid "Use _previous resolution"
 msgstr "Користи претходну резолуцију"
 
@@ -1000,21 +1082,21 @@ msgstr "Користи претходну резолуцију"
 msgid "_Keep resolution"
 msgstr "Задржи резолуцију"
 
+#: capplets/display/main.c:739
+msgid ""
+"The XServer does not support the XRandR extension.  Runtime resolution "
+"changes to the display size are not available."
+msgstr ""
+"Икс сервер не подржава XRandR проширење. Нису могуће промене резолуције "
+"екрана у ходу."
+
 #: capplets/display/main.c:747
 msgid ""
-"The Xserver doesn't support the XRandR extension, runtime resolution changes "
-"aren't possible."
+"The version of the XRandR extension is incompatible with this program. "
+"Runtime changes to the display size are not available."
 msgstr ""
-"ИКС сервер не подржава XRandR проширење, промене резолуције у ходу нису "
-"могуће."
-
-#: capplets/display/main.c:759
-msgid ""
-"The version of the XRandR extension is incompatible with this program, "
-"runtime resolution changes aren't possible."
-msgstr ""
-"Ова верзија XRandR проширења није усклађена са ови програмом - промене "
-"резолуције у ходу нису могуће."
+"Ова верзија XRandR проширења није усклађена са ови програмом. Нису могуће "
+"промене резолуције екрана у ходу."
 
 #: capplets/file-types/file-types-capplet.c:196
 #: vfs-methods/themus/themus-properties-view.c:165
@@ -1305,7 +1387,7 @@ msgstr "Интернет"
 
 #: capplets/file-types/service-info.c:46
 msgid "File transfer protocol"
-msgstr "ФТП"
+msgstr "Протокол за пренос датотека"
 
 #: capplets/file-types/service-info.c:47
 msgid "Detailed documentation"
@@ -1331,151 +1413,156 @@ msgstr "Слово"
 msgid "Select fonts for the desktop"
 msgstr "Одаберите слова за радну површину"
 
-#: capplets/font/font-properties.glade.h:1
+#: capplets/font/font-properties.glade.h:2
+msgid "<b>Font Rendering</b>"
+msgstr "<b>Исцртавање фонтова</b>"
+
+#: capplets/font/font-properties.glade.h:3
 msgid "Best _shapes"
 msgstr "Најбољи облици"
 
-#: capplets/font/font-properties.glade.h:2
+#: capplets/font/font-properties.glade.h:4
 msgid "Best co_ntrast"
 msgstr "Најбољи контраст"
 
-#: capplets/font/font-properties.glade.h:3
+#: capplets/font/font-properties.glade.h:5
 msgid "De_tails..."
 msgstr "Детаљи..."
 
-#: capplets/font/font-properties.glade.h:4
+#: capplets/font/font-properties.glade.h:6
 msgid "Font Preferences"
 msgstr "Подешавање слова"
 
-#: capplets/font/font-properties.glade.h:5
-msgid "Font Rendering"
-msgstr "Приказ слова"
-
-#: capplets/font/font-properties.glade.h:6
+#: capplets/font/font-properties.glade.h:7
 msgid "Font Rendering Details"
 msgstr "Детаљи приказа слова"
 
-#: capplets/font/font-properties.glade.h:7
+#: capplets/font/font-properties.glade.h:8
 msgid "G_rayscale"
 msgstr "Сиве нијансе"
 
-#: capplets/font/font-properties.glade.h:8
+#: capplets/font/font-properties.glade.h:9
 msgid "Go to font folder"
 msgstr "Иди до директоријума са словима"
 
-#: capplets/font/font-properties.glade.h:9
+#: capplets/font/font-properties.glade.h:10
 msgid "Hinting:"
 msgstr "Савети:"
 
-#: capplets/font/font-properties.glade.h:10
+#: capplets/font/font-properties.glade.h:11
 msgid "N_one"
 msgstr "Ништа"
 
-#: capplets/font/font-properties.glade.h:11
+#: capplets/font/font-properties.glade.h:12
 msgid "Resolution (_dots per inch):"
 msgstr "Разлагање (тачка/инч):"
 
-#: capplets/font/font-properties.glade.h:12
+#: capplets/font/font-properties.glade.h:13
 msgid "Set the font for applications"
 msgstr "Одредите слова за програме"
 
-#: capplets/font/font-properties.glade.h:13
+#: capplets/font/font-properties.glade.h:14
 msgid "Set the font for the icons on the desktop"
 msgstr "Одреди слова за иконице на радној површини"
 
-#: capplets/font/font-properties.glade.h:14
+#: capplets/font/font-properties.glade.h:15
 msgid "Set the monospace font for terminals and similar applications"
 msgstr "Одреди слова утврђене ширине за термионале и сличне програме"
 
-#: capplets/font/font-properties.glade.h:15
+#: capplets/font/font-properties.glade.h:16
 msgid "Smoothing:"
 msgstr "Дотеривање:"
 
-#: capplets/font/font-properties.glade.h:16
+#: capplets/font/font-properties.glade.h:17
 msgid "Sub_pixel (LCDs)"
 msgstr "Испод тачке (LCD)"
 
-#: capplets/font/font-properties.glade.h:17
+#: capplets/font/font-properties.glade.h:18
 msgid "Sub_pixel smoothing (LCDs)"
 msgstr "Дотеривање испод тачке (LCD)"
 
-#: capplets/font/font-properties.glade.h:18
+#: capplets/font/font-properties.glade.h:19
 msgid "Subpixel order:"
 msgstr "Поредак испод тачке:"
 
-#: capplets/font/font-properties.glade.h:19
+#: capplets/font/font-properties.glade.h:20
 msgid "VB_GR"
 msgstr "VB_GR"
 
-#: capplets/font/font-properties.glade.h:20
+#: capplets/font/font-properties.glade.h:21
 msgid "_Application font:"
 msgstr "Слова за програме:"
 
-#: capplets/font/font-properties.glade.h:21
+#: capplets/font/font-properties.glade.h:22
 msgid "_BGR"
 msgstr "_BGR"
 
-#: capplets/font/font-properties.glade.h:22
+#: capplets/font/font-properties.glade.h:23
 msgid "_Desktop font:"
 msgstr "Слова за радну површину:"
 
-#: capplets/font/font-properties.glade.h:23
+#: capplets/font/font-properties.glade.h:24
 msgid "_Full"
 msgstr "Потпуно"
 
-#: capplets/font/font-properties.glade.h:24
+#: capplets/font/font-properties.glade.h:25
+#: capplets/mouse/gnome-mouse-properties.glade.h:22
 msgid "_Medium"
 msgstr "Средње"
 
-#: capplets/font/font-properties.glade.h:25
+#: capplets/font/font-properties.glade.h:26
 msgid "_Monochrome"
 msgstr "Једнобојно"
 
-#: capplets/font/font-properties.glade.h:26
+#: capplets/font/font-properties.glade.h:27
 msgid "_None"
 msgstr "Ништа"
 
-#: capplets/font/font-properties.glade.h:27
+#: capplets/font/font-properties.glade.h:28
 msgid "_RGB"
 msgstr "_RGB"
 
-#: capplets/font/font-properties.glade.h:28
+#: capplets/font/font-properties.glade.h:29
 msgid "_Slight"
 msgstr "Мало"
 
-#: capplets/font/font-properties.glade.h:29
+#: capplets/font/font-properties.glade.h:30
 msgid "_Terminal font:"
 msgstr "Слова за терминал:"
 
-#: capplets/font/font-properties.glade.h:30
+#: capplets/font/font-properties.glade.h:31
+msgid "_Use Font"
+msgstr "_Користи фонт"
+
+#: capplets/font/font-properties.glade.h:32
 msgid "_VRGB"
 msgstr "_VRGB"
 
-#: capplets/font/font-properties.glade.h:31
+#: capplets/font/font-properties.glade.h:33
 msgid "_Window title font:"
-msgstr "Слова за назив прозора:"
+msgstr "Слова за назив _прозора:"
 
 #: capplets/keybindings/eggcellrendererkeys.c:160
 #: capplets/keybindings/eggcellrendererkeys.c:161
 msgid "Accelerator key"
-msgstr "Тастер за брзи приступ"
+msgstr "Пречица"
 
 #: capplets/keybindings/eggcellrendererkeys.c:170
 #: capplets/keybindings/eggcellrendererkeys.c:171
 msgid "Accelerator modifiers"
-msgstr "Прекидач за брзи приступ"
+msgstr "Измењивачи пречица"
 
 #: capplets/keybindings/eggcellrendererkeys.c:180
 msgid "Accel Mode"
-msgstr "Мод брзог приступа"
+msgstr "Начин рада пречица"
 
 #: capplets/keybindings/eggcellrendererkeys.c:181
 msgid "The type of accelerator."
-msgstr "Врста брзог приступа"
+msgstr "Врста пречице."
 
 #: capplets/keybindings/eggcellrendererkeys.c:219
 #: capplets/keybindings/gnome-keybinding-properties.c:204
-#: libbackground/applier.c:588 typing-break/drwright.c:446
+#: libbackground/applier.c:588 typing-break/drwright.c:439
 msgid "Disabled"
 msgstr "Онемогућено"
 
@@ -1483,20 +1570,19 @@ msgstr "Онемогућено"
 #: capplets/keybindings/eggcellrendererkeys.c:563
 msgid "Type a new accelerator, or press Backspace to clear"
 msgstr ""
-"Укуцајте нову кобинацију за брзи приступ или притисните повратник да "
-"избришете"
+"Укуцајте нову кобинацију за пречицу или притисните Backspace да избришете"
 
 #: capplets/keybindings/eggcellrendererkeys.c:566
 msgid "Type a new accelerator"
-msgstr "Укуцајте нову кобинацију за брзи приступ"
+msgstr "Укуцајте нову пречицу"
 
 #: capplets/keybindings/gnome-keybinding-properties.c:172
 msgid "GNOME Default"
-msgstr "Подразумеване вредности ГНОМА"
+msgstr "Подразумевано у Гному"
 
 #: capplets/keybindings/gnome-keybinding-properties.c:540
 msgid "<Unknown Action>"
-msgstr "<Unknown Action>"
+msgstr "<Непозната радња>"
 
 #: capplets/keybindings/gnome-keybinding-properties.c:559
 msgid "Desktop"
@@ -1512,22 +1598,21 @@ msgid ""
 "The shortcut \"%s\" is already used for:\n"
 " \"%s\"\n"
 msgstr ""
-"Пречица \"%s\" се већ користи за:\n"
-" \"%s\"\n"
+"Пречица „%s“ се већ користи за:\n"
+" „%s“\n"
 
 #: capplets/keybindings/gnome-keybinding-properties.c:729
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
-msgstr ""
-"Грешка при смештању нове комбинације за брзи приступ у базу података: %s\n"
+msgstr "Грешка при смештању нове пречице у базу података: %s\n"
 
 #: capplets/keybindings/gnome-keybinding-properties.c:880
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
 msgstr ""
-"Не могу да пронађем теме за тастатуру. Ово указује на непотпуну ГТК"
-"+инсталацију."
+"Не могу да пронађем теме за тастатуру. Ово указује на непотпуну ГТК+ "
+"инсталацију."
 
 #: capplets/keybindings/gnome-keybinding-properties.c:902
 msgid "Action"
@@ -1548,11 +1633,11 @@ msgstr "Пречице на татстатури"
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:3
 msgid "_Desktop shortcuts:"
-msgstr "Пречице на радној површини:"
+msgstr "Пречице на _радној површини:"
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:4
 msgid "_Text editing shortcuts:"
-msgstr "Пречице за ѕређење текста:"
+msgstr "Пречице за уређивање текста:"
 
 #: capplets/keybindings/keybinding.desktop.in.h:1
 msgid "Assign shortcut keys to commands"
@@ -1563,217 +1648,204 @@ msgstr "Доделите преке тастере наредбама"
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "Грешка при покретању програмчета за тастатуру : %s"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:201
+#: capplets/keyboard/gnome-keyboard-properties.c:199
 msgid "_Accessibility"
-msgstr "Приступачност"
+msgstr "_Приступачност"
 
 #: capplets/keyboard/gnome-keyboard-properties.c:218
 #: capplets/keyboard/gnome-keyboard-properties.c:220
+#: capplets/sound/sound-properties-capplet.c:208
 #: capplets/sound/sound-properties-capplet.c:210
-#: capplets/sound/sound-properties-capplet.c:212
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr "Само примени подешења и изађи "
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:1
-#, fuzzy
-msgid "<b>Cursor Blinks</b>"
-msgstr "Трептући курсор"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:2
-#, fuzzy
-msgid "<b>Repeat Keys</b>"
-msgstr "<b>Омогући тастере за понављање</b>"
+#: capplets/keyboard/gnome-keyboard-properties.c:224
+msgid "Start the page with the typing break settings showing"
+msgstr "Прикажи лист са подешавањима за одморе при куцању"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:3
-msgid "<b>_Lock screen to enforce typing break</b>"
-msgstr ""
+msgid "<b>Cursor Blinking</b>"
+msgstr "<b>Трептући курсор</b>"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+msgid "<b>Repeat Keys</b>"
+msgstr "<b>Понављање тастера</b>"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+msgid "<b>_Lock screen to enforce typing break</b>"
+msgstr "<b>_Закључај екран како би приморао на одмор при куцању</b>"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>Брзо</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>Дуго</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>Кратко</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Споро</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
-msgid "Check if breaks are allowed to be postponed"
-msgstr ""
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
-msgid "Duration of the break when typing is disallowed"
-msgstr ""
-
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:10
-msgid "Duration of work before forcing a break"
-msgstr ""
+msgid "All_ow postponing of breaks"
+msgstr "До_пусти одлагање одмора"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:11
-msgid "Key presses _repeat when key is held down"
-msgstr "Притисци на тастер се _понављају када се тастер држи притиснут"
+msgid "Check if breaks are allowed to be postponed"
+msgstr "Укључи ако је дозвољено одлагање одмора"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+msgid "Cursor _blinks in text boxes and fields"
+msgstr "Курзор _трепће у пољима за унос текста"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:13
-msgid "Keyboard Preferences"
-msgstr "Подешења тастатуре"
+msgid "Duration of the break when typing is disallowed"
+msgstr "Трајање одмора када је куцање онемогућено"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:14
+msgid "Duration of work before forcing a break"
+msgstr "Трајање рада пре наметања одмора"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+msgid "Key presses _repeat when key is held down"
+msgstr "Притисци на тастер се понављају када се тастер држи притиснут"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
+msgid "Keyboard Preferences"
+msgstr "Поставке тастатуре"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
 msgid ""
 "Lock screen after a certain duration to help prevent repetitive keyboard use "
 "injuries"
 msgstr ""
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
-msgid "Typing Break"
-msgstr ""
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
-msgid "_Accessibility..."
-msgstr "Приступачност..."
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
-msgid "_Allow postponing of breaks"
-msgstr ""
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
-msgid "_Break interval lasts"
-msgstr ""
+"Закључај екран након одређеног времена како би спречио повреде од претеране "
+"употребе тастатуре"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:20
-#, fuzzy
-msgid "_Cursor blinks in text boxes and fields"
-msgstr "Трепће у пољима и куђицама за текст"
+msgid "Typing Break"
+msgstr "Одмор од куцања"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:21
-msgid "_Delay:"
-msgstr "Застој:"
+msgid "_Accessibility..."
+msgstr "_Приступачност..."
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:22
-msgid "_Speed:"
-msgstr "Брзина:"
+msgid "_Break interval lasts:"
+msgstr "_Одмор траје:"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:23
-msgid "_Work interval lasts"
-msgstr ""
+msgid "_Delay:"
+msgstr "_Застој:"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:24
+msgid "_Speed:"
+msgstr "_Брзина:"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
+msgid "_Work interval lasts:"
+msgstr "Период _рада траје:"
+
+# bug: plural-forms
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
 msgid "minutes"
-msgstr ""
+msgstr "минута"
 
 #: capplets/keyboard/keyboard.desktop.in.h:2
 msgid "Set your keyboard preferences"
-msgstr "Подесите тастатуру"
+msgstr "Подесите вашу тастатуру"
 
-#: capplets/mouse/gnome-mouse-properties.c:439
-#, c-format
-msgid ""
-"<b>Unknown Cursor</b>\n"
-"%s"
-msgstr ""
-"<b>Непознат курсор</b>\n"
-"%s"
+#: capplets/mouse/gnome-mouse-properties.c:498
+msgid "Unknown Cursor"
+msgstr "Непознат курсор"
 
-#: capplets/mouse/gnome-mouse-properties.c:541
-msgid ""
-"<b>Default Cursor - Current</b>\n"
-"The default cursor that ships with X"
-msgstr ""
-"<b>Основни курсор - тренутни</b>\n"
-"Основни кусрор који долази са Иксом"
+#: capplets/mouse/gnome-mouse-properties.c:603
+msgid "Default Cursor - Current"
+msgstr "Основни курзор — текући"
 
-#: capplets/mouse/gnome-mouse-properties.c:544
-msgid ""
-"<b>Default Cursor</b>\n"
-"The default cursor that ships with X"
-msgstr ""
-"<b>Основни курсор</b>\n"
-"Основни кусрор који долази са Иксом"
+#: capplets/mouse/gnome-mouse-properties.c:603
+#: capplets/mouse/gnome-mouse-properties.c:606
+msgid "The default cursor that ships with X"
+msgstr "Основни курзор који долази са Иксом"
 
-#: capplets/mouse/gnome-mouse-properties.c:562
-msgid ""
-"<b>White Cursor - Current</b>\n"
-"The default cursor inverted"
-msgstr ""
-"<b>Бели курсор - тренутни</b>\n"
-"Основни курсор преокренут"
+#: capplets/mouse/gnome-mouse-properties.c:606
+msgid "Default Cursor"
+msgstr "Основни курзор"
 
-#: capplets/mouse/gnome-mouse-properties.c:565
-msgid ""
-"<b>White Cursor</b>\n"
-"The default cursor inverted"
-msgstr ""
-"<b>Бели курсор</b>\n"
-"Основни курсор преокренут"
+#: capplets/mouse/gnome-mouse-properties.c:624
+msgid "White Cursor - Current"
+msgstr "Бели курзор — текући"
 
-#: capplets/mouse/gnome-mouse-properties.c:583
-msgid ""
-"<b>Large Cursor - Current</b>\n"
-"Large version of normal cursor"
-msgstr ""
-"<b>Велики курсор - тренутни</b>\n"
-"Већа варијанта нормалног курсора"
+#: capplets/mouse/gnome-mouse-properties.c:624
+#: capplets/mouse/gnome-mouse-properties.c:627
+msgid "The default cursor inverted"
+msgstr "Основни курзор обрнутих боја"
 
-#: capplets/mouse/gnome-mouse-properties.c:586
-msgid ""
-"<b>Large Cursor</b>\n"
-"Large version of normal cursor"
-msgstr ""
-"<b>Велики курсор</b>\n"
-"Већа варијанта нормалног курсора"
+#: capplets/mouse/gnome-mouse-properties.c:627
+msgid "White Cursor"
+msgstr "Бели курзор"
 
-#: capplets/mouse/gnome-mouse-properties.c:604
-msgid ""
-"<b>Large White Cursor - Current</b>\n"
-"Large version of white cursor"
-msgstr ""
-"<b>Велики бели курсор - тренутни</b>\n"
-"Већа варијанта белог курсора"
+#: capplets/mouse/gnome-mouse-properties.c:646
+msgid "Large Cursor - Current"
+msgstr "Велики курзор — текући"
 
-#: capplets/mouse/gnome-mouse-properties.c:607
-msgid ""
-"<b>Large White Cursor</b>\n"
-"Large version of white cursor"
-msgstr ""
-"<b>Велики бели курсор</b>\n"
-"Већа варијанта белог курсора"
+#: capplets/mouse/gnome-mouse-properties.c:646
+#: capplets/mouse/gnome-mouse-properties.c:649
+msgid "Large version of normal cursor"
+msgstr "Већа варијанта нормалног курзора"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:1
-msgid "    "
-msgstr "    "
+#: capplets/mouse/gnome-mouse-properties.c:649
+msgid "Large Cursor"
+msgstr "Велики курзор"
+
+#: capplets/mouse/gnome-mouse-properties.c:668
+msgid "Large White Cursor - Current"
+msgstr "Велики бели курзор — текући"
+
+#: capplets/mouse/gnome-mouse-properties.c:668
+#: capplets/mouse/gnome-mouse-properties.c:671
+msgid "Large version of white cursor"
+msgstr "Већа варијанта белог курсора<"
+
+#: capplets/mouse/gnome-mouse-properties.c:671
+msgid "Large White Cursor"
+msgstr "Велики бели курзор"
+
+#: capplets/mouse/gnome-mouse-properties.c:749
+msgid "Cursor Size"
+msgstr "Величина курзора"
+
+#: capplets/mouse/gnome-mouse-properties.c:758
+msgid "Cursor Theme"
+msgstr "Изглед курзора"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:2
-msgid "<b>Cursor Theme</b>"
-msgstr "<b>Изглед курсора</b>"
+msgid "<b>Double-Click Timeout </b>"
+msgstr "<b>Истек времена за дупли клик </b>"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:3
-msgid "<b>Double-Click Timeout </b>"
-msgstr "<b>Истек времена за дупли притисак </b>"
+msgid "<b>Drag and Drop</b>"
+msgstr "<b>Превуци и пусти</b>"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:4
-msgid "<b>Drag and Drop</b>"
-msgstr "<b>Довуци и спусти</b>"
-
-#: capplets/mouse/gnome-mouse-properties.glade.h:5
 msgid "<b>Locate Pointer</b>"
 msgstr "<b>Пронађи показивач</b>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:6
+#: capplets/mouse/gnome-mouse-properties.glade.h:5
 msgid "<b>Mouse Orientation</b>"
 msgstr "<b>Оријентација миша</b>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:7
+#: capplets/mouse/gnome-mouse-properties.glade.h:6
 msgid "<b>Speed</b>"
 msgstr "<b>Брзина</b>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:8
+#: capplets/mouse/gnome-mouse-properties.glade.h:7
 msgid ""
 "<i><small><b>Note:</b> Changes to this setting will not take effect until "
 "you next log in.</small></i>"
@@ -1781,77 +1853,85 @@ msgstr ""
 "<i><small><b>Напомена:</b> Измене ове поставке неће ступити у дејство док се "
 "не пријавите изнова.</small></i>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:9
+#: capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid "<i>Fast</i>"
 msgstr "<i>Брзо</i>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:10
+#: capplets/mouse/gnome-mouse-properties.glade.h:9
 msgid "<i>High</i>"
 msgstr "<i>Високо</i>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:11
+#: capplets/mouse/gnome-mouse-properties.glade.h:10
 msgid "<i>Large</i>"
 msgstr "<i>Велико</i>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:12
+#: capplets/mouse/gnome-mouse-properties.glade.h:11
 msgid "<i>Low</i>"
 msgstr "<i>Ниско</i>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:13
+#: capplets/mouse/gnome-mouse-properties.glade.h:12
 msgid "<i>Slow</i>"
 msgstr "<i>Споро</i>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:14
+#: capplets/mouse/gnome-mouse-properties.glade.h:13
 msgid "<i>Small</i>"
 msgstr "<i>Мало</i>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:15
+#: capplets/mouse/gnome-mouse-properties.glade.h:14
 msgid "Buttons"
 msgstr "Дугмад"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:16
-msgid "Cursor _themes:"
-msgstr "Изгледи курсора:"
-
-#: capplets/mouse/gnome-mouse-properties.glade.h:17
+#: capplets/mouse/gnome-mouse-properties.glade.h:15
 msgid "Cursors"
 msgstr "Курсори"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:18
+#: capplets/mouse/gnome-mouse-properties.glade.h:16
 msgid "Highlight the _pointer when you press Ctrl"
-msgstr "Нагласи показивач када се притисне Ctrl"
+msgstr "Истакни показивач када се притисне Ctrl"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:19
+#: capplets/mouse/gnome-mouse-properties.glade.h:17
 msgid "Motion"
 msgstr "Кретање"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:20
+#: capplets/mouse/gnome-mouse-properties.glade.h:18
 msgid "Mouse Preferences"
 msgstr "Подешења миша"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:21
+#: capplets/mouse/gnome-mouse-properties.glade.h:19
 msgid "_Acceleration:"
-msgstr "Убрзање:"
+msgstr "_Убрзање:"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:22
+#: capplets/mouse/gnome-mouse-properties.glade.h:20
+msgid "_Large"
+msgstr "_Велико"
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:21
 msgid "_Left-handed mouse"
 msgstr "Леворуки миш"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:23
 msgid "_Sensitivity:"
-msgstr "Осетљивост:"
+msgstr "О_сетљивост:"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:24
-msgid "_Threshold:"
-msgstr "Праг:"
+msgid "_Small"
+msgstr "_Мало"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:25
+msgid "_Threshold:"
+msgstr "_Праг:"
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:26
 msgid "_Timeout:"
-msgstr "Истек времена:"
+msgstr "Истек _времена:"
+
+#: capplets/mouse/mouse.desktop.in.h:1
+msgid "Mouse"
+msgstr "Миш"
 
 #: capplets/mouse/mouse.desktop.in.h:2
 msgid "Set your mouse preferences"
-msgstr "Поставите подешења миша"
+msgstr "Подесите вашег миша"
 
 #: capplets/network/gnome-network-preferences.desktop.in.h:1
 msgid "Network Proxy"
@@ -1867,19 +1947,19 @@ msgstr "       "
 
 #: capplets/network/gnome-network-preferences.glade.h:3
 msgid "<b>_Automatic proxy configuration</b>"
-msgstr "<b>Аутоматско подешавање проксија</b>"
+msgstr "<b>_Аутоматско подешавање проксија</b>"
 
 #: capplets/network/gnome-network-preferences.glade.h:4
 msgid "<b>_Direct internet connection</b>"
-msgstr "<b>Директни прикључак на интернет</b>"
+msgstr "<b>_Директни прикључак на интернет</b>"
 
 #: capplets/network/gnome-network-preferences.glade.h:5
 msgid "<b>_Manual proxy configuration</b>"
-msgstr "<b>Ручно подешавање проксија</b>"
+msgstr "<b>_Ручно подешавање проксија</b>"
 
 #: capplets/network/gnome-network-preferences.glade.h:6
 msgid "<b>_Use authentication</b>"
-msgstr "<b>Користи проверу</b>"
+msgstr "<b>Користи _идентификацију</b>"
 
 #: capplets/network/gnome-network-preferences.glade.h:7
 msgid "Autoconfiguration _URL:"
@@ -1890,56 +1970,56 @@ msgid "HTTP Proxy Details"
 msgstr "Детаљи HTTP проксија"
 
 #: capplets/network/gnome-network-preferences.glade.h:9
+msgid "H_TTP proxy:"
+msgstr "H_TTP прокси:"
+
+#: capplets/network/gnome-network-preferences.glade.h:10
 msgid "Network Proxy Configuration"
 msgstr "Подешавање мрежног проксија"
 
-#: capplets/network/gnome-network-preferences.glade.h:10
+#: capplets/network/gnome-network-preferences.glade.h:11
 msgid "Port:"
 msgstr "Врата:"
 
-#: capplets/network/gnome-network-preferences.glade.h:11
+#: capplets/network/gnome-network-preferences.glade.h:12
 msgid "S_ocks host:"
 msgstr "Домаћин утичнице"
 
-#: capplets/network/gnome-network-preferences.glade.h:12
-msgid "_Details"
-msgstr "Детаљи"
-
 #: capplets/network/gnome-network-preferences.glade.h:13
+msgid "_Details"
+msgstr "_Детаљи"
+
+#: capplets/network/gnome-network-preferences.glade.h:14
 msgid "_FTP proxy:"
 msgstr "ФТП прокси:"
 
-#: capplets/network/gnome-network-preferences.glade.h:14
-msgid "_HTTP proxy:"
-msgstr "HTTP прокси:"
-
 #: capplets/network/gnome-network-preferences.glade.h:15
 msgid "_Password:"
-msgstr "Лозинка:"
+msgstr "_Лозинка:"
 
 #: capplets/network/gnome-network-preferences.glade.h:16
 msgid "_Secure HTTP proxy:"
-msgstr "Безбедини HTTP прокси:"
+msgstr "_Безбедни HTTP прокси:"
 
 #: capplets/network/gnome-network-preferences.glade.h:17
 msgid "_Username:"
-msgstr "Корисничко име:"
+msgstr "_Корисничко име:"
 
-#: capplets/sound/sound-properties-capplet.c:241
+#: capplets/sound/sound-properties-capplet.c:239
 msgid "Sound preferences"
-msgstr "Подешења звука"
+msgstr "Поставке звука"
 
 #: capplets/sound/sound-properties.glade.h:1
 msgid "E_nable sound server startup"
-msgstr "Омогући сервер звука на почетку"
+msgstr "О_могући сервер звука на почетку"
 
 #: capplets/sound/sound-properties.glade.h:2
-msgid "Flash _window titlebar"
-msgstr "Засветли линију са насловом прозора"
+msgid "Flash _entire screen"
+msgstr "Бљесак _читавог екрана"
 
 #: capplets/sound/sound-properties.glade.h:3
-msgid "Flash entire _screen"
-msgstr "Засветли читав екран"
+msgid "Flash _window titlebar"
+msgstr "Бљесак насловне линије _прозора"
 
 #: capplets/sound/sound-properties.glade.h:4
 msgid "General"
@@ -1951,7 +2031,7 @@ msgstr "Звучни сигнали"
 
 #: capplets/sound/sound-properties.glade.h:6
 msgid "Sound Preferences"
-msgstr "Подешења звука"
+msgstr "Поставке звука"
 
 #: capplets/sound/sound-properties.glade.h:7
 msgid "System Bell"
@@ -1959,15 +2039,15 @@ msgstr "Системско звонце"
 
 #: capplets/sound/sound-properties.glade.h:8
 msgid "_Sound an audible bell"
-msgstr "Звук и разговетно звонце"
+msgstr "_Звук и разговетно звонце"
 
 #: capplets/sound/sound-properties.glade.h:9
 msgid "_Sounds for events"
-msgstr "Звуци за догађаје"
+msgstr "_Звуци за догађаје"
 
 #: capplets/sound/sound-properties.glade.h:10
 msgid "_Visual feedback:"
-msgstr "Визуелнаповратнаспрега:"
+msgstr "_Визуелно звонце:"
 
 #: capplets/sound/sound.desktop.in.h:1
 msgid "Enable sound and associate sounds with events"
@@ -1975,7 +2055,7 @@ msgstr "Омогући звук и повежи звуке са догађаји
 
 #: capplets/theme-switcher/control/control.c:18
 msgid "Eenie Meenie Mynie Moe Catcha Tiger By Its Toe"
-msgstr "Еци пеци пец..."
+msgstr "Еци пеци пец ти си мали зец а ја мала препелица еци пеци пец"
 
 #: capplets/theme-switcher/control/control.c:43
 msgid "Selected themes from above will be tested by previewing here."
@@ -2175,29 +2255,25 @@ msgstr "Понашање"
 msgid "Sets the default behavior of GNOME applications"
 msgstr "Поставља основно понашање ГНОМ програма"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:1
-msgid "A preview of what a menubar looks like with these settings."
-msgstr "Преглед изгледа менија са овим поставкама."
-
 #: capplets/ui-properties/gnome-ui-properties.glade.h:2
-msgid "A preview of what a toolbar looks like with these settings."
-msgstr "Преглед изгледа линије са алатима са овим поставкама."
+msgid "<b>Behavior and Appearance</b>"
+msgstr "<b>Понашање и изглед</b>"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:3
-msgid "C_ut"
-msgstr "Исеци"
+msgid "<b>Preview</b>"
+msgstr "<b>Преглед</b>"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:4
-msgid "Icons Only"
-msgstr "Само иконице"
+msgid "C_ut"
+msgstr "_Исеци"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:5
-msgid "Menu and Toolbar Preferences"
-msgstr "Подешења менија и линија са алатима"
+msgid "Icons only"
+msgstr "Само иконице"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:6
-msgid "Menus"
-msgstr "Менији"
+msgid "Menu and Toolbar Preferences"
+msgstr "Подешења менија и линија са алатима"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:7
 msgid "New File"
@@ -2208,85 +2284,69 @@ msgid "Open File"
 msgstr "Отвори датотеку"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:9
-msgid "Sample menubar:"
-msgstr "Пример мени линије:"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:10
-msgid "Sample toolbar:"
-msgstr "Пример линије са алатима:"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:11
 msgid "Save File"
 msgstr "Сними датотеку"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:12
-msgid "Select the toolbar style."
-msgstr "Одаберите изглед линије са алатима."
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:13
+#: capplets/ui-properties/gnome-ui-properties.glade.h:10
 msgid "Show _icons in menus"
 msgstr "Прикажи иконице у менијима"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:14
-msgid "Text Below Icons"
+#: capplets/ui-properties/gnome-ui-properties.glade.h:11
+msgid "Text below icons"
 msgstr "Текст испод иконица"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:15
-msgid "Text Beside Icons"
+#: capplets/ui-properties/gnome-ui-properties.glade.h:12
+msgid "Text beside icons"
 msgstr "Текст поред иконица"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:16
-msgid "Text Only"
+#: capplets/ui-properties/gnome-ui-properties.glade.h:13
+msgid "Text only"
 msgstr "Само текст"
 
+#: capplets/ui-properties/gnome-ui-properties.glade.h:14
+msgid "Toolbar _button labels: "
+msgstr "Ознаке _главних алатки: "
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:15
+msgid "_Copy"
+msgstr "_Умножи"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:16
+msgid "_Detachable toolbars"
+msgstr "_Одвојиве траке са алаткама"
+
 #: capplets/ui-properties/gnome-ui-properties.glade.h:17
-msgid "Toolbar"
-msgstr "Линија са алатима"
+msgid "_Edit"
+msgstr "_Уреди"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:18
-msgid "Toolbars can be _detached and moved around"
-msgstr "Линије са алатима се могу одвајити и премештати"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:19
-msgid "_Button Labels: "
-msgstr "Називи дугмади: "
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:20
-msgid "_Copy"
-msgstr "Умножи"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:21
-msgid "_Edit"
-msgstr "Уреди"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:22
 #: control-center/gnomecc-ui.xml.h:5
 msgid "_File"
-msgstr "Датотека"
+msgstr "_Датотека"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:19
+msgid "_New"
+msgstr "_Нова"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:20
+msgid "_Open"
+msgstr "_Отвори"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:21
+msgid "_Paste"
+msgstr "У_баци"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:22
+msgid "_Print"
+msgstr "_Штампај"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:23
-msgid "_New"
-msgstr "Ново"
+msgid "_Quit"
+msgstr "_Изађи"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:24
-msgid "_Open"
-msgstr "Отвори"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:25
-msgid "_Paste"
-msgstr "Пресликај"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:26
-msgid "_Print"
-msgstr "Одштампај"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:27
-msgid "_Quit"
-msgstr "Напусти"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:28
 msgid "_Save"
-msgstr "Сними"
+msgstr "_Сачувај"
 
 #: capplets/windows/gnome-window-properties.c:378
 #, c-format
@@ -2301,7 +2361,7 @@ msgstr ""
 
 #: capplets/windows/gnome-window-properties.c:625
 msgid "Control"
-msgstr "Контроле"
+msgstr "Control"
 
 #: capplets/windows/gnome-window-properties.c:630
 msgid "Alt"
@@ -2318,31 +2378,31 @@ msgstr "Супер (или „Виндоуз знак“)"
 #: capplets/windows/gnome-window-properties.glade.h:1
 msgid "To _move a window, press-and-hold this key then grab the window:"
 msgstr ""
-"Да бисте преместил прозор држите притиснут овај тастер и ухватите прозор:"
+"Да бисте преместили прозор држите притиснут овај тастер и ухватите прозор:"
 
 #: capplets/windows/gnome-window-properties.glade.h:2
 msgid "Window Preferences"
-msgstr "Подешења прозора"
+msgstr "Поставке прозора"
 
 #: capplets/windows/gnome-window-properties.glade.h:3
 msgid "_Double-click titlebar to perform this action:"
-msgstr "Двапута кликните на линију са називом за ову акцију:"
+msgstr "_Двоструки клик на насловну линију извршава:"
 
 #: capplets/windows/gnome-window-properties.glade.h:4
 msgid "_Interval before raising:"
-msgstr "Рок за подизање:"
+msgstr "_Период пре издизања:"
 
 #: capplets/windows/gnome-window-properties.glade.h:5
 msgid "_Raise selected windows after an interval"
-msgstr "Подигни одабране пежрозоре после одрењеног рока"
+msgstr "Издигни одабране прозоре после одређеног рока"
 
 #: capplets/windows/gnome-window-properties.glade.h:6
 msgid "_Select windows when the mouse moves over them"
-msgstr "Одабери прозоре када се миш креће преко њих"
+msgstr "Ода_бери прозоре када се миш креће преко њих"
 
 #: capplets/windows/window-properties.desktop.in.h:1
 msgid "Window Properties"
-msgstr "Подешења прозора"
+msgstr "Поставке прозора"
 
 #: capplets/windows/window-properties.desktop.in.h:2
 msgid "Windows"
@@ -2351,7 +2411,7 @@ msgstr "Прозори"
 #: control-center/capplet-dir-view-list.c:324
 #, c-format
 msgid "GNOME Control Center: %s"
-msgstr "ГНОМ контролни центар%s"
+msgstr "Гномов контролни центар: %s"
 
 #: control-center/capplet-dir-view.c:158
 msgid "Layout"
@@ -2359,7 +2419,7 @@ msgstr "Изглед"
 
 #: control-center/capplet-dir-view.c:159
 msgid "Layout to use for this view of the capplets"
-msgstr "Изглед који ће се користити за овај преглед проргамчића"
+msgstr "Изглед који ће се користити за овај преглед контролних програмчета"
 
 #: control-center/capplet-dir-view.c:165
 msgid "Capplet directory object"
@@ -2371,20 +2431,24 @@ msgstr "Директоријум програмчета који се види �
 
 #: control-center/capplet-dir-view.c:348
 msgid "translator_credits"
-msgstr "Преводиоци"
+msgstr ""
+"Вељко М. Станојевић <veljko@vms.homelinux.net>\n"
+"Данило Шеган <danilo@prevod.org>\n"
+"\n"
+"http://Prevod.org/"
 
 #: control-center/capplet-dir-view.c:357 control-center/gnomecc.desktop.in.h:1
 msgid "GNOME Control Center"
-msgstr "ГНОМ контролни центар"
+msgstr "Гномов контролни центар"
 
 #: control-center/capplet-dir-view.c:360
 msgid "Desktop properties manager."
-msgstr "Управник подешења радне површине"
+msgstr "Управник особина радне површине."
 
 #: control-center/capplet-dir-view.c:498
 #, c-format
 msgid "Gnome Control Center : %s"
-msgstr "Гном контролни центар: %s"
+msgstr "Гномов контролни центар: %s"
 
 #: control-center/gnomecc-ui.xml.h:1
 msgid "About this application"
@@ -2396,19 +2460,19 @@ msgstr "Преглед контролног центра"
 
 #: control-center/gnomecc-ui.xml.h:3
 msgid "_About"
-msgstr "О..."
+msgstr "_О програму"
 
 #: control-center/gnomecc-ui.xml.h:4
 msgid "_Contents"
-msgstr "Садржај"
+msgstr "_Садржај"
 
 #: control-center/gnomecc-ui.xml.h:6
 msgid "_Help"
-msgstr "Помоћ"
+msgstr "_Помоћ"
 
 #: control-center/gnomecc.desktop.in.h:2
 msgid "The GNOME configuration tool"
-msgstr "ГНОМ алат за подешавање"
+msgstr "Гномов алат за подешавање"
 
 #: control-center/main.c:43
 msgid "Use shell even if nautilus is running."
@@ -2424,7 +2488,7 @@ msgid ""
 "Cannot create the directory \"%s\".\n"
 "This is needed to allow changing cursors."
 msgstr ""
-"Не могу да направим директоријум \"%s\".\n"
+"Не могу да направим директоријум „%s“.\n"
 "Ово је неопходно да би се омогућила промена курсора."
 
 #: gnome-settings-daemon/gnome-settings-keybindings.c:165
@@ -2440,7 +2504,7 @@ msgstr "Веза повезаног тастера (%s) је више пута �
 #: gnome-settings-daemon/gnome-settings-keybindings.c:184
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
-msgstr "Повезаност тастера (%s)није довршена\n"
+msgstr "Повезаност тастера (%s) није довршена\n"
 
 #: gnome-settings-daemon/gnome-settings-keybindings.c:212
 #, c-format
@@ -2450,12 +2514,12 @@ msgstr "Повезаност тастера (%s)није исправна\n"
 #: gnome-settings-daemon/gnome-settings-keybindings.c:248
 #, c-format
 msgid "It seems that another application already has access to key '%d'."
-msgstr ""
+msgstr "Чини се да неки други програм већ користи тастер „%d“."
 
 #: gnome-settings-daemon/gnome-settings-keybindings.c:317
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
-msgstr "Повезаност тастера (%s)је већ у употреби\n"
+msgstr "Повезаност тастера (%s) је већ у употреби\n"
 
 #: gnome-settings-daemon/gnome-settings-keybindings.c:393
 #, c-format
@@ -2483,7 +2547,7 @@ msgstr ""
 
 #: gnome-settings-daemon/gnome-settings-screensaver.c:102
 msgid "_Do not show this message again"
-msgstr "Немој више приказивати ову поруку"
+msgstr "_Немој више да приказујеш ову поруку"
 
 #: gnome-settings-daemon/gnome-settings-sound.c:128
 #, c-format
@@ -2495,14 +2559,14 @@ msgstr "Не могу да учитам датотеку %s као пробни 
 msgid "Cannot determine user's home directory"
 msgstr "Не могу да одредим корисников лични директоријум"
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:180
+#: gnome-settings-daemon/gnome-settings-xsettings.c:202
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
-msgstr "GConf тастер %s је подешен на врсту %s али је очекивана врста %s\n"
+msgstr "Гконф кључ %s је постављен на тип %s а очекивани тип је %s\n"
 
 #: gnome-settings-daemon/reaper.c:109
 msgid "Error creating signal pipe."
-msgstr ""
+msgstr "Грешка при образовању сигнала цеви."
 
 #: libbackground/applier.c:254
 msgid "Type"
@@ -2544,11 +2608,15 @@ msgstr "Екран на којем ће примењивач позадине ц
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Не могу да пронађем hbox, користим нормални одбир датотеке"
 
-#: libsounds/sound-view.c:128
+#: libbackground/preview-file-selection.c:212
+msgid "Preview"
+msgstr "Преглед"
+
+#: libsounds/sound-view.c:130
 msgid "The sound file for this event does not exist."
 msgstr "Звучна датотека за овај догађај не постоји."
 
-#: libsounds/sound-view.c:130
+#: libsounds/sound-view.c:132
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package\n"
@@ -2558,55 +2626,65 @@ msgstr ""
 "Можда би требали инсталирати гномов пакет са звуковима\n"
 "да бисте имали основне звукове."
 
-#: libsounds/sound-view.c:222
+#: libsounds/sound-view.c:176
+#, c-format
+msgid "The file %s is not a valid wav file"
+msgstr "Датотека %s не представља исправну WAV датотеку"
+
+#: libsounds/sound-view.c:241
 msgid "Event"
 msgstr "Догађај"
 
-#: libsounds/sound-view.c:229
-msgid "File to play"
-msgstr "Датотека"
+#: libsounds/sound-view.c:250
+msgid "Sound File"
+msgstr "Датотека са звуком"
 
-#: libsounds/sound-view.c:244
-msgid "_Sounds"
-msgstr "Звуци"
+#: libsounds/sound-view.c:266
+msgid "_Sounds:"
+msgstr "_Звуци:"
 
-#: libsounds/sound-view.c:258
-msgid "_Play"
-msgstr "Покрени"
+#: libsounds/sound-view.c:280
+msgid "Sound _file:"
+msgstr "_Датотека са звуком:"
 
-#: libsounds/sound-view.c:264
-msgid "Select sound file"
+#: libsounds/sound-view.c:284
+msgid "Select Sound File"
 msgstr "Одаберите датотеку са звуком"
+
+#: libsounds/sound-view.c:302
+msgid "_Play"
+msgstr "_Покрени"
 
 #: libwindow-settings/gnome-wm-manager.c:320
 #, c-format
 msgid "Window manager \"%s\" has not registered a configuration tool\n"
-msgstr "Управник прозора \"%s\" није пријавио алат за подешавање\n"
+msgstr "Управник прозора „%s“ није пријавио алат за подешавање\n"
 
 #: libwindow-settings/metacity-window-manager.c:378
 msgid "Maximize"
-msgstr "Развуци"
+msgstr "Увећај"
 
 #: libwindow-settings/metacity-window-manager.c:379
 msgid "Roll up"
-msgstr "Умотај"
+msgstr "Замотај"
 
 #: schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:1
 msgid ""
 "If true, the mime handlers for text/plain and text/* will be kept in sync"
-msgstr "Ако је тачно, миме дршке за текст/чисто и текст/* ће бити уједначене"
+msgstr ""
+"Ако је постављено, миме руковаоци за text/plain и text/* ће бити усклађени"
 
 #: schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:2
 msgid "Sync text/plain and text/* handlers"
-msgstr "Уједначи текст/чисто и текст/* дршке"
+msgstr "Усклади руковаоце за text/plain и text/*"
 
 #: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:1
 msgid "Display a dialog when there are errors running XScreenSaver"
-msgstr "Прикажи дијалог када дође до грешке током рада ИКС чувара екрана"
+msgstr "Прикажи прозорче када дође до грешке током рада чувара Икс екрана"
 
 #: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:2
 msgid "Run XScreenSaver at login"
-msgstr "Покрени ИКС чувар екрана при приајвљивању"
+msgstr "Покрени Икс чувара екрана при пријављивању"
 
 #: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:3
 msgid "Show Startup Errors"
@@ -2614,19 +2692,20 @@ msgstr "Прикажи грешке при покретању"
 
 #: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:4
 msgid "Start XScreenSaver"
-msgstr "Покрени ИКС чувар екрана"
+msgstr "Покрени Икс чувара екрана"
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:1
 msgid "Antialiasing"
-msgstr "Омекшање"
+msgstr "Омекшавање"
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:2
 msgid "DPI"
-msgstr "DPI"
+msgstr "ТПИ"
 
+# ovo je "truetype hiting" ili "type1 hinting" sto je tehnicki izraz; mozda postoji bolji prevod, ali "saveti" sigurno nisu pogodni
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:3
 msgid "Hinting"
-msgstr "Савети"
+msgstr "Хинтинг"
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:4
 msgid "RGBA Order"
@@ -2670,88 +2749,82 @@ msgstr ""
 
 #: typing-break/drw-break-window.c:260
 msgid "Postpone break"
-msgstr ""
+msgstr "Одложи одмор"
 
 #: typing-break/drw-break-window.c:298
 msgid "Take a break!"
-msgstr ""
+msgstr "Узми одмор!"
 
 #. { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
-#: typing-break/drwright.c:138
-#, fuzzy
+#: typing-break/drwright.c:133
 msgid "/_Preferences"
-msgstr "Подешавање слова"
+msgstr "/_Поставке"
 
-#: typing-break/drwright.c:139
-#, fuzzy
+#: typing-break/drwright.c:134
 msgid "/_About"
-msgstr "О..."
+msgstr "/_О програму"
 
-#: typing-break/drwright.c:141
+#: typing-break/drwright.c:136
 msgid "/_Take a Break"
-msgstr ""
+msgstr "/_Узми одмор!"
 
-#: typing-break/drwright.c:464
+# bug: plural-forms
+#: typing-break/drwright.c:457
 #, c-format
 msgid "%d minutes until the next break"
-msgstr ""
+msgstr "%d минута до следећег одмора"
 
-#: typing-break/drwright.c:467
+#: typing-break/drwright.c:460
 msgid "One minute until the next break"
-msgstr ""
+msgstr "Један минут до следећег одмора"
 
-#: typing-break/drwright.c:469
+#: typing-break/drwright.c:462
 msgid "Less than one minute until the next break"
+msgstr "Мање од једног минута до следећег одмора"
+
+#: typing-break/drwright.c:576
+#, c-format
+msgid ""
+"Unable to bring up the typing break properties dialog with the following "
+"error: %s"
 msgstr ""
+"Не може да прикаже прозорче за подешавање одмора од куцања услед следеће "
+"грешке: %s"
 
-#: typing-break/drwright.c:589
-msgid "Quit DrWright?"
-msgstr ""
-
-#: typing-break/drwright.c:590
-msgid "Don't forget to take regular breaks."
-msgstr ""
-
-#: typing-break/drwright.c:601
-msgid "Don't Quit"
-msgstr ""
-
-#: typing-break/drwright.c:605
-#, fuzzy
-msgid "Quit"
-msgstr "Напусти"
-
-#: typing-break/drwright.c:655
+#: typing-break/drwright.c:616
 msgid "About GNOME Typing Monitor"
-msgstr ""
+msgstr "О Гномовом праћењу куцања"
 
-#: typing-break/drwright.c:679
+#: typing-break/drwright.c:640
 msgid "A computer break reminder."
-msgstr ""
+msgstr "Подсетник за узимање одмора."
 
-#: typing-break/drwright.c:680
+#: typing-break/drwright.c:641
 msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
-msgstr ""
+msgstr "Написао Ричард Хулт &lt;richard@imendio.com&gt;"
 
-#: typing-break/drwright.c:681
+#: typing-break/drwright.c:642
 msgid "Eye candy added by Anders Carlsson"
-msgstr ""
+msgstr "Улепшао Андерс Карлссон"
 
-#: typing-break/drwright.c:840
+#: typing-break/drwright.c:801
 msgid "Break reminder"
-msgstr ""
+msgstr "Подсетник за одморе"
 
-#: typing-break/main.c:126
+#: typing-break/main.c:94
 msgid "The typing monitor is already running."
-msgstr ""
+msgstr "Праћење куцања је већ покренуто"
 
-#: typing-break/main.c:139
+#: typing-break/main.c:107
 msgid ""
 "The typing monitor uses the notification area to display information. You "
 "don't seem to have a notification area on your panel. You can add it by "
 "right-clicking on your panel and choose 'Add to panel -> Utilities -> "
 "Notification area'."
 msgstr ""
+"Праћење куцања користи обавештајну зону панела за приказ података. Чини се "
+"да ви немате обавештајну зону на вашем панелу. Можете је додати десним-"
+"кликом на панел и избором „Додај на панел > Алати > Обавештајна зона“."
 
 #: vfs-methods/fontilus/font-view.c:101
 msgid "The quick brown fox jumps over the lazy dog. 0123456789"
@@ -2787,7 +2860,7 @@ msgstr "Опис:"
 
 #: vfs-methods/fontilus/fontilus-context-menu.c:131
 msgid "Font context menu items"
-msgstr "Уноси у фонтовом приручном менију"
+msgstr "Ставке у приручном менију фонтова"
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:1
 msgid "If set to true, then OpenType fonts will be thumbnailed."
@@ -2889,17 +2962,28 @@ msgstr "Наутилусови уноси у приручном менију з�
 msgid "Set as Application Font"
 msgstr "Намести као фонт апликације"
 
-#: vfs-methods/themus/Themus_Component.server.in.in.h:1
-msgid "Apply theme..."
-msgstr "Примени тему..."
+#: vfs-methods/themus/apply-font.glade.h:1
+msgid " "
+msgstr " "
 
-#: vfs-methods/themus/Themus_Component.server.in.in.h:2
-msgid "Themus component"
-msgstr "Компонента темуса"
+#: vfs-methods/themus/apply-font.glade.h:2
+msgid "<span weight=\"bold\" size=\"larger\">Apply new font?</span>"
+msgstr "<span weight=\"bold\" size=\"larger\">Примени нови фонт?</span>"
 
-#: vfs-methods/themus/Themus_Component.server.in.in.h:3
-msgid "Themus component apply theme operations"
-msgstr "Темус компонента примени операције везане за тему"
+#: vfs-methods/themus/apply-font.glade.h:3
+msgid "Do _not apply font"
+msgstr "_Не примењуј фонт"
+
+#: vfs-methods/themus/apply-font.glade.h:4
+msgid ""
+"The theme you have selected suggests a new font. A preview of the font is "
+"shown below."
+msgstr ""
+"Изабрана тема препоручује неки други фонт. Овај фонт је приказан испод."
+
+#: vfs-methods/themus/apply-font.glade.h:5
+msgid "_Apply font"
+msgstr "_Примени фонт"
 
 #: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
 msgid "Theme Properties content view component"
@@ -2928,6 +3012,11 @@ msgstr "Тема за иконе"
 #: vfs-methods/themus/themus-properties-view.c:217
 msgid "URI currently displayed"
 msgstr "URI који је тренутно приказан"
+
+#. translators: you may want to include non-western chars here
+#: vfs-methods/themus/themus-theme-applier.c:83
+msgid "ABCDEFG"
+msgstr "АБВГДЂЕЖЗ"
 
 #: vfs-methods/themus/themus.schemas.in.h:1
 msgid "If set to true, then installed themes will be thumbnailed."
@@ -2968,6 +3057,96 @@ msgstr "Да ли да користим умањени приказ инстал
 msgid "Whether to thumbnail themes"
 msgstr "Да ли да користим умањени приказ тема"
 
+#~ msgid "Select CDE AccessX file"
+#~ msgstr "Одаберите CDE AccessX датотеку"
+
+#~ msgid "<b>Mouse</b>"
+#~ msgstr "<b>Миш</b>"
+
+#~ msgid "_Wallpaper"
+#~ msgstr "Постер"
+
+#~ msgid "A preview of the background picture."
+#~ msgstr "Преглед слике за позадину."
+
+#~ msgid "Background Preview"
+#~ msgstr "Преглед позадине"
+
+#~ msgid "The background picture's file name."
+#~ msgstr "Име датотеке слике за позадину."
+
+#~ msgid "Acce_pts URLs"
+#~ msgstr "Прихвата URL"
+
+#~ msgid "C_ustom Help Browser:"
+#~ msgstr "Прилагођени претраживач помоћи:"
+
+#~ msgid "Default Help Browser"
+#~ msgstr "Основни претраживач помоћи"
+
+#~ msgid "Help Browser"
+#~ msgstr "Претраживач помоћи"
+
+#~ msgid "_Select a Help Browser:"
+#~ msgstr "Одаберите претраживач помоћи:"
+
+#~ msgid ""
+#~ "<b>Default Cursor - Current</b>\n"
+#~ "The default cursor that ships with X"
+#~ msgstr ""
+#~ "<b>Основни курсор - тренутни</b>\n"
+#~ "Основни кусрор који долази са Иксом"
+
+#~ msgid ""
+#~ "<b>White Cursor - Current</b>\n"
+#~ "The default cursor inverted"
+#~ msgstr ""
+#~ "<b>Бели курсор - тренутни</b>\n"
+#~ "Основни курсор преокренут"
+
+#~ msgid ""
+#~ "<b>Large Cursor - Current</b>\n"
+#~ "Large version of normal cursor"
+#~ msgstr ""
+#~ "<b>Велики курсор - тренутни</b>\n"
+#~ "Већа варијанта нормалног курсора"
+
+#~ msgid "<b>Cursor Theme</b>"
+#~ msgstr "<b>Изглед курсора</b>"
+
+#~ msgid "Cursor _themes:"
+#~ msgstr "Изгледи курсора:"
+
+#~ msgid "A preview of what a menubar looks like with these settings."
+#~ msgstr "Преглед изгледа менија са овим поставкама."
+
+#~ msgid "A preview of what a toolbar looks like with these settings."
+#~ msgstr "Преглед изгледа линије са алатима са овим поставкама."
+
+#~ msgid "Menus"
+#~ msgstr "Менији"
+
+#~ msgid "Sample menubar:"
+#~ msgstr "Пример мени линије:"
+
+#~ msgid "Select the toolbar style."
+#~ msgstr "Одаберите изглед линије са алатима."
+
+#~ msgid "Toolbar"
+#~ msgstr "Линија са алатима"
+
+#~ msgid "Toolbars can be _detached and moved around"
+#~ msgstr "Линије са алатима се могу одвајити и премештати"
+
+#~ msgid "Apply theme..."
+#~ msgstr "Примени тему..."
+
+#~ msgid "Themus component"
+#~ msgstr "Компонента темуса"
+
+#~ msgid "Themus component apply theme operations"
+#~ msgstr "Темус компонента примени операције везане за тему"
+
 #~ msgid "Bee_p"
 #~ msgstr "Запишти"
 
@@ -2998,14 +3177,14 @@ msgstr "Да ли да користим умањени приказ тема"
 #~ msgid "quiet"
 #~ msgstr "тихо"
 
+#~ msgid "File to play"
+#~ msgstr "Датотека"
+
 #~ msgid "Enable Bo_unce Keys"
 #~ msgstr "Омогући тастере за избацивање"
 
 #~ msgid "Enable Slo_w Keys"
 #~ msgstr "Омогући споре тастере"
-
-#~ msgid "Enable _Mouse Keys"
-#~ msgstr "Омогући тастере на мишу"
 
 #~ msgid "Enable _Sticky Keys"
 #~ msgstr "Омогући „лепљиве“ тастере"
@@ -3032,9 +3211,6 @@ msgstr "Да ли да користим умањени приказ тема"
 #~ msgstr ""
 #~ "Анимира брзи обележивач око курсора када се притисне и пусти контролни "
 #~ "тастер (Ctrl)"
-
-#~ msgid "Cursor Theme"
-#~ msgstr "Изглед курсора"
 
 #~ msgid "Double-click Delay"
 #~ msgstr "Застој при дуплом притиску"
