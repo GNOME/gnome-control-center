@@ -45,6 +45,7 @@
 #include "gnome-settings-accessibility-keyboard.h"
 #include "gnome-settings-screensaver.h"
 #include "gnome-settings-default-editor.h"
+#include "gnome-settings-keybindings.h"
 
 #include "GNOME_SettingsDaemon.h"
 
@@ -239,6 +240,7 @@ gnome_settings_daemon_new (void)
   gnome_settings_screensaver_init (client);
   gnome_settings_default_editor_init (client);
   gnome_settings_background_init (client);
+  gnome_settings_keybindings_init (client);
 
   for (list = directories; list; list = list->next)
     {
@@ -278,6 +280,7 @@ gnome_settings_daemon_new (void)
   gnome_settings_screensaver_load (client);
   gnome_settings_default_editor_load (client);
   gnome_settings_background_load (client);
+  gnome_settings_keybindings_load (client);
 
   return G_OBJECT (daemon);
 }
