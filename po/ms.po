@@ -5,26 +5,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
-"POT-Creation-Date: 2002-01-28 21:49-0600\n"
-"PO-Revision-Date: 2002-01-29 04:15+0800\n"
+"POT-Creation-Date: 2002-02-01 01:24+0800\n"
+"PO-Revision-Date: 2002-02-01 00:56+0800\n"
 "Last-Translator: Hasbullah Bin Pit <sebol@ikhlas.com>\n"
 "Language-Team: Projek Gabai <gabai-penyumbang@lists.sourceforge.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: capplets/background/background-properties-capplet.c:291
-#: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:614
-#: capplets/keyboard/gnome-keyboard-properties.c:267
-#: capplets/mouse/gnome-mouse-properties.c:474
-#: capplets/sound/sound-properties-capplet.c:144
-msgid "Retrieve and store legacy settings"
-msgstr "Terima dan simpan tetapan warisan"
-
-#: capplets/background/background-properties-capplet.c:315
-msgid "Background properties"
-msgstr "Ciri-ciri latarbelakang"
 
 #: capplets/background/background.desktop.in.h:1
 msgid "Background"
@@ -33,6 +20,45 @@ msgstr "LatarBelakang"
 #: capplets/background/background.desktop.in.h:2
 msgid "Configuration of the desktop's background"
 msgstr "Konfigurasi latar belakang desktop"
+
+#: capplets/background/background-properties-capplet.c:451
+#, c-format
+msgid ""
+"Couldn't find the file '%s'.\n"
+"\n"
+"Please make sure it exists and try again, or choose a different background "
+"picture."
+msgstr ""
+"Tak dapat menjumpai fail '%s'.\n"
+"\n"
+" Sila pastikan ianya wujud dan cuba lagi, atau pilih gambar latar belakng "
+"lain."
+
+#: capplets/background/background-properties-capplet.c:476
+#, c-format
+msgid ""
+"I don't know how to open the file '%s'.\n"
+"Perhaps its a kind of picture that is not yet supported.\n"
+"\n"
+"Please select a different picture instead."
+msgstr ""
+"Saya tidak tahu bagaimana untuk membuka fail '%s'.\n"
+" Mungkin ia jenis gambar yang belum disokong lain.\n"
+"\n"
+"Sebaliknya, Sila pilih gambar lain"
+
+#: capplets/background/background-properties-capplet.c:772
+#: capplets/common/capplet-util.c:243
+#: capplets/default-applications/gnome-default-applications-properties.c:614
+#: capplets/keyboard/gnome-keyboard-properties.c:267
+#: capplets/mouse/gnome-mouse-properties.c:474
+#: capplets/sound/sound-properties-capplet.c:144
+msgid "Retrieve and store legacy settings"
+msgstr "Terima dan simpan tetapan warisan"
+
+#: capplets/background/background-properties-capplet.c:808
+msgid "Background Properties"
+msgstr "Ciri-ciri LatarBelakang"
 
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
@@ -103,317 +129,134 @@ msgstr "Pilih aplikasi digunakan sebagai default"
 msgid "Default Applications"
 msgstr "Aplikasi Default"
 
-#: capplets/keyboard/keyboard.desktop.in.h:1
-msgid "Keyboard"
-msgstr "Papan Kekunci"
+#: capplets/desktop-links/Advanced.directory.in.in.h:1
+msgid "Advanced"
+msgstr "Lanjutan"
 
-#: capplets/keyboard/keyboard.desktop.in.h:2
-msgid "Keyboard Properties"
-msgstr "Ciri-ciri Papan Kekunci"
+#: capplets/desktop-links/Advanced.directory.in.in.h:2
+msgid "Advanced Settings"
+msgstr "Tetapan Lanjutan"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:263
-#: capplets/keyboard/gnome-keyboard-properties.c:265
-#: capplets/sound/sound-properties-capplet.c:140
-#: capplets/sound/sound-properties-capplet.c:142
-msgid ""
-"Just apply settings and quit (compatibility only; now handled by daemon)"
-msgstr ""
-"Hanya terapkan tetapan da keluar (kompatibiliti sahaja; kini dikendali oleh "
-"deamon)"
+#: capplets/desktop-links/cd.desktop.in.in.h:1
+msgid "CD Properties"
+msgstr "Ciri-ciri Pemian CD"
 
-#: capplets/mouse/mouse.desktop.in.h:1
-msgid "Mouse"
-msgstr "Tetikus"
+#: capplets/desktop-links/cd.desktop.in.in.h:2
+msgid "Configure handling of CD devices"
+msgstr "Konfigurasikan pengendali peranti CD"
 
-#: capplets/mouse/gnome-mouse-properties.c:499
-#: capplets/mouse/mouse.desktop.in.h:2
-msgid "Mouse Properties"
-msgstr "Ciri-ciri Tetikus"
+#: capplets/desktop-links/legacy-applications.desktop.in.in.h:1
+msgid "Legacy Applications"
+msgstr "Aplikasi Warisan"
 
-#: capplets/sound/sound-properties-capplet.c:172
-msgid "Sound properties"
-msgstr "Ciri-ciri Bunyi"
+#: capplets/desktop-links/legacy-applications.desktop.in.in.h:2
+msgid "Legacy applications settings (grdb)"
+msgstr "Tetapan aplikasi warisan (grdb)"
 
-#: capplets/sound/sound.desktop.in.h:1
-msgid "Configure GNOME's use of sound"
-msgstr "Konfigurasi penggunaan bunyi GNOME"
+#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
+msgid "Appearance"
+msgstr "Penampilan"
+
+#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:2
+msgid "Configure window appearance"
+msgstr "Konfigurasikan penampilan tetingkap"
+
+#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:1
+msgid "Configure key shortcuts"
+msgstr "Konfigurasikan pintasan papan kekunci"
+
+#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:2
+msgid "Shortcuts"
+msgstr "Pintasan"
+
+#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:1
+msgid "Configure window focusing"
+msgstr "Konfigurasikan fokus tetingkap"
+
+#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:2
+msgid "Focus behavior"
+msgstr "Kelakuan fokus"
+
+#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:1
+msgid "Configure window properties"
+msgstr "Konfigurasikan ciri-ciri tetingkap"
+
+#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:2
+msgid "Matched Windows"
+msgstr "Tetingkpa sepadan"
+
+#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:1
+msgid "Configure window minimization and maximization"
+msgstr "Konfigurasikan miniatur dan pemaksimaan tetingkap"
+
+#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:2
+msgid "Minimizing and Maximizing"
+msgstr "Miniatur dan Pemaksimaan"
+
+#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
+msgid "Configure window manager configuration properties"
+msgstr "Konfigurasikan ciri-ciri konfigurasi pengurus tetingkap"
+
+#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:2
+msgid "Meta"
+msgstr "Meta"
+
+#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:1
+msgid "Configure miscellaneous window features"
+msgstr "Kpnfigurasikan ciri-ciri tetingkap yang lain"
+
+#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
+msgid "Miscellaneous"
+msgstr "Lain-lain"
+
+#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:1
+msgid "Configure window move/resize"
+msgstr "Konfigurasikan pindah/ubahsaiz"
+
+#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:2
+msgid "Moving and Resizing"
+msgstr "Pindah dan Ubahsaiz"
+
+#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:1
+msgid "Configure window placement"
+msgstr "Konfigurasikan penempatan tetingkap"
+
+#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:2
+msgid "Placement"
+msgstr "Penempatan"
+
+#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:1
+msgid "Control Center Menu"
+msgstr "Menu Pusat Kawalan "
+
+#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:2
+msgid "Sawfish window manager"
+msgstr "Pengurus Tetingkap Sawfish"
+
+#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:1
+msgid "Enable window manager sound events"
+msgstr "Hidupkan acara bunyi pengurus tetingkap"
 
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
 #: capplets/sound/sound.desktop.in.h:2
 msgid "Sound"
 msgstr "Bunyi"
 
-#: control-center/Gnome.directory.in.in.h:1
-msgid "Main"
-msgstr "Utama"
+#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:1
+msgid "Configure workspaces"
+msgstr "Konfigurasikan ruangkerja"
 
-#: control-center/Gnome.directory.in.in.h:2
-msgid "Main Settings"
-msgstr "Tetapan Utama"
+#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:2
+msgid "Workspaces"
+msgstr "Ruangkerja"
 
-#: control-center/capplet-dir-view-list.c:325
-#, c-format
-msgid "GNOME Control Center: %s"
-msgstr "Pusat Kawalan GNOME: %s"
+#: capplets/desktop-links/session.desktop.in.in.h:1
+msgid "Configure which non-session aware programs are started up"
+msgstr "Konfigurasikan program  bukan-sessi yang dimulakan"
 
-#: control-center/capplet-dir-view.c:146
-msgid "Layout"
-msgstr "Susunatur"
-
-#: control-center/capplet-dir-view.c:147
-msgid "Layout to use for this view of the capplets"
-msgstr "Susunatur yang akan digunakan untuk melihat kaplet ini"
-
-#: control-center/capplet-dir-view.c:153
-msgid "Capplet directory object"
-msgstr "Objek direktori kaplet"
-
-#: control-center/capplet-dir-view.c:154
-msgid "Capplet directory that this view is viewing"
-msgstr "Direktori kaplet yang paparan ini lihat"
-
-#: control-center/capplet-dir-view.c:308 control-center/gnomecc.desktop.in.h:1
-msgid "GNOME Control Center"
-msgstr "Pusat Kawalan GNOME"
-
-#: control-center/capplet-dir-view.c:311
-msgid "Desktop properties manager."
-msgstr "Pengurus ciri-ciri desktop"
-
-#: control-center/capplet-dir-view.c:445
-#, c-format
-msgid "Gnome Control Center : %s"
-msgstr "Pusat Kawalan Gnome : %s"
-
-#: control-center/capplet-dir-view.c:488
-msgid ""
-"No help is available/installed. Please make sure you\n"
-"have the GNOME User's Guide installed on your system."
-msgstr ""
-"Tiada bantuan yang dipasang. Sila pastikan anda mempunyai\n"
-"Panduan Pengguna GNOME yang dipasang pada sistem anda."
-
-#: control-center/capplet-dir-view.c:491
-msgid "Close"
-msgstr "Tutup"
-
-#: control-center/gnomecc.desktop.in.h:2
-msgid "The GNOME configuration tool"
-msgstr "Radas Konfigurasi GNOME"
-
-#: libbackground/applier.c:228
-msgid "Type"
-msgstr "Jenis"
-
-#: libbackground/applier.c:229
-msgid ""
-"Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
-"for preview"
-msgstr ""
-"Jenis bg_applier: BG_APPLIER_ROOT pada tetingkap root atau "
-"BG_APPLIER_PREVIEW untuk prebiu"
-
-#: libbackground/applier.c:388
-#, c-format
-msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
-msgstr "Tak dapat memuatkan pixbuf \"%s\"; mematikan wallpaper."
-
-#: libbackground/applier.c:505
-msgid "Disabled"
-msgstr "Dimatikan"
-
-#: libsounds/sound-view.c:98
-msgid "The sound file for this event does not exist."
-msgstr "Fail bunyi untuk acara ini tidak wujud."
-
-#: libsounds/sound-view.c:100
-msgid ""
-"The sound file for this event does not exist.\n"
-"You may want to install the gnome-audio package\n"
-"for a set of default sounds."
-msgstr ""
-"Fail bunyi untuk acara ini tidak wujud.\n"
-"Anda juga boleh pasang pakej gnome-audio\n"
-"untuk menetapkan bunyi default."
-
-#: libsounds/sound-view.c:152
-msgid "Event"
-msgstr "Acara"
-
-#: libsounds/sound-view.c:152
-msgid "File to Play"
-msgstr "Fail untuk diMainkan"
-
-#: libsounds/sound-view.c:185
-msgid "Play"
-msgstr "Main"
-
-#: libsounds/sound-view.c:191
-msgid "Select sound file"
-msgstr "Pilih fail bunyi"
-
-#: capplets/file-types/file-types.desktop.in.h:1
-msgid "File Types and Programs"
-msgstr "Jenis Fail dan Program"
-
-#: capplets/file-types/file-types.desktop.in.h:2
-msgid "Specify which programs are used to open or view each file type"
-msgstr ""
-"Nyatakan program manakah yang digunakan untuk membuka/melihat setipa jenis "
-"fail"
-
-#: capplets/file-types/mime-types-model.c:167
-#: capplets/file-types/mime-types-model.c:168
-msgid "Model for categories only"
-msgstr "Model pagi kategori sahaja"
-
-#: capplets/file-types/mime-types-model.c:420
-msgid "Internet Services"
-msgstr "Sservisn Internet"
-
-#: capplets/file-types/mime-edit-dialog.c:163
-msgid "Extension"
-msgstr "Penghujungan"
-
-#: capplets/file-types/mime-edit-dialog.c:166
-msgid "Edit file type"
-msgstr "Edit jenis fail"
-
-#: capplets/file-types/mime-category-edit-dialog.c:170
-#: capplets/file-types/mime-edit-dialog.c:203
-#: capplets/file-types/service-edit-dialog.c:165
-#: capplets/file-types/service-edit-dialog.c:166
-msgid "Model"
-msgstr "Model"
-
-#: capplets/file-types/mime-edit-dialog.c:204
-msgid "Underlying model to notify when Ok is clicked"
-msgstr "Model underlying untuk dinotifikasikan bila OK diklik"
-
-#: capplets/file-types/mime-edit-dialog.c:211
-msgid "MIME type information"
-msgstr "Maklumatjenis MIME"
-
-#: capplets/file-types/mime-edit-dialog.c:212
-msgid "Structure with data on the MIME type"
-msgstr "Struktur dengan data pada jenis MIME"
-
-#: capplets/file-types/mime-edit-dialog.c:218
-msgid "Is add dialog"
-msgstr "Adalah dialog penambahan"
-
-#: capplets/file-types/mime-edit-dialog.c:219
-msgid "True if this dialog is for adding a MIME type"
-msgstr "Benar jika dialog ini untu menambah jenis MIME"
-
-#: capplets/file-types/mime-edit-dialog.c:386
-#: capplets/file-types/mime-edit-dialog.c:441
-msgid "None"
-msgstr "Tiada"
-
-#: capplets/file-types/mime-category-edit-dialog.c:342
-#: capplets/file-types/mime-edit-dialog.c:391
-#: capplets/file-types/mime-edit-dialog.c:491
-#: capplets/file-types/service-edit-dialog.c:350
-#: capplets/file-types/service-edit-dialog.c:396
-msgid "Custom"
-msgstr "Tersendiri"
-
-#: capplets/file-types/mime-edit-dialog.c:670
-#, fuzzy
-msgid ""
-"Invalid MIME type. Please enter a valid MIME type, or leave the field blank "
-"to have one generated for you."
-msgstr ""
-"Jenis MIME tidak sah. Sila masukkan jenis MIME yang sah, atau biarkan medan "
-"kosong supaya dijanakan untuk anda."
-
-#: capplets/file-types/mime-edit-dialog.c:680
-msgid "There already exists a MIME type of that name."
-msgstr "Terdapat jenis MIME menggunakan nama itu."
-
-#: capplets/file-types/mime-edit-dialog.c:745
-msgid "Category"
-msgstr "Kategori"
-
-#: capplets/file-types/mime-edit-dialog.c:750
-msgid "Choose a file category"
-msgstr "Pilih kategori fail"
-
-#: capplets/file-types/mime-category-edit-dialog.c:136
-msgid "Edit file category"
-msgstr "Edit ketegori fail"
-
-#: capplets/file-types/mime-category-edit-dialog.c:171
-msgid "GtkTreeModel that contains the category data"
-msgstr "GtkTreeModel yang mengandungi data kategori"
-
-#: capplets/file-types/mime-category-edit-dialog.c:176
-msgid "MIME category info"
-msgstr "Maklumat kategori MIME"
-
-#: capplets/file-types/mime-category-edit-dialog.c:177
-msgid "Structure containing information on the MIME category"
-msgstr "Struktur mengandungi maklumat pada kategori MIME"
-
-#: capplets/file-types/service-info.c:43
-msgid "Unknown service types"
-msgstr "Jenis servis tidak diketahui"
-
-#: capplets/file-types/service-info.c:44
-msgid "World wide web"
-msgstr "World wide web"
-
-#: capplets/file-types/service-info.c:45
-msgid "File transfer protocol"
-msgstr "Protokol pemindahan fail"
-
-#: capplets/file-types/service-info.c:46
-msgid "Detailed documentation"
-msgstr "Dokumentasi Terperinci"
-
-#: capplets/file-types/service-info.c:47
-msgid "Manual pages"
-msgstr "Halaman Manual"
-
-#: capplets/file-types/service-info.c:48
-msgid "Electronic mail transmission"
-msgstr "Penghantaran mel elektronik"
-
-#: capplets/file-types/service-edit-dialog.c:132
-msgid "Edit service information"
-msgstr "Edit maklumat servis"
-
-#: capplets/file-types/service-edit-dialog.c:173
-msgid "Service info"
-msgstr "Maklumat servis"
-
-#: capplets/file-types/service-edit-dialog.c:174
-msgid "Structure containing service information"
-msgstr "Sktruktur mengandungi maklumat servis"
-
-#: capplets/file-types/service-edit-dialog.c:180
-msgid "Is add"
-msgstr "adalah penambahan"
-
-#: capplets/file-types/service-edit-dialog.c:181
-msgid "TRUE if this is an add service dialog"
-msgstr "BENAR jika ianya dialog penambahan servis"
-
-#: capplets/file-types/service-edit-dialog.c:486
-msgid "Please enter a protocol name."
-msgstr "Sila masukkan nama protokol."
-
-#: capplets/file-types/service-edit-dialog.c:497
-msgid ""
-"Invalid protocol name. Please enter a protocol name without any spaces or "
-"punctuation."
-msgstr ""
-"Nama protokol tidak sah. Sila masukkan nama protokol tanpa ruang atau koma"
-
-#: capplets/file-types/service-edit-dialog.c:509
-msgid "There is already a protocol by that name."
-msgstr "Sudah wujud protokol dengan nama itu."
+#: capplets/desktop-links/session.desktop.in.in.h:2
+msgid "Startup Programs"
+msgstr "Program Permulaan"
 
 #.
 #. * Translatable strings file
@@ -504,9 +347,296 @@ msgstr "Imej"
 msgid "Video"
 msgstr "Video"
 
-#: capplets/theme-switcher/main.c:209
-msgid "Select a theme to install"
-msgstr "Pilih tema untuk dipasang"
+#: capplets/file-types/file-types-capplet.c:212
+msgid "Description"
+msgstr "Huraian"
+
+#: capplets/file-types/file-types-capplet.c:219
+msgid "Extensions"
+msgstr "Penghujungan"
+
+#: capplets/file-types/file-types.desktop.in.h:1
+msgid "File Types and Programs"
+msgstr "Jenis Fail dan Program"
+
+#: capplets/file-types/file-types.desktop.in.h:2
+msgid "Specify which programs are used to open or view each file type"
+msgstr ""
+"Nyatakan program manakah yang digunakan untuk membuka/melihat setipa jenis "
+"fail"
+
+#: capplets/file-types/mime-category-edit-dialog.c:136
+msgid "Edit file category"
+msgstr "Edit ketegori fail"
+
+#: capplets/file-types/mime-category-edit-dialog.c:170
+#: capplets/file-types/mime-edit-dialog.c:203
+#: capplets/file-types/service-edit-dialog.c:165
+#: capplets/file-types/service-edit-dialog.c:166
+msgid "Model"
+msgstr "Model"
+
+#: capplets/file-types/mime-category-edit-dialog.c:171
+msgid "GtkTreeModel that contains the category data"
+msgstr "GtkTreeModel yang mengandungi data kategori"
+
+#: capplets/file-types/mime-category-edit-dialog.c:176
+msgid "MIME category info"
+msgstr "Maklumat kategori MIME"
+
+#: capplets/file-types/mime-category-edit-dialog.c:177
+msgid "Structure containing information on the MIME category"
+msgstr "Struktur mengandungi maklumat pada kategori MIME"
+
+#: capplets/file-types/mime-category-edit-dialog.c:342
+#: capplets/file-types/mime-edit-dialog.c:391
+#: capplets/file-types/mime-edit-dialog.c:491
+#: capplets/file-types/service-edit-dialog.c:350
+#: capplets/file-types/service-edit-dialog.c:396
+msgid "Custom"
+msgstr "Tersendiri"
+
+#: capplets/file-types/mime-edit-dialog.c:163
+msgid "Extension"
+msgstr "Penghujungan"
+
+#: capplets/file-types/mime-edit-dialog.c:166
+msgid "Edit file type"
+msgstr "Edit jenis fail"
+
+#: capplets/file-types/mime-edit-dialog.c:204
+msgid "Underlying model to notify when Ok is clicked"
+msgstr "Model underlying untuk dinotifikasikan bila OK diklik"
+
+#: capplets/file-types/mime-edit-dialog.c:211
+msgid "MIME type information"
+msgstr "Maklumatjenis MIME"
+
+#: capplets/file-types/mime-edit-dialog.c:212
+msgid "Structure with data on the MIME type"
+msgstr "Struktur dengan data pada jenis MIME"
+
+#: capplets/file-types/mime-edit-dialog.c:218
+msgid "Is add dialog"
+msgstr "Adalah dialog penambahan"
+
+#: capplets/file-types/mime-edit-dialog.c:219
+msgid "True if this dialog is for adding a MIME type"
+msgstr "Benar jika dialog ini untu menambah jenis MIME"
+
+#: capplets/file-types/mime-edit-dialog.c:386
+#: capplets/file-types/mime-edit-dialog.c:441
+msgid "None"
+msgstr "Tiada"
+
+#: capplets/file-types/mime-edit-dialog.c:670
+msgid ""
+"Invalid MIME type. Please enter a valid MIME type, or leave the field blank "
+"to have one generated for you."
+msgstr ""
+"Jenis MIME tidak sah. Sila masukkan jenis MIME yang sah, atau biarkan medan "
+"kosong supaya boleh dijanakan untuk anda."
+
+#: capplets/file-types/mime-edit-dialog.c:680
+msgid "There already exists a MIME type of that name."
+msgstr "Terdapat jenis MIME menggunakan nama itu."
+
+#: capplets/file-types/mime-edit-dialog.c:745
+msgid "Category"
+msgstr "Kategori"
+
+#: capplets/file-types/mime-edit-dialog.c:750
+msgid "Choose a file category"
+msgstr "Pilih kategori fail"
+
+#: capplets/file-types/mime-types-model.c:167
+#: capplets/file-types/mime-types-model.c:168
+msgid "Model for categories only"
+msgstr "Model pagi kategori sahaja"
+
+#: capplets/file-types/mime-types-model.c:420
+msgid "Internet Services"
+msgstr "Sservisn Internet"
+
+#: capplets/file-types/service-edit-dialog.c:132
+msgid "Edit service information"
+msgstr "Edit maklumat servis"
+
+#: capplets/file-types/service-edit-dialog.c:173
+msgid "Service info"
+msgstr "Maklumat servis"
+
+#: capplets/file-types/service-edit-dialog.c:174
+msgid "Structure containing service information"
+msgstr "Sktruktur mengandungi maklumat servis"
+
+#: capplets/file-types/service-edit-dialog.c:180
+msgid "Is add"
+msgstr "adalah penambahan"
+
+#: capplets/file-types/service-edit-dialog.c:181
+msgid "TRUE if this is an add service dialog"
+msgstr "BENAR jika ianya dialog penambahan servis"
+
+#: capplets/file-types/service-edit-dialog.c:486
+msgid "Please enter a protocol name."
+msgstr "Sila masukkan nama protokol."
+
+#: capplets/file-types/service-edit-dialog.c:497
+msgid ""
+"Invalid protocol name. Please enter a protocol name without any spaces or "
+"punctuation."
+msgstr ""
+"Nama protokol tidak sah. Sila masukkan nama protokol tanpa ruang atau koma"
+
+#: capplets/file-types/service-edit-dialog.c:509
+msgid "There is already a protocol by that name."
+msgstr "Sudah wujud protokol dengan nama itu."
+
+#: capplets/file-types/service-info.c:43
+msgid "Unknown service types"
+msgstr "Jenis servis tidak diketahui"
+
+#: capplets/file-types/service-info.c:44
+msgid "World wide web"
+msgstr "World wide web"
+
+#: capplets/file-types/service-info.c:45
+msgid "File transfer protocol"
+msgstr "Protokol pemindahan fail"
+
+#: capplets/file-types/service-info.c:46
+msgid "Detailed documentation"
+msgstr "Dokumentasi Terperinci"
+
+#: capplets/file-types/service-info.c:47
+msgid "Manual pages"
+msgstr "Halaman Manual"
+
+#: capplets/file-types/service-info.c:48
+msgid "Electronic mail transmission"
+msgstr "Penghantaran mel elektronik"
+
+#: capplets/keyboard/gnome-keyboard-properties.c:263
+#: capplets/keyboard/gnome-keyboard-properties.c:265
+#: capplets/sound/sound-properties-capplet.c:140
+#: capplets/sound/sound-properties-capplet.c:142
+msgid ""
+"Just apply settings and quit (compatibility only; now handled by daemon)"
+msgstr ""
+"Hanya terapkan tetapan da keluar (kompatibiliti sahaja; kini dikendali oleh "
+"deamon)"
+
+#: capplets/keyboard/keyboard.desktop.in.h:1
+msgid "Keyboard"
+msgstr "Papan Kekunci"
+
+#: capplets/keyboard/keyboard.desktop.in.h:2
+msgid "Keyboard Properties"
+msgstr "Ciri-ciri Papan Kekunci"
+
+#: capplets/mouse/gnome-mouse-properties.c:499
+#: capplets/mouse/mouse.desktop.in.h:2
+msgid "Mouse Properties"
+msgstr "Ciri-ciri Tetikus"
+
+#: capplets/mouse/mouse.desktop.in.h:1
+msgid "Mouse"
+msgstr "Tetikus"
+
+#: capplets/screensaver/screensaver.desktop.in.h:1
+msgid "Configure the settings of the screensaver"
+msgstr "Konfigurasikan tetapan bagi screensaver"
+
+#: capplets/screensaver/screensaver.desktop.in.h:2
+msgid "Screensaver"
+msgstr "Screensaver"
+
+#: capplets/sound/sound.desktop.in.h:1
+msgid "Configure GNOME's use of sound"
+msgstr "Konfigurasi penggunaan bunyi GNOME"
+
+#: capplets/sound/sound-properties-capplet.c:172
+msgid "Sound properties"
+msgstr "Ciri-ciri Bunyi"
+
+#. just 8 short names that will serve as samples for titles in demo
+#: capplets/theme-switcher/control/control.c:19
+msgid "Eenie"
+msgstr "Do"
+
+#: capplets/theme-switcher/control/control.c:19
+msgid "Mynie"
+msgstr "Mi"
+
+#: capplets/theme-switcher/control/control.c:19
+msgid "Catcha"
+msgstr "Kerbau"
+
+#: capplets/theme-switcher/control/control.c:19
+msgid "By Its"
+msgstr "Pada"
+
+#: capplets/theme-switcher/control/control.c:20
+msgid "Meenie"
+msgstr "Re"
+
+#: capplets/theme-switcher/control/control.c:20
+msgid "Moe"
+msgstr "Moe"
+
+#: capplets/theme-switcher/control/control.c:20
+msgid "Tiger"
+msgstr "Diikat"
+
+#: capplets/theme-switcher/control/control.c:20
+msgid "Toe"
+msgstr "Hidungnya"
+
+#: capplets/theme-switcher/control/control.c:38
+msgid "Selected themes from above will be tested by previewing here."
+msgstr "Tema yang dipilih diatas akan diuji dengan cara pralihat disini"
+
+#. column one
+#: capplets/theme-switcher/control/control.c:43
+msgid "Sample Button"
+msgstr "Contoh Butang"
+
+#: capplets/theme-switcher/control/control.c:47
+msgid "Sample Check Button"
+msgstr "Contoh Butang Check"
+
+#: capplets/theme-switcher/control/control.c:52
+msgid "Sample Text Entry Field"
+msgstr "Contoh Medan Kemasukkan Teks"
+
+#: capplets/theme-switcher/control/control.c:63
+msgid "Submenu"
+msgstr "Submenu"
+
+#: capplets/theme-switcher/control/control.c:68
+msgid "Item 1"
+msgstr "Item 1"
+
+#: capplets/theme-switcher/control/control.c:70
+msgid "Another item"
+msgstr "Satu lagi item"
+
+#: capplets/theme-switcher/control/control.c:74
+msgid "Radio Button 1"
+msgstr "Butang Radio 1"
+
+#: capplets/theme-switcher/control/control.c:80
+msgid "Radio Button 2"
+msgstr "Butang Radio 2"
+
+#: capplets/theme-switcher/control/control.c:101
+msgid "One"
+msgstr "Satu"
+
+#: capplets/theme-switcher/control/control.c:107
+msgid "Two"
+msgstr "Dua"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
 msgid "Gtk+ Theme Selector"
@@ -516,146 +646,115 @@ msgstr "Pemilih tema GTK+"
 msgid "Select which gtk+ theme to use"
 msgstr "PIlih tema gtk+ mana yang hendak digunakan"
 
-#: capplets/ui-properties/behavior.desktop.in.h:1
-msgid "Behavior"
-msgstr "Kelakuan"
+#: capplets/theme-switcher/main.c:209
+msgid "Select a theme to install"
+msgstr "Pilih tema untuk dipasang"
 
-#: capplets/ui-properties/behavior.desktop.in.h:2
+#: capplets/ui-properties/behavior.desktop.in.h:1
 msgid "Sets the default behavior of GNOME applications"
 msgstr "Tetapkan kelakuan default bagi aplikasi GNOME"
 
-#: capplets/ui-properties/main.c:47
-msgid "Initialize session settings"
-msgstr "Initialisasikan tetapan sessi"
+#: capplets/ui-properties/behavior.desktop.in.h:2
+msgid "Toolbars & Menus"
+msgstr "Toolbar & Menu"
 
-#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:1
-msgid "Control Center Menu"
-msgstr "Menu Pusat Kawalan "
+#: control-center/capplet-dir-view.c:146
+msgid "Layout"
+msgstr "Susunatur"
 
-#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:2
-msgid "Sawfish window manager"
-msgstr "Pengurus Tetingkap Sawfish"
+#: control-center/capplet-dir-view.c:147
+msgid "Layout to use for this view of the capplets"
+msgstr "Susunatur yang akan digunakan untuk melihat kaplet ini"
 
-#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
-msgid "Appearance"
-msgstr "Penampilan"
+#: control-center/capplet-dir-view.c:153
+msgid "Capplet directory object"
+msgstr "Objek direktori kaplet"
 
-#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:2
-msgid "Configure window appearance"
-msgstr "Konfigurasikan penampilan tetingkap"
+#: control-center/capplet-dir-view.c:154
+msgid "Capplet directory that this view is viewing"
+msgstr "Direktori kaplet yang paparan ini lihat"
 
-#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:1
-msgid "Configure key shortcuts"
-msgstr "Konfigurasikan pintasan papan kekunci"
+#: control-center/capplet-dir-view.c:308 control-center/gnomecc.desktop.in.h:1
+msgid "GNOME Control Center"
+msgstr "Pusat Kawalan GNOME"
 
-#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:2
-msgid "Shortcuts"
-msgstr "Pintasan"
+#: control-center/capplet-dir-view.c:311
+msgid "Desktop properties manager."
+msgstr "Pengurus ciri-ciri desktop"
 
-#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:1
-msgid "Configure window focusing"
-msgstr "Konfigurasikan fokus tetingkap"
+#: control-center/capplet-dir-view.c:445
+#, c-format
+msgid "Gnome Control Center : %s"
+msgstr "Pusat Kawalan Gnome : %s"
 
-#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:2
-msgid "Focus behavior"
-msgstr "Kelakuan fokus"
+#: control-center/capplet-dir-view.c:488
+msgid ""
+"No help is available/installed. Please make sure you\n"
+"have the GNOME User's Guide installed on your system."
+msgstr ""
+"Tiada bantuan yang dipasang. Sila pastikan anda mempunyai\n"
+"Panduan Pengguna GNOME yang dipasang pada sistem anda."
 
-#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:1
-msgid "Configure window properties"
-msgstr "Konfigurasikan ciri-ciri tetingkap"
+#: control-center/capplet-dir-view.c:491
+msgid "Close"
+msgstr "Tutup"
 
-#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:2
-msgid "Matched Windows"
-msgstr "Tetingkpa sepadan"
+#: control-center/capplet-dir-view-list.c:325
+#, c-format
+msgid "GNOME Control Center: %s"
+msgstr "Pusat Kawalan GNOME: %s"
 
-#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:1
-msgid "Configure window minimization and maximization"
-msgstr "Konfigurasikan miniatur dan pemaksimaan tetingkap"
+#: control-center/gnomecc.desktop.in.h:2
+msgid "The GNOME configuration tool"
+msgstr "Radas Konfigurasi GNOME"
 
-#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:2
-msgid "Minimizing and Maximizing"
-msgstr "Miniatur dan Pemaksimaan"
+#: libbackground/applier.c:228
+msgid "Type"
+msgstr "Jenis"
 
-#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
-msgid "Configure window manager configuration properties"
-msgstr "Konfigurasikan ciri-ciri konfigurasi pengurus tetingkap"
+#: libbackground/applier.c:229
+msgid ""
+"Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
+"for preview"
+msgstr ""
+"Jenis bg_applier: BG_APPLIER_ROOT pada tetingkap root atau "
+"BG_APPLIER_PREVIEW untuk prebiu"
 
-#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:2
-msgid "Meta"
-msgstr "Meta"
+#: libbackground/applier.c:391
+#, c-format
+msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
+msgstr "Tak dapat memuatkan pixbuf \"%s\"; mematikan wallpaper."
 
-#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:1
-msgid "Configure miscellaneous window features"
-msgstr "Kpnfigurasikan ciri-ciri tetingkap yang lain"
+#: libbackground/applier.c:455
+msgid "Disabled"
+msgstr "Dimatikan"
 
-#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
-msgid "Miscellaneous"
-msgstr "Lain-lain"
+#: libsounds/sound-view.c:98
+msgid "The sound file for this event does not exist."
+msgstr "Fail bunyi untuk acara ini tidak wujud."
 
-#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:1
-msgid "Configure window move/resize"
-msgstr "Konfigurasikan pindah/ubahsaiz"
+#: libsounds/sound-view.c:100
+msgid ""
+"The sound file for this event does not exist.\n"
+"You may want to install the gnome-audio package\n"
+"for a set of default sounds."
+msgstr ""
+"Fail bunyi untuk acara ini tidak wujud.\n"
+"Anda juga boleh pasang pakej gnome-audio\n"
+"untuk menetapkan bunyi default."
 
-#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:2
-msgid "Moving and Resizing"
-msgstr "Pindah dan Ubahsaiz"
+#: libsounds/sound-view.c:152
+msgid "Event"
+msgstr "Acara"
 
-#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:1
-msgid "Configure window placement"
-msgstr "Konfigurasikan penempatan tetingkap"
+#: libsounds/sound-view.c:152
+msgid "File to Play"
+msgstr "Fail untuk diMainkan"
 
-#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:2
-msgid "Placement"
-msgstr "Penempatan"
+#: libsounds/sound-view.c:185
+msgid "Play"
+msgstr "Main"
 
-#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:1
-msgid "Enable window manager sound events"
-msgstr "Hidupkan acara bunyi pengurus tetingkap"
-
-#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:1
-msgid "Configure workspaces"
-msgstr "Konfigurasikan ruangkerja"
-
-#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:2
-msgid "Workspaces"
-msgstr "Ruangkerja"
-
-#: capplets/desktop-links/Advanced.directory.in.in.h:1
-msgid "Advanced"
-msgstr "Lanjutan"
-
-#: capplets/desktop-links/Advanced.directory.in.in.h:2
-msgid "Advanced Settings"
-msgstr "Tetapan Lanjutan"
-
-#: capplets/desktop-links/cd.desktop.in.in.h:1
-msgid "CD Properties"
-msgstr "Ciri-ciri Pemian CD"
-
-#: capplets/desktop-links/cd.desktop.in.in.h:2
-msgid "Configure handling of CD devices"
-msgstr "Konfigurasikan pengendali peranti CD"
-
-#: capplets/desktop-links/legacy-applications.desktop.in.in.h:1
-msgid "Legacy Applications"
-msgstr "Aplikasi Warisan"
-
-#: capplets/desktop-links/legacy-applications.desktop.in.in.h:2
-msgid "Legacy applications settings (grdb)"
-msgstr "Tetapan aplikasi warisan (grdb)"
-
-#: capplets/desktop-links/panel.desktop.in.in.h:1
-msgid "Global panel properties"
-msgstr "Ciri-ciri panel global"
-
-#: capplets/desktop-links/panel.desktop.in.in.h:2
-msgid "Panel"
-msgstr "Panel"
-
-#: capplets/desktop-links/session.desktop.in.in.h:1
-msgid "Configure which non-session aware programs are started up"
-msgstr "Konfigurasikan program  bukan-sessi yang dimulakan"
-
-#: capplets/desktop-links/session.desktop.in.in.h:2
-msgid "Startup Programs"
-msgstr "Program Permulaan"
+#: libsounds/sound-view.c:191
+msgid "Select sound file"
+msgstr "Pilih fail bunyi"
