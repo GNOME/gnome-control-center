@@ -82,13 +82,11 @@ mime_type_info_new (const gchar *mime_type, GtkTreeModel *model)
 
 	if (mime_type != NULL) {
 		info->mime_type = g_strdup (mime_type);
-
-		mime_type_info_set_category_name (info, get_category_name (mime_type), get_category_description (mime_type), model);
-
-		mime_type_info_get_icon (info);
-	} else {
+		mime_type_info_set_category_name (info,
+			get_category_name (mime_type),
+			get_category_description (mime_type), model);
+	} else
 		info->entry.parent = get_model_entries (model);
-	}
 
 	return info;
 }
@@ -104,9 +102,6 @@ mime_type_info_load_all (MimeTypeInfo *info)
 
 	if (info->icon_name == NULL)
 		info->icon_name = g_strdup (gnome_vfs_mime_get_icon (info->mime_type));
-
-	if (info->icon_pixbuf == NULL)
-		get_icon_pixbuf (info, info->icon_name, TRUE);
 
 	if (info->default_action == NULL && info->mime_type != NULL) {
 		/* DO NOT USE gnome_vfs_mime_get_default_application
