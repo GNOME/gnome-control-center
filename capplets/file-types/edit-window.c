@@ -75,6 +75,7 @@ entry_changed (GtkWidget *widget, gpointer data)
 		capplet_widget_state_changed (CAPPLET_WIDGET (capplet),
 					      TRUE);
 }
+
 static void
 ext_clist_selected (GtkWidget *clist, gint row, gint column, gpointer data)
 {
@@ -165,7 +166,7 @@ initialize_main_win ()
 {
 	GtkWidget *align, *vbox, *hbox, *vbox2, *vbox3;
 	GtkWidget *frame, *table, *label;
-
+	
 	gchar *title[2] = {"Extensions"};
 
 	main_win = g_new0 (edit_window, 1);
@@ -180,81 +181,70 @@ initialize_main_win ()
 			    NULL);
 	vbox = GNOME_DIALOG (main_win->window)->vbox;
 	
-	/* icon box */
-	main_win->icon_entry = gnome_icon_entry_new ("mime_icon_entry", _("Select an icon..."));
 	align = gtk_alignment_new (0.5, 0.5, 0.0, 0.0);
-	gtk_container_add (GTK_CONTAINER (align), main_win->icon_entry);
-	gtk_signal_connect (GTK_OBJECT (gnome_icon_entry_gtk_entry (GNOME_ICON_ENTRY (main_win->icon_entry))),
-			    "changed",
-			    entry_changed,
-			    NULL);
 
-			    
+	/* Main vertical box */
 	gtk_box_pack_start (GTK_BOX (vbox), align, FALSE, FALSE, 0);
 
+	/* Create and add mime type label */
 	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
 	gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (_("Mime Type: ")), FALSE, FALSE, 0);
 	main_win->mime_type = gtk_label_new ("");
 	gtk_box_pack_start (GTK_BOX (hbox), main_win->mime_type, FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
-	/* extension/regexp */
+	/* Main horizontal box */
+	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
+
+	/*  Icon Control */
 	vbox2 = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
 	gtk_box_pack_start (GTK_BOX (vbox), vbox2, FALSE, FALSE, 0);
 
-	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
+	main_win->icon_entry = gnome_icon_entry_new ("mime_icon_entry", _("Select an icon..."));
+	gtk_signal_connect (GTK_OBJECT (gnome_icon_entry_gtk_entry (GNOME_ICON_ENTRY (main_win->icon_entry))),
+			    "changed",
+			    entry_changed,
+			    NULL);
+	gtk_box_pack_start (GTK_BOX (hbox), main_win->icon_entry, FALSE, FALSE, 0);
+
+	/* Extension List */
 	main_win->ext_clist = gtk_clist_new_with_titles (1, title);
 	gtk_clist_column_titles_passive (GTK_CLIST (main_win->ext_clist));
 	gtk_clist_set_auto_sort (GTK_CLIST (main_win->ext_clist), TRUE);
 
-	gtk_signal_connect (GTK_OBJECT (main_win->ext_clist), 
-			    "select-row",
-			    GTK_SIGNAL_FUNC (ext_clist_selected), 
-			    NULL);
-	gtk_signal_connect (GTK_OBJECT (main_win->ext_clist),
-			    "unselect-row",
-			    GTK_SIGNAL_FUNC (ext_clist_deselected),
-			    NULL);
+	gtk_signal_connect (GTK_OBJECT (main_win->ext_clist), "select-row",
+			    GTK_SIGNAL_FUNC (ext_clist_selected), NULL);
+	gtk_signal_connect (GTK_OBJECT (main_win->ext_clist), "unselect-row",
+			    GTK_SIGNAL_FUNC (ext_clist_deselected), NULL);
 	main_win->ext_scroll = gtk_scrolled_window_new (NULL, NULL);
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (main_win->ext_scroll),
-					GTK_POLICY_AUTOMATIC,
-					GTK_POLICY_AUTOMATIC);
-	gtk_container_add (GTK_CONTAINER (main_win->ext_scroll), 
-			   main_win->ext_clist);
+					GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+	gtk_container_add (GTK_CONTAINER (main_win->ext_scroll), main_win->ext_clist);
 
+	/* Extension Buttons */
 	vbox3 = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
 	main_win->ext_add_button = gtk_button_new_with_label (_("Add"));
-	gtk_signal_connect (GTK_OBJECT (main_win->ext_add_button),
-			    "clicked",
-			    GTK_SIGNAL_FUNC (add_extension),
-			    NULL);
+	gtk_signal_connect (GTK_OBJECT (main_win->ext_add_button), "clicked",
+			    GTK_SIGNAL_FUNC (add_extension), NULL);
 	gtk_box_pack_start (GTK_BOX (vbox3), main_win->ext_add_button, FALSE, FALSE, 0);
 	gtk_widget_set_sensitive (main_win->ext_add_button, FALSE);
 
 	main_win->ext_remove_button = gtk_button_new_with_label (_("Remove"));
-	gtk_signal_connect (GTK_OBJECT (main_win->ext_remove_button),
-			    "clicked",
-			    GTK_SIGNAL_FUNC (remove_extension),
-			    NULL);
+	gtk_signal_connect (GTK_OBJECT (main_win->ext_remove_button), "clicked",
+			    GTK_SIGNAL_FUNC (remove_extension), NULL);
 	gtk_widget_set_sensitive (main_win->ext_remove_button, FALSE);
-	gtk_box_pack_start (GTK_BOX (vbox3), main_win->ext_remove_button,
-			    FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (vbox3), main_win->ext_remove_button, FALSE, FALSE, 0);
 
 	gtk_box_pack_start (GTK_BOX (hbox), main_win->ext_scroll, TRUE, TRUE, 0);
 	gtk_box_pack_start (GTK_BOX (hbox), vbox3, FALSE, FALSE, 0);
 
 	gtk_box_pack_start (GTK_BOX (vbox2), hbox, TRUE, TRUE, 0);
 
+	/* Extension entry box */
 	main_win->ext_entry = gtk_entry_new ();
-	gtk_signal_connect (GTK_OBJECT (main_win->ext_entry),
-			    "changed",
-			    ext_entry_changed,
-			    NULL);
-	gtk_signal_connect (GTK_OBJECT (main_win->ext_entry),
-			    "activate",
-			    add_extension,
-			    NULL);
-	gtk_box_pack_start (GTK_BOX (vbox2), main_win->ext_entry, TRUE, TRUE, 0);
+	gtk_signal_connect (GTK_OBJECT (main_win->ext_entry), "changed", ext_entry_changed, NULL);
+	gtk_signal_connect (GTK_OBJECT (main_win->ext_entry), "activate", add_extension, NULL);
+	gtk_box_pack_start (GTK_BOX (vbox3), main_win->ext_entry, FALSE, FALSE, 0);
 
 	/* Defaults box */
 	frame = gtk_frame_new (NULL);
@@ -266,14 +256,14 @@ initialize_main_win ()
 	gtk_container_add (GTK_CONTAINER (frame), vbox2);
 
 	/* Default application label and menu */	
-	label = gtk_label_new (_("Default Application:"));
+	label = gtk_label_new (_("Application:"));
 	gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 0, 1);
 
 	main_win->application_menu = gtk_option_menu_new();
 	gtk_table_attach_defaults (GTK_TABLE (table), main_win->application_menu, 1, 2, 0, 1);
 	
 	/* Default component label and menu */	
-	label = gtk_label_new (_("Default Component:"));
+	label = gtk_label_new (_("Component:"));
 	gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 1, 2);
 
 	main_win->component_menu = gtk_option_menu_new();

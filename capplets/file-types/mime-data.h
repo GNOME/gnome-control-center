@@ -2,10 +2,12 @@
 /* Copyright (C) 1998 Redhat Software Inc. 
  * Authors: Jonathan Blandford <jrb@redhat.com>
  */
-#ifndef _MIME_DATA_H_
-#define _MIME_DATA_H_
+#ifndef MIME_DATA_H
+#define MIME_DATA_H
+
 #include "gnome.h"
 #include <regex.h>
+
 /* Typedefs */
 typedef struct {
 	char     *mime_type;
@@ -21,14 +23,12 @@ typedef struct {
 extern GHashTable *user_mime_types;
 extern void add_to_key (char *mime_type, char *def, GHashTable *table, gboolean init_user);
 
-GtkWidget *get_mime_clist (void);
+GtkWidget *create_mime_clist (void);
 void init_mime_type (void);
-void delete_clicked (GtkWidget *widget, gpointer data);
-void add_clicked (GtkWidget *widget, gpointer data);
-void edit_clicked (GtkWidget *widget, gpointer data);
 void add_new_mime_type (gchar *mime_type, gchar *ext);
 void write_user_mime (void);
 void write_initial_mime (void);
 void reread_list (void);
 void discard_mime_info (void);
+
 #endif

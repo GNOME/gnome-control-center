@@ -42,6 +42,8 @@
 
 #include <libgnomevfs/gnome-vfs-mime-info.h>
 
+#include "nautilus-mime-type-capplet.h"
+
 /* Prototypes */
 static void mime_fill_from_file (const char *filename, gboolean init_user);
 static void mime_load_from_dir (const char *mime_info_dir, gboolean system_dir);
@@ -57,6 +59,7 @@ GHashTable *user_mime_types = NULL;
 static GtkWidget *clist = NULL;
 extern GtkWidget *delete_button;
 extern GtkWidget *capplet;
+
 /* Initialization functions */
 static void
 run_error (gchar *message)
@@ -91,11 +94,7 @@ get_priority (char *def, int *priority)
 
 	return def;
 }
-static void
-free_mime_info (MimeInfo *mi)
-{
 
-}
 void
 add_to_key (char *mime_type, char *def, GHashTable *table, gboolean init_user)
 {
@@ -121,7 +120,8 @@ add_to_key (char *mime_type, char *def, GHashTable *table, gboolean init_user)
                 info->keys = gnome_vfs_mime_get_keys (mime_type);
 		g_hash_table_insert (table, info->mime_type, info);
 	}
-	if (strncmp (def, "ext", 3) == 0){
+	
+	if (strncmp (def, "ext", 3) == 0) {
 		char *tokp;
 
 		def += 3;
@@ -142,11 +142,13 @@ add_to_key (char *mime_type, char *def, GHashTable *table, gboolean init_user)
 			used = 1;
 			s = NULL;
 		}
-		if (!used)
+		
+		if (!used) {
 			g_free (p);
+		}
 	}
 
-	if (strncmp (def, "regex", 5) == 0){
+	if (strncmp (def, "regex", 5) == 0) {
 		regex_t *regex;
 
 		regex = g_new (regex_t, 1);
@@ -156,17 +158,20 @@ add_to_key (char *mime_type, char *def, GHashTable *table, gboolean init_user)
 		while (*def && isspace (*def))
 			def++;
 
-		if (!*def)
+		if (!*def) {
 			return;
-		if (regcomp (regex, def, REG_EXTENDED | REG_NOSUB))
+		}
+		
+		if (regcomp (regex, def, REG_EXTENDED | REG_NOSUB)) {
 			g_free (regex);
-		else {
+		} else {
 			info->regex[priority] = regex;
                         g_free (info->regex_readable[priority]);
                         info->regex_readable[priority] = g_strdup (def);
                 }
 	}
 }
+
 static void
 mime_fill_from_file (const char *filename, gboolean init_user)
 {
@@ -207,8 +212,10 @@ mime_fill_from_file (const char *filename, gboolean init_user)
 				while (*p && isspace (*p))
 					p++;
 
-				if (*p == 0)
+				if (*p == 0) {
 					continue;
+				}
+				
 				add_to_key (current_key, p, mime_types, init_user);
 				if (init_user) {
                                         add_to_key (current_key, p, 
@@ -273,29 +280,35 @@ mime_load_from_dir (const char *mime_info_dir, gboolean system_dir)
 	}
 	closedir (dir);
 }
+
 static int
 add_mime_vals_to_clist (gchar *mime_type, gpointer mi, gpointer cl)
 {
         /* we also finalize the MimeInfo structure here, now that we're done
          * loading it */
-        static gchar *text[2];
-        GList *list;
-        GString *extension;
+	static gchar *text[1];        
         gint row;
-        
+
+        /*
+	GList *list;        
+        GString *extension;        
         extension = g_string_new ("");
         for (list = ((MimeInfo *) mi)->ext[0];list; list=list->next) {
                 g_string_append (extension, (gchar *) list->data);
                 if (list->next != NULL)
                         g_string_append (extension, ", ");
         }
-        if (strcmp (extension->str, "") != 0 && ((MimeInfo *)mi)->user_ext[0])
+        
+        if (strcmp (extension->str, "") != 0 && ((MimeInfo *)mi)->user_ext[0]) {
                 g_string_append (extension, ", ");
+	}
+	
         for (list = ((MimeInfo *) mi)->user_ext[0]; list; list=list->next) {
                 g_string_append (extension, (gchar *) list->data);
                 if (list->next != NULL)
                         g_string_append (extension, ", ");
         }
+        
         ((MimeInfo *) mi)->ext_readable[0] = extension->str;
         g_string_free (extension, FALSE);
         
@@ -305,8 +318,11 @@ add_mime_vals_to_clist (gchar *mime_type, gpointer mi, gpointer cl)
                 if (list->next)
                         g_string_append (extension, ", ");
         }
-        if (strcmp (extension->str, "") != 0 && ((MimeInfo *)mi)->user_ext[1])
+        
+        if (strcmp (extension->str, "") != 0 && ((MimeInfo *)mi)->user_ext[1]) {
                 g_string_append (extension, ", ");
+	}
+	
         for (list = ((MimeInfo *) mi)->user_ext[1]; list; list=list->next) {
                 g_string_append (extension, (gchar *) list->data);
                 if (list->next != NULL)
@@ -317,111 +333,84 @@ add_mime_vals_to_clist (gchar *mime_type, gpointer mi, gpointer cl)
 
         if (((MimeInfo *) mi)->ext[0] || ((MimeInfo *) mi)->user_ext[0]) {
                 extension = g_string_new ((((MimeInfo *) mi)->ext_readable[0]));
+                
                 if (((MimeInfo *) mi)->ext[1] || ((MimeInfo *) mi)->user_ext[1]) {
                         g_string_append (extension, ", ");
                         g_string_append (extension, (((MimeInfo *) mi)->ext_readable[1]));
                 }
-        } else if (((MimeInfo *) mi)->ext[1] || ((MimeInfo *) mi)->user_ext[1])
+        } else if (((MimeInfo *) mi)->ext[1] || ((MimeInfo *) mi)->user_ext[1]) {        
                 extension = g_string_new ((((MimeInfo *) mi)->ext_readable[1]));
-        else
-                extension = g_string_new ("");
-
+	} else {
+		extension = g_string_new ("");
+	}
+	*/
+	
         text[0] = ((MimeInfo *) mi)->mime_type;
-        text[1] = extension->str;
 
         row = gtk_clist_insert (GTK_CLIST (cl), 1, text);
         gtk_clist_set_row_data (GTK_CLIST (cl), row, mi);
-        g_string_free (extension, TRUE);
+        //g_string_free (extension, TRUE);
         return row;
 }
+
 static void
 selected_row_callback (GtkWidget *widget, gint row, gint column, GdkEvent *event, gpointer data)
 {
         MimeInfo *mi;
+	
         if (column < 0)
                 return;
         
         mi = (MimeInfo *) gtk_clist_get_row_data (GTK_CLIST (widget),row);
-        
-        if (event && event->type == GDK_2BUTTON_PRESS)
-                launch_edit_window (mi->mime_type);
 
+	/* Update info on selection */
+        nautilus_mime_type_capplet_update_info (mi->mime_type);
+        
         if (g_hash_table_lookup (user_mime_types, mi->mime_type)) {
                 gtk_widget_set_sensitive (delete_button, TRUE);
         } else
                 gtk_widget_set_sensitive (delete_button, FALSE);
 }
 
-/* public functions */
-void
-delete_clicked (GtkWidget *widget, gpointer data)
-{
-        MimeInfo *mi;
-        gint row = 0;
 
-        if (GTK_CLIST (clist)->selection)
-                row = GPOINTER_TO_INT ((GTK_CLIST (clist)->selection)->data);
-        else
-                return;
-        mi = (MimeInfo *) gtk_clist_get_row_data (GTK_CLIST (clist), row);
 
-        gtk_clist_remove (GTK_CLIST (clist), row);
-        g_hash_table_remove (user_mime_types, mi->mime_type);
-        remove_mime_info (mi->mime_type);
-        free_mime_info (mi);
-        capplet_widget_state_changed (CAPPLET_WIDGET (capplet),
-                                      TRUE);
-}
 
-void
-edit_clicked (GtkWidget *widget, gpointer data)
-{
-        MimeInfo *mi;
-        gint row = 0;
-
-        if (GTK_CLIST (clist)->selection)
-                row = GPOINTER_TO_INT ((GTK_CLIST (clist)->selection)->data);
-        else
-                return;
-        mi = (MimeInfo *) gtk_clist_get_row_data (GTK_CLIST (clist), row);
-        if (mi)
-                launch_edit_window (mi->mime_type);
-        gtk_clist_remove (GTK_CLIST (clist), row);
-        row = add_mime_vals_to_clist (mi->mime_type, mi, clist);
-        gtk_clist_select_row (GTK_CLIST (clist), row, 0);
-}
-void
-add_clicked (GtkWidget *widget, gpointer data)
-{
-        launch_new_mime_window ();
-}
+/**
+ * create_mime_clist:
+ * 
+ **/
 
 GtkWidget *
-get_mime_clist (void)
+create_mime_clist (void)
 {
         GtkWidget *retval;
-        gchar *titles[2];
+        gchar *titles[3];
 
         titles[0] = _("Mime Type");
-        titles[1] = _("Extension");
+        titles[1] = _("Description");
+        titles[2] = _("Application");
+        
         retval = gtk_scrolled_window_new (NULL, NULL);
         gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (retval),
                                         GTK_POLICY_AUTOMATIC,
                                         GTK_POLICY_AUTOMATIC);
-	clist = gtk_clist_new_with_titles (2, titles);
-        gtk_signal_connect (GTK_OBJECT (clist),
-                            "select_row",
-                            GTK_SIGNAL_FUNC (selected_row_callback),
-                            NULL);
+	clist = gtk_clist_new_with_titles (3, titles);
+        gtk_signal_connect (GTK_OBJECT (clist),"select_row",
+                            GTK_SIGNAL_FUNC (selected_row_callback), NULL);
         gtk_clist_set_selection_mode (GTK_CLIST (clist), GTK_SELECTION_BROWSE);
         gtk_clist_set_auto_sort (GTK_CLIST (clist), TRUE);
-        if (clist)
+        
+        if (clist) {
                 g_hash_table_foreach (mime_types, (GHFunc) add_mime_vals_to_clist, clist);
+	}
+	
         gtk_clist_columns_autosize (GTK_CLIST (clist));
         gtk_clist_select_row (GTK_CLIST (clist), 0, 0);
         gtk_container_add (GTK_CONTAINER (retval), clist);
+        
         return retval;
 }
+
 
 static void
 finalize_mime_type_foreach (gpointer mime_type, gpointer info, gpointer data)
@@ -536,6 +525,7 @@ add_new_mime_type (gchar *mime_type, gchar *raw_ext)
                 }
                 *ptr2 = '\000';
         }
+        
         /* passed check, now we add it. */
         if (ext) {
                 temp = g_strconcat ("ext: ", ext, NULL);
@@ -552,6 +542,7 @@ add_new_mime_type (gchar *mime_type, gchar *raw_ext)
         }
         g_free (ext);
 }
+
 static void
 write_mime_foreach (gpointer mime_type, gpointer info, gpointer data)
 {
@@ -640,11 +631,13 @@ reread_list ()
         g_hash_table_foreach (mime_types, (GHFunc) add_mime_vals_to_clist, clist);
         gtk_clist_thaw (GTK_CLIST (clist));
 }
+
 static void
 clean_mime_type (gpointer mime_type, gpointer mime_info, gpointer data)
 {
         /* we should write this )-: */
 }
+
 void
 discard_mime_info ()
 {
