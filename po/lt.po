@@ -7,8 +7,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2003-09-17 15:01+0300\n"
-"PO-Revision-Date: 2003-09-12 20:13+0300\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-12-23 09:14+0200\n"
+"PO-Revision-Date: 2003-12-23 08:54+0200\n"
 "Last-Translator: Žygimantas Beručka <uid0@tuxfamily.org>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
 "MIME-Version: 1.0\n"
@@ -322,8 +323,10 @@ msgstr "milisekundžių"
 msgid "pixels/second"
 msgstr "taškų/sekundžių"
 
+#. set the timeout value  label with correct value of timeout
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
 #: capplets/mouse/gnome-mouse-properties.c:133
+#: capplets/mouse/gnome-mouse-properties.c:578
 #: capplets/mouse/gnome-mouse-properties.glade.h:27
 #: capplets/windows/gnome-window-properties.glade.h:7
 msgid "seconds"
@@ -376,7 +379,7 @@ msgstr "_Be paveiksliuko"
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:730
 #: capplets/keyboard/gnome-keyboard-properties.c:218
-#: capplets/mouse/gnome-mouse-properties.c:806
+#: capplets/mouse/gnome-mouse-properties.c:812
 #: capplets/sound/sound-properties-capplet.c:212
 msgid "Retrieve and store legacy settings"
 msgstr "Gauti ir įrašyti pasenusias nuostatas"
@@ -483,7 +486,7 @@ msgstr ""
 #: capplets/common/capplet-stock-icons.c:94
 #, c-format
 msgid "Unable to load capplet stock icon '%s'\n"
-msgstr ""
+msgstr "Negaliu įkelti įtaiso piktogramos „%s“\n"
 
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
@@ -1027,37 +1030,37 @@ msgstr "Ekrano raiška"
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: capplets/display/main.c:376
+#: capplets/display/main.c:377
 msgid "_Resolution:"
 msgstr "_Raiška:"
 
-#: capplets/display/main.c:395
+#: capplets/display/main.c:396
 msgid "Re_fresh rate:"
 msgstr "At_naujinimo dažnis:"
 
-#: capplets/display/main.c:416
+#: capplets/display/main.c:417
 msgid "Default Settings"
 msgstr "Įprasti nustatymai"
 
-#: capplets/display/main.c:418
+#: capplets/display/main.c:419
 #, c-format
 msgid "Screen %d Settings\n"
 msgstr "Ekrano %d nuostatos\n"
 
-#: capplets/display/main.c:443
+#: capplets/display/main.c:444
 msgid "Screen Resolution Preferences"
 msgstr "Ekrano raiškos parinktys"
 
-#: capplets/display/main.c:475
+#: capplets/display/main.c:476
 #, c-format
 msgid "Make default for this _computer (%s) only"
 msgstr "Padaryti įprastu tik šiam _kompiuteriui (%s)"
 
-#: capplets/display/main.c:493
+#: capplets/display/main.c:494
 msgid "Options"
 msgstr "Pariktys"
 
-#: capplets/display/main.c:514
+#: capplets/display/main.c:515
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d seconds the previous "
@@ -1066,25 +1069,25 @@ msgstr ""
 "Išbandomi nauji nustatymai. Jeigu šių pakeitimų nepatvirtinsite per %d "
 "sekundžių, bus atstatyti seni nustatymai."
 
-#: capplets/display/main.c:563
+#: capplets/display/main.c:564
 msgid "Do you want to keep this resolution?"
 msgstr "Ar norite palikti tokią raišką?"
 
-#: capplets/display/main.c:588
+#: capplets/display/main.c:589
 msgid "Use _previous resolution"
 msgstr "Naudoti _ankstesnę raišką"
 
-#: capplets/display/main.c:588
+#: capplets/display/main.c:589
 msgid "_Keep resolution"
 msgstr "_Palikti šią raišką"
 
-#: capplets/display/main.c:739
+#: capplets/display/main.c:740
 msgid ""
 "The XServer does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
 msgstr "X serveris nepalaiko XRandR išplėtimo.  "
 
-#: capplets/display/main.c:747
+#: capplets/display/main.c:748
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
@@ -1437,7 +1440,7 @@ msgstr "Eiti į temų katalogą"
 
 #: capplets/font/font-properties.glade.h:10
 msgid "Hinting:"
-msgstr ""
+msgstr "Hinting:"
 
 #: capplets/font/font-properties.glade.h:11
 msgid "N_one"
@@ -1466,15 +1469,15 @@ msgstr "Glodinimas:"
 
 #: capplets/font/font-properties.glade.h:17
 msgid "Sub_pixel (LCDs)"
-msgstr ""
+msgstr "Sub_pikseliai (LCD)"
 
 #: capplets/font/font-properties.glade.h:18
 msgid "Sub_pixel smoothing (LCDs)"
-msgstr ""
+msgstr "Sub_pikselių glodinimas (LCD)"
 
 #: capplets/font/font-properties.glade.h:19
 msgid "Subpixel order:"
-msgstr ""
+msgstr "Subpikselių tvarka:"
 
 #: capplets/font/font-properties.glade.h:20
 msgid "VB_GR"
@@ -1755,63 +1758,63 @@ msgstr "Nustatyti klaviatūros parinktis"
 msgid "Unknown Cursor"
 msgstr "Nežinomas žymeklis"
 
-#: capplets/mouse/gnome-mouse-properties.c:602
+#: capplets/mouse/gnome-mouse-properties.c:613
 msgid "Default Cursor - Current"
 msgstr "Įprastas žymeklis - dabartinis"
 
-#: capplets/mouse/gnome-mouse-properties.c:602
-#: capplets/mouse/gnome-mouse-properties.c:605
+#: capplets/mouse/gnome-mouse-properties.c:613
+#: capplets/mouse/gnome-mouse-properties.c:616
 msgid "The default cursor that ships with X"
 msgstr "Įprastas žymeklis, ateinantis su X'ais"
 
-#: capplets/mouse/gnome-mouse-properties.c:605
+#: capplets/mouse/gnome-mouse-properties.c:616
 msgid "Default Cursor"
 msgstr "Įprastas žymeklis"
 
-#: capplets/mouse/gnome-mouse-properties.c:623
+#: capplets/mouse/gnome-mouse-properties.c:634
 msgid "White Cursor - Current"
 msgstr "Baltas žymeklis - dabartinis"
 
-#: capplets/mouse/gnome-mouse-properties.c:623
-#: capplets/mouse/gnome-mouse-properties.c:626
+#: capplets/mouse/gnome-mouse-properties.c:634
+#: capplets/mouse/gnome-mouse-properties.c:637
 msgid "The default cursor inverted"
 msgstr "Invertuotas įprastas žymeklis"
 
-#: capplets/mouse/gnome-mouse-properties.c:626
+#: capplets/mouse/gnome-mouse-properties.c:637
 msgid "White Cursor"
 msgstr "Baltas žymeklis"
 
-#: capplets/mouse/gnome-mouse-properties.c:645
+#: capplets/mouse/gnome-mouse-properties.c:656
 msgid "Large Cursor - Current"
 msgstr "Didelis žymeklis - dabartinis"
 
-#: capplets/mouse/gnome-mouse-properties.c:645
-#: capplets/mouse/gnome-mouse-properties.c:648
+#: capplets/mouse/gnome-mouse-properties.c:656
+#: capplets/mouse/gnome-mouse-properties.c:659
 msgid "Large version of normal cursor"
 msgstr "Įprasto žymeklio didelė versija"
 
-#: capplets/mouse/gnome-mouse-properties.c:648
+#: capplets/mouse/gnome-mouse-properties.c:659
 msgid "Large Cursor"
 msgstr "Didelis žymeklis"
 
-#: capplets/mouse/gnome-mouse-properties.c:667
+#: capplets/mouse/gnome-mouse-properties.c:678
 msgid "Large White Cursor - Current"
 msgstr "Didelis baltas žymeklis - dabartinis"
 
-#: capplets/mouse/gnome-mouse-properties.c:667
-#: capplets/mouse/gnome-mouse-properties.c:670
+#: capplets/mouse/gnome-mouse-properties.c:678
+#: capplets/mouse/gnome-mouse-properties.c:681
 msgid "Large version of white cursor"
 msgstr "Balto žymeklio didelė versija"
 
-#: capplets/mouse/gnome-mouse-properties.c:670
+#: capplets/mouse/gnome-mouse-properties.c:681
 msgid "Large White Cursor"
 msgstr "Didelis baltas žymeklis"
 
-#: capplets/mouse/gnome-mouse-properties.c:747
+#: capplets/mouse/gnome-mouse-properties.c:753
 msgid "Cursor Size"
 msgstr "Žymeklio dydis"
 
-#: capplets/mouse/gnome-mouse-properties.c:756
+#: capplets/mouse/gnome-mouse-properties.c:762
 msgid "Cursor Theme"
 msgstr "Žymeklio tema"
 
