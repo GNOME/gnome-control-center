@@ -1,4 +1,4 @@
-# control-center de.po
+# German messages for control-center.
 # Copyright (C) 1998 Free Software Foundation, Inc.
 # Karl Eichwalder <ke@suse.de>, 1999, 2000.
 # Matthias Warkus <mawa@iname.com>, 1999.
@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0.53\n"
-"POT-Creation-Date: 2000-04-15 21:05+0200\n"
-"PO-Revision-Date: 2000-04-15 21:46+02:00\n"
+"POT-Creation-Date: 2000-04-16 07:34+0200\n"
+"PO-Revision-Date: 2000-04-16 07:39+02:00\n"
 "Last-Translator: Karl Eichwalder <ke@suse.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -723,7 +723,9 @@ msgstr "Speichert"
 msgid "Saving session details."
 msgstr "Speichert Sitzungsdetails."
 
-#: capplets/session-properties/gsm-client-row.c:43
+#. This is about the only case where we'll put Unknown instead
+#. of simply not showing the info.
+#: capplets/session-properties/gsm-client-row.c:43 control-center/splash.c:168
 msgid "Unknown"
 msgstr "Unbekannt"
 
@@ -1531,6 +1533,26 @@ msgstr ""
 "entsprechenden Eintrag."
 
 #. create the app
-#: control-center/main.c:196
+#: control-center/main.c:196 control-center/splash.c:237
 msgid "Control Center"
 msgstr "Kontrollzentrum"
+
+#: control-center/splash.c:48
+msgid "Operating System:"
+msgstr "Betriebssystem:"
+
+#: control-center/splash.c:49
+msgid "Distribution Version:"
+msgstr "Version der Distribution:"
+
+#: control-center/splash.c:50
+msgid "Processor Type:"
+msgstr "Prozessor:"
+
+#: control-center/splash.c:51
+msgid "User Name:"
+msgstr "Benutzername:"
+
+#: control-center/splash.c:52
+msgid "Host Name:"
+msgstr "Rechnername:"
