@@ -25,7 +25,7 @@
 #define __ARCHIVER_CLIENT_H
 
 #include <gnome.h>
-#include <libxml/tree.h>
+#include <gnome-xml/tree.h>
 #include <time.h>
 
 #include "ConfigArchiver.h"
