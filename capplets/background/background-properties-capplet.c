@@ -27,7 +27,7 @@
 
 #include <gnome.h>
 #include <bonobo.h>
-
+#include <bonobo/bonobo-property-bag-client.h>
 #include <glade/glade.h>
 #include <gtk/gtksignal.h>
 #include "capplet-util.h"
@@ -236,6 +236,7 @@ setup_dialog (GtkWidget *widget, Bonobo_PropertyBag bag)
 	gtk_widget_hide (WID ("opacity_spin"));
 	gtk_widget_hide (WID ("opacity_label"));
 
+	bonobo_property_bag_client_set_value_gboolean (bag, "enabled", TRUE, NULL);
 	bonobo_event_source_client_add_listener (bag, (BonoboListenerCallbackFn) property_change_cb,
 						 NULL, NULL, bag);
 

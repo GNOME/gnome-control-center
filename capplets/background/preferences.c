@@ -121,6 +121,7 @@ preferences_new (void)
 	GtkObject *object;
 
 	object = gtk_type_new (preferences_get_type ());
+	PREFERENCES (object)->enabled = TRUE;
 
 	return object;
 }
