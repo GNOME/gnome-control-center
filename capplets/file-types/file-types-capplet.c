@@ -1189,9 +1189,8 @@ revert_mime_clicked (GtkWidget *widget, gpointer data)
 {
 	GtkWidget *dialog;
 	
-	dialog = gnome_question_dialog_modal (_("Reverting to system settings\n"
-						"will lose all your personal \n"
-						"MIME configuration.\n"
+	dialog = gnome_question_dialog_modal (_("Reverting to system settings will lose any changes\n"
+						"you have ever made to File Types and Programs.\n"
 						"Revert anyway?"), 
 					      revert_real_cb, NULL);
 
