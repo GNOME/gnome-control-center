@@ -38,6 +38,7 @@ enum
 
 static GConfEnumStringPair toolbar_style_enums[] = {
   { 0, "both" },
+  { 0, "both_horiz" },
   { 1, "icons" },
   { 2, "text" }
 };
@@ -132,7 +133,7 @@ static void
 set_toolbar_style (GladeXML *dialog, const char *value)
 {
   static const GtkToolbarStyle gtk_toolbar_styles[] = 
-    { GTK_TOOLBAR_BOTH, GTK_TOOLBAR_ICONS, GTK_TOOLBAR_TEXT };
+    { GTK_TOOLBAR_BOTH, GTK_TOOLBAR_BOTH_HORIZ, GTK_TOOLBAR_ICONS, GTK_TOOLBAR_TEXT };
 
   int enum_val;
 
