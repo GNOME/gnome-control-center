@@ -813,6 +813,10 @@ populate_viewer_menu (GtkWidget *component_menu, const char *mime_type)
 			}
 			g_list_free (children);
 
+			/* FIXME: 2766. folowing line added to avoid crashes in certain cases. 
+			 someone needs to cleanup all this code for true. */
+			found_match = TRUE;
+
 			/* See if we have a match */
 			if (found_match) {
 				/* Have menu appear with default application selected */
