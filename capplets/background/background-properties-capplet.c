@@ -44,7 +44,7 @@ enum
 {
 	TARGET_URI_LIST,
 	TARGET_COLOR,
-	TARGET_BGIMAGE,
+	TARGET_BGIMAGE
 /*	TARGET_BACKGROUND_RESET*/  
 };
 
@@ -52,7 +52,7 @@ static GtkTargetEntry drop_types[] =
 {
 	{"text/uri-list", 0, TARGET_URI_LIST},
 	{ "application/x-color", 0, TARGET_COLOR },
-	{ "property/bgimage", 0, TARGET_BGIMAGE },
+	{ "property/bgimage", 0, TARGET_BGIMAGE }
 /*	{ "x-special/gnome-reset-background", 0, TARGET_BACKGROUND_RESET }*/
 };
 
