@@ -3,13 +3,10 @@ Left TODO:
  * Change custom theme text to indicate what themes are being used.
    - requires breaking string freeze
 
- * Notice when a directory is removed.
-
  * Sanity check saving.  In particular, \n needs escaping.
-
- * Fix when saving a theme.  Seems to be a small race condition there
-   that screws a lot up.  Should be trackable, though I fear it's going
-   to test my fam-fu
 
  * Fix the collation of the Details dialog.  Seems to be going on theme
    name, not readable name.
+
+ * When saving a theme that started as an initial custom theme, kill
+   that from the list.

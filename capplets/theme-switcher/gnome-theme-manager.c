@@ -281,16 +281,12 @@ load_meta_themes (GtkTreeView *tree_view,
 
   client = gconf_client_get_default ();
 
-  /* Get the settings */
   current_gtk_theme = gconf_client_get_string (client, GTK_THEME_KEY, NULL);
   current_icon_theme = gconf_client_get_string (client, ICON_THEME_KEY, NULL);
   window_manager = gnome_wm_manager_get_current (gdk_display_get_default_screen (gdk_display_get_default ()));
-  if (window_manager) {
-    wm_settings.flags = GNOME_WM_SETTING_THEME;
-    gnome_window_manager_get_settings (window_manager, &wm_settings);
-    current_window_theme = g_strdup (wm_settings.theme);
-  } else
-    current_window_theme = g_strdup ("");
+  wm_settings.flags = GNOME_WM_SETTING_THEME;
+  gnome_window_manager_get_settings (window_manager, &wm_settings);
+  current_window_theme = g_strdup (wm_settings.theme);
 
   /* FIXME: What do we really do when there is no theme? */
   if (current_icon_theme == NULL)
@@ -314,7 +310,6 @@ load_meta_themes (GtkTreeView *tree_view,
   /* Sort meta_theme_list to be in the same order of the current data.  This way
    * we can walk through them together. */
   meta_theme_list = g_list_sort (meta_theme_list, sort_meta_theme_list_func);
-
   list = meta_theme_list;
   valid = gtk_tree_model_get_iter_first (model, &iter);
 
@@ -400,13 +395,12 @@ load_meta_themes (GtkTreeView *tree_view,
 	    {
 	      /* we insert a new item */
 	      GtkTreeIter iter_to_prepend;
-
 	      gtk_list_store_insert_before (GTK_LIST_STORE (model), &iter_to_prepend, &iter);
 	      blurb = g_strdup_printf ("<span size=\"larger\" weight=\"bold\">%s</span>\n%s",
 				       list_meta_theme_info->readable_name, list_meta_theme_info->comment);
 	      pixbuf = default_image;
 
-	      gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+	      gtk_list_store_set (GTK_LIST_STORE (model), &iter_to_prepend,
 				  META_THEME_PIXBUF_COLUMN, pixbuf,
 				  META_THEME_NAME_COLUMN, blurb,
 				  META_THEME_ID_COLUMN, list_meta_theme_info->name,
@@ -817,8 +811,8 @@ update_settings_from_gconf (void)
   current_gtk_theme = gconf_client_get_string (client, GTK_THEME_KEY, NULL);
   current_icon_theme = gconf_client_get_string (client, ICON_THEME_KEY, NULL);
   window_manager = gnome_wm_manager_get_current (gdk_display_get_default_screen (gdk_display_get_default ()));
+  wm_settings.flags = GNOME_WM_SETTING_THEME;
   if (window_manager) {
-    wm_settings.flags = GNOME_WM_SETTING_THEME;
     gnome_window_manager_get_settings (window_manager, &wm_settings);
     current_window_theme = g_strdup (wm_settings.theme);
   } else
@@ -1006,7 +1000,6 @@ theme_changed_func (gpointer uri,
 		    gpointer user_data)
 {
   GladeXML *dialog;
-
   dialog = gnome_theme_manager_get_theme_dialog ();
 
   update_themes_from_disk (dialog);
@@ -1054,8 +1047,8 @@ setup_meta_tree_view (GtkTreeView *tree_view,
 					       G_TYPE_STRING,    /* META_THEME_ID_COLUMN     */
 					       G_TYPE_UINT,      /* META_THEME_FLAG_COLUMN   */
 					       GDK_TYPE_PIXBUF); /* META_THEME_PIXBUF_COLUMN */
-  gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (model), 0, gnome_theme_manager_tree_sort_func, NULL, NULL);
-  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (model), 0, GTK_SORT_ASCENDING);
+  //  gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (model), 0, gnome_theme_manager_tree_sort_func, NULL, NULL);
+  //  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (model), 0, GTK_SORT_ASCENDING);
   gtk_tree_view_set_model (tree_view, model);
   selection = gtk_tree_view_get_selection (tree_view);
   gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
@@ -1407,7 +1400,6 @@ main (int argc, char *argv[])
 		      LIBGNOMEUI_MODULE, argc, argv,
 		      GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
 		      NULL);
-
   gnome_theme_init (NULL);
 
   gnome_wm_manager_init ();
