@@ -431,6 +431,7 @@ create_dialog (struct DisplayInfo *info)
   GtkWidget *per_computer_check;
   int i;
   GtkWidget *wrapped;
+  GtkWidget *vbox;
   GConfClient *client;
   char *key;
   char *resolution;
@@ -453,15 +454,20 @@ create_dialog (struct DisplayInfo *info)
 					NULL);
 					
   gtk_window_set_resizable(GTK_WINDOW (dialog), FALSE);
-  gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
+  gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);  
   gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dialog)->vbox), 2);
   capplet_set_icon (dialog, "display-capplet.png");
+  
+  vbox = gtk_vbox_new (FALSE, 18);
+  gtk_container_set_border_width (GTK_CONTAINER (vbox), 5);
+  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox),
+                      vbox, FALSE, FALSE, 0);
+  gtk_widget_show (vbox);
   
   for (i = 0; i < info->n_screens; i++)
     {
       screen_widget = create_screen_widgets (&info->screens[i], i, info->n_screens == 1);
-      gtk_container_set_border_width (GTK_CONTAINER (screen_widget), 5);
-      gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox),
+      gtk_box_pack_start (GTK_BOX (vbox),
 			  screen_widget, FALSE, FALSE, 0);
       gtk_widget_show (screen_widget);
     }
@@ -492,7 +498,7 @@ create_dialog (struct DisplayInfo *info)
       gtk_widget_show (per_computer_check);
       
       wrapped = wrap_in_label (per_computer_check, _("Options"));
-      gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox),
+      gtk_box_pack_start (GTK_BOX (vbox),
 			  wrapped, FALSE, FALSE, 0);
       gtk_widget_show (wrapped);
     }

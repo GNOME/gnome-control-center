@@ -1660,8 +1660,6 @@ peditor_image_clicked_cb (GConfPropertyEditor *peditor, GtkButton *button)
 	GConfValue *value = NULL, *value_wid;
 	const gchar *filename;
 	GtkWidget *chooser, *toplevel, *preview, *preview_box;
-	GdkRectangle rect;
-	int kludge_height;
 
 	toplevel = gtk_widget_get_toplevel (GTK_WIDGET (button));
 	chooser = gtk_file_chooser_dialog_new (_("Please select an image."),
@@ -1687,14 +1685,6 @@ peditor_image_clicked_cb (GConfPropertyEditor *peditor, GtkButton *button)
 	gtk_dialog_set_default_response (GTK_DIALOG (chooser), GTK_RESPONSE_OK);
 	gtk_window_set_destroy_with_parent (GTK_WINDOW (chooser), TRUE);
 	gtk_window_set_modal (GTK_WINDOW (chooser), TRUE);
-
-	/* the new file selectors vertical height negotiation isn't wonderful,
-	 * kludge up a rough version that uses a fraction of the screen height for now */
-	gdk_screen_get_monitor_geometry (GTK_WINDOW (toplevel)->screen, 0, &rect);
-	kludge_height = rect.height * .6;
-	if (kludge_height < 400)
-		kludge_height = rect.height * .9;
-	gtk_window_set_default_size (GTK_WINDOW (chooser), -1, kludge_height);
 
 	/* need the current filename */
 	if (peditor->p->changeset)

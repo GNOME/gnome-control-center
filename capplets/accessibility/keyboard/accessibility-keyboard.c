@@ -429,19 +429,7 @@ fchooser_handle_response (GtkFileChooser *fchooser, gint response, gpointer data
 static void
 cb_load_CDE_file (GtkButton *button, GtkWidget *dialog)
 {
-	GtkFileChooser *fchooser;
-	GdkRectangle rect;
-	GtkWindow   *toplevel = GTK_WINDOW (gtk_widget_get_toplevel (dialog));
-	int kludge_height;
-
-	/* the new file selectors vertical height negotiation isn't wonderful,
-	 * kludge up a rough version that uses a fraction of the screen height for now */
-	gdk_screen_get_monitor_geometry (toplevel->screen, 0, &rect);
-	kludge_height = rect.height * .6;
-	if (kludge_height < 400)
-		kludge_height = rect.height * .9;
-
-	fchooser = GTK_FILE_CHOOSER (
+	GtkFileChooser *fchooser = GTK_FILE_CHOOSER (
 		gtk_file_chooser_dialog_new (_("Import Feature Settings File"),
 					     GTK_WINDOW (gtk_widget_get_toplevel (dialog)),
 					     GTK_FILE_CHOOSER_ACTION_OPEN,
@@ -449,7 +437,6 @@ cb_load_CDE_file (GtkButton *button, GtkWidget *dialog)
 					     _("_Import"), GTK_RESPONSE_OK,
 					     NULL));
 
-	gtk_window_set_default_size (GTK_WINDOW (fchooser), -1, kludge_height);
 	gtk_window_set_position (GTK_WINDOW (fchooser), GTK_WIN_POS_MOUSE);
 	gtk_window_set_modal (GTK_WINDOW (fchooser), TRUE);
 	g_signal_connect (G_OBJECT (fchooser),
