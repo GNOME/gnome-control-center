@@ -1,3 +1,15 @@
+2004-10-14  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* gnome-default-applications-properties-structs.c: Revert string
+	changes and add entries for Firefox on Debian and Fedora with
+	new binary names. Original patch from jdassen at debian org.
+	Closes part of bug #155246. The original patch should go into HEAD
+	after branching.
+	* gnome-default-applications-properties.c: (browser_setup_custom),
+	(mailer_setup_custom), (terminal_setup_custom): Use the binary
+	that's found in the path. Patch by seb128 at debian org. Closes
+	bug #148991.
+
 2004-10-12  J.H.M. Dassen (Ray) <jdassen@debian.org>
 
 	* gnome-default-applications-properties-structs.c: Added Mozilla

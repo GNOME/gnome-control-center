@@ -458,7 +458,7 @@ browser_setup_custom (GtkWidget *entry,
 	const gchar *browser = gtk_entry_get_text (GTK_ENTRY (entry));
 
 	for (i = 0; i < G_N_ELEMENTS (possible_browsers); i++ ) {
-		if (! strcmp (_(possible_browsers[i].name), browser)) {
+		if (! strcmp (_(possible_browsers[i].name), browser) && possible_browsers[i].in_path) {
 		        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("web_custom_terminal_toggle")),
 						      possible_browsers[i].needs_term);
 			gtk_entry_set_text (GTK_ENTRY (WID ("web_custom_command_entry")),
@@ -476,7 +476,7 @@ mailer_setup_custom (GtkWidget *entry,
 	const gchar *mailer = gtk_entry_get_text (GTK_ENTRY (entry));
 
 	for (i = 0; i < G_N_ELEMENTS (possible_mailers); i++ ) {
-		if (! strcmp (_(possible_mailers[i].name), mailer)) {
+		if (! strcmp (_(possible_mailers[i].name), mailer) && possible_mailers[i].in_path) {
 		        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("mail_custom_terminal_toggle")),
 						      possible_mailers[i].needs_term);
 			gtk_entry_set_text (GTK_ENTRY (WID ("mail_custom_command_entry")),
@@ -537,7 +537,7 @@ terminal_setup_custom (GtkWidget *entry,
 	const gchar *terminal = gtk_entry_get_text (GTK_ENTRY (entry));
 
 	for (i = 0; i < G_N_ELEMENTS (possible_terminals); i++ ) {
-		if (! strcmp (_(possible_terminals[i].name), terminal)) {
+		if (! strcmp (_(possible_terminals[i].name), terminal) && possible_terminals[i].in_path) {
 			gtk_entry_set_text (GTK_ENTRY (WID ("terminal_custom_command_entry")), possible_terminals[i].exec);
 			gtk_entry_set_text (GTK_ENTRY (WID ("terminal_custom_exec_entry")), possible_terminals[i].exec_arg);
 			return;
