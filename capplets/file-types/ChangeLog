@@ -1,3 +1,8 @@
+2002-04-07  Bradford Hovinen  <hovinen@ximian.com>
+
+	* model-entry.c (model_entry_remove_child): Don't signal row
+	deleted or reset tmp->next if the child node was not found
+
 2002-04-02  jacob berkman  <jacob@ximian.com>
 
 	* service-edit-dialog.c (fill_dialog): show 'unknown' in the

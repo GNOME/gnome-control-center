@@ -127,6 +127,7 @@ model_entry_remove_child (ModelEntry *entry, ModelEntry *child, GtkTreeModel *mo
 	ModelEntry *tmp;
 	GtkTreePath *path;
 	GtkTreeIter iter;
+	gboolean found = TRUE;
 
 	g_return_if_fail (entry != NULL);
 	g_return_if_fail (entry->type == MODEL_ENTRY_CATEGORY || entry->type == MODEL_ENTRY_SERVICES_CATEGORY ||
@@ -145,12 +146,18 @@ model_entry_remove_child (ModelEntry *entry, ModelEntry *child, GtkTreeModel *mo
 		entry->first_child = child->next;
 	} else {
 		for (tmp = entry->first_child; tmp->next != NULL && tmp->next != child; tmp = tmp->next);
-		tmp->next = child->next;
+
+		if (tmp->next != NULL)
+			tmp->next = child->next;
+		else
+			found = FALSE;
 	}
 
 	child->parent = NULL;
 
-	gtk_tree_model_row_deleted (model, path);
+	if (found)
+		gtk_tree_model_row_deleted (model, path);
+
 	gtk_tree_path_free (path);
 }
 
