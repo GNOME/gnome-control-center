@@ -95,7 +95,7 @@ static gboolean     mime_types_model_iter_nth_child  (GtkTreeModel      *tree_mo
 						      GtkTreeIter       *parent,
 						      gint               n);
 static gboolean     mime_types_model_iter_parent     (GtkTreeModel      *tree_model,
-						      GtkTreeIter       *iter,
+						      GtkTreeIter       *result,
 						      GtkTreeIter       *child);
 
 
@@ -603,7 +603,7 @@ mime_types_model_iter_nth_child (GtkTreeModel *tree_model, GtkTreeIter *iter, Gt
 }
 
 static gboolean
-mime_types_model_iter_parent (GtkTreeModel *tree_model, GtkTreeIter *iter, GtkTreeIter *child)
+mime_types_model_iter_parent (GtkTreeModel *tree_model, GtkTreeIter *result, GtkTreeIter *child)
 {
 	MimeTypesModel *model;
 	ModelEntry *entry;
@@ -612,13 +612,13 @@ mime_types_model_iter_parent (GtkTreeModel *tree_model, GtkTreeIter *iter, GtkTr
 	g_return_val_if_fail (IS_MIME_TYPES_MODEL (tree_model), FALSE);
 
 	model = MIME_TYPES_MODEL (tree_model);
-	entry = iter->user_data;
+	entry = child->user_data;
 
 	if (entry != NULL && entry->parent->type != MODEL_ENTRY_NONE)
-		iter->user_data = entry->parent;
+		result->user_data = entry->parent;
 	else
-		iter->user_data = NULL;
+		result->user_data = NULL;
 
-	return iter->user_data != NULL;
+	return result->user_data != NULL;
 }
 
