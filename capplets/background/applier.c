@@ -230,8 +230,7 @@ applier_class_init (ApplierClass *class)
 
 		visual = gdk_window_get_visual (GDK_ROOT_PARENT ());
 
-		gdk_pixbuf_xlib_init_with_depth
-			(GDK_DISPLAY (), gdk_screen, visual->depth);
+		gdk_pixbuf_xlib_init_with_depth (GDK_DISPLAY (), gdk_screen, visual->depth);
 	}
 }
 
@@ -783,7 +782,7 @@ render_to_screen (Applier *applier, const Preferences *prefs)
 			 applier->p->pixbuf_render_geom.y,
 			 applier->p->pixbuf_render_geom.width,
 			 applier->p->pixbuf_render_geom.height,
-			 GDK_RGB_DITHER_MAX, 0, 0);
+			 XLIB_RGB_DITHER_MAX, 0, 0);
 	} else {
 		if (applier->p->type == APPLIER_ROOT) {
 			gdk_color_alloc (gdk_window_get_colormap (GDK_ROOT_PARENT()), prefs->color1);

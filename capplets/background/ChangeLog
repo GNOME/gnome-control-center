@@ -1,9 +1,13 @@
 2001-09-28  Bradford Hovinen  <hovinen@ximian.com>
 
+	* preferences.c (preferences_load_from_bonobo_db):
+	(preferences_load_from_bonobo_pbag): Use BONOBO_RET_EX rather than
+	RETURN_IF_EX; remove the definition of the latter macro
+
 	* applier.c (fill_gradient): Copied from control center 1.4.0
 	(render_background): Create the pixbuf first and then pass to
 	fill_gradient
-	(render_to_screen): Use GDK_RGB_DITHER_MAX rather than
+	(render_to_screen): Use XLIB_RGB_DITHER_MAX rather than
 	GDK_RGB_DITHER_NORMAL
 
 	* Makefile.am: Change the binary name to
