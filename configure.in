@@ -36,14 +36,18 @@ AC_CHECK_FUNCS(usleep)
 AC_CHECK_FUNCS(putenv,[AC_DEFINE(HAVE_PUTENV)])
 AC_CHECK_FUNCS(setenv,[AC_DEFINE(HAVE_SETENV)])
 
+AC_PATH_XTRA
+x_libs="$X_PRE_LIBS $X_LIBS -lX11 $X_EXTRA_LIBS"
+
 dnl keyboard-properties-capplet
-AC_CHECK_HEADERS(X11/extensions/xf86misc.h, XF86MISC_LIBS="-lXxf86misc")
+AC_CHECK_HEADERS(X11/extensions/xf86misc.h, XF86MISC_LIBS="-lXxf86misc", , "$x_libs")
 AC_SUBST(XF86MISC_LIBS)
 AC_CHECK_HEADERS(X11/extensions/XKB.h)
 
 dnl ==============================================
 dnl Check that we meet the  dependencies
 dnl ==============================================
+
 COMMON_MODULES="gtk+-2.0 gconf-2.0 libgnomeui-2.0 libglade-2.0 libbonobo-2.0 libbonoboui-2.0 libglade-2.0 gconf-2.0"
 PKG_CHECK_MODULES(CAPPLET, $COMMON_MODULES)
 PKG_CHECK_MODULES(GNOMECC, $COMMON_MODULES libxml-2.0 gnome-desktop-2.0)
@@ -52,6 +56,10 @@ PKG_CHECK_MODULES(OLD_CAPPLET, libgnomeui-2.0 libglade-2.0)
 PKG_CHECK_MODULES(GNOME, libgnomeui-2.0)
 PKG_CHECK_MODULES(VFS_CAPPLET, $COMMON_MODULES gnome-vfs-module-2.0 gnome-vfs-2.0)
 PKG_CHECK_MODULES(SOUND_CAPPLET, esound)
+
+CAPPLET_LIBS="$CAPPLET_LIBS $x_libs"
+GNOMECC_LIBS="$GNOMECC_LIBS $x_libs"
+GNOME_SETTINGS_DAEMON_LIBS="$GNOME_SETTINGS_DAEMON_LIBS $x_libs"
 
 AC_PATH_PROG(GCONFTOOL, gconftool-2)
 
