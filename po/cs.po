@@ -1,17 +1,17 @@
 # Czech translation of gnome-control-center.
 # Copyright (C) 1999,2003 Free Software Foundation, Inc.
-# Copyright (C) 2003 Miloslav Trmac <mitr@volny.cz>
+# Copyright (C) 2003, 2004 Miloslav Trmac <mitr@volny.cz>
 # David Šauer <davids@penguin.cz>, 1999.
 # Jiří Lebl <jirka@5z.cz>, 2002.
 # Michal Bukovjan <bukm@centrum.cz>, 2002,2003
-# Miloslav Trmac <mitr@volny.cz>, 2003.
+# Miloslav Trmac <mitr@volny.cz>, 2003, 2004.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-12-31 20:07+0100\n"
-"PO-Revision-Date: 2003-12-23 21:07+0100\n"
+"POT-Creation-Date: 2004-01-06 15:19+0100\n"
+"PO-Revision-Date: 2004-01-06 17:01+0100\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -661,7 +661,7 @@ msgstr "Preferované aplikace"
 
 #: capplets/default-applications/default-applications.desktop.in.h:2
 msgid "Select your default applications"
-msgstr "Vyberte své výchozí aplikace"
+msgstr "Vyberte své implicitní aplikace"
 
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:39
 msgid "Epiphany"
@@ -1557,8 +1557,8 @@ msgid_plural ""
 "effectively use the computer.  It is recommended that you select a size "
 "smaller than %d."
 msgstr[0] ""
-"Vybrané písmo je velké %d bod, což může působit problémy při efektivní "
-"práci s počítačem. Doporučuje se vybrat velikost menší než %d."
+"Vybrané písmo je velké %d bod, což může působit problémy při efektivní práci "
+"s počítačem. Doporučuje se vybrat velikost menší než %d."
 msgstr[1] ""
 "Vybrané písmo je velké %d body, což může působit problémy při efektivní "
 "práci s počítačem. Doporučuje se vybrat velikost menší než %d."
@@ -1577,8 +1577,8 @@ msgid_plural ""
 "effectively use the computer.  It is recommended that you select a smaller "
 "sized font."
 msgstr[0] ""
-"Vybrané písmo je velké %d bod, což může působit problémy při efektivní "
-"práci s počítačem. Doporučuje se vybrat písmo menší velikosti."
+"Vybrané písmo je velké %d bod, což může působit problémy při efektivní práci "
+"s počítačem. Doporučuje se vybrat písmo menší velikosti."
 msgstr[1] ""
 "Vybrané písmo je velké %d body, což může působit problémy při efektivní "
 "práci s počítačem. Doporučuje se vybrat písmo menší velikosti."
@@ -2286,56 +2286,64 @@ msgid "Save Theme"
 msgstr "Uložit téma"
 
 #: capplets/theme-switcher/theme-properties.glade.h:9
+msgid "Select theme for the desktop"
+msgstr "Vyberte téma prostředí pracovní plochy"
+
+#: capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Short _description:"
 msgstr "Krátký _popis:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:10
+#: capplets/theme-switcher/theme-properties.glade.h:11
 msgid "Theme Details"
 msgstr "Podrobnosti o tématu"
 
-#: capplets/theme-switcher/theme-properties.glade.h:11
+#: capplets/theme-switcher/theme-properties.glade.h:12
 msgid "Theme Preferences"
 msgstr "Nastavení tématu"
 
-#: capplets/theme-switcher/theme-properties.glade.h:12
+#: capplets/theme-switcher/theme-properties.glade.h:13
 msgid "Theme _Details"
 msgstr "_Podrobnosti o tématu"
 
-#: capplets/theme-switcher/theme-properties.glade.h:13
+#: capplets/theme-switcher/theme-properties.glade.h:14
 msgid "This theme does not suggest any particular font or background."
 msgstr "Toto téma nenavrhuje žádné konkrétní písmo nebo pozadí."
 
-#: capplets/theme-switcher/theme-properties.glade.h:14
+#: capplets/theme-switcher/theme-properties.glade.h:15
 msgid "This theme suggests a background:"
 msgstr "Toto téma navrhuje pozadí:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:15
+#: capplets/theme-switcher/theme-properties.glade.h:16
 msgid "This theme suggests a font and a background:"
 msgstr "Toto téma navrhuje písmo a pozadí:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:16
+#: capplets/theme-switcher/theme-properties.glade.h:17
 msgid "This theme suggests a font:"
 msgstr "Toto téma navrhuje písmo:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:17
+#: capplets/theme-switcher/theme-properties.glade.h:18
 msgid "Window Border"
 msgstr "Okraj okna"
 
-#: capplets/theme-switcher/theme-properties.glade.h:18
+#: capplets/theme-switcher/theme-properties.glade.h:19
 msgid "_Go To Theme Folder"
 msgstr "Pře_jít do adresáře s tématy"
 
-#: capplets/theme-switcher/theme-properties.glade.h:19
+#: capplets/theme-switcher/theme-properties.glade.h:20
 msgid "_Install Theme..."
 msgstr "_Instalovat téma..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:20
+#: capplets/theme-switcher/theme-properties.glade.h:21
 msgid "_Save Theme..."
 msgstr "_Uložit téma..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:21
+#: capplets/theme-switcher/theme-properties.glade.h:22
 msgid "_Theme name:"
 msgstr "_Jméno tématu:"
+
+#: capplets/theme-switcher/theme-properties.glade.h:23
+msgid "theme selection tree"
+msgstr "strom výběru tématu"
 
 #: capplets/ui-properties/gnome-ui-properties.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
@@ -3186,9 +3194,6 @@ msgstr "Jestli zobrazovat náhledy témat"
 
 #~ msgid "Behavior"
 #~ msgstr "Chování"
-
-#~ msgid "Sets the default behavior of GNOME applications"
-#~ msgstr "Nastavuje výchozí chování aplikací prostředí GNOME"
 
 #~ msgid "One minute until the next break"
 #~ msgstr "Jedna minuta do další přestávky"
