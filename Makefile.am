@@ -1,4 +1,4 @@
-SUBDIRS = archiver libsounds capplets control-center idl po intl
+SUBDIRS = schemas libsounds capplets control-center idl po intl
 #I removed the root-manager for now
 #
 # it generated this error :

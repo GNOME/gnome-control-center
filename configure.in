@@ -133,6 +133,22 @@ if test "$XSCREENSAVER" = no ; then
 	AC_MSG_ERROR(xscreensaver was not found. It can be downloaded from http://www.jwz.org/xscreensaver/.)
 fi
 
+dnl Specify the gconf configuration source, 
+dnl default to xml::$(sysconfdir)/gconf/gconf.xml.defaults
+
+dnl ==============================================
+dnl Special GConf section 
+dnl ==============================================
+
+AC_PATH_PROG(GCONFTOOL, gconftool-1, no)
+
+if test x"$GCONFTOOL" = xno; then
+  AC_MSG_ERROR([gconftool-1 executable not found in your path - should be installed with GConf])
+fi
+
+AM_GCONF_SOURCE
+
+
 dnl ==============================================
 dnl End: Check that we meet the  dependencies
 dnl ==============================================
@@ -220,27 +236,10 @@ dnl End : Macro for the common code
 dnl ==============================================
 
 
-
-dnl =======================================
-dnl Variables for config_archiverConf.sh.in
-dnl =======================================
-CONFIG_ARCHIVER_LIBDIR='-L${libdir}'
-CONFIG_ARCHIVER_LIBS="$CONFIG_ARCHIVER_LIBS -lconfig_archiver"
-CONFIG_ARCHIVER_INCLUDEDIR="$CONFIG_ARCHIVER_CFLAGS -I${includedir}"
-
-AC_SUBST(CONFIG_ARCHIVER_LIBDIR)
-AC_SUBST(CONFIG_ARCHIVER_LIBS)
-AC_SUBST(CONFIG_ARCHIVER_INCLUDEDIR)
-dnl =======================================
-dnl End: Variables for config_archiverConf.sh.in
-dnl =======================================
-
-
 AC_OUTPUT([
 control-center.spec
 Makefile
 po/Makefile.in
-archiver/Makefile
 control-center/Makefile
 capplets/Makefile
 capplets/common/Makefile
@@ -251,6 +250,7 @@ capplets/keyboard/Makefile
 capplets/mouse/Makefile
 capplets/sound/Makefile
 libsounds/Makefile
+schemas/Makefile
 idl/Makefile
 intl/Makefile])
 
