@@ -111,14 +111,17 @@ set_int (GConfClient *client, char const *key, int val)
 	}
 }
 
-static void
-set_bool (GConfClient *client, char const *key, int val)
+static gboolean
+set_bool (GConfClient *client, gboolean in_gconf, char const *key, int val)
 {
 	GError *err;
+	if (!in_gconf && !val)
+		return FALSE;
 	if (!gconf_client_set_bool (client, key, val ? TRUE : FALSE, &err)) {
 		g_warning (err->message);
 		g_error_free (err);
 	}
+	return val;
 }
 
 static unsigned long
@@ -271,10 +274,10 @@ set_server_from_gconf (GConfEntry *ignored)
 static void
 set_gconf_from_server (GConfEntry *ignored)
 {
+	gboolean	in_gconf;
 	GConfClient	*client = gconf_client_get_default ();
-	XkbDescRec	*desc;
+	XkbDescRec	*desc = get_xkb_desc_rec ();
 
-	desc = get_xkb_desc_rec ();
 	if (!desc) {
 		d ("No XKB present\n");
 		return;
@@ -291,23 +294,31 @@ set_gconf_from_server (GConfEntry *ignored)
 	g_return_if_fail (!we_are_changing_xkb_state);
 	we_are_changing_xkb_state = TRUE;
 
-	set_bool (client, CONFIG_ROOT "/enable",
+	/* always toggle this irrespective of the state */
+	set_bool (client, TRUE, CONFIG_ROOT "/enable",
 		desc->ctrls->enabled_ctrls & (XkbAccessXKeysMask | XkbAccessXFeedbackMask));
-	set_bool (client, CONFIG_ROOT "/feature_state_change_beep",
+
+	/* if master is disabled in gconf do not change gconf state of subordinates
+	 * to match the server.  However, we should enable the master if one of the subordinates
+	 * get enabled.
+	 */
+	in_gconf = gconf_client_get_bool (client, CONFIG_ROOT "/enable", NULL);
+
+	set_bool (client, in_gconf, CONFIG_ROOT "/feature_state_change_beep",
 		desc->ctrls->ax_options & (XkbAX_FeatureFBMask | XkbAX_SlowWarnFBMask));
-	set_bool (client, CONFIG_ROOT "/timeout_enable",
+	set_bool (client, in_gconf, CONFIG_ROOT "/timeout_enable",
 		desc->ctrls->enabled_ctrls & XkbAccessXTimeoutMask);
 	set_int (client, CONFIG_ROOT "/timeout",
 		desc->ctrls->ax_timeout);
 
-	set_bool (client, CONFIG_ROOT "/bouncekeys_enable",
+	set_bool (client, in_gconf, CONFIG_ROOT "/bouncekeys_enable",
 		desc->ctrls->enabled_ctrls & XkbBounceKeysMask);
 	set_int (client, CONFIG_ROOT "/bouncekeys_delay",
 		desc->ctrls->debounce_delay);
-	set_bool (client, CONFIG_ROOT "/bouncekeys_beep_reject",
+	set_bool (client, TRUE, CONFIG_ROOT "/bouncekeys_beep_reject",
 		desc->ctrls->ax_options & XkbAX_BKRejectFBMask);
 
-	set_bool (client, CONFIG_ROOT "/mousekeys_enable",
+	set_bool (client, in_gconf, CONFIG_ROOT "/mousekeys_enable",
 		desc->ctrls->enabled_ctrls & XkbMouseKeysMask);
 	set_int (client, CONFIG_ROOT "/mousekeys_max_speed",
 		desc->ctrls->mk_max_speed * (1000 / desc->ctrls->mk_interval));
@@ -317,25 +328,25 @@ set_gconf_from_server (GConfEntry *ignored)
 	set_int (client, CONFIG_ROOT "/mousekeys_init_delay",
 		desc->ctrls->mk_delay);
 
-	set_bool (client, CONFIG_ROOT "/slowkeys_enable",
+	set_bool (client, in_gconf, CONFIG_ROOT "/slowkeys_enable",
 		desc->ctrls->enabled_ctrls & XkbSlowKeysMask);
-	set_bool (client, CONFIG_ROOT "/slowkeys_beep_press",
+	set_bool (client, TRUE, CONFIG_ROOT "/slowkeys_beep_press",
 		desc->ctrls->ax_options & XkbAX_SKPressFBMask);
-	set_bool (client, CONFIG_ROOT "/slowkeys_beep_accept",
+	set_bool (client, TRUE, CONFIG_ROOT "/slowkeys_beep_accept",
 		desc->ctrls->ax_options & XkbAX_SKAcceptFBMask);
-	set_bool (client, CONFIG_ROOT "/slowkeys_beep_reject",
+	set_bool (client, TRUE, CONFIG_ROOT "/slowkeys_beep_reject",
 		desc->ctrls->ax_options & XkbAX_SKRejectFBMask);
 	set_int (client, CONFIG_ROOT "/slowkeys_delay",
 		desc->ctrls->slow_keys_delay);
 
-	set_bool (client, CONFIG_ROOT "/stickykeys_enable",
+	set_bool (client, in_gconf, CONFIG_ROOT "/stickykeys_enable",
 		desc->ctrls->enabled_ctrls & XkbStickyKeysMask);
-	set_bool (client, CONFIG_ROOT "/stickykeys_two_key_off",
+	set_bool (client, TRUE, CONFIG_ROOT "/stickykeys_two_key_off",
 		desc->ctrls->ax_options & XkbAX_TwoKeysMask);
-	set_bool (client, CONFIG_ROOT "/stickykeys_modifier_beep",
+	set_bool (client, TRUE, CONFIG_ROOT "/stickykeys_modifier_beep",
 		desc->ctrls->ax_options & XkbAX_StickyKeysFBMask);
 
-	set_bool (client, CONFIG_ROOT "/togglekeys_enable",
+	set_bool (client, in_gconf, CONFIG_ROOT "/togglekeys_enable",
 		desc->ctrls->ax_options & XkbAX_IndicatorFBMask);
 
 	we_are_changing_xkb_state = FALSE;
