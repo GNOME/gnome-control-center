@@ -1084,35 +1084,43 @@ get_geometry (wallpaper_type_t wallpaper_type, GdkPixbuf *pixbuf,
 		else
 			factor = 1.0;
 
-		*rwidth = gdk_pixbuf_get_width (pixbuf) * factor;
-
 		/* wallpaper_type could be WPTYPE_TILED too */
 		if (vwidth < gdk_pixbuf_get_width (pixbuf) &&
 		    wallpaper_type == WPTYPE_CENTERED)
+		{
 			*srcx = (gdk_pixbuf_get_width (pixbuf) - vwidth) *
 				factor / 2;
+			*rwidth = dwidth;
+		}
 		else
+		{
 			*srcx = 0;
+			*rwidth = gdk_pixbuf_get_width (pixbuf) * factor;
+		}
 
 		if (dheight != vheight)
 			factor = (gdouble) dheight / (gdouble) vheight;
 		else
 			factor = 1.0;
 
-		*rheight = gdk_pixbuf_get_height (pixbuf) * factor;
-
 		/* wallpaper_type could be WPTYPE_TILED too */
 		if (vheight < gdk_pixbuf_get_height (pixbuf) &&
 		    wallpaper_type == WPTYPE_CENTERED)
+		{
 			*srcy = (gdk_pixbuf_get_height (pixbuf) - vheight) *
 				factor / 2;
+			*rheight = dheight;
+		}
 		else
+		{
 			*srcy = 0;
+			*rheight = gdk_pixbuf_get_height (pixbuf) * factor;
+		}
 
 		/* wallpaper_type could be WPTYPE_TILED too */
 		if (wallpaper_type == WPTYPE_CENTERED) {
-			*xoffset = (dwidth - *rwidth) >> 1;
-			*yoffset = (dheight - *rheight) >> 1;
+			*xoffset = MAX ((dwidth - *rwidth) >> 1, 0);
+			*yoffset = MAX ((dheight - *rheight) >> 1, 0);
 		}
 
 		break;
