@@ -101,7 +101,7 @@ setup_directory_structure (const gchar  *theme_name,
 			 GTK_DIALOG_MODAL,
 			 GTK_MESSAGE_QUESTION,
 	  		 GTK_BUTTONS_OK_CANCEL,
-	  		 _("The theme already exists. Would you like to replace it ?"));
+	  		 _("The theme already exists. Would you like to replace it?"));
 	response = gtk_dialog_run(dialog);
 	gtk_widget_destroy(dialog);
 	if (response == GTK_RESPONSE_CANCEL) 
