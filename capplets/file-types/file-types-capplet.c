@@ -262,11 +262,6 @@ nautilus_mime_type_capplet_add_extension (const char *extension)
 		return;
 	}
 
-	/* Check for starting space in string */
-	if (extension[0] == ' ') {
-		return;
-	}
-	
 	/* Copy only contiguous part of string.  No spaces allowed. */	
 	search_string = g_strdup (extension);
 	token = strtok (search_string, " ");
@@ -275,7 +270,7 @@ nautilus_mime_type_capplet_add_extension (const char *extension)
 		title[0] = g_strdup (extension);
 	} else if (strlen (token) <= 0) {
 		return;
-	}else {
+	} else {
 		title[0] = g_strdup (token);		
 	}
 	g_free (search_string);
@@ -796,6 +791,11 @@ init_mime_capplet (const char *scroll_to_mime_type)
 	}
 	
 	capplet_widget_state_changed (CAPPLET_WIDGET (capplet), TRUE);
+#if 0
+	/* Enable this and remove previous line when the control center patch is checked in */
+	capplet_widget_changes_are_immediate (CAPPLET_WIDGET (capplet));
+#endif
+
 }
 
 
@@ -1234,7 +1234,7 @@ add_mime_clicked (GtkWidget *widget, gpointer data)
 	int found_index;
 	
 	mime_string = nautilus_mime_type_capplet_show_new_mime_window ();
-	if (mime_string != NULL) {
+	if (mime_string != NULL && mime_string[0] != '\0') {
 		/* Add new type to mime list */
 		pixbuf = NULL;
 			

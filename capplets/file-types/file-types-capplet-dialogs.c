@@ -710,6 +710,30 @@ display_upper_case_dialog (void)
 	gnome_dialog_run_and_close (dialog);
 }
 
+/* Do some basic validation of the text entry and enable the OK button if the text is
+ * determined to be a valid string.
+ */
+static void
+validate_text_and_update_button (GtkEntry *entry, gpointer data)
+{
+	char *text, *token;
+	gboolean sensitize;
+	
+	sensitize = TRUE;
+	
+	text = gtk_entry_get_text (entry);
+	if (text == NULL) {
+		sensitize = FALSE;
+	} else {	
+		token = strtok (text, " ");
+		if (token == NULL || strlen (token) <= 0) {
+			/* Entered text is invalid as best as we can detect. */
+			sensitize = FALSE;
+		}
+	}
+	
+	gtk_widget_set_sensitive (GTK_WIDGET (data), sensitize);
+}
 
 char *
 nautilus_mime_type_capplet_show_new_mime_window (void)
@@ -758,6 +782,13 @@ nautilus_mime_type_capplet_show_new_mime_window (void)
 	desc_entry = gtk_entry_new ();
 	gtk_box_pack_start (GTK_BOX (hbox), desc_entry, TRUE, TRUE, 0);
 	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+	
+	/* Set up text entry validation signal */
+	gtk_signal_connect (GTK_OBJECT (mime_entry), "changed", 
+			    GTK_SIGNAL_FUNC (validate_text_and_update_button), GNOME_DIALOG (dialog)->buttons->data);
+	
+	/* Set initial OK button state to desensitized */
+	gtk_widget_set_sensitive (GTK_WIDGET (GNOME_DIALOG (dialog)->buttons->data), FALSE);
 	
 	/* Set focus to text entry widget */
 	gtk_widget_grab_focus (mime_entry);
