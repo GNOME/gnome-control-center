@@ -28,6 +28,12 @@
 #include <gnome.h>
 #include <gconf/gconf-client.h>
 
+#include <gdk/gdkx.h>
+#include <X11/X.h>
+#include <X11/Xlib.h>
+#include <X11/XKBlib.h>
+#include <X11/extensions/XKBrules.h>
+
 #include "capplet-util.h"
 #include "gconf-property-editor.h"
 #include "libsounds/sound-view.h"
@@ -50,6 +56,24 @@
 /* Capplet-specific prototypes */
 
 static SoundProperties *props = NULL;
+
+static gboolean
+CheckXKB (void)
+{
+	gboolean have_xkb = FALSE;
+	Display *dpy;
+	int opcode, errorBase, major, minor, xkbEventBase;
+
+	gdk_error_trap_push ();
+	dpy = GDK_DISPLAY ();
+	have_xkb = XkbQueryExtension (dpy, &opcode, &xkbEventBase, 
+				      &errorBase, &major, &minor)
+		   && XkbUseExtension (dpy, &major, &minor);
+	XSync (dpy, FALSE);
+	gdk_error_trap_pop ();
+
+	return have_xkb;
+}
 
 static void
 props_changed_cb (SoundProperties *p, SoundEvent *event, gpointer data)
@@ -128,6 +152,14 @@ create_dialog (void)
 
 	gtk_widget_set_size_request (widget, -1, 250); /* Can this be right?  Seems broken for large fonts. */
 
+	if (!CheckXKB()) {
+		GtkWidget *audible_bell_option = WID ("bell_audible_toggle");
+		GtkWidget *visual_bell_option = WID ("bell_visual_toggle");
+
+		gtk_widget_set_sensitive (audible_bell_option, FALSE);
+		gtk_widget_set_sensitive (visual_bell_option, FALSE);
+	}
+		
 	return dialog;
 }
 
