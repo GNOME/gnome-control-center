@@ -111,7 +111,9 @@ window_theme_selection_changed (GtkTreeSelection *selection,
 			  -1);
     }
   else
-    g_assert_not_reached ();
+    {
+      return;
+    }
 
   window_manager = gnome_wm_manager_get_current (gdk_display_get_default_screen (gdk_display_get_default ()));
 
