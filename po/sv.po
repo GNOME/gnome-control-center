@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2002-03-09 18:22+0100\n"
-"PO-Revision-Date: 2002-03-09 18:22+0100\n"
+"POT-Creation-Date: 2002-03-10 23:24+0100\n"
+"PO-Revision-Date: 2002-03-10 23:24+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -24,16 +24,20 @@ msgstr "Bakgrund"
 msgid "Configuration of the desktop's background"
 msgstr "Konfiguration av skrivbordsbakgrund"
 
-#: capplets/background/background-properties-capplet.c:289
+#: capplets/background/background-properties-capplet.c:238
+msgid "Please select a background image"
+msgstr "Välj en bakgrundsbild"
+
+#: capplets/background/background-properties-capplet.c:292
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:575
 #: capplets/keyboard/gnome-keyboard-properties.c:319
-#: capplets/mouse/gnome-mouse-properties.c:678
+#: capplets/mouse/gnome-mouse-properties.c:679
 #: capplets/sound/sound-properties-capplet.c:138
 msgid "Retrieve and store legacy settings"
 msgstr "Hämta och lagra föråldrade inställningar"
 
-#: capplets/background/background-properties-capplet.c:312
+#: capplets/background/background-properties-capplet.c:315
 msgid "Background properties"
 msgstr "Bakgrundsegenskaper"
 
@@ -911,7 +915,7 @@ msgstr "_Volym:"
 msgid "Keyboard"
 msgstr "Tangentbord"
 
-#: capplets/mouse/gnome-mouse-properties.c:407
+#: capplets/mouse/gnome-mouse-properties.c:408
 #, c-format
 msgid ""
 "<b>Unknown Cursor</b>\n"
@@ -920,7 +924,7 @@ msgstr ""
 "<b>Okänd muspekare</b>\n"
 "%s"
 
-#: capplets/mouse/gnome-mouse-properties.c:505
+#: capplets/mouse/gnome-mouse-properties.c:506
 msgid ""
 "<b>Default Cursor - Current</b>\n"
 "The default cursor that ships with X"
@@ -928,7 +932,7 @@ msgstr ""
 "<b>Standardmuspekare - Aktuell</b>\n"
 "Standardmuspekaren som kommer med X"
 
-#: capplets/mouse/gnome-mouse-properties.c:508
+#: capplets/mouse/gnome-mouse-properties.c:509
 msgid ""
 "<b>Default Cursor</b>\n"
 "The default cursor that ships with X"
@@ -936,7 +940,7 @@ msgstr ""
 "<b>Standardmuspekare</b>\n"
 "Standardmuspekaren som kommer med X"
 
-#: capplets/mouse/gnome-mouse-properties.c:526
+#: capplets/mouse/gnome-mouse-properties.c:527
 msgid ""
 "<b>White Cursor - Current</b>\n"
 "The default cursor inverted"
@@ -944,7 +948,7 @@ msgstr ""
 "<b>Vit muspekare - Aktuell</b>\n"
 "Inverterad standardmuspekare"
 
-#: capplets/mouse/gnome-mouse-properties.c:529
+#: capplets/mouse/gnome-mouse-properties.c:530
 msgid ""
 "<b>White Cursor</b>\n"
 "The default cursor inverted"
@@ -952,7 +956,7 @@ msgstr ""
 "<b>Vit muspekare</b>\n"
 "Inverterad standardmuspekare"
 
-#: capplets/mouse/gnome-mouse-properties.c:547
+#: capplets/mouse/gnome-mouse-properties.c:548
 msgid ""
 "<b>Large Cursor - Current</b>\n"
 "Large version of normal cursor"
@@ -960,7 +964,7 @@ msgstr ""
 "<b>Stor muspekare - Aktuell</b>\n"
 "Stor version av den vanliga muspekaren"
 
-#: capplets/mouse/gnome-mouse-properties.c:550
+#: capplets/mouse/gnome-mouse-properties.c:551
 msgid ""
 "<b>Large Cursor</b>\n"
 "Large version of normal cursor"
@@ -968,7 +972,7 @@ msgstr ""
 "<b>Stor muspekare</b>\n"
 "Stor version av den vanliga muspekaren"
 
-#: capplets/mouse/gnome-mouse-properties.c:568
+#: capplets/mouse/gnome-mouse-properties.c:569
 msgid ""
 "<b>Large White Cursor - Current</b>\n"
 "Large version of white cursor"
@@ -976,7 +980,7 @@ msgstr ""
 "<b>Stor vit muspekare - Aktuell</b>\n"
 "Stor version av den vita muspekaren"
 
-#: capplets/mouse/gnome-mouse-properties.c:571
+#: capplets/mouse/gnome-mouse-properties.c:572
 msgid ""
 "<b>Large White Cursor</b>\n"
 "Large version of white cursor"
@@ -984,7 +988,7 @@ msgstr ""
 "<b>Stor vit muspekare</b>\n"
 "Stor version av den vita muspekaren"
 
-#: capplets/mouse/gnome-mouse-properties.c:703
+#: capplets/mouse/gnome-mouse-properties.c:704
 #: capplets/mouse/gnome-mouse-properties.glade.h:18
 #: capplets/mouse/mouse.desktop.in.h:2
 msgid "Mouse Properties"
@@ -1239,26 +1243,14 @@ msgid "Select which gtk+ theme to use"
 msgstr "Välj vilket gtk+-tema som ska användas"
 
 #: capplets/theme-switcher/gtk-theme-selector.glade.h:1
-msgid "Auto Preview"
-msgstr "Automatisk förhandsgranskning"
-
-#: capplets/theme-switcher/gtk-theme-selector.glade.h:2
-msgid "Available Themes"
-msgstr "Tillgängliga teman"
-
-#: capplets/theme-switcher/gtk-theme-selector.glade.h:3
 msgid "Gtk+ Theme"
 msgstr "Gtk+-tema"
 
-#: capplets/theme-switcher/gtk-theme-selector.glade.h:4
+#: capplets/theme-switcher/gtk-theme-selector.glade.h:2
 msgid "Install new theme..."
 msgstr "Installera nytt tema..."
 
-#: capplets/theme-switcher/gtk-theme-selector.glade.h:5
-msgid "Preview"
-msgstr "Förhandsgranska"
-
-#: capplets/theme-switcher/main.c:218
+#: capplets/theme-switcher/main.c:211
 msgid "Select a theme to install"
 msgstr "Välj ett tema att installera"
 
@@ -1466,6 +1458,14 @@ msgstr "Kunde inte läsa in bilden \"%s\"; slår av bakgrundsbild."
 msgid "Disabled"
 msgstr "Avslagen"
 
+#: libbackground/preview-file-selection.c:186
+msgid "Can't find an hbox, using a normal file selection"
+msgstr "Kan inte hitta en hbox, använder normal filmarkering"
+
+#: libbackground/preview-file-selection.c:191
+msgid "Preview"
+msgstr "Förhandsgranska"
+
 #: libsounds/sound-view.c:116
 msgid "The sound file for this event does not exist."
 msgstr "Ljudfilen för denna händelse finns inte."
@@ -1495,6 +1495,12 @@ msgstr "Spela"
 #: libsounds/sound-view.c:244
 msgid "Select sound file"
 msgstr "Välj en ljudfil"
+
+#~ msgid "Auto Preview"
+#~ msgstr "Automatisk förhandsgranskning"
+
+#~ msgid "Available Themes"
+#~ msgstr "Tillgängliga teman"
 
 #~ msgid "Configure which non-session aware programs are started up"
 #~ msgstr "Konfigurera vilka sessionsomedvetna program som startas upp"
@@ -1641,9 +1647,6 @@ msgstr "Välj en ljudfil"
 
 #~ msgid "Wallpaper Selection"
 #~ msgstr "Val av bakgrundsbild"
-
-#~ msgid "Can't find an hbox, using a normal file selection"
-#~ msgstr "Kan inte hitta en hbox, använder normal filmarkering"
 
 #~ msgid "Gnome Default Editor"
 #~ msgstr "Standardtextredigerare i Gnome"
@@ -2959,9 +2962,6 @@ msgstr "Välj en ljudfil"
 
 #~ msgid "_Settings"
 #~ msgstr "_Inställningar"
-
-#~ msgid "Set background image."
-#~ msgstr "Ställ in bakgrundsbild."
 
 #~ msgid "IMAGE-FILE"
 #~ msgstr "BILDFIL"
