@@ -1,3 +1,14 @@
+2002-03-04  Anders Carlsson  <andersca@gnu.org>
+
+	* Makefile.am:
+	* gnome-settings-daemon.c: (main):
+	* gnome-settings-wm.c: (set_number_of_workspaces),
+	(set_workspace_names), (wm_callback), (gnome_settings_wm_init),
+	(gnome_settings_wm_load):
+	* gnome-settings-wm.h:
+	Add support for bridging WM settings, currently supports
+	_NET_NUMBER_OF_DESKTOPS and _NET_DESKTOP_NAMES.
+	
 Tue Feb 19 23:53:06 2002  Jonathan Blandford  <jrb@redhat.com>
 
 	* gnome-settings-font.c: set the font path and handle cursors.

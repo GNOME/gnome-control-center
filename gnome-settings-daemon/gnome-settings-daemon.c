@@ -41,6 +41,7 @@
 #include "gnome-settings-keyboard.h"
 #include "gnome-settings-background.h"
 #include "gnome-settings-sound.h"
+#include "gnome-settings-wm.h"
 
 static GSList *directories = NULL;
 XSettingsManager *manager;
@@ -143,7 +144,7 @@ main (int argc, char **argv)
 
   if (xsettings_manager_check_running (gdk_display, DefaultScreen (gdk_display)))
     {
-      fprintf (stderr, "You can only run one xsettings manager at a time; exiting");
+      fprintf (stderr, "You can only run one xsettings manager at a time; exiting\n");
       exit (1);
     }
       
@@ -153,7 +154,7 @@ main (int argc, char **argv)
 				       terminate_cb, &terminated);
       if (!manager)
 	{
-	  fprintf (stderr, "Could not create xsettings manager!");
+	  fprintf (stderr, "Could not create xsettings manager!\n");
 	  exit (1);
 	}
     }
@@ -174,7 +175,8 @@ main (int argc, char **argv)
   gnome_settings_keyboard_init (client);
   gnome_settings_background_init (client);
   gnome_settings_sound_init (client);
-
+  gnome_settings_wm_init (client);
+  
   for (list = directories; list; list = list->next)
     {
       GError *error = NULL;
@@ -206,7 +208,8 @@ main (int argc, char **argv)
   gnome_settings_mouse_load (client);
   gnome_settings_sound_load (client);
   gnome_settings_background_load (client);
-
+  gnome_settings_wm_load (client);
+  
   if (!terminated)
     gtk_main ();
   

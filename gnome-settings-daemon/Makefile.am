@@ -15,6 +15,8 @@ gnome2_settings_daemon_SOURCES =	\
 	gnome-settings-background.c	\
 	gnome-settings-xsettings.c	\
 	gnome-settings-xsettings.h	\
+	gnome-settings-wm.c		\
+	gnome-settings-wm.h		\
 	gnome-settings-locate-pointer.c	\
 	gnome-settings-locate-pointer.h	\
 	gnome-settings-sound.c		\
