@@ -34,6 +34,10 @@
 #include "gconf-property-editor.h"
 #include "applier.h"
 
+/* Apply settings to the root window. This will be moved to
+ * gnome-settings-daemon shortly.
+ */
+
 static void
 apply_settings ()
 {
@@ -46,10 +50,14 @@ apply_settings ()
 	preferences_load (PREFERENCES (prefs));
 
 	applier_apply_prefs (applier, PREFERENCES (prefs));
-	g_object_unref (G_OBJECT (prefs));
 
+	g_object_unref (G_OBJECT (prefs));
 	g_object_unref (G_OBJECT (applier));
 }
+
+/* Retrieve legacy gnome_config settings and store them in the GConf
+ * database. This involves some translation of the settings' meanings.
+ */
 
 static void
 get_legacy_settings (void) 
@@ -114,34 +122,19 @@ get_legacy_settings (void)
 				      gnome_config_get_int ("/Background/Default/opacity=100"), NULL);
 }
 
-static void
-property_change_cb (GConfEngine        *engine,
-		    guint               cnxn_id,
-		    GConfEntry         *entry,
-		    Applier            *applier)
-{
-	GladeXML *dialog;
-	Preferences *prefs;
-
-	/* FIXME: How do we get the preferences? */
-	
-	dialog = g_object_get_data (G_OBJECT (prefs), "glade-data");
-
-	preferences_merge_entry (prefs, entry);
-	applier_apply_prefs (applier, prefs);
-
-	if (!strcmp (entry->key, "/background-properties/wallpaper_type")
-	    || !strcmp (entry->key, "/background-properties/wallpaper_filename")
-	    || !strcmp (entry->key, "/background-properties/wallpaper_enabled"))
-		gtk_widget_set_sensitive
-			(WID ("color_frame"), applier_render_color_p (applier, prefs));
-}
+/* Initial apply to the preview, and setting of the color frame's sensitivity.
+ *
+ * We use a double-delay mechanism: first waiting 100 ms, then working in an
+ * idle handler so that the preview gets rendered after the rest of the dialog
+ * is displayed. This prevents the program from appearing to stall on startup,
+ * making it feel more natural to the user.
+ */
 
 static gboolean
 real_realize_cb (Preferences *prefs) 
 {
-	GladeXML *dialog;
-	Applier  *applier;
+	GtkWidget *color_frame;
+	Applier   *applier;
 
 	g_return_val_if_fail (prefs != NULL, TRUE);
 	g_return_val_if_fail (IS_PREFERENCES (prefs), TRUE);
@@ -149,12 +142,12 @@ real_realize_cb (Preferences *prefs)
 	if (G_OBJECT (prefs)->ref_count == 0)
 		return FALSE;
 
-	dialog = g_object_get_data (G_OBJECT (prefs), "glade-data");
-	applier = g_object_get_data (G_OBJECT (WID ("prefs_widget")), "applier");
+	applier = g_object_get_data (G_OBJECT (prefs), "applier");
+	color_frame = g_object_get_data (G_OBJECT (prefs), "color-frame");
 
 	applier_apply_prefs (applier, prefs);
 
-	gtk_widget_set_sensitive (WID ("color_frame"), applier_render_color_p (applier, prefs));
+	gtk_widget_set_sensitive (color_frame, applier_render_color_p (applier, prefs));
 
 	return FALSE;
 }
@@ -172,11 +165,20 @@ realize_cb (GtkWidget *widget, Preferences *prefs)
 	gtk_timeout_add (100, (GtkFunction) realize_2_cb, prefs);
 }
 
+/* Callback issued when some value changes in a property editor. This merges the
+ * value with the preferences object and applies the settings to the preview. It
+ * also sets the sensitivity of the color frame depending on whether the base
+ * colors are visible through the wallpaper (or whether the wallpaper is
+ * enabled). This cannot be done with a guard as it depends on a much more
+ * complex criterion than a simple boolean configuration property.
+ */
+
 static void
 peditor_value_changed (GConfPropertyEditor *peditor, const gchar *key, const GConfValue *value, Preferences *prefs) 
 {
 	GConfEntry *entry;
 	Applier *applier;
+	GtkWidget *color_frame;
 
 	entry = gconf_entry_new (key, value);
 	preferences_merge_entry (prefs, entry);
@@ -191,90 +193,97 @@ peditor_value_changed (GConfPropertyEditor *peditor, const gchar *key, const GCo
 	    !strcmp (key, "/background-properties/wallpaper-filename") ||
 	    !strcmp (key, "/background-properties/wallpaper-type"))
 	{
-		GladeXML *dialog = g_object_get_data (G_OBJECT (prefs), "glade-data");
-		gtk_widget_set_sensitive (WID ("color_frame"),
-					  applier_render_color_p (applier, prefs));
+		color_frame = g_object_get_data (G_OBJECT (prefs), "color-frame");
+		gtk_widget_set_sensitive (color_frame, applier_render_color_p (applier, prefs));
 	}
 }
 
-static void
-setup_dialog (GtkWidget *widget, GConfChangeSet *changeset)
-{
-	GladeXML                      *dialog;
-	Applier                       *applier;
-	GObject                       *prefs;
-	GConfEngine                   *engine;
-	GObject                       *peditor;
+/* Set up the property editors in the dialog. This also loads the preferences
+ * and sets up the callbacks.
+ */
 
+static void
+setup_dialog (GladeXML *dialog, GConfChangeSet *changeset, Applier *applier)
+{
+	GObject                       *prefs;
+	GObject                       *peditor;
+	GConfEngine                   *engine;
+
+	/* Override the enabled setting to make sure background is enabled */
+	engine = gconf_engine_get_default ();
+	gconf_engine_set_bool (engine, "enabled", TRUE, NULL);
+
+	/* Load preferences */
 	prefs = preferences_new ();
 	preferences_load (PREFERENCES (prefs));
 
-	dialog = g_object_get_data (G_OBJECT (widget), "glade-data");
-	peditor = gconf_peditor_new_select_menu (changeset, "/background-properties/orientation", WID ("color_option"));
-	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, prefs);
-	peditor = gconf_peditor_new_color (changeset, "/background-properties/color1", WID ("colorpicker1"));
-	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, prefs);
-	peditor = gconf_peditor_new_color (changeset, "/background-properties/color2", WID ("colorpicker2"));
-	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, prefs);
-	peditor = gconf_peditor_new_filename (changeset, "/background-properties/wallpaper-filename", WID ("image_fileentry"));
-	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, prefs);
-	peditor = gconf_peditor_new_select_menu (changeset, "/background-properties/wallpaper-type", WID ("image_option"));
+	/* We need to be able to retrieve the applier and the color frame in
+	   callbacks */
+	g_object_set_data (prefs, "color-frame", WID ("color_frame"));
+	g_object_set_data (prefs, "applier", applier);
+
+	peditor = gconf_peditor_new_select_menu
+		(changeset, "/background-properties/orientation", WID ("color_option"));
 	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, prefs);
 
-#if 0
-	gconf_peditor_new_int_spin (changeset, "/background-properties/opacity", WID ("opacity_spin"));
-#endif
+	peditor = gconf_peditor_new_color
+		(changeset, "/background-properties/color1", WID ("colorpicker1"));
+	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, prefs);
+
+	peditor = gconf_peditor_new_color
+		(changeset, "/background-properties/color2", WID ("colorpicker2"));
+	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, prefs);
+
+	peditor = gconf_peditor_new_filename
+		(changeset, "/background-properties/wallpaper-filename", WID ("image_fileentry"));
+	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, prefs);
+
+	peditor = gconf_peditor_new_select_menu
+		(changeset, "/background-properties/wallpaper-type", WID ("image_option"));
+	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, prefs);
 
 	peditor = gconf_peditor_new_boolean
 		(changeset, "/background-properties/wallpaper-enabled", WID ("picture_enabled_check"));
 	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, prefs);
 
 	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor), WID ("picture_frame"));
-		
-	engine = gconf_engine_get_default ();
-	gconf_engine_set_bool (engine, "enabled", TRUE, NULL);
 
-	applier = g_object_get_data (G_OBJECT (widget), "applier");
-
-	g_object_set_data (prefs, "glade-data", dialog);
-	g_object_set_data (prefs, "applier", applier);
-
+	/* Make sure preferences get applied to the preview */
 	if (GTK_WIDGET_REALIZED (applier_get_preview_widget (applier)))
 		applier_apply_prefs (applier, PREFERENCES (prefs));
 	else
 		g_signal_connect_after (G_OBJECT (applier_get_preview_widget (applier)), "realize",
 					(GCallback) realize_cb, prefs);
 
-	g_signal_connect_swapped (G_OBJECT (widget), "destroy",
-				  (GCallback) g_object_unref, prefs);
+	/* Make sure the preferences object gets destroyed when the dialog is
+	   closed */
+	g_object_weak_ref (G_OBJECT (dialog), (GWeakNotify) g_object_unref, prefs);
 }
 
-static GtkWidget*
-create_dialog (void) 
+/* Construct the dialog */
+
+static GladeXML *
+create_dialog (Applier *applier) 
 {
 	GtkWidget *holder;
 	GtkWidget *widget;
 	GladeXML  *dialog;
-	Applier   *applier;
 
 	/* FIXME: What the hell is domain? */
 	dialog = glade_xml_new (GNOMECC_GLADE_DIR "/background-properties.glade", "prefs_widget", NULL);
 	widget = glade_xml_get_widget (dialog, "prefs_widget");
-	g_object_set_data (G_OBJECT (widget), "glade-data", dialog);
-
-	applier = APPLIER (applier_new (APPLIER_PREVIEW));
-	g_object_set_data (G_OBJECT (widget), "applier", applier);
-	g_signal_connect_swapped (G_OBJECT (widget), "destroy", (GCallback) g_object_unref, G_OBJECT (applier));
 
 	/* Minor GUI addition */
 	holder = WID ("prefs_widget");
 	gtk_box_pack_start (GTK_BOX (holder), applier_get_preview_widget (applier), TRUE, TRUE, 0);
 	gtk_widget_show_all (holder);
 
-	g_signal_connect_swapped (G_OBJECT (widget), "destroy", (GCallback) g_object_unref, G_OBJECT (dialog));
+	g_object_weak_ref (G_OBJECT (widget), (GWeakNotify) g_object_unref, dialog);
 
-	return widget;
+	return dialog;
 }
+
+/* Callback issued when a button is clicked on the dialog */
 
 static void
 dialog_button_clicked_cb (GnomeDialog *dialog, gint button_number, GConfChangeSet *changeset) 
@@ -292,8 +301,9 @@ int
 main (int argc, char **argv) 
 {
 	GConfChangeSet *changeset;
-	GtkWidget      *widget;
-	GtkWidget      *dialog;
+	GladeXML       *dialog;
+	GtkWidget      *dialog_win;
+	GObject        *applier;
 
 	static gboolean apply_only;
 	static gboolean get_legacy;
@@ -324,14 +334,16 @@ main (int argc, char **argv)
 		get_legacy_settings ();
 	} else {
 		changeset = gconf_change_set_new ();
-		widget = create_dialog ();
-		setup_dialog (widget, changeset);
+		applier = applier_new (APPLIER_PREVIEW);
+		dialog = create_dialog (APPLIER (applier));
+		setup_dialog (dialog, changeset, APPLIER (applier));
 
-		dialog = gnome_dialog_new (_("Background properties"), GTK_STOCK_APPLY, GTK_STOCK_CLOSE, NULL);
-		g_signal_connect (G_OBJECT (dialog), "clicked", (GCallback) dialog_button_clicked_cb, changeset);
-		g_signal_connect (G_OBJECT (dialog), "destroy", (GCallback) gtk_main_quit, NULL);
-		gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), widget, TRUE, TRUE, GNOME_PAD_SMALL);
-		gtk_widget_show_all (dialog);
+		dialog_win = gnome_dialog_new (_("Background properties"), GTK_STOCK_APPLY, GTK_STOCK_CLOSE, NULL);
+		g_signal_connect (G_OBJECT (dialog_win), "clicked", (GCallback) dialog_button_clicked_cb, changeset);
+		g_object_weak_ref (G_OBJECT (dialog_win), (GWeakNotify) g_object_unref, applier);
+		g_object_weak_ref (G_OBJECT (dialog_win), (GWeakNotify) gtk_main_quit, NULL);
+		gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog_win)->vbox), WID ("prefs_widget"), TRUE, TRUE, GNOME_PAD_SMALL);
+		gtk_widget_show_all (dialog_win);
 
 		gtk_main ();
 		gconf_change_set_unref (changeset);

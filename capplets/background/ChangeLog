@@ -1,3 +1,20 @@
+2001-12-18  Bradford Hovinen  <hovinen@ximian.com>
+
+	* background-properties-capplet.c (property_change_cb): Remove
+	(create_dialog): Return GladeXML, not GtkWidget
+	(setup_dialog): Put GladeXML in the signature rather than
+	GtkWidget
+	(peditor_value_changed): Retrieve color_frame directory rather
+	than through Glade
+	(real_realize_cb): Ditto
+	(setup_dialog): Set color-frame rather than glade-data
+	(main): Construct the preview applier here rather than in
+	create_dialog
+	(main): Unref the applier object when the dialog is destroyed
+	(setup_dialog, create_dialog): Put the applier in the signature
+	Use weak_ref rather than the destroy signal for all relevant
+	objects
+
 2001-12-17  Bradford Hovinen  <hovinen@ximian.com>
 
 	* background.desktop.in.in (Exec): Update
