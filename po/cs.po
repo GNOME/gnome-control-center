@@ -7,14 +7,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-08-06 20:17+0200\n"
+"POT-Creation-Date: 2003-08-11 13:57-0400\n"
 "PO-Revision-Date: 2003-08-07 02:57+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:1
 msgid "<b>Applications</b>"
@@ -74,33 +74,42 @@ msgid ""
 "be installed in order to get on-screen keyboard support, and the "
 "'gnopernicus' package must be installed for screenreading and magnifying "
 "capabilities."
-msgstr "Ve vašem systému nejsou k dispozici technologie usnadnění. Pro podporu klávesnice na obrazovce musí být nainstalován balíček 'gok' a pro čtení obrazovky a zvětšování musí být nainstalován balíček 'gnopernicus'."
+msgstr ""
+"Ve vašem systému nejsou k dispozici technologie usnadnění. Pro podporu "
+"klávesnice na obrazovce musí být nainstalován balíček 'gok' a pro čtení "
+"obrazovky a zvětšování musí být nainstalován balíček 'gnopernicus'."
 
 #: capplets/accessibility/at-properties/main.c:62
 msgid ""
 "Not all available assistive technologies are installed on your system.  The "
 "'gok' package must be installed in order to get on-screen keyboard support."
-msgstr "Ve vašem systému nejsou nainstalovány všechny dostupné technologie usnadnění. Pro podporu klávesnice na obrazovce musí být nainstalován balíček 'gok'."
+msgstr ""
+"Ve vašem systému nejsou nainstalovány všechny dostupné technologie "
+"usnadnění. Pro podporu klávesnice na obrazovce musí být nainstalován balíček "
+"'gok'."
 
 #: capplets/accessibility/at-properties/main.c:64
 msgid ""
 "Not all available assistive technologies are installed on your system.  The "
 "'gnopernicus' package must be installed for screenreading and magnifying "
 "capabilities."
-msgstr "Ve vašem systému nejsou nainstalovány všechny dostupné technologie usnadnění. Pro čtení obrazovky a zvětšování musí být nainstalován balíček 'gnopernicus'."
+msgstr ""
+"Ve vašem systému nejsou nainstalovány všechny dostupné technologie "
+"usnadnění. Pro čtení obrazovky a zvětšování musí být nainstalován balíček "
+"'gnopernicus'."
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:238
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:236
 #, c-format
 msgid "There was an error launching the mouse preferences dialog: %s"
 msgstr "Nastala chyba při spouštění dialogu s nastavením myši: %s"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:334
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:392
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:332
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:390
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "Nelze importovat nastavení AccessX ze souboru '%s'"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:465
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:463
 msgid "Import Feature Settings File"
 msgstr "Importovat soubor nastavení vlastností"
 
@@ -315,6 +324,7 @@ msgid "pixels/second"
 msgstr "bodů/sekundu"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
+#: capplets/mouse/gnome-mouse-properties.c:133
 #: capplets/mouse/gnome-mouse-properties.glade.h:27
 #: capplets/windows/gnome-window-properties.glade.h:7
 msgid "seconds"
@@ -366,8 +376,8 @@ msgstr "Žád_ný obrázek"
 #: capplets/background/background-properties-capplet.c:559
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:730
-#: capplets/keyboard/gnome-keyboard-properties.c:222
-#: capplets/mouse/gnome-mouse-properties.c:808
+#: capplets/keyboard/gnome-keyboard-properties.c:218
+#: capplets/mouse/gnome-mouse-properties.c:806
 #: capplets/sound/sound-properties-capplet.c:212
 msgid "Retrieve and store legacy settings"
 msgstr "Načíst a uložit zděděná nastavení"
@@ -1634,12 +1644,12 @@ msgstr "Přiřaďte klávesové zkratky k příkazům"
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "Nastala chyba při spouštění capletu pro klávesnici: %s"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:199
+#: capplets/keyboard/gnome-keyboard-properties.c:195
 msgid "_Accessibility"
 msgstr "Zpříst_upnění"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:218
-#: capplets/keyboard/gnome-keyboard-properties.c:220
+#: capplets/keyboard/gnome-keyboard-properties.c:214
+#: capplets/keyboard/gnome-keyboard-properties.c:216
 #: capplets/sound/sound-properties-capplet.c:208
 #: capplets/sound/sound-properties-capplet.c:210
 msgid ""
@@ -1648,7 +1658,7 @@ msgstr ""
 "Pouze aplikovat nastavení a skončit (pouze pro kompatibilitu; nyní "
 "zpracovává démon)"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:224
+#: capplets/keyboard/gnome-keyboard-properties.c:220
 msgid "Start the page with the typing break settings showing"
 msgstr "Spustit se zobrazenou kartou nastavení přestávky ve psaní"
 
@@ -1748,67 +1758,67 @@ msgstr "minut"
 msgid "Set your keyboard preferences"
 msgstr "Nastavte vlastnosti vaší klávesnice"
 
-#: capplets/mouse/gnome-mouse-properties.c:498
+#: capplets/mouse/gnome-mouse-properties.c:496
 msgid "Unknown Cursor"
 msgstr "Neznámý kurzor"
 
-#: capplets/mouse/gnome-mouse-properties.c:603
+#: capplets/mouse/gnome-mouse-properties.c:602
 msgid "Default Cursor - Current"
 msgstr "Implicitní kurzor - aktuální"
 
-#: capplets/mouse/gnome-mouse-properties.c:603
-#: capplets/mouse/gnome-mouse-properties.c:606
+#: capplets/mouse/gnome-mouse-properties.c:602
+#: capplets/mouse/gnome-mouse-properties.c:605
 msgid "The default cursor that ships with X"
 msgstr "Standardní kurzor dodávaný s X"
 
-#: capplets/mouse/gnome-mouse-properties.c:606
+#: capplets/mouse/gnome-mouse-properties.c:605
 msgid "Default Cursor"
 msgstr "Implicitní kurzor"
 
-#: capplets/mouse/gnome-mouse-properties.c:624
+#: capplets/mouse/gnome-mouse-properties.c:623
 msgid "White Cursor - Current"
 msgstr "Bílý kurzor - aktuální"
 
-#: capplets/mouse/gnome-mouse-properties.c:624
-#: capplets/mouse/gnome-mouse-properties.c:627
+#: capplets/mouse/gnome-mouse-properties.c:623
+#: capplets/mouse/gnome-mouse-properties.c:626
 msgid "The default cursor inverted"
 msgstr "Invertovaný implicitní kurzor"
 
-#: capplets/mouse/gnome-mouse-properties.c:627
+#: capplets/mouse/gnome-mouse-properties.c:626
 msgid "White Cursor"
 msgstr "Bílý kurzor"
 
-#: capplets/mouse/gnome-mouse-properties.c:646
+#: capplets/mouse/gnome-mouse-properties.c:645
 msgid "Large Cursor - Current"
 msgstr "Velký kurzor - aktuální"
 
-#: capplets/mouse/gnome-mouse-properties.c:646
-#: capplets/mouse/gnome-mouse-properties.c:649
+#: capplets/mouse/gnome-mouse-properties.c:645
+#: capplets/mouse/gnome-mouse-properties.c:648
 msgid "Large version of normal cursor"
 msgstr "Velká verze normálního kurzoru"
 
-#: capplets/mouse/gnome-mouse-properties.c:649
+#: capplets/mouse/gnome-mouse-properties.c:648
 msgid "Large Cursor"
 msgstr "Velký kurzor"
 
-#: capplets/mouse/gnome-mouse-properties.c:668
+#: capplets/mouse/gnome-mouse-properties.c:667
 msgid "Large White Cursor - Current"
 msgstr "Velký bílý kurzor - aktuální"
 
-#: capplets/mouse/gnome-mouse-properties.c:668
-#: capplets/mouse/gnome-mouse-properties.c:671
+#: capplets/mouse/gnome-mouse-properties.c:667
+#: capplets/mouse/gnome-mouse-properties.c:670
 msgid "Large version of white cursor"
 msgstr "Velká verze bílého kurzoru"
 
-#: capplets/mouse/gnome-mouse-properties.c:671
+#: capplets/mouse/gnome-mouse-properties.c:670
 msgid "Large White Cursor"
 msgstr "Velký bílý kurzor"
 
-#: capplets/mouse/gnome-mouse-properties.c:749
+#: capplets/mouse/gnome-mouse-properties.c:747
 msgid "Cursor Size"
 msgstr "Velikost kurzoru"
 
-#: capplets/mouse/gnome-mouse-properties.c:758
+#: capplets/mouse/gnome-mouse-properties.c:756
 msgid "Cursor Theme"
 msgstr "Téma kurzoru"
 

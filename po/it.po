@@ -7,14 +7,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-07-08 20:39+0200\n"
+"POT-Creation-Date: 2003-08-11 13:57-0400\n"
 "PO-Revision-Date: 2003-07-08 23:40+0200\n"
 "Last-Translator: Alessio Dessì <alkex@inwind.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:1
 #, fuzzy
@@ -70,25 +70,47 @@ msgstr ""
 msgid "Enable support for GNOME assistive technologies at login"
 msgstr ""
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:238
+#: capplets/accessibility/at-properties/main.c:60
+msgid ""
+"No Assistive Technology is available on your system.  The 'gok' package must "
+"be installed in order to get on-screen keyboard support, and the "
+"'gnopernicus' package must be installed for screenreading and magnifying "
+"capabilities."
+msgstr ""
+
+#: capplets/accessibility/at-properties/main.c:62
+msgid ""
+"Not all available assistive technologies are installed on your system.  The "
+"'gok' package must be installed in order to get on-screen keyboard support."
+msgstr ""
+
+#: capplets/accessibility/at-properties/main.c:64
+msgid ""
+"Not all available assistive technologies are installed on your system.  The "
+"'gnopernicus' package must be installed for screenreading and magnifying "
+"capabilities."
+msgstr ""
+
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:236
 #, c-format
 msgid "There was an error launching the mouse preferences dialog: %s"
 msgstr ""
 "Si è verificato un errore nell'avviare la finestra di dialogo per le "
 "preferenze del mouse: %s"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:334
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:392
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:332
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:390
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "Impossibile importare le impostazioni AccessX dal file «%s»"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:465
-msgid "Select CDE AccessX file"
-msgstr "Seleziona file AccessX di CDE"
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:463
+#, fuzzy
+msgid "Import Feature Settings File"
+msgstr "_Importa impostazioni..."
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "Tastiera"
@@ -106,46 +128,51 @@ msgstr ""
 "funzionalità di accesso facilitato alla tastiera non possono essere attivate."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
+#: capplets/font/font-properties.glade.h:1
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:1
+#: capplets/mouse/gnome-mouse-properties.glade.h:1
+#: capplets/ui-properties/gnome-ui-properties.glade.h:1
+msgid "    "
+msgstr "    "
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:1
 #: capplets/file-types/file-types-properties.glade.h:1
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:2
 #: capplets/network/gnome-network-preferences.glade.h:2
 #: capplets/theme-switcher/theme-install.glade.h:1
 #: capplets/theme-switcher/theme-properties.glade.h:1
 msgid "*"
 msgstr "*"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
 #, fuzzy
 msgid "<b>Enable Bo_unce Keys</b>"
 msgstr "Abilita controllo pressioni multiple"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
 #, fuzzy
 msgid "<b>Enable Slo_w Keys</b>"
 msgstr "Abilita tasti ad attivazione ritar_data"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
 #, fuzzy
 msgid "<b>Enable _Mouse Keys</b>"
 msgstr "Abilitare il _mouse da tastiera"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
 #, fuzzy
 msgid "<b>Enable _Repeat Keys</b>"
 msgstr "Abilitare il _mouse da tastiera"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
 #, fuzzy
 msgid "<b>Enable _Sticky Keys</b>"
 msgstr "Abilita tasti a di_sattivazione ritardata"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
 msgid "<b>Features</b>"
 msgstr "<b>Funzionalità</b>"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
-msgid "<b>Mouse</b>"
-msgstr "<b>Mouse</b>"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
 #, fuzzy
@@ -221,8 +248,8 @@ msgid "Ma_ximum pointer speed:"
 msgstr "Ve_locità massima del puntatore:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
-#: capplets/mouse/mouse.desktop.in.h:1
-msgid "Mouse"
+#, fuzzy
+msgid "Mouse Keys"
 msgstr "Mouse"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
@@ -246,7 +273,7 @@ msgstr ""
 "diversi tasti) premendo un tasto alla volta."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
 msgid "S_peed:"
 msgstr "_Velocità:"
 
@@ -275,6 +302,7 @@ msgid "_Only accept keys held for:"
 msgstr "A_ccetta solo i tasti premuti per almeno:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "_Type to test settings:"
 msgstr "Di_gita qui per verificare le impostazioni:"
 
@@ -303,136 +331,158 @@ msgid "pixels/second"
 msgstr "pixel/secondo"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
-#: capplets/mouse/gnome-mouse-properties.glade.h:26
+#: capplets/mouse/gnome-mouse-properties.c:133
+#: capplets/mouse/gnome-mouse-properties.glade.h:27
 #: capplets/windows/gnome-window-properties.glade.h:7
 msgid "seconds"
 msgstr "secondi"
 
 #. solid
 #: capplets/background/background-properties-capplet.c:228
-msgid "C_olor:"
+#, fuzzy
+msgid "Co_lor:"
 msgstr "Co_lore:"
 
 #. horiz
 #: capplets/background/background-properties-capplet.c:232
-msgid "_Left Color:"
+#, fuzzy
+msgid "_Left color:"
 msgstr "Co_lore a sinistra:"
 
 #: capplets/background/background-properties-capplet.c:233
-msgid "_Right Color:"
+#, fuzzy
+msgid "_Right color:"
 msgstr "Colore a _destra:"
 
 #. vert
 #: capplets/background/background-properties-capplet.c:236
-msgid "_Top Color:"
+#, fuzzy
+msgid "Top co_lor:"
 msgstr "Co_lore in alto:"
 
 #: capplets/background/background-properties-capplet.c:237
-msgid "_Bottom Color:"
+#, fuzzy
+msgid "_Bottom color:"
 msgstr "Colore in _basso:"
 
 #: capplets/background/background-properties-capplet.c:398
-msgid "_Wallpaper"
-msgstr "_Affiancata"
+#, fuzzy
+msgid "_Tile"
+msgstr "_File"
 
 #: capplets/background/background-properties-capplet.c:398
-msgid "C_entered"
+#, fuzzy
+msgid "C_enter"
 msgstr "C_entrata"
 
 #: capplets/background/background-properties-capplet.c:398
-msgid "_Scaled"
+#, fuzzy
+msgid "Sc_ale"
 msgstr "_Scalata"
 
 #: capplets/background/background-properties-capplet.c:398
-msgid "Stretc_hed"
+#, fuzzy
+msgid "_Stretch"
 msgstr "Sti_rata"
 
 #: capplets/background/background-properties-capplet.c:398
 msgid "_No Picture"
 msgstr "_Nessuna"
 
-#: capplets/background/background-properties-capplet.c:433
-msgid "Select _picture:"
-msgstr "Seleziona i_mmagine:"
-
-#: capplets/background/background-properties-capplet.c:567
+#: capplets/background/background-properties-capplet.c:559
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:834
-#: capplets/keyboard/gnome-keyboard-properties.c:222
-#: capplets/mouse/gnome-mouse-properties.c:716
-#: capplets/sound/sound-properties-capplet.c:214
+#: capplets/default-applications/gnome-default-applications-properties.c:730
+#: capplets/keyboard/gnome-keyboard-properties.c:218
+#: capplets/mouse/gnome-mouse-properties.c:806
+#: capplets/sound/sound-properties-capplet.c:212
 msgid "Retrieve and store legacy settings"
 msgstr "Recupera e salva le impostazioni legacy"
 
-#: capplets/background/background-properties-capplet.c:593
+#: capplets/background/background-properties-capplet.c:585
 #: capplets/background/background-properties.glade.h:2
 msgid "Background Preferences"
 msgstr "Preferenze dello sfondo"
 
 #: capplets/background/background-properties.glade.h:1
-msgid "A preview of the background picture."
-msgstr "Una anteprima della immagine dello sfondo."
-
-#: capplets/background/background-properties.glade.h:3
-msgid "Background Preview"
-msgstr "Anteprima dello sfondo"
-
-#: capplets/background/background-properties.glade.h:4
-msgid "Background _Style:"
+#, fuzzy
+msgid "Bac_kground style:"
 msgstr "St_ile dello sfondo:"
 
-#: capplets/background/background-properties.glade.h:5
+#: capplets/background/background-properties.glade.h:3
+msgid "E-Mail"
+msgstr ""
+
+#: capplets/background/background-properties.glade.h:4
 msgid "Horizontal gradient"
 msgstr "Gradiente orizzontale"
 
-#: capplets/background/background-properties.glade.h:6
+#: capplets/background/background-properties.glade.h:5
 msgid "Pick a color"
 msgstr "Seleziona un colore"
 
-#: capplets/background/background-properties.glade.h:7
-msgid "Picture Options:"
+#: capplets/background/background-properties.glade.h:6
+#, fuzzy
+msgid "Picture _options:"
 msgstr "Opzioni dell'immagine:"
 
-#: capplets/background/background-properties.glade.h:8
-#: libbackground/preview-file-selection.c:212
-msgid "Preview"
-msgstr "Anteprima"
-
-#: capplets/background/background-properties.glade.h:9
+#: capplets/background/background-properties.glade.h:7
 msgid "Primary Color"
 msgstr "Colore primario"
 
-#: capplets/background/background-properties.glade.h:10
+#: capplets/background/background-properties.glade.h:8
 msgid "Secondary Color"
 msgstr "Colore secondario"
 
-#: capplets/background/background-properties.glade.h:11
+#: capplets/background/background-properties.glade.h:9
+msgid "Select _picture:"
+msgstr "Seleziona i_mmagine:"
+
+#: capplets/background/background-properties.glade.h:10
 msgid "Solid color"
 msgstr "Tinta unica"
 
-#: capplets/background/background-properties.glade.h:12
-msgid "The background picture's file name."
-msgstr "Il nome del file per l'immagine di sfondo."
-
-#: capplets/background/background-properties.glade.h:13
+#: capplets/background/background-properties.glade.h:11
 msgid "To set the background picture, drop an image or click to browse."
 msgstr ""
 "Trascinare l'immagine o cliccare su esplora per impostare l'immagine di "
 "sfondo."
 
-#: capplets/background/background-properties.glade.h:14
+#: capplets/background/background-properties.glade.h:12
 msgid "Vertical gradient"
 msgstr "Gradiente verticale"
 
-#: capplets/background/background-properties.glade.h:15
-msgid ""
-"You can drag image files\n"
-"into the window to set the \n"
-"background picture."
+#: capplets/background/background-properties.glade.h:13
+#, fuzzy
+msgid "You can drag image files into the window to set the background picture."
 msgstr ""
 "È possibile trascinare un file\n"
 "di immagine sulla finestra per\n"
 "impostarlo come sfondo."
+
+#: capplets/background/background-properties.glade.h:14
+#, fuzzy
+msgid "radiobutton1"
+msgstr "Pulsante radio 1"
+
+#: capplets/background/background-properties.glade.h:15
+#, fuzzy
+msgid "radiobutton2"
+msgstr "Pulsante radio 2"
+
+#: capplets/background/background-properties.glade.h:16
+#, fuzzy
+msgid "radiobutton3"
+msgstr "Pulsante radio 1"
+
+#: capplets/background/background-properties.glade.h:17
+#, fuzzy
+msgid "radiobutton4"
+msgstr "Pulsante radio 1"
+
+#: capplets/background/background-properties.glade.h:18
+#, fuzzy
+msgid "radiobutton5"
+msgstr "Pulsante radio 1"
 
 #: capplets/background/background.desktop.in.h:1
 msgid "Background"
@@ -615,7 +665,7 @@ msgstr "Callback di rilascio dati per l'editor delle proprietà"
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr "Callback·eseguita·quando·deve·essere·liberata·la·memoria·dei·dati·dell'oggetto·editor·delle·proprietà"
 
-#: capplets/common/gconf-property-editor.c:1531
+#: capplets/common/gconf-property-editor.c:1541
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -626,7 +676,7 @@ msgstr ""
 "Impossibile trovare il file «%s».  Assicurarsi che esista e riprovare, in "
 "alternativa scegliere una immagine di sfondo diversa."
 
-#: capplets/common/gconf-property-editor.c:1539
+#: capplets/common/gconf-property-editor.c:1549
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -637,12 +687,12 @@ msgstr ""
 "Impossibile riconoscere il formato del file «%s». Forse è un tipo di "
 "immagine non ancora supportato.  Scegliere un'altra immagine."
 
-#: capplets/common/gconf-property-editor.c:1630
+#: capplets/common/gconf-property-editor.c:1640
 msgid "Please select an image."
 msgstr "Selezionare una immagine."
 
 #: capplets/default-applications/default-applications.desktop.in.h:1
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:22
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:18
 msgid "Preferred Applications"
 msgstr "Applicazioni preferite"
 
@@ -650,93 +700,160 @@ msgstr "Applicazioni preferite"
 msgid "Select your default applications"
 msgstr "Seleziona le applicazioni predefinite"
 
-#: capplets/default-applications/gnome-default-applications-properties.c:114
+#: capplets/default-applications/gnome-default-applications-properties.c:108
 msgid "Please specify a name and a command for this editor."
 msgstr "Specificare un nome ed un comando per questo editor."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:2
-msgid "Acce_pts URLs"
-msgstr "Acce_tta URL"
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:39
+msgid "Epiphany"
+msgstr ""
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:3
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:40
+msgid "Galeon"
+msgstr ""
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:41
+msgid "Encompass"
+msgstr ""
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:42
+msgid "Mozilla/Netscape 6"
+msgstr ""
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:43
+msgid "Netscape Communicator"
+msgstr ""
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:44
+msgid "Konqueror"
+msgstr ""
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:45
+#, fuzzy
+msgid "Lynx Text Browser"
+msgstr "Web browser"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:46
+#, fuzzy
+msgid "Links Text Browser"
+msgstr "Web browser"
+
+#. The code in gnome-default-applications-properties.c makes sure
+#. * there is only one (the first entry in this list) Evolution entry
+#. * in the list shown to the user
+#.
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:55
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:56
+#, fuzzy
+msgid "Evolution Mail Reader"
+msgstr "Esploratore guida personali_zzato:"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:57
+msgid "Balsa"
+msgstr ""
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:58
+msgid "KMail"
+msgstr ""
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:59
+msgid "Mozilla Mail"
+msgstr ""
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:60
+msgid "Mutt"
+msgstr ""
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:66
+#, fuzzy
+msgid "Gnome Terminal"
+msgstr "Terminale"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:67
+#, fuzzy
+msgid "Standard XTerminal"
+msgstr "Avvia nel t_erminale"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:68
+msgid "NXterm"
+msgstr ""
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:69
+msgid "RXVT"
+msgstr ""
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:70
+#, fuzzy
+msgid "ETerm"
+msgstr "Terminale"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:2
 msgid "Add..."
 msgstr "Aggiungi..."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:4
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:3
 msgid "C_ustom Editor"
 msgstr "Editor personali_zzato"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:5
-msgid "C_ustom Help Browser:"
-msgstr "Esploratore guida personali_zzato:"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:6
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:4
 #, fuzzy
 msgid "C_ustom Mail Reader:"
 msgstr "Esploratore guida personali_zzato:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:7
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:5
 msgid "C_ustom Terminal:"
 msgstr "Terminale personali_zzato:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:8
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:6
 msgid "C_ustom Web Browser:"
 msgstr "Web browser personali_zzato:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:9
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:7
 msgid "Co_mmand:"
 msgstr "Co_mando:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:10
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:8
 msgid "Custom Editor Properties"
 msgstr "Proprietà dell'editor personalizzato"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:11
-msgid "Default Help Browser"
-msgstr "Esploratore guida predefinito"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:12
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:9
 #, fuzzy
 msgid "Default Mail Reader"
 msgstr "Window manager predefinito"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:13
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:10
 msgid "Default Terminal"
 msgstr "Terminale predefinito"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:14
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:11
 msgid "Default Text Editor"
 msgstr "Editor di testo predefinito"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:15
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:12
 msgid "Default Web Browser"
 msgstr "Web browser predefinito"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:16
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:13
 msgid "Default Window Manager"
 msgstr "Window manager predefinito"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:17
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:14
 msgid "Delete"
 msgstr "Elimina"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:18
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:15
 msgid "E_xec Flag:"
 msgstr "Flag di _esecuzione:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:19
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:16
 msgid "Edit..."
 msgstr "Modifica..."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:20
-msgid "Help Browser"
-msgstr "Esploratore guida"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:21
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:17
 msgid "Mail Reader"
 msgstr "Lettore posta"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:23
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:19
 msgid ""
 "Select the window manager you want.  You will need to hit apply, wave the "
 "magic wand, and do a magic dance for it to work."
@@ -745,73 +862,69 @@ msgstr ""
 "la bacchetta magica ed infine eseguire una danza propiziatoria per farlo "
 "funzionare."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:24
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:20
 msgid "Start in T_erminal"
 msgstr "Avvia nel t_erminale"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:25
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:21
 msgid "Terminal"
 msgstr "Terminale"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:26
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:22
 msgid "Text Editor"
 msgstr "Editor di testo"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:27
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:23
 msgid "This application can open _URIs"
 msgstr "Questa applicazione può aprire degli _URI"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:28
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:24
 msgid "This application can open _multiple files"
 msgstr "Questa applicazione può aprire più file per _volta"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:29
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:25
 msgid "This application needs to be run in a _shell"
 msgstr "Questa applicazione richiede di essere eseguira in una _shell"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:30
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:26
 msgid "Understands _Netscape Remote Control"
 msgstr "Supporta il controllo remoto di _Netscape"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:31
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:27
 msgid "Use this _editor to open text files in the file manager"
 msgstr "Usare questo _editor per aprire i file di testo dal file manager"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:32
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:28
 msgid "Web Browser"
 msgstr "Web browser"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:33
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:29
 msgid "Window Manager"
 msgstr "Window manager"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:34
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:30
 #: capplets/file-types/file-types-properties.glade.h:22
 msgid "_Name:"
 msgstr "_Nome:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:35
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:31
 msgid "_Properties..."
 msgstr "_Proprietà..."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:36
-msgid "_Select a Help Browser:"
-msgstr "_Selezionare un esploratore guida:"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:37
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:32
 #, fuzzy
 msgid "_Select a Mail Reader:"
 msgstr "_Selezionare un esploratore guida:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:38
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:33
 msgid "_Select a Terminal:"
 msgstr "_Selezionare un terminale:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:39
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:34
 msgid "_Select a Web Browser:"
 msgstr "_Selezionare un web browser:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:40
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:35
 msgid "_Select an Editor:"
 msgstr "_Selezionare un editor:"
 
@@ -946,53 +1059,54 @@ msgstr "Cambia la risoluzione dello schermo"
 msgid "Screen Resolution"
 msgstr "Risoluzione dello schermo"
 
-#: capplets/display/main.c:261
+#: capplets/display/main.c:274
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: capplets/display/main.c:367
-msgid "Resolution:"
+#: capplets/display/main.c:376
+#, fuzzy
+msgid "_Resolution:"
 msgstr "Risoluzione:"
 
-#: capplets/display/main.c:385
-msgid "Refresh rate:"
+#: capplets/display/main.c:395
+msgid "Re_fresh rate:"
 msgstr ""
 
-#: capplets/display/main.c:405
+#: capplets/display/main.c:416
 msgid "Default Settings"
 msgstr "Impostazioni predefinite"
 
-#: capplets/display/main.c:407
+#: capplets/display/main.c:418
 #, fuzzy, c-format
 msgid "Screen %d Settings\n"
 msgstr "Impostazioni avanzate"
 
-#: capplets/display/main.c:432
+#: capplets/display/main.c:443
 msgid "Screen Resolution Preferences"
 msgstr "Preferenze risoluzione schermo"
 
-#: capplets/display/main.c:460
+#: capplets/display/main.c:475
 #, c-format
 msgid "Make default for this _computer (%s) only"
 msgstr ""
 
-#: capplets/display/main.c:478
+#: capplets/display/main.c:493
 msgid "Options"
 msgstr "Opzioni"
 
-#: capplets/display/main.c:499
+#: capplets/display/main.c:514
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d seconds the previous "
 "settings will be restored."
 msgstr ""
 
-#: capplets/display/main.c:549
+#: capplets/display/main.c:563
 msgid "Do you want to keep this resolution?"
 msgstr "Si desidera mantenere questa risoluzione?"
 
-#: capplets/display/main.c:586
+#: capplets/display/main.c:588
 msgid "Use _previous resolution"
 msgstr "Usa risoluzione _precedente"
 
@@ -1000,16 +1114,16 @@ msgstr "Usa risoluzione _precedente"
 msgid "_Keep resolution"
 msgstr "_Mantieni risoluzione"
 
-#: capplets/display/main.c:747
+#: capplets/display/main.c:739
 msgid ""
-"The Xserver doesn't support the XRandR extension, runtime resolution changes "
-"aren't possible."
+"The XServer does not support the XRandR extension.  Runtime resolution "
+"changes to the display size are not available."
 msgstr ""
 
-#: capplets/display/main.c:759
+#: capplets/display/main.c:747
 msgid ""
-"The version of the XRandR extension is incompatible with this program, "
-"runtime resolution changes aren't possible."
+"The version of the XRandR extension is incompatible with this program. "
+"Runtime changes to the display size are not available."
 msgstr ""
 
 #: capplets/file-types/file-types-capplet.c:196
@@ -1325,133 +1439,139 @@ msgstr "Caratteri"
 msgid "Select fonts for the desktop"
 msgstr "Seleziona i caratteri per l'ambiente grafico"
 
-#: capplets/font/font-properties.glade.h:1
+#: capplets/font/font-properties.glade.h:2
+#, fuzzy
+msgid "<b>Font Rendering</b>"
+msgstr "Visualizzazione dei caratteri"
+
+#: capplets/font/font-properties.glade.h:3
 msgid "Best _shapes"
 msgstr "Ottimizza _forma"
 
-#: capplets/font/font-properties.glade.h:2
+#: capplets/font/font-properties.glade.h:4
 msgid "Best co_ntrast"
 msgstr "Ottimizza cont_rasto"
 
-#: capplets/font/font-properties.glade.h:3
+#: capplets/font/font-properties.glade.h:5
 msgid "De_tails..."
 msgstr "D_ettagli..."
 
-#: capplets/font/font-properties.glade.h:4
+#: capplets/font/font-properties.glade.h:6
 msgid "Font Preferences"
 msgstr "Preferenze del tipo di carattere"
 
-#: capplets/font/font-properties.glade.h:5
-#, fuzzy
-msgid "Font Rendering"
-msgstr "Visualizzazione dei caratteri"
-
-#: capplets/font/font-properties.glade.h:6
+#: capplets/font/font-properties.glade.h:7
 #, fuzzy
 msgid "Font Rendering Details"
 msgstr "Dettagli sulla visualizzazione dei caratteri"
 
-#: capplets/font/font-properties.glade.h:7
+#: capplets/font/font-properties.glade.h:8
 msgid "G_rayscale"
 msgstr "Scala di g_rigi"
 
-#: capplets/font/font-properties.glade.h:8
+#: capplets/font/font-properties.glade.h:9
 #, fuzzy
 msgid "Go to font folder"
 msgstr "_Vai alla cartella dei temi"
 
-#: capplets/font/font-properties.glade.h:9
+#: capplets/font/font-properties.glade.h:10
 msgid "Hinting:"
 msgstr "Hinting:"
 
-#: capplets/font/font-properties.glade.h:10
+#: capplets/font/font-properties.glade.h:11
 msgid "N_one"
 msgstr "N_essuna"
 
-#: capplets/font/font-properties.glade.h:11
+#: capplets/font/font-properties.glade.h:12
 msgid "Resolution (_dots per inch):"
 msgstr "Risoluzione (_dpi):"
 
-#: capplets/font/font-properties.glade.h:12
+#: capplets/font/font-properties.glade.h:13
 msgid "Set the font for applications"
 msgstr "Sceglie il carattere per le applicazioni"
 
-#: capplets/font/font-properties.glade.h:13
+#: capplets/font/font-properties.glade.h:14
 msgid "Set the font for the icons on the desktop"
 msgstr "Sceglie il carattere per le icone sul desktop"
 
-#: capplets/font/font-properties.glade.h:14
+#: capplets/font/font-properties.glade.h:15
 msgid "Set the monospace font for terminals and similar applications"
 msgstr ""
 "Sceglie il carattere a spaziatura fissa per il terminale e applicazioni "
 "simili"
 
-#: capplets/font/font-properties.glade.h:15
+#: capplets/font/font-properties.glade.h:16
 msgid "Smoothing:"
 msgstr "Armonizzazione:"
 
-#: capplets/font/font-properties.glade.h:16
+#: capplets/font/font-properties.glade.h:17
 msgid "Sub_pixel (LCDs)"
 msgstr "Su_bpixel (LCS)"
 
 # Lisciatura? Spianatura?
-#: capplets/font/font-properties.glade.h:17
+#: capplets/font/font-properties.glade.h:18
 msgid "Sub_pixel smoothing (LCDs)"
 msgstr "Sfocatura s_ubpixel (LCD)"
 
-#: capplets/font/font-properties.glade.h:18
+#: capplets/font/font-properties.glade.h:19
 msgid "Subpixel order:"
 msgstr "Ordine subpixel:"
 
-#: capplets/font/font-properties.glade.h:19
+#: capplets/font/font-properties.glade.h:20
 msgid "VB_GR"
 msgstr "VB_GR"
 
-#: capplets/font/font-properties.glade.h:20
+#: capplets/font/font-properties.glade.h:21
 msgid "_Application font:"
 msgstr "Carattere per le _applicazioni:"
 
-#: capplets/font/font-properties.glade.h:21
+#: capplets/font/font-properties.glade.h:22
 msgid "_BGR"
 msgstr "_BGR"
 
-#: capplets/font/font-properties.glade.h:22
+#: capplets/font/font-properties.glade.h:23
 msgid "_Desktop font:"
 msgstr "Carattere per il _desktop:"
 
-#: capplets/font/font-properties.glade.h:23
+#: capplets/font/font-properties.glade.h:24
 msgid "_Full"
 msgstr "_Piena"
 
-#: capplets/font/font-properties.glade.h:24
+#: capplets/font/font-properties.glade.h:25
+#: capplets/mouse/gnome-mouse-properties.glade.h:22
 msgid "_Medium"
 msgstr "_Media"
 
-#: capplets/font/font-properties.glade.h:25
+#: capplets/font/font-properties.glade.h:26
 msgid "_Monochrome"
 msgstr "_Monocromatico"
 
-#: capplets/font/font-properties.glade.h:26
+#: capplets/font/font-properties.glade.h:27
 msgid "_None"
 msgstr "_Nessuna"
 
-#: capplets/font/font-properties.glade.h:27
+#: capplets/font/font-properties.glade.h:28
 msgid "_RGB"
 msgstr "_RGB"
 
-#: capplets/font/font-properties.glade.h:28
+#: capplets/font/font-properties.glade.h:29
 msgid "_Slight"
 msgstr "_Leggera"
 
-#: capplets/font/font-properties.glade.h:29
+#: capplets/font/font-properties.glade.h:30
 msgid "_Terminal font:"
 msgstr "Carattere per il _terminale:"
 
-#: capplets/font/font-properties.glade.h:30
+#: capplets/font/font-properties.glade.h:31
+#, fuzzy
+msgid "_Use Font"
+msgstr "Caratteri"
+
+#: capplets/font/font-properties.glade.h:32
 msgid "_VRGB"
 msgstr "_VRGB"
 
-#: capplets/font/font-properties.glade.h:31
+#: capplets/font/font-properties.glade.h:33
 msgid "_Window title font:"
 msgstr "Carattere per l'_intestazione finestre:"
 
@@ -1475,7 +1595,7 @@ msgstr "Il tipo di acceleratore."
 
 #: capplets/keybindings/eggcellrendererkeys.c:219
 #: capplets/keybindings/gnome-keybinding-properties.c:204
-#: libbackground/applier.c:588 typing-break/drwright.c:446
+#: libbackground/applier.c:588 typing-break/drwright.c:439
 msgid "Disabled"
 msgstr "Disabilitato"
 
@@ -1562,110 +1682,117 @@ msgstr "Assegna dei tasti scorciatoia a dei comandi"
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "Errore nell'avviare la capplet per la tastiera. %s"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:201
+#: capplets/keyboard/gnome-keyboard-properties.c:195
 msgid "_Accessibility"
 msgstr "_Accessibilità"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:218
-#: capplets/keyboard/gnome-keyboard-properties.c:220
+#: capplets/keyboard/gnome-keyboard-properties.c:214
+#: capplets/keyboard/gnome-keyboard-properties.c:216
+#: capplets/sound/sound-properties-capplet.c:208
 #: capplets/sound/sound-properties-capplet.c:210
-#: capplets/sound/sound-properties-capplet.c:212
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
 "Applica le impostazioni ed esce (solo compatibilità; ora gestita dal daemon)"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:1
+#: capplets/keyboard/gnome-keyboard-properties.c:220
+msgid "Start the page with the typing break settings showing"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
 #, fuzzy
-msgid "<b>Cursor Blinks</b>"
+msgid "<b>Cursor Blinking</b>"
 msgstr "Lampeggiamento cursore"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:2
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
 #, fuzzy
 msgid "<b>Repeat Keys</b>"
 msgstr "Abilitare il _mouse da tastiera"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
 msgid "<b>_Lock screen to enforce typing break</b>"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>Veloce</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>Lungo</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>Breve</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Lenta</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#, fuzzy
+msgid "All_ow postponing of breaks"
+msgstr "C_onsentire la posposizione delle pause"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "Check if breaks are allowed to be postponed"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#, fuzzy
+msgid "Cursor _blinks in text boxes and fields"
+msgstr "_Lampeggia nei campi di testo"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Duration of the break when typing is disallowed"
 msgstr "Durata della pausa durante la quale la digitazione è impedita"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Duration of work before forcing a break"
 msgstr "Durata del lavoro prima di obbligare ad una pausa"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
 #, fuzzy
 msgid "Key presses _repeat when key is held down"
 msgstr "_Ripetere carattere mantenendo premuto il tasto"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
 msgid "Keyboard Preferences"
 msgstr "Preferenze della tastiera"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
 msgid ""
 "Lock screen after a certain duration to help prevent repetitive keyboard use "
 "injuries"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
 msgid "Typing Break"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
 msgid "_Accessibility..."
 msgstr "_Accessibilità..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
-msgid "_Allow postponing of breaks"
-msgstr "C_onsentire la posposizione delle pause"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
-msgid "_Break interval lasts"
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#, fuzzy
+msgid "_Break interval lasts:"
 msgstr "Intervallo di _pausa"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
-#, fuzzy
-msgid "_Cursor blinks in text boxes and fields"
-msgstr "_Lampeggia nei campi di testo"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "_Delay:"
 msgstr "_Ritardo:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
 msgid "_Speed:"
 msgstr "_Velocità:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
-msgid "_Work interval lasts"
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
+#, fuzzy
+msgid "_Work interval lasts:"
 msgstr "Intervallo di _lavoro"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
 msgid "minutes"
 msgstr "minuti"
 
@@ -1673,169 +1800,174 @@ msgstr "minuti"
 msgid "Set your keyboard preferences"
 msgstr "Imposta le preferenze della tastiera"
 
-#: capplets/mouse/gnome-mouse-properties.c:439
-#, c-format
-msgid ""
-"<b>Unknown Cursor</b>\n"
-"%s"
+#: capplets/mouse/gnome-mouse-properties.c:496
+#, fuzzy
+msgid "Unknown Cursor"
 msgstr ""
 "<b>Cursore sconosciuto</b>\n"
 "%s"
 
-#: capplets/mouse/gnome-mouse-properties.c:541
-msgid ""
-"<b>Default Cursor - Current</b>\n"
-"The default cursor that ships with X"
+#: capplets/mouse/gnome-mouse-properties.c:602
+msgid "Default Cursor - Current"
 msgstr ""
-"<b>Puntatore normale - Attuale</b>\n"
-"Il puntatore normalmente fornito con X"
 
-#: capplets/mouse/gnome-mouse-properties.c:544
-msgid ""
-"<b>Default Cursor</b>\n"
-"The default cursor that ships with X"
+#: capplets/mouse/gnome-mouse-properties.c:602
+#: capplets/mouse/gnome-mouse-properties.c:605
+#, fuzzy
+msgid "The default cursor that ships with X"
 msgstr ""
 "<b>Puntatore normale</b>\n"
 "Il puntatore normalmente fornito con X"
 
-#: capplets/mouse/gnome-mouse-properties.c:562
-msgid ""
-"<b>White Cursor - Current</b>\n"
-"The default cursor inverted"
-msgstr ""
-"<b>Puntatore bianco - Corrente</b>\n"
-"Il normale puntatore invertito"
+#: capplets/mouse/gnome-mouse-properties.c:605
+#, fuzzy
+msgid "Default Cursor"
+msgstr "Web browser predefinito"
 
-#: capplets/mouse/gnome-mouse-properties.c:565
-msgid ""
-"<b>White Cursor</b>\n"
-"The default cursor inverted"
+#: capplets/mouse/gnome-mouse-properties.c:623
+msgid "White Cursor - Current"
+msgstr ""
+
+#: capplets/mouse/gnome-mouse-properties.c:623
+#: capplets/mouse/gnome-mouse-properties.c:626
+#, fuzzy
+msgid "The default cursor inverted"
 msgstr ""
 "<b>Puntatore bianco</b>\n"
 "Il normale puntatore invertito"
 
-#: capplets/mouse/gnome-mouse-properties.c:583
-msgid ""
-"<b>Large Cursor - Current</b>\n"
-"Large version of normal cursor"
-msgstr ""
-"<b>Puntatore largo - Corrente</b>\n"
-"Versione grande del puntatore normale"
+#: capplets/mouse/gnome-mouse-properties.c:626
+#, fuzzy
+msgid "White Cursor"
+msgstr "Puntatore"
 
-#: capplets/mouse/gnome-mouse-properties.c:586
-msgid ""
-"<b>Large Cursor</b>\n"
-"Large version of normal cursor"
+#: capplets/mouse/gnome-mouse-properties.c:645
+msgid "Large Cursor - Current"
+msgstr ""
+
+#: capplets/mouse/gnome-mouse-properties.c:645
+#: capplets/mouse/gnome-mouse-properties.c:648
+#, fuzzy
+msgid "Large version of normal cursor"
 msgstr ""
 "<b>Puntatore largo</b>\n"
 "Versione grande del puntatore normale"
 
-#: capplets/mouse/gnome-mouse-properties.c:604
-msgid ""
-"<b>Large White Cursor - Current</b>\n"
-"Large version of white cursor"
+#: capplets/mouse/gnome-mouse-properties.c:648
+#, fuzzy
+msgid "Large Cursor"
+msgstr "Puntatore"
+
+#: capplets/mouse/gnome-mouse-properties.c:667
+#, fuzzy
+msgid "Large White Cursor - Current"
 msgstr ""
 "<b>Puntatore largo bianco - Corrente</b>\n"
 "Versione grande del puntatore bianco"
 
-#: capplets/mouse/gnome-mouse-properties.c:607
-msgid ""
-"<b>Large White Cursor</b>\n"
-"Large version of white cursor"
+#: capplets/mouse/gnome-mouse-properties.c:667
+#: capplets/mouse/gnome-mouse-properties.c:670
+#, fuzzy
+msgid "Large version of white cursor"
 msgstr ""
 "<b>Puntatore largo bianco</b>\n"
 "Versione grande del puntatore bianco"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:1
-msgid "    "
-msgstr "    "
+#: capplets/mouse/gnome-mouse-properties.c:670
+msgid "Large White Cursor"
+msgstr ""
+
+#: capplets/mouse/gnome-mouse-properties.c:747
+#, fuzzy
+msgid "Cursor Size"
+msgstr "Puntatore"
+
+#: capplets/mouse/gnome-mouse-properties.c:756
+#, fuzzy
+msgid "Cursor Theme"
+msgstr "Tema del puntatore"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:2
-msgid "<b>Cursor Theme</b>"
-msgstr "<b>Tema del puntatore</b>"
-
-#: capplets/mouse/gnome-mouse-properties.glade.h:3
 msgid "<b>Double-Click Timeout </b>"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:4
+#: capplets/mouse/gnome-mouse-properties.glade.h:3
 #, fuzzy
 msgid "<b>Drag and Drop</b>"
 msgstr "Trascinamento"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:5
+#: capplets/mouse/gnome-mouse-properties.glade.h:4
 #, fuzzy
 msgid "<b>Locate Pointer</b>"
 msgstr "Indicazione puntatore"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:6
+#: capplets/mouse/gnome-mouse-properties.glade.h:5
 msgid "<b>Mouse Orientation</b>"
 msgstr "<b>Orientamento del mouse</b>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:7
+#: capplets/mouse/gnome-mouse-properties.glade.h:6
 msgid "<b>Speed</b>"
 msgstr "<b>Velocità</b>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:8
+#: capplets/mouse/gnome-mouse-properties.glade.h:7
 msgid ""
 "<i><small><b>Note:</b> Changes to this setting will not take effect until "
 "you next log in.</small></i>"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:9
+#: capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid "<i>Fast</i>"
 msgstr "<i>Veloce</i>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:10
+#: capplets/mouse/gnome-mouse-properties.glade.h:9
 msgid "<i>High</i>"
 msgstr "<i>Alta</i>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:11
+#: capplets/mouse/gnome-mouse-properties.glade.h:10
 msgid "<i>Large</i>"
 msgstr "<i>Larga</i>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:12
+#: capplets/mouse/gnome-mouse-properties.glade.h:11
 msgid "<i>Low</i>"
 msgstr "<i>Bassa</i>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:13
+#: capplets/mouse/gnome-mouse-properties.glade.h:12
 msgid "<i>Slow</i>"
 msgstr "<i>Lenta</i>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:14
+#: capplets/mouse/gnome-mouse-properties.glade.h:13
 msgid "<i>Small</i>"
 msgstr "<i>Piccola</i>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:15
+#: capplets/mouse/gnome-mouse-properties.glade.h:14
 msgid "Buttons"
 msgstr "Pulsanti"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:16
-#, fuzzy
-msgid "Cursor _themes:"
-msgstr "Tema del puntatore"
-
-#: capplets/mouse/gnome-mouse-properties.glade.h:17
+#: capplets/mouse/gnome-mouse-properties.glade.h:15
 msgid "Cursors"
 msgstr "Puntatore"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:18
+#: capplets/mouse/gnome-mouse-properties.glade.h:16
 msgid "Highlight the _pointer when you press Ctrl"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:19
+#: capplets/mouse/gnome-mouse-properties.glade.h:17
 msgid "Motion"
 msgstr "Movimento"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:20
+#: capplets/mouse/gnome-mouse-properties.glade.h:18
 msgid "Mouse Preferences"
 msgstr "Preferenze del mouse"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:21
+#: capplets/mouse/gnome-mouse-properties.glade.h:19
 msgid "_Acceleration:"
 msgstr "_Accelerazione:"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:22
+#: capplets/mouse/gnome-mouse-properties.glade.h:20
+msgid "_Large"
+msgstr ""
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:21
 msgid "_Left-handed mouse"
 msgstr "Mouse per ma_ncini"
 
@@ -1844,12 +1976,21 @@ msgid "_Sensitivity:"
 msgstr "_Sensitività:"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:24
+#, fuzzy
+msgid "_Small"
+msgstr "_Scalata"
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:25
 msgid "_Threshold:"
 msgstr "_Soglia:"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:25
+#: capplets/mouse/gnome-mouse-properties.glade.h:26
 msgid "_Timeout:"
 msgstr ""
+
+#: capplets/mouse/mouse.desktop.in.h:1
+msgid "Mouse"
+msgstr "Mouse"
 
 #: capplets/mouse/mouse.desktop.in.h:2
 msgid "Set your mouse preferences"
@@ -1892,28 +2033,29 @@ msgid "HTTP Proxy Details"
 msgstr "Dettagli proxy HTTP"
 
 #: capplets/network/gnome-network-preferences.glade.h:9
+#, fuzzy
+msgid "H_TTP proxy:"
+msgstr "Proxy _HTTP:"
+
+#: capplets/network/gnome-network-preferences.glade.h:10
 msgid "Network Proxy Configuration"
 msgstr "Configurazione proxy di rete"
 
-#: capplets/network/gnome-network-preferences.glade.h:10
+#: capplets/network/gnome-network-preferences.glade.h:11
 msgid "Port:"
 msgstr "Porta:"
 
-#: capplets/network/gnome-network-preferences.glade.h:11
+#: capplets/network/gnome-network-preferences.glade.h:12
 msgid "S_ocks host:"
 msgstr "Host s_ocks:"
 
-#: capplets/network/gnome-network-preferences.glade.h:12
+#: capplets/network/gnome-network-preferences.glade.h:13
 msgid "_Details"
 msgstr "D_ettagli"
 
-#: capplets/network/gnome-network-preferences.glade.h:13
+#: capplets/network/gnome-network-preferences.glade.h:14
 msgid "_FTP proxy:"
 msgstr "Proxy _FTP:"
-
-#: capplets/network/gnome-network-preferences.glade.h:14
-msgid "_HTTP proxy:"
-msgstr "Proxy _HTTP:"
 
 #: capplets/network/gnome-network-preferences.glade.h:15
 msgid "_Password:"
@@ -1927,7 +2069,7 @@ msgstr "Proxy _secure HTTP:"
 msgid "_Username:"
 msgstr "Nome _utente:"
 
-#: capplets/sound/sound-properties-capplet.c:241
+#: capplets/sound/sound-properties-capplet.c:239
 msgid "Sound preferences"
 msgstr "Preferenze dell'audio"
 
@@ -1936,11 +2078,11 @@ msgid "E_nable sound server startup"
 msgstr "A_bilita avvio del server audio"
 
 #: capplets/sound/sound-properties.glade.h:2
-msgid "Flash _window titlebar"
+msgid "Flash _entire screen"
 msgstr ""
 
 #: capplets/sound/sound-properties.glade.h:3
-msgid "Flash entire _screen"
+msgid "Flash _window titlebar"
 msgstr ""
 
 #: capplets/sound/sound-properties.glade.h:4
@@ -2184,30 +2326,27 @@ msgstr "Comportamento"
 msgid "Sets the default behavior of GNOME applications"
 msgstr "Imposta il comportamento predefinito delle applicazioni GNOME"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:1
-msgid "A preview of what a menubar looks like with these settings."
-msgstr "Anteprima dell'aspetto di una barra dei menù con queste impostazioni."
-
 #: capplets/ui-properties/gnome-ui-properties.glade.h:2
-msgid "A preview of what a toolbar looks like with these settings."
+msgid "<b>Behavior and Appearance</b>"
 msgstr ""
-"Anteprima dell'aspetto di una barra degli strumenti con queste impostazioni."
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:3
+#, fuzzy
+msgid "<b>Preview</b>"
+msgstr "<b>Velocità</b>"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:4
 msgid "C_ut"
 msgstr "_Taglia"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:4
-msgid "Icons Only"
+#: capplets/ui-properties/gnome-ui-properties.glade.h:5
+#, fuzzy
+msgid "Icons only"
 msgstr "Solo icone"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:5
+#: capplets/ui-properties/gnome-ui-properties.glade.h:6
 msgid "Menu and Toolbar Preferences"
 msgstr "Preferenze barra menù e strumenti"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:6
-msgid "Menus"
-msgstr "Menù"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:7
 msgid "New File"
@@ -2218,83 +2357,72 @@ msgid "Open File"
 msgstr "Apri file"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:9
-msgid "Sample menubar:"
-msgstr "Esempio di barra dei menù:"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:10
-msgid "Sample toolbar:"
-msgstr "Esempio di barra degli strumenti:"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:11
 msgid "Save File"
 msgstr "Salva file"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:12
-msgid "Select the toolbar style."
-msgstr "Selezionare lo stile delle barre degli strumenti"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:13
+#: capplets/ui-properties/gnome-ui-properties.glade.h:10
 msgid "Show _icons in menus"
 msgstr "Mostrare le _icone nei menù"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:14
-msgid "Text Below Icons"
+#: capplets/ui-properties/gnome-ui-properties.glade.h:11
+#, fuzzy
+msgid "Text below icons"
 msgstr "Testo sotto le icone"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:15
-msgid "Text Beside Icons"
+#: capplets/ui-properties/gnome-ui-properties.glade.h:12
+#, fuzzy
+msgid "Text beside icons"
 msgstr "Testo accanto le icone"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:16
-msgid "Text Only"
+#: capplets/ui-properties/gnome-ui-properties.glade.h:13
+#, fuzzy
+msgid "Text only"
 msgstr "Solo testo"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:17
-msgid "Toolbar"
-msgstr "Barra degli strumenti"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:18
-msgid "Toolbars can be _detached and moved around"
-msgstr "Rendere s_taccabili e spostabili le barre degli strumenti"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:19
-msgid "_Button Labels: "
+#: capplets/ui-properties/gnome-ui-properties.glade.h:14
+#, fuzzy
+msgid "Toolbar _button labels: "
 msgstr "_Etichette dei pulsanti: "
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:20
+#: capplets/ui-properties/gnome-ui-properties.glade.h:15
 msgid "_Copy"
 msgstr "_Copia"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:21
+#: capplets/ui-properties/gnome-ui-properties.glade.h:16
+#, fuzzy
+msgid "_Detachable toolbars"
+msgstr "Esempio di barra degli strumenti:"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:17
 msgid "_Edit"
 msgstr "_Modifica"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:22
+#: capplets/ui-properties/gnome-ui-properties.glade.h:18
 #: control-center/gnomecc-ui.xml.h:5
 msgid "_File"
 msgstr "_File"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:23
+#: capplets/ui-properties/gnome-ui-properties.glade.h:19
 msgid "_New"
 msgstr "_Nuovo"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:24
+#: capplets/ui-properties/gnome-ui-properties.glade.h:20
 msgid "_Open"
 msgstr "_Apri"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:25
+#: capplets/ui-properties/gnome-ui-properties.glade.h:21
 msgid "_Paste"
 msgstr "_Incolla"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:26
+#: capplets/ui-properties/gnome-ui-properties.glade.h:22
 msgid "_Print"
 msgstr "Stam_pa"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:27
+#: capplets/ui-properties/gnome-ui-properties.glade.h:23
 msgid "_Quit"
 msgstr "_Esci"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:28
+#: capplets/ui-properties/gnome-ui-properties.glade.h:24
 msgid "_Save"
 msgstr "_Salva"
 
@@ -2509,7 +2637,7 @@ msgstr "Impossibile caricare il file audio «%s» come campione «%s»"
 msgid "Cannot determine user's home directory"
 msgstr "Impossibile determinare la directory home dell'utente"
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:180
+#: gnome-settings-daemon/gnome-settings-xsettings.c:202
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "La chiave GConf «%s» è impostata al tipo %s, ma dorebbe essere %s\n"
@@ -2558,11 +2686,15 @@ msgstr "Schermo su cui deve disegnare il BGApplier"
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Impossibile trovare un hbox, utilizzo la normale selezione file"
 
-#: libsounds/sound-view.c:128
+#: libbackground/preview-file-selection.c:212
+msgid "Preview"
+msgstr "Anteprima"
+
+#: libsounds/sound-view.c:130
 msgid "The sound file for this event does not exist."
 msgstr "Il file audio per questo evento non esiste."
 
-#: libsounds/sound-view.c:130
+#: libsounds/sound-view.c:132
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package\n"
@@ -2572,25 +2704,38 @@ msgstr ""
 "Si dovrebbe installare il pacchetto gnome-audio\n"
 "per avere un set di suoni preimpostati."
 
-#: libsounds/sound-view.c:222
+#: libsounds/sound-view.c:176
+#, c-format
+msgid "The file %s is not a valid wav file"
+msgstr ""
+
+#: libsounds/sound-view.c:241
 msgid "Event"
 msgstr "Evento"
 
-#: libsounds/sound-view.c:229
-msgid "File to play"
-msgstr "File da suonare"
+#: libsounds/sound-view.c:250
+#, fuzzy
+msgid "Sound File"
+msgstr "Audio"
 
-#: libsounds/sound-view.c:244
-msgid "_Sounds"
+#: libsounds/sound-view.c:266
+#, fuzzy
+msgid "_Sounds:"
 msgstr "_Suoni"
 
-#: libsounds/sound-view.c:258
+#: libsounds/sound-view.c:280
+#, fuzzy
+msgid "Sound _file:"
+msgstr "Selezione file audio"
+
+#: libsounds/sound-view.c:284
+#, fuzzy
+msgid "Select Sound File"
+msgstr "Selezione file audio"
+
+#: libsounds/sound-view.c:302
 msgid "_Play"
 msgstr "S_uona"
-
-#: libsounds/sound-view.c:264
-msgid "Select sound file"
-msgstr "Selezione file audio"
 
 #: libwindow-settings/gnome-wm-manager.c:320
 #, c-format
@@ -2699,74 +2844,65 @@ msgid "Take a break!"
 msgstr "Fatti una pausa!"
 
 #. { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
-#: typing-break/drwright.c:138
+#: typing-break/drwright.c:133
 #, fuzzy
 msgid "/_Preferences"
 msgstr "Preferenze del tipo di carattere"
 
-#: typing-break/drwright.c:139
+#: typing-break/drwright.c:134
 #, fuzzy
 msgid "/_About"
 msgstr "I_nformazioni"
 
-#: typing-break/drwright.c:141
+#: typing-break/drwright.c:136
 msgid "/_Take a Break"
 msgstr ""
 
-#: typing-break/drwright.c:464
+#: typing-break/drwright.c:457
 #, c-format
 msgid "%d minutes until the next break"
 msgstr "Mancano %d minuti alla prossima pausa"
 
-#: typing-break/drwright.c:467
+#: typing-break/drwright.c:460
 msgid "One minute until the next break"
 msgstr "Manca un minuto alla prossima pausa"
 
-#: typing-break/drwright.c:469
+#: typing-break/drwright.c:462
 msgid "Less than one minute until the next break"
 msgstr "Manca meno di un minuto alla prossima pausa"
 
-#: typing-break/drwright.c:589
-msgid "Quit DrWright?"
-msgstr "Uscire da DrWright?"
+#: typing-break/drwright.c:576
+#, c-format
+msgid ""
+"Unable to bring up the typing break properties dialog with the following "
+"error: %s"
+msgstr ""
 
-#: typing-break/drwright.c:590
-msgid "Don't forget to take regular breaks."
-msgstr "Non dimenticare di fare una pausa, ogni tanto."
-
-#: typing-break/drwright.c:601
-msgid "Don't Quit"
-msgstr "Non uscire"
-
-#: typing-break/drwright.c:605
-msgid "Quit"
-msgstr "Esci"
-
-#: typing-break/drwright.c:655
+#: typing-break/drwright.c:616
 msgid "About GNOME Typing Monitor"
 msgstr ""
 
-#: typing-break/drwright.c:679
+#: typing-break/drwright.c:640
 msgid "A computer break reminder."
 msgstr ""
 
-#: typing-break/drwright.c:680
+#: typing-break/drwright.c:641
 msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
 msgstr "Scritto da Richard Hult &lt;richard@imendio.com@gt;"
 
-#: typing-break/drwright.c:681
+#: typing-break/drwright.c:642
 msgid "Eye candy added by Anders Carlsson"
 msgstr ""
 
-#: typing-break/drwright.c:840
+#: typing-break/drwright.c:801
 msgid "Break reminder"
 msgstr ""
 
-#: typing-break/main.c:126
+#: typing-break/main.c:94
 msgid "The typing monitor is already running."
 msgstr ""
 
-#: typing-break/main.c:139
+#: typing-break/main.c:107
 msgid ""
 "The typing monitor uses the notification area to display information. You "
 "don't seem to have a notification area on your panel. You can add it by "
@@ -2905,18 +3041,28 @@ msgstr "Voci di men? contestuale di Nautilus per i caratteri"
 msgid "Set as Application Font"
 msgstr "Imposta come carattere predefinito"
 
-#: vfs-methods/themus/Themus_Component.server.in.in.h:1
-#, fuzzy
-msgid "Apply theme..."
-msgstr "_Installa tema..."
-
-#: vfs-methods/themus/Themus_Component.server.in.in.h:2
-msgid "Themus component"
-msgstr "Componente themus"
-
-#: vfs-methods/themus/Themus_Component.server.in.in.h:3
-msgid "Themus component apply theme operations"
+#: vfs-methods/themus/apply-font.glade.h:1
+msgid " "
 msgstr ""
+
+#: vfs-methods/themus/apply-font.glade.h:2
+msgid "<span weight=\"bold\" size=\"larger\">Apply new font?</span>"
+msgstr ""
+
+#: vfs-methods/themus/apply-font.glade.h:3
+msgid "Do _not apply font"
+msgstr ""
+
+#: vfs-methods/themus/apply-font.glade.h:4
+msgid ""
+"The theme you have selected suggests a new font. A preview of the font is "
+"shown below."
+msgstr ""
+
+#: vfs-methods/themus/apply-font.glade.h:5
+#, fuzzy
+msgid "_Apply font"
+msgstr "Applica ca_rattere"
 
 #: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
 msgid "Theme Properties content view component"
@@ -2950,6 +3096,11 @@ msgstr "Tema personalizzato"
 msgid "URI currently displayed"
 msgstr "URI verso cui si sta correntemente trasferendo"
 
+#. translators: you may want to include non-western chars here
+#: vfs-methods/themus/themus-theme-applier.c:83
+msgid "ABCDEFG"
+msgstr ""
+
 #: vfs-methods/themus/themus.schemas.in.h:1
 msgid "If set to true, then installed themes will be thumbnailed."
 msgstr ""
@@ -2982,6 +3133,109 @@ msgstr ""
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr ""
+
+#~ msgid "Select CDE AccessX file"
+#~ msgstr "Seleziona file AccessX di CDE"
+
+#~ msgid "<b>Mouse</b>"
+#~ msgstr "<b>Mouse</b>"
+
+#~ msgid "_Wallpaper"
+#~ msgstr "_Affiancata"
+
+#~ msgid "A preview of the background picture."
+#~ msgstr "Una anteprima della immagine dello sfondo."
+
+#~ msgid "Background Preview"
+#~ msgstr "Anteprima dello sfondo"
+
+#~ msgid "The background picture's file name."
+#~ msgstr "Il nome del file per l'immagine di sfondo."
+
+#~ msgid "Acce_pts URLs"
+#~ msgstr "Acce_tta URL"
+
+#~ msgid "C_ustom Help Browser:"
+#~ msgstr "Esploratore guida personali_zzato:"
+
+#~ msgid "Default Help Browser"
+#~ msgstr "Esploratore guida predefinito"
+
+#~ msgid "Help Browser"
+#~ msgstr "Esploratore guida"
+
+#~ msgid "_Select a Help Browser:"
+#~ msgstr "_Selezionare un esploratore guida:"
+
+#~ msgid ""
+#~ "<b>Default Cursor - Current</b>\n"
+#~ "The default cursor that ships with X"
+#~ msgstr ""
+#~ "<b>Puntatore normale - Attuale</b>\n"
+#~ "Il puntatore normalmente fornito con X"
+
+#~ msgid ""
+#~ "<b>White Cursor - Current</b>\n"
+#~ "The default cursor inverted"
+#~ msgstr ""
+#~ "<b>Puntatore bianco - Corrente</b>\n"
+#~ "Il normale puntatore invertito"
+
+#~ msgid ""
+#~ "<b>Large Cursor - Current</b>\n"
+#~ "Large version of normal cursor"
+#~ msgstr ""
+#~ "<b>Puntatore largo - Corrente</b>\n"
+#~ "Versione grande del puntatore normale"
+
+#~ msgid "<b>Cursor Theme</b>"
+#~ msgstr "<b>Tema del puntatore</b>"
+
+#~ msgid "A preview of what a menubar looks like with these settings."
+#~ msgstr ""
+#~ "Anteprima dell'aspetto di una barra dei menù con queste impostazioni."
+
+#~ msgid "A preview of what a toolbar looks like with these settings."
+#~ msgstr ""
+#~ "Anteprima dell'aspetto di una barra degli strumenti con queste "
+#~ "impostazioni."
+
+#~ msgid "Menus"
+#~ msgstr "Menù"
+
+#~ msgid "Sample menubar:"
+#~ msgstr "Esempio di barra dei menù:"
+
+#~ msgid "Select the toolbar style."
+#~ msgstr "Selezionare lo stile delle barre degli strumenti"
+
+#~ msgid "Toolbar"
+#~ msgstr "Barra degli strumenti"
+
+#~ msgid "Toolbars can be _detached and moved around"
+#~ msgstr "Rendere s_taccabili e spostabili le barre degli strumenti"
+
+#~ msgid "File to play"
+#~ msgstr "File da suonare"
+
+#~ msgid "Quit DrWright?"
+#~ msgstr "Uscire da DrWright?"
+
+#~ msgid "Don't forget to take regular breaks."
+#~ msgstr "Non dimenticare di fare una pausa, ogni tanto."
+
+#~ msgid "Don't Quit"
+#~ msgstr "Non uscire"
+
+#~ msgid "Quit"
+#~ msgstr "Esci"
+
+#, fuzzy
+#~ msgid "Apply theme..."
+#~ msgstr "_Installa tema..."
+
+#~ msgid "Themus component"
+#~ msgstr "Componente themus"
 
 #~ msgid "Bee_p"
 #~ msgstr "Bi_p"

@@ -5,14 +5,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 1.99.10\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-07-07 00:27-0400\n"
+"POT-Creation-Date: 2003-08-11 13:57-0400\n"
 "PO-Revision-Date: 2003-02-09 15:46--300\n"
 "Last-Translator: Vaidotas Zemlys <mpiktas@delfi.lt>\n"
 "Language-Team: Lithuanian <komp_lt@konf.lt>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:1
 #, fuzzy
@@ -68,23 +68,45 @@ msgstr ""
 msgid "Enable support for GNOME assistive technologies at login"
 msgstr ""
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:238
+#: capplets/accessibility/at-properties/main.c:60
+msgid ""
+"No Assistive Technology is available on your system.  The 'gok' package must "
+"be installed in order to get on-screen keyboard support, and the "
+"'gnopernicus' package must be installed for screenreading and magnifying "
+"capabilities."
+msgstr ""
+
+#: capplets/accessibility/at-properties/main.c:62
+msgid ""
+"Not all available assistive technologies are installed on your system.  The "
+"'gok' package must be installed in order to get on-screen keyboard support."
+msgstr ""
+
+#: capplets/accessibility/at-properties/main.c:64
+msgid ""
+"Not all available assistive technologies are installed on your system.  The "
+"'gnopernicus' package must be installed for screenreading and magnifying "
+"capabilities."
+msgstr ""
+
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:236
 #, c-format
 msgid "There was an error launching the mouse preferences dialog: %s"
 msgstr "Įvyko klaida bandant parodyti pelės parinkčių dialogą: %s"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:334
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:392
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:332
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:390
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "Nepavyko importuoti AccessX nuostatų iš bylos '%s'"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:465
-msgid "Select CDE AccessX file"
-msgstr "Pasirink CDE AccessX bylą"
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:463
+#, fuzzy
+msgid "Import Feature Settings File"
+msgstr "_Importuoti ypatybių nustatymus..."
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "Klaviatūra"
@@ -102,47 +124,53 @@ msgstr ""
 "ypatybės neveiks."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
+#: capplets/font/font-properties.glade.h:1
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:1
+#: capplets/mouse/gnome-mouse-properties.glade.h:1
+#: capplets/ui-properties/gnome-ui-properties.glade.h:1
+#, fuzzy
+msgid "    "
+msgstr "      "
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:1
 #: capplets/file-types/file-types-properties.glade.h:1
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:2
 #: capplets/network/gnome-network-preferences.glade.h:2
 #: capplets/theme-switcher/theme-install.glade.h:1
 #: capplets/theme-switcher/theme-properties.glade.h:1
 msgid "*"
 msgstr "*"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
 #, fuzzy
 msgid "<b>Enable Bo_unce Keys</b>"
 msgstr "Le_isti grąžinimo klavišus"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
 #, fuzzy
 msgid "<b>Enable Slo_w Keys</b>"
 msgstr "Leisti _lėtus klavišus"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
 #, fuzzy
 msgid "<b>Enable _Mouse Keys</b>"
 msgstr "Leisti _pelės klavišus"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
 #, fuzzy
 msgid "<b>Enable _Repeat Keys</b>"
 msgstr "Leisti _pelės klavišus"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
 #, fuzzy
 msgid "<b>Enable _Sticky Keys</b>"
 msgstr "Leisti _kibius klavišus"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
 #, fuzzy
 msgid "<b>Features</b>"
 msgstr "Ypatybės"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
-msgid "<b>Mouse</b>"
-msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
 #, fuzzy
@@ -214,8 +242,8 @@ msgid "Ma_ximum pointer speed:"
 msgstr "Di_džiausias žymeklio greitis:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
-#: capplets/mouse/mouse.desktop.in.h:1
-msgid "Mouse"
+#, fuzzy
+msgid "Mouse Keys"
 msgstr "Pelė"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
@@ -239,7 +267,7 @@ msgstr ""
 "pačių klavišų paspaudimų."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
 msgid "S_peed:"
 msgstr "G_reitis:"
 
@@ -268,6 +296,7 @@ msgid "_Only accept keys held for:"
 msgstr "_Reaguoti į klavišus jei jie nuspausti:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "_Type to test settings:"
 msgstr "Paspausdink nustatymų _patikrinimui:"
 
@@ -296,136 +325,158 @@ msgid "pixels/second"
 msgstr "taškų/sekundžių"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
-#: capplets/mouse/gnome-mouse-properties.glade.h:26
+#: capplets/mouse/gnome-mouse-properties.c:133
+#: capplets/mouse/gnome-mouse-properties.glade.h:27
 #: capplets/windows/gnome-window-properties.glade.h:7
 msgid "seconds"
 msgstr "sekundžių"
 
 #. solid
 #: capplets/background/background-properties-capplet.c:228
-msgid "C_olor:"
+#, fuzzy
+msgid "Co_lor:"
 msgstr "_Spalva"
 
 #. horiz
 #: capplets/background/background-properties-capplet.c:232
-msgid "_Left Color:"
+#, fuzzy
+msgid "_Left color:"
 msgstr "_Kairioji spalva"
 
 #: capplets/background/background-properties-capplet.c:233
-msgid "_Right Color:"
+#, fuzzy
+msgid "_Right color:"
 msgstr "_Dešinioji spalva"
 
 #. vert
 #: capplets/background/background-properties-capplet.c:236
-msgid "_Top Color:"
+#, fuzzy
+msgid "Top co_lor:"
 msgstr "_Viršutinė spalva"
 
 #: capplets/background/background-properties-capplet.c:237
-msgid "_Bottom Color:"
+#, fuzzy
+msgid "_Bottom color:"
 msgstr "_Apatinė spalva"
 
 #: capplets/background/background-properties-capplet.c:398
-msgid "_Wallpaper"
-msgstr "_Pakartotas"
+#, fuzzy
+msgid "_Tile"
+msgstr "_Byla"
 
 #: capplets/background/background-properties-capplet.c:398
-msgid "C_entered"
+#, fuzzy
+msgid "C_enter"
 msgstr "_Viduryje"
 
 #: capplets/background/background-properties-capplet.c:398
-msgid "_Scaled"
+#, fuzzy
+msgid "Sc_ale"
 msgstr "_Padidintas"
 
 #: capplets/background/background-properties-capplet.c:398
-msgid "Stretc_hed"
+#, fuzzy
+msgid "_Stretch"
 msgstr "_Ištemptas"
 
 #: capplets/background/background-properties-capplet.c:398
 msgid "_No Picture"
 msgstr "_Nerodomas"
 
-#: capplets/background/background-properties-capplet.c:433
-msgid "Select _picture:"
-msgstr "_Pasirink paveikslėlį:"
-
-#: capplets/background/background-properties-capplet.c:567
+#: capplets/background/background-properties-capplet.c:559
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:834
-#: capplets/keyboard/gnome-keyboard-properties.c:222
-#: capplets/mouse/gnome-mouse-properties.c:716
-#: capplets/sound/sound-properties-capplet.c:214
+#: capplets/default-applications/gnome-default-applications-properties.c:730
+#: capplets/keyboard/gnome-keyboard-properties.c:218
+#: capplets/mouse/gnome-mouse-properties.c:806
+#: capplets/sound/sound-properties-capplet.c:212
 msgid "Retrieve and store legacy settings"
 msgstr "Gauti ir įrašyti pasenusias nuostatas"
 
-#: capplets/background/background-properties-capplet.c:593
+#: capplets/background/background-properties-capplet.c:585
 #: capplets/background/background-properties.glade.h:2
 msgid "Background Preferences"
 msgstr "Fono parinktys"
 
 #: capplets/background/background-properties.glade.h:1
-msgid "A preview of the background picture."
-msgstr "Fono paveikslėlio peržiūra."
-
-#: capplets/background/background-properties.glade.h:3
-msgid "Background Preview"
-msgstr "Fono peržiūra"
-
-#: capplets/background/background-properties.glade.h:4
-msgid "Background _Style:"
+#, fuzzy
+msgid "Bac_kground style:"
 msgstr "Fono _stilius"
 
-#: capplets/background/background-properties.glade.h:5
+#: capplets/background/background-properties.glade.h:3
+msgid "E-Mail"
+msgstr ""
+
+#: capplets/background/background-properties.glade.h:4
 msgid "Horizontal gradient"
 msgstr "Horizontalus perėjimas"
 
-#: capplets/background/background-properties.glade.h:6
+#: capplets/background/background-properties.glade.h:5
 msgid "Pick a color"
 msgstr "Pasirink spalvą"
 
-#: capplets/background/background-properties.glade.h:7
-msgid "Picture Options:"
+#: capplets/background/background-properties.glade.h:6
+#, fuzzy
+msgid "Picture _options:"
 msgstr "Paveikslėlio parinktys:"
 
-#: capplets/background/background-properties.glade.h:8
-#: libbackground/preview-file-selection.c:212
-msgid "Preview"
-msgstr "Peržiūra"
-
-#: capplets/background/background-properties.glade.h:9
+#: capplets/background/background-properties.glade.h:7
 msgid "Primary Color"
 msgstr "Pirmoji spalva"
 
-#: capplets/background/background-properties.glade.h:10
+#: capplets/background/background-properties.glade.h:8
 msgid "Secondary Color"
 msgstr "Antroji spalva"
 
-#: capplets/background/background-properties.glade.h:11
+#: capplets/background/background-properties.glade.h:9
+msgid "Select _picture:"
+msgstr "_Pasirink paveikslėlį:"
+
+#: capplets/background/background-properties.glade.h:10
 msgid "Solid color"
 msgstr "Vientisa spalva"
 
-#: capplets/background/background-properties.glade.h:12
-msgid "The background picture's file name."
-msgstr "Fono paveikslėlio bylos vardas."
-
-#: capplets/background/background-properties.glade.h:13
+#: capplets/background/background-properties.glade.h:11
 msgid "To set the background picture, drop an image or click to browse."
 msgstr ""
 "Kad nustatytum fono piešinį, numesk paveikslėlį arba paspaudęs čia jį "
 "susirask"
 
-#: capplets/background/background-properties.glade.h:14
+#: capplets/background/background-properties.glade.h:12
 msgid "Vertical gradient"
 msgstr "Vertikalus perėjimas"
 
-#: capplets/background/background-properties.glade.h:15
-msgid ""
-"You can drag image files\n"
-"into the window to set the \n"
-"background picture."
+#: capplets/background/background-properties.glade.h:13
+#, fuzzy
+msgid "You can drag image files into the window to set the background picture."
 msgstr ""
 "Tu gali atitempti paveikslėlių\n"
 "bylas į šį langą, kad pakeistum\n"
 "fono paveikslėlį."
+
+#: capplets/background/background-properties.glade.h:14
+#, fuzzy
+msgid "radiobutton1"
+msgstr "Perjungiklis 1"
+
+#: capplets/background/background-properties.glade.h:15
+#, fuzzy
+msgid "radiobutton2"
+msgstr "Perjungiklis 2"
+
+#: capplets/background/background-properties.glade.h:16
+#, fuzzy
+msgid "radiobutton3"
+msgstr "Perjungiklis 1"
+
+#: capplets/background/background-properties.glade.h:17
+#, fuzzy
+msgid "radiobutton4"
+msgstr "Perjungiklis 1"
+
+#: capplets/background/background-properties.glade.h:18
+#, fuzzy
+msgid "radiobutton5"
+msgstr "Perjungiklis 1"
 
 #: capplets/background/background.desktop.in.h:1
 msgid "Background"
@@ -612,7 +663,7 @@ msgstr "Property editor data freeing callback"
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr "Callback to be issued when property editor object data is to be freed"
 
-#: capplets/common/gconf-property-editor.c:1531
+#: capplets/common/gconf-property-editor.c:1541
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -625,7 +676,7 @@ msgstr ""
 "Įsitikinkite kad byla egzistuoja ir pabandykite dar kartą, arba pasirinkite "
 "kitą piešinį fonui."
 
-#: capplets/common/gconf-property-editor.c:1539
+#: capplets/common/gconf-property-editor.c:1549
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -638,12 +689,12 @@ msgstr ""
 "\n"
 "Pasirinkite vietoj šio kitą piešinį"
 
-#: capplets/common/gconf-property-editor.c:1630
+#: capplets/common/gconf-property-editor.c:1640
 msgid "Please select an image."
 msgstr "Pasirinkite kokį nors piešinį."
 
 #: capplets/default-applications/default-applications.desktop.in.h:1
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:22
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:18
 msgid "Preferred Applications"
 msgstr "Pageidaujamos programos"
 
@@ -651,93 +702,160 @@ msgstr "Pageidaujamos programos"
 msgid "Select your default applications"
 msgstr "Nustatyti sau įprastas programas"
 
-#: capplets/default-applications/gnome-default-applications-properties.c:114
+#: capplets/default-applications/gnome-default-applications-properties.c:108
 msgid "Please specify a name and a command for this editor."
 msgstr "Prašom nurodyti šio redaktoriaus pavadinimą ir komandą."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:2
-msgid "Acce_pts URLs"
-msgstr "Priima _URL"
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:39
+msgid "Epiphany"
+msgstr ""
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:3
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:40
+msgid "Galeon"
+msgstr ""
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:41
+msgid "Encompass"
+msgstr ""
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:42
+msgid "Mozilla/Netscape 6"
+msgstr ""
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:43
+msgid "Netscape Communicator"
+msgstr ""
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:44
+msgid "Konqueror"
+msgstr ""
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:45
+#, fuzzy
+msgid "Lynx Text Browser"
+msgstr "Web naršyklė"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:46
+#, fuzzy
+msgid "Links Text Browser"
+msgstr "Web naršyklė"
+
+#. The code in gnome-default-applications-properties.c makes sure
+#. * there is only one (the first entry in this list) Evolution entry
+#. * in the list shown to the user
+#.
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:55
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:56
+#, fuzzy
+msgid "Evolution Mail Reader"
+msgstr "_Tinkinta pagalbos naršyklė:"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:57
+msgid "Balsa"
+msgstr ""
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:58
+msgid "KMail"
+msgstr ""
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:59
+msgid "Mozilla Mail"
+msgstr ""
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:60
+msgid "Mutt"
+msgstr ""
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:66
+#, fuzzy
+msgid "Gnome Terminal"
+msgstr "Terminalas"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:67
+#, fuzzy
+msgid "Standard XTerminal"
+msgstr "Paleisti t_erminale"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:68
+msgid "NXterm"
+msgstr ""
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:69
+msgid "RXVT"
+msgstr ""
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:70
+#, fuzzy
+msgid "ETerm"
+msgstr "Terminalas"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:2
 msgid "Add..."
 msgstr "Pridėti..."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:4
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:3
 msgid "C_ustom Editor"
 msgstr "_Tinkintas redaktorius:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:5
-msgid "C_ustom Help Browser:"
-msgstr "_Tinkinta pagalbos naršyklė:"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:6
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:4
 #, fuzzy
 msgid "C_ustom Mail Reader:"
 msgstr "_Tinkinta pagalbos naršyklė:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:7
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:5
 msgid "C_ustom Terminal:"
 msgstr "_Tinkintas terminalas:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:8
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:6
 msgid "C_ustom Web Browser:"
 msgstr "_Tinkinta naršyklė:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:9
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:7
 msgid "Co_mmand:"
 msgstr "Ko_manda:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:10
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:8
 msgid "Custom Editor Properties"
 msgstr "Tinkinto redaktoriaus savybės"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:11
-msgid "Default Help Browser"
-msgstr "Įprasta pagalbos naršyklė"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:12
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:9
 #, fuzzy
 msgid "Default Mail Reader"
 msgstr "Įprasta langų tvarkyklė"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:13
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:10
 msgid "Default Terminal"
 msgstr "Įprastas terminalas"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:14
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:11
 msgid "Default Text Editor"
 msgstr "Įprastas redaktorius"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:15
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:12
 msgid "Default Web Browser"
 msgstr "Įprasta web naršyklė"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:16
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:13
 msgid "Default Window Manager"
 msgstr "Įprasta langų tvarkyklė"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:17
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:14
 msgid "Delete"
 msgstr "Ištrinti"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:18
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:15
 msgid "E_xec Flag:"
 msgstr "Paleidimo _raktas:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:19
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:16
 msgid "Edit..."
 msgstr "Keisti..."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:20
-msgid "Help Browser"
-msgstr "Pagalbos naršyklė"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:21
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:17
 msgid "Mail Reader"
 msgstr ""
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:23
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:19
 msgid ""
 "Select the window manager you want.  You will need to hit apply, wave the "
 "magic wand, and do a magic dance for it to work."
@@ -745,73 +863,69 @@ msgstr ""
 "Pasirinkite norimą langų tvarkyklę. Reikės nuspausti pritaikyti, pamosuoti "
 "burtų lazdelę, sušokti magišką šokį, kad tai suveiktų."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:24
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:20
 msgid "Start in T_erminal"
 msgstr "Paleisti t_erminale"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:25
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:21
 msgid "Terminal"
 msgstr "Terminalas"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:26
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:22
 msgid "Text Editor"
 msgstr "Tekstų redaktorius"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:27
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:23
 msgid "This application can open _URIs"
 msgstr "Ši programa gali atidaryti _URI"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:28
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:24
 msgid "This application can open _multiple files"
 msgstr "Ši programa gali atidaryti _kelias bylas"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:29
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:25
 msgid "This application needs to be run in a _shell"
 msgstr "Ši programa turi būti paleista _shell'e"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:30
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:26
 msgid "Understands _Netscape Remote Control"
 msgstr "Supranta _Netscape Remote Control"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:31
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:27
 msgid "Use this _editor to open text files in the file manager"
 msgstr "Naudoti šį r_edaktorių atidarant tekstines bylas bylų tvarkyklėje"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:32
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:28
 msgid "Web Browser"
 msgstr "Web naršyklė"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:33
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:29
 msgid "Window Manager"
 msgstr "Langų tvarkyklė"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:34
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:30
 #: capplets/file-types/file-types-properties.glade.h:22
 msgid "_Name:"
 msgstr "_Pavadinimas:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:35
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:31
 msgid "_Properties..."
 msgstr "_Savybės..."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:36
-msgid "_Select a Help Browser:"
-msgstr "_Pasirink pagalbos naršyklę:"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:37
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:32
 #, fuzzy
 msgid "_Select a Mail Reader:"
 msgstr "_Pasirink pagalbos naršyklę:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:38
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:33
 msgid "_Select a Terminal:"
 msgstr "_Pasirink terminalą:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:39
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:34
 msgid "_Select a Web Browser:"
 msgstr "_Pasirink web naršyklę:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:40
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:35
 msgid "_Select an Editor:"
 msgstr "_Pasirink redaktorių:"
 
@@ -946,56 +1060,57 @@ msgstr ""
 msgid "Screen Resolution"
 msgstr ""
 
-#: capplets/display/main.c:261
+#: capplets/display/main.c:274
 #, c-format
 msgid "%d Hz"
 msgstr ""
 
-#: capplets/display/main.c:367
-msgid "Resolution:"
+#: capplets/display/main.c:376
+#, fuzzy
+msgid "_Resolution:"
+msgstr "_Aprašymas:"
+
+#: capplets/display/main.c:395
+msgid "Re_fresh rate:"
 msgstr ""
 
-#: capplets/display/main.c:385
-msgid "Refresh rate:"
-msgstr ""
-
-#: capplets/display/main.c:405
+#: capplets/display/main.c:416
 #, fuzzy
 msgid "Default Settings"
 msgstr "Įprastas terminalas"
 
-#: capplets/display/main.c:407
+#: capplets/display/main.c:418
 #, fuzzy, c-format
 msgid "Screen %d Settings\n"
 msgstr "Papildomos nuostatos"
 
-#: capplets/display/main.c:432
+#: capplets/display/main.c:443
 #, fuzzy
 msgid "Screen Resolution Preferences"
 msgstr "Garso parinktys"
 
-#: capplets/display/main.c:460
+#: capplets/display/main.c:475
 #, c-format
 msgid "Make default for this _computer (%s) only"
 msgstr ""
 
-#: capplets/display/main.c:478
+#: capplets/display/main.c:493
 #, fuzzy
 msgid "Options"
 msgstr "Veiksmai"
 
-#: capplets/display/main.c:499
+#: capplets/display/main.c:514
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d seconds the previous "
 "settings will be restored."
 msgstr ""
 
-#: capplets/display/main.c:549
+#: capplets/display/main.c:563
 msgid "Do you want to keep this resolution?"
 msgstr ""
 
-#: capplets/display/main.c:586
+#: capplets/display/main.c:588
 msgid "Use _previous resolution"
 msgstr ""
 
@@ -1003,16 +1118,16 @@ msgstr ""
 msgid "_Keep resolution"
 msgstr ""
 
-#: capplets/display/main.c:747
+#: capplets/display/main.c:739
 msgid ""
-"The Xserver doesn't support the XRandR extension, runtime resolution changes "
-"aren't possible."
+"The XServer does not support the XRandR extension.  Runtime resolution "
+"changes to the display size are not available."
 msgstr ""
 
-#: capplets/display/main.c:759
+#: capplets/display/main.c:747
 msgid ""
-"The version of the XRandR extension is incompatible with this program, "
-"runtime resolution changes aren't possible."
+"The version of the XRandR extension is incompatible with this program. "
+"Runtime changes to the display size are not available."
 msgstr ""
 
 #: capplets/file-types/file-types-capplet.c:196
@@ -1332,135 +1447,142 @@ msgstr "Šriftai"
 msgid "Select fonts for the desktop"
 msgstr "Nustatyti darbalaukio ikonų šriftą"
 
-#: capplets/font/font-properties.glade.h:1
+#: capplets/font/font-properties.glade.h:2
+#, fuzzy
+msgid "<b>Font Rendering</b>"
+msgstr "Šriftų vaizdavimas"
+
+#: capplets/font/font-properties.glade.h:3
 msgid "Best _shapes"
 msgstr "Geriausios _formos"
 
-#: capplets/font/font-properties.glade.h:2
+#: capplets/font/font-properties.glade.h:4
 msgid "Best co_ntrast"
 msgstr "Geriausias ko_ntrastas"
 
-#: capplets/font/font-properties.glade.h:3
+#: capplets/font/font-properties.glade.h:5
 msgid "De_tails..."
 msgstr "De_taliai..."
 
-#: capplets/font/font-properties.glade.h:4
+#: capplets/font/font-properties.glade.h:6
 msgid "Font Preferences"
 msgstr "Šriftų parinktys"
 
-#: capplets/font/font-properties.glade.h:5
-msgid "Font Rendering"
-msgstr "Šriftų vaizdavimas"
-
-#: capplets/font/font-properties.glade.h:6
+#: capplets/font/font-properties.glade.h:7
 msgid "Font Rendering Details"
 msgstr "Šriftų atvaizdavimo detalės"
 
-#: capplets/font/font-properties.glade.h:7
+#: capplets/font/font-properties.glade.h:8
 msgid "G_rayscale"
 msgstr "P_ilkumo pustoniai"
 
-#: capplets/font/font-properties.glade.h:8
+#: capplets/font/font-properties.glade.h:9
 #, fuzzy
 msgid "Go to font folder"
 msgstr "_Eiti į temų aplanką"
 
-#: capplets/font/font-properties.glade.h:9
+#: capplets/font/font-properties.glade.h:10
 #, fuzzy
 msgid "Hinting:"
 msgstr "Hinting:"
 
-#: capplets/font/font-properties.glade.h:10
+#: capplets/font/font-properties.glade.h:11
 msgid "N_one"
 msgstr "J_okios"
 
-#: capplets/font/font-properties.glade.h:11
+#: capplets/font/font-properties.glade.h:12
 msgid "Resolution (_dots per inch):"
 msgstr "Skyra (_taškų į colį):"
 
-#: capplets/font/font-properties.glade.h:12
+#: capplets/font/font-properties.glade.h:13
 msgid "Set the font for applications"
 msgstr "Nustatyti programose naudojamą šriftą"
 
-#: capplets/font/font-properties.glade.h:13
+#: capplets/font/font-properties.glade.h:14
 msgid "Set the font for the icons on the desktop"
 msgstr "Nustatyti darbalaukio ikonų šriftą"
 
-#: capplets/font/font-properties.glade.h:14
+#: capplets/font/font-properties.glade.h:15
 msgid "Set the monospace font for terminals and similar applications"
 msgstr ""
 "Nustatyti terminaluose ir panašiose programose naudojamą lygiaplotį šriftą"
 
-#: capplets/font/font-properties.glade.h:15
+#: capplets/font/font-properties.glade.h:16
 msgid "Smoothing:"
 msgstr "Glodinimas:"
 
-#: capplets/font/font-properties.glade.h:16
+#: capplets/font/font-properties.glade.h:17
 #, fuzzy
 msgid "Sub_pixel (LCDs)"
 msgstr "Sub_pixel (LCDs)"
 
-#: capplets/font/font-properties.glade.h:17
+#: capplets/font/font-properties.glade.h:18
 #, fuzzy
 msgid "Sub_pixel smoothing (LCDs)"
 msgstr "Sub_pixel smoothing (LCDs)"
 
-#: capplets/font/font-properties.glade.h:18
+#: capplets/font/font-properties.glade.h:19
 #, fuzzy
 msgid "Subpixel order:"
 msgstr "Subpixel order:"
 
-#: capplets/font/font-properties.glade.h:19
+#: capplets/font/font-properties.glade.h:20
 #, fuzzy
 msgid "VB_GR"
 msgstr "VB_GR"
 
-#: capplets/font/font-properties.glade.h:20
+#: capplets/font/font-properties.glade.h:21
 msgid "_Application font:"
 msgstr "_Programų šriftas:"
 
-#: capplets/font/font-properties.glade.h:21
+#: capplets/font/font-properties.glade.h:22
 #, fuzzy
 msgid "_BGR"
 msgstr "_BGR"
 
-#: capplets/font/font-properties.glade.h:22
+#: capplets/font/font-properties.glade.h:23
 msgid "_Desktop font:"
 msgstr "_Darbalaukio šriftas:"
 
-#: capplets/font/font-properties.glade.h:23
+#: capplets/font/font-properties.glade.h:24
 msgid "_Full"
 msgstr "P_ilna"
 
-#: capplets/font/font-properties.glade.h:24
+#: capplets/font/font-properties.glade.h:25
+#: capplets/mouse/gnome-mouse-properties.glade.h:22
 msgid "_Medium"
 msgstr "_Vidutinė"
 
-#: capplets/font/font-properties.glade.h:25
+#: capplets/font/font-properties.glade.h:26
 msgid "_Monochrome"
 msgstr "_Vienspalvis"
 
-#: capplets/font/font-properties.glade.h:26
+#: capplets/font/font-properties.glade.h:27
 msgid "_None"
 msgstr "_Jokios"
 
-#: capplets/font/font-properties.glade.h:27
+#: capplets/font/font-properties.glade.h:28
 msgid "_RGB"
 msgstr "_RGB"
 
-#: capplets/font/font-properties.glade.h:28
+#: capplets/font/font-properties.glade.h:29
 msgid "_Slight"
 msgstr "_Nežymus"
 
-#: capplets/font/font-properties.glade.h:29
+#: capplets/font/font-properties.glade.h:30
 msgid "_Terminal font:"
 msgstr "Š_riftas terminalui:"
 
-#: capplets/font/font-properties.glade.h:30
+#: capplets/font/font-properties.glade.h:31
+#, fuzzy
+msgid "_Use Font"
+msgstr "Šriftai"
+
+#: capplets/font/font-properties.glade.h:32
 msgid "_VRGB"
 msgstr "_VRGB"
 
-#: capplets/font/font-properties.glade.h:31
+#: capplets/font/font-properties.glade.h:33
 msgid "_Window title font:"
 msgstr "Š_riftas langų antraštėms"
 
@@ -1488,7 +1610,7 @@ msgstr "Greitiklio tipas"
 
 #: capplets/keybindings/eggcellrendererkeys.c:219
 #: capplets/keybindings/gnome-keybinding-properties.c:204
-#: libbackground/applier.c:588 typing-break/drwright.c:446
+#: libbackground/applier.c:588 typing-break/drwright.c:439
 msgid "Disabled"
 msgstr "Išjungtas"
 
@@ -1576,110 +1698,114 @@ msgstr "Priskirti komandas susiejimo klavišams"
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "Įvyko klaida bandant parodyti klaviatūros įtaisą: %s"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:201
+#: capplets/keyboard/gnome-keyboard-properties.c:195
 msgid "_Accessibility"
 msgstr "_Prieinamumas"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:218
-#: capplets/keyboard/gnome-keyboard-properties.c:220
+#: capplets/keyboard/gnome-keyboard-properties.c:214
+#: capplets/keyboard/gnome-keyboard-properties.c:216
+#: capplets/sound/sound-properties-capplet.c:208
 #: capplets/sound/sound-properties-capplet.c:210
-#: capplets/sound/sound-properties-capplet.c:212
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
 "Pritaikyk nustatymus ir išeik (tikrai suderinamumui; dabar tvarkoma demono)"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:1
+#: capplets/keyboard/gnome-keyboard-properties.c:220
+msgid "Start the page with the typing break settings showing"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
 #, fuzzy
-msgid "<b>Cursor Blinks</b>"
+msgid "<b>Cursor Blinking</b>"
 msgstr "Žymeklis mirksi"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:2
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
 #, fuzzy
 msgid "<b>Repeat Keys</b>"
 msgstr "Leisti _pelės klavišus"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
 msgid "<b>_Lock screen to enforce typing break</b>"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>Greitas</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>Ilgas</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>Trumpas</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Lėtas</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
-msgid "Check if breaks are allowed to be postponed"
-msgstr ""
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
-msgid "Duration of the break when typing is disallowed"
-msgstr ""
-
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:10
-msgid "Duration of work before forcing a break"
+msgid "All_ow postponing of breaks"
 msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+msgid "Check if breaks are allowed to be postponed"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#, fuzzy
+msgid "Cursor _blinks in text boxes and fields"
+msgstr "_Mirksi teksto laukuose ir langeliuose"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+msgid "Duration of the break when typing is disallowed"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
+msgid "Duration of work before forcing a break"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
 #, fuzzy
 msgid "Key presses _repeat when key is held down"
 msgstr "Klaviatūra _kartoja laikant nuspaustą klavišą"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
 msgid "Keyboard Preferences"
 msgstr "Klaviatūros parinktys"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
 msgid ""
 "Lock screen after a certain duration to help prevent repetitive keyboard use "
 "injuries"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
 msgid "Typing Break"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
 msgid "_Accessibility..."
 msgstr "_Prieinamumas..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
-msgid "_Allow postponing of breaks"
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+msgid "_Break interval lasts:"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
-msgid "_Break interval lasts"
-msgstr ""
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
-#, fuzzy
-msgid "_Cursor blinks in text boxes and fields"
-msgstr "_Mirksi teksto laukuose ir langeliuose"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "_Delay:"
 msgstr "_Delsa:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
 msgid "_Speed:"
 msgstr "_Greitis:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
-msgid "_Work interval lasts"
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
+msgid "_Work interval lasts:"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
 msgid "minutes"
 msgstr ""
 
@@ -1687,173 +1813,176 @@ msgstr ""
 msgid "Set your keyboard preferences"
 msgstr "Nustatyti klaviatūros parinktis"
 
-#: capplets/mouse/gnome-mouse-properties.c:439
-#, c-format
-msgid ""
-"<b>Unknown Cursor</b>\n"
-"%s"
+#: capplets/mouse/gnome-mouse-properties.c:496
+#, fuzzy
+msgid "Unknown Cursor"
 msgstr ""
 "<b>Nežinomas žymeklis</b>\n"
 "%s"
 
-#: capplets/mouse/gnome-mouse-properties.c:541
-msgid ""
-"<b>Default Cursor - Current</b>\n"
-"The default cursor that ships with X"
+#: capplets/mouse/gnome-mouse-properties.c:602
+msgid "Default Cursor - Current"
 msgstr ""
-"<b>Įprastas žymeklis - Esamas</b>\n"
-"Įprastas žymeklis, ateinantis su X'ais"
 
-#: capplets/mouse/gnome-mouse-properties.c:544
-msgid ""
-"<b>Default Cursor</b>\n"
-"The default cursor that ships with X"
+#: capplets/mouse/gnome-mouse-properties.c:602
+#: capplets/mouse/gnome-mouse-properties.c:605
+#, fuzzy
+msgid "The default cursor that ships with X"
 msgstr ""
 "<b>Įprastas žymeklis</b>\n"
 "Įprastas žymeklis, ateinantis su X'ais"
 
-#: capplets/mouse/gnome-mouse-properties.c:562
-msgid ""
-"<b>White Cursor - Current</b>\n"
-"The default cursor inverted"
-msgstr ""
-"<b>Baltas žymeklis - Esamas</b>\n"
-"Invertuotas įprastas žymeklis"
+#: capplets/mouse/gnome-mouse-properties.c:605
+#, fuzzy
+msgid "Default Cursor"
+msgstr "Įprasta web naršyklė"
 
-#: capplets/mouse/gnome-mouse-properties.c:565
-msgid ""
-"<b>White Cursor</b>\n"
-"The default cursor inverted"
+#: capplets/mouse/gnome-mouse-properties.c:623
+msgid "White Cursor - Current"
+msgstr ""
+
+#: capplets/mouse/gnome-mouse-properties.c:623
+#: capplets/mouse/gnome-mouse-properties.c:626
+#, fuzzy
+msgid "The default cursor inverted"
 msgstr ""
 "<b>Baltas žymeklis</b>\n"
 "Invertuotas įprastas žymeklis"
 
-#: capplets/mouse/gnome-mouse-properties.c:583
-msgid ""
-"<b>Large Cursor - Current</b>\n"
-"Large version of normal cursor"
-msgstr ""
-"<b>Didelis žymeklis - Esamas</b>\n"
-"Įprasto žymeklio didelė versija"
+#: capplets/mouse/gnome-mouse-properties.c:626
+#, fuzzy
+msgid "White Cursor"
+msgstr "Žymekliai"
 
-#: capplets/mouse/gnome-mouse-properties.c:586
-msgid ""
-"<b>Large Cursor</b>\n"
-"Large version of normal cursor"
+#: capplets/mouse/gnome-mouse-properties.c:645
+msgid "Large Cursor - Current"
+msgstr ""
+
+#: capplets/mouse/gnome-mouse-properties.c:645
+#: capplets/mouse/gnome-mouse-properties.c:648
+#, fuzzy
+msgid "Large version of normal cursor"
 msgstr ""
 "<b>Didelis žymeklis</b>\n"
 "Įprasto žymeklio didelė versija"
 
-#: capplets/mouse/gnome-mouse-properties.c:604
-msgid ""
-"<b>Large White Cursor - Current</b>\n"
-"Large version of white cursor"
+#: capplets/mouse/gnome-mouse-properties.c:648
+#, fuzzy
+msgid "Large Cursor"
+msgstr "Žymekliai"
+
+#: capplets/mouse/gnome-mouse-properties.c:667
+#, fuzzy
+msgid "Large White Cursor - Current"
 msgstr ""
 "<b>Didelis baltas žymeklis - Esamas</b>\n"
 "Balto žymeklio didelė versija"
 
-#: capplets/mouse/gnome-mouse-properties.c:607
-msgid ""
-"<b>Large White Cursor</b>\n"
-"Large version of white cursor"
+#: capplets/mouse/gnome-mouse-properties.c:667
+#: capplets/mouse/gnome-mouse-properties.c:670
+#, fuzzy
+msgid "Large version of white cursor"
 msgstr ""
 "<b>Didelis baltas žymeklis</b>\n"
 "Balto žymeklio didelė versija"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:1
-#, fuzzy
-msgid "    "
-msgstr "      "
+#: capplets/mouse/gnome-mouse-properties.c:670
+msgid "Large White Cursor"
+msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:2
+#: capplets/mouse/gnome-mouse-properties.c:747
 #, fuzzy
-msgid "<b>Cursor Theme</b>"
+msgid "Cursor Size"
+msgstr "Žymekliai"
+
+#: capplets/mouse/gnome-mouse-properties.c:756
+#, fuzzy
+msgid "Cursor Theme"
 msgstr "Žymeklio tema"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:3
+#: capplets/mouse/gnome-mouse-properties.glade.h:2
 msgid "<b>Double-Click Timeout </b>"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:4
+#: capplets/mouse/gnome-mouse-properties.glade.h:3
 #, fuzzy
 msgid "<b>Drag and Drop</b>"
 msgstr "Drag and Drop"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:5
+#: capplets/mouse/gnome-mouse-properties.glade.h:4
 #, fuzzy
 msgid "<b>Locate Pointer</b>"
 msgstr "Rasti žymeklį"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:6
+#: capplets/mouse/gnome-mouse-properties.glade.h:5
 #, fuzzy
 msgid "<b>Mouse Orientation</b>"
 msgstr "Pelės padėtis"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:7
+#: capplets/mouse/gnome-mouse-properties.glade.h:6
 #, fuzzy
 msgid "<b>Speed</b>"
 msgstr "Ypatybės"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:8
+#: capplets/mouse/gnome-mouse-properties.glade.h:7
 msgid ""
 "<i><small><b>Note:</b> Changes to this setting will not take effect until "
 "you next log in.</small></i>"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:9
+#: capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid "<i>Fast</i>"
 msgstr "<i>Greitas</i>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:10
+#: capplets/mouse/gnome-mouse-properties.glade.h:9
 msgid "<i>High</i>"
 msgstr "<i>Aukštas</i>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:11
+#: capplets/mouse/gnome-mouse-properties.glade.h:10
 msgid "<i>Large</i>"
 msgstr "<i>Didelis</i>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:12
+#: capplets/mouse/gnome-mouse-properties.glade.h:11
 msgid "<i>Low</i>"
 msgstr "<i>Žemas</i>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:13
+#: capplets/mouse/gnome-mouse-properties.glade.h:12
 msgid "<i>Slow</i>"
 msgstr "<i>Lėtas</i>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:14
+#: capplets/mouse/gnome-mouse-properties.glade.h:13
 msgid "<i>Small</i>"
 msgstr "<i>Mažas</i>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:15
+#: capplets/mouse/gnome-mouse-properties.glade.h:14
 msgid "Buttons"
 msgstr "Mygtukai"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:16
-#, fuzzy
-msgid "Cursor _themes:"
-msgstr "Žymeklio tema"
-
-#: capplets/mouse/gnome-mouse-properties.glade.h:17
+#: capplets/mouse/gnome-mouse-properties.glade.h:15
 msgid "Cursors"
 msgstr "Žymekliai"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:18
+#: capplets/mouse/gnome-mouse-properties.glade.h:16
 msgid "Highlight the _pointer when you press Ctrl"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:19
+#: capplets/mouse/gnome-mouse-properties.glade.h:17
 msgid "Motion"
 msgstr "Judėjimas"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:20
+#: capplets/mouse/gnome-mouse-properties.glade.h:18
 msgid "Mouse Preferences"
 msgstr "Pelės parinktys"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:21
+#: capplets/mouse/gnome-mouse-properties.glade.h:19
 msgid "_Acceleration:"
 msgstr "_Greitumas:"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:22
+#: capplets/mouse/gnome-mouse-properties.glade.h:20
+msgid "_Large"
+msgstr ""
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:21
 msgid "_Left-handed mouse"
 msgstr "_Kairei rankai"
 
@@ -1862,12 +1991,21 @@ msgid "_Sensitivity:"
 msgstr "_Jautrumas:"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:24
+#, fuzzy
+msgid "_Small"
+msgstr "_Padidintas"
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:25
 msgid "_Threshold:"
 msgstr "_Slenkstis:"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:25
+#: capplets/mouse/gnome-mouse-properties.glade.h:26
 msgid "_Timeout:"
 msgstr ""
+
+#: capplets/mouse/mouse.desktop.in.h:1
+msgid "Mouse"
+msgstr "Pelė"
 
 #: capplets/mouse/mouse.desktop.in.h:2
 msgid "Set your mouse preferences"
@@ -1911,29 +2049,30 @@ msgid "HTTP Proxy Details"
 msgstr "HTTP tarpinės stoties nuostatos"
 
 #: capplets/network/gnome-network-preferences.glade.h:9
+#, fuzzy
+msgid "H_TTP proxy:"
+msgstr "_HTTP tarpinė stotis:"
+
+#: capplets/network/gnome-network-preferences.glade.h:10
 msgid "Network Proxy Configuration"
 msgstr "Tarpinės tinklo stoties tvarkymas"
 
-#: capplets/network/gnome-network-preferences.glade.h:10
+#: capplets/network/gnome-network-preferences.glade.h:11
 msgid "Port:"
 msgstr "Prievadas:"
 
-#: capplets/network/gnome-network-preferences.glade.h:11
+#: capplets/network/gnome-network-preferences.glade.h:12
 #, fuzzy
 msgid "S_ocks host:"
 msgstr "S_ocks host:"
 
-#: capplets/network/gnome-network-preferences.glade.h:12
+#: capplets/network/gnome-network-preferences.glade.h:13
 msgid "_Details"
 msgstr "_Detalės"
 
-#: capplets/network/gnome-network-preferences.glade.h:13
+#: capplets/network/gnome-network-preferences.glade.h:14
 msgid "_FTP proxy:"
 msgstr "_FTP tarpinė stotis:"
-
-#: capplets/network/gnome-network-preferences.glade.h:14
-msgid "_HTTP proxy:"
-msgstr "_HTTP tarpinė stotis:"
 
 #: capplets/network/gnome-network-preferences.glade.h:15
 msgid "_Password:"
@@ -1947,7 +2086,7 @@ msgstr "_Saugi HTTP tarpinė stotis:"
 msgid "_Username:"
 msgstr "Vartotojo _vardas:"
 
-#: capplets/sound/sound-properties-capplet.c:241
+#: capplets/sound/sound-properties-capplet.c:239
 msgid "Sound preferences"
 msgstr "Garso parinktys"
 
@@ -1956,11 +2095,11 @@ msgid "E_nable sound server startup"
 msgstr "_Pradžioje paleisti garsų serverį"
 
 #: capplets/sound/sound-properties.glade.h:2
-msgid "Flash _window titlebar"
+msgid "Flash _entire screen"
 msgstr ""
 
 #: capplets/sound/sound-properties.glade.h:3
-msgid "Flash entire _screen"
+msgid "Flash _window titlebar"
 msgstr ""
 
 #: capplets/sound/sound-properties.glade.h:4
@@ -2217,29 +2356,27 @@ msgstr "Elgsena"
 msgid "Sets the default behavior of GNOME applications"
 msgstr "Nustato įprastą GNOME programų elgseną"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:1
-msgid "A preview of what a menubar looks like with these settings."
-msgstr "Peržiūra, kaip atrodys meniu juosta su tokiomis parinktimis."
-
 #: capplets/ui-properties/gnome-ui-properties.glade.h:2
-msgid "A preview of what a toolbar looks like with these settings."
-msgstr "Peržiūra, kaip atrodys įrankių juosta su tokiomis parinktimis."
+msgid "<b>Behavior and Appearance</b>"
+msgstr ""
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:3
+#, fuzzy
+msgid "<b>Preview</b>"
+msgstr "Ypatybės"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:4
 msgid "C_ut"
 msgstr "Iš_kirpti"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:4
-msgid "Icons Only"
+#: capplets/ui-properties/gnome-ui-properties.glade.h:5
+#, fuzzy
+msgid "Icons only"
 msgstr "Tik ikonos"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:5
+#: capplets/ui-properties/gnome-ui-properties.glade.h:6
 msgid "Menu and Toolbar Preferences"
 msgstr "Meniu ir įrankių juostų parinktys"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:6
-msgid "Menus"
-msgstr "Meniu"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:7
 msgid "New File"
@@ -2250,83 +2387,72 @@ msgid "Open File"
 msgstr "Atidaryti bylą"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:9
-msgid "Sample menubar:"
-msgstr "Pavyzdinė meniu juosta:"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:10
-msgid "Sample toolbar:"
-msgstr "Pavyzdinė įrankių juosta:"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:11
 msgid "Save File"
 msgstr "Išsaugoti bylą"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:12
-msgid "Select the toolbar style."
-msgstr "Pasirink įrankių juostos stilių"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:13
+#: capplets/ui-properties/gnome-ui-properties.glade.h:10
 msgid "Show _icons in menus"
 msgstr "Rodyti meniu _ikonose"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:14
-msgid "Text Below Icons"
+#: capplets/ui-properties/gnome-ui-properties.glade.h:11
+#, fuzzy
+msgid "Text below icons"
 msgstr "Tekstas po ikonomis"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:15
-msgid "Text Beside Icons"
+#: capplets/ui-properties/gnome-ui-properties.glade.h:12
+#, fuzzy
+msgid "Text beside icons"
 msgstr "Tekstas šalia ikonų"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:16
-msgid "Text Only"
+#: capplets/ui-properties/gnome-ui-properties.glade.h:13
+#, fuzzy
+msgid "Text only"
 msgstr "Tik tekstas"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:17
-msgid "Toolbar"
-msgstr "Įrankių juosta"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:18
-msgid "Toolbars can be _detached and moved around"
-msgstr "Įrankių juostos gali būti _atplėštos ir nešiojamos"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:19
-msgid "_Button Labels: "
+#: capplets/ui-properties/gnome-ui-properties.glade.h:14
+#, fuzzy
+msgid "Toolbar _button labels: "
 msgstr "_Mygtukų žymės:"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:20
+#: capplets/ui-properties/gnome-ui-properties.glade.h:15
 msgid "_Copy"
 msgstr "_Kopijuoti"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:21
+#: capplets/ui-properties/gnome-ui-properties.glade.h:16
+#, fuzzy
+msgid "_Detachable toolbars"
+msgstr "Pavyzdinė įrankių juosta:"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:17
 msgid "_Edit"
 msgstr "_Keisti"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:22
+#: capplets/ui-properties/gnome-ui-properties.glade.h:18
 #: control-center/gnomecc-ui.xml.h:5
 msgid "_File"
 msgstr "_Byla"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:23
+#: capplets/ui-properties/gnome-ui-properties.glade.h:19
 msgid "_New"
 msgstr "_Naujas"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:24
+#: capplets/ui-properties/gnome-ui-properties.glade.h:20
 msgid "_Open"
 msgstr "_Atidaryti"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:25
+#: capplets/ui-properties/gnome-ui-properties.glade.h:21
 msgid "_Paste"
 msgstr "Į_dėti"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:26
+#: capplets/ui-properties/gnome-ui-properties.glade.h:22
 msgid "_Print"
 msgstr "_Spausdinti"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:27
+#: capplets/ui-properties/gnome-ui-properties.glade.h:23
 msgid "_Quit"
 msgstr "_Išeiti"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:28
+#: capplets/ui-properties/gnome-ui-properties.glade.h:24
 msgid "_Save"
 msgstr "_Išsaugoti"
 
@@ -2545,7 +2671,7 @@ msgstr "Nepavyko įkelti garso bylos %s kaip pavyzdžio %s"
 msgid "Cannot determine user's home directory"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:180
+#: gnome-settings-daemon/gnome-settings-xsettings.c:202
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "GConf rakto %s tipas %s, bet jo tipas turėtų būti %s\n"
@@ -2598,11 +2724,15 @@ msgstr "Screen on which BGApplier is to draw"
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Negaliu rasti hbox, naudojam paprastą bylų pasirinkimą"
 
-#: libsounds/sound-view.c:128
+#: libbackground/preview-file-selection.c:212
+msgid "Preview"
+msgstr "Peržiūra"
+
+#: libsounds/sound-view.c:130
 msgid "The sound file for this event does not exist."
 msgstr "Nėra garso bylos šiam įvykiui."
 
-#: libsounds/sound-view.c:130
+#: libsounds/sound-view.c:132
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package\n"
@@ -2612,25 +2742,38 @@ msgstr ""
 "Tu tikriausiai norėtum įdiegti gnome-audio paketą\n"
 "su standartiniu garsų rinkiniu."
 
-#: libsounds/sound-view.c:222
+#: libsounds/sound-view.c:176
+#, c-format
+msgid "The file %s is not a valid wav file"
+msgstr ""
+
+#: libsounds/sound-view.c:241
 msgid "Event"
 msgstr "Įvykis"
 
-#: libsounds/sound-view.c:229
-msgid "File to play"
-msgstr "Grojama byla"
+#: libsounds/sound-view.c:250
+#, fuzzy
+msgid "Sound File"
+msgstr "Garsas"
 
-#: libsounds/sound-view.c:244
-msgid "_Sounds"
+#: libsounds/sound-view.c:266
+#, fuzzy
+msgid "_Sounds:"
 msgstr "_Garsai"
 
-#: libsounds/sound-view.c:258
+#: libsounds/sound-view.c:280
+#, fuzzy
+msgid "Sound _file:"
+msgstr "Pasirink garso bylą"
+
+#: libsounds/sound-view.c:284
+#, fuzzy
+msgid "Select Sound File"
+msgstr "Pasirink garso bylą"
+
+#: libsounds/sound-view.c:302
 msgid "_Play"
 msgstr "_Groti"
-
-#: libsounds/sound-view.c:264
-msgid "Select sound file"
-msgstr "Pasirink garso bylą"
 
 #: libwindow-settings/gnome-wm-manager.c:320
 #, c-format
@@ -2739,75 +2882,65 @@ msgid "Take a break!"
 msgstr ""
 
 #. { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
-#: typing-break/drwright.c:138
+#: typing-break/drwright.c:133
 #, fuzzy
 msgid "/_Preferences"
 msgstr "Šriftų parinktys"
 
-#: typing-break/drwright.c:139
+#: typing-break/drwright.c:134
 #, fuzzy
 msgid "/_About"
 msgstr "_Apie"
 
-#: typing-break/drwright.c:141
+#: typing-break/drwright.c:136
 msgid "/_Take a Break"
 msgstr ""
 
-#: typing-break/drwright.c:464
+#: typing-break/drwright.c:457
 #, c-format
 msgid "%d minutes until the next break"
 msgstr ""
 
-#: typing-break/drwright.c:467
+#: typing-break/drwright.c:460
 msgid "One minute until the next break"
 msgstr ""
 
-#: typing-break/drwright.c:469
+#: typing-break/drwright.c:462
 msgid "Less than one minute until the next break"
 msgstr ""
 
-#: typing-break/drwright.c:589
-msgid "Quit DrWright?"
+#: typing-break/drwright.c:576
+#, c-format
+msgid ""
+"Unable to bring up the typing break properties dialog with the following "
+"error: %s"
 msgstr ""
 
-#: typing-break/drwright.c:590
-msgid "Don't forget to take regular breaks."
-msgstr ""
-
-#: typing-break/drwright.c:601
-msgid "Don't Quit"
-msgstr ""
-
-#: typing-break/drwright.c:605
-#, fuzzy
-msgid "Quit"
-msgstr "_Išeiti"
-
-#: typing-break/drwright.c:655
+#: typing-break/drwright.c:616
 msgid "About GNOME Typing Monitor"
 msgstr ""
 
-#: typing-break/drwright.c:679
+#: typing-break/drwright.c:640
 msgid "A computer break reminder."
 msgstr ""
 
-#: typing-break/drwright.c:680
+#: typing-break/drwright.c:641
 msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
 msgstr ""
 
-#: typing-break/drwright.c:681
+#: typing-break/drwright.c:642
 msgid "Eye candy added by Anders Carlsson"
 msgstr ""
 
-#: typing-break/drwright.c:840
+#: typing-break/drwright.c:801
 msgid "Break reminder"
 msgstr ""
 
-#: typing-break/main.c:126
+#: typing-break/main.c:94
 msgid "The typing monitor is already running."
 msgstr ""
 
-#: typing-break/main.c:139
+#: typing-break/main.c:107
 msgid ""
 "The typing monitor uses the notification area to display information. You "
 "don't seem to have a notification area on your panel. You can add it by "
@@ -2942,19 +3075,28 @@ msgstr ""
 msgid "Set as Application Font"
 msgstr "_Programų šriftas:"
 
-#: vfs-methods/themus/Themus_Component.server.in.in.h:1
-#, fuzzy
-msgid "Apply theme..."
-msgstr "Į_diegti temą..."
-
-#: vfs-methods/themus/Themus_Component.server.in.in.h:2
-#, fuzzy
-msgid "Themus component"
-msgstr "P_eržiūros komponentas:"
-
-#: vfs-methods/themus/Themus_Component.server.in.in.h:3
-msgid "Themus component apply theme operations"
+#: vfs-methods/themus/apply-font.glade.h:1
+msgid " "
 msgstr ""
+
+#: vfs-methods/themus/apply-font.glade.h:2
+msgid "<span weight=\"bold\" size=\"larger\">Apply new font?</span>"
+msgstr ""
+
+#: vfs-methods/themus/apply-font.glade.h:3
+msgid "Do _not apply font"
+msgstr ""
+
+#: vfs-methods/themus/apply-font.glade.h:4
+msgid ""
+"The theme you have selected suggests a new font. A preview of the font is "
+"shown below."
+msgstr ""
+
+#: vfs-methods/themus/apply-font.glade.h:5
+#, fuzzy
+msgid "_Apply font"
+msgstr "Pritaikyti š_riftą"
 
 #: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
 msgid "Theme Properties content view component"
@@ -2989,6 +3131,11 @@ msgstr "Sava tema"
 msgid "URI currently displayed"
 msgstr "URI, į kur dabar siunčiama"
 
+#. translators: you may want to include non-western chars here
+#: vfs-methods/themus/themus-theme-applier.c:83
+msgid "ABCDEFG"
+msgstr ""
+
 #: vfs-methods/themus/themus.schemas.in.h:1
 msgid "If set to true, then installed themes will be thumbnailed."
 msgstr ""
@@ -3021,6 +3168,97 @@ msgstr ""
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr ""
+
+#~ msgid "Select CDE AccessX file"
+#~ msgstr "Pasirink CDE AccessX bylą"
+
+#~ msgid "_Wallpaper"
+#~ msgstr "_Pakartotas"
+
+#~ msgid "A preview of the background picture."
+#~ msgstr "Fono paveikslėlio peržiūra."
+
+#~ msgid "Background Preview"
+#~ msgstr "Fono peržiūra"
+
+#~ msgid "The background picture's file name."
+#~ msgstr "Fono paveikslėlio bylos vardas."
+
+#~ msgid "Acce_pts URLs"
+#~ msgstr "Priima _URL"
+
+#~ msgid "C_ustom Help Browser:"
+#~ msgstr "_Tinkinta pagalbos naršyklė:"
+
+#~ msgid "Default Help Browser"
+#~ msgstr "Įprasta pagalbos naršyklė"
+
+#~ msgid "Help Browser"
+#~ msgstr "Pagalbos naršyklė"
+
+#~ msgid "_Select a Help Browser:"
+#~ msgstr "_Pasirink pagalbos naršyklę:"
+
+#~ msgid ""
+#~ "<b>Default Cursor - Current</b>\n"
+#~ "The default cursor that ships with X"
+#~ msgstr ""
+#~ "<b>Įprastas žymeklis - Esamas</b>\n"
+#~ "Įprastas žymeklis, ateinantis su X'ais"
+
+#~ msgid ""
+#~ "<b>White Cursor - Current</b>\n"
+#~ "The default cursor inverted"
+#~ msgstr ""
+#~ "<b>Baltas žymeklis - Esamas</b>\n"
+#~ "Invertuotas įprastas žymeklis"
+
+#~ msgid ""
+#~ "<b>Large Cursor - Current</b>\n"
+#~ "Large version of normal cursor"
+#~ msgstr ""
+#~ "<b>Didelis žymeklis - Esamas</b>\n"
+#~ "Įprasto žymeklio didelė versija"
+
+#, fuzzy
+#~ msgid "<b>Cursor Theme</b>"
+#~ msgstr "Žymeklio tema"
+
+#~ msgid "A preview of what a menubar looks like with these settings."
+#~ msgstr "Peržiūra, kaip atrodys meniu juosta su tokiomis parinktimis."
+
+#~ msgid "A preview of what a toolbar looks like with these settings."
+#~ msgstr "Peržiūra, kaip atrodys įrankių juosta su tokiomis parinktimis."
+
+#~ msgid "Menus"
+#~ msgstr "Meniu"
+
+#~ msgid "Sample menubar:"
+#~ msgstr "Pavyzdinė meniu juosta:"
+
+#~ msgid "Select the toolbar style."
+#~ msgstr "Pasirink įrankių juostos stilių"
+
+#~ msgid "Toolbar"
+#~ msgstr "Įrankių juosta"
+
+#~ msgid "Toolbars can be _detached and moved around"
+#~ msgstr "Įrankių juostos gali būti _atplėštos ir nešiojamos"
+
+#~ msgid "File to play"
+#~ msgstr "Grojama byla"
+
+#, fuzzy
+#~ msgid "Quit"
+#~ msgstr "_Išeiti"
+
+#, fuzzy
+#~ msgid "Apply theme..."
+#~ msgstr "Į_diegti temą..."
+
+#, fuzzy
+#~ msgid "Themus component"
+#~ msgstr "P_eržiūros komponentas:"
 
 #~ msgid "Bee_p"
 #~ msgstr "Py_ptelti"

@@ -4,14 +4,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 2.2.0.1\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-08-06 03:33+0900\n"
+"POT-Creation-Date: 2003-08-11 13:57-0400\n"
 "PO-Revision-Date: 2003-08-06 03:33+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: GTP Korean <gnome-kr-translation@gnome.or.kr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:1
 msgid "<b>Applications</b>"
@@ -93,18 +93,18 @@ msgstr ""
 "이 시스템에서 사용할 수 없는 보조 기술이 있습니다.  화면을 읽어주거나 화면을 "
 "확대하는 기능을 사용하려면 'gnopernicus' 패키지를 설치해야 합니다."
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:238
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:236
 #, c-format
 msgid "There was an error launching the mouse preferences dialog: %s"
 msgstr "마우스 기본 설정을 시작하는 데 오류가 발생했습니다: %s"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:334
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:392
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:332
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:390
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "AccessX 설정사항을 '%s' 파일에서 가져 올 수 없습니다"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:465
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:463
 msgid "Import Feature Settings File"
 msgstr "기능 설정 파일 가져오기"
 
@@ -316,6 +316,7 @@ msgid "pixels/second"
 msgstr "픽셀/초"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
+#: capplets/mouse/gnome-mouse-properties.c:133
 #: capplets/mouse/gnome-mouse-properties.glade.h:27
 #: capplets/windows/gnome-window-properties.glade.h:7
 msgid "seconds"
@@ -367,8 +368,8 @@ msgstr "그림 없음(_N)"
 #: capplets/background/background-properties-capplet.c:559
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:730
-#: capplets/keyboard/gnome-keyboard-properties.c:222
-#: capplets/mouse/gnome-mouse-properties.c:808
+#: capplets/keyboard/gnome-keyboard-properties.c:218
+#: capplets/mouse/gnome-mouse-properties.c:806
 #: capplets/sound/sound-properties-capplet.c:212
 msgid "Retrieve and store legacy settings"
 msgstr "물려받은 설정을 되찾아서 저장합니다"
@@ -1006,42 +1007,42 @@ msgstr "화면 해상도 바꾸기"
 msgid "Screen Resolution"
 msgstr "화면 해상도"
 
-#: capplets/display/main.c:261
+#: capplets/display/main.c:274
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: capplets/display/main.c:367
+#: capplets/display/main.c:376
 msgid "_Resolution:"
 msgstr "해상도(_R):"
 
-#: capplets/display/main.c:386
+#: capplets/display/main.c:395
 msgid "Re_fresh rate:"
 msgstr "화면 주사율(_F):"
 
-#: capplets/display/main.c:407
+#: capplets/display/main.c:416
 msgid "Default Settings"
 msgstr "기본 설정"
 
-#: capplets/display/main.c:409
+#: capplets/display/main.c:418
 #, c-format
 msgid "Screen %d Settings\n"
 msgstr "화면 %d 설정\n"
 
-#: capplets/display/main.c:434
+#: capplets/display/main.c:443
 msgid "Screen Resolution Preferences"
 msgstr "화면 해상도 설정"
 
-#: capplets/display/main.c:464
+#: capplets/display/main.c:475
 #, c-format
 msgid "Make default for this _computer (%s) only"
 msgstr "이 컴퓨터(%s)의 기본값으로 만들기"
 
-#: capplets/display/main.c:482
+#: capplets/display/main.c:493
 msgid "Options"
 msgstr "옵션"
 
-#: capplets/display/main.c:503
+#: capplets/display/main.c:514
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d seconds the previous "
@@ -1050,30 +1051,32 @@ msgstr ""
 "새로운 설정을 테스트합니다. %d초 이내에 응답하지 않으면 이전 설정으로 다시 돌"
 "아갑니다."
 
-#: capplets/display/main.c:553
+#: capplets/display/main.c:563
 msgid "Do you want to keep this resolution?"
 msgstr "이 해상도를 계속 사용하시겠습니까?"
 
-#: capplets/display/main.c:590
+#: capplets/display/main.c:588
 msgid "Use _previous resolution"
 msgstr "이전 해상도 사용(_P)"
 
-#: capplets/display/main.c:592
+#: capplets/display/main.c:588
 msgid "_Keep resolution"
 msgstr "이 해상도 계속 사용(_K)"
 
-#: capplets/display/main.c:751
+#: capplets/display/main.c:739
+#, fuzzy
 msgid ""
-"The Xserver doesn't support the XRandR extension, runtime resolution changes "
-"aren't possible."
+"The XServer does not support the XRandR extension.  Runtime resolution "
+"changes to the display size are not available."
 msgstr ""
 "X서버가 XRandR 확장 기능을 지원하지 않으므로, 실행 중에 해상도를 바꿀 수 없습"
 "니다."
 
-#: capplets/display/main.c:763
+#: capplets/display/main.c:747
+#, fuzzy
 msgid ""
-"The version of the XRandR extension is incompatible with this program, "
-"runtime resolution changes aren't possible."
+"The version of the XRandR extension is incompatible with this program. "
+"Runtime changes to the display size are not available."
 msgstr ""
 "XRandR 확장 기능의 버전이 이 프로그램과 호환되지 않으므로, 실행 중에 해상도"
 "를 바꿀 수 없습니다."
@@ -1620,19 +1623,19 @@ msgstr "명령어에 단축 글쇠를 지정합니다"
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "글쇠판 애플릿을 시작하는 데 오류가 발생했습니다: %s"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:199
+#: capplets/keyboard/gnome-keyboard-properties.c:195
 msgid "_Accessibility"
 msgstr "접근성 기능(_A)"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:218
-#: capplets/keyboard/gnome-keyboard-properties.c:220
+#: capplets/keyboard/gnome-keyboard-properties.c:214
+#: capplets/keyboard/gnome-keyboard-properties.c:216
 #: capplets/sound/sound-properties-capplet.c:208
 #: capplets/sound/sound-properties-capplet.c:210
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr "설정을 적용하고 마칩니다 (호환성; 이제 데몬이 처리합니다)"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:224
+#: capplets/keyboard/gnome-keyboard-properties.c:220
 msgid "Start the page with the typing break settings showing"
 msgstr "타이핑 휴식 설정을 보여주는 페이지로 시작합니다"
 
@@ -1731,67 +1734,67 @@ msgstr "분"
 msgid "Set your keyboard preferences"
 msgstr "글쇠판 등록 정보를 설정합니다"
 
-#: capplets/mouse/gnome-mouse-properties.c:498
+#: capplets/mouse/gnome-mouse-properties.c:496
 msgid "Unknown Cursor"
 msgstr "알 수 없는 커서"
 
-#: capplets/mouse/gnome-mouse-properties.c:603
+#: capplets/mouse/gnome-mouse-properties.c:602
 msgid "Default Cursor - Current"
 msgstr "기본 커서 - 현재"
 
-#: capplets/mouse/gnome-mouse-properties.c:603
-#: capplets/mouse/gnome-mouse-properties.c:606
+#: capplets/mouse/gnome-mouse-properties.c:602
+#: capplets/mouse/gnome-mouse-properties.c:605
 msgid "The default cursor that ships with X"
 msgstr "X에 포함되어 있는 기본 커서"
 
-#: capplets/mouse/gnome-mouse-properties.c:606
+#: capplets/mouse/gnome-mouse-properties.c:605
 msgid "Default Cursor"
 msgstr "기본 커서"
 
-#: capplets/mouse/gnome-mouse-properties.c:624
+#: capplets/mouse/gnome-mouse-properties.c:623
 msgid "White Cursor - Current"
 msgstr "흰색 커서 - 현재"
 
-#: capplets/mouse/gnome-mouse-properties.c:624
-#: capplets/mouse/gnome-mouse-properties.c:627
+#: capplets/mouse/gnome-mouse-properties.c:623
+#: capplets/mouse/gnome-mouse-properties.c:626
 msgid "The default cursor inverted"
 msgstr "기본 커서의 반전"
 
-#: capplets/mouse/gnome-mouse-properties.c:627
+#: capplets/mouse/gnome-mouse-properties.c:626
 msgid "White Cursor"
 msgstr "흰색 커서"
 
-#: capplets/mouse/gnome-mouse-properties.c:646
+#: capplets/mouse/gnome-mouse-properties.c:645
 msgid "Large Cursor - Current"
 msgstr "큰 커서 - 현재"
 
-#: capplets/mouse/gnome-mouse-properties.c:646
-#: capplets/mouse/gnome-mouse-properties.c:649
+#: capplets/mouse/gnome-mouse-properties.c:645
+#: capplets/mouse/gnome-mouse-properties.c:648
 msgid "Large version of normal cursor"
 msgstr "기본 커서의 큰 버전"
 
-#: capplets/mouse/gnome-mouse-properties.c:649
+#: capplets/mouse/gnome-mouse-properties.c:648
 msgid "Large Cursor"
 msgstr "큰 커서"
 
-#: capplets/mouse/gnome-mouse-properties.c:668
+#: capplets/mouse/gnome-mouse-properties.c:667
 msgid "Large White Cursor - Current"
 msgstr "큰 흰 색 커서 - 현재"
 
-#: capplets/mouse/gnome-mouse-properties.c:668
-#: capplets/mouse/gnome-mouse-properties.c:671
+#: capplets/mouse/gnome-mouse-properties.c:667
+#: capplets/mouse/gnome-mouse-properties.c:670
 msgid "Large version of white cursor"
 msgstr "흰 색 커서의 큰 버전"
 
-#: capplets/mouse/gnome-mouse-properties.c:671
+#: capplets/mouse/gnome-mouse-properties.c:670
 msgid "Large White Cursor"
 msgstr "큰 흰 색 커서"
 
-#: capplets/mouse/gnome-mouse-properties.c:749
+#: capplets/mouse/gnome-mouse-properties.c:747
 msgid "Cursor Size"
 msgstr "커서 크기"
 
-#: capplets/mouse/gnome-mouse-properties.c:758
+#: capplets/mouse/gnome-mouse-properties.c:756
 msgid "Cursor Theme"
 msgstr "커서 테마"
 

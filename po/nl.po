@@ -12,14 +12,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center CVS\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-08-04 04:01+0200\n"
+"POT-Creation-Date: 2003-08-11 13:57-0400\n"
 "PO-Revision-Date: 2003-08-04 11:40+0100\n"
 "Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:1
 msgid "<b>Applications</b>"
@@ -107,19 +107,19 @@ msgstr ""
 "ondersteuning voor schermvoorlees- en uitvergrootfunctionaliteiten te "
 "krijgen."
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:238
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:236
 #, c-format
 msgid "There was an error launching the mouse preferences dialog: %s"
 msgstr ""
 "Er is een fout opgetreden bij het openen van het muis-voorkeurenvenster: %s"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:334
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:392
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:332
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:390
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "AccessX-instellingen vanuit bestand '%s' importeren is mislukt"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:465
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:463
 msgid "Import Feature Settings File"
 msgstr "Functie-instellingen importeren"
 
@@ -335,6 +335,7 @@ msgid "pixels/second"
 msgstr "pixels/seconde"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
+#: capplets/mouse/gnome-mouse-properties.c:133
 #: capplets/mouse/gnome-mouse-properties.glade.h:27
 #: capplets/windows/gnome-window-properties.glade.h:7
 msgid "seconds"
@@ -386,8 +387,8 @@ msgstr "_Geen plaatje"
 #: capplets/background/background-properties-capplet.c:559
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:730
-#: capplets/keyboard/gnome-keyboard-properties.c:222
-#: capplets/mouse/gnome-mouse-properties.c:808
+#: capplets/keyboard/gnome-keyboard-properties.c:218
+#: capplets/mouse/gnome-mouse-properties.c:806
 #: capplets/sound/sound-properties-capplet.c:212
 msgid "Retrieve and store legacy settings"
 msgstr "Standaardinstellingen terughalen en opslaan"
@@ -650,7 +651,7 @@ msgstr ""
 "Callback die wordt gestuurd wanneer de objectgegevens van de eigenschappen-"
 "editor vrijgegeven moeten worden"
 
-#: capplets/common/gconf-property-editor.c:1537
+#: capplets/common/gconf-property-editor.c:1541
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -663,7 +664,7 @@ msgstr ""
 "Zorgt u ervoor dat het bestaat en probeer het opnieuw, of kies een andere "
 "achtergrondafbeelding."
 
-#: capplets/common/gconf-property-editor.c:1545
+#: capplets/common/gconf-property-editor.c:1549
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -677,7 +678,7 @@ msgstr ""
 "\n"
 "Gelieve een andere afbeelding te selecteren."
 
-#: capplets/common/gconf-property-editor.c:1636
+#: capplets/common/gconf-property-editor.c:1640
 msgid "Please select an image."
 msgstr "Selecteer een afbeelding."
 
@@ -1041,42 +1042,42 @@ msgstr "Schermresolutie veranderen"
 msgid "Screen Resolution"
 msgstr "Schermresolutie"
 
-#: capplets/display/main.c:261
+#: capplets/display/main.c:274
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: capplets/display/main.c:367
+#: capplets/display/main.c:376
 msgid "_Resolution:"
 msgstr "_Resolutie:"
 
-#: capplets/display/main.c:386
+#: capplets/display/main.c:395
 msgid "Re_fresh rate:"
 msgstr "Verversings_frequentie:"
 
-#: capplets/display/main.c:407
+#: capplets/display/main.c:416
 msgid "Default Settings"
 msgstr "Standaardinstellingen"
 
-#: capplets/display/main.c:409
+#: capplets/display/main.c:418
 #, c-format
 msgid "Screen %d Settings\n"
 msgstr "Instellingen voor scherm %d\n"
 
-#: capplets/display/main.c:434
+#: capplets/display/main.c:443
 msgid "Screen Resolution Preferences"
 msgstr "Schermresolutie-voorkeuren"
 
-#: capplets/display/main.c:464
+#: capplets/display/main.c:475
 #, c-format
 msgid "Make default for this _computer (%s) only"
 msgstr "Standaard maken voor alleen deze _computer (%s)"
 
-#: capplets/display/main.c:482
+#: capplets/display/main.c:493
 msgid "Options"
 msgstr "Opties"
 
-#: capplets/display/main.c:503
+#: capplets/display/main.c:514
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d seconds the previous "
@@ -1085,30 +1086,32 @@ msgstr ""
 "De nieuwe instellingen worden getest. Als u niet binnen %d seconden reageert "
 "dan zullen de vorige instellingen worden teruggezet."
 
-#: capplets/display/main.c:553
+#: capplets/display/main.c:563
 msgid "Do you want to keep this resolution?"
 msgstr "Wilt u deze resolutie behouden?"
 
-#: capplets/display/main.c:590
+#: capplets/display/main.c:588
 msgid "Use _previous resolution"
 msgstr "Vori_ge resolutie gebruiken"
 
-#: capplets/display/main.c:592
+#: capplets/display/main.c:588
 msgid "_Keep resolution"
 msgstr "Resolutie _houden"
 
-#: capplets/display/main.c:751
+#: capplets/display/main.c:739
+#, fuzzy
 msgid ""
-"The Xserver doesn't support the XRandR extension, runtime resolution changes "
-"aren't possible."
+"The XServer does not support the XRandR extension.  Runtime resolution "
+"changes to the display size are not available."
 msgstr ""
 "De X-server ondersteunt de XRandR-uitbreiding niet, het dynamisch veranderen "
 "van de resolutie is niet mogelijk."
 
-#: capplets/display/main.c:763
+#: capplets/display/main.c:747
+#, fuzzy
 msgid ""
-"The version of the XRandR extension is incompatible with this program, "
-"runtime resolution changes aren't possible."
+"The version of the XRandR extension is incompatible with this program. "
+"Runtime changes to the display size are not available."
 msgstr ""
 "De XRandR-versie is kan niet overweg met dit programma, het dynamisch "
 "veranderen van de resolutie is niet mogelijk."
@@ -1666,12 +1669,12 @@ msgstr ""
 "Er is een fout opgetreden bij het openen van het toetsenbord-"
 "configuratievenster: %s"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:199
+#: capplets/keyboard/gnome-keyboard-properties.c:195
 msgid "_Accessibility"
 msgstr "_Toegankelijkheid"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:218
-#: capplets/keyboard/gnome-keyboard-properties.c:220
+#: capplets/keyboard/gnome-keyboard-properties.c:214
+#: capplets/keyboard/gnome-keyboard-properties.c:216
 #: capplets/sound/sound-properties-capplet.c:208
 #: capplets/sound/sound-properties-capplet.c:210
 msgid ""
@@ -1680,7 +1683,7 @@ msgstr ""
 "Instellingen toepassen en afsluiten (enkel voor compatibiliteit; wordt nu "
 "door een daemon gedaan)"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:224
+#: capplets/keyboard/gnome-keyboard-properties.c:220
 msgid "Start the page with the typing break settings showing"
 msgstr ""
 
@@ -1782,67 +1785,67 @@ msgstr "minuten"
 msgid "Set your keyboard preferences"
 msgstr "Uw toetsenbordvoorkeuren instellen"
 
-#: capplets/mouse/gnome-mouse-properties.c:498
+#: capplets/mouse/gnome-mouse-properties.c:496
 msgid "Unknown Cursor"
 msgstr "Onbekende Cursor"
 
-#: capplets/mouse/gnome-mouse-properties.c:603
+#: capplets/mouse/gnome-mouse-properties.c:602
 msgid "Default Cursor - Current"
 msgstr "Standaard cursor - huidige"
 
-#: capplets/mouse/gnome-mouse-properties.c:603
-#: capplets/mouse/gnome-mouse-properties.c:606
+#: capplets/mouse/gnome-mouse-properties.c:602
+#: capplets/mouse/gnome-mouse-properties.c:605
 msgid "The default cursor that ships with X"
 msgstr "De standaard cursor die meegeleverd wordt met X "
 
-#: capplets/mouse/gnome-mouse-properties.c:606
+#: capplets/mouse/gnome-mouse-properties.c:605
 msgid "Default Cursor"
 msgstr "Standaard cursor"
 
-#: capplets/mouse/gnome-mouse-properties.c:624
+#: capplets/mouse/gnome-mouse-properties.c:623
 msgid "White Cursor - Current"
 msgstr "Witte cursor - huidige"
 
-#: capplets/mouse/gnome-mouse-properties.c:624
-#: capplets/mouse/gnome-mouse-properties.c:627
+#: capplets/mouse/gnome-mouse-properties.c:623
+#: capplets/mouse/gnome-mouse-properties.c:626
 msgid "The default cursor inverted"
 msgstr "De standaard cursor geïnverteerd"
 
-#: capplets/mouse/gnome-mouse-properties.c:627
+#: capplets/mouse/gnome-mouse-properties.c:626
 msgid "White Cursor"
 msgstr "Witte cursor"
 
-#: capplets/mouse/gnome-mouse-properties.c:646
+#: capplets/mouse/gnome-mouse-properties.c:645
 msgid "Large Cursor - Current"
 msgstr "Grote cursor - huidige"
 
-#: capplets/mouse/gnome-mouse-properties.c:646
-#: capplets/mouse/gnome-mouse-properties.c:649
+#: capplets/mouse/gnome-mouse-properties.c:645
+#: capplets/mouse/gnome-mouse-properties.c:648
 msgid "Large version of normal cursor"
 msgstr "Grotere versie van de normale cursor"
 
-#: capplets/mouse/gnome-mouse-properties.c:649
+#: capplets/mouse/gnome-mouse-properties.c:648
 msgid "Large Cursor"
 msgstr "Grote cursor"
 
-#: capplets/mouse/gnome-mouse-properties.c:668
+#: capplets/mouse/gnome-mouse-properties.c:667
 msgid "Large White Cursor - Current"
 msgstr "Grote witte cursor - huidige"
 
-#: capplets/mouse/gnome-mouse-properties.c:668
-#: capplets/mouse/gnome-mouse-properties.c:671
+#: capplets/mouse/gnome-mouse-properties.c:667
+#: capplets/mouse/gnome-mouse-properties.c:670
 msgid "Large version of white cursor"
 msgstr "Grote versie van de witte cursor"
 
-#: capplets/mouse/gnome-mouse-properties.c:671
+#: capplets/mouse/gnome-mouse-properties.c:670
 msgid "Large White Cursor"
 msgstr "Grote witte cursor"
 
-#: capplets/mouse/gnome-mouse-properties.c:749
+#: capplets/mouse/gnome-mouse-properties.c:747
 msgid "Cursor Size"
 msgstr "Cursorgrootte"
 
-#: capplets/mouse/gnome-mouse-properties.c:758
+#: capplets/mouse/gnome-mouse-properties.c:756
 msgid "Cursor Theme"
 msgstr "Cursorthema"
 
