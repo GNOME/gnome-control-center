@@ -204,7 +204,6 @@ sort_func (GtkTreeModel *model,
  if (a_str == NULL) a_str = g_strdup ("");
  if (b_str == NULL) b_str = g_strdup ("");
 
- g_print ("comparing %s to %s\n", a_str, b_str);
  if (!strcmp (a_str, "Default"))
    return -1;
  if (!strcmp (b_str, "Default"))
@@ -294,7 +293,6 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 		/* this should be something more clever and nonblocking */
 		command = g_strdup_printf ("sh -c 'gzip -d -c < \"%s\" | tar xf - -C \"%s/.themes\"'",
 					   path, g_get_home_dir ());
-		g_print ("untarring %s\n", command);
 		if (g_spawn_command_line_sync (command, NULL, NULL, &status, NULL) && status == 0)
 			gnome_vfs_unlink (path);
 		g_free (command);
