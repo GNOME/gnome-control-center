@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.5.8\n"
-"POT-Creation-Date: 2002-05-17 00:27+0200\n"
-"PO-Revision-Date: 2002-05-17 00:29+0200\n"
+"POT-Creation-Date: 2002-05-19 00:53+0200\n"
+"PO-Revision-Date: 2002-05-19 00:56+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -236,8 +236,8 @@ msgstr "_Bilde"
 
 #: capplets/background/background-properties-capplet.c:566
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:592
-#: capplets/keyboard/gnome-keyboard-properties.c:365
+#: capplets/default-applications/gnome-default-applications-properties.c:715
+#: capplets/keyboard/gnome-keyboard-properties.c:367
 #: capplets/mouse/gnome-mouse-properties.c:735
 #: capplets/sound/sound-properties-capplet.c:156
 msgid "Retrieve and store legacy settings"
@@ -299,7 +299,8 @@ msgstr "Filnavn for bakgrunnsbilde."
 
 #: capplets/background/background-properties.glade.h:14
 msgid "To set the background picture, drop an image or click to browse."
-msgstr "Slipp et bilde for å sette bakgrunnsbilde, eller klikk for å bla gjennom."
+msgstr ""
+"Slipp et bilde for å sette bakgrunnsbilde, eller klikk for å bla gjennom."
 
 #: capplets/background/background-properties.glade.h:15
 msgid "Vertical gradient"
@@ -500,7 +501,7 @@ msgstr ""
 "Tilbakekall som skal utstedes når objektdata for redigering av egenskaper "
 "skal frigis"
 
-#: capplets/common/gconf-property-editor.c:1479
+#: capplets/common/gconf-property-editor.c:1484
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -513,7 +514,7 @@ msgstr ""
 "Vennligst sjekk at denne eksisterer og prøv på nytt, eller velg et annet "
 "bakgrunnsbilde."
 
-#: capplets/common/gconf-property-editor.c:1487
+#: capplets/common/gconf-property-editor.c:1492
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -526,7 +527,7 @@ msgstr ""
 "\n"
 "Vennligst velg et annet bilde i stedet."
 
-#: capplets/common/gconf-property-editor.c:1571
+#: capplets/common/gconf-property-editor.c:1583
 msgid "Please select an image."
 msgstr "Vennligst velg et bilde."
 
@@ -535,67 +536,96 @@ msgid "Choose the applications used by default"
 msgstr "Velg applikasjonene som brukes som standard"
 
 #: capplets/default-applications/default-applications.desktop.in.h:2
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:15
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:19
 msgid "Preferred Applications"
 msgstr "Foretrukne applikasjoner"
 
+#: capplets/default-applications/gnome-default-applications-properties.c:105
+msgid "Please specify a name and a command for this editor."
+msgstr "Vennligst spesifiser et navn og en kommando for dette redigeringsprogrammet."
+
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:1
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:1
+#: capplets/theme-switcher/theme-properties.glade.h:1
+#: capplets/network/gnome-network-preferences.glade.h:1
+msgid "*"
+msgstr "*"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:2
 msgid "Acce_pts URLs"
 msgstr "Go_dtar URLer"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:2
-msgid "Accepts Line _Number"
-msgstr "Godtar linje_nummer"
-
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:3
-msgid "C_ustom Editor:"
-msgstr "E_gendefinert redigerer:"
+#: capplets/mime-type/mime-type-capplet.c:93
+#: capplets/wm-properties/wm-properties-capplet.c:1151
+msgid "Add..."
+msgstr "Legg til..."
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:4
+msgid "C_ustom Editor"
+msgstr "E_gendefinert redigeringsprogram:"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:5
 msgid "C_ustom Help Browser:"
 msgstr "E_gendefinert hjelpleser:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:5
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:6
 msgid "C_ustom Terminal:"
 msgstr "E_gendefinert terminal:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:6
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:7
 msgid "C_ustom Web Browser:"
 msgstr "E_gendefinert nettleser:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:7
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:8
 msgid "Co_mmand:"
 msgstr "Ko_mmando:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:8
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:9
+msgid "Custom Editor Properties"
+msgstr "Egenskaper for egendefinert redigeringsprogram:"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:10
 msgid "Default Help Browser"
 msgstr "Standard hjelpleser"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:9
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:11
 msgid "Default Terminal"
 msgstr "Forvalgt terminal"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:10
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:12
 msgid "Default Text Editor"
 msgstr "Standard tekstredigerer"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:11
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:13
 msgid "Default Web Browser"
 msgstr "Standard nettleser"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:12
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:14
 msgid "Default Window Manager"
 msgstr "Standard vindushåndterer"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:13
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:15
+#: capplets/mime-type/mime-type-capplet.c:83
+#: capplets/wm-properties/wm-properties-capplet.c:1161
+msgid "Delete"
+msgstr "Slett"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:16
 msgid "E_xec Flag:"
 msgstr "E_xec-flagg:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:14
-msgid "He_lp Browser"
-msgstr "Hje_lpleser"
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:17
+#: capplets/mime-type/mime-type-capplet.c:97
+#: capplets/wm-properties/wm-properties-capplet.c:1156
+msgid "Edit..."
+msgstr "Rediger..."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:16
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:18
+msgid "Help Browser"
+msgstr "Hjelpleser"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:20
 msgid ""
 "Select the window manager you want.  You will need to hit apply, wave the "
 "magic wand, and do a magic dance for it to work."
@@ -603,58 +633,69 @@ msgstr ""
 "Velg vindushåndtereren du ønsker. Du må trykke «Bruk», vifte med den magiske "
 "staven, og utføre den magiske dansen for at dette skal virke."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:17
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:21
 msgid "Start in T_erminal"
 msgstr "Start i t_erminal"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:18
-msgid "Te_rminal"
-msgstr "Te_rminal"
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:22
+msgid "Terminal"
+msgstr "Terminal"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:19
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:23
+msgid "Text Editor"
+msgstr "Tekstredigerer"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:24
+msgid "This application can open _URIs"
+msgstr "Denne applikasjonen kan åpne _URIer"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:25
+msgid "This application can open _multiple files"
+msgstr "Denne applikasjonen kan åpne _flere filer"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:26
+msgid "This application needs to be run in a _shell"
+msgstr "Denne applikasjonen må kjøre i et _skall"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:27
 msgid "Understands _Netscape Remote Control"
 msgstr "Forstår _Netscape Remote Control"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:20
-msgid "Web _Browser"
-msgstr "_Nettleser"
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:28
+msgid "Use this _editor to open text files in the file manager"
+msgstr "Bruk dette r_edigeringsprogrammet til å åpne tekstfiler fra filhåndtereren"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:21
-msgid "_Add..."
-msgstr "_Legg til..."
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:29
+msgid "Web Browser"
+msgstr "Nettleser"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:22
-msgid "_Delete"
-msgstr "_Slett"
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:30
+msgid "Window Manager"
+msgstr "Vindushåndterer"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:23
-#: capplets/file-types/file-types-properties.glade.h:19
-msgid "_Edit..."
-msgstr "R_ediger..."
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:31
+msgid "_Name:"
+msgstr "_Navn:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:24
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:32
+msgid "_Properties..."
+msgstr "E_genskaper..."
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:33
 msgid "_Select a Help Browser:"
 msgstr "_Velg en nettleser"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:25
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:34
 msgid "_Select a Terminal:"
 msgstr "_Velg en terminal"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:26
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:35
 msgid "_Select a Web Browser:"
 msgstr "_Velg en nettleser"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:27
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:36
 msgid "_Select an Editor:"
 msgstr "_Velg en tekstredigerer"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:28
-msgid "_Text Editor"
-msgstr "_Tekstredigerer"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:29
-msgid "_Window Manager"
-msgstr "_Vindushåndterer"
 
 #: capplets/desktop-links/Accessibility.directory.in.in.h:1
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:6
@@ -750,7 +791,6 @@ msgid "Configure miscellaneous window features"
 msgstr "Konfigurer forskjellige funksjoner for vinduer"
 
 #: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
-#: capplets/ui-properties/ui-properties.glade.h:19
 msgid "Miscellaneous"
 msgstr "Forskjellig"
 
@@ -882,17 +922,17 @@ msgid "Source Code"
 msgstr "Kildekode"
 
 #: capplets/file-types/category-names.h:25
-#: capplets/file-types/mime-type-info.c:752
+#: capplets/file-types/mime-type-info.c:753
 msgid "Audio"
 msgstr "Lyd"
 
 #: capplets/file-types/category-names.h:26
-#: capplets/file-types/mime-type-info.c:748
+#: capplets/file-types/mime-type-info.c:749
 msgid "Images"
 msgstr "Bilder"
 
 #: capplets/file-types/category-names.h:27
-#: capplets/file-types/mime-type-info.c:750
+#: capplets/file-types/mime-type-info.c:751
 msgid "Video"
 msgstr "Video"
 
@@ -988,6 +1028,10 @@ msgstr "_Velg..."
 #: capplets/file-types/file-types-properties.glade.h:18
 msgid "_Description"
 msgstr "_Beskrivelse"
+
+#: capplets/file-types/file-types-properties.glade.h:19
+msgid "_Edit..."
+msgstr "R_ediger..."
 
 #: capplets/file-types/file-types-properties.glade.h:20
 msgid "_MIME Type"
@@ -1207,7 +1251,7 @@ msgstr "Hurtigtast"
 
 #: capplets/keybindings/eggcellrendererkeys.c:203
 #: capplets/keybindings/gnome-keybinding-properties.c:306
-#: libbackground/applier.c:533
+#: libbackground/applier.c:531
 msgid "Disabled"
 msgstr "Slått av"
 
@@ -1220,24 +1264,24 @@ msgstr "Skriv inn en ny aksellerator, eller trykk slett for å tømme"
 msgid "Type a new accelerator"
 msgstr "Skriv inn en ny aksellerator"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:569
+#: capplets/keybindings/gnome-keybinding-properties.c:573
 msgid "<Unknown Action>"
 msgstr "<Ukjent handling>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:592
+#: capplets/keybindings/gnome-keybinding-properties.c:598
 msgid "Desktop"
 msgstr "Skrivebord"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:596
+#: capplets/keybindings/gnome-keybinding-properties.c:602
 msgid "Window Management"
 msgstr "Vindushåndtering"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:692
+#: capplets/keybindings/gnome-keybinding-properties.c:698
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Feil under setting av ny snarvei i konfigurasjonsdatabasen: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:783
+#: capplets/keybindings/gnome-keybinding-properties.c:839
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1245,36 +1289,28 @@ msgstr ""
 "Kan ikke finne tastaturtema. Dette betyr at din GTK+-installasjon ikke er "
 "komplett."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:807
-msgid "_Action"
-msgstr "_Handling"
+#: capplets/keybindings/gnome-keybinding-properties.c:864
+msgid "Action"
+msgstr "Handling"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:819
-msgid "_Shortcut"
-msgstr "_Snarvei"
+#: capplets/keybindings/gnome-keybinding-properties.c:876
+msgid "Shortcut"
+msgstr "Snarvei"
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:1
 msgid "Click for a list of keyboard navigation schemes."
 msgstr "Klikk for en liste over schema for tastaturnavigering."
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:2
-msgid "Desktop Shortcuts:"
-msgstr "Skrivebordsnarveier:"
-
-#: capplets/keybindings/gnome-keybinding-properties.glade.h:3
 #: capplets/keybindings/keybinding.desktop.in.h:2
 msgid "Keyboard Shortcuts"
 msgstr "Tastatursnarveier"
 
-#: capplets/keybindings/gnome-keybinding-properties.glade.h:4
+#: capplets/keybindings/gnome-keybinding-properties.glade.h:3
 msgid "Keyboard _Navigation scheme for use in applications:"
 msgstr "Schema for navigering med tastatur som skal brukes i applikasjoner:"
 
-#: capplets/keybindings/gnome-keybinding-properties.glade.h:5
-msgid "The list of keybindings."
-msgstr "Listen over tastaturbindinger."
-
-#: capplets/keybindings/gnome-keybinding-properties.glade.h:6
+#: capplets/keybindings/gnome-keybinding-properties.glade.h:4
 msgid ""
 "To assign a shortcut to an action, click in the shortcut column and press "
 "the key combination you want to associate with it."
@@ -1282,16 +1318,20 @@ msgstr ""
 "For å tildele en snarvei til en handling klikker du i snarveikolonnen og "
 "trykker en tastekombinasjon du vil assosiere den med."
 
+#: capplets/keybindings/gnome-keybinding-properties.glade.h:5
+msgid "_Desktop shortcuts:"
+msgstr "Skrivebor_dsnarveier:"
+
 #: capplets/keybindings/keybinding.desktop.in.h:1
 msgid "Associate keyboard shortcuts with panel actions"
 msgstr "Tilegn tastatursnarveier til panelhandlinger"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:344
+#: capplets/keyboard/gnome-keyboard-properties.c:346
 msgid "_Accessibility"
 msgstr "_Tilgjengelighet"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:361
 #: capplets/keyboard/gnome-keyboard-properties.c:363
+#: capplets/keyboard/gnome-keyboard-properties.c:365
 #: capplets/sound/sound-properties-capplet.c:152
 #: capplets/sound/sound-properties-capplet.c:154
 msgid ""
@@ -1299,12 +1339,6 @@ msgid ""
 msgstr ""
 "Bare aktiver innstillinger og avslutt (kun for kompatibilitet; håndteres av "
 "en daemon nå)"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:1
-#: capplets/theme-switcher/theme-properties.glade.h:1
-#: capplets/network/gnome-network-preferences.glade.h:1
-msgid "*"
-msgstr "*"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:2
 msgid "<i>fast</i>"
@@ -1397,12 +1431,8 @@ msgstr "Sakte"
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:27
 msgid ""
 "The keyboard bell is the <i>beep</i> sound heard when the system wants to "
-"get your attention.  You can select a custom sound file to play instead of "
-"the traditional beeping noise."
-msgstr ""
-"Tastaturpip er <i>pip</i>-lyden du hører når systemet vil ha din "
-"oppmerksomhet. Du kan velge en egendefinert lydfil som skal spilles i stedet "
-"for den tradisjonelle pipelyden."
+"get your attention."
+msgstr "Tastaturpip er <i>pip</i>-lyden du hører når systemet vil ha din oppmerksomhet."
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:28
 msgid "Very Fast"
@@ -1417,7 +1447,10 @@ msgid ""
 "You can configure the keyboards accessibility features by bringing up the "
 "'Accessibility Settings' property dialog, or pressing the button on the "
 "right."
-msgstr "<Du kan konfigurere funksjoner for tilgjengelighet for tastaturet ved å hente opp dialogen «Innstillinger for tilgjengelighet», eller ved å trykke på knappen til høyre."
+msgstr ""
+"<Du kan konfigurere funksjoner for tilgjengelighet for tastaturet ved å "
+"hente opp dialogen «Innstillinger for tilgjengelighet», eller ved å trykke "
+"på knappen til høyre."
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:31
 msgid "_Accessibility..."
@@ -1587,21 +1620,6 @@ msgstr ""
 "~/.gnome/mime-info/user.keys.\n"
 "\n"
 "Vil ikke kunne lagre tilstandsinformajon"
-
-#: capplets/mime-type/mime-type-capplet.c:83
-#: capplets/wm-properties/wm-properties-capplet.c:1161
-msgid "Delete"
-msgstr "Slett"
-
-#: capplets/mime-type/mime-type-capplet.c:93
-#: capplets/wm-properties/wm-properties-capplet.c:1151
-msgid "Add..."
-msgstr "Legg til..."
-
-#: capplets/mime-type/mime-type-capplet.c:97
-#: capplets/wm-properties/wm-properties-capplet.c:1156
-msgid "Edit..."
-msgstr "Rediger..."
 
 #: capplets/mime-type/mime-type.desktop.in.in.h:1
 msgid "Configure how files are associated and started"
@@ -1903,7 +1921,6 @@ msgid "Submenu"
 msgstr "Undermeny"
 
 #: capplets/theme-switcher/control/control.c:74
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:2
 msgid "Item 1"
 msgstr "Oppføring 1"
 
@@ -1986,271 +2003,6 @@ msgstr "Oppførsel"
 #: capplets/ui-properties/behavior.desktop.in.in.h:2
 msgid "Sets the default behavior of GNOME applications"
 msgstr "Setter forvalgt oppførsel for GNOME-applikasjoner"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:1
-msgid "Icons and Text"
-msgstr "Ikoner og tekst"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:3
-msgid "Item 2"
-msgstr "Oppføring 2"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:4
-msgid "Item 3"
-msgstr "Oppføring 3"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:5
-msgid "Menu Item 1"
-msgstr "Menyoppføring 1"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:6
-msgid "Menu Item 2"
-msgstr "Menyoppføring 2"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:7
-msgid "Menu Item 3"
-msgstr "Menyoppføring 3"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:8
-msgid "Menu Item 4"
-msgstr "Menyoppføring 4"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:9
-msgid "Menu Item 5"
-msgstr "Menyoppføring 5"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:10
-msgid "Menu items have _icons"
-msgstr "Menyoppføringer har _ikoner"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:11
-#: capplets/ui-properties/ui-properties.glade.h:17
-msgid "Menus"
-msgstr "Menyer"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:12
-msgid "New File"
-msgstr "Ny fil"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:13
-msgid "Only Icons"
-msgstr "Kun ikoner"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:14
-msgid "Only Text"
-msgstr "Kun tekst"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:15
-msgid "Open File"
-msgstr "Åpne fil"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:16
-msgid "Sample Menubar"
-msgstr "Eksempel-menylinje"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:17
-msgid "Sample Toolbar"
-msgstr "Eksempel-verktøylinje"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:18
-msgid "Save File"
-msgstr "Lagre fil"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:19
-msgid "Toolbar"
-msgstr "Verktøylinje"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:20
-msgid "Toolbar and Menu Properties"
-msgstr "Egenskaper for verktøylinje og meny"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:21
-msgid "Toolbars can be _detached and moved around"
-msgstr "Verktøylinjene _kan tas av og flyttes rundt"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:22
-msgid "_Menu"
-msgstr "_Meny"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:23
-msgid "_Toolbars have: "
-msgstr "_Verktøylinjer har: "
-
-#: capplets/ui-properties/ui-properties.glade.h:1
-msgid "At the center of the screen"
-msgstr "Midt på skjermen"
-
-#: capplets/ui-properties/ui-properties.glade.h:2
-msgid "At the mouse pointer"
-msgstr "Ved muspekeren"
-
-#: capplets/ui-properties/ui-properties.glade.h:3
-msgid "Bottom"
-msgstr "Bunn"
-
-#: capplets/ui-properties/ui-properties.glade.h:4
-msgid "Default  (Spread out - big)"
-msgstr "Forvalgt (Spre utover - stor)"
-
-#: capplets/ui-properties/ui-properties.glade.h:5
-msgid "Dialog Buttons"
-msgstr "Knapper i dialoger"
-
-#: capplets/ui-properties/ui-properties.glade.h:6
-msgid "Dialog buttons have icons"
-msgstr "Knapper i dialoger har ikoner"
-
-#: capplets/ui-properties/ui-properties.glade.h:7
-msgid "Dialogs"
-msgstr "Dialoger"
-
-#: capplets/ui-properties/ui-properties.glade.h:8
-msgid "Dialogs are treated"
-msgstr "Dialoger behandles"
-
-#: capplets/ui-properties/ui-properties.glade.h:9
-msgid "Dialogs open"
-msgstr "Dialoger åpnes"
-
-#: capplets/ui-properties/ui-properties.glade.h:10
-msgid "Interface"
-msgstr "Grensesnitt"
-
-#: capplets/ui-properties/ui-properties.glade.h:11
-msgid "Left"
-msgstr "Venstre"
-
-#: capplets/ui-properties/ui-properties.glade.h:12
-msgid "Left aligned"
-msgstr "Venstrejustert"
-
-#: capplets/ui-properties/ui-properties.glade.h:13
-msgid "Like any other window"
-msgstr "Som ethvert annet vindu"
-
-#: capplets/ui-properties/ui-properties.glade.h:14
-msgid "Menu bars are detachable"
-msgstr "Menylinjene er avtagbare"
-
-#: capplets/ui-properties/ui-properties.glade.h:15
-msgid "Menu bars have a border"
-msgstr "Menylinjene har en kant"
-
-#: capplets/ui-properties/ui-properties.glade.h:16
-msgid "Menu items have icons"
-msgstr "Menyoppføringer har ikoner"
-
-#: capplets/ui-properties/ui-properties.glade.h:18
-msgid "Menus can be torn off"
-msgstr "Menyer kan rives av"
-
-#: capplets/ui-properties/ui-properties.glade.h:20
-msgid "Multiple Documents"
-msgstr "Flere dokumenter"
-
-#: capplets/ui-properties/ui-properties.glade.h:21
-msgid "Notebook tabs"
-msgstr "Notisblokk-faner"
-
-#: capplets/ui-properties/ui-properties.glade.h:22
-msgid "Place dialogs over application window when possible"
-msgstr "Plasser dialoger over applikasjonsvinduet når mulig"
-
-#: capplets/ui-properties/ui-properties.glade.h:23
-msgid "Progress bar is on the left"
-msgstr "Fremgangsmåler plassert til venstre"
-
-#: capplets/ui-properties/ui-properties.glade.h:24
-msgid "Progress bar is on the right"
-msgstr "Fremgangsmåler plassert til høyre"
-
-#: capplets/ui-properties/ui-properties.glade.h:25
-msgid "Right"
-msgstr "Høyre"
-
-#: capplets/ui-properties/ui-properties.glade.h:26
-msgid "Right aligned"
-msgstr "Høyrejustert"
-
-#: capplets/ui-properties/ui-properties.glade.h:27
-msgid "Seperate windows"
-msgstr "Separate vinduer"
-
-#: capplets/ui-properties/ui-properties.glade.h:28
-msgid "Settings will not take effect until applications restart"
-msgstr "Innstillingene vil ikke tre i kraft før applikasjonene startes på nytt"
-
-#: capplets/ui-properties/ui-properties.glade.h:29
-msgid "Specially by the window manager"
-msgstr "Som spesielle av vindushåndtereren"
-
-#: capplets/ui-properties/ui-properties.glade.h:30
-msgid "Spread out"
-msgstr "Spre utover"
-
-#: capplets/ui-properties/ui-properties.glade.h:31
-msgid "Spread out (big)"
-msgstr "Spre utover (stor)"
-
-#: capplets/ui-properties/ui-properties.glade.h:32
-msgid "Status Bar"
-msgstr "Statuslinje"
-
-#: capplets/ui-properties/ui-properties.glade.h:33
-msgid "Status bar is interactive when possible"
-msgstr "Statuslinjen er interaktiv når mulig"
-
-#: capplets/ui-properties/ui-properties.glade.h:34
-msgid "The same window"
-msgstr "Samme vindu"
-
-#: capplets/ui-properties/ui-properties.glade.h:35
-msgid "Tool Bars"
-msgstr "Verktøylinjer"
-
-#: capplets/ui-properties/ui-properties.glade.h:36
-msgid "Tool bar buttons are icons only"
-msgstr "Knapper på verktøylinen har kun ikoner"
-
-#: capplets/ui-properties/ui-properties.glade.h:37
-msgid "Tool bar buttons are text below icons"
-msgstr "Knapper på verktøylinjen har tekst uner ikoner"
-
-#: capplets/ui-properties/ui-properties.glade.h:38
-msgid "Tool bar buttons pop up on mouse over"
-msgstr "Knapper på verktøylinjen spretter opp når musen holdes over dem"
-
-#: capplets/ui-properties/ui-properties.glade.h:39
-msgid "Tool bars are detachable"
-msgstr "Verktøylinjene kan tas av"
-
-#: capplets/ui-properties/ui-properties.glade.h:40
-msgid "Tool bars have a border"
-msgstr "Verktøylinjer har en kant"
-
-#: capplets/ui-properties/ui-properties.glade.h:41
-msgid "Tool bars have line separators"
-msgstr "Verktøylinjer har linjeseparatorer"
-
-#: capplets/ui-properties/ui-properties.glade.h:42
-msgid "Top"
-msgstr "Topp"
-
-#: capplets/ui-properties/ui-properties.glade.h:43
-msgid "Use status bar instead of dialog when possible"
-msgstr "Bruk statuslinjen i stedet for en dialog når mulig"
-
-#: capplets/ui-properties/ui-properties.glade.h:44
-msgid "When opening Multiple documents, use"
-msgstr "Når flere dokumenter åpnes, bruk"
-
-#: capplets/ui-properties/ui-properties.glade.h:45
-msgid "When using Notebook tabs, place the tabs on the"
-msgstr "Når notisblokkfaner brukes, plasser fanene"
-
-#: capplets/ui-properties/ui-properties.glade.h:46
-msgid "Wherever the Window Manager places them"
-msgstr "Hvor vindushåndtereren plasserer dem"
 
 #: capplets/url-properties/url.desktop.in.in.h:1
 #: capplets/url-properties/url-properties.desktop.in.h:1
@@ -2655,11 +2407,6 @@ msgstr "Forhåndsvisningshøyde"
 msgid "Height if applier is a preview: Defaults to 48."
 msgstr "Høyde hvis påføringen er en forhåndsvisning. Forvalgt til 48."
 
-#: libbackground/applier.c:454
-#, c-format
-msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
-msgstr "Kunne ikke laste pixbuf \"%s\"; slår av bakgrunn."
-
 #: libbackground/preview-file-selection.c:193
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Kan ikke finne en hbox, bruker vanlig filvalg"
@@ -2735,6 +2482,226 @@ msgstr "Kunne ikke laste lydfil %s som sample %s"
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "GConf-nøkkel %s satt til type %s men forventet type var %s\n"
+
+#~ msgid "Accepts Line _Number"
+#~ msgstr "Godtar linje_nummer"
+
+#~ msgid "_Add..."
+#~ msgstr "_Legg til..."
+
+#~ msgid "_Delete"
+#~ msgstr "_Slett"
+
+#~ msgid "_Action"
+#~ msgstr "_Handling"
+
+#~ msgid "_Shortcut"
+#~ msgstr "_Snarvei"
+
+#~ msgid "The list of keybindings."
+#~ msgstr "Listen over tastaturbindinger."
+
+#~ msgid "Icons and Text"
+#~ msgstr "Ikoner og tekst"
+
+#~ msgid "Item 2"
+#~ msgstr "Oppføring 2"
+
+#~ msgid "Item 3"
+#~ msgstr "Oppføring 3"
+
+#~ msgid "Menu Item 1"
+#~ msgstr "Menyoppføring 1"
+
+#~ msgid "Menu Item 2"
+#~ msgstr "Menyoppføring 2"
+
+#~ msgid "Menu Item 3"
+#~ msgstr "Menyoppføring 3"
+
+#~ msgid "Menu Item 4"
+#~ msgstr "Menyoppføring 4"
+
+#~ msgid "Menu Item 5"
+#~ msgstr "Menyoppføring 5"
+
+#~ msgid "Menu items have _icons"
+#~ msgstr "Menyoppføringer har _ikoner"
+
+#~ msgid "Menus"
+#~ msgstr "Menyer"
+
+#~ msgid "New File"
+#~ msgstr "Ny fil"
+
+#~ msgid "Only Icons"
+#~ msgstr "Kun ikoner"
+
+#~ msgid "Only Text"
+#~ msgstr "Kun tekst"
+
+#~ msgid "Open File"
+#~ msgstr "Åpne fil"
+
+#~ msgid "Sample Menubar"
+#~ msgstr "Eksempel-menylinje"
+
+#~ msgid "Sample Toolbar"
+#~ msgstr "Eksempel-verktøylinje"
+
+#~ msgid "Save File"
+#~ msgstr "Lagre fil"
+
+#~ msgid "Toolbar"
+#~ msgstr "Verktøylinje"
+
+#~ msgid "Toolbar and Menu Properties"
+#~ msgstr "Egenskaper for verktøylinje og meny"
+
+#~ msgid "Toolbars can be _detached and moved around"
+#~ msgstr "Verktøylinjene _kan tas av og flyttes rundt"
+
+#~ msgid "_Menu"
+#~ msgstr "_Meny"
+
+#~ msgid "_Toolbars have: "
+#~ msgstr "_Verktøylinjer har: "
+
+#~ msgid "At the center of the screen"
+#~ msgstr "Midt på skjermen"
+
+#~ msgid "At the mouse pointer"
+#~ msgstr "Ved muspekeren"
+
+#~ msgid "Bottom"
+#~ msgstr "Bunn"
+
+#~ msgid "Default  (Spread out - big)"
+#~ msgstr "Forvalgt (Spre utover - stor)"
+
+#~ msgid "Dialog Buttons"
+#~ msgstr "Knapper i dialoger"
+
+#~ msgid "Dialog buttons have icons"
+#~ msgstr "Knapper i dialoger har ikoner"
+
+#~ msgid "Dialogs"
+#~ msgstr "Dialoger"
+
+#~ msgid "Dialogs are treated"
+#~ msgstr "Dialoger behandles"
+
+#~ msgid "Dialogs open"
+#~ msgstr "Dialoger åpnes"
+
+#~ msgid "Interface"
+#~ msgstr "Grensesnitt"
+
+#~ msgid "Left"
+#~ msgstr "Venstre"
+
+#~ msgid "Left aligned"
+#~ msgstr "Venstrejustert"
+
+#~ msgid "Like any other window"
+#~ msgstr "Som ethvert annet vindu"
+
+#~ msgid "Menu bars are detachable"
+#~ msgstr "Menylinjene er avtagbare"
+
+#~ msgid "Menu bars have a border"
+#~ msgstr "Menylinjene har en kant"
+
+#~ msgid "Menu items have icons"
+#~ msgstr "Menyoppføringer har ikoner"
+
+#~ msgid "Menus can be torn off"
+#~ msgstr "Menyer kan rives av"
+
+#~ msgid "Multiple Documents"
+#~ msgstr "Flere dokumenter"
+
+#~ msgid "Notebook tabs"
+#~ msgstr "Notisblokk-faner"
+
+#~ msgid "Place dialogs over application window when possible"
+#~ msgstr "Plasser dialoger over applikasjonsvinduet når mulig"
+
+#~ msgid "Progress bar is on the left"
+#~ msgstr "Fremgangsmåler plassert til venstre"
+
+#~ msgid "Progress bar is on the right"
+#~ msgstr "Fremgangsmåler plassert til høyre"
+
+#~ msgid "Right"
+#~ msgstr "Høyre"
+
+#~ msgid "Right aligned"
+#~ msgstr "Høyrejustert"
+
+#~ msgid "Seperate windows"
+#~ msgstr "Separate vinduer"
+
+#~ msgid "Settings will not take effect until applications restart"
+#~ msgstr ""
+#~ "Innstillingene vil ikke tre i kraft før applikasjonene startes på nytt"
+
+#~ msgid "Specially by the window manager"
+#~ msgstr "Som spesielle av vindushåndtereren"
+
+#~ msgid "Spread out"
+#~ msgstr "Spre utover"
+
+#~ msgid "Spread out (big)"
+#~ msgstr "Spre utover (stor)"
+
+#~ msgid "Status Bar"
+#~ msgstr "Statuslinje"
+
+#~ msgid "Status bar is interactive when possible"
+#~ msgstr "Statuslinjen er interaktiv når mulig"
+
+#~ msgid "The same window"
+#~ msgstr "Samme vindu"
+
+#~ msgid "Tool Bars"
+#~ msgstr "Verktøylinjer"
+
+#~ msgid "Tool bar buttons are icons only"
+#~ msgstr "Knapper på verktøylinen har kun ikoner"
+
+#~ msgid "Tool bar buttons are text below icons"
+#~ msgstr "Knapper på verktøylinjen har tekst uner ikoner"
+
+#~ msgid "Tool bar buttons pop up on mouse over"
+#~ msgstr "Knapper på verktøylinjen spretter opp når musen holdes over dem"
+
+#~ msgid "Tool bars are detachable"
+#~ msgstr "Verktøylinjene kan tas av"
+
+#~ msgid "Tool bars have a border"
+#~ msgstr "Verktøylinjer har en kant"
+
+#~ msgid "Tool bars have line separators"
+#~ msgstr "Verktøylinjer har linjeseparatorer"
+
+#~ msgid "Top"
+#~ msgstr "Topp"
+
+#~ msgid "Use status bar instead of dialog when possible"
+#~ msgstr "Bruk statuslinjen i stedet for en dialog når mulig"
+
+#~ msgid "When opening Multiple documents, use"
+#~ msgstr "Når flere dokumenter åpnes, bruk"
+
+#~ msgid "When using Notebook tabs, place the tabs on the"
+#~ msgstr "Når notisblokkfaner brukes, plasser fanene"
+
+#~ msgid "Wherever the Window Manager places them"
+#~ msgstr "Hvor vindushåndtereren plasserer dem"
+
+#~ msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
+#~ msgstr "Kunne ikke laste pixbuf \"%s\"; slår av bakgrunn."
 
 #~ msgid "Very long"
 #~ msgstr "Meget lang"
