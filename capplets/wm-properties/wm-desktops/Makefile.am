@@ -1,11 +1,14 @@
 wmdatadir = $(datadir)/gnome/wm-properties
 
-wmdata_DATA=\
-	Enlightenment.desktop \
-	IceWM.desktop \
-	Scwm.desktop \
-        WindowMaker.desktop \
-	twm.desktop
+wmdata_in_files= \
+	Enlightenment.desktop.in \
+	IceWM.desktop.in \
+	Scwm.desktop.in \
+        WindowMaker.desktop.in \
+	twm.desktop.in
 
-EXTRA_DIST= $(wmdata_DATA)
+wmdata_DATA = $(wmdata_in_files:.desktop.in=.desktop)
+@XML_I18N_MERGE_DESKTOP_RULE@
+
+EXTRA_DIST= $(wmdata_in_files)
 
