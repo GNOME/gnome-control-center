@@ -558,7 +558,7 @@ location_store_xml (Location *location, gchar *backend_id, xmlDocPtr xml_doc,
 		if (!location->p->inherits_location)
 			fprintf (stderr, "Could not find a location in the " \
 				 "tree ancestry that stores this " \
-				 "backend: %s.", backend_id);
+				 "backend: %s.\n", backend_id);
 		else
 			location_store_xml (location->p->inherits_location,
 					    backend_id, xml_doc, store_type);
