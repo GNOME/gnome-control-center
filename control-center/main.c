@@ -62,6 +62,9 @@ main (int argc, char **argv)
 {
 	CORBA_ORB orb;
 
+	CappletDirEntry *entry;
+	CappletDir *dir;
+
 	static gchar *capplet = NULL;
 	static struct poptOption gnomecc_options[] = {
 #ifdef HAVE_BONOBO
@@ -89,9 +92,6 @@ main (int argc, char **argv)
 #ifdef HAVE_BONOBO
 	if (capplet == NULL) {
 #endif
-		CappletDirEntry *entry;
-		CappletDir *dir;
-
 		gnomecc_init ();
 		dir = get_root_capplet_dir ();
 		if (!dir)

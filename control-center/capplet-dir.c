@@ -205,8 +205,9 @@ capplet_activate (Capplet *capplet)
 #ifdef HAVE_BONOBO
 	if (!strncmp (entry->exec[0], "gnomecc", strlen ("gnomecc")))
 		capplet_control_launch (entry->exec[2], entry->name);
+	else
 #endif
-	else if (!strncmp (entry->exec[0], "root-manager", strlen ("root-manager")))
+	if (!strncmp (entry->exec[0], "root-manager", strlen ("root-manager")))
 		start_capplet_through_root_manager (entry);
 	else
 		gnome_desktop_entry_launch (entry);
