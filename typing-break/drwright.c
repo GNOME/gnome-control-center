@@ -118,11 +118,6 @@ static void     popup_break_cb           (gpointer        callback_data,
 static void     popup_preferences_cb     (gpointer        callback_data,
 					  guint           action,
 					  GtkWidget      *widget);
-#if 0
-static void     popup_quit_cb            (gpointer        callback_data,
-					  guint           action,
-					  GtkWidget      *widget);
-#endif
 static void     popup_about_cb           (gpointer        callback_data,
 					  guint           action,
 					  GtkWidget      *widget);
@@ -139,8 +134,6 @@ static GtkItemFactoryEntry popup_items[] = {
 	{ N_("/_About"),        NULL, GIF_CB (popup_about_cb),       0,                  "<StockItem>",  GNOME_STOCK_ABOUT },
 	{ "/sep1",              NULL, 0,                             0,                  "<Separator>",  NULL },
 	{ N_("/_Take a Break"), NULL, GIF_CB (popup_break_cb),       POPUP_ITEM_BREAK,   "<Item>",       NULL }
-/*	{ "/sep2",              NULL, 0,                             0,                  "<Separator>",  NULL },
-	{ N_("/_Remove Icon"),  "",   GIF_CB (popup_quit_cb),        0,                  "<StockItem>",  GTK_STOCK_REMOVE }*/
 };
 
 GConfClient *client = NULL;
@@ -571,58 +564,26 @@ popup_preferences_cb (gpointer   callback_data,
 		      guint      action,
 		      GtkWidget *widget)
 {
-	/* Bring up gnome-keyboard-properties on the right page */
-}
+	GError *error = NULL;
 
-#if 0
-static void
-popup_quit_cb (gpointer   callback_data,
-	       guint      action,
-	       GtkWidget *widget)
-{
-	GtkWidget *dialog;
-	gchar     *str;
-	gint       response;
-	GnomeClient *client;
+	/* FIXME: Needs multi-head/screen support */
+	if (!g_spawn_command_line_async ("gnome-keyboard-properties --typing-break", &error)) {
+		GtkWidget *error_dialog;
 
-	str = g_strdup_printf ("<b>%s</b>\n%s",
-			       _("Quit DrWright?"),			       
-			       _("Don't forget to take regular breaks."));
-	
-	dialog = gtk_message_dialog_new (NULL,
-					 0,
-					 GTK_MESSAGE_QUESTION,
-					 GTK_BUTTONS_NONE,
-					 str);
+		error_dialog = gtk_message_dialog_new (NULL, 0,
+						       GTK_MESSAGE_ERROR,
+						       GTK_BUTTONS_CLOSE,
+						       _("Unable to bring up the typing break properties dialog with the following error: %s"),
+						       error->message);
+		g_signal_connect (G_OBJECT (error_dialog),
+				  "response",
+				  G_CALLBACK (gtk_widget_destroy), NULL);
+		gtk_window_set_resizable (GTK_WINDOW (error_dialog), FALSE);
+		gtk_widget_show (error_dialog);
 
-	g_free (str);
-
-	gtk_dialog_add_button (GTK_DIALOG (dialog),
-			       _("Don't Quit"),
-			       GTK_RESPONSE_NO);
-	
-	gtk_dialog_add_button (GTK_DIALOG (dialog),
-			       _("Quit"),
-			       GTK_RESPONSE_YES);
-	
-	g_object_set (GTK_MESSAGE_DIALOG (dialog)->label,
-		      "use-markup", TRUE,
-		      "wrap", TRUE,
-		      NULL);
-	
-	response = gtk_dialog_run (GTK_DIALOG (dialog));
-	if (response != GTK_RESPONSE_DELETE_EVENT) {
-		gtk_widget_destroy (dialog);
-	}
-	
-	if (response == GTK_RESPONSE_YES) {
-		client = gnome_master_client ();
-		gnome_client_set_restart_style (client, GNOME_RESTART_NEVER);
-		
-		gtk_main_quit ();
+		g_error_free (error);
 	}
 }
-#endif
 
 static void
 popup_about_cb (gpointer   callback_data,
