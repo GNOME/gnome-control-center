@@ -117,7 +117,7 @@ gnome_window_manager_get_double_click_actions (GnomeWindowManager              *
         *n_actions = 0;
         
         if (klass->get_double_click_actions)
-                return klass->get_double_click_actions (wm, actions, n_actions);
+                klass->get_double_click_actions (wm, actions, n_actions);
 }
 
 void
