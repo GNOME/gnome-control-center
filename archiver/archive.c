@@ -298,6 +298,11 @@ archive_destroy (GtkObject *object)
 
 	GTK_OBJECT_CLASS (parent_class)->destroy (GTK_OBJECT (archive));
 
+	if (archive->is_global)
+		global_archive = NULL;
+	else
+		user_archive = NULL;
+
 	DEBUG_MSG ("Exit");
 }
 
