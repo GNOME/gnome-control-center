@@ -97,14 +97,14 @@ activation_error (void)
 							     GTK_BUTTONS_CLOSE,
 							     _
 							     ("Error activating XKB configuration.\n"
-							      "It can have under various circumstances:\n"
+							      "It can happen under various circumstances:\n"
 							      "- a bug in libxklavier library\n"
 							      "- a bug in X server (xkbcomp, xmodmap utilities)\n"
-							      "- X server with incompatible libxkbfile implemenation\n\n"
+							      "- X server with incompatible libxkbfile implementation\n\n"
 							      "X server version data:\n%s\n%d\n%s\n"
 							      "If you report this situation as a bug, please include:\n"
-							      "- The result of <b>xprop -root | grep XKB</b>\n"
-							      "- The result of <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/kbd</b>"),
+							      "- The result of %s\n"
+							      "- The result of %s"),
 							     vendor,
 							     release,
 							     badXFree430Release
@@ -113,7 +113,9 @@ activation_error (void)
 							     ("You are using XFree 4.3.0.\n"
 							      "There are known problems with complex XKB configurations.\n"
 							      "Try using simpler configuration or taking more fresh version of XFree software.")
-							     : "");
+							     : "",
+							     "<b>xprop -root | grep XKB</b>",
+							     "<b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/kbd</b>");
 	g_signal_connect (msg, "response",
 			  G_CALLBACK (gtk_widget_destroy), NULL);
 	gtk_widget_show (msg);
