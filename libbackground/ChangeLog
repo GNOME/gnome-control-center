@@ -9,6 +9,8 @@
 	(need_wallpaper_load_p): We need to reload the wallpaper pixbuf if
 	it is enabled and not loaded
 	(cleanup_cb): Free bg_applier->p->pixbuf too
+	(bg_applier_apply_prefs): Only add the timeout for cleanup if we
+	are in a root renderer; we don't need it for preview
 
 2002-02-12  Lauris Kaplinski  <lauris@ximian.com>
 

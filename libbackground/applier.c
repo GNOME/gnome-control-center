@@ -396,8 +396,7 @@ bg_applier_apply_prefs (BGApplier           *bg_applier,
 					   new_prefs->wallpaper_filename);
 				new_prefs->wallpaper_enabled = FALSE;
 			}
-			else
-			{
+			else if (bg_applier->p->type == BG_APPLIER_ROOT) {
 				if (bg_applier->p->timeout)
 						g_source_remove (bg_applier->p->timeout);
 				bg_applier->p->timeout = g_timeout_add (30000, (GSourceFunc) cleanup_cb, bg_applier);
