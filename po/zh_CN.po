@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-02 05:34+0100\n"
+"POT-Creation-Date: 2005-02-04 21:37+0100\n"
 "PO-Revision-Date: 2005-02-02 17:40+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
@@ -2253,7 +2253,9 @@ msgstr "创建临时目录失败"
 msgid ""
 "Can not install theme. \n"
 "There are not bzip2 utility in the system."
-msgstr "无法安装主题。\n系统中没有 bzip2 工具。"
+msgstr ""
+"无法安装主题。\n"
+"系统中没有 bzip2 工具。"
 
 #: capplets/theme-switcher/gnome-theme-installer.c:260
 #: capplets/theme-switcher/gnome-theme-installer.c:289
@@ -2265,14 +2267,18 @@ msgstr "主题失败"
 msgid ""
 "Can not install themes. \n"
 "There are not gzip utility in the system."
-msgstr "无法安装主题。\n系统中没有 gzip 工具。"
+msgstr ""
+"无法安装主题。\n"
+"系统中没有 gzip 工具。"
 
 #: capplets/theme-switcher/gnome-theme-installer.c:306
 #, c-format
 msgid ""
 "Icon Theme %s correctly installed.\n"
 "You can select it in the theme details."
-msgstr "图标主题 %s 已正确安装。\n您可以在主题细节中选择该主题。"
+msgstr ""
+"图标主题 %s 已正确安装。\n"
+"您可以在主题细节中选择该主题。"
 
 #: capplets/theme-switcher/gnome-theme-installer.c:309
 #, c-format
@@ -2284,14 +2290,18 @@ msgstr "Gnmoe 主题 %s 已正确安装"
 msgid ""
 "Windows Border Theme %s correctly installed.\n"
 "You can select it in the theme details."
-msgstr "窗口边框主题 %s 已正确安装。\n您可以在主题细节中选择该主题。"
+msgstr ""
+"窗口边框主题 %s 已正确安装。\n"
+"您可以在主题细节中选择该主题。"
 
 #: capplets/theme-switcher/gnome-theme-installer.c:315
 #, c-format
 msgid ""
 "Controls Theme %s correctly installed.\n"
 "You can select it in the theme details."
-msgstr "控件主题 %s 已正确安装。\n您可以在主题细节中选择该主题。"
+msgstr ""
+"控件主题 %s 已正确安装。\n"
+"您可以在主题细节中选择该主题。"
 
 #: capplets/theme-switcher/gnome-theme-installer.c:323
 msgid "The theme is a engine. You need to compile the theme."
@@ -2333,7 +2343,9 @@ msgstr "%s 将要作为主题文件安装的目的路径。所以，您不能将
 msgid ""
 "Cannot install theme.\n"
 "The tar program is not installed on your system."
-msgstr "无法安装主题。\n您的系统中未安装 tar 程序。"
+msgstr ""
+"无法安装主题。\n"
+"您的系统中未安装 tar 程序。"
 
 #: capplets/theme-switcher/gnome-theme-manager.c:676
 msgid "Custom theme"
@@ -2694,7 +2706,7 @@ msgstr "控制中心查看工厂"
 msgid "View as Control Center"
 msgstr "查看为控制中心"
 
-#: control-center/control-center-categories.c:248
+#: control-center/control-center-categories.c:249
 msgid "Others"
 msgstr "其它"
 
@@ -2821,18 +2833,18 @@ msgstr ""
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
-"It can have under various circumstances:\n"
+"It can happen under various circumstances:\n"
 "- a bug in libxklavier library\n"
 "- a bug in X server (xkbcomp, xmodmap utilities)\n"
-"- X server with incompatible libxkbfile implemenation\n"
+"- X server with incompatible libxkbfile implementation\n"
 "\n"
 "X server version data:\n"
 "%s\n"
 "%d\n"
 "%s\n"
 "If you report this situation as a bug, please include:\n"
-"- The result of <b>xprop -root | grep XKB</b>\n"
-"- The result of <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/kbd</b>"
+"- The result of %s\n"
+"- The result of %s"
 msgstr ""
 "激活 XKB 配置出错。\n"
 "可能是以下情况：\n"
@@ -2845,8 +2857,8 @@ msgstr ""
 "%d\n"
 "%s\n"
 "如果您将此问题报告为错误，请同时包含：\n"
-"- <b>xprop -root | grep XKB</b> 的结果\n"
-"- <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/xkb</b> 的结果"
+"- %s 的结果\n"
+"- %s 的结果"
 
 #: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:113
 msgid ""
@@ -2859,17 +2871,17 @@ msgstr ""
 "复杂的 XKB 配置有一些已知的问题。\n"
 "请试着使用较简单的配置，或者获得更新版本的 XFree 软件。"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:216
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:218
 msgid ""
 "The X system keyboard settings differ from your current GNOME keyboard "
 "settings.  Which set would you like to use?"
 msgstr "X 系统键盘设置与您当前的 GNOME 键盘设置不同。您想要使用哪一个设置？"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:219
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:221
 msgid "Use X settings"
 msgstr "使用 X 设置"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:221
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:223
 msgid "Use GNOME settings"
 msgstr "使用 GNOME 设置"
 
@@ -3390,7 +3402,7 @@ msgstr "由 Richard Hult &lt;richard@imendio.com&gt; 编写"
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Anders Carlsson 添加了视觉效果"
 
-#: typing-break/drwright.c:832
+#: typing-break/drwright.c:833
 msgid "Break reminder"
 msgstr "间隔提醒程序"
 
@@ -3402,11 +3414,11 @@ msgstr "已经运行了打字提醒程序。"
 msgid ""
 "The typing monitor uses the notification area to display information. You "
 "don't seem to have a notification area on your panel. You can add it by "
-"right-clicking on your panel and choose 'Add to panel -> Utilities -> "
-"Notification area'."
+"right-clicking on your panel and choosing 'Add to panel', selecting "
+"'Notification area' and clicking 'Add'."
 msgstr ""
 "打字监视器使用通知区显示信息。似乎您并没有在面板上放置通知区。要想添加通知"
-"区，只需用鼠标邮件点击面板，然后选择“添加到面板 -> 实用工具 -> 通知区”。"
+"区，只需用鼠标邮件点击面板，然后选择“添加到面板 -> 通知区”。"
 
 #: vfs-methods/fontilus/font-view.c:125
 msgid "The quick brown fox jumps over the lazy dog. 0123456789"
@@ -3606,4 +3618,3 @@ msgstr "是否将已安装的主题显示为缩略图"
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "是否将主题显示为缩略图"
-
