@@ -141,7 +141,7 @@ gconf_property_editor_class_init (GConfPropertyEditorClass *class)
 		(object_class, PROP_CHANGESET,
 		 g_param_spec_pointer ("changeset",
 				       _("Change set"),
-				       _("GConf change set containing data to be forwarded to the gconf engine on apply"),
+				       _("GConf change set containing data to be forwarded to the gconf client on apply"),
 				       G_PARAM_READWRITE));
 
 	peditor_signals[VALUE_CHANGED] =
@@ -160,7 +160,7 @@ static void
 gconf_property_editor_set_prop (GObject *object, guint prop_id, const GValue *value, GParamSpec *pspec) 
 {
 	GConfPropertyEditor *peditor;
-	GConfEngine *engine;
+	GConfClient *client;
 	GConfNotifyFunc cb;
 	GObject *det_obj;
 
@@ -175,11 +175,12 @@ gconf_property_editor_set_prop (GObject *object, guint prop_id, const GValue *va
 		break;
 
 	case PROP_CALLBACK:
-		engine = gconf_engine_get_default ();
+		client = gconf_client_get_default ();
 		cb = g_value_get_pointer (value);
 		peditor->p->handler_id =
-			gconf_engine_notify_add (engine, peditor->p->key,
-						 cb, peditor, NULL);
+			gconf_client_notify_add (client, peditor->p->key,
+						 (GConfClientNotifyFunc) cb,
+						 peditor, NULL, NULL);
 		break;
 
 	case PROP_CHANGESET:
@@ -246,7 +247,7 @@ gconf_property_editor_get_key (GConfPropertyEditor *peditor)
 }
 
 static void
-peditor_boolean_value_changed (GConfEngine *engine, guint cnxn_id, GConfEntry *entry, GConfPropertyEditor *peditor) 
+peditor_boolean_value_changed (GConfClient *client, guint cnxn_id, GConfEntry *entry, GConfPropertyEditor *peditor) 
 {
 	GtkToggleButton *tb;
 	GConfValue *value;
@@ -273,7 +274,7 @@ GObject *
 gconf_peditor_new_boolean (GConfChangeSet *changeset, gchar *key, GtkWidget *checkbox)
 {
 	GObject *peditor;
-	GConfEngine *engine;
+	GConfClient *client;
 	GConfEntry *gconf_entry;
 
 	peditor = g_object_new (gconf_property_editor_get_type (),
@@ -287,15 +288,15 @@ gconf_peditor_new_boolean (GConfChangeSet *changeset, gchar *key, GtkWidget *che
 				  (GCallback) peditor_boolean_widget_changed, peditor);
 	g_object_set_data (peditor, "toggle-button", checkbox);
 
-	engine = gconf_engine_get_default ();
-	gconf_entry = gconf_engine_get_entry (engine, key, NULL, TRUE, NULL);
-	peditor_boolean_value_changed (engine, 0, gconf_entry, GCONF_PROPERTY_EDITOR (peditor));
+	client = gconf_client_get_default ();
+	gconf_entry = gconf_client_get_entry (client, key, NULL, TRUE, NULL);
+	peditor_boolean_value_changed (client, 0, gconf_entry, GCONF_PROPERTY_EDITOR (peditor));
 
 	return peditor;
 }
 
 static void
-peditor_string_value_changed (GConfEngine *engine, guint cnxn_id, GConfEntry *entry, GConfPropertyEditor *peditor) 
+peditor_string_value_changed (GConfClient *client, guint cnxn_id, GConfEntry *entry, GConfPropertyEditor *peditor) 
 {
 	GtkEntry *gtk_entry;
 	GConfValue *value;
@@ -324,7 +325,7 @@ GObject *
 gconf_peditor_new_string (GConfChangeSet *changeset, gchar *key, GtkWidget *entry)
 {
 	GObject *peditor;
-	GConfEngine *engine;
+	GConfClient *client;
 	GConfEntry *gconf_entry;
 
 	peditor = g_object_new (gconf_property_editor_get_type (),
@@ -338,9 +339,9 @@ gconf_peditor_new_string (GConfChangeSet *changeset, gchar *key, GtkWidget *entr
 				  (GCallback) peditor_string_widget_changed, peditor);
 	g_object_set_data (peditor, "entry", entry);
 
-	engine = gconf_engine_get_default ();
-	gconf_entry = gconf_engine_get_entry (engine, key, NULL, TRUE, NULL);
-	peditor_string_value_changed (engine, 0, gconf_entry, GCONF_PROPERTY_EDITOR (peditor));
+	client = gconf_client_get_default ();
+	gconf_entry = gconf_client_get_entry (client, key, NULL, TRUE, NULL);
+	peditor_string_value_changed (client, 0, gconf_entry, GCONF_PROPERTY_EDITOR (peditor));
 
 	return peditor;
 }
@@ -352,7 +353,7 @@ gconf_peditor_new_filename (GConfChangeSet *changeset, gchar *key, GtkWidget *fi
 }
 
 static void
-peditor_color_value_changed (GConfEngine *engine, guint cnxn_id, GConfEntry *entry, GConfPropertyEditor *peditor) 
+peditor_color_value_changed (GConfClient *client, guint cnxn_id, GConfEntry *entry, GConfPropertyEditor *peditor) 
 {
 	GnomeColorPicker *cp;
 	GConfValue *value;
@@ -390,7 +391,7 @@ GObject *
 gconf_peditor_new_color (GConfChangeSet *changeset, gchar *key, GtkWidget *cp)
 {
 	GObject *peditor;
-	GConfEngine *engine;
+	GConfClient *client;
 	GConfEntry *gconf_entry;
 
 	peditor = g_object_new (gconf_property_editor_get_type (),
@@ -404,15 +405,15 @@ gconf_peditor_new_color (GConfChangeSet *changeset, gchar *key, GtkWidget *cp)
 				  (GCallback) peditor_color_widget_changed, peditor);
 	g_object_set_data (peditor, "cp", cp);
 
-	engine = gconf_engine_get_default ();
-	gconf_entry = gconf_engine_get_entry (engine, key, NULL, TRUE, NULL);
-	peditor_color_value_changed (engine, 0, gconf_entry, GCONF_PROPERTY_EDITOR (peditor));
+	client = gconf_client_get_default ();
+	gconf_entry = gconf_client_get_entry (client, key, NULL, TRUE, NULL);
+	peditor_color_value_changed (client, 0, gconf_entry, GCONF_PROPERTY_EDITOR (peditor));
 
 	return peditor;
 }
 
 static void
-peditor_select_menu_value_changed (GConfEngine *engine, guint cnxn_id, GConfEntry *entry, GConfPropertyEditor *peditor) 
+peditor_select_menu_value_changed (GConfClient *client, guint cnxn_id, GConfEntry *entry, GConfPropertyEditor *peditor) 
 {
 	GtkOptionMenu *option_menu;
 	GtkMenu *menu;
@@ -446,7 +447,7 @@ GObject *
 gconf_peditor_new_select_menu (GConfChangeSet *changeset, gchar *key, GtkWidget *option_menu)
 {
 	GObject *peditor;
-	GConfEngine *engine;
+	GConfClient *client;
 	GConfEntry *gconf_entry;
 	GList *item;
 
@@ -462,15 +463,15 @@ gconf_peditor_new_select_menu (GConfChangeSet *changeset, gchar *key, GtkWidget 
 
 	g_object_set_data (peditor, "option-menu", option_menu);
 
-	engine = gconf_engine_get_default ();
-	gconf_entry = gconf_engine_get_entry (engine, key, NULL, TRUE, NULL);
-	peditor_select_menu_value_changed (engine, 0, gconf_entry, GCONF_PROPERTY_EDITOR (peditor));
+	client = gconf_client_get_default ();
+	gconf_entry = gconf_client_get_entry (client, key, NULL, TRUE, NULL);
+	peditor_select_menu_value_changed (client, 0, gconf_entry, GCONF_PROPERTY_EDITOR (peditor));
 
 	return peditor;
 }
 
 static void
-peditor_select_radio_value_changed (GConfEngine *engine, guint cnxn_id, GConfEntry *entry, GConfPropertyEditor *peditor) 
+peditor_select_radio_value_changed (GConfClient *client, guint cnxn_id, GConfEntry *entry, GConfPropertyEditor *peditor) 
 {
 	GSList *group;
 	GConfValue *value;
@@ -505,7 +506,7 @@ GObject *
 gconf_peditor_new_select_radio (GConfChangeSet *changeset, gchar *key, GSList *radio_group)
 {
 	GObject *peditor;
-	GConfEngine *engine;
+	GConfClient *client;
 	GConfEntry *gconf_entry;
 	GSList *item;
 
@@ -522,9 +523,9 @@ gconf_peditor_new_select_radio (GConfChangeSet *changeset, gchar *key, GSList *r
 
 	g_object_set_data (peditor, "group", radio_group);
 
-	engine = gconf_engine_get_default ();
-	gconf_entry = gconf_engine_get_entry (engine, key, NULL, TRUE, NULL);
-	peditor_select_radio_value_changed (engine, 0, gconf_entry, GCONF_PROPERTY_EDITOR (peditor));
+	client = gconf_client_get_default ();
+	gconf_entry = gconf_client_get_entry (client, key, NULL, TRUE, NULL);
+	peditor_select_radio_value_changed (client, 0, gconf_entry, GCONF_PROPERTY_EDITOR (peditor));
 
 	return peditor;
 }
@@ -538,10 +539,10 @@ guard_value_changed (GConfPropertyEditor *peditor, const gchar *key, const GConf
 void
 gconf_peditor_widget_set_guard (GConfPropertyEditor *peditor, GtkWidget *widget)
 {
-	GConfEngine *engine;
+	GConfClient *client;
 
-	engine = gconf_engine_get_default ();
-	gtk_widget_set_sensitive (widget, gconf_engine_get_bool (engine, peditor->p->key, NULL));
+	client = gconf_client_get_default ();
+	gtk_widget_set_sensitive (widget, gconf_client_get_bool (client, peditor->p->key, NULL));
 
 	g_signal_connect (G_OBJECT (peditor), "value-changed", (GCallback) guard_value_changed, widget);
 }

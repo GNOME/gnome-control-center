@@ -25,7 +25,7 @@
 #define __GCONF_PROPERTY_EDITOR_H
 
 #include <gnome.h>
-#include <gconf/gconf.h>
+#include <gconf/gconf-client.h>
 #include <gconf/gconf-changeset.h>
 
 G_BEGIN_DECLS
