@@ -1,4 +1,4 @@
-/* -*- mode: c; style: linux -*- */
+/* vim: set sw=8: -*- mode: c; style: linux -*- */
 
 /* capplet-dir.c
  * Copyright (C) 2000, 2001 Ximian, Inc.
@@ -53,43 +53,33 @@ CappletDirView *(*get_view_cb) (CappletDir *dir, CappletDirView *launcher);
 
 /* nice global table for capplet lookup */
 GHashTable *capplet_hash = NULL;
+static GnomeIconTheme *icon_theme = NULL;
 
 static char * 
-find_icon (const char *icon, GnomeDesktopItem *dentry) 
+find_icon (GnomeDesktopItem *dentry) 
 {
         char *icon_file = NULL;
+	char const *icon;
 
-	if (icon && icon[0]) {
+	if (icon_theme == NULL)
+		icon_theme = gnome_icon_theme_new ();
+
+	icon = gnome_desktop_item_get_string (dentry, GNOME_DESKTOP_ITEM_ICON);
+
+	if (icon == NULL || icon[0] == 0)
+		icon_file = gnome_icon_theme_lookup_icon (icon_theme, "gnome-settings", 48, NULL, NULL);
+	else if (g_path_is_absolute (icon))
 		icon_file = g_strdup (icon);
-	}
-	
-	if (icon_file) {
-		if (icon_file[0] != '/')
-		{
-			gchar *old = icon_file;
-			icon_file = g_build_filename (GNOMECC_ICONS_DIR, old, NULL);
-			g_free (old);
-		}
-		if (!g_file_test (icon_file, G_FILE_TEST_EXISTS) || g_file_test(icon_file, G_FILE_TEST_IS_DIR))
-		{
-			const gchar *icon;
-			g_free (icon_file);
-			icon = gnome_desktop_item_get_string (dentry, GNOME_DESKTOP_ITEM_ICON);
-			if (icon)
-				icon_file = gnome_program_locate_file (NULL, GNOME_FILE_DOMAIN_PIXMAP, icon, TRUE, NULL);
-	
-			if (!icon_file)
-				icon_file = gnome_program_locate_file (NULL, GNOME_FILE_DOMAIN_PIXMAP, "gnome-unknown.png", TRUE, NULL);
-		}
-	} else {
-		icon_file = gnome_program_locate_file
-			(gnome_program_get (), GNOME_FILE_DOMAIN_APP_PIXMAP,
-			 "control-center2.png", TRUE, NULL);
-	}
+	else
+		icon_file = gnome_icon_theme_lookup_icon (icon_theme, icon, 48, NULL, NULL);
 
-	if (!icon_file) { /* if icon_file still NULL */
-		icon_file = gnome_program_locate_file (NULL, GNOME_FILE_DOMAIN_PIXMAP, "gnome-unknown.png", TRUE, NULL);
-	}
+	if (icon_file == NULL)
+		icon_file = gnome_icon_theme_lookup_icon (icon_theme, "gnome-unknown", 48, NULL, NULL);
+
+	g_return_val_if_fail (icon_file != NULL, NULL);
+
+	if (!g_file_test (icon_file, G_FILE_TEST_EXISTS) || g_file_test(icon_file, G_FILE_TEST_IS_DIR))
+		return NULL;
 
 	return icon_file;
 }
@@ -138,7 +128,7 @@ capplet_new (CappletDir *dir, gchar *desktop_path)
 
 	entry->label = g_strdup (gnome_desktop_item_get_localestring (dentry,
 			GNOME_DESKTOP_ITEM_NAME));
-	entry->icon = find_icon (gnome_desktop_item_get_string (dentry, GNOME_DESKTOP_ITEM_ICON), dentry);
+	entry->icon = find_icon (dentry);
 	entry->pb = gdk_pixbuf_new_from_file (entry->icon, NULL);
 	entry->uri = gnome_vfs_uri_new (desktop_path);
 	entry->exec = vec;
@@ -187,9 +177,7 @@ capplet_dir_new (CappletDir *dir, gchar *dir_path)
 		entry->label = g_strdup (gnome_desktop_item_get_localestring (
 				entry->entry,
 				GNOME_DESKTOP_ITEM_NAME));
-		entry->icon = find_icon (gnome_desktop_item_get_string (entry->entry,
-									GNOME_DESKTOP_ITEM_ICON),
-					 entry->entry);
+		entry->icon = find_icon (entry->entry);
 
 		if (!entry->icon)
 			entry->icon = gnome_program_locate_file

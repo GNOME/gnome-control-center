@@ -14,15 +14,12 @@ gnome_keyboard_properties_LDADD =				\
 Gladedir   = $(GNOMECC_GLADE_DIR)
 Glade_DATA = gnome-keyboard-properties.glade
 
-iconsdir   = $(GNOMECC_PIXMAPS_DIR)
-icons_DATA = keyboard-capplet.png	\
+pixmapsdir   = $(GNOMECC_PIXMAPS_DIR)
+pixmaps_DATA = \
 	keyboard-repeat.png		\
 	keyboard-cursor.png		\
 	keyboard-volume.png		\
 	keyboard-bell.png
-
-pixmapsdir = $(datadir)/pixmaps
-pixmaps_DATA = keyboard-capplet.png
 
 desktopdir = $(GNOMECC_DESKTOP_DIR)
 Desktop_in_files = keyboard.desktop.in
@@ -30,4 +27,4 @@ desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS) $(LIBXKLAVIER_CFLAGS)
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
-EXTRA_DIST = $(Glade_DATA) $(icons_DATA) $(Desktop_in_files)
+EXTRA_DIST = $(Glade_DATA) $(pixmaps_DATA) $(Desktop_in_files)

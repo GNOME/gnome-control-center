@@ -9,21 +9,14 @@ gnome_at_properties_LDFLAGS = -export-dynamic
 
 @INTLTOOL_DESKTOP_RULE@
 
-iconsdir   = $(GNOMECC_ICONS_DIR)
-icons_DATA = at-enable-capplet.png
-
 desktopdir = $(GNOMECC_DESKTOP_DIR)
 Desktop_in_files = at-properties.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
 pixmapdir  = $(GNOMECC_PIXMAPS_DIR)
 pixmap_DATA =					\
-	at-enable-capplet.png			\
 	at-startup.png				\
 	at-support.png
-
-desktop_iconsdir = $(datadir)/pixmaps
-desktop_icons_DATA = at-enable-capplet.png
 
 gladedir = $(GNOMECC_GLADE_DIR)
 glade_DATA = at-enable-dialog.glade
@@ -33,4 +26,4 @@ INCLUDES   = $(AT_CAPPLET_CFLAGS)     \
 	     -DGLADEDIR=\""$(gladedir)"\" \
 	     -DPIXMAPDIR=\""$(pixmapdir)"\"
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
-EXTRA_DIST = $(icons_DATA) $(glade_DATA) $(pixmap_DATA) $(Desktop_in_files)
+EXTRA_DIST = $(glade_DATA) $(pixmap_DATA) $(Desktop_in_files)

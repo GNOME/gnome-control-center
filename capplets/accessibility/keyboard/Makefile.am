@@ -26,17 +26,11 @@ pixmap_DATA = \
 Gladedir   = $(GNOMECC_GLADE_DIR)
 Glade_DATA = gnome-accessibility-keyboard-properties.glade
 
-iconsdir   = $(GNOMECC_ICONS_DIR)
-icons_DATA = accessibility-keyboard-capplet.png
-
-desktop_iconsdir = $(datadir)/pixmaps
-desktop_icons_DATA = accessibility-keyboard-capplet.png
-
 desktopdir = $(GNOMECC_DESKTOP_DIR)
 Desktop_in_files = accessibility-keyboard.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
-EXTRA_DIST = $(Glade_DATA) $(icons_DATA) $(Desktop_in_files) $(pixmap_DATA)
+EXTRA_DIST = $(Glade_DATA) $(Desktop_in_files) $(pixmap_DATA)
 

@@ -4,9 +4,6 @@ pixmapdir = $(GNOMECC_PIXMAPS_DIR)
 pixmap_DATA = \
 	theme-thumbnailing.png
 
-desktop_iconsdir = $(datadir)/pixmaps
-desktop_icons_DATA = gnome-ccthemes.png
-
 gnome_theme_manager_LDADD = 						\
 	$(GNOMECC_CAPPLETS_LIBS) 					\
 	$(METACITY_LIBS)						\
@@ -42,4 +39,4 @@ INCLUDES   = 				\
 	-DGLADEDIR=\""$(gladedir)"\"
 
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
-EXTRA_DIST = $(Desktop_in_files) $(glade_DATA) gnome-theme-save-data.c $(pixmap_DATA) $(desktop_icons_DATA)
+EXTRA_DIST = $(Desktop_in_files) $(glade_DATA) gnome-theme-save-data.c $(pixmap_DATA)

@@ -489,7 +489,7 @@ list_create (CappletDirView *view)
 
 	adjustment = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (sw));		
 
-	w = gnome_icon_list_new (72, NULL, 0);
+	w = gnome_icon_list_new (100, NULL, 0);
 	data->gil = GNOME_ICON_LIST (w);
 	
 	title = g_build_filename (ART_DIR, "title.png", NULL);

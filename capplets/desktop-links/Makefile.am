@@ -5,7 +5,7 @@ capplets =
 
 pixmaps_pre = $(capplets:=-capplet.png)
 pixmaps_DATA = $(pixmaps_pre) accessibility-directory.png
-pixmapsdir = $(GNOMECC_ICONS_DIR)
+pixmapsdir = $(datadir)/icons/gnome/48x48/apps
 
 ##
 ##  Desktop files
@@ -13,39 +13,22 @@ pixmapsdir = $(GNOMECC_ICONS_DIR)
 
 desktop_files = $(capplets:=.desktop)
 desktop_in_files = $(desktop_files:.desktop=.desktop.in)
-desktop_in_in_files = $(desktop_files:.desktop=.desktop.in.in)
 
 desktopfilesdir = $(GNOMECC_DESKTOP_DIR)
 desktopfiles_DATA = $(desktop_files)
 
 CLEANFILES = $(desktop_files) $(desktop_in_files)
-EXTRA_DIST = $(desktop_in_in_files) $(groups_in_in_files) $(pixmaps_DATA)
-
-%.desktop.in: $(srcdir)/%.desktop.in.in
-	    sed s#Icon=#Icon=$(GNOMECC_ICONS_DIR)/# < $< > $@
+EXTRA_DIST = $(desktop_in_files) $(groups_in_files) $(pixmaps_DATA)
 
 @INTLTOOL_DESKTOP_RULE@
 
 all-local: $(desktop_files) $(groups_files)
 
-
-
-## Create the .directory file
-##
-## foo.directory.in is created from foo.directory.in.in and substituting the Icon field with
-## the full path of the icon.
-## foo.directory.in is merged with the translations to create foo.directory
-## foo.directory is installed and renamed
-##
 groups = Advanced Accessibility
 groups_files = $(groups:=.directory)
 groups_in_files = $(groups_files:.directory=.directory.in)
-groups_in_in_files = $(groups_files:.directory=.directory.in.in)
 
 Gnomeccdir = $(datadir)/gnome/vfolders
 Gnomecc_DATA = $(groups_files)
-
-%.directory.in: $(srcdir)/%.directory.in.in
-	    sed s#Icon=#Icon=$(pixmapsdir)/# < $< > $@
 
 @INTLTOOL_DIRECTORY_RULE@

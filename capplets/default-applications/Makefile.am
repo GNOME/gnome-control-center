@@ -6,12 +6,6 @@ gnome_default_applications_properties_SOURCES = \
 
 @INTLTOOL_DESKTOP_RULE@
 
-iconsdir   = $(GNOMECC_ICONS_DIR)
-icons_DATA = default-applications-capplet.png
-
-desktop_iconsdir = $(datadir)/pixmaps
-desktop_icons_DATA = default-applications-capplet.png
-
 Gladedir   = $(GNOMECC_GLADE_DIR)
 Glade_DATA = gnome-default-applications-properties.glade
 
@@ -21,4 +15,4 @@ desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
-EXTRA_DIST = $(Glade_DATA) $(icons_DATA) $(Desktop_in_files) gnome-default-applications-properties-structs.c
+EXTRA_DIST = $(Glade_DATA) $(Desktop_in_files) gnome-default-applications-properties-structs.c
