@@ -1,3 +1,13 @@
+1999-02-27  bertrand <Bertrand.Guiheneuf@inria.fr>
+
+	* capplets/desktop-links/Makefile.am:
+	comment out the panel data install entries to respect
+	new panel organisation. ".directory" are now installed
+	correctly. 
+
+	* capplets/Makefile.am (always_built_SUBDIRS): uncomment 
+	desktop-link. This was causing gnomecc to crash :(
+	
 1999-02-25  Owen Taylor  <otaylor@redhat.com>
 
 	* capplets/wm-properties/wm-desktops/IceWM.desktop (TryExec): Add
