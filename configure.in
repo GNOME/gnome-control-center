@@ -63,6 +63,20 @@ dnl End: Check that we meet the  dependencies
 dnl ==============================================
 
 dnl ==============================================
+dnl IDL settings
+dnl ==============================================
+
+# orbit-idl
+ORBIT_IDL="`$PKG_CONFIG --variable=orbit_idl ORBit-2.0`"
+AC_SUBST(ORBIT_IDL)
+
+# idl directories
+LIBBONOBO_IDL_DIR="`$PKG_CONFIG --variable=idldir libbonobo-2.0`"
+AC_SUBST(LIBBONOBO_IDL_DIR)
+BONOBO_ACTIVATION_IDL_DIR="`$PKG_CONFIG --variable=idldir bonobo-activation-2.0`"
+AC_SUBST(BONOBO_ACTIVATION_IDL_DIR)
+
+dnl ==============================================
 dnl Special GConf section 
 dnl ==============================================
 
