@@ -105,6 +105,7 @@ install_dialog_response (GtkWidget *widget, int response_id, gpointer data)
 	GnomeVFSURI *src_uri;
 	const gchar *raw;
 	gboolean icon_theme;
+	gchar *temppath;
 	
 	if (response_id == GTK_RESPONSE_HELP) {
 		capplet_help (GTK_WINDOW (widget),
@@ -133,6 +134,23 @@ install_dialog_response (GtkWidget *widget, int response_id, gpointer data)
 			path = g_build_filename (g_get_home_dir (), ".icons", base, NULL);
 		else
 			path = g_build_filename (g_get_home_dir (), ".themes", base, NULL);
+
+		/* To avoid the copy of /root/.themes to /root/.themes/.themes 
+		 * which causes an infinite loop. The user asks to transfer the all 
+         * contents of a folder, to a folder under itseld. So ignore the 		
+		 * situation.		
+		 */
+		temppath = g_build_filename (filename, ".themes", NULL);
+		if (!strcmp(temppath, path))	{
+			g_free (base);
+			g_free (filename);
+			g_free(temppath);			
+			return;
+		}
+		g_free(temppath);
+			
+
+
 		target = g_list_append (NULL, gnome_vfs_uri_new (path));
 		
 		dlg = file_transfer_dialog_new ();
@@ -165,7 +183,7 @@ gnome_theme_installer_run (GtkWidget *parent, gchar *filename, gboolean icon_the
 		return;
 
 	running_theme_install = TRUE;
-
+     printf("file name = %s\n", filename);
 	dialog = glade_xml_new (GLADEDIR "/theme-install.glade", NULL, NULL);
 	widget = WID ("install_dialog");
 	
