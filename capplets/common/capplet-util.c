@@ -40,6 +40,8 @@ static SetupPropertyEditorsFn         setup_property_editors_cb = NULL;
 
 static GConfChangeSet                *changeset;
 
+#if 0
+
 /* apply_cb
  *
  * Callback issued when the user clicks "Apply" or "Ok". This function is
@@ -171,6 +173,8 @@ get_property_name (const gchar *binary)
 	return res;
 }
 
+#endif
+
 /* setup_session_mgmt
  *
  * Make sure the capplet launches and applies its settings next time the user
@@ -217,6 +221,8 @@ setup_session_mgmt (const gchar *binary_name)
 	}
 #endif
 }
+
+#if 0
 
 /* capplet_init -- see documentation in capplet-util.h
  */
@@ -282,3 +288,5 @@ capplet_init (int                      argc,
 		gconf_change_set_unref (changeset);
 	}
 }
+
+#endif

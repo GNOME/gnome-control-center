@@ -38,6 +38,8 @@ typedef struct _GConfPropertyEditor GConfPropertyEditor;
 typedef struct _GConfPropertyEditorClass GConfPropertyEditorClass;
 typedef struct _GConfPropertyEditorPrivate GConfPropertyEditorPrivate;
 
+typedef gfloat (*GConfPEditorValueConvFn) (gfloat);
+
 struct _GConfPropertyEditor 
 {
 	GObject parent;
@@ -54,32 +56,39 @@ struct _GConfPropertyEditorClass
 
 GType gconf_property_editor_get_type    (void);
 
-const gchar *gconf_property_editor_get_key (GConfPropertyEditor *peditor);
+const gchar *gconf_property_editor_get_key (GConfPropertyEditor  *peditor);
 
-GObject *gconf_peditor_new_boolean      (GConfChangeSet      *changeset,
-					 gchar               *key,
-					 GtkWidget           *checkbox);
-GObject *gconf_peditor_new_string       (GConfChangeSet      *changeset,
-					 gchar               *key,
-					 GtkWidget           *entry);
-GObject *gconf_peditor_new_filename     (GConfChangeSet      *changeset,
-					 gchar               *key,
-					 GtkWidget           *file_entry);
-GObject *gconf_peditor_new_color        (GConfChangeSet      *changeset,
-					 gchar               *key,
-					 GtkWidget           *color_entry);
-GObject *gconf_peditor_new_select_menu  (GConfChangeSet      *changeset,
-					 gchar               *key,
-					 GtkWidget           *option_menu);
-GObject *gconf_peditor_new_select_radio (GConfChangeSet      *changeset,
-					 gchar               *key,
-					 GSList              *radio_group);
-GObject *gconf_peditor_new_int_range    (GConfChangeSet      *changeset,
-					 gchar               *key,
-					 GtkWidget           *range);
+GObject *gconf_peditor_new_boolean      (GConfChangeSet          *changeset,
+					 gchar                   *key,
+					 GtkWidget               *checkbox);
+GObject *gconf_peditor_new_string       (GConfChangeSet          *changeset,
+					 gchar                   *key,
+					 GtkWidget               *entry);
+GObject *gconf_peditor_new_filename     (GConfChangeSet          *changeset,
+					 gchar                   *key,
+					 GtkWidget               *file_entry);
+GObject *gconf_peditor_new_color        (GConfChangeSet          *changeset,
+					 gchar                   *key,
+					 GtkWidget               *color_entry);
+GObject *gconf_peditor_new_select_menu  (GConfChangeSet          *changeset,
+					 gchar                   *key,
+					 GtkWidget               *option_menu);
+GObject *gconf_peditor_new_select_radio (GConfChangeSet          *changeset,
+					 gchar                   *key,
+					 GSList                  *radio_group);
+GObject *gconf_peditor_new_float_range  (GConfChangeSet          *changeset,
+					 gchar                   *key,
+					 GtkWidget               *range,
+					 GConfPEditorValueConvFn  to_widget_cb,
+					 GConfPEditorValueConvFn  from_widget_cb);
+GObject *gconf_peditor_new_int_range    (GConfChangeSet          *changeset,
+					 gchar                   *key,
+					 GtkWidget               *range,
+					 GConfPEditorValueConvFn  to_widget_cb,
+					 GConfPEditorValueConvFn  from_widget_cb);
 
-void gconf_peditor_widget_set_guard     (GConfPropertyEditor *peditor,
-					 GtkWidget           *widget);
+void gconf_peditor_widget_set_guard     (GConfPropertyEditor     *peditor,
+					 GtkWidget               *widget);
 
 G_END_DECLS
 

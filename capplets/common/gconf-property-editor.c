@@ -529,39 +529,145 @@ gconf_peditor_new_select_radio (GConfChangeSet *changeset, gchar *key, GSList *r
 }
 
 static void
-peditor_int_range_value_changed (GConfClient *client, guint cnxn_id, GConfEntry *entry, GConfPropertyEditor *peditor) 
+peditor_float_range_value_changed (GConfClient *client, guint cnxn_id, GConfEntry *entry, GConfPropertyEditor *peditor) 
 {
 	GConfValue *value;
 	GtkAdjustment *adjustment;
+	GConfPEditorValueConvFn to_widget_cb;
+	gfloat value_f;
+
+	to_widget_cb = g_object_get_data (G_OBJECT (peditor), "to-widget-cb");
 
 	gconf_change_set_remove (peditor->p->changeset, peditor->p->key);
 	value = gconf_entry_get_value (entry);
 
 	if (value != NULL) {
+		value_f = gconf_value_get_float (value);
+
+		if (to_widget_cb != NULL)
+			value_f = to_widget_cb (value_f);
+
 		adjustment = g_object_get_data (G_OBJECT (peditor), "adjustment");
-		gtk_adjustment_set_value (adjustment, gconf_value_get_int (value));
+		gtk_adjustment_set_value (adjustment, value_f);
 	}
 }
 
 static void
-peditor_int_range_widget_changed (GConfPropertyEditor *peditor, GtkAdjustment *adjustment)
+peditor_float_range_widget_changed (GConfPropertyEditor *peditor, GtkAdjustment *adjustment)
 {
 	GConfValue *value;
+	gfloat value_f;
+	GConfPEditorValueConvFn from_widget_cb;
 
-	gconf_change_set_set_int (peditor->p->changeset, peditor->p->key,
-				  gtk_adjustment_get_value (adjustment));
+	from_widget_cb = g_object_get_data (G_OBJECT (peditor), "from-widget-cb");
+
+	value_f = gtk_adjustment_get_value (adjustment);
+
+	if (from_widget_cb != NULL)
+		value_f = from_widget_cb (value_f);
+
+	gconf_change_set_set_float (peditor->p->changeset, peditor->p->key, value_f);
 
 	gconf_change_set_check_value (peditor->p->changeset, peditor->p->key, &value);
 	g_signal_emit (peditor, peditor_signals[VALUE_CHANGED], 0, peditor->p->key, value);
 }
 
 GObject *
-gconf_peditor_new_int_range (GConfChangeSet *changeset, gchar *key, GtkWidget *range)
+gconf_peditor_new_float_range (GConfChangeSet          *changeset,
+			       gchar                   *key,
+			       GtkWidget               *range,
+			       GConfPEditorValueConvFn  to_widget_cb,
+			       GConfPEditorValueConvFn  from_widget_cb)
 {
 	GObject *peditor;
 	GConfClient *client;
 	GConfEntry *gconf_entry;
 	GSList *item;
+	GtkAdjustment *adjustment;
+
+	peditor = g_object_new (gconf_property_editor_get_type (),
+				"key", key,
+				"callback", peditor_float_range_value_changed,
+				"changeset", changeset,
+				"object", range,
+				NULL);
+
+	adjustment = gtk_range_get_adjustment (GTK_RANGE (range));
+	g_object_set_data (peditor, "adjustment", adjustment);
+	g_object_set_data (peditor, "to-widget-cb", to_widget_cb);
+	g_object_set_data (peditor, "from-widget-cb", from_widget_cb);
+
+	g_signal_connect_swapped (G_OBJECT (adjustment), "value_changed",
+				  (GCallback) peditor_float_range_widget_changed, peditor);
+
+	client = gconf_client_get_default ();
+	gconf_entry = gconf_client_get_entry (client, key, NULL, TRUE, NULL);
+	peditor_float_range_value_changed (client, 0, gconf_entry, GCONF_PROPERTY_EDITOR (peditor));
+
+	return peditor;
+}
+
+/* FIXME: These differ only trivially from the float versions; we should combine them */
+
+static void
+peditor_int_range_value_changed (GConfClient         *client,
+				 guint                cnxn_id,
+				 GConfEntry          *entry,
+				 GConfPropertyEditor *peditor) 
+{
+	GConfValue *value;
+	GtkAdjustment *adjustment;
+	GConfPEditorValueConvFn to_widget_cb;
+	gfloat value_i;
+
+	to_widget_cb = g_object_get_data (G_OBJECT (peditor), "to-widget-cb");
+
+	gconf_change_set_remove (peditor->p->changeset, peditor->p->key);
+	value = gconf_entry_get_value (entry);
+
+	if (value != NULL) {
+		value_i = gconf_value_get_int (value);
+
+		if (to_widget_cb != NULL)
+			value_i = to_widget_cb (value_i);
+
+		adjustment = g_object_get_data (G_OBJECT (peditor), "adjustment");
+		gtk_adjustment_set_value (adjustment, value_i);
+	}
+}
+
+static void
+peditor_int_range_widget_changed (GConfPropertyEditor *peditor,
+				  GtkAdjustment       *adjustment)
+{
+	GConfValue *value;
+	gfloat value_i;
+	GConfPEditorValueConvFn from_widget_cb;
+
+	from_widget_cb = g_object_get_data (G_OBJECT (peditor), "from-widget-cb");
+
+	value_i = gtk_adjustment_get_value (adjustment);
+
+	if (from_widget_cb != NULL)
+		value_i = from_widget_cb (value_i);
+
+	gconf_change_set_set_int (peditor->p->changeset, peditor->p->key, value_i);
+
+	gconf_change_set_check_value (peditor->p->changeset, peditor->p->key, &value);
+	g_signal_emit (peditor, peditor_signals[VALUE_CHANGED], 0, peditor->p->key, value);
+}
+
+GObject *
+gconf_peditor_new_int_range (GConfChangeSet          *changeset,
+			       gchar                   *key,
+			       GtkWidget               *range,
+			       GConfPEditorValueConvFn  to_widget_cb,
+			       GConfPEditorValueConvFn  from_widget_cb)
+{
+	GObject       *peditor;
+	GConfClient   *client;
+	GConfEntry    *gconf_entry;
+	GSList        *item;
 	GtkAdjustment *adjustment;
 
 	peditor = g_object_new (gconf_property_editor_get_type (),
@@ -573,8 +679,10 @@ gconf_peditor_new_int_range (GConfChangeSet *changeset, gchar *key, GtkWidget *r
 
 	adjustment = gtk_range_get_adjustment (GTK_RANGE (range));
 	g_object_set_data (peditor, "adjustment", adjustment);
+	g_object_set_data (peditor, "to-widget-cb", to_widget_cb);
+	g_object_set_data (peditor, "from-widget-cb", from_widget_cb);
 
-	g_signal_connect_swapped (G_OBJECT (adjustment), "changed",
+	g_signal_connect_swapped (G_OBJECT (adjustment), "value_changed",
 				  (GCallback) peditor_int_range_widget_changed, peditor);
 
 	client = gconf_client_get_default ();
@@ -600,4 +708,3 @@ gconf_peditor_widget_set_guard (GConfPropertyEditor *peditor, GtkWidget *widget)
 
 	g_signal_connect (G_OBJECT (peditor), "value-changed", (GCallback) guard_value_changed, widget);
 }
-

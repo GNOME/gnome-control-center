@@ -1,3 +1,21 @@
+2001-12-19  Bradford Hovinen  <hovinen@ximian.com>
+
+	* gconf-property-editor.c (gconf_peditor_new_float_range) 
+	(gconf_peditor_new_int_range): Connect to value_changed signal
+
+	* capplet-util.c: Comment out most of this file
+
+	* gconf-property-editor.c (gconf_peditor_new_int_range): Convert
+	to ~_float_range
+	(gconf_peditor_new_float_range): Add callbacks for conversion
+	between widget's values and GConf values in the signature
+	(peditor_float_range_widget_changed): Issue callback, if
+	available, to convert from widget's values to GConf values
+	(peditor_float_range_value_changed): Vice verca above
+	(gconf_peditor_new_int_range, peditor_int_range_widget_changed)
+	(peditor_int_range_value_changed): Implement. Copy from float
+	versions
+
 2001-12-18  Bradford Hovinen  <hovinen@ximian.com>
 
 	* capplet-util.h: Don't #include bonobo*.h
