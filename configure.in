@@ -65,7 +65,7 @@ dnl ==============================================
 dnl Check that we meet the  dependencies
 dnl ==============================================
 
-COMMON_MODULES="gtk+-2.0 >= 2.2.0 gconf-2.0 libgnomeui-2.0 >= 2.2.0 libglade-2.0 >= 1.99.12 libbonobo-2.0 libbonoboui-2.0 libglade-2.0 gconf-2.0 gnome-desktop-2.0 >= 2.2.0"
+COMMON_MODULES="gtk+-2.0 >= 2.3.0 gconf-2.0 libgnomeui-2.0 >= 2.2.0 libglade-2.0 >= 1.99.12 libbonobo-2.0 libbonoboui-2.0 libglade-2.0 gconf-2.0 gnome-desktop-2.0 >= 2.2.0"
 PKG_CHECK_MODULES(CAPPLET, $COMMON_MODULES)
 PKG_CHECK_MODULES(GNOMECC, $COMMON_MODULES libxml-2.0 gnome-desktop-2.0 gnome-vfs-2.0)
 PKG_CHECK_MODULES(GNOME_SETTINGS_DAEMON, gtk+-2.0 gconf-2.0 libgnomeui-2.0 esound gnome-desktop-2.0)
@@ -160,7 +160,7 @@ dnl ==============================================
 dnl themus and fontilust dependencies
 dnl ==============================================
 
-AC_ARG_ENABLE(themus, [  --disable-vfs-methods        Do not build the fonts:/// and themes:/// uri schemes],, enable_vfs_methods=yes)
+AC_ARG_ENABLE(vfs-methods, [  --disable-vfs-methods        Do not build the fonts:/// and themes:/// uri schemes],, enable_vfs_methods=yes)
 
 if test x$enable_vfs_methods = xyes; then 
 
