@@ -6,15 +6,16 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-control-center.HEAD.sq\n"
+"Project-Id-Version: gnome-control-center.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-16 11:13+0100\n"
-"PO-Revision-Date: 2004-02-16 11:18+0100\n"
+"POT-Creation-Date: 2004-02-17 10:52+0100\n"
+"PO-Revision-Date: 2004-02-17 10:55+0100\n"
 "Last-Translator: Elian Myftiu <elian@lycos.com>\n"
 "Language-Team: Albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.3\n"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:1
 msgid "<b>Applications</b>"
@@ -473,6 +474,7 @@ msgstr "_Stili:"
 
 #: capplets/background/gnome-wp-capplet.c:72
 #: capplets/common/capplet-util.c:340
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:326
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "U verifikua një gabim gjatë shfaqjes së ndihmës: %s"
@@ -1511,8 +1513,8 @@ msgid "N_one"
 msgstr "A_snjë"
 
 #: capplets/font/font-properties.glade.h:14
-msgid "R_esolution:"
-msgstr "_Qartësia:"
+msgid "R_esolution :"
+msgstr "_Qartësia :"
 
 #: capplets/font/font-properties.glade.h:15
 msgid "Set the font for applications"
@@ -2642,15 +2644,11 @@ msgstr "Përdor shell edhe pse nautilus është në ekzekutim."
 msgid "Could not initialize Bonobo"
 msgstr "E pamundur nisja e Bonobo"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:325
-msgid "There was an error displaying help:"
-msgstr "Pati një gabim kur u shfaq ndihma:"
-
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:410
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
 msgid "Slow Keys Alert"
 msgstr "Alarm i Tasteve së Ngadaltë"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
 msgid ""
 "You just held down the Shift key for 8 seconds.  This is the shortcut for "
 "the Slow Keys feature, which affects the way your keyboard works."
@@ -2658,20 +2656,19 @@ msgstr ""
 "Sapo e mbajte shtypur tastin Shift për 8 sekonda.  Kjo është mënyra për të "
 "zgjedhur mundësinë e Tasteve të Ngadaltë, që ndikon në përdorimin e tastirës."
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
 msgid "Do you want to activate Slow Keys?"
 msgstr "Dëshironi të aktivizoni Tastet e Ngdaltë?"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
-msgid "Do you want to deactivate Sticky Keys?"
-msgstr "Dëshironi të çaktivizoni Tastet Ngjitëse?"
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:414
+msgid "Do you want to deactivate Slow Keys?"
+msgstr "Dëshironi të ç'aktivoni Tastet e Ngadaltë?"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:424
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:425
 msgid "Sticky Keys Alert"
 msgstr "Alarmi i Tasteve Ngjitës"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:425
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
 msgid ""
 "You just pressed the Shift key 5 times in a row.  This is the shortcut for "
 "the Sticky Keys feature, which affects the way your keyboard works."
@@ -2679,7 +2676,7 @@ msgstr ""
 "Sapo shtype tastin Shift 5 herë rradhazi.  Kjo është mënyra për të zgjedhur "
 "mundësinë e Tasteve Ngjitës, që ndikon në përdorimin e tastierës."
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
 msgid ""
 "You just pressed two keys at once, or pressed the Shift key 5 times in a "
 "row.  This turns off the Sticky Keys feature, which affects the way your "
@@ -2688,9 +2685,13 @@ msgstr ""
 "Sapo·shtype·dy taste njëherësh, apo tastin·Shift·5·herë·rradhazi.··Kjo·heq "
 "mundësinë·e·Tasteve·Ngjitës,·që·ndikon·në·përdorimin·e·tastierës."
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
 msgid "Do you want to activate Sticky Keys?"
 msgstr "Dëshironi të aktivizoni Tastet Ngjitëse?"
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:429
+msgid "Do you want to deactivate Sticky Keys?"
+msgstr "Dëshironi të çaktivizoni Tastet Ngjitëse?"
 
 #: gnome-settings-daemon/gnome-settings-font.c:102
 #, c-format
@@ -2850,14 +2851,6 @@ msgstr "Ekrani"
 #: libbackground/applier.c:280
 msgid "Screen on which BGApplier is to draw"
 msgstr "Ekrani mbi të cilin duhet caktuar BGApplier"
-
-#: libbackground/preview-file-selection.c:207
-msgid "Can't find an hbox, using a normal file selection"
-msgstr "E pamundur gjetja e një hbox, duke përdorur zgjedhjen normale të file"
-
-#: libbackground/preview-file-selection.c:212
-msgid "Preview"
-msgstr "Shikoje"
 
 #: libsounds/sound-view.c:121 libsounds/sound-view.c:146
 msgid "The sound file for this event does not exist."
@@ -3081,11 +3074,11 @@ msgstr "Eye candy shtuar nga Anders Carlsson"
 msgid "Break reminder"
 msgstr "Kujtuesi i pushimit"
 
-#: typing-break/main.c:94
+#: typing-break/main.c:93
 msgid "The typing monitor is already running."
 msgstr "Programi për kontrollin e shkrimit është duke funksionuar."
 
-#: typing-break/main.c:107
+#: typing-break/main.c:106
 msgid ""
 "The typing monitor uses the notification area to display information. You "
 "don't seem to have a notification area on your panel. You can add it by "
