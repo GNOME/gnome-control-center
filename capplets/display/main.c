@@ -736,7 +736,7 @@ main (int argc, char *argv[])
       XRRQueryVersion (xdisplay, &major, &minor) == 0)
     {
       GtkWidget *msg_dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, 
-						   _("The XServer does not support the XRandR extenstion.  Runtime resolution changes to the display size are not available."));
+						   _("The XServer does not support the XRandR extension.  Runtime resolution changes to the display size are not available."));
       gtk_dialog_run (GTK_DIALOG (msg_dialog));
       gtk_widget_destroy (msg_dialog);
       exit (0);
