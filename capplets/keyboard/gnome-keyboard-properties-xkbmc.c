@@ -91,6 +91,9 @@ fill_models_list (GladeXML * chooserDialog)
   XklConfigEnumModels ((ConfigItemProcessFunc)
 		       add_model_to_list, modelsList);
 
+  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (listStore),
+                                        0, GTK_SORT_ASCENDING);
+
   g_signal_connect (G_OBJECT (gtk_tree_view_get_selection (GTK_TREE_VIEW (modelsList))), 
                     "changed",
                     G_CALLBACK (xkb_model_chooser_change_sel),
