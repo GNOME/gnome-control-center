@@ -144,7 +144,7 @@ service_info_get_description (ServiceInfo *info)
 
 		for (i = 0; url_descriptions[i][0] != NULL; i++)
 			if (!strcmp (url_descriptions[i][0], info->protocol))
-				return g_strdup (url_descriptions[i][1]);
+				return g_strdup (_(url_descriptions[i][1]));
 	}
 
 	return info->description;
