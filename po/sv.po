@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2003-07-31 23:12+0200\n"
-"PO-Revision-Date: 2003-07-31 23:14+0200\n"
+"POT-Creation-Date: 2003-08-01 13:08+0200\n"
+"PO-Revision-Date: 2003-08-01 13:10+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -380,7 +380,7 @@ msgstr "I_ngen bild"
 #: capplets/background/background-properties-capplet.c:559
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:852
-#: capplets/keyboard/gnome-keyboard-properties.c:220
+#: capplets/keyboard/gnome-keyboard-properties.c:222
 #: capplets/mouse/gnome-mouse-properties.c:714
 #: capplets/sound/sound-properties-capplet.c:212
 msgid "Retrieve and store legacy settings"
@@ -1502,7 +1502,7 @@ msgstr "Typen av snabbtangent."
 
 #: capplets/keybindings/eggcellrendererkeys.c:219
 #: capplets/keybindings/gnome-keybinding-properties.c:204
-#: libbackground/applier.c:588 typing-break/drwright.c:446
+#: libbackground/applier.c:588 typing-break/drwright.c:439
 msgid "Disabled"
 msgstr "Inaktiverad"
 
@@ -1593,8 +1593,8 @@ msgstr ""
 msgid "_Accessibility"
 msgstr "_Tillgänglighet"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:216
 #: capplets/keyboard/gnome-keyboard-properties.c:218
+#: capplets/keyboard/gnome-keyboard-properties.c:220
 #: capplets/sound/sound-properties-capplet.c:208
 #: capplets/sound/sound-properties-capplet.c:210
 msgid ""
@@ -1602,6 +1602,10 @@ msgid ""
 msgstr ""
 "Verkställ bara ändringar och avsluta (endast för kompatibilitet; hanteras nu "
 "av demon)"
+
+#: capplets/keyboard/gnome-keyboard-properties.c:224
+msgid "Start the page with the typing break settings showing"
+msgstr "Starta sidan utan att inställningarna för skrivandepaus visas"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:3
 msgid "<b>Cursor Blinking</b>"
@@ -2713,65 +2717,57 @@ msgid "Take a break!"
 msgstr "Ta en paus!"
 
 #. { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
-#: typing-break/drwright.c:138
+#: typing-break/drwright.c:133
 msgid "/_Preferences"
 msgstr "/_Inställningar"
 
-#: typing-break/drwright.c:139
+#: typing-break/drwright.c:134
 msgid "/_About"
 msgstr "_Om"
 
-#: typing-break/drwright.c:141
+#: typing-break/drwright.c:136
 msgid "/_Take a Break"
 msgstr "/_Ta en paus"
 
-#: typing-break/drwright.c:464
+#: typing-break/drwright.c:457
 #, c-format
 msgid "%d minutes until the next break"
 msgstr "%d minuter till nästa paus"
 
-#: typing-break/drwright.c:467
+#: typing-break/drwright.c:460
 msgid "One minute until the next break"
 msgstr "En minut till nästa paus"
 
-#: typing-break/drwright.c:469
+#: typing-break/drwright.c:462
 msgid "Less than one minute until the next break"
 msgstr "Mindre än en minut till nästa paus"
 
-#: typing-break/drwright.c:589
-msgid "Quit DrWright?"
-msgstr "Avsluta DrWright?"
-
-#: typing-break/drwright.c:590
-msgid "Don't forget to take regular breaks."
-msgstr "Glöm inte att ta regelbunda pauser."
-
-#: typing-break/drwright.c:601
-msgid "Don't Quit"
-msgstr "Avsluta inte"
-
-#: typing-break/drwright.c:605
-msgid "Quit"
-msgstr "Avsluta"
+#: typing-break/drwright.c:576
+#, c-format
+msgid ""
+"Unable to bring up the typing break properties dialog with the following "
+"error: %s"
+msgstr ""
+"Kan inte visa dialogfönstret för skrivandepausegenskaper med följande fel: %s"
 
 # Osäker
-#: typing-break/drwright.c:655
+#: typing-break/drwright.c:616
 msgid "About GNOME Typing Monitor"
 msgstr "Om GNOME-skrivandeövervakaren"
 
-#: typing-break/drwright.c:679
+#: typing-break/drwright.c:640
 msgid "A computer break reminder."
 msgstr "En datorpauspåminnare."
 
-#: typing-break/drwright.c:680
+#: typing-break/drwright.c:641
 msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
 msgstr "Skrivet av Richard Hult &lt;rhult@imendio.com&gt;"
 
-#: typing-break/drwright.c:681
+#: typing-break/drwright.c:642
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Ögongodis tillagt av Anders Carlsson"
 
-#: typing-break/drwright.c:840
+#: typing-break/drwright.c:801
 msgid "Break reminder"
 msgstr "Pauspåminnare"
 
@@ -3018,6 +3014,18 @@ msgstr "Huruvida det ska skapas miniatyrbilder för installerade teman"
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Huruvida det ska skapas miniatyrbilder för teman"
+
+#~ msgid "Quit DrWright?"
+#~ msgstr "Avsluta DrWright?"
+
+#~ msgid "Don't forget to take regular breaks."
+#~ msgstr "Glöm inte att ta regelbunda pauser."
+
+#~ msgid "Don't Quit"
+#~ msgstr "Avsluta inte"
+
+#~ msgid "Quit"
+#~ msgstr "Avsluta"
 
 #~ msgid ""
 #~ "No Assistive Technology is available on your system.  The 'gok' package "
