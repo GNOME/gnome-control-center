@@ -35,6 +35,7 @@
 #include <libgnome/gnome-i18n.h>
 
 #include <libxklavier/xklavier.h>
+#include <libxklavier/xklavier_config.h>
 #include <libgswitchit/gswitchit_xkb_config.h>
 
 #include "gnome-settings-keyboard-xkb.h"
@@ -77,6 +78,9 @@ apply_settings (void)
 {
 	GConfClient *confClient;
 
+	if (!initedOk)
+		return;
+
 	memset (&gswic, 0, sizeof (gswic));
 
 	confClient = gconf_client_get_default ();
@@ -84,12 +88,17 @@ apply_settings (void)
 	g_object_unref (confClient);
 	GSwitchItXkbConfigLoad (&gswic);
 
-	if (!gswic.overrideSettings)
+	if (gswic.overrideSettings) {
+		/* initialization - from the system settings */
 		GSwitchItXkbConfigLoadInitial (&gswic);
-
-	if (!GSwitchItXkbConfigActivate (&gswic)) {
-		g_warning ("Could not activate the XKB configuration");
-		activation_error ();
+		gswic.overrideSettings = FALSE;
+		GSwitchItXkbConfigSave (&gswic);
+	} else {
+		if (!GSwitchItXkbConfigActivate (&gswic)) {
+			g_warning
+			    ("Could not activate the XKB configuration");
+			activation_error ();
+		}
 	}
 
 	GSwitchItXkbConfigTerm (&gswic);
@@ -110,6 +119,5 @@ gnome_settings_keyboard_xkb_init (GConfClient * client)
 void
 gnome_settings_keyboard_xkb_load (GConfClient * client)
 {
-	if (initedOk)
-		apply_settings ();
+	apply_settings ();
 }
