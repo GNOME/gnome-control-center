@@ -276,8 +276,7 @@ fill_dialog (ServiceEditDialog *dialog)
 {
 	service_info_load_all (dialog->p->info);
 
-	if (dialog->p->info->description != NULL)
-		gtk_entry_set_text (GTK_ENTRY (WID ("description_entry")), dialog->p->info->description);
+	gtk_entry_set_text (GTK_ENTRY (WID ("description_entry")), service_info_get_description (dialog->p->info));
 
 	if (dialog->p->info->protocol != NULL) {
 		if (strcmp (dialog->p->info->protocol, "unknown"))
@@ -313,6 +312,9 @@ populate_app_list (ServiceEditDialog *dialog)
 	option_menu = GTK_OPTION_MENU (WID ("program_select"));
 	menu = GTK_MENU (gtk_menu_new ());
 	service_apps = get_apps_for_service_type (dialog->p->info->protocol);
+
+	if (service_apps == NULL)
+		gtk_widget_set_sensitive (WID ("program_select"), FALSE);
 
 	while (service_apps != NULL) {
 		app = service_apps->data;

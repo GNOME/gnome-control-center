@@ -297,8 +297,10 @@ fill_dialog (MimeCategoryEditDialog *dialog)
 
 	populate_application_list (dialog);
 
-	if (dialog->p->info->entry.parent->type != MODEL_ENTRY_NONE)
+	if (dialog->p->info->entry.parent->type == MODEL_ENTRY_NONE)
 		gtk_widget_set_sensitive (WID ("use_category_defaults_toggle"), FALSE);
+
+	gtk_widget_set_sensitive (WID ("component_box"), FALSE);
 
 	gtk_widget_show_all (dialog->p->dialog_win);
 }
@@ -335,6 +337,9 @@ populate_application_list (MimeCategoryEditDialog *dialog)
 		gtk_menu_append (menu, menu_item);
 		gtk_widget_show (menu_item);
 	}
+
+	if (i == 0)
+		gtk_widget_set_sensitive (WID ("default_action_box"), FALSE);
 
 	gtk_menu_append (menu, gtk_menu_item_new_with_label (_("Custom")));
 

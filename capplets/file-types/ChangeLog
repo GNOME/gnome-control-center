@@ -1,5 +1,16 @@
 2002-01-25  Bradford Hovinen  <hovinen@ximian.com>
 
+	* mime-category-edit-dialog.c (fill_dialog): Desensitize component
+	select
+	(populate_application_list): Desensitize application select if
+	there are no applications
+	(fill_dialog): Flip logic on category defaults toggle sensitivity
+
+	* service-edit-dialog.c (populate_app_list): Desensitize program
+	select if there are no programs
+	(fill_dialog): Use service_info_get_description for description
+	entry
+
 	* mime-edit-dialog.c (store_data): Construct an iterator if the
 	one given is NULL
 	(store_data): Don't notify row deletion if the object was not in
