@@ -40,17 +40,22 @@ $(desktop).in: %.desktop.in: %.desktop.in.in
 install-data-local:
 	$(mkinstalldirs) $(DESTDIR)$(datadir)/control-center/capplets/$(cappletgroup)
 	$(INSTALL_DATA) $(desktop) $(DESTDIR)$(datadir)/control-center/capplets/$(cappletgroup)$(desktop)
+	GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) gconftool --makefile-install-rule $(schema_DATA)
 
 install-data-am: install-data-local
 ####@###GNOMECC_CAPPLETS_DESKTOP_IN_RULE@
 
-INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS) $(BONOBO_CONF_DEFINE)
-CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
-EXTRA_DIST = $(GNOMECC_CAPPLETS_EXTRA_DIST) $(defaults_DATA) $(oaf_DATA).in
-iconsdir   = $(GNOMECC_ICONS_DIR)
-Gladedir   = $(GNOMECC_GLADE_DIR)
-pixmapdir  = $(GNOMECC_PIXMAPS_DIR)
-Glade_DATA = $(cappletname)-properties.glade
-icons_DATA = $(cappletname)-capplet.png
-desktop    = $(cappletname).desktop
+INCLUDES     = $(GNOMECC_CAPPLETS_CFLAGS) $(BONOBO_CONF_DEFINE)
+CLEANFILES   = $(GNOMECC_CAPPLETS_CLEANFILES)
+EXTRA_DIST   = $(GNOMECC_CAPPLETS_EXTRA_DIST) $(defaults_DATA) $(oaf_DATA).in
+iconsdir     = $(GNOMECC_ICONS_DIR)
+Gladedir     = $(GNOMECC_GLADE_DIR)
+pixmapdir    = $(GNOMECC_PIXMAPS_DIR)
+schemadir    = $(sysconfdir)/control-center/schemas
+Glade_DATA   = $(cappletname)-properties.glade
+icons_DATA   = $(cappletname)-capplet.png
+schema_DATA  = background.schema
+desktop      = $(cappletname).desktop
 all-local: $(desktop) $(oaffile)
+
+

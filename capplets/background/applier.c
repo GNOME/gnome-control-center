@@ -29,7 +29,6 @@
 #include <gdk/gdk.h>
 #include <gdk/gdkx.h>
 #include <gdk/gdkprivate.h>
-#include <gdk-pixbuf/gdk-pixbuf-xlib.h>
 
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
