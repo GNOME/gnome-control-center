@@ -32,6 +32,6 @@ gnome_control_center_SOURCES = \
 
 gnome_control_center_LDADD = $(GNOMECC_LIBS)
 
-EXTRA_DIST = gnomecc.desktop.in $(appicon_DATA) $(splash_DATA) $(ui_DATA)
+EXTRA_DIST = gnomecc.desktop.in $(splash_DATA) $(ui_DATA)
 
 CLEANFILES = gnomecc.desktop
