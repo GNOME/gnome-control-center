@@ -1,6 +1,5 @@
 schemadir   = @GCONF_SCHEMA_FILE_DIR@
 schema_DATA = \
-	apps_gnome_keybinding_properties.schemas	\
 	apps_gnome_settings_daemon_screensaver.schemas
 
 schema_source_data = $(foreach file, $(schema_DATA), $(srcdir)/$(file))
