@@ -26,7 +26,7 @@ e-util-marshal.c: e-util-marshal.h
 
 @INTLTOOL_DESKTOP_RULE@
 
-desktopdir = $(GNOMECC_DESKTOP_DIR)
+desktopdir = $(datadir)/applications
 Desktop_in_files = gnome-about-me.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
