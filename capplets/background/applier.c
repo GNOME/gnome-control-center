@@ -564,13 +564,18 @@ run_render_pipeline (Applier *applier, const Preferences *prefs)
 	g_assert (applier->p->pixbuf == NULL);
 
 	/* Initialize applier->p->render_geom */
-	memcpy (&(applier->p->pixbuf_render_geom), &(applier->p->render_geom),
-		sizeof (GdkRectangle));
+	applier->p->pixbuf_render_geom.x = applier->p->render_geom.x;
+	applier->p->pixbuf_render_geom.y = applier->p->render_geom.y;
+	applier->p->pixbuf_render_geom.width = applier->p->render_geom.width;
+	applier->p->pixbuf_render_geom.height = applier->p->render_geom.height;
+	applier->p->pixbuf_xlate.x = 0;
+	applier->p->pixbuf_xlate.y = 0;
+
+	render_background (applier, prefs);
 
 	if (need_root_pixmap_p (applier, prefs))
 		create_pixmap (applier, prefs);
 
-	render_background (applier, prefs);
 	render_wallpaper (applier, prefs);
 	render_to_screen (applier, prefs);
 
@@ -629,6 +634,9 @@ render_background (Applier *applier, const Preferences *prefs)
 						  applier->p->grad_geom.x * 3, 
 						  (GdkPixbufDestroyNotify) g_free, 
 						  NULL);
+
+		applier->p->pixbuf_render_geom.width = applier->p->grad_geom.x;
+		applier->p->pixbuf_render_geom.height = applier->p->grad_geom.y;
 	}
 }
 
@@ -688,11 +696,6 @@ render_wallpaper (Applier *applier, const Preferences *prefs)
 			applier->p->pixbuf_render_geom.y = dest_geom.y + applier->p->render_geom.y;
 			applier->p->pixbuf_render_geom.width = dest_geom.width;
 			applier->p->pixbuf_render_geom.height = dest_geom.height;
-
-			if (applier->p->type == APPLIER_ROOT) {
-				applier->p->pixbuf_xlate.x = src_geom.x;
-				applier->p->pixbuf_xlate.y = src_geom.y;
-			}
 		}
 
 		if (prefs->wallpaper_type == WPTYPE_TILED) {
@@ -726,6 +729,11 @@ render_wallpaper (Applier *applier, const Preferences *prefs)
 							   applier->p->wallpaper_pixbuf,
 							   &dest_geom, &src_geom,
 							   alpha, prefs->color1);
+
+		if (applier->p->pixbuf == applier->p->wallpaper_pixbuf) {
+			applier->p->pixbuf_xlate.x = src_geom.x;
+			applier->p->pixbuf_xlate.y = src_geom.y;
+		}
 
 		if (prescaled_pixbuf != NULL)
 			gdk_pixbuf_unref (prescaled_pixbuf);
@@ -996,27 +1004,35 @@ place_pixbuf (GdkPixbuf *dest_pixbuf,
 
 	if (need_composite && dest_pixbuf != NULL) {
 		gdk_pixbuf_composite
-			(dest_pixbuf, src_pixbuf,
+			(src_pixbuf, dest_pixbuf,
 			 dest_geom->x, dest_geom->y,
 			 dest_geom->width, 
 			 dest_geom->height,
-			 dest_geom->x - src_geom->x,
-			 dest_geom->y - src_geom->y,
+			 dest_geom->x - src_geom->x * scale_x,
+			 dest_geom->y - src_geom->y * scale_y,
 			 scale_x, scale_y,
 			 GDK_INTERP_BILINEAR,
 			 alpha);
 	}
-	else if (need_composite && dest_pixbuf == NULL) {
+	else if (need_composite) {
+		dest_pixbuf = gdk_pixbuf_new
+			(GDK_COLORSPACE_RGB, FALSE, 8,
+			 dest_geom->width, dest_geom->height);
+
 		colorv = ((bg_color->red & 0xff00) << 8) |
 			(bg_color->green & 0xff00) |
 			((bg_color->blue & 0xff00) >> 8);
 
-		dest_pixbuf = gdk_pixbuf_composite_color_simple 
-			(src_pixbuf,
-			 dest_geom->width,
+		gdk_pixbuf_composite_color 
+			(src_pixbuf, dest_pixbuf,
+			 0, 0,
+			 dest_geom->width, 
 			 dest_geom->height,
+			 -src_geom->x * scale_x,
+			 -src_geom->y * scale_y,
+			 scale_x, scale_y,
 			 GDK_INTERP_BILINEAR,
-			 alpha, 65536,
+			 alpha, 0, 0, 65536,
 			 colorv, colorv);
 	}
 	else if (need_scaling) {
@@ -1093,7 +1109,7 @@ tile_pixbuf (GdkPixbuf *dest_pixbuf,
 		for (cx = 0; cx < field_geom->width; cx += pwidth) {
 			if (need_composite && !use_simple)
 				gdk_pixbuf_composite
-					(dest_pixbuf, src_pixbuf,
+					(src_pixbuf, dest_pixbuf,
 					 cx, cy,
 					 MIN (pwidth, field_geom->width - cx), 
 					 MIN (pheight, field_geom->height - cy),
@@ -1103,7 +1119,7 @@ tile_pixbuf (GdkPixbuf *dest_pixbuf,
 					 alpha);
 			else if (need_composite && use_simple)
 				gdk_pixbuf_composite_color
-					(dest_pixbuf, src_pixbuf,
+					(src_pixbuf, dest_pixbuf,
 					 cx, cy,
 					 MIN (pwidth, field_geom->width - cx), 
 					 MIN (pheight, field_geom->height - cy),

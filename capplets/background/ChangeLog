@@ -1,3 +1,13 @@
+2001-09-22  Bradford Hovinen  <hovinen@ximian.com>
+
+	* applier.c (run_render_pipeline): Create the root pixmap after we
+	know about the gradient geometry
+	(place_pixbuf):
+	(tile_pixbuf): Fix calls to gdk_pixbuf_composite[_color]
+	(render_wallpaper): Fix setting of pixbuf_xlate
+	(render_background): Fix pixbuf_render_geom here in case the
+	gradient geometry is small
+
 2001-09-21  Bradford Hovinen  <hovinen@ximian.com>
 
 	* applier.c: Total reorganization
