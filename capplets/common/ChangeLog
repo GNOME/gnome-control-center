@@ -1,3 +1,17 @@
+2002-03-14  Richard Hestilow  <hestilow@ximian.com>
+
+	* gconf-property-editor.c:
+	(gconf_property_editor_new_option_menu_with_enum):
+	(gconf_property_editor_new_enum_toggle): Added.
+	(gconf_property_editor_new): Accept custom arguments from the
+	editor "subclass".
+	(gconf_property_editor_class_init): Add arguments "data"
+	and "data-free-cb", for custom "subclass" data.
+	(gconf_property_editor_finalize): Free custom data.
+	(*_new): Add NULL at the end of gconf_property_editor_new.
+	(guard_value_changed, peditor_widget_set_guard): Use the
+	enum->boolean mapping if the gconf value is a string.
+
 2002-03-10  Seth Nickell  <snickell@stanford.edu>
 
 	* Makefile.am:

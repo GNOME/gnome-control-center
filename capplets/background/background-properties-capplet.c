@@ -36,6 +36,7 @@
 #include "gconf-property-editor.h"
 #include "applier.h"
 #include "preview-file-selection.h"
+#include "activate-settings-daemon.h"
 
 /* Retrieve legacy gnome_config settings and store them in the GConf
  * database. This involves some translation of the settings' meanings.
@@ -49,42 +50,52 @@ get_legacy_settings (void)
 	gboolean     val_boolean;
 	gboolean     def;
 	gchar       *val_filename;
+	gchar	    *path;
+	gchar	    *prefix;
 
 	GConfClient *client;
 
+	/* gnome_config needs to be told to use the Gnome1 prefix */
+	path = g_build_filename (g_get_home_dir (), ".gnome", "Background", NULL);
+	prefix = g_strconcat ("=", path, "=", "/Default/", NULL);
+	gnome_config_push_prefix (prefix);
+	g_free (prefix);
+	g_free (path);
+
 	client = gconf_client_get_default ();
 
-	gconf_client_set_bool (client, "/desktop/gnome/background/enabled",
-			       gnome_config_get_bool ("/Background/Default/Enabled=true"), NULL);
+	gconf_client_set_bool (client, BG_PREFERENCES_DRAW_BACKGROUND,
+			       gnome_config_get_bool ("Enabled=true"), NULL);
 
-	val_filename = gnome_config_get_string ("/Background/Default/wallpaper=(none)");
-	gconf_client_set_string (client, "/desktop/gnome/background/wallpaper-filename",
-				 val_filename, NULL);
+	val_filename = gnome_config_get_string ("wallpaper=(none)");
 
 	if (val_filename != NULL && strcmp (val_filename, "(none)"))
-		gconf_client_set_bool (client, "/desktop/gnome/background/wallpaper-enabled", TRUE, NULL);
+	{
+		gconf_client_set_string (client, BG_PREFERENCES_PICTURE_FILENAME,
+					 val_filename, NULL);
+		gconf_client_set_string (client, BG_PREFERENCES_PICTURE_OPTIONS,
+			 bg_preferences_get_wptype_as_string (gnome_config_get_int ("wallpaperAlign=0")), NULL);
+	}
 	else
-		gconf_client_set_bool (client, "/desktop/gnome/background/wallpaper-enabled", FALSE, NULL);
+		gconf_client_set_string (client, BG_PREFERENCES_PICTURE_OPTIONS, "none", NULL);
 
 	g_free (val_filename);
 
-	gconf_client_set_int (client, "/desktop/gnome/background/wallpaper-type",
-			      gnome_config_get_int ("/Background/Default/wallpaperAlign=0"), NULL);
 
-	gconf_client_set_string (client, "/desktop/gnome/background/color1",
-				 gnome_config_get_string ("/Background/Default/color1"), NULL);
-	gconf_client_set_string (client, "/desktop/gnome/background/color2",
-				 gnome_config_get_string ("/Background/Default/color2"), NULL);
+	gconf_client_set_string (client, BG_PREFERENCES_PRIMARY_COLOR,
+				 gnome_config_get_string ("color1"), NULL);
+	gconf_client_set_string (client, BG_PREFERENCES_SECONDARY_COLOR,
+				 gnome_config_get_string ("color2"), NULL);
 
 	/* Code to deal with new enum - messy */
 	val_int = -1;
-	val_string = gnome_config_get_string_with_default ("/Background/Default/simple=solid", &def);
+	val_string = gnome_config_get_string_with_default ("simple=solid", &def);
 	if (!def) {
 		if (!strcmp (val_string, "solid")) {
 			val_int = ORIENTATION_SOLID;
 		} else {
 			g_free (val_string);
-			val_string = gnome_config_get_string_with_default ("/Background/Default/gradient=vertical", &def);
+			val_string = gnome_config_get_string_with_default ("gradient=vertical", &def);
 			if (!def)
 				val_int = (!strcmp (val_string, "vertical")) ? ORIENTATION_VERT : ORIENTATION_HORIZ;
 		}
@@ -93,13 +104,17 @@ get_legacy_settings (void)
 	g_free (val_string);
 
 	if (val_int != -1)
-		gconf_client_set_int (client, "/desktop/gnome/background/orientation", val_int, NULL);
+		gconf_client_set_string (client, BG_PREFERENCES_COLOR_SHADING_TYPE, bg_preferences_get_orientation_as_string (val_int), NULL);
 
-	val_boolean = gnome_config_get_bool_with_default ("/Background/Default/adjustOpacity=true", &def);
+	val_boolean = gnome_config_get_bool_with_default ("adjustOpacity=true", &def);
 
 	if (!def && val_boolean)
-		gconf_client_set_int (client, "/desktop/gnome/background/opacity",
-				      gnome_config_get_int ("/Background/Default/opacity=100"), NULL);
+		gconf_client_set_int (client, BG_PREFERENCES_PICTURE_OPACITY,
+				      gnome_config_get_int ("opacity=100"), NULL);
+	else
+		gconf_client_set_int (client, BG_PREFERENCES_PICTURE_OPACITY, 100, NULL);
+
+	gnome_config_pop_prefix ();
 }
 
 /* Initial apply to the preview, and setting of the color frame's sensitivity.
@@ -169,13 +184,20 @@ peditor_value_changed (GConfPropertyEditor *peditor, const gchar *key, const GCo
 	if (GTK_WIDGET_REALIZED (bg_applier_get_preview_widget (bg_applier)))
 		bg_applier_apply_prefs (bg_applier, BG_PREFERENCES (prefs));
 
-	if (!strcmp (key, "/desktop/gnome/background/wallpaper-enabled") ||
-	    !strcmp (key, "/desktop/gnome/background/wallpaper-filename") ||
-	    !strcmp (key, "/desktop/gnome/background/wallpaper-type"))
+	if (!strcmp (key, BG_PREFERENCES_PICTURE_FILENAME) ||
+	    !strcmp (key, BG_PREFERENCES_PICTURE_OPTIONS))
 	{
 		color_frame = g_object_get_data (G_OBJECT (prefs), "color-frame");
 		gtk_widget_set_sensitive (color_frame, bg_applier_render_color_p (bg_applier, prefs));
 	}
+}
+
+/* Returns the wallpaper enum set before we disabled it */
+static int 
+get_val_true_cb (GConfPropertyEditor *peditor, gpointer data)
+{
+	BGPreferences *prefs = (BGPreferences*) data;
+	return prefs->wallpaper_type;
 }
 
 /* Set up the property editors in the dialog. This also loads the preferences
@@ -191,7 +213,7 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset, BGApplier *bg_applier
 
 	/* Override the enabled setting to make sure background is enabled */
 	client = gconf_client_get_default ();
-	gconf_client_set_bool (client, "/desktop/gnome/background/enabled", TRUE, NULL);
+	gconf_client_set_bool (client, BG_PREFERENCES_DRAW_BACKGROUND, TRUE, NULL);
 
 	/* Load preferences */
 	prefs = bg_preferences_new ();
@@ -202,28 +224,28 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset, BGApplier *bg_applier
 	g_object_set_data (prefs, "color-frame", WID ("color_frame"));
 	g_object_set_data (prefs, "applier", bg_applier);
 
-	peditor = gconf_peditor_new_select_menu
-		(changeset, "/desktop/gnome/background/orientation", WID ("color_option"), NULL);
+	peditor = gconf_peditor_new_select_menu_with_enum
+		(changeset, BG_PREFERENCES_COLOR_SHADING_TYPE, WID ("color_option"), bg_preferences_orientation_get_type (), NULL);
 	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, prefs);
 
 	peditor = gconf_peditor_new_color
-		(changeset, "/desktop/gnome/background/color1", WID ("colorpicker1"), NULL);
+		(changeset, BG_PREFERENCES_PRIMARY_COLOR, WID ("colorpicker1"), NULL);
 	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, prefs);
 
 	peditor = gconf_peditor_new_color
-		(changeset, "/desktop/gnome/background/color2", WID ("colorpicker2"), NULL);
+		(changeset, BG_PREFERENCES_SECONDARY_COLOR, WID ("colorpicker2"), NULL);
 	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, prefs);
 
 	peditor = gconf_peditor_new_filename
-		(changeset, "/desktop/gnome/background/wallpaper-filename", WID ("image_fileentry"), NULL);
+		(changeset, BG_PREFERENCES_PICTURE_FILENAME, WID ("image_fileentry"), NULL);
 	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, prefs);
 
-	peditor = gconf_peditor_new_select_menu
-		(changeset, "/desktop/gnome/background/wallpaper-type", WID ("image_option"), NULL);
+	peditor = gconf_peditor_new_select_menu_with_enum
+		(changeset, BG_PREFERENCES_PICTURE_OPTIONS, WID ("image_option"), bg_preferences_wptype_get_type (), NULL);
 	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, prefs);
 
-	peditor = gconf_peditor_new_boolean
-		(changeset, "/desktop/gnome/background/wallpaper-enabled", WID ("picture_enabled_check"), NULL);
+	peditor = gconf_peditor_new_enum_toggle
+		(changeset, BG_PREFERENCES_PICTURE_OPTIONS, WID ("picture_enabled_check"), bg_preferences_wptype_get_type (), get_val_true_cb, WPTYPE_NONE, prefs, NULL);
 	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, prefs);
 
 	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor), WID ("picture_frame"));
@@ -300,6 +322,8 @@ main (int argc, char **argv)
 	gnome_program_init (argv[0], VERSION, LIBGNOMEUI_MODULE, argc, argv,
 			    GNOME_PARAM_POPT_TABLE, cap_options,
 			    NULL);
+
+	activate_settings_daemon ();
 
 	client = gconf_client_get_default ();
 	gconf_client_add_dir (client, "/desktop/gnome/background", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);

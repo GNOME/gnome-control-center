@@ -32,16 +32,27 @@
 #define BG_PREFERENCES_CLASS(klass)  G_TYPE_CHECK_CLASS_CAST (klass, bg_preferences_get_type (), BGPreferencesClass)
 #define IS_BG_PREFERENCES(obj)       G_TYPE_CHECK_INSTANCE_TYPE (obj, bg_preferences_get_type ())
 
+#define BG_PREFERENCES_DRAW_BACKGROUND    "/desktop/gnome/background/draw_background"
+#define BG_PREFERENCES_PRIMARY_COLOR      "/desktop/gnome/background/primary_color"
+#define BG_PREFERENCES_SECONDARY_COLOR    "/desktop/gnome/background/secondary_color"
+#define BG_PREFERENCES_COLOR_SHADING_TYPE "/desktop/gnome/background/color_shading_type"
+#define BG_PREFERENCES_PICTURE_OPTIONS    "/desktop/gnome/background/picture_options"
+#define BG_PREFERENCES_PICTURE_OPACITY    "/desktop/gnome/background/picture_opacity"
+#define BG_PREFERENCES_PICTURE_FILENAME   "/desktop/gnome/background/picture_filename"
+
+
 typedef struct _BGPreferences BGPreferences;
 typedef struct _BGPreferencesClass BGPreferencesClass;
 
 typedef enum _orientation_t {
-	ORIENTATION_SOLID, ORIENTATION_HORIZ, ORIENTATION_VERT
+	ORIENTATION_SOLID = 0, 
+	ORIENTATION_HORIZ, 
+	ORIENTATION_VERT
 } orientation_t;
 
 typedef enum _wallpaper_type_t {
-	WPTYPE_TILED, WPTYPE_CENTERED, WPTYPE_SCALED,
-	WPTYPE_STRETCHED, WPTYPE_EMBOSSED
+	WPTYPE_TILED = 0, WPTYPE_CENTERED, WPTYPE_SCALED,
+	WPTYPE_STRETCHED, WPTYPE_EMBOSSED, WPTYPE_NONE
 } wallpaper_type_t;
 
 struct _BGPreferences
@@ -87,4 +98,10 @@ void     bg_preferences_merge_entry (BGPreferences         *prefs,
 
 void     bg_preferences_save        (BGPreferences *prefs);
 
+const gchar *bg_preferences_get_wptype_as_string      (wallpaper_type_t wp);
+const gchar *bg_preferences_get_orientation_as_string (orientation_t    o);
+GType        bg_preferences_wptype_get_type	      (void);
+GType	     bg_preferences_orientation_get_type      (void);
+
+	
 #endif /* __PREFERENCES_H */

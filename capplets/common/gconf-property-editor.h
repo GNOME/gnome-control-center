@@ -38,7 +38,8 @@ typedef struct _GConfPropertyEditor GConfPropertyEditor;
 typedef struct _GConfPropertyEditorClass GConfPropertyEditorClass;
 typedef struct _GConfPropertyEditorPrivate GConfPropertyEditorPrivate;
 
-typedef GConfValue *(*GConfPEditorValueConvFn) (const GConfValue *);
+typedef GConfValue *(*GConfPEditorValueConvFn) (GConfPropertyEditor *peditor, const GConfValue *);
+typedef int	    (*GConfPEditorGetValueFn)  (GConfPropertyEditor *peditor, gpointer data);
 
 struct _GConfPropertyEditor 
 {
@@ -63,6 +64,17 @@ GObject *gconf_peditor_new_boolean      (GConfChangeSet          *changeset,
 					 GtkWidget               *checkbox,
 					 gchar                   *first_property_name,
 					 ...);
+
+GObject *gconf_peditor_new_enum_toggle  (GConfChangeSet 	 *changeset,
+					 gchar			 *key,
+					 GtkWidget		 *checkbox,
+					 GType			 enum_type,
+					 GConfPEditorGetValueFn  val_true_fn,
+					 guint			 val_false,
+					 gpointer		 data,
+					 gchar 			 *first_property_name,
+					 ...);
+
 GObject *gconf_peditor_new_string       (GConfChangeSet          *changeset,
 					 gchar                   *key,
 					 GtkWidget               *entry,
@@ -78,11 +90,21 @@ GObject *gconf_peditor_new_color        (GConfChangeSet          *changeset,
 					 GtkWidget               *color_entry,
 					 gchar                   *first_property_name,
 					 ...);
-GObject *gconf_peditor_new_select_menu  (GConfChangeSet          *changeset,
-					 gchar                   *key,
-					 GtkWidget               *option_menu,
-					 gchar                   *first_property_name,
+
+GObject *gconf_peditor_new_select_menu	(GConfChangeSet *changeset,
+					 gchar 	        *key,
+					 GtkWidget      *option_menu,
+					 gchar          *first_property_name,
 					 ...);
+
+
+GObject *gconf_peditor_new_select_menu_with_enum	(GConfChangeSet *changeset,
+							 gchar 	        *key,
+							 GtkWidget      *option_menu,
+							 GType          enum_type,
+							 gchar          *first_property_name,
+							 ...);
+
 GObject *gconf_peditor_new_select_radio (GConfChangeSet          *changeset,
 					 gchar                   *key,
 					 GSList                  *radio_group,

@@ -43,8 +43,12 @@ enum {
 	PROP_CHANGESET,
 	PROP_CONV_TO_WIDGET_CB,
 	PROP_CONV_FROM_WIDGET_CB,
-	PROP_UI_CONTROL
+	PROP_UI_CONTROL,
+	PROP_DATA,
+	PROP_DATA_FREE_CB
 };
+
+typedef void (*GConfPropertyEditorDataFreeCb) (gpointer data);
 
 struct _GConfPropertyEditorPrivate 
 {
@@ -56,7 +60,18 @@ struct _GConfPropertyEditorPrivate
 	GConfPEditorValueConvFn  conv_from_widget_cb;
 	GConfClientNotifyFunc    callback;
 	gboolean                 inited;
+
+	gpointer 		      data;
+	GConfPropertyEditorDataFreeCb data_free_cb;
 };
+
+typedef struct
+{
+	GType			 enum_type;
+	GConfPEditorGetValueFn   enum_val_true_fn;
+	gpointer		 enum_val_true_fn_data;
+	guint			 enum_val_false;
+} GConfPropertyEditorEnumData;
 
 static guint peditor_signals[LAST_SIGNAL];
 
@@ -83,7 +98,9 @@ static GObject *gconf_peditor_new             (gchar                 *key,
 					       GConfChangeSet        *changeset,
 					       GObject               *ui_control,
 					       const gchar           *first_prop_name,
-					       va_list                var_args);
+					       va_list                var_args,
+					       const gchar	     *first_custom,
+					       ...);
 
 GType
 gconf_property_editor_get_type (void)
@@ -113,13 +130,20 @@ gconf_property_editor_get_type (void)
 	return gconf_property_editor_type;
 }
 
+static GConfValue* 
+gconf_property_editor_conv_default (GConfPropertyEditor *peditor,
+				    const GConfValue *value)
+{
+	return gconf_value_copy (value);
+}
+
 static void
 gconf_property_editor_init (GConfPropertyEditor      *gconf_property_editor,
 			    GConfPropertyEditorClass *class)
 {
 	gconf_property_editor->p = g_new0 (GConfPropertyEditorPrivate, 1);
-	gconf_property_editor->p->conv_to_widget_cb = gconf_value_copy;
-	gconf_property_editor->p->conv_from_widget_cb = gconf_value_copy;
+	gconf_property_editor->p->conv_to_widget_cb = gconf_property_editor_conv_default;
+	gconf_property_editor->p->conv_from_widget_cb = gconf_property_editor_conv_default;
 	gconf_property_editor->p->inited = FALSE;
 }
 
@@ -186,6 +210,20 @@ gconf_property_editor_class_init (GConfPropertyEditorClass *class)
 			      (GSignalCMarshaller) gconf_property_editor_marshal_VOID__STRING_POINTER,
 			      G_TYPE_NONE, 2, G_TYPE_STRING, G_TYPE_POINTER);
 
+	g_object_class_install_property
+		(object_class, PROP_DATA,
+		 g_param_spec_pointer ("data",
+				       _("Property editor object data"),
+				       _("Custom data required by the specific property editor"),
+				       G_PARAM_WRITABLE));
+
+	g_object_class_install_property
+		(object_class, PROP_DATA_FREE_CB,
+		 g_param_spec_pointer ("data-free-cb",
+				       _("Property editor data freeing callback"),
+				       _("Callback to be issued when property editor object data is to be freed"),
+				       G_PARAM_WRITABLE));
+
 	parent_class = G_OBJECT_CLASS
 		(g_type_class_ref (G_TYPE_OBJECT));
 }
@@ -236,7 +274,12 @@ gconf_property_editor_set_prop (GObject      *object,
 		peditor->p->ui_control = g_value_get_object (value);
 		g_object_weak_ref (peditor->p->ui_control, (GWeakNotify) g_object_unref, object);
 		break;
-
+	case PROP_DATA:
+		peditor->p->data = g_value_get_pointer (value);
+		break;
+	case PROP_DATA_FREE_CB:
+		peditor->p->data_free_cb = g_value_get_pointer (value);
+		break;
 	default:
 		g_warning ("Bad argument set");
 		break;
@@ -281,6 +324,9 @@ gconf_property_editor_finalize (GObject *object)
 
 	gconf_property_editor = GCONF_PROPERTY_EDITOR (object);
 
+	if (gconf_property_editor->p->data_free_cb)
+		gconf_property_editor->p->data_free_cb (gconf_property_editor->p->data);
+	
 	g_free (gconf_property_editor->p);
 
 	G_OBJECT_CLASS (parent_class)->finalize (object);
@@ -292,7 +338,9 @@ gconf_peditor_new (gchar                 *key,
 		   GConfChangeSet        *changeset,
 		   GObject               *ui_control,
 		   const gchar           *first_prop_name,
-		   va_list                var_args) 
+		   va_list                var_args,
+		   const gchar		 *first_custom,
+		   ...) 
 {
 	GObject     *obj;
 	GConfClient *client;
@@ -309,6 +357,14 @@ gconf_peditor_new (gchar                 *key,
 			    NULL);
 
 	g_object_set_valist (obj, first_prop_name, var_args);
+
+	if (first_custom)
+	{
+		va_list custom_args;
+		va_start (custom_args, first_custom);
+		g_object_set_valist (obj, first_custom, custom_args);
+		va_end (custom_args);
+	}
 
 	client = gconf_client_get_default ();
 	gconf_entry = gconf_client_get_entry (client, GCONF_PROPERTY_EDITOR (obj)->p->key, NULL, TRUE, NULL);
@@ -349,7 +405,7 @@ peditor_boolean_value_changed (GConfClient         *client,
 	value = gconf_entry_get_value (entry);
 
 	if (value != NULL) {
-		value_wid = peditor->p->conv_to_widget_cb (value);
+		value_wid = peditor->p->conv_to_widget_cb (peditor, value);
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (peditor->p->ui_control), gconf_value_get_bool (value_wid));
 		gconf_value_free (value_wid);
 	}
@@ -364,7 +420,7 @@ peditor_boolean_widget_changed (GConfPropertyEditor *peditor,
 	if (!peditor->p->inited) return;
 	value_wid = gconf_value_new (GCONF_VALUE_BOOL);
 	gconf_value_set_bool (value_wid, gtk_toggle_button_get_active (tb));
-	value = peditor->p->conv_from_widget_cb (value_wid);
+	value = peditor->p->conv_from_widget_cb (peditor, value_wid);
 	peditor_set_gconf_value (peditor, peditor->p->key, value);
 	g_signal_emit (peditor, peditor_signals[VALUE_CHANGED], 0, peditor->p->key, value);
 	gconf_value_free (value_wid);
@@ -393,7 +449,8 @@ gconf_peditor_new_boolean (GConfChangeSet *changeset,
 		 changeset,
 		 G_OBJECT (checkbox),
 		 first_property_name,
-		 var_args);
+		 var_args,
+		 NULL);
 
 	va_end (var_args);
 
@@ -418,7 +475,7 @@ peditor_string_value_changed (GConfClient         *client,
 	value = gconf_entry_get_value (entry);
 
 	if (value != NULL) {
-		value_wid = peditor->p->conv_to_widget_cb (value);
+		value_wid = peditor->p->conv_to_widget_cb (peditor, value);
 		entry_current_text = gtk_entry_get_text (GTK_ENTRY (peditor->p->ui_control));
 		if (strcmp (entry_current_text, gconf_value_get_string (value)) != 0) {
 		  gtk_entry_set_text (GTK_ENTRY (peditor->p->ui_control), gconf_value_get_string (value_wid));
@@ -438,7 +495,7 @@ peditor_string_widget_changed (GConfPropertyEditor *peditor,
 	value_wid = gconf_value_new (GCONF_VALUE_STRING);
 
 	gconf_value_set_string (value_wid, gtk_entry_get_text (entry));
-	value = peditor->p->conv_from_widget_cb (value_wid);
+	value = peditor->p->conv_from_widget_cb (peditor, value_wid);
 
 	peditor_set_gconf_value (peditor, peditor->p->key, value);
 
@@ -462,7 +519,7 @@ gconf_peditor_new_string_valist (GConfChangeSet *changeset,
 		 changeset,
 		 G_OBJECT (entry),
 		 first_property_name,
-		 var_args);
+		 var_args, NULL);
 
 	g_signal_connect_swapped (G_OBJECT (entry), "changed",
 				  (GCallback) peditor_string_widget_changed, peditor);
@@ -536,7 +593,7 @@ peditor_color_value_changed (GConfClient         *client,
 	value = gconf_entry_get_value (entry);
 
 	if (value != NULL) {
-		value_wid = peditor->p->conv_to_widget_cb (value);
+		value_wid = peditor->p->conv_to_widget_cb (peditor, value);
 		gdk_color_parse (gconf_value_get_string (value_wid), &color);
 		gnome_color_picker_set_i16 (GNOME_COLOR_PICKER (peditor->p->ui_control), color.red, color.green, color.blue, 65535);
 		gconf_value_free (value_wid);
@@ -561,7 +618,7 @@ peditor_color_widget_changed (GConfPropertyEditor *peditor,
 	gconf_value_set_string (value_wid, str);
 	g_free (str);
 
-	value = peditor->p->conv_from_widget_cb (value_wid);
+	value = peditor->p->conv_from_widget_cb (peditor, value_wid);
 
 	peditor_set_gconf_value (peditor, peditor->p->key, value);
 	g_signal_emit (peditor, peditor_signals[VALUE_CHANGED], 0, peditor->p->key, value);
@@ -592,7 +649,7 @@ gconf_peditor_new_color (GConfChangeSet *changeset,
 		 changeset,
 		 G_OBJECT (cp),
 		 first_property_name,
-		 var_args);
+		 var_args, NULL);
 
 	va_end (var_args);
 
@@ -600,6 +657,88 @@ gconf_peditor_new_color (GConfChangeSet *changeset,
 				  (GCallback) peditor_color_widget_changed, peditor);
 
 	return peditor;
+}
+
+static int
+peditor_enum_int_from_string (GType type, const gchar *str)
+{
+	GEnumClass *klass;
+	GEnumValue *val;
+	int ret = -1;
+
+	klass = g_type_class_ref (type);
+	val = g_enum_get_value_by_name (klass, str);
+	if (!val)
+		val = g_enum_get_value_by_nick (klass, str);
+	if (val)
+		ret = val->value;
+
+	g_type_class_unref (klass);
+
+	return ret;
+}
+
+static gchar*
+peditor_enum_string_from_int (GType type, const int index)
+{
+	GEnumClass *klass;
+	GEnumValue *val;
+	gchar *ret = NULL;
+
+	klass = g_type_class_ref (type);
+	val = g_enum_get_value (klass, index);
+	if (val)
+	{
+		if (val->value_name)
+			ret = g_strdup (val->value_name);
+		else
+			ret = g_strdup (val->value_nick);
+	}
+	
+	g_type_class_unref (klass);
+
+	return ret;
+}
+
+static GConfValue*
+peditor_enum_conv_to_widget (GConfPropertyEditor *peditor,
+			     const GConfValue *value)
+{
+	GConfValue *ret;
+	GConfPropertyEditorEnumData *data = peditor->p->data;
+	int index;
+	
+	if (value->type == GCONF_VALUE_INT)
+		return gconf_value_copy (value);
+	
+	ret = gconf_value_new (GCONF_VALUE_INT);
+	
+	index = peditor_enum_int_from_string (data->enum_type,
+		    		    	      gconf_value_get_string (value));
+	
+	gconf_value_set_int (ret, index);
+
+	return ret;
+}
+
+static GConfValue*
+peditor_enum_conv_from_widget (GConfPropertyEditor *peditor,
+			       const GConfValue *value)
+{
+	GConfValue *ret;
+	GConfPropertyEditorEnumData *data = peditor->p->data;
+	gchar *str;
+
+	if (value->type == GCONF_VALUE_STRING)
+		return gconf_value_copy (value);
+
+	ret = gconf_value_new (GCONF_VALUE_STRING);
+	str = peditor_enum_string_from_int (data->enum_type,
+					    gconf_value_get_int (value));
+	gconf_value_set_string (ret, str);
+	g_free (str);
+
+	return ret;
 }
 
 static void
@@ -616,7 +755,7 @@ peditor_select_menu_value_changed (GConfClient         *client,
 	value = gconf_entry_get_value (entry);
 
 	if (value != NULL) {
-		value_wid = peditor->p->conv_to_widget_cb (value);
+		value_wid = peditor->p->conv_to_widget_cb (peditor, value);
 		gtk_option_menu_set_history (GTK_OPTION_MENU (peditor->p->ui_control), gconf_value_get_int (value_wid));
 		gconf_value_free (value_wid);
 	}
@@ -631,7 +770,7 @@ peditor_select_menu_widget_changed (GConfPropertyEditor *peditor,
 	if (!peditor->p->inited) return;
 	value_wid = gconf_value_new (GCONF_VALUE_INT);
 	gconf_value_set_int (value_wid, gtk_option_menu_get_history (option_menu));
-	value = peditor->p->conv_from_widget_cb (value_wid);
+	value = peditor->p->conv_from_widget_cb (peditor, value_wid);
 	peditor_set_gconf_value (peditor, peditor->p->key, value);
 	g_signal_emit (peditor, peditor_signals[VALUE_CHANGED], 0, peditor->p->key, value);
 	gconf_value_free (value_wid);
@@ -660,7 +799,7 @@ gconf_peditor_new_select_menu (GConfChangeSet *changeset,
 		 changeset,
 		 G_OBJECT (option_menu),
 		 first_property_name,
-		 var_args);
+		 var_args, NULL);
 
 	va_end (var_args);
 
@@ -668,6 +807,55 @@ gconf_peditor_new_select_menu (GConfChangeSet *changeset,
 				  (GCallback) peditor_select_menu_widget_changed, peditor);
 
 	return peditor;
+}
+
+GObject *
+gconf_peditor_new_select_menu_with_enum	(GConfChangeSet *changeset,
+					 gchar 	        *key,
+					 GtkWidget      *option_menu,
+					 GType          enum_type,
+					 gchar          *first_property_name,
+					 ...)
+{
+	GConfPropertyEditor *peditor;
+	GConfPropertyEditorEnumData *data;
+	va_list var_args;
+
+	g_return_val_if_fail (key != NULL, NULL);
+	g_return_val_if_fail (option_menu != NULL, NULL);
+	g_return_val_if_fail (GTK_IS_OPTION_MENU (option_menu), NULL);
+	g_return_val_if_fail (enum_type != G_TYPE_NONE, NULL);
+
+	data = g_new0 (GConfPropertyEditorEnumData, 1);
+	data->enum_type = enum_type;
+
+	va_start (var_args, first_property_name);
+
+	peditor = GCONF_PROPERTY_EDITOR (
+		gconf_peditor_new
+		(key,
+		 (GConfClientNotifyFunc) peditor_select_menu_value_changed,
+		 changeset,
+		 G_OBJECT (option_menu),
+		 first_property_name,
+		 var_args,
+		 "conv-to-widget-cb",
+		 peditor_enum_conv_to_widget,
+		 "conv-from-widget-cb",
+		 peditor_enum_conv_from_widget,
+		 "data",
+		 data,
+		 "data-free-cb",
+		 g_free,
+		 NULL
+		 ));
+
+	va_end (var_args);
+	
+	g_signal_connect_swapped (G_OBJECT (option_menu), "changed",
+				  (GCallback) peditor_select_menu_widget_changed, peditor);
+
+	return G_OBJECT (peditor);
 }
 
 static void
@@ -685,7 +873,7 @@ peditor_select_radio_value_changed (GConfClient         *client,
 	value = gconf_entry_get_value (entry);
 
 	if (value != NULL) {
-		value_wid = peditor->p->conv_to_widget_cb (value);
+		value_wid = peditor->p->conv_to_widget_cb (peditor, value);
 		group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (peditor->p->ui_control));
 		group = g_slist_nth (group, gconf_value_get_int (value_wid));
 		if (group && group->data)
@@ -707,7 +895,7 @@ peditor_select_radio_widget_changed (GConfPropertyEditor *peditor,
 	value_wid = gconf_value_new (GCONF_VALUE_INT);
 	group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (peditor->p->ui_control));
 	gconf_value_set_int (value_wid, g_slist_index (group, tb));
-	value = peditor->p->conv_from_widget_cb (value_wid);
+	value = peditor->p->conv_from_widget_cb (peditor, value_wid);
 
 	peditor_set_gconf_value (peditor, peditor->p->key, value);
 	g_signal_emit (peditor, peditor_signals[VALUE_CHANGED], 0, peditor->p->key, value);
@@ -743,7 +931,7 @@ gconf_peditor_new_select_radio (GConfChangeSet *changeset,
 		 changeset,
 		 G_OBJECT (first_button),
 		 first_property_name,
-		 var_args);
+		 var_args, NULL);
 
 	va_end (var_args);
 
@@ -768,7 +956,7 @@ peditor_numeric_range_value_changed (GConfClient         *client,
 	value = gconf_entry_get_value (entry);
 
 	if (value != NULL) {
-		value_wid = peditor->p->conv_to_widget_cb (value);
+		value_wid = peditor->p->conv_to_widget_cb (peditor, value);
 		gtk_adjustment_set_value (GTK_ADJUSTMENT (peditor->p->ui_control), gconf_value_get_float (value_wid));
 		gconf_value_free (value_wid);
 	}
@@ -783,7 +971,7 @@ peditor_numeric_range_widget_changed (GConfPropertyEditor *peditor,
 	if (!peditor->p->inited) return;
 	value_wid = gconf_value_new (GCONF_VALUE_FLOAT);
 	gconf_value_set_float (value_wid, gtk_adjustment_get_value (adjustment));
-	value = peditor->p->conv_from_widget_cb (value_wid);
+	value = peditor->p->conv_from_widget_cb (peditor, value_wid);
 	peditor_set_gconf_value (peditor, peditor->p->key, value);
 	g_signal_emit (peditor, peditor_signals[VALUE_CHANGED], 0, peditor->p->key, value);
 	gconf_value_free (value_wid);
@@ -815,7 +1003,7 @@ gconf_peditor_new_numeric_range (GConfChangeSet *changeset,
 		 changeset,
 		 G_OBJECT (adjustment),
 		 first_property_name,
-		 var_args);
+		 var_args, NULL);
 
 	va_end (var_args);
 
@@ -825,13 +1013,26 @@ gconf_peditor_new_numeric_range (GConfChangeSet *changeset,
 	return peditor;
 }
 
+static gboolean
+guard_get_bool (GConfPropertyEditor *peditor, const GConfValue *value)
+{
+	if (value->type == GCONF_VALUE_BOOL)
+		return gconf_value_get_bool (value);
+	else
+	{
+		GConfPropertyEditorEnumData *data = peditor->p->data;
+		int index = peditor_enum_int_from_string (data->enum_type, gconf_value_get_string (value));
+		return (index != data->enum_val_false);
+	}
+}
+
 static void
 guard_value_changed (GConfPropertyEditor *peditor,
 		     const gchar         *key,
 		     const GConfValue    *value,
 		     GtkWidget           *widget) 
 {
-	gtk_widget_set_sensitive (widget, gconf_value_get_bool (value));
+	gtk_widget_set_sensitive (widget, guard_get_bool (peditor, value));
 }
 
 void
@@ -839,6 +1040,7 @@ gconf_peditor_widget_set_guard (GConfPropertyEditor *peditor,
 				GtkWidget           *widget)
 {
 	GConfClient *client;
+	GConfValue *value;
 
 	g_return_if_fail (peditor != NULL);
 	g_return_if_fail (IS_GCONF_PROPERTY_EDITOR (peditor));
@@ -846,7 +1048,10 @@ gconf_peditor_widget_set_guard (GConfPropertyEditor *peditor,
 	g_return_if_fail (GTK_IS_WIDGET (widget));
 
 	client = gconf_client_get_default ();
-	gtk_widget_set_sensitive (widget, gconf_client_get_bool (client, peditor->p->key, NULL));
+	
+	value = gconf_client_get (client, peditor->p->key, NULL);
+	gtk_widget_set_sensitive (widget, guard_get_bool (peditor, value));
+	gconf_value_free (value);
 
 	g_signal_connect (G_OBJECT (peditor), "value-changed", (GCallback) guard_value_changed, widget);
 }
@@ -902,7 +1107,7 @@ peditor_font_value_changed (GConfClient         *client,
 	if (value != NULL) {
 		const gchar *font_name;
 
-		value_wid = peditor->p->conv_to_widget_cb (value);
+		value_wid = peditor->p->conv_to_widget_cb (peditor, value);
 		font_name = gconf_value_get_string (value_wid);
 		g_object_set (G_OBJECT (peditor->p->ui_control),
 			      "font_name", font_name,
@@ -927,7 +1132,7 @@ peditor_font_widget_changed (GConfPropertyEditor *peditor,
 	
 	value_wid = gconf_value_new (GCONF_VALUE_STRING);
 	gconf_value_set_string (value_wid, font_name);
-	value = peditor->p->conv_from_widget_cb (value_wid);
+	value = peditor->p->conv_from_widget_cb (peditor, value_wid);
 
 	peditor_set_gconf_value (peditor, peditor->p->key, value);
 	g_signal_emit (peditor, peditor_signals[VALUE_CHANGED], 0, peditor->p->key, value);
@@ -958,7 +1163,7 @@ gconf_peditor_new_font (GConfChangeSet *changeset,
 		 changeset,
 		 G_OBJECT (font_picker),
 		 first_property_name,
-		 var_args);
+		 var_args, NULL);
 
 	va_end (var_args);
 
@@ -966,5 +1171,103 @@ gconf_peditor_new_font (GConfChangeSet *changeset,
 				  (GCallback) peditor_font_widget_changed, peditor);
 
 	return peditor;
+}
+
+static GConfValue*
+peditor_enum_toggle_conv_to_widget (GConfPropertyEditor *peditor,
+				    const GConfValue *value)
+{
+	GConfValue *ret;
+	GConfPropertyEditorEnumData *data = peditor->p->data;
+	int index;
+	
+	if (value->type == GCONF_VALUE_BOOL)
+		return gconf_value_copy (value);
+	
+	ret = gconf_value_new (GCONF_VALUE_BOOL);
+	
+	index = peditor_enum_int_from_string (data->enum_type,
+		    		    	      gconf_value_get_string (value));
+	gconf_value_set_bool (ret, (index != data->enum_val_false));
+
+	return ret;
+}
+
+static GConfValue*
+peditor_enum_toggle_conv_from_widget (GConfPropertyEditor *peditor,
+				      const GConfValue *value)
+{
+	GConfValue *ret;
+	GConfPropertyEditorEnumData *data = peditor->p->data;
+	gchar *str;
+	int index;
+
+	if (value->type == GCONF_VALUE_STRING)
+		return gconf_value_copy (value);
+
+	ret = gconf_value_new (GCONF_VALUE_STRING);
+	if (gconf_value_get_bool (value))
+		index = data->enum_val_true_fn (peditor, data->enum_val_true_fn_data);
+	else
+		index = data->enum_val_false;
+
+	str = peditor_enum_string_from_int (data->enum_type, index);
+	gconf_value_set_string (ret, str);
+	g_free (str);
+
+	return ret;
+}
+
+GObject *
+gconf_peditor_new_enum_toggle  (GConfChangeSet 	 *changeset,
+				gchar			 *key,
+				GtkWidget		 *checkbox,
+				GType			 enum_type,
+				GConfPEditorGetValueFn   val_true_fn,
+				guint			 val_false,
+				gpointer		 data,
+				gchar 			 *first_property_name,
+				...)
+{
+	GConfPropertyEditor *peditor;
+	GConfPropertyEditorEnumData *enum_data;
+	va_list var_args;
+
+	g_return_val_if_fail (key != NULL, NULL);
+	g_return_val_if_fail (checkbox != NULL, NULL);
+	g_return_val_if_fail (GTK_IS_TOGGLE_BUTTON (checkbox), NULL);
+
+	enum_data = g_new0 (GConfPropertyEditorEnumData, 1);
+	enum_data->enum_type = enum_type;
+	enum_data->enum_val_true_fn = val_true_fn;
+	enum_data->enum_val_true_fn_data = data;
+	enum_data->enum_val_false = val_false;
+
+	va_start (var_args, first_property_name);
+
+	peditor = GCONF_PROPERTY_EDITOR (
+		gconf_peditor_new
+		(key,
+		 (GConfClientNotifyFunc) peditor_boolean_value_changed,
+		 changeset,
+		 G_OBJECT (checkbox),
+		 first_property_name,
+		 var_args,
+		 "conv-to-widget-cb",
+		 peditor_enum_toggle_conv_to_widget,
+		 "conv-from-widget-cb",
+		 peditor_enum_toggle_conv_from_widget,
+		 "data",
+		 enum_data,
+		 "data-free-cb",
+		 g_free,
+		 NULL));
+
+	va_end (var_args);
+
+	g_signal_connect_swapped (G_OBJECT (checkbox), "toggled",
+				  (GCallback) peditor_boolean_widget_changed, peditor);
+
+	return G_OBJECT (peditor);
 }
 
