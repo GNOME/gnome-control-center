@@ -397,11 +397,13 @@ tree_toggle_cb (GtkWidget *w, CappletDirView *view)
 	button_cb (w, view, LAYOUT_TREE);
 }
 
+#if 0
 static void
 prefs_menu_cb (GtkWidget *widget, CappletDirView *view)
 {
 	gnomecc_preferences_get_config_dialog (prefs);
 }
+#endif
 
 static void 
 back_button_cb (GtkWidget *widget, CappletDirView *view)
