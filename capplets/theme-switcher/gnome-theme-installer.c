@@ -87,12 +87,25 @@ transfer_done_tarbz2_idle_cb (gpointer data)
 static void
 transfer_done_cb (GtkWidget *dlg, gchar *path)
 {
+	GtkWidget *dialog;
 	int len = strlen (path);
+	gtk_widget_destroy (dlg);
 	if (path && len > 7 && !strcmp (path + len - 7, ".tar.gz"))
 		g_idle_add (transfer_done_targz_idle_cb, path);
-	if (path && len > 8 && !strcmp (path + len - 8, ".tar.bz2"))
+	else if (path && len > 4 && !strcmp (path + len - 4, ".tgz"))
+		g_idle_add (transfer_done_targz_idle_cb, path);
+	else if (path && len > 8 && !strcmp (path + len - 8, ".tar.bz2"))
 		g_idle_add (transfer_done_tarbz2_idle_cb, path);
-	gtk_widget_destroy (dlg);
+	else {
+		dialog = gtk_message_dialog_new (NULL,
+                                       GTK_DIALOG_MODAL,
+                                       GTK_MESSAGE_ERROR,
+                                       GTK_BUTTONS_OK,
+                                       _("This theme is not in a supported format."));
+		gtk_dialog_run (GTK_DIALOG (dialog));
+		gtk_widget_destroy (dialog);
+		gnome_vfs_unlink (path);
+	}
 }
 
 static void
