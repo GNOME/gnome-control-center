@@ -1,3 +1,15 @@
+2002-05-31  Damon Chaplin  <damon@ximian.com>
+
+	* applier.c (bg_applier_apply_prefs): don't call set_root_pixmap() at
+	all if nautilus is running. It didn't do anything in this case anyway.
+	Removed the nice(20). A library function shouldn't do this. If
+	gnome-settings-daemon wants to be niced then it should do it in main()
+	or something like that.
+	(set_root_pixmap): do a final check to see if nautilus is running
+	before setting the pixmap.
+
+	Fixes part of #74311.
+
 2002-05-21  jacob berkman  <jacob@ximian.com>
 
 	* applier.c (render_to_screen): use a gc for the pixmap not the

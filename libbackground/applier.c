@@ -428,7 +428,6 @@ bg_applier_apply_prefs (BGApplier           *bg_applier,
 	}
 
 	if (bg_applier->p->type == BG_APPLIER_ROOT && is_nautilus_running ()) {
-		set_root_pixmap ((GdkPixmap *) -1);
 		return;
 	}
 
@@ -460,9 +459,6 @@ bg_applier_apply_prefs (BGApplier           *bg_applier,
 			}
 		}
 	}
-
-	if (bg_applier->p->type == BG_APPLIER_ROOT)
-		nice (20);
 
 	run_render_pipeline (bg_applier, new_prefs);
 
@@ -1382,6 +1378,11 @@ set_root_pixmap (GdkPixmap *pixmap)
 	gint format;
 	guchar *data_esetroot;
 	Pixmap pixmap_id;
+
+	/* Final check to see if nautilus is running. If it is, we don't
+	   touch the root pixmap at all. */
+	if (is_nautilus_running ())
+		return;
 
 	if (pixmap != NULL && pixmap != (GdkPixmap *) -1)
 		pixmap_id = GDK_WINDOW_XWINDOW (pixmap);
