@@ -3,11 +3,14 @@
 # Martin Wahlen <mva@sbbs.se>, 1998-1999.
 # Richard Hult <rhult@hem2.passagen.se>, 1999.
 # Christian Rose <menthos@menthos.com>, 2000.
+# Martin Norbäck <d95mback@dtek.chalmers.se>, 2001.
+#
+# $Id$
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0.5\n"
-"POT-Creation-Date: 2001-02-14 20:16-0500\n"
+"POT-Creation-Date: 2001-03-08 21:38+0100\n"
 "PO-Revision-Date: 2000-10-08 14:39+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -65,11 +68,13 @@ msgid "Wallpaper Selection"
 msgstr "Bakgrundsval"
 
 #: capplets/background-properties/property-background.c:573
+#: capplets/file-types/file-types-icon-entry.c:258
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Kan inte hitta hbox, använder en vanlig filväljare"
 
 #: capplets/background-properties/property-background.c:578
 #: capplets/background-properties/property-background.c:1090
+#: capplets/file-types/file-types-icon-entry.c:264
 #: capplets/keyboard-properties/keyboard-properties.c:354
 #: capplets/screensaver-properties/screensaver-dialog.c:25
 #: capplets/theme-switcher/gui.c:230 capplets/theme-switcher/gui.c:302
@@ -84,7 +89,11 @@ msgstr "Bakgrund"
 msgid " Browse... "
 msgstr " Bläddra... "
 
+#. Add default action to fourth column
 #: capplets/background-properties/property-background.c:643
+#: capplets/file-types/file-types-capplet.c:1387
+#: capplets/file-types/file-types-capplet.c:1587
+#: capplets/file-types/file-types-capplet.c:1713
 msgid "none"
 msgstr "ingen"
 
@@ -117,30 +126,28 @@ msgstr "Sida-vid-sida"
 #: capplets/sound-properties/sound-properties.c:693
 #: capplets/theme-switcher/gui.c:367
 #: capplets/ui-properties/ui-properties.c:516
-#: capplets/url-properties/url-properties.c:256
+#: capplets/url-properties/url-properties.c:272
 #: capplets/wm-properties/wm-properties-capplet.c:649
 msgid ""
 "No help is available/installed for these settings. Please make sure you\n"
 "have the GNOME User's Guide installed on your system."
 msgstr ""
-"Ingen hjälp finns tillgänglig/installerad för dessa inställningar. Var "
-"vänlig kontrollera att du\n"
-"har GNOME:s användarguide installerat på ditt system."
+"Ingen hjälp finns tillgänglig/installerad för dessa inställningar.\n"
+"Kontrollera att du har GNOME:s användarguide installerat på ditt system."
 
 #: capplets/background-properties/property-background.c:833
 #: capplets/gnome-edit-properties/gnome-edit-properties.c:182
 #: capplets/keyboard-properties/keyboard-properties.c:99
 #: capplets/keyboard-properties/keyboard-properties.c:424
-#: capplets/mime-type/mime-type-capplet.c:81
 #: capplets/mouse-properties/mouse-properties.c:114
 #: capplets/screensaver-properties/callbacks.c:804
 #: capplets/sound-properties/sound-properties.c:695
 #: capplets/sound-properties/sound-properties.c:756
 #: capplets/theme-switcher/gui.c:369
 #: capplets/ui-properties/ui-properties.c:518
-#: capplets/url-properties/url-properties.c:258
+#: capplets/url-properties/url-properties.c:274
 #: capplets/wm-properties/wm-properties-capplet.c:651
-#: control-center/capplet-widget.c:263
+#: control-center/capplet-widget.c:273
 msgid "Close"
 msgstr "Stäng"
 
@@ -205,220 +212,243 @@ msgstr "Gnome-editor"
 msgid "Run In Terminal"
 msgstr "Kör i terminal"
 
-#: capplets/mime-type/edit-window.c:250
-#: capplets/mime-type/new-mime-window.c:35
-msgid "Extensions"
-msgstr "Filtillägg"
+#: capplets/file-types/file-types-capplet.desktop.in.h:1
+msgid "File Types and Programs"
+msgstr "Filtyper och program"
 
-#. icon box
-#: capplets/mime-type/edit-window.c:264
-msgid "Select an icon..."
-msgstr "Välj ikon..."
+#: capplets/file-types/file-types-capplet.desktop.in.h:2
+msgid "Specify which programs are used to open or view each file type"
+msgstr "Ange vilka program som ska användas för att öppna och visa varje filtyp"
 
-#: capplets/mime-type/edit-window.c:274
-msgid "Mime Type: "
-msgstr "Mime-typ: "
+#: capplets/file-types/file-types-capplet-dialogs.c:387
+msgid "Edit Applications List"
+msgstr "Redigera programlistan"
 
-#: capplets/mime-type/edit-window.c:304
-msgid "Add"
-msgstr "Lägg till"
-
-#: capplets/mime-type/edit-window.c:312
-#: capplets/url-properties/url-properties.c:138
-msgid "Remove"
-msgstr "Ta bort"
-
-#. gtk_container_set_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
-#: capplets/mime-type/edit-window.c:339
-#: capplets/mime-type/new-mime-window.c:65
-msgid "First Regular Expression: "
-msgstr "Första reg-exp: "
-
-#: capplets/mime-type/edit-window.c:347
-#: capplets/mime-type/new-mime-window.c:76
-msgid "Second Regular Expression: "
-msgstr "Andra reg-exp: "
-
-#. Actions box
-#: capplets/mime-type/edit-window.c:354
-msgid "Mime Type Actions"
-msgstr "Mime-typ-handlingar"
-
-#: capplets/mime-type/edit-window.c:361
+#. Add label
+#: capplets/file-types/file-types-capplet-dialogs.c:409
 #, c-format
-msgid "Example: emacs %f"
-msgstr "Exempel: emacs %f"
+msgid "Select applications to appear in menu for MIME type \"%s\""
+msgstr "Välj program som ska visas i menyn för MIME-typen \"%s\""
 
-#: capplets/mime-type/edit-window.c:366
-msgid "Open"
-msgstr "Öppna"
+#: capplets/file-types/file-types-capplet-dialogs.c:433
+msgid "Add Application..."
+msgstr "Lägg till program..."
 
-#: capplets/mime-type/edit-window.c:372 capplets/mime-type/edit-window.c:388
-#: capplets/mime-type/edit-window.c:403
-msgid "Select a file..."
-msgstr "Välj fil..."
+#: capplets/file-types/file-types-capplet-dialogs.c:440
+msgid "Edit Application..."
+msgstr "Redigera program..."
 
-#: capplets/mime-type/edit-window.c:381
-msgid "View"
-msgstr "Visa"
+#: capplets/file-types/file-types-capplet-dialogs.c:446
+msgid "Delete Application"
+msgstr "Ta bort program"
 
-#: capplets/mime-type/edit-window.c:397
-msgid "Edit"
-msgstr "Redigera"
+#: capplets/file-types/file-types-capplet-dialogs.c:480
+msgid "Edit Components List"
+msgstr "Redigera komponentlista"
 
-#. we initialize everything
-#: capplets/mime-type/edit-window.c:446
+#. Add label
+#: capplets/file-types/file-types-capplet-dialogs.c:500
 #, c-format
-msgid "Set actions for %s"
-msgstr "Sätt händelser för %s"
+msgid "Select views to appear in menu for MIME type \"%s\""
+msgstr "Välj vyer som ska visas i menyn för MIME-typen \"%s\""
 
-#: capplets/mime-type/mime-data.c:380
-msgid "Mime Type"
-msgstr "Mime-typ"
-
-#: capplets/mime-type/mime-data.c:381
-msgid "Extension"
-msgstr "Filtillägg"
-
-#: capplets/mime-type/mime-data.c:488
-msgid "You must enter a mime-type"
-msgstr "Du måste ange en mime-typ"
-
-#: capplets/mime-type/mime-data.c:493
+#: capplets/file-types/file-types-capplet-dialogs.c:720
 msgid ""
-"You must add either a regular-expression or\n"
-"a file-name extension"
-msgstr "Du måste ange en reg-exp eller ett filtillägg"
-
-#: capplets/mime-type/mime-data.c:497
-msgid ""
-"Please put your mime-type in the format:\n"
-"CATEGORY/TYPE\n"
-"\n"
-"For Example:\n"
-"image/png"
+"The MIME type entered contained upper case characters. Upper case characters "
+"were changed to lower case for you."
 msgstr ""
-"Skriv in mime-typen med formatet:\n"
-"KATEGORI/TYP\n"
-"\n"
-"Till exempel:\n"
-"image/png"
+"MIME-typen som du har skrivit in innehåller stora bokstäver. De har ändrats till små bokstäver åt dig."
 
-#: capplets/mime-type/mime-data.c:502
-msgid "This mime-type already exists"
-msgstr "Mime-typen finns redan"
+#: capplets/file-types/file-types-capplet-dialogs.c:723
+msgid "Add New MIME Type"
+msgstr "Lägg till ny MIME-typ"
 
-#: capplets/mime-type/mime-data.c:583 capplets/mime-type/mime-info.c:425
-msgid ""
-"We are unable to create the directory\n"
-"~/.gnome/mime-info\n"
-"\n"
-"We will not be able to save the state."
-msgstr ""
-"Kan inte skapa katalogen\n"
-"~/.gnome/mime-info\n"
-"\n"
-"Inställningarna kommer inte att kunna sparas."
+#: capplets/file-types/file-types-capplet-dialogs.c:769
+msgid "Add MIME Type"
+msgstr "Lägg till MIME-typ"
 
-#: capplets/mime-type/mime-data.c:589 capplets/mime-type/mime-info.c:431
-msgid ""
-"We are unable to access the directory\n"
-"~/.gnome/mime-info\n"
-"\n"
-"We will not be able to save the state."
-msgstr ""
-"Kan inte läsa katalogen\n"
-"~/.gnome/mime-info\n"
-"\n"
-"Inställningarna kommer inte att kunna sparas."
+#: capplets/file-types/file-types-capplet-dialogs.c:773
+msgid "New MIME type (e.g. image/x-thumper):"
+msgstr "Ny mime-typ (till exempel image/x-thumper):"
 
-#: capplets/mime-type/mime-data.c:600
-msgid ""
-"Cannot create the file\n"
-"~/.gnome/mime-info/user.mime\n"
-"\n"
-"We will not be able to save the state"
-msgstr ""
-"Kan inte skapa filen\n"
-"~/.gnome/mime-info/user.mime\n"
-"\n"
-"Inställningarna kommer inte att kunna sparas"
+#: capplets/file-types/file-types-capplet-dialogs.c:780
+msgid "Description (e.g. Thumper image):"
+msgstr "Beskrivning (till exempel Thumperbild):"
 
-#: capplets/mime-type/mime-info.c:442
-msgid ""
-"Cannot create the file\n"
-"~/.gnome/mime-info/user.keys\n"
-"\n"
-"We will not be able to save the state"
-msgstr ""
-"Kan inte skapa filen\n"
-"~/.gnome/mime-info/user.keys\n"
-"\n"
-"Inställningarna kommer inte att kunna sparas"
+#: capplets/file-types/file-types-capplet-dialogs.c:947
+msgid "File Extensions "
+msgstr "Filändelser"
 
-#: capplets/mime-type/mime-type-capplet.c:79
-msgid ""
-"No help is available/installed for these settings. Please make sure you\n"
-"have the Control Center documentation installed on your system."
-msgstr ""
-"Ingen hjälp finns tillgänglig/installerad för dessa inställningar. Var\n"
-"vänlig och kontrollera att du har dokumentationen för kontrollpanelen\n"
-"installerad på ditt system."
-
-#: capplets/mime-type/mime-type-capplet.c:95
-#: capplets/wm-properties/wm-properties-capplet.c:1098
-msgid "Delete"
-msgstr "Radera"
-
-#: capplets/mime-type/mime-type-capplet.c:105
+#: capplets/file-types/file-types-capplet-dialogs.c:967
 #: capplets/wm-properties/wm-properties-capplet.c:1088
 msgid "Add..."
 msgstr "Lägg till..."
 
-#: capplets/mime-type/mime-type-capplet.c:109
-#: capplets/wm-properties/wm-properties-capplet.c:1093
-msgid "Edit..."
-msgstr "Redigera..."
+#: capplets/file-types/file-types-capplet-dialogs.c:972
+msgid "    Remove    "
+msgstr "Ta bort"
 
-#: capplets/mime-type/new-mime-window.c:21
-msgid "Add Mime Type"
-msgstr "Lägg till mime-typ"
+#: capplets/file-types/file-types-capplet-dialogs.c:1041
+msgid "Add New Extension"
+msgstr "Lägg till ny filändelse"
 
-#: capplets/mime-type/new-mime-window.c:22
+#: capplets/file-types/file-types-capplet-dialogs.c:1045
 msgid ""
-"Add a new Mime Type\n"
-"For example:  image/tiff; text/x-scheme"
+"Type in the extensions for this mime-type (without dot).\n"
+"You can enter several extensions seperated by a space,\n"
+"for example: html htm"
 msgstr ""
-"Lägg till en ny mime-typ\n"
-"Till exempel:  image/tiff; text/x-scheme"
+"Skriv in filändelserna för den här MIME-typen (utan punkt).\n"
+"Till exempel: html, htm"
 
-#: capplets/mime-type/new-mime-window.c:27
-msgid "Mime Type:"
-msgstr "Mime-typ:"
-
-#: capplets/mime-type/new-mime-window.c:39
-msgid ""
-"Type in the extensions for this mime-type.\n"
-"For example:  .html, .htm"
-msgstr ""
-"Skriv in filtilläggen för den här mime-typen.\n"
-"Till exempel:  .html, .htm"
-
-#: capplets/mime-type/new-mime-window.c:46
+#: capplets/file-types/file-types-capplet-dialogs.c:1052
 msgid "Extension:"
-msgstr "Filtillägg:"
+msgstr "Filändelse:"
 
-#: capplets/mime-type/new-mime-window.c:51
-msgid "Regular Expressions"
-msgstr "reg-exp"
+#: capplets/file-types/file-types-capplet-dialogs.c:1194
+msgid "You must enter a name."
+msgstr "Du måste ange ett namn."
 
-#: capplets/mime-type/new-mime-window.c:55
+#: capplets/file-types/file-types-capplet-dialogs.c:1197
+msgid "You must enter a command."
+msgstr "Du måste ange ett kommando."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1207
 msgid ""
-"You can set up two regular expressions here to identify the Mime Type\n"
-"by.  These fields are optional."
+"\"%s\" does not exist or is not executable.\n"
+"Check your spelling and make sure you have\n"
+"the right permissions to execute this file."
 msgstr ""
-"Du kan använda två stycken reg-exp för att identifiera mime-typen.\n"
-"Dessa fält är valfria."
+"\"%s\" finns inte eller är inte körbar.\n"
+"Kontrollera stavningen och se till att du har rättighet att köra den här filen."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1213
+#, c-format
+msgid ""
+"The command \"%s\" cannot be found.\n"
+"You must use a command that can work from any command line."
+msgstr ""
+"Kommandot \"%s\" hittades inte.\n"
+"Du måste använda ett kommando som fungerar från kommandoraden."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1225
+msgid "Bad Application Name"
+msgstr "Felaktigt programnamn"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1226
+msgid "Bad Application Command"
+msgstr "Felaktigt programkommando"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1258
+msgid "Add Application"
+msgstr "Lägg till program"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1259
+msgid "Edit Application"
+msgstr "Redigera program"
+
+#. Application Name label and entry
+#: capplets/file-types/file-types-capplet-dialogs.c:1271
+msgid "Application Name:"
+msgstr "Programnamn:"
+
+#. Application Command label and entry
+#: capplets/file-types/file-types-capplet-dialogs.c:1282
+msgid "Application Command:"
+msgstr "Programkommando:"
+
+#. Open Behavior frame
+#: capplets/file-types/file-types-capplet-dialogs.c:1293
+msgid "Open Behavior"
+msgstr "Öppningsbeteende"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1299
+msgid "Can open multiple files"
+msgstr "Kan öppna flera filer"
+
+#. FIXME bugzilla.eazel.com 6066: This needs to be three options now: "yes", "no", and "use uris for non-file locations"
+#: capplets/file-types/file-types-capplet-dialogs.c:1307
+msgid "Can open from URI"
+msgstr "Kan öppna från URI"
+
+#: capplets/file-types/file-types-capplet.c:735
+#: capplets/file-types/file-types-capplet.c:1877
+msgid "MIME Type"
+msgstr "MIME-typ"
+
+#: capplets/file-types/file-types-capplet.c:742
+msgid "Change Icon"
+msgstr "Ändra ikon"
+
+#: capplets/file-types/file-types-capplet.c:749
+msgid "Change File Extensions"
+msgstr "Ändra filändelse"
+
+#: capplets/file-types/file-types-capplet.c:757
+msgid "Default Action:"
+msgstr "Standardbeteende:"
+
+#: capplets/file-types/file-types-capplet.c:769
+msgid "Use Viewer"
+msgstr "Använd visare"
+
+#: capplets/file-types/file-types-capplet.c:775
+msgid "Open With Application"
+msgstr "Öppna med program"
+
+#: capplets/file-types/file-types-capplet.c:786
+msgid "Edit List"
+msgstr "Redigera lista"
+
+#: capplets/file-types/file-types-capplet.c:811
+msgid "Add New MIME Type..."
+msgstr "Lägg till ny MIME-typ.."
+
+#: capplets/file-types/file-types-capplet.c:817
+msgid "Delete This MIME Type"
+msgstr "Ta bort den här MIME-typen"
+
+#: capplets/file-types/file-types-capplet.c:828
+msgid "Revert to System Defaults"
+msgstr "Återgå till standardinställningar"
+
+#: capplets/file-types/file-types-capplet.c:1069
+#: capplets/file-types/file-types-capplet.c:1213
+msgid "None"
+msgstr "ingen"
+
+#: capplets/file-types/file-types-capplet.c:1318
+msgid ""
+"Reverting to system settings will lose any changes\n"
+"you have ever made to File Types and Programs.\n"
+"Revert anyway?"
+msgstr ""
+"Om du återgår till systeminställningar kommer du att\n"
+"förlora de ändringar du har gjort i filtyper och program.\n"
+"Återgå ändå?"
+
+#: capplets/file-types/file-types-capplet.c:1428
+#: capplets/file-types/file-types-capplet.c:1614
+#: capplets/file-types/file-types-capplet.c:1757
+#, c-format
+msgid "View as %s"
+msgstr "Visa som "
+
+#: capplets/file-types/file-types-capplet.c:1876
+msgid "Description"
+msgstr "Beskrivning"
+
+#: capplets/file-types/file-types-capplet.c:1878
+msgid "Extension"
+msgstr "Filändelse"
+
+#: capplets/file-types/file-types-capplet.c:1879
+msgid "Default Action"
+msgstr "Standardbeteende"
+
+#: capplets/file-types/file-types-icon-entry.c:381
+msgid "Select an icon"
+msgstr "Välj en ikon..."
 
 #: capplets/mouse-properties/mouse-properties.c:267
 msgid "Mouse buttons"
@@ -1016,30 +1046,34 @@ msgstr "Protokoll"
 msgid "Command"
 msgstr "Kommando"
 
-#: capplets/url-properties/url-properties.c:92
+#: capplets/url-properties/url-properties.c:93
 msgid "handler:"
 msgstr "hanterare:"
 
 #. set some commonly used handlers
-#: capplets/url-properties/url-properties.c:102
+#: capplets/url-properties/url-properties.c:103
 msgid "Netscape"
 msgstr "Netscape"
 
-#: capplets/url-properties/url-properties.c:107
+#: capplets/url-properties/url-properties.c:108
 msgid "Netscape (new window)"
 msgstr "Netscape (nytt fönster)"
 
-#: capplets/url-properties/url-properties.c:113
+#: capplets/url-properties/url-properties.c:121
 msgid "Help browser"
 msgstr "Hjälpläsare"
 
-#: capplets/url-properties/url-properties.c:118
+#: capplets/url-properties/url-properties.c:127
 msgid "Help browser (new window)"
 msgstr "Hjälpläsare (nytt fönster)"
 
-#: capplets/url-properties/url-properties.c:130
+#: capplets/url-properties/url-properties.c:140
 msgid "Set"
 msgstr "Sätt"
+
+#: capplets/url-properties/url-properties.c:148
+msgid "Remove"
+msgstr "Ta bort"
 
 #: capplets/wm-properties/wm-properties-capplet.c:142
 #, c-format
@@ -1190,6 +1224,14 @@ msgstr "Redigera fönsterhanterare"
 msgid "You cannot delete the current Window Manager"
 msgstr "Du kan inte ta bort den aktuella fönsterhanteraren"
 
+#: capplets/wm-properties/wm-properties-capplet.c:1093
+msgid "Edit..."
+msgstr "Redigera..."
+
+#: capplets/wm-properties/wm-properties-capplet.c:1098
+msgid "Delete"
+msgstr "Radera"
+
 #: capplets/wm-properties/wm-properties-capplet.c:1134
 msgid ""
 "an initialization error occurred while starting 'wm-properties-capplet'.\n"
@@ -1260,15 +1302,15 @@ msgstr "Initialisera inställningar för session"
 msgid "Ignore default action.  Used for custom init-session cases"
 msgstr "Ignorera standardhändelse. Används för anpassade init-session-fall"
 
-#: control-center/capplet-widget.c:262
+#: control-center/capplet-widget.c:272
 msgid "Sorry, no help is available for these settings."
 msgstr "Tyvärr, ingen hjälp är tillgänglig för de här inställningarna."
 
-#: control-center/corba-glue.c:75
+#: control-center/corba-glue.c:77
 msgid "capplet-command to be run."
 msgstr "capplet-kommando som ska köras."
 
-#: control-center/corba-glue.c:75
+#: control-center/corba-glue.c:77
 msgid "CAPPLET"
 msgstr "CAPPLET"
 
@@ -1341,6 +1383,124 @@ msgstr "Värdnamn:"
 msgid "Unknown"
 msgstr "Okänd"
 
+#~ msgid "Mime Type: "
+#~ msgstr "Mime-typ: "
+
+#~ msgid "Add"
+#~ msgstr "Lägg till"
+
+#~ msgid "First Regular Expression: "
+#~ msgstr "Första reg-exp: "
+
+#~ msgid "Second Regular Expression: "
+#~ msgstr "Andra reg-exp: "
+
+#~ msgid "Mime Type Actions"
+#~ msgstr "Mime-typ-handlingar"
+
+#~ msgid "Example: emacs %f"
+#~ msgstr "Exempel: emacs %f"
+
+#~ msgid "Open"
+#~ msgstr "Öppna"
+
+#~ msgid "Select a file..."
+#~ msgstr "Välj fil..."
+
+#~ msgid "View"
+#~ msgstr "Visa"
+
+#~ msgid "Set actions for %s"
+#~ msgstr "Sätt händelser för %s"
+
+#~ msgid ""
+#~ "Please put your mime-type in the format:\n"
+#~ "CATEGORY/TYPE\n"
+#~ "\n"
+#~ "For Example:\n"
+#~ "image/png"
+#~ msgstr ""
+#~ "Skriv in mime-typen med formatet:\n"
+#~ "KATEGORI/TYP\n"
+#~ "\n"
+#~ "Till exempel:\n"
+#~ "image/png"
+
+#~ msgid "This mime-type already exists"
+#~ msgstr "Mime-typen finns redan"
+
+#~ msgid ""
+#~ "We are unable to create the directory\n"
+#~ "~/.gnome/mime-info\n"
+#~ "\n"
+#~ "We will not be able to save the state."
+#~ msgstr ""
+#~ "Kan inte skapa katalogen\n"
+#~ "~/.gnome/mime-info\n"
+#~ "\n"
+#~ "Inställningarna kommer inte att kunna sparas."
+
+#~ msgid ""
+#~ "We are unable to access the directory\n"
+#~ "~/.gnome/mime-info\n"
+#~ "\n"
+#~ "We will not be able to save the state."
+#~ msgstr ""
+#~ "Kan inte läsa katalogen\n"
+#~ "~/.gnome/mime-info\n"
+#~ "\n"
+#~ "Inställningarna kommer inte att kunna sparas."
+
+#~ msgid ""
+#~ "Cannot create the file\n"
+#~ "~/.gnome/mime-info/user.mime\n"
+#~ "\n"
+#~ "We will not be able to save the state"
+#~ msgstr ""
+#~ "Kan inte skapa filen\n"
+#~ "~/.gnome/mime-info/user.mime\n"
+#~ "\n"
+#~ "Inställningarna kommer inte att kunna sparas"
+
+#~ msgid ""
+#~ "Cannot create the file\n"
+#~ "~/.gnome/mime-info/user.keys\n"
+#~ "\n"
+#~ "We will not be able to save the state"
+#~ msgstr ""
+#~ "Kan inte skapa filen\n"
+#~ "~/.gnome/mime-info/user.keys\n"
+#~ "\n"
+#~ "Inställningarna kommer inte att kunna sparas"
+
+#~ msgid ""
+#~ "No help is available/installed for these settings. Please make sure you\n"
+#~ "have the Control Center documentation installed on your system."
+#~ msgstr ""
+#~ "Ingen hjälp finns tillgänglig/installerad för dessa inställningar. Var\n"
+#~ "vänlig och kontrollera att du har dokumentationen för kontrollpanelen\n"
+#~ "installerad på ditt system."
+
+#~ msgid ""
+#~ "Add a new Mime Type\n"
+#~ "For example:  image/tiff; text/x-scheme"
+#~ msgstr ""
+#~ "Lägg till en ny mime-typ\n"
+#~ "Till exempel:  image/tiff; text/x-scheme"
+
+#~ msgid "Mime Type:"
+#~ msgstr "Mime-typ:"
+
+#~ msgid "Regular Expressions"
+#~ msgstr "reg-exp"
+
+#~ msgid ""
+#~ "You can set up two regular expressions here to identify the Mime Type\n"
+#~ "by.  These fields are optional."
+#~ msgstr ""
+#~ "Du kan använda två stycken reg-exp för att identifiera mime-typen.\n"
+#~ "Dessa fält är valfria."
+
 #~ msgid "Session"
 #~ msgstr "Session"
 
@@ -1349,9 +1509,6 @@ msgstr "Okänd"
 
 #~ msgid "Start Session"
 #~ msgstr "Starta session"
-
-#~ msgid "Cancel Login"
-#~ msgstr "Avbryt inloggning"
 
 #~ msgid "Order: "
 #~ msgstr "Ordning: "
