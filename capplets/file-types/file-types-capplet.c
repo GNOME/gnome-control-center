@@ -64,7 +64,7 @@ GtkWidget *add_button = NULL;
 GtkWidget *info_frame = NULL;
 GtkWidget *icon_entry, *extension_list, *mime_list;
 GtkWidget *application_menu, *component_menu;
-
+GtkWidget *none_button, *application_button, *component_button;
 
 /*
  *  main
@@ -248,24 +248,49 @@ mime_list_selected_row_callback (GtkWidget *widget, gint row, gint column, GdkEv
 	/* Update info on selection */
         nautilus_mime_type_capplet_update_info (mime_type);
         
-	/* FIXME: Get user mime info */
-        //if (g_hash_table_lookup (user_mime_types, mi->mime_type)) {
-        //        gtk_widget_set_sensitive (delete_button, TRUE);
-        //} else
-        //        gtk_widget_set_sensitive (delete_button, FALSE);
+	/* FIXME: Get user mime info and determine if we can enable the delete button */
 }
+
+static void
+none_button_toggled (GtkToggleButton *button, gpointer user_data)
+{
+	if (gtk_toggle_button_get_active (button)) {
+		gnome_vfs_mime_set_default_action_type (get_selected_item_mime_type (), 
+					GNOME_VFS_MIME_ACTION_TYPE_NONE);
+	}
+}
+
+static void
+application_button_toggled (GtkToggleButton *button, gpointer user_data)
+{
+	if (gtk_toggle_button_get_active (button)) {
+		gnome_vfs_mime_set_default_action_type (get_selected_item_mime_type (), 
+					GNOME_VFS_MIME_ACTION_TYPE_APPLICATION);
+	}
+}
+
+static void
+component_button_toggled (GtkToggleButton *button, gpointer user_data)
+{
+	if (gtk_toggle_button_get_active (button)) {
+		gnome_vfs_mime_set_default_action_type (get_selected_item_mime_type (), 
+					GNOME_VFS_MIME_ACTION_TYPE_COMPONENT);
+	}
+}
+
 
 static void
 init_mime_capplet (void)
 {
 	GtkWidget *main_vbox;
-        GtkWidget *vbox, *hbox;
+        GtkWidget *vbox, *hbox, *frame_vbox;
         GtkWidget *button;        
         GtkWidget *label;
         GtkWidget *fixed;
         GtkWidget *icon_entry;
         GtkWidget *mime_list_container;
         GtkWidget *extension_scroller;
+        GtkWidget *action_frame;
 	
         gchar *title[2] = {"Extensions"};
         
@@ -345,7 +370,7 @@ init_mime_capplet (void)
 	gtk_widget_set_sensitive (add_button, TRUE);
 
         remove_button = gtk_button_new_with_label (_("Remove"));
-        gtk_fixed_put (GTK_FIXED (fixed), remove_button, 285, 95);
+	gtk_fixed_put (GTK_FIXED (fixed), remove_button, 285, 95);
 	gtk_widget_set_usize (remove_button, 60, 20);
 	gtk_widget_set_sensitive (remove_button, FALSE);
 
@@ -358,15 +383,39 @@ init_mime_capplet (void)
 	gtk_signal_connect (GTK_OBJECT (extension_list), "unselect-row",
 			    GTK_SIGNAL_FUNC (extension_list_deselected), NULL);
 
+	/* Default Action frame */
+	action_frame = gtk_frame_new (_("Default Action"));
+	gtk_fixed_put (GTK_FIXED (fixed), action_frame, 355, 0);
+	gtk_widget_set_usize (action_frame, 160, 115);
+
+	frame_vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
+	gtk_container_add (GTK_CONTAINER (action_frame), frame_vbox);
+
+	none_button = gtk_radio_button_new_with_label (NULL, _("Use None"));
+	gtk_box_pack_start (GTK_BOX (frame_vbox), none_button, FALSE, FALSE, 0);
+	gtk_signal_connect (GTK_OBJECT (none_button), "toggled",
+			    GTK_SIGNAL_FUNC (none_button_toggled), NULL);
+
+	application_button = gtk_radio_button_new_with_label_from_widget ( 
+		           GTK_RADIO_BUTTON (none_button), _("Use Application"));
+	gtk_box_pack_start (GTK_BOX (frame_vbox), application_button, FALSE, FALSE, 0);
+	gtk_signal_connect (GTK_OBJECT (application_button), "toggled",
+			    GTK_SIGNAL_FUNC (application_button_toggled), NULL);
+
+	component_button = gtk_radio_button_new_with_label_from_widget ( 
+		           GTK_RADIO_BUTTON (application_button), _("Use Viewer"));
+	gtk_box_pack_start (GTK_BOX (frame_vbox), component_button, FALSE, FALSE, 0);
+	gtk_signal_connect (GTK_OBJECT (component_button), "toggled",
+			    GTK_SIGNAL_FUNC (component_button_toggled), NULL);
+
 	/* Mime list Add and Delete buttons */
         button = left_aligned_button (_("Add..."));
         gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
-        gtk_signal_connect (GTK_OBJECT (button), "clicked", add_mime_clicked, NULL);
+	gtk_signal_connect (GTK_OBJECT (button), "clicked", add_mime_clicked, NULL);
         
 	delete_button = left_aligned_button (_("Delete"));
         gtk_signal_connect (GTK_OBJECT (delete_button), "clicked", delete_mime_clicked, NULL);
         gtk_box_pack_start (GTK_BOX (vbox), delete_button, FALSE, FALSE, 0);
-
 
 	/* Set up enabled/disabled states of capplet buttons */
 
@@ -396,9 +445,11 @@ init_mime_capplet (void)
 void
 nautilus_mime_type_capplet_update_info (const char *mime_type) {
 
+	GnomeVFSMimeAction *action;
+
 	/* Update frame label with mime type */
 	gtk_frame_set_label (GTK_FRAME (info_frame), mime_type);
-
+	
 	/* Update menus */
 	populate_application_menu (application_menu, mime_type);
 	populate_component_menu (component_menu, mime_type);
@@ -409,6 +460,30 @@ nautilus_mime_type_capplet_update_info (const char *mime_type) {
 	/* Set icon for mime type */
 	gnome_icon_entry_set_icon (GNOME_ICON_ENTRY (icon_entry),
 				   gnome_vfs_mime_get_value (mime_type, "icon-filename"));
+
+	/* Indicate default action */	
+	action = gnome_vfs_mime_get_default_action (mime_type);
+	if (action != NULL) {
+		switch (action->action_type) {
+			case GNOME_VFS_MIME_ACTION_TYPE_NONE:
+				gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (none_button), TRUE);
+				break;
+
+			case GNOME_VFS_MIME_ACTION_TYPE_APPLICATION:
+				gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (application_button), TRUE);
+				break;
+
+			case GNOME_VFS_MIME_ACTION_TYPE_COMPONENT:
+				gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (component_button), TRUE);
+				break;
+				
+			default:
+				gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (none_button), TRUE);
+				break;
+		}
+	} else {
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (none_button), TRUE);
+	}
 }
 
 static void 
