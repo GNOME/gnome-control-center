@@ -10,7 +10,7 @@
 
 /*#include "GNOME_SettingsDaemon.h"*/
 
-static void popup_error_message ()
+static void popup_error_message (void)
 {
   GtkWidget *dialog;
 

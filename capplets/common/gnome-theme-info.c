@@ -418,7 +418,7 @@ handle_change_signal (GnomeThemeType       type,
 		      GnomeThemeChangeType change_type,
 		      GnomeThemeElement    element)
 {
-#if DEBUG
+#ifdef DEBUG
   gchar *type_str = NULL;
   gchar *element_str = NULL;
 #endif
@@ -441,7 +441,7 @@ handle_change_signal (GnomeThemeType       type,
     (* callback_data->func) (uri, callback_data->data);
   }
 
-#if DEBUG
+#ifdef DEBUG
   if (change_type == GNOME_THEME_CHANGE_CREATED)
     type_str = "created";
   else if (change_type == GNOME_THEME_CHANGE_CHANGED)
@@ -1382,6 +1382,8 @@ gnome_theme_icon_info_new (void)
 void
 gnome_theme_icon_info_free (GnomeThemeIconInfo *icon_theme_info)
 {
+  g_free (icon_theme_info->name);
+  g_free (icon_theme_info->path);
   g_free (icon_theme_info);
 }
 
