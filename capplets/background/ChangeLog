@@ -1,4 +1,12 @@
 2001-07-24  Richard Hestilow  <hestilow@ximian.com>
+
+	* applier.c (output_compat_prefs): Write to gnome-config to make
+	nautilus happy. 
+	(applier_apply_prefs): Change of is_nautilus_running handling
+	logic to still output legacy settings. Also, call
+	output_compat_prefs if is_root
+.
+2001-07-24  Richard Hestilow  <hestilow@ximian.com>
 	
 	* main.c (main): Pass in legacy files to capplet_init.
 

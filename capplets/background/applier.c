@@ -201,6 +201,7 @@ static void applier_preferences_unref (ApplierPreferences *prefs);
 static void applier_preferences_free (ApplierPreferences *prefs);
 
 static GdkColor* bonobo_color_to_gdk (Bonobo_Config_Color *color);
+static void output_compat_prefs (ApplierPreferences *prefs);
 
 guint
 applier_get_type (void)
@@ -346,7 +347,6 @@ applier_apply_prefs (Applier *applier, Bonobo_PropertyBag pb, Bonobo_ConfigDatab
 
 	if (do_root && applier->private->nautilus_running) {
 		set_root_pixmap (-1);
-		do_root = FALSE;
 	}
 
 	if (pb != CORBA_OBJECT_NIL)
@@ -418,10 +418,13 @@ applier_apply_prefs (Applier *applier, Bonobo_PropertyBag pb, Bonobo_ConfigDatab
 		if (applier->private->root_renderer == NULL)
 			applier->private->root_renderer = renderer_new (TRUE);
 
-		run_render_pipeline (applier->private->root_renderer,
-				     applier->private->root_prefs, 
-				     prefs,
-				     applier->private->wallpaper_pixbuf);
+		if (!applier->private->nautilus_running)
+			run_render_pipeline (applier->private->root_renderer,
+					     applier->private->root_prefs, 
+					     prefs,
+					     applier->private->wallpaper_pixbuf);
+
+		output_compat_prefs (prefs);
 
 		if (applier->private->root_prefs != NULL)
 			applier_preferences_unref (applier->private->root_prefs);
@@ -1527,4 +1530,40 @@ bonobo_color_to_gdk (Bonobo_Config_Color *color)
 	ret->blue = color->b * 65535;
 
 	return ret;
+}
+
+static void
+output_compat_prefs (ApplierPreferences *prefs)
+{
+	gchar *color;
+	
+	gnome_config_pop_prefix ();
+	gnome_config_set_bool ("/Background/Default/Enabled", prefs->wallpaper_enabled);
+	gnome_config_set_string ("/Background/Default/wallpaper",
+				 (prefs->wallpaper_filename) ? prefs->wallpaper_filename : "none");
+	gnome_config_set_int ("/Background/Default/wallpaperAlign", prefs->wallpaper_type);
+
+	color = g_strdup_printf ("#%02x%02x%02x",
+		prefs->color1->red >> 8,
+		prefs->color1->green >> 8,
+		prefs->color1->blue >> 8);
+	gnome_config_set_string ("/Background/Default/color1", color);
+	g_free (color);
+
+	color = g_strdup_printf ("#%02x%02x%02x",
+		prefs->color2->red >> 8,
+		prefs->color2->green >> 8,
+		prefs->color2->blue >> 8);
+	gnome_config_set_string ("/Background/Default/color2", color);
+	g_free (color);
+
+	gnome_config_set_string ("/Background/Default/simple",
+		       		 (prefs->gradient_enabled) ? "gradient" : "solid");
+	gnome_config_set_string ("/Background/Default/gradient",
+				   (prefs->orientation == ORIENTATION_VERT) ? "vertical" : "horizontal");
+	
+	gnome_config_set_bool ("/Background/Default/adjustOpacity", prefs->adjust_opacity);
+	gnome_config_set_int ("/Background/Default/opacity", prefs->opacity);
+
+	gnome_config_sync ();
 }
