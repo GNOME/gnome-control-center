@@ -197,6 +197,7 @@ service_info_save (const ServiceInfo *info)
 								  info->app->command);
 			gnome_vfs_application_registry_set_bool_value (info->app->id, "requires_terminal",
 								       info->app->requires_terminal);
+			gnome_vfs_application_registry_sync ();
 		}
 
 		set_string (info, "command", info->app->command);
