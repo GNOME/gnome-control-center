@@ -63,15 +63,15 @@ parse_date (char *str)
 	if (!ok) return NULL;
 
 	date = g_new (struct tm, 1);
-	date->tm_year = value;
-	date->tm_mon = 12;
+	date->tm_year = value - 1900;
+	date->tm_mon = 11;
 	date->tm_mday = 31;
 	date->tm_hour = 23;
 	date->tm_min = 59;
 	date->tm_sec = 59;
 
 	if (extract_number (&str, &value, 2))
-		date->tm_mon = value;
+		date->tm_mon = value - 1;
 	else
 		return date;
 

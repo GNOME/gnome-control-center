@@ -774,6 +774,7 @@ do_load (ConfigLog *config_log)
 	do_unload (config_log);
 	config_log_reset_filenames (config_log);
 
+#if 0  /* Locking disabled for now */
 	/* FIXME: Race condition here, plus lock handling should be
 	 * better */
 
@@ -782,6 +783,7 @@ do_load (ConfigLog *config_log)
 
 	lock_file = fopen (config_log->lock_filename, "w");
 	fclose (lock_file);
+#endif
 
 	config_log->file = fopen (config_log->filename, "r");
 

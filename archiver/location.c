@@ -555,6 +555,7 @@ location_rollback_all_to (Location *location, struct tm *date,
 		if (id_array[i] != -1)
 			do_rollback (location->p->fullpath, node->data, 
 				     id_array[i]);
+		i++;
 	}
 
 	if (parent_chain && location->p->inherits_location != NULL)
