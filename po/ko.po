@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.5.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-19 01:10+0900\n"
-"PO-Revision-Date: 2004-02-19 01:14+0900\n"
+"POT-Creation-Date: 2004-02-24 23:56+0900\n"
+"PO-Revision-Date: 2004-02-24 23:56+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: GNOME Korea <gnome-kr-hackers@lists.kldp.net>\n"
 "MIME-Version: 1.0\n"
@@ -105,11 +105,11 @@ msgstr "마우스 기본 설정을 시작하는 데 오류가 발생했습니다
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "AccessX 설정사항을 '%s' 파일에서 가져 올 수 없습니다"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:445
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:433
 msgid "Import Feature Settings File"
 msgstr "기능 설정 파일 가져오기"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:449
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:437
 msgid "_Import"
 msgstr "가져오기(_I)"
 
@@ -690,11 +690,11 @@ msgstr ""
 "\n"
 "대신 다른 그림을 선택하십시오."
 
-#: capplets/common/gconf-property-editor.c:1667
+#: capplets/common/gconf-property-editor.c:1665
 msgid "Please select an image."
 msgstr "그림을 선택하십시오."
 
-#: capplets/common/gconf-property-editor.c:1672
+#: capplets/common/gconf-property-editor.c:1670
 msgid "_Select"
 msgstr "선택(_S)"
 
@@ -1087,20 +1087,20 @@ msgstr "기본 설정"
 msgid "Screen %d Settings\n"
 msgstr "화면 %d 설정\n"
 
-#: capplets/display/main.c:444
+#: capplets/display/main.c:445
 msgid "Screen Resolution Preferences"
 msgstr "화면 해상도 설정"
 
-#: capplets/display/main.c:476
+#: capplets/display/main.c:482
 #, c-format
 msgid "_Make default for this computer (%s) only"
 msgstr "이 컴퓨터(%s)의 경우에만 기본값으로 만들기(_M)"
 
-#: capplets/display/main.c:494
+#: capplets/display/main.c:500
 msgid "Options"
 msgstr "옵션"
 
-#: capplets/display/main.c:515
+#: capplets/display/main.c:521
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d second the previous "
@@ -1112,19 +1112,19 @@ msgstr[0] ""
 "새로운 설정을 테스트합니다. %d초 이내에 응답하지 않으면 이전 설정으로 다시 돌"
 "아갑니다."
 
-#: capplets/display/main.c:564
+#: capplets/display/main.c:570
 msgid "Do you want to keep this resolution?"
 msgstr "이 해상도를 계속 사용하시겠습니까?"
 
-#: capplets/display/main.c:589
+#: capplets/display/main.c:595
 msgid "Use _previous resolution"
 msgstr "이전 해상도 사용(_P)"
 
-#: capplets/display/main.c:589
+#: capplets/display/main.c:595
 msgid "_Keep resolution"
 msgstr "이 해상도 계속 사용(_K)"
 
-#: capplets/display/main.c:740
+#: capplets/display/main.c:746
 msgid ""
 "The XServer does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
@@ -1132,7 +1132,7 @@ msgstr ""
 "X서버가 XRandR 확장 기능을 지원하지 않습니다.  실행 중에 해상도를 바꿀 수 없"
 "습니다."
 
-#: capplets/display/main.c:748
+#: capplets/display/main.c:754
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
@@ -1140,12 +1140,16 @@ msgstr ""
 "XRandR 확장 기능의 버전이 이 프로그램과 호환되지 않습니다. 실행 중에 해상도"
 "를 바꿀 수 없습니다."
 
-#: capplets/file-types/file-types-capplet.c:196
+#: capplets/file-types/file-types-capplet.c:158
+msgid "Are you sure you want to permanently delete this entry?"
+msgstr "정말로 이 항목을 영구히 지우시겠습니까?"
+
+#: capplets/file-types/file-types-capplet.c:210
 #: vfs-methods/themus/themus-properties-view.c:163
 msgid "Description"
 msgstr "설명"
 
-#: capplets/file-types/file-types-capplet.c:218
+#: capplets/file-types/file-types-capplet.c:232
 msgid "Extensions"
 msgstr "확장자"
 
@@ -1217,7 +1221,7 @@ msgstr "프로그램 실행"
 
 #: capplets/file-types/file-types-properties.glade.h:17
 msgid "Run in _Terminal"
-msgstr "터미널에서 시작(_ㅆ)"
+msgstr "터미널에서 시작(_T)"
 
 #: capplets/file-types/file-types-properties.glade.h:18
 msgid "Use parent category _defaults"
@@ -1674,7 +1678,7 @@ msgstr "바탕 화면"
 msgid "Window Management"
 msgstr "창 관리"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:737
+#: capplets/keybindings/gnome-keybinding-properties.c:736
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1683,27 +1687,27 @@ msgstr ""
 "바로가기 키 \"%s\"(은)는 \"%s\"에서\n"
 "쓰고 있습니다\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:768
+#: capplets/keybindings/gnome-keybinding-properties.c:766
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "설정 데이터 베이스에서 새로운 단축키 설정 오류: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:818
+#: capplets/keybindings/gnome-keybinding-properties.c:812
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "설정 데이터 베이스에서 단축키 설정 해제하는 데 오류: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:967
+#: capplets/keybindings/gnome-keybinding-properties.c:960
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
 msgstr "키보드 테마를 찾을 수 없습니다.  GTK+ 설치가 불완전하기 때문입니다."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:989
+#: capplets/keybindings/gnome-keybinding-properties.c:982
 msgid "Action"
 msgstr "동작"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:1013
+#: capplets/keybindings/gnome-keybinding-properties.c:1006
 msgid "Shortcut"
 msgstr "바로 가기"
 
@@ -2656,7 +2660,10 @@ msgid ""
 "You just pressed two keys at once, or pressed the Shift key 5 times in a "
 "row.  This turns off the Sticky Keys feature, which affects the way your "
 "keyboard works."
-msgstr "키 두 개를 동시에 눌렀거나, <Shift> 키를 5번 연속해서 눌렀습니다.  고정 키 기능을 해제하게 됩니다.  고정 키를 해제하면 키보드가 동작하는 방식이 달라집니다."
+msgstr ""
+"키 두 개를 동시에 눌렀거나, <Shift> 키를 5번 연속해서 눌렀습니다.  고정 키 기"
+"능을 해제하게 됩니다.  고정 키를 해제하면 키보드가 동작하는 방식이 달라집니"
+"다."
 
 #: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
 msgid "Do you want to activate Sticky Keys?"
