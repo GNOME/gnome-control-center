@@ -1,5 +1,8 @@
 2001-07-26  Bradford Hovinen  <hovinen@ximian.com>
 
+	* applier.c (renderer_render_wallpaper): Make sure not to scale
+	the pixbuf if the wallpaper type is centered
+
 	* background-properties-capplet.c (property_change_cb): Accept
 	applier as argument; retrieve property bag from applier
 	(realize_cb): Retrieve applier from widget

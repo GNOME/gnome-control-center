@@ -872,8 +872,9 @@ renderer_render_wallpaper (Renderer *renderer)
 		PDEBUG (renderer->pixbuf); 
 			}
 		}
-		else if (renderer->wwidth != renderer->pwidth ||
-			 renderer->wheight != renderer->pheight) 
+		else if (renderer->prefs->wallpaper_type != WPTYPE_CENTERED &&
+			 (renderer->wwidth != renderer->pwidth ||
+			  renderer->wheight != renderer->pheight))
 		{
 			if (render_gradient_p (renderer, renderer->prefs)) {
 				scalex = (gdouble) renderer->wwidth / 
