@@ -529,7 +529,10 @@ add_application (GtkFileSelection *selector, gpointer user_data)
 		application->can_open_multiple_files = FALSE;
 		application->can_open_uris = FALSE;
 		
-		gnome_vfs_mime_set_default_application ((const char *)user_data, application);	
+		/* FIXME:(for gzr) should register app if not already
+		   registered, then pass only the id to
+		   set_default_application */
+		/* gnome_vfs_mime_set_default_application ((const char *)user_data, application); */	
 	}
 }
 
