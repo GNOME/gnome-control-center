@@ -64,8 +64,8 @@ $(groups_in_files): %.directory.in: %.directory.in.in
 $(groups_files): %.directory: %.directory.in
 	$(top_builddir)/xml-i18n-merge -d $(top_srcdir)/po $< $@
 
-#install-data-local:
-#	$(mkinstalldirs) $(datadir)/control-center/capplets
-#	$(INSTALL_DATA) $(srcdir)/Gnome.directory $(datadir)/control-center/capplets/.directory
+install-data-local:
+	$(mkinstalldirs) $(datadir)/control-center/capplets
+	$(INSTALL_DATA) $(srcdir)/Gnome.directory $(datadir)/control-center/capplets/.directory
 
 #all-local: Gnome.directory
