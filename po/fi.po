@@ -21,8 +21,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 1.99.0\n"
-"POT-Creation-Date: 2002-08-21 10:05-0400\n"
-"PO-Revision-Date: 2002-07-19 19:55+0200\n"
+"POT-Creation-Date: 2002-08-27 16:44+0300\n"
+"PO-Revision-Date: 2002-08-27 15:45+0300\n"
 "Last-Translator: Pauli Virtanen <pauli.virtanen@hut.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -159,9 +159,8 @@ msgid "_Disable if unused for "
 msgstr "_Poista käytöstä jos käyttämättömänä "
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
-#, fuzzy
 msgid "_Enable keyboard accessibility"
-msgstr "Muuta näppäimistön esteettömyysasetuksia"
+msgstr "_Käytä esteetöntä näppäimistöä"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
 msgid "_Ignore keypresses within  :"
@@ -840,12 +839,10 @@ msgid "Actions"
 msgstr "Toiminnot"
 
 #: capplets/file-types/file-types-properties.glade.h:3
-#, fuzzy
 msgid "Add _File Type..."
 msgstr "Lisää _tiedostotyyppi..."
 
 #: capplets/file-types/file-types-properties.glade.h:4
-#, fuzzy
 msgid "Add _Service..."
 msgstr "Lisää _palvelu..."
 
@@ -1140,46 +1137,57 @@ msgstr "_Sovelluksien kirjasin:"
 msgid "_Desktop font:"
 msgstr "_Työpöydän kirjasin:"
 
-#: capplets/keybindings/eggcellrendererkeys.c:158
-#: capplets/keybindings/eggcellrendererkeys.c:159
-msgid "Accelerator modifiers"
-msgstr "Pikanäppäimen muunnosnäppäimet"
-
-#: capplets/keybindings/eggcellrendererkeys.c:167
-#: capplets/keybindings/eggcellrendererkeys.c:168
+#: capplets/keybindings/eggcellrendererkeys.c:160
+#: capplets/keybindings/eggcellrendererkeys.c:161
 msgid "Accelerator key"
 msgstr "Pikanäppäin"
 
-#: capplets/keybindings/eggcellrendererkeys.c:206
-#: capplets/keybindings/gnome-keybinding-properties.c:179
+#: capplets/keybindings/eggcellrendererkeys.c:170
+#: capplets/keybindings/eggcellrendererkeys.c:171
+msgid "Accelerator modifiers"
+msgstr "Pikanäppäimen muunnosnäppäimet"
+
+#: capplets/keybindings/eggcellrendererkeys.c:180
+msgid "Accel Mode"
+msgstr "Pikanäppäintila"
+
+#: capplets/keybindings/eggcellrendererkeys.c:181
+msgid "The type of accelerator."
+msgstr "Pikanäppäimen tyyppi."
+
+#: capplets/keybindings/eggcellrendererkeys.c:219
+#: capplets/keybindings/gnome-keybinding-properties.c:181
 #: libbackground/applier.c:521
 msgid "Disabled"
 msgstr "Pois käytöstä"
 
-#: capplets/keybindings/eggcellrendererkeys.c:309
-#: capplets/keybindings/eggcellrendererkeys.c:506
-#: capplets/keybindings/eggcellrendererkeys.c:509
-msgid "Type a new shortcut"
+#: capplets/keybindings/eggcellrendererkeys.c:330
+#: capplets/keybindings/eggcellrendererkeys.c:563
+msgid "Type a new accelerator, or press Backspace to clear"
+msgstr "Näppäile uusi pikanäppäin tai tyhjennä painamalla askelpalautinta."
+
+#: capplets/keybindings/eggcellrendererkeys.c:566
+msgid "Type a new accelerator"
 msgstr "Näppäile uusi pikanäppäin"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:446
+#: capplets/keybindings/gnome-keybinding-properties.c:448
 msgid "<Unknown Action>"
 msgstr "<Tuntematon toiminto>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:465
+#: capplets/keybindings/gnome-keybinding-properties.c:467
 msgid "Desktop"
 msgstr "Työpöytä"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:469
+#: capplets/keybindings/gnome-keybinding-properties.c:471
 msgid "Window Management"
 msgstr "Ikkunointi"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:566
+#: capplets/keybindings/gnome-keybinding-properties.c:568
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Virhe asettaessa uutta pikanäppäintä asetustietokantaan: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:717
+#: capplets/keybindings/gnome-keybinding-properties.c:719
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1187,11 +1195,11 @@ msgstr ""
 "Ei löytänyt näppäimistöteemoja. Tämä merkitsee, että GTK+ on asennettu "
 "puutteellisesti."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:739
+#: capplets/keybindings/gnome-keybinding-properties.c:741
 msgid "Action"
 msgstr "Toiminto"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:755
+#: capplets/keybindings/gnome-keybinding-properties.c:759
 msgid "Shortcut"
 msgstr "Pikanäppäin"
 
@@ -1232,19 +1240,19 @@ msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:2
 msgid "<small><i>Fast</i></small>"
-msgstr ""
+msgstr "<small><i>Nopea</i></small>"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:3
 msgid "<small><i>Long</i></small>"
-msgstr ""
+msgstr "<small><i>Pitkä</i></small>"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "<small><i>Short</i></small>"
-msgstr ""
+msgstr "<small><i>Lyhyt</i></small>"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:5
 msgid "<small><i>Slow</i></small>"
-msgstr ""
+msgstr "<small><i>Hidas</i></small>"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "Bee_p"
@@ -2114,60 +2122,3 @@ msgstr ""
 #: libwindow-settings/gnome-wm-manager.c:464
 msgid "OK"
 msgstr "OK"
-
-#~ msgid "Documents"
-#~ msgstr "Asiakirjat"
-
-#~ msgid "Word Processor"
-#~ msgstr "Tekstinkäsittely"
-
-#~ msgid "Published Materials"
-#~ msgstr "Julkaisut"
-
-#~ msgid "Spreadsheet"
-#~ msgstr "Taulukkolaskenta"
-
-#~ msgid "Presentation"
-#~ msgstr "Esitys"
-
-#~ msgid "Diagram"
-#~ msgstr "Kaavio"
-
-#~ msgid "TeX"
-#~ msgstr "TeX"
-
-#~ msgid "Vector Graphics"
-#~ msgstr "Vektorigrafiikka"
-
-#~ msgid "World Wide Web"
-#~ msgstr "WWW"
-
-#~ msgid "Plain Text"
-#~ msgstr "Pelkkä teksti"
-
-#~ msgid "Extended Markup Language (XML)"
-#~ msgstr "XML"
-
-#~ msgid "Information"
-#~ msgstr "Tietoja"
-
-#~ msgid "Financial"
-#~ msgstr "Finanssi"
-
-#~ msgid "Calendar"
-#~ msgstr "Kalenteri"
-
-#~ msgid "Contacts"
-#~ msgstr "Yhteystiedot"
-
-#~ msgid "Packages"
-#~ msgstr "Paketit"
-
-#~ msgid "Software Development"
-#~ msgstr "Sovellusten kehittäminen"
-
-#~ msgid "Source Code"
-#~ msgstr "Lähdekoodi"
-
-#~ msgid "faster"
-#~ msgstr "nopea"
