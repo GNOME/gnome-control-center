@@ -147,17 +147,31 @@ remove_cb (GtkButton *button, GladeXML *dialog)
 	GtkTreeSelection  *selection;
 	GtkTreeIter        iter;
 	ModelEntry        *entry;
+	GtkWidget         *warning_dialog;
+	gint               response;
 
-	treeview = GTK_TREE_VIEW (WID ("mime_types_tree"));
-	selection = gtk_tree_view_get_selection (treeview);
-	gtk_tree_selection_get_selected (selection, &model, &iter);
+	warning_dialog = gtk_message_dialog_new (
+				GTK_WINDOW (WID("main_dialog")),
+				GTK_DIALOG_DESTROY_WITH_PARENT,
+				GTK_MESSAGE_WARNING,
+				GTK_BUTTONS_OK_CANCEL,
+				_("Are you sure you want to permanently delete this entry?"));
 
-	entry = MODEL_ENTRY_FROM_ITER (&iter);
+	gtk_dialog_set_default_response (GTK_DIALOG (warning_dialog), GTK_RESPONSE_CANCEL);
+	gtk_window_set_resizable (GTK_WINDOW (warning_dialog), FALSE);
+	response = gtk_dialog_run (GTK_DIALOG (warning_dialog));
 
-	model_entry_remove_child (entry->parent, entry, model);
-	model_entry_delete (entry);
+	if (response == GTK_RESPONSE_OK) {
+		treeview = GTK_TREE_VIEW (WID ("mime_types_tree"));
+		selection = gtk_tree_view_get_selection (treeview);
+		gtk_tree_selection_get_selected (selection, &model, &iter);
+		entry = MODEL_ENTRY_FROM_ITER (&iter);
 
-	selection_changed_cb (selection, dialog);
+		model_entry_remove_child (entry->parent, entry, model);
+		model_entry_delete (entry);
+		selection_changed_cb (selection, dialog);
+	}
+	gtk_widget_destroy (warning_dialog);
 }
 
 static void
