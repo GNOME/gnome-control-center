@@ -12,6 +12,7 @@
 #include <X11/Xatom.h>
 
 #include "theme-common.h"
+#include "wm-common.h"
 #include "capplet-util.h"
 #include "eggcellrendererkeys.h"
 #include "activate-settings-daemon.h"
@@ -107,149 +108,7 @@ typedef struct
   guint gconf_cnxn;
 } KeyEntry;
 
-static void reload_key_entries (GladeXML *dialog);
-
-/* Our WM Window */
-static Window wm_window = None;
-
-static char *
-get_wm_name (void)
-{
-  Atom utf8_string, atom, type;
-  int result;
-  char *retval;
-  int format;
-  gulong nitems;
-  gulong bytes_after;
-  guchar *val;
-  
-  if (wm_window == None)
-      return NULL;
-  
-  utf8_string = XInternAtom (GDK_DISPLAY (), "UTF8_STRING", False);
-  atom = XInternAtom (GDK_DISPLAY (), "_NET_WM_NAME", False);
-  
-  gdk_error_trap_push ();
-  
-  result = XGetWindowProperty (GDK_DISPLAY (),
-			       wm_window,
-			       atom,
-			       0, G_MAXLONG,
-			       False, utf8_string,
-			       &type, &format, &nitems,
-			       &bytes_after, (guchar **)&val);
-
-  if (gdk_error_trap_pop () || result != Success)
-    return NULL;
-
-  if (type != utf8_string ||
-      format != 8 ||
-      nitems == 0)
-    {
-      if (val)
-	XFree (val);
-      return NULL;
-    }
-
-  if (!g_utf8_validate (val, nitems, NULL))
-    {
-      XFree (val);
-      return NULL;
-    }
-
-  retval = g_strndup (val, nitems);
-
-  XFree (val);
-
-  return retval;
-}
-
-static gboolean
-is_metacity_running (void)
-{
-  char *wm_name;
-
-  wm_name = get_wm_name ();
-  
-  if (wm_name &&
-      strcmp (wm_name, "Metacity") == 0)
-    {
-      g_free (wm_name);
-      return TRUE;
-    }
-
-  g_free (wm_name);
-  return FALSE;
-}
-
-static void
-update_wm_window (void)
-{
-  Window *xwindow;
-  Atom type;
-  gint format;
-  gulong nitems;
-  gulong bytes_after;
-  
-  XGetWindowProperty (GDK_DISPLAY (), GDK_ROOT_WINDOW (),
-		      XInternAtom (GDK_DISPLAY (), "_NET_SUPPORTING_WM_CHECK", False),
-		      0, G_MAXLONG, False, XA_WINDOW, &type, &format,
-		      &nitems, &bytes_after, (guchar **) &xwindow);
-
-  if (type != XA_WINDOW)
-    {
-      wm_window = None;
-      return;
-    }
-
-  gdk_error_trap_push ();
-  XSelectInput (GDK_DISPLAY (), *xwindow, StructureNotifyMask | PropertyChangeMask);
-  XSync (GDK_DISPLAY (), False);
-  
-  if (gdk_error_trap_pop ())
-    {
-      XFree (xwindow);
-      wm_window = None;
-      return;
-    }
-
-  wm_window = *xwindow;
-  XFree (xwindow);
-}
-
-static GdkFilterReturn 
-wm_window_event_filter (GdkXEvent *xev,
-			GdkEvent  *event,
-			gpointer   data)
-{
-  XEvent *xevent = (XEvent *)xev;
-
-  if ((xevent->type == DestroyNotify &&
-       wm_window != None && xevent->xany.window == wm_window) ||
-      (xevent->type == PropertyNotify &&
-       xevent->xany.window == GDK_ROOT_WINDOW () &&
-       xevent->xproperty.atom == (XInternAtom (GDK_DISPLAY (),  "_NET_SUPPORTING_WM_CHECK", False))) ||
-      (xevent->type == PropertyNotify &&
-       wm_window != None && xevent->xany.window == wm_window &&
-       xevent->xproperty.atom == (XInternAtom (GDK_DISPLAY (), "_NET_WM_NAME", False))))
-    {
-      update_wm_window ();
-      reload_key_entries (data);
-    }
-  
-  return GDK_FILTER_CONTINUE;
-}
-
-static void
-initialize_wm_handling (GladeXML *dialog)
-{
-  gdk_window_add_filter (NULL, wm_window_event_filter, dialog);
-
-  update_wm_window ();
-  
-  XSelectInput (GDK_DISPLAY (), GDK_ROOT_WINDOW (), PropertyChangeMask);
-  XSync (GDK_DISPLAY (), False);
-}
+static void reload_key_entries (gpointer wm_name, GladeXML *dialog);
 
 static void
 menu_item_activate (GtkWidget *menu_item,
@@ -591,13 +450,13 @@ append_keys_to_tree (GladeXML           *dialog,
 }
 
 static void
-reload_key_entries (GladeXML *dialog)
+reload_key_entries (gpointer wm_name, GladeXML *dialog)
 {
   clear_old_model (dialog, WID ("shortcut_treeview"));
   
   append_keys_to_tree (dialog, _("Desktop"), desktop_key_list);
   
-  if (is_metacity_running ())
+  if (strcmp((char *) wm_name, WM_COMMON_METACITY) == 0)
     {
       append_keys_to_tree (dialog, _("Window Management"), metacity_key_list);
     }
@@ -609,7 +468,7 @@ key_entry_controlling_key_changed (GConfClient *client,
 				   GConfEntry  *entry,
 				   gpointer     user_data)
 {
-  reload_key_entries (user_data);
+  reload_key_entries (wm_common_get_current_window_manager(), user_data);
 }
 
 static void
@@ -896,7 +755,7 @@ setup_dialog (GladeXML *dialog)
 			   dialog, NULL, NULL);
 
   /* set up the dialog */
-  reload_key_entries (dialog);
+  reload_key_entries (wm_common_get_current_window_manager(), dialog);
 
   widget = WID ("gnome-keybinding-dialog");
   filename = gnome_program_locate_file (NULL, GNOME_FILE_DOMAIN_APP_PIXMAP, "keyboard-shortcut.png", TRUE, NULL);
@@ -929,7 +788,7 @@ main (int argc, char *argv[])
   activate_settings_daemon ();
 
   dialog = create_dialog ();
-  initialize_wm_handling (dialog);
+  wm_common_register_window_manager_change ((GFunc)(reload_key_entries), dialog);
   setup_dialog (dialog);
   
   gtk_main ();
