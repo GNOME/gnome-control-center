@@ -4,11 +4,6 @@
 #include <glib.h>
 #include <libgnome/gnome-i18n.h>
 
-#include <errno.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <unistd.h>
-
 #include "gnome-settings-daemon.h"
 #include "gnome-settings-xsettings.h"
 #include "xsettings-manager.h"
@@ -348,118 +343,6 @@ gnome_xft_settings_set_xsettings (GnomeXftSettings *settings)
     }
 }
 
-/*
- * Helper function for spawn_with_input() - write an entire
- * string to a fd.
- */
-static gboolean
-write_all (int         fd,
-	   const char *buf,
-	   gsize       to_write)
-{
-  while (to_write > 0)
-    {
-      gssize count = write (fd, buf, to_write);
-      if (count < 0)
-	{
-	  if (errno != EINTR)
-	    return FALSE;
-	}
-      else
-	{
-	  to_write -= count;
-	  buf += count;
-	}
-    }
-
-  return TRUE;
-}
-
-/*
- * Helper function for spawn_with_input() - wait for a child
- * to exit.
- */
-gboolean
-wait_for_child (int  pid,
-		int *status)
-{
-  gint ret;
-
- again:
-  ret = waitpid (pid, status, 0);
-
-  if (ret < 0)
-    {
-      if (errno == EINTR)
-        goto again;
-      else
-        {
-	  g_warning ("Unexpected error in waitpid() (%s)",
-		     g_strerror (errno));
-	  return FALSE;
-        }
-    }
-
-  return TRUE;
-}
-
-/**
- * spawn_with_input:
- * @argv: command line to run
- * @input: string to write to the child process. 
- * 
- * Spawns a child process specified by @argv, writes the text in
- * @input to it, then waits for the child to exit. Any failures
- * are output through g_warning(); if you wanted to use this in
- * cases where errors need to be presented to the user, some
- * modification would be needed.
- **/
-static void
-spawn_with_input (char      **argv,
-		  const char *input)
-{
-  int exit_status;
-  int child_pid;
-  int inpipe;
-  GError *err = NULL;
-  
-  if (!g_spawn_async_with_pipes (NULL /* working directory */, argv, NULL /* envp */,
-				 G_SPAWN_SEARCH_PATH | G_SPAWN_DO_NOT_REAP_CHILD,
-				 NULL, NULL, /* child setup and data */
-				 &child_pid,
-				 &inpipe, NULL, NULL, /* stdin, stdout, stderr */
-				 &err))
-    {
-      gchar *command = g_strjoinv (" ", argv);
-      g_warning ("Could not execute %s: %s", command, err->message);
-      g_error_free (err);
-      g_free (command);
-
-      return;
-    }
-
-  if (input)
-    {
-      if (!write_all (inpipe, input, strlen (input)))
-	{
-	  gchar *command = g_strjoinv (" ", argv);
-	  g_warning ("Could not write input to %s", command);
-	  g_free (command);
-	}
-
-      close (inpipe);
-    }
-      
-  wait_for_child (child_pid, &exit_status);
-
-  if (!WIFEXITED (exit_status) || WEXITSTATUS (exit_status))
-    {
-      gchar *command = g_strjoinv (" ", argv);
-      g_warning ("Command %s failed", command);
-      g_free (command);
-    }
-}
-
 static void
 gnome_xft_settings_set_xresources (GnomeXftSettings *settings)
 {
@@ -477,7 +360,7 @@ gnome_xft_settings_set_xresources (GnomeXftSettings *settings)
   g_string_append_printf (add_string,
 			  "Xft.rgba: %s\n", settings->rgba);
 
-  spawn_with_input (add, add_string->str);
+  gnome_settings_daemon_spawn_with_input (add, add_string->str);
 
   g_string_free (add_string, TRUE);
 }

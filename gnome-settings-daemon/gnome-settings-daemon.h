@@ -64,8 +64,10 @@ struct _GnomeSettingsDaemonClass
   POA_GNOME_SettingsDaemon__epv epv;
 };
 
-GType gnome_settings_daemon_get_type          (void);
-GObject *gnome_settings_daemon_new             (void);
+GType    gnome_settings_daemon_get_type         (void);
+GObject *gnome_settings_daemon_new              (void);
+void     gnome_settings_daemon_spawn_with_input (char       **argv,
+						 const char  *input);
 
 G_END_DECLS
 

@@ -12,6 +12,34 @@
 
 
 static void
+load_xcursor_theme (GConfClient *client)
+{
+  gchar *cursor_theme;
+  gint size;
+  char *add[] = { "xrdb", "-merge", NULL };
+  GString *add_string = g_string_new (NULL);
+
+  cursor_theme = gconf_client_get_string (client,
+					  "/desktop/gnome/peripherals/mouse/cursor_theme",
+					  NULL);
+  size = gconf_client_get_int (client,
+			       "/desktop/gnome/peripherals/mouse/cursor_size",
+			       NULL);
+  if (cursor_theme == NULL || size <= 0)
+    return;
+
+  g_string_append_printf (add_string,
+			  "Xcursor.theme: %s\n", cursor_theme);
+  g_string_append (add_string, "Xcursor.theme_core: true\n");
+  g_string_append_printf (add_string,
+			  "Xcursor.size: %d\n", size);
+
+  gnome_settings_daemon_spawn_with_input (add, add_string->str);
+
+  g_string_free (add_string, TRUE);
+}
+
+static void
 load_cursor (GConfClient *client)
 {
   DIR *dir;
@@ -122,7 +150,9 @@ load_cursor (GConfClient *client)
 
   /* run mkfontdir */
   mkfontdir_cmd = g_strdup_printf ("mkfontdir %s %s", dir_name, font_dir_name);
-  /* maybe check for error... */
+  /* maybe check for error...
+   * also, it's not going to like that if there are spaces in dir_name/font_dir_name.
+   */
   g_spawn_command_line_sync (mkfontdir_cmd, NULL, NULL, NULL, NULL);
   g_free (mkfontdir_cmd);
 
@@ -167,7 +197,8 @@ load_cursor (GConfClient *client)
 void
 gnome_settings_font_init (GConfClient *client)
 {
-  load_cursor (client);
+    load_xcursor_theme (client);
+    load_cursor (client);
 }
 
 void
