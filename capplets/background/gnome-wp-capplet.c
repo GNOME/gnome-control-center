@@ -175,21 +175,12 @@ static void gnome_wp_add_images (GnomeWPCapplet * capplet,
 
 static void gnome_wp_file_open_dialog (GtkWidget * widget,
 				       GnomeWPCapplet * capplet) {
-#if GTK_CHECK_VERSION (2, 3, 0)
   GSList * files;
-#else
-  gchar ** files;
-#endif
 
   switch (gtk_dialog_run (GTK_DIALOG (capplet->filesel))) {
   case GTK_RESPONSE_OK:
-#if GTK_CHECK_VERSION (2, 3, 0)
     files = gtk_file_chooser_get_filenames (GTK_FILE_CHOOSER (capplet->filesel));
     gnome_wp_add_images (capplet, files, NULL);
-#else
-    files = gtk_file_selection_get_selections (GTK_FILE_SELECTION (capplet->filesel));
-    gnome_wp_add_images (capplet, NULL, files);
-#endif
   case GTK_RESPONSE_CANCEL:
   default:
     gtk_widget_hide (capplet->filesel);
@@ -1449,7 +1440,6 @@ static void wallpaper_properties_init (void) {
 		    G_CALLBACK (gnome_wp_props_wp_selected), capplet);
 
   /* Create the file chooser dialog stuff here */
-#if GTK_CHECK_VERSION (2, 3, 0)
   capplet->filesel = gtk_file_chooser_dialog_new (_("Add Wallpaper"),
 						  GTK_WINDOW (capplet->window),
 						  GTK_FILE_CHOOSER_ACTION_OPEN,
@@ -1460,11 +1450,6 @@ static void wallpaper_properties_init (void) {
 						  NULL);
   gtk_file_chooser_set_select_multiple (GTK_FILE_CHOOSER (capplet->filesel),
 					TRUE);
-#else
-  capplet->filesel = gtk_file_selection_new (_("Add Wallpaper"));
-  gtk_file_selection_set_select_multiple (GTK_FILE_SELECTION (capplet->filesel),
-					  TRUE);
-#endif
 }
 
 gint main (gint argc, gchar *argv[]) {
