@@ -1,7 +1,7 @@
 appicondir = $(datadir)/control-center-2/icons
 appicon_DATA = control-center.png
 
-splashdir = $(datadir)/pixmaps/gnomecc
+splashdir = $(datadir)/pixmaps/gnomecc-2
 splash_DATA = \
 	bcg_top.png \
 	title.png \

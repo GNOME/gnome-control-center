@@ -1,4 +1,4 @@
-SUBDIRS = libsounds libbackground gnome-settings-daemon capplets control-center idl po
+SUBDIRS = po libsounds libbackground gnome-settings-daemon capplets control-center 
 
 #I removed the root-manager for now
 #
@@ -14,10 +14,10 @@ pixmap_DATA = control-center2.png
 dist-hook: control-center.spec
 	cp control-center.spec $(distdir)
 
-MAINTAINERCLEANFILES = \
-	intltool-extract \
-	intltool-merge \
-	intltool-update
+#MAINTAINERCLEANFILES = \
+#	intltool-extract \
+#	intltool-merge \
+#	intltool-update
 
 EXTRA_DIST = \
 	control-center.spec.in	\
