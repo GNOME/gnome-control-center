@@ -1,3 +1,11 @@
+2001-07-18  Richard Hestilow  <hestilow@ximian.com>
+
+	* capplet-util.h (CreateDialogFn): Add a PropertyBag argument so
+	capplet authors can hook up to the proxy.
+
+	* capplet-util.c (get_control_cb): Pass the proxy bag to setup_cb.
+	(capplet_init): Don't free default_moniker until after we print it.
+
 2001-07-17  Bradford Hovinen  <hovinen@ximian.com>
 
 	* capplet-util.c (capplet_init): Support --init-session-settings

@@ -146,12 +146,15 @@ get_control_cb (BonoboPropertyControl *property_control, gint page_number)
 	GtkWidget            *pf;
 
 	if (control == NULL) {
-		widget = create_dialog_cb ();
+		pf = bonobo_property_frame_new (NULL, NULL);
+		widget = create_dialog_cb (BONOBO_OBJREF (BONOBO_PROPERTY_FRAME (pf)->proxy));
 
 		if (widget == NULL)
+		{
+			bonobo_object_unref (BONOBO_OBJECT (pf));
 			return NULL;
+		}
 
-		pf = bonobo_property_frame_new (NULL, NULL);
 		gtk_object_set_data (GTK_OBJECT (property_control),
 				     "property-frame", pf);
 		gtk_container_add (GTK_CONTAINER (pf), widget);
@@ -385,12 +388,12 @@ capplet_init (int                      argc,
 
 	default_moniker = get_default_moniker (argv[0]);
 	db = bonobo_get_object (default_moniker, "IDL:Bonobo/ConfigDatabase:1.0", &ev);
-	g_free (default_moniker);
-
 	if (db == CORBA_OBJECT_NIL) {
 		g_critical ("Cannot open configuration database %s", default_moniker);
+		g_free (default_moniker);
 		exit (-1);
 	}
+	g_free (default_moniker);
 
 	if ((apply_only || init_session) && apply_fn != NULL) {
 		apply_fn (db);
