@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.5.8\n"
-"POT-Creation-Date: 2002-05-07 12:47+0200\n"
-"PO-Revision-Date: 2002-05-07 12:49+0200\n"
+"POT-Creation-Date: 2002-05-12 16:01+0200\n"
+"PO-Revision-Date: 2002-05-12 16:07+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -234,16 +234,16 @@ msgstr "I_ngen bilde"
 msgid "_Picture"
 msgstr "_Bilde"
 
-#: capplets/background/background-properties-capplet.c:531
+#: capplets/background/background-properties-capplet.c:537
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:592
-#: capplets/keyboard/gnome-keyboard-properties.c:359
-#: capplets/mouse/gnome-mouse-properties.c:691
-#: capplets/sound/sound-properties-capplet.c:148
+#: capplets/keyboard/gnome-keyboard-properties.c:365
+#: capplets/mouse/gnome-mouse-properties.c:735
+#: capplets/sound/sound-properties-capplet.c:156
 msgid "Retrieve and store legacy settings"
 msgstr "Hent og lagre gamle innstillinger"
 
-#: capplets/background/background-properties-capplet.c:556
+#: capplets/background/background-properties-capplet.c:562
 #: capplets/background/background-properties.glade.h:1
 msgid "Background Preferences"
 msgstr "Brukervalg for bakgrunn"
@@ -860,17 +860,17 @@ msgid "Source Code"
 msgstr "Kildekode"
 
 #: capplets/file-types/category-names.h:25
-#: capplets/file-types/mime-type-info.c:745
+#: capplets/file-types/mime-type-info.c:752
 msgid "Audio"
 msgstr "Lyd"
 
 #: capplets/file-types/category-names.h:26
-#: capplets/file-types/mime-type-info.c:741
+#: capplets/file-types/mime-type-info.c:748
 msgid "Images"
 msgstr "Bilder"
 
 #: capplets/file-types/category-names.h:27
-#: capplets/file-types/mime-type-info.c:743
+#: capplets/file-types/mime-type-info.c:750
 msgid "Video"
 msgstr "Video"
 
@@ -1210,6 +1210,11 @@ msgstr "Skrivebord"
 msgid "Window Management"
 msgstr "Vindushåndtering"
 
+#: capplets/keybindings/gnome-keybinding-properties.c:692
+#, c-format
+msgid "Error setting new accelerator in configuration database: %s\n"
+msgstr "Feil under setting av ny snarvei i konfigurasjonsdatabasen: %s\n"
+
 #: capplets/keybindings/gnome-keybinding-properties.c:783
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
@@ -1251,14 +1256,14 @@ msgstr ""
 msgid "Associate keyboard shortcuts with panel actions"
 msgstr "Tilegn tastatursnarveier til panelhandlinger"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:338
+#: capplets/keyboard/gnome-keyboard-properties.c:344
 msgid "_Accessibility"
 msgstr "_Tilgjengelighet"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:355
-#: capplets/keyboard/gnome-keyboard-properties.c:357
-#: capplets/sound/sound-properties-capplet.c:144
-#: capplets/sound/sound-properties-capplet.c:146
+#: capplets/keyboard/gnome-keyboard-properties.c:361
+#: capplets/keyboard/gnome-keyboard-properties.c:363
+#: capplets/sound/sound-properties-capplet.c:152
+#: capplets/sound/sound-properties-capplet.c:154
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
@@ -1266,8 +1271,8 @@ msgstr ""
 "en daemon nå)"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:1
-#: capplets/network/gnome-network-preferences.glade.h:1
 #: capplets/theme-switcher/theme-properties.glade.h:1
+#: capplets/network/gnome-network-preferences.glade.h:1
 msgid "*"
 msgstr "*"
 
@@ -1616,7 +1621,7 @@ msgstr ""
 "Du kan sette opp to vanlige uttrykk her som du kan identifisere MIME-typen\n"
 "på. Disse feltene er valgfrie."
 
-#: capplets/mouse/gnome-mouse-properties.c:420
+#: capplets/mouse/gnome-mouse-properties.c:455
 #, c-format
 msgid ""
 "<b>Unknown Cursor</b>\n"
@@ -1625,7 +1630,7 @@ msgstr ""
 "<b>Ukjent markør</b>\n"
 "%s"
 
-#: capplets/mouse/gnome-mouse-properties.c:518
+#: capplets/mouse/gnome-mouse-properties.c:556
 msgid ""
 "<b>Default Cursor - Current</b>\n"
 "The default cursor that ships with X"
@@ -1633,7 +1638,7 @@ msgstr ""
 "<b>Forvalgt markør - Aktiv</b>\n"
 "Standardmarkør som følger med X"
 
-#: capplets/mouse/gnome-mouse-properties.c:521
+#: capplets/mouse/gnome-mouse-properties.c:559
 msgid ""
 "<b>Default Cursor</b>\n"
 "The default cursor that ships with X"
@@ -1641,7 +1646,7 @@ msgstr ""
 "<b>Forvalgt markør</b>\n"
 "Standardmarkør som følger med X"
 
-#: capplets/mouse/gnome-mouse-properties.c:539
+#: capplets/mouse/gnome-mouse-properties.c:577
 msgid ""
 "<b>White Cursor - Current</b>\n"
 "The default cursor inverted"
@@ -1649,7 +1654,7 @@ msgstr ""
 "<b>Hvit markør - Aktiv</b>\n"
 "Omvendt versjon av standardmarkør"
 
-#: capplets/mouse/gnome-mouse-properties.c:542
+#: capplets/mouse/gnome-mouse-properties.c:580
 msgid ""
 "<b>White Cursor</b>\n"
 "The default cursor inverted"
@@ -1657,7 +1662,7 @@ msgstr ""
 "<b>Hvit markør</b>\n"
 "Omvendt standardmarkør"
 
-#: capplets/mouse/gnome-mouse-properties.c:560
+#: capplets/mouse/gnome-mouse-properties.c:598
 msgid ""
 "<b>Large Cursor - Current</b>\n"
 "Large version of normal cursor"
@@ -1665,7 +1670,7 @@ msgstr ""
 "<b>Stor markør - Aktiv</b>\n"
 "Stor versjon av standardmarkør"
 
-#: capplets/mouse/gnome-mouse-properties.c:563
+#: capplets/mouse/gnome-mouse-properties.c:601
 msgid ""
 "<b>Large Cursor</b>\n"
 "Large version of normal cursor"
@@ -1673,7 +1678,7 @@ msgstr ""
 "<b>Stor markør</b>\n"
 "Stor versjon av standardmarkør"
 
-#: capplets/mouse/gnome-mouse-properties.c:581
+#: capplets/mouse/gnome-mouse-properties.c:619
 msgid ""
 "<b>Large White Cursor - Current</b>\n"
 "Large version of white cursor"
@@ -1681,19 +1686,13 @@ msgstr ""
 "<b>Stor hvit markør - Aktiv</b>\n"
 "Stor versjon av hvit markør"
 
-#: capplets/mouse/gnome-mouse-properties.c:584
+#: capplets/mouse/gnome-mouse-properties.c:622
 msgid ""
 "<b>Large White Cursor</b>\n"
 "Large version of white cursor"
 msgstr ""
 "<b>Stor hvit markør</b>\n"
 "Stor versjon av hvit markør"
-
-#: capplets/mouse/gnome-mouse-properties.c:718
-#: capplets/mouse/gnome-mouse-properties.glade.h:17
-#: capplets/mouse/mouse.desktop.in.h:2
-msgid "Mouse Properties"
-msgstr "Egenskaper for mus"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:1
 msgid ""
@@ -1772,6 +1771,11 @@ msgstr ""
 msgid "Mouse Orientation"
 msgstr "Orientering for mus"
 
+#: capplets/mouse/gnome-mouse-properties.glade.h:17
+#: capplets/mouse/mouse.desktop.in.h:2
+msgid "Mouse Properties"
+msgstr "Egenskaper for mus"
+
 #: capplets/mouse/gnome-mouse-properties.glade.h:18
 msgid "Set the distance you need to move your cursor before dragging an item."
 msgstr "Sett avstanden du må flytte din markør før en draoperasjon starter."
@@ -1824,7 +1828,7 @@ msgstr "Mus"
 msgid "Configure GNOME's use of sound"
 msgstr "Konfigurér bruk av lyd i GNOME."
 
-#: capplets/sound/sound-properties-capplet.c:178
+#: capplets/sound/sound-properties-capplet.c:186
 msgid "Sound preferences"
 msgstr "Brukervalg for lyd"
 
@@ -1919,8 +1923,8 @@ msgid "Theme Properties"
 msgstr "Egenskaper for tema"
 
 #: capplets/theme-switcher/theme-properties.glade.h:6
-msgid "_Go to theme folder..."
-msgstr "_Gå til temamappen..."
+msgid "_Go to theme folder"
+msgstr "_Gå til temamappen"
 
 #: capplets/theme-switcher/theme-properties.glade.h:7
 msgid "_Install"
@@ -2215,14 +2219,14 @@ msgstr "Når notisblokkfaner brukes, plasser fanene"
 msgid "Wherever the Window Manager places them"
 msgstr "Hvor vindushåndtereren plasserer dem"
 
-#: capplets/url-properties/url-properties.desktop.in.h:1
 #: capplets/url-properties/url.desktop.in.in.h:1
+#: capplets/url-properties/url-properties.desktop.in.h:1
 msgid "Configure which programs are used to display URLs"
 msgstr "Konfigurer hvilke programmer som brukes for å vise URLer"
 
+#: capplets/url-properties/url.desktop.in.in.h:2
 #: capplets/url-properties/url-properties.c:66
 #: capplets/url-properties/url-properties.desktop.in.h:2
-#: capplets/url-properties/url.desktop.in.in.h:2
 msgid "URL Handlers"
 msgstr "URL-håndterere"
 
@@ -2258,6 +2262,35 @@ msgstr "Hjelpleser (nytt vindu)"
 #: capplets/url-properties/url-properties.c:127
 msgid "Set"
 msgstr "Sett"
+
+#: capplets/windows/gnome-window-properties.glade.h:1
+msgid "Apply Now"
+msgstr "Aktiver nå"
+
+#: capplets/windows/gnome-window-properties.glade.h:2
+msgid "Select windows when the mouse moves over them"
+msgstr "Velg vinduer når musen beveger seg over dem"
+
+#: capplets/windows/gnome-window-properties.glade.h:3
+msgid "Titlebar Font"
+msgstr "Skrift for tittellinjen"
+
+#: capplets/windows/gnome-window-properties.glade.h:4
+msgid "Window Border Appearance"
+msgstr "Utseende for vinduskant"
+
+#: capplets/windows/gnome-window-properties.glade.h:5
+msgid "Window Manager:"
+msgstr "Vindushåndterer:"
+
+#: capplets/windows/gnome-window-properties.glade.h:6
+#: capplets/windows/window-properties.desktop.in.h:1
+msgid "Window Properties"
+msgstr "Egenskaper for vindu"
+
+#: capplets/windows/window-properties.desktop.in.h:2
+msgid "Windows"
+msgstr "Vinduer"
 
 #: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.in.h:1
 msgid "Enlightenment"
@@ -2445,8 +2478,8 @@ msgstr "Valg av vindushåndterer"
 msgid "HTTP Proxy Settings"
 msgstr "Innstillinger for HTTP-proxy"
 
-#: capplets/network/gnome-network-preferences.desktop.in.h:2
 #: capplets/network/gnome-network-preferences.glade.h:3
+#: capplets/network/gnome-network-preferences.desktop.in.h:2
 msgid "Network Preferences"
 msgstr "Brukervalg for nettverk"
 
@@ -2581,11 +2614,11 @@ msgstr "Kan ikke finne en hbox, bruker vanlig filvalg"
 msgid "Preview"
 msgstr "Forhåndsvisning"
 
-#: libsounds/sound-view.c:120
+#: libsounds/sound-view.c:122
 msgid "The sound file for this event does not exist."
 msgstr "Lydfilen for denne hendelsen eksisterer ikke."
 
-#: libsounds/sound-view.c:122
+#: libsounds/sound-view.c:124
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package\n"
@@ -2595,23 +2628,23 @@ msgstr ""
 "Du må kanskje installere gnome-audio pakken\n"
 "for å få et forvalgt sett med lyder."
 
-#: libsounds/sound-view.c:214
+#: libsounds/sound-view.c:216
 msgid "Event"
 msgstr "Hendelse"
 
-#: libsounds/sound-view.c:221
+#: libsounds/sound-view.c:223
 msgid "File to play"
 msgstr "Fil som skal spilles"
 
-#: libsounds/sound-view.c:236
+#: libsounds/sound-view.c:238
 msgid "_Sounds"
 msgstr "_Lyder"
 
-#: libsounds/sound-view.c:249
+#: libsounds/sound-view.c:251
 msgid "_Play"
 msgstr "S_pill"
 
-#: libsounds/sound-view.c:255
+#: libsounds/sound-view.c:257
 msgid "Select sound file"
 msgstr "Velg lydfil"
 
@@ -2660,7 +2693,7 @@ msgstr "Kunne ikke laste lydfil %s som sample %s"
 msgid "Reloading events\n"
 msgstr "Laster hendelser på nytt\n"
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:157
+#: gnome-settings-daemon/gnome-settings-xsettings.c:159
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "GConf-nøkkel %s satt til type %s men forventet type var %s\n"
