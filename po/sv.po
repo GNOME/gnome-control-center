@@ -1,25 +1,33 @@
 # Swedish translation for the control-center module.
-# Copyright (C) 1998-2001 Free Software Foundation, Inc.
+# Copyright (C) 1998, 1999, 2000, 2001 Free Software Foundation, Inc.
 # Martin Wahlen <mva@sbbs.se>, 1998-1999.
-# Christian Rose <menthos@menthos.com>, 2000-2001.
+# Christian Rose <menthos@menthos.com>, 2000, 2001.
 #
 # $Id$
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center\n"
-"POT-Creation-Date: 2001-04-09 13:49+0200\n"
-"PO-Revision-Date: 2001-04-09 13:52+0200\n"
+"POT-Creation-Date: 2001-06-07 02:23+0200\n"
+"PO-Revision-Date: 2001-06-07 02:56+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:228
-#: capplets/session-properties/session-properties.c:343
+#: capplets/file-types/file-types-capplet.desktop.in.h:1
+msgid "File Types and Programs"
+msgstr "Filtyper och program"
+
+#: capplets/file-types/file-types-capplet.desktop.in.h:2
+msgid "Specify which programs are used to open or view each file type"
+msgstr "Ange vilka program som används för att öppna eller visa alla filtyper"
+
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:236
+#: capplets/session-properties/session-properties.c:342
 #: capplets/theme-switcher/gui.c:366
-#: capplets/wm-properties/wm-properties-capplet.c:666
+#: capplets/wm-properties/wm-properties-capplet.c:669
 msgid ""
 "No help is available/installed for these settings. Please make sure you\n"
 "have the GNOME User's Guide installed on your system."
@@ -28,19 +36,19 @@ msgstr ""
 "Var vänlig och kontrollera att GNOME-användarmanualen finns installerad\n"
 "på ditt system."
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:230
-#: capplets/session-properties/session-properties.c:345
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:238
+#: capplets/session-properties/session-properties.c:344
 #: capplets/theme-switcher/gui.c:368
-#: capplets/wm-properties/wm-properties-capplet.c:668
+#: capplets/wm-properties/wm-properties-capplet.c:671
 #: new-control-center/capplet-dir-view.c:522
 msgid "Close"
 msgstr "Stäng"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:335
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:379
 msgid "Gnome editor"
 msgstr "Gnome-editor"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:346
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:390
 msgid "Run In Terminal"
 msgstr "Kör i terminal"
 
@@ -218,21 +226,21 @@ msgstr ""
 "Inställningarna kommer inte att kunna sparas"
 
 #: capplets/mime-type/mime-type-capplet.c:83
-#: capplets/session-properties/session-properties.c:199
-#: capplets/wm-properties/wm-properties-capplet.c:1114
+#: capplets/session-properties/session-properties.c:203
+#: capplets/wm-properties/wm-properties-capplet.c:1119
 msgid "Delete"
 msgstr "Ta bort"
 
 #: capplets/mime-type/mime-type-capplet.c:93
 #: capplets/new-screensaver-properties/prefs-widget.c:266
-#: capplets/session-properties/session-properties.c:189
-#: capplets/wm-properties/wm-properties-capplet.c:1104
+#: capplets/session-properties/session-properties.c:193
+#: capplets/wm-properties/wm-properties-capplet.c:1109
 msgid "Add..."
 msgstr "Lägg till..."
 
 #: capplets/mime-type/mime-type-capplet.c:97
-#: capplets/session-properties/session-properties.c:194
-#: capplets/wm-properties/wm-properties-capplet.c:1109
+#: capplets/session-properties/session-properties.c:198
+#: capplets/wm-properties/wm-properties-capplet.c:1114
 msgid "Edit..."
 msgstr "Redigera..."
 
@@ -280,12 +288,12 @@ msgstr ""
 "Du kan använda två stycken reguljära uttryck för att identifiera\n"
 "Mime-typen. Dessa fält är valfria."
 
-#: capplets/new-background-properties/applier.c:353
+#: capplets/new-background-properties/applier.c:352
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr "Kunde inte läsa in bilden \"%s\"; slår av bakgrundsbild."
 
-#: capplets/new-background-properties/applier.c:493
+#: capplets/new-background-properties/applier.c:495
 msgid "Disabled"
 msgstr "Avslagen"
 
@@ -563,7 +571,7 @@ msgstr "Stor"
 msgid "Small"
 msgstr "Liten"
 
-#: capplets/new-screensaver-properties/preferences.c:502
+#: capplets/new-screensaver-properties/preferences.c:511
 msgid "Custom screensaver. No description available"
 msgstr "Anpassad skärmsläckare. Ingen beskrivning finns tillgänglig"
 
@@ -675,7 +683,7 @@ msgid "General Properties"
 msgstr "Allmänna egenskaper"
 
 #: capplets/new-screensaver-properties/prefs-widget.c:507
-#: capplets/session-properties/session-properties.c:179
+#: capplets/session-properties/session-properties.c:183
 #: capplets/session-properties/startup-programs.c:308
 msgid "Priority"
 msgstr "Prioritet"
@@ -753,7 +761,7 @@ msgid "Advanced Properties"
 msgstr "Avancerade inställningar"
 
 #: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:185
-#: capplets/wm-properties/wm-properties-capplet.c:787
+#: capplets/wm-properties/wm-properties-capplet.c:792
 msgid "Name:"
 msgstr "Namn:"
 
@@ -766,7 +774,7 @@ msgstr "Inställningar"
 msgid "label1"
 msgstr "label1"
 
-#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1361
+#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1362
 msgid ""
 "Cannot find the data to configure this screensaver. Please edit the command "
 "line below."
@@ -774,16 +782,16 @@ msgstr ""
 "Kan inte hitta informationen som krävs för att konfigurera den här "
 "skärmsläckaren. Var vänlig och ändra kommandoraden nedan."
 
-#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1366
+#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1367
 msgid "Please enter a command line below."
 msgstr "Var vänlig och ange en kommandorad nedan."
 
-#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1381
+#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1382
 msgid "Visual:"
 msgstr "Synlig:"
 
-#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1410
-#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1705
+#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1411
+#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1706
 msgid "Any"
 msgstr "Vilken som"
 
@@ -2140,33 +2148,33 @@ msgid "Remove Program"
 msgstr "Ta bort program"
 
 #. frame for options
-#: capplets/session-properties/session-properties.c:139
+#: capplets/session-properties/session-properties.c:143
 msgid "Options"
 msgstr "Alternativ"
 
-#: capplets/session-properties/session-properties.c:150
+#: capplets/session-properties/session-properties.c:154
 msgid "Prompt on logout"
 msgstr "Fråga innan utloggning"
 
-#: capplets/session-properties/session-properties.c:157
+#: capplets/session-properties/session-properties.c:161
 msgid "Automatically save changes to session"
 msgstr "Spara ändringar till session automatiskt"
 
 #. frame for manually started programs
-#: capplets/session-properties/session-properties.c:162
+#: capplets/session-properties/session-properties.c:166
 msgid "Non-session-managed Startup Programs"
 msgstr "Icke-sessionshanterat autostart-program"
 
-#: capplets/session-properties/session-properties.c:180
+#: capplets/session-properties/session-properties.c:184
 #: capplets/url-properties/url-properties.c:72
 msgid "Command"
 msgstr "Kommando"
 
-#: capplets/session-properties/session-properties.c:209
+#: capplets/session-properties/session-properties.c:213
 msgid "Browse Currently Running Programs..."
 msgstr "Visa aktuella program..."
 
-#: capplets/session-properties/session-properties.c:475
+#: capplets/session-properties/session-properties.c:474
 msgid "Only display warnings."
 msgstr "Visa bara varningar."
 
@@ -2370,7 +2378,7 @@ msgstr "Hjälpläsare (nytt fönster)"
 msgid "Set"
 msgstr "Sätt"
 
-#: capplets/wm-properties/wm-properties-capplet.c:167
+#: capplets/wm-properties/wm-properties-capplet.c:170
 #, c-format
 msgid ""
 "Starting %s\n"
@@ -2379,21 +2387,21 @@ msgstr ""
 "Startar %s\n"
 "(%d sekunder kvar innan kommandot överskrider tidsgränsen)"
 
-#: capplets/wm-properties/wm-properties-capplet.c:328
+#: capplets/wm-properties/wm-properties-capplet.c:331
 #, c-format
 msgid "%s (Current)"
 msgstr "%s (Aktuell)"
 
-#: capplets/wm-properties/wm-properties-capplet.c:331
+#: capplets/wm-properties/wm-properties-capplet.c:334
 #, c-format
 msgid "Run Configuration Tool for %s"
 msgstr "Kör konfigurationsverktyg för %s"
 
-#: capplets/wm-properties/wm-properties-capplet.c:342
+#: capplets/wm-properties/wm-properties-capplet.c:345
 msgid " (Not found)"
 msgstr " (Hittades inte)"
 
-#: capplets/wm-properties/wm-properties-capplet.c:381
+#: capplets/wm-properties/wm-properties-capplet.c:384
 msgid ""
 "wm-properties-capplet: Unable to initialize window manager.\n"
 "\tAnother window manager is already running and could not be killed\n"
@@ -2401,7 +2409,7 @@ msgstr ""
 "wm-properties.capplet: Kan inte starta fönsterhanteraren.\n"
 "\tEn annan fönsterhanterare körs redan och kunde inte avslutas\n"
 
-#: capplets/wm-properties/wm-properties-capplet.c:385
+#: capplets/wm-properties/wm-properties-capplet.c:388
 #, c-format
 msgid ""
 "wm-properties-capplet: Unable to initialize window manager.\n"
@@ -2410,11 +2418,11 @@ msgstr ""
 "wm-properties-capplet: Kan inte starta fönsterhanterare.\n"
 "\t\"%s\" startade inte\n"
 
-#: capplets/wm-properties/wm-properties-capplet.c:434
+#: capplets/wm-properties/wm-properties-capplet.c:437
 msgid "Previous window manager did not die\n"
 msgstr "Föregående fönsterhanterare avslutades inte\n"
 
-#: capplets/wm-properties/wm-properties-capplet.c:467
+#: capplets/wm-properties/wm-properties-capplet.c:470
 #, c-format
 msgid ""
 "Could not start '%s'.\n"
@@ -2423,7 +2431,7 @@ msgstr ""
 "Kunde inte starta \"%s\".\n"
 "Använder den föregående fönsterhanteraren \"%s\"\n"
 
-#: capplets/wm-properties/wm-properties-capplet.c:498
+#: capplets/wm-properties/wm-properties-capplet.c:501
 msgid ""
 "Could not start fallback window manager.\n"
 "Please run a window manager manually. You can\n"
@@ -2434,15 +2442,15 @@ msgstr ""
 "Kör en fönsterhanterare manuellt. Du kan göra det genom\n"
 "att välja \"Kör program\" i fotmenyn\n"
 
-#: capplets/wm-properties/wm-properties-capplet.c:523
-#: capplets/wm-properties/wm-properties-capplet.c:776
-#: capplets/wm-properties/wm-properties-capplet.c:884
-#: capplets/wm-properties/wm-properties-capplet.c:891
-#: capplets/wm-properties/wm-properties-capplet.c:1037
+#: capplets/wm-properties/wm-properties-capplet.c:526
+#: capplets/wm-properties/wm-properties-capplet.c:781
+#: capplets/wm-properties/wm-properties-capplet.c:889
+#: capplets/wm-properties/wm-properties-capplet.c:896
+#: capplets/wm-properties/wm-properties-capplet.c:1042
 msgid "OK"
 msgstr "OK"
 
-#: capplets/wm-properties/wm-properties-capplet.c:541
+#: capplets/wm-properties/wm-properties-capplet.c:544
 msgid ""
 "Your current window manager has been changed. In order for\n"
 "this change to be saved, you will need to save your current\n"
@@ -2460,15 +2468,15 @@ msgstr ""
 "eller genom att slå på \"Spara nuvarande inställningar\" när du\n"
 "loggar ut.\n"
 
-#: capplets/wm-properties/wm-properties-capplet.c:548
+#: capplets/wm-properties/wm-properties-capplet.c:551
 msgid "Save Session Later"
 msgstr "Spara session senare"
 
-#: capplets/wm-properties/wm-properties-capplet.c:548
+#: capplets/wm-properties/wm-properties-capplet.c:551
 msgid "Save Session Now"
 msgstr "Spara session nu"
 
-#: capplets/wm-properties/wm-properties-capplet.c:551
+#: capplets/wm-properties/wm-properties-capplet.c:554
 msgid ""
 "Your current window manager has been changed. In order for\n"
 "this change to be saved, you will need to save your current\n"
@@ -2482,44 +2490,44 @@ msgstr ""
 "under \"Inställningar\" i huvudmenyn, eller genom att slå på\n"
 "\"Spara nuvarande inställningar\" när du loggar ut.\n"
 
-#: capplets/wm-properties/wm-properties-capplet.c:775
+#: capplets/wm-properties/wm-properties-capplet.c:780
 msgid "Add New Window Manager"
 msgstr "Lägg till ny fönsterhanterare"
 
-#: capplets/wm-properties/wm-properties-capplet.c:776
+#: capplets/wm-properties/wm-properties-capplet.c:781
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: capplets/wm-properties/wm-properties-capplet.c:800
+#: capplets/wm-properties/wm-properties-capplet.c:805
 msgid "Command:"
 msgstr "Kommando:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:813
+#: capplets/wm-properties/wm-properties-capplet.c:818
 msgid "Configuration Command:"
 msgstr "Konfigurationskommando:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:832
+#: capplets/wm-properties/wm-properties-capplet.c:837
 msgid "Window manager is session managed"
 msgstr "Fönsterhanteraren använder sessionshantering"
 
-#: capplets/wm-properties/wm-properties-capplet.c:882
+#: capplets/wm-properties/wm-properties-capplet.c:887
 msgid "Name cannot be empty"
 msgstr "Du måste skriva in ett namn"
 
-#: capplets/wm-properties/wm-properties-capplet.c:889
+#: capplets/wm-properties/wm-properties-capplet.c:894
 msgid "Command cannot be empty"
 msgstr "Du måste skriva in ett kommando"
 
-#: capplets/wm-properties/wm-properties-capplet.c:938
-#: capplets/wm-properties/wm-properties-capplet.c:980
+#: capplets/wm-properties/wm-properties-capplet.c:943
+#: capplets/wm-properties/wm-properties-capplet.c:985
 msgid "Edit Window Manager"
 msgstr "Redigera fönsterhanterare"
 
-#: capplets/wm-properties/wm-properties-capplet.c:1036
+#: capplets/wm-properties/wm-properties-capplet.c:1041
 msgid "You cannot delete the current Window Manager"
 msgstr "Du kan inte ta bort den aktuella fönsterhanteraren"
 
-#: capplets/wm-properties/wm-properties-capplet.c:1178
+#: capplets/wm-properties/wm-properties-capplet.c:1183
 msgid ""
 "an initialization error occurred while starting 'wm-properties-capplet'.\n"
 "aborting...\n"
