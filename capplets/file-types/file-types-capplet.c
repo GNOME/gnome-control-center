@@ -121,14 +121,7 @@ row_activated_cb (GtkTreeView *view, GtkTreePath *path, GtkTreeViewColumn *colum
 }
 
 static void
-edit_count_cb (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gint *count) 
-{
-	if (MODEL_ENTRY_FROM_ITER (iter)->type != MODEL_ENTRY_SERVICES_CATEGORY)
-		(*count)++;
-}
-
-static void
-remove_count_cb (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gint *count) 
+selection_count_cb (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gint *count) 
 {
 	if (MODEL_ENTRY_FROM_ITER (iter)->type != MODEL_ENTRY_SERVICES_CATEGORY &&
 	    MODEL_ENTRY_FROM_ITER (iter)->type != MODEL_ENTRY_CATEGORY)
@@ -139,22 +132,9 @@ static void
 selection_changed_cb (GtkTreeSelection *selection, GladeXML *dialog) 
 {
 	gint count = 0;
-
-	gtk_tree_selection_selected_foreach (selection, (GtkTreeSelectionForeachFunc) edit_count_cb, &count);
-
-	if (count == 0)
-		gtk_widget_set_sensitive (WID ("edit_button"), FALSE);
-	else
-		gtk_widget_set_sensitive (WID ("edit_button"), TRUE);
-
-	count = 0;
-
-	gtk_tree_selection_selected_foreach (selection, (GtkTreeSelectionForeachFunc) remove_count_cb, &count);
-
-	if (count == 0)
-		gtk_widget_set_sensitive (WID ("remove_button"), FALSE);
-	else
-		gtk_widget_set_sensitive (WID ("remove_button"), TRUE);
+	gtk_tree_selection_selected_foreach (selection, (GtkTreeSelectionForeachFunc) selection_count_cb, &count);
+	gtk_widget_set_sensitive (WID ("edit_button"), count != 0);
+	gtk_widget_set_sensitive (WID ("remove_button"), count != 0);
 }
 
 static void
