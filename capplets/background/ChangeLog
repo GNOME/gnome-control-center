@@ -1,3 +1,11 @@
+2004-04-10  Rodney Dawes  <dobey@ximian.com>
+
+	* gnome-wp-capplet.c (gnome_wp_list_sort): Use g_utf8_collate to sort
+	the descriptions, rather than a strcmp, so that we follow the locale
+	settings for LC_COLLATE
+
+	Fixes #139517
+
 2004-04-08  Rodney Dawes  <dobey@ximian.com>
 
 	* gnome-wp-capplet.c (wallpaper_properties_init): Rever the previous

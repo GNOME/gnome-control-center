@@ -888,7 +888,7 @@ static gint gnome_wp_list_sort (GtkTreeModel * model,
   } else if (!strcmp (bar, "(none)")) {
     return 1;
   } else {
-    return strcmp (desca, descb);
+    return g_utf8_collate (desca, descb);
   }
 }
 
