@@ -1,5 +1,15 @@
 2002-05-22  jacob berkman  <jacob@ximian.com>
 
+	* gnome-settings-font.c (load_cursor): run the mkfontdir command
+	synchronously to avoid a possible race.  extra precaution for
+	#78023
+
+	* gnome-settings-daemon.c (gnome_settings_daemon_new): run
+	background settings after everything else, as some of those spawn
+	processes (xscreensaver) and background settings nices itself
+
+	should fix #78742
+
 	* factory.c (main): quit when we get the die signal from the SM
 
 2002-05-16  Jody Goldberg <jody@gnome.org>

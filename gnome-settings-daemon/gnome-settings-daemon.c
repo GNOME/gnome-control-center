@@ -233,12 +233,12 @@ gnome_settings_daemon_new (void)
   gnome_settings_xsettings_init (client);
   gnome_settings_mouse_init (client);
   gnome_settings_keyboard_init (client);
-  gnome_settings_background_init (client);
   gnome_settings_sound_init (client);
   gnome_settings_wm_init (client);
   gnome_settings_accessibility_keyboard_init (client);
   gnome_settings_screensaver_init (client);
   gnome_settings_default_editor_init (client);
+  gnome_settings_background_init (client);
 
   for (list = directories; list; list = list->next)
     {
@@ -273,11 +273,11 @@ gnome_settings_daemon_new (void)
   gnome_settings_mouse_load (client);
   gnome_settings_keyboard_load (client);
   gnome_settings_sound_load (client);
-  gnome_settings_background_load (client);
   gnome_settings_wm_load (client);
   gnome_settings_accessibility_keyboard_load (client);
   gnome_settings_screensaver_load (client);
   gnome_settings_default_editor_load (client);
+  gnome_settings_background_load (client);
 
   return G_OBJECT (daemon);
 }

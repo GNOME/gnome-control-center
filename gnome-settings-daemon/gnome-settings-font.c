@@ -122,7 +122,8 @@ load_cursor (GConfClient *client)
 
   /* run mkfontdir */
   mkfontdir_cmd = g_strdup_printf ("mkfontdir %s %s", dir_name, font_dir_name);
-  g_spawn_command_line_async (mkfontdir_cmd, NULL);
+  /* maybe check for error... */
+  g_spawn_command_line_sync (mkfontdir_cmd, NULL, NULL, NULL, NULL);
   g_free (mkfontdir_cmd);
 
   /* Set the font path */
