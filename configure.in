@@ -259,7 +259,7 @@ if test x$enable_vfs_methods = xyes; then
     THEMUS_COMPONENT_LIBS=`echo $THEMUS_COMPONENT_LIBS | sed -e "s/$export_dynamic//"`
     FONT_VIEW_LIBS=`echo $FONT_VIEW_LIBS | sed -e "s/$export_dynamic//"`
     FONT_CONTEXT_MENU_LIBS=`echo $CONTEXT_MENU_LIBS | sed -e "s/$export_dynamic//"`
-    FONT_THUMBNAILER_LIBS=`echo FONT_$THUMBNAILER_LIBS | sed -e "s/$export_dynamic//"`
+    FONT_THUMBNAILER_LIBS=`echo $FONT_THUMBNAILER_LIBS | sed -e "s/$export_dynamic//"`
     FONT_METHOD_LIBS=`echo $FONT_METHOD_LIBS | sed -e "s/$export_dynamic//"`
   fi
   GLIB_DEFINE_LOCALEDIR(FONTILUS_LOCALEDIR)
