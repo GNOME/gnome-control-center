@@ -36,20 +36,6 @@
 
 static void nautilus_mime_type_icon_entry_class_init (GnomeIconEntryClass *class);
 static void nautilus_mime_type_icon_entry_init       (NautilusMimeIconEntry      *ientry);
-static void drag_data_get		(GtkWidget          *widget,
-					 GdkDragContext     *context,
-					 GtkSelectionData   *selection_data,
-					 guint               info,
-					 guint               time,
-					 NautilusMimeIconEntry     *ientry);
-static void drag_data_received		(GtkWidget        *widget,
-					 GdkDragContext   *context,
-					 gint              x,
-					 gint              y,
-					 GtkSelectionData *selection_data,
-					 guint             info,
-					 guint32           time,
-					 NautilusMimeIconEntry   *ientry);
 
 static GtkVBoxClass *parent_class;
 
@@ -135,8 +121,6 @@ entry_changed(GtkWidget *widget, NautilusMimeIconEntry *ientry)
 		gtk_container_add (GTK_CONTAINER(ientry->frame), child);
 
 		if(!GTK_WIDGET_NO_WINDOW(child)) {
-			gtk_signal_connect (GTK_OBJECT (child), "drag_data_get",
-					    GTK_SIGNAL_FUNC (drag_data_get),ientry);
 			gtk_drag_source_set (child,
 					     GDK_BUTTON1_MASK|GDK_BUTTON3_MASK,
 					     drop_types, 1,
@@ -243,19 +227,18 @@ ientry_destroy(NautilusMimeIconEntry *ientry)
 		gtk_widget_unref (ientry->fentry);
 	if(ientry->pick_dialog)
 		gtk_widget_destroy(ientry->pick_dialog);
-	if(ientry->pick_dialog_dir)
-		g_free(ientry->pick_dialog_dir);
+	g_free(ientry->pick_dialog_dir);
 }
 
 
 static void
-browse_clicked(GnomeFileEntry *fentry, NautilusMimeIconEntry *ientry)
+browse_clicked (GnomeFileEntry *fentry, NautilusMimeIconEntry *ientry)
 {
 	GtkWidget *w;
 	GtkWidget *hbox;
 
 	GtkFileSelection *fs;
-
+		
 	g_return_if_fail (fentry != NULL);
 	g_return_if_fail (GNOME_IS_FILE_ENTRY (fentry));
 	g_return_if_fail (ientry != NULL);
@@ -288,7 +271,7 @@ browse_clicked(GnomeFileEntry *fentry, NautilusMimeIconEntry *ientry)
 	gtk_signal_connect_while_alive(GTK_OBJECT(fs->selection_entry),
 				       "changed",
 				       GTK_SIGNAL_FUNC(setup_preview),NULL,
-				       GTK_OBJECT(fs));
+				       GTK_OBJECT(fs));				       				      
 }
 
 static void
@@ -395,7 +378,7 @@ nautilus_mime_type_show_icon_selection (NautilusMimeIconEntry *icon_entry)
 				    p);
 	}
 
-	/*figure out the directory*/
+	/* figure out the directory */
 	if (!g_file_test (p, G_FILE_TEST_ISDIR)) {
 		gchar *d;
 		d = g_dirname (p);
@@ -418,18 +401,18 @@ nautilus_mime_type_show_icon_selection (NautilusMimeIconEntry *icon_entry)
 	}
 	
 
-	if (icon_entry->pick_dialog==NULL || icon_entry->pick_dialog_dir==NULL ||
-	    strcmp(p,icon_entry->pick_dialog_dir)!=0) {
-		GtkWidget * iconsel;
+	if (icon_entry->pick_dialog == NULL || icon_entry->pick_dialog_dir == NULL ||
+	    strcmp(p, icon_entry->pick_dialog_dir) != 0) {
+		GtkWidget *iconsel;
 		
 		if (icon_entry->pick_dialog) {
 			gtk_container_remove (GTK_CONTAINER (icon_entry->fentry->parent), icon_entry->fentry);
 			gtk_widget_destroy (icon_entry->pick_dialog);
 		}
 		
-		if (icon_entry->pick_dialog_dir) {
-			g_free(icon_entry->pick_dialog_dir);
-		}
+		g_free(icon_entry->pick_dialog_dir);
+		icon_entry->pick_dialog_dir = NULL;
+
 		icon_entry->pick_dialog_dir = p;
 		icon_entry->pick_dialog = 
 			gnome_dialog_new(GNOME_FILE_ENTRY(icon_entry->fentry)->browse_dialog_title,
@@ -450,17 +433,18 @@ nautilus_mime_type_show_icon_selection (NautilusMimeIconEntry *icon_entry)
 
 		gtk_object_set_user_data(GTK_OBJECT(icon_entry), iconsel);
 
-		gnome_icon_selection_add_directory(GNOME_ICON_SELECTION(iconsel),
-						   icon_entry->pick_dialog_dir);
-
-
-		gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(icon_entry->pick_dialog)->vbox),
-				   icon_entry->fentry, FALSE, FALSE, 0);
+		gnome_icon_selection_add_directory (GNOME_ICON_SELECTION(iconsel), icon_entry->pick_dialog_dir);
+		
+		/* Hide the file entry until we figure out how to deal with icon paths
+		outside of the standard gnome paths */
+		/*gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (icon_entry->pick_dialog)->vbox),
+				    icon_entry->fentry, FALSE, FALSE, 0);
+		*/
 		gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(icon_entry->pick_dialog)->vbox),
 				   iconsel, TRUE, TRUE, 0);
 
 		gtk_widget_show_all(icon_entry->pick_dialog);
-
+		
 		gnome_icon_selection_show_icons(GNOME_ICON_SELECTION(iconsel));
 
 		if(curfile)
@@ -489,7 +473,7 @@ nautilus_mime_type_show_icon_selection (NautilusMimeIconEntry *icon_entry)
 	}
 }
 
-gchar      *
+gchar *
 nautilus_mime_type_icon_entry_get_relative_filename (NautilusMimeIconEntry *ientry)
 {
   char *filename;
@@ -516,66 +500,6 @@ nautilus_mime_type_icon_entry_get_relative_filename (NautilusMimeIconEntry *ient
 }
 
 static void
-drag_data_received (GtkWidget        *widget,
-		    GdkDragContext   *context,
-		    gint              x,
-		    gint              y,
-		    GtkSelectionData *selection_data,
-		    guint             info,
-		    guint32           time,
-		    NautilusMimeIconEntry   *ientry)
-{
-	GList *files;
-
-	g_return_if_fail (ientry != NULL);
-	g_return_if_fail (NAUTILUS_MIME_IS_ICON_ENTRY (ientry));
-
-	/*here we extract the filenames from the URI-list we recieved*/
-	files = gnome_uri_list_extract_filenames(selection_data->data);
-	/*if there's isn't a file*/
-	if(!files) {
-		gtk_drag_finish(context,FALSE,FALSE,time);
-		return;
-	}
-
-	nautilus_mime_type_icon_entry_set_icon (ientry, files->data);
-
-	/*free the list of files we got*/
-	gnome_uri_list_free_strings (files);
-}
-
-static void  
-drag_data_get  (GtkWidget          *widget,
-		GdkDragContext     *context,
-		GtkSelectionData   *selection_data,
-		guint               info,
-		guint               time,
-		NautilusMimeIconEntry     *ientry)
-{
-	gchar *string;
-	gchar *file;
-
-	g_return_if_fail (ientry != NULL);
-	g_return_if_fail (NAUTILUS_MIME_IS_ICON_ENTRY (ientry));
-
-	file = gnome_file_entry_get_full_path (GNOME_FILE_ENTRY (ientry->fentry),
-					       TRUE);
-
-	if(!file) {
-		gdk_drag_abort (context, 0);
-		return;
-	}
-
-	string = g_strdup_printf ("file:%s\r\n",file);
-	g_free (file);
-	gtk_selection_data_set (selection_data,
-				selection_data->target,
-				8, string, strlen(string)+1);
-	g_free(string);
-}
-
-
-static void
 nautilus_mime_type_icon_entry_init (NautilusMimeIconEntry *ientry)
 {
 	GtkWidget *w;
@@ -599,11 +523,6 @@ nautilus_mime_type_icon_entry_init (NautilusMimeIconEntry *ientry)
 			   GTK_DEST_DEFAULT_HIGHLIGHT |
 			   GTK_DEST_DEFAULT_DROP,
 			   drop_types, 1, GDK_ACTION_COPY);
-	gtk_signal_connect (GTK_OBJECT (ientry->frame),
-			    "drag_data_received",
-			    GTK_SIGNAL_FUNC (drag_data_received),ientry);
-	gtk_signal_connect (GTK_OBJECT (ientry->frame), "drag_data_get",
-			    GTK_SIGNAL_FUNC (drag_data_get),ientry);
 
 	/*60x60 is just larger then default 48x48, though icon sizes
 	  are supposed to be selectable I guess*/
@@ -621,7 +540,7 @@ nautilus_mime_type_icon_entry_init (NautilusMimeIconEntry *ientry)
 	gtk_widget_show (ientry->fentry);
 	
 	p = gnome_pixmap_file (".");
-	gnome_file_entry_set_default_path (GNOME_FILE_ENTRY(ientry->fentry),p);
+	gnome_file_entry_set_default_path (GNOME_FILE_ENTRY(ientry->fentry), p);
 	g_free (p);
 	
 	w = gnome_file_entry_gtk_entry(GNOME_FILE_ENTRY(ientry->fentry));
@@ -732,8 +651,7 @@ nautilus_mime_type_icon_entry_gtk_entry (NautilusMimeIconEntry *ientry)
  * Returns:
  **/
 void
-nautilus_mime_type_icon_entry_set_pixmap_subdir(NautilusMimeIconEntry *ientry,
-				   const gchar *subdir)
+nautilus_mime_type_icon_entry_set_pixmap_subdir(NautilusMimeIconEntry *ientry, const gchar *subdir)
 {
 	gchar *p;
 	g_return_if_fail (ientry != NULL);
@@ -742,7 +660,7 @@ nautilus_mime_type_icon_entry_set_pixmap_subdir(NautilusMimeIconEntry *ientry,
 	if(!subdir)
 		subdir = ".";
 
-	p = gnome_pixmap_file(subdir);
+	p = gnome_pixmap_file (subdir);
 	gnome_file_entry_set_default_path(GNOME_FILE_ENTRY(ientry->fentry),p);
 	g_free(p);
 }
