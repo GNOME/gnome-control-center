@@ -161,16 +161,16 @@ setup_dialog (GladeXML       *dialog,
 
 	/* Ergonomics */
 	peditor = gconf_peditor_new_boolean
-		(changeset, "/desktop/gnome/keyboard_break/enabled", WID ("break_enabled_toggle"), NULL);
+		(changeset, "/desktop/gnome/typing_break/enabled", WID ("break_enabled_toggle"), NULL);
 	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor), WID ("break_details_table"));
 	gconf_peditor_new_numeric_range
-		(changeset, "/desktop/gnome/keyboard_break/type_time", WID ("break_enabled_spin"), NULL);
+		(changeset, "/desktop/gnome/typing_break/type_time", WID ("break_enabled_spin"), NULL);
 	gconf_peditor_new_numeric_range
-		(changeset, "/desktop/gnome/keyboard_break/warn_time", WID ("break_warning_spin"), NULL);
+		(changeset, "/desktop/gnome/typing_break/warn_time", WID ("break_warning_spin"), NULL);
 	gconf_peditor_new_numeric_range
-		(changeset, "/desktop/gnome/keyboard_break/break_time", WID ("break_interval_spin"), NULL);
+		(changeset, "/desktop/gnome/typing_break/break_time", WID ("break_interval_spin"), NULL);
 	gconf_peditor_new_boolean
-		(changeset, "/desktop/gnome/keyboard_break/allow_unlock", WID ("break_postponement_toggle"), NULL);
+		(changeset, "/desktop/gnome/typing_break/allow_unlock", WID ("break_postponement_toggle"), NULL);
 	g_signal_connect (G_OBJECT (WID ("keyboard_dialog")), "response", (GCallback) dialog_response, changeset);
 }
 
