@@ -1,5 +1,11 @@
 2002-05-16  jacob berkman  <jacob@ximian.com>
 
+	* gnome-settings-keyboard.c (apply_settings): load from the
+	correct key for whether the bell should be on or not
+	(apply_settings): pass the right flags to XChangeKeyboardControl()
+
+	fixes #78016 and 78015
+
 	* Makefile.am:
 	* gnome-settings-default-editor.[ch]: keep text/plain and text*
 	using the same mime type (#78037)
