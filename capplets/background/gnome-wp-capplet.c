@@ -1102,6 +1102,7 @@ static void wallpaper_properties_init (void) {
 
   if (icofile != NULL) {
     capplet->sitem = gtk_image_new_from_file (icofile);
+    g_free (icofile);
     gtk_box_pack_start (GTK_BOX (mbox), capplet->sitem, FALSE, FALSE, 0);
     gtk_widget_show (capplet->sitem);
   }

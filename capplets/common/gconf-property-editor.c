@@ -328,6 +328,8 @@ gconf_property_editor_finalize (GObject *object)
 	g_return_if_fail (IS_GCONF_PROPERTY_EDITOR (object));
 
 	gconf_property_editor = GCONF_PROPERTY_EDITOR (object);
+
+	g_free (gconf_property_editor->p->key);
 	
 	if (gconf_property_editor->p->data_free_cb)
 		gconf_property_editor->p->data_free_cb (gconf_property_editor->p->data);
