@@ -108,7 +108,7 @@ FT_New_URI_Face(FT_Library           library,
     error = FT_Open_Face(library, &args, face_index, aface);
 
     if (error != FT_Err_Ok) {
-	stream->close(stream);
+	if (stream->close) stream->close(stream);
 	free(stream);
 	return error;
     }
