@@ -12,7 +12,7 @@ Desktop_in_files = gtk-theme-selector.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
 gladedir = $(GNOMECC_GLADE_DIR)
-glade_DATA = gnome-theme-and-font-and-theme-properties.glade
+glade_DATA = gnome-font-and-theme-properties.glade
 
 INCLUDES   = \
 	$(GNOMECC_CAPPLETS_CFLAGS)	\
