@@ -57,13 +57,6 @@ static gboolean authed;
 static void
 capplet_dir_view_update_authenticated (CappletDirView *view, gpointer null)
 {
-	if (authed) {
-		gtk_widget_hide (view->rootm_locked);
-		gtk_widget_show (view->rootm_unlocked);
-	} else {
-		gtk_widget_hide (view->rootm_unlocked);
-		gtk_widget_show (view->rootm_locked);
-	}
 }
 
 void
@@ -127,20 +120,6 @@ capplet_dir_view_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 			g_print ("5.  %p\n\n\n\n", view->view);
 			gtk_widget_show (view->view);
 		}
-
-		gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (view->list_menu),
-						layout == LAYOUT_ICON_LIST);
-		gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (view->tree_menu),
-						layout == LAYOUT_TREE);
-		gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (view->html_menu),
-						layout == LAYOUT_HTML);
-
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (view->list_toggle),
-					      layout == LAYOUT_ICON_LIST);
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (view->tree_toggle),
-					      layout == LAYOUT_TREE);
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (view->html_toggle),
-					      layout == LAYOUT_HTML);
 
 		view->changing_layout = FALSE;
 		break;
@@ -362,20 +341,6 @@ capplet_dir_view_new (void)
 	window_list = g_list_append (window_list, view);
 
 	view->app = GNOME_APP (glade_xml_get_widget (xml, "main_window"));
-	view->up_button      = glade_xml_get_widget (xml, "back_button");
-	view->parents_option = glade_xml_get_widget (xml, "parents_option");
-	view->html_toggle    = glade_xml_get_widget (xml, "html_toggle");
-	view->list_toggle    = glade_xml_get_widget (xml, "list_toggle");
-	view->tree_toggle    = glade_xml_get_widget (xml, "tree_toggle");
-	view->html_menu      = glade_xml_get_widget (xml, "html_menu");
-	view->list_menu      = glade_xml_get_widget (xml, "list_menu");
-	view->tree_menu      = glade_xml_get_widget (xml, "tree_menu");
-	view->rootm_button   = glade_xml_get_widget (xml, "rootm_button");
-	view->rootm_locked   = glade_xml_get_widget (xml, "rootm_locked");
-	view->rootm_unlocked = glade_xml_get_widget (xml, "rootm_unlocked");
-
-	if (!gnome_preferences_get_toolbar_relief_btn ())
-		gtk_button_set_relief (GTK_BUTTON (view->rootm_button), GTK_RELIEF_NONE);
 
 	gtk_signal_connect (GTK_OBJECT (view->app), "destroy",
 			    GTK_SIGNAL_FUNC (destroy), view);
@@ -389,14 +354,6 @@ capplet_dir_view_new (void)
 
 	glade_xml_signal_connect_data (xml, "close_cb", close_cb, view);
 	glade_xml_signal_connect_data (xml, "exit_cb", exit_cb, view);
-
-	glade_xml_signal_connect_data (xml, "html_menu_cb", html_menu_cb, view);
-	glade_xml_signal_connect_data (xml, "icon_menu_cb", icon_menu_cb, view);
-	glade_xml_signal_connect_data (xml, "tree_menu_cb", tree_menu_cb, view);
-
-	glade_xml_signal_connect_data (xml, "html_toggle_cb", html_toggle_cb, view);
-	glade_xml_signal_connect_data (xml, "list_toggle_cb", list_toggle_cb, view);
-	glade_xml_signal_connect_data (xml, "tree_toggle_cb", tree_toggle_cb, view);
 
 	glade_xml_signal_connect_data (xml, "prefs_menu_cb", prefs_menu_cb, view);
 	glade_xml_signal_connect_data (xml, "about_menu_cb", about_menu_cb, view);
@@ -464,11 +421,6 @@ capplet_dir_view_load_dir (CappletDirView *view, CappletDir *dir)
 	if (view->impl && view->impl->populate)
 		view->impl->populate (view);
 
-	if (CAPPLET_DIR_ENTRY (dir)->dir == NULL)
-		gtk_widget_set_sensitive (view->up_button, FALSE);
-	else
-		gtk_widget_set_sensitive (view->up_button, TRUE);
-
 	menu = gtk_menu_new ();
 
 	for (entry = CAPPLET_DIR_ENTRY (dir); entry; entry = CAPPLET_DIR_ENTRY (entry->dir), parents++) {
@@ -495,9 +447,6 @@ capplet_dir_view_load_dir (CappletDirView *view, CappletDir *dir)
 		gtk_menu_prepend (GTK_MENU (menu), menuitem);
 	}
 	gtk_widget_show_all (menu);
-	gtk_option_menu_set_menu (GTK_OPTION_MENU (view->parents_option), menu);
-	gtk_option_menu_set_history (GTK_OPTION_MENU (view->parents_option), parents-1);
-
 }
 
 

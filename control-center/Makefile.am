@@ -3,13 +3,10 @@ appicon_DATA = control-center.png
 
 splashdir = $(datadir)/pixmaps/gnomecc
 splash_DATA = \
-	ccsplash.png	\
-	bgtop.png	\
-	bg.png		\
-	empty.png	\
-	foot.png	\
-	left_top.png	\
-	left.png
+	bcg_top.png \
+	title.png \
+	blank.png \
+	active.png
 
 sysdir = $(datadir)/gnome/apps/Settings
 sys_in_files = gnomecc.desktop.in

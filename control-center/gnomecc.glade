@@ -257,7 +257,8 @@
   <type>GTK_WINDOW_TOPLEVEL</type>
   <position>GTK_WIN_POS_NONE</position>
   <modal>False</modal>
-  <default_height>300</default_height>
+  <default_width>500</default_width>
+  <default_height>400</default_height>
   <allow_shrink>True</allow_shrink>
   <allow_grow>True</allow_grow>
   <auto_shrink>False</auto_shrink>
@@ -346,7 +347,7 @@
 	      </signal>
 	      <label>HTML</label>
 	      <active>False</active>
-	      <always_show_toggle>False</always_show_toggle>
+	      <always_show_toggle>True</always_show_toggle>
 	      <group>view_group</group>
 	    </widget>
 
@@ -360,7 +361,7 @@
 	      </signal>
 	      <label>Icon List</label>
 	      <active>False</active>
-	      <always_show_toggle>False</always_show_toggle>
+	      <always_show_toggle>True</always_show_toggle>
 	      <group>view_group</group>
 	    </widget>
 
@@ -374,7 +375,7 @@
 	      </signal>
 	      <label>Tree</label>
 	      <active>True</active>
-	      <always_show_toggle>False</always_show_toggle>
+	      <always_show_toggle>True</always_show_toggle>
 	      <group>view_group</group>
 	    </widget>
 	  </widget>
@@ -420,245 +421,6 @@
 		<last_modification_time>Tue, 05 Dec 2000 02:53:49 GMT</last_modification_time>
 	      </signal>
 	      <stock_item>GNOMEUIINFO_MENU_ABOUT_ITEM</stock_item>
-	    </widget>
-	  </widget>
-	</widget>
-      </widget>
-    </widget>
-
-    <widget>
-      <class>GnomeDockItem</class>
-      <name>dockitem3</name>
-      <placement>GNOME_DOCK_TOP</placement>
-      <band>1</band>
-      <position>0</position>
-      <offset>0</offset>
-      <locked>False</locked>
-      <exclusive>True</exclusive>
-      <never_floating>False</never_floating>
-      <never_vertical>False</never_vertical>
-      <never_horizontal>False</never_horizontal>
-      <shadow_type>GTK_SHADOW_OUT</shadow_type>
-
-      <widget>
-	<class>GtkHBox</class>
-	<name>hbox1</name>
-	<homogeneous>True</homogeneous>
-	<spacing>0</spacing>
-
-	<widget>
-	  <class>GtkHBox</class>
-	  <name>hbox3</name>
-	  <homogeneous>False</homogeneous>
-	  <spacing>0</spacing>
-	  <child>
-	    <padding>0</padding>
-	    <expand>True</expand>
-	    <fill>True</fill>
-	  </child>
-
-	  <widget>
-	    <class>GtkToolbar</class>
-	    <name>toolbar4</name>
-	    <orientation>GTK_ORIENTATION_HORIZONTAL</orientation>
-	    <type>GTK_TOOLBAR_ICONS</type>
-	    <space_size>5</space_size>
-	    <space_style>GTK_TOOLBAR_SPACE_EMPTY</space_style>
-	    <relief>GTK_RELIEF_NORMAL</relief>
-	    <tooltips>True</tooltips>
-	    <child>
-	      <padding>0</padding>
-	      <expand>True</expand>
-	      <fill>True</fill>
-	    </child>
-
-	    <widget>
-	      <class>GtkButton</class>
-	      <name>rootm_button</name>
-	      <can_focus>True</can_focus>
-	      <signal>
-		<name>clicked</name>
-		<handler>rootm_button_cb</handler>
-		<last_modification_time>Thu, 07 Dec 2000 22:22:55 GMT</last_modification_time>
-	      </signal>
-	      <relief>GTK_RELIEF_NONE</relief>
-
-	      <widget>
-		<class>GtkHBox</class>
-		<name>hbox3</name>
-		<homogeneous>False</homogeneous>
-		<spacing>0</spacing>
-
-		<widget>
-		  <class>GnomePixmap</class>
-		  <name>rootm_locked</name>
-		  <width>24</width>
-		  <height>24</height>
-		  <filename>gnome-lockscreen.png</filename>
-		  <child>
-		    <padding>0</padding>
-		    <expand>True</expand>
-		    <fill>True</fill>
-		  </child>
-		</widget>
-
-		<widget>
-		  <class>GnomePixmap</class>
-		  <name>rootm_unlocked</name>
-		  <width>24</width>
-		  <height>24</height>
-		  <visible>False</visible>
-		  <filename>gnome-unlockscreen.png</filename>
-		  <child>
-		    <padding>0</padding>
-		    <expand>True</expand>
-		    <fill>True</fill>
-		  </child>
-		</widget>
-	      </widget>
-	    </widget>
-	  </widget>
-
-	  <widget>
-	    <class>GtkLabel</class>
-	    <name>label3</name>
-	    <label></label>
-	    <justify>GTK_JUSTIFY_CENTER</justify>
-	    <wrap>False</wrap>
-	    <xalign>0.5</xalign>
-	    <yalign>0.5</yalign>
-	    <xpad>0</xpad>
-	    <ypad>0</ypad>
-	    <child>
-	      <padding>0</padding>
-	      <expand>True</expand>
-	      <fill>True</fill>
-	    </child>
-	  </widget>
-	</widget>
-
-	<widget>
-	  <class>GtkToolbar</class>
-	  <name>toolbar1</name>
-	  <border_width>1</border_width>
-	  <orientation>GTK_ORIENTATION_HORIZONTAL</orientation>
-	  <type>GTK_TOOLBAR_ICONS</type>
-	  <space_size>8</space_size>
-	  <space_style>GTK_TOOLBAR_SPACE_EMPTY</space_style>
-	  <relief>GTK_RELIEF_NONE</relief>
-	  <tooltips>True</tooltips>
-	  <child>
-	    <padding>0</padding>
-	    <expand>True</expand>
-	    <fill>True</fill>
-	  </child>
-
-	  <widget>
-	    <class>GtkButton</class>
-	    <child_name>Toolbar:button</child_name>
-	    <name>back_button</name>
-	    <signal>
-	      <name>clicked</name>
-	      <handler>back_button_cb</handler>
-	      <last_modification_time>Tue, 05 Dec 2000 02:56:16 GMT</last_modification_time>
-	    </signal>
-	    <label></label>
-	    <stock_pixmap>GNOME_STOCK_PIXMAP_BACK</stock_pixmap>
-	  </widget>
-
-	  <widget>
-	    <class>GtkOptionMenu</class>
-	    <name>parents_option</name>
-	    <can_focus>True</can_focus>
-	    <items></items>
-	    <initial_choice>0</initial_choice>
-	  </widget>
-	</widget>
-
-	<widget>
-	  <class>GtkHBox</class>
-	  <name>hbox2</name>
-	  <homogeneous>False</homogeneous>
-	  <spacing>0</spacing>
-	  <child>
-	    <padding>4</padding>
-	    <expand>True</expand>
-	    <fill>True</fill>
-	    <pack>GTK_PACK_END</pack>
-	  </child>
-
-	  <widget>
-	    <class>GtkLabel</class>
-	    <name>label2</name>
-	    <label></label>
-	    <justify>GTK_JUSTIFY_CENTER</justify>
-	    <wrap>False</wrap>
-	    <xalign>0.5</xalign>
-	    <yalign>0.5</yalign>
-	    <xpad>0</xpad>
-	    <ypad>0</ypad>
-	    <child>
-	      <padding>0</padding>
-	      <expand>True</expand>
-	      <fill>True</fill>
-	    </child>
-	  </widget>
-
-	  <widget>
-	    <class>GtkToolbar</class>
-	    <name>toolbar3</name>
-	    <orientation>GTK_ORIENTATION_HORIZONTAL</orientation>
-	    <type>GTK_TOOLBAR_ICONS</type>
-	    <space_size>5</space_size>
-	    <space_style>GTK_TOOLBAR_SPACE_EMPTY</space_style>
-	    <relief>GTK_RELIEF_NORMAL</relief>
-	    <tooltips>True</tooltips>
-	    <child>
-	      <padding>0</padding>
-	      <expand>False</expand>
-	      <fill>False</fill>
-	    </child>
-
-	    <widget>
-	      <class>GtkToggleButton</class>
-	      <child_name>Toolbar:button</child_name>
-	      <name>html_toggle</name>
-	      <signal>
-		<name>toggled</name>
-		<handler>html_toggle_cb</handler>
-		<last_modification_time>Tue, 05 Dec 2000 02:56:32 GMT</last_modification_time>
-	      </signal>
-	      <label></label>
-	      <icon>html-view.xpm</icon>
-	      <active>True</active>
-	    </widget>
-
-	    <widget>
-	      <class>GtkToggleButton</class>
-	      <child_name>Toolbar:button</child_name>
-	      <name>list_toggle</name>
-	      <signal>
-		<name>toggled</name>
-		<handler>list_toggle_cb</handler>
-		<last_modification_time>Tue, 05 Dec 2000 02:56:48 GMT</last_modification_time>
-	      </signal>
-	      <label></label>
-	      <icon>icon-view.xpm</icon>
-	      <active>False</active>
-	    </widget>
-
-	    <widget>
-	      <class>GtkToggleButton</class>
-	      <child_name>Toolbar:button</child_name>
-	      <name>tree_toggle</name>
-	      <signal>
-		<name>toggled</name>
-		<handler>tree_toggle_cb</handler>
-		<last_modification_time>Tue, 05 Dec 2000 02:56:59 GMT</last_modification_time>
-	      </signal>
-	      <label></label>
-	      <icon>tree-view.xpm</icon>
-	      <active>False</active>
 	    </widget>
 	  </widget>
 	</widget>

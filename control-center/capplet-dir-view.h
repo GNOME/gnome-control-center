@@ -71,21 +71,6 @@ struct _CappletDirView
 	gboolean destroyed;
 	CappletDirViewLayout layout;
 
-	GtkWidget *up_button;
-	GtkWidget *parents_option;
-
-	GtkWidget *html_toggle;
-	GtkWidget *list_toggle;
-	GtkWidget *tree_toggle;
-
-	GtkWidget *html_menu;
-	GtkWidget *list_menu;
-	GtkWidget *tree_menu;
-
-	GtkWidget *rootm_button;
-	GtkWidget *rootm_locked;
-	GtkWidget *rootm_unlocked;
-
 	gboolean changing_layout;
 };
 

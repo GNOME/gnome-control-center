@@ -61,8 +61,6 @@ capplet_new (CappletDir *dir, gchar *desktop_path)
 
 	g_return_val_if_fail (desktop_path != NULL, NULL);
 
-	g_print ("reading %s\n", desktop_path);
-
 	entry = g_hash_table_lookup (capplet_hash, desktop_path);
 	if (entry) {
 		g_print ("hash hit!!\n");
