@@ -1,3 +1,4 @@
+#include <config.h>
 #include "da.h"
 
 #define THEME_SWITCHER_VERSION "0.1"
@@ -6,6 +7,9 @@ int
 main(int argc, char **argv)
 {
   GtkWidget *w;
+
+  bindtextdomain (PACKAGE, GNOMELOCALEDIR);
+  textdomain (PACKAGE);
 
   set_tmp_rc();
   do_demo(argc, argv);
