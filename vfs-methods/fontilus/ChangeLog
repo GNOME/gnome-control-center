@@ -3,6 +3,9 @@
 	* src/font-view.c (main): get font to render correctly.  Things
 	work fine now that I am using the same FT_Library handle as Xft
 	was ...
+	(main): don't use Xft's FT_Library handle, since it is underscore
+	prefixed.  The real problem is that XftInitFtLibrary() wasn't
+	getting called.
 
 	* src/font-view.c (main): start of simple font viewer program.
 	Doesn't correctl display the text yet though :(

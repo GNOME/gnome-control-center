@@ -69,7 +69,13 @@ main(int argc, char **argv)
 	return 1;
     }
 
-    error = FT_New_Face_From_URI(_XftFTlibrary, argv[1], 0, &face);
+    error = FT_Init_FreeType(&library);
+    if (error) {
+	g_printerr("could not initialise freetype\n");
+	return 1;
+    }  
+
+    error = FT_New_Face_From_URI(library, argv[1], 0, &face);
     if (error) {
 	g_printerr("could not load face '%s'\n", argv[1]);
 	return 1;
