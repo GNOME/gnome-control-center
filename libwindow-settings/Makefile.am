@@ -15,6 +15,8 @@ libgnome_window_settings_la_LDFLAGS = 	\
 	-export_dynamic			\
         -version-info 1:0:0
 
+libgnome_window_settings_la_LIBADD = $(GNOMECC_LIBS)
+
 libgnome_window_settings_la_SOURCES = \
 	gnome-window-manager.c	\
 	gnome-window-manager.h	\
