@@ -14,7 +14,7 @@ pixmap_DATA = control-center.png
 dist-hook: control-center.spec
 	cp control-center.spec $(distdir)
 
-CLEANFILES = \
+MAINTAINERCLEANFILES = \
 	intltool-extract \
 	intltool-merge \
 	intltool-update
