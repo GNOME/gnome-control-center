@@ -1,3 +1,11 @@
+2001-07-24  Bradford Hovinen  <hovinen@ximian.com>
+
+	* capplet-dir.c (capplet_control_launch): Set moniker property
+	manually
+	(capplet_control_launch): Remove double-free of the moniker
+	(capplet_control_launch): Release and unref the property control
+	in the event of an error
+
 2001-07-23  Bradford Hovinen  <hovinen@ximian.com>
 
 	* capplet-dir.c (capplet_control_launch): Put up an error dialog

@@ -429,14 +429,20 @@ capplet_cancel_cb (GtkWidget *widget, GtkWidget *app)
 GtkWidget *
 capplet_control_launch (const gchar *capplet_name, gchar *window_title)
 {
-	gchar *oaf_iid, *moniker;
-	gchar *tmp, *tmp1;
+	gchar                  *oaf_iid;
+	gchar                  *moniker;
+	gchar                  *tmp;
+	gchar                  *tmp1;
 
-	GtkWidget *app, *control;
-	CORBA_Environment ev;
+	GtkWidget              *app;
+	GtkWidget              *control;
+	CORBA_Environment       ev;
 
-	Bonobo_PropertyControl property_control;
-	Bonobo_Control control_ref;
+	Bonobo_PropertyControl  property_control;
+	Bonobo_Control          control_ref;
+	Bonobo_PropertyBag      pb;
+
+	BonoboControlFrame     *cf;
 
 	g_return_val_if_fail (capplet_name != NULL, NULL);
 
@@ -475,12 +481,14 @@ capplet_control_launch (const gchar *capplet_name, gchar *window_title)
 	if (control == NULL) {
 		g_critical ("Could not create widget from control");
 		gtk_widget_destroy (app);
-		g_free (moniker);
+		bonobo_object_release_unref (property_control, &ev);
 		app = NULL;
 	} else {
 		gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (app)->vbox), control, TRUE, TRUE, 0);
 
-		bonobo_widget_set_property (BONOBO_WIDGET (control), "moniker", moniker, &ev);
+		cf = bonobo_widget_get_control_frame (BONOBO_WIDGET (control));
+		pb = bonobo_control_frame_get_control_property_bag (cf, &ev);
+		bonobo_property_bag_client_set_value_string (pb, "moniker", moniker, &ev);
 
 		if (BONOBO_EX (&ev)) {
 			GtkWidget *dialog;
@@ -488,7 +496,7 @@ capplet_control_launch (const gchar *capplet_name, gchar *window_title)
 			dialog = gnome_error_dialog ("Could not load your configuration settings.");
 			gnome_dialog_run_and_close (GNOME_DIALOG (dialog));
 			gtk_widget_destroy (app);
-			g_free (moniker);
+			bonobo_object_release_unref (property_control, &ev);
 			app = NULL;
 		} else {
 			gnome_dialog_button_connect (GNOME_DIALOG (app), 0, GTK_SIGNAL_FUNC (capplet_ok_cb), app);
