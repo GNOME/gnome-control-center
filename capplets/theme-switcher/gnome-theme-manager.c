@@ -65,7 +65,7 @@ static void      idle_async_func                 (GdkPixbuf          *pixbuf,
 						  gpointer            data);
 static void      list_data_free                  (gpointer            data);
 static gboolean  load_theme_in_idle              (gpointer            data);
-static void      add_pixbuf_idle                 (GtkTreeModel       *model);
+static void      add_pixbuf_idle                 (void);
 static void      load_meta_themes                (GtkTreeView        *tree_view,
 						  GList              *meta_theme_list,
 						  char               *default_theme);
@@ -129,7 +129,7 @@ idle_async_func (GdkPixbuf *pixbuf,
     }
 
   idle_running = FALSE;
-  add_pixbuf_idle (model);
+  add_pixbuf_idle ();
 }
 
 static void
@@ -146,9 +146,15 @@ list_data_free (gpointer data)
 static gboolean
 load_theme_in_idle (gpointer data)
 {
-  GtkTreeModel *model = data;
+  GladeXML *dialog;
+  GtkWidget *tree_view;
+  GtkTreeModel *model;
   GtkTreeIter iter;
   gboolean valid;
+
+  dialog = gnome_theme_manager_get_theme_dialog ();
+  tree_view = WID ("meta_theme_treeview");
+  model = gtk_tree_view_get_model (GTK_TREE_VIEW (tree_view));
 
   for (valid = gtk_tree_model_get_iter_first (model, &iter);
        valid;
@@ -171,7 +177,6 @@ load_theme_in_idle (gpointer data)
 	  if (theme_id == NULL)
 	    {
 	      meta_theme_info = &custom_meta_theme_info;
-	      continue;
 	    }
 	  else
 	    {
@@ -198,24 +203,23 @@ load_theme_in_idle (gpointer data)
    */
   gnome_theme_details_init ();
   idle_running = FALSE;
-  return TRUE;
+
+  return FALSE;
 }
 
 /* FIXME: we need a way to cancel the pixbuf loading if we get a theme updating
  * during the pixbuf generation.
  */
 static void
-add_pixbuf_idle (GtkTreeModel *model)
+add_pixbuf_idle (void)
 {
   if (idle_running)
     return;
 
   idle_running = TRUE;
-  g_object_ref (model);
   g_idle_add_full (G_PRIORITY_LOW,
 		   load_theme_in_idle,
-		   model,
-		   g_object_unref);
+		   NULL, NULL);
 }
 
 static gint
@@ -453,8 +457,7 @@ load_meta_themes (GtkTreeView *tree_view,
 	}
     }
 
-
-  add_pixbuf_idle (model);
+  add_pixbuf_idle ();
 
   g_free (current_gtk_theme);
   g_free (current_icon_theme);
@@ -808,7 +811,7 @@ update_settings_from_gconf (void)
   g_free (current_gtk_theme);
   g_free (current_window_theme);
   g_free (current_icon_theme);
-  add_pixbuf_idle (model);
+  add_pixbuf_idle ();
 }
 
 static void
@@ -928,6 +931,8 @@ setup_dialog (GladeXML *dialog)
   GnomeWindowManager *window_manager;
   GtkSizeGroup *size_group;
 
+  default_image = gdk_pixbuf_new_from_file(GNOMECC_DATA_DIR "/pixmaps/theme-thumbnailing.png", NULL);
+
   client = gconf_client_get_default ();
   window_manager = gnome_wm_manager_get_current (gdk_display_get_default_screen (gdk_display_get_default ()));
   
@@ -989,8 +994,6 @@ setup_dialog (GladeXML *dialog)
   g_signal_connect (G_OBJECT (parent), "drag-motion", G_CALLBACK (gnome_theme_manager_drag_motion_cb), NULL);
   g_signal_connect (G_OBJECT (parent), "drag-leave", G_CALLBACK (gnome_theme_manager_drag_leave_cb), NULL);
   g_signal_connect (G_OBJECT (parent), "drag-data-received",G_CALLBACK (gnome_theme_manager_drag_data_received_cb), NULL);
-
-  default_image = gdk_pixbuf_new_from_file(GNOMECC_DATA_DIR "/pixmaps/theme-thumbnailing.png", NULL);
 
   capplet_set_icon (parent, "gnome-ccthemes.png");
 
