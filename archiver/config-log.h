@@ -71,7 +71,8 @@ struct tm *config_log_get_date_for_id          (ConfigLog *config_log,
 						gint id);
 
 gint       config_log_write_entry              (ConfigLog *config_log,
-						gchar *backend_id);
+						gchar *backend_id,
+						gboolean is_default_data);
 
 void       config_log_iterate                  (ConfigLog *config_log,
 						ConfigLogIteratorCB callback,

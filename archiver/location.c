@@ -443,7 +443,8 @@ location_delete (Location *location)
  * modification. STORE_COMPARE_PARENT means subtract the settings the parent
  * has that are different and store the result. STORE_MASK_PREVIOUS means
  * store only those settings that are reflected in the previous logged data;
- * if there do not exist such data, act as in STORE_COMPARE_PARENT
+ * if there do not exist such data, act as in
+ * STORE_COMPARE_PARENT. STORE_DEFAULT means these are default data.
  * 
  * Store configuration data from the given stream in the location under the
  * given backend id
@@ -559,7 +560,8 @@ location_store_xml (Location *location, gchar *backend_id, xmlDocPtr xml_doc,
 			xmlFreeDoc (prev_doc);
 	}
 
-	id = config_log_write_entry (location->p->config_log, backend_id);
+	id = config_log_write_entry (location->p->config_log, backend_id,
+				     store_type == STORE_DEFAULT);
 
 	filename = g_strdup_printf ("%s/%08x.xml",
 				    location->p->fullpath, id);
@@ -1129,7 +1131,7 @@ store_snapshot_cb (Location *location, gchar *backend_id)
 
 	fd = run_backend_proc (backend_id, TRUE);
 	pipe = fdopen (fd, "r");
-	location_store (location, backend_id, pipe, STORE_MASK_PREVIOUS);
+	location_store (location, backend_id, pipe, STORE_DEFAULT);
 	fclose (pipe);
 
 	return FALSE;

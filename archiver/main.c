@@ -259,7 +259,8 @@ do_add_location (Archive *archive)
 
 		if (parent_location == NULL && !strcmp (parent_str, "default"))
 			parent_location =
-				location_new (archive, "default", NULL);
+				LOCATION
+				(location_new (archive, "default", NULL));
 	}
 
 	location = location_new (archive, location_id, parent_location);

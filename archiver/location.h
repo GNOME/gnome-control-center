@@ -61,7 +61,7 @@ enum _ContainmentType
 
 enum _StoreType
 {
-	STORE_FULL, STORE_COMPARE_PARENT, STORE_MASK_PREVIOUS
+	STORE_DEFAULT, STORE_FULL, STORE_COMPARE_PARENT, STORE_MASK_PREVIOUS
 };
 
 guint location_get_type (void);

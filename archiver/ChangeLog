@@ -1,3 +1,23 @@
+2001-05-03  Bradford Hovinen  <hovinen@ximian.com>
+
+	* location.c (location_store_xml): Support STORE_DEFAULT
+	(store_snapshot_cb): Use STORE_DEFAULT rather than STORE_MASK_PREVIOUS
+
+	* location.h (_StoreType): Add STORE_DEFAULT
+
+	* config-log.c (config_log_get_rollback_id_by_steps): Return the
+	current id if the node represents default data
+
+	* main.c (do_add_location): Cast correctly, fixing compiler
+	warning
+
+	* config-log.c (config_log_write_entry): Add parameter
+	is_default_data; call get_beginning_of_time rather than
+	get_current_date iff is_default_data is TRUE
+	(get_beginning_of_time): Implement
+	(has_nondefaults): Implement. Return TRUE iff the config log
+	contains regular (non-default) entries
+
 2001-04-26  Arturo Espinosa  <arturo@ximian.com>
 
 	* location.c: changed g_critical to g_error. If a newer

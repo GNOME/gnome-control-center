@@ -137,10 +137,12 @@ static void       do_unload                     (ConfigLog *config_log,
 						 gboolean write_log);
 
 static gint       get_next_id                   (ConfigLog *config_log);
+static struct tm *get_beginning_of_time         (void);
 static struct tm *get_current_date              (void);
 static void       write_log                     (IOBuffer *output, 
 						 ConfigLogEntry *entry);
 static void       dump_log                      (ConfigLog *config_log);
+static gboolean   has_nondefaults               (ConfigLog *config_log);
 
 static gboolean   connect_socket                (ConfigLog *config_log);
 static gboolean   check_socket_filename         (ConfigLog *config_log);
@@ -416,6 +418,9 @@ config_log_get_rollback_id_by_steps (ConfigLog *config_log,
 		node = find_config_log_entry_backend
 			(config_log, node, backend_id);
 
+		if (((ConfigLogEntry *) node->data)->date->tm_year == 0)
+			return ((ConfigLogEntry *) node->data)->id;
+
 		if (steps > 0) {
 			if (node->next == NULL)
 				node = load_log_entry
@@ -482,8 +487,21 @@ config_log_get_date_for_id (ConfigLog *config_log, gint id)
 		return ((ConfigLogEntry *) node->data)->date;
 }
 
+/**
+ * config_log_write_entry:
+ * @config_log:
+ * @backend_id: Backend id for the log entry to write
+ * @is_default_data: TRUE iff the corresponding data are to be considered
+ * "factory defaults" for the purpose of rollback
+ *
+ * Writes a new log entry to the config log
+ *
+ * Returns the id number of the entry on success or -1 on failure
+ **/
+
 gint 
-config_log_write_entry (ConfigLog *config_log, gchar *backend_id) 
+config_log_write_entry (ConfigLog *config_log, gchar *backend_id,
+			gboolean is_default_data) 
 {
 	ConfigLogEntry *entry;
 
@@ -491,10 +509,17 @@ config_log_write_entry (ConfigLog *config_log, gchar *backend_id)
 	g_return_val_if_fail (IS_CONFIG_LOG (config_log), -1);
 	g_return_val_if_fail (backend_id != NULL, -1);
 
-	entry = g_new0 (ConfigLogEntry, 1);
-	entry->id = get_next_id (config_log);
-	entry->date = get_current_date ();
+	if (is_default_data && has_nondefaults (config_log))
+		return -1;
+
+	entry             = g_new0 (ConfigLogEntry, 1);
+	entry->id         = get_next_id (config_log);
 	entry->backend_id = g_strdup (backend_id);
+
+	if (is_default_data)
+		entry->date = get_beginning_of_time ();
+	else
+		entry->date = get_current_date ();
 
 	config_log->p->log_data =
 		g_list_prepend (config_log->p->log_data, entry);
@@ -926,6 +951,14 @@ get_next_id (ConfigLog *config_log)
 	return ((ConfigLogEntry *) config_log->p->log_data->data)->id + 1;
 }
 
+/* Return a newly allocated struct tm with all zeros */
+
+static struct tm *
+get_beginning_of_time (void)
+{
+	return g_new0 (struct tm, 1);
+}
+
 /* Return a newly allocated struct tm with the current time */
 
 static struct tm *
@@ -1010,6 +1043,26 @@ dump_log (ConfigLog *config_log)
 		rename (filename_out, config_log->p->filename);
 
 	DEBUG_MSG ("Exit");
+}
+
+static gboolean
+has_nondefaults (ConfigLog *config_log)
+{
+	ConfigLogEntry *first;
+
+	if (config_log->p->log_data == NULL)
+		load_log_entry (config_log, FALSE, config_log->p->file_buffer,
+				config_log->p->log_data);
+
+	if (config_log->p->log_data == NULL)
+		return FALSE;
+
+	first = config_log->p->log_data->data;
+
+	if (first->date->tm_year == 0)
+		return FALSE;
+	else
+		return TRUE;
 }
 
 static gboolean
