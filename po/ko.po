@@ -1,12 +1,12 @@
-# Young-Ho Cha <ganadist@chollian.net>, 2002
-# Changwoo Ryu <cwryu@debian.org>, 2002
+# Young-Ho Cha <ganadist@chollian.net>, 2002,2003
+# Changwoo Ryu <cwryu@debian.org>, 2002,2003
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: control-center 2.2.0\n"
-"POT-Creation-Date: 2003-02-04 16:51-0500\n"
-"PO-Revision-Date: 2003-01-25 14:29+0900\n"
-"Last-Translator: Young-Ho, Cha <ganadist@chollian.net>\n"
+"Project-Id-Version: control-center 2.2.0.1\n"
+"POT-Creation-Date: 2003-05-09 01:02+0900\n"
+"PO-Revision-Date: 2003-05-09 01:05+0900\n"
+"Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: GTP Korean <gnome-kr-translation@gnome.or.kr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,7 +37,7 @@ msgstr "글쇠판"
 msgid "Set your keyboard accessibility preferences"
 msgstr "글쇠판 접근성 기능 기본 설정을 설정합니다"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.c:57
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.c:60
 msgid ""
 "This system does not seem to have the XKB extension.  The keyboard "
 "accessibility features will not operate without it."
@@ -280,9 +280,9 @@ msgstr "그림 선택(_P):"
 
 #: capplets/background/background-properties-capplet.c:567
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:712
+#: capplets/default-applications/gnome-default-applications-properties.c:724
 #: capplets/keyboard/gnome-keyboard-properties.c:290
-#: capplets/mouse/gnome-mouse-properties.c:712
+#: capplets/mouse/gnome-mouse-properties.c:716
 #: capplets/sound/sound-properties-capplet.c:149
 msgid "Retrieve and store legacy settings"
 msgstr "물려받은 설정을 되찾아서 저장합니다"
@@ -528,7 +528,7 @@ msgstr "등록 정보 편집기 데이타 free하는 콜백"
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr "등록 정보 편집기 오브젝트의 데이타를 free할 때 실행할 콜백"
 
-#: capplets/common/gconf-property-editor.c:1484
+#: capplets/common/gconf-property-editor.c:1486
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -540,7 +540,7 @@ msgstr ""
 "\n"
 "파일이 있는지 확인하고 다시 시도하거나, 다른 바탕 그림을 선택하십시오."
 
-#: capplets/common/gconf-property-editor.c:1492
+#: capplets/common/gconf-property-editor.c:1494
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -553,7 +553,7 @@ msgstr ""
 "\n"
 "대신 다른 그림을 선택하십시오."
 
-#: capplets/common/gconf-property-editor.c:1583
+#: capplets/common/gconf-property-editor.c:1585
 msgid "Please select an image."
 msgstr "그림을 선택하십시오."
 
@@ -777,7 +777,7 @@ msgid "Minimizing and Maximizing"
 msgstr "최소화 및 최대화"
 
 #: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
-#: capplets/windows/gnome-window-properties.c:649
+#: capplets/windows/gnome-window-properties.c:650
 msgid "Meta"
 msgstr "메타"
 
@@ -977,8 +977,8 @@ msgid "Structure containing information on the MIME category"
 msgstr "MIME 범주에 정보를 포함하는 구조"
 
 #: capplets/file-types/mime-category-edit-dialog.c:344
-#: capplets/file-types/mime-edit-dialog.c:488
-#: capplets/file-types/mime-edit-dialog.c:592
+#: capplets/file-types/mime-edit-dialog.c:491
+#: capplets/file-types/mime-edit-dialog.c:595
 #: capplets/file-types/service-edit-dialog.c:358
 #: capplets/file-types/service-edit-dialog.c:407
 msgid "Custom"
@@ -1013,16 +1013,16 @@ msgid "Add File Type"
 msgstr "파일 형식 더하기"
 
 #: capplets/file-types/mime-edit-dialog.c:434
-#: capplets/file-types/mime-type-info.c:673
+#: capplets/file-types/mime-type-info.c:674
 msgid "Misc"
 msgstr "기타"
 
-#: capplets/file-types/mime-edit-dialog.c:483
-#: capplets/file-types/mime-edit-dialog.c:542
+#: capplets/file-types/mime-edit-dialog.c:486
+#: capplets/file-types/mime-edit-dialog.c:545
 msgid "None"
 msgstr "없음"
 
-#: capplets/file-types/mime-edit-dialog.c:852
+#: capplets/file-types/mime-edit-dialog.c:855
 msgid ""
 "Please enter a valid MIME type.  It should be of the form class/type and may "
 "not contain any spaces."
@@ -1030,27 +1030,32 @@ msgstr ""
 "올바른 MIME 타입을 입력하십시오.  MIME 타입은 \"클래스/타입\"의 형태가 되어"
 "야 하고 공백이 들어가면 안 됩니다."
 
-#: capplets/file-types/mime-edit-dialog.c:859
+#: capplets/file-types/mime-edit-dialog.c:862
 msgid "A MIME type with that name already exists, overwrite ?."
 msgstr "그 이름의 MIME 타입이 이미 존재합니다, 덮어쓸까요 ?"
 
-#: capplets/file-types/mime-edit-dialog.c:924
+#: capplets/file-types/mime-edit-dialog.c:927
 msgid "Category"
 msgstr "범주"
 
-#: capplets/file-types/mime-edit-dialog.c:929
+#: capplets/file-types/mime-edit-dialog.c:932
 msgid "Choose a file category"
 msgstr "파일 분류 선택"
 
-#: capplets/file-types/mime-type-info.c:667
+#: capplets/file-types/mime-type-info.c:602
+#, c-format
+msgid "View as %s"
+msgstr "%s(으)로 보기"
+
+#: capplets/file-types/mime-type-info.c:668
 msgid "Images"
 msgstr "그림"
 
-#: capplets/file-types/mime-type-info.c:669
+#: capplets/file-types/mime-type-info.c:670
 msgid "Video"
 msgstr "비디오"
 
-#: capplets/file-types/mime-type-info.c:671
+#: capplets/file-types/mime-type-info.c:672
 msgid "Audio"
 msgstr "오디오"
 
@@ -1059,7 +1064,7 @@ msgstr "오디오"
 msgid "Model for categories only"
 msgstr "범주에 관한 모델만"
 
-#: capplets/file-types/mime-types-model.c:421
+#: capplets/file-types/mime-types-model.c:422
 msgid "Internet Services"
 msgstr "인터넷 서비스"
 
@@ -1457,7 +1462,7 @@ msgstr "작게"
 msgid "Set your keyboard preferences"
 msgstr "글쇠판 등록 정보를 설정합니다"
 
-#: capplets/mouse/gnome-mouse-properties.c:437
+#: capplets/mouse/gnome-mouse-properties.c:439
 #, c-format
 msgid ""
 "<b>Unknown Cursor</b>\n"
@@ -1466,7 +1471,7 @@ msgstr ""
 "<b>알 수 없는 커서</b>\n"
 "%s"
 
-#: capplets/mouse/gnome-mouse-properties.c:538
+#: capplets/mouse/gnome-mouse-properties.c:541
 msgid ""
 "<b>Default Cursor - Current</b>\n"
 "The default cursor that ships with X"
@@ -1474,7 +1479,7 @@ msgstr ""
 "<b>기본 커서 - 현재</b>\n"
 "X에 포함되어 있는 기본 커서"
 
-#: capplets/mouse/gnome-mouse-properties.c:541
+#: capplets/mouse/gnome-mouse-properties.c:544
 msgid ""
 "<b>Default Cursor</b>\n"
 "The default cursor that ships with X"
@@ -1482,7 +1487,7 @@ msgstr ""
 "<b>기본 커서</b>\n"
 "X에 포함되어 있는 기본 커서"
 
-#: capplets/mouse/gnome-mouse-properties.c:559
+#: capplets/mouse/gnome-mouse-properties.c:562
 msgid ""
 "<b>White Cursor - Current</b>\n"
 "The default cursor inverted"
@@ -1490,7 +1495,7 @@ msgstr ""
 "<b>흰 색 커서 - 현재</b>\n"
 "기본 커서의 반전"
 
-#: capplets/mouse/gnome-mouse-properties.c:562
+#: capplets/mouse/gnome-mouse-properties.c:565
 msgid ""
 "<b>White Cursor</b>\n"
 "The default cursor inverted"
@@ -1498,7 +1503,7 @@ msgstr ""
 "<b>흰 색 커서</b>\n"
 "기본 커서의 반전"
 
-#: capplets/mouse/gnome-mouse-properties.c:580
+#: capplets/mouse/gnome-mouse-properties.c:583
 msgid ""
 "<b>Large Cursor - Current</b>\n"
 "Large version of normal cursor"
@@ -1506,7 +1511,7 @@ msgstr ""
 "<b>큰 커서 - 현재</b>\n"
 "기본 커서의 큰 버전"
 
-#: capplets/mouse/gnome-mouse-properties.c:583
+#: capplets/mouse/gnome-mouse-properties.c:586
 msgid ""
 "<b>Large Cursor</b>\n"
 "Large version of normal cursor"
@@ -1514,7 +1519,7 @@ msgstr ""
 "<b>큰 커서</b>\n"
 "기본 커서의 큰 버전"
 
-#: capplets/mouse/gnome-mouse-properties.c:601
+#: capplets/mouse/gnome-mouse-properties.c:604
 msgid ""
 "<b>Large White Cursor - Current</b>\n"
 "Large version of white cursor"
@@ -1522,7 +1527,7 @@ msgstr ""
 "<b>큰 흰 색 커서 - 현재</b>\n"
 "흰 색 커서의 큰 버전"
 
-#: capplets/mouse/gnome-mouse-properties.c:604
+#: capplets/mouse/gnome-mouse-properties.c:607
 msgid ""
 "<b>Large White Cursor</b>\n"
 "Large version of white cursor"
@@ -1729,7 +1734,7 @@ msgstr "보안 HTTP 프록시(_S):"
 msgid "_Username:"
 msgstr "사용자 이름(_U):"
 
-#: capplets/sound/sound-properties-capplet.c:180
+#: capplets/sound/sound-properties-capplet.c:175
 msgid "Sound preferences"
 msgstr "사운드 기본 설정"
 
@@ -1911,7 +1916,7 @@ msgid "_Location of new theme:"
 msgstr "새 테마의 위치(_L):"
 
 #: capplets/theme-switcher/gnome-theme-details.c:372
-#: capplets/theme-switcher/gnome-theme-manager.c:609
+#: capplets/theme-switcher/gnome-theme-manager.c:610
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -1924,13 +1929,13 @@ msgstr ""
 msgid "Theme name must be present"
 msgstr "테마 이름이 없습니다"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:665
-#: capplets/theme-switcher/gnome-theme-manager.c:725
+#: capplets/theme-switcher/gnome-theme-manager.c:666
+#: capplets/theme-switcher/gnome-theme-manager.c:726
 msgid "Custom theme"
 msgstr "사용자 테마"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:665
-#: capplets/theme-switcher/gnome-theme-manager.c:725
+#: capplets/theme-switcher/gnome-theme-manager.c:666
+#: capplets/theme-switcher/gnome-theme-manager.c:726
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "테마 저장 단추를 누르면 이 테마를 저장할 수 있습니다."
 
@@ -2074,19 +2079,19 @@ msgstr ""
 "\n"
 "%s"
 
-#: capplets/windows/gnome-window-properties.c:624
+#: capplets/windows/gnome-window-properties.c:625
 msgid "Control"
 msgstr "Control"
 
-#: capplets/windows/gnome-window-properties.c:629
+#: capplets/windows/gnome-window-properties.c:630
 msgid "Alt"
 msgstr "Alt"
 
-#: capplets/windows/gnome-window-properties.c:635
+#: capplets/windows/gnome-window-properties.c:636
 msgid "Hyper"
 msgstr "Hyper"
 
-#: capplets/windows/gnome-window-properties.c:642
+#: capplets/windows/gnome-window-properties.c:643
 msgid "Super (or \"Windows logo\")"
 msgstr "Super (윈도우 글쇠)"
 
@@ -2146,8 +2151,8 @@ msgstr "이 뷰가 보여주는 capplet 디렉토리"
 #: control-center/capplet-dir-view.c:348
 msgid "translator_credits"
 msgstr ""
-"Changwoo Ryu <cwryu@debian.org>, 2002\n"
-"Young-Ho Cha <ganadist@mizi.com>, 2003"
+"류창우 <cwryu@debian.org>\n"
+"차영호 <ganadist@mizi.com>"
 
 #: control-center/capplet-dir-view.c:357 control-center/gnomecc.desktop.in.h:1
 msgid "GNOME Control Center"
@@ -2306,11 +2311,11 @@ msgstr "BGApplier가 그려지는 화면"
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "hbox를 찾을 수 없어, 보통 파일 선택 대화상자를 사용합니다"
 
-#: libsounds/sound-view.c:122
+#: libsounds/sound-view.c:128
 msgid "The sound file for this event does not exist."
 msgstr "이 상황에 대한 사운드 파일이 존재하지 않습니다."
 
-#: libsounds/sound-view.c:124
+#: libsounds/sound-view.c:130
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package\n"
@@ -2320,23 +2325,23 @@ msgstr ""
 "기본 사운드 파일을 설치하려면 gnome-audio 패키지를\n"
 "설치해야 합니다."
 
-#: libsounds/sound-view.c:216
+#: libsounds/sound-view.c:222
 msgid "Event"
 msgstr "상황"
 
-#: libsounds/sound-view.c:223
+#: libsounds/sound-view.c:229
 msgid "File to play"
 msgstr "연주할 파일"
 
-#: libsounds/sound-view.c:238
+#: libsounds/sound-view.c:244
 msgid "_Sounds"
 msgstr "사운드(_S)"
 
-#: libsounds/sound-view.c:252
+#: libsounds/sound-view.c:258
 msgid "_Play"
 msgstr "재생(_P)"
 
-#: libsounds/sound-view.c:258
+#: libsounds/sound-view.c:264
 msgid "Select sound file"
 msgstr "소리 파일 선택"
 
@@ -2345,11 +2350,11 @@ msgstr "소리 파일 선택"
 msgid "Window manager \"%s\" has not registered a configuration tool\n"
 msgstr "창 관리자 \"%s\"(이)가 설정 도구에 등록되지 않았습니다\n"
 
-#: libwindow-settings/metacity-window-manager.c:374
+#: libwindow-settings/metacity-window-manager.c:378
 msgid "Maximize"
 msgstr "최대화"
 
-#: libwindow-settings/metacity-window-manager.c:375
+#: libwindow-settings/metacity-window-manager.c:379
 msgid "Roll up"
 msgstr "말아 올리기"
 
