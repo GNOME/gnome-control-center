@@ -146,7 +146,7 @@ get_control_cb (BonoboPropertyControl *property_control, gint page_number)
 	GtkWidget            *pf;
 
 	if (control == NULL) {
-		widget = create_dialog_cb (void);
+		widget = create_dialog_cb ();
 
 		if (widget == NULL)
 			return NULL;
