@@ -892,7 +892,8 @@ create_pixmap (BGApplier *bg_applier, const BGPreferences *prefs)
 #if 0
 		bg_applier->p->pixmap = GTK_PIXMAP (bg_applier->p->preview_widget)->pixmap;
 #else
-		gtk_image_get_pixmap (GTK_IMAGE (bg_applier->p->preview_widget), &bg_applier->p->pixmap, NULL);
+		if (!bg_applier->p->pixmap)
+			gtk_image_get_pixmap (GTK_IMAGE (bg_applier->p->preview_widget), &bg_applier->p->pixmap, NULL);
 #endif
 		bg_applier->p->pixmap_is_set = TRUE;
 		break;
@@ -1276,7 +1277,9 @@ need_wallpaper_load_p (const BGApplier *bg_applier, const BGPreferences *prefs)
 static gboolean
 need_root_pixmap_p (const BGApplier *bg_applier, const BGPreferences *prefs) 
 {
-	if (prefs->wallpaper_enabled == FALSE && prefs->gradient_enabled == FALSE)
+	if (bg_applier->p->pixmap == NULL)
+		return TRUE;
+	else if (prefs->wallpaper_enabled == FALSE && prefs->gradient_enabled == FALSE)
 		return FALSE;
 	else if (bg_applier->p->last_prefs == NULL)
 		return TRUE;
@@ -1527,9 +1530,9 @@ preview_realized_cb (GtkWidget *preview, BGApplier *bg_applier)
 	/* Only draw clean image if no pref set yet */
 	if (bg_applier->p->last_prefs)
 		return;
-	
-	gtk_image_get_pixmap (GTK_IMAGE (preview), &pixmap, NULL);
 
+	gtk_image_get_pixmap (GTK_IMAGE (preview), &pixmap, NULL);
+	
 	gdk_draw_rectangle (pixmap,
 			    preview->style->bg_gc[preview->state],
 			    TRUE,
