@@ -11,6 +11,9 @@ Glade_DATA = sound-properties.glade
 iconsdir   = $(GNOMECC_ICONS_DIR)
 icons_DATA = sound-capplet.png
 
+desktop_iconsdir = $(datadir)/pixmaps
+desktop_icons_DATA = sound-capplet.png
+
 desktopdir = $(GNOMECC_DESKTOP_DIR)
 Desktop_in_files = sound.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
