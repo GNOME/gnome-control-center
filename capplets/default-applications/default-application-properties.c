@@ -335,8 +335,8 @@ response_cb (GtkDialog *dialog, gint response_id, gpointer data)
 int
 main (int argc, char **argv)
 {
-	setlocale(LC_ALL, "");
         bindtextdomain (PACKAGE, GNOMELOCALEDIR);
+	bind_textdomain_codeset (PACKAGE, "UTF-8");
         textdomain (PACKAGE);
 
 	gnome_program_init ("default-applications-properties", VERSION,
@@ -352,7 +352,7 @@ main (int argc, char **argv)
 
         /* Connect the wrapper signals */
 	g_signal_connect (G_OBJECT (capplet), "response",
-			  response_cb, NULL);
+			  G_CALLBACK (response_cb), NULL);
 
         ignore_changes = FALSE;
 

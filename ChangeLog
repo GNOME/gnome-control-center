@@ -1,3 +1,10 @@
+2001-12-09  Gediminas Paulauskas <menesis@delfi.lt>
+
+	* *.c (main): retrieve translation in utf-8 codeset. Do not
+	setlocale ().
+	* some Makefile.am (INCLUDES): remove intl.
+	(..._LDADD): remove INTLLIBS
+
 2001-12-08  Havoc Pennington  <hp@pobox.com>
 
 	* configure.in (COMMON_MODULES): add gnome-desktop-2.0 to CFLAGS,

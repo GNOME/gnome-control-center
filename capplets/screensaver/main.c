@@ -223,7 +223,8 @@ setup_capplet_widget (void)
 					 GTK_STOCK_APPLY, GTK_RESPONSE_APPLY,
 					 GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
 					 NULL);
-	g_signal_connect (G_OBJECT (capplet), "response", response_cb, NULL);
+	g_signal_connect (G_OBJECT (capplet), "response",
+			  G_CALLBACK (response_cb), NULL);
 			
 	prefs->frozen++;
 	
@@ -323,6 +324,7 @@ main (int argc, char **argv)
 	gchar *restart_args[3];
 
 	bindtextdomain (PACKAGE, GNOMELOCALEDIR);
+	bind_textdomain_codeset (PACKAGE, "UTF-8");
 	textdomain (PACKAGE);
 
 	gnome_program_init ("screensaver-properties", VERSION,

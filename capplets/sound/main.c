@@ -203,6 +203,7 @@ main (int argc, char **argv)
 	free (malloc (1024));
 
 	bindtextdomain (PACKAGE, GNOMELOCALEDIR);
+	bind_textdomain_codeset (PACKAGE, "UTF-8");
 	textdomain (PACKAGE);
 
 	glade_gnome_init ();

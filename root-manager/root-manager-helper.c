@@ -42,9 +42,8 @@ main(int argc, char* argv[])
 
 	int new_fd;
 
-	/* first set up our locale info for gettext. */
-	setlocale (LC_ALL, "");
 	bindtextdomain (PACKAGE, GNOMELOCALEDIR);
+	bind_textdomain_codeset (PACKAGE, "UTF-8");
 	textdomain (PACKAGE);
 
 	argv_fake = g_new0 (char *, 3);

@@ -360,6 +360,7 @@ main (int argc, char **argv)
 	free (malloc (1));
 
         bindtextdomain (PACKAGE, GNOMELOCALEDIR);
+	bind_textdomain_codeset (PACKAGE, "UTF-8");
         textdomain (PACKAGE);
 
 	CORBA_exception_init (&ev);

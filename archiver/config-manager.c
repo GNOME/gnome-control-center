@@ -36,6 +36,7 @@ main (int argc, char **argv)
 	GtkWidget *dialog;
 
         bindtextdomain (PACKAGE, GNOMELOCALEDIR);
+	bind_textdomain_codeset (PACKAGE, "UTF-8");
         textdomain (PACKAGE);
 
 	gnome_init ("config-manager", VERSION, argc, argv);

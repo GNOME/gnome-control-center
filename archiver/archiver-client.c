@@ -25,7 +25,7 @@
 #  include <config.h>
 #endif
 
-#include <bonobo.h>
+#include <libbonobo.h>
 #include <gnome-xml/parser.h>
 
 #include "archiver-client.h"

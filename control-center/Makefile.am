@@ -25,7 +25,6 @@ glade_DATA = \
 INCLUDES = 							\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" 		\
 	-DGLADEDIR=\""$(datadir)/control-center/interfaces"\"	\
-	-I$(top_srcdir)/intl -I$(top_builddir)/intl		\
 	-DVERSION=\""$(VERSION)"\"				\
 	-DSETTINGS_DIR=\""$(datadir)/control-center/capplets"\"	\
 	-DPIXMAPS_DIR=\""$(appicondir)"\"			\
@@ -47,7 +46,6 @@ gnomecc_SOURCES = \
 gnomecc_LDADD = \
 	@GNOMECC_LIBS@ \
 	-lgnome-desktop-2
-#	$(INTLLIBS)
 
 EXTRA_DIST = gnomecc.desktop.in $(appicon_DATA) $(splash_DATA) $(glade_DATA) Gnome.directory.in.in
 

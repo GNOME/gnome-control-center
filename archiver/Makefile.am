@@ -52,9 +52,6 @@ config_archiver_SOURCES = \
 	config-archiver.c
 
 config_archiver_LDADD = \
-	$(GNOME_LIBDIR)						\
-	$(GNOMEUI_LIBS)						\
-	$(INTLLIBS)						\
 	@ARCHIVER_LIBS@						\
 	libconfig_archiver.la
 

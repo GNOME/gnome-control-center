@@ -3,7 +3,6 @@ pixmap_DATA = xst-keys.png
 
 INCLUDES = \
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"		\
-	-I$(top_srcdir)/intl -I$(top_builddir)/intl		\
 	@RMHELPER_CFLAGS@					\
 	-DUH_PATH=\""$(sbindir)/root-manager"\"			\
 	-DUH_KEY_PIXMAP_PATH=\""$(pixmapdir)/xst-keys.png"\"	\

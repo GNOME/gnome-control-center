@@ -280,6 +280,7 @@ main (int argc, char **argv)
 	};
 
 	bindtextdomain (PACKAGE, GNOMELOCALEDIR);
+	bind_textdomain_codeset (PACKAGE, "UTF-8");
 	textdomain (PACKAGE);
 
 	gnome_program_init (argv[0], VERSION, LIBGNOMEUI_MODULE, argc, argv,

@@ -49,6 +49,7 @@ main (int argc, char **argv)
 	GtkObject *dialog;
 
         bindtextdomain (PACKAGE, GNOMELOCALEDIR);
+	bind_textdomain_codeset (PACKAGE, "UTF-8");
         textdomain (PACKAGE);
 
 	gnomelib_register_popt_table (rollback_options,

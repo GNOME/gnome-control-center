@@ -316,6 +316,7 @@ main (int argc, char **argv)
 	free (malloc (1));
 
         bindtextdomain (PACKAGE, GNOMELOCALEDIR);
+	bind_textdomain_codeset (PACKAGE, "UTF-8");
         textdomain (PACKAGE);
 
 	gnomelib_register_popt_table (global_options, 

@@ -431,9 +431,8 @@ int main(int argc, char *argv[])
     mcheck(mcheck_out);
 #endif
 
-    /* first set up our locale info for gettext. */
-    setlocale(LC_ALL, "");
     bindtextdomain (PACKAGE, GNOMELOCALEDIR);
+    bind_textdomain_codeset (PACKAGE, "UTF-8");
     textdomain (PACKAGE);
 
     if (geteuid() != 0) {

@@ -201,6 +201,7 @@ main (int argc, char **argv)
 	gchar *restart_args[3];
 
 	bindtextdomain (PACKAGE, GNOMELOCALEDIR);
+	bind_textdomain_codeset (PACKAGE, "UTF-8");
 	textdomain (PACKAGE);
 
 	glade_gnome_init ();
