@@ -30,11 +30,11 @@ struct _GnomeWindowManagerClass
 {
   GObjectClass klass;
 
-  void         (*set_theme)               (const char *theme_name);
-  GList *      (*get_theme_list)          (void);
-  void         (*set_font)                (const char *font);
-  void         (*set_focus_follows_mouse) (gboolean focus_follows_mouse);
-
+  void         (*set_theme)               (GnomeWindowManager *wm, const char *theme_name);
+  GList *      (*get_theme_list)          (GnomeWindowManager *wm);
+  void         (*set_font)                (GnomeWindowManager *wm, const char *font);
+  void         (*set_focus_follows_mouse) (GnomeWindowManager *wm, gboolean focus_follows_mouse);
+  char *       (*get_user_theme_folder)   (GnomeWindowManager *wm);
 };
 
 
@@ -48,6 +48,7 @@ void              gnome_window_manager_set_theme                (GnomeWindowMana
 GList *           gnome_window_manager_get_theme_list           (GnomeWindowManager *wm);
 void              gnome_window_manager_set_font                 (GnomeWindowManager *wm, const char *font);
 void              gnome_window_manager_set_focus_follows_mouse  (GnomeWindowManager *wm, gboolean focus_follows_mouse);
+char *            gnome_window_manager_get_user_theme_folder    (GnomeWindowManager *wm);
 
 G_END_DECLS
 

@@ -7,6 +7,8 @@
 #define METACITY_THEME_KEY "/apps/metacity/general/theme"
 #define METACITY_FONT_KEY  "/apps/metacity/general/titlebar_font"
 #define METACITY_FOCUS_KEY "/apps/metacity/general/focus_mode"
+#define METACITY_USE_SYSTEM_FONT_KEY "/apps/metacity/titlebar_uses_system_font"
+
 static GnomeWindowManagerClass *parent_class;
 
 struct _MetacityWindowManagerPrivate {
@@ -24,7 +26,7 @@ window_manager_new (void)
 }
 
 static void     
-metacity_set_theme (const char *theme_name)
+metacity_set_theme (GnomeWindowManager *wm, const char *theme_name)
 {
   gconf_client_set_string (gconf_client_get_default (),
 			   METACITY_THEME_KEY,
@@ -39,6 +41,10 @@ add_themes_from_dir (GList *current_list, const char *path)
   char *theme_file_path;
   GList *node;
   gboolean found = FALSE;
+
+  if (!(g_file_test (path, G_FILE_TEST_EXISTS) && g_file_test (path, G_FILE_TEST_IS_DIR))) {
+    return current_list;
+  }
 
   theme_dir = opendir (path);
 
@@ -66,7 +72,7 @@ add_themes_from_dir (GList *current_list, const char *path)
 }
 
 static GList *  
-metacity_get_theme_list (void)
+metacity_get_theme_list (GnomeWindowManager *wm)
 {
   GList *themes = NULL;
   char *home_dir_themes;
@@ -83,15 +89,18 @@ metacity_get_theme_list (void)
 }
 
 static void     
-metacity_set_font (const char *font)
+metacity_set_font (GnomeWindowManager *wm, const char *font)
 {
-  gconf_client_set_string (gconf_client_get_default (),
-			   METACITY_FONT_KEY,
-			   font, NULL);
+  GConfClient *client;
+
+  client = gconf_client_get_default ();
+
+  gconf_client_set_bool (client, METACITY_USE_SYSTEM_FONT_KEY, FALSE, NULL);
+  gconf_client_set_string (client, METACITY_FONT_KEY, font, NULL);
 }
 
 static void     
-metacity_set_focus_follows_mouse (gboolean focus_follows_mouse)
+metacity_set_focus_follows_mouse (GnomeWindowManager *wm, gboolean focus_follows_mouse)
 {
   const char *focus_mode;
 
@@ -106,6 +115,11 @@ metacity_set_focus_follows_mouse (gboolean focus_follows_mouse)
 			   focus_mode, NULL);
 }
 
+static char *
+metacity_get_user_theme_folder (GnomeWindowManager *wm)
+{
+  return g_build_filename (g_get_home_dir (), ".metacity/themes", NULL);
+}
 
 static void
 metacity_window_manager_init (MetacityWindowManager *metacity_window_manager, MetacityWindowManagerClass *class)
@@ -144,6 +158,7 @@ metacity_window_manager_class_init (MetacityWindowManagerClass *class)
 	wm_class->get_theme_list          = metacity_get_theme_list;
 	wm_class->set_font                = metacity_set_font;
 	wm_class->set_focus_follows_mouse = metacity_set_focus_follows_mouse;
+	wm_class->get_user_theme_folder   = metacity_get_user_theme_folder;
 
 	parent_class = g_type_class_peek_parent (class);
 }

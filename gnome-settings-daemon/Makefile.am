@@ -41,9 +41,10 @@ gnome_settings_daemon_SOURCES =	\
 #	$(AccessX_files)		
 
 gnome_settings_daemon_LDADD = \
-	$(GNOME_SETTINGS_DAEMON_LIBS)			\
-	$(top_builddir)/libbackground/libbackground.la	\
-	$(top_builddir)/libsounds/libsounds.a		\
+	$(GNOME_SETTINGS_DAEMON_LIBS)					\
+	$(top_builddir)/libbackground/libbackground.la			\
+	$(top_builddir)/libsounds/libsounds.a				\
+	-L$(top_builddir)/libwindow-settings/ -lgnome-window-settings 	\
 	$(XF86MISC_LIBS)
 
 #AccessX_files = \

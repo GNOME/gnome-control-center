@@ -1,6 +1,9 @@
 bin_PROGRAMS = gnome-theme-properties
 
-gnome_theme_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
+gnome_theme_properties_LDADD = 						\
+	$(GNOMECC_CAPPLETS_LIBS) 					\
+	-L$(top_builddir)/libwindow-settings/ -lgnome-window-settings
+
 gnome_theme_properties_SOURCES = \
 	theme-switcher.c
 gnome_theme_properties_LDFLAGS = -export-dynamic
@@ -14,7 +17,8 @@ desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 gladedir = $(GNOMECC_GLADE_DIR)
 glade_DATA = theme-properties.glade theme-install.glade
 
-INCLUDES   = \
+INCLUDES   = 				\
+	-I$(top_srcdir)			\
 	$(GNOMECC_CAPPLETS_CFLAGS)	\
 	-DGLADEDIR=\""$(gladedir)"\"
 

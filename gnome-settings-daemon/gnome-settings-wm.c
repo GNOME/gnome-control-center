@@ -5,6 +5,8 @@
 #include <gdk/gdkx.h>
 #include <string.h>
 
+#include <libwindow-settings/gnome-wm-manager.h>
+
 static void
 set_number_of_workspaces (int workspaces)
 {
@@ -61,6 +63,8 @@ set_workspace_names (GSList *values)
 static void
 wm_callback (GConfEntry *entry)
 {
+        GnomeWindowManager *wm;
+
 	if (!strcmp (entry->key, "/desktop/gnome/applications/window_manager/number_of_workspaces")) {
 		if (entry->value->type == GCONF_VALUE_INT)
 			set_number_of_workspaces (gconf_value_get_int (entry->value));
@@ -70,11 +74,26 @@ wm_callback (GConfEntry *entry)
 		    gconf_value_get_list_type (entry->value) == GCONF_VALUE_STRING)
 			set_workspace_names (gconf_value_get_list (entry->value));
 	}
+	else if (!strcmp (entry->key, "/desktop/gnome/applications/window_manager/theme")) {
+	  wm = gnome_wm_manager_get_current ();
+	  if (wm != NULL) {
+	    gnome_window_manager_set_theme (wm, gconf_value_get_string (entry->value));
+	  }
+	}
+	else if (!strcmp (entry->key, "/desktop/gnome/applications/window_manager/titlebar_font")) {
+	  wm = gnome_wm_manager_get_current ();
+	  gnome_window_manager_set_font (wm, gconf_value_get_string (entry->value));
+	}
+	else if (!strcmp (entry->key, "/desktop/gnome/applications/window_manager/focus_follows_mouse")) {
+	  wm = gnome_wm_manager_get_current ();
+	  gnome_window_manager_set_focus_follows_mouse (wm, gconf_value_get_bool (entry->value));
+	}
 }
 
 void
 gnome_settings_wm_init (GConfClient *client)
 {
+        gnome_wm_manager_init (NULL);
 	gnome_settings_daemon_register_callback ("/desktop/gnome/applications/window_manager", wm_callback);
 }
 

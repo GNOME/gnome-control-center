@@ -20,14 +20,14 @@
 #include "activate-settings-daemon.h"
 #include "gconf-property-editor.h"
 
-
 #ifdef HAVE_XFT2
 static void cb_show_details (GtkWidget *button,
 			     GtkWindow *parent);
 #endif /* HAVE_XFT2 */
 
-#define GTK_FONT_KEY "/desktop/gnome/interface/font_name"
-#define DESKTOP_FONT_KEY "/apps/nautilus/preferences/desktop_font"
+#define GTK_FONT_KEY           "/desktop/gnome/interface/font_name"
+#define DESKTOP_FONT_KEY       "/apps/nautilus/preferences/desktop_font"
+#define WINDOW_TITLE_FONT_KEY  "/desktop/gnome/applications/window_manager/titlebar_font"
 
 #ifdef HAVE_XFT2
 #define FONT_RENDER_DIR "/desktop/gnome/font_rendering"
@@ -419,6 +419,10 @@ setup_dialog (GladeXML *dialog)
 
   peditor = gconf_peditor_new_font (NULL, DESKTOP_FONT_KEY,
 		  		    WID ("desktop_font"),
+				    PEDITOR_FONT_COMBINED, NULL);
+
+  peditor = gconf_peditor_new_font (NULL, WINDOW_TITLE_FONT_KEY,
+		  		    WID ("window_title_font"),
 				    PEDITOR_FONT_COMBINED, NULL);
 
   widget = WID ("font_dialog");

@@ -62,28 +62,35 @@ void
 gnome_window_manager_set_theme (GnomeWindowManager *wm, const char *theme_name)
 {
   GnomeWindowManagerClass *klass = GNOME_WINDOW_MANAGER_GET_CLASS (wm);
-  klass->set_theme (theme_name);
+  klass->set_theme (wm, theme_name);
 }
 
 GList *
 gnome_window_manager_get_theme_list (GnomeWindowManager *wm)
 {
   GnomeWindowManagerClass *klass = GNOME_WINDOW_MANAGER_GET_CLASS (wm);
-  return klass->get_theme_list ();
+  return klass->get_theme_list (wm);
 }
 
 void
 gnome_window_manager_set_font (GnomeWindowManager *wm, const char *font)
 {
   GnomeWindowManagerClass *klass = GNOME_WINDOW_MANAGER_GET_CLASS (wm);
-  klass->set_font (font);
+  klass->set_font (wm, font);
 }
 
 void         
 gnome_window_manager_set_focus_follows_mouse (GnomeWindowManager *wm, gboolean focus_follows_mouse)
 {
   GnomeWindowManagerClass *klass = GNOME_WINDOW_MANAGER_GET_CLASS (wm);
-  klass->set_focus_follows_mouse (focus_follows_mouse);
+  klass->set_focus_follows_mouse (wm, focus_follows_mouse);
+}
+
+char *
+gnome_window_manager_get_user_theme_folder (GnomeWindowManager *wm)
+{
+  GnomeWindowManagerClass *klass = GNOME_WINDOW_MANAGER_GET_CLASS (wm);
+  return klass->get_user_theme_folder (wm);
 }
 
 static void
@@ -123,6 +130,7 @@ gnome_window_manager_class_init (GnomeWindowManagerClass *class)
 	wm_class->get_theme_list          = NULL;
 	wm_class->set_font                = NULL;
 	wm_class->set_focus_follows_mouse = NULL;
+	wm_class->get_user_theme_folder   = NULL;
 
 	parent_class = g_type_class_peek_parent (class);
 }
