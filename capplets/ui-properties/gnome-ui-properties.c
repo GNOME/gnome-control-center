@@ -231,6 +231,9 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
     G_CALLBACK (toolbar_detachable_cb), dialog);
 
   peditor = gconf_peditor_new_boolean
+    (changeset, "/desktop/gnome/interface/can_change_accels", WID ("menu_accel_toggle"), NULL);
+
+  peditor = gconf_peditor_new_boolean
     (changeset, "/desktop/gnome/interface/menus_have_icons", WID ("menu_icons_toggle"), NULL);
   g_signal_connect (peditor,
     "value_changed",
