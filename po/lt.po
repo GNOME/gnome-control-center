@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-21 09:17+0200\n"
-"PO-Revision-Date: 2005-01-21 09:24+0200\n"
+"POT-Creation-Date: 2005-02-01 00:48+0200\n"
+"PO-Revision-Date: 2005-02-01 00:49+0200\n"
 "Last-Translator: Žygimantas Beručka <uid0@akl.lt>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
 "MIME-Version: 1.0\n"
@@ -1796,7 +1796,12 @@ msgstr "Nežinomas"
 msgid "Layout"
 msgstr "Išdėstymas"
 
+#. The first radio in a group is to be "Default", meaning none of
+#. the below options are to be included in the selected list.
+#. This is a HIG-compliant alternative to allowing no
+#. selection in the group.
 #: capplets/keyboard/gnome-keyboard-properties-xkblt.c:255
+#: capplets/keyboard/gnome-keyboard-properties-xkbot.c:206
 msgid "Default"
 msgstr "Įprastas"
 
@@ -2696,12 +2701,12 @@ msgstr "Žiūrėti kaip valdymo centrą"
 msgid "Others"
 msgstr "Kita"
 
-#: control-center/control-center.c:1005
+#: control-center/control-center.c:1010
 #: control-center/gnomecc.desktop.in.in.h:1
 msgid "GNOME Control Center"
 msgstr "GNOME valdymo centras"
 
-#: control-center/control-center.c:1121
+#: control-center/control-center.c:1126
 msgid "Desktop Preferences"
 msgstr "Darbastalio nustatymai"
 
@@ -2816,7 +2821,7 @@ msgstr ""
 "Klaida bandant vykdyti (%s),\n"
 "kuris yra susietas su klavišu (%s)"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:96
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:99
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2847,7 +2852,7 @@ msgstr ""
 "- <b>xprop -root | grep XKB</b> rezultatą\n"
 "- <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/xkb</b> rezultatą"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:110
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:113
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2859,7 +2864,7 @@ msgstr ""
 "Pabandykit naudoti paprastesnes konfigūracijas arba gaukit naujesnę XFree "
 "versiją."
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:213
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:216
 msgid ""
 "The X system keyboard settings differ from your current GNOME keyboard "
 "settings.  Which set would you like to use?"
@@ -2867,24 +2872,13 @@ msgstr ""
 "X sistemos klaviatūros nustatymai skiriasi nuo Jūsų dabartinių GNOME "
 "klaviatūros nustatymų.  Kurį rinkinį norite naudoti?"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:216
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:219
 msgid "Use X settings"
 msgstr "Naudoti X serverio nustatymus"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:218
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:221
 msgid "Use GNOME settings"
 msgstr "Naudoti GNOME nustatymus"
-
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:270
-#, c-format
-msgid ""
-"You have a keyboard remapping file (%s) in your home directory whose "
-"contents will now be ignored. You can use the keyboard preferences to "
-"restore them."
-msgstr ""
-"Jūsų namų aplanke yra klaviatūros išdėstymo bylą (%s), kurios turinys dabar "
-"bus ignoruojamas. Jūs galite pasinaudoti klaviatūros nustatymais, kad juos "
-"atstatytumėt."
 
 #: gnome-settings-daemon/gnome-settings-multimedia-keys.c:126
 #, c-format
@@ -3295,44 +3289,48 @@ msgstr ""
 "iš naujo pritaikant xmodmap paremtus reguliavimus"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
+msgid "A list of modmap files available in the $HOME directory."
+msgstr "Modmap bylų prieinamų $HOME aplanke sąrašas."
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
 msgid "Default group, assigned on window creation"
 msgstr "Įprasta grupė, priskiriama sukūrus langą"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
 msgid "Keep and manage separate group per window"
 msgstr "Palikti ir tvarkyti atskirą grupę kiekvienam langui"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
 msgid "Keyboard Update Handlers"
 msgstr "Klaviatūros atnaujinimo valdikliai"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:6
 msgid "Keyboard layout"
 msgstr "Klaviatūros išdėstymas"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:6
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:7
 msgid "Keyboard model"
 msgstr "Klaviatūros modelis"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:7
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:8
 msgid "Keyboard options"
 msgstr "Klaviatūros parinktys"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:8
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:9
 msgid "Keyboard settings in gconf will be overridden from the system ASAP"
 msgstr ""
 "Klaviatūros nustatymai esantys gconf bus perrašyti iš sistemos kiek įmanoma "
 "greičiau"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:9
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:10
 msgid "Save/restore indicators together with layout groups"
 msgstr "Išsaugoti/atstatyti indikatorius kartu su išdėstymų grupėmis"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:10
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:11
 msgid "Show layout names instead of group names"
 msgstr "Rodyti išdėstymų vardus vietoje grupių vardų"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:11
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:12
 msgid ""
 "Show layout names instead of group names (only for versions of XFree "
 "supporting multiple layouts)"
@@ -3340,7 +3338,7 @@ msgstr ""
 "Rodyti išdėstymų vardus vietoje grupių vardų (tik XFree versijoms "
 "palaikančioms keletą išdėstymų)"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:12
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:13
 msgid ""
 "Very soon, keyboard settings in gconf will be overridden (from the system "
 "configuration)"
@@ -3348,13 +3346,17 @@ msgstr ""
 "Labai greitai, klaviatūros nustatymai esantys gconf bus perrašyti (iš "
 "sistemos konfigūracijos)"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:13
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:14
 msgid "keyboard layout"
 msgstr "klaviatūros išdėstymas"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:14
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:15
 msgid "keyboard model"
 msgstr "klaviatūros modelis"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:16
+msgid "modmap file list"
+msgstr "modmap bylų sąrašas"
 
 #: typing-break/drw-break-window.c:209
 msgid "_Postpone break"
@@ -3657,6 +3659,15 @@ msgstr "Ar rodyti įdiegtų temų sumažintus paveiksliukus"
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Ar rodyti mažus temų paveiksliukus"
+
+#~ msgid ""
+#~ "You have a keyboard remapping file (%s) in your home directory whose "
+#~ "contents will now be ignored. You can use the keyboard preferences to "
+#~ "restore them."
+#~ msgstr ""
+#~ "Jūsų namų aplanke yra klaviatūros išdėstymo bylą (%s), kurios turinys "
+#~ "dabar bus ignoruojamas. Jūs galite pasinaudoti klaviatūros nustatymais, "
+#~ "kad juos atstatytumėt."
 
 #~ msgid "A_vailable options:"
 #~ msgstr "_Prieinami nustatymai:"
