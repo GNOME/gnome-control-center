@@ -11,7 +11,7 @@ Glade_DATA = \
 glade_msgs = \
 	ui-properties.glade.h
 
-EXTRA_DIST = ChangeLog $(Applications_DATA) $(Glade_DATA) $(glade_msgs)
+EXTRA_DIST = $(Applications_DATA) $(Glade_DATA) $(glade_msgs)
 
 INCLUDES = \
         -DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\

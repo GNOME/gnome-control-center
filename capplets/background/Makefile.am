@@ -9,7 +9,7 @@ Glade_DATA = \
 glade_msgs = \
 	background-properties.glade.h
 
-EXTRA_DIST = ChangeLog $(Applications_DATA) $(Glade_DATA) $(glade_msgs)
+EXTRA_DIST = $(Applications_DATA) $(Glade_DATA) $(glade_msgs)
 
 INCLUDES = \
         -DGNOMELOCALEDIR=\""$(datadir)/locale"\"	\

@@ -13,12 +13,17 @@ Screensavers_DATA = \
 	qix.xml \
 	attraction.xml
 
-EXTRA_DIST = $(Screensavers_DATA) README
+screensavers_msgs = \
+	ant.xml.h \
+	bsod.xml.h \
+	compass.xml.h \
+	flag.xml.h \
+	qix.xml.h \
+	attraction.xml.h
 
-BUILT_SOURCES = ant.xml.h bsod.xml.h compass.xml.h flag.xml.h \
-		qix.xml.h attraction.xml.h
-		
-noinst_PROGRAMS = extract-labels $(BUILT_SOURCES)
+EXTRA_DIST = $(Screensavers_DATA) $(screensavers_msgs) README
+
+noinst_PROGRAMS = extract-labels
 
 extract_labels_SOURCES = extract-labels.c
 
