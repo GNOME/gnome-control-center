@@ -55,7 +55,9 @@ static TranslationEntry translations [] = {
   { "/desktop/gnome/gtk-toolbar-style", "Gtk/ToolbarStyle", GCONF_VALUE_STRING,
     translate_string_string },
   { "/desktop/gnome/gtk-toolbar-icon-size", "Gtk/ToolbarIconSize", GCONF_VALUE_STRING,
-    translate_string_string }
+    translate_string_string },
+  { "/desktop/gnome/interface/gtk_theme", "Net/ThemeName", GCONF_VALUE_STRING,
+    translate_string_string },
 };
 
 static TranslationEntry*
@@ -154,6 +156,7 @@ gnome_settings_xsettings_init (GConfClient *client)
 {
   gnome_settings_daemon_register_callback ("/desktop/gnome/peripherals/mouse", xsettings_callback);
   gnome_settings_daemon_register_callback ("/desktop/gtk", xsettings_callback);
+  gnome_settings_daemon_register_callback ("/desktop/gnome/interface", xsettings_callback);
 }
 
 void
