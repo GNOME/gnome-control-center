@@ -34,6 +34,8 @@
 #include <X11/Xlib.h>
 #include <gdk/gdkx.h>
 
+#define CP CAPPLET_CONFIG_PREFIX "mouse-properties/"
+
 /* Maximum number of mouse buttons we handle.  */
 #define MAX_BUTTONS 10
 
@@ -60,7 +62,7 @@ apply_settings (Bonobo_ConfigDatabase db)
 
 	CORBA_exception_init (&ev);
 
-        rtol = bonobo_config_get_ulong (db, "/main/right-to-left", &ev);
+        rtol = bonobo_config_get_ulong (db, CP "right-to-left", &ev);
 
         nbuttons = XGetPointerMapping (GDK_DISPLAY (), buttons, MAX_BUTTONS);
 
@@ -80,7 +82,7 @@ apply_settings (Bonobo_ConfigDatabase db)
 
 	CORBA_exception_init (&ev);
 
-        accel = bonobo_config_get_ulong (db, "/main/acceleration", &ev);
+        accel = bonobo_config_get_ulong (db, CP "acceleration", &ev);
 
         if (accel < MAX_ACCEL) {
                 num = 1;
@@ -92,7 +94,7 @@ apply_settings (Bonobo_ConfigDatabase db)
 
 	CORBA_exception_init (&ev);
 
-        threshold = MAX_THRESH - bonobo_config_get_ulong (db, "/main/threshold", &ev);
+        threshold = MAX_THRESH - bonobo_config_get_ulong (db, CP "threshold", &ev);
 
         XChangePointerControl (GDK_DISPLAY (), True, True,
                                num, den, threshold);
@@ -270,9 +272,9 @@ get_legacy_settings (Bonobo_ConfigDatabase db)
 	gboolean val_boolean, def;
 	gulong val_ulong;
 
-	COPY_FROM_LEGACY (boolean, "/main/right-to-left", bool, "/Desktop/Mouse/right-to-left");
-	COPY_FROM_LEGACY (ulong, "/main/acceleration", int, "/Desktop/Mouse/aceleration=4");
-	COPY_FROM_LEGACY (ulong, "/main/threshold", int, "/Desktop/Mouse/threshold=4");
+	COPY_FROM_LEGACY (boolean, CP "right-to-left", bool, "/Desktop/Mouse/right-to-left");
+	COPY_FROM_LEGACY (ulong, CP "acceleration", int, "/Desktop/Mouse/aceleration=4");
+	COPY_FROM_LEGACY (ulong, CP "threshold", int, "/Desktop/Mouse/threshold=4");
 }
 
 int
