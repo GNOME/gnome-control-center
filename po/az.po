@@ -6,14 +6,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD\n"
-"POT-Creation-Date: 2004-02-12 15:40+0100\n"
-"PO-Revision-Date: 2004-02-14 15:23+0200\n"
+"POT-Creation-Date: 2004-02-22 14:54+0100\n"
+"PO-Revision-Date: 2004-02-22 19:48+0200\n"
 "Last-Translator: Mətin Əmirov <metin@karegen.com>\n"
 "Language-Team: Azerbaijani Turkish <gnome@azitt.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.0.2\n"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:1
 msgid "<b>Applications</b>"
@@ -81,14 +80,18 @@ msgid "There was an error launching the mouse preferences dialog: %s"
 msgstr "Siçan qurğuları pəncərəsi başlarkən xəta yarandı: %s"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:337
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:395
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:396
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "'%s' faylından AccessX qurğuları idxal edilə bilmədi"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:468
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:433
 msgid "Import Feature Settings File"
 msgstr "Xassə Qurğuları Faylını İdxal Et"
+
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:437
+msgid "_Import"
+msgstr "_İdxal Et"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:18
@@ -294,58 +297,58 @@ msgid "seconds"
 msgstr "saniyə"
 
 #. solid
-#: capplets/background/background-properties-capplet.c:228
+#: capplets/background/background-properties-capplet.c:227
 msgid "Co_lor:"
 msgstr "Rə_ng:"
 
 #. horiz
-#: capplets/background/background-properties-capplet.c:232
+#: capplets/background/background-properties-capplet.c:231
 msgid "_Left color:"
 msgstr "S_oldakı rəng:"
 
-#: capplets/background/background-properties-capplet.c:233
+#: capplets/background/background-properties-capplet.c:232
 msgid "_Right color:"
 msgstr "_Sağdakı rəng:"
 
 #. vert
-#: capplets/background/background-properties-capplet.c:236
+#: capplets/background/background-properties-capplet.c:235
 msgid "Top co_lor:"
 msgstr "Ü_stdəki rəng:"
 
-#: capplets/background/background-properties-capplet.c:237
+#: capplets/background/background-properties-capplet.c:236
 msgid "_Bottom color:"
 msgstr "_Altdakı rəng:"
 
-#: capplets/background/background-properties-capplet.c:398
+#: capplets/background/background-properties-capplet.c:397
 msgid "_Tile"
 msgstr "_Döşə"
 
-#: capplets/background/background-properties-capplet.c:398
+#: capplets/background/background-properties-capplet.c:397
 msgid "C_enter"
 msgstr "O_rtala"
 
-#: capplets/background/background-properties-capplet.c:398
+#: capplets/background/background-properties-capplet.c:397
 msgid "Sc_ale"
 msgstr "_Miqyaslandır"
 
-#: capplets/background/background-properties-capplet.c:398
+#: capplets/background/background-properties-capplet.c:397
 msgid "_Stretch"
 msgstr "_Uzat"
 
-#: capplets/background/background-properties-capplet.c:398
+#: capplets/background/background-properties-capplet.c:397
 msgid "_No Picture"
 msgstr "_Rəsmsiz"
 
-#: capplets/background/background-properties-capplet.c:559
+#: capplets/background/background-properties-capplet.c:558
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:730
+#: capplets/default-applications/gnome-default-applications-properties.c:723
 #: capplets/keyboard/gnome-keyboard-properties.c:224
 #: capplets/mouse/gnome-mouse-properties.c:812
 #: capplets/sound/sound-properties-capplet.c:212
 msgid "Retrieve and store legacy settings"
 msgstr "Miras qurğularını al və saxla"
 
-#: capplets/background/background-properties-capplet.c:585
+#: capplets/background/background-properties-capplet.c:584
 #: capplets/background/background-properties.glade.h:2
 msgid "Background Preferences"
 msgstr "Arxa plan Xassələri"
@@ -363,6 +366,7 @@ msgid "Horizontal gradient"
 msgstr "Üfüqi Qradient"
 
 #: capplets/background/background-properties.glade.h:5
+#: capplets/background/gnome-background-properties.glade.h:4
 msgid "Pick a color"
 msgstr "Rəng seç"
 
@@ -418,10 +422,6 @@ msgstr "<b>_Masa Üstü Rəngləri</b> "
 msgid "Desktop Background Preferences"
 msgstr "Masa Üstü Arxa Planı Seçimləri"
 
-#: capplets/background/gnome-background-properties.glade.h:4
-msgid "Zgjidh një ngjyrë"
-msgstr "Ay balam bu nədir?"
-
 #: capplets/background/gnome-background-properties.glade.h:5
 msgid "_Add Wallpaper"
 msgstr "Divar Kağızı Ə_lavə Et"
@@ -432,6 +432,7 @@ msgstr "_Tərz:"
 
 #: capplets/background/gnome-wp-capplet.c:72
 #: capplets/common/capplet-util.c:340
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:326
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "Yardımın göstərilməsi sırasında xəta oldu: %s"
@@ -560,71 +561,71 @@ msgstr "Bağlanılır..."
 msgid "Downloading..."
 msgstr "Endirilir..."
 
-#: capplets/common/gconf-property-editor.c:172
+#: capplets/common/gconf-property-editor.c:170
 msgid "Key"
 msgstr "Açar"
 
-#: capplets/common/gconf-property-editor.c:173
+#: capplets/common/gconf-property-editor.c:171
 msgid "GConf key to which this property editor is attached"
 msgstr "Bu üstünlük editorunun ilişdirildiyi GConf açarı"
 
-#: capplets/common/gconf-property-editor.c:179
+#: capplets/common/gconf-property-editor.c:177
 msgid "Callback"
 msgstr "Geri axtarma"
 
-#: capplets/common/gconf-property-editor.c:180
+#: capplets/common/gconf-property-editor.c:178
 msgid "Issue this callback when the value associated with key gets changed"
 msgstr "Açar ilə əlaqələndirilmiş qiymət dəyişəndə bu geri çağırışı yay"
 
-#: capplets/common/gconf-property-editor.c:185
+#: capplets/common/gconf-property-editor.c:183
 msgid "Change set"
 msgstr "Dəstəni Dəyişdir"
 
-#: capplets/common/gconf-property-editor.c:186
+#: capplets/common/gconf-property-editor.c:184
 msgid "GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr "Tədbiq ediləndə gconf alıcısına istiqamətləndiriləcək mə'lumatı daxil edən GConf Dəyişmə dəsti"
 
-#: capplets/common/gconf-property-editor.c:191
+#: capplets/common/gconf-property-editor.c:189
 msgid "Conversion to widget callback"
 msgstr "Widget geri çağırışına çeviriş"
 
-#: capplets/common/gconf-property-editor.c:192
+#: capplets/common/gconf-property-editor.c:190
 msgid "Callback to be issued when data are to be converted from GConf to the widget"
 msgstr "Mə'lumat GConf'dan widget'ə dönüşdürüləndə yaradılacaq geri çağırış"
 
-#: capplets/common/gconf-property-editor.c:197
+#: capplets/common/gconf-property-editor.c:195
 msgid "Conversion from widget callback"
 msgstr "Widget geri çağırışından çeviriş"
 
-#: capplets/common/gconf-property-editor.c:198
+#: capplets/common/gconf-property-editor.c:196
 msgid "Callback to be issued when data are to be converted to GConf from the widget"
 msgstr "Mə'lumat widget'dən GConf'a dönüşdürüləcəksə yaradılacaq geri çağırış"
 
-#: capplets/common/gconf-property-editor.c:203
+#: capplets/common/gconf-property-editor.c:201
 msgid "UI Control"
 msgstr "UI İdarəsi"
 
-#: capplets/common/gconf-property-editor.c:204
+#: capplets/common/gconf-property-editor.c:202
 msgid "Object that controls the property (normally a widget)"
 msgstr "Üstünlüyü idarə edən cism (normal halda pəncərəcik)"
 
-#: capplets/common/gconf-property-editor.c:219
+#: capplets/common/gconf-property-editor.c:217
 msgid "Property editor object data"
 msgstr "Xassə editoru obyekt verilənləri"
 
-#: capplets/common/gconf-property-editor.c:220
+#: capplets/common/gconf-property-editor.c:218
 msgid "Custom data required by the specific property editor"
 msgstr "Spesifik xassə editoru tərəfindən xüsusi mə'lumat məcburi qılınıb"
 
-#: capplets/common/gconf-property-editor.c:226
+#: capplets/common/gconf-property-editor.c:224
 msgid "Property editor data freeing callback"
 msgstr "Geri çağırışı boşaldan xassə editoru mə'lumatı"
 
-#: capplets/common/gconf-property-editor.c:227
+#: capplets/common/gconf-property-editor.c:225
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr "Xassə editoru mə'lumatı boşaldılanda yaradılacaq geri çağırış"
 
-#: capplets/common/gconf-property-editor.c:1541
+#: capplets/common/gconf-property-editor.c:1538
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -635,7 +636,7 @@ msgstr ""
 "\n"
 "Xahiş edirik, onun mövcud olduğundan əmin olun və yenidən sınayın, ya da başqa arxa plan rəsmi seçin."
 
-#: capplets/common/gconf-property-editor.c:1549
+#: capplets/common/gconf-property-editor.c:1546
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -648,9 +649,13 @@ msgstr ""
 "\n"
 "Xahiş edirik, onun yerinə başqa rəsm seçin."
 
-#: capplets/common/gconf-property-editor.c:1640
+#: capplets/common/gconf-property-editor.c:1665
 msgid "Please select an image."
 msgstr "Xahiş edirik, bir rəsm seçin."
+
+#: capplets/common/gconf-property-editor.c:1670
+msgid "_Select"
+msgstr "_Seç"
 
 #: capplets/default-applications/default-applications.desktop.in.h:1
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:18
@@ -661,35 +666,44 @@ msgstr "Ön Qurğulu Proqramlar"
 msgid "Select your default applications"
 msgstr "Əsas proqramlarınızı seçin"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:39
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:9
 msgid "Epiphany"
 msgstr "Epiphany"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:40
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:10
 msgid "Galeon"
 msgstr "Galeon"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:41
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:11
 msgid "Encompass"
 msgstr "Encompass"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:42
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:12
+msgid "Firebird/FireFox"
+msgstr "Firebird/FireFox"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:13
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:14
 msgid "Mozilla/Netscape 6"
 msgstr "Mozilla/Netscape 6"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:43
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:15
 msgid "Netscape Communicator"
 msgstr "Netscape Communicator"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:44
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:16
 msgid "Konqueror"
 msgstr "Konqueror"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:45
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:17
+msgid "W3M Text Browser"
+msgstr "W3M Mətn Səyyahı"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:18
 msgid "Lynx Text Browser"
 msgstr "Lynx Mətn Səyyahı"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:46
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:19
 msgid "Links Text Browser"
 msgstr "Links Mətn Səyyahı"
 
@@ -697,44 +711,44 @@ msgstr "Links Mətn Səyyahı"
 #. * there is only one (the first entry in this list) Evolution entry
 #. * in the list shown to the user
 #.
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:55
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:56
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:34
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:35
 msgid "Evolution Mail Reader"
 msgstr "Evolution Poçt Oxuyucusu"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:57
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:36
 msgid "Balsa"
 msgstr "Balsa"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:58
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:37
 msgid "KMail"
 msgstr "KMail"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:59
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:38
 msgid "Mozilla Mail"
 msgstr "Mozilla Mail"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:60
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:39
 msgid "Mutt"
 msgstr "Mutt"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:66
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:50
 msgid "Gnome Terminal"
 msgstr "Gnome Terminalı"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:67
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:51
 msgid "Standard XTerminal"
 msgstr "Standart XTerminalı"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:68
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:52
 msgid "NXterm"
 msgstr "NXterm"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:69
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:53
 msgid "RXVT"
 msgstr "RXVT"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:70
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:54
 msgid "ETerm"
 msgstr "ETerm"
 
@@ -1027,47 +1041,51 @@ msgstr "Əsas Qurğular"
 msgid "Screen %d Settings\n"
 msgstr "Ekran %d Qurğuları\n"
 
-#: capplets/display/main.c:444
+#: capplets/display/main.c:445
 msgid "Screen Resolution Preferences"
 msgstr "Ekran Həlledilirliyi Qurğuları"
 
-#: capplets/display/main.c:476
+#: capplets/display/main.c:482
 #, c-format
 msgid "_Make default for this computer (%s) only"
 msgstr "Sadəcə olaraq bu _kompüter (%s) üçün ön qurğulu qəbul et"
 
-#: capplets/display/main.c:494
+#: capplets/display/main.c:500
 msgid "Options"
 msgstr "Seçənəklər"
 
-#: capplets/display/main.c:515
-#: capplets/display/main.c:564
+#: capplets/display/main.c:521
+#: capplets/display/main.c:570
 #, c-format
 msgid "Do you want to keep this resolution?"
 msgstr "Bu həlledilirliyi saxlamaq istəyirsiniz?"
 
-#: capplets/display/main.c:589
+#: capplets/display/main.c:595
 msgid "Use _previous resolution"
 msgstr "Ə_vvəlki həlledilirliyi istifadə et"
 
-#: capplets/display/main.c:589
+#: capplets/display/main.c:595
 msgid "_Keep resolution"
 msgstr "Həllediciliyi _qeyd et"
 
-#: capplets/display/main.c:740
+#: capplets/display/main.c:746
 msgid "The XServer does not support the XRandR extension.  Runtime resolution changes to the display size are not available."
 msgstr "Xverici XRandR uzantısını dəstəkləmir. Canlı həlledilirlik dəyişmələri təəssüf ki mövcud deyil."
 
-#: capplets/display/main.c:748
+#: capplets/display/main.c:754
 msgid "The version of the XRandR extension is incompatible with this program. Runtime changes to the display size are not available."
 msgstr "XRandR buraxılışı bu proqram ilə uyğun gəlmir. Canlı həlledilirlik dəyişmələri təəssüf ki mövcud deyil."
 
-#: capplets/file-types/file-types-capplet.c:196
+#: capplets/file-types/file-types-capplet.c:158
+msgid "Are you sure you want to permanently delete this entry?"
+msgstr "Bu qirişi həmişəlik silmək istəyirsiniz?"
+
+#: capplets/file-types/file-types-capplet.c:210
 #: vfs-methods/themus/themus-properties-view.c:163
 msgid "Description"
 msgstr "İzah"
 
-#: capplets/file-types/file-types-capplet.c:218
+#: capplets/file-types/file-types-capplet.c:232
 msgid "Extensions"
 msgstr "Uzantılar"
 
@@ -1245,7 +1263,7 @@ msgid "Add File Type"
 msgstr "Fayl Növünü Əlavə Et"
 
 #: capplets/file-types/mime-edit-dialog.c:432
-#: capplets/file-types/mime-type-info.c:674
+#: capplets/file-types/mime-type-info.c:763
 msgid "Misc"
 msgstr "Müxtə'lif"
 
@@ -1271,20 +1289,20 @@ msgstr "Kateqoriya"
 msgid "Choose a file category"
 msgstr "Bir fayl kateqoriyası seçin"
 
-#: capplets/file-types/mime-type-info.c:602
+#: capplets/file-types/mime-type-info.c:691
 #, c-format
 msgid "View as %s"
 msgstr "%s olaraq göstər"
 
-#: capplets/file-types/mime-type-info.c:668
+#: capplets/file-types/mime-type-info.c:757
 msgid "Images"
 msgstr "Rəsmlər"
 
-#: capplets/file-types/mime-type-info.c:670
+#: capplets/file-types/mime-type-info.c:759
 msgid "Video"
 msgstr "Video"
 
-#: capplets/file-types/mime-type-info.c:672
+#: capplets/file-types/mime-type-info.c:761
 msgid "Audio"
 msgstr "Audio"
 
@@ -1536,7 +1554,7 @@ msgstr "Yüksəldicinin növü."
 #: capplets/keybindings/eggcellrendererkeys.c:240
 #: capplets/keybindings/gnome-keybinding-properties.c:235
 #: libbackground/applier.c:588
-#: typing-break/drwright.c:464
+#: typing-break/drwright.c:473
 msgid "Disabled"
 msgstr "Bağlı"
 
@@ -1565,7 +1583,7 @@ msgstr "Masa Üstü"
 msgid "Window Management"
 msgstr "Pəncərə İdarəsi"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:737
+#: capplets/keybindings/gnome-keybinding-properties.c:736
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1574,25 +1592,25 @@ msgstr ""
 "\"%s\" qısa yolu hazırda bu gedişat üçün istifadə edilir:\n"
 " \"%s\"\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:768
+#: capplets/keybindings/gnome-keybinding-properties.c:766
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Quğu databeyzində yeni sür'ətləndirici tə'yin etmə xətası: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:818
+#: capplets/keybindings/gnome-keybinding-properties.c:812
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "Quğu databeyzindən sür'ətləndirici silmə xətası: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:967
+#: capplets/keybindings/gnome-keybinding-properties.c:960
 msgid "Unable to find any keyboard themes.  This means your GTK+ installation has been incompletely installed."
 msgstr "Heç bir klaviatura örtüyü tapılmadı. Bu, GTK+ qurulumunuz tam yerinə gətirilməyib deməkdir."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:989
+#: capplets/keybindings/gnome-keybinding-properties.c:982
 msgid "Action"
 msgstr "Gedişat"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:1013
+#: capplets/keybindings/gnome-keybinding-properties.c:1006
 msgid "Shortcut"
 msgstr "Qısa yol"
 
@@ -2487,42 +2505,41 @@ msgstr "Nautilus fəaliyyətdədirsə belə qabığı işlət"
 msgid "Could not initialize Bonobo"
 msgstr "Bonobo başladıla bilmir"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:325
-msgid "There was an error displaying help:"
-msgstr "Yardımın göstərilməsi sırasında xəta oldu:"
-
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:410
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
 msgid "Slow Keys Alert"
 msgstr "Yavaş Düymələr Xəbərdarlığı"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
 msgid "You just held down the Shift key for 8 seconds.  This is the shortcut for the Slow Keys feature, which affects the way your keyboard works."
 msgstr "Az öncə Shift düyməsinə basıb 8 saniyə saxladınız.  Bu Yavaş Düymələr xassəsini fəallaşdırar, bu da klaviaturanızın işləmə tərzini dəyişdirər."
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
 msgid "Do you want to activate Slow Keys?"
 msgstr "Yavaş Düymələri fəallaşdırmaq istəyirsiniz?"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
-msgid "Do you want to deactivate Sticky Keys?"
-msgstr "Yapışqan Düymələri qeyri-fəallaşdırmaq istəyirsiniz?"
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:414
+msgid "Do you want to deactivate Slow Keys?"
+msgstr "Yavaş Düymələri qeyri-fəallaşdırmaq istəyirsiniz?"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:424
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:425
 msgid "Sticky Keys Alert"
 msgstr "Yapışqan Düymələr Xəbərdarlığı"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:425
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
 msgid "You just pressed the Shift key 5 times in a row.  This is the shortcut for the Sticky Keys feature, which affects the way your keyboard works."
 msgstr "Az öncə Shift düyməsinə arxa arxaya 5 dəfə basdınız.  Bu Yapışqan Düymələr xassəsini fəallaşdırar, bu da klaviaturanızın işləmə tərzini dəyişdirər."
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
 msgid "You just pressed two keys at once, or pressed the Shift key 5 times in a row.  This turns off the Sticky Keys feature, which affects the way your keyboard works."
 msgstr "Az öncə iki düyməyə bərabər ya da Shift düyməsinə arxa arxaya 5 dəfə basdınız.  Bu Yapışqan Düymələr xassəsini fəallaşdırar, bu da klaviaturanızın işləmə tərzini dəyişdirər."
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
 msgid "Do you want to activate Sticky Keys?"
 msgstr "Yapışqan Düymələri fəallaşdırmaq istəyirsiniz?"
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:429
+msgid "Do you want to deactivate Sticky Keys?"
+msgstr "Yapışqan Düymələri qeyri-fəallaşdırmaq istəyirsiniz?"
 
 #: gnome-settings-daemon/gnome-settings-font.c:102
 #, c-format
@@ -2678,14 +2695,6 @@ msgstr "Ekran"
 msgid "Screen on which BGApplier is to draw"
 msgstr "BGApplier'in göstəriləcəyi ekran"
 
-#: libbackground/preview-file-selection.c:207
-msgid "Can't find an hbox, using a normal file selection"
-msgstr "hbox tapıla bilmir, normal fayl seçkisini işlədirəm"
-
-#: libbackground/preview-file-selection.c:212
-msgid "Preview"
-msgstr "Nümayiş"
-
 #: libsounds/sound-view.c:121
 #: libsounds/sound-view.c:146
 msgid "The sound file for this event does not exist."
@@ -2819,63 +2828,63 @@ msgstr "XKB seçimləri"
 msgid "XKB settings in gconf will be overridden from the system ASAP"
 msgstr "Gconf-dakı XKB qurğuları tezliklə sisteminkilərlə əvəz ediləcəkdir"
 
-#: typing-break/drw-break-window.c:189
+#: typing-break/drw-break-window.c:191
 msgid "_Postpone break"
 msgstr "Fasiləni _tə'xirə sal"
 
-#: typing-break/drw-break-window.c:227
+#: typing-break/drw-break-window.c:239
 msgid "Take a break!"
 msgstr "Fasilə ver!"
 
 #. { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
-#: typing-break/drwright.c:135
+#: typing-break/drwright.c:136
 msgid "/_Preferences"
 msgstr "/_Seçimlər"
 
-#: typing-break/drwright.c:136
+#: typing-break/drwright.c:137
 msgid "/_About"
 msgstr "/_Haqqında"
 
-#: typing-break/drwright.c:138
+#: typing-break/drwright.c:139
 msgid "/_Take a Break"
 msgstr "/_Fasilə Ver"
 
-#: typing-break/drwright.c:482
-#: typing-break/drwright.c:486
+#: typing-break/drwright.c:491
+#: typing-break/drwright.c:495
 #, c-format
 msgid "Less than one minute until the next break"
 msgstr "Növbəti fasiləyə bir dəqiqədən az vaxt qalıb"
 
-#: typing-break/drwright.c:581
+#: typing-break/drwright.c:590
 #, c-format
 msgid "Unable to bring up the typing break properties dialog with the following error: %s"
 msgstr "Yazma fasiləsi xassələri dialoqu göstərilə bilmədi. Xəta: %s"
 
-#: typing-break/drwright.c:621
+#: typing-break/drwright.c:638
 msgid "About GNOME Typing Monitor"
 msgstr "GNOME Yazma İzləyicisi Haqqında"
 
-#: typing-break/drwright.c:645
+#: typing-break/drwright.c:662
 msgid "A computer break reminder."
 msgstr "Kopüter fasiləsini yada salan tə'minat."
 
-#: typing-break/drwright.c:646
+#: typing-break/drwright.c:663
 msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
 msgstr "Richard Hult &lt;richard@imendio.com&gt; tərəfindən yazılıb"
 
-#: typing-break/drwright.c:647
+#: typing-break/drwright.c:664
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Qrafika Anders Carlsson tərəfindən əlavə edilib"
 
-#: typing-break/drwright.c:820
+#: typing-break/drwright.c:839
 msgid "Break reminder"
 msgstr "Fasilə yada salıcı"
 
-#: typing-break/main.c:94
+#: typing-break/main.c:93
 msgid "The typing monitor is already running."
 msgstr "Yazma izləyicisi onsuzda fəaliyyətdədir."
 
-#: typing-break/main.c:107
+#: typing-break/main.c:106
 msgid "The typing monitor uses the notification area to display information. You don't seem to have a notification area on your panel. You can add it by right-clicking on your panel and choose 'Add to panel -> Utilities -> Notification area'."
 msgstr "Yazma izləyicisi mə'lumatı göstərmək üçün bildiriş sahəsini istifadə edir. Panelinizdə bildiriş sahəsi appleti mövcud deyil. Onu əlavə etmək üçün panelinizə sağ tıqlayıb 'Panelə Əlavə Et -> Tə'minatlar -> Bildiriş sahəsi' menyusunu seçin."
 
