@@ -880,13 +880,15 @@ renderer_render_wallpaper (Renderer *renderer)
 					(gdouble) renderer->pwidth;
 				scaley = (gdouble) renderer->wheight / 
 					(gdouble) renderer->pheight;
+				g_message ("Scaling by %f %f", scalex, scaley);
 				gdk_pixbuf_scale 
 					(renderer->wallpaper_pixbuf,
 					 renderer->pixbuf,
 					 renderer->wx, renderer->wy,
-					 renderer->wwidth, 
-					 renderer->wheight,
-					 renderer->wx, renderer->wy,
+					 MIN (renderer->wwidth, renderer->width), 
+					 MIN (renderer->wheight, renderer->height),
+					 renderer->wx - renderer->srcx,
+					 renderer->wy - renderer->srcy,
 					 scalex, scaley,
 					 GDK_INTERP_BILINEAR);
 			} else {
@@ -912,8 +914,9 @@ renderer_render_wallpaper (Renderer *renderer)
 			if (render_gradient_p (renderer, renderer->prefs)) {
 				gdk_pixbuf_copy_area
 					(renderer->wallpaper_pixbuf,
-					 0, 0, 
-					 renderer->pwidth, renderer->pheight,
+					 renderer->srcx, renderer->srcy, 
+					 MIN (renderer->width, renderer->pwidth),
+					 MIN (renderer->height, renderer->pheight),
 					 renderer->pixbuf,
 					 renderer->wx, renderer->wy);
 			} else {
