@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-07 01:39+0000\n"
+"POT-Creation-Date: 2004-01-13 02:05-0500\n"
 "PO-Revision-Date: 2004-01-07 01:40+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
@@ -382,7 +382,7 @@ msgstr "Sem Ima_gem"
 #: capplets/background/background-properties-capplet.c:559
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:730
-#: capplets/keyboard/gnome-keyboard-properties.c:222
+#: capplets/keyboard/gnome-keyboard-properties.c:224
 #: capplets/mouse/gnome-mouse-properties.c:812
 #: capplets/sound/sound-properties-capplet.c:212
 msgid "Retrieve and store legacy settings"
@@ -445,12 +445,13 @@ msgstr ""
 "imagem de fundo."
 
 #: capplets/background/background.desktop.in.h:1
-msgid "Background"
-msgstr "Fundo"
+msgid "Desktop Wallpaper"
+msgstr ""
 
 #: capplets/background/background.desktop.in.h:2
-msgid "Customize your desktop background"
-msgstr "Personalize o fundo do seu ambiente de trabalho"
+#, fuzzy
+msgid "Desktop Wallpaper Preferences"
+msgstr "Preferências do Teclado"
 
 #: capplets/common/activate-settings-daemon.c:18
 msgid ""
@@ -1087,7 +1088,7 @@ msgstr ""
 "disponíveis alterações de resolução de ecrã durante a execução."
 
 #: capplets/file-types/file-types-capplet.c:196
-#: vfs-methods/themus/themus-properties-view.c:165
+#: vfs-methods/themus/themus-properties-view.c:163
 msgid "Description"
 msgstr "Descrição"
 
@@ -1602,7 +1603,7 @@ msgid "The type of accelerator."
 msgstr "O tipo de atalho."
 
 #: capplets/keybindings/eggcellrendererkeys.c:240
-#: capplets/keybindings/gnome-keybinding-properties.c:207
+#: capplets/keybindings/gnome-keybinding-properties.c:235
 #: libbackground/applier.c:588 typing-break/drwright.c:448
 msgid "Disabled"
 msgstr "Inactivo"
@@ -1616,23 +1617,23 @@ msgstr "Introduza um novo atalho, ou prima Backspace para limpar"
 msgid "Type a new accelerator"
 msgstr "Introduza um novo atalho"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:174
+#: capplets/keybindings/gnome-keybinding-properties.c:202
 msgid "GNOME Default"
 msgstr "Omissão GNOME"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:549
+#: capplets/keybindings/gnome-keybinding-properties.c:577
 msgid "<Unknown Action>"
 msgstr "<Acção Desconhecida>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:568
+#: capplets/keybindings/gnome-keybinding-properties.c:596
 msgid "Desktop"
 msgstr "Ambiente de Trabalho"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:572
+#: capplets/keybindings/gnome-keybinding-properties.c:600
 msgid "Window Management"
 msgstr "Gestão de Janelas"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:709
+#: capplets/keybindings/gnome-keybinding-properties.c:737
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1641,18 +1642,18 @@ msgstr ""
 "O atalho \"%s\" já está em utilização para:\n"
 " \"%s\"\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:740
+#: capplets/keybindings/gnome-keybinding-properties.c:768
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Erro ao definir novo atalho na base de dados de configuração: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:790
+#: capplets/keybindings/gnome-keybinding-properties.c:818
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr ""
 "Erro ao remover definição de atalho na base de dados de configuração: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:939
+#: capplets/keybindings/gnome-keybinding-properties.c:967
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1660,11 +1661,11 @@ msgstr ""
 "Incapaz de encontrar temas de teclado.  Isto significa que a sua instalação "
 "do GTK+ está incompleta."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:961
+#: capplets/keybindings/gnome-keybinding-properties.c:989
 msgid "Action"
 msgstr "Acção"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:985
+#: capplets/keybindings/gnome-keybinding-properties.c:1013
 msgid "Shortcut"
 msgstr "Atalho"
 
@@ -1694,12 +1695,12 @@ msgstr "Associar atalhos de teclado a comandos"
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "Ocorreu um erro ao iniciar a capplet de teclado : %s"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:199
+#: capplets/keyboard/gnome-keyboard-properties.c:201
 msgid "_Accessibility"
 msgstr "_Acessibilidade"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:218
 #: capplets/keyboard/gnome-keyboard-properties.c:220
+#: capplets/keyboard/gnome-keyboard-properties.c:222
 #: capplets/sound/sound-properties-capplet.c:208
 #: capplets/sound/sound-properties-capplet.c:210
 msgid ""
@@ -1708,7 +1709,7 @@ msgstr ""
 "Aplicar definições e sair (apenas por compatibilidade; agora gerido pelo "
 "daemon)"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:224
+#: capplets/keyboard/gnome-keyboard-properties.c:226
 msgid "Start the page with the typing break settings showing"
 msgstr ""
 "Iniciar a página apresentando as definições de intervalos de utilização"
@@ -1810,12 +1811,13 @@ msgid "_Delay:"
 msgstr "_Atraso:"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:28
-msgid "_Ignore system configuration"
-msgstr "_Ignorar configuração de sistema"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:29
 msgid "_Layouts:"
 msgstr "_Disposições:"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:29
+#, fuzzy
+msgid "_Reset to defaults"
+msgstr "Utilizar valores por omissão _da categoria pai"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:30
 msgid "_Speed:"
@@ -1832,6 +1834,142 @@ msgstr "minutos"
 #: capplets/keyboard/keyboard.desktop.in.h:2
 msgid "Set your keyboard preferences"
 msgstr "Defina as suas preferências de teclado"
+
+#: capplets/localization/gnome-localization-properties.c:184
+msgid "Show"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.c:195
+#: capplets/localization/gnome-localization-properties.glade.h:25
+#, fuzzy
+msgid "Language"
+msgstr "Páginas de manual"
+
+#: capplets/localization/gnome-localization-properties.glade.h:1
+msgid "$1,234.56"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:2
+msgid "1/2/03"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:3
+msgid "12:34 AM"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:4
+msgid "4:56 PM"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:5
+#, fuzzy
+msgid "<b>Dates</b>"
+msgstr "<b>Funcionalidades</b>"
+
+#: capplets/localization/gnome-localization-properties.glade.h:6
+#, fuzzy
+msgid "<b>Languages in use:</b>"
+msgstr "<b>Localizar Ponteiro</b>"
+
+#: capplets/localization/gnome-localization-properties.glade.h:7
+#, fuzzy
+msgid "<b>Numbers</b>"
+msgstr "<b>Funcionalidades</b>"
+
+#: capplets/localization/gnome-localization-properties.glade.h:8
+#, fuzzy
+msgid "<b>Times</b>"
+msgstr "<b>Antever</b>"
+
+#: capplets/localization/gnome-localization-properties.glade.h:9
+msgid "Available Languages"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:10
+msgid "C_hange languages in use..."
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:11
+msgid ""
+"Changes will not take effect for the\n"
+"desktop's bars and menus before\n"
+"next time you log in. Changes take\n"
+"effect in applications next time you\n"
+"run them."
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:16
+msgid "Customize _dates..."
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:17
+msgid "Customize _numbers..."
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:18
+#, fuzzy
+msgid "Customize _times..."
+msgstr "Tema Personalizado"
+
+#: capplets/localization/gnome-localization-properties.glade.h:19
+msgid ""
+"Drag languages to set the preferred\n"
+"order of use; If there exists a\n"
+"translation in the first language it will\n"
+"be used, otherwise the next will be tried"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:23
+msgid "Formats"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:24
+msgid "Jan 2, 2003"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:26
+#, fuzzy
+msgid "Language and Culture Preferences"
+msgstr "Preferências do Menu e Barra de Ferramentas"
+
+#: capplets/localization/gnome-localization-properties.glade.h:27
+msgid "Measurement _Units:"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:28
+msgid "Select the items that appear in the Languages list:"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:29
+msgid "Show _all regions"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:30
+msgid "Thursday, January 2, 2003"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:31
+msgid ""
+"Your preferred language differs\n"
+"from that of your currently\n"
+"selected date, time, and number\n"
+"formats. You can change your\n"
+"formats in the Formats tab."
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:36
+#, fuzzy
+msgid "_Region:"
+msgstr "_Resolução:"
+
+#: capplets/localization/localization.desktop.in.h:1
+msgid "Language and Culture"
+msgstr ""
+
+#: capplets/localization/localization.desktop.in.h:2
+#, fuzzy
+msgid "Set your language and culture preferences"
+msgstr "Defina as suas preferências do rato"
 
 #: capplets/mouse/gnome-mouse-properties.c:496
 msgid "Unknown Cursor"
@@ -2581,37 +2719,37 @@ msgstr ""
 "Incapaz de criar o directório \"%s\".\n"
 "Isto é necessário para permitir alterar cursores."
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:165
+#: gnome-settings-daemon/gnome-settings-keybindings.c:162
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr "Atalho de Teclado (%s) tem a sua acção definida múltiplas vezes\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:178
+#: gnome-settings-daemon/gnome-settings-keybindings.c:175
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr "Atalho de Teclado (%s) tem a sua associação definida múltiplas vezes\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:184
+#: gnome-settings-daemon/gnome-settings-keybindings.c:181
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr "Atalho de Teclado (%s) está incompleto\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:212
+#: gnome-settings-daemon/gnome-settings-keybindings.c:209
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr "Atalho de Teclado (%s) é inválido\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:248
+#: gnome-settings-daemon/gnome-settings-keybindings.c:245
 #, c-format
 msgid "It seems that another application already has access to key '%d'."
 msgstr "Parece que outra aplicação já tem acesso à tecla '%d'."
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:317
+#: gnome-settings-daemon/gnome-settings-keybindings.c:314
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr "Atalho de Teclado (%s) já está a ser utilizado\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:393
+#: gnome-settings-daemon/gnome-settings-keybindings.c:390
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -2620,7 +2758,7 @@ msgstr ""
 "Erro ao tentar executar (%s)\n"
 "que está associado à tecla (%s)"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:60
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:61
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2639,7 +2777,7 @@ msgstr ""
 "%d\n"
 "%s"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:66
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:67
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2873,19 +3011,26 @@ msgstr ""
 "quantas as possíveis; poderá causar distorção no formato das letras."
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:1
+msgid ""
+"Very soon, XKB settings in gconf will be overridden (from the system "
+"configuration)"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
 msgid "XKB keyboard layout"
 msgstr "Disposição de teclado XKB"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
 msgid "XKB keyboard model"
 msgstr "Modelo de teclado XKB"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
 msgid "XKB options"
 msgstr "Opções XKB"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
-msgid "XKB settings should be overridden"
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
+#, fuzzy
+msgid "XKB settings in gconf will be overridden from the system ASAP"
 msgstr "As definições XKB deverão ser ignoradas"
 
 #: typing-break/drw-break-window.c:189
@@ -3126,23 +3271,23 @@ msgstr ""
 msgid "_Apply font"
 msgstr "_Aplicar fonte"
 
-#: vfs-methods/themus/theme-method.c:514
+#: vfs-methods/themus/theme-method.c:519
 msgid "Themes"
 msgstr "Temas"
 
-#: vfs-methods/themus/themus-properties-view.c:170
+#: vfs-methods/themus/themus-properties-view.c:168
 msgid "Control theme"
 msgstr "Tema de controlos"
 
-#: vfs-methods/themus/themus-properties-view.c:174
+#: vfs-methods/themus/themus-properties-view.c:172
 msgid "Window border theme"
 msgstr "Tema de margens de janela"
 
-#: vfs-methods/themus/themus-properties-view.c:178
+#: vfs-methods/themus/themus-properties-view.c:176
 msgid "Icon theme"
 msgstr "Tema de ícones"
 
-#: vfs-methods/themus/themus-properties-view.c:217
+#: vfs-methods/themus/themus-properties-view.c:215
 msgid "URI currently displayed"
 msgstr "URI actualmente apresentado"
 
@@ -3186,3 +3331,12 @@ msgstr "Se amostrar ou não temas instalados"
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Se amostrar ou não temas"
+
+#~ msgid "Background"
+#~ msgstr "Fundo"
+
+#~ msgid "Customize your desktop background"
+#~ msgstr "Personalize o fundo do seu ambiente de trabalho"
+
+#~ msgid "_Ignore system configuration"
+#~ msgstr "_Ignorar configuração de sistema"

@@ -8,6 +8,7 @@
 #include <libgnome/gnome-i18n.h>
 #include "gnome-settings-daemon.h"
 #include "gnome-settings-keybindings.h"
+#include "eggaccelerators.h"
 
 /* we exclude shift, GDK_CONTROL_MASK and GDK_MOD1_MASK since we know what 
    these modifiers mean 
@@ -117,12 +118,8 @@ parse_binding (Binding *binding)
       strcmp (binding->binding_str, "Disabled") == 0)
           return FALSE;
 
-  gtk_accelerator_parse (binding->binding_str, &binding->key.keysym, &binding->key.state);
-
-  if (binding->key.keysym == 0)
+  if (egg_accelerator_parse_virtual (binding->binding_str, &binding->key.keysym, &binding->key.keycode, &binding->key.state) == FALSE)
           return FALSE;
-
-  binding->key.keycode = XKeysymToKeycode (GDK_DISPLAY (), binding->key.keysym);
 
   return TRUE;
 }

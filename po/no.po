@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: control-center 2.5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-11 14:50+0100\n"
+"POT-Creation-Date: 2004-01-13 02:05-0500\n"
 "PO-Revision-Date: 2004-01-11 15:00+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <i18n-nb@lister.ping.uio.no>\n"
@@ -374,7 +374,7 @@ msgstr "I_ngen bilde"
 #: capplets/background/background-properties-capplet.c:559
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:730
-#: capplets/keyboard/gnome-keyboard-properties.c:222
+#: capplets/keyboard/gnome-keyboard-properties.c:224
 #: capplets/mouse/gnome-mouse-properties.c:812
 #: capplets/sound/sound-properties-capplet.c:212
 msgid "Retrieve and store legacy settings"
@@ -435,12 +435,13 @@ msgid "You can drag image files into the window to set the background picture."
 msgstr "Du kan dra bildefiler til vinduet for å sette bakgrunnsbildet."
 
 #: capplets/background/background.desktop.in.h:1
-msgid "Background"
-msgstr "Bakgrunn"
+msgid "Desktop Wallpaper"
+msgstr ""
 
 #: capplets/background/background.desktop.in.h:2
-msgid "Customize your desktop background"
-msgstr "Tilpass din skrivebordsbakgrunn"
+#, fuzzy
+msgid "Desktop Wallpaper Preferences"
+msgstr "Brukervalg for tastatur"
 
 #: capplets/common/activate-settings-daemon.c:18
 msgid ""
@@ -1566,7 +1567,9 @@ msgid_plural ""
 "The font selected is %d points large, and may make it difficult to "
 "effectively use the computer.  It is recommended that you select a smaller "
 "sized font."
-msgstr[0] "Valgt skrift har størrelse %d punkt, og dette kan gjøre det vanskelig å bruke datamaskinen. Det anbefales at du velger en mindre skrift."
+msgstr[0] ""
+"Valgt skrift har størrelse %d punkt, og dette kan gjøre det vanskelig å "
+"bruke datamaskinen. Det anbefales at du velger en mindre skrift."
 msgstr[1] ""
 "Valgt skrift har størrelse %d punkter, og dette kan gjøre det vanskelig å "
 "bruke datamaskinen. Det anbefales at du velger en mindre skrift."
@@ -1595,7 +1598,7 @@ msgid "The type of accelerator."
 msgstr "Type aksellerator."
 
 #: capplets/keybindings/eggcellrendererkeys.c:240
-#: capplets/keybindings/gnome-keybinding-properties.c:207
+#: capplets/keybindings/gnome-keybinding-properties.c:235
 #: libbackground/applier.c:588 typing-break/drwright.c:448
 msgid "Disabled"
 msgstr "Slått av"
@@ -1609,23 +1612,23 @@ msgstr "Skriv inn en ny aksellerator, eller trykk slett for å tømme"
 msgid "Type a new accelerator"
 msgstr "Skriv inn en ny aksellerator"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:174
+#: capplets/keybindings/gnome-keybinding-properties.c:202
 msgid "GNOME Default"
 msgstr "GNOME forvalg"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:549
+#: capplets/keybindings/gnome-keybinding-properties.c:577
 msgid "<Unknown Action>"
 msgstr "<Ukjent handling>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:568
+#: capplets/keybindings/gnome-keybinding-properties.c:596
 msgid "Desktop"
 msgstr "Skrivebord"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:572
+#: capplets/keybindings/gnome-keybinding-properties.c:600
 msgid "Window Management"
 msgstr "Vindushåndtering"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:709
+#: capplets/keybindings/gnome-keybinding-properties.c:737
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1634,17 +1637,17 @@ msgstr ""
 "Snarveien «%s» er allerede brukt for:\n"
 " «%s»\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:740
+#: capplets/keybindings/gnome-keybinding-properties.c:768
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Feil under setting av ny snarvei i konfigurasjonsdatabasen: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:790
+#: capplets/keybindings/gnome-keybinding-properties.c:818
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "Feil under fjerning av snarveitast i konfigurasjonsdatabasen: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:939
+#: capplets/keybindings/gnome-keybinding-properties.c:967
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1652,11 +1655,11 @@ msgstr ""
 "Kan ikke finne tastaturtema. Dette betyr at din GTK+-installasjon ikke er "
 "komplett."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:961
+#: capplets/keybindings/gnome-keybinding-properties.c:989
 msgid "Action"
 msgstr "Handling"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:985
+#: capplets/keybindings/gnome-keybinding-properties.c:1013
 msgid "Shortcut"
 msgstr "Snarvei"
 
@@ -1686,12 +1689,12 @@ msgstr "Tilegn snarveitaster til kommandoer"
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "Det oppsto en feil under oppstart av tastaturdialogen : %s"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:199
+#: capplets/keyboard/gnome-keyboard-properties.c:201
 msgid "_Accessibility"
 msgstr "_Tilgjengelighet"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:218
 #: capplets/keyboard/gnome-keyboard-properties.c:220
+#: capplets/keyboard/gnome-keyboard-properties.c:222
 #: capplets/sound/sound-properties-capplet.c:208
 #: capplets/sound/sound-properties-capplet.c:210
 msgid ""
@@ -1700,7 +1703,7 @@ msgstr ""
 "Bare aktiver innstillinger og avslutt (kun for kompatibilitet; håndteres av "
 "en daemon nå)"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:224
+#: capplets/keyboard/gnome-keyboard-properties.c:226
 msgid "Start the page with the typing break settings showing"
 msgstr "Start siden med innstillingene for skrivepause fremme"
 
@@ -2708,38 +2711,38 @@ msgstr ""
 "Kan ikke opprette katalog «%s».\n"
 "Denne kreves for å tillate endring av markører."
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:165
+#: gnome-settings-daemon/gnome-settings-keybindings.c:162
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr "Handling for tastaturbinding (%s) er definert flere ganger\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:178
+#: gnome-settings-daemon/gnome-settings-keybindings.c:175
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr "Tastaturbinding (%s) er definert flere ganger\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:184
+#: gnome-settings-daemon/gnome-settings-keybindings.c:181
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr "Tastaturbinding (%s) er ikke komplett\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:212
+#: gnome-settings-daemon/gnome-settings-keybindings.c:209
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr "Tastaturbinding (%s) er ugyldig\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:248
+#: gnome-settings-daemon/gnome-settings-keybindings.c:245
 #, c-format
 msgid "It seems that another application already has access to key '%d'."
 msgstr ""
 "Det ser ut som om en annen applikasjon allerede har tilgang til nøkkel «%d»"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:317
+#: gnome-settings-daemon/gnome-settings-keybindings.c:314
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr "Tastaturbinding (%s) er allerede i bruk\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:393
+#: gnome-settings-daemon/gnome-settings-keybindings.c:390
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -3002,7 +3005,8 @@ msgstr ""
 msgid ""
 "Very soon, XKB settings in gconf will be overridden (from the system "
 "configuration)"
-msgstr "Snart vil XKB-innstillinger i gconf bli overstyrt (fra systemkonfigurasjonen)"
+msgstr ""
+"Snart vil XKB-innstillinger i gconf bli overstyrt (fra systemkonfigurasjonen)"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
 msgid "XKB keyboard layout"
@@ -3317,3 +3321,9 @@ msgstr "Om miniatyrer for installerte tema skal brukes"
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Om miniatyrer for tema skal brukes"
+
+#~ msgid "Background"
+#~ msgstr "Bakgrunn"
+
+#~ msgid "Customize your desktop background"
+#~ msgstr "Tilpass din skrivebordsbakgrunn"

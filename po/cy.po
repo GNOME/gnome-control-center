@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-12-31 12:13-0500\n"
+"POT-Creation-Date: 2004-01-13 02:05-0500\n"
 "PO-Revision-Date: 2003-08-27 00:31+0100\n"
 "Last-Translator: Dafydd Harries <daf@parnassus.ath.cx>\n"
 "Language-Team: Cymraeg <gnome-cy@www.linux.org.uk>\n"
@@ -389,7 +389,7 @@ msgstr "_Heb Lun"
 #: capplets/background/background-properties-capplet.c:559
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:730
-#: capplets/keyboard/gnome-keyboard-properties.c:222
+#: capplets/keyboard/gnome-keyboard-properties.c:224
 #: capplets/mouse/gnome-mouse-properties.c:812
 #: capplets/sound/sound-properties-capplet.c:212
 msgid "Retrieve and store legacy settings"
@@ -451,12 +451,13 @@ msgstr ""
 "cefndir."
 
 #: capplets/background/background.desktop.in.h:1
-msgid "Background"
-msgstr "Cefndir"
+msgid "Desktop Wallpaper"
+msgstr ""
 
 #: capplets/background/background.desktop.in.h:2
-msgid "Customize your desktop background"
-msgstr "Newid cefndir eich sgrîn"
+#, fuzzy
+msgid "Desktop Wallpaper Preferences"
+msgstr "Hoffterau Bysellfwrdd"
 
 #: capplets/common/activate-settings-daemon.c:18
 msgid ""
@@ -1096,7 +1097,7 @@ msgstr ""
 "bosib newid y cydrandiad tra mae'r gweinydd X yn rhedef."
 
 #: capplets/file-types/file-types-capplet.c:196
-#: vfs-methods/themus/themus-properties-view.c:165
+#: vfs-methods/themus/themus-properties-view.c:163
 msgid "Description"
 msgstr "Disgrifiad"
 
@@ -1605,7 +1606,7 @@ msgid "The type of accelerator."
 msgstr "Y math o gyflymydd."
 
 #: capplets/keybindings/eggcellrendererkeys.c:240
-#: capplets/keybindings/gnome-keybinding-properties.c:207
+#: capplets/keybindings/gnome-keybinding-properties.c:235
 #: libbackground/applier.c:588 typing-break/drwright.c:448
 msgid "Disabled"
 msgstr "Analluogwyd"
@@ -1619,23 +1620,23 @@ msgstr "Teipiwch gyflymydd newydd, neu gwasgwch Ôlnod er mwyn clirio"
 msgid "Type a new accelerator"
 msgstr "Teipiwch gyflymydd newydd"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:174
+#: capplets/keybindings/gnome-keybinding-properties.c:202
 msgid "GNOME Default"
 msgstr "Rhagosodiad GNOME"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:549
+#: capplets/keybindings/gnome-keybinding-properties.c:577
 msgid "<Unknown Action>"
 msgstr "<Gweithred Anhysbys>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:568
+#: capplets/keybindings/gnome-keybinding-properties.c:596
 msgid "Desktop"
 msgstr "Penbwrdd"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:572
+#: capplets/keybindings/gnome-keybinding-properties.c:600
 msgid "Window Management"
 msgstr "Rheoli Ffenestri"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:709
+#: capplets/keybindings/gnome-keybinding-properties.c:737
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1644,17 +1645,17 @@ msgstr ""
 "Defnyddir y byrlwybr \"%s\" eisioes ar gyfer:\n"
 " \"%s\"\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:740
+#: capplets/keybindings/gnome-keybinding-properties.c:768
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Gwall tra'n gosod cyflymydd newydd yn y cronfa cyfluniad: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:790
+#: capplets/keybindings/gnome-keybinding-properties.c:818
 #, fuzzy, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "Gwall tra'n gosod cyflymydd newydd yn y cronfa cyfluniad: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:939
+#: capplets/keybindings/gnome-keybinding-properties.c:967
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1662,11 +1663,11 @@ msgstr ""
 "Methu canfod unrhyw themau bysellfwrdd. Golyga hyn fod eich gosodiad GTK+ "
 "wedi ei osod yn anghyflawn."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:961
+#: capplets/keybindings/gnome-keybinding-properties.c:989
 msgid "Action"
 msgstr "Gweithred"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:985
+#: capplets/keybindings/gnome-keybinding-properties.c:1013
 msgid "Shortcut"
 msgstr "Byrlwybr"
 
@@ -1696,12 +1697,12 @@ msgstr "_Neilltuo bysyll byrlwybr â gorchmynion"
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "Roedd gwall tra'n cychwyn y c-ategyn : %s"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:199
+#: capplets/keyboard/gnome-keyboard-properties.c:201
 msgid "_Accessibility"
 msgstr "_Hygyrchedd"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:218
 #: capplets/keyboard/gnome-keyboard-properties.c:220
+#: capplets/keyboard/gnome-keyboard-properties.c:222
 #: capplets/sound/sound-properties-capplet.c:208
 #: capplets/sound/sound-properties-capplet.c:210
 msgid ""
@@ -1710,7 +1711,7 @@ msgstr ""
 "Cymhwyso'r gosodiadau a therfynu (cydnawsedd yn unig; trinir gan ellyll "
 "bellach)"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:224
+#: capplets/keyboard/gnome-keyboard-properties.c:226
 msgid "Start the page with the typing break settings showing"
 msgstr "Cychwyn y dudalen gyda'r gosodiadau gorffwys teipio yn dangos"
 
@@ -1816,13 +1817,13 @@ msgstr "_Oediad:"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:28
 #, fuzzy
-msgid "_Ignore system configuration"
-msgstr "Cyfluniad Dirprwy Rhwydwaith"
+msgid "_Layouts:"
+msgstr "Cyflwyniad"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:29
 #, fuzzy
-msgid "_Layouts:"
-msgstr "Cyflwyniad"
+msgid "_Reset to defaults"
+msgstr "_Defnyddio rhagosodion y categori rhiant"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:30
 msgid "_Speed:"
@@ -1839,6 +1840,142 @@ msgstr "munud"
 #: capplets/keyboard/keyboard.desktop.in.h:2
 msgid "Set your keyboard preferences"
 msgstr "Gosodwch eich hoffterau bysellfwrdd"
+
+#: capplets/localization/gnome-localization-properties.c:184
+msgid "Show"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.c:195
+#: capplets/localization/gnome-localization-properties.glade.h:25
+#, fuzzy
+msgid "Language"
+msgstr "Tudalennau llawlyfr"
+
+#: capplets/localization/gnome-localization-properties.glade.h:1
+msgid "$1,234.56"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:2
+msgid "1/2/03"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:3
+msgid "12:34 AM"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:4
+msgid "4:56 PM"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:5
+#, fuzzy
+msgid "<b>Dates</b>"
+msgstr "<b>Nodweddion</b>"
+
+#: capplets/localization/gnome-localization-properties.glade.h:6
+#, fuzzy
+msgid "<b>Languages in use:</b>"
+msgstr "<b>Lleoli'r Pwyntydd</b>"
+
+#: capplets/localization/gnome-localization-properties.glade.h:7
+#, fuzzy
+msgid "<b>Numbers</b>"
+msgstr "<b>Nodweddion</b>"
+
+#: capplets/localization/gnome-localization-properties.glade.h:8
+#, fuzzy
+msgid "<b>Times</b>"
+msgstr "<b>Rhagolwg</b>"
+
+#: capplets/localization/gnome-localization-properties.glade.h:9
+msgid "Available Languages"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:10
+msgid "C_hange languages in use..."
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:11
+msgid ""
+"Changes will not take effect for the\n"
+"desktop's bars and menus before\n"
+"next time you log in. Changes take\n"
+"effect in applications next time you\n"
+"run them."
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:16
+msgid "Customize _dates..."
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:17
+msgid "Customize _numbers..."
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:18
+#, fuzzy
+msgid "Customize _times..."
+msgstr "Thema Addasiedig"
+
+#: capplets/localization/gnome-localization-properties.glade.h:19
+msgid ""
+"Drag languages to set the preferred\n"
+"order of use; If there exists a\n"
+"translation in the first language it will\n"
+"be used, otherwise the next will be tried"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:23
+msgid "Formats"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:24
+msgid "Jan 2, 2003"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:26
+#, fuzzy
+msgid "Language and Culture Preferences"
+msgstr "Hoffterau Dewislen a Bar Offer"
+
+#: capplets/localization/gnome-localization-properties.glade.h:27
+msgid "Measurement _Units:"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:28
+msgid "Select the items that appear in the Languages list:"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:29
+msgid "Show _all regions"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:30
+msgid "Thursday, January 2, 2003"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:31
+msgid ""
+"Your preferred language differs\n"
+"from that of your currently\n"
+"selected date, time, and number\n"
+"formats. You can change your\n"
+"formats in the Formats tab."
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:36
+#, fuzzy
+msgid "_Region:"
+msgstr "_Cydraniad:"
+
+#: capplets/localization/localization.desktop.in.h:1
+msgid "Language and Culture"
+msgstr ""
+
+#: capplets/localization/localization.desktop.in.h:2
+#, fuzzy
+msgid "Set your language and culture preferences"
+msgstr "Gosodwch eich hoffterau llygoden"
 
 #: capplets/mouse/gnome-mouse-properties.c:496
 msgid "Unknown Cursor"
@@ -2285,56 +2422,65 @@ msgid "Save Theme"
 msgstr "Cadw'r Thema"
 
 #: capplets/theme-switcher/theme-properties.glade.h:9
+#, fuzzy
+msgid "Select theme for the desktop"
+msgstr "Dewiswch ffontau ar gyfer y penbwrdd"
+
+#: capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Short _description:"
 msgstr "_Disgrifiad byr:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:10
+#: capplets/theme-switcher/theme-properties.glade.h:11
 msgid "Theme Details"
 msgstr "Manylion Thema"
 
-#: capplets/theme-switcher/theme-properties.glade.h:11
+#: capplets/theme-switcher/theme-properties.glade.h:12
 msgid "Theme Preferences"
 msgstr "Hoffterau Thema"
 
-#: capplets/theme-switcher/theme-properties.glade.h:12
+#: capplets/theme-switcher/theme-properties.glade.h:13
 msgid "Theme _Details"
 msgstr "_Manylion Thema"
 
-#: capplets/theme-switcher/theme-properties.glade.h:13
+#: capplets/theme-switcher/theme-properties.glade.h:14
 msgid "This theme does not suggest any particular font or background."
 msgstr "Nid yw'r thema yma yn awgrymu unrhyw ffont neu gefndir penodol"
 
-#: capplets/theme-switcher/theme-properties.glade.h:14
+#: capplets/theme-switcher/theme-properties.glade.h:15
 msgid "This theme suggests a background:"
 msgstr "Mae'r thema yma yn awgrymu cefndir:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:15
+#: capplets/theme-switcher/theme-properties.glade.h:16
 msgid "This theme suggests a font and a background:"
 msgstr "Mae'r thema yma yn awgrymu ffont a chefndir:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:16
+#: capplets/theme-switcher/theme-properties.glade.h:17
 msgid "This theme suggests a font:"
 msgstr "Mae'r thema yma yn awgrymu ffont:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:17
+#: capplets/theme-switcher/theme-properties.glade.h:18
 msgid "Window Border"
 msgstr "Ymyl Ffenestr"
 
-#: capplets/theme-switcher/theme-properties.glade.h:18
+#: capplets/theme-switcher/theme-properties.glade.h:19
 msgid "_Go To Theme Folder"
 msgstr "_Mynd i'r Blygell Thema"
 
-#: capplets/theme-switcher/theme-properties.glade.h:19
+#: capplets/theme-switcher/theme-properties.glade.h:20
 msgid "_Install Theme..."
 msgstr "_Ymsefydlu Thema..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:20
+#: capplets/theme-switcher/theme-properties.glade.h:21
 msgid "_Save Theme..."
 msgstr "_Cadw'r thema..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:21
+#: capplets/theme-switcher/theme-properties.glade.h:22
 msgid "_Theme name:"
 msgstr "_Enw thema:"
+
+#: capplets/theme-switcher/theme-properties.glade.h:23
+msgid "theme selection tree"
+msgstr ""
 
 #: capplets/ui-properties/gnome-ui-properties.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
@@ -2582,37 +2728,37 @@ msgstr ""
 "Methu creu'r cyfeiriadur \"%s\".\n"
 "Mae angen hwn i ganiatáu newid cyrchwyr."
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:165
+#: gnome-settings-daemon/gnome-settings-keybindings.c:162
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr "Diffinir gweithred y Rhwymiad Bysell (%s) sawl gwaith\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:178
+#: gnome-settings-daemon/gnome-settings-keybindings.c:175
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr "Diffinir rhwymiad y Rhwymiad Bysell (%s) sawl gwaith\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:184
+#: gnome-settings-daemon/gnome-settings-keybindings.c:181
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr "Mae'r Rhwymiad Bysell (%s) yn anghyflawn\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:212
+#: gnome-settings-daemon/gnome-settings-keybindings.c:209
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr "Mae'r Rhwymiad Bysell (%s) yn annilys\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:248
+#: gnome-settings-daemon/gnome-settings-keybindings.c:245
 #, c-format
 msgid "It seems that another application already has access to key '%d'."
 msgstr "Mae'n debyg fod gan rhaglen arall fynediad i'r bysell '%d' eisioes."
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:317
+#: gnome-settings-daemon/gnome-settings-keybindings.c:314
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr "Defnyddir y Rhwymiad Bysell (%s) eisioes\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:393
+#: gnome-settings-daemon/gnome-settings-keybindings.c:390
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -2621,7 +2767,7 @@ msgstr ""
 "Gwall tra'n ceisio gweithredu (%s)\n"
 "sy'n rhwym i'r bysell (%s)"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:60
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:61
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2633,7 +2779,7 @@ msgid ""
 "%s"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:66
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:67
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2860,22 +3006,28 @@ msgstr ""
 "llythrennau."
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:1
+msgid ""
+"Very soon, XKB settings in gconf will be overridden (from the system "
+"configuration)"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
 #, fuzzy
 msgid "XKB keyboard layout"
 msgstr "Llwybrau byr y Bysellfwrdd"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
 #, fuzzy
 msgid "XKB keyboard model"
 msgstr "Cloch fysellfwrdd"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
 #, fuzzy
 msgid "XKB options"
 msgstr "Opsiynnau"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
-msgid "XKB settings should be overridden"
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
+msgid "XKB settings in gconf will be overridden from the system ASAP"
 msgstr ""
 
 #: typing-break/drw-break-window.c:189
@@ -3116,23 +3268,23 @@ msgstr ""
 msgid "_Apply font"
 msgstr "_Cymhwyso'r ffont"
 
-#: vfs-methods/themus/theme-method.c:514
+#: vfs-methods/themus/theme-method.c:519
 msgid "Themes"
 msgstr "Themâu"
 
-#: vfs-methods/themus/themus-properties-view.c:170
+#: vfs-methods/themus/themus-properties-view.c:168
 msgid "Control theme"
 msgstr "Thema rheoli"
 
-#: vfs-methods/themus/themus-properties-view.c:174
+#: vfs-methods/themus/themus-properties-view.c:172
 msgid "Window border theme"
 msgstr "Thema ymyl ffenestr"
 
-#: vfs-methods/themus/themus-properties-view.c:178
+#: vfs-methods/themus/themus-properties-view.c:176
 msgid "Icon theme"
 msgstr "Thema eiconau"
 
-#: vfs-methods/themus/themus-properties-view.c:217
+#: vfs-methods/themus/themus-properties-view.c:215
 msgid "URI currently displayed"
 msgstr "y URI a ddangosir yn gyfredol"
 
@@ -3177,6 +3329,16 @@ msgstr "A ddylid creu lluniau cryno o themâu sefydliedig"
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "A ddylid creu lluniau cryno o themâu"
+
+#~ msgid "Background"
+#~ msgstr "Cefndir"
+
+#~ msgid "Customize your desktop background"
+#~ msgstr "Newid cefndir eich sgrîn"
+
+#, fuzzy
+#~ msgid "_Ignore system configuration"
+#~ msgstr "Cyfluniad Dirprwy Rhwydwaith"
 
 #~ msgid "radiobutton1"
 #~ msgstr "botwmradio1"

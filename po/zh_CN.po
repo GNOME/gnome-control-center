@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-12-31 12:13-0500\n"
+"POT-Creation-Date: 2004-01-13 02:05-0500\n"
 "PO-Revision-Date: 2003-08-03 23:12+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
@@ -369,7 +369,7 @@ msgstr "无图片(_N)"
 #: capplets/background/background-properties-capplet.c:559
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:730
-#: capplets/keyboard/gnome-keyboard-properties.c:222
+#: capplets/keyboard/gnome-keyboard-properties.c:224
 #: capplets/mouse/gnome-mouse-properties.c:812
 #: capplets/sound/sound-properties-capplet.c:212
 msgid "Retrieve and store legacy settings"
@@ -429,12 +429,13 @@ msgid "You can drag image files into the window to set the background picture."
 msgstr "您可以将图像文件拖入窗口中来设置背景图片。"
 
 #: capplets/background/background.desktop.in.h:1
-msgid "Background"
-msgstr "背景"
+msgid "Desktop Wallpaper"
+msgstr ""
 
 #: capplets/background/background.desktop.in.h:2
-msgid "Customize your desktop background"
-msgstr "自定义您的桌面背景"
+#, fuzzy
+msgid "Desktop Wallpaper Preferences"
+msgstr "键盘首选项"
 
 #: capplets/common/activate-settings-daemon.c:18
 msgid ""
@@ -1057,7 +1058,7 @@ msgid ""
 msgstr "此版本的 XRandR 扩展与此程序不兼容，无法在运行时刻对分辨率进行更改。"
 
 #: capplets/file-types/file-types-capplet.c:196
-#: vfs-methods/themus/themus-properties-view.c:165
+#: vfs-methods/themus/themus-properties-view.c:163
 msgid "Description"
 msgstr "描述"
 
@@ -1563,7 +1564,7 @@ msgid "The type of accelerator."
 msgstr "快捷键类型。"
 
 #: capplets/keybindings/eggcellrendererkeys.c:240
-#: capplets/keybindings/gnome-keybinding-properties.c:207
+#: capplets/keybindings/gnome-keybinding-properties.c:235
 #: libbackground/applier.c:588 typing-break/drwright.c:448
 msgid "Disabled"
 msgstr "禁用"
@@ -1577,23 +1578,23 @@ msgstr "键入新的快捷键，或按退格键清除"
 msgid "Type a new accelerator"
 msgstr "键入新的快捷键"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:174
+#: capplets/keybindings/gnome-keybinding-properties.c:202
 msgid "GNOME Default"
 msgstr "GNOME 默认"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:549
+#: capplets/keybindings/gnome-keybinding-properties.c:577
 msgid "<Unknown Action>"
 msgstr "<未知操作>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:568
+#: capplets/keybindings/gnome-keybinding-properties.c:596
 msgid "Desktop"
 msgstr "桌面"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:572
+#: capplets/keybindings/gnome-keybinding-properties.c:600
 msgid "Window Management"
 msgstr "窗口管理器"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:709
+#: capplets/keybindings/gnome-keybinding-properties.c:737
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1602,27 +1603,27 @@ msgstr ""
 "快捷键“%s”已经用于：\n"
 "“%s”\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:740
+#: capplets/keybindings/gnome-keybinding-properties.c:768
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "在配置数据库中设置新快捷键时出错：%s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:790
+#: capplets/keybindings/gnome-keybinding-properties.c:818
 #, fuzzy, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "在配置数据库中设置新快捷键时出错：%s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:939
+#: capplets/keybindings/gnome-keybinding-properties.c:967
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
 msgstr "无法找到任何键盘主题。这意味着您的 GTK+ 未能完全安装。"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:961
+#: capplets/keybindings/gnome-keybinding-properties.c:989
 msgid "Action"
 msgstr "动作"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:985
+#: capplets/keybindings/gnome-keybinding-properties.c:1013
 msgid "Shortcut"
 msgstr "快捷键"
 
@@ -1652,19 +1653,19 @@ msgstr "为命令指定快捷键"
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "调用键盘 capplet 出错：%s"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:199
+#: capplets/keyboard/gnome-keyboard-properties.c:201
 msgid "_Accessibility"
 msgstr "辅助功能(_A)"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:218
 #: capplets/keyboard/gnome-keyboard-properties.c:220
+#: capplets/keyboard/gnome-keyboard-properties.c:222
 #: capplets/sound/sound-properties-capplet.c:208
 #: capplets/sound/sound-properties-capplet.c:210
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr "应用设置并退出 (仅为兼容，现在已由守护进程处理)"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:224
+#: capplets/keyboard/gnome-keyboard-properties.c:226
 msgid "Start the page with the typing break settings showing"
 msgstr "以显示的打字间隔设置启动页面"
 
@@ -1768,13 +1769,13 @@ msgstr "延时(_D)："
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:28
 #, fuzzy
-msgid "_Ignore system configuration"
-msgstr "网络代理配置"
+msgid "_Layouts:"
+msgstr "布局"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:29
 #, fuzzy
-msgid "_Layouts:"
-msgstr "布局"
+msgid "_Reset to defaults"
+msgstr "使用父类别默认动作(_D)"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:30
 msgid "_Speed:"
@@ -1791,6 +1792,142 @@ msgstr "分钟"
 #: capplets/keyboard/keyboard.desktop.in.h:2
 msgid "Set your keyboard preferences"
 msgstr "设置键盘首选项"
+
+#: capplets/localization/gnome-localization-properties.c:184
+msgid "Show"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.c:195
+#: capplets/localization/gnome-localization-properties.glade.h:25
+#, fuzzy
+msgid "Language"
+msgstr "用户手册页"
+
+#: capplets/localization/gnome-localization-properties.glade.h:1
+msgid "$1,234.56"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:2
+msgid "1/2/03"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:3
+msgid "12:34 AM"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:4
+msgid "4:56 PM"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:5
+#, fuzzy
+msgid "<b>Dates</b>"
+msgstr "<b>特性</b>"
+
+#: capplets/localization/gnome-localization-properties.glade.h:6
+#, fuzzy
+msgid "<b>Languages in use:</b>"
+msgstr "<b>定位指针</b>"
+
+#: capplets/localization/gnome-localization-properties.glade.h:7
+#, fuzzy
+msgid "<b>Numbers</b>"
+msgstr "<b>特性</b>"
+
+#: capplets/localization/gnome-localization-properties.glade.h:8
+#, fuzzy
+msgid "<b>Times</b>"
+msgstr "<b>预览</b>"
+
+#: capplets/localization/gnome-localization-properties.glade.h:9
+msgid "Available Languages"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:10
+msgid "C_hange languages in use..."
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:11
+msgid ""
+"Changes will not take effect for the\n"
+"desktop's bars and menus before\n"
+"next time you log in. Changes take\n"
+"effect in applications next time you\n"
+"run them."
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:16
+msgid "Customize _dates..."
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:17
+msgid "Customize _numbers..."
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:18
+#, fuzzy
+msgid "Customize _times..."
+msgstr "自定义主题"
+
+#: capplets/localization/gnome-localization-properties.glade.h:19
+msgid ""
+"Drag languages to set the preferred\n"
+"order of use; If there exists a\n"
+"translation in the first language it will\n"
+"be used, otherwise the next will be tried"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:23
+msgid "Formats"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:24
+msgid "Jan 2, 2003"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:26
+#, fuzzy
+msgid "Language and Culture Preferences"
+msgstr "菜单和工具栏首选项"
+
+#: capplets/localization/gnome-localization-properties.glade.h:27
+msgid "Measurement _Units:"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:28
+msgid "Select the items that appear in the Languages list:"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:29
+msgid "Show _all regions"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:30
+msgid "Thursday, January 2, 2003"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:31
+msgid ""
+"Your preferred language differs\n"
+"from that of your currently\n"
+"selected date, time, and number\n"
+"formats. You can change your\n"
+"formats in the Formats tab."
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:36
+#, fuzzy
+msgid "_Region:"
+msgstr "分辨率(_R)："
+
+#: capplets/localization/localization.desktop.in.h:1
+msgid "Language and Culture"
+msgstr ""
+
+#: capplets/localization/localization.desktop.in.h:2
+#, fuzzy
+msgid "Set your language and culture preferences"
+msgstr "设置鼠标首选项"
 
 #: capplets/mouse/gnome-mouse-properties.c:496
 msgid "Unknown Cursor"
@@ -2234,56 +2371,65 @@ msgid "Save Theme"
 msgstr "保存主题"
 
 #: capplets/theme-switcher/theme-properties.glade.h:9
+#, fuzzy
+msgid "Select theme for the desktop"
+msgstr "为桌面选择字体"
+
+#: capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Short _description:"
 msgstr "简要描述(_D)："
 
-#: capplets/theme-switcher/theme-properties.glade.h:10
+#: capplets/theme-switcher/theme-properties.glade.h:11
 msgid "Theme Details"
 msgstr "主题细节"
 
-#: capplets/theme-switcher/theme-properties.glade.h:11
+#: capplets/theme-switcher/theme-properties.glade.h:12
 msgid "Theme Preferences"
 msgstr "主题首选项"
 
-#: capplets/theme-switcher/theme-properties.glade.h:12
+#: capplets/theme-switcher/theme-properties.glade.h:13
 msgid "Theme _Details"
 msgstr "主题细节(_D)"
 
-#: capplets/theme-switcher/theme-properties.glade.h:13
+#: capplets/theme-switcher/theme-properties.glade.h:14
 msgid "This theme does not suggest any particular font or background."
 msgstr "该主题未建议任何特定的字体或背景。"
 
-#: capplets/theme-switcher/theme-properties.glade.h:14
+#: capplets/theme-switcher/theme-properties.glade.h:15
 msgid "This theme suggests a background:"
 msgstr "该主题建议使用背景："
 
-#: capplets/theme-switcher/theme-properties.glade.h:15
+#: capplets/theme-switcher/theme-properties.glade.h:16
 msgid "This theme suggests a font and a background:"
 msgstr "该主题建议使用的字体和背景："
 
-#: capplets/theme-switcher/theme-properties.glade.h:16
+#: capplets/theme-switcher/theme-properties.glade.h:17
 msgid "This theme suggests a font:"
 msgstr "该主题建议使用字体："
 
-#: capplets/theme-switcher/theme-properties.glade.h:17
+#: capplets/theme-switcher/theme-properties.glade.h:18
 msgid "Window Border"
 msgstr "窗口边框"
 
-#: capplets/theme-switcher/theme-properties.glade.h:18
+#: capplets/theme-switcher/theme-properties.glade.h:19
 msgid "_Go To Theme Folder"
 msgstr "转到主题文件夹(_G)"
 
-#: capplets/theme-switcher/theme-properties.glade.h:19
+#: capplets/theme-switcher/theme-properties.glade.h:20
 msgid "_Install Theme..."
 msgstr "安装主题(_I)..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:20
+#: capplets/theme-switcher/theme-properties.glade.h:21
 msgid "_Save Theme..."
 msgstr "保存主题(_S)..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:21
+#: capplets/theme-switcher/theme-properties.glade.h:22
 msgid "_Theme name:"
 msgstr "主题名称(_T)："
+
+#: capplets/theme-switcher/theme-properties.glade.h:23
+msgid "theme selection tree"
+msgstr ""
 
 #: capplets/ui-properties/gnome-ui-properties.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
@@ -2527,37 +2673,37 @@ msgstr ""
 "无法创建目录“%s”。\n"
 "允许改变光标需要此操作。"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:165
+#: gnome-settings-daemon/gnome-settings-keybindings.c:162
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr "键盘关联(%s)的按键定义了多次\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:178
+#: gnome-settings-daemon/gnome-settings-keybindings.c:175
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr "键盘关联(%s)的关联操作定义了多次\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:184
+#: gnome-settings-daemon/gnome-settings-keybindings.c:181
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr "键盘关联(%s)不完整\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:212
+#: gnome-settings-daemon/gnome-settings-keybindings.c:209
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr "键盘关联(%s)无效\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:248
+#: gnome-settings-daemon/gnome-settings-keybindings.c:245
 #, c-format
 msgid "It seems that another application already has access to key '%d'."
 msgstr "似乎其它应用程序已经被指定了访问键“%d”。"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:317
+#: gnome-settings-daemon/gnome-settings-keybindings.c:314
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr "键盘关联(%s)已被使用\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:393
+#: gnome-settings-daemon/gnome-settings-keybindings.c:390
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -2566,7 +2712,7 @@ msgstr ""
 "试图运行(%s)时出错\n"
 "与按键(%s)相关联"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:60
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:61
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2578,7 +2724,7 @@ msgid ""
 "%s"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:66
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:67
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2798,22 +2944,28 @@ msgstr ""
 "等”和“完全” - 尽可能微调；可能导致字母格式变形。"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:1
+msgid ""
+"Very soon, XKB settings in gconf will be overridden (from the system "
+"configuration)"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
 #, fuzzy
 msgid "XKB keyboard layout"
 msgstr "键盘快捷键"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
 #, fuzzy
 msgid "XKB keyboard model"
 msgstr "键盘"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
 #, fuzzy
 msgid "XKB options"
 msgstr "选项"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
-msgid "XKB settings should be overridden"
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
+msgid "XKB settings in gconf will be overridden from the system ASAP"
 msgstr ""
 
 #: typing-break/drw-break-window.c:189
@@ -3041,23 +3193,23 @@ msgstr "您选中的主题建议使用新字体，该字体的预览显示在下
 msgid "_Apply font"
 msgstr "应用字体(_A)"
 
-#: vfs-methods/themus/theme-method.c:514
+#: vfs-methods/themus/theme-method.c:519
 msgid "Themes"
 msgstr "主题"
 
-#: vfs-methods/themus/themus-properties-view.c:170
+#: vfs-methods/themus/themus-properties-view.c:168
 msgid "Control theme"
 msgstr "控件主题"
 
-#: vfs-methods/themus/themus-properties-view.c:174
+#: vfs-methods/themus/themus-properties-view.c:172
 msgid "Window border theme"
 msgstr "窗口边框主题"
 
-#: vfs-methods/themus/themus-properties-view.c:178
+#: vfs-methods/themus/themus-properties-view.c:176
 msgid "Icon theme"
 msgstr "图标主题"
 
-#: vfs-methods/themus/themus-properties-view.c:217
+#: vfs-methods/themus/themus-properties-view.c:215
 msgid "URI currently displayed"
 msgstr "当前显示的 URI"
 
@@ -3098,6 +3250,16 @@ msgstr "是否将已安装的主题显示为缩略图"
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "是否将主题显示为缩略图"
+
+#~ msgid "Background"
+#~ msgstr "背景"
+
+#~ msgid "Customize your desktop background"
+#~ msgstr "自定义您的桌面背景"
+
+#, fuzzy
+#~ msgid "_Ignore system configuration"
+#~ msgstr "网络代理配置"
 
 #~ msgid "radiobutton1"
 #~ msgstr "单选按钮 1"

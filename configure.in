@@ -68,7 +68,7 @@ dnl ==============================================
 COMMON_MODULES="gtk+-2.0 >= 2.3.0 gconf-2.0 libgnomeui-2.0 >= 2.2.0 libglade-2.0 >= 1.99.12 libbonobo-2.0 libbonoboui-2.0 libglade-2.0 gconf-2.0 gnome-desktop-2.0 >= 2.2.0"
 PKG_CHECK_MODULES(CAPPLET, $COMMON_MODULES)
 PKG_CHECK_MODULES(GNOMECC, $COMMON_MODULES libxml-2.0 gnome-desktop-2.0 gnome-vfs-2.0)
-PKG_CHECK_MODULES(GNOME_SETTINGS_DAEMON, gtk+-2.0 gconf-2.0 libgnomeui-2.0 esound gnome-desktop-2.0)
+PKG_CHECK_MODULES(GNOME_SETTINGS_DAEMON, gtk+-2.0 gconf-2.0 libgnomeui-2.0 esound gnome-desktop-2.0 libglade-2.0)
 PKG_CHECK_MODULES(OLD_CAPPLET, libgnomeui-2.0 libglade-2.0)
 PKG_CHECK_MODULES(GNOME, libgnomeui-2.0)
 PKG_CHECK_MODULES(VFS_CAPPLET, $COMMON_MODULES gnome-vfs-module-2.0 gnome-vfs-2.0)
@@ -122,16 +122,14 @@ dnl
 AC_ARG_ENABLE(localization-capplet, [  --enable-localization-capplet        Enables the localization capplet],, enable_localization_capplet=no)
 
 if test x$enable_localization_capplet = xyes; then 
+   AC_CHECK_LIB(icuuc, u_cleanup_2_1, LOCALIZATION_CAPPLET_LIBS="-licui18n",
+     [AC_CHECK_HEADER(unicode/uloc.h, , AC_MSG_ERROR([[
+     *** Couldn't find icu. Please download and install from
+     *** http://oss.software.ibm.com/icu/ and try again.]]))])
 
-AC_CHECK_LIB(icuuc, u_cleanup_2_1, LOCALIZATION_CAPPLET_LIBS="-licui18n",
-  [AC_CHECK_HEADER(unicode/uloc.h, , AC_MSG_ERROR([[
-*** Couldn't find icu. Please download and install from
-*** http://oss.software.ibm.com/icu/ and try again.]]))])
-
-LOCALIZATION_CAPPLET=localization
-AC_SUBST(LOCALIZATION_CAPPLET_LIBS)
-AC_SUBST(LOCALIZATION_CAPPLET)
-
+     LOCALIZATION_CAPPLET=localization
+     AC_SUBST(LOCALIZATION_CAPPLET_LIBS)
+     AC_SUBST(LOCALIZATION_CAPPLET)
 fi
 
 AC_PATH_PROG(GCONFTOOL, gconftool-2)
@@ -286,6 +284,46 @@ fi
 AM_GCONF_SOURCE_2
 
 dnl ==============================================
+dnl OSS and FB Level section
+dnl ==============================================
+have_oss=no
+AC_TRY_COMPILE([
+	#ifdef __NetBSD__
+	#include <soundcard.h>
+	#else
+	#include <sys/soundcard.h>
+	#endif
+	],[
+	int arg = SNDCTL_DSP_SETFRAGMENT;
+	],[
+	have_oss=yes
+])
+AC_MSG_CHECKING(for OSS audio support)
+AC_MSG_RESULT($have_oss)
+AM_CONDITIONAL(HAVE_OSS, test x"$have_oss" = "xyes")
+
+have_alsa=no
+PKG_CHECK_MODULES(ALSA, alsa >= 0.9.0,
+	have_alsa=yes,
+	AC_MSG_RESULT(*** All of ALSA dependent parts will be disabled ***))
+AM_CONDITIONAL(HAVE_ALSA, test x"$have_alsa" = "xyes")
+AC_SUBST(ALSA_LIBS)
+AC_SUBST(ALSA_CFLAGS)
+
+have_fb=no
+AC_TRY_COMPILE([
+	#include <linux/fb.h>
+	#include <linux/pmu.h>
+	],[
+	int arg = 0;
+	],[
+	have_fb=yes
+])
+AC_MSG_CHECKING(for Brightness control support)
+AC_MSG_RESULT($have_fb)
+AM_CONDITIONAL(HAVE_FB, test x"$have_fb" = "xyes")
+
+dnl ==============================================
 dnl Define the main variables
 dnl ==============================================
 COMMON_CFLAGS="-I\$(top_srcdir)/capplets/common"
@@ -404,6 +442,7 @@ po/Makefile.in
 idl/Makefile
 gnome-settings-daemon/Makefile
 gnome-settings-daemon/xrdb/Makefile
+gnome-settings-daemon/actions/Makefile
 control-center/Makefile
 libbackground/Makefile
 libwindow-settings/Makefile
@@ -418,7 +457,6 @@ capplets/display/Makefile
 capplets/file-types/Makefile
 capplets/file-types/libuuid/Makefile
 capplets/font/Makefile
-capplets/localization/Makefile
 capplets/keybindings/Makefile
 capplets/keyboard/Makefile
 capplets/mouse/Makefile

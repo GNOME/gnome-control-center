@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-02 12:39+0100\n"
+"POT-Creation-Date: 2004-01-13 02:05-0500\n"
 "PO-Revision-Date: 2004-01-04 13:07+0100\n"
 "Last-Translator: Åsmund Skjæveland <aasmunds@fys.uio.no>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -199,7 +199,8 @@ msgstr "Pip når _endringstast vert trykt ned"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
 msgid "Beep when an LED is turned on and two beeps when one is turned off."
-msgstr "Pip ein gong når ein LED vert slått på, og to gongar når ein vert slått av."
+msgstr ""
+"Pip ein gong når ein LED vert slått på, og to gongar når ein vert slått av."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
 msgid "Beep when key is:"
@@ -383,7 +384,7 @@ msgstr "Ikkje _noko bilete"
 #: capplets/background/background-properties-capplet.c:559
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:730
-#: capplets/keyboard/gnome-keyboard-properties.c:222
+#: capplets/keyboard/gnome-keyboard-properties.c:224
 #: capplets/mouse/gnome-mouse-properties.c:812
 #: capplets/sound/sound-properties-capplet.c:212
 msgid "Retrieve and store legacy settings"
@@ -445,12 +446,13 @@ msgid "You can drag image files into the window to set the background picture."
 msgstr "Du kan setja bakgrunnsbiletet ved å dra biletefila inn i vindauget."
 
 #: capplets/background/background.desktop.in.h:1
-msgid "Background"
-msgstr "Bakgrunn"
+msgid "Desktop Wallpaper"
+msgstr ""
 
 #: capplets/background/background.desktop.in.h:2
-msgid "Customize your desktop background"
-msgstr "Tilpass bakgrunnen på skrivebordet ditt"
+#, fuzzy
+msgid "Desktop Wallpaper Preferences"
+msgstr "Eigenskapar for lyd"
 
 #: capplets/common/activate-settings-daemon.c:18
 msgid ""
@@ -460,11 +462,11 @@ msgid ""
 "settings manager may already be active and conflicting with the GNOME "
 "settings manager."
 msgstr ""
-"Kan ikkje starta «gnome-settings-daemon», programmet som "
-"styrer innstillingane. Når dette programmet ikkje køyrer, kan det vera nokon "
-"av brukarvala dine som ikkje vert verksame. Dette kan tyda på eit problem "
-"med Bonobo, eller meat ein annan innstillingshandsamar (t.d. KDE sin) "
-"allereie køyrer, og skapar problem for GNOME sin innstillingshandsamar."
+"Kan ikkje starta «gnome-settings-daemon», programmet som styrer "
+"innstillingane. Når dette programmet ikkje køyrer, kan det vera nokon av "
+"brukarvala dine som ikkje vert verksame. Dette kan tyda på eit problem med "
+"Bonobo, eller meat ein annan innstillingshandsamar (t.d. KDE sin) allereie "
+"køyrer, og skapar problem for GNOME sin innstillingshandsamar."
 
 #: capplets/common/capplet-stock-icons.c:94
 #, c-format
@@ -572,7 +574,8 @@ msgid "Change set"
 msgstr "Sett av endringar"
 
 #: capplets/common/gconf-property-editor.c:186
-msgid "GConf change set containing data to be forwarded to the gconf client on apply"
+msgid ""
+"GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr ""
 "Endringssettet til GConf inneheld data som skal sendast vidare til gconf-"
 "klienten når endringane vert gjort verksame"
@@ -582,7 +585,8 @@ msgid "Conversion to widget callback"
 msgstr "Konvertering til skjermelement-tilbakekall"
 
 #: capplets/common/gconf-property-editor.c:192
-msgid "Callback to be issued when data are to be converted from GConf to the widget"
+msgid ""
+"Callback to be issued when data are to be converted from GConf to the widget"
 msgstr ""
 "Tilbakekall som skal sendast når data skal konverterast frå GConf til "
 "skjermelementet"
@@ -592,7 +596,8 @@ msgid "Conversion from widget callback"
 msgstr "Konvertering frå skjermelement-tilbakekall"
 
 #: capplets/common/gconf-property-editor.c:198
-msgid "Callback to be issued when data are to be converted to GConf from the widget"
+msgid ""
+"Callback to be issued when data are to be converted to GConf from the widget"
 msgstr ""
 "Tilbakekall som skal sendast når data skal konverterast til GConf frå "
 "skjermelementet"
@@ -847,7 +852,8 @@ msgstr "Skjønar _Netscape Remote Control"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:27
 msgid "Use this _editor to open text files in the file manager"
-msgstr "Bruk dette r_edigeringsprogrammet til å opna tekstfiler i filhandsamaren"
+msgstr ""
+"Bruk dette r_edigeringsprogrammet til å opna tekstfiler i filhandsamaren"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:28
 msgid "Web Browser"
@@ -1048,11 +1054,17 @@ msgid "Options"
 msgstr "Val"
 
 #: capplets/display/main.c:515
-#, c-format
+#, fuzzy, c-format
 msgid ""
+"Testing the new settings. If you don't respond in %d second the previous "
+"settings will be restored."
+msgid_plural ""
 "Testing the new settings. If you don't respond in %d seconds the previous "
 "settings will be restored."
-msgstr ""
+msgstr[0] ""
+"Prøver dei nye innstillingane. Dersom du ikkje reagerer i løpet av %d "
+"sekund, vil dei gamle innstillingane verta gjenoppretta."
+msgstr[1] ""
 "Prøver dei nye innstillingane. Dersom du ikkje reagerer i løpet av %d "
 "sekund, vil dei gamle innstillingane verta gjenoppretta."
 
@@ -1085,7 +1097,7 @@ msgstr ""
 "programmet. Du kan ikkje endra oppløysinga medan X-tenaren køyrer."
 
 #: capplets/file-types/file-types-capplet.c:196
-#: vfs-methods/themus/themus-properties-view.c:165
+#: vfs-methods/themus/themus-properties-view.c:163
 msgid "Description"
 msgstr "Skildring"
 
@@ -1357,7 +1369,8 @@ msgstr "Tast inn eit protokollnamn."
 msgid ""
 "Invalid protocol name. Please enter a protocol name without any spaces or "
 "punctuation."
-msgstr "Ugyldig protokollnamn. Tast inn protokollnamnet utan mellomrom eller punktum."
+msgstr ""
+"Ugyldig protokollnamn. Tast inn protokollnamnet utan mellomrom eller punktum."
 
 #: capplets/file-types/service-edit-dialog.c:523
 msgid "There is already a protocol by that name."
@@ -1461,7 +1474,8 @@ msgstr "Vel skrifta som ikona på skrivebordet skal bruka"
 
 #: capplets/font/font-properties.glade.h:17
 msgid "Set the monospace font for terminals and similar applications"
-msgstr "Vel ei skrift med lik bokstavavstand til terminalar og liknande program"
+msgstr ""
+"Vel ei skrift med lik bokstavavstand til terminalar og liknande program"
 
 #: capplets/font/font-properties.glade.h:18
 msgid "Sub_pixel (LCDs)"
@@ -1532,27 +1546,41 @@ msgstr "Skrift i _vindaugstitlar:"
 msgid "dots per inch"
 msgstr "punkt per tomme"
 
-#: capplets/font/main.c:506 capplets/font/main.c:511
+#: capplets/font/main.c:506 capplets/font/main.c:513
 msgid "Font may be too large"
 msgstr "Skrifttypen kan vera for stor"
 
 #: capplets/font/main.c:507
-#, c-format
+#, fuzzy, c-format
 msgid ""
+"The font selected is %d point large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a size "
+"smaller than %d."
+msgid_plural ""
 "The font selected is %d points large, and may make it difficult to "
 "effectively use the computer.  It is recommended that you select a size "
 "smaller than %d."
-msgstr ""
+msgstr[0] ""
+"Den valde skrifttypen er %d punkt stor, og kan gjera det vanskeleg å bruka "
+"datamaskinen. Det er tilrådd at du vel ein storleik mindre enn %d."
+msgstr[1] ""
 "Den valde skrifttypen er %d punkt stor, og kan gjera det vanskeleg å bruka "
 "datamaskinen. Det er tilrådd at du vel ein storleik mindre enn %d."
 
-#: capplets/font/main.c:512
-#, c-format
+#: capplets/font/main.c:514
+#, fuzzy, c-format
 msgid ""
+"The font selected is %d point large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a smaller "
+"sized font."
+msgid_plural ""
 "The font selected is %d points large, and may make it difficult to "
 "effectively use the computer.  It is recommended that you select a smaller "
 "sized font."
-msgstr ""
+msgstr[0] ""
+"Den valde skrifttypen er %d punkt stor, og kan gjera det vanskeleg å bruka "
+"datamaskinen. Det er tilrådd at du vel ein mindre skrifttype."
+msgstr[1] ""
 "Den valde skrifttypen er %d punkt stor, og kan gjera det vanskeleg å bruka "
 "datamaskinen. Det er tilrådd at du vel ein mindre skrifttype."
 
@@ -1580,7 +1608,7 @@ msgid "The type of accelerator."
 msgstr "Typen snøggtast."
 
 #: capplets/keybindings/eggcellrendererkeys.c:240
-#: capplets/keybindings/gnome-keybinding-properties.c:207
+#: capplets/keybindings/gnome-keybinding-properties.c:235
 #: libbackground/applier.c:588 typing-break/drwright.c:448
 msgid "Disabled"
 msgstr "Av"
@@ -1594,23 +1622,23 @@ msgstr "Trykk ein ny snøggtast, eller trykk Backspace for å sletta"
 msgid "Type a new accelerator"
 msgstr "Trykk ein ny snøggtast"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:174
+#: capplets/keybindings/gnome-keybinding-properties.c:202
 msgid "GNOME Default"
 msgstr "GNOME standard"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:549
+#: capplets/keybindings/gnome-keybinding-properties.c:577
 msgid "<Unknown Action>"
 msgstr "<Ukjent handling>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:568
+#: capplets/keybindings/gnome-keybinding-properties.c:596
 msgid "Desktop"
 msgstr "Skrivebord"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:572
+#: capplets/keybindings/gnome-keybinding-properties.c:600
 msgid "Window Management"
 msgstr "Handsaming av vindauge"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:709
+#: capplets/keybindings/gnome-keybinding-properties.c:737
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1619,17 +1647,17 @@ msgstr ""
 "Snøggtasten «%s» er allereie brukt til:\n"
 " «%s»\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:740
+#: capplets/keybindings/gnome-keybinding-properties.c:768
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Feil ved lagring av ny snøggtast i oppsettdatabasen: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:790
+#: capplets/keybindings/gnome-keybinding-properties.c:818
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "Feil ved fjerning av snøggtast frå oppsettdatabasen: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:939
+#: capplets/keybindings/gnome-keybinding-properties.c:967
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1637,11 +1665,11 @@ msgstr ""
 "Kan ikkje finna nokon tastaturoppsett. Det tyder at GTK+ ikkje er fullt "
 "installert."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:961
+#: capplets/keybindings/gnome-keybinding-properties.c:989
 msgid "Action"
 msgstr "Handling"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:985
+#: capplets/keybindings/gnome-keybinding-properties.c:1013
 msgid "Shortcut"
 msgstr "Snarveg"
 
@@ -1671,20 +1699,21 @@ msgstr "Tileigna snøggtastar til kommandoar"
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "Ein feil oppstod då tastaturdialogen starta: %s"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:199
+#: capplets/keyboard/gnome-keyboard-properties.c:201
 msgid "_Accessibility"
 msgstr "_Tilgjenge"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:218
 #: capplets/keyboard/gnome-keyboard-properties.c:220
+#: capplets/keyboard/gnome-keyboard-properties.c:222
 #: capplets/sound/sound-properties-capplet.c:208
 #: capplets/sound/sound-properties-capplet.c:210
-msgid "Just apply settings and quit (compatibility only; now handled by daemon)"
+msgid ""
+"Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
 "Berre gjer endringane aktive og avslutt (berre for kompatibilitet; vert no "
 "handsama av nissen)"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:224
+#: capplets/keyboard/gnome-keyboard-properties.c:226
 msgid "Start the page with the typing break settings showing"
 msgstr "Start sida med innstillingane for skrivepausar framme"
 
@@ -1785,12 +1814,13 @@ msgid "_Delay:"
 msgstr "_Pause:"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:28
-msgid "_Ignore system configuration"
-msgstr "_Oversjå systemoppsettet"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:29
 msgid "_Layouts:"
 msgstr "_Utformingar:"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:29
+#, fuzzy
+msgid "_Reset to defaults"
+msgstr "Bruk verdiane frå _opphavskategorien"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:30
 msgid "_Speed:"
@@ -1807,6 +1837,143 @@ msgstr "minutt"
 #: capplets/keyboard/keyboard.desktop.in.h:2
 msgid "Set your keyboard preferences"
 msgstr "Still inn brukarvala dine for tastaturet"
+
+#: capplets/localization/gnome-localization-properties.c:184
+#, fuzzy
+msgid "Show"
+msgstr "Treg"
+
+#: capplets/localization/gnome-localization-properties.c:195
+#: capplets/localization/gnome-localization-properties.glade.h:25
+#, fuzzy
+msgid "Language"
+msgstr "Manualsider"
+
+#: capplets/localization/gnome-localization-properties.glade.h:1
+msgid "$1,234.56"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:2
+msgid "1/2/03"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:3
+msgid "12:34 AM"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:4
+msgid "4:56 PM"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:5
+#, fuzzy
+msgid "<b>Dates</b>"
+msgstr "<b>Hjelpefunksjonar</b>"
+
+#: capplets/localization/gnome-localization-properties.glade.h:6
+#, fuzzy
+msgid "<b>Languages in use:</b>"
+msgstr "<p>Finn peikar</b>"
+
+#: capplets/localization/gnome-localization-properties.glade.h:7
+#, fuzzy
+msgid "<b>Numbers</b>"
+msgstr "<b>Hjelpefunksjonar</b>"
+
+#: capplets/localization/gnome-localization-properties.glade.h:8
+#, fuzzy
+msgid "<b>Times</b>"
+msgstr "<b>Førehandsvising</b>"
+
+#: capplets/localization/gnome-localization-properties.glade.h:9
+msgid "Available Languages"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:10
+msgid "C_hange languages in use..."
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:11
+msgid ""
+"Changes will not take effect for the\n"
+"desktop's bars and menus before\n"
+"next time you log in. Changes take\n"
+"effect in applications next time you\n"
+"run them."
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:16
+msgid "Customize _dates..."
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:17
+msgid "Customize _numbers..."
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:18
+#, fuzzy
+msgid "Customize _times..."
+msgstr "Sjølvlaga drakt"
+
+#: capplets/localization/gnome-localization-properties.glade.h:19
+msgid ""
+"Drag languages to set the preferred\n"
+"order of use; If there exists a\n"
+"translation in the first language it will\n"
+"be used, otherwise the next will be tried"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:23
+msgid "Formats"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:24
+msgid "Jan 2, 2003"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:26
+#, fuzzy
+msgid "Language and Culture Preferences"
+msgstr "Brukarval for menyar og verktøylinjer"
+
+#: capplets/localization/gnome-localization-properties.glade.h:27
+msgid "Measurement _Units:"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:28
+msgid "Select the items that appear in the Languages list:"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:29
+msgid "Show _all regions"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:30
+msgid "Thursday, January 2, 2003"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:31
+msgid ""
+"Your preferred language differs\n"
+"from that of your currently\n"
+"selected date, time, and number\n"
+"formats. You can change your\n"
+"formats in the Formats tab."
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:36
+#, fuzzy
+msgid "_Region:"
+msgstr "_Oppløysing:"
+
+#: capplets/localization/localization.desktop.in.h:1
+msgid "Language and Culture"
+msgstr ""
+
+#: capplets/localization/localization.desktop.in.h:2
+#, fuzzy
+msgid "Set your language and culture preferences"
+msgstr "Still inn brukarvala dine for musa"
 
 #: capplets/mouse/gnome-mouse-properties.c:496
 msgid "Unknown Cursor"
@@ -2107,7 +2274,8 @@ msgstr "_Visuell tilbakemelding:"
 # TRN: Finn noko nynorsk.
 #: capplets/theme-switcher/control/control.c:18
 msgid "Eenie Meenie Mynie Moe Catcha Tiger By Its Toe"
-msgstr "Elle melle deg fortelle, skipet går, ut i år, snipp, snapp, snute, du er ute."
+msgstr ""
+"Elle melle deg fortelle, skipet går, ut i år, snipp, snapp, snute, du er ute."
 
 #: capplets/theme-switcher/control/control.c:43
 msgid "Selected themes from above will be tested by previewing here."
@@ -2260,56 +2428,66 @@ msgid "Save Theme"
 msgstr "Lagra drakt"
 
 #: capplets/theme-switcher/theme-properties.glade.h:9
+#, fuzzy
+msgid "Select theme for the desktop"
+msgstr "Vel skrifttypane som skal brukast på skrivebordet"
+
+#: capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Short _description:"
 msgstr "Kort skil_dring:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:10
+#: capplets/theme-switcher/theme-properties.glade.h:11
 msgid "Theme Details"
 msgstr "Detaljar om drakta:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:11
+#: capplets/theme-switcher/theme-properties.glade.h:12
 msgid "Theme Preferences"
 msgstr "Vel drakt"
 
-#: capplets/theme-switcher/theme-properties.glade.h:12
+#: capplets/theme-switcher/theme-properties.glade.h:13
 msgid "Theme _Details"
 msgstr "_Detaljar om drakta"
 
-#: capplets/theme-switcher/theme-properties.glade.h:13
+#: capplets/theme-switcher/theme-properties.glade.h:14
 msgid "This theme does not suggest any particular font or background."
 msgstr "Denne drakta foreslår ingen særskilte skrifttypar eller bakgrunnar."
 
-#: capplets/theme-switcher/theme-properties.glade.h:14
+#: capplets/theme-switcher/theme-properties.glade.h:15
 msgid "This theme suggests a background:"
 msgstr "Denne drakta foreslår ein bestemt bakgrunn."
 
-#: capplets/theme-switcher/theme-properties.glade.h:15
+#: capplets/theme-switcher/theme-properties.glade.h:16
 msgid "This theme suggests a font and a background:"
 msgstr "Denne drakta foreslår ei bestemt skrift og ein bestemt bakgrunn."
 
-#: capplets/theme-switcher/theme-properties.glade.h:16
+#: capplets/theme-switcher/theme-properties.glade.h:17
 msgid "This theme suggests a font:"
 msgstr "Denne drakta foreslår ei bestemt skrift."
 
-#: capplets/theme-switcher/theme-properties.glade.h:17
+#: capplets/theme-switcher/theme-properties.glade.h:18
 msgid "Window Border"
 msgstr "Vindaugsramme"
 
-#: capplets/theme-switcher/theme-properties.glade.h:18
+#: capplets/theme-switcher/theme-properties.glade.h:19
 msgid "_Go To Theme Folder"
 msgstr "_Gå til draktmappa"
 
-#: capplets/theme-switcher/theme-properties.glade.h:19
+#: capplets/theme-switcher/theme-properties.glade.h:20
 msgid "_Install Theme..."
 msgstr "_Installer drakt ..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:20
+#: capplets/theme-switcher/theme-properties.glade.h:21
 msgid "_Save Theme..."
 msgstr "_Lagra drakt ..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:21
+#: capplets/theme-switcher/theme-properties.glade.h:22
 msgid "_Theme name:"
 msgstr "Namn på drak_ta:"
+
+#: capplets/theme-switcher/theme-properties.glade.h:23
+#, fuzzy
+msgid "theme selection tree"
+msgstr "Gtk+ temaveljar"
 
 #: capplets/ui-properties/gnome-ui-properties.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
@@ -2554,37 +2732,38 @@ msgstr ""
 "Kan ikkje laga katalogen «%s».\n"
 "Denne katalogen er naudsynt for å kunna endra markøren."
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:165
+#: gnome-settings-daemon/gnome-settings-keybindings.c:162
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr "Handlinga til snøggtasten «%s» er definert fleire gongar\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:178
+#: gnome-settings-daemon/gnome-settings-keybindings.c:175
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr "Snøggtasten «%s» er definert fleire gongar\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:184
+#: gnome-settings-daemon/gnome-settings-keybindings.c:181
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr "Snøggtasten «%s» er ufullstendig\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:212
+#: gnome-settings-daemon/gnome-settings-keybindings.c:209
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr "Snøggtasten «%s» er ikkje gyldig\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:248
+#: gnome-settings-daemon/gnome-settings-keybindings.c:245
 #, c-format
 msgid "It seems that another application already has access to key '%d'."
-msgstr "Det ser ut til at eit anna programm allereie har tilgang til tasten «%d»."
+msgstr ""
+"Det ser ut til at eit anna programm allereie har tilgang til tasten «%d»."
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:317
+#: gnome-settings-daemon/gnome-settings-keybindings.c:314
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr "Snøggtasten «%s» er allereie i bruk\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:393
+#: gnome-settings-daemon/gnome-settings-keybindings.c:390
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -2593,7 +2772,7 @@ msgstr ""
 "Feil i freistnad på å køyra «%s»\n"
 "som er bunde til tasten «%s»"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:60
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:61
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2612,7 +2791,7 @@ msgstr ""
 "%d\n"
 "%s"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:66
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:67
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2655,7 +2834,8 @@ msgstr "Kan ikkje avgjera heimekatalogen til brukaren"
 #: gnome-settings-daemon/gnome-settings-xsettings.c:204
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
-msgstr "GConf-nøkkelen «%s» er sett til type «%s», men den venta typen er «%s»\n"
+msgstr ""
+"GConf-nøkkelen «%s» er sett til type «%s», men den venta typen er «%s»\n"
 
 #: gnome-settings-daemon/reaper.c:109
 msgid "Error creating signal pipe."
@@ -2762,7 +2942,8 @@ msgid "Roll up"
 msgstr "Rull opp"
 
 #: schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:1
-msgid "If true, the mime handlers for text/plain and text/* will be kept in sync"
+msgid ""
+"If true, the mime handlers for text/plain and text/* will be kept in sync"
 msgstr ""
 "Dersom denne er sett til sann, vil MIME-handsamarane for text/plain og text/"
 "* haldast synkroniserte"
@@ -2804,7 +2985,8 @@ msgid "RGBA Order"
 msgstr "RGBA-rekkefølgje"
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:5
-msgid "Resolution used for converting font sizes to pixel sizes, in dots per inch"
+msgid ""
+"Resolution used for converting font sizes to pixel sizes, in dots per inch"
 msgstr ""
 "Oppløysinga som skal brukast for å rekna om frå skriftstorleik til "
 "pikselstorleik, i punkt per tomme"
@@ -2842,19 +3024,26 @@ msgstr ""
 "hinting som mogleg, kan føra til forvrenging av fasongen på bokstavane."
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:1
+msgid ""
+"Very soon, XKB settings in gconf will be overridden (from the system "
+"configuration)"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
 msgid "XKB keyboard layout"
 msgstr "XKB-tastaturoppsett"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
 msgid "XKB keyboard model"
 msgstr "XKB-tastaturmodell"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
 msgid "XKB options"
 msgstr "XKB-alternativ"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
-msgid "XKB settings should be overridden"
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
+#, fuzzy
+msgid "XKB settings in gconf will be overridden from the system ASAP"
 msgstr "XKB-innstillingar skal overkøyrast"
 
 #: typing-break/drw-break-window.c:189
@@ -2987,24 +3176,28 @@ msgid "If set to true, then Type1 fonts will be thumbnailed."
 msgstr "Dersom sann, vert det laga miniatyrar av Type1-skrifttypar."
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:5
-msgid "Set this key to the command used to create thumbnails for OpenType fonts."
+msgid ""
+"Set this key to the command used to create thumbnails for OpenType fonts."
 msgstr ""
 "Sett denne nøkkelen til kommandoen som lagar miniatyrar av OpenType-"
 "skrifttypar."
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:6
 msgid "Set this key to the command used to create thumbnails for PCF fonts."
-msgstr "Sett denne nøkkelen til kommandoen som lagar miniatyrar av PCF-skrifttypar."
+msgstr ""
+"Sett denne nøkkelen til kommandoen som lagar miniatyrar av PCF-skrifttypar."
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:7
-msgid "Set this key to the command used to create thumbnails for TrueType fonts."
+msgid ""
+"Set this key to the command used to create thumbnails for TrueType fonts."
 msgstr ""
 "Sett denne nøkkelen til kommandoen som lagar miniatyrar av TrueType-"
 "skrifttypar."
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:8
 msgid "Set this key to the command used to create thumbnails for Type1 fonts."
-msgstr "Sett denne nøkkelen til kommandoen som lagar miniatyrar av Type1-skrifttypar."
+msgstr ""
+"Sett denne nøkkelen til kommandoen som lagar miniatyrar av Type1-skrifttypar."
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:9
 msgid "Thumbnail command for OpenType fonts"
@@ -3090,24 +3283,24 @@ msgstr ""
 msgid "_Apply font"
 msgstr "Bruk _skrifttypen"
 
-#: vfs-methods/themus/theme-method.c:514
+#: vfs-methods/themus/theme-method.c:519
 msgid "Themes"
 msgstr "Drakter"
 
 # TRN: Dette er drakta i arbeidsflata, altså GTK-delen av programmet.
-#: vfs-methods/themus/themus-properties-view.c:170
+#: vfs-methods/themus/themus-properties-view.c:168
 msgid "Control theme"
 msgstr "Drakta i programområdet"
 
-#: vfs-methods/themus/themus-properties-view.c:174
+#: vfs-methods/themus/themus-properties-view.c:172
 msgid "Window border theme"
 msgstr "Drakt på vindaugsrammene"
 
-#: vfs-methods/themus/themus-properties-view.c:178
+#: vfs-methods/themus/themus-properties-view.c:176
 msgid "Icon theme"
 msgstr "Ikondrakt"
 
-#: vfs-methods/themus/themus-properties-view.c:217
+#: vfs-methods/themus/themus-properties-view.c:215
 msgid "URI currently displayed"
 msgstr "URI som vert vist no"
 
@@ -3125,7 +3318,8 @@ msgid "If set to true, then themes will be thumbnailed."
 msgstr "Dersom sann, vert det laga miniatyrar av drakter."
 
 #: vfs-methods/themus/themus.schemas.in.h:3
-msgid "Set this key to the command used to create thumbnails for installed themes."
+msgid ""
+"Set this key to the command used to create thumbnails for installed themes."
 msgstr ""
 "Sett denne nøkkelen til kommandoen som vert brukt til å laga miniatyrar av "
 "installerte drakter."
@@ -3151,6 +3345,15 @@ msgstr "Om det skal lagast miniatyrar av installerte drakter"
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Om det skal lagast miniatyrar av drakter"
+
+#~ msgid "Background"
+#~ msgstr "Bakgrunn"
+
+#~ msgid "Customize your desktop background"
+#~ msgstr "Tilpass bakgrunnen på skrivebordet ditt"
+
+#~ msgid "_Ignore system configuration"
+#~ msgstr "_Oversjå systemoppsettet"
 
 #~ msgid "radiobutton1"
 #~ msgstr "radioknapp1"
@@ -3280,10 +3483,6 @@ msgstr "Om det skal lagast miniatyrar av drakter"
 #~ msgstr "sekund"
 
 #, fuzzy
-#~ msgid "Network Preferences"
-#~ msgstr "Eigenskapar for lyd"
-
-#, fuzzy
 #~ msgid "Titlebar Font"
 #~ msgstr "Filoverføringsprotokoll"
 
@@ -3390,9 +3589,6 @@ msgstr "Om det skal lagast miniatyrar av drakter"
 #, fuzzy
 #~ msgid "Short"
 #~ msgstr "Kortare"
-
-#~ msgid "Slow"
-#~ msgstr "Treg"
 
 #, fuzzy
 #~ msgid "Very Fast"
@@ -3568,9 +3764,6 @@ msgstr "Om det skal lagast miniatyrar av drakter"
 #, fuzzy
 #~ msgid "Select which font to use"
 #~ msgstr "Velj kva gtk+-tema som skal brukast"
-
-#~ msgid "Gtk+ Theme Selector"
-#~ msgstr "Gtk+ temaveljar"
 
 #~ msgid "Select which gtk+ theme to use"
 #~ msgstr "Velj kva gtk+-tema som skal brukast"
@@ -4450,4 +4643,3 @@ msgstr "Om det skal lagast miniatyrar av drakter"
 
 #~ msgid "GNOME Control Center options"
 #~ msgstr "Val for GNOME Kontrollsenter"
-

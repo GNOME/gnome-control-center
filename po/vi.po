@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center for Gnome v-2.1.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-12-31 12:13-0500\n"
+"POT-Creation-Date: 2004-01-13 02:05-0500\n"
 "PO-Revision-Date: 2003-01-19 20:24+0700\n"
 "Last-Translator: pclouds <pclouds@gmx.net>\n"
 "Language-Team: Gnome-Vi <gnomevi-list@lists.sourceforge.net>\n"
@@ -388,7 +388,7 @@ msgstr "Không dùng ảnh"
 #: capplets/background/background-properties-capplet.c:559
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:730
-#: capplets/keyboard/gnome-keyboard-properties.c:222
+#: capplets/keyboard/gnome-keyboard-properties.c:224
 #: capplets/mouse/gnome-mouse-properties.c:812
 #: capplets/sound/sound-properties-capplet.c:212
 msgid "Retrieve and store legacy settings"
@@ -454,12 +454,14 @@ msgstr ""
 "ảnh nền."
 
 #: capplets/background/background.desktop.in.h:1
-msgid "Background"
-msgstr "Nền"
+#, fuzzy
+msgid "Desktop Wallpaper"
+msgstr "Ảnh _nền"
 
 #: capplets/background/background.desktop.in.h:2
-msgid "Customize your desktop background"
-msgstr "Tùy chỉnh nền màn hình của bạn"
+#, fuzzy
+msgid "Desktop Wallpaper Preferences"
+msgstr "Thông số mạng"
 
 #: capplets/common/activate-settings-daemon.c:18
 msgid ""
@@ -1098,7 +1100,7 @@ msgid ""
 msgstr ""
 
 #: capplets/file-types/file-types-capplet.c:196
-#: vfs-methods/themus/themus-properties-view.c:165
+#: vfs-methods/themus/themus-properties-view.c:163
 msgid "Description"
 msgstr "Mô tả"
 
@@ -1608,7 +1610,7 @@ msgid "The type of accelerator."
 msgstr "Loại phím nóng."
 
 #: capplets/keybindings/eggcellrendererkeys.c:240
-#: capplets/keybindings/gnome-keybinding-properties.c:207
+#: capplets/keybindings/gnome-keybinding-properties.c:235
 #: libbackground/applier.c:588 typing-break/drwright.c:448
 msgid "Disabled"
 msgstr "Tắt"
@@ -1622,23 +1624,23 @@ msgstr "Gõ phím tắt mới, hoặc nhấn Backspace để xóa"
 msgid "Type a new accelerator"
 msgstr "Gõ phím tắt"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:174
+#: capplets/keybindings/gnome-keybinding-properties.c:202
 msgid "GNOME Default"
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:549
+#: capplets/keybindings/gnome-keybinding-properties.c:577
 msgid "<Unknown Action>"
 msgstr "<Hành động lạ>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:568
+#: capplets/keybindings/gnome-keybinding-properties.c:596
 msgid "Desktop"
 msgstr "Desktop"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:572
+#: capplets/keybindings/gnome-keybinding-properties.c:600
 msgid "Window Management"
 msgstr "Bộ quản lý cửa sổ"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:709
+#: capplets/keybindings/gnome-keybinding-properties.c:737
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1647,17 +1649,17 @@ msgstr ""
 "Lối tắt \"%s\" đã được dùng cho:\n"
 " \"%s\" rồi\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:740
+#: capplets/keybindings/gnome-keybinding-properties.c:768
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Lỗi thiết lập phím tắt mới trong cơ sở dữ liệu cấu hình: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:790
+#: capplets/keybindings/gnome-keybinding-properties.c:818
 #, fuzzy, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "Lỗi thiết lập phím tắt mới trong cơ sở dữ liệu cấu hình: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:939
+#: capplets/keybindings/gnome-keybinding-properties.c:967
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1665,11 +1667,11 @@ msgstr ""
 "Không thể tìm thấy bất cứ theme bàn phím nào. Có nghĩa là bản cài đặt Gtk+ "
 "của bạn chưa hoàn chỉnh."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:961
+#: capplets/keybindings/gnome-keybinding-properties.c:989
 msgid "Action"
 msgstr "Hành động"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:985
+#: capplets/keybindings/gnome-keybinding-properties.c:1013
 msgid "Shortcut"
 msgstr "Phím tắt"
 
@@ -1699,12 +1701,12 @@ msgstr "Cấp phát các phím nóng cho các lệnh"
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "Lỗi khi chạy capplet bàn phím: %s"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:199
+#: capplets/keyboard/gnome-keyboard-properties.c:201
 msgid "_Accessibility"
 msgstr "Tính năng h_ỗ trợ"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:218
 #: capplets/keyboard/gnome-keyboard-properties.c:220
+#: capplets/keyboard/gnome-keyboard-properties.c:222
 #: capplets/sound/sound-properties-capplet.c:208
 #: capplets/sound/sound-properties-capplet.c:210
 msgid ""
@@ -1713,7 +1715,7 @@ msgstr ""
 "Chỉ áp dụng các thiết lập và thoát (chỉ để tương thích; bây giờ được xử lý "
 "bởi daemon)"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:224
+#: capplets/keyboard/gnome-keyboard-properties.c:226
 msgid "Start the page with the typing break settings showing"
 msgstr ""
 
@@ -1821,13 +1823,13 @@ msgstr "Khoảng trễ:"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:28
 #, fuzzy
-msgid "_Ignore system configuration"
-msgstr "Cấu hình proxy mạng"
+msgid "_Layouts:"
+msgstr "Bố trí"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:29
 #, fuzzy
-msgid "_Layouts:"
-msgstr "Bố trí"
+msgid "_Reset to defaults"
+msgstr "Dùng phân loại _mặc định"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:30
 msgid "_Speed:"
@@ -1844,6 +1846,143 @@ msgstr ""
 #: capplets/keyboard/keyboard.desktop.in.h:2
 msgid "Set your keyboard preferences"
 msgstr "Lập các tùy thích cho bàn phím của bạn"
+
+#: capplets/localization/gnome-localization-properties.c:184
+#, fuzzy
+msgid "Show"
+msgstr "Chậm"
+
+#: capplets/localization/gnome-localization-properties.c:195
+#: capplets/localization/gnome-localization-properties.glade.h:25
+#, fuzzy
+msgid "Language"
+msgstr "Trang man"
+
+#: capplets/localization/gnome-localization-properties.glade.h:1
+msgid "$1,234.56"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:2
+msgid "1/2/03"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:3
+msgid "12:34 AM"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:4
+msgid "4:56 PM"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:5
+#, fuzzy
+msgid "<b>Dates</b>"
+msgstr "Tính năng"
+
+#: capplets/localization/gnome-localization-properties.glade.h:6
+#, fuzzy
+msgid "<b>Languages in use:</b>"
+msgstr "Định vị con trỏ"
+
+#: capplets/localization/gnome-localization-properties.glade.h:7
+#, fuzzy
+msgid "<b>Numbers</b>"
+msgstr "<b>Kiểm tra</b>"
+
+#: capplets/localization/gnome-localization-properties.glade.h:8
+#, fuzzy
+msgid "<b>Times</b>"
+msgstr "Tính năng"
+
+#: capplets/localization/gnome-localization-properties.glade.h:9
+msgid "Available Languages"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:10
+msgid "C_hange languages in use..."
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:11
+msgid ""
+"Changes will not take effect for the\n"
+"desktop's bars and menus before\n"
+"next time you log in. Changes take\n"
+"effect in applications next time you\n"
+"run them."
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:16
+msgid "Customize _dates..."
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:17
+msgid "Customize _numbers..."
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:18
+#, fuzzy
+msgid "Customize _times..."
+msgstr "Tùy chỉnh theme"
+
+#: capplets/localization/gnome-localization-properties.glade.h:19
+msgid ""
+"Drag languages to set the preferred\n"
+"order of use; If there exists a\n"
+"translation in the first language it will\n"
+"be used, otherwise the next will be tried"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:23
+msgid "Formats"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:24
+msgid "Jan 2, 2003"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:26
+#, fuzzy
+msgid "Language and Culture Preferences"
+msgstr "Tùy thích của thanh công cụ và menu"
+
+#: capplets/localization/gnome-localization-properties.glade.h:27
+msgid "Measurement _Units:"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:28
+msgid "Select the items that appear in the Languages list:"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:29
+msgid "Show _all regions"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:30
+msgid "Thursday, January 2, 2003"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:31
+msgid ""
+"Your preferred language differs\n"
+"from that of your currently\n"
+"selected date, time, and number\n"
+"formats. You can change your\n"
+"formats in the Formats tab."
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:36
+#, fuzzy
+msgid "_Region:"
+msgstr "M_ô tả:"
+
+#: capplets/localization/localization.desktop.in.h:1
+msgid "Language and Culture"
+msgstr ""
+
+#: capplets/localization/localization.desktop.in.h:2
+#, fuzzy
+msgid "Set your language and culture preferences"
+msgstr "Lập các tùy thích cho chuột"
 
 #: capplets/mouse/gnome-mouse-properties.c:496
 #, fuzzy
@@ -2319,72 +2458,81 @@ msgstr "L_ưu theme"
 
 #: capplets/theme-switcher/theme-properties.glade.h:9
 #, fuzzy
+msgid "Select theme for the desktop"
+msgstr "Chọn phông chữ cho desktop"
+
+#: capplets/theme-switcher/theme-properties.glade.h:10
+#, fuzzy
 msgid "Short _description:"
 msgstr "Mô t_ả vắn tắt:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:10
+#: capplets/theme-switcher/theme-properties.glade.h:11
 msgid "Theme Details"
 msgstr "Chi tiết về theme"
 
-#: capplets/theme-switcher/theme-properties.glade.h:11
+#: capplets/theme-switcher/theme-properties.glade.h:12
 msgid "Theme Preferences"
 msgstr "Tùy chọn theme"
 
-#: capplets/theme-switcher/theme-properties.glade.h:12
+#: capplets/theme-switcher/theme-properties.glade.h:13
 #, fuzzy
 msgid "Theme _Details"
 msgstr "Chi tiết về theme"
 
-#: capplets/theme-switcher/theme-properties.glade.h:13
+#: capplets/theme-switcher/theme-properties.glade.h:14
 #, fuzzy
 msgid "This theme does not suggest any particular font or background."
 msgstr ""
 "Theme này gợi ý một\n"
 "phông chữ và nền màn hình"
 
-#: capplets/theme-switcher/theme-properties.glade.h:14
+#: capplets/theme-switcher/theme-properties.glade.h:15
 #, fuzzy
 msgid "This theme suggests a background:"
 msgstr ""
 "Theme này gợi ý\n"
 "nền màn hình:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:15
+#: capplets/theme-switcher/theme-properties.glade.h:16
 #, fuzzy
 msgid "This theme suggests a font and a background:"
 msgstr ""
 "Theme này gợi ý một\n"
 "phông chữ và nền màn hình"
 
-#: capplets/theme-switcher/theme-properties.glade.h:16
+#: capplets/theme-switcher/theme-properties.glade.h:17
 #, fuzzy
 msgid "This theme suggests a font:"
 msgstr ""
 "Theme này gợi ý phông\n"
 "chữ:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:17
+#: capplets/theme-switcher/theme-properties.glade.h:18
 msgid "Window Border"
 msgstr "Viền cửa sổ"
 
-#: capplets/theme-switcher/theme-properties.glade.h:18
+#: capplets/theme-switcher/theme-properties.glade.h:19
 #, fuzzy
 msgid "_Go To Theme Folder"
 msgstr "Đ_i tới thư mục theme"
 
-#: capplets/theme-switcher/theme-properties.glade.h:19
+#: capplets/theme-switcher/theme-properties.glade.h:20
 #, fuzzy
 msgid "_Install Theme..."
 msgstr "C_ài đặt theme..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:20
+#: capplets/theme-switcher/theme-properties.glade.h:21
 #, fuzzy
 msgid "_Save Theme..."
 msgstr "L_ưu theme"
 
-#: capplets/theme-switcher/theme-properties.glade.h:21
+#: capplets/theme-switcher/theme-properties.glade.h:22
 msgid "_Theme name:"
 msgstr "T_ên theme:"
+
+#: capplets/theme-switcher/theme-properties.glade.h:23
+msgid "theme selection tree"
+msgstr ""
 
 #: capplets/ui-properties/gnome-ui-properties.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
@@ -2633,37 +2781,37 @@ msgstr ""
 "Không thể tạo thư mục \"%s\".\n"
 "Việc này là cần thiết để thay đổi con trỏ."
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:165
+#: gnome-settings-daemon/gnome-settings-keybindings.c:162
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr "Tổ hợp phím (%s) có định nghĩa hành động cho nó nhiều lần\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:178
+#: gnome-settings-daemon/gnome-settings-keybindings.c:175
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr "Tổ hợp phím (%s) có định nghĩa tổ hợp cho nó nhiều lần\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:184
+#: gnome-settings-daemon/gnome-settings-keybindings.c:181
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr "Tổ hợp phím (%s) không hoàn chỉnh\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:212
+#: gnome-settings-daemon/gnome-settings-keybindings.c:209
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr "Tổ hợp phím (%s) không hợp lệ\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:248
+#: gnome-settings-daemon/gnome-settings-keybindings.c:245
 #, c-format
 msgid "It seems that another application already has access to key '%d'."
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:317
+#: gnome-settings-daemon/gnome-settings-keybindings.c:314
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr "Tổ hợp phím (%s) đang được dùng rồi\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:393
+#: gnome-settings-daemon/gnome-settings-keybindings.c:390
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -2672,7 +2820,7 @@ msgstr ""
 "Lỗi khi thử chạy (%s)\n"
 "cái được liên kết tới phím (%s)"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:60
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:61
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2684,7 +2832,7 @@ msgid ""
 "%s"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:66
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:67
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2915,22 +3063,28 @@ msgstr ""
 "các mẫu ký tự."
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:1
+msgid ""
+"Very soon, XKB settings in gconf will be overridden (from the system "
+"configuration)"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
 #, fuzzy
 msgid "XKB keyboard layout"
 msgstr "Phím tắt"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
 #, fuzzy
 msgid "XKB keyboard model"
 msgstr "Chuông bàn phím"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
 #, fuzzy
 msgid "XKB options"
 msgstr "Hành động"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
-msgid "XKB settings should be overridden"
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
+msgid "XKB settings in gconf will be overridden from the system ASAP"
 msgstr ""
 
 #: typing-break/drw-break-window.c:189
@@ -3159,23 +3313,23 @@ msgstr ""
 msgid "_Apply font"
 msgstr "Áp dụng ph_ông chữ"
 
-#: vfs-methods/themus/theme-method.c:514
+#: vfs-methods/themus/theme-method.c:519
 msgid "Themes"
 msgstr "Themes"
 
-#: vfs-methods/themus/themus-properties-view.c:170
+#: vfs-methods/themus/themus-properties-view.c:168
 msgid "Control theme"
 msgstr "Điều khiển theme"
 
-#: vfs-methods/themus/themus-properties-view.c:174
+#: vfs-methods/themus/themus-properties-view.c:172
 msgid "Window border theme"
 msgstr "Theme viền cửa sổ"
 
-#: vfs-methods/themus/themus-properties-view.c:178
+#: vfs-methods/themus/themus-properties-view.c:176
 msgid "Icon theme"
 msgstr "Theme biểu tượng"
 
-#: vfs-methods/themus/themus-properties-view.c:217
+#: vfs-methods/themus/themus-properties-view.c:215
 msgid "URI currently displayed"
 msgstr "URI hiện được hiển thị"
 
@@ -3219,6 +3373,16 @@ msgstr "Có tạo thumbnail các theme được cài đặt hay không"
 msgid "Whether to thumbnail themes"
 msgstr "Có tạo thumbnail các theme hay không"
 
+#~ msgid "Background"
+#~ msgstr "Nền"
+
+#~ msgid "Customize your desktop background"
+#~ msgstr "Tùy chỉnh nền màn hình của bạn"
+
+#, fuzzy
+#~ msgid "_Ignore system configuration"
+#~ msgstr "Cấu hình proxy mạng"
+
 #~ msgid "radiobutton1"
 #~ msgstr "radiobutton1"
 
@@ -3242,13 +3406,6 @@ msgstr "Có tạo thumbnail các theme hay không"
 
 #~ msgid "Select CDE AccessX file"
 #~ msgstr "Chọn tập tin CDE AccessX"
-
-#, fuzzy
-#~ msgid "<b>Mouse</b>"
-#~ msgstr "<b>Kiểm tra</b>"
-
-#~ msgid "_Wallpaper"
-#~ msgstr "Ảnh _nền"
 
 #~ msgid "A preview of the background picture."
 #~ msgstr "Xem thử ảnh nền."
@@ -3451,9 +3608,6 @@ msgstr "Có tạo thumbnail các theme hay không"
 #~ msgid "msecs"
 #~ msgstr "mili giây"
 
-#~ msgid "Network Preferences"
-#~ msgstr "Thông số mạng"
-
 #, fuzzy
 #~ msgid "Pro_xy requires username and password"
 #~ msgstr "_Proxy yêu cầu tên người dùng và mật khẩu"
@@ -3616,9 +3770,6 @@ msgstr "Có tạo thumbnail các theme hay không"
 #~ msgid "Needs _terminal"
 #~ msgstr "Cần _terminal"
 
-#~ msgid "Use category _defaults"
-#~ msgstr "Dùng phân loại _mặc định"
-
 #~ msgid "_Protocol name"
 #~ msgstr "Tên _giao thức"
 
@@ -3690,9 +3841,6 @@ msgstr "Có tạo thumbnail các theme hay không"
 
 #~ msgid "Short"
 #~ msgstr "Ngắn"
-
-#~ msgid "Slow"
-#~ msgstr "Chậm"
 
 #~ msgid ""
 #~ "The keyboard bell is the <i>beep</i> sound heard when the system wants to "

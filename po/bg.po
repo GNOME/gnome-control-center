@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-12-31 12:13-0500\n"
+"POT-Creation-Date: 2004-01-13 02:05-0500\n"
 "PO-Revision-Date: 2002-06-24 08:10+0200\n"
 "Last-Translator: Borislav Aleksandrov <B.Aleksandrov@cnsys.bg>\n"
 "Language-Team: Bulgarian GNOME translation team <dict@linux.zonebg.com>\n"
@@ -405,7 +405,7 @@ msgstr "_Без Картинка"
 #: capplets/background/background-properties-capplet.c:559
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:730
-#: capplets/keyboard/gnome-keyboard-properties.c:222
+#: capplets/keyboard/gnome-keyboard-properties.c:224
 #: capplets/mouse/gnome-mouse-properties.c:812
 #: capplets/sound/sound-properties-capplet.c:212
 msgid "Retrieve and store legacy settings"
@@ -472,13 +472,14 @@ msgstr ""
 "картинка."
 
 #: capplets/background/background.desktop.in.h:1
-msgid "Background"
-msgstr "Фон"
+#, fuzzy
+msgid "Desktop Wallpaper"
+msgstr "_Тапет"
 
 #: capplets/background/background.desktop.in.h:2
 #, fuzzy
-msgid "Customize your desktop background"
-msgstr "Промяна фона на работно място"
+msgid "Desktop Wallpaper Preferences"
+msgstr "Настройка на Мрежа"
 
 #: capplets/common/activate-settings-daemon.c:18
 msgid ""
@@ -1130,7 +1131,7 @@ msgid ""
 msgstr ""
 
 #: capplets/file-types/file-types-capplet.c:196
-#: vfs-methods/themus/themus-properties-view.c:165
+#: vfs-methods/themus/themus-properties-view.c:163
 msgid "Description"
 msgstr "Описание"
 
@@ -1672,7 +1673,7 @@ msgid "The type of accelerator."
 msgstr "Задава нов ускорител"
 
 #: capplets/keybindings/eggcellrendererkeys.c:240
-#: capplets/keybindings/gnome-keybinding-properties.c:207
+#: capplets/keybindings/gnome-keybinding-properties.c:235
 #: libbackground/applier.c:588 typing-break/drwright.c:448
 msgid "Disabled"
 msgstr "Забранен"
@@ -1686,42 +1687,42 @@ msgstr "Задайте нов ускорител, или натиснете 'Bac
 msgid "Type a new accelerator"
 msgstr "Задава нов ускорител"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:174
+#: capplets/keybindings/gnome-keybinding-properties.c:202
 msgid "GNOME Default"
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:549
+#: capplets/keybindings/gnome-keybinding-properties.c:577
 msgid "<Unknown Action>"
 msgstr "<Неизвестно Действие>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:568
+#: capplets/keybindings/gnome-keybinding-properties.c:596
 msgid "Desktop"
 msgstr "Работно място"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:572
+#: capplets/keybindings/gnome-keybinding-properties.c:600
 msgid "Window Management"
 msgstr "Мениджър на Прозорци"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:709
+#: capplets/keybindings/gnome-keybinding-properties.c:737
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
 " \"%s\"\n"
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:740
+#: capplets/keybindings/gnome-keybinding-properties.c:768
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr ""
 "Грешка при задаване на нов ускорител в конфигурационната база данни: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:790
+#: capplets/keybindings/gnome-keybinding-properties.c:818
 #, fuzzy, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr ""
 "Грешка при задаване на нов ускорител в конфигурационната база данни: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:939
+#: capplets/keybindings/gnome-keybinding-properties.c:967
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1729,11 +1730,11 @@ msgstr ""
 "Не мога да намеря клавишни теми. Това означава че вашата инсталация на GTK+ "
 "не е пълна."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:961
+#: capplets/keybindings/gnome-keybinding-properties.c:989
 msgid "Action"
 msgstr "Действие"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:985
+#: capplets/keybindings/gnome-keybinding-properties.c:1013
 msgid "Shortcut"
 msgstr "Препратка"
 
@@ -1764,19 +1765,19 @@ msgstr ""
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "Има грешка при стартирането на контролния панел за клавиатурата : %s"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:199
+#: capplets/keyboard/gnome-keyboard-properties.c:201
 msgid "_Accessibility"
 msgstr "_Достъпност"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:218
 #: capplets/keyboard/gnome-keyboard-properties.c:220
+#: capplets/keyboard/gnome-keyboard-properties.c:222
 #: capplets/sound/sound-properties-capplet.c:208
 #: capplets/sound/sound-properties-capplet.c:210
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr "Само използва настройките и излиза"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:224
+#: capplets/keyboard/gnome-keyboard-properties.c:226
 msgid "Start the page with the typing break settings showing"
 msgstr ""
 
@@ -1886,13 +1887,13 @@ msgstr "_Задръжка (сек):"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:28
 #, fuzzy
-msgid "_Ignore system configuration"
-msgstr "Настройка на Мрежа"
+msgid "_Layouts:"
+msgstr "Подредба"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:29
 #, fuzzy
-msgid "_Layouts:"
-msgstr "Подредба"
+msgid "_Reset to defaults"
+msgstr "Използва категория по подразбиране"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:30
 #, fuzzy
@@ -1911,6 +1912,143 @@ msgstr ""
 #, fuzzy
 msgid "Set your keyboard preferences"
 msgstr "Клавиатурни Настройки"
+
+#: capplets/localization/gnome-localization-properties.c:184
+#, fuzzy
+msgid "Show"
+msgstr "Бавно"
+
+#: capplets/localization/gnome-localization-properties.c:195
+#: capplets/localization/gnome-localization-properties.glade.h:25
+#, fuzzy
+msgid "Language"
+msgstr "Документация"
+
+#: capplets/localization/gnome-localization-properties.glade.h:1
+msgid "$1,234.56"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:2
+msgid "1/2/03"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:3
+msgid "12:34 AM"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:4
+msgid "4:56 PM"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:5
+#, fuzzy
+msgid "<b>Dates</b>"
+msgstr "<b>Тест</b>"
+
+#: capplets/localization/gnome-localization-properties.glade.h:6
+#, fuzzy
+msgid "<b>Languages in use:</b>"
+msgstr "Местоположение на Показалеца"
+
+#: capplets/localization/gnome-localization-properties.glade.h:7
+#, fuzzy
+msgid "<b>Numbers</b>"
+msgstr "<b>Тест</b>"
+
+#: capplets/localization/gnome-localization-properties.glade.h:8
+#, fuzzy
+msgid "<b>Times</b>"
+msgstr "<b>Тест</b>"
+
+#: capplets/localization/gnome-localization-properties.glade.h:9
+msgid "Available Languages"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:10
+msgid "C_hange languages in use..."
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:11
+msgid ""
+"Changes will not take effect for the\n"
+"desktop's bars and menus before\n"
+"next time you log in. Changes take\n"
+"effect in applications next time you\n"
+"run them."
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:16
+msgid "Customize _dates..."
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:17
+msgid "Customize _numbers..."
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:18
+#, fuzzy
+msgid "Customize _times..."
+msgstr "Тема с покзалец"
+
+#: capplets/localization/gnome-localization-properties.glade.h:19
+msgid ""
+"Drag languages to set the preferred\n"
+"order of use; If there exists a\n"
+"translation in the first language it will\n"
+"be used, otherwise the next will be tried"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:23
+msgid "Formats"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:24
+msgid "Jan 2, 2003"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:26
+#, fuzzy
+msgid "Language and Culture Preferences"
+msgstr "Настройка за Лента с Инструменти и Менюта"
+
+#: capplets/localization/gnome-localization-properties.glade.h:27
+msgid "Measurement _Units:"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:28
+msgid "Select the items that appear in the Languages list:"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:29
+msgid "Show _all regions"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:30
+msgid "Thursday, January 2, 2003"
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:31
+msgid ""
+"Your preferred language differs\n"
+"from that of your currently\n"
+"selected date, time, and number\n"
+"formats. You can change your\n"
+"formats in the Formats tab."
+msgstr ""
+
+#: capplets/localization/gnome-localization-properties.glade.h:36
+#, fuzzy
+msgid "_Region:"
+msgstr "_Описание"
+
+#: capplets/localization/localization.desktop.in.h:1
+msgid "Language and Culture"
+msgstr ""
+
+#: capplets/localization/localization.desktop.in.h:2
+#, fuzzy
+msgid "Set your language and culture preferences"
+msgstr "Настройка на Мишка"
 
 #: capplets/mouse/gnome-mouse-properties.c:496
 #, fuzzy
@@ -2401,67 +2539,76 @@ msgstr "Тема"
 
 #: capplets/theme-switcher/theme-properties.glade.h:9
 #, fuzzy
+msgid "Select theme for the desktop"
+msgstr "Задава шрифт за иконите на работното място"
+
+#: capplets/theme-switcher/theme-properties.glade.h:10
+#, fuzzy
 msgid "Short _description:"
 msgstr "_Описание"
 
-#: capplets/theme-switcher/theme-properties.glade.h:10
+#: capplets/theme-switcher/theme-properties.glade.h:11
 msgid "Theme Details"
 msgstr ""
 
-#: capplets/theme-switcher/theme-properties.glade.h:11
+#: capplets/theme-switcher/theme-properties.glade.h:12
 #, fuzzy
 msgid "Theme Preferences"
 msgstr "Gtk+ Предпочитания за тема"
 
-#: capplets/theme-switcher/theme-properties.glade.h:12
+#: capplets/theme-switcher/theme-properties.glade.h:13
 #, fuzzy
 msgid "Theme _Details"
 msgstr "_Свойства..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:13
+#: capplets/theme-switcher/theme-properties.glade.h:14
 #, fuzzy
 msgid "This theme does not suggest any particular font or background."
 msgstr "Промяна фона на работно място"
 
-#: capplets/theme-switcher/theme-properties.glade.h:14
+#: capplets/theme-switcher/theme-properties.glade.h:15
 #, fuzzy
 msgid "This theme suggests a background:"
 msgstr "Промяна фона на работно място"
 
-#: capplets/theme-switcher/theme-properties.glade.h:15
+#: capplets/theme-switcher/theme-properties.glade.h:16
 #, fuzzy
 msgid "This theme suggests a font and a background:"
 msgstr "Промяна фона на работно място"
 
-#: capplets/theme-switcher/theme-properties.glade.h:16
+#: capplets/theme-switcher/theme-properties.glade.h:17
 #, fuzzy
 msgid "This theme suggests a font:"
 msgstr "Промяна фона на работно място"
 
-#: capplets/theme-switcher/theme-properties.glade.h:17
+#: capplets/theme-switcher/theme-properties.glade.h:18
 #, fuzzy
 msgid "Window Border"
 msgstr "Поява Рамките на Прозорец"
 
-#: capplets/theme-switcher/theme-properties.glade.h:18
+#: capplets/theme-switcher/theme-properties.glade.h:19
 #, fuzzy
 msgid "_Go To Theme Folder"
 msgstr "_Отива в папката с тема"
 
-#: capplets/theme-switcher/theme-properties.glade.h:19
+#: capplets/theme-switcher/theme-properties.glade.h:20
 #, fuzzy
 msgid "_Install Theme..."
 msgstr "_Инсталира нова тема..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:20
+#: capplets/theme-switcher/theme-properties.glade.h:21
 #, fuzzy
 msgid "_Save Theme..."
 msgstr "Тема"
 
-#: capplets/theme-switcher/theme-properties.glade.h:21
+#: capplets/theme-switcher/theme-properties.glade.h:22
 #, fuzzy
 msgid "_Theme name:"
 msgstr "Име на по_требител:"
+
+#: capplets/theme-switcher/theme-properties.glade.h:23
+msgid "theme selection tree"
+msgstr ""
 
 #: capplets/ui-properties/gnome-ui-properties.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
@@ -2720,37 +2867,37 @@ msgstr ""
 "Не мога да създам директория \"%s\".\n"
 "Това е необходимо за да позволи промяната на показалеца."
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:165
+#: gnome-settings-daemon/gnome-settings-keybindings.c:162
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr "Клавишна комбинация (%s) има операция дефинирана многократно\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:178
+#: gnome-settings-daemon/gnome-settings-keybindings.c:175
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr "Клавишна комбинация (%s) има комбинация дефинирана многократно\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:184
+#: gnome-settings-daemon/gnome-settings-keybindings.c:181
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr "Клавишна комбинация (%s) е непълна\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:212
+#: gnome-settings-daemon/gnome-settings-keybindings.c:209
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr "Клавишна комбинация (%s) е невалидна\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:248
+#: gnome-settings-daemon/gnome-settings-keybindings.c:245
 #, c-format
 msgid "It seems that another application already has access to key '%d'."
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:317
+#: gnome-settings-daemon/gnome-settings-keybindings.c:314
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr "Клавишна комбинация (%s) е вече използвана\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:393
+#: gnome-settings-daemon/gnome-settings-keybindings.c:390
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -2759,7 +2906,7 @@ msgstr ""
 "Грешка при изпълнението на (%s)\n"
 "която е свързана с клавиша (%s)"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:60
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:61
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2771,7 +2918,7 @@ msgid ""
 "%s"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:66
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:67
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2990,22 +3137,28 @@ msgid ""
 msgstr ""
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:1
+msgid ""
+"Very soon, XKB settings in gconf will be overridden (from the system "
+"configuration)"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
 #, fuzzy
 msgid "XKB keyboard layout"
 msgstr "Клавишни Препратки"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
 #, fuzzy
 msgid "XKB keyboard model"
 msgstr "Звук на Клавиатура"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
 #, fuzzy
 msgid "XKB options"
 msgstr "Действие"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
-msgid "XKB settings should be overridden"
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
+msgid "XKB settings in gconf will be overridden from the system ASAP"
 msgstr ""
 
 #: typing-break/drw-break-window.c:189
@@ -3240,27 +3393,27 @@ msgstr ""
 msgid "_Apply font"
 msgstr "Използвай Сега"
 
-#: vfs-methods/themus/theme-method.c:514
+#: vfs-methods/themus/theme-method.c:519
 #, fuzzy
 msgid "Themes"
 msgstr "Тема"
 
-#: vfs-methods/themus/themus-properties-view.c:170
+#: vfs-methods/themus/themus-properties-view.c:168
 #, fuzzy
 msgid "Control theme"
 msgstr "Тема с покзалец"
 
-#: vfs-methods/themus/themus-properties-view.c:174
+#: vfs-methods/themus/themus-properties-view.c:172
 #, fuzzy
 msgid "Window border theme"
 msgstr "Поява Рамките на Прозорец"
 
-#: vfs-methods/themus/themus-properties-view.c:178
+#: vfs-methods/themus/themus-properties-view.c:176
 #, fuzzy
 msgid "Icon theme"
 msgstr "Тема с покзалец"
 
-#: vfs-methods/themus/themus-properties-view.c:217
+#: vfs-methods/themus/themus-properties-view.c:215
 #, fuzzy
 msgid "URI currently displayed"
 msgstr "URI текущо прехвърля до"
@@ -3303,6 +3456,17 @@ msgstr ""
 msgid "Whether to thumbnail themes"
 msgstr ""
 
+#~ msgid "Background"
+#~ msgstr "Фон"
+
+#, fuzzy
+#~ msgid "Customize your desktop background"
+#~ msgstr "Промяна фона на работно място"
+
+#, fuzzy
+#~ msgid "_Ignore system configuration"
+#~ msgstr "Настройка на Мрежа"
+
 #~ msgid "radiobutton1"
 #~ msgstr "радиобутон1"
 
@@ -3326,13 +3490,6 @@ msgstr ""
 
 #~ msgid "Select CDE AccessX file"
 #~ msgstr "Избор на CDE AccessX файл"
-
-#, fuzzy
-#~ msgid "<b>Mouse</b>"
-#~ msgstr "<b>Тест</b>"
-
-#~ msgid "_Wallpaper"
-#~ msgstr "_Тапет"
 
 #~ msgid "A preview of the background picture."
 #~ msgstr "Преглед на фоновата картинка"
@@ -3541,9 +3698,6 @@ msgstr ""
 #~ msgid "msecs"
 #~ msgstr "мсек"
 
-#~ msgid "Network Preferences"
-#~ msgstr "Настройка на Мрежа"
-
 #, fuzzy
 #~ msgid "Pro_xy requires username and password"
 #~ msgstr "П_рокси изисква име и парола"
@@ -3705,9 +3859,6 @@ msgstr ""
 #~ msgid "Needs _terminal"
 #~ msgstr "Нуждае се от тер_минал"
 
-#~ msgid "Use category _defaults"
-#~ msgstr "Използва категория по подразбиране"
-
 #~ msgid "_Protocol name"
 #~ msgstr "Име на _Протокол"
 
@@ -3768,9 +3919,6 @@ msgstr ""
 
 #~ msgid "Short"
 #~ msgstr "Къс"
-
-#~ msgid "Slow"
-#~ msgstr "Бавно"
 
 #~ msgid ""
 #~ "The keyboard bell is the <i>beep</i> sound heard when the system wants to "

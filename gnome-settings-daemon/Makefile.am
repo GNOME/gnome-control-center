@@ -1,19 +1,24 @@
-SUBDIRS = xrdb
+SUBDIRS = xrdb actions
 
 INCLUDES=$(LIBXKLAVIER_CFLAGS) $(GNOME_SETTINGS_DAEMON_CFLAGS) -I$(top_srcdir)/libbackground -I$(top_srcdir) \
-  -DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
-  -DESD_SERVER="\"$(ESD_SERVER)\""	\
-  -DDATADIR="\"$(datadir)\""
+  -DGNOMELOCALEDIR="\"$(datadir)/locale\"" 	\
+  -DESD_SERVER="\"$(ESD_SERVER)\""		\
+  -DDATADIR="\"$(datadir)\""			\
+  -DPIXMAPSDIR="\"$(GNOMECC_PIXMAPS_DIR)\""
 libexec_PROGRAMS=gnome-settings-daemon
 
 gnome_settings_daemon_SOURCES =	\
 	factory.c			\
+	eggaccelerators.h		\
+	eggaccelerators.c		\
 	gnome-settings-daemon.h		\
 	gnome-settings-daemon.c		\
 	gnome-settings-font.h		\
 	gnome-settings-font.c		\
 	gnome-settings-mouse.h		\
 	gnome-settings-mouse.c		\
+	gnome-settings-multimedia-keys.h \
+	gnome-settings-multimedia-keys.c \
 	gnome-settings-keyboard-xkb.h	\
 	gnome-settings-keyboard-xkb.c	\
 	gnome-settings-keyboard.h	\
@@ -57,6 +62,7 @@ gnome_settings_daemon_LDADD = \
 	$(top_builddir)/libsounds/libsounds.a				\
 	$(top_builddir)/libgswitchit/libgswitchit.a			\
 	$(top_builddir)/libwindow-settings/libgnome-window-settings.la 	\
+	$(top_builddir)/gnome-settings-daemon/actions/libacme.la\
 	$(XF86MISC_LIBS)
 
 #AccessX_files = \

@@ -1,4 +1,4 @@
-/* gnome-settings-sound.h
+/* gnome-settings-keybindings.h
  *
  * Copyright (C) 2002 Sun Microsystems Inc.
  *

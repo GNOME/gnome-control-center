@@ -52,6 +52,7 @@
 #include "gnome-settings-screensaver.h"
 #include "gnome-settings-default-editor.h"
 #include "gnome-settings-keybindings.h"
+#include "gnome-settings-multimedia-keys.h"
 #include "gnome-settings-gtk1theme.h"
 #include "gnome-settings-xrdb.h"
 #include "gnome-settings-typing-break.h"
@@ -276,6 +277,7 @@ gnome_settings_daemon_new (void)
 /* Essential - xkb initialization should happen before */
   gnome_settings_keyboard_xkb_init (client);
   gnome_settings_keyboard_init (client);
+  gnome_settings_multimedia_keys_init (client);
 /* */
   gnome_settings_sound_init (client);
   gnome_settings_accessibility_keyboard_init (client);
@@ -329,6 +331,7 @@ gnome_settings_daemon_new (void)
 /* Essential - xkb initialization should happen before */
   gnome_settings_keyboard_xkb_load (client);
   gnome_settings_keyboard_load (client);
+  gnome_settings_multimedia_keys_load (client);
 /* */
   gnome_settings_sound_load (client);
   gnome_settings_accessibility_keyboard_load (client);
