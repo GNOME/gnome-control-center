@@ -158,27 +158,25 @@ get_legacy_settings (Bonobo_ConfigDatabase db)
 	/* Code to deal with new enum - messy */
 	val_ulong = -1;
 	val_string = gnome_config_get_string_with_default ("/Background/Default/simple=solid", &def);
-	if (!def)
-	{
-		if (!strcmp (val_string, "solid"))
+	if (!def) {
+		if (!strcmp (val_string, "solid")) {
 			val_ulong = 0;
-		else
-		{
+		} else {
 			g_free (val_string);
 			val_string = gnome_config_get_string_with_default ("/Background/Default/gradient=vertical", &def);
 			if (!def)
 				val_ulong = !strcmp (val_string, "vertical");
 		}
 	}
-	
+
 	g_free (val_string);
-	
+
 	if (val_ulong != -1)
 		bonobo_config_set_ulong (db, "/main/orientation", val_ulong, NULL);
-	
+
 	val_boolean = gnome_config_get_bool_with_default ("/Background/Default/adjustOpacity=true", &def);
-	if (!def && val_boolean)
-	{
+
+	if (!def && val_boolean) {
 		COPY_FROM_LEGACY (long, "/main/opacity", int, "/Background/Default/opacity=100");
 	}
 }
@@ -261,6 +259,8 @@ create_dialog (void)
 			    applier_class_get_preview_widget (),
 			    TRUE, TRUE, 0);
 	gtk_widget_show_all (holder);
+
+	gnome_entry_append_history (GNOME_ENTRY (gnome_file_entry_gnome_entry (GNOME_FILE_ENTRY (WID ("image_fileentry")))), 0, "(none)");
 
 	gtk_signal_connect_object (GTK_OBJECT (widget), "destroy",
 				   GTK_SIGNAL_FUNC (gtk_object_destroy),
