@@ -178,6 +178,9 @@ static gboolean is_nautilus_running  (void);
 
 static gboolean cleanup_cb           (BGApplier *bg_applier);
 
+static void preview_realized_cb      (GtkWidget *preview,
+				      BGApplier *bg_applier);
+
 guint
 bg_applier_get_type (void)
 {
@@ -497,7 +500,15 @@ bg_applier_get_preview_widget (BGApplier *bg_applier)
 					 bg_applier->p->render_geom.height,
 					 -1);
 		bg_applier->p->preview_widget = gtk_image_new_from_pixmap (pixmap, NULL);
+
+		/* We need to initialize the pixmap, but this
+		 * needs GCs, so we have to wait until realize. */
+		g_signal_connect (G_OBJECT (bg_applier->p->preview_widget),
+				  "realize",
+				  (GCallback) preview_realized_cb,
+				  bg_applier);
 	}
+
 	return bg_applier->p->preview_widget;
 }
 
@@ -1507,3 +1518,24 @@ cleanup_cb (BGApplier *bg_applier)
 	
 	return FALSE;
 }
+
+static void
+preview_realized_cb (GtkWidget *preview, BGApplier *bg_applier)
+{
+	GdkPixmap *pixmap;
+
+	/* Only draw clean image if no pref set yet */
+	if (bg_applier->p->last_prefs)
+		return;
+	
+	gtk_image_get_pixmap (GTK_IMAGE (preview), &pixmap, NULL);
+
+	gdk_draw_rectangle (pixmap,
+			    preview->style->bg_gc[preview->state],
+			    TRUE,
+			    bg_applier->p->render_geom.x,
+			    bg_applier->p->render_geom.y,
+			    bg_applier->p->render_geom.width,
+			    bg_applier->p->render_geom.height);
+}
+
