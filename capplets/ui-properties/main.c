@@ -60,66 +60,6 @@ setup_capplet_widget (void)
 	preferences_thaw (prefs);
 }
 
-#ifdef HAVE_XIMIAN_ARCHIVER
-
-static void
-do_get_xml (void) 
-{
-	Preferences *prefs;
-	xmlDocPtr doc;
-
-	prefs = PREFERENCES (preferences_new ());
-	preferences_load (prefs);
-	doc = preferences_write_xml (prefs);
-	xmlDocDump (stdout, doc);
-	gtk_object_destroy (GTK_OBJECT (prefs));
-}
-
-static void
-do_set_xml (gboolean apply_settings) 
-{
-	xmlDocPtr doc;
-	char buffer[16384];
-	GString *doc_str;
-	int t = 0;
-
-	fflush (stdin);
-
-	fcntl (fileno (stdin), F_SETFL, 0);
-
-	doc_str = g_string_new ("");
-
-	while ((t = read (fileno (stdin), buffer, sizeof (buffer) - 1)) != 0) {
-		buffer[t] = '\0';
-		g_string_append (doc_str, buffer);
-	}
-
-	if (doc_str->len > 0) {
-		doc = xmlParseDoc (doc_str->str);
-		g_string_free (doc_str, TRUE);
-
-		if (doc != NULL) {
-			prefs = preferences_read_xml (doc);
-
-			if (prefs && apply_settings) {
-				preferences_save (prefs);
-				return;
-			}
-			else if (prefs != NULL) {
-				return;
-			}
-
-			xmlFreeDoc (doc);
-		}
-	} else {
-		g_critical ("No data to apply");
-	}
-
-	return;
-}
-
-#endif /* HAVE_XIMIAN_ARCHIVER */
-
 static void
 do_restore_from_defaults (void) 
 {
@@ -142,35 +82,10 @@ main (int argc, char **argv)
 		      GNOME_PARAM_POPT_TABLE, &cap_options,
 		      NULL);
 
-	gnome_window_icon_set_default_from_file (GNOMECC_ICONS_DIR"/gnome-applications.png");
-
-#ifdef HAVE_XIMIAN_ARCHIVER
-	archive = ARCHIVE (archive_load (FALSE));
-
-	if (capplet_get_location () != NULL &&
-	    strcmp (capplet_get_location (),
-		    archive_get_current_location_id (archive)))
-	{
-		outside_location = TRUE;
-		do_set_xml (FALSE);
-		if (prefs == NULL) return -1;
-		preferences_freeze (prefs);
-	} else {
-		outside_location = FALSE;
-		prefs = PREFERENCES (preferences_new ());
-		preferences_load (prefs);
-	}
-
-	if (!outside_location && token) {
-		preferences_apply_now (prefs);
-	}
-
-#else /* !HAVE_XIMIAN_ARCHIVER */
+	gnome_window_icon_set_default_from_file (GNOMECC_DATA_DIR"/icons/gnome-applications.png");
 
 	prefs = PREFERENCES (preferences_new ());
 	preferences_load (prefs);
-
-#endif /* HAVE_XIMIAN_ARCHIVER */
 
 	if (!cap_session_init) {
 		setup_capplet_widget ();

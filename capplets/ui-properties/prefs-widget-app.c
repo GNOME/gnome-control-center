@@ -96,7 +96,7 @@ prefs_widget_app_new (Preferences *prefs)
 
 	g_return_val_if_fail (prefs == NULL || IS_PREFERENCES (prefs), NULL);
 
-	dialog_data = glade_xml_new (GNOMECC_GLADE_DIR "/behavior-properties.glade",
+	dialog_data = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/behavior-properties.glade",
 						    "prefs_widget_app", NULL);
 
 	widget = gtk_widget_new (prefs_widget_app_get_type (),
