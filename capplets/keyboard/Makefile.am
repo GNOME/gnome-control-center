@@ -1,9 +1,12 @@
 bin_PROGRAMS = gnome-keyboard-properties
 
-gnome_keyboard_properties_SOURCES = gnome-keyboard-properties.c
+gnome_keyboard_properties_SOURCES = gnome-keyboard-properties.c \
+                                    gnome-keyboard-properties-xkb.c \
+                                    gnome-keyboard-properties-xkblt.c \
+                                    gnome-keyboard-properties-xkb.h
 gnome_keyboard_properties_LDADD =				\
 	../accessibility/keyboard/libaccessibility-keyboard.a 	\
-	$(GNOMECC_CAPPLETS_LIBS)
+	$(GNOMECC_CAPPLETS_LIBS) $(LIBXKLAVIER_LIBS) ../../libgswitchit/libgswitchit.a
 
 @INTLTOOL_DESKTOP_RULE@
 
@@ -24,6 +27,6 @@ desktopdir = $(GNOMECC_DESKTOP_DIR)
 Desktop_in_files = keyboard.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
-INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)
+INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS) $(LIBXKLAVIER_CFLAGS)
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
 EXTRA_DIST = $(Glade_DATA) $(icons_DATA) $(Desktop_in_files)

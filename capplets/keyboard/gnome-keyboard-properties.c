@@ -38,6 +38,8 @@
 #include "capplet-stock-icons.h"
 #include <../accessibility/keyboard/accessibility-keyboard.h>
 
+#include "gnome-keyboard-properties-xkb.h"
+
 enum
 {
 	RESPONSE_APPLY = 1,
@@ -164,6 +166,8 @@ setup_dialog (GladeXML       *dialog,
 	gconf_peditor_new_boolean
 		(changeset, "/desktop/gnome/typing_break/allow_postpone", WID ("break_postponement_toggle"), NULL);
 	g_signal_connect (G_OBJECT (WID ("keyboard_dialog")), "response", (GCallback) dialog_response, changeset);
+        
+        setup_xkb_tabs(dialog,changeset);
 }
 
 static void
