@@ -14,7 +14,7 @@ Glade_DATA = sound-properties.glade
 desktop_iconsdir = $(GNOMECC_PIXMAPS_DIR)
 desktop_icons_DATA = visual-bell.png
 
-desktopdir = $(GNOMECC_DESKTOP_DIR)
+desktopdir = $(datadir)/applications
 Desktop_in_files = gnome-settings-sound.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 

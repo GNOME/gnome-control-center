@@ -13,7 +13,7 @@ icons_DATA = display-capplet.png
 desktop_iconsdir = $(datadir)/pixmaps
 desktop_icons_DATA = display-capplet.png
 
-desktopdir = $(GNOMECC_DESKTOP_DIR)
+desktopdir = $(datadir)/applications
 Desktop_in_files = display-properties.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 

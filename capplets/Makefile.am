@@ -1,6 +1,6 @@
 always_built_SUBDIRS =					\
 	common accessibility				\
-	default-applications desktop-links font		\
+	default-applications font			\
 	background keyboard mouse sound			\
 	theme-switcher ui-properties			\
 	keybindings network windows

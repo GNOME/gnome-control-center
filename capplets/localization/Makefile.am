@@ -16,7 +16,7 @@ pixmapsdir   = $(GNOMECC_PIXMAPS_DIR)
 pixmaps_DATA = \
 	localization-capplet.png
 
-desktopdir = $(GNOMECC_DESKTOP_DIR)
+desktopdir = $(datadir)/applications
 desktop_in_files = localization.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 

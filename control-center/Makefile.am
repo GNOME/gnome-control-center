@@ -20,7 +20,6 @@ ui_DATA = gnomecc-ui.xml
 
 INCLUDES = 							\
 	-DGNOMELOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\" 	\
-	-DSETTINGS_DIR=\""$(GNOMECC_DESKTOP_DIR)"\"		\
 	-DGNOMECC_ICONS_DIR=\""$(GNOMECC_ICONS_DIR)"\"		\
 	-DPIXMAP_DIR=\""$(datadir)/pixmaps"\"			\
 	-DART_DIR=\""$(splashdir)"\"				\

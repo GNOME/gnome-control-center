@@ -24,7 +24,7 @@ libgnomewp_la_SOURCES = \
 libgnomewp_la_LIBADD = \
 	$(GNOMECC_CAPPLETS_LIBS)
 
-desktopdir = $(GNOMECC_DESKTOP_DIR)
+desktopdir = $(datadir)/applications
 desktop_in_files = background.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 

@@ -9,7 +9,7 @@ gnome_at_properties_LDFLAGS = -export-dynamic
 
 @INTLTOOL_DESKTOP_RULE@
 
-desktopdir = $(GNOMECC_DESKTOP_DIR)
+desktopdir = $(datadir)/applications
 Desktop_in_files = at-properties.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 

@@ -13,7 +13,7 @@ gnome_keybinding_properties_SOURCES = 	\
 Gladedir   = $(GNOMECC_GLADE_DIR)
 Glade_DATA = gnome-keybinding-properties.glade
 
-desktopdir = $(GNOMECC_DESKTOP_DIR)
+desktopdir = $(datadir)/applications
 Desktop_in_files = keybinding.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 

@@ -26,7 +26,7 @@ pixmap_DATA = \
 Gladedir   = $(GNOMECC_GLADE_DIR)
 Glade_DATA = gnome-accessibility-keyboard-properties.glade
 
-desktopdir = $(GNOMECC_DESKTOP_DIR)
+desktopdir = $(datadir)/applications
 Desktop_in_files = accessibility-keyboard.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 

@@ -9,7 +9,7 @@ gnome_network_preferences_LDADD =				\
 gladedir   = $(GNOMECC_GLADE_DIR)
 glade_DATA = gnome-network-preferences.glade
 
-desktopdir = $(GNOMECC_DESKTOP_DIR)
+desktopdir = $(datadir)/applications
 desktop_in_files = gnome-network-preferences.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 

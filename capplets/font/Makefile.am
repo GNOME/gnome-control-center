@@ -16,7 +16,7 @@ pixmap_DATA =					\
 	subpixel-vrgb.png			\
 	subpixel-vbgr.png
 
-desktopdir = $(GNOMECC_DESKTOP_DIR)
+desktopdir = $(datadir)/applications
 Desktop_in_files = font-properties.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 

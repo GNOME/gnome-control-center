@@ -11,7 +11,7 @@ gnome_window_properties_SOURCES = 		\
 gladedir   = $(GNOMECC_GLADE_DIR)
 glade_DATA = gnome-window-properties.glade
 
-desktopdir = $(GNOMECC_DESKTOP_DIR)
+desktopdir = $(datadir)/applications
 Desktop_in_files = window-properties.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 

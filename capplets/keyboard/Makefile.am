@@ -25,7 +25,7 @@ pixmaps_DATA = \
 	keyboard-volume.png		\
 	keyboard-bell.png
 
-desktopdir = $(GNOMECC_DESKTOP_DIR)
+desktopdir = $(datadir)/applications
 Desktop_in_files = keyboard.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 

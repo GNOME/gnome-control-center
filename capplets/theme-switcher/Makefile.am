@@ -25,7 +25,7 @@ gnome_theme_manager_LDFLAGS = -export-dynamic
 
 @INTLTOOL_DESKTOP_RULE@
 
-desktopdir = $(GNOMECC_DESKTOP_DIR)
+desktopdir = $(datadir)/applications
 Desktop_in_files = gtk-theme-selector.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 

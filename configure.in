@@ -487,8 +487,6 @@ fi
 AC_DEFINE_UNQUOTED(GNOMECC_DATA_DIR, "${real_prefix}/share/${GETTEXT_PACKAGE}",[Path to gnomecc data files])
 GNOMECC_ICONS_DIR='$(datadir)/'${GETTEXT_PACKAGE}'/icons'
 AC_SUBST(GNOMECC_ICONS_DIR)
-GNOMECC_DESKTOP_DIR='$(datadir)/'${GETTEXT_PACKAGE}'/capplets'
-AC_SUBST(GNOMECC_DESKTOP_DIR)
 GNOMECC_GLADE_DIR='$(datadir)/'${GETTEXT_PACKAGE}'/interfaces'
 AC_SUBST(GNOMECC_GLADE_DIR)
 GNOMECC_PIXMAPS_DIR='$(datadir)/'${GETTEXT_PACKAGE}'/pixmaps'
@@ -529,7 +527,6 @@ capplets/Makefile
 capplets/common/Makefile
 capplets/default-applications/Makefile
 capplets/background/Makefile
-capplets/desktop-links/Makefile
 capplets/display/Makefile
 capplets/font/Makefile
 capplets/keybindings/Makefile
