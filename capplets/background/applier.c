@@ -872,9 +872,8 @@ renderer_render_wallpaper (Renderer *renderer)
 		PDEBUG (renderer->pixbuf); 
 			}
 		}
-		else if (renderer->prefs->wallpaper_type != WPTYPE_CENTERED &&
-			 (renderer->wwidth != renderer->pwidth ||
-			  renderer->wheight != renderer->pheight))
+		else if (renderer->wwidth != renderer->pwidth ||
+			 renderer->wheight != renderer->pheight)
 		{
 			if (render_gradient_p (renderer, renderer->prefs)) {
 				scalex = (gdouble) renderer->wwidth / 
@@ -1136,13 +1135,13 @@ get_geometry (wallpaper_type_t wallpaper_type, GdkPixbuf *pixbuf,
 		if (vwidth < gdk_pixbuf_get_width (pixbuf) &&
 		    wallpaper_type == WPTYPE_CENTERED)
 		{
-			*srcx = (gdk_pixbuf_get_width (pixbuf) - vwidth) / 2;
-			*rwidth = dwidth;
+			*srcx = (gdk_pixbuf_get_width (pixbuf) - vwidth) * factor / 2;
+			*rwidth = (gdouble) gdk_pixbuf_get_width (pixbuf) * factor;
 		}
 		else
 		{
 			*srcx = 0;
-			*rwidth = gdk_pixbuf_get_width (pixbuf) * factor;
+			*rwidth = (gdouble) gdk_pixbuf_get_width (pixbuf) * factor;
 		}
 
 		if (dheight != vheight)
@@ -1154,8 +1153,8 @@ get_geometry (wallpaper_type_t wallpaper_type, GdkPixbuf *pixbuf,
 		if (vheight < gdk_pixbuf_get_height (pixbuf) &&
 		    wallpaper_type == WPTYPE_CENTERED)
 		{
-			*srcy = (gdk_pixbuf_get_height (pixbuf) - vheight) / 2;
-			*rheight = dheight;
+			*srcy = (gdk_pixbuf_get_height (pixbuf) - vheight) * factor / 2;
+			*rheight = gdk_pixbuf_get_height (pixbuf) * factor;
 		}
 		else
 		{
