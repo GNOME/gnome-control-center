@@ -28,6 +28,7 @@
 #include <libgnome/libgnome.h>
 #include <gconf/gconf-client.h>
 #include <glade/glade.h>
+#include <libgnomevfs/gnome-vfs-uri.h>
 
 #include "capplet-util.h"
 #include "gconf-property-editor.h"
@@ -50,6 +51,29 @@ cb_dialog_response (GtkDialog *dialog, gint response_id)
 		gtk_main_quit ();
 }
 
+static GConfValue *
+extract_proxy_host (GConfPropertyEditor *peditor, const GConfValue *orig)
+{
+	char const  *entered_text = gconf_value_get_string (orig);
+	GConfValue  *res = NULL;
+
+	if (entered_text != NULL) {
+		GnomeVFSURI *uri = gnome_vfs_uri_new (entered_text);
+		if (uri != NULL) {
+			char const  *host	  = gnome_vfs_uri_get_host_name (uri);
+			if (host != NULL) {
+				res = gconf_value_new (GCONF_VALUE_STRING);
+				gconf_value_set_string (res, host);
+			}
+			gnome_vfs_uri_unref (uri);
+		}
+	}
+
+	if (res != NULL)
+		return res;
+	return gconf_value_copy (orig);
+}
+
 static void
 setup_dialog (GladeXML *dialog)
 {
@@ -60,7 +84,9 @@ setup_dialog (GladeXML *dialog)
 	gconf_peditor_widget_set_guard (peditor, WID ("host_port_table"));
 
 	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_string (
-			NULL, PROXY_HOST_KEY, WID ("host_entry"), NULL));
+			NULL, PROXY_HOST_KEY, WID ("host_entry"),
+			"conv-from-widget-cb", extract_proxy_host,
+			NULL));
 
 	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_integer (
 			NULL, PROXY_PORT_KEY, WID ("port_entry"), NULL));
@@ -84,6 +110,7 @@ main (int argc, char **argv)
 {
 	GladeXML    *dialog;
 	GConfClient *client;
+	GtkWidget   *widget;
 
 	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
@@ -101,8 +128,9 @@ main (int argc, char **argv)
 				"network_dialog", NULL);
 
 	setup_dialog (dialog);
-
-	gtk_widget_show_all (WID ("network_dialog"));
+	widget = WID ("network_dialog");
+	capplet_set_icon (widget, "gnome-globe.png");
+	gtk_widget_show_all (widget);
 	gtk_main ();
 
 	g_object_unref (client);
