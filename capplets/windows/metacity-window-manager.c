@@ -1,5 +1,12 @@
+#include <dirent.h>
+#include <config.h>
+#include <gconf/gconf-client.h>
+
 #include "metacity-window-manager.h"
 
+#define METACITY_THEME_KEY "/apps/metacity/general/theme"
+#define METACITY_FONT_KEY  "/apps/metacity/general/titlebar_font"
+#define METACITY_FOCUS_KEY "/apps/metacity/general/focus_mode"
 static GnomeWindowManagerClass *parent_class;
 
 struct _MetacityWindowManagerPrivate {
@@ -15,22 +22,62 @@ window_manager_new (void)
 
   return wm;
 }
+
 static void     
 metacity_set_theme (const char *theme_name)
 {
+  gconf_client_set_string (gconf_client_get_default (),
+			   METACITY_THEME_KEY,
+			   theme_name, NULL);
+}
 
+static GList *
+add_themes_from_dir (GList *current_list, const char *path)
+{
+  DIR *theme_dir;
+  struct dirent *entry;
+  char *theme_file_path;
+  GList *node;
+  gboolean found = FALSE;
+
+  theme_dir = opendir (path);
+
+  for (entry = readdir (theme_dir); entry != NULL; entry = readdir (theme_dir)) {
+    theme_file_path = g_build_filename (path, entry->d_name, "metacity-theme-1.xml", NULL);
+
+    if (g_file_test (theme_file_path, G_FILE_TEST_EXISTS)) {
+
+      for (node = current_list; (node != NULL) && (!found); node = node->next) {
+	found = (strcmp (node->data, entry->d_name) == 0);
+      }
+      
+      if (!found) {
+	current_list = g_list_prepend (current_list, g_strdup (entry->d_name));
+      }
+    }
+
+    /*g_free (entry);*/
+    g_free (theme_file_path);
+  }
+   
+  closedir (theme_dir);
+
+  return current_list;
 }
 
 static GList *  
 metacity_get_theme_list (void)
 {
   GList *themes = NULL;
+  char *home_dir_themes;
 
-  themes = g_list_prepend (themes, g_strdup ("Crux"));
-  themes = g_list_prepend (themes, g_strdup ("Atlanta"));
-  themes = g_list_prepend (themes, g_strdup ("Butt Ugly XRP"));
-  themes = g_list_prepend (themes, g_strdup ("ForMyGirlFriend"));
-  themes = g_list_prepend (themes, g_strdup ("Themes.orgRocks"));
+  home_dir_themes = g_build_filename (g_get_home_dir (), ".metacity/themes", NULL);
+
+  themes = add_themes_from_dir (themes, METACITY_THEME_DIR);
+  themes = add_themes_from_dir (themes, "/usr/share/metacity/themes");
+  themes = add_themes_from_dir (themes, home_dir_themes);
+
+  g_free (home_dir_themes);
 
   return themes;
 }
@@ -38,19 +85,25 @@ metacity_get_theme_list (void)
 static void     
 metacity_set_font (const char *font)
 {
-
-}
-
-static gboolean 
-metacity_get_focus_follows_mouse (void)
-{
-  return FALSE;
+  gconf_client_set_string (gconf_client_get_default (),
+			   METACITY_FONT_KEY,
+			   font, NULL);
 }
 
 static void     
 metacity_set_focus_follows_mouse (gboolean focus_follows_mouse)
 {
+  const char *focus_mode;
 
+  if (focus_follows_mouse) {
+    focus_mode = "sloppy";
+  } else {
+    focus_mode = "click";
+  }
+
+  gconf_client_set_string (gconf_client_get_default (),
+			   METACITY_FOCUS_KEY,
+			   focus_mode, NULL);
 }
 
 
@@ -90,7 +143,6 @@ metacity_window_manager_class_init (MetacityWindowManagerClass *class)
 	wm_class->set_theme               = metacity_set_theme;
 	wm_class->get_theme_list          = metacity_get_theme_list;
 	wm_class->set_font                = metacity_set_font;
-	wm_class->get_focus_follows_mouse = metacity_get_focus_follows_mouse;
 	wm_class->set_focus_follows_mouse = metacity_set_focus_follows_mouse;
 
 	parent_class = g_type_class_peek_parent (class);

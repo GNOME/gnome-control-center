@@ -116,11 +116,11 @@ wm_widget_add_wm (GnomeWindowManager *wm)
         gtk_widget_show_all (menu_item);
 
         gtk_menu_shell_prepend (GTK_MENU_SHELL (wm_menu), menu_item);
-        wm_menu_window_managers = g_list_prepend (wm_menu_window_managers, wm);
+        wm_menu_window_managers = g_list_append (wm_menu_window_managers, wm);
 
         /* If this is supposed to be the selected window manager, do so */
         if (gnome_wm_manager_same_wm (wm, selected_wm))
-                gtk_option_menu_set_history (GTK_OPTION_MENU (option_menu), 0);
+                gtk_option_menu_set_history (GTK_OPTION_MENU (option_menu), g_list_length (wm_menu_window_managers) - 1);
 }
 
 static void
@@ -192,13 +192,17 @@ setup_appearance_option_menu (GtkWidget *appearance_option_menu, GnomeWindowMana
 {
         GtkWidget *menu, *menu_item;
         GList *themes, *node;
-        char *theme_name;
+        const char *theme_name;
+        char *current_theme_name;
+        int index = 0;
 
         menu = gtk_menu_new ();
         gtk_widget_show_all (menu);
         gtk_option_menu_set_menu (GTK_OPTION_MENU (appearance_option_menu), menu);        
 
         themes = gnome_window_manager_get_theme_list (wm);
+
+        current_theme_name = gconf_client_get_string (gconf_client, THEME_KEY, NULL);
 
         for (node = themes; node != NULL; node = node->next) {
                 theme_name = (char *)node->data;
@@ -207,7 +211,14 @@ setup_appearance_option_menu (GtkWidget *appearance_option_menu, GnomeWindowMana
                 gtk_widget_show_all (menu_item);
 
                 gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
+
+                if (strcmp (theme_name, current_theme_name) == 0)
+                        gtk_option_menu_set_history (GTK_OPTION_MENU (appearance_option_menu), index);
+
+                index++;
         }
+
+        g_free (current_theme_name);
 
         theme_list = themes;
 }

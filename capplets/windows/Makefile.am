@@ -40,9 +40,10 @@ desktopdir = $(GNOMECC_DESKTOP_DIR)
 Desktop_in_files = window-properties.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
-INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS) $(DESKTOP_ITEM_CFLAGS) 					\
+INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)					\
 	     -I $(top_builddir)/libwindow-settings \
-	     -DGNOME_WINDOW_MANAGER_MODULE_PATH=\""$(libdir)/window-manager-settings"\"
+	     -DGNOME_WINDOW_MANAGER_MODULE_PATH=\""$(libdir)/window-manager-settings"\" \
+	     -DMETACITY_THEME_DIR=\""$(datadir)/metacity/themes"\"
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
 EXTRA_DIST = $(Glade_DATA) $(icons_DATA) $(Desktop_in_files) $(pixmap_DATA)
 

@@ -1,5 +1,25 @@
 2002-06-04  Seth Nickell  <snickell@stanford.edu>
 
+	* Makefile.am:
+
+	Remove unused CFLAGS;
+	
+	* gnome-window-properties.c: (wm_widget_add_wm),
+	(setup_appearance_option_menu):
+
+	Improve handling of option menus, set the default item.
+	
+	* metacity-window-manager.c: (metacity_set_theme),
+	(add_themes_from_dir), (metacity_get_theme_list),
+	(metacity_set_font), (metacity_set_focus_follows_mouse),
+	(metacity_window_manager_class_init):
+
+	Actually do things when the "set" calls are made, improve
+	intelligence of loading the theme list. Eventually we should
+	probably do validation on the XML files.
+	
+2002-06-04  Seth Nickell  <snickell@stanford.edu>
+
 	* gnome-window-properties.c: (set_wm_change_pending),
 	(wm_selection_changed), (wm_widget_add_wm), (apply_wm),
 	(setup_appearance_option_menu), (appearance_changed),
