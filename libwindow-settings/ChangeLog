@@ -1,5 +1,15 @@
 2002-06-04  Seth Nickell  <snickell@stanford.edu>
 
+	* gnome-window-manager.c: (gnome_window_manager_new),
+	(gnome_window_manager_class_init):
+	* gnome-window-manager.h:
+
+	Get rid of "get" calls, since we should just rely on the GConf settings being right.
+	Otherwise you get ambiguous problems with merging settings, figuring out which
+	takes predecedence, etc.
+	
+2002-06-04  Seth Nickell  <snickell@stanford.edu>
+
 	* gnome-window-manager.c: (gnome_window_manager_get_ditem):
 	* gnome-window-manager.h:
 	* gnome-wm-manager.c: (gnome_wm_manager_set_current),

@@ -55,8 +55,6 @@ gnome_wm_manager_get_list (void)
   GList *wms = NULL;
   GnomeDesktopItem *ditem;
 
-  printf ("Total number of wms is %d\n", g_list_length (window_managers));
-
   for (wm_ditem = window_managers; wm_ditem != NULL; wm_ditem = wm_ditem->next) {
     ditem = ((WindowManager *)wm_ditem->data)->dentry;
     wms = g_list_prepend (wms, gnome_window_manager_new (ditem));

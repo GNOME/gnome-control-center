@@ -33,7 +33,6 @@ struct _GnomeWindowManagerClass
   void         (*set_theme)               (const char *theme_name);
   GList *      (*get_theme_list)          (void);
   void         (*set_font)                (const char *font);
-  gboolean     (*get_focus_follows_mouse) (void);
   void         (*set_focus_follows_mouse) (gboolean focus_follows_mouse);
 
 };
@@ -48,7 +47,6 @@ void              gnome_window_manager_set_theme                (GnomeWindowMana
 /* GList of char *'s */
 GList *           gnome_window_manager_get_theme_list           (GnomeWindowManager *wm);
 void              gnome_window_manager_set_font                 (GnomeWindowManager *wm, const char *font);
-gboolean          gnome_window_manager_get_focus_follows_mouse  (GnomeWindowManager *wm);
 void              gnome_window_manager_set_focus_follows_mouse  (GnomeWindowManager *wm, gboolean focus_follows_mouse);
 
 G_END_DECLS
