@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-04-07 03:31+0200\n"
-"PO-Revision-Date: 2004-04-07 13:22+0200\n"
+"POT-Creation-Date: 2004-04-12 03:31+0200\n"
+"PO-Revision-Date: 2004-04-12 12:49+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -409,8 +409,8 @@ msgstr "Svislý přechod"
 
 #: capplets/background/gnome-wp-capplet.c:1453
 #: capplets/background/gnome-wp-capplet.c:1464
-msgid "Add Wallpaper"
-msgstr "Přidat tapetu"
+msgid "Add Wallpapers"
+msgstr "Přidat tapety"
 
 #: capplets/background/gnome-wp-info.c:49
 msgid "No Wallpaper"
@@ -1496,7 +1496,7 @@ msgstr "Typ klávesové zkratky."
 
 #: capplets/keybindings/eggcellrendererkeys.c:242
 #: capplets/keybindings/gnome-keybinding-properties.c:239
-#: libbackground/applier.c:588 typing-break/drwright.c:473
+#: libbackground/applier.c:768 typing-break/drwright.c:473
 msgid "Disabled"
 msgstr "Vypnuto"
 
@@ -1569,7 +1569,9 @@ msgstr "Klávesové zkratky"
 msgid ""
 "To edit a shortcut, click on the corresponding row and type a new "
 "accelerator, or press backspace to clear."
-msgstr "Zkratku upravíte kliknutím na odpovídající řádek a zadáním nové zkratky nebo jejím vymazáním klávesou Backspace."
+msgstr ""
+"Zkratku upravíte kliknutím na odpovídající řádek a zadáním nové zkratky nebo "
+"jejím vymazáním klávesou Backspace."
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:4
 msgid "_Desktop shortcuts:"
@@ -2027,7 +2029,6 @@ msgid "_Visual feedback:"
 msgstr "_Vizuální zpětná vazba:"
 
 #: capplets/theme-switcher/gnome-theme-details.c:372
-#: capplets/theme-switcher/gnome-theme-manager.c:600
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -2054,17 +2055,15 @@ msgstr ""
 "%s je cesta, kam budou nainstalovány soubory tématu. Nemůže být zvolena jako "
 "zdrojové umístění"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:656
-#: capplets/theme-switcher/gnome-theme-manager.c:716
+#: capplets/theme-switcher/gnome-theme-manager.c:642
 msgid "Custom theme"
 msgstr "Vlastní téma"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:656
-#: capplets/theme-switcher/gnome-theme-manager.c:716
+#: capplets/theme-switcher/gnome-theme-manager.c:642
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "Toto téma můžete uložit stisknutím tlačítka Uložit téma."
 
-#: capplets/theme-switcher/gnome-theme-manager.c:1420
+#: capplets/theme-switcher/gnome-theme-manager.c:1403
 msgid ""
 "The default theme schemas could not be found on your system.  This means "
 "that you probably don't have metacity installed, or that your gconf is "
@@ -2488,37 +2487,37 @@ msgstr ""
 "Nemohu vytvořit adresář \"%s\".\n"
 "To je nutné, má-li být možné změnit kurzory."
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:162
+#: gnome-settings-daemon/gnome-settings-keybindings.c:207
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr "Svázání s klávesami (%s) má svoji akci definovanou vícekrát\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:175
+#: gnome-settings-daemon/gnome-settings-keybindings.c:220
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr "Svázání s klávesami (%s) má svoji vazbu definovanou vícekrát\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:181
+#: gnome-settings-daemon/gnome-settings-keybindings.c:226
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr "Svázání s klávesami (%s) není úplné\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:209
+#: gnome-settings-daemon/gnome-settings-keybindings.c:254
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr "Svázání s klávesami (%s) není platné\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:245
+#: gnome-settings-daemon/gnome-settings-keybindings.c:290
 #, c-format
 msgid "It seems that another application already has access to key '%d'."
 msgstr "Zdá se, že ke klávese '%d' již má přístup jiná aplikace."
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:314
+#: gnome-settings-daemon/gnome-settings-keybindings.c:359
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr "Svázání s klávesami (%s) se již používá\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:390
+#: gnome-settings-daemon/gnome-settings-keybindings.c:434
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -2611,11 +2610,11 @@ msgstr "Klíč systému GConf %s je typu %s, ale byl očekáván typ %s\n"
 msgid "Error creating signal pipe."
 msgstr "Chyba při vytváření signalizační roury."
 
-#: libbackground/applier.c:254
+#: libbackground/applier.c:256
 msgid "Type"
 msgstr "Typ"
 
-#: libbackground/applier.c:255
+#: libbackground/applier.c:257
 msgid ""
 "Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
 "for preview"
@@ -2623,27 +2622,27 @@ msgstr ""
 "Typ hodnoty bg_applier: BG_APPLIER_ROOT pro kořenové okno nebo "
 "BG_APPLIER_PREVIEW pro náhled"
 
-#: libbackground/applier.c:262
+#: libbackground/applier.c:264
 msgid "Preview Width"
 msgstr "Šířka náhledu"
 
-#: libbackground/applier.c:263
+#: libbackground/applier.c:265
 msgid "Width if applier is a preview: Defaults to 64."
 msgstr "Šířka, pokud je aplikátor jako náhled. Standardně 64."
 
-#: libbackground/applier.c:270
+#: libbackground/applier.c:272
 msgid "Preview Height"
 msgstr "Výška náhledu"
 
-#: libbackground/applier.c:271
+#: libbackground/applier.c:273
 msgid "Height if applier is a preview: Defaults to 48."
 msgstr "Výška, pokud je aplikátor jako náhled. Standardně 48."
 
-#: libbackground/applier.c:279
+#: libbackground/applier.c:281
 msgid "Screen"
 msgstr "Obrazovka"
 
-#: libbackground/applier.c:280
+#: libbackground/applier.c:282
 msgid "Screen on which BGApplier is to draw"
 msgstr "Obrazovka, na kterou má kreslit BGApplier"
 
