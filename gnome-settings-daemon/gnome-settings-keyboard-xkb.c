@@ -50,7 +50,7 @@ activation_error (void)
 	int release = VendorRelease (GDK_DISPLAY ());
 	gboolean badXFree430Release = (!strcmp (vendor,
 						"The XFree86 Project, Inc"))
-	    && (release == 40300000);
+	    && (release / 100000 == 403);
 
 	GtkWidget *msg = gtk_message_dialog_new (NULL,
 						 GTK_DIALOG_MODAL |
@@ -59,7 +59,7 @@ activation_error (void)
 						 GTK_BUTTONS_OK,
 						 _
 						 ("Error activating XKB configuration.\n"
-						  "Probably internal X server problem.\n\nX server version data:\n%s\n%d%s"),
+						  "Probably internal X server problem.\n\nX server version data:\n%s\n%d\n%s"),
 						 vendor,
 						 release,
 						 badXFree430Release ?
