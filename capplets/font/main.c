@@ -9,6 +9,7 @@
 #include <gconf/gconf-client.h>
 #include <glade/glade.h>
 #include <stdarg.h>
+#include <math.h>
 
 #ifdef HAVE_XFT2
 #include <gdk/gdkx.h>
@@ -806,6 +807,8 @@ cb_show_details (GtkWidget *button,
 		GladeXML *dialog = glade_xml_new (GLADEDIR "/font-properties.glade", "render_details", NULL);
 		GtkWidget *dpi_spinner;
 		GnomeVFSURI *uri;
+		int dpi;
+		GtkAdjustment *adjustment;
 
 		details_dialog = WID ("render_details");
 		uri = gnome_vfs_uri_new ("fonts:///");
@@ -819,6 +822,15 @@ cb_show_details (GtkWidget *button,
 		gtk_window_set_transient_for (GTK_WINDOW (details_dialog), parent);
 
 		dpi_spinner = WID ("dpi_spinner");
+
+		/* pick a sensible maximum dpi */
+		dpi = floor ((gdk_screen_width () / gdk_screen_width_mm () +
+			      gdk_screen_height () / gdk_screen_height_mm ()) * 25.4 / 2. + .5);
+		if (dpi < 50)
+			 dpi = 50; /* be extra careful */
+		adjustment = gtk_spin_button_get_adjustment (GTK_SPIN_BUTTON (dpi_spinner));
+		adjustment->upper = dpi * 3;
+
 		dpi_load (client, GTK_SPIN_BUTTON (dpi_spinner));
 		g_signal_connect (dpi_spinner, "value_changed",
 				  G_CALLBACK (dpi_value_changed), client);
