@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# test-2.sh
+# test-3.sh
 # Copyright (C) 2001 Ximian, Inc.
 # Written by Bradford Hovinen <hovinen@ximian.com>
 #
@@ -19,7 +19,7 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
 # 02111-1307, USA.
 #
-# Test suite, part II
+# Test suite, part III
 #
 # Given an archive to work with (global or per-user):
 #
@@ -27,10 +27,13 @@
 #  - Create a new location inheriting from the default location
 #    (the default location should be created automatically in this case)
 #  - Sets the new location as the current one
-#  - Stores data for a backend not contained in the new location
-#    (this should pass the data through to default)
-#  - Adds a backend to the new location (full containment)
-#  - Stores data for that backend in the new location
+#  - Stores data for a particular backend, so that it should pass
+#    through to the parent location
+#  - Adds that backend to the new location (partial containment)
+#  - Stores data for that backend in the new location, so that the
+#    nodes should be subtracted
+#  - Retrieves the data for that backend from the new location, so
+#    that the nodes should be merged
 
 XIMIAN_ARCHIVER=${XIMIAN_ARCHIVER:-'../ximian-archiver'}
 
@@ -96,93 +99,92 @@ fi
 # Test proper
 ##############################################################################
 
-# Test 1: Creating a new location
-
 run_command /dev/null --add-location --parent=default --location=Boston-Office
 run_command /dev/null --change-location --location=Boston-Office
 
-# Test 2: Storing data that should "pass through" to the parent
+# Test 1: Adding a backend (partial containment) and storing data that
+# should be stored in the child location
+#
+# Note: These are not real data
 
 archiver_test_data_file1=`get_unused_tmpfile ximian-archiver-test-data`;
 
 cat >$archiver_test_data_file1 <<EOF
 <?xml version="1.0"?>
-<background-properties>
-  <bg-color1>#111128</bg-color1>
-  <bg-color2>#796dff</bg-color2>
-  <enabled/>
-  <wallpaper/>
-  <gradient/>
-  <orientation>vertical</orientation>
-  <wallpaper-type>0</wallpaper-type>
-  <wallpaper-filename>/home/hovinen/media/Propaganda/Vol3/9a.jpg</wallpaper-filename>
-  <wallpaper-sel-path>./</wallpaper-sel-path>
-  <auto-apply/>
-  <adjust-opacity/>
-  <opacity>172</opacity>
-</background-properties>
+<mouse-properties>
+  <acceleration>7</acceleration>
+  <threshold>1</threshold>
+  <fake-node id="1">
+    <another-node>data</another-node>
+  </fake-node>
+  <fake-node id="2">
+    <my-node>blah blah blah</my-node>
+    <another-node>more data</another-node>
+  </fake-node>
+</mouse-properties>
 
 EOF
 
 run_command $archiver_test_data_file1 \
-	    --store --backend=background-properties-capplet
+	    --store --backend=mouse-properties-capplet
 
-# Test 3: Adding a backend (full containment) and storing data that
-# should be stored in the child location
-
-run_command /dev/null --add-backend --full \
-	    --backend=keyboard-properties-capplet
+run_command /dev/null --add-backend --partial \
+	    --backend=mouse-properties-capplet
 
 archiver_test_data_file2=`get_unused_tmpfile ximian-archiver-test-data`;
 
 cat >$archiver_test_data_file2 <<EOF
 <?xml version="1.0"?>
-<keyboard-properties>
-  <rate>255</rate>
-  <delay>0</delay>
-  <repeat/>
-  <volume>0</volume>
-</keyboard-properties>
+<mouse-properties>
+  <acceleration>7</acceleration>
+  <threshold>3</threshold>
+  <fake-node id="1">
+    <another-node>data</another-node>
+  </fake-node>
+  <fake-node id="2">
+    <my-node>blah blah blah</my-node>
+    <another-node>different data</another-node>
+  </fake-node>
+</mouse-properties>
 
 EOF
 
 run_command $archiver_test_data_file2 \
-	    --store --backend=keyboard-properties-capplet
+	    --store --backend=mouse-properties-capplet --compare-parent
 
-# Test 5: Retrieve the background properties data previously stored
-# and compare it with the data we have here to see if everything is ok
+# This should be the resulting file:
+
+archiver_test_data_file2_correct=`get_unused_tmpfile ximian-archiver-check`;
+
+cat >$archiver_test_data_file2_correct <<EOF
+<?xml version="1.0"?>
+<mouse-properties>
+  <threshold>3</threshold>
+  <fake-node id="2">
+    <another-node>different data</another-node>
+  </fake-node>
+</mouse-properties>
+EOF
+
+# Test 2: Retrieve the mouse properties data from the location manager
+# to see if node merging works properly
 
 archiver_test_data_file3=`get_unused_tmpfile ximian-archiver-test-data`
 
-run_command /dev/null --rollback --show --last \
-	    --backend=background-properties-capplet \
-	    >$archiver_test_data_file3
+run_command /dev/null --rollback --last --show \
+	    --backend=mouse-properties-capplet >$archiver_test_data_file3
 
 ##############################################################################
 # Results check
 ##############################################################################
 
-echo -n "Checking whether default location was created properly..."
-
-if [ -d "$archive_dir/default" ]; then
-    echo "yes -- good"
-else
-    echo "no -- error"
-fi
-
-echo -n "Checking whether derived location was created properly..."
-
-if [ -d "$archive_dir/Boston-Office" ]; then
-    echo "yes -- good"
-else
-    echo "no -- error"
-fi
-
-echo -n "Checking whether the XML data retrieved match the XML data given..."
+echo -n "Checking whether the XML data match the XML data given..."
 
 differences_file=`get_unused_tmpfile differences`
 
-diff -u $archiver_test_data_file3 $archiver_test_data_file1 >$differences_file
+diff -u "$archive_dir/Boston-Office/00000000.xml" \
+    $archiver_test_data_file2_correct \
+    >$differences_file
 
 if [ ! -s $differences_file ]; then
     echo "yes -- good"
@@ -195,6 +197,28 @@ fi
 
 rm -f $differences_file
 
+echo -n "Checking whether the XML data retrieved match the XML data given..."
+
+differences_file=`get_unused_tmpfile differences`
+
+diff -u $archiver_test_data_file3 $archiver_test_data_file2 >$differences_file
+
+if [ ! -s $differences_file ]; then
+    echo "yes -- good"
+else
+    echo "no -- error"
+    echo "Check manually to see whether this is correct. Nodes may be"
+    echo "out of order."
+    echo "File retrieved is as follows:"
+    cat $archiver_test_data_file3
+    echo
+    echo "File is supposed to be as follows:"
+    cat $archiver_test_data_file2
+    echo
+fi
+
+rm -f $differences_file
+
 ##############################################################################
 # Putting the results together
 ##############################################################################
@@ -202,6 +226,8 @@ rm -f $differences_file
 rm -f $archiver_test_data_file1
 rm -f $archiver_test_data_file2
 rm -f $archiver_test_data_file3
+rm -f $archiver_test_data_file4
+rm -f $archiver_test_data_file5
 
 results_dir="ximian-config-results-`date +%Y%m%d`"
 results_dir=`get_unused_tmpfile $results_dir`

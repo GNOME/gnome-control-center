@@ -1645,9 +1645,9 @@ compare_xml_nodes (xmlNodePtr node1, xmlNodePtr node2)
 	 */
 
 	for (attr = node1->properties; attr != NULL; attr = attr->next) {
-		g_assert (xmlNodeIsText (attr->node));
+		g_assert (xmlNodeIsText (attr->val));
 
-		if (strcmp (xmlNodeGetContent (attr->node),
+		if (strcmp (xmlNodeGetContent (attr->val),
 			    xmlGetProp (node2, attr->name)))
 			return FALSE;
 
