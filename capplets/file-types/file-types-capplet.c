@@ -33,7 +33,6 @@
 #include <regex.h>
 #include <string.h>
 
-#include <capplet-widget.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <gdk/gdkprivate.h>
 #include <gnome.h>
@@ -77,7 +76,9 @@ static void	 add_mime_clicked 	  		(GtkWidget 	*widget,
 static void	 edit_default_clicked 			(GtkWidget 	*widget, 	
 						 	 gpointer   	data);
 static GtkWidget *create_mime_list_and_scroller 	(void);
-static void 	 ok_callback 		  		(void);
+static void 	 response_cb				(GtkDialog *dialog,
+							 GtkResponseType r,
+							 gpointer data);
 static void	 gtk_widget_make_bold 			(GtkWidget 	*widget);
 static GdkFont 	 *gdk_font_get_bold 			(const GdkFont  *plain_font);
 static void	 gtk_widget_set_font 			(GtkWidget 	*widget, 
@@ -182,24 +183,27 @@ main (int argc, char **argv)
         textdomain (PACKAGE);
 	
 	
-        init_results = gnome_capplet_init ("file-types-capplet", VERSION, argc, argv, NULL, 0, NULL);
-
-	if (init_results < 0) {
-                exit (0);
-	}
+  	gnome_program_init ("file-types-capplet", VERSION,
+			    LIBGNOMEUI_MODULE, argc, argv, NULL);
 
 	gnome_vfs_init ();
 
-	if (init_results == 0) {
-		init_mime_capplet (mime_type);
-	        capplet_gtk_main ();
-	}
-        return 0;
+	init_mime_capplet (mime_type);
+	gtk_main ();
+        
+	return 0;
 }
 
 static void
-ok_callback ()
+response_cb (GtkDialog *dialog, GtkResponseType response, gpointer data)
 {
+	switch (response)
+	{
+	case GTK_RESPONSE_NONE:
+	case GTK_RESPONSE_CLOSE:
+		gtk_main_quit ();
+		break;
+	}
 }
 
 static void
@@ -649,12 +653,18 @@ init_mime_capplet (const char *scroll_to_mime_type)
         GtkWidget *table;
 	int index, list_width, column_width, found_index;
 
-	capplet = capplet_widget_new ();
+	capplet =
+		gtk_dialog_new_with_buttons (_("URL Handlers"), NULL,
+					     -1,
+					     GTK_STOCK_HELP, GTK_RESPONSE_HELP,
+					     GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
+					     NULL);
 
 	/* Main vertical box */                    
 	main_vbox = gtk_vbox_new (FALSE, GNOME_PAD);
 	gtk_container_set_border_width (GTK_CONTAINER (main_vbox), GNOME_PAD_SMALL);
-        gtk_container_add (GTK_CONTAINER (capplet), main_vbox);
+	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (capplet)->vbox), main_vbox,
+			    TRUE, TRUE, 0);
 
         /* Main horizontal box and mime list */                    
         hbox = gtk_hbox_new (FALSE, GNOME_PAD);
@@ -832,8 +842,8 @@ init_mime_capplet (const char *scroll_to_mime_type)
 #endif
 
         /* Setup capplet signals */
-        gtk_signal_connect(GTK_OBJECT(capplet), "ok",
-                           GTK_SIGNAL_FUNC(ok_callback), NULL);
+	gtk_signal_connect (GTK_OBJECT(capplet), "response",
+			    GTK_SIGNAL_FUNC (response_cb), NULL);
 
 	gtk_signal_connect (GTK_OBJECT (mime_list),"select_row",
        	                   GTK_SIGNAL_FUNC (mime_list_selected_row_callback), NULL);
@@ -865,9 +875,6 @@ init_mime_capplet (const char *scroll_to_mime_type)
 		gtk_clist_select_row (GTK_CLIST (mime_list), 0, 0);
 		list_reveal_row (GTK_CLIST (mime_list), 0);
 	}
-		
-	/* Inform control center that our changes are immediate */
-	capplet_widget_changes_are_immediate (CAPPLET_WIDGET (capplet));
 }
 
 static gboolean

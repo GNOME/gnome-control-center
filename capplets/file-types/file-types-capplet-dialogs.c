@@ -25,7 +25,6 @@
 
 #include <config.h>
 
-#include <capplet-widget.h>
 #include <ctype.h>
 #include <gnome.h>
 #include <gtk/gtk.h>
