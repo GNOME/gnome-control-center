@@ -510,16 +510,16 @@ drag_data_get  (GtkWidget          *widget,
 	g_return_if_fail (ientry != NULL);
 	g_return_if_fail (NAUTILUS_MIME_IS_ICON_ENTRY (ientry));
 
-	file = gnome_file_entry_get_full_path(GNOME_FILE_ENTRY(ientry->fentry),
-					      TRUE);
+	file = gnome_file_entry_get_full_path (GNOME_FILE_ENTRY (ientry->fentry),
+					       TRUE);
 
 	if(!file) {
-		/* FIXME bugzilla.eazel.com 2789: cancel the drag*/
+		gdk_drag_abort (context, 0);
 		return;
 	}
 
-	string = g_strdup_printf("file:%s\r\n",file);
-	g_free(file);
+	string = g_strdup_printf ("file:%s\r\n",file);
+	g_free (file);
 	gtk_selection_data_set (selection_data,
 				selection_data->target,
 				8, string, strlen(string)+1);
