@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core VERSION\n"
-"POT-Creation-Date: 1999-02-22 17:53-0500\n"
+"POT-Creation-Date: 1999-02-28 16:53-0500\n"
 "PO-Revision-Date: 1998-12-11 04:34+09:00\n"
 "Last-Translator: Eiichiro ITANI <emu@ceres.dti.ne.jp>\n"
 "Language-Team: <gnome@lists.hypercore.co.jp>\n"
@@ -72,6 +72,10 @@ msgstr ""
 
 #: capplets/background-properties/property-background.c:948
 msgid "Tiled"
+msgstr ""
+
+#: capplets/background-properties/property-background.c:1255
+msgid "Disable background selection"
 msgstr ""
 
 #: capplets/background-properties/property-background.c:1383
@@ -251,7 +255,7 @@ msgid " Settings"
 msgstr " 設定"
 
 #: capplets/screensaver-properties/screensaver-dialog.c:25
-#: capplets/theme-switcher/gui.c:56 capplets/theme-switcher/gui.c:85
+#: capplets/theme-switcher/gui.c:131 capplets/theme-switcher/gui.c:161
 msgid "Preview"
 msgstr "試写"
 
@@ -267,7 +271,7 @@ msgstr "作者:"
 msgid "Author: UNKNOWN"
 msgstr "作者: 不明"
 
-#: capplets/screensaver-properties/screensaver-dialog.c:77
+#: capplets/screensaver-properties/screensaver-dialog.c:78
 msgid "Settings"
 msgstr "設定"
 
@@ -324,61 +328,75 @@ msgstr "スクリーンセーバーデモ"
 msgid "Program:"
 msgstr ""
 
-#: capplets/sound-properties/sound-properties.c:166
+#: capplets/sound-properties/sound-properties.c:184
 msgid "Category"
 msgstr "カテゴリー"
 
-#: capplets/sound-properties/sound-properties.c:167
+#: capplets/sound-properties/sound-properties.c:185
 msgid "Event"
 msgstr "イベント"
 
-#: capplets/sound-properties/sound-properties.c:168
+#: capplets/sound-properties/sound-properties.c:186
 msgid "File to Play"
 msgstr "鳴らすファイル"
 
-#: capplets/sound-properties/sound-properties.c:221
+#: capplets/sound-properties/sound-properties.c:232
+msgid "Enable"
+msgstr ""
+
+#: capplets/sound-properties/sound-properties.c:239
 msgid "GNOME sound support"
 msgstr ""
 
-#: capplets/sound-properties/sound-properties.c:229
+#: capplets/sound-properties/sound-properties.c:247
 msgid "Sounds for events"
 msgstr ""
 
-#: capplets/sound-properties/sound-properties.c:250
+#: capplets/sound-properties/sound-properties.c:268
 msgid "General"
 msgstr "一般"
 
-#: capplets/sound-properties/sound-properties.c:294
-msgid "Play"
-msgstr "鳴らす"
-
-#: capplets/sound-properties/sound-properties.c:302
+#: capplets/sound-properties/sound-properties.c:275
 msgid "Select sound file"
 msgstr "音源ファイルの選択"
+
+#: capplets/sound-properties/sound-properties.c:308
+msgid "Play"
+msgstr "鳴らす"
 
 #: capplets/sound-properties/sound-properties.c:315
 msgid "Sound Events"
 msgstr "サウンドイベント"
 
-#: capplets/sound-properties/sound-properties.c:663
+#: capplets/sound-properties/sound-properties.c:332
+msgid ""
+"This copy of the GNOME control center was not compiled with sound support"
+msgstr ""
+
+#: capplets/sound-properties/sound-properties.c:680
 msgid "The sound file for this event does not exist."
 msgstr ""
 
-#: capplets/sound-properties/sound-properties.c:665
+#: capplets/sound-properties/sound-properties.c:682
 msgid ""
 "The sound file for this event does not exist. You may want to install the "
 "gnome-audio package for a set of default sounds."
 msgstr ""
 
-#: capplets/sound-properties/sound-properties.c:669
+#: capplets/sound-properties/sound-properties.c:686
 msgid "Close"
 msgstr ""
 
-#: capplets/theme-switcher/gui.c:38
+#: capplets/theme-switcher/gui.c:49
+#, fuzzy
+msgid "Select a theme to install"
+msgstr "音源ファイルの選択"
+
+#: capplets/theme-switcher/gui.c:113
 msgid "Available Themes"
 msgstr "使用可能なテーマ"
 
-#: capplets/theme-switcher/gui.c:48
+#: capplets/theme-switcher/gui.c:123
 msgid ""
 "Auto\n"
 "Preview"
@@ -386,19 +404,20 @@ msgstr ""
 "自動\n"
 "試写"
 
-#: capplets/theme-switcher/gui.c:59
+#: capplets/theme-switcher/gui.c:134
 msgid ""
 "Install new\n"
 "theme..."
 msgstr ""
 
-#: capplets/theme-switcher/gui.c:73
+#: capplets/theme-switcher/gui.c:149
 msgid "Theme Information"
 msgstr "テーマ情報"
 
 #: capplets/ui-properties/ui-properties.c:53
-msgid "Default Gtk setting [FIXME - Describe this better]"
-msgstr ""
+#, fuzzy
+msgid "Default Gtk setting"
+msgstr "設定のテスト"
 
 #: capplets/ui-properties/ui-properties.c:54
 msgid "Spread buttons out"
@@ -524,15 +543,15 @@ msgstr ""
 msgid "Dialog buttons have icons"
 msgstr ""
 
-#: capplets/ui-properties/ui-properties.c:342
+#: capplets/ui-properties/ui-properties.c:345
 msgid "Menu items have icons"
 msgstr ""
 
-#: capplets/ui-properties/ui-properties.c:358
+#: capplets/ui-properties/ui-properties.c:364
 msgid "Default MDI mode"
 msgstr ""
 
-#: capplets/ui-properties/ui-properties.c:363
+#: capplets/ui-properties/ui-properties.c:369
 msgid "MDI notebook tab position"
 msgstr ""
 
@@ -654,13 +673,14 @@ msgstr ""
 msgid "Discard all changes"
 msgstr ""
 
+#. create the app
+#: control-center/main.c:141
+msgid "Control Center"
+msgstr ""
+
 #, fuzzy
 #~ msgid "Keyboard focus follows"
 #~ msgstr "キーボードのクリック音"
-
-#, fuzzy
-#~ msgid "Select a file to save"
-#~ msgstr "音源ファイルの選択"
 
 #, fuzzy
 #~ msgid "Select a file to load"

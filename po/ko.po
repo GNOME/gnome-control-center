@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0.0\n"
-"POT-Creation-Date: 1999-02-26 01:35+0900\n"
+"POT-Creation-Date: 1999-02-28 16:53-0500\n"
 "PO-Revision-Date: 1998-02-26 01:40+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@adam.kaist.ac.kr>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -73,6 +73,10 @@ msgstr "중앙"
 #: capplets/background-properties/property-background.c:948
 msgid "Tiled"
 msgstr "타일"
+
+#: capplets/background-properties/property-background.c:1255
+msgid "Disable background selection"
+msgstr ""
 
 #: capplets/background-properties/property-background.c:1383
 msgid "Set parameters from saved state and exit"
@@ -249,7 +253,7 @@ msgid " Settings"
 msgstr " 설정"
 
 #: capplets/screensaver-properties/screensaver-dialog.c:25
-#: capplets/theme-switcher/gui.c:56 capplets/theme-switcher/gui.c:85
+#: capplets/theme-switcher/gui.c:131 capplets/theme-switcher/gui.c:161
 msgid "Preview"
 msgstr "미리보기"
 
@@ -320,61 +324,76 @@ msgstr "화면 보호기 데모"
 msgid "Program:"
 msgstr "프로그램:"
 
-#: capplets/sound-properties/sound-properties.c:174
+#: capplets/sound-properties/sound-properties.c:184
 msgid "Category"
 msgstr "범주"
 
-#: capplets/sound-properties/sound-properties.c:175
+#: capplets/sound-properties/sound-properties.c:185
 msgid "Event"
 msgstr "이벤트"
 
-#: capplets/sound-properties/sound-properties.c:176
+#: capplets/sound-properties/sound-properties.c:186
 msgid "File to Play"
 msgstr "소리낼 파일"
 
-#: capplets/sound-properties/sound-properties.c:229
+#: capplets/sound-properties/sound-properties.c:232
+msgid "Enable"
+msgstr ""
+
+#: capplets/sound-properties/sound-properties.c:239
 msgid "GNOME sound support"
 msgstr "그놈 소리 기능"
 
-#: capplets/sound-properties/sound-properties.c:237
+#: capplets/sound-properties/sound-properties.c:247
 msgid "Sounds for events"
 msgstr "효과음"
 
-#: capplets/sound-properties/sound-properties.c:258
+#: capplets/sound-properties/sound-properties.c:268
 msgid "General"
 msgstr "일반"
 
-#: capplets/sound-properties/sound-properties.c:302
-msgid "Play"
-msgstr "소리 내기"
-
-#: capplets/sound-properties/sound-properties.c:310
+#: capplets/sound-properties/sound-properties.c:275
 msgid "Select sound file"
 msgstr "소리 파일 선택"
 
-#: capplets/sound-properties/sound-properties.c:323
+#: capplets/sound-properties/sound-properties.c:308
+msgid "Play"
+msgstr "소리 내기"
+
+#: capplets/sound-properties/sound-properties.c:315
 msgid "Sound Events"
 msgstr "소리 이벤트"
 
-#: capplets/sound-properties/sound-properties.c:671
+#: capplets/sound-properties/sound-properties.c:332
+msgid ""
+"This copy of the GNOME control center was not compiled with sound support"
+msgstr ""
+
+#: capplets/sound-properties/sound-properties.c:680
 msgid "The sound file for this event does not exist."
 msgstr "이 이벤트에 대한 사운드 파일이 없습니다."
 
-#: capplets/sound-properties/sound-properties.c:673
+#: capplets/sound-properties/sound-properties.c:682
 msgid ""
 "The sound file for this event does not exist. You may want to install the "
 "gnome-audio package for a set of default sounds."
-msgstr "이 이벤트에 대한 사운드 파일이 없습니다. 기본적인 소리가 들어 있는 gnome-audio 패키지를 설치해야 할 것입니다."
+msgstr ""
+"이 이벤트에 대한 사운드 파일이 없습니다. 기본적인 소리가 들어 있는 "
+"gnome-audio 패키지를 설치해야 할 것입니다."
 
-#: capplets/sound-properties/sound-properties.c:677
+#: capplets/sound-properties/sound-properties.c:686
 msgid "Close"
 msgstr "닫기"
 
-#: capplets/theme-switcher/gui.c:38
+#: capplets/theme-switcher/gui.c:49
+msgid "Select a theme to install"
+msgstr ""
+
+#: capplets/theme-switcher/gui.c:113
 msgid "Available Themes"
 msgstr "사용가능한 테마"
 
-#: capplets/theme-switcher/gui.c:48
+#: capplets/theme-switcher/gui.c:123
 msgid ""
 "Auto\n"
 "Preview"
@@ -382,7 +401,7 @@ msgstr ""
 "자동으로\n"
 "미리보기"
 
-#: capplets/theme-switcher/gui.c:59
+#: capplets/theme-switcher/gui.c:134
 msgid ""
 "Install new\n"
 "theme..."
@@ -390,13 +409,14 @@ msgstr ""
 "새로운 테마\n"
 "선택..."
 
-#: capplets/theme-switcher/gui.c:73
+#: capplets/theme-switcher/gui.c:149
 msgid "Theme Information"
 msgstr "테마 정보"
 
 #: capplets/ui-properties/ui-properties.c:53
-msgid "Default Gtk setting [FIXME - Describe this better]"
-msgstr "기본 Gtk 세팅 [FIXME - Describe this better]"
+#, fuzzy
+msgid "Default Gtk setting"
+msgstr "설정 테스트"
 
 #: capplets/ui-properties/ui-properties.c:54
 msgid "Spread buttons out"
@@ -651,3 +671,12 @@ msgstr "캐플릿"
 #: control-center/main.c:72
 msgid "Discard all changes"
 msgstr "변경 사항 모두 버리기"
+
+#. create the app
+#: control-center/main.c:141
+#, fuzzy
+msgid "Control Center"
+msgstr "그놈 조종판"
+
+#~ msgid "Default Gtk setting [FIXME - Describe this better]"
+#~ msgstr "기본 Gtk 세팅 [FIXME - Describe this better]"

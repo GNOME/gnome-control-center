@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 1999-02-25 00:58-0500\n"
+"POT-Creation-Date: 1999-02-28 16:53-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Max Valianskiy <maxcom@vinchi.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -73,6 +73,10 @@ msgstr "В центре"
 #: capplets/background-properties/property-background.c:948
 msgid "Tiled"
 msgstr "Мозаика"
+
+#: capplets/background-properties/property-background.c:1255
+msgid "Disable background selection"
+msgstr ""
 
 #: capplets/background-properties/property-background.c:1383
 msgid "Set parameters from saved state and exit"
@@ -247,7 +251,7 @@ msgid " Settings"
 msgstr " Свойства"
 
 #: capplets/screensaver-properties/screensaver-dialog.c:25
-#: capplets/theme-switcher/gui.c:56 capplets/theme-switcher/gui.c:85
+#: capplets/theme-switcher/gui.c:131 capplets/theme-switcher/gui.c:161
 msgid "Preview"
 msgstr "Посмотреть"
 
@@ -264,7 +268,7 @@ msgstr "Автор:"
 msgid "Author: UNKNOWN"
 msgstr "Автор: НЕИЗВЕСТНЫЙ"
 
-#: capplets/screensaver-properties/screensaver-dialog.c:77
+#: capplets/screensaver-properties/screensaver-dialog.c:78
 msgid "Settings"
 msgstr "Свойства"
 
@@ -319,61 +323,74 @@ msgstr "Демонстрация хранителя экрана"
 msgid "Program:"
 msgstr "Программа:"
 
-#: capplets/sound-properties/sound-properties.c:174
+#: capplets/sound-properties/sound-properties.c:184
 msgid "Category"
 msgstr "Категория"
 
-#: capplets/sound-properties/sound-properties.c:175
+#: capplets/sound-properties/sound-properties.c:185
 msgid "Event"
 msgstr "Событие"
 
-#: capplets/sound-properties/sound-properties.c:176
+#: capplets/sound-properties/sound-properties.c:186
 msgid "File to Play"
 msgstr "Играть файл"
 
-#: capplets/sound-properties/sound-properties.c:229
+#: capplets/sound-properties/sound-properties.c:232
+msgid "Enable"
+msgstr ""
+
+#: capplets/sound-properties/sound-properties.c:239
 msgid "GNOME sound support"
 msgstr "Поддержка звука GNOME'ом"
 
-#: capplets/sound-properties/sound-properties.c:237
+#: capplets/sound-properties/sound-properties.c:247
 msgid "Sounds for events"
 msgstr "Звуки событий"
 
-#: capplets/sound-properties/sound-properties.c:258
+#: capplets/sound-properties/sound-properties.c:268
 msgid "General"
 msgstr "Общие"
 
-#: capplets/sound-properties/sound-properties.c:302
-msgid "Play"
-msgstr "Играть"
-
-#: capplets/sound-properties/sound-properties.c:310
+#: capplets/sound-properties/sound-properties.c:275
 msgid "Select sound file"
 msgstr "Выберете звуковой файл"
 
-#: capplets/sound-properties/sound-properties.c:323
+#: capplets/sound-properties/sound-properties.c:308
+msgid "Play"
+msgstr "Играть"
+
+#: capplets/sound-properties/sound-properties.c:315
 msgid "Sound Events"
 msgstr "Звуки Событий"
 
-#: capplets/sound-properties/sound-properties.c:671
+#: capplets/sound-properties/sound-properties.c:332
+msgid ""
+"This copy of the GNOME control center was not compiled with sound support"
+msgstr ""
+
+#: capplets/sound-properties/sound-properties.c:680
 msgid "The sound file for this event does not exist."
 msgstr ""
 
-#: capplets/sound-properties/sound-properties.c:673
+#: capplets/sound-properties/sound-properties.c:682
 msgid ""
 "The sound file for this event does not exist. You may want to install the "
 "gnome-audio package for a set of default sounds."
 msgstr ""
 
-#: capplets/sound-properties/sound-properties.c:677
+#: capplets/sound-properties/sound-properties.c:686
 msgid "Close"
 msgstr "Закрыть"
 
-#: capplets/theme-switcher/gui.c:38
+#: capplets/theme-switcher/gui.c:49
+msgid "Select a theme to install"
+msgstr ""
+
+#: capplets/theme-switcher/gui.c:113
 msgid "Available Themes"
 msgstr "Темы"
 
-#: capplets/theme-switcher/gui.c:48
+#: capplets/theme-switcher/gui.c:123
 msgid ""
 "Auto\n"
 "Preview"
@@ -381,7 +398,7 @@ msgstr ""
 "Авто\n"
 "Просмотр"
 
-#: capplets/theme-switcher/gui.c:59
+#: capplets/theme-switcher/gui.c:134
 msgid ""
 "Install new\n"
 "theme..."
@@ -389,13 +406,14 @@ msgstr ""
 "Установить новую\n"
 "тему..."
 
-#: capplets/theme-switcher/gui.c:73
+#: capplets/theme-switcher/gui.c:149
 msgid "Theme Information"
 msgstr "Информация о Теме"
 
 #: capplets/ui-properties/ui-properties.c:53
-msgid "Default Gtk setting [FIXME - Describe this better]"
-msgstr "Установки Gtk по умолчанию [FIXME - Describe this better]"
+#, fuzzy
+msgid "Default Gtk setting"
+msgstr "Проверка установок"
 
 #: capplets/ui-properties/ui-properties.c:54
 msgid "Spread buttons out"
@@ -650,3 +668,12 @@ msgstr ""
 #: control-center/main.c:72
 msgid "Discard all changes"
 msgstr ""
+
+#. create the app
+#: control-center/main.c:141
+#, fuzzy
+msgid "Control Center"
+msgstr "Центр управления GNOME"
+
+#~ msgid "Default Gtk setting [FIXME - Describe this better]"
+#~ msgstr "Установки Gtk по умолчанию [FIXME - Describe this better]"

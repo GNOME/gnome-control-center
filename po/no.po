@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-centre 1.0.0\n"
-"POT-Creation-Date: 1999-02-25 11:09+0100\n"
+"POT-Creation-Date: 1999-02-28 16:53-0500\n"
 "PO-Revision-Date: 1999-02-25 01:35+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@fib.hl.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
@@ -73,6 +73,10 @@ msgstr "Sentrert"
 #: capplets/background-properties/property-background.c:948
 msgid "Tiled"
 msgstr "Side-ved-side"
+
+#: capplets/background-properties/property-background.c:1255
+msgid "Disable background selection"
+msgstr ""
 
 #: capplets/background-properties/property-background.c:1383
 msgid "Set parameters from saved state and exit"
@@ -247,7 +251,7 @@ msgid " Settings"
 msgstr " Innstillinger"
 
 #: capplets/screensaver-properties/screensaver-dialog.c:25
-#: capplets/theme-switcher/gui.c:56 capplets/theme-switcher/gui.c:85
+#: capplets/theme-switcher/gui.c:131 capplets/theme-switcher/gui.c:161
 msgid "Preview"
 msgstr "Forhåndsvisning"
 
@@ -320,47 +324,56 @@ msgstr "Skjermsparerdemo"
 msgid "Program:"
 msgstr "Program:"
 
-#: capplets/sound-properties/sound-properties.c:174
+#: capplets/sound-properties/sound-properties.c:184
 msgid "Category"
 msgstr "Kategori"
 
-#: capplets/sound-properties/sound-properties.c:175
+#: capplets/sound-properties/sound-properties.c:185
 msgid "Event"
 msgstr "Hendelse"
 
-#: capplets/sound-properties/sound-properties.c:176
+#: capplets/sound-properties/sound-properties.c:186
 msgid "File to Play"
 msgstr "Fil som skal spilles"
 
-#: capplets/sound-properties/sound-properties.c:229
+#: capplets/sound-properties/sound-properties.c:232
+msgid "Enable"
+msgstr ""
+
+#: capplets/sound-properties/sound-properties.c:239
 msgid "GNOME sound support"
 msgstr "Slå på lydstøtte for GNOME"
 
-#: capplets/sound-properties/sound-properties.c:237
+#: capplets/sound-properties/sound-properties.c:247
 msgid "Sounds for events"
 msgstr "Slå på lyd for hendelser"
 
-#: capplets/sound-properties/sound-properties.c:258
+#: capplets/sound-properties/sound-properties.c:268
 msgid "General"
 msgstr "Generelt"
 
-#: capplets/sound-properties/sound-properties.c:302
-msgid "Play"
-msgstr "Spill"
-
-#: capplets/sound-properties/sound-properties.c:310
+#: capplets/sound-properties/sound-properties.c:275
 msgid "Select sound file"
 msgstr "Velg lydfil"
 
-#: capplets/sound-properties/sound-properties.c:323
+#: capplets/sound-properties/sound-properties.c:308
+msgid "Play"
+msgstr "Spill"
+
+#: capplets/sound-properties/sound-properties.c:315
 msgid "Sound Events"
 msgstr "Lydhendelser"
 
-#: capplets/sound-properties/sound-properties.c:671
+#: capplets/sound-properties/sound-properties.c:332
+msgid ""
+"This copy of the GNOME control center was not compiled with sound support"
+msgstr ""
+
+#: capplets/sound-properties/sound-properties.c:680
 msgid "The sound file for this event does not exist."
 msgstr "Lydfilen for denne hendelsen eksisterer ikke."
 
-#: capplets/sound-properties/sound-properties.c:673
+#: capplets/sound-properties/sound-properties.c:682
 msgid ""
 "The sound file for this event does not exist. You may want to install the "
 "gnome-audio package for a set of default sounds."
@@ -368,15 +381,19 @@ msgstr ""
 "Lydfilen for denne hendelsen eksisterer ikke. Du vil kanskje installere "
 "gnome-audio pakken for et sett med standardlyder."
 
-#: capplets/sound-properties/sound-properties.c:677
+#: capplets/sound-properties/sound-properties.c:686
 msgid "Close"
 msgstr "Lukk"
 
-#: capplets/theme-switcher/gui.c:38
+#: capplets/theme-switcher/gui.c:49
+msgid "Select a theme to install"
+msgstr ""
+
+#: capplets/theme-switcher/gui.c:113
 msgid "Available Themes"
 msgstr "Tilgjengelige temaer"
 
-#: capplets/theme-switcher/gui.c:48
+#: capplets/theme-switcher/gui.c:123
 msgid ""
 "Auto\n"
 "Preview"
@@ -384,7 +401,7 @@ msgstr ""
 "Automatisk\n"
 "Forhåndsvisning"
 
-#: capplets/theme-switcher/gui.c:59
+#: capplets/theme-switcher/gui.c:134
 msgid ""
 "Install new\n"
 "theme..."
@@ -392,13 +409,14 @@ msgstr ""
 "Installer nytt\n"
 "tema..."
 
-#: capplets/theme-switcher/gui.c:73
+#: capplets/theme-switcher/gui.c:149
 msgid "Theme Information"
 msgstr "Informasjon om tema"
 
 #: capplets/ui-properties/ui-properties.c:53
-msgid "Default Gtk setting [FIXME - Describe this better]"
-msgstr "Standard Gtk innstillinger"
+#, fuzzy
+msgid "Default Gtk setting"
+msgstr "Testinnstillinger"
 
 #: capplets/ui-properties/ui-properties.c:54
 msgid "Spread buttons out"
@@ -655,3 +673,11 @@ msgstr "CAPPLET"
 msgid "Discard all changes"
 msgstr "Forkast alle endringer"
 
+#. create the app
+#: control-center/main.c:141
+#, fuzzy
+msgid "Control Center"
+msgstr "GNOME Kontrollsenter"
+
+#~ msgid "Default Gtk setting [FIXME - Describe this better]"
+#~ msgstr "Standard Gtk innstillinger"

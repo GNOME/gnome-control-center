@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core-0.20\n"
-"POT-Creation-Date: 1999-02-22 17:53-0500\n"
+"POT-Creation-Date: 1999-02-28 16:53-0500\n"
 "PO-Revision-Date: 1998-06-16 00:00+0100\n"
 "Last-Translator: Martin Wahlen <mva@sslug.dk>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -76,6 +76,11 @@ msgstr "Centrerad"
 #: capplets/background-properties/property-background.c:948
 msgid "Tiled"
 msgstr "Sida-vid-sida"
+
+#: capplets/background-properties/property-background.c:1255
+#, fuzzy
+msgid "Disable background selection"
+msgstr "Stäng av animationer"
 
 #: capplets/background-properties/property-background.c:1383
 msgid "Set parameters from saved state and exit"
@@ -258,7 +263,7 @@ msgid " Settings"
 msgstr "Inställningar för processorbelastning"
 
 #: capplets/screensaver-properties/screensaver-dialog.c:25
-#: capplets/theme-switcher/gui.c:56 capplets/theme-switcher/gui.c:85
+#: capplets/theme-switcher/gui.c:131 capplets/theme-switcher/gui.c:161
 #, fuzzy
 msgid "Preview"
 msgstr "Enhet"
@@ -276,7 +281,7 @@ msgstr ""
 msgid "Author: UNKNOWN"
 msgstr ""
 
-#: capplets/screensaver-properties/screensaver-dialog.c:77
+#: capplets/screensaver-properties/screensaver-dialog.c:78
 msgid "Settings"
 msgstr ""
 
@@ -334,82 +339,96 @@ msgstr ""
 msgid "Program:"
 msgstr ""
 
-#: capplets/sound-properties/sound-properties.c:166
+#: capplets/sound-properties/sound-properties.c:184
 msgid "Category"
 msgstr ""
 
-#: capplets/sound-properties/sound-properties.c:167
+#: capplets/sound-properties/sound-properties.c:185
 #, fuzzy
 msgid "Event"
 msgstr "Rörelse"
 
-#: capplets/sound-properties/sound-properties.c:168
+#: capplets/sound-properties/sound-properties.c:186
 msgid "File to Play"
 msgstr ""
 
-#: capplets/sound-properties/sound-properties.c:221
+#: capplets/sound-properties/sound-properties.c:232
+msgid "Enable"
+msgstr ""
+
+#: capplets/sound-properties/sound-properties.c:239
 msgid "GNOME sound support"
 msgstr ""
 
-#: capplets/sound-properties/sound-properties.c:229
+#: capplets/sound-properties/sound-properties.c:247
 msgid "Sounds for events"
 msgstr ""
 
-#: capplets/sound-properties/sound-properties.c:250
+#: capplets/sound-properties/sound-properties.c:268
 msgid "General"
 msgstr "Generellt"
 
-#: capplets/sound-properties/sound-properties.c:294
-msgid "Play"
+#: capplets/sound-properties/sound-properties.c:275
+msgid "Select sound file"
 msgstr ""
 
-#: capplets/sound-properties/sound-properties.c:302
-msgid "Select sound file"
+#: capplets/sound-properties/sound-properties.c:308
+msgid "Play"
 msgstr ""
 
 #: capplets/sound-properties/sound-properties.c:315
 msgid "Sound Events"
 msgstr ""
 
-#: capplets/sound-properties/sound-properties.c:663
+#: capplets/sound-properties/sound-properties.c:332
+msgid ""
+"This copy of the GNOME control center was not compiled with sound support"
+msgstr ""
+
+#: capplets/sound-properties/sound-properties.c:680
 msgid "The sound file for this event does not exist."
 msgstr ""
 
-#: capplets/sound-properties/sound-properties.c:665
+#: capplets/sound-properties/sound-properties.c:682
 msgid ""
 "The sound file for this event does not exist. You may want to install the "
 "gnome-audio package for a set of default sounds."
 msgstr ""
 
-#: capplets/sound-properties/sound-properties.c:669
+#: capplets/sound-properties/sound-properties.c:686
 msgid "Close"
 msgstr "Stäng"
 
-#: capplets/theme-switcher/gui.c:38
+#: capplets/theme-switcher/gui.c:49
+msgid "Select a theme to install"
+msgstr ""
+
+#: capplets/theme-switcher/gui.c:113
 msgid "Available Themes"
 msgstr ""
 
-#: capplets/theme-switcher/gui.c:48
+#: capplets/theme-switcher/gui.c:123
 #, fuzzy
 msgid ""
 "Auto\n"
 "Preview"
 msgstr "Auto-repetering"
 
-#: capplets/theme-switcher/gui.c:59
+#: capplets/theme-switcher/gui.c:134
 msgid ""
 "Install new\n"
 "theme..."
 msgstr ""
 
-#: capplets/theme-switcher/gui.c:73
+#: capplets/theme-switcher/gui.c:149
 #, fuzzy
 msgid "Theme Information"
 msgstr "Välj animation"
 
 #: capplets/ui-properties/ui-properties.c:53
-msgid "Default Gtk setting [FIXME - Describe this better]"
-msgstr "Standard GTK inställningar [FIXAMIG - Bättre beskrivning]"
+#, fuzzy
+msgid "Default Gtk setting"
+msgstr "Animationsvärden"
 
 #: capplets/ui-properties/ui-properties.c:54
 msgid "Spread buttons out"
@@ -537,15 +556,15 @@ msgstr ""
 msgid "Dialog buttons have icons"
 msgstr "Knappar i dialogrutan"
 
-#: capplets/ui-properties/ui-properties.c:342
+#: capplets/ui-properties/ui-properties.c:345
 msgid "Menu items have icons"
 msgstr ""
 
-#: capplets/ui-properties/ui-properties.c:358
+#: capplets/ui-properties/ui-properties.c:364
 msgid "Default MDI mode"
 msgstr ""
 
-#: capplets/ui-properties/ui-properties.c:363
+#: capplets/ui-properties/ui-properties.c:369
 msgid "MDI notebook tab position"
 msgstr ""
 
@@ -673,6 +692,15 @@ msgstr ""
 #: control-center/main.c:72
 msgid "Discard all changes"
 msgstr ""
+
+#. create the app
+#: control-center/main.c:141
+#, fuzzy
+msgid "Control Center"
+msgstr "Webkontrollegenskaper"
+
+#~ msgid "Default Gtk setting [FIXME - Describe this better]"
+#~ msgstr "Standard GTK inställningar [FIXAMIG - Bättre beskrivning]"
 
 #~ msgid "Flat"
 #~ msgstr "Platt"
@@ -1216,9 +1244,6 @@ msgstr ""
 #~ msgid "Launch new window"
 #~ msgstr "Öppna nytt fönster"
 
-#~ msgid "WebControl Properties"
-#~ msgstr "Webkontrollegenskaper"
-
 #~ msgid "Display URL label"
 #~ msgstr "Visa URL ettiket"
 
@@ -1707,9 +1732,6 @@ msgstr ""
 
 #~ msgid "Panel properties"
 #~ msgstr "Panelegenskaper"
-
-#~ msgid "Disable animations"
-#~ msgstr "Stäng av animationer"
 
 #~ msgid "Auto-Hide Animation Speed"
 #~ msgstr "Animationshastighet vid automatisk gömning"

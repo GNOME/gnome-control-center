@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center VERSION\n"
-"POT-Creation-Date: 1999-02-26 19:22+0100\n"
+"POT-Creation-Date: 1999-02-28 16:53-0500\n"
 "PO-Revision-Date: 1998-02-28 19:34+0100\n"
 "Last-Translator: Vincent Renardias <vincent@debian.org>\n"
 "Language-Team: Vincent Renardias <vincent@debian.org>\n"
@@ -73,6 +73,10 @@ msgstr "Centré"
 #: capplets/background-properties/property-background.c:948
 msgid "Tiled"
 msgstr "Mosaïque"
+
+#: capplets/background-properties/property-background.c:1255
+msgid "Disable background selection"
+msgstr ""
 
 #: capplets/background-properties/property-background.c:1383
 msgid "Set parameters from saved state and exit"
@@ -247,7 +251,7 @@ msgid " Settings"
 msgstr " Paramétres"
 
 #: capplets/screensaver-properties/screensaver-dialog.c:25
-#: capplets/theme-switcher/gui.c:56 capplets/theme-switcher/gui.c:85
+#: capplets/theme-switcher/gui.c:131 capplets/theme-switcher/gui.c:161
 msgid "Preview"
 msgstr "Prévisualisation"
 
@@ -320,61 +324,75 @@ msgstr "Démo de l'économiseur d'écran"
 msgid "Program:"
 msgstr "Programme:"
 
-#: capplets/sound-properties/sound-properties.c:174
+#: capplets/sound-properties/sound-properties.c:184
 msgid "Category"
 msgstr "Catégorie"
 
-#: capplets/sound-properties/sound-properties.c:175
+#: capplets/sound-properties/sound-properties.c:185
 msgid "Event"
 msgstr "Evénement"
 
-#: capplets/sound-properties/sound-properties.c:176
+#: capplets/sound-properties/sound-properties.c:186
 msgid "File to Play"
 msgstr "Fichier à jouer"
 
-#: capplets/sound-properties/sound-properties.c:229
+#: capplets/sound-properties/sound-properties.c:232
+msgid "Enable"
+msgstr ""
+
+#: capplets/sound-properties/sound-properties.c:239
 msgid "GNOME sound support"
 msgstr "support pour le son GNOME"
 
-#: capplets/sound-properties/sound-properties.c:237
+#: capplets/sound-properties/sound-properties.c:247
 msgid "Sounds for events"
 msgstr "Effets sonores"
 
-#: capplets/sound-properties/sound-properties.c:258
+#: capplets/sound-properties/sound-properties.c:268
 msgid "General"
 msgstr "Général"
 
-#: capplets/sound-properties/sound-properties.c:302
-msgid "Play"
-msgstr "Jouer"
-
-#: capplets/sound-properties/sound-properties.c:310
+#: capplets/sound-properties/sound-properties.c:275
 msgid "Select sound file"
 msgstr "Sélection du fichier son"
 
-#: capplets/sound-properties/sound-properties.c:323
+#: capplets/sound-properties/sound-properties.c:308
+msgid "Play"
+msgstr "Jouer"
+
+#: capplets/sound-properties/sound-properties.c:315
 msgid "Sound Events"
 msgstr "Evénements Sonores"
 
-#: capplets/sound-properties/sound-properties.c:671
+#: capplets/sound-properties/sound-properties.c:332
+msgid ""
+"This copy of the GNOME control center was not compiled with sound support"
+msgstr ""
+
+#: capplets/sound-properties/sound-properties.c:680
 msgid "The sound file for this event does not exist."
 msgstr "Il n'y a pas de fichier son défini pour cet événement."
 
-#: capplets/sound-properties/sound-properties.c:673
+#: capplets/sound-properties/sound-properties.c:682
 msgid ""
 "The sound file for this event does not exist. You may want to install the "
 "gnome-audio package for a set of default sounds."
 msgstr ""
 
-#: capplets/sound-properties/sound-properties.c:677
+#: capplets/sound-properties/sound-properties.c:686
 msgid "Close"
 msgstr "Fermer"
 
-#: capplets/theme-switcher/gui.c:38
+#: capplets/theme-switcher/gui.c:49
+#, fuzzy
+msgid "Select a theme to install"
+msgstr "Sélection du fichier à sauvegarder"
+
+#: capplets/theme-switcher/gui.c:113
 msgid "Available Themes"
 msgstr "Thèmes Disponibles"
 
-#: capplets/theme-switcher/gui.c:48
+#: capplets/theme-switcher/gui.c:123
 msgid ""
 "Auto\n"
 "Preview"
@@ -382,7 +400,7 @@ msgstr ""
 "Auto\n"
 "Prévisualisation"
 
-#: capplets/theme-switcher/gui.c:59
+#: capplets/theme-switcher/gui.c:134
 msgid ""
 "Install new\n"
 "theme..."
@@ -390,7 +408,7 @@ msgstr ""
 "Installer le\n"
 "nouveau thème..."
 
-#: capplets/theme-switcher/gui.c:73
+#: capplets/theme-switcher/gui.c:149
 msgid "Theme Information"
 msgstr "Informations sur le thème"
 
@@ -794,9 +812,6 @@ msgstr ""
 
 #~ msgid "Enable sounds in Enlightenment"
 #~ msgstr "Activer les effets sonores dans Enlightenment"
-
-#~ msgid "Select a file to save"
-#~ msgstr "Sélection du fichier à sauvegarder"
 
 #~ msgid "Select a file to load"
 #~ msgstr "Sélection du fichier à charger"

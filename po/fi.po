@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 1999-02-22 17:53-0500\n"
+"POT-Creation-Date: 1999-02-28 16:53-0500\n"
 "Content-Type: text/plain; charset=\n"
 "Date: 1998-04-27 21:34:19+0300\n"
 "From: Ville Hautam‰ki <villeh@cs.joensuu.fi>\n"
@@ -81,6 +81,11 @@ msgstr "Keskell‰"
 #: capplets/background-properties/property-background.c:948
 msgid "Tiled"
 msgstr "Vierekk‰in"
+
+#: capplets/background-properties/property-background.c:1255
+#, fuzzy
+msgid "Disable background selection"
+msgstr "Est‰ animaatios"
 
 #: capplets/background-properties/property-background.c:1383
 msgid "Set parameters from saved state and exit"
@@ -267,7 +272,7 @@ msgid " Settings"
 msgstr "Asetukset"
 
 #: capplets/screensaver-properties/screensaver-dialog.c:25
-#: capplets/theme-switcher/gui.c:56 capplets/theme-switcher/gui.c:85
+#: capplets/theme-switcher/gui.c:131 capplets/theme-switcher/gui.c:161
 #, fuzzy
 msgid "Preview"
 msgstr " Esikatselu "
@@ -285,7 +290,7 @@ msgstr "Tekij‰:"
 msgid "Author: UNKNOWN"
 msgstr "Tekij‰: TUNTEMATON"
 
-#: capplets/screensaver-properties/screensaver-dialog.c:77
+#: capplets/screensaver-properties/screensaver-dialog.c:78
 msgid "Settings"
 msgstr "Asetukset"
 
@@ -349,64 +354,78 @@ msgstr "Ruuduns‰‰st‰j‰"
 msgid "Program:"
 msgstr ""
 
-#: capplets/sound-properties/sound-properties.c:166
+#: capplets/sound-properties/sound-properties.c:184
 msgid "Category"
 msgstr ""
 
-#: capplets/sound-properties/sound-properties.c:167
+#: capplets/sound-properties/sound-properties.c:185
 #, fuzzy
 msgid "Event"
 msgstr "Tapahtuma"
 
-#: capplets/sound-properties/sound-properties.c:168
+#: capplets/sound-properties/sound-properties.c:186
 msgid "File to Play"
 msgstr "Soitettava tiedosto"
 
-#: capplets/sound-properties/sound-properties.c:221
+#: capplets/sound-properties/sound-properties.c:232
+msgid "Enable"
+msgstr ""
+
+#: capplets/sound-properties/sound-properties.c:239
 #, fuzzy
 msgid "GNOME sound support"
 msgstr "Aktivoi GNOMEn ‰‰nituki"
 
-#: capplets/sound-properties/sound-properties.c:229
+#: capplets/sound-properties/sound-properties.c:247
 #, fuzzy
 msgid "Sounds for events"
 msgstr "Toista n‰pp‰imet"
 
-#: capplets/sound-properties/sound-properties.c:250
+#: capplets/sound-properties/sound-properties.c:268
 msgid "General"
 msgstr "Yleist‰"
 
-#: capplets/sound-properties/sound-properties.c:294
-msgid "Play"
-msgstr "Soita"
-
-#: capplets/sound-properties/sound-properties.c:302
+#: capplets/sound-properties/sound-properties.c:275
 msgid "Select sound file"
 msgstr "Valitse ‰‰nitiedosto"
+
+#: capplets/sound-properties/sound-properties.c:308
+msgid "Play"
+msgstr "Soita"
 
 #: capplets/sound-properties/sound-properties.c:315
 msgid "Sound Events"
 msgstr "ƒ‰nitapahtumat"
 
-#: capplets/sound-properties/sound-properties.c:663
+#: capplets/sound-properties/sound-properties.c:332
+msgid ""
+"This copy of the GNOME control center was not compiled with sound support"
+msgstr ""
+
+#: capplets/sound-properties/sound-properties.c:680
 msgid "The sound file for this event does not exist."
 msgstr ""
 
-#: capplets/sound-properties/sound-properties.c:665
+#: capplets/sound-properties/sound-properties.c:682
 msgid ""
 "The sound file for this event does not exist. You may want to install the "
 "gnome-audio package for a set of default sounds."
 msgstr ""
 
-#: capplets/sound-properties/sound-properties.c:669
+#: capplets/sound-properties/sound-properties.c:686
 msgid "Close"
 msgstr "Sulje"
 
-#: capplets/theme-switcher/gui.c:38
+#: capplets/theme-switcher/gui.c:49
+#, fuzzy
+msgid "Select a theme to install"
+msgstr "Valitse ‰‰nitiedosto"
+
+#: capplets/theme-switcher/gui.c:113
 msgid "Available Themes"
 msgstr "Teemat"
 
-#: capplets/theme-switcher/gui.c:48
+#: capplets/theme-switcher/gui.c:123
 #, fuzzy
 msgid ""
 "Auto\n"
@@ -415,20 +434,21 @@ msgstr ""
 " Automaattinen\n"
 "Esikatselu "
 
-#: capplets/theme-switcher/gui.c:59
+#: capplets/theme-switcher/gui.c:134
 msgid ""
 "Install new\n"
 "theme..."
 msgstr ""
 
-#: capplets/theme-switcher/gui.c:73
+#: capplets/theme-switcher/gui.c:149
 #, fuzzy
 msgid "Theme Information"
 msgstr "Teeman tiedot"
 
 #: capplets/ui-properties/ui-properties.c:53
-msgid "Default Gtk setting [FIXME - Describe this better]"
-msgstr "Gtk:n oletusasetukset"
+#, fuzzy
+msgid "Default Gtk setting"
+msgstr "Asetukset"
 
 #: capplets/ui-properties/ui-properties.c:54
 msgid "Spread buttons out"
@@ -559,15 +579,15 @@ msgstr ""
 msgid "Dialog buttons have icons"
 msgstr "Dialoginapeilla on ikonit"
 
-#: capplets/ui-properties/ui-properties.c:342
+#: capplets/ui-properties/ui-properties.c:345
 msgid "Menu items have icons"
 msgstr "Menuissa on ikoneita"
 
-#: capplets/ui-properties/ui-properties.c:358
+#: capplets/ui-properties/ui-properties.c:364
 msgid "Default MDI mode"
 msgstr "Oletusarvoinen MDI-moodi"
 
-#: capplets/ui-properties/ui-properties.c:363
+#: capplets/ui-properties/ui-properties.c:369
 msgid "MDI notebook tab position"
 msgstr "MDI-muistikirjan asema"
 
@@ -695,6 +715,15 @@ msgstr ""
 msgid "Discard all changes"
 msgstr ""
 
+#. create the app
+#: control-center/main.c:141
+#, fuzzy
+msgid "Control Center"
+msgstr "Selaimenohjaimen asetukset"
+
+#~ msgid "Default Gtk setting [FIXME - Describe this better]"
+#~ msgstr "Gtk:n oletusasetukset"
+
 #~ msgid "Flat"
 #~ msgstr "Tasainen"
 
@@ -738,10 +767,6 @@ msgstr ""
 
 #~ msgid "Delete"
 #~ msgstr "Tuhoa"
-
-#, fuzzy
-#~ msgid "Select a file to save"
-#~ msgstr "Valitse ‰‰nitiedosto"
 
 #, fuzzy
 #~ msgid "Select a file to load"
@@ -1530,9 +1555,6 @@ msgstr ""
 #~ msgid "Launch new window"
 #~ msgstr "Uusi ikkuna"
 
-#~ msgid "WebControl Properties"
-#~ msgstr "Selaimenohjaimen asetukset"
-
 #~ msgid "Display URL label"
 #~ msgstr "N‰yt‰ URL-etiketti"
 
@@ -2303,9 +2325,6 @@ msgstr ""
 
 #~ msgid "Panel properties"
 #~ msgstr "Paneelin ominaisuudet"
-
-#~ msgid "Disable animations"
-#~ msgstr "Est‰ animaatios"
 
 #~ msgid "Auto-Hide Animation Speed"
 #~ msgstr "Autopiilotus: Animaationopeus"

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 0.99.8.2\n"
-"POT-Creation-Date: 1999-02-25 18:54+0100\n"
+"POT-Creation-Date: 1999-02-28 16:53-0500\n"
 "PO-Revision-Date: 1998-11-21 00:05+0100\n"
 "Last-Translator: Pablo Saratxaga <srtxg@chanae.alphanet.ch>\n"
 "Language-Team: \n"
@@ -30,9 +30,6 @@ msgstr ""
 "help-browser/window.c help-browser/gnome-helpwin.c help-browser/bookmarks.c "
 "help-browser/history.c help-browser/toc2-man.c help-browser/toc2.c "
 "help-browser/visit.c gnome-terminal/gnome-terminal.c\n"
-
-msgid "Control Center"
-msgstr "Centro de Control"
 
 #: capplets/background-properties/property-background.c:628
 msgid "Color"
@@ -95,6 +92,10 @@ msgstr "Centrado"
 msgid "Tiled"
 msgstr "Mosaico"
 
+#: capplets/background-properties/property-background.c:1255
+msgid "Disable background selection"
+msgstr ""
+
 #: capplets/background-properties/property-background.c:1383
 msgid "Set parameters from saved state and exit"
 msgstr "Usa los parámetros que se tenían guardados y terminar"
@@ -121,12 +122,12 @@ msgid "Specifies end background color for gradient"
 msgstr "Indica el color de fondo final para el gradiente"
 
 #: capplets/background-properties/property-background.c:1387
-msgid "Gradient orientation: vertical or horizontal"
-msgstr "Orientación del gradiente: vertical u horizontal"
-
-#: capplets/background-properties/property-background.c:1387
 msgid "ORIENT"
 msgstr "ORIENT"
+
+#: capplets/background-properties/property-background.c:1387
+msgid "Gradient orientation: vertical or horizontal"
+msgstr "Orientación del gradiente: vertical u horizontal"
 
 #: capplets/background-properties/property-background.c:1388
 msgid "Use a solid fill for the background"
@@ -137,12 +138,12 @@ msgid "Use a gradient fill for the background"
 msgstr "Usa un gradiente de colores para el fondo"
 
 #: capplets/background-properties/property-background.c:1390
-msgid "Display wallpaper: tiled, centered, scaled or ratio"
-msgstr "Imágen de fondo: mosaico, centrada, redimensionada o racio"
-
-#: capplets/background-properties/property-background.c:1390
 msgid "MODE"
 msgstr "MODO"
+
+#: capplets/background-properties/property-background.c:1390
+msgid "Display wallpaper: tiled, centered, scaled or ratio"
+msgstr "Imágen de fondo: mosaico, centrada, redimensionada o racio"
 
 #: capplets/bell-properties/bell-properties.c:159
 msgid "Keyboard Bell"
@@ -225,6 +226,11 @@ msgstr "Rápido"
 msgid "Slow"
 msgstr "Lento"
 
+# una mejor traducción ?
+#: capplets/mouse-properties/mouse-properties.c:296
+msgid "Threshold"
+msgstr "Punto de activación"
+
 #: capplets/mouse-properties/mouse-properties.c:296
 msgid "Large"
 msgstr "Grande"
@@ -232,11 +238,6 @@ msgstr "Grande"
 #: capplets/mouse-properties/mouse-properties.c:296
 msgid "Small"
 msgstr "Pequeño"
-
-# una mejor traducción ?
-#: capplets/mouse-properties/mouse-properties.c:296
-msgid "Threshold"
-msgstr "Punto de activación"
 
 #: capplets/screensaver-properties/callbacks.c:101
 msgid "Require Password"
@@ -269,7 +270,7 @@ msgid " Settings"
 msgstr " Parámetros"
 
 #: capplets/screensaver-properties/screensaver-dialog.c:25
-#: capplets/theme-switcher/gui.c:56 capplets/theme-switcher/gui.c:85
+#: capplets/theme-switcher/gui.c:131 capplets/theme-switcher/gui.c:161
 msgid "Preview"
 msgstr "Previsualizar"
 
@@ -285,7 +286,7 @@ msgstr "Autor:"
 msgid "Author: UNKNOWN"
 msgstr "Autor: DESCONOCIDO"
 
-#: capplets/screensaver-properties/screensaver-dialog.c:77
+#: capplets/screensaver-properties/screensaver-dialog.c:78
 msgid "Settings"
 msgstr "Parámetros"
 
@@ -342,47 +343,56 @@ msgstr "Demostración de protector de pantalla"
 msgid "Program:"
 msgstr "Programa:"
 
-#: capplets/sound-properties/sound-properties.c:174
+#: capplets/sound-properties/sound-properties.c:184
 msgid "Category"
 msgstr "Categoría"
 
-#: capplets/sound-properties/sound-properties.c:175
+#: capplets/sound-properties/sound-properties.c:185
 msgid "Event"
 msgstr "Evento"
 
-#: capplets/sound-properties/sound-properties.c:176
+#: capplets/sound-properties/sound-properties.c:186
 msgid "File to Play"
 msgstr "Archivo a tocar"
 
-#: capplets/sound-properties/sound-properties.c:229
+#: capplets/sound-properties/sound-properties.c:232
+msgid "Enable"
+msgstr ""
+
+#: capplets/sound-properties/sound-properties.c:239
 msgid "GNOME sound support"
 msgstr "Soporte de sonido de Gnome"
 
-#: capplets/sound-properties/sound-properties.c:237
+#: capplets/sound-properties/sound-properties.c:247
 msgid "Sounds for events"
 msgstr "Sonidos para los eventos"
 
-#: capplets/sound-properties/sound-properties.c:258
+#: capplets/sound-properties/sound-properties.c:268
 msgid "General"
 msgstr "General"
 
-#: capplets/sound-properties/sound-properties.c:302
-msgid "Play"
-msgstr "Tocar"
-
-#: capplets/sound-properties/sound-properties.c:310
+#: capplets/sound-properties/sound-properties.c:275
 msgid "Select sound file"
 msgstr "Seleccionar archivo de sonido"
 
-#: capplets/sound-properties/sound-properties.c:323
+#: capplets/sound-properties/sound-properties.c:308
+msgid "Play"
+msgstr "Tocar"
+
+#: capplets/sound-properties/sound-properties.c:315
 msgid "Sound Events"
 msgstr "Eventos de sonido"
 
-#: capplets/sound-properties/sound-properties.c:671
+#: capplets/sound-properties/sound-properties.c:332
+msgid ""
+"This copy of the GNOME control center was not compiled with sound support"
+msgstr ""
+
+#: capplets/sound-properties/sound-properties.c:680
 msgid "The sound file for this event does not exist."
 msgstr "El archivo de sonido para este evento no existe."
 
-#: capplets/sound-properties/sound-properties.c:673
+#: capplets/sound-properties/sound-properties.c:682
 msgid ""
 "The sound file for this event does not exist. You may want to install the "
 "gnome-audio package for a set of default sounds."
@@ -390,22 +400,27 @@ msgstr ""
 "El archivo de sonido para este evento no existe. Quizás desee instalar el "
 "paquete gnome-audio para un conjunto de sonidos de base."
 
-#: capplets/sound-properties/sound-properties.c:677
+#: capplets/sound-properties/sound-properties.c:686
 msgid "Close"
 msgstr "Cerrar"
 
-#: capplets/theme-switcher/gui.c:38
+#: capplets/theme-switcher/gui.c:49
+msgid "Select a theme to install"
+msgstr ""
+
+#: capplets/theme-switcher/gui.c:113
 msgid "Available Themes"
 msgstr "Temas disponibles"
 
-#: capplets/theme-switcher/gui.c:48
+#: capplets/theme-switcher/gui.c:123
 msgid ""
 "Auto\n"
 "Preview"
-msgstr "Auto\n"
+msgstr ""
+"Auto\n"
 "Previsualización"
 
-#: capplets/theme-switcher/gui.c:59
+#: capplets/theme-switcher/gui.c:134
 msgid ""
 "Install new\n"
 "theme..."
@@ -413,13 +428,14 @@ msgstr ""
 "Instalar\n"
 "nuevo tema..."
 
-#: capplets/theme-switcher/gui.c:73
+#: capplets/theme-switcher/gui.c:149
 msgid "Theme Information"
 msgstr "Información tema"
 
 #: capplets/ui-properties/ui-properties.c:53
-msgid "Default Gtk setting [FIXME - Describe this better]"
-msgstr "Valores de Gtk por omisión [FIXME - Describirlo mejor]"
+#, fuzzy
+msgid "Default Gtk setting"
+msgstr "Configurar tests"
 
 #: capplets/ui-properties/ui-properties.c:54
 msgid "Spread buttons out"
@@ -561,12 +577,12 @@ msgid "MDI notebook tab position"
 msgstr "Posición de la etiqueta del bloc de notas MDI"
 
 #: capplets/url-properties/url-properties.c:69
-msgid "Command"
-msgstr "Comando"
-
-#: capplets/url-properties/url-properties.c:69
 msgid "Protocol"
 msgstr "Protocolo"
+
+#: capplets/url-properties/url-properties.c:69
+msgid "Command"
+msgstr "Comando"
 
 #: capplets/url-properties/url-properties.c:85
 msgid "handler:"
@@ -626,19 +642,19 @@ msgid "Help"
 msgstr "Ayuda"
 
 #: control-center/capplet-widget-libs.c:49
+msgid "id of the capplet -- assigned by the control-center"
+msgstr ""
+
+#: control-center/capplet-widget-libs.c:49
 msgid "ID"
 msgstr "ID"
 
-#: control-center/capplet-widget-libs.c:49
-msgid "id of the capplet -- assigned by the control-center"
+#: control-center/capplet-widget-libs.c:50
+msgid "Multi-capplet id."
 msgstr ""
 
 #: control-center/capplet-widget-libs.c:50
 msgid "CAPID"
-msgstr ""
-
-#: control-center/capplet-widget-libs.c:50
-msgid "Multi-capplet id."
 msgstr ""
 
 #: control-center/capplet-widget-libs.c:51
@@ -650,12 +666,12 @@ msgid "XID"
 msgstr "XID"
 
 #: control-center/capplet-widget-libs.c:52
-msgid "IOR"
-msgstr "IOR"
-
-#: control-center/capplet-widget-libs.c:52
 msgid "IOR of the control-center"
 msgstr ""
+
+#: control-center/capplet-widget-libs.c:52
+msgid "IOR"
+msgstr "IOR"
 
 #: control-center/capplet-widget-libs.c:53
 msgid "Initialize session settings"
@@ -663,14 +679,16 @@ msgstr "Inicializar la configuración de la sesión"
 
 #: control-center/capplet-widget-libs.c:54
 msgid "Ignore default action.  Used for custom init-session cases"
-msgstr "Ignorar la acción por omisión. Usado para casos de inicialización de sesión personalizados"
-
-#: control-center/corba-glue.c:75
-msgid "CAPPLET"
 msgstr ""
+"Ignorar la acción por omisión. Usado para casos de inicialización de sesión "
+"personalizados"
 
 #: control-center/corba-glue.c:75
 msgid "capplet-command to be run."
+msgstr ""
+
+#: control-center/corba-glue.c:75
+msgid "CAPPLET"
 msgstr ""
 
 #. we create the widgets
@@ -678,92 +696,100 @@ msgstr ""
 msgid "Discard all changes"
 msgstr "Descartar todos los cambios"
 
-msgid "_Hint"
-msgstr "Su_gestión"
+#. create the app
+#: control-center/main.c:141
+msgid "Control Center"
+msgstr "Centro de Control"
 
-msgid "_Scores..."
-msgstr "_Puntuación..."
+#~ msgid "Default Gtk setting [FIXME - Describe this better]"
+#~ msgstr "Valores de Gtk por omisión [FIXME - Describirlo mejor]"
 
-msgid "_Undo move"
-msgstr "_Deshacer movimiento"
+#~ msgid "_Hint"
+#~ msgstr "Su_gestión"
 
-msgid "_Restart game"
-msgstr "_Reiniciar juego"
+#~ msgid "_Scores..."
+#~ msgstr "_Puntuación..."
 
-msgid "_New game"
-msgstr "_Nuevo juego"
+#~ msgid "_Undo move"
+#~ msgstr "_Deshacer movimiento"
 
-msgid "_Close Window..."
-msgstr "_Cerrar Ventana..."
+#~ msgid "_Restart game"
+#~ msgstr "_Reiniciar juego"
 
-msgid "_New Window..."
-msgstr "_Nueva Ventana..."
+#~ msgid "_New game"
+#~ msgstr "_Nuevo juego"
 
-msgid "_Replace..."
-msgstr "_Remplazar..."
+#~ msgid "_Close Window..."
+#~ msgstr "_Cerrar Ventana..."
 
-msgid "Find _Again"
-msgstr "Buscar de _Nuevo"
+#~ msgid "_New Window..."
+#~ msgstr "_Nueva Ventana..."
 
-msgid "_Find..."
-msgstr "_Buscar..."
+#~ msgid "_Replace..."
+#~ msgstr "_Remplazar..."
 
-msgid "_Select All"
-msgstr "_Seleccionar Todo"
+#~ msgid "Find _Again"
+#~ msgstr "Buscar de _Nuevo"
 
-msgid "_Windows"
-msgstr "_Ventanas"
+#~ msgid "_Find..."
+#~ msgstr "_Buscar..."
 
-msgid "_Print"
-msgstr "_Imprimir"
+#~ msgid "_Select All"
+#~ msgstr "_Seleccionar Todo"
 
-msgid "_Preferences..."
-msgstr "_Preferencias..."
+#~ msgid "_Windows"
+#~ msgstr "_Ventanas"
 
-msgid "_Settings"
-msgstr "_Configuración"
+#~ msgid "_Print"
+#~ msgstr "_Imprimir"
 
-msgid "_File"
-msgstr "_Archivo"
+#~ msgid "_Preferences..."
+#~ msgstr "_Preferencias..."
 
-msgid "_Edit"
-msgstr "_Editar"
+#~ msgid "_Settings"
+#~ msgstr "_Configuración"
 
-msgid "_View"
-msgstr "_Vista"
+#~ msgid "_File"
+#~ msgstr "_Archivo"
 
-msgid "_Help"
-msgstr "A_yuda"
+#~ msgid "_Edit"
+#~ msgstr "_Editar"
 
-msgid "_Open..."
-msgstr "_Abrir..."
+#~ msgid "_View"
+#~ msgstr "_Vista"
 
-msgid "_Save"
-msgstr "_Guardar"
+#~ msgid "_Help"
+#~ msgstr "A_yuda"
 
-msgid "Save _As..."
-msgstr "Guardar _Como..."
+#~ msgid "_Open..."
+#~ msgstr "_Abrir..."
 
-msgid "_Close"
-msgstr "_Cerrar"
+#~ msgid "_Save"
+#~ msgstr "_Guardar"
 
-msgid "E_xit"
-msgstr "_Salir"
+#~ msgid "Save _As..."
+#~ msgstr "Guardar _Como..."
 
-msgid "_About..."
-msgstr "_Acerca..."
+#~ msgid "_Close"
+#~ msgstr "_Cerrar"
 
-msgid "C_ut"
-msgstr "Cor_tar"
+#~ msgid "E_xit"
+#~ msgstr "_Salir"
 
-msgid "_Copy"
-msgstr "_Copiar"
+#~ msgid "_About..."
+#~ msgstr "_Acerca..."
 
-msgid "_Paste"
-msgstr "_Pegar"
+#~ msgid "C_ut"
+#~ msgstr "Cor_tar"
 
-msgid "_Game"
-msgstr "_Juego"
+#~ msgid "_Copy"
+#~ msgstr "_Copiar"
 
-msgid "_Pause game"
-msgstr "_Detener el juego"
+#~ msgid "_Paste"
+#~ msgstr "_Pegar"
+
+#~ msgid "_Game"
+#~ msgstr "_Juego"
+
+#~ msgid "_Pause game"
+#~ msgstr "_Detener el juego"

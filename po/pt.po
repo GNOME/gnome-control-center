@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 0.99.8\n"
-"POT-Creation-Date: 1999-02-23 00:40+0000\n"
+"POT-Creation-Date: 1999-02-28 16:53-0500\n"
 "PO-Revision-Date: 1999-02-23 00:44+00:00\n"
 "Last-Translator: Nuno Ferreira <nmrf@rnl.ist.utl.pt>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
@@ -69,6 +69,10 @@ msgstr "Centrado"
 #: capplets/background-properties/property-background.c:948
 msgid "Tiled"
 msgstr "Em mosaico"
+
+#: capplets/background-properties/property-background.c:1255
+msgid "Disable background selection"
+msgstr ""
 
 #: capplets/background-properties/property-background.c:1383
 msgid "Set parameters from saved state and exit"
@@ -245,7 +249,7 @@ msgid " Settings"
 msgstr " Parâmetros"
 
 #: capplets/screensaver-properties/screensaver-dialog.c:25
-#: capplets/theme-switcher/gui.c:56 capplets/theme-switcher/gui.c:85
+#: capplets/theme-switcher/gui.c:131 capplets/theme-switcher/gui.c:161
 msgid "Preview"
 msgstr "Prever"
 
@@ -261,7 +265,7 @@ msgstr "Autor:"
 msgid "Author: UNKNOWN"
 msgstr "Autor: DESCONHECIDO"
 
-#: capplets/screensaver-properties/screensaver-dialog.c:77
+#: capplets/screensaver-properties/screensaver-dialog.c:78
 msgid "Settings"
 msgstr "Parâmetros"
 
@@ -318,61 +322,76 @@ msgstr "Demo da Protecção de ecrã"
 msgid "Program:"
 msgstr "Aplicação:"
 
-#: capplets/sound-properties/sound-properties.c:174
+#: capplets/sound-properties/sound-properties.c:184
 msgid "Category"
 msgstr "Categoria"
 
-#: capplets/sound-properties/sound-properties.c:175
+#: capplets/sound-properties/sound-properties.c:185
 msgid "Event"
 msgstr "Evento"
 
-#: capplets/sound-properties/sound-properties.c:176
+#: capplets/sound-properties/sound-properties.c:186
 msgid "File to Play"
 msgstr "Ficheiro a tocar"
 
-#: capplets/sound-properties/sound-properties.c:229
+#: capplets/sound-properties/sound-properties.c:232
+msgid "Enable"
+msgstr ""
+
+#: capplets/sound-properties/sound-properties.c:239
 msgid "GNOME sound support"
 msgstr "Suporte de som GNOME"
 
-#: capplets/sound-properties/sound-properties.c:237
+#: capplets/sound-properties/sound-properties.c:247
 msgid "Sounds for events"
 msgstr "Sons para eventos"
 
-#: capplets/sound-properties/sound-properties.c:258
+#: capplets/sound-properties/sound-properties.c:268
 msgid "General"
 msgstr "Geral"
 
-#: capplets/sound-properties/sound-properties.c:302
-msgid "Play"
-msgstr "Tocar"
-
-#: capplets/sound-properties/sound-properties.c:310
+#: capplets/sound-properties/sound-properties.c:275
 msgid "Select sound file"
 msgstr "Seleccione ficheiro de som"
 
-#: capplets/sound-properties/sound-properties.c:323
+#: capplets/sound-properties/sound-properties.c:308
+msgid "Play"
+msgstr "Tocar"
+
+#: capplets/sound-properties/sound-properties.c:315
 msgid "Sound Events"
 msgstr "Eventos de Som"
 
-#: capplets/sound-properties/sound-properties.c:671
+#: capplets/sound-properties/sound-properties.c:332
+msgid ""
+"This copy of the GNOME control center was not compiled with sound support"
+msgstr ""
+
+#: capplets/sound-properties/sound-properties.c:680
 msgid "The sound file for this event does not exist."
 msgstr "O ficheiro de som para este evento não existe."
 
-#: capplets/sound-properties/sound-properties.c:673
+#: capplets/sound-properties/sound-properties.c:682
 msgid ""
 "The sound file for this event does not exist. You may want to install the "
 "gnome-audio package for a set of default sounds."
-msgstr "O ficheiro de som para este evento não existe. Talvez queira instalar o pacote gnome-audio que contêm o conjunto de sons por omissão."
+msgstr ""
+"O ficheiro de som para este evento não existe. Talvez queira instalar o "
+"pacote gnome-audio que contêm o conjunto de sons por omissão."
 
-#: capplets/sound-properties/sound-properties.c:677
+#: capplets/sound-properties/sound-properties.c:686
 msgid "Close"
 msgstr "Fechar"
 
-#: capplets/theme-switcher/gui.c:38
+#: capplets/theme-switcher/gui.c:49
+msgid "Select a theme to install"
+msgstr ""
+
+#: capplets/theme-switcher/gui.c:113
 msgid "Available Themes"
 msgstr "Temas disponíveis"
 
-#: capplets/theme-switcher/gui.c:48
+#: capplets/theme-switcher/gui.c:123
 msgid ""
 "Auto\n"
 "Preview"
@@ -380,7 +399,7 @@ msgstr ""
 "Auto\n"
 "Prever"
 
-#: capplets/theme-switcher/gui.c:59
+#: capplets/theme-switcher/gui.c:134
 msgid ""
 "Install new\n"
 "theme..."
@@ -388,13 +407,14 @@ msgstr ""
 "Instar novo\n"
 "tema..."
 
-#: capplets/theme-switcher/gui.c:73
+#: capplets/theme-switcher/gui.c:149
 msgid "Theme Information"
 msgstr "Informação do Tema"
 
 #: capplets/ui-properties/ui-properties.c:53
-msgid "Default Gtk setting [FIXME - Describe this better]"
-msgstr "Configuração do Gtk por omissão [FIXME - Descrever melhor]"
+#, fuzzy
+msgid "Default Gtk setting"
+msgstr "Testar parâmetros"
 
 #: capplets/ui-properties/ui-properties.c:54
 msgid "Spread buttons out"
@@ -520,15 +540,15 @@ msgstr "Indicador de progresso da barra de estado à direita"
 msgid "Dialog buttons have icons"
 msgstr "Botões dos diálogos com ícones"
 
-#: capplets/ui-properties/ui-properties.c:342
+#: capplets/ui-properties/ui-properties.c:345
 msgid "Menu items have icons"
 msgstr "Items de menus com ícones"
 
-#: capplets/ui-properties/ui-properties.c:358
+#: capplets/ui-properties/ui-properties.c:364
 msgid "Default MDI mode"
 msgstr "Modo MDI por omissão"
 
-#: capplets/ui-properties/ui-properties.c:363
+#: capplets/ui-properties/ui-properties.c:369
 msgid "MDI notebook tab position"
 msgstr ""
 
@@ -650,3 +670,12 @@ msgstr "CAPPLET"
 #: control-center/main.c:72
 msgid "Discard all changes"
 msgstr "Esquecer todas as modificações"
+
+#. create the app
+#: control-center/main.c:141
+#, fuzzy
+msgid "Control Center"
+msgstr "Centro de controlo GNOME"
+
+#~ msgid "Default Gtk setting [FIXME - Describe this better]"
+#~ msgstr "Configuração do Gtk por omissão [FIXME - Descrever melhor]"

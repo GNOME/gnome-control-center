@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 1999-02-22 17:53-0500\n"
+"POT-Creation-Date: 1999-02-28 16:53-0500\n"
 "PO-Revision-Date: 1998-12-05 14:10+0100\n"
 "Last-Translator: Zbigniew Chyla <chyla@alice.ci.pwr.wroc.pl>\n"
 "MIME-Version: 1.0\n"
@@ -69,6 +69,11 @@ msgstr "Wy¶rodkowana"
 #: capplets/background-properties/property-background.c:948
 msgid "Tiled"
 msgstr "Kafelka"
+
+#: capplets/background-properties/property-background.c:1255
+#, fuzzy
+msgid "Disable background selection"
+msgstr "Wy³±cz animacje"
 
 #: capplets/background-properties/property-background.c:1383
 msgid "Set parameters from saved state and exit"
@@ -248,7 +253,7 @@ msgid " Settings"
 msgstr " Ustawienia"
 
 #: capplets/screensaver-properties/screensaver-dialog.c:25
-#: capplets/theme-switcher/gui.c:56 capplets/theme-switcher/gui.c:85
+#: capplets/theme-switcher/gui.c:131 capplets/theme-switcher/gui.c:161
 msgid "Preview"
 msgstr "Podgl±d"
 
@@ -264,7 +269,7 @@ msgstr "Autor:"
 msgid "Author: UNKNOWN"
 msgstr "Autor: NIEZNANY"
 
-#: capplets/screensaver-properties/screensaver-dialog.c:77
+#: capplets/screensaver-properties/screensaver-dialog.c:78
 msgid "Settings"
 msgstr "Ustawienia"
 
@@ -319,63 +324,77 @@ msgstr ""
 msgid "Program:"
 msgstr ""
 
-#: capplets/sound-properties/sound-properties.c:166
+#: capplets/sound-properties/sound-properties.c:184
 msgid "Category"
 msgstr "Kategoria"
 
-#: capplets/sound-properties/sound-properties.c:167
+#: capplets/sound-properties/sound-properties.c:185
 msgid "Event"
 msgstr "Zdarzenie"
 
-#: capplets/sound-properties/sound-properties.c:168
+#: capplets/sound-properties/sound-properties.c:186
 msgid "File to Play"
 msgstr "Plik z d¼wiêkiem"
 
-#: capplets/sound-properties/sound-properties.c:221
+#: capplets/sound-properties/sound-properties.c:232
+msgid "Enable"
+msgstr ""
+
+#: capplets/sound-properties/sound-properties.c:239
 #, fuzzy
 msgid "GNOME sound support"
 msgstr "W³±cz obs³ugê d¼wiêku GNOME"
 
-#: capplets/sound-properties/sound-properties.c:229
+#: capplets/sound-properties/sound-properties.c:247
 #, fuzzy
 msgid "Sounds for events"
 msgstr "W³±cz d¼wiêki dla zdarzeñ"
 
-#: capplets/sound-properties/sound-properties.c:250
+#: capplets/sound-properties/sound-properties.c:268
 msgid "General"
 msgstr "Ogólne"
 
-#: capplets/sound-properties/sound-properties.c:294
-msgid "Play"
-msgstr "Odtwarzaj"
-
-#: capplets/sound-properties/sound-properties.c:302
+#: capplets/sound-properties/sound-properties.c:275
 msgid "Select sound file"
 msgstr "Wybierz plik z d¼wiêkiem"
+
+#: capplets/sound-properties/sound-properties.c:308
+msgid "Play"
+msgstr "Odtwarzaj"
 
 #: capplets/sound-properties/sound-properties.c:315
 msgid "Sound Events"
 msgstr "D¼wiêki zdarzeñ"
 
-#: capplets/sound-properties/sound-properties.c:663
+#: capplets/sound-properties/sound-properties.c:332
+msgid ""
+"This copy of the GNOME control center was not compiled with sound support"
+msgstr ""
+
+#: capplets/sound-properties/sound-properties.c:680
 msgid "The sound file for this event does not exist."
 msgstr ""
 
-#: capplets/sound-properties/sound-properties.c:665
+#: capplets/sound-properties/sound-properties.c:682
 msgid ""
 "The sound file for this event does not exist. You may want to install the "
 "gnome-audio package for a set of default sounds."
 msgstr ""
 
-#: capplets/sound-properties/sound-properties.c:669
+#: capplets/sound-properties/sound-properties.c:686
 msgid "Close"
 msgstr "Zamknij"
 
-#: capplets/theme-switcher/gui.c:38
+#: capplets/theme-switcher/gui.c:49
+#, fuzzy
+msgid "Select a theme to install"
+msgstr "Wybierz plik z d¼wiêkiem"
+
+#: capplets/theme-switcher/gui.c:113
 msgid "Available Themes"
 msgstr "Dostêpne motywy"
 
-#: capplets/theme-switcher/gui.c:48
+#: capplets/theme-switcher/gui.c:123
 msgid ""
 "Auto\n"
 "Preview"
@@ -383,19 +402,20 @@ msgstr ""
 "Automatyczny\n"
 "podgl±d"
 
-#: capplets/theme-switcher/gui.c:59
+#: capplets/theme-switcher/gui.c:134
 msgid ""
 "Install new\n"
 "theme..."
 msgstr ""
 
-#: capplets/theme-switcher/gui.c:73
+#: capplets/theme-switcher/gui.c:149
 msgid "Theme Information"
 msgstr "Informacja o motywie"
 
 #: capplets/ui-properties/ui-properties.c:53
-msgid "Default Gtk setting [FIXME - Describe this better]"
-msgstr ""
+#, fuzzy
+msgid "Default Gtk setting"
+msgstr "Wypróbuj ustawienia"
 
 #: capplets/ui-properties/ui-properties.c:54
 msgid "Spread buttons out"
@@ -522,15 +542,15 @@ msgstr ""
 msgid "Dialog buttons have icons"
 msgstr "Ikony na przyciskach okien dialogowych"
 
-#: capplets/ui-properties/ui-properties.c:342
+#: capplets/ui-properties/ui-properties.c:345
 msgid "Menu items have icons"
 msgstr "Ikony w pozycjach menu"
 
-#: capplets/ui-properties/ui-properties.c:358
+#: capplets/ui-properties/ui-properties.c:364
 msgid "Default MDI mode"
 msgstr "Domy¶lny tryb MDI"
 
-#: capplets/ui-properties/ui-properties.c:363
+#: capplets/ui-properties/ui-properties.c:369
 msgid "MDI notebook tab position"
 msgstr "Pozycja zak³adki MDI"
 
@@ -657,6 +677,12 @@ msgstr ""
 msgid "Discard all changes"
 msgstr ""
 
+#. create the app
+#: control-center/main.c:141
+#, fuzzy
+msgid "Control Center"
+msgstr "W³a¶ciwo¶ci paska adresu URL"
+
 #~ msgid "Flat"
 #~ msgstr "Jednolity"
 
@@ -704,10 +730,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Edit..."
 #~ msgstr "..."
-
-#, fuzzy
-#~ msgid "Select a file to save"
-#~ msgstr "Wybierz plik z d¼wiêkiem"
 
 #, fuzzy
 #~ msgid "Select a file to load"
@@ -1217,9 +1239,6 @@ msgstr ""
 
 #~ msgid "Launch new window"
 #~ msgstr "Otwórz nowe okno"
-
-#~ msgid "WebControl Properties"
-#~ msgstr "W³a¶ciwo¶ci paska adresu URL"
 
 #~ msgid "Display URL label"
 #~ msgstr "Wy¶wietl etykietê URL"
@@ -1791,9 +1810,6 @@ msgstr ""
 
 #~ msgid "Panel properties"
 #~ msgstr "W³a¶ciwo¶ci panela"
-
-#~ msgid "Disable animations"
-#~ msgstr "Wy³±cz animacje"
 
 #~ msgid "Auto-Hide Animation Speed"
 #~ msgstr "Szybko¶æ animacji automatycznego ukrywania"
