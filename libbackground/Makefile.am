@@ -2,7 +2,7 @@ EXTRA_DIST = ChangeLog
 
 INCLUDES = \
         -DGNOMELOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\" 		\
-	-DGNOME_ICONDIR=\""${prefix}/$(DATADIRNAME)/pixmaps"\"		\
+	-DGNOME_ICONDIR=\""${prefix}/share/pixmaps"\"			\
 	-DG_LOG_DOMAIN=\"capplet-common\"				\
 	-I$(top_srcdir)/						\
 	@CAPPLET_CFLAGS@
