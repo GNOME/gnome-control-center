@@ -17,22 +17,21 @@
  * Boston, MA 02111-1307, USA.
  */
 
+#include <stdlib.h>
+
+#include <gtk/gtk.h>
+#include <glade/glade.h>
 #include <libgnome/libgnome.h>
-#include <libgnomeui/libgnomeui.h>
-#include <libbonobo.h>
 #include <libgnomevfs/gnome-vfs.h>
+#include <gconf/gconf-client.h>
+
 #include <gnome-theme-info.h>
 #include <gnome-theme-apply.h>
-#include <gconf/gconf-client.h>
-#include <glade/glade.h>
-
-#include <stdlib.h>
 
 #define FONT_KEY           "/desktop/gnome/interface/font_name"
 
-int main (int argc, char* argv[])
+int main (int argc, char **argv)
 {
-	GValue value = { 0, };
 	GnomeVFSURI *uri;
 	GnomeThemeMetaInfo *theme;
 	GConfClient *client;
@@ -43,63 +42,57 @@ int main (int argc, char* argv[])
 	gboolean apply_font = FALSE;
 	poptContext ctx;
 	gchar **args;
+
+	gtk_init (&argc, &argv);
+	program = gnome_program_init ("ThemeApplier", "0.3.0", LIBGNOME_MODULE,
+				      argc, argv, GNOME_PARAM_NONE);
 	
-	program = gnome_program_init ("ThemeApplier", "0.3.0", LIBGNOMEUI_MODULE, argc, 
-		argv, GNOME_PARAM_NONE);
-	
-	g_value_init (&value, G_TYPE_POINTER);
-	g_object_get_property (G_OBJECT (program), GNOME_PARAM_POPT_CONTEXT, &value);
-	ctx = g_value_get_pointer (&value);
-	g_value_unset (&value);
+	g_object_get (program, GNOME_PARAM_POPT_CONTEXT, &ctx, NULL);
 	args = (char**) poptGetArgs(ctx);
 
-	if (args)
-	{
-		gnome_vfs_init ();
-		gnome_theme_init (FALSE);
-		
-		uri = gnome_vfs_uri_new (args[0]);
-		g_assert (uri != NULL);
-		
-		theme = gnome_theme_read_meta_theme (uri);
-		gnome_vfs_uri_unref (uri);
-		
-		g_assert (theme != NULL);
+	if (!args) return 1;
 
-		if (theme->application_font)
-		{
-			glade_init ();
-			font_xml = glade_xml_new (GNOMECC_GLADE_DIR "/apply-font.glade",
-								NULL, NULL);
-			if (font_xml)
-			{
-				font_dialog = glade_xml_get_widget (font_xml, "ApplyFontAlert");
-				font_sample = glade_xml_get_widget (font_xml, "font_sample");
-				gtk_label_set_markup (GTK_LABEL (font_sample), g_strconcat (
-							"<span font_desc=\"",
-							theme->application_font,
-							"\">",
-			/* translators: you may want to include non-western chars here */
-							_("ABCDEFG"),
-							"</span>",
-							NULL));
+	gnome_vfs_init ();
+	gnome_theme_init (FALSE);
+		
+	uri = gnome_vfs_uri_new (args[0]);
+	g_assert (uri != NULL);
+		
+	theme = gnome_theme_read_meta_theme (uri);
+	gnome_vfs_uri_unref (uri);
+		
+	g_assert (theme != NULL);
+
+	if (theme->application_font) {
+		glade_init ();
+		font_xml = glade_xml_new (GNOMECC_GLADE_DIR "/apply-font.glade",
+					  NULL, NULL);
+		if (font_xml) {
+			font_dialog = glade_xml_get_widget (font_xml, "ApplyFontAlert");
+			font_sample = glade_xml_get_widget (font_xml, "font_sample");
+			gtk_label_set_markup (GTK_LABEL (font_sample),
+				g_strconcat ("<span font_desc=\"",
+					     theme->application_font,
+					     "\">",
+	/* translators: you may want to include non-western chars here */
+					     _("ABCDEFG"),
+					     "</span>",
+					     NULL));
 						
-				if (gtk_dialog_run (GTK_DIALOG(font_dialog)) == GTK_RESPONSE_OK)
-					apply_font = TRUE;
-			}
+			if (gtk_dialog_run (GTK_DIALOG(font_dialog)) == GTK_RESPONSE_OK)
+				apply_font = TRUE;
+		} else {
 			/* if installation is borked, recover and apply the font */
-			else apply_font = TRUE;
+			apply_font = TRUE;
 		}
-
-		gnome_meta_theme_set (theme);
-			
-		if (apply_font)
-		{
-			client = gconf_client_get_default ();
-			gconf_client_set_string (client, FONT_KEY, theme->application_font, NULL);
-		}
-		
-		return 0;
 	}
-	else return 1;
+
+	gnome_meta_theme_set (theme);
+			
+	if (apply_font) {
+		client = gconf_client_get_default ();
+		gconf_client_set_string (client, FONT_KEY, theme->application_font, NULL);
+	}
+		
+	return 0;
 }

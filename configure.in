@@ -196,16 +196,14 @@ if test x$enable_vfs_methods = xyes; then
    libmetacity-private dnl
    gnome-vfs-2.0 >= 2.2.0])
   PKG_CHECK_MODULES(THEMUS_COMPONENT,
-  [glib-2.0 >= 2.2.0 dnl
-   gtk+-2.0 >= 2.2.0 dnl
-   atk >= 1.2.0 dnl
-   libgnome-2.0 >= 2.2.0 dnl
-   libgnomeui-2.0 >= 2.2.0 dnl
+  [glib-2.0 >= 2.5.0 dnl
+   gtk+-2.0 >= 2.4.0 dnl
+   libnautilus-extension >= nautilus_minver])
+  PKG_CHECK_MODULES(THEMUS_APPLIER,
+  [gtk+-2.0 >= 2.4.0 dnl
+   libglade-2.0 >= 2.0 dnl
    gnome-vfs-2.0 >= 2.2.0 dnl
-   libbonobo-2.0 >= 2.2.0 dnl
-   libbonoboui-2.0 >= 2.2.0 dnl
-   libnautilus >= 2.2.0 dnl
-   libglade-2.0])
+   libgnome-2.0 >= 2.2.0])
   PKG_CHECK_MODULES(FONT_METHOD,
   [gnome-vfs-module-2.0 >= gnomevfs_minver dnl
    fontconfig >= fontconfig_minver])
@@ -239,6 +237,8 @@ if test x$enable_vfs_methods = xyes; then
   AC_SUBST(THEMUS_THUMBNAILER_LIBS)
   AC_SUBST(THEMUS_COMPONENT_CFLAGS)
   AC_SUBST(THEMUS_COMPONENT_LIBS)
+  AC_SUBST(THEMUS_APPLIER_CFLAGS)
+  AC_SUBST(THEMUS_APPLIER_LIBS)
   AC_SUBST(THEMUS)
   AC_SUBST(FONT_THUMBNAILER_CFLAGS)
   AC_SUBST(FONT_THUMBNAILER_LIBS)
@@ -253,19 +253,13 @@ if test x$enable_vfs_methods = xyes; then
   AC_SUBST(FONTILUS)
 
   # update LIBS for $export_dynamic
+  export_dynamic=`(./libtool --config; echo eval echo \\$export_dynamic_flag_spec) | sh`
   if test -n "$export_dynamic"; then
+    THEME_METHOD_LIBS=`echo $THEME_METHOD_LIBS | sed -e "s/$export_dynamic//"`
+    THEMUS_COMPONENT_LIBS=`echo $THEMUS_COMPONENT_LIBS | sed -e "s/$export_dynamic//"`
     FONT_VIEW_LIBS=`echo $FONT_VIEW_LIBS | sed -e "s/$export_dynamic//"`
-  fi
-
-  if test -n "$export_dynamic"; then
     FONT_CONTEXT_MENU_LIBS=`echo $CONTEXT_MENU_LIBS | sed -e "s/$export_dynamic//"`
-  fi
-
-  if test -n "$export_dynamic"; then
     FONT_THUMBNAILER_LIBS=`echo FONT_$THUMBNAILER_LIBS | sed -e "s/$export_dynamic//"`
-  fi
-
-  if test -n "$export_dynamic"; then
     FONT_METHOD_LIBS=`echo $FONT_METHOD_LIBS | sed -e "s/$export_dynamic//"`
   fi
   GLIB_DEFINE_LOCALEDIR(FONTILUS_LOCALEDIR)

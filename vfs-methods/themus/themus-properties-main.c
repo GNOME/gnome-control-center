@@ -21,34 +21,110 @@
 /* libmain.c - object activation infrastructure for shared library
    version of tree view. */
 
+#include <config.h>
 #include <string.h>
+#include <glib/gi18n-lib.h>
 #include "themus-properties-view.h"
-#include <bonobo.h>
-#include <bonobo-activation/bonobo-activation.h>
+#include <libnautilus-extension/nautilus-extension-types.h>
+#include <libnautilus-extension/nautilus-property-page-provider.h>
 
-#define VIEW_IID_PROPERTIES      "OAFIID:Themus_Theme_Properties_View"
+static GType tpp_type = 0;
+static void   property_page_provider_iface_init (NautilusPropertyPageProviderIface *iface);
+static GList *themus_properties_get_pages (NautilusPropertyPageProvider *provider,
+					   GList *files);
 
-static CORBA_Object
-image_shlib_make_object (PortableServer_POA poa,
-			 const char *iid,
-			 gpointer impl_ptr,
-			 CORBA_Environment *ev)
+static void
+themus_properties_plugin_register_type (GTypeModule *module)
 {
-	ThemusThemePropertiesView *theme;
+    static const GTypeInfo info = {
+        sizeof (GObjectClass),
+        (GBaseInitFunc) NULL,
+        (GBaseFinalizeFunc) NULL,
+        (GClassInitFunc) NULL,
+        NULL,
+        NULL,
+        sizeof (GObject),
+        0,
+        (GInstanceInitFunc) NULL
+    };
+    static const GInterfaceInfo property_page_provider_iface_info = {
+        (GInterfaceInitFunc)property_page_provider_iface_init,
+        NULL,
+        NULL
+    };
 
-	theme = g_object_new (THEMUS_TYPE_THEME_PROPERTIES_VIEW, NULL);
-
-	bonobo_activation_plugin_use (poa, impl_ptr);
-
-	return CORBA_Object_duplicate (BONOBO_OBJREF (theme), ev);
+    tpp_type = g_type_module_register_type (module, G_TYPE_OBJECT,
+					    "ThemusPropertiesPlugin",
+					    &info, 0);
+    g_type_module_add_interface (module,
+				 tpp_type,
+				 NAUTILUS_TYPE_PROPERTY_PAGE_PROVIDER,
+				 &property_page_provider_iface_info);
 }
 
-static const BonoboActivationPluginObject plugin_list[] = {
-	{ VIEW_IID_PROPERTIES, image_shlib_make_object },
-	{ NULL }
-};
+static void
+property_page_provider_iface_init (NautilusPropertyPageProviderIface *iface)
+{
+    iface->get_pages = themus_properties_get_pages;
+}
 
-const BonoboActivationPlugin Bonobo_Plugin_info = {
-	plugin_list,
-	"Themus Component"
-};
+static GList *
+themus_properties_get_pages (NautilusPropertyPageProvider *provider,
+			     GList *files)
+{
+    GList *pages = NULL;
+    NautilusFileInfo *file;
+    char *uri = NULL;
+    GtkWidget *page, *label;
+    NautilusPropertyPage *property_page;
+
+    /* only add properties page if a single file is selected */
+    if (files == NULL || files->next != NULL) goto end;
+    file = files->data;
+
+    /* only add the properties page to these mime types */
+    if (!nautilus_file_info_is_mime_type (file, "application/x-gnome-theme") &&
+	!nautilus_file_info_is_mime_type (file, "application/x-gnome-theme-installed"))
+	goto end;
+
+    /* okay, make the page */
+    uri = nautilus_file_info_get_uri (file);
+    label = gtk_label_new (_("Theme"));
+    page = themus_properties_view_new (uri);
+    property_page = nautilus_property_page_new ("theme-properties",
+						label, page);
+
+    pages = g_list_prepend (pages, property_page);
+
+ end:
+    g_free (uri);
+    return pages;
+}
+
+/* --- extension interface --- */
+void
+nautilus_module_initialize (GTypeModule *module)
+{
+    themus_properties_plugin_register_type (module);
+    themus_properties_view_register_type (module);
+
+    /* set up translation catalog */
+    bindtextdomain (GETTEXT_PACKAGE, FONTILUS_LOCALEDIR);
+    bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+}
+
+void
+nautilus_module_shutdown (void)
+{
+}
+
+void
+nautilus_module_list_types (const GType **types,
+                            int          *num_types)
+{
+    static GType type_list[1];
+
+    type_list[0] = tpp_type;
+    *types = type_list;
+    *num_types = G_N_ELEMENTS (type_list);
+}

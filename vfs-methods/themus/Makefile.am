@@ -1,6 +1,7 @@
 INCLUDES = $(THEME_METHOD_CFLAGS) \
   $(THEMUS_THUMBNAILER_CFLAGS) \
   $(THEMUS_COMPONENT_CFLAGS) \
+  $(THEMUS_APPLIER_CFLAGS) \
   -I$(top_srcdir)/capplets/common \
   -DGNOMECC_GLADE_DIR=\"$(GNOMECC_GLADE_DIR)\" \
   -DDIRECTORY_DIR=\"$(vfsdirectorydir)\" \
@@ -11,8 +12,8 @@ bin_PROGRAMS = gnome-theme-thumbnailer themus-theme-applier
 vfsmoduledir = $(libdir)/gnome-vfs-2.0/modules
 vfsmodule_LTLIBRARIES = libtheme-method.la
 
-bonobodir = $(libdir)/bonobo
-bonobo_LTLIBRARIES = libthemus-theme-properties-view.la
+nautilusdir = $(libdir)/nautilus/extensions-1.0
+nautilus_LTLIBRARIES = libnautilus-themus.la
 
 libtheme_method_la_LDFLAGS = -module -avoid-version \
   -export-symbols-regex 'vfs_module_.*'
@@ -25,15 +26,16 @@ gnome_theme_thumbnailer_LDADD = $(THEMUS_THUMBNAILER_LIBS) \
 gnome_theme_thumbnailer_SOURCES = \
 	theme-thumbnailer.c
 
-themus_theme_applier_LDADD = $(THEMUS_COMPONENT_LIBS) \
+themus_theme_applier_LDADD = $(THEMUS_APPLIER_LIBS) \
   $(top_builddir)/capplets/common/libcommon.la
 themus_theme_applier_SOURCES = \
 	themus-theme-applier.c
 
-libthemus_theme_properties_view_la_LIBADD = $(THEMUS_COMPONENT_LIBS) \
+libnautilus_themus_la_LIBADD = $(THEMUS_COMPONENT_LIBS) \
   $(top_builddir)/capplets/common/libcommon.la
-libthemus_theme_properties_view_la_LDFLAGS = -module -avoid-version
-libthemus_theme_properties_view_la_SOURCES = \
+libnautilus_themus_la_LDFLAGS = -module -avoid-version \
+  -export-symbols-regex 'nautilus_module_.*'
+libnautilus_themus_la_SOURCES = \
 	themus-properties-view.c \
 	themus-properties-view.h \
 	themus-properties-main.c
@@ -59,13 +61,6 @@ mimeinfo_DATA = themus.keys
 appregdir = $(datadir)/application-registry
 appreg_DATA = themus.applications
 
-server_in_files = Themus_Properties_View.server.in.in
-serverdir = $(libdir)/bonobo/servers
-server_DATA = $(server_in_files:.server.in.in=.server)
-
-Themus_Properties_View.server.in: Themus_Properties_View.server.in.in
-	sed -e "s|\@BONOBODIR\@|$(bonobodir)|" $< > $@
-
 CLEANFILES = Themus_Properties_View.server Themus_Properties_View.server.in
 
 if GCONF_SCHEMAS_INSTALL
@@ -78,7 +73,6 @@ install-data-local:
 endif
 
 @INTLTOOL_KEYS_RULE@
-@INTLTOOL_SERVER_RULE@  
 @INTLTOOL_SCHEMAS_RULE@
 
 EXTRA_DIST = \
@@ -88,7 +82,6 @@ EXTRA_DIST = \
   theme-method.conf \
   $(schemas_DATA)	\
   $(schemas_in_files)	\
-  Themus_Properties_View.server.in.in \
   themus.applications \
   themus.keys \
   ChangeLog

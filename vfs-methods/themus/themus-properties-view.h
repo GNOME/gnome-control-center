@@ -20,25 +20,30 @@
 #ifndef THEMUS_PROPERTIES_VIEW_H
 #define THEMUS_PROPERTIES_VIEW_H
 
-#include <libnautilus/nautilus-view.h>
+#include <gtk/gtk.h>
 
-#define THEMUS_TYPE_THEME_PROPERTIES_VIEW	     (themus_theme_properties_view_get_type ())
-#define THEMUS_THEME_PROPERTIES_VIEW(obj)	     (GTK_CHECK_CAST ((obj), THEMUS_TYPE_THEME_PROPERTIES_VIEW, ThemusThemePropertiesView))
-#define THEMUS_THEME_PROPERTIES_VIEW_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), THEMUS_TYPE_THEME_PROPERTIES_VIEW, ThemusThemePropertiesViewClass))
-#define THEMUS_IS_THEME_PROPERTIES_VIEW(obj)	     (GTK_CHECK_TYPE ((obj), THEMUS_TYPE_THEME_PROPERTIES_VIEW))
-#define THEMUS_IS_THEME_PROPERTIES_VIEW_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), THEMUS_TYPE_THEME_PROPERTIES_VIEW))
+#define THEMUS_TYPE_PROPERTIES_VIEW	    (themus_properties_view_get_type ())
+#define THEMUS_PROPERTIES_VIEW(obj)	    (G_TYPE_CHECK_INSTANCE_CAST ((obj), THEMUS_TYPE_PROPERTIES_VIEW, ThemusPropertiesView))
+#define THEMUS_PROPERTIES_VIEW_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), THEMUS_TYPE_PROPERTIES_VIEW, ThemusPropertiesViewClass))
+#define THEMUS_IS_PROPERTIES_VIEW(obj)	    (G_TYPE_CHECK_INSTANCE_TYPE ((obj), THEMUS_TYPE_PROPERTIES_VIEW))
+#define THEMUS_IS_PROPERTIES_VIEW_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), THEMUS_TYPE_PROPERTIES_VIEW))
 
-typedef struct ThemusThemePropertiesViewDetails ThemusThemePropertiesViewDetails;
-
-typedef struct {
-	BonoboControl parent;
-	ThemusThemePropertiesViewDetails *details;
-} ThemusThemePropertiesView;
+typedef struct ThemusPropertiesViewDetails ThemusPropertiesViewDetails;
 
 typedef struct {
-	BonoboControlClass parent;
-} ThemusThemePropertiesViewClass;
+	GtkTable parent;
+	ThemusPropertiesViewDetails *details;
+} ThemusPropertiesView;
 
-GType themus_theme_properties_view_get_type (void);
+typedef struct {
+	GtkTableClass parent;
+} ThemusPropertiesViewClass;
+
+GType      themus_properties_view_get_type      (void);
+void       themus_properties_view_register_type (GTypeModule *module);
+
+GtkWidget *themus_properties_view_new           (const char *location);
+void       themus_properties_view_set_location  (ThemusPropertiesView *view,
+						 const char        *location);
 
 #endif /* THEMUS_PROPERTIES_VIEW_H */
