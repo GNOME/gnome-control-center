@@ -7,17 +7,20 @@
 #
 # Konventioner:
 #
+#   detach -> frigøre
+#   extension -> endelse (det refererer nemlig som regel til f.eks. '.html')
 #   GL -> 3d
 #   help browser -> hjælpefremviser
 #   properties -> indstillinger
+#   torn off -> frigøre
 #
 # Undgå sammensætninger med 'indstil x' fordi indstil også kan betyde stop.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2002-05-06 17:01-0500\n"
-"PO-Revision-Date: 2002-04-06 17:19+0200\n"
+"POT-Creation-Date: 2002-05-12 12:05+0200\n"
+"PO-Revision-Date: 2002-05-12 13:23+0200\n"
 "Last-Translator: Ole Laursen <olau@hardworking.dk>\n"
 "Language-Team: danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -56,7 +59,7 @@ msgstr "B_ip når der trykkes på modifikationstast"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:3
 msgid "Beep when an LED is turned on and two beeps when one is turned off."
-msgstr ""
+msgstr "Bip når en tastaturlampe tændes og bip to gange når en lampe slukkes"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:4
 msgid "Beep when:"
@@ -83,19 +86,14 @@ msgid "Enable _Toggle Keys"
 msgstr "Aktivér _skiftetaster"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:10
-#, fuzzy
 msgid ""
 "Ignore all subsequent presses of the SAME key if they happen within a user "
 "selectable period of time."
-msgstr ""
-"Hoppende taster kan hjælpe brugere som til tider ryster når de slipper en "
-"tast - systemet beordres til at ignorere alle efterfølgende tryk på den "
-"samme tast hvis de sker inden for et givet tidsrum."
+msgstr "Ignorér alle efterfølgende tryk på den samme tast hvis de sker inden for et givet tidsrum"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:11
-#, fuzzy
 msgid "Keyboard Accessibility Configuration (AccessX)"
-msgstr "Tastaturtilgængelighedskonfiguration"
+msgstr "Konfiguration af tastaturtilgængelighed"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:12
 msgid "Ma_ximum pointer speed :"
@@ -105,15 +103,13 @@ msgstr "Ma_ksimal markørfart:"
 msgid ""
 "Only accept keys after they have been pressed and held for a user adjustable "
 "amount of time."
-msgstr ""
-"Acceptér kun tastatur efter de har været trykket og holdt nede for et givet "
-"tidsrum."
+msgstr "Acceptér kun tastatur efter de har været trykket og holdt nede for et givet tidsrum"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:14
 msgid ""
 "Perform multiple simultaneous key press operations by pressing modifier keys "
 "in sequence."
-msgstr ""
+msgstr "Udfør flere simultane tastetryk ved at trykke på modifikationstasterne efter hinanden"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:15
 msgid "Start mo_ving this long after keypress :"
@@ -125,12 +121,11 @@ msgstr "Tid før _accelerering til topfart:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:17
 msgid "Turn the numeric keypad into a mouse control pad."
-msgstr ""
+msgstr "Lav det numeriske tastatur om til en musekontrol"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:18
-#, fuzzy
 msgid "_Beep when enabling/disabling keyboard accessibility features"
-msgstr "_Aktivér tastaturtilgang"
+msgstr "_Bip ved aktivering/deaktivering af tastaturtilgængelighed"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:19
 msgid "_Disable if unused for "
@@ -151,7 +146,7 @@ msgstr "_Tastatur"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:23
 msgid "_Misc"
-msgstr ""
+msgstr "_Diverse"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:24
 msgid "_Only accept keypress after :"
@@ -198,9 +193,8 @@ msgid "Background"
 msgstr "Baggrund"
 
 #: capplets/background/background.desktop.in.h:2
-#, fuzzy
 msgid "Change the desktop background"
-msgstr "Konfigurér skrivebordsbaggrunden"
+msgstr "Skift skrivebordsbaggrunden"
 
 #. solid
 #: capplets/background/background-properties-capplet.c:222
@@ -249,16 +243,16 @@ msgstr "_Intet billede"
 msgid "_Picture"
 msgstr "_Billede:"
 
-#: capplets/background/background-properties-capplet.c:531
+#: capplets/background/background-properties-capplet.c:537
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:592
-#: capplets/keyboard/gnome-keyboard-properties.c:359
-#: capplets/mouse/gnome-mouse-properties.c:691
-#: capplets/sound/sound-properties-capplet.c:148
+#: capplets/keyboard/gnome-keyboard-properties.c:365
+#: capplets/mouse/gnome-mouse-properties.c:735
+#: capplets/sound/sound-properties-capplet.c:156
 msgid "Retrieve and store legacy settings"
 msgstr "Indhent og gem gamle indstillinger"
 
-#: capplets/background/background-properties-capplet.c:556
+#: capplets/background/background-properties-capplet.c:562
 #: capplets/background/background-properties.glade.h:1
 msgid "Background Preferences"
 msgstr "Indstillinger for baggrunden"
@@ -330,7 +324,6 @@ msgid "radiobutton5"
 msgstr "radioknap5"
 
 #: capplets/common/activate-settings-daemon.c:18
-#, fuzzy
 msgid ""
 "Unable to start the settings manager 'gnome-settings-daemon'.\n"
 "Without the GNOME settings manager running, some preferences may not take "
@@ -338,11 +331,8 @@ msgid ""
 "settings manager may already be active and conflicting with the GNOME "
 "settings manager."
 msgstr ""
-"Kunne ikke starte konfigurationsshåndteringen 'gnome2-settings-daemon'.\n"
-"Når den ikke kører, træder nogle indstillinger måske ikke i kraft. Dette kan "
-"indikere et problem med Bonobo eller at en anden konfigurationshåndtering "
-"som ikke er relateret til Gnome (f.eks. KDE), måske er aktiv og forårsager "
-"en konflik med Gnomes konfigurationshåndtering."
+"Kunne ikke starte konfigurationsshåndteringen 'gnome-settings-daemon'.\n"
+"Når den ikke kører, træder nogle indstillinger måske ikke i kraft. Dette kan indikere et problem med Bonobo eller at en anden konfigurationshåndtering som ikke er relateret til Gnome (f.eks. KDE), måske er aktiv og forårsager en konflik med Gnomes konfigurationshåndtering."
 
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
@@ -351,72 +341,72 @@ msgstr "Anvend indstillingerne og afslut"
 #: capplets/common/file-transfer-dialog.c:95
 #, c-format
 msgid "%i of %i"
-msgstr ""
+msgstr "%i af %i"
 
 #: capplets/common/file-transfer-dialog.c:119
 #, c-format
 msgid "Transferring: %s"
-msgstr ""
+msgstr "Overfører: %s"
 
 #: capplets/common/file-transfer-dialog.c:126
 #, c-format
 msgid "From: %s"
-msgstr ""
+msgstr "Fra: %s"
 
 #: capplets/common/file-transfer-dialog.c:134
 #, c-format
 msgid "To: %s"
-msgstr ""
+msgstr "Til: %s"
 
 #: capplets/common/file-transfer-dialog.c:185
 msgid "From URI"
-msgstr ""
+msgstr "Fra-adresse"
 
 #: capplets/common/file-transfer-dialog.c:186
 msgid "URI currently transferring from"
-msgstr ""
+msgstr "Adresse der i øjeblikket overføres fra"
 
 #: capplets/common/file-transfer-dialog.c:193
 msgid "To URI"
-msgstr ""
+msgstr "Til-adresse"
 
 #: capplets/common/file-transfer-dialog.c:194
 msgid "URI currently transferring to"
-msgstr ""
+msgstr "Adresse der i øjeblikket overføres til"
 
 #: capplets/common/file-transfer-dialog.c:201
 msgid "Fraction completed"
-msgstr ""
+msgstr "Fuldført andel"
 
 #: capplets/common/file-transfer-dialog.c:202
 msgid "Fraction of transfer currently completed"
-msgstr ""
+msgstr "Andelen af overførslen som i øjeblikket er fuldført"
 
 #: capplets/common/file-transfer-dialog.c:209
 msgid "Current URI index"
-msgstr ""
+msgstr "Aktuelt adresseindeks"
 
 #: capplets/common/file-transfer-dialog.c:210
 msgid "Current URI index - starts from 1"
-msgstr ""
+msgstr "Aktuelt adresseindeks - begynder ved 1"
 
 #: capplets/common/file-transfer-dialog.c:217
 msgid "Total URIs"
-msgstr ""
+msgstr "Totalt adresser"
 
 #: capplets/common/file-transfer-dialog.c:218
 msgid "Total number of URIs"
-msgstr ""
+msgstr "Totalt antal af adresser"
 
 #: capplets/common/file-transfer-dialog.c:372
 #: capplets/common/file-transfer-dialog.c:374
 msgid "Connecting..."
-msgstr ""
+msgstr "Tilkobler..."
 
 #: capplets/common/file-transfer-dialog.c:379
 #: capplets/common/file-transfer-dialog.c:381
 msgid "Downloading..."
-msgstr ""
+msgstr "Henter..."
 
 #: capplets/common/gconf-property-editor.c:172
 msgid "Key"
@@ -687,13 +677,12 @@ msgid "Legacy applications settings (grdb)"
 msgstr "Indstillinger for ældre programmer (grdb)"
 
 #: capplets/desktop-links/panel.desktop.in.in.h:1
-#, fuzzy
 msgid "Global panel properties"
-msgstr "Skrifttypeindstillinger"
+msgstr "Globale panelindstillinger"
 
 #: capplets/desktop-links/panel.desktop.in.in.h:2
 msgid "Panel"
-msgstr ""
+msgstr "Panel"
 
 #: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
 msgid "Appearance"
@@ -880,17 +869,17 @@ msgid "Source Code"
 msgstr "Kildekode"
 
 #: capplets/file-types/category-names.h:25
-#: capplets/file-types/mime-type-info.c:745
+#: capplets/file-types/mime-type-info.c:752
 msgid "Audio"
 msgstr "Lyd"
 
 #: capplets/file-types/category-names.h:26
-#: capplets/file-types/mime-type-info.c:741
+#: capplets/file-types/mime-type-info.c:748
 msgid "Images"
 msgstr "Billeder"
 
 #: capplets/file-types/category-names.h:27
-#: capplets/file-types/mime-type-info.c:743
+#: capplets/file-types/mime-type-info.c:750
 msgid "Video"
 msgstr "Video"
 
@@ -901,7 +890,7 @@ msgstr "Beskrivelse"
 #: capplets/file-types/file-types-capplet.c:238
 #: capplets/mime-type/new-mime-window.c:39
 msgid "Extensions"
-msgstr "Udvidelser"
+msgstr "Endelser"
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:1
 #: capplets/file-types/file-types.desktop.in.h:1
@@ -920,16 +909,13 @@ msgid "Actions"
 msgstr "Handlinger"
 
 #: capplets/file-types/file-types-properties.glade.h:2
-#, fuzzy
 msgid "Add _file type..."
-msgstr "Tilføj filtype..."
+msgstr "Tilføj _filtype..."
 
 #: capplets/file-types/file-types-properties.glade.h:3
-#, fuzzy
 msgid "Add _service..."
-msgstr "Tilføj tjeneste..."
+msgstr "Tilføj _tjeneste..."
 
-# i hvert fald bedre end standardsted...
 #: capplets/file-types/file-types-properties.glade.h:4
 msgid "Default action"
 msgstr "Forvalgt handling"
@@ -945,16 +931,15 @@ msgstr "Filtyper og internettjenester"
 
 #: capplets/file-types/file-types-properties.glade.h:7
 msgid "Filename extensions"
-msgstr "Filnavnsendelser"
+msgstr "Filendelser"
 
 #: capplets/file-types/file-types-properties.glade.h:8
 msgid "Look at content"
 msgstr "Undersøg indhold"
 
 #: capplets/file-types/file-types-properties.glade.h:9
-#, fuzzy
 msgid "Needs _terminal"
-msgstr "Behøver terminal"
+msgstr "Behøver _terminal"
 
 #: capplets/file-types/file-types-properties.glade.h:10
 msgid "Program to run"
@@ -965,69 +950,57 @@ msgid "Run a program"
 msgstr "Kør et program"
 
 #: capplets/file-types/file-types-properties.glade.h:12
-#, fuzzy
 msgid "Use category _defaults"
-msgstr "Benyt kategoriforvalg"
+msgstr "Benyt kategori_forvalg"
 
 #: capplets/file-types/file-types-properties.glade.h:13
-#, fuzzy
 msgid "Use parent category _defaults"
-msgstr "Brug forælderkategoriens forvalg"
+msgstr "Benyt forælderkategoriens _forvalg"
 
 #: capplets/file-types/file-types-properties.glade.h:14
 msgid "Viewing component"
 msgstr "Visningskomponent"
 
 #: capplets/file-types/file-types-properties.glade.h:15
-#, fuzzy
 msgid "_Add"
-msgstr "Tilføj"
+msgstr "_Tilføj"
 
 #: capplets/file-types/file-types-properties.glade.h:16
-#, fuzzy
 msgid "_Category"
-msgstr "Kategori"
+msgstr "_Kategori"
 
 #: capplets/file-types/file-types-properties.glade.h:17
-#, fuzzy
 msgid "_Choose..."
-msgstr "Vælg..."
+msgstr "_Vælg..."
 
 #: capplets/file-types/file-types-properties.glade.h:18
-#, fuzzy
 msgid "_Description"
-msgstr "Beskrivelse"
+msgstr "_Beskrivelse"
 
 #: capplets/file-types/file-types-properties.glade.h:20
-#, fuzzy
 msgid "_MIME Type"
-msgstr "MIME-type"
+msgstr "_MIME-type"
 
 #: capplets/file-types/file-types-properties.glade.h:21
-#, fuzzy
 msgid "_Name"
-msgstr "Navn"
+msgstr "_Navn"
 
 #: capplets/file-types/file-types-properties.glade.h:22
-#, fuzzy
 msgid "_Program"
-msgstr "Program"
+msgstr "_Program"
 
 #: capplets/file-types/file-types-properties.glade.h:23
-#, fuzzy
 msgid "_Program to run"
-msgstr "Program der skal køres"
+msgstr "_Program der skal køres"
 
 # ditto
 #: capplets/file-types/file-types-properties.glade.h:24
-#, fuzzy
 msgid "_Protocol name"
-msgstr "Protokolnavn"
+msgstr "_Protokolnavn"
 
 #: capplets/file-types/file-types-properties.glade.h:25
-#, fuzzy
 msgid "_Remove"
-msgstr "Fjern"
+msgstr "_Fjern"
 
 #: capplets/file-types/mime-category-edit-dialog.c:137
 msgid "Edit file category"
@@ -1063,7 +1036,7 @@ msgstr "Selvvalgt"
 #: capplets/file-types/mime-edit-dialog.c:164
 #: capplets/mime-type/mime-data.c:385
 msgid "Extension"
-msgstr "Udvidelse"
+msgstr "Endelse"
 
 #: capplets/file-types/mime-edit-dialog.c:205
 msgid "Underlying model to notify when Ok is clicked"
@@ -1086,9 +1059,8 @@ msgid "True if this dialog is for adding a MIME type"
 msgstr "TRUE hvis dette vindue er til alt tilføje en MIME-type"
 
 #: capplets/file-types/mime-edit-dialog.c:268
-#, fuzzy
 msgid "Add file type"
-msgstr "Tilføj filtype..."
+msgstr "Tilføj filtype"
 
 #: capplets/file-types/mime-edit-dialog.c:406
 #: capplets/file-types/mime-edit-dialog.c:465
@@ -1145,9 +1117,8 @@ msgid "TRUE if this is an add service dialog"
 msgstr "TRUE hvis dette er et tjenestetilføjelsesvindue"
 
 #: capplets/file-types/service-edit-dialog.c:225
-#, fuzzy
 msgid "Add service"
-msgstr "Tilføj tjeneste..."
+msgstr "Tilføj tjeneste"
 
 # ditto
 #: capplets/file-types/service-edit-dialog.c:497
@@ -1196,7 +1167,7 @@ msgstr "Gnome-dokumentation"
 
 #: capplets/font/font-properties.desktop.in.h:1
 msgid "Change the default fonts used by the desktop and applications"
-msgstr ""
+msgstr "Skift de standardskrifttyper der bruges af skrivebordet og programmerne"
 
 #: capplets/font/font-properties.desktop.in.h:2
 msgid "Font"
@@ -1207,12 +1178,10 @@ msgid "File Manager Font"
 msgstr "Filhåndteringsskrifttype"
 
 #: capplets/font/font-properties.glade.h:2
-#, fuzzy
 msgid "Font Properties"
 msgstr "Skrifttypeindstillinger"
 
 #: capplets/font/font-properties.glade.h:3
-#, fuzzy
 msgid "Standard Desktop Font"
 msgstr "Skrivebordsskrifttype"
 
@@ -1247,12 +1216,16 @@ msgstr "<ukendt handling>"
 
 #: capplets/keybindings/gnome-keybinding-properties.c:592
 msgid "Desktop"
-msgstr ""
+msgstr "Skrivebord"
 
 #: capplets/keybindings/gnome-keybinding-properties.c:596
-#, fuzzy
 msgid "Window Management"
-msgstr "_Vindueshåndtering"
+msgstr "Vindueshåndtering"
+
+#: capplets/keybindings/gnome-keybinding-properties.c:692
+#, c-format
+msgid "Error setting new accelerator in configuration database: %s\n"
+msgstr "Fejl ved anbringelse af ny genvej i konfigurationsdatabasen: %s\n"
 
 #: capplets/keybindings/gnome-keybinding-properties.c:783
 msgid ""
@@ -1295,14 +1268,14 @@ msgstr ""
 msgid "Associate keyboard shortcuts with panel actions"
 msgstr "Bind tastaturgenveje til panelhandlinger"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:338
+#: capplets/keyboard/gnome-keyboard-properties.c:344
 msgid "_Accessibility"
 msgstr "_Tilgængelighed"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:355
-#: capplets/keyboard/gnome-keyboard-properties.c:357
-#: capplets/sound/sound-properties-capplet.c:144
-#: capplets/sound/sound-properties-capplet.c:146
+#: capplets/keyboard/gnome-keyboard-properties.c:361
+#: capplets/keyboard/gnome-keyboard-properties.c:363
+#: capplets/sound/sound-properties-capplet.c:152
+#: capplets/sound/sound-properties-capplet.c:154
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
@@ -1314,7 +1287,7 @@ msgid ""
 "&lt;b&gt;Tip:&lt;/b&gt; You can configure the keyboards accessibility "
 "features by bringing up the 'Accessibility Settings' property dialog, or "
 "pressing the button on the right."
-msgstr ""
+msgstr "&lt;b&gt;Tip:&lt;/b&gt; Du kan ændre tastaturtilgængelighedsfaciliteterne ved at åbne 'Tilgængelighedsindstillingerne' eller ved at trykke på knappen til højre"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:2
 msgid "&lt;i&gt;fast&lt;/i&gt;"
@@ -1336,7 +1309,7 @@ msgstr "&lt;i&gt;langsomt&lt;/i&gt;"
 #: capplets/network/gnome-network-preferences.glade.h:1
 #: capplets/theme-switcher/theme-properties.glade.h:1
 msgid "*"
-msgstr ""
+msgstr "*"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "Cursor"
@@ -1427,9 +1400,8 @@ msgid "Very long"
 msgstr "Meget lang"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:28
-#, fuzzy
 msgid "_Accessibility..."
-msgstr "_Tilgængelighed"
+msgstr "_Tilgængelighed..."
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:29
 msgid "_Blink speed:"
@@ -1457,15 +1429,13 @@ msgstr "_Lydstyrke:"
 
 #. icon box
 #: capplets/mime-type/edit-window.c:266
-#, fuzzy
 msgid "Select an icon..."
-msgstr "_Vælg et redigeringsprogram:"
+msgstr "Vælg et ikon..."
 
 #: capplets/mime-type/edit-window.c:276
 #: capplets/mime-type/new-mime-window.c:31
-#, fuzzy
 msgid "Mime Type: "
-msgstr "MIME-type"
+msgstr "MIME-type: "
 
 #: capplets/mime-type/edit-window.c:306
 msgid "Add"
@@ -1480,64 +1450,61 @@ msgstr "Fjern"
 #: capplets/mime-type/edit-window.c:341
 #: capplets/mime-type/new-mime-window.c:69
 msgid "First Regular Expression: "
-msgstr ""
+msgstr "Første regulære udtryk: "
 
 #: capplets/mime-type/edit-window.c:349
 #: capplets/mime-type/new-mime-window.c:80
 msgid "Second Regular Expression: "
-msgstr ""
+msgstr "Andet regulære udtryk: "
 
 #. Actions box
 #: capplets/mime-type/edit-window.c:356
 msgid "Mime Type Actions"
-msgstr ""
+msgstr "MIME-typehandlinger"
 
 #: capplets/mime-type/edit-window.c:363
 #, c-format
 msgid "Example: emacs %f"
-msgstr ""
+msgstr "Eksempel: emacs %f"
 
 #: capplets/mime-type/edit-window.c:368
-#, fuzzy
 msgid "Open"
-msgstr "Åbn fiil"
+msgstr "Åbn"
 
 #: capplets/mime-type/edit-window.c:374 capplets/mime-type/edit-window.c:390
 #: capplets/mime-type/edit-window.c:405
-#, fuzzy
 msgid "Select a file..."
-msgstr "Vælg en lydfil"
+msgstr "Vælg en fil..."
 
 #: capplets/mime-type/edit-window.c:383
-#, fuzzy
 msgid "View"
-msgstr "Video"
+msgstr "Vis"
 
 #: capplets/mime-type/edit-window.c:399
-#, fuzzy
 msgid "Edit"
-msgstr "Redigér..."
+msgstr "Redigér"
 
 #. we initialize everything
 #: capplets/mime-type/edit-window.c:448
 #, c-format
 msgid "Set actions for %s"
-msgstr ""
+msgstr "Sæt handlinger for %s"
 
 #: capplets/mime-type/mime-data.c:384
-#, fuzzy
 msgid "Mime Type"
 msgstr "MIME-type"
 
 #: capplets/mime-type/mime-data.c:493
 msgid "You must enter a mime-type"
-msgstr ""
+msgstr "Du skal indtaste en MIME-type"
 
 #: capplets/mime-type/mime-data.c:498
 msgid ""
 "You must add either a regular-expression or\n"
 "a file-name extension"
 msgstr ""
+"Du skal enten tilføje et regulært udtryk eller\n"
+"en endelse på et filnavn"
 
 #: capplets/mime-type/mime-data.c:502
 msgid ""
@@ -1547,10 +1514,15 @@ msgid ""
 "For Example:\n"
 "image/png"
 msgstr ""
+"Indsæt MIME-typen i formatet:\n"
+"KATEGORI/TYPE\n"
+"\n"
+"For eksempel:\n"
+"image/png"
 
 #: capplets/mime-type/mime-data.c:507
 msgid "This mime-type already exists"
-msgstr ""
+msgstr "Denne MIME-type eksisterer allerede"
 
 #: capplets/mime-type/mime-data.c:588 capplets/mime-type/mime-info.c:427
 msgid ""
@@ -1559,6 +1531,9 @@ msgid ""
 "\n"
 "We will not be able to save the state."
 msgstr ""
+"Mappen '~/.gnome/mime-info' kan ikke oprettes.\n"
+"\n"
+"Det er derfor ikke muligt at gemme ændringerne."
 
 #: capplets/mime-type/mime-data.c:594 capplets/mime-type/mime-info.c:433
 msgid ""
@@ -1567,6 +1542,9 @@ msgid ""
 "\n"
 "We will not be able to save the state."
 msgstr ""
+"Mappen '~/.gnome/mime-info' kan ikke tilgås.\n"
+"\n"
+"Det er derfor ikke muligt at gemme ændringerne."
 
 #: capplets/mime-type/mime-data.c:605
 msgid ""
@@ -1575,6 +1553,9 @@ msgid ""
 "\n"
 "We will not be able to save the state"
 msgstr ""
+"Filen '~/.gnome/mime-info/user.mime' kan ikke oprettes.\n"
+"\n"
+"Det er derfor ikke muligt at gemme ændringerne."
 
 #: capplets/mime-type/mime-info.c:444
 msgid ""
@@ -1583,18 +1564,19 @@ msgid ""
 "\n"
 "We will not be able to save the state"
 msgstr ""
+"Filen '~/.gnome/mime-info/user.keys' kan ikke oprettes.\n"
+"\n"
+"Det er derfor ikke muligt at gemme ændringerne."
 
 #: capplets/mime-type/mime-type-capplet.c:83
 #: capplets/wm-properties/wm-properties-capplet.c:1161
-#, fuzzy
 msgid "Delete"
-msgstr "_Slet"
+msgstr "Slet"
 
 #: capplets/mime-type/mime-type-capplet.c:93
 #: capplets/wm-properties/wm-properties-capplet.c:1151
-#, fuzzy
 msgid "Add..."
-msgstr "_Tilføj..."
+msgstr "Tilføj..."
 
 #: capplets/mime-type/mime-type-capplet.c:97
 #: capplets/wm-properties/wm-properties-capplet.c:1156
@@ -1602,48 +1584,48 @@ msgid "Edit..."
 msgstr "Redigér..."
 
 #: capplets/mime-type/mime-type.desktop.in.in.h:1
-#, fuzzy
 msgid "Configure how files are associated and started"
-msgstr "Konfigurér hvilke ikke-sessionshåndterede programmer bliver startet op"
+msgstr "Konfigurér hvordan filer associeres med programmer og startes"
 
 #: capplets/mime-type/mime-type.desktop.in.in.h:2
-#, fuzzy
 msgid "Mime Types"
-msgstr "MIME-type"
+msgstr "MIME-typer"
 
 #: capplets/mime-type/new-mime-window.c:25
-#, fuzzy
 msgid "Add Mime Type"
-msgstr "Tilføj filtype..."
+msgstr "Tilføj MIME-type"
 
 #: capplets/mime-type/new-mime-window.c:26
 msgid ""
 "Add a new Mime Type\n"
 "For example:  image/tiff; text/x-scheme"
 msgstr ""
+"Tilføj en ny MIME-type\n"
+"For eksempel:  image/tiff; text/x-scheme"
 
 #: capplets/mime-type/new-mime-window.c:43
 msgid ""
 "Type in the extensions for this mime-type.\n"
 "For example:  .html, .htm"
 msgstr ""
+"Indtast endelserne for denne MIME-type.\n"
+"For eksempel:  .html, .htm"
 
 #: capplets/mime-type/new-mime-window.c:50
-#, fuzzy
 msgid "Extension:"
-msgstr "Udvidelse"
+msgstr "Endelse:"
 
 #: capplets/mime-type/new-mime-window.c:55
 msgid "Regular Expressions"
-msgstr ""
+msgstr "Regulære udtryk"
 
 #: capplets/mime-type/new-mime-window.c:59
 msgid ""
 "You can set up two regular expressions here to identify the Mime Type\n"
 "by.  These fields are optional."
-msgstr ""
+msgstr "Du kan indsætte to regulære udtryk her for at identificere MIME-typen (disse felter behøver ikke blive udfyldt)"
 
-#: capplets/mouse/gnome-mouse-properties.c:420
+#: capplets/mouse/gnome-mouse-properties.c:455
 #, c-format
 msgid ""
 "<b>Unknown Cursor</b>\n"
@@ -1652,7 +1634,7 @@ msgstr ""
 "<b>Ukendt markør</b>\n"
 "%s"
 
-#: capplets/mouse/gnome-mouse-properties.c:518
+#: capplets/mouse/gnome-mouse-properties.c:556
 msgid ""
 "<b>Default Cursor - Current</b>\n"
 "The default cursor that ships with X"
@@ -1660,7 +1642,7 @@ msgstr ""
 "<b>Standardmarkør - nuværende</b>\n"
 "Den standardmarkør der følger med X"
 
-#: capplets/mouse/gnome-mouse-properties.c:521
+#: capplets/mouse/gnome-mouse-properties.c:559
 msgid ""
 "<b>Default Cursor</b>\n"
 "The default cursor that ships with X"
@@ -1668,7 +1650,7 @@ msgstr ""
 "<b>Standardmarkør</b>\n"
 "Den standardmarkør der følger med X"
 
-#: capplets/mouse/gnome-mouse-properties.c:539
+#: capplets/mouse/gnome-mouse-properties.c:577
 msgid ""
 "<b>White Cursor - Current</b>\n"
 "The default cursor inverted"
@@ -1676,7 +1658,7 @@ msgstr ""
 "<b>Hvid markør - nuværende</b>\n"
 "Inverteret standardmarkør"
 
-#: capplets/mouse/gnome-mouse-properties.c:542
+#: capplets/mouse/gnome-mouse-properties.c:580
 msgid ""
 "<b>White Cursor</b>\n"
 "The default cursor inverted"
@@ -1684,7 +1666,7 @@ msgstr ""
 "<b>Hvid markør</b>\n"
 "Inverteret standardmarkør"
 
-#: capplets/mouse/gnome-mouse-properties.c:560
+#: capplets/mouse/gnome-mouse-properties.c:598
 msgid ""
 "<b>Large Cursor - Current</b>\n"
 "Large version of normal cursor"
@@ -1692,7 +1674,7 @@ msgstr ""
 "<b>Stor markør - nuværende</b>\n"
 "Stor udgave af den normale markør"
 
-#: capplets/mouse/gnome-mouse-properties.c:563
+#: capplets/mouse/gnome-mouse-properties.c:601
 msgid ""
 "<b>Large Cursor</b>\n"
 "Large version of normal cursor"
@@ -1700,7 +1682,7 @@ msgstr ""
 "<b>Stor markør</b>\n"
 "Stor udgave af den normale markør"
 
-#: capplets/mouse/gnome-mouse-properties.c:581
+#: capplets/mouse/gnome-mouse-properties.c:619
 msgid ""
 "<b>Large White Cursor - Current</b>\n"
 "Large version of white cursor"
@@ -1708,7 +1690,7 @@ msgstr ""
 "<b>Stor hvid markør - nuværende</b>\n"
 "Stor udgave af den hvide markør"
 
-#: capplets/mouse/gnome-mouse-properties.c:584
+#: capplets/mouse/gnome-mouse-properties.c:622
 msgid ""
 "<b>Large White Cursor</b>\n"
 "Large version of white cursor"
@@ -1716,21 +1698,11 @@ msgstr ""
 "<b>Stor hvid markør</b>\n"
 "Stor udgave af den hvide markør"
 
-#: capplets/mouse/gnome-mouse-properties.c:718
-#: capplets/mouse/gnome-mouse-properties.glade.h:17
-#: capplets/mouse/mouse.desktop.in.h:2
-msgid "Mouse Properties"
-msgstr "Indstillinger for mus"
-
 #: capplets/mouse/gnome-mouse-properties.glade.h:1
-#, fuzzy
 msgid ""
 "&lt;b&gt;Note:&lt;/b&gt; You will need to logout and log back in for this "
 "setting to take effect."
-msgstr ""
-"&lt;b&gt;Bemærk:&lt;/b&gt;\n"
-"\t\t\t    Du bliver nødt til at logge ud og ind igen for at denne "
-"indstillinger skal træde i kraft."
+msgstr "&lt;b&gt;Bemærk:&lt;/b&gt; Du bliver nødt til at logge ud og ind igen for at denne indstilling skal træde i kraft."
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:2
 msgid "&lt;i&gt;Fast&lt;/i&gt;"
@@ -1801,6 +1773,11 @@ msgstr ""
 msgid "Mouse Orientation"
 msgstr "Museorientering"
 
+#: capplets/mouse/gnome-mouse-properties.glade.h:17
+#: capplets/mouse/mouse.desktop.in.h:2
+msgid "Mouse Properties"
+msgstr "Indstillinger for mus"
+
 #: capplets/mouse/gnome-mouse-properties.glade.h:18
 msgid "Set the distance you need to move your cursor before dragging an item."
 msgstr "Angiv den afstand markøren skal flyttes før et element bliver trukket."
@@ -1853,7 +1830,7 @@ msgstr "Mus"
 msgid "Configure GNOME's use of sound"
 msgstr "Konfigurér brugen af lyd i Gnome"
 
-#: capplets/sound/sound-properties-capplet.c:178
+#: capplets/sound/sound-properties-capplet.c:186
 msgid "Sound preferences"
 msgstr "Lydindstillinger"
 
@@ -1926,62 +1903,55 @@ msgstr "To"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
 msgid "Change the appearance of buttons, scrollbars, etc"
-msgstr ""
+msgstr "Skift udseendet af knapper, rullebjælker osv."
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
-#, fuzzy
 msgid "Theme"
-msgstr "Gtk+-tema"
+msgstr "Tema"
 
 #: capplets/theme-switcher/theme-properties.glade.h:2
-#, fuzzy
 msgid "Install new theme"
-msgstr "Installér nyt tema..."
+msgstr "Installér nyt tema"
 
 #: capplets/theme-switcher/theme-properties.glade.h:3
-#, fuzzy
 msgid "Installed Themes"
-msgstr "Installér nyt tema..."
+msgstr "Installerede temaer"
 
 #: capplets/theme-switcher/theme-properties.glade.h:4
 msgid "New themes can also be installed by dragging them into the window."
-msgstr ""
+msgstr "Nye temaer kan installeres ved at trække dem ind i vinduet"
 
 #: capplets/theme-switcher/theme-properties.glade.h:5
-#, fuzzy
 msgid "Theme Properties"
-msgstr "Indstillinger for cd"
+msgstr "Temaindstillinger"
 
 #: capplets/theme-switcher/theme-properties.glade.h:6
-msgid "_Go to theme folder..."
-msgstr ""
+msgid "_Go to theme folder"
+msgstr "_Gå til temamappen"
 
 #: capplets/theme-switcher/theme-properties.glade.h:7
 msgid "_Install"
-msgstr ""
+msgstr "_Installér"
 
 #: capplets/theme-switcher/theme-properties.glade.h:8
-#, fuzzy
 msgid "_Install new theme..."
-msgstr "Installér nyt tema..."
+msgstr "_Installér nyt tema..."
 
 #: capplets/theme-switcher/theme-properties.glade.h:9
-#, fuzzy
 msgid "_Location of new theme:"
-msgstr "_Handling"
+msgstr "_Placering af det ny tema:"
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
 msgid "Change how toolbars and menus are displayed"
-msgstr ""
+msgstr "Skift hvordan værtøjslinjer og menuer bliver vist"
 
 #: capplets/ui-properties/behavior.desktop.in.h:2
 msgid "Toolbars & Menus"
 msgstr "Værktøjslinjer og menuer"
 
 #: capplets/ui-properties/behavior.desktop.in.in.h:1
-#, fuzzy
 msgid "Behavior"
-msgstr "Fokusopførsel"
+msgstr "Opførsel"
 
 #: capplets/ui-properties/behavior.desktop.in.in.h:2
 msgid "Sets the default behavior of GNOME applications"
@@ -2042,7 +2012,7 @@ msgstr "Kun tekst"
 
 #: capplets/ui-properties/gnome2-ui-properties.glade.h:15
 msgid "Open File"
-msgstr "Åbn fiil"
+msgstr "Åbn fil"
 
 #: capplets/ui-properties/gnome2-ui-properties.glade.h:16
 msgid "Sample Menubar"
@@ -2078,269 +2048,281 @@ msgstr "_Værktøjslinjer har: "
 
 #: capplets/ui-properties/ui-properties.glade.h:1
 msgid "At the center of the screen"
-msgstr ""
+msgstr "I centrum af skærmen"
 
 #: capplets/ui-properties/ui-properties.glade.h:2
 msgid "At the mouse pointer"
-msgstr ""
+msgstr "Ved musemarkøren"
 
 #: capplets/ui-properties/ui-properties.glade.h:3
-#, fuzzy
 msgid "Bottom"
-msgstr "_Nederste farve"
+msgstr "Nederst"
 
 #: capplets/ui-properties/ui-properties.glade.h:4
 msgid "Default  (Spread out - big)"
-msgstr ""
+msgstr "Standard (bredt ud - meget)"
 
 #: capplets/ui-properties/ui-properties.glade.h:5
-#, fuzzy
 msgid "Dialog Buttons"
-msgstr "Prøveknap"
+msgstr "Knapper i meddelelsesvinduer"
 
+# unødvendigt at gentage 'dialog'-delen, følger af ovenstående tekst
 #: capplets/ui-properties/ui-properties.glade.h:6
-#, fuzzy
 msgid "Dialog buttons have icons"
-msgstr "Menupunkter har _ikoner"
+msgstr "Knapper har ikoner"
 
 #: capplets/ui-properties/ui-properties.glade.h:7
 msgid "Dialogs"
-msgstr ""
+msgstr "Meddelelsesvinduer"
 
 #: capplets/ui-properties/ui-properties.glade.h:8
 msgid "Dialogs are treated"
-msgstr ""
+msgstr "Meddelelsesvinduer behandles"
 
 #: capplets/ui-properties/ui-properties.glade.h:9
 msgid "Dialogs open"
-msgstr ""
+msgstr "Meddelelsesvinduer åbner"
 
 #: capplets/ui-properties/ui-properties.glade.h:10
 msgid "Interface"
-msgstr ""
+msgstr "Grænseflade"
 
+# pga. sammenhængen skal et 'til' tilføjes
 #: capplets/ui-properties/ui-properties.glade.h:11
 msgid "Left"
-msgstr ""
+msgstr "Til venstre"
 
 #: capplets/ui-properties/ui-properties.glade.h:12
 msgid "Left aligned"
-msgstr ""
+msgstr "Venstrejusteret"
 
 #: capplets/ui-properties/ui-properties.glade.h:13
 msgid "Like any other window"
-msgstr ""
+msgstr "Som alle andre vinduer"
 
 #: capplets/ui-properties/ui-properties.glade.h:14
 msgid "Menu bars are detachable"
-msgstr ""
+msgstr "Menulinjer kan frigøres og flyttes rundt"
 
 #: capplets/ui-properties/ui-properties.glade.h:15
 msgid "Menu bars have a border"
-msgstr ""
+msgstr "Menulinjer har en kant"
 
 #: capplets/ui-properties/ui-properties.glade.h:16
-#, fuzzy
 msgid "Menu items have icons"
-msgstr "Menupunkter har _ikoner"
+msgstr "Menupunkter har ikoner"
 
 #: capplets/ui-properties/ui-properties.glade.h:18
 msgid "Menus can be torn off"
-msgstr ""
+msgstr "Menuer kan frigøres"
 
 #: capplets/ui-properties/ui-properties.glade.h:20
-#, fuzzy
 msgid "Multiple Documents"
-msgstr "Dokumenter"
+msgstr "Flere dokumenter"
 
 #: capplets/ui-properties/ui-properties.glade.h:21
 msgid "Notebook tabs"
-msgstr ""
+msgstr "Notesbogfaner"
 
 #: capplets/ui-properties/ui-properties.glade.h:22
 msgid "Place dialogs over application window when possible"
-msgstr ""
+msgstr "Placér meddelelsesvinduer over programvinduer om muligt"
 
 #: capplets/ui-properties/ui-properties.glade.h:23
 msgid "Progress bar is on the left"
-msgstr ""
+msgstr "Fremgangslinjen er til venstre"
 
 #: capplets/ui-properties/ui-properties.glade.h:24
 msgid "Progress bar is on the right"
-msgstr ""
+msgstr "Fremgangslinjen er til højre"
 
+# pga. sammenhængen skal et 'til' tilføjes
 #: capplets/ui-properties/ui-properties.glade.h:25
 msgid "Right"
-msgstr ""
+msgstr "Til højre"
 
 #: capplets/ui-properties/ui-properties.glade.h:26
-#, fuzzy
 msgid "Right aligned"
-msgstr "Højrehåndet"
+msgstr "Højrejusteret"
 
-# passer bedre
 #: capplets/ui-properties/ui-properties.glade.h:27
-#, fuzzy
 msgid "Seperate windows"
-msgstr "Vinduestilpasninger"
+msgstr "Separate vinduer"
 
 #: capplets/ui-properties/ui-properties.glade.h:28
 msgid "Settings will not take effect until applications restart"
-msgstr ""
+msgstr "Indstillingerne vil ikke træde i kraft før programmerne genstarter"
 
 #: capplets/ui-properties/ui-properties.glade.h:29
-#, fuzzy
 msgid "Specially by the window manager"
-msgstr "Vindueshåndtering (Sawfish)"
+msgstr "Specielt af vindueshåndteringen"
 
 #: capplets/ui-properties/ui-properties.glade.h:30
-#, fuzzy
 msgid "Spread out"
-msgstr "Regneark"
+msgstr "Bred ud"
 
 #: capplets/ui-properties/ui-properties.glade.h:31
 msgid "Spread out (big)"
-msgstr ""
+msgstr "Bred ud (meget)"
 
 #: capplets/ui-properties/ui-properties.glade.h:32
 msgid "Status Bar"
-msgstr ""
+msgstr "Statuslinje"
 
 #: capplets/ui-properties/ui-properties.glade.h:33
 msgid "Status bar is interactive when possible"
-msgstr ""
+msgstr "Statuslinjen er interaktiv hvis det er muligt"
 
 #: capplets/ui-properties/ui-properties.glade.h:34
 msgid "The same window"
-msgstr ""
+msgstr "Det samme vindue"
 
 #: capplets/ui-properties/ui-properties.glade.h:35
-#, fuzzy
 msgid "Tool Bars"
-msgstr "Værktøjslinje"
+msgstr "Værktøjslinjer"
 
+# 'Tool bar'-delen er underforstået pga. overskrift
 #: capplets/ui-properties/ui-properties.glade.h:36
 msgid "Tool bar buttons are icons only"
-msgstr ""
+msgstr "Knapper er kun ikoner"
 
 #: capplets/ui-properties/ui-properties.glade.h:37
 msgid "Tool bar buttons are text below icons"
-msgstr ""
+msgstr "Knapper har tekst under ikoner"
 
 #: capplets/ui-properties/ui-properties.glade.h:38
 msgid "Tool bar buttons pop up on mouse over"
-msgstr ""
+msgstr "Knapper springer frem når musen er over"
 
 #: capplets/ui-properties/ui-properties.glade.h:39
-#, fuzzy
 msgid "Tool bars are detachable"
-msgstr "Værktøjslinjer kan _frigøres og flyttes rundt"
+msgstr "Værktøjslinjer kan frigøres og flyttes rundt"
 
 #: capplets/ui-properties/ui-properties.glade.h:40
-#, fuzzy
 msgid "Tool bars have a border"
-msgstr "_Værktøjslinjer har: "
+msgstr "Værktøjslinjer har en kant"
 
 #: capplets/ui-properties/ui-properties.glade.h:41
-#, fuzzy
 msgid "Tool bars have line separators"
-msgstr "_Værktøjslinjer har: "
+msgstr "Værktøjslinjer har skillelinjer"
 
 #: capplets/ui-properties/ui-properties.glade.h:42
-#, fuzzy
 msgid "Top"
-msgstr "Fler'"
+msgstr "Øverst"
 
 #: capplets/ui-properties/ui-properties.glade.h:43
 msgid "Use status bar instead of dialog when possible"
-msgstr ""
+msgstr "Benyt statuslinjen i stedet for et meddelsesvindue hvis muligt"
 
 #: capplets/ui-properties/ui-properties.glade.h:44
 msgid "When opening Multiple documents, use"
-msgstr ""
+msgstr "Ved åbning af flere dokumenter benyt"
 
 #: capplets/ui-properties/ui-properties.glade.h:45
 msgid "When using Notebook tabs, place the tabs on the"
-msgstr ""
+msgstr "Ved åbning af notesbogfaner anbring fanerne"
 
 #: capplets/ui-properties/ui-properties.glade.h:46
 msgid "Wherever the Window Manager places them"
-msgstr ""
+msgstr "Hvor vindueshåndteringen anbringer dem"
 
 #: capplets/url-properties/url-properties.desktop.in.h:1
 #: capplets/url-properties/url.desktop.in.in.h:1
-#, fuzzy
 msgid "Configure which programs are used to display URLs"
-msgstr "Konfigurér hvilke ikke-sessionshåndterede programmer bliver startet op"
+msgstr "Konfigurér hvilke programmer der bruges til at vise URL'er"
 
 #: capplets/url-properties/url-properties.c:66
 #: capplets/url-properties/url-properties.desktop.in.h:2
 #: capplets/url-properties/url.desktop.in.in.h:2
 msgid "URL Handlers"
-msgstr ""
+msgstr "Adressehåndteringer"
 
-# ditto
 #: capplets/url-properties/url-properties.c:64
-#, fuzzy
 msgid "Protocol"
-msgstr "Protokolnavn"
+msgstr "Protokol"
 
 #: capplets/url-properties/url-properties.c:64
-#, fuzzy
 msgid "Command"
-msgstr "Ko_mmando:"
+msgstr "Kommando"
 
 #: capplets/url-properties/url-properties.c:89
 msgid "handler:"
-msgstr ""
+msgstr "Håndtering:"
 
 #. set some commonly used handlers
 #: capplets/url-properties/url-properties.c:99
 msgid "Netscape"
-msgstr ""
+msgstr "Netscape"
 
 #: capplets/url-properties/url-properties.c:104
 msgid "Netscape (new window)"
-msgstr ""
+msgstr "Netscape (nyt vindue)"
 
 #: capplets/url-properties/url-properties.c:110
-#, fuzzy
 msgid "Help browser"
-msgstr "Hjæ_lpefremviser"
+msgstr "Hjælpefremviser"
 
 #: capplets/url-properties/url-properties.c:115
-#, fuzzy
 msgid "Help browser (new window)"
-msgstr "Benyt enkelt vindue"
+msgstr "Hjælpefremviser (nyt vindue)"
 
+# RETMIG: rigtig?
 #: capplets/url-properties/url-properties.c:127
 msgid "Set"
-msgstr ""
+msgstr "Anvend"
+
+#: capplets/windows/gnome-window-properties.glade.h:1
+msgid "Apply Now"
+msgstr "Anvend nu"
+
+#: capplets/windows/gnome-window-properties.glade.h:2
+msgid "Select windows when the mouse moves over them"
+msgstr "Vælg vinduer når musen bevæger sig over dem"
+
+#: capplets/windows/gnome-window-properties.glade.h:3
+msgid "Titlebar Font"
+msgstr "Skrifttype til titellinje"
+
+#: capplets/windows/gnome-window-properties.glade.h:4
+msgid "Window Border Appearance"
+msgstr "Udseende af vindueskanter"
+
+#: capplets/windows/gnome-window-properties.glade.h:5
+msgid "Window Manager:"
+msgstr "Vindueshåndtering:"
+
+#: capplets/windows/gnome-window-properties.glade.h:6
+#: capplets/windows/window-properties.desktop.in.h:1
+msgid "Window Properties"
+msgstr "Vinduesindstillinger"
+
+#: capplets/windows/window-properties.desktop.in.h:2
+msgid "Windows"
+msgstr "Vinduer"
 
 #: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.in.h:1
 msgid "Enlightenment"
-msgstr ""
+msgstr "Enlightenment"
 
 #: capplets/wm-properties/wm-desktops/IceWM.desktop.in.in.h:1
 msgid "Ice WM"
-msgstr ""
+msgstr "Ice WM"
 
 #: capplets/wm-properties/wm-desktops/Scwm.desktop.in.in.h:1
 msgid "Scwm"
-msgstr ""
+msgstr "Scwm"
 
 #: capplets/wm-properties/wm-desktops/twm.desktop.in.in.h:1
 msgid "twm"
-msgstr ""
+msgstr "twm"
 
 #: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.in.h:1
-#, fuzzy
 msgid "Window Maker"
-msgstr "_Vindueshåndtering"
+msgstr "Window Maker"
 
 #: capplets/wm-properties/wm-properties-capplet.c:135
 msgid "Initialize session settings"
-msgstr ""
+msgstr "Klargør sessionsindstillinger"
 
 #: capplets/wm-properties/wm-properties-capplet.c:206
 #, c-format
@@ -2348,26 +2330,30 @@ msgid ""
 "Starting %s\n"
 "(%d seconds left before operation times out)"
 msgstr ""
+"Starter %s\n"
+"(%d sek. tilbage før tiden løber ud)"
 
 #: capplets/wm-properties/wm-properties-capplet.c:367
 #, c-format
 msgid "%s (Current)"
-msgstr ""
+msgstr "%s (aktiv)"
 
 #: capplets/wm-properties/wm-properties-capplet.c:370
 #, c-format
 msgid "Run Configuration Tool for %s"
-msgstr ""
+msgstr "Kør konfigurationsværktøjet til %s"
 
 #: capplets/wm-properties/wm-properties-capplet.c:381
 msgid " (Not found)"
-msgstr ""
+msgstr " (ikke fundet)"
 
 #: capplets/wm-properties/wm-properties-capplet.c:420
 msgid ""
 "wm-properties-capplet: Unable to initialize window manager.\n"
 "\tAnother window manager is already running and could not be killed\n"
 msgstr ""
+"wm-properties-capplet: Kunne ikke klargøre vindueshåndteringen.\n"
+"\tEn anden vindueshåndtering kører allerede og kan ikke dræbes.\n"
 
 #: capplets/wm-properties/wm-properties-capplet.c:424
 #, c-format
@@ -2375,11 +2361,12 @@ msgid ""
 "wm-properties-capplet: Unable to initialize window manager.\n"
 "\t'%s' didn't start\n"
 msgstr ""
+"wm-properties-capplet: Kunne ikke klargøre vindueshåndteringen.\n"
+"\t'%s' startede ikke.\n"
 
 #: capplets/wm-properties/wm-properties-capplet.c:473
-#, fuzzy
 msgid "Previous window manager did not die\n"
-msgstr "Konfigurér lyde for vindueshåndteringshændelser"
+msgstr "Foregående vindueshåndtering døde ikke\n"
 
 #: capplets/wm-properties/wm-properties-capplet.c:506
 #, c-format
@@ -2387,6 +2374,8 @@ msgid ""
 "Could not start '%s'.\n"
 "Falling back to previous window manager '%s'\n"
 msgstr ""
+"Kunne ikke starte '%s'.\n"
+"Falder tilbage til den tidligere vindueshåndtering '%s'\n"
 
 #: capplets/wm-properties/wm-properties-capplet.c:537
 msgid ""
@@ -2395,6 +2384,9 @@ msgid ""
 "do this by selecting \"Run Program\" in the\n"
 "foot menu\n"
 msgstr ""
+"Kunne ikke starte reservevindueshåndteringen.\n"
+"Kør venligst en vindueshåndtering manuelt. Du kan\n"
+"gøre dette ved at vælge \"Kør program\" i fodmenuen.\n"
 
 #: capplets/wm-properties/wm-properties-capplet.c:562
 #: capplets/wm-properties/wm-properties-capplet.c:812
@@ -2402,7 +2394,7 @@ msgstr ""
 #: capplets/wm-properties/wm-properties-capplet.c:928
 #: capplets/wm-properties/wm-properties-capplet.c:1070
 msgid "OK"
-msgstr ""
+msgstr "O.k."
 
 #: capplets/wm-properties/wm-properties-capplet.c:580
 msgid ""
@@ -2414,14 +2406,20 @@ msgid ""
 "in the main menu, or by turning on \"Save Current Setup\" when\n"
 "you log out.\n"
 msgstr ""
+"Din aktive vindueshåndtering er skiftet. For at gemme denne\n"
+"ændring skal du gemme den nuværende session. Du kan gøre\n"
+"dette nu ved at trykke på \"Gem session nu\" nedenunder eller\n"
+"du kan gemme sessionen senere. Dette kan gøres ved at vælge\n"
+"\"Gem aktuel session\" under \"Indstillinger\" i fodmenuen eller\n"
+"ved at vælge \"Gem nuværende opsætningn\" når du logger ud.\n"
 
 #: capplets/wm-properties/wm-properties-capplet.c:587
 msgid "Save Session Later"
-msgstr ""
+msgstr "Gem session senere"
 
 #: capplets/wm-properties/wm-properties-capplet.c:587
 msgid "Save Session Now"
-msgstr ""
+msgstr "Gem session nu"
 
 #: capplets/wm-properties/wm-properties-capplet.c:590
 msgid ""
@@ -2431,96 +2429,94 @@ msgid ""
 "under \"Settings\" in the main menu, or by turning on\n"
 "\"Save Current Setup\" when you log out.\n"
 msgstr ""
+"Din aktive vindueshåndtering er skiftet. For at gemme denne\n"
+"ændring skal du gemme den nuværende session. Dette kan gøres\n"
+"ved at vælge \"Gem aktuel session\" under \"Indstillinger\" i\n"
+"fodmenuen eller ved at vælge \"Gem nuværende opsætningn\" når\n"
+"du logger ud.\n"
 
 #: capplets/wm-properties/wm-properties-capplet.c:811
-#, fuzzy
 msgid "Add New Window Manager"
-msgstr "_Vindueshåndtering"
+msgstr "Tilføj ny vindueshåndtering"
 
 #: capplets/wm-properties/wm-properties-capplet.c:812
 msgid "Cancel"
-msgstr ""
+msgstr "Annullér"
 
 #: capplets/wm-properties/wm-properties-capplet.c:824
-#, fuzzy
 msgid "Name:"
-msgstr "Navn"
+msgstr "Navn:"
 
 #: capplets/wm-properties/wm-properties-capplet.c:837
-#, fuzzy
 msgid "Command:"
-msgstr "Ko_mmando:"
+msgstr "Kommando:"
 
 #: capplets/wm-properties/wm-properties-capplet.c:850
 msgid "Configuration Command:"
-msgstr ""
+msgstr "Konfigurationskommando:"
 
 #: capplets/wm-properties/wm-properties-capplet.c:869
 msgid "Window manager is session managed"
-msgstr ""
+msgstr "Vindueshåndtering er sessionshåndteret"
 
 #: capplets/wm-properties/wm-properties-capplet.c:919
 msgid "Name cannot be empty"
-msgstr ""
+msgstr "Navn skal udfyldes"
 
 #: capplets/wm-properties/wm-properties-capplet.c:926
 msgid "Command cannot be empty"
-msgstr ""
+msgstr "Kommando skal udfyldes"
 
 #: capplets/wm-properties/wm-properties-capplet.c:974
 #: capplets/wm-properties/wm-properties-capplet.c:1012
-#, fuzzy
 msgid "Edit Window Manager"
-msgstr "_Vindueshåndtering"
+msgstr "Redigér vindueshåndtering"
 
 #: capplets/wm-properties/wm-properties-capplet.c:1069
 msgid "You cannot delete the current Window Manager"
-msgstr ""
+msgstr "Du kan ikke slette den aktive vindueshåndtering"
 
 #: capplets/wm-properties/wm-properties-capplet.c:1111
 #: capplets/wm-properties/wm-properties-capplet.c:1123
-#, fuzzy
 msgid "Window Manager Selector"
-msgstr "_Vindueshåndtering"
+msgstr "Vindueshåndteringvælger"
 
 #: capplets/network/gnome-network-preferences.glade.h:2
 msgid "HTTP Proxy Settings"
-msgstr ""
+msgstr "Indstillinger for HTTP-mellemvært"
 
 #: capplets/network/gnome-network-preferences.desktop.in.h:2
 #: capplets/network/gnome-network-preferences.glade.h:3
-#, fuzzy
 msgid "Network Preferences"
-msgstr "Lydindstillinger"
+msgstr "Netværksindstillinger"
 
 #: capplets/network/gnome-network-preferences.glade.h:4
 msgid "P_ort:"
-msgstr ""
+msgstr "P_ort:"
 
 #: capplets/network/gnome-network-preferences.glade.h:5
 msgid "Pass_word:"
-msgstr ""
+msgstr "_Adgangskode:"
 
 #: capplets/network/gnome-network-preferences.glade.h:6
 msgid "Pro_xy requires a username and password"
-msgstr ""
+msgstr "Mellem_vært kræver brugernavn og adgangskode"
 
 #: capplets/network/gnome-network-preferences.glade.h:7
 msgid "User_name:"
-msgstr ""
+msgstr "Bruger_navn:"
 
 #: capplets/network/gnome-network-preferences.glade.h:8
-#, fuzzy
 msgid "_Location:"
-msgstr "_Handling"
+msgstr "_Placering:"
 
 #: capplets/network/gnome-network-preferences.glade.h:9
 msgid "_Use HTTP proxy"
-msgstr ""
+msgstr "_Benyt HTTP-mellemvært"
 
 #: capplets/network/gnome-network-preferences.desktop.in.h:1
 msgid "Network"
-msgstr ""
+msgstr "Netværk"
 
 #: control-center/capplet-dir-view.c:153
 msgid "Layout"
@@ -2625,11 +2621,11 @@ msgstr "Kunne ikke finde en hbox, bruger en almindelig filvælger"
 msgid "Preview"
 msgstr "Eksempel"
 
-#: libsounds/sound-view.c:120
+#: libsounds/sound-view.c:122
 msgid "The sound file for this event does not exist."
 msgstr "Lydfilen for denne hændelse eksisterer ikke."
 
-#: libsounds/sound-view.c:122
+#: libsounds/sound-view.c:124
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package\n"
@@ -2639,24 +2635,23 @@ msgstr ""
 "Du kan evt. installere gnome-audio-pakken\n"
 "for et sæt standardlyde."
 
-#: libsounds/sound-view.c:214
+#: libsounds/sound-view.c:216
 msgid "Event"
 msgstr "Hændelse"
 
-#: libsounds/sound-view.c:221
+#: libsounds/sound-view.c:223
 msgid "File to play"
 msgstr "Fil der skal afspilles"
 
-#: libsounds/sound-view.c:236
-#, fuzzy
+#: libsounds/sound-view.c:238
 msgid "_Sounds"
-msgstr "_Lyd"
+msgstr "_Lyde"
 
-#: libsounds/sound-view.c:249
+#: libsounds/sound-view.c:251
 msgid "_Play"
 msgstr "_Afspil"
 
-#: libsounds/sound-view.c:255
+#: libsounds/sound-view.c:257
 msgid "Select sound file"
 msgstr "Vælg en lydfil"
 
@@ -2666,6 +2661,8 @@ msgid ""
 "Cannot create the directory \"%s\".\n"
 "This is needed to allow changing cursors."
 msgstr ""
+"Kan ikke oprette mappen \"%s\".\n"
+"Dette er nødvendigt for at kunne skifte markør."
 
 #: gnome-settings-daemon/gnome-settings-screensaver.c:92
 #, c-format
@@ -2676,58 +2673,37 @@ msgid ""
 "\n"
 "Screensaver functionality will not work in this session."
 msgstr ""
+"Der opstod en fejl under opstart af pauseskærmen:\n"
+"\n"
+"%s\n"
+"\n"
+"Pauseskærmen vil ikke fungere i denne session."
 
 #: gnome-settings-daemon/gnome-settings-screensaver.c:102
 msgid "_Do not show this message again"
-msgstr ""
+msgstr "_Vis ikke denne besked igen"
 
 #: gnome-settings-daemon/gnome-settings-sound.c:59
 msgid "Starting esd\n"
-msgstr ""
+msgstr "Starter esd\n"
 
 #: gnome-settings-daemon/gnome-settings-sound.c:84
 msgid "Stopping esd\n"
-msgstr ""
+msgstr "Stopper esd\n"
 
 #: gnome-settings-daemon/gnome-settings-sound.c:127
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
-msgstr ""
+msgstr "Kunne ikke indlæse lydfilen %s som lydklip %s"
 
 #: gnome-settings-daemon/gnome-settings-sound.c:159
 msgid "Reloading events\n"
-msgstr ""
+msgstr "Genindlæser begivenheder\n"
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:157
+#: gnome-settings-daemon/gnome-settings-xsettings.c:159
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
-msgstr ""
-
-#, fuzzy
-#~ msgid "Themes"
-#~ msgstr "Gtk+-tema"
-
-#, fuzzy
-#~ msgid "_Program to execute"
-#~ msgstr "Program der skal køres"
-
-#~ msgid "Select which font to use"
-#~ msgstr "Vælg hvilken skrifttype der skal bruges"
-
-#~ msgid "Font settings only apply to new programs."
-#~ msgstr "Skrifttypeindstillinger virker kun på nye programmer"
-
-#~ msgid "Use a custom font."
-#~ msgstr "Benyt en selvvalgt skrifttype."
-
-#~ msgid "Gtk+ Theme Selector"
-#~ msgstr "Gtk+-temavælger"
-
-#~ msgid "Select which gtk+ theme to use"
-#~ msgstr "Vælg hvilket Gtk+-tema der skal bruges"
-
-#~ msgid "Select a theme to install"
-#~ msgstr "Vælg et tema der skal installeres"
+msgstr "GConf-nøglen %s er sat til typen %s, men dens forventede type var %s\n"
 
 #~ msgid ""
 #~ "MouseKeys can benefit StickyKey users or anyone unable to use the "
@@ -3015,14 +2991,10 @@ msgstr ""
 #~ msgstr "Forvalgt redigeringsprogram til Gnome"
 
 #~ msgid "With this option, you can select a predefined Editor as your default"
-#~ msgstr ""
-#~ "Med denne indstillinger kan du vælge et prædefineret redigeringsprogram "
-#~ "som forvalg"
+#~ msgstr "Med denne indstilling kan du vælge et prædefineret redigeringsprogram som forvalg"
 
 #~ msgid "With this option you can create your own default editor"
-#~ msgstr ""
-#~ "Med denne indstillinger kan du angive dit eget forvalgte "
-#~ "redigeringsprogram"
+#~ msgstr "Med denne indstilling kan du angive dit eget forvalgte redigeringsprogram"
 
 # original lidt klodset
 #~ msgid "Does this editor need to start in an xterm?"
@@ -3039,9 +3011,7 @@ msgstr ""
 
 #~ msgid ""
 #~ "With this option, you can select a predefined Web Browser as your default"
-#~ msgstr ""
-#~ "Med denne indstillinger kan du vælge et prædefineret surfningsprogram som "
-#~ "forvalg"
+#~ msgstr "ed denne indstilling kan du vælge et prædefineret surfningsprogram som forvalg"
 
 #~ msgid "With this option you can create your own default web browser"
 #~ msgstr ""
