@@ -160,12 +160,12 @@ get_legacy_settings (Bonobo_ConfigDatabase db)
 	val_string = gnome_config_get_string_with_default ("/Background/Default/simple=solid", &def);
 	if (!def) {
 		if (!strcmp (val_string, "solid")) {
-			val_ulong = 0;
+			val_ulong = ORIENTATION_SOLID;
 		} else {
 			g_free (val_string);
 			val_string = gnome_config_get_string_with_default ("/Background/Default/gradient=vertical", &def);
 			if (!def)
-				val_ulong = !strcmp (val_string, "vertical");
+				val_ulong = (!strcmp (val_string, "vertical")) ? ORIENTATION_VERT : ORIENTATION_HORIZ;
 		}
 	}
 
@@ -235,7 +235,7 @@ setup_dialog (GtkWidget *widget, Bonobo_PropertyBag bag)
 	gtk_widget_hide (WID ("opacity_spin"));
 	gtk_widget_hide (WID ("opacity_label"));
 
-	bonobo_event_source_client_add_listener (bag, property_change_cb,
+	bonobo_event_source_client_add_listener (bag, (BonoboListenerCallbackFn) property_change_cb,
 						 NULL, NULL, bag);
 
 	applier = gtk_object_get_data (GTK_OBJECT (widget), "applier");
