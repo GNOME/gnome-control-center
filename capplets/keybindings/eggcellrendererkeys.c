@@ -18,7 +18,7 @@
 
 #define EGG_CELL_RENDERER_TEXT_PATH "egg-cell-renderer-text"
 
-#define TOOLTIP_TEXT _("<New accelerator...>")
+#define TOOLTIP_TEXT _("New accelerator...")
 
 static void             egg_cell_renderer_keys_finalize      (GObject             *object);
 static void             egg_cell_renderer_keys_init          (EggCellRendererKeys *cell_keys);

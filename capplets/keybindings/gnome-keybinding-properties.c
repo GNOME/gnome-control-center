@@ -18,7 +18,6 @@
 #include "activate-settings-daemon.h"
 
 #define LABEL_DATA "gnome-keybinding-properties-label"
-#define KEY_THEME_KEY "/desktop/gnome/interface/gtk_key_theme"
 #define MAX_ELEMENTS_BEFORE_SCROLLING 10
 
 #if defined(__powerpc__) && defined (__linux__)
@@ -173,48 +172,6 @@ get_real_model (GtkTreeView *tree_view)
     submodel = NULL;
   
   return submodel;
-}
-
-static void
-menu_item_activate (GtkWidget *menu_item,
-		    gpointer   unused)
-{
-  gchar *key_theme;
-  gchar *current_key_theme;
-  GConfClient *client;
-  GError *error = NULL;
-
-  client = gconf_client_get_default ();
-
-  key_theme = g_object_get_data (G_OBJECT (menu_item), LABEL_DATA);
-  g_return_if_fail (key_theme != NULL);
-
-  current_key_theme = gconf_client_get_string (client, KEY_THEME_KEY, &error);
-  if (current_key_theme && strcmp (current_key_theme, key_theme))
-    {
-      gconf_client_set_string (client, KEY_THEME_KEY, key_theme, NULL);
-    }
-}
-
-static GtkWidget *
-make_key_theme_menu_item (const gchar *key_theme)
-{
-  GtkWidget *retval;
-
-  if (!strcmp (key_theme, "Default"))
-    {
-      retval = gtk_menu_item_new_with_label (_("GNOME Default"));
-      g_object_set_data_full (G_OBJECT (retval), LABEL_DATA, g_strdup ("Default"), g_free);
-    }
-  else
-    {
-      retval = gtk_menu_item_new_with_label (key_theme);
-      g_object_set_data_full (G_OBJECT (retval), LABEL_DATA, g_strdup (key_theme), g_free);
-    }
-  g_signal_connect (G_OBJECT (retval), "activate", G_CALLBACK (menu_item_activate), NULL);
-  gtk_widget_show (retval);
-
-  return retval;
 }
 
 static GladeXML *
@@ -615,48 +572,6 @@ key_entry_controlling_key_changed (GConfClient *client,
   reload_key_entries (wm_common_get_current_window_manager(), user_data);
 }
 
-static void
-key_theme_changed (GConfClient *client,
-		   guint        cnxn_id,
-		   GConfEntry  *entry,
-		   gpointer     user_data)
-{
-  GtkWidget *omenu = (GtkWidget *) user_data;
-  GtkWidget *menu;
-  GtkWidget *menu_item;
-  GConfValue *value;
-  const gchar *new_key_theme;
-  GList *list;
-  gint i = 0;
-
-  menu = gtk_option_menu_get_menu (GTK_OPTION_MENU (omenu));
-  value = gconf_entry_get_value (entry);
-
-  g_return_if_fail (value != NULL);
-
-  new_key_theme = gconf_value_get_string (value);
-
-  for (list = GTK_MENU_SHELL (menu)->children; list; list = list->next, i++)
-    {
-      gchar *text;
-
-      menu_item = GTK_WIDGET (list->data);
-      text = g_object_get_data (G_OBJECT (menu_item), LABEL_DATA);
-      if (! strcmp (text, new_key_theme))
-	{
-	  if (gtk_option_menu_get_history (GTK_OPTION_MENU (omenu)) != i)
-	    gtk_option_menu_set_history (GTK_OPTION_MENU (omenu), i);
-	  return;
-	}
-    }
-
-  /* We didn't find our theme.  Add it to our list. */
-  menu_item = make_key_theme_menu_item (new_key_theme);
-  gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);  
-  gtk_option_menu_set_history (GTK_OPTION_MENU (omenu), i);
-}
-
-
 static gboolean
 cb_check_for_uniqueness (GtkTreeModel *model,
 			 GtkTreePath  *path,
@@ -833,49 +748,6 @@ accel_cleared_callback (GtkCellRendererText *cell,
     }
 }
 
-static void
-theme_changed_func (gpointer  uri,
-		    GladeXML *dialog)
-{
-  GConfClient *client;
-  GtkWidget *omenu;
-  GtkWidget *menu;
-  GtkWidget *menu_item;
-  GConfEntry *entry;
-  GList *key_theme_list;
-  GList *list;
-
-  client = gconf_client_get_default ();
-  key_theme_list = gnome_theme_info_find_by_type (GNOME_THEME_GTK_2_KEYBINDING);
-
-  omenu = WID ("key_theme_omenu");
-  menu = gtk_menu_new ();
-  for (list = key_theme_list; list; list = list->next)
-    {
-      GnomeThemeInfo *info = list->data;
-
-      if (! info->has_keybinding)
-	continue;
-
-      menu_item = make_key_theme_menu_item (info->name);
-      if (!strcmp (info->name, "Default"))
-      /* Put default first, always */
-        gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), menu_item);
-      else
-        gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
-    }
-
-  gtk_widget_show (menu);
-  gtk_option_menu_set_menu (GTK_OPTION_MENU (omenu), menu);
-
-  /* Initialize the option menu */
-  entry = gconf_client_get_entry (client,
-				  KEY_THEME_KEY,
-				  NULL, TRUE, NULL);
-
-  key_theme_changed (client, 0, entry, omenu);
-}
-
 
 typedef struct
 {
@@ -945,49 +817,11 @@ static void
 setup_dialog (GladeXML *dialog)
 {
   GConfClient *client;
-  GList *key_theme_list;
   GtkCellRenderer *renderer;
   GtkTreeViewColumn *column;
   GtkWidget *widget;
-  gboolean found_keys = FALSE;
-  GList *list;
 
   client = gconf_client_get_default ();
-
-  key_theme_list = gnome_theme_info_find_by_type (GNOME_THEME_GTK_2_KEYBINDING);
-
-  for (list = key_theme_list; list; list = list->next)
-    {
-      GnomeThemeInfo *info = list->data;
-      if (info->has_keybinding)
-	{
-	  found_keys = TRUE;
-	  break;
-	}
-
-    }
-  if (! found_keys)
-    {
-      GtkWidget *msg_dialog = gtk_message_dialog_new (NULL, 0,
-						      GTK_MESSAGE_ERROR,
-						      GTK_BUTTONS_OK,
-						      _("Unable to find any keyboard themes.  This means your GTK+ "
-							"installation has been incompletely installed."));
-      gtk_dialog_run (GTK_DIALOG (msg_dialog));
-      gtk_widget_destroy (msg_dialog);
-
-    }
-  else
-    {
-      theme_changed_func (NULL, dialog);
-      gnome_theme_info_register_theme_change ((GFunc) theme_changed_func, dialog);
-      gconf_client_add_dir (client, "/desktop/gnome/interface", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
-      gconf_client_notify_add (client,
-			       KEY_THEME_KEY,
-			       (GConfClientNotifyFunc) &key_theme_changed,
-			       WID ("key_theme_omenu"), NULL, NULL);
-    }
-
 
   g_signal_connect (GTK_TREE_VIEW (WID ("shortcut_treeview")),
 		    "button_press_event",
