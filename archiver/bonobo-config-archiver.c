@@ -220,8 +220,6 @@ real_get_value (BonoboConfigDatabase *db,
 	return value;
 }
 
-#if 0 /* Disabled now to be safe */
-
 /* Produce a new, dynamically allocated string with the OAF IID of the listener
  * associated with the given backend id
  */
@@ -233,13 +231,11 @@ get_listener_oafiid (const gchar *backend_id)
 
 	tmp = g_strdup (backend_id);
 	if ((tmp1 = strstr (tmp, "-properties")) != NULL) *tmp1 = '\0';
-	oafiid = g_strconcat ("OAFIID:Bonobo_Listener_", tmp, NULL);
+	oafiid = g_strconcat ("OAFIID:Bonobo_Listener_Config_", tmp, NULL);
 	g_free (tmp);
 
 	return oafiid;
 }
-
-#endif /* Disabled */
 
 static void
 real_sync (BonoboConfigDatabase *db, 
@@ -248,10 +244,8 @@ real_sync (BonoboConfigDatabase *db,
 	BonoboConfigArchiver *archiver_db = BONOBO_CONFIG_ARCHIVER (db);
 	BonoboArg            *arg;
 
-#if 0 /* Disabled now to be safe */
 	gchar                *listener_oafiid;
 	Bonobo_Listener       listener;
-#endif /* Disabled */
 
 	if (!db->writeable)
 		return;
@@ -266,8 +260,6 @@ real_sync (BonoboConfigDatabase *db,
 
 	BONOBO_RET_EX (ev);
 
-#if 0 /* Disabled now to be safe */
-
 	/* Try to find a listener to apply the settings. If we can't, don't
 	 * worry about it
 	 */
@@ -281,16 +273,12 @@ real_sync (BonoboConfigDatabase *db,
 		CORBA_exception_init (ev);
 	}
 
-#endif /* Disabled */
-
 	arg = bonobo_arg_new (BONOBO_ARG_NULL);
 	bonobo_event_source_notify_listeners (archiver_db->es, "Bonobo/ConfigDatabase:sync", arg, ev);
 	bonobo_arg_release (arg);
 
-#if 0 /* Disabled now to be safe */
 	if (listener != CORBA_OBJECT_NIL)
 		bonobo_object_release_unref (listener, NULL);
-#endif /* Disabled */
 }
 
 static void
