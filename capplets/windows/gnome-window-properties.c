@@ -38,6 +38,7 @@ typedef struct {
 static GtkWidget *capplet;
 static GtkWidget *wm_widget;
 static GtkWidget *apply_now_button;
+static GtkWidget *properties_box;
 
 static WindowManager *selected_wm = NULL;
 
@@ -192,6 +193,13 @@ wm_widget_add_wm (WindowManager *wm, const char *row_text)
 }
 
 static void
+set_wm_change_pending (gboolean pending)
+{
+        gtk_widget_set_sensitive (apply_now_button, pending);
+        gtk_widget_set_sensitive (properties_box, !pending);
+}
+
+static void
 response_cb (GtkDialog *dialog, gint response_id, gpointer data)
 {
 	switch (response_id)
@@ -206,7 +214,7 @@ response_cb (GtkDialog *dialog, gint response_id, gpointer data)
 static void
 state_changed (void)
 {
-        gtk_widget_set_sensitive (apply_now_button, TRUE);
+        set_wm_change_pending (TRUE);
 }
 
 static void
@@ -725,8 +733,11 @@ create_dialog (void)
 	dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/gnome-window-properties.glade", "prefs_widget", NULL);
         
         apply_now_button = WID ("apply_now_button");
-        gtk_widget_set_sensitive (apply_now_button, FALSE);
         g_signal_connect (G_OBJECT (apply_now_button), "clicked", apply_wm, NULL);        
+
+        properties_box = WID ("properties_box");
+
+        set_wm_change_pending (FALSE);
 
         wm_widget = wm_widget_new ();
         
