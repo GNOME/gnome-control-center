@@ -77,17 +77,17 @@ static struct {
 	char const * const gconf_key;
 	gboolean only_for_dialog;
 } const ranges [] = {
-	{ "bouncekeys_delay_slide",	"bouncekeys_delay_spin",	    300,  10, 900,  10,
+	{ "bouncekeys_delay_slide",	"bouncekeys_delay_spin",     300,  10,  900,   10,
 	  CONFIG_ROOT "/bouncekeys_delay", FALSE },
-	{ "slowkeys_delay_slide",	"slowkeys_delay_spin",	    300,  10, 900,  10,
+	{ "slowkeys_delay_slide",	"slowkeys_delay_spin",	     300,  10,  900,   10,
 	  CONFIG_ROOT "/slowkeys_delay", FALSE },
-	{ "mousekeys_max_speed_slide",	"mousekeys_max_speed_spin",   10,  1, 100,  5,
+	{ "mousekeys_max_speed_slide",	"mousekeys_max_speed_spin",  300,  10, 1000,   20,
 	  CONFIG_ROOT "/mousekeys_max_speed", FALSE },
-	{ "mousekeys_accel_time_slide",	"mousekeys_accel_time_spin", 300,  10, 5000,  100,
+	{ "mousekeys_accel_time_slide",	"mousekeys_accel_time_spin", 300,  10, 3000,  100,
 	  CONFIG_ROOT "/mousekeys_accel_time", FALSE },
-	{ "mousekeys_init_delay_slide",	"mousekeys_init_delay_spin", 300,  10, 5000,  10,
+	{ "mousekeys_init_delay_slide",	"mousekeys_init_delay_spin", 300,  10, 5000,  100,
 	  CONFIG_ROOT "/mousekeys_init_delay", FALSE },
-	{ "timeout_slide",	"timeout_spin", 200,  10, 500,  10,
+	{ "timeout_slide",	"timeout_spin",			     200,  10,  500,   10,
 	  CONFIG_ROOT "/timeout", TRUE },
 };
 
