@@ -423,7 +423,7 @@ ax_stickykeys_warning_dialog_post (gboolean enabled)
 						    &stickykeys_shortcut_val,
 						    _("Sticky Keys Alert"),
 						    enabled ? _("You just pressed the Shift key 5 times in a row.  This is the shortcut for the Sticky Keys feature, which affects the way your keyboard works.") : 
-						    _("You just pressed two keys at once, or pressed the Shift key 5 times in a row.  This turns off the Sticky Keys feature, which affects the way your keyboard works.");
+						    _("You just pressed two keys at once, or pressed the Shift key 5 times in a row.  This turns off the Sticky Keys feature, which affects the way your keyboard works."),
 						    enabled ? _("Do you want to activate Sticky Keys?") : 
 						    _("Do you want to deactivate Sticky Keys ?"));
 }
