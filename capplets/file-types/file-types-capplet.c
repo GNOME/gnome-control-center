@@ -493,7 +493,7 @@ init_mime_capplet (void)
 	gtk_container_set_border_width (GTK_CONTAINER (main_vbox), GNOME_PAD_SMALL);
         gtk_container_add (GTK_CONTAINER (capplet), main_vbox);
 
-        /* Main horizontal box and mime list*/                    
+        /* Main horizontal box and mime list */                    
         hbox = gtk_hbox_new (FALSE, GNOME_PAD);
         gtk_box_pack_start (GTK_BOX (main_vbox), hbox, TRUE, TRUE, 0);
         mime_list_container = create_mime_list_and_scroller ();
@@ -520,12 +520,12 @@ init_mime_capplet (void)
 		gtk_table_attach ( GTK_TABLE (table), small_table, 0, 1, 0, 1,
 				   (GtkAttachOptions) (GTK_FILL),
 				   (GtkAttachOptions) (0), 0, 0);
-		
+				
 		icon_entry = nautilus_mime_type_icon_entry_new ("mime_icon_entry", NULL);
 		gtk_table_attach (GTK_TABLE (small_table), icon_entry, 0, 1, 0, 1,
 				  (GtkAttachOptions) (GTK_FILL),
 				  (GtkAttachOptions) (0), 0, 0);
-	
+				  
 		vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
 		gtk_table_attach (GTK_TABLE (small_table), vbox, 1, 2, 0, 1,
 				  (GtkAttachOptions) (GTK_FILL),
@@ -596,39 +596,45 @@ init_mime_capplet (void)
 		gtk_signal_connect (GTK_OBJECT (button), "clicked", edit_default_clicked, mime_list);
 	}
 
-	/* Set up top right area.*/
+	/* Set up top right area. */
 	{
 		GtkWidget *separator;
 		GtkWidget *small_table;
-
+		
 		hbox = gtk_hbox_new (FALSE, 0);
 		gtk_table_attach_defaults ( GTK_TABLE (table), hbox, 1, 2, 0, 1);
 
-		small_table =  gtk_table_new (4, 1, FALSE);
+		small_table =  gtk_table_new (5, 1, FALSE);
 		gtk_table_set_row_spacings (GTK_TABLE (small_table), 7);
 		gtk_box_pack_end (GTK_BOX (hbox), small_table, FALSE, FALSE, 0);
-
-
+		
+		/* Placed to space top button with top of left table */
+		hbox = gtk_hbox_new (FALSE, 0);
+		gtk_table_attach (GTK_TABLE (small_table), hbox, 0, 1, 0, 1,
+				  (GtkAttachOptions) (GTK_FILL),
+				  (GtkAttachOptions) (0), 0, 0);
+		gtk_widget_set_usize (hbox, 1, 11);
+				
 		button = gtk_button_new_with_label (_("Add new Mime type..."));
 		gtk_signal_connect (GTK_OBJECT (button), "clicked", add_mime_clicked, NULL);
-		gtk_table_attach (GTK_TABLE (small_table), button, 0, 1, 0, 1,
+		gtk_table_attach (GTK_TABLE (small_table), button, 0, 1, 1, 2,
 				  (GtkAttachOptions) (GTK_FILL),
 				  (GtkAttachOptions) (0), 0, 0);
 
 		button = gtk_button_new_with_label (_("Delete this Mime type..."));
 		gtk_signal_connect (GTK_OBJECT (button), "clicked", delete_mime_clicked, NULL);
-		gtk_table_attach (GTK_TABLE (small_table), button, 0, 1, 1, 2,
+		gtk_table_attach (GTK_TABLE (small_table), button, 0, 1, 2, 3,
 				  (GtkAttachOptions) (GTK_FILL),
 				  (GtkAttachOptions) (0), 0, 0);
 
 		separator = gtk_hseparator_new ();
-		gtk_table_attach (GTK_TABLE (small_table), separator, 0, 1, 2, 3,
+		gtk_table_attach (GTK_TABLE (small_table), separator, 0, 1, 3, 4,
 				  (GtkAttachOptions) (GTK_FILL),
 				  (GtkAttachOptions) (GTK_FILL), 0, 0);
 
 		button = gtk_button_new_with_label (_("Revert to System Defaults"));
 		gtk_signal_connect (GTK_OBJECT (button), "clicked", revert_mime_clicked, NULL);
-		gtk_table_attach (GTK_TABLE (small_table), button, 0, 1, 3, 4,
+		gtk_table_attach (GTK_TABLE (small_table), button, 0, 1, 4, 5,
 				  (GtkAttachOptions) (GTK_FILL),
 				  (GtkAttachOptions) (0), 0, 0);
 
