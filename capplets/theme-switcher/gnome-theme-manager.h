@@ -45,6 +45,10 @@ extern gint n_drop_types;
 
 /* Prototypes */
 GladeXML *gnome_theme_manager_get_theme_dialog          (void);
+gint      gnome_theme_manager_sort_func                 (const gchar      *a_str,
+							 const gchar      *b_str,
+							 guint             a_flag,
+							 guint             b_flag);
 gint      gnome_theme_manager_tree_sort_func            (GtkTreeModel     *model,
 							 GtkTreeIter      *a,
 							 GtkTreeIter      *b,

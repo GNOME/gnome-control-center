@@ -8,6 +8,7 @@
 #include <sys/types.h>
 #include <dirent.h>
 #include <libgnomevfs/gnome-vfs-ops.h>
+#include <libgnomevfs/gnome-vfs-utils.h>
 #include <glib-object.h>
 #include <libgnome/gnome-desktop-item.h>
 #include "gnome-theme-info.h"
@@ -24,7 +25,7 @@
 typedef struct _ThemeCallbackData
 {
   GFunc func;
-  gpointer  data;
+  gpointer data;
 } ThemeCallbackData;
 
 
@@ -32,7 +33,8 @@ static GHashTable *theme_hash = NULL;
 static GHashTable *icon_theme_hash = NULL;
 static GHashTable *meta_theme_hash = NULL;
 static GList *callbacks = NULL;
-
+static gboolean initted = FALSE;
+static gboolean initting = FALSE;
 
 const gchar *gtk2_suffix = "gtk-2.0";
 const gchar *key_suffix = "gtk-2.0-key";
@@ -142,11 +144,26 @@ update_theme_dir (const gchar *theme_dir)
   tmp = g_build_filename (theme_dir, meta_theme_file_id, NULL);
   if (g_file_test (tmp, G_FILE_TEST_IS_REGULAR))
     {
+      GnomeThemeMetaInfo *old_meta_theme_info;
       GnomeThemeMetaInfo *meta_theme_info;
 
+      old_meta_theme_info = gnome_theme_meta_info_find_by_filename (tmp);
       meta_theme_info = read_meta_theme (strrchr (theme_dir, '/')+1, tmp);
+
+      /* this is hardly efficient.  We always remove the old meta_theme and
+       * rereplace it, even if nothing has changed.  We can add a check in the
+       * future. */
+      if (old_meta_theme_info != NULL)
+	{
+	  g_hash_table_remove (meta_theme_hash, old_meta_theme_info->name);
+	  gnome_theme_meta_info_free (old_meta_theme_info);
+	  changed = TRUE;
+	}
       if (meta_theme_info != NULL)
-	g_hash_table_insert (meta_theme_hash, meta_theme_info->name, meta_theme_info);
+	{
+	  g_hash_table_insert (meta_theme_hash, meta_theme_info->name, meta_theme_info);
+	  changed = TRUE;
+	}
     }
   g_free (tmp);
 
@@ -206,21 +223,16 @@ update_theme_dir (const gchar *theme_dir)
 	  changed = TRUE;
 	}
     }
-  if (changed)
+  if (changed && !initting)
     {
       GList *list;
 
-      g_print ("changed!\n");
       for (list = callbacks; list; list = list->next)
 	{
 	  ThemeCallbackData *callback_data = list->data;
 
 	  (* callback_data->func) ((gpointer)theme_dir, callback_data->data);
 	}
-    }
-  else
-    {
-      g_print ("no change!\n");
     }
 
 }
@@ -247,7 +259,7 @@ update_icon_theme_dir (const gchar *theme_dir)
       changed = TRUE;
     }
 
-  if (changed)
+  if (changed && !initting)
     {
       GList *list;
 
@@ -268,28 +280,26 @@ top_theme_dir_changed_callback (GnomeVFSMonitorHandle    *handle,
 				gpointer                  user_data)
 {
   typedef void (*ThemeChangedFunc) (const gchar *uri);
+  char *uri;
   ThemeChangedFunc func;
   
 
   func = user_data;
+  uri = gnome_vfs_get_local_path_from_uri (info_uri);
+  if (uri == NULL)
+    uri = g_strdup (info_uri);
 
   switch (event_type)
     {
     case GNOME_VFS_MONITOR_EVENT_CHANGED:
     case GNOME_VFS_MONITOR_EVENT_CREATED:
     case GNOME_VFS_MONITOR_EVENT_DELETED:
-      if (!strncmp (info_uri, "file://", strlen ("file://")))
-	{
-	  func (info_uri + strlen ("file://"));
-	}
-      else
-	{
-	  func (info_uri);
-	}
+      func (uri);
       break;
     default:
       break;
     }
+  g_free (uri);
 }
 
 
@@ -337,6 +347,7 @@ icon_themes_add_dir (const char *dirname)
   g_return_if_fail (dirname != NULL);
 
   dir = opendir (dirname);
+
   gnome_vfs_monitor_add (&handle,
 			 dirname,
 			 GNOME_VFS_MONITOR_DIRECTORY,
@@ -363,14 +374,15 @@ icon_themes_add_dir (const char *dirname)
 static void
 gnome_theme_info_init (void)
 {
-  static gboolean initted = FALSE;
   gchar *dir;
   const gchar *gtk_data_dir;
   GnomeVFSURI *uri;
+  
 
   if (initted)
     return;
   initted = TRUE;
+  initting = TRUE;
 
   theme_hash = g_hash_table_new (g_str_hash, g_str_equal);
   icon_theme_hash = g_hash_table_new (g_str_hash, g_str_equal);
@@ -415,6 +427,7 @@ gnome_theme_info_init (void)
 
   /* Finally, the weird backup for icon themes */
   icon_themes_add_dir ("/usr/share/icons");
+  initting = FALSE;
 }
 
 
@@ -561,10 +574,6 @@ gnome_theme_icon_info_find (const gchar *icon_theme_name)
 
 }
 
-
-
-
-
 static void
 gnome_theme_icon_info_find_all_helper (gpointer key,
 				       gpointer value,
@@ -628,6 +637,47 @@ gnome_theme_meta_info_find (const char *meta_theme_name)
   gnome_theme_info_init ();
 
   return g_hash_table_lookup (meta_theme_hash, meta_theme_name);
+}
+
+static void
+gnome_theme_meta_info_find_by_filename_helper (gpointer key,
+					       gpointer value,
+					       gpointer user_data)
+{
+  GnomeThemeMetaInfo *theme_info = value;
+  struct GnomeThemeInfoHashData *hash_data = user_data;
+
+  g_assert (theme_info->path);
+
+  if (!strcmp (hash_data->user_data, theme_info->path))
+    hash_data->list = g_list_prepend (hash_data->list, theme_info);
+}
+
+GnomeThemeMetaInfo *
+gnome_theme_meta_info_find_by_filename (const char *file_name)
+{
+  struct GnomeThemeInfoHashData hash_data;
+  GnomeThemeMetaInfo *retval;
+
+  g_return_val_if_fail (file_name != NULL, NULL);
+
+  gnome_theme_info_init ();
+  hash_data.list = NULL;
+  hash_data.user_data = file_name;
+
+  g_hash_table_foreach (meta_theme_hash,
+			gnome_theme_meta_info_find_by_filename_helper,
+			&hash_data);
+
+  if (hash_data.list)
+    {
+      retval = hash_data.list->data;
+      g_list_free (hash_data.list);
+    }
+  else
+    retval = NULL;
+
+  return retval;
 }
 
 

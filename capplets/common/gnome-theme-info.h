@@ -93,6 +93,7 @@ GList              *gnome_theme_icon_info_find_all         (void);
 GnomeThemeMetaInfo *gnome_theme_meta_info_new              (void);
 void                gnome_theme_meta_info_free             (GnomeThemeMetaInfo *meta_theme_info);
 GnomeThemeMetaInfo *gnome_theme_meta_info_find             (const char         *meta_theme_name);
+GnomeThemeMetaInfo *gnome_theme_meta_info_find_by_filename (const char         *file_name);
 GList              *gnome_theme_meta_info_find_all         (void);
 
 
