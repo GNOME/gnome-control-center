@@ -604,7 +604,9 @@ write_command_line (gchar *name, xmlNodePtr argument_data, GTree *widget_db)
 			arg = write_select (node, widget_db);
 			free_v = FALSE;
 		}
-		else if (!strcmp (node->name, "string")) {
+		else if (!strcmp (node->name, "string") ||
+			 !strcmp (node->name, "file")) 
+		{
 			arg = write_string (node, widget_db);
 			free_v = TRUE;
 		}
@@ -927,6 +929,53 @@ get_select_widget (ScreensaverPrefsDialog *dialog, xmlNodePtr select_data,
 	return set;
 }
 
+/* Form a GtkFileEntry from a string value */
+
+static PrefsDialogWidgetSet *
+get_file_entry (ScreensaverPrefsDialog *dialog, xmlNodePtr node, 
+		GtkWidget **widget) 
+{
+	char *label_str, *default_str;
+	GtkWidget *hbox, *label, *entry;
+	PrefsDialogWidgetSet *set;
+
+	g_return_val_if_fail (widget != NULL, NULL);
+	g_return_val_if_fail (node != NULL, NULL);
+
+	label_str = xmlGetProp (node, "label");
+	default_str = xmlGetProp (node, "default");
+
+	entry = gnome_file_entry_new (NULL, NULL);
+
+	if (default_str)
+		gnome_file_entry_set_default_path (GNOME_FILE_ENTRY (entry), 
+						   default_str);
+
+	set = g_new0 (PrefsDialogWidgetSet, 1);
+	set->value_widget = 
+		gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (entry));
+
+	if (label_str) {
+		hbox = gtk_hbox_new (FALSE, 5);
+		label = gtk_label_new (label_str);
+		gtk_misc_set_alignment (GTK_MISC (label), 1.0, 0.5);
+		gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
+		gtk_box_pack_start (GTK_BOX (hbox), entry, 
+				    FALSE, TRUE, 0);
+
+		set->widgets = g_list_append (NULL, hbox);
+		g_list_append (set->widgets, label);
+		g_list_append (set->widgets, entry);
+
+		*widget = hbox;
+	} else {
+		set->widgets = g_list_append (NULL, entry);
+		*widget = entry;
+	}
+
+	return set;
+}
+
 /* Form a GtkEntry from a string value */
 
 static PrefsDialogWidgetSet *
@@ -1163,11 +1212,11 @@ place_select (ScreensaverPrefsDialog *dialog, GtkTable *table,
 	return set;
 }
 
-/* Place a GtkEntry in a table */
+/* Place a GtkEntry or a GnomeFileEntry in a table */
 
 static PrefsDialogWidgetSet *
 place_entry (ScreensaverPrefsDialog *dialog, GtkTable *table,
-	     xmlNodePtr node, gint *row) 
+	     xmlNodePtr node, gint *row, gboolean is_file) 
 {
 	PrefsDialogWidgetSet *set;
 	GtkWidget *widget;
@@ -1177,7 +1226,10 @@ place_entry (ScreensaverPrefsDialog *dialog, GtkTable *table,
 	g_return_val_if_fail (node != NULL, NULL);
 	g_return_val_if_fail (row != NULL, NULL);
 
-	set = get_entry (dialog, node, &widget);
+	if (is_file)
+		set = get_file_entry (dialog, node, &widget);
+	else
+		set = get_entry (dialog, node, &widget);
 
 	if (set) {
 		gtk_table_attach (table, widget, 0, 3, *row, *row + 1,
@@ -1223,7 +1275,9 @@ populate_table (ScreensaverPrefsDialog *dialog, GtkTable *table)
 		else if (!strcmp (node->name, "select"))
 			set = place_select (dialog, table, node, &row);
 		else if (!strcmp (node->name, "string"))
-			set = place_entry (dialog, table, node, &row);
+			set = place_entry (dialog, table, node, &row, FALSE);
+		else if (!strcmp (node->name, "file"))
+			set = place_entry (dialog, table, node, &row, TRUE);
 		else continue;
 
 		if (set) g_tree_insert (dialog->widget_db, id, set);
@@ -1498,7 +1552,8 @@ read_select (GTree *widget_db, xmlNodePtr argument_data,
 }
 
 static void
-read_string (GTree *widget_db, xmlNodePtr argument_data, GScanner *cli_db) 
+read_string (GTree *widget_db, xmlNodePtr argument_data, GScanner *cli_db,
+	     gboolean is_file) 
 {
 	PrefsDialogWidgetSet *set;
 	char *arg, *id;
@@ -1543,7 +1598,10 @@ place_screensaver_properties (ScreensaverPrefsDialog *dialog,
 				     dialog->cli_args_db);
 		else if (!strcmp (node->name, "string"))
 			read_string (dialog->widget_db, node, 
-				     dialog->cli_args_db);
+				     dialog->cli_args_db, FALSE);
+		else if (!strcmp (node->name, "file"))
+			read_string (dialog->widget_db, node, 
+				     dialog->cli_args_db, TRUE);
 		else if (!strcmp (node->name, "hgroup"))
 			place_screensaver_properties (dialog, node);
 	}
