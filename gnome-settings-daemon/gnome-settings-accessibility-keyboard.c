@@ -101,17 +101,29 @@ get_int (GConfClient *client, char const *key)
 	return res;
 }
 
-static void
-set_int (GConfChangeSet *cs, char const *key, int val)
+static gboolean
+set_int (GConfClient *client, GConfChangeSet *cs,
+	 char const *key, int val)
 {
 	gconf_change_set_set_int (cs, key, val);
+		if (val != gconf_client_get_int (client, key, NULL)) {
+			g_warning ("%s changed", key);
+		}
+	return val != gconf_client_get_int (client, key, NULL);
 }
 
-static void
-set_bool (GConfChangeSet *cs, gboolean in_gconf, char const *key, int val)
+static gboolean
+set_bool (GConfClient *client, GConfChangeSet *cs,
+	  gboolean in_gconf, char const *key, int val)
 {
-	if (in_gconf || val)
+	if (in_gconf || val) {
 		gconf_change_set_set_bool (cs, key, val ? TRUE : FALSE);
+		if (val != gconf_client_get_bool (client, key, NULL)) {
+			g_warning ("%s changed", key);
+		}
+		return val != gconf_client_get_bool (client, key, NULL);
+	}
+	return FALSE;
 }
 
 static unsigned long
@@ -278,6 +290,7 @@ set_gconf_from_server (GConfEntry *ignored)
 	GConfClient	*client = gconf_client_get_default ();
 	GConfChangeSet *cs = gconf_change_set_new ();
 	XkbDescRec	*desc = get_xkb_desc_rec ();
+	gboolean changed = FALSE;
 
 	if (!desc) {
 		d ("No XKB present\n");
@@ -296,7 +309,7 @@ set_gconf_from_server (GConfEntry *ignored)
 	we_are_changing_xkb_state = TRUE;
 
 	/* always toggle this irrespective of the state */
-	set_bool (cs, TRUE, CONFIG_ROOT "/enable",
+	changed |= set_bool (client, cs, TRUE, CONFIG_ROOT "/enable",
 		desc->ctrls->enabled_ctrls & (XkbAccessXKeysMask | XkbAccessXFeedbackMask));
 
 	/* if master is disabled in gconf do not change gconf state of subordinates
@@ -305,53 +318,55 @@ set_gconf_from_server (GConfEntry *ignored)
 	 */
 	in_gconf = gconf_client_get_bool (client, CONFIG_ROOT "/enable", NULL);
 
-	set_bool (cs, in_gconf, CONFIG_ROOT "/feature_state_change_beep",
+	changed |= set_bool (client, cs, in_gconf, CONFIG_ROOT "/feature_state_change_beep",
 		desc->ctrls->ax_options & (XkbAX_FeatureFBMask | XkbAX_SlowWarnFBMask));
-	set_bool (cs, in_gconf, CONFIG_ROOT "/timeout_enable",
+	changed |= set_bool (client, cs, in_gconf, CONFIG_ROOT "/timeout_enable",
 		desc->ctrls->enabled_ctrls & XkbAccessXTimeoutMask);
-	set_int (cs, CONFIG_ROOT "/timeout",
+	changed |= set_int (client, cs, CONFIG_ROOT "/timeout",
 		desc->ctrls->ax_timeout);
 
-	set_bool (cs, in_gconf, CONFIG_ROOT "/bouncekeys_enable",
+	changed |= set_bool (client, cs, in_gconf, CONFIG_ROOT "/bouncekeys_enable",
 		desc->ctrls->enabled_ctrls & XkbBounceKeysMask);
-	set_int (cs, CONFIG_ROOT "/bouncekeys_delay",
+	changed |= set_int (client, cs, CONFIG_ROOT "/bouncekeys_delay",
 		desc->ctrls->debounce_delay);
-	set_bool (cs, TRUE, CONFIG_ROOT "/bouncekeys_beep_reject",
+	changed |= set_bool (client, cs, TRUE, CONFIG_ROOT "/bouncekeys_beep_reject",
 		desc->ctrls->ax_options & XkbAX_BKRejectFBMask);
 
-	set_bool (cs, in_gconf, CONFIG_ROOT "/mousekeys_enable",
+	changed |= set_bool (client, cs, in_gconf, CONFIG_ROOT "/mousekeys_enable",
 		desc->ctrls->enabled_ctrls & XkbMouseKeysMask);
-	set_int (cs, CONFIG_ROOT "/mousekeys_max_speed",
+	changed |= set_int (client, cs, CONFIG_ROOT "/mousekeys_max_speed",
 		desc->ctrls->mk_max_speed * (1000 / desc->ctrls->mk_interval));
 	/* NOTE : mk_time_to_max is measured in events not time */
-	set_int (cs, CONFIG_ROOT "/mousekeys_accel_time",
+	changed |= set_int (client, cs, CONFIG_ROOT "/mousekeys_accel_time",
 		desc->ctrls->mk_time_to_max * desc->ctrls->mk_interval);
-	set_int (cs, CONFIG_ROOT "/mousekeys_init_delay",
+	changed |= set_int (client, cs, CONFIG_ROOT "/mousekeys_init_delay",
 		desc->ctrls->mk_delay);
 
-	set_bool (cs, in_gconf, CONFIG_ROOT "/slowkeys_enable",
+	changed |= set_bool (client, cs, in_gconf, CONFIG_ROOT "/slowkeys_enable",
 		desc->ctrls->enabled_ctrls & XkbSlowKeysMask);
-	set_bool (cs, TRUE, CONFIG_ROOT "/slowkeys_beep_press",
+	changed |= set_bool (client, cs, TRUE, CONFIG_ROOT "/slowkeys_beep_press",
 		desc->ctrls->ax_options & XkbAX_SKPressFBMask);
-	set_bool (cs, TRUE, CONFIG_ROOT "/slowkeys_beep_accept",
+	changed |= set_bool (client, cs, TRUE, CONFIG_ROOT "/slowkeys_beep_accept",
 		desc->ctrls->ax_options & XkbAX_SKAcceptFBMask);
-	set_bool (cs, TRUE, CONFIG_ROOT "/slowkeys_beep_reject",
+	changed |= set_bool (client, cs, TRUE, CONFIG_ROOT "/slowkeys_beep_reject",
 		desc->ctrls->ax_options & XkbAX_SKRejectFBMask);
-	set_int (cs, CONFIG_ROOT "/slowkeys_delay",
+	changed |= set_int (client, cs, CONFIG_ROOT "/slowkeys_delay",
 		desc->ctrls->slow_keys_delay);
 
-	set_bool (cs, in_gconf, CONFIG_ROOT "/stickykeys_enable",
+	changed |= set_bool (client, cs, in_gconf, CONFIG_ROOT "/stickykeys_enable",
 		desc->ctrls->enabled_ctrls & XkbStickyKeysMask);
-	set_bool (cs, TRUE, CONFIG_ROOT "/stickykeys_two_key_off",
+	changed |= set_bool (client, cs, TRUE, CONFIG_ROOT "/stickykeys_two_key_off",
 		desc->ctrls->ax_options & XkbAX_TwoKeysMask);
-	set_bool (cs, TRUE, CONFIG_ROOT "/stickykeys_modifier_beep",
+	changed |= set_bool (client, cs, TRUE, CONFIG_ROOT "/stickykeys_modifier_beep",
 		desc->ctrls->ax_options & XkbAX_StickyKeysFBMask);
 
-	set_bool (cs, in_gconf, CONFIG_ROOT "/togglekeys_enable",
+	changed |= set_bool (client, cs, in_gconf, CONFIG_ROOT "/togglekeys_enable",
 		desc->ctrls->ax_options & XkbAX_IndicatorFBMask);
 
-	gconf_client_commit_change_set (client, cs, FALSE, NULL);
-	gconf_client_suggest_sync (client, NULL);
+	if (changed) {
+		gconf_client_commit_change_set (client, cs, FALSE, NULL);
+		gconf_client_suggest_sync (client, NULL);
+	}
 	gconf_change_set_unref (cs);
 	we_are_changing_xkb_state = FALSE;
 }
@@ -373,15 +388,18 @@ cb_xkb_event_filter (GdkXEvent *xevent, GdkEvent *ignored1, gpointer ignored2)
 	return GDK_FILTER_CONTINUE;
 }
 
-/**
- * gnome_settings_accessibility_keyboard_init :
- *
- * If the display supports XKB initialize it.
- */
 void
-gnome_settings_accessibility_keyboard_init (GConfClient *client)
+gnome_settings_accessibility_keyboard_load (GConfClient *client)
 {
+	static gboolean has_filter = FALSE;
 	if (!xkb_enabled ())
+		return;
+
+	/* be sure to init before starting to monitor the server */
+	set_server_from_gconf (NULL);
+
+	/* be careful not to install multipled filters */
+	if (has_filter)
 		return;
 
 	gdk_error_trap_push ();
@@ -396,19 +414,7 @@ gnome_settings_accessibility_keyboard_init (GConfClient *client)
 	gnome_settings_daemon_register_callback (CONFIG_ROOT, &set_server_from_gconf);
 }
 
-void
-gnome_settings_accessibility_keyboard_load (GConfClient *client)
-{
-	set_server_from_gconf (NULL);
-}
-
 #else
-
-void
-gnome_settings_accessibility_keyboard_init (GConfClient *client)
-{
-	g_warning ("Unsupported in this build");
-}
 
 void
 gnome_settings_accessibility_keyboard_load (GConfClient *client)
@@ -416,3 +422,9 @@ gnome_settings_accessibility_keyboard_load (GConfClient *client)
 	g_warning ("Unsupported in this build");
 }
 #endif
+
+void
+gnome_settings_accessibility_keyboard_init (GConfClient *client)
+{
+
+}
