@@ -4,6 +4,7 @@
 <glade-interface>
 
 <widget class="GtkWindow" id="window1">
+  <property name="border_width">5</property>
   <property name="title" translatable="yes">Sound Preferences</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_NONE</property>
@@ -23,42 +24,89 @@
       <property name="enable_popup">False</property>
 
       <child>
-	<widget class="GtkVBox" id="vbox1">
-	  <property name="border_width">8</property>
+	<widget class="GtkVBox" id="vbox5">
+	  <property name="border_width">12</property>
 	  <property name="visible">True</property>
 	  <property name="homogeneous">False</property>
-	  <property name="spacing">8</property>
+	  <property name="spacing">0</property>
 
 	  <child>
-	    <widget class="GtkCheckButton" id="enable_toggle">
+	    <widget class="GtkHBox" id="hbox4">
 	      <property name="visible">True</property>
-	      <property name="can_focus">True</property>
-	      <property name="label" translatable="yes">E_nable sound server startup</property>
-	      <property name="use_underline">True</property>
-	      <property name="relief">GTK_RELIEF_NORMAL</property>
-	      <property name="active">False</property>
-	      <property name="inconsistent">False</property>
-	      <property name="draw_indicator">True</property>
-	      <signal name="toggled" handler="enable_toggled_cb"/>
-	    </widget>
-	    <packing>
-	      <property name="padding">0</property>
-	      <property name="expand">False</property>
-	      <property name="fill">False</property>
-	    </packing>
-	  </child>
+	      <property name="homogeneous">False</property>
+	      <property name="spacing">0</property>
 
-	  <child>
-	    <widget class="GtkCheckButton" id="events_toggle">
-	      <property name="visible">True</property>
-	      <property name="can_focus">True</property>
-	      <property name="label" translatable="yes">_Sounds for events</property>
-	      <property name="use_underline">True</property>
-	      <property name="relief">GTK_RELIEF_NORMAL</property>
-	      <property name="active">False</property>
-	      <property name="inconsistent">False</property>
-	      <property name="draw_indicator">True</property>
-	      <signal name="toggled" handler="events_toggled_cb"/>
+	      <child>
+		<widget class="GtkLabel" id="label5">
+		  <property name="visible">True</property>
+		  <property name="label" translatable="yes">    </property>
+		  <property name="use_underline">False</property>
+		  <property name="use_markup">False</property>
+		  <property name="justify">GTK_JUSTIFY_LEFT</property>
+		  <property name="wrap">False</property>
+		  <property name="selectable">False</property>
+		  <property name="xalign">0.5</property>
+		  <property name="yalign">0.5</property>
+		  <property name="xpad">0</property>
+		  <property name="ypad">0</property>
+		</widget>
+		<packing>
+		  <property name="padding">0</property>
+		  <property name="expand">False</property>
+		  <property name="fill">False</property>
+		</packing>
+	      </child>
+
+	      <child>
+		<widget class="GtkVBox" id="vbox1">
+		  <property name="visible">True</property>
+		  <property name="homogeneous">False</property>
+		  <property name="spacing">6</property>
+
+		  <child>
+		    <widget class="GtkCheckButton" id="enable_toggle">
+		      <property name="visible">True</property>
+		      <property name="can_focus">True</property>
+		      <property name="label" translatable="yes">E_nable sound server startup</property>
+		      <property name="use_underline">True</property>
+		      <property name="relief">GTK_RELIEF_NORMAL</property>
+		      <property name="active">False</property>
+		      <property name="inconsistent">False</property>
+		      <property name="draw_indicator">True</property>
+		      <signal name="toggled" handler="enable_toggled_cb"/>
+		    </widget>
+		    <packing>
+		      <property name="padding">0</property>
+		      <property name="expand">False</property>
+		      <property name="fill">False</property>
+		    </packing>
+		  </child>
+
+		  <child>
+		    <widget class="GtkCheckButton" id="events_toggle">
+		      <property name="visible">True</property>
+		      <property name="can_focus">True</property>
+		      <property name="label" translatable="yes">_Sounds for events</property>
+		      <property name="use_underline">True</property>
+		      <property name="relief">GTK_RELIEF_NORMAL</property>
+		      <property name="active">False</property>
+		      <property name="inconsistent">False</property>
+		      <property name="draw_indicator">True</property>
+		      <signal name="toggled" handler="events_toggled_cb"/>
+		    </widget>
+		    <packing>
+		      <property name="padding">0</property>
+		      <property name="expand">False</property>
+		      <property name="fill">False</property>
+		    </packing>
+		  </child>
+		</widget>
+		<packing>
+		  <property name="padding">0</property>
+		  <property name="expand">True</property>
+		  <property name="fill">True</property>
+		</packing>
+	      </child>
 	    </widget>
 	    <packing>
 	      <property name="padding">0</property>
@@ -94,7 +142,7 @@
 
       <child>
 	<widget class="GtkVBox" id="events_vbox">
-	  <property name="border_width">8</property>
+	  <property name="border_width">12</property>
 	  <property name="visible">True</property>
 	  <property name="homogeneous">False</property>
 	  <property name="spacing">0</property>
@@ -126,16 +174,16 @@
 
       <child>
 	<widget class="GtkVBox" id="bell_vbox">
+	  <property name="border_width">12</property>
 	  <property name="visible">True</property>
 	  <property name="homogeneous">False</property>
 	  <property name="spacing">0</property>
 
 	  <child>
 	    <widget class="GtkHBox" id="hbox2">
-	      <property name="border_width">8</property>
 	      <property name="visible">True</property>
 	      <property name="homogeneous">False</property>
-	      <property name="spacing">8</property>
+	      <property name="spacing">12</property>
 
 	      <child>
 		<widget class="GtkImage" id="bell_image">
@@ -156,7 +204,7 @@
 		<widget class="GtkVBox" id="vbox4">
 		  <property name="visible">True</property>
 		  <property name="homogeneous">False</property>
-		  <property name="spacing">3</property>
+		  <property name="spacing">6</property>
 
 		  <child>
 		    <widget class="GtkCheckButton" id="bell_audible_toggle">
@@ -233,7 +281,7 @@
 			<widget class="GtkVBox" id="bell_flash_vbox">
 			  <property name="visible">True</property>
 			  <property name="homogeneous">False</property>
-			  <property name="spacing">3</property>
+			  <property name="spacing">6</property>
 
 			  <child>
 			    <widget class="GtkRadioButton" id="bell_flash_window_radio">
@@ -257,7 +305,7 @@
 			    <widget class="GtkRadioButton" id="bell_flash_screen_radio">
 			      <property name="visible">True</property>
 			      <property name="can_focus">True</property>
-			      <property name="label" translatable="yes">Flash entire _screen</property>
+			      <property name="label" translatable="yes">Flash _entire screen</property>
 			      <property name="use_underline">True</property>
 			      <property name="relief">GTK_RELIEF_NORMAL</property>
 			      <property name="active">False</property>

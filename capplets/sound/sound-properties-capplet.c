@@ -140,8 +140,6 @@ static void
 setup_dialog (GladeXML *dialog, GConfChangeSet *changeset) 
 {
 	GObject *peditor;
-	gchar *visual_type;
-	GtkWidget *flash_titlebar_widget, *flash_screen_widget;
 
 	peditor = gconf_peditor_new_boolean (NULL, ENABLE_ESD_KEY, WID ("enable_toggle"), NULL);
 	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor), WID ("events_toggle"));
@@ -200,7 +198,7 @@ main (int argc, char **argv)
 {
 	GConfClient    *client;
 	GConfChangeSet *changeset;
-	GladeXML       *dialog;
+	GladeXML       *dialog = NULL;
 	GtkWidget      *dialog_win;
 
 	static gboolean apply_only;
@@ -243,8 +241,10 @@ main (int argc, char **argv)
 			 GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
 			 NULL);
 
+		gtk_container_set_border_width (GTK_CONTAINER (dialog_win), 5);
+		gtk_dialog_set_default_response (GTK_DIALOG (dialog_win), GTK_RESPONSE_CLOSE);
 		g_signal_connect (G_OBJECT (dialog_win), "response", (GCallback) dialog_button_clicked_cb, changeset);
-		gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog_win)->vbox), WID ("prefs_widget"), TRUE, TRUE, GNOME_PAD_SMALL);
+		gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog_win)->vbox), WID ("prefs_widget"), TRUE, TRUE, 0);
 		capplet_set_icon (dialog_win, "sound-capplet.png");
 		gtk_widget_show_all (dialog_win);
 
