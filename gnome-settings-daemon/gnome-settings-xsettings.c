@@ -86,6 +86,8 @@ static TranslationEntry translations [] = {
       GCONF_VALUE_STRING,	translate_string_string },
   { "/desktop/gnome/interface/toolbar_icon_size",		"Gtk/ToolbarIconSize",
       GCONF_VALUE_STRING,	translate_string_string },
+  { "/desktop/gnome/interface/can_change_accels",		"Gtk/CanChangeAccels",
+      GCONF_VALUE_BOOL,		translate_bool_int },
   { "/desktop/gnome/interface/cursor_blink",		"Net/CursorBlink",
       GCONF_VALUE_BOOL,		translate_bool_int },
   { "/desktop/gnome/interface/cursor_blink_time",	"Net/CursorBlinkTime",
