@@ -76,6 +76,10 @@ static void gnome_wp_load_legacy (GnomeWPCapplet * capplet) {
 	  continue;
 	}
 
+	if (!g_file_test (foo, G_FILE_TEST_EXISTS)) {
+	  continue;
+	}
+
 	item = g_new0 (GnomeWPItem, 1);
 
 	item->filename = g_strdup (foo);
