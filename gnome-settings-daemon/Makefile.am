@@ -100,3 +100,6 @@ install-data-hook :
 
 EXTRA_DIST = $(serverfile)
 CLEANFILES = $(BUILT_SOURCES)
+
+uninstall-local:
+	rm -f $(DESTDIR)$(serverdir)/$(serverfile:.in=)

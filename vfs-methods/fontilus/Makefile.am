@@ -52,6 +52,9 @@ endif
 install-desktop-database: install-desktopDATA
 	update-desktop-database $(DESTDIR)$(desktopdir)
 
+uninstall-local:
+	rm -f $(DESTDIR)$(desktopdir)/mimeinfo.cache
+
 @INTLTOOL_DESKTOP_RULE@
 @INTLTOOL_DIRECTORY_RULE@
 @INTLTOOL_SCHEMAS_RULE@
