@@ -2,8 +2,8 @@ cappletname = background
 cappletgroup = 
 bin_PROGRAMS = background-properties-capplet
 
-background_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
-background_properties_SOURCES = \
+background_properties_capplet_LDADD = $(GNOMECC_CAPPLETS_LIBS)
+background_properties_capplet_SOURCES = \
 	main.c\
 	applier.c			applier.h
 #	prefs-widget.c		prefs-widget.h \
