@@ -230,7 +230,7 @@ get_screensaver_dir_list (void)
 	while (fgets (buffer, 1024, in)) {
 		buffer[strlen(buffer) - 1] = '\0';
 
-		if (g_file_test (buffer, G_FILE_TEST_ISDIR)) {
+		if (g_file_test (buffer, G_FILE_TEST_IS_DIR)) {
 			list_tail = g_list_append (NULL, g_strdup (buffer));
 			if (screensaver_dir_list == NULL)
 				screensaver_dir_list = list_tail;
@@ -264,7 +264,7 @@ rc_command_exists (char *command)
 
 	/* If this is a complete path, then just stat it */
 	if (strchr (program, '/')) {
-		if (g_file_test (program, G_FILE_TEST_ISFILE))
+		if (g_file_test (program, G_FILE_TEST_IS_REGULAR))
 			ret = TRUE;
 		else
 			ret = FALSE;
@@ -280,7 +280,7 @@ rc_command_exists (char *command)
 	for (node = screensaver_dir_list; node; node = node->next) {
 		fullpath = g_concat_dir_and_file ((gchar *) node->data,
 						  program);
-		if (g_file_test (fullpath, G_FILE_TEST_ISFILE)) {
+		if (g_file_test (fullpath, G_FILE_TEST_IS_REGULAR)) {
 			g_free (program);
 			g_free (fullpath);
 			return TRUE;

@@ -26,12 +26,12 @@
 #endif
 
 #include <gnome.h>
-#include <parser.h>
+#include <libxml/parser.h>
 #include <sys/stat.h>
 #include <ctype.h>
 #include <string.h>
 
-#include <tree.h>
+#include <libxml/tree.h>
 
 #include "screensaver-prefs-dialog.h"
 #include "preferences.h"
@@ -157,8 +157,8 @@ screensaver_prefs_dialog_get_type (void)
 			sizeof (ScreensaverPrefsDialogClass),
 			(GtkClassInitFunc) screensaver_prefs_dialog_class_init,
 			(GtkObjectInitFunc) screensaver_prefs_dialog_init,
-			(GtkArgSetFunc) NULL,
-			(GtkArgGetFunc) NULL
+			NULL,
+			NULL
 		};
 
 		screensaver_prefs_dialog_type = 
@@ -233,7 +233,7 @@ screensaver_prefs_dialog_class_init (ScreensaverPrefsDialogClass *class)
     
 	screensaver_prefs_dialog_signals[OK_CLICKED_SIGNAL] =
 		gtk_signal_new ("ok-clicked", GTK_RUN_FIRST, 
-				object_class->type,
+				G_OBJECT_CLASS_TYPE (object_class),
 				GTK_SIGNAL_OFFSET 
 				(ScreensaverPrefsDialogClass, ok_clicked),
 				gtk_signal_default_marshaller, 
@@ -241,15 +241,11 @@ screensaver_prefs_dialog_class_init (ScreensaverPrefsDialogClass *class)
 
 	screensaver_prefs_dialog_signals[DEMO_SIGNAL] =
 		gtk_signal_new ("demo", GTK_RUN_FIRST, 
-				object_class->type,
+				G_OBJECT_CLASS_TYPE (object_class),
 				GTK_SIGNAL_OFFSET 
 				(ScreensaverPrefsDialogClass, demo),
 				gtk_signal_default_marshaller, 
 				GTK_TYPE_NONE, 0);
-
-	gtk_object_class_add_signals (object_class, 
-				      screensaver_prefs_dialog_signals,
-				      LAST_SIGNAL);
 
 	object_class->destroy = 
 		(void (*) (GtkObject *)) screensaver_prefs_dialog_destroy;
@@ -285,7 +281,7 @@ screensaver_prefs_dialog_new (Screensaver *saver)
 				xmlDocGetRootElement (dialog->argument_doc);
 	}
 
-	if (dialog->cli_args_db && dialog->argument_data && dialog->argument_data->childs && dialog->argument_data->childs->next) {
+	if (dialog->cli_args_db && dialog->argument_data && dialog->argument_data->children && dialog->argument_data->children->next) {
 		settings_widget = 
 			get_screensaver_widget (dialog);
 	} else {
@@ -408,7 +404,7 @@ activate_option_cb (GtkWidget *widget)
 	option_def = gtk_object_get_data (GTK_OBJECT (widget), "option_def");
 	select_data = gtk_object_get_data (GTK_OBJECT (widget), "select_data");
 
-	node = select_data->childs;
+	node = select_data->children;
 
 	while (node) {
 		if (node != option_def)
@@ -533,7 +529,7 @@ write_select (xmlNodePtr argument_data, GTree *widget_db)
 	menu_item = GTK_MENU_SHELL (menu)->children;
 	active = gtk_menu_get_active (GTK_MENU (menu));
 
-	for (node = argument_data->childs; node && menu_item;
+	for (node = argument_data->children; node && menu_item;
 	     node = node->next) 
 	{
 		if (!xmlGetProp (node, "id")) continue;
@@ -593,9 +589,9 @@ write_command_line (gchar *name, xmlNodePtr argument_data, GTree *widget_db)
 	gboolean free_v = FALSE;
 
 	line = g_string_new (name);
-	node = argument_data->childs;
+	node = argument_data->children;
 
-	for (node = argument_data->childs; node; node = node->next) {
+	for (node = argument_data->children; node; node = node->next) {
 		if (!strcmp (node->name, "boolean")) {
 			arg = write_boolean (node, widget_db);
 			free_v = FALSE;
@@ -751,13 +747,13 @@ get_argument_data (Screensaver *saver)
 	if (!doc)
 		return NULL;
 
-	if (!(doc->root && doc->root->childs))
+	if (!(doc->children && doc->children->children))
 	{
 		xmlFreeDoc (doc);
 		return NULL;
 	}
 	
-	for (node = doc->root->childs; node != NULL; node = node->next)
+	for (node = doc->children->children; node != NULL; node = node->next)
 	{
 		if (!strcmp (node->name, "select")
 		 || !strcmp (node->name, "number")
@@ -903,7 +899,7 @@ get_select_widget (ScreensaverPrefsDialog *dialog, xmlNodePtr select_data,
 	gtk_object_set_data (GTK_OBJECT (option_menu), "option_def", 
 			     select_data);
 
-	for (node = select_data->childs; node; node = node->next) {
+	for (node = select_data->children; node; node = node->next) {
 		option_str = xmlGetProp (node, "_label");
 		if (!option_str) continue;
 
@@ -1186,7 +1182,7 @@ place_hgroup (ScreensaverPrefsDialog *dialog,
 
 	hbox = gtk_hbox_new (FALSE, 5);
 
-	for (node = hgroup_data->childs; node; node = node->next) {
+	for (node = hgroup_data->children; node; node = node->next) {
 		id = xmlGetProp (node, "id");
 		if (!id) continue;
 
@@ -1296,7 +1292,7 @@ populate_table (ScreensaverPrefsDialog *dialog, GtkTable *table)
 	g_return_if_fail (table != NULL);
 	g_return_if_fail (GTK_IS_TABLE (table));
 
-	for (node = dialog->argument_data->childs; node; node = node->next) {
+	for (node = dialog->argument_data->children; node; node = node->next) {
 		id = xmlGetProp (node, "id");
 		if (!id && strcmp (node->name, "hgroup")) continue;
 
@@ -1568,7 +1564,7 @@ read_select (GTree *widget_db, xmlNodePtr argument_data,
 
 	/* Get the index of the selected option */
 
-	for (node = argument_data->childs; node; node = node->next) {
+	for (node = argument_data->children; node; node = node->next) {
 		if (!xmlGetProp (node, "id")) continue;
 
 		found = arg_is_set (node, cli_db);
@@ -1588,7 +1584,7 @@ read_select (GTree *widget_db, xmlNodePtr argument_data,
 
 	i = 0;
 
-	for (node = argument_data->childs; node; node = node->next) {
+	for (node = argument_data->children; node; node = node->next) {
 		if (!xmlGetProp (node, "id")) continue;
 
 		if (i != set_idx)
@@ -1600,7 +1596,7 @@ read_select (GTree *widget_db, xmlNodePtr argument_data,
 
 	i = 0;
 
-	for (node = argument_data->childs; node; node = node->next) {
+	for (node = argument_data->children; node; node = node->next) {
 		if (!xmlGetProp (node, "id")) continue;
 
 		if (i == set_idx) {
@@ -1656,7 +1652,7 @@ place_screensaver_properties (ScreensaverPrefsDialog *dialog,
 {
 	xmlNodePtr node;
 
-	for (node = argument_data->childs; node; node = node->next) {
+	for (node = argument_data->children; node; node = node->next) {
 		if (!strcmp (node->name, "boolean"))
 			read_boolean (dialog->widget_db, node, 
 				      dialog->cli_args_db);
@@ -1738,6 +1734,8 @@ demo_cb (GtkWidget *widget, ScreensaverPrefsDialog *dialog)
 static void
 help_cb (GtkWidget *widget, ScreensaverPrefsDialog *dialog) 
 {
+	/* I can't even find the current help... */
+#if 0
 	GnomeHelpMenuEntry entry;
 	gchar *url;
 
@@ -1756,6 +1754,7 @@ help_cb (GtkWidget *widget, ScreensaverPrefsDialog *dialog)
 		gnome_url_show (url);
 		g_free (url);
 	}
+#endif
 }
 
 static void

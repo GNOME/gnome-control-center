@@ -124,23 +124,3 @@ create_pixmap                          (GtkWidget       *widget,
   gdk_bitmap_unref (mask);
   return pixmap;
 }
-
-/* This is an internally used function to create imlib images. */
-GdkImlibImage*
-create_image                           (const gchar     *filename)
-{
-  GdkImlibImage *image;
-  gchar *pathname;
-
-  pathname = gnome_pixmap_file (filename);
-  if (!pathname)
-    {
-      g_warning (_("Couldn't find pixmap file: %s"), filename);
-      return NULL;
-    }
-
-  image = gdk_imlib_load_image (pathname);
-  g_free (pathname);
-  return image;
-}
-

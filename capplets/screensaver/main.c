@@ -28,9 +28,9 @@
 #include <gtk/gtk.h>
 #include <gnome.h>
 #include <libgnomeui/gnome-window-icon.h>
-#include <tree.h>
-#include <parser.h>
-#include <xmlIO.h>
+#include <libxml/tree.h>
+#include <libxml/parser.h>
+#include <libxml/xmlIO.h>
 #include <errno.h>
 #include <fcntl.h>
 

@@ -32,7 +32,7 @@
 #include <ctype.h>
 
 #include <gnome.h>
-#include <parser.h>
+#include <libxml/parser.h>
 
 #include "selection-dialog.h"
 #include "preferences.h"
@@ -78,8 +78,8 @@ selection_dialog_get_type (void)
 			sizeof (SelectionDialogClass),
 			(GtkClassInitFunc) selection_dialog_class_init,
 			(GtkObjectInitFunc) selection_dialog_init,
-			(GtkArgSetFunc) NULL,
-			(GtkArgGetFunc) NULL
+			NULL,
+			NULL
 		};
 
 		selection_dialog_type = 
@@ -143,15 +143,11 @@ selection_dialog_class_init (SelectionDialogClass *class)
     
 	selection_dialog_signals[OK_CLICKED_SIGNAL] =
 		gtk_signal_new ("ok-clicked", GTK_RUN_FIRST, 
-				object_class->type,
+				G_OBJECT_CLASS_TYPE (object_class),
 				GTK_SIGNAL_OFFSET (SelectionDialogClass, 
 						   ok_clicked),
 				gtk_marshal_NONE__POINTER, 
 				GTK_TYPE_NONE, 1, GTK_TYPE_POINTER);
-
-	gtk_object_class_add_signals (object_class, 
-				      selection_dialog_signals,
-				      LAST_SIGNAL);
 
 	known_savers = get_known_savers ();
 

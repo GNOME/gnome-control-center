@@ -25,7 +25,7 @@
 #define __SCREENSAVER_PREFS_DIALOG_H
 
 #include <gnome.h>
-#include <tree.h>
+#include <libxml/tree.h>
 #include <glade/glade.h>
 
 #include "preferences.h"

@@ -26,7 +26,7 @@
 #define __SELECTION_DIALOG_H
 
 #include <gnome.h>
-#include <tree.h>
+#include <libxml/tree.h>
 
 #include "prefs-widget.h"
 

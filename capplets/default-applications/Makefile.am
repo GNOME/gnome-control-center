@@ -2,7 +2,7 @@ cappletname = default-applications
 cappletgroup =
 bin_PROGRAMS = default-applications-properties
 
-default_applications_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
+default_applications_properties_LDADD = @OLD_CAPPLET_LIBS@
 default_applications_properties_SOURCES = \
 	default-application-properties.c \
 	interface.c		interface.h \
@@ -28,7 +28,7 @@ install-data-local:
 install-data-am: install-data-local
 ####@###GNOMECC_CAPPLETS_DESKTOP_IN_RULE@
 
-INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)
+INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS) @OLD_CAPPLET_CFLAGS@ 
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
 EXTRA_DIST = $(GNOMECC_CAPPLETS_EXTRA_DIST)
 iconsdir   = $(GNOMECC_ICONS_DIR)

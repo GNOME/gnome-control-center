@@ -263,7 +263,7 @@ show_screensaver_timeout (void)
 			gdk_pixbuf_unref (pixbuf);
 
 		pixbuf = gdk_pixbuf_new_from_file 
-			(GNOMECC_PIXMAPS_DIR "/no-hack.png");
+			(GNOMECC_PIXMAPS_DIR "/no-hack.png", NULL);
 		gdk_pixbuf_render_to_drawable
 			(pixbuf, (GdkDrawable *) preview_window->window,
 			 preview_window->style->fg_gc[0], 0, 0, 0, 0,
@@ -291,7 +291,7 @@ show_preview (Screensaver *saver)
 
 	if (saver->fakepreview)
 	{
-		pixbuf = gdk_pixbuf_new_from_file (saver->fakepreview);
+		pixbuf = gdk_pixbuf_new_from_file (saver->fakepreview, NULL);
 		gdk_pixbuf_render_to_drawable
 			(pixbuf, (GdkDrawable *) preview_window->window,
 			 preview_window->style->fg_gc[0], 0, 0, 0, 0,
@@ -332,7 +332,7 @@ show_blank_preview (void)
 	if (pixbuf)
 		gdk_pixbuf_unref (pixbuf);
 
-	pixbuf = gdk_pixbuf_new_from_file (GNOMECC_PIXMAPS_DIR "/blank-screen.png");
+	pixbuf = gdk_pixbuf_new_from_file (GNOMECC_PIXMAPS_DIR "/blank-screen.png", NULL);
 	gdk_pixbuf_render_to_drawable
 		(pixbuf, (GdkDrawable *) preview_window->window,
 		 preview_window->style->fg_gc[0], 0, 0, 0, 0,
@@ -344,16 +344,7 @@ show_blank_preview (void)
 static GdkWindow *
 gdk_window_new_from_xwindow (Window xwindow) 
 {
-	GdkWindow *window;
-	GdkWindowPrivate *window_priv;
-
-	window_priv = g_new0 (GdkWindowPrivate, 1);
-	window = (GdkWindow *) window_priv;
-	window_priv->xdisplay = gdk_display;
-	window_priv->xwindow = xwindow;
-	window_priv->destroyed = FALSE;
-
-	return window;
+	return gdk_window_foreign_new (xwindow);
 }
 
 static GdkWindow *

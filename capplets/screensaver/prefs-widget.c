@@ -149,8 +149,8 @@ guint prefs_widget_get_type (void)
 			sizeof (PrefsWidgetClass),
 			(GtkClassInitFunc) prefs_widget_class_init,
 			(GtkObjectInitFunc) prefs_widget_init,
-			(GtkArgSetFunc) NULL,
-			(GtkArgGetFunc) NULL,
+			NULL,
+			NULL,
 		};
 
 		prefs_widget_type =
@@ -194,7 +194,7 @@ prefs_widget_init (PrefsWidget *prefs_widget)
 	prefs_widget->priv = g_new0 (PrefsWidgetPrivate, 1);
 	prefs_widget->priv->xml =
 		glade_xml_new (GNOMECC_GLADE_DIR "/screensaver-properties.glade",
-			       NULL); 
+			       NULL, NULL); 
 	if (!prefs_widget->priv->xml)
 		return;
 	
@@ -328,7 +328,7 @@ prefs_widget_class_init (PrefsWidgetClass *class)
 
 	prefs_widget_signals[STATE_CHANGED_SIGNAL] =
 		gtk_signal_new ("pref-changed", GTK_RUN_FIRST,
-				object_class->type,
+				G_OBJECT_CLASS_TYPE (object_class),
 				GTK_SIGNAL_OFFSET (PrefsWidgetClass,
 						   state_changed),
 				gtk_signal_default_marshaller,
@@ -336,14 +336,11 @@ prefs_widget_class_init (PrefsWidgetClass *class)
 
 	prefs_widget_signals[ACTIVATE_DEMO_SIGNAL] =
 		gtk_signal_new ("activate_demo", GTK_RUN_FIRST,
-				object_class->type,
+				G_OBJECT_CLASS_TYPE (object_class),
 				GTK_SIGNAL_OFFSET (PrefsWidgetClass,
 						   activate_demo),
 				gtk_signal_default_marshaller,
 				GTK_TYPE_NONE, 0);
-
-	gtk_object_class_add_signals (object_class, prefs_widget_signals,
-				      LAST_SIGNAL);
 
 	class->state_changed = NULL;
 	object_class->destroy = prefs_widget_destroy;

@@ -30,7 +30,7 @@
 
 #include <X11/Intrinsic.h>
 #include <X11/Shell.h>
-#include <gdk/gdkprivate.h>
+#include <gdk/gdkx.h>
 
 #include "resources.h"
 #include "rc-parse.h"

@@ -206,7 +206,7 @@ parse_config_file (const char *file_name)
 	gint line_no;
 	char *line, *key, *value;
 
-	if (!g_file_test (file_name, G_FILE_TEST_ISFILE))
+	if (!g_file_test (file_name, G_FILE_TEST_IS_REGULAR))
 		return NULL;
 
 	in = fopen (file_name, "r");
@@ -562,7 +562,7 @@ preferences_save_to_file (Preferences *prefs)
 	   be world-readable (so that the daemon, running as "nobody", will
 	   still be able to read it.)
 	*/
-	if (g_file_test (name, G_FILE_TEST_ISFILE)) {
+	if (g_file_test (name, G_FILE_TEST_IS_REGULAR)) {
 		mode_t mode = st.st_mode;
 		mode |= S_IRUSR | S_IWUSR;                /* read/write by user */
 		mode &= ~(S_IXUSR | S_IXGRP | S_IXOTH);   /* executable by none */

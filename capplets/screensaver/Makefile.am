@@ -4,7 +4,7 @@ cappletname = screensaver
 cappletgroup =
 bin_PROGRAMS = screensaver-properties-capplet
 
-screensaver_properties_capplet_LDADD = $(GNOMECC_CAPPLETS_LIBS) -lXt
+screensaver_properties_capplet_LDADD = @OLD_CAPPLET_LIBS@ -lXt
 screensaver_properties_capplet_SOURCES = \
 	main.c \
 	prefs-widget.c				prefs-widget.h\
@@ -17,6 +17,7 @@ screensaver_properties_capplet_SOURCES = \
 	daemon.c					daemon.h\
 	rc-parse.c				rc-parse.h\
 	resources.c				resources.h\
+	gnome-startup.c	gnome-startup.h \
 	XScreenSaver_ad.h
 
 pixmaps_DATA = no-hack.png blank-screen.png
@@ -37,7 +38,7 @@ install-data-local:
 install-data-am: install-data-local
 ####@###GNOMECC_CAPPLETS_DESKTOP_IN_RULE@
 
-INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)
+INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS) @OLD_CAPPLET_CFLAGS@
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
 EXTRA_DIST = $(GNOMECC_CAPPLETS_EXTRA_DIST) $(pixmaps_DATA) 
 iconsdir   = $(GNOMECC_ICONS_DIR)

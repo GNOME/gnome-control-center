@@ -34,7 +34,7 @@
 #include <dirent.h>
 
 #include <gnome.h>
-#include <parser.h>
+#include <libxml/parser.h>
 
 #include "preferences.h"
 #include "preview.h"
@@ -435,7 +435,7 @@ xml_get_programs_list (xmlNodePtr programs_node)
 	Screensaver *saver;
 	gint id = 0;
 
-	for (node = programs_node->childs; node; node = node->next) {
+	for (node = programs_node->children; node; node = node->next) {
 		saver = screensaver_read_xml (node);
 		if (!saver) continue;
 		saver->id = id++;
@@ -462,7 +462,7 @@ preferences_read_xml (xmlDocPtr xml_doc)
 	if (strcmp (root_node->name, "screensaver-prefs"))
 		return NULL;
 
-	for (node = root_node->childs; node; node = node->next) {
+	for (node = root_node->children; node; node = node->next) {
 		if (!strcmp (node->name, "verbose"))
 			prefs->verbose = xml_read_bool (node);
 		else if (!strcmp (node->name, "lock"))
@@ -657,7 +657,7 @@ parse_arg_default (GString *s, xmlNodePtr node)
 	g_string_append_c (s, ' ');
 	g_string_append (s, arr[0]);
 	g_string_append (s, val);
-	if (arr[1] && arg[2])
+	if (arr[1] && arr[2])
 		g_string_append (s, arr[2]);
 }
 
@@ -680,7 +680,7 @@ screensaver_read_xml (xmlNodePtr saver_node)
 
 	args = g_string_new (saver->name);
 
-	for (node = saver_node->childs; node; node = node->next) {
+	for (node = saver_node->children; node; node = node->next) {
 		if (!strcmp (node->name, "command-line"))
 			saver->command_line =
 				g_strdup (xmlNodeGetContent (node));
@@ -757,7 +757,7 @@ screensaver_new_from_file (const gchar *filename)
 	if (!doc)
 		return NULL;
 
-	node = doc->root;
+	node = doc->children;
 	if (!node)
 	{
 		xmlFreeDoc (doc);

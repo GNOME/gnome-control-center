@@ -26,7 +26,7 @@
 
 #include <sys/time.h>
 #include <gtk/gtk.h>
-#include <tree.h>
+#include <libxml/tree.h>
 
 enum _SelectionMode {
 	SM_DISABLE_SCREENSAVER,
