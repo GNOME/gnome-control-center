@@ -74,7 +74,6 @@ static GObjectClass *parent_class;
 static void mime_edit_dialog_init        (MimeEditDialog *mime_edit_dialog,
 					  MimeEditDialogClass *class);
 static void mime_edit_dialog_class_init  (MimeEditDialogClass *class);
-static void mime_edit_dialog_base_init   (MimeEditDialogClass *class);
 
 static void mime_edit_dialog_set_prop    (GObject        *object, 
 					  guint           prop_id,
@@ -106,6 +105,7 @@ static void response_cb                  (MimeEditDialog *dialog,
 
 static void update_sensitivity           (MimeEditDialog *dialog);
 
+
 GType
 mime_edit_dialog_get_type (void)
 {
@@ -114,7 +114,7 @@ mime_edit_dialog_get_type (void)
 	if (!mime_edit_dialog_type) {
 		GTypeInfo mime_edit_dialog_info = {
 			sizeof (MimeEditDialogClass),
-			(GBaseInitFunc) mime_edit_dialog_base_init,
+			(GBaseInitFunc) NULL,
 			NULL, /* GBaseFinalizeFunc */
 			(GClassInitFunc) mime_edit_dialog_class_init,
 			NULL, /* GClassFinalizeFunc */
@@ -132,6 +132,31 @@ mime_edit_dialog_get_type (void)
 	}
 
 	return mime_edit_dialog_type;
+}
+
+/**
+ * mime_edit_editable_enters: Make the "activate" signal of an editable click
+ * the default dialog button.
+ * @dialog: dialog to affect.
+ * @editable: Editable to affect.
+ *
+ * This is a literal copy of gnome_dialog_editable_enters, but not restricted
+ * to GnomeDialogs.
+ *
+ * Normally if there's an editable widget (such as #GtkEntry) in your
+ * dialog, pressing Enter will activate the editable rather than the
+ * default dialog button. However, in most cases, the user expects to
+ * type something in and then press enter to close the dialog. This
+ * function enables that behavior.
+ *
+ **/
+static void
+mime_edit_editable_enters (MimeEditDialog *dialog, GtkEditable *editable)
+{
+	g_signal_connect_swapped (G_OBJECT (editable),
+		"activate",
+		G_CALLBACK (gtk_window_activate_default),
+		GTK_WINDOW (dialog->p->dialog_win));
 }
 
 static void
@@ -168,6 +193,8 @@ mime_edit_dialog_init (MimeEditDialog *dialog, MimeEditDialogClass *class)
 		 GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 		 GTK_STOCK_OK,     GTK_RESPONSE_OK,
 		 NULL);
+	gtk_dialog_set_default_response (GTK_DIALOG (dialog->p->dialog_win),
+		 GTK_RESPONSE_OK);
 
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog->p->dialog_win)->vbox), WID ("edit_widget"), TRUE, TRUE, 0);
 
@@ -179,11 +206,10 @@ mime_edit_dialog_init (MimeEditDialog *dialog, MimeEditDialogClass *class)
 				  (GCallback) use_category_defaults_toggled_cb, dialog);
 
 	g_signal_connect_swapped (G_OBJECT (dialog->p->dialog_win), "response", (GCallback) response_cb, dialog);
-}
 
-static void
-mime_edit_dialog_base_init (MimeEditDialogClass *class) 
-{
+	mime_edit_editable_enters (dialog, GTK_EDITABLE (WID ("description_entry")));
+	mime_edit_editable_enters (dialog, GTK_EDITABLE (WID ("mime_type_entry")));
+	mime_edit_editable_enters (dialog, GTK_EDITABLE (WID ("category_entry")));
 }
 
 static void
@@ -262,7 +288,8 @@ mime_edit_dialog_set_prop (GObject *object, guint prop_id, const GValue *value, 
 		mime_edit_dialog->p->is_add = g_value_get_boolean (value);
 
 		if (mime_edit_dialog->p->is_add) {
-			mime_edit_dialog->p->info = mime_type_info_new (NULL, NULL);
+			mime_edit_dialog->p->info = mime_type_info_new (NULL,
+				mime_edit_dialog->p->model);
 			setup_add_dialog (mime_edit_dialog);
 			gtk_window_set_title (GTK_WINDOW (mime_edit_dialog->p->dialog_win),
 				(_("Add file type")));
@@ -350,12 +377,19 @@ mime_edit_dialog_new (GtkTreeModel *model, MimeTypeInfo *info)
 }
 
 GObject *
-mime_add_dialog_new (GtkTreeModel *model) 
+mime_add_dialog_new (GtkTreeModel *model, GtkWindow *parent) 
 {
-	return g_object_new (mime_edit_dialog_get_type (),
-			     "model", model,
-			     "is-add", TRUE,
-			     NULL);
+	GObject *obj = g_object_new (mime_edit_dialog_get_type (),
+		"model", model,	/* must be before is-add */
+		NULL);
+	g_object_set (obj,
+		      "is-add", TRUE,
+		      NULL);
+	if (parent != NULL)
+		gtk_window_set_transient_for (
+			GTK_WINDOW (MIME_EDIT_DIALOG (obj)->p->dialog_win),
+			parent);
+	return obj;
 }
 
 static void
@@ -387,9 +421,6 @@ fill_dialog (MimeEditDialog *dialog)
 	dialog->p->use_cat_dfl = dialog->p->info->use_category;
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("use_category_defaults_toggle")), dialog->p->use_cat_dfl);
 	update_sensitivity (dialog);
-
-	if (dialog->p->info->mime_type != NULL && *dialog->p->info->mime_type != '\0')
-		gtk_widget_set_sensitive (WID ("mime_type_entry"), FALSE);
 
 	gnome_icon_entry_set_filename (GNOME_ICON_ENTRY (WID ("icon_entry")), mime_type_info_get_icon_path (dialog->p->info));
 

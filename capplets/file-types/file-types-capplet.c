@@ -53,7 +53,8 @@ add_mime_cb (GtkButton *button, GladeXML *dialog)
 	treeview = GTK_TREE_VIEW (WID ("mime_types_tree"));
 	model = gtk_tree_view_get_model (treeview);
 
-	add_dialog = mime_add_dialog_new (model);
+	add_dialog = mime_add_dialog_new (model,
+		GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (button))));
 }
 
 static void
@@ -285,9 +286,11 @@ main (int argc, char **argv)
 		gtk_widget_show_all (WID ("main_dialog"));
 	} else {
 		model = GTK_TREE_MODEL (mime_types_model_new (FALSE));
-		info = mime_type_info_new (mime_type, model);
-		mime_dialog = mime_edit_dialog_new (model, info);
-
+		if (strcmp (GNOME_VFS_MIME_TYPE_UNKNOWN, mime_type)) {
+			info = mime_type_info_new (mime_type, model);
+			mime_dialog = mime_edit_dialog_new (model, info);
+		} else
+			mime_dialog = mime_add_dialog_new (model, NULL);
 		g_signal_connect (mime_dialog, "done", (GCallback) dialog_done_cb, info);
 	}
 

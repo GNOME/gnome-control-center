@@ -12,7 +12,6 @@
 #include <config.h>
 
 #include "file-types-icon-entry.h"
-#include "file-types-capplet.h"
 
 #include <gdk_imlib.h>
 #include <gnome.h>

@@ -104,11 +104,22 @@ model_entry_insert_child (ModelEntry *parent, ModelEntry *child, GtkTreeModel *m
 	for (tmp = &parent->first_child; *tmp != NULL; tmp = &((*tmp)->next)) {
 		if ((*tmp)->type < child->type)
 			continue;
-		if ((*tmp)->type > child->type ||
-		    (child->type == MODEL_ENTRY_CATEGORY &&
-		     strcmp (MIME_CATEGORY_INFO (child)->name,
-			     MIME_CATEGORY_INFO (*tmp)->name) < 0))
-				break;
+		if ((*tmp)->type > child->type)
+			break;
+
+		if (child->type == MODEL_ENTRY_CATEGORY) {
+		     if (MIME_CATEGORY_INFO (child)->name != NULL &&
+			 MIME_CATEGORY_INFO (*tmp)->name  != NULL &&
+			 strcmp (MIME_CATEGORY_INFO (child)->name,
+				 MIME_CATEGORY_INFO (*tmp)->name) < 0)
+			 break;
+		} else if (child->type == MODEL_ENTRY_MIME_TYPE) {
+		     if (MIME_TYPE_INFO (child)->description != NULL &&
+			 MIME_TYPE_INFO (*tmp)->description  != NULL &&
+			 strcmp (MIME_TYPE_INFO (child)->description,
+				 MIME_TYPE_INFO (*tmp)->description) < 0)
+			 break;
+		}
 	}
 
 	child->parent = parent;

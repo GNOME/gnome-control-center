@@ -240,10 +240,13 @@ mime_type_info_save (const MimeTypeInfo *info)
 	uuid_t  app_uuid;
 	gchar   app_uuid_str[100];
 
+	gnome_vfs_mime_freeze ();
 	gnome_vfs_mime_set_description (info->mime_type, info->description);
 	gnome_vfs_mime_set_icon (info->mime_type, info->icon_name);
 
-	if (info->default_action != NULL && info->default_action->command != NULL && *info->default_action->command != '\0') {
+	if (info->default_action != NULL &&
+	    info->default_action->command != NULL &&
+	    info->default_action->command [0] != '\0') {
 		tmp = g_strdup_printf ("Custom %s", info->mime_type);
 
 		if (info->default_action->name == NULL)
@@ -254,8 +257,7 @@ mime_type_info_save (const MimeTypeInfo *info)
 			uuid_unparse (app_uuid, app_uuid_str);
 
 			info->default_action->id = g_strdup (app_uuid_str);
-		}
-		else if (!strcmp (tmp, info->default_action->name)) {
+		} else if (!strcmp (tmp, info->default_action->name)) {
 			gnome_vfs_application_registry_set_value (info->default_action->id, "command",
 								  info->default_action->command);
 			gnome_vfs_application_registry_set_bool_value (info->default_action->id, "requires_terminal",
@@ -285,6 +287,7 @@ mime_type_info_save (const MimeTypeInfo *info)
 	gnome_vfs_mime_set_value (info->mime_type, "use_category_default", info->use_category ? "yes" : "no");
 
 	gnome_vfs_application_registry_sync ();
+	gnome_vfs_mime_thaw ();
 }
 
 void

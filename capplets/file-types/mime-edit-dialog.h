@@ -56,7 +56,7 @@ GType mime_edit_dialog_get_type         (void);
 
 GObject *mime_edit_dialog_new           (GtkTreeModel *model,
 					 MimeTypeInfo *info);
-GObject *mime_add_dialog_new            (GtkTreeModel *model);
+GObject *mime_add_dialog_new            (GtkTreeModel *model, GtkWindow *parent);
 
 G_END_DECLS
 

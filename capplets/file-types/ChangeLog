@@ -1,3 +1,27 @@
+2002-06-05  Jody Goldberg <jody@gnome.org>
+
+	* mime-edit-dialog.c (mime_add_dialog_new) :
+
+	* mime-edit-dialog.c (mime_edit_editable_enters) : new.
+	(fill_dialog) : mime type is always sensitive.
+	(mime_edit_dialog_init) : use mime_edit_editable_enters and set the
+	  default response.
+	(mime_add_dialog_new) : forceably define the model before is-add and
+	  set the parent.
+
+
+	* model-entry.c (model_entry_insert_child) : be paranoid.  Sort the
+	  mime entries too.
+
+	* file-types-capplet.c (main) : !KLUDGE! if we are editing
+	  application/octet-stream assume that people really want to create a
+	  new mime type.
+
+2002-06-04  Jody Goldberg <jody@gnome.org>
+
+	* mime-type-info.c (mime_type_info_save) : Add a freeze/thaw around
+	  the assignments.
+
 2002-05-31  Jody Goldberg <jody@gnome.org>
 
 	* mime-type-info.c (get_category_name) : disable debug spew.
