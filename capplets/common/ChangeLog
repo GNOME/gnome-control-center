@@ -1,3 +1,12 @@
+2005-01-27  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* gnome-theme-info.c: (top_theme_dir_changed),
+	(top_icon_theme_dir_changed), (real_add_top_theme_dir_monitor):
+	Try to fix bug #149236 by not freeing stuff already being free'd
+	by the hash destroy_func. It will leak a bit more, but that can
+	be fixed later. Please test this and report success in the report
+	mentioned above.
+
 2005-01-02  Thomas Cataldo  <thomas.cataldo@aliacom.fr>
 
 	* gconf-property-editor.c: (gconf_property_editor_finalize): plug

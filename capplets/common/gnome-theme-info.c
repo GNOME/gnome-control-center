@@ -953,7 +953,6 @@ top_theme_dir_changed (GnomeVFSMonitorHandle *handle,
 	  g_hash_table_remove (handle_hash, name);
 	  g_free (monitor_data);
 	}
-      g_free (name);
     }
   gnome_vfs_uri_unref (common_theme_dir_uri);
 }
@@ -1005,7 +1004,6 @@ top_icon_theme_dir_changed (GnomeVFSMonitorHandle    *handle,
 	  g_hash_table_remove (handle_hash, name);
 	  g_free (monitor_data);
 	}
-      g_free (name);
     }
   gnome_vfs_uri_unref (common_icon_theme_dir_uri);
 }
@@ -1187,7 +1185,7 @@ real_add_top_theme_dir_monitor (GnomeVFSURI  *uri,
    * use it to remove the monitor handles when a dir is removed.
    */
   tuple = g_new0 (CallbackTuple, 1);
-  tuple->handle_hash = g_hash_table_new_full (g_str_hash, g_str_equal, (GDestroyNotify)g_free, NULL);
+  tuple->handle_hash = g_hash_table_new_full (g_str_hash, g_str_equal, (GDestroyNotify)g_free, (GDestroyNotify)g_free);
   tuple->priority = priority;
 
   /* Check the URI */
