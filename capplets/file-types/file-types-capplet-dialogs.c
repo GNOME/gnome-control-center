@@ -672,27 +672,46 @@ static void
 show_new_application_window (void)
 {
         GtkWidget *app_entry, *command_entry;
-	GtkWidget *hbox;
 	GtkWidget *dialog;
 	GtkWidget *label;
-	
-        dialog = gnome_dialog_new (_("Add New Application"), GNOME_STOCK_BUTTON_OK, GNOME_STOCK_BUTTON_CANCEL, NULL);	
+	GtkWidget *behavior_frame, *frame_vbox;
+	GtkWidget *check_box;
+	GtkWidget *table;	
+        dialog = gnome_dialog_new (_("New Application"), GNOME_STOCK_BUTTON_OK, GNOME_STOCK_BUTTON_CANCEL, NULL);	
+
+	/* Create table */
+	table = gtk_table_new (3, 2, FALSE);
+	gtk_container_add (GTK_CONTAINER (GNOME_DIALOG (dialog)->vbox), table);	
+	gtk_table_set_row_spacings (GTK_TABLE (table), GNOME_PAD_SMALL);
+	gtk_table_set_col_spacings (GTK_TABLE (table), GNOME_PAD_SMALL);
 
 	label = gtk_label_new (_("Application Name:"));
 	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
-	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+	gtk_table_attach_defaults ( GTK_TABLE (table), label, 0, 1, 0, 1);
+
 	app_entry = gtk_entry_new ();
-        gtk_box_pack_start (GTK_BOX (hbox), app_entry, TRUE, TRUE, 0);
-        gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), hbox, FALSE, FALSE, 0);	
+	gtk_table_attach_defaults ( GTK_TABLE (table), app_entry, 1, 2, 0, 1);
 
 	label = gtk_label_new (_("Application Command:"));
 	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
-	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+	gtk_table_attach_defaults ( GTK_TABLE (table), label, 0, 1, 1, 2);
+
 	command_entry = gtk_entry_new ();
-        gtk_box_pack_start (GTK_BOX (hbox), command_entry, TRUE, TRUE, 0);
-        gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), hbox, FALSE, FALSE, 0);	
+	gtk_table_attach_defaults ( GTK_TABLE (table), command_entry, 1, 2, 1, 2);
+
+        /* Open Behavior frame */
+	behavior_frame = gtk_frame_new (_("Open Behavior"));
+	gtk_table_attach_defaults ( GTK_TABLE (table), behavior_frame, 0, 2, 2, 3);
+	
+	frame_vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
+	gtk_container_add (GTK_CONTAINER (behavior_frame), frame_vbox);
+
+	check_box = gtk_check_button_new_with_label (_("Can open multiple files"));
+	gtk_box_pack_start (GTK_BOX (frame_vbox), check_box, FALSE, FALSE, 0);
+
+	check_box = gtk_check_button_new_with_label (_("Can open from URI"));
+	gtk_box_pack_start (GTK_BOX (frame_vbox), check_box, FALSE, FALSE, 0);
+		
 
         gtk_widget_show_all (GNOME_DIALOG (dialog)->vbox);
 
@@ -714,40 +733,41 @@ show_new_application_window (void)
 	        	break;
 	}        
 }
-
+	
 static void
 show_edit_application_window (void)
 {
         GtkWidget *app_entry, *command_entry;
-	GtkWidget *hbox, *vbox;
 	GtkWidget *dialog;
 	GtkWidget *label;
 	GtkWidget *behavior_frame, *frame_vbox;
 	GtkWidget *check_box;
-	
+	GtkWidget *table;	
         dialog = gnome_dialog_new (_("Edit Application"), GNOME_STOCK_BUTTON_OK, GNOME_STOCK_BUTTON_CANCEL, NULL);	
+
+	/* Create table */
+	table = gtk_table_new (3, 2, FALSE);
+	gtk_container_add (GTK_CONTAINER (GNOME_DIALOG (dialog)->vbox), table);	
+	gtk_table_set_row_spacings (GTK_TABLE (table), GNOME_PAD_SMALL);
+	gtk_table_set_col_spacings (GTK_TABLE (table), GNOME_PAD_SMALL);
 
 	label = gtk_label_new (_("Application Name:"));
 	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
-	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+	gtk_table_attach_defaults ( GTK_TABLE (table), label, 0, 1, 0, 1);
+
 	app_entry = gtk_entry_new ();
-        gtk_box_pack_start (GTK_BOX (hbox), app_entry, TRUE, TRUE, 0);
-        gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), hbox, FALSE, FALSE, 0);	
+	gtk_table_attach_defaults ( GTK_TABLE (table), app_entry, 1, 2, 0, 1);
 
 	label = gtk_label_new (_("Application Command:"));
 	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
-	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+	gtk_table_attach_defaults ( GTK_TABLE (table), label, 0, 1, 1, 2);
+
 	command_entry = gtk_entry_new ();
-        gtk_box_pack_start (GTK_BOX (hbox), command_entry, TRUE, TRUE, 0);
-        gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), hbox, FALSE, FALSE, 0);
+	gtk_table_attach_defaults ( GTK_TABLE (table), command_entry, 1, 2, 1, 2);
 
         /* Open Behavior frame */
-	vbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
-	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), vbox, FALSE, FALSE, 0);	
 	behavior_frame = gtk_frame_new (_("Open Behavior"));
-	gtk_box_pack_start (GTK_BOX (vbox), behavior_frame, FALSE, FALSE, 0);
+	gtk_table_attach_defaults ( GTK_TABLE (table), behavior_frame, 0, 2, 2, 3);
 	
 	frame_vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
 	gtk_container_add (GTK_CONTAINER (behavior_frame), frame_vbox);
