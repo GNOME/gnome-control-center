@@ -53,53 +53,22 @@ static Preferences *prefs;
 static Preferences *old_prefs;
 static PrefsWidget *prefs_widget;
 
-static CappletWidget *capplet;
+static GtkWidget *capplet;
 
-#ifdef HAVE_XIMIAN_ARCHIVER
-
-static ConfigArchiver_Archive archive;
-static gboolean outside_location;
-
-static void
-store_archive_data (void) 
-{
-	ConfigArchiver_Location location;
-	xmlDocPtr xml_doc;
-	CORBA_Environment ev;
-
-	if (archive == CORBA_OBJECT_NIL)
-		return;
-
-	CORBA_exception_init (&ev);
-
-	if (capplet_get_location () == NULL)
-		location = ConfigArchiver_Archive__get_currentLocation (archive, &ev);
-	else
-		location = ConfigArchiver_Archive_getLocation
-			(archive, capplet_get_location (), &ev);
-
-	if (BONOBO_EX (&ev) || location == CORBA_OBJECT_NIL) {
-		g_critical ("Could not open location %s", capplet_get_location ());
-		return;
-	}
-
-	xml_doc = preferences_write_xml (prefs);
-	location_client_store_xml (location, "screensaver-properties-capplet",
-				   xml_doc, STORE_MASK_PREVIOUS, &ev);
-	xmlFreeDoc (xml_doc);
-	bonobo_object_release_unref (archive, NULL);
-	bonobo_object_release_unref (location, NULL);
-
-	CORBA_exception_free (&ev);
-}
-
-#endif /* HAVE_XIMIAN_ARCHIVER */
+static gint cap_session_init = 0;
+static struct poptOption cap_options[] = {
+	{"init-session-settings", '\0', POPT_ARG_NONE, &cap_session_init, 0,
+	 N_("Initialize session settings"), NULL},
+	{NULL, '\0', 0, NULL, 0}
+};
 
 static void 
 state_changed_cb (GtkWidget *widget) 
 {
+#if 0
 	if (!prefs->frozen)
 		capplet_widget_state_changed (capplet, TRUE);
+#endif
 }
 
 static void
@@ -224,25 +193,45 @@ demo_cb (GtkWidget *widget)
 	preferences_save (prefs);
 }
 
+static void
+response_cb (GtkDialog *dialog, gint response_id, gpointer data)
+{
+	gboolean old_sm;
+
+	switch (response_id)
+	{
+	case GTK_RESPONSE_NONE:
+	case GTK_RESPONSE_CLOSE:
+		close_preview ();
+		gtk_main_quit ();
+		break;
+	case GTK_RESPONSE_APPLY:
+		try_cb (GTK_WIDGET (dialog));
+		break;
+	case GTK_RESPONSE_HELP:
+	//	help_all ();
+		break;
+	}
+}
+
 static void 
 setup_capplet_widget (void)
 {
-	capplet = CAPPLET_WIDGET (capplet_widget_new ());
-
-	gtk_signal_connect (GTK_OBJECT (capplet), "try", 
-			    GTK_SIGNAL_FUNC (try_cb), NULL);
-	gtk_signal_connect (GTK_OBJECT (capplet), "revert", 
-			    GTK_SIGNAL_FUNC (revert_cb), NULL);
-	gtk_signal_connect (GTK_OBJECT (capplet), "ok", 
-			    GTK_SIGNAL_FUNC (ok_cb), NULL);
-	gtk_signal_connect (GTK_OBJECT (capplet), "cancel", 
-			    GTK_SIGNAL_FUNC (cancel_cb), NULL);		
-
+	capplet = gtk_dialog_new_with_buttons (_("Default Applications"), NULL,
+		  			 -1,
+					 GTK_STOCK_HELP, GTK_RESPONSE_HELP,
+					 GTK_STOCK_APPLY, GTK_RESPONSE_APPLY,
+					 GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
+					 NULL);
+	g_signal_connect (G_OBJECT (capplet), "response", response_cb, NULL);
+			
 	prefs->frozen++;
+	
+	prefs_widget = PREFS_WIDGET (prefs_widget_new (GTK_WINDOW (capplet)));
 
-	prefs_widget = PREFS_WIDGET (prefs_widget_new (GTK_WINDOW (capplet->dialog)));
-
-	gtk_container_add (GTK_CONTAINER (capplet), GTK_WIDGET (prefs_widget));
+	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (capplet)->vbox),
+			    GTK_WIDGET (prefs_widget),
+			    TRUE, TRUE, 0);
 
 	set_preview_window (PREFS_WIDGET (prefs_widget)->preview_window);
 
@@ -328,12 +317,6 @@ do_restore_from_defaults (void)
 int
 main (int argc, char **argv)
 {
-#ifdef HAVE_XIMIAN_ARCHIVER
-	CORBA_ORB orb;
-	CORBA_Environment ev;
-	CORBA_char *current_location_id = NULL;
-#endif /* HAVE_XIMIAN_ARCHIVER */
-
 	GnomeClient *client;
 	GnomeClientFlags flags;
 	gint token, res;
@@ -342,38 +325,10 @@ main (int argc, char **argv)
 	bindtextdomain (PACKAGE, GNOMELOCALEDIR);
 	textdomain (PACKAGE);
 
-	res = gnome_capplet_init ("screensaver-properties",
-				  VERSION, argc, argv, NULL,
-				  0, NULL);
-
-	if (res < 0) {
-		g_error ("Could not initialize the capplet.");
-	}
-	else if (res == 3) {
-#ifdef HAVE_XIMIAN_ARCHIVER
-		do_get_xml ();
-#endif /* HAVE_XIMIAN_ARCHIVER */
-		return 0;
-	}
-	else if (res == 4) {
-#ifdef HAVE_XIMIAN_ARCHIVER
-		do_set_xml (TRUE);
-#endif /* HAVE_XIMIAN_ARCHIVER */
-		return 0;
-	}
-	else if (res == 5) {
-		do_restore_from_defaults ();
-		return 0;
-	}
-
-	glade_gnome_init ();
-
-#ifdef HAVE_XIMIAN_ARCHIVER
-	CORBA_exception_init (&ev);
-	orb = oaf_init (argc, argv);
-	if (!bonobo_init (orb, CORBA_OBJECT_NIL, CORBA_OBJECT_NIL))
-		g_critical ("Could not initialize Bonobo");
-#endif /* HAVE_XIMIAN_ARCHIVER */
+	gnome_program_init ("screensaver-properties", VERSION,
+			    LIBGNOMEUI_MODULE, argc, argv,
+			    GNOME_PARAM_POPT_TABLE, &cap_options,
+			    NULL);
 
 	client = gnome_master_client ();
 	flags = gnome_client_get_flags (client);
@@ -404,39 +359,6 @@ main (int argc, char **argv)
 		(GNOMECC_ICONS_DIR"/gnome-ccscreensaver.png");
 
 	init_resource_database (argc, argv);
-#ifdef HAVE_XIMIAN_ARCHIVER
-	archive = bonobo_get_object ("archive:user-archive", "IDL:ConfigArchiver/Archive:1.0", &ev);
-
-	if (BONOBO_EX (&ev) || archive == CORBA_OBJECT_NIL)
-		g_critical ("Could not resolve archive moniker");
-	else
-		current_location_id = ConfigArchiver_Archive__get_currentLocationId (archive, &ev);
-
-	if (capplet_get_location () != NULL &&
-	    current_location_id != NULL &&
-	    strcmp (capplet_get_location (), current_location_id))
-	{
-		outside_location = TRUE;
-		do_set_xml (FALSE);
-		if (prefs == NULL) return -1;
-		prefs->frozen++;
-	} else {
-		outside_location = FALSE;
-		prefs = preferences_new ();
-		preferences_load (prefs);
-	}
-
-	if (current_location_id != NULL)
-		CORBA_free (current_location_id);
-
-	if (!outside_location && token) {
-		if (prefs->selection_mode != SM_DISABLE_SCREENSAVER)
-			start_xscreensaver ();
-		setup_dpms (prefs);
-	}
-
-#else /* !HAVE_XIMIAN_ARCHIVER */
-
 	prefs = preferences_new ();
 	preferences_load (prefs);
 
@@ -446,9 +368,7 @@ main (int argc, char **argv)
 		setup_dpms (prefs);
 	}
 
-#endif /* HAVE_XIMIAN_ARCHIVER */
-
-	if (!res) {
+	if (!cap_session_init) {
 		old_prefs = preferences_clone (prefs);
 		setup_capplet_widget ();
 

@@ -35,6 +35,7 @@
 
 #include <gnome.h>
 #include <libxml/parser.h>
+#include <gconf/gconf-client.h>
 
 #include "preferences.h"
 #include "preview.h"
@@ -381,6 +382,8 @@ clean_saver_list (Preferences *prefs)
 void
 preferences_load (Preferences *prefs) 
 {
+	GConfClient *client;
+	
 	g_return_if_fail (prefs != NULL);
 
 	if (!preferences_load_from_file (prefs))
@@ -392,39 +395,63 @@ preferences_load (Preferences *prefs)
 	read_prefs_from_db (prefs);
 	clean_saver_list (prefs);
 
+	client = gconf_client_get_default ();
+
 	prefs->selection_mode =
-		gnome_config_get_int ("/Screensaver/Default/selection_mode=2");
+		gconf_client_get_int (client,
+				      "/apps/screensaver/selection_mode",
+				      NULL);
 	prefs->power_management = 
-		gnome_config_get_bool ("/Screensaver/Default/use_dpms=FALSE");
+		gconf_client_get_bool (client,
+				       "/apps/screensaver/use_dpms",
+				       NULL);
 	prefs->standby_time = 
-		gnome_config_get_int ("/Screensaver/Default/standby_time=0");
+		gconf_client_get_int (client,
+				      "/apps/screensaver/standby_time",
+				      NULL);
 	prefs->suspend_time = 
-		gnome_config_get_int ("/Screensaver/Default/suspend_time=0");
+		gconf_client_get_int (client,
+				      "/apps/screensaver/suspend_time",
+				      NULL);
 	prefs->power_down_time = 
-		gnome_config_get_int ("/Screensaver/Default/shutdown_time=20");
+		gconf_client_get_int (client,
+				      "/apps/screensaver/shutdown_time",
+				      NULL);
+
+	g_object_unref (G_OBJECT (client));
 }
 
 void 
 preferences_save (Preferences *prefs) 
 {
+	GConfClient *client;
+
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (prefs->config_db != NULL);
 
 	store_prefs_in_db (prefs);
 
 	preferences_save_to_file (prefs);
+	
+	client = gconf_client_get_default ();
 
-	gnome_config_set_int ("/Screensaver/Default/selection_mode",
-			      prefs->selection_mode);
-	gnome_config_set_bool ("/Screensaver/Default/use_dpms",
-			       prefs->power_management);
-	gnome_config_set_int ("/Screensaver/Default/standby_time",
-			      prefs->standby_time);
-	gnome_config_set_int ("/Screensaver/Default/suspend_time",
-			      prefs->suspend_time);
-	gnome_config_set_int ("/Screensaver/Default/shutdown_time",
-			      prefs->power_down_time);
-	gnome_config_sync ();
+	gconf_client_set_int (client,
+			      "/apps/screensaver/selection_mode",
+			      prefs->selection_mode, NULL);
+	gconf_client_set_bool (client,
+			       "/apps/screensaver/use_dpms",
+			       prefs->power_management, NULL);
+	gconf_client_set_int (client,
+			      "/apps/screensaver/standby_time",
+			      prefs->standby_time, NULL);
+	gconf_client_set_int (client,
+			      "/apps/screensaver/suspend_time",
+			      prefs->suspend_time, NULL);
+	gconf_client_set_int (client,
+			      "/apps/screensaver/shutdown_time",
+			      prefs->power_down_time, NULL);
+	
+	g_object_unref (G_OBJECT (client));
 }
 
 static GList *
