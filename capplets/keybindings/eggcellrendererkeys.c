@@ -18,6 +18,8 @@
 
 #define EGG_CELL_RENDERER_TEXT_PATH "egg-cell-renderer-text"
 
+#define TOOLTIP_TEXT _("<New accelerator...>")
+
 static void             egg_cell_renderer_keys_finalize      (GObject             *object);
 static void             egg_cell_renderer_keys_init          (EggCellRendererKeys *cell_keys);
 static void             egg_cell_renderer_keys_class_init    (EggCellRendererKeysClass *cell_keys_class);
@@ -357,7 +359,7 @@ egg_cell_renderer_keys_get_size (GtkCellRenderer *cell,
   GtkRequisition requisition;
 
   if (keys->sizing_label == NULL)
-    keys->sizing_label = gtk_label_new (_("Type a new accelerator, or press Backspace to clear"));
+    keys->sizing_label = gtk_label_new (TOOLTIP_TEXT);
 
   gtk_widget_size_request (keys->sizing_label, &requisition);
   (* GTK_CELL_RENDERER_CLASS (parent_class)->get_size) (cell, widget, cell_area, x_offset, y_offset, width, height);
@@ -595,12 +597,8 @@ egg_cell_renderer_keys_start_editing (GtkCellRenderer      *cell,
   gtk_widget_modify_fg (label, GTK_STATE_NORMAL,
                         &widget->style->fg[GTK_STATE_SELECTED]);
   
-  if (keys->accel_key != 0)
-    gtk_label_set_text (GTK_LABEL (label),
-			_("Type a new accelerator, or press Backspace to clear"));
-  else
-    gtk_label_set_text (GTK_LABEL (label),
-                        _("Type a new accelerator"));
+  gtk_label_set_text (GTK_LABEL (label),
+		  TOOLTIP_TEXT);
 
   gtk_container_add (GTK_CONTAINER (eventbox), label);
   
