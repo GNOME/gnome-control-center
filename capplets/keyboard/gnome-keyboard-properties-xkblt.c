@@ -40,7 +40,7 @@
 #include "gnome-keyboard-properties-xkb.h"
 
 #define GROUP_SWITCHERS_GROUP "grp"
-#define DEFAULT_GROUP_SWITCH "grp:alt_shift_toggle"
+#define DEFAULT_GROUP_SWITCH "grp:alts_toggle"
 
 static GtkTreeIter current1stLevelIter;
 static const char *current1stLevelId;
