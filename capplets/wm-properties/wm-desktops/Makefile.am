@@ -15,7 +15,7 @@ wmdata_DATA = $(desktop_files)
 EXTRA_DIST = $(desktop_in_in_files)
 
 $(desktop_in_files): %.desktop.in: %.desktop.in.in
-	    sed s#Icon=#Icon=$(GNOMECC_ICONS_DIR)/# < $< > $@
+	    cp $< $@
 
 $(desktop_files): %.desktop: %.desktop.in
 	$(top_builddir)/intltool-merge -d $(top_srcdir)/po $< $@

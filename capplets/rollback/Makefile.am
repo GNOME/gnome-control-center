@@ -13,7 +13,7 @@ rollback_capplet_SOURCES = \
 
 ####@###GNOMECC_CAPPLETS_DESKTOP_IN_RULE@
 $(desktop).in: %.desktop.in: %.desktop.in.in
-	sed -e "s#@DESKTOP_EXEC_LINE@#$(DESKTOP_EXEC_LINE)#" -e "s#Icon=.*#Icon=$(GNOMECC_ICONS_DIR)/${cappletname}-capplet.png#" < $< > ${cappletname}.desktop.in
+	sed -e "s#@DESKTOP_EXEC_LINE@#$(DESKTOP_EXEC_LINE)#" < $< > ${cappletname}.desktop.in
 
 install-data-local:
 	$(mkinstalldirs) $(DESTDIR)$(datadir)/control-center/capplets/$(cappletgroup)

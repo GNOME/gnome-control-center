@@ -22,7 +22,7 @@ CLEANFILES = $(desktop_files) $(desktop_in_files)
 EXTRA_DIST = $(desktop_in_in_files) $(groups_in_in_files) $(pixmaps_DATA)
 
 $(desktop_in_files): %.desktop.in: %.desktop.in.in
-	    sed s#Icon=#Icon=$(GNOMECC_ICONS_DIR)/# < $< > $@
+	    cp $< $@
 
 @INTLTOOL_DESKTOP_RULE@
 
@@ -46,6 +46,6 @@ Gnomeccdir = $(datadir)/gnome/vfolders
 Gnomecc_DATA = $(groups_files)
 
 $(groups_in_files): %.directory.in: %.directory.in.in
-	    sed s#Icon=#Icon=$(pixmapsdir)/# < $< > $@
+	    cp $< $@
 
 @INTLTOOL_DIRECTORY_RULE@

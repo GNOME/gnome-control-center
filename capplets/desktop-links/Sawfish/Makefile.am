@@ -21,7 +21,7 @@ capplets = \
 ##
 
 pixmaps_DATA = $(group_icon)
-pixmapsdir = $(GNOMECC_DATA_DIR)/icons
+pixmapsdir = $(GNOMECC_ICONS_DIR)
 
 
 ##
@@ -55,7 +55,7 @@ Gnomeccdir = $(datadir)/control-center-2/capplets/$(groups)
 Gnomecc_DATA = $(groups_files)
 
 $(groups_in_files): %.directory.in: %.directory.in.in
-	    sed s#Icon=\.*#Icon=$(GNOMECC_ICONS_DIR)/${group_icon}# < $< > $@
+	    cp $< $@
 
 $(groups_files): %.directory: %.directory.in
 	$(top_builddir)/intltool-merge -d $(top_srcdir)/po $< $@
