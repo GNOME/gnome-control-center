@@ -4,6 +4,7 @@ INCLUDES = -I. -I$(srcdir) 				\
 	$(CAPPLET_INCLUDEDIR)				\
 	$(OAF_CFLAGS)					\
 	$(GNOME_INCLUDEDIR)				\
+	$(GTK_CFLAGS)					\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"	\
 	-I$(includedir)					\
 	$(VFS_CFLAGS) $(WERROR)
