@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2002-12-03 02:36+0100\n"
-"PO-Revision-Date: 2002-12-03 02:39+0100\n"
+"POT-Creation-Date: 2002-12-03 17:36+0100\n"
+"PO-Revision-Date: 2002-12-03 17:38+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1835,7 +1835,6 @@ msgid "Select themes for various parts of the desktop"
 msgstr "Välj teman för diverse delar av skrivbordet"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
-#: capplets/theme-switcher/theme-properties.glade.h:6
 msgid "Theme"
 msgstr "Tema"
 
@@ -1858,6 +1857,10 @@ msgstr "Ikoner"
 #: capplets/theme-switcher/theme-properties.glade.h:5
 msgid "New themes can also be installed by dragging them into the window."
 msgstr "Nya teman kan också installeras genom att de dras till fönstret."
+
+#: capplets/theme-switcher/theme-properties.glade.h:6
+msgid "Theme Details"
+msgstr "Temadetaljer"
 
 #: capplets/theme-switcher/theme-properties.glade.h:7
 msgid "Theme Preferences"
@@ -1892,15 +1895,19 @@ msgid "Window Border"
 msgstr "Fönsterram"
 
 #: capplets/theme-switcher/theme-properties.glade.h:15
+msgid "_Details..."
+msgstr "_Detaljer..."
+
+#: capplets/theme-switcher/theme-properties.glade.h:16
 msgid "_Go to theme folder"
 msgstr "_Gå till temamappen"
 
-#: capplets/theme-switcher/theme-properties.glade.h:16
-msgid "_Install New Theme..."
-msgstr "_Installera nytt tema..."
-
 #: capplets/theme-switcher/theme-properties.glade.h:17
-msgid "_Save Theme"
+msgid "_Install theme..."
+msgstr "_Installera tema..."
+
+#: capplets/theme-switcher/theme-properties.glade.h:18
+msgid "_Save theme"
 msgstr "_Spara tema"
 
 #: capplets/theme-switcher/theme-install.glade.h:2
@@ -1915,17 +1922,23 @@ msgstr "_Installera"
 msgid "_Location of new theme:"
 msgstr "_Plats för nytt tema:"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:640
-msgid "Current modified"
-msgstr "Aktuellt ändrat"
-
-#: capplets/theme-switcher/gnome-theme-manager.c:659
+#: capplets/theme-switcher/gnome-theme-manager.c:466
 msgid ""
 "No themes could be found on your system.  This probably means that your "
-"\"Theme Preferences\" dialog was improperly installed."
+"\"Theme Preferences\" dialog was improperly installed, or you haven't "
+"installed the \"gnome-themes\" package."
 msgstr ""
 "Inga teman kunde hittas på ditt system. Detta betyder troligtvis att din "
-"\"Temainställningar\"-dialog inte installerades korrekt."
+"\"Temainställningar\"-dialog inte installerades korrekt, eller att du inte "
+"har installerat paketet \"gnome-themes\"."
+
+#: capplets/theme-switcher/gnome-theme-manager.c:516
+msgid "Custom theme"
+msgstr "Anpassat tema"
+
+#: capplets/theme-switcher/gnome-theme-manager.c:516
+msgid "You can save this theme by pressing the Save Theme button."
+msgstr "Du kan spara detta tema genom att trycka på knappen Spara tema."
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
@@ -2410,6 +2423,10 @@ msgid ""
 "most common. \"bgr\" - blue on left. \"vrgb\" - red on top. \"vbgr\" - red "
 "on bottom."
 msgstr ""
+"Ordningen för element underbildpunktselement på en LCD-skärm. Används endast "
+"då alntialiasing är satt till \"rgba\". Möjliga värden är: \"rgb\" - röd "
+"till vänster, vanligast. \"bgr\" - blå till vänster. \"vrgb\" - röd överst. "
+"\"vbgr\" - röd nederst."
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:7
 msgid ""
@@ -2417,6 +2434,10 @@ msgid ""
 "\"none\" - no antialiasing. \"grayscale\" - standard grayscale antialising. "
 "\"rgba\" - subpixel antialising. (LCD screens only)."
 msgstr ""
+"Typen av antialiasing att använda vid rendering av typsnitt. Möjliga värden "
+"är: \"none\" - ingen antialiasing. \"grayscale\" - standard "
+"gråskaleantialiasing. \"rgba\" - underbildpunktsantialiasing (endast LCD-"
+"skärmar)."
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:8
 msgid ""
@@ -2424,6 +2445,23 @@ msgid ""
 "\" - no hinting, \"slight\", \"medium\", and \"full\" - as much hinting as "
 "possible; may cause distortion of letter forms."
 msgstr ""
+"Typen av tipsande att använda vid rendering av typsnitt. Möjliga värden är: "
+"\"none\" - inget tipsande, \"slight\", \"medium\" och \"full\" - så mycket "
+"tipsande som möjligt; kan orsaka förvrängning av bokstavsformer."
+
+#~ msgid "Current modified"
+#~ msgstr "Aktuellt ändrat"
+
+#~ msgid ""
+#~ "The order of subpixel elements on an LCD screen; only used when "
+#~ "antialising is set to \"rgba\". Possible values are: \"rgb\" - red on "
+#~ "left, most common. \"bgr\" - blue on left. \"vrgb\" - red on top. \"vbgr"
+#~ "\" - red on bottom."
+#~ msgstr ""
+#~ "Ordningen för underbildpunktselement på en LCD-skärm. Används endast då "
+#~ "alntialiasing är satt till \"rgba\". Möjliga värden är: \"rgb\" - röd "
+#~ "till vänster, vanligast. \"bgr\" - blå till vänster. \"vrgb\" - röd "
+#~ "överst. \"vbgr\" - röd nederst."
 
 #~ msgid "Super"
 #~ msgstr "Super"
@@ -3283,9 +3321,6 @@ msgstr ""
 
 #~ msgid "&lt;i&gt;Small&lt;/i&gt;"
 #~ msgstr "&lt;i&gt;Liten&lt;/i&gt;"
-
-#~ msgid "Theme Properties"
-#~ msgstr "Temaegenskaper"
 
 #~ msgid "Icons and Text"
 #~ msgstr "Ikoner och text"
