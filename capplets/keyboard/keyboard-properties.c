@@ -172,7 +172,7 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 
 	peditor = gconf_peditor_new_boolean (changeset, "/gnome/desktop/peripherals/keyboard/repeat", WID ("repeat_toggle"));
 	gconf_peditor_new_select_menu (changeset, "/gnome/desktop/peripherals/keyboard/delay", WID ("delay_menu"));
-	gconf_peditor_new_select_menu (changeset, "/gnome/desktop/peripherals/keyboard/rate", WID ("repate_menu"));
+	gconf_peditor_new_select_menu (changeset, "/gnome/desktop/peripherals/keyboard/rate", WID ("repeat_menu"));
 
 	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor), WID ("repeat_table"));
 
@@ -193,19 +193,12 @@ static GladeXML *
 create_dialog (void)
 {
 	GladeXML *dialog;
-	GtkWidget *widget, *pixmap;
 
 	dialog = glade_xml_new (GNOMECC_GLADE_DIR "/keyboard-properties.glade", "prefs_widget", NULL);
-	widget = glade_xml_get_widget (dialog, "prefs_widget");
 
-#if 0
 	/* Minor GUI addition */
-	pixmap = gnome_stock_pixmap_widget (WID ("bell_test_button"),
-					    GNOME_STOCK_PIXMAP_VOLUME);
-	gtk_box_pack_start (GTK_BOX (WID ("bell_test_holder")), pixmap,
-			    TRUE, TRUE, 0);
-	gtk_widget_show_all (WID ("bell_test_button"));
-#endif
+	/* FIXME: There should be a way to do this using glade alone */
+	gtk_image_set_from_stock (GTK_IMAGE (WID ("bell_test_image")), GNOME_STOCK_VOLUME, GTK_ICON_SIZE_BUTTON);
 
 	return dialog;
 }
