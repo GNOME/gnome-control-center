@@ -1,6 +1,62 @@
-gnome-control-center 2.9.5
+gnome-control-center 2.9.91
 
-- Check for xmodmap files, and offer to load them (Closes: #143487)
+general:
+- check for xmodmap files, and offer to load them (#143487)
+- changing the default value for "handleIndicators" to false (#161343) 
+  (Sergey V. Udaltsov)
+- check for screensaver functionality in libXext.so also when deciding 
+  to build typing-break (#155461) (Leena Gunda)
+- providing ability to suppress the "x sysconfig changed" warning message
+  (#150435) (Sergey V. Udaltsov).
+- handle the modmap settings (#143487) (Shakti Sen)
+- fix number of leaks (Kjartan Maraas)
+
+background:
+- use the boolean argument to specify if we want to update gconf or not.
+  Always get the colors for both primary and secondary and update the thumbnail
+  (#166486) (Rodney Dawes)
+- force using the GTK backend (#154978) (Rodney Dawes)
+
+common:
+- leak fixes, use GtkIconTheme (#166267) (Kjartan Maraas)
+
+network:
+- adding/removing the host name instantly to/from gconf (#166233) (Shakti Sen)
+
+theme-switcher:
+- new install procedure (#102216) (David Sedeño)
+- some string fixes (#166550) (David Lodge)
+- remove a load of leaks and make sure newly installed themes show up in the 
+  relevant lists without having to close/open the dialog again (#166267)
+  (Kjartan Maraas)
+
+Translators:
+
+Vladimir Petkov (bg)
+Miloslav Trmac (cs)
+Frank Arnold (de)
+Nikos Charonitakis (el)
+Adam Weinberger (en_CA)
+David Lodge (en_GB)
+Francisco Javier F. Serrador (es)
+Ivar Smolin (et)
+Pauli Virtanen (fi)
+Alessio Dessì (it)
+Takeshi AIHANA (ja)
+Changwoo Ryu (ko)
+Žygimantas Beručka (lt)
+Kjartan Maraas (nb)
+rajeev shrestha (ne)
+Åsmund Skjæveland (nn)
+Kjartan Maraas (no)
+Raphael Higino (pt_BR)
+Duarte Loreto (pt)
+Leonid Kanter (ru)
+Elian Myftiu (sq)
+Christian Rose (sv)
+Theppitak Karoonboonyanan (th)
+Baris Cicek (tr)
+Funda Wang (zh_CN)
 
 ------------------------------------------------------------------------------
 gnome-control-center 2.9.4
