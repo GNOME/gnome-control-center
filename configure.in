@@ -78,7 +78,7 @@ AC_MSG_ERROR([Fatal Error: no Imlib detected.])])
 CFLAGS="-O2 -g -Wall $CFLAGS"
 
 dnl =============================================
-dnl END : Variables for ximian_archiverConf.sh.in
+dnl END : Variables for config_archiverConf.sh.in
 dnl =============================================
 
 AC_PATH_PROG(PKGCONFIG, pkg-config, no)
@@ -94,7 +94,7 @@ else
 	AC_MSG_ERROR(You need at least pkg-config 0.6.0 or greater for this version of control-center. Please install a newer version from http://www.freedesktop.org/software.)
 fi
 
-capplet_modules="libcapplet2 libglade gdk_pixbuf bonobo_conf $ARCHIVER_MODULE"
+capplet_modules="libcapplet2 libglade-gnome gdk_pixbuf bonobo_conf $ARCHIVER_MODULE"
 
 PKG_CHECK_MODULES(CAPPLET, $capplet_modules)
 PKG_CHECK_MODULES(BG_CAPPLET, $capplet_modules gdk_pixbuf_xlib)
@@ -105,7 +105,7 @@ PKG_CHECK_MODULES(GNOMECC, gnomeui libglade xml gdk_pixbuf gnomecanvaspixbuf gtk
 PKG_CHECK_MODULES(RMHELPER, gnomeui gnomecanvaspixbuf)
 PKG_CHECK_MODULES(ARCHIVER, bonobo xml)
 PKG_CHECK_MODULES(MONIKER, bonobo bonobo_conf xml)
-PKG_CHECK_MODULES(XIMIAN_ARCHIVER, gnome xml)
+PKG_CHECK_MODULES(CONFIG_ARCHIVER, gnome xml)
 
 dnl gnome-vfs doesn't support gnome-config or pkg-config
 VFS_CFLAGS=`gnome-vfs-config --cflags`
@@ -118,16 +118,16 @@ AC_SUBST(CFLAGS)
 AC_SUBST(LDFLAGS)
 
 dnl =======================================
-dnl Variables for ximian_archiverConf.sh.in
+dnl Variables for config_archiverConf.sh.in
 dnl =======================================
 
-XIMIAN_ARCHIVER_LIBDIR='-L${libdir}'
-XIMIAN_ARCHIVER_LIBS="$XIMIAN_ARCHIVER_LIBS -lximian_archiver"
-XIMIAN_ARCHIVER_INCLUDEDIR="$XIMIAN_ARCHIVER_CFLAGS -I${includedir}"
+CONFIG_ARCHIVER_LIBDIR='-L${libdir}'
+CONFIG_ARCHIVER_LIBS="$CONFIG_ARCHIVER_LIBS -lconfig_archiver"
+CONFIG_ARCHIVER_INCLUDEDIR="$CONFIG_ARCHIVER_CFLAGS -I${includedir}"
 
-AC_SUBST(XIMIAN_ARCHIVER_LIBDIR)
-AC_SUBST(XIMIAN_ARCHIVER_LIBS)
-AC_SUBST(XIMIAN_ARCHIVER_INCLUDEDIR)
+AC_SUBST(CONFIG_ARCHIVER_LIBDIR)
+AC_SUBST(CONFIG_ARCHIVER_LIBS)
+AC_SUBST(CONFIG_ARCHIVER_INCLUDEDIR)
 
 AC_OUTPUT([
 control-center.spec
