@@ -6,7 +6,8 @@ pApplications_DATA = behavior.desktop
 
 Gladedir = $(datadir)/control-center-data
 Glade_DATA = \
-	ui-properties.glade
+	ui-properties.glade	\
+	gnome-warning.png
 
 glade_msgs = \
 	ui-properties.glade.h

@@ -8,7 +8,13 @@ sysdir = $(datadir)/gnome/apps/Settings
 sys_DATA = gnomecc.desktop
 
 gladedir = $(datadir)/control-center-data
-glade_DATA = gnomecc.glade
+glade_DATA = \
+	gnomecc.glade	\
+	gnome-lockscreen.png	\
+	gnome-unlockscreen.png	\
+	html-view.xpm		\
+	icon-view.xpm		\
+	tree-view.xpm
 
 INCLUDES = 			\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\
