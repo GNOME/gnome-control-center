@@ -1,4 +1,3 @@
-SUBDIRS = 
 NULL =
 
 noinst_LIBRARIES = libuuid.a
