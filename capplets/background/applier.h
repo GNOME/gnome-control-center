@@ -52,16 +52,18 @@ struct _ApplierClass
 	GtkObjectClass klass;
 };
 
-guint        applier_get_type    (void);
+guint        applier_get_type             (void);
 
-GtkObject   *applier_new         (void);
-void         applier_destroy     (GtkObject *object);
+GtkObject   *applier_new                  (void);
 
-void         applier_apply_prefs (Applier *applier, const Preferences *prefs,
-				  gboolean do_root, gboolean do_preview);
+void         applier_apply_prefs          (Applier           *applier,
+					   const Preferences *prefs,
+					   gboolean           do_root,
+					   gboolean           do_preview);
 
-GtkWidget   *applier_get_preview_widget (Applier *applier);
+gboolean     applier_render_gradient_p    (Applier           *applier);
 
-GdkPixbuf   *applier_get_wallpaper_pixbuf (Applier *applier);
+GtkWidget   *applier_get_preview_widget   (Applier           *applier);
+GdkPixbuf   *applier_get_wallpaper_pixbuf (Applier           *applier);
 
 #endif /* __APPLIER_H */

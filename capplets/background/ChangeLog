@@ -1,3 +1,46 @@
+2001-09-13  Bradford Hovinen  <hovinen@ximian.com>
+
+	* preferences.c (preferences_load_from_bonobo_db):
+	(preferences_load_from_bonobo_pbag): Default to TRUE on enabled;
+	check value of wallpaper_filename to set wallpaper_enabled if
+	wallpaper_enabled could not be found
+
+	* background-properties-capplet.c (setup_dialog):
+	(apply_settings): Check for error condition after creating
+	preferences object
+
+	* preferences.c (preferences_destroy): Make this static
+	(read_color_from_string): Made argument const
+	(bonobo_color_to_gdk): Made argument const
+	(DB_GET_VALUE): Removed
+	(PB_GET_VALUE): Removed
+	(preferences_load_from_bonobo_pbag): Use
+	local_bonobo_property_bag_client_get_value_{color|filename}
+	(preferences_new_from_bonobo_db):
+	(preferences_new_from_bonobo_pbag): Deallocate object and return
+	NULL if there was an error
+	(local_bonobo_property_bag_client_get_value_color):
+	(local_bonobo_property_bag_client_get_value_filename): Implement
+	(MAKE_GET_SIMPLE): Implement (copy from bonobo-conf)
+	(preferences_load_from_bonobo_pbag): Read enabled property
+	(preferences_load_from_bonobo_pbag): Forgive wallpaper_enabled and
+	enabled not being found
+
+	* applier.c (applier_render_gradient_p): Implement
+	(applier_destroy): Make this static
+
+	* preferences.c (preferences_load_from_bonobo_db): Use
+	bonobo_config_get_boolean rather than BONOBO_ARG_GET_BOOLEAN
+	(DB_GET_VALUE ()). Ditto bonobo_config_get_long
+	(preferences_load_from_bonobo_db): Pass ev pointer to each call to
+	bonobo_config_get_*
+	(preferences_load_from_bonobo_db): Check ev pointer after each
+	call to bonobo_config_get_* and return if an exception is set
+	(preferences_load_from_bonobo_db): Allow the enabled flag not to
+	be present in the database since some older configurations don't
+	have it included
+	(all): Remove support for compiling without bonobo-conf
+
 2001-09-07  Richard Hestilow  <hestilow@ximian.com>
 
 	* background-properties.glade: Redid UI a bit to add new enabled

@@ -1,10 +1,9 @@
 /* -*- mode: c; style: linux -*- */
 
-/* apply.c
- * Copyright (C) 2000 Helix Code, Inc.
+/* applier.c
+ * Copyright (C) 2001 Ximian, Inc.
  *
- * Written by Bradford Hovinen <hovinen@helixcode.com>
- * Parts written by Jamie Zawinski <jwz@jwz.org>
+ * Written by Bradford Hovinen <hovinen@ximian.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -113,6 +112,8 @@ static void applier_get_arg          (GtkObject *object,
 				      GtkArg *arg, 
 				      guint arg_id);
 
+static void applier_destroy          (GtkObject *object);
+
 static void run_render_pipeline      (Renderer *renderer, 
 				      Preferences *old_prefs,
 				      Preferences *new_prefs,
@@ -132,8 +133,10 @@ static void renderer_render_wallpaper  (Renderer *renderer);
 static void renderer_create_pixmap     (Renderer *renderer);
 static void renderer_render_to_screen  (Renderer *renderer);
 
-static guchar *fill_gradient         (gint w, gint h,
-				      GdkColor *c1, GdkColor *c2,
+static guchar *fill_gradient         (gint w,
+				      gint h,
+				      GdkColor *c1,
+				      GdkColor *c2,
 				      orientation_t orientation);
 static void get_geometry             (wallpaper_type_t wallpaper_type,
 				      GdkPixbuf *pixbuf,
@@ -268,7 +271,7 @@ applier_new (void)
 	return object;
 }
 
-void
+static void
 applier_destroy (GtkObject *object) 
 {
 	Applier *applier;
@@ -404,6 +407,12 @@ applier_apply_prefs (Applier           *applier,
 	}
 
 	gtk_object_unref (GTK_OBJECT (new_prefs));
+}
+
+gboolean
+applier_render_gradient_p (Applier *applier) 
+{
+	return render_gradient_p (applier->private->preview_renderer, applier->private->preview_prefs);
 }
 
 GtkWidget *

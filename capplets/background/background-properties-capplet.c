@@ -53,7 +53,7 @@ const struct poptOption options [] = {
 static void
 apply_settings (Bonobo_ConfigDatabase db)
 {
-	Preferences *prefs;
+	GtkObject *prefs;
 	CORBA_Environment ev;
 	
 	CORBA_exception_init (&ev);
@@ -66,9 +66,14 @@ apply_settings (Bonobo_ConfigDatabase db)
 		Bonobo_ConfigDatabase_sync (db, &ev);
 	}
 
-	prefs = PREFERENCES (preferences_new_from_bonobo_db (db, &ev));
-	applier_apply_prefs (applier, prefs, TRUE, FALSE);
-	gtk_object_destroy (GTK_OBJECT (prefs));
+	prefs = preferences_new_from_bonobo_db (db, &ev);
+
+	if (BONOBO_EX (&ev) || prefs == NULL) {
+		g_critical ("Could not retrieve configuration from database (%s)", ev._repo_id);
+	} else {
+		applier_apply_prefs (applier, PREFERENCES (prefs), TRUE, FALSE);
+		gtk_object_destroy (GTK_OBJECT (prefs));
+	}
 
 	CORBA_exception_free (&ev);
 }
@@ -267,6 +272,7 @@ setup_dialog (GtkWidget *widget, Bonobo_PropertyBag bag)
 	GladeXML          *dialog;
 	Applier           *applier;
 	GtkObject         *prefs;
+	Bonobo_Property    prop;
 	
 	CORBA_Environment  ev;
 
@@ -293,7 +299,11 @@ setup_dialog (GtkWidget *widget, Bonobo_PropertyBag bag)
 	bonobo_property_bag_client_set_value_gboolean (bag, "enabled", TRUE, NULL);
 
 	prefs = preferences_new_from_bonobo_pbag (bag, &ev);
-	gtk_object_set_data (GTK_OBJECT (prefs), "glade-data", dialog);
+
+	if (BONOBO_EX (&ev) || prefs == NULL)
+		g_error ("Could not retrieve configuration from property bag (%s)", ev._repo_id);
+
+	gtk_object_set_data (prefs, "glade-data", dialog);
 	bonobo_event_source_client_add_listener (bag, (BonoboListenerCallbackFn) property_change_cb,
 						 NULL, NULL, prefs);
 
