@@ -94,7 +94,7 @@ setup_directory_structure (const gchar  *theme_name,
   if (!gnome_vfs_uri_exists (uri))
     gnome_vfs_make_directory_for_uri (uri, 0775);
   else {
-	GtkDialog *dialog;
+	GtkWidget *dialog;
 	gint response;
 	  
 	dialog = gtk_message_dialog_new (NULL,
@@ -102,7 +102,7 @@ setup_directory_structure (const gchar  *theme_name,
 			 GTK_MESSAGE_QUESTION,
 	  		 GTK_BUTTONS_OK_CANCEL,
 	  		 _("The theme already exists. Would you like to replace it?"));
-	response = gtk_dialog_run(dialog);
+	response = gtk_dialog_run(GTK_DIALOG(dialog));
 	gtk_widget_destroy(dialog);
 	if (response == GTK_RESPONSE_CANCEL) 
 		return FALSE;
