@@ -75,6 +75,8 @@ module ConfigArchiver {
 							     in boolean           parentChain)
 			raises (RollbackDataNotFound);
 
+		void               storageComplete          (in string            filename);
+
 		void               rollbackBackends         (in Time              time,
 							     in long              steps,
 							     in StringSeq         backendId,
