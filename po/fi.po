@@ -5,11 +5,24 @@
 # Mikko Rauhala <mjr@iki.fi>, x-2000
 # Pauli Virtanen <pauli.virtanen@hut.fi>, 2000-2002
 #
+#
+# I have translated repository harshly to version, the meaning of which
+# is a bit different, but if I am correct, there are no such things
+# as versions in the archiver program so it does not matter.
+#
+# rollback = palauta asetukset
+#
+#
+# sticky key = tarttuva näppäin
+# bounce key = kimmonäppäin
+# mouse key = hiirinäppäin
+# toggle key = vipunäppäin
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 1.99.0\n"
-"POT-Creation-Date: 2002-06-02 17:13-0700\n"
-"PO-Revision-Date: 2002-05-31 18:09+0200\n"
+"POT-Creation-Date: 2002-06-08 11:57+0300\n"
+"PO-Revision-Date: 2002-06-07 22:56+0300\n"
 "Last-Translator: Pauli Virtanen <pauli.virtanen@hut.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -257,52 +270,48 @@ msgid "Bor_der the picture with a:"
 msgstr "Kuvan _reunus:"
 
 #: capplets/background/background-properties.glade.h:5
-msgid "E-Mail"
-msgstr "Sähköposti"
-
-#: capplets/background/background-properties.glade.h:6
 msgid "Horizontal gradient"
 msgstr "Vaakaliukuväri"
 
-#: capplets/background/background-properties.glade.h:7
+#: capplets/background/background-properties.glade.h:6
 msgid "Pick a color"
 msgstr "Valitse väri"
 
-#: capplets/background/background-properties.glade.h:8
+#: capplets/background/background-properties.glade.h:7
 msgid "Picture Options:"
 msgstr "Kuvan asetukset:"
 
-#: capplets/background/background-properties.glade.h:9
+#: capplets/background/background-properties.glade.h:8
 #: libbackground/preview-file-selection.c:198
 msgid "Preview"
 msgstr "Esikatselu"
 
-#: capplets/background/background-properties.glade.h:10
+#: capplets/background/background-properties.glade.h:9
 msgid "Primary Color"
 msgstr "Pääväri"
 
-#: capplets/background/background-properties.glade.h:11
+#: capplets/background/background-properties.glade.h:10
 msgid "Secondary Color"
 msgstr "Toinen väri"
 
-#: capplets/background/background-properties.glade.h:12
+#: capplets/background/background-properties.glade.h:11
 msgid "Solid color"
 msgstr "Yhtenäinen väri"
 
-#: capplets/background/background-properties.glade.h:13
+#: capplets/background/background-properties.glade.h:12
 msgid "The background picture's file name."
 msgstr "Taustan kuvatiedoston nimi."
 
-#: capplets/background/background-properties.glade.h:14
+#: capplets/background/background-properties.glade.h:13
 msgid "To set the background picture, drop an image or click to browse."
 msgstr ""
 "Aseta taustakuva pudottamalla kuvatiedosto tai napsauta selataksesi niitä."
 
-#: capplets/background/background-properties.glade.h:15
+#: capplets/background/background-properties.glade.h:14
 msgid "Vertical gradient"
 msgstr "Pystyliukuväri"
 
-#: capplets/background/background-properties.glade.h:16
+#: capplets/background/background-properties.glade.h:15
 msgid ""
 "You can drag image files\n"
 "into the window to set the \n"
@@ -311,26 +320,6 @@ msgstr ""
 "Voit vetää kuvatiedostoja\n"
 "tähän ikkunaan ja asettaa\n"
 "taustakuvan siten."
-
-#: capplets/background/background-properties.glade.h:19
-msgid "radiobutton1"
-msgstr "Valintanappi 1"
-
-#: capplets/background/background-properties.glade.h:20
-msgid "radiobutton2"
-msgstr "Valintanappi 2"
-
-#: capplets/background/background-properties.glade.h:21
-msgid "radiobutton3"
-msgstr "Valintanappi 3"
-
-#: capplets/background/background-properties.glade.h:22
-msgid "radiobutton4"
-msgstr "Valintanappi 4"
-
-#: capplets/background/background-properties.glade.h:23
-msgid "radiobutton5"
-msgstr "Valintanappi 5"
 
 #: capplets/background/background.desktop.in.h:1
 msgid "Background"
@@ -559,8 +548,6 @@ msgid "Acce_pts URLs"
 msgstr "_Hyväksyy URL:eja"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:3
-#: capplets/mime-type/mime-type-capplet.c:93
-#: capplets/wm-properties/wm-properties-capplet.c:1151
 msgid "Add..."
 msgstr "Lisää..."
 
@@ -609,8 +596,6 @@ msgid "Default Window Manager"
 msgstr "Oletusikkunointiohjelma"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:15
-#: capplets/mime-type/mime-type-capplet.c:83
-#: capplets/wm-properties/wm-properties-capplet.c:1161
 msgid "Delete"
 msgstr "Poista"
 
@@ -619,8 +604,6 @@ msgid "E_xec Flag:"
 msgstr "_Valitsin:"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:17
-#: capplets/mime-type/mime-type-capplet.c:97
-#: capplets/wm-properties/wm-properties-capplet.c:1156
 msgid "Edit..."
 msgstr "Muokkaa..."
 
@@ -815,14 +798,6 @@ msgstr "Muuta työpöytiä"
 msgid "Workspaces"
 msgstr "Työpöydät"
 
-#: capplets/desktop-links/cd.desktop.in.in.h:1
-msgid "CD Properties"
-msgstr "CD-asetukset"
-
-#: capplets/desktop-links/cd.desktop.in.in.h:2
-msgid "Configure handling of CD devices"
-msgstr "Muuta CD-asemien käsittelytapaa"
-
 #: capplets/desktop-links/legacy-applications.desktop.in.in.h:1
 msgid "Legacy Applications"
 msgstr "Vanhat sovellukset"
@@ -830,22 +805,6 @@ msgstr "Vanhat sovellukset"
 #: capplets/desktop-links/legacy-applications.desktop.in.in.h:2
 msgid "Legacy applications settings (grdb)"
 msgstr "Vanhojen sovellusten asetukset (grdb)"
-
-#: capplets/desktop-links/panel.desktop.in.in.h:1
-msgid "Global panel properties"
-msgstr "Yleiset paneelin ominaisuudet"
-
-#: capplets/desktop-links/panel.desktop.in.in.h:2
-msgid "Panel"
-msgstr "Paneeli"
-
-#: capplets/desktop-links/session.desktop.in.in.h:1
-msgid "Configure which non-session aware programs are started up"
-msgstr "Mitkä istunnonhallinnan ulkopuoliset ohjelmat käynnistyvät"
-
-#: capplets/desktop-links/session.desktop.in.in.h:2
-msgid "Startup Programs"
-msgstr "Käynnistettävät ohjelmat"
 
 #.
 #. * Translatable strings file
@@ -925,26 +884,25 @@ msgid "Source Code"
 msgstr "Lähdekoodi"
 
 #: capplets/file-types/category-names.h:25
-#: capplets/file-types/mime-type-info.c:724
+#: capplets/file-types/mime-type-info.c:727
 msgid "Audio"
 msgstr "Ääni"
 
 #: capplets/file-types/category-names.h:26
-#: capplets/file-types/mime-type-info.c:720
+#: capplets/file-types/mime-type-info.c:723
 msgid "Images"
 msgstr "Kuvat"
 
 #: capplets/file-types/category-names.h:27
-#: capplets/file-types/mime-type-info.c:722
+#: capplets/file-types/mime-type-info.c:725
 msgid "Video"
 msgstr "Video"
 
-#: capplets/file-types/file-types-capplet.c:222
+#: capplets/file-types/file-types-capplet.c:223
 msgid "Description"
 msgstr "Kuvaus"
 
-#: capplets/file-types/file-types-capplet.c:229
-#: capplets/mime-type/new-mime-window.c:39
+#: capplets/file-types/file-types-capplet.c:230
 msgid "Extensions"
 msgstr "Tiedostopäätteet"
 
@@ -975,7 +933,7 @@ msgid "Default action"
 msgstr "Oletustoiminto"
 
 #: capplets/file-types/file-types-properties.glade.h:5
-#: capplets/file-types/mime-edit-dialog.c:167
+#: capplets/file-types/mime-edit-dialog.c:192
 msgid "Edit file type"
 msgstr "Muokkaa tiedostotyyppiä"
 
@@ -1064,7 +1022,7 @@ msgid "Edit file category"
 msgstr "Muokkaa tiedostoluokkaa"
 
 #: capplets/file-types/mime-category-edit-dialog.c:171
-#: capplets/file-types/mime-edit-dialog.c:204
+#: capplets/file-types/mime-edit-dialog.c:230
 #: capplets/file-types/service-edit-dialog.c:170
 #: capplets/file-types/service-edit-dialog.c:171
 msgid "Model"
@@ -1083,48 +1041,47 @@ msgid "Structure containing information on the MIME category"
 msgstr "Tietorakenne, joka sisältää MIME-luokan tiedot"
 
 #: capplets/file-types/mime-category-edit-dialog.c:343
-#: capplets/file-types/mime-edit-dialog.c:411
-#: capplets/file-types/mime-edit-dialog.c:515
+#: capplets/file-types/mime-edit-dialog.c:442
+#: capplets/file-types/mime-edit-dialog.c:546
 #: capplets/file-types/service-edit-dialog.c:358
 #: capplets/file-types/service-edit-dialog.c:407
 msgid "Custom"
 msgstr "Muu"
 
-#: capplets/file-types/mime-edit-dialog.c:164
-#: capplets/mime-type/mime-data.c:385
+#: capplets/file-types/mime-edit-dialog.c:189
 msgid "Extension"
 msgstr "Pääte"
 
-#: capplets/file-types/mime-edit-dialog.c:205
+#: capplets/file-types/mime-edit-dialog.c:231
 msgid "Underlying model to notify when Ok is clicked"
 msgstr "Alla oleva malli, jolle ilmoitetaan OK:n napsauttamisesta"
 
-#: capplets/file-types/mime-edit-dialog.c:212
+#: capplets/file-types/mime-edit-dialog.c:238
 msgid "MIME type information"
 msgstr "MIME-tyypin tiedot"
 
-#: capplets/file-types/mime-edit-dialog.c:213
+#: capplets/file-types/mime-edit-dialog.c:239
 msgid "Structure with data on the MIME type"
 msgstr "Tietorakenne, joka sisältää MIME-tyypin tiedot"
 
-#: capplets/file-types/mime-edit-dialog.c:219
+#: capplets/file-types/mime-edit-dialog.c:245
 msgid "Is add dialog"
 msgstr "On lisäysikkuna"
 
-#: capplets/file-types/mime-edit-dialog.c:220
+#: capplets/file-types/mime-edit-dialog.c:246
 msgid "True if this dialog is for adding a MIME type"
 msgstr "Tosi, jos tämä ikkuna on MIME-tyypin lisäämistä varten"
 
-#: capplets/file-types/mime-edit-dialog.c:268
+#: capplets/file-types/mime-edit-dialog.c:295
 msgid "Add file type"
 msgstr "Lisää tiedostotyyppi"
 
-#: capplets/file-types/mime-edit-dialog.c:406
-#: capplets/file-types/mime-edit-dialog.c:465
+#: capplets/file-types/mime-edit-dialog.c:437
+#: capplets/file-types/mime-edit-dialog.c:496
 msgid "None"
 msgstr "Ei mikään"
 
-#: capplets/file-types/mime-edit-dialog.c:695
+#: capplets/file-types/mime-edit-dialog.c:726
 msgid ""
 "Invalid MIME type. Please enter a valid MIME type, or leave the field blank "
 "to have one generated for you."
@@ -1132,19 +1089,19 @@ msgstr ""
 "Virheellinen MIME-tyyppi. Syötä kelvollinen MIME-tyyppi, tai jätä kenttä "
 "tyhjäksi, niin sellainen syntyy."
 
-#: capplets/file-types/mime-edit-dialog.c:699
+#: capplets/file-types/mime-edit-dialog.c:730
 msgid "There already exists a MIME type of that name."
 msgstr "Samanniminen MIME-tyyppi on jo olemassa."
 
-#: capplets/file-types/mime-edit-dialog.c:769
+#: capplets/file-types/mime-edit-dialog.c:800
 msgid "Category"
 msgstr "Luokka"
 
-#: capplets/file-types/mime-edit-dialog.c:774
+#: capplets/file-types/mime-edit-dialog.c:805
 msgid "Choose a file category"
 msgstr "Valitse tiedostoluokka"
 
-#: capplets/file-types/mime-type-info.c:726
+#: capplets/file-types/mime-type-info.c:729
 msgid "Misc"
 msgstr "Sekalaista"
 
@@ -1490,194 +1447,6 @@ msgstr "_Äänenvoimakkuus:"
 #: capplets/keyboard/keyboard.desktop.in.h:2
 msgid "Keyboard Properties"
 msgstr "Näppäimistöasetukset"
-
-#. icon box
-#: capplets/mime-type/edit-window.c:266
-msgid "Select an icon..."
-msgstr "Valitse kuvake..."
-
-#: capplets/mime-type/edit-window.c:276
-#: capplets/mime-type/new-mime-window.c:31
-msgid "Mime Type: "
-msgstr "MIME-tyyppi: "
-
-#: capplets/mime-type/edit-window.c:306
-msgid "Add"
-msgstr "Lisää"
-
-#: capplets/mime-type/edit-window.c:314
-#: capplets/url-properties/url-properties.c:135
-msgid "Remove"
-msgstr "Poista"
-
-#. gtk_container_set_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
-#: capplets/mime-type/edit-window.c:341
-#: capplets/mime-type/new-mime-window.c:69
-msgid "First Regular Expression: "
-msgstr "Ensimmäinen säännöllinen lauseke: "
-
-#: capplets/mime-type/edit-window.c:349
-#: capplets/mime-type/new-mime-window.c:80
-msgid "Second Regular Expression: "
-msgstr "Toinen säännöllinen lauseke: "
-
-#. Actions box
-#: capplets/mime-type/edit-window.c:356
-msgid "Mime Type Actions"
-msgstr "MIME-tyypin toiminnot"
-
-#: capplets/mime-type/edit-window.c:363
-#, c-format
-msgid "Example: emacs %f"
-msgstr "Esimerkki: emacs %f"
-
-#: capplets/mime-type/edit-window.c:368
-msgid "Open"
-msgstr "Avaa"
-
-#: capplets/mime-type/edit-window.c:374 capplets/mime-type/edit-window.c:390
-#: capplets/mime-type/edit-window.c:405
-msgid "Select a file..."
-msgstr "Valitse tiedosto..."
-
-#: capplets/mime-type/edit-window.c:383
-msgid "View"
-msgstr "Katsele"
-
-#: capplets/mime-type/edit-window.c:399
-msgid "Edit"
-msgstr "Muokkaa"
-
-#. we initialize everything
-#: capplets/mime-type/edit-window.c:448
-#, c-format
-msgid "Set actions for %s"
-msgstr "Aseta tyypin %s toiminnot"
-
-#: capplets/mime-type/mime-data.c:384
-msgid "Mime Type"
-msgstr "MIME-tyyppi"
-
-#: capplets/mime-type/mime-data.c:493
-msgid "You must enter a mime-type"
-msgstr "Mime-tyyppi täytyy antaa"
-
-#: capplets/mime-type/mime-data.c:498
-msgid ""
-"You must add either a regular-expression or\n"
-"a file-name extension"
-msgstr ""
-"Joko säännöllinen lauseke tai tiedostopääte\n"
-"täytyy antaa"
-
-#: capplets/mime-type/mime-data.c:502
-msgid ""
-"Please put your mime-type in the format:\n"
-"CATEGORY/TYPE\n"
-"\n"
-"For Example:\n"
-"image/png"
-msgstr ""
-"Anna mime-tyyppi muodossa:\n"
-"luokka/tyyppi\n"
-"\n"
-"Esimerkiksi:\n"
-"image/png"
-
-#: capplets/mime-type/mime-data.c:507
-msgid "This mime-type already exists"
-msgstr "Tämä mime-tyyppi on jo olemassa"
-
-#: capplets/mime-type/mime-data.c:588 capplets/mime-type/mime-info.c:427
-msgid ""
-"We are unable to create the directory\n"
-"~/.gnome/mime-info\n"
-"\n"
-"We will not be able to save the state."
-msgstr ""
-"Ei voinut luoda hakemistoa ~/.gnome/mime-info\n"
-"\n"
-"Nykyistä tilaa ei voi tallentaa."
-
-#: capplets/mime-type/mime-data.c:594 capplets/mime-type/mime-info.c:433
-msgid ""
-"We are unable to access the directory\n"
-"~/.gnome/mime-info\n"
-"\n"
-"We will not be able to save the state."
-msgstr ""
-"Ei voinut käsitellä hakemistoa\n"
-"~/.gnome/mime-info\n"
-"\n"
-"Nykyistä tilaa ei voi tallentaa."
-
-#: capplets/mime-type/mime-data.c:605
-msgid ""
-"Cannot create the file\n"
-"~/.gnome/mime-info/user.mime\n"
-"\n"
-"We will not be able to save the state"
-msgstr ""
-"Ei voi luoda tiedostoa\n"
-"~/.gnome/mime-info/user.mime\n"
-"\n"
-"Nykyistä tilaa ei voi tallentaa"
-
-#: capplets/mime-type/mime-info.c:444
-msgid ""
-"Cannot create the file\n"
-"~/.gnome/mime-info/user.keys.\n"
-"\n"
-"We will not be able to save the state"
-msgstr ""
-"Ei voi luoda tiedostoa\n"
-"~/.gnome/mime-info/user.keys\n"
-"\n"
-"Nykyistä tilaa ei voi tallentaa."
-
-#: capplets/mime-type/mime-type.desktop.in.in.h:1
-msgid "Configure how files are associated and started"
-msgstr "Määritä tiedostojen kytkennät, avaaminen ja käynnistäminen"
-
-#: capplets/mime-type/mime-type.desktop.in.in.h:2
-msgid "Mime Types"
-msgstr "MIME-tyypit"
-
-#: capplets/mime-type/new-mime-window.c:25
-msgid "Add Mime Type"
-msgstr "Lisää MIME-tyyppi"
-
-#: capplets/mime-type/new-mime-window.c:26
-msgid ""
-"Add a new Mime Type\n"
-"For example:  image/tiff; text/x-scheme"
-msgstr ""
-"Lisää uusi MIME-tyyppi\n"
-"Esimerkiksi: image/tiff, text/x-scheme"
-
-#: capplets/mime-type/new-mime-window.c:43
-msgid ""
-"Type in the extensions for this mime-type.\n"
-"For example:  .html, .htm"
-msgstr ""
-"Anna tämän Mime-tyyppisten tiedostojen päätteet.\n"
-"Esimerkiksi: .html, .htm"
-
-#: capplets/mime-type/new-mime-window.c:50
-msgid "Extension:"
-msgstr "Pääte:"
-
-#: capplets/mime-type/new-mime-window.c:55
-msgid "Regular Expressions"
-msgstr "Säännölliset lausekkeet"
-
-#: capplets/mime-type/new-mime-window.c:59
-msgid ""
-"You can set up two regular expressions here to identify the Mime Type\n"
-"by.  These fields are optional."
-msgstr ""
-"Voit halutessasi antaa kaksi säännöllistä lauseketta, joilla MIME-tyyppi\n"
-"tunnistuu."
 
 #: capplets/mouse/gnome-mouse-properties.c:455
 #, c-format
@@ -2131,78 +1900,38 @@ msgid "Save File"
 msgstr "Tallenna tiedosto"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:20
+msgid "Select the toolbar style."
+msgstr "Valitse työkalupalkin tyyli."
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:21
 msgid "Text Below Icons"
 msgstr "Teksti kuvakkeiden alla"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:21
+#: capplets/ui-properties/gnome-ui-properties.glade.h:22
 msgid "Text Only"
 msgstr "Pelkkä teksti"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:22
+#: capplets/ui-properties/gnome-ui-properties.glade.h:23
 msgid "Toolbar"
 msgstr "Työkalupalkki"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:23
+#: capplets/ui-properties/gnome-ui-properties.glade.h:24
 msgid "Toolbar and Menu Preferences"
 msgstr "Työkalupalkki- ja valikkoasetukset"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:24
+#: capplets/ui-properties/gnome-ui-properties.glade.h:25
 msgid "Toolbars can be _detached and moved around"
 msgstr "Työkalupalkkeja voi _irrottaa ja liikuttaa"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:25
+#: capplets/ui-properties/gnome-ui-properties.glade.h:26
 msgid "_Menu"
 msgstr "_Valikko"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:26
+#: capplets/ui-properties/gnome-ui-properties.glade.h:27
 msgid "_Toolbars have: "
 msgstr "_Työkalupalkeissa on: "
 
-#: capplets/url-properties/url-properties.c:64
-msgid "Protocol"
-msgstr "Protokolla"
-
-#: capplets/url-properties/url-properties.c:64
-msgid "Command"
-msgstr "Komento"
-
-#: capplets/url-properties/url-properties.c:66
-#: capplets/url-properties/url-properties.desktop.in.h:2
-#: capplets/url-properties/url.desktop.in.in.h:2
-msgid "URL Handlers"
-msgstr "URL-käsittelimet"
-
-#: capplets/url-properties/url-properties.c:89
-msgid "handler:"
-msgstr "käsittelijä:"
-
-#. set some commonly used handlers
-#: capplets/url-properties/url-properties.c:99
-msgid "Netscape"
-msgstr "Netscape"
-
-#: capplets/url-properties/url-properties.c:104
-msgid "Netscape (new window)"
-msgstr "Uusi Netscape-ikkuna"
-
-#: capplets/url-properties/url-properties.c:110
-msgid "Help browser"
-msgstr "Ohjeselain"
-
-#: capplets/url-properties/url-properties.c:115
-msgid "Help browser (new window)"
-msgstr "Ohjeselain (uusi ikkuna)"
-
-#: capplets/url-properties/url-properties.c:127
-msgid "Set"
-msgstr "Aseta"
-
-#: capplets/url-properties/url-properties.desktop.in.h:1
-#: capplets/url-properties/url.desktop.in.in.h:1
-msgid "Configure which programs are used to display URLs"
-msgstr "Aseta URL:ien näyttämiseen käytettävät ohjelmat"
-
-#: capplets/windows/gnome-window-properties.c:222
+#: capplets/windows/gnome-window-properties.c:282
 msgid "Window Preferences"
 msgstr "Ikkuna-asetukset"
 
@@ -2234,186 +1963,6 @@ msgstr "Ikkunan ominaisuudet"
 #: capplets/windows/window-properties.desktop.in.h:2
 msgid "Windows"
 msgstr "Ikkunat"
-
-#: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.in.h:1
-msgid "Enlightenment"
-msgstr "Enlightenment"
-
-#: capplets/wm-properties/wm-desktops/IceWM.desktop.in.in.h:1
-msgid "Ice WM"
-msgstr "Ice WM"
-
-#: capplets/wm-properties/wm-desktops/Scwm.desktop.in.in.h:1
-msgid "Scwm"
-msgstr "Scwm"
-
-#: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.in.h:1
-msgid "Window Maker"
-msgstr "Window Maker"
-
-#: capplets/wm-properties/wm-desktops/twm.desktop.in.in.h:1
-msgid "twm"
-msgstr "twm"
-
-#: capplets/wm-properties/wm-properties-capplet.c:135
-msgid "Initialize session settings"
-msgstr "Alusta istunnon asetukset"
-
-#: capplets/wm-properties/wm-properties-capplet.c:206
-#, c-format
-msgid ""
-"Starting %s\n"
-"(%d seconds left before operation times out)"
-msgstr ""
-"%s käynnistyy\n"
-"(%d sekuntia jäljellä ennen aikarajaa)"
-
-#: capplets/wm-properties/wm-properties-capplet.c:367
-#, c-format
-msgid "%s (Current)"
-msgstr "%s (Nykyinen)"
-
-#: capplets/wm-properties/wm-properties-capplet.c:370
-#, c-format
-msgid "Run Configuration Tool for %s"
-msgstr "Käynnistä ikkunointiohjelman %s asetusohjelma"
-
-#: capplets/wm-properties/wm-properties-capplet.c:381
-msgid " (Not found)"
-msgstr " (Ei löytynyt)"
-
-#: capplets/wm-properties/wm-properties-capplet.c:420
-msgid ""
-"wm-properties-capplet: Unable to initialize window manager.\n"
-"\tAnother window manager is already running and could not be killed\n"
-msgstr ""
-"wm-properties-capplet: Ei voinut käynnistää ikkunointiohjelmaa.\n"
-"\tToinen ikkunointiohjelma on jo käynnissä eikä sitä voinut sulkea.\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:424
-#, c-format
-msgid ""
-"wm-properties-capplet: Unable to initialize window manager.\n"
-"\t'%s' didn't start\n"
-msgstr ""
-"wm-properties-capplet: Ei voinut käynnistää ikkunointiohjelmaa \"%s\".\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:473
-msgid "Previous window manager did not die\n"
-msgstr "Edellinen ikkunointiohjelma ei sulkeutunut.\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:506
-#, c-format
-msgid ""
-"Could not start '%s'.\n"
-"Falling back to previous window manager '%s'\n"
-msgstr ""
-"Ei voinut käynnistää ohjelmaa \"%s\".\n"
-"Palaa edelliseen ikkunointiohjelmaan \"%s\".\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:537
-msgid ""
-"Could not start fallback window manager.\n"
-"Please run a window manager manually. You can\n"
-"do this by selecting \"Run Program\" in the\n"
-"foot menu\n"
-msgstr ""
-"Ei voinut käynnistää varaikkunointiohjelmaa, joten\n"
-"ikkunointiohjelma täytyy käynnistää käsin.\n"
-"Voit tehdä tämän valitsemalla päävalikosta \"Suorita...\".\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:562
-#: capplets/wm-properties/wm-properties-capplet.c:812
-#: capplets/wm-properties/wm-properties-capplet.c:921
-#: capplets/wm-properties/wm-properties-capplet.c:928
-#: capplets/wm-properties/wm-properties-capplet.c:1070
-msgid "OK"
-msgstr "OK"
-
-#: capplets/wm-properties/wm-properties-capplet.c:580
-msgid ""
-"Your current window manager has been changed. In order for\n"
-"this change to be saved, you will need to save your current\n"
-"session. You can do so immediately by selecting the \"Save session\n"
-"now\" below, or you can save your session later.  This can be\n"
-"done either selecting \"Save Current Session\" under \"Settings\"\n"
-"in the main menu, or by turning on \"Save Current Setup\" when\n"
-"you log out.\n"
-msgstr ""
-"Nykyinen ikkunointiohjelma vaihtui. Nykyinen istunto täytyy\n"
-"tallentaa, jotta tämä muutos tallentuisi. Voit tehdä sen heti\n"
-"valitsemalla \"Tallenna istunto nyt\", tai myöhemmin joko valitsemalla\n"
-"\"Tallenna nykyinen istunto\" päävalikon alivalikosta \"Asetukset\",\n"
-"tai laittamalla asetus \"Tallenna nykyiset asetukset\" päälle\n"
-"kirjautuessasi ulos.\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:587
-msgid "Save Session Later"
-msgstr "Tallenna istunto myöhemmin"
-
-#: capplets/wm-properties/wm-properties-capplet.c:587
-msgid "Save Session Now"
-msgstr "Tallenna istunto nyt"
-
-#: capplets/wm-properties/wm-properties-capplet.c:590
-msgid ""
-"Your current window manager has been changed. In order for\n"
-"this change to be saved, you will need to save your current\n"
-"session. This can be done by either selecting \"Save Current Session\"\n"
-"under \"Settings\" in the main menu, or by turning on\n"
-"\"Save Current Setup\" when you log out.\n"
-msgstr ""
-"Nykyinen ikkunointiohjelma vaihtui. Nykyinen istunto täytyy\n"
-"tallentaa, jotta tämä muutos tallentuisi. Voit tehdä sen joko\n"
-"valitsemalla \"Tallenna nykyinen istunto\" päävalikon alivalikosta\n"
-"\"Asetukset\", tai laittamalla asetus \"Tallenna nykyiset asetukset\"\n"
-"päälle kirjautuessasi ulos.\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:811
-msgid "Add New Window Manager"
-msgstr "Lisää uusi ikkunointiohjelma"
-
-#: capplets/wm-properties/wm-properties-capplet.c:812
-msgid "Cancel"
-msgstr "Peru"
-
-#: capplets/wm-properties/wm-properties-capplet.c:824
-msgid "Name:"
-msgstr "Nimi:"
-
-#: capplets/wm-properties/wm-properties-capplet.c:837
-msgid "Command:"
-msgstr "Komento:"
-
-#: capplets/wm-properties/wm-properties-capplet.c:850
-msgid "Configuration Command:"
-msgstr "Asetuskomento:"
-
-#: capplets/wm-properties/wm-properties-capplet.c:869
-msgid "Window manager is session managed"
-msgstr "Ikkunointiohjelma on istunnonhallinnan alainen"
-
-#: capplets/wm-properties/wm-properties-capplet.c:919
-msgid "Name cannot be empty"
-msgstr "Nimi puuttuu"
-
-#: capplets/wm-properties/wm-properties-capplet.c:926
-msgid "Command cannot be empty"
-msgstr "Käynnistyskomento puuttuu"
-
-#: capplets/wm-properties/wm-properties-capplet.c:974
-#: capplets/wm-properties/wm-properties-capplet.c:1012
-msgid "Edit Window Manager"
-msgstr "Muokkaa ikkunointiohjelmaa"
-
-#: capplets/wm-properties/wm-properties-capplet.c:1069
-msgid "You cannot delete the current Window Manager"
-msgstr "Et voi poistaa nykyistä ikkunointiohjelmaa"
-
-#: capplets/wm-properties/wm-properties-capplet.c:1111
-#: capplets/wm-properties/wm-properties-capplet.c:1123
-msgid "Window Manager Selector"
-msgstr "Ikkunointiohjelman valinta"
 
 #: control-center/capplet-dir-view-list.c:324
 #, c-format
@@ -2593,3 +2142,57 @@ msgstr "_Soita"
 #: libsounds/sound-view.c:257
 msgid "Select sound file"
 msgstr "Valitse äänitiedosto"
+
+#: libwindow-settings/gnome-wm-manager.c:168
+#, c-format
+msgid ""
+"Starting %s\n"
+"(%d seconds left before operation times out)"
+msgstr ""
+"%s käynnistyy\n"
+"(%d sekuntia jäljellä ennen aikarajaa)"
+
+#: libwindow-settings/gnome-wm-manager.c:322
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\tAnother window manager is already running and could not be killed\n"
+msgstr ""
+"wm-properties-capplet: Ei voinut käynnistää ikkunointiohjelmaa.\n"
+"\tToinen ikkunointiohjelma on jo käynnissä eikä sitä voinut sulkea.\n"
+
+#: libwindow-settings/gnome-wm-manager.c:326
+#, c-format
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\t'%s' didn't start\n"
+msgstr ""
+"wm-properties-capplet: Ei voinut käynnistää ikkunointiohjelmaa \"%s\".\n"
+
+#: libwindow-settings/gnome-wm-manager.c:375
+msgid "Previous window manager did not die\n"
+msgstr "Edellinen ikkunointiohjelma ei sulkeutunut.\n"
+
+#: libwindow-settings/gnome-wm-manager.c:408
+#, c-format
+msgid ""
+"Could not start '%s'.\n"
+"Falling back to previous window manager '%s'\n"
+msgstr ""
+"Ei voinut käynnistää ohjelmaa \"%s\".\n"
+"Palaa edelliseen ikkunointiohjelmaan \"%s\".\n"
+
+#: libwindow-settings/gnome-wm-manager.c:439
+msgid ""
+"Could not start fallback window manager.\n"
+"Please run a window manager manually. You can\n"
+"do this by selecting \"Run Program\" in the\n"
+"foot menu\n"
+msgstr ""
+"Ei voinut käynnistää varaikkunointiohjelmaa, joten\n"
+"ikkunointiohjelma täytyy käynnistää käsin.\n"
+"Voit tehdä tämän valitsemalla päävalikosta \"Suorita...\".\n"
+
+#: libwindow-settings/gnome-wm-manager.c:464
+msgid "OK"
+msgstr "OK"
+
