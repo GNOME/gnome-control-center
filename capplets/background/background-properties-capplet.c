@@ -200,10 +200,6 @@ setup_dialog (GtkWidget *widget, GConfChangeSet *changeset)
 					"/background-properties/wallpaper-enabled");
 #endif
 		
-	/* Disable opacity controls */
-	gtk_widget_hide (WID ("opacity_spin"));
-	gtk_widget_hide (WID ("opacity_label"));
-
 	engine = gconf_engine_get_default ();
 	gconf_engine_set_bool (engine, "enabled", TRUE, NULL);
 
