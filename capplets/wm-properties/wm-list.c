@@ -79,8 +79,12 @@ wm_check_present (WindowManager *wm)
                         wm->is_config_present = (path != NULL);
                         if (path)
                                 g_free (path);
-                } else
-                        wm->is_config_present = TRUE;
+                } else {
+			path = gnome_is_program_in_path (wm->config_exec);
+                        wm->is_config_present = (path != NULL);
+                        if (path)
+                                g_free (path);
+		}
         } else
                 wm->is_config_present = FALSE;
         
@@ -201,6 +205,11 @@ wm_list_read_dir (gchar *directory, gboolean is_user)
                 if (wm->config_exec && is_blank (wm->config_exec)) {
                         g_free (wm->config_exec);
                         wm->config_exec = NULL;
+                }
+                
+		if (wm->config_tryexec && is_blank (wm->config_tryexec)) {
+                        g_free (wm->config_tryexec);
+                        wm->config_tryexec = NULL;
                 }
 
                 gnome_config_pop_prefix ();

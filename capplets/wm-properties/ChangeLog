@@ -1,3 +1,10 @@
+2001-09-29  Richard Hestilow  <hestilow@ximian.com>
+
+	* wm-list.c (wm_list_read_dir): Check if config_tryexec is blank,
+	and if it is, free it and set it to NULL.
+	(wm_check_present): If there is no config_tryexec, fall back
+	on checking the path of the config_exec. Fix for bug #58306.
+
 2001-09-05  Abel Cheung  <maddog@linux.org.hk>
 
 	* wm.desktop.in.in: Rename zh_TW.Big5 to zh_TW .
