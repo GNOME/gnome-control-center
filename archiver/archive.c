@@ -489,7 +489,7 @@ archive_set_current_location_id (Archive *archive, const gchar *locid)
 			 archive->current_location_id);
 	else
 		gnome_config_set_string
-			("/control-center/config/current/location",
+			("/capplet-archive/config/current/location",
 			 archive->current_location_id);
 
 	gnome_config_sync ();
@@ -523,7 +523,7 @@ archive_get_current_location_id (Archive *archive)
 		else
 			archive->current_location_id =
 				gnome_config_get_string_with_default
-				("/control-center/config/current/location=default", &def);
+				("/capplet-archive/config/current/location=default", &def);
 
 		/* Create default location if it does not exist */
 		if (def && archive_get_location
