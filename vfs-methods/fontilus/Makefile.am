@@ -1,6 +1,6 @@
 
-INCLUDES = $(FONT_METHOD_CFLAGS) $(THUMBNAILER_CFLAGS) $(FONT_VIEW_CFLAGS) \
-  $(CONTEXT_MENU_CFLAGS) -DDIRECTORY_DIR=\"$(vfsdirectorydir)\" 
+INCLUDES = $(FONT_METHOD_CFLAGS) $(FONT_THUMBNAILER_CFLAGS) $(FONT_VIEW_CFLAGS) \
+  $(FONT_CONTEXT_MENU_CFLAGS) -DDIRECTORY_DIR=\"$(vfsdirectorydir)\" 
 
 vfsmoduledir = $(libdir)/gnome-vfs-2.0/modules
 vfsmodule_LTLIBRARIES = libfont-method.la
@@ -12,14 +12,14 @@ libfont_method_la_LDFLAGS = -module -avoid-version \
 libfont_method_la_LIBADD = $(FONT_METHOD_LIBS)
 libfont_method_la_SOURCES = font-method.c
 
-gnome_thumbnail_font_LDADD = $(THUMBNAILER_LIBS)
+gnome_thumbnail_font_LDADD = $(FONT_THUMBNAILER_LIBS)
 gnome_thumbnail_font_SOURCES = ftstream-vfs.c thumbnailer.c
 
 gnome_font_viewer_LDADD = $(FONT_VIEW_LIBS)
 gnome_font_viewer_SOURCES = ftstream-vfs.c font-view.c
 
 libexec_PROGRAMS = fontilus-context-menu
-fontilus_context_menu_LDADD = $(CONTEXT_MENU_LIBS)
+fontilus_context_menu_LDADD = $(FONT_CONTEXT_MENU_LIBS)
 fontilus_context_menu_SOURCES = fontilus-context-menu.c
 
 vfsmoduleconfdir = $(sysconfdir)/gnome-vfs-2.0/modules
