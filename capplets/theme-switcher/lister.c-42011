@@ -5,11 +5,17 @@
 static void
 print_standard_stuff(FILE *fout, gchar *theme, gchar *font)
 {
+      gchar *homedir;
+
+      homedir = g_strconcat ("include \"",
+			     gnome_util_user_home(),
+			     "/.gtkrc.mine\"\n\n", NULL);
       fprintf(fout, MARK_STRING);
       fprintf(fout, "include \"%s\"\n\n", theme);
       if (font)
 	      fprintf(fout, "style \"user-font\"\n{\n  font=\"%s\"\n}\nwidget_class \"*\" style \"user-font\"\n\n", font);
-      fprintf(fout, "include \"~/.gtkrc.mine\"\n\n");
+      fprintf(fout, homedir);
+      g_free (homedir);
       fprintf(fout, MARK_STRING);
 }
 void
