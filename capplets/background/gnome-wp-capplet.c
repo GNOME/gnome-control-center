@@ -1128,6 +1128,16 @@ static GladeXML * gnome_wp_create_dialog (void) {
   return new;
 }
 
+static void set_accessible_name (GtkWidget *widget, const gchar *name) {
+  AtkObject *obj;
+ 
+  obj = gtk_widget_get_accessible (widget);
+  if (!GTK_IS_ACCESSIBLE (obj))
+    return;
+  if (name)
+    atk_object_set_name (obj, name);
+} 
+  
 static void wallpaper_properties_init (void) {
   GnomeWPCapplet * capplet;
   GladeXML * dialog;
@@ -1263,6 +1273,7 @@ static void wallpaper_properties_init (void) {
 
   menu = gtk_menu_new ();
   mitem = gtk_menu_item_new ();
+  set_accessible_name (mitem, _("Centered")); 
   icofile = gnome_icon_theme_lookup_icon (capplet->theme,
 					  "stock_wallpaper-center",
 					  16, NULL, NULL);
@@ -1286,6 +1297,7 @@ static void wallpaper_properties_init (void) {
   gtk_widget_show (mitem);
 
   mitem = gtk_menu_item_new ();
+  set_accessible_name (mitem, _("Fill Screen"));
   icofile = gnome_icon_theme_lookup_icon (capplet->theme,
 					  "stock_wallpaper-fill",
 					  16, NULL, NULL);
@@ -1308,6 +1320,7 @@ static void wallpaper_properties_init (void) {
   gtk_widget_show (mitem);
 
   mitem = gtk_menu_item_new ();
+  set_accessible_name (mitem, _("Scaled"));
   icofile = gnome_icon_theme_lookup_icon (capplet->theme,
 					  "stock_wallpaper-scale",
 					  16, NULL, NULL);
@@ -1328,6 +1341,7 @@ static void wallpaper_properties_init (void) {
   gtk_widget_show (mitem);
 
   mitem = gtk_menu_item_new ();
+  set_accessible_name (mitem, _("Tiled"));
   icofile = gnome_icon_theme_lookup_icon (capplet->theme,
 					  "stock_wallpaper-tile",
 					  16, NULL, NULL);
@@ -1364,6 +1378,7 @@ static void wallpaper_properties_init (void) {
 
   menu = gtk_menu_new ();
   mitem = gtk_menu_item_new ();
+  set_accessible_name (mitem, _("Solid Color"));
   mbox = gtk_hbox_new (FALSE, 6);
   gtk_container_add (GTK_CONTAINER (mitem), mbox);
   gtk_widget_show (mbox);
@@ -1380,6 +1395,7 @@ static void wallpaper_properties_init (void) {
   gtk_menu_append (GTK_MENU (menu), mitem);
 
   mitem = gtk_menu_item_new ();
+  set_accessible_name (mitem, _("Horizontal Gradient"));
   mbox = gtk_hbox_new (FALSE, 6);
   gtk_container_add (GTK_CONTAINER (mitem), mbox);
   gtk_widget_show (mbox);
@@ -1396,6 +1412,7 @@ static void wallpaper_properties_init (void) {
   gtk_menu_append (GTK_MENU (menu), mitem);
 
   mitem = gtk_menu_item_new ();
+  set_accessible_name (mitem, _("Vertical Gradient"));
   mbox = gtk_hbox_new (FALSE, 6);
   gtk_container_add (GTK_CONTAINER (mitem), mbox);
   gtk_widget_show (mbox);
