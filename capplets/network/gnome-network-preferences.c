@@ -40,17 +40,22 @@
 #define AUTH_PASSWD_KEY "/system/http_proxy/authentication_password"
 
 static void
-dialog_response (GtkWidget *widget,
-		 int        response_id)
+cb_dialog_response (GtkDialog *dialog, gint response_id)
 {
-	switch (response_id)
-	{
-	case GTK_RESPONSE_CLOSE:
-	case GTK_RESPONSE_DELETE_EVENT:
-	default:
+	if (response_id == GTK_RESPONSE_HELP) {
+		GError *error = NULL;
+
+		/* TODO : get this written */
+		gnome_help_display_desktop (NULL,
+			"control-center-manual",
+			"config-network.xml",
+			"CONFIGURATION", &error);
+		if (error) {
+			g_warning ("help error: %s\n", error->message);
+			g_error_free (error);
+		}
+	} else
 		gtk_main_quit ();
-		break;
-	}
 }
 
 static void
@@ -82,7 +87,7 @@ setup_dialog (GladeXML *dialog)
 	gtk_entry_set_invisible_char (GTK_ENTRY (WID ("passwd_entry")), '*');
 
 	g_signal_connect (WID ("network_dialog"), "response",
-			  G_CALLBACK (dialog_response), NULL);
+			  G_CALLBACK (cb_dialog_response), NULL);
 }
 
 int
