@@ -1,5 +1,8 @@
 2002-12-10  James Henstridge  <james@daa.com.au>
 
+	* src/font-view.c (add_face_info): only display Type1 font
+	information if it is valid UTF-8.
+
 	* src/ftstream-vfs.c (FT_New_Face_From_URI): get rid of the local
 	file optimisation.  It didn't make a noticable difference for the
 	large Asian fonts.

@@ -253,10 +253,9 @@ add_face_info(GtkWidget *table, gint *row_p, const gchar *uri, FT_Face face)
 	    g_free(description);
 	}
     } else if (FT_Get_PS_Font_Info(face, &ps_info) == 0) {
-	/* XXXX need to handle encoding of this info ... */
-	if (ps_info.version)
+	if (ps_info.version && g_utf8_validate(ps_info.version, -1, NULL))
 	    add_row(table, row_p, _("Version:"), ps_info.version, FALSE);
-	if (ps_info.notice)
+	if (ps_info.notice && g_utf8_validate(ps_info.notice, -1, NULL))
 	    add_row(table, row_p, _("Copyright:"), ps_info.notice, TRUE);
     }
 }
