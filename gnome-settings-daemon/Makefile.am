@@ -24,7 +24,7 @@ gnome2_settings_daemon_SOURCES =	\
 
 gnome2_settings_daemon_LDADD = \
 	$(GNOME_SETTINGS_DAEMON_LIBS)			\
-	$(top_builddir)/libbackground/libbackground.a	\
+	$(top_builddir)/libbackground/libbackground.la	\
 	$(top_builddir)/libsounds/libsounds.a		\
 	$(XF86MISC_LIBS)
 
