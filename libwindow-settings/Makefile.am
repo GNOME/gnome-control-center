@@ -7,7 +7,7 @@ INCLUDES = 								\
 	-DGNOME_WINDOW_MANAGER_MODULE_PATH=\""$(WM_MODULE_DIR)"\" \
 	-I$(top_srcdir)/						\
 	@CAPPLET_CFLAGS@						\
-	-DMETACITY_THEME_DIR=\""$(datadir)/metacity/themes"\"
+	-DMETACITY_THEME_DIR=\""$(datadir)/themes"\"
 
 lib_LTLIBRARIES = libgnome-window-settings.la
 

@@ -101,7 +101,7 @@ add_themes_from_dir (GList *current_list, const char *path)
         theme_dir = opendir (path);
 
         for (entry = readdir (theme_dir); entry != NULL; entry = readdir (theme_dir)) {
-                theme_file_path = g_build_filename (path, entry->d_name, "metacity-theme-1.xml", NULL);
+                theme_file_path = g_build_filename (path, entry->d_name, "metacity-1/metacity-theme-1.xml", NULL);
 
                 if (g_file_test (theme_file_path, G_FILE_TEST_EXISTS)) {
 
@@ -129,10 +129,10 @@ metacity_get_theme_list (GnomeWindowManager *wm)
         GList *themes = NULL;
         char *home_dir_themes;
 
-        home_dir_themes = g_build_filename (g_get_home_dir (), ".metacity/themes", NULL);
+        home_dir_themes = g_build_filename (g_get_home_dir (), ".themes", NULL);
 
         themes = add_themes_from_dir (themes, METACITY_THEME_DIR);
-        themes = add_themes_from_dir (themes, "/usr/share/metacity/themes");
+        themes = add_themes_from_dir (themes, "/usr/share/themes");
         themes = add_themes_from_dir (themes, home_dir_themes);
 
         g_free (home_dir_themes);
@@ -328,14 +328,8 @@ metacity_get_settings (GnomeWindowManager *wm,
                 if (str == NULL)
                         str = g_strdup ("Atlanta");
 
-                if (meta_wm->p->theme &&
-                    strcmp (meta_wm->p->theme, str) == 0) {
-                        g_free (str);
-                } else {
-                        g_free (meta_wm->p->theme);
-                        meta_wm->p->font = str;
-                }
-                
+                g_free (meta_wm->p->theme);
+                meta_wm->p->theme = str;
                 settings->theme = meta_wm->p->theme;
 
                 settings->flags |= GNOME_WM_SETTING_THEME;
