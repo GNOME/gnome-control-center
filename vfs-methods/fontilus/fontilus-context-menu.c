@@ -23,16 +23,124 @@
 
 #include <string.h>
 
+#include <glib/gi18n-lib.h>
 #include <gtk/gtk.h>
-#include <libgnome/gnome-i18n.h>
-#include <libbonobo.h>
-#include <libgnomevfs/gnome-vfs.h>
 #include <gconf/gconf.h>
 #include <gconf/gconf-client.h>
+#include <libgnomevfs/gnome-vfs.h>
+#include <libnautilus-extension/nautilus-extension-types.h>
+#include <libnautilus-extension/nautilus-menu-provider.h>
 
 #define GTK_FONT_KEY "/desktop/gnome/interface/font_name"
 
-static GConfClient *default_client;
+#define FONTILUS_TYPE_CONTEXT_MENU (fontilus_context_menu_get_type ())
+#define FONTILUS_CONTEXT_MENU(o)   (G_TYPE_CHECK_INSTANCE_CAST ((o), FONTILUS_TYPE_CONTEXT_MENU))
+
+typedef struct {
+    GObject parent;
+} FontilusContextMenu;
+typedef struct {
+    GObjectClass parent_class;
+} FontilusContextMenuClass;
+
+static GType fcm_type = 0;
+static GObjectClass *parent_class = NULL;
+static GConfClient *default_client = NULL;
+
+static void fontilus_context_menu_init       (FontilusContextMenu *self);
+static void fontilus_context_menu_class_init (FontilusContextMenuClass *class);
+static void menu_provider_iface_init (NautilusMenuProviderIface *iface);
+
+static GList *fontilus_context_menu_get_file_items (NautilusMenuProvider *provider,
+						    GtkWidget *window,
+						    GList *files);
+static void fontilus_context_menu_activate (NautilusMenuItem *item,
+					    NautilusFileInfo *file);
+
+static GType
+fontilus_context_menu_get_type (void)
+{
+    return fcm_type;
+}
+
+static void
+fontilus_context_menu_register_type (GTypeModule *module)
+{
+    static const GTypeInfo info = {
+	sizeof (FontilusContextMenuClass),
+	(GBaseInitFunc) NULL,
+	(GBaseFinalizeFunc) NULL,
+	(GClassInitFunc) fontilus_context_menu_class_init,
+	NULL,
+	NULL,
+	sizeof (FontilusContextMenu),
+	0,
+	(GInstanceInitFunc) fontilus_context_menu_init
+    };
+    static const GInterfaceInfo menu_provider_iface_info = {
+	(GInterfaceInitFunc)menu_provider_iface_init,
+	NULL,
+	NULL
+    };
+
+    fcm_type = g_type_module_register_type (module,
+					    G_TYPE_OBJECT,
+					    "FontilusContextMenu",
+					    &info, 0);
+    g_type_module_add_interface (module,
+				 fcm_type,
+				 NAUTILUS_TYPE_MENU_PROVIDER,
+				 &menu_provider_iface_info);
+}
+
+static void
+fontilus_context_menu_class_init (FontilusContextMenuClass *class)
+{
+    parent_class = g_type_class_peek_parent (class);
+}
+static void menu_provider_iface_init (NautilusMenuProviderIface *iface)
+{
+    iface->get_file_items = fontilus_context_menu_get_file_items;
+}
+static void
+fontilus_context_menu_init (FontilusContextMenu *self)
+{
+}
+
+static GList *
+fontilus_context_menu_get_file_items (NautilusMenuProvider *provider,
+				      GtkWidget *window,
+				      GList *files)
+{
+    GList *items = NULL;
+    NautilusFileInfo *file;
+    NautilusMenuItem *item;
+    char *scheme = NULL;
+
+    /* only add a menu item if a single file is selected */
+    if (files == NULL || files->next != NULL) goto end;
+
+    file = files->data;
+    scheme = nautilus_file_info_get_uri_scheme (file);
+
+    /* only handle files under the fonts URI scheme */
+    if (!scheme || g_ascii_strcasecmp (scheme, "fonts") != 0) goto end;
+    if (nautilus_file_info_is_directory (file)) goto end;
+
+    /* create the context menu item */
+    item = nautilus_menu_item_new ("fontilus-set-default-font",
+				   _("Set as Application Font"),
+				   _("Sets the default application font"),
+				   NULL);
+    g_signal_connect_object (item, "activate",
+			     G_CALLBACK (fontilus_context_menu_activate),
+			     file, 0);
+    items = g_list_prepend (items, item);
+ end:
+    g_free (scheme);
+
+    return items;
+}
 
 static gchar *
 get_font_name(const gchar *uri)
@@ -50,90 +158,72 @@ get_font_name(const gchar *uri)
     return base;
 }
 
-/* create a font string suitable to store in GTK_FONT_KEY using font_name.
- * tries to preserve the font size from the old string */
-static gchar *
-make_font_string(const gchar *old_string, const gchar *font_name)
-{
-    const gchar *space;
-
-    if (!old_string)
-	return g_strdup(font_name);
-
-    space = strrchr(old_string, ' ');
-    /* if no space, or the character after the last space is not a digit */
-    if (!space || (space[1] < '0' || '9' < space[1]))
-	return g_strdup(font_name);
-
-    /* if it looks like the last word is a number, append it to the
-     * font name to form the new name */
-    return g_strconcat(font_name, space, NULL);
-}
-
 static void
-handle_event(BonoboListener *listener, const gchar *event_name,
-	     const CORBA_any *args, CORBA_Environment *ev, gpointer user_data)
+fontilus_context_menu_activate (NautilusMenuItem *item,
+				NautilusFileInfo *file)
 {
-    const CORBA_sequence_CORBA_string *list;
-    gchar *font_name = NULL;
+    char *uri, *font_name, *default_font;
+    PangoFontDescription *fontdesc, *new_fontdesc;
 
-    if (!CORBA_TypeCode_equivalent(args->_type, TC_CORBA_sequence_CORBA_string, ev)) {
-	goto end;
-    }
-    list = (CORBA_sequence_CORBA_string *)args->_value;
-
-    if (list->_length != 1) {
-	goto end;
-    }
-
-    font_name = get_font_name(list->_buffer[0]);
-    if (!font_name) goto end;
-
-    /* set font */
-    if (!strcmp(event_name, "SetAsApplicationFont")) {
-	gchar *curval, *newval;
-
-	curval = gconf_client_get_string(default_client,
-					 GTK_FONT_KEY, NULL);
-	newval = make_font_string(curval, font_name);
-	gconf_client_set_string(default_client, GTK_FONT_KEY, newval, NULL);
-	g_free(newval);
-	g_free(curval);
+    /* get the existing font */
+    default_font = gconf_client_get_string(default_client,
+					   GTK_FONT_KEY, NULL);
+    if (default_font) {
+	fontdesc = pango_font_description_from_string (default_font);
     } else {
-	goto end;
+	fontdesc = pango_font_description_new ();
     }
+    g_free (default_font);
 
- end:
-    g_free(font_name);
+    /* get the new font name */
+    uri = nautilus_file_info_get_uri (file);
+    font_name = get_font_name (uri);
+    g_free (uri);
+    if (font_name) {
+	new_fontdesc = pango_font_description_from_string (font_name);
+    } else {
+	new_fontdesc = pango_font_description_new ();
+    }
+    g_free (font_name);
+
+    /* merge the new description into the old one */
+    pango_font_description_merge (fontdesc, new_fontdesc, TRUE);
+
+    default_font = pango_font_description_to_string (fontdesc);
+    pango_font_description_free (fontdesc);
+    pango_font_description_free (new_fontdesc);
+
+    gconf_client_set_string(default_client, GTK_FONT_KEY, default_font, NULL);
+    g_free (default_font);
 }
 
-/* --- factory --- */
-
-static BonoboObject *
-view_factory(BonoboGenericFactory *this_factory,
-	     const gchar *iid,
-	     gpointer user_data)
+/* --- extension interface --- */
+void
+nautilus_module_initialize (GTypeModule *module)
 {
-    BonoboListener *listener;
-
-    listener = bonobo_listener_new(handle_event, NULL);
-
-    return BONOBO_OBJECT(listener);
-}
-
-int
-main(int argc, char *argv[])
-{
-    bindtextdomain(GETTEXT_PACKAGE, FONTILUS_LOCALEDIR);
-    bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
-    textdomain(GETTEXT_PACKAGE);
-
-    BONOBO_FACTORY_INIT(_("Font context menu items"), VERSION,
-			&argc, argv);
+    fontilus_context_menu_register_type (module);
 
     default_client = gconf_client_get_default();
-    g_return_val_if_fail(default_client != NULL, -1);
 
-    return bonobo_generic_factory_main("OAFIID:Fontilus_Context_Menu_Factory",
-				       view_factory, NULL);
+    /* set up translation catalog */
+    bindtextdomain (GETTEXT_PACKAGE, FONTILUS_LOCALEDIR);
+    bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+}
+
+void
+nautilus_module_shutdown (void)
+{
+    if (default_client)
+	g_object_unref (default_client);
+    default_client = NULL;
+}
+void
+nautilus_module_list_types (const GType **types,
+			    int          *num_types)
+{
+    static GType type_list[1];
+
+    type_list[0] = FONTILUS_TYPE_CONTEXT_MENU;
+    *types = type_list;
+    *num_types = G_N_ELEMENTS (type_list);
 }

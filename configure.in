@@ -21,6 +21,7 @@ m4_define(xft_minver, 2.0.0)
 m4_define(gtk_minver, 2.0.0)
 m4_define(libbonobo_minver, 2.0.0)
 m4_define(libgnomeui_minver, 2.1.90)
+m4_define(nautilus_minver, 2.6.0)
 
 changequote(,)dnl
 if test "x$GCC" = "xyes"; then
@@ -172,7 +173,7 @@ if test ! -d "$srcdir/libgswitchit"; then
     AC_MSG_ERROR([Your checkout of gnome-control-center is out of date.
     The 'libgswitchit' module has been virtually included into 
     gnome-control-center by CVS as a subdirectory.  Please check
-    out again (this can be done on top of your existing checkout])
+    out again (this can be done on top of your existing checkout)])
 else
    AC_MSG_RESULT(yes)
 fi
@@ -186,13 +187,40 @@ AC_ARG_ENABLE(vfs-methods, [  --disable-vfs-methods        Do not build the font
 
 if test x$enable_vfs_methods = xyes; then 
 
-  PKG_CHECK_MODULES(THEME_METHOD, gnome-vfs-module-2.0 >= 2.2.0 gnome-vfs-2.0 >= 2.2.0)
-  PKG_CHECK_MODULES(THEMUS_THUMBNAILER, gdk-2.0 >= 2.2.0 libgnomeui-2.0 >= 2.2.0 libmetacity-private gnome-vfs-2.0 >= 2.2.0)
-  PKG_CHECK_MODULES(THEMUS_COMPONENT, glib-2.0 >= 2.2.0 gtk+-2.0 >= 2.2.0 atk >= 1.2.0 libgnome-2.0 >= 2.2.0 libgnomeui-2.0 >= 2.2.0 gnome-vfs-2.0 >= 2.2.0 libbonobo-2.0 >= 2.2.0 libbonoboui-2.0 >= 2.2.0 libnautilus >= 2.2.0 libglade-2.0)
-  PKG_CHECK_MODULES(FONT_METHOD,  [gnome-vfs-module-2.0 >= gnomevfs_minver  fontconfig >= fontconfig_minver])
-  PKG_CHECK_MODULES(FONT_THUMBNAILER, [gnome-vfs-2.0 >= gnomevfs_minver gdk-pixbuf-2.0 >= gtk_minver])
-  PKG_CHECK_MODULES(FONT_CONTEXT_MENU, [gnome-vfs-2.0 >= gnomevfs_minver libbonobo-2.0 >= libbonobo_minver])
-  PKG_CHECK_MODULES(FONT_VIEW, [gnome-vfs-2.0 >= gnomevfs_minver  xft >= xft_minver gtk+-2.0 >= gtk_minver libgnomeui-2.0 >= libgnomeui_minver])
+  PKG_CHECK_MODULES(THEME_METHOD,
+  [gnome-vfs-module-2.0 >= 2.2.0 dnl
+   gnome-vfs-2.0 >= 2.2.0])
+  PKG_CHECK_MODULES(THEMUS_THUMBNAILER,
+  [gdk-2.0 >= 2.2.0 dnl
+   libgnomeui-2.0 >= 2.2.0 dnl
+   libmetacity-private dnl
+   gnome-vfs-2.0 >= 2.2.0])
+  PKG_CHECK_MODULES(THEMUS_COMPONENT,
+  [glib-2.0 >= 2.2.0 dnl
+   gtk+-2.0 >= 2.2.0 dnl
+   atk >= 1.2.0 dnl
+   libgnome-2.0 >= 2.2.0 dnl
+   libgnomeui-2.0 >= 2.2.0 dnl
+   gnome-vfs-2.0 >= 2.2.0 dnl
+   libbonobo-2.0 >= 2.2.0 dnl
+   libbonoboui-2.0 >= 2.2.0 dnl
+   libnautilus >= 2.2.0 dnl
+   libglade-2.0])
+  PKG_CHECK_MODULES(FONT_METHOD,
+  [gnome-vfs-module-2.0 >= gnomevfs_minver dnl
+   fontconfig >= fontconfig_minver])
+  PKG_CHECK_MODULES(FONT_THUMBNAILER,
+  [gnome-vfs-2.0 >= gnomevfs_minver dnl
+   gdk-pixbuf-2.0 >= gtk_minver])
+  PKG_CHECK_MODULES(FONT_CONTEXT_MENU,
+  [glib-2.0 >= 2.4.0 dnl
+   gnome-vfs-2.0 >= gnomevfs_minver dnl
+   libnautilus-extension >= nautilus_minver])
+  PKG_CHECK_MODULES(FONT_VIEW,
+  [gnome-vfs-2.0 >= gnomevfs_minver dnl
+   xft >= xft_minver dnl
+   gtk+-2.0 >= gtk_minver dnl
+   libgnomeui-2.0 >= libgnomeui_minver])
 
   # Add freetype flags to the thumbnailer script
   AC_PATH_PROG(FREETYPE_CONFIG, freetype-config, no)
