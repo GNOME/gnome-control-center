@@ -9,6 +9,9 @@ gnome2_default_applications_properties_SOURCES = \
 iconsdir   = $(GNOMECC_ICONS_DIR)
 icons_DATA = default-applications-capplet.png
 
+desktop_iconsdir = $(datadir)/pixmaps
+desktop_icons_DATA = default-applications-capplet.png
+
 Gladedir   = $(GNOMECC_GLADE_DIR)
 Glade_DATA = gnome-default-applications-properties.glade
 
