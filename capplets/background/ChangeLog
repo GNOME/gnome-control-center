@@ -1,3 +1,15 @@
+2005-02-26  Rodney Dawes  <dobey@novell.com>
+
+	* gnome-wp-capplet.c (gnome_wp_add_image): If the filename is not
+	encoded in UTF-8, we just ignore it for now to avoid crashing
+
+	* gnome-wp-xml.c (gnome_wp_xml_load_xml): Check to make sure that the
+	filename and name tags that we read in, aren't NULL
+	If the filename we read in is NULL, free the item, and continue on
+
+	Fixes #146130 #146645 (resolving these as dups of #168604 )
+	Fixes #159441
+
 2005-02-06  Rodney Dawes  <dobey@novell.com>
 
 	* gnome-wp-capplet.c (wallpaper_properties_init): Force using the gtk+

@@ -93,6 +93,9 @@ static GnomeWPItem * gnome_wp_add_image (GnomeWPCapplet * capplet,
 					 const gchar * filename) {
   GnomeWPItem * item;
 
+  if (!g_utf8_validate (filename, -1, NULL))
+    return NULL;
+
   item = g_hash_table_lookup (capplet->wphash, filename);
   if (item != NULL) {
     if (item->deleted) {

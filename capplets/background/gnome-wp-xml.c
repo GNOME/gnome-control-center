@@ -118,13 +118,13 @@ static void gnome_wp_xml_load_xml (GnomeWPCapplet * capplet,
 
       for (wpa = list->children; wpa != NULL; wpa = wpa->next) {
 	if (!strcmp (wpa->name, "filename")) {
-	  if (wpa->last != NULL) {
+	  if (wpa->last != NULL && wpa->last->content != NULL) {
 	    wp->filename = g_strdup (g_strstrip (wpa->last->content));
 	  } else {
 	    break;
 	  }
 	} else if (!strcmp (wpa->name, "name")) {
-	  if (wpa->last != NULL) {
+	  if (wpa->last != NULL && wpa->last->content != NULL) {
 	    nodelang = xmlNodeGetLang (wpa->last);
 
 	    if (wp->name == NULL && nodelang == NULL) {
@@ -138,6 +138,8 @@ static void gnome_wp_xml_load_xml (GnomeWPCapplet * capplet,
 	    }
 
 	    xmlFree (nodelang);
+	  } else {
+	    break;
 	  }
 	} else if (!strcmp (wpa->name, "imguri")) {
 	  if (wpa->last != NULL) {
@@ -169,11 +171,15 @@ static void gnome_wp_xml_load_xml (GnomeWPCapplet * capplet,
 	}
       }
 
-      /* Make sure we don't already have this one */
-      item = g_hash_table_lookup (capplet->wphash, wp->filename);
+      /* Make sure we don't already have this one and that filename exists */
+      if (wp->filename != NULL) {
+	item = g_hash_table_lookup (capplet->wphash, wp->filename);
 
-      if (item != NULL) {
-	gnome_wp_item_free (wp);
+	if (item != NULL) {
+	  gnome_wp_item_free (wp);
+	  continue;
+	}
+      } else {
 	continue;
       }
 
