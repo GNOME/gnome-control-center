@@ -1,3 +1,13 @@
+2002-10-08  Jody Goldberg <jody@gnome.org>
+
+	http://bugzilla.gnome.org/show_bug.cgi?id=95179
+	* gnome-settings-accessibility-keyboard.c
+	(gnome_settings_accessibility_keyboard_init) : do nothing here.
+	(gnome_settings_accessibility_keyboard_load) : install the filter
+	  here, _after_ loading the gconf settings.
+	(set_gconf_from_server) : check to see if anything has actually
+	  changed before sending off the changeset.
+
 2002-10-01  Jody Goldberg <jody@gnome.org>
 
 	* Release 2.1.0.1
