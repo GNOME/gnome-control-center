@@ -42,15 +42,24 @@
 
 #define CWID(s) glade_xml_get_widget (chooserDialog, s)
 
+static gchar* currentModelName = NULL;
+
 static void
-add_model_to_list (const XklConfigItemPtr configItem, GtkListStore * listStore)
+add_model_to_list (const XklConfigItemPtr configItem, GtkTreeView * modelsList)
 {
   GtkTreeIter iter;
+  GtkListStore * listStore = GTK_LIST_STORE (gtk_tree_view_get_model (modelsList));
   char *utfModelName = xci_desc_to_utf8 (configItem);
   gtk_list_store_append( listStore, &iter );
   gtk_list_store_set( listStore, &iter, 
                       0, utfModelName,
                       1, configItem->name, -1 );
+
+  if (currentModelName != NULL &&
+      !g_ascii_strcasecmp(configItem->name, currentModelName))
+    {
+       gtk_tree_selection_select_iter (gtk_tree_view_get_selection (modelsList), &iter);
+    }
   g_free (utfModelName);
 }
 
@@ -77,10 +86,10 @@ fill_models_list (GladeXML * chooserDialog)
   gtk_tree_view_column_set_visible (descriptionCol, TRUE);
   gtk_tree_view_append_column (GTK_TREE_VIEW (modelsList), descriptionCol);
 
-  XklConfigEnumModels ((ConfigItemProcessFunc)
-		       add_model_to_list, listStore);
-
   gtk_tree_view_set_model (GTK_TREE_VIEW (modelsList), GTK_TREE_MODEL (listStore) );
+
+  XklConfigEnumModels ((ConfigItemProcessFunc)
+		       add_model_to_list, modelsList);
 
   g_signal_connect (G_OBJECT (gtk_tree_view_get_selection (GTK_TREE_VIEW (modelsList))), 
                     "changed",
@@ -119,9 +128,12 @@ choose_model(GladeXML * dialog)
   GladeXML* chooserDialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/gnome-keyboard-properties.glade", "xkb_model_chooser", NULL);
   GtkWidget* chooser = CWID ( "xkb_model_chooser");
   gtk_window_set_transient_for (GTK_WINDOW (chooser), GTK_WINDOW (WID ("keyboard_dialog")));
+  currentModelName = gconf_client_get_string (gconf_client_get_default (),
+			           GSWITCHIT_CONFIG_XKB_KEY_MODEL, NULL);
   fill_models_list (chooserDialog);
   g_signal_connect (G_OBJECT (chooser),
 		    "response", G_CALLBACK (xkb_model_chooser_response), chooserDialog);
   gtk_dialog_run (GTK_DIALOG (chooser));
   gtk_widget_destroy (chooser);
+  g_free (currentModelName);
 }

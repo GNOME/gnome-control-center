@@ -53,6 +53,25 @@ xci_desc_to_utf8 (XklConfigItem * ci)
 }
 
 static GConfValue *
+model_from_widget (GConfPropertyEditor * peditor, GConfValue * value)
+{
+  GConfValue *new_value;
+
+  new_value = gconf_value_new (GCONF_VALUE_STRING);
+
+  if (value->type == GCONF_VALUE_STRING)
+    {
+      GObject* widget = gconf_property_editor_get_ui_control(peditor);
+      gchar* n = g_object_get_data (widget, "xkbModelName");
+      gconf_value_set_string (new_value, n);
+    }
+  else
+    gconf_value_set_string (new_value, _("Unknown"));
+
+  return new_value;
+}
+
+static GConfValue *
 model_to_widget (GConfPropertyEditor * peditor, GConfValue * value)
 {
   GConfValue *new_value;
@@ -64,9 +83,16 @@ model_to_widget (GConfPropertyEditor * peditor, GConfValue * value)
       XklConfigItem ci;
       g_snprintf( ci.name, sizeof (ci.name), "%s", gconf_value_get_string( value ) );
       if ( XklConfigFindModel( &ci ) )
-        gconf_value_set_string( new_value, ci.description );
+      {
+        GObject* widget = gconf_property_editor_get_ui_control(peditor);
+        gchar* d = xci_desc_to_utf8 (&ci);
+
+        g_object_set_data_full (widget, "xkbModelName", g_strdup (ci.name), g_free);
+        gconf_value_set_string (new_value, d);
+        g_free (d);
+      }
       else
-        gconf_value_set_string( new_value, _("Unknown") );
+        gconf_value_set_string (new_value, _("Unknown"));
     }
 
   return new_value;
@@ -111,7 +137,8 @@ setup_xkb_tabs (GladeXML * dialog, GConfChangeSet * changeset)
   gconf_peditor_new_string
     (changeset, (gchar *) GSWITCHIT_CONFIG_XKB_KEY_MODEL,
      WID ("xkb_model"),
-     "conv-to-widget-cb", model_to_widget, NULL);
+     "conv-to-widget-cb", model_to_widget,
+     "conv-from-widget-cb", model_from_widget, NULL);
 
   fill_available_layouts_tree (dialog);
   fill_available_options_tree (dialog);
