@@ -96,7 +96,7 @@ apply_settings (void)
 	XChangeKeyboardControl (GDK_DISPLAY (), KBKeyClickPercent, 
 				&kbdcontrol);
 
-	XFlush (GDK_DISPLAY ());
+	XSync (GDK_DISPLAY (), FALSE);
 	gdk_error_trap_pop ();
 }
 

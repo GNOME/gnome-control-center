@@ -79,12 +79,26 @@ set_server_from_gconf (GConfEntry *ignored)
 	gint32 		 enabled, enable_mask;
 	XkbDescRec	*desc;
 	GConfClient	*client = gconf_client_get_default ();
+	Status		 status;
+
+	gdk_error_trap_push ();
+	desc = XkbGetMap (GDK_DISPLAY (), XkbAllMapComponentsMask, XkbUseCoreKbd);
+	desc->ctrls = NULL;
+	status = XkbGetControls (GDK_DISPLAY (), XkbAllControlsMask, desc);
+	XSync (GDK_DISPLAY (), FALSE);
+	gdk_error_trap_pop ();
+
+	g_return_if_fail (status == Success);
+	g_return_if_fail (desc != NULL);
+	g_return_if_fail (desc->ctrls != NULL);
 
 	if (we_are_changing_xkb_state) {
 		d ("We changed gconf accessibility state\n");
 		return;
 	} else
 		d ("Someone changed gconf accessibility state\n");
+
+	desc->ctrls->ax_options = XkbAX_LatchToLockMask;
 
 	enable_mask =   XkbAccessXKeysMask	|
 			XkbSlowKeysMask		|
@@ -97,11 +111,6 @@ set_server_from_gconf (GConfEntry *ignored)
 			XkbAccessXFeedbackMask;
 
 	enabled = XkbAccessXFeedbackMask;
-
-	desc = XkbGetMap(GDK_DISPLAY (), 0, XkbUseCoreKbd);
-	XkbGetControls (GDK_DISPLAY (), XkbAllControlsMask, desc);
-
-	desc->ctrls->ax_options = XkbAX_LatchToLockMask;
 
 	/* general */
 	if (gconf_client_get_bool (client, CONFIG_ROOT "/enable", NULL))
@@ -172,7 +181,7 @@ set_server_from_gconf (GConfEntry *ignored)
 	gdk_error_trap_push ();
 	we_are_changing_xkb_state = TRUE;
 	XkbSetControls (GDK_DISPLAY (), which, desc);
-	gdk_flush ();
+	XSync (GDK_DISPLAY (), FALSE);
 	we_are_changing_xkb_state = FALSE;
 	gdk_error_trap_pop ();
 }
@@ -182,12 +191,18 @@ set_gconf_from_server (GConfEntry *ignored)
 {
 	XkbDescRec	*desc;
 	GConfClient	*client = gconf_client_get_default ();
+	Status		 status;
 
 	gdk_error_trap_push ();
-	desc = XkbGetMap(GDK_DISPLAY (), 0, XkbUseCoreKbd);
-	XkbGetControls (GDK_DISPLAY (), XkbAllControlsMask, desc);
-	XFlush (GDK_DISPLAY ());
+	desc = XkbGetMap (GDK_DISPLAY (), XkbAllMapComponentsMask, XkbUseCoreKbd);
+	desc->ctrls = NULL;
+	status = XkbGetControls (GDK_DISPLAY (), XkbAllControlsMask, desc);
+	XSync (GDK_DISPLAY (), FALSE);
 	gdk_error_trap_pop ();
+
+	g_return_if_fail (status != Success);
+	g_return_if_fail (desc != NULL);
+	g_return_if_fail (desc->ctrls != NULL);
 
 	desc->ctrls->ax_options = XkbAX_LatchToLockMask;
 
@@ -287,7 +302,7 @@ gnome_settings_accessibility_keyboard_init (GConfClient *client)
 	XkbSelectEvents (GDK_DISPLAY (),
 		XkbUseCoreKbd, XkbAllEventsMask, XkbAllEventsMask);
 
-	XFlush (GDK_DISPLAY ());
+	XSync (GDK_DISPLAY (), FALSE);
 	gdk_error_trap_pop ();
 
 	gdk_window_add_filter (NULL, &cb_xkb_event_filter, NULL);

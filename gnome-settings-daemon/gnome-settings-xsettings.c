@@ -62,24 +62,24 @@ translate_string_string (TranslationEntry *trans,
 }
 
 static TranslationEntry translations [] = {
-  { "/desktop/gnome/peripherals/mouse/double_click", "Net/DoubleClickTime", GCONF_VALUE_INT,    
-    translate_int_int },
-  { "/desktop/gnome/gtk-color-palette", "Gtk/ColorPalette", GCONF_VALUE_STRING,
-    translate_string_string },
-  { "/desktop/gnome/gtk-toolbar-style", "Gtk/ToolbarStyle", GCONF_VALUE_STRING,
-    translate_string_string },
-  { "/desktop/gnome/gtk-toolbar-icon-size", "Gtk/ToolbarIconSize", GCONF_VALUE_STRING,
-    translate_string_string },
-  { "/desktop/gnome/interface/gtk_theme", "Net/ThemeName", GCONF_VALUE_STRING,
-    translate_string_string },
-  { "/desktop/gnome/interface/gtk_key_theme", "Gtk/KeyThemeName", GCONF_VALUE_STRING,
-    translate_string_string },
-  { "/desktop/gnome/interface/font_name", "Gtk/FontName", GCONF_VALUE_STRING,
-    translate_string_string },
+  { "/desktop/gnome/peripherals/mouse/double_click",	"Net/DoubleClickTime",
+      GCONF_VALUE_INT,		translate_int_int },
+  { "/desktop/gnome/gtk-color-palette",			"Gtk/ColorPalette",
+      GCONF_VALUE_STRING,	translate_string_string },
+  { "/desktop/gnome/interface/font_name",		"Gtk/FontName",
+      GCONF_VALUE_STRING,	translate_string_string },
+  { "/desktop/gnome/interface/gtk_key_theme",		"Gtk/KeyThemeName",
+      GCONF_VALUE_STRING,	translate_string_string },
+  { "/desktop/gnome/gtk-toolbar-style",			"Gtk/ToolbarStyle",
+      GCONF_VALUE_STRING,	translate_string_string },
+  { "/desktop/gnome/gtk-toolbar-icon-size",		"Gtk/ToolbarIconSize",
+      GCONF_VALUE_STRING,	translate_string_string },
   { "/desktop/gnome/interface/cursor_blink",		"Net/CursorBlink",
-    GCONF_VALUE_BOOL,	translate_bool_int },
+      GCONF_VALUE_BOOL,		translate_bool_int },
   { "/desktop/gnome/interface/cursor_blink_time",	"Net/CursorBlinkTime",
-    GCONF_VALUE_INT,	translate_int_int }
+      GCONF_VALUE_INT,		translate_int_int },
+  { "/desktop/gnome/interface/gtk_theme",		"Net/ThemeName",
+      GCONF_VALUE_STRING,	translate_string_string }
 };
 
 static TranslationEntry*
