@@ -1,3 +1,4 @@
+#include <config.h>
 #include "da.h"
 #include <errno.h>
 
@@ -46,17 +47,28 @@ demo_main(int argc, char **argv, gint in_fd)
   GtkWidget *widget, *table, *hbox;
   GtkWidget *scrolled_window;
   GSList *group;
-  gchar *titles[2] = {"One","Two"};
-  gchar *row1[2] = {"Eenie", "Meenie"};
-  gchar *row2[2] = {"Mynie", "Moe"};
-  gchar *row3[2] = {"Catcha", "Tiger"};
-  gchar *row4[2] = {"By Its", "Toe"};
+  gchar *titles[2] = {N_("One"),N_("Two")};
+  /* just 8 short names that will serve as samples for titles in demo */	
+  gchar *row1[2] = {N_("Eenie"), N_("Meenie")};
+  gchar *row2[2] = {N_("Mynie"), N_("Moe")};
+  gchar *row3[2] = {N_("Catcha"), N_("Tiger")};
+  gchar *row4[2] = {N_("By Its"), N_("Toe")};
   gchar **rc_files;
   gchar **new_rc_files;
   gint rc_file_count;
   gint new_count;
   gchar *home_dir;
   gint i;
+
+#ifdef ENABLE_NLS
+  for (i=0;i<2;i++) {
+	titles[i]=_(titles[i]);
+	row1[i]=_(row1[i]);
+	row2[i]=_(row2[i]);
+	row3[i]=_(row3[i]);
+	row4[i]=_(row4[i]);
+  }
+#endif
 
   if (read(in_fd, buf, 12) <= 0)
     /* Assume this means that our parent exited or was killed */
@@ -99,40 +111,40 @@ demo_main(int argc, char **argv, gint in_fd)
   table = gtk_table_new (4, 3, FALSE);
   gtk_container_add(GTK_CONTAINER(plug), table);
   
-  widget = gtk_label_new ("Selected themes from above will be tested by previewing here.");
+  widget = gtk_label_new (_("Selected themes from above will be tested by previewing here."));
   gtk_label_set_justify (GTK_LABEL (widget), GTK_JUSTIFY_LEFT);
 
   /* column one */
   gtk_table_attach (GTK_TABLE (table), widget, 0, 3, 0, 1, 0, 0, GNOME_PAD_SMALL, GNOME_PAD_SMALL);
-  widget = gtk_button_new_with_label ("Sample Button");
+  widget = gtk_button_new_with_label (_("Sample Button"));
   hbox = gtk_hbox_new (FALSE, 0);
   gtk_box_pack_start (GTK_BOX (hbox), widget, FALSE, FALSE, 0);
   gtk_table_attach (GTK_TABLE (table), hbox, 0, 1, 1, 2, GTK_EXPAND | GTK_FILL, 0, GNOME_PAD_SMALL, GNOME_PAD_SMALL);
-  widget = gtk_check_button_new_with_label ("Sample Check Button");
+  widget = gtk_check_button_new_with_label (_("Sample Check Button"));
   hbox = gtk_hbox_new (FALSE, 0);
   gtk_box_pack_start (GTK_BOX (hbox), widget, FALSE, FALSE, 0);
   gtk_table_attach (GTK_TABLE (table), hbox, 0, 1, 2, 3, GTK_EXPAND | GTK_FILL, 0, GNOME_PAD_SMALL, 0);
   widget = gtk_entry_new_with_max_length (50);
-  gtk_entry_set_text (GTK_ENTRY (widget), "Sample Text Entry Field");
+  gtk_entry_set_text (GTK_ENTRY (widget), _("Sample Text Entry Field"));
   gtk_widget_set_usize (widget, 70, -1);
   hbox = gtk_hbox_new (FALSE, 0);
   gtk_box_pack_start (GTK_BOX (hbox), widget, TRUE, TRUE, 0);
   gtk_table_attach (GTK_TABLE (table), hbox, 0, 1, 3, 4, GTK_EXPAND | GTK_FILL, 0, GNOME_PAD_SMALL, GNOME_PAD_SMALL);
 
   /* column two */
-  widget = gtk_radio_button_new_with_label (NULL, "Radio Button 1");
+  widget = gtk_radio_button_new_with_label (NULL, _("Radio Button 1"));
   hbox = gtk_hbox_new (FALSE, 0);
   gtk_box_pack_start (GTK_BOX (hbox), widget, FALSE, FALSE, 0);
   group = gtk_radio_button_group (GTK_RADIO_BUTTON (widget));
   gtk_table_attach (GTK_TABLE (table), hbox, 1, 2, 1, 2, GTK_EXPAND | GTK_FILL, 0, 0, GNOME_PAD_SMALL);
 
-  widget = gtk_radio_button_new_with_label (group, "Radio Button 2");
+  widget = gtk_radio_button_new_with_label (group, _("Radio Button 2"));
   hbox = gtk_hbox_new (FALSE, 0);
   gtk_box_pack_start (GTK_BOX (hbox), widget, FALSE, FALSE, 0);
   group = gtk_radio_button_group (GTK_RADIO_BUTTON (widget));
   gtk_table_attach (GTK_TABLE (table), hbox, 1, 2, 2, 3, GTK_EXPAND | GTK_FILL, 0, 0, 0);
 
-  widget = gtk_radio_button_new_with_label (group, "Radio Button 3");
+  widget = gtk_radio_button_new_with_label (group, _("Radio Button 3"));
   hbox = gtk_hbox_new (FALSE, 0);
   gtk_box_pack_start (GTK_BOX (hbox), widget, FALSE, FALSE, 0);
   group = gtk_radio_button_group (GTK_RADIO_BUTTON (widget));
