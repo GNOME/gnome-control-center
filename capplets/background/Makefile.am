@@ -3,9 +3,11 @@ cappletgroup =
 bin_PROGRAMS = background-properties
 
 background_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
-background_properties_SOURCES =			\
-	main.c					\
-	applier.c	applier.h
+background_properties_SOURCES = \
+	main.c\
+	prefs-widget.c		prefs-widget.h \
+	preferences.c		preferences.h \
+	applier.c			applier.h
 
 pixmap_DATA = 
 

@@ -19,7 +19,7 @@ screensaver_properties_SOURCES = \
 	resources.c				resources.h\
 	XScreenSaver_ad.h
 
-pixmap_DATA = no-hack.png 
+pixmaps_DATA = no-hack.png 
 
 ##
 ## You should not need to modify anything below this line
@@ -32,7 +32,7 @@ CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
 EXTRA_DIST = $(GNOMECC_CAPPLETS_EXTRA_DIST) no-hack.png
 iconsdir   = $(GNOMECC_ICONS_DIR)
 Gladedir   = $(GNOMECC_GLADE_DIR)
-pixmapdir  = $(GNOMECC_PIXMAPS_DIR)
+pixmapsdir = $(GNOMECC_PIXMAPS_DIR)
 Glade_DATA = $(cappletname)-properties.glade
 icons_DATA = $(cappletname)-capplet.png
 desktop    = $(cappletname).desktop

@@ -7,7 +7,7 @@ mouse_properties_SOURCES = \
 	prefs-widget.c		prefs-widget.h \
 	preferences.c		preferences.h
 
-pixmap_DATA = mouse-left.png mouse-right.png
+pixmaps_DATA = mouse-left.png mouse-right.png
 
 ##
 ## You should not need to modify anything below this line
@@ -20,7 +20,7 @@ CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
 EXTRA_DIST = $(GNOMECC_CAPPLETS_EXTRA_DIST) mouse-left.png mouse-right.png
 iconsdir   = $(GNOMECC_ICONS_DIR)
 Gladedir   = $(GNOMECC_GLADE_DIR)
-pixmapdir  = $(GNOMECC_PIXMAPS_DIR)
+pixmapsdir = $(GNOMECC_PIXMAPS_DIR)
 Glade_DATA = $(cappletname)-properties.glade
 icons_DATA = $(cappletname)-capplet.png
 desktop    = $(cappletname).desktop

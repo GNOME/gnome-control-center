@@ -119,7 +119,7 @@ dnl ==============================================
 GNOMECC_CAPPLETS_CFLAGS="${CAPPLET_CFLAGS} -I\$(top_srcdir)/intl -I\$(top_srcdir)/ -DG_LOG_DOMAIN=\"\\\"\$(cappletname)-properties\\\"\" -DGLADE_DATADIR=\"\\\"${datadir}/control-center\\\"\" -DGNOMELOCALEDIR=\"\\\"${datadir}/locale\\\"\" -I\$(top_srcdir)/capplets/common "
 GNOMECC_CAPPLETS_LIBS="${CAPPLET_LIBS} \$(top_builddir)/capplets/common/libcommon.a"
 GNOMECC_CAPPLETS_CLEANFILES="\$(desktop) \$(desktop).in"
-GNOMECC_CAPPLETS_EXTRA_DIST="ChangeLog \$(desktop).in.in \$(desktop).in \$(desktop) \$(cappletname)-capplet.png \$(cappletname)-properties.glade"
+GNOMECC_CAPPLETS_EXTRA_DIST="ChangeLog \$(desktop).in.in \$(desktop).in \$(desktop) \$(cappletname)-capplet.png \$(cappletname)-properties.glade \$(pixmaps_DATA)"
 
 AC_SUBST(GNOMECC_CAPPLETS_EXTRA_DIST)
 AC_SUBST(GNOMECC_CAPPLETS_CLEANFILES)
@@ -141,7 +141,7 @@ AC_DEFINE_UNQUOTED(GNOMECC_GLADE_DIR, "${prefix}/share/${PACKAGE}/interfaces")
 GNOMECC_GLADE_DIR=""${datadir}/${PACKAGE}/interfaces""
 AC_SUBST(GNOMECC_GLADE_DIR)
 AC_DEFINE_UNQUOTED(GNOMECC_PIXMAPS_DIR, "${prefix}/share/${PACKAGE}/pixmaps")
-GNOMECC_PIXMAPS_DIR=""${datadir}/${PACKAGE}/pixmaps""
+GNOMECC_PIXMAPS_DIR=""${prefix}/share/${PACKAGE}/pixmaps""
 AC_SUBST(GNOMECC_PIXMAPS_DIR)
 AC_DEFINE_UNQUOTED(GNOMECC_SCREENSAVERS_DIR, "${prefix}/share/${PACKAGE}/screensavers")
 GNOMECC_SCREENSAVERS_DIR=""${datadir}/${PACKAGE}/screensavers""
