@@ -1,3 +1,5 @@
+SUBDIRS = location-manager-capplet
+
 confexecdir = $(libdir)
 confexec_DATA = ximian_archiverConf.sh
 
