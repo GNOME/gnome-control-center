@@ -43,6 +43,8 @@ libconfig_archiver_la_SOURCES = \
 libconfig_archiver_la_LIBADD = \
 	@GNOME_XML_LIBS@
 
+archiver-client.c: $(CORBA_SOURCE)
+
 include_HEADERS = \
 	ConfigArchiver.h	\
 	archiver-client.h
@@ -81,7 +83,7 @@ Bonobo_Moniker_archiver.oaf : $(srcdir)/Bonobo_Moniker_archiver.oaf.in $(top_bui
 	$(srcdir)/Bonobo_Moniker_archiver.oaf.in > Bonobo_Moniker_archiver.oaf 
 
 clean-local:
-	-rm -f $(OAF_FILES)
+	-rm -f $(OAF_FILES) $(CORBA_SOURCE)
 
 bonobo_moniker_archiver_SOURCES =					\
 	bonobo-config-archiver.c	bonobo-config-archiver.h	\
