@@ -1,5 +1,5 @@
 always_built_SUBDIRS =						\
-	common background keyboard mouse screensaver sound 	\
+	common background keyboard mouse sound 	\
 	default-applications desktop-links
 
 #rollback

@@ -132,20 +132,6 @@ AC_PATH_PROG(XSCREENSAVER, xscreensaver, no)
 if test "$XSCREENSAVER" = no ; then
 	AC_MSG_ERROR(xscreensaver was not found. It can be downloaded from http://www.jwz.org/xscreensaver/.)
 fi
-XSCREENSAVER_BIN_DIR=`dirname $XSCREENSAVER`
-# sigh, lame 
-if test "$XSCREENSAVER_BIN_DIR" = "/usr/bin/X11"; then
-	XSCREENSAVER_BIN_DIR="/usr/X11R6/bin";
-fi
-
-XSCREENSAVER_PREFIX=`dirname $XSCREENSAVER_BIN_DIR`
-AC_SUBST(XSCREENSAVER_PREFIX)
-
-AC_PATH_PROG(PERL, perl, no)
-if test "$PERL" = no ; then
-	AC_MSG_ERROR(Perl was not found.)
-fi
-AC_SUBST(PERL)
 
 dnl ==============================================
 dnl End: Check that we meet the  dependencies
@@ -202,8 +188,6 @@ AC_SUBST(GNOMECC_PIXMAPS_DIR)
 AC_DEFINE_UNQUOTED(GNOMECC_DEFAULTS_DIR, "${real_prefix}/share/${PACKAGE}/defaults")
 GNOMECC_DEFAULTS_DIR=""${datadir}/${PACKAGE}/defaults""
 AC_SUBST(GNOMECC_DEFAULTS_DIR)
-AC_DEFINE_UNQUOTED(GNOMECC_SCREENSAVERS_DIR, "${real_prefix}/share/${PACKAGE}/screensavers")
-GNOMECC_SCREENSAVERS_DIR=""${datadir}/${PACKAGE}/screensavers""
 AC_SUBST(GNOMECC_SCREENSAVERS_DIR)
 dnl ==============================================
 dnl End: Define the directories 
@@ -265,9 +249,6 @@ capplets/default-applications/Makefile
 capplets/desktop-links/Makefile
 capplets/keyboard/Makefile
 capplets/mouse/Makefile
-capplets/screensaver/Makefile
-capplets/screensaver/screensavers/Makefile
-capplets/screensaver/screensavers/magic.pl
 capplets/sound/Makefile
 libsounds/Makefile
 idl/Makefile
