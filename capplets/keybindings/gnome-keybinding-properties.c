@@ -59,6 +59,8 @@ const KeyListEntry metacity_key_list[] =
   { "/apps/metacity/window_keybindings/raise_or_lower",            ALWAYS_VISIBLE,  0 },
   { "/apps/metacity/window_keybindings/raise",                     ALWAYS_VISIBLE,  0 },
   { "/apps/metacity/window_keybindings/lower",                     ALWAYS_VISIBLE,  0 },
+  { "/apps/metacity/window_keybindings/maximize_vertically",       ALWAYS_VISIBLE,  0 },
+  { "/apps/metacity/window_keybindings/maximize_horizontally",     ALWAYS_VISIBLE,  0 },
   { "/apps/metacity/window_keybindings/move_to_workspace_1",       N_WORKSPACES_GT, 1 },
   { "/apps/metacity/window_keybindings/move_to_workspace_2",       N_WORKSPACES_GT, 1 },
   { "/apps/metacity/window_keybindings/move_to_workspace_3",       N_WORKSPACES_GT, 2 },
