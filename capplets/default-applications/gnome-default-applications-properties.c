@@ -40,7 +40,7 @@
 #include "gconf-property-editor.h"
 
 
-#define DEFAULT_APPS_KEY_BROWSER_PATH "/desktop/gnome/url-handlers/unknown"
+#define DEFAULT_APPS_KEY_BROWSER_PATH "/desktop/gnome/url-handlers/http"
 #define DEFAULT_APPS_KEY_BROWSER_NEEDS_TERM DEFAULT_APPS_KEY_BROWSER_PATH"/needs_terminal"
 #define DEFAULT_APPS_KEY_BROWSER_EXEC       DEFAULT_APPS_KEY_BROWSER_PATH"/command"
 
@@ -192,6 +192,10 @@ static void
 initialize_default_applications (void)
 {
         gint i;
+	/* This is used to only have one Evolution entry in the dropdown box
+	 * in case the user has installed both evo for gnome1 and for gnome2
+	 */
+	gboolean evo_already_in_list = FALSE;
 
 	text_editors = gnome_vfs_mime_get_all_applications ("text/plain");
 
@@ -202,13 +206,26 @@ initialize_default_applications (void)
 			g_free(browsers);
 		}
         }
-        for (i = 0; i < G_N_ELEMENTS (possible_mailers); i++ ) {
-		gchar *mailers = g_find_program_in_path (possible_mailers[i].executable_name);
+        for (i = 0; i < G_N_ELEMENTS (possible_mailers); i++ ) {	  
+		gchar *mailers;
+		gchar *exec_name = possible_mailers[i].executable_name;
+
+		mailers =  g_find_program_in_path (exec_name);
                 if (mailers) {
+			if (g_str_has_prefix (exec_name, "evolution")) {
+				if (evo_already_in_list) {
+					g_free (mailers);
+					continue;
+				} else {
+					evo_already_in_list = TRUE;
+				}
+			}
+
 			possible_mailers[i].in_path = TRUE;
 			g_free(mailers);
 		}
         }
+
         for (i = 0; i < G_N_ELEMENTS (possible_help_viewers); i++ ) {
                 gchar *help_viewers = g_find_program_in_path (possible_help_viewers[i].executable_name);
 		if (help_viewers) {

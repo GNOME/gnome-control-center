@@ -48,9 +48,14 @@ BrowserDescription possible_browsers[] =
 
 MailerDescription possible_mailers[] =
 {
+	/* The code in gnome-default-applications-properties.c makes sure
+	 * there is only one (the first entry in this list) Evolution entry 
+	 * in the list shown to the user
+	 */
+        { "Evolution Mail Reader",		"evolution-1.4",      "evolution-1.4 %s",      FALSE,  FALSE, },
         { "Evolution Mail Reader",		"evolution",      "evolution %s",      FALSE,  FALSE, },
-        { "Evolution Mail Reader for GNOME2",		"evolution-1.3",      "evolution-1.3 %s",      FALSE,  FALSE, },
 	{ "Balsa",        "balsa",    "balsa --compose=%s", FALSE, FALSE },
+	{ "KMail",        "kmail",    "kmail %s", FALSE, FALSE },
 	{ "Mozilla Mail", "mozilla",  "mozilla -mail %s",   FALSE, FALSE},
         { "Mutt" , 	  "mutt",     "mutt %s",            TRUE, FALSE },
 
