@@ -49,11 +49,11 @@ AC_CHECK_FUNCS(usleep)
 AC_CHECK_FUNCS(putenv,[AC_DEFINE(HAVE_PUTENV)])
 AC_CHECK_FUNCS(setenv,[AC_DEFINE(HAVE_SETENV)])
 
+AM_PATH_LIBGLADE(,AC_MSG_ERROR([You must have LibGlade installed.]), gnome)
+
 dnl keyboard-properties-capplet
 AC_CHECK_HEADERS(X11/extensions/xf86misc.h, XF86MISC_LIBS="-lXxf86misc")
 AC_SUBST(XF86MISC_LIBS)
-
-AM_PATH_LIBGLADE(,AC_MSG_ERROR([You must have LibGlade installed.]), gnome)
 
 dnl esd-manager
 have_libesd=no
@@ -103,7 +103,7 @@ dnl Check that we meet the  dependencies
 dnl ==============================================
 capplet_modules="libcapplet >= 1.4.0 libglade-gnome gdk_pixbuf bonobo_conf >= 0.7 gdk_pixbuf_xlib gal > 0.8 $ARCHIVER_MODULE"
 PKG_CHECK_MODULES(CAPPLET, $capplet_modules)
-PKG_CHECK_MODULES(GNOMECC, gnomeui libglade xml gdk_pixbuf gnomecanvaspixbuf bonobo bonobox gtkhtml >= 0.10)
+PKG_CHECK_MODULES(GNOMECC, gnomeui libglade xml gdk_pixbuf gnomecanvaspixbuf bonobo bonobox gtkhtml >= 0.9)
 PKG_CHECK_MODULES(RMHELPER, gnomeui gnomecanvaspixbuf)
 PKG_CHECK_MODULES(ARCHIVER, bonobo bonobo_conf xml)
 PKG_CHECK_MODULES(MONIKER, bonobo bonobo_conf xml)
@@ -162,8 +162,8 @@ GNOMECC_CAPPLETS_DESKTOP_IN_RULE='$(desktop).in: \%.desktop.in: \%.desktop.in.in
 	sed s#Icon=.\*#Icon=$(GNOMECC_ICONS_DIR)/${cappletname}-capplet.png# < $< \> ${cappletname}.desktop.in\
 \
 install-data-local:\
-	$(mkinstalldirs) $(datadir)/control-center/capplets\
-	$(INSTALL_DATA) $(srcdir)/$(desktop) $(datadir)/control-center/capplets/$(desktop)\
+	$(mkinstalldirs) $(datadir)/control-center/capplets/$(cappletgroup)\
+	$(INSTALL_DATA) $(srcdir)/$(desktop) $(datadir)/control-center/capplets/$(cappletgroup)$(desktop)\
 install-data-am: install-data-local'
 AC_DIVERT_PUSH(AC_DIVERSION_SED)dnl
 s%@GNOMECC_CAPPLETS_DESKTOP_IN_RULE@%[$]GNOMECC_CAPPLETS_DESKTOP_IN_RULE%g
