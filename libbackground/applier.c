@@ -701,7 +701,6 @@ render_wallpaper (BGApplier *bg_applier, const BGPreferences *prefs)
 				if (hscale < 1) hscale = 1;
 				if (vscale < 1) vscale = 1;
 
-				pheight * bg_applier->p->render_geom.height / virtual_geom.height,
 				prescaled_pixbuf = gdk_pixbuf_scale_simple
 					(bg_applier->p->wallpaper_pixbuf, hscale, vscale,
 					 GDK_INTERP_BILINEAR);
