@@ -9,7 +9,7 @@ Screensavers_DATA = \
 	qix.xml \
 	attraction.xml
 
-EXTRA_DIST = $(Screensavers_DATA)
+EXTRA_DIST = $(Screensavers_DATA) README
 
 noinst_PROGRAMS = extract-labels
 
@@ -19,6 +19,8 @@ extract_labels_LDADD = \
 	$(GNOME_LIBDIR) \
 	$(GNOME_LIBS) \
 	$(GNOME_XML_LIB)
+
+BUILT_SOURCES = qix.xml.h attraction.xml.h
 
 qix.xml.h: qix.xml extract-labels
 	./extract-labels qix.xml
