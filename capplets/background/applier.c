@@ -780,8 +780,6 @@ renderer_render_wallpaper (Renderer *renderer)
 			      &renderer->wwidth, &renderer->wheight,
 			      &renderer->srcx, &renderer->srcy);
 
-		renderer->pwidth = MAX (renderer->pwidth, renderer->wwidth);
-
 		if (renderer->prefs->wallpaper_type == WPTYPE_TILED &&
 		    renderer->wwidth != renderer->pwidth &&
 		    renderer->wheight != renderer->pheight)
