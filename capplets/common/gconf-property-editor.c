@@ -1474,6 +1474,11 @@ peditor_image_set_filename (GConfPropertyEditor *peditor, const gchar *filename)
 	gchar *message = NULL;
 	GList *l;
 	
+	/* NULL is not valid, however "" is, but not an error (it's
+	 * the default) */
+	g_return_val_if_fail (filename != NULL, FALSE);
+
+
 	if (!g_file_test (filename, G_FILE_TEST_EXISTS))
 	{
 		message = g_strdup_printf (_("Couldn't find the file '%s'.\n\nPlease make "
@@ -1491,25 +1496,6 @@ peditor_image_set_filename (GConfPropertyEditor *peditor, const gchar *filename)
 					   filename);
 	}
 
-	if (message)
-	{
-		GtkWidget *box;
-
-		box = gtk_message_dialog_new (NULL,
-					      GTK_DIALOG_MODAL,
-					      GTK_MESSAGE_ERROR,
-					      GTK_BUTTONS_OK,
-					      message);
-		gtk_dialog_run (GTK_DIALOG (box));
-		gtk_widget_destroy (box);
-		g_free (message);
-
-		return FALSE;
-	}
-
-	scaled = preview_file_selection_intelligent_scale (pixbuf,
-							   scale);
-
 	if (GTK_IS_IMAGE (GTK_BIN (peditor->p->ui_control)->child))
 		image = GTK_IMAGE (GTK_BIN (peditor->p->ui_control)->child);
 	else
@@ -1526,6 +1512,32 @@ peditor_image_set_filename (GConfPropertyEditor *peditor, const gchar *filename)
 			}
 		}
 	}
+
+	if (message)
+	{
+		if (peditor->p->inited) 
+		{
+			GtkWidget *box;
+			
+			box = gtk_message_dialog_new (NULL,
+						      GTK_DIALOG_MODAL,
+						      GTK_MESSAGE_ERROR,
+						      GTK_BUTTONS_OK,
+						      message);
+			gtk_dialog_run (GTK_DIALOG (box));
+			gtk_widget_destroy (box);
+		} else {
+			gtk_image_set_from_stock (image, GTK_STOCK_MISSING_IMAGE,
+						  GTK_ICON_SIZE_BUTTON);
+		}
+		g_free (message);
+
+		return FALSE;
+	}
+
+	scaled = preview_file_selection_intelligent_scale (pixbuf,
+							   scale);
+
 	gtk_image_set_from_pixbuf (image, scaled);
 	g_object_unref (G_OBJECT (pixbuf));
 	g_object_unref (G_OBJECT (scaled));

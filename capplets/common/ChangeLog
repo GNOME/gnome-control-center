@@ -1,3 +1,10 @@
+2002-05-16  jacob berkman  <jacob@ximian.com>
+
+	* gconf-property-editor.c (peditor_image_set_filename): if we
+	haven't been initting, don't pop up an error message.  if we are,
+	set our image to GTK_STOCK_MISSING_IMAGE.  fixes bug exposed by
+	fix for #76993
+
 Tue May 14 12:08:17 2002  Jonathan Blandford  <jrb@redhat.com>
 
 	* theme-common.c (theme_common_init): confirm that the ~/.themes/
