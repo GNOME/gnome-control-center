@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2003-02-04 16:51-0500\n"
+"POT-Creation-Date: 2003-06-01 15:47-0400\n"
 "PO-Revision-Date: 2003-01-19 12:20+0800\n"
 "Last-Translator: Funda Wang <fundawang@en2china.com>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
@@ -42,7 +42,7 @@ msgstr "键盘"
 msgid "Set your keyboard accessibility preferences"
 msgstr "设置键盘的辅助功能"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.c:57
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.c:60
 msgid ""
 "This system does not seem to have the XKB extension.  The keyboard "
 "accessibility features will not operate without it."
@@ -281,9 +281,9 @@ msgstr "选择图片(_P)："
 
 #: capplets/background/background-properties-capplet.c:567
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:712
+#: capplets/default-applications/gnome-default-applications-properties.c:724
 #: capplets/keyboard/gnome-keyboard-properties.c:290
-#: capplets/mouse/gnome-mouse-properties.c:712
+#: capplets/mouse/gnome-mouse-properties.c:716
 #: capplets/sound/sound-properties-capplet.c:149
 msgid "Retrieve and store legacy settings"
 msgstr "取得并保存原有的设置"
@@ -528,7 +528,7 @@ msgstr "属性编辑器数据释放回调函数"
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr "当属性编辑器对象数据要被释放时要调用的回调函数"
 
-#: capplets/common/gconf-property-editor.c:1484
+#: capplets/common/gconf-property-editor.c:1486
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -540,7 +540,7 @@ msgstr ""
 "\n"
 "请确定该文件存在后重试，或选择另一背景图片。"
 
-#: capplets/common/gconf-property-editor.c:1492
+#: capplets/common/gconf-property-editor.c:1494
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -553,7 +553,7 @@ msgstr ""
 "\n"
 "请选择其他图片。"
 
-#: capplets/common/gconf-property-editor.c:1583
+#: capplets/common/gconf-property-editor.c:1585
 msgid "Please select an image."
 msgstr "请选择图片。"
 
@@ -776,7 +776,7 @@ msgid "Minimizing and Maximizing"
 msgstr "最大最小化"
 
 #: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
-#: capplets/windows/gnome-window-properties.c:649
+#: capplets/windows/gnome-window-properties.c:650
 msgid "Meta"
 msgstr "Meta"
 
@@ -976,8 +976,8 @@ msgid "Structure containing information on the MIME category"
 msgstr "包含 MIME 类别信息的结构"
 
 #: capplets/file-types/mime-category-edit-dialog.c:344
-#: capplets/file-types/mime-edit-dialog.c:488
-#: capplets/file-types/mime-edit-dialog.c:592
+#: capplets/file-types/mime-edit-dialog.c:491
+#: capplets/file-types/mime-edit-dialog.c:595
 #: capplets/file-types/service-edit-dialog.c:358
 #: capplets/file-types/service-edit-dialog.c:407
 msgid "Custom"
@@ -1012,43 +1012,48 @@ msgid "Add File Type"
 msgstr "添加文件类型"
 
 #: capplets/file-types/mime-edit-dialog.c:434
-#: capplets/file-types/mime-type-info.c:673
+#: capplets/file-types/mime-type-info.c:674
 msgid "Misc"
 msgstr "杂项"
 
-#: capplets/file-types/mime-edit-dialog.c:483
-#: capplets/file-types/mime-edit-dialog.c:542
+#: capplets/file-types/mime-edit-dialog.c:486
+#: capplets/file-types/mime-edit-dialog.c:545
 msgid "None"
 msgstr "无"
 
-#: capplets/file-types/mime-edit-dialog.c:852
+#: capplets/file-types/mime-edit-dialog.c:855
 msgid ""
 "Please enter a valid MIME type.  It should be of the form class/type and may "
 "not contain any spaces."
 msgstr ""
 "请输入一个有效的 MIME 类型。应符合“类别/文件类型”的格式并且不能包含空格。"
 
-#: capplets/file-types/mime-edit-dialog.c:859
+#: capplets/file-types/mime-edit-dialog.c:862
 msgid "A MIME type with that name already exists, overwrite ?."
 msgstr "已存在同名的 MIME 类型，要覆盖吗？"
 
-#: capplets/file-types/mime-edit-dialog.c:924
+#: capplets/file-types/mime-edit-dialog.c:927
 msgid "Category"
 msgstr "类别"
 
-#: capplets/file-types/mime-edit-dialog.c:929
+#: capplets/file-types/mime-edit-dialog.c:932
 msgid "Choose a file category"
 msgstr "选择文件类别"
 
-#: capplets/file-types/mime-type-info.c:667
+#: capplets/file-types/mime-type-info.c:602
+#, c-format
+msgid "View as %s"
+msgstr ""
+
+#: capplets/file-types/mime-type-info.c:668
 msgid "Images"
 msgstr "图像"
 
-#: capplets/file-types/mime-type-info.c:669
+#: capplets/file-types/mime-type-info.c:670
 msgid "Video"
 msgstr "视频"
 
-#: capplets/file-types/mime-type-info.c:671
+#: capplets/file-types/mime-type-info.c:672
 msgid "Audio"
 msgstr "音频"
 
@@ -1057,7 +1062,7 @@ msgstr "音频"
 msgid "Model for categories only"
 msgstr "仅供类别使用的模型"
 
-#: capplets/file-types/mime-types-model.c:421
+#: capplets/file-types/mime-types-model.c:422
 msgid "Internet Services"
 msgstr "Internet 服务"
 
@@ -1454,7 +1459,7 @@ msgstr "安静"
 msgid "Set your keyboard preferences"
 msgstr "设置键盘首选项"
 
-#: capplets/mouse/gnome-mouse-properties.c:437
+#: capplets/mouse/gnome-mouse-properties.c:439
 #, c-format
 msgid ""
 "<b>Unknown Cursor</b>\n"
@@ -1463,7 +1468,7 @@ msgstr ""
 "<b>未知光标</b>\n"
 "%s"
 
-#: capplets/mouse/gnome-mouse-properties.c:538
+#: capplets/mouse/gnome-mouse-properties.c:541
 msgid ""
 "<b>Default Cursor - Current</b>\n"
 "The default cursor that ships with X"
@@ -1471,7 +1476,7 @@ msgstr ""
 "<b>默认光标－当前值</b>\n"
 "X 自带默认光标"
 
-#: capplets/mouse/gnome-mouse-properties.c:541
+#: capplets/mouse/gnome-mouse-properties.c:544
 msgid ""
 "<b>Default Cursor</b>\n"
 "The default cursor that ships with X"
@@ -1479,7 +1484,7 @@ msgstr ""
 "<b>默认光标</b>\n"
 "X 自带默认光标"
 
-#: capplets/mouse/gnome-mouse-properties.c:559
+#: capplets/mouse/gnome-mouse-properties.c:562
 msgid ""
 "<b>White Cursor - Current</b>\n"
 "The default cursor inverted"
@@ -1487,7 +1492,7 @@ msgstr ""
 "<b>白色光标－当前值</b>\n"
 "默认反转光标"
 
-#: capplets/mouse/gnome-mouse-properties.c:562
+#: capplets/mouse/gnome-mouse-properties.c:565
 msgid ""
 "<b>White Cursor</b>\n"
 "The default cursor inverted"
@@ -1495,7 +1500,7 @@ msgstr ""
 "<b>白色光标</b>\n"
 "默认反转光标"
 
-#: capplets/mouse/gnome-mouse-properties.c:580
+#: capplets/mouse/gnome-mouse-properties.c:583
 msgid ""
 "<b>Large Cursor - Current</b>\n"
 "Large version of normal cursor"
@@ -1503,7 +1508,7 @@ msgstr ""
 "<b>大号光标－当前值</b>\n"
 "大号的普通光标"
 
-#: capplets/mouse/gnome-mouse-properties.c:583
+#: capplets/mouse/gnome-mouse-properties.c:586
 msgid ""
 "<b>Large Cursor</b>\n"
 "Large version of normal cursor"
@@ -1511,7 +1516,7 @@ msgstr ""
 "<b>大号光标</b>\n"
 "大号的普通光标"
 
-#: capplets/mouse/gnome-mouse-properties.c:601
+#: capplets/mouse/gnome-mouse-properties.c:604
 msgid ""
 "<b>Large White Cursor - Current</b>\n"
 "Large version of white cursor"
@@ -1519,7 +1524,7 @@ msgstr ""
 "<b>大号白色光标－当前值</b>\n"
 "大号的白色光标"
 
-#: capplets/mouse/gnome-mouse-properties.c:604
+#: capplets/mouse/gnome-mouse-properties.c:607
 msgid ""
 "<b>Large White Cursor</b>\n"
 "Large version of white cursor"
@@ -1722,7 +1727,7 @@ msgstr "安全 HTTP 代理(_S)："
 msgid "_Username:"
 msgstr "用户名(_U)："
 
-#: capplets/sound/sound-properties-capplet.c:180
+#: capplets/sound/sound-properties-capplet.c:175
 msgid "Sound preferences"
 msgstr "声音首选项"
 
@@ -1904,7 +1909,7 @@ msgid "_Location of new theme:"
 msgstr "新主题的位置(_L)："
 
 #: capplets/theme-switcher/gnome-theme-details.c:372
-#: capplets/theme-switcher/gnome-theme-manager.c:609
+#: capplets/theme-switcher/gnome-theme-manager.c:610
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -1917,13 +1922,13 @@ msgstr ""
 msgid "Theme name must be present"
 msgstr ""
 
-#: capplets/theme-switcher/gnome-theme-manager.c:665
-#: capplets/theme-switcher/gnome-theme-manager.c:725
+#: capplets/theme-switcher/gnome-theme-manager.c:666
+#: capplets/theme-switcher/gnome-theme-manager.c:726
 msgid "Custom theme"
 msgstr "自定义主题"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:665
-#: capplets/theme-switcher/gnome-theme-manager.c:725
+#: capplets/theme-switcher/gnome-theme-manager.c:666
+#: capplets/theme-switcher/gnome-theme-manager.c:726
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "按保存主题按钮可以保存此主题。"
 
@@ -2067,19 +2072,19 @@ msgstr ""
 "\n"
 "%s"
 
-#: capplets/windows/gnome-window-properties.c:624
+#: capplets/windows/gnome-window-properties.c:625
 msgid "Control"
 msgstr "Control"
 
-#: capplets/windows/gnome-window-properties.c:629
+#: capplets/windows/gnome-window-properties.c:630
 msgid "Alt"
 msgstr "Alt"
 
-#: capplets/windows/gnome-window-properties.c:635
+#: capplets/windows/gnome-window-properties.c:636
 msgid "Hyper"
 msgstr "Hyper"
 
-#: capplets/windows/gnome-window-properties.c:642
+#: capplets/windows/gnome-window-properties.c:643
 msgid "Super (or \"Windows logo\")"
 msgstr "Super (或“Windows 标志”)"
 
@@ -2299,11 +2304,11 @@ msgstr "BGApplier 绘图的屏幕"
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "无法找到 hbox，使用普通文件选择"
 
-#: libsounds/sound-view.c:122
+#: libsounds/sound-view.c:128
 msgid "The sound file for this event does not exist."
 msgstr "此事件的声音文件不存在。"
 
-#: libsounds/sound-view.c:124
+#: libsounds/sound-view.c:130
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package\n"
@@ -2313,23 +2318,23 @@ msgstr ""
 "您需要安装 gnome-audio 软件包\n"
 "以获得系统的默认声音。"
 
-#: libsounds/sound-view.c:216
+#: libsounds/sound-view.c:222
 msgid "Event"
 msgstr "事件"
 
-#: libsounds/sound-view.c:223
+#: libsounds/sound-view.c:229
 msgid "File to play"
 msgstr "播放的文件"
 
-#: libsounds/sound-view.c:238
+#: libsounds/sound-view.c:244
 msgid "_Sounds"
 msgstr "音效(_S)"
 
-#: libsounds/sound-view.c:252
+#: libsounds/sound-view.c:258
 msgid "_Play"
 msgstr "播放(_P)"
 
-#: libsounds/sound-view.c:258
+#: libsounds/sound-view.c:264
 msgid "Select sound file"
 msgstr "选择声音文件"
 
@@ -2338,11 +2343,11 @@ msgstr "选择声音文件"
 msgid "Window manager \"%s\" has not registered a configuration tool\n"
 msgstr "窗口管理器“%s”没有注册配置工具\n"
 
-#: libwindow-settings/metacity-window-manager.c:374
+#: libwindow-settings/metacity-window-manager.c:378
 msgid "Maximize"
 msgstr "最大化"
 
-#: libwindow-settings/metacity-window-manager.c:375
+#: libwindow-settings/metacity-window-manager.c:379
 msgid "Roll up"
 msgstr "卷起"
 
