@@ -37,7 +37,7 @@
 #include "activate-settings-daemon.h"
 
 #define IDIR GNOMECC_DATA_DIR "/pixmaps/"
-#define CONFIG_ROOT "/desktop/gnome/accesibility/keyboard"
+#define CONFIG_ROOT "/desktop/gnome/accessibility/keyboard"
 
 static struct {
 	char const * const checkbox;
@@ -81,11 +81,11 @@ static struct {
 	  CONFIG_ROOT "/bouncekeys_delay", FALSE },
 	{ "slowkeys_delay_slide",	"slowkeys_delay_spin",	    300,  10, 900,  10,
 	  CONFIG_ROOT "/slowkeys_delay", FALSE },
-	{ "mousekeys_max_speed_slide",	"mousekeys_max_speed_spin",   70,  10, 500,  10,
+	{ "mousekeys_max_speed_slide",	"mousekeys_max_speed_spin",   10,  1, 100,  5,
 	  CONFIG_ROOT "/mousekeys_max_speed", FALSE },
-	{ "mousekeys_accel_time_slide",	"mousekeys_accel_time_spin", 300,  10, 900,  10,
+	{ "mousekeys_accel_time_slide",	"mousekeys_accel_time_spin", 300,  10, 5000,  100,
 	  CONFIG_ROOT "/mousekeys_accel_time", FALSE },
-	{ "mousekeys_init_delay_slide",	"mousekeys_init_delay_spin", 200,  10, 500,  10,
+	{ "mousekeys_init_delay_slide",	"mousekeys_init_delay_spin", 300,  10, 5000,  10,
 	  CONFIG_ROOT "/mousekeys_init_delay", FALSE },
 	{ "timeout_slide",	"timeout_spin", 200,  10, 500,  10,
 	  CONFIG_ROOT "/timeout", TRUE },
@@ -257,7 +257,7 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset, gboolean as_dialog)
 	setup_simple_toggles (dialog, changeset, as_dialog);
 
 	label = g_object_new (GTK_TYPE_CHECK_BUTTON,
-		"label",	 _("_Enable keyboard accesibility"),
+		"label",	 _("_Enable keyboard accessibility"),
 		"use_underline", TRUE,
 		/* init true so that if gconf is false toggle will fire */
 		"active",	 TRUE,

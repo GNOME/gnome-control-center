@@ -1,3 +1,16 @@
+2002-03-29  Jody Goldberg <jody@gnome.org>
+
+	* accessibility-keyboard.c (setup_dialog) : spelling error.
+	(CONFIG_ROOT) : fix spelling error in the schema.
+
+2002-03-29  Jody Goldberg <jody@gnome.org>
+
+	* accessibility-keyboard.c : tweak the mouse key slider ranges
+	max_speed : 100 pixels every 10 msec is plenty fast  Limit things to
+	    1..100 default 10 step 5
+	accel_time : 10..5000 default 300 step 100
+	init_delay : 10..5000 default 300 step 100
+
 2002-03-28  jacob berkman  <jacob@ximian.com>
 
 	* accessibility-keyboard.c: on solaris Xresource.h sez /* You must
