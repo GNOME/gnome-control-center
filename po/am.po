@@ -7,7 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2003-05-23 16:20+0800\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-06-24 16:13-0400\n"
 "PO-Revision-Date: 2003-02-03 10:16+EDT\n"
 "Last-Translator: Ge'ez Frontier Foundation <locales@geez.org>\n"
 "Language-Team: Amharic <locales@geez.org>\n"
@@ -31,7 +32,7 @@ msgid "Select CDE AccessX file"
 msgstr ""
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "የፊደል ሠሌዳ"
@@ -287,7 +288,7 @@ msgstr "_ሥዕል ምረጡ፦"
 #: capplets/default-applications/gnome-default-applications-properties.c:724
 #: capplets/keyboard/gnome-keyboard-properties.c:290
 #: capplets/mouse/gnome-mouse-properties.c:716
-#: capplets/sound/sound-properties-capplet.c:149
+#: capplets/sound/sound-properties-capplet.c:214
 msgid "Retrieve and store legacy settings"
 msgstr ""
 
@@ -1042,7 +1043,7 @@ msgstr ""
 
 #: capplets/file-types/mime-category-edit-dialog.c:344
 #: capplets/file-types/mime-edit-dialog.c:491
-#: capplets/file-types/mime-edit-dialog.c:595
+#: capplets/file-types/mime-edit-dialog.c:596
 #: capplets/file-types/service-edit-dialog.c:358
 #: capplets/file-types/service-edit-dialog.c:407
 msgid "Custom"
@@ -1082,25 +1083,26 @@ msgid "Misc"
 msgstr "የተለያየ"
 
 #: capplets/file-types/mime-edit-dialog.c:486
-#: capplets/file-types/mime-edit-dialog.c:545
+#: capplets/file-types/mime-edit-dialog.c:547
 msgid "None"
 msgstr "ምንም"
 
-#: capplets/file-types/mime-edit-dialog.c:855
+#: capplets/file-types/mime-edit-dialog.c:852
+#: capplets/file-types/mime-edit-dialog.c:866
 msgid ""
 "Please enter a valid MIME type.  It should be of the form class/type and may "
 "not contain any spaces."
 msgstr ""
 
-#: capplets/file-types/mime-edit-dialog.c:862
+#: capplets/file-types/mime-edit-dialog.c:859
 msgid "A MIME type with that name already exists, overwrite ?."
 msgstr ""
 
-#: capplets/file-types/mime-edit-dialog.c:927
+#: capplets/file-types/mime-edit-dialog.c:931
 msgid "Category"
 msgstr "ምድብ"
 
-#: capplets/file-types/mime-edit-dialog.c:932
+#: capplets/file-types/mime-edit-dialog.c:936
 msgid "Choose a file category"
 msgstr ""
 
@@ -1436,8 +1438,8 @@ msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.c:286
 #: capplets/keyboard/gnome-keyboard-properties.c:288
-#: capplets/sound/sound-properties-capplet.c:145
-#: capplets/sound/sound-properties-capplet.c:147
+#: capplets/sound/sound-properties-capplet.c:210
+#: capplets/sound/sound-properties-capplet.c:212
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
@@ -1474,16 +1476,16 @@ msgstr ""
 msgid "Cursor Blinks"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
-msgid "Keyboard Bell"
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+msgid "Key presses _repeat when key is held down"
 msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:12
-msgid "Keyboard Preferences"
+msgid "Keyboard Bell"
 msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:13
-msgid "Keyboard _repeats when key is held down"
+msgid "Keyboard Preferences"
 msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:14
@@ -1769,7 +1771,7 @@ msgstr ""
 msgid "_Username:"
 msgstr "የተጠቃሚ _ስም፦"
 
-#: capplets/sound/sound-properties-capplet.c:175
+#: capplets/sound/sound-properties-capplet.c:241
 msgid "Sound preferences"
 msgstr "የድምፅ ምርጫዎች"
 
@@ -1778,19 +1780,39 @@ msgid "E_nable sound server startup"
 msgstr ""
 
 #: capplets/sound/sound-properties.glade.h:2
-msgid "General"
-msgstr "አጠቃላይ"
+msgid "Flash _window titlebar"
+msgstr ""
 
 #: capplets/sound/sound-properties.glade.h:3
-msgid "Sound Events"
+msgid "Flash entire _screen"
 msgstr ""
 
 #: capplets/sound/sound-properties.glade.h:4
+msgid "General"
+msgstr "አጠቃላይ"
+
+#: capplets/sound/sound-properties.glade.h:5
+msgid "Sound Events"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:6
 msgid "Sound Preferences"
 msgstr "የድምፅ ምርጫዎች"
 
-#: capplets/sound/sound-properties.glade.h:5
+#: capplets/sound/sound-properties.glade.h:7
+msgid "System Bell"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:8
+msgid "_Sound an audible bell"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:9
 msgid "_Sounds for events"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:10
+msgid "_Visual feedback:"
 msgstr ""
 
 #: capplets/sound/sound.desktop.in.h:1
@@ -1885,19 +1907,23 @@ msgid "Theme"
 msgstr "ጭብጥ"
 
 #: capplets/theme-switcher/theme-install.glade.h:2
-msgid "Install new theme"
-msgstr "አዲስ ጭብጥን አስገባ"
+msgid "<span size=\"larger\" weight=\"bold\">Install a Theme</span>"
+msgstr ""
 
 #: capplets/theme-switcher/theme-install.glade.h:3
+msgid "Theme Installation"
+msgstr ""
+
+#: capplets/theme-switcher/theme-install.glade.h:4
 msgid "_Install"
 msgstr "_አስገባ"
 
-#: capplets/theme-switcher/theme-install.glade.h:4
-msgid "_Location of new theme:"
-msgstr ""
+#: capplets/theme-switcher/theme-install.glade.h:5
+msgid "_Location:"
+msgstr "_ቦታ፦"
 
 #: capplets/theme-switcher/theme-properties.glade.h:2
-msgid "<span size=\"larger\" weight=\"bold\">Save theme to disk</span>"
+msgid "<span size=\"larger\" weight=\"bold\">Save Theme to Disk</span>"
 msgstr ""
 
 #: capplets/theme-switcher/theme-properties.glade.h:3
@@ -1921,33 +1947,42 @@ msgid "New themes can also be installed by dragging them into the window."
 msgstr ""
 
 #: capplets/theme-switcher/theme-properties.glade.h:8
-msgid "Short _Description:"
-msgstr "የአጭር _መግለጫ"
+#, fuzzy
+msgid "Save Theme"
+msgstr "ጭብጥን _አስቀምጥ"
 
 #: capplets/theme-switcher/theme-properties.glade.h:9
+#, fuzzy
+msgid "Short _description:"
+msgstr "የአጭር _መግለጫ"
+
+#: capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Theme Details"
 msgstr "የጭብት ዝርዝሮች"
 
-#: capplets/theme-switcher/theme-properties.glade.h:10
+#: capplets/theme-switcher/theme-properties.glade.h:11
 msgid "Theme Preferences"
 msgstr "የጭብት ምርጫዎች"
 
-#: capplets/theme-switcher/theme-properties.glade.h:11
-msgid ""
-"This theme suggests a\n"
-"background:"
-msgstr ""
+#: capplets/theme-switcher/theme-properties.glade.h:12
+#, fuzzy
+msgid "Theme _Details"
+msgstr "የጭብት ዝርዝሮች"
 
 #: capplets/theme-switcher/theme-properties.glade.h:13
-msgid ""
-"This theme suggests a\n"
-"font and background:"
+msgid "This theme does not suggest any particular font or background."
+msgstr ""
+
+#: capplets/theme-switcher/theme-properties.glade.h:14
+msgid "This theme suggests a background:"
 msgstr ""
 
 #: capplets/theme-switcher/theme-properties.glade.h:15
-msgid ""
-"This theme suggests a\n"
-"font:"
+msgid "This theme suggests a font and a background:"
+msgstr ""
+
+#: capplets/theme-switcher/theme-properties.glade.h:16
+msgid "This theme suggests a font:"
 msgstr ""
 
 #: capplets/theme-switcher/theme-properties.glade.h:17
@@ -1955,22 +1990,21 @@ msgid "Window Border"
 msgstr "የመስኮት ወሰን"
 
 #: capplets/theme-switcher/theme-properties.glade.h:18
-msgid "_Details..."
-msgstr "_ዝርዝሮች..."
-
-#: capplets/theme-switcher/theme-properties.glade.h:19
-msgid "_Go to theme folder"
+#, fuzzy
+msgid "_Go To Theme Folder"
 msgstr "ወደ የጭብጥ ዶሴ _ሂድ"
 
-#: capplets/theme-switcher/theme-properties.glade.h:20
-msgid "_Install theme..."
+#: capplets/theme-switcher/theme-properties.glade.h:19
+#, fuzzy
+msgid "_Install Theme..."
 msgstr "ጭብጥን _አስገባ..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:21
-msgid "_Save theme"
+#: capplets/theme-switcher/theme-properties.glade.h:20
+#, fuzzy
+msgid "_Save Theme..."
 msgstr "ጭብጥን _አስቀምጥ"
 
-#: capplets/theme-switcher/theme-properties.glade.h:22
+#: capplets/theme-switcher/theme-properties.glade.h:21
 msgid "_Theme name:"
 msgstr "የ_ጭብጥ ስም፦"
 
@@ -2288,7 +2322,7 @@ msgid "Couldn't load sound file %s as sample %s"
 msgstr ""
 
 #: gnome-settings-daemon/gnome-settings-xrdb.c:212
-#: gnome-settings-daemon/gnome-settings-xrdb.c:259
+#: gnome-settings-daemon/gnome-settings-xrdb.c:260
 msgid "Cannot determine user's home directory"
 msgstr ""
 
@@ -2589,7 +2623,7 @@ msgstr ""
 msgid "Themus Theme Properties view"
 msgstr ""
 
-#: vfs-methods/themus/theme-method.c:513
+#: vfs-methods/themus/theme-method.c:514
 #, fuzzy
 msgid "Themes"
 msgstr "ጭብጥ"
@@ -2646,6 +2680,12 @@ msgstr ""
 msgid "Whether to thumbnail themes"
 msgstr ""
 
+#~ msgid "Install new theme"
+#~ msgstr "አዲስ ጭብጥን አስገባ"
+
+#~ msgid "_Details..."
+#~ msgstr "_ዝርዝሮች..."
+
 #~ msgid "Speed"
 #~ msgstr "ፍጥነት"
 
@@ -2654,9 +2694,6 @@ msgstr ""
 
 #~ msgid "_Name"
 #~ msgstr "_ስም"
-
-#~ msgid "_Location:"
-#~ msgstr "_ቦታ፦"
 
 #~ msgid "_General"
 #~ msgstr "_ጠቅላላ"

@@ -58,10 +58,10 @@ serverdir = $(libdir)/bonobo/servers
 server_DATA = $(server_in_files:.server.in.in=.server)
 
 Themus_Component.server.in: Themus_Component.server.in.in
-	sed -e "s|\@BONOBODIR\@|$(bonobodir)|" Themus_Component.server.in.in > Themus_Component.server.in
+	sed -e "s|\@BONOBODIR\@|$(bonobodir)|" $< > $@
 
 Themus_Properties_View.server.in: Themus_Properties_View.server.in.in
-	sed -e "s|\@BONOBODIR\@|$(bonobodir)|" Themus_Properties_View.server.in.in > Themus_Properties_View.server.in
+	sed -e "s|\@BONOBODIR\@|$(bonobodir)|" $< > $@
 
 CLEANFILES = Themus_Component.server Themus_Component.server.in Themus_Properties_View.server Themus_Properties_View.server.in
 

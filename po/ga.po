@@ -6,7 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center CVS\n"
-"POT-Creation-Date: 2003-05-23 14:33+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-06-24 16:13-0400\n"
 "PO-Revision-Date: 2003-05-23 14:40+0100\n"
 "Last-Translator:Paul Duffy <dubhthach@frink.nuigalway.ie>\n"
 "Language-Team: Irish\n"
@@ -30,7 +31,7 @@ msgid "Select CDE AccessX file"
 msgstr "Pioc comhad AccessX do CDE"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "Miarchlar"
@@ -307,7 +308,7 @@ msgstr "Tóg dealbh..."
 #: capplets/default-applications/gnome-default-applications-properties.c:724
 #: capplets/keyboard/gnome-keyboard-properties.c:290
 #: capplets/mouse/gnome-mouse-properties.c:716
-#: capplets/sound/sound-properties-capplet.c:149
+#: capplets/sound/sound-properties-capplet.c:214
 msgid "Retrieve and store legacy settings"
 msgstr ""
 
@@ -1115,7 +1116,7 @@ msgstr ""
 
 #: capplets/file-types/mime-category-edit-dialog.c:344
 #: capplets/file-types/mime-edit-dialog.c:491
-#: capplets/file-types/mime-edit-dialog.c:595
+#: capplets/file-types/mime-edit-dialog.c:596
 #: capplets/file-types/service-edit-dialog.c:358
 #: capplets/file-types/service-edit-dialog.c:407
 msgid "Custom"
@@ -1155,25 +1156,26 @@ msgid "Misc"
 msgstr "Ilchineálach"
 
 #: capplets/file-types/mime-edit-dialog.c:486
-#: capplets/file-types/mime-edit-dialog.c:545
+#: capplets/file-types/mime-edit-dialog.c:547
 msgid "None"
 msgstr "Tada"
 
-#: capplets/file-types/mime-edit-dialog.c:855
+#: capplets/file-types/mime-edit-dialog.c:852
+#: capplets/file-types/mime-edit-dialog.c:866
 msgid ""
 "Please enter a valid MIME type.  It should be of the form class/type and may "
 "not contain any spaces."
 msgstr ""
 
-#: capplets/file-types/mime-edit-dialog.c:862
+#: capplets/file-types/mime-edit-dialog.c:859
 msgid "A MIME type with that name already exists, overwrite ?."
 msgstr ""
 
-#: capplets/file-types/mime-edit-dialog.c:927
+#: capplets/file-types/mime-edit-dialog.c:931
 msgid "Category"
 msgstr "Rangú"
 
-#: capplets/file-types/mime-edit-dialog.c:932
+#: capplets/file-types/mime-edit-dialog.c:936
 msgid "Choose a file category"
 msgstr "Pioc ceann do na rangú de na comhad"
 
@@ -1528,8 +1530,8 @@ msgstr "Cumriagh"
 
 #: capplets/keyboard/gnome-keyboard-properties.c:286
 #: capplets/keyboard/gnome-keyboard-properties.c:288
-#: capplets/sound/sound-properties-capplet.c:145
-#: capplets/sound/sound-properties-capplet.c:147
+#: capplets/sound/sound-properties-capplet.c:210
+#: capplets/sound/sound-properties-capplet.c:212
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
@@ -1569,19 +1571,19 @@ msgstr "Cniog ar eochair"
 msgid "Cursor Blinks"
 msgstr "Dathanna"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+msgid "Key presses _repeat when key is held down"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 #, fuzzy
 msgid "Keyboard Bell"
 msgstr " Miarchlar "
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 #, fuzzy
 msgid "Keyboard Preferences"
 msgstr "Ábaltachtaí Cniog"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
-msgid "Keyboard _repeats when key is held down"
-msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Keypress Click"
@@ -1882,7 +1884,7 @@ msgstr "Ionadaí _HTTP Daingeanach"
 msgid "_Username:"
 msgstr "Ainm"
 
-#: capplets/sound/sound-properties-capplet.c:175
+#: capplets/sound/sound-properties-capplet.c:241
 #, fuzzy
 msgid "Sound preferences"
 msgstr "Ábaltachtaí Cúlra"
@@ -1892,23 +1894,43 @@ msgid "E_nable sound server startup"
 msgstr ""
 
 #: capplets/sound/sound-properties.glade.h:2
+msgid "Flash _window titlebar"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:3
+msgid "Flash entire _screen"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:4
 msgid "General"
 msgstr "Ginearálta"
 
-#: capplets/sound/sound-properties.glade.h:3
+#: capplets/sound/sound-properties.glade.h:5
 #, fuzzy
 msgid "Sound Events"
 msgstr "Ábaltachtaí Cúlra"
 
-#: capplets/sound/sound-properties.glade.h:4
+#: capplets/sound/sound-properties.glade.h:6
 #, fuzzy
 msgid "Sound Preferences"
 msgstr "Ábaltachtaí Cúlra"
 
-#: capplets/sound/sound-properties.glade.h:5
+#: capplets/sound/sound-properties.glade.h:7
+msgid "System Bell"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:8
+msgid "_Sound an audible bell"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:9
 #, fuzzy
 msgid "_Sounds for events"
 msgstr "Ábaltachtaí Cúlra"
+
+#: capplets/sound/sound-properties.glade.h:10
+msgid "_Visual feedback:"
+msgstr ""
 
 #: capplets/sound/sound.desktop.in.h:1
 msgid "Enable sound and associate sounds with events"
@@ -2006,20 +2028,24 @@ msgid "Theme"
 msgstr "TÃ©ma"
 
 #: capplets/theme-switcher/theme-install.glade.h:2
-msgid "Install new theme"
+msgid "<span size=\"larger\" weight=\"bold\">Install a Theme</span>"
 msgstr ""
 
 #: capplets/theme-switcher/theme-install.glade.h:3
-msgid "_Install"
+msgid "Theme Installation"
 msgstr ""
 
 #: capplets/theme-switcher/theme-install.glade.h:4
+msgid "_Install"
+msgstr ""
+
+#: capplets/theme-switcher/theme-install.glade.h:5
 #, fuzzy
-msgid "_Location of new theme:"
+msgid "_Location:"
 msgstr "Brostú"
 
 #: capplets/theme-switcher/theme-properties.glade.h:2
-msgid "<span size=\"larger\" weight=\"bold\">Save theme to disk</span>"
+msgid "<span size=\"larger\" weight=\"bold\">Save Theme to Disk</span>"
 msgstr ""
 
 #: capplets/theme-switcher/theme-properties.glade.h:3
@@ -2047,38 +2073,48 @@ msgstr ""
 
 #: capplets/theme-switcher/theme-properties.glade.h:8
 #, fuzzy
-msgid "Short _Description:"
-msgstr "Áit"
+msgid "Save Theme"
+msgstr "Ainm"
 
 #: capplets/theme-switcher/theme-properties.glade.h:9
+#, fuzzy
+msgid "Short _description:"
+msgstr "Áit"
+
+#: capplets/theme-switcher/theme-properties.glade.h:10
 #, fuzzy
 msgid "Theme Details"
 msgstr "Albaltachtaí"
 
-#: capplets/theme-switcher/theme-properties.glade.h:10
+#: capplets/theme-switcher/theme-properties.glade.h:11
 #, fuzzy
 msgid "Theme Preferences"
 msgstr "Ábaltachtaí Cúlra"
 
-#: capplets/theme-switcher/theme-properties.glade.h:11
+#: capplets/theme-switcher/theme-properties.glade.h:12
 #, fuzzy
-msgid ""
-"This theme suggests a\n"
-"background:"
-msgstr "Tóg comhad..."
+msgid "Theme _Details"
+msgstr "Albaltachtaí"
 
 #: capplets/theme-switcher/theme-properties.glade.h:13
 #, fuzzy
-msgid ""
-"This theme suggests a\n"
-"font and background:"
+msgid "This theme does not suggest any particular font or background."
+msgstr "Tóg comhad..."
+
+#: capplets/theme-switcher/theme-properties.glade.h:14
+#, fuzzy
+msgid "This theme suggests a background:"
 msgstr "Tóg comhad..."
 
 #: capplets/theme-switcher/theme-properties.glade.h:15
-msgid ""
-"This theme suggests a\n"
-"font:"
-msgstr ""
+#, fuzzy
+msgid "This theme suggests a font and a background:"
+msgstr "Tóg comhad..."
+
+#: capplets/theme-switcher/theme-properties.glade.h:16
+#, fuzzy
+msgid "This theme suggests a font:"
+msgstr "Tóg comhad..."
 
 #: capplets/theme-switcher/theme-properties.glade.h:17
 #, fuzzy
@@ -2086,24 +2122,19 @@ msgid "Window Border"
 msgstr "Ábaltachtaí Cúlra"
 
 #: capplets/theme-switcher/theme-properties.glade.h:18
-#, fuzzy
-msgid "_Details..."
-msgstr "Leacaithe"
+msgid "_Go To Theme Folder"
+msgstr ""
 
 #: capplets/theme-switcher/theme-properties.glade.h:19
-msgid "_Go to theme folder"
+msgid "_Install Theme..."
 msgstr ""
 
 #: capplets/theme-switcher/theme-properties.glade.h:20
-msgid "_Install theme..."
-msgstr ""
-
-#: capplets/theme-switcher/theme-properties.glade.h:21
 #, fuzzy
-msgid "_Save theme"
+msgid "_Save Theme..."
 msgstr "Ainm"
 
-#: capplets/theme-switcher/theme-properties.glade.h:22
+#: capplets/theme-switcher/theme-properties.glade.h:21
 #, fuzzy
 msgid "_Theme name:"
 msgstr "Ainm"
@@ -2429,7 +2460,7 @@ msgid "Couldn't load sound file %s as sample %s"
 msgstr ""
 
 #: gnome-settings-daemon/gnome-settings-xrdb.c:212
-#: gnome-settings-daemon/gnome-settings-xrdb.c:259
+#: gnome-settings-daemon/gnome-settings-xrdb.c:260
 msgid "Cannot determine user's home directory"
 msgstr ""
 
@@ -2733,7 +2764,7 @@ msgstr "comhpháirt le haighaidh feicÃ¡int ar eilimint na tÃ©ama"
 msgid "Themus Theme Properties view"
 msgstr "Radharc eilimint na tÃ©ama do Themus"
 
-#: vfs-methods/themus/theme-method.c:513
+#: vfs-methods/themus/theme-method.c:514
 msgid "Themes"
 msgstr "TÃ©amaÃ­"
 
@@ -2792,3 +2823,11 @@ msgstr ""
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "CÃ© acu na TÃ©amaÃ­ a chuir mar<b>ionga do ordÃ³g</b>"
+
+#, fuzzy
+#~ msgid "_Location of new theme:"
+#~ msgstr "Brostú"
+
+#, fuzzy
+#~ msgid "_Details..."
+#~ msgstr "Leacaithe"

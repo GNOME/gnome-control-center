@@ -10,7 +10,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.sk\n"
-"POT-Creation-Date: 2003-05-20 18:58-0400\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-06-24 16:13-0400\n"
 "PO-Revision-Date: 2003-01-23 22:59+0100\n"
 "Last-Translator: Stanislav Visnovsky <visnovsky@kde.org>\n"
 "Language-Team: Slovak <sk-i18n@linux.sk>\n"
@@ -35,7 +36,7 @@ msgid "Select CDE AccessX file"
 msgstr "Vyberte súbor CDE AccessX"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "Klávesnica"
@@ -303,7 +304,7 @@ msgstr "Vyberte _obrázok:"
 #: capplets/default-applications/gnome-default-applications-properties.c:724
 #: capplets/keyboard/gnome-keyboard-properties.c:290
 #: capplets/mouse/gnome-mouse-properties.c:716
-#: capplets/sound/sound-properties-capplet.c:149
+#: capplets/sound/sound-properties-capplet.c:214
 msgid "Retrieve and store legacy settings"
 msgstr "Získať a uložiť predchádzajúce nastavenie"
 
@@ -1082,7 +1083,7 @@ msgstr "Štruktúra obsahujúca informácie o kategórii MIME"
 
 #: capplets/file-types/mime-category-edit-dialog.c:344
 #: capplets/file-types/mime-edit-dialog.c:491
-#: capplets/file-types/mime-edit-dialog.c:595
+#: capplets/file-types/mime-edit-dialog.c:596
 #: capplets/file-types/service-edit-dialog.c:358
 #: capplets/file-types/service-edit-dialog.c:407
 msgid "Custom"
@@ -1122,11 +1123,12 @@ msgid "Misc"
 msgstr "Rôzne"
 
 #: capplets/file-types/mime-edit-dialog.c:486
-#: capplets/file-types/mime-edit-dialog.c:545
+#: capplets/file-types/mime-edit-dialog.c:547
 msgid "None"
 msgstr "Žiadny"
 
-#: capplets/file-types/mime-edit-dialog.c:855
+#: capplets/file-types/mime-edit-dialog.c:852
+#: capplets/file-types/mime-edit-dialog.c:866
 msgid ""
 "Please enter a valid MIME type.  It should be of the form class/type and may "
 "not contain any spaces."
@@ -1134,15 +1136,15 @@ msgstr ""
 "Prosím, zadajte platný typ MIME. Mal by byť v tvare trieda/typ a nesmie "
 "obsahovať medzery."
 
-#: capplets/file-types/mime-edit-dialog.c:862
+#: capplets/file-types/mime-edit-dialog.c:859
 msgid "A MIME type with that name already exists, overwrite ?."
 msgstr "Typ MIME s týmto menom už existuje, prepísať ho?"
 
-#: capplets/file-types/mime-edit-dialog.c:927
+#: capplets/file-types/mime-edit-dialog.c:931
 msgid "Category"
 msgstr "Kategória"
 
-#: capplets/file-types/mime-edit-dialog.c:932
+#: capplets/file-types/mime-edit-dialog.c:936
 msgid "Choose a file category"
 msgstr "Vyberte kategóriu súboru"
 
@@ -1485,8 +1487,8 @@ msgstr "_Prístupnosť"
 
 #: capplets/keyboard/gnome-keyboard-properties.c:286
 #: capplets/keyboard/gnome-keyboard-properties.c:288
-#: capplets/sound/sound-properties-capplet.c:145
-#: capplets/sound/sound-properties-capplet.c:147
+#: capplets/sound/sound-properties-capplet.c:210
+#: capplets/sound/sound-properties-capplet.c:212
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
@@ -1524,17 +1526,18 @@ msgstr "_Zvuk pri stlačení klávesu"
 msgid "Cursor Blinks"
 msgstr "Blikanie kurzoru"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#, fuzzy
+msgid "Key presses _repeat when key is held down"
+msgstr "Kláves sa _opakuje pri držaní"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Keyboard Bell"
 msgstr "Zvonček klávesnice"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Keyboard Preferences"
 msgstr "Nastavenie klávesnice"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
-msgid "Keyboard _repeats when key is held down"
-msgstr "Kláves sa _opakuje pri držaní"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Keypress Click"
@@ -1839,7 +1842,7 @@ msgstr "_Secure HTTP proxy:"
 msgid "_Username:"
 msgstr "_Používateľ:"
 
-#: capplets/sound/sound-properties-capplet.c:175
+#: capplets/sound/sound-properties-capplet.c:241
 msgid "Sound preferences"
 msgstr "Nastavenie zvuku"
 
@@ -1848,20 +1851,40 @@ msgid "E_nable sound server startup"
 msgstr "_Povoliť spustenie zvukového serveru"
 
 #: capplets/sound/sound-properties.glade.h:2
+msgid "Flash _window titlebar"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:3
+msgid "Flash entire _screen"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:4
 msgid "General"
 msgstr "Všeobecné"
 
-#: capplets/sound/sound-properties.glade.h:3
+#: capplets/sound/sound-properties.glade.h:5
 msgid "Sound Events"
 msgstr "Zvukové udalosti"
 
-#: capplets/sound/sound-properties.glade.h:4
+#: capplets/sound/sound-properties.glade.h:6
 msgid "Sound Preferences"
 msgstr "Nastavenie zvuku"
 
-#: capplets/sound/sound-properties.glade.h:5
+#: capplets/sound/sound-properties.glade.h:7
+msgid "System Bell"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:8
+msgid "_Sound an audible bell"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:9
 msgid "_Sounds for events"
 msgstr "_Zvuky pre udalosti"
+
+#: capplets/sound/sound-properties.glade.h:10
+msgid "_Visual feedback:"
+msgstr ""
 
 #: capplets/sound/sound.desktop.in.h:1
 msgid "Enable sound and associate sounds with events"
@@ -1958,19 +1981,26 @@ msgid "Theme"
 msgstr "Téma"
 
 #: capplets/theme-switcher/theme-install.glade.h:2
-msgid "Install new theme"
-msgstr "Inštalovať novú tému"
+#, fuzzy
+msgid "<span size=\"larger\" weight=\"bold\">Install a Theme</span>"
+msgstr "<span size=\"larger\" weight=\"bold\">Uložiť tému na disk</span>"
 
 #: capplets/theme-switcher/theme-install.glade.h:3
+msgid "Theme Installation"
+msgstr ""
+
+#: capplets/theme-switcher/theme-install.glade.h:4
 msgid "_Install"
 msgstr "_Inštalovať"
 
-#: capplets/theme-switcher/theme-install.glade.h:4
-msgid "_Location of new theme:"
-msgstr "U_miestnenie novej témy:"
+#: capplets/theme-switcher/theme-install.glade.h:5
+#, fuzzy
+msgid "_Location:"
+msgstr "_Zrýchlenie:"
 
 #: capplets/theme-switcher/theme-properties.glade.h:2
-msgid "<span size=\"larger\" weight=\"bold\">Save theme to disk</span>"
+#, fuzzy
+msgid "<span size=\"larger\" weight=\"bold\">Save Theme to Disk</span>"
 msgstr "<span size=\"larger\" weight=\"bold\">Uložiť tému na disk</span>"
 
 #: capplets/theme-switcher/theme-properties.glade.h:3
@@ -1994,36 +2024,50 @@ msgid "New themes can also be installed by dragging them into the window."
 msgstr "Nové témy je možné nainštalovať aj ťahaním myšou do tohto okna."
 
 #: capplets/theme-switcher/theme-properties.glade.h:8
-msgid "Short _Description:"
-msgstr "Krátky _popis:"
+#, fuzzy
+msgid "Save Theme"
+msgstr "_Uložiť tému"
 
 #: capplets/theme-switcher/theme-properties.glade.h:9
+#, fuzzy
+msgid "Short _description:"
+msgstr "Krátky _popis:"
+
+#: capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Theme Details"
 msgstr "Detaily témy"
 
-#: capplets/theme-switcher/theme-properties.glade.h:10
+#: capplets/theme-switcher/theme-properties.glade.h:11
 msgid "Theme Preferences"
 msgstr "Nastavenie témy"
 
-#: capplets/theme-switcher/theme-properties.glade.h:11
-msgid ""
-"This theme suggests a\n"
-"background:"
-msgstr "Táto téma navrhuje pozadie:"
+#: capplets/theme-switcher/theme-properties.glade.h:12
+#, fuzzy
+msgid "Theme _Details"
+msgstr "Detaily témy"
 
 #: capplets/theme-switcher/theme-properties.glade.h:13
 #, fuzzy
-msgid ""
-"This theme suggests a\n"
-"font and background:"
+msgid "This theme does not suggest any particular font or background."
 msgstr ""
 "Táto téma navrhuje\n"
 "písmo a pozadie"
 
+#: capplets/theme-switcher/theme-properties.glade.h:14
+#, fuzzy
+msgid "This theme suggests a background:"
+msgstr "Táto téma navrhuje pozadie:"
+
 #: capplets/theme-switcher/theme-properties.glade.h:15
-msgid ""
-"This theme suggests a\n"
-"font:"
+#, fuzzy
+msgid "This theme suggests a font and a background:"
+msgstr ""
+"Táto téma navrhuje\n"
+"písmo a pozadie"
+
+#: capplets/theme-switcher/theme-properties.glade.h:16
+#, fuzzy
+msgid "This theme suggests a font:"
 msgstr "Táto téma navrhuje písmo:"
 
 #: capplets/theme-switcher/theme-properties.glade.h:17
@@ -2031,22 +2075,21 @@ msgid "Window Border"
 msgstr "Okraj okien"
 
 #: capplets/theme-switcher/theme-properties.glade.h:18
-msgid "_Details..."
-msgstr "_Detaily..."
-
-#: capplets/theme-switcher/theme-properties.glade.h:19
-msgid "_Go to theme folder"
+#, fuzzy
+msgid "_Go To Theme Folder"
 msgstr "_Prejsť do priečinku témy"
 
-#: capplets/theme-switcher/theme-properties.glade.h:20
-msgid "_Install theme..."
+#: capplets/theme-switcher/theme-properties.glade.h:19
+#, fuzzy
+msgid "_Install Theme..."
 msgstr "_Inštalovať tému..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:21
-msgid "_Save theme"
+#: capplets/theme-switcher/theme-properties.glade.h:20
+#, fuzzy
+msgid "_Save Theme..."
 msgstr "_Uložiť tému"
 
-#: capplets/theme-switcher/theme-properties.glade.h:22
+#: capplets/theme-switcher/theme-properties.glade.h:21
 msgid "_Theme name:"
 msgstr "Meno _témy:"
 
@@ -2376,7 +2419,7 @@ msgid "Couldn't load sound file %s as sample %s"
 msgstr "Nepodarilo sa načítať zvukový súbor %s ako zvuk %s"
 
 #: gnome-settings-daemon/gnome-settings-xrdb.c:212
-#: gnome-settings-daemon/gnome-settings-xrdb.c:259
+#: gnome-settings-daemon/gnome-settings-xrdb.c:260
 msgid "Cannot determine user's home directory"
 msgstr ""
 
@@ -2553,7 +2596,156 @@ msgstr ""
 "bez rád, \"slight\", \"medium\", a \"full\" - maximálne množstvo rád, môže "
 "spôsobiť poškodenie tvaru písmen."
 
-#: vfs-methods/themus/theme-method.c:513
+#: vfs-methods/fontilus/font-view.c:101
+msgid "The quick brown fox jumps over the lazy dog. 0123456789"
+msgstr ""
+
+#: vfs-methods/fontilus/font-view.c:252
+#, fuzzy
+msgid "Name:"
+msgstr "_Meno:"
+
+#: vfs-methods/fontilus/font-view.c:255
+msgid "Style:"
+msgstr ""
+
+#: vfs-methods/fontilus/font-view.c:264
+#, fuzzy
+msgid "Type:"
+msgstr "Typ"
+
+#: vfs-methods/fontilus/font-view.c:271
+msgid "Size:"
+msgstr ""
+
+#: vfs-methods/fontilus/font-view.c:315 vfs-methods/fontilus/font-view.c:328
+msgid "Version:"
+msgstr ""
+
+#: vfs-methods/fontilus/font-view.c:319 vfs-methods/fontilus/font-view.c:330
+msgid "Copyright:"
+msgstr ""
+
+#: vfs-methods/fontilus/font-view.c:323
+#, fuzzy
+msgid "Description:"
+msgstr "_Popis:"
+
+#: vfs-methods/fontilus/fontilus-context-menu.c:131
+msgid "Font context menu items"
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:1
+msgid "If set to true, then OpenType fonts will be thumbnailed."
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:2
+msgid "If set to true, then PCF fonts will be thumbnailed."
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:3
+msgid "If set to true, then TrueType fonts will be thumbnailed."
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:4
+msgid "If set to true, then Type1 fonts will be thumbnailed."
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:5
+msgid ""
+"Set this key to the command used to create thumbnails for OpenType fonts."
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:6
+msgid "Set this key to the command used to create thumbnails for PCF fonts."
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:7
+msgid ""
+"Set this key to the command used to create thumbnails for TrueType fonts."
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:8
+msgid "Set this key to the command used to create thumbnails for Type1 fonts."
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:9
+msgid "Thumbnail command for OpenType fonts"
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:10
+msgid "Thumbnail command for PCF fonts"
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:11
+msgid "Thumbnail command for TrueType fonts"
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:12
+msgid "Thumbnail command for Type1 fonts"
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:13
+msgid "Whether to thumbnail OpenType fonts"
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:14
+msgid "Whether to thumbnail PCF fonts"
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:15
+msgid "Whether to thumbnail TrueType fonts"
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:16
+msgid "Whether to thumbnail Type1 fonts"
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.server.in.in.h:1
+msgid "Factory for the fontilus context menu"
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.server.in.in.h:2
+#, fuzzy
+msgid "Fontilus context menu"
+msgstr "Menu ovládacieho centra"
+
+#: vfs-methods/fontilus/fontilus.server.in.in.h:3
+msgid "Fontilus context menu factory"
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.server.in.in.h:4
+msgid "Nautilus context menu entries for fonts"
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.server.in.in.h:5
+#, fuzzy
+msgid "Set as Application Font"
+msgstr "Písmo _aplikácií:"
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:1
+#, fuzzy
+msgid "Apply theme..."
+msgstr "_Inštalovať tému..."
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:2
+#, fuzzy
+msgid "Themus component"
+msgstr "Komponent pre _zobrazenie:"
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:3
+msgid "Themus component apply theme operations"
+msgstr ""
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
+msgid "Theme Properties content view component"
+msgstr ""
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
+msgid "Themus Theme Properties view"
+msgstr ""
+
+#: vfs-methods/themus/theme-method.c:514
 #, fuzzy
 msgid "Themes"
 msgstr "Téma"
@@ -2611,27 +2803,14 @@ msgstr ""
 msgid "Whether to thumbnail themes"
 msgstr ""
 
-#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
-msgid "Theme Properties content view component"
-msgstr ""
+#~ msgid "Install new theme"
+#~ msgstr "Inštalovať novú tému"
 
-#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
-msgid "Themus Theme Properties view"
-msgstr ""
+#~ msgid "_Location of new theme:"
+#~ msgstr "U_miestnenie novej témy:"
 
-#: vfs-methods/themus/Themus_Component.server.in.in.h:1
-#, fuzzy
-msgid "Apply theme..."
-msgstr "_Inštalovať tému..."
-
-#: vfs-methods/themus/Themus_Component.server.in.in.h:2
-#, fuzzy
-msgid "Themus component"
-msgstr "Komponent pre _zobrazenie:"
-
-#: vfs-methods/themus/Themus_Component.server.in.in.h:3
-msgid "Themus component apply theme operations"
-msgstr ""
+#~ msgid "_Details..."
+#~ msgstr "_Detaily..."
 
 #~ msgid ""
 #~ "<b>Note:</b> You will need to logout and log back in for this setting to "

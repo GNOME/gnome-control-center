@@ -4,7 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
-"POT-Creation-Date: 2003-05-23 16:20+0800\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-06-24 16:13-0400\n"
 "PO-Revision-Date: 2003-05-14 11:43+0800\n"
 "Last-Translator: Hasbullah Bin Pit <sebol@ikhlas.com>\n"
 "Language-Team: Projek Gabai <gabai-penyumbang@lists.sourceforge.org>\n"
@@ -28,7 +29,7 @@ msgid "Select CDE AccessX file"
 msgstr "Pilih fail AccessX CDE"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "Papan Kekunci"
@@ -295,7 +296,7 @@ msgstr "_Pilih gambar:"
 #: capplets/default-applications/gnome-default-applications-properties.c:724
 #: capplets/keyboard/gnome-keyboard-properties.c:290
 #: capplets/mouse/gnome-mouse-properties.c:716
-#: capplets/sound/sound-properties-capplet.c:149
+#: capplets/sound/sound-properties-capplet.c:214
 msgid "Retrieve and store legacy settings"
 msgstr "Terima dan simpan tetapan warisan"
 
@@ -1083,7 +1084,7 @@ msgstr "Struktur mengandungi maklumat pada kategori MIME"
 
 #: capplets/file-types/mime-category-edit-dialog.c:344
 #: capplets/file-types/mime-edit-dialog.c:491
-#: capplets/file-types/mime-edit-dialog.c:595
+#: capplets/file-types/mime-edit-dialog.c:596
 #: capplets/file-types/service-edit-dialog.c:358
 #: capplets/file-types/service-edit-dialog.c:407
 msgid "Custom"
@@ -1123,11 +1124,12 @@ msgid "Misc"
 msgstr "Lain-lain"
 
 #: capplets/file-types/mime-edit-dialog.c:486
-#: capplets/file-types/mime-edit-dialog.c:545
+#: capplets/file-types/mime-edit-dialog.c:547
 msgid "None"
 msgstr "Tiada"
 
-#: capplets/file-types/mime-edit-dialog.c:855
+#: capplets/file-types/mime-edit-dialog.c:852
+#: capplets/file-types/mime-edit-dialog.c:866
 msgid ""
 "Please enter a valid MIME type.  It should be of the form class/type and may "
 "not contain any spaces."
@@ -1135,15 +1137,15 @@ msgstr ""
 "Sila masukkkan jenis MIME yang sah. Ia patut dalam bentuk kelas/jenis dan "
 "tak boleh mengandungi ruang."
 
-#: capplets/file-types/mime-edit-dialog.c:862
+#: capplets/file-types/mime-edit-dialog.c:859
 msgid "A MIME type with that name already exists, overwrite ?."
 msgstr "Jenis MIME dengan nama itu sudah ada, Tindih?."
 
-#: capplets/file-types/mime-edit-dialog.c:927
+#: capplets/file-types/mime-edit-dialog.c:931
 msgid "Category"
 msgstr "Kategori"
 
-#: capplets/file-types/mime-edit-dialog.c:932
+#: capplets/file-types/mime-edit-dialog.c:936
 msgid "Choose a file category"
 msgstr "Pilih kategori fail"
 
@@ -1483,8 +1485,8 @@ msgstr "Keboleh_capaikan"
 
 #: capplets/keyboard/gnome-keyboard-properties.c:286
 #: capplets/keyboard/gnome-keyboard-properties.c:288
-#: capplets/sound/sound-properties-capplet.c:145
-#: capplets/sound/sound-properties-capplet.c:147
+#: capplets/sound/sound-properties-capplet.c:210
+#: capplets/sound/sound-properties-capplet.c:212
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
@@ -1523,17 +1525,18 @@ msgstr "Kli_k pada tekanan kekunci"
 msgid "Cursor Blinks"
 msgstr "Kerdipan Kursor"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#, fuzzy
+msgid "Key presses _repeat when key is held down"
+msgstr "_Ulangan apabila kekunci ditekan"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Keyboard Bell"
 msgstr "Bunyi Papan Kekunci"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Keyboard Preferences"
 msgstr "Keutamaan Papan Kekunci"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
-msgid "Keyboard _repeats when key is held down"
-msgstr "_Ulangan apabila kekunci ditekan"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Keypress Click"
@@ -1838,7 +1841,7 @@ msgstr "Proksi HTTP _Selamat:"
 msgid "_Username:"
 msgstr "_Namapengguna:"
 
-#: capplets/sound/sound-properties-capplet.c:175
+#: capplets/sound/sound-properties-capplet.c:241
 msgid "Sound preferences"
 msgstr "Keutamaan Bunyi"
 
@@ -1847,20 +1850,40 @@ msgid "E_nable sound server startup"
 msgstr "_Hidupkan pelayan bunyi permulaan"
 
 #: capplets/sound/sound-properties.glade.h:2
+msgid "Flash _window titlebar"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:3
+msgid "Flash entire _screen"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:4
 msgid "General"
 msgstr "Am"
 
-#: capplets/sound/sound-properties.glade.h:3
+#: capplets/sound/sound-properties.glade.h:5
 msgid "Sound Events"
 msgstr "Acara Bunyi"
 
-#: capplets/sound/sound-properties.glade.h:4
+#: capplets/sound/sound-properties.glade.h:6
 msgid "Sound Preferences"
 msgstr "Keutamaan Bunyi"
 
-#: capplets/sound/sound-properties.glade.h:5
+#: capplets/sound/sound-properties.glade.h:7
+msgid "System Bell"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:8
+msgid "_Sound an audible bell"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:9
 msgid "_Sounds for events"
 msgstr "_Bunyi bagi acara"
+
+#: capplets/sound/sound-properties.glade.h:10
+msgid "_Visual feedback:"
+msgstr ""
 
 #: capplets/sound/sound.desktop.in.h:1
 msgid "Enable sound and associate sounds with events"
@@ -1957,19 +1980,26 @@ msgid "Theme"
 msgstr "Tema"
 
 #: capplets/theme-switcher/theme-install.glade.h:2
-msgid "Install new theme"
-msgstr "Pasang tema baru"
+#, fuzzy
+msgid "<span size=\"larger\" weight=\"bold\">Install a Theme</span>"
+msgstr "<span size=\"larger\" weight=\"bold\">Simpan tema ke cakera</span>"
 
 #: capplets/theme-switcher/theme-install.glade.h:3
+msgid "Theme Installation"
+msgstr ""
+
+#: capplets/theme-switcher/theme-install.glade.h:4
 msgid "_Install"
 msgstr "_Pasang"
 
-#: capplets/theme-switcher/theme-install.glade.h:4
-msgid "_Location of new theme:"
-msgstr "_Lokasi bagi tema baru:"
+#: capplets/theme-switcher/theme-install.glade.h:5
+#, fuzzy
+msgid "_Location:"
+msgstr "_Pemecutan:"
 
 #: capplets/theme-switcher/theme-properties.glade.h:2
-msgid "<span size=\"larger\" weight=\"bold\">Save theme to disk</span>"
+#, fuzzy
+msgid "<span size=\"larger\" weight=\"bold\">Save Theme to Disk</span>"
 msgstr "<span size=\"larger\" weight=\"bold\">Simpan tema ke cakera</span>"
 
 #: capplets/theme-switcher/theme-properties.glade.h:3
@@ -1993,37 +2023,52 @@ msgid "New themes can also be installed by dragging them into the window."
 msgstr "Tema baru boleh juga dipasang dengan mengheret tema ke tetingkap."
 
 #: capplets/theme-switcher/theme-properties.glade.h:8
-msgid "Short _Description:"
-msgstr "_Huraian Pendek:"
+#, fuzzy
+msgid "Save Theme"
+msgstr "_Simpan tema"
 
 #: capplets/theme-switcher/theme-properties.glade.h:9
+#, fuzzy
+msgid "Short _description:"
+msgstr "_Huraian Pendek:"
+
+#: capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Theme Details"
 msgstr "Perincian Tema"
 
-#: capplets/theme-switcher/theme-properties.glade.h:10
+#: capplets/theme-switcher/theme-properties.glade.h:11
 msgid "Theme Preferences"
 msgstr "Keutamaan Tema"
 
-#: capplets/theme-switcher/theme-properties.glade.h:11
-msgid ""
-"This theme suggests a\n"
-"background:"
-msgstr ""
-"Tema ini mencadangkan\n"
-"latarbelakang:"
+#: capplets/theme-switcher/theme-properties.glade.h:12
+#, fuzzy
+msgid "Theme _Details"
+msgstr "Perincian Tema"
 
 #: capplets/theme-switcher/theme-properties.glade.h:13
-msgid ""
-"This theme suggests a\n"
-"font and background:"
+#, fuzzy
+msgid "This theme does not suggest any particular font or background."
 msgstr ""
 "Tema ini mencadangkan \n"
 "font dan latarbelakang:"
 
+#: capplets/theme-switcher/theme-properties.glade.h:14
+#, fuzzy
+msgid "This theme suggests a background:"
+msgstr ""
+"Tema ini mencadangkan\n"
+"latarbelakang:"
+
 #: capplets/theme-switcher/theme-properties.glade.h:15
-msgid ""
-"This theme suggests a\n"
-"font:"
+#, fuzzy
+msgid "This theme suggests a font and a background:"
+msgstr ""
+"Tema ini mencadangkan \n"
+"font dan latarbelakang:"
+
+#: capplets/theme-switcher/theme-properties.glade.h:16
+#, fuzzy
+msgid "This theme suggests a font:"
 msgstr ""
 "Tema ini mencadangkan\n"
 "font:"
@@ -2033,22 +2078,21 @@ msgid "Window Border"
 msgstr "Sempadan Tetingkap"
 
 #: capplets/theme-switcher/theme-properties.glade.h:18
-msgid "_Details..."
-msgstr "_Terperinci..."
-
-#: capplets/theme-switcher/theme-properties.glade.h:19
-msgid "_Go to theme folder"
+#, fuzzy
+msgid "_Go To Theme Folder"
 msgstr "_Pergi ke folder tema"
 
-#: capplets/theme-switcher/theme-properties.glade.h:20
-msgid "_Install theme..."
+#: capplets/theme-switcher/theme-properties.glade.h:19
+#, fuzzy
+msgid "_Install Theme..."
 msgstr "_Pasang tema..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:21
-msgid "_Save theme"
+#: capplets/theme-switcher/theme-properties.glade.h:20
+#, fuzzy
+msgid "_Save Theme..."
 msgstr "_Simpan tema"
 
-#: capplets/theme-switcher/theme-properties.glade.h:22
+#: capplets/theme-switcher/theme-properties.glade.h:21
 msgid "_Theme name:"
 msgstr "Nama _Tema: "
 
@@ -2379,7 +2423,7 @@ msgid "Couldn't load sound file %s as sample %s"
 msgstr "Tak dapat memuatkan fail bunyi %s sebagai contoh %s"
 
 #: gnome-settings-daemon/gnome-settings-xrdb.c:212
-#: gnome-settings-daemon/gnome-settings-xrdb.c:259
+#: gnome-settings-daemon/gnome-settings-xrdb.c:260
 msgid "Cannot determine user's home directory"
 msgstr "Tak dapat menentukan direktori rumah pengguna"
 
@@ -2688,7 +2732,7 @@ msgstr "Komponen paparan kandungan Ciri-ciri Tema"
 msgid "Themus Theme Properties view"
 msgstr "Paparan Ciri-ciri Tema Themus"
 
-#: vfs-methods/themus/theme-method.c:513
+#: vfs-methods/themus/theme-method.c:514
 msgid "Themes"
 msgstr "Tema"
 
@@ -2744,6 +2788,15 @@ msgstr "Samada untuk meng'thumbnail'kan tema dipasang"
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Samada untuk meng'thumbnail'kan tema"
+
+#~ msgid "Install new theme"
+#~ msgstr "Pasang tema baru"
+
+#~ msgid "_Location of new theme:"
+#~ msgstr "_Lokasi bagi tema baru:"
+
+#~ msgid "_Details..."
+#~ msgstr "_Terperinci..."
 
 #~ msgid ""
 #~ "<b>Note:</b> You will need to logout and log back in for this setting to "

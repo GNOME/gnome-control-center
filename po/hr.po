@@ -5,7 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 1.5.5\n"
-"POT-Creation-Date: 2003-05-20 18:58-0400\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-06-24 16:13-0400\n"
 "PO-Revision-Date: Mon Dec 20 1999 21:34:11+0200\n"
 "Last-Translator: Vladimir Vuksan <vuksan@veus.hr>\n"
 "Language-Team: Croatian <lokalizacija@linux.hr>\n"
@@ -31,7 +32,7 @@ msgid "Select CDE AccessX file"
 msgstr "Izaberi datoteku sa zvukom"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr ""
@@ -309,7 +310,7 @@ msgstr "Izaberi ikonu..."
 #: capplets/default-applications/gnome-default-applications-properties.c:724
 #: capplets/keyboard/gnome-keyboard-properties.c:290
 #: capplets/mouse/gnome-mouse-properties.c:716
-#: capplets/sound/sound-properties-capplet.c:149
+#: capplets/sound/sound-properties-capplet.c:214
 msgid "Retrieve and store legacy settings"
 msgstr ""
 
@@ -1129,7 +1130,7 @@ msgstr ""
 
 #: capplets/file-types/mime-category-edit-dialog.c:344
 #: capplets/file-types/mime-edit-dialog.c:491
-#: capplets/file-types/mime-edit-dialog.c:595
+#: capplets/file-types/mime-edit-dialog.c:596
 #: capplets/file-types/service-edit-dialog.c:358
 #: capplets/file-types/service-edit-dialog.c:407
 msgid "Custom"
@@ -1171,26 +1172,27 @@ msgid "Misc"
 msgstr ""
 
 #: capplets/file-types/mime-edit-dialog.c:486
-#: capplets/file-types/mime-edit-dialog.c:545
+#: capplets/file-types/mime-edit-dialog.c:547
 #, fuzzy
 msgid "None"
 msgstr "ništa"
 
-#: capplets/file-types/mime-edit-dialog.c:855
+#: capplets/file-types/mime-edit-dialog.c:852
+#: capplets/file-types/mime-edit-dialog.c:866
 msgid ""
 "Please enter a valid MIME type.  It should be of the form class/type and may "
 "not contain any spaces."
 msgstr ""
 
-#: capplets/file-types/mime-edit-dialog.c:862
+#: capplets/file-types/mime-edit-dialog.c:859
 msgid "A MIME type with that name already exists, overwrite ?."
 msgstr ""
 
-#: capplets/file-types/mime-edit-dialog.c:927
+#: capplets/file-types/mime-edit-dialog.c:931
 msgid "Category"
 msgstr ""
 
-#: capplets/file-types/mime-edit-dialog.c:932
+#: capplets/file-types/mime-edit-dialog.c:936
 msgid "Choose a file category"
 msgstr ""
 
@@ -1553,8 +1555,8 @@ msgstr "Postavke"
 
 #: capplets/keyboard/gnome-keyboard-properties.c:286
 #: capplets/keyboard/gnome-keyboard-properties.c:288
-#: capplets/sound/sound-properties-capplet.c:145
-#: capplets/sound/sound-properties-capplet.c:147
+#: capplets/sound/sound-properties-capplet.c:210
+#: capplets/sound/sound-properties-capplet.c:212
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
@@ -1593,18 +1595,18 @@ msgstr ""
 msgid "Cursor Blinks"
 msgstr "Boja"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
-msgid "Keyboard Bell"
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+msgid "Key presses _repeat when key is held down"
 msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+msgid "Keyboard Bell"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 #, fuzzy
 msgid "Keyboard Preferences"
 msgstr "Izabire boju pozadine"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
-msgid "Keyboard _repeats when key is held down"
-msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Keypress Click"
@@ -1905,7 +1907,7 @@ msgstr ""
 msgid "_Username:"
 msgstr "Ime:"
 
-#: capplets/sound/sound-properties-capplet.c:175
+#: capplets/sound/sound-properties-capplet.c:241
 #, fuzzy
 msgid "Sound preferences"
 msgstr "Izabire boju pozadine"
@@ -1915,24 +1917,44 @@ msgid "E_nable sound server startup"
 msgstr ""
 
 #: capplets/sound/sound-properties.glade.h:2
+msgid "Flash _window titlebar"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:3
+msgid "Flash entire _screen"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:4
 #, fuzzy
 msgid "General"
 msgstr "Općenito"
 
-#: capplets/sound/sound-properties.glade.h:3
+#: capplets/sound/sound-properties.glade.h:5
 #, fuzzy
 msgid "Sound Events"
 msgstr "Zvuci događaja"
 
-#: capplets/sound/sound-properties.glade.h:4
+#: capplets/sound/sound-properties.glade.h:6
 #, fuzzy
 msgid "Sound Preferences"
 msgstr "Izabire boju pozadine"
 
-#: capplets/sound/sound-properties.glade.h:5
+#: capplets/sound/sound-properties.glade.h:7
+msgid "System Bell"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:8
+msgid "_Sound an audible bell"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:9
 #, fuzzy
 msgid "_Sounds for events"
 msgstr "Zvuci događaja"
+
+#: capplets/sound/sound-properties.glade.h:10
+msgid "_Visual feedback:"
+msgstr ""
 
 #: capplets/sound/sound.desktop.in.h:1
 #, fuzzy
@@ -2029,23 +2051,24 @@ msgid "Theme"
 msgstr ""
 
 #: capplets/theme-switcher/theme-install.glade.h:2
-#, fuzzy
-msgid "Install new theme"
+msgid "<span size=\"larger\" weight=\"bold\">Install a Theme</span>"
 msgstr ""
-"Instaliraj novu\n"
-"temu..."
 
 #: capplets/theme-switcher/theme-install.glade.h:3
-msgid "_Install"
+msgid "Theme Installation"
 msgstr ""
 
 #: capplets/theme-switcher/theme-install.glade.h:4
+msgid "_Install"
+msgstr ""
+
+#: capplets/theme-switcher/theme-install.glade.h:5
 #, fuzzy
-msgid "_Location of new theme:"
+msgid "_Location:"
 msgstr "Ubrzanje"
 
 #: capplets/theme-switcher/theme-properties.glade.h:2
-msgid "<span size=\"larger\" weight=\"bold\">Save theme to disk</span>"
+msgid "<span size=\"larger\" weight=\"bold\">Save Theme to Disk</span>"
 msgstr ""
 
 #: capplets/theme-switcher/theme-properties.glade.h:3
@@ -2074,38 +2097,48 @@ msgstr ""
 
 #: capplets/theme-switcher/theme-properties.glade.h:8
 #, fuzzy
-msgid "Short _Description:"
-msgstr "Izaberi ikonu..."
+msgid "Save Theme"
+msgstr "U mjerilu"
 
 #: capplets/theme-switcher/theme-properties.glade.h:9
+#, fuzzy
+msgid "Short _description:"
+msgstr "Izaberi ikonu..."
+
+#: capplets/theme-switcher/theme-properties.glade.h:10
 #, fuzzy
 msgid "Theme Details"
 msgstr "Izabire boju pozadine"
 
-#: capplets/theme-switcher/theme-properties.glade.h:10
+#: capplets/theme-switcher/theme-properties.glade.h:11
 #, fuzzy
 msgid "Theme Preferences"
 msgstr "Izabire boju pozadine"
 
-#: capplets/theme-switcher/theme-properties.glade.h:11
+#: capplets/theme-switcher/theme-properties.glade.h:12
 #, fuzzy
-msgid ""
-"This theme suggests a\n"
-"background:"
-msgstr "Izaberite temu koju želite instalirati"
+msgid "Theme _Details"
+msgstr "Izabire boju pozadine"
 
 #: capplets/theme-switcher/theme-properties.glade.h:13
 #, fuzzy
-msgid ""
-"This theme suggests a\n"
-"font and background:"
+msgid "This theme does not suggest any particular font or background."
+msgstr "Izaberite temu koju želite instalirati"
+
+#: capplets/theme-switcher/theme-properties.glade.h:14
+#, fuzzy
+msgid "This theme suggests a background:"
 msgstr "Izaberite temu koju želite instalirati"
 
 #: capplets/theme-switcher/theme-properties.glade.h:15
-msgid ""
-"This theme suggests a\n"
-"font:"
-msgstr ""
+#, fuzzy
+msgid "This theme suggests a font and a background:"
+msgstr "Izaberite temu koju želite instalirati"
+
+#: capplets/theme-switcher/theme-properties.glade.h:16
+#, fuzzy
+msgid "This theme suggests a font:"
+msgstr "Izaberite temu koju želite instalirati"
 
 #: capplets/theme-switcher/theme-properties.glade.h:17
 #, fuzzy
@@ -2113,27 +2146,22 @@ msgid "Window Border"
 msgstr "Izabire boju pozadine"
 
 #: capplets/theme-switcher/theme-properties.glade.h:18
-#, fuzzy
-msgid "_Details..."
-msgstr "Popločano"
-
-#: capplets/theme-switcher/theme-properties.glade.h:19
-msgid "_Go to theme folder"
+msgid "_Go To Theme Folder"
 msgstr ""
 
-#: capplets/theme-switcher/theme-properties.glade.h:20
+#: capplets/theme-switcher/theme-properties.glade.h:19
 #, fuzzy
-msgid "_Install theme..."
+msgid "_Install Theme..."
 msgstr ""
 "Instaliraj novu\n"
 "temu..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:21
+#: capplets/theme-switcher/theme-properties.glade.h:20
 #, fuzzy
-msgid "_Save theme"
+msgid "_Save Theme..."
 msgstr "U mjerilu"
 
-#: capplets/theme-switcher/theme-properties.glade.h:22
+#: capplets/theme-switcher/theme-properties.glade.h:21
 #, fuzzy
 msgid "_Theme name:"
 msgstr "Ime:"
@@ -2476,7 +2504,7 @@ msgid "Couldn't load sound file %s as sample %s"
 msgstr ""
 
 #: gnome-settings-daemon/gnome-settings-xrdb.c:212
-#: gnome-settings-daemon/gnome-settings-xrdb.c:259
+#: gnome-settings-daemon/gnome-settings-xrdb.c:260
 msgid "Cannot determine user's home directory"
 msgstr ""
 
@@ -2645,7 +2673,158 @@ msgid ""
 "possible; may cause distortion of letter forms."
 msgstr ""
 
-#: vfs-methods/themus/theme-method.c:513
+#: vfs-methods/fontilus/font-view.c:101
+msgid "The quick brown fox jumps over the lazy dog. 0123456789"
+msgstr ""
+
+#: vfs-methods/fontilus/font-view.c:252
+#, fuzzy
+msgid "Name:"
+msgstr "Ime:"
+
+#: vfs-methods/fontilus/font-view.c:255
+#, fuzzy
+msgid "Style:"
+msgstr "Stil:"
+
+#: vfs-methods/fontilus/font-view.c:264
+#, fuzzy
+msgid "Type:"
+msgstr "Mime tip"
+
+#: vfs-methods/fontilus/font-view.c:271
+msgid "Size:"
+msgstr ""
+
+#: vfs-methods/fontilus/font-view.c:315 vfs-methods/fontilus/font-view.c:328
+#, fuzzy
+msgid "Version:"
+msgstr "Sufiks"
+
+#: vfs-methods/fontilus/font-view.c:319 vfs-methods/fontilus/font-view.c:330
+msgid "Copyright:"
+msgstr ""
+
+#: vfs-methods/fontilus/font-view.c:323
+#, fuzzy
+msgid "Description:"
+msgstr "Izaberi ikonu..."
+
+#: vfs-methods/fontilus/fontilus-context-menu.c:131
+msgid "Font context menu items"
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:1
+msgid "If set to true, then OpenType fonts will be thumbnailed."
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:2
+msgid "If set to true, then PCF fonts will be thumbnailed."
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:3
+msgid "If set to true, then TrueType fonts will be thumbnailed."
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:4
+msgid "If set to true, then Type1 fonts will be thumbnailed."
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:5
+msgid ""
+"Set this key to the command used to create thumbnails for OpenType fonts."
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:6
+msgid "Set this key to the command used to create thumbnails for PCF fonts."
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:7
+msgid ""
+"Set this key to the command used to create thumbnails for TrueType fonts."
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:8
+msgid "Set this key to the command used to create thumbnails for Type1 fonts."
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:9
+msgid "Thumbnail command for OpenType fonts"
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:10
+msgid "Thumbnail command for PCF fonts"
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:11
+msgid "Thumbnail command for TrueType fonts"
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:12
+msgid "Thumbnail command for Type1 fonts"
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:13
+msgid "Whether to thumbnail OpenType fonts"
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:14
+msgid "Whether to thumbnail PCF fonts"
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:15
+msgid "Whether to thumbnail TrueType fonts"
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:16
+msgid "Whether to thumbnail Type1 fonts"
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.server.in.in.h:1
+msgid "Factory for the fontilus context menu"
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.server.in.in.h:2
+#, fuzzy
+msgid "Fontilus context menu"
+msgstr "GNOME kontrolni centar"
+
+#: vfs-methods/fontilus/fontilus.server.in.in.h:3
+msgid "Fontilus context menu factory"
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.server.in.in.h:4
+msgid "Nautilus context menu entries for fonts"
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.server.in.in.h:5
+msgid "Set as Application Font"
+msgstr ""
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:1
+#, fuzzy
+msgid "Apply theme..."
+msgstr ""
+"Instaliraj novu\n"
+"temu..."
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:2
+msgid "Themus component"
+msgstr ""
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:3
+msgid "Themus component apply theme operations"
+msgstr ""
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
+msgid "Theme Properties content view component"
+msgstr ""
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
+msgid "Themus Theme Properties view"
+msgstr ""
+
+#: vfs-methods/themus/theme-method.c:514
 #, fuzzy
 msgid "Themes"
 msgstr "Iskušaj"
@@ -2702,28 +2881,19 @@ msgstr ""
 msgid "Whether to thumbnail themes"
 msgstr ""
 
-#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
-msgid "Theme Properties content view component"
-msgstr ""
-
-#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
-msgid "Themus Theme Properties view"
-msgstr ""
-
-#: vfs-methods/themus/Themus_Component.server.in.in.h:1
 #, fuzzy
-msgid "Apply theme..."
-msgstr ""
-"Instaliraj novu\n"
-"temu..."
+#~ msgid "Install new theme"
+#~ msgstr ""
+#~ "Instaliraj novu\n"
+#~ "temu..."
 
-#: vfs-methods/themus/Themus_Component.server.in.in.h:2
-msgid "Themus component"
-msgstr ""
+#, fuzzy
+#~ msgid "_Location of new theme:"
+#~ msgstr "Ubrzanje"
 
-#: vfs-methods/themus/Themus_Component.server.in.in.h:3
-msgid "Themus component apply theme operations"
-msgstr ""
+#, fuzzy
+#~ msgid "_Details..."
+#~ msgstr "Popločano"
 
 #, fuzzy
 #~ msgid "Use _background"
@@ -2748,10 +2918,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Network Preferences"
 #~ msgstr "Izabire boju pozadine"
-
-#, fuzzy
-#~ msgid "_Location:"
-#~ msgstr "Ubrzanje"
 
 #, fuzzy
 #~ msgid "Window Manager:"
@@ -3065,10 +3231,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Cancel"
 #~ msgstr "Odustani"
-
-#, fuzzy
-#~ msgid "Name:"
-#~ msgstr "Ime:"
 
 #, fuzzy
 #~ msgid "Command:"
@@ -3418,10 +3580,6 @@ msgstr ""
 #~ msgstr "Nepoznat"
 
 #, fuzzy
-#~ msgid "Style:"
-#~ msgstr "Stil:"
-
-#, fuzzy
 #~ msgid "IMAGE-FILE"
 #~ msgstr "SLIKA"
 
@@ -3518,10 +3676,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Fade Duration"
 #~ msgstr "Trajanje (ms)"
-
-#, fuzzy
-#~ msgid "Session"
-#~ msgstr "Sufiks"
 
 #, fuzzy
 #~ msgid "Session Chooser"

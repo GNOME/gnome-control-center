@@ -9,7 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center\n"
-"POT-Creation-Date: 2003-05-23 16:20+0800\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-06-24 16:13-0400\n"
 "PO-Revision-Date: 2003-02-04 18:14+0100\n"
 "Last-Translator: GNOME PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
@@ -33,7 +34,7 @@ msgid "Select CDE AccessX file"
 msgstr "Wybór pliku CDE AccessX"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "Klawiatura"
@@ -307,7 +308,7 @@ msgstr "Wybierz _obraz:"
 #: capplets/default-applications/gnome-default-applications-properties.c:724
 #: capplets/keyboard/gnome-keyboard-properties.c:290
 #: capplets/mouse/gnome-mouse-properties.c:716
-#: capplets/sound/sound-properties-capplet.c:149
+#: capplets/sound/sound-properties-capplet.c:214
 msgid "Retrieve and store legacy settings"
 msgstr "Pobiera i zapisuje tradycyjne ustawienia"
 
@@ -1086,7 +1087,7 @@ msgstr "Struktura danych zawierająca informacje kategorii MIME"
 
 #: capplets/file-types/mime-category-edit-dialog.c:344
 #: capplets/file-types/mime-edit-dialog.c:491
-#: capplets/file-types/mime-edit-dialog.c:595
+#: capplets/file-types/mime-edit-dialog.c:596
 #: capplets/file-types/service-edit-dialog.c:358
 #: capplets/file-types/service-edit-dialog.c:407
 msgid "Custom"
@@ -1126,11 +1127,12 @@ msgid "Misc"
 msgstr "Różne"
 
 #: capplets/file-types/mime-edit-dialog.c:486
-#: capplets/file-types/mime-edit-dialog.c:545
+#: capplets/file-types/mime-edit-dialog.c:547
 msgid "None"
 msgstr "Brak"
 
-#: capplets/file-types/mime-edit-dialog.c:855
+#: capplets/file-types/mime-edit-dialog.c:852
+#: capplets/file-types/mime-edit-dialog.c:866
 msgid ""
 "Please enter a valid MIME type.  It should be of the form class/type and may "
 "not contain any spaces."
@@ -1138,15 +1140,15 @@ msgstr ""
 "Wprowadź poprawny typ MIME. Powinien on mieć formę klasa/typ i nie może "
 "zawierać spacji."
 
-#: capplets/file-types/mime-edit-dialog.c:862
+#: capplets/file-types/mime-edit-dialog.c:859
 msgid "A MIME type with that name already exists, overwrite ?."
 msgstr "Typ MIME o tej nazwie już istnieje. Czy go nadpisać?"
 
-#: capplets/file-types/mime-edit-dialog.c:927
+#: capplets/file-types/mime-edit-dialog.c:931
 msgid "Category"
 msgstr "Kategoria"
 
-#: capplets/file-types/mime-edit-dialog.c:932
+#: capplets/file-types/mime-edit-dialog.c:936
 msgid "Choose a file category"
 msgstr "Wybór kategorii pliku"
 
@@ -1490,8 +1492,8 @@ msgstr "_Dostępność"
 
 #: capplets/keyboard/gnome-keyboard-properties.c:286
 #: capplets/keyboard/gnome-keyboard-properties.c:288
-#: capplets/sound/sound-properties-capplet.c:145
-#: capplets/sound/sound-properties-capplet.c:147
+#: capplets/sound/sound-properties-capplet.c:210
+#: capplets/sound/sound-properties-capplet.c:212
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
@@ -1529,17 +1531,18 @@ msgstr "_Kliknięcia przy przyciśnięciach klawiszy"
 msgid "Cursor Blinks"
 msgstr "Migotanie kursora"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#, fuzzy
+msgid "Key presses _repeat when key is held down"
+msgstr "_Powtarzanie klawiatury przy przytrzymaniu klawisza"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Keyboard Bell"
 msgstr "Dzwonek klawiatury"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Keyboard Preferences"
 msgstr "Ustawienia klawiatury"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
-msgid "Keyboard _repeats when key is held down"
-msgstr "_Powtarzanie klawiatury przy przytrzymaniu klawisza"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Keypress Click"
@@ -1844,7 +1847,7 @@ msgstr "_Bezpieczny pośrednik HTTP:"
 msgid "_Username:"
 msgstr "Nazwa _użytkownika:"
 
-#: capplets/sound/sound-properties-capplet.c:175
+#: capplets/sound/sound-properties-capplet.c:241
 msgid "Sound preferences"
 msgstr "Ustawienia dźwięku"
 
@@ -1853,20 +1856,40 @@ msgid "E_nable sound server startup"
 msgstr "_Uruchamianie serwera dźwięku"
 
 #: capplets/sound/sound-properties.glade.h:2
+msgid "Flash _window titlebar"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:3
+msgid "Flash entire _screen"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:4
 msgid "General"
 msgstr "Ogólne"
 
-#: capplets/sound/sound-properties.glade.h:3
+#: capplets/sound/sound-properties.glade.h:5
 msgid "Sound Events"
 msgstr "Zdarzenia dźwiękowe"
 
-#: capplets/sound/sound-properties.glade.h:4
+#: capplets/sound/sound-properties.glade.h:6
 msgid "Sound Preferences"
 msgstr "Ustawienia dźwięku"
 
-#: capplets/sound/sound-properties.glade.h:5
+#: capplets/sound/sound-properties.glade.h:7
+msgid "System Bell"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:8
+msgid "_Sound an audible bell"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:9
 msgid "_Sounds for events"
 msgstr "_Powiązanie dźwięków ze zdarzeniami"
+
+#: capplets/sound/sound-properties.glade.h:10
+msgid "_Visual feedback:"
+msgstr ""
 
 #: capplets/sound/sound.desktop.in.h:1
 msgid "Enable sound and associate sounds with events"
@@ -1961,19 +1984,25 @@ msgid "Theme"
 msgstr "Motyw"
 
 #: capplets/theme-switcher/theme-install.glade.h:2
-msgid "Install new theme"
-msgstr "Instalacja nowego motywu"
+#, fuzzy
+msgid "<span size=\"larger\" weight=\"bold\">Install a Theme</span>"
+msgstr "<span size=\"larger\" weight=\"bold\">Zapis motywu na dysku</span>"
 
 #: capplets/theme-switcher/theme-install.glade.h:3
+msgid "Theme Installation"
+msgstr ""
+
+#: capplets/theme-switcher/theme-install.glade.h:4
 msgid "_Install"
 msgstr "Za_instaluj"
 
-#: capplets/theme-switcher/theme-install.glade.h:4
-msgid "_Location of new theme:"
-msgstr "P_ołożenie nowego motywu:"
+#: capplets/theme-switcher/theme-install.glade.h:5
+msgid "_Location:"
+msgstr "_Położenie:"
 
 #: capplets/theme-switcher/theme-properties.glade.h:2
-msgid "<span size=\"larger\" weight=\"bold\">Save theme to disk</span>"
+#, fuzzy
+msgid "<span size=\"larger\" weight=\"bold\">Save Theme to Disk</span>"
 msgstr "<span size=\"larger\" weight=\"bold\">Zapis motywu na dysku</span>"
 
 #: capplets/theme-switcher/theme-properties.glade.h:3
@@ -1997,33 +2026,43 @@ msgid "New themes can also be installed by dragging them into the window."
 msgstr "Nowe motywy można również instalować przeciągając je do tego okna."
 
 #: capplets/theme-switcher/theme-properties.glade.h:8
-msgid "Short _Description:"
-msgstr "Krótki _opis:"
+#, fuzzy
+msgid "Save Theme"
+msgstr "_Zapisz motyw"
 
 #: capplets/theme-switcher/theme-properties.glade.h:9
+#, fuzzy
+msgid "Short _description:"
+msgstr "Krótki _opis:"
+
+#: capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Theme Details"
 msgstr "Szczegóły dotyczące motywów"
 
-#: capplets/theme-switcher/theme-properties.glade.h:10
+#: capplets/theme-switcher/theme-properties.glade.h:11
 msgid "Theme Preferences"
 msgstr "Ustawienia motywu"
 
-#: capplets/theme-switcher/theme-properties.glade.h:11
-msgid ""
-"This theme suggests a\n"
-"background:"
-msgstr ""
+#: capplets/theme-switcher/theme-properties.glade.h:12
+#, fuzzy
+msgid "Theme _Details"
+msgstr "Szczegóły dotyczące motywów"
 
 #: capplets/theme-switcher/theme-properties.glade.h:13
-msgid ""
-"This theme suggests a\n"
-"font and background:"
+msgid "This theme does not suggest any particular font or background."
 msgstr ""
 
+#: capplets/theme-switcher/theme-properties.glade.h:14
+#, fuzzy
+msgid "This theme suggests a background:"
+msgstr "Ustawienia wyglądu tła biurka"
+
 #: capplets/theme-switcher/theme-properties.glade.h:15
-msgid ""
-"This theme suggests a\n"
-"font:"
+msgid "This theme suggests a font and a background:"
+msgstr ""
+
+#: capplets/theme-switcher/theme-properties.glade.h:16
+msgid "This theme suggests a font:"
 msgstr ""
 
 #: capplets/theme-switcher/theme-properties.glade.h:17
@@ -2031,22 +2070,21 @@ msgid "Window Border"
 msgstr "Krawędź okna"
 
 #: capplets/theme-switcher/theme-properties.glade.h:18
-msgid "_Details..."
-msgstr "_Szczegóły..."
-
-#: capplets/theme-switcher/theme-properties.glade.h:19
-msgid "_Go to theme folder"
+#, fuzzy
+msgid "_Go To Theme Folder"
 msgstr "_Przejdź do folderu z motywem"
 
-#: capplets/theme-switcher/theme-properties.glade.h:20
-msgid "_Install theme..."
+#: capplets/theme-switcher/theme-properties.glade.h:19
+#, fuzzy
+msgid "_Install Theme..."
 msgstr "Za_instaluj motyw..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:21
-msgid "_Save theme"
+#: capplets/theme-switcher/theme-properties.glade.h:20
+#, fuzzy
+msgid "_Save Theme..."
 msgstr "_Zapisz motyw"
 
-#: capplets/theme-switcher/theme-properties.glade.h:22
+#: capplets/theme-switcher/theme-properties.glade.h:21
 msgid "_Theme name:"
 msgstr "_Nazwa motywu:"
 
@@ -2378,7 +2416,7 @@ msgid "Couldn't load sound file %s as sample %s"
 msgstr "Nie można wczytać pliku dźwiękowego %s jako próbki %s"
 
 #: gnome-settings-daemon/gnome-settings-xrdb.c:212
-#: gnome-settings-daemon/gnome-settings-xrdb.c:259
+#: gnome-settings-daemon/gnome-settings-xrdb.c:260
 msgid "Cannot determine user's home directory"
 msgstr ""
 
@@ -2701,7 +2739,7 @@ msgstr "Komponenet widoku zawartości z ustawieniami motywu"
 msgid "Themus Theme Properties view"
 msgstr "Widok ustawień motywu programu Themus"
 
-#: vfs-methods/themus/theme-method.c:513
+#: vfs-methods/themus/theme-method.c:514
 msgid "Themes"
 msgstr "Motywy"
 
@@ -2757,6 +2795,15 @@ msgstr "Tworzenie miniaturek zainstalowanych motywów"
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Tworzenie miniaturek motywów"
+
+#~ msgid "Install new theme"
+#~ msgstr "Instalacja nowego motywu"
+
+#~ msgid "_Location of new theme:"
+#~ msgstr "P_ołożenie nowego motywu:"
+
+#~ msgid "_Details..."
+#~ msgstr "_Szczegóły..."
 
 #~ msgid ""
 #~ "<b>Note:</b> You will need to logout and log back in for this setting to "
@@ -2858,9 +2905,6 @@ msgstr "Tworzenie miniaturek motywów"
 
 #~ msgid "Pro_xy requires username and password"
 #~ msgstr "Pośrednik _wymaga nazwy użytkownika i hasła"
-
-#~ msgid "_Location:"
-#~ msgstr "_Położenie:"
 
 #~ msgid "_General"
 #~ msgstr "_Ogólne"

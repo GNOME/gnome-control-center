@@ -22,7 +22,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2003-05-23 16:20+0800\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-06-24 16:13-0400\n"
 "PO-Revision-Date: 2003-05-19 21:13+0200\n"
 "Last-Translator: Ole Laursen <olau@hardworking.dk>\n"
 "Language-Team: danish <dansk@klid.dk>\n"
@@ -46,7 +47,7 @@ msgid "Select CDE AccessX file"
 msgstr "Vælg CDE AccessX-fil"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "Tastatur"
@@ -310,7 +311,7 @@ msgstr "Vælg _billede:"
 #: capplets/default-applications/gnome-default-applications-properties.c:724
 #: capplets/keyboard/gnome-keyboard-properties.c:290
 #: capplets/mouse/gnome-mouse-properties.c:716
-#: capplets/sound/sound-properties-capplet.c:149
+#: capplets/sound/sound-properties-capplet.c:214
 msgid "Retrieve and store legacy settings"
 msgstr "Fremskaf og gem gamle indstillinger"
 
@@ -1104,7 +1105,7 @@ msgstr "Struktur der indeholder oplysninger om MIME-kategorien"
 
 #: capplets/file-types/mime-category-edit-dialog.c:344
 #: capplets/file-types/mime-edit-dialog.c:491
-#: capplets/file-types/mime-edit-dialog.c:595
+#: capplets/file-types/mime-edit-dialog.c:596
 #: capplets/file-types/service-edit-dialog.c:358
 #: capplets/file-types/service-edit-dialog.c:407
 msgid "Custom"
@@ -1144,11 +1145,12 @@ msgid "Misc"
 msgstr "Diverse"
 
 #: capplets/file-types/mime-edit-dialog.c:486
-#: capplets/file-types/mime-edit-dialog.c:545
+#: capplets/file-types/mime-edit-dialog.c:547
 msgid "None"
 msgstr "Ingen"
 
-#: capplets/file-types/mime-edit-dialog.c:855
+#: capplets/file-types/mime-edit-dialog.c:852
+#: capplets/file-types/mime-edit-dialog.c:866
 msgid ""
 "Please enter a valid MIME type.  It should be of the form class/type and may "
 "not contain any spaces."
@@ -1156,15 +1158,15 @@ msgstr ""
 "Indtast en gyldig MIME-type. Den skal være på formen \"klasse/type\" og må "
 "ikke indeholde mellemrum."
 
-#: capplets/file-types/mime-edit-dialog.c:862
+#: capplets/file-types/mime-edit-dialog.c:859
 msgid "A MIME type with that name already exists, overwrite ?."
 msgstr "En MIME-type med det navn eksisterer allerede, overskriv den?"
 
-#: capplets/file-types/mime-edit-dialog.c:927
+#: capplets/file-types/mime-edit-dialog.c:931
 msgid "Category"
 msgstr "Kategori"
 
-#: capplets/file-types/mime-edit-dialog.c:932
+#: capplets/file-types/mime-edit-dialog.c:936
 msgid "Choose a file category"
 msgstr "Vælg en filkategori"
 
@@ -1507,8 +1509,8 @@ msgstr "_Tilgængelighed"
 
 #: capplets/keyboard/gnome-keyboard-properties.c:286
 #: capplets/keyboard/gnome-keyboard-properties.c:288
-#: capplets/sound/sound-properties-capplet.c:145
-#: capplets/sound/sound-properties-capplet.c:147
+#: capplets/sound/sound-properties-capplet.c:210
+#: capplets/sound/sound-properties-capplet.c:212
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
@@ -1547,17 +1549,18 @@ msgstr "Kli_k ved tastetryk"
 msgid "Cursor Blinks"
 msgstr "Markørblink"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#, fuzzy
+msgid "Key presses _repeat when key is held down"
+msgstr "_Gentag tegn når en tast holdes ned"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Keyboard Bell"
 msgstr "Tastaturbip"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Keyboard Preferences"
 msgstr "Indstillinger for tastatur"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
-msgid "Keyboard _repeats when key is held down"
-msgstr "_Gentag tegn når en tast holdes ned"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Keypress Click"
@@ -1856,7 +1859,7 @@ msgstr "_Sikker HTTP-mellemvært:"
 msgid "_Username:"
 msgstr "_Brugernavn:"
 
-#: capplets/sound/sound-properties-capplet.c:175
+#: capplets/sound/sound-properties-capplet.c:241
 msgid "Sound preferences"
 msgstr "Lydindstillinger"
 
@@ -1865,20 +1868,40 @@ msgid "E_nable sound server startup"
 msgstr "A_ktivér lydserverstart"
 
 #: capplets/sound/sound-properties.glade.h:2
+msgid "Flash _window titlebar"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:3
+msgid "Flash entire _screen"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:4
 msgid "General"
 msgstr "Generelt"
 
-#: capplets/sound/sound-properties.glade.h:3
+#: capplets/sound/sound-properties.glade.h:5
 msgid "Sound Events"
 msgstr "Lydhændelser"
 
-#: capplets/sound/sound-properties.glade.h:4
+#: capplets/sound/sound-properties.glade.h:6
 msgid "Sound Preferences"
 msgstr "Lydindstillinger"
 
-#: capplets/sound/sound-properties.glade.h:5
+#: capplets/sound/sound-properties.glade.h:7
+msgid "System Bell"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:8
+msgid "_Sound an audible bell"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:9
 msgid "_Sounds for events"
 msgstr "_Lyde for hændelser"
+
+#: capplets/sound/sound-properties.glade.h:10
+msgid "_Visual feedback:"
+msgstr ""
 
 #: capplets/sound/sound.desktop.in.h:1
 msgid "Enable sound and associate sounds with events"
@@ -1979,19 +2002,26 @@ msgid "Theme"
 msgstr "Tema"
 
 #: capplets/theme-switcher/theme-install.glade.h:2
-msgid "Install new theme"
-msgstr "Installér nyt tema"
+#, fuzzy
+msgid "<span size=\"larger\" weight=\"bold\">Install a Theme</span>"
+msgstr "<span size=\"larger\" weight=\"bold\">Gem tema på disken</span>"
 
 #: capplets/theme-switcher/theme-install.glade.h:3
+#, fuzzy
+msgid "Theme Installation"
+msgstr "Præsentation"
+
+#: capplets/theme-switcher/theme-install.glade.h:4
 msgid "_Install"
 msgstr "_Installér"
 
-#: capplets/theme-switcher/theme-install.glade.h:4
-msgid "_Location of new theme:"
-msgstr "_Placering af det ny tema:"
+#: capplets/theme-switcher/theme-install.glade.h:5
+msgid "_Location:"
+msgstr "_Placering:"
 
 #: capplets/theme-switcher/theme-properties.glade.h:2
-msgid "<span size=\"larger\" weight=\"bold\">Save theme to disk</span>"
+#, fuzzy
+msgid "<span size=\"larger\" weight=\"bold\">Save Theme to Disk</span>"
 msgstr "<span size=\"larger\" weight=\"bold\">Gem tema på disken</span>"
 
 #: capplets/theme-switcher/theme-properties.glade.h:3
@@ -2015,37 +2045,52 @@ msgid "New themes can also be installed by dragging them into the window."
 msgstr "Nye temaer kan installeres ved at trække dem ind i vinduet."
 
 #: capplets/theme-switcher/theme-properties.glade.h:8
-msgid "Short _Description:"
-msgstr "Kort _beskrivelse:"
+#, fuzzy
+msgid "Save Theme"
+msgstr "_Gem tema"
 
 #: capplets/theme-switcher/theme-properties.glade.h:9
+#, fuzzy
+msgid "Short _description:"
+msgstr "Kort _beskrivelse:"
+
+#: capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Theme Details"
 msgstr "Temadetaljer"
 
-#: capplets/theme-switcher/theme-properties.glade.h:10
+#: capplets/theme-switcher/theme-properties.glade.h:11
 msgid "Theme Preferences"
 msgstr "Temaindstillinger"
 
-#: capplets/theme-switcher/theme-properties.glade.h:11
-msgid ""
-"This theme suggests a\n"
-"background:"
-msgstr ""
-"Dette tema foreslår en\n"
-"baggrund:"
+#: capplets/theme-switcher/theme-properties.glade.h:12
+#, fuzzy
+msgid "Theme _Details"
+msgstr "Temadetaljer"
 
 #: capplets/theme-switcher/theme-properties.glade.h:13
-msgid ""
-"This theme suggests a\n"
-"font and background:"
+#, fuzzy
+msgid "This theme does not suggest any particular font or background."
 msgstr ""
 "Dette tema foreslår en\n"
 "skrifttype og en baggrund:"
 
+#: capplets/theme-switcher/theme-properties.glade.h:14
+#, fuzzy
+msgid "This theme suggests a background:"
+msgstr ""
+"Dette tema foreslår en\n"
+"baggrund:"
+
 #: capplets/theme-switcher/theme-properties.glade.h:15
-msgid ""
-"This theme suggests a\n"
-"font:"
+#, fuzzy
+msgid "This theme suggests a font and a background:"
+msgstr ""
+"Dette tema foreslår en\n"
+"skrifttype og en baggrund:"
+
+#: capplets/theme-switcher/theme-properties.glade.h:16
+#, fuzzy
+msgid "This theme suggests a font:"
 msgstr ""
 "Dette tema foreslår en\n"
 "skrifttype:"
@@ -2055,22 +2100,21 @@ msgid "Window Border"
 msgstr "Vindueskant"
 
 #: capplets/theme-switcher/theme-properties.glade.h:18
-msgid "_Details..."
-msgstr "_Detaljer..."
-
-#: capplets/theme-switcher/theme-properties.glade.h:19
-msgid "_Go to theme folder"
+#, fuzzy
+msgid "_Go To Theme Folder"
 msgstr "_Gå til temamappen"
 
-#: capplets/theme-switcher/theme-properties.glade.h:20
-msgid "_Install theme..."
+#: capplets/theme-switcher/theme-properties.glade.h:19
+#, fuzzy
+msgid "_Install Theme..."
 msgstr "_Installér tema..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:21
-msgid "_Save theme"
+#: capplets/theme-switcher/theme-properties.glade.h:20
+#, fuzzy
+msgid "_Save Theme..."
 msgstr "_Gem tema"
 
-#: capplets/theme-switcher/theme-properties.glade.h:22
+#: capplets/theme-switcher/theme-properties.glade.h:21
 msgid "_Theme name:"
 msgstr "_Temanavn:"
 
@@ -2401,7 +2445,7 @@ msgid "Couldn't load sound file %s as sample %s"
 msgstr "Kunne ikke indlæse lydfilen %s som lydklip %s"
 
 #: gnome-settings-daemon/gnome-settings-xrdb.c:212
-#: gnome-settings-daemon/gnome-settings-xrdb.c:259
+#: gnome-settings-daemon/gnome-settings-xrdb.c:260
 msgid "Cannot determine user's home directory"
 msgstr "Kan ikke bestemme brugers hjemmemappe"
 
@@ -2734,7 +2778,7 @@ msgstr "Indholdsvisningskomponent til temaegenskaber"
 msgid "Themus Theme Properties view"
 msgstr "Temaegenskaber-visning"
 
-#: vfs-methods/themus/theme-method.c:513
+#: vfs-methods/themus/theme-method.c:514
 msgid "Themes"
 msgstr "Temaer"
 
@@ -2792,6 +2836,15 @@ msgstr "Generér miniaturer for installerede temaer"
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Generér miniaturer for temaer"
+
+#~ msgid "Install new theme"
+#~ msgstr "Installér nyt tema"
+
+#~ msgid "_Location of new theme:"
+#~ msgstr "_Placering af det ny tema:"
+
+#~ msgid "_Details..."
+#~ msgstr "_Detaljer..."
 
 #~ msgid "_Repeat Keys"
 #~ msgstr "_Gentagende taster"
@@ -2886,9 +2939,6 @@ msgstr "Generér miniaturer for temaer"
 #~ msgid "Pro_xy requires username and password"
 #~ msgstr "Mellem_vært kræver brugernavn og adgangskode"
 
-#~ msgid "_Location:"
-#~ msgstr "_Placering:"
-
 #~ msgid "_General"
 #~ msgstr "_Generelt"
 
@@ -2968,9 +3018,6 @@ msgstr "Generér miniaturer for temaer"
 
 #~ msgid "Spreadsheet"
 #~ msgstr "Regneark"
-
-#~ msgid "Presentation"
-#~ msgstr "Præsentation"
 
 #~ msgid "Diagram"
 #~ msgstr "Diagram"

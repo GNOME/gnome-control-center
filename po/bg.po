@@ -6,7 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2003-05-20 18:58-0400\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-06-24 16:13-0400\n"
 "PO-Revision-Date: 2002-06-24 08:10+0200\n"
 "Last-Translator: Borislav Aleksandrov <B.Aleksandrov@cnsys.bg>\n"
 "Language-Team: Bulgarian GNOME translation team <dict@linux.zonebg.com>\n"
@@ -31,7 +32,7 @@ msgid "Select CDE AccessX file"
 msgstr "Избор на CDE AccessX файл"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "Клавиатура"
@@ -320,7 +321,7 @@ msgstr "И_збор на картинка:"
 #: capplets/default-applications/gnome-default-applications-properties.c:724
 #: capplets/keyboard/gnome-keyboard-properties.c:290
 #: capplets/mouse/gnome-mouse-properties.c:716
-#: capplets/sound/sound-properties-capplet.c:149
+#: capplets/sound/sound-properties-capplet.c:214
 msgid "Retrieve and store legacy settings"
 msgstr "Получава и запазва стари настройки"
 
@@ -1129,7 +1130,7 @@ msgstr "Структура съдържаща информация на MIME к�
 
 #: capplets/file-types/mime-category-edit-dialog.c:344
 #: capplets/file-types/mime-edit-dialog.c:491
-#: capplets/file-types/mime-edit-dialog.c:595
+#: capplets/file-types/mime-edit-dialog.c:596
 #: capplets/file-types/service-edit-dialog.c:358
 #: capplets/file-types/service-edit-dialog.c:407
 msgid "Custom"
@@ -1170,11 +1171,12 @@ msgid "Misc"
 msgstr "Други"
 
 #: capplets/file-types/mime-edit-dialog.c:486
-#: capplets/file-types/mime-edit-dialog.c:545
+#: capplets/file-types/mime-edit-dialog.c:547
 msgid "None"
 msgstr "Без"
 
-#: capplets/file-types/mime-edit-dialog.c:855
+#: capplets/file-types/mime-edit-dialog.c:852
+#: capplets/file-types/mime-edit-dialog.c:866
 msgid ""
 "Please enter a valid MIME type.  It should be of the form class/type and may "
 "not contain any spaces."
@@ -1182,15 +1184,15 @@ msgstr ""
 "Моля, въведете валиден MIME тип. Трябва да бъде във формата клас/тип и не "
 "може да съдържа интервали."
 
-#: capplets/file-types/mime-edit-dialog.c:862
+#: capplets/file-types/mime-edit-dialog.c:859
 msgid "A MIME type with that name already exists, overwrite ?."
 msgstr "MIME тип с такова име вече съществува, да бъде ли презаписан ?."
 
-#: capplets/file-types/mime-edit-dialog.c:927
+#: capplets/file-types/mime-edit-dialog.c:931
 msgid "Category"
 msgstr "Категория"
 
-#: capplets/file-types/mime-edit-dialog.c:932
+#: capplets/file-types/mime-edit-dialog.c:936
 msgid "Choose a file category"
 msgstr "Избор на категория файл"
 
@@ -1544,8 +1546,8 @@ msgstr "_Достъпност"
 
 #: capplets/keyboard/gnome-keyboard-properties.c:286
 #: capplets/keyboard/gnome-keyboard-properties.c:288
-#: capplets/sound/sound-properties-capplet.c:145
-#: capplets/sound/sound-properties-capplet.c:147
+#: capplets/sound/sound-properties-capplet.c:210
+#: capplets/sound/sound-properties-capplet.c:212
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr "Само използва настройките и излиза"
@@ -1584,17 +1586,18 @@ msgstr ""
 msgid "Cursor Blinks"
 msgstr "Показалци"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#, fuzzy
+msgid "Key presses _repeat when key is held down"
+msgstr "При натиснат _клавиш повторение на символ"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Keyboard Bell"
 msgstr "Звук на Клавиатура"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Keyboard Preferences"
 msgstr "Клавиатурни Настройки"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
-msgid "Keyboard _repeats when key is held down"
-msgstr "При натиснат _клавиш повторение на символ"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Keypress Click"
@@ -1915,7 +1918,7 @@ msgstr "_Използва HTTP прокси"
 msgid "_Username:"
 msgstr "Име на по_требител:"
 
-#: capplets/sound/sound-properties-capplet.c:175
+#: capplets/sound/sound-properties-capplet.c:241
 msgid "Sound preferences"
 msgstr "Настройка за звук"
 
@@ -1924,22 +1927,42 @@ msgid "E_nable sound server startup"
 msgstr "_Разрешава звъков сървър при стартиране"
 
 #: capplets/sound/sound-properties.glade.h:2
+msgid "Flash _window titlebar"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:3
+msgid "Flash entire _screen"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:4
 msgid "General"
 msgstr "Основни"
 
-#: capplets/sound/sound-properties.glade.h:3
+#: capplets/sound/sound-properties.glade.h:5
 #, fuzzy
 msgid "Sound Events"
 msgstr "З_вукови събития"
 
-#: capplets/sound/sound-properties.glade.h:4
+#: capplets/sound/sound-properties.glade.h:6
 #, fuzzy
 msgid "Sound Preferences"
 msgstr "Настройка за звук"
 
-#: capplets/sound/sound-properties.glade.h:5
+#: capplets/sound/sound-properties.glade.h:7
+msgid "System Bell"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:8
+msgid "_Sound an audible bell"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:9
 msgid "_Sounds for events"
 msgstr "_Звуци за събития"
+
+#: capplets/sound/sound-properties.glade.h:10
+msgid "_Visual feedback:"
+msgstr ""
 
 #: capplets/sound/sound.desktop.in.h:1
 #, fuzzy
@@ -2036,19 +2059,24 @@ msgid "Theme"
 msgstr "Тема"
 
 #: capplets/theme-switcher/theme-install.glade.h:2
-msgid "Install new theme"
-msgstr "Инсталиране на нова тема"
+msgid "<span size=\"larger\" weight=\"bold\">Install a Theme</span>"
+msgstr ""
 
 #: capplets/theme-switcher/theme-install.glade.h:3
+#, fuzzy
+msgid "Theme Installation"
+msgstr "Презентация"
+
+#: capplets/theme-switcher/theme-install.glade.h:4
 msgid "_Install"
 msgstr "_Инсталира"
 
-#: capplets/theme-switcher/theme-install.glade.h:4
-msgid "_Location of new theme:"
-msgstr "_Местоположение на нова тема:"
+#: capplets/theme-switcher/theme-install.glade.h:5
+msgid "_Location:"
+msgstr "_Местоположение:"
 
 #: capplets/theme-switcher/theme-properties.glade.h:2
-msgid "<span size=\"larger\" weight=\"bold\">Save theme to disk</span>"
+msgid "<span size=\"larger\" weight=\"bold\">Save Theme to Disk</span>"
 msgstr ""
 
 #: capplets/theme-switcher/theme-properties.glade.h:3
@@ -2077,37 +2105,47 @@ msgstr "Нови теми могат също да бъдат инсталира
 
 #: capplets/theme-switcher/theme-properties.glade.h:8
 #, fuzzy
-msgid "Short _Description:"
-msgstr "_Описание"
+msgid "Save Theme"
+msgstr "Тема"
 
 #: capplets/theme-switcher/theme-properties.glade.h:9
+#, fuzzy
+msgid "Short _description:"
+msgstr "_Описание"
+
+#: capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Theme Details"
 msgstr ""
 
-#: capplets/theme-switcher/theme-properties.glade.h:10
+#: capplets/theme-switcher/theme-properties.glade.h:11
 #, fuzzy
 msgid "Theme Preferences"
 msgstr "Gtk+ Предпочитания за тема"
 
-#: capplets/theme-switcher/theme-properties.glade.h:11
+#: capplets/theme-switcher/theme-properties.glade.h:12
 #, fuzzy
-msgid ""
-"This theme suggests a\n"
-"background:"
-msgstr "Промяна фона на работно място"
+msgid "Theme _Details"
+msgstr "_Свойства..."
 
 #: capplets/theme-switcher/theme-properties.glade.h:13
 #, fuzzy
-msgid ""
-"This theme suggests a\n"
-"font and background:"
+msgid "This theme does not suggest any particular font or background."
+msgstr "Промяна фона на работно място"
+
+#: capplets/theme-switcher/theme-properties.glade.h:14
+#, fuzzy
+msgid "This theme suggests a background:"
 msgstr "Промяна фона на работно място"
 
 #: capplets/theme-switcher/theme-properties.glade.h:15
-msgid ""
-"This theme suggests a\n"
-"font:"
-msgstr ""
+#, fuzzy
+msgid "This theme suggests a font and a background:"
+msgstr "Промяна фона на работно място"
+
+#: capplets/theme-switcher/theme-properties.glade.h:16
+#, fuzzy
+msgid "This theme suggests a font:"
+msgstr "Промяна фона на работно място"
 
 #: capplets/theme-switcher/theme-properties.glade.h:17
 #, fuzzy
@@ -2116,24 +2154,20 @@ msgstr "Поява Рамките на Прозорец"
 
 #: capplets/theme-switcher/theme-properties.glade.h:18
 #, fuzzy
-msgid "_Details..."
-msgstr "_Свойства..."
+msgid "_Go To Theme Folder"
+msgstr "_Отива в папката с тема"
 
 #: capplets/theme-switcher/theme-properties.glade.h:19
-msgid "_Go to theme folder"
-msgstr "_Отива в папката с тема"
+#, fuzzy
+msgid "_Install Theme..."
+msgstr "_Инсталира нова тема..."
 
 #: capplets/theme-switcher/theme-properties.glade.h:20
 #, fuzzy
-msgid "_Install theme..."
-msgstr "_Инсталира нова тема..."
-
-#: capplets/theme-switcher/theme-properties.glade.h:21
-#, fuzzy
-msgid "_Save theme"
+msgid "_Save Theme..."
 msgstr "Тема"
 
-#: capplets/theme-switcher/theme-properties.glade.h:22
+#: capplets/theme-switcher/theme-properties.glade.h:21
 #, fuzzy
 msgid "_Theme name:"
 msgstr "Име на по_требител:"
@@ -2482,7 +2516,7 @@ msgid "Couldn't load sound file %s as sample %s"
 msgstr "Не мога да заредя звъков файл %s като %s "
 
 #: gnome-settings-daemon/gnome-settings-xrdb.c:212
-#: gnome-settings-daemon/gnome-settings-xrdb.c:259
+#: gnome-settings-daemon/gnome-settings-xrdb.c:260
 msgid "Cannot determine user's home directory"
 msgstr ""
 
@@ -2646,7 +2680,157 @@ msgid ""
 "possible; may cause distortion of letter forms."
 msgstr ""
 
-#: vfs-methods/themus/theme-method.c:513
+#: vfs-methods/fontilus/font-view.c:101
+msgid "The quick brown fox jumps over the lazy dog. 0123456789"
+msgstr ""
+
+#: vfs-methods/fontilus/font-view.c:252
+msgid "Name:"
+msgstr "Име:"
+
+#: vfs-methods/fontilus/font-view.c:255
+msgid "Style:"
+msgstr ""
+
+#: vfs-methods/fontilus/font-view.c:264
+#, fuzzy
+msgid "Type:"
+msgstr "Тип"
+
+#: vfs-methods/fontilus/font-view.c:271
+msgid "Size:"
+msgstr ""
+
+#: vfs-methods/fontilus/font-view.c:315 vfs-methods/fontilus/font-view.c:328
+#, fuzzy
+msgid "Version:"
+msgstr "Разширение:"
+
+#: vfs-methods/fontilus/font-view.c:319 vfs-methods/fontilus/font-view.c:330
+msgid "Copyright:"
+msgstr ""
+
+#: vfs-methods/fontilus/font-view.c:323
+#, fuzzy
+msgid "Description:"
+msgstr "_Описание"
+
+#: vfs-methods/fontilus/fontilus-context-menu.c:131
+msgid "Font context menu items"
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:1
+msgid "If set to true, then OpenType fonts will be thumbnailed."
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:2
+msgid "If set to true, then PCF fonts will be thumbnailed."
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:3
+msgid "If set to true, then TrueType fonts will be thumbnailed."
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:4
+msgid "If set to true, then Type1 fonts will be thumbnailed."
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:5
+msgid ""
+"Set this key to the command used to create thumbnails for OpenType fonts."
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:6
+msgid "Set this key to the command used to create thumbnails for PCF fonts."
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:7
+msgid ""
+"Set this key to the command used to create thumbnails for TrueType fonts."
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:8
+msgid "Set this key to the command used to create thumbnails for Type1 fonts."
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:9
+msgid "Thumbnail command for OpenType fonts"
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:10
+msgid "Thumbnail command for PCF fonts"
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:11
+msgid "Thumbnail command for TrueType fonts"
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:12
+msgid "Thumbnail command for Type1 fonts"
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:13
+msgid "Whether to thumbnail OpenType fonts"
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:14
+msgid "Whether to thumbnail PCF fonts"
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:15
+msgid "Whether to thumbnail TrueType fonts"
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:16
+msgid "Whether to thumbnail Type1 fonts"
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.server.in.in.h:1
+msgid "Factory for the fontilus context menu"
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.server.in.in.h:2
+#, fuzzy
+msgid "Fontilus context menu"
+msgstr "Меню на Контролен Център"
+
+#: vfs-methods/fontilus/fontilus.server.in.in.h:3
+msgid "Fontilus context menu factory"
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.server.in.in.h:4
+msgid "Nautilus context menu entries for fonts"
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.server.in.in.h:5
+#, fuzzy
+msgid "Set as Application Font"
+msgstr "Стандарт_ни шрифтове за приложенията:"
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:1
+#, fuzzy
+msgid "Apply theme..."
+msgstr "_Инсталира нова тема..."
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:2
+#, fuzzy
+msgid "Themus component"
+msgstr "Преглежда компонент"
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:3
+msgid "Themus component apply theme operations"
+msgstr ""
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
+msgid "Theme Properties content view component"
+msgstr ""
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
+#, fuzzy
+msgid "Themus Theme Properties view"
+msgstr "Настройка на Мишка"
+
+#: vfs-methods/themus/theme-method.c:514
 #, fuzzy
 msgid "Themes"
 msgstr "Тема"
@@ -2704,28 +2888,11 @@ msgstr ""
 msgid "Whether to thumbnail themes"
 msgstr ""
 
-#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
-msgid "Theme Properties content view component"
-msgstr ""
+#~ msgid "Install new theme"
+#~ msgstr "Инсталиране на нова тема"
 
-#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
-#, fuzzy
-msgid "Themus Theme Properties view"
-msgstr "Настройка на Мишка"
-
-#: vfs-methods/themus/Themus_Component.server.in.in.h:1
-#, fuzzy
-msgid "Apply theme..."
-msgstr "_Инсталира нова тема..."
-
-#: vfs-methods/themus/Themus_Component.server.in.in.h:2
-#, fuzzy
-msgid "Themus component"
-msgstr "Преглежда компонент"
-
-#: vfs-methods/themus/Themus_Component.server.in.in.h:3
-msgid "Themus component apply theme operations"
-msgstr ""
+#~ msgid "_Location of new theme:"
+#~ msgstr "_Местоположение на нова тема:"
 
 #~ msgid ""
 #~ "<b>Note:</b> You will need to logout and log back in for this setting to "
@@ -2842,9 +3009,6 @@ msgstr ""
 #~ msgid "Pro_xy requires username and password"
 #~ msgstr "П_рокси изисква име и парола"
 
-#~ msgid "_Location:"
-#~ msgstr "_Местоположение:"
-
 #~ msgid "Titlebar Font"
 #~ msgstr "Шрифт на Заглавната лента"
 
@@ -2956,9 +3120,6 @@ msgstr ""
 
 #~ msgid "Spreadsheet"
 #~ msgstr "Електронна таблица"
-
-#~ msgid "Presentation"
-#~ msgstr "Презентация"
 
 #~ msgid "Diagram"
 #~ msgstr "Диаграма"
@@ -3328,9 +3489,6 @@ msgstr ""
 #~ "Задайте разширението за този mime-тип.\n"
 #~ "Например: .html, .htm"
 
-#~ msgid "Extension:"
-#~ msgstr "Разширение:"
-
 #~ msgid "Regular Expressions"
 #~ msgstr "Регулярни Изрази:"
 
@@ -3435,9 +3593,6 @@ msgstr ""
 
 #~ msgid "Cancel"
 #~ msgstr "Прекъсва"
-
-#~ msgid "Name:"
-#~ msgstr "Име:"
 
 #~ msgid "Command:"
 #~ msgstr "Команда:"

@@ -7,7 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
-"POT-Creation-Date: 2003-05-23 16:20+0800\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-06-24 16:13-0400\n"
 "PO-Revision-Date: 2003-01-08 12:05+0200\n"
 "Last-Translator: Gil 'Dolfin' Osher <dolfin@rpg.org.il>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -32,7 +33,7 @@ msgid "Select CDE AccessX file"
 msgstr "בחר קובץ גישה CDE"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "מקלדת"
@@ -297,7 +298,7 @@ msgstr "בחר _תמונה:"
 #: capplets/default-applications/gnome-default-applications-properties.c:724
 #: capplets/keyboard/gnome-keyboard-properties.c:290
 #: capplets/mouse/gnome-mouse-properties.c:716
-#: capplets/sound/sound-properties-capplet.c:149
+#: capplets/sound/sound-properties-capplet.c:214
 msgid "Retrieve and store legacy settings"
 msgstr "קבל ושמור הגדרות מהזכרון"
 
@@ -1068,7 +1069,7 @@ msgstr "מבנה המכיל מידע על קטגוריית ה MIME"
 
 #: capplets/file-types/mime-category-edit-dialog.c:344
 #: capplets/file-types/mime-edit-dialog.c:491
-#: capplets/file-types/mime-edit-dialog.c:595
+#: capplets/file-types/mime-edit-dialog.c:596
 #: capplets/file-types/service-edit-dialog.c:358
 #: capplets/file-types/service-edit-dialog.c:407
 msgid "Custom"
@@ -1108,11 +1109,12 @@ msgid "Misc"
 msgstr "שונות"
 
 #: capplets/file-types/mime-edit-dialog.c:486
-#: capplets/file-types/mime-edit-dialog.c:545
+#: capplets/file-types/mime-edit-dialog.c:547
 msgid "None"
 msgstr "ללא"
 
-#: capplets/file-types/mime-edit-dialog.c:855
+#: capplets/file-types/mime-edit-dialog.c:852
+#: capplets/file-types/mime-edit-dialog.c:866
 msgid ""
 "Please enter a valid MIME type.  It should be of the form class/type and may "
 "not contain any spaces."
@@ -1120,15 +1122,15 @@ msgstr ""
 "אנא הזן סוג MIME תקני.  זה יכול להיות צורה של מחלקה/סוג ולא יכול להכיל "
 "רווחים."
 
-#: capplets/file-types/mime-edit-dialog.c:862
+#: capplets/file-types/mime-edit-dialog.c:859
 msgid "A MIME type with that name already exists, overwrite ?."
 msgstr "סוג MIME עם שם זהה כבר קיים, להחליף ?."
 
-#: capplets/file-types/mime-edit-dialog.c:927
+#: capplets/file-types/mime-edit-dialog.c:931
 msgid "Category"
 msgstr "קטגוריה"
 
-#: capplets/file-types/mime-edit-dialog.c:932
+#: capplets/file-types/mime-edit-dialog.c:936
 msgid "Choose a file category"
 msgstr "בחר קטגוריה"
 
@@ -1465,8 +1467,8 @@ msgstr "_נגישות"
 
 #: capplets/keyboard/gnome-keyboard-properties.c:286
 #: capplets/keyboard/gnome-keyboard-properties.c:288
-#: capplets/sound/sound-properties-capplet.c:145
-#: capplets/sound/sound-properties-capplet.c:147
+#: capplets/sound/sound-properties-capplet.c:210
+#: capplets/sound/sound-properties-capplet.c:212
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr "רק החל הגדרות וצא (תאימות בלבד; עכשיו מנוהל על-ידי תהליך שירות)"
@@ -1503,17 +1505,18 @@ msgstr "ל_חץ בלחיצת מקש"
 msgid "Cursor Blinks"
 msgstr "הבהוב סמן"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#, fuzzy
+msgid "Key presses _repeat when key is held down"
+msgstr "המקלדת _חוזרת כאשר המקש נשאר למטה"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Keyboard Bell"
 msgstr "פעמון מקלדת"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Keyboard Preferences"
 msgstr "העדפות מקלדת"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
-msgid "Keyboard _repeats when key is held down"
-msgstr "המקלדת _חוזרת כאשר המקש נשאר למטה"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Keypress Click"
@@ -1818,7 +1821,7 @@ msgstr "מתווך HTTP מ_אובטח"
 msgid "_Username:"
 msgstr "_שם משתמש:"
 
-#: capplets/sound/sound-properties-capplet.c:175
+#: capplets/sound/sound-properties-capplet.c:241
 msgid "Sound preferences"
 msgstr "העדפות קול"
 
@@ -1827,20 +1830,40 @@ msgid "E_nable sound server startup"
 msgstr "א_פשר שרת קול בהפעלה"
 
 #: capplets/sound/sound-properties.glade.h:2
+msgid "Flash _window titlebar"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:3
+msgid "Flash entire _screen"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:4
 msgid "General"
 msgstr "כללי"
 
-#: capplets/sound/sound-properties.glade.h:3
+#: capplets/sound/sound-properties.glade.h:5
 msgid "Sound Events"
 msgstr "_ארועי קול"
 
-#: capplets/sound/sound-properties.glade.h:4
+#: capplets/sound/sound-properties.glade.h:6
 msgid "Sound Preferences"
 msgstr "העדפות קול"
 
-#: capplets/sound/sound-properties.glade.h:5
+#: capplets/sound/sound-properties.glade.h:7
+msgid "System Bell"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:8
+msgid "_Sound an audible bell"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:9
 msgid "_Sounds for events"
 msgstr "_קולות לאירועים"
+
+#: capplets/sound/sound-properties.glade.h:10
+msgid "_Visual feedback:"
+msgstr ""
 
 #: capplets/sound/sound.desktop.in.h:1
 msgid "Enable sound and associate sounds with events"
@@ -1937,19 +1960,25 @@ msgid "Theme"
 msgstr "ערכת נושא"
 
 #: capplets/theme-switcher/theme-install.glade.h:2
-msgid "Install new theme"
-msgstr "התקן ערכת נושא חדשה"
+#, fuzzy
+msgid "<span size=\"larger\" weight=\"bold\">Install a Theme</span>"
+msgstr "<span size=\"larger\" weight=\"bold\">שמור ערכת נושא לדיסק</span>"
 
 #: capplets/theme-switcher/theme-install.glade.h:3
+msgid "Theme Installation"
+msgstr ""
+
+#: capplets/theme-switcher/theme-install.glade.h:4
 msgid "_Install"
 msgstr "_התקן"
 
-#: capplets/theme-switcher/theme-install.glade.h:4
-msgid "_Location of new theme:"
-msgstr "_מיקום ערכת הנושא החדשה:"
+#: capplets/theme-switcher/theme-install.glade.h:5
+msgid "_Location:"
+msgstr "_מיקום:"
 
 #: capplets/theme-switcher/theme-properties.glade.h:2
-msgid "<span size=\"larger\" weight=\"bold\">Save theme to disk</span>"
+#, fuzzy
+msgid "<span size=\"larger\" weight=\"bold\">Save Theme to Disk</span>"
 msgstr "<span size=\"larger\" weight=\"bold\">שמור ערכת נושא לדיסק</span>"
 
 #: capplets/theme-switcher/theme-properties.glade.h:3
@@ -1973,38 +2002,52 @@ msgid "New themes can also be installed by dragging them into the window."
 msgstr "ערכות נושא חדשות יכולות להיות מותקנות גם על-ידי גרירתם לתוך החלון."
 
 #: capplets/theme-switcher/theme-properties.glade.h:8
-msgid "Short _Description:"
-msgstr "_תיאור קצר:"
+#, fuzzy
+msgid "Save Theme"
+msgstr "_שמור ערכת נושא"
 
 #: capplets/theme-switcher/theme-properties.glade.h:9
+#, fuzzy
+msgid "Short _description:"
+msgstr "_תיאור קצר:"
+
+#: capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Theme Details"
 msgstr "פרטי ערכת נושא"
 
-#: capplets/theme-switcher/theme-properties.glade.h:10
+#: capplets/theme-switcher/theme-properties.glade.h:11
 msgid "Theme Preferences"
 msgstr "העדפות ערכת נושא"
 
-#: capplets/theme-switcher/theme-properties.glade.h:11
-msgid ""
-"This theme suggests a\n"
-"background:"
-msgstr ""
-"ערכת נושא זו מציעה\n"
-"רקע:"
+#: capplets/theme-switcher/theme-properties.glade.h:12
+#, fuzzy
+msgid "Theme _Details"
+msgstr "פרטי ערכת נושא"
 
 #: capplets/theme-switcher/theme-properties.glade.h:13
 #, fuzzy
-msgid ""
-"This theme suggests a\n"
-"font and background:"
+msgid "This theme does not suggest any particular font or background."
 msgstr ""
 "ערכת נושא זו מציעה\n"
 "גופן ורקע"
 
+#: capplets/theme-switcher/theme-properties.glade.h:14
+#, fuzzy
+msgid "This theme suggests a background:"
+msgstr ""
+"ערכת נושא זו מציעה\n"
+"רקע:"
+
 #: capplets/theme-switcher/theme-properties.glade.h:15
-msgid ""
-"This theme suggests a\n"
-"font:"
+#, fuzzy
+msgid "This theme suggests a font and a background:"
+msgstr ""
+"ערכת נושא זו מציעה\n"
+"גופן ורקע"
+
+#: capplets/theme-switcher/theme-properties.glade.h:16
+#, fuzzy
+msgid "This theme suggests a font:"
 msgstr ""
 "ערכת נושא זו מציעה\n"
 "גופן:"
@@ -2014,22 +2057,21 @@ msgid "Window Border"
 msgstr "מסגרת חלון"
 
 #: capplets/theme-switcher/theme-properties.glade.h:18
-msgid "_Details..."
-msgstr "_פרטים..."
-
-#: capplets/theme-switcher/theme-properties.glade.h:19
-msgid "_Go to theme folder"
+#, fuzzy
+msgid "_Go To Theme Folder"
 msgstr "_לך לתיקיית ערכת הנושא"
 
-#: capplets/theme-switcher/theme-properties.glade.h:20
-msgid "_Install theme..."
+#: capplets/theme-switcher/theme-properties.glade.h:19
+#, fuzzy
+msgid "_Install Theme..."
 msgstr "_התקן ערכת נושא..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:21
-msgid "_Save theme"
+#: capplets/theme-switcher/theme-properties.glade.h:20
+#, fuzzy
+msgid "_Save Theme..."
 msgstr "_שמור ערכת נושא"
 
-#: capplets/theme-switcher/theme-properties.glade.h:22
+#: capplets/theme-switcher/theme-properties.glade.h:21
 msgid "_Theme name:"
 msgstr "שם _ערכת הנושא:"
 
@@ -2364,7 +2406,7 @@ msgid "Couldn't load sound file %s as sample %s"
 msgstr "לא ניתן לטעון את קובץ הקול %s כדוגמה %s"
 
 #: gnome-settings-daemon/gnome-settings-xrdb.c:212
-#: gnome-settings-daemon/gnome-settings-xrdb.c:259
+#: gnome-settings-daemon/gnome-settings-xrdb.c:260
 msgid "Cannot determine user's home directory"
 msgstr ""
 
@@ -2678,7 +2720,7 @@ msgstr ""
 msgid "Themus Theme Properties view"
 msgstr ""
 
-#: vfs-methods/themus/theme-method.c:513
+#: vfs-methods/themus/theme-method.c:514
 #, fuzzy
 msgid "Themes"
 msgstr "ערכת נושא"
@@ -2735,6 +2777,15 @@ msgstr ""
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr ""
+
+#~ msgid "Install new theme"
+#~ msgstr "התקן ערכת נושא חדשה"
+
+#~ msgid "_Location of new theme:"
+#~ msgstr "_מיקום ערכת הנושא החדשה:"
+
+#~ msgid "_Details..."
+#~ msgstr "_פרטים..."
 
 #~ msgid ""
 #~ "<b>Note:</b> You will need to logout and log back in for this setting to "
@@ -2831,9 +2882,6 @@ msgstr ""
 
 #~ msgid "Pro_xy requires username and password"
 #~ msgstr "ה_מתווך דורש שם משתמש וסיסמה"
-
-#~ msgid "_Location:"
-#~ msgstr "_מיקום:"
 
 #~ msgid "_General"
 #~ msgstr "_כללי"

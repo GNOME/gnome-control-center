@@ -7,7 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 1.5.7\n"
-"POT-Creation-Date: 2003-05-20 18:58-0400\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-06-24 16:13-0400\n"
 "PO-Revision-Date: 2003-03-18 20:38+0200\n"
 "Last-Translator: Mətin Əmirov <metin@karegen.com>\n"
 "Language-Team: Azerbaijani Turkic <linuxaz@azerimail.net>\n"
@@ -31,7 +32,7 @@ msgid "Select CDE AccessX file"
 msgstr "CDE AccessX faylını seçin"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "Klaviatura"
@@ -288,7 +289,7 @@ msgstr "_Rəsmi seç:"
 #: capplets/default-applications/gnome-default-applications-properties.c:724
 #: capplets/keyboard/gnome-keyboard-properties.c:290
 #: capplets/mouse/gnome-mouse-properties.c:716
-#: capplets/sound/sound-properties-capplet.c:149
+#: capplets/sound/sound-properties-capplet.c:214
 msgid "Retrieve and store legacy settings"
 msgstr "Miras qurğularını al və saxla"
 
@@ -1043,7 +1044,7 @@ msgstr ""
 
 #: capplets/file-types/mime-category-edit-dialog.c:344
 #: capplets/file-types/mime-edit-dialog.c:491
-#: capplets/file-types/mime-edit-dialog.c:595
+#: capplets/file-types/mime-edit-dialog.c:596
 #: capplets/file-types/service-edit-dialog.c:358
 #: capplets/file-types/service-edit-dialog.c:407
 msgid "Custom"
@@ -1083,25 +1084,26 @@ msgid "Misc"
 msgstr "Müxtəlif"
 
 #: capplets/file-types/mime-edit-dialog.c:486
-#: capplets/file-types/mime-edit-dialog.c:545
+#: capplets/file-types/mime-edit-dialog.c:547
 msgid "None"
 msgstr "Yoxdur"
 
-#: capplets/file-types/mime-edit-dialog.c:855
+#: capplets/file-types/mime-edit-dialog.c:852
+#: capplets/file-types/mime-edit-dialog.c:866
 msgid ""
 "Please enter a valid MIME type.  It should be of the form class/type and may "
 "not contain any spaces."
 msgstr ""
 
-#: capplets/file-types/mime-edit-dialog.c:862
+#: capplets/file-types/mime-edit-dialog.c:859
 msgid "A MIME type with that name already exists, overwrite ?."
 msgstr ""
 
-#: capplets/file-types/mime-edit-dialog.c:927
+#: capplets/file-types/mime-edit-dialog.c:931
 msgid "Category"
 msgstr "Kateqoriya"
 
-#: capplets/file-types/mime-edit-dialog.c:932
+#: capplets/file-types/mime-edit-dialog.c:936
 msgid "Choose a file category"
 msgstr "Bir fayl kateqoriyası seçin"
 
@@ -1441,8 +1443,8 @@ msgstr "_Yetişmə Qabiliyyəti"
 
 #: capplets/keyboard/gnome-keyboard-properties.c:286
 #: capplets/keyboard/gnome-keyboard-properties.c:288
-#: capplets/sound/sound-properties-capplet.c:145
-#: capplets/sound/sound-properties-capplet.c:147
+#: capplets/sound/sound-properties-capplet.c:210
+#: capplets/sound/sound-properties-capplet.c:212
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
@@ -1479,17 +1481,18 @@ msgstr "Düymə basılanda səs çıxart"
 msgid "Cursor Blinks"
 msgstr "Ox Yanıb-Sönən"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#, fuzzy
+msgid "Key presses _repeat when key is held down"
+msgstr "Düymə basılı qalanda hərflər təkrarlanaraq _yazılsın"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Keyboard Bell"
 msgstr "Klaviatura Zəngi"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Keyboard Preferences"
 msgstr "Klaviatura Tərcihləri"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
-msgid "Keyboard _repeats when key is held down"
-msgstr "Düymə basılı qalanda hərflər təkrarlanaraq _yazılsın"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Keypress Click"
@@ -1793,7 +1796,7 @@ msgstr ""
 msgid "_Username:"
 msgstr "_İstifadəçi Adı:"
 
-#: capplets/sound/sound-properties-capplet.c:175
+#: capplets/sound/sound-properties-capplet.c:241
 msgid "Sound preferences"
 msgstr "Səs tərcihləri"
 
@@ -1802,20 +1805,40 @@ msgid "E_nable sound server startup"
 msgstr "Başlanğıcda səs vericisini _fəallaşdır"
 
 #: capplets/sound/sound-properties.glade.h:2
+msgid "Flash _window titlebar"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:3
+msgid "Flash entire _screen"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:4
 msgid "General"
 msgstr "Ümumi"
 
-#: capplets/sound/sound-properties.glade.h:3
+#: capplets/sound/sound-properties.glade.h:5
 msgid "Sound Events"
 msgstr "Səsli Hadisələr"
 
-#: capplets/sound/sound-properties.glade.h:4
+#: capplets/sound/sound-properties.glade.h:6
 msgid "Sound Preferences"
 msgstr "Səs Tərcihləri"
 
-#: capplets/sound/sound-properties.glade.h:5
+#: capplets/sound/sound-properties.glade.h:7
+msgid "System Bell"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:8
+msgid "_Sound an audible bell"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:9
 msgid "_Sounds for events"
 msgstr "Hadisələr üçün _səslər"
+
+#: capplets/sound/sound-properties.glade.h:10
+msgid "_Visual feedback:"
+msgstr ""
 
 #: capplets/sound/sound.desktop.in.h:1
 msgid "Enable sound and associate sounds with events"
@@ -1909,19 +1932,26 @@ msgid "Theme"
 msgstr "Örtük"
 
 #: capplets/theme-switcher/theme-install.glade.h:2
-msgid "Install new theme"
-msgstr "Yeni örtük quraşdır"
+#, fuzzy
+msgid "<span size=\"larger\" weight=\"bold\">Install a Theme</span>"
+msgstr "<span size=\"larger\" weight=\"bold\">Örtüyü diskə qeyd et</span>"
 
 #: capplets/theme-switcher/theme-install.glade.h:3
+msgid "Theme Installation"
+msgstr ""
+
+#: capplets/theme-switcher/theme-install.glade.h:4
 msgid "_Install"
 msgstr "_Quraşdır"
 
-#: capplets/theme-switcher/theme-install.glade.h:4
-msgid "_Location of new theme:"
-msgstr "_Yeni örtüyün yeri:"
+#: capplets/theme-switcher/theme-install.glade.h:5
+#, fuzzy
+msgid "_Location:"
+msgstr "_Sürətləndirmə:"
 
 #: capplets/theme-switcher/theme-properties.glade.h:2
-msgid "<span size=\"larger\" weight=\"bold\">Save theme to disk</span>"
+#, fuzzy
+msgid "<span size=\"larger\" weight=\"bold\">Save Theme to Disk</span>"
 msgstr "<span size=\"larger\" weight=\"bold\">Örtüyü diskə qeyd et</span>"
 
 #: capplets/theme-switcher/theme-properties.glade.h:3
@@ -1947,38 +1977,52 @@ msgstr ""
 "bilərsiniz."
 
 #: capplets/theme-switcher/theme-properties.glade.h:8
-msgid "Short _Description:"
-msgstr "_Qısa İzah:"
+#, fuzzy
+msgid "Save Theme"
+msgstr "Örtüyü _qeyd et"
 
 #: capplets/theme-switcher/theme-properties.glade.h:9
+#, fuzzy
+msgid "Short _description:"
+msgstr "_Qısa İzah:"
+
+#: capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Theme Details"
 msgstr "Örtük Təfərruatları"
 
-#: capplets/theme-switcher/theme-properties.glade.h:10
+#: capplets/theme-switcher/theme-properties.glade.h:11
 msgid "Theme Preferences"
 msgstr "Örtük Tərcihləri"
 
-#: capplets/theme-switcher/theme-properties.glade.h:11
-msgid ""
-"This theme suggests a\n"
-"background:"
-msgstr ""
-"Bu örtüyün tövsiyyəsi\n"
-"arxa plan:"
+#: capplets/theme-switcher/theme-properties.glade.h:12
+#, fuzzy
+msgid "Theme _Details"
+msgstr "Örtük Təfərruatları"
 
 #: capplets/theme-switcher/theme-properties.glade.h:13
 #, fuzzy
-msgid ""
-"This theme suggests a\n"
-"font and background:"
+msgid "This theme does not suggest any particular font or background."
 msgstr ""
 "Bu örtük yazı növü və\n"
 "arxa plan rəsmi tövsiyyə edir"
 
+#: capplets/theme-switcher/theme-properties.glade.h:14
+#, fuzzy
+msgid "This theme suggests a background:"
+msgstr ""
+"Bu örtüyün tövsiyyəsi\n"
+"arxa plan:"
+
 #: capplets/theme-switcher/theme-properties.glade.h:15
-msgid ""
-"This theme suggests a\n"
-"font:"
+#, fuzzy
+msgid "This theme suggests a font and a background:"
+msgstr ""
+"Bu örtük yazı növü və\n"
+"arxa plan rəsmi tövsiyyə edir"
+
+#: capplets/theme-switcher/theme-properties.glade.h:16
+#, fuzzy
+msgid "This theme suggests a font:"
 msgstr ""
 "Bu örtük aşağıdakı yazı növünü\n"
 "tövsiyyə edir:"
@@ -1988,22 +2032,21 @@ msgid "Window Border"
 msgstr "Pəncərə Kənarı"
 
 #: capplets/theme-switcher/theme-properties.glade.h:18
-msgid "_Details..."
-msgstr "Ə_traflı..."
-
-#: capplets/theme-switcher/theme-properties.glade.h:19
-msgid "_Go to theme folder"
+#, fuzzy
+msgid "_Go To Theme Folder"
 msgstr "Örtük cərgəsinə _get"
 
-#: capplets/theme-switcher/theme-properties.glade.h:20
-msgid "_Install theme..."
+#: capplets/theme-switcher/theme-properties.glade.h:19
+#, fuzzy
+msgid "_Install Theme..."
 msgstr "Ö_rtük quraşdır..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:21
-msgid "_Save theme"
+#: capplets/theme-switcher/theme-properties.glade.h:20
+#, fuzzy
+msgid "_Save Theme..."
 msgstr "Örtüyü _qeyd et"
 
-#: capplets/theme-switcher/theme-properties.glade.h:22
+#: capplets/theme-switcher/theme-properties.glade.h:21
 msgid "_Theme name:"
 msgstr "Örtük _adı:"
 
@@ -2323,7 +2366,7 @@ msgid "Couldn't load sound file %s as sample %s"
 msgstr ""
 
 #: gnome-settings-daemon/gnome-settings-xrdb.c:212
-#: gnome-settings-daemon/gnome-settings-xrdb.c:259
+#: gnome-settings-daemon/gnome-settings-xrdb.c:260
 msgid "Cannot determine user's home directory"
 msgstr ""
 
@@ -2488,7 +2531,175 @@ msgid ""
 "possible; may cause distortion of letter forms."
 msgstr ""
 
-#: vfs-methods/themus/theme-method.c:513
+#: vfs-methods/fontilus/font-view.c:101
+msgid "The quick brown fox jumps over the lazy dog. 0123456789"
+msgstr ""
+
+#: vfs-methods/fontilus/font-view.c:252
+#, fuzzy
+msgid "Name:"
+msgstr "_Ad:"
+
+#: vfs-methods/fontilus/font-view.c:255
+msgid "Style:"
+msgstr ""
+
+#: vfs-methods/fontilus/font-view.c:264
+#, fuzzy
+msgid "Type:"
+msgstr "Növ"
+
+#: vfs-methods/fontilus/font-view.c:271
+msgid "Size:"
+msgstr ""
+
+#: vfs-methods/fontilus/font-view.c:315 vfs-methods/fontilus/font-view.c:328
+msgid "Version:"
+msgstr ""
+
+#: vfs-methods/fontilus/font-view.c:319 vfs-methods/fontilus/font-view.c:330
+msgid "Copyright:"
+msgstr ""
+
+#: vfs-methods/fontilus/font-view.c:323
+#, fuzzy
+msgid "Description:"
+msgstr "_İzah:"
+
+#: vfs-methods/fontilus/fontilus-context-menu.c:131
+msgid "Font context menu items"
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:1
+#, fuzzy
+msgid "If set to true, then OpenType fonts will be thumbnailed."
+msgstr "True isə, örtüklərin nümaişləri göstəriləcək."
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:2
+#, fuzzy
+msgid "If set to true, then PCF fonts will be thumbnailed."
+msgstr "True isə, örtüklərin nümaişləri göstəriləcək."
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:3
+#, fuzzy
+msgid "If set to true, then TrueType fonts will be thumbnailed."
+msgstr "True isə, örtüklərin nümaişləri göstəriləcək."
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:4
+#, fuzzy
+msgid "If set to true, then Type1 fonts will be thumbnailed."
+msgstr "True isə, örtüklərin nümaişləri göstəriləcək."
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:5
+#, fuzzy
+msgid ""
+"Set this key to the command used to create thumbnails for OpenType fonts."
+msgstr ""
+"Bu düyməni örtüklərin nümaişləri göstərmək üçün işlədilən əmrə bağlayın."
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:6
+#, fuzzy
+msgid "Set this key to the command used to create thumbnails for PCF fonts."
+msgstr ""
+"Bu düyməni örtüklərin nümaişləri göstərmək üçün işlədilən əmrə bağlayın."
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:7
+#, fuzzy
+msgid ""
+"Set this key to the command used to create thumbnails for TrueType fonts."
+msgstr ""
+"Bu düyməni örtüklərin nümaişləri göstərmək üçün işlədilən əmrə bağlayın."
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:8
+#, fuzzy
+msgid "Set this key to the command used to create thumbnails for Type1 fonts."
+msgstr ""
+"Bu düyməni örtüklərin nümaişləri göstərmək üçün işlədilən əmrə bağlayın."
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:9
+#, fuzzy
+msgid "Thumbnail command for OpenType fonts"
+msgstr "Örtüklərin nümaişləri göstərmək üçün işlədilən əmr"
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:10
+#, fuzzy
+msgid "Thumbnail command for PCF fonts"
+msgstr "Örtüklərin nümaişləri göstərmək üçün işlədilən əmr"
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:11
+#, fuzzy
+msgid "Thumbnail command for TrueType fonts"
+msgstr "Örtüklərin nümaişləri göstərmək üçün işlədilən əmr"
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:12
+#, fuzzy
+msgid "Thumbnail command for Type1 fonts"
+msgstr "Örtüklərin nümaişləri göstərmək üçün işlədilən əmr"
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:13
+#, fuzzy
+msgid "Whether to thumbnail OpenType fonts"
+msgstr "Örtüklərin nümaişlərinin göstərilməsi"
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:14
+#, fuzzy
+msgid "Whether to thumbnail PCF fonts"
+msgstr "Örtüklərin nümaişlərinin göstərilməsi"
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:15
+#, fuzzy
+msgid "Whether to thumbnail TrueType fonts"
+msgstr "Örtüklərin nümaişlərinin göstərilməsi"
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:16
+#, fuzzy
+msgid "Whether to thumbnail Type1 fonts"
+msgstr "Örtüklərin nümaişlərinin göstərilməsi"
+
+#: vfs-methods/fontilus/fontilus.server.in.in.h:1
+msgid "Factory for the fontilus context menu"
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.server.in.in.h:2
+#, fuzzy
+msgid "Fontilus context menu"
+msgstr "İdarə Mərkəzi Menyusu"
+
+#: vfs-methods/fontilus/fontilus.server.in.in.h:3
+msgid "Fontilus context menu factory"
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.server.in.in.h:4
+msgid "Nautilus context menu entries for fonts"
+msgstr ""
+
+#: vfs-methods/fontilus/fontilus.server.in.in.h:5
+#, fuzzy
+msgid "Set as Application Font"
+msgstr "_Proqram yazı növü:"
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:1
+#, fuzzy
+msgid "Apply theme..."
+msgstr "Ö_rtük quraşdır..."
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:2
+msgid "Themus component"
+msgstr ""
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:3
+msgid "Themus component apply theme operations"
+msgstr ""
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
+msgid "Theme Properties content view component"
+msgstr "Örtük Xassələrinin məzmun nümaişi komponenti"
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
+msgid "Themus Theme Properties view"
+msgstr "Themus Örtük Xassələri nümaişi"
+
+#: vfs-methods/themus/theme-method.c:514
 msgid "Themes"
 msgstr "Örtüklər"
 
@@ -2544,26 +2755,14 @@ msgstr "Quraşdırılmış örtüklərin nümaişlərinin göstərilməsi"
 msgid "Whether to thumbnail themes"
 msgstr "Örtüklərin nümaişlərinin göstərilməsi"
 
-#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
-msgid "Theme Properties content view component"
-msgstr "Örtük Xassələrinin məzmun nümaişi komponenti"
+#~ msgid "Install new theme"
+#~ msgstr "Yeni örtük quraşdır"
 
-#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
-msgid "Themus Theme Properties view"
-msgstr "Themus Örtük Xassələri nümaişi"
+#~ msgid "_Location of new theme:"
+#~ msgstr "_Yeni örtüyün yeri:"
 
-#: vfs-methods/themus/Themus_Component.server.in.in.h:1
-#, fuzzy
-msgid "Apply theme..."
-msgstr "Ö_rtük quraşdır..."
-
-#: vfs-methods/themus/Themus_Component.server.in.in.h:2
-msgid "Themus component"
-msgstr ""
-
-#: vfs-methods/themus/Themus_Component.server.in.in.h:3
-msgid "Themus component apply theme operations"
-msgstr ""
+#~ msgid "_Details..."
+#~ msgstr "Ə_traflı..."
 
 #~ msgid ""
 #~ "<b>Note:</b> You will need to logout and log back in for this setting to "

@@ -6,7 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center for Gnome v-2.1.x\n"
-"POT-Creation-Date: 2003-05-23 16:20+0800\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-06-24 16:13-0400\n"
 "PO-Revision-Date: 2003-01-19 20:24+0700\n"
 "Last-Translator: pclouds <pclouds@gmx.net>\n"
 "Language-Team: Gnome-Vi <gnomevi-list@lists.sourceforge.net>\n"
@@ -30,7 +31,7 @@ msgid "Select CDE AccessX file"
 msgstr "Chọn tập tin CDE AccessX"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "Bàn phím"
@@ -300,7 +301,7 @@ msgstr "Chọn _ảnh:"
 #: capplets/default-applications/gnome-default-applications-properties.c:724
 #: capplets/keyboard/gnome-keyboard-properties.c:290
 #: capplets/mouse/gnome-mouse-properties.c:716
-#: capplets/sound/sound-properties-capplet.c:149
+#: capplets/sound/sound-properties-capplet.c:214
 msgid "Retrieve and store legacy settings"
 msgstr "Nhận và lưu thiết lập truyền thống"
 
@@ -1073,7 +1074,7 @@ msgstr "Cấu trúc chứa thông tin về phân loại MIME"
 
 #: capplets/file-types/mime-category-edit-dialog.c:344
 #: capplets/file-types/mime-edit-dialog.c:491
-#: capplets/file-types/mime-edit-dialog.c:595
+#: capplets/file-types/mime-edit-dialog.c:596
 #: capplets/file-types/service-edit-dialog.c:358
 #: capplets/file-types/service-edit-dialog.c:407
 msgid "Custom"
@@ -1113,26 +1114,27 @@ msgid "Misc"
 msgstr "Linh tinh"
 
 #: capplets/file-types/mime-edit-dialog.c:486
-#: capplets/file-types/mime-edit-dialog.c:545
+#: capplets/file-types/mime-edit-dialog.c:547
 msgid "None"
 msgstr "Không"
 
-#: capplets/file-types/mime-edit-dialog.c:855
+#: capplets/file-types/mime-edit-dialog.c:852
+#: capplets/file-types/mime-edit-dialog.c:866
 msgid ""
 "Please enter a valid MIME type.  It should be of the form class/type and may "
 "not contain any spaces."
 msgstr ""
 "Hãy nhập loại MIME hợp lệ. Nên là loại/kiểu và có thể không chứa dấu cách."
 
-#: capplets/file-types/mime-edit-dialog.c:862
+#: capplets/file-types/mime-edit-dialog.c:859
 msgid "A MIME type with that name already exists, overwrite ?."
 msgstr "Loại MIME có tên như vậy đã tồn tại rồi, có ghi đè không? "
 
-#: capplets/file-types/mime-edit-dialog.c:927
+#: capplets/file-types/mime-edit-dialog.c:931
 msgid "Category"
 msgstr "Phân loại"
 
-#: capplets/file-types/mime-edit-dialog.c:932
+#: capplets/file-types/mime-edit-dialog.c:936
 msgid "Choose a file category"
 msgstr "Chọn phân loại tập tin"
 
@@ -1474,8 +1476,8 @@ msgstr "Tính năng h_ỗ trợ"
 
 #: capplets/keyboard/gnome-keyboard-properties.c:286
 #: capplets/keyboard/gnome-keyboard-properties.c:288
-#: capplets/sound/sound-properties-capplet.c:145
-#: capplets/sound/sound-properties-capplet.c:147
+#: capplets/sound/sound-properties-capplet.c:210
+#: capplets/sound/sound-properties-capplet.c:212
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
@@ -1514,17 +1516,18 @@ msgstr "Nhấn chuột lên nhấn phím"
 msgid "Cursor Blinks"
 msgstr "Tổ hợp Con trỏ"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#, fuzzy
+msgid "Key presses _repeat when key is held down"
+msgstr "Lặp lại phím gõ khi phím được giữ lâu"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Keyboard Bell"
 msgstr "Chuông bàn phím"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Keyboard Preferences"
 msgstr "Thông số bàn phím"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
-msgid "Keyboard _repeats when key is held down"
-msgstr "Lặp lại phím gõ khi phím được giữ lâu"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Keypress Click"
@@ -1829,7 +1832,7 @@ msgstr "B_ảo mật HTTP proxy:"
 msgid "_Username:"
 msgstr "T_ên người dùng:"
 
-#: capplets/sound/sound-properties-capplet.c:175
+#: capplets/sound/sound-properties-capplet.c:241
 msgid "Sound preferences"
 msgstr "Thông số âm thanh"
 
@@ -1838,20 +1841,40 @@ msgid "E_nable sound server startup"
 msgstr "_Bật server âm thanh lúc khởi động"
 
 #: capplets/sound/sound-properties.glade.h:2
+msgid "Flash _window titlebar"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:3
+msgid "Flash entire _screen"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:4
 msgid "General"
 msgstr "Chung"
 
-#: capplets/sound/sound-properties.glade.h:3
+#: capplets/sound/sound-properties.glade.h:5
 msgid "Sound Events"
 msgstr "Sự kiện âm thanh"
 
-#: capplets/sound/sound-properties.glade.h:4
+#: capplets/sound/sound-properties.glade.h:6
 msgid "Sound Preferences"
 msgstr "Tùy thích cho âm thanh"
 
-#: capplets/sound/sound-properties.glade.h:5
+#: capplets/sound/sound-properties.glade.h:7
+msgid "System Bell"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:8
+msgid "_Sound an audible bell"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:9
 msgid "_Sounds for events"
 msgstr "Â_m thanh cho sự kiện"
+
+#: capplets/sound/sound-properties.glade.h:10
+msgid "_Visual feedback:"
+msgstr ""
 
 #: capplets/sound/sound.desktop.in.h:1
 msgid "Enable sound and associate sounds with events"
@@ -1947,19 +1970,26 @@ msgid "Theme"
 msgstr "Theme"
 
 #: capplets/theme-switcher/theme-install.glade.h:2
-msgid "Install new theme"
-msgstr "Cài theme mới"
+#, fuzzy
+msgid "<span size=\"larger\" weight=\"bold\">Install a Theme</span>"
+msgstr "<span size=\"larger\" weight=\"bold\">Lưu theme vào đĩa</span>"
 
 #: capplets/theme-switcher/theme-install.glade.h:3
+#, fuzzy
+msgid "Theme Installation"
+msgstr "Trình bày"
+
+#: capplets/theme-switcher/theme-install.glade.h:4
 msgid "_Install"
 msgstr "_Cài đặt"
 
-#: capplets/theme-switcher/theme-install.glade.h:4
-msgid "_Location of new theme:"
-msgstr "_Vị trí theme mới:"
+#: capplets/theme-switcher/theme-install.glade.h:5
+msgid "_Location:"
+msgstr "Đị_a điểm:"
 
 #: capplets/theme-switcher/theme-properties.glade.h:2
-msgid "<span size=\"larger\" weight=\"bold\">Save theme to disk</span>"
+#, fuzzy
+msgid "<span size=\"larger\" weight=\"bold\">Save Theme to Disk</span>"
 msgstr "<span size=\"larger\" weight=\"bold\">Lưu theme vào đĩa</span>"
 
 #: capplets/theme-switcher/theme-properties.glade.h:3
@@ -1983,38 +2013,52 @@ msgid "New themes can also be installed by dragging them into the window."
 msgstr "Theme mới có thể được cài đặt bằng cách kéo nó vào cửa sổ."
 
 #: capplets/theme-switcher/theme-properties.glade.h:8
-msgid "Short _Description:"
-msgstr "Mô t_ả vắn tắt:"
+#, fuzzy
+msgid "Save Theme"
+msgstr "L_ưu theme"
 
 #: capplets/theme-switcher/theme-properties.glade.h:9
+#, fuzzy
+msgid "Short _description:"
+msgstr "Mô t_ả vắn tắt:"
+
+#: capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Theme Details"
 msgstr "Chi tiết về theme"
 
-#: capplets/theme-switcher/theme-properties.glade.h:10
+#: capplets/theme-switcher/theme-properties.glade.h:11
 msgid "Theme Preferences"
 msgstr "Tùy chọn theme"
 
-#: capplets/theme-switcher/theme-properties.glade.h:11
-msgid ""
-"This theme suggests a\n"
-"background:"
-msgstr ""
-"Theme này gợi ý\n"
-"nền màn hình:"
+#: capplets/theme-switcher/theme-properties.glade.h:12
+#, fuzzy
+msgid "Theme _Details"
+msgstr "Chi tiết về theme"
 
 #: capplets/theme-switcher/theme-properties.glade.h:13
 #, fuzzy
-msgid ""
-"This theme suggests a\n"
-"font and background:"
+msgid "This theme does not suggest any particular font or background."
 msgstr ""
 "Theme này gợi ý một\n"
 "phông chữ và nền màn hình"
 
+#: capplets/theme-switcher/theme-properties.glade.h:14
+#, fuzzy
+msgid "This theme suggests a background:"
+msgstr ""
+"Theme này gợi ý\n"
+"nền màn hình:"
+
 #: capplets/theme-switcher/theme-properties.glade.h:15
-msgid ""
-"This theme suggests a\n"
-"font:"
+#, fuzzy
+msgid "This theme suggests a font and a background:"
+msgstr ""
+"Theme này gợi ý một\n"
+"phông chữ và nền màn hình"
+
+#: capplets/theme-switcher/theme-properties.glade.h:16
+#, fuzzy
+msgid "This theme suggests a font:"
 msgstr ""
 "Theme này gợi ý phông\n"
 "chữ:"
@@ -2024,22 +2068,21 @@ msgid "Window Border"
 msgstr "Viền cửa sổ"
 
 #: capplets/theme-switcher/theme-properties.glade.h:18
-msgid "_Details..."
-msgstr "Chi ti_ết..."
-
-#: capplets/theme-switcher/theme-properties.glade.h:19
-msgid "_Go to theme folder"
+#, fuzzy
+msgid "_Go To Theme Folder"
 msgstr "Đ_i tới thư mục theme"
 
-#: capplets/theme-switcher/theme-properties.glade.h:20
-msgid "_Install theme..."
+#: capplets/theme-switcher/theme-properties.glade.h:19
+#, fuzzy
+msgid "_Install Theme..."
 msgstr "C_ài đặt theme..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:21
-msgid "_Save theme"
+#: capplets/theme-switcher/theme-properties.glade.h:20
+#, fuzzy
+msgid "_Save Theme..."
 msgstr "L_ưu theme"
 
-#: capplets/theme-switcher/theme-properties.glade.h:22
+#: capplets/theme-switcher/theme-properties.glade.h:21
 msgid "_Theme name:"
 msgstr "T_ên theme:"
 
@@ -2370,7 +2413,7 @@ msgid "Couldn't load sound file %s as sample %s"
 msgstr "Không thể nạp tập tin âm thanh %s làm mẫu %s"
 
 #: gnome-settings-daemon/gnome-settings-xrdb.c:212
-#: gnome-settings-daemon/gnome-settings-xrdb.c:259
+#: gnome-settings-daemon/gnome-settings-xrdb.c:260
 msgid "Cannot determine user's home directory"
 msgstr ""
 
@@ -2690,7 +2733,7 @@ msgstr "Thành phần khung xem nội dung thuộc tính theme"
 msgid "Themus Theme Properties view"
 msgstr "Khung xem thuộc tính theme của Themus"
 
-#: vfs-methods/themus/theme-method.c:513
+#: vfs-methods/themus/theme-method.c:514
 msgid "Themes"
 msgstr "Themes"
 
@@ -2744,6 +2787,15 @@ msgstr "Có tạo thumbnail các theme được cài đặt hay không"
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Có tạo thumbnail các theme hay không"
+
+#~ msgid "Install new theme"
+#~ msgstr "Cài theme mới"
+
+#~ msgid "_Location of new theme:"
+#~ msgstr "_Vị trí theme mới:"
+
+#~ msgid "_Details..."
+#~ msgstr "Chi ti_ết..."
 
 #~ msgid ""
 #~ "<b>Note:</b> You will need to logout and log back in for this setting to "
@@ -2835,9 +2887,6 @@ msgstr "Có tạo thumbnail các theme hay không"
 #, fuzzy
 #~ msgid "Pro_xy requires username and password"
 #~ msgstr "_Proxy yêu cầu tên người dùng và mật khẩu"
-
-#~ msgid "_Location:"
-#~ msgstr "Đị_a điểm:"
 
 #~ msgid "Titlebar Font"
 #~ msgstr "Font thanh tựa đề"
@@ -2951,9 +3000,6 @@ msgstr "Có tạo thumbnail các theme hay không"
 
 #~ msgid "Spreadsheet"
 #~ msgstr "Bảng tính"
-
-#~ msgid "Presentation"
-#~ msgstr "Trình bày"
 
 #~ msgid "Diagram"
 #~ msgstr "Lược đồ"
