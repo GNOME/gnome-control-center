@@ -14,7 +14,9 @@ entities = config-background.xml \
            config-sound.xml \
            config-themes.xml \
 	   config-file-type.xml \
-	   config-accessibility-keyboard.xml
+	   config-accessibility-keyboard.xml \
+	   config-default-apps.xml \
+	   control-center.xml
 
 include $(top_srcdir)/help/xmldocs.make
 dist-hook: app-dist-hook
