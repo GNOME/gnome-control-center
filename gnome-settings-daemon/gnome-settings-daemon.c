@@ -32,6 +32,11 @@
 #include "xsettings-manager.h"
 #include "gnome-settings-daemon.h"
 
+#include "gnome-settings-xsettings.h"
+#include "gnome-settings-mouse.h"
+#include "gnome-settings-keyboard.h"
+#include "gnome-settings-background.h"
+
 static GSList *directories = NULL;
 XSettingsManager *manager;
 

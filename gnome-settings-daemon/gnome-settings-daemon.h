@@ -21,8 +21,8 @@
  * Authors:  Jonathan Blandford
  */
 
-#ifndef GNOME_SETTINGS_XSETTINGS_H
-#define GNOME_SETTINGS_XSETTINGS_H
+#ifndef __GNOME_SETTINGS_DAEMON_H
+#define __GNOME_SETTINGS_DAEMON_H
 
 #include <gconf/gconf.h>
 #include <gtk/gtk.h>
@@ -34,4 +34,4 @@ void       gnome_settings_daemon_register_callback (const char      *dir,
 						    KeyCallbackFunc  func);
 GtkWidget *gnome_settings_daemon_get_invisible     (void);
 
-#endif /* GNOME_SETTINGS_XSETTINGS_H */
+#endif /* __GNOME_SETTINGS_DAEMON_H */

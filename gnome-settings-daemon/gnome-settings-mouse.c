@@ -3,6 +3,8 @@
 #include <gconf/gconf.h>
 #include <math.h>
 
+#include "gnome-settings-daemon.h"
+
 #define MAX_BUTTONS 10
 
 #if 0
@@ -134,11 +136,6 @@ set_motion_threshold (gint motion_threshold)
 			 0, 0, motion_threshold);
 }
 
-static void
-set_drag_threshold (gint drag_threshold)
-{
-
-}
 
 
 static void
