@@ -1,3 +1,11 @@
+2004-12-10  James Henstridge  <james@jamesh.id.au>
+
+	* Makefile.am: update the desktop file database on install, since
+	we add a new mime action.
+
+	* themus-theme-applier.desktop.in.in (Exec): use %u rather than
+	%U, since it only handles a single file.
+
 2004-11-27  James Henstridge  <james@jamesh.id.au>
 
 	* themus.applications, themus.keys: remove.

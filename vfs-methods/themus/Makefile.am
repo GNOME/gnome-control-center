@@ -59,14 +59,19 @@ desktopdir = $(datadir)/applications
 desktop_in_files = themus-theme-applier.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
+install-data-local: install-gconf-schemas install-desktop-database
+
 if GCONF_SCHEMAS_INSTALL
-install-data-local:
+install-gconf-schemas:
 	if test -z "$(DESTDIR)"; then \
 	  GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule themus.schemas; \
 	fi
 else
-install-data-local:
+install-gconf-schemas:
 endif
+
+install-desktop-database: install-desktopDATA
+	update-desktop-database $(DESTDIR)$(desktopdir)
 
 @INTLTOOL_DESKTOP_RULE@
 @INTLTOOL_SCHEMAS_RULE@
