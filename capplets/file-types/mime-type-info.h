@@ -52,6 +52,7 @@ struct _MimeTypeInfo
 	gchar                   *print_line;
 
 	gboolean                 is_category;
+	gchar                   *category;
 };
 
 MimeTypeInfo *mime_type_info_load   (GtkTreeModel       *model,

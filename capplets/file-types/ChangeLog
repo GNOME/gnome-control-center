@@ -1,3 +1,49 @@
+2002-01-14  Bradford Hovinen  <hovinen@ximian.com>
+
+	* mime-category-edit-dialog.c (populate_application_list):
+	Implement. Mostly a copy from the corresponding function in
+	mime-edit-dialog.c
+
+	* mime-types-model.c (get_insertion_point): Make this public
+	(find_supported_apps_for_category, reduce_supported_app_list) 
+	(intersect_lists, find_possible_supported_apps): Implement
+
+	* mime-edit-dialog.c (fill_dialog): Fill category_entry
+	(choose_cat_cb): Implement
+	(mime_edit_dialog_init): Connect choose_button to choose_cat_cb
+
+	* mime-type-info.c (mime_type_info_load): Load category name
+	(mime_type_info_save): Call reinsert_iter to affect category name
+	change
+
+	* mime-types-model.c (mime_types_model_new): Add parameter
+	is_category_select; TRUE iff this model should be only for
+	selecting a category and not list the actual file types or
+	Internet services
+	(get_category_name): Implement
+
+	* mime-edit-dialog.c (mime_edit_dialog_init): Add category_label
+	to first size group
+
+2002-01-13  Bradford Hovinen  <hovinen@ximian.com>
+
+	* file-types-capplet.c (edit_cb, row_activated_cb): Don't try to
+	create a category edit dialog if this is the Internet Services
+	category
+	(count_cb): Only count other than internet services category
+
+	* mime-types-model.c (model_entry_is_category): Implement
+	(model_entry_is_protocol): Use categories[INTERNET_SERVICES_IDX]
+	rather than string
+	(model_entry_is_internet_services_category): Implement
+
+	* Makefile.am (gnome_file_types_properties_SOURCES): Add
+	mime-category-edit-dialog.[ch]
+
+	* file-types-capplet.c (edit_cb): Construct a category edit dialog
+	if the tree iterator has children
+	(row_activated_cb): Ditto
+
 2002-01-11  Bradford Hovinen  <hovinen@ximian.com>
 
 	* file-types-capplet.c (selection_changed_cb): Implement

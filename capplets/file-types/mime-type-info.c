@@ -120,6 +120,7 @@ mime_type_info_load (GtkTreeModel *model, GtkTreeIter *iter)
 	info->edit_line       = g_strdup (gnome_vfs_mime_get_value (info->mime_type, "edit-line"));
 	info->print_line      = g_strdup (gnome_vfs_mime_get_value (info->mime_type, "print-line"));
 	info->default_action  = gnome_vfs_mime_get_default_application (info->mime_type);
+	info->category        = get_category_name (model, iter, FALSE);
 
 	tmp = g_strdup_printf ("Custom %s", info->mime_type);
 
@@ -149,8 +150,7 @@ mime_type_info_load (GtkTreeModel *model, GtkTreeIter *iter)
 void
 mime_type_info_save (const MimeTypeInfo *info)
 {
-	gchar                   *tmp, *tmp1;
-	gchar                   *appid;
+	gchar                   *tmp;
 	uuid_t                   app_uuid;
 	gchar                    app_uuid_str[100];
 	GnomeVFSMimeApplication  app;
@@ -185,6 +185,9 @@ mime_type_info_save (const MimeTypeInfo *info)
 	tmp = form_extensions_string (info, " ", NULL);
 	gnome_vfs_mime_set_extensions_list (info->mime_type, tmp);
 	g_free (tmp);
+
+	if (strcmp (info->category, get_category_name (info->model, info->iter, FALSE)))
+		reinsert_model_entry (info->model, info->iter);
 }
 
 void
@@ -219,6 +222,7 @@ mime_type_info_free (MimeTypeInfo *info)
 	g_free (info->custom_line);
 	g_free (info->edit_line);
 	g_free (info->print_line);
+	g_free (info->category);
 	g_free (info);
 }
 

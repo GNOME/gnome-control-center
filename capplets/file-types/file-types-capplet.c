@@ -38,6 +38,7 @@
 
 #include "mime-types-model.h"
 #include "mime-edit-dialog.h"
+#include "mime-category-edit-dialog.h"
 #include "mime-type-info.h"
 #include "service-edit-dialog.h"
 #include "service-info.h"
@@ -71,7 +72,10 @@ edit_cb (GtkButton *button, GladeXML *dialog)
 
 	if (model_entry_is_protocol (model, &iter))
 		edit_dialog = service_edit_dialog_new (service_info_load (model, &iter, changeset));
-	else
+	else if (model_entry_is_category (model, &iter)) {
+		if (!model_entry_is_internet_services_category (model, &iter))
+			edit_dialog = mime_category_edit_dialog_new (model, &iter);
+	} else
 		edit_dialog = mime_edit_dialog_new (mime_type_info_load (model, &iter));
 }
 
@@ -88,14 +92,18 @@ row_activated_cb (GtkTreeView *view, GtkTreePath *path, GtkTreeViewColumn *colum
 
 	if (model_entry_is_protocol (model, &iter))
 		edit_dialog = service_edit_dialog_new (service_info_load (model, &iter, changeset));
-	else
+	else if (model_entry_is_category (model, &iter)) {
+		if (!model_entry_is_internet_services_category (model, &iter))
+			edit_dialog = mime_category_edit_dialog_new (model, &iter);
+	} else
 		edit_dialog = mime_edit_dialog_new (mime_type_info_load (model, &iter));
 }
 
 static void
 count_cb (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gint *count) 
 {
-	(*count)++;
+	if (!model_entry_is_internet_services_category (model, iter))
+		(*count)++;
 }
 
 static void
@@ -150,7 +158,7 @@ create_dialog (void)
 
 	dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/file-types-properties.glade", "main_dialog", NULL);
 
-	model = mime_types_model_new ();
+	model = mime_types_model_new (FALSE);
 	treeview = WID ("mime_types_tree");
 
 	gtk_tree_view_set_model (GTK_TREE_VIEW (treeview), model);

@@ -29,6 +29,7 @@
 #include <libgnomevfs/gnome-vfs-mime-handlers.h>
 
 #include "mime-edit-dialog.h"
+#include "mime-types-model.h"
 
 #define WID(x) (glade_xml_get_widget (dialog->p->dialog_xml, x))
 
@@ -72,6 +73,7 @@ static void populate_extensions_list     (MimeEditDialog *dialog);
 
 static void add_ext_cb                   (MimeEditDialog *dialog);
 static void remove_ext_cb                (MimeEditDialog *dialog);
+static void choose_cat_cb                (MimeEditDialog *dialog);
 static void default_action_changed_cb    (MimeEditDialog *dialog);
 static void response_cb                  (MimeEditDialog *dialog,
 					  gint            response_id);
@@ -118,6 +120,7 @@ mime_edit_dialog_init (MimeEditDialog *dialog, MimeEditDialogClass *class)
 	size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 	gtk_size_group_add_widget (size_group, WID ("description_label"));
 	gtk_size_group_add_widget (size_group, WID ("mime_type_label"));
+	gtk_size_group_add_widget (size_group, WID ("category_label"));
 
 	size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 	gtk_size_group_add_widget (size_group, WID ("component_label"));
@@ -142,6 +145,7 @@ mime_edit_dialog_init (MimeEditDialog *dialog, MimeEditDialogClass *class)
 
 	g_signal_connect_swapped (G_OBJECT (WID ("add_ext_button")), "clicked", (GCallback) add_ext_cb, dialog);
 	g_signal_connect_swapped (G_OBJECT (WID ("remove_ext_button")), "clicked", (GCallback) remove_ext_cb, dialog);
+	g_signal_connect_swapped (G_OBJECT (WID ("choose_button")), "clicked", (GCallback) choose_cat_cb, dialog);
 	g_signal_connect_swapped (G_OBJECT (WID ("default_action_select")), "changed", (GCallback) default_action_changed_cb, dialog);
 
 	g_signal_connect_swapped (G_OBJECT (dialog->p->dialog_win), "response", (GCallback) response_cb, dialog);
@@ -277,6 +281,7 @@ fill_dialog (MimeEditDialog *dialog)
 {
 	gtk_entry_set_text (GTK_ENTRY (WID ("description_entry")), dialog->p->info->description);
 	gtk_entry_set_text (GTK_ENTRY (WID ("mime_type_entry")), dialog->p->info->mime_type);
+	gtk_entry_set_text (GTK_ENTRY (WID ("category_entry")), dialog->p->info->category);
 
 	if (dialog->p->info->custom_line != NULL)
 		gnome_file_entry_set_filename (GNOME_FILE_ENTRY (WID ("program_entry")), dialog->p->info->custom_line);
@@ -465,6 +470,9 @@ store_data (MimeEditDialog *dialog)
 	g_free (dialog->p->info->icon_name);
 	dialog->p->info->icon_name = g_strdup (gnome_icon_entry_get_filename (GNOME_ICON_ENTRY (WID ("icon_entry"))));
 
+	g_free (dialog->p->info->category);
+	dialog->p->info->category = g_strdup (gtk_entry_get_text (GTK_ENTRY (WID ("category_entry"))));
+
 	option_menu = GTK_OPTION_MENU (WID ("component_select"));
 	menu_shell = GTK_MENU_SHELL (gtk_option_menu_get_menu (option_menu));
 	idx = gtk_option_menu_get_history (option_menu);
@@ -525,6 +533,48 @@ remove_ext_cb (MimeEditDialog *dialog)
 {
 	gtk_tree_selection_selected_foreach (gtk_tree_view_get_selection (GTK_TREE_VIEW (WID ("ext_list"))),
 					     (GtkTreeSelectionForeachFunc) remove_ext_foreach_cb, NULL);
+}
+
+static void
+choose_cat_cb (MimeEditDialog *dialog)
+{
+	GtkTreeModel     *model;
+	GtkTreeSelection *selection;
+	GtkTreeIter       iter;
+	GtkWidget        *treeview;
+	GtkWidget        *dialog_win;
+	GtkCellRenderer  *renderer;
+
+	model = mime_types_model_new (TRUE);
+	treeview = gtk_tree_view_new_with_model (model);
+
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
+	gtk_tree_selection_set_mode (selection, GTK_SELECTION_SINGLE);
+	get_insertion_point (GTK_TREE_STORE (model), dialog->p->info->category, &iter);
+	gtk_tree_selection_select_iter (selection, &iter);
+
+	renderer = gtk_cell_renderer_text_new ();
+	gtk_tree_view_insert_column_with_attributes
+		(GTK_TREE_VIEW (treeview), -1, _("Category"), renderer,
+		 "text", DESCRIPTION_COLUMN,
+		 NULL);
+
+	dialog_win = gtk_dialog_new_with_buttons
+		(_("Choose a file category"), NULL, -1,
+		 GTK_STOCK_OK,     GTK_RESPONSE_OK,
+		 GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+		 NULL);
+
+	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog_win)->vbox), treeview, TRUE, TRUE, GNOME_PAD_SMALL);
+	gtk_widget_show_all (dialog_win);
+
+	if (gtk_dialog_run (GTK_DIALOG (dialog_win)) == GTK_RESPONSE_OK) {
+		gtk_tree_selection_get_selected (selection, &model, &iter);
+		gtk_entry_set_text (GTK_ENTRY (WID ("category_entry")), get_category_name (model, &iter, TRUE));
+	}
+
+	gtk_widget_destroy (dialog_win);
+	g_object_unref (G_OBJECT (model));
 }
 
 static void

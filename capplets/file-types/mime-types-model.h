@@ -36,13 +36,30 @@ enum {
 	EXTENSIONS_COLUMN
 };
 
-GtkTreeModel *mime_types_model_new         (void);
+GtkTreeModel *mime_types_model_new         (gboolean      is_category_select);
 
-GdkPixbuf    *get_icon_pixbuf              (const gchar *short_icon_name);
+void          reinsert_model_entry         (GtkTreeModel *model,
+					    GtkTreeIter  *iter);
+
+GdkPixbuf    *get_icon_pixbuf              (const gchar  *short_icon_name);
 gchar        *get_description_for_protocol (const gchar  *protocol_name);
+
+gchar        *get_category_name            (GtkTreeModel *model,
+					    GtkTreeIter  *iter,
+					    gboolean      include_iter);
+void          get_insertion_point          (GtkTreeStore *model,
+					    const gchar  *path_str,
+					    GtkTreeIter  *iter);
 
 gboolean      model_entry_is_protocol      (GtkTreeModel *model,
 					    GtkTreeIter  *iter);
+gboolean      model_entry_is_category      (GtkTreeModel *model,
+					    GtkTreeIter  *iter);
+gboolean      model_entry_is_internet_services_category (GtkTreeModel *model,
+							 GtkTreeIter *iter);
+
+GList        *find_supported_apps_for_category     (GtkTreeModel      *model,
+						    GtkTreeIter       *iter);
 
 G_END_DECLS
 
