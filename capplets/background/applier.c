@@ -30,7 +30,6 @@
 #include <gdk/gdk.h>
 #include <gdk/gdkx.h>
 #include <gdk/gdkprivate.h>
-#include <gdk-pixbuf/gdk-pixbuf.h>
 #include <gdk-pixbuf/gdk-pixbuf-xlib.h>
 
 #include <X11/Xlib.h>
@@ -1413,4 +1412,12 @@ output_compat_prefs (const Preferences *prefs)
 	gnome_config_set_int ("/Background/Default/opacity", prefs->opacity);
 
 	gnome_config_sync ();
+}
+
+GdkPixbuf *
+applier_get_wallpaper_pixbuf (Applier *applier)
+{
+	g_return_val_if_fail (applier != NULL, NULL);
+
+	return applier->private->wallpaper_pixbuf;
 }

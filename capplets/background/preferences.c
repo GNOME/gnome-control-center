@@ -236,12 +236,7 @@ preferences_load_from_bonobo_pbag (Preferences        *prefs,
 	prefs->wallpaper_type = bonobo_property_bag_client_get_value_gulong (pb, "wallpaper_type", ev);
 	prefs->wallpaper_filename = g_strdup (*((CORBA_char **)(PB_GET_VALUE ("wallpaper_filename"))->_value));
 
-	if (prefs->wallpaper_filename != NULL &&
-	    strcmp (prefs->wallpaper_filename, "") != 0 &&
-	    strcmp (prefs->wallpaper_filename, "(none)") != 0)
-		prefs->wallpaper_enabled = TRUE;
-	else
-		prefs->wallpaper_enabled = FALSE;
+	prefs->wallpaper_enabled = bonobo_property_bag_client_get_value_gboolean (pb, "wallpaper_enabled", ev);
 	
 	prefs->color1 = bonobo_color_to_gdk ((Bonobo_Config_Color *)(PB_GET_VALUE ("color1"))->_value);
 	prefs->color2 = bonobo_color_to_gdk ((Bonobo_Config_Color *)(PB_GET_VALUE ("color2"))->_value);
@@ -294,13 +289,9 @@ preferences_load_from_bonobo_db (Preferences           *prefs,
 
 	prefs->wallpaper_type = bonobo_config_get_ulong (db, "/main/wallpaper_type", NULL);
 	prefs->wallpaper_filename = g_strdup (*((CORBA_char **)(DB_GET_VALUE ("/main/wallpaper_filename"))->_value));
-	if (prefs->wallpaper_filename && 
-	    strcmp (prefs->wallpaper_filename, "") != 0 &&
-	    strcmp (prefs->wallpaper_filename, "(none)") != 0)
-		prefs->wallpaper_enabled = TRUE;
-	else
-		prefs->wallpaper_enabled = FALSE;
 	
+	prefs->wallpaper_enabled = BONOBO_ARG_GET_BOOLEAN (DB_GET_VALUE ("/main/wallpaper_enabled"));
+
 	prefs->color1 = bonobo_color_to_gdk ((Bonobo_Config_Color *)(DB_GET_VALUE ("/main/color1"))->_value);
 	prefs->color2 = bonobo_color_to_gdk ((Bonobo_Config_Color *)(DB_GET_VALUE ("/main/color2"))->_value);
 
@@ -362,6 +353,9 @@ preferences_apply_event (Preferences     *prefs,
 			prefs->gradient_enabled = FALSE;
 		else
 			prefs->gradient_enabled = TRUE;
+	}
+	else if (!strcmp (name, "wallpaper_enabled")) {
+		prefs->wallpaper_enabled = BONOBO_ARG_GET_BOOLEAN (value);
 	} else {
 		g_warning ("%s: Unknown property: %s", __FUNCTION__, name);
 	}
@@ -784,4 +778,48 @@ read_color_from_string (gchar *string)
 	color->pixel = xlib_rgb_xpixel_from_rgb (rgb);
 
 	return color;
+}
+
+/* It'd be nice if we could just get the pixbuf the applier uses, for
+ * efficiency's sake */
+gboolean
+preferences_need_color_opts (Preferences *prefs, GdkPixbuf *wallpaper_pixbuf)
+{
+	int s_width, s_height;
+	int p_width, p_height;
+	
+	g_return_val_if_fail (prefs != NULL, TRUE);
+
+	if (!(prefs->wallpaper_enabled && prefs->wallpaper_filename))
+		return TRUE;
+
+	if (!wallpaper_pixbuf)
+		return TRUE;
+
+	p_width = gdk_pixbuf_get_width (wallpaper_pixbuf);
+	p_height = gdk_pixbuf_get_height (wallpaper_pixbuf);
+	
+	s_width = gdk_screen_width ();
+	s_height = gdk_screen_height ();
+
+	switch (prefs->wallpaper_type)
+	{
+		case WPTYPE_CENTERED:
+			if (p_width >= s_width && p_height >= s_height)
+				return FALSE;
+			else
+				return TRUE;
+			break;
+		case WPTYPE_SCALED_ASPECT:
+			if (s_width == p_width && s_height == p_height)
+				return FALSE;
+			else if (((double) s_width / (double) s_height)
+				 == ((double) p_width / (double) p_height))
+				return FALSE;
+			else
+				return TRUE;
+			break;
+		default:
+			return FALSE;
+	}
 }

@@ -25,6 +25,7 @@
 #define __PREFERENCES_H
 
 #include <gtk/gtk.h>
+#include <gdk-pixbuf/gdk-pixbuf.h>
 
 #ifdef BONOBO_CONF_ENABLE
 #include <bonobo-conf/bonobo-config-database.h>
@@ -85,6 +86,9 @@ GtkObject   *preferences_new                  (void);
 GtkObject   *preferences_clone                (const Preferences     *prefs);
 
 void         preferences_destroy              (GtkObject             *object);
+
+gboolean     preferences_need_color_opts      (Preferences           *prefs,
+					       GdkPixbuf   *wallpaper_pixbuf);
 
 #ifdef BONOBO_CONF_ENABLE
 

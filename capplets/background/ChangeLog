@@ -1,3 +1,25 @@
+2001-09-07  Richard Hestilow  <hestilow@ximian.com>
+
+	* background-properties.glade: Redid UI a bit to add new enabled
+	checkbox.
+	
+	* background-properties.xml: Add default for "wallpaper_enabled".
+	
+	* preferences.[ch]: New function preferences_need_color_opts.
+	(preferences_load_from_bonobo_db): Load wallpaper_enabled from
+	bonobo-conf.
+	(preferences_load_from_bonobo_pbag): Ditto.
+
+	* applier.[ch]: New function applier_get_wallpaper_pixbuf
+	(needed by preferences_need_color_opts, else pixbuf gets created
+	twice).
+
+	* background-properties-capplet.c (real_realize_cb): Set
+	color frame sensitivity based on preferences_need_color_opts.
+	(property_change_cb): Ditto.
+	(setup_dialog): Add peditor/guard for wallpaper_enabled. Also,
+	set glade object data on the preferences structure as well.
+	
 2001-08-28  Bradford Hovinen  <hovinen@ximian.com>
 
 	* background-properties-capplet.c (get_legacy_settings): Retrieve

@@ -25,6 +25,7 @@
 #define __APPLIER_H
 
 #include <gtk/gtk.h>
+#include <gdk-pixbuf/gdk-pixbuf.h>
 
 #include <X11/Xlib.h>
 #include <pthread.h>
@@ -60,5 +61,7 @@ void         applier_apply_prefs (Applier *applier, const Preferences *prefs,
 				  gboolean do_root, gboolean do_preview);
 
 GtkWidget   *applier_get_preview_widget (Applier *applier);
+
+GdkPixbuf   *applier_get_wallpaper_pixbuf (Applier *applier);
 
 #endif /* __APPLIER_H */

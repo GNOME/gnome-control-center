@@ -192,26 +192,51 @@ property_change_cb (BonoboListener     *listener,
 		    CORBA_Environment  *ev,
 		    Preferences        *prefs)
 {
+	GladeXML *dialog;
+	
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs));
 
 	if (GTK_OBJECT_DESTROYED (prefs))
 		return;
-	
+
+	dialog = gtk_object_get_data (GTK_OBJECT (prefs), "glade-data");
+
 	preferences_apply_event (prefs, event_name, any);
 	applier_apply_prefs (applier, prefs, FALSE, TRUE);
+
+	if (!strcmp (event_name, "Bonobo/Property:change:wallpaper_type")
+	    || !strcmp (event_name, "Bonobo/Property:change:wallpaper_filename")
+	    || !strcmp (event_name, "Bonobo/Property:change:wallpaper_enabled"))
+	{
+		gtk_widget_set_sensitive (
+			WID ("color_frame"),
+			preferences_need_color_opts (
+				prefs,
+				applier_get_wallpaper_pixbuf (applier)));
+	}
 }
 
 static gboolean
 real_realize_cb (Preferences *prefs) 
 {
+	GladeXML *dialog;
+
 	g_return_val_if_fail (prefs != NULL, TRUE);
 	g_return_val_if_fail (IS_PREFERENCES (prefs), TRUE);
 
 	if (GTK_OBJECT_DESTROYED (prefs))
 		return FALSE;
 
+	dialog = gtk_object_get_data (GTK_OBJECT (prefs), "glade-data");
+
 	applier_apply_prefs (applier, prefs, FALSE, TRUE);
+
+	gtk_widget_set_sensitive (
+		WID ("color_frame"),
+		preferences_need_color_opts (
+			prefs,
+			applier_get_wallpaper_pixbuf (applier)));
 
 	return FALSE;
 }
@@ -242,6 +267,7 @@ setup_dialog (GtkWidget *widget, Bonobo_PropertyBag bag)
 	GladeXML          *dialog;
 	Applier           *applier;
 	GtkObject         *prefs;
+	
 	CORBA_Environment  ev;
 
 	CORBA_exception_init (&ev);
@@ -256,6 +282,10 @@ setup_dialog (GtkWidget *widget, Bonobo_PropertyBag bag)
 	CUSTOM_CREATE_PEDITOR (option_menu, ulong, "wallpaper_type", "image_option");	
 	CUSTOM_CREATE_PEDITOR (int_range, long, "opacity", "opacity_spin");
 
+	CREATE_PEDITOR (boolean, "wallpaper_enabled", "picture_enabled_check");
+
+	bonobo_peditor_set_guard (WID ("picture_frame"), bag, "wallpaper_enabled");
+			
 	/* Disable opacity controls */
 	gtk_widget_hide (WID ("opacity_spin"));
 	gtk_widget_hide (WID ("opacity_label"));
@@ -263,6 +293,7 @@ setup_dialog (GtkWidget *widget, Bonobo_PropertyBag bag)
 	bonobo_property_bag_client_set_value_gboolean (bag, "enabled", TRUE, NULL);
 
 	prefs = preferences_new_from_bonobo_pbag (bag, &ev);
+	gtk_object_set_data (GTK_OBJECT (prefs), "glade-data", dialog);
 	bonobo_event_source_client_add_listener (bag, (BonoboListenerCallbackFn) property_change_cb,
 						 NULL, NULL, prefs);
 
@@ -296,7 +327,9 @@ create_dialog (void)
 			    TRUE, TRUE, 0);
 	gtk_widget_show_all (holder);
 
+#if 0
 	gnome_entry_append_history (GNOME_ENTRY (gnome_file_entry_gnome_entry (GNOME_FILE_ENTRY (WID ("image_fileentry")))), 0, "(none)");
+#endif
 
 	gtk_signal_connect_object (GTK_OBJECT (widget), "destroy",
 				   GTK_SIGNAL_FUNC (gtk_object_destroy),
