@@ -4,5 +4,3 @@ EXTRA_DIST = control-center.spec.in
 
 dist-hook: control-center.spec
 	cp control-center.spec $(distdir)
-
-

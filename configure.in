@@ -1,7 +1,7 @@
 AC_INIT(control-center)
 
 AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE(control-center, 1.3.1)
+AM_INIT_AUTOMAKE(control-center, 1.3.2)
 
 AM_MAINTAINER_MODE
 
@@ -77,22 +77,9 @@ AC_MSG_ERROR([Fatal Error: no Imlib detected.])])
 
 CFLAGS="-O2 -g -Wall $CFLAGS"
 
-dnl
-dnl Check for libximian_archiver and set the flag
-dnl HAVE_LIBXIMIAN_ARCHIVER iff it is prsent
-dnl
-AC_MSG_CHECKING(for Ximian archiver library)
-vers=`$GNOME_CONFIG --modversion ximian_archiver 2>/dev/null`
-case "x$vers" in
-  xximian-archiver-*)
-    AC_DEFINE(HAVE_XIMIAN_ARCHIVER)
-    ARCHIVER_MODULE=ximian_archiver
-    AC_MSG_RESULT(found)
-    ;;
-  *)
-    AC_MSG_RESULT(not found)
-    ;;
-esac
+dnl =============================================
+dnl END : Variables for ximian_archiverConf.sh.in
+dnl =============================================
 
 AC_PATH_PROG(PKGCONFIG, pkg-config, no)
 if test "$PKGCONFIG" = no ; then
@@ -114,10 +101,11 @@ PKG_CHECK_MODULES(BG_CAPPLET, $capplet_modules gdk_pixbuf_xlib)
 PKG_CHECK_MODULES(SCREENSAVER_CAPPLET, $capplet_modules gal)
 PKG_CHECK_MODULES(ROLLBACK_CAPPLET, $capplet_modules)
 PKG_CHECK_MODULES(VFS_CAPPLET, $capplet_modules)
-PKG_CHECK_MODULES(GNOMECC, gnomeui libglade xml gdk_pixbuf capplet gnomecanvaspixbuf gtkhtml)
+PKG_CHECK_MODULES(GNOMECC, gnomeui libglade xml gdk_pixbuf gnomecanvaspixbuf gtkhtml)
 PKG_CHECK_MODULES(RMHELPER, gnomeui gnomecanvaspixbuf)
 PKG_CHECK_MODULES(ARCHIVER, bonobo xml)
 PKG_CHECK_MODULES(MONIKER, bonobo bonobo_conf xml)
+PKG_CHECK_MODULES(XIMIAN_ARCHIVER, gnome xml)
 
 dnl gnome-vfs doesn't support gnome-config or pkg-config
 VFS_CFLAGS=`gnome-vfs-config --cflags`
@@ -128,6 +116,18 @@ VFS_CAPPLET_LIBS="$VFS_CAPPLET_LIBS $VFS_LIBS"
 
 AC_SUBST(CFLAGS)
 AC_SUBST(LDFLAGS)
+
+dnl =======================================
+dnl Variables for ximian_archiverConf.sh.in
+dnl =======================================
+
+XIMIAN_ARCHIVER_LIBDIR='-L${libdir}'
+XIMIAN_ARCHIVER_LIBS="$XIMIAN_ARCHIVER_LIBS -lximian_archiver"
+XIMIAN_ARCHIVER_INCLUDEDIR="$XIMIAN_ARCHIVER_CFLAGS -I${includedir}"
+
+AC_SUBST(XIMIAN_ARCHIVER_LIBDIR)
+AC_SUBST(XIMIAN_ARCHIVER_LIBS)
+AC_SUBST(XIMIAN_ARCHIVER_INCLUDEDIR)
 
 AC_OUTPUT([
 control-center.spec
