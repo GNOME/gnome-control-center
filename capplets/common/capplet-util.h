@@ -90,4 +90,6 @@ void capplet_init (int                      argc,
 		   SetupPropertyEditorsFn   setup_property_editors_fn,
 		   GetLegacySettingsFn      get_legacy_settings_fn);
 
+void capplet_help (GtkWindow *parent, char const *helpfile, char const *section);
+
 #endif /* __CAPPLET_UTIL_H */

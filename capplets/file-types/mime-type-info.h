@@ -107,7 +107,6 @@ MimeCategoryInfo *mime_category_info_new           (MimeCategoryInfo   *parent,
 void          mime_category_info_load_all          (MimeCategoryInfo   *category);
 gboolean      mime_category_info_using_custom_app  (const MimeCategoryInfo *category);
 void          mime_category_info_save              (MimeCategoryInfo   *category);
-void          mime_category_info_update            (MimeCategoryInfo   *info);
 
 GList        *mime_category_info_find_apps         (MimeCategoryInfo   *info);
 gchar        *mime_category_info_get_full_name     (MimeCategoryInfo   *info);

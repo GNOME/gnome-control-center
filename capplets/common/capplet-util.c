@@ -284,3 +284,42 @@ capplet_init (int                      argc,
 }
 
 #endif
+
+/**
+ * capplet_help :
+ * @parent :
+ * @helpfile :
+ * @section  :
+ *
+ * A quick utility routine to display help for capplets, and handle errors in a
+ * Havoc happy way.
+ **/
+void
+capplet_help (GtkWindow *parent, char const *helpfile, char const *section)
+{
+	GError *error = NULL;
+
+	g_return_if_fail (helpfile != NULL);
+	g_return_if_fail (section != NULL);
+
+	gnome_help_display_desktop (NULL,
+		"control-center-manual",
+		helpfile, section, &error);
+	if (error) {
+		GtkWidget *dialog;
+
+		dialog = gtk_message_dialog_new (GTK_WINDOW (parent),
+			GTK_DIALOG_DESTROY_WITH_PARENT,
+			GTK_MESSAGE_ERROR,
+			GTK_BUTTONS_CLOSE,
+			_("There was an error displaying help: %s"),
+			error->message);
+
+		g_signal_connect (G_OBJECT (dialog),
+			"response",
+			G_CALLBACK (gtk_widget_destroy), NULL);
+		gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+		gtk_widget_show (dialog);
+		g_error_free (error);
+	}
+}

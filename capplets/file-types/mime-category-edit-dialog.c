@@ -343,13 +343,17 @@ populate_application_list (MimeCategoryEditDialog *dialog)
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), gtk_menu_item_new_with_label (_("Custom")));
 
 	if (found_idx < 0) {
+		gboolean req_terminal = FALSE;
 		found_idx = i;
-		if (dialog->p->info->default_action->command != NULL)
-			gnome_file_entry_set_filename (GNOME_FILE_ENTRY (WID ("program_entry")),
-						       dialog->p->info->default_action->command);
+		if (dialog->p->info->default_action != NULL) {
+			if (dialog->p->info->default_action->command != NULL)
+				gnome_file_entry_set_filename (GNOME_FILE_ENTRY (WID ("program_entry")),
+							       dialog->p->info->default_action->command);
+			req_terminal = dialog->p->info->default_action->requires_terminal;
+		}
 
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("needs_terminal_toggle")),
-					      dialog->p->info->default_action->requires_terminal);
+					      req_terminal);
 	} else {
 		gtk_widget_set_sensitive (WID ("program_entry_box"), FALSE);
 	}
@@ -361,6 +365,35 @@ populate_application_list (MimeCategoryEditDialog *dialog)
 	g_list_free (app_list);
 
 	update_sensitivity (dialog);
+}
+
+static void
+update_subcategories (ModelEntry *entry, MimeCategoryInfo *category) 
+{
+	ModelEntry *tmp;
+
+	switch (entry->type) {
+	case MODEL_ENTRY_MIME_TYPE:
+		if (MIME_TYPE_INFO (entry)->use_category) {
+			gnome_vfs_mime_application_free (MIME_TYPE_INFO (entry)->default_action);
+
+			if (category->default_action == NULL)
+				MIME_TYPE_INFO (entry)->default_action = NULL;
+			else
+				MIME_TYPE_INFO (entry)->default_action = gnome_vfs_mime_application_copy (category->default_action);
+		}
+
+		break;
+
+	case MODEL_ENTRY_CATEGORY:
+		if (entry == MODEL_ENTRY (category) || MIME_CATEGORY_INFO (entry)->use_parent_category)
+			for (tmp = entry->first_child; tmp != NULL; tmp = tmp->next)
+				update_subcategories (tmp, category);
+		break;
+
+	default:
+		break;
+	}
 }
 
 static void
@@ -401,8 +434,7 @@ store_data (MimeCategoryEditDialog *dialog)
 		gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (WID ("use_category_toggle")));
 
 	model_entry_save (MODEL_ENTRY (dialog->p->info));
-
-	mime_category_info_update (dialog->p->info);
+	update_subcategories (MODEL_ENTRY (dialog->p->info), dialog->p->info);
 }
 
 static void

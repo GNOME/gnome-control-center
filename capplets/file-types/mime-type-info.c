@@ -357,7 +357,11 @@ mime_category_info_load_all (MimeCategoryInfo *category)
 
 		if (appid != NULL && *appid != '\0')
 			category->default_action = gnome_vfs_application_registry_get_mime_application (appid);
-		else
+
+		/* This must be non NULL, so be extra careful incase gnome-vfs
+		 * spits back a NULL
+		 */
+		if (category->default_action == NULL)
 			category->default_action = g_new0 (GnomeVFSMimeApplication, 1);
 	}
 
@@ -382,7 +386,9 @@ mime_category_info_using_custom_app (const MimeCategoryInfo *category)
 	gchar *tmp;
 	gboolean ret;
 
-	if (category->default_action->name == NULL)
+	if (category == NULL ||
+	    category->default_action == NULL ||
+	    category->default_action->name == NULL)
 		return TRUE;
 
 	tmp = g_strdup_printf ("Custom %s", category->name);
@@ -469,41 +475,6 @@ mime_category_info_save (MimeCategoryInfo *category)
 
 	if (set_ids)
 		set_subcategory_ids (MODEL_ENTRY (category), category, category->default_action->id);
-}
-
-static void
-update_subcategories (ModelEntry *entry, MimeCategoryInfo *category) 
-{
-	ModelEntry *tmp;
-
-	switch (entry->type) {
-	case MODEL_ENTRY_MIME_TYPE:
-		if (MIME_TYPE_INFO (entry)->use_category) {
-			gnome_vfs_mime_application_free (MIME_TYPE_INFO (entry)->default_action);
-
-			if (category->default_action == NULL)
-				MIME_TYPE_INFO (entry)->default_action = NULL;
-			else
-				MIME_TYPE_INFO (entry)->default_action = gnome_vfs_mime_application_copy (category->default_action);
-		}
-
-		break;
-
-	case MODEL_ENTRY_CATEGORY:
-		if (entry == MODEL_ENTRY (category) || MIME_CATEGORY_INFO (entry)->use_parent_category)
-			for (tmp = entry->first_child; tmp != NULL; tmp = tmp->next)
-				update_subcategories (tmp, category);
-		break;
-
-	default:
-		break;
-	}
-}
-
-void
-mime_category_info_update (MimeCategoryInfo *info) 
-{
-	update_subcategories (MODEL_ENTRY (info), info);
 }
 
 static GList *

@@ -540,19 +540,11 @@ dialog_response (GtkDialog *widget,
 		 gint       response_id,
 		 GladeXML  *dialog)
 {
-	if (response_id == GTK_RESPONSE_HELP) {
-		GError *error = NULL;
-
-		/* TODO : get this written */
-		gnome_help_display_desktop (NULL,
-					    "control-center-manual",
-					    "config-default-apps.xml",
-					    "CONFIGURATION", &error);
-		if (error) {
-			g_warning ("help error: %s\n", error->message);
-			g_error_free (error);
-		}
-	} else
+	if (response_id == GTK_RESPONSE_HELP)
+		capplet_help (GTK_WINDOW (widget),
+			"config-default-apps.xml",
+			"CONFIGURATION");
+	else
 		gtk_main_quit ();
 }
 
