@@ -10,8 +10,8 @@ bin_PROGRAMS = url-properties
 url_properties_SOURCES = url-properties.c
 
 url_properties_LDADD = ../../control-center/libcapplet.la \
-		     $(GNOME_LIBDIR) $(ORB_LIBS) \
-		     $(GNOMEUI_LIBS) $(INTLLIBS) -lgnorba
+		     $(GNOME_LIBS) $(ORBIT_LIBS) \
+		     $(GNOMEUI_LIBS) $(INTLLIBS)
 
 
 EXTRA_DIST = \

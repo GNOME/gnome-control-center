@@ -5,15 +5,13 @@ AM_INIT_AUTOMAKE(control-center, 1.0.51)
 
 AM_MAINTAINER_MODE
 
-AM_ACLOCAL_INCLUDE(macros)
-
 dnl
 dnl let applications configure for gnome
 dnl
 gnome_cv_use_gnome=yes
 
-GNOME_INIT
 
+AM_PATH_GNOME
 AC_ISC_POSIX
 AC_PROG_CC
 AC_STDC_HEADERS
@@ -22,9 +20,6 @@ AM_PROG_LIBTOOL
 AM_PROG_LEX
 AC_PROG_YACC
 
-GNOME_COMPILE_WARNINGS
-
-GNOME_X_CHECKS
 
 dnl utility conditional
 AM_CONDITIONAL(FALSE, test "x" = "y")
@@ -50,19 +45,9 @@ dnl keyboard-properties-capplet
 AC_CHECK_HEADERS(X11/extensions/xf86misc.h, XF86MISC_LIBS="-lXxf86misc")
 AC_SUBST(XF86MISC_LIBS)
 
-for dir in `(IFS=:; for i in $PATH; do echo $i ; done)` ; do
-  if test -f $dir/orbit-idl ; then
-     orbit_prefix=`echo $dir | sed 's%/bin$%%' |sed 's%/bin/$%%'`
-     break
-  fi
-done
-
-ORB_LIBS="$ORBIT_LIBS"
-ORB_CFLAGS="$ORBIT_CFLAGS"
-
-AC_SUBST(ORB_LIBS)
-AC_SUBST(ORB_CFLAGS)
-
+AM_PATH_ORBIT(0.5.1, , AC_MSG_ERROR([You must have ORBit installed.]))
+AM_PATH_OAF(0.1.0, , AC_MSG_ERROR([You must have OAF installed.]))
+AM_PATH_GCONF(0.1.0, , AC_MSG_ERROR([You must have GConf installed.]), gconf-gtk)
 dnl esd-manager
 have_libesd=no
 AM_PATH_ESD(,have_libesd=yes,
@@ -88,7 +73,6 @@ AC_OUTPUT([
 control-center.spec
 Makefile
 po/Makefile.in
-macros/Makefile
 control-center/Makefile
 capplets/Makefile
 capplets/mouse-properties/Makefile

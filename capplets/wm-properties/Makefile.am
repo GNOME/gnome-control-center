@@ -15,8 +15,8 @@ wm_properties_capplet_SOURCES = \
 
 wm_properties_capplet_LDADD = \
 ../../control-center/libcapplet.la \
-$(GNOME_LIBDIR) $(ORB_LIBS) $(GNOMEUI_LIBS) $(INTLLIBS) \
--lgnorba $(IMLIB_LIBS)
+$(GNOME_LIBS) $(ORBIT_LIBS) $(GNOMEUI_LIBS) $(INTLLIBS) \
+$(IMLIB_LIBS)
 
 EXTRA_DIST = wm-properties.desktop 
 

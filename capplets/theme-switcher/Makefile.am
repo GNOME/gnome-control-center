@@ -20,9 +20,9 @@ theme_selector_capplet_SOURCES = \
 theme_selector_capplet_LDFLAGS = ../../control-center/libcapplet.la `imlib-config --libs`
 
 theme_selector_capplet_LDADD = ../../control-center/libcapplet.la \
-	$(GNOME_LIBDIR) $(ORB_LIBS) \
+	$(GNOME_LIBS) $(ORBIT_LIBS) \
 	$(GNOMEUI_LIBS) $(INTLLIBS) \
-	-lImlib  $(GTKXMHTML_LIBS) -lgnorba
+	-lImlib $(OAF_LIBS) $(GCONF_LIBS)
 
 EXTRA_DIST = \
 	theme-selector.desktop
