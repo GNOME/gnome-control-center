@@ -331,7 +331,9 @@ get_legacy_settings (void)
 	COPY_FROM_LEGACY (int,  "/gnome/desktop/peripherals/keyboard/rate",          "/Desktop/Keyboard/rate=30");
 	COPY_FROM_LEGACY (int,  "/gnome/desktop/peripherals/keyboard/delay",         "/Desktop/Keyboard/delay=500");
 	COPY_FROM_LEGACY (int,  "/gnome/desktop/peripherals/keyboard/volume",        "/Desktop/Keyboard/clickvolume=0");
+#if 0
 	COPY_FROM_LEGACY (int,  "/gnome/desktop/peripherals/keyboard/bell_volume",   "/Desktop/Bell/percent=50");
+#endif
 	COPY_FROM_LEGACY (int,  "/gnome/desktop/peripherals/keyboard/bell_pitch",    "/Desktop/Bell/pitch=50");
 	COPY_FROM_LEGACY (int,  "/gnome/desktop/peripherals/keyboard/bell_duration", "/Desktop/Bell/duration=100");
 }
@@ -390,7 +392,7 @@ main (int argc, char **argv)
 #if 0
 		setup_accessibility (dialog, changeset);
 #endif
-		gtk_widget_show_all (WID ("keyboard_dialog"));
+		gtk_widget_show (WID ("keyboard_dialog"));
 		gtk_main ();
 	}
 

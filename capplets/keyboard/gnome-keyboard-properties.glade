@@ -486,10 +486,10 @@
 				      <property name="inverted">False</property>
 				      <property name="adjustment">1000 100 2500 200 200 0</property>
 				      <accessibility>
-					<atkrelation target="slow_label" type="labelled-by"/>
-					<atkrelation target="set_cursor_label" type="labelled-by"/>
-					<atkrelation target="fast_label" type="labelled-by"/>
 					<atkrelation target="cursor_label" type="labelled-by"/>
+					<atkrelation target="fast_label" type="labelled-by"/>
+					<atkrelation target="set_cursor_label" type="labelled-by"/>
+					<atkrelation target="slow_label" type="labelled-by"/>
 				      </accessibility>
 				    </widget>
 				    <packing>
@@ -1058,7 +1058,6 @@
 
 			      <child>
 				<widget class="GtkHBox" id="hbox4">
-				  <property name="visible">True</property>
 				  <property name="homogeneous">False</property>
 				  <property name="spacing">4</property>
 
@@ -1127,7 +1126,7 @@
 			  <child>
 			    <widget class="GtkLabel" id="label14">
 			      <property name="visible">True</property>
-			      <property name="label" translatable="yes">The keyboard bell is the &lt;i&gt;beep&lt;/i&gt; sound heard when the system wants to get your attention.  You can select a custom sound file to play instead of the traditional beeping noise.</property>
+			      <property name="label" translatable="yes">The keyboard bell is the &lt;i&gt;beep&lt;/i&gt; sound heard when the system wants to get your attention.</property>
 			      <property name="use_underline">False</property>
 			      <property name="use_markup">True</property>
 			      <property name="justify">GTK_JUSTIFY_LEFT</property>
