@@ -17,11 +17,15 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
+#include <config.h>
+
 #include "themus-properties-view.h"
 #include <gnome-theme-info.h>
 
+#include <glib/gi18n-lib.h>
 #include <gtk/gtk.h>
-#include <libbonobo.h>
+#include <bonobo/bonobo-arg.h>
+#include <bonobo/bonobo-property-bag.h>
 #include <atk/atk.h>
 
 #define LOAD_BUFFER_SIZE 8192
