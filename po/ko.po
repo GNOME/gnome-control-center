@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 0.99\n"
-"POT-Creation-Date: 1999-01-17 11:54+0100\n"
+"POT-Creation-Date: 1999-02-05 22:28+0900\n"
 "PO-Revision-Date: 1998-12-19 02:45+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@adam.kaist.ac.kr>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -24,7 +24,7 @@ msgstr "한가지 색"
 
 #. gradient background selector pane
 #: capplets/background-properties/property-background.c:604
-#: capplets/e-conf/e-conf.c:2859
+#: capplets/e-conf/e-conf.c:3395
 msgid "Gradient"
 msgstr "서서히 변화"
 
@@ -120,261 +120,312 @@ msgstr ""
 "ratio(그림 가로세로비율 고정)"
 
 #: capplets/bell-properties/bell-properties.c:159
-#, fuzzy
 msgid "Keyboard Bell"
-msgstr "키보드 누를때 소리"
+msgstr "키보드 삑소리"
 
 #: capplets/bell-properties/bell-properties.c:170
 msgid "Volume"
-msgstr ""
+msgstr "크기"
 
 #: capplets/bell-properties/bell-properties.c:173
 msgid "Pitch (Hz)"
-msgstr ""
+msgstr "진동수 (Hz)"
 
 #: capplets/bell-properties/bell-properties.c:176
 msgid "Duration (ms)"
-msgstr ""
+msgstr "길이 (ms)"
 
-#: capplets/e-conf/e-conf.c:1357
+#: capplets/e-conf/e-conf.c:1705
 msgid "Move Methods"
-msgstr ""
+msgstr "이동 방법"
 
-#: capplets/e-conf/e-conf.c:1360
+#: capplets/e-conf/e-conf.c:1708
 msgid "Resize Methods"
-msgstr ""
+msgstr "크기 조절 방법"
 
-#: capplets/e-conf/e-conf.c:1363
-#, fuzzy
+#: capplets/e-conf/e-conf.c:1711
 msgid "Keyboard focus follows"
-msgstr "키보드 누를때 소리"
+msgstr "키보드 포커스 따라오기"
 
-#: capplets/e-conf/e-conf.c:1390
+#: capplets/e-conf/e-conf.c:1753
 msgid "Window Sliding Methods"
-msgstr ""
+msgstr "윈도우 슬라이드 방법"
 
-#: capplets/e-conf/e-conf.c:1393
+#: capplets/e-conf/e-conf.c:1756
 msgid "Windows slide in when they appear"
-msgstr ""
+msgstr "윈도우가 나타나는 순간 슬라이드"
 
-#: capplets/e-conf/e-conf.c:1396 capplets/e-conf/e-conf.c:1402
-#: capplets/e-conf/e-conf.c:1408 capplets/e-conf/e-conf.c:1428
-#: capplets/e-conf/e-conf.c:1434 capplets/e-conf/e-conf.c:1440
-#: capplets/e-conf/e-conf.c:2917
+#: capplets/e-conf/e-conf.c:1759 capplets/e-conf/e-conf.c:1765
+#: capplets/e-conf/e-conf.c:1771 capplets/e-conf/e-conf.c:1852
+#: capplets/e-conf/e-conf.c:1865 capplets/e-conf/e-conf.c:1871
+#: capplets/e-conf/e-conf.c:1877 capplets/e-conf/e-conf.c:3454
 msgid "-"
-msgstr ""
+msgstr "-"
 
-#: capplets/e-conf/e-conf.c:1396 capplets/e-conf/e-conf.c:1402
-#: capplets/e-conf/e-conf.c:1408 capplets/e-conf/e-conf.c:1428
-#: capplets/e-conf/e-conf.c:1434 capplets/e-conf/e-conf.c:1440
-#: capplets/e-conf/e-conf.c:2917
+#: capplets/e-conf/e-conf.c:1759 capplets/e-conf/e-conf.c:1765
+#: capplets/e-conf/e-conf.c:1771 capplets/e-conf/e-conf.c:1852
+#: capplets/e-conf/e-conf.c:1865 capplets/e-conf/e-conf.c:1871
+#: capplets/e-conf/e-conf.c:1877 capplets/e-conf/e-conf.c:3454
 msgid "+"
-msgstr ""
+msgstr "+"
 
-#: capplets/e-conf/e-conf.c:1399
-msgid "Windows slide about when cleanup in progress"
-msgstr ""
+#: capplets/e-conf/e-conf.c:1762
+msgid "Windows slide about when window cleanup in progress"
+msgstr "윈도우 청소가 진행중일 때 윈도우 슬라이드"
 
-#: capplets/e-conf/e-conf.c:1405
-msgid "Desktops slide in when changed"
-msgstr ""
+#: capplets/e-conf/e-conf.c:1768
+msgid "Desktops slide in when changing desktops"
+msgstr "데스크탑이 바뀔 때 데스크탑 슬라이드"
 
-#: capplets/e-conf/e-conf.c:1411
+#: capplets/e-conf/e-conf.c:1774
 msgid "Animate menus"
-msgstr ""
+msgstr "메뉴 애니메이션"
 
-#: capplets/e-conf/e-conf.c:1425
-msgid "Use tooltips & timeout (sec)"
-msgstr ""
+#: capplets/e-conf/e-conf.c:1776
+msgid "Reduce refresh by using more memory (use saveunders)"
+msgstr "더 많은 기억장치를 이용해 화면 다시 그리기 줄임 (saveunder 사용)"
 
-#: capplets/e-conf/e-conf.c:1431
-msgid "Window shading speed (pixels / sec)"
-msgstr ""
+#: capplets/e-conf/e-conf.c:1779
+msgid "Enable Enlightenments background selection"
+msgstr "Enlightenments 배경 선택 사용"
 
-#: capplets/e-conf/e-conf.c:1437
-msgid "Automatic raising of windows after X seconds"
+#: capplets/e-conf/e-conf.c:1783
+msgid ""
+"This enables Enlightenments background selector. If backgrounds are selected "
+"in this section any backgrounds selected in any other selector or set by any "
+"other programs on desktop 0 will be overidden by Enlightenment"
 msgstr ""
+"Enlightenments 배경 선택기를 사용합니다. 이 부분에서 배경이 다른 부분에서 "
+"선택된 어떤 배경이든 데스크탑 0에서 선택된 다른 프로그램이든 간에 "
+"Enlightenment가 무시합니다."
 
-#: capplets/e-conf/e-conf.c:1443
-msgid "Reduce refresh by using memory (use saveunders)"
-msgstr ""
+#: capplets/e-conf/e-conf.c:1808
+msgid "Focus"
+msgstr "포커스"
 
-#: capplets/e-conf/e-conf.c:1446
-msgid "Display icons when windows are iconified"
-msgstr ""
-
-#: capplets/e-conf/e-conf.c:1449
-msgid "Transient popup windows appear together with leader"
-msgstr ""
-
-#: capplets/e-conf/e-conf.c:1452
-msgid "Switch to where popup window appears"
-msgstr ""
-
-#: capplets/e-conf/e-conf.c:1455
+#: capplets/e-conf/e-conf.c:1811
 msgid "All new windows that appear get the keyboard focus"
-msgstr ""
+msgstr "새로운 윈도우는 모두 자판 포커스를 받는다"
 
-#: capplets/e-conf/e-conf.c:1458
+#: capplets/e-conf/e-conf.c:1814
 msgid "All new popup windows get the keyboard focus"
-msgstr ""
+msgstr "새로운 팝업 윈도우는 자판 포커스를 받는다"
 
-#: capplets/e-conf/e-conf.c:1461
+#: capplets/e-conf/e-conf.c:1817
 msgid "Only new popup windows whose owner is focused get the keyboard focus"
-msgstr ""
+msgstr "소유자가 포커스된 팝업 윈도우만이 자판 포커스를 받는다"
 
-#: capplets/e-conf/e-conf.c:1477
+#: capplets/e-conf/e-conf.c:1820
+msgid "Raise windows when switching focus with the keyboard"
+msgstr "키보드로 포커스를 바꿀 때 윈도우 보이게 하기"
+
+#: capplets/e-conf/e-conf.c:1823
+msgid "Send the pointer to windows when switching focus with the keyboard"
+msgstr "키보드로 포커스를 바꿀때 마우스 포인터를 윈도우로 보내기"
+
+#: capplets/e-conf/e-conf.c:1830
+msgid "Placement"
+msgstr "윈도우 놓기"
+
+#: capplets/e-conf/e-conf.c:1833
+msgid "Place windows manually"
+msgstr "수동으로 윈도우 놓기"
+
+#: capplets/e-conf/e-conf.c:1836
+msgid "Transient popup windows appear together with leader"
+msgstr "투명 팝업 윈도우는 그 앞 윈도우와 같이 나타남"
+
+#: capplets/e-conf/e-conf.c:1839
+msgid "Switch to where popup window appears"
+msgstr "팝업 윈도우가 나타난 장소로 이동"
+
+#: capplets/e-conf/e-conf.c:1846
+msgid "Virtual Desktop"
+msgstr "가상 데스크탑"
+
+#: capplets/e-conf/e-conf.c:1849
+msgid "Flip desktop area when mouse on edge & resistance factor for flip"
+msgstr "마우스가 가장자리에 있거나 가장자리를 밀면 데스크탑 전환"
+
+#: capplets/e-conf/e-conf.c:1859
+msgid "Misc"
+msgstr "그 외"
+
+#: capplets/e-conf/e-conf.c:1862
+msgid "Tooltips ON/OFF & timeout for tooltip popup (sec)"
+msgstr "툴팁 있음/없음 및 툴팁이 나타나는 시간 (초)"
+
+#: capplets/e-conf/e-conf.c:1868
+msgid "Window shading speed (pixels / sec)"
+msgstr "윈도우 사라지는 속도 (픽셀 / 초)"
+
+#: capplets/e-conf/e-conf.c:1874
+msgid "Automatic raising of windows after X seconds"
+msgstr "몇 초 후에 자동으로 윈도우 위에 보이게 하기"
+
+#: capplets/e-conf/e-conf.c:1880
+msgid "Display icons when windows are iconified"
+msgstr "윈도우가 아이콘화되었을 때 아이콘 표시"
+
+#: capplets/e-conf/e-conf.c:1895
 msgid "Size of Virtual Screen"
-msgstr ""
+msgstr "가상 화면 크기"
 
-#: capplets/e-conf/e-conf.c:1490
+#: capplets/e-conf/e-conf.c:1908
 msgid "Separate Desktops"
-msgstr ""
+msgstr "여러개의 데스크탑"
 
-#: capplets/e-conf/e-conf.c:2409
-msgid "Edit gradient colours..."
-msgstr ""
+#: capplets/e-conf/e-conf.c:2838
+msgid "Number of colours in gradient"
+msgstr "서서히 변화할 때 색상의 수"
 
-#: capplets/e-conf/e-conf.c:2595 capplets/e-conf/e-conf.c:2677
+#: capplets/e-conf/e-conf.c:2846
+msgid "2"
+msgstr "2"
+
+#: capplets/e-conf/e-conf.c:2851
+msgid "3"
+msgstr "3"
+
+#: capplets/e-conf/e-conf.c:2856
+msgid "5"
+msgstr "5"
+
+#: capplets/e-conf/e-conf.c:3131 capplets/e-conf/e-conf.c:3213
 msgid "Image file"
-msgstr ""
+msgstr "그림 파일"
 
-#: capplets/e-conf/e-conf.c:2609 capplets/e-conf/e-conf.c:2691
-#, fuzzy
+#: capplets/e-conf/e-conf.c:3145 capplets/e-conf/e-conf.c:3227
 msgid "Browse"
-msgstr " 찾아보기... "
+msgstr "찾아보기"
 
-#: capplets/e-conf/e-conf.c:2615 capplets/e-conf/e-conf.c:2697
-#, fuzzy
+#: capplets/e-conf/e-conf.c:3151 capplets/e-conf/e-conf.c:3233
 msgid "None"
 msgstr "없음"
 
-#: capplets/e-conf/e-conf.c:2621 capplets/e-conf/e-conf.c:2703
+#: capplets/e-conf/e-conf.c:3157 capplets/e-conf/e-conf.c:3239
 msgid "Image display options"
-msgstr ""
+msgstr "그림 표시 선택사항"
 
-#: capplets/e-conf/e-conf.c:2629
+#: capplets/e-conf/e-conf.c:3165
 msgid "Repeat tiles across screen"
-msgstr ""
+msgstr "여러 화면에 걸쳐서 타일 반복"
 
-#: capplets/e-conf/e-conf.c:2637 capplets/e-conf/e-conf.c:2775
+#: capplets/e-conf/e-conf.c:3173 capplets/e-conf/e-conf.c:3311
 msgid "Retain image aspect ratio"
-msgstr ""
+msgstr "이미지 가로 세로 비율 유지"
 
-#: capplets/e-conf/e-conf.c:2645 capplets/e-conf/e-conf.c:2783
+#: capplets/e-conf/e-conf.c:3181 capplets/e-conf/e-conf.c:3319
 msgid "Maximise height to fit screen"
-msgstr ""
+msgstr "높이를 화면에 맞도록 확대"
 
-#: capplets/e-conf/e-conf.c:2653 capplets/e-conf/e-conf.c:2791
+#: capplets/e-conf/e-conf.c:3189 capplets/e-conf/e-conf.c:3327
 msgid "Maximise width to fit screen"
-msgstr ""
+msgstr "폭을 화면에 맞도록 확대"
 
 #. solid background selector pane
-#: capplets/e-conf/e-conf.c:2847
+#: capplets/e-conf/e-conf.c:3383
 msgid "Solid Colour"
-msgstr ""
+msgstr "색 채우기"
 
 #. Backgrouund Image tile selector
-#: capplets/e-conf/e-conf.c:2867
+#: capplets/e-conf/e-conf.c:3403
 msgid "Background Image"
-msgstr ""
+msgstr "배경 그림"
 
 #. Overlay Image selector
-#: capplets/e-conf/e-conf.c:2875
+#: capplets/e-conf/e-conf.c:3411
 msgid "Overlayed Logo"
-msgstr ""
+msgstr "로고 겹치기"
 
-#: capplets/e-conf/e-conf.c:2880
+#: capplets/e-conf/e-conf.c:3416
 msgid ""
 "Please select the attribute of this background\n"
 "you wish to change below"
 msgstr ""
+"아래에서 바꾸고 싶은 배경색의 속성을\n"
+"선택하세요"
 
-#: capplets/e-conf/e-conf.c:2885
-#, fuzzy
+#: capplets/e-conf/e-conf.c:3421
 msgid "Done"
-msgstr "없음"
+msgstr "끝"
 
-#: capplets/e-conf/e-conf.c:2911
+#: capplets/e-conf/e-conf.c:3448
 msgid "High quality rendering for background"
-msgstr ""
+msgstr "배경에서 높은 질의 렌더링"
 
-#: capplets/e-conf/e-conf.c:2914
+#: capplets/e-conf/e-conf.c:3451
 msgid "Minutes after which to expunge unviewed backgrounds from memory"
-msgstr ""
+msgstr "메모리에서 보이지 않는 배경을 없애 버릴때까지 시간 (분)"
 
-#: capplets/e-conf/e-conf.c:2931
+#: capplets/e-conf/e-conf.c:3468
 msgid "Select the desktop you wish to change the background of here"
-msgstr ""
+msgstr "여기서 배경을 바꾸고 싶은 데스크탑을 선택하세요"
 
-#: capplets/e-conf/e-conf.c:2941
+#: capplets/e-conf/e-conf.c:3478
 msgid "No background"
-msgstr ""
+msgstr "배경 없음"
 
-#: capplets/e-conf/e-conf.c:2948
+#: capplets/e-conf/e-conf.c:3485
 msgid ""
 "Select no background for this desktop (Enlightenment will not attempt to set "
 "any background for this desktop then)"
 msgstr ""
+"이 데스크탑에서 배경 없음 선택 (Enlightenment는 이 데스크탑에서 어떤 배경도 "
+"사용하지 않을 것입니다)"
 
-#: capplets/e-conf/e-conf.c:2953
+#: capplets/e-conf/e-conf.c:3490
 msgid "Add new..."
-msgstr ""
+msgstr "새로 추가..."
 
-#: capplets/e-conf/e-conf.c:2960
+#: capplets/e-conf/e-conf.c:3497
 msgid "Add a new background bookmark to your list"
-msgstr ""
+msgstr "리스트에 새로운 배경 책갈피 추가"
 
-#: capplets/e-conf/e-conf.c:2963
+#: capplets/e-conf/e-conf.c:3500
 msgid "Delete"
-msgstr ""
+msgstr "지우기"
 
-#: capplets/e-conf/e-conf.c:2970
+#: capplets/e-conf/e-conf.c:3507
 msgid "Remove this background bookmark from the list"
-msgstr ""
+msgstr "리스트에서 배경 책갈피 삭제"
 
-#: capplets/e-conf/e-conf.c:2973
+#: capplets/e-conf/e-conf.c:3510
 msgid "Edit..."
-msgstr ""
+msgstr "편집..."
 
-#: capplets/e-conf/e-conf.c:2980
+#: capplets/e-conf/e-conf.c:3517
 msgid "Edit the settings for this background bookmark"
-msgstr ""
+msgstr "이 배경 책갈피의 설정 편집"
 
-#: capplets/e-conf/e-conf.c:3079
+#: capplets/e-conf/e-conf.c:3617
 msgid "Enable sounds in Enlightenment"
-msgstr ""
+msgstr "Enlightenment에서 소리 사용"
 
 #: capplets/e-conf/e-conf_filesel.c:62
-#, fuzzy
 msgid "Select a file to save"
-msgstr "소리 파일 선택"
+msgstr "저장할 파일 선택"
 
 #: capplets/e-conf/e-conf_filesel.c:75 capplets/e-conf/e-conf_filesel.c:127
 #: capplets/e-conf/e-conf_filesel.c:558
-#, fuzzy
 msgid "Select a file to load"
-msgstr "소리 파일 선택"
+msgstr "읽어들일 파일 선택"
 
 #: capplets/e-conf/e-conf_filesel.c:102
-#, fuzzy
 msgid "Set Printout settings"
-msgstr "설정 테스트"
+msgstr "출력물 설정"
 
 #: capplets/e-conf/e-conf_filesel.c:585
-#, fuzzy
 msgid "Saved Image Settings"
-msgstr "화면 보호기 설정"
+msgstr "저장된 그림 설정"
 
 #: capplets/e-conf/e-conf_filesel.c:592
-#, fuzzy
 msgid "Print Command:"
-msgstr "명령어"
+msgstr "인쇄 명령어:"
 
 #: capplets/e-conf/e-conf_filesel.c:605
-#, fuzzy
 msgid "Print"
-msgstr "서서히 변화"
+msgstr "인쇄"
 
 #: capplets/e-conf/e-conf_filesel.c:611 control-center/capplet-manager.c:148
 msgid "Cancel"
@@ -382,40 +433,39 @@ msgstr "취소"
 
 #: capplets/e-conf/e-conf_filesel.c:623
 msgid "Image Format:"
-msgstr ""
+msgstr "그림 형식:"
 
 #: capplets/e-conf/e-conf_filesel.c:694
-#, fuzzy
 msgid "Quality Settings"
-msgstr " 설정"
+msgstr "화면 질 설정"
 
 #: capplets/e-conf/e-conf_filesel.c:706
-#, fuzzy
 msgid "Page Settings"
-msgstr " 설정"
+msgstr "페이지 설정"
 
 #: capplets/e-conf/e-conf_filesel.c:792 capplets/e-conf/e-conf_filesel.c:793
 msgid "Scaling Factor:"
-msgstr ""
+msgstr "축소/확대 비율:"
 
 #: capplets/e-conf/e-conf_filesel.c:822
-#, fuzzy
 msgid "Select a file"
-msgstr "소리 파일 선택"
+msgstr "파일 선택"
 
 #: capplets/e-conf/e-conf_filesel.c:833
 msgid "Load all files in directory"
-msgstr ""
+msgstr "디렉토리의 모든 파일 읽어들이기"
 
 #: capplets/e-conf/e-conf_filesel.c:847
-#, fuzzy
 msgid "Use Previews"
-msgstr "미리보기"
+msgstr "미리보기 사용"
 
 #: capplets/e-conf/e-conf_filesel.c:857
-#, fuzzy
 msgid "Image Information"
 msgstr "테마 정보"
+
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:140
+msgid "Gnome editor"
+msgstr "그놈 편집기"
 
 #: capplets/keyboard-properties/keyboard-properties.c:199
 msgid "Auto-repeat"
@@ -499,7 +549,7 @@ msgid "Use power management."
 msgstr "전원 관리 기능 사용"
 
 #: capplets/screensaver-properties/callbacks.c:393
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:59
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:53
 msgid "Settings..."
 msgstr "설정..."
 
@@ -532,82 +582,82 @@ msgstr "설정"
 msgid "Screen Saver"
 msgstr "화면 보호기"
 
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:61
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:62
 msgid ""
 "Pressing this button will popup a dialogbox that will help you setup the "
 "current screensaver."
 msgstr "이 버튼을 누르면 현재 화면보호기의 셋업을 도와주는 대화창이 나옵니다."
 
 #. set up the initial frame, and get a vbox in which to pack things.
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:87
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:88
 msgid "Screen Saver Settings"
 msgstr "화면 보호기 설정"
 
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:95
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:96
 msgid "Start After "
 msgstr "얼마 후에 시작:"
 
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:101
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:102
 msgid " Minutes."
 msgstr " 분."
 
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:116
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:117
 msgid "Priority:"
 msgstr "우선순위:"
 
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:123
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:124
 msgid "Low "
 msgstr "낮음"
 
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:125
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:126
 msgid " Normal"
 msgstr "보통"
 
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:136
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:137
 msgid "Shutdown monitor "
 msgstr "모니터 셧다운"
 
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:138
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:139
 msgid " minutes after screen saver has started."
 msgstr " 분 (화면보호기가 시작한 후로부터)"
 
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:151
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:152
 msgid "Screen Saver Demo"
 msgstr "화면 보호기 데모"
 
-#: capplets/sound-properties/sound-properties.c:153
+#: capplets/sound-properties/sound-properties.c:167
 msgid "Category"
 msgstr "범주"
 
-#: capplets/sound-properties/sound-properties.c:154
+#: capplets/sound-properties/sound-properties.c:168
 msgid "Event"
 msgstr "이벤트"
 
-#: capplets/sound-properties/sound-properties.c:155
+#: capplets/sound-properties/sound-properties.c:169
 msgid "File to Play"
 msgstr "소리낼 파일"
 
-#: capplets/sound-properties/sound-properties.c:204
+#: capplets/sound-properties/sound-properties.c:218
 msgid "GNOME sound support"
 msgstr "GNOME 소리 기능"
 
-#: capplets/sound-properties/sound-properties.c:212
+#: capplets/sound-properties/sound-properties.c:226
 msgid "Sounds for events"
 msgstr "효과음"
 
-#: capplets/sound-properties/sound-properties.c:233
+#: capplets/sound-properties/sound-properties.c:247
 msgid "General"
 msgstr "일반"
 
-#: capplets/sound-properties/sound-properties.c:277
+#: capplets/sound-properties/sound-properties.c:291
 msgid "Play"
 msgstr "소리 내기"
 
-#: capplets/sound-properties/sound-properties.c:284
+#: capplets/sound-properties/sound-properties.c:298
 msgid "Select sound file"
 msgstr "소리 파일 선택"
 
-#: capplets/sound-properties/sound-properties.c:297
+#: capplets/sound-properties/sound-properties.c:311
 msgid "Sound Events"
 msgstr "소리 이벤트"
 
@@ -628,6 +678,8 @@ msgid ""
 "Install new\n"
 "theme..."
 msgstr ""
+"새로운 테마\n"
+"선택..."
 
 #: capplets/theme-switcher/gui.c:73
 msgid "Theme Information"
@@ -754,18 +806,22 @@ msgid "Statusbar is interactive when possible"
 msgstr "가능하면 상태바가 interactive하도록"
 
 #: capplets/ui-properties/ui-properties.c:322
+msgid "Statusbar progress meter on right"
+msgstr "상태막대를 오른쪽에서부터 진행"
+
+#: capplets/ui-properties/ui-properties.c:333
 msgid "Dialog buttons have icons"
 msgstr "대화창의 버튼에 아이콘 사용"
 
-#: capplets/ui-properties/ui-properties.c:331
+#: capplets/ui-properties/ui-properties.c:342
 msgid "Menu items have icons"
 msgstr "메뉴에 아이콘 사용"
 
-#: capplets/ui-properties/ui-properties.c:347
+#: capplets/ui-properties/ui-properties.c:358
 msgid "Default MDI mode"
 msgstr "기본 MDI 모드"
 
-#: capplets/ui-properties/ui-properties.c:352
+#: capplets/ui-properties/ui-properties.c:363
 msgid "MDI notebook tab position"
 msgstr "MDI 노트북의 탭 위치"
 
@@ -872,27 +928,13 @@ msgstr "기본 동작 무시.  세션을 초기화하는 특수한 경우 사용됨"
 
 #: control-center/corba-glue.c:61
 msgid "capplet-command to be run."
-msgstr ""
+msgstr "capplet-command 실행."
 
 #: control-center/corba-glue.c:61
 msgid "CAPPLET"
-msgstr ""
+msgstr "CAPPLET"
 
-#, fuzzy
-#~ msgid "E_xit"
-#~ msgstr "끝(_Q)"
-
-#~ msgid "_About..."
-#~ msgstr "이 프로그램은(_A)..."
-
-#~ msgid "_Help"
-#~ msgstr "도움말(_H)"
-
-#~ msgid "Install"
-#~ msgstr "설치"
-
-#~ msgid "_Help with GNOME..."
-#~ msgstr "GNOME에 대한 도움말(_H)..."
-
-#~ msgid "_Main"
-#~ msgstr "주메뉴(_M)"
+#. we create the widgets
+#: control-center/main.c:71
+msgid "Discard all changes"
+msgstr "변경 사항 모두 버리기"
