@@ -189,6 +189,7 @@ main (int argc, char **argv)
 		gtk_main ();
 		gconf_change_set_unref (changeset);
 	}
-
+	
+	g_object_unref (dialog);
 	return 0;
 }

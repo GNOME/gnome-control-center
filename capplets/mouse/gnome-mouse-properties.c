@@ -385,6 +385,7 @@ read_cursor_font (void)
 				target[length] = '\0';
 				retval = g_strdup (target);
 				g_free (link_name);
+				closedir (dir);
 				return retval;
 			}
 			
@@ -612,7 +613,8 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 			    COLUMN_FONT_PATH, font_path,
 			    -1);
 	g_free (font_path);
-
+	g_free (cursor_font);
+	
 	gtk_tree_view_append_column (GTK_TREE_VIEW (tree_view), column);
 	
 	gconf_peditor_new_boolean

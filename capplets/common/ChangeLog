@@ -1,3 +1,10 @@
+2003-04-29  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* gconf-property-editor.c: (gconf_peditor_new): Plug a leak
+	* gnome-theme-info.c: (top_theme_dir_changed),
+	(top_icon_theme_dir_changed), (real_add_top_theme_dir_monitor):
+	Plug leaks and fix invalid reads reported by valgrind.
+
 2003-03-27  Andrew Sobala  <aes@gnome.org>
 
 	* gnome-theme-info.c: (gnome_theme_read_meta_theme),
