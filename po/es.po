@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.3.10\n"
-"POT-Creation-Date: 2001-07-20 01:06+0200\n"
+"POT-Creation-Date: 2001-07-19 20:28-0500\n"
 "PO-Revision-Date: 2001-07-14 22:00+0200\n"
 "Last-Translator: Carlos Perelló Marín <carlos@gnome-db.org>\n"
 "Language-Team: Spanish\n"
@@ -171,12 +171,12 @@ msgstr "Opciones para añadir o renombrar localizaciones"
 msgid "Options for adding and removing backends"
 msgstr "Opciones para añadir y eliminar backends"
 
-#: capplets/background/applier.c:352
+#: capplets/background/applier.c:386
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr "No pude cargar la imágen «%s»; desactivando imágen de fondo."
 
-#: capplets/background/applier.c:495
+#: capplets/background/applier.c:536
 msgid "Disabled"
 msgstr "Desactivado"
 
@@ -189,99 +189,75 @@ msgid "Configuration of the desktop's background"
 msgstr "Configuración del tapiz del escritorio"
 
 #: capplets/background/background-properties.glade.h:1
-#: capplets/background/prefs-widget.c:366
-msgid "(None)"
-msgstr "(Ninguno)"
+#, fuzzy
+msgid "Background colors"
+msgstr "Propiedades del tapiz"
 
 #: capplets/background/background-properties.glade.h:2
-msgid "Adjust wallpaper's transparency"
-msgstr "Ajusta la transparencia de la imágen de fondo"
+#, fuzzy
+msgid "Background picture"
+msgstr "Propiedades del tapiz"
 
 #: capplets/background/background-properties.glade.h:3
-msgid "Browse..."
-msgstr "Buscar..."
-
-#: capplets/background/background-properties.glade.h:4
 msgid "Centered"
 msgstr "Centrado"
 
-#: capplets/background/background-properties.glade.h:5
-msgid "Colors"
-msgstr "Colores"
-
-#: capplets/background/background-properties.glade.h:6
-msgid "Display Style"
-msgstr "Mostrar estilo"
-
-#: capplets/background/background-properties.glade.h:7
-msgid "Effect"
-msgstr "Efecto"
-
-#: capplets/background/background-properties.glade.h:8
-msgid "File"
-msgstr "Archivo"
-
-#: capplets/background/background-properties.glade.h:9
-msgid "Horizontal Gradient"
+#: capplets/background/background-properties.glade.h:4
+#, fuzzy
+msgid "Horizontal gradient"
 msgstr "Degradado horizontal"
 
-#: capplets/background/background-properties.glade.h:10
-msgid "More Opaque"
-msgstr "Más opaco"
+#: capplets/background/background-properties.glade.h:5
+msgid "Image:"
+msgstr ""
 
-#: capplets/background/background-properties.glade.h:11
-msgid "More Transparent"
-msgstr "Más transparente"
+#: capplets/background/background-properties.glade.h:6
+msgid "Opacity (percent):"
+msgstr ""
 
-#: capplets/background/background-properties.glade.h:12
+#: capplets/background/background-properties.glade.h:7
 msgid "Pick a color"
 msgstr "Elija un color"
 
-#: capplets/background/background-properties.glade.h:13
-msgid "Primary color"
-msgstr "Color primario"
-
-#: capplets/background/background-properties.glade.h:14
-msgid "Right or bottom color"
-msgstr "Color derecho o inferior"
-
-#: capplets/background/background-properties.glade.h:15
+#: capplets/background/background-properties.glade.h:8
 msgid "Scaled (keep aspect ratio)"
 msgstr "A escala (mantiene las proporciones)"
 
-#: capplets/background/background-properties.glade.h:16
-msgid "Solid Color"
+#: capplets/background/background-properties.glade.h:9
+#, fuzzy
+msgid "Solid color"
 msgstr "Color sólido"
 
-#: capplets/background/background-properties.glade.h:17
-msgid "Stretched (change aspect ratio)"
-msgstr "Estirado (cambia las proporciones)"
+#: capplets/background/background-properties.glade.h:10
+msgid "Stretched"
+msgstr ""
 
-#: capplets/background/background-properties.glade.h:18
+#: capplets/background/background-properties.glade.h:11
+msgid "Style:"
+msgstr ""
+
+#: capplets/background/background-properties.glade.h:12
 msgid "Tiled"
 msgstr "Mosaico"
 
-#: capplets/background/background-properties.glade.h:19
-msgid "Use GNOME for setting background"
-msgstr "Emplear GNOME para configurar el fondo"
-
-#: capplets/background/background-properties.glade.h:20
-msgid "Vertical Gradient"
+#: capplets/background/background-properties.glade.h:13
+#, fuzzy
+msgid "Vertical gradient"
 msgstr "Degradado vertical"
 
-#: capplets/background/background-properties.glade.h:21
-msgid "Wallpaper"
-msgstr "Fondo"
+#: capplets/background/prefs-widget.c:362
+msgid "(None)"
+msgstr "(Ninguno)"
 
-#: capplets/background/prefs-widget.c:620
+#: capplets/background/prefs-widget.c:611
 msgid "Wallpaper Selection"
 msgstr "Selección del fondo"
 
-#: capplets/background/prefs-widget.c:627
+#: capplets/background/prefs-widget.c:618
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "No puedo encontrar un hbox, se usará una selección de archivos normal"
 
-#: capplets/background/prefs-widget.c:633
+#: capplets/background/prefs-widget.c:624
 #: capplets/screensaver/screensaver-properties.glade.h:11
 msgid "Preview"
 msgstr "Previsualizar"
@@ -493,10 +469,11 @@ msgid ""
 "Draws quasiperiodic tilings; think of the implications on modern formica "
 "technology. Written by Time Korlove. In April 1997, Sir Roger Penrose, a "
 "British math professor who has worked with Stephen Hawking on such topics as "
-"relatvity, black holes, and whether time has a beginning, files a copyright-"
-"infringement lawsuit against Kimberly-Clark Corporation, wchih Penrose said "
-"copied a pattern he created ( apattern demonstrating that \"a nonrepeating "
-"pattern could exist in nature\") for its Kleenex quilted toilet paper. "
+"relatvity, black holes, and whether time has a beginning, files a "
+"copyright-infringement lawsuit against Kimberly-Clark Corporation, wchih "
+"Penrose said copied a pattern he created ( apattern demonstrating that \"a "
+"nonrepeating pattern could exist in nature\") for its Kleenex quilted toilet "
+"paper. "
 msgstr ""
 
 #: capplets/screensaver/screensaver-properties.glade.h:7
@@ -1201,15 +1178,15 @@ msgstr "Activar el lanzamiento del servidor de sonido"
 msgid "Sounds for events"
 msgstr "Sonidos para los eventos"
 
-#: control-center/capplet-dir-view.c:300 control-center/gnomecc.desktop.in.h:1
+#: control-center/capplet-dir-view.c:296 control-center/gnomecc.desktop.in.h:1
 msgid "GNOME Control Center"
 msgstr "Centro de Control de GNOME"
 
-#: control-center/capplet-dir-view.c:301
+#: control-center/capplet-dir-view.c:297
 msgid "Desktop properties manager."
 msgstr "Gestor de las propiedades del escritorio."
 
-#: control-center/capplet-dir-view.c:470
+#: control-center/capplet-dir-view.c:453
 msgid ""
 "No help is available/installed. Please make sure you\n"
 "have the GNOME User's Guide installed on your system."
@@ -1217,7 +1194,7 @@ msgstr ""
 "No hay ayuda disponible/instalada. Asegúrese que tiene\n"
 "instalada en sus sistema la Guía del Usuario de GNOME."
 
-#: control-center/capplet-dir-view.c:473
+#: control-center/capplet-dir-view.c:456
 msgid "Close"
 msgstr "Cerrar"
 
@@ -1251,28 +1228,16 @@ msgid "Display control panels as a tree"
 msgstr "Mostrar los paneles de control como un árbol"
 
 #: control-center/gnomecc.glade.h:7
-msgid "HTML"
-msgstr "HTML"
-
-#: control-center/gnomecc.glade.h:8
-msgid "Icon List"
-msgstr "Lista de iconos"
-
-#: control-center/gnomecc.glade.h:9
 msgid "Launch control panels in separate windows"
 msgstr "Lanzar los paneles de control en ventanas separadas"
 
-#: control-center/gnomecc.glade.h:10
+#: control-center/gnomecc.glade.h:8
 msgid "New-control-center"
 msgstr "Nuevo-centro-de-control"
 
-#: control-center/gnomecc.glade.h:11
+#: control-center/gnomecc.glade.h:9
 msgid "Put control panels in the control center's window"
 msgstr "Poner los paneles de control en la ventana del centro de control"
-
-#: control-center/gnomecc.glade.h:12
-msgid "Tree"
-msgstr "Árbol"
 
 #: capplets/desktop-links/gnome-hint-properties.desktop.in.h:1
 msgid "Options for the startup hint dialog"
@@ -1369,6 +1334,54 @@ msgstr "Configura los escritorios"
 #: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:2
 msgid "Workspaces"
 msgstr "Escritorios"
+
+#~ msgid "Adjust wallpaper's transparency"
+#~ msgstr "Ajusta la transparencia de la imágen de fondo"
+
+#~ msgid "Browse..."
+#~ msgstr "Buscar..."
+
+#~ msgid "Colors"
+#~ msgstr "Colores"
+
+#~ msgid "Display Style"
+#~ msgstr "Mostrar estilo"
+
+#~ msgid "Effect"
+#~ msgstr "Efecto"
+
+#~ msgid "File"
+#~ msgstr "Archivo"
+
+#~ msgid "More Opaque"
+#~ msgstr "Más opaco"
+
+#~ msgid "More Transparent"
+#~ msgstr "Más transparente"
+
+#~ msgid "Primary color"
+#~ msgstr "Color primario"
+
+#~ msgid "Right or bottom color"
+#~ msgstr "Color derecho o inferior"
+
+#~ msgid "Stretched (change aspect ratio)"
+#~ msgstr "Estirado (cambia las proporciones)"
+
+#~ msgid "Use GNOME for setting background"
+#~ msgstr "Emplear GNOME para configurar el fondo"
+
+#~ msgid "Wallpaper"
+#~ msgstr "Fondo"
+
+#~ msgid "HTML"
+#~ msgstr "HTML"
+
+#~ msgid "Icon List"
+#~ msgstr "Lista de iconos"
+
+#~ msgid "Tree"
+#~ msgstr "Árbol"
 
 #~ msgid "Control Center"
 #~ msgstr "Centro de control"
