@@ -2,12 +2,10 @@ SUBDIRS = screensavers
 
 cappletname = screensaver
 cappletgroup =
-bin_PROGRAMS = screensaver-properties-capplet
+bin_PROGRAMS = gnome-screensaver-properties
 
-schema_DATA = screensaver.schemas
-
-screensaver_properties_capplet_LDADD = @OLD_CAPPLET_LIBS@ -lXt
-screensaver_properties_capplet_SOURCES = \
+gnome_screensaver_properties_LDADD = @OLD_CAPPLET_LIBS@ -lXt
+gnome_screensaver_properties_SOURCES = \
 	main.c \
 	prefs-widget.c				prefs-widget.h\
 	preferences.c				preferences.h\
@@ -24,33 +22,15 @@ screensaver_properties_capplet_SOURCES = \
 
 pixmaps_DATA = no-hack.png blank-screen.png checked.xpm unchecked.xpm
 
-##
-## You should not need to modify anything below this line
-##
 @INTLTOOL_DESKTOP_RULE@
-
-schemadir = $(sysconfdir)/gconf/schemas
-
-####@###GNOMECC_CAPPLETS_DESKTOP_IN_RULE@
-$(desktop).in: %.desktop.in: %.desktop.in.in
-	sed -e "s#@DESKTOP_EXEC_LINE@#$(DESKTOP_EXEC_LINE)#" -e "s#Icon=.*#Icon=$(GNOMECC_ICONS_DIR)/${cappletname}-capplet.png#" < $< > ${cappletname}.desktop.in
-
-install-data-local:
-	$(mkinstalldirs) $(DESTDIR)$(datadir)/control-center/capplets/$(cappletgroup)
-	$(INSTALL_DATA) $(desktop) $(DESTDIR)$(datadir)/control-center/capplets/$(cappletgroup)$(desktop)
-	GCONF_CONFIG_SOURCE=$(GCONF_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $(srcdir)/$(schema_DATA)
-
-install-data-am: install-data-local
-####@###GNOMECC_CAPPLETS_DESKTOP_IN_RULE@
 
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS) @OLD_CAPPLET_CFLAGS@
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
-EXTRA_DIST = $(GNOMECC_CAPPLETS_EXTRA_DIST) $(pixmaps_DATA) $(schema_DATA)
+EXTRA_DIST = $(GNOMECC_CAPPLETS_EXTRA_DIST) $(pixmaps_DATA)
 iconsdir   = $(GNOMECC_ICONS_DIR)
 Gladedir   = $(GNOMECC_GLADE_DIR)
 pixmapsdir = $(GNOMECC_PIXMAPS_DIR)
 Glade_DATA = $(cappletname)-properties.glade
 icons_DATA = $(cappletname)-capplet.png
 desktop    = $(cappletname).desktop
-all-local: $(desktop)
 

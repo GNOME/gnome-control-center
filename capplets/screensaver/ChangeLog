@@ -1,5 +1,10 @@
 2001-12-20  Bradford Hovinen  <hovinen@ximian.com>
 
+	* Makefile.am: Remove obsolete stuff
+
+	* screensavers/Makefile.am (install-data-local): Make sure
+	share/control-center/screensavers directory is created
+
 	* main.c: Don't #include capplet-widget.h or the archiver stuff
 	(main): Call gtk_main rather than capplet_gtk_main
 	Remove archiver stuff

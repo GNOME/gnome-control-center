@@ -154,4 +154,5 @@ EXTRA_DIST = $(Screensavers) README $(pixmaps_DATA)
 ADFILE = $(XSCREENSAVER_PREFIX)/lib/X11/app-defaults/XScreenSaver
 
 install-data-local:
-	@PERL@ magic.pl --adfile $(ADFILE) --merge $(GNOMECC_SCREENSAVERS_DIR)
+	$(mkinstalldirs) $(DESTDIR)$(GNOMECC_SCREENSAVERS_DIR)
+	@PERL@ magic.pl --adfile $(ADFILE) --merge $(DESTDIR)$(GNOMECC_SCREENSAVERS_DIR)
