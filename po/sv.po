@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2004-02-15 18:40+0100\n"
-"PO-Revision-Date: 2004-02-15 18:40+0100\n"
+"POT-Creation-Date: 2004-02-17 00:14+0100\n"
+"PO-Revision-Date: 2004-02-17 00:14+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -106,14 +106,18 @@ msgid "There was an error launching the mouse preferences dialog: %s"
 msgstr "Ett fel inträffade vid visning av musinställningsdialogen: %s"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:337
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:395
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:396
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "Kan inte importera AccessX-inställningar från filen \"%s\""
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:468
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:445
 msgid "Import Feature Settings File"
 msgstr "Importera funktionsinställningsfil"
+
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:449
+msgid "_Import"
+msgstr "_Importera"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:18
@@ -337,49 +341,49 @@ msgid "seconds"
 msgstr "sekunder"
 
 #. solid
-#: capplets/background/background-properties-capplet.c:228
+#: capplets/background/background-properties-capplet.c:227
 msgid "Co_lor:"
 msgstr "Fä_rg:"
 
 #. horiz
-#: capplets/background/background-properties-capplet.c:232
+#: capplets/background/background-properties-capplet.c:231
 msgid "_Left color:"
 msgstr "_Vänster färg:"
 
-#: capplets/background/background-properties-capplet.c:233
+#: capplets/background/background-properties-capplet.c:232
 msgid "_Right color:"
 msgstr "_Höger färg:"
 
 #. vert
-#: capplets/background/background-properties-capplet.c:236
+#: capplets/background/background-properties-capplet.c:235
 msgid "Top co_lor:"
 msgstr "_Övre färg:"
 
-#: capplets/background/background-properties-capplet.c:237
+#: capplets/background/background-properties-capplet.c:236
 msgid "_Bottom color:"
 msgstr "_Nedre färg:"
 
-#: capplets/background/background-properties-capplet.c:398
+#: capplets/background/background-properties-capplet.c:397
 msgid "_Tile"
 msgstr "_Sida-vid-sida"
 
-#: capplets/background/background-properties-capplet.c:398
+#: capplets/background/background-properties-capplet.c:397
 msgid "C_enter"
 msgstr "_Centrera"
 
-#: capplets/background/background-properties-capplet.c:398
+#: capplets/background/background-properties-capplet.c:397
 msgid "Sc_ale"
 msgstr "Sk_ala"
 
-#: capplets/background/background-properties-capplet.c:398
+#: capplets/background/background-properties-capplet.c:397
 msgid "_Stretch"
 msgstr "_Sträck ut"
 
-#: capplets/background/background-properties-capplet.c:398
+#: capplets/background/background-properties-capplet.c:397
 msgid "_No Picture"
 msgstr "I_ngen bild"
 
-#: capplets/background/background-properties-capplet.c:559
+#: capplets/background/background-properties-capplet.c:558
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:723
 #: capplets/keyboard/gnome-keyboard-properties.c:224
@@ -388,7 +392,7 @@ msgstr "I_ngen bild"
 msgid "Retrieve and store legacy settings"
 msgstr "Hämta och lagra föråldrade inställningar"
 
-#: capplets/background/background-properties-capplet.c:585
+#: capplets/background/background-properties-capplet.c:584
 #: capplets/background/background-properties.glade.h:2
 msgid "Background Preferences"
 msgstr "Bakgrundsinställningar"
@@ -477,6 +481,7 @@ msgstr "_Stil:"
 
 #: capplets/background/gnome-wp-capplet.c:72
 #: capplets/common/capplet-util.c:340
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:326
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "Ett fel inträffade vid visning av hjälp: %s"
@@ -610,77 +615,77 @@ msgstr "Ansluter..."
 msgid "Downloading..."
 msgstr "Hämtar..."
 
-#: capplets/common/gconf-property-editor.c:172
+#: capplets/common/gconf-property-editor.c:170
 msgid "Key"
 msgstr "Nyckel"
 
-#: capplets/common/gconf-property-editor.c:173
+#: capplets/common/gconf-property-editor.c:171
 msgid "GConf key to which this property editor is attached"
 msgstr "GConf-nyckel till vilken denna egenskapsredigerare är ansluten"
 
-#: capplets/common/gconf-property-editor.c:179
+#: capplets/common/gconf-property-editor.c:177
 msgid "Callback"
 msgstr "Återanrop"
 
-#: capplets/common/gconf-property-editor.c:180
+#: capplets/common/gconf-property-editor.c:178
 msgid "Issue this callback when the value associated with key gets changed"
 msgstr ""
 "Gör detta återanrop då värdet som är associerat med denna nyckel ändras"
 
-#: capplets/common/gconf-property-editor.c:185
+#: capplets/common/gconf-property-editor.c:183
 msgid "Change set"
 msgstr "Ändra grupp"
 
-#: capplets/common/gconf-property-editor.c:186
+#: capplets/common/gconf-property-editor.c:184
 msgid ""
 "GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr ""
 "GConf-ändringssamling som innehåller data att vidarebefordras till gconf-"
 "klienten vid verkställande"
 
-#: capplets/common/gconf-property-editor.c:191
+#: capplets/common/gconf-property-editor.c:189
 msgid "Conversion to widget callback"
 msgstr "Konvertering till widgetåteranrop"
 
-#: capplets/common/gconf-property-editor.c:192
+#: capplets/common/gconf-property-editor.c:190
 msgid ""
 "Callback to be issued when data are to be converted from GConf to the widget"
 msgstr "Återanrop att utföras då data konverteras från GConf till widgeten"
 
-#: capplets/common/gconf-property-editor.c:197
+#: capplets/common/gconf-property-editor.c:195
 msgid "Conversion from widget callback"
 msgstr "Konvertering från widgetåteranrop"
 
-#: capplets/common/gconf-property-editor.c:198
+#: capplets/common/gconf-property-editor.c:196
 msgid ""
 "Callback to be issued when data are to be converted to GConf from the widget"
 msgstr "Återanrop att utföras då data konverteras till GConf från widgeten"
 
-#: capplets/common/gconf-property-editor.c:203
+#: capplets/common/gconf-property-editor.c:201
 msgid "UI Control"
 msgstr "Användargränssnittsstyrning"
 
-#: capplets/common/gconf-property-editor.c:204
+#: capplets/common/gconf-property-editor.c:202
 msgid "Object that controls the property (normally a widget)"
 msgstr "Objekt som styr egenskapen (normalt en widget)"
 
-#: capplets/common/gconf-property-editor.c:219
+#: capplets/common/gconf-property-editor.c:217
 msgid "Property editor object data"
 msgstr "Objektdata för egenskapsredigerare"
 
-#: capplets/common/gconf-property-editor.c:220
+#: capplets/common/gconf-property-editor.c:218
 msgid "Custom data required by the specific property editor"
 msgstr "Anpassad data som krävs av den specifika egenskapsredigeraren"
 
-#: capplets/common/gconf-property-editor.c:226
+#: capplets/common/gconf-property-editor.c:224
 msgid "Property editor data freeing callback"
 msgstr "Återanrop som frigör egenskapsredigerardata"
 
-#: capplets/common/gconf-property-editor.c:227
+#: capplets/common/gconf-property-editor.c:225
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr "Återanrop att utföras då objektdata från egenskapsdata frigörs"
 
-#: capplets/common/gconf-property-editor.c:1541
+#: capplets/common/gconf-property-editor.c:1538
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -693,7 +698,7 @@ msgstr ""
 "Försäkra dig om att den finns och försök igen, eller välj en annan "
 "bakgrundsbild."
 
-#: capplets/common/gconf-property-editor.c:1549
+#: capplets/common/gconf-property-editor.c:1546
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -706,9 +711,13 @@ msgstr ""
 "\n"
 "Välj en annan bild istället."
 
-#: capplets/common/gconf-property-editor.c:1640
+#: capplets/common/gconf-property-editor.c:1667
 msgid "Please select an image."
 msgstr "Välj en bild."
+
+#: capplets/common/gconf-property-editor.c:1672
+msgid "_Select"
+msgstr "_Välj"
 
 #: capplets/default-applications/default-applications.desktop.in.h:1
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:18
@@ -2665,15 +2674,11 @@ msgstr "Använd skal även om nautilus kör."
 msgid "Could not initialize Bonobo"
 msgstr "Kunde inte initiera Bonobo"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:325
-msgid "There was an error displaying help:"
-msgstr "Ett fel inträffade vid visning av hjälp:"
-
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:410
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
 msgid "Slow Keys Alert"
 msgstr "Varning för långsamma tangenter"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
 msgid ""
 "You just held down the Shift key for 8 seconds.  This is the shortcut for "
 "the Slow Keys feature, which affects the way your keyboard works."
@@ -2681,20 +2686,19 @@ msgstr ""
 "Du höll precis ned skifttangenten under 8 sekunder. Detta är genvägen för "
 "funktionen långsamma tangenter, som påverkar hur ditt tangentbord fungerar."
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
 msgid "Do you want to activate Slow Keys?"
 msgstr "Vill du aktivera långsamma tangenter?"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
-msgid "Do you want to deactivate Sticky Keys?"
-msgstr "Vill du inaktivera klistriga tangenter?"
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:414
+msgid "Do you want to deactivate Slow Keys?"
+msgstr "Vill du inaktivera långsamma tangenter?"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:424
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:425
 msgid "Sticky Keys Alert"
 msgstr "Varning för klistriga tangenter"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:425
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
 msgid ""
 "You just pressed the Shift key 5 times in a row.  This is the shortcut for "
 "the Sticky Keys feature, which affects the way your keyboard works."
@@ -2702,7 +2706,7 @@ msgstr ""
 "Du tryckte precis ned skifttangenten 5 gånger i följd. Detta är genvägen för "
 "funktionen klistriga tangenter, som påverkar hur ditt tangentbord fungerar."
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
 msgid ""
 "You just pressed two keys at once, or pressed the Shift key 5 times in a "
 "row.  This turns off the Sticky Keys feature, which affects the way your "
@@ -2712,9 +2716,13 @@ msgstr ""
 "skifttangenten 5 gånger i följd. Detta stänger av funktionen långsamma "
 "tangenter, som påverkar hur ditt tangentbord fungerar."
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
 msgid "Do you want to activate Sticky Keys?"
 msgstr "Vill du aktivera klistriga tangenter?"
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:429
+msgid "Do you want to deactivate Sticky Keys?"
+msgstr "Vill du inaktivera klistriga tangenter?"
 
 #: gnome-settings-daemon/gnome-settings-font.c:102
 #, c-format
@@ -2876,14 +2884,6 @@ msgstr "Skärm"
 #: libbackground/applier.c:280
 msgid "Screen on which BGApplier is to draw"
 msgstr "Skärm som BGApplier ska rita på"
-
-#: libbackground/preview-file-selection.c:207
-msgid "Can't find an hbox, using a normal file selection"
-msgstr "Kan inte hitta en hbox, använder normal filmarkering"
-
-#: libbackground/preview-file-selection.c:212
-msgid "Preview"
-msgstr "Förhandsgranska"
 
 #: libsounds/sound-view.c:121 libsounds/sound-view.c:146
 msgid "The sound file for this event does not exist."
@@ -3113,12 +3113,12 @@ msgid "Break reminder"
 msgstr "Pauspåminnare"
 
 # Osäker
-#: typing-break/main.c:94
+#: typing-break/main.c:93
 msgid "The typing monitor is already running."
 msgstr "Skrivandeövervakaren är redan igång."
 
 # Osäker
-#: typing-break/main.c:107
+#: typing-break/main.c:106
 msgid ""
 "The typing monitor uses the notification area to display information. You "
 "don't seem to have a notification area on your panel. You can add it by "
@@ -3549,6 +3549,15 @@ msgstr "Volym upp"
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
 msgid "Volume up's shortcut."
 msgstr "Genvägen för volym upp."
+
+#~ msgid "There was an error displaying help:"
+#~ msgstr "Ett fel inträffade vid visning av hjälp:"
+
+#~ msgid "Can't find an hbox, using a normal file selection"
+#~ msgstr "Kan inte hitta en hbox, använder normal filmarkering"
+
+#~ msgid "Preview"
+#~ msgstr "Förhandsgranska"
 
 #~ msgid "FireFox"
 #~ msgstr "FireFox"
@@ -4230,9 +4239,6 @@ msgstr "Genvägen för volym upp."
 
 #~ msgid "_Category"
 #~ msgstr "_Kategori"
-
-#~ msgid "_Delete"
-#~ msgstr "_Ta bort"
 
 #~ msgid "_Name"
 #~ msgstr "_Namn"
