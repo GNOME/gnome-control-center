@@ -153,7 +153,7 @@ dnl ==============================================
 
 
 dnl Here is the new sed line that adds the full path to the Exec line :
-dnl 	sed -e \"s#Icon=.\*#Icon=$(GNOMECC_ICONS_DIR)/${cappletname}-capplet.png#\" -e \"s#Exec=.\*#Exec=gnomecc --run-capplet ${bindir}/${bin_PROGRAMS}#\" < $< \> ${cappletname}.desktop.in\
+dnl	sed -e \"s#Icon=.\*#Icon=$(GNOMECC_ICONS_DIR)/${cappletname}-capplet.png#\" -e \"s#Exec=.\*#Exec=gnomecc --run-capplet ${bin_PROGRAMS}#\" < $< \> ${cappletname}.desktop.in\
 dnl
 dnl Chema
 
@@ -163,7 +163,7 @@ dnl ==============================================
 AC_DEFUN(AC_PROG_GNOMECC_CAPPLETS,
 [
 GNOMECC_CAPPLETS_DESKTOP_IN_RULE='$(desktop).in: \%.desktop.in: \%.desktop.in.in\
-	sed s#Icon=.\*#Icon=$(GNOMECC_ICONS_DIR)/${cappletname}-capplet.png# < $< \> ${cappletname}.desktop.in\
+	sed -e \"s#Icon=.\*#Icon=$(GNOMECC_ICONS_DIR)/${cappletname}-capplet.png#\" < $< \> ${cappletname}.desktop.in\
 \
 install-data-local:\
 	$(mkinstalldirs) $(datadir)/control-center/capplets/$(cappletgroup)\
