@@ -16,9 +16,9 @@ int main (int argc, char *argv [])
 {
   GnomeClient *session;
   Bonobo_RegistrationResult ret;
-  gchar *restart_argv[] = { "gnome2-settings-daemon", *argv, 0 };
+  gchar *restart_argv[] = { "gnome-settings-daemon", *argv, 0 };
 
-  gnome_program_init ("gnome2-settings-daemon", VERSION, LIBGNOMEUI_MODULE,
+  gnome_program_init ("gnome-settings-daemon", VERSION, LIBGNOMEUI_MODULE,
 		      argc, argv, NULL);
   
   if (!bonobo_init (&argc, argv)) {
