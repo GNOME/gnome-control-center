@@ -81,9 +81,10 @@ static void gnome_wp_load_legacy (GnomeWPCapplet * capplet) {
 	item->filename = g_strdup (foo);
 
 	item->fileinfo = gnome_wp_info_new (item->filename, capplet->thumbs);
+
 	if (item->fileinfo == NULL) {
-		g_free (item);
-		continue;
+	  gnome_wp_item_free (item);
+	  continue;
 	}
 
 	item->shade_type = gconf_client_get_string (capplet->client,
