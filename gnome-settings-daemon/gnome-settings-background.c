@@ -1,3 +1,4 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /* -*- mode: c; style: linux -*- */
 
 /* gnome-settings-background.c
@@ -43,21 +44,32 @@ static BGApplier *bg_applier;
 #endif
 static BGPreferences *prefs;
 
-static void
-background_callback (GConfEntry *entry) 
+static guint applier_idle_id = 0;
+
+static gboolean
+applier_idle (gpointer data)
 {
 #ifdef HAVE_GTK_MULTIHEAD
 	int i;
-#endif
-
-	bg_preferences_merge_entry (prefs, entry);
-
-#ifdef HAVE_GTK_MULTIHEAD
 	for (i = 0; bg_appliers [i]; i++)
 		bg_applier_apply_prefs (bg_appliers [i], prefs);
 #else
 	bg_applier_apply_prefs (bg_applier, prefs);
 #endif
+	applier_idle_id = 0;
+	return FALSE;
+}
+
+static void
+background_callback (GConfEntry *entry) 
+{
+	bg_preferences_merge_entry (prefs, entry);
+
+	if (applier_idle_id != 0) {
+		g_source_remove (applier_idle_id);
+	}
+
+	applier_idle_id = g_timeout_add (100, applier_idle, NULL);
 }
 
 void

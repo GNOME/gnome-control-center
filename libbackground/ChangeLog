@@ -1,3 +1,16 @@
+2004-03-12  Chris Lahey  <clahey@rigger.boston.ximian.com>
+
+	* applier.c (refresh_render): Move the image reload into a separate function.
+	(size_changed_cb): Handle screen resolution changes.
+
+2004-03-11  Chris Lahey  <clahey@rigger.boston.ximian.com>
+
+	* applier.c (bg_applier_apply_prefs): If the image is going to be
+	scaled or stretched, load it at the size it's going to be
+	displayed.
+	(need_wallpaper_load_p): If the wallpaper type changed, unless it
+	changed between TILED and CENTERED, we need to reload the image.
+
 2004-04-01  Jody Goldberg <jody@gnome.org>
 
 	* Release 2.6.0.3

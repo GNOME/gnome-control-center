@@ -1,3 +1,4 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /* -*- mode: c; style: linux -*- */
 
 /* applier.c
@@ -109,6 +110,7 @@ struct _BGApplierPrivate
 						* render the background */
 	GdkScreen          *screen;            /* Screen on which to render
 						* the background */
+	guint               size_changed_cb_id; /* Signal connection id. */
 };
 
 static GObjectClass *parent_class;
@@ -136,6 +138,8 @@ static void draw_disabled_message    (GtkWidget         *widget,
 				      const guint width,
 				      const guint height);
 
+static void size_changed_cb          (GdkScreen           *screen,
+				      BGApplier           *bg_applier);
 static void render_background        (BGApplier           *bg_applier,
 				      const BGPreferences *prefs);
 static void render_wallpaper         (BGApplier           *bg_applier,
@@ -219,21 +223,19 @@ bg_applier_get_type (void)
 static void
 bg_applier_init (BGApplier *bg_applier, BGApplierClass *class)
 {
-	bg_applier->p                   = g_new0 (BGApplierPrivate, 1);
-	bg_applier->p->last_prefs       = NULL;
-	bg_applier->p->pixbuf           = NULL;
-	bg_applier->p->wallpaper_pixbuf = NULL;
-	bg_applier->p->timeout          = 0;
-	bg_applier->p->render_geom.width = -1;
+	bg_applier->p                     = g_new0 (BGApplierPrivate, 1);
+	bg_applier->p->last_prefs         = NULL;
+	bg_applier->p->pixbuf             = NULL;
+	bg_applier->p->wallpaper_pixbuf   = NULL;
+	bg_applier->p->timeout            = 0;
+	bg_applier->p->render_geom.width  = -1;
 	bg_applier->p->render_geom.height = -1;
+	bg_applier->p->type               = BG_APPLIER_PREVIEW;
 
-#ifdef HAVE_GTK_MULTIHEAD
-	bg_applier->p->screen      = gdk_screen_get_default ();
-	bg_applier->p->root_window = gdk_screen_get_root_window (bg_applier->p->screen);
-#else
-	bg_applier->p->screen      = NULL;
-	bg_applier->p->root_window = gdk_get_default_root_window ();
-#endif
+	bg_applier->p->screen            = gdk_screen_get_default ();
+	bg_applier->p->root_window       = gdk_screen_get_root_window (bg_applier->p->screen);
+
+	bg_applier->p->size_changed_cb_id = 0;
 }
 
 static void
@@ -309,18 +311,21 @@ bg_applier_set_prop (GObject *object, guint prop_id, const GValue *value, GParam
 		case BG_APPLIER_ROOT:
 			bg_applier->p->render_geom.x = 0;
 			bg_applier->p->render_geom.y = 0;
-#ifdef HAVE_GTK_MULTIHEAD
 			bg_applier->p->render_geom.width = gdk_screen_get_width (bg_applier->p->screen);
 			bg_applier->p->render_geom.height = gdk_screen_get_height (bg_applier->p->screen);
-#else
-			bg_applier->p->render_geom.width = gdk_screen_width ();
-			bg_applier->p->render_geom.height = gdk_screen_height ();
-#endif
 			bg_applier->p->pixmap = NULL;
 			bg_applier->p->pixmap_is_set = FALSE;
+
+			if (bg_applier->p->size_changed_cb_id == 0)
+				bg_applier->p->size_changed_cb_id = g_signal_connect (bg_applier->p->screen, "size_changed",
+										      G_CALLBACK (size_changed_cb), bg_applier);
 			break;
 
 		case BG_APPLIER_PREVIEW:
+			if (bg_applier->p->size_changed_cb_id)
+				g_signal_handler_disconnect (bg_applier->p->screen,
+							     bg_applier->p->size_changed_cb_id);
+			bg_applier->p->size_changed_cb_id = 0;
 			bg_applier->p->render_geom.x = MONITOR_CONTENTS_X;
 			bg_applier->p->render_geom.y = MONITOR_CONTENTS_Y;
 			
@@ -352,10 +357,15 @@ bg_applier_set_prop (GObject *object, guint prop_id, const GValue *value, GParam
 #ifdef HAVE_GTK_MULTIHEAD
 	case PROP_SCREEN:
 		if (bg_applier->p->type == BG_APPLIER_ROOT) {
+			if (bg_applier->p->size_changed_cb_id)
+				g_signal_handler_disconnect (bg_applier->p->screen,
+							     bg_applier->p->size_changed_cb_id);
 			bg_applier->p->screen            = g_value_get_object (value);
 			bg_applier->p->root_window       = gdk_screen_get_root_window (bg_applier->p->screen);
 			bg_applier->p->render_geom.width = gdk_screen_get_width (bg_applier->p->screen);
 			bg_applier->p->render_geom.height = gdk_screen_get_height (bg_applier->p->screen);
+			bg_applier->p->size_changed_cb_id = g_signal_connect (bg_applier->p->screen, "size_changed",
+									      G_CALLBACK (size_changed_cb), bg_applier);
 		}
 		break;
 #endif
@@ -407,9 +417,16 @@ bg_applier_dispose (GObject *object)
 
 	if (bg_applier->p->last_prefs != NULL)
 		g_object_unref (G_OBJECT (bg_applier->p->last_prefs));
+	bg_applier->p->last_prefs = NULL;
 
 	if (bg_applier->p->wallpaper_pixbuf != NULL)
 		g_object_unref (G_OBJECT (bg_applier->p->wallpaper_pixbuf));
+	bg_applier->p->wallpaper_pixbuf = NULL;
+
+	if (bg_applier->p->size_changed_cb_id)
+		g_signal_handler_disconnect (bg_applier->p->screen,
+					     bg_applier->p->size_changed_cb_id);
+	bg_applier->p->size_changed_cb_id = 0;
 
 	parent_class->dispose (object);
 }
@@ -477,6 +494,203 @@ bg_applier_new_for_screen (BGApplierType  type,
 	return object;
 }
 
+static void
+size_prepared_cb (GdkPixbufLoader *loader, 
+		  int              width,
+		  int              height,
+		  gpointer         data)
+{
+	struct {
+		int width;
+		int height;
+	  gboolean keep_aspect_ratio;
+	} *info = data;
+
+	if (info->keep_aspect_ratio) {
+	  if (width < 0)
+	    width = 512;
+	  if (height < 0)
+	    height = 512;
+
+	  if ((double)height * (double)info->width >
+	      (double)width * (double)info->height) {
+	    width = 0.5 + (double)width * (double)info->height / (double)height;
+	    height = info->height;
+	  } else {
+	    height = 0.5 + (double)height * (double)info->width / (double)width;
+	    width = info->width;
+	  }
+	} else {
+	  width = info->width;
+	  height = info->height;
+	}
+
+	gdk_pixbuf_loader_set_size (loader, width, height);
+}
+
+/**
+ * egg_pixbuf_new_from_file_at_size:
+ * @filename: Name of file to load.
+ * @width: The width the image should have
+ * @height: The height the image should have
+ * @error: Return location for an error
+ *
+ * Creates a new pixbuf by loading an image from a file.  The file format is
+ * detected automatically. If %NULL is returned, then @error will be set.
+ * Possible errors are in the #GDK_PIXBUF_ERROR and #G_FILE_ERROR domains.
+ * The image will be scaled to fit in the requested size, preserving its aspect ratio.
+ *
+ * Return value: A newly-created pixbuf with a reference count of 1, or %NULL if
+ * any of several error conditions occurred:  the file could not be opened,
+ * there was no loader for the file's format, there was not enough memory to
+ * allocate the image buffer, or the image file contained invalid data.
+ *
+ * Since: 2.4
+ **/
+static GdkPixbuf *
+egg_pixbuf_new_from_file_at_size (const char *filename,
+				  int         width, 
+				  int         height,
+				  gboolean    keep_aspect_ratio,
+				  GError    **error)
+{
+	GdkPixbufLoader *loader;
+	GdkPixbuf       *pixbuf;
+
+	guchar buffer [4096];
+	int length;
+	FILE *f;
+	struct {
+		gint width;
+		gint height;
+	  gboolean keep_aspect_ratio;
+	} info;
+
+	g_return_val_if_fail (filename != NULL, NULL);
+        g_return_val_if_fail (width > 0 && height > 0, NULL);
+
+	f = fopen (filename, "rb");
+	if (!f) {
+                g_set_error (error,
+                             G_FILE_ERROR,
+                             g_file_error_from_errno (errno),
+                             _("Failed to open file '%s': %s"),
+                             filename, g_strerror (errno));
+		return NULL;
+        }
+
+	loader = gdk_pixbuf_loader_new ();
+
+	info.width = width;
+	info.height = height;
+	info.keep_aspect_ratio = keep_aspect_ratio;
+		
+	g_signal_connect (loader, "size-prepared", G_CALLBACK (size_prepared_cb), &info);
+
+	while (!feof (f)) {
+		length = fread (buffer, 1, sizeof (buffer), f);
+		if (length > 0)
+			if (!gdk_pixbuf_loader_write (loader, buffer, length, error)) {
+				gdk_pixbuf_loader_close (loader, NULL);
+				fclose (f);
+				g_object_unref (loader);
+				return NULL;
+			}
+	}
+
+	fclose (f);
+
+	if (!gdk_pixbuf_loader_close (loader, error)) {
+		g_object_unref (loader);
+		return NULL;
+	}
+
+	pixbuf = gdk_pixbuf_loader_get_pixbuf (loader);
+
+	if (!pixbuf) {
+		g_object_unref (loader);
+		g_set_error (error,
+                             GDK_PIXBUF_ERROR,
+                             GDK_PIXBUF_ERROR_FAILED,
+                             _("Failed to load image '%s': reason not known, probably a corrupt image file"),
+                             filename);
+		return NULL;
+	}
+
+	g_object_ref (pixbuf);
+
+	g_object_unref (loader);
+
+	return pixbuf;
+}
+
+static void
+refresh_render (BGApplier *bg_applier,
+		BGPreferences *prefs,
+		gboolean need_wallpaper_load)
+{
+	if (bg_applier->p->type == BG_APPLIER_ROOT && is_nautilus_running ()) {
+		return;
+	}
+
+	if (!prefs->enabled) {
+		if (bg_applier->p->type == BG_APPLIER_PREVIEW)
+			draw_disabled_message (bg_applier_get_preview_widget (bg_applier), bg_applier->p->render_geom.width, bg_applier->p->render_geom.height);
+		return;
+	}
+
+	if (need_wallpaper_load) {
+		if (bg_applier->p->wallpaper_pixbuf != NULL)
+			g_object_unref (G_OBJECT (bg_applier->p->wallpaper_pixbuf));
+
+		bg_applier->p->wallpaper_pixbuf = NULL;
+
+		if (prefs->wallpaper_enabled) {
+			g_return_if_fail (prefs->wallpaper_filename != NULL);
+
+			if (prefs->wallpaper_type == WPTYPE_STRETCHED ||
+			    prefs->wallpaper_type == WPTYPE_SCALED) {
+				bg_applier->p->wallpaper_pixbuf = 
+					egg_pixbuf_new_from_file_at_size (prefs->wallpaper_filename,
+									  bg_applier->p->render_geom.width,
+									  bg_applier->p->render_geom.height,
+									  prefs->wallpaper_type == WPTYPE_SCALED,
+									  NULL);
+			} else {
+				bg_applier->p->wallpaper_pixbuf = 
+					gdk_pixbuf_new_from_file (prefs->wallpaper_filename, NULL);
+			}
+
+			if (bg_applier->p->wallpaper_pixbuf == NULL) {
+				prefs->wallpaper_enabled = FALSE;
+			}
+			else if (bg_applier->p->type == BG_APPLIER_ROOT) {
+				if (bg_applier->p->timeout)
+					g_source_remove (bg_applier->p->timeout);
+				bg_applier->p->timeout = g_timeout_add (30000, (GSourceFunc) cleanup_cb, bg_applier);
+			}
+		}
+	}
+
+	run_render_pipeline (bg_applier, prefs);
+
+	if (bg_applier->p->type == BG_APPLIER_PREVIEW && bg_applier->p->preview_widget != NULL)
+		gtk_widget_queue_draw (bg_applier->p->preview_widget);
+}
+
+static void
+size_changed_cb (GdkScreen *screen,
+		 BGApplier *bg_applier)
+{
+	bg_applier->p->render_geom.width = gdk_screen_get_width (bg_applier->p->screen);
+	bg_applier->p->render_geom.height = gdk_screen_get_height (bg_applier->p->screen);
+	if (bg_applier->p->last_prefs) {
+		refresh_render (bg_applier,
+				bg_applier->p->last_prefs,
+				TRUE);
+	}
+}
+
 void
 bg_applier_apply_prefs (BGApplier           *bg_applier, 
 			const BGPreferences *prefs)
@@ -494,48 +708,12 @@ bg_applier_apply_prefs (BGApplier           *bg_applier,
 		new_prefs->wallpaper_type = WPTYPE_CENTERED;
 	}
 
-	if (bg_applier->p->type == BG_APPLIER_ROOT && is_nautilus_running ()) {
-		return;
-	}
-
-	if (!new_prefs->enabled) {
-		if (bg_applier->p->type == BG_APPLIER_PREVIEW)
-			draw_disabled_message (bg_applier_get_preview_widget (bg_applier), bg_applier->p->render_geom.width, bg_applier->p->render_geom.height);
-		return;
-	}
-
-	if (need_wallpaper_load_p (bg_applier, new_prefs)) {
-		if (bg_applier->p->wallpaper_pixbuf != NULL)
-			g_object_unref (G_OBJECT (bg_applier->p->wallpaper_pixbuf));
-
-		bg_applier->p->wallpaper_pixbuf = NULL;
-
-		if (new_prefs->wallpaper_enabled) {
-			g_return_if_fail (new_prefs->wallpaper_filename != NULL);
-
-			bg_applier->p->wallpaper_pixbuf = 
-				gdk_pixbuf_new_from_file (new_prefs->wallpaper_filename, NULL);
-
-			if (bg_applier->p->wallpaper_pixbuf == NULL) {
-				new_prefs->wallpaper_enabled = FALSE;
-			}
-			else if (bg_applier->p->type == BG_APPLIER_ROOT) {
-				if (bg_applier->p->timeout)
-						g_source_remove (bg_applier->p->timeout);
-				bg_applier->p->timeout = g_timeout_add (30000, (GSourceFunc) cleanup_cb, bg_applier);
-			}
-		}
-	}
-
-	run_render_pipeline (bg_applier, new_prefs);
+	refresh_render (bg_applier, new_prefs, need_wallpaper_load_p (bg_applier, new_prefs));
 
 	if (bg_applier->p->last_prefs != NULL)
 		g_object_unref (G_OBJECT (bg_applier->p->last_prefs));
 
 	bg_applier->p->last_prefs = new_prefs;
-
-	if (bg_applier->p->type == BG_APPLIER_PREVIEW && bg_applier->p->preview_widget != NULL)
-		gtk_widget_queue_draw (bg_applier->p->preview_widget);
 }
 
 gboolean
@@ -1326,6 +1504,14 @@ need_wallpaper_load_p (const BGApplier *bg_applier, const BGPreferences *prefs)
 	else if (!bg_applier->p->last_prefs->wallpaper_enabled && !prefs->wallpaper_enabled)
 		return FALSE;
 	else if (strcmp (bg_applier->p->last_prefs->wallpaper_filename, prefs->wallpaper_filename))
+		return TRUE;
+	else if (bg_applier->p->last_prefs->wallpaper_type == prefs->wallpaper_type)
+		return FALSE;
+	else if (bg_applier->p->last_prefs->wallpaper_type != WPTYPE_TILED &&
+		 bg_applier->p->last_prefs->wallpaper_type != WPTYPE_CENTERED)
+		return TRUE;
+	else if (prefs->wallpaper_type != WPTYPE_TILED &&
+		 prefs->wallpaper_type != WPTYPE_CENTERED)
 		return TRUE;
 	else
 		return FALSE;
