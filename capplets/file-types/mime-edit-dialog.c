@@ -714,7 +714,7 @@ mime_edit_dialog_get_app (GladeXML *glade, char const *mime_type,
 
 			res->name = base_cmd;
 			if (res->name != NULL && *res->name) {
-				/* Can we use the app name as the id ?
+				/* Can we use the app name as the id?
 				 * We know that there are no apps with the same
 				 * command, so if the id is taken we are screwed
 				 */
@@ -854,7 +854,7 @@ validate_data (MimeEditDialog *dialog)
 				GTK_WINDOW (dialog->p->dialog_win),
 				GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_ERROR,
 				GTK_BUTTONS_OK_CANCEL,
-				_("A MIME type with that name already exists, overwrite ?"));
+				_("A MIME type with that name already exists, overwrite?"));
 		}
 	} else {
 		err_dialog = gtk_message_dialog_new (
