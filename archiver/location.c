@@ -873,6 +873,8 @@ location_add_backend (Location *location, gchar *backend_id,
 			       backend_note_new (backend_id, type));
 	location->p->contains_list_dirty = TRUE;
 
+	save_metadata (location);
+
 	return 0;
 }
 
@@ -909,6 +911,8 @@ location_remove_backend (Location *location, gchar *backend_id)
 			return;
 		}
 	}
+
+	save_metadata (location);
 }
 
 /**
