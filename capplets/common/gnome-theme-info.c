@@ -1226,7 +1226,7 @@ real_add_top_theme_dir_monitor (GnomeVFSURI  *uri,
       GnomeVFSURI *theme_dir_uri;
       gpointer monitor_data;
 
-      if (file_info->type != GNOME_VFS_FILE_TYPE_DIRECTORY) {
+      if (!(file_info->type == GNOME_VFS_FILE_TYPE_DIRECTORY || file_info->type == GNOME_VFS_FILE_TYPE_SYMBOLIC_LINK)) {
 	gnome_vfs_file_info_clear (file_info);
 	continue;
       }
