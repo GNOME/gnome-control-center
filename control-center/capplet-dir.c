@@ -481,8 +481,6 @@ capplet_control_launch (const gchar *capplet_name, gchar *window_title)
 	oaf_iid = g_strconcat ("OAFIID:Bonobo_Control_Capplet_", tmp, NULL);
 	g_free (tmp);
 
-	g_message ("IID we are using is %s", oaf_iid);
-
 	property_control = bonobo_get_object (oaf_iid, "IDL:Bonobo/PropertyControl:1.0", &ev);
 	g_free (oaf_iid);
 
