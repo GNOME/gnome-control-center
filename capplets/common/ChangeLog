@@ -1,5 +1,12 @@
 2001-07-24  Richard Hestilow  <hestilow@ximian.com>
 
+	* capplet-util.c (get_control_cb): Set control data on PropertyFrame
+	as part of evil hack.
+	(quit_cb): Work if called multiple times...also evil.
+	(pf_destroy_cb): unref the control...evil evil evil.
+
+2001-07-24  Richard Hestilow  <hestilow@ximian.com>
+
 	* capplet-util.c: Remove debugging cruft.
 	(capplet_init): Check for legacy with --init-session-settings too.
 

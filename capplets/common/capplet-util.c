@@ -106,10 +106,14 @@ get_moniker_cb (BonoboPropertyBag *bag, BonoboArg *arg, guint arg_id,
  * configuration database is properly unrefed
  */
 
+/* evil, evil, evil.. */
 static void
 pf_destroy_cb (BonoboPropertyFrame *pf, Bonobo_ConfigDatabase db) 
 {
+	BonoboPropertyControl *pc = gtk_object_get_data (GTK_OBJECT (pf), "property-control");
+		
 	bonobo_object_release_unref (db, NULL);
+	bonobo_object_unref (BONOBO_OBJECT (pc));
 }
 
 /* set_moniker_cb
@@ -184,6 +188,9 @@ get_control_cb (BonoboPropertyControl *property_control, gint page_number)
 		pf = bonobo_property_frame_new (NULL, NULL);
 		gtk_object_set_data (GTK_OBJECT (property_control),
 				     "property-frame", pf);
+		/* Evil, evil.. */
+		gtk_object_set_data (GTK_OBJECT (pf),
+				     "property-control", property_control);
 		gtk_container_add (GTK_CONTAINER (pf), widget);
 		gtk_widget_show_all (pf);
 
@@ -236,7 +243,13 @@ static void
 quit_cb (BonoboPropertyControl *pc, Bonobo_ConfigDatabase db)
 {
 	pair_t *pair;
-
+	static gboolean called = FALSE;
+	
+	if (called)
+		return;
+	else
+		called = TRUE;
+	
 	pair = g_new (pair_t, 1);
 	pair->a = (gpointer) db;
 	pair->b = gtk_object_get_data (GTK_OBJECT (pc), "listener-id");
@@ -502,7 +515,6 @@ capplet_init (int                      argc,
 	}
 
 	g_free (default_moniker);
-
 	if (legacy_files && get_legacy_fn && !get_legacy)
 	{
 		for (i = 0; legacy_files[i] != NULL; i++)
@@ -514,7 +526,6 @@ capplet_init (int                      argc,
 			}
 		}
 	}
-	
 	if ((apply_only || init_session) && apply_fn != NULL) {
 		if (needs_legacy)
 		{
@@ -530,7 +541,6 @@ capplet_init (int                      argc,
 		Bonobo_ConfigDatabase_sync (db, &ev);
 	} else {
 		setup_session_mgmt (argv[0]);
-
 		if (needs_legacy)
 		{
 			get_legacy_fn (db);
