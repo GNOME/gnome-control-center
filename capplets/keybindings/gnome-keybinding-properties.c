@@ -35,10 +35,10 @@ typedef struct
 
 const KeyListEntry desktop_key_list[] =
 {
-  { "/apps/panel/global/run_key", ALWAYS_VISIBLE, 0 },
-  { "/apps/panel/global/menu_key", ALWAYS_VISIBLE, 0 },
-  { "/apps/panel/global/screenshot_key", ALWAYS_VISIBLE, 0 },
-  { "/apps/panel/global/window_screenshot_key", ALWAYS_VISIBLE, 0 },
+  { "/apps/metacity/global_keybindings/panel_run_dialog", ALWAYS_VISIBLE, 0 },
+  { "/apps/metacity/global_keybindings/panel_main_menu", ALWAYS_VISIBLE, 0 },
+  { "/apps/metacity/global_keybindings/run_command_screenshot", ALWAYS_VISIBLE, 0 },
+  { "/apps/metacity/global_keybindings/run_command_window_screenshot", ALWAYS_VISIBLE, 0 },
   { NULL }
 };
 
