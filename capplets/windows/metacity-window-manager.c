@@ -24,7 +24,15 @@ metacity_set_theme (const char *theme_name)
 static GList *  
 metacity_get_theme_list (void)
 {
-  return NULL;
+  GList *themes = NULL;
+
+  themes = g_list_prepend (themes, g_strdup ("Crux"));
+  themes = g_list_prepend (themes, g_strdup ("Atlanta"));
+  themes = g_list_prepend (themes, g_strdup ("Butt Ugly XRP"));
+  themes = g_list_prepend (themes, g_strdup ("ForMyGirlFriend"));
+  themes = g_list_prepend (themes, g_strdup ("Themes.orgRocks"));
+
+  return themes;
 }
 
 static void     

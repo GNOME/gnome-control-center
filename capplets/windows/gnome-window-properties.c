@@ -1,53 +1,68 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-/* Copyright (C) 1998-1999 Redhat Software Inc.
- * Code available under the Gnu GPL.
- * Authors: Jonathan Blandford <jrb@redhat.com>
- *          Owen Taylor <otaylor@redhat.com>
+
+/* background-properties-capplet.c
+ * Copyright (C) 2002 Seth Nickell
+ *
+ * Written by: Seth Nickell <snickell@stanford.edu>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2, or (at your option)
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
+ * 02111-1307, USA.
  */
 
 #ifdef HAVE_CONFIG_H
 #   include <config.h>
 #endif
 
-#include <gconf/gconf-client.h>
-#include <glade/glade.h>
 #include <ctype.h>
 
-#include <gmodule.h>
+#include <gconf/gconf-client.h>
+#include <glade/glade.h>
+#include <gnome-wm-manager.h>
 
 #include "capplet-util.h"
 #include "gconf-property-editor.h"
 
-#include <gnome-wm-manager.h>
 
 #define THEME_KEY                "/desktop/gnome/applications/window_manager/theme"
 #define TITLEBAR_FONT_KEY        "/desktop/gnome/applications/window_manager/titlebar_font"
 #define FOCUS_FOLLOWS_MOUSE_KEY  "/desktop/gnome/applications/window_manager/focus_follows_mouse"
 
-GnomeClient *client = NULL;
-
-/* structures */
-
-typedef struct {
-        GtkWidget *dialog;
-        GtkWidget *name_entry;
-        GtkWidget *exec_entry;
-        GtkWidget *config_entry;
-        GtkWidget *sm_toggle;
-} WMDialog;
-
-/* vars. */
 static GtkWidget *wm_widget;
 static GtkWidget *apply_now_button;
 static GtkWidget *properties_box;
-
 static GtkWidget *wm_menu;
 static GtkWidget *option_menu;
-static GList *wm_menu_window_managers;
+static GList     *wm_menu_window_managers;
 
-GnomeWindowManager *selected_wm;
+static GtkWidget *appearance_option_menu;
+static GList     *theme_list;
 
-gboolean in_fill;
+static GnomeWindowManager *selected_wm;
+
+static gboolean in_fill;
+
+static GConfClient *gconf_client;
+
+static void setup_appearance_option_menu (GtkWidget *appearance_option_menu, GnomeWindowManager *wm);
+
+static void
+set_wm_change_pending (gboolean pending)
+{
+        gtk_widget_set_sensitive (apply_now_button, pending);
+        gtk_widget_set_sensitive (properties_box,  !pending);
+}
 
 static void
 wm_selection_changed (GtkOptionMenu *option_menu, gpointer data)
@@ -59,9 +74,9 @@ wm_selection_changed (GtkOptionMenu *option_menu, gpointer data)
         wm = (GnomeWindowManager *) g_list_nth (wm_menu_window_managers, index)->data;
 
         if (!in_fill) {
-                if (wm != selected_wm) {
+                if (!gnome_wm_manager_same_wm (wm, selected_wm)) {
                         selected_wm = wm;
-			wm_set_change_pending (TRUE);
+			set_wm_change_pending (TRUE);
                 }
         }
 }
@@ -103,15 +118,9 @@ wm_widget_add_wm (GnomeWindowManager *wm)
         gtk_menu_shell_prepend (GTK_MENU_SHELL (wm_menu), menu_item);
         wm_menu_window_managers = g_list_prepend (wm_menu_window_managers, wm);
 
-        if (wm == selected_wm)
+        /* If this is supposed to be the selected window manager, do so */
+        if (gnome_wm_manager_same_wm (wm, selected_wm))
                 gtk_option_menu_set_history (GTK_OPTION_MENU (option_menu), 0);
-}
-
-static void
-set_wm_change_pending (gboolean pending)
-{
-        gtk_widget_set_sensitive (apply_now_button, pending);
-        gtk_widget_set_sensitive (properties_box, !pending);
 }
 
 static void
@@ -153,6 +162,8 @@ static void
 apply_wm (GObject *object, gpointer data)
 {
         gnome_wm_manager_set_current (selected_wm);
+        setup_appearance_option_menu (appearance_option_menu, selected_wm);
+        set_wm_change_pending (FALSE);
 }
 
 static GladeXML *
@@ -177,9 +188,50 @@ create_dialog (void)
 }
 
 static void
+setup_appearance_option_menu (GtkWidget *appearance_option_menu, GnomeWindowManager *wm)
+{
+        GtkWidget *menu, *menu_item;
+        GList *themes, *node;
+        char *theme_name;
+
+        menu = gtk_menu_new ();
+        gtk_widget_show_all (menu);
+        gtk_option_menu_set_menu (GTK_OPTION_MENU (appearance_option_menu), menu);        
+
+        themes = gnome_window_manager_get_theme_list (wm);
+
+        for (node = themes; node != NULL; node = node->next) {
+                theme_name = (char *)node->data;
+
+                menu_item = gtk_menu_item_new_with_label (theme_name);
+                gtk_widget_show_all (menu_item);
+
+                gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
+        }
+
+        theme_list = themes;
+}
+
+static void
+appearance_changed (GtkOptionMenu *option_menu, gpointer data)
+{
+        int index;
+        const char *theme_name;
+
+        index = gtk_option_menu_get_history (option_menu);
+        theme_name = (const char *) g_list_nth (theme_list, index)->data;
+
+        printf ("Setting theme to %s\n", theme_name);
+        
+        gconf_client_set_string (gconf_client, THEME_KEY, theme_name, NULL);
+}
+
+static void
 setup_dialog (GladeXML *dialog)
 {  
         GObject *peditor;
+
+        update_gui ();
 
         peditor = gconf_peditor_new_font (NULL, TITLEBAR_FONT_KEY,
                                           WID ("titlebar_font"),
@@ -188,6 +240,12 @@ setup_dialog (GladeXML *dialog)
         peditor = gconf_peditor_new_boolean (NULL, FOCUS_FOLLOWS_MOUSE_KEY,
                                              WID ("focus_follows_mouse"),
                                              NULL);
+
+        appearance_option_menu = WID ("window_border_appearance");
+        setup_appearance_option_menu (appearance_option_menu, selected_wm);
+        g_signal_connect (G_OBJECT (appearance_option_menu), "changed",
+                          (GCallback)appearance_changed, NULL);
+        gtk_widget_show_all (appearance_option_menu);
 }
 
 
@@ -207,9 +265,8 @@ main (int argc, char **argv)
 			    GNOME_PARAM_POPT_TABLE, 
 			    NULL);
 
-        dialog = create_dialog ();
-        setup_dialog (dialog);
-        
+        gconf_client = gconf_client_get_default ();
+
         dialog_win = gtk_dialog_new_with_buttons 
                 (_("Window Preferences"), NULL, -1,
                  GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
@@ -217,7 +274,10 @@ main (int argc, char **argv)
         g_signal_connect (G_OBJECT (dialog_win), "response", (GCallback)response_cb, NULL);
         
         gnome_wm_manager_init (dialog_win);
-        update_gui ();
+        selected_wm = gnome_wm_manager_get_current ();
+
+        dialog = create_dialog ();
+        setup_dialog (dialog);
         
         gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog_win)->vbox), WID ("prefs_widget"), TRUE, TRUE, GNOME_PAD_SMALL);
         gtk_widget_show_all (dialog_win);
