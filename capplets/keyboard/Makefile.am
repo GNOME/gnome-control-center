@@ -26,11 +26,14 @@ keyboard_properties_LDADD = @CAPPLET_LIBS@ $(XF86MISC_LIBS)
 #
 desktop = $(cappletname)-properties.desktop
 
+iconsdir = $(GNOMECC_ICONS_DIR)
+icons_DATA = keyboard-capplet.png
+
 $(desktop).in: %.desktop.in: %.desktop.in.in
-	sed s#Icon=.\*#Icon=$(GNOME_CONTROL_CENTER_ICONS_DIR)/$(cappletname)-capplet.png# < $< > $(cappletname)-properties.desktop.in
+	sed s#Icon=.\*#Icon=$(GNOMECC_ICONS_DIR)/$(cappletname)-capplet.png# < $< > $(cappletname)-properties.desktop.in
 
 install-data-local:
-	$(mkinstalldirs) /home/chema/foo
+	$(mkinstalldirs) $(datadir)/control-center/capplets/
 	$(INSTALL_DATA) $(srcdir)/$(desktop) $(datadir)/control-center/capplets/$(desktop)
 
 install-data-am: install-data-local
