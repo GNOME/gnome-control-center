@@ -32,6 +32,34 @@
 #include <activate-settings-daemon.h>
 #include "accessibility-keyboard.h"
 
+#ifdef HAVE_X11_EXTENSIONS_XKB_H
+#  include <X11/XKBlib.h>
+#  include <X11/extensions/XKBstr.h>
+#  include <gdk/gdk.h>
+#  include <gdk/gdkx.h>
+
+static void
+xkb_enabled (void)
+{
+	gboolean have_xkb = FALSE;
+	int opcode, errorBase, major, minor, xkbEventBase;
+
+	gdk_error_trap_push ();
+	have_xkb = XkbQueryExtension (GDK_DISPLAY (),
+				      &opcode, &xkbEventBase, &errorBase, &major, &minor)
+		&& XkbUseExtension (GDK_DISPLAY (), &major, &minor);
+	XSync (GDK_DISPLAY (), FALSE);
+	gdk_error_trap_pop ();
+
+	if (!have_xkb) {
+		GtkWidget *warn = gtk_message_dialog_new (NULL, 0,
+		      GTK_MESSAGE_WARNING, GTK_BUTTONS_CLOSE,
+		      _("This system does not seem to have the XKB extension.  The keyboard accessibility features will not operate with it."));
+		gtk_dialog_run (GTK_DIALOG (warn));
+	}
+}
+#endif
+
 static void
 dialog_response (GtkWidget *widget,
 		 gint       response_id,
@@ -67,7 +95,11 @@ main (int argc, char **argv)
 			    GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
 			    NULL);
 	activate_settings_daemon ();
-	
+
+#ifdef HAVE_X11_EXTENSIONS_XKB_H
+	xkb_enabled ();
+#endif
+
 	changeset = NULL;
 	dialog = setup_accessX_dialog (changeset);
 	g_signal_connect (G_OBJECT (dialog),
