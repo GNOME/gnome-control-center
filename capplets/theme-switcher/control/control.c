@@ -12,26 +12,30 @@ create_form (void)
 {
   GtkWidget *widget, *table, *hbox;
   GtkWidget *scrolled_window, *menubar, *menu;
+  GtkListStore *store;
+  GtkTreeIter iter;
   GSList *group;
-  gchar *titles[2] = {N_("One"),N_("Two")};
-  /* just 8 short names that will serve as samples for titles in demo */	
-  gchar *row1[2] = {N_("Eenie"), N_("Meenie")};
-  gchar *row2[2] = {N_("Mynie"), N_("Moe")};
-  gchar *row3[2] = {N_("Catcha"), N_("Tiger")};
-  gchar *row4[2] = {N_("By Its"), N_("Toe")};
+  /* just 8 short names that will serve as samples for titles in demo */
+  char *column1[4] = { N_("Eenie"),  N_("Mynie"), N_("Catcha"), N_("By Its") };
+  char *column2[4] = { N_("Meenie"), N_("Moe"),   N_("Tiger"),  N_("Toe") };
   gchar **rc_files;
   gint rc_file_count;
-  gchar *home_dir;
+  const gchar *home_dir;
   gint i;
 
-  for (i=0;i<2;i++) {
-	titles[i]=_(titles[i]);
-	row1[i]=_(row1[i]);
-	row2[i]=_(row2[i]);
-	row3[i]=_(row3[i]);
-	row4[i]=_(row4[i]);
-  }
+  store = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_STRING);
 
+  for (i = 0; i < 4; i++) {
+	  gtk_list_store_append (store, &iter);
+
+	  gtk_list_store_set (store,
+			      &iter, 
+			      0, _(column1[i]),
+			      1, _(column2[i]),
+			      -1);
+
+  }
+  
   /* Strip out ~/.gtkrc from the set of initial default files.
    * to suppress reading of the previous rc file.
    */
@@ -107,20 +111,30 @@ create_form (void)
 
   /* column three */
   scrolled_window = gtk_scrolled_window_new (NULL, NULL);
+  gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolled_window),
+				       GTK_SHADOW_ETCHED_IN);
   gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW (scrolled_window), 
-				 GTK_POLICY_AUTOMATIC, GTK_POLICY_ALWAYS);
+				 GTK_POLICY_NEVER, GTK_POLICY_ALWAYS);
 
   gtk_table_attach (GTK_TABLE (table), scrolled_window, 2, 3, 2, 5, GTK_EXPAND | GTK_FILL, 0, GNOME_PAD_SMALL, 0);
 
-  widget = gtk_clist_new_with_titles (2, titles);
-  gtk_clist_set_column_width (GTK_CLIST(widget), 0, 45);
-  gtk_clist_set_column_width (GTK_CLIST(widget), 1, 45);
-  gtk_clist_append (GTK_CLIST(widget), row1);
-  gtk_clist_append (GTK_CLIST(widget), row2);
-  gtk_clist_append (GTK_CLIST(widget), row3);
-  gtk_clist_append (GTK_CLIST(widget), row4);
-  gtk_widget_set_usize (widget, 160, -1);
+  widget = gtk_tree_view_new_with_model (GTK_TREE_MODEL (store));
+  gtk_widget_set_size_request (widget, 150, 75);
+  g_object_unref (store);
 
+  gtk_tree_view_insert_column_with_attributes (GTK_TREE_VIEW (widget),
+					       -1,
+					       _("One"),
+					       gtk_cell_renderer_text_new (),
+					       "text", 0,
+					       NULL);
+  gtk_tree_view_insert_column_with_attributes (GTK_TREE_VIEW (widget),
+					       -1,
+					       _("Two"),
+					       gtk_cell_renderer_text_new (),
+					       "text", 1,
+					       NULL);
+  
   gtk_container_add (GTK_CONTAINER (scrolled_window), widget);
 
   return table;
@@ -135,8 +149,12 @@ get_prop_cb (BonoboPropertyBag *bag, BonoboArg *arg, guint arg_id,
 
 static void
 set_prop_cb (BonoboPropertyBag *bag, const BonoboArg *arg, guint arg_id,
-	     CORBA_Environment *ev, GtkWidget *form)
+	     CORBA_Environment *ev, gpointer data)
 {
+	GtkWidget *form;
+
+	form = GTK_WIDGET (data);
+	
 	if (current_theme)
 		g_free (current_theme);
 	current_theme = g_strdup (BONOBO_ARG_GET_STRING (arg));
