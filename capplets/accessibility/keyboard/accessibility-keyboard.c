@@ -138,12 +138,17 @@ setup_toggles (GladeXML *dialog, GConfChangeSet *changeset)
 {
 	GObject *peditor;
 	GtkWidget *checkbox;
+	GtkWidget *checkbox_label;
 	int i = G_N_ELEMENTS (features);
 
 	while (i-- > 0) {
 		checkbox = WID (features [i].checkbox);
 
 		g_return_if_fail (checkbox != NULL);
+
+		/* you can't do this from glade */
+		checkbox_label = gtk_bin_get_child (GTK_BIN (checkbox));
+		g_object_set (G_OBJECT (checkbox_label), "use_markup", TRUE, NULL);
 
 		g_object_set_data (G_OBJECT (checkbox), "dialog", dialog);
 		g_signal_connect (G_OBJECT (checkbox),
