@@ -56,15 +56,23 @@ static const gchar uppercase_text[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 static const gchar punctuation_text[] = "0123456789.:,;(*!?')";
 
 static inline XftFont *
-get_font(Display *xdisplay, FT_Face face, gint size)
+get_font(Display *xdisplay, FT_Face face, gint size, FcCharSet *charset)
 {
     FcPattern *pattern;
     XftFont *font;
+    int screen = DefaultScreen (xdisplay);
 
     pattern = FcPatternBuild(NULL,
 			     FC_FT_FACE, FcTypeFTFace, face,
 			     FC_PIXEL_SIZE, FcTypeDouble, (double)size,
 			     NULL);
+
+    if (charset)
+	FcPatternAddCharSet (pattern, "charset", charset);
+
+    FcConfigSubstitute (NULL, pattern, FcMatchPattern);
+    XftDefaultSubstitute (xdisplay, screen, pattern);
+
     font = XftFontOpenPattern(xdisplay, pattern);
     FcPatternDestroy(pattern);
 
@@ -83,6 +91,21 @@ draw_string(Display *xdisplay, XftDraw *draw, XftFont *font, XftColor *colour,
     *pos_y += extents.height + 4;
 }
 
+static gboolean
+check_font_contain_text (FT_Face face, gchar *text)
+{
+    while (text && *text)
+	{
+	    gunichar wc = g_utf8_get_char (text);
+	    if (!FT_Get_Char_Index (face, wc))
+		return FALSE;
+
+	    text = g_utf8_next_char (text);
+	}
+
+    return TRUE;
+}
+
 static GdkPixmap *
 create_text_pixmap(GtkWidget *drawing_area, FT_Face face)
 {
@@ -98,8 +121,14 @@ create_text_pixmap(GtkWidget *drawing_area, FT_Face face)
     XGlyphInfo extents;
     XftFont *font;
     gint *sizes = NULL, n_sizes, alpha_size;
+    FcCharSet *charset = NULL;
 
     text = _("The quick brown fox jumps over the lazy dog. 0123456789");
+    if (! check_font_contain_text (face, text))
+	{
+	    text = "The quick brown fox jumps over the lazy dog. 0123456789";
+	}
+
     textlen = strlen(text);
 
     /* create pixmap */
@@ -113,14 +142,16 @@ create_text_pixmap(GtkWidget *drawing_area, FT_Face face)
 
     /* work out what sizes to render */
     if (FT_IS_SCALABLE(face)) {
-	n_sizes = 6;
+	n_sizes = 8;
 	sizes = g_new(gint, n_sizes);
 	sizes[0] = 8;
 	sizes[1] = 10;
 	sizes[2] = 12;
-	sizes[3] = 24;
-	sizes[4] = 48;
-	sizes[5] = 72;
+	sizes[3] = 18;
+	sizes[4] = 24;
+	sizes[5] = 36;
+	sizes[6] = 48;
+	sizes[7] = 72;
 	alpha_size = 24;
     } else {
 	/* use fixed sizes */
@@ -140,7 +171,8 @@ create_text_pixmap(GtkWidget *drawing_area, FT_Face face)
     pixmap_width = 8;
     pixmap_height = 8;
     
-    font = get_font(xdisplay, face, alpha_size);
+    font = get_font(xdisplay, face, alpha_size, charset);
+    charset = FcCharSetCopy (font->charset);
     XftTextExtentsUtf8(xdisplay, font,
 		       lowercase_text, strlen(lowercase_text), &extents);
     pixmap_height += extents.height + 4;
@@ -158,7 +190,7 @@ create_text_pixmap(GtkWidget *drawing_area, FT_Face face)
     pixmap_height += 8;
 
     for (i = 0; i < n_sizes; i++) {
-	font = get_font(xdisplay, face, sizes[i]);
+	font = get_font(xdisplay, face, sizes[i], charset);
 	if (!font) continue;
 	XftTextExtentsUtf8(xdisplay, font, text, textlen, &extents);
 	pixmap_height += extents.height + 4;
@@ -180,7 +212,7 @@ create_text_pixmap(GtkWidget *drawing_area, FT_Face face)
 
     /* draw text */
     pos_y = 4;
-    font = get_font(xdisplay, face, alpha_size);
+    font = get_font(xdisplay, face, alpha_size, charset);
     draw_string(xdisplay, draw, font, &colour, lowercase_text, &pos_y);
     draw_string(xdisplay, draw, font, &colour, uppercase_text, &pos_y);
     draw_string(xdisplay, draw, font, &colour, punctuation_text, &pos_y);
@@ -188,7 +220,7 @@ create_text_pixmap(GtkWidget *drawing_area, FT_Face face)
 
     pos_y += 8;
     for (i = 0; i < n_sizes; i++) {
-	font = get_font(xdisplay, face, sizes[i]);
+	font = get_font(xdisplay, face, sizes[i], charset);
 	if (!font) continue;
 	draw_string(xdisplay, draw, font, &colour, text, &pos_y);
 	XftFontClose(xdisplay, font);
@@ -196,6 +228,7 @@ create_text_pixmap(GtkWidget *drawing_area, FT_Face face)
 
  end:
     g_free(sizes);
+    FcCharSetDestroy (charset);
     return pixmap;
 }
 
@@ -347,29 +380,20 @@ expose_event(GtkWidget *widget, GdkEventExpose *event, GdkPixmap *pixmap)
 static void
 set_icon(GtkWindow *window, const gchar *uri)
 {
-    GnomeIconTheme *icon_theme;
-    gchar *icon_name = NULL, *icon_file = NULL;
-    GdkPixbuf *pixbuf = NULL;
+    GdkScreen *screen;
+    GtkIconTheme *icon_theme;
+    gchar *icon_name = NULL;
 
-    icon_theme = gnome_icon_theme_new();
+    screen = gtk_widget_get_screen (GTK_WIDGET (window));
+    icon_theme = gtk_icon_theme_get_for_screen (screen);
 
     icon_name = gnome_icon_lookup_sync(icon_theme, NULL, uri, NULL,
 				       GNOME_ICON_LOOKUP_FLAGS_NONE, NULL);
     if (!icon_name) goto end;
 
-    icon_file = gnome_icon_theme_lookup_icon(icon_theme, icon_name,
-					     48,  NULL, NULL);
-    if (!icon_file) goto end;
-
-    pixbuf = gdk_pixbuf_new_from_file(icon_file, NULL);
-    if (!pixbuf) goto end;
-
-    gtk_window_set_icon(window, pixbuf);
+    gtk_window_set_icon_name (window, icon_name);
  end:
-    if (pixbuf) g_object_unref(pixbuf);
-    g_free(icon_file);
     g_free(icon_name);
-    g_object_unref(icon_theme);
 }
 
 int
@@ -378,7 +402,7 @@ main(int argc, char **argv)
     FT_Error error;
     FT_Library library;
     FT_Face face;
-    gchar *title;
+    gchar *font_file, *title;
     gint row;
     GtkWidget *window, *vbox, *table, *swin, *drawing_area;
     GdkPixmap *pixmap;
@@ -411,9 +435,15 @@ main(int argc, char **argv)
 	return 1;
     }  
 
-    error = FT_New_Face_From_URI(library, argv[1], 0, &face);
+    font_file = gnome_vfs_make_uri_from_shell_arg (argv[1]);
+    if (!font_file) {
+	g_printerr("could not parse argument into a URI\n");
+	return 1;
+    }
+
+    error = FT_New_Face_From_URI(library, font_file, 0, &face);
     if (error) {
-	g_printerr("could not load face '%s'\n", argv[1]);
+	g_printerr("could not load face '%s'\n", font_file);
 	return 1;
     }
 
@@ -422,7 +452,7 @@ main(int argc, char **argv)
 			face->style_name ? ", " : "",
 			face->style_name, NULL);
     gtk_window_set_title(GTK_WINDOW(window), title);
-    set_icon(GTK_WINDOW(window), argv[1]);
+    set_icon(GTK_WINDOW(window), font_file);
     g_free(title);
     gtk_window_set_resizable(GTK_WINDOW(window), TRUE);
 
@@ -434,7 +464,7 @@ main(int argc, char **argv)
     gtk_box_pack_start(GTK_BOX(vbox), table, FALSE, TRUE, 0);
 
     row = 0;
-    add_face_info(table, &row, argv[1], face);
+    add_face_info(table, &row, font_file, face);
 
     gtk_table_set_col_spacings(GTK_TABLE(table), 8);
     gtk_table_set_row_spacings(GTK_TABLE(table), 2);

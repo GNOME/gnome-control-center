@@ -1,3 +1,11 @@
+2004-11-28  James Henstridge  <james@jamesh.id.au>
+
+	* font-view.c: apply Federic Zhang <federic.zhang@sun.com>'s patch
+	to speed up loading of large (eg. CJK) fonts, plus a few small bug
+	fixes.  Fixes bug #142878.
+	(set_icon): use gtk_window_set_icon_name() to set the icon.  Also,
+	get the correct icon theme object for the window's screen.
+
 2004-11-27  James Henstridge  <james@jamesh.id.au>
 
 	* Makefile.am: get rid of old mime stuff.
