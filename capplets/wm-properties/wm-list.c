@@ -113,6 +113,23 @@ wm_list_find (GList *list, gchar *name)
         return NULL;
 }
 
+static WindowManager *
+wm_list_find_exec (GList *list, gchar *name)
+{
+        GList *tmp_list = list;
+        while (tmp_list) {
+                WindowManager *wm = tmp_list->data;
+                if (!wm->dentry->exec || !wm->dentry->exec[0])
+                        continue;
+                if (strcmp (wm->dentry->exec[0], name) == 0)
+                        return wm;
+
+                tmp_list = tmp_list->next;
+        }
+        
+        return NULL;
+}
+
 static GList *
 wm_list_find_files (gchar *directory)
 {
@@ -222,6 +239,22 @@ wm_list_init (void)
         if (name) {
                 current_wm = wm_list_find (window_managers, name);
                 g_free (name);
+        }
+
+        if (!current_wm) {
+                gchar *wmfile, *prefix;
+                
+                wmfile = gnome_unconditional_datadir_file ("default.wm");
+                prefix = g_strconcat ("=", wmfile, "=/Default/WM", NULL);
+                name = gnome_config_get_string (prefix);
+
+                g_free (wmfile);
+                g_free (prefix);
+
+                if (name) {
+                        current_wm = wm_list_find_exec (window_managers, name);
+                        g_free (name);
+                }
         }
 
         if (!current_wm && window_managers) 
