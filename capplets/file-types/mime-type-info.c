@@ -55,6 +55,9 @@ static MimeCategoryInfo *get_category (const gchar        *category_name,
 				       const gchar        *category_desc,
 				       GtkTreeModel       *model);
 
+gchar *get_real_icon_path             (const MimeTypeInfo *info,
+				       const gchar        *icon_name);
+
 
 
 void
@@ -140,38 +143,10 @@ mime_type_info_get_icon (MimeTypeInfo *info)
 const gchar *
 mime_type_info_get_icon_path (MimeTypeInfo *info) 
 {
-	gchar *tmp;
-
 	if (info->icon_name == NULL)
 		info->icon_name = g_strdup (gnome_vfs_mime_get_icon (info->mime_type));
 
-	if (g_file_test (info->icon_name, G_FILE_TEST_EXISTS)) {
-		info->icon_path = g_strdup (info->icon_name);
-		return info->icon_path;
-	}
-
-	info->icon_path = gnome_vfs_icon_path_from_filename (info->icon_name);
-
-	if (info->icon_path == NULL) {
-		tmp = g_strconcat (info->icon_name, ".png", NULL);
-		info->icon_path = gnome_vfs_icon_path_from_filename (tmp);
-		g_free (tmp);
-	}
-
-	if (info->icon_path == NULL) {
-		tmp = g_strconcat ("nautilus/", info->icon_name, NULL);
-		info->icon_path = gnome_vfs_icon_path_from_filename (tmp);
-		g_free (tmp);
-	}
-
-	if (info->icon_path == NULL) {
-		tmp = g_strconcat ("nautilus/", info->icon_name, ".png", NULL);
-		info->icon_path = gnome_vfs_icon_path_from_filename (tmp);
-		g_free (tmp);
-	}
-
-	if (info->icon_path == NULL)
-		info->icon_path = gnome_vfs_icon_path_from_filename ("nautilus/i-regular-24.png");
+	info->icon_path = get_real_icon_path (info, info->icon_name);
 
 	return info->icon_path;
 }
@@ -816,6 +791,48 @@ form_extensions_string (const MimeTypeInfo *info, gchar *sep, gchar *prepend)
 	return tmp;
 }
 
+gchar *get_real_icon_path (const MimeTypeInfo *info, const gchar *icon_name) 
+{
+	gchar *tmp, *tmp1, *ret, *real_icon_name;
+
+	if (icon_name == NULL || *icon_name == '\0') {
+		tmp = g_strdup (info->mime_type);
+		tmp1 = strchr (tmp, '/');
+		if (tmp1 != NULL) *tmp1 = '-';
+		real_icon_name = g_strconcat ("document-icons/gnome-", tmp, ".png", NULL);
+		g_free (tmp);
+	} else {
+		real_icon_name = g_strdup (icon_name);
+	}
+
+	ret = gnome_vfs_icon_path_from_filename (real_icon_name);
+
+	if (ret == NULL && strstr (real_icon_name, ".png") == NULL) {
+		tmp = g_strconcat (real_icon_name, ".png", NULL);
+		ret = gnome_vfs_icon_path_from_filename (tmp);
+		g_free (tmp);
+	}
+
+	if (ret == NULL) {
+		tmp = g_strconcat ("nautilus/", real_icon_name, NULL);
+		ret = gnome_vfs_icon_path_from_filename (tmp);
+		g_free (tmp);
+	}
+
+	if (ret == NULL && strstr (real_icon_name, ".png") == NULL) {
+		tmp = g_strconcat ("nautilus/", real_icon_name, ".png", NULL);
+		ret = gnome_vfs_icon_path_from_filename (tmp);
+		g_free (tmp);
+	}
+
+	if (ret == NULL)
+		ret = gnome_vfs_icon_path_from_filename ("nautilus/i-regular-24.png");
+
+	g_free (real_icon_name);
+
+	return ret;
+}
+
 /* Loads a pixbuf for the icon, falling back on the default icon if
  * necessary
  */
@@ -826,7 +843,7 @@ get_icon_pixbuf (MimeTypeInfo *info, const gchar *icon_path, gboolean want_large
 	static GHashTable *icon_table = NULL;
 
 	if (icon_path == NULL)
-		icon_path = gnome_vfs_icon_path_from_filename ("nautilus/i-regular-24.png");
+		icon_path = get_real_icon_path (info, NULL);
 
 	if (icon_path == NULL)
 		return;

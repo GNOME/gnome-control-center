@@ -1,5 +1,14 @@
 2002-02-17  Bradford Hovinen  <hovinen@ximian.com>
 
+	* mime-type-info.c (get_icon_pixbuf): Try to find the icon from
+	the MIME type.
+	(mime_type_info_get_icon_path): Fetch the icon name from the MIME
+	type if necessary
+	(get_icon_pixbuf): Call get_real_icon_path
+	(get_real_icon_path): Implement. Factor from
+	mime_type_info_get_icon_path
+	(mime_type_info_get_icon_path): Call get_real_icon_path
+
 	* mime-types-model.c (mime_types_model_get_value): Set the object
 	value to NULL if the icon is NULL
 
