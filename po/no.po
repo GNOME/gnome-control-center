@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: control-center 2.5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-08-29 20:23-0400\n"
-"PO-Revision-Date: 2004-07-31 12:12+0200\n"
+"POT-Creation-Date: 2004-09-05 22:59+0200\n"
+"PO-Revision-Date: 2004-09-05 23:01+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -592,7 +592,7 @@ msgstr ""
 "Tilbakekall som skal utstedes når objektdata for redigering av egenskaper "
 "skal frigis"
 
-#: capplets/common/gconf-property-editor.c:1538
+#: capplets/common/gconf-property-editor.c:1543
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -605,7 +605,7 @@ msgstr ""
 "Vennligst sjekk at denne eksisterer og prøv på nytt, eller velg et annet "
 "bakgrunnsbilde."
 
-#: capplets/common/gconf-property-editor.c:1546
+#: capplets/common/gconf-property-editor.c:1551
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -618,11 +618,11 @@ msgstr ""
 "\n"
 "Vennligst velg et annet bilde i stedet."
 
-#: capplets/common/gconf-property-editor.c:1665
+#: capplets/common/gconf-property-editor.c:1670
 msgid "Please select an image."
 msgstr "Vennligst velg et bilde."
 
-#: capplets/common/gconf-property-editor.c:1670
+#: capplets/common/gconf-property-editor.c:1675
 msgid "_Select"
 msgstr "_Velg"
 
@@ -2398,38 +2398,32 @@ msgid "Windows"
 msgstr "Vinduer"
 
 #: control-center/GNOME_ControlCenter.server.in.h:1
-#, fuzzy
 msgid "Control Center"
-msgstr "Kontrollsenter meny"
+msgstr "Kontrollsenter"
 
 #: control-center/GNOME_ControlCenter.server.in.h:2
-#, fuzzy
 msgid "Control Center Viewer"
-msgstr "Kontrollsenter meny"
+msgstr "Kontrollsenter"
 
 #: control-center/GNOME_ControlCenter.server.in.h:3
-#, fuzzy
 msgid "Control Center view"
-msgstr "Kontrollsenter meny"
+msgstr "Kontrollsenter-visning"
 
 #: control-center/GNOME_ControlCenter.server.in.h:4
-#, fuzzy
 msgid "Control Center view component"
-msgstr "Kontrollsenter meny"
+msgstr "Visningskomponent for kontrollsenter"
 
 #: control-center/GNOME_ControlCenter.server.in.h:5
 msgid "Control Center view component's factory"
-msgstr ""
+msgstr "Fabrikk for visningskomponent for kontrollsenter"
 
 #: control-center/GNOME_ControlCenter.server.in.h:6
-#, fuzzy
 msgid "Control Center view factory"
-msgstr "Kontrollsenter meny"
+msgstr "Fabrikk for kontrollsenter-visning"
 
 #: control-center/GNOME_ControlCenter.server.in.h:7
-#, fuzzy
 msgid "View as Control Center"
-msgstr "GNOME kontrollsenter"
+msgstr "Vis som kontrollsenter"
 
 #: control-center/capplet-dir-view-list.c:319
 #, c-format
@@ -2577,38 +2571,38 @@ msgstr ""
 "Kan ikke opprette katalog «%s».\n"
 "Denne kreves for å tillate endring av markører."
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:207
+#: gnome-settings-daemon/gnome-settings-keybindings.c:208
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr "Handling for tastaturbinding (%s) er definert flere ganger\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:220
+#: gnome-settings-daemon/gnome-settings-keybindings.c:221
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr "Tastaturbinding (%s) er definert flere ganger\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:226
+#: gnome-settings-daemon/gnome-settings-keybindings.c:227
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr "Tastaturbinding (%s) er ikke komplett\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:254
+#: gnome-settings-daemon/gnome-settings-keybindings.c:255
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr "Tastaturbinding (%s) er ugyldig\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:290
+#: gnome-settings-daemon/gnome-settings-keybindings.c:291
 #, c-format
 msgid "It seems that another application already has access to key '%d'."
 msgstr ""
 "Det ser ut som om en annen applikasjon allerede har tilgang til nøkkel «%d»."
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:359
+#: gnome-settings-daemon/gnome-settings-keybindings.c:360
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr "Tastaturbinding (%s) er allerede i bruk\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:434
+#: gnome-settings-daemon/gnome-settings-keybindings.c:435
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -2670,16 +2664,13 @@ msgstr "Bruk innstillinger fra X"
 msgid "Use GNOME settings"
 msgstr "Bruk innstillinger fra GNOME"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:224
-#, fuzzy, c-format
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:227
+#, c-format
 msgid ""
 "You have a keyboard remapping file (%s) in your home directory whose "
-"contents are ignored by default. Add it to /desktop/gnome/peripherals/"
-"keyboard/xkb/update_handlers"
-msgstr ""
-"Du har en fil (%s) i din hjemmekatalog for tastaturkartutforming. Innholdet "
-"i denne filen vil nå ignoreres. Du kan bruke brukervalg for tastatur for å "
-"gjenopprette disse."
+"contents will now be ignored. You can use the keyboard preferences to "
+"restore them."
+msgstr "Du har en fil for omforming av tastaturkart (%s) i din hjemmekatalog. Innholdet i denne filen vil nå ignoreres. Du kan bruke brukervalg for tastatur for å gjenopprette disse."
 
 #: gnome-settings-daemon/gnome-settings-multimedia-keys.c:114
 #, c-format
@@ -2745,7 +2736,7 @@ msgstr "Kan ikke bestemme brukers hjemmekatalog"
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "GConf-nøkkel %s satt til type %s men forventet type var %s\n"
 
-#: gnome-settings-daemon/reaper.c:103
+#: gnome-settings-daemon/reaper.c:102
 msgid "Error creating signal pipe."
 msgstr "Feil under oppretting av signalrør."
 
