@@ -495,6 +495,50 @@ accel_edited_callback (GtkCellRendererText *cell,
   gtk_tree_path_free (path);
 }
 
+
+static void
+theme_changed_func (gpointer  uri,
+		    GladeXML *dialog)
+{
+  GConfClient *client;
+  GtkWidget *omenu;
+  GtkWidget *menu;
+  GtkWidget *menu_item;
+  GConfEntry *entry;
+  GList *key_theme_list;
+  GList *list;
+
+  client = gconf_client_get_default ();
+  key_theme_list = theme_common_get_list ();
+
+  omenu = WID ("key_theme_omenu");
+  menu = gtk_menu_new ();
+  for (list = key_theme_list; list; list = list->next)
+    {
+      ThemeInfo *info = list->data;
+
+      if (! info->has_keybinding)
+	continue;
+
+      menu_item = make_key_theme_menu_item (info->name);
+      if (!strcmp (info->name, "Default"))
+	/* Put default first, always */
+	gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), menu_item);
+      else
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
+    }
+
+  gtk_widget_show (menu);
+  gtk_option_menu_set_menu (GTK_OPTION_MENU (omenu), menu);
+
+  /* Initialize the option menu */
+  entry = gconf_client_get_entry (client,
+				  KEY_THEME_KEY,
+				  NULL, TRUE, NULL);
+
+  key_theme_changed (client, 0, entry, omenu);
+}
+
 static void
 setup_dialog (GladeXML *dialog)
 {
@@ -534,42 +578,13 @@ setup_dialog (GladeXML *dialog)
     }
   else
     {
-      GtkWidget *omenu;
-      GtkWidget *menu;
-      GtkWidget *menu_item;
-      GConfEntry *entry;
-
-      omenu = WID ("key_theme_omenu");
-      menu = gtk_menu_new ();
-      for (list = key_theme_list; list; list = list->next)
-	{
-	  ThemeInfo *info = list->data;
-
-	  if (! info->has_keybinding)
-	    continue;
-
-	  menu_item = make_key_theme_menu_item (info->name);
-	  if (!strcmp (info->name, "Default"))
-	    /* Put default first, always */
-	    gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), menu_item);
-	  else
-	    gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
-	}
-
-      gtk_widget_show (menu);
-      gtk_option_menu_set_menu (GTK_OPTION_MENU (omenu), menu);
-
+      theme_changed_func (NULL, dialog);
+      theme_common_register_theme_change ((GFunc) theme_changed_func, dialog);
       gconf_client_add_dir (client, "/desktop/gnome/interface", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
       gconf_client_notify_add (client,
 			       KEY_THEME_KEY,
 			       (GConfClientNotifyFunc) &key_theme_changed,
-			       omenu, NULL, NULL);
-      /* Initialize the option menu */
-      entry = gconf_client_get_entry (client,
-                                      KEY_THEME_KEY,
-				      NULL, TRUE, NULL);
-
-      key_theme_changed (client, 0, entry, omenu);
+			       WID ("key_theme_omenu"), NULL, NULL);
     }
 
 

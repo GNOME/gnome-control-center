@@ -171,9 +171,34 @@ theme_key_changed (GConfClient *client,
 
 
 static void
-theme_changed_func (gpointer data)
+theme_changed_func (gpointer uri,
+		    gpointer user_data)
 {
-	g_print ("boo\n");
+  read_themes ((GladeXML *)user_data);
+}
+
+static gint
+sort_func (GtkTreeModel *model,
+	   GtkTreeIter  *a,
+	   GtkTreeIter  *b,
+	   gpointer      user_data)
+{
+  gchar *a_str = NULL;
+  gchar *b_str = NULL;
+
+ gtk_tree_model_get (model, a, 0, &a_str, -1);
+ gtk_tree_model_get (model, b, 0, &b_str, -1);
+
+ if (a_str == NULL) a_str = g_strdup ("");
+ if (b_str == NULL) b_str = g_strdup ("");
+
+ g_print ("comparing %s to %s\n", a_str, b_str);
+ if (!strcmp (a_str, "Default"))
+   return -1;
+ if (!strcmp (b_str, "Default"))
+   return 1;
+
+ return g_utf8_collate (a_str, b_str);
 }
 
 static void
@@ -199,6 +224,8 @@ setup_dialog (GladeXML *dialog)
 			   dialog, NULL, NULL);
 
   model = (GtkTreeModel *) gtk_list_store_new (N_COLUMNS, G_TYPE_STRING);
+  gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (model), 0, sort_func, NULL, NULL);
+  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (model), 0, GTK_SORT_ASCENDING);
   gtk_tree_view_set_model (GTK_TREE_VIEW (WID ("theme_treeview")), model);
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (WID ("theme_treeview")));
   gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);

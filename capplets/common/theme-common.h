@@ -9,14 +9,16 @@ struct _ThemeInfo
 {
   gchar *path;
   gchar *name;
-  gboolean has_gtk;
-  gboolean has_keybinding;
+  guint has_gtk : 1;
+  guint has_keybinding : 1;
+  guint user_writable : 1;
 };
 
+void   theme_common_init                  (void);
 GList *theme_common_get_list              (void);
-void   theme_common_list_free             (GList    *list);
-void   theme_common_register_theme_change (GCallback func,
-					   gpointer  data);
+void   theme_common_register_theme_change (GFunc    func,
+					   gpointer data);
+
 
 
 #endif /* THEME_COMMON_H */
