@@ -93,6 +93,7 @@ typedef void (*GetLegacySettingsFn) (Bonobo_ConfigDatabase db);
 
 void capplet_init (int                      argc,
 		   gchar                  **argv,
+		   const gchar		  **legacy_files,
 		   ApplySettingsFn          apply_fn,
 		   CreateDialogFn           create_dialog_fn,
 		   SetupPropertyEditorsFn   setup_property_editors_fn,

@@ -1,3 +1,13 @@
+2001-07-24  Richard Hestilow  <hestilow@ximian.com>
+
+	* capplet-util.[ch] (capplet_init): New argument of legacy files to
+	check for changes.
+
+	* capplet-util.c (legacy_is_modified): New function that checks
+	a legacy file against the archiver modification date.
+	(capplet_init): Pass legacy_files to legacy_is_modified, and sync
+	our database with the legacy one if one has been.
+
 2001-07-24  Bradford Hovinen  <hovinen@ximian.com>
 
 	* capplet-util.c (real_quit_cb): Reenable disabled code

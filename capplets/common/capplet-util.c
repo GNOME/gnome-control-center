@@ -27,6 +27,11 @@
 
 #include <ctype.h>
 
+/* For stat */
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+
 #include "capplet-util.h"
 
 static CreateDialogFn          create_dialog_cb = NULL;
@@ -388,12 +393,69 @@ setup_session_mgmt (const gchar *binary_name)
 	}
 }
 
+static gboolean
+legacy_is_modified (Bonobo_ConfigDatabase db, const gchar *filename)
+{
+	time_t legacy_val, log_val;
+	CORBA_Environment ev;
+	Bonobo_PropertyBag pb;
+	BonoboArg *arg;
+	struct stat stbuf;
+	gchar *realfile;
+	struct tm *legacy_tm;
+	
+	g_return_val_if_fail (db != CORBA_OBJECT_NIL, FALSE);
+
+	CORBA_exception_init (&ev);
+	
+	pb = Bonobo_Unknown_queryInterface (db, "IDL:Bonobo/PropertyBag:1.0", &ev);
+	if (BONOBO_EX (&ev))
+	{
+		CORBA_exception_free (&ev);
+		return FALSE;
+	}
+
+	arg = bonobo_property_bag_client_get_value_any (pb, "last_modified", &ev);
+	if (BONOBO_EX (&ev))
+	{
+		CORBA_exception_free (&ev);
+		return FALSE;
+	}
+
+	log_val = BONOBO_ARG_GET_GENERAL (arg, TC_ulonglong, CORBA_unsigned_long_long, NULL);
+	bonobo_arg_release (arg);
+
+	if (filename[0] == '/')
+		realfile = g_strdup (filename);
+	else
+		realfile = g_strconcat (g_get_home_dir (),
+					"/.gnome/",
+					filename,
+					NULL);
+
+	if (stat (realfile, &stbuf) != 0)
+	{
+		CORBA_exception_free (&ev);
+		g_free (realfile);
+		return FALSE;
+	}
+	
+	CORBA_exception_free (&ev);
+	g_free (realfile);
+	legacy_tm = localtime (&stbuf.st_mtime);
+	g_print ("%i\n", legacy_tm->tm_isdst);
+	legacy_val = mktime (legacy_tm);
+	g_print ("Legacy %i vs db %i\n", legacy_val, log_val);
+	return (legacy_val > log_val);
+}
+
 /* capplet_init -- see documentation in capplet-util.h
  */
 
 void
 capplet_init (int                      argc,
 	      char                   **argv,
+	      const gchar 	     **legacy_files,
 	      ApplySettingsFn          apply_fn,
 	      CreateDialogFn           create_dialog_fn,
 	      SetupPropertyEditorsFn   setup_fn,
@@ -405,6 +467,8 @@ capplet_init (int                      argc,
 	CORBA_Environment      ev;
 	gchar                 *factory_iid;
 	gchar                 *default_moniker;
+	gboolean	       needs_legacy = FALSE;
+	int 		       i;	
 
 	static gboolean apply_only;
 	static gboolean init_session;
@@ -435,6 +499,7 @@ capplet_init (int                      argc,
 	default_moniker = get_default_moniker (argv[0]);
 	db = bonobo_get_object (default_moniker, "IDL:Bonobo/ConfigDatabase:1.0", &ev);
 
+		
 	if (db == CORBA_OBJECT_NIL) {
 		g_critical ("Cannot open configuration database %s", default_moniker);
 		exit (-1);
@@ -442,6 +507,19 @@ capplet_init (int                      argc,
 
 	g_free (default_moniker);
 
+	if (legacy_files && get_legacy_fn && !get_legacy)
+	{
+		for (i = 0; legacy_files[i] != NULL; i++)
+		{
+			if (legacy_is_modified (db, legacy_files[i]))
+			{
+				needs_legacy = TRUE; 
+				g_print ("Needs legacy!\n");
+				break;
+			}
+		}
+	}
+	
 	if ((apply_only || init_session) && apply_fn != NULL) {
 		apply_fn (db);
 	}
@@ -449,8 +527,16 @@ capplet_init (int                      argc,
 		setup_session_mgmt (argv[0]);
 		get_legacy_fn (db);
 		Bonobo_ConfigDatabase_sync (db, &ev);
+		g_print ("synced okay\n");
 	} else {
 		setup_session_mgmt (argv[0]);
+
+		if (needs_legacy)
+		{
+			g_print ("needs legacy\n");
+			get_legacy_fn (db);
+			Bonobo_ConfigDatabase_sync (db, &ev);
+		}
 		create_dialog_cb = create_dialog_fn;
 		apply_settings_cb = apply_fn;
 		setup_cb = setup_fn;
