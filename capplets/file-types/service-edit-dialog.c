@@ -292,6 +292,11 @@ populate_app_list (ServiceEditDialog *dialog)
 static void
 store_data (ServiceEditDialog *dialog) 
 {
+	GtkOptionMenu *option_menu;
+	GtkMenuShell  *menu_shell;
+	GObject       *menu_item;
+	gint           idx;
+
 	g_free (dialog->p->info->description);
 	dialog->p->info->description = g_strdup (gtk_entry_get_text (GTK_ENTRY (WID ("description_entry"))));
 
@@ -301,6 +306,15 @@ store_data (ServiceEditDialog *dialog)
 	g_free (dialog->p->info->custom_line);
 	dialog->p->info->custom_line =
 		g_strdup (gnome_file_entry_get_full_path (GNOME_FILE_ENTRY (WID ("custom_program_entry")), FALSE));
+
+	option_menu = GTK_OPTION_MENU (WID ("program_select"));
+	menu_shell = GTK_MENU_SHELL (gtk_option_menu_get_menu (option_menu));
+	idx = gtk_option_menu_get_history (option_menu);
+	menu_item = (g_list_nth (menu_shell->children, idx))->data;
+
+	gnome_vfs_mime_application_free (dialog->p->info->app);
+	dialog->p->info->app =
+		gnome_vfs_mime_application_copy (g_object_get_data (menu_item, "app"));
 
 	service_info_update (dialog->p->info);
 	service_info_save (dialog->p->info);
