@@ -40,6 +40,7 @@
 #include <gtk/gtk.h>
 #include <libgnomevfs/gnome-vfs-mime-handlers.h>
 #include <libgnomevfs/gnome-vfs-mime-info.h>
+#include <libgnomevfs/gnome-vfs-init.h>
 
 #include "nautilus-mime-type-capplet-dialogs.h"
 #include "nautilus-mime-type-icon-entry.h"
@@ -75,10 +76,10 @@ static GdkPixbuf *capplet_gdk_pixbuf_scale_to_fit 	(GdkPixbuf 	*pixbuf,
 							 int 		max_height);
 
 
-GtkWidget *capplet = NULL;
-GtkWidget *delete_button = NULL;
-GtkWidget *remove_button = NULL;
-GtkWidget *add_button = NULL;
+GtkWidget *capplet;
+GtkWidget *delete_button;
+GtkWidget *remove_button;
+GtkWidget *add_button;
 GtkWidget *icon_entry, *extension_list, *mime_list;
 GtkWidget *default_menu;
 GtkWidget *application_button, *viewer_button;
@@ -106,8 +107,11 @@ main (int argc, char **argv)
                 exit (0);
 	}
 
+	gnome_vfs_init ();
+
 	if (init_results == 0) {
 		init_mime_capplet ();
+		g_print ("initilaized\n");
 	        capplet_gtk_main ();
 	}
         return 0;
@@ -331,7 +335,6 @@ init_mime_capplet (void)
         GtkWidget *frame;
         GtkWidget *alignment;
         GtkWidget *table, *extensions_table;
-	//GList     *children;
 	int index, list_width, column_width;
 	
 	capplet = capplet_widget_new ();
@@ -345,9 +348,7 @@ init_mime_capplet (void)
         /* Main horizontal box and mime list*/                    
         hbox = gtk_hbox_new (FALSE, GNOME_PAD);
         gtk_box_pack_start (GTK_BOX (main_vbox), hbox, TRUE, TRUE, 0);
-	g_print ("stuff going on.\n");
         mime_list_container = create_mime_list_and_scroller ();
-	g_print ("mime created\n");
         gtk_box_pack_start (GTK_BOX (hbox), mime_list_container, TRUE, TRUE, 0);         
 	
 	vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
@@ -374,7 +375,6 @@ init_mime_capplet (void)
 	button = gtk_button_new_with_label (_("Change Icon"));
 	gtk_signal_connect (GTK_OBJECT (button), "clicked", change_icon_clicked, icon_entry);
 	gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
-
 	vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);	
 	gtk_box_pack_start (GTK_BOX (hbox), vbox, FALSE, FALSE, 0);
 
@@ -384,7 +384,6 @@ init_mime_capplet (void)
 	gtk_container_add (GTK_CONTAINER (alignment), description_entry);
 	gtk_widget_set_usize (description_entry, 200, 0);
 	gtk_widget_make_bold (GTK_WIDGET (description_entry));
-	
 	mime_label = GTK_LABEL (gtk_label_new (_("Mime Type")));	
 	gtk_label_set_justify (GTK_LABEL (mime_label), GTK_JUSTIFY_RIGHT);
 	alignment = gtk_alignment_new (0, 0, 0, 0);
@@ -395,7 +394,6 @@ init_mime_capplet (void)
 	   and delete mime types */
 	vbox = gtk_vbox_new (FALSE, 7);
 	gtk_table_attach_defaults ( GTK_TABLE (table), vbox, 0, 1, 1, 2);
-	
 	/* Put in a spacer to make buttons layout as we want them */
 	{
 		GtkWidget *spacer;
@@ -414,14 +412,14 @@ init_mime_capplet (void)
 	alignment = gtk_alignment_new (0, 0, 0, 0);
 	gtk_box_pack_start (GTK_BOX (vbox), alignment, FALSE, FALSE, 0);
 
-	button = gtk_button_new_with_label (_("Delete this Mime type..."));
-	gtk_container_add (GTK_CONTAINER (alignment), button);
+	delete_button = gtk_button_new_with_label (_("Delete this Mime type..."));
+	gtk_container_add (GTK_CONTAINER (alignment), delete_button);
 	gtk_signal_connect (GTK_OBJECT (delete_button), "clicked", delete_mime_clicked, NULL);
 
 	/* Set up top right area. */
 	frame = gtk_frame_new ("Default Action:");
 	gtk_table_attach_defaults ( GTK_TABLE (table), frame, 1, 2, 0, 1);
-	
+
 	vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
 	gtk_container_add (GTK_CONTAINER (frame), vbox);
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), 5);
@@ -491,9 +489,11 @@ init_mime_capplet (void)
 	gtk_signal_connect (GTK_OBJECT (extension_list), "unselect-row",
 			    GTK_SIGNAL_FUNC (extension_list_deselected), NULL);
 
-
 	/* Set up enabled/disabled states of capplet buttons */	
 	gtk_widget_set_sensitive (add_button, TRUE);
+	/* FIXME: this call generates a 
+	   Gtk-WARNING **: gtk_signal_disconnect_by_data(): could not find handler containing data (0x80FA6F8)
+	*/
 	gtk_widget_set_sensitive (remove_button, FALSE);
 	
 	/* Yes, show all widgets */
@@ -517,8 +517,6 @@ init_mime_capplet (void)
 	gtk_clist_select_row (GTK_CLIST (mime_list), 0, 0);
 
 	capplet_widget_state_changed (CAPPLET_WIDGET (capplet), FALSE);
-
-	g_print ("initialized\n");
 }
 
 
@@ -1029,10 +1027,8 @@ populate_mime_list (GList *type_list, GtkCList *clist)
 
 			/* Set up action column */
 
-			g_print ("will get action soon\n");
 			pixbuf = NULL;
 			action = gnome_vfs_mime_get_default_action (mime_string);
-			g_print ("got action \n");
 			if (action != NULL) {
 				switch (action->action_type) {
 					case GNOME_VFS_MIME_ACTION_TYPE_APPLICATION:
@@ -1116,9 +1112,7 @@ create_mime_list_and_scroller (void)
         gtk_clist_set_auto_sort (GTK_CLIST (mime_list), TRUE);
 
 	type_list = gnome_vfs_get_registered_mime_types ();
-	g_print ("populate begin \n");
 	populate_mime_list (type_list, GTK_CLIST (mime_list));
-	g_print ("populate end \n");
 	gnome_vfs_mime_registered_mime_type_list_free (type_list);
 	
         gtk_clist_columns_autosize (GTK_CLIST (mime_list));
