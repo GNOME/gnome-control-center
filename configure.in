@@ -260,6 +260,11 @@ AC_SUBST(LIBBONOBO_IDL_DIR)
 BONOBO_ACTIVATION_IDL_DIR="`$PKG_CONFIG --variable=idldir bonobo-activation-2.0`"
 AC_SUBST(BONOBO_ACTIVATION_IDL_DIR)
 
+# check for nautilus
+PKG_CHECK_MODULES(NAUTILUS, libnautilus)
+AC_SUBST(NAUTILUS_LIBS)
+AC_SUBST(NAUTILUS_CFLAGS)
+
 # esd
 ESDSERVERDIR=`$PKG_CONFIG --variable=esd_serverdir esound`
 if test x"$ESDSERVERDIR" = x; then
