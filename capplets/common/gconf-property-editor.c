@@ -428,9 +428,7 @@ peditor_select_menu_value_changed (GConfEngine *engine, guint cnxn_id, GConfEntr
 
 	if (value != NULL) {
 		option_menu = g_object_get_data (G_OBJECT (peditor), "option-menu");
-		menu = GTK_MENU (gtk_option_menu_get_menu (option_menu));
-		item = g_list_nth (GTK_MENU_SHELL (menu)->children, gconf_value_get_int (value));
-		gtk_menu_item_activate (GTK_MENU_ITEM (item->data));
+		gtk_option_menu_set_history (option_menu, gconf_value_get_int (value));
 	}
 }
 
