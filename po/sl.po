@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.2.0\n"
-"POT-Creation-Date: 2002-02-12 00:27-0600\n"
+"POT-Creation-Date: 2001-11-25 22:29+0100\n"
 "PO-Revision-Date: 2001-08-19 14:26+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -13,677 +13,3084 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: capplets/background/background.desktop.in.h:1
+#: archiver/archive.c:614
+msgid "Default location"
+msgstr "Privzeta lokacija"
+
+#: archiver/config-archiver.c:307 archiver/location.c:460
+msgid "Default Location"
+msgstr "Privzeta lokacija"
+
+#: archiver/config-archiver.c:81
+msgid "Store XML data in the archive"
+msgstr "V arhiv shrani podatke XML"
+
+#: archiver/config-archiver.c:83
+msgid "Roll back the configuration to a given point"
+msgstr "Prevrti nastavitve nazaj do doloèene toèke"
+
+#: archiver/config-archiver.c:85
+msgid "Change the location profile to the given one"
+msgstr "Spremeni profil lokacije na podanega"
+
+#: archiver/config-archiver.c:87
+msgid "Push configuration data out to client machines (UNIMPLEMENTED)"
+msgstr ""
+"Potisni podatke o nastavitvah v raèunalnike odjemalce (NEIMPLEMENTIRANO)"
+
+#: archiver/config-archiver.c:89
+msgid "Rename a location to a new name"
+msgstr "Preimenuj lokacijo"
+
+#: archiver/config-archiver.c:91
+msgid "Add a new location to the archive"
+msgstr "Dodaj novo lokacijo v arhiv"
+
+#: archiver/config-archiver.c:93
+msgid "Remove a location from the archive"
+msgstr "Odstrani lokacijo iz arhiva"
+
+#: archiver/config-archiver.c:95
+msgid "Add a given backend to the given location"
+msgstr ""
+
+#: archiver/config-archiver.c:97
+msgid "Remove the given backend from the given location"
+msgstr ""
+
+#: archiver/config-archiver.c:99
+msgid "Perform garbage collection on the given location"
+msgstr ""
+
+#: archiver/config-archiver.c:105
+msgid "Use the global repository"
+msgstr "Uporabi globalno shrambo"
+
+#: archiver/config-archiver.c:107
+msgid "Identifier of location profile on which to operate"
+msgstr "Identifikator lokacijskega profila za uporabo"
+
+#: archiver/config-archiver.c:108
+msgid "LOCATION"
+msgstr "LOKACIJA"
+
+#: archiver/config-archiver.c:110
+msgid "Backend being used for this operation"
+msgstr ""
+
+#: archiver/config-archiver.c:110
+msgid "BACKEND_ID"
+msgstr ""
+
+#: archiver/config-archiver.c:116
+msgid "Store only the differences with the parent location's config"
+msgstr "Shrani le razlike v primerjavi z nastavitvami star¹evske lokacije"
+
+#: archiver/config-archiver.c:118
+msgid "Store only those settings set in the previous config"
+msgstr "Shrani le nastavitve spremenjene v prej¹njem nastavljanju"
+
+#: archiver/config-archiver.c:124
+msgid "Date to which to roll back"
+msgstr "Datum do katerega naj prevrtim"
+
+#: archiver/config-archiver.c:124
+msgid "DATE"
+msgstr "DATUM"
+
+#: archiver/config-archiver.c:126
+msgid "Roll back all configuration items"
+msgstr "Prevrti vse predmete nastavitev"
+
+#: archiver/config-archiver.c:128
+msgid "Roll back to the revision REVISION_ID"
+msgstr "Prevrti do razlièice RAZLIÈICA"
+
+#: archiver/config-archiver.c:128
+msgid "REVISION_ID"
+msgstr "RAZLIÈICA"
+
+#: archiver/config-archiver.c:130
+msgid "Roll back to the last known revision"
+msgstr "Prevrti do zadnje znane razlièice"
+
+#: archiver/config-archiver.c:132
+msgid "Roll back by STEPS revisions"
+msgstr "Prevrti za KORAKOV razlièic"
+
+#: archiver/config-archiver.c:132
+msgid "STEPS"
+msgstr "KORAKOV"
+
+#: archiver/config-archiver.c:134
+msgid "Don't run the backend, just dump the output"
+msgstr ""
+
+#: archiver/config-archiver.c:140
+msgid "Parent location for the new location"
+msgstr ""
+
+#: archiver/config-archiver.c:140
+msgid "PARENT"
+msgstr "STAR©"
+
+#: archiver/config-archiver.c:142
+msgid "New name to assign to the location"
+msgstr "Novo ime, ki naj se dodeli lokaciji"
+
+#: archiver/config-archiver.c:142
+msgid "NEW_NAME"
+msgstr "NOVO_IME"
+
+#: archiver/config-archiver.c:148
+msgid "Add/remove this backend to/from the master backend list"
+msgstr ""
+
+#: archiver/config-archiver.c:150
+msgid "Full containment"
+msgstr "Popolno vsebovanje"
+
+#: archiver/config-archiver.c:152
+msgid "Partial containment"
+msgstr "Delno vsebovanje"
+
+#: archiver/config-archiver.c:368
+msgid "Global archiver options"
+msgstr "Mo¾nosti globalnega arhivarja"
+
+#: archiver/config-archiver.c:370
+msgid "Archiver commands"
+msgstr "Ukazi arhivarja"
+
+#: archiver/config-archiver.c:372
+msgid "Options for storing data"
+msgstr "Mo¾nosti za shranjevanje podatkov"
+
+#: archiver/config-archiver.c:374
+msgid "Options for rolling back"
+msgstr "Mo¾nosti za prevrtenje"
+
+#: archiver/config-archiver.c:376
+msgid "Options for adding or renaming locations"
+msgstr "Mo¾nosti za dodajanje ali preimenovanje lokacij"
+
+#: archiver/config-archiver.c:379
+msgid "Options for adding and removing backends"
+msgstr ""
+
+#: capplets/background/applier.c:223
+msgid "Type"
+msgstr ""
+
+#: capplets/background/applier.c:224
+msgid ""
+"Type of applier: APPLIER_ROOT for root window or APPLIER_PREVIEW for preview"
+msgstr ""
+
+#: capplets/background/applier.c:385
+#, c-format
+msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
+msgstr "Nisem mogel nalo¾iti slike \"%s\"; tapete izkljuèene."
+
+#: capplets/background/applier.c:491
+msgid "Disabled"
+msgstr "Izkljuèeno"
+
+#: capplets/background/background.desktop.in.in.h:1
 msgid "Background"
 msgstr "Ozadje"
 
-#: capplets/background/background.desktop.in.h:2
+#: capplets/background/background.desktop.in.in.h:2
 msgid "Configuration of the desktop's background"
 msgstr "Nastavitev ozadja namizja"
 
-#: capplets/background/background-properties-capplet.c:291
-#: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:575
-#: capplets/keyboard/gnome-keyboard-properties.c:319
-#: capplets/mouse/gnome-mouse-properties.c:493
-#: capplets/sound/sound-properties-capplet.c:139
-msgid "Retrieve and store legacy settings"
+#: capplets/background/background-properties.glade.h:1
+msgid "Background colors"
+msgstr "Barve ozadja"
+
+#: capplets/background/background-properties.glade.h:2
+msgid "Background picture"
+msgstr "Slika v ozadju"
+
+#: capplets/background/background-properties.glade.h:3
+msgid "Centered"
+msgstr "Centrirano"
+
+#: capplets/background/background-properties.glade.h:4
+msgid "Horizontal gradient"
+msgstr "Vodoravni preliv"
+
+#: capplets/background/background-properties.glade.h:5
+msgid "Image:"
+msgstr "Slika:"
+
+#: capplets/background/background-properties.glade.h:6
+msgid "Opacity (percent):"
+msgstr "Prosojnost (procentov):"
+
+#: capplets/background/background-properties.glade.h:7
+msgid "Pick a color"
+msgstr "Izberi barvo"
+
+#: capplets/background/background-properties.glade.h:8
+msgid "Scaled (keep aspect ratio)"
+msgstr "Raztegnjeno (ohrani razmerja)"
+
+#: capplets/background/background-properties.glade.h:9
+msgid "Solid color"
+msgstr "polna barva"
+
+#: capplets/background/background-properties.glade.h:10
+msgid "Stretched"
+msgstr "Raztegnjeno"
+
+#: capplets/background/background-properties.glade.h:11
+msgid "Style:"
+msgstr "Slog:"
+
+#: capplets/background/background-properties.glade.h:12
+msgid "Tiled"
+msgstr "Tlakovano"
+
+#: capplets/background/background-properties.glade.h:13
+msgid "Use a picture for the background"
 msgstr ""
 
-#: capplets/background/background-properties-capplet.c:315
-#, fuzzy
-msgid "Background properties"
-msgstr "Barve ozadja"
+#: capplets/background/background-properties.glade.h:14
+msgid "Vertical gradient"
+msgstr "Navpièni preliv"
 
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr "Le uveljavi nastavitve in konèaj"
 
-#: capplets/common/gconf-property-editor.c:144
-msgid "Key"
+#: capplets/common/capplet-util.c:243
+msgid "Retrieve and store legacy settings"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:145
-msgid "GConf key to which this property editor is attached"
-msgstr ""
-
-#: capplets/common/gconf-property-editor.c:151
-msgid "Callback"
-msgstr ""
-
-#: capplets/common/gconf-property-editor.c:152
-msgid "Issue this callback when the value associated with key gets changed"
-msgstr ""
-
-#: capplets/common/gconf-property-editor.c:157
-msgid "Change set"
-msgstr ""
-
-#: capplets/common/gconf-property-editor.c:158
-msgid ""
-"GConf change set containing data to be forwarded to the gconf client on apply"
-msgstr ""
-
-#: capplets/common/gconf-property-editor.c:163
-msgid "Conversion to widget callback"
-msgstr ""
-
-#: capplets/common/gconf-property-editor.c:164
-msgid ""
-"Callback to be issued when data are to be converted from GConf to the widget"
-msgstr ""
-
-#: capplets/common/gconf-property-editor.c:169
-msgid "Conversion from widget callback"
-msgstr ""
-
-#: capplets/common/gconf-property-editor.c:170
-msgid ""
-"Callback to be issued when data are to be converted to GConf from the widget"
-msgstr ""
-
-#: capplets/common/gconf-property-editor.c:175
-msgid "UI Control"
-msgstr ""
-
-#: capplets/common/gconf-property-editor.c:176
-msgid "Object that controls the property (normally a widget)"
-msgstr ""
-
-#: capplets/default-applications/default-applications.desktop.in.h:1
+#: capplets/default-applications/default-applications.desktop.in.in.h:1
 msgid "Choose the applications used by default"
 msgstr "Spremeni privzet program"
 
-#: capplets/default-applications/default-applications.desktop.in.h:2
+#: capplets/default-applications/default-applications.desktop.in.in.h:2
 msgid "Default Applications"
 msgstr "Privzeti programi"
 
-#: capplets/desktop-links/Advanced.directory.in.in.h:1
-msgid "Advanced"
+#: capplets/default-applications/interface.c:108
+msgid "Gnome Default Editor"
+msgstr "Privzet urejevalnik za Gnome"
+
+#: capplets/default-applications/interface.c:125
+msgid "Select an Editor"
+msgstr "Izberi urejevalnik"
+
+#: capplets/default-applications/interface.c:134
+msgid "With this option, you can select a predefined Editor as your default"
 msgstr ""
-
-#: capplets/desktop-links/Advanced.directory.in.in.h:2
-#, fuzzy
-msgid "Advanced Settings"
-msgstr "Glavne nastavitve"
-
-#: capplets/desktop-links/cd.desktop.in.in.h:1
-#, fuzzy
-msgid "CD Properties"
-msgstr "Lastnosti %s"
-
-#: capplets/desktop-links/cd.desktop.in.in.h:2
-#, fuzzy
-msgid "Configure handling of CD devices"
-msgstr "Nastavi ohranjevalnik zaslona"
-
-#: capplets/desktop-links/legacy-applications.desktop.in.in.h:1
-#, fuzzy
-msgid "Legacy Applications"
-msgstr "Privzeti programi"
-
-#: capplets/desktop-links/legacy-applications.desktop.in.in.h:2
-msgid "Legacy applications settings (grdb)"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
-msgid "Appearance"
-msgstr "Videz"
-
-#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:2
-#, fuzzy
-msgid "Configure window appearance"
-msgstr "Nastavi upravljanje z energijo"
-
-#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:1
-msgid "Configure key shortcuts"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:2
-#, fuzzy
-msgid "Shortcuts"
-msgstr "Kratek"
-
-#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:1
-msgid "Configure window focusing"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:2
-msgid "Focus behavior"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:1
-#, fuzzy
-msgid "Configure window properties"
-msgstr "Lastnosti mi¹ke"
-
-#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:2
-msgid "Matched Windows"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:1
-msgid "Configure window minimization and maximization"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:2
-msgid "Minimizing and Maximizing"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
-msgid "Configure window manager configuration properties"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:2
-msgid "Meta"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:1
-msgid "Configure miscellaneous window features"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
-msgid "Miscellaneous"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:1
-msgid "Configure window move/resize"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:2
-msgid "Moving and Resizing"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:1
-#, fuzzy
-msgid "Configure window placement"
-msgstr "Nastavi upravljanje z energijo"
-
-#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:2
-msgid "Placement"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:1
-#, fuzzy
-msgid "Control Center Menu"
-msgstr "Kontrolni center GNOME"
-
-#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:2
-msgid "Sawfish window manager"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:1
-#, fuzzy
-msgid "Enable window manager sound events"
-msgstr "Vkljuèi u_pravljanje z energijo."
-
-#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
-#: capplets/sound/sound.desktop.in.h:2
-msgid "Sound"
-msgstr "Zvok"
-
-#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:1
-#, fuzzy
-msgid "Configure workspaces"
-msgstr "Nastavi upravljanje z energijo"
-
-#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:2
-msgid "Workspaces"
-msgstr ""
-
-#: capplets/desktop-links/session.desktop.in.in.h:1
-msgid "Configure which non-session aware programs are started up"
-msgstr ""
-
-#: capplets/desktop-links/session.desktop.in.in.h:2
-msgid "Startup Programs"
-msgstr ""
-
-#.
-#. * Translatable strings file
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/file-types/category-names.h:7
-msgid "Documents"
-msgstr ""
-
-#: capplets/file-types/category-names.h:8
-msgid "Word Processor"
-msgstr ""
-
-#: capplets/file-types/category-names.h:9
-msgid "Published Materials"
-msgstr ""
-
-#: capplets/file-types/category-names.h:10
-msgid "Spreadsheet"
-msgstr ""
-
-#: capplets/file-types/category-names.h:11
-msgid "Presentation"
-msgstr ""
-
-#: capplets/file-types/category-names.h:12
-msgid "Diagram"
-msgstr ""
-
-#: capplets/file-types/category-names.h:13
-msgid "TeX"
-msgstr ""
-
-#: capplets/file-types/category-names.h:14
-msgid "Vector Graphics"
-msgstr ""
-
-#: capplets/file-types/category-names.h:15
-msgid "World Wide Web"
-msgstr ""
-
-#: capplets/file-types/category-names.h:16
-#, fuzzy
-msgid "Plain Text"
-msgstr "GLPlanet"
-
-#: capplets/file-types/category-names.h:17
-msgid "Extended Markup Language (XML)"
-msgstr ""
-
-#: capplets/file-types/category-names.h:18
-#, fuzzy
-msgid "Information"
-msgstr "Nastavitv"
-
-#: capplets/file-types/category-names.h:19
-msgid "Financial"
-msgstr ""
-
-#: capplets/file-types/category-names.h:20
-msgid "Calendar"
-msgstr ""
-
-#: capplets/file-types/category-names.h:21
-msgid "Contacts"
-msgstr ""
-
-#: capplets/file-types/category-names.h:22
-msgid "Packages"
-msgstr ""
-
-#: capplets/file-types/category-names.h:23
-msgid "Software Development"
-msgstr ""
-
-#: capplets/file-types/category-names.h:24
-msgid "Source Code"
-msgstr ""
-
-#: capplets/file-types/category-names.h:25
-msgid "Audio"
-msgstr ""
-
-#: capplets/file-types/category-names.h:26
-#, fuzzy
-msgid "Images"
-msgstr "Slika:"
-
-#: capplets/file-types/category-names.h:27
-msgid "Video"
-msgstr ""
-
-#: capplets/file-types/file-types-capplet.c:212
-msgid "Description"
-msgstr "Opis"
-
-#: capplets/file-types/file-types-capplet.c:219
-msgid "Extensions"
-msgstr ""
-
-#: capplets/file-types/file-types.desktop.in.h:1
-msgid "File Types and Programs"
-msgstr ""
-
-#: capplets/file-types/file-types.desktop.in.h:2
-msgid "Specify which programs are used to open or view each file type"
-msgstr ""
-
-#: capplets/file-types/mime-category-edit-dialog.c:137
-msgid "Edit file category"
-msgstr ""
-
-#: capplets/file-types/mime-category-edit-dialog.c:171
-#: capplets/file-types/mime-edit-dialog.c:204
-#: capplets/file-types/service-edit-dialog.c:166
-#: capplets/file-types/service-edit-dialog.c:167
-#, fuzzy
-msgid "Model"
-msgstr "_Naèin:"
-
-#: capplets/file-types/mime-category-edit-dialog.c:172
-msgid "GtkTreeModel that contains the category data"
-msgstr ""
-
-#: capplets/file-types/mime-category-edit-dialog.c:177
-msgid "MIME category info"
-msgstr ""
-
-#: capplets/file-types/mime-category-edit-dialog.c:178
-msgid "Structure containing information on the MIME category"
-msgstr ""
-
-#: capplets/file-types/mime-category-edit-dialog.c:343
-#: capplets/file-types/mime-edit-dialog.c:392
-#: capplets/file-types/mime-edit-dialog.c:492
-#: capplets/file-types/service-edit-dialog.c:351
-#: capplets/file-types/service-edit-dialog.c:397
-msgid "Custom"
-msgstr "Prikrojeno"
-
-#: capplets/file-types/mime-edit-dialog.c:164
-msgid "Extension"
-msgstr ""
-
-#: capplets/file-types/mime-edit-dialog.c:167
-msgid "Edit file type"
-msgstr ""
-
-#: capplets/file-types/mime-edit-dialog.c:205
-msgid "Underlying model to notify when Ok is clicked"
-msgstr ""
-
-#: capplets/file-types/mime-edit-dialog.c:212
-msgid "MIME type information"
-msgstr ""
-
-#: capplets/file-types/mime-edit-dialog.c:213
-msgid "Structure with data on the MIME type"
-msgstr ""
-
-#: capplets/file-types/mime-edit-dialog.c:219
-msgid "Is add dialog"
-msgstr ""
-
-#: capplets/file-types/mime-edit-dialog.c:220
-msgid "True if this dialog is for adding a MIME type"
-msgstr ""
-
-#: capplets/file-types/mime-edit-dialog.c:387
-#: capplets/file-types/mime-edit-dialog.c:442
-#, fuzzy
-msgid "None"
-msgstr "(Brez)"
-
-#: capplets/file-types/mime-edit-dialog.c:673
+"S to mo¾nostjo lahko kot privzetega izberete prednastavljen urejevalnik"
+
+#: capplets/default-applications/interface.c:154
+msgid "Custom Editor"
+msgstr "Poljuben urejevalnik"
+
+#: capplets/default-applications/interface.c:163
+msgid "With this option you can create your own default editor"
+msgstr "S to mo¾nostjo lahko ustvarite svoj lasten privzet urejevalnik"
+
+#: capplets/default-applications/interface.c:174
+#: capplets/default-applications/interface.c:305
+#: capplets/default-applications/interface.c:436
+msgid "Start in Terminal"
+msgstr "Po¾eni v terminalu"
+
+#: capplets/default-applications/interface.c:182
+msgid "Does this editor need to start in an xterm?"
+msgstr "Ali se mora urejevalnik pognati v xterm-u"
+
+#: capplets/default-applications/interface.c:184
+msgid "Accepts Line Number"
+msgstr "Sprejema ¹tevilke vrstic"
+
+#: capplets/default-applications/interface.c:192
+msgid "Does this editor accept line numbers from the command line?"
+msgstr "Ali ta urejevalnik sprejema ¹tevilke vrstic iz ukazne vrstice?"
+
+#: capplets/default-applications/interface.c:203
+#: capplets/default-applications/interface.c:334
+#: capplets/default-applications/interface.c:465
+#: capplets/default-applications/interface.c:576
+msgid "Command:"
+msgstr "Ukaz:"
+
+#: capplets/default-applications/interface.c:221
+msgid "Please enter the command line used to start this editor"
+msgstr "Prosim, vpi¹ite ukaz s katerim se urejevalnik po¾ene"
+
+#: capplets/default-applications/interface.c:232
+msgid "Text Editor"
+msgstr "Urejevalnik besedila"
+
+#: capplets/default-applications/interface.c:239
+msgid "Gnome Default Web Browser"
+msgstr "Privzet spletni brskalnik za Gnome"
+
+#: capplets/default-applications/interface.c:256
+msgid "Select a Web Browser"
+msgstr "Izberite spletni brskalnik"
+
+#: capplets/default-applications/interface.c:265
 msgid ""
-"Invalid MIME type. Please enter a valid MIME type, or leave the field blank "
-"to have one generated for you."
-msgstr ""
+"With this option, you can select a predefined Web Browser as your default"
+msgstr "S to mo¾nostjo lahko kot privzetega izberete prednastavljen brskalnik"
 
-#: capplets/file-types/mime-edit-dialog.c:684
-msgid "There already exists a MIME type of that name."
-msgstr ""
+#: capplets/default-applications/interface.c:285
+msgid "Custom Web Browser"
+msgstr "Poljuben brskalnik"
 
-#: capplets/file-types/mime-edit-dialog.c:748
-msgid "Category"
-msgstr ""
+#: capplets/default-applications/interface.c:294
+msgid "With this option you can create your own default web browser"
+msgstr "S to mo¾nostjo lahko ustvarite svoj lasten privzet brskalnik"
 
-#: capplets/file-types/mime-edit-dialog.c:753
-msgid "Choose a file category"
-msgstr ""
+#: capplets/default-applications/interface.c:313
+msgid "Does this web browser need to display in an xterm?"
+msgstr "Ali se mora brskalnik pognati v xterm-u"
 
-#: capplets/file-types/mime-types-model.c:167
-#: capplets/file-types/mime-types-model.c:168
-msgid "Model for categories only"
-msgstr ""
+#: capplets/default-applications/interface.c:315
+msgid "Understands Netscape Remote Control"
+msgstr "Razume oddaljeno kontrolo Netscape"
 
-#: capplets/file-types/mime-types-model.c:420
-#, fuzzy
-msgid "Internet Services"
-msgstr "Interferenca"
-
-#: capplets/file-types/service-edit-dialog.c:133
-msgid "Edit service information"
-msgstr ""
-
-#: capplets/file-types/service-edit-dialog.c:174
-msgid "Service info"
-msgstr ""
-
-#: capplets/file-types/service-edit-dialog.c:175
-msgid "Structure containing service information"
-msgstr ""
-
-#: capplets/file-types/service-edit-dialog.c:181
-msgid "Is add"
-msgstr ""
-
-#: capplets/file-types/service-edit-dialog.c:182
-msgid "TRUE if this is an add service dialog"
-msgstr ""
-
-#: capplets/file-types/service-edit-dialog.c:489
-#, fuzzy
-msgid "Please enter a protocol name."
-msgstr "Prosim vpi¹ite ukazno vrstico spodaj."
-
-#: capplets/file-types/service-edit-dialog.c:502
+#: capplets/default-applications/interface.c:323
 msgid ""
-"Invalid protocol name. Please enter a protocol name without any spaces or "
-"punctuation."
+"Does this web browser support the netscape remote control protocol?  If in "
+"doubt, and this web browser isn't Netscape or Mozilla, it probably doesn't."
 msgstr ""
+"Ali ta brskalnik podpira protokol za oddaljeno upravljanje Netscape? Èe ste "
+"v dvomih in ta brskalnik ni Netscape ali Mozilla, potem verjetno ne."
 
-#: capplets/file-types/service-edit-dialog.c:515
-msgid "There is already a protocol by that name."
-msgstr ""
+#: capplets/default-applications/interface.c:352
+msgid "Please enter the command line used to start this web browser"
+msgstr "Prosim, vpi¹ite ukaz s katerim se brskalnik po¾ene"
 
-#: capplets/file-types/service-info.c:44
-msgid "Unknown service types"
-msgstr ""
+#: capplets/default-applications/interface.c:363
+msgid "Web Browser"
+msgstr "Spletni brskalnik"
 
-#: capplets/file-types/service-info.c:45
-msgid "World wide web"
-msgstr ""
+#: capplets/default-applications/interface.c:370
+msgid "Default Help Viewer"
+msgstr "Privzet pregledovalnik pomoèi"
 
-#: capplets/file-types/service-info.c:46
-msgid "File transfer protocol"
-msgstr ""
+#: capplets/default-applications/interface.c:387
+msgid "Select a Viewer"
+msgstr "Izberi pregledovalnik"
 
-#: capplets/file-types/service-info.c:47
-#, fuzzy
-msgid "Detailed documentation"
-msgstr "Privzeta lokacija"
+#: capplets/default-applications/interface.c:396
+msgid "With this option you can select a predefined help viewer."
+msgstr "S to mo¾nostjo lahko izberete prednastavljen pregledovalnik pomoèi."
 
-#: capplets/file-types/service-info.c:48
-msgid "Manual pages"
-msgstr ""
+#: capplets/default-applications/interface.c:416
+msgid "Custom Help Viewer"
+msgstr "Poljuben pregledovalnik pomoèi"
 
-#: capplets/file-types/service-info.c:49
-msgid "Electronic mail transmission"
-msgstr ""
+#: capplets/default-applications/interface.c:425
+msgid "With this option you can create your own help viewer"
+msgstr "S to mo¾nostjo lahko ustvarite svoj lasten pregledovalnik pomoèi"
 
-#: capplets/font/font-properties.desktop.in.h:1
-#, fuzzy
-msgid "Font"
-msgstr "Gozd"
+#: capplets/default-applications/interface.c:444
+msgid "Does this help viewer need an xterm for display?"
+msgstr "Ali se mora pregledovalnik pomoèi pognati v xterm-u"
 
-#: capplets/font/font-properties.desktop.in.h:2
-msgid "Select which font to use"
-msgstr ""
+#: capplets/default-applications/interface.c:446
+msgid "Accepts URLs"
+msgstr "Sprejema URLje"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:315
-#: capplets/keyboard/gnome-keyboard-properties.c:317
-#: capplets/sound/sound-properties-capplet.c:135
-#: capplets/sound/sound-properties-capplet.c:137
+#: capplets/default-applications/interface.c:454
+msgid "Does this help viewer allow URLs for help?"
+msgstr "Ali ta pregledovalnik pomoèi sprejema URLje do pomoèi?"
+
+#: capplets/default-applications/interface.c:483
+msgid "Please enter the command line used to start this help viewer"
+msgstr "Prosim, vpi¹ite ukaz s katerim se brskalnik po¾ene"
+
+#: capplets/default-applications/interface.c:494
+msgid "Help Viewer"
+msgstr "Pregledovalnik pomoèi"
+
+#: capplets/default-applications/interface.c:501
+msgid "Default Terminal"
+msgstr "Privzet terminal"
+
+#: capplets/default-applications/interface.c:518
+msgid "Select a Terminal"
+msgstr "Izberite terminal"
+
+#: capplets/default-applications/interface.c:527
+msgid "With this option you can select a predefined terminal."
+msgstr "S to mo¾nostjo lahko izberete prednastavljen terminal."
+
+#: capplets/default-applications/interface.c:547
+msgid "Custom Terminal"
+msgstr "Poljuben terminal"
+
+#: capplets/default-applications/interface.c:556
+msgid "With this option you can create your own terminal"
+msgstr "S to mo¾nostjo lahko ustvarite svoj lasten terminal"
+
+#: capplets/default-applications/interface.c:586
+msgid "Exec Flag:"
+msgstr "Parameter za zagon:"
+
+#: capplets/default-applications/interface.c:604
 msgid ""
-"Just apply settings and quit (compatibility only; now handled by daemon)"
+"Please enter the flag used by this terminal to specify the command to run on "
+"startup.  For example, in 'xterm' this would be '-e'."
 msgstr ""
+"Prosim, vpi¹ite parameter, ki ga ta termianl uporablja, za navedbo ukaza, ki "
+"naj se za¾ene ob zagonu. Na primer, za 'xterm' bi bila odgovor '-e'."
 
-#: capplets/keyboard/keyboard.desktop.in.h:1
+#: capplets/default-applications/interface.c:614
+msgid "Please enter the command line used to start this terminal"
+msgstr "Prosim, vpi¹ite ukaz s katerim naj se terminal po¾ene"
+
+#: capplets/default-applications/interface.c:625
+msgid "Terminal"
+msgstr "Terminal"
+
+#: capplets/default-applications/support.c:100
+#: capplets/default-applications/support.c:138
+#, c-format
+msgid "Couldn't find pixmap file: %s"
+msgstr "Nisem na¹el datoteke z sliko: %s"
+
+#: capplets/default-applications/support.c:116
+#, c-format
+msgid "Couldn't create pixmap from file: %s"
+msgstr "Nisem mogel ustvariti slike iz datoteke: %s"
+
+#: capplets/desktop-links/gnome-hint-properties.desktop.in.h:1
+msgid "Options for the startup hint dialog"
+msgstr "Mo¾nosti za zaèetno pogovorno okno z namigom"
+
+#: capplets/desktop-links/gnome-hint-properties.desktop.in.h:2
+msgid "Startup Hint"
+msgstr "Zaèetni namig"
+
+#: capplets/keyboard/keyboard-properties.glade.h:9
+#: capplets/keyboard/keyboard.desktop.in.in.h:1
 msgid "Keyboard"
 msgstr "Tipkovnica"
 
-#: capplets/keyboard/keyboard.desktop.in.h:2
+#: capplets/keyboard/keyboard.desktop.in.in.h:2
 msgid "Keyboard Properties"
 msgstr "Nastavitve tipkovnice"
 
-#: capplets/mouse/gnome-mouse-properties.c:518
-#: capplets/mouse/mouse.desktop.in.h:2
-msgid "Mouse Properties"
-msgstr "Lastnosti mi¹ke"
+#: capplets/keyboard/keyboard-properties.glade.h:1
+msgid "Bell"
+msgstr "Zvonec"
 
-#: capplets/mouse/mouse.desktop.in.h:1
+#: capplets/keyboard/keyboard-properties.glade.h:2
+msgid "Click volume"
+msgstr "Glasnost klika"
+
+#: capplets/keyboard/keyboard-properties.glade.h:3
+msgid "Delay before repeat:"
+msgstr "Premor pred ponovitvijo:"
+
+#: capplets/keyboard/keyboard-properties.glade.h:4
+msgid "Duration (ms)"
+msgstr "Trajanje (ms)"
+
+#: capplets/keyboard/keyboard-properties.glade.h:5
+msgid "Enable Keyboard Click"
+msgstr "Vkljuèi klikanje tipkovnice"
+
+#: capplets/keyboard/keyboard-properties.glade.h:6
+msgid "Enable Keyboard Repeat"
+msgstr "Vkljuèi ponavljanje"
+
+#: capplets/keyboard/keyboard-properties.glade.h:7
+#: capplets/mouse/mouse-properties.glade.h:1
+msgid "Fast"
+msgstr "Hitro"
+
+#: capplets/keyboard/keyboard-properties.glade.h:8
+msgid "Key repeat rate:"
+msgstr "Hitrost ponavljanja tipk:"
+
+#: capplets/keyboard/keyboard-properties.glade.h:10
+msgid "Long"
+msgstr "Dolg"
+
+#: capplets/keyboard/keyboard-properties.glade.h:11
+msgid "Medium"
+msgstr "Srednji"
+
+#: capplets/keyboard/keyboard-properties.glade.h:12
+msgid "Pitch (Hz)"
+msgstr "Vi¹ina (Hz)"
+
+#: capplets/keyboard/keyboard-properties.glade.h:13
+msgid "Short"
+msgstr "Kratek"
+
+#: capplets/keyboard/keyboard-properties.glade.h:14
+#: capplets/mouse/mouse-properties.glade.h:10
+msgid "Slow"
+msgstr "Poèasno"
+
+#: capplets/keyboard/keyboard-properties.glade.h:15
+msgid "Test"
+msgstr "Preizkus"
+
+#: capplets/keyboard/keyboard-properties.glade.h:16
+msgid "Very fast"
+msgstr "Zelo hiter"
+
+#: capplets/keyboard/keyboard-properties.glade.h:17
+msgid "Very long"
+msgstr "Zelo dolg"
+
+#: capplets/keyboard/keyboard-properties.glade.h:18
+msgid "Volume"
+msgstr "Glasnost"
+
+#: capplets/mouse/mouse.desktop.in.in.h:1
 msgid "Mouse"
 msgstr "Mi¹ka"
 
-#: capplets/screensaver/screensaver.desktop.in.h:1
-#, fuzzy
-msgid "Configure the settings of the screensaver"
-msgstr "Za ta ohranjevalnik zaslona ni spremenljivih nastavitev."
+#: capplets/mouse/mouse.desktop.in.in.h:2
+msgid "Mouse Properties"
+msgstr "Lastnosti mi¹ke"
 
-#: capplets/screensaver/screensaver.desktop.in.h:2
+#: capplets/mouse/mouse-properties.glade.h:2
+msgid "High"
+msgstr "Visoka"
+
+#: capplets/mouse/mouse-properties.glade.h:3
+msgid "Left handed"
+msgstr "Za levièarje"
+
+#: capplets/mouse/mouse-properties.glade.h:4
+msgid "Low"
+msgstr "Nizka"
+
+#: capplets/mouse/mouse-properties.glade.h:5
+msgid "Mouse Configuration"
+msgstr "Nastavitev mi¹ke"
+
+#: capplets/mouse/mouse-properties.glade.h:6
+msgid "Mouse speed:"
+msgstr "Hitrost mi¹ke:"
+
+#: capplets/mouse/mouse-properties.glade.h:7
+msgid "My mouse is:"
+msgstr "Moja mi¹ka je:"
+
+#: capplets/mouse/mouse-properties.glade.h:8
+msgid "Right handed"
+msgstr "Za desnièarje"
+
+#: capplets/mouse/mouse-properties.glade.h:9
+msgid "Sensitivity:"
+msgstr "Obèutljivost"
+
+#: capplets/screensaver/preferences.c:786
+msgid "Custom screensaver. No description available"
+msgstr "Nestandarden ohranjevalnik zaslona. Opis ni dostopen"
+
+#: capplets/screensaver/prefs-widget.c:192
+#: capplets/screensaver/screensaver.desktop.in.in.h:2
 msgid "Screensaver"
 msgstr "Ohranjevalnik zaslona"
 
-#: capplets/sound/sound.desktop.in.h:1
+#: capplets/screensaver/prefs-widget.c:740
+#, c-format
+msgid "About %s\n"
+msgstr "O %s\n"
+
+#: capplets/screensaver/screensaver.desktop.in.in.h:1
+msgid "Configure the settings of the screensaver"
+msgstr "Nastavi ohranjevalnik zaslona"
+
+#: capplets/screensaver/screensaver-prefs-dialog.c:185
+msgid "Name:"
+msgstr "Ime:"
+
+#: capplets/screensaver/screensaver-prefs-dialog.c:197
+msgid "Settings"
+msgstr "Nastavitve"
+
+#: capplets/screensaver/screensaver-prefs-dialog.c:204
+msgid "Description"
+msgstr "Opis"
+
+#: capplets/screensaver/screensaver-prefs-dialog.c:207
+msgid "label1"
+msgstr "oznaèba1"
+
+#: capplets/screensaver/screensaver-prefs-dialog.c:216
+msgid "Demo"
+msgstr "Demonstracija"
+
+#: capplets/screensaver/screensaver-prefs-dialog.c:274
+#, c-format
+msgid "%s properties"
+msgstr "Lastnosti %s"
+
+#: capplets/screensaver/screensaver-prefs-dialog.c:1366
+msgid "There are no configurable settings for this screensaver."
+msgstr "Za ta ohranjevalnik zaslona ni spremenljivih nastavitev."
+
+#: capplets/screensaver/screensaver-prefs-dialog.c:1375
+msgid ""
+"Cannot find the data to configure this screensaver. Please edit the command "
+"line below."
+msgstr ""
+"Ne najdem podatkov za nastavitev tega ohranjevalnika. Prosim uredite ukazno "
+"vrstico spodaj."
+
+#: capplets/screensaver/screensaver-prefs-dialog.c:1380
+msgid "Please enter a command line below."
+msgstr "Prosim vpi¹ite ukazno vrstico spodaj."
+
+#: capplets/screensaver/screensaver-prefs-dialog.c:1395
+msgid "Visual:"
+msgstr "Vizualno:"
+
+#: capplets/screensaver/screensaver-prefs-dialog.c:1424
+#: capplets/screensaver/screensaver-prefs-dialog.c:1715
+msgid "Any"
+msgstr "Katerkoli"
+
+#: capplets/screensaver/screensaver-properties.glade.h:1
+msgid " Configure..."
+msgstr " Nastavi..."
+
+#: capplets/screensaver/screensaver-properties.glade.h:2
+msgid "About \"<Screensaver name>\""
+msgstr "O \"<Screensaver name>\""
+
+#: capplets/screensaver/screensaver-properties.glade.h:3
+msgid "Black screen only"
+msgstr "Le èrn zaslon"
+
+#: capplets/screensaver/screensaver-properties.glade.h:4
+msgid "Configure Power Management"
+msgstr "Nastavi upravljanje z energijo"
+
+#: capplets/screensaver/screensaver-properties.glade.h:5
+msgid "Disable screensaver"
+msgstr "Izkljuèi ohranjevalnik zaslona"
+
+#: capplets/screensaver/screensaver-properties.glade.h:6
+msgid ""
+"Draws quasiperiodic tilings; think of the implications on modern formica "
+"technology. Written by Time Korlove. In April 1997, Sir Roger Penrose, a "
+"British math professor who has worked with Stephen Hawking on such topics as "
+"relatvity, black holes, and whether time has a beginning, files a copyright-"
+"infringement lawsuit against Kimberly-Clark Corporation, wchih Penrose said "
+"copied a pattern he created ( apattern demonstrating that \"a nonrepeating "
+"pattern could exist in nature\") for its Kleenex quilted toilet paper. "
+msgstr ""
+
+#: capplets/screensaver/screensaver-properties.glade.h:7
+msgid "Enable _power management"
+msgstr "Vkljuèi u_pravljanje z energijo."
+
+#: capplets/screensaver/screensaver-properties.glade.h:8
+msgid "Go to standby mode after"
+msgstr "Pojdi v naèin pripravljenosti po"
+
+#: capplets/screensaver/screensaver-properties.glade.h:9
+msgid "Go to suspend mode after"
+msgstr "Pojdi v spanje po"
+
+#: capplets/screensaver/screensaver-properties.glade.h:10
+msgid "One screensaver all the time"
+msgstr "En ohranjevalnik ves èas"
+
+#: capplets/screensaver/screensaver-properties.glade.h:11
+msgid "Preview"
+msgstr "Predogled"
+
+#: capplets/screensaver/screensaver-properties.glade.h:12
+msgid "R_equire password to unlock screen"
+msgstr "Zahtevaj geslo za _odklenitev zaslona"
+
+#: capplets/screensaver/screensaver-properties.glade.h:13
+msgid "Random (all screensavers)"
+msgstr "Nakljuèni ohranjevalnik zaslona (izmed vseh)"
+
+#: capplets/screensaver/screensaver-properties.glade.h:14
+msgid "Random (checked screensavers)"
+msgstr "Nakljuèni ohranjevalnik zaslona (izmed izbranih)"
+
+#: capplets/screensaver/screensaver-properties.glade.h:15
+msgid "S_tart screensaver after "
+msgstr "_Po¾eni ohranjevalnik po "
+
+#: capplets/screensaver/screensaver-properties.glade.h:16
+msgid "S_witch screensavers after "
+msgstr "_Zamenjaj ohranjvalnik vsakih "
+
+#: capplets/screensaver/screensaver-properties.glade.h:17
+msgid "Settings for \"<Screensaver name>\""
+msgstr "Nastavitve za \"<Screensaver name>\""
+
+#: capplets/screensaver/screensaver-properties.glade.h:18
+msgid "Shut down monitor after"
+msgstr "Ugasni zaslon po"
+
+#: capplets/screensaver/screensaver-properties.glade.h:19
+msgid ""
+"There are no configurable settings for this\n"
+"screensaver. "
+msgstr ""
+"Za ta ohranjevalnik zaslona ni \n"
+"spremenljivih nastavitev."
+
+#: capplets/screensaver/screensaver-properties.glade.h:21
+msgid "_About this screensaver..."
+msgstr "_O tem ohranjevalniku..."
+
+#: capplets/screensaver/screensaver-properties.glade.h:22
+msgid "_Add"
+msgstr "_Dodaj"
+
+#: capplets/screensaver/screensaver-properties.glade.h:23
+msgid "_Mode:"
+msgstr "_Naèin:"
+
+#: capplets/screensaver/screensaver-properties.glade.h:24
+msgid "_Remove"
+msgstr "_Odstrani"
+
+#: capplets/screensaver/screensaver-properties.glade.h:25
+msgid "_Settings"
+msgstr "_Nastavitve"
+
+#: capplets/screensaver/screensaver-properties.glade.h:26
+msgid "minutes"
+msgstr "minutah"
+
+#: capplets/screensaver/screensavers/3d_clock.xml.h:1
+msgid "3d clock"
+msgstr "3D ura"
+
+#: capplets/screensaver/screensavers/3d_clock.xml.h:2
+msgid "Size:"
+msgstr "Velikost:"
+
+#: capplets/screensaver/screensavers/3d_clock.xml.h:3
+msgid "Twist speed:"
+msgstr "Hitrost sukanja:"
+
+#: capplets/screensaver/screensavers/3d_clock.xml.h:4
+msgid "Twist:"
+msgstr "Sukanje:"
+
+#: capplets/screensaver/screensavers/3d_clock.xml.h:5
+msgid "Wobble:"
+msgstr "Neurejeno premikanje:"
+
+#: capplets/screensaver/screensavers/ant.xml.h:1
+msgid ""
+"A cellular automaton that is really a two-dimensional Turing machine: as the "
+"heads (``ants'') walk along the screen, they change pixel values in their "
+"path.  Then, as they pass over changed pixels, their behavior is "
+"influenced.  Written by David Bagley."
+msgstr ""
+"Celièna avtomaticja, ki je v bistvu dvodimenzionalni Turingov stroj: mravlje "
+"hodijo okoli kot glave èez zaslon in spreminjajo vrednosti pikslov na "
+"njihovi poti. Potem ko gredo èez spremenjene piksle to vpliva na njihovo "
+"vedenje.  Napisal David Bagley."
+
+#: capplets/screensaver/screensavers/ant.xml.h:2
+msgid "Ant"
+msgstr "Mravelje"
+
+#: capplets/screensaver/screensavers/ant.xml.h:3
+msgid "Four Sided cells"
+msgstr "©tiristrane celice"
+
+#: capplets/screensaver/screensavers/ant.xml.h:4
+#: capplets/screensaver/screensavers/attraction.xml.h:4
+#: capplets/screensaver/screensavers/bsod.xml.h:3
+#: capplets/screensaver/screensavers/compass.xml.h:3
+#: capplets/screensaver/screensavers/flag.xml.h:3
+#: capplets/screensaver/screensavers/qix.xml.h:3
+msgid "Full Color"
+msgstr "Polna barva"
+
+#: capplets/screensaver/screensavers/ant.xml.h:5
+#: capplets/screensaver/screensavers/attraction.xml.h:12
+#: capplets/screensaver/screensavers/bsod.xml.h:4
+#: capplets/screensaver/screensavers/compass.xml.h:4
+#: capplets/screensaver/screensavers/flag.xml.h:4
+#: capplets/screensaver/screensavers/qix.xml.h:6
+msgid "Monochrome"
+msgstr "Èrnobel"
+
+#: capplets/screensaver/screensavers/ant.xml.h:6
+msgid "Nine Sided cells"
+msgstr "Devetstrane celice"
+
+#: capplets/screensaver/screensavers/ant.xml.h:7
+#: capplets/screensaver/screensavers/flag.xml.h:5
+msgid "Number of colours"
+msgstr "©tevilo barv"
+
+#: capplets/screensaver/screensavers/ant.xml.h:8
+msgid "Random"
+msgstr "Nakljuèno"
+
+#: capplets/screensaver/screensavers/ant.xml.h:9
+msgid "Random size upto"
+msgstr "Nakljuèna velikost do"
+
+#: capplets/screensaver/screensavers/ant.xml.h:10
+msgid "Randomize"
+msgstr "Nakljuèno"
+
+#: capplets/screensaver/screensavers/ant.xml.h:11
+msgid "Sharp turns"
+msgstr "Ostri obrati"
+
+#: capplets/screensaver/screensavers/ant.xml.h:12
+msgid "Six Sided cells"
+msgstr "©eststrane celice"
+
+#: capplets/screensaver/screensavers/ant.xml.h:13
+msgid "Specific"
+msgstr "Specifièno"
+
+#: capplets/screensaver/screensavers/ant.xml.h:14
+#: capplets/screensaver/screensavers/flag.xml.h:7
+msgid "Specific size of"
+msgstr "Specifièna velikost"
+
+#: capplets/screensaver/screensavers/ant.xml.h:15
+#: capplets/screensaver/screensavers/attraction.xml.h:15
+#: capplets/screensaver/screensavers/bsod.xml.h:5
+#: capplets/screensaver/screensavers/compass.xml.h:5
+#: capplets/screensaver/screensavers/flag.xml.h:8
+#: capplets/screensaver/screensavers/qix.xml.h:12
+msgid "Speed"
+msgstr "Hitrost"
+
+#: capplets/screensaver/screensavers/ant.xml.h:16
+msgid "Three Sided cells"
+msgstr "Trostrane celice"
+
+#: capplets/screensaver/screensavers/ant.xml.h:17
+#: capplets/screensaver/screensavers/flag.xml.h:11
+msgid "Timeout"
+msgstr "Èasovna omejitev"
+
+#: capplets/screensaver/screensavers/ant.xml.h:18
+msgid "Truchet lines"
+msgstr "Vzorec iz èrt"
+
+#: capplets/screensaver/screensavers/ant.xml.h:19
+msgid "Twelve Sided cells"
+msgstr "Dvanajststrane celice"
+
+#: capplets/screensaver/screensavers/ant.xml.h:20
+msgid "number of Ants"
+msgstr "¹tevilo mravelj"
+
+#: capplets/screensaver/screensavers/atlantis.xml.h:1
+msgid "Atlantis"
+msgstr "Atlantik"
+
+#: capplets/screensaver/screensavers/atlantis.xml.h:2
+msgid ""
+"This is xfishtank writ large: a GL animation of a number of sharks, "
+"dolphins, and whales.  The swimming motions are great.  Originally written "
+"by Mark Kilgard."
+msgstr ""
+
+#: capplets/screensaver/screensavers/attraction.xml.h:1
+msgid "Attraction (balls)"
+msgstr "Privlaènost (¾oge)"
+
+#: capplets/screensaver/screensavers/attraction.xml.h:2
+msgid "Balls"
+msgstr "®oge"
+
+#: capplets/screensaver/screensavers/attraction.xml.h:3
+msgid "Color Contrast"
+msgstr "Barvni kontrast"
+
+#: capplets/screensaver/screensavers/attraction.xml.h:5
+msgid "Length of Trail"
+msgstr "Dol¾ina sledi"
+
+#: capplets/screensaver/screensavers/attraction.xml.h:6
+msgid ""
+"Like qix, this uses a simple motion model to generate many different display "
+"modes.  The control points attract each other up to a certain distance, and "
+"then begin to repel each other.  The attraction/repulsion is proportional to "
+"the distance between any two particles, similar to the strong and weak "
+"nuclear forces.  \n"
+"\n"
+"One of the most interesting ways to watch this hack is simply as bouncing "
+"balls, because their motions and interactions with each other are so odd.  "
+"Sometimes two balls will get into a tight orbit around each other, to be "
+"interrupted later by a third, or by the edge of the screen.  It looks quite "
+"chaotic.  \n"
+"\n"
+"Written by Jamie Zawinski, based on Lisp code by John Pezaris."
+msgstr ""
+
+#: capplets/screensaver/screensavers/attraction.xml.h:11
+#: capplets/screensaver/screensavers/qix.xml.h:5
+msgid "Lines"
+msgstr "Èrte"
+
+#: capplets/screensaver/screensavers/attraction.xml.h:13
+#: capplets/screensaver/screensavers/braid.xml.h:4
+#: capplets/screensaver/screensavers/fadeplot.xml.h:5
+#: capplets/screensaver/screensavers/sierpinski.xml.h:2
+#: capplets/screensaver/screensavers/spiral.xml.h:3
+#: capplets/screensaver/screensavers/triangle.xml.h:3
+#: capplets/screensaver/screensavers/vines.xml.h:2
+msgid "Number of Colors"
+msgstr "©tevilo barv"
+
+#: capplets/screensaver/screensavers/attraction.xml.h:14
+#: capplets/screensaver/screensavers/qix.xml.h:9
+msgid "Polygons"
+msgstr "Poligoni"
+
+#: capplets/screensaver/screensavers/attraction.xml.h:16
+msgid "Splines"
+msgstr "Mehke krivulje"
+
+#: capplets/screensaver/screensavers/attraction.xml.h:17
+msgid "Tails"
+msgstr "Repi"
+
+#: capplets/screensaver/screensavers/attraction.xml.h:18
+msgid "Threshold of repulsion"
+msgstr "Prag odboja"
+
+#: capplets/screensaver/screensavers/blaster.xml.h:1
+msgid "Blaster"
+msgstr "Blaster"
+
+#: capplets/screensaver/screensavers/blaster.xml.h:2
+msgid ""
+"Draws a simulation of flying space-combat robots (cleverly disguised as "
+"colored circles) doing battle in front of a moving star field.  Written by "
+"Jonathan Lin."
+msgstr ""
+"Ri¹e simulacijo leteèih vojskujoèih se robotov (skrbno zakamufliranih v "
+"barvne krogce), ki se bojujejo pred premikajoèim se ozvezjdem. Napisal "
+"Jonathan Lin."
+
+#: capplets/screensaver/screensavers/blitspin.xml.h:1
+msgid "BlitSpin"
+msgstr "BlitSpin"
+
+#: capplets/screensaver/screensavers/blitspin.xml.h:2
+#: capplets/screensaver/screensavers/bouboule.xml.h:2
+#: capplets/screensaver/screensavers/braid.xml.h:2
+#: capplets/screensaver/screensavers/bubbles.xml.h:3
+#: capplets/screensaver/screensavers/crystal.xml.h:4
+#: capplets/screensaver/screensavers/cynosure.xml.h:3
+#: capplets/screensaver/screensavers/decayscreen.xml.h:2
+#: capplets/screensaver/screensavers/discrete.xml.h:2
+#: capplets/screensaver/screensavers/drift.xml.h:1
+#: capplets/screensaver/screensavers/epicycle.xml.h:1
+#: capplets/screensaver/screensavers/fadeplot.xml.h:1
+#: capplets/screensaver/screensavers/flame.xml.h:2
+#: capplets/screensaver/screensavers/forest.xml.h:2
+#: capplets/screensaver/screensavers/goop.xml.h:1
+#: capplets/screensaver/screensavers/grav.xml.h:1
+#: capplets/screensaver/screensavers/greynetic.xml.h:1
+#: capplets/screensaver/screensavers/halo.xml.h:3
+#: capplets/screensaver/screensavers/helix.xml.h:1
+#: capplets/screensaver/screensavers/hopalong.xml.h:1
+#: capplets/screensaver/screensavers/hypercube.xml.h:1
+#: capplets/screensaver/screensavers/ifs.xml.h:1
+#: capplets/screensaver/screensavers/julia.xml.h:1
+#: capplets/screensaver/screensavers/kaleidescope.xml.h:2
+#: capplets/screensaver/screensavers/laser.xml.h:1
+#: capplets/screensaver/screensavers/lightning.xml.h:1
+#: capplets/screensaver/screensavers/lisa.xml.h:1
+#: capplets/screensaver/screensavers/lmorph.xml.h:1
+#: capplets/screensaver/screensavers/moire.xml.h:1
+#: capplets/screensaver/screensavers/munch.xml.h:9
+#: capplets/screensaver/screensavers/pedal.xml.h:1
+#: capplets/screensaver/screensavers/sierpinski.xml.h:1
+#: capplets/screensaver/screensavers/spiral.xml.h:1
+#: capplets/screensaver/screensavers/triangle.xml.h:1
+#: capplets/screensaver/screensavers/vines.xml.h:1
+#: capplets/screensaver/screensavers/xroger.xml.h:1
+msgid "Display screensaver in monochrome."
+msgstr "Èrnobel ohranjevalnik zaslona."
+
+#: capplets/screensaver/screensavers/blitspin.xml.h:3
+msgid "Speed of rotation."
+msgstr "Hitrost vrtenja."
+
+#: capplets/screensaver/screensavers/blitspin.xml.h:4
+msgid "Speed of the 90 degree rotation."
+msgstr "Hitrost zasuka za 90 stopinj."
+
+#: capplets/screensaver/screensavers/blitspin.xml.h:5
+msgid ""
+"The ``blitspin'' hack repeatedly rotates a bitmap by 90 degrees by using "
+"logical operations: the bitmap is divided into quadrants, and the quadrants "
+"are shifted clockwise.  Then the same thing is done again with progressively "
+"smaller quadrants, except that all sub-quadrants of a given size are rotated "
+"in parallel.  Written by Jamie Zawinski based on some cool SmallTalk code "
+"seen in in Byte Magazine in 1981.  \n"
+"\n"
+"As you watch it, the image appears to dissolve into static and then "
+"reconstitute itself, but rotated.  You can provide the image to use, as an "
+"XBM or XPM file, or tell it to grab a screen image and rotate that."
+msgstr ""
+
+#: capplets/screensaver/screensavers/bouboule.xml.h:1
+msgid "Bouboule"
+msgstr "Mehurèki"
+
+#: capplets/screensaver/screensavers/bouboule.xml.h:3
+#: capplets/screensaver/screensavers/crystal.xml.h:7
+#: capplets/screensaver/screensavers/cynosure.xml.h:4
+#: capplets/screensaver/screensavers/discrete.xml.h:4
+#: capplets/screensaver/screensavers/drift.xml.h:5
+#: capplets/screensaver/screensavers/forest.xml.h:4
+#: capplets/screensaver/screensavers/grav.xml.h:3
+#: capplets/screensaver/screensavers/halo.xml.h:5
+#: capplets/screensaver/screensavers/hopalong.xml.h:3
+#: capplets/screensaver/screensavers/ifs.xml.h:3
+#: capplets/screensaver/screensavers/julia.xml.h:3
+#: capplets/screensaver/screensavers/lightning.xml.h:3
+#: capplets/screensaver/screensavers/lisa.xml.h:3
+#: capplets/screensaver/screensavers/moire.xml.h:4
+msgid "Number of Colors."
+msgstr "©tevilo barv."
+
+#: capplets/screensaver/screensavers/bouboule.xml.h:4
+#: capplets/screensaver/screensavers/goop.xml.h:4
+msgid "Number of bubbles to use."
+msgstr "©tevilo uporabljenih mehurèkov."
+
+#: capplets/screensaver/screensavers/bouboule.xml.h:5
+#: capplets/screensaver/screensavers/bubbles.xml.h:6
+#: capplets/screensaver/screensavers/coral.xml.h:5
+#: capplets/screensaver/screensavers/crystal.xml.h:9
+#: capplets/screensaver/screensavers/cynosure.xml.h:6
+#: capplets/screensaver/screensavers/decayscreen.xml.h:3
+#: capplets/screensaver/screensavers/discrete.xml.h:6
+#: capplets/screensaver/screensavers/drift.xml.h:7
+#: capplets/screensaver/screensavers/epicycle.xml.h:3
+#: capplets/screensaver/screensavers/flame.xml.h:6
+#: capplets/screensaver/screensavers/goop.xml.h:5
+#: capplets/screensaver/screensavers/greynetic.xml.h:3
+#: capplets/screensaver/screensavers/halo.xml.h:7
+#: capplets/screensaver/screensavers/hopalong.xml.h:5
+#: capplets/screensaver/screensavers/hypercube.xml.h:4
+#: capplets/screensaver/screensavers/jigsaw.xml.h:2
+#: capplets/screensaver/screensavers/julia.xml.h:5
+#: capplets/screensaver/screensavers/kaleidescope.xml.h:6
+#: capplets/screensaver/screensavers/lisa.xml.h:6
+#: capplets/screensaver/screensavers/lmorph.xml.h:6
+#: capplets/screensaver/screensavers/moire.xml.h:5
+#: capplets/screensaver/screensavers/munch.xml.h:12
+#: capplets/screensaver/screensavers/spiral.xml.h:5
+msgid "Speed of Motion."
+msgstr "Hitrost gibanja."
+
+#: capplets/screensaver/screensavers/bouboule.xml.h:6
+msgid ""
+"This draws what looks like a spinning, deforming baloon with varying-sized "
+"spots painted on its invisible surface.  Written by Jeremie Petit."
+msgstr ""
+
+#: capplets/screensaver/screensavers/bouboule.xml.h:7
+msgid "Use red/blue 3d seperation."
+msgstr "Uporabi 3d razloèevanje rdeèe in modre."
+
+#: capplets/screensaver/screensavers/braid.xml.h:1
+msgid "Braid"
+msgstr "Preplet"
+
+#: capplets/screensaver/screensavers/braid.xml.h:3
+msgid ""
+"Draws random color-cycling inter-braided concentric circles.  Written by "
+"John Neil."
+msgstr ""
+
+#: capplets/screensaver/screensavers/bsod.xml.h:1
+msgid "BSOD"
+msgstr ""
+
+#: capplets/screensaver/screensavers/bsod.xml.h:2
+msgid ""
+"BSOD stands for ``Blue Screen of Death.''  The finest in personal computer "
+"emulation, this hack simulates popular screen savers from a number of less "
+"robust operating systems.  Written by Jamie Zawinski."
+msgstr ""
+
+#: capplets/screensaver/screensavers/bubble3d.xml.h:1
+msgid "Bubble3D"
+msgstr "3D Mehurèki"
+
+#: capplets/screensaver/screensavers/bubble3d.xml.h:2
+msgid ""
+"Draws a stream of rising, undulating 3D bubbles, rising toward the top of "
+"the screen, with nice specular reflections.  Written by Richard Jones."
+msgstr ""
+"Ri¹e tok poveèujoèih se 3D mehurèkov, ki se z lepimi odboji svetlobe dvigajo "
+"proti vrhu zaslona. Napisal Richard Jones."
+
+#: capplets/screensaver/screensavers/bubbles.xml.h:1
+msgid "Bubbles"
+msgstr "Mehurèki"
+
+#: capplets/screensaver/screensavers/bubbles.xml.h:2
+msgid "Bubbles exist in three dimensions."
+msgstr "Mehurèki obstajajo v treh dimenzijah."
+
+#: capplets/screensaver/screensavers/bubbles.xml.h:4
+msgid "Don't hide bubbles when they pop."
+msgstr "Ne skrij mehurèkov, ko poèijo."
+
+#: capplets/screensaver/screensavers/bubbles.xml.h:5
+msgid "Draw circles instead of pixmap bubbles."
+msgstr "Ri¹i kro¾ce namesto mehurèkov."
+
+#: capplets/screensaver/screensavers/bubbles.xml.h:7
+msgid ""
+"This simulates the kind of bubble formation that happens when water boils:"
+"small bubbles appear, and as they get closer to each other, they combine to "
+"form larger bubbles, which eventually pop.  Written by James Macnicol."
+msgstr ""
+
+#: capplets/screensaver/screensavers/bumps.xml.h:1
+msgid ""
+"A bit like `Spotlight', except that instead of merely exposing part of your "
+"desktop, it creates a bump map from it.  Basically, it 3D-izes a roaming "
+"section of your desktop, based on color intensity.  Written by Shane Smit."
+msgstr ""
+
+#: capplets/screensaver/screensavers/bumps.xml.h:2
+msgid "Bumps"
+msgstr "Poskoki"
+
+#: capplets/screensaver/screensavers/cage.xml.h:1
+msgid "Cage"
+msgstr "Kletka"
+
+#: capplets/screensaver/screensavers/cage.xml.h:2
+msgid ""
+"This draws Escher's ``Impossible Cage,'' a 3d analog of a moebius strip, and "
+"rotates it in three dimensions.  Written by Marcelo Vianna."
+msgstr ""
+"To ri¹e Escherjevo ``Nemogoèo kletko'', 3d analogijo Mobiusovem traku, ki se "
+"vrti v treh dimenzijah.  Napisal Marcelo Vianna."
+
+#: capplets/screensaver/screensavers/ccurve.xml.h:1
+msgid "C Curve"
+msgstr "C Krivulja"
+
+#: capplets/screensaver/screensavers/ccurve.xml.h:2
+msgid ""
+"Generates self-similar linear fractals, including the classic ``C Curve.''  "
+"Written by Rick Campbell."
+msgstr ""
+"Generira samopodobne linearne fraktale, vkljuèujoè klasièno ``C krivuljo''.  "
+"Napisal Rick Campbell."
+
+#: capplets/screensaver/screensavers/compass.xml.h:1
+msgid "Compass"
+msgstr "Kompas"
+
+#: capplets/screensaver/screensavers/compass.xml.h:2
+msgid "Don't use double bufferinge"
+msgstr "Ne uporabljal dvojnega izravnalnika"
+
+#: capplets/screensaver/screensavers/compass.xml.h:6
+msgid ""
+"This draws a compass, with all elements spinning about randomly, for that "
+"``lost and nauseous'' feeling.  Written by Jamie Zawinski."
+msgstr ""
+"Ri¹e kompas, kjer se vsi elementi nakljuèno vrtijo, kar daje obèutek "
+"izgubljenosti.  Napisal Jamie Zawinski."
+
+#: capplets/screensaver/screensavers/compass.xml.h:7
+msgid "Use double buffering"
+msgstr "Uporabi dvojni izravnalnik"
+
+#: capplets/screensaver/screensavers/coral.xml.h:1
+msgid "Coral"
+msgstr "Korale"
+
+#: capplets/screensaver/screensavers/coral.xml.h:2
+msgid "Density"
+msgstr "Gostota"
+
+#: capplets/screensaver/screensavers/coral.xml.h:3
+msgid "Number of seeds"
+msgstr "©tevilo semen"
+
+#: capplets/screensaver/screensavers/coral.xml.h:4
+msgid ""
+"Simulates coral growth, albeit somewhat slowly.  This image doesn't really "
+"do it justice.  Written by Frederick Roeber."
+msgstr ""
+"Simulira rast koral, èeprav nekoliko poèasi. Slika ni èisto avtentièna.  "
+"Napisal Frederick Roeber."
+
+#: capplets/screensaver/screensavers/cosmos.xml.h:1
+msgid "Cosmos"
+msgstr "Kozmos"
+
+#: capplets/screensaver/screensavers/cosmos.xml.h:2
+msgid ""
+"Draws fireworks and zooming, fading flares.  By Tom Campbell.  You can find "
+"it at <http://www.mindspring.com/~campbell/cosmos/>."
+msgstr ""
+"Ri¹e ognjemet in rakete.  Napisal Tom Campbell. Veè najdete na <http://www."
+"mindspring.com/~campbell/cosmos/>."
+
+#: capplets/screensaver/screensavers/critical.xml.h:1
+msgid "Critical"
+msgstr "Kritièno"
+
+#: capplets/screensaver/screensavers/critical.xml.h:2
+msgid ""
+"Draws a system of self-organizing lines.  It starts out as random squiggles, "
+"but after a few iterations, order begins to appear.  Written by Martin Pool."
+msgstr ""
+
+#: capplets/screensaver/screensavers/crystal.xml.h:1
+msgid "Cell"
+msgstr "Celica"
+
+#: capplets/screensaver/screensavers/crystal.xml.h:2
+msgid "Center image."
+msgstr "Centriraj sliko"
+
+#: capplets/screensaver/screensavers/crystal.xml.h:3
+msgid "Crystal"
+msgstr "Kristal"
+
+#: capplets/screensaver/screensavers/crystal.xml.h:5
+msgid "Have at maximum size"
+msgstr "Imej najveèjo velikost"
+
+#: capplets/screensaver/screensavers/crystal.xml.h:6
+msgid ""
+"Moving polygons, similar to a kaleidescope (more like a kaleidescope than "
+"the hack called `kaleid,' actually.) This one by Jouk Jansen."
+msgstr ""
+
+#: capplets/screensaver/screensavers/crystal.xml.h:8
+msgid "Number of polygons to use."
+msgstr "©tevilo uporabljenih poligonov."
+
+#: capplets/screensaver/screensavers/cynosure.xml.h:1
+msgid ""
+"A hack similar to `greynetic', but less frenetic.  The first implementation "
+"was by Stephen Linhart; then Ozymandias G.  Desiderata wrote a Java applet "
+"clone.  That clone was discovered by Jamie Zawinski, and ported to C for "
+"inclusion here."
+msgstr ""
+
+#: capplets/screensaver/screensavers/cynosure.xml.h:2
+msgid "Cynosure"
+msgstr "Cynosure"
+
+#: capplets/screensaver/screensavers/cynosure.xml.h:5
+msgid "Number of iterations."
+msgstr "©tevilo ponovitev."
+
+#: capplets/screensaver/screensavers/dangerball.xml.h:1
+msgid "DangerBall"
+msgstr "Nevarna ¾oga"
+
+#: capplets/screensaver/screensavers/dangerball.xml.h:2
+msgid ""
+"Draws a ball that periodically extrudes many random spikes.  Ouch! Written "
+"by Jamie Zawinski."
+msgstr ""
+"Ri¹e ¾ogo, ki se periodièno pojavi iz veèih ble¹èic.  Auch! Napisal Jamie "
+"Zawinski."
+
+#: capplets/screensaver/screensavers/decayscreen.xml.h:1
+msgid "DecayScreen"
+msgstr "Razpad zaslona"
+
+#: capplets/screensaver/screensavers/decayscreen.xml.h:4
+msgid ""
+"This grabs an image of whatever is on your screen, and makes it melt.  "
+"You've no doubt seen this effect before, but no screensaver would really be "
+"complete without it.  It works best if there's something colorful visible.  "
+"Warning, if the effect continues after the screen saver is off, seek medical "
+"attention.  Written by David Wald and Vivek Khera.  \n"
+"\n"
+"A number of these screenhacks have the ability to take an image of your "
+"desktop and manipulate it in some way.  On SGI systems, these programs are "
+"able to (at random) pull their source image from the system's video input "
+"instead!  This works nicely if you leave some some random television station "
+"plugged in."
+msgstr ""
+"Zajame sliko zaslona in jo stopi.  Nedvomno ste ta efekt ¾e videlo, a brez "
+"njega ni noben ohranjevalnik zaslona popolen.  Najbolje deluje, èe je na "
+"zaslonu nekaj pisanega. Opozorilo, èe se efekt nadaljuje po izklopu "
+"ohranejvalnika, poi¹èite zdravni¹ko pomoè.  Napisala David Wald in Vivek "
+"Khera.  \n"
+"\n"
+"Veliko tak¹nih programov ima mo¾nost zajema slike zaslona in jo nato "
+"obdelovati. Na sistemih SGI je to ¹e posebej zanimivo, saj lahko programi "
+"zajamejo sliko tudi iz video vhoda. To deluje lepo, èe imate vklopljeno "
+"kak¹no nakljuèno televizijsko postajo."
+
+#: capplets/screensaver/screensavers/deco.xml.h:1
+msgid "Cycle through colors."
+msgstr "Kro¾i skozi barve."
+
+#: capplets/screensaver/screensavers/deco.xml.h:2
+msgid "Deco"
+msgstr "Deko"
+
+#: capplets/screensaver/screensavers/deco.xml.h:3
+msgid ""
+"This one subdivides and colors rectangles randomly.  It looks kind of like "
+"Brady-Bunch-era rec-room wall paneling.  (Raven says: ``this screensaver is "
+"ugly enough to peel paint.'')  Written by Jamie Zawinski, inspired by Java "
+"code by Michael Bayne."
+msgstr ""
+"Ohranjevalnik, ki nakljuèno deli in barva ¹tirikotnike.  Izgleda kot slika "
+"iz èasov Brandy Buncha.  Napisal Jamie Zawinski, navdihnjeno po Java kodi "
+"Michaela Bayna."
+
+#: capplets/screensaver/screensavers/deco.xml.h:4
+msgid "Use color when drawing."
+msgstr "Za risanje uporabi barve."
+
+#: capplets/screensaver/screensavers/deluxe.xml.h:1
+msgid "Deluxe"
+msgstr "Delux"
+
+#: capplets/screensaver/screensavers/deluxe.xml.h:2
+msgid ""
+"This draws a pulsing sequence of stars, circles, and lines.  It would look "
+"better if it was faster, but as far as I can tell, there is no way to make "
+"this be both: fast, and flicker-free.  Yet another reason X sucks.  Written "
+"by Jamie Zawinski."
+msgstr ""
+"Ohranjevalnik, ki ri¹e utripajoèe zaporedje zvezdic, krogov in èrt. Bolje bi "
+"izgledalo, èe bi bilo hitrej¹e, a kot vem, ne bostaja naèin, da bi bilo to "
+"hkrati hitro in nepome¾ikujoèe.  ©e en razlog zakaj Xi sesajo.  Napisal "
+"Jamie Zawinski."
+
+#: capplets/screensaver/screensavers/demon.xml.h:1
+msgid ""
+"A cellular automaton that starts with a random field, and organizes it into "
+"stripes and spirals.  Written by David Bagley."
+msgstr ""
+"Celièni avtomat, ki zaène z nakljuènim poljem in ga organizira v pasove in "
+"spirale.  Napisal David Bagley"
+
+#: capplets/screensaver/screensavers/demon.xml.h:2
+msgid "Demon"
+msgstr "Demon"
+
+#: capplets/screensaver/screensavers/discrete.xml.h:1
+msgid "Discrete"
+msgstr "Diskretne èrte"
+
+#: capplets/screensaver/screensavers/discrete.xml.h:3
+msgid ""
+"More ``discrete map'' systems, including new variants of Hopalong and Julia, "
+"and a few others.  Written by Tim Auckland."
+msgstr ""
+
+#: capplets/screensaver/screensavers/discrete.xml.h:5
+#: capplets/screensaver/screensavers/julia.xml.h:4
+#: capplets/screensaver/screensavers/lisa.xml.h:4
+#: capplets/screensaver/screensavers/spiral.xml.h:4
+msgid "Number to use."
+msgstr "©tevilo uporabljenih."
+
+#: capplets/screensaver/screensavers/distort.xml.h:1
+msgid "Distort"
+msgstr "Bula"
+
+#: capplets/screensaver/screensavers/distort.xml.h:2
+msgid ""
+"This hack grabs an image of the screen, and then lets a transparent lens "
+"wander around the screen, magnifying whatever is underneath.  Written by "
+"Jonas Munsin."
+msgstr ""
+
+#: capplets/screensaver/screensavers/drift.xml.h:2
+msgid "Drift"
+msgstr "Puhanje"
+
+#: capplets/screensaver/screensavers/drift.xml.h:3
+msgid "Fractals should grow."
+msgstr "Fraktali naj rastejo."
+
+#: capplets/screensaver/screensavers/drift.xml.h:4
+msgid ""
+"How could one possibly describe this except as ``drifting recursive fractal "
+"cosmic flames?''  Another fine hack from the Scott Draves collection of fine "
+"hacks."
+msgstr ""
+
+#: capplets/screensaver/screensavers/drift.xml.h:6
+msgid "Number of pixels to use."
+msgstr "©tevilo uporabljenih pik."
+
+#: capplets/screensaver/screensavers/drift.xml.h:8
+msgid "Use lissajous figures to get points."
+msgstr "Uporabi lissajeve skice za pridobitev toèk."
+
+#: capplets/screensaver/screensavers/electricsheep.xml.h:1
+msgid "ElectricSheep"
+msgstr ""
+
+#: capplets/screensaver/screensavers/electricsheep.xml.h:2
+msgid ""
+"ElectricSheep is an xscreensaver module that displays mpeg video of an "
+"animated fractal flame.  In the background, it contributes render cycles to "
+"the next animation.  Periodically it uploades completed frames to the "
+"server, where they are compressed for distribution to all clients.  \n"
+"\n"
+"This program is recommended only if you have a high bandwidth connection to "
+"the Internet.  \n"
+"\n"
+"By Scott Draves.  You can find it at <http://www.electricsheep.org/>.  See "
+"that web site for configuration information."
+msgstr ""
+
+#: capplets/screensaver/screensavers/epicycle.xml.h:2
+msgid "Epicycle"
+msgstr "Epicikel"
+
+#: capplets/screensaver/screensavers/epicycle.xml.h:4
+msgid ""
+"This program draws the path traced out by a point on the edge of a circle.  "
+"That circle rotates around a point on the rim of another circle, and so on, "
+"several times.  These were the basis for the pre-heliocentric model of "
+"planetary motion.  Written by James Youngman."
+msgstr ""
+
+#: capplets/screensaver/screensavers/epicycle.xml.h:5
+#: capplets/screensaver/screensavers/flame.xml.h:7
+msgid "Time finished product is shown."
+msgstr "Èas, ko je konèan produkt pokazan."
+
+#: capplets/screensaver/screensavers/extrusion.xml.h:1
+msgid ""
+"Draws various rotating extruded shapes that twist around, lengthen, and turn "
+"inside out.  Created by David Konerding from the samples that come with the "
+"GL Extrusion library by Linas Vepstas."
+msgstr ""
+
+#: capplets/screensaver/screensavers/extrusion.xml.h:2
+msgid "Extrusion"
+msgstr ""
+
+#: capplets/screensaver/screensavers/fadeplot.xml.h:2
+msgid ""
+"Draws what looks like a waving ribbon following a sinusoidal path.  Written "
+"by Bas van Gaalen and Charles Vidal."
+msgstr ""
+"Ri¹e nekaj kar izgleda kot plapolajoè trak, ki se giblje po sinusoidni "
+"poti.  Napisala Bas van Gaal in Charles Vidal. "
+
+#: capplets/screensaver/screensavers/fadeplot.xml.h:3
+msgid "FadePlot"
+msgstr "FadePlot"
+
+#: capplets/screensaver/screensavers/fadeplot.xml.h:4
+msgid "Number"
+msgstr "©tevilo"
+
+#: capplets/screensaver/screensavers/fadeplot.xml.h:6
+msgid "Number of cycles"
+msgstr "©tevilo ciklov"
+
+#: capplets/screensaver/screensavers/fadeplot.xml.h:7
+#: capplets/screensaver/screensavers/sierpinski.xml.h:4
+msgid "Speed of Motion"
+msgstr "Hitrost gibanja"
+
+#: capplets/screensaver/screensavers/flag.xml.h:1
+msgid "Bitmap for flag"
+msgstr "Slika za zastavo"
+
+#: capplets/screensaver/screensavers/flag.xml.h:2
+msgid "Flag"
+msgstr "Zastava"
+
+#: capplets/screensaver/screensavers/flag.xml.h:6
+msgid "Random size up to"
+msgstr "Nakljuèna velikost vse do"
+
+#: capplets/screensaver/screensavers/flag.xml.h:9
+msgid "Text for flag"
+msgstr "Besedilo za zastavo"
+
+#: capplets/screensaver/screensavers/flag.xml.h:10
+msgid ""
+"This draws a waving colored flag, that undulates its way around the screen.  "
+"The trick is the flag can contain arbitrary text and images.  By default, it "
+"displays either the current system name and OS type, or a picture of "
+"``Bob,'' but you can replace the text or the image with a command-line "
+"option.  Written by Charles Vidal and Jamie Zawinski."
+msgstr ""
+
+#: capplets/screensaver/screensavers/flame.xml.h:1
+msgid "Another iterative fractal generator.  Written by Scott Draves."
+msgstr ""
+
+#: capplets/screensaver/screensavers/flame.xml.h:3
+msgid "Flame"
+msgstr "Plamen"
+
+#: capplets/screensaver/screensavers/flame.xml.h:4
+msgid "Number of fractals to generate."
+msgstr "©tevilo generiranih fraktalov."
+
+#: capplets/screensaver/screensavers/flame.xml.h:5
+msgid "Pixels per fractal."
+msgstr "Pik na fraktal."
+
+#: capplets/screensaver/screensavers/flow.xml.h:1
+msgid ""
+"Another series of strange attractors: a flowing series of points, making "
+"strange rotational shapes.  Written by Jeff Butterworth."
+msgstr ""
+
+#: capplets/screensaver/screensavers/flow.xml.h:2
+msgid "Flow"
+msgstr "Tok"
+
+#: capplets/screensaver/screensavers/forest.xml.h:1
+msgid "Delay between redraws."
+msgstr "Premor pred naslednjim risanjem."
+
+#: capplets/screensaver/screensavers/forest.xml.h:3
+msgid "Forest"
+msgstr "Gozd"
+
+#: capplets/screensaver/screensavers/forest.xml.h:5
+msgid "Number of trees to use."
+msgstr "©tevilo uporabljenih dreves."
+
+#: capplets/screensaver/screensavers/forest.xml.h:6
+msgid ""
+"This draws fractal trees.  Written by Peter Baumung.  Everybody loves "
+"fractals, right?"
+msgstr ""
+
+#: capplets/screensaver/screensavers/galaxy.xml.h:1
+msgid "Galaxy"
+msgstr "Galaksija"
+
+#: capplets/screensaver/screensavers/galaxy.xml.h:2
+msgid ""
+"This draws spinning galaxies, which then collide and scatter their stars to "
+"the, uh, four winds or something.  Originally an Amiga program by Uli "
+"Siegmund."
+msgstr ""
+
+#: capplets/screensaver/screensavers/gears.xml.h:1
+msgid "Gears"
+msgstr "Zobniki"
+
+#: capplets/screensaver/screensavers/gears.xml.h:2
+msgid ""
+"This draws sets of turning, interlocking gears, rotating in three "
+"dimensions.  Another GL hack, by Danny Sung, Brian Paul, Ed Mackey, and "
+"Jamie Zawinski."
+msgstr ""
+
+#: capplets/screensaver/screensavers/gflux.xml.h:1
+msgid ""
+"Draws a rippling waves on a rotating wireframe grid, using GL.  Written by "
+"Josiah Pease."
+msgstr ""
+
+#: capplets/screensaver/screensavers/gflux.xml.h:2
+msgid "GFlux"
+msgstr ""
+
+#: capplets/screensaver/screensavers/glplanet.xml.h:1
+msgid ""
+"Draws a planet bouncing around in space.  Written by David Konerding.  The "
+"built-in image is a map of the earth (extracted from `xearth'), but you can "
+"wrap any texture around the sphere, e.g., the planetary textures that come "
+"with `ssystem'."
+msgstr ""
+
+#: capplets/screensaver/screensavers/glplanet.xml.h:2
+msgid "GLPlanet"
+msgstr "GLPlanet"
+
+#: capplets/screensaver/screensavers/gltext.xml.h:1
+msgid ""
+"Displays a few lines of text spinning around in a solid 3D font.  Written by "
+"Jamie Zawinski."
+msgstr ""
+
+#: capplets/screensaver/screensavers/gltext.xml.h:2
+msgid "GLText"
+msgstr "GL Besedilo"
+
+#: capplets/screensaver/screensavers/goban.xml.h:1
+msgid "Goban"
+msgstr ""
+
+#: capplets/screensaver/screensavers/goban.xml.h:2
+msgid ""
+"Replays historical games of go (aka wei-chi and baduk) on the screen.  By "
+"Scott Draves.  You can find it at <http://www.draves.org/goban/>."
+msgstr ""
+
+#: capplets/screensaver/screensavers/goop.xml.h:2
+msgid "Goop"
+msgstr "Goop"
+
+#: capplets/screensaver/screensavers/goop.xml.h:3
+msgid "Have transparent bubbles."
+msgstr "Prosojni mehurèki."
+
+#: capplets/screensaver/screensavers/goop.xml.h:6
+msgid ""
+"This draws set of animating, transparent, amoeba-like blobs.  The blobs "
+"change shape as they wander around the screen, and they are translucent, so "
+"you can see the lower blobs through the higher ones, and when one passes "
+"over another, their colors merge.  Written by Jamie Zawinski.  I got the "
+"idea for this from a cool mouse pad I have, which achieves the same kind of "
+"effect in real life by having several layers plastic with colored oil "
+"between them.  Written by Jamie Zawinski."
+msgstr ""
+
+#: capplets/screensaver/screensavers/goop.xml.h:7
+msgid "Use additive color model."
+msgstr "Uporabi aditivni barvni model."
+
+#: capplets/screensaver/screensavers/grav.xml.h:2
+msgid "Grav"
+msgstr "Grav"
+
+#: capplets/screensaver/screensavers/grav.xml.h:4
+msgid "Number of planets to use."
+msgstr "©tevilo uporabljenih planetov."
+
+#: capplets/screensaver/screensavers/grav.xml.h:5
+msgid "Objects should leave trails behind them."
+msgstr "Predmeti naj za sabo pu¹èajo sledove."
+
+#: capplets/screensaver/screensavers/grav.xml.h:6
+msgid "Orbit should decay."
+msgstr "Orbita naj se spu¹èa."
+
+#: capplets/screensaver/screensavers/grav.xml.h:7
+msgid ""
+"This program draws a simple orbital simulation.  If you turn on trails, it "
+"looks kind of like a cloud-chamber photograph.  Written by Greg Bowering."
+msgstr ""
+
+#: capplets/screensaver/screensavers/greynetic.xml.h:2
+msgid "Greynetic"
+msgstr "Greynetic"
+
+#: capplets/screensaver/screensavers/greynetic.xml.h:4
+msgid ""
+"This draws random colored and stippled rectangles.  Written by Jamie "
+"Zawinski."
+msgstr ""
+
+#: capplets/screensaver/screensavers/halo.xml.h:1
+msgid "Animate circles."
+msgstr "Animirani krogi."
+
+#: capplets/screensaver/screensavers/halo.xml.h:2
+msgid "Cycle through colormap."
+msgstr "Kro¾i skozi barvno paleto."
+
+#: capplets/screensaver/screensavers/halo.xml.h:4
+msgid "Halo"
+msgstr "Halo"
+
+#: capplets/screensaver/screensavers/halo.xml.h:6
+msgid "Number of circles to use."
+msgstr "©tevilo uporabljenih krogov."
+
+#: capplets/screensaver/screensavers/halo.xml.h:8
+msgid ""
+"This draws trippy psychedelic circular patterns that hurt to look at.  It "
+"can also animate the control-points, but that takes a lot of CPU and "
+"bandwidth.  Written by Jamie Zawinski."
+msgstr ""
+
+#: capplets/screensaver/screensavers/halo.xml.h:9
+msgid "Use a gradient of colors between circles."
+msgstr "Uporabi prelivanje barv med krogi."
+
+#: capplets/screensaver/screensavers/helix.xml.h:2
+msgid "Helix"
+msgstr "Heliks"
+
+#: capplets/screensaver/screensavers/helix.xml.h:3
+msgid ""
+"This repeatedly generates spirally string-art-ish patterns.  Written by "
+"Jamie Zawinski."
+msgstr "Ponavljajoèe generira spiralno zavite vzorce.  Napisal Jamie Zawinski."
+
+#: capplets/screensaver/screensavers/helix.xml.h:4
+msgid "Time between redraws."
+msgstr "Èas med risanji."
+
+#: capplets/screensaver/screensavers/hopalong.xml.h:2
+msgid "Hopalong"
+msgstr "Hopalong"
+
+#: capplets/screensaver/screensavers/hopalong.xml.h:4
+msgid "Number of pixels before a color change."
+msgstr "©tevilo pik pred spremembo barve."
+
+#: capplets/screensaver/screensavers/hopalong.xml.h:6
+msgid ""
+"This draws lacy fractal patterns, based on iteration in the imaginary plane, "
+"from a 1986 Scientific American article.  Mostly written by Patrick Naughton."
+msgstr ""
+
+#: capplets/screensaver/screensavers/hyperball.xml.h:1
+msgid "Hyperball"
+msgstr "Hiper¾oga"
+
+#: capplets/screensaver/screensavers/hyperball.xml.h:2
+msgid ""
+"Hyperball is to hypercube as dodecahedron is to cube: this displays a 2D "
+"projection of the sequence of 3D objects which are the projections of the 4D "
+"analog to the dodecahedron.  Written by Joe Keane."
+msgstr ""
+
+#: capplets/screensaver/screensavers/hypercube.xml.h:2
+msgid "Distance from center of cube"
+msgstr "Razdalja od sredi¹èa kocke"
+
+#: capplets/screensaver/screensavers/hypercube.xml.h:3
+msgid "Hypercube"
+msgstr "Hiperkocka"
+
+#: capplets/screensaver/screensavers/hypercube.xml.h:5
+msgid ""
+"This displays 2D projections of the sequence of 3D objects which are the "
+"projections of the 4D analog to the cube: as a square is composed of four "
+"lines, each touching two others; and a cube is composed of six squares, each "
+"touching four others; a hypercube is composed of eight cubes, each touching "
+"six others.  To make it easier to visualize the rotation, it uses a "
+"different color for the edges of each face.  Don't think about it too long, "
+"or your brain will melt.  Written by Joe Keane, Fritz Mueller, and Jamie "
+"Zawinski."
+msgstr ""
+
+#: capplets/screensaver/screensavers/ifs.xml.h:2
+msgid "IFS"
+msgstr "IFS"
+
+#: capplets/screensaver/screensavers/ifs.xml.h:4
+msgid ""
+"This one draws spinning, colliding iterated-function-system images.  Written "
+"by Massimino Pascal."
+msgstr "Ri¹e premikajoèe se slike IFS fraktalov.  Napisal Massimino Pascal. "
+
+#: capplets/screensaver/screensavers/imsmap.xml.h:1
+msgid "IMSmap"
+msgstr "IMS zemljevid"
+
+#: capplets/screensaver/screensavers/imsmap.xml.h:2
+msgid ""
+"This generates random cloud-like patterns.  It looks quite different in "
+"monochrome and color.  The basic idea is to take four points on the edge of "
+"the image, and assign each a random ``elevation''.  Then find the point "
+"between them, and give it a value which is the average of the other four, "
+"plus some small random offset.  Then coloration is done based on "
+"elevation.  \n"
+"\n"
+"The color selection is done by binding the elevation to either hue, "
+"saturation, or brightness, and assigning random values to the others.  The "
+"``brightness'' mode tends to yield cloudlike patterns, and the others tend "
+"to generate images that look like heat-maps or CAT-scans.  Written by "
+"Juergen Nickelsen and Jamie Zawinski."
+msgstr ""
+
+#: capplets/screensaver/screensavers/interference.xml.h:1
+msgid ""
+"Another color-field hack, this one works by computing decaying sinusoidal "
+"waves, and allowing them to interfere with each other as their origins "
+"move.  Written by Hannu Mallat."
+msgstr ""
+
+#: capplets/screensaver/screensavers/interference.xml.h:2
+msgid "Interference"
+msgstr "Interferenca"
+
+#: capplets/screensaver/screensavers/jigsaw.xml.h:1
+msgid "Jigsaw"
+msgstr "jigsaw"
+
+#: capplets/screensaver/screensavers/jigsaw.xml.h:3
+msgid ""
+"This grabs a screen image, carves it up into a jigsaw puzzle, shuffles it, "
+"and then solves the puzzle.  This works especially well when you feed it an "
+"external video signal instead of letting it grab the screen image (actually, "
+"I guess this is generally true...)\tWhen it is grabbing a video image, it is "
+"sometimes pretty hard to guess what the image is going to look like once the "
+"puzzle is solved.  Written by Jamie Zawinski."
+msgstr ""
+
+#: capplets/screensaver/screensavers/julia.xml.h:2
+msgid "Julia"
+msgstr "Julia"
+
+#: capplets/screensaver/screensavers/julia.xml.h:6
+msgid ""
+"This one draws spinning, animating (are you detecting a pattern here yet?)  "
+"explorations of the Julia set.  You've probably seen static images of this "
+"fractal form before, but it's a lot of fun to watch in motion as well.  One "
+"interesting thing is that there is a small swinging dot passing in front of "
+"the image, which indicates the control point from which the rest of the "
+"image was generated.  Written by Sean McCullough."
+msgstr ""
+
+#: capplets/screensaver/screensavers/kaleidescope.xml.h:1
+msgid ""
+"Another clone of an ancient meme, consisting largely of frenetic rotational "
+"motion of colored lines.  This one is by Ron Tapia.  The motion is nice, but "
+"I think it needs more solids, or perhaps just brighter colors.  More "
+"variations in the rotational speed might help, too."
+msgstr ""
+
+#: capplets/screensaver/screensavers/kaleidescope.xml.h:3
+msgid "Kaleidescope"
+msgstr "Kaleidoskop"
+
+#: capplets/screensaver/screensavers/kaleidescope.xml.h:4
+msgid "Number of segments."
+msgstr "¹tevilo daljic."
+
+#: capplets/screensaver/screensavers/kaleidescope.xml.h:5
+msgid "Number of trails."
+msgstr "©tevilo sledov."
+
+#: capplets/screensaver/screensavers/kumppa.xml.h:1
+msgid "Kumppa"
+msgstr "Kumppa"
+
+#: capplets/screensaver/screensavers/kumppa.xml.h:2
+msgid ""
+"Spiraling, spinning, and very, very fast splashes of color rush toward the "
+"screen.  Written by Teemu Suutari."
+msgstr ""
+
+#: capplets/screensaver/screensavers/lament.xml.h:1
+msgid ""
+"Animates a simulation of Lemarchand's Box, repeatedly solving itself.  "
+"Requires OpenGL, and a machine with fast hardware support for texture maps.  "
+"Warning: occasionally opens doors.  Written by Jamie Zawinski."
+msgstr ""
+
+#: capplets/screensaver/screensavers/lament.xml.h:2
+msgid "Lament"
+msgstr ""
+
+#: capplets/screensaver/screensavers/laser.xml.h:2
+msgid "Duration of laser burst."
+msgstr "Trajanje izbruha laserja."
+
+#: capplets/screensaver/screensavers/laser.xml.h:3
+msgid "Laser"
+msgstr "Laser"
+
+#: capplets/screensaver/screensavers/laser.xml.h:4
+msgid ""
+"Moving radiating lines, that look vaguely like scanning laser beams.  "
+"Written by Pascal Pensa.  (Frankie say: relax.)"
+msgstr ""
+
+#: capplets/screensaver/screensavers/laser.xml.h:5
+msgid "Size of burst."
+msgstr "Velikost izbruha."
+
+#: capplets/screensaver/screensavers/lightning.xml.h:2
+msgid "Lightning"
+msgstr "Bliskanje"
+
+#: capplets/screensaver/screensavers/lightning.xml.h:4
+msgid ""
+"This one draws crackling fractal lightning bolts.  It's simple, direct, and "
+"to the point.  If only it had sound...  Written by Keith Romberg."
+msgstr ""
+
+#: capplets/screensaver/screensavers/lisa.xml.h:2
+msgid "Lisa"
+msgstr "Lisa"
+
+#: capplets/screensaver/screensavers/lisa.xml.h:5
+msgid "Size of object."
+msgstr "Velikost predmeta."
+
+#: capplets/screensaver/screensavers/lisa.xml.h:7
+msgid ""
+"This draws Lisajous loops, by Caleb Cullen.  Remember that device they had "
+"the Phantom Zone prisoners in during their trial in Superman?  I think that "
+"was one of these."
+msgstr ""
+
+#: capplets/screensaver/screensavers/lissie.xml.h:1
+msgid ""
+"Another Lissajous figure.  This one draws the progress of circular shapes "
+"along a path.  Written by Alexander Jolk."
+msgstr ""
+
+#: capplets/screensaver/screensavers/lissie.xml.h:2
+msgid "Lissie"
+msgstr "Lissie"
+
+#: capplets/screensaver/screensavers/lmorph.xml.h:2
+msgid "LMorph"
+msgstr "LMorph"
+
+#: capplets/screensaver/screensavers/lmorph.xml.h:3
+msgid "Number of interpolation steps."
+msgstr "©tevilo korakov interpolacije."
+
+#: capplets/screensaver/screensavers/lmorph.xml.h:4
+msgid "Number of points."
+msgstr "©tevilo toèk."
+
+#: capplets/screensaver/screensavers/lmorph.xml.h:5
+msgid "Open figures."
+msgstr "Odpri skice."
+
+#: capplets/screensaver/screensavers/lmorph.xml.h:7
+msgid ""
+"This generates random spline-ish line drawings and morphs between them.  "
+"Written by Sverre H.  Huseby and Glenn T.  Lines."
+msgstr ""
+
+#: capplets/screensaver/screensavers/loop.xml.h:1
+msgid "Loop"
+msgstr "Zanka"
+
+#: capplets/screensaver/screensavers/loop.xml.h:2
+msgid ""
+"This one produces loop-shaped colonies that spawn, age, and eventually die.  "
+"Written by David Bagley."
+msgstr ""
+"Ta ohranjevalnik ustvari kolonije v zankah, ki se delijo, starajo in na "
+"koncu umrejo.  Napisal David Bagley"
+
+#: capplets/screensaver/screensavers/maze.xml.h:1
+msgid "Delay between drawing the maze and starting the solution."
+msgstr "Premor med risanjem zidu in zaèetkom re¹evanja."
+
+#: capplets/screensaver/screensavers/maze.xml.h:2
+msgid "Delay between each step in the maze."
+msgstr "Premor med vsakim korakom poti."
+
+#: capplets/screensaver/screensavers/maze.xml.h:3
+msgid "Delay between finishing the maze and starting a new one."
+msgstr "Premor med konèanjem labirinta in zaèetkom novega."
+
+#: capplets/screensaver/screensavers/maze.xml.h:4
+msgid "Maze"
+msgstr "Labirint"
+
+#: capplets/screensaver/screensavers/maze.xml.h:5
+msgid "Put a bridge over the logo?"
+msgstr "Postavi most nad logotip?"
+
+#: capplets/screensaver/screensavers/maze.xml.h:6
+msgid ""
+"This is the ancient X maze demo, modified to work with xscreensaver.  It "
+"generates a random maze, then solves it with visual feedback.  Originally by "
+"Jim Randell; modified by a cast of thousands."
+msgstr ""
+
+#: capplets/screensaver/screensavers/moebius.xml.h:1
+msgid ""
+"Another M.  C.  Escher hack by Marcelo Vianna, this one draws ``Moebius "
+"Strip II,'' a GL image of ants walking along the surface of a moebius strip."
+msgstr ""
+"©e en hack M. C. Escher-ja s strani Marcela Vianna. Ta ri¹e ``Moebiusov trak "
+"II'', sliko mravelj, ki hodijo po povr¹ini Mobiusovega traku."
+
+#: capplets/screensaver/screensavers/moebius.xml.h:2
+msgid "Moebius"
+msgstr "Moebius"
+
+#: capplets/screensaver/screensavers/moire2.xml.h:1
+msgid ""
+"Another example of the fun you can have with moire interference patterns; "
+"this hack generates fields of concentric circles or ovals, and combines the "
+"planes with various operations.  The planes are moving independently of one "
+"another, causing the interference lines to ``spray.''  Written by Jamie "
+"Zawinski."
+msgstr ""
+
+#: capplets/screensaver/screensavers/moire2.xml.h:2
+msgid "Moire2"
+msgstr "Moire2"
+
+#: capplets/screensaver/screensavers/moire.xml.h:2
+msgid "Maximum radius increment"
+msgstr "Najveèje poveèanje radija"
+
+#: capplets/screensaver/screensavers/moire.xml.h:3
+msgid "Moire"
+msgstr "Moire"
+
+#: capplets/screensaver/screensavers/moire.xml.h:6
+msgid ""
+"This one draws cool circular interference patterns.  Most of the circles you "
+"see aren't explicitly rendered, but show up as a result of interactions "
+"between the other pixels that were drawn.  Written by Jamie Zawinski, "
+"inspired by Java code by Michael Bayne.  As he pointed out, the beauty of "
+"this one is that the heart of the display algorithm can be expressed with "
+"just a pair of loops and a handful of arithmetic, giving it a high ``display "
+"hack metric''."
+msgstr ""
+
+#: capplets/screensaver/screensavers/molecule.xml.h:1
+msgid ""
+"Draws several different representations of molecules.  Some common molecules "
+"are built in, and it can also read PDB (Protein Data Base) files as input.  "
+"Written by Jamie Zawinski."
+msgstr ""
+"Ri¹e veè razliènih predstavitev molekul. Nekatere obièajne molekule so "
+"vgrajene, hkrati pa lahko kot vhod bere PDB (zbirko podatkov o proteinih).  "
+"Napisal Jamie Zawinski."
+
+#: capplets/screensaver/screensavers/molecule.xml.h:2
+msgid "Molecule"
+msgstr "Molekula"
+
+#: capplets/screensaver/screensavers/morph3d.xml.h:1
+msgid ""
+"Another 3d shape-changing GL hack, by Marcelo Vianna.  It has the same shiny-"
+"plastic feel as Superquadrics, as many computer-generated objects do..."
+msgstr ""
+"©e en hack spreminjanja 3d oblike s strani Marcela Vianne.  Daje enak "
+"obèutek svetleèe plastike kot Superquadrics in veèina raèunalni¹ko "
+"generiranih objektov..."
+
+#: capplets/screensaver/screensavers/morph3d.xml.h:2
+msgid "Morph3D"
+msgstr "Morph3D"
+
+#: capplets/screensaver/screensavers/mountain.xml.h:1
+msgid ""
+"Generates random 3d plots that look vaguely mountainous.  Written by Pascal "
+"Pensa."
+msgstr ""
+"Generira nakljuène 3d risbe, ki izgledajo kot gore.  Napisal Pascal Pensa."
+
+#: capplets/screensaver/screensavers/mountain.xml.h:2
+msgid "Mountain"
+msgstr "Gore"
+
+#: capplets/screensaver/screensavers/munch.xml.h:1
+msgid ""
+"\n"
+"        DATAI 2\t\t\t\t\t\t\t      \n"
+"        ADDB 1,2\t\t\t\t\t\t      \n"
+"        ROTC 2,-22\t\t\t\t\t\t      \n"
+"        XOR 1,2\t\t\t\t\t\t\t      \n"
+"        JRST .-4\t\t\t\t\t\t      \n"
+"\t\t\t\t\t\t\t\t      \n"
+"As reported by HAKMEM, in 1962, Jackson Wright wrote the above PDP-1 code.  "
+"That code still lives on in this screenhack, some 35 years later.  The "
+"number of lines of enclosing code has increased substantially, however.  "
+"This version is by Tim Showalter."
+msgstr ""
+"\n"
+"        DATAI 2\t\t\t\t\t\t\t      \n"
+"        ADDB 1,2\t\t\t\t\t\t      \n"
+"        ROTC 2,-22\t\t\t\t\t\t      \n"
+"        XOR 1,2\t\t\t\t\t\t\t      \n"
+"        JRST .-4\t\t\t\t\t\t      \n"
+"\t\t\t\t\t\t\t\t      \n"
+"Kot je poroèal HAKMEM leta 1962, je Jackson Wright napisal zgornjo PDP-1 "
+"kodo.  35 let pozneje ta koda ¹e vedno ¾ivi v tem hacku.  ©tevilo vrstic "
+"okoli kode se je od takrat opazno poveèalo.  Napisal Tim Showalter."
+
+#: capplets/screensaver/screensavers/munch.xml.h:10
+msgid "Draw square at weird starting points."
+msgstr "Spremeni risanje kvadrata na èuden naèin."
+
+#: capplets/screensaver/screensavers/munch.xml.h:11
+msgid "Munch"
+msgstr "Munch"
+
+#: capplets/screensaver/screensavers/munch.xml.h:13
+msgid "Use XOR drawing function."
+msgstr "Uporabi XOR za risanje."
+
+#: capplets/screensaver/screensavers/nerverot.xml.h:1
+msgid ""
+"Draws different shapes composed of nervously vibrating squiggles, as if seen "
+"through a camera operated by a monkey on crack.  By Dan Bornstein."
+msgstr ""
+"Ri¹e razliène oblike sestavljene iz nervozno vibrajoèih delov, kot se jih "
+"vidi skozi kamero s katero operira zadeta opica.  Napisal Dan Bornstein."
+
+#: capplets/screensaver/screensavers/nerverot.xml.h:2
+msgid "NerveRot"
+msgstr "NerveRot"
+
+#: capplets/screensaver/screensavers/noseguy.xml.h:1
+msgid ""
+"A little man with a big nose wanders around your screen saying things.  The "
+"things which he says can come from a file, or from an external program like "
+"`zippy' or `fortune'.  This was extracted from `xnlock' by Dan Heller.  "
+"Colorized by Jamie Zawinski."
+msgstr ""
+
+#: capplets/screensaver/screensavers/noseguy.xml.h:2
+msgid "Noseguy"
+msgstr "Nosonja"
+
+#: capplets/screensaver/screensavers/pedal.xml.h:2
+msgid "Maximum number of lines."
+msgstr "Najveèje ¹tevilo èrt."
+
+#: capplets/screensaver/screensavers/pedal.xml.h:3
+msgid "Pedal"
+msgstr "Pdeal"
+
+#: capplets/screensaver/screensavers/pedal.xml.h:4
+msgid ""
+"This is sort of a combination spirograph/string-art.  It generates a large, "
+"complex polygon, and lets the X server do the bulk of the work by giving it "
+"an even/odd winding rule.  Written by Dale Moore, based on some ancient PDP-"
+"11 code."
+msgstr ""
+
+#: capplets/screensaver/screensavers/pedal.xml.h:5
+msgid "Time to fade away."
+msgstr "Èas za izbris."
+
+#: capplets/screensaver/screensavers/pedal.xml.h:6
+msgid "Time to show each picture."
+msgstr "Èas prikaza vsake slike."
+
+#: capplets/screensaver/screensavers/penetrate.xml.h:1
+msgid "Penetrate"
+msgstr "Preboj"
+
+#: capplets/screensaver/screensavers/penetrate.xml.h:2
+msgid ""
+"This hack simulates the classic arcade game Missile Command.  Written by "
+"Adam Miller."
+msgstr ""
+
+#: capplets/screensaver/screensavers/penrose.xml.h:1
+msgid ""
+"Draws quasiperiodic tilings; think of the implications on modern formica "
+"technology.  Written by Timo Korvola.  \n"
+"\n"
+"In April 1997, Sir Roger Penrose, a British math professor who has worked "
+"with Stephen Hawking on such topics as relativity, black holes, and whether "
+"time has a beginning, filed a copyright-infringement lawsuit against the "
+"Kimberly-Clark Corporation, which Penrose said copied a pattern he created "
+"(a pattern demonstrating that ``a nonrepeating pattern could exist in "
+"nature'') for its Kleenex quilted toilet paper.  Penrose said he doesn't "
+"like litigation but, ``When it comes to the population of Great Britain "
+"being invited by a multinational to wipe their bottoms on what appears to be "
+"the work of a Knight of the Realm, then a last stand must be taken.'' \t\t\t"
+"\t\t\t\t\t    \n"
+"\n"
+"As reported by News of the Weird #491, 4-jul-1997."
+msgstr ""
+
+#: capplets/screensaver/screensavers/penrose.xml.h:6
+msgid "Penrose"
+msgstr "Tlakovanje"
+
+#: capplets/screensaver/screensavers/petri.xml.h:1
+msgid "Petri"
+msgstr ""
+
+#: capplets/screensaver/screensavers/petri.xml.h:2
+msgid ""
+"This simulates colonies of mold growing in a petri dish.  Growing colored "
+"circles overlap and leave spiral interference in their wake.  Written by Dan "
+"Bornstein."
+msgstr ""
+
+#: capplets/screensaver/screensavers/phosphor.xml.h:1
+msgid ""
+"Draws a simulation of an old terminal, with large pixels and long-sustain "
+"phosphor.  It can run any program as a source of the text it displays.  "
+"Written by Jamie Zawinski."
+msgstr ""
+"Ri¹e simulacijo starega terminala z velikimi piksli in dolgo osvetljenim "
+"fosforjem.  Kot izvor besedila, ki ga poka¾e, lahko slu¾i katerikoli "
+"program.  Napisal Jamie Zawinski."
+
+#: capplets/screensaver/screensavers/phosphor.xml.h:2
+msgid "Phosphor"
+msgstr "Fosfor"
+
+#: capplets/screensaver/screensavers/pipes.xml.h:1
+msgid ""
+"If you've ever been in the same room with a Windows NT machine, you've "
+"probably seen this GL hack.  This version is by Marcelo Vianna."
+msgstr ""
+
+#: capplets/screensaver/screensavers/pipes.xml.h:2
+msgid "Pipes"
+msgstr "Cevi"
+
+#: capplets/screensaver/screensavers/pulsar.xml.h:1
+msgid ""
+"Draws some intersecting planes, making use of alpha blending, fog, textures, "
+"and mipmaps, plus a ``frames per second'' meter so that you can tell how "
+"fast your graphics card is...  Requires OpenGL.  Written by David Konerding."
+msgstr ""
+"Ri¹e nekaj sekajoèih se ravnin, uporablja tudi aplha blending, meglo, "
+"teksture, mipmape in ima merilec ''okvirjev na seknod'', tako da lahko pove, "
+"kako hitra je va¹a grafièna kartica...  Zahteva OpenGL.  Napisal David "
+"Konerding. "
+
+#: capplets/screensaver/screensavers/pulsar.xml.h:2
+msgid "Pulsar"
+msgstr "Pulzar"
+
+#: capplets/screensaver/screensavers/pyro.xml.h:1
+msgid "Frequency of missile launch"
+msgstr "Pogostost izstreljevanja raket"
+
+#: capplets/screensaver/screensavers/pyro.xml.h:2
+msgid "Number of particles"
+msgstr "©tevilo delcev"
+
+#: capplets/screensaver/screensavers/pyro.xml.h:3
+msgid "Particles on screen"
+msgstr "Delci na zaslonu"
+
+#: capplets/screensaver/screensavers/pyro.xml.h:4
+msgid "Pyro"
+msgstr "Pyro"
+
+#: capplets/screensaver/screensavers/pyro.xml.h:5
+msgid ""
+"Pyro draws exploding fireworks.  Blah blah blah.  Written by Jamie Zawinski."
+msgstr "Pyro ri¹e ognjemete.  Bla bla bla.  Napisal Jamie Zawinski"
+
+#: capplets/screensaver/screensavers/qix.xml.h:1
+msgid "Color contrast"
+msgstr "Barvni kontrast"
+
+#: capplets/screensaver/screensavers/qix.xml.h:2
+msgid "Discrete Lines"
+msgstr "Diskretne èrte"
+
+#: capplets/screensaver/screensavers/qix.xml.h:4
+msgid "Length"
+msgstr "Dol¾ina"
+
+#: capplets/screensaver/screensavers/qix.xml.h:7
+msgid "Number of points:"
+msgstr "©tevilo toèk:"
+
+#: capplets/screensaver/screensavers/qix.xml.h:8
+msgid "Number of trails:"
+msgstr "©tevilo sledov:"
+
+#: capplets/screensaver/screensavers/qix.xml.h:10
+msgid "Qix (solid)"
+msgstr ""
+
+#: capplets/screensaver/screensavers/qix.xml.h:11
+msgid "Solid Trails"
+msgstr "Polni sledovi"
+
+#: capplets/screensaver/screensavers/qix.xml.h:13
+msgid "Spread between lines"
+msgstr "Sprejaj med èrtami"
+
+#: capplets/screensaver/screensavers/qix.xml.h:14
+msgid ""
+"This is the swiss army chainsaw of qix programs.  It bounces a series of "
+"line segments around the screen, and uses variations on this basic motion "
+"pattern to produce all sorts of different presentations: line segments, "
+"filled polygons, overlapping translucent areas...  Written by Jamie Zawinski."
+msgstr ""
+
+#: capplets/screensaver/screensavers/qix.xml.h:15
+msgid "Trails attract each other"
+msgstr "Sledovi prevlaèijo drug drugega"
+
+#: capplets/screensaver/screensavers/qix.xml.h:16
+msgid "Transparent Trails"
+msgstr "Prosojni sledovi"
+
+#: capplets/screensaver/screensavers/qix.xml.h:17
+msgid "Width"
+msgstr "©irina"
+
+#: capplets/screensaver/screensavers/qix.xml.h:18
+msgid "XOR Trails"
+msgstr "XOR sledovi"
+
+#: capplets/screensaver/screensavers/rd-bomb.xml.h:1
+msgid ""
+"Another variation of the `Bomb' program by Scott Draves.  This draws a grid "
+"of growing square-like shapes that, once they overtake each other, react in "
+"unpredictable ways.  ``RD'' stands for reaction-diffusion."
+msgstr ""
+"©e ena varijacija programa `Bomba' Scotta Dravesa. Ta ri¹e mre¾o rastoèih "
+"kvadratom podobnih oblik, ki, ko prevzamejo druga drugo, reagirajo na "
+"nepredvidljiv naèin.  ``RD'' pomeni reakcija-difuzija."
+
+#: capplets/screensaver/screensavers/rd-bomb.xml.h:2
+msgid "RD-Bomb"
+msgstr "RD-bomba"
+
+#: capplets/screensaver/screensavers/ripples.xml.h:1
+msgid "Ripples (oily)"
+msgstr "Valovèki (oljni)"
+
+#: capplets/screensaver/screensavers/ripples.xml.h:2
+msgid ""
+"This draws rippling interference patterns like splashing water.  With the -"
+"water option, it manipulates your desktop image to look like something is "
+"dripping into it.  Written by Tom Hammersley."
+msgstr ""
+
+#: capplets/screensaver/screensavers/rocks.xml.h:1
+msgid "Rocks"
+msgstr "Kamni"
+
+#: capplets/screensaver/screensavers/rocks.xml.h:2
+msgid ""
+"This draws an animation of flight through an asteroid field, with changes in "
+"rotation and direction.  It can also display 3D separations for red/blue "
+"glasses!  Mostly written by Jamie Zawinski."
+msgstr ""
+"To ri¹e animacijo leta skozi pas asteroidov s spremembami smeri in "
+"vrtenjem.  Prika¾e lahko tudi sparacije za 3D redèe/modra oèala!  Veèinoma "
+"napisal Jamie Zawinski."
+
+#: capplets/screensaver/screensavers/rorschach.xml.h:1
+msgid "Delay before next redraw"
+msgstr "Premor pred naslednjim risanjem"
+
+#: capplets/screensaver/screensavers/rorschach.xml.h:2
+msgid "Number of Iterations"
+msgstr "©tevilo ponovitev"
+
+#: capplets/screensaver/screensavers/rorschach.xml.h:3
+msgid "Offset"
+msgstr "Odmik"
+
+#: capplets/screensaver/screensavers/rorschach.xml.h:4
+msgid "Rorschach"
+msgstr "Rorscach"
+
+#: capplets/screensaver/screensavers/rorschach.xml.h:5
+msgid "Speed to clear the screen"
+msgstr "Hitrost èi¹èenja zaslona"
+
+#: capplets/screensaver/screensavers/rorschach.xml.h:6
+msgid ""
+"This generates random inkblot patterns.  The algorithm is deceptively simple "
+"for how well it works; it merely walks a dot around the screen randomly, and "
+"then reflects the image horizontally, vertically, or both.  Any deep-seated "
+"neurotic tendencies which this program reveals are your own problem.  "
+"Written by Jamie Zawinski."
+msgstr ""
+
+#: capplets/screensaver/screensavers/rorschach.xml.h:7
+msgid "With X-axis Symmetry"
+msgstr "Simetrija z X osjo"
+
+#: capplets/screensaver/screensavers/rorschach.xml.h:8
+msgid "With Y-axis Symmetry"
+msgstr "Simetrija z Y osjo"
+
+#: capplets/screensaver/screensavers/rotor.xml.h:1
+msgid ""
+"Another ancient xlock demo, this one by Tom Lawrence.  It draws a line "
+"segment moving along a complex spiraling curve.  I tweaked this to generate "
+"curvier lines, but still frames of it don't look like much."
+msgstr ""
+"©e en prazgodovinski xlock demo, ta s strani Toma Lawrenca.  Ri¹e daljice, "
+"ki se premikajo po kompleksni spiralni krivulji.  Spremenil sem, da generira "
+"krive èrte, a ¹e vedno ne izgleda ne vem kako."
+
+#: capplets/screensaver/screensavers/rotor.xml.h:2
+msgid "Rotor"
+msgstr "Rotor"
+
+#: capplets/screensaver/screensavers/rotzoomer.xml.h:1
+msgid ""
+"Creates a collage of rotated and scaled portions of the screen.  Written by "
+"Claudio Matsuoka."
+msgstr ""
+"Ustvari kola¾ iz zasukanih in skaliranih slik zaslona.  Napisal Claudio "
+"Matsuoka."
+
+#: capplets/screensaver/screensavers/rotzoomer.xml.h:2
+msgid "RotZoomer"
+msgstr "RotoZoomer"
+
+#: capplets/screensaver/screensavers/rubik.xml.h:1
+msgid ""
+"Draws a Rubik's Cube that rotates in three dimensions and repeatedly "
+"shuffles and solves itself.  Another fine GL hack by Marcelo Vianna."
+msgstr ""
+
+#: capplets/screensaver/screensavers/rubik.xml.h:2
+msgid "Rubik"
+msgstr "Rubikova kocka"
+
+#: capplets/screensaver/screensavers/shadebobs.xml.h:1
+msgid "ShadeBobs"
+msgstr "Senèeni bobi"
+
+#: capplets/screensaver/screensavers/shadebobs.xml.h:2
+msgid ""
+"This draws smoothly-shaded oscilating oval patterns, that look something "
+"like vapor trails or neon tubes.  Written by Shane Smit."
+msgstr ""
+"Ri¹e mehko senèene kro¾ne ovalne vzorce, ki spominjajo na sledi hlapov ali "
+"neonske cevi.  Napisal Shane Smit."
+
+#: capplets/screensaver/screensavers/sierpinski3d.xml.h:1
+msgid "Sierpinski3D"
+msgstr "Sierpinski3D"
+
+#: capplets/screensaver/screensavers/sierpinski3d.xml.h:2
+msgid ""
+"This draws the three-dimensional variant of the recursive Sierpinski "
+"triangle fractal, using GL.  Written by Tim Robinson and Jamie Zawinski."
+msgstr ""
+"Ri¹e trodimenzionalno razlièico rekurzivnega Sierpiskijevega trikotnega "
+"fraktala z uporabo OpenGl.  Nappisala Tim Robinson in Jamie Zawinski."
+
+#: capplets/screensaver/screensavers/sierpinski.xml.h:3
+msgid "Sierpinski"
+msgstr "Sierpinski"
+
+#: capplets/screensaver/screensavers/sierpinski.xml.h:5
+msgid ""
+"This draws the two-dimensional variant of the recursive Sierpinski triangle "
+"fractal.  Written by Desmond Daignault."
+msgstr ""
+"Ri¹e dvodimenizonalno razlièico fraktalnega trikotnika Sierpinskega.  "
+"Napisal Desmond Daignault."
+
+#: capplets/screensaver/screensavers/slidescreen.xml.h:1
+msgid "SlideScreen"
+msgstr "DrsniZaslon"
+
+#: capplets/screensaver/screensavers/slidescreen.xml.h:2
+msgid ""
+"This grabs an image of whatever is on your screen, divides it into a grid, "
+"and then randomly shuffles the squares around as if it was one of those "
+"annoying ``16-puzzle'' games, where there is a grid of squares, one of which "
+"is missing.  I hate trying to solve those puzzles, but watching one permute "
+"itself is more amusing.  Written by Jamie Zawinski."
+msgstr ""
+"Vzame sliko zaslona, jo razdeli v mre¾o in nato nakljuèno okoli preme¹èa "
+"kvadrakte, tako kot ena tistih iger iz 16 puzzel.  Sovra¾im re¹evanje "
+"teh puzzel, a gledanje kako permutirajo je bolj zabavno.  Napisal Jamie Zawinski."
+
+#: capplets/screensaver/screensavers/slip.xml.h:1
+msgid "Slip"
+msgstr "Slip"
+
+#: capplets/screensaver/screensavers/slip.xml.h:2
+msgid ""
+"This program throws some random bits on the screen, then sucks them through "
+"a jet engine and spews them out the other side.  To avoid turning the image "
+"completely to mush, every now and then it will and then it interjects some "
+"splashes of color into the scene, or go into a spin cycle, or stretch the "
+"image like taffy, or (this is my addition) grab an image of your current "
+"desktop to chew on.  Originally written by Scott Draves; whacked on by Jamie "
+"Zawinski."
+msgstr ""
+"Ta program meèe nakljuène bite na zaslon, potem jih poskra skozi reaktivni "
+"motor in jih izvr¾e na drugi strani.  Da se slika ne bi popolnoma degenerirala, "
+"vsake toliko èasa vr¾e nekaj pack na zaslon, ali gre v kro¾ni cikel ali pa raztegne "
+"sliko ali (to je moj dodatek) vzame sliko trenutnega namizja za ¾veèenje.  "
+"Izvorno napisal Scott Draves; Dodatno pohackal Jamie Zawinski."
+
+#: capplets/screensaver/screensavers/sonar.xml.h:1
+msgid "Sonar"
+msgstr "Sonar"
+
+#: capplets/screensaver/screensavers/sonar.xml.h:2
+msgid ""
+"This program draws a simulation of a sonar screen.  Written by default, it "
+"displays a random assortment of ``bogies'' on the screen, but if compiled "
+"properly, it can ping (pun intended) your local network, and actually plot "
+"the proximity of the other hosts on your network to you.  It would be easy "
+"to make it monitor other sources of data, too.  (Processes?\t Active network "
+"connections?  CPU usage per user?)\tWritten by Stephen Martin."
+msgstr ""
+
+#: capplets/screensaver/screensavers/speedmine.xml.h:1
+msgid ""
+"Simulates speeding down a rocky mineshaft, or a funky dancing worm.  Written "
+"by Conrad Parker.\n"
+"\n"
+"\n"
+"!"
+"=============================================================================\n"
+"!\n"
+"! Documentation for some programs that are not bundled with XScreenSaver\n"
+"!\n"
+"!"
+"============================================================================="
+msgstr ""
+
+#: capplets/screensaver/screensavers/speedmine.xml.h:9
+msgid "SpeedMine"
+msgstr "HitroKopanje"
+
+#: capplets/screensaver/screensavers/sphere.xml.h:1
+msgid ""
+"Another of the classic screenhacks of the distant past, this one draws "
+"shaded spheres in multiple colors.  This hack traces its lineage back to Tom "
+"Duff in 1982."
+msgstr ""
+
+#: capplets/screensaver/screensavers/sphere.xml.h:2
+msgid "Sphere"
+msgstr "Sfera"
+
+#: capplets/screensaver/screensavers/spiral.xml.h:2
+msgid ""
+"Moving circular patterns, by Peter Schmitzberger.  Moving circular patterns "
+"means moire; interference patterns, of course."
+msgstr ""
+
+#: capplets/screensaver/screensavers/spiral.xml.h:6
+msgid "Spiral"
+msgstr "Spirala"
+
+#: capplets/screensaver/screensavers/spotlight.xml.h:1
+msgid ""
+"Draws a spotlight scanning across a black screen, illumnating the underlying "
+"desktop when it passes.  Written by Rick Schultz."
+msgstr ""
+
+#: capplets/screensaver/screensavers/spotlight.xml.h:2
+msgid "Spotlight"
+msgstr "Odrska luè"
+
+#: capplets/screensaver/screensavers/sproingies.xml.h:1
+msgid "Q-Bert meets Marble Madness!  Written by Ed Mackey."
+msgstr ""
+
+#: capplets/screensaver/screensavers/sproingies.xml.h:2
+msgid "Sproingies"
+msgstr ""
+
+#: capplets/screensaver/screensavers/squiral.xml.h:1
+msgid ""
+"Draws a set of interacting, square-spiral-producing automata.  The spirals "
+"grow outward until they hit something, then they go around it.  Written by "
+"Jeff Epler."
+msgstr ""
+
+#: capplets/screensaver/screensavers/squiral.xml.h:2
+msgid "Squiral"
+msgstr "Squiral"
+
+#: capplets/screensaver/screensavers/ssystem.xml.h:1
+msgid "SSystem"
+msgstr ""
+
+#: capplets/screensaver/screensavers/ssystem.xml.h:2
+msgid ""
+"SSystem is a GL Solar System simulator.  It simulates flybys of Sun, the "
+"nine planets and a few major satellites, with four camera modes.  Written by "
+"Raul Alonso.  This is not included with the XScreenSaver package, but if you "
+"don't have it already, you can find it at <http://www1.las.es/~amil/ssystem/"
+">."
+msgstr ""
+
+#: capplets/screensaver/screensavers/stairs.xml.h:1
+msgid "Stairs"
+msgstr "Stopnice"
+
+#: capplets/screensaver/screensavers/stairs.xml.h:2
+msgid ""
+"by Marcelo Vianna's third Escher GL hack, this one draws an ``infinite'' "
+"staircase."
+msgstr ""
+
+#: capplets/screensaver/screensavers/starfish.xml.h:1
+msgid "Change to display in monochrome."
+msgstr "Spremeni zaslon v èrnobel."
+
+#: capplets/screensaver/screensavers/starfish.xml.h:2
+msgid "Duration of current shape."
+msgstr "Trajanje trenutne oblike."
+
+#: capplets/screensaver/screensavers/starfish.xml.h:3
+msgid "Quickness of rotation at each step (0 = Random)"
+msgstr "Hitrost vrtenja ob vsakem koraku (0 = nakljuèna)"
+
+#: capplets/screensaver/screensavers/starfish.xml.h:4
+msgid "Speed of animation."
+msgstr "Hitrost animacije"
+
+#: capplets/screensaver/screensavers/starfish.xml.h:5
+msgid "Starfish"
+msgstr "Morska zvezda"
+
+#: capplets/screensaver/screensavers/starfish.xml.h:6
+msgid "Thickness of color bands (0 = Random)"
+msgstr "©irina barvnih pasov (0 = nakljuèna)"
+
+#: capplets/screensaver/screensavers/starfish.xml.h:7
+msgid ""
+"This generates a sequence of undulating, throbbing, star-like patterns which "
+"pulsate, rotate, and turn inside out.  Another display mode uses these "
+"shapes to lay down a field of colors, which are then cycled.  The motion is "
+"very organic.  Written by Jamie Zawinski."
+msgstr ""
+
+#: capplets/screensaver/screensavers/starfish.xml.h:8
+msgid "Use raw shapes "
+msgstr "Ka¾i le obrobo "
+
+#: capplets/screensaver/screensavers/starwars.xml.h:1
+msgid ""
+"Draws a stream of text slowly scrolling into the distance at an angle, over "
+"a star field, like at the beginning of the movie of the same name.  Written "
+"by Jamie Zawinski and Claudio Matauoka."
+msgstr ""
+"Ri¹te tok besedila, ki se pod kotom poèasi premika v neskonènost, èez "
+"polje zvezd, kot ob zaèetku filma z enakim imenom.  Napisala Jamie Zawinski in Claudio Matauoka."
+
+#: capplets/screensaver/screensavers/starwars.xml.h:2
+msgid "StarWars"
+msgstr "Vojne zvezd"
+
+#: capplets/screensaver/screensavers/stonerview.xml.h:1
+msgid ""
+"Chains of colorful squares dance around each other in complex spiral "
+"patterns.  Written by Andrew Plotkin, based on SGI's `electropaint' "
+"screensaver."
+msgstr ""
+
+#: capplets/screensaver/screensavers/stonerview.xml.h:2
+msgid "StonerView"
+msgstr ""
+
+#: capplets/screensaver/screensavers/strange.xml.h:1
+msgid "Strange"
+msgstr "Èudno"
+
+#: capplets/screensaver/screensavers/strange.xml.h:2
+msgid ""
+"This draws strange attractors: it's a colorful, unpredictably-animating "
+"field of dots that swoops and twists around.  The motion is very nice.  "
+"Written by Massimino Pascal."
+msgstr ""
+
+#: capplets/screensaver/screensavers/superquadrics.xml.h:1
+msgid ""
+"Ed Mackey reports that he wrote the first version of this program in BASIC "
+"on a Commodore 64 in 1987, as a 320x200 black and white wireframe.  Now it "
+"is GL and has specular reflections."
+msgstr ""
+
+#: capplets/screensaver/screensavers/superquadrics.xml.h:2
+msgid "Superquadrics"
+msgstr "Superkvadri"
+
+#: capplets/screensaver/screensavers/swirl.xml.h:1
+msgid ""
+"More flowing, swirly patterns.  This version is by M.  Dobie and R.  Taylor, "
+"but you might have seen a Mac program similar to this called FlowFazer.  "
+"There is also a cool Java applet of a similar concept"
+msgstr ""
+
+#: capplets/screensaver/screensavers/swirl.xml.h:2
+msgid "Swirl"
+msgstr "Interferenca"
+
+#: capplets/screensaver/screensavers/t3d.xml.h:1
+msgid "T3D"
+msgstr "T3D"
+
+#: capplets/screensaver/screensavers/t3d.xml.h:2
+msgid ""
+"This draws a working analog clock composed of floating, throbbing bubbles.  "
+"Written by Bernd Paysan."
+msgstr ""
+"To nari¹e analogno uro v teku, ki je sestavljena iz lebdeèih mehurèkov.  Napisal Bernd Paysan."
+
+#: capplets/screensaver/screensavers/triangle.xml.h:2
+msgid ""
+"Generates random mountain ranges using iterative subdivision of triangles.  "
+"Written by Tobias Gloth."
+msgstr ""
+"Generira nakljuène gorske panorame z uporabo iterativnega deljenja "
+"trikotnikov.  Napisal Tobias Gloth."
+
+#: capplets/screensaver/screensavers/triangle.xml.h:4
+msgid "Triangle"
+msgstr "Trikotnik"
+
+#: capplets/screensaver/screensavers/truchet.xml.h:1
+msgid ""
+"This draws line- and arc-based Truchet patterns that tile the screen.  "
+"Written by Adrian Likins."
+msgstr ""
+
+#: capplets/screensaver/screensavers/truchet.xml.h:2
+msgid "Truchet"
+msgstr "Vzorec iz èrt"
+
+#: capplets/screensaver/screensavers/vidwhacker.xml.h:1
+msgid ""
+"This is actually just a shell script that grabs a frame of video from the "
+"system's video input, and then uses some PBM filters (chosen at random) to "
+"manipulate and recombine the video frame in various ways (edge detection, "
+"subtracting the image from a rotated version of itself, etc.)  Then it "
+"displays that image for a few seconds, and does it again.  This works really "
+"well if you just feed broadcast television into it.  \n"
+"\n"
+"Currently, the three lines of the script that actually grab the source "
+"picture are SGI specific, but it should be trivial to adapt it to work on "
+"other systems that can grab video (please send me the changes if you do "
+"this...)"
+msgstr ""
+
+#: capplets/screensaver/screensavers/vidwhacker.xml.h:4
+msgid "VidWhacker"
+msgstr ""
+
+#: capplets/screensaver/screensavers/vines.xml.h:3
+msgid ""
+"This one generates a continuous sequence of small, curvy geometric "
+"patterns.  It scatters them around your screen until it fills up, then it "
+"clears the screen and starts over.  Written by Tracy Camp and David Hansen."
+msgstr ""
+
+#: capplets/screensaver/screensavers/vines.xml.h:4
+msgid "Vines"
+msgstr ""
+
+#: capplets/screensaver/screensavers/wander.xml.h:1
+msgid ""
+"Draws a colorful random-walk, in various forms.  Written by Rick Campbell."
+msgstr ""
+
+#: capplets/screensaver/screensavers/wander.xml.h:2
+msgid "Wander"
+msgstr ""
+
+#: capplets/screensaver/screensavers/webcollage.xml.h:1
+msgid ""
+"This program makes collages out of random images pulled off of the World "
+"Wide Web.  It finds these images by doing random web searches, and then "
+"extracting images from the returned pages.  It can also be set up to filter "
+"the images through the `VidWhacker' program, above, which looks really "
+"great.  \n"
+"\n"
+"(Note that most of the images it finds are text, and not pictures.  This is "
+"because most of the web is pictures of text.  Which is pretty sad.)  Written "
+"by Jamie Zawinski."
+msgstr ""
+
+#: capplets/screensaver/screensavers/webcollage.xml.h:4
+msgid "WebCollage"
+msgstr ""
+
+#: capplets/screensaver/screensavers/whirlwindwarp.xml.h:1
+msgid ""
+"Floating stars are acted upon by a mixture of simple 2D forcefields.  The "
+"strength of each forcefield changes continuously, and it is also switched on "
+"and off at random.  By Paul 'Joey' Clark."
+msgstr ""
+
+#: capplets/screensaver/screensavers/whirlwindwarp.xml.h:2
+msgid "WhirlwindWarp"
+msgstr ""
+
+#: capplets/screensaver/screensavers/whirlygig.xml.h:1
+msgid ""
+"Draws zooming chains of sinusoidal spots.  Written by Ashton Trey Belew."
+msgstr ""
+
+#: capplets/screensaver/screensavers/whirlygig.xml.h:2
+msgid "WhirlyGig"
+msgstr ""
+
+#: capplets/screensaver/screensavers/worm.xml.h:1
+msgid ""
+"An ancient xlock hack that draws multicolored worms that crawl around the "
+"screen.  Written by Brad Taylor, Dave Lemke, Boris Putanec, and Henrik "
+"Theiling."
+msgstr ""
+
+#: capplets/screensaver/screensavers/worm.xml.h:2
+msgid "Worm"
+msgstr "Èrv"
+
+#: capplets/screensaver/screensavers/xaos.xml.h:1
+msgid "XaoS"
+msgstr ""
+
+#: capplets/screensaver/screensavers/xaos.xml.h:2
+msgid ""
+"XaoS generates fast fly-through animations of the Mandelbrot and other "
+"fractal sets.  Written by Thomas Marsh and Jan Hubicka.  This is not "
+"included with the XScreenSaver package, but if you don't have it already, "
+"you can find it at <http://limax.paru.cas.cz/~hubicka/XaoS/>."
+msgstr ""
+
+#: capplets/screensaver/screensavers/xdaliclock.xml.h:1
+msgid "XDaliClock"
+msgstr ""
+
+#: capplets/screensaver/screensavers/xdaliclock.xml.h:2
+msgid ""
+"XDaliClock draws a large digital clock, the numbers of which change by "
+"``melting'' into their new shapes.  Written by Jamie Zawinski.  This is not "
+"included with the XScreenSaver package, but if you don't have it already, "
+"you can find it at <http://www.jwz.org/xdaliclock/>."
+msgstr ""
+
+#: capplets/screensaver/screensavers/xearth.xml.h:1
+msgid ""
+"XEarth draws an image of the Earth, as seen from your favorite vantage point "
+"in space, correctly shaded for the current position of the Sun.  Written by "
+"Kirk Johnson.  This is not included with the XScreenSaver package, but if "
+"you don't have it already, you can find it at <http://www.cs.colorado.edu/"
+"~tuna/xearth/>."
+msgstr ""
+
+#: capplets/screensaver/screensavers/xearth.xml.h:2
+msgid "Xearth"
+msgstr "Xzemlja"
+
+#: capplets/screensaver/screensavers/xfishtank.xml.h:1
+msgid ""
+"Fish!  This is not included with the XScreenSaver package, but if you don't "
+"have it already, you can find it at <http://metalab.unc.edu/pub/Linux/X11/"
+"demos/>."
+msgstr ""
+
+#: capplets/screensaver/screensavers/xfishtank.xml.h:2
+msgid "XFishTank"
+msgstr ""
+
+#: capplets/screensaver/screensavers/xflame.xml.h:1
+msgid ""
+"Draws a simulation of pulsing fire.  It can also take an arbitrary image and "
+"set it on fire too.  Written by Carsten Haitzler, hacked on by many others."
+msgstr ""
+
+#: capplets/screensaver/screensavers/xflame.xml.h:2
+msgid "Xflame"
+msgstr "Xplamen"
+
+#: capplets/screensaver/screensavers/xjack.xml.h:1
+msgid ""
+"This program behaves schizophrenically and makes a lot of typos.  Written by "
+"Jamie Zawinski.  If you haven't seen Stanley Kubrick's masterpiece, ``The "
+"Shining,'' you won't get it.  Those who have describe this hack as "
+"``inspired.''"
+msgstr ""
+
+#: capplets/screensaver/screensavers/xjack.xml.h:2
+msgid "Xjack"
+msgstr "Xjaka"
+
+#: capplets/screensaver/screensavers/xlyap.xml.h:1
+msgid ""
+"This generates pretty fractal pictures by doing funky math involving the "
+"``Lyapunov exponent.''  It has a cool interactive mode, too.  Written by Ron "
+"Record."
+msgstr ""
+
+#: capplets/screensaver/screensavers/xlyap.xml.h:2
+msgid "Xlyap"
+msgstr "Xlyap"
+
+#: capplets/screensaver/screensavers/xmatrix.xml.h:1
+msgid ""
+"A rendition of the text scrolls seen in the movie ``The Matrix.'' Written by "
+"Jamie Zawinski."
+msgstr ""
+"Prikaz premikanja besedila, kot je bil viden v filmu Matrica.  Napisal Jamie "
+"Zawinski."
+
+#: capplets/screensaver/screensavers/xmatrix.xml.h:2
+msgid "Xmatrix"
+msgstr "Xmatrica"
+
+#: capplets/screensaver/screensavers/xmountains.xml.h:1
+msgid ""
+"XMountains generates realistic-looking fractal terrains of snow-capped "
+"mountains near water, with either a top view or a side view.  Written by "
+"Stephen Booth.  This is not included with the XScreenSaver package, but if "
+"you don't have it already, you can find it at <http://www.epcc.ed.ac.uk/~spb/"
+"xmountains/>.  \n"
+"\n"
+"Be sure to compile it with -DVROOT or it won't work right when launched by "
+"the xscreensaver daemon."
+msgstr ""
+"XGore ri¹e realistiène fraktalne pokrajne gor z zasne¾enim vrhom, ki so zraven vode. "
+"Napisal Stephen Booth.  To ni vkljuèeno v paket XScreenSaver, a èe XGore ¹e nimate, "
+"ga lahko najdete na <http://www.epcc.ed.ac.uk/~spb/xmountains/>.\n"
+"\n"
+"Ne pozabite prevesti z -DVROOT, ali pa ne bo delovalo pravilno, ko bo zagnano "
+"s strani daemona xscreensaver."
+
+#: capplets/screensaver/screensavers/xmountains.xml.h:4
+msgid "Xmountains"
+msgstr "XGore"
+
+#: capplets/screensaver/screensavers/xrayswarm.xml.h:1
+msgid ""
+"Draws a few swarms of critters flying around the screen, with nicely faded "
+"color trails behind them.  Written by Chris Leger."
+msgstr ""
+
+#: capplets/screensaver/screensavers/xrayswarm.xml.h:2
+msgid "XRaySwarm"
+msgstr ""
+
+#: capplets/screensaver/screensavers/xroger.xml.h:2
+msgid ""
+"The XScreenSaver logo.  Don't you hate it?  So do I.  Would you like to "
+"design a new logo for XScreenSaver?\tIf so, send jwz your submissions."
+msgstr ""
+"Logotip ohranjevalnika zaslona X.  Ga ne sovra¾ite?  Tudi jaz ga.  ®elite "
+"oblikovati nov logotip za ohranjevalnik zaslona X?\n"
+"V tem primeru po¹ljite prispevke jwz-ju."
+
+#: capplets/screensaver/screensavers/xroger.xml.h:3
+msgid "Xroger"
+msgstr "Xroger"
+
+#: capplets/screensaver/screensavers/xsnow.xml.h:1
+msgid ""
+"Draws falling snow and the occasional tiny Santa.  By Rick Jansen.  You can "
+"find it at <http://www.euronet.nl/~rja/Xsnow/>."
+msgstr ""
+"Ri¹e padanje snega in obèasno majhnega bo¾ièka.  Napisal Rick Jansen.  "
+"Program najdete na <http://www.euronet.nl/~rja/Xsnow/>."
+
+#: capplets/screensaver/screensavers/xsnow.xml.h:2
+msgid "Xsnow"
+msgstr "Xsneg"
+
+#: capplets/screensaver/screensavers/xspirograph.xml.h:1
+msgid ""
+"Simulates that pen-in-nested-plastic-gears toy from your childhood.  By "
+"Rohit Singh."
+msgstr ""
+
+#: capplets/screensaver/screensavers/xspirograph.xml.h:2
+msgid "XSpiroGraph"
+msgstr ""
+
+#: capplets/screensaver/screensavers/xteevee.xml.h:1
+msgid "XTeeVee"
+msgstr "XTeeVee"
+
+#: capplets/screensaver/screensavers/xteevee.xml.h:2
+msgid ""
+"XTeeVee simulates various television problems, including static, loss of "
+"vertical hold, and a test pattern.  By Greg Knauss."
+msgstr ""
+"Simulira razliène probleme televizije kot so ¹um, izguba vertikalne "
+"sinhronizacije in testne slike.  Napisal Greg Knauss."
+
+#: capplets/screensaver/screensavers/zoom.xml.h:1
+msgid "Zoom (Fatbits)"
+msgstr "Zoom (Fatbits)"
+
+#: capplets/screensaver/screensavers/zoom.xml.h:2
+msgid ""
+"Zooms in on a part of the screen and then moves around.  With the -lenses "
+"option the result is like looking through many overlapping lenses rather "
+"than just a simple zoom.  Written by James Macnicol."
+msgstr ""
+"Poveèa del zaslona in se nato premika okoli.  Z -lenses je rezultat kot, da "
+"bi gledal èez veè prekritih leè in ne skozi enostavno poveèavo.  Napisal "
+"James Macnicol."
+
+#: capplets/screensaver/selection-dialog.c:99
+msgid "Add a new screensaver"
+msgstr "Dodaj nov ohranjevalnik zaslona"
+
+#: capplets/screensaver/selection-dialog.c:108
+msgid "Select the screensaver to run from the list below:"
+msgstr "Izberite ohranjevalnik, ki naj se po¾ene iz spodnjega seznama:"
+
+#: capplets/screensaver/selection-dialog.c:194
+msgid "Custom"
+msgstr "Prikrojeno"
+
+#: capplets/screensaver/selection-dialog.c:220
+msgid "New screensaver"
+msgstr "Nov ohranjevalnik zaslona"
+
+#: capplets/sound/sound.desktop.in.in.h:1
 msgid "Configure GNOME's use of sound"
 msgstr "Nastavi GNOME-ovo uporabo zvoka."
 
-#: capplets/sound/sound-properties-capplet.c:167
-#, fuzzy
-msgid "Sound properties"
-msgstr "Lastnosti %s"
+#: capplets/sound/sound.desktop.in.in.h:2
+msgid "Sound"
+msgstr "Zvok"
 
-#. just 8 short names that will serve as samples for titles in demo
-#: capplets/theme-switcher/control/control.c:19
-msgid "Eenie"
-msgstr ""
+#: capplets/sound/sound-properties.glade.h:1
+msgid "Enable sound server startup"
+msgstr "Vkljuèi zagon stre¾nika za zvok"
 
-#: capplets/theme-switcher/control/control.c:19
-#, fuzzy
-msgid "Mynie"
-msgstr "Moire"
+#: capplets/sound/sound-properties.glade.h:2
+msgid "General"
+msgstr "Splo¹no"
 
-#: capplets/theme-switcher/control/control.c:19
-msgid "Catcha"
-msgstr ""
+#: capplets/sound/sound-properties.glade.h:3
+msgid "Sound Events"
+msgstr "Zvoèni dogodki"
 
-#: capplets/theme-switcher/control/control.c:19
-msgid "By Its"
-msgstr ""
+#: capplets/sound/sound-properties.glade.h:4
+msgid "Sounds for events"
+msgstr "Zvoki ob dogodkih"
 
-#: capplets/theme-switcher/control/control.c:20
-msgid "Meenie"
-msgstr ""
-
-#: capplets/theme-switcher/control/control.c:20
-#, fuzzy
-msgid "Moe"
-msgstr "Mi¹ka"
-
-#: capplets/theme-switcher/control/control.c:20
-#, fuzzy
-msgid "Tiger"
-msgstr "Trikotnik"
-
-#: capplets/theme-switcher/control/control.c:20
-msgid "Toe"
-msgstr ""
-
-#: capplets/theme-switcher/control/control.c:38
-msgid "Selected themes from above will be tested by previewing here."
-msgstr ""
-
-#. column one
-#: capplets/theme-switcher/control/control.c:43
-msgid "Sample Button"
-msgstr ""
-
-#: capplets/theme-switcher/control/control.c:47
-msgid "Sample Check Button"
-msgstr ""
-
-#: capplets/theme-switcher/control/control.c:53
-msgid "Sample Text Entry Field"
-msgstr ""
-
-#: capplets/theme-switcher/control/control.c:64
-msgid "Submenu"
-msgstr ""
-
-#: capplets/theme-switcher/control/control.c:69
-msgid "Item 1"
-msgstr ""
-
-#: capplets/theme-switcher/control/control.c:71
-msgid "Another item"
-msgstr ""
-
-#: capplets/theme-switcher/control/control.c:75
-msgid "Radio Button 1"
-msgstr ""
-
-#: capplets/theme-switcher/control/control.c:81
-msgid "Radio Button 2"
-msgstr ""
-
-#: capplets/theme-switcher/control/control.c:102
-msgid "One"
-msgstr ""
-
-#: capplets/theme-switcher/control/control.c:108
-msgid "Two"
-msgstr ""
-
-#: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
-msgid "Gtk+ Theme Selector"
-msgstr ""
-
-#: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
-msgid "Select which gtk+ theme to use"
-msgstr ""
-
-#: capplets/theme-switcher/main.c:217
-#, fuzzy
-msgid "Select a theme to install"
-msgstr "Izberite terminal"
-
-#: capplets/ui-properties/behavior.desktop.in.h:1
-msgid "Sets the default behavior of GNOME applications"
-msgstr ""
-
-#: capplets/ui-properties/behavior.desktop.in.h:2
-msgid "Toolbars & Menus"
-msgstr ""
-
-#: control-center/capplet-dir-view.c:146
-msgid "Layout"
-msgstr ""
-
-#: control-center/capplet-dir-view.c:147
-msgid "Layout to use for this view of the capplets"
-msgstr ""
-
-#: control-center/capplet-dir-view.c:153
-msgid "Capplet directory object"
-msgstr ""
-
-#: control-center/capplet-dir-view.c:154
-msgid "Capplet directory that this view is viewing"
-msgstr ""
-
-#: control-center/capplet-dir-view.c:308 control-center/gnomecc.desktop.in.h:1
+#: control-center/capplet-dir-view.c:298 control-center/gnomecc.desktop.in.h:1
 msgid "GNOME Control Center"
 msgstr "Kontrolni center GNOME"
 
-#: control-center/capplet-dir-view.c:311
+#: control-center/capplet-dir-view.c:299
 msgid "Desktop properties manager."
 msgstr "Upravljalnik lastnosti namizja."
 
-#: control-center/capplet-dir-view.c:445
+#: control-center/capplet-dir-view.c:413
 #, c-format
 msgid "Gnome Control Center : %s"
 msgstr "Kontrolni center Gnome : %s"
 
-#: control-center/capplet-dir-view.c:488
+#: control-center/capplet-dir-view.c:461
 msgid ""
 "No help is available/installed. Please make sure you\n"
 "have the GNOME User's Guide installed on your system."
@@ -691,1670 +3098,89 @@ msgstr ""
 "Pomoè za te nastavitve ni na voljo / ni name¹èena. Prosim preprièajte se,\n"
 "da imate GNOME Uporabni¹ki Vodiè name¹èen na va¹em sistemu."
 
-#: control-center/capplet-dir-view.c:491
+#: control-center/capplet-dir-view.c:464
 msgid "Close"
 msgstr "Zapri"
 
-#: control-center/capplet-dir-view-list.c:325
-#, fuzzy, c-format
-msgid "GNOME Control Center: %s"
+#: control-center/capplet-dir-view-html.c:145
+msgid "GNOME Control Center:"
 msgstr "Kontrolni center GNOME:"
 
 #: control-center/gnomecc.desktop.in.h:2
 msgid "The GNOME configuration tool"
 msgstr "Nastavitveno orodje GNOME-a."
 
-#: control-center/main.c:44
-msgid "Use shell even if nautilus is running."
-msgstr ""
-
-#: libbackground/applier.c:239
-msgid "Type"
-msgstr ""
-
-#: libbackground/applier.c:240
-msgid ""
-"Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
-"for preview"
-msgstr ""
-
-#: libbackground/applier.c:399
-#, c-format
-msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
-msgstr "Nisem mogel nalo¾iti slike \"%s\"; tapete izkljuèene."
-
-#: libbackground/applier.c:522
-msgid "Disabled"
-msgstr "Izkljuèeno"
-
-#: libsounds/sound-view.c:99
-msgid "The sound file for this event does not exist."
-msgstr ""
-
-#: libsounds/sound-view.c:101
-msgid ""
-"The sound file for this event does not exist.\n"
-"You may want to install the gnome-audio package\n"
-"for a set of default sounds."
-msgstr ""
-
-#: libsounds/sound-view.c:154
-msgid "Event"
-msgstr ""
-
-#: libsounds/sound-view.c:154
-msgid "File to Play"
-msgstr ""
-
-#: libsounds/sound-view.c:187
-#, fuzzy
-msgid "Play"
-msgstr "Pulzar"
-
-#: libsounds/sound-view.c:193
-#, fuzzy
-msgid "Select sound file"
-msgstr "Izberi pregledovalnik"
-
-#~ msgid "Main"
-#~ msgstr "Glavna"
-
-#~ msgid "Main Settings"
-#~ msgstr "Glavne nastavitve"
-
-#, fuzzy
-#~ msgid "Initialize session settings"
-#~ msgstr "Inicializiraj sejo"
-
-#, fuzzy
-#~ msgid "Global panel properties"
-#~ msgstr "Mo¾nosti globalnega arhivarja"
-
-#, fuzzy
-#~ msgid "Panel"
-#~ msgstr "GLPlanet"
-
-#~ msgid "Default location"
-#~ msgstr "Privzeta lokacija"
-
-#~ msgid "Store XML data in the archive"
-#~ msgstr "V arhiv shrani podatke XML"
-
-#~ msgid "Roll back the configuration to a given point"
-#~ msgstr "Prevrti nastavitve nazaj do doloèene toèke"
-
-#~ msgid "Change the location profile to the given one"
-#~ msgstr "Spremeni profil lokacije na podanega"
-
-#~ msgid "Push configuration data out to client machines (UNIMPLEMENTED)"
-#~ msgstr ""
-#~ "Potisni podatke o nastavitvah v raèunalnike odjemalce (NEIMPLEMENTIRANO)"
-
-#~ msgid "Rename a location to a new name"
-#~ msgstr "Preimenuj lokacijo"
-
-#~ msgid "Add a new location to the archive"
-#~ msgstr "Dodaj novo lokacijo v arhiv"
-
-#~ msgid "Remove a location from the archive"
-#~ msgstr "Odstrani lokacijo iz arhiva"
-
-#~ msgid "Use the global repository"
-#~ msgstr "Uporabi globalno shrambo"
-
-#~ msgid "Identifier of location profile on which to operate"
-#~ msgstr "Identifikator lokacijskega profila za uporabo"
-
-#~ msgid "LOCATION"
-#~ msgstr "LOKACIJA"
-
-#~ msgid "Store only the differences with the parent location's config"
-#~ msgstr "Shrani le razlike v primerjavi z nastavitvami star¹evske lokacije"
-
-#~ msgid "Store only those settings set in the previous config"
-#~ msgstr "Shrani le nastavitve spremenjene v prej¹njem nastavljanju"
-
-#~ msgid "Date to which to roll back"
-#~ msgstr "Datum do katerega naj prevrtim"
-
-#~ msgid "DATE"
-#~ msgstr "DATUM"
-
-#~ msgid "Roll back all configuration items"
-#~ msgstr "Prevrti vse predmete nastavitev"
-
-#~ msgid "Roll back to the revision REVISION_ID"
-#~ msgstr "Prevrti do razlièice RAZLIÈICA"
-
-#~ msgid "REVISION_ID"
-#~ msgstr "RAZLIÈICA"
-
-#~ msgid "Roll back to the last known revision"
-#~ msgstr "Prevrti do zadnje znane razlièice"
-
-#~ msgid "Roll back by STEPS revisions"
-#~ msgstr "Prevrti za KORAKOV razlièic"
-
-#~ msgid "STEPS"
-#~ msgstr "KORAKOV"
-
-#~ msgid "PARENT"
-#~ msgstr "STAR©"
-
-#~ msgid "New name to assign to the location"
-#~ msgstr "Novo ime, ki naj se dodeli lokaciji"
-
-#~ msgid "NEW_NAME"
-#~ msgstr "NOVO_IME"
-
-#~ msgid "Full containment"
-#~ msgstr "Popolno vsebovanje"
-
-#~ msgid "Partial containment"
-#~ msgstr "Delno vsebovanje"
-
-#~ msgid "Archiver commands"
-#~ msgstr "Ukazi arhivarja"
-
-#~ msgid "Options for storing data"
-#~ msgstr "Mo¾nosti za shranjevanje podatkov"
-
-#~ msgid "Options for rolling back"
-#~ msgstr "Mo¾nosti za prevrtenje"
-
-#~ msgid "Options for adding or renaming locations"
-#~ msgstr "Mo¾nosti za dodajanje ali preimenovanje lokacij"
-
-#~ msgid "Background picture"
-#~ msgstr "Slika v ozadju"
-
-#~ msgid "Centered"
-#~ msgstr "Centrirano"
-
-#~ msgid "Horizontal gradient"
-#~ msgstr "Vodoravni preliv"
-
-#~ msgid "Opacity (percent):"
-#~ msgstr "Prosojnost (procentov):"
-
-#~ msgid "Pick a color"
-#~ msgstr "Izberi barvo"
-
-#~ msgid "Scaled (keep aspect ratio)"
-#~ msgstr "Raztegnjeno (ohrani razmerja)"
-
-#~ msgid "Solid color"
-#~ msgstr "polna barva"
-
-#~ msgid "Stretched"
-#~ msgstr "Raztegnjeno"
-
-#~ msgid "Style:"
-#~ msgstr "Slog:"
-
-#~ msgid "Tiled"
-#~ msgstr "Tlakovano"
-
-#~ msgid "Vertical gradient"
-#~ msgstr "Navpièni preliv"
-
-#~ msgid "Gnome Default Editor"
-#~ msgstr "Privzet urejevalnik za Gnome"
-
-#~ msgid "Select an Editor"
-#~ msgstr "Izberi urejevalnik"
-
-#~ msgid "With this option, you can select a predefined Editor as your default"
-#~ msgstr ""
-#~ "S to mo¾nostjo lahko kot privzetega izberete prednastavljen urejevalnik"
-
-#~ msgid "Custom Editor"
-#~ msgstr "Poljuben urejevalnik"
-
-#~ msgid "With this option you can create your own default editor"
-#~ msgstr "S to mo¾nostjo lahko ustvarite svoj lasten privzet urejevalnik"
-
-#~ msgid "Start in Terminal"
-#~ msgstr "Po¾eni v terminalu"
-
-#~ msgid "Does this editor need to start in an xterm?"
-#~ msgstr "Ali se mora urejevalnik pognati v xterm-u"
-
-#~ msgid "Accepts Line Number"
-#~ msgstr "Sprejema ¹tevilke vrstic"
-
-#~ msgid "Does this editor accept line numbers from the command line?"
-#~ msgstr "Ali ta urejevalnik sprejema ¹tevilke vrstic iz ukazne vrstice?"
-
-#~ msgid "Command:"
-#~ msgstr "Ukaz:"
-
-#~ msgid "Please enter the command line used to start this editor"
-#~ msgstr "Prosim, vpi¹ite ukaz s katerim se urejevalnik po¾ene"
-
-#~ msgid "Text Editor"
-#~ msgstr "Urejevalnik besedila"
-
-#~ msgid "Gnome Default Web Browser"
-#~ msgstr "Privzet spletni brskalnik za Gnome"
-
-#~ msgid "Select a Web Browser"
-#~ msgstr "Izberite spletni brskalnik"
-
-#~ msgid ""
-#~ "With this option, you can select a predefined Web Browser as your default"
-#~ msgstr ""
-#~ "S to mo¾nostjo lahko kot privzetega izberete prednastavljen brskalnik"
-
-#~ msgid "Custom Web Browser"
-#~ msgstr "Poljuben brskalnik"
-
-#~ msgid "With this option you can create your own default web browser"
-#~ msgstr "S to mo¾nostjo lahko ustvarite svoj lasten privzet brskalnik"
-
-#~ msgid "Does this web browser need to display in an xterm?"
-#~ msgstr "Ali se mora brskalnik pognati v xterm-u"
-
-#~ msgid "Understands Netscape Remote Control"
-#~ msgstr "Razume oddaljeno kontrolo Netscape"
-
-#~ msgid ""
-#~ "Does this web browser support the netscape remote control protocol?  If "
-#~ "in doubt, and this web browser isn't Netscape or Mozilla, it probably "
-#~ "doesn't."
-#~ msgstr ""
-#~ "Ali ta brskalnik podpira protokol za oddaljeno upravljanje Netscape? Èe "
-#~ "ste v dvomih in ta brskalnik ni Netscape ali Mozilla, potem verjetno ne."
-
-#~ msgid "Please enter the command line used to start this web browser"
-#~ msgstr "Prosim, vpi¹ite ukaz s katerim se brskalnik po¾ene"
-
-#~ msgid "Web Browser"
-#~ msgstr "Spletni brskalnik"
-
-#~ msgid "Default Help Viewer"
-#~ msgstr "Privzet pregledovalnik pomoèi"
-
-#~ msgid "With this option you can select a predefined help viewer."
-#~ msgstr "S to mo¾nostjo lahko izberete prednastavljen pregledovalnik pomoèi."
-
-#~ msgid "Custom Help Viewer"
-#~ msgstr "Poljuben pregledovalnik pomoèi"
-
-#~ msgid "With this option you can create your own help viewer"
-#~ msgstr "S to mo¾nostjo lahko ustvarite svoj lasten pregledovalnik pomoèi"
-
-#~ msgid "Does this help viewer need an xterm for display?"
-#~ msgstr "Ali se mora pregledovalnik pomoèi pognati v xterm-u"
-
-#~ msgid "Accepts URLs"
-#~ msgstr "Sprejema URLje"
-
-#~ msgid "Does this help viewer allow URLs for help?"
-#~ msgstr "Ali ta pregledovalnik pomoèi sprejema URLje do pomoèi?"
-
-#~ msgid "Please enter the command line used to start this help viewer"
-#~ msgstr "Prosim, vpi¹ite ukaz s katerim se brskalnik po¾ene"
-
-#~ msgid "Help Viewer"
-#~ msgstr "Pregledovalnik pomoèi"
-
-#~ msgid "Default Terminal"
-#~ msgstr "Privzet terminal"
-
-#~ msgid "With this option you can select a predefined terminal."
-#~ msgstr "S to mo¾nostjo lahko izberete prednastavljen terminal."
-
-#~ msgid "Custom Terminal"
-#~ msgstr "Poljuben terminal"
-
-#~ msgid "With this option you can create your own terminal"
-#~ msgstr "S to mo¾nostjo lahko ustvarite svoj lasten terminal"
-
-#~ msgid "Exec Flag:"
-#~ msgstr "Parameter za zagon:"
-
-#~ msgid ""
-#~ "Please enter the flag used by this terminal to specify the command to run "
-#~ "on startup.  For example, in 'xterm' this would be '-e'."
-#~ msgstr ""
-#~ "Prosim, vpi¹ite parameter, ki ga ta termianl uporablja, za navedbo ukaza, "
-#~ "ki naj se za¾ene ob zagonu. Na primer, za 'xterm' bi bila odgovor '-e'."
-
-#~ msgid "Please enter the command line used to start this terminal"
-#~ msgstr "Prosim, vpi¹ite ukaz s katerim naj se terminal po¾ene"
-
-#~ msgid "Terminal"
-#~ msgstr "Terminal"
-
-#~ msgid "Couldn't find pixmap file: %s"
-#~ msgstr "Nisem na¹el datoteke z sliko: %s"
-
-#~ msgid "Couldn't create pixmap from file: %s"
-#~ msgstr "Nisem mogel ustvariti slike iz datoteke: %s"
-
-#~ msgid "Options for the startup hint dialog"
-#~ msgstr "Mo¾nosti za zaèetno pogovorno okno z namigom"
-
-#~ msgid "Startup Hint"
-#~ msgstr "Zaèetni namig"
-
-#~ msgid "Bell"
-#~ msgstr "Zvonec"
-
-#~ msgid "Click volume"
-#~ msgstr "Glasnost klika"
-
-#~ msgid "Delay before repeat:"
-#~ msgstr "Premor pred ponovitvijo:"
-
-#~ msgid "Duration (ms)"
-#~ msgstr "Trajanje (ms)"
-
-#~ msgid "Enable Keyboard Click"
-#~ msgstr "Vkljuèi klikanje tipkovnice"
-
-#~ msgid "Enable Keyboard Repeat"
-#~ msgstr "Vkljuèi ponavljanje"
-
-#~ msgid "Fast"
-#~ msgstr "Hitro"
-
-#~ msgid "Key repeat rate:"
-#~ msgstr "Hitrost ponavljanja tipk:"
-
-#~ msgid "Long"
-#~ msgstr "Dolg"
-
-#~ msgid "Medium"
-#~ msgstr "Srednji"
-
-#~ msgid "Pitch (Hz)"
-#~ msgstr "Vi¹ina (Hz)"
-
-#~ msgid "Slow"
-#~ msgstr "Poèasno"
-
-#~ msgid "Test"
-#~ msgstr "Preizkus"
-
-#~ msgid "Very fast"
-#~ msgstr "Zelo hiter"
-
-#~ msgid "Very long"
-#~ msgstr "Zelo dolg"
-
-#~ msgid "Volume"
-#~ msgstr "Glasnost"
-
-#~ msgid "High"
-#~ msgstr "Visoka"
-
-#~ msgid "Left handed"
-#~ msgstr "Za levièarje"
-
-#~ msgid "Low"
-#~ msgstr "Nizka"
-
-#~ msgid "Mouse Configuration"
-#~ msgstr "Nastavitev mi¹ke"
-
-#~ msgid "Mouse speed:"
-#~ msgstr "Hitrost mi¹ke:"
-
-#~ msgid "My mouse is:"
-#~ msgstr "Moja mi¹ka je:"
-
-#~ msgid "Right handed"
-#~ msgstr "Za desnièarje"
-
-#~ msgid "Sensitivity:"
-#~ msgstr "Obèutljivost"
-
-#~ msgid "Custom screensaver. No description available"
-#~ msgstr "Nestandarden ohranjevalnik zaslona. Opis ni dostopen"
-
-#~ msgid "About %s\n"
-#~ msgstr "O %s\n"
-
-#~ msgid "Name:"
-#~ msgstr "Ime:"
-
-#~ msgid "Settings"
-#~ msgstr "Nastavitve"
-
-#~ msgid "label1"
-#~ msgstr "oznaèba1"
-
-#~ msgid "Demo"
-#~ msgstr "Demonstracija"
-
-#~ msgid ""
-#~ "Cannot find the data to configure this screensaver. Please edit the "
-#~ "command line below."
-#~ msgstr ""
-#~ "Ne najdem podatkov za nastavitev tega ohranjevalnika. Prosim uredite "
-#~ "ukazno vrstico spodaj."
-
-#~ msgid "Visual:"
-#~ msgstr "Vizualno:"
-
-#~ msgid "Any"
-#~ msgstr "Katerkoli"
-
-#~ msgid " Configure..."
-#~ msgstr " Nastavi..."
-
-#~ msgid "About \"<Screensaver name>\""
-#~ msgstr "O \"<Screensaver name>\""
-
-#~ msgid "Black screen only"
-#~ msgstr "Le èrn zaslon"
-
-#~ msgid "Disable screensaver"
-#~ msgstr "Izkljuèi ohranjevalnik zaslona"
-
-#~ msgid "Go to standby mode after"
-#~ msgstr "Pojdi v naèin pripravljenosti po"
-
-#~ msgid "Go to suspend mode after"
-#~ msgstr "Pojdi v spanje po"
-
-#~ msgid "One screensaver all the time"
-#~ msgstr "En ohranjevalnik ves èas"
-
-#~ msgid "Preview"
-#~ msgstr "Predogled"
-
-#~ msgid "R_equire password to unlock screen"
-#~ msgstr "Zahtevaj geslo za _odklenitev zaslona"
-
-#~ msgid "Random (all screensavers)"
-#~ msgstr "Nakljuèni ohranjevalnik zaslona (izmed vseh)"
-
-#~ msgid "Random (checked screensavers)"
-#~ msgstr "Nakljuèni ohranjevalnik zaslona (izmed izbranih)"
-
-#~ msgid "S_tart screensaver after "
-#~ msgstr "_Po¾eni ohranjevalnik po "
-
-#~ msgid "S_witch screensavers after "
-#~ msgstr "_Zamenjaj ohranjvalnik vsakih "
-
-#~ msgid "Settings for \"<Screensaver name>\""
-#~ msgstr "Nastavitve za \"<Screensaver name>\""
-
-#~ msgid "Shut down monitor after"
-#~ msgstr "Ugasni zaslon po"
-
-#~ msgid ""
-#~ "There are no configurable settings for this\n"
-#~ "screensaver. "
-#~ msgstr ""
-#~ "Za ta ohranjevalnik zaslona ni \n"
-#~ "spremenljivih nastavitev."
-
-#~ msgid "_About this screensaver..."
-#~ msgstr "_O tem ohranjevalniku..."
-
-#~ msgid "_Add"
-#~ msgstr "_Dodaj"
-
-#~ msgid "_Remove"
-#~ msgstr "_Odstrani"
-
-#~ msgid "_Settings"
-#~ msgstr "_Nastavitve"
-
-#~ msgid "minutes"
-#~ msgstr "minutah"
-
-#~ msgid "3d clock"
-#~ msgstr "3D ura"
-
-#~ msgid "Size:"
-#~ msgstr "Velikost:"
-
-#~ msgid "Twist speed:"
-#~ msgstr "Hitrost sukanja:"
-
-#~ msgid "Twist:"
-#~ msgstr "Sukanje:"
-
-#~ msgid "Wobble:"
-#~ msgstr "Neurejeno premikanje:"
-
-#~ msgid ""
-#~ "A cellular automaton that is really a two-dimensional Turing machine: as "
-#~ "the heads (``ants'') walk along the screen, they change pixel values in "
-#~ "their path.  Then, as they pass over changed pixels, their behavior is "
-#~ "influenced.  Written by David Bagley."
-#~ msgstr ""
-#~ "Celièna avtomaticja, ki je v bistvu dvodimenzionalni Turingov stroj: "
-#~ "mravlje hodijo okoli kot glave èez zaslon in spreminjajo vrednosti "
-#~ "pikslov na njihovi poti. Potem ko gredo èez spremenjene piksle to vpliva "
-#~ "na njihovo vedenje.  Napisal David Bagley."
-
-#~ msgid "Ant"
-#~ msgstr "Mravelje"
-
-#~ msgid "Four Sided cells"
-#~ msgstr "©tiristrane celice"
-
-#~ msgid "Full Color"
-#~ msgstr "Polna barva"
-
-#~ msgid "Monochrome"
-#~ msgstr "Èrnobel"
-
-#~ msgid "Nine Sided cells"
-#~ msgstr "Devetstrane celice"
-
-#~ msgid "Number of colours"
-#~ msgstr "©tevilo barv"
-
-#~ msgid "Random"
-#~ msgstr "Nakljuèno"
-
-#~ msgid "Random size upto"
-#~ msgstr "Nakljuèna velikost do"
-
-#~ msgid "Randomize"
-#~ msgstr "Nakljuèno"
-
-#~ msgid "Sharp turns"
-#~ msgstr "Ostri obrati"
-
-#~ msgid "Six Sided cells"
-#~ msgstr "©eststrane celice"
-
-#~ msgid "Specific"
-#~ msgstr "Specifièno"
-
-#~ msgid "Specific size of"
-#~ msgstr "Specifièna velikost"
-
-#~ msgid "Speed"
-#~ msgstr "Hitrost"
-
-#~ msgid "Three Sided cells"
-#~ msgstr "Trostrane celice"
-
-#~ msgid "Timeout"
-#~ msgstr "Èasovna omejitev"
-
-#~ msgid "Truchet lines"
-#~ msgstr "Vzorec iz èrt"
-
-#~ msgid "Twelve Sided cells"
-#~ msgstr "Dvanajststrane celice"
-
-#~ msgid "number of Ants"
-#~ msgstr "¹tevilo mravelj"
-
-#~ msgid "Atlantis"
-#~ msgstr "Atlantik"
-
-#~ msgid "Attraction (balls)"
-#~ msgstr "Privlaènost (¾oge)"
-
-#~ msgid "Balls"
-#~ msgstr "®oge"
-
-#~ msgid "Color Contrast"
-#~ msgstr "Barvni kontrast"
-
-#~ msgid "Length of Trail"
-#~ msgstr "Dol¾ina sledi"
-
-#~ msgid "Lines"
-#~ msgstr "Èrte"
-
-#~ msgid "Number of Colors"
-#~ msgstr "©tevilo barv"
-
-#~ msgid "Polygons"
-#~ msgstr "Poligoni"
-
-#~ msgid "Splines"
-#~ msgstr "Mehke krivulje"
-
-#~ msgid "Tails"
-#~ msgstr "Repi"
-
-#~ msgid "Threshold of repulsion"
-#~ msgstr "Prag odboja"
-
-#~ msgid "Blaster"
-#~ msgstr "Blaster"
-
-#~ msgid ""
-#~ "Draws a simulation of flying space-combat robots (cleverly disguised as "
-#~ "colored circles) doing battle in front of a moving star field.  Written "
-#~ "by Jonathan Lin."
-#~ msgstr ""
-#~ "Ri¹e simulacijo leteèih vojskujoèih se robotov (skrbno zakamufliranih v "
-#~ "barvne krogce), ki se bojujejo pred premikajoèim se ozvezjdem. Napisal "
-#~ "Jonathan Lin."
-
-#~ msgid "BlitSpin"
-#~ msgstr "BlitSpin"
-
-#~ msgid "Display screensaver in monochrome."
-#~ msgstr "Èrnobel ohranjevalnik zaslona."
-
-#~ msgid "Speed of rotation."
-#~ msgstr "Hitrost vrtenja."
-
-#~ msgid "Speed of the 90 degree rotation."
-#~ msgstr "Hitrost zasuka za 90 stopinj."
-
-#~ msgid "Bouboule"
-#~ msgstr "Mehurèki"
-
-#~ msgid "Number of Colors."
-#~ msgstr "©tevilo barv."
-
-#~ msgid "Number of bubbles to use."
-#~ msgstr "©tevilo uporabljenih mehurèkov."
-
-#~ msgid "Speed of Motion."
-#~ msgstr "Hitrost gibanja."
-
-#~ msgid "Use red/blue 3d seperation."
-#~ msgstr "Uporabi 3d razloèevanje rdeèe in modre."
-
-#~ msgid "Braid"
-#~ msgstr "Preplet"
-
-#~ msgid "Bubble3D"
-#~ msgstr "3D Mehurèki"
-
-#~ msgid ""
-#~ "Draws a stream of rising, undulating 3D bubbles, rising toward the top of "
-#~ "the screen, with nice specular reflections.  Written by Richard Jones."
-#~ msgstr ""
-#~ "Ri¹e tok poveèujoèih se 3D mehurèkov, ki se z lepimi odboji svetlobe "
-#~ "dvigajo proti vrhu zaslona. Napisal Richard Jones."
-
-#~ msgid "Bubbles"
-#~ msgstr "Mehurèki"
-
-#~ msgid "Bubbles exist in three dimensions."
-#~ msgstr "Mehurèki obstajajo v treh dimenzijah."
-
-#~ msgid "Don't hide bubbles when they pop."
-#~ msgstr "Ne skrij mehurèkov, ko poèijo."
-
-#~ msgid "Draw circles instead of pixmap bubbles."
-#~ msgstr "Ri¹i kro¾ce namesto mehurèkov."
-
-#~ msgid "Bumps"
-#~ msgstr "Poskoki"
-
-#~ msgid "Cage"
-#~ msgstr "Kletka"
-
-#~ msgid ""
-#~ "This draws Escher's ``Impossible Cage,'' a 3d analog of a moebius strip, "
-#~ "and rotates it in three dimensions.  Written by Marcelo Vianna."
-#~ msgstr ""
-#~ "To ri¹e Escherjevo ``Nemogoèo kletko'', 3d analogijo Mobiusovem traku, ki "
-#~ "se vrti v treh dimenzijah.  Napisal Marcelo Vianna."
-
-#~ msgid "C Curve"
-#~ msgstr "C Krivulja"
-
-#~ msgid ""
-#~ "Generates self-similar linear fractals, including the classic ``C "
-#~ "Curve.''  Written by Rick Campbell."
-#~ msgstr ""
-#~ "Generira samopodobne linearne fraktale, vkljuèujoè klasièno ``C "
-#~ "krivuljo''.  Napisal Rick Campbell."
-
-#~ msgid "Compass"
-#~ msgstr "Kompas"
-
-#~ msgid "Don't use double bufferinge"
-#~ msgstr "Ne uporabljal dvojnega izravnalnika"
-
-#~ msgid ""
-#~ "This draws a compass, with all elements spinning about randomly, for that "
-#~ "``lost and nauseous'' feeling.  Written by Jamie Zawinski."
-#~ msgstr ""
-#~ "Ri¹e kompas, kjer se vsi elementi nakljuèno vrtijo, kar daje obèutek "
-#~ "izgubljenosti.  Napisal Jamie Zawinski."
-
-#~ msgid "Use double buffering"
-#~ msgstr "Uporabi dvojni izravnalnik"
-
-#~ msgid "Coral"
-#~ msgstr "Korale"
-
-#~ msgid "Density"
-#~ msgstr "Gostota"
-
-#~ msgid "Number of seeds"
-#~ msgstr "©tevilo semen"
-
-#~ msgid ""
-#~ "Simulates coral growth, albeit somewhat slowly.  This image doesn't "
-#~ "really do it justice.  Written by Frederick Roeber."
-#~ msgstr ""
-#~ "Simulira rast koral, èeprav nekoliko poèasi. Slika ni èisto avtentièna.  "
-#~ "Napisal Frederick Roeber."
-
-#~ msgid "Cosmos"
-#~ msgstr "Kozmos"
-
-#~ msgid ""
-#~ "Draws fireworks and zooming, fading flares.  By Tom Campbell.  You can "
-#~ "find it at <http://www.mindspring.com/~campbell/cosmos/>."
-#~ msgstr ""
-#~ "Ri¹e ognjemet in rakete.  Napisal Tom Campbell. Veè najdete na <http://"
-#~ "www.mindspring.com/~campbell/cosmos/>."
-
-#~ msgid "Critical"
-#~ msgstr "Kritièno"
-
-#~ msgid "Cell"
-#~ msgstr "Celica"
-
-#~ msgid "Center image."
-#~ msgstr "Centriraj sliko"
-
-#~ msgid "Crystal"
-#~ msgstr "Kristal"
-
-#~ msgid "Have at maximum size"
-#~ msgstr "Imej najveèjo velikost"
-
-#~ msgid "Number of polygons to use."
-#~ msgstr "©tevilo uporabljenih poligonov."
-
-#~ msgid "Cynosure"
-#~ msgstr "Cynosure"
-
-#~ msgid "Number of iterations."
-#~ msgstr "©tevilo ponovitev."
-
-#~ msgid "DangerBall"
-#~ msgstr "Nevarna ¾oga"
-
-#~ msgid ""
-#~ "Draws a ball that periodically extrudes many random spikes.  Ouch! "
-#~ "Written by Jamie Zawinski."
-#~ msgstr ""
-#~ "Ri¹e ¾ogo, ki se periodièno pojavi iz veèih ble¹èic.  Auch! Napisal Jamie "
-#~ "Zawinski."
-
-#~ msgid "DecayScreen"
-#~ msgstr "Razpad zaslona"
-
-#~ msgid ""
-#~ "This grabs an image of whatever is on your screen, and makes it melt.  "
-#~ "You've no doubt seen this effect before, but no screensaver would really "
-#~ "be complete without it.  It works best if there's something colorful "
-#~ "visible.  Warning, if the effect continues after the screen saver is off, "
-#~ "seek medical attention.  Written by David Wald and Vivek Khera.  \n"
-#~ "\n"
-#~ "A number of these screenhacks have the ability to take an image of your "
-#~ "desktop and manipulate it in some way.  On SGI systems, these programs "
-#~ "are able to (at random) pull their source image from the system's video "
-#~ "input instead!  This works nicely if you leave some some random "
-#~ "television station plugged in."
-#~ msgstr ""
-#~ "Zajame sliko zaslona in jo stopi.  Nedvomno ste ta efekt ¾e videlo, a "
-#~ "brez njega ni noben ohranjevalnik zaslona popolen.  Najbolje deluje, èe "
-#~ "je na zaslonu nekaj pisanega. Opozorilo, èe se efekt nadaljuje po izklopu "
-#~ "ohranejvalnika, poi¹èite zdravni¹ko pomoè.  Napisala David Wald in Vivek "
-#~ "Khera.  \n"
-#~ "\n"
-#~ "Veliko tak¹nih programov ima mo¾nost zajema slike zaslona in jo nato "
-#~ "obdelovati. Na sistemih SGI je to ¹e posebej zanimivo, saj lahko programi "
-#~ "zajamejo sliko tudi iz video vhoda. To deluje lepo, èe imate vklopljeno "
-#~ "kak¹no nakljuèno televizijsko postajo."
-
-#~ msgid "Cycle through colors."
-#~ msgstr "Kro¾i skozi barve."
-
-#~ msgid "Deco"
-#~ msgstr "Deko"
-
-#~ msgid ""
-#~ "This one subdivides and colors rectangles randomly.  It looks kind of "
-#~ "like Brady-Bunch-era rec-room wall paneling.  (Raven says: ``this "
-#~ "screensaver is ugly enough to peel paint.'')  Written by Jamie Zawinski, "
-#~ "inspired by Java code by Michael Bayne."
-#~ msgstr ""
-#~ "Ohranjevalnik, ki nakljuèno deli in barva ¹tirikotnike.  Izgleda kot "
-#~ "slika iz èasov Brandy Buncha.  Napisal Jamie Zawinski, navdihnjeno po "
-#~ "Java kodi Michaela Bayna."
-
-#~ msgid "Use color when drawing."
-#~ msgstr "Za risanje uporabi barve."
-
-#~ msgid "Deluxe"
-#~ msgstr "Delux"
-
-#~ msgid ""
-#~ "This draws a pulsing sequence of stars, circles, and lines.  It would "
-#~ "look better if it was faster, but as far as I can tell, there is no way "
-#~ "to make this be both: fast, and flicker-free.  Yet another reason X "
-#~ "sucks.  Written by Jamie Zawinski."
-#~ msgstr ""
-#~ "Ohranjevalnik, ki ri¹e utripajoèe zaporedje zvezdic, krogov in èrt. Bolje "
-#~ "bi izgledalo, èe bi bilo hitrej¹e, a kot vem, ne bostaja naèin, da bi "
-#~ "bilo to hkrati hitro in nepome¾ikujoèe.  ©e en razlog zakaj Xi sesajo.  "
-#~ "Napisal Jamie Zawinski."
-
-#~ msgid ""
-#~ "A cellular automaton that starts with a random field, and organizes it "
-#~ "into stripes and spirals.  Written by David Bagley."
-#~ msgstr ""
-#~ "Celièni avtomat, ki zaène z nakljuènim poljem in ga organizira v pasove "
-#~ "in spirale.  Napisal David Bagley"
-
-#~ msgid "Demon"
-#~ msgstr "Demon"
-
-#~ msgid "Discrete"
-#~ msgstr "Diskretne èrte"
-
-#~ msgid "Number to use."
-#~ msgstr "©tevilo uporabljenih."
-
-#~ msgid "Distort"
-#~ msgstr "Bula"
-
-#~ msgid "Drift"
-#~ msgstr "Puhanje"
-
-#~ msgid "Fractals should grow."
-#~ msgstr "Fraktali naj rastejo."
-
-#~ msgid "Number of pixels to use."
-#~ msgstr "©tevilo uporabljenih pik."
-
-#~ msgid "Use lissajous figures to get points."
-#~ msgstr "Uporabi lissajeve skice za pridobitev toèk."
-
-#~ msgid "Epicycle"
-#~ msgstr "Epicikel"
-
-#~ msgid "Time finished product is shown."
-#~ msgstr "Èas, ko je konèan produkt pokazan."
-
-#~ msgid ""
-#~ "Draws what looks like a waving ribbon following a sinusoidal path.  "
-#~ "Written by Bas van Gaalen and Charles Vidal."
-#~ msgstr ""
-#~ "Ri¹e nekaj kar izgleda kot plapolajoè trak, ki se giblje po sinusoidni "
-#~ "poti.  Napisala Bas van Gaal in Charles Vidal. "
-
-#~ msgid "FadePlot"
-#~ msgstr "FadePlot"
-
-#~ msgid "Number"
-#~ msgstr "©tevilo"
-
-#~ msgid "Number of cycles"
-#~ msgstr "©tevilo ciklov"
-
-#~ msgid "Speed of Motion"
-#~ msgstr "Hitrost gibanja"
-
-#~ msgid "Bitmap for flag"
-#~ msgstr "Slika za zastavo"
-
-#~ msgid "Flag"
-#~ msgstr "Zastava"
-
-#~ msgid "Random size up to"
-#~ msgstr "Nakljuèna velikost vse do"
-
-#~ msgid "Text for flag"
-#~ msgstr "Besedilo za zastavo"
-
-#~ msgid "Flame"
-#~ msgstr "Plamen"
-
-#~ msgid "Number of fractals to generate."
-#~ msgstr "©tevilo generiranih fraktalov."
-
-#~ msgid "Pixels per fractal."
-#~ msgstr "Pik na fraktal."
-
-#~ msgid "Flow"
-#~ msgstr "Tok"
-
-#~ msgid "Delay between redraws."
-#~ msgstr "Premor pred naslednjim risanjem."
-
-#~ msgid "Number of trees to use."
-#~ msgstr "©tevilo uporabljenih dreves."
-
-#~ msgid "Galaxy"
-#~ msgstr "Galaksija"
-
-#~ msgid "Gears"
-#~ msgstr "Zobniki"
-
-#~ msgid "GLText"
-#~ msgstr "GL Besedilo"
-
-#~ msgid "Goop"
-#~ msgstr "Goop"
-
-#~ msgid "Have transparent bubbles."
-#~ msgstr "Prosojni mehurèki."
-
-#~ msgid "Use additive color model."
-#~ msgstr "Uporabi aditivni barvni model."
-
-#~ msgid "Grav"
-#~ msgstr "Grav"
-
-#~ msgid "Number of planets to use."
-#~ msgstr "©tevilo uporabljenih planetov."
-
-#~ msgid "Objects should leave trails behind them."
-#~ msgstr "Predmeti naj za sabo pu¹èajo sledove."
-
-#~ msgid "Orbit should decay."
-#~ msgstr "Orbita naj se spu¹èa."
-
-#~ msgid "Greynetic"
-#~ msgstr "Greynetic"
-
-#~ msgid "Animate circles."
-#~ msgstr "Animirani krogi."
-
-#~ msgid "Cycle through colormap."
-#~ msgstr "Kro¾i skozi barvno paleto."
-
-#~ msgid "Halo"
-#~ msgstr "Halo"
-
-#~ msgid "Number of circles to use."
-#~ msgstr "©tevilo uporabljenih krogov."
-
-#~ msgid "Use a gradient of colors between circles."
-#~ msgstr "Uporabi prelivanje barv med krogi."
-
-#~ msgid "Helix"
-#~ msgstr "Heliks"
-
-#~ msgid ""
-#~ "This repeatedly generates spirally string-art-ish patterns.  Written by "
-#~ "Jamie Zawinski."
-#~ msgstr ""
-#~ "Ponavljajoèe generira spiralno zavite vzorce.  Napisal Jamie Zawinski."
-
-#~ msgid "Time between redraws."
-#~ msgstr "Èas med risanji."
-
-#~ msgid "Hopalong"
-#~ msgstr "Hopalong"
-
-#~ msgid "Number of pixels before a color change."
-#~ msgstr "©tevilo pik pred spremembo barve."
-
-#~ msgid "Hyperball"
-#~ msgstr "Hiper¾oga"
-
-#~ msgid "Distance from center of cube"
-#~ msgstr "Razdalja od sredi¹èa kocke"
-
-#~ msgid "Hypercube"
-#~ msgstr "Hiperkocka"
-
-#~ msgid "IFS"
-#~ msgstr "IFS"
-
-#~ msgid ""
-#~ "This one draws spinning, colliding iterated-function-system images.  "
-#~ "Written by Massimino Pascal."
-#~ msgstr ""
-#~ "Ri¹e premikajoèe se slike IFS fraktalov.  Napisal Massimino Pascal. "
-
-#~ msgid "IMSmap"
-#~ msgstr "IMS zemljevid"
-
-#~ msgid "Jigsaw"
-#~ msgstr "jigsaw"
-
-#~ msgid "Julia"
-#~ msgstr "Julia"
-
-#~ msgid "Kaleidescope"
-#~ msgstr "Kaleidoskop"
-
-#~ msgid "Number of segments."
-#~ msgstr "¹tevilo daljic."
-
-#~ msgid "Number of trails."
-#~ msgstr "©tevilo sledov."
-
-#~ msgid "Kumppa"
-#~ msgstr "Kumppa"
-
-#~ msgid "Duration of laser burst."
-#~ msgstr "Trajanje izbruha laserja."
-
-#~ msgid "Laser"
-#~ msgstr "Laser"
-
-#~ msgid "Size of burst."
-#~ msgstr "Velikost izbruha."
-
-#~ msgid "Lightning"
-#~ msgstr "Bliskanje"
-
-#~ msgid "Lisa"
-#~ msgstr "Lisa"
-
-#~ msgid "Size of object."
-#~ msgstr "Velikost predmeta."
-
-#~ msgid "Lissie"
-#~ msgstr "Lissie"
-
-#~ msgid "LMorph"
-#~ msgstr "LMorph"
-
-#~ msgid "Number of interpolation steps."
-#~ msgstr "©tevilo korakov interpolacije."
-
-#~ msgid "Number of points."
-#~ msgstr "©tevilo toèk."
-
-#~ msgid "Open figures."
-#~ msgstr "Odpri skice."
-
-#~ msgid "Loop"
-#~ msgstr "Zanka"
-
-#~ msgid ""
-#~ "This one produces loop-shaped colonies that spawn, age, and eventually "
-#~ "die.  Written by David Bagley."
-#~ msgstr ""
-#~ "Ta ohranjevalnik ustvari kolonije v zankah, ki se delijo, starajo in na "
-#~ "koncu umrejo.  Napisal David Bagley"
-
-#~ msgid "Delay between drawing the maze and starting the solution."
-#~ msgstr "Premor med risanjem zidu in zaèetkom re¹evanja."
-
-#~ msgid "Delay between each step in the maze."
-#~ msgstr "Premor med vsakim korakom poti."
-
-#~ msgid "Delay between finishing the maze and starting a new one."
-#~ msgstr "Premor med konèanjem labirinta in zaèetkom novega."
-
-#~ msgid "Maze"
-#~ msgstr "Labirint"
-
-#~ msgid "Put a bridge over the logo?"
-#~ msgstr "Postavi most nad logotip?"
-
-#~ msgid ""
-#~ "Another M.  C.  Escher hack by Marcelo Vianna, this one draws ``Moebius "
-#~ "Strip II,'' a GL image of ants walking along the surface of a moebius "
-#~ "strip."
-#~ msgstr ""
-#~ "©e en hack M. C. Escher-ja s strani Marcela Vianna. Ta ri¹e ``Moebiusov "
-#~ "trak II'', sliko mravelj, ki hodijo po povr¹ini Mobiusovega traku."
-
-#~ msgid "Moebius"
-#~ msgstr "Moebius"
-
-#~ msgid "Moire2"
-#~ msgstr "Moire2"
-
-#~ msgid "Maximum radius increment"
-#~ msgstr "Najveèje poveèanje radija"
-
-#~ msgid ""
-#~ "Draws several different representations of molecules.  Some common "
-#~ "molecules are built in, and it can also read PDB (Protein Data Base) "
-#~ "files as input.  Written by Jamie Zawinski."
-#~ msgstr ""
-#~ "Ri¹e veè razliènih predstavitev molekul. Nekatere obièajne molekule so "
-#~ "vgrajene, hkrati pa lahko kot vhod bere PDB (zbirko podatkov o "
-#~ "proteinih).  Napisal Jamie Zawinski."
-
-#~ msgid "Molecule"
-#~ msgstr "Molekula"
-
-#~ msgid ""
-#~ "Another 3d shape-changing GL hack, by Marcelo Vianna.  It has the same "
-#~ "shiny-plastic feel as Superquadrics, as many computer-generated objects "
-#~ "do..."
-#~ msgstr ""
-#~ "©e en hack spreminjanja 3d oblike s strani Marcela Vianne.  Daje enak "
-#~ "obèutek svetleèe plastike kot Superquadrics in veèina raèunalni¹ko "
-#~ "generiranih objektov..."
-
-#~ msgid "Morph3D"
-#~ msgstr "Morph3D"
-
-#~ msgid ""
-#~ "Generates random 3d plots that look vaguely mountainous.  Written by "
-#~ "Pascal Pensa."
-#~ msgstr ""
-#~ "Generira nakljuène 3d risbe, ki izgledajo kot gore.  Napisal Pascal Pensa."
-
-#~ msgid "Mountain"
-#~ msgstr "Gore"
-
-#~ msgid ""
-#~ "\n"
-#~ "        DATAI 2\t\t\t\t\t\t\t      \n"
-#~ "        ADDB 1,2\t\t\t\t\t\t      \n"
-#~ "        ROTC 2,-22\t\t\t\t\t\t      \n"
-#~ "        XOR 1,2\t\t\t\t\t\t\t      \n"
-#~ "        JRST .-4\t\t\t\t\t\t      \n"
-#~ "\t\t\t\t\t\t\t\t      \n"
-#~ "As reported by HAKMEM, in 1962, Jackson Wright wrote the above PDP-1 "
-#~ "code.  That code still lives on in this screenhack, some 35 years later.  "
-#~ "The number of lines of enclosing code has increased substantially, "
-#~ "however.  This version is by Tim Showalter."
-#~ msgstr ""
-#~ "\n"
-#~ "        DATAI 2\t\t\t\t\t\t\t      \n"
-#~ "        ADDB 1,2\t\t\t\t\t\t      \n"
-#~ "        ROTC 2,-22\t\t\t\t\t\t      \n"
-#~ "        XOR 1,2\t\t\t\t\t\t\t      \n"
-#~ "        JRST .-4\t\t\t\t\t\t      \n"
-#~ "\t\t\t\t\t\t\t\t      \n"
-#~ "Kot je poroèal HAKMEM leta 1962, je Jackson Wright napisal zgornjo PDP-1 "
-#~ "kodo.  35 let pozneje ta koda ¹e vedno ¾ivi v tem hacku.  ©tevilo vrstic "
-#~ "okoli kode se je od takrat opazno poveèalo.  Napisal Tim Showalter."
-
-#~ msgid "Draw square at weird starting points."
-#~ msgstr "Spremeni risanje kvadrata na èuden naèin."
-
-#~ msgid "Munch"
-#~ msgstr "Munch"
-
-#~ msgid "Use XOR drawing function."
-#~ msgstr "Uporabi XOR za risanje."
-
-#~ msgid ""
-#~ "Draws different shapes composed of nervously vibrating squiggles, as if "
-#~ "seen through a camera operated by a monkey on crack.  By Dan Bornstein."
-#~ msgstr ""
-#~ "Ri¹e razliène oblike sestavljene iz nervozno vibrajoèih delov, kot se jih "
-#~ "vidi skozi kamero s katero operira zadeta opica.  Napisal Dan Bornstein."
-
-#~ msgid "NerveRot"
-#~ msgstr "NerveRot"
-
-#~ msgid "Noseguy"
-#~ msgstr "Nosonja"
-
-#~ msgid "Maximum number of lines."
-#~ msgstr "Najveèje ¹tevilo èrt."
-
-#~ msgid "Pedal"
-#~ msgstr "Pdeal"
-
-#~ msgid "Time to fade away."
-#~ msgstr "Èas za izbris."
-
-#~ msgid "Time to show each picture."
-#~ msgstr "Èas prikaza vsake slike."
-
-#~ msgid "Penetrate"
-#~ msgstr "Preboj"
-
-#~ msgid "Penrose"
-#~ msgstr "Tlakovanje"
-
-#~ msgid ""
-#~ "Draws a simulation of an old terminal, with large pixels and long-sustain "
-#~ "phosphor.  It can run any program as a source of the text it displays.  "
-#~ "Written by Jamie Zawinski."
-#~ msgstr ""
-#~ "Ri¹e simulacijo starega terminala z velikimi piksli in dolgo osvetljenim "
-#~ "fosforjem.  Kot izvor besedila, ki ga poka¾e, lahko slu¾i katerikoli "
-#~ "program.  Napisal Jamie Zawinski."
-
-#~ msgid "Phosphor"
-#~ msgstr "Fosfor"
-
-#~ msgid "Pipes"
-#~ msgstr "Cevi"
-
-#~ msgid ""
-#~ "Draws some intersecting planes, making use of alpha blending, fog, "
-#~ "textures, and mipmaps, plus a ``frames per second'' meter so that you can "
-#~ "tell how fast your graphics card is...  Requires OpenGL.  Written by "
-#~ "David Konerding."
-#~ msgstr ""
-#~ "Ri¹e nekaj sekajoèih se ravnin, uporablja tudi aplha blending, meglo, "
-#~ "teksture, mipmape in ima merilec ''okvirjev na seknod'', tako da lahko "
-#~ "pove, kako hitra je va¹a grafièna kartica...  Zahteva OpenGL.  Napisal "
-#~ "David Konerding. "
-
-#~ msgid "Frequency of missile launch"
-#~ msgstr "Pogostost izstreljevanja raket"
-
-#~ msgid "Number of particles"
-#~ msgstr "©tevilo delcev"
-
-#~ msgid "Particles on screen"
-#~ msgstr "Delci na zaslonu"
-
-#~ msgid "Pyro"
-#~ msgstr "Pyro"
-
-#~ msgid ""
-#~ "Pyro draws exploding fireworks.  Blah blah blah.  Written by Jamie "
-#~ "Zawinski."
-#~ msgstr "Pyro ri¹e ognjemete.  Bla bla bla.  Napisal Jamie Zawinski"
-
-#~ msgid "Color contrast"
-#~ msgstr "Barvni kontrast"
-
-#~ msgid "Discrete Lines"
-#~ msgstr "Diskretne èrte"
-
-#~ msgid "Length"
-#~ msgstr "Dol¾ina"
-
-#~ msgid "Number of points:"
-#~ msgstr "©tevilo toèk:"
-
-#~ msgid "Number of trails:"
-#~ msgstr "©tevilo sledov:"
-
-#~ msgid "Solid Trails"
-#~ msgstr "Polni sledovi"
-
-#~ msgid "Spread between lines"
-#~ msgstr "Sprejaj med èrtami"
-
-#~ msgid "Trails attract each other"
-#~ msgstr "Sledovi prevlaèijo drug drugega"
-
-#~ msgid "Transparent Trails"
-#~ msgstr "Prosojni sledovi"
-
-#~ msgid "Width"
-#~ msgstr "©irina"
-
-#~ msgid "XOR Trails"
-#~ msgstr "XOR sledovi"
-
-#~ msgid ""
-#~ "Another variation of the `Bomb' program by Scott Draves.  This draws a "
-#~ "grid of growing square-like shapes that, once they overtake each other, "
-#~ "react in unpredictable ways.  ``RD'' stands for reaction-diffusion."
-#~ msgstr ""
-#~ "©e ena varijacija programa `Bomba' Scotta Dravesa. Ta ri¹e mre¾o rastoèih "
-#~ "kvadratom podobnih oblik, ki, ko prevzamejo druga drugo, reagirajo na "
-#~ "nepredvidljiv naèin.  ``RD'' pomeni reakcija-difuzija."
-
-#~ msgid "RD-Bomb"
-#~ msgstr "RD-bomba"
-
-#~ msgid "Ripples (oily)"
-#~ msgstr "Valovèki (oljni)"
-
-#~ msgid "Rocks"
-#~ msgstr "Kamni"
-
-#~ msgid ""
-#~ "This draws an animation of flight through an asteroid field, with changes "
-#~ "in rotation and direction.  It can also display 3D separations for red/"
-#~ "blue glasses!  Mostly written by Jamie Zawinski."
-#~ msgstr ""
-#~ "To ri¹e animacijo leta skozi pas asteroidov s spremembami smeri in "
-#~ "vrtenjem.  Prika¾e lahko tudi sparacije za 3D redèe/modra oèala!  "
-#~ "Veèinoma napisal Jamie Zawinski."
-
-#~ msgid "Delay before next redraw"
-#~ msgstr "Premor pred naslednjim risanjem"
-
-#~ msgid "Number of Iterations"
-#~ msgstr "©tevilo ponovitev"
-
-#~ msgid "Offset"
-#~ msgstr "Odmik"
-
-#~ msgid "Rorschach"
-#~ msgstr "Rorscach"
-
-#~ msgid "Speed to clear the screen"
-#~ msgstr "Hitrost èi¹èenja zaslona"
-
-#~ msgid "With X-axis Symmetry"
-#~ msgstr "Simetrija z X osjo"
-
-#~ msgid "With Y-axis Symmetry"
-#~ msgstr "Simetrija z Y osjo"
-
-#~ msgid ""
-#~ "Another ancient xlock demo, this one by Tom Lawrence.  It draws a line "
-#~ "segment moving along a complex spiraling curve.  I tweaked this to "
-#~ "generate curvier lines, but still frames of it don't look like much."
-#~ msgstr ""
-#~ "©e en prazgodovinski xlock demo, ta s strani Toma Lawrenca.  Ri¹e "
-#~ "daljice, ki se premikajo po kompleksni spiralni krivulji.  Spremenil sem, "
-#~ "da generira krive èrte, a ¹e vedno ne izgleda ne vem kako."
-
-#~ msgid "Rotor"
-#~ msgstr "Rotor"
-
-#~ msgid ""
-#~ "Creates a collage of rotated and scaled portions of the screen.  Written "
-#~ "by Claudio Matsuoka."
-#~ msgstr ""
-#~ "Ustvari kola¾ iz zasukanih in skaliranih slik zaslona.  Napisal Claudio "
-#~ "Matsuoka."
-
-#~ msgid "RotZoomer"
-#~ msgstr "RotoZoomer"
-
-#~ msgid "Rubik"
-#~ msgstr "Rubikova kocka"
-
-#~ msgid "ShadeBobs"
-#~ msgstr "Senèeni bobi"
-
-#~ msgid ""
-#~ "This draws smoothly-shaded oscilating oval patterns, that look something "
-#~ "like vapor trails or neon tubes.  Written by Shane Smit."
-#~ msgstr ""
-#~ "Ri¹e mehko senèene kro¾ne ovalne vzorce, ki spominjajo na sledi hlapov "
-#~ "ali neonske cevi.  Napisal Shane Smit."
-
-#~ msgid "Sierpinski3D"
-#~ msgstr "Sierpinski3D"
-
-#~ msgid ""
-#~ "This draws the three-dimensional variant of the recursive Sierpinski "
-#~ "triangle fractal, using GL.  Written by Tim Robinson and Jamie Zawinski."
-#~ msgstr ""
-#~ "Ri¹e trodimenzionalno razlièico rekurzivnega Sierpiskijevega trikotnega "
-#~ "fraktala z uporabo OpenGl.  Nappisala Tim Robinson in Jamie Zawinski."
-
-#~ msgid "Sierpinski"
-#~ msgstr "Sierpinski"
-
-#~ msgid ""
-#~ "This draws the two-dimensional variant of the recursive Sierpinski "
-#~ "triangle fractal.  Written by Desmond Daignault."
-#~ msgstr ""
-#~ "Ri¹e dvodimenizonalno razlièico fraktalnega trikotnika Sierpinskega.  "
-#~ "Napisal Desmond Daignault."
-
-#~ msgid "SlideScreen"
-#~ msgstr "DrsniZaslon"
-
-#~ msgid ""
-#~ "This grabs an image of whatever is on your screen, divides it into a "
-#~ "grid, and then randomly shuffles the squares around as if it was one of "
-#~ "those annoying ``16-puzzle'' games, where there is a grid of squares, one "
-#~ "of which is missing.  I hate trying to solve those puzzles, but watching "
-#~ "one permute itself is more amusing.  Written by Jamie Zawinski."
-#~ msgstr ""
-#~ "Vzame sliko zaslona, jo razdeli v mre¾o in nato nakljuèno okoli preme¹èa "
-#~ "kvadrakte, tako kot ena tistih iger iz 16 puzzel.  Sovra¾im re¹evanje teh "
-#~ "puzzel, a gledanje kako permutirajo je bolj zabavno.  Napisal Jamie "
-#~ "Zawinski."
-
-#~ msgid "Slip"
-#~ msgstr "Slip"
-
-#~ msgid ""
-#~ "This program throws some random bits on the screen, then sucks them "
-#~ "through a jet engine and spews them out the other side.  To avoid turning "
-#~ "the image completely to mush, every now and then it will and then it "
-#~ "interjects some splashes of color into the scene, or go into a spin "
-#~ "cycle, or stretch the image like taffy, or (this is my addition) grab an "
-#~ "image of your current desktop to chew on.  Originally written by Scott "
-#~ "Draves; whacked on by Jamie Zawinski."
-#~ msgstr ""
-#~ "Ta program meèe nakljuène bite na zaslon, potem jih poskra skozi "
-#~ "reaktivni motor in jih izvr¾e na drugi strani.  Da se slika ne bi "
-#~ "popolnoma degenerirala, vsake toliko èasa vr¾e nekaj pack na zaslon, ali "
-#~ "gre v kro¾ni cikel ali pa raztegne sliko ali (to je moj dodatek) vzame "
-#~ "sliko trenutnega namizja za ¾veèenje.  Izvorno napisal Scott Draves; "
-#~ "Dodatno pohackal Jamie Zawinski."
-
-#~ msgid "Sonar"
-#~ msgstr "Sonar"
-
-#~ msgid "SpeedMine"
-#~ msgstr "HitroKopanje"
-
-#~ msgid "Sphere"
-#~ msgstr "Sfera"
-
-#~ msgid "Spiral"
-#~ msgstr "Spirala"
-
-#~ msgid "Spotlight"
-#~ msgstr "Odrska luè"
-
-#~ msgid "Squiral"
-#~ msgstr "Squiral"
-
-#~ msgid "Stairs"
-#~ msgstr "Stopnice"
-
-#~ msgid "Change to display in monochrome."
-#~ msgstr "Spremeni zaslon v èrnobel."
-
-#~ msgid "Duration of current shape."
-#~ msgstr "Trajanje trenutne oblike."
-
-#~ msgid "Quickness of rotation at each step (0 = Random)"
-#~ msgstr "Hitrost vrtenja ob vsakem koraku (0 = nakljuèna)"
-
-#~ msgid "Speed of animation."
-#~ msgstr "Hitrost animacije"
-
-#~ msgid "Starfish"
-#~ msgstr "Morska zvezda"
-
-#~ msgid "Thickness of color bands (0 = Random)"
-#~ msgstr "©irina barvnih pasov (0 = nakljuèna)"
-
-#~ msgid "Use raw shapes "
-#~ msgstr "Ka¾i le obrobo "
-
-#~ msgid ""
-#~ "Draws a stream of text slowly scrolling into the distance at an angle, "
-#~ "over a star field, like at the beginning of the movie of the same name.  "
-#~ "Written by Jamie Zawinski and Claudio Matauoka."
-#~ msgstr ""
-#~ "Ri¹te tok besedila, ki se pod kotom poèasi premika v neskonènost, èez "
-#~ "polje zvezd, kot ob zaèetku filma z enakim imenom.  Napisala Jamie "
-#~ "Zawinski in Claudio Matauoka."
-
-#~ msgid "StarWars"
-#~ msgstr "Vojne zvezd"
-
-#~ msgid "Strange"
-#~ msgstr "Èudno"
-
-#~ msgid "Superquadrics"
-#~ msgstr "Superkvadri"
-
-#~ msgid "Swirl"
-#~ msgstr "Interferenca"
-
-#~ msgid "T3D"
-#~ msgstr "T3D"
-
-#~ msgid ""
-#~ "This draws a working analog clock composed of floating, throbbing "
-#~ "bubbles.  Written by Bernd Paysan."
-#~ msgstr ""
-#~ "To nari¹e analogno uro v teku, ki je sestavljena iz lebdeèih mehurèkov.  "
-#~ "Napisal Bernd Paysan."
-
-#~ msgid ""
-#~ "Generates random mountain ranges using iterative subdivision of "
-#~ "triangles.  Written by Tobias Gloth."
-#~ msgstr ""
-#~ "Generira nakljuène gorske panorame z uporabo iterativnega deljenja "
-#~ "trikotnikov.  Napisal Tobias Gloth."
-
-#~ msgid "Truchet"
-#~ msgstr "Vzorec iz èrt"
-
-#~ msgid "Worm"
-#~ msgstr "Èrv"
-
-#~ msgid "Xearth"
-#~ msgstr "Xzemlja"
-
-#~ msgid "Xflame"
-#~ msgstr "Xplamen"
-
-#~ msgid "Xjack"
-#~ msgstr "Xjaka"
-
-#~ msgid "Xlyap"
-#~ msgstr "Xlyap"
-
-#~ msgid ""
-#~ "A rendition of the text scrolls seen in the movie ``The Matrix.'' Written "
-#~ "by Jamie Zawinski."
-#~ msgstr ""
-#~ "Prikaz premikanja besedila, kot je bil viden v filmu Matrica.  Napisal "
-#~ "Jamie Zawinski."
-
-#~ msgid "Xmatrix"
-#~ msgstr "Xmatrica"
-
-#~ msgid ""
-#~ "XMountains generates realistic-looking fractal terrains of snow-capped "
-#~ "mountains near water, with either a top view or a side view.  Written by "
-#~ "Stephen Booth.  This is not included with the XScreenSaver package, but "
-#~ "if you don't have it already, you can find it at <http://www.epcc.ed.ac."
-#~ "uk/~spb/xmountains/>.  \n"
-#~ "\n"
-#~ "Be sure to compile it with -DVROOT or it won't work right when launched "
-#~ "by the xscreensaver daemon."
-#~ msgstr ""
-#~ "XGore ri¹e realistiène fraktalne pokrajne gor z zasne¾enim vrhom, ki so "
-#~ "zraven vode. Napisal Stephen Booth.  To ni vkljuèeno v paket "
-#~ "XScreenSaver, a èe XGore ¹e nimate, ga lahko najdete na <http://www.epcc."
-#~ "ed.ac.uk/~spb/xmountains/>.\n"
-#~ "\n"
-#~ "Ne pozabite prevesti z -DVROOT, ali pa ne bo delovalo pravilno, ko bo "
-#~ "zagnano s strani daemona xscreensaver."
-
-#~ msgid "Xmountains"
-#~ msgstr "XGore"
-
-#~ msgid ""
-#~ "The XScreenSaver logo.  Don't you hate it?  So do I.  Would you like to "
-#~ "design a new logo for XScreenSaver?\tIf so, send jwz your submissions."
-#~ msgstr ""
-#~ "Logotip ohranjevalnika zaslona X.  Ga ne sovra¾ite?  Tudi jaz ga.  ®elite "
-#~ "oblikovati nov logotip za ohranjevalnik zaslona X?\n"
-#~ "V tem primeru po¹ljite prispevke jwz-ju."
-
-#~ msgid "Xroger"
-#~ msgstr "Xroger"
-
-#~ msgid ""
-#~ "Draws falling snow and the occasional tiny Santa.  By Rick Jansen.  You "
-#~ "can find it at <http://www.euronet.nl/~rja/Xsnow/>."
-#~ msgstr ""
-#~ "Ri¹e padanje snega in obèasno majhnega bo¾ièka.  Napisal Rick Jansen.  "
-#~ "Program najdete na <http://www.euronet.nl/~rja/Xsnow/>."
-
-#~ msgid "Xsnow"
-#~ msgstr "Xsneg"
-
-#~ msgid "XTeeVee"
-#~ msgstr "XTeeVee"
-
-#~ msgid ""
-#~ "XTeeVee simulates various television problems, including static, loss of "
-#~ "vertical hold, and a test pattern.  By Greg Knauss."
-#~ msgstr ""
-#~ "Simulira razliène probleme televizije kot so ¹um, izguba vertikalne "
-#~ "sinhronizacije in testne slike.  Napisal Greg Knauss."
-
-#~ msgid "Zoom (Fatbits)"
-#~ msgstr "Zoom (Fatbits)"
-
-#~ msgid ""
-#~ "Zooms in on a part of the screen and then moves around.  With the -lenses "
-#~ "option the result is like looking through many overlapping lenses rather "
-#~ "than just a simple zoom.  Written by James Macnicol."
-#~ msgstr ""
-#~ "Poveèa del zaslona in se nato premika okoli.  Z -lenses je rezultat kot, "
-#~ "da bi gledal èez veè prekritih leè in ne skozi enostavno poveèavo.  "
-#~ "Napisal James Macnicol."
-
-#~ msgid "Add a new screensaver"
-#~ msgstr "Dodaj nov ohranjevalnik zaslona"
-
-#~ msgid "Select the screensaver to run from the list below:"
-#~ msgstr "Izberite ohranjevalnik, ki naj se po¾ene iz spodnjega seznama:"
-
-#~ msgid "New screensaver"
-#~ msgstr "Nov ohranjevalnik zaslona"
-
-#~ msgid "Enable sound server startup"
-#~ msgstr "Vkljuèi zagon stre¾nika za zvok"
-
-#~ msgid "General"
-#~ msgstr "Splo¹no"
-
-#~ msgid "Sound Events"
-#~ msgstr "Zvoèni dogodki"
-
-#~ msgid "Sounds for events"
-#~ msgstr "Zvoki ob dogodkih"
-
-#~ msgid "Browse with multiple windows"
-#~ msgstr "Brskaj z veèimi okni"
-
-#~ msgid "Browse with single window"
-#~ msgstr "Brskaj z enim samim oknom"
-
-#~ msgid "Display control panels as HTML"
-#~ msgstr "Ka¾i kontrolne pulte kot HTML"
-
-#~ msgid "Display control panels as a set of icons"
-#~ msgstr "Ka¾i kontrolne pulte kot niz ikon"
-
-#~ msgid "Display control panels as a tree"
-#~ msgstr "Ka¾i kontrolne pulte kot drevo"
-
-#~ msgid "Launch control panels in separate windows"
-#~ msgstr "Po¾eni kontrolne pulte v loèenih oknih"
-
-#~ msgid "New-control-center"
-#~ msgstr "Nov-kontrolni-center"
-
-#~ msgid "Put control panels in the control center's window"
-#~ msgstr "Postavi kontrolne pulte v okno kontrolnega centra"
-
-#~ msgid "Run the capplet CAPPLET"
-#~ msgstr "Po¾eni nastavitveni vstavek CAPPLET"
-
-#~ msgid "CAPPLET"
-#~ msgstr "CAPPLET"
-
-#~ msgid "GNOME Control Center options"
-#~ msgstr "Mo¾nosti Kontrolnega centra GNOME"
+#: control-center/gnomecc.glade.h:1
+msgid "Appearance"
+msgstr "Videz"
+
+#: control-center/gnomecc.glade.h:2
+msgid "Browse with multiple windows"
+msgstr "Brskaj z veèimi okni"
+
+#: control-center/gnomecc.glade.h:3
+msgid "Browse with single window"
+msgstr "Brskaj z enim samim oknom"
+
+#: control-center/gnomecc.glade.h:4
+msgid "Display control panels as HTML"
+msgstr "Ka¾i kontrolne pulte kot HTML"
+
+#: control-center/gnomecc.glade.h:5
+msgid "Display control panels as a set of icons"
+msgstr "Ka¾i kontrolne pulte kot niz ikon"
+
+#: control-center/gnomecc.glade.h:6
+msgid "Display control panels as a tree"
+msgstr "Ka¾i kontrolne pulte kot drevo"
+
+#: control-center/gnomecc.glade.h:7
+msgid "Launch control panels in separate windows"
+msgstr "Po¾eni kontrolne pulte v loèenih oknih"
+
+#: control-center/gnomecc.glade.h:8
+msgid "New-control-center"
+msgstr "Nov-kontrolni-center"
+
+#: control-center/gnomecc.glade.h:9
+msgid "Put control panels in the control center's window"
+msgstr "Postavi kontrolne pulte v okno kontrolnega centra"
+
+#: control-center/Gnome.directory.in.in.h:1
+msgid "Main"
+msgstr "Glavna"
+
+#: control-center/Gnome.directory.in.in.h:2
+msgid "Main Settings"
+msgstr "Glavne nastavitve"
+
+#: control-center/main.c:40
+msgid "Configuration"
+msgstr "Nastavitv"
+
+#: control-center/main.c:63
+msgid "Run the capplet CAPPLET"
+msgstr "Po¾eni nastavitveni vstavek CAPPLET"
+
+#: control-center/main.c:63
+msgid "CAPPLET"
+msgstr "CAPPLET"
+
+#: control-center/main.c:70
+msgid "GNOME Control Center options"
+msgstr "Mo¾nosti Kontrolnega centra GNOME"
+
+#~ msgid "(None)"
+#~ msgstr "(Brez)"
 
 #~ msgid "Wallpaper Selection"
 #~ msgstr "Izbira tapet"
 
 #~ msgid "Can't find an hbox, using a normal file selection"
 #~ msgstr "Ne najdem hbox-a, uporabljam obièajno izbiranje datotek"
+
+#~ msgid "Initialize the session"
+#~ msgstr "Inicializiraj sejo"
 
 #~ msgid "Capplet options"
 #~ msgstr "Mo¾nosti nastavitvenega vstavka"
