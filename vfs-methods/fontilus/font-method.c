@@ -253,6 +253,12 @@ fill_file_info(GnomeVFSFileInfo *file_info, GnomeVFSFileInfoOptions options,
     if (result == GNOME_VFS_OK) {
 	g_free(file_info->name);
 	file_info->name = g_strdup(name);
+
+	file_info->valid_fields &= ~GNOME_VFS_FILE_INFO_FIELDS_SYMLINK_NAME;
+	g_free(file_info->symlink_name);
+	file_info->symlink_name = NULL;
+	file_info->type = GNOME_VFS_FILE_TYPE_REGULAR;
+	GNOME_VFS_FILE_INFO_SET_SYMLINK(file_info, FALSE);
     }
 
     return result;

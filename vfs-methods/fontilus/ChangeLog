@@ -1,3 +1,10 @@
+2004-02-10  James Henstridge  <james@daa.com.au>
+
+	* font-method.c (fill_file_info): clear the SYMBOLIC_LINK flag if
+	present on the file_info struct.  Since gnome-vfs doesn't support
+	cross-vfs symlinks, the symlink would no longer resolve when
+	returned by the fonts:/// method.  Fixes bug #133811.
+
 2004-01-14  Jody Goldberg <jody@gnome.org>
 
 	* Release 2.5.2
