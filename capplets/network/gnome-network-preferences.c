@@ -136,7 +136,7 @@ cb_http_details_button_clicked (GtkWidget *button,
 	g_signal_connect (widget, "response",
 			  G_CALLBACK (cb_details_dialog_response), NULL);
 	
-	capplet_set_icon (widget, "gnome-network-capplet.png");
+	capplet_set_icon (widget, "stock_proxy");
 
 	gtk_widget_show_all (widget);
 }
