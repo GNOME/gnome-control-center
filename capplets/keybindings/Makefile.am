@@ -21,5 +21,5 @@ desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
-EXTRA_DIST = $(Glade_DATA) $(Desktop_in_files)
+EXTRA_DIST = $(Glade_DATA) $(Desktop_in_files) $(pixmaps_DATA)
 
