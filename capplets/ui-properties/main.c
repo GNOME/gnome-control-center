@@ -122,22 +122,31 @@ do_set_xml (gboolean apply_settings)
 	xmlDocPtr doc;
 	char *buffer = NULL;
 	int len = 0;
+	int bytes_read = 0;
 
 	while (!feof (stdin)) {
-		if (!len) buffer = g_new (char, 16384);
-		else buffer = g_renew (char, buffer, len + 16384);
-		fread (buffer + len, 1, 16384, stdin);
+		if (!len) buffer = g_new (char, 16385);
+		else buffer = g_renew (char, buffer, len + 16385);
+		bytes_read = fread (buffer + len, 1, 16384, stdin);
+		buffer[len + bytes_read] = '\0';
 		len += 16384;
 	}
 
-	doc = xmlParseMemory (buffer, strlen (buffer));
+	if (len > 0 && bytes_read + len - 16384 > 0) {
+		doc = xmlParseMemory (buffer, strlen (buffer));
+		prefs = preferences_read_xml (doc);
 
-	prefs = preferences_read_xml (doc);
+		if (prefs && apply_settings) {
+			preferences_save (prefs);
+			return;
+		}
+		else if (prefs) {
+			return;
+		}
+	}
 
-	if (prefs && apply_settings)
-		preferences_save (prefs);
-	else if (prefs == NULL)
-		g_warning ("Error while reading the screensaver config file");
+	g_warning ("Error while reading the ui config file");
+	return;
 }
 
 int

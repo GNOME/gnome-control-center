@@ -39,6 +39,13 @@
 #include "resources.h"
 #include "rc-parse.h"
 
+static gint       xml_read_int           (xmlNodePtr node);
+static xmlNodePtr xml_write_int          (gchar *name, 
+					  gint number);
+static gboolean   xml_read_bool          (xmlNodePtr node);
+static xmlNodePtr xml_write_bool         (gchar *name,
+					  gboolean value);
+
 static void
 remove_entry (GTree *config_db, gchar *entry) 
 {
@@ -217,12 +224,6 @@ preferences_save (Preferences *prefs)
 	gnome_config_sync ();
 }
 
-static gint
-xml_get_number (xmlNodePtr node) 
-{
-	return atoi (xmlNodeGetContent (node));
-}
-
 static GList *
 xml_get_programs_list (xmlNodePtr programs_node) 
 {
@@ -260,39 +261,39 @@ preferences_read_xml (xmlDocPtr xml_doc)
 
 	for (node = root_node->childs; node; node = node->next) {
 		if (!strcmp (node->name, "verbose"))
-			prefs->verbose = TRUE;
+			prefs->verbose = xml_read_bool (node);
 		else if (!strcmp (node->name, "lock"))
-			prefs->lock = TRUE;
+			prefs->lock = xml_read_bool (node);
 		else if (!strcmp (node->name, "fade"))
-			prefs->fade = TRUE;
+			prefs->fade = xml_read_bool (node);
 		else if (!strcmp (node->name, "unfade"))
-			prefs->unfade = TRUE;
+			prefs->unfade = xml_read_bool (node);
 		else if (!strcmp (node->name, "fade-seconds"))
-			prefs->fade_seconds = xml_get_number (node);
+			prefs->fade_seconds = xml_read_int (node);
 		else if (!strcmp (node->name, "fade-ticks"))
-			prefs->fade_ticks = xml_get_number (node);
+			prefs->fade_ticks = xml_read_int (node);
 		else if (!strcmp (node->name, "install-colormap"))
-			prefs->install_colormap = TRUE;
+			prefs->install_colormap = xml_read_bool (node);
 		else if (!strcmp (node->name, "nice"))
-			prefs->nice = xml_get_number (node);
+			prefs->nice = xml_read_int (node);
 		else if (!strcmp (node->name, "timeout"))
-			prefs->timeout = xml_get_number (node);
+			prefs->timeout = xml_read_int (node);
 		else if (!strcmp (node->name, "lock-timeout"))
-			prefs->lock_timeout = xml_get_number (node);
+			prefs->lock_timeout = xml_read_int (node);
 		else if (!strcmp (node->name, "cycle"))
-			prefs->cycle = xml_get_number (node);
+			prefs->cycle = xml_read_int (node);
 		else if (!strcmp (node->name, "programs"))
 			prefs->screensavers = xml_get_programs_list (node);
 		else if (!strcmp (node->name, "selection-mode"))
-			prefs->selection_mode = xml_get_number (node);
+			prefs->selection_mode = xml_read_int (node);
 		else if (!strcmp (node->name, "use-dpms"))
-			prefs->power_management = TRUE;
+			prefs->power_management = xml_read_bool (node);
 		else if (!strcmp (node->name, "standby-time"))
-			prefs->standby_time = xml_get_number (node);
+			prefs->standby_time = xml_read_int (node);
 		else if (!strcmp (node->name, "suspend-time"))
-			prefs->suspend_time = xml_get_number (node);
+			prefs->suspend_time = xml_read_int (node);
 		else if (!strcmp (node->name, "shutdown-time"))
-			prefs->power_down_time = xml_get_number (node);
+			prefs->power_down_time = xml_read_int (node);
 	}
 
 	return prefs;
@@ -317,68 +318,32 @@ preferences_write_xml (Preferences *prefs)
 {
 	xmlDocPtr doc;
 	xmlNodePtr node;
-	char *tmp;
 
 	doc = xmlNewDoc ("1.0");
 
 	node = xmlNewDocNode (doc, NULL, "screensaver-prefs", NULL);
 
-	if (prefs->verbose)
-		xmlNewChild (node, NULL, "verbose", NULL);
-	if (prefs->lock)
-		xmlNewChild (node, NULL, "lock", NULL);
-	if (prefs->fade)
-		xmlNewChild (node, NULL, "fade", NULL);
-	if (prefs->unfade)
-		xmlNewChild (node, NULL, "unfade", NULL);
-
-	tmp = g_strdup_printf ("%d", (int) prefs->fade_seconds);
-	xmlNewChild (node, NULL, "fade-seconds", tmp);
-	g_free (tmp);
-
-	tmp = g_strdup_printf ("%d", prefs->fade_ticks);
-	xmlNewChild (node, NULL, "fade-ticks", tmp);
-	g_free (tmp);
-
-	if (prefs->install_colormap)
-		xmlNewChild (node, NULL, "install-colormap", NULL);
-
-	tmp = g_strdup_printf ("%d", prefs->nice);
-	xmlNewChild (node, NULL, "nice", tmp);
-	g_free (tmp);
-
-	tmp = g_strdup_printf ("%d", (int) prefs->timeout);
-	xmlNewChild (node, NULL, "timeout", tmp);
-	g_free (tmp);
-
-	tmp = g_strdup_printf ("%d", (int) prefs->lock_timeout);
-	xmlNewChild (node, NULL, "lock-timeout", tmp);
-	g_free (tmp);
-
-	tmp = g_strdup_printf ("%d", (int) prefs->cycle);
-	xmlNewChild (node, NULL, "cycle", tmp);
-	g_free (tmp);
-
+	xmlAddChild (node, xml_write_bool ("verbose", prefs->verbose));
+	xmlAddChild (node, xml_write_bool ("lock", prefs->lock));
+	xmlAddChild (node, xml_write_bool ("fade", prefs->fade));
+	xmlAddChild (node, xml_write_bool ("unfade", prefs->unfade));
+	xmlAddChild (node, xml_write_int ("fade-seconds", prefs->fade_seconds));
+	xmlAddChild (node, xml_write_int ("fade-ticks", prefs->fade_ticks));
+	xmlAddChild (node, xml_write_bool ("install-colormap",
+					   prefs->install_colormap));
+	xmlAddChild (node, xml_write_int ("nice", prefs->nice));
+	xmlAddChild (node, xml_write_int ("timeout", prefs->timeout));
+	xmlAddChild (node, xml_write_int ("lock-timeout", prefs->lock_timeout));
+	xmlAddChild (node, xml_write_int ("cycle", prefs->cycle));
 	xmlAddChild (node, xml_write_programs_list (prefs->screensavers));
-
-	tmp = g_strdup_printf ("%d", prefs->selection_mode);
-	xmlNewChild (node, NULL, "selection-mode", tmp);
-	g_free (tmp);
-
-	if (prefs->power_management)
-		xmlNewChild (node, NULL, "use-dpms", NULL);
-
-	tmp = g_strdup_printf ("%d", (int) prefs->standby_time);
-	xmlNewChild (node, NULL, "standby-time", tmp);
-	g_free (tmp);
-
-	tmp = g_strdup_printf ("%d", (int) prefs->suspend_time);
-	xmlNewChild (node, NULL, "suspend-time", tmp);
-	g_free (tmp);
-
-	tmp = g_strdup_printf ("%d", (int) prefs->power_down_time);
-	xmlNewChild (node, NULL, "shutdown-time", tmp);
-	g_free (tmp);
+	xmlAddChild (node, xml_write_int ("selection-mode",
+					  prefs->selection_mode));
+	xmlAddChild (node, xml_write_bool ("use-dpms",
+					   prefs->power_management));
+	xmlAddChild (node, xml_write_int ("standby-time", prefs->standby_time));
+	xmlAddChild (node, xml_write_int ("suspend-time", prefs->suspend_time));
+	xmlAddChild (node, xml_write_int ("shutdown-time",
+					  prefs->power_down_time));
 
 	xmlDocSetRootElement (doc, node);
 
@@ -454,18 +419,18 @@ screensaver_read_xml (xmlNodePtr saver_node)
 	saver = screensaver_new ();
 	saver->enabled = FALSE;
 
+	saver->label = g_strdup (xmlGetProp (saver_node, "label"));
+
 	for (node = saver_node->childs; node; node = node->next) {
 		if (!strcmp (node->name, "name"))
 			saver->name = g_strdup (xmlNodeGetContent (node));
-		else if (!strcmp (node->name, "label"))
-			saver->label = g_strdup (xmlNodeGetContent (node));
 		else if (!strcmp (node->name, "command-line"))
 			saver->command_line =
 				g_strdup (xmlNodeGetContent (node));
 		else if (!strcmp (node->name, "visual"))
 			saver->visual = g_strdup (xmlNodeGetContent (node));
 		else if (!strcmp (node->name, "enabled"))
-			saver->enabled = TRUE;
+			saver->enabled = xml_read_bool (node);
 	}
 
 	return saver;
@@ -478,13 +443,11 @@ screensaver_write_xml (Screensaver *saver)
 
 	saver_node = xmlNewNode (NULL, "screensaver");
 
+	xmlNewProp (saver_node, "label", saver->label);
 	xmlNewChild (saver_node, NULL, "name", saver->name);
-	xmlNewChild (saver_node, NULL, "label", saver->label);
 	xmlNewChild (saver_node, NULL, "command-line", saver->command_line);
 	xmlNewChild (saver_node, NULL, "visual", saver->visual);
-
-	if (saver->enabled)
-		xmlNewChild (saver_node, NULL, "enabled", NULL);
+	xmlAddChild (saver_node, xml_write_bool ("enabled", saver->enabled));
 
 	return saver_node;
 }
@@ -526,4 +489,72 @@ screensaver_get_label (gchar *name)
 		label[1] -= 'a'-'A';
 
 	return label;
+}
+
+
+/* Read a numeric value from a node */
+
+static gint
+xml_read_int (xmlNodePtr node) 
+{
+	char *text;
+
+	text = xmlNodeGetContent (node);
+
+	if (text == NULL) 
+		return 0;
+	else
+		return atoi (text);
+}
+
+/* Write out a numeric value in a node */
+
+static xmlNodePtr
+xml_write_int (gchar *name, gint number) 
+{
+	xmlNodePtr node;
+	gchar *str;
+
+	g_return_val_if_fail (name != NULL, NULL);
+
+	str = g_strdup_printf ("%d", number);
+	node = xmlNewNode (NULL, name);
+	xmlNodeSetContent (node, str);
+	g_free (str);
+
+	return node;
+}
+
+/* Read a boolean value from a node */
+
+static gboolean
+xml_read_bool (xmlNodePtr node) 
+{
+	char *text;
+
+	text = xmlNodeGetContent (node);
+
+	if (!g_strcasecmp (text, "true")) 
+		return TRUE;
+	else
+		return FALSE;
+}
+
+/* Write out a boolean value in a node */
+
+static xmlNodePtr
+xml_write_bool (gchar *name, gboolean value) 
+{
+	xmlNodePtr node;
+
+	g_return_val_if_fail (name != NULL, NULL);
+
+	node = xmlNewNode (NULL, name);
+
+	if (value)
+		xmlNodeSetContent (node, "true");
+	else
+		xmlNodeSetContent (node, "false");
+
+	return node;
 }

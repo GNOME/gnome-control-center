@@ -49,11 +49,12 @@ static XF86MiscKbdSettings kbdsettings;
 static void preferences_init             (Preferences *prefs);
 static void preferences_class_init       (PreferencesClass *class);
 
-static gint       xml_read_int           (xmlNodePtr node,
-					  gchar *propname);
+static gint       xml_read_int           (xmlNodePtr node);
 static xmlNodePtr xml_write_int          (gchar *name, 
-					  gchar *propname, 
 					  gint number);
+static gboolean   xml_read_bool          (xmlNodePtr node);
+static xmlNodePtr xml_write_bool         (gchar *name,
+					  gboolean value);
 
 static gint apply_timeout_cb             (Preferences *prefs);
 
@@ -285,15 +286,15 @@ preferences_read_xml (xmlDocPtr xml_doc)
 
 	for (node = root_node->childs; node; node = node->next) {
                 if (!strcmp (node->name, "rate"))
-                        prefs->rate = xml_read_int (node, NULL);
+                        prefs->rate = xml_read_int (node);
                 else if (!strcmp (node->name, "delay"))
-                        prefs->delay = xml_read_int (node, NULL);
+                        prefs->delay = xml_read_int (node);
                 else if (!strcmp (node->name, "repeat"))
-                        prefs->repeat = TRUE;
+                        prefs->repeat = xml_read_bool (node);
                 else if (!strcmp (node->name, "volume"))
-                        prefs->volume = xml_read_int (node, NULL);
+                        prefs->volume = xml_read_int (node);
                 else if (!strcmp (node->name, "click"))
-                        prefs->click = TRUE;
+                        prefs->click = xml_read_bool (node);
 	}
 
 	return prefs;
@@ -304,23 +305,16 @@ preferences_write_xml (Preferences *prefs)
 {
 	xmlDocPtr doc;
 	xmlNodePtr node;
-	char *tmp;
 
 	doc = xmlNewDoc ("1.0");
 
 	node = xmlNewDocNode (doc, NULL, "keyboard-properties", NULL);
 
-        xmlAddChild (node, xml_write_int ("rate", NULL, prefs->rate));
-        xmlAddChild (node, xml_write_int ("delay", NULL, prefs->delay));
-
-        if (prefs->repeat)
-                xmlNewChild (node, NULL, "repeat", NULL);
-
-        xmlAddChild (node, xml_write_int ("volume", NULL,
-					  prefs->volume));
-
-        if (prefs->click)
-                xmlNewChild (node, NULL, "click", NULL);
+        xmlAddChild (node, xml_write_int ("rate", prefs->rate));
+        xmlAddChild (node, xml_write_int ("delay", prefs->delay));
+	xmlAddChild (node, xml_write_bool ("repeat", prefs->repeat));
+        xmlAddChild (node, xml_write_int ("volume", prefs->volume));
+	xmlAddChild (node, xml_write_bool ("click", prefs->click));
 
 	xmlDocSetRootElement (doc, node);
 
@@ -330,14 +324,11 @@ preferences_write_xml (Preferences *prefs)
 /* Read a numeric value from a node */
 
 static gint
-xml_read_int (xmlNodePtr node, char *propname) 
+xml_read_int (xmlNodePtr node) 
 {
 	char *text;
 
-	if (propname == NULL)
-		text = xmlNodeGetContent (node);
-	else
-		text = xmlGetProp (node, propname);
+	text = xmlNodeGetContent (node);
 
 	if (text == NULL) 
 		return 0;
@@ -348,7 +339,7 @@ xml_read_int (xmlNodePtr node, char *propname)
 /* Write out a numeric value in a node */
 
 static xmlNodePtr
-xml_write_int (gchar *name, gchar *propname, gint number) 
+xml_write_int (gchar *name, gint number) 
 {
 	xmlNodePtr node;
 	gchar *str;
@@ -356,15 +347,43 @@ xml_write_int (gchar *name, gchar *propname, gint number)
 	g_return_val_if_fail (name != NULL, NULL);
 
 	str = g_strdup_printf ("%d", number);
+	node = xmlNewNode (NULL, name);
+	xmlNodeSetContent (node, str);
+	g_free (str);
+
+	return node;
+}
+
+/* Read a boolean value from a node */
+
+static gboolean
+xml_read_bool (xmlNodePtr node) 
+{
+	char *text;
+
+	text = xmlNodeGetContent (node);
+
+	if (!g_strcasecmp (text, "true")) 
+		return TRUE;
+	else
+		return FALSE;
+}
+
+/* Write out a boolean value in a node */
+
+static xmlNodePtr
+xml_write_bool (gchar *name, gboolean value) 
+{
+	xmlNodePtr node;
+
+	g_return_val_if_fail (name != NULL, NULL);
 
 	node = xmlNewNode (NULL, name);
 
-	if (propname == NULL)
-		xmlNodeSetContent (node, str);
+	if (value)
+		xmlNodeSetContent (node, "true");
 	else
-		xmlSetProp (node, propname, str);
-
-	g_free (str);
+		xmlNodeSetContent (node, "false");
 
 	return node;
 }

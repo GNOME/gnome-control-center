@@ -235,34 +235,33 @@ static void
 do_set_xml (gboolean apply_settings) 
 {
 	xmlDocPtr doc;
-	Preferences *old_prefs, *new_prefs;
 	char *buffer = NULL;
 	int len = 0;
+	int bytes_read;
 
 	while (!feof (stdin)) {
-		if (!len) buffer = g_new (char, 16384);
-		else buffer = g_renew (char, buffer, len + 16384);
-		fread (buffer + len, 1, 16384, stdin);
+		if (!len) buffer = g_new (char, 16385);
+		else buffer = g_renew (char, buffer, len + 16385);
+		bytes_read = fread (buffer + len, 1, 16384, stdin);
+		buffer[len + bytes_read] = '\0';
 		len += 16384;
 	}
 
-	doc = xmlParseMemory (buffer, strlen (buffer));
+	if (len > 0 && bytes_read + len - 16384 > 0) {
+		doc = xmlParseMemory (buffer, strlen (buffer));
+		prefs = preferences_read_xml (doc);
 
-	old_prefs = preferences_new ();
-	preferences_load (old_prefs);
-
-	new_prefs = preferences_read_xml (doc);
-
-	if (new_prefs) {
-		new_prefs->config_db = old_prefs->config_db;
-
-		if (apply_settings)
-			preferences_save (new_prefs);
-		else
-			prefs = new_prefs;
-	} else {
-		g_warning ("Error while reading the screensaver config file");
+		if (prefs && apply_settings) {
+			preferences_save (prefs);
+			return;
+		}
+		else if (prefs) {
+			return;
+		}
 	}
+
+	g_warning ("Error while reading the screensaver config file");
+	return;
 }
 
 int

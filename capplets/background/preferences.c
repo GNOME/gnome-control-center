@@ -40,11 +40,12 @@ static Applier *applier = NULL;
 static void preferences_init             (Preferences *prefs);
 static void preferences_class_init       (PreferencesClass *class);
 
-static gint       xml_read_int           (xmlNodePtr node,
-					  gchar *propname);
+static gint       xml_read_int           (xmlNodePtr node);
 static xmlNodePtr xml_write_int          (gchar *name, 
-					  gchar *propname, 
 					  gint number);
+static gboolean   xml_read_bool          (xmlNodePtr node);
+static xmlNodePtr xml_write_bool         (gchar *name,
+					  gboolean value);
 
 static gint apply_timeout_cb             (Preferences *prefs);
 
@@ -284,7 +285,7 @@ preferences_save (Preferences *prefs)
     
 	gnome_config_set_string ("/Background/Default/wallpaper",
 				 (prefs->wallpaper_enabled) ? 
-				 prefs->wallpaper_filename : "none");
+				 prefs->wallpaper_filename : "(none)");
 	gnome_config_set_int ("/Background/Default/wallpaperAlign", 
 			      prefs->wallpaper_type);
 
@@ -395,11 +396,11 @@ preferences_read_xml (xmlDocPtr xml_doc)
 			prefs->color2 = read_color_from_string
 				(xmlNodeGetContent (node));
 		else if (!strcmp (node->name, "enabled"))
-			prefs->enabled = TRUE;
+			prefs->enabled = xml_read_bool (node);
 		else if (!strcmp (node->name, "wallpaper"))
-			prefs->wallpaper_enabled = TRUE;
+			prefs->wallpaper_enabled = xml_read_bool (node);
 		else if (!strcmp (node->name, "gradient"))
-			prefs->gradient_enabled = TRUE;
+			prefs->gradient_enabled = xml_read_bool (node);
 		else if (!strcmp (node->name, "orientation")) {
 			str = xmlNodeGetContent (node);
 
@@ -409,7 +410,7 @@ preferences_read_xml (xmlDocPtr xml_doc)
 				prefs->orientation = ORIENTATION_VERT;
 		}
 		else if (!strcmp (node->name, "wallpaper-type"))
-			prefs->wallpaper_type = xml_read_int (node, NULL);
+			prefs->wallpaper_type = xml_read_int (node);
 		else if (!strcmp (node->name, "wallpaper-filename"))
 			prefs->wallpaper_filename = 
 				g_strdup (xmlNodeGetContent (node));
@@ -417,11 +418,11 @@ preferences_read_xml (xmlDocPtr xml_doc)
 			prefs->wallpaper_sel_path = 
 				g_strdup (xmlNodeGetContent (node));
 		else if (!strcmp (node->name, "auto-apply"))
-			prefs->auto_apply = TRUE;
+			prefs->auto_apply = xml_read_bool (node);
 		else if (!strcmp (node->name, "adjust-opacity"))
-			prefs->adjust_opacity = TRUE;
+			prefs->adjust_opacity = xml_read_bool (node);
 		else if (!strcmp (node->name, "opacity"))
-			prefs->opacity = xml_read_int (node, NULL);
+			prefs->opacity = xml_read_int (node);
 	}
 
 	return prefs;
@@ -450,20 +451,17 @@ preferences_write_xml (Preferences *prefs)
 		  prefs->color2->blue >> 8);
 	xmlNewChild (node, NULL, "bg-color2", tmp);
 
-	if (prefs->enabled)
-		xmlNewChild (node, NULL, "enabled", NULL);
-
-	if (prefs->wallpaper_enabled)	
-		xmlNewChild (node, NULL, "wallpaper", NULL);
-
-	if (prefs->gradient_enabled)
-		xmlNewChild (node, NULL, "gradient", NULL);
+	xmlAddChild (node, xml_write_bool ("enabled", prefs->enabled));
+	xmlAddChild (node, xml_write_bool ("wallpaper",
+					   prefs->wallpaper_enabled));
+	xmlAddChild (node, xml_write_bool ("gradient",
+					   prefs->gradient_enabled));
 
 	xmlNewChild (node, NULL, "orientation", 
 		     (prefs->orientation == ORIENTATION_VERT) ?
 		     "vertical" : "horizontal");
 
-	xmlAddChild (node, xml_write_int ("wallpaper-type", NULL,
+	xmlAddChild (node, xml_write_int ("wallpaper-type",
 					  prefs->wallpaper_type));
 
 	xmlNewChild (node, NULL, "wallpaper-filename", 
@@ -471,12 +469,12 @@ preferences_write_xml (Preferences *prefs)
 	xmlNewChild (node, NULL, "wallpaper-sel-path", 
 		     prefs->wallpaper_sel_path);
 
-	if (prefs->auto_apply)
-		xmlNewChild (node, NULL, "auto-apply", NULL);
+	xmlAddChild (node, xml_write_bool ("auto-apply",
+					   prefs->auto_apply));
 
 	if (prefs->adjust_opacity)
 		xmlNewChild (node, NULL, "adjust-opacity", NULL);
-	xmlAddChild (node, xml_write_int ("opacity", NULL,
+	xmlAddChild (node, xml_write_int ("opacity",
 					  prefs->opacity));
 
 	xmlDocSetRootElement (doc, node);
@@ -487,14 +485,11 @@ preferences_write_xml (Preferences *prefs)
 /* Read a numeric value from a node */
 
 static gint
-xml_read_int (xmlNodePtr node, char *propname) 
+xml_read_int (xmlNodePtr node) 
 {
 	char *text;
 
-	if (propname == NULL)
-		text = xmlNodeGetContent (node);
-	else
-		text = xmlGetProp (node, propname);
+	text = xmlNodeGetContent (node);
 
 	if (text == NULL) 
 		return 0;
@@ -505,7 +500,7 @@ xml_read_int (xmlNodePtr node, char *propname)
 /* Write out a numeric value in a node */
 
 static xmlNodePtr
-xml_write_int (gchar *name, gchar *propname, gint number) 
+xml_write_int (gchar *name, gint number) 
 {
 	xmlNodePtr node;
 	gchar *str;
@@ -513,15 +508,43 @@ xml_write_int (gchar *name, gchar *propname, gint number)
 	g_return_val_if_fail (name != NULL, NULL);
 
 	str = g_strdup_printf ("%d", number);
+	node = xmlNewNode (NULL, name);
+	xmlNodeSetContent (node, str);
+	g_free (str);
+
+	return node;
+}
+
+/* Read a boolean value from a node */
+
+static gboolean
+xml_read_bool (xmlNodePtr node) 
+{
+	char *text;
+
+	text = xmlNodeGetContent (node);
+
+	if (!g_strcasecmp (text, "true")) 
+		return TRUE;
+	else
+		return FALSE;
+}
+
+/* Write out a boolean value in a node */
+
+static xmlNodePtr
+xml_write_bool (gchar *name, gboolean value) 
+{
+	xmlNodePtr node;
+
+	g_return_val_if_fail (name != NULL, NULL);
 
 	node = xmlNewNode (NULL, name);
 
-	if (propname == NULL)
-		xmlNodeSetContent (node, str);
+	if (value)
+		xmlNodeSetContent (node, "true");
 	else
-		xmlSetProp (node, propname, str);
-
-	g_free (str);
+		xmlNodeSetContent (node, "false");
 
 	return node;
 }

@@ -50,11 +50,12 @@ static GtkObjectClass *parent_class;
 static void preferences_init             (Preferences *prefs);
 static void preferences_class_init       (PreferencesClass *class);
 
-static gint       xml_read_int           (xmlNodePtr node,
-					  gchar *propname);
+static gint       xml_read_int           (xmlNodePtr node);
 static xmlNodePtr xml_write_int          (gchar *name, 
-					  gchar *propname, 
 					  gint number);
+static gboolean   xml_read_bool          (xmlNodePtr node);
+static xmlNodePtr xml_write_bool         (gchar *name,
+					  gboolean value);
 
 static gint apply_timeout_cb             (Preferences *prefs);
 
@@ -300,11 +301,11 @@ preferences_read_xml (xmlDocPtr xml_doc)
 
 	for (node = root_node->childs; node; node = node->next) {
                 if (!strcmp (node->name, "acceleration"))
-                        prefs->acceleration = atoi (xmlNodeGetContent (node));
+                        prefs->acceleration = xml_read_int (node);
                 else if (!strcmp (node->name, "threshold"))
-                        prefs->threshold = atoi (xmlNodeGetContent (node));
+                        prefs->threshold = xml_read_int (node);
                 else if (!strcmp (node->name, "right-to-left"))
-                        prefs->rtol = TRUE;
+                        prefs->rtol = xml_read_bool (node);
 	}
 
 	return prefs;
@@ -321,14 +322,13 @@ preferences_write_xml (Preferences *prefs)
 
 	node = xmlNewDocNode (doc, NULL, "mouse-properties", NULL);
 
-        xmlAddChild (node, xml_write_int ("acceleration", NULL, 
+        xmlAddChild (node, xml_write_int ("acceleration", 
 					  prefs->acceleration));
 
-        xmlAddChild (node, xml_write_int ("threshold", NULL, 
+        xmlAddChild (node, xml_write_int ("threshold", 
 					  prefs->threshold));
 
-        if (prefs->rtol)
-                xmlNewChild (node, NULL, "right-to-left", NULL);
+	xmlAddChild (node, xml_write_bool ("right-to-left", prefs->rtol));
 
 	xmlDocSetRootElement (doc, node);
 
@@ -338,14 +338,11 @@ preferences_write_xml (Preferences *prefs)
 /* Read a numeric value from a node */
 
 static gint
-xml_read_int (xmlNodePtr node, char *propname) 
+xml_read_int (xmlNodePtr node) 
 {
 	char *text;
 
-	if (propname == NULL)
-		text = xmlNodeGetContent (node);
-	else
-		text = xmlGetProp (node, propname);
+	text = xmlNodeGetContent (node);
 
 	if (text == NULL) 
 		return 0;
@@ -356,7 +353,7 @@ xml_read_int (xmlNodePtr node, char *propname)
 /* Write out a numeric value in a node */
 
 static xmlNodePtr
-xml_write_int (gchar *name, gchar *propname, gint number) 
+xml_write_int (gchar *name, gint number) 
 {
 	xmlNodePtr node;
 	gchar *str;
@@ -364,15 +361,43 @@ xml_write_int (gchar *name, gchar *propname, gint number)
 	g_return_val_if_fail (name != NULL, NULL);
 
 	str = g_strdup_printf ("%d", number);
+	node = xmlNewNode (NULL, name);
+	xmlNodeSetContent (node, str);
+	g_free (str);
+
+	return node;
+}
+
+/* Read a boolean value from a node */
+
+static gboolean
+xml_read_bool (xmlNodePtr node) 
+{
+	char *text;
+
+	text = xmlNodeGetContent (node);
+
+	if (!g_strcasecmp (text, "true")) 
+		return TRUE;
+	else
+		return FALSE;
+}
+
+/* Write out a boolean value in a node */
+
+static xmlNodePtr
+xml_write_bool (gchar *name, gboolean value) 
+{
+	xmlNodePtr node;
+
+	g_return_val_if_fail (name != NULL, NULL);
 
 	node = xmlNewNode (NULL, name);
 
-	if (propname == NULL)
-		xmlNodeSetContent (node, str);
+	if (value)
+		xmlNodeSetContent (node, "true");
 	else
-		xmlSetProp (node, propname, str);
-
-	g_free (str);
+		xmlNodeSetContent (node, "false");
 
 	return node;
 }

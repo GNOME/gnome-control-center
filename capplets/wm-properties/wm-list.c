@@ -24,6 +24,10 @@ static WindowManager *current_wm = NULL;
 /* Window manager on startup */
 static WindowManager *current_wm_save = NULL;
 
+static gboolean   xml_read_bool          (xmlNodePtr node);
+static xmlNodePtr xml_write_bool         (gchar *name,
+					  gboolean value);
+
 gboolean
 is_blank (gchar *str)
 {
@@ -417,21 +421,20 @@ wm_read_from_xml (xmlNodePtr wm_node)
 
         wm = g_new0 (WindowManager, 1);
 
+        wm->dentry = gnome_desktop_entry_load_unconditional
+                (xmlGetProp (wm_node, "desktop-entry"));
+
         for (node = wm_node->childs; node; node = node->next) {
-                if (!strcmp (node->name, "desktop-entry"))
-                        wm->dentry =
-                                gnome_desktop_entry_load_unconditional
-                                (xmlNodeGetContent (node));
-                else if (!strcmp (node->name, "config-exec"))
+                if (!strcmp (node->name, "config-exec"))
                         wm->config_exec = xmlNodeGetContent (node);
                 else if (!strcmp (node->name, "config-tryexec"))
                         wm->config_tryexec = xmlNodeGetContent (node);
                 else if (!strcmp (node->name, "session-managed"))
-                        wm->session_managed = TRUE;
+                        wm->session_managed = xml_read_bool (node);
                 else if (!strcmp (node->name, "is-user"))
-                        wm->is_user = TRUE;
+                        wm->is_user = xml_read_bool (node);
                 else if (!strcmp (node->name, "is-current"))
-                        is_current = TRUE;  /* FIXME: sanity check */
+                        is_current = xml_read_bool (node);  /* FIXME: sanity check */
         }
 
         wm_check_present (wm);
@@ -476,19 +479,16 @@ wm_write_to_xml (WindowManager *wm)
 
         node = xmlNewNode (NULL, "window-manager");
 
-        xmlNewChild (node, NULL, "desktop-entry", wm->dentry->location);
+        xmlNewProp (node, "desktop-entry", wm->dentry->location);
 
         if (wm->config_exec != NULL)
                 xmlNewChild (node, NULL, "config-exec", wm->config_exec);
 
-        if (wm->session_managed)
-                xmlNewChild (node, NULL, "session-managed", NULL);
+        xmlAddChild (node, xml_write_bool ("session-managed",
+                                           wm->session_managed));
 
-        if (wm->is_user)
-                xmlNewChild (node, NULL, "is-user", NULL);
-
-        if (wm == current_wm)
-                xmlNewChild (node, NULL, "is-current", NULL);
+        xmlAddChild (node, xml_write_bool ("is-user", wm->is_user));
+        xmlAddChild (node, xml_write_bool ("is-current", wm == current_wm));
 
         return node;
 }
@@ -511,4 +511,38 @@ wm_list_write_to_xml (void)
         xmlDocSetRootElement (doc, root_node);
 
         return doc;
+}
+
+/* Read a boolean value from a node */
+
+static gboolean
+xml_read_bool (xmlNodePtr node) 
+{
+	char *text;
+
+	text = xmlNodeGetContent (node);
+
+	if (!g_strcasecmp (text, "true")) 
+		return TRUE;
+	else
+		return FALSE;
+}
+
+/* Write out a boolean value in a node */
+
+static xmlNodePtr
+xml_write_bool (gchar *name, gboolean value) 
+{
+	xmlNodePtr node;
+
+	g_return_val_if_fail (name != NULL, NULL);
+
+	node = xmlNewNode (NULL, name);
+
+	if (value)
+		xmlNodeSetContent (node, "true");
+	else
+		xmlNodeSetContent (node, "false");
+
+	return node;
 }

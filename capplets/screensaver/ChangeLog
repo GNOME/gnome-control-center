@@ -1,3 +1,14 @@
+2001-04-27  Bradford Hovinen  <hovinen@ximian.com>
+
+	* preferences.c (screensaver_read_xml): Make label an attribute of
+	the node rather than a child node
+	(preferences_write_xml): Use xml_write_int rather than rolling our
+	own
+	(xml_read_int): 
+	(xml_write_int): 
+	(xml_read_bool): 
+	(xml_write_bool): Implement
+
 2001-03-12  Bradford Hovinen  <hovinen@ximian.com>
 
 	* main.c (store_archive_data): Fix call to location_store_xml

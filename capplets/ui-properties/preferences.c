@@ -36,11 +36,12 @@ static GtkObjectClass *parent_class;
 static void preferences_init             (Preferences *prefs);
 static void preferences_class_init       (PreferencesClass *class);
 
-static gint       xml_read_int           (xmlNodePtr node,
-					  gchar *propname);
+static gint       xml_read_int           (xmlNodePtr node);
 static xmlNodePtr xml_write_int          (gchar *name, 
-					  gchar *propname, 
 					  gint number);
+static gboolean   xml_read_bool          (xmlNodePtr node);
+static xmlNodePtr xml_write_bool         (gchar *name,
+					  gboolean value);
 
 static gint apply_timeout_cb             (Preferences *prefs);
 
@@ -216,57 +217,72 @@ preferences_read_xml (xmlDocPtr xml_doc)
 	for (node = root_node->childs; node; node = node->next) {
 		if (!strcmp (node->name, "dialog-buttons-style"))
 			prefs->gnome_prefs->dialog_buttons_style = 
-				xml_read_int (node, "style");
+				xml_read_int (node);
 		else if (!strcmp (node->name, "property-box-buttons-ok"))
-			prefs->gnome_prefs->property_box_buttons_ok = TRUE;
+			prefs->gnome_prefs->property_box_buttons_ok =
+				xml_read_bool (node);
 		else if (!strcmp (node->name, "property-box-buttons-apply"))
-			prefs->gnome_prefs->property_box_buttons_apply = TRUE;
+			prefs->gnome_prefs->property_box_buttons_apply =
+				xml_read_bool (node);
 		else if (!strcmp (node->name, "property-box-buttons-close"))
-			prefs->gnome_prefs->property_box_buttons_close = TRUE;
+			prefs->gnome_prefs->property_box_buttons_close =
+				xml_read_bool (node);
 		else if (!strcmp (node->name, "property-box-buttons-help"))
-			prefs->gnome_prefs->property_box_buttons_help = TRUE;
+			prefs->gnome_prefs->property_box_buttons_help =
+				xml_read_bool (node);
 		else if (!strcmp (node->name, "statusbar-not-dialog"))
-			prefs->gnome_prefs->statusbar_not_dialog = TRUE;
+			prefs->gnome_prefs->statusbar_not_dialog =
+				xml_read_bool (node);
 		else if (!strcmp (node->name, "statusbar-is-interactive"))
-			prefs->gnome_prefs->statusbar_is_interactive = TRUE;
+			prefs->gnome_prefs->statusbar_is_interactive =
+				xml_read_bool (node);
 		else if (!strcmp (node->name, "statusbar-meter-on-right"))
-			prefs->gnome_prefs->statusbar_meter_on_right = TRUE;
+			prefs->gnome_prefs->statusbar_meter_on_right =
+				xml_read_bool (node);
 		else if (!strcmp (node->name, "menubar-detachable"))
-			prefs->gnome_prefs->menubar_detachable = TRUE;
+			prefs->gnome_prefs->menubar_detachable =
+				xml_read_bool (node);
 		else if (!strcmp (node->name, "menubar-relief"))
-			prefs->gnome_prefs->menubar_relief = TRUE;
+			prefs->gnome_prefs->menubar_relief =
+				xml_read_bool (node);
 		else if (!strcmp (node->name, "toolbar-detachable"))
-			prefs->gnome_prefs->toolbar_detachable = TRUE;
+			prefs->gnome_prefs->toolbar_detachable =
+				xml_read_bool (node);
 		else if (!strcmp (node->name, "toolbar-relief"))
-			prefs->gnome_prefs->toolbar_relief = TRUE;
+			prefs->gnome_prefs->toolbar_relief =
+				xml_read_bool (node);
 		else if (!strcmp (node->name, "toolbar-relief-btn"))
-			prefs->gnome_prefs->toolbar_relief_btn = TRUE;
+			prefs->gnome_prefs->toolbar_relief_btn =
+				xml_read_bool (node);
 		else if (!strcmp (node->name, "toolbar-lines"))
-			prefs->gnome_prefs->toolbar_lines = TRUE;
+			prefs->gnome_prefs->toolbar_lines =
+				xml_read_bool (node);
 		else if (!strcmp (node->name, "toolbar-labels"))
-			prefs->gnome_prefs->toolbar_labels = TRUE;
+			prefs->gnome_prefs->toolbar_labels =
+				xml_read_bool (node);
 		else if (!strcmp (node->name, "dialog-centered"))
-			prefs->gnome_prefs->dialog_centered = TRUE;
+			prefs->gnome_prefs->dialog_centered =
+				xml_read_bool (node);
 		else if (!strcmp (node->name, "menus-have-tearoff"))
-			prefs->gnome_prefs->menus_have_tearoff = TRUE;
+			prefs->gnome_prefs->menus_have_tearoff =
+				xml_read_bool (node);
 		else if (!strcmp (node->name, "menus-have-icons"))
-			prefs->gnome_prefs->menus_have_icons = TRUE;
+			prefs->gnome_prefs->menus_have_icons =
+				xml_read_bool (node);
 		else if (!strcmp (node->name, "disable-imlib-cache"))
-			prefs->gnome_prefs->disable_imlib_cache = TRUE;
+			prefs->gnome_prefs->disable_imlib_cache =
+				xml_read_bool (node);
 		else if (!strcmp (node->name, "dialog-type"))
-			prefs->gnome_prefs->dialog_type = 
-				xml_read_int (node, "type");
+			prefs->gnome_prefs->dialog_type = xml_read_int (node);
 		else if (!strcmp (node->name, "dialog-position"))
-			prefs->gnome_prefs->dialog_position = 
-				xml_read_int (node, "position");
+			prefs->gnome_prefs->dialog_position =
+				xml_read_int (node);
 		else if (!strcmp (node->name, "mdi-mode"))
-			prefs->gnome_prefs->mdi_mode = 
-				xml_read_int (node, "mode");
+			prefs->gnome_prefs->mdi_mode = xml_read_int (node);
 		else if (!strcmp (node->name, "mdi-tab-pos"))
-			prefs->gnome_prefs->mdi_tab_pos = 
-				xml_read_int (node, "pos");
+			prefs->gnome_prefs->mdi_tab_pos = xml_read_int (node);
 		else if (!strcmp (node->name, "dialog-use-icons"))
-			prefs->dialog_use_icons = TRUE;
+			prefs->dialog_use_icons = xml_read_bool (node);
 	}
 
 	return prefs;
@@ -283,61 +299,80 @@ preferences_write_xml (Preferences *prefs)
 	node = xmlNewDocNode (doc, NULL, "ui-properties", NULL);
 
 	xmlAddChild (node, 
-		     xml_write_int ("dialog-buttons-style", "style",
+		     xml_write_int ("dialog-buttons-style",
 				    prefs->gnome_prefs->dialog_buttons_style));
 
-	if (prefs->gnome_prefs->property_box_buttons_ok)
-		xmlNewChild (node, NULL, "property-box-buttons-ok", NULL);
-	if (prefs->gnome_prefs->property_box_buttons_apply)
-		xmlNewChild (node, NULL, "property-box-buttons-apply", NULL);
-	if (prefs->gnome_prefs->property_box_buttons_close)
-		xmlNewChild (node, NULL, "property-box-buttons-close", NULL);
-	if (prefs->gnome_prefs->property_box_buttons_help)
-		xmlNewChild (node, NULL, "property-box-buttons-help", NULL);
-	if (prefs->gnome_prefs->statusbar_not_dialog)
-		xmlNewChild (node, NULL, "statusbar-not-dialog", NULL);
-	if (prefs->gnome_prefs->statusbar_is_interactive)
-		xmlNewChild (node, NULL, "statusbar-is-interactive", NULL);
-	if (prefs->gnome_prefs->statusbar_meter_on_right)
-		xmlNewChild (node, NULL, "statusbar-meter-on-right", NULL);
-	if (prefs->gnome_prefs->menubar_detachable)
-		xmlNewChild (node, NULL, "menubar-detachable", NULL);
-	if (prefs->gnome_prefs->menubar_relief)
-		xmlNewChild (node, NULL, "menubar-relief", NULL);
-	if (prefs->gnome_prefs->toolbar_detachable)
-		xmlNewChild (node, NULL, "toolbar-detachable", NULL);
-	if (prefs->gnome_prefs->toolbar_relief)
-		xmlNewChild (node, NULL, "toolbar-relief", NULL);
-	if (prefs->gnome_prefs->toolbar_relief_btn)
-		xmlNewChild (node, NULL, "toolbar-relief-btn", NULL);
-	if (prefs->gnome_prefs->toolbar_lines)
-		xmlNewChild (node, NULL, "toolbar-lines", NULL);
-	if (prefs->gnome_prefs->toolbar_labels)
-		xmlNewChild (node, NULL, "toolbar-labels", NULL);
-	if (prefs->gnome_prefs->dialog_centered)
-		xmlNewChild (node, NULL, "dialog-centered", NULL);
-	if (prefs->gnome_prefs->menus_have_tearoff)
-		xmlNewChild (node, NULL, "menus-have-tearoff", NULL);
-	if (prefs->gnome_prefs->menus_have_icons)
-		xmlNewChild (node, NULL, "menus-have-icons", NULL);
-	if (prefs->gnome_prefs->disable_imlib_cache)
-		xmlNewChild (node, NULL, "disable-imlib-cache", NULL);
+	xmlAddChild (node,
+		     xml_write_bool ("property-box-buttons-ok",
+				     prefs->gnome_prefs->property_box_buttons_ok));
+	xmlAddChild (node,
+		     xml_write_bool ("property-box-buttons-apply",
+				     prefs->gnome_prefs->property_box_buttons_apply));
+	xmlAddChild (node,
+		     xml_write_bool ("property-box-buttons-close",
+				     prefs->gnome_prefs->property_box_buttons_close));
+	xmlAddChild (node,
+		     xml_write_bool ("property-box-buttons-help",
+				     prefs->gnome_prefs->property_box_buttons_help));
+	xmlAddChild (node,
+		     xml_write_bool ("statusbar-not-dialog",
+				     prefs->gnome_prefs->statusbar_not_dialog));
+	xmlAddChild (node,
+		     xml_write_bool ("statusbar-is-interactive",
+				     prefs->gnome_prefs->statusbar_is_interactive));
+	xmlAddChild (node,
+		     xml_write_bool ("statusbar-meter-on-right",
+				     prefs->gnome_prefs->statusbar_meter_on_right));
+	xmlAddChild (node,
+		     xml_write_bool ("menubar-detachable",
+				     prefs->gnome_prefs->menubar_detachable));
+	xmlAddChild (node,
+		     xml_write_bool ("menubar-relief",
+				     prefs->gnome_prefs->menubar_relief));
+	xmlAddChild (node,
+		     xml_write_bool ("toolbar-detachable",
+				     prefs->gnome_prefs->toolbar_detachable));
+	xmlAddChild (node,
+		     xml_write_bool ("toolbar-relief",
+				     prefs->gnome_prefs->toolbar_relief));
+	xmlAddChild (node,
+		     xml_write_bool ("toolbar-relief-btn",
+				     prefs->gnome_prefs->toolbar_relief_btn));
+	xmlAddChild (node,
+		     xml_write_bool ("toolbar-lines",
+				     prefs->gnome_prefs->toolbar_lines));
+	xmlAddChild (node,
+		     xml_write_bool ("toolbar-labels",
+				     prefs->gnome_prefs->toolbar_labels));
+	xmlAddChild (node,
+		     xml_write_bool ("dialog-centered",
+				     prefs->gnome_prefs->dialog_centered));
+	xmlAddChild (node,
+		     xml_write_bool ("menus-have-tearoff",
+				     prefs->gnome_prefs->menus_have_tearoff));
+	xmlAddChild (node,
+		     xml_write_bool ("menus-have-icons",
+				     prefs->gnome_prefs->menus_have_icons));
+	xmlAddChild (node,
+		     xml_write_bool ("disable-imlib-cache",
+				     prefs->gnome_prefs->disable_imlib_cache));
 
 	xmlAddChild (node, 
-		     xml_write_int ("dialog-type", "type",
+		     xml_write_int ("dialog-type",
 				    prefs->gnome_prefs->dialog_type));
 	xmlAddChild (node, 
-		     xml_write_int ("dialog-position", "position",
+		     xml_write_int ("dialog-position",
 				    prefs->gnome_prefs->dialog_position));
 	xmlAddChild (node, 
-		     xml_write_int ("mdi-mode", "mode",
+		     xml_write_int ("mdi-mode",
 				    prefs->gnome_prefs->mdi_mode));
 	xmlAddChild (node, 
-		     xml_write_int ("mdi-tab-pos", "pos",
+		     xml_write_int ("mdi-tab-pos",
 				    prefs->gnome_prefs->mdi_tab_pos));
 
-	if (prefs->dialog_use_icons)
-		xmlNewChild (node, NULL, "dialog-use-icons", NULL);
+	xmlAddChild (node,
+		     xml_write_bool ("dialog-use-icons",
+				     prefs->dialog_use_icons));
 
 	xmlDocSetRootElement (doc, node);
 
@@ -347,14 +382,11 @@ preferences_write_xml (Preferences *prefs)
 /* Read a numeric value from a node */
 
 static gint
-xml_read_int (xmlNodePtr node, char *propname) 
+xml_read_int (xmlNodePtr node) 
 {
 	char *text;
 
-	if (propname == NULL)
-		text = xmlNodeGetContent (node);
-	else
-		text = xmlGetProp (node, propname);
+	text = xmlNodeGetContent (node);
 
 	if (text == NULL) 
 		return 0;
@@ -365,7 +397,7 @@ xml_read_int (xmlNodePtr node, char *propname)
 /* Write out a numeric value in a node */
 
 static xmlNodePtr
-xml_write_int (gchar *name, gchar *propname, gint number) 
+xml_write_int (gchar *name, gint number) 
 {
 	xmlNodePtr node;
 	gchar *str;
@@ -373,15 +405,43 @@ xml_write_int (gchar *name, gchar *propname, gint number)
 	g_return_val_if_fail (name != NULL, NULL);
 
 	str = g_strdup_printf ("%d", number);
+	node = xmlNewNode (NULL, name);
+	xmlNodeSetContent (node, str);
+	g_free (str);
+
+	return node;
+}
+
+/* Read a boolean value from a node */
+
+static gboolean
+xml_read_bool (xmlNodePtr node) 
+{
+	char *text;
+
+	text = xmlNodeGetContent (node);
+
+	if (!g_strcasecmp (text, "true")) 
+		return TRUE;
+	else
+		return FALSE;
+}
+
+/* Write out a boolean value in a node */
+
+static xmlNodePtr
+xml_write_bool (gchar *name, gboolean value) 
+{
+	xmlNodePtr node;
+
+	g_return_val_if_fail (name != NULL, NULL);
 
 	node = xmlNewNode (NULL, name);
 
-	if (propname == NULL)
-		xmlNodeSetContent (node, str);
+	if (value)
+		xmlNodeSetContent (node, "true");
 	else
-		xmlSetProp (node, propname, str);
-
-	g_free (str);
+		xmlNodeSetContent (node, "false");
 
 	return node;
 }

@@ -42,11 +42,12 @@ typedef struct _triple_t { gpointer a; gpointer b; gpointer c; } triple_t;
 static void preferences_init             (Preferences *prefs);
 static void preferences_class_init       (PreferencesClass *class);
 
-static gint       xml_read_int           (xmlNodePtr node,
-					  gchar *propname);
+static gint       xml_read_int           (xmlNodePtr node);
 static xmlNodePtr xml_write_int          (gchar *name, 
-					  gchar *propname, 
 					  gint number);
+static gboolean   xml_read_bool          (xmlNodePtr node);
+static xmlNodePtr xml_write_bool         (gchar *name,
+					  gboolean value);
 
 static gint apply_timeout_cb             (Preferences *prefs);
 
@@ -325,9 +326,9 @@ preferences_read_xml (xmlDocPtr xml_doc)
 
 	for (node = root_node->childs; node; node = node->next) {
 		if (!strcmp (node->name, "enable-esd"))
-			prefs->enable_esd = TRUE;
+			prefs->enable_esd = xml_read_bool (node);
 		else if (!strcmp (node->name, "enable-sound-events"))
-			prefs->enable_sound_events = TRUE;
+			prefs->enable_sound_events = xml_read_bool (node);
 		else if (!strcmp (node->name, "categories"))
 			read_sound_events_from_xml (node, prefs->categories);
 	}
@@ -345,11 +346,9 @@ preferences_write_xml (Preferences *prefs)
 
 	node = xmlNewDocNode (doc, NULL, "sound-properties", NULL);
 
-	if (prefs->enable_esd)
-		xmlNewChild (node, NULL, "enable-esd", NULL);
-	if (prefs->enable_sound_events)
-		xmlNewChild (node, NULL, "enable-sound-events", NULL);
-
+	xmlAddChild (node, xml_write_bool ("enable-esd", prefs->enable_esd));
+	xmlAddChild (node, xml_write_bool ("enable-sound-events",
+					   prefs->enable_sound_events));
 	xmlAddChild (node, write_sound_events_to_xml (prefs->categories));
 
 	xmlDocSetRootElement (doc, node);
@@ -711,10 +710,11 @@ category_read_xml (xmlNodePtr cat_node)
 	category = category_new ();
 
 	category->file = xmlGetProp (cat_node, "file");
-	category->description = xmlGetProp (cat_node, "description");
 
 	for (node = cat_node->childs; node; node = node->next) {
-		if (!strcmp (node->name, "event")) {
+		if (!strcmp (node->name, "description"))
+			category->description = xmlNodeGetContent (node);
+		else if (!strcmp (node->name, "event")) {
 			event = sound_event_read_xml (node);
 			list_tail = g_list_append (list_tail, event);
 			if (list_head == NULL)
@@ -745,7 +745,7 @@ category_write_xml (Category *category)
 
 	node = xmlNewNode (NULL, "category");
 	xmlNewProp (node, "file", category->file);
-	xmlNewProp (node, "description", category->description);
+	xmlNewChild (node, NULL, "description", category->description);
 
 	g_tree_traverse (category->events,
 			 (GTraverseFunc) event_tree_write_xml_cb, G_IN_ORDER,
@@ -808,7 +808,7 @@ sound_event_write_xml  (SoundEvent *event)
 	g_return_val_if_fail (event->name != NULL, NULL);
 
 	node = xmlNewNode (NULL, "event");
-	xmlNewChild (node, NULL, "name", event->name);
+	xmlNewProp (node, "name", event->name);
 
 	if (event->file != NULL)
 		xmlNewChild (node, NULL, "file", event->file);
@@ -826,11 +826,10 @@ sound_event_read_xml  (xmlNodePtr event_node)
 		return NULL;
 
 	event = sound_event_new ();
+	event->name = g_strdup (xmlGetProp (event_node, "name"));
 
 	for (node = event_node->childs; node; node = node->next) {
-		if (!strcmp (node->name, "name"))
-			event->name = g_strdup (xmlNodeGetContent (node));
-		else if (!strcmp (node->name, "file"))
+		if (!strcmp (node->name, "file"))
 			event->file = g_strdup (xmlNodeGetContent (node));
 	}
 
@@ -840,14 +839,11 @@ sound_event_read_xml  (xmlNodePtr event_node)
 /* Read a numeric value from a node */
 
 static gint
-xml_read_int (xmlNodePtr node, char *propname) 
+xml_read_int (xmlNodePtr node) 
 {
 	char *text;
 
-	if (propname == NULL)
-		text = xmlNodeGetContent (node);
-	else
-		text = xmlGetProp (node, propname);
+	text = xmlNodeGetContent (node);
 
 	if (text == NULL) 
 		return 0;
@@ -858,7 +854,7 @@ xml_read_int (xmlNodePtr node, char *propname)
 /* Write out a numeric value in a node */
 
 static xmlNodePtr
-xml_write_int (gchar *name, gchar *propname, gint number) 
+xml_write_int (gchar *name, gint number) 
 {
 	xmlNodePtr node;
 	gchar *str;
@@ -866,15 +862,43 @@ xml_write_int (gchar *name, gchar *propname, gint number)
 	g_return_val_if_fail (name != NULL, NULL);
 
 	str = g_strdup_printf ("%d", number);
+	node = xmlNewNode (NULL, name);
+	xmlNodeSetContent (node, str);
+	g_free (str);
+
+	return node;
+}
+
+/* Read a boolean value from a node */
+
+static gboolean
+xml_read_bool (xmlNodePtr node) 
+{
+	char *text;
+
+	text = xmlNodeGetContent (node);
+
+	if (!g_strcasecmp (text, "true")) 
+		return TRUE;
+	else
+		return FALSE;
+}
+
+/* Write out a boolean value in a node */
+
+static xmlNodePtr
+xml_write_bool (gchar *name, gboolean value) 
+{
+	xmlNodePtr node;
+
+	g_return_val_if_fail (name != NULL, NULL);
 
 	node = xmlNewNode (NULL, name);
 
-	if (propname == NULL)
-		xmlNodeSetContent (node, str);
+	if (value)
+		xmlNodeSetContent (node, "true");
 	else
-		xmlSetProp (node, propname, str);
-
-	g_free (str);
+		xmlNodeSetContent (node, "false");
 
 	return node;
 }
