@@ -679,11 +679,11 @@ location_do_rollback (Location *location, gchar *backend_id, xmlDocPtr doc)
 
 	if (fflush (output) == EOF)
 		g_critical ("%s: Could not dump buffer: %s",
-			    __FUNCTION__, g_strerror (errno));
+			    G_GNUC_FUNCTION, g_strerror (errno));
 
 	if (fclose (output) == EOF) {
 		g_critical ("%s: Could not close output stream: %s",
-			    __FUNCTION__, g_strerror (errno));
+			    G_GNUC_FUNCTION, g_strerror (errno));
 		return FALSE;
 	}
 
@@ -724,7 +724,7 @@ location_delete (Location *location)
 
 	if (rmdir (location->p->fullpath) == -1)
 		g_warning ("%s: Could not remove directory: %s\n",
-			   __FUNCTION__, g_strerror (errno));
+			   G_GNUC_FUNCTION, g_strerror (errno));
 
 	location->p->deleted = TRUE;
 }

@@ -101,7 +101,7 @@ create_control_cb (BonoboGenericFactory *factory, const gchar *component_id)
 
 	static const gchar            *prefix1 = "OAFIID:Bonobo_Control_Capplet_";
 
-	g_message ("%s: Enter", __FUNCTION__);
+	g_message ("%s: Enter", G_GNUC_FUNCTION);
 
 	if (!strncmp (component_id, prefix1, strlen (prefix1))) {
 		property_control = bonobo_property_control_new

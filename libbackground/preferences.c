@@ -250,7 +250,7 @@ bg_preferences_merge_entry (BGPreferences    *prefs,
 	else if (!strcmp (entry->key, "/desktop/gnome/background/wallpaper-type")) {
 		prefs->wallpaper_type = gconf_value_get_int (value);
 	} else {
-		g_warning ("%s: Unknown property: %s", __FUNCTION__, entry->key);
+		g_warning ("%s: Unknown property: %s", G_GNUC_FUNCTION, entry->key);
 	}
 }
 

@@ -32,9 +32,9 @@
 
 /* Print a debugging message */
 
-#define DEBUG_MSG(str, args...) \
+#define DEBUG_MSG(str, ...) \
               g_log (G_LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "(%d:%s) " str, \
-		     getpid (), __FUNCTION__ , ## args)
+		     getpid (), G_GNUC_FUNCTION, __VA_ARGS__)
 
 /* Retrieve a widget from the Glade object */
 
