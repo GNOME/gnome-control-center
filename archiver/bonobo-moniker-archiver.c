@@ -91,7 +91,7 @@ archiverdb_resolve (BonoboMoniker               *moniker,
 		    CORBA_Environment           *ev)
 {
 	Bonobo_Moniker          parent;
-	Bonobo_ConfigDatabase   db;
+	BonoboConfigArchiver   *archiver_db;
 	const gchar            *name;
 
 	if (strcmp (requested_interface, "IDL:Bonobo/ConfigDatabase:1.0")) {
@@ -110,14 +110,16 @@ archiverdb_resolve (BonoboMoniker               *moniker,
 
 	name = bonobo_moniker_get_name (moniker);
 
-	db = bonobo_config_archiver_new (parent, options, name, ev);
-
-	if (db == CORBA_OBJECT_NIL || BONOBO_EX (ev))
-		EX_SET_NOT_FOUND (ev);
+	archiver_db = bonobo_config_archiver_new (parent, options, name, ev);
 
 	bonobo_object_release_unref (parent, NULL);
 
-	return db;
+	if (archiver_db == NULL || BONOBO_EX (ev)) {
+		EX_SET_NOT_FOUND (ev);
+		return CORBA_OBJECT_NIL;
+	}
+
+	return CORBA_Object_duplicate (BONOBO_OBJREF (archiver_db), ev);
 }			
 
 

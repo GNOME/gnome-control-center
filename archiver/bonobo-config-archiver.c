@@ -26,6 +26,8 @@
 
 static GtkObjectClass *parent_class = NULL;
 
+static GHashTable     *cache = NULL;
+
 #define CLASS(o) BONOBO_CONFIG_ARCHIVER_CLASS (GTK_OBJECT(o)->klass)
 
 #define PARENT_TYPE BONOBO_CONFIG_DATABASE_TYPE
@@ -552,13 +554,8 @@ bonobo_config_archiver_destroy (GtkObject *object)
 	CORBA_exception_init (&ev);
 
 	if (archiver_db->moniker != NULL) {
-		bonobo_url_unregister ("BONOBO_CONF:ARCHIVER", archiver_db->moniker, &ev);
+		g_hash_table_remove (cache, archiver_db->moniker);
 		g_free (archiver_db->moniker);
-
-		if (BONOBO_EX (&ev)) {
-			g_critical ("Could not unregister the archiver URL");
-			CORBA_exception_init (&ev);
-		}
 	}
 
 	if (archiver_db->listener_id != 0) {
@@ -788,37 +785,35 @@ new_rollback_cb (BonoboListener        *listener,
 	bonobo_arg_release (arg);
 }
 
-Bonobo_ConfigDatabase
+BonoboConfigArchiver *
 bonobo_config_archiver_new (Bonobo_Moniker               parent,
 			    const Bonobo_ResolveOptions *options,
 			    const char                  *moniker,
 			    CORBA_Environment           *ev)
 {
 	BonoboConfigArchiver    *archiver_db;
-	Bonobo_ConfigDatabase    db;
 	ConfigArchiver_Archive   archive;
 	ConfigArchiver_Location  location;
-	gchar                   *moniker_tmp;
 	gchar                   *backend_id;
 	gchar                   *location_id;
 	struct tm               *date;
 
 	g_return_val_if_fail (backend_id != NULL, NULL);
 
-	/* Check the Bonobo URL database to see if this archiver database has
-	 * already been created, and return it if it has */
+	/* Check whether the database object already exists, and return it if it does */
 
-	moniker_tmp = g_strdup (moniker);
-	db = bonobo_url_lookup ("BONOBO_CONF:ARCHIVER", moniker_tmp, ev);
-	g_free (moniker_tmp);
+	if (cache == NULL)
+		cache = g_hash_table_new (g_str_hash, g_str_equal);
 
-	if (BONOBO_EX (ev)) {
-		db = CORBA_OBJECT_NIL;
-		CORBA_exception_init (ev);
+	archiver_db = g_hash_table_lookup (cache, moniker);
+
+	if (archiver_db != NULL) {
+		g_message ("%s: Found database %s in the hash table", __FUNCTION__, moniker);
+		bonobo_object_ref (BONOBO_OBJECT (archiver_db));
+		return archiver_db;
 	}
 
-	if (db != CORBA_OBJECT_NIL)
-		return bonobo_object_dup_ref (db, NULL);
+	g_message ("%s: Did NOT find database %s in the hash table", __FUNCTION__, moniker);
 
 	/* Parse out the backend id, location id, and rollback date from the
 	 * moniker given */
@@ -932,13 +927,8 @@ bonobo_config_archiver_new (Bonobo_Moniker               parent,
 	else
 		archiver_db->listener_id = 0;
 
-	/* Prepare to return the database object */
+	g_message ("%s: Inserting database %s in the cache", __FUNCTION__, moniker);
+	g_hash_table_insert (cache, g_strdup (moniker), archiver_db);
 
-	db = CORBA_Object_duplicate (BONOBO_OBJREF (archiver_db), NULL);
-
-	moniker_tmp = g_strdup (moniker);
-	bonobo_url_register ("BONOBO_CONF:ARCHIVER", moniker_tmp, NULL, db, ev);
-	g_free (moniker_tmp);
-
-	return db;
+	return archiver_db;
 }

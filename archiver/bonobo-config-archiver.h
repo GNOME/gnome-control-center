@@ -78,7 +78,7 @@ typedef struct {
 GtkType		      
 bonobo_config_archiver_get_type  (void);
 
-Bonobo_ConfigDatabase
+BonoboConfigArchiver *
 bonobo_config_archiver_new (Bonobo_Moniker               parent,
 			    const Bonobo_ResolveOptions *options,
 			    const char                  *moniker,
