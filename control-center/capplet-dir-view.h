@@ -28,7 +28,6 @@
 #include <libbonoboui.h>
 
 #include "capplet-dir.h"
-#include "preferences.h"
 
 G_BEGIN_DECLS
 
@@ -55,6 +54,13 @@ struct _CappletDirViewImpl
 	GtkWidget *(*create) (CappletDirView *);
 };
 	
+typedef enum _CappletDirViewLayout {
+	LAYOUT_NONE,
+	LAYOUT_ICON_LIST,
+#ifdef USE_HTML
+	LAYOUT_HTML
+#endif
+} CappletDirViewLayout;
 
 struct _CappletDirView 
 {
