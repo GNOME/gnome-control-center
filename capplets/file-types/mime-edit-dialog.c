@@ -565,10 +565,10 @@ populate_application_list (MimeEditDialog *dialog)
 
 	menu = GTK_MENU (gtk_menu_new ());
 
-	app_list = gnome_vfs_application_registry_get_applications (dialog->p->info->mime_type);
+	app_list  = gnome_vfs_mime_get_short_list_applications (dialog->p->info->mime_type);
 
 	for (tmp = app_list, i = 0; tmp != NULL; tmp = tmp->next, i++) {
-		app = gnome_vfs_application_registry_get_mime_application (tmp->data);
+		app = tmp->data;
 
 		if (dialog->p->info->default_action != NULL &&
 		    dialog->p->info->default_action->id != NULL &&
