@@ -1,3 +1,5 @@
+SUBDIRS = xrdb
+
 INCLUDES=$(GNOME_SETTINGS_DAEMON_CFLAGS) -I$(top_srcdir)/libbackground -I$(top_srcdir) \
   -DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
   -DESD_SERVER="\"$(ESD_SERVER)\""	\
@@ -30,6 +32,8 @@ gnome_settings_daemon_SOURCES =	\
 	gnome-settings-default-editor.h	\
 	gnome-settings-gtk1theme.c      \
 	gnome-settings-gtk1theme.h	\
+	gnome-settings-xrdb.c		\
+	gnome-settings-xrdb.h		\
 	xsettings-common.c		\
 	xsettings-manager.c		\
 	xsettings-common.h		\
