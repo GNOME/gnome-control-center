@@ -53,6 +53,7 @@ const struct poptOption options [] = {
 static void
 apply_settings (Bonobo_ConfigDatabase db)
 {
+	Preferences *prefs;
 	CORBA_Environment ev;
 	
 	CORBA_exception_init (&ev);
@@ -66,7 +67,10 @@ apply_settings (Bonobo_ConfigDatabase db)
 		Bonobo_ConfigDatabase_sync (db, &ev);
 	}
 
-	applier_apply_prefs (applier, CORBA_OBJECT_NIL, db, &ev, TRUE, FALSE);
+	prefs = PREFERENCES (preferences_new_from_bonobo_db (db, &ev));
+	applier_apply_prefs (applier, prefs, TRUE, FALSE);
+	gtk_object_destroy (GTK_OBJECT (prefs));
+
 	CORBA_exception_free (&ev);
 }
 
@@ -184,23 +188,25 @@ property_change_cb (BonoboListener *listener,
 		    char *event_name,
 		    CORBA_any *any,
 		    CORBA_Environment *ev,
-		    Applier *applier)
+		    Bonobo_PropertyBag pb)
 {
-	Bonobo_PropertyBag pb;
+	Preferences *prefs;
 
-	pb = gtk_object_get_data (GTK_OBJECT (applier), "property-bag");
-	applier_apply_prefs (applier, pb, CORBA_OBJECT_NIL, ev, FALSE, TRUE);
+	prefs = PREFERENCES (preferences_new_from_bonobo_pbag (pb, ev));
+	applier_apply_prefs (applier, prefs, FALSE, TRUE);
+	gtk_object_destroy (GTK_OBJECT (prefs));
 }
 
 static void
-realize_cb (GtkWidget *widget, Applier *applier)
+realize_cb (GtkWidget *widget, Bonobo_PropertyBag bag)
 {
 	CORBA_Environment ev;
-	Bonobo_PropertyBag bag;
-
+	Preferences *prefs;
+	
 	CORBA_exception_init (&ev);
-	bag = gtk_object_get_data (GTK_OBJECT (applier), "property-bag");
-	applier_apply_prefs (applier, bag, CORBA_OBJECT_NIL, &ev, FALSE, TRUE);
+       	prefs = PREFERENCES (preferences_new_from_bonobo_pbag (bag, &ev));
+	applier_apply_prefs (applier, prefs, FALSE, TRUE);
+	gtk_object_destroy (GTK_OBJECT (prefs));
 	CORBA_exception_free (&ev);
 }
 
@@ -215,31 +221,25 @@ realize_cb (GtkWidget *widget, Applier *applier)
 static void
 setup_dialog (GtkWidget *widget, Bonobo_PropertyBag bag)
 {
-	BonoboPEditor *ed;
 	GladeXML *dialog;
-	Applier *applier;
 
 	dialog = gtk_object_get_data (GTK_OBJECT (widget), "glade-data");
-	ed = BONOBO_PEDITOR (bonobo_peditor_option_menu_construct (WID ("color_option")));
-	bonobo_peditor_set_property (ed, bag, "orientation", TC_ulong, NULL);
+	CUSTOM_CREATE_PEDITOR (option_menu, ulong, "orientation", "color_option");	
 
 	CUSTOM_CREATE_PEDITOR (color, Bonobo_Config_Color, "color1", "colorpicker1");	
 	CUSTOM_CREATE_PEDITOR (color, Bonobo_Config_Color, "color2", "colorpicker2");	
 	CUSTOM_CREATE_PEDITOR (filename, Bonobo_Config_FileName, "wallpaper_filename", "image_fileentry");	
 
-	ed = BONOBO_PEDITOR (bonobo_peditor_option_menu_construct (WID ("image_option")));
-	bonobo_peditor_set_property (ed, bag, "wallpaper_type", TC_ulong, NULL);
+	CUSTOM_CREATE_PEDITOR (option_menu, ulong, "wallpaper_type", "image_option");	
+	CUSTOM_CREATE_PEDITOR (int_range, long, "opacity", "opacity_spin");
 
-	CUSTOM_CREATE_PEDITOR (int_range, long, "opacity", "opacity_spin");	
 	gtk_widget_hide (WID ("opacity_spin"));
 	gtk_widget_hide (WID ("opacity_label"));
 
-	applier = gtk_object_get_data (GTK_OBJECT (widget), "applier");
-	gtk_object_set_data (GTK_OBJECT (applier), "property-bag", bag);
-	bonobo_event_source_client_add_listener (bag, (BonoboListenerCallbackFn) property_change_cb,
-						 NULL, NULL, applier);
+	bonobo_event_source_client_add_listener (bag, property_change_cb,
+						 NULL, NULL, bag);
 
-	gtk_signal_connect_after (GTK_OBJECT (applier_get_preview_widget (applier)), "realize", realize_cb, applier);
+	gtk_signal_connect_after (GTK_OBJECT (applier_class_get_preview_widget ()), "realize", realize_cb, bag);
 }
 
 static GtkWidget*
@@ -254,12 +254,11 @@ create_dialog (void)
 	gtk_object_set_data (GTK_OBJECT (widget), "glade-data", dialog);
 
 	applier = APPLIER (applier_new ());
-	gtk_object_set_data (GTK_OBJECT (widget), "applier", applier);
 
 	/* Minor GUI addition */
 	holder = WID ("preview_holder");
 	gtk_box_pack_start (GTK_BOX (holder),
-			    applier_get_preview_widget (applier),
+			    applier_class_get_preview_widget (),
 			    TRUE, TRUE, 0);
 	gtk_widget_show_all (holder);
 

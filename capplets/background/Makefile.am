@@ -6,6 +6,7 @@ background_properties_capplet_LDADD = $(GNOMECC_CAPPLETS_LIBS)
 
 bonobo_sources =				\
 	background-properties-capplet.c		\
+	preferences.c		preferences.h   \
 	applier.c applier.h
 
 legacy_sources =				\
@@ -17,9 +18,11 @@ legacy_sources =				\
 if BONOBO_CONF_ENABLE
 DESKTOP_EXEC_LINE = gnomecc --run-capplet background-properties
 background_properties_capplet_SOURCES = $(bonobo_sources)
+BONOBO_CONF_DEFINE=-DBONOBO_CONF_ENABLE
 else
 DESKTOP_EXEC_LINE = background-properties-capplet
 background_properties_capplet_SOURCES = $(legacy_sources)
+BONOBO_CONF_DEFINE=
 endif
 
 pixmap_DATA = 
@@ -50,7 +53,7 @@ install-data-local:
 install-data-am: install-data-local
 ####@###GNOMECC_CAPPLETS_DESKTOP_IN_RULE@
 
-INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)
+INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS) $(BONOBO_CONF_DEFINE)
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
 EXTRA_DIST = $(GNOMECC_CAPPLETS_EXTRA_DIST) $(defaults_DATA) $(oaf_DATA).in $(bonobo_sources) $(legacy_sources)
 iconsdir   = $(GNOMECC_ICONS_DIR)

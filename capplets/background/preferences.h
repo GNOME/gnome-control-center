@@ -26,7 +26,11 @@
 
 #include <gtk/gtk.h>
 
+#ifdef BONOBO_CONF_ENABLE
+#include <bonobo-conf/bonobo-config-database.h>
+#else
 #include <tree.h>
+#endif
 
 #define PREFERENCES(obj)          GTK_CHECK_CAST (obj, preferences_get_type (), Preferences)
 #define PREFERENCES_CLASS(klass)  GTK_CHECK_CLASS_CAST (klass, preferences_get_type (), PreferencesClass)
@@ -34,6 +38,15 @@
 
 typedef struct _Preferences Preferences;
 typedef struct _PreferencesClass PreferencesClass;
+
+typedef enum _orientation_t {
+ORIENTATION_SOLID, ORIENTATION_HORIZ, ORIENTATION_VERT
+} orientation_t;
+
+typedef enum _wallpaper_type_t {
+	WPTYPE_TILED, WPTYPE_CENTERED, WPTYPE_SCALED_ASPECT,
+	WPTYPE_SCALED, WPTYPE_EMBOSSED
+} wallpaper_type_t;
 
 struct _Preferences
 {
@@ -70,8 +83,15 @@ guint        preferences_get_type   (void);
 
 GtkObject   *preferences_new        (void);
 GtkObject   *preferences_clone      (Preferences *prefs);
+
 void         preferences_destroy    (GtkObject *object);
 
+#ifdef BONOBO_CONF_ENABLE
+GtkObject   *preferences_new_from_bonobo_pbag (Bonobo_PropertyBag pb,
+					       CORBA_Environment *ev);
+GtkObject   *preferences_new_from_bonobo_db   (Bonobo_ConfigDatabase db,
+					       CORBA_Environment *ev);
+#else
 void         preferences_load       (Preferences *prefs);
 void         preferences_save       (Preferences *prefs);
 void         preferences_changed    (Preferences *prefs);
@@ -83,5 +103,6 @@ void         preferences_thaw       (Preferences *prefs);
 
 Preferences *preferences_read_xml   (xmlDocPtr xml_doc);
 xmlDocPtr    preferences_write_xml  (Preferences *prefs);
+#endif /* BONOBO_CONF_ENABLE */
 
 #endif /* __PREFERENCES_H */
