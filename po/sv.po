@@ -8,14 +8,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2003-10-09 18:22+0200\n"
-"PO-Revision-Date: 2003-10-09 18:24+0200\n"
+"POT-Creation-Date: 2003-10-19 11:54+0200\n"
+"PO-Revision-Date: 2003-10-19 11:55+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Report-Msgid-Bugs-To: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:1
 msgid "<b>Applications</b>"
@@ -674,10 +675,6 @@ msgstr "Föredragna program"
 msgid "Select your default applications"
 msgstr "Välj dina standardprogram"
 
-#: capplets/default-applications/gnome-default-applications-properties.c:108
-msgid "Please specify a name and a command for this editor."
-msgstr "Ange ett namn och ett kommando för att denna textredigerare."
-
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:39
 msgid "Epiphany"
 msgstr "Epiphany"
@@ -754,6 +751,10 @@ msgstr "RXVT"
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:70
 msgid "ETerm"
 msgstr "ETerm"
+
+#: capplets/default-applications/gnome-default-applications-properties.c:108
+msgid "Please specify a name and a command for this editor."
+msgstr "Ange ett namn och ett kommando för att denna textredigerare."
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:2
 msgid "Add..."
@@ -1127,9 +1128,8 @@ msgid "Add _Service..."
 msgstr "Lägg till _tjänst..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
-#, fuzzy
 msgid "Browse icons"
-msgstr "sekunder"
+msgstr "Bläddra bland ikoner"
 
 #: capplets/file-types/file-types-properties.glade.h:6
 msgid "C_hoose..."
@@ -1547,6 +1547,32 @@ msgstr "_VRGB"
 #: capplets/font/font-properties.glade.h:33
 msgid "_Window title font:"
 msgstr "_Fönstertiteltypsnitt:"
+
+#: capplets/font/main.c:494 capplets/font/main.c:499
+msgid "Font may be too large"
+msgstr "Typsnittet kan vara för stort"
+
+#: capplets/font/main.c:495
+#, c-format
+msgid ""
+"The font selected is %d points large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a size "
+"smaller than %d."
+msgstr ""
+"Det valda typsnittet är %d punkter stort, och kan göra det svårt att "
+"effektivt använda datorn. Det rekommenderas att du väljer en storlek som är "
+"mindre än %d."
+
+#: capplets/font/main.c:500
+#, c-format
+msgid ""
+"The font selected is %d points large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a smaller "
+"sized font."
+msgstr ""
+"Det valda typsnittet är %d punkter stort, och kan göra det svårt att "
+"effektivt använda datorn. Det rekommenderas att du väljer ett mindre "
+"typsnitt."
 
 #: capplets/keybindings/eggcellrendererkeys.c:160
 #: capplets/keybindings/eggcellrendererkeys.c:161
@@ -2787,10 +2813,10 @@ msgid "/_Take a Break"
 msgstr "/_Ta en paus"
 
 #: typing-break/drwright.c:466
-#, fuzzy, c-format
+#, c-format
 msgid "%d minute until the next break"
 msgid_plural "%d minutes until the next break"
-msgstr[0] "%d minuter till nästa paus"
+msgstr[0] "%d minut till nästa paus"
 msgstr[1] "%d minuter till nästa paus"
 
 #: typing-break/drwright.c:470
@@ -2976,6 +3002,14 @@ msgstr "Poster i Nautilus-sammanhangsmeny för typsnitt"
 msgid "Set as Application Font"
 msgstr "Ställ in som programtypsnitt"
 
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
+msgid "Theme Properties content view component"
+msgstr "Innehållsvykomponent för temaegenskaper"
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
+msgid "Themus Theme Properties view"
+msgstr "Temaegenskapsvy för Themus"
+
 #: vfs-methods/themus/apply-font.glade.h:1
 msgid " "
 msgstr " "
@@ -2999,14 +3033,6 @@ msgstr ""
 #: vfs-methods/themus/apply-font.glade.h:5
 msgid "_Apply font"
 msgstr "_Använd typsnitt"
-
-#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
-msgid "Theme Properties content view component"
-msgstr "Innehållsvykomponent för temaegenskaper"
-
-#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
-msgid "Themus Theme Properties view"
-msgstr "Temaegenskapsvy för Themus"
 
 #: vfs-methods/themus/theme-method.c:514
 msgid "Themes"
