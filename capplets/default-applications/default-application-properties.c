@@ -52,20 +52,20 @@ TerminalDescription tcurrent_info = { NULL };
 
 EditorDescription possible_editors[] =
 {
-        { "Emacs", "emacs", FALSE, "executable", TRUE },
-        { "XEmacs", "xemacs", FALSE, "executable", TRUE },
-        { "vi", "vi", TRUE, "executable", TRUE },
-        { "Go", "go", FALSE, "executable", FALSE },
-        { "gEdit", "gedit", FALSE, "executable", FALSE },
-        { "GWP", "gwp", FALSE, "executable", FALSE },
-        { "Jed", "jed", TRUE, "executable", TRUE },
-        { "Joe", "joe", TRUE, "executable", TRUE },
-        { "Pico", "pico", TRUE, "executable", TRUE },
-        { "vim",  "vim", TRUE, "executable", TRUE },
-        { "gvim",  "gvim", FALSE, "executable", TRUE },
-        { "ed", "ed", TRUE, "executable", FALSE },
+        { "gedit",        "gedit",  FALSE, "executable",  FALSE },
+        { "Emacs",        "emacs",  FALSE, "executable",  TRUE },
+        { "XEmacs",       "xemacs", FALSE, "executable",  TRUE },
+        { "vi",           "vi",     TRUE,  "executable",  TRUE },
+        { "Go",           "go",     FALSE, "executable",  FALSE },
+        { "GWP",          "gwp",    FALSE, "executable",  FALSE },
+        { "Jed",          "jed",    TRUE,  "executable",  TRUE },
+        { "Joe",          "joe",    TRUE,  "executable",  TRUE },
+        { "Pico",         "pico",   TRUE,  "executable",  TRUE },
+        { "vim",          "vim",    TRUE,  "executable",  TRUE },
+        { "gvim",         "gvim",   FALSE, "executable",  TRUE },
+        { "ed",           "ed",     TRUE,  "executable",  FALSE },
         { "GMC/CoolEdit", "gmc -e", FALSE, "mc-internal", FALSE },
-	{ "Nedit", "nedit", FALSE, "executable", FALSE }
+	{ "Nedit",        "nedit",  FALSE, "executable",  FALSE }
 };
 
 BrowserDescription possible_browsers[] =
@@ -129,8 +129,8 @@ edit_read(void)
         eoriginal_info.execution_type = gnome_config_get_string("/editor/Editor/EDITOR_TYPE");
         eoriginal_info.accepts_lineno = gnome_config_get_bool_with_default("/editor/Editor/ACCEPTS_LINE_NO", NULL);
 
-        ecurrent_info.name = gnome_config_get_string("/editor/Editor/EDITNAME=Emacs");
-        ecurrent_info.executable_name = gnome_config_get_string("/editor/Editor/EDITOR=emacs");
+        ecurrent_info.name = gnome_config_get_string("/editor/Editor/EDITNAME=gedit");
+        ecurrent_info.executable_name = gnome_config_get_string("/editor/Editor/EDITOR=gedit");
         ecurrent_info.needs_term = gnome_config_get_bool_with_default("/editor/Editor/NEEDS_TERM=FALSE", NULL);
         ecurrent_info.execution_type = gnome_config_get_string("/editor/Editor/EDITOR_TYPE=executable");
         ecurrent_info.accepts_lineno = gnome_config_get_bool_with_default("/editor/Editor/ACCEPTS_LINE_NO=TRUE", NULL);
