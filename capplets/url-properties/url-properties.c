@@ -43,6 +43,7 @@ main(int argc, char *argv[]) {
   gint init_ret;
 
   bindtextdomain(PACKAGE, GNOMELOCALEDIR);
+  bind_textdomain_codeset (PACKAGE, "UTF-8");
   textdomain(PACKAGE);
 
   gnome_program_init ("url-properties", VERSION,

@@ -124,6 +124,7 @@ main (int argc, char **argv)
         int init_results;
 
         bindtextdomain (PACKAGE, GNOMELOCALEDIR);
+	bind_textdomain_codeset (PACKAGE, "UTF-8");
         textdomain (PACKAGE);
 
         init_results = gnome_capplet_init("mime-type", VERSION,

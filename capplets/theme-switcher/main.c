@@ -13,6 +13,7 @@ main(int argc, char **argv)
   GtkWidget *w;
 
   bindtextdomain (PACKAGE, GNOMELOCALEDIR);
+  bind_textdomain_codeset (PACKAGE, "UTF-8");
   textdomain (PACKAGE);
 
   set_tmp_rc();
