@@ -618,6 +618,7 @@ nautilus_mime_type_capplet_show_new_mime_window (void)
 	mime_type = NULL;
 	
         dialog = gnome_dialog_new (_("Add Mime Type"), GNOME_STOCK_BUTTON_OK, GNOME_STOCK_BUTTON_CANCEL, NULL);
+	gnome_dialog_set_default (GNOME_DIALOG (dialog), 1);
 	label = gtk_label_new (_("Add a new Mime Type\nFor example:  image/tiff; text/x-scheme"));
 	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
 	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
@@ -647,6 +648,8 @@ nautilus_mime_type_capplet_show_new_mime_window (void)
 	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 	
 	
+	gnome_dialog_set_close (GNOME_DIALOG (dialog), FALSE);
+
         gtk_widget_show_all (GNOME_DIALOG (dialog)->vbox);
         switch (gnome_dialog_run (GNOME_DIALOG (dialog))) {
 	        case 0:
@@ -662,13 +665,14 @@ nautilus_mime_type_capplet_show_new_mime_window (void)
 			/* Fall through to close dialog */
 
 	        case 1:
-	                gtk_widget_destroy (dialog);
 			break;
 			
 		default:
 			break;
         }
-        
+
+	gnome_dialog_close (GNOME_DIALOG (dialog));
+
         return mime_type;
 }
 

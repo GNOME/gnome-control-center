@@ -954,20 +954,39 @@ populate_viewer_menu (GtkWidget *component_menu, const char *mime_type)
 	gtk_option_menu_set_menu (GTK_OPTION_MENU (default_menu), new_menu);
 }
 
+static void
+revert_real_cb (gint reply, gpointer data)
+{
+	if (reply == 0) {
+		/* YES */
+		GList *mime_types_list;
+		gnome_vfs_mime_reset ();
+		
+		gnome_vfs_mime_info_reload ();
+
+		mime_types_list = gnome_vfs_get_registered_mime_types ();
+
+		gtk_clist_clear (GTK_CLIST (mime_list));
+		populate_mime_list (mime_types_list, GTK_CLIST (mime_list));
+	} else {
+		/* NO */
+	}
+
+}
 
 static void
 revert_mime_clicked (GtkWidget *widget, gpointer data)
 {
-	GList *mime_types_list;
+	GtkWidget *dialog;
+	gint button_clicked;
+	GtkWidget *label;
+	
+	dialog = gnome_question_dialog_modal (_("Reverting to system settings\n"
+						"will lose all your personal \n"
+						"Mime configuration.\n"
+						"Revert to System Settings ?\n"), 
+					      revert_real_cb, NULL);
 
-	gnome_vfs_mime_reset ();
-
-	gnome_vfs_mime_info_reload ();
-
-	mime_types_list = gnome_vfs_get_registered_mime_types ();
-
-	gtk_clist_clear (GTK_CLIST (mime_list));
-	populate_mime_list (mime_types_list, GTK_CLIST (mime_list));
 }
 /*
  *  delete_mime_clicked	
@@ -1091,6 +1110,7 @@ add_mime_clicked (GtkWidget *widget, gpointer data)
 		g_free (text[3]);
 		g_free (extensions);
 	}
+	
 }
 
 static void
