@@ -125,8 +125,8 @@ restart_label_update (void)
         if ((gint)restart_remaining_time != restart_displayed_time) {
                 restart_displayed_time = restart_remaining_time;
                 
-                tmp = g_strdup_printf ("Starting %s\n"
-                                       "(%d seconds left before operation times out)",
+                tmp = g_strdup_printf (_("Starting %s\n"
+                                         "(%d seconds left before operation times out)"),
                                        restart_name,
                                        restart_displayed_time);
                 gtk_label_set_text (GTK_LABEL (restart_label), tmp);
@@ -286,9 +286,10 @@ update_gui (void)
                 wm = tmp_list->data;
 
                 if (wm == current_wm) {
-                        row_text = g_strconcat (wm->dentry->name, " (Current)", NULL);
+                        row_text = g_strconcat (wm->dentry->name,
+                                                _(" (Current)"), NULL);
 
-                        tmpstr = g_strconcat ("Run Configuration Tool for ",
+                        tmpstr = g_strconcat (_("Run Configuration Tool for "),
                                               wm->dentry->name,
                                               NULL);
                                               
@@ -299,7 +300,8 @@ update_gui (void)
 
                         g_free (tmpstr);
                 } else if (wm->is_user && !wm->is_present) {
-                        row_text = g_strconcat (wm->dentry->name, " (Not found)", NULL);
+                        row_text = g_strconcat (wm->dentry->name,
+                                                _(" (Not found)"), NULL);
                 } else {
                         row_text = g_strdup (wm->dentry->name);
                 }
@@ -380,7 +382,7 @@ restart_failure (WMResult reason)
         /* Did the previous window manager not die?
          */
         if (reason == WM_ALREADY_RUNNING) {
-                msg = g_strdup ("Previous window manager did not die\n");
+                msg = g_strdup (_("Previous window manager did not die\n"));
 
                 switch (state) {
                 case STATE_TRY:
@@ -413,8 +415,8 @@ restart_failure (WMResult reason)
                 case STATE_REVERT:
                 case STATE_OK:
                 case STATE_CANCEL:
-                        msg = g_strdup_printf ("Could not start '%s'.\n"
-                                               "Falling back to previous window manager '%s'\n",
+                        msg = g_strdup_printf (_("Could not start '%s'.\n"
+                                                 "Falling back to previous window manager '%s'\n"),
                                                selected_wm->dentry->name,
                                                current_wm->dentry->name);
                         selected_wm = current_wm;
@@ -444,11 +446,10 @@ restart_failure (WMResult reason)
                         /* Fall through */
                 case STATE_TRY:
                 case STATE_REVERT:
-                        msg = g_strdup (
-                                        "Could not start fallback window manager.\n"
-                                        "Please run a window manager manually. You can\n"
-                                        "do this by selecting \"Run Program\" in the\n"
-                                        "foot menu\n");
+                        msg = g_strdup (_("Could not start fallback window manager.\n"
+                                          "Please run a window manager manually. You can\n"
+                                          "do this by selecting \"Run Program\" in the\n"
+                                          "foot menu\n"));
                         
                         restart_finalize();
                         break;
@@ -669,8 +670,8 @@ create_dialog (gchar *title)
 
         dialog = g_new (WMDialog, 1);
         
-        dialog->dialog = gnome_dialog_new ("Add New Window Manager",
-                                           "OK", "Cancel", NULL);
+        dialog->dialog = gnome_dialog_new (_("Add New Window Manager"),
+                                           _("OK"), _("Cancel"), NULL);
 
         gnome_dialog_set_default (GNOME_DIALOG (dialog->dialog), 0);
         gnome_dialog_close_hides (GNOME_DIALOG (dialog->dialog), TRUE);
@@ -681,7 +682,7 @@ create_dialog (gchar *title)
         gtk_container_add (GTK_CONTAINER (GNOME_DIALOG (dialog->dialog)->vbox),
                            table);
         
-        label = gtk_label_new ("Name:");
+        label = gtk_label_new (_("Name:"));
         gtk_misc_set_alignment (GTK_MISC (label), 1.0, 0.5);
         gtk_table_attach (GTK_TABLE (table), label,
                           0, 1, 0, 1,
@@ -694,7 +695,7 @@ create_dialog (gchar *title)
                           GTK_FILL | GTK_EXPAND, 0,
                           0, 0);
 
-        label = gtk_label_new ("Command:");
+        label = gtk_label_new (_("Command:"));
         gtk_misc_set_alignment (GTK_MISC (label), 1.0, 0.5);
         gtk_table_attach (GTK_TABLE (table), label,
                           0, 1, 1, 2,
@@ -707,7 +708,7 @@ create_dialog (gchar *title)
                           GTK_FILL | GTK_EXPAND, 0,
                           0, 0);
 
-        label = gtk_label_new ("Configuration Command:");
+        label = gtk_label_new (_("Configuration Command:"));
         gtk_misc_set_alignment (GTK_MISC (label), 1.0, 0.5);
         gtk_table_attach (GTK_TABLE (table), label,
                           0, 1, 2, 3,
@@ -726,7 +727,7 @@ create_dialog (gchar *title)
                           GTK_FILL | GTK_EXPAND, 0,
                           0, 0);
         
-        dialog->sm_toggle = gtk_check_button_new_with_label ("Window manager is session managed");
+        dialog->sm_toggle = gtk_check_button_new_with_label (_("Window manager is session managed"));
         gtk_container_add (GTK_CONTAINER (alignment), dialog->sm_toggle);
 
         gtk_window_set_default_size (GTK_WINDOW (dialog->dialog), 400, -1);
@@ -776,16 +777,16 @@ check_dialog (WMDialog *dialog)
         GtkWidget *msgbox;
         
         if (is_blank (gtk_entry_get_text (GTK_ENTRY (dialog->name_entry)))) {
-                msgbox = gnome_message_box_new ("Name cannot be empty",
+                msgbox = gnome_message_box_new (_("Name cannot be empty"),
                                                 GNOME_MESSAGE_BOX_ERROR,
-                                                "OK", NULL);
+                                                _("OK"), NULL);
                 gnome_dialog_run (GNOME_DIALOG (msgbox));
                 return FALSE;
         }
         if (is_blank (gtk_entry_get_text (GTK_ENTRY (dialog->exec_entry)))) {
-                msgbox = gnome_message_box_new ("Command cannot be empty",
+                msgbox = gnome_message_box_new (_("Command cannot be empty"),
                                                 GNOME_MESSAGE_BOX_ERROR,
-                                                "OK", NULL);
+                                                _("OK"), NULL);
                 gnome_dialog_run (GNOME_DIALOG (msgbox));
                 return FALSE;
         }
@@ -825,7 +826,7 @@ get_dialog_contents (WMDialog *dialog, WindowManager *wm)
 static void
 edit_dialog (void)
 {
-        WMDialog *dialog = create_dialog ("Add New Window Manager");
+        WMDialog *dialog = create_dialog (_("Add New Window Manager"));
         gchar *tmp;
         gint result;
 
@@ -869,7 +870,7 @@ edit_dialog (void)
 static void
 add_dialog (void)
 {
-        WMDialog *dialog = create_dialog ("Edit Window Manager");
+        WMDialog *dialog = create_dialog (_("Edit Window Manager"));
         WindowManager *wm;
         gint result;
 
@@ -924,8 +925,8 @@ delete (void)
         
         if (current_wm == selected_wm) {
                 msgbox = gnome_message_box_new (
-                   "You cannot delete the current Window Manager",
-                   GNOME_MESSAGE_BOX_ERROR, "OK", NULL);
+                   _("You cannot delete the current Window Manager"),
+                   GNOME_MESSAGE_BOX_ERROR, _("OK"), NULL);
 
                 gnome_dialog_run (GNOME_DIALOG (msgbox));
                 return;
@@ -991,17 +992,17 @@ wm_setup (void)
         util_vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
         gtk_box_pack_start (GTK_BOX (hbox), util_vbox, FALSE, FALSE, 0);
         
-        add_button = gtk_button_new_with_label ("Add");
+        add_button = gtk_button_new_with_label (_("Add"));
         gtk_signal_connect (GTK_OBJECT (add_button), "clicked",
                             GTK_SIGNAL_FUNC (add_dialog), NULL);
         gtk_box_pack_start (GTK_BOX (util_vbox), add_button, FALSE, FALSE, 0);
 
-        edit_button = gtk_button_new_with_label ("Edit");
+        edit_button = gtk_button_new_with_label (_("Edit"));
         gtk_signal_connect (GTK_OBJECT (edit_button), "clicked",
                             GTK_SIGNAL_FUNC (edit_dialog), NULL);
         gtk_box_pack_start (GTK_BOX (util_vbox), edit_button, FALSE, FALSE, 0);
 
-        delete_button = gtk_button_new_with_label ("Delete");
+        delete_button = gtk_button_new_with_label (_("Delete"));
         gtk_signal_connect (GTK_OBJECT (delete_button), "clicked",
                             GTK_SIGNAL_FUNC (delete), NULL);
         gtk_box_pack_start (GTK_BOX (util_vbox), delete_button, FALSE, FALSE, 0);
@@ -1036,9 +1037,9 @@ main (int argc, char **argv)
 					  argc, argv, NULL, 0, NULL);
         
 	if (init_results < 0) {
-                g_warning ("an initialization error occurred while "
-			   "starting 'wm-properties-capplet'.\n"
-                           "aborting...\n");
+                g_warning (_("an initialization error occurred while "
+                             "starting 'wm-properties-capplet'.\n"
+                             "aborting...\n"));
                 exit (1);
 	}
 

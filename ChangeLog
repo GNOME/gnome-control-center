@@ -1,3 +1,41 @@
+1999-04-03  Ettore Perazzoli  <ettore@comm2000.it>
+
+	* capplets/wm-properties/wm-properties-capplet.c
+	(restart_label_update): Made i18n-aware.
+	(update_gui): Likewise.
+	(restart_failure): Likewise.
+	(create_dialog): Likewise.
+	(check_dialog): Likewise.
+	(edit_dialog): Likewise.
+	(delete): Likewise.
+	(main): Likewise.
+
+	* capplets/screensaver-properties/callbacks.c
+	(handle_list_change): Replace the `... settings' hack with a more
+	i18n-friendly one.
+
+	* capplets/background-properties/property-background.c
+	(fill_monitor): Made i18n-aware.
+
+	* capplets/e-conf/e-conf.c (main): Initialize i18n stuff.
+	(add_kb): Gettextize action text.
+	(update_current_kb): Likewise.
+	(add_actions): Likewise.
+	(__setup_pane_13): Gettextize titles.
+	(e_create_icon_option): Gettextize tooltips.
+
+	* capplets/wm-properties/wm-properties-capplet.c (create_dialog):
+	Made i18n-aware.
+	(check_dialog): Likewise.
+	(edit_dialog): Likewise.
+	(add_dialog): Likewise.
+	(delete): Likewise.
+	(wm_setup): Likewise.
+	(main): Likewise.
+	(restart_label_update): Likewise.
+	(update_gui): Likewise.
+	(restart_failure): Likewise.
+
 1999-04-01  Jonathan Blandford  <jrb@redhat.com>
 
 	* capplets/screensaver-properties/parser.c (set_color): Patch by
@@ -59,6 +97,7 @@
  	the default WM so the gnome-wm script can write the chosen WM
 	there.
 
+>>>>>>> 1.178
 1999-03-22  Jonathan Blandford  <jrb@redhat.com>
 
 	* capplets/screensaver-properties/: removed print statements.
@@ -69,6 +108,7 @@ Sun Mar 21 01:33:55 CST 1999 Frank Belew <frb@umr.edu>
 	* capplets/gnome-edit-properties/gnome-edit-properties.c:
 	  added Nedit to the list
 
+>>>>>>> 1.174
 Tue Mar 16 17:54:04 1999 Timur Bakeyev <mc@bat.ru>
 
 	* capplets/wm-properties/wm-list.c: Add missed #include <sys/types.h>
