@@ -347,7 +347,7 @@ grab_key_callback (GtkWidget    *widget,
                    GdkEventKey  *event,
                    void         *data)
 {
-  GdkModifierType accel_mods;
+  GdkModifierType accel_mods = 0;
   guint accel_keyval;
   EggCellRendererKeys *keys;
   char *path;

@@ -959,6 +959,8 @@ main (int argc, char *argv[])
 		      GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
 		      NULL);
 
+  gnome_theme_init (NULL);
+
   activate_settings_daemon ();
 
   dialog = create_dialog ();
