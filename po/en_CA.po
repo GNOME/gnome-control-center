@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-17 15:58-0500\n"
-"PO-Revision-Date: 2005-01-17 19:59-0400\n"
+"POT-Creation-Date: 2005-02-01 02:33-0500\n"
+"PO-Revision-Date: 2005-02-01 19:59-0400\n"
 "Last-Translator: Adam Weinberger <adamw@gnome.org>\n"
 "Language-Team: English/Canada <adamw@FreeBSD.org>\n"
 "MIME-Version: 1.0\n"
@@ -364,6 +364,7 @@ msgstr "    "
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:1
 #: capplets/file-types/file-types-properties.glade.h:1
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:2
 #: capplets/network/gnome-network-preferences.glade.h:2
 #: capplets/theme-switcher/theme-install.glade.h:1
 #: capplets/theme-switcher/theme-properties.glade.h:1
@@ -516,7 +517,7 @@ msgid "_Only accept keys held for:"
 msgstr "_Only accept keys held for:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:40
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:39
 msgid "_Type to test settings:"
 msgstr "_Type to test settings:"
 
@@ -1780,7 +1781,12 @@ msgstr "Unknown"
 msgid "Layout"
 msgstr "Layout"
 
+#. The first radio in a group is to be "Default", meaning none of
+#. the below options are to be included in the selected list.
+#. This is a HIG-compliant alternative to allowing no
+#. selection in the group.
 #: capplets/keyboard/gnome-keyboard-properties-xkblt.c:255
+#: capplets/keyboard/gnome-keyboard-properties-xkbot.c:206
 msgid "Default"
 msgstr "Default"
 
@@ -1810,45 +1816,41 @@ msgstr ""
 msgid "Start the page with the typing break settings showing"
 msgstr "Start the page with the typing break settings showing"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:2
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
 msgid "..."
 msgstr "..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "<b>Cursor Blinking</b>"
 msgstr "<b>Cursor Blinking</b>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
 msgid "<b>Repeat Keys</b>"
 msgstr "<b>Repeat Keys</b>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "<b>_Lock screen to enforce typing break</b>"
 msgstr "<b>_Lock screen to enforce typing break</b>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>Fast</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>Long</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>Short</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Slow</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "A_vailable layouts:"
 msgstr "A_vailable layouts:"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
-msgid "A_vailable options:"
-msgstr "A_vailable options:"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "All_ow postponing of breaks"
@@ -1951,18 +1953,14 @@ msgid "_Selected layouts:"
 msgstr "_Selected layouts:"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:38
-msgid "_Selected options:"
-msgstr "_Selected options:"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:39
 msgid "_Speed:"
 msgstr "_Speed:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:41
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:40
 msgid "_Work interval lasts:"
 msgstr "_Work interval lasts:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:42
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:41
 msgid "minutes"
 msgstr "minutes"
 
@@ -2686,12 +2684,12 @@ msgstr "View as Control Centre"
 msgid "Others"
 msgstr "Others"
 
-#: control-center/control-center.c:1005
+#: control-center/control-center.c:1010
 #: control-center/gnomecc.desktop.in.in.h:1
 msgid "GNOME Control Center"
 msgstr "GNOME Control Centre"
 
-#: control-center/control-center.c:1121
+#: control-center/control-center.c:1126
 msgid "Desktop Preferences"
 msgstr "Desktop Preferences"
 
@@ -2806,7 +2804,7 @@ msgstr ""
 "Error while trying to run (%s)\n"
 "which is linked to the key (%s)"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:96
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:99
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2837,7 +2835,7 @@ msgstr ""
 "- The result of <b>xprop -root | grep XKB</b>\n"
 "- The result of <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/kbd</b>"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:110
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:113
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2848,33 +2846,22 @@ msgstr ""
 "There are known problems with complex XKB configurations.\n"
 "Try using simpler configuration or taking more fresh version of XFree "
 "software."
-
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:213
-msgid ""
-"The X system keyboard settings differ from your current GNOME keyboard "
-"settings.  Which set would you like to use?"
-msgstr ""
-"The X system keyboard settings differ from your current GNOME keyboard "
-"settings.  Which set would you like to use?"
 
 #: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:216
+msgid ""
+"The X system keyboard settings differ from your current GNOME keyboard "
+"settings.  Which set would you like to use?"
+msgstr ""
+"The X system keyboard settings differ from your current GNOME keyboard "
+"settings.  Which set would you like to use?"
+
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:219
 msgid "Use X settings"
 msgstr "Use X settings"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:218
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:221
 msgid "Use GNOME settings"
 msgstr "Use GNOME settings"
-
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:270
-#, c-format
-msgid ""
-"You have a keyboard remapping file (%s) in your home directory whose "
-"contents will now be ignored. You can use the keyboard preferences to "
-"restore them."
-msgstr ""
-"You have a keyboard remapping file (%s) in your home directory whose "
-"contents will now be ignored. You can use the keyboard preferences to "
-"restore them."
 
 #: gnome-settings-daemon/gnome-settings-multimedia-keys.c:126
 #, c-format
@@ -3283,42 +3270,46 @@ msgstr ""
 "Useful for re-applying xmodmap-based adjustments"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
+msgid "A list of modmap files available in the $HOME directory."
+msgstr "A list of modmap files available in the $HOME directory."
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
 msgid "Default group, assigned on window creation"
 msgstr "Default group, assigned on window creation"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
 msgid "Keep and manage separate group per window"
 msgstr "Keep and manage separate group per window"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
 msgid "Keyboard Update Handlers"
 msgstr "Keyboard Update Handlers"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:6
 msgid "Keyboard layout"
 msgstr "Keyboard layout"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:6
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:7
 msgid "Keyboard model"
 msgstr "Keyboard model"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:7
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:8
 msgid "Keyboard options"
 msgstr "Keyboard options"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:8
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:9
 msgid "Keyboard settings in gconf will be overridden from the system ASAP"
 msgstr "Keyboard settings in gconf will soon be overridden by the system"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:9
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:10
 msgid "Save/restore indicators together with layout groups"
 msgstr "Save/restore indicators together with layout groups"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:10
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:11
 msgid "Show layout names instead of group names"
 msgstr "Show layout names instead of group names"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:11
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:12
 msgid ""
 "Show layout names instead of group names (only for versions of XFree "
 "supporting multiple layouts)"
@@ -3326,7 +3317,7 @@ msgstr ""
 "Show layout names instead of group names (only for versions of XFree "
 "supporting multiple layouts)"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:12
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:13
 msgid ""
 "Very soon, keyboard settings in gconf will be overridden (from the system "
 "configuration)"
@@ -3334,13 +3325,17 @@ msgstr ""
 "Very soon, keyboard settings in gconf will be overridden (by the system "
 "configuration)"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:13
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:14
 msgid "keyboard layout"
 msgstr "keyboard layout"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:14
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:15
 msgid "keyboard model"
 msgstr "keyboard model"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:16
+msgid "modmap file list"
+msgstr "modmap file list"
 
 #: typing-break/drw-break-window.c:209
 msgid "_Postpone break"
