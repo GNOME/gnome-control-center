@@ -411,6 +411,22 @@ nautilus_mime_type_capplet_update_info (const char *mime_type) {
 				   gnome_vfs_mime_get_value (mime_type, "icon-filename"));
 }
 
+static void 
+application_menu_activated (GtkWidget *menu_item, gpointer data)
+{
+	const char *id;
+	const char *mime_type;
+
+	/* Get our stashed data */
+	id = gtk_object_get_data (GTK_OBJECT (menu_item), "id");
+	mime_type = gtk_object_get_data (GTK_OBJECT (menu_item), "mime_type");
+
+	if (id == NULL || mime_type == NULL) {
+		return;
+	}	
+	gnome_vfs_mime_set_default_application (mime_type, id);
+}
+
 static void
 populate_application_menu (GtkWidget *application_menu, const char *mime_type)
 {
@@ -419,7 +435,7 @@ populate_application_menu (GtkWidget *application_menu, const char *mime_type)
 	GnomeVFSMimeApplication *default_app, *application;
 	gboolean has_none, found_match;
 	char *mime_copy;
-	const char *name;
+	const char *id;
 	GList *children;
 	int index;
 
@@ -442,57 +458,41 @@ populate_application_menu (GtkWidget *application_menu, const char *mime_type)
 			application = copy_list->data;
 			menu_item = gtk_menu_item_new_with_label (application->name);
 
-			/* Store copy of application name in item; free when item destroyed. */
+			/* Store copy of application name and mime type in item; free when item destroyed. */
 			gtk_object_set_data_full (GTK_OBJECT (menu_item),
-						  "application",
-						  g_strdup (application->name),
+						  "id",
+						  g_strdup (application->id),
 						  g_free);
 
+			gtk_object_set_data_full (GTK_OBJECT (menu_item),
+						  "mime_type",
+						  g_strdup (mime_type),
+						  g_free);
+			
 			gtk_menu_append (GTK_MENU (new_menu), menu_item);
 			gtk_widget_show (menu_item);
+
+			gtk_signal_connect (GTK_OBJECT (menu_item), "activate", 
+					    application_menu_activated, NULL);
 		}
 	
 		gnome_vfs_mime_application_list_free (app_list);
 	}
 
-	/* Find all appliactions or add a "None" item */
-	if (has_none && default_app == NULL) {
-		/* Add all applications */
-		app_list = gnome_vfs_mime_get_all_applications (mime_type);
-		for (copy_list = app_list; copy_list != NULL; copy_list = copy_list->next) {
-			has_none = FALSE;
-
-			application = copy_list->data;
-			menu_item = gtk_menu_item_new_with_label (application->name);
-
-			/* Store copy of application name in item; free when item destroyed. */
-			gtk_object_set_data_full (GTK_OBJECT (menu_item),
-						  "application",
-						  g_strdup (application->name),
-						  g_free);
-
-			gtk_menu_append (GTK_MENU (new_menu), menu_item);
-			gtk_widget_show (menu_item);
-		}
-
-		if (app_list != NULL) {
-			gnome_vfs_mime_application_list_free (app_list);
-			app_list = NULL;
-		} else {
-			menu_item = gtk_menu_item_new_with_label (_("None"));
-			gtk_menu_append (GTK_MENU (new_menu), menu_item);
-			gtk_widget_show (menu_item);
-		}
-
+	/* Find all applications or add a "None" item */
+	if (has_none && default_app == NULL) {		
+		menu_item = gtk_menu_item_new_with_label (_("None"));
+		gtk_menu_append (GTK_MENU (new_menu), menu_item);
+		gtk_widget_show (menu_item);
 	} else {
 		/* Check and see if default is in the short list */
 		if (default_app != NULL) {
 			/* Iterate */
 			children = gtk_container_children (GTK_CONTAINER (new_menu));
 			for (index = 0; children != NULL; children = children->next, ++index) {				
-				name = (const char *)(gtk_object_get_data (GTK_OBJECT (children->data), "application"));
-				if (name != NULL) {											
-					if (strcmp (default_app->name, name) == 0) {
+				id = (const char *)(gtk_object_get_data (GTK_OBJECT (children->data), "id"));
+				if (id != NULL) {											
+					if (strcmp (default_app->id, id) == 0) {
 						found_match = TRUE;
 						break;
 					}
@@ -505,9 +505,43 @@ populate_application_menu (GtkWidget *application_menu, const char *mime_type)
 				/* Have menu appear with default application selected */
 				gtk_menu_set_active (GTK_MENU (new_menu), index);
 			} else {
-				/* FIXME bugzilla.eazel.com 1221: 
-				 * What should we do in this case? 
-				 * */
+				/* No match found.  We need to insert a menu item
+				 * and add the application to the default list */
+				menu_item = gtk_menu_item_new_with_label (default_app->name);
+
+				/* Store copy of application name and mime type in item; free when item destroyed. */
+				gtk_object_set_data_full (GTK_OBJECT (menu_item),
+							  "id",
+							  g_strdup (default_app->id),
+							  g_free);
+
+				gtk_object_set_data_full (GTK_OBJECT (menu_item),
+							  "mime_type",
+							  g_strdup (mime_type),
+							  g_free);
+				
+				gtk_menu_append (GTK_MENU (new_menu), menu_item);
+				gtk_widget_show (menu_item);
+
+				gtk_signal_connect (GTK_OBJECT (menu_item), "activate", 
+						    application_menu_activated, NULL);
+				
+				
+				/* Iterate */
+				children = gtk_container_children (GTK_CONTAINER (new_menu));
+				for (index = 0; children != NULL; children = children->next, ++index) {				
+					id = (const char *)(gtk_object_get_data (GTK_OBJECT (children->data), "id"));
+					if (id != NULL) {											
+						if (strcmp (default_app->id, id) == 0) {
+							found_match = TRUE;
+							break;
+						}
+					}
+				}
+				g_list_free (children);
+
+				/* Set it as active */
+				gtk_menu_set_active (GTK_MENU (new_menu), index);
 			}
 		}
 	}
@@ -516,43 +550,147 @@ populate_application_menu (GtkWidget *application_menu, const char *mime_type)
 }
 
 
+static void 
+component_menu_activated (GtkWidget *menu_item, gpointer data)
+{
+	const char *iid;
+	const char *mime_type;
+
+	/* Get our stashed data */
+	iid = gtk_object_get_data (GTK_OBJECT (menu_item), "iid");
+	mime_type = gtk_object_get_data (GTK_OBJECT (menu_item), "mime_type");
+
+	if (iid == NULL || mime_type == NULL) {
+		return;
+	}
+
+	gnome_vfs_mime_set_default_component (mime_type, iid);
+}
+
 static void
-populate_component_menu (GtkWidget *component_menu, const char *mime_string)
+populate_component_menu (GtkWidget *component_menu, const char *mime_type)
 {
 	GtkWidget *new_menu;
 	GtkWidget *menu_item;
-	GList *component_list;
+	GList *component_list, *copy_list;
 	GList *list_element;
-	gboolean has_none;
+	gboolean has_none, found_match;
 	char *component_name;
-
-	has_none = TRUE;
+	OAF_ServerInfo *default_component;
+	OAF_ServerInfo *info;
+	const char *iid;
+	GList *children;
+	int index;
 	
+	has_none = TRUE;
+	found_match = FALSE;
+
 	new_menu = gtk_menu_new ();
+	
+	/* Get the default component */
+	default_component = gnome_vfs_mime_get_default_component (mime_type);
 
-	/* Traverse the list looking for a match */
-	component_list = gnome_vfs_mime_get_short_list_components (mime_string);
-	for (list_element = component_list; list_element != NULL; list_element = list_element->next) {
-		has_none = FALSE;
+	/* Fill list with default components */
+	component_list = gnome_vfs_mime_get_short_list_components (mime_type);
+	if (component_list != NULL) {
+		for (list_element = component_list; list_element != NULL; list_element = list_element->next) {
+			has_none = FALSE;
 
-		component_name = name_from_oaf_server_info (list_element->data);
-		menu_item = gtk_menu_item_new_with_label (component_name);
-		gtk_menu_append (GTK_MENU (new_menu), menu_item);
-		gtk_widget_show (menu_item);
-		g_free (component_name);
-	}
+			component_name = name_from_oaf_server_info (list_element->data);
+			menu_item = gtk_menu_item_new_with_label (component_name);
 
-	if (mime_list != NULL) {
+			/* Store copy of component name and mime type in item; free when item destroyed. */
+			info = list_element->data;
+			gtk_object_set_data_full (GTK_OBJECT (menu_item),
+						  "iid",
+						  g_strdup (info->iid),
+						  g_free);
+
+			gtk_object_set_data_full (GTK_OBJECT (menu_item),
+						  "mime_type",
+						  g_strdup (mime_type),
+						  g_free);
+			
+			gtk_menu_append (GTK_MENU (new_menu), menu_item);
+			gtk_widget_show (menu_item);
+
+			gtk_signal_connect (GTK_OBJECT (menu_item), "activate", 
+					    component_menu_activated, NULL);
+		}
+
 		gnome_vfs_mime_component_list_free (component_list);
 	}
 	
-	/* Add None menu item */
-	if (has_none) {
+	/* Add a "None" item */
+	if (has_none && default_component == NULL) {		
 		menu_item = gtk_menu_item_new_with_label (_("None"));
 		gtk_menu_append (GTK_MENU (new_menu), menu_item);
 		gtk_widget_show (menu_item);
-	}
+	} else {
+		/* Check and see if default is in the short list */
+		if (default_component != NULL) {
+			/* Iterate */
+			children = gtk_container_children (GTK_CONTAINER (new_menu));
+			for (index = 0; children != NULL; children = children->next, ++index) {				
+				iid = (const char *)(gtk_object_get_data (GTK_OBJECT (children->data), "iid"));
+				if (iid != NULL) {											
+					if (strcmp (default_component->iid, iid) == 0) {
+						found_match = TRUE;
+						break;
+					}
+				}
+			}
+			g_list_free (children);
 
+			/* See if we have a match */
+			if (found_match) {
+				/* Have menu appear with default application selected */
+				gtk_menu_set_active (GTK_MENU (new_menu), index);
+			} else {
+				/* No match found.  We need to insert a menu item
+				 * and add the application to the default list */
+
+				component_name = name_from_oaf_server_info (copy_list->data);
+				menu_item = gtk_menu_item_new_with_label (component_name);
+
+
+				/* Store copy of application name and mime type in item; free when item destroyed. */
+				gtk_object_set_data_full (GTK_OBJECT (menu_item),
+							  "iid",
+							  g_strdup (default_component->iid),
+							  g_free);
+
+				gtk_object_set_data_full (GTK_OBJECT (menu_item),
+							  "mime_type",
+							  g_strdup (mime_type),
+							  g_free);
+				
+				gtk_menu_append (GTK_MENU (new_menu), menu_item);
+				gtk_widget_show (menu_item);
+
+				gtk_signal_connect (GTK_OBJECT (menu_item), "activate", 
+						    component_menu_activated, NULL);
+				
+				
+				/* Iterate */
+				children = gtk_container_children (GTK_CONTAINER (new_menu));
+				for (index = 0; children != NULL; children = children->next, ++index) {				
+					iid = (const char *)(gtk_object_get_data (GTK_OBJECT (children->data), "iid"));
+					if (iid != NULL) {											
+						if (strcmp (default_component->iid, iid) == 0) {
+							found_match = TRUE;
+							break;
+						}
+					}
+				}
+				g_list_free (children);
+
+				/* Set it as active */
+				gtk_menu_set_active (GTK_MENU (new_menu), index);
+			}
+		}
+	}
+	
 	gtk_option_menu_set_menu (GTK_OPTION_MENU (component_menu), new_menu);
 }
 
