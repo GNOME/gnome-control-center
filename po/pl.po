@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center\n"
-"POT-Creation-Date: 2002-03-28 20:58+0100\n"
-"PO-Revision-Date: 2002-03-28 21:28+0100\n"
+"POT-Creation-Date: 2002-04-05 22:58+0200\n"
+"PO-Revision-Date: 2002-04-05 23:01+0200\n"
 "Last-Translator: GNOME PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:1
-msgid "_Enable keyboard accesibility"
+msgid "_Enable keyboard accessibility"
 msgstr "_Dostępność klawiatury"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:1
@@ -31,15 +31,16 @@ msgid "Select CDE AccessX file"
 msgstr "Wybór pliku CDE AccessX"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-msgid "AccessX"
-msgstr "AccessX"
+#: capplets/keyboard/keyboard.desktop.in.h:1
+msgid "Keyboard"
+msgstr "Klawiatura"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
 msgid "Keyboard Accessibility Properties"
 msgstr "Ustawienia dostępności klawiatury"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:1
-msgid "&lt;b&gt;Sample&lt;/b&gt;"
+msgid "&lt;b&gt;Test&lt;/b&gt;"
 msgstr "&lt;b&gt;Próbka&lt;/b&gt;"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:1
@@ -89,14 +90,13 @@ msgstr "Ma_ksymalna szybkość wskaźnika :"
 msgid ""
 "MouseKeys can benefit StickyKey users or anyone unable to use the pointing "
 "device or in need of 'pixel by pixel' position control of the pointer.  When "
-"activated, MouseKeys turns the numeric keypad into a mouse control pad. "
+"activated, MouseKeys turns the numeric keypad into a mouse control pad."
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:1
 msgid ""
-"SlowKeys can benefit users who hit unwanted keys as they type.  SlowKeys "
-"instructs the system not to accept keys as pressed, unless the key has been "
-"pressed and held for a user adjustable amount of time (i.e., the key delay)."
+"Only accept keys after they have been pressed and held for a user adjustable "
+"amount of time."
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:1
@@ -121,7 +121,7 @@ msgstr "_Czas przyspieszania do maksymalnej prędkości :"
 msgid ""
 "ToggleKeys can benefit the visually impaired user who has difficulty seeing "
 "the small LED keyboard indicators.  ToggleKeys provides one beep when an LED "
-"(e.g., the Caps Lock LED) is turned on and two beeps when it is turned off"
+"(e.g., the Caps Lock LED) is turned on and two beeps when it is turned off."
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:1
@@ -234,12 +234,16 @@ msgid "_Scaled"
 msgstr "Prze_skalowany"
 
 #: capplets/background/background-properties-capplet.c:1
-msgid "S_tretched"
+msgid "Stretc_hed"
 msgstr "_Rozciągnięty"
 
 #: capplets/background/background-properties-capplet.c:1
 msgid "_No Picture"
 msgstr "_Bez obrazu"
+
+#: capplets/background/background-properties-capplet.c:1
+msgid "_Picture"
+msgstr "_Obraz"
 
 #: capplets/background/background-properties-capplet.c:1
 #: capplets/common/capplet-util.c:1
@@ -251,16 +255,13 @@ msgid "Retrieve and store legacy settings"
 msgstr "Pobiera i zapisuje tradycyjne ustawienia"
 
 #: capplets/background/background-properties-capplet.c:1
-msgid "Background properties"
+#: capplets/background/background-properties.glade.h:1
+msgid "Background Preferences"
 msgstr "Ustawienia tła"
 
 #: capplets/background/background-properties.glade.h:1
-msgid "Background Properties"
-msgstr "Ustawienia tła"
-
-#: capplets/background/background-properties.glade.h:1
-msgid "Border the picture with a:"
-msgstr "Ramka obrazu:"
+msgid "Bor_der the picture with a:"
+msgstr "_Ramka obrazu:"
 
 #: capplets/background/background-properties.glade.h:1
 msgid "E-Mail"
@@ -277,10 +278,6 @@ msgstr "Wybór koloru"
 #: capplets/background/background-properties.glade.h:1
 msgid "Picture Options:"
 msgstr "Opcje obrazu:"
-
-#: capplets/background/background-properties.glade.h:1
-msgid "Picture:"
-msgstr "Obraz:"
 
 #: capplets/background/background-properties.glade.h:1
 msgid "Primary Color"
@@ -448,6 +445,7 @@ msgid "Choose the applications used by default"
 msgstr "Ustawienia domyślnych aplikacji do pełnienia różnych funkcji"
 
 #: capplets/default-applications/default-applications.desktop.in.h:1
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:1
 msgid "Preferred Applications"
 msgstr "Preferowane aplikacje"
 
@@ -478,10 +476,6 @@ msgstr "_Dowolna przeglądarka WWW:"
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:1
 msgid "Co_mmand:"
 msgstr "_Polecenie:"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:1
-msgid "Default Applications"
-msgstr "Domyślne aplikacje"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:1
 msgid "Default Help Browser"
@@ -602,103 +596,6 @@ msgstr "Tradycyjne aplikacje"
 #: capplets/desktop-links/legacy-applications.desktop.in.in.h:1
 msgid "Legacy applications settings (grdb)"
 msgstr "Ustawienie tradycyjnych aplikacji (grdb)"
-
-#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
-msgid "Appearance"
-msgstr "Wygląd"
-
-#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
-msgid "Configure window appearance"
-msgstr "Konfiguruje wygląd okien"
-
-#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:1
-msgid "Configure key shortcuts"
-msgstr "Konfiguruje skróty klawiszowe"
-
-#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:1
-msgid "Shortcuts"
-msgstr "Skróty"
-
-#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:1
-msgid "Configure window focusing"
-msgstr "Konfiguruje sposób aktywacji okien"
-
-#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:1
-msgid "Focus behavior"
-msgstr "Aktywacja"
-
-#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:1
-msgid "Configure window properties"
-msgstr "Konfiguruje właściwości okien"
-
-#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:1
-msgid "Matched Windows"
-msgstr "Dopasowywanie okien"
-
-#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:1
-msgid "Configure window minimization and maximization"
-msgstr "Konfiguruje minimalizację i maksymalizację okien"
-
-#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:1
-msgid "Minimizing and Maximizing"
-msgstr "Minimalizacja i maksymalizacja"
-
-#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
-msgid "Configure window manager configuration properties"
-msgstr "Konfiguracja menedżera okien"
-
-#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
-msgid "Meta"
-msgstr "Meta"
-
-#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:1
-msgid "Configure miscellaneous window features"
-msgstr "Konfiguruje różne ustawienia dotyczące okien"
-
-#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:1
-msgid "Miscellaneous"
-msgstr "Różne"
-
-#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:1
-msgid "Configure window move/resize"
-msgstr "Konfiguruje sposób przenoszenia i zmiany rozmiaru okien"
-
-#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:1
-msgid "Moving and Resizing"
-msgstr "Przenoszenie i zmiana rozmiaru"
-
-#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:1
-msgid "Configure window placement"
-msgstr "Konfiguruje sposób rozmieszczania okien"
-
-#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:1
-msgid "Placement"
-msgstr "Rozmieszczanie"
-
-#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:1
-msgid "Control Center Menu"
-msgstr "Menu Centrum sterowania"
-
-#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:1
-msgid "Sawfish window manager"
-msgstr "Menedżer okien Sawfish"
-
-#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:1
-msgid "Enable window manager sound events"
-msgstr "Wykorzystanie dźwięku przez menedżera okien"
-
-#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:1
-#: capplets/sound/sound.desktop.in.h:1
-msgid "Sound"
-msgstr "Dźwięk"
-
-#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:1
-msgid "Configure workspaces"
-msgstr "Konfiguruje obszary robocze"
-
-#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:1
-msgid "Workspaces"
-msgstr "Obszary robocze"
 
 #.
 #. * Translatable strings file
@@ -1055,6 +952,10 @@ msgstr "Strony podręcznikowe"
 msgid "Electronic mail transmission"
 msgstr "Przesyłanie poczty elektronicznej"
 
+#: capplets/file-types/service-info.c:1
+msgid "Gnome documentation"
+msgstr "Dokumentacja GNOME"
+
 #: capplets/font/font-properties.desktop.in.h:1
 msgid "Font"
 msgstr "Czcionka"
@@ -1285,10 +1186,6 @@ msgstr "_Dźwięk"
 msgid "_Volume:"
 msgstr "_Głośność:"
 
-#: capplets/keyboard/keyboard.desktop.in.h:1
-msgid "Keyboard"
-msgstr "Klawiatura"
-
 #: capplets/mouse/gnome-mouse-properties.c:1
 #, c-format
 msgid ""
@@ -1503,6 +1400,10 @@ msgstr "Mysz"
 msgid "Configure GNOME's use of sound"
 msgstr "Konfiguracja wykorzystania dźwięku przez GNOME"
 
+#: capplets/sound/sound.desktop.in.h:1
+msgid "Sound"
+msgstr "Dźwięk"
+
 #: capplets/sound/sound-properties-capplet.c:1
 msgid "Sound preferences"
 msgstr "Ustawienia dźwięku"
@@ -1519,38 +1420,9 @@ msgstr "_Dźwięki zdarzeń"
 msgid "_Sounds for events"
 msgstr "_Powiązanie dźwięków ze zdarzeniami"
 
-#. just 8 short names that will serve as samples for titles in demo
 #: capplets/theme-switcher/control/control.c:1
-msgid "Eenie"
-msgstr "Gdyby"
-
-#: capplets/theme-switcher/control/control.c:1
-msgid "Mynie"
-msgstr "nie"
-
-#: capplets/theme-switcher/control/control.c:1
-msgid "Catcha"
-msgstr "to by"
-
-#: capplets/theme-switcher/control/control.c:1
-msgid "By Its"
-msgstr "nie"
-
-#: capplets/theme-switcher/control/control.c:1
-msgid "Meenie"
-msgstr "kózka"
-
-#: capplets/theme-switcher/control/control.c:1
-msgid "Moe"
-msgstr "skakała"
-
-#: capplets/theme-switcher/control/control.c:1
-msgid "Tiger"
-msgstr "nóżki"
-
-#: capplets/theme-switcher/control/control.c:1
-msgid "Toe"
-msgstr "złamała"
+msgid "Eenie Meenie Mynie Moe Catcha Tiger By Its Toe"
+msgstr ""
 
 #: capplets/theme-switcher/control/control.c:1
 msgid "Selected themes from above will be tested by previewing here."
@@ -1787,6 +1659,22 @@ msgid ""
 msgstr ""
 "Typ bg_applier: BG_APPLIER_ROOT dla głównego okna serwera lub "
 "BG_APPLIER_PREVIEW dla podglądu"
+
+#: libbackground/applier.c:1
+msgid "Preview Width"
+msgstr "Szerokość podglądu"
+
+#: libbackground/applier.c:1
+msgid "Width if applier is a preview: Defaults to 64."
+msgstr ""
+
+#: libbackground/applier.c:1
+msgid "Preview Height"
+msgstr "Wysokość podglądu"
+
+#: libbackground/applier.c:1
+msgid "Height if applier is a preview: Defaults to 48."
+msgstr ""
 
 #: libbackground/applier.c:1
 #, c-format
