@@ -82,6 +82,8 @@ if $PKG_CONFIG --exists xft ; then
 fi
 
 PKG_CHECK_MODULES(FONT_CAPPLET, $COMMON_MODULES $xft_modules)
+
+PKG_CHECK_MODULES(AT_CAPPLET, $COMMON_MODULES)
 				
 dnl
 dnl Check for XRandR, needed for display capplet
@@ -262,6 +264,9 @@ AC_SUBST(SOUND_CAPPLET_LIBS)
 AC_SUBST(FONT_CAPPLET_CFLAGS)
 AC_SUBST(FONT_CAPPLET_LIBS)
 
+AC_SUBST(AT_CAPPLET_CFLAGS)
+AC_SUBST(AT_CAPPLET_LIBS)
+
 AC_SUBST(DISPLAY_CAPPLET_CFLAGS)
 AC_SUBST(DISPLAY_CAPPLET_LIBS)
 
@@ -362,6 +367,7 @@ capplets/theme-switcher/Makefile
 capplets/ui-properties/Makefile
 capplets/accessibility/Makefile
 capplets/accessibility/keyboard/Makefile
+capplets/accessibility/at-properties/Makefile
 capplets/network/Makefile
 capplets/windows/Makefile
 schemas/Makefile

@@ -1,1 +1,1 @@
-SUBDIRS = keyboard
+SUBDIRS = keyboard at-properties
