@@ -315,7 +315,8 @@ applier_apply_prefs (Applier *applier, Preferences *prefs,
 	}
 
 	if (!prefs->enabled) {
-		draw_disabled_message (applier_get_preview_widget (applier));
+		if (do_preview)
+			draw_disabled_message (applier_get_preview_widget (applier));
 		return;
 	}
 
@@ -1386,7 +1387,7 @@ output_compat_prefs (Preferences *prefs)
 	gchar *color;
 	
 	gnome_config_pop_prefix ();
-	gnome_config_set_bool ("/Background/Default/Enabled", prefs->wallpaper_enabled);
+	gnome_config_set_bool ("/Background/Default/Enabled", prefs->enabled);
 	gnome_config_set_string ("/Background/Default/wallpaper",
 				 (prefs->wallpaper_filename) ? prefs->wallpaper_filename : "none");
 	gnome_config_set_int ("/Background/Default/wallpaperAlign", prefs->wallpaper_type);

@@ -150,6 +150,7 @@ get_legacy_settings (Bonobo_ConfigDatabase db)
 	gchar *val_string, *val_filename;
 	int val_ulong, val_long;
 
+	COPY_FROM_LEGACY (boolean, "/main/enabled", bool, "/Background/Default/Enabled=true");
 	COPY_FROM_LEGACY (filename, "/main/wallpaper_filename", string, "/Background/Default/wallpaper=none");
 	COPY_FROM_LEGACY (ulong, "/main/wallpaper_type", int, "/Background/Default/wallpaperAlign=0");
 	copy_color_from_legacy (db, "/main/color1", "/Background/Default/color1");
