@@ -379,19 +379,18 @@ selected_row_callback (GtkWidget *widget, gint row, gint column, GdkEvent *event
  * create_mime_clist:
  * 
  **/
-
 GtkWidget *
 create_mime_clist (void)
 {
-        GtkWidget *retval;
+        GtkWidget *window;
         gchar *titles[3];
 
         titles[0] = _("Mime Type");
         titles[1] = _("Description");
         titles[2] = _("Application");
         
-        retval = gtk_scrolled_window_new (NULL, NULL);
-        gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (retval),
+        window = gtk_scrolled_window_new (NULL, NULL);
+        gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (window),
                                         GTK_POLICY_AUTOMATIC,
                                         GTK_POLICY_AUTOMATIC);
 	clist = gtk_clist_new_with_titles (3, titles);
@@ -400,15 +399,13 @@ create_mime_clist (void)
         gtk_clist_set_selection_mode (GTK_CLIST (clist), GTK_SELECTION_BROWSE);
         gtk_clist_set_auto_sort (GTK_CLIST (clist), TRUE);
         
-        if (clist) {
-                g_hash_table_foreach (mime_types, (GHFunc) add_mime_vals_to_clist, clist);
-	}
+        g_hash_table_foreach (mime_types, (GHFunc) add_mime_vals_to_clist, clist);
 	
         gtk_clist_columns_autosize (GTK_CLIST (clist));
         gtk_clist_select_row (GTK_CLIST (clist), 0, 0);
-        gtk_container_add (GTK_CONTAINER (retval), clist);
+        gtk_container_add (GTK_CONTAINER (window), clist);
         
-        return retval;
+        return window;
 }
 
 
@@ -463,12 +460,14 @@ finalize_mime_type_foreach (gpointer mime_type, gpointer info, gpointer data)
                 extension = g_string_new ("");
         g_string_free (extension, TRUE);
 }
+
 static void
-finalize_user_mime ()
+finalize_user_mime (void)
 {
         g_hash_table_foreach (user_mime_types, finalize_mime_type_foreach, NULL);
         g_hash_table_foreach (initial_user_mime_types, finalize_mime_type_foreach, NULL);
 }
+
 void
 init_mime_type (void)
 {
@@ -478,6 +477,7 @@ init_mime_type (void)
 	initial_user_mime_types = g_hash_table_new (g_str_hash, g_str_equal);
 	user_mime_types = g_hash_table_new (g_str_hash, g_str_equal);
 
+	/* FIXME bugzilla.eazel.com 796: Looks in gnome-libs prefix instead of gnome-vfs prefix. */
 	mime_info_dir = gnome_unconditional_datadir_file ("mime-info");
 	mime_load_from_dir (mime_info_dir, TRUE);
 	g_free (mime_info_dir);
@@ -624,7 +624,7 @@ write_initial_mime (void)
 }
 
 void
-reread_list ()
+reread_list (void)
 {
         gtk_clist_freeze (GTK_CLIST (clist));
         gtk_clist_clear (GTK_CLIST (clist));
@@ -635,13 +635,14 @@ reread_list ()
 static void
 clean_mime_type (gpointer mime_type, gpointer mime_info, gpointer data)
 {
-        /* we should write this )-: */
+        /* FIXME: we should write this )-: */
 }
 
 void
-discard_mime_info ()
+discard_mime_info (void)
 {
         gchar *filename;
+
 	g_hash_table_foreach (user_mime_types, clean_mime_type, NULL);
 	g_hash_table_destroy (user_mime_types);
 	g_hash_table_foreach (initial_user_mime_types, clean_mime_type, NULL);
@@ -655,10 +656,3 @@ discard_mime_info ()
         reread_list ();
 	g_free (filename);
 }
-
-
-
-
-
-
-
