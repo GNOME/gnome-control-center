@@ -30,6 +30,14 @@
 
 #include "config-manager-dialog.h"
 
+static gboolean is_global;
+
+static struct poptOption rollback_options[] = {
+	{"global", 'g', POPT_ARG_NONE, &is_global, 0,
+	 N_("Operate on global backends")},
+	{NULL, '\0', 0, NULL, 0}
+};
+
 int
 main (int argc, char **argv) 
 {
@@ -38,10 +46,14 @@ main (int argc, char **argv)
         bindtextdomain (PACKAGE, GNOMELOCALEDIR);
         textdomain (PACKAGE);
 
+	gnomelib_register_popt_table (rollback_options,
+				      _("Options for the rollback GUI"));
+
 	gnome_init ("config-manager", VERSION, argc, argv);
 	glade_gnome_init ();
 
-	dialog = config_manager_dialog_new (CM_DIALOG_USER);
+	dialog = config_manager_dialog_new
+		(is_global ? CM_DIALOG_GLOBAL : CM_DIALOG_USER);
 	gtk_widget_show (dialog);
 
 	gtk_signal_connect (GTK_OBJECT (dialog), "destroy",
