@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0.6\n"
-"POT-Creation-Date: 1999-09-20 19:14-0400\n"
-"PO-Revision-Date: 1999-08-18 00:39:42 EDT\n"
+"POT-Creation-Date: 1999-10-05 02:44-0400\n"
+"PO-Revision-Date: 1999-10-05 03:18-0400\n"
 "Last-Translator: Sergey Panov <sipan@mit.edu>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -111,30 +111,32 @@ msgstr "Мозаика"
 #: capplets/gnome-edit-properties/gnome-edit-properties.c:179
 #: capplets/keyboard-properties/keyboard-properties.c:81
 #: capplets/mouse-properties/mouse-properties.c:111
-#: capplets/screensaver-properties/callbacks.c:804
-#: capplets/session-properties/session-properties.c:296
+#: capplets/screensaver-properties/callbacks.c:802
+#: capplets/session-properties/session-properties.c:300
 #: capplets/sound-properties/sound-properties.c:690
 #: capplets/theme-switcher/gui.c:362
 #: capplets/ui-properties/ui-properties.c:513
-#: capplets/wm-properties/wm-properties-capplet.c:623
+#: capplets/wm-properties/wm-properties-capplet.c:639
 msgid ""
 "No help is available/installed for these settings. Please make sure you\n"
 "have the GNOME User's Guide installed on your system."
 msgstr ""
+"Справочная информация для этих настроек не доступна. Проверьте пожалуйста\n"
+"что Руководство пользователя GNOME установлено на вашей системе."
 
 #: capplets/background-properties/property-background.c:1136
 #: capplets/bell-properties/bell-properties.c:63
 #: capplets/gnome-edit-properties/gnome-edit-properties.c:181
 #: capplets/keyboard-properties/keyboard-properties.c:83
 #: capplets/mouse-properties/mouse-properties.c:113
-#: capplets/screensaver-properties/callbacks.c:806
-#: capplets/session-properties/session-properties.c:298
+#: capplets/screensaver-properties/callbacks.c:804
+#: capplets/session-properties/session-properties.c:302
 #: capplets/sound-properties/sound-properties.c:692
 #: capplets/sound-properties/sound-properties.c:753
 #: capplets/theme-switcher/gui.c:364
 #: capplets/ui-properties/ui-properties.c:515
-#: capplets/wm-properties/wm-properties-capplet.c:625
-#: control-center/callbacks.c:74 control-center/capplet-widget.c:263
+#: capplets/wm-properties/wm-properties-capplet.c:641
+#: control-center/callbacks.c:75 control-center/capplet-widget.c:263
 msgid "Close"
 msgstr "Закрыть"
 
@@ -207,11 +209,11 @@ msgstr "Высота (Гц)"
 msgid "Duration (ms)"
 msgstr "Продолжительность (милл сек)"
 
-#: capplets/bell-properties/bell-properties.c:225
+#: capplets/bell-properties/bell-properties.c:219
 msgid "Test"
 msgstr "Проверить"
 
-#: capplets/bell-properties/bell-properties.c:247
+#: capplets/bell-properties/bell-properties.c:241
 msgid ""
 "an initialization error occurred while starting 'bell-properties-capplet'.\n"
 "aborting...\n"
@@ -278,9 +280,8 @@ msgid "Mime Type: "
 msgstr "Mime тип: "
 
 #: capplets/mime-type/edit-window.c:301
-#, fuzzy
 msgid "Add"
-msgstr "Добавить..."
+msgstr "Добавить"
 
 #: capplets/mime-type/edit-window.c:309
 #: capplets/url-properties/url-properties.c:133
@@ -419,19 +420,19 @@ msgstr ""
 
 #: capplets/mime-type/mime-type-capplet.c:79
 #: capplets/session-properties/session-properties.c:198
-#: capplets/wm-properties/wm-properties-capplet.c:1067
+#: capplets/wm-properties/wm-properties-capplet.c:1084
 msgid "Delete"
 msgstr "Удалить"
 
 #: capplets/mime-type/mime-type-capplet.c:89
 #: capplets/session-properties/session-properties.c:188
-#: capplets/wm-properties/wm-properties-capplet.c:1057
+#: capplets/wm-properties/wm-properties-capplet.c:1074
 msgid "Add..."
 msgstr "Добавить..."
 
 #: capplets/mime-type/mime-type-capplet.c:93
 #: capplets/session-properties/session-properties.c:193
-#: capplets/wm-properties/wm-properties-capplet.c:1062
+#: capplets/wm-properties/wm-properties-capplet.c:1079
 msgid "Edit..."
 msgstr "Исправить..."
 
@@ -544,17 +545,17 @@ msgstr "Нет хранителя экрана"
 msgid "Random Screensaver"
 msgstr "Случайный хранитель экрана"
 
-#: capplets/screensaver-properties/callbacks.c:484
+#: capplets/screensaver-properties/callbacks.c:483
 #: capplets/screensaver-properties/screensaver-properties-capplet.c:54
 msgid "Settings..."
 msgstr "Свойства..."
 
 #. we need to special case random
-#: capplets/screensaver-properties/callbacks.c:492
+#: capplets/screensaver-properties/callbacks.c:491
 msgid "Random Settings"
 msgstr "Случайные параметры"
 
-#: capplets/screensaver-properties/callbacks.c:502
+#: capplets/screensaver-properties/callbacks.c:501
 #, c-format
 msgid "%s Settings..."
 msgstr "Настройка %s"
@@ -676,9 +677,8 @@ msgid "State"
 msgstr "Состояние"
 
 #: capplets/session-properties/gsm-client-list.c:138
-#, fuzzy
 msgid "Program"
-msgstr "Программа:"
+msgstr "Программа"
 
 #: capplets/session-properties/gsm-client-row.c:31
 msgid "Inactive"
@@ -748,7 +748,7 @@ msgstr ""
 msgid "Always started on every login."
 msgstr ""
 
-#: capplets/session-properties/gsm-protocol.c:503
+#: capplets/session-properties/gsm-protocol.c:500
 msgid "Remove Program"
 msgstr "Удалить программу"
 
@@ -784,7 +784,7 @@ msgstr "Команда"
 msgid "Browse Currently Running Programs..."
 msgstr "Просмотр запущенных программ..."
 
-#: capplets/session-properties/session-properties.c:389
+#: capplets/session-properties/session-properties.c:393
 msgid "Only display warnings."
 msgstr ""
 
@@ -872,46 +872,44 @@ msgstr ""
 
 #: capplets/theme-switcher/demo.c:50
 msgid "One"
-msgstr ""
+msgstr "Один"
 
 #: capplets/theme-switcher/demo.c:50
-#, fuzzy
 msgid "Two"
-msgstr "Сверху"
+msgstr "Два"
 
 #. just 8 short names that will serve as samples for titles in demo
 #: capplets/theme-switcher/demo.c:52
-#, fuzzy
 msgid "Eenie"
-msgstr "Событие"
+msgstr "Эники"
 
 #: capplets/theme-switcher/demo.c:52
 msgid "Meenie"
-msgstr ""
+msgstr "Беники"
 
 #: capplets/theme-switcher/demo.c:53
 msgid "Mynie"
-msgstr ""
+msgstr "Ели"
 
 #: capplets/theme-switcher/demo.c:53
 msgid "Moe"
-msgstr ""
+msgstr "Вареники"
 
 #: capplets/theme-switcher/demo.c:54
 msgid "Catcha"
-msgstr ""
+msgstr "Эники"
 
 #: capplets/theme-switcher/demo.c:54
 msgid "Tiger"
-msgstr ""
+msgstr "Беники"
 
 #: capplets/theme-switcher/demo.c:55
 msgid "By Its"
-msgstr ""
+msgstr "Съели"
 
 #: capplets/theme-switcher/demo.c:55
 msgid "Toe"
-msgstr ""
+msgstr "Ведро"
 
 #: capplets/theme-switcher/demo.c:114
 msgid "Selected themes from above will be tested by previewing here."
@@ -960,7 +958,7 @@ msgstr ""
 
 #: capplets/theme-switcher/gui.c:115
 msgid "Select a theme to install"
-msgstr ""
+msgstr "Выберите тему для установки"
 
 #: capplets/theme-switcher/gui.c:192
 msgid "Available Themes"
@@ -986,7 +984,7 @@ msgstr ""
 #.
 #: capplets/theme-switcher/gui.c:235
 msgid "User Font"
-msgstr ""
+msgstr "Шрифт пользователя"
 
 #. FIXME - should really get this from X somehow
 #. for now we just assume default gtk font
@@ -996,7 +994,7 @@ msgstr "-cronyx-helvetica-medium-r-normal--*-120-*-*-*-*-koi8-*"
 
 #: capplets/theme-switcher/gui.c:272
 msgid "Use custom font."
-msgstr ""
+msgstr "Шрифт на заказ."
 
 #: capplets/theme-switcher/install.c:26
 msgid "Home directory doesn't exist!\n"
@@ -1009,7 +1007,7 @@ msgstr "Эта тема отсутствует"
 #: capplets/theme-switcher/install.c:68
 #, c-format
 msgid "Command '%s' failed"
-msgstr ""
+msgstr "Команда '%s' не прошла"
 
 #: capplets/theme-switcher/install.c:73
 msgid "Unknown file format"
@@ -1021,11 +1019,11 @@ msgstr "Отцепление и перенос панелей инструментов"
 
 #: capplets/ui-properties/ui-properties.c:58
 msgid "Toolbars have relieved border"
-msgstr ""
+msgstr "Скошенные границы у панелей инструментов"
 
 #: capplets/ui-properties/ui-properties.c:63
 msgid "Toolbar buttons have relieved border"
-msgstr ""
+msgstr "Скошенные границы у кнопок панелей инструментов"
 
 #: capplets/ui-properties/ui-properties.c:68
 msgid "Toolbars have line separators"
@@ -1041,7 +1039,7 @@ msgstr "Можно отсоединять и переносить меню"
 
 #: capplets/ui-properties/ui-properties.c:107
 msgid "Menus have relieved border"
-msgstr ""
+msgstr "Скошенные границы у меню"
 
 #: capplets/ui-properties/ui-properties.c:111
 msgid "Submenus can be torn off"
@@ -1136,17 +1134,14 @@ msgid "Place dialogs over application window when possible"
 msgstr "Помещать диалоги поверх окон приложения когда это возможно"
 
 #: capplets/ui-properties/ui-properties.c:241
-#, fuzzy
 msgid "Dialog Layout"
-msgstr "Кнопки диалогов"
+msgstr "Организация диалогов"
 
 #: capplets/ui-properties/ui-properties.c:242
-#, fuzzy
 msgid "Dialog Behavior"
-msgstr "Свойства диалогов"
+msgstr "Поведение диалогов"
 
 #: capplets/ui-properties/ui-properties.c:248
-#, fuzzy
 msgid "Default MDI Mode"
 msgstr "Режим MDI по умолчанию"
 
@@ -1184,7 +1179,7 @@ msgstr "Снизу"
 
 #: capplets/ui-properties/ui-properties.c:275
 msgid "GNOME MDI Options"
-msgstr ""
+msgstr "Настройки MDI GNOME"
 
 #: capplets/url-properties/url-properties.c:48
 msgid "Error initializing the `url-properties' capplet."
@@ -1274,66 +1269,86 @@ msgid ""
 "foot menu\n"
 msgstr ""
 
-#: capplets/wm-properties/wm-properties-capplet.c:509
+#: capplets/wm-properties/wm-properties-capplet.c:496
+#: capplets/wm-properties/wm-properties-capplet.c:746
+#: capplets/wm-properties/wm-properties-capplet.c:854
+#: capplets/wm-properties/wm-properties-capplet.c:861
+#: capplets/wm-properties/wm-properties-capplet.c:1007
+#: control-center/capplet-manager.c:181
+msgid "OK"
+msgstr "OK"
+
+#: capplets/wm-properties/wm-properties-capplet.c:514
 msgid ""
 "Your current window manager has been changed. In order for\n"
 "this change to be saved, you will need to save your current\n"
-"session. This can be done either selecting \"Save Current Session\"\n"
+"session. You can do so immediately by selecting the \"Save session\n"
+"now\" below, or you can save your session later.  This can be\n"
+"done either selecting \"Save Current Session\" under \"Settings\"\n"
+"in the main menu, or by turning on \"Save Current Setup\" when\n"
+"you log out.\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:521
+msgid "Save Session Later"
+msgstr "Сохранить сеанс позже"
+
+#: capplets/wm-properties/wm-properties-capplet.c:521
+msgid "Save Session Now"
+msgstr "Сохранить сеанс сейчас"
+
+#: capplets/wm-properties/wm-properties-capplet.c:524
+msgid ""
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. This can be done by either selecting \"Save Current Session\"\n"
 "under \"Settings\" in the main menu, or by turning on\n"
 "\"Save Current Setup\" when you log out.\n"
 msgstr ""
 
-#: capplets/wm-properties/wm-properties-capplet.c:729
+#: capplets/wm-properties/wm-properties-capplet.c:745
 msgid "Add New Window Manager"
 msgstr "Добавить новый диспетчер окон"
 
-#: capplets/wm-properties/wm-properties-capplet.c:730
-#: capplets/wm-properties/wm-properties-capplet.c:838
-#: capplets/wm-properties/wm-properties-capplet.c:845
-#: capplets/wm-properties/wm-properties-capplet.c:990
-#: control-center/capplet-manager.c:180
-msgid "OK"
-msgstr "OK"
-
-#: capplets/wm-properties/wm-properties-capplet.c:730
-#: control-center/capplet-manager.c:185
+#: capplets/wm-properties/wm-properties-capplet.c:746
+#: control-center/capplet-manager.c:186
 msgid "Cancel"
 msgstr "Отменить"
 
-#: capplets/wm-properties/wm-properties-capplet.c:741
+#: capplets/wm-properties/wm-properties-capplet.c:757
 msgid "Name:"
 msgstr "Имя: "
 
-#: capplets/wm-properties/wm-properties-capplet.c:754
+#: capplets/wm-properties/wm-properties-capplet.c:770
 msgid "Command:"
 msgstr "Команда:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:767
+#: capplets/wm-properties/wm-properties-capplet.c:783
 msgid "Configuration Command:"
 msgstr "Команда настройки:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:786
+#: capplets/wm-properties/wm-properties-capplet.c:802
 msgid "Window manager is session managed"
 msgstr "Диспетчер окон также и диспетчер сеансов"
 
-#: capplets/wm-properties/wm-properties-capplet.c:836
+#: capplets/wm-properties/wm-properties-capplet.c:852
 msgid "Name cannot be empty"
 msgstr "Имя не может быть пустым"
 
-#: capplets/wm-properties/wm-properties-capplet.c:843
+#: capplets/wm-properties/wm-properties-capplet.c:859
 msgid "Command cannot be empty"
 msgstr "Команда не может быть пустой"
 
-#: capplets/wm-properties/wm-properties-capplet.c:892
-#: capplets/wm-properties/wm-properties-capplet.c:934
+#: capplets/wm-properties/wm-properties-capplet.c:908
+#: capplets/wm-properties/wm-properties-capplet.c:950
 msgid "Edit Window Manager"
 msgstr "Изменение диспетчера окон"
 
-#: capplets/wm-properties/wm-properties-capplet.c:989
+#: capplets/wm-properties/wm-properties-capplet.c:1006
 msgid "You cannot delete the current Window Manager"
 msgstr "Используемый диспетчер окон удалить нельзя"
 
-#: capplets/wm-properties/wm-properties-capplet.c:1102
+#: capplets/wm-properties/wm-properties-capplet.c:1119
 msgid ""
 "an initialization error occurred while starting 'wm-properties-capplet'.\n"
 "aborting...\n"
@@ -1341,29 +1356,29 @@ msgstr ""
 "ошибка инициализации при запуске 'wm-properties-capplet'.\n"
 "исполнение прервано ...\n"
 
-#: control-center/callbacks.c:72
+#: control-center/callbacks.c:73
 msgid ""
 "No help is available/installed. Please make sure you\n"
 "have the GNOME User's Guide installed on your system."
 msgstr ""
 
-#: control-center/callbacks.c:94
+#: control-center/callbacks.c:95
 msgid "GNOME Control Center"
 msgstr "Центр управления GNOME"
 
-#: control-center/callbacks.c:97
+#: control-center/callbacks.c:98
 msgid "Desktop Properties manager."
 msgstr "Диспетчер свойств рабочего стола."
 
-#: control-center/capplet-manager.c:170
+#: control-center/capplet-manager.c:171
 msgid "Try"
 msgstr "Попробовать"
 
-#: control-center/capplet-manager.c:175
+#: control-center/capplet-manager.c:176
 msgid "Revert"
 msgstr "Вернуть"
 
-#: control-center/capplet-manager.c:188 control-center/main.c:31
+#: control-center/capplet-manager.c:189 control-center/main.c:31
 msgid "Help"
 msgstr "Справка"
 
@@ -1444,12 +1459,3 @@ msgstr ""
 msgid "Control Center"
 msgstr "Центр управления GNOME"
 
-#~ msgid "Extension: "
-#~ msgstr "Расширение: "
-
-#~ msgid "Category"
-#~ msgstr "Категория"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'session-properties-capplet'."
-#~ msgstr "ошибка инициализации при запуске 'session-properties-capplet'."
