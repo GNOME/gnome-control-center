@@ -206,7 +206,9 @@ create_image (ThemeThumbnailData *theme_thumbnail_data,
   if (folder_icon_name == NULL) {
     folder_icon_name = gnome_icon_theme_lookup_icon (icon_theme, "gnome-fs-directory", 48, NULL, NULL);
   }
-  
+ 
+  g_object_unref (icon_theme);
+ 
   if (folder_icon_name != NULL)
     {
       folder_icon = gdk_pixbuf_new_from_file (folder_icon_name, NULL);
