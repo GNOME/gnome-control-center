@@ -263,19 +263,22 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 
 /*******************************************************************************/
 
-static void
+static gboolean
 xrm_get_bool (GConfClient *client, XrmDatabase *db, char const *gconf_key,
 	      char const *res_str, char const *class_str)
 {
 	XrmValue  resourceValue;
 	char	 *res;
 
-	if (XrmGetResource (*db, res_str, class_str, &res, &resourceValue))
-		gconf_client_set_bool (client, gconf_key,
-			!g_ascii_strcasecmp (resourceValue.addr, "True"), NULL);
+	if (!XrmGetResource (*db, res_str, class_str, &res, &resourceValue))
+		return FALSE;
+	gconf_client_set_bool (client, gconf_key,
+		!g_ascii_strcasecmp (resourceValue.addr, "True"), NULL);
+
+	return TRUE;
 }
 
-static void
+static gboolean
 xrm_get_int (GConfClient *client, XrmDatabase *db, char const *gconf_key,
 	     char const *res_str, char const *class_str, float scale)
 {
@@ -286,12 +289,12 @@ xrm_get_int (GConfClient *client, XrmDatabase *db, char const *gconf_key,
 
 	snprintf (resource, sizeof (resource), "%s.value", res_str);
 	if (!XrmGetResource (*db, resource, class_str, &res, &resourceValue))
-		return;
+		return FALSE;
 	value = atoi (resourceValue.addr);
 
 	snprintf (resource, sizeof (resource), "%s.decimalPoints", res_str);
 	if (!XrmGetResource (*db, resource, class_str, &res, &resourceValue))
-		return;
+		return FALSE;
 	log_scale = atoi (resourceValue.addr);
 
 	while (log_scale-- > 0)
@@ -299,7 +302,7 @@ xrm_get_int (GConfClient *client, XrmDatabase *db, char const *gconf_key,
 
 	gconf_client_set_int (client, gconf_key, value, NULL);
 
-	printf ("%f * %d\n", scale, value);
+	return TRUE;
 }
 
 /* This loads the current users XKB settings from their file */
@@ -309,6 +312,7 @@ load_CDE_file (GtkFileSelection *fsel)
 	char const *file = gtk_file_selection_get_filename (fsel);
 	GConfClient *client;
 	XrmDatabase  db;
+	gboolean found = FALSE;
 
 	if (!(db = XrmGetFileDatabase (file))) {
 		GtkWidget *warn = gtk_message_dialog_new (
@@ -326,45 +330,60 @@ load_CDE_file (GtkFileSelection *fsel)
 	client = gconf_client_get_default ();
 	gconf_client_set_bool (client, CONFIG_ROOT "/enable", TRUE, NULL);
 
-	xrm_get_bool (client, &db, CONFIG_ROOT "/feature_state_change_beep",
+	found |= xrm_get_bool (client, &db, CONFIG_ROOT "/feature_state_change_beep",
 		"*SoundOnOffToggle.set",	"AccessX*ToggleButtonGadget.XmCSet");
-	xrm_get_bool (client, &db, CONFIG_ROOT "/timeout_enable",
+	found |= xrm_get_bool (client, &db, CONFIG_ROOT "/timeout_enable",
 		"*TimeOutToggle.set",		"AccessX*ToggleButtonGadget.XmCSet");
-	xrm_get_bool (client, &db, CONFIG_ROOT "/stickykeys_enable",
+	found |= xrm_get_bool (client, &db, CONFIG_ROOT "/stickykeys_enable",
 		"*StickyKeysToggle.set",	"AccessX*ToggleButtonGadget.XmCSet");
-	xrm_get_bool (client, &db, CONFIG_ROOT "/mousekeys_enable",
+	found |= xrm_get_bool (client, &db, CONFIG_ROOT "/mousekeys_enable",
 		"*MouseKeysToggle.set",		"AccessX*ToggleButtonGadget.XmCSet");
-	xrm_get_bool (client, &db, CONFIG_ROOT "/togglekeys_enable",
+	found |= xrm_get_bool (client, &db, CONFIG_ROOT "/togglekeys_enable",
 		"*ToggleKeysToggle.set",	"AccessX*ToggleButtonGadget.XmCSet");
-	xrm_get_bool (client, &db, CONFIG_ROOT "/slowkeys_enable",
+	found |= xrm_get_bool (client, &db, CONFIG_ROOT "/slowkeys_enable",
 		"*SlowKeysToggle.set",		"AccessX*ToggleButtonGadget.XmCSet");
-	xrm_get_bool (client, &db, CONFIG_ROOT "/bouncekeys_enable",
+	found |= xrm_get_bool (client, &db, CONFIG_ROOT "/bouncekeys_enable",
 		"*BounceKeysToggle.set",	"AccessX*ToggleButtonGadget.XmCSet");
-	xrm_get_bool (client, &db, CONFIG_ROOT "/stickykeys_modifier_beep",
+	found |= xrm_get_bool (client, &db, CONFIG_ROOT "/stickykeys_modifier_beep",
 		"*StickyModSoundToggle.set",	"AccessX*ToggleButtonGadget.XmCSet");
-	xrm_get_bool (client, &db, CONFIG_ROOT "/stickykeys_two_key_off",
+	found |= xrm_get_bool (client, &db, CONFIG_ROOT "/stickykeys_two_key_off",
 		"*StickyTwoKeysToggle.set",	"AccessX*ToggleButtonGadget.XmCSet");
-	xrm_get_bool (client, &db, CONFIG_ROOT "/slowkeys_beep_press",
+	found |= xrm_get_bool (client, &db, CONFIG_ROOT "/slowkeys_beep_press",
 		"*SlowKeysOnPressToggle.set",	"AccessX*ToggleButtonGadget.XmCSet");
-	xrm_get_bool (client, &db, CONFIG_ROOT "/slowkeys_beep_accept",
+	found |= xrm_get_bool (client, &db, CONFIG_ROOT "/slowkeys_beep_accept",
 		"*SlowKeysOnAcceptToggle.set",	"AccessX*ToggleButtonGadget.XmCSet");
-	xrm_get_int  (client, &db, CONFIG_ROOT "/timeout",
+	found |= xrm_get_int  (client, &db, CONFIG_ROOT "/timeout",
 		"*TimeOutScale",		"AccessX*XmScale", 60);
-	xrm_get_int  (client, &db, CONFIG_ROOT "/mousekeys_max_speed",
+	found |= xrm_get_int  (client, &db, CONFIG_ROOT "/mousekeys_max_speed",
 		"*MouseMaxSpeedScale",		"AccessX*XmScale", 1);
-	xrm_get_int  (client, &db, CONFIG_ROOT "/mousekeys_accel_time",
+	found |= xrm_get_int  (client, &db, CONFIG_ROOT "/mousekeys_accel_time",
 		"*MouseAccelScale",		"AccessX*XmScale", 1);
-	xrm_get_int  (client, &db, CONFIG_ROOT "/mousekeys_init_delay",
+	found |= xrm_get_int  (client, &db, CONFIG_ROOT "/mousekeys_init_delay",
 		"*MouseDelayScale",		"AccessX*XmScale", 1);
-	xrm_get_int  (client, &db, CONFIG_ROOT "/slowkeys_delay",
+	found |= xrm_get_int  (client, &db, CONFIG_ROOT "/slowkeys_delay",
 		"*KRGSlowKeysDelayScale",	"AccessX*XmScale", 1000);
-	xrm_get_int  (client, &db, CONFIG_ROOT "/bouncekeys_delay",
+	found |= xrm_get_int  (client, &db, CONFIG_ROOT "/bouncekeys_delay",
 		"*KRGDebounceScale",		"AccessX*XmScale", 1000);
 
 	/* Set the master enable flag last */
-	xrm_get_bool (client, &db, CONFIG_ROOT "/enable",
+	found |= xrm_get_bool (client, &db, CONFIG_ROOT "/enable",
 		"*EnableAccessXToggle.set",	"AccessX*ToggleButtonGadget.XmCSet");
 
+	if (!found) {
+		/* it would be nice to have a better message bu that would
+		 * break string freeze
+		 */
+		GtkWidget *warn = gtk_message_dialog_new (
+			gtk_window_get_transient_for (GTK_WINDOW (fsel)),
+			GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK,
+			_("Unable to import AccessX settings from file '%s'"),
+			file);
+		g_signal_connect (warn,
+			"response",
+			G_CALLBACK (gtk_widget_destroy), NULL);
+		gtk_widget_show (warn);
+		return FALSE;
+	}
 	return TRUE;
 }
 

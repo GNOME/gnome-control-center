@@ -1,3 +1,14 @@
+2002-09-24  Jody Goldberg <jody@gnome.org>
+
+	* accessibility-keyboard.c (load_CDE_file) : blah the
+	  XrmGetFileDatabase is implementation specific in its handling of
+	  invalid files.  Add a hack that if the imported file did not contain
+	  any resources it was invalid.
+
+	* gnome-accessibility-keyboard-properties.glade : add mnemonic_widget
+	  for mousekeys_init_delay_title.  Remove the atkrelations for things
+	  with mnemonic_widget.
+
 2002-09-11  Jody Goldberg <jody@gnome.org>
 
 	* gnome-accessibility-keyboard-properties.glade : Fix conflicting
