@@ -17,6 +17,13 @@
 	(gconf_property_editor_set_prop): Store the callback in the
 	property editor proper
 	(gconf_peditor_new): Put initialization code in an idle handler
+	(peditor_string_value_changed): Free the value created from
+	conversion
+	(init_widget_cb): Return FALSE
+	(peditor_*_widget_changed): Just return if we are not fully
+	initialized
+	(init_widget_cb): Set initialized flag
+	(struct _GConfPropertyEditorPrivate): Add inited
 
 	* gconf-property-editor.c: Add ui-control property storing the
 	object (normally a widget) that controls the property; remove

@@ -52,6 +52,7 @@ struct _GConfPropertyEditorPrivate
 	GConfPEditorValueConvFn  conv_to_widget_cb;
 	GConfPEditorValueConvFn  conv_from_widget_cb;
 	GConfClientNotifyFunc    callback;
+	gboolean                 inited;
 };
 
 static guint peditor_signals[LAST_SIGNAL];
@@ -114,6 +115,7 @@ gconf_property_editor_init (GConfPropertyEditor      *gconf_property_editor,
 	gconf_property_editor->p = g_new0 (GConfPropertyEditorPrivate, 1);
 	gconf_property_editor->p->conv_to_widget_cb = gconf_value_copy;
 	gconf_property_editor->p->conv_from_widget_cb = gconf_value_copy;
+	gconf_property_editor->p->inited = FALSE;
 }
 
 static void
@@ -280,7 +282,7 @@ gconf_property_editor_finalize (GObject *object)
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
-static void
+static gboolean
 init_widget_cb (GConfPropertyEditor *peditor) 
 {
 	GConfClient *client;
@@ -289,6 +291,9 @@ init_widget_cb (GConfPropertyEditor *peditor)
 	client = gconf_client_get_default ();
 	gconf_entry = gconf_client_get_entry (client, peditor->p->key, NULL, TRUE, NULL);
 	peditor->p->callback (client, 0, gconf_entry, peditor);
+	peditor->p->inited = TRUE;
+
+	return FALSE;
 }
 
 static GObject *
@@ -345,6 +350,7 @@ peditor_boolean_widget_changed (GConfPropertyEditor *peditor,
 {
 	GConfValue *value, *value_wid;
 
+	if (!peditor->p->inited) return;
 	value_wid = gconf_value_new (GCONF_VALUE_BOOL);
 	gconf_value_set_bool (value_wid, gtk_toggle_button_get_active (tb));
 	value = peditor->p->conv_from_widget_cb (value_wid);
@@ -388,6 +394,7 @@ peditor_string_value_changed (GConfClient         *client,
 	if (value != NULL) {
 		value_wid = peditor->p->conv_to_widget_cb (value);
 		gtk_entry_set_text (GTK_ENTRY (peditor->p->ui_control), gconf_value_get_string (value));
+		gconf_value_free (value_wid);
 	}
 }
 
@@ -397,6 +404,7 @@ peditor_string_widget_changed (GConfPropertyEditor *peditor,
 {
 	GConfValue *value, *value_wid;
 
+	if (!peditor->p->inited) return;
 	value_wid = gconf_value_new (GCONF_VALUE_STRING);
 	gconf_value_set_string (value_wid, gtk_entry_get_text (entry));
 	value = peditor->p->conv_from_widget_cb (value_wid);
@@ -471,6 +479,8 @@ peditor_color_widget_changed (GConfPropertyEditor *peditor,
 	gchar *str;
 	GConfValue *value, *value_wid;
 
+	if (!peditor->p->inited) return;
+
 	value_wid = gconf_value_new (GCONF_VALUE_STRING);
 	str = g_strdup_printf ("#%02x%02x%02x", r >> 8, g >> 8, b >> 8);
 	gconf_value_set_string (value_wid, str);
@@ -529,6 +539,7 @@ peditor_select_menu_widget_changed (GConfPropertyEditor *peditor,
 {
 	GConfValue *value, *value_wid;
 
+	if (!peditor->p->inited) return;
 	value_wid = gconf_value_new (GCONF_VALUE_INT);
 	gconf_value_set_int (value_wid, gtk_option_menu_get_history (option_menu));
 	value = peditor->p->conv_from_widget_cb (value_wid);
@@ -586,6 +597,7 @@ peditor_select_radio_widget_changed (GConfPropertyEditor *peditor,
 	GSList *group;
 	GConfValue *value, *value_wid;
 
+	if (!peditor->p->inited) return;
 	value_wid = gconf_value_new (GCONF_VALUE_INT);
 	group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (peditor->p->ui_control));
 	gconf_value_set_int (value_wid, g_slist_index (group, tb));
@@ -651,6 +663,7 @@ peditor_numeric_range_widget_changed (GConfPropertyEditor *peditor,
 {
 	GConfValue *value, *value_wid;
 
+	if (!peditor->p->inited) return;
 	value_wid = gconf_value_new (GCONF_VALUE_FLOAT);
 	gconf_value_set_float (value_wid, gtk_adjustment_get_value (adjustment));
 	value = peditor->p->conv_from_widget_cb (value_wid);
