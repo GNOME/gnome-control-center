@@ -147,6 +147,7 @@ gnome_settings_keyboard_xkb_analyze_sysconfig (void)
 {
 	GConfClient *confClient;
 	GSwitchItXkbConfig gswicWas, *pgswicNow;
+	gboolean isConfigChanged;
 
 	if (!initedOk)
 		return;
@@ -158,9 +159,10 @@ gnome_settings_keyboard_xkb_analyze_sysconfig (void)
 	GSwitchItXkbConfigLoadSysBackup (&gswicWas);
 	GSwitchItXkbConfigLoadInitial (pgswicNow);
 
+	isConfigChanged = g_slist_length (gswicWas.layouts) &&
+	    !GSwitchItXkbConfigEquals (pgswicNow, &gswicWas);
 	/* config was changed!!! */
-	if (g_slist_length (gswicWas.layouts) &&
-	    !GSwitchItXkbConfigEquals (pgswicNow, &gswicWas)) {
+	if (isConfigChanged) {
 		GtkWidget *msg = gtk_message_dialog_new_with_markup (NULL,
 								     0,
 								     GTK_MESSAGE_INFO,
@@ -183,6 +185,8 @@ gnome_settings_keyboard_xkb_analyze_sysconfig (void)
 		gtk_widget_show (msg);
 	}
 	GSwitchItXkbConfigSaveSysBackup (pgswicNow);
+	if (!isConfigChanged) 
+		g_free (pgswicNow);
 	GSwitchItXkbConfigTerm (&gswicWas);
 }
 
