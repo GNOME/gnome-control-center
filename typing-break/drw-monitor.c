@@ -26,7 +26,6 @@
 #include <math.h>
 #include <unistd.h>
 #include <sys/ioctl.h>
-#include <sys/vt.h>
 #include <fcntl.h>
 #include <stdio.h>
 #include <sys/types.h>
