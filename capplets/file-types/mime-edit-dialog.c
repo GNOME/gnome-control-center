@@ -702,7 +702,7 @@ mime_edit_dialog_get_app (GladeXML *glade, char const *mime_type,
 
 			/* Look for a matching application (with or without path) */
 			if (app_cmd != NULL &&
-			    (!strcmp (cmd, app_cmd) || !strcmp (base_cmd, app_cmd))) {
+			    (!strcmp (cmd, app_cmd) || (*base_cmd && !strcmp (base_cmd, app_cmd)))) {
 				gboolean ok, app_req = gnome_vfs_application_registry_get_bool_value (ptr->data,
 					GNOME_VFS_APPLICATION_REGISTRY_REQUIRES_TERMINAL, &ok);
 				if (ok && app_req == requires_terminal)
