@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.5.8\n"
-"POT-Creation-Date: 2002-03-12 18:52+0100\n"
-"PO-Revision-Date: 2002-03-12 18:52+0100\n"
+"POT-Creation-Date: 2002-03-14 22:16+0100\n"
+"PO-Revision-Date: 2002-03-14 22:18+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -21,11 +21,11 @@ msgstr "Bakgrunn"
 msgid "Configuration of the desktop's background"
 msgstr "Konfigurasjon av skrivebordsbakgrunn"
 
-#: capplets/background/background-properties-capplet.c:238
+#: capplets/background/background-properties-capplet.c:260
 msgid "Please select a background image"
 msgstr "Vennligst velg et bakgrunnsbilde"
 
-#: capplets/background/background-properties-capplet.c:292
+#: capplets/background/background-properties-capplet.c:314
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:622
 #: capplets/keyboard/gnome-keyboard-properties.c:320
@@ -34,7 +34,7 @@ msgstr "Vennligst velg et bakgrunnsbilde"
 msgid "Retrieve and store legacy settings"
 msgstr "Hent og lagre gamle innstillinger"
 
-#: capplets/background/background-properties-capplet.c:315
+#: capplets/background/background-properties-capplet.c:339
 msgid "Background properties"
 msgstr "Egenskaper for bakgrunn"
 
@@ -94,63 +94,79 @@ msgstr "Vertikal gradient"
 msgid "Just apply settings and quit"
 msgstr "Bare aktiver innstillingene og avslutt"
 
-#: capplets/common/gconf-property-editor.c:145
+#: capplets/common/gconf-property-editor.c:169
 msgid "Key"
 msgstr "Nøkkel"
 
-#: capplets/common/gconf-property-editor.c:146
+#: capplets/common/gconf-property-editor.c:170
 msgid "GConf key to which this property editor is attached"
 msgstr "GConf-nøkkel hvor egenskapsredigereren er festet"
 
-#: capplets/common/gconf-property-editor.c:152
+#: capplets/common/gconf-property-editor.c:176
 msgid "Callback"
 msgstr "Tilbakekall"
 
-#: capplets/common/gconf-property-editor.c:153
+#: capplets/common/gconf-property-editor.c:177
 msgid "Issue this callback when the value associated with key gets changed"
 msgstr ""
 "Send dette tilbakekallet når verdien som er assosiert med nøkkelen blir "
 "endret"
 
-#: capplets/common/gconf-property-editor.c:158
+#: capplets/common/gconf-property-editor.c:182
 msgid "Change set"
 msgstr "Endringssett"
 
-#: capplets/common/gconf-property-editor.c:159
+#: capplets/common/gconf-property-editor.c:183
 msgid ""
 "GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr ""
 "GConf endringssett inneholder data som skal videresendes til gconf-klienten "
 "når det aktiveres"
 
-#: capplets/common/gconf-property-editor.c:164
+#: capplets/common/gconf-property-editor.c:188
 msgid "Conversion to widget callback"
 msgstr "Konvertering til widget tilbakekall"
 
-#: capplets/common/gconf-property-editor.c:165
+#: capplets/common/gconf-property-editor.c:189
 msgid ""
 "Callback to be issued when data are to be converted from GConf to the widget"
 msgstr ""
 "Tilbakekall som skal sendes når data skal konverteres fra GConf til widget"
 
-#: capplets/common/gconf-property-editor.c:170
+#: capplets/common/gconf-property-editor.c:194
 msgid "Conversion from widget callback"
 msgstr "Konvertering fra widget tilbakekall"
 
-#: capplets/common/gconf-property-editor.c:171
+#: capplets/common/gconf-property-editor.c:195
 msgid ""
 "Callback to be issued when data are to be converted to GConf from the widget"
 msgstr ""
 "Tilbakekall som skal utstedes når data skal konverteres til GConf fra "
 "widgetene"
 
-#: capplets/common/gconf-property-editor.c:176
+#: capplets/common/gconf-property-editor.c:200
 msgid "UI Control"
 msgstr "UI-kontroll"
 
-#: capplets/common/gconf-property-editor.c:177
+#: capplets/common/gconf-property-editor.c:201
 msgid "Object that controls the property (normally a widget)"
 msgstr "Objekt som kontrollerer egenskapen (vanligvis et widget)"
+
+#: capplets/common/gconf-property-editor.c:216
+msgid "Property editor object data"
+msgstr "Objektdata for redigering av egenskaper"
+
+#: capplets/common/gconf-property-editor.c:217
+msgid "Custom data required by the specific property editor"
+msgstr "Egendefinerte data som kreves av redigering av egenskaper"
+
+#: capplets/common/gconf-property-editor.c:223
+msgid "Property editor data freeing callback"
+msgstr "Tilbakekall som frigir data for redigering av egenskaper"
+
+#: capplets/common/gconf-property-editor.c:224
+msgid "Callback to be issued when property editor object data is to be freed"
+msgstr "Tilbakekall som skal utstedes når objektdata for redigering av egenskaper skal frigis"
 
 #: capplets/default-applications/default-applications.desktop.in.h:1
 msgid "Choose the applications used by default"
@@ -1372,7 +1388,7 @@ msgstr "GNOME Kontrollsenter"
 msgid "Desktop properties manager."
 msgstr "Håndtering av egenskaper for skrivebord."
 
-#: control-center/capplet-dir-view.c:455
+#: control-center/capplet-dir-view.c:457
 #, c-format
 msgid "Gnome Control Center : %s"
 msgstr "GNOME Kontrollsenter: %s"
