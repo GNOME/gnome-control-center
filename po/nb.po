@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: control-center 2.5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-19 15:39+0100\n"
-"PO-Revision-Date: 2005-01-19 15:40+0100\n"
+"POT-Creation-Date: 2005-02-08 12:47+0100\n"
+"PO-Revision-Date: 2005-02-08 12:55+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -359,6 +359,7 @@ msgstr "    "
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:1
 #: capplets/file-types/file-types-properties.glade.h:1
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:2
 #: capplets/network/gnome-network-preferences.glade.h:2
 #: capplets/theme-switcher/theme-install.glade.h:1
 #: capplets/theme-switcher/theme-properties.glade.h:1
@@ -510,7 +511,7 @@ msgid "_Only accept keys held for:"
 msgstr "_Kun aksepter tastetrykk etter:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:40
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:39
 msgid "_Type to test settings:"
 msgstr "_Skriv for å prøve ut innstillinger:"
 
@@ -586,43 +587,43 @@ msgstr "_Stil:"
 msgid "There was an error displaying help: %s"
 msgstr "Det oppsto en feil under visning av hjelp: %s"
 
-#: capplets/background/gnome-wp-capplet.c:1064
-#: capplets/background/gnome-wp-capplet.c:1080
+#: capplets/background/gnome-wp-capplet.c:1061
+#: capplets/background/gnome-wp-capplet.c:1077
 msgid "Centered"
 msgstr "Sentrert"
 
-#: capplets/background/gnome-wp-capplet.c:1088
-#: capplets/background/gnome-wp-capplet.c:1103
+#: capplets/background/gnome-wp-capplet.c:1085
+#: capplets/background/gnome-wp-capplet.c:1100
 msgid "Fill Screen"
 msgstr "Fyll skjermen"
 
-#: capplets/background/gnome-wp-capplet.c:1111
-#: capplets/background/gnome-wp-capplet.c:1126
+#: capplets/background/gnome-wp-capplet.c:1108
+#: capplets/background/gnome-wp-capplet.c:1123
 msgid "Scaled"
 msgstr "Skalert"
 
-#: capplets/background/gnome-wp-capplet.c:1134
-#: capplets/background/gnome-wp-capplet.c:1149
+#: capplets/background/gnome-wp-capplet.c:1131
+#: capplets/background/gnome-wp-capplet.c:1146
 msgid "Tiled"
 msgstr "Flislagt"
 
-#: capplets/background/gnome-wp-capplet.c:1173
-#: capplets/background/gnome-wp-capplet.c:1182
+#: capplets/background/gnome-wp-capplet.c:1170
+#: capplets/background/gnome-wp-capplet.c:1179
 msgid "Solid Color"
 msgstr "Helfylt farge"
 
-#: capplets/background/gnome-wp-capplet.c:1190
-#: capplets/background/gnome-wp-capplet.c:1199
+#: capplets/background/gnome-wp-capplet.c:1187
+#: capplets/background/gnome-wp-capplet.c:1196
 msgid "Horizontal Gradient"
 msgstr "Horisontal gradient"
 
-#: capplets/background/gnome-wp-capplet.c:1207
-#: capplets/background/gnome-wp-capplet.c:1216
+#: capplets/background/gnome-wp-capplet.c:1204
+#: capplets/background/gnome-wp-capplet.c:1213
 msgid "Vertical Gradient"
 msgstr "Vertikal gradient"
 
 #. Create the file chooser dialog stuff here
-#: capplets/background/gnome-wp-capplet.c:1263
+#: capplets/background/gnome-wp-capplet.c:1260
 msgid "Add Wallpaper"
 msgstr "Legg til bakgrunn"
 
@@ -1782,7 +1783,12 @@ msgstr "Ukjent"
 msgid "Layout"
 msgstr "Utseende"
 
+#. The first radio in a group is to be "Default", meaning none of
+#. the below options are to be included in the selected list.
+#. This is a HIG-compliant alternative to allowing no
+#. selection in the group.
 #: capplets/keyboard/gnome-keyboard-properties-xkblt.c:255
+#: capplets/keyboard/gnome-keyboard-properties-xkbot.c:206
 msgid "Default"
 msgstr "Forvalg"
 
@@ -1813,45 +1819,41 @@ msgstr ""
 msgid "Start the page with the typing break settings showing"
 msgstr "Start siden med innstillingene for skrivepause fremme"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:2
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
 msgid "..."
 msgstr "..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "<b>Cursor Blinking</b>"
 msgstr "<b>Markørblinking</b>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
 msgid "<b>Repeat Keys</b>"
 msgstr "<b>Repeter taster</b>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "<b>_Lock screen to enforce typing break</b>"
 msgstr "<b>_Lås skjemen for tvungen skrivepause</b>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>Rask</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>Lang</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>Kort</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Treg</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "A_vailable layouts:"
 msgstr "Til_gjengelige utforminger:"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
-msgid "A_vailable options:"
-msgstr "Til_gjengelige alternativer:"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "All_ow postponing of breaks"
@@ -1954,18 +1956,14 @@ msgid "_Selected layouts:"
 msgstr "_Valgte utforminger:"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:38
-msgid "_Selected options:"
-msgstr "_Valgte alternativer:"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:39
 msgid "_Speed:"
 msgstr "_Hastighet:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:41
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:40
 msgid "_Work interval lasts:"
 msgstr "_Arbeidsintervallet varer:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:42
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:41
 msgid "minutes"
 msgstr "minutter"
 
@@ -2285,7 +2283,7 @@ msgstr "Aktiver lyd for hendel_ser"
 msgid "_Visual feedback:"
 msgstr "_Visuell tilbakemelding:"
 
-#: capplets/theme-switcher/gnome-theme-details.c:370
+#: capplets/theme-switcher/gnome-theme-details.c:349
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -2295,19 +2293,85 @@ msgstr ""
 "«Brukervalg for tema» ikke er korrekt installert, eller at du ikke har "
 "installert pakken «gnome-themes»."
 
-#: capplets/theme-switcher/gnome-theme-installer.c:103
+#: capplets/theme-switcher/gnome-theme-installer.c:227
 msgid "This theme is not in a supported format."
 msgstr "Dette temaet er ikke i et støttet format."
 
-#: capplets/theme-switcher/gnome-theme-installer.c:139
+#: capplets/theme-switcher/gnome-theme-installer.c:244
+msgid "Failed to create temporary directory"
+msgstr "Kunne ikke opprette midlertidig katalog"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:264
+msgid ""
+"Can not install theme. \n"
+"The bzip2 utility is not installed."
+msgstr ""
+"Kan ikke installere tema.\n"
+"Programmet bzip2 er ikke installert."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:282
+#: capplets/theme-switcher/gnome-theme-installer.c:319
+#: capplets/theme-switcher/gnome-theme-installer.c:399
+msgid "Installation Failed"
+msgstr "Installasjonen feilet"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:302
+msgid ""
+"Can not install themes. \n"
+"The gzip utility is not installed."
+msgstr ""
+"Kan ikke installere tema.\n"
+"Programmet gzip er ikke installert."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:340
+#, c-format
+msgid ""
+"Icon Theme %s correctly installed.\n"
+"You can select it in the theme details."
+msgstr ""
+"Ikontema %s er installert.\n"
+"Du kan velge dette under detaljer for tema."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:343
+#, c-format
+msgid "Gnome Theme %s correctly installed"
+msgstr "GNOME tema %s er installert"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:346
+#, c-format
+msgid ""
+"Windows Border Theme %s correctly installed.\n"
+"You can select it in the theme details."
+msgstr ""
+"Tema %s for vinduskant er installert.\n"
+"Du kan velge det under detaljer for tema."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:349
+#, c-format
+msgid ""
+"Controls Theme %s correctly installed.\n"
+"You can select it in the theme details."
+msgstr ""
+"Tema %s for kontroller er installert.\n"
+"Du kan velge det under detaljer for tema."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:357
+msgid "The theme is an engine. You need to compile the theme."
+msgstr "Dette er en temamotor. Du må kompilere temaet."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:374
+msgid "The file format is invalid"
+msgstr "Filformatet er ugyldig"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:468
 msgid "No theme file location specified to install"
 msgstr "Ingen lokasjon oppgitt for installasjon av temafil"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:156
+#: capplets/theme-switcher/gnome-theme-installer.c:485
 msgid "The theme file location specified to install is invalid"
 msgstr "Ugyldig lokasjon for installasjon av temafil"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:176
+#: capplets/theme-switcher/gnome-theme-installer.c:505
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -2316,7 +2380,11 @@ msgstr ""
 "Ikke nok rettigheter til å installere tema i:\n"
 "%s"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:216
+#: capplets/theme-switcher/gnome-theme-installer.c:526
+msgid "The file format is invalid."
+msgstr "Filformatet er ugyldig."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:553
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
@@ -2324,6 +2392,14 @@ msgid ""
 msgstr ""
 "%s er stien hvor temafilene vil bli installert. Denne kan ikke velges som "
 "kildelokasjon"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:607
+msgid ""
+"Cannot install theme.\n"
+"The tar program is not installed on your system."
+msgstr ""
+"Kan ikke installere tema.\n"
+"Programmet «tar» er ikke installert på ditt system."
 
 #: capplets/theme-switcher/gnome-theme-manager.c:676
 msgid "Custom theme"
@@ -2333,7 +2409,7 @@ msgstr "Egendefinert tema"
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "Du kan lagre dette temaet ved å klikke på «Lagre tema»-knappen."
 
-#: capplets/theme-switcher/gnome-theme-manager.c:1454
+#: capplets/theme-switcher/gnome-theme-manager.c:1466
 msgid ""
 "The default theme schemas could not be found on your system.  This means "
 "that you probably don't have metacity installed, or that your gconf is "
@@ -2684,16 +2760,16 @@ msgstr "Fabrikk for kontrollsenter-visning"
 msgid "View as Control Center"
 msgstr "Vis som kontrollsenter"
 
-#: control-center/control-center-categories.c:248
+#: control-center/control-center-categories.c:249
 msgid "Others"
 msgstr "Andre"
 
-#: control-center/control-center.c:1005
+#: control-center/control-center.c:1010
 #: control-center/gnomecc.desktop.in.in.h:1
 msgid "GNOME Control Center"
 msgstr "GNOME Kontrollsenter"
 
-#: control-center/control-center.c:1121
+#: control-center/control-center.c:1126
 msgid "Desktop Preferences"
 msgstr "Brukervalg for skrivebord"
 
@@ -2809,38 +2885,38 @@ msgstr ""
 "Feil under forsøk på å kjøre (%s)\n"
 "som er bundet til tast (%s)"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:96
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:99
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
-"It can have under various circumstances:\n"
+"It can happen under various circumstances:\n"
 "- a bug in libxklavier library\n"
 "- a bug in X server (xkbcomp, xmodmap utilities)\n"
-"- X server with incompatible libxkbfile implemenation\n"
+"- X server with incompatible libxkbfile implementation\n"
 "\n"
 "X server version data:\n"
 "%s\n"
 "%d\n"
 "%s\n"
 "If you report this situation as a bug, please include:\n"
-"- The result of <b>xprop -root | grep XKB</b>\n"
-"- The result of <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/kbd</b>"
+"- The result of %s\n"
+"- The result of %s"
 msgstr ""
 "Feil under aktivering av XKB-konfigurasjon.\n"
 "Dette kan ha mange årsaker:\n"
 "- en feil i libxklavier-biblioteket\n"
 "- en feil i X-tjeneren (xkbcomp, xmodmap-verktøyene)\n"
-"- X-tjener med inkompatibel libxfile-implementasjon\n"
+"- X-tjener med inkompatibel libxkbfile-implementasjon\n"
 "\n"
 "Versjonsdata for X-tjener:\n"
 "%s\n"
 "%d\n"
 "%s\n"
 "Hvis du rapporterer dette i en feilrapport vennligst ta med:\n"
-"- utskrift av <b>xprop -root | grep XKB</b>\n"
-"- utskrift av <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/xkb</b>"
+"- utskrift av %s\n"
+"- utskrift av %s"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:110
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:113
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2852,7 +2928,11 @@ msgstr ""
 "Prøv å bruke enklere konfigurasjoner eller en nyere versjon av XFree-"
 "programvaren."
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:213
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:226
+msgid "Do _not show this warning again"
+msgstr "Ikke vis denne meldinge_n igjen"
+
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:237
 msgid ""
 "The X system keyboard settings differ from your current GNOME keyboard "
 "settings.  Which set would you like to use?"
@@ -2860,24 +2940,13 @@ msgstr ""
 "Tastaturinnstilling for X er forskjellig fra innstillingene i GNOME. Hvilket "
 "sett vil du bruke?"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:216
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:247
 msgid "Use X settings"
 msgstr "Bruk innstillinger fra X"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:218
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:249
 msgid "Use GNOME settings"
 msgstr "Bruk innstillinger fra GNOME"
-
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:270
-#, c-format
-msgid ""
-"You have a keyboard remapping file (%s) in your home directory whose "
-"contents will now be ignored. You can use the keyboard preferences to "
-"restore them."
-msgstr ""
-"Du har en fil for omforming av tastaturkart (%s) i din hjemmekatalog. "
-"Innholdet i denne filen vil nå ignoreres. Du kan bruke brukervalg for "
-"tastatur for å gjenopprette disse."
 
 #: gnome-settings-daemon/gnome-settings-multimedia-keys.c:126
 #, c-format
@@ -2942,6 +3011,30 @@ msgstr "Kan ikke bestemme brukers hjemmekatalog"
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "GConf-nøkkel %s satt til type %s men forventet type var %s\n"
+
+#: gnome-settings-daemon/modmap-dialog.glade.h:1
+msgid "A_vailable files:"
+msgstr "Til_gjengelige filer:"
+
+#: gnome-settings-daemon/modmap-dialog.glade.h:2
+msgid "Do _not show this warning again."
+msgstr "Ikke vis denne meldinge_n igjen."
+
+#: gnome-settings-daemon/modmap-dialog.glade.h:3
+msgid "Do you like to load the modmap file(s)?"
+msgstr "Vil du laste modmap filen(e)?"
+
+#: gnome-settings-daemon/modmap-dialog.glade.h:4
+msgid "Load modmap files"
+msgstr "Last modmap-filer"
+
+#: gnome-settings-daemon/modmap-dialog.glade.h:5
+msgid "_Load"
+msgstr "_Last"
+
+#: gnome-settings-daemon/modmap-dialog.glade.h:6
+msgid "_Loaded files:"
+msgstr "_Lastede filer:"
 
 #: gnome-settings-daemon/reaper.c:103
 msgid "Error creating signal pipe."
@@ -3289,42 +3382,46 @@ msgstr ""
 "Nyttig for å legge inn xmodmap-baserte justeringer på nytt"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
+msgid "A list of modmap files available in the $HOME directory."
+msgstr "En liste over modmap-filer som finnes i katalogen $HOME."
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
 msgid "Default group, assigned on window creation"
 msgstr "Forvalgt gruppe, tildelt ved oppretting av vindu"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
 msgid "Keep and manage separate group per window"
 msgstr "Behold og håndter separate grupper per vindu"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
 msgid "Keyboard Update Handlers"
 msgstr "Tastaturoppdatering"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:6
 msgid "Keyboard layout"
 msgstr "Tastaturutforming"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:6
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:7
 msgid "Keyboard model"
 msgstr "Tastaturmodell"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:7
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:8
 msgid "Keyboard options"
 msgstr "Alternativer for tastatur"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:8
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:9
 msgid "Keyboard settings in gconf will be overridden from the system ASAP"
 msgstr "Tastaturinnstillinger i gconf overstyres fra systemet ASAP"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:9
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:10
 msgid "Save/restore indicators together with layout groups"
 msgstr "Lagre/gjenopprett indikatorer sammen med utformingsgrupper"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:10
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:11
 msgid "Show layout names instead of group names"
 msgstr "Vis navn på utforming i stedet for gruppenavn"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:11
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:12
 msgid ""
 "Show layout names instead of group names (only for versions of XFree "
 "supporting multiple layouts)"
@@ -3332,7 +3429,11 @@ msgstr ""
 "Vis navn på utforming i stedet for gruppenavn (kun for versjoner av XFree "
 "som støtter flere utforminger)"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:12
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:13
+msgid "Suppress the \"X sysconfig changed\" warning message"
+msgstr "Ikke vis advarsel om «X konfigurasjonen er endret»"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:14
 msgid ""
 "Very soon, keyboard settings in gconf will be overridden (from the system "
 "configuration)"
@@ -3340,13 +3441,17 @@ msgstr ""
 "Meget snart vil tastaturinnstillinger i gconf bli overstyrt (fra "
 "systemkonfigurasjonen)"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:13
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:15
 msgid "keyboard layout"
 msgstr "tastaturutforming"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:14
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:16
 msgid "keyboard model"
 msgstr "tastaturmodell"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:17
+msgid "modmap file list"
+msgstr "liste over modmap-filer"
 
 #: typing-break/drw-break-window.c:209
 msgid "_Postpone break"
@@ -3403,7 +3508,7 @@ msgstr "Skrevet av Richard Hult &lt;richard@imendio.com&gt;"
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Eye candy lagt til av Anders Carlsson"
 
-#: typing-break/drwright.c:832
+#: typing-break/drwright.c:833
 msgid "Break reminder"
 msgstr "Påminnelse om pause"
 
@@ -3415,13 +3520,9 @@ msgstr "Skrivemonitor kjører allerede."
 msgid ""
 "The typing monitor uses the notification area to display information. You "
 "don't seem to have a notification area on your panel. You can add it by "
-"right-clicking on your panel and choose 'Add to panel -> Utilities -> "
-"Notification area'."
-msgstr ""
-"Skrivepause bruker varselområdet for å vise informasjon. Du ser ikke ut til "
-"å ha et varslingsområde på ditt panel. Du kan legge dette til ved å "
-"høyreklikke på panelet og velge «Legg til på panelet -> Verktøy -> "
-"Varslingsområde»."
+"right-clicking on your panel and choosing 'Add to panel', selecting "
+"'Notification area' and clicking 'Add'."
+msgstr "Skrivepause bruker varselområdet for å vise informasjon. Du ser ikke ut til å ha et varslingsområde på ditt panel. Du kan legge dette til ved å høyreklikke på panelet og velge «Legg til på panelet» og velge «Varslingsområde»."
 
 #: vfs-methods/fontilus/font-view.c:125
 msgid "The quick brown fox jumps over the lazy dog. 0123456789"
@@ -3635,9 +3736,6 @@ msgstr "Om miniatyrer for installerte tema skal brukes"
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Om miniatyrer for tema skal brukes"
-
-#~ msgid "FTP proxy port"
-#~ msgstr "Port for FTP-proxy"
 
 #~ msgid "HTTP proxy port"
 #~ msgstr "Port for HTTP-proxy"
