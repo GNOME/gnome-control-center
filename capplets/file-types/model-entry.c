@@ -113,6 +113,8 @@ model_entry_insert_child (ModelEntry *entry, ModelEntry *child, GtkTreeModel *mo
 		tmp->next = child;
 	}
 
+	child->parent = entry;
+
 	mime_types_model_construct_iter (MIME_TYPES_MODEL (model), child, &iter);
 	path = gtk_tree_model_get_path (model, &iter);
 	gtk_tree_model_row_inserted (model, path, &iter);
@@ -133,6 +135,9 @@ model_entry_remove_child (ModelEntry *entry, ModelEntry *child, GtkTreeModel *mo
 	g_return_if_fail (model != NULL);
 	g_return_if_fail (IS_MIME_TYPES_MODEL (model));
 
+	mime_types_model_construct_iter (MIME_TYPES_MODEL (model), child, &iter);
+	path = gtk_tree_model_get_path (model, &iter);
+
 	if (entry->first_child == NULL) {
 		return;
 	}
@@ -143,8 +148,8 @@ model_entry_remove_child (ModelEntry *entry, ModelEntry *child, GtkTreeModel *mo
 		tmp->next = child->next;
 	}
 
-	mime_types_model_construct_iter (MIME_TYPES_MODEL (model), child, &iter);
-	path = gtk_tree_model_get_path (model, &iter);
+	child->parent = NULL;
+
 	gtk_tree_model_row_deleted (model, path);
 	gtk_tree_path_free (path);
 }
