@@ -303,6 +303,7 @@ store_data (ServiceEditDialog *dialog)
 		g_strdup (gnome_file_entry_get_full_path (GNOME_FILE_ENTRY (WID ("custom_program_entry")), FALSE));
 
 	service_info_update (dialog->p->info);
+	service_info_save (dialog->p->info, NULL);
 }
 
 static void

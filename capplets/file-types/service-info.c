@@ -42,6 +42,9 @@ set_string (const ServiceInfo *info, gchar *end, gchar *value, GConfChangeSet *c
 {
 	gchar *key;
 
+	if (value == NULL)
+		return;
+
 	key = get_key_name (info, end);
 
 	if (changeset != NULL)
