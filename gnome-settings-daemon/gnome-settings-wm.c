@@ -100,6 +100,7 @@ gnome_settings_wm_init (GConfClient *client)
 void
 gnome_settings_wm_load (GConfClient *client)
 {
-	
+	set_number_of_workspaces (gconf_client_get_int (client, "/desktop/gnome/applications/window_manager/number_of_workspaces", NULL));
+	set_workspace_names (gconf_client_get_list (client, "/desktop/gnome/applications/window_manager/workspace_names", GCONF_VALUE_LIST, NULL));
 }
 
