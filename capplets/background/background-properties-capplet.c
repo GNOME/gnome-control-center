@@ -225,16 +225,16 @@ update_color_widget_labels_and_visibility (ApplierSet *set, const gchar *value_s
 
 	switch (orientation) {
 	case ORIENTATION_SOLID: /* solid */ 
-		color1_string = _("C_olor"); 
+		color1_string = _("C_olor:"); 
 		two_colors = FALSE; 
 		break;
 	case ORIENTATION_HORIZ: /* horiz */ 
-		color1_string = _("_Left Color"); 
-		color2_string = _("_Right Color"); 
+		color1_string = _("_Left Color:"); 
+		color2_string = _("_Right Color:"); 
 		break;
 	case ORIENTATION_VERT: /* vert  */
-		color1_string = _("_Top Color");
-		color2_string = _("_Bottom Color"); 
+		color1_string = _("_Top Color:");
+		color2_string = _("_Bottom Color:"); 
 		break;
 	default:
 		break;
@@ -430,7 +430,7 @@ create_dialog (ApplierSet *set)
 
 	g_slist_free (group);
 
-	label = gtk_label_new_with_mnemonic (_("_Picture"));
+	label = gtk_label_new_with_mnemonic (_("Select _picture:"));
 	gtk_frame_set_label_widget (GTK_FRAME (WID ("picture_frame")),
 				    label);
 	gtk_label_set_mnemonic_widget (GTK_LABEL (label),
@@ -581,10 +581,12 @@ main (int argc, char **argv)
 		setup_dialog (dialog, NULL, set);
 
 		dialog_win = gtk_dialog_new_with_buttons
-			(_("Background Preferences"), NULL, -1,
+			(_("Background Preferences"), NULL, 0,
 			 GTK_STOCK_HELP, GTK_RESPONSE_HELP,
 			 GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
 			 NULL);
+		gtk_dialog_set_default_response (GTK_DIALOG (dialog_win),
+			GTK_RESPONSE_CLOSE);
 
 		pixbuf = gdk_pixbuf_new_from_file (GNOMECC_DATA_DIR "/icons/background-capplet.png", NULL);
 		gtk_window_set_icon (GTK_WINDOW(dialog_win), pixbuf);
