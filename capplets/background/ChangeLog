@@ -1,3 +1,9 @@
+2005-01-10  Rodney Dawes  <dobey@novell.com>
+
+	* gnome-wp-xml.c (gnome_wp_xml_load_xml):
+	Fix compile warning for syslangs declaration
+	Wrap g_get_language_names in #if GLIB_CHECK_VERSION as it is 2.6 API
+
 2005-01-09  Rodney Dawes  <dobey@novell.com>
 
 	* gnome-wp-capplet.[ch] (gnome_wp_update_preview): Add new callback

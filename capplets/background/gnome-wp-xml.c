@@ -95,12 +95,14 @@ static void gnome_wp_xml_load_xml (GnomeWPCapplet * capplet,
   xmlDoc * wplist;
   xmlNode * root, * list, * wpa;
   gchar * nodelang;
-  const gchar ** syslangs;
+  const gchar * const * syslangs;
   GdkColor color1, color2;
   GnomeWPItem * item;
   gint i;
 
+#if GLIB_CHECK_VERSION (2, 6, 0)
   syslangs = g_get_language_names ();
+#endif
 
   wplist = xmlParseFile (filename);
 
