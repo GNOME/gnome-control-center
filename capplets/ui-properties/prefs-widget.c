@@ -208,14 +208,14 @@ prefs_widget_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		if (prefs_widget->dialog_data) {
 			gtk_object_ref 
 				(GTK_OBJECT (prefs_widget->dialog_data));
-			register_callbacks (prefs_widget,
-					    prefs_widget->dialog_data);
 			if (prefs_widget->prefs)
 				gtk_signal_emit 
 					(GTK_OBJECT (prefs_widget),
 					 prefs_widget_signals
 					 [READ_PREFERENCES], 
 					 prefs_widget->prefs, NULL);
+			register_callbacks (prefs_widget,
+					    prefs_widget->dialog_data);
 		}
 
 		break;
@@ -449,8 +449,12 @@ selected_cb (GtkMenuItem *mi, PrefsWidget *prefs_widget)
 	widget_desc = find_widget_desc_with_name (prefs_widget, widget_name);
 	g_return_if_fail (widget_desc != NULL);
 
-	widget_desc->set_func (prefs_widget->prefs, index);
+	/* Only set it if it really changed */
+	if (widget_desc->get_func (prefs_widget->prefs) != index)
+	{
+		widget_desc->set_func (prefs_widget->prefs, index);
 
-	preferences_changed (prefs_widget->prefs);
-        capplet_widget_state_changed (CAPPLET_WIDGET (prefs_widget), TRUE);
+		preferences_changed (prefs_widget->prefs);
+        	capplet_widget_state_changed (CAPPLET_WIDGET (prefs_widget), TRUE);
+	}
 }
