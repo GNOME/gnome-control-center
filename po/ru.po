@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0.6\n"
 "POT-Creation-Date: 1999-10-05 02:44-0400\n"
-"PO-Revision-Date: 1999-10-05 03:18-0400\n"
+"PO-Revision-Date: 1999-10-05 06:05-0400\n"
 "Last-Translator: Sergey Panov <sipan@mit.edu>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -53,7 +53,7 @@ msgstr "Монотонный"
 
 #: capplets/background-properties/property-background.c:659
 msgid "Gradient"
-msgstr "Градиент"
+	msgstr "Градиент"
 
 #: capplets/background-properties/property-background.c:660
 msgid "Vertical"
@@ -649,6 +649,11 @@ msgid ""
 "Trash programs are discarded on logout and can die;\n"
 "Settings programs are always started on every login."
 msgstr ""
+"Эта кнопка задает стиль повторного запуска выбранных программ:\n"
+"Обычные программы сохраняются при окончании работы, но \"смертны\";\n"
+"Перезапускаемые программы \"бессмертны\";\n"
+"Выбрасываемые программы \"смертны\" и выкидываются при окончании работы;\n"
+"Настраивающие программы запускаются в начале каждого сеанса работы."
 
 #: capplets/session-properties/gsm-client-list.c:36
 msgid ""
@@ -659,10 +664,16 @@ msgid ""
 "Saving programs are saving their session details;\n"
 "Programs which make no contact have Unknown states.\n"
 msgstr ""
+"Эта кнопка выдает следующие типы состояний программ:\n"
+"Бездействующие программы ожидают запуска или уже завершены;\n"
+"Запускаемые программы, которым отведено время на запуск;\n"
+"Исполняемые программы это обычные участники сеанса;\n"
+"Программы сохраняющие подробности своего сеанса;\n"
+"Неизвест. программы не сообщили свое состояние.\n"
 
 #: capplets/session-properties/gsm-client-list.c:42
 msgid "This column gives the command used to start a program."
-msgstr ""
+msgstr "Эта колонка задает команду запуска программы."
 
 #: capplets/session-properties/gsm-client-list.c:135
 msgid "Order"
@@ -714,11 +725,11 @@ msgstr "Сохраняет подробности сеанса."
 
 #: capplets/session-properties/gsm-client-row.c:43
 msgid "Unknown"
-msgstr "Неизвестн."
+msgstr "Неизвест."
 
 #: capplets/session-properties/gsm-client-row.c:44
 msgid "State not reported within timeout."
-msgstr ""
+msgstr "За отведенное время состояние не сообщено."
 
 #: capplets/session-properties/gsm-client-row.c:50
 msgid "Normal"
@@ -726,7 +737,7 @@ msgstr "Нормальная"
 
 #: capplets/session-properties/gsm-client-row.c:51
 msgid "Unaffected by logouts but can die."
-msgstr ""
+msgstr "Сохраняется при окончании работы, но \"смертна\"."
 
 #: capplets/session-properties/gsm-client-row.c:53
 msgid "Respawn"
@@ -734,19 +745,19 @@ msgstr "Перезапускаемая"
 
 #: capplets/session-properties/gsm-client-row.c:54
 msgid "Never allowed to die."
-msgstr ""
+msgstr "\"Бессмертная\" программа"
 
 #: capplets/session-properties/gsm-client-row.c:56
 msgid "Trash"
-msgstr "Мусор"
+msgstr "Выбрасываемая"
 
 #: capplets/session-properties/gsm-client-row.c:57
 msgid "Discarded on logout and can die."
-msgstr ""
+msgstr "Выкидывается при окончании работы и \"смертна\"."
 
 #: capplets/session-properties/gsm-client-row.c:60
 msgid "Always started on every login."
-msgstr ""
+msgstr "Запускается в начале каждого сеанса работы."
 
 #: capplets/session-properties/gsm-protocol.c:500
 msgid "Remove Program"
@@ -768,7 +779,7 @@ msgstr "Автоматически сохранять изменения сеанса"
 #. frame for manually started programs
 #: capplets/session-properties/session-properties.c:161
 msgid "Non-session-managed Startup Programs"
-msgstr ""
+msgstr "Программы запуска без поддержки сессий"
 
 #: capplets/session-properties/session-properties.c:178
 #: capplets/session-properties/startup-programs.c:304
@@ -786,7 +797,7 @@ msgstr "Просмотр запущенных программ..."
 
 #: capplets/session-properties/session-properties.c:393
 msgid "Only display warnings."
-msgstr ""
+msgstr "Только показывать предупреждения."
 
 #: capplets/session-properties/startup-programs.c:288
 #: capplets/session-properties/startup-programs.c:295
@@ -858,10 +869,11 @@ msgstr "Звуки Событий"
 msgid ""
 "This copy of the GNOME control center was not compiled with sound support"
 msgstr ""
+"Эта копия Центра Управления GNOME скомпилирована без поддержки звука"
 
 #: capplets/sound-properties/sound-properties.c:745
 msgid "The sound file for this event does not exist."
-msgstr ""
+msgstr "Не существует файла звука для этого события."
 
 #: capplets/sound-properties/sound-properties.c:747
 msgid ""
@@ -869,6 +881,9 @@ msgid ""
 "You may want to install the gnome-audio package\n"
 "for a set of default sounds."
 msgstr ""
+"Не существует файла звука для этого события.\n"
+"Вам повидимому необходимо установить пакет\n"
+"gnome-audio."
 
 #: capplets/theme-switcher/demo.c:50
 msgid "One"
@@ -913,40 +928,40 @@ msgstr "Ведро"
 
 #: capplets/theme-switcher/demo.c:114
 msgid "Selected themes from above will be tested by previewing here."
-msgstr ""
+msgstr "Выбранные выше темы будут продемонстрированы здесь."
 
 #. column one
 #: capplets/theme-switcher/demo.c:119
 msgid "Sample Button"
-msgstr ""
+msgstr "Образец кнопки"
 
 #: capplets/theme-switcher/demo.c:123
 msgid "Sample Check Button"
-msgstr ""
+msgstr "Образец кнопки выбора"
 
 #: capplets/theme-switcher/demo.c:128
 msgid "Sample Text Entry Field"
-msgstr ""
+msgstr "Образец поля ввода текста"
 
 #: capplets/theme-switcher/demo.c:139
 msgid "Submenu"
-msgstr ""
+msgstr "Дочернее меню"
 
 #: capplets/theme-switcher/demo.c:146
 msgid "Item 1"
-msgstr ""
+msgstr "Элемент 1"
 
 #: capplets/theme-switcher/demo.c:149
 msgid "Another item"
-msgstr ""
+msgstr "Другой элемент"
 
 #: capplets/theme-switcher/demo.c:154
 msgid "Radio Button 1"
-msgstr ""
+msgstr "Кнопка переключателя 1"
 
 #: capplets/theme-switcher/demo.c:160
 msgid "Radio Button 2"
-msgstr ""
+msgstr "Кнопка переключателя 2"
 
 #: capplets/theme-switcher/gui.c:84
 #, c-format
@@ -955,6 +970,9 @@ msgid ""
 "'%s'\n"
 "%s"
 msgstr ""
+"Ошибка при установке темы:\n"
+"'%s'\n"
+"%s"
 
 #: capplets/theme-switcher/gui.c:115
 msgid "Select a theme to install"
@@ -990,7 +1008,7 @@ msgstr "Шрифт пользователя"
 #. for now we just assume default gtk font
 #: capplets/theme-switcher/gui.c:253
 msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
-msgstr "-cronyx-helvetica-medium-r-normal--*-120-*-*-*-*-koi8-*"
+msgstr "-cronyx-helvetica-medium-r-normal--*-80-*-*-*-*-koi8-*"
 
 #: capplets/theme-switcher/gui.c:272
 msgid "Use custom font."
@@ -1220,6 +1238,8 @@ msgid ""
 "Starting %s\n"
 "(%d seconds left before operation times out)"
 msgstr ""
+"Запускается %s\n"
+"(до истечения отведенного времени осталось %d секунд)"
 
 #: capplets/wm-properties/wm-properties-capplet.c:301
 #, c-format
@@ -1260,6 +1280,8 @@ msgid ""
 "Could not start '%s'.\n"
 "Falling back to previous window manager '%s'\n"
 msgstr ""
+"Невозможно запустить '%s'.\n"
+"Возвращаемся к предыдущему диспетчеру окон '%s'\n"
 
 #: capplets/wm-properties/wm-properties-capplet.c:471
 msgid ""
@@ -1268,6 +1290,10 @@ msgid ""
 "do this by selecting \"Run Program\" in the\n"
 "foot menu\n"
 msgstr ""
+"Невозможно запустить запасной диспетчер окон.\n"
+"Запустите пожалуйста диспетчер окон вручную.\n"
+"Это можно сделать выбрав \"Запустить программу\"\n"
+"в главном меню\n"
 
 #: capplets/wm-properties/wm-properties-capplet.c:496
 #: capplets/wm-properties/wm-properties-capplet.c:746
@@ -1288,6 +1314,12 @@ msgid ""
 "in the main menu, or by turning on \"Save Current Setup\" when\n"
 "you log out.\n"
 msgstr ""
+"Произошла замена диспетчера окон. Чтобы сохранить это изменение\n"
+"необходимо сохранить текущий сеанс работы. Это можно сделать\n"
+"сейчас выбрав \"Сохранить сеанс сейчас\" ниже или позже. Для\n"
+"последующего сохранения сеанса работы нужно выбрать \"Сохранить\n"
+"текущий сеанс\" в разделе \"Настройки\" главного меню или включить\n"
+"\"Сохранить текущее состояние\" при окончании работы.\n"
 
 #: capplets/wm-properties/wm-properties-capplet.c:521
 msgid "Save Session Later"
@@ -1305,6 +1337,10 @@ msgid ""
 "under \"Settings\" in the main menu, or by turning on\n"
 "\"Save Current Setup\" when you log out.\n"
 msgstr ""
+"Произошла замена диспетчера окон. Чтобы сохранить это изменение\n"
+"необходимо сохранить текущий сеанс работы. Для этого нужно выбрать\n"
+"\"Сохранить текущий сеанс\" в разделе \"Настройки\" главного меню\n"
+"или включить \"Сохранить текущее состояние\" при окончании работы.\n"
 
 #: capplets/wm-properties/wm-properties-capplet.c:745
 msgid "Add New Window Manager"
@@ -1317,7 +1353,7 @@ msgstr "Отменить"
 
 #: capplets/wm-properties/wm-properties-capplet.c:757
 msgid "Name:"
-msgstr "Имя: "
+msgstr "Имя:"
 
 #: capplets/wm-properties/wm-properties-capplet.c:770
 msgid "Command:"
@@ -1361,6 +1397,8 @@ msgid ""
 "No help is available/installed. Please make sure you\n"
 "have the GNOME User's Guide installed on your system."
 msgstr ""
+"Справочная информация не доступна. Проверьте пожалуйста что\n"
+"Руководство пользователя GNOME установлено на вашей системе."
 
 #: control-center/callbacks.c:95
 msgid "GNOME Control Center"
@@ -1384,35 +1422,35 @@ msgstr "Справка"
 
 #: control-center/capplet-widget-libs.c:46
 msgid "id of the capplet -- assigned by the control-center"
-msgstr ""
+msgstr "идентификатор капплет -- выдается центром управления"
 
 #: control-center/capplet-widget-libs.c:46
 msgid "ID"
-msgstr ""
+msgstr "ИД"
 
 #: control-center/capplet-widget-libs.c:47
 msgid "Multi-capplet id."
-msgstr ""
+msgstr "Мульти-капплет идентификатор"
 
 #: control-center/capplet-widget-libs.c:47
 msgid "CAPID"
-msgstr ""
+msgstr "КАПИД"
 
 #: control-center/capplet-widget-libs.c:48
 msgid "X ID of the socket it's plugged into"
-msgstr ""
+msgstr "X ИД используемой розетки "
 
 #: control-center/capplet-widget-libs.c:48
 msgid "XID"
-msgstr ""
+msgstr "XИД"
 
 #: control-center/capplet-widget-libs.c:49
 msgid "IOR of the control-center"
-msgstr ""
+msgstr "IOR центра управления"
 
 #: control-center/capplet-widget-libs.c:49
 msgid "IOR"
-msgstr ""
+msgstr "IOR"
 
 #: control-center/capplet-widget-libs.c:50
 msgid "Initialize session settings"
@@ -1420,19 +1458,19 @@ msgstr "Инициализировать свойства сеанса"
 
 #: control-center/capplet-widget-libs.c:51
 msgid "Ignore default action.  Used for custom init-session cases"
-msgstr ""
+msgstr "Проигнорировать обычные действия. Для специальных случаев"
 
 #: control-center/capplet-widget.c:262
 msgid "Sorry, no help is available for these settings."
-msgstr ""
+msgstr "К сожалению информация о этих настройках отсутствует."
 
 #: control-center/corba-glue.c:75
 msgid "capplet-command to be run."
-msgstr ""
+msgstr "исполнить капплет-команду."
 
 #: control-center/corba-glue.c:75
 msgid "CAPPLET"
-msgstr ""
+msgstr "КАППЛЕТ"
 
 #: control-center/main.c:31
 msgid "Help with the GNOME control-center."
@@ -1453,6 +1491,8 @@ msgid ""
 "The following modules have had changes made, but not committed.  If you "
 "would like to edit them, please double click on the appropriate entry."
 msgstr ""
+"Следующие модули были изменены но изменения еще не активизированы. Для "
+"работы с этими модулями нужен двойной щелчок на соответствующем элементе."
 
 #. create the app
 #: control-center/main.c:187
