@@ -41,16 +41,20 @@
 struct AcmeVolumeAlsaPrivate
 {
 	long pmin, pmax;
+	gboolean has_mute, has_master;
 	snd_mixer_t *handle;
 	snd_mixer_elem_t *elem;
-	gboolean mixerpb;
 	int saved_volume;
+	guint timer_id;
 };
 
 static GObjectClass *parent_class = NULL;
 
 static int acme_volume_alsa_get_volume (AcmeVolume *self);
 static void acme_volume_alsa_set_volume (AcmeVolume *self, int val);
+static gboolean acme_volume_alsa_open (AcmeVolumeAlsa *self);
+static void acme_volume_alsa_close (AcmeVolumeAlsa *self);
+static gboolean acme_volume_alsa_close_real (AcmeVolumeAlsa *self);
 
 G_DEFINE_TYPE (AcmeVolumeAlsa, acme_volume_alsa, ACME_TYPE_VOLUME)
 
@@ -65,7 +69,16 @@ acme_volume_alsa_finalize (GObject *object)
 	self = ACME_VOLUME_ALSA (object);
 
 	if (self->_priv)
+	{
+		if (self->_priv->timer_id != 0)
+		{
+			g_source_remove (self->_priv->timer_id);
+			self->_priv->timer_id = 0;
+		}
+
+		acme_volume_alsa_close_real (self);
 		g_free (self->_priv);
+	}
 
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 }
@@ -75,8 +88,21 @@ acme_volume_alsa_set_mute (AcmeVolume *vol, gboolean val)
 {
 	AcmeVolumeAlsa *self = (AcmeVolumeAlsa *) vol;
 
-	snd_mixer_selem_set_playback_switch(self->_priv->elem,
-			SND_MIXER_SCHN_FRONT_LEFT, !val);
+	if (acme_volume_alsa_open (self) == FALSE)
+		return;
+
+	/* If we have a hardware mute */
+	if (self->_priv->has_mute)
+	{
+		snd_mixer_selem_set_playback_volume_all
+			(self->_priv->elem, !val);
+		acme_volume_alsa_close (self);
+		return;
+	}
+
+	acme_volume_alsa_close (self);
+
+	/* If we don't */
 	if (val == TRUE)
 	{
 		self->_priv->saved_volume = acme_volume_alsa_get_volume (vol);
@@ -94,10 +120,22 @@ acme_volume_alsa_get_mute (AcmeVolume *vol)
 	AcmeVolumeAlsa *self = (AcmeVolumeAlsa *) vol;
 	int ival;
 
-	snd_mixer_selem_get_playback_switch(self->_priv->elem,
-			SND_MIXER_SCHN_FRONT_LEFT, &ival);
+	if (acme_volume_alsa_open (self) == FALSE)
+		return FALSE;
 
-	return !ival;
+	if (self->_priv->has_mute)
+	{
+		snd_mixer_selem_get_playback_switch(self->_priv->elem,
+				SND_MIXER_SCHN_FRONT_LEFT, &ival);
+
+		acme_volume_alsa_close (self);
+
+		return !ival;
+	} else {
+		acme_volume_alsa_close (self);
+
+		return (acme_volume_alsa_get_volume (vol) == 0);
+	}
 }
 
 static int
@@ -108,10 +146,15 @@ acme_volume_alsa_get_volume (AcmeVolume *vol)
 	int tmp;
 	float alsa_vol;
 
+	if (acme_volume_alsa_open (self) == FALSE)
+		return 0;
+
 	snd_mixer_selem_get_playback_volume(self->_priv->elem,
 			SND_MIXER_SCHN_FRONT_LEFT, &lval);
 	snd_mixer_selem_get_playback_volume(self->_priv->elem,
 			SND_MIXER_SCHN_FRONT_RIGHT, &rval);
+
+	acme_volume_alsa_close (self);
 
 	alsa_vol = (lval + rval) / 2;
 	alsa_vol = alsa_vol * 100 / (self->_priv->pmax - self->_priv->pmin);
@@ -127,61 +170,90 @@ acme_volume_alsa_set_volume (AcmeVolume *vol, int val)
 	float volume;
 	int tmp;
 
+	if (acme_volume_alsa_open (self) == FALSE)
+		return;
+
 	volume = (float) val / 100 * (self->_priv->pmax - self->_priv->pmin);
 	volume = CLAMP (volume, self->_priv->pmin, self->_priv->pmax);
 	tmp = ROUND (volume);
 
-	snd_mixer_selem_set_playback_volume(self->_priv->elem,
-			SND_MIXER_SCHN_FRONT_LEFT, tmp);
-	snd_mixer_selem_set_playback_volume(self->_priv->elem,
-			SND_MIXER_SCHN_FRONT_RIGHT, tmp);
+	snd_mixer_selem_set_playback_volume_all (self->_priv->elem, tmp);
+
+	acme_volume_alsa_close (self);
 }
 
-static void
-acme_volume_alsa_init (AcmeVolumeAlsa *self)
+static gboolean
+acme_volume_alsa_close_real (AcmeVolumeAlsa *self)
+{
+	if (self->_priv->handle != NULL)
+	{
+		snd_mixer_detach (self->_priv->handle, DEFAULT_CARD);
+		snd_mixer_free (self->_priv->handle);
+		self->_priv->handle = NULL;
+		self->_priv->elem = NULL;
+	}
+
+	self->_priv->timer_id = 0;
+
+	return FALSE;
+}
+
+static gboolean
+acme_volume_alsa_open (AcmeVolumeAlsa *self)
 {
 	snd_mixer_selem_id_t *sid;
 	snd_mixer_t *handle;
 	snd_mixer_elem_t *elem;
 
-	self->_priv = g_new0 (AcmeVolumeAlsaPrivate, 1);
+	if (self->_priv->timer_id != 0)
+	{
+		g_source_remove (self->_priv->timer_id);
+		self->_priv->timer_id = 0;
+		return TRUE;
+	}
 
-	 /* open the mixer */
+	/* open the mixer */
 	if (snd_mixer_open (&handle, 0) < 0)
 	{
 		D("snd_mixer_open");
-		return;
+		return FALSE;
 	}
 	/* attach the handle to the default card */
-	if (snd_mixer_attach(handle, DEFAULT_CARD) <0)
+	if (snd_mixer_attach (handle, DEFAULT_CARD) <0)
 	{
 		D("snd_mixer_attach");
 		goto bail;
 	}
 	/* ? */
-	if (snd_mixer_selem_register(handle, NULL, NULL) < 0)
+	if (snd_mixer_selem_register (handle, NULL, NULL) < 0)
 	{
 		D("snd_mixer_selem_register");
 		goto bail;
 	}
-	if (snd_mixer_load(handle) < 0)
+	if (snd_mixer_load (handle) < 0)
 	{
 		D("snd_mixer_load");
 		goto bail;
 	}
 
-	snd_mixer_selem_id_alloca(&sid);
+	snd_mixer_selem_id_alloca (&sid);
 	snd_mixer_selem_id_set_name (sid, "Master");
-	elem = snd_mixer_find_selem(handle, sid);
+	elem = snd_mixer_find_selem (handle, sid);
 	if (!elem)
 	{
-		D("snd_mixer_find_selem");
-		goto bail;
+		snd_mixer_selem_id_alloca (&sid);
+		snd_mixer_selem_id_set_name (sid, "PCM");
+		elem = snd_mixer_find_selem (handle, sid);
+		if (!elem)
+		{
+			D("snd_mixer_find_selem");
+			goto bail;
+		}
 	}
 
-	if (!snd_mixer_selem_has_playback_volume(elem))
+	if (!snd_mixer_selem_has_playback_volume (elem))
 	{
-		D("snd_mixer_selem_has_capture_volume");
+		D("snd_mixer_selem_has_playback_volume");
 		goto bail;
 	}
 
@@ -189,11 +261,35 @@ acme_volume_alsa_init (AcmeVolumeAlsa *self)
 			&(self->_priv->pmin),
 			&(self->_priv->pmax));
 
+	self->_priv->has_mute = snd_mixer_selem_has_playback_switch (elem);
 	self->_priv->handle = handle;
 	self->_priv->elem = elem;
 
-	return;
+	return TRUE;
+
 bail:
+	acme_volume_alsa_close (self);
+	return FALSE;
+}
+
+static void
+acme_volume_alsa_close (AcmeVolumeAlsa *self)
+{
+	self->_priv->timer_id = g_timeout_add (4000,
+			(GSourceFunc) acme_volume_alsa_close_real, self);
+}
+
+static void
+acme_volume_alsa_init (AcmeVolumeAlsa *self)
+{
+	self->_priv = g_new0 (AcmeVolumeAlsaPrivate, 1);
+
+	acme_volume_alsa_open (self);
+	if (self->_priv->handle != NULL) {
+		acme_volume_alsa_close (self);
+		return;
+	}
+
 	g_free (self->_priv);
 	self->_priv = NULL;
 }

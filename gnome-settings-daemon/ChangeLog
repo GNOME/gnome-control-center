@@ -1,3 +1,18 @@
+2004-07-15  Bastien Nocera  <hadess@hadess.net>
+
+	* actions/acme-volume-alsa.c: (acme_volume_alsa_finalize),
+	(acme_volume_alsa_set_mute), (acme_volume_alsa_get_mute),
+	(acme_volume_alsa_get_volume), (acme_volume_alsa_set_volume),
+	(acme_volume_alsa_close_real), (acme_volume_alsa_open),
+	(acme_volume_alsa_close), (acme_volume_alsa_init):
+	rework the ALSA mixer so that:
+	- the ALSA device isn't kept open at all times, only for 4 seconds
+	  after the last use (Closes: #141793)
+	- the hardware mute is used if it is available
+	  (Closes: #141404, #144489, #140937)
+	- lowering the volume doesn't move the balance to the right
+	- it doesn't leak alsa-lib mixers all around
+
 2004-06-18  Crispin Flowerday  <gnome@flowerday.cx>
 
 	* gnome-settings-xsettings.c: Translate the menus_have_icons
