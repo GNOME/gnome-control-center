@@ -378,7 +378,7 @@ real_list_keys (BonoboConfigDatabase *db,
 	
 	for (l = dd->entries; l != NULL; l = l->next) {
 		de = (DirEntry *)l->data;
-	       
+
                 key_list->_buffer [key_list->_length] = 
                         CORBA_string_dup (de->name);
                 key_list->_length++;

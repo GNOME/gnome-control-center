@@ -148,6 +148,7 @@ set_moniker_cb (BonoboPropertyBag *bag, BonoboArg *arg, guint arg_id,
 		CORBA_Environment *ev, BonoboControl *control) 
 {
 	gchar *moniker;
+	gchar *full_moniker;
 	BonoboPEditor *ed;
 	BonoboPropertyFrame *pf;
 	Bonobo_PropertyBag proxy;
@@ -156,9 +157,10 @@ set_moniker_cb (BonoboPropertyBag *bag, BonoboArg *arg, guint arg_id,
 	if (arg_id != 1) return;
 
 	moniker = BONOBO_ARG_GET_STRING (arg);
+	full_moniker = g_strconcat (moniker, "#config:/main", NULL);
 
 	pf = BONOBO_PROPERTY_FRAME (bonobo_control_get_widget (control));
-	bonobo_property_frame_set_moniker (pf, moniker);
+	bonobo_property_frame_set_moniker (pf, full_moniker);
 	proxy = BONOBO_OBJREF (pf->proxy);
 	dialog = gtk_object_get_data (GTK_OBJECT (control), "dialog");
 

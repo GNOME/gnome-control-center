@@ -63,9 +63,7 @@ archiver_resolve (BonoboMoniker               *moniker,
 	const gchar           *name;
 	gchar                 *backend_id, *location;
 
-	if (strcmp (requested_interface, "IDL:Bonobo/ConfigDatabase:1.0") &&
-	    strcmp (requested_interface, "IDL:Bonobo/PropertyBag:1.0"))
-	{
+	if (strcmp (requested_interface, "IDL:Bonobo/ConfigDatabase:1.0")) {
 		EX_SET_NOT_FOUND (ev);
 		return CORBA_OBJECT_NIL; 
 	}
@@ -79,7 +77,7 @@ archiver_resolve (BonoboMoniker               *moniker,
 
 	if (parent != CORBA_OBJECT_NIL) {
 		pdb = Bonobo_Moniker_resolve (parent, options, 
-					      requested_interface, ev);
+					      "IDL:Bonobo/ConfigDatabase:1.0", ev);
     
 		bonobo_object_release_unref (parent, NULL);
 		
