@@ -1,23 +1,30 @@
-INCLUDES = -I. -I$(srcdir) 				\
-	-I$(top_srcdir)/intl -I$(top_builddir)/intl	\
-	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"	\
-	@CAPPLET_CFLAGS@
-
+cappletname = mime-type
+cappletgroup = "Advanced/"
 bin_PROGRAMS = mime-type-capplet
 
-mime_type_capplet_SOURCES = mime-type-capplet.c\
-	mime-data.h mime-data.c edit-window.c\
-	edit-window.h mime-info.c mime-info.h \
-	new-mime-window.h new-mime-window.c
+mime_type_capplet_LDADD = $(GNOMECC_CAPPLETS_LIBS)
+mime_type_capplet_SOURCES = \
+	mime-type-capplet.c\
+	mime-data.h		mime-data.c\
+	edit-window.c		edit-window.h\
+	mime-info.c		mime-info.h\
+	new-mime-window.h	new-mime-window.c
 
-mime_type_capplet_LDADD = @CAPPLET_LIBS@
+pixmap_DATA = 
 
-EXTRA_DIST = \
-	mime-type.desktop
+##
+## You should not need to modify anything below this line
+##
+@XML_I18N_MERGE_DESKTOP_RULE@
+@GNOMECC_CAPPLETS_DESKTOP_IN_RULE@
 
-
-sysdir = $(datadir)/control-center/capplets/Advanced/
-sys_DATA = mime-type.desktop 
-
-install-data-local:
-	$(INSTALL_DATA) $(srcdir)/mime-type.desktop $(DESTDIR)$(datadir)/gnome/apps/Settings/Advanced/mime-type.desktop
+INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)
+CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
+EXTRA_DIST = $(GNOMECC_CAPPLETS_EXTRA_DIST)
+iconsdir   = $(GNOMECC_ICONS_DIR)
+Gladedir   = $(GNOMECC_GLADE_DIR)
+pixmapdir  = $(GNOMECC_PIXMAPS_DIR)
+Glade_DATA = $(cappletname)-properties.glade
+icons_DATA = $(cappletname)-capplet.png
+desktop    = $(cappletname).desktop
+all-local: $(desktop)

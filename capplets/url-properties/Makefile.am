@@ -1,21 +1,25 @@
-INCLUDES = -I. -I$(srcdir) 				\
-	-I$(top_srcdir)/intl -I$(top_builddir)/intl	\
-	-I$(srcdir)/../../libcapplet		\
-	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"	\
-	@CAPPLET_CFLAGS@				\
-	-DGNOMESYSCONFDIR=\""$(sysconfdir)"\"
-
+cappletname = url
+cappletgroup = "Advanced/"
 bin_PROGRAMS = url-properties
 
+url_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
 url_properties_SOURCES = url-properties.c
 
-url_properties_LDADD = @CAPPLET_LIBS@
+pixmap_DATA = 
 
-EXTRA_DIST = \
-	url-properties.desktop
+##
+## You should not need to modify anything below this line
+##
+@XML_I18N_MERGE_DESKTOP_RULE@
+@GNOMECC_CAPPLETS_DESKTOP_IN_RULE@
 
-sysdir = $(datadir)/control-center/Documents/
-sys_DATA = url-properties.desktop
-
-psysdir = $(datadir)/gnome/apps/Settings/Documents/
-psys_DATA = url-properties.desktop
+INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)
+CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
+EXTRA_DIST = $(GNOMECC_CAPPLETS_EXTRA_DIST)
+iconsdir   = $(GNOMECC_ICONS_DIR)
+Gladedir   = $(GNOMECC_GLADE_DIR)
+pixmapdir  = $(GNOMECC_PIXMAPS_DIR)
+Glade_DATA = $(cappletname)-properties.glade
+icons_DATA = $(cappletname)-capplet.png
+desktop    = $(cappletname).desktop
+all-local: $(desktop)
