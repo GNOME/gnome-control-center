@@ -46,8 +46,6 @@ CappletDirViewImpl *capplet_dir_view_impl[] = {
 
 static GObjectClass *parent_class;
 
-static GnomeCCPreferences *prefs;
-
 enum {
 	PROP_0,
 	PROP_CAPPLET_DIR,
@@ -263,7 +261,10 @@ capplet_dir_view_update_authenticated (CappletDirView *view, gpointer null)
 CappletDirView *
 capplet_dir_view_new (void) 
 {
+	GnomeCCPreferences *prefs;
 	GObject *view;
+
+	prefs = gnomecc_preferences_get ();
 
 	view = g_object_new (capplet_dir_view_get_type (),
 			     "layout", prefs->layout,
@@ -545,6 +546,10 @@ capplet_dir_view_show (CappletDirView *view)
 static CappletDirView *
 get_capplet_dir_view (CappletDir *dir, CappletDirView *launcher) 
 {
+	GnomeCCPreferences *prefs;
+
+	prefs = gnomecc_preferences_get ();
+
 	if (prefs->single_window && launcher)
 		return launcher;
 	else
@@ -554,8 +559,9 @@ get_capplet_dir_view (CappletDir *dir, CappletDirView *launcher)
 void
 gnomecc_init (void) 
 {
-	prefs = gnomecc_preferences_new ();
-	gnomecc_preferences_load (prefs);
+	GnomeCCPreferences *prefs;
+
+	prefs = gnomecc_preferences_get ();
 
 	g_signal_connect (G_OBJECT (prefs), "changed",
 			  (GCallback) prefs_changed_cb, NULL);

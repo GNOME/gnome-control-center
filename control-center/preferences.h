@@ -69,4 +69,6 @@ void gnomecc_preferences_save (GnomeCCPreferences *prefs);
 
 GtkWidget *gnomecc_preferences_get_config_dialog (GnomeCCPreferences *prefs);
 
+GnomeCCPreferences *gnomecc_preferences_get (void);
+
 #endif /* __PREFERNCES_H */

@@ -354,3 +354,17 @@ gnomecc_preferences_get_config_dialog (GnomeCCPreferences *prefs)
 
 	return prefs_dialog;
 }
+
+GnomeCCPreferences *
+gnomecc_preferences_get (void)
+{
+	static GnomeCCPreferences *prefs = NULL;
+
+	if (!prefs) {
+		prefs = gnomecc_preferences_new ();
+		gnomecc_preferences_load (prefs);
+	}
+
+	return prefs;
+}
+

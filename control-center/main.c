@@ -108,11 +108,35 @@ is_nautilus_running (void)
 	return running;
 }
 
+static gboolean
+gnome_cc_save_yourself (GnomeClient *client, gint phase, GnomeSaveStyle save_style,
+			gboolean shutdown, GnomeInteractStyle interact_style,
+			gboolean fast, gchar *argv0)
+{
+	gchar *argv[3];
+	gint argc;
+
+	argv[0] = argv0;
+	argv[1] = "--use-shell";
+	argc = 2;
+	gnome_client_set_clone_command (client, argc, argv);
+	gnome_client_set_restart_command (client, argc, argv);
+
+	return TRUE;
+}
+
+static void
+gnome_cc_die (GnomeClient *client, gpointer data)
+{
+	gtk_main_quit ();
+}
+
 int
 main (int argc, char **argv) 
 {
 	CappletDirEntry *entry;
 	CappletDir *dir;
+	GnomeClient *client;
 
         bindtextdomain (PACKAGE, GNOMELOCALEDIR);
 	bind_textdomain_codeset (PACKAGE, "UTF-8");
@@ -135,6 +159,12 @@ main (int argc, char **argv)
 	if (entry == NULL)
 		return -1;
 	capplet_dir_entry_activate (entry, NULL);
+
+	client = gnome_master_client ();
+	g_signal_connect (G_OBJECT (client), "save_yourself",
+			  G_CALLBACK (gnome_cc_save_yourself), argv[0]);
+	g_signal_connect (G_OBJECT (client), "die",
+			  G_CALLBACK (gnome_cc_die), NULL);
 
 	gtk_main ();
 

@@ -1,5 +1,17 @@
 2002-02-14  Lauris Kaplinski  <lauris@ximian.com>
 
+	* preferences.c (gnomecc_preferences_get): Public method to
+	get pointer of static preferences object
+
+	* main.c (gnome_cc_save_yourself): Session signal handler
+	(gnome_cc_die): Ditto
+	(main): Get client and connect session manager signals
+
+	* capplet-dir-view.c (capplet_dir_view_new): Get prefs pointer
+	via public method
+	(get_capplet_dir_view): Ditto
+	(gnomecc_init): Ditto
+
 	* capplet-dir-view-tree.c: Remove #undef GTK_DISABLE_DEPRECATED,
 	so if included again we see warnings
 
