@@ -198,13 +198,16 @@ scan_for_files (GError **error)
 	home_dir = g_get_home_dir ();
 	if (home_dir) {
 		char *user_ad = g_build_filename (home_dir, USER_AD_DIR, NULL);
-		user_list = scan_ad_directory (user_ad, error);
-		if (*error) {
-			g_slist_foreach (system_list, (GFunc)g_free, NULL);
-			g_slist_free (system_list);
-			g_free (user_ad);
-			return NULL;
+		if (g_file_test (user_ad, G_FILE_TEST_IS_DIR)) {
+			user_list = scan_ad_directory (user_ad, error);
+			if (*error) {
+				g_slist_foreach (system_list, (GFunc)g_free, NULL);
+				g_slist_free (system_list);
+				g_free (user_ad);
+				return NULL;
+			}
 		}
+		g_free (user_ad);
 	} else {
 		g_warning (_("Cannot determine user's home directory"));
 	}
