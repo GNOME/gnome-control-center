@@ -534,10 +534,10 @@ name_from_oaf_server_info (OAF_ServerInfo *server)
         display_name = NULL;
 
         langs = get_lang_list ();
-        view_as_name = oaf_server_info_attr_lookup (server, "nautilus:view_as_name", langs);
+        view_as_name = oaf_server_info_prop_lookup (server, "nautilus:view_as_name", langs);
 		
         if (view_as_name == NULL) {
-                view_as_name = oaf_server_info_attr_lookup (server, "name", langs);
+                view_as_name = oaf_server_info_prop_lookup (server, "name", langs);
         }
 
         if (view_as_name == NULL) {
