@@ -1,0 +1,140 @@
+<?xml version="1.0" standalone="no"?> <!--*- mode: xml -*-->
+<!DOCTYPE glade-interface SYSTEM "../glade-2.0.dtd" >
+
+<glade-interface>
+  <requires lib="bonobo"/>
+
+  <widget class="GtkDialog" id="window1">
+    <property name="title" translatable="yes">Gtk+ Theme</property>
+    <property name="visible">yes</property>
+
+    <signal name="destroy" handler="gtk_main_quit" />
+    <signal name="response" handler="response_cb" />
+    
+    <child internal-child="vbox">
+      <widget class="GtkVBox" id="vbox1">
+        <property name="spacing">4</property>
+        <child>
+	  <widget class="GtkFrame" id="frame1">
+	    <property name="label" translatable="yes">Available Themes</property>
+	    <property name="visible">yes</property>
+	    
+	    <child>
+	      <widget class="GtkHBox" id="hbox1">
+	        <property name="homogeneous">no</property>
+		<property name="spacing">4</property>
+		<property name="border_width">4</property>
+		<property name="visible">yes</property>
+		<child>
+		  <widget class="GtkScrolledWindow" id="scrolled1">
+		    <property name="hscrollbar_policy">automatic</property>
+		    <property name="vscrollbar_policy">automatic</property>
+		    <property name="shadow_type">in</property>
+		    <property name="visible">yes</property>
+		    <child>
+		      <widget class="GtkTreeView" id="tree1">
+		        <property name="headers_visible">no</property>
+		        <property name="visible">yes</property>
+		      </widget>
+		    </child>
+		  </widget>
+		  <packing>
+		     <property name="expand">yes</property>
+		     <property name="fill">yes</property>
+		  </packing>
+		 </child>
+		 <child>
+		   <widget class="GtkVBox" id="vbox2">
+		     <property name="homogeneous">no</property>
+		     <property name="spacing">4</property>
+		     <property name="visible">yes</property>
+		     <child>
+		       <widget class="GtkCheckButton" id="check1">
+		         <property name="label" translatable="yes">Auto Preview</property>
+		         <property name="visible">yes</property>
+			 <signal name="toggled" handler="preview_toggled_cb" />
+		       </widget>
+		       <packing>
+		         <property name="expand">no</property>
+		       </packing>
+		     </child>
+		     <child>
+		       <widget class="GtkButton" id="button3">
+		         <property name="label" translatable="yes">Preview</property>
+		         <property name="visible">yes</property>
+			 <signal name="clicked" handler="preview_cb" />
+		       </widget>
+		       <packing>
+		         <property name="expand">no</property>
+		       </packing>
+		     </child>
+		     <child>
+		       <widget class="GtkButton" id="button4">
+		         <property name="label" translatable="yes">Install new theme...</property>
+		         <property name="visible">yes</property>
+			 <signal name="clicked" handler="install_cb" />
+		       </widget>
+		       <packing>
+		         <property name="expand">no</property>
+		       </packing>
+		     </child>
+		   </widget>
+		   <packing>
+		     <property name="expand">no</property>
+		   </packing>
+		 </child>
+	       </widget>
+	     </child>
+	   </widget>
+	</child>
+        <child>
+	  <widget class="GtkFrame" id="frame2">
+	    <property name="label" translatable="yes">Preview</property>
+	    <property name="visible">yes</property>
+	    <child>
+	      <widget class="GtkHBox" id="hbox2">
+  	        <property name="border_width">4</property>
+	        <property name="visible">yes</property>
+		<child>
+	          <widget class="GtkFrame" id="frame3">
+	            <property name="visible">yes</property>
+	    	    <property name="shadow_type">in</property>
+		    <child>
+                      <widget class="BonoboWidget" id="control1">
+                        <property name="moniker">OAFIID:GNOME_Theme_Preview</property>
+                        <property name="visible">yes</property>
+                      </widget>
+		    </child>
+	          </widget>
+	        </child>
+	      </widget>
+	    </child>
+	  </widget>
+        </child>
+      </widget>
+    </child> 
+
+    <child internal-child="action_area">
+      <widget class="GtkHButtonBox" id="buttonbox1">
+        <child>	   
+          <widget class="GtkButton" id="button1">
+            <property name="label">gtk-apply</property>
+            <property name="use_stock">yes</property>
+            <property name="use_underline">yes</property>
+            <property name="response_id">1</property>
+            <property name="visible">yes</property>
+          </widget>
+        </child>
+	<child>
+          <widget class="GtkButton" id="button2">
+            <property name="label">gtk-close</property>
+            <property name="use_stock">yes</property>
+            <property name="use_underline">yes</property>
+            <property name="response_id">2</property>
+            <property name="visible">yes</property>
+          </widget>
+        </child>
+      </widget>
+    </child> 
+  </widget>
+</glade-interface>
