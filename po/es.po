@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-04-15 18:23-0400\n"
-"PO-Revision-Date: 2004-04-09 23:48+0200\n"
+"POT-Creation-Date: 2004-05-13 12:40+0200\n"
+"PO-Revision-Date: 2004-05-13 12:42+0200\n"
 "Last-Translator: Francisco Javier F. Serrador <serrador@cvs.gnome.org>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -388,37 +388,37 @@ msgstr "E_stilo:"
 msgid "There was an error displaying help: %s"
 msgstr "Ha ocurrido un error al mostrar la ayuda: %s"
 
-#: capplets/background/gnome-wp-capplet.c:1290
+#: capplets/background/gnome-wp-capplet.c:1281
 msgid "Centered"
 msgstr "Centrado"
 
-#: capplets/background/gnome-wp-capplet.c:1312
+#: capplets/background/gnome-wp-capplet.c:1303
 msgid "Fill Screen"
 msgstr "Rellenar pantalla"
 
-#: capplets/background/gnome-wp-capplet.c:1332
+#: capplets/background/gnome-wp-capplet.c:1323
 msgid "Scaled"
 msgstr "Escalado"
 
-#: capplets/background/gnome-wp-capplet.c:1352
+#: capplets/background/gnome-wp-capplet.c:1343
 msgid "Tiled"
 msgstr "Mosaico"
 
-#: capplets/background/gnome-wp-capplet.c:1384
+#: capplets/background/gnome-wp-capplet.c:1375
 msgid "Solid Color"
 msgstr "Color sólido"
 
-#: capplets/background/gnome-wp-capplet.c:1400
+#: capplets/background/gnome-wp-capplet.c:1391
 msgid "Horizontal Gradient"
 msgstr "Degradado horizontal"
 
-#: capplets/background/gnome-wp-capplet.c:1416
+#: capplets/background/gnome-wp-capplet.c:1407
 msgid "Vertical Gradient"
 msgstr "Degradado vertical"
 
-#: capplets/background/gnome-wp-capplet.c:1453
-#: capplets/background/gnome-wp-capplet.c:1464
-msgid "Add Wallpapers"
+#. Create the file chooser dialog stuff here
+#: capplets/background/gnome-wp-capplet.c:1443
+msgid "Add Wallpaper"
 msgstr "Añadir tapiz"
 
 #: capplets/background/gnome-wp-info.c:49
@@ -966,7 +966,7 @@ msgstr "C_onservar esta resolución"
 
 #: capplets/display/main.c:803
 msgid ""
-"The XServer does not support the XRandR extension.  Runtime resolution "
+"The X Server does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
 msgstr ""
 "El servidor X no soporta la extensión XRandR. Los cambios de resolución de "
@@ -1530,7 +1530,7 @@ msgstr "Sonido"
 msgid "Window Management"
 msgstr "Gestor de ventanas"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:743
+#: capplets/keybindings/gnome-keybinding-properties.c:744
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1539,20 +1539,20 @@ msgstr ""
 "La combinación «%s» ya esta siendo usada por:\n"
 "«%s»\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:773
+#: capplets/keybindings/gnome-keybinding-properties.c:776
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr ""
 "Error al definir una nueva combinación en la base de datos de configuración: "
 "%s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:819
+#: capplets/keybindings/gnome-keybinding-properties.c:826
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr ""
 "Error al borrar una combinación en la base de datos de configuración: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:967
+#: capplets/keybindings/gnome-keybinding-properties.c:974
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1560,11 +1560,11 @@ msgstr ""
 "No se puede encontrar ningún tema de teclado.  Esto significa que la "
 "instalación de GTK+ está incompleta."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:989
+#: capplets/keybindings/gnome-keybinding-properties.c:996
 msgid "Action"
 msgstr "Acción"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:1013
+#: capplets/keybindings/gnome-keybinding-properties.c:1020
 msgid "Shortcut"
 msgstr "Combinación de teclas"
 
@@ -2553,7 +2553,7 @@ msgstr ""
 "Se ha producido un error al intentar ejecutar (%s)\n"
 "que está asociado a la tecla (%s)"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:65
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:70
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2579,7 +2579,7 @@ msgstr ""
 "- El resultado de  <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/"
 "xkb</b>"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:75
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:80
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2591,7 +2591,21 @@ msgstr ""
 "Intente usar una configuración más simple o usar una versión más reciente de "
 "XFree."
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:151
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:163
+msgid ""
+"The X system keyboard settings differ from your current GNOME keyboard "
+"settings.  Which set would you like to use?"
+msgstr "La configuración del teclado de X difiere de su configuración de teclado de Gnome. ¿Cuál quiere usar?"
+
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:166
+msgid "Use X settings"
+msgstr "Usar la configuración de X"
+
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:168
+msgid "Use GNOME settings"
+msgstr "Usar la configuración de Gnome"
+
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:220
 #, c-format
 msgid ""
 "You have a keyboard remapping file (%s) in your home directory whose "
