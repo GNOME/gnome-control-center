@@ -1,4 +1,4 @@
-SUBDIRS = capplets control-center idl po
+SUBDIRS = libsounds capplets control-center idl po
 #I removed the root-manager for now
 #
 # it generated this error :

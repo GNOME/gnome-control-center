@@ -40,6 +40,8 @@ PKG_CHECK_MODULES(GNOMECC, $COMMON_MODULES libxml-2.0)
 PKG_CHECK_MODULES(ARCHIVER, libbonobo-2.0 bonobo-config-2.0 libxml-2.0)
 PKG_CHECK_MODULES(CONFIG_ARCHIVER, libbonobo-2.0 libgnome-2.0 libxml-2.0)
 PKG_CHECK_MODULES(MONIKER, libbonobo-2.0 bonobo-config-2.0 libxml-2.0)
+PKG_CHECK_MODULES(OLD_CAPPLET, libgnomeui-2.0 libglade-2.0 libcapplet-2.0)
+PKG_CHECK_MODULES(GNOME, libgnomeui-2.0)
 
 SCREENSAVER=screensaver
 AC_PATH_PROG(XSCREENSAVER, xscreensaver, no)
@@ -153,4 +155,5 @@ capplets/screensaver/Makefile
 capplets/screensaver/screensavers/Makefile
 capplets/screensaver/screensavers/magic.pl
 capplets/sound/Makefile
+libsounds/Makefile
 idl/Makefile])
