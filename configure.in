@@ -123,13 +123,13 @@ dnl gnome-vfs
 dnl
 AC_MSG_CHECKING(for gnome-vfs library >= 0.9)
 VFS_CFLAGS=`gnome-vfs-config --cflags`
-VFS_LIBS=`gnome-vfs-config --libs vfs`
+VFS_LIBS=`gnome-vfs-config --libs`
 if test "x$VFS_CFLAGS" != x ; then
     vers=`gnome-vfs-config --version | awk 'BEGIN { FS = "."; } { printf "%d", ($1 * 1000 + $2) * 1000 + $3;}'`
-    if test "$vers" -ge 0004200; then
+    if test "$vers" -ge 0009000; then
         AC_MSG_RESULT(found)
     else
-       AC_MSG_ERROR(You need at least gnome-vfs version 0.4.2 for control-center)
+       AC_MSG_ERROR(You need at least gnome-vfs version 0.9 for control-center)
     fi
 else
     AC_MSG_ERROR(Did not find GdkPixbuf installed)
