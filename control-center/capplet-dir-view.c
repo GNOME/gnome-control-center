@@ -73,6 +73,9 @@ static void capplet_dir_view_finalize    (GObject        *object);
 static void close_cb                     (BonoboUIComponent *uic,
 					  gpointer data,
 					  const char *cname);
+static void help_menu_cb		 (BonoboUIComponent *uic,
+					  gpointer data,
+					  const char *cname);
 static void about_menu_cb                (BonoboUIComponent *uic,
 					  gpointer data,
 					  const char *cname);
@@ -107,6 +110,7 @@ capplet_dir_view_get_type (void)
 
 static BonoboUIVerb capplet_dir_view_verbs[] = {
 	BONOBO_UI_VERB ("FileClose", close_cb),
+	BONOBO_UI_VERB ("HelpContent", help_menu_cb),
 	BONOBO_UI_VERB ("HelpAbout", about_menu_cb),
 	BONOBO_UI_VERB_END
 };
@@ -128,7 +132,8 @@ capplet_dir_view_init (CappletDirView *view, CappletDirViewClass *class)
 
 	ui_component = bonobo_ui_component_new ("gnomecc");
 	bonobo_ui_component_set_container (ui_component, bonobo_object_corba_objref (BONOBO_OBJECT (ui_container)), NULL);
-	bonobo_ui_util_set_ui (ui_component, "", "gnomecc-ui.xml", "gnomecc", NULL);
+	bonobo_ui_util_set_ui (ui_component,
+		GNOMECC_DATA_DIR, "gnomecc-ui.xml", "gnomecc", NULL);
 
 	g_signal_connect_swapped (G_OBJECT (view->app), "destroy",
 				  (GCallback) g_object_unref, view);
@@ -290,6 +295,21 @@ close_cb (BonoboUIComponent *uic, gpointer data, const char *cname)
 {
 	CappletDirView *view = CAPPLET_DIR_VIEW (data);
 	gtk_widget_destroy (GTK_WIDGET (CAPPLET_DIR_VIEW_W (view)));
+}
+
+static void
+help_menu_cb (BonoboUIComponent *uic, gpointer data, const char *cname)
+{
+	GError *error = NULL;
+
+	gnome_help_display_desktop (NULL,
+		"control-center-manual",
+		"control-center.xml",
+		"intro", &error);
+	if (error) {
+		g_warning ("help error: %s\n", error->message);
+		g_error_free (error);
+	}
 }
 
 static void

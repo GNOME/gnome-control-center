@@ -1,6 +1,8 @@
 <Root>
   <commands>
     <cmd name="FileClose" stockid="gtk-close"/>
+    <cmd name="HelpContent" _label="_Contents..." _tip="Overview of the control center"
+    	 pixtype="stock" pixname="Help"/>
     <cmd name="HelpAbout" _label="_About..." _tip="About this application"
     	 pixtype="stock" pixname="About"/>
   </commands>
@@ -10,7 +12,7 @@
       <menuitem name="FileClose" verb=""/>
     </submenu>
     <submenu name="Help" _label="_Help">
-      <placeholder name="BuiltMenuItems"/>
+      <menuitem name="HelpContent" verb=""/>
       <menuitem name="HelpAbout" verb=""/>
     </submenu>
   </menu>
