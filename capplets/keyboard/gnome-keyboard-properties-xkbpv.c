@@ -37,19 +37,36 @@ static GtkWidget * previewWindow = NULL;
 static gint        preview_origin_x = -1;
 static gint        preview_origin_y = -1;
 
-static gboolean click_on_X (GtkWidget *widget,
-                            GdkEvent *event,
-                            GladeXML *dialog)
+static KeyboardDrawingGroupLevel groupsLevels[] = {{0,0},{0,1},{0,2},{0,3}};
+static KeyboardDrawingGroupLevel * pGroupsLevels[] = {
+groupsLevels, groupsLevels+1, groupsLevels+2, groupsLevels+3 };
+
+static gboolean 
+click_on_X (GtkWidget *widget, GdkEvent *event, GladeXML *dialog)
 {
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("enable_preview")), FALSE);
   /* stop processing! */
   return TRUE;
 }
 
+GtkWidget*
+create_preview_widget (GladeXML * dialog)
+{
+  GtkWidget *kbdraw = keyboard_drawing_new ();
+  //keyboard_drawing_set_track_group (KEYBOARD_DRAWING (kbdraw), TRUE);
+  //keyboard_drawing_set_track_config (KEYBOARD_DRAWING (kbdraw), TRUE);
+
+  /* show levels 1 and 2 - hoping that no more levels are used */
+  
+  //keyboard_drawing_set_levels (KEYBOARD_DRAWING (kbdraw), 0, 1);
+  keyboard_drawing_set_groups_levels (KEYBOARD_DRAWING (kbdraw), pGroupsLevels);
+  return kbdraw;
+}
+
 static void
 init_preview (GladeXML * dialog)
 {
-  GtkWidget *kbdraw = keyboard_drawing_new ();
+  GtkWidget *kbdraw = create_preview_widget (dialog);
   GtkWidget *capplet_dialog = glade_xml_get_widget(dialog, "keyboard_dialog");
 
   previewWindow = gtk_window_new (GTK_WINDOW_TOPLEVEL);
@@ -64,13 +81,6 @@ init_preview (GladeXML * dialog)
   gtk_window_set_default_size(GTK_WINDOW (previewWindow), 500, 300);
 
   gtk_window_set_title(GTK_WINDOW (previewWindow), _("Keyboard layout preview"));
-
-  keyboard_drawing_set_track_group (KEYBOARD_DRAWING (kbdraw), TRUE);
-  keyboard_drawing_set_track_config (KEYBOARD_DRAWING (kbdraw), TRUE);
-
-  /* show levels 1 and 2 - hoping that no more levels are used */
-  
-  keyboard_drawing_set_levels (KEYBOARD_DRAWING (kbdraw), 0, 1);
 
   gtk_container_add (GTK_CONTAINER (previewWindow), kbdraw);
 

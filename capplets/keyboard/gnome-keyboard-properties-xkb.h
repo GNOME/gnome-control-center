@@ -92,5 +92,7 @@ extern void xkb_layouts_enable_disable_default (GladeXML * dialog,
                                GSWITCHIT_KBD_CONFIG_KEY_OPTIONS, \
                                GCONF_VALUE_STRING, (list), NULL)
 
+extern GtkWidget * create_preview_widget (GladeXML * dialog);
+
 G_END_DECLS
 #endif				/* __GNOME_KEYBOARD_PROPERTY_XKB_H */
