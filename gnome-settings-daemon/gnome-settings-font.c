@@ -111,7 +111,7 @@ load_cursor (GConfClient *client)
       gchar *font_name;
 
       font_name = strrchr (cursor_font, G_DIR_SEPARATOR);
-      newpath = g_build_filename (dir_name, font_name);
+      newpath = g_build_filename (dir_name, font_name, NULL);
       symlink (cursor_font, newpath);
       g_free (newpath);
     }
