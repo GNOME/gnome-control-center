@@ -144,8 +144,6 @@ static void
 do_table_attach (GtkWidget *table, GtkWidget *child, guint x, guint y, guint w, guint h,
 guint xalign)
 {
-	GtkWidget *align;
-	
 	gtk_misc_set_alignment (GTK_MISC (child), xalign, 0.5);
 	gtk_table_attach (GTK_TABLE (table), child, x, x + w, y, y + h, GTK_FILL, 0, 6, 6);
 }

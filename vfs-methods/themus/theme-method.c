@@ -22,6 +22,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
+#include <glib/gi18n.h>
 #include <libgnomevfs/gnome-vfs.h>
 #include <libgnomevfs/gnome-vfs-cancellable-ops.h>
 #include <libgnomevfs/gnome-vfs-module.h>
@@ -29,7 +30,11 @@
 #include <gnome-theme-info.h>
 
 #define THEME_METHOD_DIRECTORY DIRECTORY_DIR "/theme-method.directory"
-#define _(s) gettext (s)
+
+/* this is from gnome-vfs-monitor-private.h */
+void gnome_vfs_monitor_callback (GnomeVFSMethodHandle *method_handle,
+                                 GnomeVFSURI *info_uri,
+                                 GnomeVFSMonitorEventType event_type);
 
 static void invoke_monitors(gchar *uri, gpointer data);
 

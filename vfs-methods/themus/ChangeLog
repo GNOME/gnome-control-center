@@ -1,3 +1,13 @@
+2004-01-07  Alex Duggan  <aldug@astrolinux.com>
+
+	* theme-method.c: 
+	Remove #define _(s) and replaced with #include <glib/gi18n.h> 
+	which fixes bug #130757.  Add a function prototype 
+	(copied from font-method.c) to fix compiler warning.
+	
+	* themus-properties-view.c:
+	Remove unused variable to fix compiler warning.
+
 2004-01-02  Andrew Sobala  <aes@gnome.org>
 
 	* Makefile.am:
