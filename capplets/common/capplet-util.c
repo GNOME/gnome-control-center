@@ -146,15 +146,12 @@ get_control_cb (BonoboPropertyControl *property_control, gint page_number)
 	GtkWidget            *pf;
 
 	if (control == NULL) {
-		pf = bonobo_property_frame_new (NULL, NULL);
-		widget = create_dialog_cb (BONOBO_OBJREF (BONOBO_PROPERTY_FRAME (pf)->proxy));
+		widget = create_dialog_cb (void);
 
 		if (widget == NULL)
-		{
-			bonobo_object_unref (BONOBO_OBJECT (pf));
 			return NULL;
-		}
 
+		pf = bonobo_property_frame_new (NULL, NULL);
 		gtk_object_set_data (GTK_OBJECT (property_control),
 				     "property-frame", pf);
 		gtk_container_add (GTK_CONTAINER (pf), widget);

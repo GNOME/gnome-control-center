@@ -66,7 +66,7 @@
 typedef void (*ApplySettingsFn) (Bonobo_ConfigDatabase db);
 
 /* Callback to set up the dialog proper */
-typedef GtkWidget *(*CreateDialogFn) (Bonobo_PropertyBag bag);
+typedef GtkWidget *(*CreateDialogFn) (void);
 
 /* Callback to set up property editors for the dialog */
 typedef void (*SetupPropertyEditorsFn) (GtkWidget *dialog, Bonobo_PropertyBag bag);
