@@ -36,6 +36,9 @@
 
 #include <capplet-widget.h>
 
+#include <ximian-archiver/archive.h>
+#include <ximian-archiver/location.h>
+
 #include "preferences.h"
 #include "prefs-widget.h"
 #include "preview.h"
@@ -47,6 +50,22 @@ static Preferences *old_prefs;
 static PrefsWidget *prefs_widget;
 
 static CappletWidget *capplet;
+
+static void
+store_archive_data (void) 
+{
+	Archive *archive;
+	Location *location;
+	xmlDocPtr xml_doc;
+
+	archive = ARCHIVE (archive_load (FALSE));
+	location = archive_get_current_location (archive);
+	xml_doc = preferences_write_xml (prefs);
+	location_store_xml (location, "screensaver-properties-capplet",
+			    xml_doc);
+	xmlFreeDoc (xml_doc);
+	archive_close (archive);
+}
 
 static void 
 state_changed_cb (GtkWidget *widget) 
@@ -119,6 +138,8 @@ ok_cb (GtkWidget *widget)
 	else if (old_sm != SM_DISABLE_SCREENSAVER && 
 	    prefs->selection_mode == SM_DISABLE_SCREENSAVER)
 		stop_xscreensaver ();
+
+	store_archive_data ();
 }
 
 static void
