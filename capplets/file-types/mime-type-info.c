@@ -108,8 +108,18 @@ mime_type_info_load_all (MimeTypeInfo *info)
 	if (info->icon_pixbuf == NULL)
 		get_icon_pixbuf (info, info->icon_name, TRUE);
 
-	if (info->default_action == NULL)
-		info->default_action = gnome_vfs_mime_get_default_application (info->mime_type);
+	if (info->default_action == NULL && info->mime_type != NULL) {
+		/* DO NOT USE gnome_vfs_mime_get_default_application
+		 * it will silently remove non-existant applications
+		 * which will make them seem to disappear on systems that
+		 * are configured differently */
+		char const *app_id = gnome_vfs_mime_get_value (
+			info->mime_type, "default_application_id");
+
+		if (app_id != NULL && app_id[0] != '\0')
+			info->default_action =
+				gnome_vfs_application_registry_get_mime_application (app_id);
+	}
 
 	if (info->default_action == NULL)
 		info->default_action = g_new0 (GnomeVFSMimeApplication, 1);

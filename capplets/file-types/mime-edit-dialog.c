@@ -824,8 +824,7 @@ validate_data (MimeEditDialog *dialog)
 				GTK_BUTTONS_CANCEL,
 				_("Please enter a valid MIME type.  It should be of the form "
 				  "class/type and may not contain any spaces."));
-		} else if (dialog->p->is_add && (gnome_vfs_mime_type_is_known (mime_type) ||
-						 get_mime_type_info (mime_type) != NULL)) {
+		} else if (dialog->p->is_add && gnome_vfs_mime_type_is_known (mime_type)) {
 			err_dialog = gtk_message_dialog_new (
 				GTK_WINDOW (dialog->p->dialog_win),
 				GTK_DIALOG_MODAL, GTK_MESSAGE_QUESTION,
