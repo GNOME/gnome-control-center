@@ -4,7 +4,7 @@
 <glade-interface>
 
 <widget class="GtkDialog" id="mouse_properties_dialog">
-  <property name="title" translatable="yes">Mouse Properties</property>
+  <property name="title" translatable="yes">Mouse Preferences</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_NONE</property>
   <property name="modal">False</property>
@@ -740,9 +740,9 @@
 			      <property name="inverted">False</property>
 			      <property name="adjustment">1 1 10 1 1 0</property>
 			      <accessibility>
-				<atkrelation target="speed_label" type="labelled-by"/>
-				<atkrelation target="low_label" type="labelled-by"/>
 				<atkrelation target="high_label" type="labelled-by"/>
+				<atkrelation target="low_label" type="labelled-by"/>
+				<atkrelation target="speed_label" type="labelled-by"/>
 			      </accessibility>
 			    </widget>
 			    <packing>
@@ -765,9 +765,9 @@
 			      <property name="inverted">False</property>
 			      <property name="adjustment">6 1 10 1 1 0</property>
 			      <accessibility>
-				<atkrelation target="speed_label" type="labelled-by"/>
-				<atkrelation target="slow_label" type="labelled-by"/>
 				<atkrelation target="fast_label" type="labelled-by"/>
+				<atkrelation target="slow_label" type="labelled-by"/>
+				<atkrelation target="speed_label" type="labelled-by"/>
 			      </accessibility>
 			    </widget>
 			    <packing>
@@ -855,8 +855,8 @@
 			  <property name="xpad">0</property>
 			  <property name="ypad">0</property>
 			  <accessibility>
-			    <atkrelation target="sensitivity_scale" type="label-for"/>
 			    <atkrelation target="accel_scale" type="label-for"/>
+			    <atkrelation target="sensitivity_scale" type="label-for"/>
 			  </accessibility>
 			</widget>
 			<packing>
@@ -971,9 +971,9 @@
 			      <property name="inverted">False</property>
 			      <property name="adjustment">1 1 10 1 1 0</property>
 			      <accessibility>
-				<atkrelation target="small_label" type="labelled-by"/>
-				<atkrelation target="large_label" type="labelled-by"/>
 				<atkrelation target="dnd_label" type="labelled-by"/>
+				<atkrelation target="large_label" type="labelled-by"/>
+				<atkrelation target="small_label" type="labelled-by"/>
 			      </accessibility>
 			    </widget>
 			    <packing>

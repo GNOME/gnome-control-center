@@ -662,7 +662,7 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 
 	/* listen to cursors changing */
         gconf_client_notify_add (gconf_client_get_default (),
-				 CURSOR_FONT_KEY, /* dir or key to listen to */
+				 CURSOR_FONT_KEY,
 				 cursor_font_changed,
 				 tree_view, NULL, NULL);
 
@@ -755,8 +755,8 @@ main (int argc, char **argv)
 	} else {
 		changeset = NULL;
 		dialog = create_dialog ();
-		//		load_pixbufs ();
-		//		setup_dialog (dialog, changeset);
+		load_pixbufs ();
+		setup_dialog (dialog, changeset);
 
 		dialog_win = WID ("mouse_properties_dialog");
 		g_signal_connect (dialog_win, "response",
