@@ -3,7 +3,7 @@ always_built_SUBDIRS = desktop-links  \
         theme-switcher new-sound-properties new-bell-properties \
 	new-ui-properties url-properties gnome-edit-properties \
 	session-properties wm-properties new-keyboard-properties \
-	mime-type
+	mime-type new-mouse-properties
 
 SUBDIRS = $(always_built_SUBDIRS)
 
