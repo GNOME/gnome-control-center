@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-06-04 14:42+0200\n"
-"PO-Revision-Date: 2004-06-04 22:56+0800\n"
+"POT-Creation-Date: 2004-06-25 14:57+0200\n"
+"PO-Revision-Date: 2004-06-25 23:46+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
 "MIME-Version: 1.0\n"
@@ -437,7 +437,7 @@ msgstr "应用设置并退出"
 #: capplets/default-applications/gnome-default-applications-properties.c:723
 #: capplets/keyboard/gnome-keyboard-properties.c:224
 #: capplets/mouse/gnome-mouse-properties.c:812
-#: capplets/sound/sound-properties-capplet.c:212
+#: capplets/sound/sound-properties-capplet.c:244
 msgid "Retrieve and store legacy settings"
 msgstr "取得并保存原有的设置"
 
@@ -918,25 +918,29 @@ msgid_plural ""
 "settings will be restored."
 msgstr[0] "测试新设置。如果您在 %d 秒内不响应的话，将会恢复为先前的设置。"
 
-#: capplets/display/main.c:629
+#: capplets/display/main.c:626
+msgid "Keep Resolution"
+msgstr "保留分辨率"
+
+#: capplets/display/main.c:630
 msgid "Do you want to keep this resolution?"
 msgstr "您想保留此分辨率吗？"
 
-#: capplets/display/main.c:654
+#: capplets/display/main.c:655
 msgid "Use _previous resolution"
 msgstr "使用先前的分辨率(_P)"
 
-#: capplets/display/main.c:654
+#: capplets/display/main.c:655
 msgid "_Keep resolution"
 msgstr "保留此分辨率(_K)"
 
-#: capplets/display/main.c:803
+#: capplets/display/main.c:806
 msgid ""
 "The X Server does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
 msgstr "Xserver 不支持 XRandR 扩展。无法在运行时刻对分辨率进行更改。"
 
-#: capplets/display/main.c:811
+#: capplets/display/main.c:814
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
@@ -1523,8 +1527,8 @@ msgstr "辅助功能(_A)"
 
 #: capplets/keyboard/gnome-keyboard-properties.c:220
 #: capplets/keyboard/gnome-keyboard-properties.c:222
-#: capplets/sound/sound-properties-capplet.c:208
-#: capplets/sound/sound-properties-capplet.c:210
+#: capplets/sound/sound-properties-capplet.c:240
+#: capplets/sound/sound-properties-capplet.c:242
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr "应用设置并退出(仅为兼容，现在已由守护进程处理)"
@@ -1899,30 +1903,30 @@ msgid "Socks host port"
 msgstr "Socks 主机端口"
 
 #: capplets/network/gnome-network-preferences.glade.h:17
+msgid "U_sername:"
+msgstr "用户名(_S)："
+
+#: capplets/network/gnome-network-preferences.glade.h:18
 msgid "_Details"
 msgstr "细节(_D)"
 
-#: capplets/network/gnome-network-preferences.glade.h:18
+#: capplets/network/gnome-network-preferences.glade.h:19
 msgid "_FTP proxy:"
 msgstr "_FTP 代理："
 
-#: capplets/network/gnome-network-preferences.glade.h:19
+#: capplets/network/gnome-network-preferences.glade.h:20
 msgid "_Password:"
 msgstr "密码(_P)："
 
-#: capplets/network/gnome-network-preferences.glade.h:20
+#: capplets/network/gnome-network-preferences.glade.h:21
 msgid "_Secure HTTP proxy:"
 msgstr "安全 HTTP 代理(_S)："
-
-#: capplets/network/gnome-network-preferences.glade.h:21
-msgid "_Username:"
-msgstr "用户名(_U)："
 
 #: capplets/sound/gnome-settings-sound.desktop.in.h:1
 msgid "Enable sound and associate sounds with events"
 msgstr "启用窗口管理器的事件音效"
 
-#: capplets/sound/sound-properties-capplet.c:239
+#: capplets/sound/sound-properties-capplet.c:271
 msgid "Sound preferences"
 msgstr "声音首选项"
 
@@ -1990,15 +1994,15 @@ msgid ""
 "selected as the source location"
 msgstr "%s 将要作为主题文件安装的目的路径。所以，您不能将其选为源位置"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:642
+#: capplets/theme-switcher/gnome-theme-manager.c:677
 msgid "Custom theme"
 msgstr "自定义主题"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:642
+#: capplets/theme-switcher/gnome-theme-manager.c:677
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "按保存主题按钮可以保存此主题。"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:1403
+#: capplets/theme-switcher/gnome-theme-manager.c:1455
 msgid ""
 "The default theme schemas could not be found on your system.  This means "
 "that you probably don't have metacity installed, or that your gconf is "
@@ -2113,14 +2117,18 @@ msgid "_Install Theme..."
 msgstr "安装主题(_I)..."
 
 #: capplets/theme-switcher/theme-properties.glade.h:21
+msgid "_Revert"
+msgstr "复原(_R)"
+
+#: capplets/theme-switcher/theme-properties.glade.h:22
 msgid "_Save Theme..."
 msgstr "保存主题(_S)..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:22
+#: capplets/theme-switcher/theme-properties.glade.h:23
 msgid "_Theme name:"
 msgstr "主题名称(_T)："
 
-#: capplets/theme-switcher/theme-properties.glade.h:23
+#: capplets/theme-switcher/theme-properties.glade.h:24
 msgid "theme selection tree"
 msgstr "主题选择树"
 
@@ -2225,7 +2233,7 @@ msgstr "退出(_Q)"
 msgid "_Save"
 msgstr "保存(_S)"
 
-#: capplets/windows/gnome-window-properties.c:378
+#: capplets/windows/gnome-window-properties.c:388
 #, c-format
 msgid ""
 "<b>Cannot start the preferences application for your window manager</b>\n"
@@ -2236,23 +2244,23 @@ msgstr ""
 "\n"
 "%s"
 
-#: capplets/windows/gnome-window-properties.c:625
+#: capplets/windows/gnome-window-properties.c:637
 msgid "Control"
 msgstr "Control"
 
-#: capplets/windows/gnome-window-properties.c:630
+#: capplets/windows/gnome-window-properties.c:642
 msgid "Alt"
 msgstr "Alt"
 
-#: capplets/windows/gnome-window-properties.c:636
+#: capplets/windows/gnome-window-properties.c:648
 msgid "Hyper"
 msgstr "Hyper"
 
-#: capplets/windows/gnome-window-properties.c:643
+#: capplets/windows/gnome-window-properties.c:655
 msgid "Super (or \"Windows logo\")"
 msgstr "Super (或“Windows 标志”)"
 
-#: capplets/windows/gnome-window-properties.c:650
+#: capplets/windows/gnome-window-properties.c:662
 msgid "Meta"
 msgstr "Meta"
 
@@ -2523,8 +2531,7 @@ msgstr ""
 msgid ""
 "The X system keyboard settings differ from your current GNOME keyboard "
 "settings.  Which set would you like to use?"
-msgstr ""
-"X 系统键盘设置与您当前的 GNOME 键盘设置不同。您想要使用哪一个设置？"
+msgstr "X 系统键盘设置与您当前的 GNOME 键盘设置不同。您想要使用哪一个设置？"
 
 #: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:173
 msgid "Use X settings"
@@ -2573,7 +2580,7 @@ msgstr "无法载入声音文件 %s 作为示例 %s"
 msgid "Cannot determine user's home directory"
 msgstr "无法确定用户的主目录"
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:206
+#: gnome-settings-daemon/gnome-settings-xsettings.c:208
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "GConf 键 %s 被设为 %s 类型，但是期望的类型是 %s\n"
@@ -2876,7 +2883,7 @@ msgstr "描述："
 #: vfs-methods/fontilus/font-view.c:394
 #, c-format
 msgid "usage: %s fontfile\n"
-msgstr ""
+msgstr "用法：%s 字体文件\n"
 
 #: vfs-methods/fontilus/fontilus-context-menu.c:131
 msgid "Font context menu items"
@@ -3249,4 +3256,3 @@ msgstr "音量升高"
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
 msgid "Volume up's shortcut."
 msgstr "音量升高的快捷键。"
-
