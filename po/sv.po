@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0.5\n"
-"POT-Creation-Date: 2001-03-11 19:34+0100\n"
+"POT-Creation-Date: 2001-03-13 11:43+0100\n"
 "PO-Revision-Date: 2000-10-08 14:39+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -34,6 +34,14 @@ msgid ""
 msgstr ""
 "ett fel uppstod vid start av 'background-properties-capplet'.\n"
 "avbryter...\n"
+
+#: capplets/background-properties/background-properties.desktop.in.h:1
+msgid "Background"
+msgstr "Bakgrund"
+
+#: capplets/background-properties/background-properties.desktop.in.h:2
+msgid "Configuration of the desktop's background"
+msgstr "Konfiguration av skrivbordsbakgrund"
 
 #: capplets/background-properties/property-background.c:116
 msgid "Disabled"
@@ -124,6 +132,7 @@ msgstr "Sida-vid-sida"
 #: capplets/keyboard-properties/keyboard-properties.c:422
 #: capplets/mouse-properties/mouse-properties.c:112
 #: capplets/screensaver-properties/callbacks.c:802
+#: capplets/session-properties/session-properties.c:323
 #: capplets/sound-properties/sound-properties.c:693
 #: capplets/theme-switcher/gui.c:367
 #: capplets/ui-properties/ui-properties.c:516
@@ -142,6 +151,7 @@ msgstr ""
 #: capplets/keyboard-properties/keyboard-properties.c:424
 #: capplets/mouse-properties/mouse-properties.c:114
 #: capplets/screensaver-properties/callbacks.c:804
+#: capplets/session-properties/session-properties.c:325
 #: capplets/sound-properties/sound-properties.c:695
 #: capplets/sound-properties/sound-properties.c:756
 #: capplets/theme-switcher/gui.c:369
@@ -205,22 +215,61 @@ msgstr "MODE"
 msgid "Display wallpaper: tiled, centered, scaled or ratio"
 msgstr "Visa bakgrund: sida vid sida, centrerad, skalad eller ratio"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:238
-msgid "Gnome editor"
-msgstr "Gnome-editor"
+#: capplets/desktop-links/Desktop.directory.in.h:1
+#: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:1
+msgid "Desktop"
+msgstr "Skrivbord"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:249
-msgid "Run In Terminal"
-msgstr "Kör i terminal"
+#: capplets/desktop-links/Documents.directory.in.h:1
+msgid "Configure how document types are handled"
+msgstr "Konfiguera hantering av dokumenttyper"
 
-#: capplets/file-types/file-types-capplet.desktop.in.h:1
-msgid "File Types and Programs"
-msgstr "Filtyper och program"
+#: capplets/desktop-links/Documents.directory.in.h:2
+msgid "Document Handlers"
+msgstr "Dokumenthantering"
 
-#: capplets/file-types/file-types-capplet.desktop.in.h:2
-msgid "Specify which programs are used to open or view each file type"
-msgstr ""
-"Ange vilka program som ska användas för att öppna och visa varje filtyp"
+#. create the app
+#: capplets/desktop-links/Gnome.directory.in.h:1 control-center/main.c:197
+#: control-center/splash.c:247
+msgid "Control Center"
+msgstr "Kontrollpanelen"
+
+#: capplets/desktop-links/Gnome.directory.in.h:2
+msgid "Control Center Menu"
+msgstr "Kontrollcentermeny"
+
+#: capplets/desktop-links/Multimedia.directory.in.h:1
+msgid "Configure the settings of your Multimedia devices"
+msgstr "Ändra inställningar för multimedia."
+
+#: capplets/desktop-links/Multimedia.directory.in.h:2
+msgid "Multimedia"
+msgstr "Multimedia"
+
+#: capplets/desktop-links/Peripherals.directory.in.h:1
+msgid "Configure your external devices"
+msgstr "Konfigurera din kringutrustning."
+
+#: capplets/desktop-links/Peripherals.directory.in.h:2
+msgid "Peripherals"
+msgstr "Kringutrustning"
+
+#: capplets/desktop-links/Session.directory.in.h:1
+#: capplets/session-properties/chooser.c:57
+msgid "Session"
+msgstr "Session"
+
+#: capplets/desktop-links/Session.directory.in.h:2
+msgid "Session Management Settings"
+msgstr "Inställningar för sessionshantering"
+
+#: capplets/desktop-links/UIOptions.directory.in.h:1
+msgid "Configure the global settings of your GNOME applications"
+msgstr "Konfigurera globala inställningar för GNOME-applikationer."
+
+#: capplets/desktop-links/UIOptions.directory.in.h:2
+msgid "User Interface"
+msgstr "Användargränssnitt"
 
 #: capplets/file-types/file-types-capplet-dialogs.c:387
 msgid "Edit Applications List"
@@ -283,6 +332,7 @@ msgid "File Extensions "
 msgstr "Filändelser"
 
 #: capplets/file-types/file-types-capplet-dialogs.c:967
+#: capplets/session-properties/session-properties.c:205
 #: capplets/wm-properties/wm-properties-capplet.c:1088
 msgid "Add..."
 msgstr "Lägg till..."
@@ -450,9 +500,103 @@ msgstr "Filändelse"
 msgid "Default Action"
 msgstr "Standardbeteende"
 
+#: capplets/file-types/file-types-capplet.desktop.in.h:1
+msgid "File Types and Programs"
+msgstr "Filtyper och program"
+
+#: capplets/file-types/file-types-capplet.desktop.in.h:2
+msgid "Specify which programs are used to open or view each file type"
+msgstr ""
+"Ange vilka program som ska användas för att öppna och visa varje filtyp"
+
 #: capplets/file-types/file-types-icon-entry.c:381
 msgid "Select an icon"
 msgstr "Välj en ikon"
+
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:238
+msgid "Gnome editor"
+msgstr "Gnome-editor"
+
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:249
+msgid "Run In Terminal"
+msgstr "Kör i terminal"
+
+#: capplets/gnome-edit-properties/gnome-edit-properties.desktop.in.h:1
+msgid "Choose the editor that is invoked by gnome-edit"
+msgstr "Välj vilken editor som ska startas av gnome-edit."
+
+#: capplets/gnome-edit-properties/gnome-edit-properties.desktop.in.h:2
+msgid "Default Editor"
+msgstr "GNOME-editor"
+
+#: capplets/keyboard-properties/keyboard-properties.c:262
+msgid "Keyboard bell"
+msgstr "Tangentbordsljud"
+
+#: capplets/keyboard-properties/keyboard-properties.c:270
+msgid "Volume"
+msgstr "Volym"
+
+#: capplets/keyboard-properties/keyboard-properties.c:273
+msgid "Pitch (Hz)"
+msgstr "Tonläge (Hz)"
+
+#: capplets/keyboard-properties/keyboard-properties.c:276
+msgid "Duration (ms)"
+msgstr "Längd (ms)"
+
+#: capplets/keyboard-properties/keyboard-properties.c:288
+msgid "Test"
+msgstr "Test"
+
+#: capplets/keyboard-properties/keyboard-properties.c:306
+msgid "Keyboard repeat rate"
+msgstr "Repeteringshastighet"
+
+#: capplets/keyboard-properties/keyboard-properties.c:316
+msgid "Enable auto-repeat"
+msgstr "Aktivera autorepetering"
+
+#: capplets/keyboard-properties/keyboard-properties.c:325
+msgid "Repeat rate"
+msgstr "Repeteringshastighet"
+
+#: capplets/keyboard-properties/keyboard-properties.c:328
+msgid "Repeat Delay"
+msgstr "Tid innan repetering"
+
+#: capplets/keyboard-properties/keyboard-properties.c:330
+msgid "Keyboard click"
+msgstr "Tangentbordsklick"
+
+#: capplets/keyboard-properties/keyboard-properties.c:339
+msgid "Click on keypress"
+msgstr "Klicka vid tangentnedslag"
+
+#: capplets/keyboard-properties/keyboard-properties.c:348
+msgid "Click volume"
+msgstr "Klickvolym"
+
+#: capplets/keyboard-properties/keyboard-properties.c:359
+msgid "Test settings"
+msgstr "Prova inställningar"
+
+#: capplets/keyboard-properties/keyboard-properties.c:466
+msgid ""
+"an initialization error occurred while starting "
+"'keyboard-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"ett fel uppstod vid start av 'keyboard-properties-capplet'.\n"
+"avbryter...\n"
+
+#: capplets/keyboard-properties/keyboard-properties.desktop.in.h:1
+msgid "Keyboard"
+msgstr "Tangentbord"
+
+#: capplets/keyboard-properties/keyboard-properties.desktop.in.h:2
+msgid "Keyboard Properties"
+msgstr "Tangentbordsinställningar"
 
 #: capplets/mouse-properties/mouse-properties.c:267
 msgid "Mouse buttons"
@@ -516,6 +660,14 @@ msgstr ""
 "ett fel uppstod vid start av 'mouse-properties-capplet'.\n"
 "avbryter...\n"
 
+#: capplets/mouse-properties/mouse-properties.desktop.in.h:1
+msgid "Mouse"
+msgstr "Mus"
+
+#: capplets/mouse-properties/mouse-properties.desktop.in.h:2
+msgid "Mouse Properties"
+msgstr "Egenskaper för mus"
+
 #: capplets/screensaver-properties/callbacks.c:102
 msgid "Require Password"
 msgstr "Använd lösenord"
@@ -546,940 +698,6 @@ msgstr "Inställningar för slumpmässig skärmsläckare"
 #, c-format
 msgid "%s Settings..."
 msgstr "Inställningar för %s..."
-
-#: capplets/screensaver-properties/screensaver-dialog.c:46
-msgid "About:"
-msgstr "Om:"
-
-#: capplets/screensaver-properties/screensaver-dialog.c:51
-msgid "Author:"
-msgstr "Författare:"
-
-#: capplets/screensaver-properties/screensaver-dialog.c:61
-msgid "Author: UNKNOWN"
-msgstr "Författare: OKÄND"
-
-#: capplets/screensaver-properties/screensaver-dialog.c:78
-msgid "Settings"
-msgstr "Inställningar"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:38
-msgid "RANDOM SCREENSAVER"
-msgstr "SLUMPMÄSSIG SKÄRMSLÄCKARE"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:49
-msgid "Screen Saver"
-msgstr "Skärmsläckare"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:61
-msgid ""
-"Pressing this button will popup a dialogbox that will help you setup the "
-"current screensaver."
-msgstr ""
-"Öppna en dialogruta som hjälper dig att ändra inställningar för aktuell "
-"skärmsläckare."
-
-#. set up the initial frame, and get a vbox in which to pack things.
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:88
-msgid "Screen Saver Settings"
-msgstr "Inställningar för skärmsläckare"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:96
-msgid "Start After "
-msgstr "Starta efter "
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:102
-msgid " Minutes."
-msgstr " minuter."
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:117
-msgid "Priority:"
-msgstr "Prioritet:"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:124
-msgid "Low "
-msgstr "Låg "
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:126
-msgid " Normal"
-msgstr " Normal"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:137
-msgid "Shutdown monitor "
-msgstr "Stäng av skärm "
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:139
-msgid " minutes after screen saver has started."
-msgstr " minuter efter att skärmsläckaren startat."
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:152
-msgid "Screen Saver Demo"
-msgstr "Demo"
-
-#: capplets/keyboard-properties/keyboard-properties.c:262
-msgid "Keyboard bell"
-msgstr "Tangentbordsljud"
-
-#: capplets/keyboard-properties/keyboard-properties.c:270
-msgid "Volume"
-msgstr "Volym"
-
-#: capplets/keyboard-properties/keyboard-properties.c:273
-msgid "Pitch (Hz)"
-msgstr "Tonläge (Hz)"
-
-#: capplets/keyboard-properties/keyboard-properties.c:276
-msgid "Duration (ms)"
-msgstr "Längd (ms)"
-
-#: capplets/keyboard-properties/keyboard-properties.c:288
-msgid "Test"
-msgstr "Test"
-
-#: capplets/keyboard-properties/keyboard-properties.c:306
-msgid "Keyboard repeat rate"
-msgstr "Repeteringshastighet"
-
-#: capplets/keyboard-properties/keyboard-properties.c:316
-msgid "Enable auto-repeat"
-msgstr "Aktivera autorepetering"
-
-#: capplets/keyboard-properties/keyboard-properties.c:325
-msgid "Repeat rate"
-msgstr "Repeteringshastighet"
-
-#: capplets/keyboard-properties/keyboard-properties.c:328
-msgid "Repeat Delay"
-msgstr "Tid innan repetering"
-
-#: capplets/keyboard-properties/keyboard-properties.c:330
-msgid "Keyboard click"
-msgstr "Tangentbordsklick"
-
-#: capplets/keyboard-properties/keyboard-properties.c:339
-msgid "Click on keypress"
-msgstr "Klicka vid tangentnedslag"
-
-#: capplets/keyboard-properties/keyboard-properties.c:348
-msgid "Click volume"
-msgstr "Klickvolym"
-
-#: capplets/keyboard-properties/keyboard-properties.c:359
-msgid "Test settings"
-msgstr "Prova inställningar"
-
-#: capplets/keyboard-properties/keyboard-properties.c:466
-msgid ""
-"an initialization error occurred while starting "
-"'keyboard-properties-capplet'.\n"
-"aborting...\n"
-msgstr ""
-"ett fel uppstod vid start av 'keyboard-properties-capplet'.\n"
-"avbryter...\n"
-
-#: capplets/sound-properties/sound-properties.c:97
-msgid ""
-"an initialization error occurred while starting 'sound-properties-capplet'."
-msgstr "ett fel uppstod vid start av 'sound-properties-capplet'."
-
-#: capplets/sound-properties/sound-properties.c:188
-msgid "Event"
-msgstr "Händelse"
-
-#: capplets/sound-properties/sound-properties.c:189
-msgid "File to Play"
-msgstr "Ljudfil"
-
-#: capplets/sound-properties/sound-properties.c:243
-msgid "Enable"
-msgstr "Aktivera"
-
-#: capplets/sound-properties/sound-properties.c:250
-msgid "Enable sound server startup"
-msgstr "Aktivera uppstart av ljudserver"
-
-#: capplets/sound-properties/sound-properties.c:258
-msgid "Sounds for events"
-msgstr "Ljud för händelser"
-
-#: capplets/sound-properties/sound-properties.c:279
-msgid "General"
-msgstr "Allmänt"
-
-#: capplets/sound-properties/sound-properties.c:286
-msgid "Select sound file"
-msgstr "Välj ljudfil"
-
-#: capplets/sound-properties/sound-properties.c:325
-msgid "Play"
-msgstr "Spela upp"
-
-#: capplets/sound-properties/sound-properties.c:336
-msgid "Sound Events"
-msgstr "Ljudhändelser"
-
-#: capplets/sound-properties/sound-properties.c:355
-msgid ""
-"This copy of the GNOME control center was not compiled with sound support"
-msgstr "Denna kopia av GNOME-kontrollpanelen är inte kompilerad med ljudstöd"
-
-#: capplets/sound-properties/sound-properties.c:748
-msgid "The sound file for this event does not exist."
-msgstr "Ljudfilen för denna händelsen finns inte."
-
-#: capplets/sound-properties/sound-properties.c:750
-msgid ""
-"The sound file for this event does not exist.\n"
-"You may want to install the gnome-audio package\n"
-"for a set of default sounds."
-msgstr ""
-"Ljudfilen för denna händelsen finns inte.\n"
-"Du kan installera gnome-audio-paketet\n"
-"för en uppsättning standardljud."
-
-#: capplets/theme-switcher/demo.c:50
-msgid "One"
-msgstr "Ett"
-
-#: capplets/theme-switcher/demo.c:50
-msgid "Two"
-msgstr "Två"
-
-#. just 8 short names that will serve as samples for titles in demo
-#: capplets/theme-switcher/demo.c:52
-msgid "Eenie"
-msgstr "Ett"
-
-#: capplets/theme-switcher/demo.c:52
-msgid "Meenie"
-msgstr "Två"
-
-#: capplets/theme-switcher/demo.c:53
-msgid "Mynie"
-msgstr "Tre"
-
-#: capplets/theme-switcher/demo.c:53
-msgid "Moe"
-msgstr "Fyra"
-
-#: capplets/theme-switcher/demo.c:54
-msgid "Catcha"
-msgstr "Alla"
-
-#: capplets/theme-switcher/demo.c:54
-msgid "Tiger"
-msgstr "Byxor"
-
-#: capplets/theme-switcher/demo.c:55
-msgid "By Its"
-msgstr "Äro"
-
-#: capplets/theme-switcher/demo.c:55
-msgid "Toe"
-msgstr "Dyra"
-
-#: capplets/theme-switcher/demo.c:114
-msgid "Selected themes from above will be tested by previewing here."
-msgstr "Valda teman kan testas med förhandsgranskning här."
-
-#. column one
-#: capplets/theme-switcher/demo.c:119
-msgid "Sample Button"
-msgstr "Testknapp"
-
-#: capplets/theme-switcher/demo.c:123
-msgid "Sample Check Button"
-msgstr "Testkryssruta"
-
-#: capplets/theme-switcher/demo.c:128
-msgid "Sample Text Entry Field"
-msgstr "Testtextfält"
-
-#: capplets/theme-switcher/demo.c:139
-msgid "Submenu"
-msgstr "Undermeny"
-
-#: capplets/theme-switcher/demo.c:146
-msgid "Item 1"
-msgstr "Val 1"
-
-#: capplets/theme-switcher/demo.c:149
-msgid "Another item"
-msgstr "Ett annat val"
-
-#: capplets/theme-switcher/demo.c:154
-msgid "Radio Button 1"
-msgstr "Radioknapp 1"
-
-#: capplets/theme-switcher/demo.c:160
-msgid "Radio Button 2"
-msgstr "Radioknapp 2"
-
-#: capplets/theme-switcher/gui.c:89
-#, c-format
-msgid ""
-"Error installing theme:\n"
-"'%s'\n"
-"%s"
-msgstr ""
-"Kan inte installera tema:\n"
-"\"%s\"\n"
-"%s"
-
-#: capplets/theme-switcher/gui.c:120
-msgid "Select a theme to install"
-msgstr "Välj ett tema att installera"
-
-#: capplets/theme-switcher/gui.c:197
-msgid "Available Themes"
-msgstr "Tillgängliga teman"
-
-#: capplets/theme-switcher/gui.c:221
-msgid ""
-"Auto\n"
-"Preview"
-msgstr ""
-"Auto-\n"
-"visa"
-
-#: capplets/theme-switcher/gui.c:233
-msgid ""
-"Install new\n"
-"theme..."
-msgstr ""
-"Installera nytt\n"
-"tema..."
-
-#. Font selector.
-#.
-#: capplets/theme-switcher/gui.c:239
-msgid "User Font"
-msgstr "Typsnitt"
-
-#. FIXME - should really get this from X somehow
-#. for now we just assume default gtk font
-#: capplets/theme-switcher/gui.c:257
-msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
-msgstr "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
-
-#: capplets/theme-switcher/gui.c:276
-msgid "Use custom font."
-msgstr "Använd eget typsnitt."
-
-#: capplets/theme-switcher/install.c:26
-msgid "Home directory doesn't exist!\n"
-msgstr "Hemkatalogen finns inte!\n"
-
-#: capplets/theme-switcher/install.c:36
-msgid "Theme does not exist"
-msgstr "Temat finns inte"
-
-#: capplets/theme-switcher/install.c:68
-#, c-format
-msgid "Command '%s' failed"
-msgstr "Kommandot \"%s\" kunde inte köras"
-
-#: capplets/theme-switcher/install.c:73
-msgid "Unknown file format"
-msgstr "Okänt filformat"
-
-#: capplets/ui-properties/ui-properties.c:54
-msgid "Can detach and move toolbars"
-msgstr "Kan ta loss och flytta verktygsfält"
-
-#: capplets/ui-properties/ui-properties.c:59
-msgid "Toolbars have relieved border"
-msgstr "Verktygsfält har upphöjd ram"
-
-#: capplets/ui-properties/ui-properties.c:64
-msgid "Toolbar buttons have relieved border"
-msgstr "Knappar på verktygsfält har upphöjd ram"
-
-#: capplets/ui-properties/ui-properties.c:69
-msgid "Toolbars have line separators"
-msgstr "Verktygsfält har avdelningslinjer"
-
-#: capplets/ui-properties/ui-properties.c:74
-msgid "Toolbars have text labels"
-msgstr "Verktygsfält har text"
-
-#: capplets/ui-properties/ui-properties.c:103
-msgid "Can detach and move menus"
-msgstr "Kan ta loss och flytta menyrader"
-
-#: capplets/ui-properties/ui-properties.c:108
-msgid "Menus have relieved border"
-msgstr "Menyrader har upphöjd ram"
-
-#: capplets/ui-properties/ui-properties.c:112
-msgid "Submenus can be torn off"
-msgstr "Kan ta loss menyer"
-
-#: capplets/ui-properties/ui-properties.c:116
-msgid "Menu items have icons"
-msgstr "Menyval har ikoner"
-
-#: capplets/ui-properties/ui-properties.c:140
-msgid "Statusbar is interactive when possible"
-msgstr "Statuslisten är interaktiv när det är möjligt"
-
-#: capplets/ui-properties/ui-properties.c:145
-msgid "Statusbar progress meter is on the right"
-msgstr "Visa mätare till höger"
-
-#: capplets/ui-properties/ui-properties.c:162
-msgid "Menu Options"
-msgstr "Menyer"
-
-#: capplets/ui-properties/ui-properties.c:163
-msgid "Statusbar Options"
-msgstr "Statusrader"
-
-#: capplets/ui-properties/ui-properties.c:164
-msgid "Toolbar Options"
-msgstr "Verktygsfält"
-
-#: capplets/ui-properties/ui-properties.c:170
-msgid "Dialog buttons"
-msgstr "Knappar i dialogrutan"
-
-#: capplets/ui-properties/ui-properties.c:171
-msgid "Default value"
-msgstr "Standardvärde"
-
-#: capplets/ui-properties/ui-properties.c:172
-msgid "Spread buttons out"
-msgstr "Sprid ut knapparna"
-
-#: capplets/ui-properties/ui-properties.c:173
-msgid "Put buttons on edges"
-msgstr "Placera knapparna på kanterna"
-
-#: capplets/ui-properties/ui-properties.c:174
-msgid "Left-justify buttons"
-msgstr "Vänsterjustera knapparna"
-
-#: capplets/ui-properties/ui-properties.c:175
-msgid "Right-justify buttons"
-msgstr "Högerjustera knapparna"
-
-#: capplets/ui-properties/ui-properties.c:180
-msgid "Dialog buttons have icons"
-msgstr "Dialogruteknappar har ikoner"
-
-#: capplets/ui-properties/ui-properties.c:185
-msgid "Use statusbar instead of dialog when possible"
-msgstr "Använd statuslisten istället för dialogrutor när det är möjligt"
-
-#: capplets/ui-properties/ui-properties.c:207
-msgid "Dialog position"
-msgstr "Dialogrutans position"
-
-#: capplets/ui-properties/ui-properties.c:208
-msgid "Let window manager decide"
-msgstr "Låt fönsterhanteraren bestämma"
-
-#: capplets/ui-properties/ui-properties.c:209
-msgid "Center of the screen"
-msgstr "Centrera på skärmen"
-
-#: capplets/ui-properties/ui-properties.c:210
-msgid "At the mouse pointer"
-msgstr "Vid musmarkören"
-
-#: capplets/ui-properties/ui-properties.c:215
-msgid "Dialog hints"
-msgstr "Tips för dialogrutans placering"
-
-#: capplets/ui-properties/ui-properties.c:216
-msgid "Dialogs are like other windows"
-msgstr "Dialogrutor är som vanliga fönster"
-
-#: capplets/ui-properties/ui-properties.c:217
-msgid "Dialogs are treated specially by window manager"
-msgstr "Dialogrutor särbehandlas av fönsterhanteraren"
-
-#: capplets/ui-properties/ui-properties.c:222
-msgid "Place dialogs over application window when possible"
-msgstr "Placera dialogrutor över programfönstret när det är möjligt"
-
-#: capplets/ui-properties/ui-properties.c:243
-msgid "Dialog Layout"
-msgstr "Layout för dialogrutor"
-
-#: capplets/ui-properties/ui-properties.c:244
-msgid "Dialog Behavior"
-msgstr "Uppförande"
-
-#: capplets/ui-properties/ui-properties.c:250
-msgid "Default MDI Mode"
-msgstr "Standard MDI-läge"
-
-#: capplets/ui-properties/ui-properties.c:251
-msgid "Notebook"
-msgstr "Flikhäfte"
-
-#: capplets/ui-properties/ui-properties.c:252
-msgid "Toplevel"
-msgstr "Toppnivå"
-
-#: capplets/ui-properties/ui-properties.c:253
-msgid "Modal"
-msgstr "Modal"
-
-#: capplets/ui-properties/ui-properties.c:258
-msgid "MDI notebook tab position"
-msgstr "Flikposition på MDI-anteckningsbok"
-
-#: capplets/ui-properties/ui-properties.c:259
-msgid "Left"
-msgstr "Vänster"
-
-#: capplets/ui-properties/ui-properties.c:260
-msgid "Right"
-msgstr "Höger"
-
-#: capplets/ui-properties/ui-properties.c:261
-msgid "Top"
-msgstr "Överst"
-
-#: capplets/ui-properties/ui-properties.c:262
-msgid "Bottom"
-msgstr "Nederst"
-
-#: capplets/ui-properties/ui-properties.c:277
-msgid "GNOME MDI Options"
-msgstr "GNOME MDI-alternativ"
-
-#: capplets/url-properties/url-properties.c:51
-msgid "Error initializing the `url-properties' capplet."
-msgstr "Kunde inte köra 'url-properties' capplet."
-
-#: capplets/url-properties/url-properties.c:76
-msgid "Protocol"
-msgstr "Protokoll"
-
-#: capplets/url-properties/url-properties.c:76
-msgid "Command"
-msgstr "Kommando"
-
-#: capplets/url-properties/url-properties.c:93
-msgid "handler:"
-msgstr "hanterare:"
-
-#. set some commonly used handlers
-#: capplets/url-properties/url-properties.c:103
-msgid "Netscape"
-msgstr "Netscape"
-
-#: capplets/url-properties/url-properties.c:108
-msgid "Netscape (new window)"
-msgstr "Netscape (nytt fönster)"
-
-#: capplets/url-properties/url-properties.c:121
-msgid "Help browser"
-msgstr "Hjälpläsare"
-
-#: capplets/url-properties/url-properties.c:127
-msgid "Help browser (new window)"
-msgstr "Hjälpläsare (nytt fönster)"
-
-#: capplets/url-properties/url-properties.c:140
-msgid "Set"
-msgstr "Sätt"
-
-#: capplets/url-properties/url-properties.c:148
-msgid "Remove"
-msgstr "Ta bort"
-
-#: capplets/wm-properties/wm-properties-capplet.c:142
-#, c-format
-msgid ""
-"Starting %s\n"
-"(%d seconds left before operation times out)"
-msgstr ""
-"startar %s\n"
-"(%d sekunder kvar innan kommandot får time-out)"
-
-#: capplets/wm-properties/wm-properties-capplet.c:303
-#, c-format
-msgid "%s (Current)"
-msgstr "%s (Aktuell)"
-
-#: capplets/wm-properties/wm-properties-capplet.c:306
-#, c-format
-msgid "Run Configuration Tool for %s"
-msgstr "Kör konfigurationsverktyg för %s"
-
-#: capplets/wm-properties/wm-properties-capplet.c:317
-msgid " (Not found)"
-msgstr " (Hittas inte)"
-
-#: capplets/wm-properties/wm-properties-capplet.c:356
-msgid ""
-"wm-properties-capplet: Unable to initialize window manager.\n"
-"\tAnother window manager is already running and could not be killed\n"
-msgstr ""
-"wm-properties.capplet: Kan inte starta fönsterhanterare.\n"
-"\tEn annan fönsterhanterare körs redan och kunde inte avslutas\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:360
-#, c-format
-msgid ""
-"wm-properties-capplet: Unable to initialize window manager.\n"
-"\t'%s' didn't start\n"
-msgstr ""
-"wm-properties-capplet: Kan inte starta fönsterhanterare.\n"
-"\t\"%s\" startade inte\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:413
-msgid "Previous window manager did not die\n"
-msgstr "Föregående fönsterhanterare avslutades inte\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:446
-#, c-format
-msgid ""
-"Could not start '%s'.\n"
-"Falling back to previous window manager '%s'\n"
-msgstr ""
-"Kunde inte starta \"%s\".\n"
-"Använder föregående fönsterhanterare \"%s\"\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:477
-msgid ""
-"Could not start fallback window manager.\n"
-"Please run a window manager manually. You can\n"
-"do this by selecting \"Run Program\" in the\n"
-"foot menu\n"
-msgstr ""
-"Kunde inte inte starta fönsterhanterare.\n"
-"Kör en fönsterhanterare manuellt. Du kan\n"
-"göra det genom att välja \"Kör program\" i\n"
-"fot-menyn\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:502
-#: capplets/wm-properties/wm-properties-capplet.c:868
-#: capplets/wm-properties/wm-properties-capplet.c:875
-#: capplets/wm-properties/wm-properties-capplet.c:1021
-msgid "OK"
-msgstr "OK"
-
-#: capplets/wm-properties/wm-properties-capplet.c:520
-msgid ""
-"Your current window manager has been changed. In order for\n"
-"this change to be saved, you will need to save your current\n"
-"session. You can do so immediately by selecting the \"Save session\n"
-"now\" below, or you can save your session later.  This can be\n"
-"done either selecting \"Save Current Session\" under \"Settings\"\n"
-"in the main menu, or by turning on \"Save Current Setup\" when\n"
-"you log out.\n"
-msgstr ""
-"Aktuell fönsterhanterare har ändrats. För att ändringen\n"
-"ska vara permanent måste du spara aktuell session.\n"
-"Du kan göra det genom att välja \"Spara session nu\" eller \n"
-"så kan du spara din session senare. Detta kan göras genom att välja\n"
-"\"Spara aktuell session\" under \"Inställningar\" i huvudmenyn,\n"
-"eller genom att slå på \"Spara nuvarande inställningar\" när du\n"
-"loggar ut.\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:527
-msgid "Save Session Later"
-msgstr "Spara session senare"
-
-#: capplets/wm-properties/wm-properties-capplet.c:527
-msgid "Save Session Now"
-msgstr "Spara session nu"
-
-#: capplets/wm-properties/wm-properties-capplet.c:530
-msgid ""
-"Your current window manager has been changed. In order for\n"
-"this change to be saved, you will need to save your current\n"
-"session. This can be done by either selecting \"Save Current Session\"\n"
-"under \"Settings\" in the main menu, or by turning on\n"
-"\"Save Current Setup\" when you log out.\n"
-msgstr ""
-"Aktuell fönsterhanterare har ändrats. För att ändringen\n"
-"ska vara permanent måste du spara aktuell session\n"
-"Du kan göra det genom att välja \"Spara aktuell session\"\n"
-"under \"Inställningar\" i huvudmenyn, eller genom att slå på\n"
-"\"Spara nuvarande inställningar\" när du loggar ut.\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:757
-msgid "Add New Window Manager"
-msgstr "Lägg till ny fönsterhanterare"
-
-#: capplets/wm-properties/wm-properties-capplet.c:771
-msgid "Name:"
-msgstr "Namn:"
-
-#: capplets/wm-properties/wm-properties-capplet.c:784
-msgid "Command:"
-msgstr "Kommando:"
-
-#: capplets/wm-properties/wm-properties-capplet.c:797
-msgid "Configuration Command:"
-msgstr "Kommando för konfiguration:"
-
-#: capplets/wm-properties/wm-properties-capplet.c:816
-msgid "Window manager is session managed"
-msgstr "Fönsterhanterare använder sessionshantering"
-
-#: capplets/wm-properties/wm-properties-capplet.c:866
-msgid "Name cannot be empty"
-msgstr "Du måste skriva in ett namn"
-
-#: capplets/wm-properties/wm-properties-capplet.c:873
-msgid "Command cannot be empty"
-msgstr "Du måste skriva in ett kommando"
-
-#: capplets/wm-properties/wm-properties-capplet.c:922
-#: capplets/wm-properties/wm-properties-capplet.c:964
-msgid "Edit Window Manager"
-msgstr "Redigera fönsterhanterare"
-
-#: capplets/wm-properties/wm-properties-capplet.c:1020
-msgid "You cannot delete the current Window Manager"
-msgstr "Du kan inte ta bort den aktuella fönsterhanteraren"
-
-#: capplets/wm-properties/wm-properties-capplet.c:1093
-msgid "Edit..."
-msgstr "Redigera..."
-
-#: capplets/wm-properties/wm-properties-capplet.c:1098
-msgid "Delete"
-msgstr "Radera"
-
-#: capplets/wm-properties/wm-properties-capplet.c:1134
-msgid ""
-"an initialization error occurred while starting 'wm-properties-capplet'.\n"
-"aborting...\n"
-msgstr ""
-"ett fel uppstod vid start av 'wm-properties-capplet'.\n"
-"avbryter...\n"
-
-#: control-center/callbacks.c:102 control-center/gnomecc.desktop.in.h:1
-msgid "GNOME Control Center"
-msgstr "GNOME kontrollpanel"
-
-#: control-center/callbacks.c:105
-msgid "Desktop Properties manager."
-msgstr "Egenskaper för skrivbordet."
-
-#: control-center/capplet-manager.c:179
-msgid "Try"
-msgstr "Försök"
-
-#: control-center/capplet-manager.c:185
-msgid "Revert"
-msgstr "Återgå"
-
-#. set the help item
-#: control-center/capplet-manager.c:208
-#, c-format
-msgid "Help with '%s' settings"
-msgstr "Hjälp för inställningar för \"%s\""
-
-#: control-center/capplet-widget-libs.c:46
-msgid "id of the capplet -- assigned by the control-center"
-msgstr "id av capplet -- tilldelad av kontrollpanelen"
-
-#: control-center/capplet-widget-libs.c:46
-msgid "ID"
-msgstr "ID"
-
-#: control-center/capplet-widget-libs.c:47
-msgid "Multi-capplet id."
-msgstr "Multi-capplet id."
-
-#: control-center/capplet-widget-libs.c:47
-msgid "CAPID"
-msgstr "CAPID"
-
-#: control-center/capplet-widget-libs.c:48
-msgid "X ID of the socket it's plugged into"
-msgstr "X ID för den socket den är isatt i"
-
-#: control-center/capplet-widget-libs.c:48
-msgid "XID"
-msgstr "XID"
-
-#: control-center/capplet-widget-libs.c:49
-msgid "IOR of the control-center"
-msgstr "IOR för kontrollpanelen"
-
-#: control-center/capplet-widget-libs.c:49
-msgid "IOR"
-msgstr "IOR"
-
-#: control-center/capplet-widget-libs.c:50
-msgid "Initialize session settings"
-msgstr "Initialisera inställningar för session"
-
-#: control-center/capplet-widget-libs.c:51
-msgid "Ignore default action.  Used for custom init-session cases"
-msgstr "Ignorera standardhändelse. Används för anpassade init-session-fall"
-
-#: control-center/capplet-widget.c:272
-msgid "Sorry, no help is available for these settings."
-msgstr "Tyvärr, ingen hjälp är tillgänglig för de här inställningarna."
-
-#: control-center/corba-glue.c:77
-msgid "capplet-command to be run."
-msgstr "capplet-kommando som ska köras."
-
-#: control-center/corba-glue.c:77
-msgid "CAPPLET"
-msgstr "CAPPLET"
-
-#: control-center/main.c:36
-msgid "Help on control-center"
-msgstr "Hjälp med kontrollpanelen"
-
-#: control-center/main.c:36
-msgid "Help with the GNOME control-center."
-msgstr "Hjälp med GNOMEs kontrollpanel."
-
-#: control-center/main.c:38
-msgid "Help with the current configuration page."
-msgstr "Hjälp med den aktuella sidan."
-
-#: control-center/main.c:41
-msgid "About"
-msgstr "Om"
-
-#: control-center/main.c:41
-msgid "About the GNOME control-center."
-msgstr "Om GNOME:s kontrollpanel."
-
-#. we create the widgets
-#: control-center/main.c:69
-msgid "Warning:"
-msgstr "Varning:"
-
-#: control-center/main.c:69
-msgid "Discard all changes"
-msgstr "Återställ alla ändringar"
-
-#. ...labels, etc
-#: control-center/main.c:78
-msgid ""
-"The following modules have had changes made, but not committed.  If you "
-"would like to edit them, please double click on the appropriate entry."
-msgstr ""
-"Följande moduler har ändrats, men ändringarna har inte verkställts. Om du "
-"vill ändra dem, dubbelklicka på aktuellt val."
-
-#. create the app
-#: capplets/desktop-links/Gnome.directory.in.h:1 control-center/main.c:197
-#: control-center/splash.c:247
-msgid "Control Center"
-msgstr "Kontrollpanelen"
-
-#: control-center/splash.c:48
-msgid "Operating System:"
-msgstr "Operativsystem:"
-
-#: control-center/splash.c:49
-msgid "Distribution Version:"
-msgstr "Distributionsversion:"
-
-#: control-center/splash.c:50
-msgid "Processor Type:"
-msgstr "Processortyp:"
-
-#: control-center/splash.c:51
-msgid "User Name:"
-msgstr "Användarnamn:"
-
-#: control-center/splash.c:52
-msgid "Host Name:"
-msgstr "Värdnamn:"
-
-#. This is about the only case where we'll put Unknown instead
-#. of simply not showing the info.
-#: control-center/splash.c:178
-msgid "Unknown"
-msgstr "Okänd"
-
-#: control-center/gnomecc.desktop.in.h:2
-msgid "The GNOME configuration tool"
-msgstr "Konfigurationsverktyg för GNOME"
-
-#: capplets/wm-properties/wm-properties.desktop.in.h:1
-msgid "Choose a window manager"
-msgstr "Välj en fönsterhanterare"
-
-#: capplets/wm-properties/wm-properties.desktop.in.h:2
-msgid "Window Manager"
-msgstr "Fönsterhanterare"
-
-#: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.h:1
-msgid "Enlightenment"
-msgstr "Enlightenment"
-
-#: capplets/wm-properties/wm-desktops/IceWM.desktop.in.h:1
-msgid "Ice WM"
-msgstr "Ice WM"
-
-#: capplets/wm-properties/wm-desktops/Scwm.desktop.in.h:1
-msgid "Scwm"
-msgstr "Scwm"
-
-#: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.h:1
-msgid "Window Maker"
-msgstr "Window Maker"
-
-#: capplets/wm-properties/wm-desktops/twm.desktop.in.h:1
-msgid "twm"
-msgstr "twm"
-
-#: capplets/url-properties/url-properties.desktop.in.h:1
-msgid "Configure which programs are used to display URLs"
-msgstr "Konfigurera vilka program som används för att visa URL:er"
-
-#: capplets/url-properties/url-properties.desktop.in.h:2
-msgid "URL Handlers"
-msgstr "URL-hantering"
-
-#: capplets/ui-properties/application.desktop.in.h:1
-msgid "Applications"
-msgstr "Applikation"
-
-#: capplets/ui-properties/application.desktop.in.h:2
-msgid "Sets the default feel of GNOME applications"
-msgstr "Konfigurera hur GNOME-applikationer uppför sig."
-
-#: capplets/ui-properties/dialogs.desktop.in.h:1
-msgid "Dialogs"
-msgstr "Dialogrutor"
-
-#: capplets/ui-properties/mdi.desktop.in.h:1
-msgid "MDI"
-msgstr "MDI"
-
-#: capplets/theme-switcher/theme-selector.desktop.in.h:1
-msgid "Select which desktop theme to use"
-msgstr "Välj tema för skrivbordet."
-
-#: capplets/theme-switcher/theme-selector.desktop.in.h:2
-msgid "Theme Selector"
-msgstr "Temaväljare"
-
-#: capplets/sound-properties/sound-properties.desktop.in.h:1
-msgid "Configure GNOME's use of sound"
-msgstr "Välj ljud för GNOME."
-
-#: capplets/sound-properties/sound-properties.desktop.in.h:2
-msgid "Sound"
-msgstr "Ljud"
-
-#: capplets/screensaver-properties/screensaver-properties.desktop.in.h:1
-msgid "Configure the settings of the screensaver"
-msgstr "Ändra inställningar för skärmsläckare"
-
-#: capplets/screensaver-properties/screensaver-properties.desktop.in.h:2
-msgid "Screensaver"
-msgstr "Skärmsläckare"
 
 #: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:1
 msgid "3D Clock"
@@ -1652,8 +870,8 @@ msgid "Whales, dolphins and sharks swimming around, in 3D"
 msgstr "Valar, delfiner och hajar som simmar runt i 3D"
 
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:1
-msgid " A show of objects interacting through attractive and repulsive forces."
-msgstr "Objekt som interagerar genom attraktiva och repellerande krafter."
+msgid "A show of objects interacting through attractive and repulsive forces."
+msgstr "En föreställning med objekt som interagerar genom attraktiva och repellerande krafter."
 
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:2
 msgid "Attraction"
@@ -1856,7 +1074,7 @@ msgstr "Punktstorlek."
 #: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:13
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:20
 #: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:11
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:18
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:17
 #: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:14
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:23
 #: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:19
@@ -1896,7 +1114,7 @@ msgstr "Mindre"
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:29
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:21
 #: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:12
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:19
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:18
 #: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:15
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:24
 #: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:20
@@ -1919,10 +1137,6 @@ msgstr "Mindre"
 #: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:19
 msgid "Speed of Motion."
 msgstr "Rörelsehastighet."
-
-#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:31
-msgid "Ïî-áëèçêî"
-msgstr "Närmare"
 
 #: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:1
 msgid "Blitspin"
@@ -2033,7 +1247,7 @@ msgstr "Visa skärmsläckaren monokromt."
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:17
 #: capplets/screensaver-properties/screensaver-desktops/Braid.desktop.in.h:8
 #: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:10
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:16
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:15
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:19
 #: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:15
 #: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:9
@@ -2290,16 +1504,10 @@ msgid "James Macnicol <J.Macnicol@student.anu.edu.au>"
 msgstr "James Macnicol <J.Macnicol@student.anu.edu.au>"
 
 #: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:14
-msgid ""
-"James Macnicol <J.Macnicol@student.anu.edu.au>, Ïðåäîâ: Äèëÿí Ïàëàóçîâ "
-"<didopalauzov@uk2.net>"
-msgstr "James Macnicol <J.Macnicol@student.anu.edu.au>"
-
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:15
 msgid "Lots of random bubbles grow until they pop."
 msgstr "En massa slumpmässiga bubblor växer tills de går sönder."
 
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:17
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:16
 msgid "Simple"
 msgstr "Enkel"
 
@@ -2469,12 +1677,6 @@ msgstr "Antal iterationer."
 
 #: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:21
 msgid "Stephen Linhart, Ozymandias Desiderata, Jamie Zawinski"
-msgstr "Stephen Linhart, Ozymandias Desiderata och Jamie Zawinski"
-
-#: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:22
-msgid ""
-"Stephen Linhart, Ozymandias Desiderata, Jamie Zawinski, Ïðåâîä: Äèëÿí "
-"Ïàëàóçîâ <didopalauzov@uk2.net>"
 msgstr "Stephen Linhart, Ozymandias Desiderata och Jamie Zawinski"
 
 #: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:3
@@ -3081,7 +2283,8 @@ msgstr "Hyperkub visar en linjebaserad projektion av en hyperkub."
 #: capplets/screensaver-properties/screensaver-desktops/Ifs.desktop.in.h:6
 msgid "Draws spinning, colliding, iterated-function-system images."
 msgstr ""
-"Ritar snurrande och kolliderande ifs-bilder. (ifs = iterated function system)."
+"Ritar snurrande och kolliderande ifs-bilder. (ifs = iterated function "
+"system)."
 
 #: capplets/screensaver-properties/screensaver-desktops/Ifs.desktop.in.h:7
 msgid "Ifs"
@@ -3090,7 +2293,8 @@ msgstr "Ifs"
 #: capplets/screensaver-properties/screensaver-desktops/Ifs.desktop.in.h:8
 msgid "Ifs draws spinning, colliding, iterated-function-system images."
 msgstr ""
-"Ifs ritar snurrande och kolliderande ifs-bilder. (ifs = iterated function system)."
+"Ifs ritar snurrande och kolliderande ifs-bilder. (ifs = iterated function "
+"system)."
 
 #: capplets/screensaver-properties/screensaver-desktops/Ifs.desktop.in.h:9
 msgid "Massimino Pascal <Pascal.Massimon@ens.fr>"
@@ -3789,11 +2993,6 @@ msgstr "Bredd på segment:"
 msgid "Rd-bomb"
 msgstr "Rd-bomb"
 
-#: capplets/desktop-links/Desktop.directory.in.h:1
-#: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:1
-msgid "Desktop"
-msgstr "Skrivbord"
-
 #: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:2
 msgid "Display oily drops."
 msgstr "Visa oljedroppar."
@@ -4153,81 +3352,713 @@ msgstr "Vertikal rullning."
 msgid "Xteevee"
 msgstr "Xtv"
 
-#: capplets/mouse-properties/mouse-properties.desktop.in.h:1
-msgid "Mouse"
-msgstr "Mus"
+#: capplets/screensaver-properties/screensaver-dialog.c:46
+msgid "About:"
+msgstr "Om:"
 
-#: capplets/mouse-properties/mouse-properties.desktop.in.h:2
-msgid "Mouse Properties"
-msgstr "Egenskaper för mus"
+#: capplets/screensaver-properties/screensaver-dialog.c:51
+msgid "Author:"
+msgstr "Författare:"
 
-#: capplets/keyboard-properties/keyboard-properties.desktop.in.h:1
-msgid "Keyboard"
-msgstr "Tangentbord"
+#: capplets/screensaver-properties/screensaver-dialog.c:61
+msgid "Author: UNKNOWN"
+msgstr "Författare: OKÄND"
 
-#: capplets/keyboard-properties/keyboard-properties.desktop.in.h:2
-msgid "Keyboard Properties"
-msgstr "Tangentbordsinställningar"
+#: capplets/screensaver-properties/screensaver-dialog.c:78
+#: capplets/session-properties/gsm-client-row.c:59
+msgid "Settings"
+msgstr "Inställningar"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.desktop.in.h:1
-msgid "Choose the editor that is invoked by gnome-edit"
-msgstr "Välj vilken editor som ska startas av gnome-edit."
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:38
+msgid "RANDOM SCREENSAVER"
+msgstr "SLUMPMÄSSIG SKÄRMSLÄCKARE"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.desktop.in.h:2
-msgid "Default Editor"
-msgstr "GNOME-editor"
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:49
+msgid "Screen Saver"
+msgstr "Skärmsläckare"
 
-#: capplets/background-properties/background-properties.desktop.in.h:1
-msgid "Background"
-msgstr "Bakgrund"
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:61
+msgid ""
+"Pressing this button will popup a dialogbox that will help you setup the "
+"current screensaver."
+msgstr ""
+"Öppna en dialogruta som hjälper dig att ändra inställningar för aktuell "
+"skärmsläckare."
 
-#: capplets/background-properties/background-properties.desktop.in.h:2
-msgid "Configuration of the desktop's background"
-msgstr "Konfiguration av skrivbordsbakgrund"
+#. set up the initial frame, and get a vbox in which to pack things.
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:88
+msgid "Screen Saver Settings"
+msgstr "Inställningar för skärmsläckare"
 
-#: capplets/desktop-links/Documents.directory.in.h:1
-msgid "Configure how document types are handled"
-msgstr "Konfiguera hantering av dokumenttyper"
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:96
+msgid "Start After "
+msgstr "Starta efter "
 
-#: capplets/desktop-links/Documents.directory.in.h:2
-msgid "Document Handlers"
-msgstr "Dokumenthantering"
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:102
+msgid " Minutes."
+msgstr " minuter."
 
-#: capplets/desktop-links/Gnome.directory.in.h:2
-msgid "Control Center Menu"
-msgstr "Kontrollcentermeny"
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:117
+msgid "Priority:"
+msgstr "Prioritet:"
 
-#: capplets/desktop-links/Multimedia.directory.in.h:1
-msgid "Configure the settings of your Multimedia devices"
-msgstr "Ändra inställningar för multimedia."
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:124
+msgid "Low "
+msgstr "Låg "
 
-#: capplets/desktop-links/Multimedia.directory.in.h:2
-msgid "Multimedia"
-msgstr "Multimedia"
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:126
+msgid " Normal"
+msgstr " Normal"
 
-#: capplets/desktop-links/Peripherals.directory.in.h:1
-msgid "Configure your external devices"
-msgstr "Konfigurera din kringutrustning."
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:137
+msgid "Shutdown monitor "
+msgstr "Stäng av skärm "
 
-#: capplets/desktop-links/Peripherals.directory.in.h:2
-msgid "Peripherals"
-msgstr "Kringutrustning"
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:139
+msgid " minutes after screen saver has started."
+msgstr " minuter efter att skärmsläckaren startat."
 
-#: capplets/desktop-links/Session.directory.in.h:1
-msgid "Session"
-msgstr "Session"
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:152
+msgid "Screen Saver Demo"
+msgstr "Demo"
 
-#: capplets/desktop-links/Session.directory.in.h:2
-msgid "Session Management Settings"
-msgstr "Inställningar för sessionshantering"
+#: capplets/screensaver-properties/screensaver-properties.desktop.in.h:1
+msgid "Configure the settings of the screensaver"
+msgstr "Ändra inställningar för skärmsläckare"
 
-#: capplets/desktop-links/UIOptions.directory.in.h:1
-msgid "Configure the global settings of your GNOME applications"
-msgstr "Konfigurera globala inställningar för GNOME-applikationer."
+#: capplets/screensaver-properties/screensaver-properties.desktop.in.h:2
+msgid "Screensaver"
+msgstr "Skärmsläckare"
 
-#: capplets/desktop-links/UIOptions.directory.in.h:2
-msgid "User Interface"
-msgstr "Användargränssnitt"
+#. dialog
+#: capplets/session-properties/chooser.c:93
+msgid "Session Chooser"
+msgstr "Sessionväljare"
+
+#: capplets/session-properties/chooser.c:96
+msgid "Start Session"
+msgstr "Starta session"
+
+#: capplets/session-properties/chooser.c:99
+msgid "Cancel Login"
+msgstr "Avbryt inloggning"
+
+#: capplets/session-properties/gsm-client-editor.c:100
+msgid "Order: "
+msgstr "Ordning: "
+
+#: capplets/session-properties/gsm-client-editor.c:110
+msgid "Style: "
+msgstr "Typ: "
+
+#: capplets/session-properties/gsm-client-list.c:30
+msgid "This button sets the start order of the selected programs.\n"
+msgstr "Ställ in startordningen för markerade program.\n"
+
+#: capplets/session-properties/gsm-client-list.c:31
+msgid ""
+"This button sets the restart style of the selected programs:\n"
+"Normal programs are unaffected by logouts but can die;\n"
+"Respawn programs are never allowed to die;\n"
+"Trash programs are discarded on logout and can die;\n"
+"Settings programs are always started on every login."
+msgstr ""
+"Ställ in omstartstyp för markerade program:\n"
+"Normala program påverkas inte vid utloggning, men kan avslutas;\n"
+"Återuppstå-program får inte avslutas;\n"
+"Skräp-program försvinner vid utloggning och kan avslutas;\n"
+"Inställnings-program startas alltid vid inloggning."
+
+#: capplets/session-properties/gsm-client-list.c:36
+msgid ""
+"This button produces a key to the program states below:\n"
+"Inactive programs are waiting to start or have finished;\n"
+"Starting programs are being given time to get running;\n"
+"Running programs are normal members of the session;\n"
+"Saving programs are saving their session details;\n"
+"Programs which make no contact have Unknown states.\n"
+msgstr ""
+"Visar vilka lägen olika program befinner sig i:\n"
+"Inaktiva program väntar på att starta, eller har avslutats;\n"
+"Startande program ges tid för att köras;\n"
+"Körande program är normala medlemmar av aktuell session;\n"
+"Sparande program håller på att spara sitt sessionsdata;\n"
+"Program som inte har kontakt med sessionshanteraren har Okända lägen.\n"
+
+#: capplets/session-properties/gsm-client-list.c:42
+msgid "This column gives the command used to start a program."
+msgstr "Visar kommandot som används för att starta programmet."
+
+#: capplets/session-properties/gsm-client-list.c:135
+msgid "Order"
+msgstr "Ordning"
+
+#: capplets/session-properties/gsm-client-list.c:136
+msgid "Style"
+msgstr "Stil"
+
+#: capplets/session-properties/gsm-client-list.c:137
+msgid "State"
+msgstr "Tillstånd"
+
+#: capplets/session-properties/gsm-client-list.c:138
+msgid "Program"
+msgstr "Program"
+
+#: capplets/session-properties/gsm-client-row.c:31
+msgid "Inactive"
+msgstr "Inaktiv"
+
+#: capplets/session-properties/gsm-client-row.c:32
+msgid "Waiting to start or already finished."
+msgstr "Väntar på att starta, eller har redan avslutats."
+
+#: capplets/session-properties/gsm-client-row.c:34
+msgid "Starting"
+msgstr "Startar"
+
+#: capplets/session-properties/gsm-client-row.c:35
+msgid "Started but has not yet reported state."
+msgstr "Startat men har ännu inte rapporterat läget."
+
+#: capplets/session-properties/gsm-client-row.c:37
+msgid "Running"
+msgstr "Körande"
+
+#: capplets/session-properties/gsm-client-row.c:38
+msgid "A normal member of the session."
+msgstr "En normal medlem av sessionen."
+
+#: capplets/session-properties/gsm-client-row.c:40
+msgid "Saving"
+msgstr "Sparande"
+
+#: capplets/session-properties/gsm-client-row.c:41
+msgid "Saving session details."
+msgstr "Håller på att spara sessionsdata."
+
+#. This is about the only case where we'll put Unknown instead
+#. of simply not showing the info.
+#: capplets/session-properties/gsm-client-row.c:43 control-center/splash.c:178
+msgid "Unknown"
+msgstr "Okänd"
+
+#: capplets/session-properties/gsm-client-row.c:44
+msgid "State not reported within timeout."
+msgstr "Har inte rapporterat läge innan timeout."
+
+#: capplets/session-properties/gsm-client-row.c:50
+msgid "Normal"
+msgstr "Normal"
+
+#: capplets/session-properties/gsm-client-row.c:51
+msgid "Unaffected by logouts but can die."
+msgstr "Påverkas ej av utloggningar, men kan avslutas."
+
+#: capplets/session-properties/gsm-client-row.c:53
+msgid "Respawn"
+msgstr "Återuppstå"
+
+#: capplets/session-properties/gsm-client-row.c:54
+msgid "Never allowed to die."
+msgstr "Får inte avslutas."
+
+#: capplets/session-properties/gsm-client-row.c:56
+msgid "Trash"
+msgstr "Skräp"
+
+#: capplets/session-properties/gsm-client-row.c:57
+msgid "Discarded on logout and can die."
+msgstr "Försvinner vid utloggning och kan avslutas."
+
+#: capplets/session-properties/gsm-client-row.c:60
+msgid "Always started on every login."
+msgstr "Startas alltid vid inloggning."
+
+#: capplets/session-properties/gsm-protocol.c:500
+msgid "Remove Program"
+msgstr "Ta bort program"
+
+#. frame for options
+#: capplets/session-properties/session-properties.c:148
+msgid "Options"
+msgstr "Alternativ"
+
+#: capplets/session-properties/session-properties.c:159
+msgid "Show splash screen on login"
+msgstr "Visa startbild vid inloggning"
+
+#: capplets/session-properties/session-properties.c:166
+msgid "Prompt on logout"
+msgstr "Fråga innan utloggning sker"
+
+#: capplets/session-properties/session-properties.c:173
+msgid "Automatically save changes to session"
+msgstr "Spara ändringar till session automatiskt"
+
+#. frame for manually started programs
+#: capplets/session-properties/session-properties.c:178
+msgid "Non-session-managed Startup Programs"
+msgstr "Icke-sessionshanterade autostart-program"
+
+#: capplets/session-properties/session-properties.c:195
+#: capplets/session-properties/startup-programs.c:305
+msgid "Priority"
+msgstr "Prioritet"
+
+#: capplets/session-properties/session-properties.c:196
+#: capplets/url-properties/url-properties.c:76
+msgid "Command"
+msgstr "Kommando"
+
+#: capplets/session-properties/session-properties.c:210
+#: capplets/wm-properties/wm-properties-capplet.c:1093
+msgid "Edit..."
+msgstr "Redigera..."
+
+#: capplets/session-properties/session-properties.c:215
+#: capplets/wm-properties/wm-properties-capplet.c:1098
+msgid "Delete"
+msgstr "Radera"
+
+#: capplets/session-properties/session-properties.c:225
+msgid "Browse Currently Running Programs..."
+msgstr "Visa aktuella program..."
+
+#: capplets/session-properties/session-properties.c:417
+msgid "Only display warnings."
+msgstr "Visa bara varningar."
+
+#: capplets/session-properties/startup-programs.c:289
+#: capplets/session-properties/startup-programs.c:296
+msgid "Startup Command"
+msgstr "Startkommando"
+
+#: capplets/session-properties/startup-programs.c:320
+msgid ""
+"Programs with smaller values are started before programs with higher values. "
+"The default value should be OK"
+msgstr ""
+"Program med lägre värden startar före program med högre värden. "
+"Standardvärdet är oftast ok"
+
+#: capplets/session-properties/startup-programs.c:339
+msgid "The startup command cannot be empty"
+msgstr "Startkommandot kan inte vara tomt"
+
+#: capplets/session-properties/startup-programs.c:379
+msgid "Add Startup Program"
+msgstr "Lägg till autostart-program"
+
+#: capplets/session-properties/startup-programs.c:397
+msgid "Edit Startup Program"
+msgstr "Redigera autostart-program"
+
+#: capplets/sound-properties/sound-properties.c:97
+msgid ""
+"an initialization error occurred while starting 'sound-properties-capplet'."
+msgstr "ett fel uppstod vid start av 'sound-properties-capplet'."
+
+#: capplets/sound-properties/sound-properties.c:188
+msgid "Event"
+msgstr "Händelse"
+
+#: capplets/sound-properties/sound-properties.c:189
+msgid "File to Play"
+msgstr "Ljudfil"
+
+#: capplets/sound-properties/sound-properties.c:243
+msgid "Enable"
+msgstr "Aktivera"
+
+#: capplets/sound-properties/sound-properties.c:250
+msgid "Enable sound server startup"
+msgstr "Aktivera uppstart av ljudserver"
+
+#: capplets/sound-properties/sound-properties.c:258
+msgid "Sounds for events"
+msgstr "Ljud för händelser"
+
+#: capplets/sound-properties/sound-properties.c:279
+msgid "General"
+msgstr "Allmänt"
+
+#: capplets/sound-properties/sound-properties.c:286
+msgid "Select sound file"
+msgstr "Välj ljudfil"
+
+#: capplets/sound-properties/sound-properties.c:325
+msgid "Play"
+msgstr "Spela upp"
+
+#: capplets/sound-properties/sound-properties.c:336
+msgid "Sound Events"
+msgstr "Ljudhändelser"
+
+#: capplets/sound-properties/sound-properties.c:355
+msgid ""
+"This copy of the GNOME control center was not compiled with sound support"
+msgstr "Denna kopia av GNOME-kontrollpanelen är inte kompilerad med ljudstöd"
+
+#: capplets/sound-properties/sound-properties.c:748
+msgid "The sound file for this event does not exist."
+msgstr "Ljudfilen för denna händelsen finns inte."
+
+#: capplets/sound-properties/sound-properties.c:750
+msgid ""
+"The sound file for this event does not exist.\n"
+"You may want to install the gnome-audio package\n"
+"for a set of default sounds."
+msgstr ""
+"Ljudfilen för denna händelsen finns inte.\n"
+"Du kan installera gnome-audio-paketet\n"
+"för en uppsättning standardljud."
+
+#: capplets/sound-properties/sound-properties.desktop.in.h:1
+msgid "Configure GNOME's use of sound"
+msgstr "Välj ljud för GNOME."
+
+#: capplets/sound-properties/sound-properties.desktop.in.h:2
+msgid "Sound"
+msgstr "Ljud"
+
+#: capplets/theme-switcher/demo.c:50
+msgid "One"
+msgstr "Ett"
+
+#: capplets/theme-switcher/demo.c:50
+msgid "Two"
+msgstr "Två"
+
+#. just 8 short names that will serve as samples for titles in demo
+#: capplets/theme-switcher/demo.c:52
+msgid "Eenie"
+msgstr "Ett"
+
+#: capplets/theme-switcher/demo.c:52
+msgid "Meenie"
+msgstr "Två"
+
+#: capplets/theme-switcher/demo.c:53
+msgid "Mynie"
+msgstr "Tre"
+
+#: capplets/theme-switcher/demo.c:53
+msgid "Moe"
+msgstr "Fyra"
+
+#: capplets/theme-switcher/demo.c:54
+msgid "Catcha"
+msgstr "Alla"
+
+#: capplets/theme-switcher/demo.c:54
+msgid "Tiger"
+msgstr "Byxor"
+
+#: capplets/theme-switcher/demo.c:55
+msgid "By Its"
+msgstr "Äro"
+
+#: capplets/theme-switcher/demo.c:55
+msgid "Toe"
+msgstr "Dyra"
+
+#: capplets/theme-switcher/demo.c:114
+msgid "Selected themes from above will be tested by previewing here."
+msgstr "Valda teman kan testas med förhandsgranskning här."
+
+#. column one
+#: capplets/theme-switcher/demo.c:119
+msgid "Sample Button"
+msgstr "Testknapp"
+
+#: capplets/theme-switcher/demo.c:123
+msgid "Sample Check Button"
+msgstr "Testkryssruta"
+
+#: capplets/theme-switcher/demo.c:128
+msgid "Sample Text Entry Field"
+msgstr "Testtextfält"
+
+#: capplets/theme-switcher/demo.c:139
+msgid "Submenu"
+msgstr "Undermeny"
+
+#: capplets/theme-switcher/demo.c:146
+msgid "Item 1"
+msgstr "Val 1"
+
+#: capplets/theme-switcher/demo.c:149
+msgid "Another item"
+msgstr "Ett annat val"
+
+#: capplets/theme-switcher/demo.c:154
+msgid "Radio Button 1"
+msgstr "Radioknapp 1"
+
+#: capplets/theme-switcher/demo.c:160
+msgid "Radio Button 2"
+msgstr "Radioknapp 2"
+
+#: capplets/theme-switcher/gui.c:89
+#, c-format
+msgid ""
+"Error installing theme:\n"
+"'%s'\n"
+"%s"
+msgstr ""
+"Kan inte installera tema:\n"
+"\"%s\"\n"
+"%s"
+
+#: capplets/theme-switcher/gui.c:120
+msgid "Select a theme to install"
+msgstr "Välj ett tema att installera"
+
+#: capplets/theme-switcher/gui.c:197
+msgid "Available Themes"
+msgstr "Tillgängliga teman"
+
+#: capplets/theme-switcher/gui.c:221
+msgid ""
+"Auto\n"
+"Preview"
+msgstr ""
+"Auto-\n"
+"visa"
+
+#: capplets/theme-switcher/gui.c:233
+msgid ""
+"Install new\n"
+"theme..."
+msgstr ""
+"Installera nytt\n"
+"tema..."
+
+#. Font selector.
+#.
+#: capplets/theme-switcher/gui.c:239
+msgid "User Font"
+msgstr "Typsnitt"
+
+#. FIXME - should really get this from X somehow
+#. for now we just assume default gtk font
+#: capplets/theme-switcher/gui.c:257
+msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
+msgstr "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
+
+#: capplets/theme-switcher/gui.c:276
+msgid "Use custom font."
+msgstr "Använd eget typsnitt."
+
+#: capplets/theme-switcher/install.c:26
+msgid "Home directory doesn't exist!\n"
+msgstr "Hemkatalogen finns inte!\n"
+
+#: capplets/theme-switcher/install.c:36
+msgid "Theme does not exist"
+msgstr "Temat finns inte"
+
+#: capplets/theme-switcher/install.c:68
+#, c-format
+msgid "Command '%s' failed"
+msgstr "Kommandot \"%s\" kunde inte köras"
+
+#: capplets/theme-switcher/install.c:73
+msgid "Unknown file format"
+msgstr "Okänt filformat"
+
+#: capplets/theme-switcher/theme-selector.desktop.in.h:1
+msgid "Select which desktop theme to use"
+msgstr "Välj tema för skrivbordet."
+
+#: capplets/theme-switcher/theme-selector.desktop.in.h:2
+msgid "Theme Selector"
+msgstr "Temaväljare"
+
+#: capplets/ui-properties/application.desktop.in.h:1
+msgid "Applications"
+msgstr "Applikation"
+
+#: capplets/ui-properties/application.desktop.in.h:2
+msgid "Sets the default feel of GNOME applications"
+msgstr "Konfigurera hur GNOME-applikationer uppför sig."
+
+#: capplets/ui-properties/dialogs.desktop.in.h:1
+msgid "Dialogs"
+msgstr "Dialogrutor"
+
+#: capplets/ui-properties/mdi.desktop.in.h:1
+msgid "MDI"
+msgstr "MDI"
+
+#: capplets/ui-properties/ui-properties.c:54
+msgid "Can detach and move toolbars"
+msgstr "Kan ta loss och flytta verktygsfält"
+
+#: capplets/ui-properties/ui-properties.c:59
+msgid "Toolbars have relieved border"
+msgstr "Verktygsfält har upphöjd ram"
+
+#: capplets/ui-properties/ui-properties.c:64
+msgid "Toolbar buttons have relieved border"
+msgstr "Knappar på verktygsfält har upphöjd ram"
+
+#: capplets/ui-properties/ui-properties.c:69
+msgid "Toolbars have line separators"
+msgstr "Verktygsfält har avdelningslinjer"
+
+#: capplets/ui-properties/ui-properties.c:74
+msgid "Toolbars have text labels"
+msgstr "Verktygsfält har text"
+
+#: capplets/ui-properties/ui-properties.c:103
+msgid "Can detach and move menus"
+msgstr "Kan ta loss och flytta menyrader"
+
+#: capplets/ui-properties/ui-properties.c:108
+msgid "Menus have relieved border"
+msgstr "Menyrader har upphöjd ram"
+
+#: capplets/ui-properties/ui-properties.c:112
+msgid "Submenus can be torn off"
+msgstr "Kan ta loss menyer"
+
+#: capplets/ui-properties/ui-properties.c:116
+msgid "Menu items have icons"
+msgstr "Menyval har ikoner"
+
+#: capplets/ui-properties/ui-properties.c:140
+msgid "Statusbar is interactive when possible"
+msgstr "Statuslisten är interaktiv när det är möjligt"
+
+#: capplets/ui-properties/ui-properties.c:145
+msgid "Statusbar progress meter is on the right"
+msgstr "Visa mätare till höger"
+
+#: capplets/ui-properties/ui-properties.c:162
+msgid "Menu Options"
+msgstr "Menyer"
+
+#: capplets/ui-properties/ui-properties.c:163
+msgid "Statusbar Options"
+msgstr "Statusrader"
+
+#: capplets/ui-properties/ui-properties.c:164
+msgid "Toolbar Options"
+msgstr "Verktygsfält"
+
+#: capplets/ui-properties/ui-properties.c:170
+msgid "Dialog buttons"
+msgstr "Knappar i dialogrutan"
+
+#: capplets/ui-properties/ui-properties.c:171
+msgid "Default value"
+msgstr "Standardvärde"
+
+#: capplets/ui-properties/ui-properties.c:172
+msgid "Spread buttons out"
+msgstr "Sprid ut knapparna"
+
+#: capplets/ui-properties/ui-properties.c:173
+msgid "Put buttons on edges"
+msgstr "Placera knapparna på kanterna"
+
+#: capplets/ui-properties/ui-properties.c:174
+msgid "Left-justify buttons"
+msgstr "Vänsterjustera knapparna"
+
+#: capplets/ui-properties/ui-properties.c:175
+msgid "Right-justify buttons"
+msgstr "Högerjustera knapparna"
+
+#: capplets/ui-properties/ui-properties.c:180
+msgid "Dialog buttons have icons"
+msgstr "Dialogruteknappar har ikoner"
+
+#: capplets/ui-properties/ui-properties.c:185
+msgid "Use statusbar instead of dialog when possible"
+msgstr "Använd statuslisten istället för dialogrutor när det är möjligt"
+
+#: capplets/ui-properties/ui-properties.c:207
+msgid "Dialog position"
+msgstr "Dialogrutans position"
+
+#: capplets/ui-properties/ui-properties.c:208
+msgid "Let window manager decide"
+msgstr "Låt fönsterhanteraren bestämma"
+
+#: capplets/ui-properties/ui-properties.c:209
+msgid "Center of the screen"
+msgstr "Centrera på skärmen"
+
+#: capplets/ui-properties/ui-properties.c:210
+msgid "At the mouse pointer"
+msgstr "Vid musmarkören"
+
+#: capplets/ui-properties/ui-properties.c:215
+msgid "Dialog hints"
+msgstr "Tips för dialogrutans placering"
+
+#: capplets/ui-properties/ui-properties.c:216
+msgid "Dialogs are like other windows"
+msgstr "Dialogrutor är som vanliga fönster"
+
+#: capplets/ui-properties/ui-properties.c:217
+msgid "Dialogs are treated specially by window manager"
+msgstr "Dialogrutor särbehandlas av fönsterhanteraren"
+
+#: capplets/ui-properties/ui-properties.c:222
+msgid "Place dialogs over application window when possible"
+msgstr "Placera dialogrutor över programfönstret när det är möjligt"
+
+#: capplets/ui-properties/ui-properties.c:243
+msgid "Dialog Layout"
+msgstr "Layout för dialogrutor"
+
+#: capplets/ui-properties/ui-properties.c:244
+msgid "Dialog Behavior"
+msgstr "Uppförande"
+
+#: capplets/ui-properties/ui-properties.c:250
+msgid "Default MDI Mode"
+msgstr "Standard MDI-läge"
+
+#: capplets/ui-properties/ui-properties.c:251
+msgid "Notebook"
+msgstr "Flikhäfte"
+
+#: capplets/ui-properties/ui-properties.c:252
+msgid "Toplevel"
+msgstr "Toppnivå"
+
+#: capplets/ui-properties/ui-properties.c:253
+msgid "Modal"
+msgstr "Modal"
+
+#: capplets/ui-properties/ui-properties.c:258
+msgid "MDI notebook tab position"
+msgstr "Flikposition på MDI-anteckningsbok"
+
+#: capplets/ui-properties/ui-properties.c:259
+msgid "Left"
+msgstr "Vänster"
+
+#: capplets/ui-properties/ui-properties.c:260
+msgid "Right"
+msgstr "Höger"
+
+#: capplets/ui-properties/ui-properties.c:261
+msgid "Top"
+msgstr "Överst"
+
+#: capplets/ui-properties/ui-properties.c:262
+msgid "Bottom"
+msgstr "Nederst"
+
+#: capplets/ui-properties/ui-properties.c:277
+msgid "GNOME MDI Options"
+msgstr "GNOME MDI-alternativ"
 
 #: capplets/ui-properties/ui-properties.directory.in.h:1
 msgid "Look and Feel"
@@ -4236,6 +4067,385 @@ msgstr "Utseende"
 #: capplets/ui-properties/ui-properties.directory.in.h:2
 msgid "Look and Feel Properties"
 msgstr "Egenskaper för utseende"
+
+#: capplets/url-properties/url-properties.c:51
+msgid "Error initializing the `url-properties' capplet."
+msgstr "Kunde inte köra 'url-properties' capplet."
+
+#: capplets/url-properties/url-properties.c:76
+msgid "Protocol"
+msgstr "Protokoll"
+
+#: capplets/url-properties/url-properties.c:93
+msgid "handler:"
+msgstr "hanterare:"
+
+#. set some commonly used handlers
+#: capplets/url-properties/url-properties.c:103
+msgid "Netscape"
+msgstr "Netscape"
+
+#: capplets/url-properties/url-properties.c:108
+msgid "Netscape (new window)"
+msgstr "Netscape (nytt fönster)"
+
+#: capplets/url-properties/url-properties.c:121
+msgid "Help browser"
+msgstr "Hjälpläsare"
+
+#: capplets/url-properties/url-properties.c:127
+msgid "Help browser (new window)"
+msgstr "Hjälpläsare (nytt fönster)"
+
+#: capplets/url-properties/url-properties.c:140
+msgid "Set"
+msgstr "Sätt"
+
+#: capplets/url-properties/url-properties.c:148
+msgid "Remove"
+msgstr "Ta bort"
+
+#: capplets/url-properties/url-properties.desktop.in.h:1
+msgid "Configure which programs are used to display URLs"
+msgstr "Konfigurera vilka program som används för att visa URL:er"
+
+#: capplets/url-properties/url-properties.desktop.in.h:2
+msgid "URL Handlers"
+msgstr "URL-hantering"
+
+#: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.h:1
+msgid "Enlightenment"
+msgstr "Enlightenment"
+
+#: capplets/wm-properties/wm-desktops/IceWM.desktop.in.h:1
+msgid "Ice WM"
+msgstr "Ice WM"
+
+#: capplets/wm-properties/wm-desktops/Scwm.desktop.in.h:1
+msgid "Scwm"
+msgstr "Scwm"
+
+#: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.h:1
+msgid "Window Maker"
+msgstr "Window Maker"
+
+#: capplets/wm-properties/wm-desktops/twm.desktop.in.h:1
+msgid "twm"
+msgstr "twm"
+
+#: capplets/wm-properties/wm-properties-capplet.c:142
+#, c-format
+msgid ""
+"Starting %s\n"
+"(%d seconds left before operation times out)"
+msgstr ""
+"startar %s\n"
+"(%d sekunder kvar innan kommandot får time-out)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:303
+#, c-format
+msgid "%s (Current)"
+msgstr "%s (Aktuell)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:306
+#, c-format
+msgid "Run Configuration Tool for %s"
+msgstr "Kör konfigurationsverktyg för %s"
+
+#: capplets/wm-properties/wm-properties-capplet.c:317
+msgid " (Not found)"
+msgstr " (Hittas inte)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:356
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\tAnother window manager is already running and could not be killed\n"
+msgstr ""
+"wm-properties.capplet: Kan inte starta fönsterhanterare.\n"
+"\tEn annan fönsterhanterare körs redan och kunde inte avslutas\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:360
+#, c-format
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\t'%s' didn't start\n"
+msgstr ""
+"wm-properties-capplet: Kan inte starta fönsterhanterare.\n"
+"\t\"%s\" startade inte\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:413
+msgid "Previous window manager did not die\n"
+msgstr "Föregående fönsterhanterare avslutades inte\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:446
+#, c-format
+msgid ""
+"Could not start '%s'.\n"
+"Falling back to previous window manager '%s'\n"
+msgstr ""
+"Kunde inte starta \"%s\".\n"
+"Använder föregående fönsterhanterare \"%s\"\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:477
+msgid ""
+"Could not start fallback window manager.\n"
+"Please run a window manager manually. You can\n"
+"do this by selecting \"Run Program\" in the\n"
+"foot menu\n"
+msgstr ""
+"Kunde inte inte starta fönsterhanterare.\n"
+"Kör en fönsterhanterare manuellt. Du kan\n"
+"göra det genom att välja \"Kör program\" i\n"
+"fot-menyn\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:502
+#: capplets/wm-properties/wm-properties-capplet.c:868
+#: capplets/wm-properties/wm-properties-capplet.c:875
+#: capplets/wm-properties/wm-properties-capplet.c:1021
+msgid "OK"
+msgstr "OK"
+
+#: capplets/wm-properties/wm-properties-capplet.c:520
+msgid ""
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. You can do so immediately by selecting the \"Save session\n"
+"now\" below, or you can save your session later.  This can be\n"
+"done either selecting \"Save Current Session\" under \"Settings\"\n"
+"in the main menu, or by turning on \"Save Current Setup\" when\n"
+"you log out.\n"
+msgstr ""
+"Aktuell fönsterhanterare har ändrats. För att ändringen\n"
+"ska vara permanent måste du spara aktuell session.\n"
+"Du kan göra det genom att välja \"Spara session nu\" eller \n"
+"så kan du spara din session senare. Detta kan göras genom att välja\n"
+"\"Spara aktuell session\" under \"Inställningar\" i huvudmenyn,\n"
+"eller genom att slå på \"Spara nuvarande inställningar\" när du\n"
+"loggar ut.\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:527
+msgid "Save Session Later"
+msgstr "Spara session senare"
+
+#: capplets/wm-properties/wm-properties-capplet.c:527
+msgid "Save Session Now"
+msgstr "Spara session nu"
+
+#: capplets/wm-properties/wm-properties-capplet.c:530
+msgid ""
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. This can be done by either selecting \"Save Current Session\"\n"
+"under \"Settings\" in the main menu, or by turning on\n"
+"\"Save Current Setup\" when you log out.\n"
+msgstr ""
+"Aktuell fönsterhanterare har ändrats. För att ändringen\n"
+"ska vara permanent måste du spara aktuell session\n"
+"Du kan göra det genom att välja \"Spara aktuell session\"\n"
+"under \"Inställningar\" i huvudmenyn, eller genom att slå på\n"
+"\"Spara nuvarande inställningar\" när du loggar ut.\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:757
+msgid "Add New Window Manager"
+msgstr "Lägg till ny fönsterhanterare"
+
+#: capplets/wm-properties/wm-properties-capplet.c:771
+msgid "Name:"
+msgstr "Namn:"
+
+#: capplets/wm-properties/wm-properties-capplet.c:784
+msgid "Command:"
+msgstr "Kommando:"
+
+#: capplets/wm-properties/wm-properties-capplet.c:797
+msgid "Configuration Command:"
+msgstr "Kommando för konfiguration:"
+
+#: capplets/wm-properties/wm-properties-capplet.c:816
+msgid "Window manager is session managed"
+msgstr "Fönsterhanterare använder sessionshantering"
+
+#: capplets/wm-properties/wm-properties-capplet.c:866
+msgid "Name cannot be empty"
+msgstr "Du måste skriva in ett namn"
+
+#: capplets/wm-properties/wm-properties-capplet.c:873
+msgid "Command cannot be empty"
+msgstr "Du måste skriva in ett kommando"
+
+#: capplets/wm-properties/wm-properties-capplet.c:922
+#: capplets/wm-properties/wm-properties-capplet.c:964
+msgid "Edit Window Manager"
+msgstr "Redigera fönsterhanterare"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1020
+msgid "You cannot delete the current Window Manager"
+msgstr "Du kan inte ta bort den aktuella fönsterhanteraren"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1134
+msgid ""
+"an initialization error occurred while starting 'wm-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"ett fel uppstod vid start av 'wm-properties-capplet'.\n"
+"avbryter...\n"
+
+#: capplets/wm-properties/wm-properties.desktop.in.h:1
+msgid "Choose a window manager"
+msgstr "Välj en fönsterhanterare"
+
+#: capplets/wm-properties/wm-properties.desktop.in.h:2
+msgid "Window Manager"
+msgstr "Fönsterhanterare"
+
+#: control-center/callbacks.c:102 control-center/gnomecc.desktop.in.h:1
+msgid "GNOME Control Center"
+msgstr "GNOME kontrollpanel"
+
+#: control-center/callbacks.c:105
+msgid "Desktop Properties manager."
+msgstr "Egenskaper för skrivbordet."
+
+#: control-center/capplet-manager.c:179
+msgid "Try"
+msgstr "Försök"
+
+#: control-center/capplet-manager.c:185
+msgid "Revert"
+msgstr "Återgå"
+
+#. set the help item
+#: control-center/capplet-manager.c:208
+#, c-format
+msgid "Help with '%s' settings"
+msgstr "Hjälp för inställningar för \"%s\""
+
+#: control-center/capplet-widget-libs.c:46
+msgid "id of the capplet -- assigned by the control-center"
+msgstr "id av capplet -- tilldelad av kontrollpanelen"
+
+#: control-center/capplet-widget-libs.c:46
+msgid "ID"
+msgstr "ID"
+
+#: control-center/capplet-widget-libs.c:47
+msgid "Multi-capplet id."
+msgstr "Multi-capplet id."
+
+#: control-center/capplet-widget-libs.c:47
+msgid "CAPID"
+msgstr "CAPID"
+
+#: control-center/capplet-widget-libs.c:48
+msgid "X ID of the socket it's plugged into"
+msgstr "X ID för den socket den är isatt i"
+
+#: control-center/capplet-widget-libs.c:48
+msgid "XID"
+msgstr "XID"
+
+#: control-center/capplet-widget-libs.c:49
+msgid "IOR of the control-center"
+msgstr "IOR för kontrollpanelen"
+
+#: control-center/capplet-widget-libs.c:49
+msgid "IOR"
+msgstr "IOR"
+
+#: control-center/capplet-widget-libs.c:50
+msgid "Initialize session settings"
+msgstr "Initialisera inställningar för session"
+
+#: control-center/capplet-widget-libs.c:51
+msgid "Ignore default action.  Used for custom init-session cases"
+msgstr "Ignorera standardhändelse. Används för anpassade init-session-fall"
+
+#: control-center/capplet-widget.c:272
+msgid "Sorry, no help is available for these settings."
+msgstr "Tyvärr, ingen hjälp är tillgänglig för de här inställningarna."
+
+#: control-center/corba-glue.c:77
+msgid "capplet-command to be run."
+msgstr "capplet-kommando som ska köras."
+
+#: control-center/corba-glue.c:77
+msgid "CAPPLET"
+msgstr "CAPPLET"
+
+#: control-center/gnomecc.desktop.in.h:2
+msgid "The GNOME configuration tool"
+msgstr "Konfigurationsverktyg för GNOME"
+
+#: control-center/main.c:36
+msgid "Help on control-center"
+msgstr "Hjälp med kontrollpanelen"
+
+#: control-center/main.c:36
+msgid "Help with the GNOME control-center."
+msgstr "Hjälp med GNOMEs kontrollpanel."
+
+#: control-center/main.c:38
+msgid "Help with the current configuration page."
+msgstr "Hjälp med den aktuella sidan."
+
+#: control-center/main.c:41
+msgid "About"
+msgstr "Om"
+
+#: control-center/main.c:41
+msgid "About the GNOME control-center."
+msgstr "Om GNOME:s kontrollpanel."
+
+#. we create the widgets
+#: control-center/main.c:69
+msgid "Warning:"
+msgstr "Varning:"
+
+#: control-center/main.c:69
+msgid "Discard all changes"
+msgstr "Återställ alla ändringar"
+
+#. ...labels, etc
+#: control-center/main.c:78
+msgid ""
+"The following modules have had changes made, but not committed.  If you "
+"would like to edit them, please double click on the appropriate entry."
+msgstr ""
+"Följande moduler har ändrats, men ändringarna har inte verkställts. Om du "
+"vill ändra dem, dubbelklicka på aktuellt val."
+
+#: control-center/splash.c:48
+msgid "Operating System:"
+msgstr "Operativsystem:"
+
+#: control-center/splash.c:49
+msgid "Distribution Version:"
+msgstr "Distributionsversion:"
+
+#: control-center/splash.c:50
+msgid "Processor Type:"
+msgstr "Processortyp:"
+
+#: control-center/splash.c:51
+msgid "User Name:"
+msgstr "Användarnamn:"
+
+#: control-center/splash.c:52
+msgid "Host Name:"
+msgstr "Värdnamn:"
+
+#~ msgid "Ïî-áëèçêî"
+#~ msgstr "Närmare"
+
+#~ msgid ""
+#~ "James Macnicol <J.Macnicol@student.anu.edu.au>, Ïðåäîâ: Äèëÿí Ïàëàóçîâ "
+#~ "<didopalauzov@uk2.net>"
+#~ msgstr "James Macnicol <J.Macnicol@student.anu.edu.au>"
+
+#~ msgid ""
+#~ "Stephen Linhart, Ozymandias Desiderata, Jamie Zawinski, Ïðåâîä: Äèëÿí "
+#~ "Ïàëàóçîâ <didopalauzov@uk2.net>"
+#~ msgstr "Stephen Linhart, Ozymandias Desiderata och Jamie Zawinski"
 
 #~ msgid "Configure the settings of the screensaver."
 #~ msgstr "Inställningar för skärmsläckare"
@@ -4357,143 +4567,6 @@ msgstr "Egenskaper för utseende"
 #~ msgstr ""
 #~ "Du kan använda två stycken reg-exp för att identifiera mime-typen.\n"
 #~ "Dessa fält är valfria."
-
-#~ msgid "Session Chooser"
-#~ msgstr "Sessionväljare"
-
-#~ msgid "Start Session"
-#~ msgstr "Starta session"
-
-#~ msgid "Order: "
-#~ msgstr "Ordning: "
-
-#~ msgid "Style: "
-#~ msgstr "Typ: "
-
-#~ msgid "This button sets the start order of the selected programs.\n"
-#~ msgstr "Ställ in startordningen för markerade program.\n"
-
-#~ msgid ""
-#~ "This button sets the restart style of the selected programs:\n"
-#~ "Normal programs are unaffected by logouts but can die;\n"
-#~ "Respawn programs are never allowed to die;\n"
-#~ "Trash programs are discarded on logout and can die;\n"
-#~ "Settings programs are always started on every login."
-#~ msgstr ""
-#~ "Ställ in omstartstyp för markerade program:\n"
-#~ "Normala program påverkas inte vid utloggning, men kan avslutas;\n"
-#~ "Återuppstå-program får inte avslutas;\n"
-#~ "Skräp-program försvinner vid utloggning och kan avslutas;\n"
-#~ "Inställnings-program startas alltid vid inloggning."
-
-#~ msgid ""
-#~ "This button produces a key to the program states below:\n"
-#~ "Inactive programs are waiting to start or have finished;\n"
-#~ "Starting programs are being given time to get running;\n"
-#~ "Running programs are normal members of the session;\n"
-#~ "Saving programs are saving their session details;\n"
-#~ "Programs which make no contact have Unknown states.\n"
-#~ msgstr ""
-#~ "Visar vilka lägen olika program befinner sig i:\n"
-#~ "Inaktiva program väntar på att starta, eller har avslutats;\n"
-#~ "Startande program ges tid för att köras;\n"
-#~ "Körande program är normala medlemmar av aktuell session;\n"
-#~ "Sparande program håller på att spara sitt sessionsdata;\n"
-#~ "Program som inte har kontakt med sessionshanteraren har Okända lägen.\n"
-
-#~ msgid "This column gives the command used to start a program."
-#~ msgstr "Visar kommandot som används för att starta programmet."
-
-#~ msgid "Order"
-#~ msgstr "Ordning"
-
-#~ msgid "Program"
-#~ msgstr "Program"
-
-#~ msgid "Inactive"
-#~ msgstr "Inaktiv"
-
-#~ msgid "Waiting to start or already finished."
-#~ msgstr "Väntar på att starta, eller har redan avslutats."
-
-#~ msgid "Started but has not yet reported state."
-#~ msgstr "Startat men har ännu inte rapporterat läget."
-
-#~ msgid "Running"
-#~ msgstr "Körande"
-
-#~ msgid "A normal member of the session."
-#~ msgstr "En normal medlem av sessionen."
-
-#~ msgid "Saving"
-#~ msgstr "Sparande"
-
-#~ msgid "Saving session details."
-#~ msgstr "Håller på att spara sessionsdata."
-
-#~ msgid "State not reported within timeout."
-#~ msgstr "Har inte rapporterat läge innan timeout."
-
-#~ msgid "Unaffected by logouts but can die."
-#~ msgstr "Påverkas ej av utloggningar, men kan avslutas."
-
-#~ msgid "Respawn"
-#~ msgstr "Återuppstå"
-
-#~ msgid "Never allowed to die."
-#~ msgstr "Får inte avslutas."
-
-#~ msgid "Discarded on logout and can die."
-#~ msgstr "Försvinner vid utloggning och kan avslutas."
-
-#~ msgid "Always started on every login."
-#~ msgstr "Startas alltid vid inloggning."
-
-#~ msgid "Remove Program"
-#~ msgstr "Ta bort program"
-
-#~ msgid "Options"
-#~ msgstr "Alternativ"
-
-#~ msgid "Show splash screen on login"
-#~ msgstr "Visa startbild vid inloggning"
-
-#~ msgid "Prompt on logout"
-#~ msgstr "Fråga innan utloggning sker"
-
-#~ msgid "Automatically save changes to session"
-#~ msgstr "Spara ändringar till session automatiskt"
-
-#~ msgid "Non-session-managed Startup Programs"
-#~ msgstr "Icke-sessionshanterade autostart-program"
-
-#~ msgid "Priority"
-#~ msgstr "Prioritet"
-
-#~ msgid "Browse Currently Running Programs..."
-#~ msgstr "Visa aktuella program..."
-
-#~ msgid "Only display warnings."
-#~ msgstr "Visa bara varningar."
-
-#~ msgid "Startup Command"
-#~ msgstr "Startkommando"
-
-#~ msgid ""
-#~ "Programs with smaller values are started before programs with higher values. "
-#~ "The default value should be OK"
-#~ msgstr ""
-#~ "Program med lägre värden startar före program med högre värden. "
-#~ "Standardvärdet är oftast ok"
-
-#~ msgid "The startup command cannot be empty"
-#~ msgstr "Startkommandot kan inte vara tomt"
-
-#~ msgid "Add Startup Program"
-#~ msgstr "Lägg till autostart-program"
-
-#~ msgid "Edit Startup Program"
-#~ msgstr "Redigera autostart-program"
 
 #~ msgid ""
 #~ "No help is available/installed. Please make sure you\n"
