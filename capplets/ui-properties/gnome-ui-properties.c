@@ -125,6 +125,7 @@ int
 main (int argc, char **argv)
 {
   GConfClient    *client;
+  GConfChangeSet *changeset;
   GladeXML       *dialog;
 
   bindtextdomain (PACKAGE, GNOMELOCALEDIR);
@@ -136,12 +137,15 @@ main (int argc, char **argv)
 		      NULL);
 
   client = gconf_client_get_default ();
+  changeset = gconf_change_set_new ();
   gconf_client_add_dir (client, "/desktop/gnome/interface", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 
   dialog = create_dialog ();
-  setup_dialog (dialog, NULL);
+  setup_dialog (dialog, changeset);
 
   gtk_main ();
+
+  gconf_change_set_unref (changeset);
 
   return 0;
 }
