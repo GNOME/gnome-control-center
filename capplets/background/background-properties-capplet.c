@@ -500,8 +500,12 @@ drag_data_received_cb (GtkWidget *widget, GdkDragContext *context,
 			GnomeVFSURI *uri = (GnomeVFSURI *) uris->data;
 			GConfEntry *entry;
 			GConfValue *value = gconf_value_new (GCONF_VALUE_STRING);
-			
-			gconf_value_set_string (value, gnome_vfs_uri_get_path (uri));
+			gchar *base;
+
+			base = gnome_vfs_unescape_string (gnome_vfs_uri_get_path (uri),
+							  G_DIR_SEPARATOR_S);
+			gconf_value_set_string (value, base);
+			g_free (base);
 
 			/* Hmm, should we bother with changeset here? */
 			gconf_client_set (client, BG_PREFERENCES_PICTURE_FILENAME, value, NULL);
@@ -550,7 +554,6 @@ main (int argc, char **argv)
 	GladeXML       *dialog;
 	GtkWidget      *dialog_win;
 	ApplierSet     *set;
-	GdkPixbuf      *pixbuf;
 
 	static gboolean get_legacy;
 	static struct poptOption cap_options[] = {
@@ -588,10 +591,6 @@ main (int argc, char **argv)
 		gtk_dialog_set_default_response (GTK_DIALOG (dialog_win),
 			GTK_RESPONSE_CLOSE);
 
-		pixbuf = gdk_pixbuf_new_from_file (GNOMECC_DATA_DIR "/icons/background-capplet.png", NULL);
-		gtk_window_set_icon (GTK_WINDOW(dialog_win), pixbuf);
-		gdk_pixbuf_unref (pixbuf);
-
 		g_signal_connect (G_OBJECT (dialog_win),
 				    "response",
 				    G_CALLBACK (cb_dialog_response), NULL);
@@ -609,6 +608,7 @@ main (int argc, char **argv)
 
 		g_object_weak_ref (G_OBJECT (dialog_win), (GWeakNotify) applier_set_free, set);
 		gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog_win)->vbox), WID ("prefs_widget"), TRUE, TRUE, GNOME_PAD_SMALL);
+		capplet_set_icon (dialog_win, "background-capplet.png");
 		gtk_widget_show (dialog_win);
 
 		gtk_main ();
