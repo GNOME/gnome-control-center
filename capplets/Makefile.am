@@ -6,3 +6,7 @@ always_built_SUBDIRS =					\
 	keybindings network
 
 SUBDIRS =  $(always_built_SUBDIRS)
+
+DIST_SUBDIRS = \
+	$(always_built_SUBDIRS)	\
+	windows
