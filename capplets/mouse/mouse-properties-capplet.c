@@ -373,10 +373,6 @@ main (int argc, char **argv)
 	static gboolean apply_only;
 	static gboolean get_legacy;
 	static struct poptOption cap_options[] = {
-		{ "apply", '\0', POPT_ARG_NONE, &apply_only, 0,
-		  N_("Just apply settings and quit (compatibility only; now handled by daemon)"), NULL },
-		{ "init-session-settings", '\0', POPT_ARG_NONE, &apply_only, 0,
-		  N_("Just apply settings and quit (compatibility only; now handled by daemon)"), NULL },
 		{ "get-legacy", '\0', POPT_ARG_NONE, &get_legacy, 0,
 		  N_("Retrieve and store legacy settings"), NULL },
 		{ NULL, '\0', 0, NULL, 0, NULL, NULL }
