@@ -1,7 +1,26 @@
 2001-12-19  Bradford Hovinen  <hovinen@ximian.com>
 
-	* gconf-property-editor.c (gconf_peditor_new_float_range) 
-	(gconf_peditor_new_int_range): Connect to value_changed signal
+	* gconf-property-editor.c (gconf_peditor_new_float_range)
+	(gconf_peditor_new_int_range): Connect to value_changed signal Add
+	properties conv-{to|from}-widget-cb and use those for conversion
+	of values to and from the widget
+	(peditor_{int|float}_range_value_changed, friends): Combine into
+	peditor_numeric_*
+	(gconf_peditor_new): Implement. Factor out some common code from
+	the various type-specific constructors
+	(peditor_*_value_changed): Don't check if the value is the same as
+	what is already in the widget; it's not very important
+	(peditor_*_value_changed): Remove the key from the changeset
+	(gconf_peditor_new_*): Add g_return_val_if_fail macros
+	(gconf_peditor_widget_set_guard): Add g_return_if_fail macros
+	(gconf_value_float_to_int, gconf_value_int_to_float): Implement
+	(gconf_property_editor_set_prop): Store the callback in the
+	property editor proper
+	(gconf_peditor_new): Put initialization code in an idle handler
+
+	* gconf-property-editor.c: Add ui-control property storing the
+	object (normally a widget) that controls the property; remove
+	object property and replace its function with ui-control
 
 	* capplet-util.c: Comment out most of this file
 

@@ -38,7 +38,7 @@ typedef struct _GConfPropertyEditor GConfPropertyEditor;
 typedef struct _GConfPropertyEditorClass GConfPropertyEditorClass;
 typedef struct _GConfPropertyEditorPrivate GConfPropertyEditorPrivate;
 
-typedef gfloat (*GConfPEditorValueConvFn) (gfloat);
+typedef GConfValue *(*GConfPEditorValueConvFn) (const GConfValue *);
 
 struct _GConfPropertyEditor 
 {
@@ -76,19 +76,15 @@ GObject *gconf_peditor_new_select_menu  (GConfChangeSet          *changeset,
 GObject *gconf_peditor_new_select_radio (GConfChangeSet          *changeset,
 					 gchar                   *key,
 					 GSList                  *radio_group);
-GObject *gconf_peditor_new_float_range  (GConfChangeSet          *changeset,
-					 gchar                   *key,
-					 GtkWidget               *range,
-					 GConfPEditorValueConvFn  to_widget_cb,
-					 GConfPEditorValueConvFn  from_widget_cb);
-GObject *gconf_peditor_new_int_range    (GConfChangeSet          *changeset,
-					 gchar                   *key,
-					 GtkWidget               *range,
-					 GConfPEditorValueConvFn  to_widget_cb,
-					 GConfPEditorValueConvFn  from_widget_cb);
+GObject *gconf_peditor_new_numeric_range (GConfChangeSet          *changeset,
+					  gchar                   *key,
+					  GtkWidget               *range);
 
 void gconf_peditor_widget_set_guard     (GConfPropertyEditor     *peditor,
 					 GtkWidget               *widget);
+
+GConfValue *gconf_value_int_to_float    (const GConfValue        *value);
+GConfValue *gconf_value_float_to_int    (const GConfValue        *value);
 
 G_END_DECLS
 
