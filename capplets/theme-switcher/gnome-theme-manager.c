@@ -73,6 +73,108 @@ create_dialog (void)
 
 
 static void
+load_meta_themes (GtkTreeView *tree_view,
+		  GList       *meta_theme_list,
+		  char        *current_theme,
+		  char        *default_theme)
+{
+  GList *list;
+  GtkTreeModel *model;
+  GtkWidget *swindow;
+  gint i = 0;
+  gboolean current_theme_found = FALSE;
+  GtkTreeRowReference *row_ref = NULL;
+
+  swindow = GTK_WIDGET (tree_view)->parent;
+  model = gtk_tree_view_get_model (tree_view);
+
+  setting_model = TRUE;
+  gtk_list_store_clear (GTK_LIST_STORE (model));
+  
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (swindow),
+				  GTK_POLICY_NEVER, GTK_POLICY_NEVER);
+  gtk_widget_set_usize (swindow, -1, -1);
+
+  for (list = meta_theme_list; list; list = list->next)
+    {
+      GnomeThemeMetaInfo *meta_theme_info = list->data;
+      gchar *blurb;
+      GtkTreeIter iter;
+      gboolean is_default;
+
+      gtk_list_store_prepend (GTK_LIST_STORE (model), &iter);
+
+      if (strcmp (default_theme, meta_theme_info->name) == 0)
+	is_default = TRUE;
+      else
+	is_default = FALSE;
+
+      if (strcmp (current_theme, meta_theme_info->name) == 0)
+	{
+	  GtkTreePath *path = gtk_tree_model_get_path (model, &iter);
+	  row_ref = gtk_tree_row_reference_new (model, path);
+	  gtk_tree_path_free (path);
+	  current_theme_found = TRUE;
+	}
+      blurb = g_strdup_printf ("<span size=\"larger\" weight=\"bold\">%s</span>\n\n%s", meta_theme_info->name, meta_theme_info->comment);
+      gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+			  THEME_NAME_COLUMN, blurb,
+			  DEFAULT_THEME_COLUMN, is_default,
+			  -1);
+      g_free (blurb);
+
+      if (i == MAX_ELEMENTS_BEFORE_SCROLLING)
+	{
+	  GtkRequisition rectangle;
+	  gtk_widget_size_request (GTK_WIDGET (tree_view), &rectangle);
+	  gtk_widget_set_usize (swindow, -1, rectangle.height);
+	  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (swindow),
+					  GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
+	}
+      i++;
+    }
+
+  if (! current_theme_found)
+    {
+      GtkTreeIter iter;
+      GtkTreePath *path;
+      gboolean is_default;
+
+      if (strcmp (default_theme, current_theme) == 0)
+	is_default = TRUE;
+      else
+	is_default = FALSE;
+      gtk_list_store_prepend (GTK_LIST_STORE (model), &iter);
+      gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+			  THEME_NAME_COLUMN, current_theme,
+			  DEFAULT_THEME_COLUMN, is_default,
+			  -1);
+
+      path = gtk_tree_model_get_path (model, &iter);
+      row_ref = gtk_tree_row_reference_new (model, path);
+      gtk_tree_path_free (path);
+    }
+
+  if (row_ref)
+    {
+      GtkTreePath *path;
+
+      path = gtk_tree_row_reference_get_path (row_ref);
+      gtk_tree_view_set_cursor (tree_view,path, NULL, FALSE);
+
+      if (initial_scroll)
+	{
+	  gtk_tree_view_scroll_to_cell (tree_view, path, NULL, TRUE, 0.5, 0.0);
+	  initial_scroll = FALSE;
+	}
+      
+      gtk_tree_path_free (path);
+      gtk_tree_row_reference_free (row_ref);
+    }
+  setting_model = FALSE;
+}
+
+static void
 load_theme_names (GtkTreeView *tree_view,
 		  GList       *theme_list,
 		  char        *current_theme,
@@ -221,6 +323,7 @@ static void
 meta_theme_setup_info (GnomeThemeMetaInfo *meta_theme_info,
 		       GladeXML           *dialog)
 {
+	return;
   if (meta_theme_info == NULL)
     {
       gtk_widget_hide (WID ("meta_theme_extras_vbox"));
@@ -518,7 +621,7 @@ read_themes (GladeXML *dialog)
 	{
 	  current_meta_theme = g_strdup (info->name);
 	}
-      string_list = g_list_prepend (string_list, info->name);
+      string_list = g_list_prepend (string_list, info);
     }
 
   if (string_list == NULL)
@@ -532,7 +635,7 @@ read_themes (GladeXML *dialog)
       gtk_widget_show (WID ("meta_theme_hbox"));
       if (current_meta_theme == NULL)
 	current_meta_theme = g_strdup (_("Current modified"));
-      load_theme_names (GTK_TREE_VIEW (WID ("meta_theme_treeview")), string_list, current_meta_theme, META_THEME_DEFAULT_NAME);
+      load_meta_themes (GTK_TREE_VIEW (WID ("meta_theme_treeview")), string_list, current_meta_theme, META_THEME_DEFAULT_NAME);
       g_list_free (string_list);
     }
   g_list_free (theme_list);
@@ -760,7 +863,7 @@ setup_tree_view (GtkTreeView *tree_view,
   gtk_tree_view_insert_column_with_attributes (tree_view,
  					       -1, NULL,
  					       gtk_cell_renderer_text_new (),
- 					       "text", THEME_NAME_COLUMN,
+ 					       "markup", THEME_NAME_COLUMN,
  					       NULL);
 
   model = (GtkTreeModel *) gtk_list_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_BOOLEAN);
