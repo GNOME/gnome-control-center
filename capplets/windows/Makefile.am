@@ -2,10 +2,28 @@ bin_PROGRAMS = gnome-window-properties
 
 gnome_window_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
 gnome_window_properties_SOURCES = 		\
+	gnome-window-manager.h			\
+	gnome-window-manager.c			\
 	gnome-window-properties.c		\
 	wm-properties.h				\
 	wm-exec.c				\
 	wm-list.c
+
+wms_flags = -export_dynamic -avoid-version
+wmsdir = $(libdir)/window-manager-settings/
+
+wms_LTLIBRARIES =			\
+	libmetacity.la
+
+libmetacity_la_SOURCES = 		\
+	gnome-window-manager.h		\
+	metacity-window-manager.c	\
+	metacity-window-manager.h
+
+
+libmetacity_la_LDFLAGS = $(wms_flags)
+libmetacity_la_LIBADD =
+
 
 @INTLTOOL_DESKTOP_RULE@
 
@@ -25,7 +43,8 @@ desktopdir = $(GNOMECC_DESKTOP_DIR)
 Desktop_in_files = window-properties.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
-INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS) $(DESKTOP_ITEM_CFLAGS)
+INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS) $(DESKTOP_ITEM_CFLAGS) 					\
+	     -DGNOME_WINDOW_MANAGER_MODULE_PATH=\""$(libdir)/window-manager-settings"\"
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
 EXTRA_DIST = $(Glade_DATA) $(icons_DATA) $(Desktop_in_files) $(pixmap_DATA)
 

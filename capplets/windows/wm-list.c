@@ -112,7 +112,7 @@ wm_copy (WindowManager *wm)
 
 
 static WindowManager *
-wm_list_find (GList *list, gchar *name)
+wm_list_find (GList *list, const char *name)
 {
         GList *tmp_list = list;
         while (tmp_list) {
@@ -127,7 +127,7 @@ wm_list_find (GList *list, gchar *name)
 }
 
 static WindowManager *
-wm_list_find_exec (GList *list, gchar *name)
+wm_list_find_exec (GList *list, const char *name)
 {
         GList *tmp_list = list;
         while (tmp_list) {

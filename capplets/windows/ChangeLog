@@ -1,3 +1,34 @@
+2002-05-11  Seth Nickell  <snickell@stanford.edu>
+
+	* .cvsignore:
+
+	Ignore gladep (grrr) files.
+	
+	* Makefile.am:
+	* gnome-window-manager.c: (gnome_window_manager_new):
+	* gnome-window-manager.h:
+	* metacity-window-manager.c: (window_manager_new),
+	(metacity_set_theme), (metacity_get_theme_list),
+	(metacity_set_font), (metacity_get_focus_follows_mouse),
+	(metacity_set_focus_follows_mouse), (finalize), (class_init),
+	(init), (metacity_window_manager_get_type):
+	* metacity-window-manager.h:
+
+	First pass at adding settings modules.
+	
+	* window-capplet.png:
+
+	Use the wm-properties icon.
+
+	* wm-list.c: (wm_list_find), (wm_list_find_exec):
+
+	Nix some warnings caused by non-use of const.
+
+	* gnome-window-properties.c: (setup_dialog):
+	* gnome-window-properties.glade:
+
+	Tweak appearance some more.
+	
 2002-05-10  Seth Nickell  <snickell@stanford.edu>
 
 	* gnome-window-properties.c: (setup_dialog), (main):

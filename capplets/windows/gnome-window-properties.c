@@ -19,7 +19,9 @@
 
 //#include "gnome-startup.h"
 
-#define TITLEBAR_FONT_KEY "/desktop/gnome/applications/window_manager/titlebar_font"
+#define THEME_KEY                "/desktop/gnome/applications/window_manager/theme"
+#define TITLEBAR_FONT_KEY        "/desktop/gnome/applications/window_manager/titlebar_font"
+#define FOCUS_FOLLOWS_MOUSE_KEY  "/desktop/gnome/applications/window_manager/focus_follows_mouse"
 
 /* prototypes */
 static void restart         (gboolean force);
@@ -758,6 +760,10 @@ setup_dialog (GladeXML *dialog)
         peditor = gconf_peditor_new_font (NULL, TITLEBAR_FONT_KEY,
                                           WID ("titlebar_font"),
                                           PEDITOR_FONT_COMBINED, NULL);
+
+        peditor = gconf_peditor_new_boolean (NULL, FOCUS_FOLLOWS_MOUSE_KEY,
+                                             WID ("focus_follows_mouse"),
+                                             NULL);
 }
 
 int
