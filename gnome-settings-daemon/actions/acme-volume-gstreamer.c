@@ -214,7 +214,7 @@ acme_volume_gstreamer_init (AcmeVolumeGStreamer *self)
 			for (; tracks != NULL; tracks = tracks->next) {
 				GstMixerTrack *track = tracks->data;
 				
-				if (! g_strcasecmp (track->label, "volume")) {
+				if (GST_MIXER_TRACK_HAS_FLAG (track, GST_MIXER_TRACK_MASTER)) {
 					self->_priv->mixer = GST_MIXER (element);
 					self->_priv->track = track;
 
