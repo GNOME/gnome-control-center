@@ -1,7 +1,9 @@
 # control-center Greek translations.
-# Copyright (C) 2000 Free Software Foundation, Inc.
+# Copyright (C) 2000, 2001, 2002 Free Software Foundation, Inc.
 # Spiros Papadimitriou <spapadim+@cs.cmu.edu>, 2000.
-# Simos Xenitellis <simos@hellug.gr>, 2000.
+# Simos Xenitellis <simos@hellug.gr>, 2000, 2001, 2002.
+# Nikos Charonitakis <charosn@her.forthnet.gr>, 2002.
+# Ξ¤Ξ± Ο€Ξ¬Ξ½Ο„Ξ± ΟΞµΞΉ <ta_panta_rei@flashmail.com>, 2002.
 #
 # Note: Some items are unfinished and there are a few
 # (linguistic) improvements necessary. Please see comments
@@ -9,319 +11,306 @@
 #
 # For screensaver, picked: profilaji o8onis -simos.
 #
-# spyros did: initial translation, around 300 messages
-# simos did: 19Aug2k
-#   277 translated messages, 24 fuzzy translations, 40 untranslated messages.
-# simos updated to 358 messages: 5Dec2000
+# spyros: initial translation, around 300 messages.
+# simos: 277 messages, 19Aug2000, (24 fuzzy, 40 untranslated).
+# simos: 358 messages, 05Dec2000, updated translation.
+#      :  64 messages, 01Aug2002, due to enhancements in application.
+# nikos: 266 messages, 05Aug2002, updated translation.
+# t_p_r: 266 messages, 05Aug2002, reviewed translation.
+# simos: 329 messages, 06Aug2002, updated translation.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-control-center 1.5.5\n"
-"POT-Creation-Date: 2002-06-17 18:03-0400\n"
-"PO-Revision-Date: 2001-02-18 23:12:25+0900\n"
-"Last-Translator: Simos Xenitellis <simos@hellug.gr>\n"
+"Project-Id-Version: gnome-control-center 2.0.0\n"
+"POT-Creation-Date: 2002-08-06 13:44+0100\n"
+"PO-Revision-Date: 2002-08-06 14:31+0100\n"
+"Last-Translator: Nikos Charonitakis <charosn@her.forthnet.gr>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-7\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:262
-#, fuzzy
-msgid "_Enable keyboard accessibility"
-msgstr "Ενεργοποίηση Κλίκ Πληκτρολογίου"
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:225
+#: capplets/keyboard/gnome-keyboard-properties.c:143
+#, c-format
+msgid "There was an error launching the keyboard capplet : %s"
+msgstr ""
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:329
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:291
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr ""
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:441
-#, fuzzy
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:403
 msgid "Select CDE AccessX file"
-msgstr "Επιλογή αρχείου ήχου"
+msgstr "Ξ•Ο€ΞΉΞ»ΞΏΞ³Ξ® Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… AccessX Ο„ΞΏΟ… CDE"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
-msgstr "Ρυθμίσεις πληκτρολογίου"
+msgstr "Ξ΅Ο…ΞΈΞΌΞ―ΟƒΞµΞΉΟ‚ Ξ Ξ»Ξ·ΞΊΟ„ΟΞΏΞ»ΞΏΞ³Ξ―ΞΏΟ…"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:2
-#, fuzzy
-msgid "Keyboard Accessibility Properties"
-msgstr "Τροποποίηση των ρυθμίσεων του πληκτρολογίου"
+msgid "Set your keyboard accessibility preferences"
+msgstr "Ξ΅ΟΞΈΞΌΞΉΟƒΞ· Ο„Ο‰Ξ½ Ο€ΟΞΏΟ„ΞΉΞΌΞ®ΟƒΞµΟ‰Ξ½ Ο€ΟΞΏΟƒΞ²Ξ±ΟƒΞΉΞΌΟΟ„Ξ·Ο„Ξ±Ο‚ Ο€Ξ»Ξ·ΞΊΟ„ΟΞΏΞ»ΞΏΞ³Ξ―ΞΏΟ…"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:1
-msgid "<b>Test</b>"
-msgstr ""
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:2
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
 msgid "B_eep when modifier is pressed"
 msgstr ""
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:3
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
 msgid "Beep when an LED is turned on and two beeps when one is turned off."
 msgstr ""
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:4
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
+msgid "Beep when key is re_jected"
+msgstr ""
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
 msgid "Beep when:"
-msgstr ""
+msgstr "Ξ‰Ο‡ΞΏΟ‚ ΟΟ„Ξ±Ξ½:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:5
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
 msgid "Enable Slo_w Keys"
-msgstr ""
+msgstr "Ξ•Ξ½ΞµΟΞ³ΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ· Ξ‘Ο_Ξ³ΟΞ½ Ξ Ξ»Ξ®ΞΊΟ„ΟΟ‰Ξ½"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:6
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
 msgid "Enable _Bounce Keys"
 msgstr ""
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:7
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
 msgid "Enable _Mouse Keys"
-msgstr ""
+msgstr "Ξ•Ξ½ΞµΟΞ³ΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ· Ξ Ξ»Ξ®ΞΊΟ„ΟΟ‰Ξ½ Ξ“ΞΉΞ± Ξ ΞΏΞ½Ο„Ξ―ΞΊΞΉ"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:8
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
 msgid "Enable _Sticky Keys"
-msgstr ""
+msgstr "Ξ•Ξ½ΞµΟΞ³ΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ· _ΞΞΏΞ»Ξ»Ξ·ΞΌΞ­Ξ½Ο‰Ξ½ Ξ Ξ»Ξ®ΞΊΟ„ΟΟ‰Ξ½"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:9
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
 msgid "Enable _Toggle Keys"
-msgstr ""
+msgstr "Ξ•Ξ½ΞµΟΞ³ΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ· Ξ Ξ»Ξ®ΞΊΟ„ΟΟ‰Ξ½ _Ξ•Ξ½Ξ½Ξ±Ξ»Ξ»Ξ±Ξ³Ξ®Ο‚"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:10
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
+msgid "General"
+msgstr "Ξ“ΞµΞ½ΞΉΞΊΞ¬"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:11
 msgid ""
 "Ignore all subsequent presses of the SAME key if they happen within a user "
 "selectable period of time."
 msgstr ""
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:11
-#, fuzzy
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:12
 msgid "Keyboard Accessibility Configuration (AccessX)"
-msgstr "Τροποποίηση των ρυθμίσεων του πληκτρολογίου"
+msgstr "Ξ΅ΟΞΈΞΌΞΉΟƒΞ· Ξ ΟΞΏΟƒΞ²Ξ±ΟƒΞΉΞΌΟΟ„Ξ·Ο„Ξ±Ο‚ Ο€Ξ»Ξ·ΞΊΟ„ΟΞΏΞ»ΞΏΞ³Ξ―ΞΏΟ… (AccessX)"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:12
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:13
 msgid "Ma_ximum pointer speed :"
 msgstr ""
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:13
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
 msgid ""
 "Only accept keys after they have been pressed and held for a user adjustable "
 "amount of time."
 msgstr ""
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:14
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
 msgid ""
 "Perform multiple simultaneous key press operations by pressing modifier keys "
 "in sequence."
 msgstr ""
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:15
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:16
+msgid "Repeat Key Preferences"
+msgstr "Ξ ΟΞΏΟ„ΞΉΞΌΞ®ΟƒΞµΞΉΟ‚ Ξ•Ο€Ξ±Ξ½Ξ¬Ξ»Ξ·ΟΞ·Ο‚ Ξ Ξ»Ξ®ΞΊΟ„ΟΟ‰Ξ½"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:17
 msgid "Start mo_ving this long after keypress :"
 msgstr ""
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:16
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:18
+msgid "Testing Area"
+msgstr ""
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:19
 msgid "Time to _accelerate to max speed :"
 msgstr ""
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:17
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:20
+msgid "Toggle and Repeat Keys"
+msgstr ""
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:21
 msgid "Turn the numeric keypad into a mouse control pad."
 msgstr ""
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:18
-#, fuzzy
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:22
 msgid "_Beep when enabling/disabling keyboard accessibility features"
-msgstr "Ενεργοποίηση Κλίκ Πληκτρολογίου"
+msgstr ""
+"Ξ‰_Ο‡Ξ·ΟƒΞ· ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ ΞµΞ½ΞµΟΞ³ΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ·/Ξ±Ο€ΞµΞ½ΞµΟΞ³ΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ· Ο„Ο‰Ξ½ Ο‡Ξ±ΟΞ±ΞΊΟ„Ξ·ΟΞΉΟƒΟ„ΞΉΞΊΟΞ½ "
+"Ο€ΟΞΏΟƒΞ²Ξ±ΟƒΞΉΞΌΟΟ„Ξ·Ο„Ξ±Ο‚"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:19
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:23
 msgid "_Disable if unused for "
 msgstr ""
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:20
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
 msgid "_Ignore keypresses within  :"
 msgstr ""
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:21
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
 msgid "_Import CDE AccessX file"
-msgstr ""
+msgstr "Ξ•ΞΉΟƒΞ±Ξ³Ο‰_Ξ³Ξ® Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… CDE AccessX"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:22
-#, fuzzy
-msgid "_Keyboard"
-msgstr "Ρυθμίσεις πληκτρολογίου"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:23
-msgid "_Misc"
-msgstr ""
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:24
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
 msgid "_Only accept keypress after :"
 msgstr ""
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:25
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
 msgid ""
 "_Turn off Sticky Keys when\n"
 "two keys pressed simultaneously"
 msgstr ""
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:27
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
 msgid "key is _accepted"
 msgstr ""
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:28
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:30
 msgid "key is _pressed"
 msgstr ""
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:29
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:31
 msgid "key is _rejected"
 msgstr ""
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:30
-msgid "key is re_jected"
-msgstr ""
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:31
-#, fuzzy
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:32
 msgid "msecs"
-msgstr "Δευτερόλεπτα"
+msgstr "ΞµΞΊΞ±Ο„ΞΏΟƒΟ„Ξ¬ Ξ΄ΞµΟ…Ο„ΞµΟΞΏΞ»Ξ­Ο€Ο„ΞΏΟ…"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:32
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
 msgid "pixels/sec"
-msgstr ""
+msgstr "ΞµΞΉΞΊΞΏΞ½ΞΏΟƒΟ„ΞΏΞΉΟ‡ΞµΞ―Ξ±/Ξ΄ΞµΟ…Ο„ΞµΟΟΞ»ΞµΟ€Ο„ΞΏ"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:33
-#, fuzzy
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
 msgid "seconds"
-msgstr "Δευτερόλεπτα"
+msgstr "Ξ΄ΞµΟ…Ο„ΞµΟΟΞ»ΞµΟ€Ο„Ξ±"
 
 #. solid
 #: capplets/background/background-properties-capplet.c:228
-#, fuzzy
-msgid "C_olor"
-msgstr "Χρώματα:"
+msgid "C_olor:"
+msgstr "Ξ§_ΟΟΞΌΞ±:"
 
 #. horiz
 #: capplets/background/background-properties-capplet.c:232
-msgid "_Left Color"
-msgstr ""
+msgid "_Left Color:"
+msgstr "Ξ§ΟΟΞΌΞ± Ξ‘ΟΞΉΟƒΟ„Ξµ_ΟΞ¬:"
 
 #: capplets/background/background-properties-capplet.c:233
-msgid "_Right Color"
-msgstr ""
+msgid "_Right Color:"
+msgstr "Ξ§ΟΟΞΌΞ± _Ξ”ΞµΞΎΞΉΞ¬:"
 
 #. vert
 #: capplets/background/background-properties-capplet.c:236
-#, fuzzy
-msgid "_Top Color"
-msgstr "Με Χρώμα"
+msgid "_Top Color:"
+msgstr "Ξ§ΟΟΞΌΞ± Ξ•_Ο€Ξ¬Ξ½Ο‰:"
 
 #: capplets/background/background-properties-capplet.c:237
-#, fuzzy
-msgid "_Bottom Color"
-msgstr "Κάτω"
+msgid "_Bottom Color:"
+msgstr "Ξ§ΟΟΞΌΞ± _ΞΞ¬Ο„Ο‰:"
 
 #: capplets/background/background-properties-capplet.c:398
-#, fuzzy
 msgid "_Wallpaper"
-msgstr "Επένδυση"
+msgstr "_Ξ¤Ξ±Ο€ΞµΟ„ΟƒΞ±ΟΞ―Ξ±"
 
 #: capplets/background/background-properties-capplet.c:398
-#, fuzzy
 msgid "C_entered"
-msgstr "Εικόνα στο κέντρο."
+msgstr "Ξ_ΞµΞ½Ο„ΟΞ±ΟΞΉΟƒΞΌΞ­Ξ½Ξ·"
 
 # For lack of a better term...?  Anaklimakwsh ???
 #: capplets/background/background-properties-capplet.c:398
-#, fuzzy
 msgid "_Scaled"
-msgstr "Νέα κλίμακα"
+msgstr "_Ξ£Ξµ ΞΊΞ»Ξ―ΞΌΞ±ΞΊΞ±"
 
 #: capplets/background/background-properties-capplet.c:398
 msgid "Stretc_hed"
-msgstr ""
+msgstr "Ξ¤ΞµΞ½Ο„Ο‰ΞΌΞ­Ξ½Ξ·"
 
 #: capplets/background/background-properties-capplet.c:398
 msgid "_No Picture"
-msgstr ""
+msgstr "_Ξ§Ο‰ΟΞ―Ο‚ Ξ•ΞΉΞΊΟΞ½Ξ±"
 
 #: capplets/background/background-properties-capplet.c:433
-msgid "_Picture"
-msgstr ""
+msgid "Select _picture:"
+msgstr "Ξ•Ο€ΞΉΞ»ΞΏΞ³Ξ® ΞµΞΉ_ΞΊΟΞ½Ξ±Ο‚:"
 
-#: capplets/background/background-properties-capplet.c:558
+#: capplets/background/background-properties-capplet.c:561
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:712
-#: capplets/keyboard/gnome-keyboard-properties.c:359
-#: capplets/mouse/gnome-mouse-properties.c:727
+#: capplets/keyboard/gnome-keyboard-properties.c:277
+#: capplets/mouse/gnome-mouse-properties.c:752
 #: capplets/sound/sound-properties-capplet.c:149
 msgid "Retrieve and store legacy settings"
 msgstr ""
 
-#: capplets/background/background-properties-capplet.c:584
+#: capplets/background/background-properties-capplet.c:587
 #: capplets/background/background-properties.glade.h:2
-#, fuzzy
 msgid "Background Preferences"
-msgstr "Καθορισμός χρώματος φόντου"
+msgstr "Ξ ΟΞΏΟ„ΞΉΞΌΞ®ΟƒΞµΞΉΟ‚ Ξ Ξ±ΟΞ±ΟƒΞΊΞ·Ξ½Ξ―ΞΏΟ…"
 
 #: capplets/background/background-properties.glade.h:1
-#, fuzzy
 msgid "A preview of the background picture."
-msgstr "Καθορισμός εικόνας φόντου."
+msgstr "Ξ ΟΞΏΞµΟ€ΞΉΟƒΞΊΟΟ€Ξ·ΟƒΞ· Ο„Ξ·Ο‚ ΞµΞΉΞΊΟΞ½Ξ±Ο‚ Ο†ΟΞ½Ο„ΞΏΟ…."
 
 #: capplets/background/background-properties.glade.h:3
-#, fuzzy
 msgid "Background Preview"
-msgstr "Καθορισμός χρώματος φόντου"
+msgstr "Ξ ΟΞΏΞµΟ€ΞΉΟƒΞΊΟΟ€Ξ·ΟƒΞ· Ξ Ξ±ΟΞ±ΟƒΞΊΞ·Ξ½Ξ―ΞΏΟ…"
 
 #: capplets/background/background-properties.glade.h:4
-msgid "Bor_der the picture with a:"
-msgstr ""
+msgid "Background _Style:"
+msgstr "Ξ£Ο„Ο…Ξ» Ξ Ξ±ΟΞ±ΟƒΞΊΞ·_Ξ½Ξ―ΞΏΟ…:"
 
 #: capplets/background/background-properties.glade.h:5
-#, fuzzy
 msgid "Horizontal gradient"
-msgstr "Οριζόντιο"
+msgstr "ΞΟΞΉΞ¶ΟΞ½Ο„ΞΉΞ± Ξ΄ΞΉΞ±Ξ²Ξ¬ΞΈΞΌΞΉΟƒΞ·"
 
 #: capplets/background/background-properties.glade.h:6
 msgid "Pick a color"
-msgstr "Επιλογή χρώματος"
+msgstr "Ξ•Ο€ΞΉΞ»ΞΏΞ³Ξ® Ο‡ΟΟΞΌΞ±Ο„ΞΏΟ‚"
 
 #: capplets/background/background-properties.glade.h:7
-#, fuzzy
 msgid "Picture Options:"
-msgstr "Επιλογές Γραμμής Κατάστασης"
+msgstr "Ξ•Ο€ΞΉΞ»ΞΏΞ³Ξ­Ο‚ Ξ•ΞΉΞΊΟΞ½Ξ±Ο‚:"
 
 #: capplets/background/background-properties.glade.h:8
 #: libbackground/preview-file-selection.c:198
 msgid "Preview"
-msgstr "Προεπισκόπηση"
+msgstr "Ξ ΟΞΏΞµΟ€ΞΉΟƒΞΊΟΟ€Ξ·ΟƒΞ·"
 
 #: capplets/background/background-properties.glade.h:9
-#, fuzzy
 msgid "Primary Color"
-msgstr "Επιλογή χρώματος"
+msgstr "ΞΟΟΞΉΞΏ Ξ§ΟΟΞΌΞ±"
 
 #: capplets/background/background-properties.glade.h:10
-#, fuzzy
 msgid "Secondary Color"
-msgstr "Με Χρώμα"
+msgstr "Ξ”ΞµΟ…Ο„ΞµΟΞµΟΞΏΞ½ Ξ§ΟΟΞΌΞ±"
 
 #: capplets/background/background-properties.glade.h:11
-#, fuzzy
 msgid "Solid color"
-msgstr "Με Χρώμα"
+msgstr "Ξ£Ο…ΞΌΟ€Ξ±Ξ³Ξ­Ο‚ Ξ§ΟΟΞΌΞ±"
 
 #: capplets/background/background-properties.glade.h:12
-#, fuzzy
 msgid "The background picture's file name."
-msgstr "Καθορισμός εικόνας φόντου."
+msgstr "Ξ¤ΞΏ ΟΞ½ΞΏΞΌΞ± Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… Ο„Ξ·Ο‚ ΞµΞΉΞΊΟΞ½Ξ±Ο‚ Ο€Ξ±ΟΞ±ΟƒΞΊΞ·Ξ½Ξ―ΞΏΟ…."
 
 #: capplets/background/background-properties.glade.h:13
 msgid "To set the background picture, drop an image or click to browse."
 msgstr ""
 
 #: capplets/background/background-properties.glade.h:14
-#, fuzzy
 msgid "Vertical gradient"
-msgstr "Διαβάθμιση"
+msgstr "ΞΞ¬ΞΈΞµΟ„Ξ· Ξ΄ΞΉΞ±Ξ²Ξ¬ΞΈΞΌΞΉΟƒΞ·"
 
 #: capplets/background/background-properties.glade.h:15
 msgid ""
@@ -332,12 +321,11 @@ msgstr ""
 
 #: capplets/background/background.desktop.in.h:1
 msgid "Background"
-msgstr ""
+msgstr "Ξ Ξ±ΟΞ±ΟƒΞΊΞ®Ξ½ΞΉΞΏ"
 
 #: capplets/background/background.desktop.in.h:2
-#, fuzzy
-msgid "Change the desktop background"
-msgstr "Επιλογή θέματος προς εγκατάσταση"
+msgid "Customize your desktop background"
+msgstr "Ξ Ξ±ΟΞ±ΞΌΞµΟ„ΟΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ· ΞµΞΌΟ†Ξ¬Ξ½ΞΉΟƒΞ·Ο‚ Ο„ΞΏΟ… Ο†ΟΞ½Ο„ΞΏΟ… Ο„Ξ·Ο‚ ΞµΟ€ΞΉΟ†Ξ¬Ξ½ΞµΞΉΞ±Ο‚ ΞµΟΞ³Ξ±ΟƒΞ―Ξ±Ο‚"
 
 #: capplets/common/activate-settings-daemon.c:18
 msgid ""
@@ -352,7 +340,7 @@ msgstr ""
 msgid "Just apply settings and quit"
 msgstr ""
 
-#: capplets/common/capplet-util.c:315
+#: capplets/common/capplet-util.c:340
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr ""
@@ -360,22 +348,22 @@ msgstr ""
 #: capplets/common/file-transfer-dialog.c:95
 #, c-format
 msgid "%i of %i"
-msgstr ""
+msgstr "%i Ξ±Ο€Ο %i"
 
 #: capplets/common/file-transfer-dialog.c:119
 #, c-format
 msgid "Transferring: %s"
-msgstr ""
+msgstr "ΞΞµΟ„Ξ±Ο†Ξ­ΟΞµΟ„Ξ±ΞΉ: %s"
 
 #: capplets/common/file-transfer-dialog.c:126
 #, c-format
 msgid "From: %s"
-msgstr ""
+msgstr "Ξ‘Ο€Ο: %s"
 
 #: capplets/common/file-transfer-dialog.c:134
 #, c-format
 msgid "To: %s"
-msgstr ""
+msgstr "Ξ ΟΞΏΟ‚: %s"
 
 #: capplets/common/file-transfer-dialog.c:185
 msgid "From URI"
@@ -402,9 +390,8 @@ msgid "Fraction of transfer currently completed"
 msgstr ""
 
 #: capplets/common/file-transfer-dialog.c:209
-#, fuzzy
 msgid "Current URI index"
-msgstr "Εικόνα στο κέντρο."
+msgstr "Ξ¤ΟΞ­Ο‡Ο‰Ξ½ Ο€Ξ―Ξ½Ξ±ΞΊΞ±Ο‚ URI"
 
 #: capplets/common/file-transfer-dialog.c:210
 msgid "Current URI index - starts from 1"
@@ -415,20 +402,18 @@ msgid "Total URIs"
 msgstr ""
 
 #: capplets/common/file-transfer-dialog.c:218
-#, fuzzy
 msgid "Total number of URIs"
-msgstr "αριθμός Μυρμηγκιών"
+msgstr "Ξ£Ο…Ξ½ΞΏΞ»ΞΉΞΊΟΟ‚ Ξ±ΟΞΉΞΈΞΌΟΟ‚ URI"
 
 #: capplets/common/file-transfer-dialog.c:372
 #: capplets/common/file-transfer-dialog.c:374
-#, fuzzy
 msgid "Connecting..."
-msgstr "Ρυθμίσεις..."
+msgstr "Ξ“Ξ―Ξ½ΞµΟ„Ξ±ΞΉ ΟƒΟΞ½Ξ΄ΞµΟƒΞ·..."
 
 #: capplets/common/file-transfer-dialog.c:379
 #: capplets/common/file-transfer-dialog.c:381
 msgid "Downloading..."
-msgstr ""
+msgstr "ΞΞµΟ„Ξ±Ο†ΟΟΟ„Ο‰ΟƒΞ·..."
 
 #: capplets/common/gconf-property-editor.c:172
 msgid "Key"
@@ -517,97 +502,84 @@ msgstr ""
 
 #: capplets/common/gconf-property-editor.c:1583
 msgid "Please select an image."
-msgstr ""
+msgstr "Ξ Ξ±ΟΞ±ΞΊΞ±Ξ»Ο ΞµΟ€ΞΉΞ»Ξ­ΞΎΟ„Ξµ ΞΌΞΉΞ± ΞµΞΉΞΊΟΞ½Ξ±."
 
 #: capplets/default-applications/default-applications.desktop.in.h:1
-msgid "Choose the applications used by default"
-msgstr ""
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:19
+msgid "Preferred Applications"
+msgstr "Ξ ΟΞΏΟ„ΞΉΞΌΟΞΌΞµΞ½ΞµΟ‚ Ξ•Ο†Ξ±ΟΞΌΞΏΞ³Ξ­Ο‚"
 
 #: capplets/default-applications/default-applications.desktop.in.h:2
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:19
-#, fuzzy
-msgid "Preferred Applications"
-msgstr "Εξ' ορισμού τιμή"
+msgid "Select your default applications"
+msgstr "ΞΞ±ΞΈΞΏΟΞΉΟƒΞΌΟΟ‚ Ο„Ο‰Ξ½ ΞµΞΎ ΞΏΟΞΉΟƒΞΌΞΏΟ ΞµΟ†Ξ±ΟΞΌΞΏΞ³ΟΞ½"
 
 #: capplets/default-applications/gnome-default-applications-properties.c:105
-#, fuzzy
 msgid "Please specify a name and a command for this editor."
-msgstr "Παρακαλώ εισαγάγετε μια γραμμή εντολών παρακάτω."
+msgstr "Ξ Ξ±ΟΞ±ΞΊΞ±Ξ»Ο ΞµΞΉΟƒΞ±Ξ³Ξ¬Ξ³ΞµΟ„Ξµ ΟΞ½ΞΏΞΌΞ± ΞΊΞ±ΞΉ ΞµΞ½Ο„ΞΏΞ»Ξ® Ξ³ΞΉΞ± Ξ±Ο…Ο„ΟΞ½ Ο„ΞΏΞ½ ΞµΟ€ΞµΞΎΞµΟΞ³Ξ±ΟƒΟ„Ξ®."
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:1
+#: capplets/file-types/file-types-properties.glade.h:1
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: capplets/network/gnome-network-preferences.glade.h:1
-#: capplets/theme-switcher/theme-properties.glade.h:1
+#: capplets/theme-switcher/theme-install.glade.h:1
 msgid "*"
-msgstr ""
+msgstr "*"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:2
 msgid "Acce_pts URLs"
-msgstr ""
+msgstr "Ξ”Ξ­Ο‡ΞµΟ„Ξ±ΞΉ URL"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:3
-#, fuzzy
 msgid "Add..."
-msgstr "Νέος..."
+msgstr "Ξ ΟΞΏΟƒΞΈΞ®ΞΊΞ·..."
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:4
-#, fuzzy
 msgid "C_ustom Editor"
-msgstr "Διορθωτής του GNOME"
+msgstr "Ξ•Ο€ΞµΞΎΞµΟΞ³Ξ±Οƒ_Ο„Ξ®Ο‚ Ξ•Ο€ΞΉΞ»ΞµΞ³ΞΌΞ­Ξ½ΞΏΟ‚ Ξ±Ο€Ο Ο„ΞΏ Ξ§ΟΞ®ΟƒΟ„Ξ·"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:5
 msgid "C_ustom Help Browser:"
-msgstr ""
+msgstr "Ξ Ξ±ΟΞ±ΞΌΞµΟ„ΟΞΏΟ€ΞΏΞΉΞ®ΟƒΞΉΞΌΞΏΟ‚ Ξ±Ο€Ο Ο„ΞΏ Ξ§ΟΞ®ΟƒΟ„Ξ· Ξ ΞµΟΞΉΞ·Ξ³Ξ·Ο„Ξ®Ο‚ Ξ’ΞΏΞ®ΞΈΞµΞΉΞ±Ο‚:"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:6
-#, fuzzy
 msgid "C_ustom Terminal:"
-msgstr "Εκτέλεση εντός τερματικού"
+msgstr "Ξ¤ΞµΟΞΌΞ±Ο„ΞΉΞΊΟ Ξ•Ο€ΞΉΞ»ΞµΞ³ΞΌΞ­Ξ½ΞΏΟ… Ξ±Ο€Ο Ο„ΞΏ _Ξ§ΟΞ®ΟƒΟ„Ξ·:"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:7
-#, fuzzy
 msgid "C_ustom Web Browser:"
-msgstr "Πρόγραμμα βοήθειας"
+msgstr "Ξ ΞµΟΞΉΞ·Ξ³Ξ·Ο„Ξ®Ο‚ Ξ”ΞΉΞΊΟ„. Ξ™ΟƒΟ„ΞΏΟ Ξ•Ο€ΞΉΞ»ΞµΞ³ΞΌΞ­Ξ½ΞΏΟ‚ Ξ±Ο€Ο Ο„ΞΏ Ξ§ΟΞ®ΟƒΟ„Ξ·:"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:8
-#, fuzzy
 msgid "Co_mmand:"
-msgstr "Εντολή:"
+msgstr "Ξ•Ξ½_Ο„ΞΏΞ»Ξ®:"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:9
-#, fuzzy
 msgid "Custom Editor Properties"
-msgstr "Καθορισμός χρώματος φόντου"
+msgstr "Ξ Ξ±ΟΞ±ΞΌΞµΟ„ΟΞΏΟ€ΞΏΞΉΞ®ΟƒΞΉΞΌΞµΟ‚ Ξ™Ξ΄ΞΉΟΟ„Ξ·Ο„ΞµΟ‚ Ξ•Ο€ΞµΞΎΞµΟΞ³Ξ±ΟƒΟ„Ξ®"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:10
-#, fuzzy
 msgid "Default Help Browser"
-msgstr "Πρόγραμμα βοήθειας"
+msgstr "Ξ•ΞΎ ΞΏΟΞΉΟƒΞΌΞΏΟ Ξ¦Ο…Ξ»Ξ»ΞΏΞΌΞµΟ„ΟΞ·Ο„Ξ®Ο‚  Ξ’ΞΏΞ®ΞΈΞµΞΉΞ±Ο‚"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:11
-#, fuzzy
 msgid "Default Terminal"
-msgstr "Επιλογή θέματος προς εγκατάσταση"
+msgstr "Ξ•ΞΎ ΞΏΟΞΉΟƒΞΌΞΏΟ Ξ¤ΞµΟΞΌΞ±Ο„ΞΉΞΊΟ"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:12
-#, fuzzy
 msgid "Default Text Editor"
-msgstr "Διορθωτής του GNOME"
+msgstr "Ξ•ΞΎ ΞΏΟΞΉΟƒΞΌΞΏΟ ΞΞµΞΉΞΌΞµΞ½ΞΏΞ³ΟΞ¬Ο†ΞΏΟ‚"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:13
-#, fuzzy
 msgid "Default Web Browser"
-msgstr "Πρόγραμμα βοήθειας"
+msgstr "Ξ•ΞΎ ΞΏΟΞΉΟƒΞΌΞΏΟ Ξ¦Ο…Ξ»Ξ»ΞΏΞΌΞµΟ„ΟΞ·Ο„Ξ®Ο‚"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:14
-#, fuzzy
 msgid "Default Window Manager"
-msgstr "Νέος διαχειριστής παραθύρων"
+msgstr "Ξ•ΞΎ ΞΏΟΞΉΟƒΞΌΞΏΟ Ξ΄ΞΉΞ±Ο‡ΞµΞΉΟΞΉΟƒΟ„Ξ®Ο‚ Ο€Ξ±ΟΞ±ΞΈΟΟΟ‰Ξ½"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:15
-#, fuzzy
 msgid "Delete"
-msgstr "Διαγραφή"
+msgstr "Ξ”ΞΉΞ±Ξ³ΟΞ±Ο†Ξ®"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:16
 msgid "E_xec Flag:"
@@ -615,12 +587,11 @@ msgstr ""
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:17
 msgid "Edit..."
-msgstr "Διόρθωση..."
+msgstr "Ξ”ΞΉΟΟΞΈΟ‰ΟƒΞ·..."
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:18
-#, fuzzy
 msgid "Help Browser"
-msgstr "Πρόγραμμα βοήθειας"
+msgstr "Ξ¦Ο…Ξ»Ξ»ΞΏΞΌΞµΟ„ΟΞ·Ο„Ξ®Ο‚ Ξ’ΞΏΞ®ΞΈΞµΞΉΞ±Ο‚"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:20
 msgid ""
@@ -629,19 +600,16 @@ msgid ""
 msgstr ""
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:21
-#, fuzzy
 msgid "Start in T_erminal"
-msgstr "Εκτέλεση εντός τερματικού"
+msgstr "Ξ•ΞΊΞΊΞ―Ξ½Ξ·ΟƒΞ· ΞµΞ½Ο„ΟΟ‚ Ξ¤_ΞµΟΞΌΞ±Ο„ΞΉΞΊΞΏΟ"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:22
-#, fuzzy
 msgid "Terminal"
-msgstr "Εκτέλεση εντός τερματικού"
+msgstr "Ξ¤ΞµΟΞΌΞ±Ο„ΞΉΞΊΟ"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:23
-#, fuzzy
 msgid "Text Editor"
-msgstr "Διορθωτής του GNOME"
+msgstr "ΞΞµΞΉΞΌΞµΞ½ΞΏΞ³ΟΞ¬Ο†ΞΏΟ‚"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:24
 msgid "This application can open _URIs"
@@ -664,170 +632,157 @@ msgid "Use this _editor to open text files in the file manager"
 msgstr ""
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:29
-#, fuzzy
 msgid "Web Browser"
-msgstr "Πρόγραμμα βοήθειας"
+msgstr "Ξ ΞµΟΞΉΞ·Ξ³Ξ·Ο„Ξ®Ο‚ Ξ”ΞΉΞΊΟ„Ο…Ξ±ΞΊΞΏΟ Ξ™ΟƒΟ„ΞΏΟ"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:30
-#, fuzzy
 msgid "Window Manager"
-msgstr "Νέος διαχειριστής παραθύρων"
+msgstr "Ξ”ΞΉΞ±Ο‡ΞµΞΉΟΞΉΟƒΟ„Ξ®Ο‚ Ξ Ξ±ΟΞ±ΞΈΟΟΟ‰Ξ½"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:31
-#, fuzzy
 msgid "_Name:"
-msgstr "Όνομα:"
+msgstr "_ΞΞ½ΞΏΞΌΞ±:"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:32
-#, fuzzy
 msgid "_Properties..."
-msgstr "Τροποποίηση των ρυθμίσεων του ποντικιού"
+msgstr "_Ξ™Ξ΄ΞΉΟΟ„Ξ·Ο„ΞµΟ‚..."
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:33
-#, fuzzy
 msgid "_Select a Help Browser:"
-msgstr "Πρόγραμμα βοήθειας"
+msgstr "_Ξ•Ο€ΞΉΞ»ΞΏΞ³Ξ® Ξ¦Ο…Ξ»Ξ»ΞΏΞΌΞµΟ„ΟΞ·Ο„Ξ® Ξ’ΞΏΞ®ΞΈΞµΞΉΞ±Ο‚:"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:34
-#, fuzzy
 msgid "_Select a Terminal:"
-msgstr "Επιλογή θέματος προς εγκατάσταση"
+msgstr "_Ξ•Ο€ΞΉΞ»ΞΏΞ³Ξ® ΞµΞ½ΟΟ‚ Ξ¤ΞµΟΞΌΞ±Ο„ΞΉΞΊΞΏΟ:"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:35
-#, fuzzy
 msgid "_Select a Web Browser:"
-msgstr "Πρόγραμμα βοήθειας"
+msgstr "Ξ•Ο€ΞΉΞ»ΞΏΞ³Ξ® Ξ ΞµΟΞΉΞ·Ξ³Ξ·_Ο„Ξ® Ξ”ΞΉΞΊΟ„Ο…Ξ±ΞΊΞΏΟ Ξ™ΟƒΟ„ΞΏΟ:"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:36
-#, fuzzy
 msgid "_Select an Editor:"
-msgstr "Επιλογή εικονιδίου..."
+msgstr "_Ξ•Ο€ΞΉΞ»ΞΏΞ³Ξ® ΞΊΞµΞΉΞΌΞµΞ½ΞΏΞ³ΟΞ¬Ο†ΞΏΟ…:"
 
 #: capplets/desktop-links/Accessibility.directory.in.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "Accessibility"
-msgstr ""
+msgstr "Ξ ΟΞΏΟƒΞ²Ξ±ΟƒΞΉΞΌΟΟ„Ξ·Ο„Ξ±"
 
 #: capplets/desktop-links/Accessibility.directory.in.in.h:2
-#, fuzzy
 msgid "Accessibility Settings"
-msgstr "Ρυθμίσεις τυχαίου"
+msgstr "Ξ΅Ο…ΞΈΞΌΞ―ΟƒΞµΞΉΟ‚ Ξ ΟΞΏΟƒΞ²Ξ±ΟƒΞΉΞΌΟΟ„Ξ·Ο„Ξ±Ο‚"
 
 #: capplets/desktop-links/Advanced.directory.in.in.h:1
 msgid "Advanced"
-msgstr ""
+msgstr "Ξ“ΞΉΞ¬ Ο€ΟΞΏΟ‡Ο‰ΟΞ·ΞΌΞ­Ξ½ΞΏΟ…Ο‚"
 
 #: capplets/desktop-links/Advanced.directory.in.in.h:2
-#, fuzzy
 msgid "Advanced Settings"
-msgstr "Ρυθμίσεις τυχαίου"
+msgstr "Ξ ΟΞΏΟ‡Ο‰ΟΞ·ΞΌΞ­Ξ½ΞµΟ‚ Ξ΅Ο…ΞΈΞΌΞ―ΟƒΞµΞΉΟ‚"
 
 #: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:1
-#, fuzzy
 msgid "Control Center Menu"
-msgstr "Προτιμίσεις Κέντρου Ελέγχου"
+msgstr "ΞΞµΞ½ΞΏΟ ΞΞ­Ξ½Ο„ΟΞΏΟ… Ξ•Ξ»Ξ­Ξ³Ο‡ΞΏΟ…"
 
 # TODO
 #: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:2
-#, fuzzy
 msgid "Sawfish window manager"
-msgstr "Διόρθωση Διαχ. Παραθύρων"
+msgstr "Ξ”ΞΉΞ±Ο‡ΞµΞΉΟΞΉΟƒΟ„Ξ®Ο‚ Ξ Ξ±ΟΞ±ΞΈΟΟΟ‰Ξ½ Sawfish"
 
 #: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
 msgid "Appearance"
-msgstr ""
+msgstr "Ξ•ΞΌΟ†Ξ¬Ξ½ΞΉΟƒΞ·"
 
 #: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:2
-msgid "Configure window appearance"
-msgstr "Ρυθμίζει την εμφάνιση των παραθύρων"
+msgid "Select themes and fonts for your windows"
+msgstr ""
 
 #: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:1
-msgid "Configure key shortcuts"
-msgstr "Ρυθμίζει τις συντομεύσεις πλήκτρων"
+msgid "Customize shortcut keys for your windows"
+msgstr ""
 
 #: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:2
 msgid "Shortcuts"
-msgstr "Συντομεύσεις"
+msgstr "Ξ£Ο…Ξ½Ο„ΞΏΞΌΞµΟΟƒΞµΞΉΟ‚"
 
 #: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:1
-msgid "Configure window focusing"
-msgstr "Ρυθμίζει την συμπεριφορά της εστίασης των παραθύρων"
+msgid "Configure how to give focus to windows"
+msgstr "Ξ΅ΟΞΈΞΌΞΉΟƒΞ· ΟƒΟ…ΞΌΟ€ΞµΟΞΉΟ†ΞΏΟΞ¬Ο‚ ΞµΟƒΟ„Ξ―Ξ±ΟƒΞ·Ο‚ Ο€Ξ±ΟΞ±ΞΈΟΟΟ‰Ξ½"
 
 #: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:2
 msgid "Focus behavior"
-msgstr "Συμπεριφορά εστίασης"
+msgstr "Ξ£Ο…ΞΌΟ€ΞµΟΞΉΟ†ΞΏΟΞ¬ ΞµΟƒΟ„Ξ―Ξ±ΟƒΞ·Ο‚"
 
 #: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:1
-msgid "Configure window properties"
-msgstr "Ρυθμίζει πως συσχετίζονται τα παράθυρα"
+msgid "Configure matched windows to have particular characteristics"
+msgstr ""
 
 #: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:2
 msgid "Matched Windows"
-msgstr "Συσχέτιση παραθύρων"
+msgstr "Ξ£Ο…ΟƒΟ‡Ξ­Ο„ΞΉΟƒΞ· Ο€Ξ±ΟΞ±ΞΈΟΟΟ‰Ξ½"
 
 #: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:1
-msgid "Configure window minimization and maximization"
-msgstr "Ρυθμίζει την μεγιστοποίηση και ελαχιστοποίηση των παραθύρων"
+msgid "Configure how to minimize, maximize, and restore windows"
+msgstr ""
+"Ξ΅ΟΞΈΞΌΞΉΟƒΞ· Ο„ΞΏΟ… Ο„ΟΟΟ€ΞΏΟ… ΞµΞ»Ξ±Ο‡ΞΉΟƒΟ„ΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ·Ο‚, ΞΌΞµΞ³ΞΉΟƒΟ„ΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ·Ο‚ ΞΊΞ±ΞΉ ΞµΟ€Ξ±Ξ½Ξ±Ο†ΞΏΟΞ¬Ο‚ Ο„Ο‰Ξ½ "
+"Ο€Ξ±ΟΞ±ΞΈΟΟΟ‰Ξ½"
 
 #: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:2
 msgid "Minimizing and Maximizing"
-msgstr "Μεγιστοποίηση και Ελαχιστοποίηση"
+msgstr "ΞΞµΞ³ΞΉΟƒΟ„ΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ· ΞΊΞ±ΞΉ Ξ•Ξ»Ξ±Ο‡ΞΉΟƒΟ„ΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ·"
 
 #: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
-msgid "Configure window manager configuration properties"
-msgstr "Ρυθμίζει τις ιδιότητες του διαχειριστή παραθύρων"
+msgid "Meta"
+msgstr "ΞΞµΟ„Ξ¬-ΟΟΞΈΞΌΞΉΟƒΞ·"
 
 #: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:2
-msgid "Meta"
-msgstr "Μετά-ρύθμιση"
+msgid "Select your Sawfish user level"
+msgstr ""
 
 #: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:1
-msgid "Configure miscellaneous window features"
-msgstr "Ρυθμίζει τα λοιπά χαρακτηριστικά των παραθύρων"
+msgid "Miscellaneous"
+msgstr "Ξ›ΞΏΞΉΟ€Ξ¬"
 
 #: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
-msgid "Miscellaneous"
-msgstr "Λοιπά"
+msgid "Select miscellaneous window options"
+msgstr "Ξ΅ΟΞΈΞΌΞΉΟƒΞ· Ξ»ΞΏΞΉΟ€ΟΞ½ Ο‡Ξ±ΟΞ±ΞΊΟ„Ξ·ΟΞΉΟƒΟ„ΞΉΞΊΟΞ½ Ο„Ο‰Ξ½ Ο€Ξ±ΟΞ±ΞΈΟΟΟ‰Ξ½"
 
 #: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:1
-msgid "Configure window move/resize"
-msgstr "Ρυθμίζει την μετακίνηση και την αλλαγή μεγέθους των παραθύρων"
+msgid "Configure how windows move and resize"
+msgstr "Ξ΅ΟΞΈΞΌΞΉΟƒΞ· Ο„ΞΏΟ… Ο„ΟΟΟ€ΞΏΟ… ΞΌΞµΟ„Ξ±ΞΊΞ―Ξ½Ξ·ΟƒΞ·Ο‚ ΞΊΞ±ΞΉ Ξ±Ξ»Ξ»Ξ±Ξ³Ξ®Ο‚ ΞΌΞµΞ³Ξ­ΞΈΞΏΟ…Ο‚ Ο„Ο‰Ξ½ Ο€Ξ±ΟΞ±ΞΈΟΟΟ‰Ξ½"
 
 #: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:2
 msgid "Moving and Resizing"
-msgstr "Μετακίνηση και Αλλαγή μεγέθους"
+msgstr "ΞΞµΟ„Ξ±ΞΊΞ―Ξ½Ξ·ΟƒΞ· ΞΊΞ±ΞΉ Ξ‘Ξ»Ξ»Ξ±Ξ³Ξ® ΞΌΞµΞ³Ξ­ΞΈΞΏΟ…Ο‚"
 
 #: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:1
-msgid "Configure window placement"
-msgstr "Ρυθμίζει την τοποθέτηση των παραθύρων"
+msgid "Configure positioning of windows on the desktop"
+msgstr ""
 
 #: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:2
-#, fuzzy
 msgid "Placement"
-msgstr "Τοποθέτηση"
+msgstr "Ξ¤ΞΏΟ€ΞΏΞΈΞ­Ο„Ξ·ΟƒΞ·"
 
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:1
-msgid "Enable window manager sound events"
-msgstr "Ενεργοποιεί τα ηχητικά συμβάντα του διαχειριστή παραθύρων"
+msgid "Associate sounds with window manager events"
+msgstr "Ξ‘Ξ½Ο„ΞΉΟƒΟ„ΞΏΞ―Ο‡ΞΉΟƒΞ· Ξ®Ο‡Ο‰Ξ½ ΞΌΞµ ΟƒΟ…ΞΌΞ²Ξ¬Ξ½Ο„Ξ± Ο„ΞΏΟ… Ξ΄ΞΉΞ±Ο‡ΞµΞΉΟΞΉΟƒΟ„Ξ® Ο€Ξ±ΟΞ±ΞΈΟΟΟ‰Ξ½"
 
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 #: capplets/sound/sound.desktop.in.h:2
 msgid "Sound"
-msgstr "Ιδιότητες του Ήχου"
+msgstr "Ξ™Ξ΄ΞΉΟΟ„Ξ·Ο„ΞµΟ‚ Ο„ΞΏΟ… Ξ‰Ο‡ΞΏΟ…"
 
 #: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:1
-msgid "Configure workspaces"
-msgstr "Ρυθμίζει τους χώρους εργασίας"
+msgid "Configure your workspaces and viewports"
+msgstr "Ξ΅ΟΞΈΞΌΞΉΟƒΞ· Ο„Ο‰Ξ½ Ο‡ΟΟΟ‰Ξ½ ΞµΟΞ³Ξ±ΟƒΞ―Ξ±Ο‚ ΞΊΞ±ΞΉ viewports"
 
 #: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:2
 msgid "Workspaces"
-msgstr "Χώροι εργασίας"
+msgstr "Ξ§ΟΟΞΏΞΉ ΞµΟΞ³Ξ±ΟƒΞ―Ξ±Ο‚"
 
 #: capplets/desktop-links/legacy-applications.desktop.in.in.h:1
-#, fuzzy
 msgid "Legacy Applications"
-msgstr "Εξ' ορισμού τιμή"
+msgstr ""
 
 #: capplets/desktop-links/legacy-applications.desktop.in.in.h:2
 msgid "Legacy applications settings (grdb)"
@@ -840,323 +795,292 @@ msgstr ""
 #.
 #: capplets/file-types/category-names.h:7
 msgid "Documents"
-msgstr ""
+msgstr "ΞΞ³Ξ³ΟΞ±Ο†Ξ±"
 
 #: capplets/file-types/category-names.h:8
 msgid "Word Processor"
-msgstr ""
+msgstr "ΞΞµΞΉΞΌΞµΞ½ΞΏΞ³ΟΞ¬Ο†ΞΏΟ‚"
 
 #: capplets/file-types/category-names.h:9
 msgid "Published Materials"
 msgstr ""
 
 #: capplets/file-types/category-names.h:10
-#, fuzzy
 msgid "Spreadsheet"
-msgstr "¶πλωμα"
+msgstr "Ξ›ΞΏΞ³ΞΉΟƒΟ„ΞΉΞΊΟ Ξ¦ΟΞ»Ξ»ΞΏ"
 
 #: capplets/file-types/category-names.h:11
 msgid "Presentation"
-msgstr ""
+msgstr "Ξ Ξ±ΟΞΏΟ…ΟƒΞ―Ξ±ΟƒΞ·"
 
 #: capplets/file-types/category-names.h:12
 msgid "Diagram"
-msgstr ""
+msgstr "Ξ”ΞΉΞ¬Ξ³ΟΞ±ΞΌΞΌΞ±"
 
 #: capplets/file-types/category-names.h:13
-#, fuzzy
 msgid "TeX"
-msgstr "κιθεμπλόμ"
+msgstr "TeX"
 
 #: capplets/file-types/category-names.h:14
 msgid "Vector Graphics"
-msgstr ""
+msgstr "Ξ”ΞΉΞ±Ξ½Ο…ΟƒΞΌΞ±Ο„ΞΉΞΊΞ¬ Ξ“ΟΞ±Ο†ΞΉΞΊΞ¬"
 
 #: capplets/file-types/category-names.h:15
 msgid "World Wide Web"
-msgstr ""
+msgstr "Ξ”ΞΉΞΊΟ„Ο…Ξ±ΞΊΟΟ‚ Ξ™ΟƒΟ„ΟΟ‚"
 
 #: capplets/file-types/category-names.h:16
 msgid "Plain Text"
-msgstr ""
+msgstr "Ξ‘Ο€Ξ»Ο ΞΞµΞ―ΞΌΞµΞ½ΞΏ"
 
 #: capplets/file-types/category-names.h:17
 msgid "Extended Markup Language (XML)"
 msgstr ""
 
 #: capplets/file-types/category-names.h:18
-#, fuzzy
 msgid "Information"
-msgstr "Κίνηση ποντικιού"
+msgstr "Ξ Ξ»Ξ·ΟΞΏΟ†ΞΏΟΞ―ΞµΟ‚"
 
 #: capplets/file-types/category-names.h:19
 msgid "Financial"
-msgstr ""
+msgstr "ΞΞΉΞΊΞΏΞ½ΞΏΞΌΞΉΞΊΞ¬"
 
 #: capplets/file-types/category-names.h:20
 msgid "Calendar"
-msgstr ""
+msgstr "Ξ—ΞΌΞµΟΞΏΞ»ΟΞ³ΞΉΞΏ"
 
 #: capplets/file-types/category-names.h:21
 msgid "Contacts"
-msgstr ""
+msgstr "Ξ•Ο€Ξ±Ο†Ξ­Ο‚"
 
 #: capplets/file-types/category-names.h:22
 msgid "Packages"
-msgstr ""
+msgstr "Ξ Ξ±ΞΊΞ­Ο„Ξ±"
 
 #: capplets/file-types/category-names.h:23
 msgid "Software Development"
-msgstr ""
+msgstr "Ξ‘Ξ½Ξ¬Ο€Ο„Ο…ΞΎΞ· Ξ›ΞΏΞ³ΞΉΟƒΞΌΞΉΞΊΞΏΟ"
 
 #: capplets/file-types/category-names.h:24
 msgid "Source Code"
-msgstr ""
+msgstr "Ξ Ξ·Ξ³Ξ±Ξ―ΞΏΟ‚ ΞΟΞ΄ΞΉΞΊΞ±Ο‚"
 
 #: capplets/file-types/category-names.h:25
-#: capplets/file-types/mime-type-info.c:727
+#: capplets/file-types/mime-type-info.c:668
 msgid "Audio"
-msgstr ""
+msgstr "Ξ‰Ο‡ΞΏΟ‚"
 
 #: capplets/file-types/category-names.h:26
-#: capplets/file-types/mime-type-info.c:723
-#, fuzzy
+#: capplets/file-types/mime-type-info.c:664
 msgid "Images"
-msgstr "Μεγάλο"
+msgstr "Ξ•ΞΉΞΊΟΞ½ΞµΟ‚"
 
 #: capplets/file-types/category-names.h:27
-#: capplets/file-types/mime-type-info.c:725
-#, fuzzy
+#: capplets/file-types/mime-type-info.c:666
 msgid "Video"
-msgstr "Εμφάνιση"
+msgstr "Ξ’Ξ―Ξ½Ο„ΞµΞΏ"
 
-#: capplets/file-types/file-types-capplet.c:223
+#: capplets/file-types/file-types-capplet.c:214
 msgid "Description"
-msgstr "Περιγραφή"
+msgstr "Ξ ΞµΟΞΉΞ³ΟΞ±Ο†Ξ®"
 
-#: capplets/file-types/file-types-capplet.c:230
+#: capplets/file-types/file-types-capplet.c:236
 msgid "Extensions"
-msgstr "Επεκτάσεις"
+msgstr "Ξ•Ο€ΞµΞΊΟ„Ξ¬ΟƒΞµΞΉΟ‚"
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:1
-#: capplets/file-types/file-types.desktop.in.h:1
+#: capplets/file-types/file-types-properties.glade.h:8
+#: capplets/file-types/file-types.desktop.in.h:2
 msgid "File Types and Programs"
 msgstr ""
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:2
-#: capplets/file-types/file-types.desktop.in.h:2
 msgid "Specify which programs are used to open or view each file type"
 msgstr ""
 
-#: capplets/file-types/file-types-properties.glade.h:1
-#, fuzzy
-msgid "Actions"
-msgstr "Επιλογές"
-
 #: capplets/file-types/file-types-properties.glade.h:2
-#, fuzzy
-msgid "Add _file type..."
-msgstr "Νέος τύπος MIME"
+msgid "Actions"
+msgstr "Ξ•Ξ½Ξ­ΟΞ³ΞµΞΉΞµΟ‚"
 
 #: capplets/file-types/file-types-properties.glade.h:3
-#, fuzzy
-msgid "Add _service..."
-msgstr "Νέος..."
+msgid "Add _file type..."
+msgstr "Ξ ΟΞΏΟƒΞΈΞ®ΞΊΞ· Ο„ΟΟ€ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ…..."
 
 #: capplets/file-types/file-types-properties.glade.h:4
-#, fuzzy
-msgid "Default action"
-msgstr "Εξ' ορισμού τιμή"
+msgid "Add _service..."
+msgstr "Ξ ΟΞΏΟƒΞΈΞ®ΞΊΞ· _Ο…Ο€Ξ·ΟΞµΟƒΞ―Ξ±Ο‚..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
-#: capplets/file-types/mime-edit-dialog.c:192
+msgid "Add:"
+msgstr "Ξ ΟΞΏΟƒΞΈΞ®ΞΊΞ·:"
+
+#: capplets/file-types/file-types-properties.glade.h:6
+msgid "Default action"
+msgstr "Ξ•ΞΎ ΞΏΟΞΉΟƒΞΌΞΏΟ ΞµΞ½Ξ­ΟΞ³ΞµΞΉΞ±"
+
+#: capplets/file-types/file-types-properties.glade.h:7
+#: capplets/file-types/mime-edit-dialog.c:209
 msgid "Edit file type"
 msgstr ""
 
-#: capplets/file-types/file-types-properties.glade.h:6
-#, fuzzy
-msgid "File types and Internet Services"
-msgstr "Διασύνδεση"
+#: capplets/file-types/file-types-properties.glade.h:9
+msgid "Filename Extensions"
+msgstr "Ξ•Ο€ΞµΞΊΟ„Ξ¬ΟƒΞµΞΉΟ‚ Ξ‘ΟΟ‡ΞµΞ―Ο‰Ξ½"
 
-#: capplets/file-types/file-types-properties.glade.h:7
-#, fuzzy
-msgid "Filename extensions"
-msgstr "Επεκτάσεις"
-
-#: capplets/file-types/file-types-properties.glade.h:8
+#: capplets/file-types/file-types-properties.glade.h:10
 msgid "Look at content"
 msgstr ""
 
-#: capplets/file-types/file-types-properties.glade.h:9
-#, fuzzy
-msgid "Needs _terminal"
-msgstr "Εκτέλεση εντός τερματικού"
-
-#: capplets/file-types/file-types-properties.glade.h:10
-#, fuzzy
-msgid "Program to run"
-msgstr "Πρόγραμμα"
-
 #: capplets/file-types/file-types-properties.glade.h:11
-#, fuzzy
-msgid "Run a program"
-msgstr "Πρόγραμμα"
+msgid "Program to Run"
+msgstr "Ξ•ΞΊΟ„Ξ­Ξ»ΞµΟƒΞ· Ξ ΟΞΏΞ³ΟΞ¬ΞΌΞΌΞ±Ο„ΞΏΟ‚"
 
 #: capplets/file-types/file-types-properties.glade.h:12
-msgid "Use category _defaults"
-msgstr ""
+msgid "Run a program"
+msgstr "Ξ•ΞΊΟ„Ξ­Ξ»ΞµΟƒΞ· ΞµΞ½ΟΟ‚ Ο€ΟΞΏΞ³ΟΞ¬ΞΌΞΌΞ±Ο„ΞΏΟ‚"
 
 #: capplets/file-types/file-types-properties.glade.h:13
+msgid "Run in _Terminal"
+msgstr "Ξ•ΞΊΟ„Ξ­Ξ»ΞµΟƒΞ· ΞµΞ½Ο„ΟΟ‚ _Ξ¤ΞµΟΞΌΞ±Ο„ΞΉΞΊΞΏΟ"
+
+#: capplets/file-types/file-types-properties.glade.h:14
 msgid "Use parent category _defaults"
 msgstr ""
 
-#: capplets/file-types/file-types-properties.glade.h:14
-msgid "Viewing component"
-msgstr ""
-
 #: capplets/file-types/file-types-properties.glade.h:15
-#, fuzzy
-msgid "_Add"
-msgstr "Νέος"
+msgid "Viewer Component"
+msgstr ""
 
 #: capplets/file-types/file-types-properties.glade.h:16
 msgid "_Category"
-msgstr ""
+msgstr "_ΞΞ±Ο„Ξ·Ξ³ΞΏΟΞ―Ξ±"
 
 #: capplets/file-types/file-types-properties.glade.h:17
-#, fuzzy
 msgid "_Choose..."
-msgstr "Εξερεύνηση..."
+msgstr "_Ξ•Ο€ΞΉΞ»ΞΏΞ³Ξ®..."
 
 #: capplets/file-types/file-types-properties.glade.h:18
-#, fuzzy
-msgid "_Description"
-msgstr "Περιγραφή"
+msgid "_Delete"
+msgstr "Ξ”ΞΉΞ±Ξ³ΟΞ±_Ο†Ξ®"
 
 #: capplets/file-types/file-types-properties.glade.h:19
-#, fuzzy
-msgid "_Edit..."
-msgstr "Διόρθωση..."
+msgid "_Description"
+msgstr "_Ξ ΞµΟΞΉΞ³ΟΞ±Ο†Ξ®"
 
 #: capplets/file-types/file-types-properties.glade.h:20
-#, fuzzy
-msgid "_MIME Type"
-msgstr "Τύπος MIME:"
+msgid "_Edit..."
+msgstr "_Ξ•Ο€ΞµΞΎΞµΟΞ³Ξ±ΟƒΞ―Ξ±..."
 
 #: capplets/file-types/file-types-properties.glade.h:21
-#, fuzzy
-msgid "_Name"
-msgstr "Όνομα:"
+msgid "_MIME Type"
+msgstr "Ξ¤ΟΟ€ΞΏΟ‚ _MIME"
 
 #: capplets/file-types/file-types-properties.glade.h:22
-#, fuzzy
-msgid "_Program"
-msgstr "Πρόγραμμα"
+msgid "_Name"
+msgstr "_ΞΞ½ΞΏΞΌΞ±"
 
 #: capplets/file-types/file-types-properties.glade.h:23
-#, fuzzy
-msgid "_Program to run"
-msgstr "Πρόγραμμα"
+msgid "_Program"
+msgstr "_Ξ ΟΟΞ³ΟΞ±ΞΌΞΌΞ±"
 
 #: capplets/file-types/file-types-properties.glade.h:24
-#, fuzzy
-msgid "_Protocol name"
-msgstr "Πρωτόκολο"
+msgid "_Program to Run"
+msgstr "_Ξ ΟΟΞ³ΟΞ±ΞΌΞΌΞ± Ο€ΟΞΏΟ‚ Ξ•ΞΊΟ„Ξ­Ξ»ΞµΟƒΞ·"
 
 #: capplets/file-types/file-types-properties.glade.h:25
-#, fuzzy
-msgid "_Remove"
-msgstr "Διαγραφή"
+msgid "_Protocol"
+msgstr "_Ξ ΟΟ‰Ο„ΟΞΊΞΏΞ»Ξ»ΞΏ"
 
-#: capplets/file-types/mime-category-edit-dialog.c:137
+#: capplets/file-types/file-types.desktop.in.h:1
+msgid "Associate applications with file types"
+msgstr ""
+
+#: capplets/file-types/mime-category-edit-dialog.c:138
 msgid "Edit file category"
 msgstr ""
 
-#: capplets/file-types/mime-category-edit-dialog.c:171
-#: capplets/file-types/mime-edit-dialog.c:230
+#: capplets/file-types/mime-category-edit-dialog.c:172
+#: capplets/file-types/mime-edit-dialog.c:256
 #: capplets/file-types/service-edit-dialog.c:170
 #: capplets/file-types/service-edit-dialog.c:171
-#, fuzzy
 msgid "Model"
-msgstr "Α μπε"
+msgstr "ΞΞΏΞ½Ο„Ξ­Ξ»ΞΏ"
 
-#: capplets/file-types/mime-category-edit-dialog.c:172
+#: capplets/file-types/mime-category-edit-dialog.c:173
 msgid "GtkTreeModel that contains the category data"
 msgstr ""
 
-#: capplets/file-types/mime-category-edit-dialog.c:177
+#: capplets/file-types/mime-category-edit-dialog.c:178
 msgid "MIME category info"
 msgstr ""
 
-#: capplets/file-types/mime-category-edit-dialog.c:178
+#: capplets/file-types/mime-category-edit-dialog.c:179
 msgid "Structure containing information on the MIME category"
 msgstr ""
 
-#: capplets/file-types/mime-category-edit-dialog.c:343
-#: capplets/file-types/mime-edit-dialog.c:442
-#: capplets/file-types/mime-edit-dialog.c:546
+#: capplets/file-types/mime-category-edit-dialog.c:344
+#: capplets/file-types/mime-edit-dialog.c:490
+#: capplets/file-types/mime-edit-dialog.c:594
 #: capplets/file-types/service-edit-dialog.c:358
 #: capplets/file-types/service-edit-dialog.c:407
 msgid "Custom"
-msgstr "Παραμετροποιημένο"
+msgstr "Ξ Ξ±ΟΞ±ΞΌΞµΟ„ΟΞΏΟ€ΞΏΞΉΞ·ΞΌΞ­Ξ½ΞΏ"
 
-#: capplets/file-types/mime-edit-dialog.c:189
-#, fuzzy
+#: capplets/file-types/mime-edit-dialog.c:206
 msgid "Extension"
-msgstr "Επέκταση:"
+msgstr "Ξ•Ο€Ξ­ΞΊΟ„Ξ±ΟƒΞ·"
 
-#: capplets/file-types/mime-edit-dialog.c:231
+#: capplets/file-types/mime-edit-dialog.c:257
 msgid "Underlying model to notify when Ok is clicked"
 msgstr ""
 
-#: capplets/file-types/mime-edit-dialog.c:238
+#: capplets/file-types/mime-edit-dialog.c:264
 msgid "MIME type information"
 msgstr ""
 
-#: capplets/file-types/mime-edit-dialog.c:239
+#: capplets/file-types/mime-edit-dialog.c:265
 msgid "Structure with data on the MIME type"
 msgstr ""
 
-#: capplets/file-types/mime-edit-dialog.c:245
+#: capplets/file-types/mime-edit-dialog.c:271
 msgid "Is add dialog"
 msgstr ""
 
-#: capplets/file-types/mime-edit-dialog.c:246
+#: capplets/file-types/mime-edit-dialog.c:272
 msgid "True if this dialog is for adding a MIME type"
 msgstr ""
 
-#: capplets/file-types/mime-edit-dialog.c:295
-#, fuzzy
-msgid "Add file type"
-msgstr "Νέος τύπος MIME"
+#: capplets/file-types/mime-edit-dialog.c:321
+msgid "Add File Type"
+msgstr "Ξ ΟΞΏΟƒΞΈΞ®ΞΊΞ· Ξ¤ΟΟ€ΞΏΟ… MIME"
 
-#: capplets/file-types/mime-edit-dialog.c:437
-#: capplets/file-types/mime-edit-dialog.c:496
-#, fuzzy
-msgid "None"
-msgstr "(Κενό)"
-
-#: capplets/file-types/mime-edit-dialog.c:726
-msgid ""
-"Invalid MIME type. Please enter a valid MIME type, or leave the field blank "
-"to have one generated for you."
-msgstr ""
-
-#: capplets/file-types/mime-edit-dialog.c:730
-msgid "There already exists a MIME type of that name."
-msgstr ""
-
-#: capplets/file-types/mime-edit-dialog.c:800
-msgid "Category"
-msgstr ""
-
-#: capplets/file-types/mime-edit-dialog.c:805
-msgid "Choose a file category"
-msgstr ""
-
-#: capplets/file-types/mime-type-info.c:729
+#: capplets/file-types/mime-edit-dialog.c:435
+#: capplets/file-types/mime-type-info.c:670
 msgid "Misc"
+msgstr "Ξ”ΞΉΞ¬Ο†ΞΏΟΞ±"
+
+#: capplets/file-types/mime-edit-dialog.c:485
+#: capplets/file-types/mime-edit-dialog.c:544
+msgid "None"
+msgstr "ΞΞ±Ξ½Ξ­Ξ½Ξ±"
+
+#: capplets/file-types/mime-edit-dialog.c:847
+msgid ""
+"Please enter a valid MIME type.  It should be of the form class/type and may "
+"not contain any spaces."
 msgstr ""
+
+#: capplets/file-types/mime-edit-dialog.c:854
+msgid "A MIME type with that name already exists, overwrite ?."
+msgstr ""
+
+#: capplets/file-types/mime-edit-dialog.c:919
+msgid "Category"
+msgstr "ΞΞ±Ο„Ξ·Ξ³ΞΏΟΞ―Ξ±"
+
+#: capplets/file-types/mime-edit-dialog.c:924
+msgid "Choose a file category"
+msgstr "Ξ•Ο€ΞΉΞ»ΞΏΞ³Ξ® ΞΊΞ±Ο„Ξ·Ξ³ΞΏΟΞ―Ξ±Ο‚ Ξ±ΟΟ‡ΞµΞ―Ο‰Ξ½"
 
 #: capplets/file-types/mime-types-model.c:167
 #: capplets/file-types/mime-types-model.c:168
@@ -1164,9 +1088,8 @@ msgid "Model for categories only"
 msgstr ""
 
 #: capplets/file-types/mime-types-model.c:421
-#, fuzzy
 msgid "Internet Services"
-msgstr "Διασύνδεση"
+msgstr "Ξ¥Ο€Ξ·ΟΞµΟƒΞ―ΞµΟ‚ Ξ”ΞΉΞ±Ξ΄ΞΉΞΊΟ„ΟΞΏΟ…"
 
 #: capplets/file-types/service-edit-dialog.c:135
 msgid "Edit service information"
@@ -1174,7 +1097,7 @@ msgstr ""
 
 #: capplets/file-types/service-edit-dialog.c:178
 msgid "Service info"
-msgstr ""
+msgstr "Ξ Ξ»Ξ·ΟΞΏΟ†ΞΏΟΞ―ΞµΟ‚ Ξ¥Ο€Ξ·ΟΞµΟƒΞ―Ξ±Ο‚"
 
 #: capplets/file-types/service-edit-dialog.c:179
 msgid "Structure containing service information"
@@ -1189,14 +1112,12 @@ msgid "TRUE if this is an add service dialog"
 msgstr ""
 
 #: capplets/file-types/service-edit-dialog.c:225
-#, fuzzy
-msgid "Add service"
-msgstr "Νέος..."
+msgid "Add Service"
+msgstr "Ξ ΟΞΏΟƒΞΈΞ®ΞΊΞ· Ξ¥Ο€Ξ·ΟΞµΟƒΞ―Ξ±Ο‚"
 
 #: capplets/file-types/service-edit-dialog.c:497
-#, fuzzy
 msgid "Please enter a protocol name."
-msgstr "Παρακαλώ εισαγάγετε μια γραμμή εντολών παρακάτω."
+msgstr "Ξ Ξ±ΟΞ±ΞΊΞ±Ξ»Ο ΞµΞΉΟƒΞ±Ξ³Ξ¬Ξ³ΞµΟ„Ξµ ΟΞ½ΞΏΞΌΞ± Ο€ΟΟ‰Ο„ΞΏΞΊΟΞ»Ξ»ΞΏΟ…."
 
 #: capplets/file-types/service-edit-dialog.c:509
 msgid ""
@@ -1209,129 +1130,113 @@ msgid "There is already a protocol by that name."
 msgstr ""
 
 #: capplets/file-types/service-info.c:44
-#, fuzzy
 msgid "Unknown service types"
-msgstr "¶γνωστος χρήστης."
+msgstr "Ξ†Ξ³Ξ½Ο‰ΟƒΟ„ΞΏΞΉ Ο„ΟΟ€ΞΏΞΉ Ο…Ο€Ξ·ΟΞµΟƒΞΉΟΞ½"
 
 #: capplets/file-types/service-info.c:45
 msgid "World wide web"
-msgstr ""
+msgstr "Ξ”ΞΉΞΊΟ„Ο…Ξ±ΞΊΟΟ‚ ΞΉΟƒΟ„ΟΟ‚"
 
 #: capplets/file-types/service-info.c:46
 msgid "File transfer protocol"
 msgstr ""
 
 #: capplets/file-types/service-info.c:47
-#, fuzzy
 msgid "Detailed documentation"
-msgstr "Εξ' ορισμού τιμή"
+msgstr "Ξ›ΞµΟ€Ο„ΞΏΞΌΞµΟΞµΞ―Ο‚ Ο„ΞµΞΊΞΌΞ·ΟΞ―Ο‰ΟƒΞ·"
 
 #: capplets/file-types/service-info.c:48
 msgid "Manual pages"
-msgstr ""
+msgstr "Ξ£ΞµΞ»Ξ―Ξ΄ΞµΟ‚ Ο„ΞµΞΊΞΌΞ·ΟΞ―Ο‰ΟƒΞ·Ο‚"
 
 #: capplets/file-types/service-info.c:49
 msgid "Electronic mail transmission"
 msgstr ""
 
 #: capplets/file-types/service-info.c:50
-#, fuzzy
 msgid "Gnome documentation"
-msgstr "Εξ' ορισμού τιμή"
+msgstr "Ξ¤ΞµΞΊΞΌΞ·ΟΞ―Ο‰ΟƒΞ· Ο„ΞΏΟ… Gnome"
 
 #: capplets/font/font-properties.desktop.in.h:1
-msgid "Change the default fonts used by the desktop and applications"
-msgstr ""
+msgid "Font"
+msgstr "Ξ“ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΞ¬"
 
 #: capplets/font/font-properties.desktop.in.h:2
-#, fuzzy
-msgid "Font"
-msgstr "Γραμματοσειρά χρήστη"
+msgid "Select fonts for the desktop"
+msgstr "Ξ•Ο€ΞΉΞ»ΞΏΞ³Ξ® Ξ³ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΟΞ½ Ξ³ΞΉΞ± Ο„Ξ·Ξ½ ΞµΟ€ΞΉΟ†Ξ¬Ξ½ΞµΞΉΞ± ΞµΟΞ³Ξ±ΟƒΞ―Ξ±Ο‚"
 
 #: capplets/font/font-properties.glade.h:1
-#, fuzzy
 msgid "Font Preferences"
-msgstr "Προτιμήσεις"
+msgstr "Ξ ΟΞΏΟ„ΞΉΞΌΞ®ΟƒΞµΞΉΟ‚ Ξ“ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΟΞ½"
 
 #: capplets/font/font-properties.glade.h:2
-#, fuzzy
 msgid "Set the font for applications"
-msgstr "Εξ' ορισμού τιμή"
+msgstr "ΞΟΞΉΟƒΞΌΟΟ‚ Ξ³ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΞ¬Ο‚ ΞµΟ†Ξ±ΟΞΌΞΏΞ³ΟΞ½"
 
 #: capplets/font/font-properties.glade.h:3
 msgid "Set the font for the icons on the desktop"
 msgstr ""
 
 #: capplets/font/font-properties.glade.h:4
-msgid "Standard _application font:"
-msgstr ""
+msgid "_Application font:"
+msgstr "Ξ“ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΞ¬ ΞµΟ†Ξ±ΟΞΌΞΏ_Ξ³Ξ®Ο‚:"
 
 #: capplets/font/font-properties.glade.h:5
-#, fuzzy
 msgid "_Desktop font:"
-msgstr "Συντομεύσεις"
+msgstr "Ξ“ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΞ¬  Ξµ_Ο€ΞΉΟ†Ξ¬Ξ½ΞµΞΉΞ±Ο‚ ΞµΟΞ³Ξ±ΟƒΞ―Ξ±Ο‚:"
 
 #: capplets/keybindings/eggcellrendererkeys.c:158
 #: capplets/keybindings/eggcellrendererkeys.c:159
-#, fuzzy
 msgid "Accelerator modifiers"
-msgstr "Επιτάχυνση"
+msgstr ""
 
 #: capplets/keybindings/eggcellrendererkeys.c:167
 #: capplets/keybindings/eggcellrendererkeys.c:168
-#, fuzzy
 msgid "Accelerator key"
-msgstr "Επιτάχυνση"
+msgstr "Ξ Ξ»Ξ®ΞΊΟ„ΟΞΏ ΞµΟ€ΞΉΟ„Ξ¬Ο‡Ο…Ξ½ΟƒΞ·Ο‚"
 
 #: capplets/keybindings/eggcellrendererkeys.c:206
-#: capplets/keybindings/gnome-keybinding-properties.c:306
+#: capplets/keybindings/gnome-keybinding-properties.c:173
 #: libbackground/applier.c:521
 msgid "Disabled"
-msgstr "Ανενεργό"
+msgstr "Ξ‘Ξ½ΞµΞ½ΞµΟΞ³Ο"
 
 #: capplets/keybindings/eggcellrendererkeys.c:309
 #: capplets/keybindings/eggcellrendererkeys.c:506
-msgid "Type a new accelerator, or press Backspace to clear"
-msgstr ""
-
 #: capplets/keybindings/eggcellrendererkeys.c:509
-msgid "Type a new accelerator"
-msgstr ""
+msgid "Type a new shortcut"
+msgstr "Ξ Ξ»Ξ·ΞΊΟ„ΟΞΏΞ»ΞΏΞ³Ξ®ΟƒΟ„Ξµ Ξ½Ξ­Ξ± ΟƒΟ…Ξ½Ο„ΟΞΌΞµΟ…ΟƒΞ·"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:573
-#, fuzzy
+#: capplets/keybindings/gnome-keybinding-properties.c:440
 msgid "<Unknown Action>"
-msgstr "¶γνωστο"
+msgstr "<Ξ†Ξ³Ξ½Ο‰ΟƒΟ„Ξ· Ξ•Ξ½Ξ­ΟΞ³ΞµΞΉΞ±>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:598
+#: capplets/keybindings/gnome-keybinding-properties.c:459
 msgid "Desktop"
-msgstr ""
+msgstr "Ξ•Ο€ΞΉΟ†Ξ¬Ξ½ΞµΞΉΞ± ΞµΟΞ³Ξ±ΟƒΞ―Ξ±Ο‚"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:602
-#, fuzzy
+#: capplets/keybindings/gnome-keybinding-properties.c:463
 msgid "Window Management"
-msgstr "Νέος διαχειριστής παραθύρων"
+msgstr "Ξ”ΞΉΞ±Ο‡ΞµΞ―ΟΞΉΟƒΞ· Ο€Ξ±ΟΞ±ΞΈΟΟΟ‰Ξ½"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:699
+#: capplets/keybindings/gnome-keybinding-properties.c:560
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:851
+#: capplets/keybindings/gnome-keybinding-properties.c:711
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:876
-#, fuzzy
+#: capplets/keybindings/gnome-keybinding-properties.c:733
 msgid "Action"
-msgstr "Επιλογές"
+msgstr "Ξ•Ξ½Ξ­ΟΞ³ΞµΞΉΞ±"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:888
-#, fuzzy
+#: capplets/keybindings/gnome-keybinding-properties.c:749
 msgid "Shortcut"
-msgstr "Συντομεύσεις"
+msgstr "Ξ£Ο…Ξ½Ο„ΟΞΌΞµΟ…ΟƒΞ·"
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:1
 msgid "Click for a list of keyboard navigation schemes."
@@ -1339,36 +1244,27 @@ msgstr ""
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:2
 #: capplets/keybindings/keybinding.desktop.in.h:2
-#, fuzzy
 msgid "Keyboard Shortcuts"
-msgstr "Τροποποίηση των ρυθμίσεων του πληκτρολογίου"
+msgstr "Ξ£Ο…Ξ½Ο„ΞΏΞΌΞµΟΟƒΞµΞΉΟ‚ Ξ Ξ»Ξ·ΞΊΟ„ΟΞΏΞ»ΞΏΞ³Ξ―ΞΏΟ…"
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:3
-msgid "Keyboard _Navigation scheme for use in applications:"
-msgstr ""
+msgid "_Desktop shortcuts:"
+msgstr "Ξ£Ο…Ξ½Ο„ΞΏΞΌΞµΟΟƒΞµΞΉΟ‚ ΞµΟ€ΞΉ_Ο†Ξ¬Ξ½ΞµΞΉΞ±Ο‚ ΞµΟΞ³Ξ±ΟƒΞ―Ξ±Ο‚:"
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:4
-msgid ""
-"To assign a shortcut to an action, click in the shortcut column and press "
-"the key combination you want to associate with it."
-msgstr ""
-
-#: capplets/keybindings/gnome-keybinding-properties.glade.h:5
-#, fuzzy
-msgid "_Desktop shortcuts:"
-msgstr "Συντομεύσεις"
+msgid "_Text editing shortcuts:"
+msgstr "Ξ£Ο…Ξ½Ο„ΞΏΞΌΞµΟΟƒΞµΞΉΟ‚ ΞµΟ€ΞµΞΎΞµΟΞ³Ξ±_ΟƒΞ―Ξ±Ο‚ ΞΊΞµΞΉΞΌΞ­Ξ½ΞΏΟ…:"
 
 #: capplets/keybindings/keybinding.desktop.in.h:1
-msgid "Associate keyboard shortcuts with panel actions"
+msgid "Assign shortcut keys to commands"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.c:338
-#, fuzzy
+#: capplets/keyboard/gnome-keyboard-properties.c:256
 msgid "_Accessibility"
-msgstr "Ρυθμίσεις τυχαίου"
+msgstr "_Ξ ΟΞΏΟƒΞ²Ξ±ΟƒΞΉΞΌΟΟ„Ξ·Ο„Ξ±"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:355
-#: capplets/keyboard/gnome-keyboard-properties.c:357
+#: capplets/keyboard/gnome-keyboard-properties.c:273
+#: capplets/keyboard/gnome-keyboard-properties.c:275
 #: capplets/sound/sound-properties-capplet.c:145
 #: capplets/sound/sound-properties-capplet.c:147
 msgid ""
@@ -1376,207 +1272,157 @@ msgid ""
 msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:2
-msgid "<i>fast</i>"
-msgstr ""
+msgid "Bee_p"
+msgstr "Ξ‰_Ο‡Ξ·ΟƒΞ·"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:3
-msgid "<i>loud</i>"
-msgstr ""
+msgid "C_ustom:"
+msgstr "Ξ Ξ±ΟΞ±ΞΌΞµΟ„ΟΞΏΟ€ΞΏΞΉΞ·_ΞΌΞ­Ξ½ΞΏ:"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:4
-msgid "<i>quiet</i>"
-msgstr ""
+msgid "Clic_k on keypress"
+msgstr "Ξ‰_Ο‡Ξ·ΟƒΞ· ΟƒΟ„ΞΏ Ο€Ξ¬Ο„Ξ·ΞΌΞ± Ο€Ξ»Ξ®ΞΊΟ„ΟΟ‰Ξ½"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:5
-msgid "<i>slow</i>"
-msgstr ""
+msgid "Cursor Blinks"
+msgstr "Ξ”ΟΞΏΞΌΞ­Ξ±Ο‚ Ξ‘Ξ½Ξ±Ξ²ΞΏΟƒΞ²Ξ®Ξ½ΞµΞΉ"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:7
-#, fuzzy
-msgid "Cursor"
-msgstr "Παραμετροποιημένο"
+msgid "Keyboard Bell"
+msgstr "ΞΞΏΟ…Ξ΄ΞΏΟΞ½ΞΉ Ο€Ξ»Ξ·ΞΊΟ„ΟΞΏΞ»ΞΏΞ³Ξ―ΞΏΟ…"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:8
-msgid "Cursor _blinks in text fields"
-msgstr ""
+msgid "Keyboard Preferences"
+msgstr "Ξ ΟΞΏΟ„ΞΉΞΌΞ®ΟƒΞµΞΉΟ‚ Ξ Ξ»Ξ·ΞΊΟ„ΟΞΏΞ»ΞΏΞ³Ξ―ΞΏΟ…"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:9
-msgid "Fast"
-msgstr "Ταχεία"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
-msgid "Key_press makes sound"
-msgstr ""
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
-msgid "Keyboard Bell"
-msgstr "Κουδούνι πληκτρολογίου"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
-#, fuzzy
-msgid "Keyboard Preferences"
-msgstr "Τροποποίηση των ρυθμίσεων του πληκτρολογίου"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Keyboard _repeats when key is held down"
 msgstr ""
 
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+msgid "Keypress Click"
+msgstr "Ξ‰Ο‡Ξ·ΟƒΞ· ΟƒΟ„ΞΏ Ξ Ξ¬Ο„Ξ·ΞΌΞ± Ξ Ξ»Ξ®ΞΊΟ„ΟΟ‰Ξ½"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+msgid "Repeat Keys"
+msgstr "Ξ•Ο€Ξ±Ξ½Ξ¬Ξ»Ξ·ΟΞ· Ξ Ξ»Ξ®ΞΊΟ„ΟΟ‰Ξ½"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+msgid "S_peed:"
+msgstr "Ξ¤Ξ±_Ο‡ΟΟ„Ξ·Ο„Ξ±:"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
+msgid "_Accessibility..."
+msgstr "_Ξ ΟΞΏΟƒΞ²Ξ±ΟƒΞΉΞΌΟΟ„Ξ·Ο„Ξ±..."
+
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:15
-#, fuzzy
-msgid "Keyboard bell _enabled"
-msgstr "Κουδούνι πληκτρολογίου"
+msgid "_Blinks in text boxes and fields"
+msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:16
-#, fuzzy
-msgid "Keyboard bell _off"
-msgstr "Κουδούνι πληκτρολογίου"
+msgid "_Delay:"
+msgstr "ΞΞ±ΞΈΟ…_ΟƒΟ„Ξ­ΟΞ·ΟƒΞ·:"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:17
-#, fuzzy
-msgid "Keyclick Volume"
-msgstr "Ένταση κλίκ"
+msgid "_Off"
+msgstr "_Ξ‘Ο€ΞµΞ½ΞµΟΞ³ΞΏΟ€ΞΏΞΉΞ·ΞΌΞ­Ξ½ΞΏ"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:18
-msgid "Long"
-msgstr "Μεγάλη"
+msgid "_Speed:"
+msgstr "Ξ¤Ξ±_Ο‡ΟΟ„Ξ·Ο„Ξ±:"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:19
-#, fuzzy
-msgid "Medium"
-msgstr "Ρυθμίσεις ποντικιού"
+msgid "_Volume:"
+msgstr "_ΞΞ½Ο„Ξ±ΟƒΞ·:"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:20
-#, fuzzy
-msgid "Repeat Rate"
-msgstr "Υστέρηση επανάληψης"
+msgid "faster"
+msgstr "Ο„Ξ±Ο‡ΟΟ„ΞµΟΞ±"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:21
-#, fuzzy
-msgid "Repeat s_peed:"
-msgstr "Ταχύτητα συστροφής:"
+msgid "loud"
+msgstr "Ξ΄Ο…Ξ½Ξ±Ο„Ξ¬"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:22
-msgid "Set the speed the cursor blinks in text fields."
+msgid "quiet"
 msgstr ""
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
-msgid "Set the volume of the clicking sound made when pressing a key"
-msgstr ""
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
-msgid "Short"
-msgstr "Σύντομη"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
-msgid "Slow"
-msgstr "Αργή"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
-msgid ""
-"The keyboard bell is the <i>beep</i> sound heard when the system wants to "
-"get your attention."
-msgstr ""
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:28
-#, fuzzy
-msgid "Very Fast"
-msgstr "Ταχεία"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:29
-#, fuzzy
-msgid "Very Short"
-msgstr "Σύντομη"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:30
-msgid ""
-"You can configure the keyboards accessibility features by bringing up the "
-"'Accessibility Settings' property dialog, or pressing the button on the "
-"right."
-msgstr ""
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:31
-#, fuzzy
-msgid "_Accessibility..."
-msgstr "Ρυθμίσεις τυχαίου"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:32
-#, fuzzy
-msgid "_Blink speed:"
-msgstr "Ταχύτητα συστροφής:"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:33
-#, fuzzy
-msgid "_Custom keyboard bell:"
-msgstr "Κουδούνι πληκτρολογίου"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:34
-#, fuzzy
-msgid "_Delay before repeating:"
-msgstr "Υστέρηση μέχρι την επόμενη επανασχεδίαση"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:35
-#, fuzzy
-msgid "_Volume:"
-msgstr "Ένταση"
 
 #: capplets/keyboard/keyboard.desktop.in.h:2
-msgid "Keyboard Properties"
-msgstr "Τροποποίηση των ρυθμίσεων του πληκτρολογίου"
+msgid "Set your keyboard preferences"
+msgstr "ΞΞ±ΞΈΞΏΟΞΉΟƒΞΌΟΟ‚ Ο„Ο‰Ξ½ Ο€ΟΞΏΟ„ΞΉΞΌΞ®ΟƒΞµΟ‰Ξ½ Ο€Ξ»Ξ·ΞΊΟ„ΟΞΏΞ»ΞΏΞ³Ξ―ΞΏΟ…"
 
-#: capplets/mouse/gnome-mouse-properties.c:455
+#: capplets/mouse/gnome-mouse-properties.c:477
 #, c-format
 msgid ""
 "<b>Unknown Cursor</b>\n"
 "%s"
 msgstr ""
+"<b>Ξ†Ξ³Ξ½Ο‰ΟƒΟ„ΞΏΟ‚ Ξ”ΟΞΏΞΌΞ­Ξ±Ο‚</b>\n"
+"%s"
 
-#: capplets/mouse/gnome-mouse-properties.c:556
+#: capplets/mouse/gnome-mouse-properties.c:578
 msgid ""
 "<b>Default Cursor - Current</b>\n"
 "The default cursor that ships with X"
 msgstr ""
+"<b>Ξ•ΞΎ ΞΏΟΞΉΟƒΞΌΞΏΟ Ξ”ΟΞΏΞΌΞ­Ξ±Ο‚ - Ξ¤ΟΞ­Ο‡Ο‰Ξ½</b>\n"
+"The default cursor that ships with X"
 
-#: capplets/mouse/gnome-mouse-properties.c:559
+#: capplets/mouse/gnome-mouse-properties.c:581
 msgid ""
 "<b>Default Cursor</b>\n"
 "The default cursor that ships with X"
 msgstr ""
+"<b>Ξ•ΞΎ ΞΏΟΞΉΟƒΞΌΞΏΟ Ξ”ΟΞΏΞΌΞ­Ξ±Ο‚</b>\n"
+"The default cursor that ships with X"
 
-#: capplets/mouse/gnome-mouse-properties.c:577
+#: capplets/mouse/gnome-mouse-properties.c:599
 msgid ""
 "<b>White Cursor - Current</b>\n"
 "The default cursor inverted"
 msgstr ""
+"<b>Ξ›ΞµΟ…ΞΊΟΟ‚ Ξ”ΟΞΏΞΌΞ­Ξ±Ο‚ - Ξ¤ΟΞ­Ο‡Ο‰Ξ½</b>\n"
+"The default cursor inverted"
 
-#: capplets/mouse/gnome-mouse-properties.c:580
+#: capplets/mouse/gnome-mouse-properties.c:602
 msgid ""
 "<b>White Cursor</b>\n"
 "The default cursor inverted"
 msgstr ""
+"<b>Ξ›ΞµΟ…ΞΊΟΟ‚ Ξ”ΟΞΏΞΌΞ­Ξ±Ο‚</b>\n"
+"The default cursor inverted"
 
-#: capplets/mouse/gnome-mouse-properties.c:598
+#: capplets/mouse/gnome-mouse-properties.c:620
 msgid ""
 "<b>Large Cursor - Current</b>\n"
 "Large version of normal cursor"
 msgstr ""
+"<b>ΞΞµΞ³Ξ¬Ξ»ΞΏΟ‚ Ξ”ΟΞΏΞΌΞ­Ξ±Ο‚ - Ξ¤ΟΞ­Ο‡Ο‰Ξ½</b>\n"
+"Large version of normal cursor"
 
-#: capplets/mouse/gnome-mouse-properties.c:601
+#: capplets/mouse/gnome-mouse-properties.c:623
 msgid ""
 "<b>Large Cursor</b>\n"
 "Large version of normal cursor"
 msgstr ""
+"<b>ΞΞµΞ³Ξ¬Ξ»ΞΏΟ‚ Ξ”ΟΞΏΞΌΞ­Ξ±Ο‚</b>\n"
+"Large version of normal cursor"
 
-#: capplets/mouse/gnome-mouse-properties.c:619
+#: capplets/mouse/gnome-mouse-properties.c:641
 msgid ""
 "<b>Large White Cursor - Current</b>\n"
 "Large version of white cursor"
 msgstr ""
+"<b>ΞΞµΞ³Ξ¬Ξ»ΞΏΟ‚ Ξ›ΞµΟ…ΞΊΟΟ‚ Ξ”ΟΞΏΞΌΞ­Ξ±Ο‚ - Ξ¤ΟΞ­Ο‡Ο‰Ξ½</b>\n"
+"Large version of white cursor"
 
-#: capplets/mouse/gnome-mouse-properties.c:622
+#: capplets/mouse/gnome-mouse-properties.c:644
 msgid ""
 "<b>Large White Cursor</b>\n"
 "Large version of white cursor"
 msgstr ""
+"<b>ΞΞµΞ³Ξ¬Ξ»ΞΏΟ‚ Ξ›ΞµΟ…ΞΊΟΟ‚ Ξ”ΟΞΏΞΌΞ­Ξ±Ο‚</b>\n"
+"Large version of white cursor"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:1
 msgid ""
@@ -1586,27 +1432,27 @@ msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:2
 msgid "<i>Fast</i>"
-msgstr ""
+msgstr "<i>Ξ“ΟΞ®Ξ³ΞΏΟΞ±</i>"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:3
 msgid "<i>High</i>"
-msgstr ""
+msgstr "<i>ΞΞµΞ³Ξ¬Ξ»Ξ·</i>"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:4
 msgid "<i>Large</i>"
-msgstr ""
+msgstr "<i>ΞΞµΞ³Ξ¬Ξ»ΞΏ</i>"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:5
 msgid "<i>Low</i>"
-msgstr ""
+msgstr "<i>ΞΞΉΞΊΟΞ®</i>"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:6
 msgid "<i>Slow</i>"
-msgstr ""
+msgstr "<i>Ξ‘ΟΞ³Ξ¬</i>"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:7
 msgid "<i>Small</i>"
-msgstr ""
+msgstr "<i>ΞΞΉΞΊΟΟ</i>"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid ""
@@ -1615,26 +1461,24 @@ msgid ""
 msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:9
-#, fuzzy
 msgid "Buttons"
-msgstr "Κουμπιά Διαλόγων"
+msgstr "ΞΞΏΟ…ΞΌΟ€ΞΉΞ¬"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:10
 msgid "Cursor Theme"
-msgstr ""
+msgstr "ΞΞ­ΞΌΞ± Ξ”ΟΞΏΞΌΞ­Ξ±"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:11
-#, fuzzy
 msgid "Cursors"
-msgstr "Παραμετροποιημένο"
+msgstr "Ξ”ΟΞΏΞΌΞµΞ―Ο‚"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:12
 msgid "Double-click Delay"
-msgstr ""
+msgstr "ΞΞ±ΞΈΟ…ΟƒΟ„Ξ­ΟΞ·ΟƒΞ· Ξ”ΞΉΟ€Ξ»ΞΏΟ-ΞΊΞ»ΞΉΞΊ"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:13
 msgid "Drag and Drop"
-msgstr ""
+msgstr "Ξ£ΟΟΞµ ΞΊΞ±ΞΉ Ξ†Ο†Ξ·ΟƒΞµ"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:14
 msgid ""
@@ -1643,28 +1487,27 @@ msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:15
 msgid "Locate Pointer"
-msgstr ""
+msgstr "Ξ•Ξ½Ο„ΞΏΟ€ΞΉΟƒΞΌΟΟ‚ Ξ”ΞµΞ―ΞΊΟ„Ξ·"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:16
 msgid ""
 "Maximum time allowed between clicks when double-clicking.   Use the box on "
 "the right to test."
 msgstr ""
+"ΞΞ­Ξ³ΞΉΟƒΟ„ΞΏΟ‚ ΞµΟ€ΞΉΟ„ΟΞµΟ€Ο„ΟΟ‚ Ο‡ΟΟΞ½ΞΏΟ‚ Ξ±Ξ½Ξ¬ΞΌΞµΟƒΞ± ΟƒΞµ Ξ΄ΞΉΟ€Ξ»Ο ΞΊΞ»ΞΉΞΊ.   ΞΞ¬Ξ½ΞµΟ„Ξµ Ξ΄ΞΏΞΊΞΉΞΌΞ®  ΟƒΟ„ΞΏ ΞΊΞΏΟ…Ο„Ξ― "
+"Ξ΄ΞµΞΎΞΉΞ¬."
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:17
-#, fuzzy
 msgid "Motion"
-msgstr "Επιτάχυνση"
+msgstr "ΞΞ―Ξ½Ξ·ΟƒΞ·"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:18
-#, fuzzy
 msgid "Mouse Orientation"
-msgstr "Πλήκτρα ποντικιού"
+msgstr "Ξ ΟΞΏΟƒΞ±Ξ½Ξ±Ο„ΞΏΞ»ΞΉΟƒΞΌΟΟ‚ Ξ ΞΏΞ½Ο„ΞΉΞΊΞΉΞΏΟ"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:19
-#, fuzzy
 msgid "Mouse Preferences"
-msgstr "Προτιμήσεις"
+msgstr "Ξ ΟΞΏΟ„ΞΉΞΌΞ®ΟƒΞµΞΉΟ‚ Ξ ΞΏΞ½Ο„ΞΉΞΊΞΉΞΏΟ"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:20
 msgid "Set the distance you need to move your cursor before dragging an item."
@@ -1676,236 +1519,212 @@ msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:22
 msgid "Speed"
-msgstr "Ταχύτητα"
+msgstr "Ξ¤Ξ±Ο‡ΟΟ„Ξ·Ο„Ξ±"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:23
-#, fuzzy
 msgid "_Acceleration:"
-msgstr "Επιτάχυνση"
+msgstr "_Ξ•Ο€ΞΉΟ„Ξ¬Ο‡Ο…Ξ½ΟƒΞ·:"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:24
 msgid "_Delay (sec):"
-msgstr ""
+msgstr "_ΞΞ±ΞΈΟ…ΟƒΟ„Ξ­ΟΞ·ΟƒΞ·(Ξ΄Ξ»Ο„):"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:25
-#, fuzzy
 msgid "_Left-handed mouse"
-msgstr "Αριστερόχειρας"
+msgstr "Ξ ΞΏΞ½Ο„Ξ―ΞΊΞΉ Ξ³ΞΉΞ± _Ξ±ΟΞΉΟƒΟ„ΞµΟΟΟ‡ΞµΞΉΟΞµΟ‚"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:26
 msgid "_Sensitivity:"
-msgstr ""
+msgstr "_Ξ•Ο…Ξ±ΞΉΟƒΞΈΞ·ΟƒΞ―Ξ±"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:27
 msgid "_Show position of cursor when the Control key is pressed"
 msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:28
-#, fuzzy
 msgid "_Threshold:"
-msgstr "Κατώφλι"
+msgstr "_ΞΞ±Ο„ΟΟ†Ξ»ΞΉ:"
 
 #: capplets/mouse/mouse.desktop.in.h:1
 msgid "Mouse"
-msgstr "Ρυθμίσεις ποντικιού"
+msgstr "Ξ΅Ο…ΞΈΞΌΞ―ΟƒΞµΞΉΟ‚ Ξ ΞΏΞ½Ο„ΞΉΞΊΞΉΞΏΟ"
 
 #: capplets/mouse/mouse.desktop.in.h:2
-msgid "Mouse Properties"
-msgstr "Τροποποίηση των ρυθμίσεων του ποντικιού"
+msgid "Set your mouse preferences"
+msgstr "ΞΞ±ΞΈΞΏΟΞΉΟƒΞΌΟΟ‚ Ο€ΟΞΏΟ„ΞΉΞΌΞ®ΟƒΞµΟ‰Ξ½ Ο€ΞΏΞ½Ο„ΞΉΞΊΞΉΞΏΟ"
 
 #: capplets/network/gnome-network-preferences.desktop.in.h:1
-msgid "Network"
-msgstr ""
+msgid "Network Proxy"
+msgstr "Ξ”ΞΉΞ±ΞΌΞµΟƒΞΏΞ»Ξ±Ξ²Ξ·Ο„Ξ®Ο‚ Ξ”ΞΉΞΊΟ„ΟΞΏΟ…"
 
 #: capplets/network/gnome-network-preferences.desktop.in.h:2
 #: capplets/network/gnome-network-preferences.glade.h:3
-#, fuzzy
-msgid "Network Preferences"
-msgstr "Προτιμήσεις"
+msgid "Network Proxy Preferences"
+msgstr "Ξ ΟΞΏΟ„ΞΉΞΌΞ®ΟƒΞµΞΉΟ‚ Ξ”ΞΉΞ±ΞΌΞµΟƒΞΏΞ»Ξ±Ξ²Ξ·Ο„Ξ® Ξ”ΞΉΞΊΟ„ΟΞΏΟ…"
 
 #: capplets/network/gnome-network-preferences.glade.h:2
-msgid "HTTP Proxy Settings"
-msgstr ""
+msgid "Network Preferences"
+msgstr "Ξ ΟΞΏΟ„ΞΉΞΌΞ®ΟƒΞµΞΉΟ‚ Ξ”ΞΉΞΊΟ„ΟΞΏΟ…"
 
 #: capplets/network/gnome-network-preferences.glade.h:4
-#, fuzzy
 msgid "P_ort:"
-msgstr "Σημεία:"
+msgstr "Ξ_ΟΟΞ±:"
 
 #: capplets/network/gnome-network-preferences.glade.h:5
 msgid "Pass_word:"
-msgstr ""
+msgstr "ΞΟ‰Ξ΄ΞΉΞΊΟΟ‚ _Ο€ΟΟΟƒΞ²Ξ±ΟƒΞ·Ο‚:"
 
 #: capplets/network/gnome-network-preferences.glade.h:6
-msgid "Pro_xy requires a username and password"
+msgid "Pro_xy requires username and password"
 msgstr ""
 
 #: capplets/network/gnome-network-preferences.glade.h:7
 msgid "User_name:"
-msgstr ""
+msgstr "ΞΞ½ΞΏΞΌΞ± _Ο‡ΟΞ®ΟƒΟ„Ξ·"
 
 #: capplets/network/gnome-network-preferences.glade.h:8
-#, fuzzy
 msgid "_Location:"
-msgstr "Επιτάχυνση"
+msgstr "_Ξ¤ΞΏΟ€ΞΏΞΈΞµΟƒΞ―Ξ±"
 
 #: capplets/network/gnome-network-preferences.glade.h:9
 msgid "_Use HTTP proxy"
 msgstr ""
 
 #: capplets/sound/sound-properties-capplet.c:180
-#, fuzzy
 msgid "Sound preferences"
-msgstr "Προτιμήσεις"
+msgstr "Ξ ΟΞΏΟ„ΞΉΞΌΞ®ΟƒΞµΞΉΟ‚ Ξ®Ο‡ΞΏΟ…"
 
 #: capplets/sound/sound-properties.glade.h:1
-#, fuzzy
 msgid "E_nable sound server startup"
-msgstr "Ενεργοποίηση εξυπηρέτη ήχων"
+msgstr "Ξ•Ξ½ΞµΟΞ³ΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ· ΞµΞΊΞΊΞ―Ξ½Ξ·ΟƒΞ·Ο‚ ΞµΞΎΟ…Ο€Ξ·ΟΞµΟ„Ξ·Ο„Ξ® Ξ®Ο‡Ο‰Ξ½"
 
 #: capplets/sound/sound-properties.glade.h:2
-#, fuzzy
-msgid "Sound _Events"
-msgstr "Συμβάντα"
+msgid "Sound Preferences"
+msgstr "Ξ ΟΞΏΟ„ΞΉΞΌΞ®ΟƒΞµΞΉΟ‚ Ξ‰Ο‡ΞΏΟ…"
 
 #: capplets/sound/sound-properties.glade.h:3
-#, fuzzy
-msgid "_General"
-msgstr "Γενικά"
+msgid "Sound _Events"
+msgstr "Ξ—Ο‡Ξ·Ο„ΞΉΞΊΞ¬ _Ξ£Ο…ΞΌΞ²Ξ¬Ξ½Ο„Ξ±"
 
 #: capplets/sound/sound-properties.glade.h:4
-#, fuzzy
+msgid "_General"
+msgstr "_Ξ“ΞµΞ½ΞΉΞΊΞ¬"
+
+#: capplets/sound/sound-properties.glade.h:5
 msgid "_Sounds for events"
-msgstr "Ήχοι συμβάντων"
+msgstr "_Ξ‰Ο‡ΞΏΞΉ Ξ³ΞΉΞ± ΟƒΟ…ΞΌΞ²Ξ¬Ξ½Ο„Ξ±"
 
 #: capplets/sound/sound.desktop.in.h:1
-msgid "Configure GNOME's use of sound"
-msgstr "Ρύθμιση των Ιδιοτήτων του Ήχου στο GNOME"
+msgid "Enable sound and associate sounds with events"
+msgstr "Ξ•Ξ½ΞµΟΞ³ΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ· Ξ®Ο‡Ο‰Ξ½ ΞΊΞ±ΞΉ Ξ±Ξ½Ο„ΞΉΟƒΟ„ΞΏΞ―Ο‡ΞΉΟƒΞ· Ξ®Ο‡Ο‰Ξ½ ΞΌΞµ ΟƒΟ…ΞΌΞ²Ξ¬Ξ½Ο„Ξ±"
 
 #: capplets/theme-switcher/control/control.c:18
 msgid "Eenie Meenie Mynie Moe Catcha Tiger By Its Toe"
-msgstr ""
+msgstr "Eenie Meenie Mynie Moe Catcha Tiger By Its Toe"
 
 #: capplets/theme-switcher/control/control.c:43
 msgid "Selected themes from above will be tested by previewing here."
-msgstr "Περιοχή προεπισκόπισης επιλεγμένων θεμάτων."
+msgstr "Ξ ΞµΟΞΉΞΏΟ‡Ξ® Ο€ΟΞΏΞµΟ€ΞΉΟƒΞΊΟΟ€Ξ·ΟƒΞ·Ο‚ ΞµΟ€ΞΉΞ»ΞµΞ³ΞΌΞ­Ξ½Ο‰Ξ½ ΞΈΞµΞΌΞ¬Ο„Ο‰Ξ½."
 
 #. column one
 #: capplets/theme-switcher/control/control.c:48
 msgid "Sample Button"
-msgstr "Δείγμα Κουμπιού"
+msgstr "Ξ”ΞµΞ―Ξ³ΞΌΞ± ΞΞΏΟ…ΞΌΟ€ΞΉΞΏΟ"
 
 # FIX??
 #: capplets/theme-switcher/control/control.c:52
 msgid "Sample Check Button"
-msgstr "Δείγμα Κουμπιού Επιλογής"
+msgstr "Ξ”ΞµΞ―Ξ³ΞΌΞ± ΞΞΏΟ…ΞΌΟ€ΞΉΞΏΟ Ξ•Ο€ΞΉΞ»ΞΏΞ³Ξ®Ο‚"
 
 # TODO
 #: capplets/theme-switcher/control/control.c:58
 msgid "Sample Text Entry Field"
-msgstr "Δείγμα Πεδίου Κειμένου"
+msgstr "Ξ”ΞµΞ―Ξ³ΞΌΞ± Ξ ΞµΞ΄Ξ―ΞΏΟ… ΞΞµΞΉΞΌΞ­Ξ½ΞΏΟ…"
 
 #: capplets/theme-switcher/control/control.c:69
 msgid "Submenu"
-msgstr "Υπομενού"
+msgstr "Ξ¥Ο€ΞΏΞΌΞµΞ½ΞΏΟ"
 
 #: capplets/theme-switcher/control/control.c:74
-#: capplets/ui-properties/gnome-ui-properties.glade.h:4
 msgid "Item 1"
-msgstr "Επιλογή ένα"
+msgstr "Ξ£Ο„ΞΏΞΉΟ‡ΞµΞ―ΞΏ 1"
 
 #: capplets/theme-switcher/control/control.c:76
 msgid "Another item"
-msgstr "¶λλη επιλογή"
+msgstr "Ξ†Ξ»Ξ»Ξ· ΞµΟ€ΞΉΞ»ΞΏΞ³Ξ®"
 
 # FIX?? (next 2)
 #: capplets/theme-switcher/control/control.c:80
 msgid "Radio Button 1"
-msgstr "Ραδιοπλήκτρο 1"
+msgstr "Ξ΅Ξ±Ξ΄ΞΉΞΏΟ€Ξ»Ξ®ΞΊΟ„ΟΞΏ 1"
 
 #: capplets/theme-switcher/control/control.c:86
 msgid "Radio Button 2"
-msgstr "Ραδιοπλήκτρο 2"
+msgstr "Ξ΅Ξ±Ξ΄ΞΉΞΏΟ€Ξ»Ξ®ΞΊΟ„ΟΞΏ 2"
 
 #: capplets/theme-switcher/control/control.c:107
 msgid "One"
-msgstr "Ένα"
+msgstr "ΞΞ½Ξ±"
 
 #: capplets/theme-switcher/control/control.c:113
 msgid "Two"
-msgstr "Δύο"
+msgstr "Ξ”ΟΞΏ"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
-msgid "Change the appearance of buttons, scrollbars, etc"
+msgid "Select themes for various parts of the desktop"
 msgstr ""
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
-#, fuzzy
 msgid "Theme"
-msgstr "Δέντρο"
+msgstr "ΞΞ­ΞΌΞ±"
+
+#: capplets/theme-switcher/theme-properties.glade.h:1
+msgid "Installed Themes"
+msgstr "Ξ•Ξ³ΞΊΞ±Ο„ΞµΟƒΟ„Ξ·ΞΌΞ­Ξ½Ξ± ΞΞ­ΞΌΞ±Ο„Ξ±"
 
 #: capplets/theme-switcher/theme-properties.glade.h:2
-#, fuzzy
-msgid "Gtk+ Theme Preferences"
-msgstr "Προτιμήσεις"
+msgid "List of available GTK+ themes"
+msgstr "Ξ”ΞΉΞ±ΞΈΞ­ΟƒΞΉΞΌΞ± ΞΈΞ­ΞΌΞ±Ο„Ξ± GTK+"
 
 #: capplets/theme-switcher/theme-properties.glade.h:3
-#, fuzzy
-msgid "Install new theme"
-msgstr ""
-"Εγκατάσταση\n"
-"νέου θέματος..."
-
-#: capplets/theme-switcher/theme-properties.glade.h:4
-#, fuzzy
-msgid "Installed Themes"
-msgstr ""
-"Εγκατάσταση\n"
-"νέου θέματος..."
-
-#: capplets/theme-switcher/theme-properties.glade.h:5
-#, fuzzy
-msgid "List of available GTK+ themes"
-msgstr "Διαθέσιμα θέματα"
-
-#: capplets/theme-switcher/theme-properties.glade.h:6
 msgid "New themes can also be installed by dragging them into the window."
 msgstr ""
 
-#: capplets/theme-switcher/theme-properties.glade.h:7
-#, fuzzy
+#: capplets/theme-switcher/theme-properties.glade.h:4
+msgid "Theme Preferences"
+msgstr "Ξ ΟΞΏΟ„ΞΉΞΌΞ®ΟƒΞµΞΉΟ‚ ΞΞ­ΞΌΞ±Ο„ΞΏΟ‚"
+
+#: capplets/theme-switcher/theme-properties.glade.h:5
 msgid "_Go to theme folder"
-msgstr "Πήγαινε σε κατάσταση ύπνου μετά από"
+msgstr "_ΞΞµΟ„Ξ¬Ξ²Ξ±ΟƒΞ· ΟƒΟ„ΞΏΞ½ Ο†Ξ¬ΞΊΞµΞ»ΞΏ ΞΈΞµΞΌΞ¬Ο„Ο‰Ξ½"
 
-#: capplets/theme-switcher/theme-properties.glade.h:8
+#: capplets/theme-switcher/theme-properties.glade.h:6
+msgid "_Install New Theme..."
+msgstr "_Ξ•Ξ³ΞΊΞ±Ο„Ξ¬ΟƒΟ„Ξ±ΟƒΞ· ΞΞ­ΞΏΟ… ΞΞ­ΞΌΞ±Ο„ΞΏΟ‚..."
+
+#: capplets/theme-switcher/theme-install.glade.h:2
+msgid "Install new theme"
+msgstr "Ξ•Ξ³ΞΊΞ±Ο„Ξ¬ΟƒΟ„Ξ±ΟƒΞ· Ξ½Ξ­ΞΏΟ… ΞΈΞ­ΞΌΞ±Ο„ΞΏΟ‚"
+
+#: capplets/theme-switcher/theme-install.glade.h:3
 msgid "_Install"
-msgstr ""
+msgstr "_Ξ•Ξ³ΞΊΞ±Ο„Ξ¬ΟƒΟ„Ξ±ΟƒΞ·"
 
-#: capplets/theme-switcher/theme-properties.glade.h:9
-#, fuzzy
-msgid "_Install new theme..."
-msgstr ""
-"Εγκατάσταση\n"
-"νέου θέματος..."
-
-#: capplets/theme-switcher/theme-properties.glade.h:10
-#, fuzzy
+#: capplets/theme-switcher/theme-install.glade.h:4
 msgid "_Location of new theme:"
-msgstr "Επιτάχυνση"
+msgstr "_Ξ¤ΞΏΟ€ΞΏΞΈΞµΟƒΞ―Ξ± Ο„ΞΏΟ… Ξ½Ξ­ΞΏΟ… ΞΈΞ­ΞΌΞ±Ο„ΞΏΟ‚:"
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
-msgid "Change how toolbars and menus are displayed"
+msgid "Customize the appearance of toolbars and menubars in applications"
 msgstr ""
 
 #: capplets/ui-properties/behavior.desktop.in.h:2
-#, fuzzy
-msgid "Toolbars & Menus"
-msgstr "Επιλογές Εργαλειοθήκης"
+msgid "Menus & Toolbars"
+msgstr "ΞΞµΞ½ΞΏΟ ΞΊΞ±ΞΉ Ξ•ΟΞ³Ξ±Ξ»ΞµΞΉΞΏΞΈΞ®ΞΊΞµΟ‚"
 
 #: capplets/ui-properties/behavior.desktop.in.in.h:1
-#, fuzzy
 msgid "Behavior"
-msgstr "Συμπεριφορά Διαλόγων"
+msgstr "Ξ£Ο…ΞΌΟ€ΞµΟΞΉΟ†ΞΏΟΞ¬"
 
 #: capplets/ui-properties/behavior.desktop.in.in.h:2
 msgid "Sets the default behavior of GNOME applications"
@@ -1920,120 +1739,114 @@ msgid "A preview of what a toolbar looks like with these settings."
 msgstr ""
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:3
-msgid "Icons Only"
-msgstr ""
+msgid "C_ut"
+msgstr "Ξ‘Ο€ΞΏΞΊΞΏ_Ο€Ξ®"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:4
+msgid "Edit Menu"
+msgstr "Ξ•Ο€ΞµΞΎΞµΟΞ³Ξ±ΟƒΞ―Ξ± ΞΞµΞ½ΞΏΟ"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:5
-#, fuzzy
-msgid "Item 2"
-msgstr "Επιλογή ένα"
+msgid "Icons Only"
+msgstr "Ξ•ΞΉΞΊΞΏΞ½Ξ―Ξ΄ΞΉΞ± ΞΟΞ½ΞΏ"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:6
-#, fuzzy
-msgid "Item 3"
-msgstr "Επιλογή ένα"
+msgid "Menu and Toolbar Preferences"
+msgstr "Ξ ΟΞΏΟ„ΞΉΞΌΞ®ΟƒΞµΞΉΟ‚ ΞΞµΞ½ΞΏΟ ΞΊΞ±ΞΉ Ξ•ΟΞ³Ξ±Ξ»ΞµΞΉΞΏΞΈΞ®ΞΊΞ·Ο‚"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:7
-#, fuzzy
-msgid "Menu Item 1"
-msgstr "Επιλογή ένα"
+msgid "Menus"
+msgstr "ΞΞµΞ½ΞΏΟ"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:8
-msgid "Menu Item 2"
-msgstr ""
+msgid "New File"
+msgstr "ΞΞ­ΞΏ Ξ‘ΟΟ‡ΞµΞ―ΞΏ"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:9
-msgid "Menu Item 3"
-msgstr ""
+msgid "Open File"
+msgstr "Ξ†Ξ½ΞΏΞΉΞ³ΞΌΞ± Ξ‘ΟΟ‡ΞµΞ―ΞΏΟ…"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:10
-msgid "Menu Item 4"
-msgstr ""
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:11
-msgid "Menu Item 5"
-msgstr ""
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:12
-#, fuzzy
-msgid "Menu items can have _icons"
-msgstr "Επιλογές μενού με εικονίδια"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:13
-#, fuzzy
-msgid "Menus"
-msgstr "Ρυθμίσεις ποντικιού"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:14
-msgid "New File"
-msgstr ""
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:15
-#, fuzzy
-msgid "Open File"
-msgstr "Ανοιχτές φιγούρες."
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:16
 msgid "Priority Text Beside Icons"
 msgstr ""
 
+#: capplets/ui-properties/gnome-ui-properties.glade.h:11
+msgid "Sample menubar:"
+msgstr "Ξ”ΞµΞ―Ξ³ΞΌΞ± ΞΌΟ€Ξ¬ΟΞ±Ο‚ ΞΌΞµΞ½ΞΏΟ:"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:12
+msgid "Sample toolbar:"
+msgstr "Ξ”ΞµΞ―Ξ³ΞΌΞ± ΞµΟΞ³Ξ±Ξ»ΞµΞΉΞΏΞΈΞ®ΞΊΞ·Ο‚:"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:13
+msgid "Save File"
+msgstr "Ξ‘Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ· Ξ‘ΟΟ‡ΞµΞ―ΞΏΟ…"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:14
+msgid "Text Below Icons"
+msgstr "ΞΞµΞ―ΞΌΞµΞ½ΞΏ ΞΊΞ¬Ο„Ο‰ Ξ±Ο€Ο Ο„Ξ± Ξ•ΞΉΞΊΞΏΞ½Ξ―Ξ΄ΞΉΞ±"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:15
+msgid "Text Only"
+msgstr "ΞΞµΞ―ΞΌΞµΞ½ΞΏ ΞΟΞ½ΞΏ"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:16
+msgid "Toolbar"
+msgstr "Ξ•ΟΞ³Ξ±Ξ»ΞµΞΉΞΏΞΈΞ®ΞΊΞ·"
+
 #: capplets/ui-properties/gnome-ui-properties.glade.h:17
-msgid "Sample Menubar"
-msgstr ""
+msgid "Toolbars can be _detached and moved around"
+msgstr "ΞΞΉ ΞµΟΞ³Ξ±Ξ»ΞµΞΉΞΏΞΈΞ®ΞΊΞµΟ‚ Ξ½Ξ± ΞµΞ―Ξ½Ξ±ΞΉ Ξ±Ο€ΞΏΟƒΟ€ΟΞΌΞµΞ½ΞµΟ‚ ΞΊΞ±ΞΉ ΞΌΞµΟ„Ξ±ΞΊΞΉΞ½ΞΏΟΞΌΞµΞ½ΞµΟ‚"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:18
-msgid "Sample Toolbar"
-msgstr ""
+msgid "_Button Labels: "
+msgstr "Ξ•Ο„Ο„ΞΉ_ΞΊΞ­Ο„ΞµΟ‚ ΞΞΏΟ…ΞΌΟ€ΞΉΟΞ½: "
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:19
-msgid "Save File"
-msgstr ""
+msgid "_Copy"
+msgstr "Ξ‘Ξ½Ο„ΞΉΞ³ΟΞ±_Ο†Ξ®"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:20
-#, fuzzy
-msgid "Select the toolbar style."
-msgstr "Επιλογή θέματος προς εγκατάσταση"
+msgid "_Menu"
+msgstr "_ΞΞµΞ½ΞΏΟ"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:21
-msgid "Text Below Icons"
-msgstr ""
+msgid "_New"
+msgstr "_ΞΞ­ΞΏ"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:22
-msgid "Text Only"
-msgstr ""
+msgid "_Open"
+msgstr "_Ξ†Ξ½ΞΏΞΉΞ³ΞΌΞ±"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:23
-#, fuzzy
-msgid "Toolbar"
-msgstr "Επιλογές Εργαλειοθήκης"
+msgid "_Paste"
+msgstr "Ξ•Ο€ΞΉ_ΞΊΟΞ»Ξ»Ξ·ΟƒΞ·"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:24
-#, fuzzy
-msgid "Toolbar and Menu Preferences"
-msgstr "Γενικές Ιδιότητες"
+msgid "_Print"
+msgstr "_Ξ•ΞΊΟ„ΟΟ€Ο‰ΟƒΞ·"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:25
-#, fuzzy
-msgid "Toolbars can be _detached and moved around"
-msgstr "Αποσπώμενες εργαλειοθήκες"
+msgid "_Quit"
+msgstr "_Ξ¤ΞµΟΞΌΞ±Ο„ΞΉΟƒΞΌΟΟ‚"
 
+# For lack of a better term...?  Anaklimakwsh ???
 #: capplets/ui-properties/gnome-ui-properties.glade.h:26
-msgid "_Menu"
-msgstr ""
+msgid "_Save"
+msgstr "_Ξ‘Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ·"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:27
-#, fuzzy
-msgid "_Toolbars have: "
-msgstr "Εργαλειοθήκες με περίγραμμα"
+msgid "_Show icons in menus"
+msgstr "_Ξ•ΞΌΟ†Ξ¬Ξ½ΞΉΟƒΞ· ΞµΞΉΞΊΞΏΞ½ΞΉΞ΄Ξ―Ο‰Ξ½ ΟƒΟ„Ξ± ΞΌΞµΞ½ΞΏΟ"
 
 #: capplets/windows/gnome-window-properties.c:282
-#, fuzzy
+#: capplets/windows/gnome-window-properties.glade.h:6
 msgid "Window Preferences"
-msgstr "Προτιμήσεις"
+msgstr "Ξ ΟΞΏΟ„ΞΉΞΌΞ®ΟƒΞµΞΉΟ‚ Ξ Ξ±ΟΞ±ΞΈΟΟΟ‰Ξ½"
 
 #: capplets/windows/gnome-window-properties.glade.h:1
 msgid "Apply Now"
-msgstr ""
+msgstr "Ξ•Ο†Ξ±ΟΞΌΞΏΞ³Ξ® Ξ¤ΟΟΞ±"
 
 #: capplets/windows/gnome-window-properties.glade.h:2
 msgid "Select windows when the mouse moves over them"
@@ -2041,37 +1854,32 @@ msgstr ""
 
 #: capplets/windows/gnome-window-properties.glade.h:3
 msgid "Titlebar Font"
-msgstr ""
+msgstr "Ξ“ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΞ¬ ΞΟ€Ξ¬ΟΞ±Ο‚ Ξ¤Ξ―Ο„Ξ»ΞΏΟ…"
 
 #: capplets/windows/gnome-window-properties.glade.h:4
 msgid "Window Border Appearance"
 msgstr ""
 
 #: capplets/windows/gnome-window-properties.glade.h:5
-#, fuzzy
 msgid "Window Manager:"
-msgstr "Νέος διαχειριστής παραθύρων"
+msgstr "Ξ”ΞΉΞ±Ο‡ΞµΞΉΟΞΉΟƒΟ„Ξ®Ο‚ Ξ Ξ±ΟΞ±ΞΈΟΟΟ‰Ξ½:"
 
-#: capplets/windows/gnome-window-properties.glade.h:6
 #: capplets/windows/window-properties.desktop.in.h:1
-#, fuzzy
 msgid "Window Properties"
-msgstr "Καθορισμός χρώματος φόντου"
+msgstr "Ξ™Ξ΄ΞΉΟΟ„Ξ·Ο„ΞµΟ‚ Ξ Ξ±ΟΞ±ΞΈΟΟΟ‰Ξ½"
 
 #: capplets/windows/window-properties.desktop.in.h:2
-#, fuzzy
 msgid "Windows"
-msgstr "window4"
+msgstr "Ξ Ξ±ΟΞ¬ΞΈΟ…ΟΞ±"
 
 #: control-center/capplet-dir-view-list.c:324
-#, fuzzy, c-format
+#, c-format
 msgid "GNOME Control Center: %s"
-msgstr "Κέντρο Ελέγχου GNOME"
+msgstr "ΞΞ­Ξ½Ο„ΟΞΏ Ξ•Ξ»Ξ­Ξ³Ο‡ΞΏΟ… GNOME: %s"
 
 #: control-center/capplet-dir-view.c:158
-#, fuzzy
 msgid "Layout"
-msgstr "Διάταξη Διαλόγων"
+msgstr "Ξ”ΞΉΞ¬Ο„Ξ±ΞΎΞ·"
 
 #: control-center/capplet-dir-view.c:159
 msgid "Layout to use for this view of the capplets"
@@ -2085,55 +1893,53 @@ msgstr ""
 msgid "Capplet directory that this view is viewing"
 msgstr ""
 
-#: control-center/capplet-dir-view.c:335
+#: control-center/capplet-dir-view.c:348
 msgid "translator_credits"
 msgstr ""
+"Ξ£Ξ―ΞΌΞΏΟ‚ ΞΞµΞ½ΞΉΟ„Ξ­Ξ»Ξ»Ξ·Ο‚ <simos@hellug.gr>\n"
+" Ξ£Ο€ΟΟΞΏΟ‚ Ξ Ξ±Ο€Ξ±Ξ΄Ξ·ΞΌΞ·Ο„ΟΞ―ΞΏΟ… <spapadim+@cs.smu,edu>\n"
+" ΞΞ―ΞΊΞΏΟ‚ Ξ§Ξ±ΟΟ‰Ξ½ΞΉΟ„Ξ¬ΞΊΞ·Ο‚ <charosn@her.forthnet.gr>"
 
-#: control-center/capplet-dir-view.c:344 control-center/gnomecc.desktop.in.h:1
+#: control-center/capplet-dir-view.c:357 control-center/gnomecc.desktop.in.h:1
 msgid "GNOME Control Center"
-msgstr "Κέντρο Ελέγχου GNOME"
+msgstr "ΞΞ­Ξ½Ο„ΟΞΏ Ξ•Ξ»Ξ­Ξ³Ο‡ΞΏΟ… GNOME"
 
-#: control-center/capplet-dir-view.c:347
+#: control-center/capplet-dir-view.c:360
 msgid "Desktop properties manager."
-msgstr "Διαχειρηστής ρυθμίσεων επιφάνειας εργασίας."
+msgstr "Ξ”ΞΉΞ±Ο‡ΞµΞΉΟΞΉΟƒΟ„Ξ®Ο‚ ΟΟ…ΞΈΞΌΞ―ΟƒΞµΟ‰Ξ½ ΞµΟ€ΞΉΟ†Ξ¬Ξ½ΞµΞΉΞ±Ο‚ ΞµΟΞ³Ξ±ΟƒΞ―Ξ±Ο‚."
 
-#: control-center/capplet-dir-view.c:485
-#, fuzzy, c-format
+#: control-center/capplet-dir-view.c:498
+#, c-format
 msgid "Gnome Control Center : %s"
-msgstr "Κέντρο Ελέγχου"
+msgstr "ΞΞ­Ξ½Ο„ΟΞΏ Ξ•Ξ»Ξ­Ξ³Ο‡ΞΏΟ… Gnome : %s"
 
 #: control-center/gnomecc-ui.xml.h:1
-#, fuzzy
 msgid "About this application"
-msgstr "Εξ' ορισμού τιμή"
+msgstr "Ξ ΞµΟΞ― Ξ±Ο…Ο„Ξ®Ο‚ Ο„Ξ·Ο‚ ΞµΟ†Ξ±ΟΞΌΞΏΞ³Ξ®Ο‚"
 
 #: control-center/gnomecc-ui.xml.h:2
-#, fuzzy
 msgid "Overview of the control center"
-msgstr "IOR του control-center"
+msgstr "Ξ£ΟΞ½ΞΏΟΞ· Ο„ΞΏΟ… ΞΊΞ­Ξ½Ο„ΟΞΏΟ… ΞµΞ»Ξ­Ξ³Ο‡ΞΏΟ…"
 
 #: control-center/gnomecc-ui.xml.h:3
 msgid "_About..."
-msgstr ""
+msgstr "_Ξ ΞµΟΞ―..."
 
 #: control-center/gnomecc-ui.xml.h:4
-#, fuzzy
 msgid "_Contents..."
-msgstr "Ρυθμίσεις..."
+msgstr "_Ξ ΞµΟΞΉΞµΟ‡ΟΞΌΞµΞ½Ξ±..."
 
 #: control-center/gnomecc-ui.xml.h:5
-#, fuzzy
 msgid "_File"
-msgstr "Αρχείο"
+msgstr "_Ξ‘ΟΟ‡ΞµΞ―ΞΏ"
 
 #: control-center/gnomecc-ui.xml.h:6
-#, fuzzy
 msgid "_Help"
-msgstr "Βοήθεια"
+msgstr "_Ξ’ΞΏΞ®ΞΈΞµΞΉΞ±"
 
 #: control-center/gnomecc.desktop.in.h:2
 msgid "The GNOME configuration tool"
-msgstr "Το εργαλείο ρύθμισης του GNOME"
+msgstr "Ξ¤ΞΏ ΞµΟΞ³Ξ±Ξ»ΞµΞ―ΞΏ ΟΟΞΈΞΌΞΉΟƒΞ·Ο‚ Ο„ΞΏΟ… GNOME"
 
 #: control-center/main.c:43
 msgid "Use shell even if nautilus is running."
@@ -2194,7 +2000,7 @@ msgstr ""
 
 #: gnome-settings-daemon/gnome-settings-screensaver.c:102
 msgid "_Do not show this message again"
-msgstr ""
+msgstr "_ΞΞ± ΞΌΞ·Ξ½ ΞµΞΌΟ†Ξ±Ξ½ΞΉΟƒΟ„ΞµΞ― ΞΎΞ±Ξ½Ξ¬ Ξ±Ο…Ο„Ο Ο„ΞΏ ΞΌΞ®Ξ½Ο…ΞΌΞ± "
 
 #: gnome-settings-daemon/gnome-settings-sound.c:125
 #, c-format
@@ -2207,9 +2013,8 @@ msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr ""
 
 #: libbackground/applier.c:239
-#, fuzzy
 msgid "Type"
-msgstr "Τύπος MIME"
+msgstr "Ξ¤ΟΟ€ΞΏΟ‚"
 
 #: libbackground/applier.c:240
 msgid ""
@@ -2218,18 +2023,16 @@ msgid ""
 msgstr ""
 
 #: libbackground/applier.c:247
-#, fuzzy
 msgid "Preview Width"
-msgstr "Προεπισκόπηση"
+msgstr "Ξ Ξ»Ξ¬Ο„ΞΏΟ‚ Ξ ΟΞΏΞµΟ€ΞΉΟƒΞΊΟΟ€Ξ·ΟƒΞ·Ο‚"
 
 #: libbackground/applier.c:248
 msgid "Width if applier is a preview: Defaults to 64."
 msgstr ""
 
 #: libbackground/applier.c:255
-#, fuzzy
 msgid "Preview Height"
-msgstr "Προεπισκόπηση"
+msgstr "ΞΟΞΏΟ‚ Ξ ΟΞΏΞµΟ€ΞΉΟƒΞΊΟΟ€Ξ·ΟƒΞ·Ο‚"
 
 #: libbackground/applier.c:256
 msgid "Height if applier is a preview: Defaults to 48."
@@ -2237,11 +2040,11 @@ msgstr ""
 
 #: libbackground/preview-file-selection.c:193
 msgid "Can't find an hbox, using a normal file selection"
-msgstr "Δε βρέθηκε hbox, χρήση απλού επιλογέα αρχείων"
+msgstr "Ξ”Ξµ Ξ²ΟΞ­ΞΈΞ·ΞΊΞµ hbox, Ο‡ΟΞ®ΟƒΞ· Ξ±Ο€Ξ»ΞΏΟ ΞµΟ€ΞΉΞ»ΞΏΞ³Ξ­Ξ± Ξ±ΟΟ‡ΞµΞ―Ο‰Ξ½"
 
 #: libsounds/sound-view.c:122
 msgid "The sound file for this event does not exist."
-msgstr "Το αρχείο ήχου για το παρόν συμβάν δεν υπάρχει."
+msgstr "Ξ¤ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ Ξ®Ο‡ΞΏΟ… Ξ³ΞΉΞ± Ο„ΞΏ Ο€Ξ±ΟΟΞ½ ΟƒΟ…ΞΌΞ²Ξ¬Ξ½ Ξ΄ΞµΞ½ Ο…Ο€Ξ¬ΟΟ‡ΞµΞΉ."
 
 #: libsounds/sound-view.c:124
 msgid ""
@@ -2249,32 +2052,29 @@ msgid ""
 "You may want to install the gnome-audio package\n"
 "for a set of default sounds."
 msgstr ""
-"Το αρχείο ήχου για το παρόν συμβάν δεν υπάρχει.\n"
-"Εάν επιθυμείτε, μπορείτε να εγκαταστήσετε το πακέτο\n"
-"gnome-audio, με συλλογή μερικών ήχων."
+"Ξ¤ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ Ξ®Ο‡ΞΏΟ… Ξ³ΞΉΞ± Ο„ΞΏ Ο€Ξ±ΟΟΞ½ ΟƒΟ…ΞΌΞ²Ξ¬Ξ½ Ξ΄ΞµΞ½ Ο…Ο€Ξ¬ΟΟ‡ΞµΞΉ.\n"
+"Ξ•Ξ¬Ξ½ ΞµΟ€ΞΉΞΈΟ…ΞΌΞµΞ―Ο„Ξµ, ΞΌΟ€ΞΏΟΞµΞ―Ο„Ξµ Ξ½Ξ± ΞµΞ³ΞΊΞ±Ο„Ξ±ΟƒΟ„Ξ®ΟƒΞµΟ„Ξµ Ο„ΞΏ Ο€Ξ±ΞΊΞ­Ο„ΞΏ\n"
+"gnome-audio, ΞΌΞµ ΟƒΟ…Ξ»Ξ»ΞΏΞ³Ξ® ΞΌΞµΟΞΉΞΊΟΞ½ Ξ®Ο‡Ο‰Ξ½."
 
 #: libsounds/sound-view.c:216
 msgid "Event"
-msgstr "Συμβάν"
+msgstr "Ξ£Ο…ΞΌΞ²Ξ¬Ξ½"
 
 #: libsounds/sound-view.c:223
-#, fuzzy
 msgid "File to play"
-msgstr "Αρχείο ήχου"
+msgstr "Ξ‘ΟΟ‡ΞµΞ―ΞΏ Ο€ΟΞΏΟ‚ Ξ±Ξ½Ξ±Ο€Ξ±ΟΞ±Ξ³Ο‰Ξ³Ξ®"
 
 #: libsounds/sound-view.c:238
-#, fuzzy
 msgid "_Sounds"
-msgstr "Ιδιότητες του Ήχου"
+msgstr "_Ξ‰Ο‡ΞΏΞΉ"
 
 #: libsounds/sound-view.c:251
-#, fuzzy
 msgid "_Play"
-msgstr "Εκτέλεση"
+msgstr "_Ξ‘Ξ½Ξ±Ο€Ξ±ΟΞ±Ξ³Ο‰Ξ³Ξ®"
 
 #: libsounds/sound-view.c:257
 msgid "Select sound file"
-msgstr "Επιλογή αρχείου ήχου"
+msgstr "Ξ•Ο€ΞΉΞ»ΞΏΞ³Ξ® Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… Ξ®Ο‡ΞΏΟ…"
 
 #: libwindow-settings/gnome-wm-manager.c:168
 #, c-format
@@ -2282,16 +2082,16 @@ msgid ""
 "Starting %s\n"
 "(%d seconds left before operation times out)"
 msgstr ""
-"Έναρξη %s\n"
-"(λήξη απόπειρας σε %d δευτερόλεπτα)"
+"ΞΞ½Ξ±ΟΞΎΞ· %s\n"
+"(Ξ»Ξ®ΞΎΞ· Ξ±Ο€ΟΟ€ΞµΞΉΟΞ±Ο‚ ΟƒΞµ %d Ξ΄ΞµΟ…Ο„ΞµΟΟΞ»ΞµΟ€Ο„Ξ±)"
 
 #: libwindow-settings/gnome-wm-manager.c:322
 msgid ""
 "wm-properties-capplet: Unable to initialize window manager.\n"
 "\tAnother window manager is already running and could not be killed\n"
 msgstr ""
-"wm-properties-capplet: Αρχικοποίηση διαχειριστή παραθύρων αδύνατη.\n"
-"\tΟ τερματισμός του ήδη υπάρχοντος διαχειριστή δεν ήταν δυνατός\n"
+"wm-properties-capplet: Ξ‘ΟΟ‡ΞΉΞΊΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ· Ξ΄ΞΉΞ±Ο‡ΞµΞΉΟΞΉΟƒΟ„Ξ® Ο€Ξ±ΟΞ±ΞΈΟΟΟ‰Ξ½ Ξ±Ξ΄ΟΞ½Ξ±Ο„Ξ·.\n"
+"\tΞ Ο„ΞµΟΞΌΞ±Ο„ΞΉΟƒΞΌΟΟ‚ Ο„ΞΏΟ… Ξ®Ξ΄Ξ· Ο…Ο€Ξ¬ΟΟ‡ΞΏΞ½Ο„ΞΏΟ‚ Ξ΄ΞΉΞ±Ο‡ΞµΞΉΟΞΉΟƒΟ„Ξ® Ξ΄ΞµΞ½ Ξ®Ο„Ξ±Ξ½ Ξ΄Ο…Ξ½Ξ±Ο„ΟΟ‚\n"
 
 #: libwindow-settings/gnome-wm-manager.c:326
 #, c-format
@@ -2299,12 +2099,12 @@ msgid ""
 "wm-properties-capplet: Unable to initialize window manager.\n"
 "\t'%s' didn't start\n"
 msgstr ""
-"wm-properties-capplet: Αρχικοποίηση διαχειριστή παραθύρων αδύνατη.\n"
-"\tανεπιτυχής εκκίνηση του '%s' \n"
+"wm-properties-capplet: Ξ‘ΟΟ‡ΞΉΞΊΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ· Ξ΄ΞΉΞ±Ο‡ΞµΞΉΟΞΉΟƒΟ„Ξ® Ο€Ξ±ΟΞ±ΞΈΟΟΟ‰Ξ½ Ξ±Ξ΄ΟΞ½Ξ±Ο„Ξ·.\n"
+"\tΞ±Ξ½ΞµΟ€ΞΉΟ„Ο…Ο‡Ξ®Ο‚ ΞµΞΊΞΊΞ―Ξ½Ξ·ΟƒΞ· Ο„ΞΏΟ… '%s' \n"
 
 #: libwindow-settings/gnome-wm-manager.c:375
 msgid "Previous window manager did not die\n"
-msgstr "Ο προηγούμενος διαχειριστής παραθύρων δεν τερματίστηκε\n"
+msgstr "Ξ Ο€ΟΞΏΞ·Ξ³ΞΏΟΞΌΞµΞ½ΞΏΟ‚ Ξ΄ΞΉΞ±Ο‡ΞµΞΉΟΞΉΟƒΟ„Ξ®Ο‚ Ο€Ξ±ΟΞ±ΞΈΟΟΟ‰Ξ½ Ξ΄ΞµΞ½ Ο„ΞµΟΞΌΞ±Ο„Ξ―ΟƒΟ„Ξ·ΞΊΞµ\n"
 
 #: libwindow-settings/gnome-wm-manager.c:408
 #, c-format
@@ -2312,8 +2112,8 @@ msgid ""
 "Could not start '%s'.\n"
 "Falling back to previous window manager '%s'\n"
 msgstr ""
-"Εκκίνηση του '%s' ανεπιτυχής.\n"
-"Επαναφορά του προηγούμενου διαχειριστή παραθύρων '%s'\n"
+"Ξ•ΞΊΞΊΞ―Ξ½Ξ·ΟƒΞ· Ο„ΞΏΟ… '%s' Ξ±Ξ½ΞµΟ€ΞΉΟ„Ο…Ο‡Ξ®Ο‚.\n"
+"Ξ•Ο€Ξ±Ξ½Ξ±Ο†ΞΏΟΞ¬ Ο„ΞΏΟ… Ο€ΟΞΏΞ·Ξ³ΞΏΟΞΌΞµΞ½ΞΏΟ… Ξ΄ΞΉΞ±Ο‡ΞµΞΉΟΞΉΟƒΟ„Ξ® Ο€Ξ±ΟΞ±ΞΈΟΟΟ‰Ξ½ '%s'\n"
 
 #: libwindow-settings/gnome-wm-manager.c:439
 msgid ""
@@ -2322,1901 +2122,165 @@ msgid ""
 "do this by selecting \"Run Program\" in the\n"
 "foot menu\n"
 msgstr ""
-"Απόπειρες εκκίνησης διαχειριστή παραθύρων απέτυχαν.\n"
-"Παρακαλώ εκτελέστε κάποιο διαχειριστή. Αυτό μπορείτε να\n"
-"το κάνετε επιλέγοντας \"Εκτέλεση προγράμματος\" από το\n"
-"κεντρικό μενού του GNOME\n"
+"Ξ‘Ο€ΟΟ€ΞµΞΉΟΞµΟ‚ ΞµΞΊΞΊΞ―Ξ½Ξ·ΟƒΞ·Ο‚ Ξ΄ΞΉΞ±Ο‡ΞµΞΉΟΞΉΟƒΟ„Ξ® Ο€Ξ±ΟΞ±ΞΈΟΟΟ‰Ξ½ Ξ±Ο€Ξ­Ο„Ο…Ο‡Ξ±Ξ½.\n"
+"Ξ Ξ±ΟΞ±ΞΊΞ±Ξ»Ο ΞµΞΊΟ„ΞµΞ»Ξ­ΟƒΟ„Ξµ ΞΊΞ¬Ο€ΞΏΞΉΞΏ Ξ΄ΞΉΞ±Ο‡ΞµΞΉΟΞΉΟƒΟ„Ξ®. Ξ‘Ο…Ο„Ο ΞΌΟ€ΞΏΟΞµΞ―Ο„Ξµ Ξ½Ξ±\n"
+"Ο„ΞΏ ΞΊΞ¬Ξ½ΞµΟ„Ξµ ΞµΟ€ΞΉΞ»Ξ­Ξ³ΞΏΞ½Ο„Ξ±Ο‚ \"Ξ•ΞΊΟ„Ξ­Ξ»ΞµΟƒΞ· Ο€ΟΞΏΞ³ΟΞ¬ΞΌΞΌΞ±Ο„ΞΏΟ‚\" Ξ±Ο€Ο Ο„ΞΏ\n"
+"ΞΊΞµΞ½Ο„ΟΞΉΞΊΟ ΞΌΞµΞ½ΞΏΟ Ο„ΞΏΟ… GNOME\n"
 
 #: libwindow-settings/gnome-wm-manager.c:464
 msgid "OK"
-msgstr "Εντάξει"
+msgstr "Ξ•Ξ½Ο„Ξ¬ΞΎΞµΞΉ"
 
 #, fuzzy
-#~ msgid "E-Mail"
-#~ msgstr "Πολλά"
+#~ msgid "_Enable keyboard accessibility"
+#~ msgstr "Ξ•Ξ½ΞµΟΞ³ΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ· ΞΞ»Ξ―ΞΊ Ξ Ξ»Ξ·ΞΊΟ„ΟΞΏΞ»ΞΏΞ³Ξ―ΞΏΟ…"
 
-# FIX?? (next 2)
-#, fuzzy
-#~ msgid "radiobutton1"
-#~ msgstr "Ραδιοπλήκτρο 1"
-
-#, fuzzy
-#~ msgid "radiobutton2"
-#~ msgstr "Ραδιοπλήκτρο 2"
-
-#, fuzzy
-#~ msgid "radiobutton3"
-#~ msgstr "Ραδιοπλήκτρο 2"
-
-#, fuzzy
-#~ msgid "radiobutton4"
-#~ msgstr "Ραδιοπλήκτρο 2"
-
-#, fuzzy
-#~ msgid "radiobutton5"
-#~ msgstr "Ραδιοπλήκτρο 2"
-
-#, fuzzy
-#~ msgid "CD Properties"
-#~ msgstr "Τροποποίηση των ρυθμίσεων του ποντικιού"
-
-#, fuzzy
-#~ msgid "Configure handling of CD devices"
-#~ msgstr "Ρυθμίζει πως συσχετίζονται τα παράθυρα"
-
-#, fuzzy
-#~ msgid "Global panel properties"
-#~ msgstr "Καθορισμός χρώματος φόντου"
-
-#, fuzzy
-#~ msgid "Panel"
-#~ msgstr "¶κυρο"
-
-#, fuzzy
-#~ msgid "Startup Programs"
-#~ msgstr "Νέο Πρόγραμμα Εκκίνησης"
-
-#, fuzzy
-#~ msgid "Select an icon..."
-#~ msgstr "Επιλογή"
-
-#~ msgid "Mime Type: "
-#~ msgstr "Τύπος MIME: "
-
-#, fuzzy
-#~ msgid "Add"
-#~ msgstr "Νέος"
-
-#, fuzzy
-#~ msgid "Remove"
-#~ msgstr "Διαγραφή"
-
-#~ msgid "First Regular Expression: "
-#~ msgstr "Πρώτη κανονική έκφραση: "
-
-#~ msgid "Second Regular Expression: "
-#~ msgstr "Δεύτερη κανονική έκφραση: "
-
-#~ msgid "Mime Type Actions"
-#~ msgstr "Ενέργειες"
-
-#~ msgid "Example: emacs %f"
-#~ msgstr "Παράδειγμα: emacs %f"
-
-#~ msgid "Open"
-#~ msgstr "¶νοιγμα"
-
-#, fuzzy
-#~ msgid "Select a file..."
-#~ msgstr "Επιλογή αρχείου ήχου"
-
-#, fuzzy
-#~ msgid "View"
-#~ msgstr "Γραμμές"
-
-#~ msgid "Edit"
-#~ msgstr "Διόρθωση"
-
-#~ msgid "Set actions for %s"
-#~ msgstr "Καθορισμός ενεργειών για: %s"
-
-#, fuzzy
-#~ msgid "Mime Type"
-#~ msgstr "Τύπος MIME: "
-
-#~ msgid "You must enter a mime-type"
-#~ msgstr "Πρέπει να δώσετε τύπο MIME"
-
-#~ msgid ""
-#~ "You must add either a regular-expression or\n"
-#~ "a file-name extension"
-#~ msgstr ""
-#~ "Πρέπει να δώσετε είτε κανονική έκφραση, είτε\n"
-#~ "επέκταση ονόματος αρχείου"
-
-#~ msgid ""
-#~ "Please put your mime-type in the format:\n"
-#~ "CATEGORY/TYPE\n"
-#~ "\n"
-#~ "For Example:\n"
-#~ "image/png"
-#~ msgstr ""
-#~ "Παρακαλώ εισάγετε τον τύπο MIME στη μορφή:\n"
-#~ "ΚΑΤΗΓΟΡΙΑ/ΤΥΠΟΣ\n"
-#~ "\n"
-#~ "Για παράδειγμα:\n"
-#~ "image/png"
-
-#~ msgid "This mime-type already exists"
-#~ msgstr "Ήδη υπάρχων τύπος MIME"
-
-#~ msgid ""
-#~ "We are unable to create the directory\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "We will not be able to save the state."
-#~ msgstr ""
-#~ "Αποτυχία δημιουργίας του καταλόγου\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "Αδύνατη η αποθήκευση ρυθμίσεων."
-
-#~ msgid ""
-#~ "We are unable to access the directory\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "We will not be able to save the state."
-#~ msgstr ""
-#~ "Αποτυχία πρόσβασης στον κατάλογο\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "Αδύνατη η αποθήκευση ρυθμίσεων."
-
-#~ msgid ""
-#~ "Cannot create the file\n"
-#~ "~/.gnome/mime-info/user.mime\n"
-#~ "\n"
-#~ "We will not be able to save the state"
-#~ msgstr ""
-#~ "Αποτυχία δημιουργίας του αρχείου\n"
-#~ "~/.gnome/mime-info/user.mime\n"
-#~ "\n"
-#~ "Αδύνατη η αποθήκευση ρυθμίσεων."
-
-#~ msgid ""
-#~ "Cannot create the file\n"
-#~ "~/.gnome/mime-info/user.keys.\n"
-#~ "\n"
-#~ "We will not be able to save the state"
-#~ msgstr ""
-#~ "Αποτυχία δημιουργίας του αρχείου\n"
-#~ "~/.gnome/mime-info/user.keys.\n"
-#~ "\n"
-#~ "Αδύνατη η αποθήκευση ρυθμίσεων."
-
-#, fuzzy
-#~ msgid "Mime Types"
-#~ msgstr "Τύπος MIME: "
-
-#, fuzzy
-#~ msgid "Add Mime Type"
-#~ msgstr "Τύπος MIME: "
-
-#~ msgid ""
-#~ "Add a new Mime Type\n"
-#~ "For example:  image/tiff; text/x-scheme"
-#~ msgstr ""
-#~ "Εισαγωγή νέου τύπου MIME\n"
-#~ "Για παράδειγμα:  image/tiff; text/x-scheme"
-
-#~ msgid ""
-#~ "Type in the extensions for this mime-type.\n"
-#~ "For example:  .html, .htm"
-#~ msgstr ""
-#~ "Εισάγετε τις επεκτάσεις για τον παρόντα τύπο MIME.\n"
-#~ "Για παράδειγμα:  .html, .htm"
-
-#, fuzzy
-#~ msgid "Extension:"
-#~ msgstr "Επέκταση:"
-
-#~ msgid "Regular Expressions"
-#~ msgstr "Κανονικές εκφράσεις"
-
-#~ msgid ""
-#~ "You can set up two regular expressions here to identify the Mime Type\n"
-#~ "by.  These fields are optional."
-#~ msgstr ""
-#~ "Μπορειτε να εισάγετε δύο κανονικές εκφράσεις για αναγνώριση του τύπου\n"
-#~ "MIME.  Τα πεδία αυτά είναι προαιρετικά."
-
-#, fuzzy
-#~ msgid "Protocol"
-#~ msgstr "Πρωτόκολο"
-
-#~ msgid "Command"
-#~ msgstr "Εντολή"
-
-#, fuzzy
-#~ msgid "handler:"
-#~ msgstr "διαχειριστής:"
-
-#~ msgid "Netscape"
-#~ msgstr "Netscape"
-
-#~ msgid "Netscape (new window)"
-#~ msgstr "Netscape (νέο παράθυρο)"
-
-#, fuzzy
-#~ msgid "Help browser"
-#~ msgstr "Πρόγραμμα βοήθειας"
-
-#~ msgid "Help browser (new window)"
-#~ msgstr "Πρόγραμμα βοήθειας (νέο παράθυρο)"
-
-# Other options?? (shorter word)  "8esh" ??? nah...
-#~ msgid "Set"
-#~ msgstr "Καθορισμός"
-
-#, fuzzy
-#~ msgid "Window Maker"
-#~ msgstr "Νέος διαχειριστής παραθύρων"
-
-#, fuzzy
-#~ msgid "Initialize session settings"
-#~ msgstr "Αρχικοποίηση ρυθμίσεων συνεδρίας"
-
-#~ msgid "%s (Current)"
-#~ msgstr "%s (Τρέχων)"
-
-#~ msgid "Run Configuration Tool for %s"
-#~ msgstr "Εκτέλεση εργαλείου ρυθμίσεων του %s"
-
-#~ msgid " (Not found)"
-#~ msgstr " (Δε βρέθηκε)"
-
-#~ msgid ""
-#~ "Your current window manager has been changed. In order for\n"
-#~ "this change to be saved, you will need to save your current\n"
-#~ "session. You can do so immediately by selecting the \"Save session\n"
-#~ "now\" below, or you can save your session later.  This can be\n"
-#~ "done either selecting \"Save Current Session\" under \"Settings\"\n"
-#~ "in the main menu, or by turning on \"Save Current Setup\" when\n"
-#~ "you log out.\n"
-#~ msgstr ""
-#~ "Ο διαχειριστής παραθύρων έχει αλλαχθεί. Προκειμένου να αποθηκευτεί\n"
-#~ "αυτή η αλλαγή, πρέπει να αποθηκεύσετε την τρέχουσα συνεδρία.\n"
-#~ "Αυτό μπορείτε να το κάνετε αμέσως, επιλέγοντας \"Αποθήκευση συνεδρίας\n"
-#~ "τώρα\". Διαφορετικά, μπορείτε να αποθηκεύσετε τη συνεδρία αργότερα, είτε\n"
-#~ "επιλέγοντας \"Αποθήκευση τρέχουσας συνεδρίας\" από τις \"Ρυθμίσεις\"\n"
-#~ "στο κεντρικό μενού του GNOME, είτε επιλέγοντας \"Αποθήκευση συνεδρίας\"\n"
-#~ "στο πλαίσιο διαλόγου κατά τον τερματισμό.\n"
-
-#~ msgid "Save Session Later"
-#~ msgstr "Αποθήκευση συνεδρίας αργότερα"
-
-#~ msgid "Save Session Now"
-#~ msgstr "Αποθήκευση συνεδρίας τώρα"
-
-#~ msgid ""
-#~ "Your current window manager has been changed. In order for\n"
-#~ "this change to be saved, you will need to save your current\n"
-#~ "session. This can be done by either selecting \"Save Current Session\"\n"
-#~ "under \"Settings\" in the main menu, or by turning on\n"
-#~ "\"Save Current Setup\" when you log out.\n"
-#~ msgstr ""
-#~ "Ο διαχειριστής παραθύρων έχει αλλαχθεί. Προκειμένου να αποθηκευτεί\n"
-#~ "αυτή η αλλαγή, πρέπει να αποθηκεύσετε την τρέχουσα συνεδρία.\n"
-#~ "Αυτό μπορείτε να το κάνετε αμέσως, επιλέγοντας \"Αποθήκευση συνεδρίας\n"
-#~ "τώρα\". Διαφορετικά, μπορείτε να αποθηκεύσετε τη συνεδρία αργότερα, είτε\n"
-#~ "επιλέγοντας \"Αποθήκευση τρέχουσας συνεδρίας\" από τις \"Ρυθμίσεις\"\n"
-#~ "στο κεντρικό μενού του GNOME, είτε επιλέγοντας \"Αποθήκευση συνεδρίας\"\n"
-#~ "στο πλαίσιο διαλόγου κατά τον τερματισμό.\n"
-
-#, fuzzy
-#~ msgid "Add New Window Manager"
-#~ msgstr "Νέος διαχειριστής παραθύρων"
-
-#, fuzzy
-#~ msgid "Cancel"
-#~ msgstr "¶κυρο"
-
-#, fuzzy
-#~ msgid "Name:"
-#~ msgstr "Όνομα:"
-
-#, fuzzy
-#~ msgid "Command:"
-#~ msgstr "Εντολή:"
-
-#~ msgid "Configuration Command:"
-#~ msgstr "Πρόγραμμα ρυθμίσεων:"
-
-# TODO
-#~ msgid "Window manager is session managed"
-#~ msgstr "Ο διαχ. συνεδρίας αναλαμβάνει το διαχ. παραθύρων"
-
-#~ msgid "Name cannot be empty"
-#~ msgstr "Δεν επιτρέπεται κενό όνομα"
-
-#~ msgid "Command cannot be empty"
-#~ msgstr "Δεν επιτρέπεται κενή εντολή"
-
-#, fuzzy
-#~ msgid "Edit Window Manager"
-#~ msgstr "Νέος διαχειριστής παραθύρων"
-
-#~ msgid "You cannot delete the current Window Manager"
-#~ msgstr "Διαγραφή τρέχοντος διαχειριστή παραθύρων δεν επιτρέπεται"
-
-#, fuzzy
-#~ msgid "Window Manager Selector"
-#~ msgstr "Νέος διαχειριστής παραθύρων"
-
-#, fuzzy
-#~ msgid "_Add..."
-#~ msgstr "Νέος..."
-
-#, fuzzy
-#~ msgid "_Delete"
-#~ msgstr "Διαγραφή"
-
-#, fuzzy
-#~ msgid "_Action"
-#~ msgstr "Επιτάχυνση"
-
-#, fuzzy
-#~ msgid "_Sound"
-#~ msgstr "Ιδιότητες του Ήχου"
-
-#, fuzzy
-#~ msgid "Theme Properties"
-#~ msgstr "Τροποποίηση των ρυθμίσεων του ποντικιού"
-
-#~ msgid "At the center of the screen"
-#~ msgstr "Στο κέντρο της οθόνης"
-
-#~ msgid "At the mouse pointer"
-#~ msgstr "Στη θέση του δείκτη ποντικιού"
-
-#, fuzzy
-#~ msgid "Bottom"
-#~ msgstr "Κάτω"
-
-#, fuzzy
-#~ msgid "Default  (Spread out - big)"
-#~ msgstr "¶πλωμα (μεγάλο)"
-
-#, fuzzy
-#~ msgid "Dialog Buttons"
-#~ msgstr "Ανοίγουν διαλόγοι"
-
-#~ msgid "Dialog buttons have icons"
-#~ msgstr "Κουμπιά διαλόγων με εικονίδια"
-
-#~ msgid "Dialogs"
-#~ msgstr "Διάλογοι"
-
-#~ msgid "Dialogs are treated"
-#~ msgstr "Μεταχείρηση διαλόγων"
-
-#~ msgid "Dialogs open"
-#~ msgstr "Ανοίγουν διαλόγοι"
-
-#, fuzzy
-#~ msgid "Left"
-#~ msgstr "Μήκος"
-
-#~ msgid "Left aligned"
-#~ msgstr "Στοίχιση στα αριστερά"
-
-#~ msgid "Like any other window"
-#~ msgstr "Όπως τα άλλα παράθυρα"
-
-#, fuzzy
-#~ msgid "Menu bars are detachable"
-#~ msgstr "Οι μπάρες των μενού να έχουν περίγραμμα"
-
-#~ msgid "Menu bars have a border"
-#~ msgstr "Οι μπάρες των μενού να έχουν περίγραμμα"
-
-#, fuzzy
-#~ msgid "Menu items have icons"
-#~ msgstr "Επιλογές μενού με εικονίδια"
-
-#~ msgid "Menus can be torn off"
-#~ msgstr "Τα μενού να μπορούν να αποσπώνται"
-
-#, fuzzy
-#~ msgid "Multiple Documents"
-#~ msgstr "Εξ' ορισμού τιμή"
-
-# Please use this term consistently for this MDI option...
-#~ msgid "Notebook tabs"
-#~ msgstr "Σελιδοδείκτες τετραδίου"
-
-#~ msgid "Place dialogs over application window when possible"
-#~ msgstr ""
-#~ "Τοποθέτηση διαλόγων πάνω από το παράθυρο εφαρμογής όποτε είναι δυνατόν"
-
-#~ msgid "Progress bar is on the left"
-#~ msgstr "Μετρητής προόδου αριστερά στη γραμμή κατάστασης"
-
-#~ msgid "Progress bar is on the right"
-#~ msgstr "Μετρητής προόδου δεξιά στη γραμμή κατάστασης"
-
-#~ msgid "Right"
-#~ msgstr "Δεξιά"
-
-#~ msgid "Right aligned"
-#~ msgstr "Στοίχιση στα δεξιά"
-
-#~ msgid "Seperate windows"
-#~ msgstr "Ξεχωριστά παράθυρα"
-
-#~ msgid "Specially by the window manager"
-#~ msgstr "Ειδικά από το διαχ. παραθύρων"
-
-#, fuzzy
-#~ msgid "Spread out"
-#~ msgstr "¶πλωμα (μεγάλο)"
-
-#~ msgid "Spread out (big)"
-#~ msgstr "¶πλωμα (μεγάλο)"
-
-#~ msgid "Status Bar"
-#~ msgstr "Γραμμή Κατάστασης"
-
-#~ msgid "Status bar is interactive when possible"
-#~ msgstr "Διαδραστική γραμμή κατάστασης όποτε είναι δυνατόν"
-
-#~ msgid "The same window"
-#~ msgstr "Το ίδιο παράθυρο"
-
-#, fuzzy
-#~ msgid "Tool Bars"
-#~ msgstr "Επιλογές Εργαλειοθήκης"
-
-#~ msgid "Tool bar buttons are icons only"
-#~ msgstr "Κουμπιά εργαλειοθηκών που είναι μόνο εικονίδια"
-
-#~ msgid "Tool bar buttons are text below icons"
-#~ msgstr "Κουμπιά εργαλειοθηκών με ετικέτες κάτω από τα εικονίδια"
-
-#~ msgid "Tool bar buttons pop up on mouse over"
-#~ msgstr ""
-#~ "Κουμπιά εργαλειοθηκών που ανασηκώνονται με την επίδραση του ποντικιού"
-
-#, fuzzy
-#~ msgid "Tool bars are detachable"
-#~ msgstr "Αποσπώμενες εργαλειοθήκες"
-
-#, fuzzy
-#~ msgid "Tool bars have a border"
-#~ msgstr "Οι μπάρες των μενού να έχουν περίγραμμα"
-
-#~ msgid "Tool bars have line separators"
-#~ msgstr "Εργαλειοθήκες με διαχωριστικές γραμμές"
-
-#, fuzzy
-#~ msgid "Top"
-#~ msgstr "Δύο"
-
-#~ msgid "Use status bar instead of dialog when possible"
-#~ msgstr "Χρήση γραμμής κατάστασης αντί διαλόγου όποτε είναι δυνατόν"
-
-#, fuzzy
-#~ msgid "Starting esd\n"
-#~ msgstr "Ρυθμίσεις"
-
-#, fuzzy
-#~ msgid "Stopping esd\n"
-#~ msgstr "Παντογράφοι καμπυλών"
-
-#, fuzzy
-#~ msgid "Themes"
-#~ msgstr "Δέντρο"
-
-#, fuzzy
-#~ msgid "_Program to execute"
-#~ msgstr "Πρόγραμμα"
-
-# TODO
-#, fuzzy
-#~ msgid "Use a custom font."
-#~ msgstr "Χρήση ειδικής γραμματοσειράς."
-
-#, fuzzy
-#~ msgid "Default Applications"
-#~ msgstr "Εξ' ορισμού τιμή"
-
-#~ msgid "Eenie"
-#~ msgstr "Τρία"
-
-#~ msgid "Mynie"
-#~ msgstr "Κάθονταν"
-
-#~ msgid "Catcha"
-#~ msgstr "Μπα"
-
-#~ msgid "By Its"
-#~ msgstr "Του"
-
-#~ msgid "Meenie"
-#~ msgstr "Πουλάκια"
-
-#, fuzzy
-#~ msgid "Moe"
-#~ msgstr "Περισσότερο"
-
-#~ msgid "Tiger"
-#~ msgstr "Μπλομ"
-
-#, fuzzy
-#~ msgid "Toe"
-#~ msgstr "Επάνω"
-
-#, fuzzy
-#~ msgid "Pick a Font"
-#~ msgstr "Επιλογή χρώματος"
-
-#, fuzzy
-#~ msgid "Keybinding Properties"
-#~ msgstr "Τροποποίηση των ρυθμίσεων του πληκτρολογίου"
-
-#~ msgid "Configure the settings of the screensaver"
-#~ msgstr "Ρύθμιση των ιδιοτήτων της προφύλαξης οθόνης"
-
-#, fuzzy
-#~ msgid "Screensaver"
-#~ msgstr "Screensaver"
-
-#, fuzzy
-#~ msgid "General"
-#~ msgstr "Γενικά"
-
-#~ msgid ""
-#~ "No help is available/installed. Please make sure you\n"
-#~ "have the GNOME User's Guide installed on your system."
-#~ msgstr ""
-#~ "Δεν υπάρχει βοήθεια διαθέσιμη/εγκατεστημένη. Παρακαλώ βεβαιωθείτε\n"
-#~ "ότι ο Οδηγός Χρήστη του GNOME είναι εγκατεστημένος στο σύστημά σας."
-
-#~ msgid "Close"
-#~ msgstr "Κλείσιμο"
-
-#, fuzzy
-#~ msgid "Main Settings"
-#~ msgstr "Ρυθμίσεις τυχαίου"
-
-#, fuzzy
-#~ msgid "PARENT"
-#~ msgstr "ΠΡΟΣΑΝΑΤΟΛΙΣΜΟΣ"
-
-#, fuzzy
-#~ msgid "Full containment"
-#~ msgstr "Διαβάθμιση"
-
-#, fuzzy
-#~ msgid "Partial containment"
-#~ msgstr "Διαβάθμιση"
-
-#, fuzzy
-#~ msgid "Options for storing data"
-#~ msgstr "Υπόδειξη κατά την εκκίνηση"
-
-#~ msgid "Wallpaper Selection"
-#~ msgstr "Επιλογή επένδυσης"
-
-#, fuzzy
-#~ msgid "Gnome Default Editor"
-#~ msgstr "Διορθωτής του GNOME"
-
-#, fuzzy
-#~ msgid "Please enter the command line used to start this web browser"
-#~ msgstr "Παρακαλώ εισαγάγετε μια γραμμή εντολών παρακάτω."
-
-#, fuzzy
-#~ msgid "Select a Viewer"
-#~ msgstr "Επιλογή αρχείου..."
-
-#, fuzzy
-#~ msgid "Please enter the command line used to start this help viewer"
-#~ msgstr "Παρακαλώ εισαγάγετε μια γραμμή εντολών παρακάτω."
-
-#, fuzzy
-#~ msgid "Help Viewer"
-#~ msgstr "Πρόγραμμα βοήθειας"
-
-#, fuzzy
-#~ msgid "Please enter the command line used to start this terminal"
-#~ msgstr "Παρακαλώ εισαγάγετε μια γραμμή εντολών παρακάτω."
-
-#, fuzzy
-#~ msgid "30 minutes ago"
-#~ msgstr "λεπτά"
-
-#, fuzzy
-#~ msgid "10 minutes ago"
-#~ msgstr "λεπτά"
-
-#, fuzzy
-#~ msgid "5 minutes ago"
-#~ msgstr "λεπτά"
-
-#, fuzzy
-#~ msgid "1 minute ago"
-#~ msgstr "λεπτά"
-
-#~ msgid "Custom screensaver. No description available"
-#~ msgstr "Παραμετροποιημένη προφύλαξη οθόνης. Δεν υπάρχει διαθέσιμη περιγραφή"
-
-#, fuzzy
-#~ msgid "About %s\n"
-#~ msgstr "Περί"
-
-#~ msgid "label1"
-#~ msgstr "label1"
-
-#~ msgid "Demo"
-#~ msgstr "Δείγμα"
-
-#~ msgid ""
-#~ "Cannot find the data to configure this screensaver. Please edit the "
-#~ "command line below."
-#~ msgstr ""
-#~ "Δεν μπορούν να βρεθούν τα δεδομένα για να ρυθμιστεί η προφύλ. οθόνης. "
-#~ "Παρακαλώ τροποποιήστε την παρακάτω γραμμή εντολών κατάλληλα."
-
-#~ msgid "Visual:"
-#~ msgstr "Οπτικό:"
-
-#~ msgid "Any"
-#~ msgstr "Οτιδήποτε"
-
-#~ msgid "High"
-#~ msgstr "Υψηλή"
-
-#, fuzzy
-#~ msgid "Large"
-#~ msgstr "Μεγάλο"
-
-#~ msgid "Low"
-#~ msgstr "Χαμηλή"
-
-#~ msgid "Size:"
-#~ msgstr "Μέγεθος:"
-
-#~ msgid "Small"
-#~ msgstr "Μικρό"
-
-#~ msgid "Twist:"
-#~ msgstr "Συστροφή:"
-
-#~ msgid "Wobble:"
-#~ msgstr "Ταλάντευση:"
-
-#, fuzzy
-#~ msgid "Ant"
-#~ msgstr "Οτιδήποτε"
-
-#~ msgid "Four Sided cells"
-#~ msgstr "Κελιά Τεσσάρων Πλευρών"
-
-#, fuzzy
-#~ msgid "Many"
-#~ msgstr "Πολλά"
-
-#~ msgid "Monochrome"
-#~ msgstr "Μονόχρωμο"
-
-#~ msgid "Nine Sided cells"
-#~ msgstr "Κελιά Εννιά Πλευρών"
-
-#~ msgid "Number of colours"
-#~ msgstr "Αριθμός χρωμάτων"
-
-#~ msgid "Random"
-#~ msgstr "Τυχαίο"
-
-#~ msgid "Random size upto"
-#~ msgstr "Τυχαίο μέγεθος μέχρι"
-
-#~ msgid "Randomize"
-#~ msgstr "Τυχαιότητα"
-
-#~ msgid "Sharp turns"
-#~ msgstr "Απότομες στροφές"
-
-#~ msgid "Six Sided cells"
-#~ msgstr "Κελιά Έξη Πλευρών"
-
-#~ msgid "Specific"
-#~ msgstr "Συγκεκριμένο"
-
-#~ msgid "Specific size of"
-#~ msgstr "Συγκεκριμένο μέγεθος των "
-
-#~ msgid "Three Sided cells"
-#~ msgstr "Κελιά Τριών Πλευρών"
-
-#~ msgid "Timeout"
-#~ msgstr "Χρονικό περιθώριο"
-
-#~ msgid "Truchet lines"
-#~ msgstr "Γραμμές truchet"
-
-#~ msgid "Twelve Sided cells"
-#~ msgstr "Κελιά Δώδεκα Πλευρών"
-
-#, fuzzy
-#~ msgid "Attraction (balls)"
-#~ msgstr "Διάρκεια (ms)"
-
-#~ msgid "Balls"
-#~ msgstr "Σφαίρες"
-
-#~ msgid "Color Contrast"
-#~ msgstr "Αντίθεση Χρώματος"
-
-#~ msgid "Length of Trail"
-#~ msgstr "Μήκος Ίχνους"
-
-#~ msgid "Lines"
-#~ msgstr "Γραμμές"
-
-#~ msgid "Number of Colors"
-#~ msgstr "Αριθμός Χρωμάτων"
-
-#~ msgid "Polygons"
-#~ msgstr "Πολύγωνα"
-
-#~ msgid "Splines"
-#~ msgstr "Παντογράφοι καμπυλών"
-
-#~ msgid "Tails"
-#~ msgstr "Ουρές"
-
-#~ msgid "Threshold of repulsion"
-#~ msgstr "Κατώφλι απώθησης"
-
-#, fuzzy
-#~ msgid "Blaster"
-#~ msgstr "Πιο γρήγορα"
-
-# Haven't come up (yet) with a satisfactory xlation of screensaver...
-#~ msgid "Display screensaver in monochrome."
-#~ msgstr "Εμφάνιση της προφύλαξης οθόνης σε μονόχρωμο."
-
-#, fuzzy
-#~ msgid "Faster"
-#~ msgstr "Ταχεία"
-
-#~ msgid "Slower"
-#~ msgstr "Αργότερα"
-
-#~ msgid "Speed of rotation."
-#~ msgstr "Ταχύτητα περιστροφής."
-
-#~ msgid "Speed of the 90 degree rotation."
-#~ msgstr "Ταχύτητα περιστρογής 90 μοιρών."
-
-#~ msgid "Count:"
-#~ msgstr "Μετρητής:"
-
-#~ msgid "Number of Colors."
-#~ msgstr "Αριθμός Χρωμάτων."
-
-#~ msgid "Number of bubbles to use."
-#~ msgstr "Αριθμός φυσσαλίδων για χρήση."
-
-#~ msgid "Speed of Motion."
-#~ msgstr "Ταχύτητα Κίνησης."
-
-#, fuzzy
-#~ msgid "Braid"
-#~ msgstr "Βασικό"
-
-#~ msgid "Don't use double bufferinge"
-#~ msgstr "Χωρίς χρήση διπλής ενταμίευσης"
-
-#~ msgid "Use double buffering"
-#~ msgstr "Χρήση διπλής ενταμίευσης"
-
-#, fuzzy
-#~ msgid "Coral"
-#~ msgstr "Κανονικό"
-
-#, fuzzy
-#~ msgid "Denser"
-#~ msgstr "Πυκνότερα"
-
-#~ msgid "Number of seeds"
-#~ msgstr "Αριθμός σπόρων"
-
-#~ msgid "Seeds"
-#~ msgstr "Σπόρια"
-
-#~ msgid "Thinner"
-#~ msgstr "Αραιότερα"
-
-#, fuzzy
-#~ msgid "Cosmos"
-#~ msgstr "Χρώματα"
-
-#, fuzzy
-#~ msgid "Critical"
-#~ msgstr "Κατακόρυφο"
-
-#~ msgid "Cell"
-#~ msgstr "Κύτταρο"
-
-#~ msgid "Center image."
-#~ msgstr "Εικόνα στο κέντρο."
-
-#~ msgid "Number of polygons to use."
-#~ msgstr "Αριθμός πολυγώνων προς χρήση."
-
-#, fuzzy
-#~ msgid "Cynosure"
-#~ msgstr "Κλείσιμο"
-
-#, fuzzy
-#~ msgid "Less"
-#~ msgstr "Γραμμές"
-
-#~ msgid "Number of iterations."
-#~ msgstr "Αριθμός επαναλήψεων."
-
-#, fuzzy
-#~ msgid "Deco"
-#~ msgstr "Δείγμα"
-
-#, fuzzy
-#~ msgid "Time between redraws:"
-#~ msgstr "Υστέρηση μεταξύ επανασχεδιάσεων."
-
-#, fuzzy
-#~ msgid "Demon"
-#~ msgstr "Δείγμα"
-
-#, fuzzy
-#~ msgid "Discrete"
-#~ msgstr "Διακριτές Γραμμές"
-
-#~ msgid "Number to use."
-#~ msgstr "Αριθμός προς χρήση."
-
-#~ msgid "Number of pixels to use."
-#~ msgstr "Αριθμός εικονοστοιχείων προς χρήση."
-
-#~ msgid "Seconds"
-#~ msgstr "Δευτερόλεπτα"
-
-#, fuzzy
-#~ msgid "Extrusion"
-#~ msgstr "Επέκταση"
-
-#~ msgid "Number of cycles"
-#~ msgstr "Αριθμός επαναλήψεων"
-
-#~ msgid "Bitmap for flag"
-#~ msgstr "Εικόνα στη σημαία"
-
-#~ msgid "Random size up to"
-#~ msgstr "Τυχαίο μέγεθος μέχρι "
-
-#~ msgid "Text for flag"
-#~ msgstr "Κείμενο στη σημαία"
-
-#, fuzzy
-#~ msgid "Flame"
-#~ msgstr "Αρχείο"
-
-#~ msgid "Iterations:"
-#~ msgstr "Επαναλήψεις:"
-
-#~ msgid "Pixels per fractal."
-#~ msgstr "Εικονοστοιχεία ανά φράκταλ."
-
-#, fuzzy
-#~ msgid "Flow"
-#~ msgstr "Αργή"
-
-#~ msgid "Delay between redraws."
-#~ msgstr "Υστέρηση μεταξύ επανασχεδιάσεων."
-
-#, fuzzy
-#~ msgid "Forest"
-#~ msgstr "Δοκιμή"
+#~ msgid "<b>Test</b>"
+#~ msgstr "<b>Ξ”ΞΏΞΊΞΉΞΌΞ®</b>"
 
-#~ msgid "Number of trees to use."
-#~ msgstr "Αριθμός δέντρων προς χρήση."
+#~ msgid "_Keyboard"
+#~ msgstr "_Ξ Ξ»Ξ·ΞΊΟ„ΟΞΏΞ»ΟΞ³ΞΉΞΏ"
 
-#, fuzzy
-#~ msgid "Galaxy"
-#~ msgstr "Εκτέλεση"
-
-#, fuzzy
-#~ msgid "GLText"
-#~ msgstr "Αριστερά"
-
-#~ msgid "Have transparent bubbles."
-#~ msgstr "Χρήση διαφανών φυσσαλίδων."
-
-#~ msgid "Use additive color model."
-#~ msgstr "Χρήση μοντέλου προσθετικού χρώματος."
-
-#~ msgid "Number of planets to use."
-#~ msgstr "Αριθμός πλανητών προς χρήση."
-
-#~ msgid "Objects should leave trails behind them."
-#~ msgstr "Τα αντικείμενα να αφήνουν ίχνη πίσω τους."
-
-#~ msgid "Orbit should decay."
-#~ msgstr "Η τροχιά να φθίνει."
-
-#~ msgid "Number of circles to use."
-#~ msgstr "Αριθμός κύκλων προς χρήση."
-
-#~ msgid "Use a gradient of colors between circles."
-#~ msgstr "Χρήση διαβάθμισης χρωμάτων μεταξύ των κύκλων."
-
-#~ msgid "Closer"
-#~ msgstr "Πλησιέστερα"
-
-#, fuzzy
-#~ msgid "Farther"
-#~ msgstr "Μακρύτερα"
-
-#~ msgid "Number of segments."
-#~ msgstr "Αριθμός κατατμήσεων."
-
-#~ msgid "Number of trails."
-#~ msgstr "Αριθμός ίχνων."
-
-#~ msgid "Segments"
-#~ msgstr "Κατατμήσεις"
-
-#, fuzzy
-#~ msgid "Laser"
-#~ msgstr "Πιο γρήγορα"
-
-#~ msgid "Longer"
-#~ msgstr "Μακρύτερα"
-
-#, fuzzy
-#~ msgid "Segments:"
-#~ msgstr "Κατατμήσεις"
-
-#~ msgid "Shorter"
-#~ msgstr "Κοντύτερα"
-
-#~ msgid "Size of burst."
-#~ msgstr "Μέγεθος έκρηξης."
-
-#, fuzzy
-#~ msgid "Larger"
-#~ msgstr "Πιο γρήγορα"
-
-#, fuzzy
-#~ msgid "Lisa"
-#~ msgstr "Γραμμές"
-
-#~ msgid "Smaller"
-#~ msgstr "Μικρότερο"
-
-#, fuzzy
-#~ msgid "Lissie"
-#~ msgstr "Λιγότερο"
-
-#, fuzzy
-#~ msgid "LMorph"
-#~ msgstr "Περισσότερο"
-
-#~ msgid "Number of interpolation steps."
-#~ msgstr "Αριθμός βημάτων παρεμβολής."
-
-#~ msgid "Number of points."
-#~ msgstr "Αριθμός σημείων."
-
-#, fuzzy
-#~ msgid "More Delay"
-#~ msgstr "Περισσότερο Συμπαγές"
-
-#, fuzzy
-#~ msgid "Moire"
-#~ msgstr "Περισσότερο"
-
-#, fuzzy
-#~ msgid "Moire2"
-#~ msgstr "Περισσότερο"
-
-#, fuzzy
-#~ msgid "Molecule"
-#~ msgstr "Ρυθμίσεις ποντικιού"
-
-#~ msgid "Maximum number of lines."
-#~ msgstr "Μέγιστος αριθμός γραμμών."
-
-#, fuzzy
-#~ msgid "Pedal"
-#~ msgstr "Αποκλειστικό"
-
-#, fuzzy
-#~ msgid "Penetrate"
-#~ msgstr "Γενικά"
-
-#, fuzzy
-#~ msgid "Penrose"
-#~ msgstr "Πυκνότερα"
-
-#, fuzzy
-#~ msgid "Pipes"
-#~ msgstr "Γραμμές"
-
-#, fuzzy
-#~ msgid "Pulsar"
-#~ msgstr "Εκτέλεση"
-
-#~ msgid "Number of particles"
-#~ msgstr "Αριθμός σωματιδίων"
-
-#, fuzzy
-#~ msgid "Pyro"
-#~ msgstr "Προτροπή"
-
-#~ msgid "Color contrast"
-#~ msgstr "Αντίθεση χρώματος"
-
-#~ msgid "Discrete Lines"
-#~ msgstr "Διακριτές Γραμμές"
-
-#~ msgid "Narrow"
-#~ msgstr "Στενό"
-
-#~ msgid "Number of points:"
-#~ msgstr "Αριθμός σημείων:"
-
-#~ msgid "Number of trails:"
-#~ msgstr "Αριθμός ίχνων:"
-
-#~ msgid "Solid Trails"
-#~ msgstr "Διατηρούμενα Ίχνη"
-
-#~ msgid "Spread between lines"
-#~ msgstr "Διάχυση μεταξύ γραμμών"
-
-#~ msgid "Trails attract each other"
-#~ msgstr "Ίχνη που έλκονται μεταξύ τους"
+#~ msgid "_Picture"
+#~ msgstr "_Ξ•ΞΉΞΊΟΞ½Ξ±"
 
-#~ msgid "Transparent Trails"
-#~ msgstr "Διαφανή Ίχνη"
-
-#~ msgid "Wide"
-#~ msgstr "Πλατύ"
-
-#~ msgid "Width"
-#~ msgstr "Πλάτος"
-
-#~ msgid "XOR Trails"
-#~ msgstr "Ίχνη XOR"
-
-#~ msgid "Delay before next redraw"
-#~ msgstr "Υστέρηση μέχρι την επόμενη επανασχεδίαση"
-
-#~ msgid "Number of Iterations"
-#~ msgstr "Αριθμός Επαναλήψεων"
-
-#~ msgid "Offset"
-#~ msgstr "Μετατόπιση"
-
-#~ msgid "Speed to clear the screen"
-#~ msgstr "Ταχύτητα καθαρισμού οθόνης"
-
-#~ msgid "With X-axis Symmetry"
-#~ msgstr "Συμμετρία ως προς τον άξονα Χ"
-
-#~ msgid "With Y-axis Symmetry"
-#~ msgstr "Συμμετρία ως προς τον άξονα Υ"
-
-#, fuzzy
-#~ msgid "Slip"
-#~ msgstr "Λεπτό"
-
-#, fuzzy
-#~ msgid "Sonar"
-#~ msgstr "Ιδιότητες του Ήχου"
-
-#, fuzzy
-#~ msgid "SpeedMine"
-#~ msgstr "Ταχύτητα"
-
 #, fuzzy
-#~ msgid "Sphere"
-#~ msgstr "Ταχύτητα"
+#~ msgid "Bor_der the picture with a:"
+#~ msgstr "Ξ ΞµΟΞ―Ξ²Ξ»Ξ·ΞΌΞ± ΞµΞΉΞΊΟΞ½Ξ±Ο‚ ΞΌΞµ:"
 
-#~ msgid "Quickness of rotation at each step (0 = Random)"
-#~ msgstr "Ταχύτητα περιστροφής σε κάθε βήμα (0 = Τυχαίο)"
-
-#, fuzzy
-#~ msgid "Slim"
-#~ msgstr "Λεπτό"
-
 #, fuzzy
-#~ msgid "Starfish"
-#~ msgstr "Εκκινείται"
+#~ msgid "Choose the applications used by default"
+#~ msgstr "Ξ•Ο€ΞΉΞ»ΞΏΞ³Ξ® ΞµΞΎ ΞΏΟΞΉΟƒΞΌΞΏΟ ΞµΟ†Ξ±ΟΞΌΞΏΞ³ΟΞ½"
 
-#, fuzzy
-#~ msgid "Strange"
-#~ msgstr "Εκκινείται"
+#~ msgid "Configure window appearance"
+#~ msgstr "Ξ΅Ο…ΞΈΞΌΞ―Ξ¶ΞµΞΉ Ο„Ξ·Ξ½ ΞµΞΌΟ†Ξ¬Ξ½ΞΉΟƒΞ· Ο„Ο‰Ξ½ Ο€Ξ±ΟΞ±ΞΈΟΟΟ‰Ξ½"
 
-#, fuzzy
-#~ msgid "Triangle"
-#~ msgstr "Αρχείο"
+#~ msgid "Configure key shortcuts"
+#~ msgstr "Ξ΅Ο…ΞΈΞΌΞ―Ξ¶ΞµΞΉ Ο„ΞΉΟ‚ ΟƒΟ…Ξ½Ο„ΞΏΞΌΞµΟΟƒΞµΞΉΟ‚ Ο€Ξ»Ξ®ΞΊΟ„ΟΟ‰Ξ½"
 
-#, fuzzy
-#~ msgid "Truchet"
-#~ msgstr "Γραμμές truchet"
+#~ msgid "Configure window properties"
+#~ msgstr "Ξ΅Ο…ΞΈΞΌΞ―Ξ¶ΞµΞΉ Ο€Ο‰Ο‚ ΟƒΟ…ΟƒΟ‡ΞµΟ„Ξ―Ξ¶ΞΏΞ½Ο„Ξ±ΞΉ Ο„Ξ± Ο€Ξ±ΟΞ¬ΞΈΟ…ΟΞ±"
 
-#, fuzzy
-#~ msgid "Worm"
-#~ msgstr "Κανονικό"
+#~ msgid "Configure window manager configuration properties"
+#~ msgstr "Ξ΅Ο…ΞΈΞΌΞ―Ξ¶ΞµΞΉ Ο„ΞΉΟ‚ ΞΉΞ΄ΞΉΟΟ„Ξ·Ο„ΞµΟ‚ Ο„ΞΏΟ… Ξ΄ΞΉΞ±Ο‡ΞµΞΉΟΞΉΟƒΟ„Ξ® Ο€Ξ±ΟΞ±ΞΈΟΟΟ‰Ξ½"
 
-#, fuzzy
-#~ msgid "Xearth"
-#~ msgstr "Μακρύτερα"
+#~ msgid "Configure window placement"
+#~ msgstr "Ξ΅Ο…ΞΈΞΌΞ―Ξ¶ΞµΞΉ Ο„Ξ·Ξ½ Ο„ΞΏΟ€ΞΏΞΈΞ­Ο„Ξ·ΟƒΞ· Ο„Ο‰Ξ½ Ο€Ξ±ΟΞ±ΞΈΟΟΟ‰Ξ½"
 
 #, fuzzy
-#~ msgid "Xroger"
-#~ msgstr "Μεγαλύτερο"
+#~ msgid "File types and Internet Services"
+#~ msgstr "Ξ”ΞΉΞ±ΟƒΟΞ½Ξ΄ΞµΟƒΞ·"
 
-#~ msgid "Add a new screensaver"
-#~ msgstr "Προσθήκη νέας προφύλ. οθόνης"
+#~ msgid "Needs _terminal"
+#~ msgstr "Ξ§ΟΞµΞΉΞ¬Ξ¶ΞµΟ„Ξ±ΞΉ _Ο„ΞµΟΞΌΞ±Ο„ΞΉΞΊΟ"
 
-#~ msgid "Select the screensaver to run from the list below:"
-#~ msgstr "Επιλογή προφύλ. οθόνης προς εκτέλεση από την παρακάτω λίστα:"
+#~ msgid "_Remove"
+#~ msgstr "_Ξ”ΞΉΞ±Ξ³ΟΞ±Ο†Ξ®"
 
-# Haven't come up (yet) with a satisfactory xlation of screensaver...
-#~ msgid "New screensaver"
-#~ msgstr "Νέα προφυλ. οθόνης"
+#~ msgid "<i>fast</i>"
+#~ msgstr "<i>Ξ³ΟΞ®Ξ³ΞΏΟΞ±</i>"
 
-#, fuzzy
-#~ msgid "GNOME Control Center:"
-#~ msgstr "Κέντρο Ελέγχου GNOME"
+#~ msgid "<i>loud</i>"
+#~ msgstr "<i>Ο†Ο‰Ξ½Ξ±Ο‡Ο„Ξ¬</i>"
 
-#~ msgid "Unknown error."
-#~ msgstr "¶γνωστο σφάλμα."
+#~ msgid "<i>quiet</i>"
+#~ msgstr "<i>Ξ±ΞΈΟΟΟ…Ξ²Ξ±</i>"
 
-#, fuzzy
-#~ msgid "Unknown exit code."
-#~ msgstr "¶γνωστο σφάλμα."
+#~ msgid "<i>slow</i>"
+#~ msgstr "<i>Ξ±ΟΞ³Ξ¬</i>"
 
-#, fuzzy
-#~ msgid "Scaled (keep aspect ratio)"
-#~ msgstr "Νέα κλίμακα (διατήρηση σχήματος)"
+#~ msgid "Cursor"
+#~ msgstr "Ξ”ΟΞΏΞΌΞ­Ξ±Ο‚"
 
 #, fuzzy
-#~ msgid "Style:"
-#~ msgstr "Είδος: "
+#~ msgid "Key_press makes sound"
+#~ msgstr "Ξ¤ΞΏ _ΞΊΟ„ΟΟ€Ξ·ΞΌΞ±  Ο€Ξ»Ξ®ΞΊΟ„ΟΞΏΟ… Ξ²Ξ³Ξ¬Ξ¶ΞµΞΉ Ξ®Ο‡ΞΏ"
 
-#, fuzzy
-#~ msgid "Use a picture for the background"
-#~ msgstr "Χρήση του GNOME για την ρύθμιση του παρασκηνίου"
+#~ msgid "Keyboard bell _enabled"
+#~ msgstr "ΞΞΏΟ…Ξ΄ΞΏΟΞ½ΞΉ Ο€Ξ»Ξ·ΞΊΟ„ΟΞΏΞ»ΞΏΞ³Ξ―ΞΏΟ… _ΞµΞ½ΞµΟΞ³Ο"
 
-#, fuzzy
-#~ msgid "Set background image."
-#~ msgstr "Καθορισμός εικόνας φόντου."
+#~ msgid "Keyboard bell _off"
+#~ msgstr "ΞΞΏΟ…Ξ΄ΞΏΟΞ½ΞΉ Ο€Ξ»Ξ·ΞΊΟ„ΟΞΏΞ»ΞΏΞ³Ξ―ΞΏΟ… _Ξ±Ξ½ΞµΞ½ΞµΟΞ³Ο"
 
-#~ msgid "IMAGE-FILE"
-#~ msgstr "ΑΡΧΕΙΟ-ΕΙΚΟΝΑΣ"
+#~ msgid "Keyclick Volume"
+#~ msgstr "ΞΞ½Ο„Ξ±ΟƒΞ· ΞΊΞ»ΞΉΞΊ"
 
-#~ msgid "Startup Hint"
-#~ msgstr "Υπόδειξη εκκίνησης"
+#~ msgid "Long"
+#~ msgstr "ΞΞµΞ³Ξ¬Ξ»Ξ·"
 
 #, fuzzy
-#~ msgid "Bell"
-#~ msgstr "Κύτταρο"
-
-#~ msgid "Duration (ms)"
-#~ msgstr "Διάρκεια (ms)"
+#~ msgid "Medium"
+#~ msgstr "Ξ΅Ο…ΞΈΞΌΞ―ΟƒΞµΞΉΟ‚ Ο€ΞΏΞ½Ο„ΞΉΞΊΞΉΞΏΟ"
 
-#~ msgid "Enable Keyboard Repeat"
-#~ msgstr "Ενεργοποίηση Επανάληψης Πληκτρολογίου"
+#~ msgid "Repeat s_peed:"
+#~ msgstr "Ξ΅_Ο…ΞΈΞΌΟΟ‚ ΞµΟ€Ξ±Ξ½Ξ±Ξ»Ξ®ΟΞµΟ‰Ξ½:"
 
-#, fuzzy
-#~ msgid "Key repeat rate:"
-#~ msgstr "Ρυθμός Επανάληψης Πλήκτρων"
+#~ msgid "Short"
+#~ msgstr "Ξ£ΟΞ½Ο„ΞΏΞΌΞ·"
 
-#~ msgid "Pitch (Hz)"
-#~ msgstr "Συχνότητα (Hz)"
+#~ msgid "Slow"
+#~ msgstr "Ξ‘ΟΞ³Ξ¬"
 
-#~ msgid "Test"
-#~ msgstr "Δοκιμή"
+#~ msgid "Very Fast"
+#~ msgstr "Ξ ΞΏΞ»Ο Ξ“ΟΞ®Ξ³ΞΏΟΞ±"
 
-#, fuzzy
-#~ msgid "Mouse Configuration"
-#~ msgstr "Κίνηση ποντικιού"
+#~ msgid "Very Short"
+#~ msgstr "Ξ ΞΏΞ»Ο Ξ£ΟΞ½Ο„ΞΏΞΌΞ·"
 
 #, fuzzy
-#~ msgid "Mouse speed:"
-#~ msgstr "Ταχύτητα συστροφής:"
+#~ msgid "_Blink speed:"
+#~ msgstr "Ξ¤Ξ±Ο‡ΟΟ„Ξ·Ο„Ξ± ΟƒΟ…ΟƒΟ„ΟΞΏΟ†Ξ®Ο‚:"
 
-#~ msgid "Right handed"
-#~ msgstr "Δεξιόχειρας"
-
 #, fuzzy
-#~ msgid " Configure..."
-#~ msgstr "Ανοιχτές φιγούρες."
+#~ msgid "_Custom keyboard bell:"
+#~ msgstr "ΞΞΏΟ…Ξ΄ΞΏΟΞ½ΞΉ Ο€Ξ»Ξ·ΞΊΟ„ΟΞΏΞ»ΞΏΞ³Ξ―ΞΏΟ…"
 
 #, fuzzy
-#~ msgid "About \"<Screensaver name>\""
-#~ msgstr "Εκκίνηση προφύλαξης οθόνης μετά από "
+#~ msgid "_Delay before repeating:"
+#~ msgstr "Ξ¥ΟƒΟ„Ξ­ΟΞ·ΟƒΞ· ΞΌΞ­Ο‡ΟΞΉ Ο„Ξ·Ξ½ ΞµΟ€ΟΞΌΞµΞ½Ξ· ΞµΟ€Ξ±Ξ½Ξ±ΟƒΟ‡ΞµΞ΄Ξ―Ξ±ΟƒΞ·"
 
-#~ msgid "Black screen only"
-#~ msgstr "Μόνο μαύρη οθόνη"
+#~ msgid "Keyboard Properties"
+#~ msgstr "Ξ¤ΟΞΏΟ€ΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ· Ο„Ο‰Ξ½ ΟΟ…ΞΈΞΌΞ―ΟƒΞµΟ‰Ξ½ Ο„ΞΏΟ… Ο€Ξ»Ξ·ΞΊΟ„ΟΞΏΞ»ΞΏΞ³Ξ―ΞΏΟ…"
 
-#, fuzzy
-#~ msgid "Configure Power Management"
-#~ msgstr "Διαχείριση Ενέργειας"
+#~ msgid "Mouse Properties"
+#~ msgstr "Ξ¤ΟΞΏΟ€ΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ· Ο„Ο‰Ξ½ ΟΟ…ΞΈΞΌΞ―ΟƒΞµΟ‰Ξ½ Ο„ΞΏΟ… Ο€ΞΏΞ½Ο„ΞΉΞΊΞΉΞΏΟ"
 
-# Haven't come up (yet) with a satisfactory xlation of screensaver...
-#~ msgid "Disable screensaver"
-#~ msgstr "Απενεργοποίηση προφύλαξης οθόνης"
+#~ msgid "Configure GNOME's use of sound"
+#~ msgstr "Ξ΅ΟΞΈΞΌΞΉΟƒΞ· Ο„Ο‰Ξ½ Ξ™Ξ΄ΞΉΞΏΟ„Ξ®Ο„Ο‰Ξ½ Ο„ΞΏΟ… Ξ‰Ο‡ΞΏΟ… ΟƒΟ„ΞΏ GNOME"
 
 #, fuzzy
-#~ msgid "Enable _power management"
-#~ msgstr "Ενεργοποίηση διαχείρισης ενέργειας"
-
-#~ msgid "Go to standby mode after"
-#~ msgstr "Πήγαινε σε κατάσταση αναμονής μετά από"
-
-#~ msgid "One screensaver all the time"
-#~ msgstr "Μόνο μια προφύλαξη οθόνης τη φορά"
+#~ msgid "Toolbars & Menus"
+#~ msgstr "Ξ•Ο€ΞΉΞ»ΞΏΞ³Ξ­Ο‚ Ξ•ΟΞ³Ξ±Ξ»ΞµΞΉΞΏΞΈΞ®ΞΊΞ·Ο‚"
 
-#, fuzzy
-#~ msgid "R_equire password to unlock screen"
-#~ msgstr "Απαίτηση κωδικού για ξεκλείδωμα"
+#~ msgid "Item 2"
+#~ msgstr "Ξ£Ο„ΞΏΞΉΟ‡ΞµΞ―ΞΏ 2"
 
-#, fuzzy
-#~ msgid "Random (all screensavers)"
-#~ msgstr "Χρήση τυχαίας από όλες τις προφυλάξεις οθόνης"
+#~ msgid "Item 3"
+#~ msgstr "Ξ£Ο„ΞΏΞΉΟ‡ΞµΞ―ΞΏ 3"
 
-#, fuzzy
-#~ msgid "Random (checked screensavers)"
-#~ msgstr "Προσθήκη νέας προφύλ. οθόνης"
+#~ msgid "Menu Item 1"
+#~ msgstr "Ξ£Ο„ΞΏΞΉΟ‡ΞµΞ―ΞΏ ΞΞµΞ½ΞΏΟ 1"
 
-#, fuzzy
-#~ msgid "S_tart screensaver after "
-#~ msgstr "Εκκίνηση προφύλαξης οθόνης μετά από "
+#~ msgid "Menu Item 2"
+#~ msgstr "Ξ£Ο„ΞΏΞΉΟ‡ΞµΞ―ΞΏ ΞΞµΞ½ΞΏΟ 2"
 
-#, fuzzy
-#~ msgid "S_witch screensavers after "
-#~ msgstr "Εναλλαγή μεταξύ προφυλάξεων οθόνης κάθε"
+#~ msgid "Menu Item 3"
+#~ msgstr "Ξ£Ο„ΞΏΞΉΟ‡ΞµΞ―ΞΏ ΞΞµΞ½ΞΏΟ 3"
 
-#, fuzzy
-#~ msgid "Settings for \"<Screensaver name>\""
-#~ msgstr "Εκκίνηση προφύλαξης οθόνης μετά από "
+#~ msgid "Menu Item 4"
+#~ msgstr "Ξ£Ο„ΞΏΞΉΟ‡ΞµΞ―ΞΏ ΞΞµΞ½ΞΏΟ 4"
 
-#~ msgid "Shut down monitor after"
-#~ msgstr "Σβήσιμο οθόνης μετά από"
+#~ msgid "Menu Item 5"
+#~ msgstr "Ξ£Ο„ΞΏΞΉΟ‡ΞµΞ―ΞΏ ΞΞµΞ½ΞΏΟ 5"
 
-# Haven't come up (yet) with a satisfactory xlation of screensaver...
 #, fuzzy
-#~ msgid "_About this screensaver..."
-#~ msgstr "Απενεργοποίηση προφύλαξης οθόνης"
+#~ msgid "Menu items can have _icons"
+#~ msgstr "Ξ•Ο€ΞΉΞ»ΞΏΞ³Ξ­Ο‚ ΞΌΞµΞ½ΞΏΟ ΞΌΞµ ΞµΞΉΞΊΞΏΞ½Ξ―Ξ΄ΞΉΞ±"
 
 #, fuzzy
-#~ msgid "_Settings"
-#~ msgstr "Ρυθμίσεις"
-
-#~ msgid "Browse with single window"
-#~ msgstr "Εξερεύνηση με ένα παράθυρο"
-
-#~ msgid "New-control-center"
-#~ msgstr "Νέο-κέντρο-ελέγχου"
+#~ msgid "Select the toolbar style."
+#~ msgstr "Ξ•Ο€ΞΉΞ»ΞΏΞ³Ξ® ΞΈΞ­ΞΌΞ±Ο„ΞΏΟ‚ Ο€ΟΞΏΟ‚ ΞµΞ³ΞΊΞ±Ο„Ξ¬ΟƒΟ„Ξ±ΟƒΞ·"
 
-#~ msgid "CAPPLET"
-#~ msgstr "CAPPLET"
-
 #, fuzzy
-#~ msgid "GNOME Control Center options"
-#~ msgstr "Κέντρο Ελέγχου GNOME"
-
-#~ msgid "window2"
-#~ msgstr "window2"
-
-#~ msgid "Effect"
-#~ msgstr "Εφφέ"
-
-#~ msgid "Apply changes automatically"
-#~ msgstr "Αυτόματη ενεργοποίηση αλλαγών"
-
-#~ msgid "More Transparent"
-#~ msgstr "Περισσότερο Διαφανές"
-
-#~ msgid "window1"
-#~ msgstr "window1"
-
-#~ msgid "Delay Until Repeat"
-#~ msgstr "Καθυστέρηση Μέχρι Επανάληψη"
-
-#~ msgid "....a"
-#~ msgstr "....α"
-
-#~ msgid "...a"
-#~ msgstr "...α"
-
-#~ msgid "..a"
-#~ msgstr "..α"
-
-#~ msgid ".a"
-#~ msgstr ".α"
-
-#~ msgid "a....a"
-#~ msgstr "α....α"
-
-#~ msgid "a...a"
-#~ msgstr "α...α"
-
-#~ msgid "a..a"
-#~ msgstr "α..α"
-
-#~ msgid "a.a"
-#~ msgstr "α.α"
-
-#~ msgid "Keyboard click"
-#~ msgstr "Κλίκ πληκτρολογίου"
-
-#~ msgid "Type here to test setting"
-#~ msgstr "Πληκτρολογίστε εδώ για να δοκιμάσετε τις ρυθμίσεις"
-
-#~ msgid "Enable"
-#~ msgstr "Ενεργοποίηση"
-
-#~ msgid "HTML"
-#~ msgstr "HTML"
-
-#~ msgid "Icon List"
-#~ msgstr "Λίστα Εικονιδίων"
-
-#~ msgid ""
-#~ "No help is available/installed for these settings. Please make sure you\n"
-#~ "have the GNOME User's Guide installed on your system."
-#~ msgstr ""
-#~ "Βοήθεια για τις παρούσες ρυθμίσεις ανύπαρκτη ή μη εγκατεστημένη. "
-#~ "Παρακαλώ\n"
-#~ "βεβαιωθείτε ότι ο Οδηγός Χρήσης του GNOME είναι εγκατεστημένος στο "
-#~ "σύστημα σας."
-
-#~ msgid ""
-#~ "We are unable to create the directory\n"
-#~ "~/.gnome/mime-info.\n"
-#~ "\n"
-#~ "We will not be able to save the state."
-#~ msgstr ""
-#~ "Αποτυχία δημιουργίας του καταλόγου\n"
-#~ "~/.gnome/mime-info.\n"
-#~ "\n"
-#~ "Αδύνατη η αποθήκευση ρυθμίσεων."
-
-#~ msgid ""
-#~ "We are unable to access the directory\n"
-#~ "~/.gnome/mime-info.\n"
-#~ "\n"
-#~ "We will not be able to save the state."
-#~ msgstr ""
-#~ "Αποτυχία πρόσβασης στον κατάλογο\n"
-#~ "~/.gnome/mime-info.\n"
-#~ "\n"
-#~ "Αδύνατη η αποθήκευση ρυθμίσεων."
-
-#~ msgid "Choose randomly from those checked off"
-#~ msgstr "Χρήση τυχαίας από τις επιλεγμένες"
-
-#~ msgid "Demo Next"
-#~ msgstr "Επόμενο Δείγμα"
-
-#~ msgid "Demo Previous"
-#~ msgstr "Προηγούμενο Δείγμα"
-
-#~ msgid "Screensaver Selection"
-#~ msgstr "Επιλογή Προφύλαξης Οθόνης"
-
-#~ msgid "Security"
-#~ msgstr "Ασφάλεια"
-
-#~ msgid "Only after the screensaver has run for"
-#~ msgstr "Μόνο μετά την εκτέλεση της προφύλαξης οθόνης για"
-
-#~ msgid "Priority"
-#~ msgstr "Προτεραιότητα"
-
-#~ msgid "Be verbose"
-#~ msgstr "Διαλογικότητα"
-
-#~ msgid "Effects"
-#~ msgstr "Εφφέ"
-
-#~ msgid "Install colormap"
-#~ msgstr "Εγκατάσταση χάρτη χρωμάτων"
-
-#~ msgid "Fade to black when activating screensaver"
-#~ msgstr "Σκοτείνιασμα οθόνης κατά την ενεργοποίηση της προφυλ. οθόνης"
-
-#~ msgid "Fade desktop back when deactivating screensaver"
-#~ msgstr "Επαναφορά οθόνης κατά την απενεργ. της προφυλ. οθόνης"
-
-#~ msgid "Fade Duration"
-#~ msgstr "Διάρκεια Σκοτεινιάσματος"
-
-#~ msgid "Fade Smoothness"
-#~ msgstr "Ομαλότητα Σκοτεινιάσματος"
-
-#~ msgid "Smooth"
-#~ msgstr "Ομαλή"
-
-#~ msgid "Jerky"
-#~ msgstr "Ανώμαλη"
-
-#~ msgid "Advanced Properties"
-#~ msgstr "Προηγμένες Επιλογές"
-
-#~ msgid "Session"
-#~ msgstr "Συνεδρία"
-
-#~ msgid "Session Chooser"
-#~ msgstr "Επιλογή Συνεδρίας"
-
-#~ msgid "Start Session"
-#~ msgstr "Έναρξη Συνεδρίας"
-
-#~ msgid "Cancel Login"
-#~ msgstr "Ακύρωση Αυθεντικοποίησης"
-
-#~ msgid "Order: "
-#~ msgstr "Σειρά: "
-
-#~ msgid "This button sets the start order of the selected programs.\n"
-#~ msgstr ""
-#~ "Το κουμπί αυτό καθορίζει τη σειρά εκκίνησης των επιλεγμένων "
-#~ "προγραμμάτων.\n"
-
-# Needs some improvement...
-#~ msgid ""
-#~ "This button sets the restart style of the selected programs:\n"
-#~ "Normal programs are unaffected by logouts but can die;\n"
-#~ "Respawn programs are never allowed to die;\n"
-#~ "Trash programs are discarded on logout and can die;\n"
-#~ "Settings programs are always started on every login."
-#~ msgstr ""
-#~ "Το κουμπί αυτό καθορίζει τον είδος εππανεκίνησης των επιλεγμένων "
-#~ "προγραμμάτων:\n"
-#~ "Κανονικά προγράμματα παραμένουν κατά την έξοδο από το GNOME,\n"
-#~ "Εππανεκινούμενα προγράμματα δεν επιτρέπεται να τερματίσουν ποτέ,\n"
-#~ "Προγράμματα μίας χρήσης δεν παραμένουν μετά την έξοδο από το GNOME,\n"
-#~ "Προγράμματα ρυθμίσεων εκκινούνται σε κάθε έναρξη του GNOME."
-
-#~ msgid ""
-#~ "This button produces a key to the program states below:\n"
-#~ "Inactive programs are waiting to start or have finished;\n"
-#~ "Starting programs are being given time to get running;\n"
-#~ "Running programs are normal members of the session;\n"
-#~ "Saving programs are saving their session details;\n"
-#~ "Programs which make no contact have Unknown states.\n"
-#~ msgstr ""
-#~ "Το κουμπί αυτό δίνει πληροφορίες για την κατάσταση των προγραμμάτων:\n"
-#~ "Ανενεργά προγράμματα αναμένουν εκκίνηση ή έχουν τερματιστεί,\n"
-#~ "Εκκινούμενα προγράμματα βρίσκονται στο στάδιο έναρξης εκτέλεσης,\n"
-#~ "Εκτελούμενα προγράμματα είναι κανονικά μέλη της συνεδρίας,\n"
-#~ "Αποθηκευόμενα προγράμματα αποθηκεύουν τις πληροφορίες συνεδρίας,\n"
-#~ "Προγράμματα που δεν απαντούν έχουν ¶γνωστη κατάσταση.\n"
-
-#~ msgid "This column gives the command used to start a program."
-#~ msgstr "Στήλη ονόματος εντολής για την εκκίνηση του προγράμματος."
-
-#~ msgid "Order"
-#~ msgstr "Σειρά"
-
-#~ msgid "Style"
-#~ msgstr "Είδος"
-
-#~ msgid "State"
-#~ msgstr "Κατάσταση"
-
-#~ msgid "Inactive"
-#~ msgstr "Ανενεργό"
-
-#~ msgid "Waiting to start or already finished."
-#~ msgstr "Αναμονή εκκίνησης ή ήδη τερματισμένο."
-
-#~ msgid "Started but has not yet reported state."
-#~ msgstr "Έχει εκκινηθεί αλλά δεν έχει αναφέρει κατάσταση ακόμα."
-
-#~ msgid "Running"
-#~ msgstr "Εκτελείται"
-
-#~ msgid "A normal member of the session."
-#~ msgstr "Κανονικό μέλος της συνεδρίας."
-
-#~ msgid "Saving"
-#~ msgstr "Αποθηκεύεται"
-
-#~ msgid "Saving session details."
-#~ msgstr "Αποθήκευση πληροφοριών συνεδρίας."
-
-#~ msgid "State not reported within timeout."
-#~ msgstr "Καμία αναφορά κατάστασης εντός χρονικού περιθωρίου."
-
-#~ msgid "Unaffected by logouts but can die."
-#~ msgstr "Επανεκκινείται κατά την επόμενη έναρξη του GNOME."
-
-#~ msgid "Respawn"
-#~ msgstr "Επανεκκινούμενο"
-
-#~ msgid "Never allowed to die."
-#~ msgstr "Δεν επιτρέπεται να τερματίσει ποτέ."
-
-#~ msgid "Trash"
-#~ msgstr "Μίας χρήσης"
-
-#~ msgid "Discarded on logout and can die."
-#~ msgstr "Δεν παραμένει μετά την έξοδο από GNOME."
-
-#~ msgid "Always started on every login."
-#~ msgstr "Εκκινείται σε κάθε έναρξη του GNOME."
-
-#~ msgid "Remove Program"
-#~ msgstr "Αφαίρεση προγράμματος"
-
-#~ msgid "Prompt on logout"
-#~ msgstr "Ερώτηση κατά τον τερματισμό του GNOME"
-
-#~ msgid "Automatically save changes to session"
-#~ msgstr "Αυτόματη αποθήκευση συνεδρίας κατά τον τερματισμό"
-
-# It is getting late and the translation sucks more and more...
-#~ msgid "Non-session-managed Startup Programs"
-#~ msgstr "Προγράμματα εκτός διαχειριστή συνεδρίας"
-
-#~ msgid "Browse Currently Running Programs..."
-#~ msgstr "Εμφάνιση Εκτελούμενων Προγραμμάτων..."
-
-#~ msgid "Only display warnings."
-#~ msgstr "Μόνο εμφάνιση προειδοποιήσεων"
-
-#~ msgid "Startup Command"
-#~ msgstr "Εντολή εκκίνησης"
-
-#~ msgid ""
-#~ "Programs with smaller values are started before programs with higher "
-#~ "values. The default value should be OK"
-#~ msgstr ""
-#~ "Τα προγράμματα με μικρότερες τιμές εκκινούνται πρίν απο αυτά με "
-#~ "μεγαλύτερες τιμές.. Η εξ' ορισμού τιμή πρέπει να είναι εντάξει"
-
-#~ msgid "The startup command cannot be empty"
-#~ msgstr "Η εντολή εκκίνησης δε μπορεί να είναι άδεια"
-
-#~ msgid "Edit Startup Program"
-#~ msgstr "Διόρθωση Προγράμματος Εκκίνησης"
-
-#~ msgid ""
-#~ "Error installing theme:\n"
-#~ "'%s'\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Σφάλμα εγκατάστασης θέματος:\n"
-#~ "'%s'\n"
-#~ "%s"
-
-#~ msgid ""
-#~ "Auto\n"
-#~ "Preview"
-#~ msgstr ""
-#~ "Αυτόματη\n"
-#~ "Επισκόπιση"
-
-#~ msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
-#~ msgstr "-greek-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*"
-
-#~ msgid "Home directory doesn't exist!\n"
-#~ msgstr "Αρχικός κατάλογος ανύπαρκτος!\n"
-
-#~ msgid "Theme does not exist"
-#~ msgstr "Ανύπαρκτο θέμα"
-
-#~ msgid "Command '%s' failed"
-#~ msgstr "Εκτέλεση εντολής '%s' ανεπιτυχής"
-
-#~ msgid "Unknown file format"
-#~ msgstr "¶γνωστος τύπος αρχείου"
-
-#~ msgid "Error initializing the `url-properties' capplet."
-#~ msgstr "Σφάλμα αριχκοποίησης εφαρμογιδίου `url-properties'."
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'wm-properties-capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "σφάλμα αρχικοποίησης κατά την εκκίνηση του 'wm-properties-capplet'.\n"
-#~ "τερματισμός...\n"
-
-#~ msgid "Color 1"
-#~ msgstr "Χρώμα 1"
-
-#~ msgid "Color 2"
-#~ msgstr "Χρώμα 2"
-
-#~ msgid "(None)\n"
-#~ msgstr "(Κενό)\n"
-
-#~ msgid "Disable background selection"
-#~ msgstr "Απενεργοποίηση επιλογής φόντου"
-
-#~ msgid "Auto-repeat"
-#~ msgstr "Επανάληψη"
-
-#~ msgid "Click on keypress"
-#~ msgstr "Κλίκ κατά την πίεση"
-
-#~ msgid "Menu Options"
-#~ msgstr "Επιλογές Μενού"
-
-#~ msgid "Can detach and move menus"
-#~ msgstr "Ενεργ. απόσπασης και μετακίνησης μενού"
-
-# TODO
-#~ msgid "Can detach and move toolbars"
-#~ msgstr "Ενεργ. απόσπασης και μετακίνησης εργαλειοθηκών"
-
-#~ msgid ""
-#~ "Default value\n"
-#~ "Spread buttons out\n"
-#~ "Put buttons on edges\n"
-#~ "Left-justify buttons\n"
-#~ "Right-justify buttons\n"
-#~ msgstr ""
-#~ "Εξ' ορισμού τιμή\n"
-#~ "Διάχυση των κουμπιών προς τα έξω\n"
-#~ "Τοποθέτηση των κουμπιών στις άκρες\n"
-#~ "Στοίχιση κουμπιών στα αριστερά\n"
-#~ "Στοίχιση κουμπιών στα δεξιά\n"
-
-#~ msgid "Dialog position:"
-#~ msgstr "Θέση διαλόγων:"
-
-#~ msgid ""
-#~ "Let window manager decide\n"
-#~ "Center of the screen\n"
-#~ "At the mouse pointer\n"
-#~ msgstr ""
-#~ "Η επιλογή στο διαχειριστή παραθύρων\n"
-#~ "Στο κέντρο της οθόνης\n"
-#~ "Στο δείκτη του ποντικιού\n"
-
-#~ msgid ""
-#~ "Dialogs are like other windows\n"
-#~ "Dialogs are treated specially by the window manager\n"
-#~ msgstr ""
-#~ "Οι διάλογοι είναι όπως τα υπόλοιπα παράθυρα\n"
-#~ "Ειδική μεταχείριση διαλόγων από το διαχ. παραθύρων\n"
-
-#~ msgid "window3"
-#~ msgstr "παράθυρο3"
-
-#~ msgid "GNOME MDI Options"
-#~ msgstr "Επιλογές GNOME MDI"
-
-#~ msgid "Default MDI Mode:"
-#~ msgstr "Εξ' Ορισμού Κατάσταση MDI:"
-
-# Please use "tetradio" for "(MDI) notebook" consistently... 
-#~ msgid "MDI notebook tab position:"
-#~ msgstr "Θέση σελιδοδεικτών τετραδίου MDI:"
-
-#~ msgid ""
-#~ "Notebook\n"
-#~ "Toplevel\n"
-#~ "Modal\n"
-#~ msgstr ""
-#~ "Τετράδιο\n"
-#~ "Κορυφής\n"
-#~ "Αποκλειστικό\n"
-
-#~ msgid ""
-#~ "Left\n"
-#~ "Right\n"
-#~ "Top\n"
-#~ "Bottom\n"
-#~ msgstr ""
-#~ "Αριστερά\n"
-#~ "Δεξιά\n"
-#~ "Επάνω\n"
-#~ "Κάτω\n"
-
-#~ msgid "id of the capplet -- assigned by the control-center"
-#~ msgstr "id εφαρμογιδίου ελέγχου -- ανάθεση από το control-center"
-
-#~ msgid "ID"
-#~ msgstr "ID"
-
-#~ msgid "Multi-capplet id."
-#~ msgstr "ID πολλαπλού εφαμογιδίου."
-
-#~ msgid "CAPID"
-#~ msgstr "CAPID"
-
-#~ msgid "X ID of the socket it's plugged into"
-#~ msgstr "X ID της υποδοχής που το δέχεται"
-
-#~ msgid "XID"
-#~ msgstr "XID"
-
-#~ msgid "IOR"
-#~ msgstr "IOR"
-
-#~ msgid "Ignore default action.  Used for custom init-session cases"
-#~ msgstr ""
-#~ "Αγνόηση εξ' ορισμού ενέργειών.  Χρήση σε ειδικές περιπτώσεις init-session"
-
-#~ msgid "Get an XML description of the capplet's state"
-#~ msgstr "Λήψη περιγραφής XML της κατάσταση εφαρμογιδίου"
-
-#~ msgid "DO_GET"
-#~ msgstr "DO_GET"
-
-#~ msgid "Read an XML description of the capplet's state and apply it"
-#~ msgstr ""
-#~ "Ανάγνωση περιγραφής XML από την κατάσταση του εφαρμογιδίου και εκτέλεσή "
-#~ "της"
-
-#~ msgid "DO_SET"
-#~ msgstr "DO_SET"
-
-#~ msgid "Help with the GNOME control-center."
-#~ msgstr "Βοήθεια για το κέντρο ελέγχου του GNOME."
-
-#~ msgid "About the GNOME control-center."
-#~ msgstr "Πέρι του κέντρου ελέγχου του GNOME."
-
-#~ msgid "Up"
-#~ msgstr "Πάνω"
-
-#~ msgid "Parent Group"
-#~ msgstr "Πατρική Ομάδα"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'background-properties-"
-#~ "capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "σφάλμα αρχικοπόιησης κατά την εκκίνηση του εφαρμογιδίου 'background-"
-#~ "properties-capplet'.\n"
-#~ "τερματισμός...\n"
-
-#~ msgid "Set parameters from saved state and exit"
-#~ msgstr "Παράμετροι από αποθηκευμένη κατάσταση και έξοδος"
-
-#~ msgid "IMAGE"
-#~ msgstr "ΕΙΚΟΝΑ"
-
-#~ msgid "Sets the wallpaper to the value specified"
-#~ msgstr "Χρήση επένδυσης βάσει καθορισμένων παραμέτρων"
-
-#~ msgid "COLOR"
-#~ msgstr "ΧΡΩΜΑ"
-
-#~ msgid "Specifies end background color for gradient"
-#~ msgstr "Καθορισμός τελικού χρώματος διαβάθμισης για το φόντο"
-
-#~ msgid "Gradient orientation: vertical or horizontal"
-#~ msgstr "Προσανατολισμός διαβάθμισης: κατακόρυφη ή οριζόντια"
-
-#~ msgid "MODE"
-#~ msgstr "ΚΑΤΑΣΤΑΣΗ"
-
-# see prev comment about translation of scaled
-#~ msgid "Display wallpaper: tiled, centered, scaled or ratio"
-#~ msgstr "Εμφάνιση επένδυσης: μωσαϊκό, κέντρο, νέα κλίμακα"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'bell-properties-"
-#~ "capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "σφάλμα αρχικοποίησης κατά την εκκίνηση του 'bell-properties-capplet'.\n"
-#~ "τερματισμός...\n"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'keyboard-properties-"
-#~ "capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "σφάλμα αρχικοποίησης κατά την εκκίνηση του 'keyboard-properties-"
-#~ "capplet'.\n"
-#~ "τερματισμός...\n"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'mouse-properties-"
-#~ "capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "σφάλμα αρχικοποίησης κατά την εκκίνηση του 'mouse-properties-capplet'.\n"
-#~ "τερματισμός...\n"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'sound-properties-"
-#~ "capplet'."
-#~ msgstr ""
-#~ "σφάλμα αρχικοποίσης κατά την εκκίνηση του 'sound-properties-capplet'."
-
-#~ msgid ""
-#~ "This copy of the GNOME control center was not compiled with sound support"
-#~ msgstr "Το παρόν κέντρο ελέγχου του GNOME δεν περιλαμβάνει υποστήριξη ήχου"
-
-#~ msgid "Put buttons on edges"
-#~ msgstr "Κουμπιά στις άκρες"
-
-#~ msgid "Left-justify buttons"
-#~ msgstr "Αριστερή στοίχιση κουμπιών"
-
-#~ msgid "Right-justify buttons"
-#~ msgstr "Δεξιά στοίχιση κουμπιών"
-
-#~ msgid "Toplevel"
-#~ msgstr "Παράθυρο"
-
-#~ msgid "%s Settings..."
-#~ msgstr "Ρυθμίσεις %s..."
-
-#~ msgid "Author:"
-#~ msgstr "Συγγραφέας:"
-
-#~ msgid "Author: UNKNOWN"
-#~ msgstr "Συγγραφέας: ΑΓΝΩΣΤΟΣ"
-
-#~ msgid "RANDOM SCREENSAVER"
-#~ msgstr "ΤΥΧΑΙΟΣ SCREENSAVER"
-
-#~ msgid ""
-#~ "Pressing this button will popup a dialogbox that will help you setup the "
-#~ "current screensaver."
-#~ msgstr ""
-#~ "Εάν πιέσετε το κουμπί θα εμφανιστεί πλαίσιο διαλόγου για τη ρύθμιση του "
-#~ "παρόντος screensaver."
-
-#~ msgid "Start After "
-#~ msgstr "Εκκίνηση μετά από"
-
-#~ msgid " Normal"
-#~ msgstr " Κανονική"
-
-#~ msgid "Screen Saver Demo"
-#~ msgstr "Επίδειξη screensaver"
-
-#~ msgid "Try"
-#~ msgstr "Δοκιμή"
-
-#~ msgid "Revert"
-#~ msgstr "Επαναφορά"
-
-#~ msgid "Sorry, no help is available for these settings."
-#~ msgstr "Με συγχωρείτε, δεν υπάρχει βοήθεια για αυτές τις ρυθμίσεις."
-
-#~ msgid "capplet-command to be run."
-#~ msgstr "εντολή-capplet προς εκτέλεση."
-
-#~ msgid "Warning:"
-#~ msgstr "Προειδοποίηση:"
-
-#~ msgid "Discard all changes"
-#~ msgstr "Απόριψη όλων των αλλαγών"
-
-#~ msgid ""
-#~ "The following modules have had changes made, but not committed.  If you "
-#~ "would like to edit them, please double click on the appropriate entry."
-#~ msgstr ""
-#~ "Στις ακόλουθες κατηγορίες έγιναν αλλαγές που δεν έχουν οριστικοποιηθεί. "
-#~ "Για να διορθώσετε κάτι, παρακαλώ κάντε διπλό κλίκ στην επιθυμητή "
-#~ "κατηγορία."
+#~ msgid "_Toolbars have: "
+#~ msgstr "Ξ•ΟΞ³Ξ±Ξ»ΞµΞΉΞΏΞΈΞ®ΞΊΞµΟ‚ ΞΌΞµ Ο€ΞµΟΞ―Ξ³ΟΞ±ΞΌΞΌΞ±"
