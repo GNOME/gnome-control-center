@@ -38,6 +38,8 @@
 #include <X11/extensions/xf86misc.h>
 #endif
 
+#define CP CAPPLET_CONFIG_PREFIX "keyboard-properties/"
+
 static void
 apply_settings (Bonobo_ConfigDatabase db)
 {
@@ -58,14 +60,14 @@ apply_settings (Bonobo_ConfigDatabase db)
 	XKeyboardControl kbdcontrol;
         int event_base_return, error_base_return;
 
-	repeat = bonobo_config_get_boolean (db, "/main/repeat", NULL);
-	click = bonobo_config_get_boolean (db, "/main/click", NULL);
-	rate = bonobo_config_get_ulong (db, "/main/rate", NULL);
-	delay = bonobo_config_get_ulong (db, "/main/delay", NULL);
-	volume = bonobo_config_get_ulong (db, "/main/volume", NULL);
-	bell_volume = bonobo_config_get_ulong (db, "/main/bell_volume", NULL);
-	bell_pitch = bonobo_config_get_ulong (db, "/main/bell_pitch", NULL);
-	bell_duration = bonobo_config_get_ulong (db, "/main/bell_duration", NULL);
+	repeat = bonobo_config_get_boolean (db, CP "repeat", NULL);
+	click = bonobo_config_get_boolean (db, CP "click", NULL);
+	rate = bonobo_config_get_ulong (db, CP "rate", NULL);
+	delay = bonobo_config_get_ulong (db, CP "delay", NULL);
+	volume = bonobo_config_get_ulong (db, CP "volume", NULL);
+	bell_volume = bonobo_config_get_ulong (db, CP "bell_volume", NULL);
+	bell_pitch = bonobo_config_get_ulong (db, CP "bell_pitch", NULL);
+	bell_duration = bonobo_config_get_ulong (db, CP "bell_duration", NULL);
 
         if (repeat) {
 		XAutoRepeatOn (GDK_DISPLAY ());
@@ -201,14 +203,14 @@ get_legacy_settings (Bonobo_ConfigDatabase db)
 	gboolean val_boolean, def;
 	gulong val_ulong;
 
-	COPY_FROM_LEGACY (boolean, "/main/repeat", bool, "/Desktop/Keyboard/repeat=true");
-	COPY_FROM_LEGACY (boolean, "/main/click", bool, "/Desktop/Keyboard/click=true");
-	COPY_FROM_LEGACY (ulong, "/main/rate", int, "/Desktop/Keyboard/rate=30");
-	COPY_FROM_LEGACY (ulong, "/main/delay", int, "/Desktop/Keyboard/delay=500");
-	COPY_FROM_LEGACY (ulong, "/main/volume", int, "/Desktop/Keyboard/clickvolume=0");
-	COPY_FROM_LEGACY (ulong, "/main/bell_volume", int, "/Desktop/Bell/percent=50");
-	COPY_FROM_LEGACY (ulong, "/main/bell_pitch", int, "/Desktop/Bell/pitch=50");
-	COPY_FROM_LEGACY (ulong, "/main/bell_duration", int, "/Desktop/Bell/duration=100");
+	COPY_FROM_LEGACY (boolean, CP "repeat", bool, "/Desktop/Keyboard/repeat=true");
+	COPY_FROM_LEGACY (boolean, CP "click", bool, "/Desktop/Keyboard/click=true");
+	COPY_FROM_LEGACY (ulong, CP "rate", int, "/Desktop/Keyboard/rate=30");
+	COPY_FROM_LEGACY (ulong, CP "delay", int, "/Desktop/Keyboard/delay=500");
+	COPY_FROM_LEGACY (ulong, CP "volume", int, "/Desktop/Keyboard/clickvolume=0");
+	COPY_FROM_LEGACY (ulong, CP "bell_volume", int, "/Desktop/Bell/percent=50");
+	COPY_FROM_LEGACY (ulong, CP "bell_pitch", int, "/Desktop/Bell/pitch=50");
+	COPY_FROM_LEGACY (ulong, CP "bell_duration", int, "/Desktop/Bell/duration=100");
 }
 
 int
