@@ -1,11 +1,11 @@
-# control-center hu.po
+
 # Copyright (C) 1999 Free Software Foundation, Inc.
 # Shooby Ban <bansz@szif.hu>, 1999.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0.0\n"
-"POT-Creation-Date: 1999-08-16 11:59-0400\n"
+"POT-Creation-Date: 1999-08-26 21:38+0200\n"
 "Last-Translator: Shooby Ban <bansz@szif.hu>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -14,20 +14,20 @@ msgstr ""
 
 #: capplets/background-properties/app-background.c:13
 msgid "Set background image."
-msgstr ""
+msgstr "A háttérkép beállítása"
 
 #: capplets/background-properties/app-background.c:13
 msgid "IMAGE-FILE"
 msgstr ""
 
 #: capplets/background-properties/app-background.c:34
-#, fuzzy
 msgid ""
 "an initialization error occurred while starting "
 "'background-properties-capplet'.\n"
 "aborting...\n"
 msgstr ""
-"a wm-properties-capplet futtatása közben hiba történt,\n"
+"a background-properties-capplet futtatása "
+"közben hiba történt,\n"
 "kilépek....\n"
 
 #: capplets/background-properties/property-background.c:244
@@ -186,7 +186,7 @@ msgid ""
 "an initialization error occurred while starting 'bell-properties-capplet'.\n"
 "aborting...\n"
 msgstr ""
-"a wm-properties-capplet futtatása közben hiba történt,\n"
+"a bell-properties-capplet futtatása közben hiba történt,\n"
 "kilépek....\n"
 
 #: capplets/gnome-edit-properties/gnome-edit-properties.c:229
@@ -230,13 +230,12 @@ msgid "Test settings"
 msgstr "Beállítások kipróbálása"
 
 #: capplets/keyboard-properties/keyboard-properties.c:307
-#, fuzzy
 msgid ""
 "an initialization error occurred while starting "
 "'keyboard-properties-capplet'.\n"
 "aborting...\n"
 msgstr ""
-"a wm-properties-capplet futtatása közben hiba történt,\n"
+"a keyboard-properties-capplet futtatása közben hiba történt,\n"
 "kilépek....\n"
 
 #. icon box
@@ -294,17 +293,15 @@ msgstr "Szerkeszt"
 #: capplets/mime-type/edit-window.c:238
 #, c-format
 msgid "Set actions for %s"
-msgstr ""
+msgstr "Akciók beállítása %s-hez"
 
 #: capplets/mime-type/mime-data.c:354
-#, fuzzy
 msgid "Mime Type"
-msgstr "Mime típus: "
+msgstr "Mime típus"
 
 #: capplets/mime-type/mime-data.c:355
-#, fuzzy
 msgid "Extension"
-msgstr "Kiterjesztések"
+msgstr "Kiterjesztés"
 
 #: capplets/mime-type/mime-data.c:449
 msgid "You must enter a mime-type"
@@ -337,30 +334,28 @@ msgid "This mime-type already exists"
 msgstr "Ez a mime típus már létezik"
 
 #: capplets/mime-type/mime-data.c:544 capplets/mime-type/mime-info.c:423
-#, fuzzy
 msgid ""
 "We are unable to create the directory\n"
 "~/.gnome/mime-info\n"
 "\n"
 "We will not be able to save the state."
 msgstr ""
-"Nem tudom létrehozni a fájlt\n"
-"~/.gnome/mime-info/user.mime\n"
+"Nem tudom létrehozni a könyvtárat:\n"
+"~/.gnome/mime-info\n"
 "\n"
-"Nem tudjuk elmenteni az állást"
+"Nem tudjuk elmenteni az állást."
 
 #: capplets/mime-type/mime-data.c:550 capplets/mime-type/mime-info.c:429
-#, fuzzy
 msgid ""
 "We are unable to access the directory\n"
 "~/.gnome/mime-info\n"
 "\n"
 "We will not be able to save the state."
 msgstr ""
-"Nem tudom létrehozni a fájlt\n"
-"~/.gnome/mime-info/user.mime\n"
+"Nem tudom elérni a könyvtárat\n"
+"~/.gnome/mime-info\n"
 "\n"
-"Nem tudjuk elmenteni az állást"
+"Nem tudjuk elmenteni az állást."
 
 #: capplets/mime-type/mime-data.c:561
 msgid ""
@@ -437,7 +432,6 @@ msgid "Extension:"
 msgstr "Kiterjesztés:"
 
 #: capplets/mime-type/new-mime-window.c:51
-#, fuzzy
 msgid "Regular Expressions"
 msgstr "Reguláris kifejezések"
 
@@ -491,12 +485,11 @@ msgid "Small"
 msgstr "Rövid"
 
 #: capplets/mouse-properties/mouse-properties.c:341
-#, fuzzy
 msgid ""
 "an initialization error occurred while starting 'mouse-properties-capplet'.\n"
 "aborting...\n"
 msgstr ""
-"a wm-properties-capplet futtatása közben hiba történt,\n"
+"a mouse-properties-capplet futtatása közben hiba történt,\n"
 "kilépek....\n"
 
 #: capplets/screensaver-properties/callbacks.c:102
@@ -712,7 +705,7 @@ msgstr "Belépéskor újratöltõdik, de megállhat."
 
 #: capplets/session-properties/gsm-client-row.c:53
 msgid "Respawn"
-msgstr ""
+msgstr "Újraindul"
 
 #: capplets/session-properties/gsm-client-row.c:54
 msgid "Never allowed to die."
@@ -720,7 +713,7 @@ msgstr "Nem lövõdhet ki."
 
 #: capplets/session-properties/gsm-client-row.c:56
 msgid "Trash"
-msgstr ""
+msgstr "Kuka"
 
 #: capplets/session-properties/gsm-client-row.c:57
 msgid "Discarded on logout and can die."
@@ -731,33 +724,31 @@ msgid "Always started on every login."
 msgstr "Minden belépéskor elindul."
 
 #: capplets/session-properties/gsm-protocol.c:503
-#, fuzzy
 msgid "Remove Program"
-msgstr "Töröl"
+msgstr "Program törlése"
 
 #. frame for options
 #: capplets/session-properties/session-properties.c:138
 msgid "Options"
-msgstr ""
+msgstr "Beállítások"
 
 #: capplets/session-properties/session-properties.c:149
 msgid "Prompt on logout"
-msgstr ""
+msgstr "Kilépésnél kérdezzen"
 
 #: capplets/session-properties/session-properties.c:156
 msgid "Automatically save changes to session"
-msgstr ""
+msgstr "Automatikusan mentsd a szezon beállításait"
 
 #. frame for manually started programs
 #: capplets/session-properties/session-properties.c:166
 msgid "Non-session-managed Startup Programs"
-msgstr ""
+msgstr "Nem szezonvezérelt programindítások"
 
 #: capplets/session-properties/session-properties.c:183
 #: capplets/session-properties/startup-programs.c:304
-#, fuzzy
 msgid "Priority"
-msgstr "Prioritás:"
+msgstr "Prioritás"
 
 #: capplets/session-properties/session-properties.c:184
 #: capplets/url-properties/url-properties.c:71
@@ -766,52 +757,42 @@ msgstr "Parancs"
 
 #: capplets/session-properties/session-properties.c:213
 msgid "Browse Currently Running Programs..."
-msgstr ""
+msgstr "Az épp futó programok megtekintése..."
 
 #: capplets/session-properties/session-properties.c:379
 msgid "Only display warnings."
 msgstr "Csak a figyelmeztetéseket mutasd."
 
-#: capplets/session-properties/session-properties.c:405
-#, fuzzy
-msgid ""
-"an initialization error occurred while starting 'session-properties-capplet'."
-msgstr ""
-"a wm-properties-capplet futtatása közben hiba történt,\n"
-"kilépek....\n"
-
 #: capplets/session-properties/startup-programs.c:288
 #: capplets/session-properties/startup-programs.c:295
-#, fuzzy
 msgid "Startup Command"
-msgstr "Parancs"
+msgstr "Indítási parancs"
 
 #: capplets/session-properties/startup-programs.c:319
 msgid ""
 "Programs with smaller values are started before programs with higher values. "
 "The default value should be OK"
 msgstr ""
+"A kisebb értékekkel rendelkezõ programok indulnak hamarabb. "
+"Az alapértéknek OK-nek kell lennie"
 
 #: capplets/session-properties/startup-programs.c:338
-#, fuzzy
 msgid "The startup command cannot be empty"
 msgstr "Nem lehet a parancs üres"
 
 #: capplets/session-properties/startup-programs.c:378
 msgid "Add Startup Program"
-msgstr ""
+msgstr "Induló program hozzáadása"
 
 #: capplets/session-properties/startup-programs.c:396
 msgid "Edit Startup Program"
-msgstr ""
+msgstr "Induló program szerkeszése"
 
 #: capplets/sound-properties/sound-properties.c:94
-#, fuzzy
 msgid ""
 "an initialization error occurred while starting 'sound-properties-capplet'."
 msgstr ""
-"a wm-properties-capplet futtatása közben hiba történt,\n"
-"kilépek....\n"
+"a sound-properties-capplet futtatása közben hiba történt."
 
 #: capplets/sound-properties/sound-properties.c:184
 msgid "Category"
@@ -936,15 +917,15 @@ msgstr "Minta szövegbeviteli mezõ"
 
 #: capplets/theme-switcher/demo.c:139
 msgid "Submenu"
-msgstr ""
+msgstr "Almenü"
 
 #: capplets/theme-switcher/demo.c:146
 msgid "Item 1"
-msgstr ""
+msgstr "Elsõ elem"
 
 #: capplets/theme-switcher/demo.c:149
 msgid "Another item"
-msgstr ""
+msgstr "Második elem"
 
 #: capplets/theme-switcher/demo.c:154
 msgid "Radio Button 1"
@@ -1007,20 +988,20 @@ msgstr "Beállított betûtípust használj."
 
 #: capplets/theme-switcher/install.c:26
 msgid "Home directory doesn't exist!\n"
-msgstr ""
+msgstr "A saját könyvtár nem létezik!\n"
 
 #: capplets/theme-switcher/install.c:36
 msgid "Theme does not exist"
-msgstr ""
+msgstr "Nincs ilyen téma"
 
 #: capplets/theme-switcher/install.c:68
 #, c-format
 msgid "Command '%s' failed"
-msgstr ""
+msgstr "%s parancs nem sikerült"
 
 #: capplets/theme-switcher/install.c:73
 msgid "Unknown file format"
-msgstr ""
+msgstr "Nem ismert fájlformátum"
 
 #: capplets/ui-properties/ui-properties.c:53
 msgid "Can detach and move toolbars"
@@ -1043,18 +1024,16 @@ msgid "Toolbars have text labels"
 msgstr "Feliratos eszközsor gombok legyenek"
 
 #: capplets/ui-properties/ui-properties.c:102
-#, fuzzy
 msgid "Can detach and move menus"
-msgstr "Lehessen a menüt mozgatni"
+msgstr "Lehessen a menüt lecsatlakoztatni és mozgatni"
 
 #: capplets/ui-properties/ui-properties.c:107
-#, fuzzy
 msgid "Menus have relieved border"
 msgstr "A menünek kerete legyen"
 
 #: capplets/ui-properties/ui-properties.c:111
 msgid "Submenus can be torn off"
-msgstr ""
+msgstr "Az almenüket le lehet szakítani"
 
 #: capplets/ui-properties/ui-properties.c:115
 msgid "Menu items have icons"
@@ -1065,31 +1044,28 @@ msgid "Statusbar is interactive when possible"
 msgstr "Az állapotsor interaktív legyen, ha lehet"
 
 #: capplets/ui-properties/ui-properties.c:143
-#, fuzzy
 msgid "Statusbar progress meter is on the right"
 msgstr "Állapotsor folyamatjelzõ sáv jobb oldalon legyen"
 
 #: capplets/ui-properties/ui-properties.c:160
-#, fuzzy
 msgid "Menu Options"
-msgstr "Mime-típus akciók"
+msgstr "Menü beállítások"
 
 #: capplets/ui-properties/ui-properties.c:161
 msgid "Statusbar Options"
-msgstr ""
+msgstr "Státuszsor beállítások"
 
 #: capplets/ui-properties/ui-properties.c:162
 msgid "Toolbar Options"
-msgstr ""
+msgstr "Eszköztár beállítások"
 
 #: capplets/ui-properties/ui-properties.c:168
 msgid "Dialog buttons"
 msgstr "Párbeszédablak gombok"
 
 #: capplets/ui-properties/ui-properties.c:169
-#, fuzzy
 msgid "Default value"
-msgstr "Alap MDI mód"
+msgstr "Alapérték"
 
 #: capplets/ui-properties/ui-properties.c:170
 msgid "Spread buttons out"
@@ -1148,17 +1124,14 @@ msgid "Place dialogs over application window when possible"
 msgstr "A párbeszédablakokat az alkalmazások fölé tedd, ha lehet"
 
 #: capplets/ui-properties/ui-properties.c:241
-#, fuzzy
 msgid "Dialog Layout"
-msgstr "Párbeszédablak gombok"
+msgstr "Párbeszédablak kiosztás"
 
 #: capplets/ui-properties/ui-properties.c:242
-#, fuzzy
 msgid "Dialog Behavior"
-msgstr "Párbeszédablak hintszövegek"
+msgstr "Párbeszédablak kinézet"
 
 #: capplets/ui-properties/ui-properties.c:248
-#, fuzzy
 msgid "Default MDI Mode"
 msgstr "Alap MDI mód"
 
@@ -1196,11 +1169,11 @@ msgstr "Lent"
 
 #: capplets/ui-properties/ui-properties.c:275
 msgid "GNOME MDI Options"
-msgstr ""
+msgstr "GNOME MDI beállítások"
 
 #: capplets/url-properties/url-properties.c:48
 msgid "Error initializing the `url-properties' capplet."
-msgstr ""
+msgstr "Hiba az 'url-properties' capplet indítása közben"
 
 #: capplets/url-properties/url-properties.c:71
 msgid "Protocol"
@@ -1245,14 +1218,14 @@ msgstr ""
 "(%d másodperc telt el az elõzõ mûvelet óta)"
 
 #: capplets/wm-properties/wm-properties-capplet.c:301
-#, fuzzy, c-format
+#, c-format
 msgid "%s (Current)"
-msgstr " (jelenlegi)"
+msgstr "%s (jelenlegi)"
 
 #: capplets/wm-properties/wm-properties-capplet.c:304
-#, fuzzy, c-format
+#, c-format
 msgid "Run Configuration Tool for %s"
-msgstr "Konfigurációs eszköz indítása: "
+msgstr "%s konfigurációs eszköz indítása: "
 
 #: capplets/wm-properties/wm-properties-capplet.c:315
 msgid " (Not found)"
@@ -1263,6 +1236,8 @@ msgid ""
 "wm-properties-capplet: Unable to initialize window manager.\n"
 "\tAnother window manager is already running and could not be killed\n"
 msgstr ""
+"wm-properties-capplet: Nem tuom elindítani az ablakkezelõt.\n"
+"\tMásik ablakkezelõ fut, és nem lehet kilõni\n"
 
 #: capplets/wm-properties/wm-properties-capplet.c:358
 #, c-format
@@ -1270,6 +1245,8 @@ msgid ""
 "wm-properties-capplet: Unable to initialize window manager.\n"
 "\t'%s' didn't start\n"
 msgstr ""
+"wm-properties-capplet: Nem tudom elindítani az ablakkezelõt.\n"
+"\t'%s' nem indul\n"
 
 #: capplets/wm-properties/wm-properties-capplet.c:407
 msgid "Previous window manager did not die\n"
@@ -1448,27 +1425,3 @@ msgstr ""
 #: control-center/main.c:187
 msgid "Control Center"
 msgstr "Vezérlõpult"
-
-#~ msgid "Radio Button 3"
-#~ msgstr "Rádiógomb 3"
-
-#~ msgid "Default Gtk setting"
-#~ msgstr "Alap GTK beállítások"
-
-#~ msgid "Session"
-#~ msgstr "Folyamat"
-
-#~ msgid "Session Chooser"
-#~ msgstr "Folyamatválasztó"
-
-#~ msgid "Start Session"
-#~ msgstr "Folyamat indítása"
-
-#~ msgid "Cancel Login"
-#~ msgstr "Mégsem"
-
-#~ msgid "First Regular Expresion: "
-#~ msgstr "Elsõ reguláris kifejezés: "
-
-#~ msgid "Second Regular Expresion: "
-#~ msgstr "Második reguláris kifejezés: "
