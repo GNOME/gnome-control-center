@@ -702,7 +702,7 @@ cb_show_details (GtkWidget *button,
 }
 #endif /* HAVE_XFT2 */
   
-t
+int
 main (int argc, char *argv[])
 {
   GladeXML *dialog;
