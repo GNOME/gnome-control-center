@@ -1,6 +1,7 @@
 SUBDIRS = 
 
 cappletname = default-applications
+cappletgroup =
 bin_PROGRAMS = default-applications-properties
 
 default_applications_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)

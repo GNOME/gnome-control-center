@@ -1,6 +1,7 @@
 SUBDIRS =
 
 cappletname = background
+cappletgroup = 
 bin_PROGRAMS = background-properties
 
 background_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
@@ -9,6 +10,8 @@ background_properties_SOURCES = \
 	prefs-widget.c		prefs-widget.h \
 	preferences.c		preferences.h \
 	applier.c
+
+pixmap_DATA = 
 
 ##
 ## You should not need to modify anything below this line

@@ -1,14 +1,7 @@
 SUBDIRS =
 
-defaultsdir= $(datadir)/control-center/defaults
-defaults_DATA = sound-properties.xml
-
-oafdir = $(datadir)/oaf
-oaf_DATA = Bonobo_Control_Capplet_sound_properties.oaf
-
-EXTRA_DIST = $(GNOMECC_CAPPLETS_EXTRA_DIST) $(oaf_DATA) $(defaults_DATA)
-
 cappletname = sound
+cappletgroup = 
 bin_PROGRAMS = sound-properties
 
 sound_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
@@ -16,6 +9,18 @@ sound_properties_SOURCES = \
 	sound-properties-capplet.c
 
 pixmap_DATA =
+
+
+##
+## this is not generic
+##
+EXTRA_DIST = $(GNOMECC_CAPPLETS_EXTRA_DIST) $(oaf_DATA) $(defaults_DATA)
+
+defaultsdir= $(datadir)/control-center/defaults
+defaults_DATA = sound-properties.xml
+
+oafdir = $(datadir)/oaf
+oaf_DATA = Bonobo_Control_Capplet_sound_properties.oaf
 
 ##
 ## You should not need to modify anything below this line

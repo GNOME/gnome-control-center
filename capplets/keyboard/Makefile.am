@@ -1,14 +1,7 @@
 SUBDIRS =
 
-defaultsdir= $(datadir)/control-center/defaults
-defaults_DATA = keyboard-properties.xml
-
-oafdir = $(datadir)/oaf
-oaf_DATA = Bonobo_Control_Capplet_keyboard_properties.oaf
-
-EXTRA_DIST = $(GNOMECC_CAPPLETS_EXTRA_DIST) $(oaf_DATA) $(defaults_DATA)
-
 cappletname = keyboard
+cappletgroup =
 bin_PROGRAMS = keyboard-properties
 
 keyboard_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS) $(XF86MISC_LIBS)
@@ -17,6 +10,17 @@ keyboard_properties_SOURCES = \
 	main.c \
 	bonobo-property-editor-range.c \
 	bonobo-property-editor-range.h 
+
+## this is not generic
+
+defaultsdir= $(datadir)/control-center/defaults
+defaults_DATA = keyboard-properties.xml
+
+oafdir = $(datadir)/oaf
+oaf_DATA = Bonobo_Control_Capplet_keyboard_properties.oaf
+
+EXTRA_DIST = $(GNOMECC_CAPPLETS_EXTRA_DIST) $(oaf_DATA) $(defaults_DATA)
+
 
 ##
 ## You should not need to modify anything below this line

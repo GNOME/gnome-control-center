@@ -1,6 +1,7 @@
 SUBDIRS = screensavers
 
 cappletname = screensaver
+cappletgroup =
 bin_PROGRAMS = screensaver-properties
 
 screensaver_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS) -lXt
