@@ -11,7 +11,7 @@
 #include <glade/glade.h>
 #include <X11/Xatom.h>
 
-#include "theme-common.h"
+#include "gnome-theme-info.h"
 #include "wm-common.h"
 #include "capplet-util.h"
 #include "eggcellrendererkeys.h"
@@ -591,13 +591,13 @@ theme_changed_func (gpointer  uri,
   GList *list;
 
   client = gconf_client_get_default ();
-  key_theme_list = theme_common_get_list ();
+  key_theme_list = gnome_theme_info_find_by_type (GNOME_THEME_GTK_2_KEYBINDING);
 
   omenu = WID ("key_theme_omenu");
   menu = gtk_menu_new ();
   for (list = key_theme_list; list; list = list->next)
     {
-      ThemeInfo *info = list->data;
+      GnomeThemeInfo *info = list->data;
 
       if (! info->has_keybinding)
 	continue;
@@ -699,11 +699,11 @@ setup_dialog (GladeXML *dialog)
 
   client = gconf_client_get_default ();
 
-  key_theme_list = theme_common_get_list ();
+  key_theme_list = gnome_theme_info_find_by_type (GNOME_THEME_GTK_2_KEYBINDING);
 
   for (list = key_theme_list; list; list = list->next)
     {
-      ThemeInfo *info = list->data;
+      GnomeThemeInfo *info = list->data;
       if (info->has_keybinding)
 	{
 	  found_keys = TRUE;
@@ -725,7 +725,7 @@ setup_dialog (GladeXML *dialog)
   else
     {
       theme_changed_func (NULL, dialog);
-      theme_common_register_theme_change ((GFunc) theme_changed_func, dialog);
+      gnome_theme_info_register_theme_change ((GFunc) theme_changed_func, dialog);
       gconf_client_add_dir (client, "/desktop/gnome/interface", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
       gconf_client_notify_add (client,
 			       KEY_THEME_KEY,

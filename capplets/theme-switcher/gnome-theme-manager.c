@@ -21,10 +21,6 @@
 #include "file-transfer-dialog.h"
 #include "gnome-theme-installer.h"
 
-/* FIXME: This shouldn't be hardcoded
- */
-#define METACITY_THEME_LOCATION "/usr/share/themes"
-
 #define GTK_THEME_KEY      "/desktop/gnome/interface/gtk_theme"
 #define WINDOW_THEME_KEY   "/desktop/gnome/applications/window_manager/theme"
 #define ICON_THEME_KEY     "/desktop/gnome/interface/icon_theme"

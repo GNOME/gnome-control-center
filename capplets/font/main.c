@@ -15,7 +15,6 @@
 #include <X11/Xft/Xft.h>
 #endif /* HAVE_XFT2 */
 
-#include "theme-common.h"
 #include "capplet-util.h"
 #include "activate-settings-daemon.h"
 #include "gconf-property-editor.h"
