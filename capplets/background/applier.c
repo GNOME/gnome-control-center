@@ -537,6 +537,8 @@ run_render_pipeline (Renderer *renderer,
 	    old_prefs->orientation != new_prefs->orientation ||
 	    !gdk_color_equal (old_prefs->color1, new_prefs->color1) ||
 	    !gdk_color_equal (old_prefs->color2, new_prefs->color2) ||
+	    old_prefs->adjust_brightness != new_prefs->adjust_brightness ||
+	    old_prefs->brightness_value != new_prefs->brightness_value ||
 	    ((wallpaper_pixbuf != NULL ||
 	      old_prefs->wallpaper_type != new_prefs->wallpaper_type) &&
 	     render_gradient_p (renderer, new_prefs)))
@@ -703,6 +705,7 @@ static void
 renderer_render_wallpaper (Renderer *renderer) 
 {
 	gint root_width, root_height;
+	gdouble scalex, scaley;
 
 	g_return_if_fail (renderer != NULL);
 	g_return_if_fail (!render_gradient_p (renderer, renderer->prefs) ||
@@ -722,12 +725,49 @@ renderer_render_wallpaper (Renderer *renderer)
 			      &renderer->wwidth, &renderer->wheight,
 			      &renderer->srcx, &renderer->srcy);
 
-		if (renderer->wwidth != renderer->pwidth ||
-		    renderer->wheight != renderer->pheight) 
+		if (renderer->prefs->adjust_brightness) {
+			guint alpha_value;
+			guint32 color;
+
+			alpha_value = ABS (renderer->prefs->brightness_value);
+			alpha_value = 256 - alpha_value * alpha_value / 256;
+			alpha_value = CLAMP (alpha_value, 0, 255);
+			color = (renderer->prefs->brightness_value < 0) ?
+				0 : (guint32) -1;
+
+			if (render_gradient_p (renderer, renderer->prefs)) {
+				scalex = (gdouble) renderer->wwidth / 
+					(gdouble) renderer->pwidth;
+				scaley = (gdouble) renderer->wheight / 
+					(gdouble) renderer->pheight;
+
+				gdk_pixbuf_composite_color
+					(renderer->wallpaper_pixbuf,
+					 renderer->pixbuf,
+					 renderer->wx, renderer->wy,
+					 renderer->wwidth, renderer->wheight,
+					 renderer->wx, renderer->wy,
+					 scalex, scaley,
+					 GDK_INTERP_BILINEAR,
+					 alpha_value, 0, 0, 65536,
+					 color, color);
+			} else {
+				if (renderer->pixbuf != NULL)
+					gdk_pixbuf_unref (renderer->pixbuf);
+
+				renderer->pixbuf =
+					gdk_pixbuf_composite_color_simple 
+					(renderer->wallpaper_pixbuf,
+					 renderer->wwidth, renderer->wheight,
+					 GDK_INTERP_BILINEAR,
+					 alpha_value, 65536,
+					 color, color);
+			}
+		}
+		else if (renderer->wwidth != renderer->pwidth ||
+			 renderer->wheight != renderer->pheight) 
 		{
 			if (render_gradient_p (renderer, renderer->prefs)) {
-				gdouble scalex, scaley;
-
 				scalex = (gdouble) renderer->wwidth / 
 					(gdouble) renderer->pwidth;
 				scaley = (gdouble) renderer->wheight / 
@@ -737,7 +777,8 @@ renderer_render_wallpaper (Renderer *renderer)
 					(renderer->wallpaper_pixbuf,
 					 renderer->pixbuf,
 					 renderer->wx, renderer->wy,
-					 renderer->wwidth, renderer->wheight,
+					 renderer->wwidth, 
+					 renderer->wheight,
 					 renderer->wx, renderer->wy,
 					 scalex, scaley,
 					 GDK_INTERP_BILINEAR);
@@ -748,7 +789,8 @@ renderer_render_wallpaper (Renderer *renderer)
 				renderer->pixbuf =
 					gdk_pixbuf_scale_simple
 					(renderer->wallpaper_pixbuf,
-					 renderer->wwidth, renderer->wheight,
+					 renderer->wwidth,
+					 renderer->wheight,
 					 GDK_INTERP_BILINEAR);
 			}
 		} else {

@@ -42,11 +42,17 @@ static Preferences *prefs;
 static Preferences *old_prefs;
 static PrefsWidget *prefs_widget;
 
+static guint ok_handler_id;
+static guint cancel_handler_id;
+
 static void
 ok_cb (GtkWidget *widget) 
 {
 	preferences_save (prefs);
 	preferences_apply_now (prefs);
+	gtk_signal_disconnect (GTK_OBJECT (prefs_widget), ok_handler_id);
+	gtk_signal_disconnect (GTK_OBJECT (prefs_widget), cancel_handler_id);
+	gtk_object_destroy (GTK_OBJECT (prefs_widget));
 }
 
 static void
@@ -54,6 +60,9 @@ cancel_cb (GtkWidget *widget)
 {
 	preferences_save (old_prefs);
 	preferences_apply_now (old_prefs);
+	gtk_signal_disconnect (GTK_OBJECT (prefs_widget), ok_handler_id);
+	gtk_signal_disconnect (GTK_OBJECT (prefs_widget), cancel_handler_id);
+	gtk_object_destroy (GTK_OBJECT (prefs_widget));
 }
 
 static void 
@@ -63,10 +72,12 @@ setup_capplet_widget (void)
 
 	prefs_widget = PREFS_WIDGET (prefs_widget_new (prefs));
 
-	gtk_signal_connect (GTK_OBJECT (prefs_widget), "ok", 
-			    GTK_SIGNAL_FUNC (ok_cb), NULL);
-	gtk_signal_connect (GTK_OBJECT (prefs_widget), "cancel", 
-			    GTK_SIGNAL_FUNC (cancel_cb), NULL);		
+	ok_handler_id =
+		gtk_signal_connect (GTK_OBJECT (prefs_widget), "ok", 
+				    GTK_SIGNAL_FUNC (ok_cb), NULL);
+	cancel_handler_id =
+		gtk_signal_connect (GTK_OBJECT (prefs_widget), "cancel", 
+				    GTK_SIGNAL_FUNC (cancel_cb), NULL);		
 
 	gtk_widget_show_all (GTK_WIDGET (prefs_widget));
 

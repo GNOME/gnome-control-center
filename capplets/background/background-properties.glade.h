@@ -21,3 +21,6 @@ gchar *s = N_("Scaled (keep aspect)");
 gchar *s = N_("Scaled");
 gchar *s = N_("Disable background selection");
 gchar *s = N_("Apply changes automatically");
+gchar *s = N_("Adjust background's brightness");
+gchar *s = N_("Dimmer");
+gchar *s = N_("Brighter");

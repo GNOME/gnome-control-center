@@ -48,6 +48,7 @@ static void prefs_widget_set_arg            (GtkObject *object,
 static void prefs_widget_get_arg            (GtkObject *object, 
 					     GtkArg *arg, 
 					     guint arg_id);
+static void prefs_widget_destroy            (GtkObject *object);
 
 static void read_preferences                (PrefsWidget *prefs_widget,
 					     Preferences *prefs);
@@ -87,12 +88,18 @@ static void disable_toggled_cb              (GtkToggleButton *tb,
 					     PrefsWidget *prefs_widget);
 static void auto_apply_toggled_cb           (GtkToggleButton *tb, 
 					     PrefsWidget *prefs_widget);
+static void adjust_brightness_toggled_cb    (GtkToggleButton *tb,
+					     PrefsWidget *prefs_widget);
+static void brightness_adjust_changed_cb    (GtkAdjustment *adjustment,
+					     PrefsWidget *prefs_widget);
 
 static void set_gradient_controls_sensitive   (PrefsWidget *prefs_widget,
 					       gboolean s);
 static void set_wallpaper_controls_sensitive  (PrefsWidget *prefs_widget,
 					       gboolean s);
 static void set_background_controls_sensitive (PrefsWidget *prefs_widget,
+					       gboolean s);
+static void set_brightness_controls_sensitive (PrefsWidget *prefs_widget,
 					       gboolean s);
 
 guint
@@ -123,6 +130,7 @@ static void
 prefs_widget_init (PrefsWidget *prefs_widget)
 {
 	GtkWidget *widget;
+	GtkAdjustment *adjustment;
 
 	prefs_widget->dialog_data = 
 		glade_xml_new (GLADE_DATADIR "/background-properties.glade",
@@ -189,6 +197,20 @@ prefs_widget_init (PrefsWidget *prefs_widget)
 				       "auto_apply_toggled_cb",
 				       auto_apply_toggled_cb,
 				       prefs_widget);
+	glade_xml_signal_connect_data (prefs_widget->dialog_data,
+				       "adjust_brightness_toggled_cb",
+				       adjust_brightness_toggled_cb,
+				       prefs_widget);
+
+	adjustment = gtk_range_get_adjustment
+		(GTK_RANGE (WID ("brightness_adjust")));
+	gtk_signal_connect (GTK_OBJECT (adjustment), "value-changed",
+			    GTK_SIGNAL_FUNC (brightness_adjust_changed_cb),
+			    prefs_widget);
+
+	gnome_entry_load_history
+		(GNOME_ENTRY (gnome_file_entry_gnome_entry 
+			      (GNOME_FILE_ENTRY (WID ("wallpaper_entry")))));
 }
 
 static void
@@ -202,6 +224,7 @@ prefs_widget_class_init (PrefsWidgetClass *class)
 				 ARG_PREFERENCES);
 
 	object_class = GTK_OBJECT_CLASS (class);
+	object_class->destroy = prefs_widget_destroy;
 	object_class->set_arg = prefs_widget_set_arg;
 	object_class->get_arg = prefs_widget_get_arg;
 
@@ -260,6 +283,23 @@ prefs_widget_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	}
 }
 
+static void
+prefs_widget_destroy (GtkObject *object) 
+{
+	PrefsWidget *prefs_widget;
+
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (IS_PREFS_WIDGET (object));
+
+	prefs_widget = PREFS_WIDGET (object);
+
+	gnome_entry_save_history
+		(GNOME_ENTRY (gnome_file_entry_gnome_entry 
+			      (GNOME_FILE_ENTRY (WID ("wallpaper_entry")))));
+
+	GTK_OBJECT_CLASS (parent_class)->destroy (object);
+}
+
 GtkWidget *
 prefs_widget_new (Preferences *prefs) 
 {
@@ -285,6 +325,7 @@ static void
 read_preferences (PrefsWidget *prefs_widget, Preferences *prefs) 
 {
 	GtkWidget *widget, *entry;
+	GtkAdjustment *adjustment;
 
 	g_return_if_fail (prefs_widget != NULL);
 	g_return_if_fail (IS_PREFS_WIDGET (prefs_widget));
@@ -388,6 +429,31 @@ read_preferences (PrefsWidget *prefs_widget, Preferences *prefs)
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON 
 					      (WID ("auto_apply")),
 					      FALSE);
+
+	if (prefs->adjust_brightness)
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON 
+					      (WID ("auto_apply")),
+					      TRUE);
+	else
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON 
+					      (WID ("auto_apply")),
+					      FALSE);
+
+	if (prefs->adjust_brightness) {
+		gtk_toggle_button_set_active
+			(GTK_TOGGLE_BUTTON (WID ("adjust_brightness_toggle")),
+			 TRUE);
+		set_brightness_controls_sensitive (prefs_widget, TRUE);
+	} else {
+		gtk_toggle_button_set_active
+			(GTK_TOGGLE_BUTTON (WID ("adjust_brightness_toggle")),
+			 FALSE);
+		set_brightness_controls_sensitive (prefs_widget, FALSE);
+	}
+
+	adjustment = gtk_range_get_adjustment
+		(GTK_RANGE (WID ("brightness_adjust")));
+	gtk_adjustment_set_value (adjustment, prefs->brightness_value);
 
 	preferences_apply_preview (prefs);
 }
@@ -507,8 +573,10 @@ wallpaper_entry_changed_cb (GtkEntry *e, PrefsWidget *prefs_widget)
 {
 	g_return_if_fail (prefs_widget != NULL);
 	g_return_if_fail (IS_PREFS_WIDGET (prefs_widget));
-	g_return_if_fail (prefs_widget->prefs != NULL);
-	g_return_if_fail (IS_PREFERENCES (prefs_widget->prefs));
+	g_return_if_fail (prefs_widget->prefs == NULL ||
+			  IS_PREFERENCES (prefs_widget->prefs));
+
+	if (prefs_widget->prefs == NULL) return;
 
 	if (prefs_widget->prefs->wallpaper_filename)
 		g_free (prefs_widget->prefs->wallpaper_filename);
@@ -641,6 +709,41 @@ auto_apply_toggled_cb (GtkToggleButton *tb, PrefsWidget *prefs_widget)
 }
 
 static void
+adjust_brightness_toggled_cb (GtkToggleButton *tb, PrefsWidget *prefs_widget)
+{
+	g_return_if_fail (prefs_widget != NULL);
+	g_return_if_fail (IS_PREFS_WIDGET (prefs_widget));
+	g_return_if_fail (prefs_widget->prefs != NULL);
+	g_return_if_fail (IS_PREFERENCES (prefs_widget->prefs));
+
+	if (gtk_toggle_button_get_active (tb)) {
+		prefs_widget->prefs->adjust_brightness = TRUE;
+		set_brightness_controls_sensitive (prefs_widget, TRUE);
+	} else {
+		prefs_widget->prefs->adjust_brightness = FALSE;
+		set_brightness_controls_sensitive (prefs_widget, FALSE);
+	}
+
+	preferences_changed (prefs_widget->prefs);
+	capplet_widget_state_changed (CAPPLET_WIDGET (prefs_widget), TRUE);
+}
+
+static void
+brightness_adjust_changed_cb (GtkAdjustment *adjustment,
+			      PrefsWidget *prefs_widget) 
+{
+	g_return_if_fail (prefs_widget != NULL);
+	g_return_if_fail (IS_PREFS_WIDGET (prefs_widget));
+	g_return_if_fail (prefs_widget->prefs != NULL);
+	g_return_if_fail (IS_PREFERENCES (prefs_widget->prefs));
+
+	prefs_widget->prefs->brightness_value = adjustment->value;
+
+	preferences_changed (prefs_widget->prefs);
+	capplet_widget_state_changed (CAPPLET_WIDGET (prefs_widget), TRUE);
+}
+
+static void
 set_gradient_controls_sensitive (PrefsWidget *prefs_widget, gboolean s) 
 {
 	gtk_widget_set_sensitive (WID ("vertical_select"), s);
@@ -663,5 +766,13 @@ set_background_controls_sensitive (PrefsWidget *prefs_widget, gboolean s)
 {
 	gtk_widget_set_sensitive (WID ("color_frame"), s);
 	gtk_widget_set_sensitive (WID ("wallpaper_frame"), s);
+}
+
+static void
+set_brightness_controls_sensitive (PrefsWidget *prefs_widget, gboolean s)
+{
+	gtk_widget_set_sensitive (WID ("brightness_low_label"), s);
+	gtk_widget_set_sensitive (WID ("brightness_adjust"), s);
+	gtk_widget_set_sensitive (WID ("brightness_high_label"), s);
 }
 

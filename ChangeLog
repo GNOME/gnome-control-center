@@ -1,5 +1,39 @@
 2000-12-17  Bradford Hovinen  <hovinen@helixcode.com>
 
+	* capplets/new-background-properties/applier.c
+	(renderer_render_wallpaper): Add support for adjusting wallpaper
+	brightness
+
+	* capplets/new-background-properties/main.c (ok_cb):
+	(cancel_cb): Disconnect ok, cancel handler signals before
+	destroying preferences widget
+	(setup_capplet_widget): Set signal handler ids for ok, cancel
+	signals
+
+	* capplets/new-background-properties/prefs-widget.c
+	(prefs_widget_init): Connect signals for adjusting brightness
+	(adjust_brightness_toggled_cb): 
+	(brightness_adjust_changed_cb):
+	(set_brightness_controls_sensitive): Implement
+
+	* capplets/new-background-properties/preferences.h (struct
+	_Preferences): Add adjust_brightness, brightness_value
+
+	* capplets/new-background-properties/preferences.c (preferences_load): 
+	(preferences_save): 
+	(preferences_read_xml): 
+	(preferences_write_xml): Support adjust_brightness, brightness_value
+
+	* capplets/new-background-properties/prefs-widget.c
+	(wallpaper_entry_changed_cb): Don't fail if prefs is NULL, just
+	return
+
+	* capplets/new-background-properties/main.c (ok_cb): 
+	(cancel_cb): Properly destroy the preferences widget
+
+	* capplets/new-background-properties/prefs-widget.c
+	(prefs_widget_destroy): Implement
+
 	* capplets/new-background-properties/preferences.c
 	(preferences_changed): Increased delay before autoapply
 	(preferences_load):

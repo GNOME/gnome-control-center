@@ -140,6 +140,10 @@ preferences_clone (Preferences *prefs)
 		new_prefs->wallpaper_sel_path = 
 			g_strdup (prefs->wallpaper_sel_path);;
 
+	new_prefs->auto_apply        = prefs->auto_apply;
+	new_prefs->adjust_brightness = prefs->adjust_brightness;
+	new_prefs->brightness_value  = prefs->brightness_value;
+
 	return object;
 }
 
@@ -231,6 +235,17 @@ preferences_load (Preferences *prefs)
 	} else {
 		prefs->wallpaper_enabled = TRUE;
 	}
+
+	string = gnome_config_get_string
+		("/Background/Default/adjustBrightness=true");
+	if (!g_strcasecmp (string, "true"))
+		prefs->adjust_brightness = TRUE;
+	else if (g_strcasecmp (string, "false"))
+		prefs->adjust_brightness = FALSE;
+	g_free (string);
+
+	prefs->brightness_value = 
+		gnome_config_get_int ("/Background/Default/brightnessValue=0");
 }
 
 void 
@@ -271,6 +286,11 @@ preferences_save (Preferences *prefs)
 	gnome_config_set_string ("/Background/Default/autoApply", 
 				 prefs->auto_apply ? "True" : "False");
 
+	gnome_config_set_string ("/Background/Default/adjustBrightness", 
+				 prefs->adjust_brightness ? "True" : "False");
+	gnome_config_set_int ("/Background/Default/brightnessValue", 
+			      prefs->brightness_value);
+
 	gnome_config_sync ();
 }
 
@@ -284,7 +304,7 @@ preferences_changed (Preferences *prefs)
 
 	if (prefs->auto_apply)
 		prefs->timeout_id = 
-			gtk_timeout_add (5000, (GtkFunction) apply_timeout_cb,
+			gtk_timeout_add (2000, (GtkFunction) apply_timeout_cb,
 					 prefs);
 
 	applier_apply_prefs (applier, prefs, FALSE, TRUE);
@@ -384,6 +404,10 @@ preferences_read_xml (xmlDocPtr xml_doc)
 				g_strdup (xmlNodeGetContent (node));
 		else if (!strcmp (node->name, "auto-apply"))
 			prefs->auto_apply = TRUE;
+		else if (!strcmp (node->name, "adjust-brightness"))
+			prefs->auto_apply = TRUE;
+		else if (!strcmp (node->name, "brightness-value"))
+			prefs->brightness_value = xml_read_int (node, NULL);
 	}
 
 	return prefs;
@@ -435,6 +459,11 @@ preferences_write_xml (Preferences *prefs)
 
 	if (prefs->auto_apply)
 		xmlNewChild (node, NULL, "auto-apply", NULL);
+
+	if (prefs->adjust_brightness)
+		xmlNewChild (node, NULL, "adjust-brightness", NULL);
+	xmlAddChild (node, xml_write_int ("brightness-value", NULL,
+					  prefs->brightness_value));
 
 	xmlDocSetRootElement (doc, node);
 
