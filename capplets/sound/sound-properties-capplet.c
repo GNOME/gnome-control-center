@@ -39,6 +39,8 @@
 #include <stdlib.h>
 #include <sys/types.h>
 
+#include "activate-settings-daemon.h"
+
 /* Capplet-specific prototypes */
 
 static SoundProperties *props = NULL;
@@ -147,6 +149,8 @@ main (int argc, char **argv)
 			    GNOME_PARAM_POPT_TABLE, cap_options,
 			    NULL);
 
+	activate_settings_daemon ();
+	
 	client = gconf_client_get_default ();
 	gconf_client_add_dir (client, "/desktop/gnome/sound", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 

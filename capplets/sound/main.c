@@ -25,6 +25,8 @@
 #  include <config.h>
 #endif
 
+#include "activate-settings-daemon.h"
+
 #include <gtk/gtk.h>
 #include <gnome.h>
 #include <libgnomeui/gnome-window-icon.h>
@@ -210,6 +212,8 @@ main (int argc, char **argv)
 	res = gnome_capplet_init ("sound-properties",
 				  VERSION, argc, argv, NULL,
 				  0, NULL);
+
+	activate_settings_daemon ();
 
 	if (res < 0) {
 		g_error ("Could not initialize the capplet.");
