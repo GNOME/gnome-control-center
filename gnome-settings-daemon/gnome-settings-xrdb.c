@@ -251,6 +251,7 @@ static void
 append_xresources (GString *string, GError **error)
 {
 	const char* home_path;
+	char *xresources;
 
 	g_return_if_fail (string != NULL);
 
@@ -259,7 +260,8 @@ append_xresources (GString *string, GError **error)
 		g_warning (_("Cannot determine user's home directory"));
 		return;
 	}
-	char *xresources = g_build_filename (home_path, USER_X_RESOURCES, NULL);
+
+	xresources = g_build_filename (home_path, USER_X_RESOURCES, NULL);
 	if (g_file_test (xresources, G_FILE_TEST_EXISTS)) {
 		append_file (xresources, string, error);
 		if (*error) {
