@@ -23,6 +23,7 @@
 # kostas: 678 messagew,12Nov2003, updates and fixes
 # kostas: 786 messagew,22Jan2004, updates and fixes
 # kostas: 15 feb 2004, update
+# Nikos: 30May2004, some fixes.
 # Spiros Papadimitriou <spapadim+@cs.cmu.edu>, 2000.
 # Simos Xenitellis <simos@hellug.gr>, 2000, 2001, 2002.
 # Nikos Charonitakis <charosn@her.forthnet.gr>, 2002, 2003.
@@ -33,8 +34,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: el\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-22 10:40+0300\n"
-"PO-Revision-Date: 2004-05-22 10:48+0200\n"
+"POT-Creation-Date: 2004-05-30 12:58+0300\n"
+"PO-Revision-Date: 2004-05-30 13:09+0200\n"
 "Last-Translator: Nikos Charonitakis <frolix68@yahoo.gr>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
 "MIME-Version: 1.0\n"
@@ -220,7 +221,7 @@ msgstr "Ήχος μπίπ κατά την από_ρριψη πλήκτρου"
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:12
 msgid "Beep when _features turned on or off from keyboard"
 msgstr ""
-"Ήχος μπίπ κατά την ενεργοποίηση ή απενεργοποίηση _λειτιυργιών από το "
+"Ήχος μπίπ κατά την ενεργοποίηση ή απενεργοποίηση _λειτουργιών από το "
 "πληκτρολόγιο"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:13
@@ -724,7 +725,7 @@ msgstr "Περιηγητής κειμένου Links"
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:36
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:37
 msgid "Evolution Mail Reader"
-msgstr "Εφαρμογή αλληλογραφίας Evolution"
+msgstr "Εφαρμογή Αλληλογραφίας Evolution"
 
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:38
 msgid "Balsa"
@@ -772,11 +773,11 @@ msgstr "Προσθήκη..."
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:3
 msgid "C_ustom Editor"
-msgstr "Π_ροσαρμοσμένος Κειμενογράφος"
+msgstr "Κειμενογράφος Επιλεγμένος από το _Χρήστη"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:4
 msgid "C_ustom Mail Reader:"
-msgstr "Εφαρμογή Αλληλογραφίας Επιλεγμένη απο το _Χρήστη:"
+msgstr "Εφαρμογή Αλληλογραφίας Επιλεγμένη από το _Χρήστη:"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:5
 msgid "C_ustom Terminal:"
@@ -1199,7 +1200,7 @@ msgid "Add File Type"
 msgstr "Προσθήκη τύπου αρχείου"
 
 #: capplets/file-types/mime-edit-dialog.c:432
-#: capplets/file-types/mime-type-info.c:763
+#: capplets/file-types/mime-type-info.c:766
 msgid "Misc"
 msgstr "Διάφορα"
 
@@ -1229,20 +1230,20 @@ msgstr "Κατηγορία"
 msgid "Choose a file category"
 msgstr "Επιλογή κατηγορίας αρχείων"
 
-#: capplets/file-types/mime-type-info.c:691
+#: capplets/file-types/mime-type-info.c:694
 #, c-format
 msgid "View as %s"
 msgstr "Προβολή ως %s"
 
-#: capplets/file-types/mime-type-info.c:757
+#: capplets/file-types/mime-type-info.c:760
 msgid "Images"
 msgstr "Εικόνες"
 
-#: capplets/file-types/mime-type-info.c:759
+#: capplets/file-types/mime-type-info.c:762
 msgid "Video"
 msgstr "Βίντεο"
 
-#: capplets/file-types/mime-type-info.c:761
+#: capplets/file-types/mime-type-info.c:764
 msgid "Audio"
 msgstr "Ήχος"
 
@@ -1288,7 +1289,7 @@ msgid ""
 "Invalid protocol name. Please enter a protocol name without any spaces or "
 "punctuation."
 msgstr ""
-"Μή έγκυρο όνομα πρωτοκόλου. Εισάγετε ένα όνομα πρωτοκόλλου χωρίς κενά ή "
+"Μη έγκυρο όνομα πρωτοκόλου. Εισάγετε ένα όνομα πρωτοκόλλου χωρίς κενά ή "
 "σημεία στίξης."
 
 #: capplets/file-types/service-edit-dialog.c:523
@@ -1383,7 +1384,7 @@ msgstr "Κα_νένα"
 
 #: capplets/font/font-properties.glade.h:14
 msgid "R_esolution:"
-msgstr "Ανά_λυση :"
+msgstr "Ανά_λυση:"
 
 #: capplets/font/font-properties.glade.h:15
 msgid "Set the font for applications"
@@ -1419,7 +1420,7 @@ msgstr "_BGR"
 
 #: capplets/font/font-properties.glade.h:23
 msgid "_Desktop font:"
-msgstr "Γραμματοσειρά  ε_πιφάνειας εργασίας:"
+msgstr "Γραμματοσειρά ε_πιφάνειας εργασίας:"
 
 #: capplets/font/font-properties.glade.h:24
 msgid "_Full"
@@ -1448,11 +1449,11 @@ msgstr "_Ελαφρύ"
 
 #: capplets/font/font-properties.glade.h:30
 msgid "_Terminal font:"
-msgstr "Γραμμματοσειρά  _τερματικού:"
+msgstr "Γραμμματοσειρά _τερματικού:"
 
 #: capplets/font/font-properties.glade.h:31
 msgid "_Use Font"
-msgstr "_Χρήση γραμματοσειράς"
+msgstr "_Χρήση Γραμματοσειράς"
 
 #: capplets/font/font-properties.glade.h:32
 msgid "_VRGB"
@@ -1502,16 +1503,15 @@ msgid_plural ""
 msgstr[0] ""
 "Η γραμματοσειρά που επιλέχθηκε είναι %d σημείo μεγάλη, και αυτό κάνει "
 "δύσκολη την αποτελεσματική χρήση του υπολογιστή. Είναι καλύτερο να επιλέξετε "
-"ένα μικρότερο μέγεθος γραμματοσειρά. "
+"ένα μικρότερο μέγεθος γραμματοσειράς. "
 msgstr[1] ""
 "Η γραμματοσειρά που επιλέχθηκε είναι %d σημεία μεγάλη, και αυτό κάνει "
 "δύσκολη την αποτελεσματική χρήση του υπολογιστή. Είναι καλύτερο να επιλέξετε "
-"ένα μικρότερο μέγεθος γραμματοσειρά. "
+"ένα μικρότερο μέγεθος γραμματοσειράς. "
 
 #: capplets/keybindings/eggcellrendererkeys.c:21
-#, fuzzy
 msgid "New accelerator..."
-msgstr "Πληκτρολογήστε νέα συντόμευση"
+msgstr "Νέα συντόμευση..."
 
 #: capplets/keybindings/eggcellrendererkeys.c:163
 #: capplets/keybindings/eggcellrendererkeys.c:164
@@ -1572,13 +1572,13 @@ msgstr ""
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr ""
-"Σφάλμα κατά τη ρύθμιση νέας συντόμευσης στη βάση δεδομένων ρυθμίσεων : %s\n"
+"Σφάλμα κατά τη ρύθμιση νέας συντόμευσης στη βάση δεδομένων ρυθμίσεων: %s\n"
 
 #: capplets/keybindings/gnome-keybinding-properties.c:741
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr ""
-"Σφάλμα κατά τη κατάργηση ρύθμισης συντόμευσης στη βάση δεδομένων ρυθμίσεων : "
+"Σφάλμα κατά τη κατάργηση ρύθμισης συντόμευσης στη βάση δεδομένων ρυθμίσεων: "
 "%s\n"
 
 #: capplets/keybindings/gnome-keybinding-properties.c:830
@@ -2474,12 +2474,12 @@ msgid "Others"
 msgstr "Φίλτρα"
 
 #: control-center/control-center-categories.c:424
-#: control-center/control-center.c:1055
+#: control-center/control-center.c:1090
 #, fuzzy
 msgid "Gnome Control Center"
 msgstr "Κέντρο Ελέγχου Gnome : %s"
 
-#: control-center/control-center.c:1153
+#: control-center/control-center.c:78
 #, fuzzy
 msgid "Use nautilus if it is running."
 msgstr "Χρήση κέλυφους ακόμα και αν τρέχει ο nautilus."
@@ -2594,9 +2594,9 @@ msgid ""
 "which is linked to the key (%s)"
 msgstr ""
 "Σφάλμα κατα την προσπάθεια εκτέλεσης (%s)\n"
-"που συνδέεται με το κλειδί  (%s)"
+"που συνδέεται με το κλειδί (%s)"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:70
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:73
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2622,7 +2622,7 @@ msgstr ""
 "- Το αποτέλεσμα του <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/"
 "xkb</b>"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:80
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:83
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2634,22 +2634,22 @@ msgstr ""
 "Προσπαθείστε να χρησιμοποιήσετε μια πιό απλή ρύθμιση ή να εγκταστήσετε μια "
 "νεότερη έκδοση του  XFree."
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:163
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:170
 msgid ""
 "The X system keyboard settings differ from your current GNOME keyboard "
 "settings.  Which set would you like to use?"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:166
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:173
 #, fuzzy
 msgid "Use X settings"
 msgstr "Ρυθμίσεις %d Οθόνης\n"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:168
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:175
 msgid "Use GNOME settings"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:220
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:227
 #, c-format
 msgid ""
 "You have a keyboard remapping file (%s) in your home directory whose "
@@ -2694,7 +2694,7 @@ msgstr "Δεν είναι δυνατός ο εντοπισμός του αρχι
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr ""
-"Το GConf key %s  έχει ορισθεί  to type %s but its expected type was %s\n"
+"Το GConf key %s έχει ορισθεί to type %s but its expected type was %s\n"
 
 #: gnome-settings-daemon/reaper.c:103
 msgid "Error creating signal pipe."
@@ -3252,7 +3252,7 @@ msgid ""
 "Make sure that this daemon is properly installed."
 msgstr ""
 "Αδυναμία φόρτωσης αρχείου Glade.\n"
-"Βεβαιωθείτε ότι ο δαίμονας έχει εγκατασραθεί σωστά."
+"Βεβαιωθείτε ότι ο δαίμονας έχει εγκατασταθεί σωστά."
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:1
 msgid "Brightness down"
