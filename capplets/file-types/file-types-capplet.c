@@ -262,8 +262,6 @@ mime_list_selected_row_callback (GtkWidget *widget, gint row, gint column, GdkEv
 
 	/* Update info on selection */
         nautilus_mime_type_capplet_update_info (mime_type);
-        
-	/* FIXME bugzilla.eazel.com 2764: Get user mime info and determine if we can enable the delete button */
 }
 
 static void
