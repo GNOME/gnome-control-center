@@ -137,20 +137,20 @@ header_populate (CappletDirView *view)
 "<html>\n"
 "<head></head>\n"
 "<body marginwidth=\"0\" marginheight=\"0\" background=\""ART_DIR"/bgtop.png\">\n"
-"<img src=\""ART_DIR"/left_top.png\" alt=\"\" width=\"47\" height=\"139\" />\n"
-"<img src=\""ART_DIR"/empty.png\" alt=\"\" width=\"5\" height=\"110\" />\n"
-"<img src=\""ART_DIR"/foot.png\" alt=\"Gnome\" />\n"
-"<img src=\""ART_DIR"/empty.png\" alt=\"\" width=\"5\" height=\"110\" />\n"
-"<FONT face=\"Trebuchet MS CE,Trebuchet MS, Verdana CE, Verdana, Sans-Serif CE, Sans-Serif\" size=\"6\" color=\"white\">Your Gnome</font>\n"
+"<img src=\""ART_DIR"/left_top.png\" alt=\"\" width=\"47\" height=\"110\">\n"
+"<img src=\""ART_DIR"/empty.png\" alt=\"\" width=\"5\" height=\"110\">\n"
+"<img src=\""ART_DIR"/foot.png\" alt=\"Gnome\">\n"
+"<img src=\""ART_DIR"/empty.png\" alt=\"\" width=\"5\" height=\"110\">\n"
+"<font face=\"Trebuchet MS CE,Trebuchet MS, Verdana CE, Verdana, Sans-Serif CE, Sans-Serif\" size=\"6\" color=\"white\">Your Gnome</font>\n"
 #if 0
-"<img src=\""ART_DIR"/yourgnome.png\" alt=\"\" />\n"
+"<img src=\""ART_DIR"/yourgnome.png\">\n"
 #endif
 "</body>\n"
 "</html>";
 
 	gtk_html_write (data->top, stream, s, strlen (s));
 	gtk_html_end (data->top, stream, GTK_HTML_STREAM_OK);
-	gtk_widget_set_usize (GTK_WIDGET (data->top), 0, 139);
+	gtk_widget_set_usize (GTK_WIDGET (data->top), 0, 110);
 }
 
 static void
@@ -169,16 +169,15 @@ html_populate (CappletDirView *view)
 	stream = gtk_html_begin (data->main);
 
 	s =
-"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\n"
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">\n"
 "<html>\n"
 "  <head>\n"
 "    <title>GNOME Control Center</title>\n"
 "  </head>\n"
 "  <body marginheight=\"0\" marginwidth=\"0\" background=\""ART_DIR"/bg.png\">\n"
-"    <img src=\""ART_DIR"/left.png\" align=\"left\" alt=\"\">\n"
-"    <p align=\"center\">\n"
+"    <img src=\""ART_DIR"/left.png\" align=\"left\">\n"
 #if 0
-"    <img src=\""ART_DIR"/empty.png\" alt=\"\" width=\"600\" height=\"30\" />\n"
+"    <img src=\""ART_DIR"/empty.png\" width=\"600\" height=\"30\">\n"
 "    <table bgcolor=\"#292928\" width=\"100%%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" columns=\"2\">\n"
 "      <tr>\n"
 "        <td>\n"
@@ -232,7 +231,6 @@ html_populate (CappletDirView *view)
 
 	s =
 "    </table>\n"
-"    </p>\n"
 "  </body>\n"
 "</html>\n";
 	gtk_html_write (data->main, stream, s, strlen (s));
