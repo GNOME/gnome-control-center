@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-07-15 12:48+0200\n"
-"PO-Revision-Date: 2003-07-16 00:05+0300\n"
+"POT-Creation-Date: 2003-07-19 05:17+0200\n"
+"PO-Revision-Date: 2003-07-19 11:21+0300\n"
 "Last-Translator: Gil 'Dolfin' Osher <dolfin@rpg.org.il>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -81,11 +81,11 @@ msgid "Unable to import AccessX settings from file '%s'"
 msgstr "לא ניתן לייבא את הגדרות גישה מהקובץ '%s'"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:465
-msgid "Select CDE AccessX file"
-msgstr "בחר קובץ גישה CDE"
+msgid "Import Feature Settings File"
+msgstr "ייבא קובץ הגדרות מאפיינים"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "מקלדת"
@@ -103,41 +103,46 @@ msgstr ""
 "זה."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
+#: capplets/font/font-properties.glade.h:1
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:1
+#: capplets/mouse/gnome-mouse-properties.glade.h:1
+#: capplets/ui-properties/gnome-ui-properties.glade.h:1
+msgid "    "
+msgstr "    "
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:1
 #: capplets/file-types/file-types-properties.glade.h:1
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:2
 #: capplets/network/gnome-network-preferences.glade.h:2
 #: capplets/theme-switcher/theme-install.glade.h:1
 #: capplets/theme-switcher/theme-properties.glade.h:1
 msgid "*"
 msgstr "*"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
 msgid "<b>Enable Bo_unce Keys</b>"
 msgstr "<b>אפשר מקשים _קופצים</b>"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
 msgid "<b>Enable Slo_w Keys</b>"
 msgstr "<b>אפשר מקשים אי_טיים</b>"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
 msgid "<b>Enable _Mouse Keys</b>"
 msgstr "<b>אפשר מקשי _עכבר</b>"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
 msgid "<b>Enable _Repeat Keys</b>"
 msgstr "<b>אפשר מקשים _חוזרים</b>"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
 msgid "<b>Enable _Sticky Keys</b>"
 msgstr "<b>אפשר מקשים _דביקים</b>"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
 msgid "<b>Features</b>"
 msgstr "<b>אפשרויות</b>"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
-msgid "<b>Mouse</b>"
-msgstr "<b>עכבר</b>"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
 msgid "<b>Toggle Keys</b>"
@@ -165,7 +170,7 @@ msgstr "צפצוף כשנורה נדלקת ושני צפצופים כשנורה 
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
 msgid "Beep when key is:"
-msgstr "צפצף כאשר המקש הוא:"
+msgstr "צפצף כאשר המקש:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:16
 msgid "Del_ay:"
@@ -206,9 +211,8 @@ msgid "Ma_ximum pointer speed:"
 msgstr "מהירות סמן מ_קסימלית:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
-#: capplets/mouse/mouse.desktop.in.h:1
-msgid "Mouse"
-msgstr "עכבר"
+msgid "Mouse Keys"
+msgstr "מקשי עכבר"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
 msgid "Mouse _Preferences..."
@@ -227,7 +231,7 @@ msgid ""
 msgstr "בצע מספר לחיצות מקש בו-זמנית על-ידי לחיצה על מקשים ברצף."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
 msgid "S_peed:"
 msgstr "_מהירות:"
 
@@ -256,6 +260,7 @@ msgid "_Only accept keys held for:"
 msgstr "_קבל רק מקשים שנלחצו:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "_Type to test settings:"
 msgstr "_כתוב כדי לבדוק את ההגדרות:"
 
@@ -291,127 +296,128 @@ msgstr "שניות"
 
 #. solid
 #: capplets/background/background-properties-capplet.c:228
-msgid "C_olor:"
-msgstr "_צבע:"
+msgid "Co_lor:"
+msgstr "צ_בע:"
 
 #. horiz
 #: capplets/background/background-properties-capplet.c:232
-msgid "_Left Color:"
+msgid "_Left color:"
 msgstr "צבע _שמאלי:"
 
 #: capplets/background/background-properties-capplet.c:233
-msgid "_Right Color:"
+msgid "_Right color:"
 msgstr "צבע _ימיני:"
 
 #. vert
 #: capplets/background/background-properties-capplet.c:236
-msgid "_Top Color:"
+msgid "Top co_lor:"
 msgstr "צבע _עליון:"
 
 #: capplets/background/background-properties-capplet.c:237
-msgid "_Bottom Color:"
+msgid "_Bottom color:"
 msgstr "צבע _תחתון:"
 
 #: capplets/background/background-properties-capplet.c:398
-msgid "_Wallpaper"
-msgstr "_טפט"
+msgid "_Tile"
+msgstr "_רצף"
 
 #: capplets/background/background-properties-capplet.c:398
-msgid "C_entered"
+msgid "C_enter"
 msgstr "_ממורכז"
 
 #: capplets/background/background-properties-capplet.c:398
-msgid "_Scaled"
+msgid "Sc_ale"
 msgstr "_פרוס"
 
 #: capplets/background/background-properties-capplet.c:398
-msgid "Stretc_hed"
+msgid "_Stretch"
 msgstr "מ_תוח"
 
 #: capplets/background/background-properties-capplet.c:398
 msgid "_No Picture"
 msgstr "_אין תמונה"
 
-#: capplets/background/background-properties-capplet.c:433
-msgid "Select _picture:"
-msgstr "בחר _תמונה:"
-
-#: capplets/background/background-properties-capplet.c:567
+#: capplets/background/background-properties-capplet.c:559
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:851
-#: capplets/keyboard/gnome-keyboard-properties.c:222
+#: capplets/keyboard/gnome-keyboard-properties.c:220
 #: capplets/mouse/gnome-mouse-properties.c:716
 #: capplets/sound/sound-properties-capplet.c:212
 msgid "Retrieve and store legacy settings"
 msgstr "קבל ושמור הגדרות מהזיכרון"
 
-#: capplets/background/background-properties-capplet.c:593
+#: capplets/background/background-properties-capplet.c:585
 #: capplets/background/background-properties.glade.h:2
 msgid "Background Preferences"
 msgstr "העדפות רקע"
 
 #: capplets/background/background-properties.glade.h:1
-msgid "A preview of the background picture."
-msgstr "תצוגה מקדימה של תמונת רקע."
+msgid "Bac_kground style:"
+msgstr "סגנון ר_קע:"
 
 #: capplets/background/background-properties.glade.h:3
-msgid "Background Preview"
-msgstr "תצוגה מקדימה של הרקע"
+msgid "E-Mail"
+msgstr "דוא\"ל"
 
 #: capplets/background/background-properties.glade.h:4
-msgid "Background _Style:"
-msgstr "_סגנון רקע:"
-
-#: capplets/background/background-properties.glade.h:5
 msgid "Horizontal gradient"
 msgstr "מדורג אופקית"
 
-#: capplets/background/background-properties.glade.h:6
+#: capplets/background/background-properties.glade.h:5
 msgid "Pick a color"
 msgstr "בחר צבע"
 
+#: capplets/background/background-properties.glade.h:6
+msgid "Picture _options:"
+msgstr "_אפשרויות תמונה:"
+
 #: capplets/background/background-properties.glade.h:7
-msgid "Picture Options:"
-msgstr "אפשרויות תמונה:"
-
-#: capplets/background/background-properties.glade.h:8
-#: libbackground/preview-file-selection.c:212
-msgid "Preview"
-msgstr "תצוגה מקדימה"
-
-#: capplets/background/background-properties.glade.h:9
 msgid "Primary Color"
 msgstr "צבע ראשי"
 
-#: capplets/background/background-properties.glade.h:10
+#: capplets/background/background-properties.glade.h:8
 msgid "Secondary Color"
 msgstr "צבע משני"
 
-#: capplets/background/background-properties.glade.h:11
+#: capplets/background/background-properties.glade.h:9
+msgid "Select _picture:"
+msgstr "בחר _תמונה:"
+
+#: capplets/background/background-properties.glade.h:10
 msgid "Solid color"
 msgstr "צבע קבוע"
 
-#: capplets/background/background-properties.glade.h:12
-msgid "The background picture's file name."
-msgstr "שם הקובץ של תמונת הרקע."
-
-#: capplets/background/background-properties.glade.h:13
+#: capplets/background/background-properties.glade.h:11
 msgid "To set the background picture, drop an image or click to browse."
 msgstr "כדי לקבוע תמונת רקע, זרוק תמונה או לחץ כדי לעיין."
 
-#: capplets/background/background-properties.glade.h:14
+#: capplets/background/background-properties.glade.h:12
 msgid "Vertical gradient"
 msgstr "מדורג אנכית"
 
+#: capplets/background/background-properties.glade.h:13
+msgid "You can drag image files into the window to set the background picture."
+msgstr "אתה יכול לגרור קבצי תמונה לתוך החלון כדי לקבוע את תמונת הרקע."
+
+#: capplets/background/background-properties.glade.h:14
+msgid "radiobutton1"
+msgstr "כפתור בחירה 1"
+
 #: capplets/background/background-properties.glade.h:15
-msgid ""
-"You can drag image files\n"
-"into the window to set the \n"
-"background picture."
-msgstr ""
-"ניתן לגרור קבצי תמונה\n"
-"לתוך החלון כדי לקבוע \n"
-"את תמונת הרקע."
+msgid "radiobutton2"
+msgstr "כפתור בחירה 2"
+
+#: capplets/background/background-properties.glade.h:16
+msgid "radiobutton3"
+msgstr "כפתור בחירה 3"
+
+#: capplets/background/background-properties.glade.h:17
+msgid "radiobutton4"
+msgstr "כפתור בחירה 4"
+
+#: capplets/background/background-properties.glade.h:18
+msgid "radiobutton5"
+msgstr "כפתור בחירה 5"
 
 #: capplets/background/background.desktop.in.h:1
 msgid "Background"
@@ -917,61 +923,61 @@ msgid "%d Hz"
 msgstr "%d Hz"
 
 #: capplets/display/main.c:367
-msgid "Resolution:"
-msgstr "רזולוצייה:"
+msgid "_Resolution:"
+msgstr "_רזולוצייה:"
 
-#: capplets/display/main.c:385
-msgid "Refresh rate:"
-msgstr "תדירות רענון:"
+#: capplets/display/main.c:386
+msgid "Re_fresh rate:"
+msgstr "תדירות ר_ענון:"
 
-#: capplets/display/main.c:405
+#: capplets/display/main.c:407
 msgid "Default Settings"
 msgstr "הגדרות ברירת מחדל"
 
-#: capplets/display/main.c:407
+#: capplets/display/main.c:409
 #, c-format
 msgid "Screen %d Settings\n"
 msgstr "הגדרות מסך %d\n"
 
-#: capplets/display/main.c:432
+#: capplets/display/main.c:434
 msgid "Screen Resolution Preferences"
 msgstr "העדפות רזולוציית מסך"
 
-#: capplets/display/main.c:460
+#: capplets/display/main.c:464
 #, c-format
 msgid "Make default for this _computer (%s) only"
 msgstr "עשה כברירת מחדל ל_מחשב זה (%s) בלבד"
 
-#: capplets/display/main.c:478
+#: capplets/display/main.c:482
 msgid "Options"
 msgstr "אפשרויות"
 
-#: capplets/display/main.c:499
+#: capplets/display/main.c:503
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d seconds the previous "
 "settings will be restored."
 msgstr "בודק את ההגדרות החדשות. אם אינך תגיב תוך %d שניות ההגדרות הקודמות יוחזרו."
 
-#: capplets/display/main.c:549
+#: capplets/display/main.c:553
 msgid "Do you want to keep this resolution?"
 msgstr "האם ברצונך להשאיר רזולוצייה זו?"
 
-#: capplets/display/main.c:586
+#: capplets/display/main.c:590
 msgid "Use _previous resolution"
 msgstr "השתמש ברזולוצייה ה_קודמת"
 
-#: capplets/display/main.c:588
+#: capplets/display/main.c:592
 msgid "_Keep resolution"
 msgstr "ה_שאר רזולוצייה"
 
-#: capplets/display/main.c:747
+#: capplets/display/main.c:751
 msgid ""
 "The Xserver doesn't support the XRandR extension, runtime resolution changes "
 "aren't possible."
 msgstr "שרת X אינו תומך בהרחבה XRandR, שינוי רזולוצייה בזמן הריצה אינו אפשרי."
 
-#: capplets/display/main.c:759
+#: capplets/display/main.c:763
 msgid ""
 "The version of the XRandR extension is incompatible with this program, "
 "runtime resolution changes aren't possible."
@@ -1288,127 +1294,127 @@ msgstr "גופן"
 msgid "Select fonts for the desktop"
 msgstr "בחר גופן לשולחן העבודה"
 
-#: capplets/font/font-properties.glade.h:1
+#: capplets/font/font-properties.glade.h:2
+msgid "<b>Font Rendering</b>"
+msgstr "<b>ציור גופן</b>"
+
+#: capplets/font/font-properties.glade.h:3
 msgid "Best _shapes"
 msgstr "ה_צורות הטובות ביותר"
 
-#: capplets/font/font-properties.glade.h:2
+#: capplets/font/font-properties.glade.h:4
 msgid "Best co_ntrast"
 msgstr "ה_ניגוד הטוב ביותר"
 
-#: capplets/font/font-properties.glade.h:3
+#: capplets/font/font-properties.glade.h:5
 msgid "De_tails..."
 msgstr "פ_רטים..."
 
-#: capplets/font/font-properties.glade.h:4
+#: capplets/font/font-properties.glade.h:6
 msgid "Font Preferences"
 msgstr "העדפות גופן"
 
-#: capplets/font/font-properties.glade.h:5
-msgid "Font Rendering"
-msgstr "ציור גופן"
-
-#: capplets/font/font-properties.glade.h:6
+#: capplets/font/font-properties.glade.h:7
 msgid "Font Rendering Details"
 msgstr "פרטי ציור גופן"
 
-#: capplets/font/font-properties.glade.h:7
+#: capplets/font/font-properties.glade.h:8
 msgid "G_rayscale"
 msgstr "גווני _אפור"
 
-#: capplets/font/font-properties.glade.h:8
+#: capplets/font/font-properties.glade.h:9
 msgid "Go to font folder"
 msgstr "לך לתיקיית הגופן"
 
-#: capplets/font/font-properties.glade.h:9
+#: capplets/font/font-properties.glade.h:10
 msgid "Hinting:"
 msgstr "רמיזה:"
 
-#: capplets/font/font-properties.glade.h:10
+#: capplets/font/font-properties.glade.h:11
 msgid "N_one"
 msgstr "_ללא"
 
-#: capplets/font/font-properties.glade.h:11
+#: capplets/font/font-properties.glade.h:12
 msgid "Resolution (_dots per inch):"
 msgstr "רזולוצייה (_נקודות לאינץ'):"
 
-#: capplets/font/font-properties.glade.h:12
+#: capplets/font/font-properties.glade.h:13
 msgid "Set the font for applications"
 msgstr "קובע את הגופן ליישומים"
 
-#: capplets/font/font-properties.glade.h:13
+#: capplets/font/font-properties.glade.h:14
 msgid "Set the font for the icons on the desktop"
 msgstr "קובע את הגופן לסמלים על שולחן העבודה"
 
-#: capplets/font/font-properties.glade.h:14
+#: capplets/font/font-properties.glade.h:15
 msgid "Set the monospace font for terminals and similar applications"
 msgstr "קובע את הגופן הקבוע למסופים ויישומים דומים"
 
-#: capplets/font/font-properties.glade.h:15
+#: capplets/font/font-properties.glade.h:16
 msgid "Smoothing:"
 msgstr "החלקה:"
 
-#: capplets/font/font-properties.glade.h:16
+#: capplets/font/font-properties.glade.h:17
 msgid "Sub_pixel (LCDs)"
 msgstr "תת _פיקסל (צגי LCD)"
 
-#: capplets/font/font-properties.glade.h:17
+#: capplets/font/font-properties.glade.h:18
 msgid "Sub_pixel smoothing (LCDs)"
 msgstr "החלקת תת _פיקסל (לצגי LCD)"
 
-#: capplets/font/font-properties.glade.h:18
+#: capplets/font/font-properties.glade.h:19
 msgid "Subpixel order:"
 msgstr "סדר תת-פיקסל:"
 
-#: capplets/font/font-properties.glade.h:19
+#: capplets/font/font-properties.glade.h:20
 msgid "VB_GR"
 msgstr "VB_GR"
 
-#: capplets/font/font-properties.glade.h:20
+#: capplets/font/font-properties.glade.h:21
 msgid "_Application font:"
 msgstr "גופן ה_יישום:"
 
-#: capplets/font/font-properties.glade.h:21
+#: capplets/font/font-properties.glade.h:22
 msgid "_BGR"
 msgstr "_BGR"
 
-#: capplets/font/font-properties.glade.h:22
+#: capplets/font/font-properties.glade.h:23
 msgid "_Desktop font:"
 msgstr "גופן _שולחן העבודה:"
 
-#: capplets/font/font-properties.glade.h:23
+#: capplets/font/font-properties.glade.h:24
 msgid "_Full"
 msgstr "_מלאה"
 
-#: capplets/font/font-properties.glade.h:24
+#: capplets/font/font-properties.glade.h:25
 msgid "_Medium"
 msgstr "_בינונית"
 
-#: capplets/font/font-properties.glade.h:25
+#: capplets/font/font-properties.glade.h:26
 msgid "_Monochrome"
 msgstr "מונו_כרום"
 
-#: capplets/font/font-properties.glade.h:26
+#: capplets/font/font-properties.glade.h:27
 msgid "_None"
 msgstr "_ללא"
 
-#: capplets/font/font-properties.glade.h:27
+#: capplets/font/font-properties.glade.h:28
 msgid "_RGB"
 msgstr "_RGB"
 
-#: capplets/font/font-properties.glade.h:28
+#: capplets/font/font-properties.glade.h:29
 msgid "_Slight"
 msgstr "מו_עטת"
 
-#: capplets/font/font-properties.glade.h:29
+#: capplets/font/font-properties.glade.h:30
 msgid "_Terminal font:"
 msgstr "גופן _מסוף:"
 
-#: capplets/font/font-properties.glade.h:30
+#: capplets/font/font-properties.glade.h:31
 msgid "_VRGB"
 msgstr "_VRGB"
 
-#: capplets/font/font-properties.glade.h:31
+#: capplets/font/font-properties.glade.h:32
 msgid "_Window title font:"
 msgstr "גופן כותרת ה_חלון:"
 
@@ -1513,104 +1519,104 @@ msgstr "שייך מקשי קיצור לפקודות"
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "ארעה שגיאה בהפעלת יישומון הבקרה מקלדת: %s"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:201
+#: capplets/keyboard/gnome-keyboard-properties.c:199
 msgid "_Accessibility"
 msgstr "_נגישות"
 
+#: capplets/keyboard/gnome-keyboard-properties.c:216
 #: capplets/keyboard/gnome-keyboard-properties.c:218
-#: capplets/keyboard/gnome-keyboard-properties.c:220
 #: capplets/sound/sound-properties-capplet.c:208
 #: capplets/sound/sound-properties-capplet.c:210
 msgid "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr "רק החל הגדרות וצא (תאימות בלבד; עכשיו מנוהל על-ידי תהליך שירות)"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:1
-msgid "<b>Cursor Blinks</b>"
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
+msgid "<b>Cursor Blinking</b>"
 msgstr "<b>הבהוב סמן</b>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:2
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "<b>Repeat Keys</b>"
 msgstr "<b>מקשים חוזרים</b>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
 msgid "<b>_Lock screen to enforce typing break</b>"
 msgstr "<b>_נעל מסך כדי להכריח הפסקת הקלדה</b>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>מהיר</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>ארוכה</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>קצרה</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>איטי</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+msgid "All_ow postponing of breaks"
+msgstr "א_פשר דחיית הפסקות"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "Check if breaks are allowed to be postponed"
 msgstr "בדוק אם ההפסקות ניתנות לדחייה"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+msgid "Cursor _blinks in text boxes and fields"
+msgstr "סמן מ_הבהב בתיבות טקסט ושדות"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Duration of the break when typing is disallowed"
 msgstr "משך ההפסקה כאשר הקלדה אסורה"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Duration of work before forcing a break"
 msgstr "משך העבודה לפני שמכריחים הפסקה"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
 msgid "Key presses _repeat when key is held down"
 msgstr "לחיצת המקש _חוזרת כאשר המקש נשאר למטה"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
 msgid "Keyboard Preferences"
 msgstr "העדפות מקלדת"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
 msgid ""
 "Lock screen after a certain duration to help prevent repetitive keyboard use "
 "injuries"
 msgstr "נעל את המסך לאחר פרק זמן מסוים כדי לעזור למנוע נזקי שימוש חוזר במקלדת"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
 msgid "Typing Break"
 msgstr "הפסקת הקלדה"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
 msgid "_Accessibility..."
 msgstr "_נגישות..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
-msgid "_Allow postponing of breaks"
-msgstr "_אפשר דחיית הפסקות"
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+msgid "_Break interval lasts:"
+msgstr "_זמן ההפסקה אורך:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
-msgid "_Break interval lasts"
-msgstr "_זמן ההפסקה אורך"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
-msgid "_Cursor blinks in text boxes and fields"
-msgstr "_סמן מהבהב בתיבות טקסט ושדות"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "_Delay:"
 msgstr "_השהייה:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
 msgid "_Speed:"
 msgstr "_מהירות:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
-msgid "_Work interval lasts"
-msgstr "זמן ה_עבודה נמשך"
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
+msgid "_Work interval lasts:"
+msgstr "זמן ה_עבודה נמשך:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
 msgid "minutes"
 msgstr "דקות"
 
@@ -1690,10 +1696,6 @@ msgid ""
 msgstr ""
 "<b>סמן גדול לבן</b>\n"
 "גירסה גדולה של הסמן הלבן"
-
-#: capplets/mouse/gnome-mouse-properties.glade.h:1
-msgid "    "
-msgstr "    "
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:2
 msgid "<b>Cursor Theme</b>"
@@ -1795,6 +1797,10 @@ msgstr "_סף:"
 msgid "_Timeout:"
 msgstr "_פרק זמן:"
 
+#: capplets/mouse/mouse.desktop.in.h:1
+msgid "Mouse"
+msgstr "עכבר"
+
 #: capplets/mouse/mouse.desktop.in.h:2
 msgid "Set your mouse preferences"
 msgstr "קבע את העדפות העכבר שלך"
@@ -1836,28 +1842,28 @@ msgid "HTTP Proxy Details"
 msgstr "פרטי מתווך HTTP"
 
 #: capplets/network/gnome-network-preferences.glade.h:9
+msgid "H_TTP proxy:"
+msgstr "מתווך H_TTP:"
+
+#: capplets/network/gnome-network-preferences.glade.h:10
 msgid "Network Proxy Configuration"
 msgstr "הגדרות מתווך רשת"
 
-#: capplets/network/gnome-network-preferences.glade.h:10
+#: capplets/network/gnome-network-preferences.glade.h:11
 msgid "Port:"
 msgstr "פתחה:"
 
-#: capplets/network/gnome-network-preferences.glade.h:11
+#: capplets/network/gnome-network-preferences.glade.h:12
 msgid "S_ocks host:"
 msgstr "מארח _שקע:"
 
-#: capplets/network/gnome-network-preferences.glade.h:12
+#: capplets/network/gnome-network-preferences.glade.h:13
 msgid "_Details"
 msgstr "_פרטים"
 
-#: capplets/network/gnome-network-preferences.glade.h:13
+#: capplets/network/gnome-network-preferences.glade.h:14
 msgid "_FTP proxy:"
 msgstr "מתווך _FTP:"
-
-#: capplets/network/gnome-network-preferences.glade.h:14
-msgid "_HTTP proxy:"
-msgstr "מתווך _HTTP:"
 
 #: capplets/network/gnome-network-preferences.glade.h:15
 msgid "_Password:"
@@ -2122,29 +2128,25 @@ msgstr "התנהגות"
 msgid "Sets the default behavior of GNOME applications"
 msgstr "קובע את התנהגות ברירת המחדל של יישומי GNOME"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:1
-msgid "A preview of what a menubar looks like with these settings."
-msgstr "תצוגה מקדימה של מראה התפריט עם ההגדרות הללו."
-
 #: capplets/ui-properties/gnome-ui-properties.glade.h:2
-msgid "A preview of what a toolbar looks like with these settings."
-msgstr "תצוגה מקדימה של מראה סרגל הכלים עם ההגדרות הללו."
+msgid "<b>Behavior and Appearance</b>"
+msgstr "<b>התנהגות ומראה</b>"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:3
+msgid "<b>Preview</b>"
+msgstr "<b>תצוגה מקדימה</b>"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:4
 msgid "C_ut"
 msgstr "_גזור"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:4
-msgid "Icons Only"
+#: capplets/ui-properties/gnome-ui-properties.glade.h:5
+msgid "Icons only"
 msgstr "סמלים בלבד"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:5
+#: capplets/ui-properties/gnome-ui-properties.glade.h:6
 msgid "Menu and Toolbar Preferences"
 msgstr "העדפות תפריט וסרגל כלים"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:6
-msgid "Menus"
-msgstr "תפריטים"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:7
 msgid "New File"
@@ -2155,83 +2157,67 @@ msgid "Open File"
 msgstr "פתח קובץ"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:9
-msgid "Sample menubar:"
-msgstr "תפריט לדוגמה:"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:10
-msgid "Sample toolbar:"
-msgstr "סרגל כלים לדוגמה:"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:11
 msgid "Save File"
 msgstr "שמור קובץ"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:12
-msgid "Select the toolbar style."
-msgstr "בחר את סגנון סרגל הכלים."
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:13
+#: capplets/ui-properties/gnome-ui-properties.glade.h:10
 msgid "Show _icons in menus"
 msgstr "הצג _סמלים בתפריטים"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:14
-msgid "Text Below Icons"
+#: capplets/ui-properties/gnome-ui-properties.glade.h:11
+msgid "Text below icons"
 msgstr "טקסט מתחת לסמלים"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:15
-msgid "Text Beside Icons"
+#: capplets/ui-properties/gnome-ui-properties.glade.h:12
+msgid "Text beside icons"
 msgstr "טקסט לצד סמלים"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:16
-msgid "Text Only"
+#: capplets/ui-properties/gnome-ui-properties.glade.h:13
+msgid "Text only"
 msgstr "טקסט בלבד"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:17
-msgid "Toolbar"
-msgstr "סרגל כלים"
+#: capplets/ui-properties/gnome-ui-properties.glade.h:14
+msgid "Toolbar _button labels: "
+msgstr "תוויות _כפתורי סרגל הכלים: "
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:18
-msgid "Toolbars can be _detached and moved around"
-msgstr "סרגלי הכלים יכולים להת_נתק ולזוז"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:19
-msgid "_Button Labels: "
-msgstr "_תוויות כפתור:"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:20
+#: capplets/ui-properties/gnome-ui-properties.glade.h:15
 msgid "_Copy"
 msgstr "ה_עתק"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:21
+#: capplets/ui-properties/gnome-ui-properties.glade.h:16
+msgid "_Detachable toolbars"
+msgstr "סרגלי כלים _נתיקים"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:17
 msgid "_Edit"
 msgstr "_עריכה"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:22
+#: capplets/ui-properties/gnome-ui-properties.glade.h:18
 #: control-center/gnomecc-ui.xml.h:5
 msgid "_File"
 msgstr "_קובץ"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:23
+#: capplets/ui-properties/gnome-ui-properties.glade.h:19
 msgid "_New"
 msgstr "_חדש"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:24
+#: capplets/ui-properties/gnome-ui-properties.glade.h:20
 msgid "_Open"
 msgstr "_פתח"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:25
+#: capplets/ui-properties/gnome-ui-properties.glade.h:21
 msgid "_Paste"
 msgstr "ה_דבק"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:26
+#: capplets/ui-properties/gnome-ui-properties.glade.h:22
 msgid "_Print"
 msgstr "_הדפס"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:27
+#: capplets/ui-properties/gnome-ui-properties.glade.h:23
 msgid "_Quit"
 msgstr "_יציאה"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:28
+#: capplets/ui-properties/gnome-ui-properties.glade.h:24
 msgid "_Save"
 msgstr "_שמור"
 
@@ -2495,6 +2481,10 @@ msgstr "מסך בו יש BGApplier לציור"
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "לא ניתן למצוא hbox, משתמש בבחירת קובץ רגילה"
 
+#: libbackground/preview-file-selection.c:212
+msgid "Preview"
+msgstr "תצוגה מקדימה"
+
 #: libsounds/sound-view.c:129
 msgid "The sound file for this event does not exist."
 msgstr "הקול לאירוע זה אינו קיים."
@@ -2690,11 +2680,11 @@ msgstr "סוכריות לעיניים נוספו על-ידי Anders Carlsson"
 msgid "Break reminder"
 msgstr "מזכיר הפסקות"
 
-#: typing-break/main.c:126
+#: typing-break/main.c:94
 msgid "The typing monitor is already running."
 msgstr "צג ההקלדה כבר פועל."
 
-#: typing-break/main.c:139
+#: typing-break/main.c:107
 msgid ""
 "The typing monitor uses the notification area to display information. You "
 "don't seem to have a notification area on your panel. You can add it by "
@@ -2896,6 +2886,45 @@ msgstr "האם ליצור דוגמיות לערכות נושא מותקנות"
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "האם ליצור דוגמיות לערכות נושא"
+
+#~ msgid "Select CDE AccessX file"
+#~ msgstr "בחר קובץ גישה CDE"
+
+#~ msgid "<b>Mouse</b>"
+#~ msgstr "<b>עכבר</b>"
+
+#~ msgid "_Wallpaper"
+#~ msgstr "_טפט"
+
+#~ msgid "A preview of the background picture."
+#~ msgstr "תצוגה מקדימה של תמונת רקע."
+
+#~ msgid "Background Preview"
+#~ msgstr "תצוגה מקדימה של הרקע"
+
+#~ msgid "The background picture's file name."
+#~ msgstr "שם הקובץ של תמונת הרקע."
+
+#~ msgid "A preview of what a menubar looks like with these settings."
+#~ msgstr "תצוגה מקדימה של מראה התפריט עם ההגדרות הללו."
+
+#~ msgid "A preview of what a toolbar looks like with these settings."
+#~ msgstr "תצוגה מקדימה של מראה סרגל הכלים עם ההגדרות הללו."
+
+#~ msgid "Menus"
+#~ msgstr "תפריטים"
+
+#~ msgid "Sample menubar:"
+#~ msgstr "תפריט לדוגמה:"
+
+#~ msgid "Select the toolbar style."
+#~ msgstr "בחר את סגנון סרגל הכלים."
+
+#~ msgid "Toolbar"
+#~ msgstr "סרגל כלים"
+
+#~ msgid "Toolbars can be _detached and moved around"
+#~ msgstr "סרגלי הכלים יכולים להת_נתק ולזוז"
 
 #~ msgid "File to play"
 #~ msgstr "קובץ לנגינה"
