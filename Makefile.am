@@ -7,7 +7,7 @@ SUBDIRS = intl po macros \
 #DIST_SUBDIRS = intl po macros $(always_built_SUBDIRS)
 
 
-EXTRA_DIST = control-center.spec.in
+EXTRA_DIST = control-center.spec.in xml-i18n-extract.in xml-i18n-merge.in xml-i18n-update.in
 
 dist-hook: control-center.spec
 	cp control-center.spec $(distdir)
