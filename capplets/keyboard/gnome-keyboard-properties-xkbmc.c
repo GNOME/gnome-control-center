@@ -53,11 +53,6 @@ add_model_to_list (const XklConfigItemPtr configItem, GtkTreeView * modelsList)
                       0, utfModelName,
                       1, configItem->name, -1 );
 
-  if (currentModelName != NULL &&
-      !g_ascii_strcasecmp(configItem->name, currentModelName))
-    {
-       gtk_tree_selection_select_iter (gtk_tree_view_get_selection (modelsList), &iter);
-    }
   g_free (utfModelName);
 }
 
@@ -74,23 +69,45 @@ static void
 fill_models_list (GladeXML * chooserDialog)
 {
   GtkWidget* modelsList = CWID( "models_list" );
+  GtkTreeIter iter;
+  GtkTreePath *path;
   GtkCellRenderer* renderer = gtk_cell_renderer_text_new ();
   GtkTreeViewColumn* descriptionCol = gtk_tree_view_column_new_with_attributes (  _("Models"),
                                                                                   renderer,
                                                                                   "text", 0,
                                                                                   NULL);
   GtkListStore *listStore = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_STRING);
+  char *modelName;
 
   gtk_tree_view_column_set_visible (descriptionCol, TRUE);
   gtk_tree_view_append_column (GTK_TREE_VIEW (modelsList), descriptionCol);
 
   gtk_tree_view_set_model (GTK_TREE_VIEW (modelsList), GTK_TREE_MODEL (listStore) );
 
+  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (listStore),
+                                        0, GTK_SORT_ASCENDING);
+
   XklConfigEnumModels ((ConfigItemProcessFunc)
 		       add_model_to_list, modelsList);
 
-  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (listStore),
-                                        0, GTK_SORT_ASCENDING);
+  if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (listStore), &iter))
+  {
+    do
+    {
+      gtk_tree_model_get (GTK_TREE_MODEL (listStore), &iter, 
+                          1, &modelName, -1);
+      if (currentModelName != NULL &&
+          !g_ascii_strcasecmp(modelName, currentModelName))
+      {
+        gtk_tree_selection_select_iter (gtk_tree_view_get_selection (GTK_TREE_VIEW (modelsList)), &iter);
+        path = gtk_tree_model_get_path (GTK_TREE_MODEL (listStore), &iter);
+        gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (modelsList),
+                                      path, NULL, TRUE, 0.5, 0);
+        gtk_tree_path_free (path);
+      }
+      g_free (modelName);
+    } while (gtk_tree_model_iter_next (GTK_TREE_MODEL (listStore), &iter));
+  }
 
   g_signal_connect (G_OBJECT (gtk_tree_view_get_selection (GTK_TREE_VIEW (modelsList))), 
                     "changed",
