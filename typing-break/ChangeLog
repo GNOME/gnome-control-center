@@ -1,3 +1,12 @@
+2005-02-03  Richard Hult  <richard@imendio.com>
+
+	* drwright.c (break_window_postpone_cb), (maybe_change_state),
+	(popup_break_cb): Go back to the timer value from before the break
+	if postponing a manual break. Fixes bug #134595, based on patch
+	from Vinay M R <vinay.mandyakoppal@wipro.com>. Modified to use the
+	right enum type and changed to update the tooltip immendiately
+	after a break.
+
 2004-12-25  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* drw-selection.c: (drw_selection_start): ANSIfication.
