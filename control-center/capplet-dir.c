@@ -480,9 +480,19 @@ capplet_control_launch (const gchar *capplet_name, gchar *window_title)
 	} else {
 		gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (app)->vbox), control, TRUE, TRUE, 0);
 
-		bonobo_widget_set_property (BONOBO_WIDGET (control), "moniker", moniker, NULL);
+		bonobo_widget_set_property (BONOBO_WIDGET (control), "moniker", moniker, &ev);
 
-		gtk_widget_show_all (app);
+		if (BONOBO_EX (&ev)) {
+			GtkWidget *dialog;
+
+			dialog = gnome_error_dialog ("Could not load your configuration settings.");
+			gnome_dialog_run_and_close (GNOME_DIALOG (dialog));
+			gtk_widget_destroy (app);
+			g_free (moniker);
+			app = NULL;
+		} else {
+			gtk_widget_show_all (app);
+		}
 	}
 
 	gnome_dialog_button_connect (GNOME_DIALOG (app), 0, GTK_SIGNAL_FUNC (capplet_ok_cb), app);

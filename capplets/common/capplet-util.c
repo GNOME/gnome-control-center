@@ -124,8 +124,10 @@ set_moniker_cb (BonoboPropertyBag *bag, BonoboArg *arg, guint arg_id,
 	pf = BONOBO_PROPERTY_FRAME (bonobo_control_get_widget (control));
 	bonobo_property_frame_set_moniker (pf, full_moniker);
 
-	if (pf->proxy->bag == CORBA_OBJECT_NIL)
-		gnome_error_dialog ("Could not load your configuration settings.");
+	if (pf->proxy->bag == CORBA_OBJECT_NIL) {
+		bonobo_exception_set (ev, ex_Bonobo_Property_InvalidValue);
+		return;
+	}
 
 	proxy = BONOBO_OBJREF (pf->proxy);
 
