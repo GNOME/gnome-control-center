@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: control-centre CVS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-17 13:23+0100\n"
-"PO-Revision-Date: 2004-10-17 13:24+0100\n"
+"POT-Creation-Date: 2004-11-14 20:17+0000\n"
+"PO-Revision-Date: 2004-11-14 20:17+0100\n"
 "Last-Translator: David Lodge <dave@cirt.net>\n"
 "Language-Team: English/GB <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -650,38 +650,42 @@ msgid "KMail"
 msgstr "KMail"
 
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:42
+msgid "Thunderbird"
+msgstr "Thunderbird"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:43
 msgid "Mozilla Mail"
 msgstr "Mozilla Mail"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:43
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:44
 msgid "Mutt"
 msgstr "Mutt"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:54
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:55
 msgid "Debian Terminal Emulator"
 msgstr "Debian Terminal Emulator"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:55
-msgid "Gnome Terminal"
-msgstr "Gnome Terminal"
-
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:56
+msgid "GNOME Terminal"
+msgstr "GNOME Terminal"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:57
 msgid "Standard XTerminal"
 msgstr "Standard XTerminal"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:57
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:58
 msgid "NXterm"
 msgstr "NXterm"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:58
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:59
 msgid "RXVT"
 msgstr "RXVT"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:59
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:60
 msgid "aterm"
 msgstr "aterm"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:60
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:61
 msgid "ETerm"
 msgstr "ETerm"
 
@@ -821,22 +825,6 @@ msgstr "_Select a Web Browser:"
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:35
 msgid "_Select an Editor:"
 msgstr "_Select an Editor:"
-
-#: capplets/desktop-links/Accessibility.directory.in.h:1
-msgid "Accessibility"
-msgstr "Accessibility"
-
-#: capplets/desktop-links/Accessibility.directory.in.h:2
-msgid "Accessibility Settings"
-msgstr "Accessibility Settings"
-
-#: capplets/desktop-links/Advanced.directory.in.h:1
-msgid "Advanced"
-msgstr "Advanced"
-
-#: capplets/desktop-links/Advanced.directory.in.h:2
-msgid "Advanced Settings"
-msgstr "Advanced Settings"
 
 #: capplets/display/display-properties.desktop.in.h:1
 msgid "Change screen resolution"
@@ -1024,6 +1012,7 @@ msgid "_Protocol:"
 msgstr "_Protocol:"
 
 #: capplets/file-types/file-types-properties.glade.h:26
+#: libsounds/sound-view.c:366
 msgid "_Remove"
 msgstr "_Remove"
 
@@ -1212,8 +1201,8 @@ msgid "Electronic mail transmission"
 msgstr "Electronic mail transmission"
 
 #: capplets/file-types/service-info.c:50
-msgid "Gnome documentation"
-msgstr "Gnome documentation"
+msgid "GNOME documentation"
+msgstr "GNOME documentation"
 
 #: capplets/font/font-properties.desktop.in.h:1
 msgid "Font"
@@ -1951,15 +1940,28 @@ msgstr "_Visual feedback:"
 msgid "No themes could be found on your system.  This probably means that your \"Theme Preferences\" dialog was improperly installed, or you haven't installed the \"gnome-themes\" package."
 msgstr "No themes could be found on your system.  This probably means that your \"Theme Preferences\" dialogue was improperly installed, or you haven't installed the \"gnome-themes\" package."
 
-#: capplets/theme-switcher/gnome-theme-installer.c:127
+#: capplets/theme-switcher/gnome-theme-installer.c:104
+msgid "This theme is not in a supported format."
+msgstr "This theme is not in a supported format."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:140
 msgid "No theme file location specified to install"
 msgstr "No theme file location specified to install"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:146
+#: capplets/theme-switcher/gnome-theme-installer.c:157
 msgid "The theme file location specified to install is invalid"
 msgstr "The theme file location specified to install is invalid"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:173
+#: capplets/theme-switcher/gnome-theme-installer.c:177
+#, c-format
+msgid ""
+"Insufficient permissions to install the theme in:\n"
+"%s"
+msgstr ""
+"Insufficient permissions to install the theme in:\n"
+"%s"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:196
 #, c-format
 msgid "%s is the path where the theme files will be installed. This can not be selected as the source location"
 msgstr "%s is the path where the theme files will be installed. This can not be selected as the source location"
@@ -2213,23 +2215,23 @@ msgstr ""
 "\n"
 "%s"
 
-#: capplets/windows/gnome-window-properties.c:637
+#: capplets/windows/gnome-window-properties.c:648
 msgid "Control"
 msgstr "Control"
 
-#: capplets/windows/gnome-window-properties.c:642
+#: capplets/windows/gnome-window-properties.c:653
 msgid "Alt"
 msgstr "Alt"
 
-#: capplets/windows/gnome-window-properties.c:648
+#: capplets/windows/gnome-window-properties.c:659
 msgid "Hyper"
 msgstr "Hyper"
 
-#: capplets/windows/gnome-window-properties.c:655
+#: capplets/windows/gnome-window-properties.c:666
 msgid "Super (or \"Windows logo\")"
 msgstr "Super (or \"Windows logo\")"
 
-#: capplets/windows/gnome-window-properties.c:662
+#: capplets/windows/gnome-window-properties.c:673
 msgid "Meta"
 msgstr "Meta"
 
@@ -2311,8 +2313,9 @@ msgstr "Others"
 
 #: control-center/control-center-categories.c:424
 #: control-center/control-center.c:1091
-msgid "Gnome Control Center"
-msgstr "Gnome Control Center"
+#: control-center/gnomecc.desktop.in.h:1
+msgid "GNOME Control Center"
+msgstr "GNOME Control Centre"
 
 #: control-center/control-center.c:78
 msgid "Use nautilus if it is running."
@@ -2338,11 +2341,8 @@ msgstr "_Contents"
 msgid "_Help"
 msgstr "_Help"
 
-#: control-center/gnomecc.desktop.in.h:1
-msgid "GNOME Control Center"
-msgstr "GNOME Control Centre"
-
 #: control-center/gnomecc.desktop.in.h:2
+#: vfs-methods/fontilus/gnome-font-viewer.desktop.in.h:2
 msgid "The GNOME configuration tool"
 msgstr "The GNOME configuration tool"
 
@@ -2544,8 +2544,8 @@ msgstr "_Do not show this message again"
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Couldn't load sound file %s as sample %s"
 
-#: gnome-settings-daemon/gnome-settings-xrdb.c:212
-#: gnome-settings-daemon/gnome-settings-xrdb.c:260
+#: gnome-settings-daemon/gnome-settings-xrdb.c:213
+#: gnome-settings-daemon/gnome-settings-xrdb.c:261
 msgid "Cannot determine user's home directory"
 msgstr "Cannot determine user's home directory"
 
@@ -2590,12 +2590,12 @@ msgstr "Screen"
 msgid "Screen on which BGApplier is to draw"
 msgstr "Screen on which BGApplier is to draw"
 
-#: libsounds/sound-view.c:121
-#: libsounds/sound-view.c:146
+#: libsounds/sound-view.c:122
+#: libsounds/sound-view.c:147
 msgid "The sound file for this event does not exist."
 msgstr "The sound file for this event does not exist."
 
-#: libsounds/sound-view.c:148
+#: libsounds/sound-view.c:149
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package\n"
@@ -2605,32 +2605,32 @@ msgstr ""
 "You may want to install the gnome-audio package\n"
 "for a set of default sounds."
 
-#: libsounds/sound-view.c:192
+#: libsounds/sound-view.c:224
 #, c-format
 msgid "The file %s is not a valid wav file"
 msgstr "The file %s is not a valid wav file"
 
-#: libsounds/sound-view.c:257
+#: libsounds/sound-view.c:289
 msgid "Event"
 msgstr "Event"
 
-#: libsounds/sound-view.c:266
+#: libsounds/sound-view.c:298
 msgid "Sound File"
 msgstr "Sound File"
 
-#: libsounds/sound-view.c:282
+#: libsounds/sound-view.c:314
 msgid "_Sounds:"
 msgstr "_Sounds:"
 
-#: libsounds/sound-view.c:296
+#: libsounds/sound-view.c:328
 msgid "Sound _file:"
 msgstr "Sound _file:"
 
-#: libsounds/sound-view.c:300
+#: libsounds/sound-view.c:332
 msgid "Select Sound File"
 msgstr "Select Sound File"
 
-#: libsounds/sound-view.c:324
+#: libsounds/sound-view.c:356
 msgid "_Play"
 msgstr "_Play"
 
@@ -3074,6 +3074,10 @@ msgstr "Nautilus context menu entries for fonts"
 #: vfs-methods/fontilus/fontilus.server.in.in.h:5
 msgid "Set as Application Font"
 msgstr "Set as Application Font"
+
+#: vfs-methods/fontilus/gnome-font-viewer.desktop.in.h:1
+msgid "GNOME Font Viewer"
+msgstr "GNOME Font Viewer"
 
 #: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
 msgid "Theme Properties content view component"
