@@ -19,4 +19,7 @@ GnomeWindowManager *gnome_wm_manager_get_current  (void);
 /* change to the wm specified in GConf */
 void                gnome_wm_manager_change_wm_to_settings (void);
 
+/* return TRUE if wm1 and wm2 refer to the same window manager */
+gboolean            gnome_wm_manager_same_wm (GnomeWindowManager *wm1, GnomeWindowManager *wm2);
+
 #endif

@@ -51,6 +51,13 @@ gnome_window_manager_get_name (GnomeWindowManager *wm)
 {
   return wm->p->window_manager_name;
 }
+
+GnomeDesktopItem *
+gnome_window_manager_get_ditem (GnomeWindowManager *wm)
+{
+  return gnome_desktop_item_ref (wm->p->ditem);
+}
+
 void         
 gnome_window_manager_set_theme (GnomeWindowManager *wm, const char *theme_name)
 {

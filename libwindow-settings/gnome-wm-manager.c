@@ -68,13 +68,14 @@ gnome_wm_manager_get_list (void)
 void
 gnome_wm_manager_set_current  (GnomeWindowManager *wm)
 {
-  /*selected_wm = wm->ditem;*/
+  /* this line is bogus */
+  /*selected_wm = gnome_window_manager_get_ditem (wm);*/
 }
 
 GnomeWindowManager *
 gnome_wm_manager_get_current (void)
 {
-  return gnome_window_manager_new (wm_list_get_current()->dentry);
+  return GNOME_WINDOW_MANAGER (gnome_window_manager_new (wm_list_get_current()->dentry));
 }
 
 void gnome_wm_manager_change_wm_to_settings (void)
@@ -86,6 +87,26 @@ void gnome_wm_manager_change_wm_to_settings (void)
         update_session ();
 }
 
+gboolean
+gnome_wm_manager_same_wm (GnomeWindowManager *wm1, GnomeWindowManager *wm2)
+{
+  GnomeDesktopItem *item1, *item2;
+  const char *location1, *location2;
+  gboolean same;
+
+  item1 = gnome_window_manager_get_ditem (wm1);
+  item2 = gnome_window_manager_get_ditem (wm2);
+
+  location1 = gnome_desktop_item_get_location (item1);
+  location2 = gnome_desktop_item_get_location (item2);
+
+  same = (strcmp (location1, location2) == 0);
+
+  gnome_desktop_item_unref (item1);
+  gnome_desktop_item_unref (item2);
+
+  return same;
+}
 
 static GtkWidget *restart_dialog = NULL;
 static GtkWidget *restart_label = NULL;

@@ -39,15 +39,17 @@ struct _GnomeWindowManagerClass
 };
 
 
-GObject *    gnome_window_manager_new                      (GnomeDesktopItem *item);
-GType        gnome_window_manager_get_type                 (void);
+GObject *         gnome_window_manager_new                      (GnomeDesktopItem *item);
+GType             gnome_window_manager_get_type                 (void);
 
-const char * gnome_window_manager_get_name                 (GnomeWindowManager *wm);
-void         gnome_window_manager_set_theme                (GnomeWindowManager *wm, const char *theme_name);
-GList *      gnome_window_manager_get_theme_list           (GnomeWindowManager *wm);
-void         gnome_window_manager_set_font                 (GnomeWindowManager *wm, const char *font);
-gboolean     gnome_window_manager_get_focus_follows_mouse  (GnomeWindowManager *wm);
-void         gnome_window_manager_set_focus_follows_mouse  (GnomeWindowManager *wm, gboolean focus_follows_mouse);
+const char *      gnome_window_manager_get_name                 (GnomeWindowManager *wm);
+GnomeDesktopItem *gnome_window_manager_get_ditem                (GnomeWindowManager *wm);
+void              gnome_window_manager_set_theme                (GnomeWindowManager *wm, const char *theme_name);
+/* GList of char *'s */
+GList *           gnome_window_manager_get_theme_list           (GnomeWindowManager *wm);
+void              gnome_window_manager_set_font                 (GnomeWindowManager *wm, const char *font);
+gboolean          gnome_window_manager_get_focus_follows_mouse  (GnomeWindowManager *wm);
+void              gnome_window_manager_set_focus_follows_mouse  (GnomeWindowManager *wm, gboolean focus_follows_mouse);
 
 G_END_DECLS
 
