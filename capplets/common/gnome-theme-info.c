@@ -28,10 +28,10 @@ typedef struct _ThemeCallbackData
 } ThemeCallbackData;
 
 
-GHashTable *theme_hash = NULL;
-GHashTable *icon_theme_hash = NULL;
-GHashTable *meta_theme_hash = NULL;
-GList *callbacks = NULL;
+static GHashTable *theme_hash = NULL;
+static GHashTable *icon_theme_hash = NULL;
+static GHashTable *meta_theme_hash = NULL;
+static GList *callbacks = NULL;
 
 
 const gchar *gtk2_suffix = "gtk-2.0";

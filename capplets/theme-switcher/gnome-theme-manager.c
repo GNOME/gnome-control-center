@@ -33,7 +33,7 @@
 #define WINDOW_THEME_DEFAULT_NAME "Atlanta"
 #define ICON_THEME_DEFAULT_NAME   "Default"
 
-#define MAX_ELEMENTS_BEFORE_SCROLLING 8
+#define MAX_ELEMENTS_BEFORE_SCROLLING 3
 
 static void read_themes (GladeXML *dialog);
 
@@ -84,6 +84,19 @@ create_dialog (void)
 
 
 static void
+async_func (GdkPixbuf *pixbuf,
+	    gpointer    data)
+{
+  GList *list = data;
+  GtkTreeIter *iter = list->next->data;
+  GtkTreeModel *model = list->data;
+
+  gtk_list_store_set (GTK_LIST_STORE (model), iter,
+		      PIXBUF_COLUMN, pixbuf,
+		      -1);
+}
+
+static void
 load_meta_themes (GtkTreeView *tree_view,
 		  GList       *meta_theme_list,
 		  char        *current_theme,
@@ -127,9 +140,22 @@ load_meta_themes (GtkTreeView *tree_view,
 	  gtk_tree_path_free (path);
 	  current_theme_found = TRUE;
 	}
-      blurb = g_strdup_printf ("<span size=\"larger\" weight=\"bold\">%s</span>\n\n%s",
+      blurb = g_strdup_printf ("<span size=\"larger\" weight=\"bold\">%s</span>\n%s",
 			       meta_theme_info->readable_name, meta_theme_info->comment);
+      pixbuf = NULL;
       pixbuf = generate_theme_thumbnail (meta_theme_info);
+      if (i <= MAX_ELEMENTS_BEFORE_SCROLLING)
+	{
+	  GtkTreeIter *new_iter = gtk_tree_iter_copy (&iter);
+	  GList *list_data = NULL;
+
+	  list_data = g_list_prepend (list_data, new_iter);
+	  list_data = g_list_prepend (list_data, model);
+#if 0
+	  //pixbuf = generate_theme_thumbnail (meta_theme_info);
+#endif  
+	}
+
       gtk_list_store_set (GTK_LIST_STORE (model), &iter,
 			  PIXBUF_COLUMN, pixbuf,
 			  THEME_NAME_COLUMN, blurb,
@@ -343,7 +369,6 @@ meta_theme_setup_info (GnomeThemeMetaInfo *meta_theme_info,
 {
   GtkWidget *notebook;
   GtkWidget *toggle;
-  gulong signal_id;
 
   notebook = WID ("meta_theme_notebook");
 
@@ -882,7 +907,17 @@ setup_dialog (GladeXML *dialog)
   size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
   gtk_size_group_add_widget (size_group, WID ("meta_theme_install_button"));
   gtk_size_group_add_widget (size_group, WID ("meta_theme_save_button"));
+  g_object_unref (size_group);
+
   
+  size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
+  gtk_size_group_add_widget (size_group, WID ("meta_theme_font1_button"));
+  gtk_size_group_add_widget (size_group, WID ("meta_theme_background1_button"));
+  gtk_size_group_add_widget (size_group, WID ("meta_theme_font2_button"));
+  gtk_size_group_add_widget (size_group, WID ("meta_theme_background2_button"));
+  g_object_unref (size_group);
+
+
   setup_tree_view (GTK_TREE_VIEW (WID ("meta_theme_treeview")),
   		   (GCallback) meta_theme_selection_changed,
 		   dialog);

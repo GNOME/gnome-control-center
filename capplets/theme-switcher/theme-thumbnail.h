@@ -5,8 +5,18 @@
 #include <gtk/gtk.h>
 #include "gnome-theme-info.h"
 
-GdkPixbuf *generate_theme_thumbnail      (GnomeThemeMetaInfo *meta_theme_info);
-void       setup_theme_thumbnail_factory (int                 argc,
-					  char               *argv[]);
+typedef void (* ThemeThumbnailFunc) (GdkPixbuf          *pixbuf,
+				     gpointer            data);
+
+
+GdkPixbuf *generate_theme_thumbnail       (GnomeThemeMetaInfo *meta_theme_info);
+void       generate_theme_thumbnail_async (GnomeThemeMetaInfo *meta_theme_info,
+					   ThemeThumbnailFunc  func,
+					   gpointer            data,
+					   GDestroyNotify      destroy);
+void       setup_theme_thumbnail_factory  (int                 argc,
+					   char               *argv[]);
+
+
 
 #endif /* __THEME_THUMBNAIL_H__ */

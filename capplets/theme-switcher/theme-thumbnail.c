@@ -17,15 +17,34 @@
 #include "capplet-util.h"
 
 static gint child_pid;
+#define ICON_SIZE_WIDTH 150
+#define ICON_SIZE_HEIGHT 150
 
+typedef struct
+{
+  gboolean set;
+  GByteArray *data;
+  gchar *meta_theme_name;
+  ThemeThumbnailFunc func;
+  gpointer user_data;
+  GDestroyNotify destroy;
+  GIOChannel *channel;
+  guint watch_id;
+} ThemeThumbnailAsyncData;
+
+
+
+GHashTable *theme_hash = NULL;
+
+ThemeThumbnailAsyncData async_data;
 
 /* Protocol */
 
 /* Our protocol is pretty simple.  The parent process will write three strings
  * (separated by a '\000') They are the widget theme, the wm theme, and the icon
  * theme.  Then, it will wait for the child to write back the data.  It expects
- * 100x100x3 bytes of information.  After that, the child is ready for the next
- * theme to render.
+ * ICON_SIZE_WIDTH * ICON_SIZE_HEIGHT * 4 bytes of information.  After that, the
+ * child is ready for the next theme to render.
  */
 
 enum
@@ -34,6 +53,7 @@ enum
   READING_CONTROL_THEME_NAME,
   READING_WM_THEME_NAME,
   READING_ICON_THEME_NAME,
+  READING_APPLICATION_FONT,
   WRITING_PIXBUF_DATA
 };
 
@@ -43,6 +63,7 @@ typedef struct
   GByteArray *control_theme_name;
   GByteArray *wm_theme_name;
   GByteArray *icon_theme_name;
+  GByteArray *application_font;
 } ThemeThumbnailData;
 
 int pipe_to_factory_fd[2];
@@ -99,12 +120,15 @@ create_image (ThemeThumbnailData *theme_thumbnail_data,
   GnomeIconTheme *icon_theme;
   GdkPixbuf *folder_icon;
   char *folder_icon_name;
-
+  char *foo;
   settings = gtk_settings_get_default ();
   g_object_set (G_OBJECT (settings),
 		"gtk-theme-name", (char *) theme_thumbnail_data->control_theme_name->data,
+		"gtk-font-name", (char *) theme_thumbnail_data->application_font->data,
 		NULL);
-
+  g_object_get (G_OBJECT (settings),
+		"gtk-icon-sizes", &foo,
+		NULL);
   theme = meta_theme_load ((char *) theme_thumbnail_data->wm_theme_name->data, NULL);
 
   flags = META_FRAME_ALLOWS_DELETE |
@@ -140,19 +164,19 @@ create_image (ThemeThumbnailData *theme_thumbnail_data,
   meta_preview_set_title (META_PREVIEW (preview), "");
 
 
-  gtk_window_set_default_size (GTK_WINDOW (window), 100, 100);
+  gtk_window_set_default_size (GTK_WINDOW (window), ICON_SIZE_WIDTH, ICON_SIZE_HEIGHT);
 
   gtk_widget_size_request (window, &requisition);
   allocation.x = 0;
   allocation.y = 0;
-  allocation.width = 100;
-  allocation.height = 100;
+  allocation.width = ICON_SIZE_WIDTH;
+  allocation.height = ICON_SIZE_HEIGHT;
   gtk_widget_size_allocate (window, &allocation);
   gtk_widget_size_request (window, &requisition);
 
   /* Create a pixmap */
   visual = gtk_widget_get_visual (window);
-  pixmap = gdk_pixmap_new (NULL, 100, 100, gdk_visual_get_best_depth());
+  pixmap = gdk_pixmap_new (NULL, ICON_SIZE_WIDTH, ICON_SIZE_HEIGHT, gdk_visual_get_best_depth());
   gdk_drawable_set_colormap (GDK_DRAWABLE (pixmap), gtk_widget_get_colormap (window));
 
   /* Draw the window */
@@ -169,7 +193,7 @@ create_image (ThemeThumbnailData *theme_thumbnail_data,
   fake_expose_widget (GTK_BIN (stock_button)->child, pixmap);
 
 
-  gdk_pixbuf_get_from_drawable (pixbuf, pixmap, NULL, 0, 0, 0, 0, 100, 100);
+  gdk_pixbuf_get_from_drawable (pixbuf, pixmap, NULL, 0, 0, 0, 0, ICON_SIZE_WIDTH, ICON_SIZE_HEIGHT);
 
   /* Handle the icon theme */
   icon_theme = gnome_icon_theme_new ();
@@ -257,6 +281,21 @@ handle_bytes (const gchar        *buffer,
 	      g_byte_array_append (theme_thumbnail_data->icon_theme_name, ptr, nil - ptr + 1);
 	      bytes_read -= (nil - ptr + 1);
 	      ptr = nil + 1;
+	      theme_thumbnail_data->status = READING_APPLICATION_FONT;
+	    }
+	  break;
+	case READING_APPLICATION_FONT:
+	  nil = memchr (ptr, '\000', bytes_read);
+	  if (nil == NULL)
+	    {
+	      g_byte_array_append (theme_thumbnail_data->application_font, ptr, bytes_read);
+	      bytes_read = 0;
+	    }
+	  else
+	    {
+	      g_byte_array_append (theme_thumbnail_data->application_font, ptr, nil - ptr + 1);
+	      bytes_read -= (nil - ptr + 1);
+	      ptr = nil + 1;
 	      theme_thumbnail_data->status = WRITING_PIXBUF_DATA;
 	    }
 	  break;
@@ -294,19 +333,19 @@ message_from_capplet (GIOChannel   *source,
 
       if (theme_thumbnail_data->status == WRITING_PIXBUF_DATA)
 	{
-	  pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, 100, 100);
+	  pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, ICON_SIZE_WIDTH, ICON_SIZE_HEIGHT);
 	  create_image (theme_thumbnail_data, pixbuf);
 	  rowstride = gdk_pixbuf_get_rowstride (pixbuf);
 	  pixels = gdk_pixbuf_get_pixels (pixbuf);
-
-	  for (i = 0; i < 100; i ++)
+	  for (i = 0; i < ICON_SIZE_HEIGHT; i ++)
 	    {
-	      write (pipe_from_factory_fd[1], pixels + (rowstride)*i, 100*4);
+	      write (pipe_from_factory_fd[1], pixels + (rowstride)*i, ICON_SIZE_WIDTH * gdk_pixbuf_get_n_channels (pixbuf));
 	    }
 	  theme_thumbnail_data->status = READY_FOR_THEME;
 	  g_byte_array_set_size (theme_thumbnail_data->control_theme_name, 0);
 	  g_byte_array_set_size (theme_thumbnail_data->wm_theme_name, 0);
 	  g_byte_array_set_size (theme_thumbnail_data->icon_theme_name, 0);
+	  g_byte_array_set_size (theme_thumbnail_data->application_font, 0);
 	}
       return TRUE;
     case G_IO_STATUS_AGAIN:
@@ -321,27 +360,151 @@ message_from_capplet (GIOChannel   *source,
   return TRUE;
 }
 
+static gboolean
+message_from_child (GIOChannel   *source,
+		    GIOCondition  condition,
+		    gpointer      data)
+{
+
+  gchar buffer[1024];
+  GIOStatus status;
+  gsize bytes_read;
+
+  if (async_data.set == FALSE)
+    return TRUE;
+
+  status = g_io_channel_read_chars (source,
+                                    buffer,
+                                    1024,
+                                    &bytes_read,
+                                    NULL);
+
+  switch (status)
+    {
+    case G_IO_STATUS_NORMAL:
+      g_byte_array_append (async_data.data, buffer, bytes_read);
+      if (async_data.data->len == ICON_SIZE_WIDTH * ICON_SIZE_HEIGHT * 4)
+	{
+	  GdkPixbuf *pixbuf;
+	  GdkPixbuf *scaled_pixbuf;
+	  gchar *pixels;
+	  gint i, rowstride;
+
+	  pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, ICON_SIZE_WIDTH, ICON_SIZE_HEIGHT);
+	  pixels = gdk_pixbuf_get_pixels (pixbuf);
+	  rowstride = gdk_pixbuf_get_rowstride (pixbuf);
+	  for (i = 0; i < ICON_SIZE_HEIGHT; i++)
+	    memcpy (pixels + rowstride * i, async_data.data->data + 4 * ICON_SIZE_WIDTH * i, ICON_SIZE_WIDTH * 4);
+
+	  scaled_pixbuf = gdk_pixbuf_scale_simple (pixbuf, ICON_SIZE_WIDTH/2, ICON_SIZE_HEIGHT/2, GDK_INTERP_BILINEAR);
+	  g_hash_table_insert (theme_hash, async_data.meta_theme_name, scaled_pixbuf);
+	  g_object_unref (pixbuf);
+
+ 	  (* async_data.func) (scaled_pixbuf, async_data.user_data);
+
+	  g_source_remove (async_data.watch_id);
+	  g_io_channel_unref (async_data.channel);
+	  async_data.channel = NULL;
+	  if (async_data.destroy)
+	    (* async_data.destroy) (async_data.data);
+	  g_free (async_data.meta_theme_name);
+	  async_data.meta_theme_name = NULL;
+	  async_data.set = FALSE;
+	}
+      return TRUE;
+    case G_IO_STATUS_AGAIN:
+      return TRUE;
+
+    case G_IO_STATUS_EOF:
+    case G_IO_STATUS_ERROR:
+      return TRUE;
+    default:
+      g_assert_not_reached ();
+    }
+
+  return TRUE;
+}
 
 GdkPixbuf *
 generate_theme_thumbnail (GnomeThemeMetaInfo *meta_theme_info)
 {
   GdkPixbuf *retval = NULL;
+  GdkPixbuf *pixbuf = NULL;
   gint i, rowstride;
   char *pixels;
 
-  retval = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, 100, 100);
+
+  g_return_val_if_fail (async_data.set == FALSE, NULL);
+
+  pixbuf = g_hash_table_lookup (theme_hash, meta_theme_info->name);
+  if (pixbuf != NULL)
+    {
+      return pixbuf;
+    }
+
+  pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, ICON_SIZE_WIDTH, ICON_SIZE_HEIGHT);
   write (pipe_to_factory_fd[1], meta_theme_info->gtk_theme_name, strlen (meta_theme_info->gtk_theme_name) + 1);
   write (pipe_to_factory_fd[1], meta_theme_info->metacity_theme_name, strlen (meta_theme_info->metacity_theme_name) + 1);
   write (pipe_to_factory_fd[1], meta_theme_info->icon_theme_name, strlen (meta_theme_info->icon_theme_name) + 1);
+  if (meta_theme_info->application_font == NULL)
+    write (pipe_to_factory_fd[1], "Sans 10", strlen ("Sans 10") + 1);
+  else
+    write (pipe_to_factory_fd[1], meta_theme_info->application_font, strlen (meta_theme_info->application_font) + 1);
 
-  rowstride = gdk_pixbuf_get_rowstride (retval);
-  pixels = gdk_pixbuf_get_pixels (retval);
+  rowstride = gdk_pixbuf_get_rowstride (pixbuf);
+  pixels = gdk_pixbuf_get_pixels (pixbuf);
 
-  for (i = 0; i < 100; i++)
+  for (i = 0; i < ICON_SIZE_HEIGHT; i++)
     {
-      read (pipe_from_factory_fd[0], pixels + (rowstride)*i, 100*4);
+      read (pipe_from_factory_fd[0], pixels + (rowstride)*i, ICON_SIZE_WIDTH * gdk_pixbuf_get_n_channels (pixbuf));
     }
+
+  retval = gdk_pixbuf_scale_simple (pixbuf, ICON_SIZE_WIDTH/2, ICON_SIZE_HEIGHT/2, GDK_INTERP_BILINEAR);
+
+  g_hash_table_insert (theme_hash, meta_theme_info->name, retval);
   return retval;
+}
+
+void
+generate_theme_thumbnail_async (GnomeThemeMetaInfo *meta_theme_info,
+				ThemeThumbnailFunc  func,
+				gpointer            user_data,
+				GDestroyNotify      destroy)
+{
+  GdkPixbuf *pixbuf;
+
+  g_return_if_fail (async_data.set == FALSE);
+
+  pixbuf = g_hash_table_lookup (theme_hash, meta_theme_info->name);
+  if (pixbuf != NULL)
+    {
+      (* func) (pixbuf, user_data);
+      if (destroy)
+	(* destroy) (user_data);
+      return;
+    }
+  
+  async_data.channel = g_io_channel_unix_new (pipe_from_factory_fd[0]);
+
+  g_io_channel_set_flags (async_data.channel, g_io_channel_get_flags (async_data.channel) |
+			  G_IO_FLAG_NONBLOCK, NULL);
+  g_io_channel_set_encoding (async_data.channel, NULL, NULL);
+  async_data.watch_id = g_io_add_watch (async_data.channel, G_IO_IN | G_IO_HUP, message_from_child, NULL);
+
+  async_data.set = TRUE;
+  async_data.meta_theme_name = g_strdup (meta_theme_info->name);
+  async_data.func = func;
+  async_data.user_data = user_data;
+  async_data.destroy = destroy;
+
+
+  write (pipe_to_factory_fd[1], meta_theme_info->gtk_theme_name, strlen (meta_theme_info->gtk_theme_name) + 1);
+  write (pipe_to_factory_fd[1], meta_theme_info->metacity_theme_name, strlen (meta_theme_info->metacity_theme_name) + 1);
+  write (pipe_to_factory_fd[1], meta_theme_info->icon_theme_name, strlen (meta_theme_info->icon_theme_name) + 1);
+  if (meta_theme_info->application_font == NULL)
+    write (pipe_to_factory_fd[1], "Sans 10", strlen ("Sans 10") + 1);
+  else
+    write (pipe_to_factory_fd[1], meta_theme_info->application_font, strlen (meta_theme_info->application_font) + 1);
 }
 
 void
@@ -353,8 +516,8 @@ setup_theme_thumbnail_factory (int argc, char *argv[])
   child_pid = fork ();
   if (child_pid == 0)
     {
-      GIOChannel *channel;
       ThemeThumbnailData data;
+      GIOChannel *channel;
 
       /* Child */
       gtk_init (&argc, &argv);
@@ -366,6 +529,7 @@ setup_theme_thumbnail_factory (int argc, char *argv[])
       data.control_theme_name = g_byte_array_new ();
       data.wm_theme_name = g_byte_array_new ();
       data.icon_theme_name = g_byte_array_new ();
+      data.application_font = g_byte_array_new ();
 
       channel = g_io_channel_unix_new (pipe_to_factory_fd[0]);
       g_io_channel_set_flags (channel, g_io_channel_get_flags (channel) |
@@ -381,4 +545,9 @@ setup_theme_thumbnail_factory (int argc, char *argv[])
   /* Parent */
   close (pipe_to_factory_fd[0]);
   close (pipe_from_factory_fd[1]);
+  async_data.set = FALSE;
+  async_data.meta_theme_name = NULL;
+  async_data.data = g_byte_array_new ();
+
+  theme_hash = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, g_object_unref);
 }
