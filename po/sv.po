@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2002-06-23 11:42+0200\n"
-"PO-Revision-Date: 2002-06-23 11:43+0200\n"
+"POT-Creation-Date: 2002-07-05 23:19+0200\n"
+"PO-Revision-Date: 2002-07-05 23:20+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -243,7 +243,7 @@ msgstr "I_ngen bild"
 msgid "Select _picture:"
 msgstr "Välj _bild:"
 
-#: capplets/background/background-properties-capplet.c:558
+#: capplets/background/background-properties-capplet.c:561
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:712
 #: capplets/keyboard/gnome-keyboard-properties.c:363
@@ -252,7 +252,7 @@ msgstr "Välj _bild:"
 msgid "Retrieve and store legacy settings"
 msgstr "Hämta och lagra föråldrade inställningar"
 
-#: capplets/background/background-properties-capplet.c:584
+#: capplets/background/background-properties-capplet.c:587
 #: capplets/background/background-properties.glade.h:2
 msgid "Background Preferences"
 msgstr "Bakgrundsinställningar"
@@ -347,7 +347,7 @@ msgstr ""
 msgid "Just apply settings and quit"
 msgstr "Verkställ ändringarna och avsluta"
 
-#: capplets/common/capplet-util.c:339
+#: capplets/common/capplet-util.c:340
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "Ett fel inträffade vid visande av hjälp: %s"
@@ -885,25 +885,25 @@ msgid "Source Code"
 msgstr "Källkod"
 
 #: capplets/file-types/category-names.h:25
-#: capplets/file-types/mime-type-info.c:664
+#: capplets/file-types/mime-type-info.c:673
 msgid "Audio"
 msgstr "Ljud"
 
 #: capplets/file-types/category-names.h:26
-#: capplets/file-types/mime-type-info.c:660
+#: capplets/file-types/mime-type-info.c:669
 msgid "Images"
 msgstr "Bilder"
 
 #: capplets/file-types/category-names.h:27
-#: capplets/file-types/mime-type-info.c:662
+#: capplets/file-types/mime-type-info.c:671
 msgid "Video"
 msgstr "Grafik"
 
-#: capplets/file-types/file-types-capplet.c:226
+#: capplets/file-types/file-types-capplet.c:227
 msgid "Description"
 msgstr "Beskrivning"
 
-#: capplets/file-types/file-types-capplet.c:233
+#: capplets/file-types/file-types-capplet.c:234
 msgid "Extensions"
 msgstr "Tillägg"
 
@@ -1042,8 +1042,8 @@ msgid "Structure containing information on the MIME category"
 msgstr "Struktur som innehåller information om MIME-kategorin"
 
 #: capplets/file-types/mime-category-edit-dialog.c:344
-#: capplets/file-types/mime-edit-dialog.c:442
-#: capplets/file-types/mime-edit-dialog.c:546
+#: capplets/file-types/mime-edit-dialog.c:465
+#: capplets/file-types/mime-edit-dialog.c:569
 #: capplets/file-types/service-edit-dialog.c:358
 #: capplets/file-types/service-edit-dialog.c:407
 msgid "Custom"
@@ -1077,12 +1077,22 @@ msgstr "Sant om denna dialog är till för tillägg av en MIME-typ"
 msgid "Add file type"
 msgstr "Lägg till filtyp"
 
-#: capplets/file-types/mime-edit-dialog.c:437
-#: capplets/file-types/mime-edit-dialog.c:496
+# SUN NEW TRANSLATION
+#
+# Sun vill ha "_Övrigt" här
+# Jag vill ha "Diverse"
+#
+#: capplets/file-types/mime-edit-dialog.c:409
+#: capplets/file-types/mime-type-info.c:675
+msgid "Misc"
+msgstr "Diverse"
+
+#: capplets/file-types/mime-edit-dialog.c:460
+#: capplets/file-types/mime-edit-dialog.c:519
 msgid "None"
 msgstr "Ingen"
 
-#: capplets/file-types/mime-edit-dialog.c:802
+#: capplets/file-types/mime-edit-dialog.c:825
 msgid ""
 "Please enter a valid MIME type.  It should be of the form class/type and may "
 "not contain any spaces."
@@ -1090,26 +1100,17 @@ msgstr ""
 "Ange en giltig MIME-typ. Den bör vara på formen klass/typ och får inte "
 "innehålla några blanksteg."
 
-#: capplets/file-types/mime-edit-dialog.c:810
+#: capplets/file-types/mime-edit-dialog.c:832
 msgid "A MIME type with that name already exists, overwrite ?."
 msgstr "En MIME-typ med det namnet finns redan, skriva över?"
 
-#: capplets/file-types/mime-edit-dialog.c:875
+#: capplets/file-types/mime-edit-dialog.c:897
 msgid "Category"
 msgstr "Kategori"
 
-#: capplets/file-types/mime-edit-dialog.c:880
+#: capplets/file-types/mime-edit-dialog.c:902
 msgid "Choose a file category"
 msgstr "Välj en filkategori"
-
-# SUN NEW TRANSLATION
-#
-# Sun vill ha "_Övrigt" här
-# Jag vill ha "Diverse"
-#
-#: capplets/file-types/mime-type-info.c:666
-msgid "Misc"
-msgstr "Diverse"
 
 #: capplets/file-types/mime-types-model.c:167
 #: capplets/file-types/mime-types-model.c:168
@@ -1209,8 +1210,8 @@ msgid "Set the font for the icons on the desktop"
 msgstr "Ställ in typsnitt för ikonerna på skrivbordet"
 
 #: capplets/font/font-properties.glade.h:4
-msgid "Standard _application font:"
-msgstr "Standard_typsnitt för program:"
+msgid "_Application font:"
+msgstr "_Programtypsnitt:"
 
 #: capplets/font/font-properties.glade.h:5
 msgid "_Desktop font:"
@@ -1258,7 +1259,7 @@ msgstr "Fönsterhantering"
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Fel vid inställning av ny snabbtangent i konfigurationsdatabasen: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:710
+#: capplets/keybindings/gnome-keybinding-properties.c:708
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1266,11 +1267,11 @@ msgstr ""
 "Kan inte hitta några tangentbordsteman. Detta betyder att din GTK+-"
 "installation inte har installerats korrekt."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:735
+#: capplets/keybindings/gnome-keybinding-properties.c:733
 msgid "Action"
 msgstr "Åtgärd"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:747
+#: capplets/keybindings/gnome-keybinding-properties.c:745
 msgid "Shortcut"
 msgstr "Genväg"
 
