@@ -59,6 +59,9 @@ struct _BGApplierClass
 guint      bg_applier_get_type             (void);
 
 GObject   *bg_applier_new                  (BGApplierType          type);
+GObject   *bg_applier_new_at_size          (BGApplierType          type,
+					    const guint width,
+					    const guint height);
 
 void       bg_applier_apply_prefs          (BGApplier             *bg_applier,
 					    const BGPreferences *prefs);

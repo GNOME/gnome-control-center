@@ -1,3 +1,16 @@
+2002-03-28  Richard Hestilow  <hestilow@ximian.com>
+
+	* applier.c (MONITOR_CONTENTS_WIDTH, MONITOR_CONTENTS_HEIGHT):
+	Rename to _DEFAULT_WIDTH, _DEFAULT_HEIGHT.
+	(draw_disabled_message): Accept width and height as variables.
+	(bg_applier_class_init): Install props preview_width, preview_height.
+	(bg_applier_set_prop): Accept new size properties, only set to
+	default width/height on mode PREVIEW if uninitialized.
+	(bg_applier_new_at_size): Added.
+	(bg_applier_apply_prefs): Call draw_disabled_message with actual
+	width/height.
+	(bg_applier_get_preview_width): Create pixmap based on set size.
+	
 2002-03-26  Dave Camp  <dave@ximian.com>
 
 	* applier.c: (bg_applier_init): Don't initialize

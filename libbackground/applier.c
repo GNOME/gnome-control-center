@@ -40,12 +40,14 @@
 
 #define MONITOR_CONTENTS_X 0 
 #define MONITOR_CONTENTS_Y 0
-#define MONITOR_CONTENTS_WIDTH 64
-#define MONITOR_CONTENTS_HEIGHT 48
+#define MONITOR_CONTENTS_DEFAULT_WIDTH 64
+#define MONITOR_CONTENTS_DEFAULT_HEIGHT 48
 
 enum {
 	PROP_0,
-	PROP_TYPE
+	PROP_TYPE,
+	PROP_PREVIEW_WIDTH,
+	PROP_PREVIEW_HEIGHT
 };
 
 struct _BGApplierPrivate 
@@ -125,7 +127,9 @@ static void bg_applier_finalize      (GObject           *object);
 
 static void run_render_pipeline      (BGApplier           *bg_applier, 
 				      const BGPreferences *prefs);
-static void draw_disabled_message    (GtkWidget         *widget);
+static void draw_disabled_message    (GtkWidget         *widget,
+				      const guint width,
+				      const guint height);
 
 static void render_background        (BGApplier           *bg_applier,
 				      const BGPreferences *prefs);
@@ -210,6 +214,8 @@ bg_applier_init (BGApplier *bg_applier, BGApplierClass *class)
 	bg_applier->p->pixbuf           = NULL;
 	bg_applier->p->wallpaper_pixbuf = NULL;
 	bg_applier->p->timeout          = 0;
+	bg_applier->p->render_geom.width = -1;
+	bg_applier->p->render_geom.height = -1;
 }
 
 static void
@@ -231,6 +237,22 @@ bg_applier_class_init (BGApplierClass *class)
 				   _("Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW for preview"),
 				   0, 1, 0,
 				   G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+
+	g_object_class_install_property
+		(object_class, PROP_PREVIEW_WIDTH,
+		 g_param_spec_uint ("preview_width",
+			 	    _("Preview Width"),
+				    _("Width if applier is a preview: Defaults to 64."),
+				    1, 65535, MONITOR_CONTENTS_DEFAULT_WIDTH,
+				    G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+
+	g_object_class_install_property
+		(object_class, PROP_PREVIEW_HEIGHT,
+		 g_param_spec_uint ("preview_height",
+				    _("Preview Height"),
+				    _("Height if applier is a preview: Defaults to 48."),
+				    1, 65535, MONITOR_CONTENTS_DEFAULT_HEIGHT,
+				    G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 
 	parent_class = 
 		G_OBJECT_CLASS (g_type_class_ref (G_TYPE_OBJECT));
@@ -268,8 +290,13 @@ bg_applier_set_prop (GObject *object, guint prop_id, const GValue *value, GParam
 		case BG_APPLIER_PREVIEW:
 			bg_applier->p->render_geom.x = MONITOR_CONTENTS_X;
 			bg_applier->p->render_geom.y = MONITOR_CONTENTS_Y;
-			bg_applier->p->render_geom.width = MONITOR_CONTENTS_WIDTH;
-			bg_applier->p->render_geom.height = MONITOR_CONTENTS_HEIGHT;
+			
+			if (bg_applier->p->render_geom.width == -1)
+			{
+				bg_applier->p->render_geom.width = MONITOR_CONTENTS_DEFAULT_WIDTH;
+				bg_applier->p->render_geom.height = MONITOR_CONTENTS_DEFAULT_HEIGHT;
+			}
+
 			break;
 
 		default:
@@ -279,6 +306,14 @@ bg_applier_set_prop (GObject *object, guint prop_id, const GValue *value, GParam
 
 		break;
 
+	case PROP_PREVIEW_WIDTH:
+		bg_applier->p->render_geom.width = g_value_get_uint (value);
+		break;
+
+	case PROP_PREVIEW_HEIGHT:
+		bg_applier->p->render_geom.height = g_value_get_uint (value);
+		break;
+		
 	default:
 		g_warning ("Bad property set");
 		break;
@@ -354,6 +389,22 @@ bg_applier_new (BGApplierType type)
 	return object;
 }
 
+GObject *
+bg_applier_new_at_size (BGApplierType type,
+			const guint width,
+			const guint height)
+{
+	GObject *object;
+
+	object = g_object_new (bg_applier_get_type (),
+			       "type", type,
+			       "preview_width", width,
+			       "preview_height", height,
+			       NULL);
+
+	return object;
+}
+
 void
 bg_applier_apply_prefs (BGApplier           *bg_applier, 
 			const BGPreferences *prefs)
@@ -378,7 +429,7 @@ bg_applier_apply_prefs (BGApplier           *bg_applier,
 
 	if (!new_prefs->enabled) {
 		if (bg_applier->p->type == BG_APPLIER_PREVIEW)
-			draw_disabled_message (bg_applier_get_preview_widget (bg_applier));
+			draw_disabled_message (bg_applier_get_preview_widget (bg_applier), bg_applier->p->render_geom.width, bg_applier->p->render_geom.height);
 		return;
 	}
 
@@ -439,7 +490,10 @@ bg_applier_get_preview_widget (BGApplier *bg_applier)
 	{
 		GdkPixmap *pixmap;
 
-		pixmap = gdk_pixmap_new (gdk_get_default_root_window (), MONITOR_CONTENTS_WIDTH, MONITOR_CONTENTS_HEIGHT, -1);
+		pixmap = gdk_pixmap_new (gdk_get_default_root_window (),
+					 bg_applier->p->render_geom.width,
+					 bg_applier->p->render_geom.height,
+					 -1);
 		bg_applier->p->preview_widget = gtk_image_new_from_pixmap (pixmap, NULL);
 	}
 	return bg_applier->p->preview_widget;
@@ -455,21 +509,19 @@ bg_applier_get_wallpaper_pixbuf (BGApplier *bg_applier)
 }
 
 static void
-draw_disabled_message (GtkWidget *widget)
+draw_disabled_message (GtkWidget *widget, const guint w, const guint h)
 {
 	GdkPixmap      *pixmap;
 	GdkColor        color;
 	PangoLayout    *layout;
 	PangoRectangle  extents;
 	GdkGC          *gc;
-	gint            x, y, w, h;
+	gint            x, y;
 	const char     *disabled_string = _("Disabled");
 
 	g_return_if_fail (widget != NULL);
 	g_return_if_fail (GTK_IS_IMAGE (widget));
 
-	w = MONITOR_CONTENTS_WIDTH;
-	h = MONITOR_CONTENTS_HEIGHT;
 	x = MONITOR_CONTENTS_X;
 	y = MONITOR_CONTENTS_Y;
 
