@@ -16,7 +16,7 @@ INCLUDES = 			\
 	-I$(top_srcdir)/intl -I$(top_builddir)/intl	\
 	-I$(includedir) $(GNOME_INCLUDEDIR)		\
 	-DVERSION=\""$(VERSION)"\"			\
-	-DSETTINGS_DIR=\""$(sysdir)"\"			\
+	-DSETTINGS_DIR=\""$(datadir)/control-center"\"	\
 	$(LIBGLADE_CFLAGS)				\
 	-DPIXMAPS_DIR=\""$(appicondir)"\"
 
