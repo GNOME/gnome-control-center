@@ -45,6 +45,9 @@ sysdir = $(datadir)/control-center
 sys_in_files = file-types-capplet.desktop.in 
 sys_DATA = $(sys_in_files:.desktop.in=.desktop)
 
+settingsdir = $(datadir)/gnome/apps/Settings
+settings_DATA = $(sys_DATA)
+
 desktop_in_file = file-types-capplet.desktop.in
 
 desktop_file = $(desktop_in_file:.desktop.in=.desktop)
