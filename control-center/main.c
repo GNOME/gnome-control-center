@@ -30,6 +30,10 @@
 
 #include <bonobo.h>
 
+#ifdef GTKHTML_HAVE_GCONF
+#include <gconf/gconf.h>
+#endif
+
 #include "capplet-dir.h"
 #include "capplet-dir-view.h"
 
@@ -51,6 +55,9 @@ main (int argc, char **argv)
 
 	gnomelib_register_popt_table (gnomecc_options, _("GNOME Control Center options"));
 	gnome_init ("control-center", VERSION, argc, argv);
+#ifdef GTKHTML_HAVE_GCONF
+	gconf_init (argc, argv, NULL);
+#endif
 	glade_gnome_init ();
 
 	orb = oaf_init (argc, argv);
