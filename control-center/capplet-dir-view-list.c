@@ -331,7 +331,7 @@ static void
 select_icon_list_cb (GtkWidget *widget, gint arg1, GdkEvent *event, 
 		     CappletDirView *view) 
 {
-	if (event->type == GDK_2BUTTON_PRESS &&
+	if (event && event->type == GDK_2BUTTON_PRESS &&
 	    ((GdkEventButton *) event)->button == 1) 
 	{
 		capplet_dir_entry_activate 
@@ -340,6 +340,17 @@ select_icon_list_cb (GtkWidget *widget, gint arg1, GdkEvent *event,
 	} else {
 		view->selected = real_slist_nth_data (view->capplet_dir->entries, arg1, TYPE_CAPPLET);
 	}
+}
+
+static gboolean
+cdvl_key_press (GtkWidget *widget, GdkEventKey *event, CappletDirView *view)
+{
+	if ((event->keyval == GDK_Return) && (view->selected)) {
+		capplet_dir_entry_activate (view->selected, view);
+		return TRUE;
+	}
+
+	return FALSE;
 }
 
 void
@@ -509,6 +520,9 @@ list_create (CappletDirView *view)
 	g_signal_connect (G_OBJECT (w), "select-icon", 
 			  (GCallback) select_icon_list_cb,
 			  view);
+
+	g_signal_connect (G_OBJECT (w), "key_press_event",
+			  G_CALLBACK (cdvl_key_press), view);
 
 	gtk_container_add (GTK_CONTAINER (sw), w);
 	gtk_paned_add2 (GTK_PANED (hbox), sw);

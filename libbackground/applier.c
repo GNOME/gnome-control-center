@@ -824,8 +824,8 @@ render_to_screen (BGApplier *bg_applier, const BGPreferences *prefs)
 						    bg_applier->p->render_geom.height);
 			}
 			else if (bg_applier->p->type == BG_APPLIER_ROOT) {
-				gdk_window_set_back_pixmap (GDK_ROOT_PARENT (), NULL, FALSE);
-				gdk_window_set_background (GDK_ROOT_PARENT (), prefs->color1);
+				gdk_window_set_back_pixmap (gdk_get_default_root_window (), NULL, FALSE);
+				gdk_window_set_background (gdk_get_default_root_window (), prefs->color1);
 			}
 		}
 	}
