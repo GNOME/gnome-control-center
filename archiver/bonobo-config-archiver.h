@@ -59,6 +59,7 @@ struct _BonoboConfigArchiver {
 	Archive              *archive;
 	Location             *location;
 	gchar                *backend_id;
+	gchar                *real_name;
 
 	BonoboEventSource    *es;
 };

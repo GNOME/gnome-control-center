@@ -482,12 +482,15 @@ static void
 bonobo_config_archiver_destroy (GtkObject *object)
 {
 	BonoboConfigArchiver *archiver_db = BONOBO_CONFIG_ARCHIVER (object);
-	CORBA_Environment      ev;
+	CORBA_Environment     ev;
 
 	CORBA_exception_init (&ev);
 
-	bonobo_url_unregister ("BONOBO_CONF:ARCHIVER", archiver_db->filename, &ev);
-      
+	if (archiver_db->real_name != NULL) {
+		bonobo_url_unregister ("BONOBO_CONF:ARCHIVER", archiver_db->real_name, &ev);
+		g_free (archiver_db->real_name);
+	}
+
 	CORBA_exception_free (&ev);
 
 	if (archiver_db->doc)
@@ -655,6 +658,7 @@ bonobo_config_archiver_new (const char *backend_id, const char *location_id)
 
 	archiver_db->backend_id = g_strdup (backend_id);
 	archiver_db->archive = archive;
+	archiver_db->real_name = real_name;
 	
 	archiver_db->doc = location_load_rollback_data
 		(archiver_db->location, NULL, 0, archiver_db->backend_id, TRUE);
@@ -693,7 +697,6 @@ bonobo_config_archiver_new (const char *backend_id, const char *location_id)
 	db = CORBA_Object_duplicate (BONOBO_OBJREF (archiver_db), NULL);
 
 	bonobo_url_register ("BONOBO_CONF:ARCHIVER", real_name, NULL, db, &ev);
-	g_free (real_name);
 
 	return db;
 }

@@ -1,3 +1,13 @@
+2001-07-12  Bradford Hovinen  <hovinen@ximian.com>
+
+	* archive.c (archive_get_current_location_id): Only try to store a
+	full snapshot if we are in a global archive
+
+	* bonobo-config-archiver.c (bonobo_config_archiver_new): Store
+	real_name in archiver_db
+	(bonobo_config_archiver_destroy): Use archiver_db->real_name with
+	bonobo_url_register
+
 2001-07-10  Bradford Hovinen  <hovinen@ximian.com>
 
 	* default-user.xml: Add sound-properties

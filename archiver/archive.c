@@ -522,7 +522,9 @@ archive_get_current_location_id (Archive *archive)
 				(location_new (archive,
 					       archive->current_location_id,
 					       NULL));
-			if (location_store_full_snapshot (loc) < 0) {
+			if (!archive->is_global ||
+			    location_store_full_snapshot (loc) < 0)
+			{
 				location_delete (loc);
 				return NULL;
 			}
