@@ -40,7 +40,7 @@
 #define PMU_IOC_GRAB_BACKLIGHT  _IOR('B', 6, 0)
 #endif
 
-G_DEFINE_TYPE (AcmeFblevel, acme_fblevel, ACME_TYPE_FBLEVEL)
+G_DEFINE_TYPE (AcmeFblevel, acme_fblevel, G_TYPE_OBJECT)
 
 struct AcmeFblevelPrivate {
 	int pmu_fd;
