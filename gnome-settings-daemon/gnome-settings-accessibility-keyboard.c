@@ -412,6 +412,12 @@ gnome_settings_accessibility_keyboard_load (GConfClient *client)
 	gdk_window_add_filter (NULL, &cb_xkb_event_filter, NULL);
 }
 
+void
+gnome_settings_accessibility_keyboard_init (GConfClient *client)
+{
+	gnome_settings_daemon_register_callback (CONFIG_ROOT, &set_server_from_gconf);
+}
+
 #else
 
 void
@@ -419,10 +425,9 @@ gnome_settings_accessibility_keyboard_load (GConfClient *client)
 {
 	g_warning ("Unsupported in this build");
 }
-#endif
 
 void
 gnome_settings_accessibility_keyboard_init (GConfClient *client)
 {
-	gnome_settings_daemon_register_callback (CONFIG_ROOT, &set_server_from_gconf);
 }
+#endif
