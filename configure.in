@@ -64,14 +64,11 @@ dnl
 dnl Check for Xft version 2; we build in extra functionality to the font capplet
 dnl when we have it.
 dnl
-have_xft2=false
-xft_modules=""
+xft_modules=
 if $PKG_CONFIG --exists xft ; then
-  have_xft2=true
   xft_modules="xft"
+  AC_DEFINE(HAVE_XFT2)
 fi
-
-AC_DEFINE(HAVE_XFT2)
 
 PKG_CHECK_MODULES(FONT_CAPPLET, $COMMON_MODULES $xft_modules)
 
