@@ -1,3 +1,20 @@
+2003-07-02  Mark McLoughlin  <mark@skynet.ie>
+
+	Handle crashes of the thumbnailer child process a
+	little more gracefully.
+	
+        * theme-thumbnail.c:
+	(generate_theme_thumbnail): if we get an EOF from
+	the child close the pipe, return NULL and return
+	NULL from any subsequent calls.
+	(generate_theme_thumbnail_async): return NULL if
+	the pipe has been closed.
+	(theme_thumbnail_factory_init): set pipe descriptos
+	to zero after closing them.
+
+        * gnome-theme-manager.c: (idle_async_func), (load_meta_themes):
+        use the default image if the thumbnailer fails.
+	
 2003-05-03  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* theme-thumbnail.c: (create_image): Merge leak fix.
