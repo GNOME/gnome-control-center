@@ -160,11 +160,28 @@ mime_edit_editable_enters (MimeEditDialog *dialog, GtkEditable *editable)
 }
 
 static void
+check_for_content (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter,
+		   gpointer data) 
+{
+	*((gboolean *)data) = TRUE;
+}
+
+static void
+remove_ext_sensitivity_cb (GtkTreeSelection *selection, GtkWidget *button)
+{
+	gboolean flag = FALSE;
+	gtk_tree_selection_selected_foreach (selection, check_for_content, &flag);
+	gtk_widget_set_sensitive (GTK_WIDGET (button), flag);
+}
+
+static void
 mime_edit_dialog_init (MimeEditDialog *dialog, MimeEditDialogClass *class)
 {
 	GtkSizeGroup *size_group;
 	GtkTreeView *view;
 	GtkCellRenderer *renderer;
+	GtkWidget *remove_ext;
+	GtkTreeSelection *selection;
 
 	dialog->p = g_new0 (MimeEditDialogPrivate, 1);
 	dialog->p->dialog_xml = glade_xml_new
@@ -199,12 +216,22 @@ mime_edit_dialog_init (MimeEditDialog *dialog, MimeEditDialogClass *class)
 
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog->p->dialog_win)->vbox), WID ("edit_widget"), TRUE, TRUE, 0);
 
-	g_signal_connect_swapped (G_OBJECT (WID ("new_ext_entry")), "activate", (GCallback) add_ext_cb, dialog);
-	g_signal_connect_swapped (G_OBJECT (WID ("remove_ext_button")), "clicked", (GCallback) remove_ext_cb, dialog);
-	g_signal_connect_swapped (G_OBJECT (WID ("choose_button")), "clicked", (GCallback) choose_cat_cb, dialog);
-	g_signal_connect_swapped (G_OBJECT (WID ("default_action_select")), "changed", (GCallback) default_action_changed_cb, dialog);
+	remove_ext = WID ("remove_ext_button");
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (WID ("ext_list")));
+	g_signal_connect (G_OBJECT (selection), "changed",
+		(GCallback) remove_ext_sensitivity_cb, remove_ext);
+	g_signal_connect_swapped (G_OBJECT (remove_ext), "clicked",
+		(GCallback) remove_ext_cb, dialog);
+	g_signal_connect_swapped (G_OBJECT (WID ("new_ext_entry")), "activate",
+		(GCallback) add_ext_cb, dialog);
+	g_signal_connect_swapped (G_OBJECT (WID ("choose_button")), "clicked",
+		(GCallback) choose_cat_cb, dialog);
+	g_signal_connect_swapped (G_OBJECT (WID ("default_action_select")), "changed",
+		(GCallback) default_action_changed_cb, dialog);
+	g_signal_connect_swapped (G_OBJECT (dialog->p->dialog_win), "response",
+		(GCallback) response_cb, dialog);
 
-	g_signal_connect_swapped (G_OBJECT (dialog->p->dialog_win), "response", (GCallback) response_cb, dialog);
+	remove_ext_sensitivity_cb (selection, (gpointer)remove_ext);
 
 	mime_edit_editable_enters (dialog, GTK_EDITABLE (WID ("description_entry")));
 	mime_edit_editable_enters (dialog, GTK_EDITABLE (WID ("mime_type_entry")));
