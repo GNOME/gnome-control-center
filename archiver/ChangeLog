@@ -1,5 +1,10 @@
 2001-08-29  Bradford Hovinen  <hovinen@ximian.com>
 
+	* archive.c (foreach_build_list_cb): Don't unref the location if
+	it is deleted
+	(load_all_locations): Check if the location is marked deleted and
+	throw it away if so
+
 	* location.c (location_new): Don't unref parent location
 
 2001-08-28  Bradford Hovinen  <hovinen@ximian.com>

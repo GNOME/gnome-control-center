@@ -139,6 +139,7 @@
 	  <name>button4</name>
 	  <can_focus>True</can_focus>
 	  <label>View Logs...</label>
+	  <relief>GTK_RELIEF_NORMAL</relief>
 	  <child>
 	    <left_attach>0</left_attach>
 	    <right_attach>1</right_attach>
@@ -160,6 +161,7 @@
 	  <name>button5</name>
 	  <can_focus>True</can_focus>
 	  <label>Advanced...</label>
+	  <relief>GTK_RELIEF_NORMAL</relief>
 	  <child>
 	    <left_attach>1</left_attach>
 	    <right_attach>2</right_attach>
@@ -356,6 +358,7 @@
 	      <last_modification_time>Wed, 20 Dec 2000 23:51:41 GMT</last_modification_time>
 	    </signal>
 	    <label>Create...</label>
+	    <relief>GTK_RELIEF_NORMAL</relief>
 	    <child>
 	      <padding>0</padding>
 	      <expand>False</expand>
@@ -373,6 +376,7 @@
 	      <last_modification_time>Wed, 20 Dec 2000 23:51:56 GMT</last_modification_time>
 	    </signal>
 	    <label>Destroy...</label>
+	    <relief>GTK_RELIEF_NORMAL</relief>
 	    <child>
 	      <padding>0</padding>
 	      <expand>False</expand>
@@ -390,6 +394,7 @@
 	      <last_modification_time>Wed, 20 Dec 2000 23:52:13 GMT</last_modification_time>
 	    </signal>
 	    <label>Rename...</label>
+	    <relief>GTK_RELIEF_NORMAL</relief>
 	    <child>
 	      <padding>0</padding>
 	      <expand>False</expand>
@@ -417,6 +422,7 @@
 	      <last_modification_time>Wed, 20 Dec 2000 23:52:33 GMT</last_modification_time>
 	    </signal>
 	    <label>Change to this Location</label>
+	    <relief>GTK_RELIEF_NORMAL</relief>
 	    <child>
 	      <padding>0</padding>
 	      <expand>False</expand>
@@ -434,6 +440,7 @@
 	      <last_modification_time>Wed, 20 Dec 2000 23:52:51 GMT</last_modification_time>
 	    </signal>
 	    <label>Edit this Location</label>
+	    <relief>GTK_RELIEF_NORMAL</relief>
 	    <child>
 	      <padding>0</padding>
 	      <expand>False</expand>
@@ -480,7 +487,7 @@
 
 <widget>
   <class>GnomeDialog</class>
-  <name>rollback_dialog</name>
+  <name>rollback_dialog_backup</name>
   <title>Restore old configuration</title>
   <type>GTK_WINDOW_TOPLEVEL</type>
   <position>GTK_WIN_POS_NONE</position>
@@ -724,12 +731,130 @@
 	  </child>
 	</widget>
       </widget>
+    </widget>
+  </widget>
+</widget>
+
+<widget>
+  <class>GnomeDialog</class>
+  <name>rollback_dialog_win</name>
+  <type>GTK_WINDOW_TOPLEVEL</type>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>False</modal>
+  <allow_shrink>False</allow_shrink>
+  <allow_grow>False</allow_grow>
+  <auto_shrink>False</auto_shrink>
+  <auto_close>False</auto_close>
+  <hide_on_close>False</hide_on_close>
+
+  <widget>
+    <class>GtkVBox</class>
+    <child_name>GnomeDialog:vbox</child_name>
+    <name>dialog-vbox4</name>
+    <homogeneous>False</homogeneous>
+    <spacing>8</spacing>
+    <child>
+      <padding>4</padding>
+      <expand>True</expand>
+      <fill>True</fill>
+    </child>
+
+    <widget>
+      <class>GtkHButtonBox</class>
+      <child_name>GnomeDialog:action_area</child_name>
+      <name>dialog-action_area4</name>
+      <layout_style>GTK_BUTTONBOX_END</layout_style>
+      <spacing>8</spacing>
+      <child_min_width>85</child_min_width>
+      <child_min_height>27</child_min_height>
+      <child_ipad_x>7</child_ipad_x>
+      <child_ipad_y>0</child_ipad_y>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>True</fill>
+	<pack>GTK_PACK_END</pack>
+      </child>
 
       <widget>
-	<class>GtkHBox</class>
-	<name>hbox6</name>
-	<homogeneous>False</homogeneous>
-	<spacing>5</spacing>
+	<class>GtkButton</class>
+	<name>button17</name>
+	<can_default>True</can_default>
+	<can_focus>True</can_focus>
+	<stock_button>GNOME_STOCK_BUTTON_OK</stock_button>
+      </widget>
+
+      <widget>
+	<class>GtkButton</class>
+	<name>button18</name>
+	<can_default>True</can_default>
+	<can_focus>True</can_focus>
+	<stock_button>GNOME_STOCK_BUTTON_APPLY</stock_button>
+      </widget>
+
+      <widget>
+	<class>GtkButton</class>
+	<name>button19</name>
+	<can_default>True</can_default>
+	<can_focus>True</can_focus>
+	<stock_button>GNOME_STOCK_BUTTON_CANCEL</stock_button>
+      </widget>
+    </widget>
+
+    <widget>
+      <class>GtkVBox</class>
+      <name>rollback_dialog</name>
+      <homogeneous>False</homogeneous>
+      <spacing>5</spacing>
+      <child>
+	<padding>0</padding>
+	<expand>True</expand>
+	<fill>True</fill>
+      </child>
+
+      <widget>
+	<class>GtkLabel</class>
+	<name>rollback_level_label</name>
+	<label>Current time</label>
+	<justify>GTK_JUSTIFY_LEFT</justify>
+	<wrap>False</wrap>
+	<xalign>0</xalign>
+	<yalign>0.5</yalign>
+	<xpad>0</xpad>
+	<ypad>0</ypad>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>False</fill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkHScale</class>
+	<name>rollback_scale</name>
+	<can_focus>True</can_focus>
+	<draw_value>False</draw_value>
+	<value_pos>GTK_POS_TOP</value_pos>
+	<digits>0</digits>
+	<policy>GTK_UPDATE_DISCONTINUOUS</policy>
+	<value>0</value>
+	<lower>0</lower>
+	<upper>0</upper>
+	<step>0</step>
+	<page>0</page>
+	<page_size>0</page_size>
+	<child>
+	  <padding>0</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkFrame</class>
+	<name>control_socket</name>
+	<label_xalign>0</label_xalign>
+	<shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
 	<child>
 	  <padding>0</padding>
 	  <expand>True</expand>
@@ -737,27 +862,7 @@
 	</child>
 
 	<widget>
-	  <class>GtkButton</class>
-	  <name>view_logs_button</name>
-	  <can_focus>True</can_focus>
-	  <label>View Logs...</label>
-	  <child>
-	    <padding>0</padding>
-	    <expand>True</expand>
-	    <fill>True</fill>
-	  </child>
-	</widget>
-
-	<widget>
-	  <class>GtkButton</class>
-	  <name>advanced_button</name>
-	  <can_focus>True</can_focus>
-	  <label>Advanced...</label>
-	  <child>
-	    <padding>0</padding>
-	    <expand>True</expand>
-	    <fill>True</fill>
-	  </child>
+	  <class>Placeholder</class>
 	</widget>
       </widget>
     </widget>

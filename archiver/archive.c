@@ -701,8 +701,6 @@ foreach_build_list_cb (gchar *key, Location *value, GList **node)
 {
 	if (!location_is_deleted (value))
 		*node = g_list_prepend (*node, value);
-	else
-		bonobo_object_unref (BONOBO_OBJECT (value));
 
 	return 0;
 }
@@ -750,6 +748,7 @@ load_all_locations (Archive *archive)
 	DIR *archive_dir;
 	struct dirent entry, *entryp;
 	gchar *filename;
+	Location *location;
 
 	archive_dir = opendir (archive->prefix);
 
@@ -772,8 +771,11 @@ load_all_locations (Archive *archive)
 		{
 			filename = g_concat_dir_and_file (archive->prefix,
 							  entry.d_name);
-			if (g_file_test (filename, G_FILE_TEST_ISDIR))
-				archive_get_location (archive, entry.d_name);
+			if (g_file_test (filename, G_FILE_TEST_ISDIR)) {
+				location = archive_get_location (archive, entry.d_name);
+				if (location_is_deleted (location))
+					bonobo_object_unref (BONOBO_OBJECT (location));
+			}
 		}
 	}
 }

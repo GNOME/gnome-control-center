@@ -1,6 +1,6 @@
 /* -*- mode: c; style: linux -*- */
 
-/* config-manager.c
+/* main.c
  * Copyright (C) 2000-2001 Ximian, Inc.
  *
  * Written by Bradford Hovinen <hovinen@ximian.com>
@@ -28,11 +28,14 @@
 #include <gnome.h>
 #include <glade/glade.h>
 
-#include "config-manager-dialog.h"
+#include "rollback-capplet-dialog.h"
 
 static gboolean is_global;
+static gchar *capplet_name;
 
 static struct poptOption rollback_options[] = {
+	{"capplet", 'c', POPT_ARG_STRING, &capplet_name, 0,
+	 N_("Rollback the capplet given")},
 	{"global", 'g', POPT_ARG_NONE, &is_global, 0,
 	 N_("Operate on global backends")},
 	{NULL, '\0', 0, NULL, 0}
@@ -52,14 +55,18 @@ main (int argc, char **argv)
 	gnome_init ("config-manager", VERSION, argc, argv);
 	glade_gnome_init ();
 
-	dialog = config_manager_dialog_new
-		(is_global ? CM_DIALOG_GLOBAL : CM_DIALOG_USER);
-	gtk_widget_show (dialog);
+	orb = oaf_init (argc, argv);
+	if (bonobo_init (orb, CORBA_OBJECT_NIL, CORBA_OBJECT_NIL) == FALSE)
+		g_error ("Cannot initialize bonobo");
 
-	gtk_signal_connect (GTK_OBJECT (dialog), "destroy",
-			    gtk_main_quit, NULL);
+	if (capplet_name != NULL) {
+		dialog = rollback_capplet_dialog_new (capplet_name);
 
-	gtk_main ();
+		gtk_signal_connect (GTK_OBJECT (dialog), "destroy",
+				    gtk_main_quit, NULL);
+	}
+
+	bonobo_main ();
 
 	return 0;
 }

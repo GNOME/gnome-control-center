@@ -63,4 +63,3 @@ Glade_DATA = $(cappletname)-properties.glade
 icons_DATA = $(cappletname)-capplet.png
 desktop    = $(cappletname).desktop
 all-local: $(desktop) $(oaffile)
-
