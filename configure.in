@@ -90,7 +90,7 @@ dnl ==============================================
 
 COMMON_MODULES="gtk+-2.0 >= 2.3.0 gconf-2.0 libgnomeui-2.0 >= 2.2.0 libglade-2.0 >= 1.99.12 libbonobo-2.0 libbonoboui-2.0 libglade-2.0 gconf-2.0 gnome-desktop-2.0 >= 2.2.0"
 PKG_CHECK_MODULES(CAPPLET, $COMMON_MODULES)
-PKG_CHECK_MODULES(GNOMECC, $COMMON_MODULES libxml-2.0 gnome-desktop-2.0 gnome-vfs-2.0)
+PKG_CHECK_MODULES(GNOMECC, $COMMON_MODULES libgnome-menu >= 2.9.1)
 PKG_CHECK_MODULES(GNOME_SETTINGS_DAEMON, gtk+-2.0 gconf-2.0 libgnomeui-2.0 esound gnome-desktop-2.0 libglade-2.0)
 PKG_CHECK_MODULES(OLD_CAPPLET, libgnomeui-2.0 libglade-2.0)
 PKG_CHECK_MODULES(GNOME, libgnomeui-2.0)
@@ -260,11 +260,6 @@ LIBBONOBO_IDL_DIR="`$PKG_CONFIG --variable=idldir libbonobo-2.0`"
 AC_SUBST(LIBBONOBO_IDL_DIR)
 BONOBO_ACTIVATION_IDL_DIR="`$PKG_CONFIG --variable=idldir bonobo-activation-2.0`"
 AC_SUBST(BONOBO_ACTIVATION_IDL_DIR)
-
-# check for nautilus
-PKG_CHECK_MODULES(NAUTILUS, libnautilus)
-AC_SUBST(NAUTILUS_LIBS)
-AC_SUBST(NAUTILUS_CFLAGS)
 
 # esd
 ESDSERVERDIR=`$PKG_CONFIG --variable=esd_serverdir esound`
@@ -517,7 +512,6 @@ gnome-settings-daemon/Makefile
 gnome-settings-daemon/xrdb/Makefile
 gnome-settings-daemon/actions/Makefile
 control-center/Makefile
-control-center/GNOME_ControlCenter.server
 libbackground/Makefile
 libwindow-settings/Makefile
 libwindow-settings/gnome-window-settings-2.0.pc

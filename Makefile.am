@@ -8,9 +8,6 @@ SUBDIRS = po libsounds libbackground libwindow-settings libgswitchit libkbdraw g
 # in the configure.in file. Since we are not using it now, i will
 # remove it from the default build. Chema
 
-pixmapdir = $(datadir)/pixmaps
-pixmap_DATA = control-center2.png
-
 dist-hook: control-center.spec
 	cp control-center.spec $(distdir)
 
