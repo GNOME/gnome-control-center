@@ -295,7 +295,9 @@ config_log_destroy (GtkObject *object)
 	config_log = CONFIG_LOG (object);
 
 	do_unload (config_log, !config_log->p->deleted);
+#if 0
 	disconnect_socket (config_log);
+#endif
 
 	GTK_OBJECT_CLASS (parent_class)->destroy (GTK_OBJECT (config_log));
 }
@@ -332,7 +334,9 @@ config_log_open (Location *location)
 
 	config_log_reset_filenames (CONFIG_LOG (object));
 	do_load (CONFIG_LOG (object));
+#if 0
 	connect_socket (CONFIG_LOG (object));
+#endif
 
 	return object;
 }
@@ -530,7 +534,9 @@ config_log_write_entry (ConfigLog *config_log, gchar *backend_id,
 		g_list_prepend (config_log->p->log_data, entry);
 
 	if (config_log->p->socket_owner) {
+#if 0
 		slave_broadcast_data (NULL, config_log);
+#endif
 		dump_log (config_log);
 		if (config_log->p->file_buffer)
 			io_buffer_destroy (config_log->p->file_buffer);
@@ -917,7 +923,7 @@ do_unload (ConfigLog *config_log, gboolean write_log)
 	g_return_if_fail (config_log != NULL);
 	g_return_if_fail (IS_CONFIG_LOG (config_log));
 
-	if (write_log && config_log->p->socket_owner) dump_log (config_log);
+	if (write_log) dump_log (config_log);
 
 	if (config_log->p->file_buffer) {
 		io_buffer_destroy (config_log->p->file_buffer);
@@ -1289,8 +1295,13 @@ socket_data_cb (GIOChannel *channel, GIOCondition condition,
 		return FALSE;
 	}
 	else if (condition & G_IO_IN) {
-		load_log_entry (config_log, TRUE,
-				config_log->p->socket_buffer, NULL);
+		if (load_log_entry (config_log, TRUE,
+				    config_log->p->socket_buffer, NULL) == NULL) {
+			DEBUG_MSG ("Connection closing");
+			disconnect_socket (config_log);
+			connect_socket (config_log);
+			return FALSE;
+		}
 	}
 
 	DEBUG_MSG ("Exit");

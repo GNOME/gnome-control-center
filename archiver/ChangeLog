@@ -1,3 +1,10 @@
+2001-07-30  Bradford Hovinen  <hovinen@ximian.com>
+
+	* config-log.c (socket_data_cb): Close the socket if we couldn't
+	load the log entry
+	(config_log_destroy): 
+	(config_log_open): Disable socket sync system
+
 2001-07-27  Bradford Hovinen  <hovinen@ximian.com>
 
 	* bonobo-config-archiver.c (bonobo_config_archiver_destroy): Don't
