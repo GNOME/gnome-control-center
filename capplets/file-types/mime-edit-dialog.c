@@ -53,6 +53,11 @@ struct _MimeEditDialogPrivate
 	gboolean      is_add;
 
 	GtkTreeModel *model;
+
+	gboolean      component_active         : 1;
+	gboolean      default_action_active    : 1;
+	gboolean      custom_action            : 1;
+	gboolean      use_cat_dfl              : 1;
 };
 
 static GObjectClass *parent_class;
@@ -85,8 +90,12 @@ static void add_ext_cb                   (MimeEditDialog *dialog);
 static void remove_ext_cb                (MimeEditDialog *dialog);
 static void choose_cat_cb                (MimeEditDialog *dialog);
 static void default_action_changed_cb    (MimeEditDialog *dialog);
+static void use_category_defaults_toggled_cb (MimeEditDialog  *dialog,
+					      GtkToggleButton *tb);
 static void response_cb                  (MimeEditDialog *dialog,
 					  gint            response_id);
+
+static void update_sensitivity           (MimeEditDialog *dialog);
 
 GType
 mime_edit_dialog_get_type (void)
@@ -157,6 +166,8 @@ mime_edit_dialog_init (MimeEditDialog *dialog, MimeEditDialogClass *class)
 	g_signal_connect_swapped (G_OBJECT (WID ("remove_ext_button")), "clicked", (GCallback) remove_ext_cb, dialog);
 	g_signal_connect_swapped (G_OBJECT (WID ("choose_button")), "clicked", (GCallback) choose_cat_cb, dialog);
 	g_signal_connect_swapped (G_OBJECT (WID ("default_action_select")), "changed", (GCallback) default_action_changed_cb, dialog);
+	g_signal_connect_swapped (G_OBJECT (WID ("use_category_defaults_toggle")), "toggled",
+				  (GCallback) use_category_defaults_toggled_cb, dialog);
 
 	g_signal_connect_swapped (G_OBJECT (dialog->p->dialog_win), "response", (GCallback) response_cb, dialog);
 }
@@ -337,6 +348,10 @@ fill_dialog (MimeEditDialog *dialog)
 	gtk_entry_set_text (GTK_ENTRY (WID ("mime_type_entry")), dialog->p->info->mime_type);
 	gtk_entry_set_text (GTK_ENTRY (WID ("category_entry")), mime_type_info_get_category_name (dialog->p->info));
 
+	dialog->p->use_cat_dfl = !dialog->p->info->override_category;
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("use_category_defaults_toggle")), dialog->p->use_cat_dfl);
+	update_sensitivity (dialog);
+
 	if (dialog->p->info->custom_line != NULL)
 		gnome_file_entry_set_filename (GNOME_FILE_ENTRY (WID ("program_entry")), dialog->p->info->custom_line);
 
@@ -410,8 +425,7 @@ populate_component_list (MimeEditDialog *dialog)
 		gtk_widget_show (menu_item);
 	}
 
-	if (i == 0)
-		gtk_widget_set_sensitive (WID ("component_box"), FALSE);
+	dialog->p->component_active = !(i == 0);
 
 	menu_item = gtk_menu_item_new_with_label (_("None"));
 	gtk_menu_append (menu, menu_item);
@@ -423,6 +437,8 @@ populate_component_list (MimeEditDialog *dialog)
 	component_select = GTK_OPTION_MENU (WID ("component_select"));
 	gtk_option_menu_set_menu (component_select, GTK_WIDGET (menu));
 	gtk_option_menu_set_history (component_select, found_idx);
+
+	update_sensitivity (dialog);
 }
 
 static void
@@ -457,8 +473,8 @@ populate_application_list (MimeEditDialog *dialog)
 		gtk_widget_show (menu_item);
 	}
 
-	if (i == 0)
-		gtk_widget_set_sensitive (WID ("default_action_box"), FALSE);
+	dialog->p->default_action_active = !(i == 0);
+	dialog->p->custom_action = (found_idx < 0);
 
 	gtk_menu_append (menu, gtk_menu_item_new_with_label (_("Custom")));
 
@@ -476,6 +492,8 @@ populate_application_list (MimeEditDialog *dialog)
 	gtk_option_menu_set_history (app_select, found_idx);
 
 	g_list_free (app_list);
+
+	update_sensitivity (dialog);
 }
 
 static void
@@ -564,6 +582,9 @@ store_data (MimeEditDialog *dialog)
 		g_object_unref (G_OBJECT (dialog->p->info->small_icon_pixbuf));
 		dialog->p->info->small_icon_pixbuf = NULL;
 	}
+
+	dialog->p->info->override_category =
+		!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (WID ("use_category_defaults_toggle")));
 
 	option_menu = GTK_OPTION_MENU (WID ("component_select"));
 	menu_shell = GTK_MENU_SHELL (gtk_option_menu_get_menu (option_menu));
@@ -738,13 +759,16 @@ default_action_changed_cb (MimeEditDialog *dialog)
 	menu = GTK_MENU_SHELL (gtk_option_menu_get_menu (option_menu));
 	id = gtk_option_menu_get_history (option_menu);
 
-	if (id == g_list_length (menu->children) - 1) {
-		gtk_widget_set_sensitive (WID ("program_entry_box"), TRUE);
-		gtk_widget_set_sensitive (WID ("needs_terminal_toggle"), TRUE);
-	} else {
-		gtk_widget_set_sensitive (WID ("program_entry_box"), FALSE);
-		gtk_widget_set_sensitive (WID ("needs_terminal_toggle"), FALSE);
-	}
+	dialog->p->custom_action = (id == g_list_length (menu->children) - 1);
+
+	update_sensitivity (dialog);
+}
+
+static void
+use_category_defaults_toggled_cb (MimeEditDialog *dialog, GtkToggleButton *tb)
+{
+	dialog->p->use_cat_dfl = gtk_toggle_button_get_active (tb);
+	update_sensitivity (dialog);
 }
 
 static void
@@ -761,4 +785,13 @@ response_cb (MimeEditDialog *dialog, gint response_id)
 
 		g_object_unref (G_OBJECT (dialog));
 	}
+}
+
+static void
+update_sensitivity (MimeEditDialog *dialog) 
+{
+	gtk_widget_set_sensitive (WID ("component_box"), dialog->p->component_active && !dialog->p->use_cat_dfl);
+	gtk_widget_set_sensitive (WID ("default_action_box"), dialog->p->default_action_active && !dialog->p->use_cat_dfl);
+	gtk_widget_set_sensitive (WID ("program_entry_box"), dialog->p->custom_action && !dialog->p->use_cat_dfl);
+	gtk_widget_set_sensitive (WID ("needs_terminal_toggle"), dialog->p->custom_action && !dialog->p->use_cat_dfl);
 }

@@ -53,6 +53,8 @@ struct _MimeTypeInfo
 	GdkPixbuf               *icon_pixbuf;
 	GdkPixbuf               *small_icon_pixbuf;
 
+	gboolean                 override_category;
+
 	Bonobo_ServerInfo       *default_component;
 	GnomeVFSMimeApplication *default_action;
 	gchar                   *custom_line;

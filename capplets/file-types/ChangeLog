@@ -1,7 +1,26 @@
 2002-01-27  Bradford Hovinen  <hovinen@ximian.com>
 
+	* mime-edit-dialog.c (fill_dialog): Set
+	use_category_defaults_toggle
+	(store_data): Set override_category
+	(mime_edit_dialog_init): Connect to
+	use_category_defaults_toggled_cb
+	(use_category_defaults_toggle_cb): Implement
+	(default_action_changed_cb, populate_application_list)
+	(populate_component_list): Call update_sensitivity; set
+	sensitivity-controlling flags
+	(update_sensitivity): Implement
+
+	* mime-type-info.c (find_possible_supported_apps)
+	(reduce_supported_app_list): Don't consider a MIME type if its
+	override_category flag is set
+	(mime_type_info_save): Set the override-category flag
+	(mime_type_info_load_all): Load the override-category flag
+
 	* service-edit-dialog.c (validate_data): Call get_service_info to
 	handle case where the service was created and not yet committed
+	(fill_dialog): Desensitize the look at content toggle if GnomeVFS
+	doesn't support that protocol
 
 	* mime-type-info.c (get_mime_type_info, get_mime_type_info_int):
 	Implement

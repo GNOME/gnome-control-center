@@ -120,6 +120,13 @@ mime_type_info_load_all (MimeTypeInfo *info)
 
 	if (info->default_component == NULL)
 		info->default_component = gnome_vfs_mime_get_default_component (info->mime_type);
+
+	tmp = gnome_vfs_mime_get_value (info->mime_type, "override-category");
+
+	if (tmp != NULL && !strcmp (tmp, "yes"))
+		info->override_category = TRUE;
+	else
+		info->override_category = FALSE;
 }
 
 const gchar *
@@ -290,6 +297,8 @@ mime_type_info_save (const MimeTypeInfo *info)
 	tmp = mime_type_info_get_category_name (info);
 	gnome_vfs_mime_set_value (info->mime_type, "category", tmp);
 	g_free (tmp);
+
+	gnome_vfs_mime_set_value (info->mime_type, "override-category", info->override_category ? "yes" : "no");
 }
 
 void
@@ -360,7 +369,10 @@ find_possible_supported_apps (ModelEntry *entry)
 		return NULL;
 
 	case MODEL_ENTRY_MIME_TYPE:
-		return gnome_vfs_application_registry_get_applications (MIME_TYPE_INFO (entry)->mime_type);
+		if (MIME_TYPE_INFO (entry)->override_category)
+			return NULL;
+		else
+			return gnome_vfs_application_registry_get_applications (MIME_TYPE_INFO (entry)->mime_type);
 
 	default:
 		return NULL;
@@ -403,6 +415,9 @@ reduce_supported_app_list (ModelEntry *entry, GList *list)
 		break;
 
 	case MODEL_ENTRY_MIME_TYPE:
+		if (MIME_TYPE_INFO (entry)->override_category)
+			break;
+
 		type_list = gnome_vfs_application_registry_get_applications (MIME_TYPE_INFO (entry)->mime_type);
 		list = intersect_lists (list, type_list);
 		g_list_free (type_list);
