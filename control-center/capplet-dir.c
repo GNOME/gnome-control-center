@@ -137,7 +137,7 @@ capplet_new (CappletDir *dir, gchar *desktop_path)
 	entry->type = TYPE_CAPPLET;
 	entry->entry = dentry;
 
-	entry->label = g_strdup (gnome_desktop_item_get_string (dentry,
+	entry->label = g_strdup (gnome_desktop_item_get_localestring (dentry,
 			GNOME_DESKTOP_ITEM_NAME));
 	entry->icon = find_icon (gnome_desktop_item_get_string (dentry, GNOME_DESKTOP_ITEM_ICON), dentry);
 	entry->pb = gdk_pixbuf_new_from_file (entry->icon, NULL);
@@ -185,7 +185,7 @@ capplet_dir_new (CappletDir *dir, gchar *dir_path)
 	g_free (desktop_uri_string);
 
 	if (entry->entry) {
-		entry->label = g_strdup (gnome_desktop_item_get_string (
+		entry->label = g_strdup (gnome_desktop_item_get_localestring (
 				entry->entry,
 				GNOME_DESKTOP_ITEM_NAME));
 		entry->icon = find_icon (gnome_desktop_item_get_string (entry->entry,
