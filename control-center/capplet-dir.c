@@ -208,25 +208,31 @@ capplet_activate (Capplet *capplet)
 {
 	GnomeDesktopEntry *entry;
 
-	if (capplet->launching) {
-		return;
-	} else {
-		capplet->launching = TRUE;
-		gtk_idle_add ((GtkFunction) capplet_reset_cb, capplet);
-	}
-
 	entry = CAPPLET_DIR_ENTRY (capplet)->entry;
 
 #warning FIXME: this should probably be root-manager-helper
 #ifdef HAVE_BONOBO
-	if (!strncmp (entry->exec[0], "gnomecc", strlen ("gnomecc")))
-		capplet_control_launch (entry->exec[2], entry->name);
-	else
+	if (!strncmp (entry->exec[0], "gnomecc", strlen ("gnomecc"))) {
+		if (capplet->launching) {
+			return;
+		} else {
+			capplet->launching = TRUE;
+			gtk_idle_add ((GtkFunction) capplet_reset_cb, capplet);
+			capplet_control_launch (entry->exec[2], entry->name);
+		}
+	} else
 #endif
-	if (!strncmp (entry->exec[0], "root-manager", strlen ("root-manager")))
+	if (!strncmp (entry->exec[0], "root-manager", strlen ("root-manager"))) {
 		start_capplet_through_root_manager (entry);
-	else
-		gnome_desktop_entry_launch (entry);
+	} else {
+		if (capplet->launching) {
+			return;
+		} else {
+			capplet->launching = TRUE;
+			gtk_timeout_add (1000, (GtkFunction) capplet_reset_cb, capplet);
+			gnome_desktop_entry_launch (entry);
+		}
+	}
 }
 
 void
