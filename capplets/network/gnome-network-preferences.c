@@ -136,7 +136,7 @@ cb_http_details_button_clicked (GtkWidget *button,
 	g_signal_connect (widget, "response",
 			  G_CALLBACK (cb_details_dialog_response), NULL);
 	
-	capplet_set_icon (widget, "gnome-globe.png");
+	capplet_set_icon (widget, "gnome-network-capplet.png");
 
 	gtk_widget_show_all (widget);
 }
@@ -302,7 +302,7 @@ main (int argc, char **argv)
 
 	setup_dialog (dialog);
 	widget = WID ("network_dialog");
-	capplet_set_icon (widget, "gnome-globe.png");
+	capplet_set_icon (widget, "gnome-network-capplet.png");
 	gtk_widget_show_all (widget);
 	gtk_main ();
 

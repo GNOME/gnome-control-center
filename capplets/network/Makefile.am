@@ -9,10 +9,13 @@ gnome_network_preferences_LDADD =				\
 gladedir   = $(GNOMECC_GLADE_DIR)
 glade_DATA = gnome-network-preferences.glade
 
+iconsdir   = $(GNOMECC_ICONS_DIR)
+icons_DATA = gnome-network-capplet.png
+
 desktopdir = $(GNOMECC_DESKTOP_DIR)
 desktop_in_files = gnome-network-preferences.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
-EXTRA_DIST = $(glade_DATA) $(desktop_in_files)
+EXTRA_DIST = $(glade_DATA) $(icons_DATA) $(desktop_in_files)
