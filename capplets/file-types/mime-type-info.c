@@ -606,7 +606,7 @@ mime_category_info_get_full_name (MimeCategoryInfo *info)
 {
 	GString *string;
 	ModelEntry *tmp;
-	gchar *ret;
+	gchar *ret, *s;
 
 	string = g_string_new ("");
 
@@ -615,7 +615,10 @@ mime_category_info_get_full_name (MimeCategoryInfo *info)
 		g_string_prepend (string, "/");
 	}
 
-	ret = g_strdup ((*string->str == '\0') ? string->str : string->str + 1);
+	/* work around gcc 2.96 bug */
+	s = (*string->str == '\0') ? string->str : string->str + 1;
+	ret = g_strdup (s);
+		
 	g_string_free (string, TRUE);
 	return ret;
 }
@@ -625,7 +628,7 @@ mime_category_info_get_full_description (MimeCategoryInfo *info)
 {
 	GString *string;
 	ModelEntry *tmp;
-	gchar *ret;
+	gchar *ret, *s;
 
 	string = g_string_new ("");
 
@@ -634,7 +637,11 @@ mime_category_info_get_full_description (MimeCategoryInfo *info)
 		g_string_prepend (string, "/");
 	}
 
-	ret = g_strdup ((*string->str == '\0') ? string->str : string->str + 1);
+
+	/* work around gcc 2.96 bug */
+	s = (*string->str == '\0') ? string->str : string->str + 1;
+	ret = g_strdup (s);
+
 	g_string_free (string, TRUE);
 	return ret;
 }
