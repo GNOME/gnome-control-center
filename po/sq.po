@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-27 19:50+0200\n"
-"PO-Revision-Date: 2004-10-28 01:36+0200\n"
+"POT-Creation-Date: 2004-11-03 19:50+0100\n"
+"PO-Revision-Date: 2004-11-04 01:46+0100\n"
 "Last-Translator: Elian Myftiu <elian@lycos.com>\n"
 "Language-Team: Albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -955,9 +955,9 @@ msgid ""
 "settings will be restored."
 msgstr ""
 "Duke provuar rregullimet e reja. Nëse nuk përgjigjesh brenda %d sekonde do "
-"të rikthehem tek rregullimet e mëparshme."
-"Duke provuar rregullimet e reja. Nëse nuk përgjigjesh brenda %d sekondash "
-"do të rikthehem tek rregullimet e mëparshme."
+"të rikthehem tek rregullimet e mëparshme.Duke provuar rregullimet e reja. "
+"Nëse nuk përgjigjesh brenda %d sekondash do të rikthehem tek rregullimet e "
+"mëparshme."
 
 #: capplets/display/main.c:626
 msgid "Keep Resolution"
@@ -1103,6 +1103,7 @@ msgid "_Protocol:"
 msgstr "_Protokolli:"
 
 #: capplets/file-types/file-types-properties.glade.h:26
+#: libsounds/sound-view.c:366
 msgid "_Remove"
 msgstr "_Hiq"
 
@@ -1460,11 +1461,10 @@ msgid ""
 "smaller than %d."
 msgstr ""
 "Gërma e zgjedhur është %d pikë e gjerë, dhe mund ta vështirësojë përdorimin "
-"efikas të kompjuterit.  Këshillohet zgjedhja e një madhësie më të vogël se %d."
-"Gërma e zgjedhur është %d pika e gjerë, dhe mund ta vështirësojë "
+"efikas të kompjuterit.  Këshillohet zgjedhja e një madhësie më të vogël se %"
+"d.Gërma e zgjedhur është %d pika e gjerë, dhe mund ta vështirësojë "
 "përdorimin efikas të kompjuterit.  Këshillohet zgjedhja e një madhësie më të "
 "vogël se %d."
-""
 
 #: capplets/font/main.c:514
 #, c-format
@@ -1480,7 +1480,6 @@ msgstr ""
 "efikas të kompjuterit.  Këshillohet zgjedhja e një madhësie mëë të vogël."
 "Gërma e zgjedhur është %d pika e gjerë,dhe mund t'a vështirësojë përdorimin "
 "efikas të kompjuterit.  Këshillohet zgjedhja e një madhësie më të vogël."
-""
 
 #: capplets/keybindings/eggcellrendererkeys.c:21
 msgid "New accelerator..."
@@ -2078,16 +2077,29 @@ msgstr ""
 "Preferences\" nuk është instaluar mirë, ose nuk keni instaluar paketin "
 "\"gnome themes\"."
 
-#: capplets/theme-switcher/gnome-theme-installer.c:127
+#: capplets/theme-switcher/gnome-theme-installer.c:104
+msgid "This theme is not in a supported format."
+msgstr "Kjo temë nuk është e një formati të duhur."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:140
 msgid "No theme file location specified to install"
 msgstr "Nuk u gjend file për temën e përcaktuar për instalim"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:146
+#: capplets/theme-switcher/gnome-theme-installer.c:157
 msgid "The theme file location specified to install is invalid"
 msgstr ""
 "Vendndodhja e file të temës, përcaktuar për instalim, nuk është e vlefshme"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:173
+#: capplets/theme-switcher/gnome-theme-installer.c:177
+#, c-format
+msgid ""
+"Insufficient permissions to install the theme in:\n"
+"%s"
+msgstr ""
+"Leje të pamjaftueshme për instalimin e temës në:\n"
+"%s"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:196
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
@@ -2479,6 +2491,7 @@ msgid "_Help"
 msgstr "_Ndihmë"
 
 #: control-center/gnomecc.desktop.in.h:2
+#: vfs-methods/fontilus/gnome-font-viewer.desktop.in.h:2
 msgid "The GNOME configuration tool"
 msgstr "Veglat e konfigurimit të GNOME"
 
@@ -2707,8 +2720,8 @@ msgstr "_Mos e shfaq më këtë mesazh"
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "I pamundur ngarkimi i tingullit %s si shembull %s"
 
-#: gnome-settings-daemon/gnome-settings-xrdb.c:212
-#: gnome-settings-daemon/gnome-settings-xrdb.c:260
+#: gnome-settings-daemon/gnome-settings-xrdb.c:213
+#: gnome-settings-daemon/gnome-settings-xrdb.c:261
 msgid "Cannot determine user's home directory"
 msgstr "Nuk arrij të përcaktoj directory shtëpi të përdoruesit"
 
@@ -2757,11 +2770,11 @@ msgstr "Ekrani"
 msgid "Screen on which BGApplier is to draw"
 msgstr "Ekrani mbi të cilin duhet caktuar BGApplier"
 
-#: libsounds/sound-view.c:121 libsounds/sound-view.c:146
+#: libsounds/sound-view.c:122 libsounds/sound-view.c:147
 msgid "The sound file for this event does not exist."
 msgstr "Tingulli për këtë veprim nuk ekziston."
 
-#: libsounds/sound-view.c:148
+#: libsounds/sound-view.c:149
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package\n"
@@ -2771,32 +2784,32 @@ msgstr ""
 "Duhet të instaloni paketin gnome-audio\n"
 "për një sërë tingujsh të zakonshëm."
 
-#: libsounds/sound-view.c:192
+#: libsounds/sound-view.c:224
 #, c-format
 msgid "The file %s is not a valid wav file"
 msgstr "File %s nuk është një file i vlefshëm wav"
 
-#: libsounds/sound-view.c:257
+#: libsounds/sound-view.c:289
 msgid "Event"
 msgstr "Ndodhi"
 
-#: libsounds/sound-view.c:266
+#: libsounds/sound-view.c:298
 msgid "Sound File"
 msgstr "File i tingullit"
 
-#: libsounds/sound-view.c:282
+#: libsounds/sound-view.c:314
 msgid "_Sounds:"
 msgstr "_Tingujt:"
 
-#: libsounds/sound-view.c:296
+#: libsounds/sound-view.c:328
 msgid "Sound _file:"
 msgstr "_File i tingullit:"
 
-#: libsounds/sound-view.c:300
+#: libsounds/sound-view.c:332
 msgid "Select Sound File"
 msgstr "Zgjidh file e tingullit"
 
-#: libsounds/sound-view.c:324
+#: libsounds/sound-view.c:356
 msgid "_Play"
 msgstr "_Luaj"
 
@@ -3293,6 +3306,10 @@ msgstr "Zërat e menu-së kontekstuale të Nautilus për gërmat"
 #: vfs-methods/fontilus/fontilus.server.in.in.h:5
 msgid "Set as Application Font"
 msgstr "Zgjidh Shkronjat e Programeve"
+
+#: vfs-methods/fontilus/gnome-font-viewer.desktop.in.h:1
+msgid "GNOME Font Viewer"
+msgstr "Shikuesi i Gërmave GNOME"
 
 #: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
 msgid "Theme Properties content view component"
