@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-12-31 12:13-0500\n"
+"POT-Creation-Date: 2004-01-09 12:55+0100\n"
 "PO-Revision-Date: 2003-07-12 01:00+0100\n"
 "Last-Translator: Gnome PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
@@ -1045,7 +1045,7 @@ msgid "Options"
 msgstr "Opcje"
 
 #: capplets/display/main.c:515
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d second the previous "
 "settings will be restored."
@@ -1053,7 +1053,7 @@ msgid_plural ""
 "Testing the new settings. If you don't respond in %d seconds the previous "
 "settings will be restored."
 msgstr[0] ""
-"Testowanie nowych ustawień. Jeśli nie odpowiesz w ciągu %d sekund, zostaną "
+"Testowanie nowych ustawień. Jeśli nie odpowiesz w ciągu %d sekundy, zostaną "
 "przywrócone poprzednie ustawienia."
 msgstr[1] ""
 "Testowanie nowych ustawień. Jeśli nie odpowiesz w ciągu %d sekund, zostaną "
@@ -1064,7 +1064,7 @@ msgstr[2] ""
 
 #: capplets/display/main.c:564
 msgid "Do you want to keep this resolution?"
-msgstr "Czy chcesz zatrzymać tą rozdzielczość?"
+msgstr "Czy chcesz zostawić tą rozdzielczość?"
 
 #: capplets/display/main.c:589
 msgid "Use _previous resolution"
@@ -1091,7 +1091,7 @@ msgstr ""
 "rozdzielczości podczas pracy nie są możliwe."
 
 #: capplets/file-types/file-types-capplet.c:196
-#: vfs-methods/themus/themus-properties-view.c:165
+#: vfs-methods/themus/themus-properties-view.c:163
 msgid "Description"
 msgstr "Opis"
 
@@ -1552,7 +1552,7 @@ msgid "Font may be too large"
 msgstr "Czcionka może być za duża"
 
 #: capplets/font/main.c:507
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The font selected is %d point large, and may make it difficult to "
 "effectively use the computer.  It is recommended that you select a size "
@@ -1562,7 +1562,7 @@ msgid_plural ""
 "effectively use the computer.  It is recommended that you select a size "
 "smaller than %d."
 msgstr[0] ""
-"Wybrana czcionka posiada wysokość %d punktów i może być trudne jej efektywne "
+"Wybrana czcionka posiada wysokość %d punktu i może być trudne jej efektywne "
 "wykorzystanie przez komputer. Zalecane jest wybranie rozmiaru mniejszego niż "
 "%d."
 msgstr[1] ""
@@ -1575,7 +1575,7 @@ msgstr[2] ""
 "%d."
 
 #: capplets/font/main.c:514
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The font selected is %d point large, and may make it difficult to "
 "effectively use the computer.  It is recommended that you select a smaller "
@@ -1585,7 +1585,7 @@ msgid_plural ""
 "effectively use the computer.  It is recommended that you select a smaller "
 "sized font."
 msgstr[0] ""
-"Wybrana czcionka posiada wysokość %d punktów i może być trudne jej efektywne "
+"Wybrana czcionka posiada wysokość %d punktu i może być trudne jej efektywne "
 "wykorzystanie przez komputer. Zalecane jest wybranie czcionki o mniejszym "
 "rozmiarze."
 msgstr[1] ""
@@ -1851,6 +1851,155 @@ msgstr "minut"
 #: capplets/keyboard/keyboard.desktop.in.h:2
 msgid "Set your keyboard preferences"
 msgstr "Ustawienia klawiatury"
+
+# FIXME - ciekawe czy poprawnie?
+#: capplets/localization/gnome-localization-properties.c:184
+msgid "Show"
+msgstr "Wyświetl"
+
+#: capplets/localization/gnome-localization-properties.c:195
+#: capplets/localization/gnome-localization-properties.glade.h:25
+msgid "Language"
+msgstr "Język"
+
+# FIXME - Coś mi tu nie pasuje
+#: capplets/localization/gnome-localization-properties.glade.h:1
+msgid "$1,234.56"
+msgstr "$1,234.56"
+
+# FIXME - Coś mi tu nie pasuje
+#: capplets/localization/gnome-localization-properties.glade.h:2
+msgid "1/2/03"
+msgstr "1/2/03"
+
+# FIXME - Coś mi tu nie pasuje
+#: capplets/localization/gnome-localization-properties.glade.h:3
+msgid "12:34 AM"
+msgstr "12:34 AM"
+
+# FIXME - Coś mi tu nie pasuje
+#: capplets/localization/gnome-localization-properties.glade.h:4
+msgid "4:56 PM"
+msgstr "4:56 PM"
+
+#: capplets/localization/gnome-localization-properties.glade.h:5
+msgid "<b>Dates</b>"
+msgstr "<b>Daty</b>"
+
+#: capplets/localization/gnome-localization-properties.glade.h:6
+msgid "<b>Languages in use:</b>"
+msgstr "<b>Używane języki:</b>"
+
+#: capplets/localization/gnome-localization-properties.glade.h:7
+msgid "<b>Numbers</b>"
+msgstr "<b>Liczby</b>"
+
+#: capplets/localization/gnome-localization-properties.glade.h:8
+msgid "<b>Times</b>"
+msgstr "<b>Czas</b>"
+
+#: capplets/localization/gnome-localization-properties.glade.h:9
+msgid "Available Languages"
+msgstr "Dostępne języki"
+
+#: capplets/localization/gnome-localization-properties.glade.h:10
+msgid "C_hange languages in use..."
+msgstr "_Zmień używane języki..."
+
+#: capplets/localization/gnome-localization-properties.glade.h:11
+msgid ""
+"Changes will not take effect for the\n"
+"desktop's bars and menus before\n"
+"next time you log in. Changes take\n"
+"effect in applications next time you\n"
+"run them."
+msgstr ""
+"Zmiany dla menu pulpitu odniosą\n"
+"skutek dopiero po następnym\n"
+"zalogowaniu. Zmiany w aplikacjach\n"
+"będą widoczne po ich ponownym\n"
+"uruchomieniu."
+
+#: capplets/localization/gnome-localization-properties.glade.h:16
+msgid "Customize _dates..."
+msgstr "Dopasowanie da_t..."
+
+#: capplets/localization/gnome-localization-properties.glade.h:17
+msgid "Customize _numbers..."
+msgstr "Dopasowanie _liczb..."
+
+#: capplets/localization/gnome-localization-properties.glade.h:18
+msgid "Customize _times..."
+msgstr "Dopasowanie cza_su..."
+
+#: capplets/localization/gnome-localization-properties.glade.h:19
+msgid ""
+"Drag languages to set the preferred\n"
+"order of use; If there exists a\n"
+"translation in the first language it will\n"
+"be used, otherwise the next will be tried"
+msgstr ""
+"Przeciągnij języki aby ustawić żądaną\n"
+"kolejność; Jeżeli istnieje tłumaczenie\n"
+"dla pierwszego języka, to będzie ono\n"
+"użyte, w przeciwnym razie zostanie\n"
+"wypróbowane nastepne."
+
+#: capplets/localization/gnome-localization-properties.glade.h:23
+msgid "Formats"
+msgstr "Formaty"
+
+# FIXME - Coś mi tu nie pasuje
+#: capplets/localization/gnome-localization-properties.glade.h:24
+msgid "Jan 2, 2003"
+msgstr "Jan 2, 2003"
+
+#: capplets/localization/gnome-localization-properties.glade.h:26
+msgid "Language and Culture Preferences"
+msgstr "Ustawienia języka i kultury"
+
+#: capplets/localization/gnome-localization-properties.glade.h:27
+msgid "Measurement _Units:"
+msgstr "Jednoski m_iar:"
+
+#: capplets/localization/gnome-localization-properties.glade.h:28
+msgid "Select the items that appear in the Languages list:"
+msgstr "Wybierz elementy widoczne na liście języków:"
+
+#: capplets/localization/gnome-localization-properties.glade.h:29
+msgid "Show _all regions"
+msgstr "_Wyświetlenie wszystkich regionów"
+
+# FIXME - Coś mi tu nie pasuje
+#: capplets/localization/gnome-localization-properties.glade.h:30
+msgid "Thursday, January 2, 2003"
+msgstr "Czwartek, Styczeń 2, 2003"
+
+#: capplets/localization/gnome-localization-properties.glade.h:31
+msgid ""
+"Your preferred language differs\n"
+"from that of your currently\n"
+"selected date, time, and number\n"
+"formats. You can change your\n"
+"formats in the Formats tab."
+msgstr ""
+"Preferowany język różni się od\n"
+"tego, zgodnie z którym ustawione\n"
+"są formaty daty, czasu i liczb.\n"
+"Możesz to zmienić w zakładce\n"
+"Formaty."
+
+#: capplets/localization/gnome-localization-properties.glade.h:36
+msgid "_Region:"
+msgstr "_Region:"
+
+#: capplets/localization/localization.desktop.in.h:1
+msgid "Language and Culture"
+msgstr "Język i kultura"
+
+#: capplets/localization/localization.desktop.in.h:2
+msgid "Set your language and culture preferences"
+msgstr "Ustawia właściwości języka i kultury"
 
 #: capplets/mouse/gnome-mouse-properties.c:496
 msgid "Unknown Cursor"
@@ -2297,57 +2446,66 @@ msgstr "Nowe motywy można również instalować przeciągając je do tego okna.
 msgid "Save Theme"
 msgstr "Zapis motywu"
 
+# FIXME - nie mogę tego znaleźć w oknie dialogowym
 #: capplets/theme-switcher/theme-properties.glade.h:9
+msgid "Select theme for the desktop"
+msgstr "Wybór motywu dla pulpitu"
+
+#: capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Short _description:"
 msgstr "Krótki _opis:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:10
+#: capplets/theme-switcher/theme-properties.glade.h:11
 msgid "Theme Details"
 msgstr "Szczegóły dotyczące motywów"
 
-#: capplets/theme-switcher/theme-properties.glade.h:11
+#: capplets/theme-switcher/theme-properties.glade.h:12
 msgid "Theme Preferences"
 msgstr "Ustawienia motywu"
 
-#: capplets/theme-switcher/theme-properties.glade.h:12
+#: capplets/theme-switcher/theme-properties.glade.h:13
 msgid "Theme _Details"
 msgstr "Szczegóły _dotyczące motywów"
 
-#: capplets/theme-switcher/theme-properties.glade.h:13
+#: capplets/theme-switcher/theme-properties.glade.h:14
 msgid "This theme does not suggest any particular font or background."
 msgstr "Ten motyw nie sugeruje użycia określonej czcionki czy tła"
 
-#: capplets/theme-switcher/theme-properties.glade.h:14
+#: capplets/theme-switcher/theme-properties.glade.h:15
 msgid "This theme suggests a background:"
 msgstr "Ten motyw sugeruje użycie tła:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:15
+#: capplets/theme-switcher/theme-properties.glade.h:16
 msgid "This theme suggests a font and a background:"
 msgstr "Ten motyw sugeruje użycie czcionki i tła:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:16
+#: capplets/theme-switcher/theme-properties.glade.h:17
 msgid "This theme suggests a font:"
 msgstr "Ten motyw sugeruje użycie czcionki:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:17
+#: capplets/theme-switcher/theme-properties.glade.h:18
 msgid "Window Border"
 msgstr "Krawędź okna"
 
-#: capplets/theme-switcher/theme-properties.glade.h:18
+#: capplets/theme-switcher/theme-properties.glade.h:19
 msgid "_Go To Theme Folder"
 msgstr "_Przejdź do folderu z motywem"
 
-#: capplets/theme-switcher/theme-properties.glade.h:19
+#: capplets/theme-switcher/theme-properties.glade.h:20
 msgid "_Install Theme..."
 msgstr "Za_instaluj motyw..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:20
+#: capplets/theme-switcher/theme-properties.glade.h:21
 msgid "_Save Theme..."
 msgstr "_Zapisz motyw..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:21
+#: capplets/theme-switcher/theme-properties.glade.h:22
 msgid "_Theme name:"
 msgstr "_Nazwa motywu:"
+
+#: capplets/theme-switcher/theme-properties.glade.h:23
+msgid "theme selection tree"
+msgstr "drzewo wyboru motywu"
 
 #: capplets/ui-properties/gnome-ui-properties.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
@@ -3141,23 +3299,23 @@ msgstr "Wybrany motyw proponuje nową czcionkę. Jej podgląd jest poniżej."
 msgid "_Apply font"
 msgstr "Zastosuj _czcionkę"
 
-#: vfs-methods/themus/theme-method.c:514
+#: vfs-methods/themus/theme-method.c:519
 msgid "Themes"
 msgstr "Motywy"
 
-#: vfs-methods/themus/themus-properties-view.c:170
+#: vfs-methods/themus/themus-properties-view.c:168
 msgid "Control theme"
 msgstr "Motyw kontrolny"
 
-#: vfs-methods/themus/themus-properties-view.c:174
+#: vfs-methods/themus/themus-properties-view.c:172
 msgid "Window border theme"
 msgstr "Motyw krawędzi okna"
 
-#: vfs-methods/themus/themus-properties-view.c:178
+#: vfs-methods/themus/themus-properties-view.c:176
 msgid "Icon theme"
 msgstr "Motyw ikony"
 
-#: vfs-methods/themus/themus-properties-view.c:217
+#: vfs-methods/themus/themus-properties-view.c:215
 msgid "URI currently displayed"
 msgstr "Aktualnie wyświetlany URI"
 
@@ -3202,129 +3360,3 @@ msgstr "Tworzenie miniaturek zainstalowanych motywów"
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Tworzenie miniaturek motywów"
-
-#~ msgid "radiobutton1"
-#~ msgstr "Przycisk opcji 1"
-
-#~ msgid "radiobutton2"
-#~ msgstr "Przycisk opcji 2"
-
-#~ msgid "radiobutton3"
-#~ msgstr "Przycisk opcji 3"
-
-#~ msgid "radiobutton4"
-#~ msgstr "Przycisk opcji 4"
-
-#~ msgid "radiobutton5"
-#~ msgstr "Przycisk opcji 5"
-
-#~ msgid "Behavior"
-#~ msgstr "Zachowanie"
-
-#~ msgid "Sets the default behavior of GNOME applications"
-#~ msgstr "Ustawia domyślne zachowanie aplikacji GNOME"
-
-#~ msgid "One minute until the next break"
-#~ msgstr "Jedna minuta do przerwy"
-
-#~ msgid "Acce_pts URLs"
-#~ msgstr "Obsługuje _URL-e"
-
-#~ msgid "C_ustom Help Browser:"
-#~ msgstr "_Dowolna przeglądarka pomocy:"
-
-#~ msgid "Default Help Browser"
-#~ msgstr "Domyślna przeglądarka pomocy"
-
-#~ msgid "Help Browser"
-#~ msgstr "Przeglądarka pomocy"
-
-#~ msgid "_Select a Help Browser:"
-#~ msgstr "Wybór przeglądarki pomocy z _listy:"
-
-#~ msgid ""
-#~ "<b>Default Cursor - Current</b>\n"
-#~ "The default cursor that ships with X"
-#~ msgstr ""
-#~ "<b>Domyślny wskaźnik - bieżący</b>\n"
-#~ "Domyślny wskaźnik dostarczany z X"
-
-#~ msgid ""
-#~ "<b>White Cursor - Current</b>\n"
-#~ "The default cursor inverted"
-#~ msgstr ""
-#~ "<b>Biały wskaźnik - bieżący</b>\n"
-#~ "Domyślny wskaźnik poddany inwersji"
-
-#~ msgid ""
-#~ "<b>Large Cursor - Current</b>\n"
-#~ "Large version of normal cursor"
-#~ msgstr ""
-#~ "<b>Duży wskaźnik - bieżący</b>\n"
-#~ "Duża odmiana zwykłego wskaźnika"
-
-#~ msgid "<b>Cursor Theme</b>"
-#~ msgstr "<b>Motyw kursora</b>"
-
-#~ msgid "Quit DrWright?"
-#~ msgstr "Zamknąć DrWright?"
-
-#~ msgid "Don't forget to take regular breaks."
-#~ msgstr "Nie zapominaj robić regularnych przerw."
-
-#~ msgid "Don't Quit"
-#~ msgstr "Nie kończ"
-
-#~ msgid "Quit"
-#~ msgstr "Zakończ"
-
-#~ msgid "Apply theme..."
-#~ msgstr "Zastosuj motyw..."
-
-#~ msgid "Themus component"
-#~ msgstr "Komponent Themus"
-
-#~ msgid "Themus component apply theme operations"
-#~ msgstr "Komponent Themus operujący na motywach"
-
-#~ msgid "_Wallpaper"
-#~ msgstr "_Tapeta"
-
-#~ msgid "A preview of the background picture."
-#~ msgstr "Podgląd obrazu w tle"
-
-#~ msgid "Background Preview"
-#~ msgstr "Podgląd tła"
-
-#~ msgid "The background picture's file name."
-#~ msgstr "Nazwa pliku z obrazem tła."
-
-#~ msgid "Select CDE AccessX file"
-#~ msgstr "Wybór pliku CDE AccessX"
-
-#~ msgid "<b>Mouse</b>"
-#~ msgstr "<b>Mysz</b>"
-
-#~ msgid "A preview of what a menubar looks like with these settings."
-#~ msgstr "Podgląd paska menu przy wybranych ustawieniach wyglądu."
-
-#~ msgid "A preview of what a toolbar looks like with these settings."
-#~ msgstr "Podgląd paska narzędziowego przy wybranych ustawieniach wyglądu."
-
-#~ msgid "Menus"
-#~ msgstr "Menu"
-
-#~ msgid "Sample menubar:"
-#~ msgstr "Przykładowy pasek menu:"
-
-#~ msgid "Select the toolbar style."
-#~ msgstr "Wybiera styl paska narzędziowego."
-
-#~ msgid "Toolbar"
-#~ msgstr "Paski narzędziowe"
-
-#~ msgid "Toolbars can be _detached and moved around"
-#~ msgstr "Możliwość _odrywania i przesuwania pasków narzędziowych"
-
-#~ msgid "File to play"
-#~ msgstr "Plik z dźwiękiem"
