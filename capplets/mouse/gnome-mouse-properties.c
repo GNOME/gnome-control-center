@@ -421,7 +421,7 @@ create_dialog (void)
 	GladeXML     *dialog;
 	GtkSizeGroup *size_group;
 
-	dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/mouse-properties.glade", "prefs_widget", NULL);
+	dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/gnome-mouse-properties.glade", "prefs_widget", NULL);
 	widget = glade_xml_get_widget (dialog, "prefs_widget");
 
 	size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);

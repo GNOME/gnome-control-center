@@ -54,7 +54,7 @@
         </child>
 
         <child>
-          <widget class="GtkNotebook" id="main_notebook">
+          <widget class="GtkNotebook" id="prefs_widget">
             <property name="can_focus">yes</property>
             <property name="show_tabs">yes</property>
             <property name="show_border">yes</property>
@@ -338,6 +338,7 @@
 			    name="shadow">GTK_SHADOW_IN</property>
 			    <child>
 			      <widget class="GtkTreeView" id="cursor_tree">
+				<property name="rules_hint">yes</property>
 				<property name="visible">yes</property>
 				<property name="headers-visible">no</property>
 			      </widget>
@@ -351,8 +352,7 @@
 			</child>
 			<child>
 			  <widget class="GtkLabel" id="label19">
-			    <property name="label"
-			    translatable="yes"><b>Note:</b> You will need to restart your login session for this setting to take effect.</property>
+			    <property name="label" translatable="yes">&lt;b&gt;Note:&lt;/b&gt; You will need to logout for this setting to take effect.</property>
 			    <property name="justify">GTK_JUSTIFY_LEFT</property>
 			    <property name="wrap">yes</property>
 			    <property name="use_markup">yes</property>
@@ -394,7 +394,8 @@
 			<child>
 			  <widget class="GtkCheckButton" id="locate_pointer_toggle">
 			    <property name="can_focus">yes</property>
-			    <property name="label" translatable="yes">_Show position of cursor when Control is pressed</property>
+			    <property name="label"
+			    translatable="yes">_Show position of cursor when the Control key is pressed</property>
 			    <property name="active">no</property>
 			    <property name="draw_indicator">yes</property>
 			    <property name="visible">yes</property>
@@ -405,14 +406,14 @@
 			<child>
 			  <widget class="GtkLabel" id="label20">
 			    <property name="label"
-			    translatable="yes">Draws a quick box around the cursor when the control key has been pressed and released</property>
+			    translatable="yes">Animates a quick marker around the cursor when the Control key has been pressed and released.</property>
 			    <property name="justify">GTK_JUSTIFY_LEFT</property>
 			    <property name="wrap">yes</property>
 			    <property name="xalign">0</property>
 			    <property name="yalign">0.5</property>
-			    <property name="xpad">0</property>
-			    <property name="ypad">0</property>
-			    <property name="visible">yes</property>
+			    <property name="xpad">0</property> <property
+			    name="ypad">0</property> <property
+			    name="visible">yes</property>
 			  </widget>
 			  <packing>
 			    <property name="padding">0</property>

@@ -1,7 +1,7 @@
 bin_PROGRAMS = gnome-mouse-properties
 
 gnome_mouse_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
-gnome_mouse_properties_SOURCES = mouse-properties-capplet.c
+gnome_mouse_properties_SOURCES = gnome-mouse-properties.c
 
 @INTLTOOL_DESKTOP_RULE@
 
@@ -14,7 +14,7 @@ pixmap_DATA = \
 	mouse-right.png
 
 Gladedir   = $(GNOMECC_GLADE_DIR)
-Glade_DATA = mouse-properties.glade
+Glade_DATA = gnome-mouse-properties.glade
 
 iconsdir   = $(GNOMECC_ICONS_DIR)
 icons_DATA = mouse-capplet.png
