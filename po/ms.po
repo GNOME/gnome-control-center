@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
-"POT-Creation-Date: 2002-09-13 09:59+0800\n"
+"POT-Creation-Date: 2002-09-24 14:34-0400\n"
 "PO-Revision-Date: 2002-09-13 10:03+0800\n"
 "Last-Translator: Hasbullah Bin Pit <sebol@ikhlas.com>\n"
 "Language-Team: Projek Gabai <gabai-penyumbang@lists.sourceforge.org>\n"
@@ -18,12 +18,13 @@ msgstr ""
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "Terdapat ralat melancarkan caplet papan kekunci: %s"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:317
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:321
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:379
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "Tak dapat mengimport tetapan AccessX dari fail '%s'"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:433
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:452
 msgid "Select CDE AccessX file"
 msgstr "Pilih fail AccessX CDE"
 
@@ -82,8 +83,12 @@ msgid "I_gnore keypresses within  :"
 msgstr "_Abaikan tekanan kekunci dalam tempoh :"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:12
-msgid "Ignore all subsequent presses of the SAME key if they happen within a user selectable period of time."
-msgstr "Abaikan semua turutan tekan bagi kekunci SAMA jika ianya berlaku dalam tempoh yang boleh dipilih pengguna."
+msgid ""
+"Ignore all subsequent presses of the SAME key if they happen within a user "
+"selectable period of time."
+msgstr ""
+"Abaikan semua turutan tekan bagi kekunci SAMA jika ianya berlaku dalam "
+"tempoh yang boleh dipilih pengguna."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:13
 msgid "Keyboard Accessibility Configuration (AccessX)"
@@ -94,11 +99,15 @@ msgid "Ma_ximum pointer speed :"
 msgstr "Kelajuan ma_ksima penuding :"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
-msgid "Only accept keys after they have been pressed and held for a user adjustable amount of time."
+msgid ""
+"Only accept keys after they have been pressed and held for a user adjustable "
+"amount of time."
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:16
-msgid "Perform multiple simultaneous key press operations by pressing modifier keys in sequence."
+msgid ""
+"Perform multiple simultaneous key press operations by pressing modifier keys "
+"in sequence."
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:17
@@ -285,7 +294,9 @@ msgstr "Nama fail gambar latarbelakang."
 
 #: capplets/background/background-properties.glade.h:13
 msgid "To set the background picture, drop an image or click to browse."
-msgstr "Untuk menetapkan gambar latar belakang, jatuhkan imej atau klik untuk lungsur."
+msgstr ""
+"Untuk menetapkan gambar latar belakang, jatuhkan imej atau klik untuk "
+"lungsur."
 
 #: capplets/background/background-properties.glade.h:14
 msgid "Vertical gradient"
@@ -313,13 +324,18 @@ msgstr "Personalisasi latar belakang desktop anda"
 #: capplets/common/activate-settings-daemon.c:18
 msgid ""
 "Unable to start the settings manager 'gnome-settings-daemon'.\n"
-"Without the GNOME settings manager running, some preferences may not take effect. This could indicate a problem with Bonobo, or a non-GNOME (e.g. KDE) settings manager may already be active and conflicting with the GNOME settings manager."
+"Without the GNOME settings manager running, some preferences may not take "
+"effect. This could indicate a problem with Bonobo, or a non-GNOME (e.g. KDE) "
+"settings manager may already be active and conflicting with the GNOME "
+"settings manager."
 msgstr ""
 "Gagal memulakan pengurus tetapan 'gnome-setting-daemon'.\n"
-"Tanpa pengurus tetapan GNOME terlaksana, setengah keutamaan tak dapat bertindak. Ini menunjukkan masalah dengan Bonobo, atau pengurus tetapan bukan-GNOME (ie. KDE) sudah tersedia aktif dan konflik dengan pengurus tetapan GNOME."
+"Tanpa pengurus tetapan GNOME terlaksana, setengah keutamaan tak dapat "
+"bertindak. Ini menunjukkan masalah dengan Bonobo, atau pengurus tetapan "
+"bukan-GNOME (ie. KDE) sudah tersedia aktif dan konflik dengan pengurus "
+"tetapan GNOME."
 
-#: capplets/common/capplet-util.c:239
-#: capplets/common/capplet-util.c:241
+#: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr "Hanya terapkan tetapan dan keluar"
 
@@ -419,24 +435,33 @@ msgid "Change set"
 msgstr "Tukar set"
 
 #: capplets/common/gconf-property-editor.c:186
-msgid "GConf change set containing data to be forwarded to the gconf client on apply"
-msgstr "GConf tukar set yang mengandungi data untuk diforwardkan ke klient gconf pada terapan"
+msgid ""
+"GConf change set containing data to be forwarded to the gconf client on apply"
+msgstr ""
+"GConf tukar set yang mengandungi data untuk diforwardkan ke klient gconf "
+"pada terapan"
 
 #: capplets/common/gconf-property-editor.c:191
 msgid "Conversion to widget callback"
 msgstr "Penukaran widget panggilbalik"
 
 #: capplets/common/gconf-property-editor.c:192
-msgid "Callback to be issued when data are to be converted from GConf to the widget"
-msgstr "Panggilbalik akan disisukan bila data hendak ditukarkan daripada GConf ke widget"
+msgid ""
+"Callback to be issued when data are to be converted from GConf to the widget"
+msgstr ""
+"Panggilbalik akan disisukan bila data hendak ditukarkan daripada GConf ke "
+"widget"
 
 #: capplets/common/gconf-property-editor.c:197
 msgid "Conversion from widget callback"
 msgstr "Penukaran daripada panggilbalik wigdet"
 
 #: capplets/common/gconf-property-editor.c:198
-msgid "Callback to be issued when data are to be converted to GConf from the widget"
-msgstr "Panggilbalik akan diisukan apabila data yang akan ditukarkan kepada GConf daripada widget"
+msgid ""
+"Callback to be issued when data are to be converted to GConf from the widget"
+msgstr ""
+"Panggilbalik akan diisukan apabila data yang akan ditukarkan kepada GConf "
+"daripada widget"
 
 #: capplets/common/gconf-property-editor.c:203
 msgid "UI Control"
@@ -460,18 +485,21 @@ msgstr "Data property editor melepaskan panggilbalik"
 
 #: capplets/common/gconf-property-editor.c:227
 msgid "Callback to be issued when property editor object data is to be freed"
-msgstr "Panggilbalik yang akan diisukan apabila data property editor yang dikosongkan"
+msgstr ""
+"Panggilbalik yang akan diisukan apabila data property editor yang dikosongkan"
 
 #: capplets/common/gconf-property-editor.c:1484
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
 "\n"
-"Please make sure it exists and try again, or choose a different background picture."
+"Please make sure it exists and try again, or choose a different background "
+"picture."
 msgstr ""
 "Tak menjumpai fail  '%s'.\n"
 "\n"
-"Pastikan ianya wujud dan cuba lagi, atau pilih gambar latar belakang yang lain."
+"Pastikan ianya wujud dan cuba lagi, atau pilih gambar latar belakang yang "
+"lain."
 
 #: capplets/common/gconf-property-editor.c:1492
 #, c-format
@@ -580,8 +608,12 @@ msgid "Help Browser"
 msgstr "Pelayar Bantuan"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:20
-msgid "Select the window manager you want.  You will need to hit apply, wave the magic wand, and do a magic dance for it to work."
-msgstr "Pilih pengurus tetingkap yang anda mahu.  Anda dikehendaki menekan apply, goyangkan kayu silap mata, dan lakukan tarian silap mata untuk menjayakannya"
+msgid ""
+"Select the window manager you want.  You will need to hit apply, wave the "
+"magic wand, and do a magic dance for it to work."
+msgstr ""
+"Pilih pengurus tetingkap yang anda mahu.  Anda dikehendaki menekan apply, "
+"goyangkan kayu silap mata, dan lakukan tarian silap mata untuk menjayakannya"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:21
 msgid "Start in T_erminal"
@@ -955,8 +987,12 @@ msgid "None"
 msgstr "Tiada"
 
 #: capplets/file-types/mime-edit-dialog.c:852
-msgid "Please enter a valid MIME type.  It should be of the form class/type and may not contain any spaces."
-msgstr "Sila masukkkan jenis MIME yang sah. Ia patut dalam bentuk kelas/jenis dan tak boleh mengandungi ruang."
+msgid ""
+"Please enter a valid MIME type.  It should be of the form class/type and may "
+"not contain any spaces."
+msgstr ""
+"Sila masukkkan jenis MIME yang sah. Ia patut dalam bentuk kelas/jenis dan "
+"tak boleh mengandungi ruang."
 
 #: capplets/file-types/mime-edit-dialog.c:859
 msgid "A MIME type with that name already exists, overwrite ?."
@@ -1020,8 +1056,11 @@ msgid "Please enter a protocol name."
 msgstr "Sila masukkan nama protokol."
 
 #: capplets/file-types/service-edit-dialog.c:509
-msgid "Invalid protocol name. Please enter a protocol name without any spaces or punctuation."
-msgstr "Nama protokol tidak sah. Sila masukkan nama protokol tanpa ruang atau koma"
+msgid ""
+"Invalid protocol name. Please enter a protocol name without any spaces or "
+"punctuation."
+msgstr ""
+"Nama protokol tidak sah. Sila masukkan nama protokol tanpa ruang atau koma"
 
 #: capplets/file-types/service-edit-dialog.c:523
 msgid "There is already a protocol by that name."
@@ -1130,16 +1169,16 @@ msgstr "Pengurusan Tetingkap"
 
 #: capplets/keybindings/gnome-keybinding-properties.c:568
 #, c-format
-msgid ""
-"Error setting new accelerator in configuration database: %s\n"
-""
-msgstr ""
-"Ralat menetapkan pemecut baru pada pangkalandata konfigurasi: %s\n"
-""
+msgid "Error setting new accelerator in configuration database: %s\n"
+msgstr "Ralat menetapkan pemecut baru pada pangkalandata konfigurasi: %s\n"
 
 #: capplets/keybindings/gnome-keybinding-properties.c:719
-msgid "Unable to find any keyboard themes.  This means your GTK+ installation has been incompletely installed."
-msgstr "Tak dapat menjumpai tema papankekunci. Ini bermaksud pemasangan GTK+ tidak dipasang dengan sempurna."
+msgid ""
+"Unable to find any keyboard themes.  This means your GTK+ installation has "
+"been incompletely installed."
+msgstr ""
+"Tak dapat menjumpai tema papankekunci. Ini bermaksud pemasangan GTK+ tidak "
+"dipasang dengan sempurna."
 
 #: capplets/keybindings/gnome-keybinding-properties.c:741
 msgid "Action"
@@ -1178,8 +1217,11 @@ msgstr "Keboleh_capaikan"
 #: capplets/keyboard/gnome-keyboard-properties.c:291
 #: capplets/sound/sound-properties-capplet.c:145
 #: capplets/sound/sound-properties-capplet.c:147
-msgid "Just apply settings and quit (compatibility only; now handled by daemon)"
-msgstr "Hanya terapkan tetapan dan keluar (kompatibiliti sahaja; kini dikendali oleh deamon)"
+msgid ""
+"Just apply settings and quit (compatibility only; now handled by daemon)"
+msgstr ""
+"Hanya terapkan tetapan dan keluar (kompatibiliti sahaja; kini dikendali oleh "
+"deamon)"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:2
 msgid "<small><i>Fast</i></small>"
@@ -1347,8 +1389,12 @@ msgstr ""
 "Versi besar bagi kursor putih"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:1
-msgid "<b>Note:</b> You will need to logout and log back in for this setting to take effect."
-msgstr "<b>Perhatian:</b>  Anda perlu logkeluar dan logmasuk semula supaya tetapan ini bertindak."
+msgid ""
+"<b>Note:</b> You will need to logout and log back in for this setting to "
+"take effect."
+msgstr ""
+"<b>Perhatian:</b>  Anda perlu logkeluar dan logmasuk semula supaya tetapan "
+"ini bertindak."
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:2
 msgid "<i>Fast</i>"
@@ -1375,8 +1421,12 @@ msgid "<i>Small</i>"
 msgstr "<i>Kecil</i>"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:8
-msgid "Animates a quick marker around the cursor when the Control key has been pressed and released."
-msgstr "Gerakkan quick marker sekitar kursor apabila kekunci Control ditekan dan dilepaskan."
+msgid ""
+"Animates a quick marker around the cursor when the Control key has been "
+"pressed and released."
+msgstr ""
+"Gerakkan quick marker sekitar kursor apabila kekunci Control ditekan dan "
+"dilepaskan."
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:9
 msgid "Buttons"
@@ -1399,7 +1449,8 @@ msgid "Drag and Drop"
 msgstr "Heret dan Jatuh"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:14
-msgid "Left-handed mouse mode switches the left and right buttons on the mouse."
+msgid ""
+"Left-handed mouse mode switches the left and right buttons on the mouse."
 msgstr "Mod tetikus kidal akan menukarkan butang kiri dan kanan pada tetikus."
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:15
@@ -1407,8 +1458,12 @@ msgid "Locate Pointer"
 msgstr "Cari Pointer"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:16
-msgid "Maximum time allowed between clicks when double-clicking.   Use the box on the right to test."
-msgstr "Masa maksima yang dibenarkan bagi setiap klik bila dwi-klik.  Gunakan kekotak di sebelah kanan untuk ujian."
+msgid ""
+"Maximum time allowed between clicks when double-clicking.   Use the box on "
+"the right to test."
+msgstr ""
+"Masa maksima yang dibenarkan bagi setiap klik bila dwi-klik.  Gunakan "
+"kekotak di sebelah kanan untuk ujian."
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:17
 msgid "Motion"
@@ -1424,7 +1479,9 @@ msgstr "Keutamaan Tetikus"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:20
 msgid "Set the distance you need to move your cursor before dragging an item."
-msgstr "Tetapkan jarak yang diperlukan untuk menggerakkan kursor sebelum mengheret sesuatu item."
+msgstr ""
+"Tetapkan jarak yang diperlukan untuk menggerakkan kursor sebelum mengheret "
+"sesuatu item."
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:21
 msgid "Set the speed of your pointing device."
@@ -1814,8 +1871,7 @@ msgstr "Direktori kaplet yang paparan ini lihat"
 msgid "translator_credits"
 msgstr " boh nama khai, boh nama sebol lagi siapa ek ?"
 
-#: control-center/capplet-dir-view.c:357
-#: control-center/gnomecc.desktop.in.h:1
+#: control-center/capplet-dir-view.c:357 control-center/gnomecc.desktop.in.h:1
 msgid "GNOME Control Center"
 msgstr "Pusat Kawalan GNOME"
 
@@ -1871,48 +1927,28 @@ msgstr ""
 
 #: gnome-settings-daemon/gnome-settings-keybindings.c:106
 #, c-format
-msgid ""
-"Key Binding (%s) has its action defined multiple times\n"
-""
-msgstr ""
-"Ikatan Kekunci (%s) imempunyai aksi yang ditakrifkan beberapa kali\n"
-""
+msgid "Key Binding (%s) has its action defined multiple times\n"
+msgstr "Ikatan Kekunci (%s) imempunyai aksi yang ditakrifkan beberapa kali\n"
 
 #: gnome-settings-daemon/gnome-settings-keybindings.c:119
 #, c-format
-msgid ""
-"Key Binding (%s) has its binding defined multiple times\n"
-""
-msgstr ""
-"Ikatan Kekunci (%s) mempunyai ikatan ditakrifkan banyak kali\n"
-""
+msgid "Key Binding (%s) has its binding defined multiple times\n"
+msgstr "Ikatan Kekunci (%s) mempunyai ikatan ditakrifkan banyak kali\n"
 
 #: gnome-settings-daemon/gnome-settings-keybindings.c:125
 #, c-format
-msgid ""
-"Key Binding (%s) is incomplete\n"
-""
-msgstr ""
-"Ikatan kekunci (%s) tidak selesai\n"
-""
+msgid "Key Binding (%s) is incomplete\n"
+msgstr "Ikatan kekunci (%s) tidak selesai\n"
 
 #: gnome-settings-daemon/gnome-settings-keybindings.c:153
 #, c-format
-msgid ""
-"Key Binding (%s) is invalid\n"
-""
-msgstr ""
-"Ikatan Kekunci (%s) tidak sah\n"
-""
+msgid "Key Binding (%s) is invalid\n"
+msgstr "Ikatan Kekunci (%s) tidak sah\n"
 
 #: gnome-settings-daemon/gnome-settings-keybindings.c:241
 #, c-format
-msgid ""
-"Key Binding (%s) is already in use\n"
-""
-msgstr ""
-"Ikatan Kekunci (%s) telah digunakan\n"
-""
+msgid "Key Binding (%s) is already in use\n"
+msgstr "Ikatan Kekunci (%s) telah digunakan\n"
 
 #: gnome-settings-daemon/gnome-settings-keybindings.c:292
 #, c-format
@@ -1949,20 +1985,21 @@ msgstr "Tak dapat memuatkan fail bunyi %s sebagai contoh %s"
 
 #: gnome-settings-daemon/gnome-settings-xsettings.c:150
 #, c-format
-msgid ""
-"GConf key %s set to type %s but its expected type was %s\n"
-""
+msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr ""
 "Kekunci GConf %s ditetapkan ke jenis %s tapi ia menjangkakan jenis %s\n"
-""
 
 #: libbackground/applier.c:239
 msgid "Type"
 msgstr "Jenis"
 
 #: libbackground/applier.c:240
-msgid "Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW for preview"
-msgstr "Jenis bg_applier: BG_APPLIER_ROOT pada tetingkap root atau BG_APPLIER_PREVIEW untuk prebiu"
+msgid ""
+"Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
+"for preview"
+msgstr ""
+"Jenis bg_applier: BG_APPLIER_ROOT pada tetingkap root atau "
+"BG_APPLIER_PREVIEW untuk prebiu"
 
 #: libbackground/applier.c:247
 msgid "Preview Width"
@@ -2031,41 +2068,31 @@ msgstr ""
 msgid ""
 "wm-properties-capplet: Unable to initialize window manager.\n"
 "\tAnother window manager is already running and could not be killed\n"
-""
 msgstr ""
 "wm-properties-caplet: Tak dapat menginitialisasi pengurus tetingkap.\n"
 "\tPengurus tetingkap lain sudah dilaksana dan tak dpaat dibunuh.\n"
-""
 
 #: libwindow-settings/gnome-wm-manager.c:329
 #, c-format
 msgid ""
 "wm-properties-capplet: Unable to initialize window manager.\n"
 "\t'%s' didn't start\n"
-""
 msgstr ""
 "wm-properties-capplet: Tak dapat menginitialisasi pengurus tetingkap.\n"
 "\t'%s' tidak bermula\n"
-""
 
 #: libwindow-settings/gnome-wm-manager.c:378
-msgid ""
-"Previous window manager did not die\n"
-""
-msgstr ""
-"Pengurus tetingkap terdahulu belum mati\n"
-""
+msgid "Previous window manager did not die\n"
+msgstr "Pengurus tetingkap terdahulu belum mati\n"
 
 #: libwindow-settings/gnome-wm-manager.c:411
 #, c-format
 msgid ""
 "Could not start '%s'.\n"
 "Falling back to previous window manager '%s'\n"
-""
 msgstr ""
 "Tak dapat memulakan '%s'.\n"
 "Kembali menggunakan pengurus tetingkap terdahulu '%s'\n"
-""
 
 #: libwindow-settings/gnome-wm-manager.c:442
 msgid ""
@@ -2073,10 +2100,8 @@ msgid ""
 "Please run a window manager manually. You can\n"
 "do this by selecting \"Run Program\" in the\n"
 "foot menu\n"
-""
 msgstr ""
 
 #: libwindow-settings/gnome-wm-manager.c:467
 msgid "OK"
 msgstr "OK"
-

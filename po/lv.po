@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2002-08-26 05:03+0200\n"
+"POT-Creation-Date: 2002-09-24 14:34-0400\n"
 "PO-Revision-Date: 2002-08-30 22:13+0200\n"
 "Last-Translator: Artis Trops <hornet@navigators.lv>\n"
 "Language-Team: Latvian <ll10nt@os.lv>\n"
@@ -13,18 +13,19 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:225
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:229
 #: capplets/keyboard/gnome-keyboard-properties.c:159
 #, c-format
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "Atgadījās kļūda, palaižot tastatūras kapletu : %s"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:309
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:321
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:379
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "Nevarēju importēt AccessX uzstādījumus no faila '%s'"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:421
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:452
 msgid "Select CDE AccessX file"
 msgstr "Izvēlieties CDE AccessX failu"
 
@@ -39,12 +40,13 @@ msgid "Set your keyboard accessibility preferences"
 msgstr "Uzstādīt jūsu tastatūras pieejamības preferences"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
-msgid "B_eep when modifier is pressed"
-msgstr "Pī_kstēt, kad tiek nospiests modifikators"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
 msgid "Beep when an LED is turned on and two beeps when one is turned off."
 msgstr "Pīkstēt kad LED ir iedegta un divreiz pīkstēt kad tā ir izslēgta."
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
+#, fuzzy
+msgid "Beep when enabling/disabling _keyboard accessibility features"
+msgstr "_Pīkstēt, kad aktivizē/deaktivizē tastatūras pieejamības funkcijas"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
 msgid "Beep when key is re_jected"
@@ -55,88 +57,106 @@ msgid "Beep when:"
 msgstr "Pīkstēt, kad:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
-msgid "Enable Slo_w Keys"
-msgstr "Aktivizēt _Lēnos Taustiņus"
+#, fuzzy
+msgid "E_nable Toggle Keys"
+msgstr "Aktivizēt _Slēgt Taustiņus"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
-msgid "Enable _Bounce Keys"
+#, fuzzy
+msgid "Enable Bo_unce Keys"
 msgstr "Aktivizēt _Atlekšanas Taustiņus"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
+msgid "Enable Slo_w Keys"
+msgstr "Aktivizēt _Lēnos Taustiņus"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
 msgid "Enable _Mouse Keys"
 msgstr "Aktivizēt _Peles Taustiņus"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
 msgid "Enable _Sticky Keys"
 msgstr "Aktivizēt Lipī_gos Taustiņus"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
-msgid "Enable _Toggle Keys"
-msgstr "Aktivizēt _Slēgt Taustiņus"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
 msgid "General"
 msgstr "Vispārīgi"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:11
-msgid "Ignore all subsequent presses of the SAME key if they happen within a user selectable period of time."
-msgstr "Ignorēt visus sekojošos nospiedienus no VIENA UN TĀ PAŠA taustiņa, ja tie notiek lietotāja izvēlētajā laika posmā."
+#, fuzzy
+msgid "I_gnore keypresses within  :"
+msgstr "_Ignorēt taustiņnospiešanas robežās :"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:12
+msgid ""
+"Ignore all subsequent presses of the SAME key if they happen within a user "
+"selectable period of time."
+msgstr ""
+"Ignorēt visus sekojošos nospiedienus no VIENA UN TĀ PAŠA taustiņa, ja tie "
+"notiek lietotāja izvēlētajā laika posmā."
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:13
 msgid "Keyboard Accessibility Configuration (AccessX)"
 msgstr "Tastatūras Pieejamības Konfigurācija (AccessX)"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:13
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
 msgid "Ma_ximum pointer speed :"
 msgstr "Maksimālais punktiera ātrums :"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
-msgid "Only accept keys after they have been pressed and held for a user adjustable amount of time."
-msgstr "Pieņemt taustiņu nospiešanu tikai tad, ja tie ir nospiesti un turēti attiecīgu laika brīdi."
-
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
-msgid "Perform multiple simultaneous key press operations by pressing modifier keys in sequence."
-msgstr "Veikt vairākas vinlaicīgas taustiņa nospiešanas operācijas, nospiežot modifikatora taustiņus citu aiz cita."
+msgid ""
+"Only accept keys after they have been pressed and held for a user adjustable "
+"amount of time."
+msgstr ""
+"Pieņemt taustiņu nospiešanu tikai tad, ja tie ir nospiesti un turēti "
+"attiecīgu laika brīdi."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:16
-msgid "Repeat Key Preferences"
-msgstr "Taustiņu Atkārtošanās Preferences"
+msgid ""
+"Perform multiple simultaneous key press operations by pressing modifier keys "
+"in sequence."
+msgstr ""
+"Veikt vairākas vinlaicīgas taustiņa nospiešanas operācijas, nospiežot "
+"modifikatora taustiņus citu aiz cita."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:17
+#, fuzzy
+msgid "Repeat Key Pre_ferences"
+msgstr "Taustiņu Atkārtošanās Preferences"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:18
 msgid "Start mo_ving this long after keypress :"
 msgstr "Sākt _kustēties tik tālu pēc taustiņa nospiešanas : "
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:18
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:19
 msgid "Testing Area"
 msgstr "Testēšanas Laukums"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:19
-msgid "Time to _accelerate to max speed :"
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:20
+#, fuzzy
+msgid "Time to acce_lerate to max speed :"
 msgstr "Laiks, kurā paātrināt līdz maks. ātrumam : "
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:20
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:21
 msgid "Toggle and Repeat Keys"
 msgstr "Slēgšans un Atkārtošanās Taustiņi"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:21
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:22
 msgid "Turn the numeric keypad into a mouse control pad."
 msgstr "Pārveidot skaitļu tastatūru par peles kontroles iekārtu."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:22
-msgid "_Beep when enabling/disabling keyboard accessibility features"
-msgstr "_Pīkstēt, kad aktivizē/deaktivizē tastatūras pieejamības funkcijas"
-
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:23
+#, fuzzy
+msgid "_Beep when modifier is pressed"
+msgstr "Pī_kstēt, kad tiek nospiests modifikators"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
 msgid "_Disable if unused for "
 msgstr "_Izslēgt, ja netiek izmantots "
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
 msgid "_Enable keyboard accessibility"
 msgstr "_Aktivizēt klaviatūras pieejamību"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
-msgid "_Ignore keypresses within  :"
-msgstr "_Ignorēt taustiņnospiešanas robežās :"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
 msgid "_Import CDE AccessX file"
@@ -312,13 +332,18 @@ msgstr "Mainiet jūsu darbavirsmas fonu"
 #: capplets/common/activate-settings-daemon.c:18
 msgid ""
 "Unable to start the settings manager 'gnome-settings-daemon'.\n"
-"Without the GNOME settings manager running, some preferences may not take effect. This could indicate a problem with Bonobo, or a non-GNOME (e.g. KDE) settings manager may already be active and conflicting with the GNOME settings manager."
+"Without the GNOME settings manager running, some preferences may not take "
+"effect. This could indicate a problem with Bonobo, or a non-GNOME (e.g. KDE) "
+"settings manager may already be active and conflicting with the GNOME "
+"settings manager."
 msgstr ""
 "Nevarēju startēt uzstādījumu pārvaldnieku 'gnome-settings-daemon'.\n"
-"Bez strādājoša GNOME uzstādījumu pārvaldnieka, dažas preferenču maiņa varētu neizraisīt nekādu efektu. Tas varētu būt saistīts ar Bonobo problēmu vai arī ne-GNOME (piem. KDE) uzstādījumu pārvaldnieks jau varētu būt aktīvs un konfliktēt ar GNOME uzstādījumu pārvaldnieku."
+"Bez strādājoša GNOME uzstādījumu pārvaldnieka, dažas preferenču maiņa varētu "
+"neizraisīt nekādu efektu. Tas varētu būt saistīts ar Bonobo problēmu vai arī "
+"ne-GNOME (piem. KDE) uzstādījumu pārvaldnieks jau varētu būt aktīvs un "
+"konfliktēt ar GNOME uzstādījumu pārvaldnieku."
 
-#: capplets/common/capplet-util.c:239
-#: capplets/common/capplet-util.c:241
+#: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr "Tikai attiecināt uzstādījumus un iziet"
 
@@ -411,22 +436,27 @@ msgstr "Atsaukšana"
 
 #: capplets/common/gconf-property-editor.c:180
 msgid "Issue this callback when the value associated with key gets changed"
-msgstr "Izdot šo atsaukumu, kad vērtība, kas asociēta ar atslēgu, tiek izmainīta"
+msgstr ""
+"Izdot šo atsaukumu, kad vērtība, kas asociēta ar atslēgu, tiek izmainīta"
 
 #: capplets/common/gconf-property-editor.c:185
 msgid "Change set"
 msgstr "Mainīt kopu"
 
 #: capplets/common/gconf-property-editor.c:186
-msgid "GConf change set containing data to be forwarded to the gconf client on apply"
-msgstr "GConf izmaiņu kopa, kas satur datus, kurus pārsūtīt gconf klientam pie pielietošanas"
+msgid ""
+"GConf change set containing data to be forwarded to the gconf client on apply"
+msgstr ""
+"GConf izmaiņu kopa, kas satur datus, kurus pārsūtīt gconf klientam pie "
+"pielietošanas"
 
 #: capplets/common/gconf-property-editor.c:191
 msgid "Conversion to widget callback"
 msgstr "Konversijas uz logdaļu atsaukums"
 
 #: capplets/common/gconf-property-editor.c:192
-msgid "Callback to be issued when data are to be converted from GConf to the widget"
+msgid ""
+"Callback to be issued when data are to be converted from GConf to the widget"
 msgstr "Atsaukums, kas jāizdod, kad dati tiek konvertēti no GConf uz logdaļu"
 
 #: capplets/common/gconf-property-editor.c:197
@@ -434,7 +464,8 @@ msgid "Conversion from widget callback"
 msgstr "Konversijas no logdaļas atsaukums"
 
 #: capplets/common/gconf-property-editor.c:198
-msgid "Callback to be issued when data are to be converted to GConf from the widget"
+msgid ""
+"Callback to be issued when data are to be converted to GConf from the widget"
 msgstr "Atsaukums, kas jāizdod, kad dati tiek konvertēti uz GConf no logdaļas"
 
 #: capplets/common/gconf-property-editor.c:203
@@ -459,18 +490,21 @@ msgstr "Rekvizītu redaktora datu atbrīvošanas atsaukums"
 
 #: capplets/common/gconf-property-editor.c:227
 msgid "Callback to be issued when property editor object data is to be freed"
-msgstr "Atsaukums, kas jāizdod, kad rekvizītu redaktora objekta dati ir jāatbrīvo"
+msgstr ""
+"Atsaukums, kas jāizdod, kad rekvizītu redaktora objekta dati ir jāatbrīvo"
 
 #: capplets/common/gconf-property-editor.c:1484
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
 "\n"
-"Please make sure it exists and try again, or choose a different background picture."
+"Please make sure it exists and try again, or choose a different background "
+"picture."
 msgstr ""
 "Nevarēju atrast failu '%s'.\n"
 "\n"
-"Lūdzu pārliecinieties, vai tas eksistē un mēģiniet vēlreiz, vai arī izvēlieties citu fona attēlu."
+"Lūdzu pārliecinieties, vai tas eksistē un mēģiniet vēlreiz, vai arī "
+"izvēlieties citu fona attēlu."
 
 #: capplets/common/gconf-property-editor.c:1492
 #, c-format
@@ -579,8 +613,13 @@ msgid "Help Browser"
 msgstr "Palīdzības Pārlūks"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:20
-msgid "Select the window manager you want.  You will need to hit apply, wave the magic wand, and do a magic dance for it to work."
-msgstr "Izvēlieties logu pārvaldnieku, kuru jūs vēlaties. Jums vajadzēs uzsist par 'attiecināt', pavicināt maģisko lakatiņu un padejot maģisko deju, lai tas strādātu."
+msgid ""
+"Select the window manager you want.  You will need to hit apply, wave the "
+"magic wand, and do a magic dance for it to work."
+msgstr ""
+"Izvēlieties logu pārvaldnieku, kuru jūs vēlaties. Jums vajadzēs uzsist par "
+"'attiecināt', pavicināt maģisko lakatiņu un padejot maģisko deju, lai tas "
+"strādātu."
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:21
 msgid "Start in T_erminal"
@@ -784,7 +823,9 @@ msgstr "Failu Tipi un Programmas"
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:2
 msgid "Specify which programs are used to open or view each file type"
-msgstr "Norādīt kuras programmas tiek izmantotas, lai atvērtu vai skatītos katru faila tipu"
+msgstr ""
+"Norādīt kuras programmas tiek izmantotas, lai atvērtu vai skatītos katru "
+"faila tipu"
 
 #: capplets/file-types/file-types-properties.glade.h:2
 msgid "Actions"
@@ -807,7 +848,7 @@ msgid "Default action"
 msgstr "Noklusētā darbība"
 
 #: capplets/file-types/file-types-properties.glade.h:7
-#: capplets/file-types/mime-edit-dialog.c:209
+#: capplets/file-types/mime-edit-dialog.c:208
 msgid "Edit file type"
 msgstr "Rediģēt faila tipu"
 
@@ -888,7 +929,7 @@ msgid "Edit file category"
 msgstr "Rediģēt faila kategoriju"
 
 #: capplets/file-types/mime-category-edit-dialog.c:172
-#: capplets/file-types/mime-edit-dialog.c:256
+#: capplets/file-types/mime-edit-dialog.c:255
 #: capplets/file-types/service-edit-dialog.c:170
 #: capplets/file-types/service-edit-dialog.c:171
 msgid "Model"
@@ -907,64 +948,68 @@ msgid "Structure containing information on the MIME category"
 msgstr "Struktūra, kas satur informāciju par MIME kategoriju"
 
 #: capplets/file-types/mime-category-edit-dialog.c:344
-#: capplets/file-types/mime-edit-dialog.c:490
-#: capplets/file-types/mime-edit-dialog.c:594
+#: capplets/file-types/mime-edit-dialog.c:488
+#: capplets/file-types/mime-edit-dialog.c:592
 #: capplets/file-types/service-edit-dialog.c:358
 #: capplets/file-types/service-edit-dialog.c:407
 msgid "Custom"
 msgstr "Pēc Izvēles"
 
-#: capplets/file-types/mime-edit-dialog.c:206
+#: capplets/file-types/mime-edit-dialog.c:205
 msgid "Extension"
 msgstr "Paplašinājums"
 
-#: capplets/file-types/mime-edit-dialog.c:257
+#: capplets/file-types/mime-edit-dialog.c:256
 msgid "Underlying model to notify when Ok is clicked"
 msgstr "Pamata modelis, kādā ziņot, kad klikšķina uz OK"
 
-#: capplets/file-types/mime-edit-dialog.c:264
+#: capplets/file-types/mime-edit-dialog.c:263
 msgid "MIME type information"
 msgstr "Informācija par MIME tipu"
 
-#: capplets/file-types/mime-edit-dialog.c:265
+#: capplets/file-types/mime-edit-dialog.c:264
 msgid "Structure with data on the MIME type"
 msgstr "Struktūra ar datiem MIME tipā"
 
-#: capplets/file-types/mime-edit-dialog.c:271
+#: capplets/file-types/mime-edit-dialog.c:270
 msgid "Is add dialog"
 msgstr "Ir pievienošanas dialogs"
 
-#: capplets/file-types/mime-edit-dialog.c:272
+#: capplets/file-types/mime-edit-dialog.c:271
 msgid "True if this dialog is for adding a MIME type"
 msgstr "Paties, ja šis dialogs ir MIME tipa pievienošanai"
 
-#: capplets/file-types/mime-edit-dialog.c:321
+#: capplets/file-types/mime-edit-dialog.c:320
 msgid "Add File Type"
 msgstr "Pievienot Faila Tipu"
 
-#: capplets/file-types/mime-edit-dialog.c:435
+#: capplets/file-types/mime-edit-dialog.c:434
 #: capplets/file-types/mime-type-info.c:673
 msgid "Misc"
 msgstr "Dažādi"
 
-#: capplets/file-types/mime-edit-dialog.c:485
-#: capplets/file-types/mime-edit-dialog.c:544
+#: capplets/file-types/mime-edit-dialog.c:483
+#: capplets/file-types/mime-edit-dialog.c:542
 msgid "None"
 msgstr "Nekas"
 
-#: capplets/file-types/mime-edit-dialog.c:854
-msgid "Please enter a valid MIME type.  It should be of the form class/type and may not contain any spaces."
-msgstr "Lūdzu ievadiet pareizu MIME tipu.  Tam vajadzētu būt formā klase/tips un tam nevajadzētu saturēt nekādus tukšumus."
+#: capplets/file-types/mime-edit-dialog.c:852
+msgid ""
+"Please enter a valid MIME type.  It should be of the form class/type and may "
+"not contain any spaces."
+msgstr ""
+"Lūdzu ievadiet pareizu MIME tipu.  Tam vajadzētu būt formā klase/tips un tam "
+"nevajadzētu saturēt nekādus tukšumus."
 
-#: capplets/file-types/mime-edit-dialog.c:861
+#: capplets/file-types/mime-edit-dialog.c:859
 msgid "A MIME type with that name already exists, overwrite ?."
 msgstr "MIME tips ar tādu vārdu jau eksistē, pārrakstīt ?."
 
-#: capplets/file-types/mime-edit-dialog.c:926
+#: capplets/file-types/mime-edit-dialog.c:924
 msgid "Category"
 msgstr "Kategorija"
 
-#: capplets/file-types/mime-edit-dialog.c:931
+#: capplets/file-types/mime-edit-dialog.c:929
 msgid "Choose a file category"
 msgstr "Izvēlieties faila kategoriju"
 
@@ -1018,8 +1063,12 @@ msgid "Please enter a protocol name."
 msgstr "Lūdzu ievadiet protokola nosaukumu."
 
 #: capplets/file-types/service-edit-dialog.c:509
-msgid "Invalid protocol name. Please enter a protocol name without any spaces or punctuation."
-msgstr "Nepareizs protokola nosaukums. Lūdzu ievadiet protokola nosaukumu bez jebkādiem tukšumiem vai punktiem."
+msgid ""
+"Invalid protocol name. Please enter a protocol name without any spaces or "
+"punctuation."
+msgstr ""
+"Nepareizs protokola nosaukums. Lūdzu ievadiet protokola nosaukumu bez "
+"jebkādiem tukšumiem vai punktiem."
 
 #: capplets/file-types/service-edit-dialog.c:523
 msgid "There is already a protocol by that name."
@@ -1128,16 +1177,16 @@ msgstr "Logu Pārvaldīšana"
 
 #: capplets/keybindings/gnome-keybinding-properties.c:568
 #, c-format
-msgid ""
-"Error setting new accelerator in configuration database: %s\n"
-""
-msgstr ""
-"Kļūda uzstādot jaunu paātrinātāju konfigurācijas datubāzē: %s\n"
-""
+msgid "Error setting new accelerator in configuration database: %s\n"
+msgstr "Kļūda uzstādot jaunu paātrinātāju konfigurācijas datubāzē: %s\n"
 
 #: capplets/keybindings/gnome-keybinding-properties.c:719
-msgid "Unable to find any keyboard themes.  This means your GTK+ installation has been incompletely installed."
-msgstr "Nevaru atrast nekādas tastatūras tēmas. Tas nozīmē, ka jūsu GTK+ instalācija ir nepilnīgi uzstādīta."
+msgid ""
+"Unable to find any keyboard themes.  This means your GTK+ installation has "
+"been incompletely installed."
+msgstr ""
+"Nevaru atrast nekādas tastatūras tēmas. Tas nozīmē, ka jūsu GTK+ instalācija "
+"ir nepilnīgi uzstādīta."
 
 #: capplets/keybindings/gnome-keybinding-properties.c:741
 msgid "Action"
@@ -1176,8 +1225,11 @@ msgstr "_Peejamība"
 #: capplets/keyboard/gnome-keyboard-properties.c:291
 #: capplets/sound/sound-properties-capplet.c:145
 #: capplets/sound/sound-properties-capplet.c:147
-msgid "Just apply settings and quit (compatibility only; now handled by daemon)"
-msgstr "Tikai attiecināt uzstādījumus un iziet (savietojamības dēļ; tagad to pārvalda dēmons)"
+msgid ""
+"Just apply settings and quit (compatibility only; now handled by daemon)"
+msgstr ""
+"Tikai attiecināt uzstādījumus un iziet (savietojamības dēļ; tagad to "
+"pārvalda dēmons)"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:2
 msgid "<small><i>Fast</i></small>"
@@ -1345,8 +1397,12 @@ msgstr ""
 "Baltā kursora lielā versija"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:1
-msgid "<b>Note:</b> You will need to logout and log back in for this setting to take effect."
-msgstr "<b>Piezīme:</b> Jums vajadzēs iziet un ieiet atpakaļ sistēmā lai šis uzstādījums kaut ko ietekmētu."
+msgid ""
+"<b>Note:</b> You will need to logout and log back in for this setting to "
+"take effect."
+msgstr ""
+"<b>Piezīme:</b> Jums vajadzēs iziet un ieiet atpakaļ sistēmā lai šis "
+"uzstādījums kaut ko ietekmētu."
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:2
 msgid "<i>Fast</i>"
@@ -1373,8 +1429,11 @@ msgid "<i>Small</i>"
 msgstr "<i>Mazs</i>"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:8
-msgid "Animates a quick marker around the cursor when the Control key has been pressed and released."
-msgstr "Animē ātru atzīmi ap kursoru kad Control taustiņš ir nospiests un atlaists."
+msgid ""
+"Animates a quick marker around the cursor when the Control key has been "
+"pressed and released."
+msgstr ""
+"Animē ātru atzīmi ap kursoru kad Control taustiņš ir nospiests un atlaists."
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:9
 msgid "Buttons"
@@ -1397,7 +1456,8 @@ msgid "Drag and Drop"
 msgstr "Vilkt un Mest (Drag and Drop)"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:14
-msgid "Left-handed mouse mode switches the left and right buttons on the mouse."
+msgid ""
+"Left-handed mouse mode switches the left and right buttons on the mouse."
 msgstr "Peles kreiļu režīms samaina peles kreisās un labās puses pogas."
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:15
@@ -1405,8 +1465,12 @@ msgid "Locate Pointer"
 msgstr "Sameklēt Punktieri"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:16
-msgid "Maximum time allowed between clicks when double-clicking.   Use the box on the right to test."
-msgstr "Maksimālais atļautais laiks starp klikšķiem pie dubūltklikšķa. Lietojiet šo kastīti pa labi, lai notestētu."
+msgid ""
+"Maximum time allowed between clicks when double-clicking.   Use the box on "
+"the right to test."
+msgstr ""
+"Maksimālais atļautais laiks starp klikšķiem pie dubūltklikšķa. Lietojiet šo "
+"kastīti pa labi, lai notestētu."
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:17
 msgid "Motion"
@@ -1422,7 +1486,9 @@ msgstr "Peles Preferences"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:20
 msgid "Set the distance you need to move your cursor before dragging an item."
-msgstr "Uzstādīt distanci, kādu jūs gribat pavirzīt kursoru pirms sākt vilkt līdzi priekšmetu."
+msgstr ""
+"Uzstādīt distanci, kādu jūs gribat pavirzīt kursoru pirms sākt vilkt līdzi "
+"priekšmetu."
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:21
 msgid "Set the speed of your pointing device."
@@ -1465,17 +1531,22 @@ msgid "Set your mouse preferences"
 msgstr "Uzstādīt jūsu peles preferences"
 
 #: capplets/network/gnome-network-preferences.desktop.in.h:1
-msgid "Network Proxy"
+#, fuzzy
+msgid "Network proxy"
 msgstr "Tīkla Starpserveris"
 
 #: capplets/network/gnome-network-preferences.desktop.in.h:2
-#: capplets/network/gnome-network-preferences.glade.h:3
-msgid "Network Proxy Preferences"
+#, fuzzy
+msgid "Network proxy preferences"
 msgstr "Tīkla Starpservera Preferences"
 
 #: capplets/network/gnome-network-preferences.glade.h:2
 msgid "Network Preferences"
 msgstr "Tīkla Preferences"
+
+#: capplets/network/gnome-network-preferences.glade.h:3
+msgid "Network Proxy Preferences"
+msgstr "Tīkla Starpservera Preferences"
 
 #: capplets/network/gnome-network-preferences.glade.h:4
 msgid "P_ort:"
@@ -1651,76 +1722,79 @@ msgid "C_ut"
 msgstr "Iz_griezt"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:4
-msgid "Edit Menu"
-msgstr "Rediģēt Izvēlni"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:5
 msgid "Icons Only"
 msgstr "Tikai Ikonas"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:6
+#: capplets/ui-properties/gnome-ui-properties.glade.h:5
 msgid "Menu and Toolbar Preferences"
 msgstr "Izvēlnes un Rīkjoslas Preferences"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:7
+#: capplets/ui-properties/gnome-ui-properties.glade.h:6
 msgid "Menus"
 msgstr "Izvēlnes"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:8
+#: capplets/ui-properties/gnome-ui-properties.glade.h:7
 msgid "New File"
 msgstr "Jauns Fails"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:9
+#: capplets/ui-properties/gnome-ui-properties.glade.h:8
 msgid "Open File"
 msgstr "Atvērt Failu"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:10
-msgid "Priority Text Beside Icons"
-msgstr "Prioritātes teksts blakus ikonām"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:11
+#: capplets/ui-properties/gnome-ui-properties.glade.h:9
 msgid "Sample menubar:"
 msgstr "Parauga izvēļņjosla:"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:12
+#: capplets/ui-properties/gnome-ui-properties.glade.h:10
 msgid "Sample toolbar:"
 msgstr "Parauga rīkjosla:"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:13
+#: capplets/ui-properties/gnome-ui-properties.glade.h:11
 msgid "Save File"
 msgstr "Saglabāt Failu"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:14
+#: capplets/ui-properties/gnome-ui-properties.glade.h:12
 msgid "Select the toolbar style."
 msgstr "Izvēlieties rīkjoslas stilu."
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:15
+#: capplets/ui-properties/gnome-ui-properties.glade.h:13
 msgid "Text Below Icons"
 msgstr "Teksts Zem Ikonām"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:16
+#: capplets/ui-properties/gnome-ui-properties.glade.h:14
+#, fuzzy
+msgid "Text Beside Icons"
+msgstr "Prioritātes teksts blakus ikonām"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:15
 msgid "Text Only"
 msgstr "Tikai Teksts"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:17
+#: capplets/ui-properties/gnome-ui-properties.glade.h:16
 msgid "Toolbar"
 msgstr "Rikjosla"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:18
+#: capplets/ui-properties/gnome-ui-properties.glade.h:17
 msgid "Toolbars can be _detached and moved around"
 msgstr "Rīkjoslas var tikt atdalītas un pārvietotas apkārt"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:19
+#: capplets/ui-properties/gnome-ui-properties.glade.h:18
 msgid "_Button Labels: "
 msgstr "_Pogu Virsraksti:"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:20
+#: capplets/ui-properties/gnome-ui-properties.glade.h:19
 msgid "_Copy"
 msgstr "_Kopēt"
 
+#: capplets/ui-properties/gnome-ui-properties.glade.h:20
+#, fuzzy
+msgid "_Edit"
+msgstr "_Rediģēt..."
+
 #: capplets/ui-properties/gnome-ui-properties.glade.h:21
-msgid "_Menu"
-msgstr "_Izvēlne"
+#: control-center/gnomecc-ui.xml.h:5
+msgid "_File"
+msgstr "_Fails"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:22
 msgid "_New"
@@ -1810,8 +1884,7 @@ msgstr ""
 "Pēteris Krišjānis <peteris.krisjanis@os.lv>\n"
 "Atris Trops <hornet@navigators.lv>"
 
-#: control-center/capplet-dir-view.c:357
-#: control-center/gnomecc.desktop.in.h:1
+#: control-center/capplet-dir-view.c:357 control-center/gnomecc.desktop.in.h:1
 msgid "GNOME Control Center"
 msgstr "GNOME Kontroles Centrs"
 
@@ -1840,10 +1913,6 @@ msgstr "_Par..."
 msgid "_Contents..."
 msgstr "_Saturs..."
 
-#: control-center/gnomecc-ui.xml.h:5
-msgid "_File"
-msgstr "_Fails"
-
 #: control-center/gnomecc-ui.xml.h:6
 msgid "_Help"
 msgstr "_Palīdzība"
@@ -1871,48 +1940,28 @@ msgstr ""
 
 #: gnome-settings-daemon/gnome-settings-keybindings.c:106
 #, c-format
-msgid ""
-"Key Binding (%s) has its action defined multiple times\n"
-""
-msgstr ""
-"Taustiņu Sasaistes (%s) darbība ir definēta vairākas reizes\n"
-""
+msgid "Key Binding (%s) has its action defined multiple times\n"
+msgstr "Taustiņu Sasaistes (%s) darbība ir definēta vairākas reizes\n"
 
 #: gnome-settings-daemon/gnome-settings-keybindings.c:119
 #, c-format
-msgid ""
-"Key Binding (%s) has its binding defined multiple times\n"
-""
-msgstr ""
-"Taustiņu Sasaiste (%s) ir definēta vairākas reizes\n"
-""
+msgid "Key Binding (%s) has its binding defined multiple times\n"
+msgstr "Taustiņu Sasaiste (%s) ir definēta vairākas reizes\n"
 
 #: gnome-settings-daemon/gnome-settings-keybindings.c:125
 #, c-format
-msgid ""
-"Key Binding (%s) is incomplete\n"
-""
-msgstr ""
-"Taustiņu Sasaiste (%s) ir nepilnīga\n"
-""
+msgid "Key Binding (%s) is incomplete\n"
+msgstr "Taustiņu Sasaiste (%s) ir nepilnīga\n"
 
 #: gnome-settings-daemon/gnome-settings-keybindings.c:153
 #, c-format
-msgid ""
-"Key Binding (%s) is invalid\n"
-""
-msgstr ""
-"Taustiņu Sasaiste (%s) ir nepareiza.\n"
-""
+msgid "Key Binding (%s) is invalid\n"
+msgstr "Taustiņu Sasaiste (%s) ir nepareiza.\n"
 
 #: gnome-settings-daemon/gnome-settings-keybindings.c:241
 #, c-format
-msgid ""
-"Key Binding (%s) is already in use\n"
-""
-msgstr ""
-"Taustiņu Sasaiste (%s) ir jau lietošanā\n"
-""
+msgid "Key Binding (%s) is already in use\n"
+msgstr "Taustiņu Sasaiste (%s) ir jau lietošanā\n"
 
 #: gnome-settings-daemon/gnome-settings-keybindings.c:292
 #, c-format
@@ -1949,20 +1998,21 @@ msgstr "Nevarēju ielādēt skaņas failu %s kā paraugu %s"
 
 #: gnome-settings-daemon/gnome-settings-xsettings.c:150
 #, c-format
-msgid ""
-"GConf key %s set to type %s but its expected type was %s\n"
-""
+msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr ""
 "GConf atslēga %s uzstādīta uz tipu %s, bet tai vajadzētu būt ar tipu %s\n"
-""
 
 #: libbackground/applier.c:239
 msgid "Type"
 msgstr "Tips"
 
 #: libbackground/applier.c:240
-msgid "Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW for preview"
-msgstr "bg_applier tips: BG_APPLIER_ROOT galvenajam logam un BG_APPLIER_PREVIEW pirmsapskatei"
+msgid ""
+"Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
+"for preview"
+msgstr ""
+"bg_applier tips: BG_APPLIER_ROOT galvenajam logam un BG_APPLIER_PREVIEW "
+"pirmsapskatei"
 
 #: libbackground/applier.c:247
 msgid "Preview Width"
@@ -2010,15 +2060,15 @@ msgstr "Fails, kuru atskaņot"
 msgid "_Sounds"
 msgstr "_Skaņas"
 
-#: libsounds/sound-view.c:251
+#: libsounds/sound-view.c:252
 msgid "_Play"
 msgstr "_Atskaņot"
 
-#: libsounds/sound-view.c:257
+#: libsounds/sound-view.c:258
 msgid "Select sound file"
 msgstr "Izvēlieties skaņas failu"
 
-#: libwindow-settings/gnome-wm-manager.c:168
+#: libwindow-settings/gnome-wm-manager.c:171
 #, c-format
 msgid ""
 "Starting %s\n"
@@ -2027,61 +2077,54 @@ msgstr ""
 "Startēju %s\n"
 "(atlikušas %d sekundes pirms operācijas laika iztecēšanas)"
 
-#: libwindow-settings/gnome-wm-manager.c:322
+#: libwindow-settings/gnome-wm-manager.c:325
 msgid ""
 "wm-properties-capplet: Unable to initialize window manager.\n"
 "\tAnother window manager is already running and could not be killed\n"
-""
 msgstr ""
 "wm-properties-capplet: Nevarēju inicializēt logu pārvaldnieku.\n"
 "\tJau darbojas cits logu pārvalnieks un nevar tikt nokauts\n"
-""
 
-#: libwindow-settings/gnome-wm-manager.c:326
+#: libwindow-settings/gnome-wm-manager.c:329
 #, c-format
 msgid ""
 "wm-properties-capplet: Unable to initialize window manager.\n"
 "\t'%s' didn't start\n"
-""
 msgstr ""
 "wm-properties-capplet: Nevarēju inicializēt logu pārvaldnieku.\n"
 "\tnepalaidu '%s'\n"
-""
 
-#: libwindow-settings/gnome-wm-manager.c:375
-msgid ""
-"Previous window manager did not die\n"
-""
-msgstr ""
-"Iepriekšējais Logu Pārvaldnieks nav miris\n"
-""
+#: libwindow-settings/gnome-wm-manager.c:378
+msgid "Previous window manager did not die\n"
+msgstr "Iepriekšējais Logu Pārvaldnieks nav miris\n"
 
-#: libwindow-settings/gnome-wm-manager.c:408
+#: libwindow-settings/gnome-wm-manager.c:411
 #, c-format
 msgid ""
 "Could not start '%s'.\n"
 "Falling back to previous window manager '%s'\n"
-""
 msgstr ""
 "Nevarēju palaist '%s'.\n"
 "Atgriežamies atpakaļ pie pašreizējā logu pārvaldnieka '%s'\n"
-""
 
-#: libwindow-settings/gnome-wm-manager.c:439
+#: libwindow-settings/gnome-wm-manager.c:442
 msgid ""
 "Could not start fallback window manager.\n"
 "Please run a window manager manually. You can\n"
 "do this by selecting \"Run Program\" in the\n"
 "foot menu\n"
-""
 msgstr ""
 "Nevarēju palaist atkāpšanās logu pārvaldnieku.\n"
 "Lūdzu palaid logu pārvaldnieku pašrocīgi. Tu to\n"
 "vari izdarīt, izvēloties \"Palaist...\" no\n"
 "pēdas izvēlnes\n"
-""
 
-#: libwindow-settings/gnome-wm-manager.c:464
+#: libwindow-settings/gnome-wm-manager.c:467
 msgid "OK"
 msgstr "Labi"
 
+#~ msgid "Edit Menu"
+#~ msgstr "Rediģēt Izvēlni"
+
+#~ msgid "_Menu"
+#~ msgstr "_Izvēlne"
