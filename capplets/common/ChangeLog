@@ -4,6 +4,10 @@
 	correct ordering of setup
 	(gconf_peditor_new_*): Terminate the parameter list passed to
 	g_object_new with NULL
+	(gconf_property_editor_class_init): Make the changeset property a
+	pointer
+	(gconf_property_editor_set_prop): Use g_value_get_object for the
+	destroy notify object
 
 2001-11-03  Bradford Hovinen  <hovinen@ximian.com>
 

@@ -139,15 +139,14 @@ gconf_property_editor_class_init (GConfPropertyEditorClass *class)
 				      G_PARAM_WRITABLE));
 	g_object_class_install_property
 		(object_class, PROP_CHANGESET,
-		 g_param_spec_object ("changeset",
-				      _("Change set"),
-				      _("GConf change set containing data to be forwarded to the gconf engine on apply"),
-				      G_TYPE_OBJECT,
-				      G_PARAM_READWRITE));
+		 g_param_spec_pointer ("changeset",
+				       _("Change set"),
+				       _("GConf change set containing data to be forwarded to the gconf engine on apply"),
+				       G_PARAM_READWRITE));
 
 	peditor_signals[VALUE_CHANGED] =
 		g_signal_new ("value-changed",
-			      0, G_TYPE_FROM_CLASS (object_class),
+			      G_TYPE_FROM_CLASS (object_class), 0,
 			      G_STRUCT_OFFSET (GConfPropertyEditorClass, value_changed),
 			      NULL, NULL,
 			      (GSignalCMarshaller) gconf_property_editor_marshal_VOID__STRING_POINTER,
@@ -188,7 +187,7 @@ gconf_property_editor_set_prop (GObject *object, guint prop_id, const GValue *va
 		break;
 
 	case PROP_OBJECT:
-		det_obj = g_value_get_pointer (value);
+		det_obj = g_value_get_object (value);
 		g_signal_connect_swapped (det_obj, "destroy",
 					  (GCallback) g_object_unref,
 					  object);
