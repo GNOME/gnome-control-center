@@ -71,8 +71,10 @@ xfree86_set_keyboard_autorepeat_rate (int delay, int rate)
 static gboolean
 xkb_set_keyboard_autorepeat_rate (int delay, int rate)
 {
+	int interval = (rate <= 0) ? 1000000 : 1000/rate;
+	if (delay <= 0) delay = 1;
 	return XkbSetAutoRepeatRate (GDK_DISPLAY (), XkbUseCoreKbd,
-				     delay, 1000/rate);
+				     delay, interval);
 }
 #endif
 
