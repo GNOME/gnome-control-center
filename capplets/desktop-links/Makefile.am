@@ -4,7 +4,7 @@ capplets =
 ## Pixmaps
 
 pixmaps_pre = $(capplets:=-capplet.png)
-pixmaps_DATA = $(pixmaps_pre) advanced-directory.png accessibility-directory.png
+pixmaps_DATA = $(pixmaps_pre) accessibility-directory.png
 pixmapsdir = $(GNOMECC_ICONS_DIR)
 
 ##
