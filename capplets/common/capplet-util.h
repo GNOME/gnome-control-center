@@ -26,12 +26,9 @@
 
 #include <gnome.h>
 #include <bonobo.h>
-
-/* FIXME: We should really have a single bonobo-conf.h header */
-
-#include <bonobo-conf/bonobo-config-database.h>
-#include <bonobo-conf/bonobo-property-editor.h>
-#include <bonobo-conf/bonobo-property-frame.h>
+#include <bonobo/bonobo-property-control.h>
+#include <gconf/gconf.h>
+#include <gconf/gconf-changeset.h>
 
 /* Macros to make certain repetitive tasks a bit easier */
 
@@ -51,29 +48,20 @@
 	val_##type = gnome_config_get_##legacy_type##_with_default (legacy_key, &def); \
                                                                                        \
 	if (!def)                                                                      \
-		bonobo_config_set_##type (db, key, val_##type, NULL);
-
-/* Create a property editor */
-
-#define CREATE_PEDITOR(type, key, widget)                                              \
-        {                                                                              \
-		BonoboPEditor *ed = BONOBO_PEDITOR                                     \
-			(bonobo_peditor_##type##_construct (WID (widget)));            \
-		bonobo_peditor_set_property (ed, bag, key, TC_##type, NULL);           \
-	}
+		gconf_engine_set_##type (engine, key, val_##type, NULL);
 
 /* Callback to apply the settings in the given database */
-typedef void (*ApplySettingsFn) (Bonobo_ConfigDatabase db);
+typedef void (*ApplySettingsFn) (void);
 
 /* Callback to set up the dialog proper */
 typedef GtkWidget *(*CreateDialogFn) (void);
 
 /* Callback to set up property editors for the dialog */
-typedef void (*SetupPropertyEditorsFn) (GtkWidget *dialog, Bonobo_PropertyBag bag);
+typedef void (*SetupPropertyEditorsFn) (GtkWidget *dialog, GConfChangeSet *changeset);
 
 /* Callback to retrieve legacy settings and store them in the new configuration
  * database */
-typedef void (*GetLegacySettingsFn) (Bonobo_ConfigDatabase db);
+typedef void (*GetLegacySettingsFn) (void);
 
 /* Wrapper function for the entire capplet. This handles all initialization and
  * runs the capplet for you. Just supply the appropriate callbacks and your argc
@@ -93,7 +81,6 @@ typedef void (*GetLegacySettingsFn) (Bonobo_ConfigDatabase db);
 
 void capplet_init (int                      argc,
 		   gchar                  **argv,
-		   const gchar		  **legacy_files,
 		   ApplySettingsFn          apply_fn,
 		   CreateDialogFn           create_dialog_fn,
 		   SetupPropertyEditorsFn   setup_property_editors_fn,

@@ -36,10 +36,9 @@
 
 static CreateDialogFn                 create_dialog_cb = NULL;
 static ApplySettingsFn                apply_settings_cb = NULL;
-static SetupPropertyEditorsFn         setup_cb = NULL;
+static SetupPropertyEditorsFn         setup_property_editors_cb = NULL;
 
-static BonoboListener                *listener = NULL;
-static Bonobo_EventSource_ListenerId  listener_id;
+static GConfChangeSet                *changeset;
 
 /* apply_cb
  *
@@ -50,120 +49,21 @@ static Bonobo_EventSource_ListenerId  listener_id;
 static void
 apply_cb (BonoboPropertyControl *pc, Bonobo_PropertyControl_Action action) 
 {
-	BonoboPropertyFrame *pf;
-	Bonobo_ConfigDatabase db;
-	CORBA_Environment ev;
-
-	if (action == Bonobo_PropertyControl_APPLY) {
-		CORBA_exception_init (&ev);
-
-		pf = gtk_object_get_data (GTK_OBJECT (pc), "property-frame");
-		db = gtk_object_get_data (GTK_OBJECT (pf), "config-database");
-		bonobo_pbproxy_update (pf->proxy);
-		Bonobo_ConfigDatabase_sync (db, &ev);
-
-		CORBA_exception_free (&ev);
-	}
+	if (action == Bonobo_PropertyControl_APPLY)
+		gconf_engine_commit_change_set (gconf_engine_get_default (),
+						changeset, TRUE, NULL);
 }
 
-/* changed_cb
+/* properties_changed_cb
  *
- * Callback issued when a setting in the ConfigDatabase changes.
+ * Callback issued when some setting has changed
  */
 
 static void
-changed_cb (BonoboListener        *listener,
-	    gchar                 *event_name,
-	    CORBA_any             *any,
-	    CORBA_Environment     *ev,
-	    Bonobo_ConfigDatabase  db) 
+properties_changed_cb (GConfEngine *engine, guint cnxn_id, GConfEntry *entry, gpointer user_data) 
 {
 	if (apply_settings_cb != NULL)
-		apply_settings_cb (db);
-}
-
-/* get_moniker_cb
- *
- * Callback issued to retrieve the name of the moniker being used. This function
- * is just a formality.
- */
-
-static void
-get_moniker_cb (BonoboPropertyBag *bag, BonoboArg *arg, guint arg_id,
-		CORBA_Environment *ev, BonoboControl *control) 
-{
-	BONOBO_ARG_SET_STRING (arg, gtk_object_get_data (GTK_OBJECT (control), "moniker"));
-}
-
-/* pf_destroy_cb
- *
- * Callback issued when the property frame is destroyed. Ensures that the
- * configuration database is properly unrefed
- */
-
-static void
-pf_destroy_cb (BonoboPropertyFrame *pf, Bonobo_ConfigDatabase db) 
-{
-	bonobo_object_release_unref (db, NULL);
-}
-
-/* set_moniker_cb
- *
- * Callback issued when the name of the moniker to be used is set. This function
- * does most of the dirty work -- creating the property editors that connect
- * properties to the dialog box.
- */
-
-static void
-set_moniker_cb (BonoboPropertyBag *bag, 
-		BonoboArg         *arg,
-		guint              arg_id,
-		CORBA_Environment *ev,
-		BonoboControl     *control) 
-{
-	gchar                 *moniker;
-	gchar                 *full_moniker;
-	BonoboPropertyFrame   *pf;
-	Bonobo_PropertyBag     proxy;
-	Bonobo_ConfigDatabase  db;
-	gboolean               need_setup_cb = TRUE;
-
-	if (arg_id != 1) return;
-
-	moniker = BONOBO_ARG_GET_STRING (arg);
-	full_moniker = g_strconcat (moniker, "#config:/main", NULL);
-
-	pf = BONOBO_PROPERTY_FRAME (bonobo_control_get_widget (control));
-	bonobo_property_frame_set_moniker (pf, full_moniker);
-	g_free (full_moniker);
-
-	if (pf->proxy->bag == CORBA_OBJECT_NIL) {
-		bonobo_exception_set (ev, ex_Bonobo_Property_InvalidValue);
-		return;
-	}
-
-	proxy = BONOBO_OBJREF (pf->proxy);
-
-	db = gtk_object_get_data (GTK_OBJECT (pf), "config-database");
-
-	if (db != CORBA_OBJECT_NIL) {
-		gtk_signal_disconnect_by_func (GTK_OBJECT (pf),
-					       GTK_SIGNAL_FUNC (pf_destroy_cb), db);
-		bonobo_object_release_unref (db, ev);
-		need_setup_cb = FALSE;
-	}
-
-	db = bonobo_get_object (moniker, "IDL:Bonobo/ConfigDatabase:1.0", ev);
-
-	if (BONOBO_EX (ev) || db == CORBA_OBJECT_NIL)
-		g_critical ("Could not resolve configuration moniker; will not be able to apply settings");
-
-	gtk_object_set_data (GTK_OBJECT (pf), "config-database", db);
-	gtk_signal_connect (GTK_OBJECT (pf), "destroy",
-			    GTK_SIGNAL_FUNC (pf_destroy_cb), db);
-
-	if (setup_cb != NULL && need_setup_cb)
-		setup_cb (GTK_BIN (pf)->child, proxy);
+		apply_settings_cb ();
 }
 
 /* get_control_cb
@@ -176,8 +76,6 @@ set_moniker_cb (BonoboPropertyBag *bag,
 static BonoboObject *
 get_control_cb (BonoboPropertyControl *property_control, gint page_number) 
 {
-	BonoboPropertyBag    *pb;
-	GtkWidget            *pf;
 	BonoboControl        *control;
 	GtkWidget            *widget;
 
@@ -186,23 +84,8 @@ get_control_cb (BonoboPropertyControl *property_control, gint page_number)
 	if (widget == NULL)
 		return NULL;
 
-	pf = bonobo_property_frame_new (NULL, NULL);
-	gtk_object_set_data (GTK_OBJECT (property_control),
-			     "property-frame", pf);
-	gtk_container_add (GTK_CONTAINER (pf), widget);
-	gtk_widget_show_all (pf);
-
-	control = bonobo_control_new (pf);
-
-	pb = bonobo_property_bag_new ((BonoboPropertyGetFn) get_moniker_cb, 
-				      (BonoboPropertySetFn) set_moniker_cb,
-				      control);
-	bonobo_control_set_properties (control, pb);
-	bonobo_object_unref (BONOBO_OBJECT (pb));
-
-	bonobo_property_bag_add (pb, "moniker", 1, BONOBO_ARG_STRING, NULL,
-				 "Moniker for configuration",
-				 BONOBO_PROPERTY_WRITEABLE);
+	control = bonobo_control_new (widget);
+	setup_property_editors_cb (widget, changeset);
 
 	bonobo_control_set_automerge (control, TRUE);
 
@@ -215,26 +98,21 @@ get_control_cb (BonoboPropertyControl *property_control, gint page_number)
  */
 
 static BonoboObject *
-create_control_cb (BonoboGenericFactory *factory, const gchar *component_id, gchar *default_moniker) 
+create_control_cb (BonoboGenericFactory *factory, const gchar *component_id) 
 {
 	BonoboObject                  *obj;
 	BonoboPropertyControl         *property_control;
 
 	static const gchar            *prefix1 = "OAFIID:Bonobo_Control_Capplet_";
-	static const gchar            *prefix2 = "OAFIID:Bonobo_Listener_Config_";
 
 	g_message ("%s: Enter", __FUNCTION__);
 
 	if (!strncmp (component_id, prefix1, strlen (prefix1))) {
 		property_control = bonobo_property_control_new
 			((BonoboPropertyControlGetControlFn) get_control_cb, 1, NULL);
-		gtk_signal_connect (GTK_OBJECT (property_control), "action",
-				    GTK_SIGNAL_FUNC (apply_cb), NULL);
+		g_signal_connect (G_OBJECT (property_control), "action",
+				  G_CALLBACK (apply_cb), NULL);
 		obj = BONOBO_OBJECT (property_control);
-	}
-	else if (!strncmp (component_id, prefix2, strlen (prefix2))) {
-		obj = BONOBO_OBJECT (listener);
-		bonobo_object_ref (obj);
 	} else {
 		g_critical ("Not creating %s", component_id);
 		obj = NULL;
@@ -262,28 +140,6 @@ get_factory_name (const gchar *binary)
 	while ((tmp1 = strchr (tmp, '-')) != NULL) *tmp1 = '_';
 
 	res = g_strconcat ("OAFIID:Bonobo_", tmp, "_Factory", NULL);
-	g_free (s);
-	return res;
-}
-
-/* get_default_moniker
- *
- * Construct the default moniker for configuration from the binary name
- */
-
-static gchar *
-get_default_moniker (const gchar *binary) 
-{
-	gchar *s, *tmp, *tmp1, *res;
-
-	s = g_strdup (binary);
-	tmp = strrchr (s, '/');
-	if (tmp == NULL) tmp = s;
-	else tmp++;
-	if ((tmp1 = strstr (tmp, "-control")) != NULL) *tmp1 = '\0';
-	if ((tmp1 = strstr (tmp, "-capplet")) != NULL) *tmp1 = '\0';
-
-	res = g_strconcat ("archive:user-archive#archiverdb:", tmp, NULL);
 	g_free (s);
 	return res;
 }
@@ -324,6 +180,9 @@ get_property_name (const gchar *binary)
 static void
 setup_session_mgmt (const gchar *binary_name) 
 {
+/* Disabled. I never really understood this code anyway, and I am absolutely
+ * unclear about how to port it to GNOME 2.0 */
+#if 0
 	GnomeClient *client;
 	GnomeClientFlags flags;
 	gint token;
@@ -356,93 +215,7 @@ setup_session_mgmt (const gchar *binary_name)
 				(client, GNOME_RESTART_NEVER);
 		}
 	}
-}
-
-static gboolean
-legacy_is_modified (Bonobo_ConfigDatabase db, const gchar *filename)
-{
-	time_t legacy_val, log_val;
-	CORBA_Environment ev;
-	Bonobo_PropertyBag pb;
-	BonoboArg *arg;
-	struct stat stbuf;
-	gchar *realfile;
-	struct tm *legacy_tm;
-	gboolean ret;
-	
-	g_return_val_if_fail (db != CORBA_OBJECT_NIL, FALSE);
-
-	CORBA_exception_init (&ev);
-
-	pb = Bonobo_Unknown_queryInterface (db, "IDL:Bonobo/PropertyBag:1.0", &ev);
-
-	if (pb == CORBA_OBJECT_NIL || BONOBO_EX (&ev))
-		return FALSE;
-
-	arg = bonobo_property_bag_client_get_value_any (pb, "last_modified", &ev);
-
-	bonobo_object_release_unref (pb, NULL);
-
-	if (arg == NULL || BONOBO_EX (&ev))
-		return FALSE;
-
-	log_val = BONOBO_ARG_GET_GENERAL (arg, TC_ulonglong, CORBA_unsigned_long_long, NULL);
-	bonobo_arg_release (arg);
-
-	if (filename[0] == '/')
-		realfile = g_strdup (filename);
-	else
-		realfile = g_strconcat (g_get_home_dir (),
-					"/.gnome/",
-					filename,
-					NULL);
-
-	if (stat (realfile, &stbuf) != 0) {
-		ret = FALSE;
-	} else {
-		legacy_tm = localtime (&stbuf.st_mtime);
-		legacy_val = mktime (legacy_tm);
-		ret = (legacy_val > log_val);
-	}
-
-	g_free (realfile);
-
-	CORBA_exception_free (&ev);
-
-	return ret;
-}
-
-static int
-add_listener_cb (Bonobo_ConfigDatabase db) 
-{
-	Bonobo_EventSource             es;
-	CORBA_Environment              ev;
-
-	CORBA_exception_init (&ev);
-
-	/* We do this manually so that we have access to the resulting listener object */
-	es = Bonobo_Unknown_queryInterface (db, "IDL:Bonobo/EventSource:1.0", &ev);
-
-	if (BONOBO_EX (&ev) || es == CORBA_OBJECT_NIL) {
-		g_critical ("Cannot get event source interface (%s)",
-			    bonobo_exception_get_text (&ev));
-	} else {
-		listener = bonobo_listener_new ((BonoboListenerCallbackFn) changed_cb, db);
-		listener_id = Bonobo_EventSource_addListenerWithMask (es, BONOBO_OBJREF (listener),
-								      "Bonobo/ConfigDatabase:sync", &ev);
-
-		if (BONOBO_EX (&ev) || listener_id == 0) {
-			g_critical ("Could not add the listener to the event source (%s)",
-				    bonobo_exception_get_text (&ev));
-		}
-
-		bonobo_object_release_unref (es, NULL);
-		bonobo_running_context_auto_exit_unref (BONOBO_OBJECT (listener));
-	}
-
-	CORBA_exception_free (&ev);
-
-	return FALSE;
+#endif
 }
 
 /* capplet_init -- see documentation in capplet-util.h
@@ -451,32 +224,21 @@ add_listener_cb (Bonobo_ConfigDatabase db)
 void
 capplet_init (int                      argc,
 	      char                   **argv,
-	      const gchar 	     **legacy_files,
 	      ApplySettingsFn          apply_fn,
 	      CreateDialogFn           create_dialog_fn,
 	      SetupPropertyEditorsFn   setup_fn,
 	      GetLegacySettingsFn      get_legacy_fn) 
 {
 	gchar                         *factory_iid;
-	gchar                         *default_moniker;
-	gboolean	               needs_legacy = FALSE;
-	int 		               i;	
-
 	BonoboGenericFactory          *factory;
 
-	CORBA_ORB                      orb;
-	Bonobo_ConfigDatabase          db;
-
-	CORBA_Environment              ev;
-
 	static gboolean apply_only;
-	static gboolean init_session;
 	static gboolean get_legacy;
 	static struct poptOption cap_options[] = {
 		{ "apply", '\0', POPT_ARG_NONE, &apply_only, 0,
 		  N_("Just apply settings and quit"), NULL },
-		{ "init-session-settings", '\0', POPT_ARG_NONE, &init_session, 0,
-		  N_("Initialize the session"), NULL },
+		{ "init-session-settings", '\0', POPT_ARG_NONE, &apply_only, 0,
+		  N_("Just apply settings and quit"), NULL },
 		{ "get-legacy", '\0', POPT_ARG_NONE, &get_legacy, 0,
 		  N_("Retrieve and store legacy settings"), NULL },
 		{ NULL, '\0', 0, NULL, 0, NULL, NULL }
@@ -485,71 +247,37 @@ capplet_init (int                      argc,
 	bindtextdomain (PACKAGE, GNOMELOCALEDIR);
 	textdomain (PACKAGE);
 
-	CORBA_exception_init (&ev);
+	gnome_program_init (argv[0], VERSION, LIBGNOMEUI_MODULE, argc, argv,
+			    GNOME_PARAM_POPT_TABLE, cap_options,
+			    NULL);
 
-	gnomelib_register_popt_table (cap_options, _("Capplet options"));
-	gnome_init_with_popt_table (argv[0], VERSION, argc, argv,
-				    oaf_popt_options, 0, NULL);
-
-	orb = oaf_init (argc, argv);
-	if (bonobo_init (orb, CORBA_OBJECT_NIL, CORBA_OBJECT_NIL) == FALSE)
+	if (!bonobo_init (&argc, argv))
 		g_error ("Cannot initialize bonobo");
 
-	default_moniker = get_default_moniker (argv[0]);
-	db = bonobo_get_object (default_moniker, "IDL:Bonobo/ConfigDatabase:1.0", &ev);
-	
-	if (db == CORBA_OBJECT_NIL) {
-		g_critical ("Cannot open configuration database %s", default_moniker);
-		exit (-1);
-	}
-
-	if (legacy_files && get_legacy_fn && !get_legacy) {
-		for (i = 0; legacy_files[i] != NULL; i++) {
-			if (legacy_is_modified (db, legacy_files[i])) {
-				needs_legacy = TRUE; 
-				break;
-			}
-		}
-	}
-
-	if ((apply_only || init_session) && apply_fn != NULL) {
+	if (apply_only && apply_fn != NULL) {
 		setup_session_mgmt (argv[0]);
-		if (needs_legacy)
-			get_legacy_fn (db);
-
-		apply_fn (db);
+		apply_fn ();
 	}
 	else if (get_legacy && get_legacy_fn != NULL) {
 		setup_session_mgmt (argv[0]);
-		get_legacy_fn (db);
-		Bonobo_ConfigDatabase_sync (db, &ev);
+		get_legacy_fn ();
 	} else {
 		setup_session_mgmt (argv[0]);
-		if (needs_legacy)
-			get_legacy_fn (db);
+
 		create_dialog_cb = create_dialog_fn;
 		apply_settings_cb = apply_fn;
-		setup_cb = setup_fn;
+		setup_property_editors_cb = setup_fn;
+
 		factory_iid = get_factory_name (argv[0]);
-		factory = bonobo_generic_factory_new_multi
-			(factory_iid, (GnomeFactoryCallback) create_control_cb, default_moniker);
+		factory = bonobo_generic_factory_new
+			(factory_iid, (BonoboFactoryCallback) create_control_cb, NULL);
 		g_free (factory_iid);
 		bonobo_running_context_auto_exit_unref (BONOBO_OBJECT (factory));
 
-		gtk_idle_add ((GtkFunction) add_listener_cb, db);
+		changeset = gconf_change_set_new ();
 
 		bonobo_main ();
 
-		if (listener_id != 0) {
-			bonobo_event_source_client_remove_listener (db, listener_id, &ev);
-
-			if (BONOBO_EX (&ev))
-				g_critical ("Could not remove listener (%s)", bonobo_exception_get_text (&ev));
-		}
+		gconf_change_set_unref (changeset);
 	}
-
-	g_free (default_moniker);
-	bonobo_object_release_unref (db, NULL);
-
-	CORBA_exception_free (&ev);
 }

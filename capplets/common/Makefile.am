@@ -12,4 +12,5 @@ noinst_LIBRARIES = libcommon.a
 
 libcommon_a_SOURCES = \
 	capplet-util.c			capplet-util.h			\
-	bonobo-property-editor-range.c	bonobo-property-editor-range.h
+	gconf-property-editor.c		gconf-property-editor.h		\
+	gconf-property-editor-marshal.c	gconf-property-editor-marshal.h
