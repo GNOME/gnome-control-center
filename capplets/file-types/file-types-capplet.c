@@ -39,20 +39,22 @@
 #include <libgnomevfs/gnome-vfs-mime-info.h>
 
 #include "mime-data.h"
-#include "mime-info.h"
+//#include "mime-info.h"
 #include "nautilus-mime-type-capplet-dialogs.h"
 
 #include "nautilus-mime-type-capplet.h"
 
 
 /* Local Prototypes */
-static void	init_mime_capplet 	  	(void);
-static void 	populate_application_menu 	(GtkWidget 	*menu, 	 const char *mime_string);
-static void 	populate_component_menu	  	(GtkWidget 	*menu, 	 const char *mime_string);
-static void	delete_mime_clicked       	(GtkWidget 	*widget, gpointer   data);
-static void	add_mime_clicked 	  	(GtkWidget 	*widget, gpointer   data);
-static void	edit_applications_clicked 	(GtkWidget 	*widget, gpointer   data);
-static void	edit_components_clicked   	(GtkWidget 	*widget, gpointer   data);
+static void	 init_mime_capplet 	  	(void);
+static void 	 populate_application_menu 	(GtkWidget 	*menu, 	 const char *mime_string);
+static void 	 populate_component_menu	(GtkWidget 	*menu, 	 const char *mime_string);
+static void	 delete_mime_clicked       	(GtkWidget 	*widget, gpointer   data);
+static void	 add_mime_clicked 	  	(GtkWidget 	*widget, gpointer   data);
+static void	 edit_applications_clicked 	(GtkWidget 	*widget, gpointer   data);
+static void	 edit_components_clicked   	(GtkWidget 	*widget, gpointer   data);
+static GtkWidget *create_mime_list_and_scroller (void);
+
 
 static void 	try_callback 		  	(void);
 static void 	revert_callback 	  	(void);
@@ -94,11 +96,17 @@ main (int argc, char **argv)
 	}
 
 	if (init_results == 0) {
-		init_mime_type ();
 		init_mime_capplet ();
 	        capplet_gtk_main ();
 	}
         return 0;
+}
+
+static void
+g_list_free_deep (GList *list)
+{
+	g_list_foreach (list, (GFunc) g_free, NULL);
+	g_list_free (list);
 }
 
 static GtkWidget *
@@ -116,31 +124,31 @@ left_aligned_button (gchar *label)
 static void
 try_callback ()
 {
-        write_user_keys ();
-        write_user_mime ();
+	//write_user_keys ();
+        //write_user_mime ();
 }
 
 static void
 revert_callback ()
 {
-        write_initial_keys ();
-        write_initial_mime ();
-        discard_key_info ();
-        discard_mime_info ();
+        //write_initial_keys ();
+        //write_initial_mime ();
+	//discard_key_info ();
+	//discard_mime_info ();
 }
 
 static void
 ok_callback ()
 {
-        write_user_keys ();
-        write_user_mime ();
+        //write_user_keys ();
+        //write_user_mime ();
 }
 
 static void
 cancel_callback ()
 {
-        write_initial_keys ();
-        write_initial_mime ();
+        //write_initial_keys ();
+        //write_initial_mime ();
 }
 
 #if 0
@@ -152,15 +160,20 @@ help_callback ()
 #endif
 
 static void
-populate_extension_list (const MimeInfo *info, GtkCList *list)
+populate_extension_list (const char *mime_type, GtkCList *list)
 {
-	GList *element;
-	gchar *extension[1];
-	gint row;
-
+	//GList *element;
+	//gchar *extension[1];
+	//gint row;
+		
+	if (mime_type == NULL || list == NULL) {
+		return;
+	}
+		
 	/* Clear out old items */
 	gtk_clist_clear (list);
 
+	/*
 	if (info->ext[0]) {
 		for (element = info->ext[0]; element; element = element->next) {
 		       extension[0] = g_strdup (element->data);
@@ -176,6 +189,7 @@ populate_extension_list (const MimeInfo *info, GtkCList *list)
 		       gtk_clist_set_row_data (list, row, GINT_TO_POINTER (FALSE));
 		}
 	}
+	*/
 
 	/* Select first item in extension list */
 	gtk_clist_select_row (list, 0, 0);
@@ -269,6 +283,26 @@ extension_list_deselected (GtkWidget *clist, gint row, gint column, gpointer dat
 }
 
 static void
+mime_list_selected_row_callback (GtkWidget *widget, gint row, gint column, GdkEvent *event, gpointer data)
+{
+        const char *mime_type;
+	
+        if (column < 0)
+                return;
+        
+        mime_type = (const char *) gtk_clist_get_row_data (GTK_CLIST (widget),row);
+
+	/* Update info on selection */
+        nautilus_mime_type_capplet_update_info (mime_type);
+        
+	/* FIXME: Get user mime info */
+        //if (g_hash_table_lookup (user_mime_types, mi->mime_type)) {
+        //        gtk_widget_set_sensitive (delete_button, TRUE);
+        //} else
+        //        gtk_widget_set_sensitive (delete_button, FALSE);
+}
+
+static void
 init_mime_capplet (void)
 {
 	GtkWidget *main_vbox;
@@ -279,7 +313,6 @@ init_mime_capplet (void)
         GtkWidget *icon_entry;
         GtkWidget *mime_list_container;
         GtkWidget *extension_scroller;
-        GList *children, *child;
 	
         gchar *title[2] = {"Extensions"};
         
@@ -293,13 +326,8 @@ init_mime_capplet (void)
         /* Main horizontal box and mime list*/                    
         hbox = gtk_hbox_new (FALSE, GNOME_PAD);
         gtk_box_pack_start (GTK_BOX (main_vbox), hbox, TRUE, TRUE, 0);
-        mime_list_container = create_mime_clist ();
+        mime_list_container = create_mime_list_and_scroller ();
         gtk_box_pack_start (GTK_BOX (hbox), mime_list_container, TRUE, TRUE, 0);         
-
-	/* Get pointer to mime list */
-	children = gtk_container_children (GTK_CONTAINER (mime_list_container));
-	child = g_list_first (children);
-	mime_list = child->data;
 
 	vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
       
@@ -407,6 +435,9 @@ init_mime_capplet (void)
                            GTK_SIGNAL_FUNC(help_callback), NULL);
 #endif
 
+	gtk_signal_connect (GTK_OBJECT (mime_list),"select_row",
+       	                   GTK_SIGNAL_FUNC (mime_list_selected_row_callback), NULL);
+
 	/* Select first item in list and update menus */
 	gtk_clist_select_row (GTK_CLIST (mime_list), 0, 0);
 }
@@ -419,21 +450,21 @@ init_mime_capplet (void)
  */
  
 void
-nautilus_mime_type_capplet_update_info (const MimeInfo *info) {
+nautilus_mime_type_capplet_update_info (const char *mime_type) {
 
 	/* Update frame label with mime type */
-	gtk_frame_set_label (GTK_FRAME (info_frame), info->mime_type);
+	gtk_frame_set_label (GTK_FRAME (info_frame), mime_type);
 
 	/* Update menus */
-	populate_application_menu (application_menu, info->mime_type);
-	populate_component_menu (component_menu, info->mime_type);
+	populate_application_menu (application_menu, mime_type);
+	populate_component_menu (component_menu, mime_type);
 
 	/* Update extesnions list */
-	populate_extension_list (info, GTK_CLIST (extension_list));
+	populate_extension_list (mime_type, GTK_CLIST (extension_list));
 
 	/* Set icon for mime type */
 	gnome_icon_entry_set_icon (GNOME_ICON_ENTRY (icon_entry),
-				   gnome_vfs_mime_get_value (info->mime_type, "icon-filename"));
+				   gnome_vfs_mime_get_value (mime_type, "icon-filename"));
 }
 
 static void
@@ -581,10 +612,6 @@ populate_component_menu (GtkWidget *component_menu, const char *mime_string)
 	gtk_option_menu_set_menu (GTK_OPTION_MENU (component_menu), new_menu);
 }
 
-static void
-free_mime_info (MimeInfo *mi)
-{
-}
 
 /*
  *  delete_mime_clicked	
@@ -595,19 +622,19 @@ free_mime_info (MimeInfo *mi)
 static void
 delete_mime_clicked (GtkWidget *widget, gpointer data)
 {
-        MimeInfo *mi;
+        const char *mime_type;
         gint row = 0;
 
         if (GTK_CLIST (mime_list)->selection)
                 row = GPOINTER_TO_INT ((GTK_CLIST (mime_list)->selection)->data);
         else
                 return;
-        mi = (MimeInfo *) gtk_clist_get_row_data (GTK_CLIST (mime_list), row);
+        mime_type = (const char *) gtk_clist_get_row_data (GTK_CLIST (mime_list), row);
 
         gtk_clist_remove (GTK_CLIST (mime_list), row);
-        g_hash_table_remove (user_mime_types, mi->mime_type);
-        remove_mime_info (mi->mime_type);
-        free_mime_info (mi);
+	/* FIXME: Get user mime info */
+        //g_hash_table_remove (user_mime_types, mi->mime_type);
+	//remove_mime_info (mi->mime_type);
         capplet_widget_state_changed (CAPPLET_WIDGET (capplet),
                                       TRUE);
 }
@@ -622,7 +649,7 @@ static void
 edit_applications_clicked (GtkWidget *widget, gpointer data)
 {	
 	GtkWidget *list;
-	MimeInfo *mi;
+	const char *mime_type;
 	GList *p;
 	GtkCListRow *row;
 
@@ -644,15 +671,15 @@ edit_applications_clicked (GtkWidget *widget, gpointer data)
 	}
 	
 	/* Show dialog */
-	mi = (MimeInfo *) row->data;
-	show_edit_applications_dialog (mi->mime_type);
+	mime_type = (const char *) row->data;
+	show_edit_applications_dialog (mime_type);
 }
 
 static void
 edit_components_clicked (GtkWidget *widget, gpointer data)
 {
 	GtkWidget *list;
-	MimeInfo *mi;
+	const char *mime_type;
 	GList *p;
 	GtkCListRow *row;
 
@@ -674,8 +701,8 @@ edit_components_clicked (GtkWidget *widget, gpointer data)
 	}
 	
 	/* Show dialog */
-	mi = (MimeInfo *) row->data;
-	show_edit_components_dialog (mi->mime_type);
+	mime_type = (const char *) row->data;
+	show_edit_components_dialog (mime_type);
 }
 
 /*
@@ -704,3 +731,66 @@ nautilus_mime_type_capplet_update_component_info (const char *mime_type)
 	populate_component_menu (component_menu, mime_type);
 }
 
+
+static void
+insert_mime_vals_into_clist (GList *type_list, GtkCList *clist)
+{
+	static gchar *text[2];        
+	const char *description;
+	char *mime_string;
+        gint row;
+	GList *element;
+	
+	for (element = type_list; element != NULL; element= element->next) {
+		mime_string = (char *)element->data;
+		
+		/* Make sure we do not include comments */
+		if (mime_string[0] != '#') {
+			/* Add mime type to first column */
+			text[0] = mime_string;
+
+			/* Add description to second column */
+			description = gnome_vfs_mime_description (mime_string);	
+			if (description != NULL && strlen (description) > 0) {
+				text[1] = g_strdup (description);
+			} else {
+				text[1] = g_strdup ("");
+			}
+			
+		        row = gtk_clist_insert (GTK_CLIST (clist), 1, text);
+		        gtk_clist_set_row_data (GTK_CLIST (clist), row, g_strdup(mime_string));
+
+			g_free (text[1]);
+		}
+	}
+}
+
+static GtkWidget *
+create_mime_list_and_scroller (void)
+{
+        GtkWidget *window;
+        gchar *titles[3];
+	GList *type_list;
+	
+        titles[0] = _("Mime Type");
+        titles[1] = _("Description");
+        titles[2] = _("Application");
+        
+        window = gtk_scrolled_window_new (NULL, NULL);
+        gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (window),
+                                        GTK_POLICY_AUTOMATIC,
+                                        GTK_POLICY_AUTOMATIC);
+	mime_list = gtk_clist_new_with_titles (3, titles);
+        gtk_clist_set_selection_mode (GTK_CLIST (mime_list), GTK_SELECTION_BROWSE);
+        gtk_clist_set_auto_sort (GTK_CLIST (mime_list), TRUE);
+
+	type_list = gnome_vfs_get_registered_mime_types ();
+	insert_mime_vals_into_clist (type_list, GTK_CLIST (mime_list));
+	g_list_free_deep (type_list);
+	
+        gtk_clist_columns_autosize (GTK_CLIST (mime_list));
+        gtk_clist_select_row (GTK_CLIST (mime_list), 0, 0);
+        gtk_container_add (GTK_CONTAINER (window), mime_list);
+       
+        return window;
+}

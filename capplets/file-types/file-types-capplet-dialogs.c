@@ -533,7 +533,6 @@ nautilus_mime_type_capplet_show_new_mime_window (void)
 	GtkWidget *dialog;
         GtkWidget *mime_entry;
 	GtkWidget *label;
-	GtkWidget *frame;
 	GtkWidget *ext_entry;
 	GtkWidget *hbox;
 	GtkWidget *vbox;
@@ -552,18 +551,18 @@ nautilus_mime_type_capplet_show_new_mime_window (void)
         gtk_box_pack_start (GTK_BOX (hbox), mime_entry, TRUE, TRUE, 0);
         gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), hbox, FALSE, FALSE, 0);
 	
-	frame = gtk_frame_new (_("Extensions"));
-        gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), frame, FALSE, FALSE, 0);
+        
 	vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
+	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), vbox, FALSE, FALSE, 0);
+	//gtk_container_add (GTK_CONTAINER (frame), vbox);
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), GNOME_PAD_SMALL);
-	label = gtk_label_new (_("Type in the extensions for this mime-type.\nFor example:  .html, .htm"));
+	label = gtk_label_new (_("Type in a description for this mime-type."));
 	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
 	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
-	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-	gtk_container_add (GTK_CONTAINER (frame), vbox);
+	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);	
 	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
-	gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (_("Extension:")), FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (_("Description:")), FALSE, FALSE, 0);
 	ext_entry = gtk_entry_new ();
 	gtk_box_pack_start (GTK_BOX (hbox), ext_entry, TRUE, TRUE, 0);
 	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);

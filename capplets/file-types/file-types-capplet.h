@@ -27,7 +27,7 @@
 
 #include "mime-data.h"
 
-void nautilus_mime_type_capplet_update_info 		(const MimeInfo *info);
+void nautilus_mime_type_capplet_update_info 		(const char *mime_type);
 void nautilus_mime_type_capplet_update_application_info (const char *mime_type);
 void nautilus_mime_type_capplet_update_component_info   (const char *mime_type);
 void nautilus_mime_type_capplet_add_extension 		(const char *extension);
