@@ -37,7 +37,17 @@ draw_bitmap(GdkPixbuf *pixbuf, FT_Bitmap *bitmap, gint off_x, gint off_y)
 
 	    if (i + off_x < 0 || i + off_x >= p_width)
 		continue;
-	    pixel = 255 - bitmap->buffer[j*bitmap->pitch + i];
+	    switch (bitmap->pixel_mode) {
+	    case ft_pixel_mode_mono:
+		pixel = bitmap->buffer[j * bitmap->pitch + i/8];
+		pixel = 255 - ((pixel >> (7 - i % 8)) & 0x1) * 255;
+		break;
+	    case ft_pixel_mode_grays:
+		pixel = 255 - bitmap->buffer[j*bitmap->pitch + i];
+		break;
+	    default:
+		pixel = 255;
+	    }
 	    pos = (j + off_y) * p_rowstride + 3 * (i + off_x);
 	    buffer[pos]   = pixel;
 	    buffer[pos+1] = pixel;
@@ -59,7 +69,6 @@ draw_char(GdkPixbuf *pixbuf, FT_Face face, gchar character,
 	g_printerr("could not load character '%c'\n", character);
 	return;
     }
-    g_assert(slot->bitmap.pixel_mode == ft_pixel_mode_grays);
 
     draw_bitmap(pixbuf, &slot->bitmap,
 		*pen_x + slot->bitmap_left,
@@ -196,7 +205,7 @@ main(int argc, char **argv)
     error = FT_Set_Pixel_Sizes(face, 0, FONT_SIZE);
     if (error) {
 	g_printerr("could not set pixel size\n");
-	return 1;
+	/* return 1; */
     }
 
     pixbuf = gdk_pixbuf_new(GDK_COLORSPACE_RGB, FALSE, 8,

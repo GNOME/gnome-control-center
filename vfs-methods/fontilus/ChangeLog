@@ -4,6 +4,8 @@
 	into separate function.
 	(save_pixbuf): function to save the pixbuf.  We crop the pixbuf
 	leaving PAD_PIXELS pixels round the edges.
+	(draw_bitmap): handle monochrome bitmaps.
+	(main): don't error out if we can't set pixel size.
 
 	* src/ftstream-vfs.c (FT_New_URI_Face): unset the
 	FT_FACE_FLAG_EXTERNAL_STREAM flag on the face, so that it gets
