@@ -11,8 +11,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.3.2\n"
-"POT-Creation-Date: 2003-05-30 20:49+0800\n"
-"PO-Revision-Date: 2003-05-31 00:13+0800\n"
+"POT-Creation-Date: 2003-06-09 23:15+0800\n"
+"PO-Revision-Date: 2003-06-10 06:52+0800\n"
 "Last-Translator: Abel Cheung <maddog@linux.org.hk>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
 "MIME-Version: 1.0\n"
@@ -35,7 +35,7 @@ msgid "Select CDE AccessX file"
 msgstr "選取 CDE AccessX 檔案"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "鍵盤"
@@ -223,7 +223,7 @@ msgstr "拒絕按鍵(_R)"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:40
 msgid "characters/second"
-msgstr "字元(每秒)"
+msgstr "字符(每秒)"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:41
 msgid "milliseconds"
@@ -291,7 +291,7 @@ msgstr "請選取圖案(_P)："
 #: capplets/default-applications/gnome-default-applications-properties.c:724
 #: capplets/keyboard/gnome-keyboard-properties.c:290
 #: capplets/mouse/gnome-mouse-properties.c:716
-#: capplets/sound/sound-properties-capplet.c:149
+#: capplets/sound/sound-properties-capplet.c:214
 msgid "Retrieve and store legacy settings"
 msgstr "讀入舊版本的設定"
 
@@ -494,12 +494,12 @@ msgstr ""
 
 #: capplets/common/gconf-property-editor.c:191
 msgid "Conversion to widget callback"
-msgstr ""
+msgstr "轉化為視窗元件的改變所需的 callback"
 
 #: capplets/common/gconf-property-editor.c:192
 msgid ""
 "Callback to be issued when data are to be converted from GConf to the widget"
-msgstr ""
+msgstr "需要將更改後的 GConf 資料轉化為視窗元件的改變時，所發出的 callback"
 
 #: capplets/common/gconf-property-editor.c:197
 msgid "Conversion from widget callback"
@@ -1057,7 +1057,7 @@ msgstr "描述 MIME 分類的資料結構"
 
 #: capplets/file-types/mime-category-edit-dialog.c:344
 #: capplets/file-types/mime-edit-dialog.c:491
-#: capplets/file-types/mime-edit-dialog.c:595
+#: capplets/file-types/mime-edit-dialog.c:596
 #: capplets/file-types/service-edit-dialog.c:358
 #: capplets/file-types/service-edit-dialog.c:407
 msgid "Custom"
@@ -1097,26 +1097,27 @@ msgid "Misc"
 msgstr "其它"
 
 #: capplets/file-types/mime-edit-dialog.c:486
-#: capplets/file-types/mime-edit-dialog.c:545
+#: capplets/file-types/mime-edit-dialog.c:547
 msgid "None"
 msgstr "無"
 
-#: capplets/file-types/mime-edit-dialog.c:855
+#: capplets/file-types/mime-edit-dialog.c:852
+#: capplets/file-types/mime-edit-dialog.c:866
 msgid ""
 "Please enter a valid MIME type.  It should be of the form class/type and may "
 "not contain any spaces."
 msgstr ""
 "請輸入正確的 MIME 類型。它的格式應該類似「分類/格式」那樣而且沒有任何空格。"
 
-#: capplets/file-types/mime-edit-dialog.c:862
+#: capplets/file-types/mime-edit-dialog.c:859
 msgid "A MIME type with that name already exists, overwrite ?."
 msgstr "該名稱的 MIME 類型已經存在，是否覆寫？"
 
-#: capplets/file-types/mime-edit-dialog.c:927
+#: capplets/file-types/mime-edit-dialog.c:931
 msgid "Category"
 msgstr "分類"
 
-#: capplets/file-types/mime-edit-dialog.c:932
+#: capplets/file-types/mime-edit-dialog.c:936
 msgid "Choose a file category"
 msgstr "請選取檔案類別"
 
@@ -1453,8 +1454,8 @@ msgstr "無障礙環境(_A)"
 
 #: capplets/keyboard/gnome-keyboard-properties.c:286
 #: capplets/keyboard/gnome-keyboard-properties.c:288
-#: capplets/sound/sound-properties-capplet.c:145
-#: capplets/sound/sound-properties-capplet.c:147
+#: capplets/sound/sound-properties-capplet.c:210
+#: capplets/sound/sound-properties-capplet.c:212
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr "套用設定並離開（現在已經由伺服程式處理，此選擇只為提供兼容性而設）"
@@ -1489,19 +1490,19 @@ msgstr "按鍵時發出響聲(_K)"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "Cursor Blinks"
-msgstr "鼠標"
+msgstr "鼠標會閃爍"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+msgid "Key presses _repeat when key is held down"
+msgstr "當按下某鍵不放時重複輸出該字符(_R)"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Keyboard Bell"
 msgstr "鍵盤聲響"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Keyboard Preferences"
 msgstr "鍵盤偏好設定"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
-msgid "Keyboard _repeats when key is held down"
-msgstr "當按下某鍵不放時重複輸出該鍵代表的字元(_R)"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Keypress Click"
@@ -1717,11 +1718,11 @@ msgstr "敏感度(_S)："
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:24
 msgid "_Threshold:"
-msgstr "臨界距離(_T)："
+msgstr "分辨距離(_T)："
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:25
 msgid "_Timeout:"
-msgstr ""
+msgstr "時限(_T)："
 
 #: capplets/mouse/mouse.desktop.in.h:2
 msgid "Set your mouse preferences"
@@ -1799,7 +1800,7 @@ msgstr "安全 HTTP 代理伺服器(_S)："
 msgid "_Username:"
 msgstr "用戶名稱(_U)："
 
-#: capplets/sound/sound-properties-capplet.c:175
+#: capplets/sound/sound-properties-capplet.c:241
 msgid "Sound preferences"
 msgstr "音效偏好設定"
 
@@ -1808,20 +1809,40 @@ msgid "E_nable sound server startup"
 msgstr "啟動 GNOME 時啟用音效伺服程式(_N)"
 
 #: capplets/sound/sound-properties.glade.h:2
+msgid "Flash _window titlebar"
+msgstr "閃動視窗標題列(_W)"
+
+#: capplets/sound/sound-properties.glade.h:3
+msgid "Flash entire _screen"
+msgstr "閃動整個畫面(_S)"
+
+#: capplets/sound/sound-properties.glade.h:4
 msgid "General"
 msgstr "一般"
 
-#: capplets/sound/sound-properties.glade.h:3
+#: capplets/sound/sound-properties.glade.h:5
 msgid "Sound Events"
 msgstr "事件音效"
 
-#: capplets/sound/sound-properties.glade.h:4
+#: capplets/sound/sound-properties.glade.h:6
 msgid "Sound Preferences"
 msgstr "音效偏好設定"
 
-#: capplets/sound/sound-properties.glade.h:5
+#: capplets/sound/sound-properties.glade.h:7
+msgid "System Bell"
+msgstr "系統鈴聲"
+
+#: capplets/sound/sound-properties.glade.h:8
+msgid "_Sound an audible bell"
+msgstr "發出可聽見的聲響(_S)"
+
+#: capplets/sound/sound-properties.glade.h:9
 msgid "_Sounds for events"
 msgstr "使用音效代表事件(_S)"
+
+#: capplets/sound/sound-properties.glade.h:10
+msgid "_Visual feedback:"
+msgstr "視覺方式回饋(_V)："
 
 #: capplets/sound/sound.desktop.in.h:1
 msgid "Enable sound and associate sounds with events"
@@ -1833,7 +1854,7 @@ msgstr "甲 乙 丙 丁 戊 己 庚 辛"
 
 #: capplets/theme-switcher/control/control.c:43
 msgid "Selected themes from above will be tested by previewing here."
-msgstr "可在這裡測試已選取的佈景主題。"
+msgstr "可在這裡測試選定的佈景主題。"
 
 #. column one
 #: capplets/theme-switcher/control/control.c:48
@@ -2345,7 +2366,7 @@ msgid "Couldn't load sound file %s as sample %s"
 msgstr "無法載入音效檔 %s 作為音效樣本 %s"
 
 #: gnome-settings-daemon/gnome-settings-xrdb.c:212
-#: gnome-settings-daemon/gnome-settings-xrdb.c:259
+#: gnome-settings-daemon/gnome-settings-xrdb.c:260
 msgid "Cannot determine user's home directory"
 msgstr "無法決定用戶的個人目錄所在"
 
@@ -2663,7 +2684,7 @@ msgstr "Themus 屬性內容顯示模式元件"
 msgid "Themus Theme Properties view"
 msgstr "Themus 佈景屬性顯示模式"
 
-#: vfs-methods/themus/theme-method.c:513
+#: vfs-methods/themus/theme-method.c:514
 msgid "Themes"
 msgstr "佈景主題"
 
