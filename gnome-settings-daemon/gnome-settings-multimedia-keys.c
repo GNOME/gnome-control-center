@@ -153,10 +153,10 @@ fblevel_problem_cb (void)
 #endif
 
 static char *images[] = {
-	PIXMAPSDIR "gnome-speakernotes-muted.png",
-	PIXMAPSDIR "gnome-speakernotes.png",
-	PIXMAPSDIR "acme-brightness.png",
-	PIXMAPSDIR "acme-eject.png",
+	PIXMAPSDIR "/gnome-speakernotes-muted.png",
+	PIXMAPSDIR "/gnome-speakernotes.png",
+	PIXMAPSDIR "/acme-brightness.png",
+	PIXMAPSDIR "/acme-eject.png",
 };
 
 static void
