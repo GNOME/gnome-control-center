@@ -1,5 +1,16 @@
 2001-07-24  Richard Hestilow  <hestilow@ximian.com>
 
+	* config-log.c (parse_line): Ok, bad fix. Move that to the archiver.
+
+	* bonobo-config-archiver.c (pb_set_fn): Moved here.
+	(bonobo_config_archiver_new): Don't aggregate against an EventSource,
+	since the PropertyBag already has one and everything will get confused.
+	Just use the one the bag has.
+	(bonobo_config_archiver_destroy): Don't unref the event source, we
+	don't own it any more.	
+
+2001-07-24  Richard Hestilow  <hestilow@ximian.com>
+
 	* config-log.c (parse_line): Fix date parsing to work with DST.
 
 	* bonobo-config-archiver.[ch]: Export a PropertyBag interface that

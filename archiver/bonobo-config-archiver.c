@@ -474,14 +474,15 @@ pb_get_fn (BonoboPropertyBag *bag, BonoboArg *arg,
 	ConfigLog *log;
 	struct tm *mod;
 	time_t val;
+	extern int daylight;
 
 	log = CONFIG_LOG (config_log_open (archiver_db->location));
 	id = config_log_get_rollback_id_by_steps (log, 0, archiver_db->real_name);
 	mod = config_log_get_date_for_id (log, id);
 	val = mktime (mod);
 	g_print ("%i\n", mod->tm_hour);
-	//if (daytime)
-	//	val -= 3600;
+	if (daylight)
+		val -= 3600;
 
 	BONOBO_ARG_SET_GENERAL (arg, val,
 				TC_ulonglong, CORBA_unsigned_long_long, NULL);
@@ -519,10 +520,10 @@ bonobo_config_archiver_destroy (GtkObject *object)
 
 	if (archiver_db->fp)
 		fclose (archiver_db->fp);
-
+#if 0
 	if (archiver_db->es)
 		bonobo_object_unref (BONOBO_OBJECT (archiver_db->es));
-
+#endif
 	if (archiver_db->pb)
 		bonobo_object_unref (BONOBO_OBJECT (archiver_db->pb));
 			
@@ -722,11 +723,13 @@ bonobo_config_archiver_new (const char *backend_id, const char *location_id)
 
 	fill_cache (archiver_db);
 
+#if 0
 	archiver_db->es = bonobo_event_source_new ();
 
 	bonobo_object_add_interface (BONOBO_OBJECT (archiver_db), 
 				     BONOBO_OBJECT (archiver_db->es));
-
+#endif
+	
 	archiver_db->pb = bonobo_property_bag_new (pb_get_fn,
 						   pb_set_fn,
 						   archiver_db);
@@ -734,6 +737,8 @@ bonobo_config_archiver_new (const char *backend_id, const char *location_id)
 	bonobo_object_add_interface (BONOBO_OBJECT (archiver_db), 
 				     BONOBO_OBJECT (archiver_db->pb));
 
+	archiver_db->es = archiver_db->pb->es; 
+		
 	bonobo_property_bag_add (archiver_db->pb,
 				 "last_modified", 1, TC_ulonglong, NULL,
 		       		 "Date (time_t) of modification", 
