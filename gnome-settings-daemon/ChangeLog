@@ -1,3 +1,14 @@
+2002-07-27  Mark McLoughlin  <mark@skynet.ie>
+
+	Add multiscreen support for background rendering.
+
+	* gnome-settings-background.c:
+	(background_callback): apply prefs to all screens.
+	(gnome_settings_background_init): create a BGApplier for
+	each screen.
+	(gnome_settings_background_load): apply prefs to all
+	screens.
+
 2002-07-22  jacob berkman  <jacob@ximian.com>
 
 	* gnome-settings-background.c (gnome_settings_background_load): if

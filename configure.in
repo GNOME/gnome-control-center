@@ -78,6 +78,17 @@ GNOME_SETTINGS_DAEMON_LIBS="$GNOME_SETTINGS_DAEMON_LIBS $x_libs"
 
 AC_PATH_PROG(GCONFTOOL, gconftool-2)
 
+dnl
+dnl Check for gtk+ with multihead support
+dnl
+AC_MSG_CHECKING([for gtk+ multihead support])
+if $PKG_CONFIG --atleast-version 2.1.0 gtk+-2.0; then
+   AC_DEFINE(HAVE_GTK_MULTIHEAD,,[gtk+ with multihead support found])
+   AC_MSG_RESULT(yes)
+else
+   AC_MSG_RESULT(no)
+fi
+
 dnl ==============================================
 dnl End: Check that we meet the  dependencies
 dnl ==============================================
