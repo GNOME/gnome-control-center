@@ -57,7 +57,7 @@ struct _ConfigManagerDialogPrivate
 	Location     *current_location;
 };
 
-static GnomeDialogClass *parent_class;
+static CappletWidgetClass *parent_class;
 
 static void config_manager_dialog_init        (ConfigManagerDialog *dialog);
 static void config_manager_dialog_class_init  (ConfigManagerDialogClass *class);
@@ -116,7 +116,7 @@ config_manager_dialog_get_type (void)
 		};
 
 		config_manager_dialog_type = 
-			gtk_type_unique (gnome_dialog_get_type (), 
+			gtk_type_unique (capplet_widget_get_type (), 
 					 &config_manager_dialog_info);
 	}
 
@@ -126,38 +126,20 @@ config_manager_dialog_get_type (void)
 static void
 config_manager_dialog_init (ConfigManagerDialog *dialog)
 {
-	static char *buttons[] = {
-		GNOME_STOCK_BUTTON_OK,
-		GNOME_STOCK_BUTTON_APPLY,
-		GNOME_STOCK_BUTTON_CANCEL,
-		NULL
-	};
-
-	gnome_dialog_constructv (GNOME_DIALOG (dialog),
-				 _("Rollback and Location Management"),
-				 buttons);
-
 	dialog->p = g_new0 (ConfigManagerDialogPrivate, 1);
 	dialog->p->config_dialog_data =
 		glade_xml_new (GLADE_DATADIR "/rollback.glade",
 			       "config_dialog_data");
 
-	gtk_box_pack_start (GTK_BOX
-			    (GNOME_DIALOG (dialog)->vbox),
-			    WID ("config_dialog_data"), 0, TRUE, TRUE);
+	gtk_container_add (GTK_CONTAINER (dialog),
+			   WID ("config_dialog_data"));
 
-	gtk_window_set_policy (GTK_WINDOW (dialog),
-			       TRUE, FALSE, TRUE);
-
-	gnome_dialog_button_connect (GNOME_DIALOG (dialog),
-				     0, GTK_SIGNAL_FUNC (ok_cb),
-				     dialog);
-	gnome_dialog_button_connect (GNOME_DIALOG (dialog),
-				     1, GTK_SIGNAL_FUNC (apply_cb),
-				     dialog);
-	gnome_dialog_button_connect (GNOME_DIALOG (dialog),
-				     2, GTK_SIGNAL_FUNC (cancel_cb),
-				     dialog);
+	gtk_signal_connect (GTK_OBJECT (dialog), "ok",
+			    GTK_SIGNAL_FUNC (ok_cb), dialog);
+	gtk_signal_connect (GTK_OBJECT (dialog), "try",
+			    GTK_SIGNAL_FUNC (apply_cb), dialog);
+	gtk_signal_connect (GTK_OBJECT (dialog), "cancel",
+			    GTK_SIGNAL_FUNC (cancel_cb), dialog);
 
 	glade_xml_signal_connect_data (dialog->p->config_dialog_data, 
 				       "time_count_changed_cb",
@@ -177,6 +159,8 @@ config_manager_dialog_init (ConfigManagerDialog *dialog)
 
 	set_backend_controls_sensitive (dialog, FALSE);
 	reset_time (dialog, 0);
+
+	capplet_widget_state_changed (CAPPLET_WIDGET (dialog), FALSE);
 }
 
 static void
@@ -194,8 +178,8 @@ config_manager_dialog_class_init (ConfigManagerDialogClass *class)
 	object_class->set_arg = config_manager_dialog_set_arg;
 	object_class->get_arg = config_manager_dialog_get_arg;
 
-	parent_class = GNOME_DIALOG_CLASS
-		(gtk_type_class (gnome_dialog_get_type ()));
+	parent_class = CAPPLET_WIDGET_CLASS
+		(gtk_type_class (capplet_widget_get_type ()));
 }
 
 static void
@@ -294,8 +278,6 @@ ok_cb (GtkWidget *widget, ConfigManagerDialog *dialog)
 	g_return_if_fail (IS_CONFIG_MANAGER_DIALOG (dialog));
 
 	do_rollback (dialog, FALSE);
-
-	gnome_dialog_close (GNOME_DIALOG (dialog));
 }
 
 static void
@@ -314,8 +296,6 @@ cancel_cb (GtkWidget *widget, ConfigManagerDialog *dialog)
 	g_return_if_fail (IS_CONFIG_MANAGER_DIALOG (dialog));
 
 	do_rollback (dialog, TRUE);
-
-	gnome_dialog_close (GNOME_DIALOG (dialog));
 }
 
 static void
@@ -401,6 +381,9 @@ populate_backends_cb (BackendList *list, gchar *backend_id,
 {
 	GtkWidget *menu_item;
 	GtkWidget *menu;
+
+	if (dialog->p->backend_id == NULL)
+		dialog->p->backend_id = backend_id;
 
 	menu_item = gtk_menu_item_new_with_label (backend_id);
 	gtk_widget_show (menu_item);

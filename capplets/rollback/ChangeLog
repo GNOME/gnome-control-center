@@ -5,6 +5,13 @@
 	(config_manager_dialog_init): GLADE_DIR -> GLADE_DATADIR
 	(config_manager_dialog_init): Remove outdated signal connections
 	(config_manager_dialog_init): Remove code to create location list
+	Inherit from CappletWidget rather than GnomeDialog
+	(config_manager_dialog_init): Remove gtk_window_set_policy call
+	(ok_cb):
+	(cancel_cb): Remove gnome_dialog_close call
+	(config_manager_dialog_init): Set state to "changed" so that the
+	Ok button is active
+	(populate_backends_cb): Set backend_id in dialog if not already set
 
 	* Makefile.am (INCLUDES): Changed CAPPLET_CFLAGS to
 	ROLLBACK_CAPPLET_CFLAGS
