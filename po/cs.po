@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-02 13:32+0100\n"
-"PO-Revision-Date: 2005-02-02 21:27+0100\n"
+"POT-Creation-Date: 2005-02-04 05:35+0100\n"
+"PO-Revision-Date: 2005-02-04 13:24+0100\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -2779,7 +2779,7 @@ msgstr "Generátor pohledu Ovládacího centra"
 msgid "View as Control Center"
 msgstr "Zobrazit jako Ovládací centrum"
 
-#: control-center/control-center-categories.c:248
+#: control-center/control-center-categories.c:249
 msgid "Others"
 msgstr "Ostatní"
 
@@ -2907,32 +2907,32 @@ msgstr ""
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
-"It can have under various circumstances:\n"
+"It can happen under various circumstances:\n"
 "- a bug in libxklavier library\n"
 "- a bug in X server (xkbcomp, xmodmap utilities)\n"
-"- X server with incompatible libxkbfile implemenation\n"
+"- X server with incompatible libxkbfile implementation\n"
 "\n"
 "X server version data:\n"
 "%s\n"
 "%d\n"
 "%s\n"
 "If you report this situation as a bug, please include:\n"
-"- The result of <b>xprop -root | grep XKB</b>\n"
-"- The result of <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/kbd</b>"
+"- The result of %s\n"
+"- The result of %s"
 msgstr ""
 "Chyba při aktivaci nastavení XKB.\n"
 "Může vzniknout za různých okolností:\n"
 "- chyba v knihovně libxklavier\n"
 "- chyba v X serveru (nástroje xkbcomp, xmodmap)\n"
-"- X server nekompatibilní implementací libxkbfile\n"
+"- X server s nekompatibilní implementací libxkbfile\n"
 "\n"
 "Data o verzi X serveru:\n"
 "%s\n"
 "%d\n"
 "%s\n"
 "Pokud budete tuto situaci hlásit jako chybu, uveďte prosím:\n"
-"- Výsledek <b>xprop -root | grep XKB</b>\n"
-"- Výsledek <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/xkb</b>"
+"- Výsledek %s\n"
+"- Výsledek %s"
 
 #: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:113
 msgid ""
@@ -2945,7 +2945,7 @@ msgstr ""
 "Jsou známy problémy se složitými nastaveními XKB.\n"
 "Zkuste použít jednodušší nastavení nebo novější verzi software XFree."
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:216
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:218
 msgid ""
 "The X system keyboard settings differ from your current GNOME keyboard "
 "settings.  Which set would you like to use?"
@@ -2953,11 +2953,11 @@ msgstr ""
 "Systémové nastavení klávesnice v X se liší od vašeho momentálního nastavení "
 "klávesnice v GNOME. Které nastavení chcete používat?"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:219
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:221
 msgid "Use X settings"
 msgstr "Používat nastavení X"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:221
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:223
 msgid "Use GNOME settings"
 msgstr "Používat nastavení GNOME"
 
@@ -3498,7 +3498,7 @@ msgstr "Napsal Richard Hult &lt;richard@imendio.com&gt;"
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Pastvu pro oči přidal Anders Carlsson"
 
-#: typing-break/drwright.c:832
+#: typing-break/drwright.c:833
 msgid "Break reminder"
 msgstr "Připomenutí přestávky"
 
@@ -3510,13 +3510,9 @@ msgstr "Sledování psaní již běží."
 msgid ""
 "The typing monitor uses the notification area to display information. You "
 "don't seem to have a notification area on your panel. You can add it by "
-"right-clicking on your panel and choose 'Add to panel -> Utilities -> "
-"Notification area'."
-msgstr ""
-"Sledování psaní používá pro zobrazování informací oznamovací oblast. Na svém "
-"panelu zřejmě nemáte oznamovací oblast. Můžete ji přidat kliknutím na panel "
-"pravým tlačítkem a zvolením 'Přidat na panel -> Nástroj -> Oznamovací "
-"oblast'."
+"right-clicking on your panel and choosing 'Add to panel', selecting "
+"'Notification area' and clicking 'Add'."
+msgstr "Sledování psaní používá pro zobrazování informací oznamovací oblast. Na vašem panelu zřejmě nemáte oznamovací oblast. Můžete ji přidat kliknutím na panel pravým tlačítkem a zvolením 'Přidat na panel', zvolením 'Oznamovací oblast' a kliknutím na 'Přidat'."
 
 #: vfs-methods/fontilus/font-view.c:125
 msgid "The quick brown fox jumps over the lazy dog. 0123456789"
