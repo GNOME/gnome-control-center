@@ -377,19 +377,42 @@ mime_edit_dialog_new (GtkTreeModel *model, MimeTypeInfo *info)
 }
 
 GObject *
-mime_add_dialog_new (GtkTreeModel *model, GtkWindow *parent) 
+mime_add_dialog_new (GtkTreeModel *model, GtkWindow *parent,
+		     char const *file_name) 
 {
-	GObject *obj = g_object_new (mime_edit_dialog_get_type (),
+	GObject *dialog = g_object_new (mime_edit_dialog_get_type (),
 		"model", model,	/* must be before is-add */
 		NULL);
-	g_object_set (obj,
+	g_object_set (dialog,
 		      "is-add", TRUE,
 		      NULL);
 	if (parent != NULL)
 		gtk_window_set_transient_for (
-			GTK_WINDOW (MIME_EDIT_DIALOG (obj)->p->dialog_win),
+			GTK_WINDOW (MIME_EDIT_DIALOG (dialog)->p->dialog_win),
 			parent);
-	return obj;
+
+	if (file_name != NULL) {
+		/* quick and dirty, no tests for backslashed dots */
+		char const *last = g_utf8_strrchr (file_name, -1,
+			g_utf8_get_char ("."));
+
+		if (last != NULL && last[1] != '\0') {
+			MimeTypeInfo *info = MIME_EDIT_DIALOG (dialog)->p->info;
+			char *lower = g_utf8_strdown (last +1, -1);
+
+			info->mime_type = g_strdup_printf ("application/x-%s", lower);
+			g_free (lower);
+
+			mime_type_info_set_file_extensions (info,
+				g_list_prepend (NULL, g_strdup (last+1)));
+			mime_type_info_set_category_name (info,
+				"Misc", _("Misc"), model);
+
+			fill_dialog (MIME_EDIT_DIALOG (dialog));
+		}
+	}
+
+	return dialog;
 }
 
 static void

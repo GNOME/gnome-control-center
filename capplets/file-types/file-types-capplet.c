@@ -54,7 +54,8 @@ add_mime_cb (GtkButton *button, GladeXML *dialog)
 	model = gtk_tree_view_get_model (treeview);
 
 	add_dialog = mime_add_dialog_new (model,
-		GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (button))));
+		GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (button))),
+		NULL);
 }
 
 static void
@@ -265,21 +266,36 @@ dialog_done_cb (MimeEditDialog *dialog, gboolean done, MimeTypeInfo *info)
 int
 main (int argc, char **argv) 
 {
-	gchar        *mime_type;
+	char const   *mime_type = NULL;
+	char const   *file_name = NULL;
 	GtkTreeModel *model;
 	MimeTypeInfo *info = NULL;
 	GObject      *mime_dialog;
+	GnomeProgram *program;
+	poptContext   popt_ctxt = 0;
 
 	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 
-	if (argc >= 1)
-		mime_type = g_strdup (argv[1]);
-	else
-		mime_type = NULL;
+	program = gnome_program_init ("gnome-file-types-properties",
+		VERSION, LIBGNOMEUI_MODULE,
+		argc, argv,
+		NULL);
+	g_object_get (G_OBJECT (program),
+		GNOME_PARAM_POPT_CONTEXT, &popt_ctxt,
+		NULL);
 
-	gnome_program_init ("gnome-file-types-properties", VERSION, LIBGNOMEUI_MODULE, argc, argv, NULL);
+	if (popt_ctxt) {
+		const gchar **startup_files = poptGetArgs (popt_ctxt);
+		mime_type = startup_files [0];
+		if (mime_type != NULL) {
+		    puts (mime_type);
+			file_name = startup_files [1];
+			if (file_name)
+			    puts (file_name);
+		}
+	}
 
 	if (mime_type == NULL) {
 		GladeXML *dialog = create_dialog ();
@@ -289,8 +305,9 @@ main (int argc, char **argv)
 		if (strcmp (GNOME_VFS_MIME_TYPE_UNKNOWN, mime_type)) {
 			info = mime_type_info_new (mime_type, model);
 			mime_dialog = mime_edit_dialog_new (model, info);
-		} else
-			mime_dialog = mime_add_dialog_new (model, NULL);
+		} else {
+			mime_dialog = mime_add_dialog_new (model, NULL, file_name);
+		}
 		g_signal_connect (mime_dialog, "done", (GCallback) dialog_done_cb, info);
 	}
 
