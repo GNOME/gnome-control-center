@@ -254,7 +254,7 @@ main (int argc, char **argv)
 	}
 
 	gnome_window_icon_set_default_from_file
-		(GNOME_ICONDIR"/gnome-mouse.png");
+		(GNOMECC_ICONS_DIR"/gnome-mouse.png");
 
 #ifdef HAVE_XIMIAN_ARCHIVER
 	archive = ARCHIVE (archive_load (FALSE));
