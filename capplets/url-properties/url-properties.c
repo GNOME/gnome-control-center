@@ -22,16 +22,21 @@
 
 #include <string.h>
 #include <gtk/gtk.h>
-#include "capplet-widget.h"
 #include <gnome.h>
+#include <gconf/gconf-client.h>
 
 GtkWidget *capplet, *protocol, *combo, *clist;
+GSList *handlers_removed = NULL;
 
-void url_capplet_revert(void);
+void url_capplet_refill_clist (void);
 void url_capplet_commit(void);
-void url_capplet_cancel(void);
 
 void build_capplet(void);
+void state_changed (void);
+void response_cb (GtkDialog *dialog, GtkResponseType response, gpointer data);
+void set_handler(GtkEntry *entry);
+void remove_handler(GtkButton *button);
+void select_clist_row(GtkCList *clist, gint row, gint column);
 
 int
 main(int argc, char *argv[]) {
@@ -40,41 +45,35 @@ main(int argc, char *argv[]) {
   bindtextdomain(PACKAGE, GNOMELOCALEDIR);
   textdomain(PACKAGE);
 
-  init_ret = gnome_capplet_init("url-properties", VERSION, argc, argv,
-				NULL, 0, NULL);
-  if (init_ret == 1) {
-    /* nothing to init */
-    return 0;
-  } else if (init_ret == -1) {
-    g_error (_("Error initializing the `url-properties' capplet."));
-  }
+  gnome_program_init ("url-properties", VERSION,
+		      LIBGNOMEUI_MODULE, argc, argv, NULL);
 
   build_capplet();
-  url_capplet_revert(); /* this will refill the clist */
+  url_capplet_refill_clist (); /* this will refill the clist */
 
-  gtk_signal_connect(GTK_OBJECT(capplet), "revert",
-		     GTK_SIGNAL_FUNC(url_capplet_revert), NULL);
-  gtk_signal_connect(GTK_OBJECT(capplet), "ok",
-		     GTK_SIGNAL_FUNC(url_capplet_commit), NULL);
-  gtk_signal_connect(GTK_OBJECT(capplet), "cancel",
-		     GTK_SIGNAL_FUNC(url_capplet_cancel), NULL);
+  gtk_signal_connect(GTK_OBJECT(capplet), "response",
+		     GTK_SIGNAL_FUNC(response_cb), NULL);
 
-  capplet_gtk_main();
+  gtk_main();
   return 0;
 }
-
-void set_handler(GtkEntry *entry);
-void remove_handler(GtkButton *button);
-void select_clist_row(GtkCList *clist, gint row, gint column);
 
 void build_capplet(void) {
   GtkWidget *vbox, *hbox, *item, *button;
   gchar *titles[] = { N_("Protocol"), N_("Command") };
 
-  capplet = capplet_widget_new();
+  capplet = gtk_dialog_new_with_buttons (_("URL Handlers"), NULL,
+		  			 -1,
+					 GTK_STOCK_HELP, GTK_RESPONSE_HELP,
+					 GTK_STOCK_APPLY, GTK_RESPONSE_APPLY,
+					 GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
+					 NULL);
+  gtk_dialog_set_response_sensitive (GTK_DIALOG (capplet), GTK_RESPONSE_APPLY,
+		  		     FALSE);
+
   vbox = gtk_vbox_new(FALSE, 5);
   gtk_widget_set_usize (vbox, 400, 250);
-  gtk_container_add(GTK_CONTAINER(capplet), vbox);
+  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (capplet)->vbox), vbox, TRUE, TRUE, 0);
   gtk_widget_show(vbox);
 
   hbox = gtk_hbox_new(FALSE, 5);
@@ -163,79 +162,72 @@ void build_capplet(void) {
   gtk_widget_show(capplet);
 }
 
-void url_capplet_revert(void) {
-  void *iter;
-  gchar *key, *value;
-  gint len;
-  gboolean def = FALSE;
+void url_capplet_refill_clist(void) {
+  GSList *l;
+  GConfClient *client;
 
-  /* see if the default is set.  If not, put in some sensible defaults.
-   * Maybe this should pass a call through to gnome-url */
-  g_free(gnome_config_get_string_with_default(
-		"/Gnome/URL Handlers/default-show=?", &def));
-  if (def) {
-    gnome_config_set_string("/Gnome/URL Handlers/default-show",
-			    "gnome-moz-remote --newwin \"%s\"");
-    g_free(gnome_config_get_string_with_default(
-			"/Gnome/URL Handlers/info-show=?", &def));
-    if (def)
-      gnome_config_set_string("/Gnome/URL Handlers/info-show",
-			      "gnome-help-browser \"%s\"");
-    g_free(gnome_config_get_string_with_default(
-			"/Gnome/URL Handlers/man-show=?", &def));
-    if (def)
-      gnome_config_set_string("/Gnome/URL Handlers/man-show",
-			      "gnome-help-browser \"%s\"");
-    g_free(gnome_config_get_string_with_default(
-			"/Gnome/URL Handlers/ghelp-show=?", &def));
-    if (def)
-      gnome_config_set_string("/Gnome/URL Handlers/ghelp-show",
-			      "gnome-help-browser \"%s\"");
-  }
-				       
-  iter = gnome_config_init_iterator("/Gnome/URL Handlers");
   gtk_clist_freeze(GTK_CLIST(clist));
   gtk_clist_clear(GTK_CLIST(clist));
-  while ((iter = gnome_config_iterator_next(iter, &key, &value))) {
-    len = strlen(key);
+  
+  client = gconf_client_get_default ();
+  l = gconf_client_all_entries (client, "/desktop/gnome/url-handlers", NULL);
+  for (; l != NULL; l = l->next)
+  {
+    GConfEntry *e = l->data;
+    gchar *key = g_strdup (e->key);
+    gchar *value = g_strdup (gconf_value_get_string (gconf_entry_get_value (e)));
+    int len = strlen(key);
+
     if (len > 5 && !strcmp(&key[len-5], "-show")) {
       gchar *row[2];
       gint id;
       /* it is a *-show key */
       key[len-5] = '\0';
-      row[0] = key;
+      row[0] = g_basename (key);
       row[1] = value;
 
       id = gtk_clist_append(GTK_CLIST(clist), row);
       if (!g_strcasecmp(key, "default"))
-	gtk_clist_select_row(GTK_CLIST(clist), id, 0);
+         gtk_clist_select_row(GTK_CLIST(clist), id, 0);
     }
     g_free(key);
     g_free(value);
+    gconf_entry_free (e);
   }
   gtk_clist_thaw(GTK_CLIST(clist));
+
+  g_slist_free (l);
+  g_object_unref (G_OBJECT (client));
 }
 
 void url_capplet_commit(void) {
   gint num_rows, row;
   gchar *col1, *col2, *key;
-
-  /* should we be more specific here?*/
-  gnome_config_clean_section("/Gnome/URL Handlers");
+  gchar *prefix = "/desktop/gnome/url-handlers/";
+  GConfClient *client = gconf_client_get_default ();
+  GSList *l;
+  
+  for (l = handlers_removed; l != NULL; l = l->next)
+  {
+	  key = g_strconcat (prefix, l->data, "-show", NULL);
+	  gconf_client_unset (client, key, NULL);
+	  g_free (key);
+	  g_free (l->data);
+  }
+  
+  g_slist_free (handlers_removed);
+  handlers_removed = NULL;
+  
   num_rows = GTK_CLIST(clist)->rows;
   for (row = 0; row < num_rows; row++) {
     gtk_clist_get_text(GTK_CLIST(clist), row, 0, &col1);
     gtk_clist_get_text(GTK_CLIST(clist), row, 1, &col2);
-    key = g_strconcat("/Gnome/URL Handlers/", col1, "-show", NULL);
-    gnome_config_set_string(key, col2);
+    key = g_strconcat (prefix, col1, "-show", NULL);
+    gconf_client_set_string (client, key, col2, NULL);
     g_free(key);
   }
-  gnome_config_sync();
-  gtk_main_quit();
-}
 
-void url_capplet_cancel(void) {
-  gtk_main_quit();
+  g_object_unref (G_OBJECT (client));
 }
 
 void set_handler(GtkEntry *entry) {
@@ -248,7 +240,7 @@ void set_handler(GtkEntry *entry) {
     gtk_clist_get_text(GTK_CLIST(clist), row, 0, &col1);
     if (!g_strcasecmp(prot, col1)) {
       gtk_clist_set_text(GTK_CLIST(clist), row, 1, gtk_entry_get_text(entry));
-      capplet_widget_state_changed(CAPPLET_WIDGET(capplet), TRUE);
+      state_changed ();
       return;
     }
   }
@@ -256,7 +248,7 @@ void set_handler(GtkEntry *entry) {
   cols[0] = prot;
   cols[1] = gtk_entry_get_text(entry);
   gtk_clist_append(GTK_CLIST(clist), cols);
-  capplet_widget_state_changed(CAPPLET_WIDGET(capplet), TRUE);
+  state_changed ();
 }
 
 void remove_handler(GtkButton *button) {
@@ -268,9 +260,10 @@ void remove_handler(GtkButton *button) {
   for (row = 0; row < num_rows; row++) {
     gtk_clist_get_text(GTK_CLIST(clist), row, 0, &col1);
     if (!g_strcasecmp(prot, col1)) {
+      handlers_removed = g_slist_prepend (handlers_removed, g_strdup (col1));
       gtk_clist_unselect_row(GTK_CLIST(clist), row, 0);
       gtk_clist_remove(GTK_CLIST(clist), row);
-      capplet_widget_state_changed(CAPPLET_WIDGET(capplet), TRUE);
+      state_changed ();
       gtk_entry_set_text(GTK_ENTRY(protocol), "");
       gtk_entry_set_text(GTK_ENTRY(GTK_COMBO(combo)->entry), "");
       if (num_rows > 1)
@@ -290,4 +283,24 @@ void select_clist_row(GtkCList *clist, gint row, gint column) {
   gtk_entry_set_text(GTK_ENTRY(protocol), col1);
 
   gtk_entry_set_text(GTK_ENTRY(GTK_COMBO(combo)->entry), col2);
+}
+
+void state_changed (void)
+{
+  gtk_dialog_set_response_sensitive (GTK_DIALOG (capplet), GTK_RESPONSE_APPLY,
+		  		     TRUE);
+}
+
+void response_cb (GtkDialog *dialog, GtkResponseType response, gpointer data)
+{
+	switch (response)
+	{
+	case GTK_RESPONSE_NONE:
+	case GTK_RESPONSE_CLOSE:
+		gtk_main_quit ();
+		break;
+	case GTK_RESPONSE_APPLY:
+		url_capplet_commit ();
+		break;
+	}
 }
