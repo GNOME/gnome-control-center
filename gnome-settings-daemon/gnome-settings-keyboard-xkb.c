@@ -126,14 +126,14 @@ gnome_settings_keyboard_xkb_analyze_sysconfig (void)
 	GSwitchItXkbConfigLoadSysBackup (&gswicWas);
 	GSwitchItXkbConfigLoadInitial (&gswicNow);
 
-	// config was changed!!!
+	/* config was changed!!! */
 	if (g_slist_length (gswicWas.layouts) &&
 	    !GSwitchItXkbConfigEquals (&gswicNow, &gswicWas)) {
 		GtkWidget *msg = gtk_message_dialog_new_with_markup (NULL,
 								     0,
 								     GTK_MESSAGE_INFO,
 								     GTK_BUTTONS_CLOSE,
-//!! temporary one
+/* !! temporary one */
 								     _
 								     ("System-wide XKB configuration has changed. "
 								      "You may want to adjust your local configuration as well."));
