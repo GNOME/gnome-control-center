@@ -349,6 +349,7 @@ message_from_capplet (GIOChannel   *source,
 	    {
 	      write (pipe_from_factory_fd[1], pixels + (rowstride)*i, ICON_SIZE_WIDTH * gdk_pixbuf_get_n_channels (pixbuf));
 	    }
+	  g_object_unref (pixbuf);
 	  theme_thumbnail_data->status = READY_FOR_THEME;
 	  g_byte_array_set_size (theme_thumbnail_data->control_theme_name, 0);
 	  g_byte_array_set_size (theme_thumbnail_data->wm_theme_name, 0);
@@ -404,7 +405,7 @@ message_from_child (GIOChannel   *source,
 	    memcpy (pixels + rowstride * i, async_data.data->data + 4 * ICON_SIZE_WIDTH * i, ICON_SIZE_WIDTH * 4);
 
 	  scaled_pixbuf = gdk_pixbuf_scale_simple (pixbuf, ICON_SIZE_WIDTH/2, ICON_SIZE_HEIGHT/2, GDK_INTERP_BILINEAR);
-	  g_hash_table_insert (theme_hash, async_data.meta_theme_name, scaled_pixbuf);
+	  g_hash_table_insert (theme_hash, g_strdup(async_data.meta_theme_name), scaled_pixbuf);
 	  g_object_unref (pixbuf);
 
  	  (* async_data.func) (scaled_pixbuf, async_data.user_data);
@@ -498,7 +499,7 @@ generate_theme_thumbnail (GnomeThemeMetaInfo *meta_theme_info,
   retval = gdk_pixbuf_scale_simple (pixbuf, ICON_SIZE_WIDTH/2, ICON_SIZE_HEIGHT/2, GDK_INTERP_BILINEAR);
   g_object_unref (pixbuf);
   
-  g_hash_table_insert (theme_hash, meta_theme_info->name, retval);
+  g_hash_table_insert (theme_hash, g_strdup (meta_theme_info->name), retval);
   return retval;
 }
 
@@ -590,5 +591,5 @@ theme_thumbnail_factory_init (int argc, char *argv[])
   async_data.meta_theme_name = NULL;
   async_data.data = g_byte_array_new ();
 
-  theme_hash = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, g_object_unref);
+  theme_hash = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_object_unref);
 }

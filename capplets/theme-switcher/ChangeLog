@@ -1,3 +1,9 @@
+2003-04-29  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* theme-thumbnail.c: (message_from_capplet), (message_from_child),
+	(generate_theme_thumbnail), (theme_thumbnail_factory_init): Plug
+	leaks and guard against invalid reads reported by valgrind.
+
 Wed Feb  5 17:03:26 2003  Jonathan Blandford  <jrb@gnome.org>
 
 	* gnome-theme-manager.[ch] (get_default_string_from_key): get the

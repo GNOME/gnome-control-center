@@ -347,9 +347,11 @@ read_entries (CappletDir *dir)
 	result = gnome_vfs_directory_open_from_uri (&parent_dir, CAPPLET_DIR_ENTRY (dir)->uri,
 						    GNOME_VFS_FILE_INFO_DEFAULT);
 
-	if (result != GNOME_VFS_OK)
+	if (result != GNOME_VFS_OK) {
+		gnome_vfs_file_info_unref (child);
 	        return NULL;
-	
+	}
+		
 	while ( gnome_vfs_directory_read_next (parent_dir, child) == GNOME_VFS_OK ) {
       	        if (child->name[0] == '.')
 	                continue;
@@ -375,6 +377,7 @@ read_entries (CappletDir *dir)
 		g_free (fullpath);
         }
         
+	gnome_vfs_file_info_unref (child);
 	gnome_vfs_directory_close (parent_dir);
 
 	list = g_slist_sort (list, node_compare);
