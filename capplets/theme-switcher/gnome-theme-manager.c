@@ -1070,7 +1070,7 @@ static void
 gnome_meta_theme_installer_run_cb (GtkWidget *button,
 				   GtkWidget *parent_window)
 {
-  gnome_theme_installer_run (parent_window, NULL, FALSE);
+  gnome_theme_installer_run (parent_window, NULL);
 }
 
 
@@ -1388,7 +1388,7 @@ gnome_theme_manager_drag_data_received_cb (GtkWidget *widget, GdkDragContext *co
 		gnome_vfs_uri_list_unref (uris);
 	}
 
-	gnome_theme_installer_run (widget, filename, FALSE);
+	gnome_theme_installer_run (widget, filename);
 	g_free (filename);
 }
 

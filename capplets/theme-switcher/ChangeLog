@@ -1,3 +1,27 @@
+2005-02-01  David Sedeño <david@alderia.com>
+
+	New install procedure: See bug #102216.
+	* gnome-theme-details.c: Remove gnome_theme_installer_run_cb,
+	gnome_icon_theme_installer_run_cb because gnome_theme_installer_run
+	function now detects if it is a icon or theme.
+	(gnome_theme_details_init): Remove install buttons in theme details
+	window.
+	* gnome-theme-installer.c (file_theme_type): Detects the type of the
+	theme inspecting the content of the file.
+	(transfer_done_targz_idle_cb, transfer_done_tarbz2_idle_cb): Install
+	the theme in the correct temp dir.
+	(transfer_done_cb): Detects if the file to install it is in the
+	correct format and informs the user if it is not supported. Unpack the
+	file (informs the user if there are not the correct utility in the
+	system) and install the theme in the correct directory.
+	(gnome_theme_installer_run): Remove parameter. Now we detect the file
+	type.
+	* gnome-theme-manager.c (gnome_meta_theme_installer_run_cb,
+	gnome_theme_manager_drag_data_received_cb): Call
+	gnome_theme_installer_run without the third parameter. Now we detect
+	the file type.
+	* theme-properties.glade: Removes install buttons in details window.
+
 2005-01-06  Sebastien Bacher  <seb128@debian.org>
 
 	* gnome-theme-installer.c: (install_dialog_response): check the 

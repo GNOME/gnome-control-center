@@ -160,21 +160,6 @@ window_theme_selection_changed (GtkTreeSelection *selection,
 }
 
 static void
-gnome_theme_installer_run_cb (GtkWidget *button,
-			      GtkWidget *parent_window)
-{
-  gnome_theme_installer_run (parent_window, NULL, FALSE);
-}
-
-
-static void
-gnome_icon_theme_installer_run_cb (GtkWidget *button,
-			      GtkWidget *parent_window)
-{
-  gnome_theme_installer_run (parent_window, NULL, TRUE);
-}
-
-static void
 icon_theme_selection_changed (GtkTreeSelection *selection,
 			     gpointer          data)
 {
@@ -309,20 +294,14 @@ gnome_theme_details_init (void)
 		   dialog);
 
   /* gtk themes */
-  widget = WID ("control_install_button");
-  g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_theme_installer_run_cb), parent);
   widget = WID ("control_manage_button");
   g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_theme_manager_show_manage_themes), dialog);
 
   /* window manager themes */
-  widget = WID ("window_install_button");
-  g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_theme_installer_run_cb), parent);
   widget = WID ("window_manage_button");
   g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_theme_manager_window_show_manage_themes), dialog);
 
   /* icon themes */
-  widget = WID ("icon_install_button");
-  g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_icon_theme_installer_run_cb), parent);
   widget = WID ("icon_manage_button");
   g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_theme_manager_icon_show_manage_themes), dialog);
 
