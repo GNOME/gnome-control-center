@@ -10,9 +10,9 @@
 /*
  * WARNING: This is a hack.
  *
- * All it does is keep the "text/*" and "text/plain" mime type
+ * All it does is keep the "text / *" and "text/plain" mime type
  * handlers in sync with each other.  The reason we do this is because
- * there is no UI for editing the text/* handler, and this is probably
+ * there is no UI for editing the text / * handler, and this is probably
  * what the user actually wants to do.
  */
 

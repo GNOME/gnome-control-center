@@ -56,7 +56,8 @@ create_dialog (void)
 static GConfEnumStringPair bell_enums[] = {
 	{ 0, "off" },
 	{ 1, "on" },
-	{ 2, "custom" }
+	{ 2, "custom" },
+	{ -1, NULL }
 };
 
 static GConfValue *
