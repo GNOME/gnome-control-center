@@ -1,0 +1,29 @@
+INCLUDES = -I. -I$(srcdir) 				\
+	-I$(top_srcdir)/intl -I$(top_builddir)/intl	\
+	-I$(srcdir)/../../control-center		\
+	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"	\
+	-I$(includedir) $(GNOME_INCLUDEDIR)
+
+bin_PROGRAMS = theme-selector-capplet
+
+theme_selector_capplet_SOURCES = \
+        da.h		\
+	file.c		\
+	globals.c	\
+	lister.c        \
+	main.c          \
+	signals.c       \
+	demo.c          \
+	gui.c           \
+	install.c
+
+theme_selector_capplet_LDADD = ../../control-center/libcapplet.la \
+	$(GNOME_LIBDIR) $(ORB_LIBS) \
+	$(GNOMEUI_LIBS) $(INTLLIBS) \
+	-lImlib  $(GTKXMHTML_LIBS)
+
+EXTRA_DIST = \
+	theme-selector.desktop
+
+sysdir = $(datadir)/control-center/Appearances
+sys_DATA = theme-selector.desktop
