@@ -1,5 +1,14 @@
 2001-07-09  Bradford Hovinen  <hovinen@ximian.com>
 
+	* capplet-dir.c (capplet_control_launch): Create a control by
+	first retrieving the PropertyControl and then extracting the
+	control from it
+	(capplet_control_launch): Connect button signals
+	(capplet_cancel_cb): Implement. Just destroy the app widget
+	(capplet_ok_cb): Ditto.
+	(capplet_control_launch): Don't use a BonoboArg when setting the
+	property
+
 	* Makefile.am (INCLUDES): Update directory locations
 
 	* capplet-dir.c (capplet_control_launch): Terminate the list of

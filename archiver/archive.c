@@ -240,7 +240,7 @@ archive_load (gboolean is_global)
 		prefix = "/var/ximian-setup-tools";
 	else
 		prefix = g_concat_dir_and_file (g_get_home_dir (),
-						".gnome/control-center");
+						".gnome/capplet-archive");
 
 	object = gtk_object_new (archive_get_type (),
 				 "prefix", prefix,

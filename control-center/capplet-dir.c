@@ -384,11 +384,13 @@ get_root_capplet_dir (void)
 static void
 capplet_ok_cb (GtkWidget *widget, GtkWidget *app) 
 {
+	gtk_widget_destroy (app);
 }
 
 static void
 capplet_cancel_cb (GtkWidget *widget, GtkWidget *app) 
 {
+	gtk_widget_destroy (app);
 }
 
 /* capplet_control_launch
@@ -405,7 +407,9 @@ capplet_control_launch (const gchar *capplet_name)
 
 	GtkWidget *app, *control;
 	CORBA_Environment ev;
-	BonoboArg *value;
+
+	Bonobo_PropertyControl property_control;
+	Bonobo_Control control_ref;
 
 	g_return_val_if_fail (capplet_name != NULL, NULL);
 
@@ -416,31 +420,48 @@ capplet_control_launch (const gchar *capplet_name)
 	while ((tmp1 = strchr (tmp, '-'))) *tmp1 = '_';
 
 	oaf_iid = g_strconcat ("OAFIID:Bonobo_Control_Capplet_", tmp, NULL);
-	moniker = g_strconcat ("archiver:", tmp, NULL);
+
+	property_control = bonobo_get_object (oaf_iid, "IDL:Bonobo/PropertyControl:1.0", &ev);
+	g_free (oaf_iid);
+
+	if (BONOBO_EX (&ev) || property_control == CORBA_OBJECT_NIL) {
+		g_critical ("Could not resolve PropertyControl");
+		g_free (tmp);
+		return NULL;
+	}
+
+	control_ref = Bonobo_PropertyControl_getControl (property_control, 0, &ev);
+
+	if (BONOBO_EX (&ev) || property_control == CORBA_OBJECT_NIL) {
+		g_critical ("Could not extract control from PropertyControl");
+		bonobo_object_release_unref (property_control, &ev);
+		g_free (tmp);
+		return NULL;
+	}
 
 	/* FIXME: Use a human-readable capplet name here */
 	app = gnome_dialog_new (_("Capplet"), GNOME_STOCK_BUTTON_OK,
 				GNOME_STOCK_BUTTON_CANCEL, NULL);
-	control = bonobo_widget_new_control (oaf_iid, CORBA_OBJECT_NIL);
+	control = bonobo_widget_new_control_from_objref (control_ref, CORBA_OBJECT_NIL);
 
 	if (control == NULL) {
-		g_critical ("Could not create capplet control");
+		g_critical ("Could not create widget from control");
 		gtk_widget_destroy (app);
 		app = NULL;
 	} else {
 		gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (app)->vbox), control, TRUE, TRUE, 0);
 
-		value = bonobo_arg_new (BONOBO_ARG_STRING);
-		BONOBO_ARG_SET_STRING (value, moniker);
-		bonobo_widget_set_property (BONOBO_WIDGET (control), "moniker", value, NULL);
-		bonobo_arg_release (value);
+		moniker = g_strconcat ("archiver:", tmp, NULL);
+		bonobo_widget_set_property (BONOBO_WIDGET (control), "moniker", moniker, NULL);
+		g_free (moniker);
 
 		gtk_widget_show_all (app);
 	}
 
+	gnome_dialog_button_connect (GNOME_DIALOG (app), 0, GTK_SIGNAL_FUNC (capplet_ok_cb), app);
+	gnome_dialog_button_connect (GNOME_DIALOG (app), 1, GTK_SIGNAL_FUNC (capplet_cancel_cb), app);
+
 	CORBA_exception_free (&ev);
-	g_free (oaf_iid);
-	g_free (moniker);
 	g_free (tmp);
 
 	return app;

@@ -1,5 +1,13 @@
 2001-07-09  Bradford Hovinen  <hovinen@ximian.com>
 
+	* sound-properties-capplet.c (create_control_cb): Implement
+	(main): Use create_control_cb
+
+	* Bonobo_Control_Capplet_sound_properties.oaf: Use PropertyControl interface
+
+	* sound-properties-capplet.c (create_dialog_cb): Update signature
+	for use as a BonoboPropertyControlGetControlFn
+
 	* Makefile.am (defaults_DATA): Add sound-properties.xml
 	(EXTRA_DIST): Add defaults_DATA
 

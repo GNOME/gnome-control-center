@@ -196,7 +196,7 @@ close_cb (void)
  * has the name "prefs_widget".  */
 
 static BonoboObject *
-create_dialog_cb (BonoboGenericFactory *factory, gpointer data) 
+create_dialog_cb (BonoboPropertyControl *property_control, gint page_number, gpointer data) 
 {
 	BonoboPropertyBag    *pb;
 	GtkWidget            *pf;
@@ -248,6 +248,20 @@ create_dialog_cb (BonoboGenericFactory *factory, gpointer data)
 	}
 
 	return BONOBO_OBJECT (control);
+}
+
+/* create_control_cb
+ *
+ * Small function to create the PropertyControl and return it. It may be copied
+ * and pasted from capplet to capplet.
+ */
+
+static BonoboObject *
+create_control_cb (BonoboGenericFactory *factory, gpointer data) 
+{
+	return BONOBO_OBJECT (bonobo_property_control_new
+			      ((BonoboPropertyControlGetControlFn)
+			       create_dialog_cb, 1, NULL));
 }
 
 /* main -- This function should not vary from capplet to capplet
@@ -302,7 +316,8 @@ main (int argc, char **argv)
 		CORBA_exception_free (&ev);
 	} else {
 		factory = bonobo_generic_factory_new
-			(FACTORY_IID, (BonoboGenericFactoryFn) create_dialog_cb, NULL);
+			("OAFIID:Bonobo_Control_Capplet_sound_properties_Factory",
+			 (BonoboGenericFactoryFn) create_control_cb, NULL);
 		bonobo_running_context_auto_exit_unref (BONOBO_OBJECT (factory));
 		bonobo_main ();
 	}
