@@ -74,6 +74,7 @@ void select_clist_row(GtkCList *clist, gint row, gint column);
 void build_capplet(void) {
   GtkWidget *vbox, *hbox, *item, *button;
   gchar *titles[] = { N_("Protocol"), N_("Command") };
+  char *app;
 
   capplet = capplet_widget_new();
   vbox = gtk_vbox_new(FALSE, 5);
@@ -110,17 +111,26 @@ void build_capplet(void) {
   gtk_container_add(GTK_CONTAINER(GTK_COMBO(combo)->list), item);
   gtk_widget_show(item);
 
-  item = gtk_list_item_new_with_label(_("Help browser"));
-  gtk_combo_set_item_string(GTK_COMBO(combo), GTK_ITEM(item),
-			    "gnome-help-browser '#%s'");
-  gtk_container_add(GTK_CONTAINER(GTK_COMBO(combo)->list), item);
-  gtk_widget_show(item);
-  item = gtk_list_item_new_with_label(_("Help browser (new window)"));
-  gtk_combo_set_item_string(GTK_COMBO(combo), GTK_ITEM(item),
-			    "gnome-help-browser '%s'");
-  gtk_container_add(GTK_CONTAINER(GTK_COMBO(combo)->list), item);
-  gtk_widget_show(item);
+  app = gnome_is_program_in_path ("nautilus");
+  if (app) {
+	  g_free (app);
+	  app = "nautilus '%s'";
+  } else
+	  app = "gnome-help-browser '%s'";
 
+  item = gtk_list_item_new_with_label(_("Help browser"));
+  gtk_combo_set_item_string(GTK_COMBO(combo), GTK_ITEM(item), app);
+
+  gtk_container_add(GTK_CONTAINER(GTK_COMBO(combo)->list), item);
+  gtk_widget_show(item);
+#if 0
+  item = gtk_list_item_new_with_label(_("Help browser (new window)"));
+
+  gtk_combo_set_item_string(GTK_COMBO(combo), GTK_ITEM(item), app);
+
+  gtk_container_add(GTK_CONTAINER(GTK_COMBO(combo)->list), item);
+  gtk_widget_show(item);
+#endif
   gtk_box_pack_start(GTK_BOX(hbox), combo, TRUE, TRUE, 0);
   gtk_widget_show(combo);
 
@@ -171,30 +181,36 @@ void url_capplet_revert(void) {
   gchar *key, *value;
   gint len;
   gboolean def = FALSE;
+  char *app;
 
+  app = gnome_is_program_in_path ("nautilus");
+  if (app) {
+    g_free (app);
+    app = "nautilus \"%s\"";
+  } else
+    app = "gnome-help-browser \"%s\"";
+  
   /* see if the default is set.  If not, put in some sensible defaults.
    * Maybe this should pass a call through to gnome-url */
-  g_free(gnome_config_get_string_with_default(
-		"/Gnome/URL Handlers/default-show=?", &def));
-  if (def) {
+  g_free(gnome_config_get_string_with_default("/Gnome/URL Handlers/default-show=?", &def));	
+  
+  if (def)
     gnome_config_set_string("/Gnome/URL Handlers/default-show",
 			    "gnome-moz-remote --newwin \"%s\"");
-    g_free(gnome_config_get_string_with_default(
-			"/Gnome/URL Handlers/info-show=?", &def));
-    if (def)
-      gnome_config_set_string("/Gnome/URL Handlers/info-show",
-			      "gnome-help-browser \"%s\"");
-    g_free(gnome_config_get_string_with_default(
-			"/Gnome/URL Handlers/man-show=?", &def));
-    if (def)
-      gnome_config_set_string("/Gnome/URL Handlers/man-show",
-			      "gnome-help-browser \"%s\"");
-    g_free(gnome_config_get_string_with_default(
-			"/Gnome/URL Handlers/ghelp-show=?", &def));
-    if (def)
-      gnome_config_set_string("/Gnome/URL Handlers/ghelp-show",
-			      "gnome-help-browser \"%s\"");
-  }
+  g_free(gnome_config_get_string_with_default("/Gnome/URL Handlers/info-show=?", &def));
+  
+  if (def)
+    gnome_config_set_string("/Gnome/URL Handlers/info-show", app);
+  
+  g_free(gnome_config_get_string_with_default("/Gnome/URL Handlers/man-show=?", &def));
+  
+  if (def)
+    gnome_config_set_string("/Gnome/URL Handlers/man-show", app);
+  
+  g_free(gnome_config_get_string_with_default("/Gnome/URL Handlers/ghelp-show=?", &def));
+					      
+  if (def)
+    gnome_config_set_string("/Gnome/URL Handlers/ghelp-show", app);
 				       
   iter = gnome_config_init_iterator("/Gnome/URL Handlers");
   gtk_clist_freeze(GTK_CLIST(clist));
