@@ -35,7 +35,6 @@ typedef struct
 
 const KeyListEntry desktop_key_list[] =
 {
-  { "/apps/panel/global/logout_key", ALWAYS_VISIBLE, 0 },
   { "/apps/panel/global/run_key", ALWAYS_VISIBLE, 0 },
   { "/apps/panel/global/menu_key", ALWAYS_VISIBLE, 0 },
   { "/apps/panel/global/screenshot_key", ALWAYS_VISIBLE, 0 },
@@ -689,15 +688,13 @@ accel_edited_callback (GtkCellRendererText *cell,
 
       name = egg_virtual_accelerator_name (keyval, mask);
       
-      dialog =
-        gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (view))),
+      dialog = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (view))),
 				       GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL,
 				       GTK_MESSAGE_WARNING,
 				       GTK_BUTTONS_OK,
-                                _("The shortcut \"%s\" is already used for:\n \"%s\"\n"),
-                                name,
-                                tmp_key.description ?
-                                tmp_key.description : tmp_key.gconf_key);
+				       _("That accelerator key is already in use by: %s\n"),
+				       tmp_key.description ?
+				       tmp_key.description : tmp_key.gconf_key);
       g_free (name);
       gtk_dialog_run (GTK_DIALOG (dialog));
       gtk_widget_destroy (dialog);
