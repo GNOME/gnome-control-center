@@ -163,7 +163,7 @@ sidebar_dummy_foreach (GtkTreeModel *model, GtkTreePath *path,
 	
 	g_return_if_fail (dir != NULL);
 
-	g_value_init (&val, G_TYPE_POINTER);
+	//g_value_init (&val, G_TYPE_POINTER);
 	gtk_tree_model_get_value (model, iter, SIDEBAR_DATA, &val);
 	*dir = g_value_get_pointer (&val);
 }

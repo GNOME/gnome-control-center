@@ -107,10 +107,12 @@ capplet_new (CappletDir *dir, gchar *desktop_path)
 	}
 	if (!g_file_exists (entry->icon))
 	{
+		const gchar *icon;
 		g_free (entry->icon);
-		entry->icon = gnome_pixmap_file (
-				gnome_desktop_item_get_string (dentry,
-					GNOME_DESKTOP_ITEM_ICON));
+		icon = gnome_desktop_item_get_string (dentry, GNOME_DESKTOP_ITEM_ICON);
+		if (icon)
+			entry->icon = gnome_pixmap_file (icon);
+
 		if (!entry->icon)
 			entry->icon = gnome_pixmap_file ("gnome-unknown.png");
 	}

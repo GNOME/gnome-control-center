@@ -1,3 +1,11 @@
+2002-01-03  Richard Hestilow  <hestilow@ximian.com>
+
+	* capplet-dir.c (capplet_new): Check for ditem::icon != NULL
+	before calling gnome_pixmap_file.
+
+	* gnomecc.glade: Remove toolbar & menu stuff (this was causing
+	runtime glade warnings).
+
 2001-12-20  Bradford Hovinen  <hovinen@ximian.com>
 
 	* capplet-dir-view-list.c: Eliminate compiler warnings
