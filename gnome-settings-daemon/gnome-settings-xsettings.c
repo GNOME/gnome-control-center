@@ -124,6 +124,8 @@ static TranslationEntry translations [] = {
   { "/desktop/gnome/interface/gtk-im-preedit-style",	"Gtk/IMPreeditStyle",
       GCONF_VALUE_STRING,	translate_string_string },
   { "/desktop/gnome/interface/gtk-im-status-style",	"Gtk/IMStatusStyle",
+      GCONF_VALUE_STRING,	translate_string_string },
+  { "/desktop/gnome/interface/icon_theme",		"Net/IconThemeName",
       GCONF_VALUE_STRING,	translate_string_string }
 };
 
