@@ -218,6 +218,7 @@ setup_dialog (GtkWidget *widget, GConfChangeSet *changeset)
 
 	peditor = gconf_peditor_new_boolean
 		(changeset, "/background-properties/wallpaper-enabled", WID ("picture_enabled_check"));
+	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, prefs);
 
 #if 0
 	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor), WID ("picture_frame"),
