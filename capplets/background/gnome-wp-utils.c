@@ -135,14 +135,18 @@ GdkPixbuf * gnome_wp_pixbuf_tile (GdkPixbuf * src_pixbuf,
 
 GdkPixbuf * gnome_wp_pixbuf_center (GdkPixbuf * src_pixbuf,
 				    GdkPixbuf * dest_pixbuf) {
-  gdouble cx, cy;
+  gint ox, oy;
+  gint cx, cy;
   gint dwidth, dheight;
   gint swidth, sheight;
+  gint cwidth, cheight;
   guint alpha = 255;
 
   if (dest_pixbuf == NULL) {
     return gdk_pixbuf_copy (src_pixbuf);
   }
+
+  ox = cx = oy = cy = 0;
 
   swidth = gdk_pixbuf_get_width (src_pixbuf);
   sheight = gdk_pixbuf_get_height (src_pixbuf);
@@ -150,12 +154,34 @@ GdkPixbuf * gnome_wp_pixbuf_center (GdkPixbuf * src_pixbuf,
   dwidth = gdk_pixbuf_get_width (dest_pixbuf);
   dheight = gdk_pixbuf_get_height (dest_pixbuf);
 
-  cx = (dwidth - swidth) / 2;
-  cy = (dheight - sheight) / 2;
+  if (dwidth > swidth) {
+    ox = (dwidth - swidth) / 2;
+    cx = 0;
+    cwidth = swidth;
+  } else {
+    cx = (swidth - dwidth) / 2;
+    oy = 0;
+    cwidth = dwidth;
+  }
 
-  gdk_pixbuf_composite (src_pixbuf, dest_pixbuf, cx, cy,
-			swidth, sheight,
-			cx, cy, 1.0, 1.0, GDK_INTERP_BILINEAR, alpha);
+  if (dheight > sheight) {
+    oy = ((dheight - sheight) / 2) - 1;
+    cy = 0;
+    cheight = sheight;
+  } else {
+    cy = (sheight - dheight) / 2;
+    oy = 0;
+    cheight = dheight;
+  }
+
+  if (gdk_pixbuf_get_has_alpha (src_pixbuf))
+    gdk_pixbuf_composite (src_pixbuf, dest_pixbuf, 0, 0,
+			  dwidth, dheight,
+			  ox, oy, 1.0, 1.0, GDK_INTERP_BILINEAR, alpha);
+  else
+    gdk_pixbuf_copy_area (src_pixbuf, cx, cy, cwidth, cheight,
+			  dest_pixbuf, ox, oy);
+
   return gdk_pixbuf_copy (dest_pixbuf);
 }
 

@@ -53,34 +53,34 @@ GdkPixbuf * gnome_wp_item_get_thumbnail (GnomeWPItem * item,
 					 GnomeThumbnailFactory * thumbs) {
   GdkPixbuf * pixbuf, * bgpixbuf;
   GdkPixbuf * scaled = NULL;
-  gint w, h, ratio;
-  gint bw, bh;
+  gint rw, rh, sw, sh, bw, bh, pw, ph, th, tw;
+  gdouble ratio;
 
   /*
      Get the size of the screen and calculate our aspect ratio divisor
      We do this, so that images are thumbnailed as they would look on
      the screen in reality
   */
-  w = gdk_screen_get_width (gdk_screen_get_default ());
-  h = gdk_screen_get_height (gdk_screen_get_default ());
-  ratio = h / 48;
-  bw = w / ratio;
-  bh = h / ratio;
+  sw = gdk_screen_get_width (gdk_screen_get_default ());
+  sh = gdk_screen_get_height (gdk_screen_get_default ());
+  ratio = (gdouble) sw / (gdouble) 64;
+  bw = sw / ratio;
+  bh = sh / ratio;
 
   /*
      Create the pixbuf for the background colors, which will show up for
      oddly sized images, smaller images that are centered, or alpha images
   */
   if (!strcmp (item->shade_type, "solid")) {
-    bgpixbuf = gnome_wp_pixbuf_new_solid (item->pcolor, w / ratio, h / ratio);
+    bgpixbuf = gnome_wp_pixbuf_new_solid (item->pcolor, bw, bh);
   } else if (!strcmp (item->shade_type, "vertical-gradient")) {
     bgpixbuf = gnome_wp_pixbuf_new_gradient (GTK_ORIENTATION_VERTICAL,
 					     item->pcolor, item->scolor,
-					     w / ratio, h / ratio);
+					     bw, bh);
   } else {
     bgpixbuf = gnome_wp_pixbuf_new_gradient (GTK_ORIENTATION_HORIZONTAL,
 					     item->pcolor, item->scolor,
-					     w / ratio, h / ratio);
+					     bw, bh);
   }
 
   /*
@@ -103,48 +103,69 @@ GdkPixbuf * gnome_wp_item_get_thumbnail (GnomeWPItem * item,
 					    item->fileinfo->mtime);
   }
 
-  if (pixbuf != NULL) {
-    w = gdk_pixbuf_get_width (pixbuf);
-    h = gdk_pixbuf_get_height (pixbuf);
+  if (pixbuf != NULL && strcmp (item->filename, "(none)") != 0) {
+    const gchar * w_val, * h_val;
 
-    /*
-       Handle images large and small. We default to 1, since images smaller
-       than 64x48 don't need to be scaled down, and the tiled thumbnails
-       will look correct for really small pattern images
-    */
-    if (h >= 48)
-      ratio = h / 48;
-    else if (w >= 64)
-      ratio = w / 64;
-    else
-      ratio = 1;
+    w_val = gdk_pixbuf_get_option (pixbuf, "tEXt::Thumb::Image::Width");
+    h_val = gdk_pixbuf_get_option (pixbuf, "tEXt::Thumb::Image::Height");
+    if (item->width <= 0 || item->height <= 0) {
+      if (w_val && h_val) {
+	item->width = rw = atoi (w_val);
+	item->height = rh = atoi (h_val);
+      } else {
+	GdkPixbuf * tmpbuf = gdk_pixbuf_new_from_file (item->filename, NULL);
+	
+	item->width = rw = gdk_pixbuf_get_width (tmpbuf);
+	item->height = rh = gdk_pixbuf_get_height (tmpbuf);
+	
+	g_object_unref (tmpbuf);
+      }
+    } else {
+	rw = item->width;
+	rh = item->height;
+    }
 
-    scaled = gnome_thumbnail_scale_down_pixbuf (pixbuf, w / ratio, h / ratio);
+    pw = gdk_pixbuf_get_width (pixbuf);
+    ph = gdk_pixbuf_get_height (pixbuf);
+
+    if (rw >= sw && rh >= sh) {
+      ratio = (gdouble) rw / (gdouble) sw;
+      tw = ratio * bw;
+      th = ratio * bh;
+    } else {
+      if (pw > ph) {
+	ratio = (gdouble) pw / (gdouble) (bw - 16);
+      } else {
+	ratio = (gdouble) ph / (gdouble) (bh - 16);
+      }
+      tw = pw / ratio;
+      th = ph / ratio;
+    }
+    scaled = gnome_thumbnail_scale_down_pixbuf (pixbuf, tw, th);
 
     if (!strcmp (item->options, "wallpaper")) {
-      w = gdk_pixbuf_get_width (scaled);
-      h = gdk_pixbuf_get_height (scaled);
-
-      scaled = gnome_wp_pixbuf_tile (scaled, bgpixbuf);
+      pixbuf = gnome_wp_pixbuf_tile (scaled, bgpixbuf);
     } else if (!strcmp (item->options, "centered")) {
-      w = gdk_pixbuf_get_width (scaled);
-      h = gdk_pixbuf_get_height (scaled);
-
-      /*
-	 This is for alpha centered images like gnome-logo-transparent.jpg
-	 It's an ugly hack, that can potentially be removed when round() or
-	 something like it decides to work
-	 We scale it down again so that it looks proper, instead of the off-
-	 center look that seems to appear without this hack
-      */
-      if (gdk_pixbuf_get_has_alpha (pixbuf) && (w > bw || h > bh))
-	scaled = gnome_thumbnail_scale_down_pixbuf (scaled, w / 2, h / 2);
-
-      scaled = gnome_wp_pixbuf_center (scaled, bgpixbuf);
+      pixbuf = gnome_wp_pixbuf_center (scaled, bgpixbuf);
+    } else if (!strcmp (item->options, "stretched")) {
+      scaled = gnome_thumbnail_scale_down_pixbuf (pixbuf, bw, bh);
+      pixbuf = gnome_wp_pixbuf_center (scaled, bgpixbuf);
+    } else if (!strcmp (item->options, "scaled")) {
+      if (ph > bh && pw > bw) {
+	if ((gdouble) ph * (gdouble) bw > (gdouble) pw * (gdouble) bh) {
+	  tw = 0.5 + (gdouble) pw * (gdouble) bh / (gdouble) ph;
+	  th = bh;
+	} else {
+	  th = 0.5 + (gdouble) ph * (gdouble) bw / (gdouble) pw;
+	  tw = bw;
+	}
+	scaled = gnome_thumbnail_scale_down_pixbuf (pixbuf, tw, th);
+      }
+      pixbuf = gnome_wp_pixbuf_center (scaled, bgpixbuf);
     }
-  } else {
-    scaled = gdk_pixbuf_copy (bgpixbuf);
   }
+  scaled = gdk_pixbuf_copy (pixbuf);
+
   g_object_unref (pixbuf);
   g_object_unref (bgpixbuf);
 

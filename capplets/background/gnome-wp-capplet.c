@@ -525,6 +525,7 @@ static void wallpaper_properties_clicked (GtkWidget * dialog,
 static void gnome_wp_scale_type_changed (GtkMenuShell * shell,
 					 GnomeWPCapplet * capplet) {
   GnomeWPItem * item = NULL;
+  GdkPixbuf * pixbuf;
   GtkTreeIter iter;
   GtkTreeModel * model;
   GtkTreeSelection * selection;
@@ -558,6 +559,11 @@ static void gnome_wp_scale_type_changed (GtkMenuShell * shell,
   default:
     break;
   }
+  pixbuf = gnome_wp_item_get_thumbnail (item, capplet->thumbs);
+  gtk_list_store_set (GTK_LIST_STORE (capplet->model), &iter,
+		      0, pixbuf,
+		      -1);
+  g_object_unref (pixbuf);
   gconf_client_set_string (capplet->client, WP_OPTIONS_KEY,
 			   item->options, NULL);
 }
@@ -1142,6 +1148,9 @@ static void wallpaper_properties_init (void) {
   GdkPixbuf * pixbuf;
   GdkCursor * cursor;
   gchar * icofile;
+#if GTK_CHECK_VERSION (2, 3, 0)
+  GtkFileFilter * filter;
+#endif
 
   gtk_rc_parse_string ("style \"wp-tree-defaults\" {\n"
 		       "  GtkTreeView::horizontal-separator = 6\n"
@@ -1454,6 +1463,11 @@ static void wallpaper_properties_init (void) {
 						  NULL);
   gtk_file_chooser_set_select_multiple (GTK_FILE_CHOOSER (capplet->filesel),
 					TRUE);
+  filter = gtk_file_filter_new ();
+  gtk_file_filter_set_name (filter, _("Images"));
+  gtk_file_filter_add_mime_type (filter, "image/*");
+  gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (capplet->filesel), filter);
+  gtk_file_chooser_set_filter (GTK_FILE_CHOOSER (capplet->filesel), filter);
 #else
   capplet->filesel = gtk_file_selection_new (_("Add Wallpapers"));
   gtk_file_selection_set_select_multiple (GTK_FILE_SELECTION (capplet->filesel),
