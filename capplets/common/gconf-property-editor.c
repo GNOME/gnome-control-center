@@ -189,9 +189,7 @@ gconf_property_editor_set_prop (GObject *object, guint prop_id, const GValue *va
 
 	case PROP_OBJECT:
 		det_obj = g_value_get_object (value);
-		g_signal_connect_swapped (det_obj, "destroy",
-					  (GCallback) g_object_unref,
-					  object);
+		g_object_weak_ref (det_obj, (GWeakNotify) g_object_unref, object);
 		break;
 
 	default:
@@ -526,6 +524,62 @@ gconf_peditor_new_select_radio (GConfChangeSet *changeset, gchar *key, GSList *r
 	client = gconf_client_get_default ();
 	gconf_entry = gconf_client_get_entry (client, key, NULL, TRUE, NULL);
 	peditor_select_radio_value_changed (client, 0, gconf_entry, GCONF_PROPERTY_EDITOR (peditor));
+
+	return peditor;
+}
+
+static void
+peditor_int_range_value_changed (GConfClient *client, guint cnxn_id, GConfEntry *entry, GConfPropertyEditor *peditor) 
+{
+	GConfValue *value;
+	GtkAdjustment *adjustment;
+
+	gconf_change_set_remove (peditor->p->changeset, peditor->p->key);
+	value = gconf_entry_get_value (entry);
+
+	if (value != NULL) {
+		adjustment = g_object_get_data (G_OBJECT (peditor), "adjustment");
+		gtk_adjustment_set_value (adjustment, gconf_value_get_int (value));
+	}
+}
+
+static void
+peditor_int_range_widget_changed (GConfPropertyEditor *peditor, GtkAdjustment *adjustment)
+{
+	GConfValue *value;
+
+	gconf_change_set_set_int (peditor->p->changeset, peditor->p->key,
+				  gtk_adjustment_get_value (adjustment));
+
+	gconf_change_set_check_value (peditor->p->changeset, peditor->p->key, &value);
+	g_signal_emit (peditor, peditor_signals[VALUE_CHANGED], 0, peditor->p->key, value);
+}
+
+GObject *
+gconf_peditor_new_int_range (GConfChangeSet *changeset, gchar *key, GtkWidget *range)
+{
+	GObject *peditor;
+	GConfClient *client;
+	GConfEntry *gconf_entry;
+	GSList *item;
+	GtkAdjustment *adjustment;
+
+	peditor = g_object_new (gconf_property_editor_get_type (),
+				"key", key,
+				"callback", peditor_int_range_value_changed,
+				"changeset", changeset,
+				"object", range,
+				NULL);
+
+	adjustment = gtk_range_get_adjustment (GTK_RANGE (range));
+	g_object_set_data (peditor, "adjustment", adjustment);
+
+	g_signal_connect_swapped (G_OBJECT (adjustment), "changed",
+				  (GCallback) peditor_int_range_widget_changed, peditor);
+
+	client = gconf_client_get_default ();
+	gconf_entry = gconf_client_get_entry (client, key, NULL, TRUE, NULL);
+	peditor_int_range_value_changed (client, 0, gconf_entry, GCONF_PROPERTY_EDITOR (peditor));
 
 	return peditor;
 }

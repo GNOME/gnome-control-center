@@ -1,8 +1,13 @@
 2001-12-18  Bradford Hovinen  <hovinen@ximian.com>
 
 	* gconf-property-editor.c (peditor_string_widget_changed): Use
-	actual signature for the changed signal
-	Use gconf_client rather than gconf_engine
+	actual signature for the changed signal Use gconf_client rather
+	than gconf_engine
+	(gconf_property_editor_set_prop): Use weak_ref rather than destroy
+	signal
+	(peditor_int_range_value_changed)
+	(peditor_int_range_widget_changed, gconf_peditor_new_int_range):
+	Implement
 
 2001-12-17  Bradford Hovinen  <hovinen@ximian.com>
 

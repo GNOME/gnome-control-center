@@ -74,6 +74,9 @@ GObject *gconf_peditor_new_select_menu  (GConfChangeSet      *changeset,
 GObject *gconf_peditor_new_select_radio (GConfChangeSet      *changeset,
 					 gchar               *key,
 					 GSList              *radio_group);
+GObject *gconf_peditor_new_int_range    (GConfChangeSet      *changeset,
+					 gchar               *key,
+					 GtkWidget           *range);
 
 void gconf_peditor_widget_set_guard     (GConfPropertyEditor *peditor,
 					 GtkWidget           *widget);
