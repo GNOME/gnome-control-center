@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: control-center 2.5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-19 19:56+0100\n"
-"PO-Revision-Date: 2004-02-19 19:56+0100\n"
+"POT-Creation-Date: 2004-03-01 17:38+0100\n"
+"PO-Revision-Date: 2004-03-01 17:40+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -474,39 +474,40 @@ msgstr "_Stil:"
 msgid "There was an error displaying help: %s"
 msgstr "Det oppsto en feil under visning av hjelp: %s"
 
-#: capplets/background/gnome-wp-capplet.c:171
-msgid "Add Wallpapers"
-msgstr "Legg til bakgrunner"
-
-#: capplets/background/gnome-wp-capplet.c:1265
+#: capplets/background/gnome-wp-capplet.c:1269
 msgid "Centered"
 msgstr "Sentrert"
 
-#: capplets/background/gnome-wp-capplet.c:1287
+#: capplets/background/gnome-wp-capplet.c:1291
 msgid "Fill Screen"
 msgstr "Fyll skjermen"
 
-#: capplets/background/gnome-wp-capplet.c:1307
+#: capplets/background/gnome-wp-capplet.c:1311
 msgid "Scaled"
 msgstr "Skalert"
 
-#: capplets/background/gnome-wp-capplet.c:1327
+#: capplets/background/gnome-wp-capplet.c:1331
 msgid "Tiled"
 msgstr "Flislagt"
 
-#: capplets/background/gnome-wp-capplet.c:1359
+#: capplets/background/gnome-wp-capplet.c:1363
 msgid "Solid Color"
 msgstr "Helfylt farge"
 
-#: capplets/background/gnome-wp-capplet.c:1375
+#: capplets/background/gnome-wp-capplet.c:1379
 msgid "Horizontal Gradient"
 msgstr "Horisontal gradient"
 
-#: capplets/background/gnome-wp-capplet.c:1391
+#: capplets/background/gnome-wp-capplet.c:1395
 msgid "Vertical Gradient"
 msgstr "Vertikal gradient"
 
-#: capplets/background/gnome-wp-info.c:46
+#: capplets/background/gnome-wp-capplet.c:1432
+#: capplets/background/gnome-wp-capplet.c:1443
+msgid "Add Wallpapers"
+msgstr "Legg til bakgrunner"
+
+#: capplets/background/gnome-wp-info.c:49
 msgid "No Wallpaper"
 msgstr "Ingen bakgrunn"
 
@@ -2754,7 +2755,7 @@ msgstr ""
 "Feil under forsøk på å kjøre (%s)\n"
 "som er bundet til tast (%s)"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:61
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:65
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2779,7 +2780,7 @@ msgstr ""
 "- utskrift av <b>xprop -root | grep XKB</b>\n"
 "- utskrift av <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/xkb</b>"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:71
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:75
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2790,6 +2791,14 @@ msgstr ""
 "Det finnes kjente problemer med komplekse XKB-konfigurasjoner.\n"
 "Prøv å bruke enklere konfigurasjoner eller en nyere versjon av XFree-"
 "programvaren."
+
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:151
+#, c-format
+msgid ""
+"You have a keyboard remapping file (%s) in your home directory whose "
+"contents will now be ignored. You can use the keyboard preferences to "
+"restore them."
+msgstr "Du har en fil (%s) i din hjemmekatalog for tastaturkartutforming. Innholdet i denne filen vil nå ignoreres. Du kan bruke brukervalg for tastatur for å gjenopprette disse."
 
 #: gnome-settings-daemon/gnome-settings-screensaver.c:92
 #, c-format
