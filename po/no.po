@@ -5,24 +5,24 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.5.8\n"
-"POT-Creation-Date: 2002-03-25 09:35+0100\n"
-"PO-Revision-Date: 2002-03-25 09:43+0100\n"
+"POT-Creation-Date: 2002-03-26 09:16+0100\n"
+"PO-Revision-Date: 2002-03-26 09:16+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:229
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:259
 msgid "_Enable keyboard accesibility"
 msgstr "Aktiver tilgjengelighet for tastatur"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:302
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:326
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "Kan ikke importere innstillinger for AccessX fra fil «%s»"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:414
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:438
 msgid "Select CDE AccessX file"
 msgstr "Velg AccessX-fil for CDE"
 
@@ -52,6 +52,9 @@ msgid ""
 "BounceKeys instructs the system to ignore all subsequent presses of the SAME "
 "key if they happen within a user selectable period of time."
 msgstr ""
+"Sprett-taster kan være nyttig for brukere som skjelver når de slipper opp en "
+"tast. Sprett-taster ber systemet om å ignorere alle etterfølgende trykk på "
+"SAMME tast hvis de skjer innenfor en tidsramme som kan bestemmes av brukeren."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:5
 msgid "Enable Slo_w Keys"
@@ -59,7 +62,7 @@ msgstr "Aktiver tre_ge taster"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:6
 msgid "Enable _Bounce Keys"
-msgstr ""
+msgstr "Aktiver _Bounce Keys"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:7
 msgid "Enable _Mouse Keys"
@@ -71,7 +74,7 @@ msgstr "Aktiver _klebrige taster"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:9
 msgid "Enable _Toggle Keys"
-msgstr ""
+msgstr "Aktiver _BryterTaster"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:10
 msgid "Keyboard Accessibility Configuration"
@@ -87,6 +90,10 @@ msgid ""
 "device or in need of 'pixel by pixel' position control of the pointer.  When "
 "activated, MouseKeys turns the numeric keypad into a mouse control pad. "
 msgstr ""
+"MouseKeys kan være nyttig for brukere av StickyKeys eller alle som ikke kan "
+"bruke pekerenheten eller som trenger «piksel for piksel» posisjonskontroll "
+"over pekeren. Når denne er aktivert endres nummertastaturet til en "
+"muskontroll. "
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:13
 msgid ""
@@ -94,10 +101,13 @@ msgid ""
 "instructs the system not to accept keys as pressed, unless the key has been "
 "pressed and held for a user adjustable amount of time (i.e., the key delay)."
 msgstr ""
+"TregeTaster kan være nyttig for brukere som treffer uønskede taster når de "
+"skriver. TregeTaster ber systemet om å ikke akseptere tastetrykk før de "
+"holdes nede en bestemt tid. Dette intervallet kan bestemmes av brukeren."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:14
 msgid "Start mo_ving this long after keypress :"
-msgstr ""
+msgstr "Tid etter tastetrykk før be_vegelse starter: "
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:15
 msgid ""
@@ -108,10 +118,17 @@ msgid ""
 "'Ctrl' and 'Tab' key, a StickyKeys user can press the 'Ctrl' key, release "
 "it, and then press the 'Tab' key and release it, achieving the same result."
 msgstr ""
+"KlebrigeTaster kan være nyttig for brukere som skriver med bare én finger "
+"eller som kanskje bruker en styrepinne med munnen eller hodet. "
+"KlebrigeTaster lar brukere utføre flere samtidige tastetrykkoperasjoner ved "
+"å trykke tastene i etter hverandre. For eksempel, hvis en applikasjon krever "
+"at brukeren må trykke «Ctrl» og «Tab»-tastene, kan en bruker av "
+"KlebrigeTaster trykke «Ctrl»-tasten, slippe den, og så trykke «Tab»-tasten "
+"og slippe den, for å oppnå samme resultat."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:16
 msgid "Time to _accelerate to max speed :"
-msgstr ""
+msgstr "Tid før _aksellerasjon til maks hastighet: "
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:17
 msgid ""
@@ -119,6 +136,9 @@ msgid ""
 "the small LED keyboard indicators.  ToggleKeys provides one beep when an LED "
 "(e.g., the Caps Lock LED) is turned on and two beeps when it is turned off"
 msgstr ""
+"BryterTaster kan være nyttig for brukere med dårlig syn som har problemer "
+"med å se lysene på tastaturet. BryterTaster gir et pip når et lys (f.eks. "
+"Caps Lock) slås på og to pip når den skrus av"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:18
 msgid "_Beep on state change"
@@ -154,6 +174,8 @@ msgid ""
 "_Turn off Sticky Keys when\n"
 "two keys pressed simultaneously"
 msgstr ""
+"Slå av klebrige taster når\n"
+"to taster trykkes samtidig"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:27
 msgid "key is _accepted"
@@ -237,7 +259,7 @@ msgstr "I_ngen bilde"
 #: capplets/background/background-properties-capplet.c:515
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:622
-#: capplets/keyboard/gnome-keyboard-properties.c:331
+#: capplets/keyboard/gnome-keyboard-properties.c:345
 #: capplets/mouse/gnome-mouse-properties.c:691
 #: capplets/sound/sound-properties-capplet.c:140
 msgid "Retrieve and store legacy settings"
@@ -297,6 +319,9 @@ msgid ""
 "into the window to set the \n"
 "background picture."
 msgstr ""
+"Du kan dra bildefiler\n"
+"til vinduet for å sette\n"
+"bakgrunnsbildet."
 
 #: capplets/background/background-properties.glade.h:15
 msgid "radiobutton1"
@@ -432,10 +457,16 @@ msgstr "Vennligst velg et bilde."
 msgid ""
 "Unable to start the settings manager 'gnome2-settings-daemon'.\n"
 "Without the GNOME settings manager running, some preferences may not take "
-"effect. This couldindicate a problem with Bonobo, or a non-GNOME (e.g. KDE) "
-"settings manager may alreadybe active and conflicting with the GNOME "
+"effect. This could indicate a problem with Bonobo, or a non-GNOME (e.g. KDE) "
+"settings manager may already be active and conflicting with the GNOME "
 "settings manager."
 msgstr ""
+"Kan ikke starte programmet som håndterer innstillinger «gnome2-settings-"
+"daemon».\n"
+"Uten dette programmet vil noen brukervalg ikke tas i bruk. Dette kan "
+"indikere et problem med Bonobo, eller et annet program for håndtering av "
+"innstillinger (f.eks. KDE) kan være aktivt og i konflikt med GNOME's program "
+"for håndtering av innstillinger."
 
 #: capplets/default-applications/default-applications.desktop.in.h:1
 msgid "Choose the applications used by default"
@@ -566,7 +597,6 @@ msgid "_Window Manager"
 msgstr "_Vindushåndterer"
 
 #: capplets/desktop-links/Accessibility.directory.in.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.c:311
 msgid "Accessibility"
 msgstr "Tilgjengelighet"
 
@@ -1087,7 +1117,7 @@ msgstr "Sett til forvalg"
 #: capplets/keybindings/eggcellrendererkeys.c:152
 #: capplets/keybindings/eggcellrendererkeys.c:153
 msgid "Accelerator modifiers"
-msgstr ""
+msgstr "Endringstaster for aksellerator"
 
 #: capplets/keybindings/eggcellrendererkeys.c:161
 #: capplets/keybindings/eggcellrendererkeys.c:162
@@ -1130,24 +1160,24 @@ msgid "_Shortcut"
 msgstr "_Snarvei"
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:1
-#, fuzzy
 msgid "Desktop Shortcuts:"
-msgstr "Snarveier"
+msgstr "Skrivebordsnarveier:"
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:2
-#, fuzzy
 msgid "Keyboard Shortcuts"
-msgstr "Egenskaper for tastatur"
+msgstr "Tastatursnarveier"
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:3
 msgid "Keyboard _Navigation scheme for use in applications:"
-msgstr ""
+msgstr "Schema for _navigering med tastatur som skal brukes i applikasjoner:"
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:4
 msgid ""
 "To assign a shortcut to an action, click in the shortcut column and press "
 "the key combination you want to associate with it."
 msgstr ""
+"For å tildele en snarvei til en handling klikker du i snarveikolonnen og "
+"trykker en tastekombinasjon du vil assosiere den med."
 
 #: capplets/keybindings/keybinding.desktop.in.h:1
 msgid "Keybinding"
@@ -1157,8 +1187,12 @@ msgstr "Tastaturbinding"
 msgid "Keybinding Properties"
 msgstr "Egenskaper for tastaturbinding"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:327
-#: capplets/keyboard/gnome-keyboard-properties.c:329
+#: capplets/keyboard/gnome-keyboard-properties.c:325
+msgid "_Accessibility"
+msgstr "_Tilgjengelighet"
+
+#: capplets/keyboard/gnome-keyboard-properties.c:341
+#: capplets/keyboard/gnome-keyboard-properties.c:343
 #: capplets/sound/sound-properties-capplet.c:136
 #: capplets/sound/sound-properties-capplet.c:138
 msgid ""
@@ -1789,7 +1823,7 @@ msgstr "_Hjelp"
 msgid "Use shell even if nautilus is running."
 msgstr "Bruk skall selv om nautilus kjører."
 
-#: gnome-settings-daemon/factory.c:30
+#: gnome-settings-daemon/factory.c:25
 msgid "Could not initialize Bonobo"
 msgstr "Kunne ikke initiere Bonobo"
 
