@@ -61,22 +61,17 @@ get_screens_list (void)
   return list;
 }
 
-char *
-screen_exec_display_string (XEvent *xevent)
+extern char **environ;
+
+static char *
+screen_exec_display_string (GdkScreen *screen)
 {
   GString    *str;
   const char *old_display;
   char       *retval;
   char       *p;
 
-  GdkScreen  *screen = NULL;
-  
-  GdkWindow *window = gdk_xid_table_lookup (xevent->xkey.root);
-  
-  if (window)
-    screen = gdk_drawable_get_screen (GDK_DRAWABLE (window));
-       
-  g_assert (GDK_IS_SCREEN (screen));
+  g_return_val_if_fail (GDK_IS_SCREEN (screen), NULL);
 
   old_display = gdk_display_get_name (gdk_screen_get_display (screen));
 
@@ -95,6 +90,56 @@ screen_exec_display_string (XEvent *xevent)
 
   return retval;
 }
+
+/**
+ * get_exec_environment:
+ *
+ * Description: Modifies the current program environment to
+ * ensure that $DISPLAY is set such that a launched application
+ * inheriting this environment would appear on screen.
+ *
+ * Returns: a newly-allocated %NULL-terminated array of strings or
+ * %NULL on error. Use g_strfreev() to free it.
+ *
+ * mainly ripped from egg_screen_exec_display_string in
+ * gnome-panel/egg-screen-exec.c
+ **/
+char **
+get_exec_environment (XEvent *xevent)
+{
+  char **retval = NULL;
+  int    i;
+  int    display_index = -1;
+
+  GdkScreen  *screen = NULL;
+
+  GdkWindow *window = gdk_xid_table_lookup (xevent->xkey.root);
+
+  if (window)
+    screen = gdk_drawable_get_screen (GDK_DRAWABLE (window));
+
+  g_return_val_if_fail (GDK_IS_SCREEN (screen), NULL);
+
+  for (i = 0; environ [i]; i++)
+    if (!strncmp (environ [i], "DISPLAY", 7))
+      display_index = i;
+
+  if (display_index == -1)
+    display_index = i++;
+
+  retval = g_new (char *, i + 1);
+
+  for (i = 0; environ [i]; i++)
+    if (i == display_index)
+      retval [i] = screen_exec_display_string (screen);
+    else
+      retval [i] = g_strdup (environ [i]);
+
+  retval [i] = NULL;
+
+  return retval;
+}
+
 
 static gint 
 compare_bindings (gconstpointer a, gconstpointer b)
@@ -368,9 +413,8 @@ keybindings_filter (GdkXEvent *gdk_xevent,
 				   &error))
 	    return GDK_FILTER_CONTINUE;
 
-	  envp = g_new0 (gchar *, 2);
-	  envp [0] = screen_exec_display_string (xevent);
-	  envp [1] = NULL;
+	  envp = get_exec_environment (xevent);
+
 	  
 	  retval = g_spawn_async (NULL,
 				  argv,
@@ -405,11 +449,22 @@ keybindings_filter (GdkXEvent *gdk_xevent,
 void
 gnome_settings_keybindings_init (GConfClient *client)
 {
+  GdkDisplay *dpy = gdk_display_get_default ();
+  GdkScreen *screen;
+  int screen_num = gdk_display_get_n_screens (dpy);
+  int i;
+
   gnome_settings_daemon_register_callback (GCONF_BINDING_DIR, bindings_callback);
   
   gdk_window_add_filter (gdk_get_default_root_window (),
 			 keybindings_filter,
 			 NULL);
+  for (i = 0; i < screen_num; i++)
+    {
+      screen = gdk_display_get_screen (dpy, i);
+      gdk_window_add_filter (gdk_screen_get_root_window (screen),
+			     keybindings_filter, NULL);
+    }
 }
 
 void

@@ -353,12 +353,39 @@ void
 capplet_set_icon (GtkWidget *window, char const *icon_file_name)
 {
 	char *path;
-	GdkPixbuf *icon_pixbuf;
+	char *tmp;
+	char *p;
+	GdkPixbuf *icon_pixbuf = NULL;
+	GnomeIconTheme *icon_theme;
 
-	path = g_strconcat (GNOMECC_DATA_DIR "/icons/", icon_file_name, NULL);
-	icon_pixbuf = gdk_pixbuf_new_from_file (path, NULL);
-	g_free (path);
+	/* First look up from the icon theme */
+	icon_theme = gnome_icon_theme_new ();
+
+	tmp = g_strdup (icon_file_name);
+	p = strrchr (tmp, '.');
+	if (p)
+		p[0] = '\0';
+
+	path = gnome_icon_theme_lookup_icon (icon_theme, tmp, 48, NULL, NULL);
+	
+	if (path != NULL) {
+		icon_pixbuf = gdk_pixbuf_new_from_file (path, NULL);
+		g_free (path);
+	}
+
+	g_free (tmp);
+	g_object_unref (icon_theme);
+
 	if (icon_pixbuf == NULL) {
+		/* Then we fallback to the control center icon location */
+		path = g_strconcat (GNOMECC_DATA_DIR "/icons/", icon_file_name, NULL);
+
+		icon_pixbuf = gdk_pixbuf_new_from_file (path, NULL);
+		g_free (path);
+	}
+
+	if (icon_pixbuf == NULL) {
+		/* Then we fallback to the gnome program discovery stuff */
 		path = gnome_pixmap_file (icon_file_name);
 		if (path != NULL) {
 			icon_pixbuf = gdk_pixbuf_new_from_file (path, NULL);
