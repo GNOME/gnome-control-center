@@ -671,21 +671,28 @@ mime_edit_dialog_get_app (GladeXML *glade, char const *mime_type,
 	GnomeVFSMimeApplication *res, *app = g_object_get_data (item, "app");
 
 	if (app == NULL) {
-		char *cmd = gnome_file_entry_get_full_path (
-			GNOME_FILE_ENTRY (glade_xml_get_widget (glade, "program_entry")), FALSE);
+		GnomeFileEntry *program_entry =
+			GNOME_FILE_ENTRY (glade_xml_get_widget (glade, "program_entry"));
+		char *cmd = gnome_file_entry_get_full_path (program_entry, TRUE);
 		gboolean requires_terminal = gtk_toggle_button_get_active (
 			GTK_TOGGLE_BUTTON (glade_xml_get_widget (glade, "needs_terminal_toggle")));
 		char *base_cmd;
 
 		GList *ptr, *app_list = NULL;
 		
-		/* I have no idea what semantics people want, but I'll be anal
-		 * and avoid NULL
+		/* If the cmd is NULL its possible that the user just types a
+		 * command name in their path.  Because the file picker seems
+		 * to insist that it only return a valid path we ask it to
+		 * verify the app exists so that we can catch it here and just
+		 * use the raw non-absolute name here.
 		 */
-		if (cmd == NULL)
-			cmd = g_strdup ("");
+		if (cmd == NULL) {
+			char const *tmp = gtk_entry_get_text (
+				GTK_ENTRY (gnome_file_entry_gtk_entry (program_entry)));
+			cmd = g_strdup (tmp == NULL ? "" : tmp);
+		}
 		base_cmd = g_path_get_basename  (cmd);
-		if (base_cmd == NULL);
+		if (base_cmd == NULL)
 			base_cmd = g_strdup ("");
 
 		app_list = gnome_vfs_application_registry_get_applications (NULL);

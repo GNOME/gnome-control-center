@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 2.0.0\n"
-"POT-Creation-Date: 2002-07-28 10:17+0200\n"
+"POT-Creation-Date: 2002-08-06 09:32-0400\n"
 "PO-Revision-Date: 2002-07-28 10:35+0200\n"
 "Last-Translator: Christophe Merlet (RedFox) <christophe@merlet.net>\n"
 "Language-Team: Gnome French Team <gnomefr@traduc.org>\n"
@@ -25,13 +25,12 @@ msgstr ""
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "Il y a eu une erreur lors du lancement de la capplet clavier : %s"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:291
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:309
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
-msgstr ""
-"Incapable d'importer les paramètres AccessX à partir du fichier « %s »"
+msgstr "Incapable d'importer les paramètres AccessX à partir du fichier « %s »"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:403
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:421
 msgid "Select CDE AccessX file"
 msgstr "Sélectionnez le fichier CDE AccessX"
 
@@ -153,45 +152,49 @@ msgid "_Disable if unused for "
 msgstr "_Désactiver si non-utilisé pour"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
+msgid "_Enable keyboard accessibility"
+msgstr "_Activer l'accessibilité au clavier"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
 msgid "_Ignore keypresses within  :"
 msgstr "_Ignorer l'enfoncement des touches survenues entre : "
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
 msgid "_Import CDE AccessX file"
 msgstr "_Importer le fichier CDE AccessX"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
 msgid "_Only accept keypress after :"
 msgstr "N'accepter les touches enfoncés qu'après : "
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:28
 msgid ""
 "_Turn off Sticky Keys when\n"
 "two keys pressed simultaneously"
 msgstr ""
 "_Désactiver Sticky Keys lorsque deux touches sont enfoncées simultanément"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:30
 msgid "key is _accepted"
 msgstr "la touche est _acceptée"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:30
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:31
 msgid "key is _pressed"
 msgstr "la touche est _enfoncée"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:31
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:32
 msgid "key is _rejected"
 msgstr "la touche est _rejetée"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:32
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
 msgid "msecs"
 msgstr "millisecondes"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
 msgid "pixels/sec"
 msgstr "pixels/sec"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:35
 msgid "seconds"
 msgstr "secondes"
 
@@ -304,8 +307,8 @@ msgstr "Nom de fichier de l'image d'arrière-plan."
 #: capplets/background/background-properties.glade.h:13
 msgid "To set the background picture, drop an image or click to browse."
 msgstr ""
-"Pour définir l'image d'arrière-plan, faites glisser une image ou cliquez "
-"sur Parcourir."
+"Pour définir l'image d'arrière-plan, faites glisser une image ou cliquez sur "
+"Parcourir."
 
 #: capplets/background/background-properties.glade.h:14
 msgid "Vertical gradient"
@@ -337,12 +340,12 @@ msgid ""
 "settings manager may already be active and conflicting with the GNOME "
 "settings manager."
 msgstr ""
-"Incapable de démarrer le gestionnaire de paramètres "
-"« gnome-settings-daemon ».\n"
+"Incapable de démarrer le gestionnaire de paramètres « gnome-settings-"
+"daemon ».\n"
 "Sans le gestionnaire de paramètres de GNOME, certains paramètres peuvent ne "
-"pas être appliqués convenablement.  Ceci pourrait être dû à un problème "
-"avec Bonobo, ou bien à un autre gestionnaire de paramètres présentement "
-"actif et qui entre en conflit avec GNOME (par ex. KDE)."
+"pas être appliqués convenablement.  Ceci pourrait être dû à un problème avec "
+"Bonobo, ou bien à un autre gestionnaire de paramètres présentement actif et "
+"qui entre en conflit avec GNOME (par ex. KDE)."
 
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
@@ -438,8 +441,8 @@ msgstr "Fonction de rappel"
 #: capplets/common/gconf-property-editor.c:180
 msgid "Issue this callback when the value associated with key gets changed"
 msgstr ""
-"Émettre cette fonction de rappel quand la valeur associée à cette touche "
-"est modifiée"
+"Émettre cette fonction de rappel quand la valeur associée à cette touche est "
+"modifiée"
 
 #: capplets/common/gconf-property-editor.c:185
 msgid "Change set"
@@ -488,13 +491,11 @@ msgstr "données d'un objet éditeur de paramètres"
 
 #: capplets/common/gconf-property-editor.c:220
 msgid "Custom data required by the specific property editor"
-msgstr ""
-"Données particulières requises par l'éditeur de paramètres spécifique"
+msgstr "Données particulières requises par l'éditeur de paramètres spécifique"
 
 #: capplets/common/gconf-property-editor.c:226
 msgid "Property editor data freeing callback"
-msgstr ""
-"Données de l'éditeur de paramètres qui libèrent la fonction de rappel"
+msgstr "Données de l'éditeur de paramètres qui libèrent la fonction de rappel"
 
 #: capplets/common/gconf-property-editor.c:227
 msgid "Callback to be issued when property editor object data is to be freed"
@@ -898,25 +899,25 @@ msgid "Source Code"
 msgstr "Code source"
 
 #: capplets/file-types/category-names.h:25
-#: capplets/file-types/mime-type-info.c:668
+#: capplets/file-types/mime-type-info.c:671
 msgid "Audio"
 msgstr "Audio"
 
 #: capplets/file-types/category-names.h:26
-#: capplets/file-types/mime-type-info.c:664
+#: capplets/file-types/mime-type-info.c:667
 msgid "Images"
 msgstr "Images"
 
 #: capplets/file-types/category-names.h:27
-#: capplets/file-types/mime-type-info.c:666
+#: capplets/file-types/mime-type-info.c:669
 msgid "Video"
 msgstr "Vidéo"
 
-#: capplets/file-types/file-types-capplet.c:215
+#: capplets/file-types/file-types-capplet.c:214
 msgid "Description"
 msgstr "Description"
 
-#: capplets/file-types/file-types-capplet.c:237
+#: capplets/file-types/file-types-capplet.c:236
 msgid "Extensions"
 msgstr "Extensions"
 
@@ -929,8 +930,8 @@ msgstr "Types de fichiers et programmes"
 #: capplets/file-types/file-types-capplet.desktop.in.h:2
 msgid "Specify which programs are used to open or view each file type"
 msgstr ""
-"Spécifie quels programmes sont utilisés pour ouvrir ou visionner chaque "
-"type de fichier"
+"Spécifie quels programmes sont utilisés pour ouvrir ou visionner chaque type "
+"de fichier"
 
 #: capplets/file-types/file-types-properties.glade.h:2
 msgid "Actions"
@@ -1055,8 +1056,8 @@ msgstr "Structure comprenant l'information de la catégorie MIME"
 #: capplets/file-types/mime-category-edit-dialog.c:344
 #: capplets/file-types/mime-edit-dialog.c:490
 #: capplets/file-types/mime-edit-dialog.c:594
-#: capplets/file-types/service-edit-dialog.c:359
-#: capplets/file-types/service-edit-dialog.c:408
+#: capplets/file-types/service-edit-dialog.c:358
+#: capplets/file-types/service-edit-dialog.c:407
 msgid "Custom"
 msgstr "Personnalisé"
 
@@ -1089,7 +1090,7 @@ msgid "Add File Type"
 msgstr "Ajouter un type de fichier"
 
 #: capplets/file-types/mime-edit-dialog.c:435
-#: capplets/file-types/mime-type-info.c:670
+#: capplets/file-types/mime-type-info.c:673
 msgid "Misc"
 msgstr "Divers"
 
@@ -1098,7 +1099,7 @@ msgstr "Divers"
 msgid "None"
 msgstr "Aucun"
 
-#: capplets/file-types/mime-edit-dialog.c:847
+#: capplets/file-types/mime-edit-dialog.c:854
 msgid ""
 "Please enter a valid MIME type.  It should be of the form class/type and may "
 "not contain any spaces."
@@ -1106,15 +1107,15 @@ msgstr ""
 "Veuillez saisir un type mIME valide. Il doit être de la forme class/type et "
 "ne doit pas contenir d'espace."
 
-#: capplets/file-types/mime-edit-dialog.c:854
+#: capplets/file-types/mime-edit-dialog.c:861
 msgid "A MIME type with that name already exists, overwrite ?."
 msgstr "Un type MIME avec ce nom existe déjà, l'écraser ?."
 
-#: capplets/file-types/mime-edit-dialog.c:919
+#: capplets/file-types/mime-edit-dialog.c:926
 msgid "Category"
 msgstr "Catégorie"
 
-#: capplets/file-types/mime-edit-dialog.c:924
+#: capplets/file-types/mime-edit-dialog.c:931
 msgid "Choose a file category"
 msgstr "Choisisser une catégorie de fichier"
 
@@ -1151,11 +1152,11 @@ msgstr "VRAI si cela est un dialogue d'ajout de service"
 msgid "Add Service"
 msgstr "Ajouter un service"
 
-#: capplets/file-types/service-edit-dialog.c:498
+#: capplets/file-types/service-edit-dialog.c:497
 msgid "Please enter a protocol name."
 msgstr "Veullez entrer un nom de protocole."
 
-#: capplets/file-types/service-edit-dialog.c:510
+#: capplets/file-types/service-edit-dialog.c:509
 msgid ""
 "Invalid protocol name. Please enter a protocol name without any spaces or "
 "punctuation."
@@ -1163,7 +1164,7 @@ msgstr ""
 "Nom de protocole invalide.  Veuillez entrer un nom de protocole sans espace "
 "ni ponctuation."
 
-#: capplets/file-types/service-edit-dialog.c:524
+#: capplets/file-types/service-edit-dialog.c:523
 msgid "There is already a protocol by that name."
 msgstr "Il y a déjà un protocole du même nom."
 
@@ -1261,8 +1262,8 @@ msgstr "Gestion des fenêtres"
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr ""
-"Erreur lors de la définition du nouvel accélérateur dans la base de "
-"données de configuration : %s\n"
+"Erreur lors de la définition du nouvel accélérateur dans la base de données "
+"de configuration : %s\n"
 
 #: capplets/keybindings/gnome-keybinding-properties.c:711
 msgid ""
@@ -1470,8 +1471,8 @@ msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:1
 msgid ""
-"<b>Note:</b> You will need to logout and log back in for this setting to take "
-"effect."
+"<b>Note:</b> You will need to logout and log back in for this setting to "
+"take effect."
 msgstr ""
 "<b>Remarque : </b> Il faut que vous fermiez la session et que vous vous "
 "reconnectiez pour que ce réglage soit pris en compte."
@@ -1590,8 +1591,7 @@ msgstr "_Sensibilité :"
 #: capplets/mouse/gnome-mouse-properties.glade.h:27
 msgid "_Show position of cursor when the Control key is pressed"
 msgstr ""
-"Montrer la position du curseur lorsque la touche contrôle (Ctrl) est "
-"appuyée"
+"Montrer la position du curseur lorsque la touche contrôle (Ctrl) est appuyée"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:28
 msgid "_Threshold:"
@@ -2086,8 +2086,8 @@ msgstr "Type"
 
 #: libbackground/applier.c:240
 msgid ""
-"Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW for "
-"preview"
+"Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
+"for preview"
 msgstr ""
 "Type de bg_applier : BG_APPLIER_ROOT pour la fenêtre racine ou "
 "BG_APPLIER_PREVIEW pour l'aperçu"
@@ -2163,8 +2163,8 @@ msgid ""
 msgstr ""
 "wm-properties-capplet : Impossible d'initialiser le\n"
 "gestionnaire de fenêtres.\n"
-"\tUn autre gestionnaire de fenêtres est déjà en cours d'exécution et ne "
-"peux pas être terminé\n"
+"\tUn autre gestionnaire de fenêtres est déjà en cours d'exécution et ne peux "
+"pas être terminé\n"
 
 #: libwindow-settings/gnome-wm-manager.c:326
 #, c-format
@@ -2204,9 +2204,6 @@ msgstr ""
 #: libwindow-settings/gnome-wm-manager.c:464
 msgid "OK"
 msgstr "Valider"
-
-#~ msgid "_Enable keyboard accessibility"
-#~ msgstr "_Activer l'accessibilité au clavier"
 
 #~ msgid "<b>Test</b>"
 #~ msgstr "<b>Test</b>"

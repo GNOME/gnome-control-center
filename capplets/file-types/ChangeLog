@@ -1,3 +1,28 @@
+2002-08-06  Jody Goldberg <jody@gnome.org>
+
+	* Release 2.0.1
+
+2002-08-06  Jody Goldberg <jody@gnome.org>
+
+	http://bugzilla.gnome.org/show_bug.cgi?id=87056
+	* mime-edit-dialog.c (mime_edit_dialog_get_app) : remove bogus extra
+	  semicolon.
+
+2002-08-05  Jody Goldberg <jody@gnome.org>
+
+	* mime-edit-dialog.c (mime_edit_dialog_get_app) : work around
+	  gnome_file_entry's propensity for prepending the current dir if none
+	  is specified.  This allows a user to type a nme with no
+	  qualifications and have it look things up in the path.
+
+	* mime-type-info.c (mime_category_info_save) : lobotomize this just in
+	  case.
+
+2002-08-03  Jody Goldberg <jody@gnome.org>
+
+	http://bugzilla.gnome.org/show_bug.cgi?id=88775
+	* file-types-properties.glade : make the other sub dialogs modal too.
+
 2002-08-01  Federico Mena Quintero  <federico@ximian.com>
 
 	* file-types-properties.glade: Made the file entries modal as they

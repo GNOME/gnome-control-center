@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center CVS\n"
-"POT-Creation-Date: 2002-06-17 18:03-0400\n"
+"POT-Creation-Date: 2002-08-06 09:32-0400\n"
 "PO-Revision-Date: 2002-06-12 00:14+0200\n"
 "Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
@@ -20,67 +20,76 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:262
-msgid "_Enable keyboard accessibility"
-msgstr "_Toetsenbord-toegankelijkheid inschakelen"
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:225
+#: capplets/keyboard/gnome-keyboard-properties.c:143
+#, fuzzy, c-format
+msgid "There was an error launching the keyboard capplet : %s"
+msgstr "Er is een fout opgetreden bij de hulpweergave: %s"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:329
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:309
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "AccessX-instellingen vanuit bestand '%s' importeren is mislukt"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:441
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:421
 msgid "Select CDE AccessX file"
 msgstr "CDE AccessX-bestand selecteren"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "Toetsenbord"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:2
-msgid "Keyboard Accessibility Properties"
+#, fuzzy
+msgid "Set your keyboard accessibility preferences"
 msgstr "Toetsenbord-toegankelijkheidsinstellingen"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:1
-msgid "<b>Test</b>"
-msgstr "<b>Test</b>"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:2
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
 msgid "B_eep when modifier is pressed"
 msgstr "_Piepen wanneer optietoets wordt ingedrukt"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:3
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
 msgid "Beep when an LED is turned on and two beeps when one is turned off."
 msgstr ""
 "Piepen als een LED aangezet wordt en piep twee keer als er één afgezet wordt."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:4
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
+#, fuzzy
+msgid "Beep when key is re_jected"
+msgstr "toets is ge_weigerd"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
 msgid "Beep when:"
 msgstr "Piepen wanneer:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:5
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
 msgid "Enable Slo_w Keys"
 msgstr "_TrageToetsen inschakelen"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:6
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
 msgid "Enable _Bounce Keys"
 msgstr "_KaatsToetsen inschakelen"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:7
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
 msgid "Enable _Mouse Keys"
 msgstr "_MuisToetsen inschakelen"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:8
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
 msgid "Enable _Sticky Keys"
 msgstr "_PlakToetsen inschakelen"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:9
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
 msgid "Enable _Toggle Keys"
 msgstr "_SchakelToetsen inschakelen"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:10
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
+#, fuzzy
+msgid "General"
+msgstr "_Algemeen"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:11
 msgid ""
 "Ignore all subsequent presses of the SAME key if they happen within a user "
 "selectable period of time."
@@ -88,15 +97,15 @@ msgstr ""
 "Alle opeenvolgende aanslagen van DEZELFDE toets negeren indien dit binnen "
 "een door de gebruiker in te stellen tijdsinterval gebeurt."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:11
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:12
 msgid "Keyboard Accessibility Configuration (AccessX)"
 msgstr "Configuratie Toetsenbord-toegankelijkheid (AccessX)"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:12
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:13
 msgid "Ma_ximum pointer speed :"
 msgstr "Ma_ximum aanwijzersnelheid:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:13
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
 msgid ""
 "Only accept keys after they have been pressed and held for a user adjustable "
 "amount of time."
@@ -104,7 +113,7 @@ msgstr ""
 "Toetsen slechts accepteren nadat zij ingedrukt zijn en gehouden gedurende "
 "een door de gebruiker in te stellen tijdsduur."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:14
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
 msgid ""
 "Perform multiple simultaneous key press operations by pressing modifier keys "
 "in sequence."
@@ -112,49 +121,58 @@ msgstr ""
 "Voer meerdere gelijktijdige toetsaanslag-operaties uit wanneer plaktoetsen "
 "in volgorde aangeslagen worden."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:15
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:16
+#, fuzzy
+msgid "Repeat Key Preferences"
+msgstr "Toetsenbordeigenschappen"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:17
 msgid "Start mo_ving this long after keypress :"
 msgstr "Beginnen met _bewegen deze tijdsduur na toetsaanslag:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:16
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:18
+msgid "Testing Area"
+msgstr ""
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:19
 msgid "Time to _accelerate to max speed :"
 msgstr "Tijd om te _versnellen naar maximumsnelheid:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:17
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:20
+msgid "Toggle and Repeat Keys"
+msgstr ""
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:21
 msgid "Turn the numeric keypad into a mouse control pad."
 msgstr "Maak een muis-pad van het numerieke toetsenbord"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:18
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:22
 msgid "_Beep when enabling/disabling keyboard accessibility features"
 msgstr ""
 "_Piep als toetsenbord-toegangelijkheid-eigenschappen in- of uitgeschakeld "
 "worden"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:19
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:23
 msgid "_Disable if unused for "
 msgstr "_Uitschakelen indien ongebruikt voor "
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:20
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
+msgid "_Enable keyboard accessibility"
+msgstr "_Toetsenbord-toegankelijkheid inschakelen"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
 msgid "_Ignore keypresses within  :"
 msgstr "_Negeer toetsaanslagen binnen :"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:21
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
 msgid "_Import CDE AccessX file"
 msgstr "CDE AccessX-bestand _importeren"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:22
-msgid "_Keyboard"
-msgstr "_Toetsenbord"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:23
-msgid "_Misc"
-msgstr "_Overig"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:24
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
 msgid "_Only accept keypress after :"
 msgstr "Toetsaanslag _slechts accepteren na:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:25
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:28
 msgid ""
 "_Turn off Sticky Keys when\n"
 "two keys pressed simultaneously"
@@ -162,55 +180,56 @@ msgstr ""
 "PlakToetsen _uitschakelen indien\n"
 "twee toetsen gelijktijdig ingedrukt worden"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:27
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:30
 msgid "key is _accepted"
 msgstr "toets is gea_ccepteerd"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:28
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:31
 msgid "key is _pressed"
 msgstr "toets is _ingedrukt"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:29
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:32
 msgid "key is _rejected"
 msgstr "toets is ge_weigerd"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:30
-msgid "key is re_jected"
-msgstr "toets is ge_weigerd"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:31
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
 msgid "msecs"
 msgstr "msec"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:32
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
 msgid "pixels/sec"
 msgstr "pixels/sec"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:33
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:35
 msgid "seconds"
 msgstr "seconden"
 
 #. solid
 #: capplets/background/background-properties-capplet.c:228
-msgid "C_olor"
+#, fuzzy
+msgid "C_olor:"
 msgstr "_Kleur"
 
 #. horiz
 #: capplets/background/background-properties-capplet.c:232
-msgid "_Left Color"
+#, fuzzy
+msgid "_Left Color:"
 msgstr "_Linker kleur"
 
 #: capplets/background/background-properties-capplet.c:233
-msgid "_Right Color"
+#, fuzzy
+msgid "_Right Color:"
 msgstr "_Rechter kleur"
 
 #. vert
 #: capplets/background/background-properties-capplet.c:236
-msgid "_Top Color"
+#, fuzzy
+msgid "_Top Color:"
 msgstr "_Bovenkleur"
 
 #: capplets/background/background-properties-capplet.c:237
-msgid "_Bottom Color"
+#, fuzzy
+msgid "_Bottom Color:"
 msgstr "_Onderkleur"
 
 #: capplets/background/background-properties-capplet.c:398
@@ -234,20 +253,21 @@ msgid "_No Picture"
 msgstr "_Geen plaatje"
 
 #: capplets/background/background-properties-capplet.c:433
-msgid "_Picture"
-msgstr "_Plaatje"
+#, fuzzy
+msgid "Select _picture:"
+msgstr "_Kies een editor..."
 
-#: capplets/background/background-properties-capplet.c:558
+#: capplets/background/background-properties-capplet.c:561
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:712
-#: capplets/keyboard/gnome-keyboard-properties.c:359
-#: capplets/mouse/gnome-mouse-properties.c:727
+#: capplets/keyboard/gnome-keyboard-properties.c:277
+#: capplets/mouse/gnome-mouse-properties.c:752
 #: capplets/sound/sound-properties-capplet.c:149
 msgid "Retrieve and store legacy settings"
 msgstr "Ga terug naar de standaard instellingen"
 
 #
-#: capplets/background/background-properties-capplet.c:584
+#: capplets/background/background-properties-capplet.c:587
 #: capplets/background/background-properties.glade.h:2
 msgid "Background Preferences"
 msgstr "Achtergrond-voorkeuren"
@@ -262,8 +282,9 @@ msgid "Background Preview"
 msgstr "Achtergrond-voorbeeld"
 
 #: capplets/background/background-properties.glade.h:4
-msgid "Bor_der the picture with a:"
-msgstr "Afbeelding om_lijsten met een:"
+#, fuzzy
+msgid "Background _Style:"
+msgstr "Achtergrond"
 
 #: capplets/background/background-properties.glade.h:5
 msgid "Horizontal gradient"
@@ -324,7 +345,8 @@ msgid "Background"
 msgstr "Achtergrond"
 
 #: capplets/background/background.desktop.in.h:2
-msgid "Change the desktop background"
+#, fuzzy
+msgid "Customize your desktop background"
 msgstr "Wijzig de bureaubladachtergrond"
 
 #: capplets/common/activate-settings-daemon.c:18
@@ -345,7 +367,7 @@ msgstr ""
 msgid "Just apply settings and quit"
 msgstr "Instellingen toepassen en afsluiten"
 
-#: capplets/common/capplet-util.c:315
+#: capplets/common/capplet-util.c:340
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "Er is een fout opgetreden bij de hulpweergave: %s"
@@ -527,22 +549,24 @@ msgid "Please select an image."
 msgstr "Selecteer een afbeelding."
 
 #: capplets/default-applications/default-applications.desktop.in.h:1
-msgid "Choose the applications used by default"
-msgstr "Kies de applicaties die standaard worden gebruikt"
-
-#: capplets/default-applications/default-applications.desktop.in.h:2
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:19
 msgid "Preferred Applications"
 msgstr "Standaard Toepassingen"
+
+#: capplets/default-applications/default-applications.desktop.in.h:2
+#, fuzzy
+msgid "Select your default applications"
+msgstr "Het lettertype instellen voor toepassingen"
 
 #: capplets/default-applications/gnome-default-applications-properties.c:105
 msgid "Please specify a name and a command for this editor."
 msgstr "Geef een naam en een opdracht voor deze editor."
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:1
+#: capplets/file-types/file-types-properties.glade.h:1
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: capplets/network/gnome-network-preferences.glade.h:1
-#: capplets/theme-switcher/theme-properties.glade.h:1
+#: capplets/theme-switcher/theme-install.glade.h:1
 msgid "*"
 msgstr "*"
 
@@ -689,7 +713,6 @@ msgid "_Select an Editor:"
 msgstr "_Kies een editor..."
 
 #: capplets/desktop-links/Accessibility.directory.in.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "Accessibility"
 msgstr "Toegankelijkheid"
 
@@ -718,19 +741,20 @@ msgid "Appearance"
 msgstr "Uiterlijk"
 
 #: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:2
-msgid "Configure window appearance"
-msgstr "Uiterlijk van vensters configureren"
+msgid "Select themes and fonts for your windows"
+msgstr ""
 
 #: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:1
-msgid "Configure key shortcuts"
-msgstr "Sneltoetsen configureren"
+msgid "Customize shortcut keys for your windows"
+msgstr ""
 
 #: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:2
 msgid "Shortcuts"
 msgstr "Sneltoetsen"
 
 #: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:1
-msgid "Configure window focusing"
+#, fuzzy
+msgid "Configure how to give focus to windows"
 msgstr "Vensteraandacht configureren"
 
 #: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:2
@@ -738,15 +762,16 @@ msgid "Focus behavior"
 msgstr "Aandacht-gedrag"
 
 #: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:1
-msgid "Configure window properties"
-msgstr "Venster-eigenschappen configureren"
+msgid "Configure matched windows to have particular characteristics"
+msgstr ""
 
 #: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:2
 msgid "Matched Windows"
 msgstr "Passende vensters"
 
 #: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:1
-msgid "Configure window minimization and maximization"
+#, fuzzy
+msgid "Configure how to minimize, maximize, and restore windows"
 msgstr "Vensterminimalisatie en -maximalisatie configureren"
 
 #: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:2
@@ -754,23 +779,25 @@ msgid "Minimizing and Maximizing"
 msgstr "Minimalisatie en maximalisatie"
 
 #: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
-msgid "Configure window manager configuration properties"
-msgstr "Window manager configuratie-eigenschappen configureren"
-
-#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:2
 msgid "Meta"
 msgstr "Meta"
 
-#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:1
-msgid "Configure miscellaneous window features"
-msgstr "Overige venstereigenschappen configureren"
+#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:2
+msgid "Select your Sawfish user level"
+msgstr ""
 
-#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
+#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:1
 msgid "Miscellaneous"
 msgstr "Diversen"
 
+#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
+#, fuzzy
+msgid "Select miscellaneous window options"
+msgstr "Overige venstereigenschappen configureren"
+
 #: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:1
-msgid "Configure window move/resize"
+#, fuzzy
+msgid "Configure how windows move and resize"
 msgstr "Vensterverplaatsing/-formaatverandering configureren"
 
 #: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:2
@@ -778,25 +805,27 @@ msgid "Moving and Resizing"
 msgstr "Verplaatsing en formaatverandering"
 
 #: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:1
-msgid "Configure window placement"
-msgstr "Plaatsing van vensters configureren"
+msgid "Configure positioning of windows on the desktop"
+msgstr ""
 
 #: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:2
 msgid "Placement"
 msgstr "Plaatsing"
 
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:1
-msgid "Enable window manager sound events"
+#, fuzzy
+msgid "Associate sounds with window manager events"
 msgstr "Window manager geluid-gebeurtenissen inschakelen"
 
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 #: capplets/sound/sound.desktop.in.h:2
 msgid "Sound"
 msgstr "Geluid"
 
 #: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:1
-msgid "Configure workspaces"
+#, fuzzy
+msgid "Configure your workspaces and viewports"
 msgstr "Werkruimtes configureren"
 
 #: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:2
@@ -889,100 +918,97 @@ msgid "Source Code"
 msgstr "Broncode"
 
 #: capplets/file-types/category-names.h:25
-#: capplets/file-types/mime-type-info.c:727
+#: capplets/file-types/mime-type-info.c:671
 msgid "Audio"
 msgstr "Audio"
 
 #: capplets/file-types/category-names.h:26
-#: capplets/file-types/mime-type-info.c:723
+#: capplets/file-types/mime-type-info.c:667
 msgid "Images"
 msgstr "Afbeeldingen"
 
 #: capplets/file-types/category-names.h:27
-#: capplets/file-types/mime-type-info.c:725
+#: capplets/file-types/mime-type-info.c:669
 msgid "Video"
 msgstr "Video"
 
-#: capplets/file-types/file-types-capplet.c:223
+#: capplets/file-types/file-types-capplet.c:214
 msgid "Description"
 msgstr "Beschrijving"
 
-#: capplets/file-types/file-types-capplet.c:230
+#: capplets/file-types/file-types-capplet.c:236
 msgid "Extensions"
 msgstr "Achtervoegsels"
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:1
-#: capplets/file-types/file-types.desktop.in.h:1
+#: capplets/file-types/file-types-properties.glade.h:8
+#: capplets/file-types/file-types.desktop.in.h:2
 msgid "File Types and Programs"
 msgstr "Bestandstypen en programma's"
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:2
-#: capplets/file-types/file-types.desktop.in.h:2
 msgid "Specify which programs are used to open or view each file type"
 msgstr ""
 "Instellen welke toepassingen gebruikt worden om bestandstypen te openen of "
 "bekijken"
 
-#: capplets/file-types/file-types-properties.glade.h:1
+#: capplets/file-types/file-types-properties.glade.h:2
 msgid "Actions"
 msgstr "Acties"
 
-#: capplets/file-types/file-types-properties.glade.h:2
+#: capplets/file-types/file-types-properties.glade.h:3
 msgid "Add _file type..."
 msgstr "_Bestandstype toevoegen..."
 
-#: capplets/file-types/file-types-properties.glade.h:3
+#: capplets/file-types/file-types-properties.glade.h:4
 msgid "Add _service..."
 msgstr "_Service toevoegen..."
 
-#: capplets/file-types/file-types-properties.glade.h:4
+#: capplets/file-types/file-types-properties.glade.h:5
+#, fuzzy
+msgid "Add:"
+msgstr "Toevoegen"
+
+#: capplets/file-types/file-types-properties.glade.h:6
 msgid "Default action"
 msgstr "Standaardactie"
 
-#: capplets/file-types/file-types-properties.glade.h:5
-#: capplets/file-types/mime-edit-dialog.c:192
+#: capplets/file-types/file-types-properties.glade.h:7
+#: capplets/file-types/mime-edit-dialog.c:209
 msgid "Edit file type"
 msgstr "Bestandstype bewerken"
 
-#: capplets/file-types/file-types-properties.glade.h:6
-msgid "File types and Internet Services"
-msgstr "Bestandstypen en Internetdiensten"
-
-#: capplets/file-types/file-types-properties.glade.h:7
-msgid "Filename extensions"
+#: capplets/file-types/file-types-properties.glade.h:9
+#, fuzzy
+msgid "Filename Extensions"
 msgstr "Bestandsnaam-achtervoegsels"
 
-#: capplets/file-types/file-types-properties.glade.h:8
+#: capplets/file-types/file-types-properties.glade.h:10
 msgid "Look at content"
 msgstr "Inhoud bekijken"
 
-#: capplets/file-types/file-types-properties.glade.h:9
-msgid "Needs _terminal"
-msgstr "Vereist _terminal"
-
-#: capplets/file-types/file-types-properties.glade.h:10
-msgid "Program to run"
+#: capplets/file-types/file-types-properties.glade.h:11
+#, fuzzy
+msgid "Program to Run"
 msgstr "Uit te voeren programma"
 
-#: capplets/file-types/file-types-properties.glade.h:11
+#: capplets/file-types/file-types-properties.glade.h:12
 msgid "Run a program"
 msgstr "Draai een programma"
 
-#: capplets/file-types/file-types-properties.glade.h:12
-msgid "Use category _defaults"
-msgstr "_Standaardinstellingen per categorie gebruiken"
-
 #: capplets/file-types/file-types-properties.glade.h:13
+#, fuzzy
+msgid "Run in _Terminal"
+msgstr "Activeren in Terminal"
+
+#: capplets/file-types/file-types-properties.glade.h:14
 msgid "Use parent category _defaults"
 msgstr "Standaardinstellingen _oudercategorie gebruiken"
 
-#: capplets/file-types/file-types-properties.glade.h:14
-msgid "Viewing component"
-msgstr "Bekijk-onderdeel"
-
 #: capplets/file-types/file-types-properties.glade.h:15
-msgid "_Add"
-msgstr "_Toevoegen"
+#, fuzzy
+msgid "Viewer Component"
+msgstr "Bekijk-onderdeel"
 
 #: capplets/file-types/file-types-properties.glade.h:16
 msgid "_Category"
@@ -993,124 +1019,130 @@ msgid "_Choose..."
 msgstr "_Bladeren..."
 
 #: capplets/file-types/file-types-properties.glade.h:18
+msgid "_Delete"
+msgstr "_Verwijderen"
+
+#: capplets/file-types/file-types-properties.glade.h:19
 msgid "_Description"
 msgstr "_Beschrijving"
 
-#: capplets/file-types/file-types-properties.glade.h:19
+#: capplets/file-types/file-types-properties.glade.h:20
 msgid "_Edit..."
 msgstr "_Bewerken..."
 
-#: capplets/file-types/file-types-properties.glade.h:20
+#: capplets/file-types/file-types-properties.glade.h:21
 msgid "_MIME Type"
 msgstr "_MIME-type"
 
-#: capplets/file-types/file-types-properties.glade.h:21
+#: capplets/file-types/file-types-properties.glade.h:22
 msgid "_Name"
 msgstr "_Naam"
 
-#: capplets/file-types/file-types-properties.glade.h:22
+#: capplets/file-types/file-types-properties.glade.h:23
 msgid "_Program"
 msgstr "_Programma"
 
-#: capplets/file-types/file-types-properties.glade.h:23
-msgid "_Program to run"
+#: capplets/file-types/file-types-properties.glade.h:24
+#, fuzzy
+msgid "_Program to Run"
 msgstr "Uit te voeren _programma"
 
-#: capplets/file-types/file-types-properties.glade.h:24
-msgid "_Protocol name"
-msgstr "_Protocolnaam"
-
 #: capplets/file-types/file-types-properties.glade.h:25
-msgid "_Remove"
-msgstr "_Verwijderen"
+#, fuzzy
+msgid "_Protocol"
+msgstr "Protocol"
 
-#: capplets/file-types/mime-category-edit-dialog.c:137
+#: capplets/file-types/file-types.desktop.in.h:1
+msgid "Associate applications with file types"
+msgstr ""
+
+#: capplets/file-types/mime-category-edit-dialog.c:138
 msgid "Edit file category"
 msgstr "Bestandscategorie bewerken"
 
-#: capplets/file-types/mime-category-edit-dialog.c:171
-#: capplets/file-types/mime-edit-dialog.c:230
+#: capplets/file-types/mime-category-edit-dialog.c:172
+#: capplets/file-types/mime-edit-dialog.c:256
 #: capplets/file-types/service-edit-dialog.c:170
 #: capplets/file-types/service-edit-dialog.c:171
 msgid "Model"
 msgstr "Model"
 
-#: capplets/file-types/mime-category-edit-dialog.c:172
+#: capplets/file-types/mime-category-edit-dialog.c:173
 msgid "GtkTreeModel that contains the category data"
 msgstr "GtkTreeModel dat de categoriegegevens bevat"
 
-#: capplets/file-types/mime-category-edit-dialog.c:177
+#: capplets/file-types/mime-category-edit-dialog.c:178
 msgid "MIME category info"
 msgstr "MIME categorie informatie"
 
-#: capplets/file-types/mime-category-edit-dialog.c:178
+#: capplets/file-types/mime-category-edit-dialog.c:179
 msgid "Structure containing information on the MIME category"
 msgstr "Structuur die informatie over de MIME categorie bevat"
 
-#: capplets/file-types/mime-category-edit-dialog.c:343
-#: capplets/file-types/mime-edit-dialog.c:442
-#: capplets/file-types/mime-edit-dialog.c:546
+#: capplets/file-types/mime-category-edit-dialog.c:344
+#: capplets/file-types/mime-edit-dialog.c:490
+#: capplets/file-types/mime-edit-dialog.c:594
 #: capplets/file-types/service-edit-dialog.c:358
 #: capplets/file-types/service-edit-dialog.c:407
 msgid "Custom"
 msgstr "Aangepast"
 
-#: capplets/file-types/mime-edit-dialog.c:189
+#: capplets/file-types/mime-edit-dialog.c:206
 msgid "Extension"
 msgstr "Achtervoegsel"
 
-#: capplets/file-types/mime-edit-dialog.c:231
+#: capplets/file-types/mime-edit-dialog.c:257
 msgid "Underlying model to notify when Ok is clicked"
 msgstr "Onderliggend model om aan te geven wanneer op OK wordt geklikt"
 
-#: capplets/file-types/mime-edit-dialog.c:238
+#: capplets/file-types/mime-edit-dialog.c:264
 msgid "MIME type information"
 msgstr "MIME-type informatie"
 
-#: capplets/file-types/mime-edit-dialog.c:239
+#: capplets/file-types/mime-edit-dialog.c:265
 msgid "Structure with data on the MIME type"
 msgstr "Structuur met gegevens over het MIME-type"
 
-#: capplets/file-types/mime-edit-dialog.c:245
+#: capplets/file-types/mime-edit-dialog.c:271
 msgid "Is add dialog"
 msgstr "Is 'toevoegen'-dialoog"
 
-#: capplets/file-types/mime-edit-dialog.c:246
+#: capplets/file-types/mime-edit-dialog.c:272
 msgid "True if this dialog is for adding a MIME type"
 msgstr "WAAR als deze dialoog voor het toevoegen van een MIME-type is"
 
-#: capplets/file-types/mime-edit-dialog.c:295
-msgid "Add file type"
-msgstr "Bestandstype toevoegen"
+#: capplets/file-types/mime-edit-dialog.c:321
+#, fuzzy
+msgid "Add File Type"
+msgstr "MIME-type toevoegen"
 
-#: capplets/file-types/mime-edit-dialog.c:437
-#: capplets/file-types/mime-edit-dialog.c:496
+#: capplets/file-types/mime-edit-dialog.c:435
+#: capplets/file-types/mime-type-info.c:673
+msgid "Misc"
+msgstr "Overig"
+
+#: capplets/file-types/mime-edit-dialog.c:485
+#: capplets/file-types/mime-edit-dialog.c:544
 msgid "None"
 msgstr "Geen"
 
-#: capplets/file-types/mime-edit-dialog.c:726
+#: capplets/file-types/mime-edit-dialog.c:854
 msgid ""
-"Invalid MIME type. Please enter a valid MIME type, or leave the field blank "
-"to have one generated for you."
+"Please enter a valid MIME type.  It should be of the form class/type and may "
+"not contain any spaces."
 msgstr ""
-"Ongeldig MIME-type. Geef een geldig MIME-type, of laat het veld leeg om een "
-"geldig type te laten genereren."
 
-#: capplets/file-types/mime-edit-dialog.c:730
-msgid "There already exists a MIME type of that name."
-msgstr "Er bestaat al een MIME-type met die naam."
+#: capplets/file-types/mime-edit-dialog.c:861
+msgid "A MIME type with that name already exists, overwrite ?."
+msgstr ""
 
-#: capplets/file-types/mime-edit-dialog.c:800
+#: capplets/file-types/mime-edit-dialog.c:926
 msgid "Category"
 msgstr "Categorie"
 
-#: capplets/file-types/mime-edit-dialog.c:805
+#: capplets/file-types/mime-edit-dialog.c:931
 msgid "Choose a file category"
 msgstr "Kies een bestandscategorie"
-
-#: capplets/file-types/mime-type-info.c:729
-msgid "Misc"
-msgstr "Overig"
 
 #: capplets/file-types/mime-types-model.c:167
 #: capplets/file-types/mime-types-model.c:168
@@ -1142,7 +1174,8 @@ msgid "TRUE if this is an add service dialog"
 msgstr "WAAR als dit een 'dienst toevoegen'-dialoog is"
 
 #: capplets/file-types/service-edit-dialog.c:225
-msgid "Add service"
+#, fuzzy
+msgid "Add Service"
 msgstr "Dienst toevoegen"
 
 #: capplets/file-types/service-edit-dialog.c:497
@@ -1189,14 +1222,13 @@ msgid "Gnome documentation"
 msgstr "Gnome documentatie"
 
 #: capplets/font/font-properties.desktop.in.h:1
-msgid "Change the default fonts used by the desktop and applications"
-msgstr ""
-"Het standaardlettertype veranderen dat gebruikt wordt op het bureablad en in "
-"toepassingen"
-
-#: capplets/font/font-properties.desktop.in.h:2
 msgid "Font"
 msgstr "Lettertype"
+
+#: capplets/font/font-properties.desktop.in.h:2
+#, fuzzy
+msgid "Select fonts for the desktop"
+msgstr "Het lettertype intstellen voor de pictogrammen op het bureaublad"
 
 #: capplets/font/font-properties.glade.h:1
 msgid "Font Preferences"
@@ -1211,7 +1243,8 @@ msgid "Set the font for the icons on the desktop"
 msgstr "Het lettertype intstellen voor de pictogrammen op het bureaublad"
 
 #: capplets/font/font-properties.glade.h:4
-msgid "Standard _application font:"
+#, fuzzy
+msgid "_Application font:"
 msgstr "Standaard-_toepassingslettertype:"
 
 #: capplets/font/font-properties.glade.h:5
@@ -1229,39 +1262,37 @@ msgid "Accelerator key"
 msgstr "Sneltoets"
 
 #: capplets/keybindings/eggcellrendererkeys.c:206
-#: capplets/keybindings/gnome-keybinding-properties.c:306
+#: capplets/keybindings/gnome-keybinding-properties.c:173
 #: libbackground/applier.c:521
 msgid "Disabled"
 msgstr "Uitgeschakeld"
 
 #: capplets/keybindings/eggcellrendererkeys.c:309
 #: capplets/keybindings/eggcellrendererkeys.c:506
-msgid "Type a new accelerator, or press Backspace to clear"
-msgstr "Geef een nieuwe sneltoets in, of druk op Backspace om te wissen"
-
 #: capplets/keybindings/eggcellrendererkeys.c:509
-msgid "Type a new accelerator"
+#, fuzzy
+msgid "Type a new shortcut"
 msgstr "Geef een nieuwe sneltoets in"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:573
+#: capplets/keybindings/gnome-keybinding-properties.c:440
 msgid "<Unknown Action>"
 msgstr "<Onbekende actie>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:598
+#: capplets/keybindings/gnome-keybinding-properties.c:459
 msgid "Desktop"
 msgstr "Bureaublad"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:602
+#: capplets/keybindings/gnome-keybinding-properties.c:463
 msgid "Window Management"
 msgstr "Vensterbeheer"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:699
+#: capplets/keybindings/gnome-keybinding-properties.c:560
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr ""
 "Fout bij het instellen van nieuwe sneltoets in configuratiedatabase: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:851
+#: capplets/keybindings/gnome-keybinding-properties.c:711
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1269,11 +1300,11 @@ msgstr ""
 "Kon geen enkel toetsenbord-thema vinden. Dit betekent dat uw GTK+-"
 "installatie incompleet is."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:876
+#: capplets/keybindings/gnome-keybinding-properties.c:733
 msgid "Action"
 msgstr "Actie"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:888
+#: capplets/keybindings/gnome-keybinding-properties.c:749
 msgid "Shortcut"
 msgstr "Sneltoets"
 
@@ -1287,32 +1318,24 @@ msgid "Keyboard Shortcuts"
 msgstr "Toetsenbord-snelkoppelingen"
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:3
-msgid "Keyboard _Navigation scheme for use in applications:"
-msgstr "Toetsenbord-_navigatieschema voor gebruik in toepassingen:"
-
-#: capplets/keybindings/gnome-keybinding-properties.glade.h:4
-msgid ""
-"To assign a shortcut to an action, click in the shortcut column and press "
-"the key combination you want to associate with it."
-msgstr ""
-"Om een snelkoppeling aan een actie toe te wijzen, klikt u in de "
-"snelkoppeling-kolom en drukt u de toetscombinatie in die u ermee wilt "
-"associëren."
-
-#: capplets/keybindings/gnome-keybinding-properties.glade.h:5
 msgid "_Desktop shortcuts:"
 msgstr "_Bureaublad-sneltoetsen:"
 
-#: capplets/keybindings/keybinding.desktop.in.h:1
-msgid "Associate keyboard shortcuts with panel actions"
-msgstr "Toetsenbord-sneltoetsen met paneel-acties associëren"
+#: capplets/keybindings/gnome-keybinding-properties.glade.h:4
+#, fuzzy
+msgid "_Text editing shortcuts:"
+msgstr "_Bureaublad-sneltoetsen:"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:338
+#: capplets/keybindings/keybinding.desktop.in.h:1
+msgid "Assign shortcut keys to commands"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.c:256
 msgid "_Accessibility"
 msgstr "_Toegankelijkheid"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:355
-#: capplets/keyboard/gnome-keyboard-properties.c:357
+#: capplets/keyboard/gnome-keyboard-properties.c:273
+#: capplets/keyboard/gnome-keyboard-properties.c:275
 #: capplets/sound/sound-properties-capplet.c:145
 #: capplets/sound/sound-properties-capplet.c:147
 msgid ""
@@ -1322,144 +1345,96 @@ msgstr ""
 "een daemon gedaan)"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:2
-msgid "<i>fast</i>"
-msgstr "<i>snel</i>"
+msgid "Bee_p"
+msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:3
-msgid "<i>loud</i>"
-msgstr "<i>luid</i>"
+#, fuzzy
+msgid "C_ustom:"
+msgstr "Aangepast"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:4
-msgid "<i>quiet</i>"
-msgstr "<i>stil</i>"
+msgid "Clic_k on keypress"
+msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:5
-msgid "<i>slow</i>"
-msgstr "<i>langzaam</i>"
+#, fuzzy
+msgid "Cursor Blinks"
+msgstr "Cursors"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:7
-msgid "Cursor"
-msgstr "Cursor"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
-msgid "Cursor _blinks in text fields"
-msgstr "Cursor _knippert in tekstvelden"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
-msgid "Fast"
-msgstr "Snel"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
-msgid "Key_press makes sound"
-msgstr "Toetsaan_slag maakt geluid"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Keyboard Bell"
 msgstr "Toetsenbordpiep"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "Keyboard Preferences"
 msgstr "Toetsenbordeigenschappen"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "Keyboard _repeats when key is held down"
 msgstr "Toetsenbord _herhaalt wanneer de toets ingedrukt blijft"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
-msgid "Keyboard bell _enabled"
-msgstr "Toetsenbordpiep _ingeschakeld"
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+msgid "Keypress Click"
+msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
-msgid "Keyboard bell _off"
-msgstr "Toetsenbordpiep _uit"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
-msgid "Keyclick Volume"
-msgstr "Toetsklik-volume"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
-msgid "Long"
-msgstr "Lang"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
-msgid "Medium"
-msgstr "Gemiddeld"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
-msgid "Repeat Rate"
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#, fuzzy
+msgid "Repeat Keys"
 msgstr "Herhaalsnelheid"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
-msgid "Repeat s_peed:"
-msgstr "Herhaals_nelheid:"
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#, fuzzy
+msgid "S_peed:"
+msgstr "Snelheid"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
-msgid "Set the speed the cursor blinks in text fields."
-msgstr "De snelheid instellen van het knipperen van de cursor in tekstvelden. "
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
-msgid "Set the volume of the clicking sound made when pressing a key"
-msgstr "Het volume instellen van het klikgeluid bij toetsaanslagen."
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
-msgid "Short"
-msgstr "Kort"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
-msgid "Slow"
-msgstr "Traag"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
-msgid ""
-"The keyboard bell is the <i>beep</i> sound heard when the system wants to "
-"get your attention."
-msgstr ""
-"De toetsenbord piep is het <i>piep</i>-geluid dat u hoort wanneer het "
-"systeem uw aandacht nodig heeft."
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:28
-msgid "Very Fast"
-msgstr "Zeer snel"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:29
-msgid "Very Short"
-msgstr "Zeer kort"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:30
-msgid ""
-"You can configure the keyboards accessibility features by bringing up the "
-"'Accessibility Settings' property dialog, or pressing the button on the "
-"right."
-msgstr ""
-"U kunt de toetsenbord-toegankelijkheidsfuncties configureren door het "
-"'Toegankelijkheid' eigenschappenvenster te openen, of door op de knop rechts "
-"te klikken."
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:31
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "_Accessibility..."
 msgstr "_Toegankelijkheid..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:32
-msgid "_Blink speed:"
-msgstr "_Knippersnelheid:"
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#, fuzzy
+msgid "_Blinks in text boxes and fields"
+msgstr "Cursor _knippert in tekstvelden"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:33
-msgid "_Custom keyboard bell:"
-msgstr "_Aangepaste toetsenbordpiep:"
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
+#, fuzzy
+msgid "_Delay:"
+msgstr "Ver_traging (sec):"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:34
-msgid "_Delay before repeating:"
-msgstr "Ver_traging voor herhaling:"
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
+msgid "_Off"
+msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:35
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
+#, fuzzy
+msgid "_Speed:"
+msgstr "Snelheid"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
 msgid "_Volume:"
 msgstr "_Volume"
 
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
+#, fuzzy
+msgid "faster"
+msgstr "Snel"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#, fuzzy
+msgid "loud"
+msgstr "Geluid"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+msgid "quiet"
+msgstr ""
+
 #: capplets/keyboard/keyboard.desktop.in.h:2
-msgid "Keyboard Properties"
+#, fuzzy
+msgid "Set your keyboard preferences"
 msgstr "Toetsenbordeigenschappen"
 
-#: capplets/mouse/gnome-mouse-properties.c:455
+#: capplets/mouse/gnome-mouse-properties.c:477
 #, c-format
 msgid ""
 "<b>Unknown Cursor</b>\n"
@@ -1468,7 +1443,7 @@ msgstr ""
 "<b>Onbekende Cursor</b>\n"
 "%s"
 
-#: capplets/mouse/gnome-mouse-properties.c:556
+#: capplets/mouse/gnome-mouse-properties.c:578
 msgid ""
 "<b>Default Cursor - Current</b>\n"
 "The default cursor that ships with X"
@@ -1476,7 +1451,7 @@ msgstr ""
 "<b>Standaard cursor - Huidig</b>\n"
 "De standaard cursor die meegeleverd wordt met X "
 
-#: capplets/mouse/gnome-mouse-properties.c:559
+#: capplets/mouse/gnome-mouse-properties.c:581
 msgid ""
 "<b>Default Cursor</b>\n"
 "The default cursor that ships with X"
@@ -1484,7 +1459,7 @@ msgstr ""
 "<b>Standaard cursor</b>\n"
 "De standaard cursor die meegeleverd wordt met X "
 
-#: capplets/mouse/gnome-mouse-properties.c:577
+#: capplets/mouse/gnome-mouse-properties.c:599
 msgid ""
 "<b>White Cursor - Current</b>\n"
 "The default cursor inverted"
@@ -1492,7 +1467,7 @@ msgstr ""
 "<b>Witte Cursor - Huidig</b>\n"
 "De standaard cursor geïnverteerd"
 
-#: capplets/mouse/gnome-mouse-properties.c:580
+#: capplets/mouse/gnome-mouse-properties.c:602
 msgid ""
 "<b>White Cursor</b>\n"
 "The default cursor inverted"
@@ -1500,7 +1475,7 @@ msgstr ""
 "<b>Witte Cursor</b>\n"
 "De standaard cursor geïnverteerd"
 
-#: capplets/mouse/gnome-mouse-properties.c:598
+#: capplets/mouse/gnome-mouse-properties.c:620
 msgid ""
 "<b>Large Cursor - Current</b>\n"
 "Large version of normal cursor"
@@ -1508,7 +1483,7 @@ msgstr ""
 "<b>Grote Cursor - Huidig</b>\n"
 "Grote versie van de standaard cursor"
 
-#: capplets/mouse/gnome-mouse-properties.c:601
+#: capplets/mouse/gnome-mouse-properties.c:623
 msgid ""
 "<b>Large Cursor</b>\n"
 "Large version of normal cursor"
@@ -1516,7 +1491,7 @@ msgstr ""
 "<b>Grote Cursor</b>\n"
 "Grote versie van de standaard cursor"
 
-#: capplets/mouse/gnome-mouse-properties.c:619
+#: capplets/mouse/gnome-mouse-properties.c:641
 msgid ""
 "<b>Large White Cursor - Current</b>\n"
 "Large version of white cursor"
@@ -1524,7 +1499,7 @@ msgstr ""
 "<b>Grote Witte Cursor - Huidig</b>\n"
 "Grote versie van de witte cursor"
 
-#: capplets/mouse/gnome-mouse-properties.c:622
+#: capplets/mouse/gnome-mouse-properties.c:644
 msgid ""
 "<b>Large White Cursor</b>\n"
 "Large version of white cursor"
@@ -1666,21 +1641,24 @@ msgid "Mouse"
 msgstr "Muis"
 
 #: capplets/mouse/mouse.desktop.in.h:2
-msgid "Mouse Properties"
-msgstr "Muis-eigenschappen"
+#, fuzzy
+msgid "Set your mouse preferences"
+msgstr "Muisvoorkeuren"
 
 #: capplets/network/gnome-network-preferences.desktop.in.h:1
-msgid "Network"
+#, fuzzy
+msgid "Network Proxy"
 msgstr "Netwerk"
 
 #: capplets/network/gnome-network-preferences.desktop.in.h:2
 #: capplets/network/gnome-network-preferences.glade.h:3
-msgid "Network Preferences"
+#, fuzzy
+msgid "Network Proxy Preferences"
 msgstr "Netwerk-voorkeuren"
 
 #: capplets/network/gnome-network-preferences.glade.h:2
-msgid "HTTP Proxy Settings"
-msgstr "HTTP Proxy instellingen"
+msgid "Network Preferences"
+msgstr "Netwerk-voorkeuren"
 
 #: capplets/network/gnome-network-preferences.glade.h:4
 msgid "P_ort:"
@@ -1691,7 +1669,8 @@ msgid "Pass_word:"
 msgstr "Wacht_woord:"
 
 #: capplets/network/gnome-network-preferences.glade.h:6
-msgid "Pro_xy requires a username and password"
+#, fuzzy
+msgid "Pro_xy requires username and password"
 msgstr "Pro_xy vereist een gebruikersnaam en wachtwoord."
 
 #: capplets/network/gnome-network-preferences.glade.h:7
@@ -1715,20 +1694,26 @@ msgid "E_nable sound server startup"
 msgstr "S_tarten van geluidsserver inschakelen"
 
 #: capplets/sound/sound-properties.glade.h:2
+#, fuzzy
+msgid "Sound Preferences"
+msgstr "Geluidsvoorkeuren"
+
+#: capplets/sound/sound-properties.glade.h:3
 msgid "Sound _Events"
 msgstr "Geluid-_gebeurtenissen"
 
-#: capplets/sound/sound-properties.glade.h:3
+#: capplets/sound/sound-properties.glade.h:4
 msgid "_General"
 msgstr "_Algemeen"
 
-#: capplets/sound/sound-properties.glade.h:4
+#: capplets/sound/sound-properties.glade.h:5
 msgid "_Sounds for events"
 msgstr "_Geluiden bij gebeurtenissen"
 
 #: capplets/sound/sound.desktop.in.h:1
-msgid "Configure GNOME's use of sound"
-msgstr "Het gebruik van geluid in GNOME configureren"
+#, fuzzy
+msgid "Enable sound and associate sounds with events"
+msgstr "Window manager geluid-gebeurtenissen inschakelen"
 
 #: capplets/theme-switcher/control/control.c:18
 msgid "Eenie Meenie Mynie Moe Catcha Tiger By Its Toe"
@@ -1756,7 +1741,6 @@ msgid "Submenu"
 msgstr "Submenu"
 
 #: capplets/theme-switcher/control/control.c:74
-#: capplets/ui-properties/gnome-ui-properties.glade.h:4
 msgid "Item 1"
 msgstr "Item 1"
 
@@ -1781,58 +1765,62 @@ msgid "Two"
 msgstr "Twee"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
-msgid "Change the appearance of buttons, scrollbars, etc"
-msgstr "Het uiterlijk configureren van knoppen, scrollbalken etc."
+#, fuzzy
+msgid "Select themes for various parts of the desktop"
+msgstr "Het lettertype intstellen voor de pictogrammen op het bureaublad"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
 msgid "Theme"
 msgstr "Thema"
 
-#: capplets/theme-switcher/theme-properties.glade.h:2
-msgid "Gtk+ Theme Preferences"
-msgstr "Gtk+ thema-vookeuren"
-
-#: capplets/theme-switcher/theme-properties.glade.h:3
-msgid "Install new theme"
-msgstr "Nieuw thema installeren..."
-
-#: capplets/theme-switcher/theme-properties.glade.h:4
+#: capplets/theme-switcher/theme-properties.glade.h:1
 msgid "Installed Themes"
 msgstr "Geïnstalleerde thema's"
 
-#: capplets/theme-switcher/theme-properties.glade.h:5
+#: capplets/theme-switcher/theme-properties.glade.h:2
 msgid "List of available GTK+ themes"
 msgstr "Lijst van beschikbare GTK+-thema's"
 
-#: capplets/theme-switcher/theme-properties.glade.h:6
+#: capplets/theme-switcher/theme-properties.glade.h:3
 msgid "New themes can also be installed by dragging them into the window."
 msgstr ""
 "Nieuwe thema's kunnen ook geïnstalleerd worden door ze naar het venster te "
 "slepen."
 
-#: capplets/theme-switcher/theme-properties.glade.h:7
+#: capplets/theme-switcher/theme-properties.glade.h:4
+#, fuzzy
+msgid "Theme Preferences"
+msgstr "Gtk+ thema-vookeuren"
+
+#: capplets/theme-switcher/theme-properties.glade.h:5
 msgid "_Go to theme folder"
 msgstr "_Ga naar thema-map"
 
-#: capplets/theme-switcher/theme-properties.glade.h:8
+#: capplets/theme-switcher/theme-properties.glade.h:6
+#, fuzzy
+msgid "_Install New Theme..."
+msgstr "Nieuw thema _installeren..."
+
+#: capplets/theme-switcher/theme-install.glade.h:2
+msgid "Install new theme"
+msgstr "Nieuw thema installeren..."
+
+#: capplets/theme-switcher/theme-install.glade.h:3
 msgid "_Install"
 msgstr "_Installeren"
 
-#: capplets/theme-switcher/theme-properties.glade.h:9
-msgid "_Install new theme..."
-msgstr "Nieuw thema _installeren..."
-
-#: capplets/theme-switcher/theme-properties.glade.h:10
+#: capplets/theme-switcher/theme-install.glade.h:4
 msgid "_Location of new theme:"
 msgstr "_Locatie van nieuw thema:"
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
-msgid "Change how toolbars and menus are displayed"
-msgstr "Weergave van werkbalken en menu's veranderen"
+msgid "Customize the appearance of toolbars and menubars in applications"
+msgstr ""
 
 #: capplets/ui-properties/behavior.desktop.in.h:2
-msgid "Toolbars & Menus"
-msgstr "Werkbalken & Menu's"
+#, fuzzy
+msgid "Menus & Toolbars"
+msgstr "Werkbalk"
 
 #: capplets/ui-properties/behavior.desktop.in.in.h:1
 msgid "Behavior"
@@ -1851,102 +1839,121 @@ msgid "A preview of what a toolbar looks like with these settings."
 msgstr "Een voorbeeld van hoe een werkbalk eruit ziet met deze instellingen."
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:3
+#, fuzzy
+msgid "C_ut"
+msgstr "Aangepast"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:4
+#, fuzzy
+msgid "Edit Menu"
+msgstr "Bewerken"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:5
 msgid "Icons Only"
 msgstr "Alleen pictogrammen"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:5
-msgid "Item 2"
-msgstr "Item 2"
-
 #: capplets/ui-properties/gnome-ui-properties.glade.h:6
-msgid "Item 3"
-msgstr "Item 3"
+#, fuzzy
+msgid "Menu and Toolbar Preferences"
+msgstr "Werkbalk- en menu-voorkeuren"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:7
-msgid "Menu Item 1"
-msgstr "Menu-item 1"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:8
-msgid "Menu Item 2"
-msgstr "Menu-item 2"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:9
-msgid "Menu Item 3"
-msgstr "Menu-item 3"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:10
-msgid "Menu Item 4"
-msgstr "Menu-item 4"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:11
-msgid "Menu Item 5"
-msgstr "Menu-item 5"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:12
-msgid "Menu items can have _icons"
-msgstr "Menu-items kunnen _pictogrammen hebben"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:13
 msgid "Menus"
 msgstr "Menu's"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:14
+#: capplets/ui-properties/gnome-ui-properties.glade.h:8
 msgid "New File"
 msgstr "Nieuw bestand"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:15
+#: capplets/ui-properties/gnome-ui-properties.glade.h:9
 msgid "Open File"
 msgstr "Bestand openen"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:16
+#: capplets/ui-properties/gnome-ui-properties.glade.h:10
 msgid "Priority Text Beside Icons"
 msgstr "Belangrijke Tekst Naast Iconen"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:17
-msgid "Sample Menubar"
+#: capplets/ui-properties/gnome-ui-properties.glade.h:11
+#, fuzzy
+msgid "Sample menubar:"
 msgstr "Voorbeeld-menubalk"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:18
-msgid "Sample Toolbar"
+#: capplets/ui-properties/gnome-ui-properties.glade.h:12
+#, fuzzy
+msgid "Sample toolbar:"
 msgstr "Voorbeeld-werkbalk"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:19
+#: capplets/ui-properties/gnome-ui-properties.glade.h:13
 msgid "Save File"
 msgstr "Bestand opslaan"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:20
+#: capplets/ui-properties/gnome-ui-properties.glade.h:14
 msgid "Select the toolbar style."
 msgstr "Selecteer de werkbalk-stijl."
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:21
+#: capplets/ui-properties/gnome-ui-properties.glade.h:15
 msgid "Text Below Icons"
 msgstr "Tekst Onder Iconen"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:22
+#: capplets/ui-properties/gnome-ui-properties.glade.h:16
 msgid "Text Only"
 msgstr "Aleen Tekst"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:23
+#: capplets/ui-properties/gnome-ui-properties.glade.h:17
 msgid "Toolbar"
 msgstr "Werkbalk"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:24
-msgid "Toolbar and Menu Preferences"
-msgstr "Werkbalk- en menu-voorkeuren"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:25
+#: capplets/ui-properties/gnome-ui-properties.glade.h:18
 msgid "Toolbars can be _detached and moved around"
 msgstr "Werkbalken zijn _ontkoppelbaar en verplaatsbaar"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:26
+#: capplets/ui-properties/gnome-ui-properties.glade.h:19
+#, fuzzy
+msgid "_Button Labels: "
+msgstr "Knoppen"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:20
+msgid "_Copy"
+msgstr ""
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:21
 msgid "_Menu"
 msgstr "_Menu"
 
+#: capplets/ui-properties/gnome-ui-properties.glade.h:22
+#, fuzzy
+msgid "_New"
+msgstr "_Naam"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:23
+#, fuzzy
+msgid "_Open"
+msgstr "Openen"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:24
+#, fuzzy
+msgid "_Paste"
+msgstr "Snel"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:25
+msgid "_Print"
+msgstr ""
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:26
+msgid "_Quit"
+msgstr ""
+
 #: capplets/ui-properties/gnome-ui-properties.glade.h:27
-msgid "_Toolbars have: "
-msgstr "_Werkbalken bevatten:"
+#, fuzzy
+msgid "_Save"
+msgstr "Ge_schaald"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:28
+msgid "_Show icons in menus"
+msgstr ""
 
 #: capplets/windows/gnome-window-properties.c:282
+#: capplets/windows/gnome-window-properties.glade.h:6
 msgid "Window Preferences"
 msgstr "Venstervoorkeuren"
 
@@ -1970,7 +1977,6 @@ msgstr "Uiterlijk vensterkader"
 msgid "Window Manager:"
 msgstr "Window manager:"
 
-#: capplets/windows/gnome-window-properties.glade.h:6
 #: capplets/windows/window-properties.desktop.in.h:1
 msgid "Window Properties"
 msgstr "Venstereigenschappen"
@@ -2000,19 +2006,19 @@ msgstr "Capplet mapobject"
 msgid "Capplet directory that this view is viewing"
 msgstr "Capplet map die hierdoor wordt bekeken"
 
-#: control-center/capplet-dir-view.c:335
+#: control-center/capplet-dir-view.c:348
 msgid "translator_credits"
 msgstr "Huib Kleinhout, Reinout van Schouwen"
 
-#: control-center/capplet-dir-view.c:344 control-center/gnomecc.desktop.in.h:1
+#: control-center/capplet-dir-view.c:357 control-center/gnomecc.desktop.in.h:1
 msgid "GNOME Control Center"
 msgstr "GNOME Configuratiecentrum"
 
-#: control-center/capplet-dir-view.c:347
+#: control-center/capplet-dir-view.c:360
 msgid "Desktop properties manager."
 msgstr "Bureaublad-eigenschappenbeheer."
 
-#: control-center/capplet-dir-view.c:485
+#: control-center/capplet-dir-view.c:498
 #, c-format
 msgid "Gnome Control Center : %s"
 msgstr "Gnome Configuratiecentrum : %s"
@@ -2250,6 +2256,220 @@ msgstr ""
 msgid "OK"
 msgstr "OK"
 
+#~ msgid "<b>Test</b>"
+#~ msgstr "<b>Test</b>"
+
+#~ msgid "_Keyboard"
+#~ msgstr "_Toetsenbord"
+
+#~ msgid "_Misc"
+#~ msgstr "_Overig"
+
+#~ msgid "_Picture"
+#~ msgstr "_Plaatje"
+
+#~ msgid "Bor_der the picture with a:"
+#~ msgstr "Afbeelding om_lijsten met een:"
+
+#~ msgid "Choose the applications used by default"
+#~ msgstr "Kies de applicaties die standaard worden gebruikt"
+
+#~ msgid "Configure window appearance"
+#~ msgstr "Uiterlijk van vensters configureren"
+
+#~ msgid "Configure key shortcuts"
+#~ msgstr "Sneltoetsen configureren"
+
+#~ msgid "Configure window properties"
+#~ msgstr "Venster-eigenschappen configureren"
+
+#~ msgid "Configure window manager configuration properties"
+#~ msgstr "Window manager configuratie-eigenschappen configureren"
+
+#~ msgid "Configure window placement"
+#~ msgstr "Plaatsing van vensters configureren"
+
+#~ msgid "File types and Internet Services"
+#~ msgstr "Bestandstypen en Internetdiensten"
+
+#~ msgid "Needs _terminal"
+#~ msgstr "Vereist _terminal"
+
+#~ msgid "Use category _defaults"
+#~ msgstr "_Standaardinstellingen per categorie gebruiken"
+
+#~ msgid "_Add"
+#~ msgstr "_Toevoegen"
+
+#~ msgid "_Protocol name"
+#~ msgstr "_Protocolnaam"
+
+#~ msgid "_Remove"
+#~ msgstr "_Verwijderen"
+
+#~ msgid "Add file type"
+#~ msgstr "Bestandstype toevoegen"
+
+#~ msgid ""
+#~ "Invalid MIME type. Please enter a valid MIME type, or leave the field "
+#~ "blank to have one generated for you."
+#~ msgstr ""
+#~ "Ongeldig MIME-type. Geef een geldig MIME-type, of laat het veld leeg om "
+#~ "een geldig type te laten genereren."
+
+#~ msgid "There already exists a MIME type of that name."
+#~ msgstr "Er bestaat al een MIME-type met die naam."
+
+#~ msgid "Change the default fonts used by the desktop and applications"
+#~ msgstr ""
+#~ "Het standaardlettertype veranderen dat gebruikt wordt op het bureablad en "
+#~ "in toepassingen"
+
+#~ msgid "Type a new accelerator, or press Backspace to clear"
+#~ msgstr "Geef een nieuwe sneltoets in, of druk op Backspace om te wissen"
+
+#~ msgid "Keyboard _Navigation scheme for use in applications:"
+#~ msgstr "Toetsenbord-_navigatieschema voor gebruik in toepassingen:"
+
+#~ msgid ""
+#~ "To assign a shortcut to an action, click in the shortcut column and press "
+#~ "the key combination you want to associate with it."
+#~ msgstr ""
+#~ "Om een snelkoppeling aan een actie toe te wijzen, klikt u in de "
+#~ "snelkoppeling-kolom en drukt u de toetscombinatie in die u ermee wilt "
+#~ "associëren."
+
+#~ msgid "Associate keyboard shortcuts with panel actions"
+#~ msgstr "Toetsenbord-sneltoetsen met paneel-acties associëren"
+
+#~ msgid "<i>fast</i>"
+#~ msgstr "<i>snel</i>"
+
+#~ msgid "<i>loud</i>"
+#~ msgstr "<i>luid</i>"
+
+#~ msgid "<i>quiet</i>"
+#~ msgstr "<i>stil</i>"
+
+#~ msgid "<i>slow</i>"
+#~ msgstr "<i>langzaam</i>"
+
+#~ msgid "Cursor"
+#~ msgstr "Cursor"
+
+#~ msgid "Key_press makes sound"
+#~ msgstr "Toetsaan_slag maakt geluid"
+
+#~ msgid "Keyboard bell _enabled"
+#~ msgstr "Toetsenbordpiep _ingeschakeld"
+
+#~ msgid "Keyboard bell _off"
+#~ msgstr "Toetsenbordpiep _uit"
+
+#~ msgid "Keyclick Volume"
+#~ msgstr "Toetsklik-volume"
+
+#~ msgid "Long"
+#~ msgstr "Lang"
+
+#~ msgid "Medium"
+#~ msgstr "Gemiddeld"
+
+#~ msgid "Repeat s_peed:"
+#~ msgstr "Herhaals_nelheid:"
+
+#~ msgid "Set the speed the cursor blinks in text fields."
+#~ msgstr ""
+#~ "De snelheid instellen van het knipperen van de cursor in tekstvelden. "
+
+#~ msgid "Set the volume of the clicking sound made when pressing a key"
+#~ msgstr "Het volume instellen van het klikgeluid bij toetsaanslagen."
+
+#~ msgid "Short"
+#~ msgstr "Kort"
+
+#~ msgid "Slow"
+#~ msgstr "Traag"
+
+#~ msgid ""
+#~ "The keyboard bell is the <i>beep</i> sound heard when the system wants to "
+#~ "get your attention."
+#~ msgstr ""
+#~ "De toetsenbord piep is het <i>piep</i>-geluid dat u hoort wanneer het "
+#~ "systeem uw aandacht nodig heeft."
+
+#~ msgid "Very Fast"
+#~ msgstr "Zeer snel"
+
+#~ msgid "Very Short"
+#~ msgstr "Zeer kort"
+
+#~ msgid ""
+#~ "You can configure the keyboards accessibility features by bringing up the "
+#~ "'Accessibility Settings' property dialog, or pressing the button on the "
+#~ "right."
+#~ msgstr ""
+#~ "U kunt de toetsenbord-toegankelijkheidsfuncties configureren door het "
+#~ "'Toegankelijkheid' eigenschappenvenster te openen, of door op de knop "
+#~ "rechts te klikken."
+
+#~ msgid "_Blink speed:"
+#~ msgstr "_Knippersnelheid:"
+
+#~ msgid "_Custom keyboard bell:"
+#~ msgstr "_Aangepaste toetsenbordpiep:"
+
+#~ msgid "_Delay before repeating:"
+#~ msgstr "Ver_traging voor herhaling:"
+
+#~ msgid "Keyboard Properties"
+#~ msgstr "Toetsenbordeigenschappen"
+
+#~ msgid "Mouse Properties"
+#~ msgstr "Muis-eigenschappen"
+
+#~ msgid "HTTP Proxy Settings"
+#~ msgstr "HTTP Proxy instellingen"
+
+#~ msgid "Configure GNOME's use of sound"
+#~ msgstr "Het gebruik van geluid in GNOME configureren"
+
+#~ msgid "Change the appearance of buttons, scrollbars, etc"
+#~ msgstr "Het uiterlijk configureren van knoppen, scrollbalken etc."
+
+#~ msgid "Change how toolbars and menus are displayed"
+#~ msgstr "Weergave van werkbalken en menu's veranderen"
+
+#~ msgid "Toolbars & Menus"
+#~ msgstr "Werkbalken & Menu's"
+
+#~ msgid "Item 2"
+#~ msgstr "Item 2"
+
+#~ msgid "Item 3"
+#~ msgstr "Item 3"
+
+#~ msgid "Menu Item 1"
+#~ msgstr "Menu-item 1"
+
+#~ msgid "Menu Item 2"
+#~ msgstr "Menu-item 2"
+
+#~ msgid "Menu Item 3"
+#~ msgstr "Menu-item 3"
+
+#~ msgid "Menu Item 4"
+#~ msgstr "Menu-item 4"
+
+#~ msgid "Menu Item 5"
+#~ msgstr "Menu-item 5"
+
+#~ msgid "Menu items can have _icons"
+#~ msgstr "Menu-items kunnen _pictogrammen hebben"
+
+#~ msgid "_Toolbars have: "
+#~ msgstr "_Werkbalken bevatten:"
+
 #~ msgid "E-Mail"
 #~ msgstr "E-mail"
 
@@ -2292,9 +2512,6 @@ msgstr "OK"
 #~ msgid "Mime Type: "
 #~ msgstr "MIME-type:"
 
-#~ msgid "Add"
-#~ msgstr "Toevoegen"
-
 #~ msgid "Remove"
 #~ msgstr "Verwijderen"
 
@@ -2310,17 +2527,11 @@ msgstr "OK"
 #~ msgid "Example: emacs %f"
 #~ msgstr "Bijvoorbeeld: emacs %f"
 
-#~ msgid "Open"
-#~ msgstr "Openen"
-
 #~ msgid "Select a file..."
 #~ msgstr "Een bestand selecteren..."
 
 #~ msgid "View"
 #~ msgstr "Bekijken"
-
-#~ msgid "Edit"
-#~ msgstr "Bewerken"
 
 #~ msgid "Set actions for %s"
 #~ msgstr "Acties voor %s instellen"
@@ -2404,9 +2615,6 @@ msgstr "OK"
 #~ msgid "Mime Types"
 #~ msgstr "MIME-types"
 
-#~ msgid "Add Mime Type"
-#~ msgstr "MIME-type toevoegen"
-
 #~ msgid ""
 #~ "Add a new Mime Type\n"
 #~ "For example:  image/tiff; text/x-scheme"
@@ -2433,9 +2641,6 @@ msgstr "OK"
 #~ msgstr ""
 #~ "U kunt maximaal 2 reguliere expressies instellen om MIME-types te\n"
 #~ "identificeren.  Deze velden zijn facultatief."
-
-#~ msgid "Protocol"
-#~ msgstr "Protocol"
 
 #~ msgid "Command"
 #~ msgstr "Opdracht"
@@ -2568,9 +2773,6 @@ msgstr "OK"
 
 #~ msgid "_Add..."
 #~ msgstr "_Toevoegen..."
-
-#~ msgid "_Delete"
-#~ msgstr "_Verwijderen"
 
 #~ msgid "File Manager Font"
 #~ msgstr "Lettertype voor bestandsbeheer"

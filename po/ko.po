@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.99.10\n"
-"POT-Creation-Date: 2002-07-21 20:48+0900\n"
+"POT-Creation-Date: 2002-08-06 09:32-0400\n"
 "PO-Revision-Date: 2002-07-21 20:53+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: Korean <gnome-kr-translation@lists.sourceforge.net>\n"
@@ -18,12 +18,12 @@ msgstr ""
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "키보드 애플릿을 시작하는 데 오류가 발생했습니다: %s"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:291
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:309
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "AccessX 설정사항을 '%s' 파일에서 가져 올 수 없습니다"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:403
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:421
 msgid "Select CDE AccessX file"
 msgstr "CDE AccessX 파일 선택"
 
@@ -138,18 +138,23 @@ msgid "_Disable if unused for "
 msgstr "이 만큼의 시간동안 사용되지 않으면 끄기(_D): "
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
+#, fuzzy
+msgid "_Enable keyboard accessibility"
+msgstr "키보드 접근성 기능 기본 설정을 설정합니다"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
 msgid "_Ignore keypresses within  :"
 msgstr "다음 시간 내에 키 누름 무시(_I) :"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
 msgid "_Import CDE AccessX file"
 msgstr "CDE AccessX 파일 가져 오기(_I)"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
 msgid "_Only accept keypress after :"
 msgstr "이 만큼 지난 뒤에 키 누름 받아들이기(_O) :"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:28
 msgid ""
 "_Turn off Sticky Keys when\n"
 "two keys pressed simultaneously"
@@ -157,27 +162,27 @@ msgstr ""
 "두 키를 동시에 눌렀을 때\n"
 "StickyKeys 끄기(_T)"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:30
 msgid "key is _accepted"
 msgstr "키를 받아들일 때(_A)"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:30
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:31
 msgid "key is _pressed"
 msgstr "키가 눌러졌을 때(_P)"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:31
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:32
 msgid "key is _rejected"
 msgstr "키가 거부되었을 때(_R)"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:32
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
 msgid "msecs"
 msgstr "천분의일초"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
 msgid "pixels/sec"
 msgstr "픽셀/초"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:35
 msgid "seconds"
 msgstr "초"
 
@@ -864,25 +869,25 @@ msgid "Source Code"
 msgstr "소스 코드"
 
 #: capplets/file-types/category-names.h:25
-#: capplets/file-types/mime-type-info.c:668
+#: capplets/file-types/mime-type-info.c:671
 msgid "Audio"
 msgstr "오디오"
 
 #: capplets/file-types/category-names.h:26
-#: capplets/file-types/mime-type-info.c:664
+#: capplets/file-types/mime-type-info.c:667
 msgid "Images"
 msgstr "그림"
 
 #: capplets/file-types/category-names.h:27
-#: capplets/file-types/mime-type-info.c:666
+#: capplets/file-types/mime-type-info.c:669
 msgid "Video"
 msgstr "비디오"
 
-#: capplets/file-types/file-types-capplet.c:215
+#: capplets/file-types/file-types-capplet.c:214
 msgid "Description"
 msgstr "설명"
 
-#: capplets/file-types/file-types-capplet.c:237
+#: capplets/file-types/file-types-capplet.c:236
 msgid "Extensions"
 msgstr "확장자"
 
@@ -1019,8 +1024,8 @@ msgstr "MIME 범주에 정보를 포함하는 구조"
 #: capplets/file-types/mime-category-edit-dialog.c:344
 #: capplets/file-types/mime-edit-dialog.c:490
 #: capplets/file-types/mime-edit-dialog.c:594
-#: capplets/file-types/service-edit-dialog.c:359
-#: capplets/file-types/service-edit-dialog.c:408
+#: capplets/file-types/service-edit-dialog.c:358
+#: capplets/file-types/service-edit-dialog.c:407
 msgid "Custom"
 msgstr "사용자 설정"
 
@@ -1053,7 +1058,7 @@ msgid "Add File Type"
 msgstr "파일 형식 추가"
 
 #: capplets/file-types/mime-edit-dialog.c:435
-#: capplets/file-types/mime-type-info.c:670
+#: capplets/file-types/mime-type-info.c:673
 msgid "Misc"
 msgstr "기타"
 
@@ -1062,7 +1067,7 @@ msgstr "기타"
 msgid "None"
 msgstr "없음"
 
-#: capplets/file-types/mime-edit-dialog.c:847
+#: capplets/file-types/mime-edit-dialog.c:854
 msgid ""
 "Please enter a valid MIME type.  It should be of the form class/type and may "
 "not contain any spaces."
@@ -1070,15 +1075,15 @@ msgstr ""
 "올바른 MIME 타입을 입력하십시오.  MIME 타입은 \"클래스/타입\"의 형태가 되어"
 "야 하고 공백이 들어가면 안 됩니다."
 
-#: capplets/file-types/mime-edit-dialog.c:854
+#: capplets/file-types/mime-edit-dialog.c:861
 msgid "A MIME type with that name already exists, overwrite ?."
 msgstr "그 이름의 MIME 타입이 이미 존재합니다, 덮어쓸까요 ?"
 
-#: capplets/file-types/mime-edit-dialog.c:919
+#: capplets/file-types/mime-edit-dialog.c:926
 msgid "Category"
 msgstr "범주"
 
-#: capplets/file-types/mime-edit-dialog.c:924
+#: capplets/file-types/mime-edit-dialog.c:931
 msgid "Choose a file category"
 msgstr "파일 분류 선택"
 
@@ -1115,18 +1120,18 @@ msgstr "서비스 추가 대화 상자이면 참"
 msgid "Add Service"
 msgstr "서비스 추가"
 
-#: capplets/file-types/service-edit-dialog.c:498
+#: capplets/file-types/service-edit-dialog.c:497
 msgid "Please enter a protocol name."
 msgstr "프로토콜 이름을 입력하십시오."
 
-#: capplets/file-types/service-edit-dialog.c:510
+#: capplets/file-types/service-edit-dialog.c:509
 msgid ""
 "Invalid protocol name. Please enter a protocol name without any spaces or "
 "punctuation."
 msgstr ""
 "잘못된 프로토콜 이름입니다. 공백이나 구두점 없이 프로토콜 이름을 입력하십시오"
 
-#: capplets/file-types/service-edit-dialog.c:524
+#: capplets/file-types/service-edit-dialog.c:523
 msgid "There is already a protocol by that name."
 msgstr "그러한 프로토콜은 이미 있습니다"
 

@@ -19,7 +19,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2002-07-19 23:48+0200\n"
+"POT-Creation-Date: 2002-08-06 09:32-0400\n"
 "PO-Revision-Date: 2002-07-19 23:48+0200\n"
 "Last-Translator: Ole Laursen <olau@hardworking.dk>\n"
 "Language-Team: danish <dansk@klid.dk>\n"
@@ -33,12 +33,12 @@ msgstr ""
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "Der opstod en fejl ved kørsel af tastaturindstillingsvinduet: %s"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:291
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:309
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "Kunne ikke importere AccessX-indstillinger fra filen '%s'"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:403
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:421
 msgid "Select CDE AccessX file"
 msgstr "Vælg CDE AccessX-fil"
 
@@ -157,18 +157,22 @@ msgid "_Disable if unused for "
 msgstr "_Deaktivér hvis ubenyttet i "
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
+msgid "_Enable keyboard accessibility"
+msgstr "_Aktivér tastaturtilgængelighed"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
 msgid "_Ignore keypresses within  :"
 msgstr "_Ignorér tastetryk inden for:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
 msgid "_Import CDE AccessX file"
 msgstr "_Importér CDE AccessX-fil"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
 msgid "_Only accept keypress after :"
 msgstr "_Acceptér kun tastetryk efter:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:28
 msgid ""
 "_Turn off Sticky Keys when\n"
 "two keys pressed simultaneously"
@@ -176,27 +180,27 @@ msgstr ""
 "Slå klæbrige taster _fra\n"
 "når to taster holdes nede samtidigt"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:30
 msgid "key is _accepted"
 msgstr "tast _accepteres"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:30
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:31
 msgid "key is _pressed"
 msgstr "tast _holdes ned"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:31
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:32
 msgid "key is _rejected"
 msgstr "tast af_vises"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:32
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
 msgid "msecs"
 msgstr "millisek"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
 msgid "pixels/sec"
 msgstr "punkter/sek"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:35
 msgid "seconds"
 msgstr "sekunder"
 
@@ -900,25 +904,25 @@ msgid "Source Code"
 msgstr "Kildekode"
 
 #: capplets/file-types/category-names.h:25
-#: capplets/file-types/mime-type-info.c:668
+#: capplets/file-types/mime-type-info.c:671
 msgid "Audio"
 msgstr "Lyd"
 
 #: capplets/file-types/category-names.h:26
-#: capplets/file-types/mime-type-info.c:664
+#: capplets/file-types/mime-type-info.c:667
 msgid "Images"
 msgstr "Billeder"
 
 #: capplets/file-types/category-names.h:27
-#: capplets/file-types/mime-type-info.c:666
+#: capplets/file-types/mime-type-info.c:669
 msgid "Video"
 msgstr "Video"
 
-#: capplets/file-types/file-types-capplet.c:215
+#: capplets/file-types/file-types-capplet.c:214
 msgid "Description"
 msgstr "Beskrivelse"
 
-#: capplets/file-types/file-types-capplet.c:237
+#: capplets/file-types/file-types-capplet.c:236
 msgid "Extensions"
 msgstr "Endelser"
 
@@ -1056,8 +1060,8 @@ msgstr "Struktur der indeholder oplysninger om MIME-kategorien"
 #: capplets/file-types/mime-category-edit-dialog.c:344
 #: capplets/file-types/mime-edit-dialog.c:490
 #: capplets/file-types/mime-edit-dialog.c:594
-#: capplets/file-types/service-edit-dialog.c:359
-#: capplets/file-types/service-edit-dialog.c:408
+#: capplets/file-types/service-edit-dialog.c:358
+#: capplets/file-types/service-edit-dialog.c:407
 msgid "Custom"
 msgstr "Selvvalgt"
 
@@ -1090,7 +1094,7 @@ msgid "Add File Type"
 msgstr "Tilføj filtype"
 
 #: capplets/file-types/mime-edit-dialog.c:435
-#: capplets/file-types/mime-type-info.c:670
+#: capplets/file-types/mime-type-info.c:673
 msgid "Misc"
 msgstr "Diverse"
 
@@ -1099,7 +1103,7 @@ msgstr "Diverse"
 msgid "None"
 msgstr "Ingen"
 
-#: capplets/file-types/mime-edit-dialog.c:847
+#: capplets/file-types/mime-edit-dialog.c:854
 msgid ""
 "Please enter a valid MIME type.  It should be of the form class/type and may "
 "not contain any spaces."
@@ -1107,15 +1111,15 @@ msgstr ""
 "Indtast en gyldig MIME-type. Den skal være på formen \"klasse/type\" og må "
 "ikke indeholde mellemrum."
 
-#: capplets/file-types/mime-edit-dialog.c:854
+#: capplets/file-types/mime-edit-dialog.c:861
 msgid "A MIME type with that name already exists, overwrite ?."
 msgstr "En MIME-type med det navn eksisterer allerede, overskriv den?"
 
-#: capplets/file-types/mime-edit-dialog.c:919
+#: capplets/file-types/mime-edit-dialog.c:926
 msgid "Category"
 msgstr "Kategori"
 
-#: capplets/file-types/mime-edit-dialog.c:924
+#: capplets/file-types/mime-edit-dialog.c:931
 msgid "Choose a file category"
 msgstr "Vælg en filkategori"
 
@@ -1153,11 +1157,11 @@ msgid "Add Service"
 msgstr "Tilføj tjeneste"
 
 # ditto
-#: capplets/file-types/service-edit-dialog.c:498
+#: capplets/file-types/service-edit-dialog.c:497
 msgid "Please enter a protocol name."
 msgstr "Indtast venligst et protokolnavn."
 
-#: capplets/file-types/service-edit-dialog.c:510
+#: capplets/file-types/service-edit-dialog.c:509
 msgid ""
 "Invalid protocol name. Please enter a protocol name without any spaces or "
 "punctuation."
@@ -1165,7 +1169,7 @@ msgstr ""
 "Ugyldigt protokolnavn. Indtast venligst et protokolnavn uden mellemrum eller "
 "punktuering."
 
-#: capplets/file-types/service-edit-dialog.c:524
+#: capplets/file-types/service-edit-dialog.c:523
 msgid "There is already a protocol by that name."
 msgstr "Der eksisterer allerede en protokol med det navn."
 
@@ -2299,9 +2303,6 @@ msgstr "O.k."
 
 #~ msgid "_Toolbars have: "
 #~ msgstr "_Værktøjslinjer har: "
-
-#~ msgid "_Enable keyboard accessibility"
-#~ msgstr "_Aktivér tastaturtilgængelighed"
 
 #~ msgid "<b>Test</b>"
 #~ msgstr "<b>Test</b>"

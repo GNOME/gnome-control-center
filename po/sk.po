@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: sk\n"
-"POT-Creation-Date: 2002-07-24 16:31+0200\n"
+"POT-Creation-Date: 2002-08-06 09:32-0400\n"
 "PO-Revision-Date: 2002-07-24 17:08+0200\n"
 "Last-Translator: Stanislav Višňovský <visnovsky@nenya.ms.mff.cuni.cz>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -23,12 +23,12 @@ msgstr ""
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "Pri pokuse o spustenie modulu pre klávesnicu nastala chyba: %s"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:291
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:309
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "Nepodarilo sa importovať nastavenie AccessX zo súboru '%s'"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:403
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:421
 msgid "Select CDE AccessX file"
 msgstr "Vyberte súbor CDE AccessX"
 
@@ -145,18 +145,22 @@ msgid "_Disable if unused for "
 msgstr "_Zakázať ak nepoužívané po:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
+msgid "_Enable keyboard accessibility"
+msgstr "_Povoliť sprístupnenie klávesnice"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
 msgid "_Ignore keypresses within  :"
 msgstr "_Ignorovať stlačenie kláves po dobu:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
 msgid "_Import CDE AccessX file"
 msgstr "_Importovať súbor CDE AccessX"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
 msgid "_Only accept keypress after :"
 msgstr "_Akceptovať stlačenie klávesu po:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:28
 msgid ""
 "_Turn off Sticky Keys when\n"
 "two keys pressed simultaneously"
@@ -164,27 +168,27 @@ msgstr ""
 "_Vypnúť lepivé klávesy ak sú\n"
 "naraz stlačené dva klávesy."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:30
 msgid "key is _accepted"
 msgstr "kláves je _akceptovaný"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:30
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:31
 msgid "key is _pressed"
 msgstr "kláves je _stlačený"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:31
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:32
 msgid "key is _rejected"
 msgstr "kláves je _odmietnutý"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:32
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
 msgid "msecs"
 msgstr "msek"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
 msgid "pixels/sec"
 msgstr "bodov/sek"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:35
 msgid "seconds"
 msgstr "sekúnd"
 
@@ -433,15 +437,18 @@ msgid "Change set"
 msgstr "Skupina zmien"
 
 #: capplets/common/gconf-property-editor.c:186
-msgid "GConf change set containing data to be forwarded to the gconf client on apply"
-msgstr "Skupina zmien GConf obsahujúca dáta predávané klientovi gconf pri použití"
+msgid ""
+"GConf change set containing data to be forwarded to the gconf client on apply"
+msgstr ""
+"Skupina zmien GConf obsahujúca dáta predávané klientovi gconf pri použití"
 
 #: capplets/common/gconf-property-editor.c:191
 msgid "Conversion to widget callback"
 msgstr "Callback pre prevod do prvku"
 
 #: capplets/common/gconf-property-editor.c:192
-msgid "Callback to be issued when data are to be converted from GConf to the widget"
+msgid ""
+"Callback to be issued when data are to be converted from GConf to the widget"
 msgstr "Callback volaný pre prevod dát z GConf do prvku"
 
 #: capplets/common/gconf-property-editor.c:197
@@ -449,7 +456,8 @@ msgid "Conversion from widget callback"
 msgstr "Callback pre prevod z prvku"
 
 #: capplets/common/gconf-property-editor.c:198
-msgid "Callback to be issued when data are to be converted to GConf from the widget"
+msgid ""
+"Callback to be issued when data are to be converted to GConf from the widget"
 msgstr "Callback volaný pre prevod dát do GConf z prvku"
 
 #: capplets/common/gconf-property-editor.c:203
@@ -633,7 +641,8 @@ msgstr "Podporuje _Netscape Remote Control"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:28
 msgid "Use this _editor to open text files in the file manager"
-msgstr "Použiť tento _editor pre otvorenie textových súborov v správcovi súborov"
+msgstr ""
+"Použiť tento _editor pre otvorenie textových súborov v správcovi súborov"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:29
 msgid "Web Browser"
@@ -869,25 +878,25 @@ msgid "Source Code"
 msgstr "Zdrojový kód"
 
 #: capplets/file-types/category-names.h:25
-#: capplets/file-types/mime-type-info.c:668
+#: capplets/file-types/mime-type-info.c:671
 msgid "Audio"
 msgstr "Audio"
 
 #: capplets/file-types/category-names.h:26
-#: capplets/file-types/mime-type-info.c:664
+#: capplets/file-types/mime-type-info.c:667
 msgid "Images"
 msgstr "Obrázky"
 
 #: capplets/file-types/category-names.h:27
-#: capplets/file-types/mime-type-info.c:666
+#: capplets/file-types/mime-type-info.c:669
 msgid "Video"
 msgstr "Video"
 
-#: capplets/file-types/file-types-capplet.c:215
+#: capplets/file-types/file-types-capplet.c:214
 msgid "Description"
 msgstr "Popis"
 
-#: capplets/file-types/file-types-capplet.c:237
+#: capplets/file-types/file-types-capplet.c:236
 msgid "Extensions"
 msgstr "Rozšírenia"
 
@@ -1028,8 +1037,8 @@ msgstr "Štruktúra obsahujúca informácie o kategórii MIME"
 #: capplets/file-types/mime-category-edit-dialog.c:344
 #: capplets/file-types/mime-edit-dialog.c:490
 #: capplets/file-types/mime-edit-dialog.c:594
-#: capplets/file-types/service-edit-dialog.c:359
-#: capplets/file-types/service-edit-dialog.c:408
+#: capplets/file-types/service-edit-dialog.c:358
+#: capplets/file-types/service-edit-dialog.c:407
 msgid "Custom"
 msgstr "Vlastný"
 
@@ -1062,7 +1071,7 @@ msgid "Add File Type"
 msgstr "Pridať typ súboru"
 
 #: capplets/file-types/mime-edit-dialog.c:435
-#: capplets/file-types/mime-type-info.c:670
+#: capplets/file-types/mime-type-info.c:673
 msgid "Misc"
 msgstr "Rôzne"
 
@@ -1071,21 +1080,21 @@ msgstr "Rôzne"
 msgid "None"
 msgstr "Žiadny"
 
-#: capplets/file-types/mime-edit-dialog.c:847
+#: capplets/file-types/mime-edit-dialog.c:854
 msgid ""
 "Please enter a valid MIME type.  It should be of the form class/type and may "
 "not contain any spaces."
 msgstr ""
 
-#: capplets/file-types/mime-edit-dialog.c:854
+#: capplets/file-types/mime-edit-dialog.c:861
 msgid "A MIME type with that name already exists, overwrite ?."
 msgstr "Typ MIME s týmto menom už existuje. Chcete ho prepísať?"
 
-#: capplets/file-types/mime-edit-dialog.c:919
+#: capplets/file-types/mime-edit-dialog.c:926
 msgid "Category"
 msgstr "Kategória"
 
-#: capplets/file-types/mime-edit-dialog.c:924
+#: capplets/file-types/mime-edit-dialog.c:931
 msgid "Choose a file category"
 msgstr "Vyberte kategóriu súboru"
 
@@ -1122,11 +1131,11 @@ msgstr "TRUE znamená dialóg pre pridanie služby"
 msgid "Add Service"
 msgstr "Pridať službu"
 
-#: capplets/file-types/service-edit-dialog.c:498
+#: capplets/file-types/service-edit-dialog.c:497
 msgid "Please enter a protocol name."
 msgstr "Prosím, zadajte meno protokolu."
 
-#: capplets/file-types/service-edit-dialog.c:510
+#: capplets/file-types/service-edit-dialog.c:509
 msgid ""
 "Invalid protocol name. Please enter a protocol name without any spaces or "
 "punctuation."
@@ -1134,7 +1143,7 @@ msgstr ""
 "Neplatné meno protokolu. Prosím, zadajte meno protokolu bez medzier a "
 "znamienok."
 
-#: capplets/file-types/service-edit-dialog.c:524
+#: capplets/file-types/service-edit-dialog.c:523
 msgid "There is already a protocol by that name."
 msgstr "Protokol s týmto menom už existuje."
 
@@ -1234,7 +1243,8 @@ msgstr "Správa okien"
 #: capplets/keybindings/gnome-keybinding-properties.c:560
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
-msgstr "Chyba pri nastavovaní nového akcelerátoru v konfiguračnej databázi: %s\n"
+msgstr ""
+"Chyba pri nastavovaní nového akcelerátoru v konfiguračnej databázi: %s\n"
 
 #: capplets/keybindings/gnome-keybinding-properties.c:711
 msgid ""
@@ -1282,8 +1292,10 @@ msgstr "_Prístupnosť"
 #: capplets/keyboard/gnome-keyboard-properties.c:275
 #: capplets/sound/sound-properties-capplet.c:145
 #: capplets/sound/sound-properties-capplet.c:147
-msgid "Just apply settings and quit (compatibility only; now handled by daemon)"
-msgstr "Použiť nastavenia a skončiť (iba pre kompatibilitu, teraz spracováva démon)"
+msgid ""
+"Just apply settings and quit (compatibility only; now handled by daemon)"
+msgstr ""
+"Použiť nastavenia a skončiť (iba pre kompatibilitu, teraz spracováva démon)"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:2
 msgid "Bee_p"
@@ -1507,7 +1519,8 @@ msgid "Drag and Drop"
 msgstr "Ťahaj a pusť"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:14
-msgid "Left-handed mouse mode switches the left and right buttons on the mouse."
+msgid ""
+"Left-handed mouse mode switches the left and right buttons on the mouse."
 msgstr "Myš pre ľavákov vymení ľavé a pravé tlačidlá myši."
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:15
@@ -2183,9 +2196,6 @@ msgstr ""
 msgid "OK"
 msgstr "OK"
 
-#~ msgid "_Enable keyboard accessibility"
-#~ msgstr "_Povoliť sprístupnenie klávesnice"
-
 #~ msgid "<b>Test</b>"
 #~ msgstr "<b>Test</b>"
 
@@ -2386,4 +2396,3 @@ msgstr "OK"
 
 #~ msgid "_Toolbars have: "
 #~ msgstr "_Panely nástrojov majú:"
-

@@ -1,13 +1,9 @@
 noinst_LIBRARIES = libaccessibility-keyboard.a
+bin_PROGRAMS = gnome-accessibility-keyboard-properties
 
 libaccessibility_keyboard_a_SOURCES =		\
     accessibility-keyboard.c			\
     accessibility-keyboard.h
-
-# in case we need to forward port the sun accessX extension
-#    AccessXcomm.c
-
-bin_PROGRAMS = gnome-accessibility-keyboard-properties
 
 gnome_accessibility_keyboard_properties_SOURCES = gnome-accessibility-keyboard-properties.c
 gnome_accessibility_keyboard_properties_LDADD = \
