@@ -30,6 +30,10 @@
 #include "mime-type-info.h"
 #include "service-info.h"
 
+/* List of MimeTypeInfo structures that have data to be committed */
+
+static GList *dirty_list = NULL;
+
 ModelEntry *
 get_model_entries (void)
 {
@@ -125,3 +129,44 @@ model_entry_remove_child (ModelEntry *entry, ModelEntry *child)
 	}
 }
 
+void
+model_entry_save (ModelEntry *entry) 
+{
+	switch (entry->type) {
+	case MODEL_ENTRY_MIME_TYPE:
+		mime_type_info_save (MIME_TYPE_INFO (entry));
+		break;
+
+	case MODEL_ENTRY_SERVICE:
+		service_info_save (SERVICE_INFO (entry));
+		break;
+
+	case MODEL_ENTRY_CATEGORY:
+		mime_category_info_save (MIME_CATEGORY_INFO (entry));
+		break;
+
+	default:
+		break;
+	}
+}
+
+void
+model_entry_append_to_dirty_list (ModelEntry *entry)
+{
+	if (g_list_find (dirty_list, entry) == NULL)
+		dirty_list = g_list_prepend (dirty_list, entry);
+}
+
+void
+model_entry_remove_from_dirty_list (ModelEntry *entry)
+{
+	dirty_list = g_list_remove (dirty_list, entry);
+}
+
+void
+model_entry_commit_dirty_list (void)
+{
+	gnome_vfs_mime_freeze ();
+	g_list_foreach (dirty_list, (GFunc) model_entry_save, NULL);
+	gnome_vfs_mime_thaw ();
+}

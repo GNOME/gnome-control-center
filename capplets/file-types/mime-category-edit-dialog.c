@@ -38,16 +38,16 @@
 enum {
 	PROP_0,
 	PROP_MODEL,
-	PROP_ITER
+	PROP_INFO
 };
 
 struct _MimeCategoryEditDialogPrivate 
 {
-	GladeXML     *dialog_xml;
-	GtkWidget    *dialog_win;
-	GtkTreeModel *model;
-	GtkTreeIter  *iter;
-	MimeTypeInfo *info;
+	GladeXML         *dialog_xml;
+	GtkWidget        *dialog_win;
+	MimeCategoryInfo *info;
+
+	GtkTreeModel     *model;
 };
 
 static GObjectClass *parent_class;
@@ -113,28 +113,16 @@ mime_category_edit_dialog_init (MimeCategoryEditDialog *dialog, MimeCategoryEdit
 
 	dialog->p = g_new0 (MimeCategoryEditDialogPrivate, 1);
 	dialog->p->dialog_xml = glade_xml_new
-		(GNOMECC_DATA_DIR "/interfaces/file-types-properties.glade", "edit_widget", NULL);
+		(GNOMECC_DATA_DIR "/interfaces/file-types-properties.glade", "mime_category_edit_widget", NULL);
 
 	dialog->p->model = NULL;
 	dialog->p->info = NULL;
 
 	size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
-	gtk_size_group_add_widget (size_group, WID ("description_label"));
-	gtk_size_group_add_widget (size_group, WID ("mime_type_label"));
-	gtk_size_group_add_widget (size_group, WID ("category_label"));
-
-	size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
-	gtk_size_group_add_widget (size_group, WID ("component_label"));
 	gtk_size_group_add_widget (size_group, WID ("default_action_label"));
 	gtk_size_group_add_widget (size_group, WID ("program_label"));
 
-	gtk_widget_set_sensitive (WID ("icon_entry"), FALSE);
-	gtk_widget_set_sensitive (WID ("mime_type_entry"), FALSE);
-	gtk_widget_set_sensitive (WID ("mime_type_label"), FALSE);
-	gtk_widget_set_sensitive (WID ("description_entry"), FALSE);
-	gtk_widget_set_sensitive (WID ("file_extensions_frame"), FALSE);
-	gtk_widget_set_sensitive (WID ("component_label"), FALSE);
-	gtk_widget_set_sensitive (WID ("component_select"), FALSE);
+	gtk_widget_set_sensitive (WID ("name_box"), FALSE);
 
 	dialog->p->dialog_win = gtk_dialog_new_with_buttons
 		(_("Edit file category"), NULL, -1,
@@ -142,7 +130,7 @@ mime_category_edit_dialog_init (MimeCategoryEditDialog *dialog, MimeCategoryEdit
 		 GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 		 NULL);
 
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog->p->dialog_win)->vbox), WID ("edit_widget"), TRUE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog->p->dialog_win)->vbox), WID ("mime_category_edit_widget"), TRUE, TRUE, 0);
 
 	g_signal_connect_swapped (G_OBJECT (WID ("default_action_select")), "changed", (GCallback) default_action_changed_cb, dialog);
 
@@ -173,10 +161,10 @@ mime_category_edit_dialog_class_init (MimeCategoryEditDialogClass *class)
 				      _("GtkTreeModel that contains the category data"),
 				      G_PARAM_READWRITE));
 	g_object_class_install_property
-		(object_class, PROP_ITER,
-		 g_param_spec_pointer ("iterator",
-				      _("Iterator"),
-				      _("Iterator"),
+		(object_class, PROP_INFO,
+		 g_param_spec_pointer ("mime-cat-info",
+				      _("MIME category info"),
+				      _("Structure containing information on the MIME category"),
 				      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 
 	parent_class = G_OBJECT_CLASS
@@ -202,9 +190,8 @@ mime_category_edit_dialog_set_prop (GObject *object, guint prop_id, const GValue
 
 		break;
 
-	case PROP_ITER:
-		dialog->p->iter = gtk_tree_iter_copy (g_value_get_pointer (value));
-		dialog->p->info = MIME_TYPE_INFO (MODEL_ENTRY_FROM_ITER (dialog->p->iter));
+	case PROP_INFO:
+		dialog->p->info = g_value_get_pointer (value);
 
 		if (dialog->p->model != NULL)
 			fill_dialog (dialog);
@@ -232,8 +219,8 @@ mime_category_edit_dialog_get_prop (GObject *object, guint prop_id, GValue *valu
 		g_value_set_pointer (value, dialog->p->model);
 		break;
 
-	case PROP_ITER:
-		g_value_set_pointer (value, dialog->p->iter);
+	case PROP_INFO:
+		g_value_set_pointer (value, dialog->p->info);
 		break;
 
 	default:
@@ -275,32 +262,28 @@ mime_category_edit_dialog_finalize (GObject *object)
 
 	mime_category_edit_dialog = MIME_CATEGORY_EDIT_DIALOG (object);
 
-	gtk_tree_iter_free (mime_category_edit_dialog->p->iter);
 	g_free (mime_category_edit_dialog->p);
 
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
 GObject *
-mime_category_edit_dialog_new (GtkTreeModel *model, GtkTreeIter *iter) 
+mime_category_edit_dialog_new (GtkTreeModel *model, MimeCategoryInfo *info) 
 {
 	return g_object_new (mime_category_edit_dialog_get_type (),
 			     "model", model,
-			     "iterator", iter,
+			     "mime-cat-info", info,
 			     NULL);
 }
 
 static void
 fill_dialog (MimeCategoryEditDialog *dialog)
 {
-	gtk_entry_set_text (GTK_ENTRY (WID ("description_entry")), mime_type_info_get_description (dialog->p->info));
+	mime_category_info_load_all (dialog->p->info);
+
+	gtk_entry_set_text (GTK_ENTRY (WID ("name_entry")), dialog->p->info->name);
 
 	populate_application_list (dialog);
-
-	if (dialog->p->info->entry.parent->type == MODEL_ENTRY_NONE)
-		gtk_widget_set_sensitive (WID ("use_category_defaults_toggle"), FALSE);
-
-	gtk_widget_set_sensitive (WID ("component_box"), FALSE);
 
 	gtk_widget_show_all (dialog->p->dialog_win);
 }
@@ -319,7 +302,7 @@ populate_application_list (MimeCategoryEditDialog *dialog)
 
 	menu = GTK_MENU (gtk_menu_new ());
 
-	app_list = mime_type_info_category_find_supported_apps (dialog->p->info);
+	app_list = mime_category_info_find_apps (dialog->p->info);
 
 	for (tmp = app_list, i = 0; tmp != NULL; tmp = tmp->next, i++) {
 		app = gnome_vfs_application_registry_get_mime_application (tmp->data);
@@ -363,9 +346,13 @@ static void
 store_data (MimeCategoryEditDialog *dialog)
 {
 	GtkTreePath *path;
+	GtkTreeIter  iter;
 
-	path = gtk_tree_model_get_path (dialog->p->model, dialog->p->iter);
-	gtk_tree_model_row_changed (dialog->p->model, path, dialog->p->iter);
+	model_entry_append_to_dirty_list (MODEL_ENTRY (dialog->p->info));
+
+	mime_types_model_construct_iter (MIME_TYPES_MODEL (dialog->p->model), MODEL_ENTRY (dialog->p->info), &iter);
+	path = gtk_tree_model_get_path (dialog->p->model, &iter);
+	gtk_tree_model_row_changed (dialog->p->model, path, &iter);
 	gtk_tree_path_free (path);
 }
 

@@ -34,7 +34,6 @@
 #include <gnome.h>
 #include <glade/glade.h>
 #include <gconf/gconf-client.h>
-#include <gconf/gconf-changeset.h>
 
 #include "mime-types-model.h"
 #include "mime-edit-dialog.h"
@@ -46,7 +45,6 @@
 #define WID(x) (glade_xml_get_widget (dialog, x))
 
 static GList          *remove_list = NULL;
-static GConfChangeSet *changeset = NULL;
 
 static void
 add_mime_cb (GtkButton *button, GladeXML *dialog) 
@@ -61,6 +59,19 @@ add_mime_cb (GtkButton *button, GladeXML *dialog)
 	add_dialog = mime_add_dialog_new (model);
 }
 
+static void
+add_service_cb (GtkButton *button, GladeXML *dialog) 
+{
+	GtkTreeView     *treeview;
+	GtkTreeModel    *model;
+	GObject         *add_dialog;
+
+	treeview = GTK_TREE_VIEW (WID ("mime_types_tree"));
+	model = gtk_tree_view_get_model (treeview);
+
+	add_dialog = service_add_dialog_new (model);
+}
+
 static GObject *
 launch_edit_dialog (GtkTreeModel *model, GtkTreeIter *iter) 
 {
@@ -70,13 +81,13 @@ launch_edit_dialog (GtkTreeModel *model, GtkTreeIter *iter)
 
 	switch (entry->type) {
 	case MODEL_ENTRY_MIME_TYPE:
-		return mime_edit_dialog_new (model, iter);
+		return mime_edit_dialog_new (model, MIME_TYPE_INFO (entry));
 
 	case MODEL_ENTRY_SERVICE:
-		return service_edit_dialog_new (model, iter);
+		return service_edit_dialog_new (model, SERVICE_INFO (entry));
 
 	case MODEL_ENTRY_CATEGORY:
-		return mime_category_edit_dialog_new (model, iter);
+		return mime_category_edit_dialog_new (model, MIME_CATEGORY_INFO (entry));
 
 	default:
 		return NULL;
@@ -149,7 +160,7 @@ remove_cb (GtkButton *button, GladeXML *dialog)
 		path = gtk_tree_model_get_path (model, &iter);
 		model_entry_remove_child (entry->parent, entry);
 		remove_list = g_list_prepend (remove_list, MIME_TYPE_INFO (entry)->mime_type);
-		mime_type_remove_from_dirty_list (MIME_TYPE_INFO (entry)->mime_type);
+		model_entry_remove_from_dirty_list (entry);
 		gtk_tree_model_row_deleted (model, path);
 		gtk_tree_path_free (path);
 	}
@@ -208,6 +219,7 @@ create_dialog (void)
 	gtk_tree_selection_set_mode (selection, GTK_SELECTION_SINGLE);
 
 	g_signal_connect (G_OBJECT (WID ("add_mime_button")), "clicked", (GCallback) add_mime_cb, dialog);
+	g_signal_connect (G_OBJECT (WID ("add_service_button")), "clicked", (GCallback) add_service_cb, dialog);
 	g_signal_connect (G_OBJECT (WID ("edit_button")), "clicked", (GCallback) edit_cb, dialog);
 	g_signal_connect (G_OBJECT (WID ("remove_button")), "clicked", (GCallback) remove_cb, dialog);
 	g_signal_connect (G_OBJECT (selection), "changed", (GCallback) selection_changed_cb, dialog);
@@ -220,13 +232,11 @@ create_dialog (void)
 static void
 apply_cb (void) 
 {
-	mime_type_commit_dirty_list ();
+	model_entry_commit_dirty_list ();
 
 	g_list_foreach (remove_list, (GFunc) gnome_vfs_mime_registered_mime_type_delete, NULL);
 	g_list_foreach (remove_list, (GFunc) g_free, NULL);
 	g_list_free (remove_list);
-
-	gconf_client_commit_change_set (gconf_client_get_default (), changeset, TRUE, NULL);
 }
 
 int
@@ -240,7 +250,6 @@ main (int argc, char **argv)
 
 	gnome_program_init ("gnome-file-types-properties", VERSION, LIBGNOMEUI_MODULE, argc, argv, NULL);
 
-	changeset = gconf_change_set_new ();
 	dialog = create_dialog ();
 
 	g_signal_connect (G_OBJECT (WID ("main_apply_button")), "clicked", (GCallback) apply_cb, NULL);

@@ -38,10 +38,6 @@
 #include "mime-type-info.h"
 #include "mime-types-model.h"
 
-/* List of MimeTypeInfo structures that have data to be committed */
-
-static GList *dirty_list = NULL;
-
 static const gchar *get_category_name (const gchar        *mime_type);
 static GSList *get_lang_list          (void);
 static gchar  *form_extensions_string (const MimeTypeInfo *info,
@@ -51,7 +47,7 @@ static void    get_icon_pixbuf        (MimeTypeInfo       *info,
 				       const gchar        *icon_path,
 				       gboolean            want_large);
 
-static MimeTypeInfo *get_category     (const gchar        *category_name);
+static MimeCategoryInfo *get_category (const gchar        *category_name);
 
 
 
@@ -83,23 +79,6 @@ mime_type_info_new (const gchar *mime_type)
 	} else {
 		info->entry.parent = get_model_entries ();
 	}
-
-	return info;
-}
-
-MimeTypeInfo *
-mime_type_info_new_category (MimeTypeInfo *parent, const gchar *category) 
-{
-	MimeTypeInfo      *info;
-
-	info = g_new0 (MimeTypeInfo, 1);
-	MODEL_ENTRY (info)->type = MODEL_ENTRY_CATEGORY;
-
-	info->description = g_strdup (category);
-	MODEL_ENTRY (info)->parent = MODEL_ENTRY (parent);
-
-	if (parent != NULL)
-		model_entry_insert_child (MODEL_ENTRY (parent), MODEL_ENTRY (info));
 
 	return info;
 }
@@ -233,19 +212,13 @@ mime_type_info_get_category_name (const MimeTypeInfo *info)
 		tmp = info->entry.parent;
 
 	for (; tmp != NULL && tmp->type != MODEL_ENTRY_NONE; tmp = tmp->parent) {
-		g_string_prepend (string, MIME_TYPE_INFO (tmp)->description);
+		g_string_prepend (string, MIME_CATEGORY_INFO (tmp)->name);
 		g_string_prepend (string, "/");
 	}
 
 	ret = g_strdup ((*string->str == '\0') ? string->str : string->str + 1);
 	g_string_free (string, TRUE);
 	return ret;
-}
-
-GList *
-mime_type_info_category_find_supported_apps (MimeTypeInfo *info)
-{
-	return NULL;
 }
 
 void
@@ -321,8 +294,6 @@ mime_type_info_save (const MimeTypeInfo *info)
 void
 mime_type_info_free (MimeTypeInfo *info)
 {
-	dirty_list = g_list_remove (dirty_list, info);
-
 	g_free (info->mime_type);
 	g_free (info->description);
 	g_free (info->icon_name);
@@ -338,6 +309,120 @@ mime_type_info_free (MimeTypeInfo *info)
 		g_object_unref (G_OBJECT (info->small_icon_pixbuf));
 
 	g_free (info);
+}
+
+MimeCategoryInfo *
+mime_category_info_new (MimeCategoryInfo *parent, const gchar *name) 
+{
+	MimeCategoryInfo      *info;
+
+	info = g_new0 (MimeCategoryInfo, 1);
+	MODEL_ENTRY (info)->type = MODEL_ENTRY_CATEGORY;
+
+	info->name = g_strdup (name);
+
+	if (parent != NULL)
+		MODEL_ENTRY (info)->parent = MODEL_ENTRY (parent);
+	else
+		MODEL_ENTRY (info)->parent = get_model_entries ();
+
+	model_entry_insert_child (MODEL_ENTRY (info)->parent, MODEL_ENTRY (info));
+
+	return info;
+}
+
+void
+mime_category_info_load_all (MimeCategoryInfo *category)
+{
+}
+
+void
+mime_category_info_save (MimeCategoryInfo *category) 
+{
+}
+
+static GList *
+find_possible_supported_apps (ModelEntry *entry) 
+{
+	GList      *ret;
+	ModelEntry *tmp;
+
+	if (entry == NULL) return NULL;
+
+	switch (entry->type) {
+	case MODEL_ENTRY_CATEGORY:
+		for (tmp = entry->first_child; tmp != NULL; tmp = tmp->next) {
+			ret = find_possible_supported_apps (tmp);
+
+			if (ret != NULL)
+				return ret;
+		}
+
+		return NULL;
+
+	case MODEL_ENTRY_MIME_TYPE:
+		return gnome_vfs_application_registry_get_applications (MIME_TYPE_INFO (entry)->mime_type);
+
+	default:
+		return NULL;
+	}
+}
+
+static GList *
+intersect_lists (GList *list, GList *list1) 
+{
+	GList *tmp, *tmp1, *tmpnext;
+
+	tmp = list;
+
+	while (tmp != NULL) {
+		tmpnext = tmp->next;
+
+		for (tmp1 = list1; tmp1 != NULL; tmp1 = tmp1->next)
+			if (!strcmp (tmp->data, tmp1->data))
+				break;
+
+		if (tmp1 == NULL)
+			list = g_list_remove_link (list, tmp);
+
+		tmp = tmpnext;
+	}
+
+	return list;
+}
+
+static GList *
+reduce_supported_app_list (ModelEntry *entry, GList *list) 
+{
+	GList      *type_list;
+	ModelEntry *tmp;
+
+	switch (entry->type) {
+	case MODEL_ENTRY_CATEGORY:
+		for (tmp = entry->first_child; tmp != NULL; tmp = tmp->next)
+			list = reduce_supported_app_list (tmp, list);
+		break;
+
+	case MODEL_ENTRY_MIME_TYPE:
+		type_list = gnome_vfs_application_registry_get_applications (MIME_TYPE_INFO (entry)->mime_type);
+		list = intersect_lists (list, type_list);
+		g_list_free (type_list);
+		break;
+
+	default:
+		break;
+	}
+
+	return list;
+}
+
+GList *
+mime_category_info_find_apps (MimeCategoryInfo *info)
+{
+	GList *ret;
+
+	ret = find_possible_supported_apps (MODEL_ENTRY (info));
+	return reduce_supported_app_list (MODEL_ENTRY (info), ret);
 }
 
 char *
@@ -374,34 +459,6 @@ mime_type_get_pretty_name_for_server (Bonobo_ServerInfo *server)
 	}
 			
         return g_strdup_printf ("View as %s", view_as_name);
-}
-
-void
-mime_type_append_to_dirty_list (MimeTypeInfo *info)
-{
-	if (g_list_find (dirty_list, info) == NULL)
-		dirty_list = g_list_prepend (dirty_list, info);
-}
-
-void
-mime_type_remove_from_dirty_list (const gchar *mime_type)
-{
-	GList *tmp = dirty_list, *tmp1;
-
-	while (tmp != NULL) {
-		tmp1 = tmp->next;
-		if (!strcmp (mime_type, ((MimeTypeInfo *) tmp->data)->mime_type))
-			dirty_list = g_list_remove_link (dirty_list, tmp);
-		tmp = tmp1;
-	}
-}
-
-void
-mime_type_commit_dirty_list (void)
-{
-	gnome_vfs_mime_freeze ();
-	g_list_foreach (dirty_list, (GFunc) mime_type_info_save, NULL);
-	gnome_vfs_mime_thaw ();
 }
 
 
@@ -509,7 +566,7 @@ get_icon_pixbuf (MimeTypeInfo *info, const gchar *icon_path, gboolean want_large
 	}
 }
 
-static MimeTypeInfo *
+static MimeCategoryInfo *
 get_category (const gchar *category_name)
 {
 	ModelEntry *current, *child;
@@ -528,17 +585,17 @@ get_category (const gchar *category_name)
 			if (child->type != MODEL_ENTRY_CATEGORY)
 				continue;
 
-			if (!strcmp (MIME_TYPE_INFO (child)->description, categories[i]))
+			if (!strcmp (MIME_CATEGORY_INFO (child)->name, categories[i]))
 				break;
 		}
 
 		if (child == NULL)
-			child = MODEL_ENTRY (mime_type_info_new_category (MIME_TYPE_INFO (current), categories[i]));
+			child = MODEL_ENTRY (mime_category_info_new (MIME_CATEGORY_INFO (current), categories[i]));
 
 		current = child;
 	}
 
 	g_strfreev (categories);
 
-	return MIME_TYPE_INFO (current);
+	return MIME_CATEGORY_INFO (current);
 }

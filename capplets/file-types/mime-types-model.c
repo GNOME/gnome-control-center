@@ -405,8 +405,11 @@ mime_types_model_get_value (GtkTreeModel *tree_model, GtkTreeIter *iter, gint co
 
 		switch (entry->type) {
 		case MODEL_ENTRY_MIME_TYPE:
-		case MODEL_ENTRY_CATEGORY:
 			g_value_set_static_string (value, mime_type_info_get_description (MIME_TYPE_INFO (entry)));
+			break;
+
+		case MODEL_ENTRY_CATEGORY:
+			g_value_set_static_string (value, MIME_CATEGORY_INFO (entry)->name);
 			break;
 
 		case MODEL_ENTRY_SERVICE:

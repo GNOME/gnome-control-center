@@ -51,8 +51,8 @@ struct _MimeCategoryEditDialogClass
 
 GType mime_category_edit_dialog_get_type (void);
 
-GObject *mime_category_edit_dialog_new   (GtkTreeModel *model,
-					  GtkTreeIter  *iter);
+GObject *mime_category_edit_dialog_new   (GtkTreeModel     *model,
+					  MimeCategoryInfo *info);
 
 G_END_DECLS
 

@@ -35,8 +35,10 @@
 G_BEGIN_DECLS
 
 #define MIME_TYPE_INFO(obj) ((MimeTypeInfo *) obj)
+#define MIME_CATEGORY_INFO(obj) ((MimeCategoryInfo *) obj)
 
 typedef struct _MimeTypeInfo MimeTypeInfo;
+typedef struct _MimeCategoryInfo MimeCategoryInfo;
 
 struct _MimeTypeInfo
 {
@@ -57,11 +59,19 @@ struct _MimeTypeInfo
 	gboolean                 needs_terminal;
 };
 
+struct _MimeCategoryInfo
+{
+	ModelEntry               entry;
+
+	gchar                   *name;
+	GnomeVFSMimeApplication *default_action;
+	gchar                   *custom_line;
+	gboolean                 needs_terminal;
+};
+
 void          load_all_mime_types                  (void);
 
 MimeTypeInfo *mime_type_info_new                   (const gchar        *mime_type);
-MimeTypeInfo *mime_type_info_new_category          (MimeTypeInfo       *parent,
-						    const gchar        *category);
 
 void          mime_type_info_load_all              (MimeTypeInfo       *info);
 const gchar  *mime_type_info_get_description       (MimeTypeInfo       *info);
@@ -76,19 +86,18 @@ gchar        *mime_type_info_get_file_extensions_pretty_string
                                                    (MimeTypeInfo *info);
 gchar        *mime_type_info_get_category_name     (const MimeTypeInfo *info);
 
-GList        *mime_type_info_category_find_supported_apps
-                                                   (MimeTypeInfo      *info);
-
 void          mime_type_info_set_category_name     (const MimeTypeInfo *info,
 						    const gchar        *category_name);
 void          mime_type_info_set_file_extensions   (MimeTypeInfo       *info,
 						    GList              *list);
 
-gchar        *mime_type_get_pretty_name_for_server (Bonobo_ServerInfo *server);
+MimeCategoryInfo *mime_category_info_new           (MimeCategoryInfo   *parent,
+						    const gchar        *name);
+void          mime_category_info_load_all          (MimeCategoryInfo   *category);
+void          mime_category_info_save              (MimeCategoryInfo   *category);
+GList        *mime_category_info_find_apps         (MimeCategoryInfo   *info);
 
-void          mime_type_append_to_dirty_list       (MimeTypeInfo      *info);
-void          mime_type_remove_from_dirty_list     (const gchar       *mime_type);
-void          mime_type_commit_dirty_list          (void);
+gchar        *mime_type_get_pretty_name_for_server (Bonobo_ServerInfo *server);
 
 G_END_DECLS
 

@@ -5,8 +5,8 @@
  - Better sorting on the MIME types tree
  - Don't consider a mime type when generating category handler list if the mime type overrides the category default
  - Implement override_category_default flag
- - Implement setting of default action for a whole category
- - Implement retrieving the current default action for a whole category
+ - Implement mime_category_info_save, mime_category_info_load_all
  - Implement remove for Internet services
- - Implement add service
- - Refactor: Don't pass iter to add/edit dialogs, just pass structure. Generate iter on the fly
+ - Better checking for duplicate service names, check for duplicate MIME types
+ - Don't enable Remove button for categories
+ - Make sure cancel on add is handled properly

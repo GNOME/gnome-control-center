@@ -83,7 +83,7 @@ load_all_services (void)
 		if (protocol_name == NULL)
 			continue;
 
-		service_info_new (protocol_name, NULL);
+		service_info_new (protocol_name);
 
 		g_free (tmp->data);
 	}
@@ -92,13 +92,14 @@ load_all_services (void)
 }
 
 ServiceInfo *
-service_info_new (const gchar *protocol, GConfChangeSet *changeset)
+service_info_new (const gchar *protocol)
 {
 	ServiceInfo *info;
 
 	info = g_new0 (ServiceInfo, 1);
-	info->protocol = g_strdup (protocol);
-	info->changeset = changeset;
+
+	if (protocol != NULL)
+		info->protocol = g_strdup (protocol);
 
 	info->entry.type = MODEL_ENTRY_SERVICE;
 	info->entry.parent = MODEL_ENTRY (get_services_category_entry ());
@@ -146,12 +147,6 @@ service_info_get_description (ServiceInfo *info)
 	}
 
 	return info->description;
-}
-
-void
-service_info_set_changeset (ServiceInfo *info, GConfChangeSet *changeset) 
-{
-	info->changeset = changeset;
 }
 
 void
@@ -240,12 +235,7 @@ set_string (const ServiceInfo *info, gchar *end, gchar *value)
 		return;
 
 	key = get_key_name (info, end);
-
-	if (info->changeset != NULL)
-		gconf_change_set_set_string (info->changeset, key, value);
-	else
-		gconf_client_set_string (gconf_client_get_default (), key, value, NULL);
-
+	gconf_client_set_string (gconf_client_get_default (), key, value, NULL);
 	g_free (key);
 }
 
@@ -255,34 +245,17 @@ set_bool (const ServiceInfo *info, gchar *end, gboolean value)
 	gchar *key;
 
 	key = get_key_name (info, end);
-
-	if (info->changeset != NULL)
-		gconf_change_set_set_bool (info->changeset, key, value);
-	else
-		gconf_client_set_bool (gconf_client_get_default (), key, value, NULL);
-
+	gconf_client_set_bool (gconf_client_get_default (), key, value, NULL);
 	g_free (key);
 }
 
 static gchar *
 get_string (ServiceInfo *info, const gchar *end) 
 {
-	gchar      *key, *ret;
-	GConfValue *value;
-	gboolean    found = FALSE;
+	gchar *key, *ret;
 
 	key = get_key_name (info, end);
-
-	if (info->changeset != NULL)
-		found = gconf_change_set_check_value (info->changeset, key, &value);
-
-	if (!found || info->changeset == NULL) {
-		ret = gconf_client_get_string (gconf_client_get_default (), key, NULL);
-	} else {
-		ret = g_strdup (gconf_value_get_string (value));
-		gconf_value_free (value);
-	}
-
+	ret = gconf_client_get_string (gconf_client_get_default (), key, NULL);
 	g_free (key);
 
 	return ret;
@@ -293,21 +266,9 @@ get_bool (const ServiceInfo *info, gchar *end)
 {
 	gchar      *key;
 	gboolean    ret;
-	GConfValue *value;
-	gboolean    found = FALSE;
 
 	key = get_key_name (info, end);
-
-	if (info->changeset != NULL)
-		found = gconf_change_set_check_value (info->changeset, key, &value);
-
-	if (!found || info->changeset == NULL) {
-		ret = gconf_client_get_bool (gconf_client_get_default (), key, NULL);
-	} else {
-		ret = gconf_value_get_bool (value);
-		gconf_value_free (value);
-	}
-
+	ret = gconf_client_get_bool (gconf_client_get_default (), key, NULL);
 	g_free (key);
 
 	return ret;

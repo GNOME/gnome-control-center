@@ -26,6 +26,8 @@
 #endif
 
 #include <glade/glade.h>
+#include <gconf/gconf-client.h>
+#include <ctype.h>
 
 #include "service-edit-dialog.h"
 #include "mime-types-model.h"
@@ -35,7 +37,8 @@
 enum {
 	PROP_0,
 	PROP_MODEL,
-	PROP_ITER
+	PROP_INFO,
+	PROP_IS_ADD
 };
 
 struct _ServiceEditDialogPrivate 
@@ -43,9 +46,9 @@ struct _ServiceEditDialogPrivate
 	ServiceInfo  *info;
 	GladeXML     *dialog_xml;
 	GtkWidget    *dialog_win;
+	gboolean      is_add;
 
 	GtkTreeModel *model;
-	GtkTreeIter  *iter;
 };
 
 static GObjectClass *parent_class;
@@ -68,9 +71,12 @@ static void service_edit_dialog_dispose     (GObject *object);
 static void service_edit_dialog_finalize    (GObject *object);
 
 static void fill_dialog                     (ServiceEditDialog *dialog);
+static void setup_add_dialog                (ServiceEditDialog *dialog);
+
 static void populate_app_list               (ServiceEditDialog *dialog);
 
 static void store_data                      (ServiceEditDialog *dialog);
+static gboolean validate_data               (ServiceEditDialog *dialog);
 
 static void program_sensitive_cb            (ServiceEditDialog *dialog,
 					     GtkToggleButton   *tb);
@@ -161,10 +167,18 @@ service_edit_dialog_class_init (ServiceEditDialogClass *class)
 				      G_PARAM_READWRITE));
 
 	g_object_class_install_property
-		(object_class, PROP_ITER,
-		 g_param_spec_pointer ("iterator",
-				       _("Iterator"),
-				       _("Iterator"),
+		(object_class, PROP_INFO,
+		 g_param_spec_pointer ("service-info",
+				       _("Service info"),
+				       _("Structure containing service information"),
+				       G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+
+	g_object_class_install_property
+		(object_class, PROP_IS_ADD,
+		 g_param_spec_boolean ("is-add",
+				       _("Is add"),
+				       _("TRUE if this is an add service dialog"),
+				       FALSE,
 				       G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 
 	parent_class = G_OBJECT_CLASS
@@ -186,10 +200,24 @@ service_edit_dialog_set_prop (GObject *object, guint prop_id, const GValue *valu
 		dialog->p->model = GTK_TREE_MODEL (g_value_get_object (value));
 		break;
 
-	case PROP_ITER:
-		dialog->p->iter = gtk_tree_iter_copy (g_value_get_pointer (value));
-		dialog->p->info = SERVICE_INFO (MODEL_ENTRY_FROM_ITER (dialog->p->iter));
-		fill_dialog (dialog);
+	case PROP_INFO:
+		if (g_value_get_pointer (value) != NULL) {
+			dialog->p->info = g_value_get_pointer (value);
+			fill_dialog (dialog);
+			gtk_widget_show_all (dialog->p->dialog_win);
+		}
+
+		break;
+
+	case PROP_IS_ADD:
+		dialog->p->is_add = g_value_get_boolean (value);
+
+		if (dialog->p->is_add) {
+			dialog->p->info = service_info_new (NULL);
+			setup_add_dialog (dialog);
+			gtk_widget_show_all (dialog->p->dialog_win);
+		}
+
 		break;
 
 	default:
@@ -213,8 +241,12 @@ service_edit_dialog_get_prop (GObject *object, guint prop_id, GValue *value, GPa
 		g_value_set_object (value, G_OBJECT (dialog->p->model));
 		break;
 
-	case PROP_ITER:
-		g_value_set_pointer (value, dialog->p->iter);
+	case PROP_INFO:
+		g_value_set_pointer (value, dialog->p->info);
+		break;
+
+	case PROP_IS_ADD:
+		g_value_set_boolean (value, dialog->p->is_add);
 		break;
 
 	default:
@@ -256,18 +288,26 @@ service_edit_dialog_finalize (GObject *object)
 
 	service_edit_dialog = SERVICE_EDIT_DIALOG (object);
 
-	gtk_tree_iter_free (service_edit_dialog->p->iter);
 	g_free (service_edit_dialog->p);
 
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
 GObject *
-service_edit_dialog_new (GtkTreeModel *model, GtkTreeIter *iter) 
+service_edit_dialog_new (GtkTreeModel *model, ServiceInfo *info) 
 {
 	return g_object_new (service_edit_dialog_get_type (),
 			     "model", model,
-			     "iterator", iter,
+			     "service-info", info,
+			     NULL);
+}
+
+GObject *
+service_add_dialog_new (GtkTreeModel *model) 
+{
+	return g_object_new (service_edit_dialog_get_type (),
+			     "model", model,
+			     "is-add", TRUE,
 			     NULL);
 }
 
@@ -295,8 +335,22 @@ fill_dialog (ServiceEditDialog *dialog)
 		gnome_file_entry_set_filename (GNOME_FILE_ENTRY (WID ("custom_program_entry")), dialog->p->info->custom_line);
 
 	populate_app_list (dialog);
+}
 
-	gtk_widget_show_all (dialog->p->dialog_win);
+static void
+setup_add_dialog (ServiceEditDialog *dialog)
+{
+	GtkWidget *menu, *item;
+
+	item = gtk_menu_item_new_with_label (_("Custom"));
+	menu = gtk_menu_new ();
+	gtk_menu_append (GTK_MENU (menu), item);
+	gtk_option_menu_set_menu (GTK_OPTION_MENU (WID ("program_select")), menu);
+
+	gtk_widget_set_sensitive (WID ("program_select"), FALSE);
+
+	gtk_widget_set_sensitive (WID ("look_at_content_toggle"), FALSE);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("run_program_toggle")), TRUE);
 }
 
 static void
@@ -341,6 +395,10 @@ store_data (ServiceEditDialog *dialog)
 	gint           idx;
 
 	GtkTreePath   *path;
+	GtkTreeIter    iter;
+
+	if (dialog->p->is_add)
+		dialog->p->info->protocol = g_strdup (gtk_entry_get_text (GTK_ENTRY (WID ("protocol_entry"))));
 
 	g_free (dialog->p->info->description);
 	dialog->p->info->description = g_strdup (gtk_entry_get_text (GTK_ENTRY (WID ("description_entry"))));
@@ -361,11 +419,68 @@ store_data (ServiceEditDialog *dialog)
 	dialog->p->info->app =
 		gnome_vfs_mime_application_copy (g_object_get_data (menu_item, "app"));
 
-	service_info_save (dialog->p->info);
+	model_entry_append_to_dirty_list (MODEL_ENTRY (dialog->p->info));
 
-	path = gtk_tree_model_get_path (dialog->p->model, dialog->p->iter);
-	gtk_tree_model_row_changed (dialog->p->model, path, dialog->p->iter);
-	gtk_tree_path_free (path);
+	mime_types_model_construct_iter (MIME_TYPES_MODEL (dialog->p->model),
+					 MODEL_ENTRY (dialog->p->info), &iter);
+
+	if (dialog->p->is_add) {
+		path = gtk_tree_model_get_path (dialog->p->model, &iter);
+		gtk_tree_model_row_inserted (dialog->p->model, path, &iter);
+		gtk_tree_path_free (path);
+	} else {
+		path = gtk_tree_model_get_path (dialog->p->model, &iter);
+		gtk_tree_model_row_changed (dialog->p->model, path, &iter);
+		gtk_tree_path_free (path);
+	}
+}
+
+static gboolean
+validate_data (ServiceEditDialog *dialog) 
+{
+	const gchar *tmp, *tmp1;
+	gchar *dir;
+	GtkWidget *err_dialog;
+
+	tmp = gtk_entry_get_text (GTK_ENTRY (WID ("protocol_entry")));
+
+	if (tmp == NULL || *tmp == '\0') {
+		err_dialog = gnome_error_dialog_parented
+			(_("Please enter a protocol name."),
+			 GTK_WINDOW (dialog->p->dialog_win));
+
+		gtk_window_set_modal (GTK_WINDOW (err_dialog), TRUE);
+
+		return FALSE;
+	} else {
+		for (tmp1 = tmp; *tmp1 != '\0' && isalnum (*tmp1); tmp1++);
+
+		if (*tmp1 != '\0') {
+			err_dialog = gnome_error_dialog_parented
+				(_("Invalid protocol name. Please enter a protocol name without any spaces or punctuation."),
+				 GTK_WINDOW (dialog->p->dialog_win));
+
+			gtk_window_set_modal (GTK_WINDOW (err_dialog), TRUE);
+
+			return FALSE;
+		}
+
+		if (dialog->p->is_add) {
+			dir = g_strconcat ("/desktop/gnome/url-handlers/", tmp, NULL);
+			if (gconf_client_dir_exists (gconf_client_get_default (), dir, NULL)) {
+				err_dialog = gnome_error_dialog_parented
+					(_("There is already a protocol by that name."),
+					 GTK_WINDOW (dialog->p->dialog_win));
+
+				gtk_window_set_modal (GTK_WINDOW (err_dialog), TRUE);
+
+				return FALSE;
+			}
+			g_free (dir);
+		}
+	}
+
+	return TRUE;
 }
 
 static void
@@ -399,8 +514,12 @@ program_changed_cb (ServiceEditDialog *dialog, GtkOptionMenu *option_menu)
 static void
 response_cb (ServiceEditDialog *dialog, gint response_id) 
 {
-	if (response_id == GTK_RESPONSE_OK)
-		store_data (dialog);
-
-	g_object_unref (G_OBJECT (dialog));
+	if (response_id == GTK_RESPONSE_OK) {
+		if (validate_data (dialog)) {
+			store_data (dialog);
+			g_object_unref (G_OBJECT (dialog));
+		}
+	} else {
+		g_object_unref (G_OBJECT (dialog));
+	}
 }

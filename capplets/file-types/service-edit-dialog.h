@@ -53,7 +53,8 @@ struct _ServiceEditDialogClass
 GType service_edit_dialog_get_type (void);
 
 GObject *service_edit_dialog_new   (GtkTreeModel *model,
-				    GtkTreeIter  *iter);
+				    ServiceInfo  *info);
+GObject *service_add_dialog_new    (GtkTreeModel *model);
 
 G_END_DECLS
 

@@ -1,4 +1,71 @@
+2002-01-26  Bradford Hovinen  <hovinen@ximian.com>
+
+	* mime-type-info.c (intersect_lists, reduce_supported_app_list) 
+	(mime_category_info_find_apps): Implement
+	(find_possible_supported_apps): Implement
+
+	* mime-category-edit-dialog.c (mime_category_edit_dialog_init):
+	Use mime_category_edit_widget for the dialog source
+
+	* model-entry.c (model_entry_remove_from_dirty_list): Accept a
+	ModelEntry structure
+
+	* mime-category-edit-dialog.c (store_data): Call
+	model_entry_append_to_dirty_list
+
+	* service-edit-dialog.c (store_data): Call
+	model_entry_append_to_dirty_list
+
+	* service-info.c (service_info_new): Remove changeset
+	(get_string, get_bool): Remove changeset support
+	(set_string, set_bool): Ditto
+
+	* file-types-capplet.c: Remove the changeset since it duplicates
+	functionality already present elsewhere
+
+	* model-entry.c: Move dirty list from mime-type-info.c to here;
+	extend to support arbitrary model entries
+
+	* mime-type-info.c (mime_type_info_new_category): Rename to
+	mime_category_info_new; return MimeCategoryInfo
+	(mime_category_info_new): Set parent to root node if it is NULL
+	(get_category): Return a MimeCategoryInfo
+	(mime_type_info_category_find_supported_apps): Rename to
+	mime_type_info_find_apps
+
+	* mime-type-info.h (struct _MimeCategoryInfo): Create new structure
+
+	* mime-category-edit-dialog.c: Change iter property back to info
+	(fill_dialog): Desensitize description, mime type entries
+
+	* service-edit-dialog.c: Change iter property back to info
+	(validate_data): Don't check duplicate directory unless this is an
+	add dialog
+
+	* mime-edit-dialog.c: Change iter property back to info
+
 2002-01-25  Bradford Hovinen  <hovinen@ximian.com>
+
+	* service-edit-dialog.c (store_data): Fetch the protocol name if
+	this is an add dialog
+	(validate_data): Implement
+	(response_cb): Call validate_data
+
+	* service-info.c (service_info_new): Don't strdup the protocol if
+	it is NULL
+
+	* service-edit-dialog.c (store_data): Use
+	gtk_tree_model_row_inserted if this is an add dialog; also
+	construct an iter in that case
+	(service_edit_dialog_dispose): Free the iter
+	(service_edit_dialog_finalize): Don't free the iter here
+
+	* file-types-capplet.c (add_service_cb): Implement
+	(create_dialog): Connect addd_service_button to add_service_cb
+
+	* service-edit-dialog.c: Add property is-add
+	(service_add_dialog_new): Implement
+	(setup_add_dialog): Implement
 
 	* mime-category-edit-dialog.c (fill_dialog): Desensitize component
 	select

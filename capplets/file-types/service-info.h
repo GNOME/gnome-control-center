@@ -28,7 +28,6 @@
 #include <gnome.h>
 #include <bonobo.h>
 #include <libgnomevfs/gnome-vfs-mime-handlers.h>
-#include <gconf/gconf-changeset.h>
 
 #include "model-entry.h"
 
@@ -48,14 +47,11 @@ struct _ServiceInfo {
 	GnomeVFSMimeApplication *app;
 	gchar                   *custom_line;
 	gboolean                 need_terminal;
-
-	GConfChangeSet          *changeset;
 };
 
 void         load_all_services            (void);
 
-ServiceInfo *service_info_new             (const gchar       *protocol,
-					   GConfChangeSet    *changeset);
+ServiceInfo *service_info_new             (const gchar       *protocol);
 void         service_info_load_all        (ServiceInfo       *info);
 const gchar *service_info_get_description (ServiceInfo       *info);
 void         service_info_save            (const ServiceInfo *info);

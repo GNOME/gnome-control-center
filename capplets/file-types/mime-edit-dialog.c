@@ -39,7 +39,7 @@
 enum {
 	PROP_0,
 	PROP_MODEL,
-	PROP_ITER,
+	PROP_INFO,
 	PROP_IS_ADD
 };
 
@@ -53,7 +53,6 @@ struct _MimeEditDialogPrivate
 	gboolean      is_add;
 
 	GtkTreeModel *model;
-	GtkTreeIter  *iter;
 };
 
 static GObjectClass *parent_class;
@@ -188,10 +187,10 @@ mime_edit_dialog_class_init (MimeEditDialogClass *class)
 				      G_PARAM_READWRITE));
 
 	g_object_class_install_property
-		(object_class, PROP_ITER,
-		 g_param_spec_pointer ("iterator",
-				       _("Iterator"),
-				       _("Iterator on the model referring to object to edit"),
+		(object_class, PROP_INFO,
+		 g_param_spec_pointer ("mime-type-info",
+				       _("MIME type information"),
+				       _("Structure with data on the MIME type"),
 				       G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 
 	g_object_class_install_property
@@ -221,10 +220,9 @@ mime_edit_dialog_set_prop (GObject *object, guint prop_id, const GValue *value, 
 		mime_edit_dialog->p->model = GTK_TREE_MODEL (g_value_get_object (value));
 		break;
 
-	case PROP_ITER:
+	case PROP_INFO:
 		if (g_value_get_pointer (value) != NULL) {
-			mime_edit_dialog->p->iter = gtk_tree_iter_copy (g_value_get_pointer (value));
-			mime_edit_dialog->p->info = MIME_TYPE_INFO (MODEL_ENTRY_FROM_ITER (mime_edit_dialog->p->iter));
+			mime_edit_dialog->p->info = g_value_get_pointer (value);
 			fill_dialog (mime_edit_dialog);
 
 			gtk_widget_show_all (mime_edit_dialog->p->dialog_win);
@@ -264,8 +262,8 @@ mime_edit_dialog_get_prop (GObject *object, guint prop_id, GValue *value, GParam
 		g_value_set_object (value, G_OBJECT (mime_edit_dialog->p->model));
 		break;
 
-	case PROP_ITER:
-		g_value_set_pointer (value, mime_edit_dialog->p->iter);
+	case PROP_INFO:
+		g_value_set_pointer (value, mime_edit_dialog->p->info);
 		break;
 
 	default:
@@ -294,11 +292,6 @@ mime_edit_dialog_dispose (GObject *object)
 		dialog->p->dialog_win = NULL;
 	}
 
-	if (dialog->p->iter != NULL) {
-		gtk_tree_iter_free (dialog->p->iter);
-		dialog->p->iter = NULL;
-	}
-
 	G_OBJECT_CLASS (parent_class)->dispose (object);
 }
 
@@ -318,11 +311,11 @@ mime_edit_dialog_finalize (GObject *object)
 }
 
 GObject *
-mime_edit_dialog_new (GtkTreeModel *model, GtkTreeIter *iter) 
+mime_edit_dialog_new (GtkTreeModel *model, MimeTypeInfo *info) 
 {
 	return g_object_new (mime_edit_dialog_get_type (),
 			     "model", model,
-			     "iterator", iter,
+			     "mime-type-info", info,
 			     NULL);
 }
 
@@ -537,6 +530,7 @@ store_data (MimeEditDialog *dialog)
 
 	GnomeVFSMimeApplication *app;
 
+	GtkTreeIter    iter;
 	GtkTreePath   *path;
 	GtkTreePath   *old_path = NULL;
 
@@ -576,8 +570,11 @@ store_data (MimeEditDialog *dialog)
 	if (strcmp (tmp, tmp1)) {
 		cat_changed = TRUE;
 
-		if (!dialog->p->is_add)
-			old_path = gtk_tree_model_get_path (dialog->p->model, dialog->p->iter);
+		if (!dialog->p->is_add) {
+			mime_types_model_construct_iter (MIME_TYPES_MODEL (dialog->p->model),
+							 MODEL_ENTRY (dialog->p->info), &iter);
+			old_path = gtk_tree_model_get_path (dialog->p->model, &iter);
+		}
 
 		mime_type_info_set_category_name (dialog->p->info, tmp1);
 	}
@@ -611,7 +608,10 @@ store_data (MimeEditDialog *dialog)
 	ext_list = collect_filename_extensions (dialog);
 	mime_type_info_set_file_extensions (dialog->p->info, ext_list);
 
-	mime_type_append_to_dirty_list (dialog->p->info);
+	model_entry_append_to_dirty_list (MODEL_ENTRY (dialog->p->info));
+
+	mime_types_model_construct_iter (MIME_TYPES_MODEL (dialog->p->model),
+					 MODEL_ENTRY (dialog->p->info), &iter);
 
 	if (cat_changed) {
 		if (old_path != NULL) {
@@ -619,18 +619,12 @@ store_data (MimeEditDialog *dialog)
 			gtk_tree_path_free (old_path);
 		}
 
-		if (dialog->p->iter == NULL) {
-			dialog->p->iter = g_new0 (GtkTreeIter, 1);
-			mime_types_model_construct_iter (MIME_TYPES_MODEL (dialog->p->model),
-							 MODEL_ENTRY (dialog->p->info), dialog->p->iter);
-		}
-
-		path = gtk_tree_model_get_path (dialog->p->model, dialog->p->iter);
-		gtk_tree_model_row_inserted (dialog->p->model, path, dialog->p->iter);
+		path = gtk_tree_model_get_path (dialog->p->model, &iter);
+		gtk_tree_model_row_inserted (dialog->p->model, path, &iter);
 		gtk_tree_path_free (path);
 	} else {
-		path = gtk_tree_model_get_path (dialog->p->model, dialog->p->iter);
-		gtk_tree_model_row_changed (dialog->p->model, path, dialog->p->iter);
+		path = gtk_tree_model_get_path (dialog->p->model, &iter);
+		gtk_tree_model_row_changed (dialog->p->model, path, &iter);
 		gtk_tree_path_free (path);
 	}
 }
