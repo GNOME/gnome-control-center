@@ -300,6 +300,7 @@ main (int argc, char **argv)
 
 		dialog = gnome_dialog_new (_("Background properties"), GTK_STOCK_APPLY, GTK_STOCK_CLOSE, NULL);
 		g_signal_connect (G_OBJECT (dialog), "clicked", (GCallback) dialog_button_clicked_cb, changeset);
+		g_signal_connect (G_OBJECT (dialog), "destroy", (GCallback) gtk_main_quit, NULL);
 		gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), widget, TRUE, TRUE, GNOME_PAD_SMALL);
 		gtk_widget_show_all (dialog);
 
