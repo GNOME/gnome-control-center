@@ -119,7 +119,7 @@ install_dialog_response (GtkWidget *widget, int response_id, gpointer data)
 	const gchar *raw;
 	gboolean icon_theme;
 	gchar *temppath;
-	
+
 	if (response_id == GTK_RESPONSE_HELP) {
 		capplet_help (GTK_WINDOW (widget),
 			"user-guide.xml",
@@ -131,37 +131,35 @@ install_dialog_response (GtkWidget *widget, int response_id, gpointer data)
 		icon_theme = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (widget), "icon_theme"));
 		raw = gtk_entry_get_text (GTK_ENTRY (gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (WID ("install_theme_picker")))));
 		if (raw == NULL || strlen (raw) <= 0)	{
-	        GtkWidget *dialog;
+			GtkWidget *dialog;
 
-  	        dialog = gtk_message_dialog_new (NULL,
-			  	       GTK_DIALOG_MODAL,
-				       GTK_MESSAGE_ERROR,
-				       GTK_BUTTONS_OK,
-				       _("No theme file location specified to install"));
-    	    gtk_dialog_run (GTK_DIALOG (dialog));
-      	    gtk_widget_destroy (dialog);			
+			dialog = gtk_message_dialog_new (NULL,
+							 GTK_DIALOG_MODAL,
+							 GTK_MESSAGE_ERROR,
+							 GTK_BUTTONS_OK,
+							 _("No theme file location specified to install"));
+			gtk_dialog_run (GTK_DIALOG (dialog));
+			gtk_widget_destroy (dialog);
 			return;
-			
 		}
-
 
 		if (strncmp (raw, "http://", 7) && strncmp (raw, "ftp://", 6) && *raw != '/')
 			filename = gnome_file_entry_get_full_path (GNOME_FILE_ENTRY (WID ("install_theme_picker")), TRUE);
 		else
 			filename = g_strdup (raw);
 		if (filename == NULL)	{
-	        GtkWidget *dialog;
+			GtkWidget *dialog;
 
-  	        dialog = gtk_message_dialog_new (NULL,
-			  	       GTK_DIALOG_MODAL,
-				       GTK_MESSAGE_ERROR,
-				       GTK_BUTTONS_OK,
-				       _("The theme file location specified to install is invalid"));
-    	    gtk_dialog_run (GTK_DIALOG (dialog));
-      	    gtk_widget_destroy (dialog);			
+			dialog = gtk_message_dialog_new (NULL,
+							 GTK_DIALOG_MODAL,
+							 GTK_MESSAGE_ERROR,
+							 GTK_BUTTONS_OK,
+							 _("The theme file location specified to install is invalid"));
+			gtk_dialog_run (GTK_DIALOG (dialog));
+			gtk_widget_destroy (dialog);
 			return;
 		}
-			
+
 		src_uri = gnome_vfs_uri_new (filename);
 		base = gnome_vfs_uri_extract_short_name (src_uri);
 		src = g_list_append (NULL, src_uri);
@@ -170,34 +168,46 @@ install_dialog_response (GtkWidget *widget, int response_id, gpointer data)
 		else
 			path = g_build_filename (g_get_home_dir (), ".themes", base, NULL);
 
-		/* To avoid the copy of /root/.themes to /root/.themes/.themes 
-		 * which causes an infinite loop. The user asks to transfer the all 
-         * contents of a folder, to a folder under itseld. So ignore the 		
-		 * situation.		
+		if (access (path, X_OK | W_OK) != 0) {
+                        GtkWidget *dialog;
+
+                        dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL,
+                                                          GTK_MESSAGE_ERROR,
+                                                          GTK_BUTTONS_OK,
+                                                          _("Insufficient permissions to install the theme in:\n%s"), path);
+			gtk_dialog_run (GTK_DIALOG (dialog));
+			gtk_widget_destroy (dialog);
+			return;
+                } 
+		
+		/* To avoid the copy of /root/.themes to /root/.themes/.themes
+		 * which causes an infinite loop. The user asks to transfer the all
+		 * contents of a folder, to a folder under itseld. So ignore the
+		 * situation.
 		 */
 		temppath = g_build_filename (filename, ".themes", NULL);
 		if (!strcmp(temppath, path))	{
-	      GtkWidget *dialog;
+			GtkWidget *dialog;
 
-	      dialog = gtk_message_dialog_new (NULL,
-				       GTK_DIALOG_MODAL,
-				       GTK_MESSAGE_ERROR,
-				       GTK_BUTTONS_OK,
-				       _("%s is the path where the theme files will be installed. This can not be selected as the source location"), filename);
-    	  gtk_dialog_run (GTK_DIALOG (dialog));
-      	  gtk_widget_destroy (dialog);
+			dialog = gtk_message_dialog_new (NULL,
+							 GTK_DIALOG_MODAL,
+							 GTK_MESSAGE_ERROR,
+							 GTK_BUTTONS_OK,
+							 _("%s is the path where the theme files will be installed. This can not be selected as the source location"), filename);
+			gtk_dialog_run (GTK_DIALOG (dialog));
+			gtk_widget_destroy (dialog);
 			
 			g_free (base);
 			g_free (filename);
-			g_free(temppath);			
+			g_free(temppath);
 			return;
 		}
 		g_free(temppath);
-			
+
 
 
 		target = g_list_append (NULL, gnome_vfs_uri_new (path));
-		
+
 		dlg = file_transfer_dialog_new ();
 		file_transfer_dialog_wrap_async_xfer (FILE_TRANSFER_DIALOG (dlg),
 						      src, target,
@@ -223,15 +233,16 @@ gnome_theme_installer_run (GtkWidget *parent, gchar *filename, gboolean icon_the
 	static gboolean running_theme_install = FALSE;
 	GladeXML *dialog;
 	GtkWidget *widget;
-	
+
 	if (running_theme_install)
 		return;
 
 	running_theme_install = TRUE;
 
+	g_print ("blah2\n");
 	dialog = glade_xml_new (GLADEDIR "/theme-install.glade", NULL, NULL);
 	widget = WID ("install_dialog");
-	
+
 	g_object_set_data (G_OBJECT (widget), "icon_theme", GINT_TO_POINTER (icon_theme));
 	g_signal_connect (G_OBJECT (widget), "response", G_CALLBACK (install_dialog_response), dialog);
 	gtk_window_set_transient_for (GTK_WINDOW (widget), GTK_WINDOW (parent));
