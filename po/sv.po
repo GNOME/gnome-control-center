@@ -1,298 +1,566 @@
-# Swedish translation for the control-center module.
+# Swedish translation for the gnome-control-center module.
 # Copyright (C) 1998, 1999, 2000, 2001 Free Software Foundation, Inc.
-# Martin Wahlen <mva@sbbs.se>, 1998-1999.
+# Martin Wahlen <mva@sbbs.se>, 1998, 1999.
 # Christian Rose <menthos@menthos.com>, 2000, 2001.
 #
 # $Id$
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: control-center\n"
-"POT-Creation-Date: 2001-07-10 18:52-0500\n"
-"PO-Revision-Date: 2001-06-07 02:56+0200\n"
+"Project-Id-Version: gnome-control-center\n"
+"POT-Creation-Date: 2001-07-21 17:57+0200\n"
+"PO-Revision-Date: 2001-07-21 17:58+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: capplets/background/applier.c:352
+#: archiver/location.c:228
+msgid "Default Location"
+msgstr "Standardplats"
+
+#: archiver/main.c:77
+msgid "Store XML data in the archive"
+msgstr "Lagra XML-data i arkivet"
+
+#: archiver/main.c:79
+msgid "Roll back the configuration to a given point"
+msgstr "Återställ konfigurationen till en given tidpunkt"
+
+#: archiver/main.c:81
+msgid "Change the location profile to the given one"
+msgstr "Ändra platsprofilen till den angivna"
+
+#: archiver/main.c:83
+msgid "Push configuration data out to client machines (UNIMPLEMENTED)"
+msgstr "Sprid konfigurationsdata till klientmaskiner (INTE IMPLEMENTERAT)"
+
+#: archiver/main.c:85
+msgid "Rename a location to a new name"
+msgstr "Byt namn på en plats"
+
+#: archiver/main.c:87
+msgid "Add a new location to the archive"
+msgstr "Lägg till en ny plats till arkivet"
+
+#: archiver/main.c:89
+msgid "Remove a location from the archive"
+msgstr "Ta bort en plats från arkivet"
+
+#: archiver/main.c:91
+msgid "Add a given backend to the given location"
+msgstr "Lägg till en angiven backend till den angivna platsen"
+
+#: archiver/main.c:93
+msgid "Remove the given backend from the given location"
+msgstr "Ta bort angiven backend från den angivna platsen"
+
+#: archiver/main.c:99
+msgid "Use the global repository"
+msgstr "Använd det globala lagret"
+
+#: archiver/main.c:101
+msgid "Identifier of location profile on which to operate"
+msgstr "Identifierare till platsprofilen som ska användas"
+
+#: archiver/main.c:102
+msgid "LOCATION"
+msgstr "PLATS"
+
+#: archiver/main.c:104
+msgid "Backend being used for this operation"
+msgstr "Backend som används för denna åtgärd"
+
+#: archiver/main.c:104
+msgid "BACKEND_ID"
+msgstr "BACKEND-ID"
+
+#: archiver/main.c:110
+msgid "Store only the differences with the parent location's config"
+msgstr "Lagra endast ändringarna gentemot förälderplatsens konfiguration"
+
+#: archiver/main.c:112
+msgid "Store only those settings set in the previous config"
+msgstr ""
+"Lagra endast de inställningar som är angivna i den föregående konfigurationen"
+
+#: archiver/main.c:118
+msgid "Date to which to roll back"
+msgstr "Datum att återställa till"
+
+#: archiver/main.c:118
+msgid "DATE"
+msgstr "DATUM"
+
+#: archiver/main.c:120
+msgid "Roll back all configuration items"
+msgstr "Återställ alla konfigurationsobjekt"
+
+#: archiver/main.c:122
+msgid "Roll back to the revision REVISION_ID"
+msgstr "Återställ till revisionen REVISIONSID"
+
+#: archiver/main.c:122
+msgid "REVISION_ID"
+msgstr "REVISIONSID"
+
+#: archiver/main.c:124
+msgid "Roll back to the last known revision"
+msgstr "Återställ till den senast kända revisionen"
+
+#: archiver/main.c:126
+msgid "Roll back by STEPS revisions"
+msgstr "Återställ STEG revisioner tillbaka"
+
+#: archiver/main.c:126
+msgid "STEPS"
+msgstr "STEG"
+
+#: archiver/main.c:128
+msgid "Don't run the backend, just dump the output"
+msgstr "Kör inte backend, dumpa bara utdata"
+
+#: archiver/main.c:134
+msgid "Parent location for the new location"
+msgstr "Förälderplats för den nya platsen"
+
+#: archiver/main.c:134
+msgid "PARENT"
+msgstr "FÖRÄLDER"
+
+#: archiver/main.c:136
+msgid "New name to assign to the location"
+msgstr "Nytt namn att ge platsen"
+
+#: archiver/main.c:136
+msgid "NEW_NAME"
+msgstr "NYTT_NAMN"
+
+#: archiver/main.c:142
+msgid "Add/remove this backend to/from the master backend list"
+msgstr "Lägg till/ta bort denna backend till/från huvudbackendlistan"
+
+#: archiver/main.c:144
+msgid "Full containment"
+msgstr "Fullständig uppdämning"
+
+#: archiver/main.c:146
+msgid "Partial containment"
+msgstr "Delvis uppdämning"
+
+#: archiver/main.c:313
+msgid "Global archiver options"
+msgstr "Globala arkiveringsflaggor"
+
+#: archiver/main.c:315
+msgid "Archiver commands"
+msgstr "Arkiveringskommandon"
+
+#: archiver/main.c:317
+msgid "Options for storing data"
+msgstr "Flaggor för lagrande av data"
+
+#: archiver/main.c:319
+msgid "Options for rolling back"
+msgstr "Flaggor för återställning"
+
+#: archiver/main.c:321
+msgid "Options for adding or renaming locations"
+msgstr "Flaggor för tillägg eller namnbyte av platser"
+
+#: archiver/main.c:324
+msgid "Options for adding and removing backends"
+msgstr "Flaggor för tillägg och borttagande av backend"
+
+#: capplets/background/applier.c:386
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr "Kunde inte läsa in bilden \"%s\"; slår av bakgrundsbild."
 
-#: capplets/background/applier.c:495
+#: capplets/background/applier.c:536
 msgid "Disabled"
 msgstr "Avslagen"
 
-#: capplets/background/background-properties.glade.h:27
-#: capplets/background/prefs-widget.c:361
-msgid "(None)"
-msgstr "(Ingen)"
-
-#: capplets/background/prefs-widget.c:615
-msgid "Wallpaper Selection"
-msgstr "Bakgrundsval"
-
-#: capplets/background/prefs-widget.c:622
-msgid "Can't find an hbox, using a normal file selection"
-msgstr "Kan inte hitta hbox, använder en vanlig filväljare"
-
-#: capplets/background/prefs-widget.c:628
-#: capplets/screensaver/screensaver-properties.glade.h:31
-msgid "Preview"
-msgstr "Förhandsgranska"
-
-#.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/background/background-properties.glade.h:7
-msgid "window2"
-msgstr "window2"
-
-#: capplets/background/background-properties.glade.h:8
-msgid "Use GNOME for setting background"
-msgstr "Använd GNOME för att ställa in bakgrunden"
-
-#: capplets/background/background-properties.glade.h:9
-msgid "Colors"
-msgstr "Färger"
-
-#: capplets/background/background-properties.glade.h:10
-msgid "Effect"
-msgstr "Effekt"
-
-#: capplets/background/background-properties.glade.h:11
-msgid "Primary color"
-msgstr "Huvudfärg"
-
-#: capplets/background/background-properties.glade.h:12
-msgid "Right or bottom color"
-msgstr "Högerkants- eller nederkantsfärg"
-
-#: capplets/background/background-properties.glade.h:13
-#: capplets/background/background-properties.glade.h:14
-msgid "Pick a color"
-msgstr "Välj en färg"
-
-#: capplets/background/background-properties.glade.h:15
-msgid "Solid Color"
-msgstr "Fylld färg"
-
-#: capplets/background/background-properties.glade.h:16
-msgid "Vertical Gradient"
-msgstr "Lodrät färgtoning"
-
-#: capplets/background/background-properties.glade.h:17
-msgid "Horizontal Gradient"
-msgstr "Vågrät färgtoning"
-
-#: capplets/background/background-properties.glade.h:18
-msgid "Apply changes automatically"
-msgstr "Verkställ ändringar automatiskt"
-
-#: capplets/background/background-properties.glade.h:19
-msgid "Wallpaper"
+#: capplets/background/background.desktop.in.in.h:1
+msgid "Background"
 msgstr "Bakgrund"
 
-#: capplets/background/background-properties.glade.h:20
-msgid "File"
-msgstr "Fil"
+#: capplets/background/background.desktop.in.in.h:2
+msgid "Configuration of the desktop's background"
+msgstr "Konfiguration av skrivbordsbakgrund"
 
-#: capplets/background/background-properties.glade.h:21
-msgid "Display Style"
-msgstr "Visa stil"
+#: capplets/background/background-properties.glade.h:1
+msgid "Background colors"
+msgstr "Bakgrundsfärger"
 
-#: capplets/background/background-properties.glade.h:22
-msgid "Tiled"
-msgstr "Sida-vid-sida"
+#: capplets/background/background-properties.glade.h:2
+msgid "Background picture"
+msgstr "Bakgrundsbild"
 
-#: capplets/background/background-properties.glade.h:23
+#: capplets/background/background-properties.glade.h:3
 msgid "Centered"
 msgstr "Centrerad"
 
-#: capplets/background/background-properties.glade.h:24
+#: capplets/background/background-properties.glade.h:4
+msgid "Horizontal gradient"
+msgstr "Vågrät toning"
+
+#: capplets/background/background-properties.glade.h:5
+msgid "Image:"
+msgstr "Bild:"
+
+#: capplets/background/background-properties.glade.h:6
+msgid "Opacity (percent):"
+msgstr "Opacitet (procent):"
+
+#: capplets/background/background-properties.glade.h:7
+msgid "Pick a color"
+msgstr "Välj en färg"
+
+#: capplets/background/background-properties.glade.h:8
 msgid "Scaled (keep aspect ratio)"
 msgstr "Skalad (behåll proportioner)"
 
-#: capplets/background/background-properties.glade.h:25
-msgid "Stretched (change aspect ratio)"
-msgstr "Utsträckt (ändra proportioner)"
+#: capplets/background/background-properties.glade.h:9
+msgid "Solid color"
+msgstr "Enfärgad"
 
-#: capplets/background/background-properties.glade.h:26
-msgid "Browse..."
-msgstr "Bläddra... "
+#: capplets/background/background-properties.glade.h:10
+msgid "Stretched"
+msgstr "Utsträckt"
 
-#: capplets/background/background-properties.glade.h:28
-msgid "Adjust wallpaper's transparency"
-msgstr "Justera skrivbordsbakgrundens genomskinlighet"
+#: capplets/background/background-properties.glade.h:11
+msgid "Style:"
+msgstr "Stil:"
 
-#: capplets/background/background-properties.glade.h:29
-msgid "More Transparent"
-msgstr "Mera genomskinlig"
+#: capplets/background/background-properties.glade.h:12
+msgid "Tiled"
+msgstr "Sida-vid-sida"
 
-#: capplets/background/background-properties.glade.h:30
-msgid "More Solid"
-msgstr "Mera solid"
+#: capplets/background/background-properties.glade.h:13
+msgid "Vertical gradient"
+msgstr "Lodrät toning"
 
-#.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/keyboard/keyboard-properties.glade.h:7
-#: capplets/screensaver/screensaver-properties.glade.h:23
-#: capplets/sound/sound-properties.glade.h:7
-msgid "window1"
-msgstr "window1"
+#: capplets/default-applications/default-applications.desktop.in.in.h:1
+msgid "Choose the applications used by default"
+msgstr "Välj de program som används som standard"
 
-#: capplets/keyboard/keyboard-properties.glade.h:8
-msgid "Enable Keyboard Repeat"
-msgstr "Slå på tangentrepetering"
+#: capplets/default-applications/default-applications.desktop.in.in.h:2
+msgid "Default Applications"
+msgstr "Standardprogram"
+
+#: capplets/default-applications/interface.c:108
+msgid "Gnome Default Editor"
+msgstr "Standardtextredigerare i Gnome"
+
+#: capplets/default-applications/interface.c:125
+msgid "Select an Editor"
+msgstr "Välj en textredigerare"
+
+#: capplets/default-applications/interface.c:134
+msgid "With this option, you can select a predefined Editor as your default"
+msgstr ""
+"Med detta alternativ kan du välja en fördefinierad textredigerare som ditt "
+"standardalternativ"
+
+#: capplets/default-applications/interface.c:154
+msgid "Custom Editor"
+msgstr "Anpassad redigerare"
+
+#: capplets/default-applications/interface.c:163
+msgid "With this option you can create your own default editor"
+msgstr "Med detta alternativ kan du välja din egen standardtextredigerare"
+
+#: capplets/default-applications/interface.c:174
+#: capplets/default-applications/interface.c:305
+#: capplets/default-applications/interface.c:436
+msgid "Start in Terminal"
+msgstr "Starta i terminal"
+
+#: capplets/default-applications/interface.c:182
+msgid "Does this editor need to start in an xterm?"
+msgstr "Behöver denna textredigerare starta i en xterm?"
+
+#: capplets/default-applications/interface.c:184
+msgid "Accepts Line Number"
+msgstr "Godtar radnummer"
+
+#: capplets/default-applications/interface.c:192
+msgid "Does this editor accept line numbers from the command line?"
+msgstr "Godtar denna textredigerare radnummer från kommandoraden?"
+
+#: capplets/default-applications/interface.c:203
+#: capplets/default-applications/interface.c:334
+#: capplets/default-applications/interface.c:465
+#: capplets/default-applications/interface.c:576
+msgid "Command:"
+msgstr "Kommando:"
+
+#: capplets/default-applications/interface.c:221
+msgid "Please enter the command line used to start this editor"
+msgstr "Ange kommandot för att starta denna textredigerare"
+
+#: capplets/default-applications/interface.c:232
+msgid "Text Editor"
+msgstr "Textredigerare"
+
+#: capplets/default-applications/interface.c:239
+msgid "Gnome Default Web Browser"
+msgstr "Standardwebbläsare i Gnome"
+
+#: capplets/default-applications/interface.c:256
+msgid "Select a Web Browser"
+msgstr "Välj en webbläsare"
+
+#: capplets/default-applications/interface.c:265
+msgid ""
+"With this option, you can select a predefined Web Browser as your default"
+msgstr ""
+"Med detta alternativ kan du välja en fördefinierad webbläsare som ditt "
+"standardalternativ"
+
+#: capplets/default-applications/interface.c:285
+msgid "Custom Web Browser"
+msgstr "Anpassad webbläsare"
+
+#: capplets/default-applications/interface.c:294
+msgid "With this option you can create your own default web browser"
+msgstr "Med detta alternativ kan du skapa din egen standardwebbläsare"
+
+#: capplets/default-applications/interface.c:313
+msgid "Does this web browser need to display in an xterm?"
+msgstr "Måste denna webbläsare visa i en xterm?"
+
+#: capplets/default-applications/interface.c:315
+msgid "Understands Netscape Remote Control"
+msgstr "Förstår Netscape-fjärrstyrning"
+
+#: capplets/default-applications/interface.c:323
+msgid ""
+"Does this web browser support the netscape remote control protocol?  If in "
+"doubt, and this web browser isn't Netscape or Mozilla, it probably doesn't."
+msgstr ""
+"Förstår denna webbläsare Netscape-fjärrstyrningsprotokollet? Om du är "
+"osäker, och webbläsaren inte är Netscape eller Mozilla, är det troligtvis "
+"inte så."
+
+#: capplets/default-applications/interface.c:352
+msgid "Please enter the command line used to start this web browser"
+msgstr "Ange kommandot för att starta denna webbläsare"
+
+#: capplets/default-applications/interface.c:363
+msgid "Web Browser"
+msgstr "Webbläsare"
+
+#: capplets/default-applications/interface.c:370
+#: capplets/default-applications/interface.c:501
+msgid "Default Help Viewer"
+msgstr "Standardhjälpläsare"
+
+#: capplets/default-applications/interface.c:387
+msgid "Select a Viewer"
+msgstr "Välj en visare"
+
+#: capplets/default-applications/interface.c:396
+msgid "With this option you can select a predefined help viewer."
+msgstr "Med detta alternativ kan du välja en fördefinierad hjälpläsare."
+
+#: capplets/default-applications/interface.c:416
+msgid "Custom Help Viewer"
+msgstr "Anpassad hjälpläsare"
+
+#: capplets/default-applications/interface.c:425
+msgid "With this option you can create your own help viewer"
+msgstr "Med detta alternativ kan du skapa din egen hjälpläsare"
+
+#: capplets/default-applications/interface.c:444
+msgid "Does this help viewer need an xterm for display?"
+msgstr "Behöver denna hjälpvisare en xterm för att visa?"
+
+#: capplets/default-applications/interface.c:446
+msgid "Accepts URLs"
+msgstr "Accepterar URL:er"
+
+#: capplets/default-applications/interface.c:454
+msgid "Does this help viewer allow URLs for help?"
+msgstr "Tillåter denna hjälpläsare hjälp-URL:er?"
+
+#: capplets/default-applications/interface.c:483
+msgid "Please enter the command line used to start this help viewer"
+msgstr "Ange kommandot för att starta denna hjälpläsare"
+
+#: capplets/default-applications/interface.c:494
+msgid "Help Viewer"
+msgstr "Hjälpläsare"
+
+#: capplets/default-applications/interface.c:518
+msgid "Select a Terminal"
+msgstr "Välj en terminal"
+
+#: capplets/default-applications/interface.c:527
+msgid "With this option you can select a predefined terminal."
+msgstr "Med detta alternativ kan du välja en fördefinierad terminal."
+
+#: capplets/default-applications/interface.c:547
+msgid "Custom Terminal"
+msgstr "Anpassad terminal"
+
+#: capplets/default-applications/interface.c:556
+msgid "With this option you can create your own terminal"
+msgstr "Med detta alternativ kan du skapa din egen terminal"
+
+#: capplets/default-applications/interface.c:586
+msgid "Exec Flag:"
+msgstr "Exec-flagga:"
+
+#: capplets/default-applications/interface.c:604
+msgid ""
+"Please enter the flag used by this terminal to specify the command to run on "
+"startup.  For example, in 'xterm' this would be '-e'."
+msgstr ""
+"Ange den flagga som används av denna terminal för att ange det kommando som "
+"ska köras vid start. I \"xterm\" är det till exempel \"-e\"."
+
+#: capplets/default-applications/interface.c:614
+msgid "Please enter the command line used to start this terminal"
+msgstr "Ange kommandot för att starta denna terminal"
+
+#: capplets/default-applications/interface.c:625
+msgid "Terminal"
+msgstr "Terminal"
 
 #: capplets/keyboard/keyboard-properties.glade.h:9
-msgid "Delay Until Repeat"
-msgstr "Fördröjning innan repetering"
+#: capplets/keyboard/keyboard.desktop.in.in.h:1
+msgid "Keyboard"
+msgstr "Tangentbord"
 
-#: capplets/keyboard/keyboard-properties.glade.h:10
-msgid "....a"
-msgstr "....a"
+#: capplets/keyboard/keyboard.desktop.in.in.h:2
+msgid "Keyboard Properties"
+msgstr "Tangentbordsinställningar"
 
-#: capplets/keyboard/keyboard-properties.glade.h:11
-msgid "...a"
-msgstr "...a"
+#: capplets/keyboard/keyboard-properties.glade.h:1
+msgid "Bell"
+msgstr "Signal"
 
-#: capplets/keyboard/keyboard-properties.glade.h:12
-msgid "..a"
-msgstr "..a"
-
-#: capplets/keyboard/keyboard-properties.glade.h:13
-msgid ".a"
-msgstr ".a"
-
-#: capplets/keyboard/keyboard-properties.glade.h:14
-msgid "Key Repeat Rate"
-msgstr "Tangentrepeteringshastighet"
-
-#: capplets/keyboard/keyboard-properties.glade.h:15
-msgid "a....a"
-msgstr "a....a"
-
-#: capplets/keyboard/keyboard-properties.glade.h:16
-msgid "a...a"
-msgstr "a...a"
-
-#: capplets/keyboard/keyboard-properties.glade.h:17
-msgid "a..a"
-msgstr "a..a"
-
-#: capplets/keyboard/keyboard-properties.glade.h:18
-msgid "a.a"
-msgstr "a.a"
-
-#: capplets/keyboard/keyboard-properties.glade.h:19
-msgid "Enable Keyboard Click"
-msgstr "Slå på tangentbordsklick"
-
-#: capplets/keyboard/keyboard-properties.glade.h:20
-msgid "Keyboard click"
-msgstr "Tangentbordsklick"
-
-#: capplets/keyboard/keyboard-properties.glade.h:21
+#: capplets/keyboard/keyboard-properties.glade.h:2
 msgid "Click volume"
 msgstr "Klickvolym"
 
-#: capplets/keyboard/keyboard-properties.glade.h:22
-msgid "Type here to test setting"
-msgstr "Skriv här för att prova inställningarna"
+#: capplets/keyboard/keyboard-properties.glade.h:3
+msgid "Delay until repeat:"
+msgstr "Fördröjning innan repetering:"
 
-#.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/mouse/mouse-properties.glade.h:7
-#, fuzzy
-msgid "Mouse Configuration"
-msgstr "Musrörelse"
+#: capplets/keyboard/keyboard-properties.glade.h:4
+msgid "Duration (ms)"
+msgstr "Längd (ms)"
 
-#: capplets/mouse/mouse-properties.glade.h:8
-msgid "My mouse is:"
-msgstr ""
+#: capplets/keyboard/keyboard-properties.glade.h:5
+msgid "Enable Keyboard Click"
+msgstr "Slå på tangentbordsklick"
 
-#: capplets/mouse/mouse-properties.glade.h:9
-msgid "Left handed"
-msgstr "Vänsterhänt"
+#: capplets/keyboard/keyboard-properties.glade.h:6
+msgid "Enable Keyboard Repeat"
+msgstr "Slå på tangentrepetering"
 
-#: capplets/mouse/mouse-properties.glade.h:10
-msgid "Right handed"
-msgstr "Högerhänt"
-
-#: capplets/mouse/mouse-properties.glade.h:11
-#: capplets/screensaver/screensavers/3d_clock.xml.h:11
-#: capplets/screensaver/screensavers/ant.xml.h:10
-#: capplets/screensaver/screensavers/attraction.xml.h:19
-#: capplets/screensaver/screensavers/bsod.xml.h:8
-#: capplets/screensaver/screensavers/compass.xml.h:10
-#: capplets/screensaver/screensavers/flag.xml.h:10
-#: capplets/screensaver/screensavers/qix.xml.h:16
-#: capplets/screensaver/screensavers/starfish.xml.h:9
-#: capplets/screensaver/screensavers/starfish.xml.h:13
-msgid "Slow"
-msgstr "Långsamt"
-
-#: capplets/mouse/mouse-properties.glade.h:12
-#: capplets/screensaver/screensavers/3d_clock.xml.h:12
-#: capplets/screensaver/screensavers/ant.xml.h:11
-#: capplets/screensaver/screensavers/attraction.xml.h:20
-#: capplets/screensaver/screensavers/bsod.xml.h:9
-#: capplets/screensaver/screensavers/compass.xml.h:11
-#: capplets/screensaver/screensavers/flag.xml.h:11
-#: capplets/screensaver/screensavers/qix.xml.h:17
-#: capplets/screensaver/screensavers/starfish.xml.h:8
+#: capplets/keyboard/keyboard-properties.glade.h:7
+#: capplets/mouse/mouse-properties.glade.h:1
 msgid "Fast"
 msgstr "Fort"
 
-#: capplets/mouse/mouse-properties.glade.h:13
-#, fuzzy
-msgid "Mouse speed:"
-msgstr "Vridningshastighet:"
+#: capplets/keyboard/keyboard-properties.glade.h:8
+msgid "Key repeat rate:"
+msgstr "Tangentrepeteringshastighet:"
 
-#: capplets/mouse/mouse-properties.glade.h:14
-#: capplets/screensaver/screensavers/3d_clock.xml.h:8
-#: capplets/screensaver/screensavers/3d_clock.xml.h:14
-#: capplets/screensaver/screensavers/attraction.xml.h:25
-#: capplets/screensaver/screensavers/qix.xml.h:31
-msgid "Low"
-msgstr "Låg"
+#: capplets/keyboard/keyboard-properties.glade.h:10
+msgid "Long"
+msgstr "Lång"
 
-#: capplets/mouse/mouse-properties.glade.h:15
-#: capplets/screensaver/screensavers/3d_clock.xml.h:9
-#: capplets/screensaver/screensavers/3d_clock.xml.h:15
-#: capplets/screensaver/screensavers/attraction.xml.h:26
-#: capplets/screensaver/screensavers/qix.xml.h:32
+#: capplets/keyboard/keyboard-properties.glade.h:11
+msgid "Medium"
+msgstr "Mellan"
+
+#: capplets/keyboard/keyboard-properties.glade.h:12
+msgid "Pitch (Hz)"
+msgstr "Tonläge (Hz)"
+
+#: capplets/keyboard/keyboard-properties.glade.h:13
+msgid "Short"
+msgstr "Kort"
+
+#: capplets/keyboard/keyboard-properties.glade.h:14
+#: capplets/mouse/mouse-properties.glade.h:10
+msgid "Slow"
+msgstr "Långsamt"
+
+#: capplets/keyboard/keyboard-properties.glade.h:15
+msgid "Test"
+msgstr "Test"
+
+#: capplets/keyboard/keyboard-properties.glade.h:16
+msgid "Very fast"
+msgstr "Mycket snabbt"
+
+#: capplets/keyboard/keyboard-properties.glade.h:17
+msgid "Very long"
+msgstr "Mycket långsamt"
+
+#: capplets/keyboard/keyboard-properties.glade.h:18
+msgid "Volume"
+msgstr "Volym"
+
+#: capplets/mouse/mouse.desktop.in.in.h:1
+msgid "Mouse"
+msgstr "Mus"
+
+#: capplets/mouse/mouse.desktop.in.in.h:2
+msgid "Mouse Properties"
+msgstr "Egenskaper för mus"
+
+#: capplets/mouse/mouse-properties.glade.h:2
 msgid "High"
 msgstr "Hög"
 
-#: capplets/mouse/mouse-properties.glade.h:16
-#, fuzzy
+#: capplets/mouse/mouse-properties.glade.h:3
+msgid "Left handed"
+msgstr "Vänsterhänt"
+
+#: capplets/mouse/mouse-properties.glade.h:4
+msgid "Low"
+msgstr "Låg"
+
+#: capplets/mouse/mouse-properties.glade.h:5
+msgid "Mouse Configuration"
+msgstr "Muskonfiguration"
+
+#: capplets/mouse/mouse-properties.glade.h:6
+msgid "Mouse speed:"
+msgstr "Mushastighet:"
+
+#: capplets/mouse/mouse-properties.glade.h:7
+msgid "My mouse is:"
+msgstr "Min mus är:"
+
+#: capplets/mouse/mouse-properties.glade.h:8
+msgid "Right handed"
+msgstr "Högerhänt"
+
+#: capplets/mouse/mouse-properties.glade.h:9
 msgid "Sensitivity:"
-msgstr "Täthet"
+msgstr "Känslighet:"
 
 #: capplets/screensaver/preferences.c:508
 msgid "Custom screensaver. No description available"
 msgstr "Anpassad skärmsläckare. Ingen beskrivning finns tillgänglig"
 
-#: capplets/screensaver/prefs-widget.c:160
+#: capplets/screensaver/prefs-widget.c:185
 msgid "Use"
-msgstr ""
+msgstr "Använd"
 
-#: capplets/screensaver/prefs-widget.c:160
-#, fuzzy
+#: capplets/screensaver/prefs-widget.c:185
+#: capplets/screensaver/screensaver.desktop.in.in.h:2
 msgid "Screensaver"
-msgstr "Ny skärmsläckare"
+msgstr "Skärmsläckare"
 
 #: capplets/screensaver/screensaver-prefs-dialog.c:185
 msgid "Name:"
@@ -316,7 +584,7 @@ msgstr "Demo"
 
 #: capplets/screensaver/screensaver-prefs-dialog.c:1360
 msgid "There are no configurable settings for this screensaver."
-msgstr ""
+msgstr "Det finns inga anpassningsbara inställningar för denna skärmsläckare."
 
 #: capplets/screensaver/screensaver-prefs-dialog.c:1369
 msgid ""
@@ -324,11 +592,11 @@ msgid ""
 "line below."
 msgstr ""
 "Kan inte hitta informationen som krävs för att konfigurera den här "
-"skärmsläckaren. Var vänlig och ändra kommandoraden nedan."
+"skärmsläckaren. Var vänlig och ändra kommandot nedan."
 
 #: capplets/screensaver/screensaver-prefs-dialog.c:1374
 msgid "Please enter a command line below."
-msgstr "Var vänlig och ange en kommandorad nedan."
+msgstr "Var vänlig och ange ett kommando nedan."
 
 #: capplets/screensaver/screensaver-prefs-dialog.c:1389
 msgid "Visual:"
@@ -339,996 +607,723 @@ msgstr "Synlig:"
 msgid "Any"
 msgstr "Vilken som"
 
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/3d_clock.xml.h:7
-msgid "Twist:"
-msgstr "Vrid:"
+#: capplets/screensaver/screensaver.desktop.in.in.h:1
+msgid "Configure the settings of the screensaver"
+msgstr "Ändra inställningar för skärmsläckare"
 
-#: capplets/screensaver/screensavers/3d_clock.xml.h:10
-msgid "Twist speed:"
-msgstr "Vridningshastighet:"
+#: capplets/screensaver/screensaver-properties.glade.h:1
+msgid " Configure..."
+msgstr " Konfigurera..."
 
-#: capplets/screensaver/screensavers/3d_clock.xml.h:13
-msgid "Wobble:"
-msgstr "Vackla:"
+#: capplets/screensaver/screensaver-properties.glade.h:2
+msgid "About \"<Screensaver name>\""
+msgstr "Om \"<skärmsläckarnamn>\""
 
-#: capplets/screensaver/screensavers/3d_clock.xml.h:16
+#: capplets/screensaver/screensaver-properties.glade.h:3
+msgid "Black screen only"
+msgstr "Endast tom skärm"
+
+#: capplets/screensaver/screensaver-properties.glade.h:4
+msgid "Configure Power Management"
+msgstr "Konfigurera strömsparfunktioner"
+
+#: capplets/screensaver/screensaver-properties.glade.h:5
+msgid "Disable screensaver"
+msgstr "Deaktivera skärmsläckare"
+
+# Hjälp behövs!
+#: capplets/screensaver/screensaver-properties.glade.h:6
+msgid ""
+"Draws quasiperiodic tilings; think of the implications on modern formica "
+"technology. Written by Time Korlove. In April 1997, Sir Roger Penrose, a "
+"British math professor who has worked with Stephen Hawking on such topics as "
+"relatvity, black holes, and whether time has a beginning, files a "
+"copyright-infringement lawsuit against Kimberly-Clark Corporation, wchih "
+"Penrose said copied a pattern he created ( apattern demonstrating that \"a "
+"nonrepeating pattern could exist in nature\") for its Kleenex quilted toilet "
+"paper. "
+msgstr ""
+"Ritar kvasiperiodiska rutor; tänk på implikationerna i modern "
+"formica-teknik. Skrivet av Time Korlove. I april 1997 anmälde Sir Roger "
+"Penrose, en brittisk matematikprofessor som har arbetat tillsammans med "
+"Stephen Hawking inom områden som relativitetsteori, svarta hål och huruvida "
+"tiden har en begynnelse, företaget Kimberly-Clark för brott mot "
+"upphovsrätten. Penrose anklagade Kimberly-Clark för att ha kopierat ett "
+"mönster han hade skapat (ett mönster som visade \"att ett ickerepeterande "
+"mönster kan finnas naturligt\") i dess Kleenex-toalettpappersprodukter. "
+
+#: capplets/screensaver/screensaver-properties.glade.h:7
+msgid "Enable _power management"
+msgstr "Använd _strömsparfunktioner"
+
+#: capplets/screensaver/screensaver-properties.glade.h:8
+msgid "Go to standby mode after"
+msgstr "Gå i standby-läge efter"
+
+#: capplets/screensaver/screensaver-properties.glade.h:9
+msgid "Go to suspend mode after"
+msgstr "Gå i suspend-läge efter"
+
+#: capplets/screensaver/screensaver-properties.glade.h:10
+msgid "One screensaver all the time"
+msgstr "En skärmsläckare hela tiden"
+
+#: capplets/screensaver/screensaver-properties.glade.h:11
+msgid "Preview"
+msgstr "Förhandsgranska"
+
+#: capplets/screensaver/screensaver-properties.glade.h:12
+msgid "R_equire password to unlock screen"
+msgstr "_Kräv lösenord för att låsa upp skärmen"
+
+#: capplets/screensaver/screensaver-properties.glade.h:13
+msgid "Random (all screensavers)"
+msgstr "Slumpmässigt (alla skärmsläckare)"
+
+#: capplets/screensaver/screensaver-properties.glade.h:14
+msgid "Random (checked screensavers)"
+msgstr "Slumpmässigt (markerade skärmsläckare)"
+
+#: capplets/screensaver/screensaver-properties.glade.h:15
+msgid "S_tart screensaver after "
+msgstr "S_tarta skärmsläckaren efter "
+
+#: capplets/screensaver/screensaver-properties.glade.h:16
+msgid "S_witch screensavers after "
+msgstr "_Byt skärmsläckare efter "
+
+#: capplets/screensaver/screensaver-properties.glade.h:17
+msgid "Settings for \"<Screensaver name>\""
+msgstr "Inställningar för \"<skärmsläckarnamn>\""
+
+#: capplets/screensaver/screensaver-properties.glade.h:18
+msgid "Shut down monitor after"
+msgstr "Stäng av skärm efter"
+
+#: capplets/screensaver/screensaver-properties.glade.h:19
+msgid ""
+"There are no configurable settings for this\n"
+"screensaver. "
+msgstr ""
+"Det finns inga anpassningsbara inställningar\n"
+"för denna skärmsläckare. "
+
+#: capplets/screensaver/screensaver-properties.glade.h:21
+msgid "_About this screensaver..."
+msgstr "_Om denna skärmsläckare..."
+
+#: capplets/screensaver/screensaver-properties.glade.h:22
+msgid "_Add"
+msgstr "_Lägg till"
+
+#: capplets/screensaver/screensaver-properties.glade.h:23
+msgid "_Mode:"
+msgstr "L_äge:"
+
+#: capplets/screensaver/screensaver-properties.glade.h:24
+msgid "_Remove"
+msgstr "_Ta bort"
+
+#: capplets/screensaver/screensaver-properties.glade.h:25
+msgid "_Settings"
+msgstr "_Inställningar"
+
+#: capplets/screensaver/screensaver-properties.glade.h:26
+msgid "minutes"
+msgstr "minuter"
+
+#: capplets/screensaver/screensavers/3d_clock.xml.h:1
 msgid "Size:"
 msgstr "Storlek:"
 
-#: capplets/screensaver/screensavers/3d_clock.xml.h:17
-#: capplets/screensaver/screensavers/ant.xml.h:13
-#: capplets/screensaver/screensavers/attraction.xml.h:13
-#: capplets/screensaver/screensavers/flag.xml.h:13
-#: capplets/screensaver/screensavers/rorschach.xml.h:8
-#: capplets/screensaver/screensavers/rorschach.xml.h:11
-msgid "Small"
-msgstr "Liten"
+#: capplets/screensaver/screensavers/3d_clock.xml.h:2
+msgid "Twist speed:"
+msgstr "Vridningshastighet:"
 
-#: capplets/screensaver/screensavers/3d_clock.xml.h:18
-#: capplets/screensaver/screensavers/ant.xml.h:14
-#: capplets/screensaver/screensavers/attraction.xml.h:14
-#: capplets/screensaver/screensavers/flag.xml.h:14
-#: capplets/screensaver/screensavers/rorschach.xml.h:9
-#: capplets/screensaver/screensavers/rorschach.xml.h:12
-msgid "Large"
-msgstr "Stor"
+#: capplets/screensaver/screensavers/3d_clock.xml.h:3
+msgid "Twist:"
+msgstr "Vrid:"
 
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/ant.xml.h:7
-msgid "Sharp turns"
-msgstr "Skarpa svängar"
+#: capplets/screensaver/screensavers/3d_clock.xml.h:4
+msgid "Wobble:"
+msgstr "Vackla:"
 
-#: capplets/screensaver/screensavers/ant.xml.h:8
-msgid "Truchet lines"
-msgstr "Truchet-linjer"
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/ant.xml.h:9
-#: capplets/screensaver/screensavers/attraction.xml.h:18
-#: capplets/screensaver/screensavers/bsod.xml.h:7
-#: capplets/screensaver/screensavers/compass.xml.h:9
-#: capplets/screensaver/screensavers/flag.xml.h:9
-#: capplets/screensaver/screensavers/qix.xml.h:15
-msgid "Speed"
-msgstr "Hastighet"
-
-#: capplets/screensaver/screensavers/ant.xml.h:12
-#: capplets/screensaver/screensavers/flag.xml.h:12
-msgid "Timeout"
-msgstr "Tidsgräns"
-
-#: capplets/screensaver/screensavers/ant.xml.h:15
-msgid "Random"
-msgstr "Slumpvis"
-
-#: capplets/screensaver/screensavers/ant.xml.h:16
-msgid "Specific"
-msgstr "Specifikt"
-
-#: capplets/screensaver/screensavers/ant.xml.h:17
-msgid "number of Ants"
-msgstr "antal myror"
-
-#: capplets/screensaver/screensavers/ant.xml.h:18
-msgid "Random size upto"
-msgstr "Slumpvis storlek upp till"
-
-#: capplets/screensaver/screensavers/ant.xml.h:19
-#: capplets/screensaver/screensavers/flag.xml.h:16
-msgid "Specific size of"
-msgstr "Specifik storlek"
-
-#: capplets/screensaver/screensavers/ant.xml.h:20
-#: capplets/screensaver/screensavers/flag.xml.h:17
-msgid "Number of colours"
-msgstr "Antal färger"
-
-#: capplets/screensaver/screensavers/ant.xml.h:21
-#: capplets/screensaver/screensavers/flag.xml.h:18
-msgid "Two"
-msgstr "Två"
-
-#: capplets/screensaver/screensavers/ant.xml.h:22
-#: capplets/screensaver/screensavers/flag.xml.h:19
-msgid "Many"
-msgstr "Många"
-
-#: capplets/screensaver/screensavers/ant.xml.h:23
-msgid "Randomize"
-msgstr "Slumpa"
-
-#: capplets/screensaver/screensavers/ant.xml.h:24
-msgid "Three Sided cells"
-msgstr "Tresidade celler"
-
-#: capplets/screensaver/screensavers/ant.xml.h:25
+#: capplets/screensaver/screensavers/ant.xml.h:1
 msgid "Four Sided cells"
 msgstr "Fyrsidade celler"
 
-#: capplets/screensaver/screensavers/ant.xml.h:26
-msgid "Six Sided cells"
-msgstr "Sexsidade celler"
-
-#: capplets/screensaver/screensavers/ant.xml.h:27
-msgid "Nine Sided cells"
-msgstr "Niosidade celler"
-
-#: capplets/screensaver/screensavers/ant.xml.h:28
-msgid "Twelve Sided cells"
-msgstr "Tolvsidade celler"
-
-#: capplets/screensaver/screensavers/ant.xml.h:29
-#: capplets/screensaver/screensavers/attraction.xml.h:22
-#: capplets/screensaver/screensavers/bsod.xml.h:11
-#: capplets/screensaver/screensavers/compass.xml.h:13
-#: capplets/screensaver/screensavers/flag.xml.h:21
-#: capplets/screensaver/screensavers/qix.xml.h:29
-msgid "Monochrome"
-msgstr "Enfärgad"
-
-#: capplets/screensaver/screensavers/ant.xml.h:30
-#: capplets/screensaver/screensavers/attraction.xml.h:21
-#: capplets/screensaver/screensavers/bsod.xml.h:10
-#: capplets/screensaver/screensavers/compass.xml.h:12
-#: capplets/screensaver/screensavers/flag.xml.h:20
-#: capplets/screensaver/screensavers/qix.xml.h:28
+#: capplets/screensaver/screensavers/ant.xml.h:2
+#: capplets/screensaver/screensavers/attraction.xml.h:3
+#: capplets/screensaver/screensavers/bsod.xml.h:1
+#: capplets/screensaver/screensavers/compass.xml.h:2
+#: capplets/screensaver/screensavers/flag.xml.h:2
+#: capplets/screensaver/screensavers/qix.xml.h:3
 msgid "Full Color"
 msgstr "Full färg"
 
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/attraction.xml.h:7
+#: capplets/screensaver/screensavers/ant.xml.h:3
+#: capplets/screensaver/screensavers/attraction.xml.h:6
+#: capplets/screensaver/screensavers/bsod.xml.h:2
+#: capplets/screensaver/screensavers/compass.xml.h:3
+#: capplets/screensaver/screensavers/flag.xml.h:3
+#: capplets/screensaver/screensavers/qix.xml.h:6
+msgid "Monochrome"
+msgstr "Enfärgad"
+
+#: capplets/screensaver/screensavers/ant.xml.h:4
+msgid "Nine Sided cells"
+msgstr "Niosidade celler"
+
+#: capplets/screensaver/screensavers/ant.xml.h:5
+#: capplets/screensaver/screensavers/flag.xml.h:4
+msgid "Number of colours"
+msgstr "Antal färger"
+
+#: capplets/screensaver/screensavers/ant.xml.h:6
+msgid "Random"
+msgstr "Slumpvis"
+
+#: capplets/screensaver/screensavers/ant.xml.h:7
+msgid "Random size upto"
+msgstr "Slumpvis storlek upp till"
+
+#: capplets/screensaver/screensavers/ant.xml.h:8
+msgid "Randomize"
+msgstr "Slumpa"
+
+#: capplets/screensaver/screensavers/ant.xml.h:9
+msgid "Sharp turns"
+msgstr "Skarpa svängar"
+
+#: capplets/screensaver/screensavers/ant.xml.h:10
+msgid "Six Sided cells"
+msgstr "Sexsidade celler"
+
+#: capplets/screensaver/screensavers/ant.xml.h:11
+msgid "Specific"
+msgstr "Specifikt"
+
+#: capplets/screensaver/screensavers/ant.xml.h:12
+#: capplets/screensaver/screensavers/flag.xml.h:6
+msgid "Specific size of"
+msgstr "Specifik storlek"
+
+#: capplets/screensaver/screensavers/ant.xml.h:13
+#: capplets/screensaver/screensavers/attraction.xml.h:9
+#: capplets/screensaver/screensavers/bsod.xml.h:3
+#: capplets/screensaver/screensavers/compass.xml.h:4
+#: capplets/screensaver/screensavers/flag.xml.h:7
+#: capplets/screensaver/screensavers/qix.xml.h:11
+msgid "Speed"
+msgstr "Hastighet"
+
+#: capplets/screensaver/screensavers/ant.xml.h:14
+msgid "Three Sided cells"
+msgstr "Tresidade celler"
+
+#: capplets/screensaver/screensavers/ant.xml.h:15
+#: capplets/screensaver/screensavers/flag.xml.h:9
+msgid "Timeout"
+msgstr "Tidsgräns"
+
+#: capplets/screensaver/screensavers/ant.xml.h:16
+msgid "Truchet lines"
+msgstr "Truchet-linjer"
+
+#: capplets/screensaver/screensavers/ant.xml.h:17
+msgid "Twelve Sided cells"
+msgstr "Tolvsidade celler"
+
+#: capplets/screensaver/screensavers/ant.xml.h:18
+msgid "number of Ants"
+msgstr "antal myror"
+
+#: capplets/screensaver/screensavers/attraction.xml.h:1
 msgid "Balls"
 msgstr "Bollar"
 
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/attraction.xml.h:8
-#: capplets/screensaver/screensavers/qix.xml.h:7
+#: capplets/screensaver/screensavers/attraction.xml.h:2
+msgid "Color Contrast"
+msgstr "Färgkontrast"
+
+#: capplets/screensaver/screensavers/attraction.xml.h:4
+msgid "Length of Trail"
+msgstr "Svanslängd"
+
+#: capplets/screensaver/screensavers/attraction.xml.h:5
+#: capplets/screensaver/screensavers/qix.xml.h:5
 msgid "Lines"
 msgstr "Linjer"
 
-#: capplets/screensaver/screensavers/attraction.xml.h:9
-msgid "Tails"
-msgstr "Svansar"
+#: capplets/screensaver/screensavers/attraction.xml.h:7
+#: capplets/screensaver/screensavers/braid.xml.h:2
+#: capplets/screensaver/screensavers/fadeplot.xml.h:3
+#: capplets/screensaver/screensavers/sierpinski.xml.h:2
+#: capplets/screensaver/screensavers/spiral.xml.h:2
+#: capplets/screensaver/screensavers/triangle.xml.h:2
+#: capplets/screensaver/screensavers/vines.xml.h:2
+msgid "Number of Colors"
+msgstr "Antal färger"
 
-#: capplets/screensaver/screensavers/attraction.xml.h:10
-#: capplets/screensaver/screensavers/qix.xml.h:8
+#: capplets/screensaver/screensavers/attraction.xml.h:8
+#: capplets/screensaver/screensavers/qix.xml.h:9
 msgid "Polygons"
 msgstr "Polygoner"
 
-#: capplets/screensaver/screensavers/attraction.xml.h:11
+#: capplets/screensaver/screensavers/attraction.xml.h:10
 msgid "Splines"
 msgstr "Spliner"
+
+#: capplets/screensaver/screensavers/attraction.xml.h:11
+msgid "Tails"
+msgstr "Svansar"
 
 #: capplets/screensaver/screensavers/attraction.xml.h:12
 msgid "Threshold of repulsion"
 msgstr "Repulsionströskelvärde"
 
-#: capplets/screensaver/screensavers/attraction.xml.h:15
-msgid "Length of Trail"
-msgstr "Svanslängd"
-
-#: capplets/screensaver/screensavers/attraction.xml.h:16
-#: capplets/screensaver/screensavers/qix.xml.h:19
-#: capplets/screensaver/screensavers/qix.xml.h:25
-#: capplets/screensaver/screensavers/rorschach.xml.h:16
-msgid "Short"
-msgstr "Kort"
-
-#: capplets/screensaver/screensavers/attraction.xml.h:17
-#: capplets/screensaver/screensavers/qix.xml.h:20
-#: capplets/screensaver/screensavers/qix.xml.h:26
-#: capplets/screensaver/screensavers/rorschach.xml.h:17
-msgid "Long"
-msgstr "Lång"
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/attraction.xml.h:23
-#: capplets/screensaver/screensavers/braid.xml.h:7
-#: capplets/screensaver/screensavers/fadeplot.xml.h:7
-#: capplets/screensaver/screensavers/sierpinski.xml.h:7
-#: capplets/screensaver/screensavers/spiral.xml.h:12
-#: capplets/screensaver/screensavers/triangle.xml.h:7
-#: capplets/screensaver/screensavers/vines.xml.h:7
-msgid "Number of Colors"
-msgstr "Antal färger"
-
-#: capplets/screensaver/screensavers/attraction.xml.h:24
-msgid "Color Contrast"
-msgstr "Färgkontrast"
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/blitspin.xml.h:7
-msgid "Speed of rotation."
-msgstr "Rotationshastighet."
-
-#: capplets/screensaver/screensavers/blitspin.xml.h:8
-#: capplets/screensaver/screensavers/blitspin.xml.h:11
-#: capplets/screensaver/screensavers/bouboule.xml.h:10
-#: capplets/screensaver/screensavers/bubbles.xml.h:8
-#: capplets/screensaver/screensavers/coral.xml.h:13
-#: capplets/screensaver/screensavers/crystal.xml.h:10
-#: capplets/screensaver/screensavers/cynosure.xml.h:13
-#: capplets/screensaver/screensavers/decayscreen.xml.h:8
-#: capplets/screensaver/screensavers/discrete.xml.h:10
-#: capplets/screensaver/screensavers/drift.xml.h:10
-#: capplets/screensaver/screensavers/epicycle.xml.h:8
-#: capplets/screensaver/screensavers/fadeplot.xml.h:12
-#: capplets/screensaver/screensavers/flame.xml.h:13
-#: capplets/screensaver/screensavers/flame.xml.h:16
-#: capplets/screensaver/screensavers/forest.xml.h:10
-#: capplets/screensaver/screensavers/goop.xml.h:10
-#: capplets/screensaver/screensavers/greynetic.xml.h:8
-#: capplets/screensaver/screensavers/halo.xml.h:12
-#: capplets/screensaver/screensavers/helix.xml.h:8
-#: capplets/screensaver/screensavers/hopalong.xml.h:10
-#: capplets/screensaver/screensavers/hypercube.xml.h:11
-#: capplets/screensaver/screensavers/jigsaw.xml.h:8
-#: capplets/screensaver/screensavers/julia.xml.h:10
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:13
-#: capplets/screensaver/screensavers/lisa.xml.h:10
-#: capplets/screensaver/screensavers/lmorph.xml.h:13
-#: capplets/screensaver/screensavers/moire.xml.h:8
-#: capplets/screensaver/screensavers/munch.xml.h:8
-#: capplets/screensaver/screensavers/pyro.xml.h:11
-#: capplets/screensaver/screensavers/sierpinski.xml.h:10
-#: capplets/screensaver/screensavers/spiral.xml.h:10
-msgid "Faster"
-msgstr "Fortare"
-
-#: capplets/screensaver/screensavers/blitspin.xml.h:9
-#: capplets/screensaver/screensavers/blitspin.xml.h:12
-#: capplets/screensaver/screensavers/bouboule.xml.h:11
-#: capplets/screensaver/screensavers/bubbles.xml.h:9
-#: capplets/screensaver/screensavers/coral.xml.h:14
-#: capplets/screensaver/screensavers/crystal.xml.h:11
-#: capplets/screensaver/screensavers/cynosure.xml.h:14
-#: capplets/screensaver/screensavers/decayscreen.xml.h:9
-#: capplets/screensaver/screensavers/discrete.xml.h:11
-#: capplets/screensaver/screensavers/drift.xml.h:11
-#: capplets/screensaver/screensavers/epicycle.xml.h:9
-#: capplets/screensaver/screensavers/fadeplot.xml.h:13
-#: capplets/screensaver/screensavers/fadeplot.xml.h:16
-#: capplets/screensaver/screensavers/flame.xml.h:14
-#: capplets/screensaver/screensavers/flame.xml.h:17
-#: capplets/screensaver/screensavers/forest.xml.h:11
-#: capplets/screensaver/screensavers/goop.xml.h:11
-#: capplets/screensaver/screensavers/greynetic.xml.h:9
-#: capplets/screensaver/screensavers/halo.xml.h:13
-#: capplets/screensaver/screensavers/helix.xml.h:9
-#: capplets/screensaver/screensavers/hopalong.xml.h:11
-#: capplets/screensaver/screensavers/hypercube.xml.h:12
-#: capplets/screensaver/screensavers/jigsaw.xml.h:9
-#: capplets/screensaver/screensavers/julia.xml.h:11
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:14
-#: capplets/screensaver/screensavers/lisa.xml.h:11
-#: capplets/screensaver/screensavers/lmorph.xml.h:14
-#: capplets/screensaver/screensavers/moire.xml.h:9
-#: capplets/screensaver/screensavers/munch.xml.h:9
-#: capplets/screensaver/screensavers/pyro.xml.h:10
-#: capplets/screensaver/screensavers/sierpinski.xml.h:11
-#: capplets/screensaver/screensavers/spiral.xml.h:11
-msgid "Slower"
-msgstr "Långsammare"
-
-#: capplets/screensaver/screensavers/blitspin.xml.h:10
-msgid "Speed of the 90 degree rotation."
-msgstr "Hastighet för 90-gradersvridningen."
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/blitspin.xml.h:13
-#: capplets/screensaver/screensavers/bouboule.xml.h:15
-#: capplets/screensaver/screensavers/braid.xml.h:9
-#: capplets/screensaver/screensavers/bubbles.xml.h:13
-#: capplets/screensaver/screensavers/crystal.xml.h:15
-#: capplets/screensaver/screensavers/cynosure.xml.h:15
-#: capplets/screensaver/screensavers/decayscreen.xml.h:10
-#: capplets/screensaver/screensavers/discrete.xml.h:14
-#: capplets/screensaver/screensavers/drift.xml.h:15
-#: capplets/screensaver/screensavers/epicycle.xml.h:12
-#: capplets/screensaver/screensavers/fadeplot.xml.h:17
-#: capplets/screensaver/screensavers/flame.xml.h:18
-#: capplets/screensaver/screensavers/forest.xml.h:14
-#: capplets/screensaver/screensavers/goop.xml.h:12
-#: capplets/screensaver/screensavers/grav.xml.h:11
-#: capplets/screensaver/screensavers/greynetic.xml.h:10
-#: capplets/screensaver/screensavers/halo.xml.h:14
-#: capplets/screensaver/screensavers/helix.xml.h:10
-#: capplets/screensaver/screensavers/hopalong.xml.h:15
-#: capplets/screensaver/screensavers/hypercube.xml.h:13
-#: capplets/screensaver/screensavers/ifs.xml.h:9
-#: capplets/screensaver/screensavers/julia.xml.h:14
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:15
-#: capplets/screensaver/screensavers/laser.xml.h:12
-#: capplets/screensaver/screensavers/lightning.xml.h:9
-#: capplets/screensaver/screensavers/lisa.xml.h:17
-#: capplets/screensaver/screensavers/lmorph.xml.h:16
-#: capplets/screensaver/screensavers/moire.xml.h:15
-#: capplets/screensaver/screensavers/munch.xml.h:12
-#: capplets/screensaver/screensavers/pedal.xml.h:16
-#: capplets/screensaver/screensavers/sierpinski.xml.h:12
-#: capplets/screensaver/screensavers/spiral.xml.h:16
-#: capplets/screensaver/screensavers/triangle.xml.h:9
-#: capplets/screensaver/screensavers/vines.xml.h:9
-#: capplets/screensaver/screensavers/xroger.xml.h:7
+#: capplets/screensaver/screensavers/blitspin.xml.h:1
+#: capplets/screensaver/screensavers/bouboule.xml.h:1
+#: capplets/screensaver/screensavers/braid.xml.h:1
+#: capplets/screensaver/screensavers/bubbles.xml.h:2
+#: capplets/screensaver/screensavers/crystal.xml.h:3
+#: capplets/screensaver/screensavers/cynosure.xml.h:1
+#: capplets/screensaver/screensavers/decayscreen.xml.h:1
+#: capplets/screensaver/screensavers/discrete.xml.h:1
+#: capplets/screensaver/screensavers/drift.xml.h:1
+#: capplets/screensaver/screensavers/epicycle.xml.h:1
+#: capplets/screensaver/screensavers/fadeplot.xml.h:1
+#: capplets/screensaver/screensavers/flame.xml.h:1
+#: capplets/screensaver/screensavers/forest.xml.h:2
+#: capplets/screensaver/screensavers/goop.xml.h:1
+#: capplets/screensaver/screensavers/grav.xml.h:1
+#: capplets/screensaver/screensavers/greynetic.xml.h:1
+#: capplets/screensaver/screensavers/halo.xml.h:3
+#: capplets/screensaver/screensavers/helix.xml.h:1
+#: capplets/screensaver/screensavers/hopalong.xml.h:1
+#: capplets/screensaver/screensavers/hypercube.xml.h:1
+#: capplets/screensaver/screensavers/ifs.xml.h:1
+#: capplets/screensaver/screensavers/julia.xml.h:1
+#: capplets/screensaver/screensavers/kaleidescope.xml.h:1
+#: capplets/screensaver/screensavers/laser.xml.h:1
+#: capplets/screensaver/screensavers/lightning.xml.h:1
+#: capplets/screensaver/screensavers/lisa.xml.h:1
+#: capplets/screensaver/screensavers/lmorph.xml.h:1
+#: capplets/screensaver/screensavers/moire.xml.h:1
+#: capplets/screensaver/screensavers/munch.xml.h:1
+#: capplets/screensaver/screensavers/pedal.xml.h:1
+#: capplets/screensaver/screensavers/sierpinski.xml.h:1
+#: capplets/screensaver/screensavers/spiral.xml.h:1
+#: capplets/screensaver/screensavers/triangle.xml.h:1
+#: capplets/screensaver/screensavers/vines.xml.h:1
+#: capplets/screensaver/screensavers/xroger.xml.h:1
 msgid "Display screensaver in monochrome."
 msgstr "Visa skärmsläckaren monokromt."
 
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/bouboule.xml.h:7
-#: capplets/screensaver/screensavers/crystal.xml.h:7
-#: capplets/screensaver/screensavers/cynosure.xml.h:7
-#: capplets/screensaver/screensavers/discrete.xml.h:7
-#: capplets/screensaver/screensavers/drift.xml.h:7
-#: capplets/screensaver/screensavers/forest.xml.h:7
-#: capplets/screensaver/screensavers/grav.xml.h:7
-#: capplets/screensaver/screensavers/halo.xml.h:7
-#: capplets/screensaver/screensavers/hopalong.xml.h:7
-#: capplets/screensaver/screensavers/ifs.xml.h:7
-#: capplets/screensaver/screensavers/julia.xml.h:7
-#: capplets/screensaver/screensavers/lightning.xml.h:7
-#: capplets/screensaver/screensavers/lisa.xml.h:7
-#: capplets/screensaver/screensavers/moire.xml.h:10
+#: capplets/screensaver/screensavers/blitspin.xml.h:2
+msgid "Speed of rotation."
+msgstr "Rotationshastighet."
+
+#: capplets/screensaver/screensavers/blitspin.xml.h:3
+msgid "Speed of the 90 degree rotation."
+msgstr "Hastighet för 90-gradersvridningen."
+
+#: capplets/screensaver/screensavers/bouboule.xml.h:2
+#: capplets/screensaver/screensavers/crystal.xml.h:5
+#: capplets/screensaver/screensavers/cynosure.xml.h:2
+#: capplets/screensaver/screensavers/discrete.xml.h:2
+#: capplets/screensaver/screensavers/drift.xml.h:3
+#: capplets/screensaver/screensavers/forest.xml.h:3
+#: capplets/screensaver/screensavers/grav.xml.h:2
+#: capplets/screensaver/screensavers/halo.xml.h:4
+#: capplets/screensaver/screensavers/hopalong.xml.h:2
+#: capplets/screensaver/screensavers/ifs.xml.h:2
+#: capplets/screensaver/screensavers/julia.xml.h:2
+#: capplets/screensaver/screensavers/lightning.xml.h:2
+#: capplets/screensaver/screensavers/lisa.xml.h:2
+#: capplets/screensaver/screensavers/moire.xml.h:3
 msgid "Number of Colors."
 msgstr "Antal färger."
 
-#: capplets/screensaver/screensavers/bouboule.xml.h:8
-#: capplets/screensaver/screensavers/braid.xml.h:8
-#: capplets/screensaver/screensavers/crystal.xml.h:8
-#: capplets/screensaver/screensavers/cynosure.xml.h:8
-#: capplets/screensaver/screensavers/discrete.xml.h:8
-#: capplets/screensaver/screensavers/drift.xml.h:8
-#: capplets/screensaver/screensavers/fadeplot.xml.h:8
-#: capplets/screensaver/screensavers/forest.xml.h:8
-#: capplets/screensaver/screensavers/grav.xml.h:8
-#: capplets/screensaver/screensavers/halo.xml.h:8
-#: capplets/screensaver/screensavers/hopalong.xml.h:8
-#: capplets/screensaver/screensavers/ifs.xml.h:8
-#: capplets/screensaver/screensavers/julia.xml.h:8
-#: capplets/screensaver/screensavers/lightning.xml.h:8
-#: capplets/screensaver/screensavers/lisa.xml.h:8
-#: capplets/screensaver/screensavers/moire.xml.h:11
-#: capplets/screensaver/screensavers/sierpinski.xml.h:8
-#: capplets/screensaver/screensavers/spiral.xml.h:13
-#: capplets/screensaver/screensavers/triangle.xml.h:8
-#: capplets/screensaver/screensavers/vines.xml.h:8
-msgid "Colors:"
-msgstr "Färger:"
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/bouboule.xml.h:9
-#: capplets/screensaver/screensavers/bubbles.xml.h:7
-#: capplets/screensaver/screensavers/coral.xml.h:12
-#: capplets/screensaver/screensavers/crystal.xml.h:9
-#: capplets/screensaver/screensavers/cynosure.xml.h:12
-#: capplets/screensaver/screensavers/decayscreen.xml.h:7
-#: capplets/screensaver/screensavers/discrete.xml.h:9
-#: capplets/screensaver/screensavers/drift.xml.h:9
-#: capplets/screensaver/screensavers/epicycle.xml.h:7
-#: capplets/screensaver/screensavers/flame.xml.h:12
-#: capplets/screensaver/screensavers/goop.xml.h:9
-#: capplets/screensaver/screensavers/greynetic.xml.h:7
-#: capplets/screensaver/screensavers/halo.xml.h:11
-#: capplets/screensaver/screensavers/hopalong.xml.h:9
-#: capplets/screensaver/screensavers/hypercube.xml.h:10
-#: capplets/screensaver/screensavers/jigsaw.xml.h:7
-#: capplets/screensaver/screensavers/julia.xml.h:9
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:12
-#: capplets/screensaver/screensavers/lisa.xml.h:9
-#: capplets/screensaver/screensavers/lmorph.xml.h:12
-#: capplets/screensaver/screensavers/moire.xml.h:7
-#: capplets/screensaver/screensavers/munch.xml.h:7
-#: capplets/screensaver/screensavers/spiral.xml.h:9
-msgid "Speed of Motion."
-msgstr "Rörelsehastighet."
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/bouboule.xml.h:12
-#: capplets/screensaver/screensavers/goop.xml.h:7
+#: capplets/screensaver/screensavers/bouboule.xml.h:3
+#: capplets/screensaver/screensavers/goop.xml.h:3
 msgid "Number of bubbles to use."
 msgstr "Antal bubblor att använda."
 
-#: capplets/screensaver/screensavers/bouboule.xml.h:13
-#: capplets/screensaver/screensavers/crystal.xml.h:13
-#: capplets/screensaver/screensavers/discrete.xml.h:13
-#: capplets/screensaver/screensavers/drift.xml.h:13
-#: capplets/screensaver/screensavers/fadeplot.xml.h:10
-#: capplets/screensaver/screensavers/forest.xml.h:13
-#: capplets/screensaver/screensavers/goop.xml.h:8
-#: capplets/screensaver/screensavers/grav.xml.h:10
-#: capplets/screensaver/screensavers/halo.xml.h:10
-#: capplets/screensaver/screensavers/julia.xml.h:13
-#: capplets/screensaver/screensavers/lisa.xml.h:13
-#: capplets/screensaver/screensavers/pyro.xml.h:8
-#: capplets/screensaver/screensavers/spiral.xml.h:15
-msgid "Count:"
-msgstr "Räkna:"
+#: capplets/screensaver/screensavers/bouboule.xml.h:4
+#: capplets/screensaver/screensavers/bubbles.xml.h:5
+#: capplets/screensaver/screensavers/coral.xml.h:3
+#: capplets/screensaver/screensavers/crystal.xml.h:7
+#: capplets/screensaver/screensavers/cynosure.xml.h:4
+#: capplets/screensaver/screensavers/decayscreen.xml.h:2
+#: capplets/screensaver/screensavers/discrete.xml.h:4
+#: capplets/screensaver/screensavers/drift.xml.h:5
+#: capplets/screensaver/screensavers/epicycle.xml.h:2
+#: capplets/screensaver/screensavers/flame.xml.h:4
+#: capplets/screensaver/screensavers/goop.xml.h:4
+#: capplets/screensaver/screensavers/greynetic.xml.h:2
+#: capplets/screensaver/screensavers/halo.xml.h:6
+#: capplets/screensaver/screensavers/hopalong.xml.h:4
+#: capplets/screensaver/screensavers/hypercube.xml.h:3
+#: capplets/screensaver/screensavers/jigsaw.xml.h:1
+#: capplets/screensaver/screensavers/julia.xml.h:4
+#: capplets/screensaver/screensavers/kaleidescope.xml.h:4
+#: capplets/screensaver/screensavers/lisa.xml.h:5
+#: capplets/screensaver/screensavers/lmorph.xml.h:5
+#: capplets/screensaver/screensavers/moire.xml.h:4
+#: capplets/screensaver/screensavers/munch.xml.h:3
+#: capplets/screensaver/screensavers/spiral.xml.h:4
+msgid "Speed of Motion."
+msgstr "Rörelsehastighet."
 
-#: capplets/screensaver/screensavers/bouboule.xml.h:14
+#: capplets/screensaver/screensavers/bouboule.xml.h:5
 msgid "Use red/blue 3d seperation."
 msgstr "Använd röd/blå 3d-separation."
 
-#: capplets/screensaver/screensavers/bubbles.xml.h:10
-msgid "Draw circles instead of pixmap bubbles."
-msgstr "Rita cirklar i stället för bildbubblor."
-
-#: capplets/screensaver/screensavers/bubbles.xml.h:11
-msgid "Don't hide bubbles when they pop."
-msgstr "Göm inte bubblor när de bubblar upp."
-
-#: capplets/screensaver/screensavers/bubbles.xml.h:12
+#: capplets/screensaver/screensavers/bubbles.xml.h:1
 msgid "Bubbles exist in three dimensions."
 msgstr "Bubblor är tredimensionella."
 
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/compass.xml.h:7
-msgid "Use double buffering"
-msgstr "Använd dubbelbuffring"
+#: capplets/screensaver/screensavers/bubbles.xml.h:3
+msgid "Don't hide bubbles when they pop."
+msgstr "Göm inte bubblor när de bubblar upp."
 
-#: capplets/screensaver/screensavers/compass.xml.h:8
+#: capplets/screensaver/screensavers/bubbles.xml.h:4
+msgid "Draw circles instead of pixmap bubbles."
+msgstr "Rita cirklar i stället för bildbubblor."
+
+#: capplets/screensaver/screensavers/compass.xml.h:1
 msgid "Don't use double bufferinge"
 msgstr "Använd inte dubbelbuffring"
 
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/coral.xml.h:7
+#: capplets/screensaver/screensavers/compass.xml.h:5
+msgid "Use double buffering"
+msgstr "Använd dubbelbuffring"
+
+#: capplets/screensaver/screensavers/coral.xml.h:1
 msgid "Density"
 msgstr "Täthet"
 
-#: capplets/screensaver/screensavers/coral.xml.h:8
-msgid "Denser"
-msgstr "Tätare"
-
-#: capplets/screensaver/screensavers/coral.xml.h:9
-msgid "Thinner"
-msgstr "Glesare"
-
-#: capplets/screensaver/screensavers/coral.xml.h:10
+#: capplets/screensaver/screensavers/coral.xml.h:2
 msgid "Number of seeds"
 msgstr "Antal frön"
 
-#: capplets/screensaver/screensavers/coral.xml.h:11
-msgid "Seeds"
-msgstr "Frön"
-
-#: capplets/screensaver/screensavers/crystal.xml.h:12
-msgid "Number of polygons to use."
-msgstr "Antal polygoner att använda."
-
-#: capplets/screensaver/screensavers/crystal.xml.h:14
-msgid "Center image."
-msgstr "Centrera bild."
-
-#: capplets/screensaver/screensavers/crystal.xml.h:16
-msgid "Have at maximum size"
-msgstr "Behåll vid maxstorlek"
-
-#: capplets/screensaver/screensavers/crystal.xml.h:17
+#: capplets/screensaver/screensavers/crystal.xml.h:1
 msgid "Cell"
 msgstr "Cell"
 
-#: capplets/screensaver/screensavers/cynosure.xml.h:9
+#: capplets/screensaver/screensavers/crystal.xml.h:2
+msgid "Center image."
+msgstr "Centrera bild."
+
+#: capplets/screensaver/screensavers/crystal.xml.h:4
+msgid "Have at maximum size"
+msgstr "Behåll vid maxstorlek"
+
+#: capplets/screensaver/screensavers/crystal.xml.h:6
+msgid "Number of polygons to use."
+msgstr "Antal polygoner att använda."
+
+#: capplets/screensaver/screensavers/cynosure.xml.h:3
 msgid "Number of iterations."
 msgstr "Antal iterationer."
 
-#: capplets/screensaver/screensavers/cynosure.xml.h:10
-#: capplets/screensaver/screensavers/flame.xml.h:10
-#: capplets/screensaver/screensavers/hopalong.xml.h:13
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:10
-#: capplets/screensaver/screensavers/lmorph.xml.h:10
-#: capplets/screensaver/screensavers/pedal.xml.h:11
-#: capplets/screensaver/screensavers/pyro.xml.h:13
-msgid "Less"
-msgstr "Färre"
-
-#: capplets/screensaver/screensavers/cynosure.xml.h:11
-#: capplets/screensaver/screensavers/fadeplot.xml.h:15
-#: capplets/screensaver/screensavers/flame.xml.h:11
-#: capplets/screensaver/screensavers/hopalong.xml.h:14
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:11
-#: capplets/screensaver/screensavers/lmorph.xml.h:11
-#: capplets/screensaver/screensavers/pedal.xml.h:12
-#: capplets/screensaver/screensavers/pyro.xml.h:14
-msgid "More"
-msgstr "Fler"
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/deco.xml.h:7
-#: capplets/screensaver/screensavers/spiral.xml.h:7
-msgid "Time between redraws:"
-msgstr "Tid mellan omritningar:"
-
-#: capplets/screensaver/screensavers/deco.xml.h:8
-msgid "seconds"
-msgstr "sekunder"
-
-#: capplets/screensaver/screensavers/deco.xml.h:9
-msgid "Use color when drawing."
-msgstr "Använd färg vid ritning."
-
-#: capplets/screensaver/screensavers/deco.xml.h:10
+#: capplets/screensaver/screensavers/deco.xml.h:1
 msgid "Cycle through colors."
 msgstr "Byt färger."
 
-#: capplets/screensaver/screensavers/discrete.xml.h:12
-#: capplets/screensaver/screensavers/julia.xml.h:12
-#: capplets/screensaver/screensavers/lisa.xml.h:12
-#: capplets/screensaver/screensavers/spiral.xml.h:14
+#: capplets/screensaver/screensavers/deco.xml.h:2
+msgid "Use color when drawing."
+msgstr "Använd färg vid ritning."
+
+#: capplets/screensaver/screensavers/discrete.xml.h:3
+#: capplets/screensaver/screensavers/julia.xml.h:3
+#: capplets/screensaver/screensavers/lisa.xml.h:3
+#: capplets/screensaver/screensavers/spiral.xml.h:3
 msgid "Number to use."
 msgstr "Antal att använda."
 
-#: capplets/screensaver/screensavers/drift.xml.h:12
-msgid "Number of pixels to use."
-msgstr "Antal pixlar att använda."
-
-#: capplets/screensaver/screensavers/drift.xml.h:14
+#: capplets/screensaver/screensavers/drift.xml.h:2
 msgid "Fractals should grow."
 msgstr "Fraktaler ska växa."
 
-#: capplets/screensaver/screensavers/drift.xml.h:16
+#: capplets/screensaver/screensavers/drift.xml.h:4
+msgid "Number of pixels to use."
+msgstr "Antal pixlar att använda."
+
+#: capplets/screensaver/screensavers/drift.xml.h:6
 msgid "Use lissajous figures to get points."
 msgstr "Använd lissajous-figurer för att ta poäng."
 
-#: capplets/screensaver/screensavers/epicycle.xml.h:10
-#: capplets/screensaver/screensavers/flame.xml.h:15
+#: capplets/screensaver/screensavers/epicycle.xml.h:3
+#: capplets/screensaver/screensavers/flame.xml.h:5
 msgid "Time finished product is shown."
 msgstr "Avslutningstidsprodukten visas."
 
-#: capplets/screensaver/screensavers/epicycle.xml.h:11
-#: capplets/screensaver/screensavers/spiral.xml.h:8
-#: capplets/screensaver/screensavers/starfish.xml.h:15
-msgid "Seconds"
-msgstr "sekunder"
-
-#: capplets/screensaver/screensavers/fadeplot.xml.h:9
+#: capplets/screensaver/screensavers/fadeplot.xml.h:2
 msgid "Number"
 msgstr "Tal"
 
-#: capplets/screensaver/screensavers/fadeplot.xml.h:11
-#: capplets/screensaver/screensavers/sierpinski.xml.h:9
-msgid "Speed of Motion"
-msgstr "Rörelsehastighet"
-
-#: capplets/screensaver/screensavers/fadeplot.xml.h:14
+#: capplets/screensaver/screensavers/fadeplot.xml.h:4
 msgid "Number of cycles"
 msgstr "Antal cykler"
 
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/flag.xml.h:7
-msgid "Text for flag"
-msgstr "Flaggtext"
+#: capplets/screensaver/screensavers/fadeplot.xml.h:5
+#: capplets/screensaver/screensavers/sierpinski.xml.h:3
+msgid "Speed of Motion"
+msgstr "Rörelsehastighet"
 
-#: capplets/screensaver/screensavers/flag.xml.h:8
+#: capplets/screensaver/screensavers/flag.xml.h:1
 msgid "Bitmap for flag"
 msgstr "Flaggbitmappsbild"
 
-#: capplets/screensaver/screensavers/flag.xml.h:15
+#: capplets/screensaver/screensavers/flag.xml.h:5
 msgid "Random size up to"
 msgstr "Slumpvis storlek upp till"
 
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/flame.xml.h:7
+#: capplets/screensaver/screensavers/flag.xml.h:8
+msgid "Text for flag"
+msgstr "Flaggtext"
+
+#: capplets/screensaver/screensavers/flame.xml.h:2
 msgid "Number of fractals to generate."
 msgstr "Antal fraktaler att generera."
 
-#: capplets/screensaver/screensavers/flame.xml.h:8
-msgid "Iterations:"
-msgstr "Iterationer:"
-
-#: capplets/screensaver/screensavers/flame.xml.h:9
+#: capplets/screensaver/screensavers/flame.xml.h:3
 msgid "Pixels per fractal."
 msgstr "Pixlar per fraktal."
 
-#: capplets/screensaver/screensavers/forest.xml.h:9
+#: capplets/screensaver/screensavers/forest.xml.h:1
 msgid "Delay between redraws."
 msgstr "Fördröjning mellan omritningar."
 
-#: capplets/screensaver/screensavers/forest.xml.h:12
+#: capplets/screensaver/screensavers/forest.xml.h:4
 msgid "Number of trees to use."
 msgstr "Antal träd att använda."
 
-#: capplets/screensaver/screensavers/goop.xml.h:13
+#: capplets/screensaver/screensavers/goop.xml.h:2
 msgid "Have transparent bubbles."
 msgstr "Ha genomskinliga bubblor."
 
-#: capplets/screensaver/screensavers/goop.xml.h:14
+#: capplets/screensaver/screensavers/goop.xml.h:5
 msgid "Use additive color model."
 msgstr "Använd additiv färgmodell."
 
-#: capplets/screensaver/screensavers/grav.xml.h:9
+#: capplets/screensaver/screensavers/grav.xml.h:3
 msgid "Number of planets to use."
 msgstr "Antal planeter att använda."
 
-#: capplets/screensaver/screensavers/grav.xml.h:12
-msgid "Orbit should decay."
-msgstr "Orbit ska avtyna."
-
-#: capplets/screensaver/screensavers/grav.xml.h:13
+#: capplets/screensaver/screensavers/grav.xml.h:4
 msgid "Objects should leave trails behind them."
 msgstr "Objekt ska lämna spår efter dem."
 
-#: capplets/screensaver/screensavers/halo.xml.h:9
-msgid "Number of circles to use."
-msgstr "Antal cirklar att använda."
+#: capplets/screensaver/screensavers/grav.xml.h:5
+msgid "Orbit should decay."
+msgstr "Orbit ska avtyna."
 
-#: capplets/screensaver/screensavers/halo.xml.h:15
-msgid "Use a gradient of colors between circles."
-msgstr "Använd en färgtoning mellan cirklar."
-
-#: capplets/screensaver/screensavers/halo.xml.h:16
+#: capplets/screensaver/screensavers/halo.xml.h:1
 msgid "Animate circles."
 msgstr "Animera cirklar."
 
-#: capplets/screensaver/screensavers/halo.xml.h:17
+#: capplets/screensaver/screensavers/halo.xml.h:2
 msgid "Cycle through colormap."
 msgstr "Byt mellan färger i färgkartan."
 
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/helix.xml.h:7
+#: capplets/screensaver/screensavers/halo.xml.h:5
+msgid "Number of circles to use."
+msgstr "Antal cirklar att använda."
+
+#: capplets/screensaver/screensavers/halo.xml.h:7
+msgid "Use a gradient of colors between circles."
+msgstr "Använd en färgtoning mellan cirklar."
+
+#: capplets/screensaver/screensavers/helix.xml.h:2
 msgid "Time between redraws."
 msgstr "Tid mellan omritningar."
 
-#: capplets/screensaver/screensavers/hopalong.xml.h:12
+#: capplets/screensaver/screensavers/hopalong.xml.h:3
 msgid "Number of pixels before a color change."
 msgstr "Antal pixlar innan en färgändring."
 
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/hypercube.xml.h:7
+#: capplets/screensaver/screensavers/hypercube.xml.h:2
 msgid "Distance from center of cube"
 msgstr "Avstånd från kubens mittpunkt"
 
-#: capplets/screensaver/screensavers/hypercube.xml.h:8
-msgid "Closer"
-msgstr "Närmare"
-
-#: capplets/screensaver/screensavers/hypercube.xml.h:9
-msgid "Farther"
-msgstr "Längre bort"
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:7
+#: capplets/screensaver/screensavers/kaleidescope.xml.h:2
 msgid "Number of segments."
 msgstr "Antal segment."
 
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:8
-msgid "Segments"
-msgstr "Segment"
-
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:9
+#: capplets/screensaver/screensavers/kaleidescope.xml.h:3
 msgid "Number of trails."
 msgstr "Antal spår."
 
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/laser.xml.h:7
+#: capplets/screensaver/screensavers/laser.xml.h:2
 msgid "Duration of laser burst."
 msgstr "Varaktighet för laserstråle."
 
-#: capplets/screensaver/screensavers/laser.xml.h:8
-#: capplets/screensaver/screensavers/pedal.xml.h:8
-#: capplets/screensaver/screensavers/pedal.xml.h:14
-msgid "Shorter"
-msgstr "Kortare"
-
-#: capplets/screensaver/screensavers/laser.xml.h:9
-#: capplets/screensaver/screensavers/pedal.xml.h:9
-#: capplets/screensaver/screensavers/pedal.xml.h:15
-msgid "Longer"
-msgstr "Längre"
-
-#: capplets/screensaver/screensavers/laser.xml.h:10
+#: capplets/screensaver/screensavers/laser.xml.h:3
 msgid "Size of burst."
 msgstr "Strålens storlek."
 
-#: capplets/screensaver/screensavers/laser.xml.h:11
-msgid "Segments:"
-msgstr "Segment:"
-
-#: capplets/screensaver/screensavers/lisa.xml.h:14
+#: capplets/screensaver/screensavers/lisa.xml.h:4
 msgid "Size of object."
 msgstr "Objektets storlek."
 
-#: capplets/screensaver/screensavers/lisa.xml.h:15
-#: capplets/screensaver/screensavers/moire.xml.h:13
-msgid "Smaller"
-msgstr "Mindre"
-
-#: capplets/screensaver/screensavers/lisa.xml.h:16
-#: capplets/screensaver/screensavers/moire.xml.h:14
-msgid "Larger"
-msgstr "Större"
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/lmorph.xml.h:7
-msgid "Number of points."
-msgstr "Antal punkter."
-
-#: capplets/screensaver/screensavers/lmorph.xml.h:8
-msgid "Points:"
-msgstr "Punkter:"
-
-#: capplets/screensaver/screensavers/lmorph.xml.h:9
+#: capplets/screensaver/screensavers/lmorph.xml.h:2
 msgid "Number of interpolation steps."
 msgstr "Antal interpolationssteg."
 
-#: capplets/screensaver/screensavers/lmorph.xml.h:15
+#: capplets/screensaver/screensavers/lmorph.xml.h:3
+msgid "Number of points."
+msgstr "Antal punkter."
+
+#: capplets/screensaver/screensavers/lmorph.xml.h:4
 msgid "Open figures."
 msgstr "Öppna figurer."
 
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/maze.xml.h:7
-msgid "Delay between each step in the maze."
-msgstr "Fördröjning mellan varje steg i labyrinten."
-
-#: capplets/screensaver/screensavers/maze.xml.h:8
-#: capplets/screensaver/screensavers/maze.xml.h:11
-#: capplets/screensaver/screensavers/maze.xml.h:14
-msgid "Less Delay"
-msgstr "Mindre fördröjning"
-
-#: capplets/screensaver/screensavers/maze.xml.h:9
-#: capplets/screensaver/screensavers/maze.xml.h:12
-#: capplets/screensaver/screensavers/maze.xml.h:15
-msgid "More Delay"
-msgstr "Mer fördröjning"
-
-#: capplets/screensaver/screensavers/maze.xml.h:10
+#: capplets/screensaver/screensavers/maze.xml.h:1
 msgid "Delay between drawing the maze and starting the solution."
 msgstr "Fördröjning mellan labyrinten och startandet av lösningen."
 
-#: capplets/screensaver/screensavers/maze.xml.h:13
+#: capplets/screensaver/screensavers/maze.xml.h:2
+msgid "Delay between each step in the maze."
+msgstr "Fördröjning mellan varje steg i labyrinten."
+
+#: capplets/screensaver/screensavers/maze.xml.h:3
 msgid "Delay between finishing the maze and starting a new one."
 msgstr "Fördröjning mellan avslutande av labyrinten och start av en ny."
 
-#: capplets/screensaver/screensavers/maze.xml.h:16
+#: capplets/screensaver/screensavers/maze.xml.h:4
 msgid "Put a bridge over the logo?"
 msgstr "Visa en bro över logotypen?"
 
-#: capplets/screensaver/screensavers/moire.xml.h:12
+#: capplets/screensaver/screensavers/moire.xml.h:2
 msgid "Maximum radius increment"
 msgstr "Maximal radieökning"
 
-#: capplets/screensaver/screensavers/munch.xml.h:10
-msgid "Use XOR drawing function."
-msgstr "Använd XOR-ritningsfunktion."
-
-#: capplets/screensaver/screensavers/munch.xml.h:11
+#: capplets/screensaver/screensavers/munch.xml.h:2
 msgid "Draw square at weird starting points."
 msgstr "Rita fyrkant vid konstiga startpunkter."
 
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/pedal.xml.h:7
-msgid "Time to show each picture."
-msgstr "Tid att visa varje bild."
+#: capplets/screensaver/screensavers/munch.xml.h:4
+msgid "Use XOR drawing function."
+msgstr "Använd XOR-ritningsfunktion."
 
-#: capplets/screensaver/screensavers/pedal.xml.h:10
+#: capplets/screensaver/screensavers/pedal.xml.h:2
 msgid "Maximum number of lines."
 msgstr "Maximala antalet linjer."
 
-#: capplets/screensaver/screensavers/pedal.xml.h:13
+#: capplets/screensaver/screensavers/pedal.xml.h:3
 msgid "Time to fade away."
 msgstr "Tid att tyna bort."
 
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/pyro.xml.h:7
-msgid "Particles on screen"
-msgstr "Partiklar på skärmen"
+#: capplets/screensaver/screensavers/pedal.xml.h:4
+msgid "Time to show each picture."
+msgstr "Tid att visa varje bild."
 
-#: capplets/screensaver/screensavers/pyro.xml.h:9
+#: capplets/screensaver/screensavers/pyro.xml.h:1
 msgid "Frequency of missile launch"
 msgstr "Missiluppskjutningsfrekvens"
 
-#: capplets/screensaver/screensavers/pyro.xml.h:12
+#: capplets/screensaver/screensavers/pyro.xml.h:2
 msgid "Number of particles"
 msgstr "Antal partiklar"
 
-#: capplets/screensaver/screensavers/qix.xml.h:9
-msgid "Number of points:"
-msgstr "Antal punkter:"
+#: capplets/screensaver/screensavers/pyro.xml.h:3
+msgid "Particles on screen"
+msgstr "Partiklar på skärmen"
 
-#: capplets/screensaver/screensavers/qix.xml.h:10
+#: capplets/screensaver/screensavers/qix.xml.h:1
+msgid "Color contrast"
+msgstr "Färgkontrast"
+
+#: capplets/screensaver/screensavers/qix.xml.h:2
 msgid "Discrete Lines"
 msgstr "Diskreta linjer"
 
-#: capplets/screensaver/screensavers/qix.xml.h:11
+#: capplets/screensaver/screensavers/qix.xml.h:4
+msgid "Length"
+msgstr "Längd"
+
+#: capplets/screensaver/screensavers/qix.xml.h:7
+msgid "Number of points:"
+msgstr "Antal punkter:"
+
+#: capplets/screensaver/screensavers/qix.xml.h:8
+msgid "Number of trails:"
+msgstr "Antal spår:"
+
+#: capplets/screensaver/screensavers/qix.xml.h:10
 msgid "Solid Trails"
 msgstr "Solida spår"
 
 #: capplets/screensaver/screensavers/qix.xml.h:12
-msgid "Transparent Trails"
-msgstr "Transparenta spår"
-
-#: capplets/screensaver/screensavers/qix.xml.h:13
-msgid "XOR Trails"
-msgstr "XOR-spår"
-
-#: capplets/screensaver/screensavers/qix.xml.h:14
-msgid "Trails attract each other"
-msgstr "Spåren drar till varandra"
-
-#: capplets/screensaver/screensavers/qix.xml.h:18
-msgid "Length"
-msgstr "Längd"
-
-#: capplets/screensaver/screensavers/qix.xml.h:21
-msgid "Width"
-msgstr "Bredd"
-
-#: capplets/screensaver/screensavers/qix.xml.h:22
-msgid "Narrow"
-msgstr "Smal"
-
-#: capplets/screensaver/screensavers/qix.xml.h:23
-msgid "Wide"
-msgstr "Bred"
-
-#: capplets/screensaver/screensavers/qix.xml.h:24
 msgid "Spread between lines"
 msgstr "Sprid mellan linjer"
 
-#: capplets/screensaver/screensavers/qix.xml.h:27
-msgid "Number of trails:"
-msgstr "Antal spår:"
+#: capplets/screensaver/screensavers/qix.xml.h:13
+msgid "Trails attract each other"
+msgstr "Spåren drar till varandra"
 
-#: capplets/screensaver/screensavers/qix.xml.h:30
-msgid "Color contrast"
-msgstr "Färgkontrast"
+#: capplets/screensaver/screensavers/qix.xml.h:14
+msgid "Transparent Trails"
+msgstr "Transparenta spår"
 
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/rorschach.xml.h:7
-msgid "Number of Iterations"
-msgstr "Antal iterationer"
+#: capplets/screensaver/screensavers/qix.xml.h:15
+msgid "Width"
+msgstr "Bredd"
 
-#: capplets/screensaver/screensavers/rorschach.xml.h:10
-msgid "Offset"
-msgstr "Förskjutning"
+#: capplets/screensaver/screensavers/qix.xml.h:16
+msgid "XOR Trails"
+msgstr "XOR-spår"
 
-#: capplets/screensaver/screensavers/rorschach.xml.h:13
-msgid "With X-axis Symmetry"
-msgstr "Med symmetri längs X-axeln"
-
-#: capplets/screensaver/screensavers/rorschach.xml.h:14
-msgid "With Y-axis Symmetry"
-msgstr "Med symmetri längs Y-axeln"
-
-#: capplets/screensaver/screensavers/rorschach.xml.h:15
+#: capplets/screensaver/screensavers/rorschach.xml.h:1
 msgid "Delay before next redraw"
 msgstr "Fördröjning innan näxta omritning"
 
-#: capplets/screensaver/screensavers/rorschach.xml.h:18
+#: capplets/screensaver/screensavers/rorschach.xml.h:2
+msgid "Number of Iterations"
+msgstr "Antal iterationer"
+
+#: capplets/screensaver/screensavers/rorschach.xml.h:3
+msgid "Offset"
+msgstr "Förskjutning"
+
+#: capplets/screensaver/screensavers/rorschach.xml.h:4
 msgid "Speed to clear the screen"
 msgstr "Hastighet för tömning av skärmen"
 
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/starfish.xml.h:7
-msgid "Speed of animation."
-msgstr "Animeringshastighet."
+#: capplets/screensaver/screensavers/rorschach.xml.h:5
+msgid "With X-axis Symmetry"
+msgstr "Med symmetri längs X-axeln"
 
-#: capplets/screensaver/screensavers/starfish.xml.h:10
-msgid "Thickness of color bands (0 = Random)"
-msgstr "Tjocklek på färgband (0 = slumpmässigt värde)"
+#: capplets/screensaver/screensavers/rorschach.xml.h:6
+msgid "With Y-axis Symmetry"
+msgstr "Med symmetri längs Y-axeln"
 
-#: capplets/screensaver/screensavers/starfish.xml.h:11
-msgid "Slim"
-msgstr "Tunn"
+#: capplets/screensaver/screensavers/starfish.xml.h:1
+msgid "Change to display in monochrome."
+msgstr "Byt till monokrom visning."
 
-#: capplets/screensaver/screensavers/starfish.xml.h:12
-msgid "Quickness of rotation at each step (0 = Random)"
-msgstr "Snabbhet för rotationen vid varje steg (0 = slumpmässigt värde)"
-
-#: capplets/screensaver/screensavers/starfish.xml.h:14
+#: capplets/screensaver/screensavers/starfish.xml.h:2
 msgid "Duration of current shape."
 msgstr "Varaktigheten av aktuell form."
 
-#: capplets/screensaver/screensavers/starfish.xml.h:16
+#: capplets/screensaver/screensavers/starfish.xml.h:3
+msgid "Quickness of rotation at each step (0 = Random)"
+msgstr "Snabbhet för rotationen vid varje steg (0 = slumpmässigt värde)"
+
+#: capplets/screensaver/screensavers/starfish.xml.h:4
+msgid "Speed of animation."
+msgstr "Animeringshastighet."
+
+#: capplets/screensaver/screensavers/starfish.xml.h:5
+msgid "Thickness of color bands (0 = Random)"
+msgstr "Tjocklek på färgband (0 = slumpmässigt värde)"
+
+#: capplets/screensaver/screensavers/starfish.xml.h:6
 msgid "Use raw shapes "
 msgstr "Använd råa former "
-
-#: capplets/screensaver/screensavers/starfish.xml.h:17
-msgid "Change to display in monochrome."
-msgstr "Byt till monokrom visning."
 
 #: capplets/screensaver/selection-dialog.c:99
 msgid "Add a new screensaver"
@@ -1346,47 +1341,32 @@ msgstr "Anpassad"
 msgid "New screensaver"
 msgstr "Ny skärmsläckare"
 
-#: capplets/sound/prefs-widget.c:137
-msgid "Play"
-msgstr "Spela upp"
+#: capplets/sound/sound.desktop.in.in.h:1
+msgid "Configure GNOME's use of sound"
+msgstr "Välj ljud för GNOME"
 
-#: capplets/sound/sound-properties.glade.h:8
-msgid "Enable"
-msgstr "Slå på"
+#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
+#: capplets/sound/sound.desktop.in.in.h:2
+msgid "Sound"
+msgstr "Ljud"
 
-#: capplets/sound/sound-properties.glade.h:9
+#: capplets/sound/sound-properties.glade.h:1
 msgid "Enable sound server startup"
 msgstr "Slå på uppstart av ljudserver"
 
-#: capplets/sound/sound-properties.glade.h:10
+#: capplets/sound/sound-properties.glade.h:2
 msgid "Sounds for events"
 msgstr "Ljud för händelser"
 
-#: capplets/sound/sound-properties.glade.h:11
-msgid "General"
-msgstr "Allmänt"
-
-#: capplets/sound/sound-properties.glade.h:12
-msgid "Event"
-msgstr "Händelse"
-
-#: capplets/sound/sound-properties.glade.h:13
-msgid "File to Play"
-msgstr "Ljudfil"
-
-#: capplets/sound/sound-properties.glade.h:14
-msgid "Sound Events"
-msgstr "Ljudhändelser"
-
-#: control-center/capplet-dir-view.c:321
+#: control-center/capplet-dir-view.c:296 control-center/gnomecc.desktop.in.h:1
 msgid "GNOME Control Center"
 msgstr "GNOME-kontrollpanelen"
 
-#: control-center/capplet-dir-view.c:322
+#: control-center/capplet-dir-view.c:297
 msgid "Desktop properties manager."
 msgstr "Hanteraren av skrivbordsegenskaper."
 
-#: control-center/capplet-dir-view.c:519
+#: control-center/capplet-dir-view.c:453
 msgid ""
 "No help is available/installed. Please make sure you\n"
 "have the GNOME User's Guide installed on your system."
@@ -1395,1842 +1375,143 @@ msgstr ""
 "kontrollera att du har GNOME-användarmanualen installerad på\n"
 "ditt system."
 
-#: control-center/capplet-dir-view.c:522
+#: control-center/capplet-dir-view.c:456
 msgid "Close"
 msgstr "Stäng"
 
-#.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
+#: control-center/gnomecc.desktop.in.h:2
+msgid "The GNOME configuration tool"
+msgstr "Konfigurationsverktyg för GNOME"
+
+#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
+#: control-center/gnomecc.glade.h:1
+msgid "Appearance"
+msgstr "Utseende"
+
+#: control-center/gnomecc.glade.h:2
+msgid "Browse with multiple windows"
+msgstr "Bläddra med flera fönster"
+
+#: control-center/gnomecc.glade.h:3
+msgid "Browse with single window"
+msgstr "Bläddra med endast ett fönster"
+
+#: control-center/gnomecc.glade.h:4
+msgid "Display control panels as HTML"
+msgstr "Visa kontrollpaneler som HTML"
+
+#: control-center/gnomecc.glade.h:5
+msgid "Display control panels as a set of icons"
+msgstr "Visa kontrollpaneler som en samling ikoner"
+
+#: control-center/gnomecc.glade.h:6
+msgid "Display control panels as a tree"
+msgstr "Visa kontrollpaneler som ett träd"
+
 #: control-center/gnomecc.glade.h:7
 msgid "Launch control panels in separate windows"
 msgstr "Visa kontrollpaneler i seperata fönster"
 
 #: control-center/gnomecc.glade.h:8
-msgid "Put control panels in the control center's window"
-msgstr "Visa kontrollpaneler i Kontrollpanelens huvudfönster"
-
-#: control-center/gnomecc.glade.h:9
-msgid "Display control panels as HTML"
-msgstr "Visa kontrollpaneler som HTML"
-
-#: control-center/gnomecc.glade.h:10
-msgid "Display control panels as a set of icons"
-msgstr "Visa kontrollpaneler som en samling ikoner"
-
-#: control-center/gnomecc.glade.h:11
-msgid "Display control panels as a tree"
-msgstr "Visa kontrollpaneler som ett träd"
-
-#: control-center/gnomecc.glade.h:12
-msgid "Browse with single window"
-msgstr "Bläddra med endast ett fönster"
-
-#: control-center/gnomecc.glade.h:13
-msgid "Browse with multiple windows"
-msgstr "Bläddra med flera fönster"
-
-#: control-center/gnomecc.glade.h:14
-msgid "Appearance"
-msgstr "Utseende"
-
-#: control-center/gnomecc.glade.h:15
 msgid "New-control-center"
 msgstr "Ny-kontrollpanel"
 
-#: control-center/gnomecc.glade.h:16
-msgid "HTML"
-msgstr "HTML"
-
-#: control-center/gnomecc.glade.h:17
-msgid "Icon List"
-msgstr "Lista med ikoner"
-
-#: control-center/gnomecc.glade.h:18
-msgid "Tree"
-msgstr "Träd"
-
-#: root-manager/root-manager.c:110
-#, c-format
-msgid "Got error %d.\n"
-msgstr "Tog emot felet %d.\n"
-
-#: root-manager/root-manager.c:206
-#, c-format
-msgid "Password for %s"
-msgstr "Lösenord för %s"
-
-#: root-manager/root-manager.c:401
-msgid "Consistency checking is not turned on."
-msgstr "Konsistenskontroll används inte."
-
-#: root-manager/root-manager.c:403
-msgid "Block is fine."
-msgstr "Blocket är okej."
-
-#: root-manager/root-manager.c:405
-msgid "Block freed twice."
-msgstr "Blocket frigjordes två gånger."
-
-#: root-manager/root-manager.c:407
-msgid "Memory before the block was clobbered."
-msgstr "Minnet innan blocket var nersablat."
-
-#: root-manager/root-manager.c:409
-msgid "Memory after the block was clobbered."
-msgstr "Minnet efter blocket var nersablat."
-
-#: root-manager/root-manager.c:440
-msgid "userhelper must be setuid root\n"
-msgstr "userhelper måste vara setuid root\n"
-
-#: root-manager/root-manager.c:445 root-manager/root-manager.c:451
-msgid "Usage: root-helper fd\n"
-msgstr "Användning: root-helper fd\n"
-
-#: root-manager/root-manager.c:555
-#, c-format
-msgid "PAM returned = %d\n"
-msgstr "PAM returnerade = %d\n"
-
-#: root-manager/root-manager.c:556
-#, c-format
-msgid "about to authenticate \"%s\"\n"
-msgstr "kommer att autentisera \"%s\"\n"
-
-#: root-manager/root-manager.c:633 root-manager/root-manager.c:701
-#, c-format
-msgid "about to exec \"%s\"\n"
-msgstr "kommer att köra \"%s\"\n"
-
-#: root-manager/root-manager-wrap.c:56
-msgid "Pipe error.\n"
-msgstr "Rörfel.\n"
-
-#: root-manager/root-manager-wrap.c:62
-msgid "Cannot fork().\n"
-msgstr "Kan inte grena.\n"
-
-#: root-manager/root-manager-wrap.c:83 root-manager/root-manager-wrap.c:93
-msgid "dup2() error.\n"
-msgstr "dup2()-fel.\n"
-
-#: root-manager/root-manager-wrap.c:123
-#, c-format
-msgid "execl() error, errno=%d\n"
-msgstr "execl()-fel, felnummer=%d\n"
-
-#: root-manager/root-manager-wrap.c:152
-msgid "Information updated."
-msgstr "Informationen uppdaterades."
-
-#: root-manager/root-manager-wrap.c:155
-msgid ""
-"The password you typed is invalid.\n"
-"Please try again."
-msgstr ""
-"Lösenordet som du försökte ange är ogiltigt.\n"
-"Var vänlig och försök igen."
-
-#: root-manager/root-manager-wrap.c:158
-msgid ""
-"One or more of the changed fields is invalid.\n"
-"This is probably due to either colons or commas in one of the fields.\n"
-"Please remove those and try again."
-msgstr ""
-"Ett eller flera av de ändrade fälten är ogiltigt.\n"
-"Detta beror troligtvis på att antingen kolon eller komman finns i ett av "
-"fälten.\n"
-"Var vänlig och ta bort dessa och försök igen."
-
-#: root-manager/root-manager-wrap.c:161
-msgid "Password resetting error."
-msgstr "Fel vid återställning av lösenord."
-
-#: root-manager/root-manager-wrap.c:164
-msgid ""
-"Some systems files are locked.\n"
-"Please try again in a few moments."
-msgstr ""
-"Några systemfiler är låsta.\n"
-"Var vänlig och försök igen om ett tag."
-
-#: root-manager/root-manager-wrap.c:167
-msgid "Unknown user."
-msgstr "Okänd användare."
-
-#: root-manager/root-manager-wrap.c:170
-msgid "Insufficient rights."
-msgstr "Otillräckliga rättigheter."
-
-#: root-manager/root-manager-wrap.c:173
-msgid "Invalid call to sub process."
-msgstr "Ogiltigt anrop av underprocess."
-
-#: root-manager/root-manager-wrap.c:176
-msgid ""
-"Your current shell is not listed in /etc/shells.\n"
-"You are not allowed to change your shell.\n"
-"Consult your system administrator."
-msgstr ""
-"Ditt nuvarande skal finns inte listat i /etc/shells.\n"
-"Du får inte lov att ändra ditt skal.\n"
-"Kontakta din systemadministratör."
-
-#. well, this is unlikely to work either, but at least we tried...
-#: root-manager/root-manager-wrap.c:180
-msgid "Out of memory."
-msgstr "Slut på minne."
-
-#: root-manager/root-manager-wrap.c:183
-msgid "The exec() call failed."
-msgstr "Anropet av exec() misslyckades."
-
-#: root-manager/root-manager-wrap.c:186
-msgid "Failed to find selected program."
-msgstr "Misslyckades med att hitta det valda programmet."
-
-#: root-manager/root-manager-wrap.c:189
-msgid "Unknown error."
-msgstr "Okänt fel."
-
-#: root-manager/root-manager-wrap.c:192
-msgid "Unknown exit code."
-msgstr "Okänd slutstatus."
-
-#: root-manager/root-manager-wrap.c:280
-msgid "Input"
-msgstr "Inmatning"
-
-#: root-manager/root-manager-wrap.c:386
-#, c-format
-msgid "Need %d responses.\n"
-msgstr "Behöver %d svar.\n"
-
-#: root-manager/root-manager-wrap.c:411
-msgid ""
-"In order to make changes to your system, you\n"
-"must enter the administrator (root) password."
-msgstr ""
-"För att kunna göra ändringar på ditt system måste\n"
-"du ange administratörslösenordet (rootlösenordet)."
-
-#: root-manager/root-manager-wrap.c:425
-msgid "Error"
-msgstr "Fel"
-
-#: root-manager/root-manager-wrap.c:439
-#, c-format
-msgid "You want %d response(s) from %d entry fields!?!?!\n"
-msgstr "Vill du ha %d svar från %d poster!?!?!\n"
-
-#: root-manager/root-manager-wrap.c:445
-msgid "Run Unprivileged"
-msgstr "Kör oprivilegierat"
-
-#: archiver/location.c:228
-#, fuzzy
-msgid "Default Location"
-msgstr "Standardvärde"
-
-#: archiver/main.c:77
-msgid "Store XML data in the archive"
-msgstr ""
-
-#: archiver/main.c:79
-msgid "Roll back the configuration to a given point"
-msgstr ""
-
-#: archiver/main.c:81
-msgid "Change the location profile to the given one"
-msgstr ""
-
-#: archiver/main.c:83
-msgid "Push configuration data out to client machines (UNIMPLEMENTED)"
-msgstr ""
-
-#: archiver/main.c:85
-msgid "Rename a location to a new name"
-msgstr ""
-
-#: archiver/main.c:87
-msgid "Add a new location to the archive"
-msgstr ""
-
-#: archiver/main.c:89
-msgid "Remove a location from the archive"
-msgstr ""
-
-#: archiver/main.c:91
-msgid "Add a given backend to the given location"
-msgstr ""
-
-#: archiver/main.c:93
-msgid "Remove the given backend from the given location"
-msgstr ""
-
-#: archiver/main.c:99
-msgid "Use the global repository"
-msgstr ""
-
-#: archiver/main.c:101
-msgid "Identifier of location profile on which to operate"
-msgstr ""
-
-#: archiver/main.c:102
-msgid "LOCATION"
-msgstr ""
-
-#: archiver/main.c:104
-msgid "Backend being used for this operation"
-msgstr ""
-
-#: archiver/main.c:104
-msgid "BACKEND_ID"
-msgstr ""
-
-#: archiver/main.c:110
-msgid "Store only the differences with the parent location's config"
-msgstr ""
-
-#: archiver/main.c:112
-msgid "Store only those settings set in the previous config"
-msgstr ""
-
-#: archiver/main.c:118
-msgid "Date to which to roll back"
-msgstr ""
-
-#: archiver/main.c:118
-msgid "DATE"
-msgstr ""
-
-#: archiver/main.c:120
-msgid "Roll back all configuration items"
-msgstr ""
-
-#: archiver/main.c:122
-msgid "Roll back to the revision REVISION_ID"
-msgstr ""
-
-#: archiver/main.c:122
-msgid "REVISION_ID"
-msgstr ""
-
-#: archiver/main.c:124
-msgid "Roll back to the last known revision"
-msgstr ""
-
-#: archiver/main.c:126
-msgid "Roll back by STEPS revisions"
-msgstr ""
-
-#: archiver/main.c:126
-msgid "STEPS"
-msgstr ""
-
-#: archiver/main.c:128
-msgid "Don't run the backend, just dump the output"
-msgstr ""
-
-#: archiver/main.c:134
-msgid "Parent location for the new location"
-msgstr ""
-
-#: archiver/main.c:134
-#, fuzzy
-msgid "PARENT"
-msgstr "ORIENT"
-
-#: archiver/main.c:136
-msgid "New name to assign to the location"
-msgstr ""
-
-#: archiver/main.c:136
-msgid "NEW_NAME"
-msgstr ""
-
-#: archiver/main.c:142
-msgid "Add/remove this backend to/from the master backend list"
-msgstr ""
-
-#: archiver/main.c:144
-msgid "Full containment"
-msgstr ""
-
-#: archiver/main.c:146
-#, fuzzy
-msgid "Partial containment"
-msgstr "Lodrät färgtoning"
-
-#: archiver/main.c:313
-msgid "Global archiver options"
-msgstr ""
-
-#: archiver/main.c:315
-msgid "Archiver commands"
-msgstr ""
-
-#: archiver/main.c:317
-msgid "Options for storing data"
-msgstr ""
-
-#: archiver/main.c:319
-msgid "Options for rolling back"
-msgstr ""
-
-#: archiver/main.c:321
-msgid "Options for adding or renaming locations"
-msgstr ""
-
-#: archiver/main.c:324
-msgid "Options for adding and removing backends"
-msgstr ""
-
-#: capplets/rollback/main.c:37
-msgid "Operate on global backends"
-msgstr ""
-
-#: capplets/rollback/main.c:50
-msgid "Options for the rollback GUI"
-msgstr ""
-
-#.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensaver-properties.glade.h:7
-#, fuzzy
-msgid "About \"<Screensaver name>\""
-msgstr "Starta skärmsläckaren efter"
-
-#: capplets/screensaver/screensaver-properties.glade.h:8
-msgid ""
-"Draws quasiperiodic tilings; think of the implications on modern formica "
-"technology. Written by Time Korlove. In April 1997, Sir Roger Penrose, a "
-"British math professor who has worked with Stephen Hawking on such topics as "
-"relatvity, black holes, and whether time has a beginning, files a "
-"copyright-infringement lawsuit against Kimberly-Clark Corporation, wchih "
-"Penrose said copied a pattern he created ( apattern demonstrating that \"a "
-"nonrepeating pattern could exist in nature\") for its Kleenex quilted toilet "
-"paper. "
-msgstr ""
-
-#: capplets/screensaver/screensaver-properties.glade.h:9
-#, fuzzy
-msgid "Configure Power Management"
-msgstr "Strömsparfunktioner"
-
-#: capplets/screensaver/screensaver-properties.glade.h:10
-msgid "Shut down monitor after"
-msgstr "Stäng av skärm efter"
-
-#: capplets/screensaver/screensaver-properties.glade.h:11
-#: capplets/screensaver/screensaver-properties.glade.h:13
-#: capplets/screensaver/screensaver-properties.glade.h:15
-#: capplets/screensaver/screensaver-properties.glade.h:24
-#: capplets/screensaver/screensaver-properties.glade.h:25
-msgid "minutes"
-msgstr "minuter"
-
-#: capplets/screensaver/screensaver-properties.glade.h:12
-msgid "Go to suspend mode after"
-msgstr "Gå i suspend-läge efter"
-
-#: capplets/screensaver/screensaver-properties.glade.h:14
-msgid "Go to standby mode after"
-msgstr "Gå i standby-läge efter"
-
-#: capplets/screensaver/screensaver-properties.glade.h:16
-#, fuzzy
-msgid "Settings for \"<Screensaver name>\""
-msgstr "Starta skärmsläckaren efter"
-
-#: capplets/screensaver/screensaver-properties.glade.h:17
-msgid ""
-"There are no configurable settings for this\n"
-"screensaver. "
-msgstr ""
-
-#: capplets/screensaver/screensaver-properties.glade.h:19
-#, fuzzy
-msgid "_Add"
-msgstr "Lägg till"
-
-#: capplets/screensaver/screensaver-properties.glade.h:20
-#, fuzzy
-msgid "_Settings"
-msgstr "Inställningar"
-
-#: capplets/screensaver/screensaver-properties.glade.h:21
-#, fuzzy
-msgid "_Remove"
-msgstr "Ta bort"
-
-#: capplets/screensaver/screensaver-properties.glade.h:22
-#, fuzzy
-msgid "_About this screensaver..."
-msgstr "Deaktivera skärmsläckare"
-
-#: capplets/screensaver/screensaver-properties.glade.h:26
-#, fuzzy
-msgid "S_tart screensaver after "
-msgstr "Starta skärmsläckaren efter"
-
-#: capplets/screensaver/screensaver-properties.glade.h:27
-#, fuzzy
-msgid "S_witch screensavers after "
-msgstr "Byt skärmsläckare varje"
-
-#: capplets/screensaver/screensaver-properties.glade.h:28
-#, fuzzy
-msgid "R_equire password to unlock screen"
-msgstr "Kräv lösenord för att låsa upp"
-
-#: capplets/screensaver/screensaver-properties.glade.h:29
-#, fuzzy
-msgid "Enable _power management"
-msgstr "Använd strömsparfunktioner"
-
-#: capplets/screensaver/screensaver-properties.glade.h:30
-#, fuzzy
-msgid " Configure..."
-msgstr "Öppna figurer."
-
-#: capplets/screensaver/screensaver-properties.glade.h:32
-#, fuzzy
-msgid "_Mode:"
-msgstr "Fyra"
-
-#: capplets/screensaver/screensaver-properties.glade.h:33
-msgid "Disable screensaver"
-msgstr "Deaktivera skärmsläckare"
-
-#: capplets/screensaver/screensaver-properties.glade.h:34
-msgid "Black screen only"
-msgstr "Endast tom skärm"
-
-#: capplets/screensaver/screensaver-properties.glade.h:35
-msgid "One screensaver all the time"
-msgstr "En skärmsläckare hela tiden"
-
-#: capplets/screensaver/screensaver-properties.glade.h:36
-#, fuzzy
-msgid "Random (checked screensavers)"
-msgstr "Lägg till en ny skärmsläckare"
-
-#: capplets/screensaver/screensaver-properties.glade.h:37
-#, fuzzy
-msgid "Random (all screensavers)"
-msgstr "Välj slumpmässigt från alla skärmsläckare"
-
-#: capplets/sound/sound-properties-capplet.c:360
-msgid "Just apply settings and quit"
-msgstr ""
-
-#: capplets/sound/sound-properties-capplet.c:362
-msgid "Retrieve and store legacy settings"
-msgstr ""
-
-#: capplets/sound/sound-properties-capplet.c:372
-msgid "Capplet options"
-msgstr ""
-
-#. FIXME: Use a human-readable capplet name here
-#: control-center/capplet-dir.c:453
-msgid "Capplet"
-msgstr ""
-
-#: root-manager/root-manager-helper.c:55
-msgid "Could not connect to X Display"
-msgstr ""
-
-#: root-manager/root-manager-helper.c:61
-msgid "Could not duplicate file descriptor"
-msgstr ""
-
-#~ msgid ""
-#~ "No help is available/installed for these settings. Please make sure you\n"
-#~ "have the GNOME User's Guide installed on your system."
-#~ msgstr ""
-#~ "Ingen hjälp finns tillgänglig/installerad för dessa inställningar.\n"
-#~ "Var vänlig och kontrollera att GNOME-användarmanualen finns installerad\n"
-#~ "på ditt system."
-
-#~ msgid "Gnome editor"
-#~ msgstr "Gnome-editor"
-
-#~ msgid "Run In Terminal"
-#~ msgstr "Kör i terminal"
-
-#~ msgid "Select an icon..."
-#~ msgstr "Välj ikon..."
-
-#~ msgid "Mime Type: "
-#~ msgstr "Mime-typ: "
-
-#~ msgid "First Regular Expression: "
-#~ msgstr "Första reguljära uttrycket: "
-
-#~ msgid "Second Regular Expression: "
-#~ msgstr "Andra reguljära uttrycket: "
-
-#~ msgid "Mime Type Actions"
-#~ msgstr "Mime-typ-åtgärder"
-
-#~ msgid "Example: emacs %f"
-#~ msgstr "Exempel: emacs %f"
-
-#~ msgid "Open"
-#~ msgstr "Öppna"
-
-#~ msgid "Select a file..."
-#~ msgstr "Välj fil..."
-
-#~ msgid "View"
-#~ msgstr "Visa"
-
-#~ msgid "Edit"
-#~ msgstr "Redigera"
-
-#~ msgid "Set actions for %s"
-#~ msgstr "Sätt händelser för %s"
-
-#~ msgid "Mime Type"
-#~ msgstr "Mime-typ"
-
-#~ msgid "Extension"
-#~ msgstr "Filändelse"
-
-#~ msgid "You must enter a mime-type"
-#~ msgstr "Du måste ange en mime-typ"
-
-#~ msgid ""
-#~ "You must add either a regular-expression or\n"
-#~ "a file-name extension"
-#~ msgstr ""
-#~ "Du måste ange antingen ett reguljärt uttryck\n"
-#~ "eller en filändelse"
-
-#~ msgid ""
-#~ "Please put your mime-type in the format:\n"
-#~ "CATEGORY/TYPE\n"
-#~ "\n"
-#~ "For Example:\n"
-#~ "image/png"
-#~ msgstr ""
-#~ "Ange mime-typen i formatet:\n"
-#~ "KATEGORI/TYP\n"
-#~ "\n"
-#~ "Till exempel:\n"
-#~ "image/png"
-
-#~ msgid "This mime-type already exists"
-#~ msgstr "Denna mime-typ finns redan"
-
-#~ msgid ""
-#~ "We are unable to create the directory\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "We will not be able to save the state."
-#~ msgstr ""
-#~ "Kan inte skapa katalogen\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "Inställningarna kommer inte att kunna sparas."
-
-#~ msgid ""
-#~ "We are unable to access the directory\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "We will not be able to save the state."
-#~ msgstr ""
-#~ "Kan inte läsa katalogen\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "Inställningarna kommer inte att kunna sparas."
-
-#~ msgid ""
-#~ "Cannot create the file\n"
-#~ "~/.gnome/mime-info/user.mime\n"
-#~ "\n"
-#~ "We will not be able to save the state"
-#~ msgstr ""
-#~ "Kan inte skapa filen\n"
-#~ "~/.gnome/mime-info/user.mime\n"
-#~ "\n"
-#~ "Inställningarna kommer inte att kunna sparas"
-
-#~ msgid ""
-#~ "We are unable to create the directory\n"
-#~ "~/.gnome/mime-info.\n"
-#~ "\n"
-#~ "We will not be able to save the state."
-#~ msgstr ""
-#~ "Kan inte skapa katalogen\n"
-#~ "~/.gnome/mime-info.\n"
-#~ "\n"
-#~ "Inställningarna kommer inte att kunna sparas."
-
-#~ msgid ""
-#~ "We are unable to access the directory\n"
-#~ "~/.gnome/mime-info.\n"
-#~ "\n"
-#~ "We will not be able to save the state."
-#~ msgstr ""
-#~ "Kan inte läsa katalogen\n"
-#~ "~/.gnome/mime-info.\n"
-#~ "\n"
-#~ "Inställningarna kommer inte att kunna sparas."
-
-#~ msgid ""
-#~ "Cannot create the file\n"
-#~ "~/.gnome/mime-info/user.keys.\n"
-#~ "\n"
-#~ "We will not be able to save the state"
-#~ msgstr ""
-#~ "Kan inte skapa filen\n"
-#~ "~/.gnome/mime-info/user.keys.\n"
-#~ "\n"
-#~ "Inställningarna kommer inte att kunna sparas"
-
-#~ msgid "Delete"
-#~ msgstr "Ta bort"
-
-#~ msgid "Add..."
-#~ msgstr "Lägg till..."
-
-#~ msgid "Edit..."
-#~ msgstr "Redigera..."
-
-#~ msgid "Add Mime Type"
-#~ msgstr "Lägg till mime-typ"
-
-#~ msgid ""
-#~ "Add a new Mime Type\n"
-#~ "For example:  image/tiff; text/x-scheme"
-#~ msgstr ""
-#~ "Lägg till en ny Mime-typ\n"
-#~ "Till exempel:  image/tiff; text/x-scheme"
-
-#~ msgid "Mime Type:"
-#~ msgstr "Mime-typ:"
-
-#~ msgid "Extensions"
-#~ msgstr "Filändelser"
-
-#~ msgid ""
-#~ "Type in the extensions for this mime-type.\n"
-#~ "For example:  .html, .htm"
-#~ msgstr ""
-#~ "Skriv in filändelserna för den här mime-typen.\n"
-#~ "Till exempel:  .html, .htm"
-
-#~ msgid "Extension:"
-#~ msgstr "Filändelse:"
-
-#~ msgid "Regular Expressions"
-#~ msgstr "Reguljära uttryck"
-
-#~ msgid ""
-#~ "You can set up two regular expressions here to identify the Mime Type\n"
-#~ "by.  These fields are optional."
-#~ msgstr ""
-#~ "Du kan använda två stycken reguljära uttryck för att identifiera\n"
-#~ "Mime-typen. Dessa fält är valfria."
-
-#~ msgid "Keyboard Bell"
-#~ msgstr "Tangentbordsljud"
-
-#~ msgid "Volume"
-#~ msgstr "Volym"
-
-#~ msgid "Pitch (Hz)"
-#~ msgstr "Tonläge (Hz)"
-
-#~ msgid "Duration (ms)"
-#~ msgstr "Längd (ms)"
-
-#~ msgid "Test"
-#~ msgstr "Test"
-
-#~ msgid "Mouse buttons"
-#~ msgstr "Musknappar"
-
-#~ msgid "Acceleration"
-#~ msgstr "Acceleration"
-
-#~ msgid "Threshold"
-#~ msgstr "Tröskel"
-
-#~ msgid "Selection"
-#~ msgstr "Val"
-
-#~ msgid "Choose randomly from those checked off"
-#~ msgstr "Välj slumpmässigt från de som är ikryssade"
-
-#~ msgid "Settings..."
-#~ msgstr "Inställningar..."
-
-#~ msgid "Demo Next"
-#~ msgstr "Nästa demo"
-
-#~ msgid "Demo Previous"
-#~ msgstr "Föregående demo"
-
-#~ msgid "Screensaver Selection"
-#~ msgstr "Val av skärmsläckare"
-
-#~ msgid "Basic"
-#~ msgstr "Grundläggande"
-
-#~ msgid "Security"
-#~ msgstr "Säkerhet"
-
-#~ msgid "Only after the screensaver has run for"
-#~ msgstr "Endast då skärmsläckaren varit aktiv i"
-
-#~ msgid "General Properties"
-#~ msgstr "Allmänna egenskaper"
-
-#~ msgid "Priority"
-#~ msgstr "Prioritet"
-
-#~ msgid "Be verbose"
-#~ msgstr "Var mångordig"
-
-#~ msgid "Effects"
-#~ msgstr "Effekter"
-
-#~ msgid "Install colormap"
-#~ msgstr "Installera färgkarta"
-
-#~ msgid "Fade to black when activating screensaver"
-#~ msgstr "Mjuk övergång till svart då skärmsläckaren aktiveras"
-
-#~ msgid "Fade desktop back when deactivating screensaver"
-#~ msgstr "Mjuk övergång tillbaka då skärmsläckaren deaktiveras"
-
-#~ msgid "Fade Duration"
-#~ msgstr "Längd på mjuk övergång"
-
-#~ msgid "Fade Smoothness"
-#~ msgstr "Mjukhet på övergång"
-
-#~ msgid "Smooth"
-#~ msgstr "Mjuk"
-
-#~ msgid "Jerky"
-#~ msgstr "Hackig"
-
-#~ msgid "Advanced Properties"
-#~ msgstr "Avancerade inställningar"
-
-#~ msgid "window4"
-#~ msgstr "window4"
-
-#~ msgid "Menus"
-#~ msgstr "Menyer"
-
-#~ msgid "Menu bars are detachable"
-#~ msgstr "Menyrader kan tas loss"
-
-#~ msgid "Menu bars have a border"
-#~ msgstr "Menyrader har en ram"
-
-#~ msgid "Menus can be torn off"
-#~ msgstr "Menyer kan slitas bort"
-
-#~ msgid "Menu items have icons"
-#~ msgstr "Menyval har ikoner"
-
-#~ msgid "Status Bar"
-#~ msgstr "Statusrad"
-
-#~ msgid "Use status bar instead of dialog when possible"
-#~ msgstr "Använd statusraden i stället för dialogfönster när det är möjligt"
-
-#~ msgid "Status bar is interactive when possible"
-#~ msgstr "Statusraden är inaktiv när det är möjligt"
-
-#~ msgid "Progress bar is on the left"
-#~ msgstr "Förloppsmätaren är till vänster"
-
-#~ msgid "Progress bar is on the right"
-#~ msgstr "Förloppsmätaren är till höger"
-
-#~ msgid "Tool Bars"
-#~ msgstr "Verktygsrader"
-
-#~ msgid "Tool bars have a border"
-#~ msgstr "Verktygsrader har en ram"
-
-#~ msgid "Tool bar buttons pop up on mouse over"
-#~ msgstr "Knappar på verktygsrader höjs då muspekaren är över"
-
-#~ msgid "Tool bars have line separators"
-#~ msgstr "Verktygsrad har avdelningslinjer"
-
-#~ msgid "Tool bars are detachable"
-#~ msgstr "Verktygsrader är löstagbara"
-
-#~ msgid "Tool bar buttons are icons only"
-#~ msgstr "Knappar på verktygsrader är endast ikoner"
-
-#~ msgid "Tool bar buttons are text below icons"
-#~ msgstr "Knappar på verktygrader är text nedanför ikoner"
-
-#~ msgid "Interface"
-#~ msgstr "Gränssnitt"
-
-#~ msgid "Dialogs"
-#~ msgstr "Dialogfönster"
-
-#~ msgid "Dialog buttons have icons"
-#~ msgstr "Dialogfönsterknappar har ikoner"
-
-#~ msgid "Place dialogs over application window when possible"
-#~ msgstr "Placera dialogfönster över programfönstret när det är möjligt"
-
-#~ msgid "Dialogs open"
-#~ msgstr "Dialogfönster visas"
-
-#~ msgid "Wherever the Window Manager places them"
-#~ msgstr "var som helst där fönsterhanteraren placerar dem"
-
-#~ msgid "At the center of the screen"
-#~ msgstr "vid skärmens mittpunkt"
-
-#~ msgid "At the mouse pointer"
-#~ msgstr "vid muspekaren"
-
-#~ msgid "Dialogs are treated"
-#~ msgstr "Dialogfönster behandlas"
-
-#~ msgid "Like any other window"
-#~ msgstr "som alla andra fönster"
-
-#~ msgid "Specially by the window manager"
-#~ msgstr "speciellt av fönsterhanteraren"
-
-#~ msgid "Dialog Buttons"
-#~ msgstr "Dialogfönsterknappar"
-
-#~ msgid "Default  (Spread out - big)"
-#~ msgstr "Standard (Sprid ut - stort)"
-
-#~ msgid "Spread out"
-#~ msgstr "Sprid ut"
-
-#~ msgid "Spread out (big)"
-#~ msgstr "Sprid ut (stort)"
-
-#~ msgid "Left aligned"
-#~ msgstr "Vänsterjusterat"
-
-#~ msgid "Right aligned"
-#~ msgstr "Högerjusterat"
-
-#~ msgid "Multiple Documents"
-#~ msgstr "Multipla dokument"
-
-#~ msgid "Notebook tabs"
-#~ msgstr "Flikar"
-
-#~ msgid "Seperate windows"
-#~ msgstr "Separata fönster"
-
-#~ msgid "The same window"
-#~ msgstr "Samma fönster"
-
-#~ msgid "Left"
-#~ msgstr "till vänster"
-
-#~ msgid "Right"
-#~ msgstr "till höger"
-
-#~ msgid "Top"
-#~ msgstr "överst"
-
-#~ msgid "Bottom"
-#~ msgstr "nederst"
-
-#~ msgid "When opening Multiple documents, use"
-#~ msgstr "Använd när multipla dokument öppnas:"
-
-#~ msgid "When using Notebook tabs, place the tabs on the"
-#~ msgstr "När flikar används ska flikarna placeras"
-
-#~ msgid "Miscellaneous"
-#~ msgstr "Diverse"
-
-#~ msgid "Settings will not take effect until applications restart"
-#~ msgstr "Ändringarna kommer inte att gälla förrän program startas om"
-
-#~ msgid "Session"
-#~ msgstr "Sessionshantering"
-
-#~ msgid "Session Chooser"
-#~ msgstr "Sessionsväljare"
-
-#~ msgid "Start Session"
-#~ msgstr "Starta session"
-
-#~ msgid "Cancel Login"
-#~ msgstr "Avbryt inloggning"
-
-#~ msgid "Order: "
-#~ msgstr "Ordning: "
-
-#~ msgid "Style: "
-#~ msgstr "Stil: "
-
-#~ msgid "This button sets the start order of the selected programs.\n"
-#~ msgstr "Ställ in startordningen för de markerade programmen.\n"
-
-#~ msgid ""
-#~ "This button sets the restart style of the selected programs:\n"
-#~ "Normal programs are unaffected by logouts but can die;\n"
-#~ "Respawn programs are never allowed to die;\n"
-#~ "Trash programs are discarded on logout and can die;\n"
-#~ "Settings programs are always started on every login."
-#~ msgstr ""
-#~ "Denna knapp ställer in omstartstyp för de markerade programmen:\n"
-#~ "Normala program påverkas inte vid utloggning, men kan avslutas;\n"
-#~ "Återuppstå-program får inte avslutas;\n"
-#~ "Skräpprogram försvinner vid utloggning och kan avslutas;\n"
-#~ "Inställnings-program startas alltid vid inloggning."
-
-#~ msgid ""
-#~ "This button produces a key to the program states below:\n"
-#~ "Inactive programs are waiting to start or have finished;\n"
-#~ "Starting programs are being given time to get running;\n"
-#~ "Running programs are normal members of the session;\n"
-#~ "Saving programs are saving their session details;\n"
-#~ "Programs which make no contact have Unknown states.\n"
-#~ msgstr ""
-#~ "Denna knapp visar vilka lägen olika program befinner sig i:\n"
-#~ "Inaktiva program väntar på att starta eller har avslutats;\n"
-#~ "Startande program ges tid för att köras;\n"
-#~ "Körande program är normala medlemmar av aktuell session;\n"
-#~ "Sparande program håller på att spara sin sessionsdata;\n"
-#~ "Program som inte har kontakt med sessionshanteraren har Okända lägen.\n"
-
-#~ msgid "This column gives the command used to start a program."
-#~ msgstr "Visar kommandot som används för att starta programmet."
-
-#~ msgid "Order"
-#~ msgstr "Ordning"
-
-#~ msgid "Style"
-#~ msgstr "Typ"
-
-#~ msgid "State"
-#~ msgstr "Läge"
-
-#~ msgid "Program"
-#~ msgstr "Program"
-
-#~ msgid "Inactive"
-#~ msgstr "Inaktiv"
-
-#~ msgid "Waiting to start or already finished."
-#~ msgstr "Väntar på att starta, eller har redan avslutats."
-
-#~ msgid "Starting"
-#~ msgstr "Startande"
-
-#~ msgid "Started but has not yet reported state."
-#~ msgstr "Startat men har ännu inte rapporterat läget."
-
-#~ msgid "Running"
-#~ msgstr "Körande"
-
-#~ msgid "A normal member of the session."
-#~ msgstr "En normal medlem av sessionen."
-
-#~ msgid "Saving"
-#~ msgstr "Sparande"
-
-#~ msgid "Saving session details."
-#~ msgstr "Håller på att spara sessionsdata."
-
-#~ msgid "Unknown"
-#~ msgstr "Okänd"
-
-#~ msgid "State not reported within timeout."
-#~ msgstr "Tillståndet rapporterades inte innan timeout."
-
-#~ msgid "Normal"
-#~ msgstr "Normal"
-
-#~ msgid "Unaffected by logouts but can die."
-#~ msgstr "Påverkas inte av utloggningar, men kan avslutas."
-
-#~ msgid "Respawn"
-#~ msgstr "Återuppstå"
-
-#~ msgid "Never allowed to die."
-#~ msgstr "Får inte avslutas."
-
-#~ msgid "Trash"
-#~ msgstr "Skräp"
-
-#~ msgid "Discarded on logout and can die."
-#~ msgstr "Försvinner vid utloggning och kan avslutas."
-
-#~ msgid "Always started on every login."
-#~ msgstr "Startas alltid vid inloggning."
-
-#~ msgid "Remove Program"
-#~ msgstr "Ta bort program"
-
-#~ msgid "Options"
-#~ msgstr "Alternativ"
-
-#~ msgid "Prompt on logout"
-#~ msgstr "Fråga innan utloggning"
-
-#~ msgid "Automatically save changes to session"
-#~ msgstr "Spara ändringar till session automatiskt"
-
-#~ msgid "Non-session-managed Startup Programs"
-#~ msgstr "Icke-sessionshanterat autostart-program"
-
-#~ msgid "Command"
-#~ msgstr "Kommando"
-
-#~ msgid "Browse Currently Running Programs..."
-#~ msgstr "Visa aktuella program..."
-
-#~ msgid "Only display warnings."
-#~ msgstr "Visa bara varningar."
-
-#~ msgid "Startup Command"
-#~ msgstr "Startkommando"
-
-#~ msgid ""
-#~ "Programs with smaller values are started before programs with higher values. "
-#~ "The default value should be OK"
-#~ msgstr ""
-#~ "Program med lägre värden startar före program med högre värden. "
-#~ "Standardvärdet är oftast ok"
-
-#~ msgid "The startup command cannot be empty"
-#~ msgstr "Startkommandot kan inte vara tomt"
-
-#~ msgid "Add Startup Program"
-#~ msgstr "Lägg till autostart-program"
-
-#~ msgid "Edit Startup Program"
-#~ msgstr "Redigera autostart-program"
-
-#~ msgid "One"
-#~ msgstr "Ett"
-
-#~ msgid "Eenie"
-#~ msgstr "Ett"
-
-#~ msgid "Meenie"
-#~ msgstr "Två"
-
-#~ msgid "Mynie"
-#~ msgstr "Tre"
-
-#~ msgid "Catcha"
-#~ msgstr "Alla"
-
-#~ msgid "Tiger"
-#~ msgstr "Byxor"
-
-#~ msgid "By Its"
-#~ msgstr "Äro"
-
-#~ msgid "Toe"
-#~ msgstr "Dyra"
-
-#~ msgid "Selected themes from above will be tested by previewing here."
-#~ msgstr "Valda teman kan testas med förhandsgranskning här."
-
-#~ msgid "Sample Button"
-#~ msgstr "Testknapp"
-
-#~ msgid "Sample Check Button"
-#~ msgstr "Testkryssruta"
-
-#~ msgid "Sample Text Entry Field"
-#~ msgstr "Testtextfält"
-
-#~ msgid "Submenu"
-#~ msgstr "Undermeny"
-
-#~ msgid "Item 1"
-#~ msgstr "Val 1"
-
-#~ msgid "Another item"
-#~ msgstr "Ett annat val"
-
-#~ msgid "Radio Button 1"
-#~ msgstr "Radioknapp 1"
-
-#~ msgid "Radio Button 2"
-#~ msgstr "Radioknapp 2"
-
-#~ msgid ""
-#~ "Error installing theme:\n"
-#~ "'%s'\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Fel vid installation av tema:\n"
-#~ "\"%s\"\n"
-#~ "%s"
-
-#~ msgid "Select a theme to install"
-#~ msgstr "Välj ett tema som ska installeras"
-
-#~ msgid "Available Themes"
-#~ msgstr "Tillgängliga teman"
-
-#~ msgid ""
-#~ "Auto\n"
-#~ "Preview"
-#~ msgstr ""
-#~ "Auto\n"
-#~ "Förhandsgranska"
-
-#~ msgid ""
-#~ "Install new\n"
-#~ "theme..."
-#~ msgstr ""
-#~ "Installera nytt\n"
-#~ "tema..."
-
-#~ msgid "User Font"
-#~ msgstr "Användartypsnitt"
-
-#~ msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
-#~ msgstr "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
-
-#~ msgid "Use custom font."
-#~ msgstr "Använd eget typsnitt."
-
-#~ msgid "Home directory doesn't exist!\n"
-#~ msgstr "Hemkatalogen finns inte!\n"
-
-#~ msgid "Theme does not exist"
-#~ msgstr "Temat finns inte"
-
-#~ msgid "Command '%s' failed"
-#~ msgstr "Kommandot \"%s\" misslyckades"
-
-#~ msgid "Unknown file format"
-#~ msgstr "Okänt filformat"
-
-#~ msgid "Error initializing the `url-properties' capplet."
-#~ msgstr "Kunde inte köra \"url-properties\"-cappleten."
-
-#~ msgid "Protocol"
-#~ msgstr "Protokoll"
-
-#~ msgid "handler:"
-#~ msgstr "hanterare:"
-
-#~ msgid "Netscape"
-#~ msgstr "Netscape"
-
-#~ msgid "Netscape (new window)"
-#~ msgstr "Netscape (nytt fönster)"
-
-#~ msgid "Help browser"
-#~ msgstr "Hjälpläsare"
-
-#~ msgid "Help browser (new window)"
-#~ msgstr "Hjälpläsare (nytt fönster)"
-
-#~ msgid "Set"
-#~ msgstr "Sätt"
-
-#~ msgid ""
-#~ "Starting %s\n"
-#~ "(%d seconds left before operation times out)"
-#~ msgstr ""
-#~ "Startar %s\n"
-#~ "(%d sekunder kvar innan kommandot överskrider tidsgränsen)"
-
-#~ msgid "%s (Current)"
-#~ msgstr "%s (Aktuell)"
-
-#~ msgid "Run Configuration Tool for %s"
-#~ msgstr "Kör konfigurationsverktyg för %s"
-
-#~ msgid " (Not found)"
-#~ msgstr " (Hittades inte)"
-
-#~ msgid ""
-#~ "wm-properties-capplet: Unable to initialize window manager.\n"
-#~ "\tAnother window manager is already running and could not be killed\n"
-#~ msgstr ""
-#~ "wm-properties.capplet: Kan inte starta fönsterhanteraren.\n"
-#~ "\tEn annan fönsterhanterare körs redan och kunde inte avslutas\n"
-
-#~ msgid ""
-#~ "wm-properties-capplet: Unable to initialize window manager.\n"
-#~ "\t'%s' didn't start\n"
-#~ msgstr ""
-#~ "wm-properties-capplet: Kan inte starta fönsterhanterare.\n"
-#~ "\t\"%s\" startade inte\n"
-
-#~ msgid "Previous window manager did not die\n"
-#~ msgstr "Föregående fönsterhanterare avslutades inte\n"
-
-#~ msgid ""
-#~ "Could not start '%s'.\n"
-#~ "Falling back to previous window manager '%s'\n"
-#~ msgstr ""
-#~ "Kunde inte starta \"%s\".\n"
-#~ "Använder den föregående fönsterhanteraren \"%s\"\n"
-
-#~ msgid ""
-#~ "Could not start fallback window manager.\n"
-#~ "Please run a window manager manually. You can\n"
-#~ "do this by selecting \"Run Program\" in the\n"
-#~ "foot menu\n"
-#~ msgstr ""
-#~ "Kunde inte inte starta den föregående fönsterhanteraren.\n"
-#~ "Kör en fönsterhanterare manuellt. Du kan göra det genom\n"
-#~ "att välja \"Kör program\" i fotmenyn\n"
-
-#~ msgid "OK"
-#~ msgstr "OK"
-
-#~ msgid ""
-#~ "Your current window manager has been changed. In order for\n"
-#~ "this change to be saved, you will need to save your current\n"
-#~ "session. You can do so immediately by selecting the \"Save session\n"
-#~ "now\" below, or you can save your session later.  This can be\n"
-#~ "done either selecting \"Save Current Session\" under \"Settings\"\n"
-#~ "in the main menu, or by turning on \"Save Current Setup\" when\n"
-#~ "you log out.\n"
-#~ msgstr ""
-#~ "Aktuell fönsterhanterare har ändrats. För att ändringen\n"
-#~ "ska vara permanent måste du spara aktuell session.\n"
-#~ "Du kan göra det nu direkt genom att välja \"Spara session nu\" eller \n"
-#~ "så kan du spara din session senare. Detta kan göras genom att välja\n"
-#~ "\"Spara aktuell session\" under \"Inställningar\" i huvudmenyn,\n"
-#~ "eller genom att slå på \"Spara nuvarande inställningar\" när du\n"
-#~ "loggar ut.\n"
-
-#~ msgid "Save Session Later"
-#~ msgstr "Spara session senare"
-
-#~ msgid "Save Session Now"
-#~ msgstr "Spara session nu"
-
-#~ msgid ""
-#~ "Your current window manager has been changed. In order for\n"
-#~ "this change to be saved, you will need to save your current\n"
-#~ "session. This can be done by either selecting \"Save Current Session\"\n"
-#~ "under \"Settings\" in the main menu, or by turning on\n"
-#~ "\"Save Current Setup\" when you log out.\n"
-#~ msgstr ""
-#~ "Aktuell fönsterhanterare har ändrats. För att ändringen\n"
-#~ "ska vara permanent måste du spara aktuell session\n"
-#~ "Du kan göra det genom att antingen välja \"Spara aktuell session\"\n"
-#~ "under \"Inställningar\" i huvudmenyn, eller genom att slå på\n"
-#~ "\"Spara nuvarande inställningar\" när du loggar ut.\n"
-
-#~ msgid "Add New Window Manager"
-#~ msgstr "Lägg till ny fönsterhanterare"
-
-#~ msgid "Cancel"
-#~ msgstr "Avbryt"
-
-#~ msgid "Command:"
-#~ msgstr "Kommando:"
-
-#~ msgid "Configuration Command:"
-#~ msgstr "Konfigurationskommando:"
-
-#~ msgid "Window manager is session managed"
-#~ msgstr "Fönsterhanteraren använder sessionshantering"
-
-#~ msgid "Name cannot be empty"
-#~ msgstr "Du måste skriva in ett namn"
-
-#~ msgid "Command cannot be empty"
-#~ msgstr "Du måste skriva in ett kommando"
-
-#~ msgid "Edit Window Manager"
-#~ msgstr "Redigera fönsterhanterare"
-
-#~ msgid "You cannot delete the current Window Manager"
-#~ msgstr "Du kan inte ta bort den aktuella fönsterhanteraren"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'wm-properties-capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "ett initieringsfel uppstod vid start av \"wm-properties-capplet\".\n"
-#~ "avbryter...\n"
-
-#~ msgid "File Types and Programs"
-#~ msgstr "Filtyper och program"
-
-#~ msgid "Specify which programs are used to open or view each file type"
-#~ msgstr ""
-#~ "Ange vilka program som används för att öppna eller visa alla filtyper"
-
-#~ msgid "Color 1"
-#~ msgstr "Färg 1"
-
-#~ msgid "Color 2"
-#~ msgstr "Färg 2"
-
-#~ msgid ""
-#~ "Solid Color\n"
-#~ "Vertical Gradient\n"
-#~ "Horizontal Gradient\n"
-#~ msgstr ""
-#~ "Solid färg\n"
-#~ "Lodrät färgtoning\n"
-#~ "Vågrät färgtoning\n"
-
-#~ msgid ""
-#~ "Tiled\n"
-#~ "Centered\n"
-#~ "Scaled (keep aspect ratio)\n"
-#~ "Stretched (change aspect ratio)\n"
-#~ "Embossed\n"
-#~ msgstr ""
-#~ "Sida-vid-sida\n"
-#~ "Centrerad\n"
-#~ "Skalad (behåll proportioner)\n"
-#~ "Utsträckt (ändra proportioner)\n"
-#~ "Präglad\n"
-
-#~ msgid "(None)\n"
-#~ msgstr "(Ingen)\n"
-
-#~ msgid "Prompt"
-#~ msgstr "Fråga"
-
-#~ msgid "Embossed"
-#~ msgstr "Präglad"
-
-#~ msgid "Color"
-#~ msgstr "Färg"
-
-#~ msgid "Solid"
-#~ msgstr "Solid"
-
-#~ msgid "Vertical"
-#~ msgstr "Lodrät"
-
-#~ msgid "Scaled"
-#~ msgstr "Skalad"
-
-#~ msgid "Disable background selection"
-#~ msgstr "Stäng av val av bakgrund"
-
-#~ msgid "Auto-repeat"
-#~ msgstr "Autorepetering"
-
-#~ msgid "Repeat delay"
-#~ msgstr "Repeteringsfördröjning"
-
-#~ msgid "Click on keypress"
-#~ msgstr "Klicka vid tangentnedslag"
-
-#~ msgid "Menu Options"
-#~ msgstr "Menyalternativ"
-
-#~ msgid "Can detach and move menus"
-#~ msgstr "Kan ta loss och flytta menyrader"
-
-#~ msgid "Statusbar Options"
-#~ msgstr "Statusrader"
-
-#~ msgid "Toolbar Options"
-#~ msgstr "Verktygsradsalternativ"
-
-#~ msgid "Can detach and move toolbars"
-#~ msgstr "Kan ta loss och flytta verktygsrader"
-
-#~ msgid "Dialog Layout"
-#~ msgstr "Layout för dialogfönster"
-
-#~ msgid ""
-#~ "Default value\n"
-#~ "Spread buttons out\n"
-#~ "Put buttons on edges\n"
-#~ "Left-justify buttons\n"
-#~ "Right-justify buttons\n"
-#~ msgstr ""
-#~ "Standardvärde\n"
-#~ "Sprid ut knappar\n"
-#~ "Placera knappar i hörn\n"
-#~ "Vänsterjustera knappar\n"
-#~ "Högerjustera knappar\n"
-
-#~ msgid "Dialog Behavior"
-#~ msgstr "Uppförande hos dialogfönster"
-
-#~ msgid "Dialog position:"
-#~ msgstr "Dialogfönsterposition:"
-
-#~ msgid ""
-#~ "Let window manager decide\n"
-#~ "Center of the screen\n"
-#~ "At the mouse pointer\n"
-#~ msgstr ""
-#~ "Låt fönsterhanteraren bestämma\n"
-#~ "Mitten på fönstret\n"
-#~ "Vid muspekaren\n"
-
-#~ msgid ""
-#~ "Dialogs are like other windows\n"
-#~ "Dialogs are treated specially by the window manager\n"
-#~ msgstr ""
-#~ "Dialogfönster är som andra fönster\n"
-#~ "Dialogfönster särbehandlas av fönsterhanteraren\n"
-
-#~ msgid "window3"
-#~ msgstr "window3"
-
-#~ msgid "GNOME MDI Options"
-#~ msgstr "GNOME-MDI-alternativ"
-
-#~ msgid "Default MDI Mode:"
-#~ msgstr "Standard-MDI-läge:"
-
-#~ msgid "MDI notebook tab position:"
-#~ msgstr "Flikposition på MDI-flikhäfte:"
-
-#~ msgid ""
-#~ "Notebook\n"
-#~ "Toplevel\n"
-#~ "Modal\n"
-#~ msgstr ""
-#~ "Flikhäfte\n"
-#~ "Överst\n"
-#~ "Modal\n"
-
-#~ msgid ""
-#~ "Left\n"
-#~ "Right\n"
-#~ "Top\n"
-#~ "Bottom\n"
-#~ msgstr ""
-#~ "Vänster\n"
-#~ "Höger\n"
-#~ "Överkant\n"
-#~ "Underkant\n"
-
-#~ msgid "id of the capplet -- assigned by the control-center"
-#~ msgstr "id hos capplet -- tilldelad av kontrollpanelen"
-
-#~ msgid "ID"
-#~ msgstr "ID"
-
-#~ msgid "Multi-capplet id."
-#~ msgstr "Multi-capplet-id."
-
-#~ msgid "CAPID"
-#~ msgstr "CAPID"
-
-#~ msgid "X ID of the socket it's plugged into"
-#~ msgstr "X-ID för det uttag (socket) den är fastsatt i"
-
-#~ msgid "XID"
-#~ msgstr "XID"
-
-#~ msgid "IOR of the control-center"
-#~ msgstr "IOR för kontrollpanelen"
-
-#~ msgid "IOR"
-#~ msgstr "IOR"
-
-#~ msgid "Initialize session settings"
-#~ msgstr "Initiera inställningar för session"
-
-#~ msgid "Ignore default action.  Used for custom init-session cases"
-#~ msgstr "Ignorera standardhändelse. Används för anpassade init-session-fall"
-
-#~ msgid "Get an XML description of the capplet's state"
-#~ msgstr "Hämta en XML-beskrivning av cappletens tillstånd"
-
-#~ msgid "DO_GET"
-#~ msgstr "DO_GET"
-
-#~ msgid "Read an XML description of the capplet's state and apply it"
-#~ msgstr "Läs en XML-beskrivning av cappletens tillstånd och verkställ det"
-
-#~ msgid "DO_SET"
-#~ msgstr "DO_SET"
-
-#~ msgid "Help with the GNOME control-center."
-#~ msgstr "Hjälp med GNOME-kontrollpanelen."
-
-#~ msgid "About"
-#~ msgstr "Om"
-
-#~ msgid "About the GNOME control-center."
-#~ msgstr "Om GNOME-kontrollpanelen."
-
-#~ msgid "Up"
-#~ msgstr "Upp"
-
-#~ msgid "Parent Group"
-#~ msgstr "Föräldergrupp"
-
-#~ msgid "Preferences"
-#~ msgstr "Inställningar"
-
-#~ msgid "Control Center Preferences"
-#~ msgstr "Inställningar för kontrollpanelen"
-
-#~ msgid "Control Center"
-#~ msgstr "Kontrollpanelen"
-
-#~ msgid "Set background image."
-#~ msgstr "Ställ in bakgrundsbild."
-
-#~ msgid "IMAGE-FILE"
-#~ msgstr "IMAGE-FILE"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting "
-#~ "'background-properties-capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "ett initieringsfel uppstod vid start av \"background-properties-capplet\".\n"
-#~ "avbryter...\n"
-
-#~ msgid "Set parameters from saved state and exit"
-#~ msgstr "Sätt parametrar från det lagrade läget och avsluta"
-
-#~ msgid "IMAGE"
-#~ msgstr "IMAGE"
-
-#~ msgid "Sets the wallpaper to the value specified"
-#~ msgstr "Sätter bakgrunden till det angivna värdet"
-
-#~ msgid "COLOR"
-#~ msgstr "COLOR"
-
-#~ msgid "Specifies the background color"
-#~ msgstr "Anger bakgrundsfärgen"
-
-#~ msgid "Gradient orientation: vertical or horizontal"
-#~ msgstr "Graderingsriktning: lodrät eller vågrät?"
-
-#~ msgid "MODE"
-#~ msgstr "MODE"
-
-#~ msgid "Display wallpaper: tiled, centered, scaled or ratio"
-#~ msgstr "Visa bakgrund: sida vid sida, centrerad, skalad eller ratio"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'bell-properties-capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "ett initieringsfel uppstod vid start av \"bell-properties-capplet\".\n"
-#~ "avbryter...\n"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting "
-#~ "'keyboard-properties-capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "ett initieringsfel uppstod vid start av \"keyboard-properties-capplet\".\n"
-#~ "avbryter...\n"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'mouse-properties-capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "ett initieringsfel uppstod vid start av \"mouse-properties-capplet\".\n"
-#~ "avbryter...\n"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'sound-properties-capplet'."
-#~ msgstr ""
-#~ "ett initieringsfel uppstod vid start av \"sound-properties-capplet\"."
-
-#~ msgid "Select sound file"
-#~ msgstr "Välj ljudfil"
-
-#~ msgid ""
-#~ "This copy of the GNOME control center was not compiled with sound support"
-#~ msgstr ""
-#~ "Denna kopia av GNOME-kontrollpanelen är inte kompilerad med ljudstöd"
-
-#~ msgid "The sound file for this event does not exist."
-#~ msgstr "Ljudfilen för aktuell händelse finns inte."
-
-#~ msgid ""
-#~ "The sound file for this event does not exist.\n"
-#~ "You may want to install the gnome-audio package\n"
-#~ "for a set of default sounds."
-#~ msgstr ""
-#~ "Ljudfilen för aktuell händelse finns inte.\n"
-#~ "Du kan installera gnome-audio-paketet\n"
-#~ "för att få en uppsättning standardljud."
-
-#~ msgid "Put buttons on edges"
-#~ msgstr "Placera knapparna på kanterna"
-
-#~ msgid "Left-justify buttons"
-#~ msgstr "Vänsterjustera knapparna"
-
-#~ msgid "Right-justify buttons"
-#~ msgstr "Högerjustera knapparna"
-
-#~ msgid "Toplevel"
-#~ msgstr "Toppnivå"
-
-#~ msgid "Modal"
-#~ msgstr "Modal"
-
-#: Gnome.directory.in:3
-msgid "Control Center"
-msgstr "Kontrollpanelen"
-
-#: Gnome.directory.in:4
-msgid "Control Center Menu"
-msgstr "Kontrollcentermeny"
-
-#: control-center/gnomecc.desktop.in:4
-msgid "The GNOME configuration tool"
-msgstr "Konfigurationsverktyg för GNOME"
-
-#: capplets/sound/sound-properties.desktop.in:3
-msgid "Sound"
-msgstr "Ljud"
-
-#: capplets/sound/sound-properties.desktop.in:4
-msgid "Configure GNOME's use of sound"
-msgstr "Välj ljud för GNOME"
-
-#: capplets/screensaver/screensaver-properties.desktop.in:4
-msgid "Configure the settings of the screensaver"
-msgstr "Ändra inställningar för skärmsläckare"
-
-#: capplets/mouse/mouse-properties.desktop.in:3
-msgid "Mouse"
-msgstr "Mus"
-
-#: capplets/mouse/mouse-properties.desktop.in:4
-msgid "Mouse Properties"
-msgstr "Egenskaper för mus"
-
-#: capplets/keyboard/keyboard-properties.desktop.in:3
-msgid "Keyboard"
-msgstr "Tangentbord"
-
-#: capplets/keyboard/keyboard-properties.desktop.in:4
-msgid "Keyboard Properties"
-msgstr "Tangentbordsinställningar"
-
-#: capplets/background/background-properties.desktop.in:3
-msgid "Background"
-msgstr "Bakgrund"
-
-#: capplets/background/background-properties.desktop.in:4
-msgid "Configuration of the desktop's background"
-msgstr "Konfiguration av skrivbordsbakgrund"
-
-#: capplets/desktop-links/gnome-hint-properties.desktop.in:3
-msgid "Startup Hint"
-msgstr "Uppstartstips"
-
-#: capplets/desktop-links/gnome-hint-properties.desktop.in:4
+#: control-center/gnomecc.glade.h:9
+msgid "Put control panels in the control center's window"
+msgstr "Visa kontrollpaneler i Kontrollpanelens huvudfönster"
+
+#: capplets/desktop-links/gnome-hint-properties.desktop.in.h:1
 msgid "Options for the startup hint dialog"
 msgstr "Inställningar för uppstartstips-dialogen"
 
-#: capplets/desktop-links/Sawfish/Sawfish.directory.in:3
+#: capplets/desktop-links/gnome-hint-properties.desktop.in.h:2
+msgid "Startup Hint"
+msgstr "Uppstartstips"
+
+#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:1
+msgid "Control Center Menu"
+msgstr "Kontrollcentermeny"
+
+#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:2
 msgid "Sawfish window manager"
 msgstr "Fönsterhanteraren Sawfish"
 
-#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in:4
+#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:2
 msgid "Configure window appearance"
 msgstr "Konfigurera fönsterutseende"
 
-#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in:3
-msgid "Shortcuts"
-msgstr "Snabbtangenter"
-
-#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in:4
+#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:1
 msgid "Configure key shortcuts"
 msgstr "Konfigurera snabbtangenter"
 
-#: capplets/desktop-links/Sawfish/focus-properties.desktop.in:3
-msgid "Focus behavior"
-msgstr "Fokusbeteende"
+#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:2
+msgid "Shortcuts"
+msgstr "Snabbtangenter"
 
-#: capplets/desktop-links/Sawfish/focus-properties.desktop.in:4
+#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:1
 msgid "Configure window focusing"
 msgstr "Konfigurera fönsterfokusering"
 
-#: capplets/desktop-links/Sawfish/match-properties.desktop.in:3
-msgid "Matched Windows"
-msgstr "Matchade fönster"
+#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:2
+msgid "Focus behavior"
+msgstr "Fokusbeteende"
 
-#: capplets/desktop-links/Sawfish/match-properties.desktop.in:4
+#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:1
 msgid "Configure window properties"
 msgstr "Konfigurera fönsteregenskaper"
 
-#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in:3
-msgid "Minimizing and Maximizing"
-msgstr "Minimering och maximering"
+#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:2
+msgid "Matched Windows"
+msgstr "Matchade fönster"
 
-#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in:4
+#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:1
 msgid "Configure window minimization and maximization"
 msgstr "Konfigurera minimering och maximering av fönster"
 
-#: capplets/desktop-links/Sawfish/meta-properties.desktop.in:3
-msgid "Meta"
-msgstr "Meta"
+#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:2
+msgid "Minimizing and Maximizing"
+msgstr "Minimering och maximering"
 
-#: capplets/desktop-links/Sawfish/meta-properties.desktop.in:4
+#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
 msgid "Configure window manager configuration properties"
 msgstr "Konfigurera fönsterhanterarens konfigurationsegenskaper"
 
-#: capplets/desktop-links/Sawfish/misc-properties.desktop.in:3
-msgid "Miscellaneous"
-msgstr "Diverse"
+#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:2
+msgid "Meta"
+msgstr "Meta"
 
-#: capplets/desktop-links/Sawfish/misc-properties.desktop.in:4
+#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:1
 msgid "Configure miscellaneous window features"
 msgstr "Konfigurera diverse fönsterfunktioner"
 
-#: capplets/desktop-links/Sawfish/move-properties.desktop.in:3
-msgid "Moving and Resizing"
-msgstr "Flyttning och storleksförändring"
+#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
+msgid "Miscellaneous"
+msgstr "Diverse"
 
-#: capplets/desktop-links/Sawfish/move-properties.desktop.in:4
+#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:1
 msgid "Configure window move/resize"
 msgstr "Konfigurera flyttning och storleksförändring av fönster"
 
-#: capplets/desktop-links/Sawfish/placement-properties.desktop.in:3
-msgid "Placement"
-msgstr "Placering"
+#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:2
+msgid "Moving and Resizing"
+msgstr "Flyttning och storleksförändring"
 
-#: capplets/desktop-links/Sawfish/placement-properties.desktop.in:4
+#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:1
 msgid "Configure window placement"
 msgstr "Konfigurera fönsterplacering"
 
-#: capplets/desktop-links/Sawfish/sound-properties.desktop.in:4
+#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:2
+msgid "Placement"
+msgstr "Placering"
+
+#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:1
 msgid "Enable window manager sound events"
 msgstr "Använd fönsterhanterarens ljudhändelser"
 
-#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in:3
-msgid "Workspaces"
-msgstr "Arbetsytor"
-
-#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in:4
+#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:1
 msgid "Configure workspaces"
 msgstr "Konfigurera arbetsytor"
+
+#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:2
+msgid "Workspaces"
+msgstr "Arbetsytor"
