@@ -29,6 +29,8 @@
 
 #ifdef BONOBO_CONF_ENABLE
 #include <bonobo-conf/bonobo-config-database.h>
+#include "capplet-util.h"
+#define CP CAPPLET_CONFIG_PREFIX "background-properties/"
 #else
 #include <tree.h>
 #endif

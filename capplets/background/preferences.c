@@ -297,7 +297,7 @@ preferences_load_from_bonobo_db (Preferences           *prefs,
 	g_return_if_fail (db != CORBA_OBJECT_NIL);
 	g_return_if_fail (ev != NULL);
 
-	prefs->enabled = bonobo_config_get_boolean (db, "/main/enabled", ev);
+	prefs->enabled = bonobo_config_get_boolean (db, CP "enabled", ev);
 
 	if (BONOBO_EX (ev) && !strcmp (ev->_repo_id, "IDL:Bonobo/ConfigDatabase/NotFound:1.0")) {
 		prefs->enabled = TRUE;
@@ -306,17 +306,17 @@ preferences_load_from_bonobo_db (Preferences           *prefs,
 		BONOBO_RET_EX (ev);
 	}
 
-	prefs->orientation = bonobo_config_get_ulong (db, "/main/orientation", ev); BONOBO_RET_EX (ev);
+	prefs->orientation = bonobo_config_get_ulong (db, CP "orientation", ev); BONOBO_RET_EX (ev);
 
 	if (prefs->orientation != ORIENTATION_SOLID)
 		prefs->gradient_enabled = TRUE;
 	else
 		prefs->gradient_enabled = FALSE;
 
-	prefs->wallpaper_type = bonobo_config_get_ulong (db, "/main/wallpaper_type", ev); BONOBO_RET_EX (ev);
-	prefs->wallpaper_filename = local_bonobo_config_get_filename (db, "/main/wallpaper_filename", ev); BONOBO_RET_EX (ev);
+	prefs->wallpaper_type = bonobo_config_get_ulong (db, CP "wallpaper_type", ev); BONOBO_RET_EX (ev);
+	prefs->wallpaper_filename = local_bonobo_config_get_filename (db, CP "wallpaper_filename", ev); BONOBO_RET_EX (ev);
 
-	prefs->wallpaper_enabled = bonobo_config_get_boolean (db, "/main/wallpaper_enabled", ev);
+	prefs->wallpaper_enabled = bonobo_config_get_boolean (db, CP "wallpaper_enabled", ev);
 
 	if (BONOBO_EX (ev) && !strcmp (ev->_repo_id, "IDL:Bonobo/ConfigDatabase/NotFound:1.0")) {
 		prefs->wallpaper_enabled = (prefs->wallpaper_filename != NULL && strcmp (prefs->wallpaper_filename, "(none)"));
@@ -325,10 +325,10 @@ preferences_load_from_bonobo_db (Preferences           *prefs,
 		BONOBO_RET_EX (ev);
 	}
 
-	prefs->color1 = local_bonobo_config_get_color (db, "/main/color1", ev); BONOBO_RET_EX (ev);
-	prefs->color2 = local_bonobo_config_get_color (db, "/main/color2", ev); BONOBO_RET_EX (ev);
+	prefs->color1 = local_bonobo_config_get_color (db, CP "color1", ev); BONOBO_RET_EX (ev);
+	prefs->color2 = local_bonobo_config_get_color (db, CP "color2", ev); BONOBO_RET_EX (ev);
 
-	prefs->opacity = bonobo_config_get_long (db, "/main/opacity", ev); BONOBO_RET_EX (ev);
+	prefs->opacity = bonobo_config_get_long (db, CP "opacity", ev); BONOBO_RET_EX (ev);
 
 	if (prefs->opacity >= 100 || prefs->opacity < 0)
 		prefs->adjust_opacity = FALSE;

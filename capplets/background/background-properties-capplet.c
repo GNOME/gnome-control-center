@@ -30,7 +30,6 @@
 #include <bonobo/bonobo-property-bag-client.h>
 #include <glade/glade.h>
 #include <gtk/gtksignal.h>
-#include "capplet-util.h"
 #include "applier.h"
 
 static void
@@ -61,7 +60,7 @@ apply_settings (Bonobo_ConfigDatabase db)
 
 	/* Hackity hackty */
 	if (background_image != NULL) {
-		bonobo_config_set_filename (db, "/main/wallpaper_filename", background_image, NULL);
+		bonobo_config_set_filename (db, CP "wallpaper_filename", background_image, NULL);
 		Bonobo_ConfigDatabase_sync (db, &ev);
 	}
 
@@ -157,19 +156,19 @@ get_legacy_settings (Bonobo_ConfigDatabase db)
 
 	static const int wallpaper_types[] = { 0, 1, 3, 2 };
 
-	COPY_FROM_LEGACY (boolean, "/main/enabled", bool, "/Background/Default/Enabled=true");
-	COPY_FROM_LEGACY (filename, "/main/wallpaper_filename", string, "/Background/Default/wallpaper=(none)");
+	COPY_FROM_LEGACY (boolean, CP "enabled", bool, "/Background/Default/Enabled=true");
+	COPY_FROM_LEGACY (filename, CP "wallpaper_filename", string, "/Background/Default/wallpaper=(none)");
 
 	if (val_filename != NULL && strcmp (val_filename, "(none)"))
-		bonobo_config_set_boolean (db, "/main/wallpaper_enabled", TRUE, NULL);
+		bonobo_config_set_boolean (db, CP "wallpaper_enabled", TRUE, NULL);
 	else
-		bonobo_config_set_boolean (db, "/main/wallpaper_enabled", FALSE, NULL);
+		bonobo_config_set_boolean (db, CP "wallpaper_enabled", FALSE, NULL);
 
 	val_ulong = gnome_config_get_int ("/Background/Default/wallpaperAlign=0");
-	bonobo_config_set_ulong (db, "/main/wallpaper_type", wallpaper_types[val_ulong], NULL);
+	bonobo_config_set_ulong (db, CP "wallpaper_type", wallpaper_types[val_ulong], NULL);
 
-	copy_color_from_legacy (db, "/main/color1", "/Background/Default/color1");
-	copy_color_from_legacy (db, "/main/color2", "/Background/Default/color2");
+	copy_color_from_legacy (db, CP "color1", "/Background/Default/color1");
+	copy_color_from_legacy (db, CP "color2", "/Background/Default/color2");
 
 	/* Code to deal with new enum - messy */
 	val_ulong = -1;
@@ -188,12 +187,12 @@ get_legacy_settings (Bonobo_ConfigDatabase db)
 	g_free (val_string);
 
 	if (val_ulong != -1)
-		bonobo_config_set_ulong (db, "/main/orientation", val_ulong, NULL);
+		bonobo_config_set_ulong (db, CP "orientation", val_ulong, NULL);
 
 	val_boolean = gnome_config_get_bool_with_default ("/Background/Default/adjustOpacity=true", &def);
 
 	if (!def && val_boolean)
-		COPY_FROM_LEGACY (long, "/main/opacity", int, "/Background/Default/opacity=100");
+		COPY_FROM_LEGACY (long, CP "opacity", int, "/Background/Default/opacity=100");
 }
 
 static void
