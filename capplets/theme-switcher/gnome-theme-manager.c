@@ -1432,7 +1432,7 @@ main (int argc, char *argv[])
 				       GTK_DIALOG_MODAL,
 				       GTK_MESSAGE_ERROR,
 				       GTK_BUTTONS_OK,
-				       _("The default theme schemas could not be found on.  This means that you probably don't have metacity installed, or that your gconf is configured incorrectly."));
+				       _("The default theme schemas could not be found on your system.  This means that you probably don't have metacity installed, or that your gconf is configured incorrectly."));
       gtk_dialog_run (GTK_DIALOG (dialog));
       gtk_widget_destroy (dialog);
       exit (0);
