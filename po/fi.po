@@ -21,38 +21,39 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 1.99.0\n"
-"POT-Creation-Date: 2002-03-28 09:22-0500\n"
-"PO-Revision-Date: 2002-03-27 20:48+0200\n"
+"POT-Creation-Date: 2002-04-03 00:00+0300\n"
+"PO-Revision-Date: 2002-04-03 00:22+0300\n"
 "Last-Translator: Pauli Virtanen <pauli.virtanen@hut.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:259
-msgid "_Enable keyboard accesibility"
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:260
+msgid "_Enable keyboard accessibility"
 msgstr "_Käytä esteetöntä näppäimistöä"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:326
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:327
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "Ei voinut tuoda AccessX-asetuksia tiedostosta \"%s\""
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:438
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:439
 msgid "Select CDE AccessX file"
 msgstr "Valitse CDE AccessX -tiedosto"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-msgid "AccessX"
-msgstr "AccessX"
+#: capplets/keyboard/keyboard.desktop.in.h:1
+msgid "Keyboard"
+msgstr "Näppäimistö"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:2
 msgid "Keyboard Accessibility Properties"
 msgstr "Näppäimistön esteettömyysominaisuudet"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:1
-msgid "&lt;b&gt;Sample&lt;/b&gt;"
-msgstr "&lt;i&gt;Esimerkki&lt;/i&gt;"
+msgid "&lt;b&gt;Test&lt;/b&gt;"
+msgstr "&lt;b&gt;Testi&lt;/b&gt;"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:2
 msgid "B_eep when modifier is pressed"
@@ -105,23 +106,14 @@ msgstr "S_uurin osoittimen nopeus:"
 msgid ""
 "MouseKeys can benefit StickyKey users or anyone unable to use the pointing "
 "device or in need of 'pixel by pixel' position control of the pointer.  When "
-"activated, MouseKeys turns the numeric keypad into a mouse control pad. "
-msgstr ""
-"Hiirinäppäimistä voi olla hyötyä tarttuvien näppäinten käyttäjille sekä "
-"niille, joiden on vaikea käyttää osoitinlaitetta (esim. hiirtä) tai jotka "
-"tarvitsevat osoittimen pisteentarkkaa liikuttelua. Kun tämä on käytössä, "
-"numeronäppäimistöltä voi ohjata hiiren osoitinta."
+"activated, MouseKeys turns the numeric keypad into a mouse control pad."
+msgstr "Hiirinäppäimistä voi olla hyötyä tarttuvien näppäinten käyttäjille sekä niille, joiden on vaikea käyttää osoitinlaitetta (esim. hiirtä) tai jotka tarvitsevat osoittimen pisteentarkkaa liikuttelua. Kun tämä on käytössä, numeronäppäimistöltä voi ohjata hiiren osoitinta."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:13
 msgid ""
-"SlowKeys can benefit users who hit unwanted keys as they type.  SlowKeys "
-"instructs the system not to accept keys as pressed, unless the key has been "
-"pressed and held for a user adjustable amount of time (i.e., the key delay)."
-msgstr ""
-"Hitaista näppäimistä voi olla hyötyä käyttäjille, jotka osuvat "
-"kirjoittaessaan myös vääriin näppäimiin. Tämä asetus käskee järjestelmää "
-"sivuuttamaan näppäinten painallukset, jotka eivät kestä tarpeeksi kauan. "
-"Tätä viivettä voi säätää."
+"Only accept keys after they have been pressed and held for a user adjustable "
+"amount of time."
+msgstr "Hyväksy vain määritellyn ajan pohjassa olleet näppäinten painallukset"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:14
 msgid "Start mo_ving this long after keypress :"
@@ -135,13 +127,7 @@ msgid ""
 "example, if an application requires a user to simultaneously press the "
 "'Ctrl' and 'Tab' key, a StickyKeys user can press the 'Ctrl' key, release "
 "it, and then press the 'Tab' key and release it, achieving the same result."
-msgstr ""
-"Tarttuvista näppäimistä voi olla hyötyä käyttäjille, jotka kirjoittavat "
-"yhdellä sormella tai suussa pidettävällä tai päähän kiinnitetyllä tikulla. "
-"Tämän asetuksen avulla näppäinten samanaikaista painamista vaativat komennot "
-"voi suorittaa painamalla näppäimiä peräkkäin. Esimerkiksi control- ja tab-"
-"näppäinten painaminen samaan aikaan tapahtuu näppäilemällä ensin control ja "
-"sitten tab."
+msgstr "Tarttuvista näppäimistä voi olla hyötyä käyttäjille, jotka kirjoittavat yhdellä sormella tai suussa tai päässä pidettävällä tikulla. Tämän asetuksen avulla näppäinten samanaikaista painamista vaativat komennot voi suorittaa painamalla näppäimiä peräkkäin. Esimerkiksi control- ja tab-näppäinten painaminen samaan aikaan tapahtuu näppäilemällä ensin control ja sitten tab."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:16
 msgid "Time to _accelerate to max speed :"
@@ -151,7 +137,7 @@ msgstr "_Suurimpaan nopeuteen kiihtymisaika:"
 msgid ""
 "ToggleKeys can benefit the visually impaired user who has difficulty seeing "
 "the small LED keyboard indicators.  ToggleKeys provides one beep when an LED "
-"(e.g., the Caps Lock LED) is turned on and two beeps when it is turned off"
+"(e.g., the Caps Lock LED) is turned on and two beeps when it is turned off."
 msgstr ""
 "Vipunäppäimistä voi olla hyötyä jos ei näe kunnolla näppäimistön "
 "merkkivaloja. Tämä asetus saa järjestelmän päästämään piippauksen kun "
@@ -267,14 +253,18 @@ msgid "_Scaled"
 msgstr "_Skaalattu"
 
 #: capplets/background/background-properties-capplet.c:392
-msgid "S_tretched"
+msgid "Stretc_hed"
 msgstr "Ve_nytetty"
 
 #: capplets/background/background-properties-capplet.c:392
 msgid "_No Picture"
 msgstr "_Ei kuvaa"
 
-#: capplets/background/background-properties-capplet.c:515
+#: capplets/background/background-properties-capplet.c:427
+msgid "_Picture"
+msgstr "_Kuva"
+
+#: capplets/background/background-properties-capplet.c:531
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:592
 #: capplets/keyboard/gnome-keyboard-properties.c:348
@@ -283,17 +273,14 @@ msgstr "_Ei kuvaa"
 msgid "Retrieve and store legacy settings"
 msgstr "Hae ja tallenna aikaisempien versioiden asetukset"
 
-#: capplets/background/background-properties-capplet.c:540
-msgid "Background properties"
-msgstr "Taustan ominaisuudet"
-
+#: capplets/background/background-properties-capplet.c:556
 #: capplets/background/background-properties.glade.h:1
-msgid "Background Properties"
-msgstr "Taustan ominaisuudet"
+msgid "Background Preferences"
+msgstr "Taustan asetukset"
 
 #: capplets/background/background-properties.glade.h:2
-msgid "Border the picture with a:"
-msgstr "Kuvan reunus:"
+msgid "Bor_der the picture with a:"
+msgstr "Kuvan _reunus:"
 
 #: capplets/background/background-properties.glade.h:3
 msgid "E-Mail"
@@ -312,26 +299,22 @@ msgid "Picture Options:"
 msgstr "Kuvan asetukset:"
 
 #: capplets/background/background-properties.glade.h:7
-msgid "Picture:"
-msgstr "Kuva:"
-
-#: capplets/background/background-properties.glade.h:8
 msgid "Primary Color"
 msgstr "Pääväri"
 
-#: capplets/background/background-properties.glade.h:9
+#: capplets/background/background-properties.glade.h:8
 msgid "Secondary Color"
 msgstr "Toinen väri"
 
-#: capplets/background/background-properties.glade.h:10
+#: capplets/background/background-properties.glade.h:9
 msgid "Solid color"
 msgstr "Yhtenäinen väri"
 
-#: capplets/background/background-properties.glade.h:11
+#: capplets/background/background-properties.glade.h:10
 msgid "Vertical gradient"
 msgstr "Pystyliukuväri"
 
-#: capplets/background/background-properties.glade.h:12
+#: capplets/background/background-properties.glade.h:11
 msgid ""
 "You can drag image files\n"
 "into the window to set the \n"
@@ -341,23 +324,23 @@ msgstr ""
 "tähän ikkunaan ja asettaa\n"
 "taustakuvan siten."
 
-#: capplets/background/background-properties.glade.h:15
+#: capplets/background/background-properties.glade.h:14
 msgid "radiobutton1"
 msgstr "Valintanappi 1"
 
-#: capplets/background/background-properties.glade.h:16
+#: capplets/background/background-properties.glade.h:15
 msgid "radiobutton2"
 msgstr "Valintanappi 2"
 
-#: capplets/background/background-properties.glade.h:17
+#: capplets/background/background-properties.glade.h:16
 msgid "radiobutton3"
 msgstr "Valintanappi 3"
 
-#: capplets/background/background-properties.glade.h:18
+#: capplets/background/background-properties.glade.h:17
 msgid "radiobutton4"
 msgstr "Valintanappi 4"
 
-#: capplets/background/background-properties.glade.h:19
+#: capplets/background/background-properties.glade.h:18
 msgid "radiobutton5"
 msgstr "Valintanappi 5"
 
@@ -481,6 +464,7 @@ msgid "Choose the applications used by default"
 msgstr "Valitse oletuksena käytettävät sovellukset"
 
 #: capplets/default-applications/default-applications.desktop.in.h:2
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:15
 msgid "Preferred Applications"
 msgstr "Suositut sovellukset"
 
@@ -513,34 +497,30 @@ msgid "Co_mmand:"
 msgstr "Ko_mento:"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:8
-msgid "Default Applications"
-msgstr "Oletussovellukset"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:9
 msgid "Default Help Browser"
 msgstr "Oletusohjeselain"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:10
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:9
 msgid "Default Terminal"
 msgstr "Oletuspääte"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:11
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:10
 msgid "Default Text Editor"
 msgstr "Oletustekstieditori"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:12
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:11
 msgid "Default Web Browser"
 msgstr "Oletus-Internetselain"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:13
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:12
 msgid "Default Window Manager"
 msgstr "Oletusikkunointiohjelma"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:14
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:13
 msgid "E_xec Flag:"
 msgstr "_Valitsin:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:15
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:14
 msgid "He_lp Browser"
 msgstr "Oh_jeselain"
 
@@ -859,7 +839,7 @@ msgid "Add service..."
 msgstr "Lisää palvelu..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
-#: capplets/file-types/mime-edit-dialog.c:750
+#: capplets/file-types/mime-edit-dialog.c:755
 msgid "Category"
 msgstr "Luokka"
 
@@ -965,7 +945,7 @@ msgstr "Tietorakenne, joka sisältää MIME-luokan tiedot"
 
 #: capplets/file-types/mime-category-edit-dialog.c:343
 #: capplets/file-types/mime-edit-dialog.c:392
-#: capplets/file-types/mime-edit-dialog.c:492
+#: capplets/file-types/mime-edit-dialog.c:496
 #: capplets/file-types/service-edit-dialog.c:351
 #: capplets/file-types/service-edit-dialog.c:397
 msgid "Custom"
@@ -996,11 +976,11 @@ msgid "True if this dialog is for adding a MIME type"
 msgstr "Tosi, jos tämä ikkuna on MIME-tyypin lisäämistä varten"
 
 #: capplets/file-types/mime-edit-dialog.c:387
-#: capplets/file-types/mime-edit-dialog.c:442
+#: capplets/file-types/mime-edit-dialog.c:446
 msgid "None"
 msgstr "Ei mikään"
 
-#: capplets/file-types/mime-edit-dialog.c:675
+#: capplets/file-types/mime-edit-dialog.c:680
 msgid ""
 "Invalid MIME type. Please enter a valid MIME type, or leave the field blank "
 "to have one generated for you."
@@ -1008,11 +988,11 @@ msgstr ""
 "Virheellinen MIME-tyyppi. Syötä kelvollinen MIME-tyyppi, tai jätä kenttä "
 "tyhjäksi, niin sellainen syntyy."
 
-#: capplets/file-types/mime-edit-dialog.c:686
+#: capplets/file-types/mime-edit-dialog.c:691
 msgid "There already exists a MIME type of that name."
 msgstr "Samanniminen MIME-tyyppi on jo olemassa."
 
-#: capplets/file-types/mime-edit-dialog.c:755
+#: capplets/file-types/mime-edit-dialog.c:760
 msgid "Choose a file category"
 msgstr "Valitse tiedostoluokka"
 
@@ -1085,6 +1065,10 @@ msgstr "Manuaalisivut"
 msgid "Electronic mail transmission"
 msgstr "Sähköpostin välitys"
 
+#: capplets/file-types/service-info.c:50
+msgid "Gnome documentation"
+msgstr "Gnomen ohjeet"
+
 #: capplets/font/font-properties.desktop.in.h:1
 msgid "Font"
 msgstr "Kirjasin"
@@ -1116,8 +1100,8 @@ msgid "Accelerator key"
 msgstr "Pikanäppäin"
 
 #: capplets/keybindings/eggcellrendererkeys.c:199
-#: capplets/keybindings/gnome-keybinding-properties.c:88
-#: libbackground/applier.c:466
+#: capplets/keybindings/gnome-keybinding-properties.c:86
+#: libbackground/applier.c:522
 msgid "Disabled"
 msgstr "Pois käytöstä"
 
@@ -1130,11 +1114,11 @@ msgstr "Näppäile uusi pikanäppäin, tai paina askelpalautinta tyhjentääkses
 msgid "Type a new accelerator"
 msgstr "Näppäile uusi pikanäppäin"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:284
+#: capplets/keybindings/gnome-keybinding-properties.c:282
 msgid "<Unknown Action>"
 msgstr "<Tuntematon toiminto>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:443
+#: capplets/keybindings/gnome-keybinding-properties.c:444
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1142,11 +1126,11 @@ msgstr ""
 "Ei löytänyt näppäimistöteemoja. Tämä merkitsee, että GTK+ on asennettu "
 "puutteellisesti."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:506
+#: capplets/keybindings/gnome-keybinding-properties.c:507
 msgid "_Action"
 msgstr "_Toiminto"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:518
+#: capplets/keybindings/gnome-keybinding-properties.c:519
 msgid "_Shortcut"
 msgstr "_Oikotie"
 
@@ -1315,10 +1299,6 @@ msgstr "_Ääni"
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:31
 msgid "_Volume:"
 msgstr "_Äänenvoimakkuus:"
-
-#: capplets/keyboard/keyboard.desktop.in.h:1
-msgid "Keyboard"
-msgstr "Näppäimistö"
 
 #: capplets/mouse/gnome-mouse-properties.c:420
 #, c-format
@@ -1533,101 +1513,68 @@ msgid "Configure GNOME's use of sound"
 msgstr "Muokkaa Gnomen ääniasetuksia"
 
 #: capplets/sound/sound-properties-capplet.c:178
-#, fuzzy
 msgid "Sound preferences"
-msgstr "Kirjasinasetukset"
+msgstr "Ääniasetukset"
 
 #: capplets/sound/sound-properties.glade.h:1
-#, fuzzy
 msgid "E_nable sound server startup"
-msgstr "Ota äänipalvelin käyttöön käynnistyessä"
+msgstr "_Ota äänipalvelin käyttöön käynnistyessä"
 
 #: capplets/sound/sound-properties.glade.h:2
-#, fuzzy
 msgid "Sound _Events"
-msgstr "Äänitapahtumat"
+msgstr "_Äänitapahtumat"
 
 #: capplets/sound/sound-properties.glade.h:4
-#, fuzzy
 msgid "_Sounds for events"
-msgstr "Tapahtumaäänet"
+msgstr "_Tapahtumien äänet"
 
-#. just 8 short names that will serve as samples for titles in demo
-#: capplets/theme-switcher/control/control.c:19
-msgid "Eenie"
-msgstr "Entten"
+#: capplets/theme-switcher/control/control.c:18
+msgid "Eenie Meenie Mynie Moe Catcha Tiger By Its Toe"
+msgstr "Entten tentten teelika mentten"
 
-#: capplets/theme-switcher/control/control.c:19
-msgid "Mynie"
-msgstr "Teelika"
-
-#: capplets/theme-switcher/control/control.c:19
-msgid "Catcha"
-msgstr "Hissun"
-
-#: capplets/theme-switcher/control/control.c:19
-msgid "By Its"
-msgstr "Vaapula"
-
-#: capplets/theme-switcher/control/control.c:20
-msgid "Meenie"
-msgstr "Tentten"
-
-#: capplets/theme-switcher/control/control.c:20
-msgid "Moe"
-msgstr "Mentten"
-
-#: capplets/theme-switcher/control/control.c:20
-msgid "Tiger"
-msgstr "Kissun"
-
-#: capplets/theme-switcher/control/control.c:20
-msgid "Toe"
-msgstr "Vissun"
-
-#: capplets/theme-switcher/control/control.c:38
+#: capplets/theme-switcher/control/control.c:43
 msgid "Selected themes from above will be tested by previewing here."
 msgstr "Yllä valitut teemat ovat tässä katseltavina."
 
 #. column one
-#: capplets/theme-switcher/control/control.c:43
+#: capplets/theme-switcher/control/control.c:48
 msgid "Sample Button"
 msgstr "Painike"
 
-#: capplets/theme-switcher/control/control.c:47
+#: capplets/theme-switcher/control/control.c:52
 msgid "Sample Check Button"
 msgstr "Valintaruutu"
 
-#: capplets/theme-switcher/control/control.c:53
+#: capplets/theme-switcher/control/control.c:58
 msgid "Sample Text Entry Field"
 msgstr "Tekstikenttä"
 
-#: capplets/theme-switcher/control/control.c:64
+#: capplets/theme-switcher/control/control.c:69
 msgid "Submenu"
 msgstr "Alivalikko"
 
-#: capplets/theme-switcher/control/control.c:69
+#: capplets/theme-switcher/control/control.c:74
 #: capplets/ui-properties/gnome2-ui-properties.glade.h:2
 msgid "Item 1"
 msgstr "Kohta 1"
 
-#: capplets/theme-switcher/control/control.c:71
+#: capplets/theme-switcher/control/control.c:76
 msgid "Another item"
 msgstr "Toinen kohta"
 
-#: capplets/theme-switcher/control/control.c:75
+#: capplets/theme-switcher/control/control.c:80
 msgid "Radio Button 1"
 msgstr "Valintanappi 1"
 
-#: capplets/theme-switcher/control/control.c:81
+#: capplets/theme-switcher/control/control.c:86
 msgid "Radio Button 2"
 msgstr "Valintanappi 2"
 
-#: capplets/theme-switcher/control/control.c:102
+#: capplets/theme-switcher/control/control.c:107
 msgid "One"
 msgstr "Yksi"
 
-#: capplets/theme-switcher/control/control.c:108
+#: capplets/theme-switcher/control/control.c:113
 msgid "Two"
 msgstr "Kaksi"
 
@@ -1811,11 +1758,11 @@ msgstr "Käytä omaa ikkunaa vaikka Nautilus olisi käynnissä"
 msgid "Could not initialize Bonobo"
 msgstr "Ei voinut alustaa Bonoboa"
 
-#: libbackground/applier.c:230
+#: libbackground/applier.c:236
 msgid "Type"
 msgstr "Tyyppi"
 
-#: libbackground/applier.c:231
+#: libbackground/applier.c:237
 msgid ""
 "Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
 "for preview"
@@ -1823,7 +1770,23 @@ msgstr ""
 "bg_applierin tyyppi: BG_APPLIER_ROOT juuri-ikkunalle ja BG_APPLIER_PREVIEW "
 "esikatselulle"
 
-#: libbackground/applier.c:398
+#: libbackground/applier.c:244
+msgid "Preview Width"
+msgstr "Esikatseluleveys"
+
+#: libbackground/applier.c:245
+msgid "Width if applier is a preview: Defaults to 64."
+msgstr ""
+
+#: libbackground/applier.c:252
+msgid "Preview Height"
+msgstr "Esikatselukorkeus"
+
+#: libbackground/applier.c:253
+msgid "Height if applier is a preview: Defaults to 48."
+msgstr ""
+
+#: libbackground/applier.c:451
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr "Ei voinut ladata kuvaa \"%s\", joten taustakuvaa ei ole."
@@ -1851,27 +1814,71 @@ msgstr ""
 "Saatat haluta asentaa gnome-audio-paketin,\n"
 "joka sisältää valikoiman oletusääniä."
 
-#: libsounds/sound-view.c:209
+#: libsounds/sound-view.c:210
 msgid "Event"
 msgstr "Tapahtuma"
 
-#: libsounds/sound-view.c:216
+#: libsounds/sound-view.c:217
 msgid "File to play"
 msgstr "Soitettava tiedosto"
 
-#: libsounds/sound-view.c:238
-msgid "Play"
-msgstr "Soita"
+#: libsounds/sound-view.c:245
+msgid "_Play"
+msgstr "_Soita"
 
-#: libsounds/sound-view.c:244
+#: libsounds/sound-view.c:251
 msgid "Select sound file"
 msgstr "Valitse äänitiedosto"
+
+#~ msgid "AccessX"
+#~ msgstr "AccessX"
+
+#~ msgid ""
+#~ "SlowKeys can benefit users who hit unwanted keys as they type.  SlowKeys "
+#~ "instructs the system not to accept keys as pressed, unless the key has "
+#~ "been pressed and held for a user adjustable amount of time (i.e., the key "
+#~ "delay)."
+#~ msgstr ""
+#~ "Hitaista näppäimistä voi olla hyötyä käyttäjille, jotka osuvat "
+#~ "kirjoittaessaan myös vääriin näppäimiin. Tämä asetus käskee järjestelmää "
+#~ "sivuuttamaan näppäinten painallukset, jotka eivät kestä tarpeeksi kauan. "
+#~ "Tätä viivettä voi säätää."
+
+#~ msgid "Background properties"
+#~ msgstr "Taustan ominaisuudet"
+
+#~ msgid "Default Applications"
+#~ msgstr "Oletussovellukset"
 
 #~ msgid "Sound properties"
 #~ msgstr "Ääniominaisuudet"
 
 #~ msgid "General"
 #~ msgstr "Yleistä"
+
+#~ msgid "Eenie"
+#~ msgstr "Entten"
+
+#~ msgid "Mynie"
+#~ msgstr "Teelika"
+
+#~ msgid "Catcha"
+#~ msgstr "Hissun"
+
+#~ msgid "By Its"
+#~ msgstr "Vaapula"
+
+#~ msgid "Meenie"
+#~ msgstr "Tentten"
+
+#~ msgid "Moe"
+#~ msgstr "Mentten"
+
+#~ msgid "Tiger"
+#~ msgstr "Kissun"
+
+#~ msgid "Toe"
+#~ msgstr "Vissun"
 
 #~ msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 #~ msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZzÅåÄäÖö"
