@@ -1,3 +1,17 @@
+1993-03-09  Owen Taylor  <otaylor@redhat.com>
+
+	* capplets/background-properties/property-background.c:
+	Fixed code for setting root window properties so it:
+
+	 - Doesn't call gdk_property_get() with the arguments in 
+	   the wrong order.
+	 - Doesn't leak its pixmaps 
+	 - Doesn't leak anything else. (I.e., use a separate
+	   connection, instead of calling XSetCloseDownMode
+	   on GDK_DISPLAY())
+	 - Doesn't make a messy, unsucessful attempt at committing suicide
+	 - Handles tiled pixmaps properly.
+
 1999-03-08  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* capplets/gnome-edit-properties/gnome-edit-properties.c (main):
