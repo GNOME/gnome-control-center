@@ -76,10 +76,15 @@ store_archive_data (void)
 static void
 ok_cb (GtkWidget *widget) 
 {
+#ifdef HAVE_XIMIAN_ARCHIVER
 	if (!outside_location) {
 		preferences_save (prefs);
 		preferences_apply_now (prefs);
 	}
+#else /* !HAVE_XIMIAN_ARCHIVER */
+	preferences_save (prefs);
+	preferences_apply_now (prefs);
+#endif /* HAVE_XIMIAN_ARCHIVER */
 
 #ifdef HAVE_XIMIAN_ARCHIVER
 	store_archive_data ();
@@ -89,10 +94,15 @@ ok_cb (GtkWidget *widget)
 static void
 cancel_cb (GtkWidget *widget) 
 {
+#ifdef HAVE_XIMIAN_ARCHIVER
 	if (!outside_location) {
 		preferences_save (old_prefs);
 		preferences_apply_now (old_prefs);
 	}
+#else /* !HAVE_XIMIAN_ARCHIVER */
+	preferences_save (old_prefs);
+	preferences_apply_now (old_prefs);
+#endif /* HAVE_XIMIAN_ARCHIVER */
 }
 
 static void 
