@@ -331,22 +331,40 @@ transfer_cancel_cb (GtkWidget *dlg, gchar *path)
 	gtk_widget_destroy (dlg);
 }
 
+/* this works around problems when doing fork/exec in a threaded app
+ * with some locks being held/waited on in different threads.
+ *
+ * we do the idle callback so that the async xfer has finished and
+ * cleaned up its vfs job.  otherwise it seems the slave thread gets
+ * woken up and it removes itself from the job queue before it is
+ * supposed to.  very strange.
+ *
+ * see bugzilla.gnome.org #86141 for details
+ */
+static gboolean
+transfer_done_idle_cb (gpointer data)
+{
+	int status;
+	gchar *command;
+	gchar *path = data;
+
+	/* this should be something more clever and nonblocking */
+	command = g_strdup_printf ("sh -c 'gzip -d -c < \"%s\" | tar xf - -C \"%s/.themes\"'",
+				   path, g_get_home_dir ());
+	if (g_spawn_command_line_sync (command, NULL, NULL, &status, NULL) && status == 0)
+		gnome_vfs_unlink (path);
+	g_free (command);
+	g_free (path);
+
+	return FALSE;
+}
+
 static void
 transfer_done_cb (GtkWidget *dlg, gchar *path)
 {
 	int len = strlen (path);
 	if (path && len > 7 && !strcmp (path + len - 7, ".tar.gz"))
-	{
-		int status;
-		gchar *command;
-		/* this should be something more clever and nonblocking */
-		command = g_strdup_printf ("sh -c 'gzip -d -c < \"%s\" | tar xf - -C \"%s/.themes\"'",
-					   path, g_get_home_dir ());
-		if (g_spawn_command_line_sync (command, NULL, NULL, &status, NULL) && status == 0)
-			gnome_vfs_unlink (path);
-		g_free (command);
-	}
-	g_free (path);
+		g_idle_add (transfer_done_idle_cb, path);
 	gtk_widget_destroy (dlg);
 }
 

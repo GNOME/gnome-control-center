@@ -1,3 +1,11 @@
+2002-07-05  jacob berkman  <jacob@ximian.com>
+
+	* theme-switcher.c (transfer_done_cb): do the real work in an idle
+	(transfer_done_idle_cb): do the real work
+
+	this fixes bug #86141 - i don't understand why, but some very evil
+	things seem to have been happening.  see that bug for details.
+
 2002-06-17  Jody Goldberg <jody@gnome.org>
 
 	* Release 2.0.0
