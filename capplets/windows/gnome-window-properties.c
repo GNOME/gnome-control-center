@@ -151,7 +151,7 @@ update_gui (void)
 
         for (tmp_list = gnome_wm_manager_get_list (); tmp_list != NULL; tmp_list = tmp_list->next) {
                 wm = tmp_list->data;
-                wm_widget_add_wm (wm);
+                if (wm != NULL) wm_widget_add_wm (wm);
         }
         
         in_fill = FALSE;
