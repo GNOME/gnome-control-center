@@ -1,3 +1,12 @@
+2005-02-01  Elijah Newren  <newren@gmail.com>
+
+	Fix an infinite loop that was bringing single-CPU systems to their
+	knees.  #160803
+
+	* gnome-theme-manager.c: (window_settings_changed): keep track of
+	the window manager theme last selected and just exit if we are
+	already using the one we want
+
 2005-02-01  David Sedeño <david@alderia.com>
 
 	New install procedure: See bug #102216.

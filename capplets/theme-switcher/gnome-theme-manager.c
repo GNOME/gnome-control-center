@@ -919,7 +919,19 @@ static void
 window_settings_changed (GnomeWindowManager *window_manager,
 			 GladeXML           *dialog)
 {
-  /* There is no way to know what changed, so we just check it all */
+  static gchar *window_theme = NULL;
+  GnomeWMSettings wm_settings;
+
+  wm_settings.flags = GNOME_WM_SETTING_THEME;
+  gnome_window_manager_get_settings (window_manager, &wm_settings);
+  if (window_theme == NULL || strcmp (wm_settings.theme, window_theme) != 0)
+    {
+      g_free (window_theme);
+      window_theme = g_strdup (wm_settings.theme);
+    }
+  else
+    return;
+
   update_settings_from_gconf ();
   gnome_theme_details_update_from_gconf ();
 }
