@@ -268,6 +268,7 @@ void remove_handler(GtkButton *button) {
   for (row = 0; row < num_rows; row++) {
     gtk_clist_get_text(GTK_CLIST(clist), row, 0, &col1);
     if (!g_strcasecmp(prot, col1)) {
+      gtk_clist_unselect_row(GTK_CLIST(clist), row, 0);
       gtk_clist_remove(GTK_CLIST(clist), row);
       capplet_widget_state_changed(CAPPLET_WIDGET(capplet), TRUE);
       gtk_entry_set_text(GTK_ENTRY(protocol), "");
