@@ -4,13 +4,22 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 1999-05-19 14:40+0200\n"
+"POT-Creation-Date: 1999-07-30 15:55-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Max Valianskiy <maxcom@vinchi.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=koi8-r\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: capplets/background-properties/app-background.c:13
+msgid "Set background image."
+msgstr ""
+
+#: capplets/background-properties/app-background.c:13
+#, fuzzy
+msgid "IMAGE-FILE"
+msgstr "КАРТИНКА"
 
 #: capplets/background-properties/property-background.c:244
 #, fuzzy
@@ -25,6 +34,7 @@ msgstr "Цвет"
 msgid "Color 1"
 msgstr "Цвет 1"
 
+#. gtk_table_attach_defaults (GTK_TABLE(table), cp1, 0, 1, 1, 2);
 #. gtk_table_attach_defaults (GTK_TABLE(table), gtk_hseparator_new (), 0, 1, 2, 3);
 #: capplets/background-properties/property-background.c:646
 msgid "Color 2"
@@ -161,11 +171,11 @@ msgstr "Продолжительность (милл сек)"
 msgid "Test"
 msgstr "Проверить"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:226
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:229
 msgid "Gnome editor"
 msgstr "Редактор GNOME"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:237
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:240
 msgid "Run In Terminal"
 msgstr "Запускать в терминале"
 
@@ -214,12 +224,15 @@ msgstr ""
 msgid "Extension: "
 msgstr ""
 
+#. gtk_container_set_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
 #: capplets/mime-type/edit-window.c:133
-msgid "First Regular Expresion: "
+#: capplets/mime-type/new-mime-window.c:65
+msgid "First Regular Expression: "
 msgstr ""
 
 #: capplets/mime-type/edit-window.c:141
-msgid "Second Regular Expresion: "
+#: capplets/mime-type/new-mime-window.c:76
+msgid "Second Regular Expression: "
 msgstr ""
 
 #. Actions box
@@ -248,6 +261,19 @@ msgstr ""
 
 #: capplets/mime-type/edit-window.c:191
 msgid "Edit"
+msgstr ""
+
+#. we initialize everything
+#: capplets/mime-type/edit-window.c:238
+msgid "Set actions for "
+msgstr ""
+
+#: capplets/mime-type/mime-data.c:354
+msgid "Mime Type"
+msgstr ""
+
+#: capplets/mime-type/mime-data.c:355
+msgid "Extension"
 msgstr ""
 
 #: capplets/mime-type/mime-data.c:449
@@ -304,91 +330,82 @@ msgstr ""
 msgid "Edit..."
 msgstr ""
 
-#: capplets/mime-type/new-mime-window.c:20
+#: capplets/mime-type/new-mime-window.c:21
 msgid "Add Mime Type"
 msgstr ""
 
-#: capplets/mime-type/new-mime-window.c:21
+#: capplets/mime-type/new-mime-window.c:22
 msgid ""
 "Add a new Mime Type\n"
 "For example:  image/tiff; text/x-scheme"
 msgstr ""
 
-#: capplets/mime-type/new-mime-window.c:26
+#: capplets/mime-type/new-mime-window.c:27
 msgid "Mime Type:"
 msgstr ""
 
-#: capplets/mime-type/new-mime-window.c:34
+#: capplets/mime-type/new-mime-window.c:35
 msgid "Extensions"
 msgstr ""
 
-#: capplets/mime-type/new-mime-window.c:38
+#: capplets/mime-type/new-mime-window.c:39
 msgid ""
 "Type in the extensions for this mime-type.\n"
 "For example:  .html, .htm"
 msgstr ""
 
-#: capplets/mime-type/new-mime-window.c:45
+#: capplets/mime-type/new-mime-window.c:46
 msgid "Extension:"
 msgstr ""
 
-#: capplets/mime-type/new-mime-window.c:50
-msgid "Regular Expresions"
+#: capplets/mime-type/new-mime-window.c:51
+msgid "Regular Expressions"
 msgstr ""
 
-#: capplets/mime-type/new-mime-window.c:54
+#: capplets/mime-type/new-mime-window.c:55
 msgid ""
 "You can set up two regular expressions here to identify the Mime Type\n"
 "by.  These fields are optional."
 msgstr ""
 
-#. gtk_container_set_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
-#: capplets/mime-type/new-mime-window.c:64
-msgid "First Regular Expression: "
-msgstr ""
-
-#: capplets/mime-type/new-mime-window.c:75
-msgid "Second Regular Expression: "
-msgstr ""
-
-#: capplets/mouse-properties/mouse-properties.c:252
+#: capplets/mouse-properties/mouse-properties.c:259
 msgid "Mouse buttons"
 msgstr "Кнопки мыши"
 
-#: capplets/mouse-properties/mouse-properties.c:261
+#: capplets/mouse-properties/mouse-properties.c:268
 msgid "Left handed"
 msgstr "Под левую руку"
 
-#: capplets/mouse-properties/mouse-properties.c:263
+#: capplets/mouse-properties/mouse-properties.c:270
 msgid "Right handed"
 msgstr "Под правую руку"
 
 #. Mouse motion
-#: capplets/mouse-properties/mouse-properties.c:289
+#: capplets/mouse-properties/mouse-properties.c:296
 msgid "Mouse motion"
 msgstr "Движение мыши"
 
-#: capplets/mouse-properties/mouse-properties.c:299
+#: capplets/mouse-properties/mouse-properties.c:306
 msgid "Acceleration"
 msgstr "Ускорение"
 
-#: capplets/mouse-properties/mouse-properties.c:299
+#: capplets/mouse-properties/mouse-properties.c:306
 msgid "Fast"
 msgstr "Быстро"
 
-#: capplets/mouse-properties/mouse-properties.c:299
+#: capplets/mouse-properties/mouse-properties.c:306
 msgid "Slow"
 msgstr "Медлено"
 
-#: capplets/mouse-properties/mouse-properties.c:310
+#: capplets/mouse-properties/mouse-properties.c:317
 msgid "Threshold"
 msgstr "Порог"
 
-#: capplets/mouse-properties/mouse-properties.c:310
+#: capplets/mouse-properties/mouse-properties.c:317
 msgid "Large"
 msgstr "Большой"
 
-#: capplets/mouse-properties/mouse-properties.c:310
+#: capplets/mouse-properties/mouse-properties.c:317
 msgid "Small"
 msgstr "Маленький"
 
@@ -614,6 +631,11 @@ msgstr ""
 msgid "Always started on every login."
 msgstr ""
 
+#: capplets/session-properties/gsm-protocol.c:503
+#, fuzzy
+msgid "Remove Program"
+msgstr "Программа:"
+
 #: capplets/session-properties/session-properties.c:147
 msgid "Program:"
 msgstr "Программа:"
@@ -700,48 +722,6 @@ msgstr ""
 msgid "Close"
 msgstr "Закрыть"
 
-#: capplets/theme-switcher/gui.c:83
-#, c-format
-msgid ""
-"Error installing theme:\n"
-"'%s'\n"
-"%s"
-msgstr ""
-
-#: capplets/theme-switcher/gui.c:114
-msgid "Select a theme to install"
-msgstr ""
-
-#: capplets/theme-switcher/gui.c:191
-msgid "Available Themes"
-msgstr "Темы"
-
-#: capplets/theme-switcher/gui.c:216
-msgid ""
-"Auto\n"
-"Preview"
-msgstr ""
-"Авто\n"
-"Просмотр"
-
-#: capplets/theme-switcher/gui.c:228
-msgid ""
-"Install new\n"
-"theme..."
-msgstr ""
-"Установить новую\n"
-"тему..."
-
-#. Font selector.
-#.
-#: capplets/theme-switcher/gui.c:234
-msgid "User Font"
-msgstr ""
-
-#: capplets/theme-switcher/gui.c:271
-msgid "Use custom font."
-msgstr ""
-
 #: capplets/theme-switcher/demo.c:50
 msgid "One"
 msgstr ""
@@ -814,6 +794,65 @@ msgstr ""
 
 #: capplets/theme-switcher/demo.c:147
 msgid "Radio Button 3"
+msgstr ""
+
+#: capplets/theme-switcher/gui.c:83
+#, c-format
+msgid ""
+"Error installing theme:\n"
+"'%s'\n"
+"%s"
+msgstr ""
+
+#: capplets/theme-switcher/gui.c:114
+msgid "Select a theme to install"
+msgstr ""
+
+#: capplets/theme-switcher/gui.c:191
+msgid "Available Themes"
+msgstr "Темы"
+
+#: capplets/theme-switcher/gui.c:216
+msgid ""
+"Auto\n"
+"Preview"
+msgstr ""
+"Авто\n"
+"Просмотр"
+
+#: capplets/theme-switcher/gui.c:228
+msgid ""
+"Install new\n"
+"theme..."
+msgstr ""
+"Установить новую\n"
+"тему..."
+
+#. Font selector.
+#.
+#: capplets/theme-switcher/gui.c:234
+msgid "User Font"
+msgstr ""
+
+#: capplets/theme-switcher/gui.c:271
+msgid "Use custom font."
+msgstr ""
+
+#: capplets/theme-switcher/install.c:26
+msgid "Home directory doesn't exist!\n"
+msgstr ""
+
+#: capplets/theme-switcher/install.c:36
+msgid "Theme does not exist"
+msgstr ""
+
+#: capplets/theme-switcher/install.c:68
+#, c-format
+msgid "Command '%s' failed"
+msgstr ""
+
+#: capplets/theme-switcher/install.c:73
+msgid "Unknown file format"
 msgstr ""
 
 #: capplets/ui-properties/ui-properties.c:53
@@ -913,84 +952,92 @@ msgstr "Отцепление и перенос панелей инструментов"
 msgid "Can detach and move menubars"
 msgstr "Отцепление и перенос меню"
 
-#: capplets/ui-properties/ui-properties.c:270
-msgid "Menubars have relieved border"
+#: capplets/ui-properties/ui-properties.c:269
+msgid "Menus can be torn off"
 msgstr ""
 
 #: capplets/ui-properties/ui-properties.c:279
-msgid "Toolbars have relieved border"
+msgid "Menubars have relieved border"
 msgstr ""
 
 #: capplets/ui-properties/ui-properties.c:288
-msgid "Toolbar buttons have relieved border"
+msgid "Toolbars have relieved border"
 msgstr ""
 
 #: capplets/ui-properties/ui-properties.c:297
+msgid "Toolbar buttons have relieved border"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:306
 msgid "Toolbars have line separators"
 msgstr "Разделители в пеналах"
 
-#: capplets/ui-properties/ui-properties.c:306
+#: capplets/ui-properties/ui-properties.c:315
 msgid "Toolbars have text labels"
 msgstr "Текстовые метки в пеналах"
 
-#: capplets/ui-properties/ui-properties.c:315
+#: capplets/ui-properties/ui-properties.c:324
 msgid "Statusbar is interactive when possible"
 msgstr "Интерактивная строка статуса когда это возможно"
 
-#: capplets/ui-properties/ui-properties.c:324
+#: capplets/ui-properties/ui-properties.c:333
 msgid "Statusbar progress meter on right"
 msgstr ""
 
-#: capplets/ui-properties/ui-properties.c:335
+#: capplets/ui-properties/ui-properties.c:344
 msgid "Dialog buttons have icons"
 msgstr "Иконки на кнопках диалогов"
 
-#: capplets/ui-properties/ui-properties.c:347
+#: capplets/ui-properties/ui-properties.c:356
 msgid "Menu items have icons"
 msgstr "Иконки в меню"
 
-#: capplets/ui-properties/ui-properties.c:366
+#: capplets/ui-properties/ui-properties.c:375
 msgid "Default MDI mode"
 msgstr "Режим MDI по умолчанию"
 
-#: capplets/ui-properties/ui-properties.c:371
+#: capplets/ui-properties/ui-properties.c:380
 msgid "MDI notebook tab position"
 msgstr "Положение закладок MDI блокнота"
 
-#: capplets/url-properties/url-properties.c:69
+#: capplets/url-properties/url-properties.c:48
+msgid "Error initializing the `url-properties' capplet."
+msgstr ""
+
+#: capplets/url-properties/url-properties.c:71
 msgid "Protocol"
 msgstr "Протокол"
 
-#: capplets/url-properties/url-properties.c:69
+#: capplets/url-properties/url-properties.c:71
 msgid "Command"
 msgstr "Команда"
 
-#: capplets/url-properties/url-properties.c:85
+#: capplets/url-properties/url-properties.c:87
 msgid "handler:"
 msgstr "обработчик:"
 
 #. set some commonly used handlers
-#: capplets/url-properties/url-properties.c:95
+#: capplets/url-properties/url-properties.c:97
 msgid "Netscape"
 msgstr "Netscape"
 
-#: capplets/url-properties/url-properties.c:100
+#: capplets/url-properties/url-properties.c:102
 msgid "Netscape (new window)"
 msgstr "Netscape (в новом окне)"
 
-#: capplets/url-properties/url-properties.c:106
+#: capplets/url-properties/url-properties.c:108
 msgid "Help browser"
 msgstr "Справочный навигатор"
 
-#: capplets/url-properties/url-properties.c:111
+#: capplets/url-properties/url-properties.c:113
 msgid "Help browser (new window)"
 msgstr "Справочный навигатор (в новом окне)"
 
-#: capplets/url-properties/url-properties.c:123
+#: capplets/url-properties/url-properties.c:125
 msgid "Set"
 msgstr "Установить"
 
-#: capplets/url-properties/url-properties.c:131
+#: capplets/url-properties/url-properties.c:133
 msgid "Remove"
 msgstr "Удалить"
 
@@ -1107,7 +1154,7 @@ msgstr "Попробовать"
 msgid "Revert"
 msgstr "Вернуть"
 
-#: control-center/capplet-manager.c:188 control-center/main.c:30
+#: control-center/capplet-manager.c:188 control-center/main.c:31
 msgid "Help"
 msgstr "Справка"
 
@@ -1159,29 +1206,29 @@ msgstr ""
 msgid "CAPPLET"
 msgstr ""
 
-#: control-center/main.c:30
+#: control-center/main.c:31
 #, fuzzy
 msgid "Help with the GNOME control-center."
 msgstr "Центр управления GNOME"
 
 #. we create the widgets
-#: control-center/main.c:58
+#: control-center/main.c:59
 msgid "Warning:"
 msgstr ""
 
-#: control-center/main.c:58
+#: control-center/main.c:59
 msgid "Discard all changes"
 msgstr ""
 
 #. ...labels, etc
-#: control-center/main.c:67
+#: control-center/main.c:68
 msgid ""
 "The following modules have had changes made, but not committed.  If you "
 "would like to edit them, please double click on the appropriate entry."
 msgstr ""
 
 #. create the app
-#: control-center/main.c:162
+#: control-center/main.c:184
 #, fuzzy
 msgid "Control Center"
 msgstr "Центр управления GNOME"

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0.5\n"
-"POT-Creation-Date: 1999-05-19 14:40+0200\n"
+"POT-Creation-Date: 1999-07-30 15:55-0400\n"
 "PO-Revision-Date: 1998-11-21 00:05+0100\n"
 "Last-Translator: Pablo Saratxaga <srtxg@chanae.alphanet.ch>\n"
 "Language-Team: \n"
@@ -31,6 +31,15 @@ msgstr ""
 "help-browser/history.c help-browser/toc2-man.c help-browser/toc2.c "
 "help-browser/visit.c gnome-terminal/gnome-terminal.c\n"
 
+#: capplets/background-properties/app-background.c:13
+msgid "Set background image."
+msgstr ""
+
+#: capplets/background-properties/app-background.c:13
+#, fuzzy
+msgid "IMAGE-FILE"
+msgstr "IMÁGEN"
+
 #: capplets/background-properties/property-background.c:244
 msgid "Disabled"
 msgstr "Desactivado"
@@ -43,6 +52,7 @@ msgstr "Color"
 msgid "Color 1"
 msgstr "Color 1"
 
+#. gtk_table_attach_defaults (GTK_TABLE(table), cp1, 0, 1, 1, 2);
 #. gtk_table_attach_defaults (GTK_TABLE(table), gtk_hseparator_new (), 0, 1, 2, 3);
 #: capplets/background-properties/property-background.c:646
 msgid "Color 2"
@@ -179,11 +189,11 @@ msgstr "Duración (ms)"
 msgid "Test"
 msgstr "Prueba"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:226
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:229
 msgid "Gnome editor"
 msgstr "Editor de Gnome"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:237
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:240
 msgid "Run In Terminal"
 msgstr "Lanzar en un terminal"
 
@@ -232,12 +242,15 @@ msgstr "Tipo MIME: "
 msgid "Extension: "
 msgstr "Extensión: "
 
+#. gtk_container_set_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
 #: capplets/mime-type/edit-window.c:133
-msgid "First Regular Expresion: "
+#: capplets/mime-type/new-mime-window.c:65
+msgid "First Regular Expression: "
 msgstr "Primera expresión regular: "
 
 #: capplets/mime-type/edit-window.c:141
-msgid "Second Regular Expresion: "
+#: capplets/mime-type/new-mime-window.c:76
+msgid "Second Regular Expression: "
 msgstr "Segunda expresión regular: "
 
 #. Actions box
@@ -266,6 +279,21 @@ msgstr "Ver"
 #: capplets/mime-type/edit-window.c:191
 msgid "Edit"
 msgstr "Editar"
+
+#. we initialize everything
+#: capplets/mime-type/edit-window.c:238
+msgid "Set actions for "
+msgstr ""
+
+#: capplets/mime-type/mime-data.c:354
+#, fuzzy
+msgid "Mime Type"
+msgstr "Tipo MIME:"
+
+#: capplets/mime-type/mime-data.c:355
+#, fuzzy
+msgid "Extension"
+msgstr "Extensiones"
 
 #: capplets/mime-type/mime-data.c:449
 msgid "You must enter a mime-type"
@@ -336,11 +364,11 @@ msgstr "Añadir..."
 msgid "Edit..."
 msgstr "Editar..."
 
-#: capplets/mime-type/new-mime-window.c:20
+#: capplets/mime-type/new-mime-window.c:21
 msgid "Add Mime Type"
 msgstr "Añadir un Tipo MIME"
 
-#: capplets/mime-type/new-mime-window.c:21
+#: capplets/mime-type/new-mime-window.c:22
 msgid ""
 "Add a new Mime Type\n"
 "For example:  image/tiff; text/x-scheme"
@@ -348,15 +376,15 @@ msgstr ""
 "Añadir un nuevo tipo MIME\n"
 "Por ejemplo:  image/tiff; text/x-scheme"
 
-#: capplets/mime-type/new-mime-window.c:26
+#: capplets/mime-type/new-mime-window.c:27
 msgid "Mime Type:"
 msgstr "Tipo MIME:"
 
-#: capplets/mime-type/new-mime-window.c:34
+#: capplets/mime-type/new-mime-window.c:35
 msgid "Extensions"
 msgstr "Extensiones"
 
-#: capplets/mime-type/new-mime-window.c:38
+#: capplets/mime-type/new-mime-window.c:39
 msgid ""
 "Type in the extensions for this mime-type.\n"
 "For example:  .html, .htm"
@@ -364,15 +392,16 @@ msgstr ""
 "Teclee las extensions para este tipo MIME.\n"
 "Por ejemplo:  .html, .htm"
 
-#: capplets/mime-type/new-mime-window.c:45
+#: capplets/mime-type/new-mime-window.c:46
 msgid "Extension:"
 msgstr "Extensión:"
 
-#: capplets/mime-type/new-mime-window.c:50
-msgid "Regular Expresions"
+#: capplets/mime-type/new-mime-window.c:51
+#, fuzzy
+msgid "Regular Expressions"
 msgstr "Expresiones regulares"
 
-#: capplets/mime-type/new-mime-window.c:54
+#: capplets/mime-type/new-mime-window.c:55
 msgid ""
 "You can set up two regular expressions here to identify the Mime Type\n"
 "by.  These fields are optional."
@@ -380,54 +409,45 @@ msgstr ""
 "Puede definir dos expresiones regulares para identificar el tipo MIME.\n"
 "Estos campos son opcionales."
 
-#. gtk_container_set_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
-#: capplets/mime-type/new-mime-window.c:64
-msgid "First Regular Expression: "
-msgstr "Primera expresión regular: "
-
-#: capplets/mime-type/new-mime-window.c:75
-msgid "Second Regular Expression: "
-msgstr "Segunda expresión regular: "
-
-#: capplets/mouse-properties/mouse-properties.c:252
+#: capplets/mouse-properties/mouse-properties.c:259
 msgid "Mouse buttons"
 msgstr "Botones del ratón"
 
-#: capplets/mouse-properties/mouse-properties.c:261
+#: capplets/mouse-properties/mouse-properties.c:268
 msgid "Left handed"
 msgstr "Zurdo"
 
-#: capplets/mouse-properties/mouse-properties.c:263
+#: capplets/mouse-properties/mouse-properties.c:270
 msgid "Right handed"
 msgstr "Derecho"
 
 #. Mouse motion
-#: capplets/mouse-properties/mouse-properties.c:289
+#: capplets/mouse-properties/mouse-properties.c:296
 msgid "Mouse motion"
 msgstr "Movimiento del raton"
 
-#: capplets/mouse-properties/mouse-properties.c:299
+#: capplets/mouse-properties/mouse-properties.c:306
 msgid "Acceleration"
 msgstr "Aceleración"
 
-#: capplets/mouse-properties/mouse-properties.c:299
+#: capplets/mouse-properties/mouse-properties.c:306
 msgid "Fast"
 msgstr "Rápido"
 
-#: capplets/mouse-properties/mouse-properties.c:299
+#: capplets/mouse-properties/mouse-properties.c:306
 msgid "Slow"
 msgstr "Lento"
 
 # una mejor traducción ?
-#: capplets/mouse-properties/mouse-properties.c:310
+#: capplets/mouse-properties/mouse-properties.c:317
 msgid "Threshold"
 msgstr "Punto de activación"
 
-#: capplets/mouse-properties/mouse-properties.c:310
+#: capplets/mouse-properties/mouse-properties.c:317
 msgid "Large"
 msgstr "Grande"
 
-#: capplets/mouse-properties/mouse-properties.c:310
+#: capplets/mouse-properties/mouse-properties.c:317
 msgid "Small"
 msgstr "Pequeño"
 
@@ -458,6 +478,7 @@ msgid "Random Settings"
 msgstr "Parámetros al azar"
 
 #: capplets/screensaver-properties/callbacks.c:512
+#, c-format
 msgid "%s Settings..."
 msgstr "Propiedades %s..."
 
@@ -662,6 +683,11 @@ msgstr "Descartada al salir de la sesión, y puede morir."
 msgid "Always started on every login."
 msgstr "Siempre iniciado en cada sesión."
 
+#: capplets/session-properties/gsm-protocol.c:503
+#, fuzzy
+msgid "Remove Program"
+msgstr "Programa"
+
 #: capplets/session-properties/session-properties.c:147
 msgid "Program:"
 msgstr "Programa:"
@@ -752,51 +778,6 @@ msgstr ""
 msgid "Close"
 msgstr "Cerrar"
 
-#: capplets/theme-switcher/gui.c:83
-#, c-format
-msgid ""
-"Error installing theme:\n"
-"'%s'\n"
-"%s"
-msgstr ""
-"Error al instalar el tema:\n"
-"'%s'\n"
-"%s"
-
-#: capplets/theme-switcher/gui.c:114
-msgid "Select a theme to install"
-msgstr "Seleccione un tema a instalar"
-
-#: capplets/theme-switcher/gui.c:191
-msgid "Available Themes"
-msgstr "Temas disponibles"
-
-#: capplets/theme-switcher/gui.c:216
-msgid ""
-"Auto\n"
-"Preview"
-msgstr ""
-"Auto\n"
-"Previsualización"
-
-#: capplets/theme-switcher/gui.c:228
-msgid ""
-"Install new\n"
-"theme..."
-msgstr ""
-"Instalar\n"
-"nuevo tema..."
-
-#. Font selector.
-#.
-#: capplets/theme-switcher/gui.c:234
-msgid "User Font"
-msgstr "Fuente del Usuario"
-
-#: capplets/theme-switcher/gui.c:271
-msgid "Use custom font."
-msgstr "Usar una fuente personalizada."
-
 #: capplets/theme-switcher/demo.c:50
 msgid "One"
 msgstr "Uno"
@@ -866,6 +847,68 @@ msgstr "Botón de radio 2"
 #: capplets/theme-switcher/demo.c:147
 msgid "Radio Button 3"
 msgstr "Botón de radio 3"
+
+#: capplets/theme-switcher/gui.c:83
+#, c-format
+msgid ""
+"Error installing theme:\n"
+"'%s'\n"
+"%s"
+msgstr ""
+"Error al instalar el tema:\n"
+"'%s'\n"
+"%s"
+
+#: capplets/theme-switcher/gui.c:114
+msgid "Select a theme to install"
+msgstr "Seleccione un tema a instalar"
+
+#: capplets/theme-switcher/gui.c:191
+msgid "Available Themes"
+msgstr "Temas disponibles"
+
+#: capplets/theme-switcher/gui.c:216
+msgid ""
+"Auto\n"
+"Preview"
+msgstr ""
+"Auto\n"
+"Previsualización"
+
+#: capplets/theme-switcher/gui.c:228
+msgid ""
+"Install new\n"
+"theme..."
+msgstr ""
+"Instalar\n"
+"nuevo tema..."
+
+#. Font selector.
+#.
+#: capplets/theme-switcher/gui.c:234
+msgid "User Font"
+msgstr "Fuente del Usuario"
+
+#: capplets/theme-switcher/gui.c:271
+msgid "Use custom font."
+msgstr "Usar una fuente personalizada."
+
+#: capplets/theme-switcher/install.c:26
+msgid "Home directory doesn't exist!\n"
+msgstr ""
+
+#: capplets/theme-switcher/install.c:36
+msgid "Theme does not exist"
+msgstr ""
+
+#: capplets/theme-switcher/install.c:68
+#, c-format
+msgid "Command '%s' failed"
+msgstr ""
+
+#: capplets/theme-switcher/install.c:73
+msgid "Unknown file format"
+msgstr ""
 
 #: capplets/ui-properties/ui-properties.c:53
 msgid "Default Gtk setting"
@@ -966,84 +1009,92 @@ msgstr "Barras de íconos desprendibles y desplazables"
 msgid "Can detach and move menubars"
 msgstr "Barras de menúes desprendibles y desplazables"
 
-#: capplets/ui-properties/ui-properties.c:270
+#: capplets/ui-properties/ui-properties.c:269
+msgid "Menus can be torn off"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:279
 msgid "Menubars have relieved border"
 msgstr "Barras de menúes con bordes en relieve"
 
-#: capplets/ui-properties/ui-properties.c:279
+#: capplets/ui-properties/ui-properties.c:288
 msgid "Toolbars have relieved border"
 msgstr "Barras de íconos con bordes en relieve"
 
-#: capplets/ui-properties/ui-properties.c:288
+#: capplets/ui-properties/ui-properties.c:297
 msgid "Toolbar buttons have relieved border"
 msgstr "Botones de la barra de íconos con bordes en relieve"
 
-#: capplets/ui-properties/ui-properties.c:297
+#: capplets/ui-properties/ui-properties.c:306
 msgid "Toolbars have line separators"
 msgstr "Barras de íconos con líneas de separación"
 
-#: capplets/ui-properties/ui-properties.c:306
+#: capplets/ui-properties/ui-properties.c:315
 msgid "Toolbars have text labels"
 msgstr "Barras de íconos con textos"
 
-#: capplets/ui-properties/ui-properties.c:315
+#: capplets/ui-properties/ui-properties.c:324
 msgid "Statusbar is interactive when possible"
 msgstr "Barra de estado interactiva siempre que sea posible"
 
-#: capplets/ui-properties/ui-properties.c:324
+#: capplets/ui-properties/ui-properties.c:333
 msgid "Statusbar progress meter on right"
 msgstr "Barra de estado con barra de progresión a la derecha"
 
-#: capplets/ui-properties/ui-properties.c:335
+#: capplets/ui-properties/ui-properties.c:344
 msgid "Dialog buttons have icons"
 msgstr "Botones de diálogo con íconos"
 
-#: capplets/ui-properties/ui-properties.c:347
+#: capplets/ui-properties/ui-properties.c:356
 msgid "Menu items have icons"
 msgstr "Menúes con íconos"
 
-#: capplets/ui-properties/ui-properties.c:366
+#: capplets/ui-properties/ui-properties.c:375
 msgid "Default MDI mode"
 msgstr "Modo MDI por omisión"
 
-#: capplets/ui-properties/ui-properties.c:371
+#: capplets/ui-properties/ui-properties.c:380
 msgid "MDI notebook tab position"
 msgstr "Posición de la etiqueta del bloc de notas MDI"
 
-#: capplets/url-properties/url-properties.c:69
+#: capplets/url-properties/url-properties.c:48
+msgid "Error initializing the `url-properties' capplet."
+msgstr ""
+
+#: capplets/url-properties/url-properties.c:71
 msgid "Protocol"
 msgstr "Protocolo"
 
-#: capplets/url-properties/url-properties.c:69
+#: capplets/url-properties/url-properties.c:71
 msgid "Command"
 msgstr "Comando"
 
-#: capplets/url-properties/url-properties.c:85
+#: capplets/url-properties/url-properties.c:87
 msgid "handler:"
 msgstr "selector:"
 
 #. set some commonly used handlers
-#: capplets/url-properties/url-properties.c:95
+#: capplets/url-properties/url-properties.c:97
 msgid "Netscape"
 msgstr "Netscape"
 
-#: capplets/url-properties/url-properties.c:100
+#: capplets/url-properties/url-properties.c:102
 msgid "Netscape (new window)"
 msgstr "Netscape (nueva ventana)"
 
-#: capplets/url-properties/url-properties.c:106
+#: capplets/url-properties/url-properties.c:108
 msgid "Help browser"
 msgstr "Visualisador de ayuda"
 
-#: capplets/url-properties/url-properties.c:111
+#: capplets/url-properties/url-properties.c:113
 msgid "Help browser (new window)"
 msgstr "Visualizador de ayuda (nueva ventana)"
 
-#: capplets/url-properties/url-properties.c:123
+#: capplets/url-properties/url-properties.c:125
 msgid "Set"
 msgstr "Definir"
 
-#: capplets/url-properties/url-properties.c:131
+#: capplets/url-properties/url-properties.c:133
 msgid "Remove"
 msgstr "Quitar"
 
@@ -1167,7 +1218,7 @@ msgstr "Probar"
 msgid "Revert"
 msgstr "Revertir"
 
-#: control-center/capplet-manager.c:188 control-center/main.c:30
+#: control-center/capplet-manager.c:188 control-center/main.c:31
 msgid "Help"
 msgstr "Ayuda"
 
@@ -1221,21 +1272,21 @@ msgstr "comando capplet a lanzar."
 msgid "CAPPLET"
 msgstr "CAPPLET"
 
-#: control-center/main.c:30
+#: control-center/main.c:31
 msgid "Help with the GNOME control-center."
 msgstr "Ayuda con centro de control de GNOME."
 
 #. we create the widgets
-#: control-center/main.c:58
+#: control-center/main.c:59
 msgid "Warning:"
 msgstr "Advertencia:"
 
-#: control-center/main.c:58
+#: control-center/main.c:59
 msgid "Discard all changes"
 msgstr "Descartar todos los cambios"
 
 #. ...labels, etc
-#: control-center/main.c:67
+#: control-center/main.c:68
 msgid ""
 "The following modules have had changes made, but not committed.  If you "
 "would like to edit them, please double click on the appropriate entry."
@@ -1244,7 +1295,12 @@ msgstr ""
 "editarlos por favor haga un doble-clic en la entrada apropriada."
 
 #. create the app
-#: control-center/main.c:162
+#: control-center/main.c:184
 msgid "Control Center"
 msgstr "Centro de Control"
 
+#~ msgid "First Regular Expresion: "
+#~ msgstr "Primera expresión regular: "
+
+#~ msgid "Second Regular Expresion: "
+#~ msgstr "Segunda expresión regular: "
