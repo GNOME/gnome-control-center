@@ -18,7 +18,7 @@ static void popup_error_message ()
 				   GTK_BUTTONS_OK, _("Unable to start the settings manager 'gnome2-settings-daemon'.\n"
 				   "Without the GNOME settings manager running, some preferences may not take effect. This could"
 				   "indicate a problem with Bonobo, or a non-GNOME (e.g. KDE) settings manager may already"
-				   "be active and conflicting with the GNOME settings manager.");
+				   "be active and conflicting with the GNOME settings manager."));
 
   gtk_widget_show (dialog);
   gtk_widget_destroy (dialog);
