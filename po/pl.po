@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-09 12:55+0100\n"
+"POT-Creation-Date: 2004-01-12 15:17+0100\n"
 "PO-Revision-Date: 2003-07-12 01:00+0100\n"
 "Last-Translator: Gnome PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
@@ -387,7 +387,7 @@ msgstr "_Bez obrazu"
 #: capplets/background/background-properties-capplet.c:559
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:730
-#: capplets/keyboard/gnome-keyboard-properties.c:222
+#: capplets/keyboard/gnome-keyboard-properties.c:224
 #: capplets/mouse/gnome-mouse-properties.c:812
 #: capplets/sound/sound-properties-capplet.c:212
 msgid "Retrieve and store legacy settings"
@@ -447,12 +447,12 @@ msgid "You can drag image files into the window to set the background picture."
 msgstr "Aby ustawić obraz tła, przeciągnij plik z obrazem do okna."
 
 #: capplets/background/background.desktop.in.h:1
-msgid "Background"
-msgstr "Tło"
+msgid "Desktop Wallpaper"
+msgstr "Tapeta pulpitu"
 
 #: capplets/background/background.desktop.in.h:2
-msgid "Customize your desktop background"
-msgstr "Ustawienia wyglądu tła biurka"
+msgid "Desktop Wallpaper Preferences"
+msgstr "Ustawienia tapety pulpitu"
 
 #: capplets/common/activate-settings-daemon.c:18
 msgid ""
@@ -1715,12 +1715,12 @@ msgstr "Powiązania skrótów klawiszowych z poleceniami"
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "Przy uruchamianiu apletu klawiatury wystąpił błąd: %s"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:199
+#: capplets/keyboard/gnome-keyboard-properties.c:201
 msgid "_Accessibility"
 msgstr "_Dostępność"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:218
 #: capplets/keyboard/gnome-keyboard-properties.c:220
+#: capplets/keyboard/gnome-keyboard-properties.c:222
 #: capplets/sound/sound-properties-capplet.c:208
 #: capplets/sound/sound-properties-capplet.c:210
 msgid ""
@@ -1728,7 +1728,7 @@ msgid ""
 msgstr ""
 "Wprowadza ustawienia i kończy (tylko dla zgodności, teraz obsługuje to demon)"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:224
+#: capplets/keyboard/gnome-keyboard-properties.c:226
 msgid "Start the page with the typing break settings showing"
 msgstr "Otwiera stronę z właściwościami przerwy w pisaniu na klawiaturze"
 
@@ -1829,12 +1829,12 @@ msgid "_Delay:"
 msgstr "_Opóźnienie:"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:28
-msgid "_Ignore system configuration"
-msgstr "_Ignorowanie konfiguracji systemowej"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:29
 msgid "_Layouts:"
 msgstr "U_kłady:"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:29
+msgid "_Reset to defaults"
+msgstr "P_rzywrócenie wartości domyślnych"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:30
 msgid "_Speed:"
@@ -2789,7 +2789,7 @@ msgstr ""
 "Wystąpił błąd przy próbie uruchomienia programu (%s)\n"
 "który jest powiązany z kluczem (%s)"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:60
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:61
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2808,7 +2808,7 @@ msgstr ""
 "%d\n"
 "%s"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:66
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:67
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -3047,20 +3047,29 @@ msgstr ""
 "zniekształcenia liter."
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:1
+msgid ""
+"Very soon, XKB settings in gconf will be overridden (from the system "
+"configuration)"
+msgstr ""
+"Niedługo, ustawienia XKB w gconf będą nadpisane (z konfiguracji systemu)"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
 msgid "XKB keyboard layout"
 msgstr "Układ klawiatury XKB"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
 msgid "XKB keyboard model"
 msgstr "Model klawiatury XKB"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
 msgid "XKB options"
 msgstr "Opcje XKB"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
-msgid "XKB settings should be overridden"
-msgstr "Ustawienia XKB powinny być nadpisane"
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
+msgid "XKB settings in gconf will be overridden from the system ASAP"
+msgstr ""
+"Ustawienia XKB w gconf będą nadpisane przez system najszybciej jak to tylko "
+"możliwe"
 
 #: typing-break/drw-break-window.c:189
 msgid "Postpone break"
