@@ -21,7 +21,7 @@ capplets = \
 ##
 
 pixmaps_DATA = $(group_icon)
-pixmapsdir = $(GNOMECC_ICONS_DIR)
+pixmapsdir = $(GNOMECC_DATA_DIR)/icons
 
 
 ##
