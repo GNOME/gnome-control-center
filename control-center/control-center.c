@@ -578,9 +578,10 @@ set_x (ControlCenter *cc)
 static void
 select_entry (ControlCenter *cc, ControlCenterEntry *entry)
 {
-	EntryInfo *ei = entry->user_data;
+	EntryInfo *ei = NULL;
 	GtkAdjustment *pos;
 	double affine[6];
+
 	if (cc->selected == entry)
 		return;
 
@@ -594,6 +595,9 @@ select_entry (ControlCenter *cc, ControlCenterEntry *entry)
 		((EntryInfo *)cc->selected->user_data)->selected = TRUE;
 	setup_entry (cc->selected);
 
+	if (entry == NULL)
+		return;
+	ei = entry->user_data;
 	gnome_canvas_item_i2c_affine (GNOME_CANVAS_ITEM (ei->group), affine);
 	pos = gtk_layout_get_vadjustment (GTK_LAYOUT (ei->cover->canvas));
 
