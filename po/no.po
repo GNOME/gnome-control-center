@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.5.8\n"
-"POT-Creation-Date: 2002-10-05 23:34+0200\n"
-"PO-Revision-Date: 2002-10-05 23:43+0200\n"
+"POT-Creation-Date: 2002-10-21 12:17+0200\n"
+"PO-Revision-Date: 2002-10-21 12:18+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -43,7 +43,9 @@ msgstr "Brukervalg for tilgjengelighet for tastatur"
 msgid ""
 "This system does not seem to have the XKB extension.  The keyboard "
 "accessibility features will not operate with it."
-msgstr "Dette systemet ser ikke ut til å ha XKB-utvidelsen. Funksjoner for tastaturtilgjengelighet vil ikke virke."
+msgstr ""
+"Dette systemet ser ikke ut til å ha XKB-utvidelsen. Funksjoner for "
+"tastaturtilgjengelighet vil ikke virke."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
 msgid "Beep when an LED is turned on and two beeps when one is turned off."
@@ -82,6 +84,7 @@ msgid "Enable _Sticky Keys"
 msgstr "Aktiver _klebrige taster"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
+#: capplets/sound/sound-properties.glade.h:2
 msgid "General"
 msgstr "Generelt"
 
@@ -932,7 +935,9 @@ msgstr "Filtyper og programmer"
 
 #: capplets/file-types/file-types.desktop.in.h:2
 msgid "Specify which programs are used to open or view each type of file"
-msgstr "Spesifiser hvilke programmer som skal brukes for å åpne eller vise hver filtype"
+msgstr ""
+"Spesifiser hvilke programmer som skal brukes for å åpne eller vise hver "
+"filtype"
 
 #: capplets/file-types/mime-category-edit-dialog.c:138
 msgid "Edit file category"
@@ -1169,9 +1174,8 @@ msgid "Set the font for the icons on the desktop"
 msgstr "Sett skrift for ikoner på skrivebordet"
 
 #: capplets/font/font-properties.glade.h:13
-#, fuzzy
 msgid "Set the monospace font for terminals and similar applications"
-msgstr "Sett skrift for terminaler og lignende applikasjoner"
+msgstr "Sett skrift med lik bostavstørrelse for terminaler og lignende applikasjoner"
 
 #: capplets/font/font-properties.glade.h:14
 msgid "Smoothing:"
@@ -1186,7 +1190,6 @@ msgid "Sub_pixel smoothing (LCDs)"
 msgstr "Utjevning under pikselnivå (LCDer)"
 
 #: capplets/font/font-properties.glade.h:17
-#, fuzzy
 msgid "Subpixel order:"
 msgstr "Underpikselrekkefølge:"
 
@@ -1689,17 +1692,13 @@ msgstr "Brukervalg for lyd"
 msgid "E_nable sound server startup"
 msgstr "Slå på oppstart av lydtje_ner"
 
-#: capplets/sound/sound-properties.glade.h:2
-msgid "Sound Preferences"
-msgstr "Brukervalg for lyd"
-
 #: capplets/sound/sound-properties.glade.h:3
-msgid "Sound _Events"
-msgstr "Lydh_endelser"
+msgid "Sound Events"
+msgstr "Lydhendelser"
 
 #: capplets/sound/sound-properties.glade.h:4
-msgid "_General"
-msgstr "_Generelt"
+msgid "Sound Preferences"
+msgstr "Brukervalg for lyd"
 
 #: capplets/sound/sound-properties.glade.h:5
 msgid "_Sounds for events"
@@ -2031,7 +2030,7 @@ msgstr "Konfigurasjonsverktøy for GNOME"
 msgid "Use shell even if nautilus is running."
 msgstr "Bruk skall selv om nautilus kjører."
 
-#: gnome-settings-daemon/factory.c:29
+#: gnome-settings-daemon/factory.c:32
 msgid "Could not initialize Bonobo"
 msgstr "Kunne ikke initiere Bonobo"
 
@@ -2044,32 +2043,32 @@ msgstr ""
 "Kan ikke opprette katalog «%s».\n"
 "Dette kreves for å tillate endring av markører."
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:106
+#: gnome-settings-daemon/gnome-settings-keybindings.c:146
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr "Handling for tastaturbinding (%s) er definert flere ganger\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:119
+#: gnome-settings-daemon/gnome-settings-keybindings.c:159
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr "Tastaturbinding (%s) er definert flere ganger\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:125
+#: gnome-settings-daemon/gnome-settings-keybindings.c:165
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr "Tastaturbinding (%s) er ikke komplett\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:153
+#: gnome-settings-daemon/gnome-settings-keybindings.c:193
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr "Tastaturbinding (%s) er ugyldig\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:241
+#: gnome-settings-daemon/gnome-settings-keybindings.c:281
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr "Tastaturbinding (%s) er allerede i bruk\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:292
+#: gnome-settings-daemon/gnome-settings-keybindings.c:357
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -2235,6 +2234,9 @@ msgstr ""
 #: libwindow-settings/gnome-wm-manager.c:467
 msgid "OK"
 msgstr "OK"
+
+#~ msgid "_General"
+#~ msgstr "_Generelt"
 
 #~ msgid "_Category"
 #~ msgstr "_Kategori"
