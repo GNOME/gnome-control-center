@@ -1,7 +1,7 @@
-Applicationsdir = $(datadir)/control-center/Desktop
+Applicationsdir = $(datadir)/control-center/capplets/Advanced/
 Applications_DATA = behavior.desktop
 
-pApplicationsdir = $(datadir)/gnome/apps/Settings/Desktop
+pApplicationsdir = $(datadir)/gnome/apps/Settings/Advanced
 pApplications_DATA = behavior.desktop
 
 Gladedir = $(datadir)/control-center-data

@@ -18,8 +18,8 @@ EXTRA_DIST = wm-properties.desktop
 
 SUBDIRS=wm-desktops
 
-sysdir = $(datadir)/control-center/Desktop
+sysdir = $(datadir)/control-center/capplets/Advanced/
 sys_DATA = wm-properties.desktop
 
-psysdir = $(datadir)/gnome/apps/Settings/Desktop
+psysdir = $(datadir)/gnome/apps/Settings/Advanced
 psys_DATA = wm-properties.desktop

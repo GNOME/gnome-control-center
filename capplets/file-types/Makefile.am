@@ -34,11 +34,11 @@ file_types_capplet_LDADD =						\
 			$(NULL)
 
 
-sysdir = $(datadir)/control-center/Documents
+sysdir = $(datadir)/control-center/capplets/Advanced/
 sys_in_files = file-types-capplet.desktop.in 
 sys_DATA = $(sys_in_files:.desktop.in=.desktop)
 
-settingsdir = $(datadir)/gnome/apps/Settings
+settingsdir = $(datadir)/gnome/apps/Settings/Advanced
 settings_DATA = $(sys_DATA)
 
 desktop_in_file = file-types-capplet.desktop.in

@@ -22,8 +22,8 @@ theme_selector_capplet_LDADD = @CAPPLET_LIBS@
 EXTRA_DIST = \
 	theme-selector.desktop
 
-sysdir = $(datadir)/control-center/Desktop
+sysdir = $(datadir)/control-center/capplets/Advanced
 sys_DATA = theme-selector.desktop
 
-psysdir = $(datadir)/gnome/apps/Settings/Desktop
+psysdir = $(datadir)/gnome/apps/Settings/Advanced
 psys_DATA = theme-selector.desktop
