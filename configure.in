@@ -1,7 +1,7 @@
 AC_INIT(desktop-properties)
 
 AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE(gnome-core, 0.30)
+AM_INIT_AUTOMAKE(control-center, 0.5)
 
 AM_MAINTAINER_MODE
 
@@ -26,7 +26,6 @@ AC_PROG_YACC
 GNOME_COMPILE_WARNINGS
 
 GNOME_X_CHECKS
-GNOME_GHTTP_CHECK
 
 dnl utility conditional
 AM_CONDITIONAL(FALSE, test "x" = "y")
@@ -48,7 +47,7 @@ apps, like panel, will not run properly.))
 ])])
 AC_SUBST(DL_LIB)
 
-dnl properties-keyboard
+dnl keyboard-properties-capplet
 AC_CHECK_HEADERS(X11/extensions/xf86misc.h, XF86MISC_LIBS="-lXxf86misc")
 AC_SUBST(XF86MISC_LIBS)
 
@@ -65,134 +64,16 @@ ORB_CFLAGS="$ORBIT_CFLAGS"
 AC_SUBST(ORB_LIBS)
 AC_SUBST(ORB_CFLAGS)
 
-dnl gnome-session
-dnl $GNOME_HAVE_SM comes from GNOME_X_CHECKS
-AM_CONDITIONAL(SESSION, test "$GNOME_HAVE_SM" = true)
-AC_ARG_WITH(window-manager,
-[  --with-window-manager=NAME
-			   Specify default window manager],[
-    WINDOW_MANAGER="$with_window_manager"], [
-    dnl icewm is the default because it supports session management
-    dnl and other Gnome requirements.
-    WINDOW_MANAGER=icewm])
-AC_SUBST(WINDOW_MANAGER)
-
-dnl Check for libgtop
-GNOME_LIBGTOP_HOOK(,applets_libgtop=yes)
-
-if test x$applets_libgtop != xyes; then
-  AC_MSG_WARN([*** \`cpuload' applet will not be built ***])
-  AC_MSG_WARN([*** \`cpumemusage' applet will not be built ***])
-  AC_MSG_WARN([*** \`diskusage' applet will not be built ***])
-  AC_MSG_WARN([*** \`multiload' applet will not be built ***])
-  AC_MSG_WARN([*** \`netload' applet will not be built ***])
-fi
-
-dnl Check for ghttp library
-AM_CONDITIONAL(HAVE_LIBGHTTP, test -n "$GHTTP_LIB")
-AC_SUBST(GHTTP_LIB)
-if test -z "$GHTTP_LIB"; then
-  AC_MSG_WARN([*** \`bussign' applet will not be built ***])
-fi
-
-dnl panel/cdplayer
-AC_CANONICAL_HOST
-case "$host" in
-*linux*) CDROM_HOST=linux;;
-*solaris*) CDROM_HOST=solaris;;
-esac
-AM_CONDITIONAL(APPLET_CDPLAYER, test -n "$CDROM_HOST")
-AC_SUBST(CDROM_HOST)
-if test -z "$CDROM_HOST"; then
-  AC_MSG_WARN([*** \`cdplayer' applet will not be built ***])
-fi
-
-dnl panel/mixer
-P_MIXER=
-AC_CHECK_HEADERS(linux/soundcard.h,[P_MIXER=mixer],[
-  AC_CHECK_HEADERS(machine/soundcard.h, [P_MIXER=mixer])])
-AM_CONDITIONAL(APPLET_MIXER, test "$P_MIXER" = "mixer")
-if test "$P_MIXER" != "mixer"; then
-  AC_MSG_WARN([*** \`mixer' applet will not be built ***])
-fi
-
-dnl panel/modemlights
-P_MODEMLIGHTS=
-AC_CHECK_HEADERS(net/ppp_defs.h,[P_MODEMLIGHTS=modemlights])
-AM_CONDITIONAL(APPLET_MODEMLIGHTS, test "$P_MODEMLIGHTS" = "modemlights")
-if test "$P_MODEMLIGHTS" != "modemlights"; then
-  AC_MSG_WARN([*** \`modemlights' applet will not be built ***])
-fi
-
-if test "$WINDOW_MANAGER" == "Xfvwm2"
-then
-   FVWM_PAGER=yes
-   AM_CONDITIONAL(APPLET_FVWM_PAGER, test ! -z "$FVWM_PAGER")
-fi
-
 dnl esd-manager
 have_libesd=no
 AM_PATH_ESD(,have_libesd=yes,
 [AC_MSG_WARN([*** \`esd-manager' will not be built ***])])
 AM_CONDITIONAL(HAVE_LIBESD, test yes = $have_libesd)
 
-dnl help-browser
-dnl I found `inet_aton' in -lresolv on solaris
-oLIBS="$LIBS"
-RES_LIBS=
-# the following two are covered by X11 too.  If inet_aton is found in
-# plain libc, -lsocket or -lnsl, RES_LIBS will be empty.
-AC_CHECK_FUNC(connect,,[AC_CHECK_LIB(socket,connect)])
-AC_CHECK_FUNC(gethostbyname,,[AC_CHECK_LIB(nsl,gethostbyname)])
-AC_CHECK_FUNC(inet_aton,,[AC_CHECK_LIB(resolv,inet_aton,RES_LIBS="-lresolv")])
-AC_SUBST(RES_LIBS)
-LIBS="$oLIBS"
-
-dnl AC_CONFIG_SUBDIRS(gemvt)
-
 AC_OUTPUT([
 Makefile
 po/Makefile.in
 macros/Makefile
-panel/Makefile
-applets/Makefile
-applets/applet-dirs/Makefile
-applets/asclock/Makefile
-applets/gen_util/Makefile
-applets/batmon/Makefile
-applets/bussign/Makefile
-applets/cdplayer/Makefile
-applets/mixer/Makefile
-applets/modemlights/Makefile
-applets/multiload/Makefile
-applets/cpuload/Makefile
-applets/netload/Makefile
-applets/cpumemusage/Makefile
-applets/fish/Makefile
-applets/gkb/Makefile
-applets/diskusage/Makefile
-applets/icewm-pager/Makefile
-applets/gnome-pager/Makefile
-applets/esd-manager/Makefile
-applets/drivemount/Makefile
-applets/clockmail/Makefile
-applets/webcontrol/Makefile
-applets/dialer/Makefile
-applets/fifteen/Makefile
-applets/battery/Makefile
-applets/charpick/Makefile
-applets/winlist/Makefile
-applets/fvwm-pager/Makefile
-applets/slashapp/Makefile
-applets/gticker/Makefile
-core-docs/Makefile
-desktop-links/Makefile
-desktop-properties/Makefile
-gnome-terminal/Makefile
-help-browser/Makefile
-help-browser/gnome-man2html/Makefile
-help-browser/gnome-info2html/Makefile
-gmenu/Makefile
 control-center/Makefile
 capplets/Makefile
 capplets/mouse-properties/Makefile
@@ -208,7 +89,5 @@ capplets/theme-switcher/Makefile
 capplets/ui-properties/Makefile
 capplets/url-properties/Makefile
 idl/Makefile
-pixmaps/Makefile
-gsm/Makefile
-smproxy/Makefile
 intl/Makefile])
+
