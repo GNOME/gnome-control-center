@@ -8,15 +8,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2002-09-07 20:47+0200\n"
-"PO-Revision-Date: 2002-09-07 20:50+0200\n"
+"POT-Creation-Date: 2002-09-12 13:23+0200\n"
+"PO-Revision-Date: 2002-09-12 13:23+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:225
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:229
 #: capplets/keyboard/gnome-keyboard-properties.c:159
 #, c-format
 msgid "There was an error launching the keyboard capplet : %s"
@@ -24,12 +24,12 @@ msgstr ""
 "Ett fel inträffade vid visande av kontrollpanelsprogrammet för tangentbord: %"
 "s"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:309
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:317
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "Kan inte importera AccessX-inställningar från filen \"%s\""
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:421
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:433
 msgid "Select CDE AccessX file"
 msgstr "Välj CDE AccessX-fil"
 
@@ -44,12 +44,12 @@ msgid "Set your keyboard accessibility preferences"
 msgstr "Ställ in dina inställningar för tangentbordshjälpmedel"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
-msgid "B_eep when modifier is pressed"
-msgstr "_Pip då modifieraren trycks ned"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
 msgid "Beep when an LED is turned on and two beeps when one is turned off."
 msgstr "Pip när en lysdiod sätts på och pip två gånger när en stängs av."
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
+msgid "Beep when enabling/disabling _keyboard accessibility features"
+msgstr "Pip vid aktivering/inaktivering av _tangentbordshjälpmedel"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
 msgid "Beep when key is re_jected"
@@ -60,30 +60,34 @@ msgid "Beep when:"
 msgstr "Pip då:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
+msgid "E_nable Toggle Keys"
+msgstr "Använd _växlingsknappar"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
+msgid "Enable Bo_unce Keys"
+msgstr "Använd st_udsande tangenter"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
 msgid "Enable Slo_w Keys"
 msgstr "Använd l_ångsamma tangenter"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
-msgid "Enable _Bounce Keys"
-msgstr "Använd s_tudsande tangenter"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
 msgid "Enable _Mouse Keys"
 msgstr "Använd _mustangenter"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
 msgid "Enable _Sticky Keys"
 msgstr "Använd _klistriga tangenter"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
-msgid "Enable _Toggle Keys"
-msgstr "Använd _växlingsknappar"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
 msgid "General"
 msgstr "Allmänt"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:11
+msgid "I_gnore keypresses within  :"
+msgstr "I_gnorera tangenttryckningar inom:"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:12
 msgid ""
 "Ignore all subsequent presses of the SAME key if they happen within a user "
 "selectable period of time."
@@ -91,15 +95,15 @@ msgstr ""
 "Ignorera alla efterföljande nedtryckningar av SAMMA tangent om de sker inom "
 "en användardefinierbar tidsperiod."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:12
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:13
 msgid "Keyboard Accessibility Configuration (AccessX)"
 msgstr "Konfiguration av tangentbordshjälpmedel (AccessX)"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:13
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
 msgid "Ma_ximum pointer speed :"
 msgstr "Ma_ximal pekarhastighet:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
 msgid ""
 "Only accept keys after they have been pressed and held for a user adjustable "
 "amount of time."
@@ -108,7 +112,7 @@ msgstr ""
 "en användardefinierad tid."
 
 # SUN NEW TRANSLATION
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:16
 msgid ""
 "Perform multiple simultaneous key press operations by pressing modifier keys "
 "in sequence."
@@ -116,46 +120,42 @@ msgstr ""
 "Tryck ned flera modifierare i följd i stället för att trycka ned flera "
 "tangenter samtidigt."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:16
-msgid "Repeat Key Preferences"
-msgstr "Inställningar för tangentbordsupprepning"
-
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:17
+msgid "Repeat Key Pre_ferences"
+msgstr "Inst_ällningar för tangentbordsupprepning"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:18
 msgid "Start mo_ving this long after keypress :"
 msgstr "Börja flytta så här lång tid efter tangentnedtryckning:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:18
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:19
 msgid "Testing Area"
 msgstr "Testområde"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:19
-msgid "Time to _accelerate to max speed :"
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:20
+msgid "Time to acce_lerate to max speed :"
 msgstr "Tid att a_ccelerera till maximal hastighet:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:20
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:21
 msgid "Toggle and Repeat Keys"
 msgstr "Växlings- och upprepningstangenter"
 
 # SUN NEW TRANSLATION
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:21
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:22
 msgid "Turn the numeric keypad into a mouse control pad."
 msgstr "Får det numeriska tangentbordet att fungera som en musstyrningsenhet."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:22
-msgid "_Beep when enabling/disabling keyboard accessibility features"
-msgstr "_Pip vid aktivering/inaktivering av tangentbordshjälpmedel"
-
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:23
+msgid "_Beep when modifier is pressed"
+msgstr "_Pip då modifierare trycks ned"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
 msgid "_Disable if unused for "
 msgstr "I_naktivera om oanvänd i "
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
 msgid "_Enable keyboard accessibility"
 msgstr "_Använd tangentbordshjälpmedel"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
-msgid "_Ignore keypresses within  :"
-msgstr "_Ignorera tangenttryckningar inom:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
 msgid "_Import CDE AccessX file"
@@ -848,7 +848,7 @@ msgid "Default action"
 msgstr "Standardåtgärd"
 
 #: capplets/file-types/file-types-properties.glade.h:7
-#: capplets/file-types/mime-edit-dialog.c:209
+#: capplets/file-types/mime-edit-dialog.c:208
 msgid "Edit file type"
 msgstr "Redigera filtyp"
 
@@ -929,7 +929,7 @@ msgid "Edit file category"
 msgstr "Redigera filkategori"
 
 #: capplets/file-types/mime-category-edit-dialog.c:172
-#: capplets/file-types/mime-edit-dialog.c:256
+#: capplets/file-types/mime-edit-dialog.c:255
 #: capplets/file-types/service-edit-dialog.c:170
 #: capplets/file-types/service-edit-dialog.c:171
 msgid "Model"
@@ -948,38 +948,38 @@ msgid "Structure containing information on the MIME category"
 msgstr "Struktur som innehåller information om MIME-kategorin"
 
 #: capplets/file-types/mime-category-edit-dialog.c:344
-#: capplets/file-types/mime-edit-dialog.c:490
-#: capplets/file-types/mime-edit-dialog.c:594
+#: capplets/file-types/mime-edit-dialog.c:488
+#: capplets/file-types/mime-edit-dialog.c:592
 #: capplets/file-types/service-edit-dialog.c:358
 #: capplets/file-types/service-edit-dialog.c:407
 msgid "Custom"
 msgstr "Anpassad"
 
-#: capplets/file-types/mime-edit-dialog.c:206
+#: capplets/file-types/mime-edit-dialog.c:205
 msgid "Extension"
 msgstr "Tillägg"
 
-#: capplets/file-types/mime-edit-dialog.c:257
+#: capplets/file-types/mime-edit-dialog.c:256
 msgid "Underlying model to notify when Ok is clicked"
 msgstr "Underliggande modell att notifiera då Ok klickas"
 
-#: capplets/file-types/mime-edit-dialog.c:264
+#: capplets/file-types/mime-edit-dialog.c:263
 msgid "MIME type information"
 msgstr "Information om MIME-typ"
 
-#: capplets/file-types/mime-edit-dialog.c:265
+#: capplets/file-types/mime-edit-dialog.c:264
 msgid "Structure with data on the MIME type"
 msgstr "Struktur med data på MIME-typ"
 
-#: capplets/file-types/mime-edit-dialog.c:271
+#: capplets/file-types/mime-edit-dialog.c:270
 msgid "Is add dialog"
 msgstr "Är tilläggningsdialog"
 
-#: capplets/file-types/mime-edit-dialog.c:272
+#: capplets/file-types/mime-edit-dialog.c:271
 msgid "True if this dialog is for adding a MIME type"
 msgstr "Sant om denna dialog är till för tillägg av en MIME-typ"
 
-#: capplets/file-types/mime-edit-dialog.c:321
+#: capplets/file-types/mime-edit-dialog.c:320
 msgid "Add File Type"
 msgstr "Lägg till filtyp"
 
@@ -988,17 +988,17 @@ msgstr "Lägg till filtyp"
 # Sun vill ha "_Övrigt" här
 # Jag vill ha "Diverse"
 #
-#: capplets/file-types/mime-edit-dialog.c:435
+#: capplets/file-types/mime-edit-dialog.c:434
 #: capplets/file-types/mime-type-info.c:673
 msgid "Misc"
 msgstr "Diverse"
 
-#: capplets/file-types/mime-edit-dialog.c:485
-#: capplets/file-types/mime-edit-dialog.c:544
+#: capplets/file-types/mime-edit-dialog.c:483
+#: capplets/file-types/mime-edit-dialog.c:542
 msgid "None"
 msgstr "Ingen"
 
-#: capplets/file-types/mime-edit-dialog.c:854
+#: capplets/file-types/mime-edit-dialog.c:852
 msgid ""
 "Please enter a valid MIME type.  It should be of the form class/type and may "
 "not contain any spaces."
@@ -1006,15 +1006,15 @@ msgstr ""
 "Ange en giltig MIME-typ. Den bör vara på formen klass/typ och får inte "
 "innehålla några blanksteg."
 
-#: capplets/file-types/mime-edit-dialog.c:861
+#: capplets/file-types/mime-edit-dialog.c:859
 msgid "A MIME type with that name already exists, overwrite ?."
 msgstr "En MIME-typ med det namnet finns redan, skriva över?"
 
-#: capplets/file-types/mime-edit-dialog.c:926
+#: capplets/file-types/mime-edit-dialog.c:924
 msgid "Category"
 msgstr "Kategori"
 
-#: capplets/file-types/mime-edit-dialog.c:931
+#: capplets/file-types/mime-edit-dialog.c:929
 msgid "Choose a file category"
 msgstr "Välj en filkategori"
 
@@ -1538,17 +1538,20 @@ msgid "Set your mouse preferences"
 msgstr "Ställ in dina musinställningar"
 
 #: capplets/network/gnome-network-preferences.desktop.in.h:1
-msgid "Network Proxy"
+msgid "Network proxy"
 msgstr "Nätverksproxy"
 
 #: capplets/network/gnome-network-preferences.desktop.in.h:2
-#: capplets/network/gnome-network-preferences.glade.h:3
-msgid "Network Proxy Preferences"
+msgid "Network proxy preferences"
 msgstr "Inställningar för nätverksproxy"
 
 #: capplets/network/gnome-network-preferences.glade.h:2
 msgid "Network Preferences"
 msgstr "Nätverksinställningar"
+
+#: capplets/network/gnome-network-preferences.glade.h:3
+msgid "Network Proxy Preferences"
+msgstr "Inställningar för nätverksproxy"
 
 #: capplets/network/gnome-network-preferences.glade.h:4
 msgid "P_ort:"
@@ -1725,76 +1728,77 @@ msgid "C_ut"
 msgstr "Klipp _ut"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:4
-msgid "Edit Menu"
-msgstr "Redigerameny"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:5
 msgid "Icons Only"
 msgstr "Endast ikoner"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:6
+#: capplets/ui-properties/gnome-ui-properties.glade.h:5
 msgid "Menu and Toolbar Preferences"
 msgstr "Meny- och verktygsradsinställningar"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:7
+#: capplets/ui-properties/gnome-ui-properties.glade.h:6
 msgid "Menus"
 msgstr "Menyer"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:8
+#: capplets/ui-properties/gnome-ui-properties.glade.h:7
 msgid "New File"
 msgstr "Ny fil"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:9
+#: capplets/ui-properties/gnome-ui-properties.glade.h:8
 msgid "Open File"
 msgstr "Öppna fil"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:10
-msgid "Priority Text Beside Icons"
-msgstr "Prioritetstext bredvid ikoner"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:11
+#: capplets/ui-properties/gnome-ui-properties.glade.h:9
 msgid "Sample menubar:"
 msgstr "Exempelmenyrad:"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:12
+#: capplets/ui-properties/gnome-ui-properties.glade.h:10
 msgid "Sample toolbar:"
 msgstr "Exempelverktygsrad:"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:13
+#: capplets/ui-properties/gnome-ui-properties.glade.h:11
 msgid "Save File"
 msgstr "Spara fil"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:14
+#: capplets/ui-properties/gnome-ui-properties.glade.h:12
 msgid "Select the toolbar style."
 msgstr "Välj stilen på verktygsrader."
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:15
+#: capplets/ui-properties/gnome-ui-properties.glade.h:13
 msgid "Text Below Icons"
 msgstr "Text under ikoner"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:16
+#: capplets/ui-properties/gnome-ui-properties.glade.h:14
+msgid "Text Beside Icons"
+msgstr "Text bredvid ikoner"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:15
 msgid "Text Only"
 msgstr "Endast text"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:17
+#: capplets/ui-properties/gnome-ui-properties.glade.h:16
 msgid "Toolbar"
 msgstr "Verktygsrad"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:18
+#: capplets/ui-properties/gnome-ui-properties.glade.h:17
 msgid "Toolbars can be _detached and moved around"
 msgstr "Verktygsrader kan _tas loss och flyttas runt"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:19
+#: capplets/ui-properties/gnome-ui-properties.glade.h:18
 msgid "_Button Labels: "
 msgstr "_Knappetiketter: "
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:20
+#: capplets/ui-properties/gnome-ui-properties.glade.h:19
 msgid "_Copy"
 msgstr "_Kopiera"
 
+#: capplets/ui-properties/gnome-ui-properties.glade.h:20
+msgid "_Edit"
+msgstr "_Redigera"
+
 #: capplets/ui-properties/gnome-ui-properties.glade.h:21
-msgid "_Menu"
-msgstr "_Meny"
+#: control-center/gnomecc-ui.xml.h:5
+msgid "_File"
+msgstr "_Arkiv"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:22
 msgid "_New"
@@ -1913,10 +1917,6 @@ msgstr "_Om..."
 #: control-center/gnomecc-ui.xml.h:4
 msgid "_Contents..."
 msgstr "_Innehåll..."
-
-#: control-center/gnomecc-ui.xml.h:5
-msgid "_File"
-msgstr "_Arkiv"
 
 #: control-center/gnomecc-ui.xml.h:6
 msgid "_Help"
@@ -2065,16 +2065,16 @@ msgstr "Fil att spela"
 msgid "_Sounds"
 msgstr "_Ljud"
 
-#: libsounds/sound-view.c:251
+#: libsounds/sound-view.c:252
 msgid "_Play"
 msgstr "_Spela"
 
-#: libsounds/sound-view.c:257
+#: libsounds/sound-view.c:258
 msgid "Select sound file"
 msgstr "Välj en ljudfil"
 
 # SUN NEW TRANSLATION
-#: libwindow-settings/gnome-wm-manager.c:168
+#: libwindow-settings/gnome-wm-manager.c:171
 #, c-format
 msgid ""
 "Starting %s\n"
@@ -2084,7 +2084,7 @@ msgstr ""
 "(%d sekunder kvar innan åtgärden når tidsgränsen)"
 
 # SUN NEW TRANSLATION
-#: libwindow-settings/gnome-wm-manager.c:322
+#: libwindow-settings/gnome-wm-manager.c:325
 msgid ""
 "wm-properties-capplet: Unable to initialize window manager.\n"
 "\tAnother window manager is already running and could not be killed\n"
@@ -2097,7 +2097,7 @@ msgstr ""
 # Sun vill använda ''
 # Jag vill använda \"\" som i alla andra GNOME-översättningar
 #
-#: libwindow-settings/gnome-wm-manager.c:326
+#: libwindow-settings/gnome-wm-manager.c:329
 #, c-format
 msgid ""
 "wm-properties-capplet: Unable to initialize window manager.\n"
@@ -2106,7 +2106,7 @@ msgstr ""
 "wm-egenskaper-capplet: Det går inte att initiera fönsterhanteraren.\n"
 "\t\"%s\" startade inte\n"
 
-#: libwindow-settings/gnome-wm-manager.c:375
+#: libwindow-settings/gnome-wm-manager.c:378
 msgid "Previous window manager did not die\n"
 msgstr "Föregående fönsterhanterare dog inte\n"
 
@@ -2118,7 +2118,7 @@ msgstr "Föregående fönsterhanterare dog inte\n"
 # Sun vill ha "fönsterhanterare'%s'\n"
 # Jag vill ha "fönsterhanteraren \"%s\"\n"
 #
-#: libwindow-settings/gnome-wm-manager.c:408
+#: libwindow-settings/gnome-wm-manager.c:411
 #, c-format
 msgid ""
 "Could not start '%s'.\n"
@@ -2127,7 +2127,7 @@ msgstr ""
 "Det gick inte att starta \"%s\".\n"
 "Återgår till tidigare fönsterhanteraren \"%s\"\n"
 
-#: libwindow-settings/gnome-wm-manager.c:439
+#: libwindow-settings/gnome-wm-manager.c:442
 msgid ""
 "Could not start fallback window manager.\n"
 "Please run a window manager manually. You can\n"
@@ -2139,9 +2139,15 @@ msgstr ""
 "genom att välja \"Kör\" i fotmenyn\n"
 
 # SUN NEW TRANSLATION
-#: libwindow-settings/gnome-wm-manager.c:464
+#: libwindow-settings/gnome-wm-manager.c:467
 msgid "OK"
 msgstr "OK"
+
+#~ msgid "Edit Menu"
+#~ msgstr "Redigerameny"
+
+#~ msgid "_Menu"
+#~ msgstr "_Meny"
 
 #~ msgid "Accelerator Mode"
 #~ msgstr "Snabbtangentsläge"
