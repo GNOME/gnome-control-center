@@ -311,13 +311,9 @@ peditor_string_value_changed (GConfEngine *engine, guint cnxn_id, GConfEntry *en
 }
 
 static void
-peditor_string_widget_changed (GConfPropertyEditor *peditor)
+peditor_string_widget_changed (GConfPropertyEditor *peditor, GtkEntry *entry)
 {
 	GConfValue *value;
-	GtkEntry *entry;
-
-	/* I do this so that we don't have to deal with multiple callback signatures */
-	entry = g_object_get_data (peditor, "entry");
 
 	gconf_change_set_set_string (peditor->p->changeset, peditor->p->key, gtk_entry_get_text (entry));
 	gconf_change_set_check_value (peditor->p->changeset, peditor->p->key, &value);
