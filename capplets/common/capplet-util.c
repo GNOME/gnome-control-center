@@ -221,7 +221,7 @@ create_control_cb (BonoboGenericFactory *factory, const gchar *component_id, gch
 	BonoboPropertyControl         *property_control;
 
 	static const gchar            *prefix1 = "OAFIID:Bonobo_Control_Capplet_";
-	static const gchar            *prefix2 = "OAFIID:Bonobo_Listener_Capplet_";
+	static const gchar            *prefix2 = "OAFIID:Bonobo_Listener_Config_";
 
 	g_message ("%s: Enter", __FUNCTION__);
 
