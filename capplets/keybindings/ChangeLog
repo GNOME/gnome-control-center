@@ -1,3 +1,25 @@
+2002-12-04  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-keybinding-properties.c (clear_old_model): create a sort
+	model for the treeview.
+
+2002-12-03  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-keybinding-properties.c (append_keys_to_tree): store
+	description in the KeyEntry
+	(cb_check_for_uniqueness): don't complain if a key is a duplicate
+	of itself.
+	(accel_edited_callback): use human-readable key name in the error
+	message, not the gconf key. Reword error message to say "shortcut"
+	like the other text in the dialog. Allow duplicate disabled keys
+	(keyval == 0)
+	(accel_edited_callback): the passed-in mask is an
+	EggVirtualModifierType.
+	(struct KeyEntry): the mask is an EggVirtualModifierType
+	(binding_name): use egg_virtual_accelerator_name() not 
+	gtk_accelerator_name().
+	(binding_from_string): use egg_accelerator_parse_virtual
+
 2002-11-23  Jody Goldberg <jody@gnome.org>
 
 	* Release 2.1.3
