@@ -363,6 +363,28 @@ accel_set_func (GtkTreeViewColumn *tree_column,
 		  NULL);
 }
 
+static gboolean
+keybinding_key_changed_foreach (GtkTreeModel *model,
+				GtkTreePath  *path,
+				GtkTreeIter  *iter,
+				gpointer      user_data)
+{
+  KeyEntry *key_entry;
+  KeyEntry *tmp_key_entry;
+
+  key_entry = (KeyEntry *)user_data;
+  gtk_tree_model_get (key_entry->model, iter,
+		      KEYENTRY_COLUMN, &tmp_key_entry,
+		      -1);
+
+  if (key_entry == tmp_key_entry)
+    {
+      gtk_tree_model_row_changed (key_entry->model, path, iter);
+      return TRUE;
+    }
+  return FALSE;
+}
+
 static void
 keybinding_key_changed (GConfClient *client,
 			guint        cnxn_id,
@@ -371,33 +393,15 @@ keybinding_key_changed (GConfClient *client,
 {
   KeyEntry *key_entry;
   const gchar *key_value;
-  GtkTreePath *path;
-  GtkTreeIter iter;
-  gboolean valid;
-  
+
   key_entry = (KeyEntry *)user_data;
   key_value = gconf_value_get_string (entry->value);
 
   binding_from_string (key_value, &key_entry->keyval, &key_entry->mask);
   key_entry->editable = gconf_entry_get_is_writable (entry);
 
-  path = gtk_tree_path_new_first ();
-  for (valid = gtk_tree_model_get_iter_first (key_entry->model, &iter);
-       valid;
-       valid = gtk_tree_model_iter_next (key_entry->model, &iter))
-    {
-      KeyEntry *tmp_key_entry;
-
-      gtk_tree_model_get (key_entry->model, &iter,
-			  KEYENTRY_COLUMN, &tmp_key_entry,
-			  -1);
-      if (tmp_key_entry == key_entry)
-	{
-	  gtk_tree_model_row_changed (key_entry->model, path, &iter);
-	}
-      gtk_tree_path_next (path);
-    }
-  gtk_tree_path_free (path);
+  /* update the model */
+  gtk_tree_model_foreach (key_entry->model, keybinding_key_changed_foreach, key_entry);
 }
 
 
@@ -746,8 +750,62 @@ theme_changed_func (gpointer  uri,
 }
 
 static gboolean
-disable_collapsing_cb (GtkTreeView *tree_view, GtkTreeIter *iter, GtkTreePath *path)
+disable_collapsing_cb (GtkTreeView *tree_view, GtkTreeIter *iter, GtkTreePath *path, gpointer data)
 {
+  return TRUE;
+}
+
+
+typedef struct
+{
+  GtkTreeView *tree_view;
+  GtkTreePath *path;
+} IdleData;
+
+static gboolean
+real_start_editing_cb (IdleData *idle_data)
+{
+  gtk_widget_grab_focus (GTK_WIDGET (idle_data->tree_view));
+  gtk_tree_view_set_cursor (idle_data->tree_view,
+			    idle_data->path,
+			    gtk_tree_view_get_column (idle_data->tree_view, 1),
+			    TRUE);
+
+  gtk_tree_path_free (idle_data->path);
+  g_free (idle_data);
+  return FALSE;
+}
+
+static gboolean
+start_editing_cb (GtkTreeView    *tree_view,
+		  GdkEventButton *event,
+		  GladeXML       *dialog)
+{
+  GtkTreePath *path;
+
+  if (event->window != gtk_tree_view_get_bin_window (tree_view))
+    return FALSE;
+
+  if (gtk_tree_view_get_path_at_pos (tree_view,
+				     (gint) event->x,
+				     (gint) event->y,
+				     &path, NULL,
+				     NULL, NULL))
+    {
+      IdleData *idle_data;
+
+      if (gtk_tree_path_get_depth (path) == 1)
+	{
+	  gtk_tree_path_free (path);
+	  return FALSE;
+	}
+
+      idle_data = g_new (IdleData, 1);
+      idle_data->tree_view = tree_view;
+      idle_data->path = path;
+      g_signal_stop_emission_by_name (G_OBJECT (tree_view), "button_press_event");
+      g_idle_add ((GSourceFunc) real_start_editing_cb, idle_data);
+    }
   return TRUE;
 }
 
@@ -801,6 +859,9 @@ setup_dialog (GladeXML *dialog)
 
   g_signal_connect (WID ("shortcut_treeview"), "test_collapse_row",
 		    G_CALLBACK (disable_collapsing_cb), NULL),
+  g_signal_connect (GTK_TREE_VIEW (WID ("shortcut_treeview")),
+		    "button_press_event",
+		    G_CALLBACK (start_editing_cb), dialog),
 		    
   gtk_tree_view_insert_column_with_attributes (GTK_TREE_VIEW (WID ("shortcut_treeview")),
 					       -1,

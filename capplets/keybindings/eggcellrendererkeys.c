@@ -330,7 +330,7 @@ grab_key_callback (GtkWidget    *widget,
   keys = EGG_CELL_RENDERER_KEYS (data);
 
   if (is_modifier (event->hardware_keycode))
-    return FALSE;
+    return TRUE;
 
   edited = FALSE;
 
@@ -379,7 +379,7 @@ grab_key_callback (GtkWidget    *widget,
 
   g_free (path);
   
-  return FALSE;
+  return TRUE;
 }
 
 static void
