@@ -286,10 +286,10 @@ void gnome_wp_item_update_description (GnomeWPItem * item) {
 			    item->width,
 			    item->height);
 
-    item->description = g_strdup_printf ("<b>%s</b>\n"
-					 "%s",
-					 item->name,
-					 info);
+    item->description = g_markup_printf_escaped ("<b>%s</b>\n"
+						 "%s",
+						 item->name,
+						 info);
 
     g_free (info);
   }
