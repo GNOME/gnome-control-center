@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0.53\n"
-"POT-Creation-Date: 2000-04-25 11:07+0200\n"
-"PO-Revision-Date: 2000-04-25 11:11+0200\n"
+"POT-Creation-Date: 2000-04-27 23:59+0200\n"
+"PO-Revision-Date: 2000-04-28 00:02+0200\n"
 "Last-Translator: Ruben Lopez Gomez <ryu@mundivia.es>\n"
 "Language-Team: Galician <gpul-traduccion@ceu.fi.udc.es>\n"
 "MIME-Version: 1.0\n"
@@ -27,7 +27,7 @@ msgid ""
 "'background-properties-capplet'.\n"
 "aborting...\n"
 msgstr ""
-"Ocorreu un erro de inicialización mentres se executaba "
+"Ocorreu un erro de inicialización cando se executaba "
 "'background-properties-capplet'.\n"
 "terminando...\n"
 
@@ -68,7 +68,7 @@ msgid "Can't find an hbox, using a normal file selection"
 msgstr "Non se pode atopar un hbox, usarase unha selección de ficheiro normal"
 
 #: capplets/background-properties/property-background.c:866
-#: capplets/background-properties/property-background.c:1306
+#: capplets/background-properties/property-background.c:1308
 #: capplets/keyboard-properties/keyboard-properties.c:342
 #: capplets/screensaver-properties/screensaver-dialog.c:25
 #: capplets/theme-switcher/gui.c:224 capplets/theme-switcher/gui.c:296
@@ -103,7 +103,8 @@ msgstr "Centrado"
 msgid "Tiled"
 msgstr "Mosaico"
 
-#: capplets/background-properties/property-background.c:1104
+#: capplets/background-properties/property-background.c:1106
+#: capplets/bell-properties/bell-properties.c:61
 #: capplets/gnome-edit-properties/gnome-edit-properties.c:179
 #: capplets/keyboard-properties/keyboard-properties.c:91
 #: capplets/keyboard-properties/keyboard-properties.c:410
@@ -121,7 +122,8 @@ msgstr ""
 "Non hai axuda dispoñible/instalada para esta configuración. Por favor "
 "asegúrese de que ten a Guía de Usuario de GNOME instalada no seu sistema."
 
-#: capplets/background-properties/property-background.c:1106
+#: capplets/background-properties/property-background.c:1108
+#: capplets/bell-properties/bell-properties.c:63
 #: capplets/gnome-edit-properties/gnome-edit-properties.c:181
 #: capplets/keyboard-properties/keyboard-properties.c:93
 #: capplets/keyboard-properties/keyboard-properties.c:412
@@ -137,58 +139,91 @@ msgstr ""
 msgid "Close"
 msgstr "Pechar"
 
-#: capplets/background-properties/property-background.c:1318
+#: capplets/background-properties/property-background.c:1320
 msgid "Use GNOME to set background"
 msgstr "Usa GNOME para por o fondo"
 
-#: capplets/background-properties/property-background.c:1438
+#: capplets/background-properties/property-background.c:1440
 msgid "Set parameters from saved state and exit"
 msgstr "Recuperar os parámetros do estado gardado e saír"
 
-#: capplets/background-properties/property-background.c:1439
+#: capplets/background-properties/property-background.c:1441
 msgid "IMAGE"
 msgstr "IMAXE"
 
-#: capplets/background-properties/property-background.c:1439
+#: capplets/background-properties/property-background.c:1441
 msgid "Sets the wallpaper to the value specified"
 msgstr "Pon o papel tapiz elixido"
 
-#: capplets/background-properties/property-background.c:1440
-#: capplets/background-properties/property-background.c:1441
+#: capplets/background-properties/property-background.c:1442
+#: capplets/background-properties/property-background.c:1443
 msgid "COLOR"
 msgstr "COR"
 
-#: capplets/background-properties/property-background.c:1440
+#: capplets/background-properties/property-background.c:1442
 msgid "Specifies the background color"
 msgstr "Especifica a cor de fondo"
 
-#: capplets/background-properties/property-background.c:1441
+#: capplets/background-properties/property-background.c:1443
 msgid "Specifies end background color for gradient"
 msgstr "Indica a cor final para un degradado"
 
-#: capplets/background-properties/property-background.c:1442
+#: capplets/background-properties/property-background.c:1444
 msgid "ORIENT"
 msgstr "DIRECCION"
 
-#: capplets/background-properties/property-background.c:1442
+#: capplets/background-properties/property-background.c:1444
 msgid "Gradient orientation: vertical or horizontal"
 msgstr "Dirección do degradado: vertical ou horizontal"
 
-#: capplets/background-properties/property-background.c:1443
+#: capplets/background-properties/property-background.c:1445
 msgid "Use a solid fill for the background"
 msgstr "Utiliza un recheo sólido para o fondo"
 
-#: capplets/background-properties/property-background.c:1444
+#: capplets/background-properties/property-background.c:1446
 msgid "Use a gradient fill for the background"
 msgstr "Utiliza un recheo con degradado para o fondo"
 
-#: capplets/background-properties/property-background.c:1445
+#: capplets/background-properties/property-background.c:1447
 msgid "MODE"
 msgstr "MODO"
 
-#: capplets/background-properties/property-background.c:1445
+#: capplets/background-properties/property-background.c:1447
 msgid "Display wallpaper: tiled, centered, scaled or ratio"
 msgstr "Mostrar papel tapiz: mosaico, centrado, escalado ou relación"
+
+#: capplets/bell-properties/bell-properties.c:178
+msgid "Keyboard Bell"
+msgstr "Campá do Teclado"
+
+#: capplets/bell-properties/bell-properties.c:189
+#: capplets/keyboard-properties/keyboard-properties.c:258
+msgid "Volume"
+msgstr "Volume"
+
+#: capplets/bell-properties/bell-properties.c:192
+#: capplets/keyboard-properties/keyboard-properties.c:261
+msgid "Pitch (Hz)"
+msgstr "Tono (Hz)"
+
+#: capplets/bell-properties/bell-properties.c:195
+#: capplets/keyboard-properties/keyboard-properties.c:264
+msgid "Duration (ms)"
+msgstr "Duración (ms)"
+
+#: capplets/bell-properties/bell-properties.c:219
+#: capplets/keyboard-properties/keyboard-properties.c:276
+msgid "Test"
+msgstr "Proba"
+
+#: capplets/bell-properties/bell-properties.c:241
+msgid ""
+"an initialization error occurred while starting 'bell-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"Ocorreu un erro de inicialización cando se executaba "
+"'bell-properties-capplet'.\n"
+"terminando...\n"
 
 #: capplets/gnome-edit-properties/gnome-edit-properties.c:237
 msgid "Gnome editor"
@@ -201,22 +236,6 @@ msgstr "Executar nun terminal"
 #: capplets/keyboard-properties/keyboard-properties.c:250
 msgid "Keyboard bell"
 msgstr "Campá do teclado"
-
-#: capplets/keyboard-properties/keyboard-properties.c:258
-msgid "Volume"
-msgstr "Volume"
-
-#: capplets/keyboard-properties/keyboard-properties.c:261
-msgid "Pitch (Hz)"
-msgstr "Tono (Hz)"
-
-#: capplets/keyboard-properties/keyboard-properties.c:264
-msgid "Duration (ms)"
-msgstr "Duración (ms)"
-
-#: capplets/keyboard-properties/keyboard-properties.c:276
-msgid "Test"
-msgstr "Proba"
 
 #: capplets/keyboard-properties/keyboard-properties.c:294
 msgid "Keyboard repeat rate"
@@ -256,7 +275,7 @@ msgid ""
 "'keyboard-properties-capplet'.\n"
 "aborting...\n"
 msgstr ""
-"Ocorreu un erro de inicialización mentres se executaba "
+"Ocorreu un erro de inicialización cando se executaba "
 "'keyboard-properties-capplet'.\n"
 "terminando...\n"
 
@@ -620,6 +639,23 @@ msgstr " minutos despois de comeza-lo protector de pantalla"
 #: capplets/screensaver-properties/screensaver-properties-capplet.c:150
 msgid "Screen Saver Demo"
 msgstr "Demostración do protector de pantalla"
+
+#: capplets/session-properties/chooser.c:57
+msgid "Session"
+msgstr "Sesión"
+
+#. dialog
+#: capplets/session-properties/chooser.c:93
+msgid "Session Chooser"
+msgstr "Escolledor de Sesión"
+
+#: capplets/session-properties/chooser.c:96
+msgid "Start Session"
+msgstr "Comezar Sesión"
+
+#: capplets/session-properties/chooser.c:99
+msgid "Cancel Login"
+msgstr "Cancelar Login"
 
 #: capplets/session-properties/gsm-client-editor.c:100
 msgid "Order: "
@@ -1392,8 +1428,8 @@ msgid ""
 "an initialization error occurred while starting 'wm-properties-capplet'.\n"
 "aborting...\n"
 msgstr ""
-"Ocorreu un erro de inicialización cando se "
-"executaba'wm-properties-capplet'.\n"
+"Ocorreu un erro de inicialización cando se executaba "
+"'wm-properties-capplet'.\n"
 "terminando...\n"
 
 #: control-center/callbacks.c:75
