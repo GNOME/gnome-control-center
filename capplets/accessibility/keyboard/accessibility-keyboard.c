@@ -488,7 +488,7 @@ setup_accessX_dialog (GConfChangeSet *changeset, gboolean as_dialog)
 	if (as_dialog) {
 		GtkWidget *load_cde = WID ("load_CDE_file");
 		g_signal_connect (G_OBJECT (load_cde),
-			"activate",
+			"clicked",
 			G_CALLBACK (cb_load_CDE_file), toplevel);
 	}
 	return toplevel;

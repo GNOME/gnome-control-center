@@ -5,7 +5,7 @@
 
 <widget class="GtkDialog" id="accessX_dialog">
   <property name="visible">True</property>
-  <property name="title" translatable="yes">Keyboard Accessibility Configuration</property>
+  <property name="title" translatable="yes">Keyboard Accessibility Configuration (AccessX)</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_MOUSE</property>
   <property name="modal">False</property>
@@ -27,7 +27,7 @@
 	  <property name="spacing">10</property>
 
 	  <child>
-	    <widget class="GtkButton" id="help_button1">
+	    <widget class="GtkButton" id="help_button">
 	      <property name="visible">True</property>
 	      <property name="can_default">True</property>
 	      <property name="can_focus">True</property>
@@ -39,14 +39,14 @@
 	  </child>
 
 	  <child>
-	    <widget class="GtkButton" id="ok_button1">
+	    <widget class="GtkButton" id="close_button">
 	      <property name="visible">True</property>
 	      <property name="can_default">True</property>
 	      <property name="can_focus">True</property>
-	      <property name="label">gtk-ok</property>
+	      <property name="label">gtk-close</property>
 	      <property name="use_stock">True</property>
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
-	      <property name="response_id">-5</property>
+	      <property name="response_id">-7</property>
 	    </widget>
 	  </child>
 	</widget>
@@ -510,7 +510,7 @@ two keys pressed simultaneously</property>
 		      <child>
 			<widget class="GtkCheckButton" id="stickykeys_enable">
 			  <property name="visible">True</property>
-			  <property name="tooltip" translatable="yes">StickyKeys can benefit users who type with only one finger or who might use a mouth or head mounted-stick.  StickyKeys allows users to perform multiple simultaneous key press operations by pressing the keys in sequence.  For example, if an application requires a user to simultaneously press the 'Ctrl' and 'Tab' key, a StickyKeys user can press the 'Ctrl' key, release it, and then press the 'Tab' key and release it, achieving the same result.</property>
+			  <property name="tooltip" translatable="yes">Perform multiple simultaneous key press operations by pressing modifier keys in sequence.</property>
 			  <property name="can_focus">True</property>
 			  <property name="label" translatable="yes">Enable _Sticky Keys</property>
 			  <property name="use_underline">True</property>
@@ -573,7 +573,7 @@ two keys pressed simultaneously</property>
 		      <child>
 			<widget class="GtkCheckButton" id="togglekeys_enable">
 			  <property name="visible">True</property>
-			  <property name="tooltip" translatable="yes">ToggleKeys can benefit the visually impaired user who has difficulty seeing the small LED keyboard indicators.  ToggleKeys provides one beep when an LED (e.g., the Caps Lock LED) is turned on and two beeps when it is turned off.</property>
+			  <property name="tooltip" translatable="yes">Beep when an LED is turned on and two beeps when one is turned off.</property>
 			  <property name="can_focus">True</property>
 			  <property name="label" translatable="yes">Enable _Toggle Keys</property>
 			  <property name="use_underline">True</property>
@@ -1066,7 +1066,7 @@ two keys pressed simultaneously</property>
 		      <child>
 			<widget class="GtkCheckButton" id="bouncekeys_enable">
 			  <property name="visible">True</property>
-			  <property name="tooltip" translatable="yes">BounceKeys can benefit users who sometimes tremor when they release a key.  BounceKeys instructs the system to ignore all subsequent presses of the SAME key if they happen within a user selectable period of time.</property>
+			  <property name="tooltip" translatable="yes">Ignore all subsequent presses of the SAME key if they happen within a user selectable period of time.</property>
 			  <property name="can_focus">True</property>
 			  <property name="label" translatable="yes">Enable _Bounce Keys</property>
 			  <property name="use_underline">True</property>
@@ -1112,7 +1112,7 @@ two keys pressed simultaneously</property>
 		      <child>
 			<widget class="GtkCheckButton" id="mousekeys_enable">
 			  <property name="visible">True</property>
-			  <property name="tooltip" translatable="yes">MouseKeys can benefit StickyKey users or anyone unable to use the pointing device or in need of 'pixel by pixel' position control of the pointer.  When activated, MouseKeys turns the numeric keypad into a mouse control pad.</property>
+			  <property name="tooltip" translatable="yes">Turn the numeric keypad into a mouse control pad.</property>
 			  <property name="can_focus">True</property>
 			  <property name="label" translatable="yes">Enable _Mouse Keys</property>
 			  <property name="use_underline">True</property>
@@ -1242,7 +1242,7 @@ two keys pressed simultaneously</property>
 		    <widget class="GtkCheckButton" id="feature_state_change_beep">
 		      <property name="visible">True</property>
 		      <property name="can_focus">True</property>
-		      <property name="label" translatable="yes">_Beep on state change</property>
+		      <property name="label" translatable="yes">_Beep when enabling/disabling keyboard accessibility features</property>
 		      <property name="use_underline">True</property>
 		      <property name="relief">GTK_RELIEF_NORMAL</property>
 		      <property name="active">False</property>
@@ -1435,7 +1435,7 @@ two keys pressed simultaneously</property>
 	  <child>
 	    <widget class="GtkLabel" id="label20">
 	      <property name="visible">True</property>
-	      <property name="label" translatable="yes">_General</property>
+	      <property name="label" translatable="yes">_Misc</property>
 	      <property name="use_underline">True</property>
 	      <property name="use_markup">False</property>
 	      <property name="justify">GTK_JUSTIFY_LEFT</property>
