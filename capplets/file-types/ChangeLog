@@ -1,3 +1,20 @@
+2002-01-25  Bradford Hovinen  <hovinen@ximian.com>
+
+	* mime-type-info.c (mime_type_info_free): Free icon_path
+
+	* mime-edit-dialog.c (fill_dialog): Set icon entry with the full
+	path of the icon
+
+	* mime-type-info.c (mime_type_info_get_icon_path):
+	Implement. Factor from get_pixbuf
+
+	* mime-edit-dialog.c (store_data): Reset the icon pixbufs so that
+	they get reloaded
+
+	* mime-type-info.c (get_icon_pixbuf): Use
+	gnome_vfs_icon_path_from_filename and install the nautilus/ hack
+	from the old capplet *sigh*
+
 2002-01-24  Bradford Hovinen  <hovinen@ximian.com>
 
 	* file-types-capplet.c (launch_edit_dialog): Implement. Factor

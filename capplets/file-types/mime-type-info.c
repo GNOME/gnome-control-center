@@ -31,6 +31,7 @@
 
 #include <bonobo.h>
 #include <libgnomevfs/gnome-vfs-application-registry.h>
+#include <libgnomevfs/gnome-vfs-utils.h>
 
 #include "libuuid/uuid.h"
 
@@ -47,7 +48,7 @@ static gchar  *form_extensions_string (const MimeTypeInfo *info,
 				       gchar              *sep,
 				       gchar              *prepend);
 static void    get_icon_pixbuf        (MimeTypeInfo       *info,
-				       const gchar        *short_icon_name,
+				       const gchar        *icon_path,
 				       gboolean            want_large);
 
 static MimeTypeInfo *get_category     (const gchar        *category_name);
@@ -151,15 +152,51 @@ mime_type_info_get_description (MimeTypeInfo *info)
 GdkPixbuf *
 mime_type_info_get_icon (MimeTypeInfo *info)
 {
-	if (info->icon_name == NULL)
-		info->icon_name = g_strdup (gnome_vfs_mime_get_icon (info->mime_type));
-
 	if (info->small_icon_pixbuf == NULL)
-		get_icon_pixbuf (info, info->icon_name, FALSE);
+		get_icon_pixbuf (info, mime_type_info_get_icon_path (info), FALSE);
 
 	g_object_ref (G_OBJECT (info->small_icon_pixbuf));
 
 	return info->small_icon_pixbuf;
+}
+
+const gchar *
+mime_type_info_get_icon_path (MimeTypeInfo *info) 
+{
+	gchar *tmp;
+
+	if (info->icon_name == NULL)
+		info->icon_name = g_strdup (gnome_vfs_mime_get_icon (info->mime_type));
+
+	if (g_file_exists (info->icon_name)) {
+		info->icon_path = g_strdup (info->icon_name);
+		return info->icon_path;
+	}
+
+	info->icon_path = gnome_vfs_icon_path_from_filename (info->icon_name);
+
+	if (info->icon_path == NULL) {
+		tmp = g_strconcat (info->icon_name, ".png", NULL);
+		info->icon_path = gnome_vfs_icon_path_from_filename (tmp);
+		g_free (tmp);
+	}
+
+	if (info->icon_path == NULL) {
+		tmp = g_strconcat ("nautilus/", info->icon_name, NULL);
+		info->icon_path = gnome_vfs_icon_path_from_filename (tmp);
+		g_free (tmp);
+	}
+
+	if (info->icon_path == NULL) {
+		tmp = g_strconcat ("nautilus/", info->icon_name, ".png", NULL);
+		info->icon_path = gnome_vfs_icon_path_from_filename (tmp);
+		g_free (tmp);
+	}
+
+	if (info->icon_path == NULL)
+		info->icon_path = gnome_vfs_icon_path_from_filename ("nautilus/i-regular-24.png");
+
+	return info->icon_path;
 }
 
 const GList *
@@ -287,6 +324,7 @@ mime_type_info_free (MimeTypeInfo *info)
 	g_free (info->mime_type);
 	g_free (info->description);
 	g_free (info->icon_name);
+	g_free (info->icon_path);
 	gnome_vfs_mime_extensions_list_free (info->file_extensions);
 	CORBA_free (info->default_component);
 	gnome_vfs_mime_application_free (info->default_action);
@@ -436,11 +474,12 @@ form_extensions_string (const MimeTypeInfo *info, gchar *sep, gchar *prepend)
  */
 
 void
-get_icon_pixbuf (MimeTypeInfo *info, const gchar *short_icon_name, gboolean want_large) 
+get_icon_pixbuf (MimeTypeInfo *info, const gchar *icon_path, gboolean want_large) 
 {
-	gchar *icon_name;
-
 	static GHashTable *icon_table = NULL;
+
+	if (icon_path == NULL)
+		icon_path = gnome_vfs_icon_path_from_filename ("nautilus/i-regular-24.png");
 
 	if ((want_large && info->icon_pixbuf != NULL) || info->small_icon_pixbuf != NULL)
 		return;
@@ -448,36 +487,23 @@ get_icon_pixbuf (MimeTypeInfo *info, const gchar *short_icon_name, gboolean want
 	if (icon_table == NULL)
 		icon_table = g_hash_table_new (g_str_hash, g_str_equal);
 
-	if (short_icon_name == NULL)
-		short_icon_name = "nautilus/i-regular-24.png";
+	if (!want_large)
+		info->small_icon_pixbuf = g_hash_table_lookup (icon_table, icon_path);
 
-	icon_name = gnome_program_locate_file
-		(gnome_program_get (), GNOME_FILE_DOMAIN_PIXMAP,
-		 short_icon_name, TRUE, NULL);
-
-	if (icon_name != NULL) {
-		if (!want_large)
-			info->small_icon_pixbuf = g_hash_table_lookup (icon_table, icon_name);
-
-		if (info->small_icon_pixbuf != NULL) {
-			g_object_ref (G_OBJECT (info->small_icon_pixbuf));
-		} else {
-			info->icon_pixbuf = gdk_pixbuf_new_from_file (icon_name, NULL);
-
-			if (info->icon_pixbuf == NULL)
-				get_icon_pixbuf (info, NULL, want_large);
-
-			if (!want_large) {
-				info->small_icon_pixbuf =
-					gdk_pixbuf_scale_simple (info->icon_pixbuf, 16, 16, GDK_INTERP_HYPER);
-
-				g_hash_table_insert (icon_table, icon_name, info->small_icon_pixbuf);
-			}
-		}
-
-		g_free (icon_name);
+	if (info->small_icon_pixbuf != NULL) {
+		g_object_ref (G_OBJECT (info->small_icon_pixbuf));
 	} else {
-		get_icon_pixbuf (info, NULL, want_large);
+		info->icon_pixbuf = gdk_pixbuf_new_from_file (icon_path, NULL);
+
+		if (info->icon_pixbuf == NULL) {
+			get_icon_pixbuf (info, NULL, want_large);
+		}
+		else if (!want_large) {
+			info->small_icon_pixbuf =
+				gdk_pixbuf_scale_simple (info->icon_pixbuf, 16, 16, GDK_INTERP_HYPER);
+
+			g_hash_table_insert (icon_table, g_strdup (icon_path), info->small_icon_pixbuf);
+		}
 	}
 }
 

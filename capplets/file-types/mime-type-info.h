@@ -45,6 +45,7 @@ struct _MimeTypeInfo
 	gchar                   *mime_type;
 	gchar                   *description;
 	gchar                   *icon_name;
+	gchar                   *icon_path;
 	GList                   *file_extensions;
 
 	GdkPixbuf               *icon_pixbuf;
@@ -66,6 +67,7 @@ void          mime_type_info_load_all              (MimeTypeInfo       *info);
 const gchar  *mime_type_info_get_description       (MimeTypeInfo       *info);
 GdkPixbuf    *mime_type_info_get_icon              (MimeTypeInfo       *info);
 const GList  *mime_type_info_get_file_extensions   (MimeTypeInfo       *info);
+const gchar  *mime_type_info_get_icon_path         (MimeTypeInfo       *info);
 
 void          mime_type_info_save                  (const MimeTypeInfo *info);
 void          mime_type_info_free                  (MimeTypeInfo       *info);

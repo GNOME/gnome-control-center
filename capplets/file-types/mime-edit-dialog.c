@@ -316,10 +316,7 @@ fill_dialog (MimeEditDialog *dialog)
 	if (dialog->p->info->mime_type != NULL && *dialog->p->info->mime_type != '\0')
 		gtk_widget_set_sensitive (WID ("mime_type_entry"), FALSE);
 
-	if (dialog->p->info->icon_name == NULL)
-		gnome_icon_entry_set_filename (GNOME_ICON_ENTRY (WID ("icon_entry")), "nautilus/i-regular-24.png");
-	else
-		gnome_icon_entry_set_filename (GNOME_ICON_ENTRY (WID ("icon_entry")), dialog->p->info->icon_name);
+	gnome_icon_entry_set_filename (GNOME_ICON_ENTRY (WID ("icon_entry")), mime_type_info_get_icon_path (dialog->p->info));
 
 	populate_component_list (dialog);
 	populate_application_list (dialog);
@@ -484,8 +481,21 @@ store_data (MimeEditDialog *dialog)
 	g_free (dialog->p->info->mime_type);
 	dialog->p->info->mime_type = g_strdup (gtk_entry_get_text (GTK_ENTRY (WID ("mime_type_entry"))));
 
+	g_free (dialog->p->info->icon_path);
+	dialog->p->info->icon_path = NULL;
+
 	g_free (dialog->p->info->icon_name);
 	dialog->p->info->icon_name = g_strdup (gnome_icon_entry_get_filename (GNOME_ICON_ENTRY (WID ("icon_entry"))));
+
+	if (dialog->p->info->icon_pixbuf != NULL) {
+		g_object_unref (G_OBJECT (dialog->p->info->icon_pixbuf));
+		dialog->p->info->icon_pixbuf = NULL;
+	}
+
+	if (dialog->p->info->small_icon_pixbuf != NULL) {
+		g_object_unref (G_OBJECT (dialog->p->info->small_icon_pixbuf));
+		dialog->p->info->small_icon_pixbuf = NULL;
+	}
 
 	tmp = mime_type_info_get_category_name (dialog->p->info);
 	tmp1 = gtk_entry_get_text (GTK_ENTRY (WID ("category_entry")));
