@@ -94,15 +94,71 @@ create_dialog (void)
 }
 
 static void
+toolbar_detachable_cb (GConfPropertyEditor *peditor,
+		       gchar               *key,
+		       GConfValue          *value,
+		       GladeXML            *dialog)
+{
+  GtkWidget *handlebox;
+  GtkWidget *toolbar;
+  GtkWidget *frame;
+
+  handlebox = WID ("toolbar_handlebox");
+  toolbar = WID ("toolbar_toolbar");
+  frame = WID ("toolbar_frame");
+
+  g_object_ref (handlebox);
+  g_object_ref (toolbar);
+
+  if (GTK_BIN (frame)->child)
+    gtk_container_remove (GTK_CONTAINER (frame), GTK_BIN (frame)->child);
+  if (GTK_BIN (handlebox)->child)
+    gtk_container_remove (GTK_CONTAINER (handlebox), GTK_BIN (handlebox)->child);
+
+  if (gconf_value_get_bool (value))
+    {
+      gtk_container_add (GTK_CONTAINER (frame), handlebox);
+      gtk_container_add (GTK_CONTAINER (handlebox), toolbar);
+      g_object_unref (handlebox);
+    }
+  else
+    {
+      gtk_container_add (GTK_CONTAINER (frame), toolbar);
+    }
+  g_object_unref (toolbar);
+}
+
+
+static void
+menus_have_icons_cb (GConfPropertyEditor *peditor,
+		     gchar               *key,
+		     GConfValue          *value,
+		     GladeXML            *dialog)
+{
+  g_print ("menus_have_icons_cb: %d\n", gconf_value_get_bool (value));
+}
+
+static gint
+button_press_blocker (GtkWidget *toolbar,
+		      GdkEvent  *event,
+		      gpointer   data)
+{
+  return TRUE;
+}
+
+static void
 setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 {
   GtkWidget *widget;
+  GConfPropertyEditor *peditor;
 
-  gconf_peditor_new_boolean
+  peditor = gconf_peditor_new_boolean
     (changeset, "/desktop/gnome/interface/toolbar_detachable", WID ("detachable_toolbars_toggle"), NULL);
+  g_signal_connect (peditor, "value_changed", toolbar_detachable_cb, dialog);
 
-  gconf_peditor_new_boolean
+  peditor = gconf_peditor_new_boolean
     (changeset, "/desktop/gnome/interface/menus_have_icons", WID ("menu_icons_toggle"), NULL);
+  g_signal_connect (peditor, "value_changed", menus_have_icons_cb, dialog);
 
   gconf_peditor_new_select_menu
     (changeset, "/desktop/gnome/interface/toolbar_style", WID ("toolbar_style_omenu"),
@@ -110,12 +166,13 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
      "conv-from-widget-cb", toolbar_from_widget,
      NULL);
 
+  widget = WID ("toolbar_handlebox");
+  g_signal_connect (G_OBJECT (widget), "button_press_event", button_press_blocker, NULL);
 
   widget = WID ("gnome_ui_properties_dialog");
   g_signal_connect (G_OBJECT (widget), "response",
 		    (GCallback) dialog_button_clicked_cb, changeset);
   gtk_widget_show_all (widget);
-
 }
 
 int
