@@ -1,3 +1,18 @@
+2002-01-11  Bradford Hovinen  <hovinen@ximian.com>
+
+	* service-edit-dialog.c (store_data): Implement
+	(program_sensitive_cb): Implement
+	(response_cb): Call store_data if response_id is OK
+	(service_edit_dialog_init): Connect toggled signal on
+	run_program_toggle to program_sensitive_cb
+
+	* mime-type-info.h: Add #include gnome-vfs-mime-info.h
+
+	* service-edit-dialog.c (populate_app_list): Implement
+
+	* mime-edit-dialog.c (populate_component_list): Make sure custom
+	menu item is shown
+
 2002-01-04  Bradford Hovinen  <hovinen@ximian.com>
 
 	* Makefile.am: Clean up

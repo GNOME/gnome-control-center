@@ -27,6 +27,7 @@
 
 #include <gnome.h>
 #include <bonobo.h>
+#include <libgnomevfs/gnome-vfs-mime-info.h>
 #include <libgnomevfs/gnome-vfs-mime-handlers.h>
 
 G_BEGIN_DECLS
@@ -45,6 +46,8 @@ struct _MimeTypeInfo
 	gchar                   *custom_line;
 	gchar                   *edit_line;
 	gchar                   *print_line;
+
+	gboolean                 is_category;
 };
 
 MimeTypeInfo *mime_type_info_load (const gchar        *mime_type);

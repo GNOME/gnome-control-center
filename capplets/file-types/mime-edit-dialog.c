@@ -331,7 +331,9 @@ populate_component_list (MimeEditDialog *dialog)
 		gtk_widget_show (menu_item);
 	}
 
-	gtk_menu_append (menu, gtk_menu_item_new_with_label (_("None")));
+	menu_item = gtk_menu_item_new_with_label (_("None"));
+	gtk_menu_append (menu, menu_item);
+	gtk_widget_show (menu_item);
 
 	if (found_idx < 0)
 		found_idx = i;

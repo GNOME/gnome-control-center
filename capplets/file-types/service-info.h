@@ -37,7 +37,7 @@ typedef struct _ServiceInfo ServiceInfo;
 struct _ServiceInfo {
 	gchar                   *protocol;
 	gchar                   *description;
-	gboolean                 use_content;
+	gboolean                 run_program;
 
 	GnomeVFSMimeApplication *app;
 	gchar                   *custom_line;

@@ -124,7 +124,7 @@ service_info_load (const gchar *protocol, GConfChangeSet *changeset)
 	info = g_new0 (ServiceInfo, 1);
 	info->protocol = g_strdup (protocol);
 	info->description = get_string (info, "description", changeset);
-	info->use_content = get_bool (info, "use-content", changeset);
+	info->run_program = get_bool (info, "type", changeset);
 	info->custom_line = get_string (info, "command", changeset);
 	info->need_terminal = get_bool (info, "need-terminal", changeset);
 
@@ -149,7 +149,7 @@ service_info_save (const ServiceInfo *info, GConfChangeSet *changeset)
 		set_string (info, "command-id", info->app->id, changeset);
 	}
 
-	set_bool (info, "use-content", info->use_content, changeset);
+	set_bool (info, "type", info->run_program, changeset);
 	set_bool (info, "need-terminal", info->need_terminal, changeset);
 }
 

@@ -65,7 +65,13 @@ static void service_edit_dialog_finalize    (GObject *object);
 static void fill_dialog                     (ServiceEditDialog *dialog);
 static void populate_app_list               (ServiceEditDialog *dialog);
 
-static void response_cb                     (ServiceEditDialog *dialog);
+static void store_data                      (ServiceEditDialog *dialog);
+
+static void program_sensitive_cb            (ServiceEditDialog *dialog,
+					     GtkToggleButton   *tb);
+
+static void response_cb                     (ServiceEditDialog *dialog,
+					     gint               response_id);
 
 GType
 service_edit_dialog_get_type (void)
@@ -115,6 +121,8 @@ service_edit_dialog_init (ServiceEditDialog *dialog, ServiceEditDialogClass *cla
 		 NULL);
 
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog->p->dialog_win)->vbox), WID ("service_edit_widget"), TRUE, TRUE, 0);
+
+	g_signal_connect_swapped (G_OBJECT (WID ("run_program_toggle")), "toggled", (GCallback) program_sensitive_cb, dialog);
 
 	g_signal_connect_swapped (G_OBJECT (dialog->p->dialog_win), "response", (GCallback) response_cb, dialog);
 }
@@ -245,9 +253,10 @@ fill_dialog (ServiceEditDialog *dialog)
 	if (dialog->p->info->protocol != NULL)
 		gtk_entry_set_text (GTK_ENTRY (WID ("protocol_entry")), dialog->p->info->protocol);
 
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("look_at_content_toggle")), dialog->p->info->use_content);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("look_at_content_toggle")), !dialog->p->info->run_program);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("run_program_toggle")), dialog->p->info->run_program);
 
-	if (dialog->p->info->use_content && strcmp (dialog->p->info->protocol, "ftp"))
+	if (!dialog->p->info->run_program && strcmp (dialog->p->info->protocol, "ftp"))
 		gtk_widget_set_sensitive (WID ("program_frame"), FALSE);
 
 	if (dialog->p->info->custom_line != NULL)
@@ -261,10 +270,50 @@ fill_dialog (ServiceEditDialog *dialog)
 static void
 populate_app_list (ServiceEditDialog *dialog) 
 {
+	GtkOptionMenu *option_menu;
+	GtkMenu       *menu;
+	GtkWidget     *item;
+
+	option_menu = GTK_OPTION_MENU (WID ("program_select"));
+
+	menu = GTK_MENU (gtk_menu_new ());
+
+	item = gtk_menu_item_new_with_label (_("Custom"));
+	gtk_widget_show (item);
+	gtk_menu_append (menu, item);
+
+	gtk_option_menu_set_menu (option_menu, GTK_WIDGET (menu));
 }
 
 static void
-response_cb (ServiceEditDialog *dialog) 
+store_data (ServiceEditDialog *dialog) 
 {
+	g_free (dialog->p->info->description);
+	dialog->p->info->description = g_strdup (gtk_entry_get_text (GTK_ENTRY (WID ("description_entry"))));
+
+	dialog->p->info->run_program =
+		gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (WID ("run_program_toggle")));
+
+	g_free (dialog->p->info->custom_line);
+	dialog->p->info->custom_line =
+		g_strdup (gnome_file_entry_get_full_path (GNOME_FILE_ENTRY (WID ("custom_program_entry")), FALSE));
+}
+
+static void
+program_sensitive_cb (ServiceEditDialog *dialog, GtkToggleButton *tb) 
+{
+	if (gtk_toggle_button_get_active (tb))
+		gtk_widget_set_sensitive (WID ("program_frame"), TRUE);
+	else if (dialog->p->info == NULL || dialog->p->info->protocol == NULL ||
+		 strcmp (dialog->p->info->protocol, "ftp"))
+		gtk_widget_set_sensitive (WID ("program_frame"), FALSE);
+}
+
+static void
+response_cb (ServiceEditDialog *dialog, gint response_id) 
+{
+	if (response_id == GTK_RESPONSE_OK)
+		store_data (dialog);
+
 	g_object_unref (G_OBJECT (dialog));
 }
