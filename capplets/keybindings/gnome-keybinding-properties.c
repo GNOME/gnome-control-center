@@ -47,6 +47,8 @@ const KeyListEntry metacity_key_list[] =
   { "/apps/metacity/window_keybindings/activate_window_menu",      ALWAYS_VISIBLE,  0 },
   { "/apps/metacity/window_keybindings/toggle_fullscreen",         ALWAYS_VISIBLE,  0 },
   { "/apps/metacity/window_keybindings/toggle_maximized",          ALWAYS_VISIBLE,  0 },
+  { "/apps/metacity/window_keybindings/maximize",                  ALWAYS_VISIBLE,  0 },
+  { "/apps/metacity/window_keybindings/unmaximize",                ALWAYS_VISIBLE,  0 },
   { "/apps/metacity/window_keybindings/toggle_shaded",             ALWAYS_VISIBLE,  0 },
   { "/apps/metacity/window_keybindings/close",                     ALWAYS_VISIBLE,  0 },
   { "/apps/metacity/window_keybindings/minimize",                  ALWAYS_VISIBLE,  0 },
