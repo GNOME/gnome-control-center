@@ -1,5 +1,3 @@
-SUBDIRS = 
-
 cappletname = default-applications
 cappletgroup =
 bin_PROGRAMS = default-applications-properties

@@ -1,5 +1,3 @@
-SUBDIRS =
-
 cappletname = sound
 cappletgroup = 
 bin_PROGRAMS = sound-properties

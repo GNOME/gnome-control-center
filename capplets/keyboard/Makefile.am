@@ -1,5 +1,3 @@
-SUBDIRS =
-
 cappletname = keyboard
 cappletgroup =
 bin_PROGRAMS = keyboard-properties

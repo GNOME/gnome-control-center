@@ -1,5 +1,3 @@
-SUBDIRS =
-
 cappletname = background
 cappletgroup = 
 bin_PROGRAMS = background-properties
