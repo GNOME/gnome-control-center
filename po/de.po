@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.3.0\n"
-"POT-Creation-Date: 2000-08-14 20:39+0200\n"
+"POT-Creation-Date: 2000-08-18 19:45+0200\n"
 "PO-Revision-Date: 2000-03-27 04:55+02:00\n"
 "Last-Translator: Kai Lahmann <kl@linuxfaqs.de>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
@@ -46,8 +46,7 @@ msgid "Color 1"
 msgstr "Farbe 1"
 
 #. gtk_table_attach_defaults (GTK_TABLE(table), cp1, 0, 1, 1, 2);
-#. gtk_table_attach_defaults (GTK_TABLE(table), gtk_hseparator_new (), 0, 1, 2, 
-#. 3);
+#. gtk_table_attach_defaults (GTK_TABLE(table), gtk_hseparator_new (), 0, 1, 2, 3);
 #: capplets/background-properties/property-background.c:649
 msgid "Color 2"
 msgstr "Farbe 2"
@@ -555,14 +554,13 @@ msgstr "Klein"
 
 #: capplets/mouse-properties/mouse-properties.c:349
 msgid ""
-"an initialization error occurred while starting "
-"'mouse-properties-capplet'.\n"
+"an initialization error occurred while starting 'mouse-properties-capplet'.\n"
 "aborting...\n"
 msgstr ""
 "Initialisierungsfehler beim Starten von »mouse-properties-capplet«.\n"
 "Abbruch...\n"
 
-#: capplets/new-screensaver-properties/preferences.c:286
+#: capplets/new-screensaver-properties/preferences.c:502
 msgid "Custom screensaver. No description available"
 msgstr "Benutzerdefinierter Bildschirmschoner. Keine Beschreibung verfügbar"
 
@@ -750,7 +748,7 @@ msgstr "Einstellungen"
 msgid "label1"
 msgstr "label1"
 
-#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1103
+#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1263
 msgid ""
 "Cannot find the data to configure this screensaver. Please edit the command "
 "line below."
@@ -758,16 +756,16 @@ msgstr ""
 "Kann die Daten für die Konfiguration dieses Bildschirmschoners nicht finden. "
 "Bitte verändern Sie die Komandozeile unten."
 
-#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1108
+#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1268
 msgid "Please enter a command line below."
 msgstr "Bitte geben Sie unten eine Befehl ein."
 
-#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1123
+#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1283
 msgid "Visual:"
 msgstr "Optisch:"
 
-#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1152
-#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1397
+#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1312
+#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1592
 msgid "Any"
 msgstr "Alle"
 
@@ -981,8 +979,7 @@ msgid ""
 "Programs with smaller values are started before programs with higher values. "
 "The default value should be OK"
 msgstr ""
-"Programme mit kleineren Werten werden vor den Programmen mit höheren "
-"Werten\n"
+"Programme mit kleineren Werten werden vor den Programmen mit höheren Werten\n"
 "gestartet. Der voreingestellte Wert sollte okay sein."
 
 #: capplets/session-properties/startup-programs.c:339
@@ -1173,6 +1170,7 @@ msgstr ""
 "installieren..."
 
 #. Font selector.
+#.
 #: capplets/theme-switcher/gui.c:235
 msgid "User Font"
 msgstr "Eigene Schriftart"
@@ -1489,8 +1487,7 @@ msgid ""
 "in the main menu, or by turning on \"Save Current Setup\" when\n"
 "you log out.\n"
 msgstr ""
-"Ihr aktueller Windowmanager wurde geändert.  Damit die Änderung "
-"gespeichert\n"
+"Ihr aktueller Windowmanager wurde geändert.  Damit die Änderung gespeichert\n"
 "werden kann, müssen Sie den Zustand Ihrer aktuellen Sitzung speichern.  "
 "Dies\n"
 "kann entweder durch Auswahl von \"Sitzung jetzt speichern\" sofort "
@@ -1571,45 +1568,61 @@ msgstr ""
 "Initialisierungsfehler beim Starten `wm-properties-capplet'.\n"
 "Abbruch...\n"
 
-#: libcapplet/capplet-widget.c:77
+#: libcapplet/capplet-widget.c:78
 msgid "id of the capplet -- assigned by the control-center"
 msgstr "Kennung des Capplets -- vergeben durch das Kontrollzentrum"
 
-#: libcapplet/capplet-widget.c:77
+#: libcapplet/capplet-widget.c:78
 msgid "ID"
 msgstr "ID"
 
-#: libcapplet/capplet-widget.c:79
+#: libcapplet/capplet-widget.c:80
 msgid "Multi-capplet id."
 msgstr "Multi-Capplet-ID."
 
-#: libcapplet/capplet-widget.c:79
+#: libcapplet/capplet-widget.c:80
 msgid "CAPID"
 msgstr "CAPID"
 
-#: libcapplet/capplet-widget.c:81
+#: libcapplet/capplet-widget.c:82
 msgid "X ID of the socket it's plugged into"
 msgstr "X-ID des Sockets, an den es angeschlossen ist"
 
-#: libcapplet/capplet-widget.c:81
+#: libcapplet/capplet-widget.c:82
 msgid "XID"
 msgstr "XID"
 
-#: libcapplet/capplet-widget.c:83
+#: libcapplet/capplet-widget.c:84
 msgid "IOR of the control-center"
 msgstr "IOR des Kontrollzentrums"
 
-#: libcapplet/capplet-widget.c:83
+#: libcapplet/capplet-widget.c:84
 msgid "IOR"
 msgstr "IOR"
 
-#: libcapplet/capplet-widget.c:85
+#: libcapplet/capplet-widget.c:86
 msgid "Initialize session settings"
 msgstr "Sitzungseinstellungen initialisieren"
 
-#: libcapplet/capplet-widget.c:87
+#: libcapplet/capplet-widget.c:88
 msgid "Ignore default action.  Used for custom init-session cases"
 msgstr "Standardaktion ignorieren (selbstgestrickte Sitzungsinitialisierung)"
+
+#: libcapplet/capplet-widget.c:91
+msgid "Get an XML description of the capplet's state"
+msgstr "Eine XML-Beschreibung des capplet-Status erfragen"
+
+#: libcapplet/capplet-widget.c:91
+msgid "DO_GET"
+msgstr "DO_GET"
+
+#: libcapplet/capplet-widget.c:93
+msgid "Read an XML description of the capplet's state and apply it"
+msgstr "Lese eine XML-Beschreibung einer capplet-Status und wende ihn an"
+
+#: libcapplet/capplet-widget.c:94
+msgid "DO_SET"
+msgstr "DO_SET"
 
 #: new-control-center/capplet-dir-view.c:107
 msgid "Help on control-center"
@@ -1667,4 +1680,3 @@ msgstr "GNOME-Kontrollzentrum"
 #: new-control-center/capplet-dir-view.c:599
 msgid "Desktop Properties manager."
 msgstr "Desktopeigenschaften-Verwaltung"
-
