@@ -342,9 +342,13 @@ meta_theme_setup_info (GnomeThemeMetaInfo *meta_theme_info,
 		       GladeXML           *dialog)
 {
   GtkWidget *notebook;
+  GtkWidget *toggle;
+  gulong signal_id;
 
   notebook = WID ("meta_theme_notebook");
 
+  /* Undo all signals */
+  toggle = WID ("meta_theme_font1_toggle");
 
   if (meta_theme_info == NULL)
     {
@@ -869,11 +873,16 @@ setup_dialog (GladeXML *dialog)
   GConfClient *client;
   GtkWidget *parent, *widget;
   GnomeWindowManager *window_manager;
-
+  GtkSizeGroup *size_group;
+  
   client = gconf_client_get_default ();
   window_manager = gnome_wm_manager_get_current (gdk_display_get_default_screen (gdk_display_get_default ()));
   parent = WID ("theme_dialog");
 
+  size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
+  gtk_size_group_add_widget (size_group, WID ("meta_theme_install_button"));
+  gtk_size_group_add_widget (size_group, WID ("meta_theme_save_button"));
+  
   setup_tree_view (GTK_TREE_VIEW (WID ("meta_theme_treeview")),
   		   (GCallback) meta_theme_selection_changed,
 		   dialog);
@@ -927,7 +936,9 @@ setup_dialog (GladeXML *dialog)
   g_signal_connect (G_OBJECT (widget), "clicked",
 		    G_CALLBACK (show_manage_themes), dialog);
 
-  /*
+
+
+/*
   g_signal_connect (G_OBJECT (WID ("install_dialog")), "response",
 		    G_CALLBACK (install_dialog_response), dialog);
   */
