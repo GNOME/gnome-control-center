@@ -31,20 +31,28 @@
 
 #include "capplet-dir-view.h"
 
+typedef struct {
+	GtkHTML *top;
+	GtkHTML *main;
+} HtmlViewData;
+
 static void
 html_clear (CappletDirView *view)
 {
-	g_return_if_fail (GTK_IS_HTML (view->view));
+	HtmlViewData *data;
 
-	gtk_html_load_empty (GTK_HTML (view->view));
+	data = view->view_data;
+
+	gtk_html_load_empty (data->top);
+	gtk_html_load_empty (data->main);
 }
 
 static void
 html_clean (CappletDirView *view)
 {
-	g_return_if_fail (GTK_IS_HTML (view->view));
-	
-	gtk_object_destroy (GTK_OBJECT (view->view));
+	/* gtk_widget_unparent (view->view); */
+	g_free (view->view_data);
+	view->view_data = NULL;
 }
 
 #define BUFLEN 4096
@@ -114,17 +122,51 @@ write_parent_html (CappletDir *dir, GtkHTML *html, GtkHTMLStream *stream)
 }
 
 static void
+header_populate (CappletDirView *view)
+{
+	GtkHTMLStream *stream;
+	HtmlViewData *data;
+	char *s;
+
+	data = view->view_data;
+	stream = gtk_html_begin (data->top);
+
+#warning this should probably be loaded from a file yo
+	s = 
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">\n"
+"<html>\n"
+"<head></head>\n"
+"<body marginwidth=\"0\" marginheight=\"0\" background=\""ART_DIR"/bgtop.png\">\n"
+"<img src=\""ART_DIR"/left_top.png\" alt=\"\" width=\"47\" height=\"139\" />\n"
+"<img src=\""ART_DIR"/empty.png\" alt=\"\" width=\"5\" height=\"110\" />\n"
+"<img src=\""ART_DIR"/foot.png\" alt=\"Gnome\" />\n"
+"<img src=\""ART_DIR"/empty.png\" alt=\"\" width=\"5\" height=\"110\" />\n"
+"<FONT face=\"Trebuchet MS CE,Trebuchet MS, Verdana CE, Verdana, Sans-Serif CE, Sans-Serif\" size=\"6\" color=\"white\">Your Gnome</font>\n"
+#if 0
+"<img src=\""ART_DIR"/yourgnome.png\" alt=\"\" />\n"
+#endif
+"</body>\n"
+"</html>";
+
+	gtk_html_write (data->top, stream, s, strlen (s));
+	gtk_html_end (data->top, stream, GTK_HTML_STREAM_OK);
+	gtk_widget_set_usize (GTK_WIDGET (data->top), 0, 139);
+}
+
+static void
 html_populate (CappletDirView *view)
 {
+	HtmlViewData *data;
 	GtkHTMLStream *stream;
 	CappletDirEntry *entry;
 	GSList *item;
 	int i;
 	char *s;
 
-	g_return_if_fail (GTK_IS_HTML (view->view));
+	header_populate (view);
 
-	stream = gtk_html_begin (GTK_HTML (view->view));
+	data = view->view_data;
+	stream = gtk_html_begin (data->main);
 
 	s =
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\n"
@@ -132,8 +174,11 @@ html_populate (CappletDirView *view)
 "  <head>\n"
 "    <title>GNOME Control Center</title>\n"
 "  </head>\n"
-"  <body marginheight=\"0\" marginwidth=\"0\">\n"
+"  <body marginheight=\"0\" marginwidth=\"0\" background=\""ART_DIR"/bg.png\">\n"
+"    <img src=\""ART_DIR"/left.png\" align=\"left\" alt=\"\">\n"
+"    <p align=\"center\">\n"
 #if 0
+"    <img src=\""ART_DIR"/empty.png\" alt=\"\" width=\"600\" height=\"30\" />\n"
 "    <table bgcolor=\"#292928\" width=\"100%%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" columns=\"2\">\n"
 "      <tr>\n"
 "        <td>\n"
@@ -145,23 +190,25 @@ html_populate (CappletDirView *view)
 "    </table>\n"
 #endif
 "    <table width=\"100%%\" columns=\"4\" cellpadding=\"4\" cellspacing=\"0\" border=\"0\">\n"
+#if 0
 "      <tr height=\"64\">\n"
 "        <td colspan=\"4\">\n"
 "          Select something you want to customize.\n"
 "        </td>\n"
 "      <\tr>\n"
+#endif
 "      <tr>\n"
 "        <td colspan=\"4\">\n"
 "          &nbsp;\n";
 
-	gtk_html_write (GTK_HTML (view->view), stream, s, strlen (s));
+	gtk_html_write (data->main, stream, s, strlen (s));
 
-	write_parent_html (view->capplet_dir->entry.dir, GTK_HTML (view->view), stream);
+	/* write_parent_html (view->capplet_dir->entry.dir, data->main, stream); */
 
 	for (i = 0, item = view->capplet_dir->entries; item; item = item->next, i++) {
 		if (!(i%2)) {
 			s = "      <tr>\n";
-			gtk_html_write (GTK_HTML (view->view), stream, s, strlen (s));
+			gtk_html_write (data->main, stream, s, strlen (s));
 		}
 
 		entry = CAPPLET_DIR_ENTRY (item->data);
@@ -174,36 +221,67 @@ html_populate (CappletDirView *view)
 "        </td>\n"
 , entry->path, entry->icon, entry->path, entry->label, entry->entry->comment);
 
-		gtk_html_write (GTK_HTML (view->view), stream, s, strlen (s));
+		gtk_html_write (data->main, stream, s, strlen (s));
 		g_free (s);
 
 		if (i%2 || !item->next) {
 			s = "      </tr>\n";
-			gtk_html_write (GTK_HTML (view->view), stream, s, strlen (s));
+			gtk_html_write (data->main, stream, s, strlen (s));
 		}
 	}
 
 	s =
 "    </table>\n"
+"    </p>\n"
 "  </body>\n"
 "</html>\n";
-	gtk_html_write (GTK_HTML (view->view), stream, s, strlen (s));
+	gtk_html_write (data->main, stream, s, strlen (s));
 
-	gtk_html_end (GTK_HTML (view->view), stream, GTK_HTML_STREAM_OK);
+	gtk_html_end (data->main, stream, GTK_HTML_STREAM_OK);
 }
 
 static GtkWidget *
 html_create (CappletDirView *view)
-{
-	GtkWidget *w = gtk_html_new ();
+{	
+	GtkWidget *vbox;
+	HtmlViewData *data;
+	GtkWidget *sw;
 
-	gtk_signal_connect (GTK_OBJECT (w), "url_requested",
+	data = g_new (HtmlViewData, 1);
+	view->view_data = data;
+
+	vbox = gtk_vbox_new (FALSE, 0);
+
+	/* top widget */
+	data->top = GTK_HTML (gtk_html_new ());
+
+	sw = gtk_scrolled_window_new (NULL, NULL);
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
+					GTK_POLICY_NEVER,
+					GTK_POLICY_NEVER);
+	gtk_container_add (GTK_CONTAINER (sw), GTK_WIDGET (data->top));
+	gtk_box_pack_start (GTK_BOX (vbox), sw, FALSE, FALSE, 0);
+
+	/* main widget */
+	data->main = GTK_HTML (gtk_html_new ());
+	sw = gtk_scrolled_window_new (NULL, NULL);
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
+					GTK_POLICY_NEVER,
+					GTK_POLICY_AUTOMATIC);
+	gtk_container_add (GTK_CONTAINER (sw), GTK_WIDGET (data->main));
+	gtk_box_pack_start (GTK_BOX (vbox), sw, TRUE, TRUE, 0);
+			    
+	gtk_signal_connect (GTK_OBJECT (data->top), "url_requested",
 			    GTK_SIGNAL_FUNC (handle_url_cb), view);
 
-	gtk_signal_connect (GTK_OBJECT (w), "link_clicked",
+	gtk_signal_connect (GTK_OBJECT (data->main), "url_requested",
+			    GTK_SIGNAL_FUNC (handle_url_cb), view);
+
+	gtk_signal_connect (GTK_OBJECT (data->main), "link_clicked",
 			    GTK_SIGNAL_FUNC (handle_link_cb), view);
 
-	return w;
+	gtk_widget_show_all (vbox);
+	return vbox;
 }
 
 CappletDirViewImpl capplet_dir_view_html = {
@@ -212,4 +290,3 @@ CappletDirViewImpl capplet_dir_view_html = {
 	html_populate,
 	html_create
 };
-

@@ -325,8 +325,7 @@ start_capplet_through_root_manager (GnomeDesktopEntry *gde)
 
 		if (pid == (pid_t) -1) {
 			g_error ("%s", g_strerror (errno));
-		}
-		else if (pid == 0) {
+		} else if (pid == 0) {
 			char *arg[2];
 			int i;
 
@@ -337,11 +336,11 @@ start_capplet_through_root_manager (GnomeDesktopEntry *gde)
 			arg[0] = gnome_is_program_in_path ("root-manager-helper");
 			arg[1] = NULL;
 			execv (arg[0], arg);
-		}
-		else
-		{
+		} else {
 			output = fdopen(pipe_fd[1], "a");
 		}
+
+		capplet_dir_views_set_authenticated (TRUE);
 	}
 
 

@@ -29,17 +29,17 @@
 static void
 tree_clear (CappletDirView *view)
 {
-	g_return_if_fail (GTK_IS_CTREE (view->view));
+	g_return_if_fail (GTK_IS_CTREE (view->view_data));
 
-	gtk_clist_clear (GTK_CLIST (view->view));
+	gtk_clist_clear (GTK_CLIST (view->view_data));
 }
 
 static void
 tree_clean (CappletDirView *view)
 {
-	g_return_if_fail (GTK_IS_CTREE (view->view));
+	g_return_if_fail (GTK_IS_CTREE (view->view_data));
 
-	gtk_object_destroy (GTK_OBJECT (view->view));
+	view->view_data = NULL;
 }
 
 static void
@@ -80,11 +80,11 @@ populate_tree_branch (CappletDir *dir, GtkCTree *ctree, GtkCTreeNode *parent)
 static void
 tree_populate (CappletDirView *view) 
 {
-	g_return_if_fail (GTK_IS_CTREE (view->view));
+	g_return_if_fail (GTK_IS_CTREE (view->view_data));
 
-	gtk_clist_freeze (GTK_CLIST (view->view));
-	populate_tree_branch (view->capplet_dir, GTK_CTREE (view->view), NULL);
-	gtk_clist_thaw (GTK_CLIST (view->view));
+	gtk_clist_freeze (GTK_CLIST (view->view_data));
+	populate_tree_branch (view->capplet_dir, GTK_CTREE (view->view_data), NULL);
+	gtk_clist_thaw (GTK_CLIST (view->view_data));
 }
 
 static void
@@ -122,12 +122,14 @@ static GtkWidget *
 tree_create (CappletDirView *view) 
 {
 	GtkAdjustment *adjustment;
-	GtkWidget *w;
+	GtkWidget *w, *sw;
+	
+	sw = gtk_scrolled_window_new (NULL, NULL);
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
+					GTK_POLICY_AUTOMATIC,
+					GTK_POLICY_AUTOMATIC);
 
-	adjustment = gtk_scrolled_window_get_vadjustment
-		(GTK_SCROLLED_WINDOW (view->scrolled_win));
-
-	w = gtk_ctree_new (1, 0);
+	view->view_data = w = gtk_ctree_new (1, 0);
 
 	gtk_signal_connect (GTK_OBJECT (w), "tree-select-row",
 			    GTK_SIGNAL_FUNC (select_tree_cb),
@@ -136,7 +138,10 @@ tree_create (CappletDirView *view)
 			    GTK_SIGNAL_FUNC (tree_event_cb),
 			    view);
 
-	return w;
+	gtk_container_add (GTK_CONTAINER (sw), w);
+	gtk_widget_show_all (sw);
+
+	return sw;
 }
 
 #if 0

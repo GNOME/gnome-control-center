@@ -31,17 +31,16 @@
 static void
 list_clear (CappletDirView *view)
 {
-	g_return_if_fail (GNOME_IS_ICON_LIST (view->view));
+	g_return_if_fail (GNOME_IS_ICON_LIST (view->view_data));
 
-	gnome_icon_list_clear (GNOME_ICON_LIST (view->view));
+	gnome_icon_list_clear (GNOME_ICON_LIST (view->view_data));
 }
 
 static void
 list_clean (CappletDirView *view)
 {
-	g_return_if_fail (GNOME_IS_ICON_LIST (view->view));
-
-	gtk_object_destroy (GTK_OBJECT (view->view));
+	/* i think this can be a no-op now */
+	view->view_data = NULL;
 }
 
 /*
@@ -103,23 +102,23 @@ list_populate (CappletDirView *view)
 	int i;
 	GnomeCanvasItem *item;
 
-	g_return_if_fail (GNOME_IS_ICON_LIST (view->view));
+	g_return_if_fail (GNOME_IS_ICON_LIST (view->view_data));
 
-	gnome_icon_list_freeze (GNOME_ICON_LIST (view->view));
+	gnome_icon_list_freeze (GNOME_ICON_LIST (view->view_data));
 
 	for (i = 0, list = view->capplet_dir->entries; list; list = list->next, i++) {
 #if 0
 		item = flatten_alpha (CAPPLET_DIR_ENTRY (list->data)->pb,
-				      GNOME_CANVAS (view->view));
-		gnome_icon_list_insert_item (GNOME_ICON_LIST (view->view), i, item, 
+				      GNOME_CANVAS (view->view_data));
+		gnome_icon_list_insert_item (GNOME_ICON_LIST (view->view_data), i, item, 
 					     CAPPLET_DIR_ENTRY (list->data)->label);
 #else
-		gnome_icon_list_insert (GNOME_ICON_LIST (view->view), i,
+		gnome_icon_list_insert (GNOME_ICON_LIST (view->view_data), i,
 					CAPPLET_DIR_ENTRY (list->data)->icon,
 					CAPPLET_DIR_ENTRY (list->data)->label);
 #endif
 	}
-	gnome_icon_list_thaw (GNOME_ICON_LIST (view->view));
+	gnome_icon_list_thaw (GNOME_ICON_LIST (view->view_data));
 }
 
 static void 
@@ -141,15 +140,18 @@ static GtkWidget *
 list_create (CappletDirView *view) 
 {
 	GtkAdjustment *adjustment;
-	GtkWidget *w;
+	GtkWidget *w, *sw;
 	GSList *list;
 	int i;
 
-	adjustment = gtk_scrolled_window_get_vadjustment
-		(GTK_SCROLLED_WINDOW (view->scrolled_win));
+	sw = gtk_scrolled_window_new (NULL, NULL);
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
+					GTK_POLICY_AUTOMATIC,
+					GTK_POLICY_AUTOMATIC);
 
+	adjustment = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (sw));		
 
-	w = gnome_icon_list_new (72, adjustment, 0);
+	view->view_data = w = gnome_icon_list_new (72, adjustment, 0);
 
 	if (view->selected)
 		view->capplet_dir = view->selected->dir;
@@ -170,7 +172,11 @@ list_create (CappletDirView *view)
 	gtk_signal_connect (GTK_OBJECT (w), "select-icon", 
 			    GTK_SIGNAL_FUNC (select_icon_list_cb),
 			    view);
-	return w;
+
+	gtk_container_add (GTK_CONTAINER (sw), w);
+	gtk_widget_show_all (sw);
+
+	return sw;
 }
 
 CappletDirViewImpl capplet_dir_view_list = {

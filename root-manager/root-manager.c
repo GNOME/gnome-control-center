@@ -1,5 +1,6 @@
 /* -*-Mode: c-*- */
 /* Copyright (C) 1997 Red Hat Software, Inc.
+ * Copyright 2001 Ximian Inc.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -56,6 +57,8 @@
 
 #include "root-manager.h"
 #include "shvar.h"
+
+#define _(s) gettext(s)
 
 /* Total GECOS field length... is this enough ? */
 #define GECOS_LENGTH		80
@@ -438,12 +441,16 @@ int main(int argc, char *argv[])
 	exit(ERR_NO_RIGHTS);
     }
 
-    if (argc < 2)
-	    g_error ("Usage: root-helper fd");
+    if (argc < 2) {
+	    fprintf(stderr, _("Usage: root-helper fd"));
+	    exit(ERR_INVALID_CALL);
+    }
 
     fd = atoi (argv[1]);
-    if (fd <= STDERR_FILENO)
-	    g_error ("Usage: root-helper fd");
+    if (fd <= STDERR_FILENO) {
+	    fprintf (stderr, _("Usage: root-helper fd"));
+	    exit(ERR_INVALID_CALL);
+    }
     
 #ifdef DEBUG_USERHELPER
     fprintf (stderr, "fd is %d\n", fd);
@@ -598,6 +605,7 @@ int main(int argc, char *argv[])
 #define BUFSIZE 1024
 		{
 			char buf[BUFSIZE];
+			fprintf (stdout, "success\n");
 #ifdef DEBUG_USERHELPER
 			fprintf (stderr, "looping for input\n");
 #endif
@@ -615,7 +623,7 @@ int main(int argc, char *argv[])
 					       "/usr/sbin:/usr/bin:/sbin:/bin:/usr/X11R6/bin:/root/bin", 1);
 					
 					execv (args[0], args);
-					g_error ("s", g_strerror (errno));
+					g_error ("%s", g_strerror (errno));
 				}
 			}
 		}	    
@@ -680,7 +688,7 @@ int main(int argc, char *argv[])
 					   "/usr/sbin:/usr/bin:/sbin:/bin:/usr/X11R6/bin:/root/bin", 1);
 
 				    execv (args[0], args);
-				    g_error ("s", g_strerror (errno));
+				    g_error ("%s", g_strerror (errno));
 			    }
 		    }
 	    }	    

@@ -46,7 +46,7 @@ struct _CappletDirViewImpl
 	/* remove entries from view */
 	CDVFunc clear;
 
-	/* clean up (destroy widgets */
+	/* clean up (destroy widgets) */
 	CDVFunc clean;
 
 	CDVFunc populate;
@@ -66,11 +66,10 @@ struct _CappletDirView
 	CappletDirViewImpl *impl;
 
 	GtkWidget *view;
+	gpointer view_data;
 
 	gboolean destroyed;
 	CappletDirViewLayout layout;
-
-	GtkScrolledWindow *scrolled_win;
 
 	GtkWidget *up_button;
 	GtkWidget *parents_option;
@@ -86,6 +85,8 @@ struct _CappletDirView
 	GtkWidget *rootm_button;
 	GtkWidget *rootm_locked;
 	GtkWidget *rootm_unlocked;
+
+	gboolean changing_layout;
 };
 
 struct _CappletDirViewClass 
@@ -100,6 +101,8 @@ void capplet_dir_view_destroy   (CappletDirView *view);
 
 void capplet_dir_view_load_dir  (CappletDirView *view, CappletDir *dir);
 void capplet_dir_view_show      (CappletDirView *view);
+
+void capplet_dir_views_set_authenticated (gboolean authed);
 
 void gnomecc_init (void);
 

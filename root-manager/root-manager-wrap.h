@@ -1,4 +1,5 @@
 /* Copyright (C) 1997-1999 Red Hat Software, Inc.
+ * Copyright 2001 Ximian, Inc.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -19,7 +20,6 @@
 #define __USERHELPER_WRAP_H__
 
 /* lots 'o includes. */
-#include "userdialogs.h"
 #include <signal.h>
 #include <unistd.h>
 #include <errno.h>
@@ -59,7 +59,7 @@ void userhelper_runv(char *path, int new_fd);
 void userhelper_parse_exitstatus(int exitstatus);
 void userhelper_parse_childout();
 void userhelper_read_childout(gpointer data, int source, GdkInputCondition cond);
-void userhelper_write_childin(GtkWidget* widget, response *resp);
+void userhelper_write_childin(int button, response *resp);
 
 void userhelper_sigchld();	/* sigchld handler */
 

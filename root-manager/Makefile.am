@@ -1,7 +1,12 @@
+pixmapdir = $(datadir)/pixmaps
+pixmap_DATA = xst-keys.png
+
 INCLUDES = \
-	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"	\
-	-I$(top_srcdir)/intl -I$(top_builddir)/intl	\
-	-I$(includedir)  $(shell gtk-config --cflags)	\
+	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"		\
+	-I$(top_srcdir)/intl -I$(top_builddir)/intl		\
+	@RMHELPER_CFLAGS@					\
+	-DUH_PATH=\""$(sbindir)/root-manager"\"			\
+	-DUH_KEY_PIXMAP_PATH=\""$(pixmapdir)/xst-keys.png"\"	\
 	-DDEBUG_USERHELPER
 
 bin_PROGRAMS = root-manager-helper
@@ -19,8 +24,6 @@ root_manager_LDFLAGS = $(shell glib-config --libs)
 root_manager_helper_SOURCES = \
 	root-manager-helper.c	\
 	root-manager-wrap.c	\
-	root-manager-wrap.h	\
-	userdialogs.c		\
-	userdialogs.h
+	root-manager-wrap.h
 
-root_manager_helper_LDFLAGS = $(shell gtk-config --libs)
+root_manager_helper_LDFLAGS = @RMHELPER_LIBS@

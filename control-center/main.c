@@ -34,8 +34,6 @@
 int
 main (int argc, char **argv) 
 {
-	CappletDirEntry *main_dir;
-
         bindtextdomain (PACKAGE, GNOMELOCALEDIR);
         textdomain (PACKAGE);
 

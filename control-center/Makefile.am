@@ -1,8 +1,15 @@
 appicondir = $(datadir)/pixmaps
 appicon_DATA = control-center.png
 
-splashdir = $(datadir)/pixmaps
-splash_DATA = ccsplash.png
+splashdir = $(datadir)/pixmaps/gnomecc
+splash_DATA = \
+	ccsplash.png	\
+	bgtop.png	\
+	bg.png		\
+	empty.png	\
+	foot.png	\
+	left_top.png	\
+	left.png
 
 sysdir = $(datadir)/gnome/apps/Settings
 sys_DATA = gnomecc.desktop
@@ -23,8 +30,9 @@ INCLUDES = 			\
 	-DVERSION=\""$(VERSION)"\"			\
 	-DSETTINGS_DIR=\""$(datadir)/control-center"\"	\
 	-DPIXMAPS_DIR=\""$(appicondir)"\"		\
-	-DGNOME_SBINDIR=\""$(sbindir)"\"		\
-	$(GNOEMCC_CFLAGS)
+	-DART_DIR=\""$(splashdir)"\"		\
+	-DGNOME_SBINDIR=\""$(sbindir)"\"
+	$(GNOMECC_CFLAGS)
 
 bin_PROGRAMS = gnomecc
 

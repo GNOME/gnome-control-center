@@ -1,4 +1,5 @@
 /* Copyright (C) 1997-1999 Red Hat Software, Inc.
+ * Copyright 2001 Ximian, Inc.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -17,8 +18,6 @@
 
 #ifndef __USERHELPER_H__
 #define __USERHELPER_H__
-
-#define _(String) gettext(String)
 
 #define UH_ECHO_ON_PROMPT 1
 #define UH_ECHO_OFF_PROMPT 2
@@ -46,8 +45,8 @@
 #define ERR_EXEC_FAILED		11	/* exec failed for some reason */
 #define ERR_UNK_ERROR           255     /* unknown error */
 
-#define UH_PATH "/gnome/sbin/root-manager"
-#define UH_KEY_PIXMAP_PATH "/usr/share/pixmaps/userhelper-keys.xpm"
-/*#define UH_PATH "./root-manager"*/
+#ifndef _
+#define _(s) gettext(s)
+#endif
 
 #endif /* __USERHELPER_H__ */

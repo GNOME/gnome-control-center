@@ -52,6 +52,26 @@ enum {
 };
 
 static GList *window_list;
+static gboolean authed;
+
+static void
+capplet_dir_view_update_authenticated (CappletDirView *view, gpointer null)
+{
+	if (authed) {
+		gtk_widget_hide (view->rootm_locked);
+		gtk_widget_show (view->rootm_unlocked);
+	} else {
+		gtk_widget_hide (view->rootm_unlocked);
+		gtk_widget_show (view->rootm_locked);
+	}
+}
+
+void
+capplet_dir_views_set_authenticated (gboolean amiauthedornot)
+{
+	authed = amiauthedornot;
+	g_list_foreach (window_list, (GFunc)capplet_dir_view_update_authenticated, NULL);
+}
 
 static void
 capplet_dir_view_init (CappletDirView *view) 
@@ -76,6 +96,11 @@ capplet_dir_view_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		if (layout == view->layout)
 			break;
 
+		g_assert (!view->changing_layout);
+		view->changing_layout = TRUE;
+
+		g_print ("layout: %p, %d\n", view, layout);
+
 		if (view->impl && view->impl->clean)
 			view->impl->clean (view);
 
@@ -83,18 +108,23 @@ capplet_dir_view_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		view->impl = capplet_dir_view_impl[layout];
 
 		if (view->impl && view->impl->create) {
+			g_print ("1.  %p\n", view->view);
 			view->view = view->impl->create (view);
 
-			gtk_container_add (GTK_CONTAINER (view->scrolled_win),
-					   view->view);
+			g_print ("2.  %p\n", view->view);
+			gnome_app_set_contents (view->app, view->view);
 
+			g_print ("3.  %p\n", view->view);
 			if (view->capplet_dir && view->impl->populate)
 				view->impl->populate (view);
 
+			g_print ("4.  %p\n", view->view);
+#if 0			
 			gtk_signal_connect (GTK_OBJECT (view->view), "destroy",
 					    GTK_SIGNAL_FUNC (gtk_widget_destroyed),
 					    &view->view);
-
+#endif
+			g_print ("5.  %p\n\n\n\n", view->view);
 			gtk_widget_show (view->view);
 		}
 
@@ -111,6 +141,8 @@ capplet_dir_view_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 					      layout == LAYOUT_TREE);
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (view->html_toggle),
 					      layout == LAYOUT_HTML);
+
+		view->changing_layout = FALSE;
 		break;
 	default:
 		break;
@@ -211,7 +243,7 @@ exit_cb (GtkWidget *w, gpointer data)
 static void
 menu_cb (GtkWidget *w, CappletDirView *view, CappletDirViewLayout layout)
 {
-	if (!GTK_CHECK_MENU_ITEM (w)->active)
+	if (!GTK_CHECK_MENU_ITEM (w)->active || view->changing_layout)
 		return;
 
 	gtk_object_set (GTK_OBJECT (view), "layout", layout, NULL);
@@ -238,7 +270,7 @@ tree_menu_cb (GtkWidget *w, CappletDirView *view)
 static void
 button_cb (GtkWidget *w, CappletDirView *view, CappletDirViewLayout layout)
 {
-	if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w)))
+	if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w)) || view->changing_layout)
 		return;
 
 	gtk_object_set (GTK_OBJECT (view), "layout", layout, NULL);
@@ -273,8 +305,8 @@ about_menu_cb (GtkWidget *widget, CappletDirView *view)
 {
 	static GtkWidget *about = NULL;
 	static gchar *authors[] = {
-		"Bradford Hovinen <hovinen@helixcode.com>",
-		"Jacob Berkman <jacob@helixcode.com>",
+		"Bradford Hovinen <hovinen@ximian.com>",
+		"Jacob Berkman <jacob@ximian.com>",
 		"Johnathan Blandford <jrb@redhat.com>",
 		NULL
 	};
@@ -289,7 +321,7 @@ about_menu_cb (GtkWidget *widget, CappletDirView *view)
 		(_("GNOME Control Center"), VERSION,
 		 _("Desktop properties manager."),
 		 (const gchar **) authors,
-		 "Copyright (C) 2000 Helix Code, Inc.\n"
+		 "Copyright (C) 2000, 20001 Ximian, Inc.\n"
 		 "Copyright (C) 1999 Red Hat Software, Inc.",
 		 NULL);
 
@@ -311,13 +343,7 @@ back_button_cb (GtkWidget *widget, CappletDirView *view)
 static void
 rootm_button_cb (GtkWidget *w, CappletDirView *view)
 {
-	if (GTK_WIDGET_VISIBLE (view->rootm_locked)) {
-		gtk_widget_hide (view->rootm_locked);
-		gtk_widget_show (view->rootm_unlocked);
-	} else {
-		gtk_widget_hide (view->rootm_unlocked);
-		gtk_widget_show (view->rootm_locked);
-	}	
+	gdk_beep ();
 }
 
 CappletDirView *
@@ -335,8 +361,7 @@ capplet_dir_view_new (void)
 
 	window_list = g_list_append (window_list, view);
 
-	view->app            = glade_xml_get_widget (xml, "main_window");
-	view->scrolled_win   = glade_xml_get_widget (xml, "scrolled_window");
+	view->app = GNOME_APP (glade_xml_get_widget (xml, "main_window"));
 	view->up_button      = glade_xml_get_widget (xml, "back_button");
 	view->parents_option = glade_xml_get_widget (xml, "parents_option");
 	view->html_toggle    = glade_xml_get_widget (xml, "html_toggle");
@@ -382,6 +407,8 @@ capplet_dir_view_new (void)
 	gtk_object_unref (GTK_OBJECT (xml));
 	
 	gtk_object_set (GTK_OBJECT (view), "layout", prefs->layout, NULL);
+
+	capplet_dir_view_update_authenticated (view, NULL);
 
 	return view;
 }

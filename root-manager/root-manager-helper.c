@@ -1,4 +1,5 @@
 /* Copyright (C) 1999 Red Hat Software, Inc.
+ * Copyright 2001 Ximian, Inc.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -23,8 +24,7 @@
 #include <libintl.h>
 #include <unistd.h>
 #include <sys/types.h>
-#include <gtk/gtk.h>
-#include "userdialogs.h"
+#include <gnome.h>
 #include "root-manager-wrap.h"
 
 void
@@ -52,12 +52,18 @@ main(int argc, char* argv[])
 	argv_fake[1] = "0";
 
 	if (!gtk_init_check(&argc_fake, &argv_fake)) {
-		g_error ("Must be run with $DISPLAY");
+		fprintf (stderr, _("Could not connect to X Display"));
+		return -1;
 	}
 
 	new_fd = dup (STDIN_FILENO);
-	if (new_fd < 0)
-		g_error ("error dup()'ing");
+	if (new_fd < 0) {
+		fprintf (stderr, _("Could not duplicate file descriptor"));
+		return -1;
+	}
+
+	gnome_init ("root-manager-helper", VERSION, argc_fake, argv_fake);
+	gdk_rgb_init ();
 
 	signal(SIGCHLD, userhelper_fatal_error);
 
@@ -65,7 +71,5 @@ main(int argc, char* argv[])
 
 	gtk_main();
 
-	g_print ("back...\n");
-	
 	return 0;
 }
