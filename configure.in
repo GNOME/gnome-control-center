@@ -169,8 +169,11 @@ install-data-local:\
 	$(mkinstalldirs) $(datadir)/control-center/capplets/$(cappletgroup)\
 	$(INSTALL_DATA) $(desktop) $(datadir)/control-center/capplets/$(cappletgroup)$(desktop)\
 install-data-am: install-data-local'
+GNOMECC_CAPPLETS_OAF_FILE_IN_RULE='$(oaffile): \%.oaf: \%.oaf.in\
+	sed -e "s#REPLACEME_PLIZ#$(bindir)/$(bin_PROGRAMS)#" < $< > ${oaffile}'
 AC_DIVERT_PUSH(AC_DIVERSION_SED)dnl
 s%@GNOMECC_CAPPLETS_DESKTOP_IN_RULE@%[$]GNOMECC_CAPPLETS_DESKTOP_IN_RULE%g
+s%@GNOMECC_CAPPLETS_OAF_FILE_IN_RULE@%[$]GNOMECC_CAPPLETS_OAF_FILE_IN_RULE%g
 AC_DIVERT_POP()dnl
 # Redirect the config.log output again, so that the ltconfig log is not
 # clobbered by the next message.
