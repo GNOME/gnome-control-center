@@ -454,7 +454,7 @@
 				  <property name="spacing">4</property>
 
 				  <child>
-				    <widget class="GtkLabel" id="label5">
+				    <widget class="GtkLabel" id="cursor_label">
 				      <property name="visible">True</property>
 				      <property name="label" translatable="yes">_Blink speed:</property>
 				      <property name="use_underline">True</property>
@@ -475,7 +475,7 @@
 				  </child>
 
 				  <child>
-				    <widget class="GtkLabel" id="label6">
+				    <widget class="GtkLabel" id="slow_label">
 				      <property name="visible">True</property>
 				      <property name="label" translatable="yes">&lt;i&gt;slow&lt;/i&gt;</property>
 				      <property name="use_underline">False</property>
@@ -487,6 +487,9 @@
 				      <property name="yalign">0.5</property>
 				      <property name="xpad">0</property>
 				      <property name="ypad">0</property>
+				      <accessibility>
+					<atkrelation target="cursor_blink_time_scale" type="label-for"/>
+				      </accessibility>
 				    </widget>
 				    <packing>
 				      <property name="padding">0</property>
@@ -505,6 +508,12 @@
 				      <property name="update_policy">GTK_UPDATE_DISCONTINUOUS</property>
 				      <property name="inverted">False</property>
 				      <property name="adjustment">1000 100 2500 200 200 0</property>
+				      <accessibility>
+					<atkrelation target="slow_label" type="labelled-by"/>
+					<atkrelation target="set_cursor_label" type="labelled-by"/>
+					<atkrelation target="fast_label" type="labelled-by"/>
+					<atkrelation target="cursor_label" type="labelled-by"/>
+				      </accessibility>
 				    </widget>
 				    <packing>
 				      <property name="padding">0</property>
@@ -514,7 +523,7 @@
 				  </child>
 
 				  <child>
-				    <widget class="GtkLabel" id="label7">
+				    <widget class="GtkLabel" id="fast_label">
 				      <property name="visible">True</property>
 				      <property name="label" translatable="yes">&lt;i&gt;fast&lt;/i&gt;</property>
 				      <property name="use_underline">False</property>
@@ -526,6 +535,9 @@
 				      <property name="yalign">0.5</property>
 				      <property name="xpad">0</property>
 				      <property name="ypad">0</property>
+				      <accessibility>
+					<atkrelation target="cursor_blink_time_scale" type="label-for"/>
+				      </accessibility>
 				    </widget>
 				    <packing>
 				      <property name="padding">0</property>
@@ -549,7 +561,7 @@
 			  </child>
 
 			  <child>
-			    <widget class="GtkLabel" id="label8">
+			    <widget class="GtkLabel" id="set_cursor_label">
 			      <property name="visible">True</property>
 			      <property name="label" translatable="yes">Set the speed the cursor blinks in text fields.</property>
 			      <property name="use_underline">False</property>
@@ -561,6 +573,9 @@
 			      <property name="yalign">0.5</property>
 			      <property name="xpad">0</property>
 			      <property name="ypad">0</property>
+			      <accessibility>
+				<atkrelation target="cursor_blink_time_scale" type="label-for"/>
+			      </accessibility>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -782,7 +797,7 @@
 				  <property name="spacing">4</property>
 
 				  <child>
-				    <widget class="GtkLabel" id="label9">
+				    <widget class="GtkLabel" id="volume_label">
 				      <property name="visible">True</property>
 				      <property name="label" translatable="yes">_Volume:</property>
 				      <property name="use_underline">True</property>
@@ -794,6 +809,9 @@
 				      <property name="yalign">0.5</property>
 				      <property name="xpad">0</property>
 				      <property name="ypad">0</property>
+				      <accessibility>
+					<atkrelation target="volume_scale" type="label-for"/>
+				      </accessibility>
 				    </widget>
 				    <packing>
 				      <property name="padding">0</property>
