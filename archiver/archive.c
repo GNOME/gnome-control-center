@@ -701,6 +701,8 @@ foreach_build_list_cb (gchar *key, Location *value, GList **node)
 {
 	if (!location_is_deleted (value))
 		*node = g_list_prepend (*node, value);
+	else
+		bonobo_object_unref (BONOBO_OBJECT (value));
 
 	return 0;
 }
