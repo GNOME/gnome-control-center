@@ -103,14 +103,17 @@ read_themes (GladeXML *dialog)
   GList *gtk_theme_list;
   GList *list;
   GtkTreeModel *model;
+  GtkTreeView *tree_view;
   gchar *current_theme;
   gint i = 0;
   gboolean current_theme_found = FALSE;
+  GtkTreeRowReference *row_ref = NULL;
 
   client = gconf_client_get_default ();
 
   gtk_theme_list = theme_common_get_list ();
-  model = gtk_tree_view_get_model (GTK_TREE_VIEW (WID ("theme_treeview")));
+  tree_view = GTK_TREE_VIEW (WID ("theme_treeview"));
+  model = gtk_tree_view_get_model (tree_view);
 
   setting_model = TRUE;
   gtk_list_store_clear (GTK_LIST_STORE (model));
@@ -137,15 +140,21 @@ read_themes (GladeXML *dialog)
 
       if (strcmp (current_theme, info->name) == 0)
 	{
-	  GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (WID ("theme_treeview")));
+	  GtkTreeSelection *selection;
+	  GtkTreePath *path;
+
+	  selection = gtk_tree_view_get_selection (tree_view);
 	  gtk_tree_selection_select_iter (selection, &iter);
+	  path = gtk_tree_model_get_path (model, &iter);
+	  row_ref = gtk_tree_row_reference_new (model, path);
+	  gtk_tree_path_free (path);
 	  current_theme_found = TRUE;
 	}
 
       if (i == MAX_ELEMENTS_BEFORE_SCROLLING)
 	{
 	  GtkRequisition rectangle;
-	  gtk_widget_size_request (WID ("theme_treeview"), &rectangle);
+	  gtk_widget_size_request (GTK_WIDGET (tree_view), &rectangle);
 	  gtk_widget_set_usize (WID ("theme_swindow"), -1, rectangle.height);
 	  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (WID ("theme_swindow")),
 					  GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
@@ -155,14 +164,29 @@ read_themes (GladeXML *dialog)
 
   if (! current_theme_found)
     {
-      GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (WID ("theme_treeview")));
+      GtkTreeSelection *selection = gtk_tree_view_get_selection (tree_view);
       GtkTreeIter iter;
+      GtkTreePath *path;
 
       gtk_list_store_prepend (GTK_LIST_STORE (model), &iter);
       gtk_list_store_set (GTK_LIST_STORE (model), &iter,
 			  THEME_NAME_COLUMN, current_theme,
 			  -1);
       gtk_tree_selection_select_iter (selection, &iter);
+      path = gtk_tree_model_get_path (model, &iter);
+      row_ref = gtk_tree_row_reference_new (model, path);
+      gtk_tree_path_free (path);
+    }
+
+
+  if (row_ref)
+    {
+      GtkTreePath *path;
+
+      path = gtk_tree_row_reference_get_path (row_ref);
+      gtk_tree_view_scroll_to_cell (tree_view, path, NULL, TRUE, 0.5, 0.0);
+      gtk_tree_path_free (path);
+      gtk_tree_row_reference_free (row_ref);
     }
   setting_model = FALSE;
 
@@ -276,7 +300,7 @@ show_manage_themes (GtkWidget *button, gpointer data)
 
 	if (!gnome_vfs_uri_exists (uri)) {
 		/* Create the directory */
-		gnome_vfs_make_directory_for_uri (uri, 775);
+		gnome_vfs_make_directory_for_uri (uri, 0775);
 	}
 	gnome_vfs_uri_unref (uri);
 

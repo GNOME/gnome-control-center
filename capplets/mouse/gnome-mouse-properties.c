@@ -377,7 +377,7 @@ read_cursor_font (void)
 	gchar *dir_name;
 	struct dirent *file_dirent;
 
-	dir_name = g_build_path (G_DIR_SEPARATOR_S, g_get_home_dir (), ".gnome/share/cursor-fonts", NULL);
+	dir_name = g_build_path (G_DIR_SEPARATOR_S, g_get_home_dir (), ".gnome2/share/cursor-fonts", NULL);
 	if (! g_file_test (dir_name, G_FILE_TEST_EXISTS))
 		return NULL;
 

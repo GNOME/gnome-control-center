@@ -175,12 +175,21 @@ theme_common_init (void)
 {
   static gboolean initted = FALSE;
   gchar *dir;
+  GnomeVFSURI *uri;
 
   if (initted)
     return;
   initted = TRUE;
 
   dir = g_build_filename (g_get_home_dir (), ".themes", NULL);
+
+  /* Make sure it exists */
+  uri = gnome_vfs_uri_new (dir);
+  if (!gnome_vfs_uri_exists (uri))
+    gnome_vfs_make_directory_for_uri (uri, 0775);
+
+  gnome_vfs_uri_unref (uri);
+
   themes_common_list_add_dir (dir);
   g_free (dir);
 
