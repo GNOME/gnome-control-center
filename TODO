@@ -2,32 +2,104 @@
 [ Things prefaced with GSD need to be fixed in the gnome-settings daemon
   and not the dialog ]
 
-MOUSE PROPERTIES:
+ACCESSIBILITY:
+ * UI love
+ * Figure out Keyboard/peripherals integration
 
- * Add cursors to CVS (I have them locally) and install them
- * GSD: actually do the 'xset' to load the cursors at start time
- * GSD: Add support for devices other than CoreInput.
-
-KEYBOARD PROPERTIES:
-
- * GSD: support keyboard bell
- * Remove awful jrb-art and replace with actual blinking cursor.
+BACKGROUND:
+ * Seth love
+ * Get actual GNOME backgrounds
 
 DEFAULT APPLICATIONS PROPERTIES:
+ * Merge in Window Manager selection
 
- * Move to libglade support
- * Merge in Window Manager properties
- * Test that GConf changes affect the dialog
+FILE TYPES:
+ * Stability issues
+ * UI Love
 
-ALL DIALOGS:
-
- * Change buttons to use whatever the UI team comes up with
- * Make sure GSD exists using bonobo-activation
+FONT AND THEME:
+ * merge them
 
 GNOME SETTINGS DAEMON:
+ * disk monitor
 
- * GSD: Confirm all XSettings settings are correct, and have support in GTK+
- * GSD: Register with session management so we are started before
-   anything else is started
- * GSD: add bonobo-activation support so that we can guarantee it's running.
- * GSD: Hook up locate_pointer to the GConf key rather than do it every time.
+KEYBOARD SHORTCUTS:
+ * Not sure I like the name.
+ * Needs icon
+ * Add a way to add new ones
+
+KEYBOARD PROPERTIES:
+ * GSD: support keyboard bell
+ * Remove awful jrb-art and replace with actual blinking cursor
+
+MOUSE PROPERTIES:
+ * GSD: Add support for devices other than CoreInput.
+
+KEYBINDINGS:
+ * Metacity keyboard merging.  See what hp plans to do
+
+PANEL:
+ * UI love
+ * port gconf-peditor functionality
+
+SAWFISH????
+
+SOUND:
+ * Unknown
+ * Buggy as heck
+
+SCREENSAVER:
+ * See what Jacob wants to do
+ * xscreensaver release
+
+UI-PROPERTIES:
+ * Seems to be okay
+
+GENERAL:
+ * Where we have keys, add a restore to defaults context menu button.
+ * Kill 'advanced'
+ * Control center itself seems to be fine
+ * Change buttons to use whatever the UI team comes up with
+ * Make sure we handle 'locked down' keys
+ * Make sure we handle all broken keys!
+
+
+GOING FORWARD:
+
+Hardware Integration 
+ - hwbrowser??? Kde has one; should we?
+ - peripherals (RH only?)
+ - gphoto/sane/cd burning??  Userland hw.
+
+Nautilus:
+ - Move nautilus settings
+ - Desktop should be a separate dialog
+
+Background:
+ - Merge nautilus pane and bg capplet;
+ - possibly even popup a nautilus window of bg's for DnD
+ - Integrate better w/ nautilus
+ - per Workspace?
+
+Workspace/Tasks
+ - Set number and name of workspaces
+ - Maybe something else?
+
+Identification Capplet
+ - GDM screen
+ - Mail capplet
+
+Password Capplet?
+ - ssh/smb
+
+Themes and Appearance:
+ - blah
+
+Sound: 
+ - blah
+
+Bugzilla
+ - Start using it better
+
+
+
