@@ -1,3 +1,10 @@
+2004-04-01  Jody Goldberg <jody@gnome.org>
+
+	* gnome-keybinding-properties.c (accel_edited_callback) : Use a cancel
+	  button on the 'already used' dialog so that escape will close it.
+	(cb_check_for_uniqueness) : fix brokeness.  It is entirely possible
+	  for keycode on loaded keys to be '0'
+
 2003-12-30  Sven Herzberg <herzi@gnome-de.org>
 
 	* capplets/keybindings/eggcellrendererkeys.c : change the "Type a

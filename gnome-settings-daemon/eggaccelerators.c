@@ -326,7 +326,7 @@ egg_accelerator_parse_virtual (const gchar            *accelerator,
 	{
           keyval = gdk_keyval_from_name (accelerator);
 
-          if (keyval == GDK_VoidSymbol)
+          if (keyval == 0)
 	    {
 	      /* If keyval is 0, than maybe it's a keycode.  Check for 0x## */
 	      if (len >= 4 && is_keycode (accelerator))

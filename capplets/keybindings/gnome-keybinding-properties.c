@@ -672,11 +672,11 @@ cb_check_for_uniqueness (GtkTreeModel *model,
 		      -1);
 
   if (tmp_key_entry != NULL &&
-      key_entry->keyval == tmp_key_entry->keyval &&
-      key_entry->mask   == tmp_key_entry->mask &&
-      key_entry->keycode == tmp_key_entry->keycode &&
+      strcmp (key_entry->gconf_key, tmp_key_entry->gconf_key) != 0 &&
+      ((key_entry->keyval == tmp_key_entry->keyval &&
+	key_entry->mask   == tmp_key_entry->mask) ||
+       key_entry->keycode == tmp_key_entry->keycode))
       /* be sure we don't claim a key is a dup of itself */
-      strcmp (key_entry->gconf_key, tmp_key_entry->gconf_key) != 0)
     {
       key_entry->editable = FALSE;
       key_entry->gconf_key = tmp_key_entry->gconf_key;
@@ -737,7 +737,7 @@ accel_edited_callback (GtkCellRendererText   *cell,
         gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (view))),
                                 GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL,
                                 GTK_MESSAGE_WARNING,
-                                GTK_BUTTONS_OK,
+                                GTK_BUTTONS_CANCEL,
                                 _("The shortcut \"%s\" is already used for:\n \"%s\"\n"),
                                 name,
                                 tmp_key.description ?
