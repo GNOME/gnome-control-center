@@ -1,8 +1,7 @@
 SUBDIRS = Sawfish
 
-capplets = \
-	cd \
-	legacy-applications
+## removed legacy applications for now -- grdb is not part of GNOME2
+capplets = cd
 
 ## Pixmaps
 
