@@ -44,6 +44,8 @@ main(int argc, char *argv[]) {
   if (init_ret == 1) {
     /* nothing to init */
     return 0;
+  } else if (init_ret == -1) {
+    g_error (_("Error initializing the `url-properties' capplet."));
   }
 
   build_capplet();
