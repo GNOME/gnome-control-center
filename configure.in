@@ -94,14 +94,14 @@ dnl ==============================================
 dnl Check for --enable-bonobo-conf option
 dnl ==============================================
 
+CC_USE_BONOBO_CONF=yes
+
 AC_ARG_ENABLE(bonobo-conf,[     --disable-bonobo-conf    Disable bonobo-conf support in the capplets],[
-PKG_BONOBO_CHECK=
-PKG_BONOBO_CONF_CHECK=
-bonobo_conf_enable=
-libcommon_enable=
-LIBCOMMON_DIR=
-moniker_enable=
 ],[
+CC_USE_BONOBO_CONF=no
+])
+
+if test "x$CC_USE_BONOBO_CONF" = "xyes"; then
 PKG_BONOBO_CHECK="bonobo bonobox"
 PKG_BONOBO_CONF_CHECK="bonobo bonobo_conf >= 0.9"
 bonobo_conf_enable=yes
@@ -109,7 +109,14 @@ libcommon_enable=yes
 LIBCOMMON_DIR=common
 moniker_enable=yes
 AC_DEFINE(HAVE_BONOBO)
-])
+else
+PKG_BONOBO_CHECK=
+PKG_BONOBO_CONF_CHECK=
+bonobo_conf_enable=
+libcommon_enable=
+LIBCOMMON_DIR=
+moniker_enable=
+fi
 
 AC_SUBST(LIBCOMMON_DIR)
 
