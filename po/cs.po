@@ -7,14 +7,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 2.0.2\n"
-"POT-Creation-Date: 2002-11-28 09:51+0100\n"
-"PO-Revision-Date: 2002-11-28 09:51GMT\n"
-"Last-Translator: Michal Bukovjan <bukm@centrum.cz>\n"
+"POT-Creation-Date: 2002-12-05 06:07+0100\n"
+"PO-Revision-Date: 2002-12-05 20:45+0100\n"
+"Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 0.9.6\n"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:237
 #, c-format
@@ -54,6 +53,7 @@ msgstr ""
 #: capplets/file-types/file-types-properties.glade.h:1
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: capplets/network/gnome-network-preferences.glade.h:2
+#: capplets/theme-switcher/theme-properties.glade.h:1
 #: capplets/theme-switcher/theme-install.glade.h:1
 msgid "*"
 msgstr "*"
@@ -233,6 +233,7 @@ msgid "pixels/second"
 msgstr "bodů/sekundu"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:42
+#: capplets/windows/gnome-window-properties.glade.h:7
 msgid "seconds"
 msgstr "sekund"
 
@@ -787,7 +788,7 @@ msgid "Minimizing and Maximizing"
 msgstr "Minimalizace a maximalizace"
 
 #: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
-#: capplets/windows/gnome-window-properties.c:600
+#: capplets/windows/gnome-window-properties.c:649
 msgid "Meta"
 msgstr "Meta"
 
@@ -1181,7 +1182,7 @@ msgstr "Stupně še_di"
 
 #: capplets/font/font-properties.glade.h:8
 msgid "Hinting:"
-msgstr "Zeštíhlení:"
+msgstr "Hinting:"
 
 #: capplets/font/font-properties.glade.h:9
 msgid "N_one"
@@ -1290,7 +1291,7 @@ msgid "The type of accelerator."
 msgstr "Typ klávesové zkratky."
 
 #: capplets/keybindings/eggcellrendererkeys.c:219
-#: capplets/keybindings/gnome-keybinding-properties.c:181
+#: capplets/keybindings/gnome-keybinding-properties.c:202
 #: libbackground/applier.c:588
 msgid "Disabled"
 msgstr "Vypnuto"
@@ -1304,29 +1305,33 @@ msgstr "Zadejte novou zkratku, nebo ji vymažte klávesou Backspace"
 msgid "Type a new accelerator"
 msgstr "Zadejte novou zkratku"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:448
+#: capplets/keybindings/gnome-keybinding-properties.c:538
 msgid "<Unknown Action>"
 msgstr "<Neznámá akce>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:467
+#: capplets/keybindings/gnome-keybinding-properties.c:557
 msgid "Desktop"
 msgstr "Plocha"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:471
+#: capplets/keybindings/gnome-keybinding-properties.c:561
 msgid "Window Management"
 msgstr "Správa oken"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:593
+#: capplets/keybindings/gnome-keybinding-properties.c:696
 #, c-format
-msgid "That accelerator key is already in use by: %s\n"
-msgstr "Tato klávesová zkratka je již použita: %s\n"
+msgid ""
+"The shortcut \"%s\" is already used for:\n"
+" \"%s\"\n"
+msgstr ""
+"Zkratka \"%s\" se již používá pro:\n"
+" \"%s\"\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:620
+#: capplets/keybindings/gnome-keybinding-properties.c:727
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Chyba při nastavení nové zkratky v databázi s nastavením: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:771
+#: capplets/keybindings/gnome-keybinding-properties.c:878
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1334,11 +1339,11 @@ msgstr ""
 "Nelze nalézt žádné téma pro klávesnici. To znamená, že vaše instalace GTK+ "
 "není úplná."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:793
+#: capplets/keybindings/gnome-keybinding-properties.c:900
 msgid "Action"
 msgstr "Akce"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:811
+#: capplets/keybindings/gnome-keybinding-properties.c:919
 msgid "Shortcut"
 msgstr "Zkratka"
 
@@ -1828,35 +1833,46 @@ msgid "Select themes for various parts of the desktop"
 msgstr "Vybrat témata pro různé části pracovní plochy"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
-#: capplets/theme-switcher/theme-properties.glade.h:6
 msgid "Theme"
 msgstr "Téma"
 
-#: capplets/theme-switcher/theme-properties.glade.h:1
+#: capplets/theme-switcher/theme-properties.glade.h:2
+msgid "<span size=\"larger\" weight=\"bold\">Save theme to disk</span>"
+msgstr "<span size=\"larger\" weight=\"bold\">Uložit téma na disk</span>"
+
+#: capplets/theme-switcher/theme-properties.glade.h:3
 msgid "Apply _Background"
 msgstr "Použít po_zadí"
 
-#: capplets/theme-switcher/theme-properties.glade.h:2
+#: capplets/theme-switcher/theme-properties.glade.h:4
 msgid "Apply _Font"
 msgstr "Použít _písmo"
 
-#: capplets/theme-switcher/theme-properties.glade.h:3
+#: capplets/theme-switcher/theme-properties.glade.h:5
 msgid "Controls"
 msgstr "Kontrolky"
 
-#: capplets/theme-switcher/theme-properties.glade.h:4
+#: capplets/theme-switcher/theme-properties.glade.h:6
 msgid "Icons"
 msgstr "Ikony"
 
-#: capplets/theme-switcher/theme-properties.glade.h:5
+#: capplets/theme-switcher/theme-properties.glade.h:7
 msgid "New themes can also be installed by dragging them into the window."
 msgstr "Nová témata lze také instalovat jejich přetažením do okna."
 
-#: capplets/theme-switcher/theme-properties.glade.h:7
+#: capplets/theme-switcher/theme-properties.glade.h:8
+msgid "Short _Description:"
+msgstr "Krátký _popis:"
+
+#: capplets/theme-switcher/theme-properties.glade.h:9
+msgid "Theme Details"
+msgstr "Po_drobnosti o tématu"
+
+#: capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Theme Preferences"
 msgstr "Nastavení tématu"
 
-#: capplets/theme-switcher/theme-properties.glade.h:8
+#: capplets/theme-switcher/theme-properties.glade.h:11
 msgid ""
 "This theme suggests a\n"
 "background:"
@@ -1864,7 +1880,7 @@ msgstr ""
 "Toto téma navrhuje\n"
 "pozadí:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:10
+#: capplets/theme-switcher/theme-properties.glade.h:13
 msgid ""
 "This theme suggests a\n"
 "font and background"
@@ -1872,7 +1888,7 @@ msgstr ""
 "Toto téma navrhuje\n"
 "písmo a pozadí"
 
-#: capplets/theme-switcher/theme-properties.glade.h:12
+#: capplets/theme-switcher/theme-properties.glade.h:15
 msgid ""
 "This theme suggests a\n"
 "font:"
@@ -1880,21 +1896,29 @@ msgstr ""
 "Toto téma navrhuje\n"
 "písmo:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:14
+#: capplets/theme-switcher/theme-properties.glade.h:17
 msgid "Window Border"
 msgstr "Okraj okna"
 
-#: capplets/theme-switcher/theme-properties.glade.h:15
+#: capplets/theme-switcher/theme-properties.glade.h:18
+msgid "_Details..."
+msgstr "Podrobno_sti..."
+
+#: capplets/theme-switcher/theme-properties.glade.h:19
 msgid "_Go to theme folder"
 msgstr "Pře_jít do adresáře s tématy"
 
-#: capplets/theme-switcher/theme-properties.glade.h:16
-msgid "_Install New Theme..."
-msgstr "_Instalovat nové téma..."
+#: capplets/theme-switcher/theme-properties.glade.h:20
+msgid "_Install theme..."
+msgstr "_Instalovat téma..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:17
-msgid "_Save Theme"
+#: capplets/theme-switcher/theme-properties.glade.h:21
+msgid "_Save theme"
 msgstr "_Uložit téma"
+
+#: capplets/theme-switcher/theme-properties.glade.h:22
+msgid "_Theme name:"
+msgstr "_Jméno tématu:"
 
 #: capplets/theme-switcher/theme-install.glade.h:2
 msgid "Install new theme"
@@ -1908,17 +1932,23 @@ msgstr "_Instalovat"
 msgid "_Location of new theme:"
 msgstr "_Umístění nového tématu:"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:640
-msgid "Current modified"
-msgstr "Aktuální upravené"
-
-#: capplets/theme-switcher/gnome-theme-manager.c:659
+#: capplets/theme-switcher/gnome-theme-manager.c:467
 msgid ""
 "No themes could be found on your system.  This probably means that your "
-"\"Theme Preferences\" dialog was improperly installed."
+"\"Theme Preferences\" dialog was improperly installed, or you haven't "
+"installed the \"gnome-themes\" package."
 msgstr ""
-"Na vašem systémy nebyly nalezeny žádná témata. To pravděpodobně znamená, že "
-"váš dialog \"Nastavení témat\" byl nesprávně nainstalován."
+"Na vašem systému nebyla nalezena žádná témata. To pravděpodobně znamená, že "
+"váš dialog \"Nastavení témat\" byl nesprávně nainstalován nebo jste "
+"nenainstalovali balíček \"gnome-themes\"."
+
+#: capplets/theme-switcher/gnome-theme-manager.c:517
+msgid "Custom theme"
+msgstr "Vlastní téma"
+
+#: capplets/theme-switcher/gnome-theme-manager.c:517
+msgid "You can save this theme by pressing the Save Theme button."
+msgstr "Toto téma můžete uložit stisknutím tlačítka Uložit téma."
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
@@ -2049,7 +2079,7 @@ msgstr "U_končit"
 msgid "_Save"
 msgstr "_Uložit"
 
-#: capplets/windows/gnome-window-properties.c:352
+#: capplets/windows/gnome-window-properties.c:378
 #, c-format
 msgid ""
 "<b>Cannot start the preferences application for your window manager</b>\n"
@@ -2060,45 +2090,45 @@ msgstr ""
 "\n"
 "%s"
 
-#: capplets/windows/gnome-window-properties.c:575
+#: capplets/windows/gnome-window-properties.c:624
 msgid "Control"
 msgstr "Control"
 
-#: capplets/windows/gnome-window-properties.c:580
+#: capplets/windows/gnome-window-properties.c:629
 msgid "Alt"
 msgstr "Alt"
 
-#: capplets/windows/gnome-window-properties.c:586
+#: capplets/windows/gnome-window-properties.c:635
 msgid "Hyper"
 msgstr "Hyper"
 
-#: capplets/windows/gnome-window-properties.c:593
-msgid "Super"
-msgstr "Super"
+#: capplets/windows/gnome-window-properties.c:642
+msgid "Super (or \"Windows logo\")"
+msgstr "Super (nebo \"Windows logo\")"
 
 #: capplets/windows/gnome-window-properties.glade.h:1
-msgid "To _move windows, click while holding down:"
-msgstr "Okna se přesunou kliknutí_m a současným držením:"
+msgid "To _move a window, press-and-hold this key then grab the window:"
+msgstr "Pro _přesun okna stiskněte a držte tuto klávesu, pak táhněte okno:"
 
 #: capplets/windows/gnome-window-properties.glade.h:2
 msgid "Window Preferences"
 msgstr "Nastavení oken"
 
 #: capplets/windows/gnome-window-properties.glade.h:3
-msgid "_Double-click window titles to:"
-msgstr "Po _dvojitém kliknutí na titulek okna:"
+msgid "_Double-click titlebar to perform this action:"
+msgstr "_Dvakrát klikněte na titulek okna pro provedení této akce:"
 
 #: capplets/windows/gnome-window-properties.glade.h:4
-msgid "_Raise selected windows after a short time"
-msgstr "Po k_rátké chvíli vyzvedne vybraná okna"
+msgid "_Interval before raising:"
+msgstr "_Interval před vyzvednutím:"
 
 #: capplets/windows/gnome-window-properties.glade.h:5
-msgid "_Select windows when the mouse moves over them"
-msgstr "Vybírat okna, pokud _se nad ně přesune ukazatel myši"
+msgid "_Raise selected windows after an interval"
+msgstr "Vyzvednout vyb_raná okna po intervalu"
 
 #: capplets/windows/gnome-window-properties.glade.h:6
-msgid "_Tenths of a second before raising the window:"
-msgstr "Dese_tiny sekundy před vyzvednutím okna:"
+msgid "_Select windows when the mouse moves over them"
+msgstr "Vybírat okna, pokud _se nad ně přesune ukazatel myši"
 
 #: capplets/windows/window-properties.desktop.in.h:1
 msgid "Window Properties"
@@ -2340,6 +2370,94 @@ msgstr "Maximalizovat"
 msgid "Roll up"
 msgstr "Zarolovat"
 
+#: schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:1
+msgid ""
+"If true, the mime handlers for text/plain and text/* will be kept in sync"
+msgstr ""
+"Je-li true, jsou obsluhy mime pro text/plain a text/* udržovány "
+"synchronizované"
+
+#: schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:2
+msgid "Sync text/plain and text/* handlers"
+msgstr "Synchronizovat obsluhy text/plain a text/*"
+
+#: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:1
+msgid "Display a dialog when there are errors running XScreenSaver"
+msgstr "Zobrazit dialog, nastanou-li chyby při spuštění XScreenSaver"
+
+#: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:2
+msgid "Run XScreenSaver at login"
+msgstr "Spusti XScreenSaver při přihlášení"
+
+#: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:3
+msgid "Show Startup Errors"
+msgstr "Zobrazovat chyby při spuštění"
+
+#: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:4
+msgid "Start XScreenSaver"
+msgstr "Spustit XScreenSaver"
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:1
+msgid "Antialising"
+msgstr "Vyhlazování"
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:2
+msgid "DPI"
+msgstr "DPI"
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:3
+msgid "Hinting"
+msgstr "Hinting"
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:4
+msgid "RGBA Order"
+msgstr "Pořadí RGBA"
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:5
+msgid ""
+"Resolution used for converting font sizes to pixel sizes, in dots per inch"
+msgstr ""
+"Rozlišení používané pro převod velikostí písem na počty bodů, v bodech na "
+"palec"
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:6
+msgid ""
+"The order of elements subpixel elements on an LCD screen; only used when "
+"antialising is set to \"rgba\". Possible values are: \"rgb\" - red on left, "
+"most common. \"bgr\" - blue on left. \"vrgb\" - red on top. \"vbgr\" - red "
+"on bottom."
+msgstr ""
+"Požadí subpixelových elementů na obrazovce LCD; používá se jen, je-li "
+"antialiasing nastaveno na \"rgba\". Možné hodnoty jsou: \"rgb\" - červená "
+"vlevo, nejčastější. \"bgr\" - modrá vlevo. \"vrgb\" - červená nahoře. \"vbgr"
+"\" - červená dole."
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:7
+msgid ""
+"The type of antialiasing to use when rendering fonts. Possible values are: "
+"\"none\" - no antialiasing. \"grayscale\" - standard grayscale antialising. "
+"\"rgba\" - subpixel antialising. (LCD screens only)."
+msgstr ""
+"Typ vyhlazování, které použít při vykreslování písem. Možné hodnoty jsou: "
+"\"none\" - žádné vyhlazování. \"grayscale\" - standardní vyhlazování stupni "
+"šedi. \"rgba\" - subpixelové vyhlazování (jen LCD displeje)."
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:8
+msgid ""
+"The type of hinting to use when rendering fonts. Possible values are: \"none"
+"\" - no hinting, \"slight\", \"medium\", and \"full\" - as much hinting as "
+"possible; may cause distortion of letter forms."
+msgstr ""
+"Typ hinting, který použít pro vykreslování písem. Možné hodnoty jsou: \"none"
+"\" - žádný hinting, \"slight\", \"medium\" a \"full\" - takový hinting, jak "
+"je možný; může způsobit poškození tvaru písmen."
+
+#~ msgid "That accelerator key is already in use by: %s\n"
+#~ msgstr "Tato klávesová zkratka je již použita: %s\n"
+
+#~ msgid "Current modified"
+#~ msgstr "Aktuální upravené"
+
 #~ msgid "Use _Font"
 #~ msgstr "Použít _písmo"
 
@@ -2376,9 +2494,6 @@ msgstr "Zarolovat"
 #~ msgstr ""
 #~ "Vypnout kombinaci kláves _jedním\n"
 #~ "prstem současným stiskem dvou kláves"
-
-#~ msgid "msecs"
-#~ msgstr "ms"
 
 #~ msgid "_Category"
 #~ msgstr "_Kategorie"
@@ -2456,6 +2571,3 @@ msgstr "Zarolovat"
 #~ "Nelze spustit nouzového správce oken.\n"
 #~ "Spusťte prosím správce oken z příkazové řádky. To lze provést\n"
 #~ "třeba z menu položkou \"Spustit program\".\n"
-
-#~ msgid "OK"
-#~ msgstr "OK"
