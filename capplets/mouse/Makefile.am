@@ -21,7 +21,7 @@ Glade_DATA = gnome-mouse-properties.glade
 ##
 @INTLTOOL_DESKTOP_RULE@
 
-install-data-am: install-data-local
+## install-data-am: install-data-local
 
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
