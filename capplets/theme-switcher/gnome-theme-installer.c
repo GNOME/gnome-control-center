@@ -117,16 +117,38 @@ install_dialog_response (GtkWidget *widget, int response_id, gpointer data)
 	if (response_id == 0) {
 		icon_theme = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (widget), "icon_theme"));
 		raw = gtk_entry_get_text (GTK_ENTRY (gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (WID ("install_theme_picker")))));
-		if (raw == NULL || strlen (raw) <= 0)
+		if (raw == NULL || strlen (raw) <= 0)	{
+	        GtkWidget *dialog;
+
+  	        dialog = gtk_message_dialog_new (NULL,
+			  	       GTK_DIALOG_MODAL,
+				       GTK_MESSAGE_ERROR,
+				       GTK_BUTTONS_OK,
+				       _("No theme file location specified to install"));
+    	    gtk_dialog_run (GTK_DIALOG (dialog));
+      	    gtk_widget_destroy (dialog);			
 			return;
+			
+		}
+
 
 		if (strncmp (raw, "http://", 7) && strncmp (raw, "ftp://", 6) && *raw != '/')
 			filename = gnome_file_entry_get_full_path (GNOME_FILE_ENTRY (WID ("install_theme_picker")), TRUE);
 		else
 			filename = g_strdup (raw);
-		if (filename == NULL)
-			return;
+		if (filename == NULL)	{
+	        GtkWidget *dialog;
 
+  	        dialog = gtk_message_dialog_new (NULL,
+			  	       GTK_DIALOG_MODAL,
+				       GTK_MESSAGE_ERROR,
+				       GTK_BUTTONS_OK,
+				       _("The theme file location specified to install is invalid"));
+    	    gtk_dialog_run (GTK_DIALOG (dialog));
+      	    gtk_widget_destroy (dialog);			
+			return;
+		}
+			
 		src_uri = gnome_vfs_uri_new (filename);
 		base = gnome_vfs_uri_extract_short_name (src_uri);
 		src = g_list_append (NULL, src_uri);
