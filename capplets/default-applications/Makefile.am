@@ -1,7 +1,7 @@
 bin_PROGRAMS = gnome2-default-applications-properties
 
-gnome_default_applications_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
-gnome_default_applications_properties_SOURCES = \
+gnome2_default_applications_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
+gnome2_default_applications_properties_SOURCES = \
 	gnome-default-applications-properties.c
 
 @INTLTOOL_DESKTOP_RULE@

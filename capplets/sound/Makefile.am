@@ -1,7 +1,7 @@
-bin_PROGRAMS = gnome-sound-properties
+bin_PROGRAMS = gnome2-sound-properties
 
-gnome_sound_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS) $(top_builddir)/libsounds/libsounds.a
-gnome_sound_properties_SOURCES = sound-properties-capplet.c
+gnome2_sound_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS) $(top_builddir)/libsounds/libsounds.a
+gnome2_sound_properties_SOURCES = sound-properties-capplet.c
 
 @INTLTOOL_DESKTOP_RULE@
 
