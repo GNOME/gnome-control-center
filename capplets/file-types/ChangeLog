@@ -1,3 +1,29 @@
+2002-02-17  Bradford Hovinen  <hovinen@ximian.com>
+
+	* mime-category-edit-dialog.c (fill_dialog): Fill the name entry
+	with the description, not the name field
+
+	* mime-types-model.c (mime_types_model_get_value): Use description
+	field when returning the description column for a category
+
+	* mime-type-info.c (mime_type_info_set_category_name): Accept
+	pointer to category description and pass that to get_category
+	(mime_category_info_new): Initialize description; accept pointer
+	to description
+	(get_category): Accept a pointer to the description and initialize
+	the category with that as well if necessary
+	(get_category_description): Implement. Copy from
+	get_category_name, but use the translated description name
+
+	* mime-type-info.h (struct _MimeCategoryInfo): Add description
+	field; holds the translated name
+
+	* mime-type-info.c (mime_category_info_get_full_description):
+	Implement. Copy from mime_category_info_get_full_name, but use
+	description field rather than name field
+	(mime_type_info_get_category_name): Use _get_full_description
+	rather than _get_full_name
+
 2002-02-04  Lauris Kaplinski  <lauris@ximian.com>
 
 	* service-edit-dialog.c (setup_add_dialog): Use gtk_menu_shell_append

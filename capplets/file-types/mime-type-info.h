@@ -65,6 +65,7 @@ struct _MimeCategoryInfo
 	ModelEntry               entry;
 
 	gchar                   *name;
+	gchar                   *description;
 	GnomeVFSMimeApplication *default_action;
 
 	gboolean                 use_parent_category;
@@ -94,12 +95,14 @@ gboolean      mime_type_info_using_custom_app      (const MimeTypeInfo *info);
 
 void          mime_type_info_set_category_name     (const MimeTypeInfo *info,
 						    const gchar        *category_name,
+						    const gchar        *category_desc,
 						    GtkTreeModel       *model);
 void          mime_type_info_set_file_extensions   (MimeTypeInfo       *info,
 						    GList              *list);
 
 MimeCategoryInfo *mime_category_info_new           (MimeCategoryInfo   *parent,
 						    const gchar        *name,
+						    const gchar        *description,
 						    GtkTreeModel       *model);
 void          mime_category_info_load_all          (MimeCategoryInfo   *category);
 gboolean      mime_category_info_using_custom_app  (const MimeCategoryInfo *category);
@@ -108,6 +111,7 @@ void          mime_category_info_update            (MimeCategoryInfo   *info);
 
 GList        *mime_category_info_find_apps         (MimeCategoryInfo   *info);
 gchar        *mime_category_info_get_full_name     (MimeCategoryInfo   *info);
+gchar        *mime_category_info_get_full_description (MimeCategoryInfo   *info);
 
 gchar        *mime_type_get_pretty_name_for_server (Bonobo_ServerInfo  *server);
 

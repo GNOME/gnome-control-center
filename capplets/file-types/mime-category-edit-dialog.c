@@ -292,7 +292,7 @@ fill_dialog (MimeCategoryEditDialog *dialog)
 {
 	mime_category_info_load_all (dialog->p->info);
 
-	gtk_entry_set_text (GTK_ENTRY (WID ("name_entry")), dialog->p->info->name);
+	gtk_entry_set_text (GTK_ENTRY (WID ("name_entry")), dialog->p->info->description);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("use_category_toggle")), dialog->p->info->use_parent_category);
 
 	if (dialog->p->info->entry.parent->type == MODEL_ENTRY_NONE)
