@@ -45,4 +45,6 @@ gchar    *write_screensaver_list  (GList *screensavers);
 /* Internal; used by pref-file.c and rc-parse.c only */
 int       string_columns          (const char *string, int length, int start);
 
+GList    *get_screensaver_dir_list (void);
+
 #endif /* __RC_PARSE_H */
