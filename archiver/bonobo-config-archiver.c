@@ -631,15 +631,6 @@ fill_cache (BonoboConfigArchiver *archiver_db)
 	}
 }
 
-/* TEMPORARY */
-
-static void
-unref_cb (GtkObject *db, GtkObject *ref_obj) 
-{
-	DEBUG_MSG ("Enter");
-	gtk_object_unref (ref_obj);
-}
-
 Bonobo_ConfigDatabase
 bonobo_config_archiver_new (const char *backend_id, const char *location_id)
 {
@@ -649,7 +640,6 @@ bonobo_config_archiver_new (const char *backend_id, const char *location_id)
 	gchar                 *real_name;
 
 	static Archive        *archive = NULL;
-	static GtkObject      *ref_obj = NULL;
 
 	g_return_val_if_fail (backend_id != NULL, NULL);
 
@@ -748,20 +738,5 @@ bonobo_config_archiver_new (const char *backend_id, const char *location_id)
 
 	bonobo_url_register ("BONOBO_CONF:ARCHIVER", real_name, NULL, db, &ev);
 
-	if (ref_obj == NULL) {
-		ref_obj = gtk_object_new (gtk_object_get_type (), NULL);
-		gtk_signal_connect (ref_obj, "destroy", GTK_SIGNAL_FUNC (gtk_main_quit), NULL);
-		gtk_signal_connect_object (ref_obj, "destroy",
-					   GTK_SIGNAL_FUNC (gtk_object_destroy),
-					   GTK_OBJECT (archive));
-	} else {
-		gtk_object_ref (ref_obj);
-	}
-
-	DEBUG_MSG ("_ref complete");
-
-	gtk_signal_connect (GTK_OBJECT (archiver_db), "destroy",
-			    GTK_SIGNAL_FUNC (unref_cb), ref_obj);
-	
 	return db;
 }

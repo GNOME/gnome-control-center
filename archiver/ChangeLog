@@ -3,6 +3,8 @@
 	* bonobo-config-archiver.c (pb_get_fn): Use
 	location_get_config_log rather than config_log_open; don't destroy
 	the log
+	(bonobo_config_archiver_new): Eliminate unref mechanism; it is not
+	needed
 
 2001-07-30  Bradford Hovinen  <hovinen@ximian.com>
 
