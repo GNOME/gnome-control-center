@@ -1,9 +1,9 @@
 /* -*- mode: c; style: linux -*- */
 
 /* rollback-widget.h
- * Copyright (C) 2000-2001 Ximian, Inc.
+ * Copyright (C) 2000 Helix Code, Inc.
  *
- * Written by Bradford Hovinen <hovinen@ximian.com>
+ * Written by Bradford Hovinen <hovinen@helixcode.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,9 +24,8 @@
 #ifndef __ROLLBACK_WIDGET_H
 #define __ROLLBACK_WIDGET_H
 
-#ifdef HAVE_LIBARCHIVER
-
 #include <gnome.h>
+
 
 BEGIN_GNOME_DECLS
 
@@ -38,24 +37,33 @@ typedef struct _RollbackWidget RollbackWidget;
 typedef struct _RollbackWidgetClass RollbackWidgetClass;
 typedef struct _RollbackWidgetPrivate RollbackWidgetPrivate;
 
+enum {
+	BACKGROUND_COLOR,
+	MARKER_COLOR,
+	ARROW_COLOR,
+	LAST_COLOR
+};
+
 struct _RollbackWidget 
 {
-	GtkWidget parent;
+	GnomeCanvas parent;
 
 	RollbackWidgetPrivate *p;
+
+	GdkColor control_colors[LAST_COLOR];
 };
 
 struct _RollbackWidgetClass 
 {
-	GtkWidgetClass gtk_widget_class;
+	GnomeCanvasClass gnome_canvas_class;
 };
 
 guint rollback_widget_get_type         (void);
 
 GtkObject *rollback_widget_new         (void);
 
-END_GNOME_DECLS
+GdkGC     *rollback_widget_get_gc      (RollbackWidget *widget);
 
-#endif /* HAVE_LIBARCHIVER */
+END_GNOME_DECLS
 
 #endif /* __ROLLBACK_WIDGET_H */

@@ -34,6 +34,8 @@
 #include <ximian-archiver/backend-list.h>
 
 #include "config-manager-dialog.h"
+#include "rollback-widget.h"
+#include "rollback-control.h"
 
 #define WID(str) (glade_xml_get_widget (dialog->p->config_dialog_data, str))
 
@@ -126,6 +128,9 @@ config_manager_dialog_get_type (void)
 static void
 config_manager_dialog_init (ConfigManagerDialog *dialog)
 {
+	RollbackWidget *canvas;
+	GnomeCanvasGroup *group;
+
 	dialog->p = g_new0 (ConfigManagerDialogPrivate, 1);
 	dialog->p->config_dialog_data =
 		glade_xml_new (GLADE_DATADIR "/rollback.glade",
@@ -159,6 +164,18 @@ config_manager_dialog_init (ConfigManagerDialog *dialog)
 
 	set_backend_controls_sensitive (dialog, FALSE);
 	reset_time (dialog, 0);
+
+	canvas = ROLLBACK_WIDGET (rollback_widget_new ());
+	group = gnome_canvas_root (GNOME_CANVAS (canvas));
+	gnome_canvas_item_new (group, rollback_control_get_type (),
+			       "backend-id", "background-properties-capplet",
+			       "is-global", FALSE,
+			       "control-number", 0,
+			       NULL);
+	gtk_widget_show (GTK_WIDGET (canvas));
+
+	gtk_box_pack_start (GTK_BOX (WID ("config_dialog_data")),
+			    GTK_WIDGET (canvas), TRUE, TRUE, 0);
 
 	capplet_widget_state_changed (CAPPLET_WIDGET (dialog), FALSE);
 }
@@ -295,7 +312,7 @@ cancel_cb (GtkWidget *widget, ConfigManagerDialog *dialog)
 	g_return_if_fail (dialog != NULL);
 	g_return_if_fail (IS_CONFIG_MANAGER_DIALOG (dialog));
 
-	do_rollback (dialog, TRUE);
+/*  	do_rollback (dialog, TRUE); */
 }
 
 static void

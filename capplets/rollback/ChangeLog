@@ -1,3 +1,30 @@
+2001-01-29  Bradford Hovinen  <hovinen@ximian.com>
+
+	* rollback-widget.c (rollback_widget_realize): Check entire
+	success array and warn if any allocation did not succeed
+
+	* config-manager-dialog.c (cancel_cb): Don't do rollback
+
+	* Makefile.am (rollback_capplet_SOURCES): Added rollback-control.[ch]
+
+	* config-manager-dialog.c (config_manager_dialog_init): Construct
+	a rollback widget with a rollback control and place it in the
+	dialog
+
+2001-01-27  Bradford Hovinen  <hovinen@ximian.com>
+
+	* rollback-widget.c (rollback_widget_realize): Allocate control
+	colors
+
+	* rollback-widget.h (struct _RollbackWidget ): Added array
+	control_colors
+
+	* rollback-widget.c (rollback_widget_realize):
+	(rollback_widget_unrealize): Implement. Just calls the parent's
+	[un]realize and creates/destroys a GC to be used by the individual
+	controls.
+	(rollback_widget_get_gc): Implement. Return the GC created above
+
 2001-01-25  Bradford Hovinen  <hovinen@ximian.com>
 
 	* main.c (main): Support operating on global backends

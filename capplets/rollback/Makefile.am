@@ -30,6 +30,7 @@ bin_PROGRAMS = rollback-capplet
 rollback_capplet_SOURCES = \
 	config-manager-dialog.c	config-manager-dialog.h		\
 	rollback-widget.c	rollback-widget.h		\
+	rollback-control.c	rollback-control.h		\
 	main.c
 
 rollback_capplet_LDADD = \
