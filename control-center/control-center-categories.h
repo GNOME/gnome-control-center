@@ -4,7 +4,7 @@ typedef struct ControlCenterCategory_ ControlCenterCategory;
 
 typedef struct {
   GnomeDesktopItem *desktop_entry;
-  char *icon;
+  GdkPixbuf  *icon_pixbuf;
   const char *title;
   const char *comment;
   char *name;

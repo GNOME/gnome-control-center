@@ -1,4 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/* vim: set sw=8: -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 #include <config.h>
 
 #include "control-center-categories.h"
@@ -14,6 +14,7 @@
 #include <gdk/gdkx.h>
 #include "gnomecc-event-box.h"
 
+#define PAD 5 /*when scrolling keep a few pixels above or below if possible */
 static gboolean use_nautilus = FALSE;
 
 typedef struct ControlCenter_ ControlCenter;
@@ -413,26 +414,22 @@ setup_entry (ControlCenterEntry *entry)
 			gnome_canvas_item_show_hide (ei->pixbuf, !ei->highlighted);
 		}
 		gnome_canvas_item_show_hide (ei->selection, ei->selected);
-		if (ei->selected) {
-			color = &widget->style->text[GTK_STATE_SELECTED];
-		} else {
-			color = &widget->style->text[GTK_STATE_NORMAL];
-		}
+		color = ei->selected
+			? &widget->style->text[GTK_STATE_SELECTED]
+			: &widget->style->text[GTK_STATE_NORMAL];
 		g_object_set (ei->text,
 			      "fill_color_gdk", color,
 			      NULL);
 
 		if (ei->cc->status_cb) {
 			if (ei->selected) {
-				ei->cc->status_cb (ei->cc,
-							       entry->comment,
-							       ei->cc->status_data);
+				ei->cc->status_cb (ei->cc, entry->comment,
+						   ei->cc->status_data);
 				ei->cc->current_status = entry;
 			} else {
 				if (entry == ei->cc->current_status)
-					ei->cc->status_cb (ei->cc,
-								       NULL,
-								       ei->cc->status_data);
+					ei->cc->status_cb (ei->cc, NULL,
+							   ei->cc->status_data);
 				ei->cc->current_status = NULL;
 			}
 		}
@@ -548,6 +545,9 @@ set_x (ControlCenter *cc)
 static void
 select_entry (ControlCenter *cc, ControlCenterEntry *entry)
 {
+	EntryInfo *ei = entry->user_data;
+	GtkAdjustment *pos;
+	double affine[6];
 	if (cc->selected == entry)
 		return;
 
@@ -560,6 +560,16 @@ select_entry (ControlCenter *cc, ControlCenterEntry *entry)
 	if (cc->selected && cc->selected->user_data)
 		((EntryInfo *)cc->selected->user_data)->selected = TRUE;
 	setup_entry (cc->selected);
+
+	gnome_canvas_item_i2c_affine (GNOME_CANVAS_ITEM (ei->group), affine);
+	pos = gtk_layout_get_vadjustment (GTK_LAYOUT (ei->cover->canvas));
+
+	g_warning ("\ny\t= %g .. %g\nitem\t= %g .. %g", pos->value, pos->value+pos->page_size, affine[5], affine[5]+ei->height);
+
+	if (affine[5] < pos->value)
+		gtk_adjustment_set_value (pos, MAX (affine[5] - PAD, 0));
+	else if ((affine[5] + ei->height) > (pos->value+pos->page_size))
+		gtk_adjustment_set_value (pos, MAX (MIN (affine[5] + ei->height + PAD, pos->upper) - pos->page_size, 0));
 }
 
 static void
@@ -601,137 +611,137 @@ cover_event (GnomeCanvasItem *item, GdkEvent *event, ControlCenterEntry *entry)
 }
 
 static gboolean
-key_press (GnomeCanvasItem *item, GdkEvent *event, ControlCenter *cc)
+cb_canvas_event (GnomeCanvasItem *item, GdkEvent *event, ControlCenter *cc)
 {
 	int x, y;
 	int do_set_x = FALSE;
-	switch (event->type) {
-	case GDK_BUTTON_PRESS:
+
+	if (event->type == GDK_BUTTON_PRESS) {
 		select_entry (cc, NULL);
 		set_x (cc);
 		return TRUE;
-	case GDK_KEY_PRESS:
-		switch (event->key.keyval) {
-		case GDK_KP_Up:
-		case GDK_Up:
-			if (cc->selected) {
-				y = get_y (cc, cc->selected);
-				if (y > 0) {
-					y--;
-					x = cc->last_x;
-					if (x == -1)
-						x = get_x (cc, cc->selected);
-					break;
-				}
-			} else {
-				x = y = 0;
+	}
+
+	if (event->type != GDK_KEY_PRESS)
+		return FALSE;
+
+	switch (event->key.keyval) {
+	case GDK_KP_Up:
+	case GDK_Up:
+		if (cc->selected) {
+			y = get_y (cc, cc->selected);
+			if (y > 0) {
+				y--;
+				x = cc->last_x;
+				if (x == -1)
+					x = get_x (cc, cc->selected);
 				break;
 			}
-			return FALSE;
-		case GDK_KP_Down:
-		case GDK_Down:
-			if (cc->selected) {
-				y = get_y (cc, cc->selected);
-				if (y < cc->line_count - 1) {
-					y++;
-					x = cc->last_x;
-					if (x == -1)
-						x = get_x (cc, cc->selected);
-					break;
-				}
-			} else {
-				x = y = 0;
+		} else {
+			x = y = 0;
+			break;
+		}
+		return FALSE;
+	case GDK_KP_Down:
+	case GDK_Down:
+		if (cc->selected) {
+			y = get_y (cc, cc->selected);
+			if (y < cc->line_count - 1) {
+				y++;
+				x = cc->last_x;
+				if (x == -1)
+					x = get_x (cc, cc->selected);
 				break;
 			}
-			return FALSE;
-		case GDK_KP_Right:
-		case GDK_Right:
-		case GDK_Tab:
-		case GDK_KP_Tab:
-			do_set_x = TRUE;
-			if (cc->selected) {
-				x = get_x (cc, cc->selected);
-				y = get_y (cc, cc->selected);
-
-				g_return_val_if_fail (x != -1 && y != -1, FALSE);
-
-				x++;
-
-				if (x >= get_line_length (cc, y)) {
-					y++;
-					x = 0;
-				}
-				if (y >= cc->line_count) {
-					return FALSE;
-				}
-			} else {
-				x = y = 0;
-			}
+		} else {
+			x = y = 0;
 			break;
-		case GDK_KP_Left:
-		case GDK_Left:
-		case GDK_ISO_Left_Tab:
-			do_set_x = TRUE;
-			if (cc->selected) {
-				x = get_x (cc, cc->selected);
-				y = get_y (cc, cc->selected);
+		}
+		return FALSE;
+	case GDK_KP_Right:
+	case GDK_Right:
+	case GDK_Tab:
+	case GDK_KP_Tab:
+		do_set_x = TRUE;
+		if (cc->selected) {
+			x = get_x (cc, cc->selected);
+			y = get_y (cc, cc->selected);
 
-				g_return_val_if_fail (x != -1 && y != -1, FALSE);
+			g_return_val_if_fail (x != -1 && y != -1, FALSE);
 
-				x--;
+			x++;
 
-				if (x < 0) {
-					if (y == 0)
-						return FALSE;
-					y--;
-					x = get_line_length (cc, y) - 1;
-				}
-			} else {
-				x = y = 0;
+			if (x >= get_line_length (cc, y)) {
+				y++;
+				x = 0;
 			}
-			break;
-		case GDK_Return:
-		case GDK_KP_Enter:
-			if (cc->selected) {
-				activate_entry (cc->selected);
-				set_x (cc);
-				return TRUE;
-			} else {
+			if (y >= cc->line_count) {
 				return FALSE;
 			}
-		case GDK_Escape:
-			gtk_main_quit ();
-			return TRUE;
+		} else {
+			x = y = 0;
+		}
+		break;
+	case GDK_KP_Left:
+	case GDK_Left:
+	case GDK_ISO_Left_Tab:
+		do_set_x = TRUE;
+		if (cc->selected) {
+			x = get_x (cc, cc->selected);
+			y = get_y (cc, cc->selected);
 
-		case 'w':
-		case 'q':
-		case 'W':
-		case 'Q':
-			if (event->key.state == GDK_CONTROL_MASK) {
-				gtk_main_quit ();
+			g_return_val_if_fail (x != -1 && y != -1, FALSE);
+
+			x--;
+
+			if (x < 0) {
+				if (y == 0)
+					return FALSE;
+				y--;
+				x = get_line_length (cc, y) - 1;
 			}
+		} else {
+			x = y = 0;
+		}
+		break;
+	case GDK_Return:
+	case GDK_KP_Enter:
+		if (cc->selected) {
+			activate_entry (cc->selected);
+			set_x (cc);
 			return TRUE;
-		default:
+		} else {
 			return FALSE;
 		}
-		if (y < 0)
-			y = 0;
-		if (y >= cc->line_count)
-			y = cc->line_count - 1;
-		if (y < 0)
-			return FALSE;
-		if (x < 0)
-			x = 0;
-		if (x >= get_line_length (cc, y))
-			x = get_line_length (cc, y) - 1;
-		select_entry (cc, get_entry (cc, x, y));
-		if (do_set_x)
-			set_x (cc);
+	case GDK_Escape:
+		gtk_main_quit ();
+		return TRUE;
+
+	case 'w':
+	case 'q':
+	case 'W':
+	case 'Q':
+		if (event->key.state == GDK_CONTROL_MASK) {
+			gtk_main_quit ();
+		}
 		return TRUE;
 	default:
 		return FALSE;
 	}
-
+	if (y < 0)
+		y = 0;
+	if (y >= cc->line_count)
+		y = cc->line_count - 1;
+	if (y < 0)
+		return FALSE;
+	if (x < 0)
+		x = 0;
+	if (x >= get_line_length (cc, y))
+		x = get_line_length (cc, y) - 1;
+	select_entry (cc, get_entry (cc, x, y));
+	if (do_set_x)
+		set_x (cc);
+	return TRUE;
 }
 
 static void
@@ -815,7 +825,7 @@ rebuild_canvas (ControlCenter *cc, ControlCenterInformation *info)
 	gnome_canvas_item_grab_focus (GNOME_CANVAS_ITEM (gnome_canvas_root (cc->canvas)));
 	g_signal_connect (gnome_canvas_root (cc->canvas),
 		"event",
-		G_CALLBACK (key_press), cc);
+		G_CALLBACK (cb_canvas_event), cc);
 
 	count = cc->info->count;
 
@@ -891,9 +901,8 @@ rebuild_canvas (ControlCenter *cc, ControlCenterInformation *info)
 			} else
 				ei->text = NULL;
 
-			if (cc->info->categories[i]->entries[j]->icon) {
-				GdkPixbuf *pixbuf =
-					gdk_pixbuf_new_from_file (cc->info->categories[i]->entries[j]->icon, NULL);
+			if (cc->info->categories[i]->entries[j]->icon_pixbuf) {
+				GdkPixbuf *pixbuf = cc->info->categories[i]->entries[j]->icon_pixbuf;
 				GdkPixbuf *highlight_pixbuf =
 					create_spotlight_pixbuf (pixbuf);
 				ei->icon_height = gdk_pixbuf_get_height (pixbuf);
@@ -914,8 +923,8 @@ rebuild_canvas (ControlCenter *cc, ControlCenterInformation *info)
 			}
 
 			ei->cover = gnome_canvas_item_new (ei->group,
-								   gnomecc_event_box_get_type(),
-								   NULL);
+							   gnomecc_event_box_get_type(),
+							   NULL);
 			g_signal_connect (ei->cover, "event",
 				G_CALLBACK (cover_event),
 				cc->info->categories[i]->entries[j]);

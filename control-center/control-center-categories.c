@@ -39,263 +39,100 @@
 #include <errno.h>
 #include <libgnomevfs/gnome-vfs.h>
 
-static char *
-find_icon (GnomeDesktopItem *dentry)
+/********************************************************************
+ *
+ * Stolen from nautilus to keep control center and nautilus in sync
+ */
+static gboolean
+eel_str_has_suffix (const char *haystack, const char *needle)
 {
-	char *icon_file = gnome_desktop_item_get_icon (dentry, NULL);
-	if (!icon_file)
-		icon_file = gnome_program_locate_file (NULL, GNOME_FILE_DOMAIN_PIXMAP,
-						       "gnome-unknown.png", TRUE, NULL);
-	return icon_file;
-}
+	const char *h, *n;
 
-
-#if 0
-#include "capplet-dir.h"
-#include "capplet-dir-view.h"
-
-CappletDirView *(*get_view_cb) (CappletDir *dir, CappletDirView *launcher);
-
-/* nice global table for capplet lookup */
-GHashTable *capplet_hash = NULL;
-
-CappletDirEntry *
-capplet_new (CappletDir *dir, gchar *desktop_path) 
-{
-	Capplet *capplet;
-	CappletDirEntry *entry;
-	GnomeDesktopItem *dentry;
-	gchar *path, **vec;
-	const gchar *execstr;
-
-	g_return_val_if_fail (desktop_path != NULL, NULL);
-
-	entry = g_hash_table_lookup (capplet_hash, desktop_path);
-	if (entry) {
-		return entry;
+	if (needle == NULL) {
+		return TRUE;
 	}
-
-	dentry = gnome_desktop_item_new_from_uri (desktop_path,
-						  GNOME_DESKTOP_ITEM_TYPE_NULL,
-						  NULL);
-	if (dentry == NULL)
-		return NULL;
-
-	execstr = gnome_desktop_item_get_string (dentry,
-			GNOME_DESKTOP_ITEM_EXEC);
-	/* Perhaps use poptParseArgvString here */
-	vec = g_strsplit (execstr, " ", 0);
-	if (!(execstr && execstr[0]) || !(vec && (path = g_find_program_in_path (vec[0]))))
-	{
-		g_strfreev (vec);
-		gnome_desktop_item_unref (dentry);
-		return NULL;
+	if (haystack == NULL) {
+		return needle[0] == '\0';
 	}
-	g_free (path);
-
-	capplet = g_new0 (Capplet, 1);
-	capplet->launching = FALSE;
-
-	entry = CAPPLET_DIR_ENTRY (capplet);
-
-	entry->type = TYPE_CAPPLET;
-	entry->entry = dentry;
-
-	entry->label = g_strdup (gnome_desktop_item_get_localestring (dentry,
-			GNOME_DESKTOP_ITEM_NAME));
-	entry->icon = find_icon (, dentry);
-	entry->pb = gdk_pixbuf_new_from_file (entry->icon, NULL);
-	entry->uri = gnome_vfs_uri_new (desktop_path);
-	entry->exec = vec;
-	entry->dir = dir;
-
-	g_hash_table_insert (capplet_hash, g_strdup (desktop_path), entry);
-
-	return entry;
-}
-
-CappletDirEntry *
-capplet_dir_new (CappletDir *dir, gchar *dir_path)
-{
-	CappletDir *capplet_dir;
-	CappletDirEntry *entry;
-	GnomeVFSURI *desktop_uri;
-	GnomeVFSURI *dir_uri;
-	char *desktop_uri_string;
-
-	g_return_val_if_fail (dir_path != NULL, NULL);
-
-
-	entry = g_hash_table_lookup (capplet_hash, dir_path);
-	if (entry) {
-		return entry;
-	}
-
-	desktop_uri = gnome_vfs_uri_append_file_name (dir_uri, ".directory");
-	desktop_uri_string = gnome_vfs_uri_to_string (desktop_uri, GNOME_VFS_URI_HIDE_NONE);
-
-	capplet_dir = g_new0 (CappletDir, 1);
-	entry = CAPPLET_DIR_ENTRY (capplet_dir);
-
-	entry->type = TYPE_CAPPLET_DIR;
-	entry->entry = gnome_desktop_item_new_from_uri (desktop_uri_string,
-			GNOME_DESKTOP_ITEM_TYPE_NULL,
-			NULL);
-	entry->dir = dir;
-	entry->uri = dir_uri;
-
-	gnome_vfs_uri_unref (desktop_uri);
-	g_free (desktop_uri_string);
-
-	if (entry->entry) {
-		entry->label = g_strdup (gnome_desktop_item_get_localestring (
-				entry->entry,
-				GNOME_DESKTOP_ITEM_NAME));
-		entry->icon = find_icon (gnome_desktop_item_get_string (entry->entry,
-									GNOME_DESKTOP_ITEM_ICON),
-					 entry->entry);
-
-		if (!entry->icon)
-			entry->icon = gnome_program_locate_file
-				(gnome_program_get (), GNOME_FILE_DOMAIN_APP_PIXMAP,
-				 "control-center2.png", TRUE, NULL);
-
-		entry->pb = gdk_pixbuf_new_from_file (entry->icon, NULL);
-	} else {
-		/* If the .directory file could not be found or read, abort */
-		g_free (capplet_dir);
-		return NULL;
-	}
-
-	entry->dir = dir;
-
-	g_hash_table_insert (capplet_hash, g_strdup (dir_path), entry);
-
-	capplet_dir_load (CAPPLET_DIR (entry));
-
-	return entry;
-}
-
-CappletDirEntry *
-capplet_lookup (const char *path)
-{
-	return g_hash_table_lookup (capplet_hash, path);
-}
-
-void 
-capplet_dir_entry_destroy (CappletDirEntry *entry)
-{
-	if (entry->type == TYPE_CAPPLET) {
-		capplet_shutdown (CAPPLET (entry));
-	} else {
-		capplet_dir_shutdown (CAPPLET_DIR (entry));
-	}
-
-	g_free (entry->label);
-	g_free (entry->icon);
-	gnome_vfs_uri_unref (entry->uri);
-	g_strfreev (entry->exec);
-	if (entry->entry)
-		gnome_desktop_item_unref (entry->entry);
-	g_free (entry);
-}
-
-void 
-capplet_dir_entry_activate (CappletDirEntry *entry, 
-			    CappletDirView *launcher)
-{
-	g_return_if_fail (entry != NULL);
-
-	if (entry->type == TYPE_CAPPLET)
-		capplet_activate (CAPPLET (entry));
-	else if (entry->type == TYPE_CAPPLET_DIR)
-		capplet_dir_activate (CAPPLET_DIR (entry), launcher);
-	else
-		g_assert_not_reached ();
-}
-
-void 
-capplet_dir_entry_shutdown (CappletDirEntry *entry)
-{
-	if (entry->type == TYPE_CAPPLET)
-		capplet_shutdown (CAPPLET (entry));
-	else if (entry->type == TYPE_CAPPLET_DIR)
-		capplet_dir_shutdown (CAPPLET_DIR (entry));
-	else
-		g_assert_not_reached ();
-}
-
-static gint
-capplet_reset_cb (Capplet *capplet) 
-{
-	capplet->launching = FALSE;
+		
+	/* Eat one character at a time. */
+	h = haystack + strlen(haystack);
+	n = needle + strlen(needle);
+	do {
+		if (n == needle) {
+			return TRUE;
+		}
+		if (h == haystack) {
+			return FALSE;
+		}
+	} while (*--h == *--n);
 	return FALSE;
 }
-
-static void
-capplet_activate (Capplet *capplet) 
+static char *   
+eel_str_strip_trailing_str (const char *source, const char *remove_this)
 {
-	CappletDirEntry *entry;
-
-	entry = CAPPLET_DIR_ENTRY (capplet);
-
-	if (capplet->launching) {
-		return;
-	} else {
-		capplet->launching = TRUE;
-		gtk_timeout_add (1000, (GtkFunction) capplet_reset_cb, capplet);
-		gnome_desktop_item_launch (entry->entry, NULL, 0, NULL);
+	const char *end;
+	if (source == NULL) {
+		return NULL;
 	}
+	if (remove_this == NULL) {
+		return g_strdup (source);
+	}
+	end = source + strlen (source);
+	if (strcmp (end - strlen (remove_this), remove_this) != 0) {
+		return g_strdup (source);
+	}
+	else {
+		return g_strndup (source, strlen (source) - strlen(remove_this));
+	}
+	
 }
-
-void
-capplet_dir_load (CappletDir *capplet_dir) 
+static char *
+nautilus_remove_icon_file_name_suffix (const char *icon_name)
 {
-	if (capplet_dir->entries) return;
-	capplet_dir->entries = read_entries (capplet_dir);
-}
+	guint i;
+	const char *suffix;
+	static const char *icon_file_name_suffixes[] = { ".svg", ".svgz", ".png", ".jpg", ".xpm" };
 
-static void
-capplet_dir_activate (CappletDir *capplet_dir, CappletDirView *launcher) 
+	for (i = 0; i < G_N_ELEMENTS (icon_file_name_suffixes); i++) {
+		suffix = icon_file_name_suffixes[i];
+		if (eel_str_has_suffix (icon_name, suffix)) {
+			return eel_str_strip_trailing_str (icon_name, suffix);
+		}
+	}
+	return g_strdup (icon_name);
+}
+/********************************************************************/
+
+static GdkPixbuf * 
+find_icon (GnomeDesktopItem *dentry) 
 {
-	capplet_dir_load (capplet_dir);
-	capplet_dir->view = get_view_cb (capplet_dir, launcher);
+	GdkPixbuf *res;
+	char const *icon;
+	GtkIconTheme *icon_theme = gtk_icon_theme_get_default ();
 
-	capplet_dir_view_load_dir (capplet_dir->view, capplet_dir);
-	capplet_dir_view_show (capplet_dir->view);
+	icon = gnome_desktop_item_get_string (dentry, GNOME_DESKTOP_ITEM_ICON);
+
+	if (icon == NULL || icon[0] == 0)
+		icon = "gnome-settings";
+	else if (g_path_is_absolute (icon))
+		res = gdk_pixbuf_new_from_file (icon, NULL);
+	else  {
+		char *no_suffix = nautilus_remove_icon_file_name_suffix (icon);
+		res = gtk_icon_theme_load_icon (icon_theme, no_suffix, 48, 0, NULL);
+		g_free (no_suffix);
+		if (res == NULL) {
+			char *path = g_build_filename (GNOMECC_ICONS_DIR, icon, NULL);
+			res = gdk_pixbuf_new_from_file (path, NULL);
+			g_free (path);
+		}
+	}
+	if (res == NULL)
+		res = gtk_icon_theme_load_icon (icon_theme, "gnome-unknown", 48, 0, NULL);
+	if (res == NULL)
+		res = gtk_icon_theme_load_icon (icon_theme, "gtk-missing-image", 48, 0, NULL);
+	return res;
 }
-
-static void
-capplet_shutdown (Capplet *capplet) 
-{
-	/* Can't do much here ... :-( */
-}
-
-static void
-cde_destroy (CappletDirEntry *e, gpointer null)
-{
-	capplet_dir_entry_destroy (e);
-}
-
-static void
-capplet_dir_shutdown (CappletDir *capplet_dir) 
-{
-	if (capplet_dir->view)
-		g_object_unref (G_OBJECT (capplet_dir->view));
-
-	g_slist_foreach (capplet_dir->entries, (GFunc) cde_destroy, NULL);
-
-	g_slist_free (capplet_dir->entries);
-}
-
-static gint 
-node_compare (gconstpointer a, gconstpointer b) 
-{
-	return strcmp (CAPPLET_DIR_ENTRY (a)->label, 
-		       CAPPLET_DIR_ENTRY (b)->label);
-}
-#endif
-/* Adapted from the original control center... */
 
 GnomeDesktopItem *
 get_directory_entry (GnomeVFSURI *uri)
@@ -453,7 +290,8 @@ get_entry_name (const void *ap)
 static void
 free_entry (ControlCenterEntry *entry)
 {
-	g_free (entry->icon);
+	g_object_unref (entry->icon_pixbuf);
+	entry->icon_pixbuf = NULL;
 	g_free (entry->name);
 	if (entry->desktop_entry)
 		gnome_desktop_item_unref (entry->desktop_entry);
@@ -500,7 +338,7 @@ load_information_to_category (CategoryLoadInformation *info, gboolean real_categ
 		category->entries[i] = g_new (ControlCenterEntry, 1);
 
 		category->entries[i]->desktop_entry = iterator->data;
-		category->entries[i]->icon = find_icon (category->entries[i]->desktop_entry);
+		category->entries[i]->icon_pixbuf = find_icon (category->entries[i]->desktop_entry);
 		category->entries[i]->user_data = NULL;
 		category->entries[i]->name = name_iterator->data;
 		category->entries[i]->category = category;
