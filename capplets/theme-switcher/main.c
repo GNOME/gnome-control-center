@@ -1,6 +1,7 @@
 #include <gnome.h>
 #include <bonobo.h>
 #include <glade/glade.h>
+#include <gconf/gconf-client.h>
 #include <config.h>
 
 #include <sys/stat.h>
@@ -110,10 +111,9 @@ static gchar* get_selected_theme (void)
 }
 
 
-static gchar* get_selected_theme_name (void)
+static const gchar* get_selected_theme_name (void)
 {
 	int index = -1;
-	gchar *theme;
 	GtkTreeView *view = GTK_TREE_VIEW (glade_xml_get_widget (xml, "tree1"));
 	
 	gtk_tree_selection_selected_foreach (gtk_tree_view_get_selection (view), (GtkTreeSelectionForeachFunc) select_foreach_cb, &index);
@@ -130,7 +130,7 @@ apply_cb (void)
 	gchar *name = get_selected_theme_name ();
 	if (name)
 	{
-		gconf_client_set_string (gconf_client_get_default (), "/desktop/gnome/interface/gtk_theme", name);
+		gconf_client_set_string (gconf_client_get_default (), "/desktop/gnome/interface/gtk_theme", name, NULL);
 	}
 }
 
@@ -241,13 +241,13 @@ main (int argc, char **argv)
 	xml = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/gtk-theme-selector.glade", NULL, NULL);
 	setup_list ();
 
-	auto_preview = gconf_client_get_bool (gconf_client_get_default (), "/apps/gtk-theme-selector/auto");
+	auto_preview = gconf_client_get_bool (gconf_client_get_default (), "/apps/gtk-theme-selector/auto", NULL);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (glade_xml_get_widget (xml, "check1")), auto_preview);
 			
 	glade_xml_signal_autoconnect (xml);
 	gtk_main ();
  
-	gconf_client_set_bool (gconf_client_get_default (), "/apps/gtk-theme-selector/auto", auto_preview);
+	gconf_client_set_bool (gconf_client_get_default (), "/apps/gtk-theme-selector/auto", auto_preview, NULL);
 	
 	return 0;
 }
