@@ -77,6 +77,7 @@ static void wp_properties_help (GtkWindow * parent, char const * helpfile,
 static void gnome_wp_add_image (GnomeWPCapplet * capplet,
 				const gchar * filename) {
   GnomeWPItem * item;
+  GtkTreePath * path;
   GdkColor color1, color2;
 
   item = g_hash_table_lookup (capplet->wphash, filename);
@@ -124,11 +125,25 @@ static void gnome_wp_add_image (GnomeWPCapplet * capplet,
     item->options = gconf_client_get_string (capplet->client,
 					     WP_OPTIONS_KEY,
 					     NULL);
-
+    if (!strcmp (item->options, "none")) {
+      item->options = g_strdup ("wallpaper");
+    }
     gnome_wp_item_update_description (item);
      
     g_hash_table_insert (capplet->wphash, g_strdup (item->filename), item);
     wp_props_load_wallpaper (item->filename, item, capplet);
+
+    gconf_client_set_string (capplet->client, WP_FILE_KEY,
+			     item->filename, NULL);
+    gconf_client_set_string (capplet->client, WP_OPTIONS_KEY,
+			     item->options, NULL);
+
+    path = gtk_tree_row_reference_get_path (item->rowref);
+    gtk_tree_view_set_cursor (GTK_TREE_VIEW (capplet->treeview), path,
+			      NULL, FALSE);
+    gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (capplet->treeview),
+				  path, NULL, TRUE, 0.5, 0.0);
+    gtk_tree_path_free (path);
   } else {
     gnome_wp_item_free (item);
   }
