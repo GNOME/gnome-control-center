@@ -392,6 +392,9 @@ mime_category_info_save (MimeCategoryInfo *category)
 	gchar   *key, *basename;
 	gboolean set_ids;
 
+	g_warning ("Do not call this, nothing actually observes the gconf settings");
+	return;
+
 	/* Be really anal about validating this action */
 	if (category->default_action != NULL) {
 		if ( category->default_action->command == NULL ||

@@ -8,16 +8,21 @@
 #include "gnome-settings-locate-pointer.h"
 #include "gnome-settings-daemon.h"
 
-#define MAX_BUTTONS 10
+#define DEFAULT_PTR_MAP_SIZE 128
 
 static void
 set_left_handed (gboolean left_handed)
 {
-  unsigned char buttons[MAX_BUTTONS];
+  unsigned char *buttons;
   gint n_buttons, i;
   gint idx_1 = 0, idx_3 = 1;
 
-  n_buttons = XGetPointerMapping (GDK_DISPLAY (), buttons, MAX_BUTTONS);
+  buttons = g_alloca (DEFAULT_PTR_MAP_SIZE);
+  n_buttons = XGetPointerMapping (GDK_DISPLAY (), buttons, DEFAULT_PTR_MAP_SIZE);
+  if (n_buttons > DEFAULT_PTR_MAP_SIZE) {
+    buttons = g_alloca (n_buttons);
+    n_buttons = XGetPointerMapping (GDK_DISPLAY (), buttons, n_buttons);
+  }
 
   for (i = 0; i < n_buttons; i++)
     {
