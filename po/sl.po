@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2003-01-12 13:57+0100\n"
+"POT-Creation-Date: 2003-01-21 17:26+0100\n"
 "PO-Revision-Date: 2002-06-09 20:17+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -42,8 +42,8 @@ msgid ""
 "This system does not seem to have the XKB extension.  The keyboard "
 "accessibility features will not operate without it."
 msgstr ""
-"Zdi se, da ta sistem nima razširitve XKB.  Možnosti dostopnosti tipkovnice brez "
-"nje ne bodo delovale."
+"Zdi se, da ta sistem nima razširitve XKB.  Možnosti dostopnosti tipkovnice "
+"brez nje ne bodo delovale."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:1
@@ -387,6 +387,11 @@ msgstr "Le uveljavi nastavitve in končaj"
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "Ob prikazovanju pomoči se je zgodila napaka: %s"
+
+#: capplets/common/capplet-stock-icons.c:94
+#, c-format
+msgid "Unable to load capplet stock icon '%s'\n"
+msgstr "Nisem mogel naložiti komplet ikon za nastavitvene vstavke '%s'\n"
 
 #: capplets/common/file-transfer-dialog.c:95
 #, c-format
@@ -1930,23 +1935,28 @@ msgstr "_Namesti"
 msgid "_Location of new theme:"
 msgstr "_Lokacija nove teme:"
 
-#: capplets/theme-switcher/gnome-theme-details.c:329
-#: capplets/theme-switcher/gnome-theme-manager.c:606
+#: capplets/theme-switcher/gnome-theme-details.c:372
+#: capplets/theme-switcher/gnome-theme-manager.c:609
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
 "installed the \"gnome-themes\" package."
 msgstr ""
 "Na vašem sistemu ni bila najdena nobena tema.  To verjetno pomeni, da je bil "
-"vaš dialog \"Nastavitve teme\" nepravilno nameščen ali pa niste namestili paketa \"gnome-themes\"."
+"vaš dialog \"Nastavitve teme\" nepravilno nameščen ali pa niste namestili "
+"paketa \"gnome-themes\"."
 
-#: capplets/theme-switcher/gnome-theme-manager.c:662
-#: capplets/theme-switcher/gnome-theme-manager.c:722
+#: capplets/theme-switcher/gnome-theme-save.c:72
+msgid "Theme name must be present"
+msgstr "Tema mora biti prisotna"
+
+#: capplets/theme-switcher/gnome-theme-manager.c:665
+#: capplets/theme-switcher/gnome-theme-manager.c:725
 msgid "Custom theme"
 msgstr "Prikrojena tema"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:662
-#: capplets/theme-switcher/gnome-theme-manager.c:722
+#: capplets/theme-switcher/gnome-theme-manager.c:665
+#: capplets/theme-switcher/gnome-theme-manager.c:725
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "To temo lahko shranete, če pritisnete gumb \"Shrani temo\"."
 
@@ -2108,7 +2118,8 @@ msgstr "Super (ali \"logotip Oken\")"
 
 #: capplets/windows/gnome-window-properties.glade.h:1
 msgid "To _move a window, press-and-hold this key then grab the window:"
-msgstr "Za _premik okna, pritisnite in držite to tipko, nato pa zagrabite okno:"
+msgstr ""
+"Za _premik okna, pritisnite in držite to tipko, nato pa zagrabite okno:"
 
 #: capplets/windows/gnome-window-properties.glade.h:2
 msgid "Window Preferences"
@@ -2360,11 +2371,11 @@ msgstr "Izberi zvočno datoteko"
 msgid "Window manager \"%s\" has not registered a configuration tool\n"
 msgstr "Upravljalnik oken \"%s\" ni registrirano nastavitveno orodje\n"
 
-#: libwindow-settings/metacity-window-manager.c:373
+#: libwindow-settings/metacity-window-manager.c:374
 msgid "Maximize"
 msgstr "Povečaj"
 
-#: libwindow-settings/metacity-window-manager.c:374
+#: libwindow-settings/metacity-window-manager.c:375
 msgid "Roll up"
 msgstr "Zvarti navzgor"
 
@@ -2372,7 +2383,8 @@ msgstr "Zvarti navzgor"
 msgid ""
 "If true, the mime handlers for text/plain and text/* will be kept in sync"
 msgstr ""
-"Če je resnično, bodo obravnavalniki mime za text/plain in text/* ohranjeni v soskladju"
+"Če je resnično, bodo obravnavalniki mime za text/plain in text/* ohranjeni v "
+"soskladju"
 
 #: schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:2
 msgid "Sync text/plain and text/* handlers"
@@ -2414,7 +2426,8 @@ msgstr "Zaporedje RGBA"
 msgid ""
 "Resolution used for converting font sizes to pixel sizes, in dots per inch"
 msgstr ""
-"Ločljivost, ki se uporabi za pretvorbo velikost pisav v količino pik, v pikah na palec"
+"Ločljivost, ki se uporabi za pretvorbo velikost pisav v količino pik, v "
+"pikah na palec"
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:6
 msgid ""
@@ -2423,8 +2436,9 @@ msgid ""
 "\"bgr\" - blue on left. \"vrgb\" - red on top. \"vbgr\" - red on bottom."
 msgstr ""
 "Zaporedje podpikselnih elementov na zaslonu LCD; uporabljeno le kadar je "
-"glajenje robov nastavljeno na \"rgba\". Možne vrednosti so: \"rgb\" - rdeča na levi, najpogosteje. "
-"\"bgr\" - modra na levi. \"vrgb\" - rdeča na vrhu. \"vbgr\" - rdeča na dnu."
+"glajenje robov nastavljeno na \"rgba\". Možne vrednosti so: \"rgb\" - rdeča "
+"na levi, najpogosteje. \"bgr\" - modra na levi. \"vrgb\" - rdeča na vrhu. "
+"\"vbgr\" - rdeča na dnu."
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:7
 msgid ""
@@ -2432,9 +2446,9 @@ msgid ""
 "\"none\" - no antialiasing. \"grayscale\" - standard grayscale antialiasing. "
 "\"rgba\" - subpixel antialiasing. (LCD screens only)."
 msgstr ""
-"Vrsta glajenja robov pisavam. Možne vrednosti so: "
-"\"none\" - brez glajenja. \"grayscale\" - običajno sivinsko glajenje. "
-"\"rgba\" - podpikselsko glajenje. (le zasloni LCD)."
+"Vrsta glajenja robov pisavam. Možne vrednosti so: \"none\" - brez glajenja. "
+"\"grayscale\" - običajno sivinsko glajenje. \"rgba\" - podpikselsko "
+"glajenje. (le zasloni LCD)."
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:8
 msgid ""
