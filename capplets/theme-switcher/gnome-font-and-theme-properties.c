@@ -35,7 +35,7 @@ create_dialog (void)
 {
   GladeXML *dialog;
 
-  dialog = glade_xml_new ("./gnome-font-and-theme-properties.glade", "font_and_theme_dialog", NULL);
+  dialog = glade_xml_new (GLADEDIR "/gnome-font-and-theme-properties.glade", "font_and_theme_dialog", NULL);
 
   return dialog;
 }

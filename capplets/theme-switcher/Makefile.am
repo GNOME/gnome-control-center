@@ -12,8 +12,11 @@ Desktop_in_files = gtk-theme-selector.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
 gladedir = $(GNOMECC_GLADE_DIR)
-glade_DATA = gtk-theme-selector.glade
+glade_DATA = gnome-theme-and-font-and-theme-properties.glade
 
-INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)
+INCLUDES   = \
+	$(GNOMECC_CAPPLETS_CFLAGS)	\
+	-DGLADEDIR=\""$(gladedir)"\"
+
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
 EXTRA_DIST = $(Desktop_in_files) $(glade_DATA)
