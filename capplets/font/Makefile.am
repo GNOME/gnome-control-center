@@ -20,6 +20,7 @@ desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 gladedir = $(GNOMECC_GLADE_DIR)
 glade_DATA = font-properties.glade
 
-INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)
+INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS) \
+	-DGLADEDIR=\""$(gladedir)"\"
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
 EXTRA_DIST = $(Desktop_in_files) $(icons_DATA) $(glade_DATA)
