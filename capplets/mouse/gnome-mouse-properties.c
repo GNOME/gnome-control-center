@@ -669,12 +669,20 @@ create_dialog (void)
 static void
 dialog_button_clicked_cb (GtkDialog *dialog, gint response_id, GConfChangeSet *changeset) 
 {
-	switch (response_id) {
-	case GTK_RESPONSE_CLOSE:
-	default:
+	if (response_id == GTK_RESPONSE_HELP) {
+		GError *error = NULL;
+
+		/* TODO : get this written */
+		gnome_help_display_desktop (NULL,
+			"control-center-manual",
+			"config-mouse.xml",
+			"CONFIGURATION", &error);
+		if (error) {
+			g_warning ("help error: %s\n", error->message);
+			g_error_free (error);
+		}
+	} else
 		gtk_main_quit ();
-		break;
-	}
 }
 
 int
@@ -716,6 +724,7 @@ main (int argc, char **argv)
 
 		dialog_win = gtk_dialog_new_with_buttons
 			(_("Mouse Properties"), NULL, 0,
+			 GTK_STOCK_HELP, GTK_RESPONSE_HELP,
 			 GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
 			 NULL);
 
