@@ -226,7 +226,7 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 						GTK_DIALOG_MODAL,
 						GTK_MESSAGE_ERROR,
 						GTK_BUTTONS_OK,
-						_("Failed to create temporal directory"));
+						_("Failed to create temporary directory"));
 		gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);			
 		return;	
@@ -243,7 +243,7 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 						GTK_DIALOG_MODAL,
 						GTK_MESSAGE_ERROR,
 						GTK_BUTTONS_OK,
-						_("Can not install theme. \nThere are not bzip2 utility in the system."));
+						_("Can not install theme. \nThe bzip2 utility is not installed."));
 			gtk_dialog_run (GTK_DIALOG (dialog));
 			gtk_widget_destroy (dialog);
 			gnome_vfs_unlink(path);			
@@ -273,7 +273,7 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 						GTK_DIALOG_MODAL,
 						GTK_MESSAGE_ERROR,
 						GTK_BUTTONS_OK,
-						_("Can not install themes. \nThere are not gzip utility in the system."));
+						_("Can not install themes. \nThe gzip utility is not installed."));
 			gtk_dialog_run (GTK_DIALOG (dialog));
 			gtk_widget_destroy (dialog);			
 			gnome_vfs_unlink(path);
@@ -320,7 +320,7 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 			  	       GTK_DIALOG_MODAL,
 				       GTK_MESSAGE_ERROR,
 				       GTK_BUTTONS_OK,
-				       _("The theme is a engine. You need to compile the theme."));
+				       _("The theme is an engine. You need to compile the theme."));
 			gtk_dialog_run (GTK_DIALOG (dialog));
 			gtk_widget_destroy (dialog);		
 			cleanup_tmp_dir(theme_props);			
