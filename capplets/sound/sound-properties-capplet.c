@@ -55,7 +55,7 @@ apply_settings (Bonobo_ConfigDatabase db)
         if (enable_esd && gnome_sound_connection < 0)
                 start_esd ();
 
-	if (!enable_esd && gnome_sound_connection >= 0)
+	if (!enable_esd)
 		system ("killall esd");
 
 	/* I'm not going to deal with reloading samples until later. It's
