@@ -35,6 +35,7 @@
 #define GENERAL_AD SYSTEM_AD_DIR "/General.ad"
 #define USER_AD_DIR ".gnome2/xrdb"
 #define USER_X_RESOURCES ".Xresources"
+#define USER_X_DEFAULTS ".Xdefaults"
 
 #define GTK_THEME_KEY "/desktop/gnome/interface/gtk_theme"
 
@@ -245,10 +246,10 @@ scan_for_files (GError **error)
 }
 
 /**
- * Append the users .Xresources file if it exists
+ * Append an X resources file, such as .Xresources, or .Xdefaults
  */
 static void
-append_xresources (GString *string, GError **error)
+append_xresource_file (const char * filename, GString *string, GError **error)
 {
 	const char* home_path;
 	char *xresources;
@@ -261,7 +262,7 @@ append_xresources (GString *string, GError **error)
 		return;
 	}
 
-	xresources = g_build_filename (home_path, USER_X_RESOURCES, NULL);
+	xresources = g_build_filename (home_path, filename, NULL);
 	if (g_file_test (xresources, G_FILE_TEST_EXISTS)) {
 		append_file (xresources, string, error);
 		if (*error) {
@@ -305,7 +306,9 @@ apply_settings (GtkStyle *style)
 	g_slist_foreach (list, (GFunc)g_free, NULL);
 	g_slist_free (list);
 	
-	append_xresources (string, &error);
+	append_xresource_file (USER_X_RESOURCES, string, &error);
+	append_xresource_file (USER_X_DEFAULTS, string, &error);
+
 	if (error) {
 		g_warning (error->message);
 		g_error_free (error);
