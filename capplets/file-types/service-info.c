@@ -292,17 +292,17 @@ get_key_name (const ServiceInfo *info, const gchar *end)
 static void
 fill_service_apps (void) 
 {
-	GList *apps, *tmp, *tmp1;
+	GList *app_list, *app, *tmp1;
 	const gchar *uri_schemes_str;
 	gchar **uri_schemes;
 	int i;
 
 	if (service_apps == NULL)
-		service_apps = g_hash_table_new (g_str_hash, g_str_equal);
+		service_apps = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
 
-	apps = gnome_vfs_application_registry_get_applications (NULL);
-	for (tmp = apps; tmp != NULL; tmp = tmp->next) {
-		uri_schemes_str = gnome_vfs_application_registry_peek_value (tmp->data, "supported_uri_schemes");
+	app_list = gnome_vfs_application_registry_get_applications (NULL);
+	for (app = app_list; app != NULL; app = app->next) {
+		uri_schemes_str = gnome_vfs_application_registry_peek_value (app->data, "supported_uri_schemes");
 		if (uri_schemes_str == NULL)
 			continue;
 
@@ -312,16 +312,15 @@ fill_service_apps (void)
 
 		for (i = 0; uri_schemes[i] != NULL; i++) {
 			tmp1 = g_hash_table_lookup (service_apps, uri_schemes[i]);
-			tmp1 = g_list_prepend (tmp1, gnome_vfs_application_registry_get_mime_application (tmp->data));
-			g_hash_table_remove (service_apps, uri_schemes[i]);
-			g_hash_table_insert (service_apps, uri_schemes[i], tmp1);
+			tmp1 = g_list_prepend (tmp1, gnome_vfs_application_registry_get_mime_application (app->data));
+			g_hash_table_replace (service_apps, g_strdup (uri_schemes[i]), tmp1);
 		}
 
 		g_strfreev (uri_schemes);
 	}
 
-	g_list_foreach (apps, (GFunc) g_free, NULL);
-	g_list_free (apps);
+	g_list_foreach (app_list, (GFunc) g_free, NULL);
+	g_list_free (app_list);
 }
 
 static void

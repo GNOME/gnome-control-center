@@ -1,3 +1,11 @@
+2002-04-26  Jody Goldberg <jody@gnome.org>
+
+	* service-edit-dialog.c (populate_app_list) : always populate the
+	  details fields so a user can see what they selected.
+	(program_changed_cb) : ditto.
+
+	* service-info.c (fill_service_apps) : fix to not use freed memory.
+
 2002-04-23  Jody Goldberg <jody@gnome.org>
 
 	* model-entry.c (model_entry_save) : wrap in vfs freeze/unfreeze.

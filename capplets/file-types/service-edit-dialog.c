@@ -372,7 +372,7 @@ setup_add_dialog (ServiceEditDialog *dialog)
 static void
 populate_app_list (ServiceEditDialog *dialog) 
 {
-	GtkOptionMenu *option_menu;
+	GtkOptionMenu *program_select;
 	GtkMenu       *menu;
 	GtkWidget     *item;
 	gint           found_idx = -1, i = 0;
@@ -380,12 +380,12 @@ populate_app_list (ServiceEditDialog *dialog)
 	const GList   *service_apps;
 	GnomeVFSMimeApplication *app;
 
-	option_menu = GTK_OPTION_MENU (WID ("program_select"));
+	program_select = GTK_OPTION_MENU (WID ("program_select"));
 	menu = GTK_MENU (gtk_menu_new ());
 	service_apps = get_apps_for_service_type (dialog->p->info->protocol);
 
 	if (service_apps == NULL)
-		gtk_widget_set_sensitive (WID ("program_select"), FALSE);
+		gtk_widget_set_sensitive (GTK_WIDGET (program_select), FALSE);
 
 	while (service_apps != NULL) {
 		app = service_apps->data;
@@ -407,19 +407,13 @@ populate_app_list (ServiceEditDialog *dialog)
 	item = gtk_menu_item_new_with_label (_("Custom"));
 	gtk_widget_show (item);
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
+	if (found_idx < 0)
+		found_idx = i;
 
-	if (found_idx < 0) {
-		if (dialog->p->info->app != NULL) {
-			if (dialog->p->info->app->command != NULL)
-				gnome_file_entry_set_filename (GNOME_FILE_ENTRY (WID ("custom_program_entry")),
-							       dialog->p->info->app->command);
-
-			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("needs_terminal_toggle")),
-						      dialog->p->info->app->requires_terminal);
-		}
-	}
-
-	gtk_option_menu_set_menu (option_menu, GTK_WIDGET (menu));
+	gtk_option_menu_set_menu (program_select, GTK_WIDGET (menu));
+	gtk_option_menu_set_history (program_select, found_idx);
+	/* fire it again just in case we had selected the 1st element */
+	program_changed_cb (dialog, program_select);
 }
 
 static void
@@ -557,6 +551,8 @@ program_changed_cb (ServiceEditDialog *dialog, GtkOptionMenu *option_menu)
 {
 	int id;
 	GtkMenuShell *menu;
+	GnomeVFSMimeApplication *app;
+	GList *child;
 
 	menu = GTK_MENU_SHELL (gtk_option_menu_get_menu (option_menu));
 	id = gtk_option_menu_get_history (option_menu);
@@ -568,6 +564,19 @@ program_changed_cb (ServiceEditDialog *dialog, GtkOptionMenu *option_menu)
 		gtk_widget_set_sensitive (WID ("program_entry_box"), FALSE);
 		gtk_widget_set_sensitive (WID ("needs_terminal_toggle"), FALSE);
 	}
+
+	child = g_list_nth (menu->children, id);
+	g_return_if_fail (child != NULL);
+
+	app = g_object_get_data (G_OBJECT (child->data), "app");
+	if (app == NULL) 
+		app = dialog->p->info->app;
+	if (app->command != NULL)
+		gnome_file_entry_set_filename (GNOME_FILE_ENTRY (WID ("custom_program_entry")),
+			app->command);
+
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("needs_terminal_toggle")),
+		app->requires_terminal);
 }
 
 static void
