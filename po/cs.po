@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-31 19:37+0200\n"
-"PO-Revision-Date: 2004-07-31 20:40+0200\n"
+"POT-Creation-Date: 2004-08-07 11:39+0200\n"
+"PO-Revision-Date: 2004-08-07 17:34+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1572,6 +1572,19 @@ msgstr ""
 msgid "Assign shortcut keys to commands"
 msgstr "Přiřaďte klávesové zkratky k příkazům"
 
+#: capplets/keyboard/gnome-keyboard-properties-xkb.c:69
+#: capplets/keyboard/gnome-keyboard-properties-xkb.c:95
+msgid "Unknown"
+msgstr "Neznámé"
+
+#: capplets/keyboard/gnome-keyboard-properties-xkbmc.c:80
+msgid "Models"
+msgstr "Modely"
+
+#: capplets/keyboard/gnome-keyboard-properties-xkbpv.c:59
+msgid "Keyboard layout preview"
+msgstr "Náhled rozložení klávesnice"
+
 #: capplets/keyboard/gnome-keyboard-properties.c:106
 #, c-format
 msgid "There was an error launching the keyboard capplet : %s"
@@ -2398,6 +2411,34 @@ msgstr "Vlastnosti okna"
 msgid "Windows"
 msgstr "Okna"
 
+#: control-center/GNOME_ControlCenter.server.in.h:1
+msgid "Control Center"
+msgstr "Ovládací centrum"
+
+#: control-center/GNOME_ControlCenter.server.in.h:2
+msgid "Control Center Viewer"
+msgstr "Prohlížeč Ovládacího centra"
+
+#: control-center/GNOME_ControlCenter.server.in.h:3
+msgid "Control Center view"
+msgstr "Pohled Ovládacího centra"
+
+#: control-center/GNOME_ControlCenter.server.in.h:4
+msgid "Control Center view component"
+msgstr "Komponenta pohledu Ovládacího centra"
+
+#: control-center/GNOME_ControlCenter.server.in.h:5
+msgid "Control Center view component's factory"
+msgstr "Generátor komponenty pohledu Ovládacího centra"
+
+#: control-center/GNOME_ControlCenter.server.in.h:6
+msgid "Control Center view factory"
+msgstr "Generátor pohledu Ovládacího centra"
+
+#: control-center/GNOME_ControlCenter.server.in.h:7
+msgid "View as Control Center"
+msgstr "Zobrazit jako Ovládací centrum"
+
 #: control-center/capplet-dir-view-list.c:319
 #, c-format
 msgid "GNOME Control Center: %s"
@@ -2440,6 +2481,19 @@ msgstr "Správce vlastností pracovní plochy."
 msgid "Gnome Control Center : %s"
 msgstr "Ovládací centrum GNOME : %s"
 
+#: control-center/control-center-categories.c:333
+msgid "Others"
+msgstr "Ostatní"
+
+#: control-center/control-center-categories.c:424
+#: control-center/control-center.c:1091
+msgid "Gnome Control Center"
+msgstr "Ovládací centrum Gnome"
+
+#: control-center/control-center.c:78
+msgid "Use nautilus if it is running."
+msgstr "Použít nautilus, pokud běží."
+
 #: control-center/gnomecc-ui.xml.h:1
 msgid "About this application"
 msgstr "O této aplikaci"
@@ -2460,19 +2514,6 @@ msgstr "_Obsah"
 msgid "_Help"
 msgstr "_Nápověda"
 
-#: control-center/control-center-categories.c:333
-msgid "Others"
-msgstr "Ostatní"
-
-#: control-center/control-center-categories.c:424
-#: control-center/control-center.c:1091
-msgid "Gnome Control Center"
-msgstr "Ovládací centrum Gnome"
-
-#: control-center/control-center.c:78
-msgid "Use nautilus if it is running."
-msgstr "Použít nautilus, pokud běží."
-
 #: control-center/gnomecc.desktop.in.h:2
 msgid "The GNOME configuration tool"
 msgstr "Nástroj pro nastavení prostředí GNOME"
@@ -2480,6 +2521,10 @@ msgstr "Nástroj pro nastavení prostředí GNOME"
 #: control-center/main.c:43
 msgid "Use shell even if nautilus is running."
 msgstr "Použít shell, i pokud běží nautilus."
+
+#: gnome-settings-daemon/actions/acme.glade.h:1
+msgid "Volume"
+msgstr "Hlasitost"
 
 #: gnome-settings-daemon/factory.c:34
 msgid "Could not initialize Bonobo"
@@ -2645,6 +2690,36 @@ msgstr ""
 "Ve vašem domovském adresáři máte soubor přemapování klávesnice (%s), jehož "
 "obsah bude nyní ignorován. Můžete jej obnovit pomocí nastavení klávesnice."
 
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:114
+#, c-format
+msgid ""
+"Couldn't execute command: %s\n"
+"Verify that this command exists."
+msgstr ""
+"Nemohu spustit příkaz: %s\n"
+"Ověřte, že tento příkaz existuje."
+
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:130
+msgid ""
+"Couldn't put the machine to sleep.\n"
+"Verify that the machine is correctly configured."
+msgstr ""
+"Nemohu uspat počítač.\n"
+"Ověřte, že je počítač správně nastaven."
+
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:140
+#, c-format
+msgid "Permissions on the file %s are broken\n"
+msgstr "Oprávnění souboru %s jsou špatně\n"
+
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:185
+msgid ""
+"Couldn't load the Glade file.\n"
+"Make sure that this daemon is properly installed."
+msgstr ""
+"Nemohu načíst soubor glade.\n"
+"Ověřte, že je tento démon správně nastaven."
+
 #: gnome-settings-daemon/gnome-settings-screensaver.c:92
 #, c-format
 msgid ""
@@ -2785,6 +2860,166 @@ msgstr ""
 #: schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:2
 msgid "Sync text/plain and text/* handlers"
 msgstr "Synchronizovat obsluhy text/plain a text/*"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:1
+msgid "Brightness down"
+msgstr "Snížit jas"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:2
+msgid "Brightness down's shortcut."
+msgstr "Zkratka snížení jasu."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:3
+msgid "Brightness up"
+msgstr "Zvýšit jas"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:4
+msgid "Brightness up's shortcut."
+msgstr "Zkratka zvýšení jasu."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:5
+msgid "E-mail"
+msgstr "E-mail"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:6
+msgid "E-mail's shortcut."
+msgstr "Zkratka e-mailu."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:7
+msgid "Eject"
+msgstr "Vysunout"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:8
+msgid "Eject's shortcut."
+msgstr "Zkratka vysunutí."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:9
+msgid "Home folder"
+msgstr "Domovský adresář"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:10
+msgid "Home folder's shortcut."
+msgstr "Zkratka domovského adresáře."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
+msgid "Launch help browser"
+msgstr "Spustit prohlížeč nápovědy"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:12
+msgid "Launch help browser's shortcut."
+msgstr "Zkratka spuštění prohlížeče nápovědy."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:13
+msgid "Launch web browser"
+msgstr "Spustit prohlížeč WWW"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:14
+msgid "Launch web browser's shortcut."
+msgstr "Zkratka spuštění prohlížeče WWW."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
+msgid "Lock screen"
+msgstr "Zamknout obrazovku"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
+msgid "Lock screen's shortcut."
+msgstr "Zkratka zamčení obrazovky."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
+msgid "Log out"
+msgstr "Odhlásit se"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
+msgid "Log out's shortcut."
+msgstr "Zkratka odhlášení."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
+msgid "Next track key's shortcut."
+msgstr "Zkratka klávesy Další stopa."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
+msgid "Pause"
+msgstr "Pozastavit"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
+msgid "Pause key's shortcut."
+msgstr "Zkratka klávesy Pozastavit."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
+msgid "Play (or play/pause)"
+msgstr "Přehrávat (nebo přehrávat/pozastavit)"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
+msgid "Play (or play/pause) key's shortcut."
+msgstr "Zkratka klávesy Přehrávat (nebo přehrávat/pozastavit)."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
+msgid "Previous track key's shortcut."
+msgstr "Zkratka klávesy Předchozí stopa."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
+msgid "Search"
+msgstr "Hledat"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
+msgid "Search's shortcut."
+msgstr "Zkratka hledání."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
+msgid "Skip to next track"
+msgstr "Přeskočit na následující stopu"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
+msgid "Skip to previous track"
+msgstr "Přeskočit na předchozí stopu"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
+msgid "Sleep"
+msgstr "Uspat"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
+msgid "Sleep's shortcut."
+msgstr "Zkratka uspání."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
+msgid "Stop playback key"
+msgstr "Klávesa Zastavit přehrávání"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
+msgid "Stop playback key's shortcut."
+msgstr "Zkratka klávesy Zastavit přehrávání."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
+msgid "Volume down"
+msgstr "Snížit hlasitost"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
+msgid "Volume down's shortcut."
+msgstr "Zkratka snížení hlasitosti."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
+msgid "Volume mute"
+msgstr "Umlčet zvuk"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
+msgid "Volume mute's shortcut"
+msgstr "Zkratka umlčení zvuku"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:37
+msgid "Volume step"
+msgstr "Krok hlasitosti"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:38
+msgid "Volume step as percentage of volume."
+msgstr "Krok hlasitosti v procentech."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:39
+msgid "Volume up"
+msgstr "Zvýšit hlasitost"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
+msgid "Volume up's shortcut."
+msgstr "Zkratka zvýšení hlasitosti."
 
 #: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:1
 msgid "Display a dialog when there are errors running XScreenSaver"
@@ -3185,573 +3420,3 @@ msgstr "Jestli zobrazovat náhledy nainstalovaných témat"
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Jestli zobrazovat náhledy témat"
-
-#: gnome-settings-daemon/actions/acme.glade.h:1
-msgid "Volume"
-msgstr "Hlasitost"
-
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:114
-#, c-format
-msgid ""
-"Couldn't execute command: %s\n"
-"Verify that this command exists."
-msgstr ""
-"Nemohu spustit příkaz: %s\n"
-"Ověřte, že tento příkaz existuje."
-
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:130
-msgid ""
-"Couldn't put the machine to sleep.\n"
-"Verify that the machine is correctly configured."
-msgstr ""
-"Nemohu uspat počítač.\n"
-"Ověřte, že je počítač správně nastaven."
-
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:140
-#, c-format
-msgid "Permissions on the file %s are broken\n"
-msgstr "Oprávnění souboru %s jsou špatně\n"
-
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:185
-msgid ""
-"Couldn't load the Glade file.\n"
-"Make sure that this daemon is properly installed."
-msgstr ""
-"Nemohu načíst soubor glade.\n"
-"Ověřte, že je tento démon správně nastaven."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:1
-msgid "Brightness down"
-msgstr "Snížit jas"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:2
-msgid "Brightness down's shortcut."
-msgstr "Zkratka snížení jasu."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:3
-msgid "Brightness up"
-msgstr "Zvýšit jas"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:4
-msgid "Brightness up's shortcut."
-msgstr "Zkratka zvýšení jasu."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:5
-msgid "E-mail"
-msgstr "E-mail"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:6
-msgid "E-mail's shortcut."
-msgstr "Zkratka e-mailu."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:7
-msgid "Eject"
-msgstr "Vysunout"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:8
-msgid "Eject's shortcut."
-msgstr "Zkratka vysunutí."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:9
-msgid "Home folder"
-msgstr "Domovský adresář"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:10
-msgid "Home folder's shortcut."
-msgstr "Zkratka domovského adresáře."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
-msgid "Launch help browser"
-msgstr "Spustit prohlížeč nápovědy"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:12
-msgid "Launch help browser's shortcut."
-msgstr "Zkratka spuštění prohlížeče nápovědy."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:13
-msgid "Launch web browser"
-msgstr "Spustit prohlížeč WWW"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:14
-msgid "Launch web browser's shortcut."
-msgstr "Zkratka spuštění prohlížeče WWW."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
-msgid "Lock screen"
-msgstr "Zamknout obrazovku"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
-msgid "Lock screen's shortcut."
-msgstr "Zkratka zamčení obrazovky."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
-msgid "Log out"
-msgstr "Odhlásit se"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
-msgid "Log out's shortcut."
-msgstr "Zkratka odhlášení."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
-msgid "Next track key's shortcut."
-msgstr "Zkratka klávesy Další stopa."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
-msgid "Pause"
-msgstr "Pozastavit"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
-msgid "Pause key's shortcut."
-msgstr "Zkratka klávesy Pozastavit."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
-msgid "Play (or play/pause)"
-msgstr "Přehrávat (nebo přehrávat/pozastavit)"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
-msgid "Play (or play/pause) key's shortcut."
-msgstr "Zkratka klávesy Přehrávat (nebo přehrávat/pozastavit)."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
-msgid "Previous track key's shortcut."
-msgstr "Zkratka klávesy Předchozí stopa."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
-msgid "Search"
-msgstr "Hledat"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
-msgid "Search's shortcut."
-msgstr "Zkratka hledání."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
-msgid "Skip to next track"
-msgstr "Přeskočit na následující stopu"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
-msgid "Skip to previous track"
-msgstr "Přeskočit na předchozí stopu"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
-msgid "Sleep"
-msgstr "Uspat"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
-msgid "Sleep's shortcut."
-msgstr "Zkratka uspání."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
-msgid "Stop playback key"
-msgstr "Klávesa Zastavit přehrávání"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
-msgid "Stop playback key's shortcut."
-msgstr "Zkratka klávesy Zastavit přehrávání."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
-msgid "Volume down"
-msgstr "Snížit hlasitost"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
-msgid "Volume down's shortcut."
-msgstr "Zkratka snížení hlasitosti."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
-msgid "Volume mute"
-msgstr "Umlčet zvuk"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
-msgid "Volume mute's shortcut"
-msgstr "Zkratka umlčení zvuku"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:37
-msgid "Volume step"
-msgstr "Krok hlasitosti"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:38
-msgid "Volume step as percentage of volume."
-msgstr "Krok hlasitosti v procentech."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:39
-msgid "Volume up"
-msgstr "Zvýšit hlasitost"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
-msgid "Volume up's shortcut."
-msgstr "Zkratka zvýšení hlasitosti."
-
-#: capplets/keyboard/gnome-keyboard-properties-xkb.c:69
-#: capplets/keyboard/gnome-keyboard-properties-xkb.c:95
-msgid "Unknown"
-msgstr "Neznámé"
-
-#: capplets/keyboard/gnome-keyboard-properties-xkbmc.c:80
-msgid "Models"
-msgstr "Modely"
-
-#: capplets/keyboard/gnome-keyboard-properties-xkbpv.c:59
-msgid "Keyboard layout preview"
-msgstr "Náhled rozložení klávesnice"
-
-#~ msgid ""
-#~ "Unable to find any keyboard themes.  This means your GTK+ installation "
-#~ "has been incompletely installed."
-#~ msgstr ""
-#~ "Nemohu najít žádné téma pro klávesnici. To znamená, že vaše instalace GTK"
-#~ "+ není úplná."
-
-#~ msgid "Click for a list of keyboard navigation schemes."
-#~ msgstr "Kliknutím získáte seznam navigačních schémat klávesnice."
-
-#~ msgid "_Desktop shortcuts:"
-#~ msgstr "Zkratky _prostředí pracovní plochy:"
-
-#~ msgid "_Text editing shortcuts:"
-#~ msgstr "Zkratky úprav _textu:"
-
-#~ msgid "Control Center Menu"
-#~ msgstr "Menu Ovládacího centra"
-
-#~ msgid "Sawfish window manager"
-#~ msgstr "Správce oken Sawfish"
-
-#~ msgid "Appearance"
-#~ msgstr "Vzhled"
-
-#~ msgid "Select themes and fonts for your windows"
-#~ msgstr "Vyberte témata a písma pro vaše okna"
-
-#~ msgid "Customize shortcut keys for your windows"
-#~ msgstr "Upravte klávesové zkratky pro vaše okna"
-
-#~ msgid "Shortcuts"
-#~ msgstr "Zkratky"
-
-#~ msgid "Configure how to give focus to windows"
-#~ msgstr "Nastavte způsob zaměření oken"
-
-#~ msgid "Focus behavior"
-#~ msgstr "Chování zaměření"
-
-#~ msgid "Configure matched windows to have particular characteristics"
-#~ msgstr "Nastavte zvláštní charakteristiky zvlášť spravovaných oken"
-
-#~ msgid "Matched Windows"
-#~ msgstr "Zvlášť spravovaná okna"
-
-#~ msgid "Configure how to minimize, maximize, and restore windows"
-#~ msgstr "Nastavení způsobu maximalizace, minimalizace a obnovení oken"
-
-#~ msgid "Minimizing and Maximizing"
-#~ msgstr "Minimalizace a maximalizace"
-
-#~ msgid "Select your Sawfish user level"
-#~ msgstr "Vyberte vaši uživatelskou úroveň Sawfish"
-
-#~ msgid "Miscellaneous"
-#~ msgstr "Různé"
-
-#~ msgid "Select miscellaneous window options"
-#~ msgstr "Nastavte ostatní možnosti oken"
-
-#~ msgid "Configure how windows move and resize"
-#~ msgstr "Nastavení způsobu přesunu a změny velikosti oken"
-
-#~ msgid "Moving and Resizing"
-#~ msgstr "Přesun a velikost"
-
-#~ msgid "Configure positioning of windows on the desktop"
-#~ msgstr "Nastavení umístění oken na pracovní ploše"
-
-#~ msgid "Placement"
-#~ msgstr "Umísťování"
-
-#~ msgid "Associate sounds with window manager events"
-#~ msgstr "Přiřazení zvuků k událostem správce oken"
-
-#~ msgid "Configure your workspaces and viewports"
-#~ msgstr "Nastavení pracovních ploch a pohledů"
-
-#~ msgid "Workspaces"
-#~ msgstr "Pracovní plochy"
-
-#~ msgid "Legacy Applications"
-#~ msgstr "Starší aplikace"
-
-#~ msgid "Legacy applications settings (grdb)"
-#~ msgstr "Nastavení starších aplikací (grdb)"
-
-#~ msgid "Eenie Meenie Mynie Moe Catcha Tiger By Its Toe"
-#~ msgstr "En ten týky dva špalíky čert vyletěl z elektriky"
-
-#~ msgid "Selected themes from above will be tested by previewing here."
-#~ msgstr "Výše vybraná témata je možné otestovat v náhledu zde."
-
-#~ msgid "Sample Button"
-#~ msgstr "Ukázkové tlačítko"
-
-#~ msgid "Sample Check Button"
-#~ msgstr "Ukázkové zaškrtávací tlačítko"
-
-#~ msgid "Sample Text Entry Field"
-#~ msgstr "Ukázková textová položka"
-
-#~ msgid "Submenu"
-#~ msgstr "Podmenu"
-
-#~ msgid "Item 1"
-#~ msgstr "Položka 1"
-
-#~ msgid "Another item"
-#~ msgstr "Další položka"
-
-#~ msgid "Radio Button 1"
-#~ msgstr "Rádiové tlačítko 1"
-
-#~ msgid "Radio Button 2"
-#~ msgstr "Rádiové tlačítko 2"
-
-#~ msgid "One"
-#~ msgstr "Tvar 1"
-
-#~ msgid "Two"
-#~ msgstr "Tvar 2"
-
-#~ msgid "Co_lor:"
-#~ msgstr "_Barva:"
-
-#~ msgid "_Left color:"
-#~ msgstr "_Levá barva:"
-
-#~ msgid "_Right color:"
-#~ msgstr "_Pravá barva:"
-
-#~ msgid "Top co_lor:"
-#~ msgstr "_Horní barva:"
-
-#~ msgid "_Bottom color:"
-#~ msgstr "_Dolní barva:"
-
-#~ msgid "_Tile"
-#~ msgstr "_Tapeta"
-
-#~ msgid "C_enter"
-#~ msgstr "Na stř_ed"
-
-#~ msgid "Sc_ale"
-#~ msgstr "_Přizpůsobená"
-
-#~ msgid "_Stretch"
-#~ msgstr "_Roztažená"
-
-#~ msgid "_No Picture"
-#~ msgstr "Žád_ný obrázek"
-
-#~ msgid "Background Preferences"
-#~ msgstr "Vlastnosti pozadí"
-
-#~ msgid "Bac_kground style:"
-#~ msgstr "_Styl pozadí:"
-
-#~ msgid "E-Mail"
-#~ msgstr "E-mail"
-
-#~ msgid "Horizontal gradient"
-#~ msgstr "Horizontální přechod"
-
-#~ msgid "Picture _options:"
-#~ msgstr "_Možnosti obrázku:"
-
-#~ msgid "Primary Color"
-#~ msgstr "Hlavní barva"
-
-#~ msgid "Secondary Color"
-#~ msgstr "Druhotná barva"
-
-#~ msgid "Select _picture:"
-#~ msgstr "Vyberte _obrázek:"
-
-#~ msgid "Solid color"
-#~ msgstr "Plná barva"
-
-#~ msgid "To set the background picture, drop an image or click to browse."
-#~ msgstr ""
-#~ "Chcete-li nastavit obrázek pozadí, přetáhněte sem obrázek nebo jej "
-#~ "kliknutím vyberte."
-
-#~ msgid "Vertical gradient"
-#~ msgstr "Vertikální přechod"
-
-#~ msgid ""
-#~ "You can drag image files into the window to set the background picture."
-#~ msgstr ""
-#~ "Obrázek pozadí můžete nastavit přetažením souboru s obrázkem do okna."
-
-#~ msgid ""
-#~ "The gnome-theme-manager does not know how to change the themes on the "
-#~ "current window manager."
-#~ msgstr "gnome-theme-manager neví, jak měnit témata aktuálního správce oken."
-
-#~ msgid "There was an error displaying help:"
-#~ msgstr "Při zobrazování nápovědy došlo k chybě:"
-
-#~ msgid "Show"
-#~ msgstr "Zobrazit"
-
-#~ msgid "Language"
-#~ msgstr "Jazyky"
-
-#~ msgid "$1,234.56"
-#~ msgstr "1 234,56 Kč"
-
-#~ msgid "1/2/03"
-#~ msgstr "1. 2. 03"
-
-#~ msgid "12:34 AM"
-#~ msgstr "12:34"
-
-#~ msgid "4:56 PM"
-#~ msgstr "16:56"
-
-#~ msgid "<b>Dates</b>"
-#~ msgstr "<b>Data</b>"
-
-#~ msgid "<b>Languages in use:</b>"
-#~ msgstr "<b>Používané jazyky:</b>"
-
-#~ msgid "<b>Numbers</b>"
-#~ msgstr "<b>Čísla</b>"
-
-#~ msgid "<b>Times</b>"
-#~ msgstr "<b>Čas</b>"
-
-#~ msgid "Available Languages"
-#~ msgstr "Dostupné jazyky"
-
-#~ msgid "C_hange languages in use..."
-#~ msgstr "Z_měnit používané jazyky..."
-
-#~ msgid ""
-#~ "Changes will not take effect for the\n"
-#~ "desktop's bars and menus before\n"
-#~ "next time you log in. Changes take\n"
-#~ "effect in applications next time you\n"
-#~ "run them."
-#~ msgstr ""
-#~ "Na lišty pracovní plochy a menu nebudou\n"
-#~ "mít změny vliv, dokud se znovu nepřihlásíte.\n"
-#~ "Na aplikace budou změny mít vliv, až je\n"
-#~ "příště spustíte."
-
-#~ msgid "Customize _dates..."
-#~ msgstr "Upravit _data..."
-
-#~ msgid "Customize _numbers..."
-#~ msgstr "Upravit _čísla..."
-
-#~ msgid "Customize _times..."
-#~ msgstr "Upravit _časy..."
-
-#~ msgid ""
-#~ "Drag languages to set the preferred\n"
-#~ "order of use; If there exists a\n"
-#~ "translation in the first language it will\n"
-#~ "be used, otherwise the next will be tried"
-#~ msgstr ""
-#~ "Nastavte preferované pořadí používání\n"
-#~ "jazyků jejich přetažením; pokud existuje\n"
-#~ "překlad v prvním jazyce, použije se, jinak\n"
-#~ "se zkusí další jazyk"
-
-#~ msgid "Formats"
-#~ msgstr "Formáty"
-
-#~ msgid "Jan 2, 2003"
-#~ msgstr "2. led 2003"
-
-#~ msgid "Language and Culture Preferences"
-#~ msgstr "Možnosti jazyka a kultury"
-
-#~ msgid "Measurement _Units:"
-#~ msgstr "_Jednotky měření:"
-
-#~ msgid "Select the items that appear in the Languages list:"
-#~ msgstr "Zvolte položky, které se objeví v seznamu Jazyky:"
-
-#~ msgid "Show _all regions"
-#~ msgstr "Zobrazit _všechny regiony"
-
-#~ msgid "Thursday, January 2, 2003"
-#~ msgstr "Čtvrtek 2. ledna 2003"
-
-#~ msgid ""
-#~ "Your preferred language differs\n"
-#~ "from that of your currently\n"
-#~ "selected date, time, and number\n"
-#~ "formats. You can change your\n"
-#~ "formats in the Formats tab."
-#~ msgstr ""
-#~ "Váš preferovaný jazyk se liší\n"
-#~ "od momentálně vybraných formátů\n"
-#~ "data, času a čísel. Formáty\n"
-#~ "můžete změnit v záložce Formáty."
-
-#~ msgid "_Region:"
-#~ msgstr "_Region:"
-
-#~ msgid "Language and Culture"
-#~ msgstr "Jazyk a kultura"
-
-#~ msgid "Set your language and culture preferences"
-#~ msgstr "Nastavte možnosti jazyka a kultury"
-
-#~ msgid "Advanced Layout Options"
-#~ msgstr "Pokročilá nastavení rozložení"
-
-#~ msgid "Core Layout Configuration"
-#~ msgstr "Základní nastavení rozložení"
-
-#~ msgid "Behavior"
-#~ msgstr "Chování"
-
-#~ msgid "One minute until the next break"
-#~ msgstr "Jedna minuta do další přestávky"
-
-#~ msgid "C_ustom Help Browser:"
-#~ msgstr "Vlastní prohlížeč _nápovědy:"
-
-#~ msgid "Default Help Browser"
-#~ msgstr "Implicitní prohlížeč nápovědy"
-
-#~ msgid "_Select a Help Browser:"
-#~ msgstr "_Vyberte prohlížeč nápovědy:"
-
-#~ msgid "Don't forget to take regular breaks."
-#~ msgstr "Nezapomeňte si pravidelně udělat přestávku."
-
-#~ msgid "Don't Quit"
-#~ msgstr "Nekončit"
-
-#~ msgid "Apply theme..."
-#~ msgstr "Použít téma..."
-
-#~ msgid "Select CDE AccessX file"
-#~ msgstr "Vyberte soubor CDE AccessX"
-
-#~ msgid "A preview of the background picture."
-#~ msgstr "Náhled obrázku pozadí."
-
-#~ msgid "The background picture's file name."
-#~ msgstr "Název souboru obrázku pozadí."
-
-#~ msgid "Menus"
-#~ msgstr "Menu"
-
-#~ msgid "/_Enabled"
-#~ msgstr "/_Povolen"
-
-#~ msgid "/_Remove Icon"
-#~ msgstr "/_Odstranit ikonu"
-
-#~ msgid "Keypress Click"
-#~ msgstr "Kliknutí klávesy"
