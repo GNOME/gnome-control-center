@@ -121,11 +121,29 @@ preferences_load_from_xrdb (Preferences *prefs)
 void
 screensaver_get_desc_from_xrdb (Screensaver *saver) 
 {
-	gchar *s;
+	gchar *s, *desc;
+	int i, j;
+	gboolean flag;
 
 	s = g_strconcat ("hacks.", saver->name, ".documentation", NULL);
-	saver->description = get_resource (s, s);
+	desc = get_resource (s, s);
 	g_free (s);
+
+	saver->description = g_new (char, strlen (desc));
+	flag = FALSE;
+	for (i = 0, j = 0; desc[i]; i++) {
+		if (!isspace(desc[i])) {
+			saver->description[j++] = desc[i];
+			flag = FALSE;
+		} else if (!flag) {
+			saver->description[j++] = ' ';
+			flag = TRUE;
+		}
+	}
+
+	saver->description[j] = '\0';
+
+	g_free (desc);
 }
 
 gchar *
