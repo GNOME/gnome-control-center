@@ -1,15 +1,15 @@
 # English/Canada translation of gnome-control-center.
 # Copyright (C) 2004-2005 Adam Weinberger <adamw@FreeBSD.org>
 # This file is distributed under the same licence as the gnome-control-center package.
-# Adam Weinberger <adamw@FreeBSD.org>, 2004, 2005.
+# Adam Weinberger <adamw@gnome.org>, 2004, 2005.
 # 
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-01 02:33-0500\n"
-"PO-Revision-Date: 2005-02-01 19:59-0400\n"
+"POT-Creation-Date: 2005-02-02 20:28-0500\n"
+"PO-Revision-Date: 2005-02-02 19:59-0400\n"
 "Last-Translator: Adam Weinberger <adamw@gnome.org>\n"
 "Language-Team: English/Canada <adamw@FreeBSD.org>\n"
 "MIME-Version: 1.0\n"
@@ -2280,7 +2280,7 @@ msgstr "_Sounds for events"
 msgid "_Visual feedback:"
 msgstr "_Visual feedback:"
 
-#: capplets/theme-switcher/gnome-theme-details.c:370
+#: capplets/theme-switcher/gnome-theme-details.c:349
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -2290,19 +2290,85 @@ msgstr ""
 "\"Theme Preferences\" dialogue was improperly installed, or you have not "
 "installed the \"gnome-themes\" package."
 
-#: capplets/theme-switcher/gnome-theme-installer.c:103
+#: capplets/theme-switcher/gnome-theme-installer.c:214
 msgid "This theme is not in a supported format."
 msgstr "This theme is not in a supported format."
 
-#: capplets/theme-switcher/gnome-theme-installer.c:139
+#: capplets/theme-switcher/gnome-theme-installer.c:229
+msgid "Failed to create temporal directory"
+msgstr "Failed to create temporary directory"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:246
+msgid ""
+"Can not install theme. \n"
+"There are not bzip2 utility in the system."
+msgstr ""
+"Can not install theme. \n"
+"System cannot handle bzip2-compressed files."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:260
+#: capplets/theme-switcher/gnome-theme-installer.c:289
+#: capplets/theme-switcher/gnome-theme-installer.c:355
+msgid "Installation Failed"
+msgstr "Installation Failed"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:276
+msgid ""
+"Can not install themes. \n"
+"There are not gzip utility in the system."
+msgstr ""
+"Can not install themes. \n"
+"System cannot handle gzip-compressed files."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:306
+#, c-format
+msgid ""
+"Icon Theme %s correctly installed.\n"
+"You can select it in the theme details."
+msgstr ""
+"Icon Theme %s correctly installed.\n"
+"You can select it in the theme details."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:309
+#, c-format
+msgid "Gnome Theme %s correctly installed"
+msgstr "Gnome Theme %s correctly installed"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:312
+#, c-format
+msgid ""
+"Windows Border Theme %s correctly installed.\n"
+"You can select it in the theme details."
+msgstr ""
+"Windows Border Theme %s correctly installed.\n"
+"You can select it in the theme details."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:315
+#, c-format
+msgid ""
+"Controls Theme %s correctly installed.\n"
+"You can select it in the theme details."
+msgstr ""
+"Controls Theme %s correctly installed.\n"
+"You can select it in the theme details."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:323
+msgid "The theme is a engine. You need to compile the theme."
+msgstr "The theme is a engine. You need to compile the theme."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:335
+msgid "The file format is invalid"
+msgstr "The file format is invalid"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:407
 msgid "No theme file location specified to install"
 msgstr "No theme file location specified to install"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:156
+#: capplets/theme-switcher/gnome-theme-installer.c:424
 msgid "The theme file location specified to install is invalid"
 msgstr "The theme file location specified to install is invalid"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:176
+#: capplets/theme-switcher/gnome-theme-installer.c:444
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -2311,7 +2377,11 @@ msgstr ""
 "Insufficient permissions to install the theme in:\n"
 "%s"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:216
+#: capplets/theme-switcher/gnome-theme-installer.c:463
+msgid "The file format is invalid."
+msgstr "The file format is invalid."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:490
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
@@ -2319,6 +2389,14 @@ msgid ""
 msgstr ""
 "%s is the path where the theme files will be installed. This can not be "
 "selected as the source location"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:543
+msgid ""
+"Cannot install theme.\n"
+"The tar program is not installed on your system."
+msgstr ""
+"Cannot install theme.\n"
+"The tar(1) program is not installed on your system."
 
 #: capplets/theme-switcher/gnome-theme-manager.c:676
 msgid "Custom theme"
@@ -2328,7 +2406,7 @@ msgstr "Custom theme"
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "You can save this theme by pressing the Save Theme button."
 
-#: capplets/theme-switcher/gnome-theme-manager.c:1454
+#: capplets/theme-switcher/gnome-theme-manager.c:1466
 msgid ""
 "The default theme schemas could not be found on your system.  This means "
 "that you probably don't have metacity installed, or that your gconf is "
