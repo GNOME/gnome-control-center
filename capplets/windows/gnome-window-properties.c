@@ -19,6 +19,8 @@
 
 //#include "gnome-startup.h"
 
+#define TITLEBAR_FONT_KEY "/desktop/gnome/applications/window_manager/titlebar_font"
+
 /* prototypes */
 static void restart         (gboolean force);
 static void revert_callback (void);
@@ -748,6 +750,16 @@ create_dialog (void)
         return dialog;
 }
 
+static void
+setup_dialog (GladeXML *dialog)
+{  
+        GObject *peditor;
+
+        peditor = gconf_peditor_new_font (NULL, TITLEBAR_FONT_KEY,
+                                          WID ("titlebar_font"),
+                                          PEDITOR_FONT_COMBINED, NULL);
+}
+
 int
 main (int argc, char **argv)
 {
@@ -773,6 +785,7 @@ main (int argc, char **argv)
 	{
                 init_session();
                 dialog = create_dialog ();
+                setup_dialog (dialog);
 
                 dialog_win = gtk_dialog_new_with_buttons 
                         (_("Window Preferences"), NULL, -1,
