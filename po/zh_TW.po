@@ -10,15 +10,16 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-control-center 2.3.5\n"
+"Project-Id-Version: gnome-control-center 2.5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-10-28 16:59-0500\n"
-"PO-Revision-Date: 2003-08-14 20:24+0800\n"
+"POT-Creation-Date: 2003-11-08 02:20+0800\n"
+"PO-Revision-Date: 2003-11-08 03:15+0800\n"
 "Last-Translator: Abel Cheung <maddog@linux.org.hk>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:1
 msgid "<b>Applications</b>"
@@ -122,7 +123,7 @@ msgstr "鍵盤"
 msgid "Set your keyboard accessibility preferences"
 msgstr "修改無障礙鍵盤功能設定"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.c:60
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.c:58
 msgid ""
 "This system does not seem to have the XKB extension.  The keyboard "
 "accessibility features will not operate without it."
@@ -305,7 +306,7 @@ msgstr "拒絕按鍵(_R)"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:40
 msgid "characters/second"
-msgstr "字符(每秒)"
+msgstr "字元(每秒)"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:41
 msgid "milliseconds"
@@ -1101,9 +1102,8 @@ msgid "Add _Service..."
 msgstr "新增網路服務(_S)..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
-#, fuzzy
 msgid "Browse icons"
-msgstr "秒"
+msgstr "瀏覽圖示"
 
 #: capplets/file-types/file-types-properties.glade.h:6
 msgid "C_hoose..."
@@ -1388,19 +1388,16 @@ msgid "<b>Font Rendering</b>"
 msgstr "<b>描繪字型</b>"
 
 #: capplets/font/font-properties.glade.h:3
-#, fuzzy
 msgid "<b>Hinting</b>:"
-msgstr "Hinting："
+msgstr "<b>Hinting</b>："
 
 #: capplets/font/font-properties.glade.h:4
-#, fuzzy
 msgid "<b>Smoothing</b>:"
-msgstr "平滑化方式："
+msgstr "<b>平滑化方式</b>"
 
 #: capplets/font/font-properties.glade.h:5
-#, fuzzy
 msgid "<b>Subpixel order</b>:"
-msgstr "次像素(subpixel)次序："
+msgstr "<b>次像素 (subpixel) 排列次序</b>"
 
 #: capplets/font/font-properties.glade.h:6
 msgid "Best _shapes"
@@ -1427,18 +1424,16 @@ msgid "G_rayscale"
 msgstr "灰階(_R)"
 
 #: capplets/font/font-properties.glade.h:12
-#, fuzzy
 msgid "Go _to font folder"
-msgstr "前往字型資料夾"
+msgstr "前往字型資料夾(_T)"
 
 #: capplets/font/font-properties.glade.h:13
 msgid "N_one"
 msgstr "無(_O)"
 
 #: capplets/font/font-properties.glade.h:14
-#, fuzzy
 msgid "R_esolution :"
-msgstr "解析度(_R)："
+msgstr "解析度(_E)："
 
 #: capplets/font/font-properties.glade.h:15
 msgid "Set the font for applications"
@@ -1714,7 +1709,7 @@ msgstr "強制休息前可以工作的時間"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:15
 msgid "Key presses _repeat when key is held down"
-msgstr "當按下某鍵不放時重複輸出該字符(_R)"
+msgstr "當按下某鍵不放時重複輸出該字元(_R)"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:17
 msgid "Keyboard Preferences"
@@ -2374,7 +2369,7 @@ msgstr "Super (或者「視窗標誌」)"
 
 #: capplets/windows/gnome-window-properties.glade.h:1
 msgid "To _move a window, press-and-hold this key then grab the window:"
-msgstr "如果想移動視窗，請按下此鍵後才用滑鼠抓取視窗(_M)："
+msgstr "如果想移動視窗，請按下此鍵後再用滑鼠抓取視窗(_M)："
 
 #: capplets/windows/gnome-window-properties.glade.h:2
 msgid "Window Preferences"
@@ -2382,11 +2377,11 @@ msgstr "視窗偏好設定"
 
 #: capplets/windows/gnome-window-properties.glade.h:3
 msgid "_Double-click titlebar to perform this action:"
-msgstr "雙擊視窗標題後會進行指定的動作(_D)："
+msgstr "在視窗標題中連按兩下滑鼠按鈕後會進行指定的動作(_D)："
 
 #: capplets/windows/gnome-window-properties.glade.h:4
 msgid "_Interval before raising:"
-msgstr "提升前的時間(_I)："
+msgstr "這個時間後提升視窗(_I)："
 
 #: capplets/windows/gnome-window-properties.glade.h:5
 msgid "_Raise selected windows after an interval"
@@ -2767,11 +2762,10 @@ msgid "/_Take a Break"
 msgstr "/立刻休息(_T)"
 
 #: typing-break/drwright.c:466
-#, fuzzy, c-format
+#, c-format
 msgid "%d minute until the next break"
 msgid_plural "%d minutes until the next break"
 msgstr[0] "距離休息時間還有 %d 分鐘"
-msgstr[1] "距離休息時間還有 %d 分鐘"
 
 #: typing-break/drwright.c:470
 msgid "Less than one minute until the next break"
@@ -2782,7 +2776,7 @@ msgstr "距離休息時間少於 1 分鐘"
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
 "error: %s"
-msgstr ""
+msgstr "無法顯示「休息提示」偏好設定對話方塊，因為出現以下的錯誤：%s"
 
 #: typing-break/drwright.c:605
 msgid "About GNOME Typing Monitor"
@@ -2815,12 +2809,12 @@ msgid ""
 "right-clicking on your panel and choose 'Add to panel -> Utilities -> "
 "Notification area'."
 msgstr ""
-"休息提示小程式需要使用程式狀態通知區來顯示資訊，可是面板中並沒有該區域。您可"
+"休息提示小程式需要透過程式狀態通知區來顯示資訊，可是面板中並沒有該區域。您可"
 "以在面板上按滑鼠右邊按鈕，然後選取「加入至面板→公用程式→程式狀態通知區」。"
 
 #: vfs-methods/fontilus/font-view.c:101
 msgid "The quick brown fox jumps over the lazy dog. 0123456789"
-msgstr "The following is Chinese: '中文測試' 0123456789"
+msgstr "0123456789 The following is Chinese: '中文測試'"
 
 #: vfs-methods/fontilus/font-view.c:252
 msgid "Name:"
