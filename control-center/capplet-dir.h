@@ -66,6 +66,7 @@ struct _CappletDir
 struct _Capplet
 {
 	CappletDirEntry entry;
+	gboolean launching;
 };
 
 CappletDirEntry *capplet_new                (CappletDir *dir,

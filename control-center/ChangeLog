@@ -1,5 +1,12 @@
 2001-07-26  Bradford Hovinen  <hovinen@ximian.com>
 
+	* capplet-dir.h (struct _Capplet): Add flag launching
+
+	* capplet-dir.c (capplet_new): Initialize capplet->launching
+	(capplet_reset_cb): Implement. Just reset capplet->launching
+	(capplet_activate): Just return if capplet->launching is set;
+	otherwise set that flag and add an idle handler to unset it
+
 	* kill-gnomecc.sh: Don't kill oafd for fear that someone may be
 	running Evolution. Kill bonobo-moniker-archiver after everything
 	else is dead. Redirect errors to /dev/null. Kill the mouse

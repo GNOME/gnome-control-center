@@ -79,6 +79,8 @@ capplet_new (CappletDir *dir, gchar *desktop_path)
 	g_free (path);
 
 	capplet = g_new0 (Capplet, 1);
+	capplet->launching = FALSE;
+
 	entry = CAPPLET_DIR_ENTRY (capplet);
 
 	entry->type = TYPE_CAPPLET;
@@ -194,10 +196,27 @@ capplet_dir_entry_shutdown (CappletDirEntry *entry)
 		g_assert_not_reached ();
 }
 
+static gint
+capplet_reset_cb (Capplet *capplet) 
+{
+	g_message ("%s: Enter", __FUNCTION__);
+	capplet->launching = FALSE;
+	return FALSE;
+}
+
 static void
 capplet_activate (Capplet *capplet) 
 {
 	GnomeDesktopEntry *entry;
+
+	if (capplet->launching) {
+		g_message ("Capplet already running");
+		return;
+	} else {
+		g_message ("Capplet not already running; launching");
+		capplet->launching = TRUE;
+		gtk_idle_add ((GtkFunction) capplet_reset_cb, capplet);
+	}
 
 	entry = CAPPLET_DIR_ENTRY (capplet)->entry;
 
