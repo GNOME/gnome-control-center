@@ -48,6 +48,11 @@ static gboolean initedOk;
 static const char DISABLE_XMM_WARNING_KEY[] =
     "/desktop/gnome/peripherals/keyboard/disable_xmm_and_xkb_warning";
 
+typedef enum {
+	RESPONSE_USE_X,
+	RESPONSE_USE_GNOME
+} SysConfigChangedMsgResponse;
+
 static void
 activation_error (void)
 {
@@ -111,39 +116,67 @@ apply_settings (void)
 }
 
 static void
+gnome_settings_keyboard_xkb_sysconfig_changed_response (GtkDialog * dialog,
+							SysConfigChangedMsgResponse
+							what2do,
+							GSwitchItXkbConfig
+							* pgswicNow)
+{
+	switch (what2do) {
+	case RESPONSE_USE_X:
+		GSwitchItXkbConfigSave (pgswicNow);
+		break;
+	case RESPONSE_USE_GNOME:
+		/* Do absolutely nothing - just keep things the way they are */
+		break;
+	}
+	gtk_widget_destroy (GTK_WIDGET (dialog));
+	GSwitchItXkbConfigTerm (pgswicNow);
+	g_free (pgswicNow);
+}
+
+static void
 gnome_settings_keyboard_xkb_analyze_sysconfig (void)
 {
 	GConfClient *confClient;
-	GSwitchItXkbConfig gswicWas, gswicNow;
+	GSwitchItXkbConfig gswicWas, *pgswicNow;
 
 	if (!initedOk)
 		return;
-
+	pgswicNow = g_new (GSwitchItXkbConfig, 1);
 	confClient = gconf_client_get_default ();
 	GSwitchItXkbConfigInit (&gswicWas, confClient);
-	GSwitchItXkbConfigInit (&gswicNow, confClient);
+	GSwitchItXkbConfigInit (pgswicNow, confClient);
 	g_object_unref (confClient);
 	GSwitchItXkbConfigLoadSysBackup (&gswicWas);
-	GSwitchItXkbConfigLoadInitial (&gswicNow);
+	GSwitchItXkbConfigLoadInitial (pgswicNow);
 
 	/* config was changed!!! */
 	if (g_slist_length (gswicWas.layouts) &&
-	    !GSwitchItXkbConfigEquals (&gswicNow, &gswicWas)) {
+	    !GSwitchItXkbConfigEquals (pgswicNow, &gswicWas)) {
 		GtkWidget *msg = gtk_message_dialog_new_with_markup (NULL,
 								     0,
 								     GTK_MESSAGE_INFO,
-								     GTK_BUTTONS_CLOSE,
+								     GTK_BUTTONS_NONE,
 /* !! temporary one */
 								     _
-								     ("System-wide XKB configuration has changed. "
-								      "You may want to adjust your local configuration as well."));
+								     ("The X system keyboard settings differ from your current GNOME "
+								      "keyboard settings.  Which set would you like to use?"));
+		gtk_dialog_add_buttons (GTK_DIALOG (msg),
+					_("Use X settings"),
+					RESPONSE_USE_X,
+					_("Use GNOME settings"),
+					RESPONSE_USE_GNOME, NULL);
+		gtk_dialog_set_default_response (GTK_DIALOG (msg),
+						 RESPONSE_USE_GNOME);
 		g_signal_connect (msg, "response",
-				  G_CALLBACK (gtk_widget_destroy), NULL);
+				  G_CALLBACK
+				  (gnome_settings_keyboard_xkb_sysconfig_changed_response),
+				  pgswicNow);
 		gtk_widget_show (msg);
 	}
-	GSwitchItXkbConfigSaveSysBackup (&gswicNow);
+	GSwitchItXkbConfigSaveSysBackup (pgswicNow);
 	GSwitchItXkbConfigTerm (&gswicWas);
-	GSwitchItXkbConfigTerm (&gswicNow);
 }
 
 static void
