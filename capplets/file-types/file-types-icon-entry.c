@@ -302,7 +302,7 @@ icon_selected_cb (GtkButton *button, NautilusMimeIconEntry *icon_entry)
 				filename++;
 				mime_type = nautilus_mime_type_capplet_get_selected_item_mime_type ();
 				gnome_vfs_mime_set_icon (mime_type, filename);
-				nautilus_mime_type_capplet_update_mime_list_icon (mime_type);
+				nautilus_mime_type_capplet_update_mime_list_icon_and_description (mime_type);
 			}
 			g_free (path);
 		}

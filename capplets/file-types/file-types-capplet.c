@@ -90,6 +90,8 @@ static void      populate_mime_list                     (GList          *type_li
 static GdkPixbuf *capplet_get_icon_pixbuf               (const char     *mime_string, 
 							 gboolean        is_executable);
 
+
+/* FIXME: Using global variables here is yucky */
 GtkWidget *capplet;
 GtkWidget *delete_button;
 GtkWidget *remove_button;
@@ -99,6 +101,7 @@ GtkWidget *default_menu;
 GtkWidget *application_button, *viewer_button;
 GtkLabel  *mime_label;
 GtkWidget *description_entry;
+gboolean   description_has_changed;
 gboolean sort_column_clicked [TOTAL_COLUMNS];
 
 /*
@@ -386,7 +389,7 @@ really_change_icon (gpointer user_data)
 
 	gnome_vfs_mime_set_icon (mime_type, filename);
 
-	nautilus_mime_type_capplet_update_mime_list_icon (mime_type);
+	nautilus_mime_type_capplet_update_mime_list_icon_and_description (mime_type);
 
 	g_free (filename);
 }
@@ -581,6 +584,66 @@ find_row_for_mime_type (const char *mime_type, GtkCList *mime_list)
 
 
 static void
+update_description_from_input (GtkEntry *entry)
+{
+	char *new_description;
+	const char *mime_type;
+
+	g_assert (GTK_IS_ENTRY (entry));
+	g_assert ((gpointer)entry == (gpointer)description_entry);
+
+	description_has_changed = FALSE;
+
+	mime_type = get_selected_mime_type ();
+	if (mime_type == NULL) {
+		return;
+	}
+
+	new_description = gtk_editable_get_chars (GTK_EDITABLE (entry), 0, -1);
+	gnome_vfs_mime_set_description (mime_type, new_description);
+	nautilus_mime_type_capplet_update_mime_list_icon_and_description (mime_type);
+	g_free (new_description);
+}
+
+static void
+description_entry_activate (GtkEntry *entry, gpointer user_data)
+{
+	g_assert (GTK_IS_ENTRY (entry));
+	g_assert ((gpointer)entry == (gpointer)description_entry);
+	g_assert (user_data == NULL);
+	
+	if (description_has_changed) {
+		update_description_from_input (entry);
+	}
+}
+
+static void
+description_entry_changed (GtkEntry *entry, gpointer user_data)
+{
+	g_assert (GTK_IS_ENTRY (entry));
+	g_assert ((gpointer)entry == (gpointer)description_entry);
+	g_assert (user_data == NULL);
+	
+	description_has_changed = TRUE;
+}
+
+static gboolean
+description_entry_lost_focus (GtkEntry *entry,
+			      GdkEventFocus *event,
+			      gpointer user_data)
+{
+	g_assert (GTK_IS_ENTRY (entry));
+	g_assert ((gpointer)entry == (gpointer)description_entry);
+	g_assert (user_data == NULL);
+	
+	if (description_has_changed) {
+		update_description_from_input (entry);
+	}
+
+	return FALSE;
+}
+
+static void
 init_mime_capplet (const char *scroll_to_mime_type)
 {
 	GtkWidget *main_vbox;
@@ -637,8 +700,21 @@ init_mime_capplet (const char *scroll_to_mime_type)
 				  (GtkAttachOptions) (GTK_FILL), 0, 0);
 	
 		description_entry = gtk_entry_new ();
+		description_has_changed = FALSE;
 		gtk_box_pack_start (GTK_BOX (vbox), description_entry, FALSE, FALSE, 0);
 		gtk_widget_make_bold (GTK_WIDGET (description_entry));
+		
+		gtk_signal_connect (GTK_OBJECT (description_entry), "activate",
+	      	              	    GTK_SIGNAL_FUNC (description_entry_activate),
+	                            NULL);
+		
+		gtk_signal_connect (GTK_OBJECT (description_entry), "changed",
+	      	              	    GTK_SIGNAL_FUNC (description_entry_changed),
+	                            NULL);
+		
+		gtk_signal_connect (GTK_OBJECT (description_entry), "focus_out_event",
+	      	              	    GTK_SIGNAL_FUNC (description_entry_lost_focus),
+	                            NULL);
 		
 		hbox = gtk_hbox_new (FALSE, 0);
 		gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET (hbox), FALSE, FALSE, 0);
@@ -798,7 +874,6 @@ init_mime_capplet (const char *scroll_to_mime_type)
 
 }
 
-
 /*
  *  nautilus_mime_type_capplet_update_info
  *
@@ -816,14 +891,9 @@ nautilus_mime_type_capplet_update_info (const char *mime_type) {
 	gtk_label_set_text (GTK_LABEL (mime_label), mime_type);
 
 	description = gnome_vfs_mime_get_description (mime_type);	
-	if (description != NULL && strlen (description) > 0) {
-		gtk_entry_set_text (GTK_ENTRY (description_entry), description);
-	} else {
-		gtk_entry_set_text (GTK_ENTRY (description_entry), _("No Description"));
-	}
+	gtk_entry_set_text (GTK_ENTRY (description_entry), description != NULL ? description : "");
+	description_has_changed = FALSE;
 
-	gtk_editable_set_editable (GTK_EDITABLE (description_entry), FALSE);
-	
 	/* Update menus */
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (application_button))) {
 		populate_application_menu (default_menu, mime_type);						
@@ -1372,7 +1442,7 @@ edit_default_clicked (GtkWidget *widget, gpointer data)
 
 
 void
-nautilus_mime_type_capplet_update_mime_list_icon (const char *mime_string)
+nautilus_mime_type_capplet_update_mime_list_icon_and_description (const char *mime_string)
 {
 	char *text;        
 	const char *description;
