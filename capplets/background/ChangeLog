@@ -1,3 +1,16 @@
+2004-02-29  Rodney Dawes  <dobey@ximian.com>
+
+	* gnome-wp-capplet.c (gnome_wp_add_image): Split out real image adding
+	code into a separate call
+	(gnome_wp_add_images):
+	(gnome_wp_file_open_dialog):
+	(gnome_wp_properties_init): Add support for GtkFileChooser (#135317)
+	(bg_properties_dragged_image): Fix re-addition of deleted images
+	* gnome-wp-capplet.h: Store the filesel widget in GnomeWPCapplet
+	* gnome-wp-item.c: Fix warning about gnome_vfs_mime_get_description
+
+	Fixes #135317
+
 2004-02-24  Rodney Dawes  <dobey@ximian.com>
 
 	* gnome-wp-info.c (gnome_wp_info_new):

@@ -81,6 +81,9 @@ struct _GnomeWPCapplet {
 
   /* The Timeout ID for Setting the Wallpaper */
   gint idleid;
+
+  /* File Chooser Dialog */
+  GtkWidget * filesel;
 };
 
 typedef enum {

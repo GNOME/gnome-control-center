@@ -21,6 +21,7 @@
 #include "gnome-wp-item.h"
 #include "gnome-wp-utils.h"
 #include <string.h>
+#include <libgnomevfs/gnome-vfs-mime-handlers.h>
 
 void gnome_wp_item_free (GnomeWPItem * item) {
   if (item == NULL) {

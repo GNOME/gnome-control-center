@@ -74,15 +74,69 @@ static void wp_properties_help (GtkWindow * parent, char const * helpfile,
   }
 }
 
-static void gnome_wp_file_open_cancel (GtkWidget * widget, gpointer data) {
-  gtk_widget_hide (gtk_widget_get_toplevel (widget));
+static void gnome_wp_add_image (GnomeWPCapplet * capplet,
+				const gchar * filename) {
+  GnomeWPItem * item;
+  GdkColor color1, color2;
+
+  item = g_hash_table_lookup (capplet->wphash, filename);
+  if (item != NULL) {
+    GtkTreePath * path;
+    
+    if (item->deleted) {
+      item->deleted = FALSE;
+      wp_props_load_wallpaper (item->filename, item, capplet);
+    }
+
+    path = gtk_tree_row_reference_get_path (item->rowref);
+    gtk_tree_view_set_cursor (GTK_TREE_VIEW (capplet->treeview), path,
+			      NULL, FALSE);
+    gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (capplet->treeview),
+				  path, NULL, TRUE, 0.5, 0.0);
+    gtk_tree_path_free (path);
+
+    return;
+  }
+
+  item = g_new0 (GnomeWPItem, 1);
+  
+  item->filename = g_strdup (filename);
+
+  item->fileinfo = gnome_wp_info_new (item->filename, capplet->thumbs);
+
+  item->shade_type = gconf_client_get_string (capplet->client,
+					      WP_SHADING_KEY, NULL);
+  item->pri_color = gconf_client_get_string (capplet->client,
+					     WP_PCOLOR_KEY, NULL);
+  item->sec_color = gconf_client_get_string (capplet->client,
+					     WP_SCOLOR_KEY, NULL);
+
+  gdk_color_parse (item->pri_color, &color1);
+  gdk_color_parse (item->sec_color, &color2);
+     
+  item->pcolor = gdk_color_copy (&color1);
+  item->scolor = gdk_color_copy (&color2);
+
+  if (!strncmp (item->fileinfo->mime_type, "image/", strlen ("image/"))) {
+    if (item->name == NULL) {
+      item->name = g_strdup (item->fileinfo->name);
+    }
+    item->options = gconf_client_get_string (capplet->client,
+					     WP_OPTIONS_KEY,
+					     NULL);
+
+    gnome_wp_item_update_description (item);
+     
+    g_hash_table_insert (capplet->wphash, g_strdup (item->filename), item);
+    wp_props_load_wallpaper (item->filename, item, capplet);
+  } else {
+    gnome_wp_item_free (item);
+  }
 }
 
-static void gnome_wp_file_open_get_files (GtkWidget * widget,
-					  GnomeWPCapplet * capplet) {
-  GtkWidget * filesel;
-  GdkColor color1, color2;
-  gchar ** files;
+static void gnome_wp_add_images (GnomeWPCapplet * capplet,
+				 GSList * images,
+				 gchar ** files) {
   GdkCursor * cursor;
   gint i;
 
@@ -91,94 +145,41 @@ static void gnome_wp_file_open_get_files (GtkWidget * widget,
   gdk_window_set_cursor (capplet->window->window, cursor);
   gdk_cursor_unref (cursor);
 
-  filesel = gtk_widget_get_toplevel (widget);
-
-  files = gtk_file_selection_get_selections (GTK_FILE_SELECTION (filesel));
-
-  for (i = 0; files && files[i]; i++) {
-    GnomeWPItem * item;
-
-    item = g_hash_table_lookup (capplet->wphash, files[i]);
-    if (item != NULL) {
-	GtkTreePath * path;
-
-      if (item->deleted) {
-	item->deleted = FALSE;
-	wp_props_load_wallpaper (item->filename, item, capplet);
-      }
-
-      path = gtk_tree_row_reference_get_path (item->rowref);
-      gtk_tree_view_set_cursor (GTK_TREE_VIEW (capplet->treeview), path,
-				NULL, FALSE);
-      gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (capplet->treeview),
-				    path, NULL, TRUE, 0.5, 0.0);
-      gtk_tree_path_free (path);
-
-      continue;
+  if (images != NULL) {
+    for (; images != NULL; images = images->next) {
+      gnome_wp_add_image (capplet, images->data);
     }
-
-   item = g_new0 (GnomeWPItem, 1);
-
-   item->filename = g_strdup (files[i]);
-
-   item->fileinfo = gnome_wp_info_new (item->filename, capplet->thumbs);
-
-   item->shade_type = gconf_client_get_string (capplet->client,
-					       WP_SHADING_KEY, NULL);
-   item->pri_color = gconf_client_get_string (capplet->client,
-					      WP_PCOLOR_KEY, NULL);
-   item->sec_color = gconf_client_get_string (capplet->client,
-					      WP_SCOLOR_KEY, NULL);
-
-   gdk_color_parse (item->pri_color, &color1);
-   gdk_color_parse (item->sec_color, &color2);
-     
-   item->pcolor = gdk_color_copy (&color1);
-   item->scolor = gdk_color_copy (&color2);
-
-   if (!strncmp (item->fileinfo->mime_type, "image/", strlen ("image/"))) {
-     if (item->name == NULL) {
-       item->name = g_strdup (item->fileinfo->name);
-     }
-     item->options = gconf_client_get_string (capplet->client,
-					      WP_OPTIONS_KEY,
-					      NULL);
-
-     gnome_wp_item_update_description (item);
-     
-     g_hash_table_insert (capplet->wphash, g_strdup (item->filename), item);
-     wp_props_load_wallpaper (item->filename, item, capplet);
-   } else {
-     gnome_wp_item_free (item);
-   }
+  } else {
+    for (i = 0; files && files[i]; i++) {
+      gnome_wp_add_image (capplet, files[i]);
+    }
   }
-
-  g_strfreev (files);
-  gtk_widget_hide (filesel);
 
   gdk_window_set_cursor (capplet->window->window, NULL);
 }
 
 static void gnome_wp_file_open_dialog (GtkWidget * widget,
 				       GnomeWPCapplet * capplet) {
-  static GtkWidget * filesel = NULL;
+#if GTK_CHECK_VERSION (2, 3, 0)
+  GSList * files;
+#else
+  gchar ** files;
+#endif
 
-  if (filesel != NULL) {
-    gtk_widget_show (filesel);
-    return;
+  switch (gtk_dialog_run (GTK_DIALOG (capplet->filesel))) {
+  case GTK_RESPONSE_OK:
+#if GTK_CHECK_VERSION (2, 3, 0)
+    files = gtk_file_chooser_get_filenames (GTK_FILE_CHOOSER (capplet->filesel));
+    gnome_wp_add_images (capplet, files, NULL);
+#else
+    files = gtk_file_selection_get_selections (GTK_FILE_SELECTION (capplet->filesel));
+    gnome_wp_add_images (capplet, NULL, files);
+#endif
+  case GTK_RESPONSE_CANCEL:
+  default:
+    gtk_widget_hide (capplet->filesel);
+    break;
   }
-
-  filesel = gtk_file_selection_new (_("Add Wallpapers"));
-  gtk_file_selection_set_select_multiple (GTK_FILE_SELECTION (filesel), TRUE);
-
-  g_signal_connect (G_OBJECT (GTK_FILE_SELECTION (filesel)->ok_button),
-		    "clicked",
-		    G_CALLBACK (gnome_wp_file_open_get_files), capplet);
-  g_signal_connect (G_OBJECT (GTK_FILE_SELECTION (filesel)->cancel_button),
-		    "clicked",
-		    G_CALLBACK (gnome_wp_file_open_cancel), capplet);
-
-  gtk_widget_show (filesel);
 }
 
 static void bg_add_multiple_files (GnomeVFSURI * uri,
@@ -269,6 +270,9 @@ static void bg_properties_dragged_image (GtkWidget * widget,
 
 	  g_hash_table_insert (capplet->wphash, g_strdup (item->filename),
 			       item);
+	  wp_props_load_wallpaper (item->filename, item, capplet);
+	} else if (item->deleted) {
+	  item->deleted = FALSE;
 	  wp_props_load_wallpaper (item->filename, item, capplet);
 	}
 	gconf_client_set_string (capplet->client, WP_FILE_KEY,
@@ -1422,6 +1426,24 @@ static void wallpaper_properties_init (void) {
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (capplet->treeview));
   g_signal_connect (G_OBJECT (selection), "changed",
 		    G_CALLBACK (gnome_wp_props_wp_selected), capplet);
+
+  /* Create the file chooser dialog stuff here */
+#if GTK_CHECK_VERSION (2, 3, 0)
+  capplet->filesel = gtk_file_chooser_dialog_new (_("Add Wallpapers"),
+						  GTK_WINDOW (capplet->window),
+						  GTK_FILE_CHOOSER_ACTION_OPEN,
+						  GTK_STOCK_CANCEL,
+						  GTK_RESPONSE_CANCEL,
+						  GTK_STOCK_OPEN,
+						  GTK_RESPONSE_OK,
+						  NULL);
+  gtk_file_chooser_set_select_multiple (GTK_FILE_CHOOSER (capplet->filesel),
+					TRUE);
+#else
+  capplet->filesel = gtk_file_selection_new (_("Add Wallpapers"));
+  gtk_file_selection_set_select_multiple (GTK_FILE_SELECTION (capplet->filesel),
+					  TRUE);
+#endif
 }
 
 gint main (gint argc, gchar *argv[]) {
