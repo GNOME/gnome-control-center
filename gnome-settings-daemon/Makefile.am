@@ -84,19 +84,11 @@ IDL_FLAGS = -D__GNOME_SettingsDaemon_COMPILATION -I $(idl_dir) -I $(datadir)/idl
 $(CORBA_GENERATED): $(idl_dir)/GNOME_SettingsDaemon.idl $(ORBIT_IDL)
 	$(ORBIT_IDL) $(IDL_FLAGS) $(idl_dir)/GNOME_SettingsDaemon.idl
 
-serverdir	= $(libdir)/bonobo/servers
-server_in_files = GNOME_SettingsDaemon.server.in
-server_DATA     = $(server_in_files:.server.in=.server)
+serverfile = GNOME_SettingsDaemon.server.in
+serverdir = $(libdir)/bonobo/servers
+install-data-hook :
+	$(mkinstalldirs) $(serverdir)
+	sed -e "s|\@LIBEXECDIR\@|$(libexecdir)|" $(srcdir)/$(serverfile) > $(serverdir)/$(serverfile:.in=)
 
-$(server_in_files): $(server_in_files).in
-	sed -e "s|\@LIBEXECDIR\@|$(libexecdir)|" $< > $@
-
-# Do not ship
-dist-hook :
-	-rm -f $(distdir)/GNOME_SettingsDaemon.server.in $(distdir)/GNOME_SettingsDaemon.server
-
-@INTLTOOL_SERVER_RULE@
-
-CLEANFILES = $(BUILT_SOURCES) $(server_in_files)
-
-EXTRA_DIST = $(server_in_files)	GNOME_SettingsDaemon.server.in.in
+EXTRA_DIST = $(serverfile)
+CLEANFILES = $(BUILT_SOURCES)
