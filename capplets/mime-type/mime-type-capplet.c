@@ -126,7 +126,7 @@ main (int argc, char **argv)
         bindtextdomain (PACKAGE, GNOMELOCALEDIR);
         textdomain (PACKAGE);
 
-        init_results = gnome_capplet_init("mime-type-capplet", VERSION,
+        init_results = gnome_capplet_init("mime-type", VERSION,
                                           argc, argv, NULL, 0, NULL);
 
 	if (init_results < 0) {

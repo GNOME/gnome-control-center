@@ -184,7 +184,7 @@ main (int argc, char **argv)
         textdomain (PACKAGE);
 	
 	
-        init_results = gnome_capplet_init ("mime-type-capplet", VERSION, argc, argv, NULL, 0, NULL);
+        init_results = gnome_capplet_init ("file-types-capplet", VERSION, argc, argv, NULL, 0, NULL);
 
 	if (init_results < 0) {
                 exit (0);

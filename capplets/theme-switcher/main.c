@@ -19,7 +19,7 @@ main(int argc, char **argv)
 
   set_tmp_rc();
   child_pid = do_demo(argc, argv);
-  switch (gnome_capplet_init ("theme-switcher-capplet",
+  switch (gnome_capplet_init ("gtk-theme-selector",
 			      THEME_SWITCHER_VERSION, argc, argv, NULL, 0, NULL)) {
   case -1:
 	  exit (1);

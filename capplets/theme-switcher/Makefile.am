@@ -4,9 +4,9 @@ INCLUDES = -I. -I$(srcdir) 				\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"	\
 	@CAPPLET_CFLAGS@
 
-bin_PROGRAMS = theme-selector-capplet
+bin_PROGRAMS = gtk-theme-selector-capplet
 
-theme_selector_capplet_SOURCES = \
+gtk_theme_selector_capplet_SOURCES = \
         da.h		\
 	file.c		\
 	globals.c	\
@@ -17,13 +17,13 @@ theme_selector_capplet_SOURCES = \
 	gui.c           \
 	install.c
 
-theme_selector_capplet_LDADD = @CAPPLET_LIBS@
+gtk_theme_selector_capplet_LDADD = @CAPPLET_LIBS@
 
 EXTRA_DIST = \
-	theme-selector.desktop
+	gtk-theme-selector.desktop
 
 sysdir = $(datadir)/control-center/capplets/Advanced
-sys_DATA = theme-selector.desktop
+sys_DATA = gtk-theme-selector.desktop
 
 psysdir = $(datadir)/gnome/apps/Settings/Advanced
-psys_DATA = theme-selector.desktop
+psys_DATA = gtk-theme-selector.desktop

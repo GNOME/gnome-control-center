@@ -196,7 +196,7 @@ main (int argc, char **argv)
 	textdomain (PACKAGE);
 
 	glade_gnome_init ();
-	res = gnome_capplet_init ("ui-properties",
+	res = gnome_capplet_init ("behavior",
 				  VERSION, argc, argv, NULL,
 				  0, NULL);
 
