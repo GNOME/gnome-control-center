@@ -5,7 +5,7 @@
 # Mikko Rauhala <mjr@iki.fi>, x-2000
 # Pauli Virtanen <pauli.virtanen@hut.fi>, 2000-2002
 #
-# sticky key = tarttuva näppäin
+# sticky key = pohjaan jäävä näppäin
 # bounce key = kimmonäppäin
 # mouse key = hiirinäppäin
 # toggle key = piippaava näppäin
@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 1.99.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-08-16 19:27+0300\n"
-"PO-Revision-Date: 2003-08-16 19:06+0200\n"
+"POT-Creation-Date: 2003-08-24 20:09+0300\n"
+"PO-Revision-Date: 2003-08-24 20:08+0300\n"
 "Last-Translator: Pauli Virtanen <pauli.virtanen@hut.fi>\n"
 "Language-Team: Gnome Finnish Translation Team <gnome-fi-laatu@lists."
 "sourceforge.net>\n"
@@ -84,8 +84,8 @@ msgid ""
 "capabilities."
 msgstr ""
 "Järjestelmässäsi ei ole esteettömyysohjelmia. \"gok\"-paketti täytyy olla "
-"asennettuna näppäimistön saamiseksi ruudulla näkyväksi, ja \"gnopernicus\"-"
-"paketti näytön lukua ja suurentamista varten."
+"asennettuna näppäimistön näyttämiseksi ruudulla, ja \"gnopernicus\"-paketti "
+"näytön lukua ja suurentamista varten."
 
 #: capplets/accessibility/at-properties/main.c:62
 msgid ""
@@ -93,8 +93,7 @@ msgid ""
 "'gok' package must be installed in order to get on-screen keyboard support."
 msgstr ""
 "Kaikkia mahdollisia esteettömyysohjelmia ei ole asennettu järjestelmään.  "
-"\"gok\"-paketti täytyy olla asennettuna näppäimistön saamiseksi ruudulla "
-"näkyväksi."
+"\"gok\"-paketti täytyy olla asennettuna  näppäimistön näyttämiseksi ruudulla."
 
 #: capplets/accessibility/at-properties/main.c:64
 msgid ""
@@ -175,7 +174,7 @@ msgstr "<b>Käytä _toistonäppäimiä</b>"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
 msgid "<b>Enable _Sticky Keys</b>"
-msgstr "<b>Kä_ytä tarttuvia näppäimiä</b>"
+msgstr "<b>Kä_ytä pohjaan jääviä näppäimiä</b>"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
 msgid "<b>Features</b>"
@@ -205,7 +204,9 @@ msgstr "P_iippaa, kun muunnosnäppäintä painetaan"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
 msgid "Beep when an LED is turned on and two beeps when one is turned off."
-msgstr "Piippaa kerran näppäimistön valon syttyessä ja kahdesti sen sammuessa."
+msgstr ""
+"Piippaa kerran, kun jokin näppäimistön valoista syttyy ja kahdesti kun "
+"sammuu."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
 msgid "Beep when key is:"
@@ -270,8 +271,8 @@ msgid ""
 "Perform multiple simultaneous key press operations by pressing modifier keys "
 "in sequence."
 msgstr ""
-"Jäljittele monen näppäimen painamista samaan aikaan näppäilemällä "
-"muunnosnäppäimiä peräkkäin."
+"Korvaa monen muunnosnäppäimen (Control yms.) painaminen samaan aikaan niiden "
+"näppäilemisellä peräkkäin."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:19
@@ -442,7 +443,7 @@ msgstr "Pystyväriliuku"
 
 #: capplets/background/background-properties.glade.h:13
 msgid "You can drag image files into the window to set the background picture."
-msgstr "Voit asettaa taustakuvan vetämällä kuvatiedoston tähän ikkunaan."
+msgstr "Taustakuvan voi asettaa vetämällä kuvatiedoston tähän ikkunaan."
 
 #: capplets/background/background-properties.glade.h:14
 msgid "radiobutton1"
@@ -454,15 +455,15 @@ msgstr "Valintanappi 2"
 
 #: capplets/background/background-properties.glade.h:16
 msgid "radiobutton3"
-msgstr "Valintanappi 2"
+msgstr "Valintanappi 3"
 
 #: capplets/background/background-properties.glade.h:17
 msgid "radiobutton4"
-msgstr "Valintanappi 2"
+msgstr "Valintanappi 4"
 
 #: capplets/background/background-properties.glade.h:18
 msgid "radiobutton5"
-msgstr "Valintanappi 2"
+msgstr "Valintanappi 5"
 
 #: capplets/background/background.desktop.in.h:1
 msgid "Background"
@@ -710,11 +711,11 @@ msgstr "Konqueror"
 
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:45
 msgid "Lynx Text Browser"
-msgstr "Lynx, Internet-tekstiselain"
+msgstr "Lynx, WWW-tekstiselain"
 
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:46
 msgid "Links Text Browser"
-msgstr "Links, Internet-tekstiselain"
+msgstr "Links, WWW-tekstiselain"
 
 #. The code in gnome-default-applications-properties.c makes sure
 #. * there is only one (the first entry in this list) Evolution entry
@@ -779,7 +780,7 @@ msgstr "M_uu pääte:"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:6
 msgid "C_ustom Web Browser:"
-msgstr "M_uu Internet-selain:"
+msgstr "M_uu WWW-selain:"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:7
 msgid "Co_mmand:"
@@ -803,7 +804,7 @@ msgstr "Oletusarvoinen tekstieditori"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:12
 msgid "Default Web Browser"
-msgstr "Oletusarvoinen Internet-selain"
+msgstr "Oletusarvoinen WWW-selain"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:13
 msgid "Default Window Manager"
@@ -868,7 +869,7 @@ msgstr "Avaa tekstitiedostot tällä _editorilla tiedostonhallinnassa"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:28
 msgid "Web Browser"
-msgstr "Internet-selain"
+msgstr "WWW-selain"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:29
 msgid "Window Manager"
@@ -893,7 +894,7 @@ msgstr "_Valitse pääte:"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:34
 msgid "_Select a Web Browser:"
-msgstr "_Valitse Internet-selain:"
+msgstr "_Valitse WWW-selain:"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:35
 msgid "_Select an Editor:"
@@ -1070,7 +1071,7 @@ msgid ""
 "Testing the new settings. If you don't respond in %d seconds the previous "
 "settings will be restored."
 msgstr ""
-"Uusien asetusten testaus. Jos et vastaa %d sekunnin aikana, edelliset "
+"Uusien asetusten kokeilu. Jos et vastaa %d sekunnin aikana, edelliset "
 "asetukset palautuvat."
 
 #: capplets/display/main.c:563
@@ -1726,8 +1727,8 @@ msgid ""
 "Lock screen after a certain duration to help prevent repetitive keyboard use "
 "injuries"
 msgstr ""
-"Lukitse näyttö tietyn ajan kuluttua näppäimistön toistuvasta käytöstä "
-"johtuvien vammojen estämiseksi"
+"Lukitse näyttö tietyin väliajoin näppäimistön toistuvasta käytöstä johtuvien "
+"vammojen estämiseksi"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:20
 msgid "Typing Break"
@@ -1776,7 +1777,7 @@ msgstr "X:n mukana tuleva oletusosoitin"
 
 #: capplets/mouse/gnome-mouse-properties.c:605
 msgid "Default Cursor"
-msgstr "Oletusarvoinen osoitin"
+msgstr "Oletusosoitin"
 
 #: capplets/mouse/gnome-mouse-properties.c:623
 msgid "White Cursor - Current"
@@ -1785,7 +1786,7 @@ msgstr "Valkoinen osoitin - nykyinen"
 #: capplets/mouse/gnome-mouse-properties.c:623
 #: capplets/mouse/gnome-mouse-properties.c:626
 msgid "The default cursor inverted"
-msgstr "Oletusarvoinen osoitin käänteisin värein"
+msgstr "Oletusosoitin käänteisin värein"
 
 #: capplets/mouse/gnome-mouse-properties.c:626
 msgid "White Cursor"
@@ -2130,8 +2131,8 @@ msgid ""
 "that you probably don't have metacity installed, or that your gconf is "
 "configured incorrectly."
 msgstr ""
-"Oletusteeman kaavaimia ei löytynyt. Tämä merkitsee joko että Metacity ei ole "
-"asennettu tai että Gconfin asetuksissa on vikaa."
+"Oletusteeman kaavaimia ei löytynyt. Tämä merkitsee, että Metacity ei ole "
+"asennettu tai Gconfin asetuksissa on vikaa."
 
 #: capplets/theme-switcher/gnome-theme-save.c:72
 msgid "Theme name must be present"
@@ -2208,7 +2209,7 @@ msgstr "Teeman _lisätiedot"
 
 #: capplets/theme-switcher/theme-properties.glade.h:13
 msgid "This theme does not suggest any particular font or background."
-msgstr "Tämä teema ei ehdota kirjasinta ja taustaa"
+msgstr "Tämä teema ei ehdota kirjasinta tai taustaa"
 
 #: capplets/theme-switcher/theme-properties.glade.h:14
 msgid "This theme suggests a background:"
@@ -2433,7 +2434,11 @@ msgstr "Tämän näkymän näyttämä hallintasovelmien hakemisto"
 
 #: control-center/capplet-dir-view.c:348
 msgid "translator_credits"
-msgstr "Suomennos: http://gnome-fi.sourceforge.net/"
+msgstr ""
+"Pauli Virtanen, 2000-2002\n"
+"Mikko Rauhala <mjr@iki.fi>, -2000\n"
+"\n"
+"http://gnome-fi.sourceforge.net/"
 
 #: control-center/capplet-dir-view.c:357 control-center/gnomecc.desktop.in.h:1
 msgid "GNOME Control Center"
@@ -2512,7 +2517,7 @@ msgstr "Näppäinsidonta (%s) on virheellinen\n"
 #: gnome-settings-daemon/gnome-settings-keybindings.c:248
 #, c-format
 msgid "It seems that another application already has access to key '%d'."
-msgstr "Jokin toinen sovellus vaikuttaa jo käyttävän avainta \"%d\""
+msgstr "Ilmeisesti jokin toinen sovellus käyttää jo avainta \"%d\""
 
 #: gnome-settings-daemon/gnome-settings-keybindings.c:317
 #, c-format
@@ -2820,14 +2825,14 @@ msgid ""
 "right-clicking on your panel and choose 'Add to panel -> Utilities -> "
 "Notification area'."
 msgstr ""
-"Kirjoituksentarkkailin käyttää ilmoitusaluetta viestien näyttämiseen, mutta "
+"Näppäilyjentarkkailin käyttää ilmoitusaluetta viestien näyttämiseen, mutta "
 "paneelissasi ei kuitenkaan vaikuta olevan sitä. Voit lisätä ilmoitusalueen "
 "paneeliin napsauttamalla paneelia oikealla painikkeella ja valitsemalla "
 "\"Lisää paneeliin -> Ohjelmat -> Ilmoitusalue\"."
 
 #: vfs-methods/fontilus/font-view.c:101
 msgid "The quick brown fox jumps over the lazy dog. 0123456789"
-msgstr "Abcdefghijklmnopqrstuvwxyzåäö. 0123456789"
+msgstr "Abcdefghijklmnopqrsštuvwxyzåäö. 0123456789"
 
 #: vfs-methods/fontilus/font-view.c:252
 msgid "Name:"
@@ -2936,7 +2941,7 @@ msgstr "Tehdas Fontilus-kontekstivalikoille"
 
 #: vfs-methods/fontilus/fontilus.server.in.in.h:2
 msgid "Fontilus context menu"
-msgstr "Fontiluksen asiayhteysvalikko"
+msgstr "Fontiluksen kontekstivalikko"
 
 #: vfs-methods/fontilus/fontilus.server.in.in.h:3
 msgid "Fontilus context menu factory"
@@ -3009,11 +3014,11 @@ msgstr "ABCDEFGÅÄÖ"
 
 #: vfs-methods/themus/themus.schemas.in.h:1
 msgid "If set to true, then installed themes will be thumbnailed."
-msgstr "Jos tosi, joka asennetulle teemalle syntyy pienoiskuva."
+msgstr "Jos tosi, joka asennetulle teemalle luodaan pienoiskuva."
 
 #: vfs-methods/themus/themus.schemas.in.h:2
 msgid "If set to true, then themes will be thumbnailed."
-msgstr "Jos tosi, joka teemalle syntyy pienoiskuva."
+msgstr "Jos tosi, joka teemalle luodaan pienoiskuva."
 
 #: vfs-methods/themus/themus.schemas.in.h:3
 msgid ""
