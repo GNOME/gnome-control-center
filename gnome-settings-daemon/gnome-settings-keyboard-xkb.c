@@ -131,7 +131,7 @@ gnome_settings_keyboard_xkb_analyze_sysconfig (void)
 	    !GSwitchItXkbConfigEquals (&gswicNow, &gswicWas)) {
 		GtkWidget *msg = gtk_message_dialog_new_with_markup (NULL,
 								     0,
-								     GTK_MESSAGE_ERROR,
+								     GTK_MESSAGE_INFO,
 								     GTK_BUTTONS_CLOSE,
 //!! temporary one
 								     _
