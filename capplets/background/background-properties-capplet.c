@@ -186,6 +186,15 @@ peditor_value_changed (GConfPropertyEditor *peditor, const gchar *key, const GCo
 
 	if (GTK_WIDGET_REALIZED (applier_get_preview_widget (applier)))
 		applier_apply_prefs (applier, PREFERENCES (prefs));
+
+	if (!strcmp (key, "/background-properties/wallpaper-enabled") ||
+	    !strcmp (key, "/background-properties/wallpaper-filename") ||
+	    !strcmp (key, "/background-properties/wallpaper-type"))
+	{
+		GladeXML *dialog = g_object_get_data (G_OBJECT (prefs), "glade-data");
+		gtk_widget_set_sensitive (WID ("color_frame"),
+					  applier_render_color_p (applier, prefs));
+	}
 }
 
 static void
