@@ -523,7 +523,7 @@ append_keys_to_tree (GladeXML           *dialog,
 	  GtkRequisition rectangle;
 	  gtk_widget_ensure_style (WID ("shortcut_treeview"));
 	  gtk_widget_size_request (WID ("shortcut_treeview"), &rectangle);
-	  gtk_widget_set_size_request (WID ("actions_swindow"), -1, rectangle.height);
+	  gtk_widget_set_size_request (WID ("shortcut_treeview"), -1, rectangle.height);
 	  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (WID ("actions_swindow")),
 					  GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
 	}
