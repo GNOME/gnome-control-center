@@ -68,32 +68,32 @@ get_legacy_settings (void)
 	gboolean def;
 	gchar *val_filename;
 
-	GConfEngine *engine;
+	GConfClient *client;
 
 	static const int wallpaper_types[] = { 0, 1, 3, 2 };
 
-	engine = gconf_engine_get_default ();
+	client = gconf_client_get_default ();
 
-	gconf_engine_set_bool (engine, "/desktop/gnome/background/enabled",
+	gconf_client_set_bool (client, "/desktop/gnome/background/enabled",
 			       gnome_config_get_bool ("/Background/Default/Enabled=true"), NULL);
 
 	val_filename = gnome_config_get_string ("/Background/Default/wallpaper=(none)");
-	gconf_engine_set_string (engine, "/desktop/gnome/background/wallpaper-filename",
+	gconf_client_set_string (client, "/desktop/gnome/background/wallpaper-filename",
 				 val_filename, NULL);
 
 	if (val_filename != NULL && strcmp (val_filename, "(none)"))
-		gconf_engine_set_bool (engine, "/desktop/gnome/background/wallpaper-enabled", TRUE, NULL);
+		gconf_client_set_bool (client, "/desktop/gnome/background/wallpaper-enabled", TRUE, NULL);
 	else
-		gconf_engine_set_bool (engine, "/desktop/gnome/background/wallpaper-enabled", FALSE, NULL);
+		gconf_client_set_bool (client, "/desktop/gnome/background/wallpaper-enabled", FALSE, NULL);
 
 	g_free (val_filename);
 
-	gconf_engine_set_int (engine, "/desktop/gnome/background/wallpaper-type",
+	gconf_client_set_int (client, "/desktop/gnome/background/wallpaper-type",
 			      gnome_config_get_int ("/Background/Default/wallpaperAlign=0"), NULL);
 
-	gconf_engine_set_string (engine, "/desktop/gnome/background/color1",
+	gconf_client_set_string (client, "/desktop/gnome/background/color1",
 				 gnome_config_get_string ("/Background/Default/color1"), NULL);
-	gconf_engine_set_string (engine, "/desktop/gnome/background/color2",
+	gconf_client_set_string (client, "/desktop/gnome/background/color2",
 				 gnome_config_get_string ("/Background/Default/color2"), NULL);
 
 	/* Code to deal with new enum - messy */
@@ -113,12 +113,12 @@ get_legacy_settings (void)
 	g_free (val_string);
 
 	if (val_int != -1)
-		gconf_engine_set_int (engine, "/desktop/gnome/background/orientation", val_int, NULL);
+		gconf_client_set_int (client, "/desktop/gnome/background/orientation", val_int, NULL);
 
 	val_boolean = gnome_config_get_bool_with_default ("/Background/Default/adjustOpacity=true", &def);
 
 	if (!def && val_boolean)
-		gconf_engine_set_int (engine, "/desktop/gnome/background/opacity",
+		gconf_client_set_int (client, "/desktop/gnome/background/opacity",
 				      gnome_config_get_int ("/Background/Default/opacity=100"), NULL);
 }
 
@@ -207,11 +207,11 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset, Applier *applier)
 {
 	GObject                       *prefs;
 	GObject                       *peditor;
-	GConfEngine                   *engine;
+	GConfClient                   *client;
 
 	/* Override the enabled setting to make sure background is enabled */
-	engine = gconf_engine_get_default ();
-	gconf_engine_set_bool (engine, "enabled", TRUE, NULL);
+	client = gconf_client_get_default ();
+	gconf_client_set_bool (client, "/desktop/gnome/background/enabled", TRUE, NULL);
 
 	/* Load preferences */
 	prefs = preferences_new ();
@@ -289,7 +289,7 @@ static void
 dialog_button_clicked_cb (GnomeDialog *dialog, gint button_number, GConfChangeSet *changeset) 
 {
 	if (button_number == 0) {
-		gconf_engine_commit_change_set (gconf_engine_get_default (), changeset, TRUE, NULL);
+		gconf_client_commit_change_set (gconf_client_get_default (), changeset, TRUE, NULL);
 		apply_settings ();
 	}
 	else if (button_number == 1) {
@@ -300,6 +300,7 @@ dialog_button_clicked_cb (GnomeDialog *dialog, gint button_number, GConfChangeSe
 int
 main (int argc, char **argv) 
 {
+	GConfClient    *client;
 	GConfChangeSet *changeset;
 	GladeXML       *dialog;
 	GtkWidget      *dialog_win;
@@ -326,6 +327,9 @@ main (int argc, char **argv)
 			    NULL);
 
 	setup_session_mgmt (argv[0]);
+
+	client = gconf_client_get_default ();
+	gconf_client_add_dir (client, "/desktop/gnome/background", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 
 	if (apply_only) {
 		apply_settings ();
