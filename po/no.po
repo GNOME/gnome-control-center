@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.5.8\n"
-"POT-Creation-Date: 2002-12-07 21:00+0100\n"
-"PO-Revision-Date: 2002-12-07 21:03+0100\n"
+"POT-Creation-Date: 2002-12-30 01:38+0100\n"
+"PO-Revision-Date: 2002-12-30 01:38+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -51,8 +51,8 @@ msgstr ""
 #: capplets/file-types/file-types-properties.glade.h:1
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: capplets/network/gnome-network-preferences.glade.h:2
-#: capplets/theme-switcher/theme-properties.glade.h:1
 #: capplets/theme-switcher/theme-install.glade.h:1
+#: capplets/theme-switcher/theme-properties.glade.h:1
 msgid "*"
 msgstr "*"
 
@@ -1932,18 +1932,22 @@ msgstr "_Installer"
 msgid "_Location of new theme:"
 msgstr "P_lassering for det nye temaet:"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:463
+#: capplets/theme-switcher/gnome-theme-details.c:331
+#: capplets/theme-switcher/gnome-theme-manager.c:468
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
 "installed the \"gnome-themes\" package."
-msgstr "Ingen tema ble funnet på ditt system. Dette betyr sannsynligvis at dialogen «Brukervalg for tema» ikke er korrekt installert, eller at du ikke har installert pakken «gnome-themes»."
+msgstr ""
+"Ingen tema ble funnet på ditt system. Dette betyr sannsynligvis at dialogen "
+"«Brukervalg for tema» ikke er korrekt installert, eller at du ikke har "
+"installert pakken «gnome-themes»."
 
-#: capplets/theme-switcher/gnome-theme-manager.c:513
+#: capplets/theme-switcher/gnome-theme-manager.c:518
 msgid "Custom theme"
 msgstr "Egendefinert tema"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:513
+#: capplets/theme-switcher/gnome-theme-manager.c:518
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "Du kan lagre dette temaet ved å klikke på «Lagre tema»-knappen."
 
@@ -2368,7 +2372,9 @@ msgstr "Rull opp"
 #: schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:1
 msgid ""
 "If true, the mime handlers for text/plain and text/* will be kept in sync"
-msgstr "Hvis satt til sann vil MIME-håndtererene for text/plain og text/* holdes synkronisert"
+msgstr ""
+"Hvis satt til sann vil MIME-håndtererene for text/plain og text/* holdes "
+"synkronisert"
 
 #: schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:2
 msgid "Sync text/plain and text/* handlers"
@@ -2391,7 +2397,7 @@ msgid "Start XScreenSaver"
 msgstr "Start XScreenSaver"
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:1
-msgid "Antialising"
+msgid "Antialiasing"
 msgstr "Antialiasing"
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:2
@@ -2415,17 +2421,16 @@ msgstr ""
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:6
 msgid ""
-"The order of elements subpixel elements on an LCD screen; only used when "
-"antialising is set to \"rgba\". Possible values are: \"rgb\" - red on left, "
-"most common. \"bgr\" - blue on left. \"vrgb\" - red on top. \"vbgr\" - red "
-"on bottom."
+"The order of subpixel elements on an LCD screen; only used when antialiasing "
+"is set to \"rgba\". Possible values are: \"rgb\" - red on left, most common. "
+"\"bgr\" - blue on left. \"vrgb\" - red on top. \"vbgr\" - red on bottom."
 msgstr ""
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:7
 msgid ""
 "The type of antialiasing to use when rendering fonts. Possible values are: "
-"\"none\" - no antialiasing. \"grayscale\" - standard grayscale antialising. "
-"\"rgba\" - subpixel antialising. (LCD screens only)."
+"\"none\" - no antialiasing. \"grayscale\" - standard grayscale antialiasing. "
+"\"rgba\" - subpixel antialiasing. (LCD screens only)."
 msgstr ""
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:8
