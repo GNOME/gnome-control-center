@@ -51,7 +51,13 @@
 #define DEFAULT_REGULAR_ICON "/nautilus/i-regular-24.png"
 #define DEFAULT_ACTION_ICON "/nautilus/i-executable.png"
 
-#define TOTAL_COLUMNS 4
+enum {
+	COLUMN_DESCRIPTION = 0,
+	COLUMN_MIME_TYPE,
+	COLUMN_EXTENSION,
+	COLUMN_ACTION,
+	TOTAL_COLUMNS
+};
 
 /* Local Prototypes */
 static void	 init_mime_capplet 	  		(const char 	*scroll_to_mime_type);
@@ -735,6 +741,10 @@ init_mime_capplet (const char *scroll_to_mime_type)
 	gtk_signal_connect (GTK_OBJECT (mime_list),"select_row",
        	                   GTK_SIGNAL_FUNC (mime_list_selected_row_callback), NULL);
 
+	/* Sort by description. The description is the first column in the list. */
+	gtk_clist_set_sort_column (GTK_CLIST (mime_list), COLUMN_DESCRIPTION);
+	gtk_clist_sort (GTK_CLIST (mime_list));
+	
 	/* Attempt to select specified mime type in list */
 	if (scroll_to_mime_type != NULL) {
 		found_one = FALSE;
@@ -756,7 +766,7 @@ init_mime_capplet (const char *scroll_to_mime_type)
 	} else {
 		gtk_clist_select_row (GTK_CLIST (mime_list), 0, 0);
 	}
-				
+	
 	capplet_widget_state_changed (CAPPLET_WIDGET (capplet), TRUE);
 }
 
