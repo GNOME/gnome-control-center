@@ -1,3 +1,10 @@
+2002-03-13  jacob berkman  <jacob@ximian.com>
+
+	* gnome-settings-daemon.c (_GnomeSettingsDaemonPrivate): add a
+	dummy field
+	(gnome_settings_daemon_register_callback): cast functions to
+	gpointers as forte does not like this (bug #74349)
+
 2002-03-07  Lauris Kaplinski  <lauris@ximian.com>
 
 	* gnome-settings-keyboard.c (apply_settings): Use correct GConf keys,

@@ -46,6 +46,7 @@
 static GObjectClass *parent_class = NULL;
 
 struct _GnomeSettingsDaemonPrivate {
+	int dummy;
 };
 
 static GSList *directories = NULL;
@@ -70,7 +71,7 @@ gnome_settings_daemon_register_callback (const char      *dir,
 
       if (! strcmp (dir_element->dir, dir))
 	{
-	  dir_element->callbacks = g_slist_prepend (dir_element->callbacks, func);
+	  dir_element->callbacks = g_slist_prepend (dir_element->callbacks, (gpointer)func);
 	  dir_found = TRUE;
 	  break;
 	}
@@ -80,7 +81,7 @@ gnome_settings_daemon_register_callback (const char      *dir,
       DirElement *dir_element = g_new0 (DirElement, 1);
 
       dir_element->dir = g_strdup (dir);
-      dir_element->callbacks = g_slist_prepend (dir_element->callbacks, func);
+      dir_element->callbacks = g_slist_prepend (dir_element->callbacks, (gpointer)func);
       directories = g_slist_prepend (directories, dir_element);
     }
 }
