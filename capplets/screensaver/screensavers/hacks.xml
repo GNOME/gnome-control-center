@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<screensaver-descriptions>
+
+<hack name="attraction">
+    <command arg="-root"/>
+    <select id="mode">
+	<option id="balls" arg-set="-mode balls"/>
+	<option id="lines" arg-set="-mode lines" test="mode = lines"/>
+	<option id="tails" arg-set="-mode tails" test="mode = tails"/>
+	<option id="polygons" arg-set="-mode polygons" test="mode = polygons"/>
+	<option id="splines" arg-set="-mode splines" test="mode = splines"/>
+    </select>
+    <number id="threshold" arg="-threshold %d"/>
+    <number id="segments" arg="-segments %d"/>
+    <number id="speed" arg="-delay %d" from-cli-conv="20000 - var" to-cli-conv="20000 - var"/>
+    <select id="use_color">
+	<option id="color" enable="number_colors_label,number_colors_widget,color_contrast_label,color_contrast_low_label,color_contrast_high_label,color_contrast_widget"/>
+	<option id="mono" arg-set="-mono" test="mono"/>
+    </select>
+    <number id="number_colors" arg="-colors %d"/>
+    <number id="color_contrast" arg="-color-shift %d"/>
+</hack>
+
+<hack name="qix">
+    <command arg="-root"/>
+    <select id="shape">
+	<option id="lines" enable="trail_type_widget,width_widget,width_label,width_high_label,width_low_label" arg-set="-poly 2"/>
+	<option id="poly" enable="no_pts_widget,no_pts_label" test="poly > 2"/>
+    </select>
+    <number id="no_pts" arg="-poly %d"/>
+    <select id="trail_type">
+	<option id="discrete" enable="spread_widget,spread_label,spread_low_label,spread_high_label"/>
+	<option id="solid" arg-set="-solid" test="solid and not (transparent or xor)"/>
+	<option id="transparent" arg-set="-solid -transparent" test="solid and transparent"/>
+	<option id="xor" arg-set="-solid -xor" test="solid and xor"/>
+    </select>
+    <boolean id="gravity" arg-set="-gravity" test="gravity"/>
+    <number id="speed" arg="-delay %d" from-cli-conv="20000 - var" to-cli-conv="20000 - var"/>
+    <number id="length" arg="-segments %d"/>
+    <number id="width" arg="-size %d"/>
+    <number id="count" arg="-count %d"/>
+    <number id="spread" arg="-spread %d"/>
+    <select id="use_color">
+	<option id="color" enable="shift_widget,shift_label,shift_low_label,shift_high_label"/>
+	<option id="mono" arg-set="-mono" test="mono"/>
+    </select>
+    <number id="shift" arg="-color-shift %d"/>
+</hack>
+
+</screensaver-descriptions>
