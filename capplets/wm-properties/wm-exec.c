@@ -269,7 +269,7 @@ start_do (RestartInfo *info)
 {
         gnome_desktop_entry_launch (info->dentry);
 
-        info->retries = 20;
+        info->retries = 10;
         gtk_timeout_add (1000, start_timeout, info);
 }
 

@@ -39,6 +39,11 @@ static WindowManager *selected_wm;
 static GtkWidget *restart_dialog = NULL;
 static GtkWidget *restart_label = NULL;
 guint restart_dialog_timeout;
+gchar *restart_name = NULL;
+
+/* Time until dialog times out */
+gdouble restart_remaining_time;
+gint restart_displayed_time;
 
 GnomeClient *client = NULL;
 gchar *argv0;
@@ -100,19 +105,41 @@ typedef enum {
  */
 StateType state = STATE_IDLE;
 
-/* Set TRUE when we've exited the main loop, but state != IDLE
+/* Set TRUE when we've exited the main loop, but restart_pending
  */
 gboolean quit_pending = FALSE;
+
+/* Set TRUE when we're waiting for the WM to restart
+ */
+gboolean restart_pending = FALSE;
 
 /* Set TRUE while we are filling in the list
  */
 gboolean in_fill = FALSE;
 
+static void
+restart_label_update (void)
+{
+        gchar *tmp;
+
+        if ((gint)restart_remaining_time != restart_displayed_time) {
+                restart_displayed_time = restart_remaining_time;
+                
+                tmp = g_strdup_printf ("Starting %s\n"
+                                       "(%d seconds left before operation times out)",
+                                       restart_name,
+                                       restart_displayed_time);
+                gtk_label_set_text (GTK_LABEL (restart_label), tmp);
+                g_free (tmp);
+        }
+}
 
 static gboolean
 restart_dialog_raise (gpointer data)
 {
         if (restart_dialog && GTK_WIDGET_REALIZED (restart_dialog)) {
+                restart_remaining_time -= 0.25;
+                restart_label_update();
                 gdk_window_raise (restart_dialog->window);
         }
         return TRUE;
@@ -165,14 +192,17 @@ show_restart_dialog (gchar *name)
         }
 
         if (!restart_dialog_timeout) {
-                gtk_timeout_add (250, restart_dialog_raise, NULL);
-                
+                restart_dialog_timeout = gtk_timeout_add (250, restart_dialog_raise, NULL);
         }
 
-        tmp = g_strdup_printf ("Starting %s", name);
-        gtk_label_set_text (GTK_LABEL (restart_label), tmp);
-        g_free (tmp);
+        restart_remaining_time = 10.0;
+        restart_displayed_time = -1;
+        if (restart_name)
+                g_free (restart_name);
 
+        restart_name = g_strdup (name);
+        restart_label_update ();
+                
         gtk_widget_show_all (restart_dialog);
 }
 
@@ -334,6 +364,7 @@ restart_finalize ()
                 return;
         }
 
+        restart_pending = FALSE;
 }
 
 static void 
@@ -496,6 +527,7 @@ restart (gboolean force)
                 show_restart_dialog (selected_wm->dentry->name);
                 if (state != STATE_OK && state != STATE_CANCEL)
                         gtk_widget_set_sensitive (capplet, FALSE);
+                restart_pending = TRUE;
                 wm_restart (selected_wm, 
                             capplet->window, 
                             restart_callback, 
@@ -854,7 +886,9 @@ add_dialog (void)
                 
                 wm_list_add (wm);
 
+                selected_wm = wm;
                 update_gui();
+                
                 capplet_widget_state_changed (CAPPLET_WIDGET (capplet), TRUE);
         }
 
@@ -898,6 +932,7 @@ delete (void)
         }
 
         wm_list_delete (selected_wm);
+        selected_wm = current_wm;
         update_gui();
         capplet_widget_state_changed (CAPPLET_WIDGET (capplet), TRUE);
 }
@@ -971,6 +1006,9 @@ wm_setup (void)
                             GTK_SIGNAL_FUNC (delete), NULL);
         gtk_box_pack_start (GTK_BOX (util_vbox), delete_button, FALSE, FALSE, 0);
         config_button = gtk_button_new_with_label ("");
+                                              
+        gtk_misc_set_padding (GTK_MISC (GTK_BIN (config_button)->child),
+                              GNOME_PAD_SMALL, 0);
         gtk_signal_connect (GTK_OBJECT (config_button), "clicked",
                             GTK_SIGNAL_FUNC (run_config), NULL);
         gtk_box_pack_start (GTK_BOX (bottom), config_button, FALSE, FALSE, 0);
@@ -1028,7 +1066,7 @@ main (int argc, char **argv)
         
 	        capplet_gtk_main ();
 
-                if (state != STATE_IDLE) {
+                if (restart_pending) {
                         quit_pending = TRUE;
                         gtk_main();
                 }
