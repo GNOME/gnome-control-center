@@ -144,6 +144,12 @@ static void render_tiled_image       (Pixmap pixmap, GC xgc,
 				      GdkPixbuf *pixbuf,
 				      gint x, gint y, 
 				      gint dwidth, gint dheight);
+static void tile_composite           (GdkPixbuf *dest, GdkPixbuf *src,
+				      gdouble sx, gdouble sy,
+				      gdouble swidth, gdouble sheight, 
+				      gdouble dwidth, gdouble dheight,
+				      gdouble scalex, gdouble scaley,
+				      gint alpha_value);
 
 static gboolean render_gradient_p    (Renderer *renderer,
 				      Preferences *prefs);
@@ -537,8 +543,8 @@ run_render_pipeline (Renderer *renderer,
 	    old_prefs->orientation != new_prefs->orientation ||
 	    !gdk_color_equal (old_prefs->color1, new_prefs->color1) ||
 	    !gdk_color_equal (old_prefs->color2, new_prefs->color2) ||
-	    old_prefs->adjust_brightness != new_prefs->adjust_brightness ||
-	    old_prefs->brightness_value != new_prefs->brightness_value ||
+	    old_prefs->adjust_opacity != new_prefs->adjust_opacity ||
+	    old_prefs->opacity != new_prefs->opacity ||
 	    ((wallpaper_pixbuf != NULL ||
 	      old_prefs->wallpaper_type != new_prefs->wallpaper_type) &&
 	     render_gradient_p (renderer, new_prefs)))
@@ -725,15 +731,13 @@ renderer_render_wallpaper (Renderer *renderer)
 			      &renderer->wwidth, &renderer->wheight,
 			      &renderer->srcx, &renderer->srcy);
 
-		if (renderer->prefs->adjust_brightness) {
+		if (renderer->prefs->adjust_opacity) {
 			guint alpha_value;
-			guint32 color;
+			guint32 colorv;
 
-			alpha_value = ABS (renderer->prefs->brightness_value);
-			alpha_value = 256 - alpha_value * alpha_value / 256;
+			alpha_value = renderer->prefs->opacity;
+			alpha_value = alpha_value * alpha_value / 256;
 			alpha_value = CLAMP (alpha_value, 0, 255);
-			color = (renderer->prefs->brightness_value < 0) ?
-				0 : (guint32) -1;
 
 			if (render_gradient_p (renderer, renderer->prefs)) {
 				scalex = (gdouble) renderer->wwidth / 
@@ -741,17 +745,37 @@ renderer_render_wallpaper (Renderer *renderer)
 				scaley = (gdouble) renderer->wheight / 
 					(gdouble) renderer->pheight;
 
-				gdk_pixbuf_composite_color
-					(renderer->wallpaper_pixbuf,
-					 renderer->pixbuf,
-					 renderer->wx, renderer->wy,
-					 renderer->wwidth, renderer->wheight,
-					 renderer->wx, renderer->wy,
-					 scalex, scaley,
-					 GDK_INTERP_BILINEAR,
-					 alpha_value, 0, 0, 65536,
-					 color, color);
+				if (renderer->prefs->wallpaper_type !=
+				    WPTYPE_TILED)
+					gdk_pixbuf_composite
+						(renderer->wallpaper_pixbuf,
+						 renderer->pixbuf,
+						 renderer->wx, renderer->wy,
+						 renderer->wwidth, 
+						 renderer->wheight,
+						 renderer->wx, renderer->wy,
+						 scalex, scaley,
+						 GDK_INTERP_BILINEAR,
+						 alpha_value);
+				else
+					tile_composite
+						(renderer->wallpaper_pixbuf,
+						 renderer->pixbuf,
+						 renderer->wx, renderer->wy,
+						 renderer->wwidth, 
+						 renderer->wheight,
+						 renderer->width,
+						 renderer->height,
+						 scalex, scaley,
+						 alpha_value);
 			} else {
+				GdkColor *color;
+
+				color = renderer->prefs->color1;
+				colorv = ((color->red & 0xff00) << 8) |
+					(color->green & 0xff00) |
+					((color->blue & 0xff00) >> 8);
+
 				if (renderer->pixbuf != NULL)
 					gdk_pixbuf_unref (renderer->pixbuf);
 
@@ -761,7 +785,7 @@ renderer_render_wallpaper (Renderer *renderer)
 					 renderer->wwidth, renderer->wheight,
 					 GDK_INTERP_BILINEAR,
 					 alpha_value, 65536,
-					 color, color);
+					 colorv, colorv);
 			}
 		}
 		else if (renderer->wwidth != renderer->pwidth ||
@@ -1085,6 +1109,27 @@ get_geometry (wallpaper_type_t wallpaper_type, GdkPixbuf *pixbuf,
 }
 
 static void
+tile_composite (GdkPixbuf *dest, GdkPixbuf *src,
+		gdouble sx, gdouble sy,
+		gdouble swidth, gdouble sheight, 
+		gdouble dwidth, gdouble dheight,
+		gdouble scalex, gdouble scaley,
+		gint alpha_value) 
+{
+	gdouble cx, cy;
+
+	for (cy = sy; cy < dheight; cy += sheight)
+		for (cx = sx; cx < dwidth; cx += swidth)
+			gdk_pixbuf_composite
+				(dest, src, cx, cy,
+				 MIN (swidth, dwidth - cx), 
+				 MIN (sheight, dheight - cy),
+				 cx, cy, scalex, scaley,
+				 GDK_INTERP_BILINEAR,
+				 alpha_value);
+}
+
+static void
 render_tiled_image (Pixmap pixmap, GC xgc, GdkPixbuf *pixbuf,
 		    gint x, gint y, gint dwidth, gint dheight)
 {
@@ -1111,6 +1156,7 @@ render_gradient_p (Renderer *renderer, Preferences *prefs)
 {
 	return prefs->gradient_enabled &&
 		!(prefs->wallpaper_enabled &&
+		  !prefs->adjust_opacity &&
 		  ((prefs->wallpaper_type == WPTYPE_TILED ||
 		    prefs->wallpaper_type == WPTYPE_SCALED) ||
 		   (renderer->pwidth == renderer->width &&

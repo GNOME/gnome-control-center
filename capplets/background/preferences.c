@@ -141,8 +141,8 @@ preferences_clone (Preferences *prefs)
 			g_strdup (prefs->wallpaper_sel_path);;
 
 	new_prefs->auto_apply        = prefs->auto_apply;
-	new_prefs->adjust_brightness = prefs->adjust_brightness;
-	new_prefs->brightness_value  = prefs->brightness_value;
+	new_prefs->adjust_opacity = prefs->adjust_opacity;
+	new_prefs->opacity  = prefs->opacity;
 
 	return object;
 }
@@ -237,15 +237,15 @@ preferences_load (Preferences *prefs)
 	}
 
 	string = gnome_config_get_string
-		("/Background/Default/adjustBrightness=true");
+		("/Background/Default/adjustOpacity=true");
 	if (!g_strcasecmp (string, "true"))
-		prefs->adjust_brightness = TRUE;
+		prefs->adjust_opacity = TRUE;
 	else if (g_strcasecmp (string, "false"))
-		prefs->adjust_brightness = FALSE;
+		prefs->adjust_opacity = FALSE;
 	g_free (string);
 
-	prefs->brightness_value = 
-		gnome_config_get_int ("/Background/Default/brightnessValue=0");
+	prefs->opacity = 
+		gnome_config_get_int ("/Background/Default/opacity=255");
 }
 
 void 
@@ -286,10 +286,10 @@ preferences_save (Preferences *prefs)
 	gnome_config_set_string ("/Background/Default/autoApply", 
 				 prefs->auto_apply ? "True" : "False");
 
-	gnome_config_set_string ("/Background/Default/adjustBrightness", 
-				 prefs->adjust_brightness ? "True" : "False");
-	gnome_config_set_int ("/Background/Default/brightnessValue", 
-			      prefs->brightness_value);
+	gnome_config_set_string ("/Background/Default/adjustOpacity", 
+				 prefs->adjust_opacity ? "True" : "False");
+	gnome_config_set_int ("/Background/Default/opacity", 
+			      prefs->opacity);
 
 	gnome_config_sync ();
 }
@@ -404,10 +404,10 @@ preferences_read_xml (xmlDocPtr xml_doc)
 				g_strdup (xmlNodeGetContent (node));
 		else if (!strcmp (node->name, "auto-apply"))
 			prefs->auto_apply = TRUE;
-		else if (!strcmp (node->name, "adjust-brightness"))
+		else if (!strcmp (node->name, "adjust-opacity"))
 			prefs->auto_apply = TRUE;
-		else if (!strcmp (node->name, "brightness-value"))
-			prefs->brightness_value = xml_read_int (node, NULL);
+		else if (!strcmp (node->name, "opacity"))
+			prefs->opacity = xml_read_int (node, NULL);
 	}
 
 	return prefs;
@@ -460,10 +460,10 @@ preferences_write_xml (Preferences *prefs)
 	if (prefs->auto_apply)
 		xmlNewChild (node, NULL, "auto-apply", NULL);
 
-	if (prefs->adjust_brightness)
-		xmlNewChild (node, NULL, "adjust-brightness", NULL);
-	xmlAddChild (node, xml_write_int ("brightness-value", NULL,
-					  prefs->brightness_value));
+	if (prefs->adjust_opacity)
+		xmlNewChild (node, NULL, "adjust-opacity", NULL);
+	xmlAddChild (node, xml_write_int ("opacity", NULL,
+					  prefs->opacity));
 
 	xmlDocSetRootElement (doc, node);
 

@@ -88,9 +88,9 @@ static void disable_toggled_cb              (GtkToggleButton *tb,
 					     PrefsWidget *prefs_widget);
 static void auto_apply_toggled_cb           (GtkToggleButton *tb, 
 					     PrefsWidget *prefs_widget);
-static void adjust_brightness_toggled_cb    (GtkToggleButton *tb,
+static void adjust_opacity_toggled_cb       (GtkToggleButton *tb,
 					     PrefsWidget *prefs_widget);
-static void brightness_adjust_changed_cb    (GtkAdjustment *adjustment,
+static void opacity_adjust_changed_cb       (GtkAdjustment *adjustment,
 					     PrefsWidget *prefs_widget);
 
 static void set_gradient_controls_sensitive   (PrefsWidget *prefs_widget,
@@ -99,7 +99,7 @@ static void set_wallpaper_controls_sensitive  (PrefsWidget *prefs_widget,
 					       gboolean s);
 static void set_background_controls_sensitive (PrefsWidget *prefs_widget,
 					       gboolean s);
-static void set_brightness_controls_sensitive (PrefsWidget *prefs_widget,
+static void set_opacity_controls_sensitive    (PrefsWidget *prefs_widget,
 					       gboolean s);
 
 guint
@@ -198,14 +198,14 @@ prefs_widget_init (PrefsWidget *prefs_widget)
 				       auto_apply_toggled_cb,
 				       prefs_widget);
 	glade_xml_signal_connect_data (prefs_widget->dialog_data,
-				       "adjust_brightness_toggled_cb",
-				       adjust_brightness_toggled_cb,
+				       "adjust_opacity_toggled_cb",
+				       adjust_opacity_toggled_cb,
 				       prefs_widget);
 
 	adjustment = gtk_range_get_adjustment
-		(GTK_RANGE (WID ("brightness_adjust")));
+		(GTK_RANGE (WID ("opacity_adjust")));
 	gtk_signal_connect (GTK_OBJECT (adjustment), "value-changed",
-			    GTK_SIGNAL_FUNC (brightness_adjust_changed_cb),
+			    GTK_SIGNAL_FUNC (opacity_adjust_changed_cb),
 			    prefs_widget);
 
 	gnome_entry_load_history
@@ -430,7 +430,7 @@ read_preferences (PrefsWidget *prefs_widget, Preferences *prefs)
 					      (WID ("auto_apply")),
 					      FALSE);
 
-	if (prefs->adjust_brightness)
+	if (prefs->adjust_opacity)
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON 
 					      (WID ("auto_apply")),
 					      TRUE);
@@ -439,21 +439,21 @@ read_preferences (PrefsWidget *prefs_widget, Preferences *prefs)
 					      (WID ("auto_apply")),
 					      FALSE);
 
-	if (prefs->adjust_brightness) {
+	if (prefs->adjust_opacity) {
 		gtk_toggle_button_set_active
-			(GTK_TOGGLE_BUTTON (WID ("adjust_brightness_toggle")),
+			(GTK_TOGGLE_BUTTON (WID ("adjust_opacity_toggle")),
 			 TRUE);
-		set_brightness_controls_sensitive (prefs_widget, TRUE);
+		set_opacity_controls_sensitive (prefs_widget, TRUE);
 	} else {
 		gtk_toggle_button_set_active
-			(GTK_TOGGLE_BUTTON (WID ("adjust_brightness_toggle")),
+			(GTK_TOGGLE_BUTTON (WID ("adjust_opacity_toggle")),
 			 FALSE);
-		set_brightness_controls_sensitive (prefs_widget, FALSE);
+		set_opacity_controls_sensitive (prefs_widget, FALSE);
 	}
 
 	adjustment = gtk_range_get_adjustment
-		(GTK_RANGE (WID ("brightness_adjust")));
-	gtk_adjustment_set_value (adjustment, prefs->brightness_value);
+		(GTK_RANGE (WID ("opacity_adjust")));
+	gtk_adjustment_set_value (adjustment, prefs->opacity);
 
 	preferences_apply_preview (prefs);
 }
@@ -709,7 +709,7 @@ auto_apply_toggled_cb (GtkToggleButton *tb, PrefsWidget *prefs_widget)
 }
 
 static void
-adjust_brightness_toggled_cb (GtkToggleButton *tb, PrefsWidget *prefs_widget)
+adjust_opacity_toggled_cb (GtkToggleButton *tb, PrefsWidget *prefs_widget)
 {
 	g_return_if_fail (prefs_widget != NULL);
 	g_return_if_fail (IS_PREFS_WIDGET (prefs_widget));
@@ -717,11 +717,11 @@ adjust_brightness_toggled_cb (GtkToggleButton *tb, PrefsWidget *prefs_widget)
 	g_return_if_fail (IS_PREFERENCES (prefs_widget->prefs));
 
 	if (gtk_toggle_button_get_active (tb)) {
-		prefs_widget->prefs->adjust_brightness = TRUE;
-		set_brightness_controls_sensitive (prefs_widget, TRUE);
+		prefs_widget->prefs->adjust_opacity = TRUE;
+		set_opacity_controls_sensitive (prefs_widget, TRUE);
 	} else {
-		prefs_widget->prefs->adjust_brightness = FALSE;
-		set_brightness_controls_sensitive (prefs_widget, FALSE);
+		prefs_widget->prefs->adjust_opacity = FALSE;
+		set_opacity_controls_sensitive (prefs_widget, FALSE);
 	}
 
 	preferences_changed (prefs_widget->prefs);
@@ -729,7 +729,7 @@ adjust_brightness_toggled_cb (GtkToggleButton *tb, PrefsWidget *prefs_widget)
 }
 
 static void
-brightness_adjust_changed_cb (GtkAdjustment *adjustment,
+opacity_adjust_changed_cb (GtkAdjustment *adjustment,
 			      PrefsWidget *prefs_widget) 
 {
 	g_return_if_fail (prefs_widget != NULL);
@@ -737,7 +737,7 @@ brightness_adjust_changed_cb (GtkAdjustment *adjustment,
 	g_return_if_fail (prefs_widget->prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs_widget->prefs));
 
-	prefs_widget->prefs->brightness_value = adjustment->value;
+	prefs_widget->prefs->opacity = adjustment->value;
 
 	preferences_changed (prefs_widget->prefs);
 	capplet_widget_state_changed (CAPPLET_WIDGET (prefs_widget), TRUE);
@@ -769,10 +769,10 @@ set_background_controls_sensitive (PrefsWidget *prefs_widget, gboolean s)
 }
 
 static void
-set_brightness_controls_sensitive (PrefsWidget *prefs_widget, gboolean s)
+set_opacity_controls_sensitive (PrefsWidget *prefs_widget, gboolean s)
 {
-	gtk_widget_set_sensitive (WID ("brightness_low_label"), s);
-	gtk_widget_set_sensitive (WID ("brightness_adjust"), s);
-	gtk_widget_set_sensitive (WID ("brightness_high_label"), s);
+	gtk_widget_set_sensitive (WID ("opacity_low_label"), s);
+	gtk_widget_set_sensitive (WID ("opacity_adjust"), s);
+	gtk_widget_set_sensitive (WID ("opacity_high_label"), s);
 }
 
