@@ -1,7 +1,47 @@
-gnome-control-center 2.9.92
+gnome-control-center 2.10.0
+
+background:
+- fix the crashes with non-UTF8 names (Rodney Dawes)
 
 general:
 - do not warn vnc users that their XKB does not work.  We already know.
+  (Jody Goldberg)
+
+translators:
+
+Vladimir Petkov (bg)
+Jordi Mallach (ca)
+Miloslav Trmac (cs)
+Martin Willemoes Hansen (da)
+Frank Arnold (de)
+Kostas Papadimas (el)
+Adam Weinberger (en_CA)
+David Lodge (en_GB)
+Francisco Javier F. Serrador (es)
+Priit Laes (et)
+Pauli Virtanen (fi)
+Simon Manlay (fr)
+Ankit Patel (gu)
+Gabor Kelemen (hu)
+Alessio Dessì (it)
+Takeshi AIHANA (ja)
+Changwoo Ryu (ko)
+Žygimantas Beručka (lt)
+Kjartan Maraas (nb)
+Reinout van Schouwen (nl)
+Kjartan Maraas (no)
+Gnome PL Team (pl)
+Raphael Higino (pt_BR)
+Duarte Loreto (pt)
+Dan Damian (ro)
+Leonid Kanter (ru)
+Marcel Telka (sk)
+Elian Myftiu (sq)
+Veljko M. Stanojevic (sr)
+Christian Rose (sv)
+Theppitak Karoonboonyanan (th)
+Maxim Dziumanenko (uk)
+Woodman Tuen (zh_TW)
 
 ------------------------------------------------------------------------------
 gnome-control-center 2.9.91
@@ -35,6 +75,8 @@ theme-switcher:
 - remove a load of leaks and make sure newly installed themes show up in the 
   relevant lists without having to close/open the dialog again (#166267)
   (Kjartan Maraas)
+- fix an infinite loop that was bringing single-CPU systems to their
+  knees (#160803) (Elijah Newren).
 
 Translators:
 
