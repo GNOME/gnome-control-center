@@ -375,16 +375,19 @@ install_dialog_response (GtkWidget *widget, int response_id, gpointer data)
 		return;
 	}
 
-	gtk_widget_hide (widget);
-	
-	switch (response_id)
-	{
-	case 0:
+	if (response_id == 0) {
 		raw = gtk_entry_get_text (GTK_ENTRY (gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (WID ("install_theme_picker")))));
+		if (raw == NULL || strlen (raw) <= 0)
+			return;
+
 		if (strncmp (raw, "http://", 7) && strncmp (raw, "ftp://", 6) && *raw != '/')
 			filename = gnome_file_entry_get_full_path (GNOME_FILE_ENTRY (WID ("install_theme_picker")), TRUE);
 		else
 			filename = g_strdup (raw);
+		if (filename == NULL)
+			return;
+
+		gtk_widget_hide (widget);
 
 		src_uri = gnome_vfs_uri_new (filename);
 		base = gnome_vfs_uri_extract_short_name (src_uri);
@@ -409,10 +412,8 @@ install_dialog_response (GtkWidget *widget, int response_id, gpointer data)
 		g_signal_connect (G_OBJECT (dlg), "done",
 				  G_CALLBACK (transfer_done_cb), path);
 		gtk_widget_show (dlg);
-		break;
-	default:
-		break;
-	}
+	} else
+		gtk_widget_hide (widget);
 }
 
 static void
