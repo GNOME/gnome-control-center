@@ -1,3 +1,14 @@
+2001-05-06  Bradford Hovinen  <hovinen@ximian.com>
+
+	* preferences.c (preferences_clone): Implement. Create a copy of a
+	preferences structure
+	(clone_cb): Implement
+	(read_prefs_from_db): Parse screensavers from a copy of the string
+	so that we don't overwrite the original
+
+	* main.c (main): Call preferences_clone instead of reloading old
+	preferences
+
 2001-05-05  Bradford Hovinen  <hovinen@ximian.com>
 
 	* prefs-widget.c (one_screensaver_cb): Fix segv

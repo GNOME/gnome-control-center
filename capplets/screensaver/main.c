@@ -400,8 +400,7 @@ main (int argc, char **argv)
 #endif /* HAVE_XIMIAN_ARCHIVER */
 
 	if (!res) {
-		old_prefs = preferences_new ();
-		preferences_load (old_prefs);
+		old_prefs = preferences_clone (prefs);
 		setup_capplet_widget ();
 
 		capplet_gtk_main ();

@@ -95,6 +95,7 @@ struct _Preferences
 typedef struct _Preferences Preferences;
 
 Preferences *preferences_new (void);
+Preferences *preferences_clone (Preferences *prefs);
 void preferences_destroy (Preferences *prefs);
 
 void preferences_load (Preferences *prefs);

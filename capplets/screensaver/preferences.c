@@ -59,7 +59,7 @@ remove_entry (GTree *config_db, gchar *entry)
 static void
 read_prefs_from_db (Preferences *prefs) 
 {
-	gchar *value;
+	gchar *value, *tmp;
 
 	value = g_tree_lookup (prefs->config_db, "verbose");
 	if (value) prefs->verbose = parse_boolean_resource (value);
@@ -95,7 +95,12 @@ read_prefs_from_db (Preferences *prefs)
 	if (value) prefs->cycle = parse_minutes_resource (value);
 
 	value = g_tree_lookup (prefs->config_db, "programs");
-	if (value) prefs->screensavers = parse_screensaver_list (value);
+
+	if (value) {
+		tmp = g_strdup (value);
+		prefs->screensavers = parse_screensaver_list (tmp);
+		g_free (tmp);
+	}
 }
 
 static void
@@ -167,6 +172,38 @@ preferences_new (void)
 	prefs->power_down_time  = 20;
 
 	return prefs;
+}
+
+static gint
+clone_cb (gchar *key, gchar *value, Preferences *new_prefs) 
+{
+	if (!strcmp (key, "programs"))
+		g_log (G_LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "Programs value is:\n%s", value);
+
+	g_tree_insert (new_prefs->config_db, key, g_strdup (value));
+	return 0;
+}
+
+Preferences *
+preferences_clone (Preferences *prefs) 
+{
+	Preferences *new_prefs;
+
+	new_prefs = g_new0 (Preferences, 1);
+
+	new_prefs->config_db = g_tree_new ((GCompareFunc) strcmp);
+
+	new_prefs->selection_mode = prefs->selection_mode;
+	new_prefs->power_management = prefs->power_management;
+	new_prefs->standby_time = prefs->standby_time;
+	new_prefs->suspend_time = prefs->suspend_time;
+	new_prefs->power_down_time = prefs->power_down_time;
+
+	g_tree_traverse (prefs->config_db, (GTraverseFunc) clone_cb,
+			 G_IN_ORDER, new_prefs);
+
+	read_prefs_from_db (new_prefs);
+	return new_prefs;
 }
 
 void
