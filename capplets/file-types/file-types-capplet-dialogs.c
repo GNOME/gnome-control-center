@@ -742,8 +742,6 @@ nautilus_mime_type_capplet_show_new_mime_window (void)
         GtkWidget *mime_entry;
 	GtkWidget *label;
 	GtkWidget *desc_entry;
-	GtkWidget *hbox;
-	GtkWidget *vbox;
 	const char *description;
 	char *mime_type, *tmp_str, c;
 	gboolean upper_case_alert;
@@ -754,34 +752,20 @@ nautilus_mime_type_capplet_show_new_mime_window (void)
         dialog = gnome_dialog_new (_("Add MIME Type"), GNOME_STOCK_BUTTON_OK, 
 				   GNOME_STOCK_BUTTON_CANCEL, NULL);
 	gnome_dialog_set_default (GNOME_DIALOG (dialog), 1);
-	label = gtk_label_new (_("Add a new MIME Type\n"
-				 "For example:  image/tiff; text/x-scheme"));
-	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
-	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-        gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), hbox, FALSE, FALSE, 0);
-	label = gtk_label_new (_("MIME Type:"));
-	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
-	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+
+	label = gtk_label_new (_("New MIME type (e.g. image/x-thumper):"));
+	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+        gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), label, TRUE, TRUE, 0);
+
 	mime_entry = gtk_entry_new ();
-        gtk_box_pack_start (GTK_BOX (hbox), mime_entry, TRUE, TRUE, 0);
-        gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), hbox, FALSE, FALSE, 0);
+        gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), mime_entry, TRUE, TRUE, 0);
 	
-        
-	vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
-	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), vbox, FALSE, FALSE, 0);
-	gtk_container_set_border_width (GTK_CONTAINER (vbox), GNOME_PAD_SMALL);
-	label = gtk_label_new (_("Type a description for this MIME type."));
-	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
-	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);	
-	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
-	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
-	gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (_("Description:")), FALSE, FALSE, 0);
+       	label = gtk_label_new (_("Description (e.g. Thumper image):"));
+	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+        gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), label, TRUE, TRUE, 0);
+
 	desc_entry = gtk_entry_new ();
-	gtk_box_pack_start (GTK_BOX (hbox), desc_entry, TRUE, TRUE, 0);
-	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+        gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), desc_entry, TRUE, TRUE, 0);
 	
 	/* Set up text entry validation signal */
 	gtk_signal_connect (GTK_OBJECT (mime_entry), "changed", 

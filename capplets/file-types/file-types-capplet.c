@@ -51,6 +51,9 @@
 #define DEFAULT_REGULAR_ICON "/nautilus/i-regular-24.png"
 #define DEFAULT_ACTION_ICON "/nautilus/i-executable.png"
 
+#define MAX_ICON_WIDTH_IN_LIST	18
+#define MAX_ICON_HEIGHT_IN_LIST	18
+
 enum {
 	COLUMN_DESCRIPTION = 0,
 	COLUMN_MIME_TYPE,
@@ -768,11 +771,10 @@ init_mime_capplet (const char *scroll_to_mime_type)
 		gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
 		default_menu = gtk_option_menu_new();
-		gtk_widget_set_usize (GTK_WIDGET (default_menu), 170, 0);
 		gtk_box_pack_start (GTK_BOX (hbox), default_menu, TRUE, TRUE, 0);
 
 		button = gtk_button_new_with_label (_("Edit List"));
-		gtk_widget_set_usize (GTK_WIDGET (button), 70, 0);
+		gtk_misc_set_padding (GTK_MISC (GTK_BIN(button)->child), 2, 1);
 		gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
 		gtk_signal_connect (GTK_OBJECT (button), "clicked", edit_default_clicked, mime_list);
 	}
@@ -1347,7 +1349,7 @@ add_mime_clicked (GtkWidget *widget, gpointer data)
 		pixbuf = capplet_get_icon_pixbuf (mime_string, FALSE);
 
 		if (pixbuf != NULL) {
-			pixbuf = capplet_gdk_pixbuf_scale_to_fit (pixbuf, 18, 18);
+			pixbuf = capplet_gdk_pixbuf_scale_to_fit (pixbuf, MAX_ICON_WIDTH_IN_LIST, MAX_ICON_HEIGHT_IN_LIST);
 			gdk_pixbuf_render_pixmap_and_mask (pixbuf, &pixmap, &bitmap, 100);
 			gtk_clist_set_pixtext (GTK_CLIST (mime_list), row, 0, text[0], 5, pixmap, bitmap);
 			gdk_pixbuf_unref (pixbuf);
@@ -1390,7 +1392,7 @@ add_mime_clicked (GtkWidget *widget, gpointer data)
 				
 		/* Set column icon */
 		if (pixbuf != NULL) {
-			pixbuf = capplet_gdk_pixbuf_scale_to_fit (pixbuf, 18, 18);
+			pixbuf = capplet_gdk_pixbuf_scale_to_fit (pixbuf, MAX_ICON_WIDTH_IN_LIST, MAX_ICON_HEIGHT_IN_LIST);
 			gdk_pixbuf_render_pixmap_and_mask (pixbuf, &pixmap, &bitmap, 100);
 			gtk_clist_set_pixtext (GTK_CLIST (mime_list), row, 3, text[3], 5, pixmap, bitmap);
 			gdk_pixbuf_unref (pixbuf);
@@ -1481,7 +1483,7 @@ nautilus_mime_type_capplet_update_mime_list_icon_and_description (const char *mi
 	pixbuf = capplet_get_icon_pixbuf (mime_string, FALSE);
 
 	if (pixbuf != NULL) {
-		pixbuf = capplet_gdk_pixbuf_scale_to_fit (pixbuf, 18, 18);
+		pixbuf = capplet_gdk_pixbuf_scale_to_fit (pixbuf, MAX_ICON_WIDTH_IN_LIST, MAX_ICON_HEIGHT_IN_LIST);
 		gdk_pixbuf_render_pixmap_and_mask (pixbuf, &pixmap, &bitmap, 100);
 		gtk_clist_set_pixtext (clist, row, 0, text, 5, pixmap, bitmap);
 		gdk_pixbuf_unref (pixbuf);
@@ -1525,7 +1527,7 @@ update_mime_list_action (const char *mime_string)
 	GnomeVFSMimeAction *action;
 	GnomeVFSMimeApplication *default_app;
 	OAF_ServerInfo *default_component;
-	char *text, *tmp_text;
+	char *text, *tmp_text, *icon_path;
 	int row;
 	
 	pixbuf = NULL;
@@ -1536,6 +1538,10 @@ update_mime_list_action (const char *mime_string)
 	action = gnome_vfs_mime_get_default_action (mime_string);
 	if (action != NULL) {
 		switch (action->action_type) {
+			/* FIXME: Big hunks of this code are copied/pasted in several
+			 * places in this file. Need to use common routines. One way
+			 * to find them is to search for "nautilus/gnome-library.png"
+			 */
 			case GNOME_VFS_MIME_ACTION_TYPE_APPLICATION:
 				/* Get the default application */
 				default_app = gnome_vfs_mime_get_default_application (mime_string);
@@ -1552,7 +1558,9 @@ update_mime_list_action (const char *mime_string)
 				tmp_text = name_from_oaf_server_info (default_component);
 				text = g_strdup_printf (_("View as %s"), tmp_text);
 				g_free (tmp_text);
-				pixbuf = gdk_pixbuf_new_from_file ("/gnome/share/pixmaps/nautilus/gnome-library.png");
+				icon_path = gnome_vfs_icon_path_from_filename ("nautilus/gnome-library.png");
+				pixbuf = gdk_pixbuf_new_from_file (icon_path);
+				g_free (icon_path);
 				CORBA_free (default_component);
 				break;
 				
@@ -1564,7 +1572,7 @@ update_mime_list_action (const char *mime_string)
 
 	/* Set column icon */
 	if (pixbuf != NULL) {
-		pixbuf = capplet_gdk_pixbuf_scale_to_fit (pixbuf, 18, 18);
+		pixbuf = capplet_gdk_pixbuf_scale_to_fit (pixbuf, MAX_ICON_WIDTH_IN_LIST, MAX_ICON_HEIGHT_IN_LIST);
 		gdk_pixbuf_render_pixmap_and_mask (pixbuf, &pixmap, &bitmap, 100);
 		gtk_clist_set_pixtext (GTK_CLIST (mime_list), row, 3, text, 5, pixmap, bitmap);
 		gdk_pixbuf_unref (pixbuf);
@@ -1609,6 +1617,7 @@ populate_mime_list (GList *type_list, GtkCList *clist)
 {
 	char *text[4], *tmp_text;        
 	const char *description;
+	char *icon_path;
 	char *extensions, *mime_string;
         gint row;
 	GList *element;
@@ -1654,7 +1663,11 @@ populate_mime_list (GList *type_list, GtkCList *clist)
 		pixbuf = capplet_get_icon_pixbuf (mime_string, FALSE);
 		
 		if (pixbuf != NULL) {
-			pixbuf = capplet_gdk_pixbuf_scale_to_fit (pixbuf, 18, 18);
+			/* FIXME: Big hunks of this code are copied/pasted in several
+			 * places in this file. Need to use common routines. One way
+			 * to find them is to search for MAX_ICON_WIDTH_IN_LIST
+			 */
+			pixbuf = capplet_gdk_pixbuf_scale_to_fit (pixbuf, MAX_ICON_WIDTH_IN_LIST, MAX_ICON_HEIGHT_IN_LIST);
 			gdk_pixbuf_render_pixmap_and_mask (pixbuf, &pixmap, &bitmap, 100);
 			gtk_clist_set_pixtext (clist, row, 0, text[0], 5, pixmap, bitmap);
 			gdk_pixbuf_unref (pixbuf);
@@ -1682,7 +1695,9 @@ populate_mime_list (GList *type_list, GtkCList *clist)
 				tmp_text = name_from_oaf_server_info (default_component);
 				text[3] = g_strdup_printf (_("View as %s"), tmp_text);
 				g_free (tmp_text);
-				pixbuf = gdk_pixbuf_new_from_file ("/gnome/share/pixmaps/nautilus/gnome-library.png");
+				icon_path = gnome_vfs_icon_path_from_filename ("nautilus/gnome-library.png");
+				pixbuf = gdk_pixbuf_new_from_file (icon_path);
+				g_free (icon_path);
 				CORBA_free (default_component);
 				break;
 				
@@ -1694,7 +1709,7 @@ populate_mime_list (GList *type_list, GtkCList *clist)
 			
 		/* Set column icon */
 		if (pixbuf != NULL) {
-			pixbuf = capplet_gdk_pixbuf_scale_to_fit (pixbuf, 18, 18);
+			pixbuf = capplet_gdk_pixbuf_scale_to_fit (pixbuf, MAX_ICON_WIDTH_IN_LIST, MAX_ICON_HEIGHT_IN_LIST);
 			gdk_pixbuf_render_pixmap_and_mask (pixbuf, &pixmap, &bitmap, 100);
 			gtk_clist_set_pixtext (clist, row, 3, text[3], 5, pixmap, bitmap);
 			gdk_pixbuf_unref (pixbuf);
@@ -1775,6 +1790,18 @@ column_clicked (GtkCList *clist, gint column, gpointer user_data)
 	gtk_clist_sort (clist);
 }
 
+static void
+mime_list_reset_row_height (GtkCList *list)
+{
+	guint height_for_icon;
+	guint height_for_text;
+
+	height_for_icon = MAX_ICON_HEIGHT_IN_LIST + 1;
+	height_for_text = GTK_WIDGET (list)->style->font->ascent +
+			  GTK_WIDGET (list)->style->font->descent + 1;
+	gtk_clist_set_row_height (list, MAX (height_for_icon, height_for_text));
+}
+
 static GtkWidget *
 create_mime_list_and_scroller (void)
 {
@@ -1813,6 +1840,17 @@ create_mime_list_and_scroller (void)
 	for (index = 0; index < TOTAL_COLUMNS; index++) {
 		gtk_clist_set_column_auto_resize (GTK_CLIST (mime_list), index, FALSE);
 	}
+
+	/* Make height tall enough for icons to look good.
+	 * This must be done after the list widget is realized, due to
+	 * a bug/design flaw in nautilus_clist_set_row_height. Connecting to
+	 * the "realize" signal is slightly too early, so we connect to
+	 * "map".
+	 */
+	gtk_signal_connect (GTK_OBJECT (mime_list),
+			    "map",
+			    mime_list_reset_row_height,
+			    NULL);
 		
         return window;
 }

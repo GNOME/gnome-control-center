@@ -434,7 +434,10 @@ nautilus_mime_type_show_icon_selection (NautilusMimeIconEntry *icon_entry)
 		gtk_object_set_user_data(GTK_OBJECT(icon_entry), iconsel);
 
 		gnome_icon_selection_add_directory (GNOME_ICON_SELECTION(iconsel), icon_entry->pick_dialog_dir);
-		
+
+		gtk_window_set_title (GTK_WINDOW (icon_entry->pick_dialog), _("Select an icon"));
+
+		/* FIXME bugzilla.eazel.com 6525: Can't pick icons from another directory */
 		/* Hide the file entry until we figure out how to deal with icon paths
 		outside of the standard gnome paths */
 		/*gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (icon_entry->pick_dialog)->vbox),
