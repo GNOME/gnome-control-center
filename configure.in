@@ -48,11 +48,6 @@ GLIB_DEFINE_LOCALEDIR(GNOMELOCALEDIR)
 AC_CHECK_FUNCS(usleep)
 AC_CHECK_FUNCS(putenv)
 AC_CHECK_FUNCS(setenv)
-AC_CHECK_FUNCS(ngettext, have_ngettext=yes)
-
-if test x"$have_ngettext" != "xyes"; then
-	AC_MSG_ERROR([Your Gettext installation doesn't seem to support ngettext to handle translation of plural forms. Please install GNU Gettext])
-fi;
 
 AC_PATH_XTRA
 x_libs="$X_PRE_LIBS $X_LIBS -lX11 $X_EXTRA_LIBS"
