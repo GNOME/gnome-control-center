@@ -35,9 +35,6 @@
 #include "archive.h"
 #include "util.h"
 
-typedef struct _GRealTree  GRealTree;
-typedef struct _GTreeNode  GTreeNode;
-
 typedef struct _foreach_t foreach_t;
 
 struct _foreach_t 
@@ -50,14 +47,13 @@ struct _foreach_t
 
 static GtkObjectClass *parent_class;
 
-static Archive *user_archive;
-static Archive *global_archive;
-
 enum {
 	ARG_0,
 	ARG_PREFIX,
 	ARG_IS_GLOBAL
 };
+
+#define ARCHIVE_FROM_SERVANT(servant) (ARCHIVE (bonobo_object_from_servant (servant)))
 
 static void archive_init          (Archive *archive);
 static void archive_class_init    (ArchiveClass *klass);
@@ -74,29 +70,128 @@ static void archive_get_arg       (GtkObject *object,
 
 static void load_all_locations    (Archive *archive);
 
-guint
-archive_get_type (void) 
+/* CORBA interface methods */
+
+static ConfigArchiver_Location
+impl_ConfigArchiver_Archive_getLocation (PortableServer_Servant  servant,
+					 const CORBA_char       *locid,
+					 CORBA_Environment      *ev) 
 {
-	static guint archive_type;
-
-	if (!archive_type) {
-		GtkTypeInfo archive_info = {
-			"Archive",
-			sizeof (Archive),
-			sizeof (ArchiveClass),
-			(GtkClassInitFunc) archive_class_init,
-			(GtkObjectInitFunc) archive_init,
-			(GtkArgSetFunc) NULL,
-			(GtkArgGetFunc) NULL
-		};
-
-		archive_type = 
-			gtk_type_unique (gtk_object_get_type (),
-					 &archive_info);
-	}
-
-	return archive_type;
+	return CORBA_Object_duplicate (BONOBO_OBJREF (archive_get_location (ARCHIVE_FROM_SERVANT (servant), locid)), ev);
 }
+
+static ConfigArchiver_Location
+impl_ConfigArchiver_Archive_createLocation (PortableServer_Servant         servant,
+					    const CORBA_char              *locid,
+					    const CORBA_char              *label,
+					    const ConfigArchiver_Location  parent_ref,
+					    CORBA_Environment             *ev) 
+{
+	Location *loc;
+
+	loc = archive_create_location (ARCHIVE_FROM_SERVANT (servant), locid, label,
+				       LOCATION (bonobo_object_from_servant (parent_ref)));
+
+	return bonobo_object_dup_ref (BONOBO_OBJREF (loc), ev);
+}
+
+static void
+build_list_cb (Archive *archive, Location *location, GList **list) 
+{
+	*list = g_list_prepend (*list, bonobo_object_dup_ref (BONOBO_OBJREF (location), NULL));
+}
+
+static ConfigArchiver_LocationSeq *
+impl_ConfigArchiver_Archive_getChildLocations (PortableServer_Servant   servant,
+					       ConfigArchiver_Location  location_ref,
+					       CORBA_Environment       *ev) 
+{
+	ConfigArchiver_LocationSeq *ret;
+	Archive *archive;
+	Location *location;
+	GList *locs = NULL, *tmp;
+	guint i = 0;
+
+	archive = ARCHIVE_FROM_SERVANT (servant);
+
+	if (location_ref == CORBA_OBJECT_NIL)
+		location = NULL;
+	else
+		location = LOCATION (bonobo_object_from_servant (location_ref->servant));
+
+	archive_foreach_child_location (archive, (LocationCB) build_list_cb, location, &locs);
+
+	ret = ConfigArchiver_LocationSeq__alloc ();
+	ret->_length = g_list_length (locs);
+	ret->_buffer = CORBA_sequence_ConfigArchiver_Location_allocbuf (ret->_length);
+
+	for (tmp = locs; tmp != NULL; tmp = tmp->next)
+		ret->_buffer[i++] = tmp->data;
+
+	g_list_free (locs);
+	return ret;
+}
+
+static CORBA_char *
+impl_ConfigArchiver_Archive__get_prefix (PortableServer_Servant  servant,
+					 CORBA_Environment      *ev) 
+{
+	return CORBA_string_dup (ARCHIVE_FROM_SERVANT (servant)->prefix);
+}
+
+static CORBA_boolean
+impl_ConfigArchiver_Archive__get_isGlobal (PortableServer_Servant  servant,
+					   CORBA_Environment      *ev) 
+{
+	return ARCHIVE_FROM_SERVANT (servant)->is_global;
+}
+
+static ConfigArchiver_BackendList
+impl_ConfigArchiver_Archive__get_backendList (PortableServer_Servant  servant,
+					      CORBA_Environment      *ev) 
+{
+	return bonobo_object_dup_ref (BONOBO_OBJREF (ARCHIVE_FROM_SERVANT (servant)->backend_list), ev);
+}
+
+static ConfigArchiver_Location
+impl_ConfigArchiver_Archive__get_currentLocation (PortableServer_Servant  servant,
+						  CORBA_Environment      *ev)
+{
+	return CORBA_Object_duplicate (BONOBO_OBJREF (archive_get_current_location (ARCHIVE_FROM_SERVANT (servant))), ev);
+}
+
+static void
+impl_ConfigArchiver_Archive__set_currentLocation (PortableServer_Servant   servant,
+						  ConfigArchiver_Location  location_ref,
+						  CORBA_Environment       *ev) 
+{
+	Archive *archive = ARCHIVE_FROM_SERVANT (servant);
+	Location *location;
+
+	location = LOCATION (bonobo_object_from_servant (location_ref->servant));
+
+	if (location == NULL)
+		/* bonobo_exception_set (ev, ex_ConfigArchiver_Archive_LocationNotFound) */;
+	else
+		archive_set_current_location (archive, location);
+}
+
+static void
+impl_ConfigArchiver_Archive__set_currentLocationId (PortableServer_Servant   servant,
+						    const CORBA_char        *locid,
+						    CORBA_Environment       *ev) 
+{
+	archive_set_current_location_id (ARCHIVE_FROM_SERVANT (servant), locid);
+}
+
+CORBA_char *
+impl_ConfigArchiver_Archive__get_currentLocationId (PortableServer_Servant  servant,
+						    CORBA_Environment      *ev) 
+{
+	return CORBA_string_dup (archive_get_current_location_id (ARCHIVE_FROM_SERVANT (servant)));
+}
+
+BONOBO_X_TYPE_FUNC_FULL (Archive, ConfigArchiver_Archive, BONOBO_X_OBJECT_TYPE, archive);
 
 static void
 archive_init (Archive *archive) 
@@ -126,7 +221,20 @@ archive_class_init (ArchiveClass *klass)
 				 GTK_ARG_READWRITE | GTK_ARG_CONSTRUCT_ONLY,
 				 ARG_IS_GLOBAL);
 
-	parent_class = gtk_type_class (gtk_object_get_type ());
+	klass->epv.getLocation            = impl_ConfigArchiver_Archive_getLocation;
+	klass->epv.createLocation         = impl_ConfigArchiver_Archive_createLocation;
+	klass->epv.getChildLocations      = impl_ConfigArchiver_Archive_getChildLocations;
+
+	klass->epv._get_prefix            = impl_ConfigArchiver_Archive__get_prefix;
+	klass->epv._get_isGlobal          = impl_ConfigArchiver_Archive__get_isGlobal;
+	klass->epv._get_backendList       = impl_ConfigArchiver_Archive__get_backendList;
+	klass->epv._get_currentLocation   = impl_ConfigArchiver_Archive__get_currentLocation;
+	klass->epv._get_currentLocationId = impl_ConfigArchiver_Archive__get_currentLocationId;
+
+	klass->epv._set_currentLocation   = impl_ConfigArchiver_Archive__set_currentLocation;
+	klass->epv._set_currentLocationId = impl_ConfigArchiver_Archive__set_currentLocationId;
+
+	parent_class = gtk_type_class (BONOBO_X_OBJECT_TYPE);
 }
 
 static void
@@ -225,16 +333,11 @@ archive_construct (Archive *archive, gboolean is_new)
  * Return value: Reference to archive
  **/
 
-GtkObject *
+BonoboObject *
 archive_load (gboolean is_global) 
 {
-	GtkObject *object;
+	BonoboObject *object;
 	gchar *prefix;
-
-	if (is_global && global_archive != NULL)
-		return GTK_OBJECT (global_archive);
-	else if (user_archive != NULL)
-		return GTK_OBJECT (user_archive);
 
 	if (is_global)
 		prefix = "/var/ximian-setup-tools";
@@ -242,10 +345,10 @@ archive_load (gboolean is_global)
 		prefix = g_concat_dir_and_file (g_get_home_dir (),
 						".gnome/capplet-archive");
 
-	object = gtk_object_new (archive_get_type (),
-				 "prefix", prefix,
-				 "is-global", is_global,
-				 NULL);
+	object = BONOBO_OBJECT (gtk_object_new (archive_get_type (),
+						"prefix", prefix,
+						"is-global", is_global,
+						NULL));
 
 	if (!is_global)
 		g_free (prefix);
@@ -253,22 +356,17 @@ archive_load (gboolean is_global)
 	if (archive_construct (ARCHIVE (object), FALSE) == FALSE &&
 	    archive_construct (ARCHIVE (object), TRUE) == FALSE)
 	{
-		gtk_object_destroy (object);
+		bonobo_object_unref (object);
 		return NULL;
 	}
-
-	if (is_global)
-		global_archive = ARCHIVE (object);
-	else
-		user_archive = ARCHIVE (object);
 
 	return object;
 }
 
 static gint
-free_location_cb (gchar *locid, Location *location) 
+free_location_cb (gchar *locid, BonoboObject *location) 
 {
-	location_close (location);
+	bonobo_object_unref (location);
 	g_free (locid);
 
 	return FALSE;
@@ -296,36 +394,16 @@ archive_destroy (GtkObject *object)
 	if (archive->current_location_id != NULL)
 		g_free (archive->current_location_id);
 
-	GTK_OBJECT_CLASS (parent_class)->destroy (GTK_OBJECT (archive));
+	if (archive->backend_list != NULL)
+		bonobo_object_unref (BONOBO_OBJECT (archive->backend_list));
 
-	if (archive->is_global)
-		global_archive = NULL;
-	else
-		user_archive = NULL;
+	GTK_OBJECT_CLASS (parent_class)->destroy (GTK_OBJECT (archive));
 
 	DEBUG_MSG ("Exit");
 }
 
 /**
- * archive_close:
- * @archive: 
- * 
- * Closes the given archive handle. Also closes all locations under this
- * archive.
- **/
-
-void
-archive_close (Archive *archive) 
-{
-	g_return_if_fail (archive != NULL);
-	g_return_if_fail (IS_ARCHIVE (archive));
-
-	gtk_object_destroy (GTK_OBJECT (archive));
-}
-
-/**
  * archive_get_location:
- * @archive: 
  * @locid: 
  * 
  * Get a reference to the location with the given name. 
@@ -334,57 +412,67 @@ archive_close (Archive *archive)
  **/
 
 Location *
-archive_get_location (Archive *archive, const gchar *locid) 
+archive_get_location (Archive       *archive,
+		      const gchar   *locid) 
 {
-	GtkObject *loc_obj;
+	Location *loc_obj;
 	gchar *tmp;
 
 	g_return_val_if_fail (archive != NULL, NULL);
 	g_return_val_if_fail (IS_ARCHIVE (archive), NULL);
 	g_return_val_if_fail (locid != NULL, NULL);
 
+	DEBUG_MSG ("Enter: %s", locid);
+
 	/* Stupid borken glib... */
 	tmp = g_strdup (locid);
 	loc_obj = g_tree_lookup (archive->locations, tmp);
 	g_free (tmp);
 
-	if (!loc_obj) {
-		loc_obj = location_open (archive, locid);
+	if (loc_obj == NULL) {
+		loc_obj = LOCATION (location_open (archive, locid));
 
-		if (!loc_obj) return NULL;
-
-		if (loc_obj)
+		if (loc_obj == NULL)
+			return NULL;
+		else
 			g_tree_insert (archive->locations, 
 				       g_strdup (locid), loc_obj);
+	} else {
+		bonobo_object_ref (BONOBO_OBJECT (loc_obj));
 	}
 
-	if (loc_obj) {
-		gtk_object_ref (loc_obj);
-		return LOCATION (loc_obj);
-	} else {
-		return NULL;
-	}
+	return loc_obj;
 }
 
 /**
- * archive_register_location:
- * @archive: 
- * @location: 
- * 
- * Register a location with the archive; invoked by location_new 
- **/
+ * archive_create_location:
+ * @archive:
+ * @location:
+ *
+ * Creates a new location
+ */
 
-void
-archive_register_location (Archive *archive, Location *location) 
+Location *
+archive_create_location (Archive     *archive,
+			 const gchar *locid,
+			 const gchar *label,
+			 Location    *parent)
 {
-	g_return_if_fail (archive != NULL);
-	g_return_if_fail (IS_ARCHIVE (archive));
-	g_return_if_fail (location != NULL);
-	g_return_if_fail (IS_LOCATION (location));
+	Location *location;
 
-	g_tree_insert (archive->locations,
-		       g_strdup (location_get_id (location)),
-		       location);
+	g_return_val_if_fail (archive != NULL, NULL);
+	g_return_val_if_fail (IS_ARCHIVE (archive), NULL);
+	g_return_val_if_fail (locid != NULL, NULL);
+	g_return_val_if_fail (label != NULL, NULL);
+	g_return_val_if_fail (parent == NULL || IS_LOCATION (parent), NULL);
+
+	location = LOCATION (location_new (archive, locid, label, parent));
+
+	if (location == NULL)
+		return NULL;
+
+	g_tree_insert (archive->locations, g_strdup (locid), location);
+	return location;
 }
 
 /**
@@ -406,7 +494,7 @@ archive_unregister_location (Archive *archive, Location *location)
 	g_return_if_fail (IS_LOCATION (location));
 
 	if (GTK_OBJECT_DESTROYED (archive)) return;
-	
+
 	tmp = g_strdup (location_get_id (location));
 	g_tree_remove (archive->locations, tmp);
 	g_free (tmp);
@@ -414,7 +502,6 @@ archive_unregister_location (Archive *archive, Location *location)
 
 /**
  * archive_get_current_location:
- * @archive: object
  * 
  * Convenience function to get a pointer to the current location
  * 
@@ -425,10 +512,12 @@ archive_unregister_location (Archive *archive, Location *location)
 Location *
 archive_get_current_location (Archive *archive)
 {
-	const gchar *locid = archive_get_current_location_id (archive);
+	const gchar *locid;
 
 	g_return_val_if_fail (archive != NULL, NULL);
 	g_return_val_if_fail (IS_ARCHIVE (archive), NULL);
+
+	locid = archive_get_current_location_id (archive);
 
 	if (locid == NULL)
 		return NULL;
@@ -438,7 +527,6 @@ archive_get_current_location (Archive *archive)
 
 /**
  * archive_set_current_location:
- * @archive: object
  * @location: Location to which to set archive
  * 
  * Set the current location in an archive to the location given; apply
@@ -446,33 +534,35 @@ archive_get_current_location (Archive *archive)
  **/
 
 void
-archive_set_current_location (Archive *archive, Location *location) 
+archive_set_current_location (Archive  *archive,
+			      Location *location) 
 {
+	Location *old_location;
 	GList *backends;
-	Location *old_location = archive_get_current_location (archive);
 
 	g_return_if_fail (archive != NULL);
 	g_return_if_fail (IS_ARCHIVE (archive));
 	g_return_if_fail (location != NULL);
 	g_return_if_fail (IS_LOCATION (location));
 
+	old_location = archive_get_current_location (archive);
+
 	archive_set_current_location_id (archive, location_get_id (location));
 
 	backends = location_get_changed_backends (location, old_location);
-	location_rollback_backends_to (location, NULL, backends, TRUE);
-	g_list_free (backends);
+	location_rollback_backends_to (location, NULL, 0, backends, TRUE);
 }
 
 /**
  * archive_set_current_location_id: 
- * @archive: 
  * @name: 
  * 
  * Sets the current location's name, but does not invoke any rollback
  **/
 
 void
-archive_set_current_location_id (Archive *archive, const gchar *locid) 
+archive_set_current_location_id (Archive       *archive,
+				 const gchar   *locid) 
 {
 	g_return_if_fail (archive != NULL);
 	g_return_if_fail (IS_ARCHIVE (archive));
@@ -497,7 +587,6 @@ archive_set_current_location_id (Archive *archive, const gchar *locid)
 
 /**
  * archive_get_current_location_id:
- * @archive: object
  * 
  * Get the name of the current location
  * 
@@ -511,6 +600,7 @@ archive_get_current_location_id (Archive *archive)
 {
 	gboolean def;
 	Location *loc;
+	Location *current_location;
 
 	g_return_val_if_fail (archive != NULL, NULL);
 	g_return_val_if_fail (IS_ARCHIVE (archive), NULL);
@@ -526,18 +616,24 @@ archive_get_current_location_id (Archive *archive)
 				("/capplet-archive/config/current/location=default", &def);
 
 		/* Create default location if it does not exist */
-		if (def && archive_get_location
-		    (archive, archive->current_location_id) == NULL)
-		{
-			loc = LOCATION
-				(location_new (archive,
-					       archive->current_location_id,
-					       NULL));
-			if (archive->is_global &&
-			    location_store_full_snapshot (loc) < 0)
-			{
-				location_delete (loc);
-				return NULL;
+		if (def) {
+			current_location =
+				archive_get_location (archive, archive->current_location_id);
+
+			if (current_location == NULL) {
+				loc = LOCATION
+					(location_new (archive,
+						       archive->current_location_id,
+						       _("Default location"),
+						       NULL));
+				if (archive->is_global &&
+				    location_store_full_snapshot (loc) < 0)
+				{
+					location_delete (loc);
+					return NULL;
+				}
+			} else {
+				bonobo_object_unref (BONOBO_OBJECT (current_location));
 			}
 		}
 	}
@@ -603,10 +699,11 @@ static gint
 foreach_cb (gchar *key, Location *value, foreach_t *data) 
 {
 	if (location_get_parent (value) == data->parent)
-		return data->callback (data->archive, value, 
-				       data->user_data);
-	else
-		return 0;
+		data->callback (data->archive, value, data->user_data);
+
+	bonobo_object_unref (BONOBO_OBJECT (value));
+
+	return 0;
 }
 
 /**

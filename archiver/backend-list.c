@@ -42,7 +42,9 @@ struct _BackendListPrivate
 	GList    *backend_ids;
 };
 
-static GtkObjectClass *parent_class;
+#define BACKEND_LIST_FROM_SERVANT(servant) (BACKEND_LIST (bonobo_object_from_servant (servant)))
+
+static BonoboXObjectClass *parent_class;
 
 static void backend_list_init        (BackendList *backend_list);
 static void backend_list_class_init  (BackendListClass *class);
@@ -59,29 +61,63 @@ static void backend_list_finalize    (GtkObject *object);
 static void do_load                  (BackendList *backend_list);
 static void do_save                  (BackendList *backend_list);
 
-guint
-backend_list_get_type (void)
+/* CORBA interface methods */
+
+static CORBA_boolean
+impl_ConfigArchiver_BackendList_contains (PortableServer_Servant  servant,
+					  const CORBA_char       *backend_id,
+					  CORBA_Environment      *ev) 
 {
-	static guint backend_list_type = 0;
-
-	if (!backend_list_type) {
-		GtkTypeInfo backend_list_info = {
-			"BackendList",
-			sizeof (BackendList),
-			sizeof (BackendListClass),
-			(GtkClassInitFunc) backend_list_class_init,
-			(GtkObjectInitFunc) backend_list_init,
-			(GtkArgSetFunc) NULL,
-			(GtkArgGetFunc) NULL
-		};
-
-		backend_list_type = 
-			gtk_type_unique (gtk_object_get_type (), 
-					 &backend_list_info);
-	}
-
-	return backend_list_type;
+	return backend_list_contains (BACKEND_LIST_FROM_SERVANT (servant), backend_id);
 }
+
+static void
+impl_ConfigArchiver_BackendList_add (PortableServer_Servant  servant,
+				     const CORBA_char       *backend_id,
+				     CORBA_Environment      *ev)
+{
+	backend_list_add (BACKEND_LIST_FROM_SERVANT (servant), backend_id);
+}
+
+static void
+impl_ConfigArchiver_BackendList_remove (PortableServer_Servant  servant,
+					const CORBA_char       *backend_id,
+					CORBA_Environment      *ev) 
+{
+	backend_list_remove (BACKEND_LIST_FROM_SERVANT (servant), backend_id);
+}
+
+static void
+impl_ConfigArchiver_BackendList_save (PortableServer_Servant  servant,
+				      CORBA_Environment      *ev) 
+{
+	backend_list_save (BACKEND_LIST_FROM_SERVANT (servant));
+}
+
+static ConfigArchiver_StringSeq *
+impl_ConfigArchiver_BackendList__get_backends (PortableServer_Servant  servant,
+					       CORBA_Environment      *ev) 
+{
+	ConfigArchiver_StringSeq *seq;
+	BackendList *backend_list = BACKEND_LIST_FROM_SERVANT (servant);
+	guint i = 0;
+	GList *node;
+
+	g_return_val_if_fail (backend_list != NULL, NULL);
+	g_return_val_if_fail (IS_BACKEND_LIST (backend_list), NULL);
+
+	seq = ConfigArchiver_StringSeq__alloc ();
+	seq->_length = g_list_length (backend_list->p->backend_ids);
+	seq->_buffer = CORBA_sequence_CORBA_string_allocbuf (seq->_length);
+	CORBA_sequence_set_release (seq, TRUE);
+
+	for (node = backend_list->p->backend_ids; node != NULL; node = node->next)
+		seq->_buffer[i++] = CORBA_string_dup (node->data);
+
+	return seq;
+}
+
+BONOBO_X_TYPE_FUNC_FULL (BackendList, ConfigArchiver_BackendList, BONOBO_X_OBJECT_TYPE, backend_list);
 
 static void
 backend_list_init (BackendList *backend_list)
@@ -104,8 +140,15 @@ backend_list_class_init (BackendListClass *class)
 	object_class->set_arg = backend_list_set_arg;
 	object_class->get_arg = backend_list_get_arg;
 
-	parent_class = GTK_OBJECT_CLASS
-		(gtk_type_class (gtk_object_get_type ()));
+	class->epv.contains      = impl_ConfigArchiver_BackendList_contains;
+	class->epv.add           = impl_ConfigArchiver_BackendList_add;
+	class->epv.remove        = impl_ConfigArchiver_BackendList_remove;
+	class->epv.save          = impl_ConfigArchiver_BackendList_save;
+
+	class->epv._get_backends = impl_ConfigArchiver_BackendList__get_backends;
+
+	parent_class = BONOBO_X_OBJECT_CLASS
+		(gtk_type_class (BONOBO_X_OBJECT_TYPE));
 }
 
 static void
@@ -173,16 +216,17 @@ backend_list_finalize (GtkObject *object)
 	GTK_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
-GtkObject *
+BonoboObject *
 backend_list_new (gboolean is_global) 
 {
-	return gtk_object_new (backend_list_get_type (),
-			       "is-global", is_global,
-			       NULL);
+	return BONOBO_OBJECT
+		(gtk_object_new (backend_list_get_type (),
+				 "is-global", is_global,
+				 NULL));
 }
 
 gboolean
-backend_list_contains (BackendList *backend_list, gchar *backend_id)
+backend_list_contains (BackendList *backend_list, const gchar *backend_id)
 {
 	GList *node;
 
@@ -226,25 +270,33 @@ backend_list_foreach (BackendList *backend_list, BackendCB callback,
 }
 
 void
-backend_list_add (BackendList *backend_list, gchar *backend_id)
+backend_list_add (BackendList *backend_list, const gchar *backend_id)
 {
 	g_return_if_fail (backend_list != NULL);
 	g_return_if_fail (IS_BACKEND_LIST (backend_list));
 	g_return_if_fail (backend_id != NULL);
 
 	backend_list->p->backend_ids =
-		g_list_prepend (backend_list->p->backend_ids, backend_id);
+		g_list_prepend (backend_list->p->backend_ids, g_strdup (backend_id));
 }
 
 void
-backend_list_remove (BackendList *backend_list, gchar *backend_id)
+backend_list_remove (BackendList *backend_list, const gchar *backend_id)
 {
+	gchar *tmp;
+	GList *node;
+
 	g_return_if_fail (backend_list != NULL);
 	g_return_if_fail (IS_BACKEND_LIST (backend_list));
 	g_return_if_fail (backend_id != NULL);
 
+	tmp = g_strdup (backend_id);
+	node = g_list_find (backend_list->p->backend_ids, tmp);
 	backend_list->p->backend_ids = 
-		g_list_remove (backend_list->p->backend_ids, backend_id);
+		g_list_remove_link (backend_list->p->backend_ids, node);
+	g_free (node->data);
+	g_free (tmp);
+	g_list_free_1 (node);
 }
 
 void

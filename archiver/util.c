@@ -95,3 +95,13 @@ parse_date (char *str)
 
 	return date;
 }
+
+struct tm *
+dup_date (const struct tm *date) 
+{
+	struct tm *date1;
+
+	date1 = g_new (struct tm, 1);
+	memcpy (date1, date, sizeof (struct tm));
+	return date1;
+}

@@ -1,0 +1,114 @@
+/* -*- mode: idl; style: linux -*- */
+
+/* Bonobo_ConfigArchiver.idl
+ * Copyright (C) 2001 Ximian, Inc.
+ *
+ * Written by Bradford Hovinen <hovinen@ximian.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2, or (at your option)
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
+ * 02111-1307, USA.
+ */
+
+#ifndef __CONFIGARCHIVER_IDL
+#define __CONFIGARCHIVER_IDL
+
+%{
+#pragma include_defs bonobo/Bonobo.h
+%}
+#pragma inhibit push
+
+#include <Bonobo_Unknown.idl>
+
+#pragma inhibit pop
+
+module ConfigArchiver {
+	typedef unsigned long long Time;
+	typedef sequence<string> StringSeq;
+
+	enum ContainmentType {
+		CONTAIN_NONE, CONTAIN_PARTIAL, CONTAIN_FULL
+	};
+
+	enum StoreType {
+		STORE_DEFAULT, STORE_FULL, STORE_COMPARE_PARENT, STORE_MASK_PREVIOUS
+	};
+
+	interface BackendList : Bonobo::Unknown {
+		readonly attribute StringSeq        backends;
+
+		boolean            contains                 (in string            backendId);
+
+		void               add                      (in string            backendId);
+		void               remove                   (in string            backendId);
+
+		void               save                     ();
+	};
+
+	interface Location : Bonobo::Unknown {
+		readonly attribute Location         parent;
+		readonly attribute string           path;
+		readonly attribute StringSeq        backendList;
+
+		attribute string                    label;
+		attribute string                    id;
+
+		string             getStorageFilename       (in string            backendId,
+							     in boolean           isDefaultData);
+
+		string             getRollbackFilename      (in Time              time,
+							     in long              steps,
+							     in string            backendId,
+							     in boolean           parentChain);
+
+		void               rollbackBackends         (in Time              time,
+							     in long              steps,
+							     in StringSeq         backendId,
+							     in boolean           parentChain);
+
+		Time               getModificationTime      (in string            backendId);
+
+		ContainmentType    contains                 (in string            backendId);
+		long               addBackend               (in string            backendId,
+							     in ContainmentType   type);
+		void               removeBackend            (in string            backendId);
+
+		boolean            doesBackendChange        (in Location          location,
+							     in string            backendId);
+
+		void               garbageCollect           ();
+
+		void               delete                   ();
+	};
+
+	typedef sequence<Location> LocationSeq;
+
+	interface Archive : Bonobo::Unknown {
+		readonly attribute string      prefix;
+		readonly attribute boolean     isGlobal;
+		readonly attribute BackendList backendList;
+
+		attribute Location             currentLocation;
+		attribute string               currentLocationId;
+
+		Location           getLocation              (in string              locid);
+		Location           createLocation           (in string              locid,
+							     in string              label,
+							     in Location            parent);
+
+		LocationSeq        getChildLocations        (in Location            parent);
+	};
+};
+
+#endif /* ! __CONFIGARCHIVER_IDL */

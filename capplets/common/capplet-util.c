@@ -334,7 +334,7 @@ get_default_moniker (const gchar *binary)
 	else tmp++;
 	if ((tmp1 = strstr (tmp, "-capplet")) != NULL) *tmp1 = '\0';
 
-	res = g_strconcat ("archiver:", tmp, NULL);
+	res = g_strconcat ("archive:user-archive#archiverdb:", tmp, NULL);
 	g_free (s);
 	return res;
 }

@@ -1,4 +1,4 @@
-SUBDIRS = archiver capplets control-center po intl
+SUBDIRS = archiver capplets control-center idl po intl
 #I removed the root-manager for now
 #
 # it generated this error :

@@ -17,8 +17,13 @@
 #include <bonobo/bonobo-exception.h>
 
 #include "bonobo-config-archiver.h"
+#include "archive.h"
+#include "util.h"
 
 #define EX_SET_NOT_FOUND(ev) bonobo_exception_set (ev, ex_Bonobo_Moniker_InterfaceNotFound)
+
+static Archive *user_archive = NULL;
+static Archive *global_archive = NULL;
 
 /* parse_name
  *
@@ -52,16 +57,85 @@ parse_name (const gchar *name, gchar **backend_id, gchar **location)
 	return TRUE;
 }
 
-static Bonobo_Unknown
-archiver_resolve (BonoboMoniker               *moniker,
-		  const Bonobo_ResolveOptions *options,
-		  const CORBA_char            *requested_interface,
-		  CORBA_Environment           *ev)
+static void
+archive_destroy_cb (Archive *archive) 
 {
-	Bonobo_Moniker         parent;
-	Bonobo_ConfigDatabase  db, pdb = CORBA_OBJECT_NIL;
-	const gchar           *name;
-	gchar                 *backend_id, *location;
+	if (archive == global_archive)
+		global_archive = NULL;
+	else if (archive == user_archive)
+		user_archive = NULL;
+}
+
+static Bonobo_Unknown
+archive_resolve (BonoboMoniker               *moniker,
+		 const Bonobo_ResolveOptions *options,
+		 const CORBA_char            *requested_interface,
+		 CORBA_Environment           *ev) 
+{
+	const gchar *name;
+
+	Bonobo_Unknown ret;
+
+	DEBUG_MSG ("Enter");
+
+	if (strcmp (requested_interface, "IDL:ConfigArchiver/Archive:1.0")) {
+		EX_SET_NOT_FOUND (ev);
+		return CORBA_OBJECT_NIL;
+	}
+
+	name = bonobo_moniker_get_name (moniker);
+
+	if (!strcmp (name, "global-archive")) {
+		DEBUG_MSG ("Global archive requested");
+
+		if (global_archive == NULL) {
+			global_archive = ARCHIVE (archive_load (TRUE));
+			gtk_signal_connect (GTK_OBJECT (global_archive), "destroy", GTK_SIGNAL_FUNC (archive_destroy_cb), NULL);
+			ret = CORBA_Object_duplicate (BONOBO_OBJREF (global_archive), ev);
+		} else {
+			ret = bonobo_object_dup_ref (BONOBO_OBJREF (global_archive), ev);
+		}
+
+		if (BONOBO_EX (ev)) {
+			g_critical ("Cannot duplicate object");
+			bonobo_object_release_unref (ret, NULL);
+			ret = CORBA_OBJECT_NIL;
+		}
+	}
+	else if (!strcmp (name, "user-archive")) {
+		if (user_archive == NULL) {
+			user_archive = ARCHIVE (archive_load (FALSE));
+			gtk_signal_connect (GTK_OBJECT (user_archive), "destroy", GTK_SIGNAL_FUNC (archive_destroy_cb), NULL);
+			ret = CORBA_Object_duplicate (BONOBO_OBJREF (user_archive), ev);
+		} else {
+			ret = bonobo_object_dup_ref (BONOBO_OBJREF (user_archive), ev);
+		}
+
+		if (BONOBO_EX (ev)) {
+			g_critical ("Cannot duplicate object");
+			bonobo_object_release_unref (ret, NULL);
+			ret = CORBA_OBJECT_NIL;
+		}
+	} else {
+		EX_SET_NOT_FOUND (ev);
+		ret = CORBA_OBJECT_NIL;
+	}
+
+	DEBUG_MSG ("Exit");
+
+	return ret;
+}
+
+static Bonobo_Unknown
+archiverdb_resolve (BonoboMoniker               *moniker,
+		    const Bonobo_ResolveOptions *options,
+		    const CORBA_char            *requested_interface,
+		    CORBA_Environment           *ev)
+{
+	Bonobo_Moniker          parent;
+	Bonobo_ConfigDatabase   db;
+	const gchar            *name;
+	gchar                  *backend_id, *locid;
 
 	if (strcmp (requested_interface, "IDL:Bonobo/ConfigDatabase:1.0")) {
 		EX_SET_NOT_FOUND (ev);
@@ -72,42 +146,27 @@ archiver_resolve (BonoboMoniker               *moniker,
 	if (BONOBO_EX (ev))
 		return CORBA_OBJECT_NIL;
 
-	name = bonobo_moniker_get_name (moniker);
-
-	if (parent != CORBA_OBJECT_NIL) {
-		pdb = Bonobo_Moniker_resolve (parent, options, 
-					      "IDL:Bonobo/ConfigDatabase:1.0", ev);
-    
-		bonobo_object_release_unref (parent, NULL);
-		
-		if (BONOBO_EX (ev) || pdb == CORBA_OBJECT_NIL)
-			return CORBA_OBJECT_NIL;
-	}
-
-	if (parse_name (name, &backend_id, &location) < 0) {
+	if (parent == CORBA_OBJECT_NIL) {
 		EX_SET_NOT_FOUND (ev);
 		return CORBA_OBJECT_NIL;
 	}
 
-	if (!(db = bonobo_config_archiver_new (backend_id, location))) {
-		g_free (backend_id);
-		g_free (location);
+	name = bonobo_moniker_get_name (moniker);
+
+	if (parse_name (name, &backend_id, &locid) < 0) {
 		EX_SET_NOT_FOUND (ev);
-		return CORBA_OBJECT_NIL; 
+		return CORBA_OBJECT_NIL;
 	}
+
+	db = bonobo_config_archiver_new (parent, options, backend_id, locid, ev);
+
+	bonobo_object_release_unref (parent, NULL);
+
+	if (db == CORBA_OBJECT_NIL || BONOBO_EX (ev))
+		EX_SET_NOT_FOUND (ev);
 
 	g_free (backend_id);
-	g_free (location);
-
-	if (pdb != CORBA_OBJECT_NIL) {
-		Bonobo_ConfigDatabase_addDatabase (db, pdb, "", Bonobo_ConfigDatabase_DEFAULT, ev);
-		
-		if (BONOBO_EX (ev)) {
-			bonobo_object_release_unref (pdb, NULL);
-			bonobo_object_release_unref (db, NULL);
-			return CORBA_OBJECT_NIL; 
-		}
-	}
+	g_free (locid);
 
 	return db;
 }			
@@ -118,13 +177,16 @@ bonobo_moniker_archiver_factory (BonoboGenericFactory *this,
 				 const char           *object_id,
 				 void                 *closure)
 {
-	if (!strcmp (object_id, "OAFIID:Bonobo_Moniker_archiver")) {
-
-		return BONOBO_OBJECT (bonobo_moniker_simple_new (
-		        "archiver:", archiver_resolve));
-	
-	} else
+	if (!strcmp (object_id, "OAFIID:Bonobo_Moniker_archiverdb")) {
+		return BONOBO_OBJECT (bonobo_moniker_simple_new
+				      ("archiverdb:", archiverdb_resolve));
+	}
+	else if (!strcmp (object_id, "OAFIID:Bonobo_Moniker_archive")) {
+		return BONOBO_OBJECT (bonobo_moniker_simple_new
+				      ("archive:", archive_resolve));
+	} else {
 		g_warning ("Failing to manufacture a '%s'", object_id);
+	}
 	
 	return NULL;
 }

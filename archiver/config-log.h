@@ -61,18 +61,18 @@ void       config_log_delete                   (ConfigLog           *config_log)
 
 gint       config_log_get_rollback_id_for_date (ConfigLog           *config_log,
 						struct tm           *date,
-						gchar               *backend_id);
+						const gchar         *backend_id);
 gint       config_log_get_rollback_id_by_steps (ConfigLog           *config_log,
 						guint                steps,
-						gchar               *backend_id);
+						const gchar         *backend_id);
 
 gchar     *config_log_get_backend_id_for_id    (ConfigLog           *config_log,
 						gint                 id);
-struct tm *config_log_get_date_for_id          (ConfigLog           *config_log,
+const struct tm *config_log_get_date_for_id    (ConfigLog           *config_log,
 						gint                 id);
 
 gint       config_log_write_entry              (ConfigLog           *config_log,
-						gchar               *backend_id,
+						const gchar         *backend_id,
 						gboolean             is_default_data);
 
 void       config_log_iterate                  (ConfigLog           *config_log,

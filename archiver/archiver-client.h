@@ -1,7 +1,7 @@
 /* -*- mode: c; style: linux -*- */
 
-/* util.h
- * Copyright (C) 2000-2001 Ximian, Inc.
+/* archiver-client.h
+ * Copyright (C) 2001 Ximian, Inc.
  *
  * Written by Bradford Hovinen (hovinen@ximian.com)
  *
@@ -21,31 +21,26 @@
  * 02111-1307, USA.
  */
 
-#ifndef __UTIL_H
-#define __UTIL_H
+#ifndef __ARCHIVER_CLIENT_H
+#define __ARCHIVER_CLIENT_H
 
+#include <gnome.h>
+#include <libxml/tree.h>
 #include <time.h>
-#include <glib.h>
 
-/* Uncomment this if you want debugs: */
-#define DEBUG_ME_MORE
+#include "ConfigArchiver.h"
 
-#ifdef DEBUG_ME_MORE
-#  ifdef __GNUC__
-#    define DEBUG_MSG(str, args...) \
-              g_log (G_LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "(%d:%s) " str, \
-		     getpid (), __FUNCTION__ , ## args)
-#  else
-#    define DEBUG_MSG(str, args...)
-#  endif
-#else
-/* This was redefined here because it was messing with the frontend->backend 
- * talk. Arturo */
-#  define DEBUG_MSG(str, args...)
-#endif
+xmlDocPtr location_client_load_rollback_data (ConfigArchiver_Location   location,
+					      struct tm                *date,
+					      guint                     steps,
+					      gchar                    *backend_id,
+					      gboolean                  parent_chain,
+					      CORBA_Environment        *opt_ev);
 
-gboolean extract_number (char **str, int *number, int digits);
-struct tm *parse_date (char *str);
-struct tm *dup_date (const struct tm *date);
+void      location_client_store_xml          (ConfigArchiver_Location   location, 
+					      gchar                    *backend_id, 
+					      xmlDocPtr                 xml_doc,
+					      ConfigArchiver_StoreType  store_type,
+					      CORBA_Environment        *opt_ev);
 
-#endif /* __UTIL_H */
+#endif /* __ARCHIVER_CLIENT_H */

@@ -25,6 +25,9 @@
 #define __BACKEND_LIST_H
 
 #include <gnome.h>
+#include <bonobo.h>
+
+#include "ConfigArchiver.h"
 
 BEGIN_GNOME_DECLS
 
@@ -40,33 +43,35 @@ typedef gint (*BackendCB) (BackendList *, gchar *, gpointer);
 
 struct _BackendList 
 {
-	GtkObject parent;
+	BonoboXObject parent;
 
 	BackendListPrivate *p;
 };
 
 struct _BackendListClass 
 {
-	GtkObjectClass gtk_object_class;
+	BonoboXObjectClass parent_class;
+
+	POA_ConfigArchiver_BackendList__epv epv;
 };
 
-guint      backend_list_get_type    (void);
+guint         backend_list_get_type    (void);
 
-GtkObject *backend_list_new         (gboolean is_global);
+BonoboObject *backend_list_new         (gboolean is_global);
 
-gboolean   backend_list_contains    (BackendList *backend_list,
-				     gchar *backend_id);
+gboolean      backend_list_contains    (BackendList *backend_list,
+					const gchar *backend_id);
 
-gboolean   backend_list_foreach     (BackendList *backend_list,
-				     BackendCB callback,
-				     gpointer data);
+gboolean      backend_list_foreach     (BackendList *backend_list,
+					BackendCB callback,
+					gpointer data);
 
-void       backend_list_add         (BackendList *backend_list,
-				     gchar *backend_id);
-void       backend_list_remove      (BackendList *backend_list,
-				     gchar *backend_id);
+void          backend_list_add         (BackendList *backend_list,
+					const gchar *backend_id);
+void          backend_list_remove      (BackendList *backend_list,
+					const gchar *backend_id);
 
-void       backend_list_save        (BackendList *backend_list);
+void          backend_list_save        (BackendList *backend_list);
 
 END_GNOME_DECLS
 

@@ -26,6 +26,9 @@
 
 #include <gnome.h>
 #include <tree.h>
+#include <bonobo.h>
+
+#include "ConfigArchiver.h"
 
 #include "config-log.h"
 
@@ -37,118 +40,100 @@ typedef struct _LocationClass LocationClass;
 typedef struct _LocationPrivate LocationPrivate;
 typedef struct _Archive Archive;
 
-typedef enum _ContainmentType ContainmentType;
-typedef enum _StoreType StoreType;
+typedef ConfigArchiver_ContainmentType ContainmentType;
+typedef ConfigArchiver_StoreType StoreType;
 
 typedef int (*LocationBackendCB) (Location *, gchar *, gpointer);
 
 struct _Location 
 {
-	GtkObject object;
+	BonoboXObject object;
 
 	LocationPrivate *p;
 };
 
 struct _LocationClass 
 {
-	GtkObjectClass parent;
+	BonoboXObjectClass parent;
+
+	POA_ConfigArchiver_Location__epv epv;
 
 	gboolean (*do_rollback) (Location *location,
 				 gchar *backend_id,
 				 xmlDocPtr xml_doc);
 };
 
-enum _ContainmentType
-{
-	CONTAIN_NONE, CONTAIN_PARTIAL, CONTAIN_FULL
-};
+guint           location_get_type                     (void);
 
-enum _StoreType
-{
-	STORE_DEFAULT, STORE_FULL, STORE_COMPARE_PARENT, STORE_MASK_PREVIOUS
-};
+BonoboObject   *location_new                          (Archive         *archive, 
+						       const gchar     *locid, 
+						       const gchar     *label,
+						       Location        *parent);
+BonoboObject   *location_open                         (Archive         *archive, 
+						       const gchar     *locid);
 
-guint location_get_type (void);
+void            location_delete                       (Location        *location);
 
-GtkObject *location_new            (Archive *archive, 
-				    const gchar *locid, 
-				    Location *inherits);
-GtkObject *location_open           (Archive *archive, 
-				    const gchar *locid);
+gchar          *location_get_storage_filename         (Location        *location,
+						       const gchar     *backend_id,
+						       gboolean         is_default);
+gchar          *location_get_rollback_filename        (Location        *location,
+						       struct tm       *date,
+						       gint             steps,
+						       const gchar     *backend_id,
+						       gboolean         parent_chain);
 
-void location_close                (Location *location);
-void location_delete               (Location *location);
+gint            location_store                        (Location        *location, 
+						       gchar           *backend_id, 
+						       FILE            *input,
+						       ConfigArchiver_StoreType store_type);
+void            location_store_xml                    (Location        *location, 
+						       gchar           *backend_id, 
+						       xmlDocPtr        xml_doc,
+						       ConfigArchiver_StoreType store_type);
 
-gint location_store                (Location *location, 
-				    gchar *backend_id, 
-				    FILE *input,
-				    StoreType store_type);
-void location_store_xml            (Location *location, 
-				    gchar *backend_id, 
-				    xmlDocPtr xml_doc,
-				    StoreType store_type);
+void            location_rollback_backends_to         (Location        *location,
+						       struct tm       *date,
+						       gint             steps,
+						       GList           *backends,
+						       gboolean         parent_chain);
 
-void location_rollback_backend_to  (Location *location,
-				    struct tm *date, 
-				    gchar *backend_id,
-				    gboolean parent_chain);
-void location_rollback_backends_to (Location *location,
-				    struct tm *date,
-				    GList *backends,
-				    gboolean parent_chain);
-void location_rollback_all_to      (Location *location,
-				    struct tm *date,
-				    gboolean parent_chain);
+const struct tm *location_get_modification_time        (Location        *location,
+							const gchar     *backend_id);
 
-void location_rollback_backend_by  (Location *location,
-				    guint steps, 
-				    gchar *backend_id,
-				    gboolean parent_chain);
+ContainmentType location_contains                     (Location        *location,
+						       const gchar     *backend_id);
+gint            location_add_backend                  (Location        *location,
+						       const gchar     *backend_id,
+						       ContainmentType  type);
+void            location_remove_backend               (Location        *location,
+						       const gchar     *backend_id);
 
-void location_rollback_id          (Location *location,
-				    gint id);
+void            location_foreach_backend              (Location          *location,
+						       LocationBackendCB  callback,
+						       gpointer           data);
 
-void location_dump_rollback_data   (Location *location,
-				    struct tm *date,
-				    guint steps,
-				    gchar *backend_id,
-				    gboolean parent_chain,
-				    FILE *output);
-xmlDocPtr location_load_rollback_data (Location *location,
-				       struct tm *date,
-				       guint steps,
-				       gchar *backend_id,
-				       gboolean parent_chain);
+GList          *location_find_path_from_common_parent (Location        *location, 
+						       Location        *location2);
 
-ContainmentType location_contains  (Location *location, gchar *backend_id);
-gint location_add_backend          (Location *location, gchar *backend_id,
-				    ContainmentType type);
-void location_remove_backend       (Location *location, gchar *backend_id);
+Location       *location_get_parent                   (Location        *location);
+const gchar    *location_get_path                     (Location        *location);
+const gchar    *location_get_label                    (Location        *location);
+const gchar    *location_get_id                       (Location        *location);
 
-void location_foreach_backend      (Location *location,
-				    LocationBackendCB callback,
-				    gpointer data);
+void            location_set_id                       (Location        *location,
+						       const gchar     *locid);
 
-GList *location_find_path_from_common_parent (Location *location, 
-					      Location *location2);
+gint            location_store_full_snapshot          (Location        *location);
 
-Location *location_get_parent      (Location *location);
-const gchar *location_get_path     (Location *location);
-const gchar *location_get_label    (Location *location);
-const gchar *location_get_id       (Location *location);
+GList          *location_get_changed_backends         (Location        *location,
+						       Location        *location1);
+gboolean        location_does_backend_change          (Location        *location,
+						       Location        *location1,
+						       const gchar     *backend_id);
 
-void location_set_id               (Location *location, const gchar *locid);
+ConfigLog      *location_get_config_log               (Location        *location);
 
-gint location_store_full_snapshot  (Location *location);
-
-GList *location_get_changed_backends (Location *location,
-				      Location *location1);
-gboolean location_does_backend_change (Location *location,
-				       Location *location1,
-				       gchar *backend_id);
-
-ConfigLog *location_get_config_log (Location *location);
-
-void location_garbage_collect      (Location *location);
+void            location_garbage_collect              (Location        *location);
 
 #endif /* __LOCATION */

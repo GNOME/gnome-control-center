@@ -131,7 +131,7 @@ PKG_CHECK_MODULES(CAPPLET, $capplet_modules $PKG_BONOBO_CONF_CHECK)
 PKG_CHECK_MODULES(GNOMECC, gnomeui libglade xml gdk_pixbuf gnomecanvaspixbuf $PKG_BONOBO_CHECK gtkhtml >= 0.9)
 PKG_CHECK_MODULES(RMHELPER, gnomeui gnomecanvaspixbuf)
 PKG_CHECK_MODULES(ARCHIVER, $PKG_BONOBO_CONF_CHECK xml)
-PKG_CHECK_MODULES(CONFIG_ARCHIVER, gnome xml)
+PKG_CHECK_MODULES(CONFIG_ARCHIVER, bonobo gnome xml)
 
 if test "x$moniker_enable" = "xyes"; then
 PKG_CHECK_MODULES(MONIKER, $PKG_BONOBO_CONF_CHECK xml)
@@ -276,6 +276,7 @@ capplets/screensaver/Makefile
 capplets/screensaver/screensavers/Makefile
 capplets/screensaver/screensavers/magic.pl
 capplets/sound/Makefile
+idl/Makefile
 intl/Makefile])
 echo "
 
@@ -294,4 +295,3 @@ esac
 echo "
 
 "
-	

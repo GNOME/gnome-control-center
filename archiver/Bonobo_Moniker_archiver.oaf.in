@@ -8,7 +8,7 @@
 	<oaf_attribute name="name" type="string" value="XML Database Moniker factory"/>
 </oaf_server>
 
-<oaf_server iid="OAFIID:Bonobo_Moniker_archiver" type="factory"
+<oaf_server iid="OAFIID:Bonobo_Moniker_archiverdb" type="factory"
 	location="OAFIID:Bonobo_Moniker_archiver_Factory">
 	<oaf_attribute name="repo_ids" type="stringv">
 		<item value="IDL:Bonobo/Moniker:1.0"/>
@@ -16,7 +16,19 @@
 	</oaf_attribute>
 	<oaf_attribute name="name" type="string" value="XML Database Moniker with archiver interface"/>
 	<oaf_attribute name="bonobo:moniker" type="stringv">
-		<item value="archiver:"/>
+		<item value="archiverdb:"/>
+	</oaf_attribute>
+</oaf_server>
+
+<oaf_server iid="OAFIID:Bonobo_Moniker_archive" type="factory"
+	location="OAFIID:Bonobo_Moniker_archiver_Factory">
+	<oaf_attribute name="repo_ids" type="stringv">
+		<item value="IDL:Bonobo/Moniker:1.0"/>
+		<item value="IDL:Bonobo/Unknown:1.0"/>
+	</oaf_attribute>
+	<oaf_attribute name="name" type="string" value="XML archiver interface"/>
+	<oaf_attribute name="bonobo:moniker" type="stringv">
+		<item value="archive:"/>
 	</oaf_attribute>
 </oaf_server>
 

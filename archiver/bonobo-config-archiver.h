@@ -18,8 +18,7 @@
 #include <bonobo/bonobo-event-source.h>
 #include <bonobo/bonobo-property-bag.h>
 
-#include "archive.h"
-#include "location.h"
+#include "archiver-client.h"
 
 BEGIN_GNOME_DECLS
 
@@ -49,21 +48,21 @@ typedef struct {
 typedef struct _BonoboConfigArchiver        BonoboConfigArchiver;
 
 struct _BonoboConfigArchiver {
-	BonoboConfigDatabase  base;
-	
-	char                 *filename;
-	FILE                 *fp;
-	xmlDocPtr             doc;
-	DirData              *dir;
-	guint                 time_id;
+	BonoboConfigDatabase     base;
 
-	Archive              *archive;
-	Location             *location;
-	gchar                *backend_id;
-	gchar                *real_name;
+	char                    *filename;
+	FILE                    *fp;
+	xmlDocPtr                doc;
+	DirData                 *dir;
+	guint                    time_id;
 
-	BonoboEventSource    *es;
-	BonoboPropertyBag    *pb;
+	ConfigArchiver_Archive   archive;
+	ConfigArchiver_Location  location;
+	gchar                   *backend_id;
+	gchar                   *real_name;
+
+	BonoboEventSource       *es;
+	BonoboPropertyBag       *pb;
 };
 
 typedef struct {
@@ -75,7 +74,11 @@ GtkType
 bonobo_config_archiver_get_type  (void);
 
 Bonobo_ConfigDatabase
-bonobo_config_archiver_new (const char *backend_id, const char *location_id);
+bonobo_config_archiver_new (Bonobo_Moniker               parent,
+			    const Bonobo_ResolveOptions *options,
+			    const char                  *backend_id,
+			    const char                  *location_id,
+			    CORBA_Environment           *ev);
 
 END_GNOME_DECLS
 

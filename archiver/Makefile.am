@@ -20,39 +20,35 @@ INCLUDES = 			\
 	@ARCHIVER_CFLAGS@							\
 	@MONIKER_CFLAGS@
 
-if MONIKER_ENABLE
-BONOBO_MONIKER_ARCHIVER_BIN=bonobo-moniker-archiver
-else
-BONOBO_MONIKER_ARCHIVER_BIN=
-endif
+CORBA_SOURCE =			\
+	ConfigArchiver.h	\
+	ConfigArchiver-common.c	\
+	ConfigArchiver-stubs.c	\
+	ConfigArchiver-skels.c
 
-bin_PROGRAMS = $(BONOBO_MONIKER_ARCHIVER_BIN) config-archiver
+idl_flags = `gnome-config --cflags idl`
+
+$(CORBA_SOURCE): $(top_srcdir)/idl/ConfigArchiver.idl
+	orbit-idl $(top_srcdir)/idl/ConfigArchiver.idl -I$(top_srcdir)/idl $(idl_flags)
+
+bin_PROGRAMS = bonobo-moniker-archiver config-archiver
 
 lib_LTLIBRARIES = libconfig_archiver.la
 
 libconfig_archiver_la_SOURCES = \
-	archive.c		archive.h		\
-	location.c		location.h		\
-	config-log.c		config-log.h		\
-	backend-list.c		backend-list.h		\
-	cluster.c       	cluster.h		\
-	cluster-location.c	cluster-location.h	\
-	util.c			util.h
+	util.c				util.h				\
+	archiver-client.c						\
+	$(CORBA_SOURCE)
 
 libconfig_archiver_la_LIBADD = \
 	@GNOME_XML_LIBS@
 
 include_HEADERS = \
-	archive.h 		\
-	location.h		\
-	config-log.h		\
-	backend-list.h		\
-	cluster.h		\
-	cluster-location.h	\
-	util.h
+	ConfigArchiver.h	\
+	archiver-client.h
 
 config_archiver_SOURCES = \
-	main.c
+	config-archiver.c
 
 config_archiver_LDADD = \
 	$(GNOME_LIBDIR)						\
@@ -87,9 +83,14 @@ Bonobo_Moniker_archiver.oaf : $(srcdir)/Bonobo_Moniker_archiver.oaf.in $(top_bui
 clean-local:
 	-rm -f $(OAF_FILES)
 
-bonobo_moniker_archiver_SOURCES =		\
-	bonobo-config-archiver.c		\
-	bonobo-config-archiver.h		\
+bonobo_moniker_archiver_SOURCES =					\
+	bonobo-config-archiver.c	bonobo-config-archiver.h	\
+	archive.c			archive.h			\
+	location.c			location.h			\
+	config-log.c			config-log.h			\
+	backend-list.c			backend-list.h			\
+	cluster.c       		cluster.h			\
+	cluster-location.c		cluster-location.h		\
 	bonobo-moniker-archiver.c
 
 bonobo_moniker_archiver_LDADD = @MONIKER_LIBS@ libconfig_archiver.la

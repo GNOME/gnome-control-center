@@ -39,12 +39,14 @@
 #include "location.h"
 #include "archive.h"
 #include "util.h"
+#include "archiver-client.h"
 
-static GtkObjectClass *parent_class;
+static BonoboXObjectClass *parent_class;
 
 enum {
 	ARG_0,
 	ARG_LOCID,
+	ARG_LABEL,
 	ARG_ARCHIVE,
 	ARG_INHERITS
 };
@@ -66,13 +68,15 @@ struct _LocationPrivate
 	gchar           *fullpath;
 	gchar           *label;
 
-	Location        *inherits_location;
+	Location        *parent;
 	GList           *contains_list;      /* List of BackendNotes */
 	gboolean         is_new;
 	gboolean         contains_list_dirty;
 
 	ConfigLog       *config_log;
 };
+
+#define LOCATION_FROM_SERVANT(servant) (LOCATION (bonobo_object_from_servant (servant)))
 
 static void location_init            (Location *location);
 static void location_class_init      (LocationClass *klass);
@@ -105,56 +109,234 @@ static void save_metadata            (Location *location);
 static void write_metadata_file      (Location *location, 
 				      gchar *filename);
 
-static xmlDocPtr load_xml_data       (gchar *fullpath, gint id);
 static gint run_backend_proc         (gchar *backend_id,
 				      gboolean do_get,
 				      pid_t *pid);
 
-static BackendNote *backend_note_new (gchar *backend_id, 
+static BackendNote *backend_note_new (const gchar *backend_id, 
 				      ContainmentType type);
 static void backend_note_destroy     (BackendNote *note);
-static const BackendNote *find_note  (Location *location, gchar *backend_id);
+static const BackendNote *find_note  (Location *location,
+				      const gchar *backend_id);
 
 static GList *create_backends_list   (Location *location1,
 				      Location *location2);
 static GList *merge_backend_lists    (GList *backends1,
 				      GList *backends2);
 
-static void merge_xml_docs           (xmlDocPtr child_doc,
-				      xmlDocPtr parent_doc);
-static void subtract_xml_doc         (xmlDocPtr child_doc,
-				      xmlDocPtr parent_doc,
-				      gboolean strict);
-static void merge_xml_nodes          (xmlNodePtr node1,
-				      xmlNodePtr node2);
-static xmlNodePtr subtract_xml_node  (xmlNodePtr node1,
-				      xmlNodePtr node2,
-				      gboolean strict);
-static gboolean compare_xml_nodes    (xmlNodePtr node1, xmlNodePtr node2);
+/* CORBA interface methods */
 
-guint
-location_get_type (void) 
+static CORBA_char *
+impl_ConfigArchiver_Location_getStorageFilename (PortableServer_Servant  servant,
+						 const CORBA_char       *backendId,
+						 CORBA_boolean           isDefaultData,
+						 CORBA_Environment      *ev) 
 {
-	static guint location_type;
+	gchar *filename;
+	CORBA_char *ret;
 
-	if (!location_type) {
-		GtkTypeInfo location_info = {
-			"Location",
-			sizeof (Location),
-			sizeof (LocationClass),
-			(GtkClassInitFunc) location_class_init,
-			(GtkObjectInitFunc) location_init,
-			(GtkArgSetFunc) NULL,
-			(GtkArgGetFunc) NULL
-		};
+	filename = location_get_storage_filename (LOCATION_FROM_SERVANT (servant), backendId, isDefaultData);
+	ret = CORBA_string_dup (filename);
+	g_free (filename);
 
-		location_type = 
-			gtk_type_unique (gtk_object_get_type (),
-					 &location_info);
+	return ret;
+}
+
+static CORBA_char *
+impl_ConfigArchiver_Location_getRollbackFilename (PortableServer_Servant  servant,
+						  ConfigArchiver_Time     timep,
+						  CORBA_long              steps,
+						  const CORBA_char       *backendId,
+						  CORBA_boolean           parentChain,
+						  CORBA_Environment      *ev) 
+{
+	gchar *filename;
+	CORBA_char *ret;
+	struct tm timeb, *timeb_p = &timeb;
+
+	if (timep != 0)
+		gmtime_r ((time_t *) &timep, timeb_p);
+	else
+		timeb_p = NULL;
+
+	filename = location_get_rollback_filename (LOCATION_FROM_SERVANT (servant), timeb_p, steps, backendId, parentChain);
+	ret = CORBA_string_dup (filename);
+	g_free (filename);
+
+	return ret;
+}
+
+static void
+impl_ConfigArchiver_Location_rollbackBackends (PortableServer_Servant          servant,
+					       ConfigArchiver_Time             timep,
+					       CORBA_long                      steps,
+					       const ConfigArchiver_StringSeq *backends,
+					       CORBA_boolean                   parentChain,
+					       CORBA_Environment              *ev) 
+{
+	GList *node = NULL;
+	unsigned int i;
+	struct tm timeb, *timeb_p = &timeb;
+
+	for (i = 0; i < backends->_length; i++)
+		node = g_list_prepend (node, backends->_buffer[i]);
+
+	if (timep != 0)
+		gmtime_r ((time_t *) &timep, &timeb);
+	else
+		timeb_p = NULL;
+
+	location_rollback_backends_to (LOCATION_FROM_SERVANT (servant), timeb_p, steps, node, parentChain);
+
+	g_list_free (node);
+}
+
+static ConfigArchiver_Time
+impl_ConfigArchiver_Location_getModificationTime (PortableServer_Servant  servant,
+						  const CORBA_char       *backendId,
+						  CORBA_Environment      *ev) 
+{
+	const struct tm *time_s;
+	struct tm *tmp_date;
+	ConfigArchiver_Time ret;
+
+	time_s = location_get_modification_time (LOCATION_FROM_SERVANT (servant), backendId);
+
+	if (time_s != NULL) {
+		tmp_date = dup_date (time_s);
+		ret = mktime (tmp_date);
+		g_free (tmp_date);
+	} else {
+		ret = 0;
 	}
 
-	return location_type;
+	return ret;
 }
+
+static ConfigArchiver_ContainmentType
+impl_ConfigArchiver_Location_contains (PortableServer_Servant  servant,
+				       const CORBA_char       *backendId,
+				       CORBA_Environment      *ev) 
+{
+	return location_contains (LOCATION_FROM_SERVANT (servant), backendId);
+}
+
+static CORBA_long
+impl_ConfigArchiver_Location_addBackend (PortableServer_Servant          servant,
+					 const CORBA_char               *backendId,
+					 ConfigArchiver_ContainmentType  containmentType,
+					 CORBA_Environment              *ev) 
+{
+	return location_add_backend (LOCATION_FROM_SERVANT (servant), backendId, containmentType);
+}
+
+static void
+impl_ConfigArchiver_Location_removeBackend (PortableServer_Servant  servant,
+					    const CORBA_char       *backendId,
+					    CORBA_Environment      *ev)
+{
+	location_remove_backend (LOCATION_FROM_SERVANT (servant), backendId);
+}
+
+static CORBA_boolean
+impl_ConfigArchiver_Location_doesBackendChange (PortableServer_Servant   servant,
+						ConfigArchiver_Location  location,  
+						const CORBA_char        *backendId,
+						CORBA_Environment       *ev) 
+{
+	Location *loc1, *loc2;
+
+	loc1 = LOCATION_FROM_SERVANT (servant);
+	loc2 = LOCATION_FROM_SERVANT (location->servant);
+
+	return location_does_backend_change (loc1, loc2, backendId);
+}
+
+static void
+impl_ConfigArchiver_Location_garbageCollect (PortableServer_Servant  servant,
+					     CORBA_Environment      *ev) 
+{
+	location_garbage_collect (LOCATION_FROM_SERVANT (servant));
+}
+
+static void
+impl_ConfigArchiver_Location_delete (PortableServer_Servant  servant,
+				     CORBA_Environment      *ev) 
+{
+	location_delete (LOCATION_FROM_SERVANT (servant));
+}
+
+static ConfigArchiver_Location
+impl_ConfigArchiver_Location__get_parent (PortableServer_Servant  servant,
+					  CORBA_Environment      *ev) 
+{
+	Location *location = LOCATION_FROM_SERVANT (servant);
+
+	if (location->p->parent != NULL)
+		return bonobo_object_dup_ref (BONOBO_OBJREF (location->p->parent), ev);
+	else
+		return CORBA_OBJECT_NIL;
+}
+
+static CORBA_char *
+impl_ConfigArchiver_Location__get_path (PortableServer_Servant  servant,
+					CORBA_Environment      *ev) 
+{
+	return CORBA_string_dup (LOCATION_FROM_SERVANT (servant)->p->fullpath);
+}
+
+static ConfigArchiver_StringSeq *
+impl_ConfigArchiver_Location__get_backendList (PortableServer_Servant  servant,
+					       CORBA_Environment      *ev) 
+{
+	ConfigArchiver_StringSeq *ret;
+	Location *location;
+	GList *node;
+	guint i = 0;
+
+	location = LOCATION_FROM_SERVANT (servant);
+
+	ret = ConfigArchiver_StringSeq__alloc ();
+	ret->_length = g_list_length (location->p->contains_list);
+	ret->_buffer = CORBA_sequence_CORBA_string_allocbuf (ret->_length);
+
+	for (node = location->p->contains_list; node != NULL; node = node->next)
+		ret->_buffer[i++] = CORBA_string_dup (((BackendNote *) node->data)->backend_id);
+
+	return ret;
+}
+
+static CORBA_char *
+impl_ConfigArchiver_Location__get_label (PortableServer_Servant  servant,
+					 CORBA_Environment      *ev) 
+{
+	return CORBA_string_dup (LOCATION_FROM_SERVANT (servant)->p->label);
+}
+
+static CORBA_char *
+impl_ConfigArchiver_Location__get_id (PortableServer_Servant  servant,
+				      CORBA_Environment      *ev) 
+{
+	return CORBA_string_dup (LOCATION_FROM_SERVANT (servant)->p->locid);
+}
+
+static void
+impl_ConfigArchiver_Location__set_label (PortableServer_Servant  servant,
+					 const CORBA_char       *label,
+					 CORBA_Environment      *ev) 
+{
+	gtk_object_set (GTK_OBJECT (LOCATION_FROM_SERVANT (servant)), "label", label, NULL);
+}
+
+static void
+impl_ConfigArchiver_Location__set_id (PortableServer_Servant  servant,
+				      const CORBA_char       *id,
+				      CORBA_Environment      *ev) 
+{
+	gtk_object_set (GTK_OBJECT (LOCATION_FROM_SERVANT (servant)), "locid", id, NULL);
+}
+
+BONOBO_X_TYPE_FUNC_FULL (Location, ConfigArchiver_Location, BONOBO_X_OBJECT_TYPE, location);
 
 static void
 location_init (Location *location) 
@@ -188,6 +370,11 @@ location_class_init (LocationClass *klass)
 				 GTK_ARG_READWRITE,
 				 ARG_LOCID);
 
+	gtk_object_add_arg_type ("Location::label",
+				 GTK_TYPE_POINTER,
+				 GTK_ARG_READWRITE,
+				 ARG_LABEL);
+
 	gtk_object_add_arg_type ("Location::inherits",
 				 GTK_TYPE_POINTER,
 				 GTK_ARG_READWRITE,
@@ -195,7 +382,27 @@ location_class_init (LocationClass *klass)
 
 	klass->do_rollback = location_do_rollback;
 
-	parent_class = gtk_type_class (gtk_object_get_type ());
+	klass->epv.getStorageFilename  = impl_ConfigArchiver_Location_getStorageFilename;
+	klass->epv.getRollbackFilename = impl_ConfigArchiver_Location_getRollbackFilename;
+	klass->epv.rollbackBackends    = impl_ConfigArchiver_Location_rollbackBackends;
+	klass->epv.getModificationTime = impl_ConfigArchiver_Location_getModificationTime;
+	klass->epv.contains            = impl_ConfigArchiver_Location_contains;
+	klass->epv.addBackend          = impl_ConfigArchiver_Location_addBackend;
+	klass->epv.removeBackend       = impl_ConfigArchiver_Location_removeBackend;
+	klass->epv.doesBackendChange   = impl_ConfigArchiver_Location_doesBackendChange;
+	klass->epv.garbageCollect      = impl_ConfigArchiver_Location_garbageCollect;
+	klass->epv.delete              = impl_ConfigArchiver_Location_delete;
+
+	klass->epv._get_parent         = impl_ConfigArchiver_Location__get_parent;
+	klass->epv._get_path           = impl_ConfigArchiver_Location__get_path;
+	klass->epv._get_backendList    = impl_ConfigArchiver_Location__get_backendList;
+	klass->epv._get_label          = impl_ConfigArchiver_Location__get_label;
+	klass->epv._get_id             = impl_ConfigArchiver_Location__get_id;
+
+	klass->epv._set_label          = impl_ConfigArchiver_Location__set_label;
+	klass->epv._set_id             = impl_ConfigArchiver_Location__set_id;
+
+	parent_class = gtk_type_class (BONOBO_X_OBJECT_TYPE);
 }
 
 static void
@@ -215,7 +422,9 @@ location_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		g_return_if_fail (IS_ARCHIVE (GTK_VALUE_POINTER (*arg)));
 
 		location->p->archive = GTK_VALUE_POINTER (*arg);
+		bonobo_object_ref (BONOBO_OBJECT (location->p->archive));
 		break;
+
 	case ARG_LOCID:
 		if (GTK_VALUE_POINTER (*arg) != NULL) {
 			if (location->p->locid != NULL)
@@ -224,21 +433,35 @@ location_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 			location->p->locid = 
 				g_strdup (GTK_VALUE_POINTER (*arg));
 
-			if (!strcmp (location->p->locid, "default"))
-				location->p->label = _("Default Location");
-			else
-				location->p->label = location->p->locid;
+			if (!strcmp (location->p->locid, "default") &&
+			    location->p->label == NULL)
+				location->p->label = g_strdup (_("Default Location"));
+			else if (location->p->label == NULL)
+				location->p->label = g_strdup (location->p->locid);
 		}
 
 		break;
+
+	case ARG_LABEL:
+		if (GTK_VALUE_POINTER (*arg) != NULL) {
+			if (location->p->label != NULL)
+				g_free (location->p->label);
+
+			location->p->label =
+				g_strdup (GTK_VALUE_POINTER (*arg));
+		}
+
+		break;
+
 	case ARG_INHERITS:
 		if (GTK_VALUE_POINTER (*arg) != NULL) {
 			g_return_if_fail (IS_LOCATION
 					  (GTK_VALUE_POINTER (*arg)));
-			location->p->inherits_location =
+			location->p->parent =
 				GTK_VALUE_POINTER (*arg);
-			gtk_object_ref (GTK_VALUE_POINTER (*arg));
+			bonobo_object_ref (GTK_VALUE_POINTER (*arg));
 		}
+
 	default:
 		break;
 	}
@@ -262,8 +485,11 @@ location_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	case ARG_LOCID:
 		GTK_VALUE_POINTER (*arg) = location->p->locid;
 		break;
+	case ARG_LABEL:
+		GTK_VALUE_POINTER (*arg) = location->p->label;
+		break;
 	case ARG_INHERITS:
-		GTK_VALUE_POINTER (*arg) = location->p->inherits_location;
+		GTK_VALUE_POINTER (*arg) = location->p->parent;
 		break;
 	default:
 		arg->type = GTK_TYPE_INVALID;
@@ -283,8 +509,8 @@ location_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
  * Return value: Reference to location
  **/
 
-GtkObject *
-location_new (Archive *archive, const gchar *locid, Location *inherits) 
+BonoboObject *
+location_new (Archive *archive, const gchar *locid, const gchar *label, Location *inherits) 
 {
 	GtkObject *object;
 
@@ -295,20 +521,23 @@ location_new (Archive *archive, const gchar *locid, Location *inherits)
 	object = gtk_object_new (location_get_type (),
 				 "archive", archive,
 				 "locid", locid,
+				 "label", label,
 				 "inherits", inherits,
 				 NULL);
 
+	if (inherits != NULL)
+		bonobo_object_unref (BONOBO_OBJECT (inherits));
+
 	if (!do_create (LOCATION (object))) {
-		gtk_object_destroy (object);
+		bonobo_object_unref (BONOBO_OBJECT (object));
 		return NULL;
 	}
 
 	LOCATION (object)->p->is_new = TRUE;
 
-	archive_register_location (archive, LOCATION (object));
 	save_metadata (LOCATION (object));
 
-	return object;
+	return BONOBO_OBJECT (object);
 }
 
 /**
@@ -321,7 +550,7 @@ location_new (Archive *archive, const gchar *locid, Location *inherits)
  * Return value: Reference of location
  **/
 
-GtkObject *
+BonoboObject *
 location_open (Archive *archive, const gchar *locid) 
 {
 	GtkObject *object;
@@ -336,11 +565,11 @@ location_open (Archive *archive, const gchar *locid)
 				 NULL);
 
 	if (!do_load (LOCATION (object))) {
-		gtk_object_destroy (object);
+		bonobo_object_unref (BONOBO_OBJECT (object));
 		return NULL;
 	}
 
-	return object;
+	return BONOBO_OBJECT (object);
 }
 
 static void 
@@ -351,17 +580,25 @@ location_destroy (GtkObject *object)
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (IS_LOCATION (object));
 
+	DEBUG_MSG ("Enter");
+
 	location = LOCATION (object);
+
+	save_metadata (location);
 
 	if (location->p->config_log)
 		gtk_object_destroy (GTK_OBJECT (location->p->config_log));
 
-	if (location->p->inherits_location)
-		gtk_object_unref (GTK_OBJECT (location->p->inherits_location));
+	if (location->p->parent)
+		bonobo_object_unref (BONOBO_OBJECT (location->p->parent));
 
 	archive_unregister_location (location->p->archive, location);
 
+	bonobo_object_unref (BONOBO_OBJECT (location->p->archive));
+
 	GTK_OBJECT_CLASS (parent_class)->destroy (object);
+
+	DEBUG_MSG ("Exit");
 }
 
 static void
@@ -379,8 +616,14 @@ location_finalize (GtkObject *object)
 		backend_note_destroy (node->data);
 	g_list_free (location->p->contains_list);
 
-	if (location->p->fullpath)
+	if (location->p->fullpath != NULL)
 		g_free (location->p->fullpath);
+
+	if (location->p->label != NULL)
+		g_free (location->p->label);
+
+	if (location->p->locid != NULL)
+		g_free (location->p->locid);
 
 	g_free (location->p);
 	location->p = (LocationPrivate *) 0xdeadbeef;
@@ -417,12 +660,9 @@ location_do_rollback (Location *location, gchar *backend_id, xmlDocPtr doc)
 	output = fdopen (fd, "w");
 	xmlDocDump (output, doc);
 
-	DEBUG_MSG ("Done dumping data; flushing and closing output stream");
-
-	if (fflush (output) == EOF) {
+	if (fflush (output) == EOF)
 		g_critical ("%s: Could not dump buffer: %s",
 			    __FUNCTION__, g_strerror (errno));
-	}
 
 	if (fclose (output) == EOF) {
 		g_critical ("%s: Could not close output stream: %s",
@@ -433,25 +673,6 @@ location_do_rollback (Location *location, gchar *backend_id, xmlDocPtr doc)
 	waitpid (pid, &status, 0);
 
 	return TRUE;
-}
-
-/**
- * location_close:
- * @location: 
- * 
- * Close a location handle; this saves the metadata associated with the
- * location and destroys the object
- **/
-
-void
-location_close (Location *location) 
-{
-	g_return_if_fail (location != NULL);
-	g_return_if_fail (IS_LOCATION (location));
-
-	save_metadata (location);
-
-	gtk_object_destroy (GTK_OBJECT (location));
 }
 
 static gint
@@ -487,8 +708,118 @@ location_delete (Location *location)
 	if (rmdir (location->p->fullpath) == -1)
 		g_warning ("%s: Could not remove directory: %s\n",
 			   __FUNCTION__, g_strerror (errno));
+}
 
-	gtk_object_destroy (GTK_OBJECT (location));
+/**
+ * location_rollback_backends_to:
+ * @location: 
+ * @date: 
+ * @backends: 
+ * @parent_chain: 
+ * 
+ * Roll back the list of backends specified to the given date, optionally
+ * chaining to the parent location. This destroys the list of backends given
+ *
+ * FIXME: To enforce some kind of ordering on backend application, just create
+ * a comparison function between backend ids that calls a BackendList method
+ * to see which item should go first, and then call g_list_sort with that on
+ * the backend list
+ **/
+
+void 
+location_rollback_backends_to (Location  *location,
+			       struct tm *date,
+			       gint       steps,
+			       GList     *backends,
+			       gboolean   parent_chain) 
+{
+	GList *node;
+	gchar *backend_id, *filename;
+	xmlDocPtr doc;
+
+	g_return_if_fail (location != NULL);
+	g_return_if_fail (IS_LOCATION (location));
+	g_return_if_fail (location->p->config_log != NULL);
+	g_return_if_fail (IS_CONFIG_LOG (location->p->config_log));
+
+	for (node = backends; node; node = node->next) {
+		backend_id = node->data;
+		filename = location_get_rollback_filename
+			(location, date, steps, backend_id, parent_chain);
+		if (filename == NULL) continue;
+
+		doc = xmlParseFile (filename);
+		g_free (filename);
+		if (doc == NULL) continue;
+
+		LOCATION_CLASS (GTK_OBJECT (location)->klass)->do_rollback
+			(location, backend_id, doc);
+		xmlFreeDoc (doc);
+	}
+}
+
+/**
+ * location_get_storage_filename:
+ * @location:
+ * @backend_id:
+ *
+ * Finds a new storage filename for storing rollback data from the backend id
+ **/
+
+gchar *
+location_get_storage_filename (Location      *location,
+			       const gchar   *backend_id,
+			       gboolean       is_default)
+{
+	guint id;
+
+	g_return_val_if_fail (location != NULL, NULL);
+	g_return_val_if_fail (IS_LOCATION (location), NULL);
+	g_return_val_if_fail (backend_id != NULL, NULL);
+
+	id = config_log_write_entry (location->p->config_log, backend_id, is_default);
+
+        return g_strdup_printf ("%s/%08x.xml", location->p->fullpath, id);
+}
+
+/**
+ * location_get_rollback_filename:
+ * @location:
+ * @date:
+ * @steps:
+ * @backend_id:
+ * @parent_chain:
+ *
+ * Get the filename for the rollback data for the date or number of steps, and
+ * backend id given. String should be freed after use. Returns NULL if no data
+ * were found.
+ **/
+
+gchar *
+location_get_rollback_filename (Location        *location,
+				struct tm       *date,
+				gint             steps,
+				const gchar     *backend_id,
+				gboolean         parent_chain)
+{
+	gint id;
+
+	g_return_val_if_fail (location != NULL, NULL);
+	g_return_val_if_fail (IS_LOCATION (location), NULL);
+	g_return_val_if_fail (location->p->config_log != NULL, NULL);
+	g_return_val_if_fail (IS_CONFIG_LOG (location->p->config_log), NULL);
+
+	if (steps > 0)
+		id = config_log_get_rollback_id_by_steps
+			(location->p->config_log, steps, backend_id);
+	else
+		id = config_log_get_rollback_id_for_date
+			(location->p->config_log, date, backend_id);
+
+	if (id != -1)
+		return g_strdup_printf ("%s/%08x.xml", location->p->fullpath, id);
+	else
+		return NULL;
 }
 
 /**
@@ -567,313 +898,42 @@ location_store (Location *location, gchar *backend_id, FILE *input,
  **/
 
 void 
-location_store_xml (Location *location, gchar *backend_id, xmlDocPtr xml_doc,
-		    StoreType store_type) 
+location_store_xml (Location                 *location,
+		    gchar                    *backend_id,
+		    xmlDocPtr                 xml_doc,
+		    ConfigArchiver_StoreType  store_type) 
 {
-	gint id, prev_id = 0;
-	xmlDocPtr parent_doc, prev_doc = NULL;
-	char *filename;
-	ContainmentType contain_type;
+	CORBA_Environment ev;
 
 	g_return_if_fail (location != NULL);
 	g_return_if_fail (IS_LOCATION (location));
-	g_return_if_fail (location->p->config_log != NULL);
-	g_return_if_fail (IS_CONFIG_LOG (location->p->config_log));
 	g_return_if_fail (xml_doc != NULL);
 
-	contain_type = location_contains (location, backend_id);
-
-	if (contain_type == CONTAIN_NONE) {
-		if (!location->p->inherits_location)
-			fprintf (stderr, "Could not find a location in the " \
-				 "tree ancestry that stores this " \
-				 "backend: %s.\n", backend_id);
-		else
-			location_store_xml (location->p->inherits_location,
-					    backend_id, xml_doc, store_type);
-
-		return;
-	}
-
-	if (contain_type == CONTAIN_PARTIAL && store_type != STORE_FULL &&
-	    location->p->inherits_location != NULL)
-	{
-		g_assert (store_type == STORE_MASK_PREVIOUS ||
-			  store_type == STORE_COMPARE_PARENT);
-
-		parent_doc = location_load_rollback_data
-			(location->p->inherits_location, NULL, 0,
-			 backend_id, TRUE);
-
-		if (store_type == STORE_MASK_PREVIOUS) {
-			prev_id = config_log_get_rollback_id_by_steps
-				(location->p->config_log, 0, backend_id);
-
-			if (prev_id != -1)
-				prev_doc = load_xml_data
-					(location->p->fullpath, prev_id);
-		}
-
-		if (prev_id == -1 || store_type == STORE_COMPARE_PARENT) {
-			subtract_xml_doc (xml_doc, parent_doc, FALSE);
-		} else {
-			subtract_xml_doc (parent_doc, prev_doc, FALSE);
-			subtract_xml_doc (xml_doc, parent_doc, TRUE);
-		}
-
-		xmlFreeDoc (parent_doc);
-
-		if (prev_doc != NULL)
-			xmlFreeDoc (prev_doc);
-	}
-
-	id = config_log_write_entry (location->p->config_log, backend_id,
-				     store_type == STORE_DEFAULT);
-
-	filename = g_strdup_printf ("%s/%08x.xml",
-				    location->p->fullpath, id);
-	xmlSaveFile (filename, xml_doc);
-	g_free (filename);
+	CORBA_exception_init (&ev);
+	location_client_store_xml (BONOBO_OBJREF (location), backend_id, xml_doc, store_type, &ev);
+	CORBA_exception_free (&ev);
 }
 
 /**
- * location_rollback_backend_to:
- * @location: 
- * @date: 
- * @backend_id: 
- * @parent_chain: 
- * 
- * Roll back the backend with the given id to the given date, optionally
- * chaining to the parent location if the current one does not cover this
- * backend
- **/
-
-void
-location_rollback_backend_to (Location *location, struct tm *date, 
-			      gchar *backend_id, gboolean parent_chain) 
-{
-	xmlDocPtr doc;
-
-	g_return_if_fail (location != NULL);
-	g_return_if_fail (IS_LOCATION (location));
-
-	doc = location_load_rollback_data (location, date, 0,
-					   backend_id, parent_chain);
-	LOCATION_CLASS (GTK_OBJECT (location)->klass)->do_rollback
-		(location, backend_id, doc);
-	xmlFreeDoc (doc);
-}
-
-/**
- * location_rollback_backends_to:
- * @location: 
- * @date: 
- * @backends: 
- * @parent_chain: 
- * 
- * Roll back the list of backends specified to the given date, optionally
- * chaining to the parent location. This destroys the list of backends given
- *
- * FIXME: To enforce some kind of ordering on backend application, just create
- * a comparison function between backend ids that calls a BackendList method
- * to see which item should go first, and then call g_list_sort with that on
- * the backend list
- **/
-
-void 
-location_rollback_backends_to (Location *location, struct tm *date,
-			       GList *backends, gboolean parent_chain) 
-{
-	GList *node;
-
-	g_return_if_fail (location != NULL);
-	g_return_if_fail (IS_LOCATION (location));
-	g_return_if_fail (location->p->config_log != NULL);
-	g_return_if_fail (IS_CONFIG_LOG (location->p->config_log));
-
-	for (node = backends; node; node = node->next)
-		location_rollback_backend_to (location, date, node->data,
-					      parent_chain);
-}
-
-/**
- * location_rollback_all_to:
- * @location: 
- * @date: 
- * @parent_chain: 
- * 
- * Roll back all configurations for this location to the given date,
- * optionally chaining to the parent location
- **/
-
-void 
-location_rollback_all_to (Location *location, struct tm *date, 
-			  gboolean parent_chain) 
-{
-	GList *node;
-	BackendNote *note;
-
-	g_return_if_fail (location != NULL);
-	g_return_if_fail (IS_LOCATION (location));
-	g_return_if_fail (location->p->config_log != NULL);
-	g_return_if_fail (IS_CONFIG_LOG (location->p->config_log));
-
-	for (node = location->p->contains_list; node; node = node->next) {
-		note = node->data;
-		location_rollback_backend_to (location, date, note->backend_id,
-					      parent_chain);
-	}
-}
-
-/**
- * location_rollback_backend_by:
- * @location: 
- * @steps: Number of steps to roll back
- * @backend_id: The backend to roll back
- * @parent_chain: TRUE iff the location should defer to its parent
- * 
- * Roll back a backend a given number of steps
- **/
-
-void
-location_rollback_backend_by (Location *location, guint steps, 
-			      gchar *backend_id, gboolean parent_chain)
-{
-	xmlDocPtr doc;
-
-	g_return_if_fail (location != NULL);
-	g_return_if_fail (IS_LOCATION (location));
-
-	doc = location_load_rollback_data (location, NULL, steps,
-					   backend_id, parent_chain);
-	LOCATION_CLASS (GTK_OBJECT (location)->klass)->do_rollback
-		(location, backend_id, doc);
-	xmlFreeDoc (doc);
-}
-
-/**
- * location_rollback_id:
- * @location: 
- * @id: 
- * 
- * Find the configuration snapshot with the given id number and feed it to the
- * backend associated with it
- **/
-
-void
-location_rollback_id (Location *location, gint id) 
-{
-	gchar *backend_id;
-	struct tm *date;
-	xmlDocPtr xml_doc, parent_doc;
-
-	backend_id = config_log_get_backend_id_for_id
-		(location->p->config_log, id);
-
-	if (backend_id == NULL) return;
-
-	xml_doc = load_xml_data (location->p->fullpath, id);
-
-	if (location_contains (location, backend_id) == CONTAIN_PARTIAL) {
-		date = config_log_get_date_for_id
-			(location->p->config_log, id);
-		parent_doc = location_load_rollback_data
-			(location->p->inherits_location, date, 0,
-			 backend_id, TRUE);
-		merge_xml_docs (xml_doc, parent_doc);
-		xmlFreeDoc (parent_doc);
-	}
-
-	if (backend_id)
-		LOCATION_CLASS (GTK_OBJECT (location)->klass)->do_rollback
-			(location, backend_id, xml_doc);
-}
-
-/**
- * location_dump_rollback_data:
- * @location: 
- * @date: 
- * @steps: 
- * @backend_id: 
- * @parent_chain: 
- * @output: 
- * 
- * Output to the given stream configuration for a given backend as of the
- * given date, optionally specifying whether to chain up to the parent
- * location
- **/
-
-void 
-location_dump_rollback_data (Location *location, struct tm *date,
-			     guint steps, gchar *backend_id,
-			     gboolean parent_chain, FILE *output) 
-{
-	xmlDocPtr doc;
-
-	g_return_if_fail (location != NULL);
-	g_return_if_fail (IS_LOCATION (location));
-	g_return_if_fail (location->p->config_log != NULL);
-	g_return_if_fail (IS_CONFIG_LOG (location->p->config_log));
-
-	doc = location_load_rollback_data (location, date, steps, backend_id,
-					   parent_chain);
-
-	if (doc != NULL) {
-		xmlDocDump (output, doc);
-		xmlFreeDoc (doc);
-	}
-}
-
-/**
- * location_load_rollback_data
+ * location_get_modification_time:
  * @location:
- * @date:
- * @steps:
  * @backend_id:
- * @parent_chain:
  *
- * Loads the XML data for rolling back as specified and returns the document
- * object
+ * Get the time the particular backend was last modified (archived)
  **/
 
-xmlDocPtr
-location_load_rollback_data (Location *location, struct tm *date,
-			     guint steps, gchar *backend_id,
-			     gboolean parent_chain)
+const struct tm *
+location_get_modification_time (Location    *location,
+				const gchar *backend_id) 
 {
 	gint id;
-	xmlDocPtr doc = NULL, parent_doc = NULL;
-	ContainmentType type;
 
-	g_return_val_if_fail (location != NULL, NULL);
-	g_return_val_if_fail (IS_LOCATION (location), NULL);
-	g_return_val_if_fail (location->p->config_log != NULL, NULL);
-	g_return_val_if_fail (IS_CONFIG_LOG (location->p->config_log), NULL);
+	id = config_log_get_rollback_id_by_steps (location->p->config_log, 0, backend_id);
 
-	if (steps > 0)
-		id = config_log_get_rollback_id_by_steps
-			(location->p->config_log, steps, backend_id);
+	if (id < 0)
+		return NULL;
 	else
-		id = config_log_get_rollback_id_for_date
-			(location->p->config_log, date, backend_id);
-
-	if (id != -1)
-		doc = load_xml_data (location->p->fullpath, id);
-
-	type = location_contains (location, backend_id);
-
-	if ((id == -1 || type == CONTAIN_PARTIAL) &&
-	    parent_chain && location->p->inherits_location != NULL)
-		parent_doc = location_load_rollback_data
-			(location->p->inherits_location,
-			 date, steps, backend_id, TRUE);
-
-	if (doc != NULL && parent_doc != NULL)
-		merge_xml_docs (doc, parent_doc);
-	else if (parent_doc != NULL)
-		doc = parent_doc;
-
-	return doc;
+		return config_log_get_date_for_id (location->p->config_log, id);
 }
 
 /**
@@ -887,27 +947,27 @@ location_load_rollback_data (Location *location, struct tm *date,
  **/
 
 ContainmentType
-location_contains (Location *location, gchar *backend_id) 
+location_contains (Location *location, const gchar *backend_id) 
 {
 	BackendList *list;
 
 	g_return_val_if_fail (location != NULL, FALSE);
 	g_return_val_if_fail (IS_LOCATION (location), FALSE);
 
-	if (location->p->inherits_location == NULL) {
+	if (location->p->parent == NULL) {
 		list = archive_get_backend_list (location->p->archive);
 
 		if (backend_list_contains (list, backend_id))
-			return CONTAIN_FULL;
+			return ConfigArchiver_CONTAIN_FULL;
 		else
-			return CONTAIN_NONE;
+			return ConfigArchiver_CONTAIN_NONE;
 	} else {
 		const BackendNote *note = find_note (location, backend_id);
 
 		if (note != NULL)
 			return note->type;
 		else
-			return CONTAIN_NONE;
+			return ConfigArchiver_CONTAIN_NONE;
 	}
 }
 
@@ -924,16 +984,17 @@ location_contains (Location *location, gchar *backend_id)
  **/
 
 gint
-location_add_backend (Location *location, gchar *backend_id,
+location_add_backend (Location *location,
+		      const gchar *backend_id,
 		      ContainmentType type) 
 {
 	g_return_val_if_fail (location != NULL, -1);
 	g_return_val_if_fail (IS_LOCATION (location), -1);
 	g_return_val_if_fail (backend_id != NULL, -2);
 
-	if (location->p->inherits_location == NULL) return -1;
+	if (location->p->parent == NULL) return -1;
 
-	if (type == CONTAIN_NONE) return -3;
+	if (type == ConfigArchiver_CONTAIN_NONE) return -3;
 
 	if (!backend_list_contains 
 	    (archive_get_backend_list (location->p->archive), backend_id))
@@ -959,7 +1020,7 @@ location_add_backend (Location *location, gchar *backend_id,
  **/
 
 void
-location_remove_backend (Location *location, gchar *backend_id) 
+location_remove_backend (Location *location, const gchar *backend_id) 
 {
 	GList *node;
 	BackendNote *note;
@@ -968,7 +1029,7 @@ location_remove_backend (Location *location, gchar *backend_id)
 	g_return_if_fail (IS_LOCATION (location));
 	g_return_if_fail (backend_id != NULL);
 
-	if (location->p->inherits_location == NULL) return;
+	if (location->p->parent == NULL) return;
 
 	for (node = location->p->contains_list; node; node = node->next) {
 		note = node->data;
@@ -1015,23 +1076,23 @@ location_find_path_from_common_parent (Location *location,
 
 	list_node = g_list_append (NULL, location);
 
-	for (tmp = location; tmp; tmp = tmp->p->inherits_location) depth++;
-	for (tmp = location1; tmp; tmp = tmp->p->inherits_location) depth1++;
+	for (tmp = location; tmp; tmp = tmp->p->parent) depth++;
+	for (tmp = location1; tmp; tmp = tmp->p->parent) depth1++;
 
 	while (depth > depth1) {
-		location = location->p->inherits_location;
+		location = location->p->parent;
 		list_node = g_list_prepend (list_node, location);
 		depth--;
 	}
 
 	while (depth1 > depth) {
-		location1 = location1->p->inherits_location;
+		location1 = location1->p->parent;
 		depth1--;
 	}
 
 	while (location && location1 && location != location1) {
-		location = location->p->inherits_location;
-		location1 = location1->p->inherits_location;
+		location = location->p->parent;
+		location1 = location1->p->parent;
 		list_node = g_list_prepend (list_node, location);
 	}
 
@@ -1053,7 +1114,7 @@ location_get_parent (Location *location)
 	g_return_val_if_fail (location != NULL, NULL);
 	g_return_val_if_fail (IS_LOCATION (location), NULL);
 
-	return location->p->inherits_location;
+	return location->p->parent;
 }
 
 /**
@@ -1172,45 +1233,6 @@ location_set_id (Location *location, const gchar *locid)
 }
 
 /**
- * location_store_full_snapshot:
- * @location:
- *
- * Gets XML snapshot data from all the backends contained in this location and
- * archives those data
- *
- * Return value: 0 on success and -1 if any of the backends failed
- **/
-
-gint
-location_store_full_snapshot (Location *location)
-{
-	int fd;
-	gint ret;
-	FILE *pipe;
-	GList *c;
-	BackendNote *note;
-
-	g_return_val_if_fail (location != NULL, -1);
-	g_return_val_if_fail (IS_LOCATION (location), -1);
-
-	for (c = location->p->contains_list; c; c = c->next) {
-		note = c->data;
-		DEBUG_MSG ("Storing %s", note->backend_id);
-
-		fd = run_backend_proc (note->backend_id, TRUE, NULL);
-		pipe = fdopen (fd, "r");
-		ret = location_store (location, note->backend_id,
-				      pipe, STORE_DEFAULT);
-		fclose (pipe);
-
-		if (ret < 0)
-			return -1;
-	}
-
-	return 0;
-}
-
-/**
  * location_get_changed_backends:
  * @location:
  * @location1:
@@ -1245,11 +1267,13 @@ location_get_changed_backends (Location *location, Location *location1)
  **/
 
 gboolean
-location_does_backend_change (Location *location, Location *location1,
-			      gchar *backend_id) 
+location_does_backend_change (Location *location,
+			      Location *location1,
+			      const gchar *backend_id) 
 {
 	GList *backends;
 	gboolean ret;
+	gchar *str;
 
 	g_return_val_if_fail (location != NULL, FALSE);
 	g_return_val_if_fail (IS_LOCATION (location), FALSE);
@@ -1258,8 +1282,10 @@ location_does_backend_change (Location *location, Location *location1,
 	g_return_val_if_fail (backend_id != NULL, FALSE);
 
 	backends = location_get_changed_backends (location, location1);
-	ret = !(g_list_find_custom (backends, backend_id,
+	str = g_strdup (backend_id);
+	ret = !(g_list_find_custom (backends, str,
 				    (GCompareFunc) strcmp) == NULL);
+	g_free (str);
 	g_list_free (backends);
 
 	return ret;
@@ -1278,6 +1304,45 @@ location_get_config_log (Location *location)
 	g_return_val_if_fail (IS_LOCATION (location), FALSE);
 
 	return location->p->config_log;
+}
+
+/**
+ * location_store_full_snapshot:
+ * @location:
+ *
+ * Gets XML snapshot data from all the backends contained in this location and
+ * archives those data
+ *
+ * Return value: 0 on success and -1 if any of the backends failed
+ **/
+
+gint
+location_store_full_snapshot (Location *location)
+{
+	int fd;
+	gint ret;
+	FILE *pipe;
+	GList *c;
+	BackendNote *note;
+
+	g_return_val_if_fail (location != NULL, -1);
+	g_return_val_if_fail (IS_LOCATION (location), -1);
+
+	for (c = location->p->contains_list; c; c = c->next) {
+		note = c->data;
+		DEBUG_MSG ("Storing %s", note->backend_id);
+
+		fd = run_backend_proc (note->backend_id, TRUE, NULL);
+		pipe = fdopen (fd, "r");
+		ret = location_store (location, note->backend_id,
+				      pipe, ConfigArchiver_STORE_DEFAULT);
+		fclose (pipe);
+
+		if (ret < 0)
+			return -1;
+	}
+
+	return 0;
 }
 
 /* location_garbage_collect:
@@ -1341,7 +1406,7 @@ do_create (Location *location)
 	g_return_val_if_fail (IS_ARCHIVE (location->p->archive), FALSE);
 	g_return_val_if_fail (location->p->locid != NULL, FALSE);
 
-	if (location->p->inherits_location == NULL)
+	if (location->p->parent == NULL)
 		backend_list_foreach 
 			(archive_get_backend_list (location->p->archive),
 			 (BackendCB) get_backends_cb,
@@ -1389,17 +1454,14 @@ do_load (Location *location)
 
 	if (location->p->fullpath) g_free (location->p->fullpath);
 
-	location->p->fullpath =
-		g_concat_dir_and_file (archive_get_prefix
-				       (location->p->archive),
-				       location->p->locid);
+	location->p->fullpath = g_concat_dir_and_file
+		(archive_get_prefix (location->p->archive), location->p->locid);
 
 	if (g_file_test (location->p->fullpath, G_FILE_TEST_ISDIR) == FALSE)
 		return FALSE;
 
 	metadata_filename =
-		g_concat_dir_and_file (location->p->fullpath,
-				       "location.xml");
+		g_concat_dir_and_file (location->p->fullpath, "location.xml");
 
 	if (!load_metadata_file (location, metadata_filename, FALSE))
 		return FALSE;
@@ -1419,7 +1481,7 @@ load_metadata_file (Location *location, char *filename, gboolean is_default)
 {
 	xmlDocPtr doc;
 	xmlNodePtr root_node, node;
-	char *inherits_str = NULL, *contains_str, *type_str;
+	char *inherits_str = NULL, *label_str = NULL, *contains_str, *type_str;
 	GList *list_head = NULL, *list_tail = NULL;
 	BackendNote *note;
 	ContainmentType type;
@@ -1451,17 +1513,20 @@ load_metadata_file (Location *location, char *filename, gboolean is_default)
 					   "inherits element with no " \
 					   "location attribute");
 		}
+		else if (!strcmp (node->name, "label")) {
+			label_str = xmlNodeGetContent (node);
+		}
 		else if (!strcmp (node->name, "contains")) {
 			contains_str = xmlGetProp (node, "backend");
 			type_str = xmlGetProp (node, "type");
 
 			if (contains_str != NULL) {
 				if (!strcmp (type_str, "full"))
-					type = CONTAIN_FULL;
+					type = ConfigArchiver_CONTAIN_FULL;
 				else if (!strcmp (type_str, "partial"))
-					type = CONTAIN_PARTIAL;
+					type = ConfigArchiver_CONTAIN_PARTIAL;
 				else {
-					type = CONTAIN_NONE;
+					type = ConfigArchiver_CONTAIN_NONE;
 					g_warning ("Bad type attribute");
 				}
 
@@ -1485,7 +1550,7 @@ load_metadata_file (Location *location, char *filename, gboolean is_default)
 
 	if (!is_default) {
 		if (inherits_str != NULL) {
-			location->p->inherits_location =
+			location->p->parent =
 				archive_get_location (location->p->archive,
 						      inherits_str);
 		} else {
@@ -1503,6 +1568,13 @@ load_metadata_file (Location *location, char *filename, gboolean is_default)
 				 (BackendCB) get_backends_cb,
 				 location);
 		}
+	}
+
+	if (label_str != NULL) {
+		if (location->p->label != NULL)
+			g_free (location->p->label);
+
+		location->p->label = label_str;
 	}
 
 	return TRUE;
@@ -1540,13 +1612,13 @@ write_metadata_file (Location *location, gchar *filename)
 	doc = xmlNewDoc ("1.0");
 	root_node = xmlNewDocNode (doc, NULL, "location", NULL);
 
-	if (location->p->inherits_location) {
+	if (location->p->parent) {
 		g_return_if_fail
-			(location->p->inherits_location->p->locid != NULL);
+			(location->p->parent->p->locid != NULL);
 
 		child_node = xmlNewChild (root_node, NULL, "inherits", NULL);
 		xmlNewProp (child_node, "location",
-			    location->p->inherits_location->p->locid);
+			    location->p->parent->p->locid);
 
 		for (node = location->p->contains_list; node;
 		     node = node->next) 
@@ -1556,31 +1628,20 @@ write_metadata_file (Location *location, gchar *filename)
 						  "contains", NULL);
 			xmlNewProp (child_node, "backend", note->backend_id);
 
-			if (note->type == CONTAIN_PARTIAL)
+			if (note->type == ConfigArchiver_CONTAIN_PARTIAL)
 				xmlNewProp (child_node, "type", "partial");
-			else if (note->type == CONTAIN_FULL)
+			else if (note->type == ConfigArchiver_CONTAIN_FULL)
 				xmlNewProp (child_node, "type", "full");
 		}
 	}
+
+	xmlNewChild (root_node, NULL, "label", location->p->label);
 
 	xmlDocSetRootElement (doc, root_node);
 
 	/* FIXME: Report errors here */
 	xmlSaveFile (filename, doc);
 	xmlFreeDoc (doc);
-}
-
-static xmlDocPtr
-load_xml_data (gchar *fullpath, gint id) 
-{
-	char *filename;
-	xmlDocPtr xml_doc;
-
-	filename = g_strdup_printf ("%s/%08x.xml", fullpath, id);
-	xml_doc = xmlParseFile (filename);
-	g_free (filename);
-
-	return xml_doc;
 }
 
 /* Run the given backend and return the file descriptor used to read or write
@@ -1644,7 +1705,7 @@ run_backend_proc (gchar *backend_id, gboolean do_get, pid_t *pid_r)
 }
 
 static BackendNote *
-backend_note_new (gchar *backend_id, ContainmentType type)
+backend_note_new (const gchar *backend_id, ContainmentType type)
 {
 	BackendNote *note;
 
@@ -1663,7 +1724,7 @@ backend_note_destroy (BackendNote *note)
 }
 
 static const BackendNote *
-find_note (Location *location, gchar *backend_id)
+find_note (Location *location, const gchar *backend_id)
 {
 	GList *node;
 
@@ -1673,107 +1734,6 @@ find_note (Location *location, gchar *backend_id)
 			return node->data;
 
 	return NULL;
-}
-
-static void
-merge_xml_docs (xmlDocPtr child_doc, xmlDocPtr parent_doc)
-{
-	merge_xml_nodes (xmlDocGetRootElement (child_doc),
-			 xmlDocGetRootElement (parent_doc));
-}
-
-static void
-subtract_xml_doc (xmlDocPtr child_doc, xmlDocPtr parent_doc, gboolean strict) 
-{
-	subtract_xml_node (xmlDocGetRootElement (child_doc),
-			   xmlDocGetRootElement (parent_doc), strict);
-}
-
-/* Merge contents of node1 and node2, where node1 overrides node2 as
- * appropriate
- *
- * Notes: Two XML nodes are considered to be "the same" iff their names and
- * all names and values of their attributes are the same. If that is not the
- * case, they are considered "different" and will both be present in the
- * merged node. If nodes are "the same", then this algorithm is called
- * recursively. If nodes are CDATA, then node1 overrides node2 and the
- * resulting node is just node1. The node merging is order-independent; child
- * node from one tree are compared with all child nodes of the other tree
- * regardless of the order they appear in. Hence one may have documents with
- * different node orderings and the algorithm should still run correctly. It
- * will not, however, run correctly in cases when the agent using this
- * facility depends on the nodes being in a particular order.
- *
- * This XML node merging/comparison facility requires that the following
- * standard be set for DTDs:
- *
- * Attributes' sole purpose is to identify a node. For example, a network
- * configuration DTD might have an element like <interface name="eth0"> with a
- * bunch of child nodes to configure that interface. The attribute "name" does
- * not specify the configuration for the interface. It differentiates the node
- * from the configuration for, say, interface eth1. Conversely, a node must be
- * completely identified by its attributes. One cannot include identification
- * information in the node's children, since otherwise the merging and
- * subtraction algorithms will not know what to look for.
- *
- * As a corollary to the above, all configuration information must ultimately
- * be in text nodes. For example, a text string might be stored as
- * <configuration-item>my-value</configuration-item> but never as
- * <configuration-item value="my-value"/>. As an example, if the latter is
- * used, a child location might override a parent's setting for
- * configuration-item. This algorithm will interpret those as different nodes
- * and include them both in the merged result, since it will not have any way
- * of knowing that they are really the same node with different
- * configuration.
- */
-
-static void
-merge_xml_nodes (xmlNodePtr node1, xmlNodePtr node2) 
-{
-	xmlNodePtr child, tmp, iref;
-	GList *node1_children = NULL, *i;
-	gboolean found;
-
-	if (node1->type == XML_TEXT_NODE)
-		return;
-
-	for (child = node1->childs; child != NULL; child = child->next)
-		node1_children = g_list_prepend (node1_children, child);
-
-	node1_children = g_list_reverse (node1_children);
-
-	child = node2->childs;
-
-	while (child != NULL) {
-		tmp = child->next;
-
-		i = node1_children; found = FALSE;
-
-		while (i != NULL) {
-			iref = (xmlNodePtr) i->data;
-
-			if (compare_xml_nodes (iref, child)) {
-				merge_xml_nodes (iref, child);
-				if (i == node1_children)
-					node1_children = node1_children->next;
-				g_list_remove_link (node1_children, i);
-				g_list_free_1 (i);
-				found = TRUE;
-				break;
-			} else {
-				i = i->next;
-			}
-		}
-
-		if (found == FALSE) {
-			xmlUnlinkNode (child);
-			xmlAddChild (node1, child);
-		}
-
-		child = tmp;
-	}
-
-	g_list_free (node1_children);
 }
 
 /* Create a list of backends that differ between location1 and the common
@@ -1855,124 +1815,4 @@ merge_backend_lists (GList *backends1, GList *backends2)
 	}
 
 	return head;
-}
-
-/* Modifies node1 so that it only contains the parts different from node2;
- * returns the modified node or NULL if the node should be destroyed
- *
- * strict determines whether the settings themselves are compared; it should
- * be set to FALSE when the trees are being compared for the purpose of
- * seeing what settings should be included in a tree and TRUE when one wants
- * to restrict the settings included in a tree to those that have already been
- * specified
- */
-
-static xmlNodePtr
-subtract_xml_node (xmlNodePtr node1, xmlNodePtr node2, gboolean strict) 
-{
-	xmlNodePtr child, tmp, iref;
-	GList *node2_children = NULL, *i;
-	gboolean found, same, all_same = TRUE;
-
-	if (node1->type == XML_TEXT_NODE) {
-		if (node2->type == XML_TEXT_NODE &&
-		    (strict || !strcmp (xmlNodeGetContent (node1),
-					xmlNodeGetContent (node2))))
-			return NULL;
-		else
-			return node1;
-	}
-
-	if (node1->childs == NULL && node2->childs == NULL)
-		return NULL;
-
-	for (child = node2->childs; child != NULL; child = child->next)
-		node2_children = g_list_prepend (node2_children, child);
-
-	node2_children = g_list_reverse (node2_children);
-
-	child = node1->childs;
-
-	while (child != NULL) {
-		tmp = child->next;
-		i = node2_children; found = FALSE; all_same = TRUE;
-
-		while (i != NULL) {
-			iref = (xmlNodePtr) i->data;
-
-			if (compare_xml_nodes (child, iref)) {
-				same = (subtract_xml_node
-					(child, iref, strict) == NULL);
-				all_same = all_same && same;
-
-				if (same) {
-					xmlUnlinkNode (child);
-					xmlFreeNode (child);
-				}
-
-				if (i == node2_children)
-					node2_children = node2_children->next;
-				g_list_remove_link (node2_children, i);
-				g_list_free_1 (i);
-				found = TRUE;
-				break;
-			} else {
-				i = i->next;
-			}
-		}
-
-		if (!found)
-			all_same = FALSE;
-
-		child = tmp;
-	}
-
-	g_list_free (node2_children);
-
-	if (all_same)
-		return NULL;
-	else
-		return node1;
-}
-
-/* Return TRUE iff node1 and node2 are "the same" in the sense defined above */
-
-static gboolean
-compare_xml_nodes (xmlNodePtr node1, xmlNodePtr node2) 
-{
-	xmlAttrPtr attr;
-	gint count = 0;
-
-	if (strcmp (node1->name, node2->name))
-		return FALSE;
-
-	/* FIXME: This is worst case O(n^2), which can add up. Could we
-	 * optimize for the case where people have attributes in the same
-	 * order, or does not not matter? It probably does not matter, though,
-	 * since people don't generally have more than one or two attributes
-	 * in a tag anyway.
-	 */
-
-	for (attr = node1->properties; attr != NULL; attr = attr->next) {
-		g_assert (xmlNodeIsText (attr->val));
-
-		if (strcmp (xmlNodeGetContent (attr->val),
-			    xmlGetProp (node2, attr->name)))
-			return FALSE;
-
-		count++;
-	}
-
-	/* FIXME: Is checking if the two nodes have the same number of
-	 * attributes the correct policy here? Should we instead merge the
-	 * attribute(s) that node1 is missing?
-	 */
-
-	for (attr = node2->properties; attr != NULL; attr = attr->next)
-		count--;
-
-	if (count == 0)
-		return TRUE;
-	else
-		return FALSE;
 }

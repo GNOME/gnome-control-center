@@ -223,8 +223,8 @@ real_sync (BonoboConfigDatabase *db,
 	if (!db->writeable)
 		return;
 
-	location_store_xml (archiver_db->location, archiver_db->backend_id, 
-			    archiver_db->doc, STORE_MASK_PREVIOUS);
+	location_client_store_xml (archiver_db->location, archiver_db->backend_id, 
+				   archiver_db->doc, ConfigArchiver_STORE_MASK_PREVIOUS, ev);
 
 	arg = bonobo_arg_new (BONOBO_ARG_NULL);
 	bonobo_event_source_notify_listeners (archiver_db->es, "Bonobo/ConfigDatabase:sync", arg, ev);
@@ -470,29 +470,12 @@ pb_get_fn (BonoboPropertyBag *bag, BonoboArg *arg,
 	   gpointer user_data)
 {
 	BonoboConfigArchiver *archiver_db = BONOBO_CONFIG_ARCHIVER (user_data);
-	gint id;
-	ConfigLog *log;
-	struct tm *mod;
 	time_t val;
-	extern int daylight;
 
-	log = location_get_config_log (archiver_db->location);
-	id = config_log_get_rollback_id_by_steps (log, 0, archiver_db->real_name);
-	if (id < 0)
-	{
-		BONOBO_ARG_SET_GENERAL (arg, 0,
-				TC_ulonglong, CORBA_unsigned_long_long, NULL);
-		return;
-	}
+	val = ConfigArchiver_Location_getModificationTime
+		(archiver_db->location, archiver_db->backend_id, ev);
 
-	mod = config_log_get_date_for_id (log, id);
-	val = mktime (mod);
-	g_print ("%i\n", mod->tm_hour);
-	if (daylight)
-		val -= 3600;
-
-	BONOBO_ARG_SET_GENERAL (arg, val,
-				TC_ulonglong, CORBA_unsigned_long_long, NULL);
+	BONOBO_ARG_SET_GENERAL (arg, val, TC_ulonglong, CORBA_unsigned_long_long, NULL);
 }
 
 static void
@@ -509,6 +492,8 @@ bonobo_config_archiver_destroy (GtkObject *object)
 	BonoboConfigArchiver *archiver_db = BONOBO_CONFIG_ARCHIVER (object);
 	CORBA_Environment     ev;
 
+	DEBUG_MSG ("Enter");
+
 	CORBA_exception_init (&ev);
 
 	if (archiver_db->real_name != NULL) {
@@ -518,16 +503,24 @@ bonobo_config_archiver_destroy (GtkObject *object)
 
 	CORBA_exception_free (&ev);
 
-	if (archiver_db->doc)
+	if (archiver_db->doc != NULL)
 		xmlFreeDoc (archiver_db->doc);
 	
-	if (archiver_db->filename)
+	if (archiver_db->filename != NULL)
 		g_free (archiver_db->filename);
 
-	if (archiver_db->fp)
+	if (archiver_db->fp != NULL)
 		fclose (archiver_db->fp);
+
+	if (archiver_db->location != CORBA_OBJECT_NIL)
+		bonobo_object_release_unref (archiver_db->location, NULL);
+
+	if (archiver_db->archive != CORBA_OBJECT_NIL)
+		bonobo_object_release_unref (archiver_db->archive, NULL);
 	
 	parent_class->destroy (object);
+
+	DEBUG_MSG ("Exit");
 }
 
 
@@ -632,60 +625,67 @@ fill_cache (BonoboConfigArchiver *archiver_db)
 }
 
 Bonobo_ConfigDatabase
-bonobo_config_archiver_new (const char *backend_id, const char *location_id)
+bonobo_config_archiver_new (Bonobo_Moniker               parent,
+			    const Bonobo_ResolveOptions *options,
+			    const char                  *backend_id,
+			    const char                  *location_id,
+			    CORBA_Environment           *ev)
 {
 	BonoboConfigArchiver  *archiver_db;
 	Bonobo_ConfigDatabase  db;
-	CORBA_Environment      ev;
 	gchar                 *real_name;
-
-	static Archive        *archive = NULL;
 
 	g_return_val_if_fail (backend_id != NULL, NULL);
 
-	CORBA_exception_init (&ev);
+	DEBUG_MSG ("Enter");
 
 	if (location_id == NULL)
 		real_name = g_strdup (backend_id);
 	else
 		real_name = g_strconcat ("[", location_id, "]", backend_id, NULL);
 
-	db = bonobo_url_lookup ("BONOBO_CONF:ARCHIVER", real_name, &ev);
+	db = bonobo_url_lookup ("BONOBO_CONF:ARCHIVER", real_name, ev);
 
-	if (BONOBO_EX (&ev))
+	if (BONOBO_EX (ev)) {
 		db = CORBA_OBJECT_NIL;
-	
-	CORBA_exception_free (&ev);
+		CORBA_exception_init (ev);
+	}
 
 	if (db) {
 		g_free (real_name);
 		return bonobo_object_dup_ref (db, NULL);
 	}
 
-	if (!(archiver_db = gtk_type_new (BONOBO_CONFIG_ARCHIVER_TYPE))) {
+	DEBUG_MSG ("Creating object");
+
+	if ((archiver_db = gtk_type_new (BONOBO_CONFIG_ARCHIVER_TYPE)) == NULL) {
 		g_free (real_name);
 		return CORBA_OBJECT_NIL;
 	}
 
-	if (archive == NULL)
-		archive = ARCHIVE (archive_load (FALSE));
+	archiver_db->archive = Bonobo_Moniker_resolve (parent, options, "IDL:ConfigArchiver/Archive:1.0", ev);
+
+	if (BONOBO_EX (ev) || archiver_db->archive == CORBA_OBJECT_NIL) {
+		g_critical ("Could not resolve parent moniker to an archive");
+		bonobo_object_unref (BONOBO_OBJECT (archiver_db));
+		return CORBA_OBJECT_NIL;
+	}
 
 	if (location_id == NULL || *location_id == '\0')
-		archiver_db->location = archive_get_current_location (archive);
+		archiver_db->location = ConfigArchiver_Archive__get_currentLocation (archiver_db->archive, ev);
 	else
-		archiver_db->location = archive_get_location (archive, location_id);
+		archiver_db->location = ConfigArchiver_Archive_getLocation (archiver_db->archive, location_id, ev);
 
-	if (archiver_db->location == NULL) {
+	if (archiver_db->location == CORBA_OBJECT_NIL) {
 		bonobo_object_unref (BONOBO_OBJECT (archiver_db));
 		return CORBA_OBJECT_NIL;
 	}
 
 	archiver_db->backend_id = g_strdup (backend_id);
-	archiver_db->archive = archive;
 	archiver_db->real_name = real_name;
 	
-	archiver_db->doc = location_load_rollback_data
-		(archiver_db->location, NULL, 0, archiver_db->backend_id, TRUE);
+	archiver_db->doc = location_client_load_rollback_data
+		(archiver_db->location, NULL, 0, archiver_db->backend_id, TRUE, ev);
 
 	if (archiver_db->doc == NULL) {
 		gchar *filename;
@@ -736,7 +736,9 @@ bonobo_config_archiver_new (const char *backend_id, const char *location_id)
 
 	db = CORBA_Object_duplicate (BONOBO_OBJREF (archiver_db), NULL);
 
-	bonobo_url_register ("BONOBO_CONF:ARCHIVER", real_name, NULL, db, &ev);
+	bonobo_url_register ("BONOBO_CONF:ARCHIVER", real_name, NULL, db, ev);
+
+	DEBUG_MSG ("Exit: %p", db);
 
 	return db;
 }

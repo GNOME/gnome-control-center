@@ -89,7 +89,7 @@ static GList     *find_config_log_entry_date    (ConfigLog       *config_log,
 						 struct tm       *date);
 static GList     *find_config_log_entry_backend (ConfigLog       *config_log,
 						 GList           *start, 
-						 gchar           *backend_id);
+						 const gchar     *backend_id);
 
 static GList     *load_log_entry                (ConfigLog       *config_log,
 						 GList           *last);
@@ -300,7 +300,7 @@ config_log_delete (ConfigLog *config_log)
 gint 
 config_log_get_rollback_id_for_date (ConfigLog *config_log,
 				     struct tm *date,
-				     gchar *backend_id) 
+				     const gchar *backend_id) 
 {
 	GList *node;
 
@@ -333,7 +333,8 @@ config_log_get_rollback_id_for_date (ConfigLog *config_log,
 
 gint
 config_log_get_rollback_id_by_steps (ConfigLog *config_log,
-				     guint steps, gchar *backend_id)
+				     guint steps,
+				     const gchar *backend_id)
 {
 	GList *node;
 
@@ -394,7 +395,7 @@ config_log_get_backend_id_for_id (ConfigLog *config_log, gint id)
 
 /* Return the date the data with the given id was written */
 
-struct tm *
+const struct tm *
 config_log_get_date_for_id (ConfigLog *config_log, gint id) 
 {
 	GList *node;
@@ -429,8 +430,9 @@ config_log_get_date_for_id (ConfigLog *config_log, gint id)
  **/
 
 gint 
-config_log_write_entry (ConfigLog *config_log, gchar *backend_id,
-			gboolean is_default_data) 
+config_log_write_entry (ConfigLog   *config_log,
+			const gchar *backend_id,
+			gboolean     is_default_data) 
 {
 	ConfigLogEntry *entry;
 
@@ -454,9 +456,6 @@ config_log_write_entry (ConfigLog *config_log, gchar *backend_id,
 		g_list_prepend (config_log->p->log_data, entry);
 
 	dump_log (config_log);
-	if (config_log->p->file_stream != NULL)
-		fclose (config_log->p->file_stream);
-	do_load (config_log);
 
 	return entry->id;
 }
@@ -565,6 +564,7 @@ config_log_garbage_collect (ConfigLog        *config_log,
 	GList *node, *list = NULL;
 	ConfigLogEntry *e1, *e2;
 	time_t t1, t2, now;
+	struct tm now_b, *tmp_date;
 
 	g_return_if_fail (config_log != NULL);
 	g_return_if_fail (IS_CONFIG_LOG (config_log));
@@ -593,15 +593,27 @@ config_log_garbage_collect (ConfigLog        *config_log,
 	if (list == NULL) return;
 
 	now = time (NULL);
+	gmtime_r (&now, &now_b);
+	now = mktime (&now_b);
 
 	for (node = list; node->next != NULL; node = node->next) {
 		e1 = ((GList *) node->data)->data;
 		e2 = ((GList *) node->next->data)->data;
 
-		t1 = mktime (e1->date);
-		t2 = mktime (e2->date);
+		tmp_date = dup_date (e1->date);
+		t1 = mktime (tmp_date);
+		g_free (tmp_date);
 
-		if (K_CONST * (t2 - t1) < now - t2) {
+		tmp_date = dup_date (e2->date);
+		t2 = mktime (tmp_date);
+		g_free (tmp_date);
+
+		if (now < t2 || now < t1)
+			g_warning ("Log entry is in the future!");
+		if (t1 > t2)
+			g_warning ("Log entries are out of order!");
+
+		if (K_CONST * difftime (t2, t1) < difftime (now, t2)) {
 			config_log->p->log_data =
 				g_list_remove_link (config_log->p->log_data, node->data);
 			callback (config_log, backend_id, e1->id, data);
@@ -693,8 +705,9 @@ find_config_log_entry_date (ConfigLog *config_log, GList *start,
  */
 
 static GList *
-find_config_log_entry_backend (ConfigLog *config_log, GList *start, 
-			       gchar *backend_id) 
+find_config_log_entry_backend (ConfigLog *config_log,
+			       GList *start, 
+			       const gchar *backend_id) 
 {
 	GList *last;
 	ConfigLogEntry *entry;
@@ -812,6 +825,9 @@ parse_line (char *buffer, int *id, struct tm *date, char **backend_id)
 	if (extract_number (&buffer, &date->tm_sec, 2) == FALSE)
 		return FALSE;
 
+	date->tm_gmtoff = 0;
+	date->tm_zone = "GMT";
+
 	if (!isspace (*buffer) || *(buffer + 1) == '\0') return FALSE;
 	buffer++;
 
@@ -918,10 +934,10 @@ static struct tm *
 get_current_date (void) 
 {
 	time_t current_time;
-	struct tm *time_1, *ret;
+	struct tm time_2, *time_1 = &time_2, *ret;
 
 	current_time = time (NULL);
-	time_1 = localtime (&current_time);
+	gmtime_r (&current_time, time_1);
 	ret = g_new (struct tm, 1);
 	memcpy (ret, time_1, sizeof (struct tm));
 	return ret;
@@ -952,7 +968,7 @@ dump_log (ConfigLog *config_log)
 {
 	char  *filename_out;
 	GList *first;
-	FILE  *output;
+	FILE  *input, *output;
 
 	DEBUG_MSG ("Enter");
 
@@ -983,8 +999,9 @@ dump_log (ConfigLog *config_log)
 	    ((config_log->p->first_old == NULL && config_log->p->log_data == NULL) ||
 	     (config_log->p->first_old != NULL && config_log->p->log_data != NULL)))
 	{
-		rewind (config_log->p->file_stream);
-		dump_file (config_log->p->file_stream, output);
+		input = fopen (config_log->p->filename, "r");
+		dump_file (input, output);
+		fclose (input);
 	}
 
 	config_log->p->first_old = config_log->p->log_data;
