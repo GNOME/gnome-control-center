@@ -172,17 +172,17 @@ preferences_load (Preferences *prefs)
 
 	engine = gconf_engine_get_default ();
 
-	prefs->enabled = gconf_engine_get_bool (engine, "/background-properties/enabled", &error);
-	prefs->wallpaper_type = gconf_engine_get_int (engine, "/background-properties/wallpaper-type", &error);
-	prefs->wallpaper_filename = gconf_engine_get_string (engine, "/background-properties/wallpaper-filename", &error);
-	prefs->wallpaper_enabled = gconf_engine_get_bool (engine, "/background-properties/wallpaper-enabled", &error);
-	prefs->color1 = read_color_from_string (gconf_engine_get_string (engine, "/background-properties/color1", &error));
-	prefs->color2 = read_color_from_string (gconf_engine_get_string (engine, "/background-properties/color2", &error));
-	prefs->opacity = gconf_engine_get_int (engine, "/background-properties/opacity", &error);
+	prefs->enabled = gconf_engine_get_bool (engine, "/desktop/gnome/background/enabled", &error);
+	prefs->wallpaper_type = gconf_engine_get_int (engine, "/desktop/gnome/background/wallpaper-type", &error);
+	prefs->wallpaper_filename = gconf_engine_get_string (engine, "/desktop/gnome/background/wallpaper-filename", &error);
+	prefs->wallpaper_enabled = gconf_engine_get_bool (engine, "/desktop/gnome/background/wallpaper-enabled", &error);
+	prefs->color1 = read_color_from_string (gconf_engine_get_string (engine, "/desktop/gnome/background/color1", &error));
+	prefs->color2 = read_color_from_string (gconf_engine_get_string (engine, "/desktop/gnome/background/color2", &error));
+	prefs->opacity = gconf_engine_get_int (engine, "/desktop/gnome/background/opacity", &error);
 	if (prefs->opacity >= 100 || prefs->opacity < 0)
 		prefs->adjust_opacity = FALSE;
 
-	prefs->orientation = gconf_engine_get_int (engine, "/background-properties/orientation", &error);
+	prefs->orientation = gconf_engine_get_int (engine, "/desktop/gnome/background/orientation", &error);
 
 	if (prefs->orientation == ORIENTATION_SOLID)
 		prefs->gradient_enabled = FALSE;
@@ -204,10 +204,10 @@ preferences_merge_entry (Preferences      *prefs,
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs));
 
-	if (!strcmp (entry->key, "/background-properties/wallpaper_type")) {
+	if (!strcmp (entry->key, "/desktop/gnome/background/wallpaper_type")) {
 		prefs->wallpaper_type = gconf_value_get_int (value);
 	}
-	else if (!strcmp (entry->key, "/background-properties/wallpaper-filename")) {
+	else if (!strcmp (entry->key, "/desktop/gnome/background/wallpaper-filename")) {
 		prefs->wallpaper_filename = g_strdup (gconf_value_get_string (value));
 
 		if (prefs->wallpaper_filename != NULL &&
@@ -217,19 +217,19 @@ preferences_merge_entry (Preferences      *prefs,
 		else
 			prefs->wallpaper_enabled = FALSE;
 	}
-	else if (!strcmp (entry->key, "/background-properties/color1")) {
+	else if (!strcmp (entry->key, "/desktop/gnome/background/color1")) {
 		prefs->color1 = read_color_from_string (gconf_value_get_string (value));
 	}
-	else if (!strcmp (entry->key, "/background-properties/color2")) {
+	else if (!strcmp (entry->key, "/desktop/gnome/background/color2")) {
 		prefs->color2 = read_color_from_string (gconf_value_get_string (value));
 	}
-	else if (!strcmp (entry->key, "/background-properties/opacity")) {
+	else if (!strcmp (entry->key, "/desktop/gnome/background/opacity")) {
 		prefs->opacity = gconf_value_get_int (value);
 
 		if (prefs->opacity >= 100)
 			prefs->adjust_opacity = FALSE;
 	}
-	else if (!strcmp (entry->key, "/background-properties/orientation")) {
+	else if (!strcmp (entry->key, "/desktop/gnome/background/orientation")) {
 		prefs->orientation = gconf_value_get_int (value);
 
 		if (prefs->orientation == ORIENTATION_SOLID)
@@ -237,10 +237,10 @@ preferences_merge_entry (Preferences      *prefs,
 		else
 			prefs->gradient_enabled = TRUE;
 	}
-	else if (!strcmp (entry->key, "/background-properties/wallpaper-enabled")) {
+	else if (!strcmp (entry->key, "/desktop/gnome/background/wallpaper-enabled")) {
 		prefs->wallpaper_enabled = gconf_value_get_bool (value);
 	}
-	else if (!strcmp (entry->key, "/background-properties/wallpaper-type")) {
+	else if (!strcmp (entry->key, "/desktop/gnome/background/wallpaper-type")) {
 		prefs->wallpaper_type = gconf_value_get_int (value);
 	} else {
 		g_warning ("%s: Unknown property: %s", __FUNCTION__, entry->key);
