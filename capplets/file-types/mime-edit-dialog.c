@@ -490,37 +490,15 @@ store_data (MimeEditDialog *dialog)
 static void
 add_ext_cb (MimeEditDialog *dialog)
 {
-	GladeXML *add_dialog_xml;
-	GtkWidget *add_dialog;
-	GtkWidget *add_widget;
-	GtkWidget *ext_entry;
-	gint response_id;
 	GtkTreeIter iter;
+	const gchar *ext_name;
 
-	add_dialog_xml = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/file-types-properties.glade", "add_ext_widget", NULL);
+	ext_name = gtk_entry_get_text (GTK_ENTRY (WID ("new_ext_entry")));
 
-	add_dialog = gtk_dialog_new_with_buttons
-		(_("Add filename extension"), NULL, -1,
-		 GTK_STOCK_OK,     GTK_RESPONSE_OK,
-		 GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-		 NULL);
-
-	add_widget = glade_xml_get_widget (add_dialog_xml, "add_ext_widget");
-	ext_entry = glade_xml_get_widget (add_dialog_xml, "add_ext_entry");
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (add_dialog)->vbox), add_widget, TRUE, TRUE, 0);
-
-	gtk_widget_show_all (add_dialog);
-
-	response_id = gtk_dialog_run (GTK_DIALOG (add_dialog));
-
-	if (response_id == GTK_RESPONSE_OK) {
+	if (ext_name != NULL && *ext_name != '\0') {
 		gtk_tree_store_append (dialog->p->ext_store, &iter, NULL);
-		gtk_tree_store_set (dialog->p->ext_store, &iter, 0,
-				    gtk_entry_get_text (GTK_ENTRY (ext_entry)), -1);
+		gtk_tree_store_set (dialog->p->ext_store, &iter, 0, ext_name, -1);
 	}
-
-	gtk_widget_destroy (GTK_WIDGET (add_dialog));
-	g_object_unref (G_OBJECT (add_dialog_xml));
 }
 
 static void
