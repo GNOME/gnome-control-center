@@ -106,7 +106,8 @@ main (int argc, char *argv[])
 						 _("The typing monitor uses the notification area to display "
 						   "information. You don't seem to have a notification area "
 						   "on your panel. You can add it by right-clicking on your "
-						   "panel and choose 'Add to panel -> Utilities -> Notification area'."));
+						   "panel and choosing 'Add to panel', selecting 'Notification "
+						   "area' and clicking 'Add'."));
 
 		gtk_dialog_run (GTK_DIALOG (dialog));
 
