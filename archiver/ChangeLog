@@ -1,3 +1,10 @@
+2001-10-13  Bradford Hovinen  <hovinen@ximian.com>
+
+	* bonobo-config-archiver.c (real_sync): Try to resolve a listener
+	to make sure that something is listening when we issue the sync
+	event (disabled for now)
+	(get_listener_oafiid): Implement (disabled for now)
+
 2001-10-05  Shaun Merrigan  <shaun.merrigan@sun.com>
 
 	* archiver-client.c (location_client_load_rollback_data):

@@ -1,3 +1,21 @@
+2001-10-12  Bradford Hovinen  <hovinen@ximian.com>
+
+	* capplet-util.c (get_factory_name): Updated factory name to
+	reflect new, expanded roles
+
+	* Bonobo_Control_Capplet_generic.oaf.in: Create
+
+2001-09-29  Bradford Hovinen  <hovinen@ximian.com>
+
+	* capplet-util.c (create_control_cb): Elimite reference counter --
+	it's not necessary
+	(create_control_cb): Make this a multi-factory so that we can
+	return the listener when needed
+	(capplet_init): Set up the listener here rather than in
+	get_control_cb; also remove the listener and unref the database
+	here
+	(quit_cb, real_quit_cb): Remove (thank the gods)
+
 2001-09-28  Bradford Hovinen  <hovinen@ximian.com>
 
 	* capplet-util.c (get_default_moniker): Remove -control from the

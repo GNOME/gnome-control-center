@@ -34,17 +34,12 @@
 
 #include "capplet-util.h"
 
-static CreateDialogFn          create_dialog_cb = NULL;
-static ApplySettingsFn         apply_settings_cb = NULL;
-static SetupPropertyEditorsFn  setup_cb = NULL;
+static CreateDialogFn                 create_dialog_cb = NULL;
+static ApplySettingsFn                apply_settings_cb = NULL;
+static SetupPropertyEditorsFn         setup_cb = NULL;
 
-typedef struct _pair_t pair_t;
-
-struct _pair_t 
-{
-	gpointer a;
-	gpointer b;
-};
+static BonoboListener                *listener = NULL;
+static Bonobo_EventSource_ListenerId  listener_id;
 
 /* apply_cb
  *
@@ -214,98 +209,38 @@ get_control_cb (BonoboPropertyControl *property_control, gint page_number)
 	return BONOBO_OBJECT (control);
 }
 
-/* real_quit_cb
- *
- * Release all objects and close down
- */
-
-static gint 
-real_quit_cb (pair_t *pair) 
-{
-	CORBA_Environment ev;
-	Bonobo_EventSource_ListenerId id;
-	Bonobo_ConfigDatabase db;
-
-	CORBA_exception_init (&ev);
-
-	db = (Bonobo_ConfigDatabase) pair->a;
-	id = (Bonobo_EventSource_ListenerId) pair->b;
-
-	DEBUG_MSG ("Removing event source...");
-	bonobo_event_source_client_remove_listener (db, id, &ev);
-	DEBUG_MSG ("Releasing db object...");
-	bonobo_object_release_unref (db, &ev);
-	DEBUG_MSG ("Done releasing db object...");
-
-	CORBA_exception_free (&ev);
-
-	g_free (pair);
-
-	return FALSE;
-}
-
-static void
-quit_cb (BonoboPropertyControl *pc, pair_t *pair)
-{
-	GtkObject *ref_obj = pair->b;
-
-	pair->b = gtk_object_get_data (GTK_OBJECT (pc), "listener-id");
-
-	gtk_idle_add ((GtkFunction)real_quit_cb, pair);
-	gtk_object_unref (ref_obj);
-}
-
-static void
-all_done_cb (void) 
-{
-	gtk_idle_add ((GtkFunction) gtk_main_quit, NULL);
-}
-
 /* create_control_cb
  *
  * Small function to create the PropertyControl and return it.
  */
 
 static BonoboObject *
-create_control_cb (BonoboGenericFactory *factory, gchar *default_moniker) 
+create_control_cb (BonoboGenericFactory *factory, const gchar *component_id, gchar *default_moniker) 
 {
+	BonoboObject                  *obj;
 	BonoboPropertyControl         *property_control;
-	CORBA_Environment              ev;
-	Bonobo_EventSource_ListenerId  id;
-	Bonobo_ConfigDatabase          db;
-	pair_t                        *pair;
 
-	static GtkObject              *ref_obj = NULL;
+	static const gchar            *prefix1 = "OAFIID:Bonobo_Control_Capplet_";
+	static const gchar            *prefix2 = "OAFIID:Bonobo_Listener_Capplet_";
 
-	CORBA_exception_init (&ev);
+	g_message ("%s: Enter", __FUNCTION__);
 
-	property_control = bonobo_property_control_new
-		((BonoboPropertyControlGetControlFn) get_control_cb, 1, NULL);
-	gtk_signal_connect (GTK_OBJECT (property_control), "action",
-			    GTK_SIGNAL_FUNC (apply_cb), NULL);
-
-	db = bonobo_get_object (default_moniker, "IDL:Bonobo/ConfigDatabase:1.0", &ev);
-	id = bonobo_event_source_client_add_listener
-		(db, (BonoboListenerCallbackFn) changed_cb,
-		 "Bonobo/ConfigDatabase:sync", &ev, db);
-	gtk_object_set_data (GTK_OBJECT (property_control), "listener-id", (gpointer) id);
-
-	CORBA_exception_free (&ev);
-
-	if (ref_obj == NULL) {
-		ref_obj = gtk_object_new (gtk_object_get_type (), NULL);
-		gtk_signal_connect (ref_obj, "destroy", GTK_SIGNAL_FUNC (all_done_cb), NULL);
+	if (!strncmp (component_id, prefix1, strlen (prefix1))) {
+		property_control = bonobo_property_control_new
+			((BonoboPropertyControlGetControlFn) get_control_cb, 1, NULL);
+		gtk_signal_connect (GTK_OBJECT (property_control), "action",
+				    GTK_SIGNAL_FUNC (apply_cb), NULL);
+		obj = BONOBO_OBJECT (property_control);
+	}
+	else if (!strncmp (component_id, prefix2, strlen (prefix2))) {
+		obj = BONOBO_OBJECT (listener);
+		bonobo_object_ref (obj);
 	} else {
-		gtk_object_ref (ref_obj);
+		g_critical ("Not creating %s", component_id);
+		obj = NULL;
 	}
 
-	pair = g_new (pair_t, 1);
-	pair->a = db;
-	pair->b = ref_obj;
-	gtk_signal_connect (GTK_OBJECT (property_control), "destroy",
-			    GTK_SIGNAL_FUNC (quit_cb), pair);
-
-	return BONOBO_OBJECT (property_control);
+	return obj;
 }
 
 /* get_factory_name
@@ -326,7 +261,7 @@ get_factory_name (const gchar *binary)
 	if ((tmp1 = strstr (tmp, "-capplet")) != NULL) *tmp1 = '\0';
 	while ((tmp1 = strchr (tmp, '-')) != NULL) *tmp1 = '_';
 
-	res = g_strconcat ("OAFIID:Bonobo_Control_Capplet_", tmp, "_Factory", NULL);
+	res = g_strconcat ("OAFIID:Bonobo_", tmp, "_Factory", NULL);
 	g_free (s);
 	return res;
 }
@@ -477,6 +412,39 @@ legacy_is_modified (Bonobo_ConfigDatabase db, const gchar *filename)
 	return ret;
 }
 
+static int
+add_listener_cb (Bonobo_ConfigDatabase db) 
+{
+	Bonobo_EventSource             es;
+	CORBA_Environment              ev;
+
+	CORBA_exception_init (&ev);
+
+	/* We do this manually so that we have access to the resulting listener object */
+	es = Bonobo_Unknown_queryInterface (db, "IDL:Bonobo/EventSource:1.0", &ev);
+
+	if (BONOBO_EX (&ev) || es == CORBA_OBJECT_NIL) {
+		g_critical ("Cannot get event source interface (%s)",
+			    bonobo_exception_get_text (&ev));
+	} else {
+		listener = bonobo_listener_new ((BonoboListenerCallbackFn) changed_cb, db);
+		listener_id = Bonobo_EventSource_addListenerWithMask (es, BONOBO_OBJREF (listener),
+								      "Bonobo/ConfigDatabase:sync", &ev);
+
+		if (BONOBO_EX (&ev) || listener_id == 0) {
+			g_critical ("Could not add the listener to the event source (%s)",
+				    bonobo_exception_get_text (&ev));
+		}
+
+		bonobo_object_release_unref (es, NULL);
+		bonobo_running_context_auto_exit_unref (BONOBO_OBJECT (listener));
+	}
+
+	CORBA_exception_free (&ev);
+
+	return FALSE;
+}
+
 /* capplet_init -- see documentation in capplet-util.h
  */
 
@@ -489,14 +457,17 @@ capplet_init (int                      argc,
 	      SetupPropertyEditorsFn   setup_fn,
 	      GetLegacySettingsFn      get_legacy_fn) 
 {
-	BonoboGenericFactory  *factory;
-	Bonobo_ConfigDatabase  db;
-	CORBA_ORB              orb;
-	CORBA_Environment      ev;
-	gchar                 *factory_iid;
-	gchar                 *default_moniker;
-	gboolean	       needs_legacy = FALSE;
-	int 		       i;	
+	gchar                         *factory_iid;
+	gchar                         *default_moniker;
+	gboolean	               needs_legacy = FALSE;
+	int 		               i;	
+
+	BonoboGenericFactory          *factory;
+
+	CORBA_ORB                      orb;
+	Bonobo_ConfigDatabase          db;
+
+	CORBA_Environment              ev;
 
 	static gboolean apply_only;
 	static gboolean init_session;
@@ -560,17 +531,25 @@ capplet_init (int                      argc,
 		apply_settings_cb = apply_fn;
 		setup_cb = setup_fn;
 		factory_iid = get_factory_name (argv[0]);
-		factory = bonobo_generic_factory_new
-			(factory_iid, (BonoboGenericFactoryFn) create_control_cb, default_moniker);
+		factory = bonobo_generic_factory_new_multi
+			(factory_iid, (GnomeFactoryCallback) create_control_cb, default_moniker);
 		g_free (factory_iid);
 		bonobo_running_context_auto_exit_unref (BONOBO_OBJECT (factory));
+
+		gtk_idle_add ((GtkFunction) add_listener_cb, db);
+
 		bonobo_main ();
+
+		if (listener_id != 0) {
+			bonobo_event_source_client_remove_listener (db, listener_id, &ev);
+
+			if (BONOBO_EX (&ev))
+				g_critical ("Could not remove listener (%s)", bonobo_exception_get_text (&ev));
+		}
 	}
 
 	g_free (default_moniker);
-	DEBUG_MSG ("Releasing final db object...");
-	bonobo_object_release_unref (db, &ev);
-	DEBUG_MSG ("Done releasing final db object...");
+	bonobo_object_release_unref (db, NULL);
 
 	CORBA_exception_free (&ev);
 }

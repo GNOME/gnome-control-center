@@ -1,0 +1,30 @@
+<oaf_info>
+
+<oaf_server iid="OAFIID:Bonobo_@SHORT_CAPPLET_NAME@_properties_Factory" type="exe"
+	    location="@BINDIR@/@CAPPLET_BINARY_NAME@">
+	<oaf_attribute name="repo_ids" type="stringv">
+		<item value="IDL:GNOME/ObjectFactory:1.0"/>
+	</oaf_attribute>
+
+	<oaf_attribute name="name" type="string" value="@SHORT_CAPPLET_NAME@ properties capplet factory"/>
+</oaf_server>
+
+<oaf_server iid="OAFIID:Bonobo_Control_Capplet_@SHORT_CAPPLET_NAME@_properties" type="factory"
+	    location="OAFIID:Bonobo_@SHORT_CAPPLET_NAME@_properties_Factory">
+	<oaf_attribute name="repo_ids" type="stringv">
+		<item value="IDL:Bonobo/PropertyControl:1.0"/>
+		<item value="IDL:Bonobo/Unknown:1.0"/>
+	</oaf_attribute>
+	<oaf_attribute name="name" type="string" value="@SHORT_CAPPLET_NAME@ capplet"/>
+</oaf_server>
+
+<oaf_server iid="OAFIID:Bonobo_Listener_@SHORT_CAPPLET_NAME@" type="factory"
+	    location="OAFIID:Bonobo_@SHORT_CAPPLET_NAME@_properties_Factory">
+	<oaf_attribute name="repo_ids" type="stringv">
+		<item value="IDL:Bonobo/Listener:1.0"/>
+		<item value="IDL:Bonobo/Unknown:1.0"/>
+	</oaf_attribute>
+	<oaf_attribute name="name" type="string" value="Listener for changes to @SHORT_CAPPLET_NAME@ properties"/>
+</oaf_server>
+
+</oaf_info>

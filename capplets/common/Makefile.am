@@ -1,4 +1,4 @@
-EXTRA_DIST = ChangeLog wrapper-script.in
+EXTRA_DIST = ChangeLog wrapper-script.in Bonobo_Control_Capplet_generic.oaf.in
 
 INCLUDES = \
         -DGNOMELOCALEDIR=\""$(datadir)/locale"\" 			\

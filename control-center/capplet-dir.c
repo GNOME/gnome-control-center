@@ -515,6 +515,7 @@ capplet_control_launch (const gchar *capplet_name, gchar *window_title)
 		cf = bonobo_widget_get_control_frame (BONOBO_WIDGET (control));
 		pb = bonobo_control_frame_get_control_property_bag (cf, &ev);
 		bonobo_property_bag_client_set_value_string (pb, "moniker", moniker, &ev);
+		bonobo_object_release_unref (pb, NULL);
 
 		if (BONOBO_EX (&ev)) {
 			dialog = gnome_error_dialog ("Could not load your configuration settings.");

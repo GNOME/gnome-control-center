@@ -17,9 +17,7 @@ defaults_DATA = keyboard-properties.xml
 
 oafdir = $(datadir)/oaf
 oaf_DATA = Bonobo_Control_Capplet_keyboard_properties.oaf
-
-$(oaffile): %.oaf: %.oaf.in
-	sed -e "s#REPLACEME_PLIZ#$(bindir)/$(bin_PROGRAMS)#" < $< > ${oaffile}
+oaffile = $(oaf_DATA)
 
 ##
 ## You should not need to modify anything below this line
@@ -29,6 +27,9 @@ $(oaffile): %.oaf: %.oaf.in
 $(bin_SCRIPTS): $(top_srcdir)/capplets/common/wrapper-script.in
 	sed -e "s#@BINDIR@#$(bindir)#" -e "s#@CAPPLET_NAME@#$(cappletname)-properties#" < $< > $@
 	chmod a+x $@
+
+$(oaffile): %.oaf: $(top_srcdir)/capplets/common/Bonobo_Control_Capplet_generic.oaf.in
+	sed -e "s#@BINDIR@#$(bindir)#" -e "s#@SHORT_CAPPLET_NAME@#$(cappletname)#" -e "s#@CAPPLET_BINARY_NAME@#$(bin_PROGRAMS)#" < $< > ${oaffile}
 
 ####@###GNOMECC_CAPPLETS_DESKTOP_IN_RULE@
 $(desktop).in: %.desktop.in: %.desktop.in.in

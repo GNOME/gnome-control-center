@@ -1,6 +1,6 @@
 /* -*- mode: c; style: linux -*- */
 
-/* capplet-util.c
+/* capplet-util.h
  * Copyright (C) 2001 Ximian, Inc.
  *
  * Written by Bradford Hovinen <hovinen@ximian.com>

@@ -31,6 +31,15 @@ static GtkObjectClass *parent_class = NULL;
 #define PARENT_TYPE BONOBO_CONFIG_DATABASE_TYPE
 #define FLUSH_INTERVAL 30 /* 30 seconds */
 
+/* Small Bonobo bug here... */
+
+#undef BONOBO_RET_EX
+#define BONOBO_RET_EX(ev)		\
+	G_STMT_START{			\
+		if (BONOBO_EX (ev))	\
+			return;		\
+	}G_STMT_END
+
 extern int daytime;
 
 static DirEntry *
@@ -211,12 +220,38 @@ real_get_value (BonoboConfigDatabase *db,
 	return value;
 }
 
+#if 0 /* Disabled now to be safe */
+
+/* Produce a new, dynamically allocated string with the OAF IID of the listener
+ * associated with the given backend id
+ */
+
+static gchar *
+get_listener_oafiid (const gchar *backend_id) 
+{
+	gchar *oafiid, *tmp, *tmp1;
+
+	tmp = g_strdup (backend_id);
+	if ((tmp1 = strstr (tmp, "-properties")) != NULL) *tmp1 = '\0';
+	oafiid = g_strconcat ("OAFIID:Bonobo_Listener_", tmp, NULL);
+	g_free (tmp);
+
+	return oafiid;
+}
+
+#endif /* Disabled */
+
 static void
 real_sync (BonoboConfigDatabase *db, 
 	   CORBA_Environment    *ev)
 {
 	BonoboConfigArchiver *archiver_db = BONOBO_CONFIG_ARCHIVER (db);
-	BonoboArg *arg;
+	BonoboArg            *arg;
+
+#if 0 /* Disabled now to be safe */
+	gchar                *listener_oafiid;
+	Bonobo_Listener       listener;
+#endif /* Disabled */
 
 	if (!db->writeable)
 		return;
@@ -229,9 +264,33 @@ real_sync (BonoboConfigDatabase *db,
 	location_client_store_xml (archiver_db->location, archiver_db->backend_id, 
 				   archiver_db->doc, ConfigArchiver_STORE_MASK_PREVIOUS, ev);
 
+	BONOBO_RET_EX (ev);
+
+#if 0 /* Disabled now to be safe */
+
+	/* Try to find a listener to apply the settings. If we can't, don't
+	 * worry about it
+	 */
+
+	listener_oafiid = get_listener_oafiid (archiver_db->backend_id);
+	listener = bonobo_get_object (listener_oafiid, "IDL:Bonobo/Listener:1.0", ev);
+	g_free (listener_oafiid);
+
+	if (BONOBO_EX (ev)) {
+		listener = CORBA_OBJECT_NIL;
+		CORBA_exception_init (ev);
+	}
+
+#endif /* Disabled */
+
 	arg = bonobo_arg_new (BONOBO_ARG_NULL);
 	bonobo_event_source_notify_listeners (archiver_db->es, "Bonobo/ConfigDatabase:sync", arg, ev);
 	bonobo_arg_release (arg);
+
+#if 0 /* Disabled now to be safe */
+	if (listener != CORBA_OBJECT_NIL)
+		bonobo_object_release_unref (listener, NULL);
+#endif /* Disabled */
 }
 
 static void
