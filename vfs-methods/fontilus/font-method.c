@@ -161,7 +161,7 @@ ensure_font_list(void)
     pat = FcPatternCreate();
     os = FcObjectSetBuild(FC_FILE, FC_FAMILY, FC_WEIGHT, FC_SLANT, 0);
 
-    font_list = FcFontList(0, pat, os);
+    font_list = FcFontList(NULL, pat, os);
 
     FcPatternDestroy(pat);
     FcObjectSetDestroy(os);

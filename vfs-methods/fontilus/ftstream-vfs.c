@@ -55,7 +55,7 @@ vfs_stream_close(FT_Stream stream)
 
     stream->descriptor.pointer = NULL;
     stream->size               = 0;
-    stream->base               = 0;    
+    stream->base               = NULL;    
 }
 
 static FT_Error
