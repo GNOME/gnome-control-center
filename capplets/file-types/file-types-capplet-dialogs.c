@@ -615,14 +615,16 @@ nautilus_mime_type_capplet_show_new_mime_window (void)
 	GtkWidget *desc_entry;
 	GtkWidget *hbox;
 	GtkWidget *vbox;
-	const char *type, *description;
+	const char *description;
 	char *mime_type;
 
 	mime_type = NULL;
 	
-        dialog = gnome_dialog_new (_("Add Mime Type"), GNOME_STOCK_BUTTON_OK, GNOME_STOCK_BUTTON_CANCEL, NULL);
+        dialog = gnome_dialog_new (_("Add Mime Type"), GNOME_STOCK_BUTTON_OK, 
+				   GNOME_STOCK_BUTTON_CANCEL, NULL);
 	gnome_dialog_set_default (GNOME_DIALOG (dialog), 1);
-	label = gtk_label_new (_("Add a new Mime Type\nFor example:  image/tiff; text/x-scheme"));
+	label = gtk_label_new (_("Add a new Mime Type\n"
+				 "For example:  image/tiff; text/x-scheme"));
 	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
 	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
 	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
@@ -654,22 +656,22 @@ nautilus_mime_type_capplet_show_new_mime_window (void)
 	gnome_dialog_set_close (GNOME_DIALOG (dialog), FALSE);
 
         gtk_widget_show_all (GNOME_DIALOG (dialog)->vbox);
+
         switch (gnome_dialog_run (GNOME_DIALOG (dialog))) {
 	        case 0:
-			type = gtk_entry_get_text (GTK_ENTRY (mime_entry));
+			mime_type = g_strdup (gtk_entry_get_text (GTK_ENTRY (mime_entry)));
 			description = gtk_entry_get_text (GTK_ENTRY (desc_entry));
 			
 			/* Add new mime type here */
-			if (strlen (type) > 3) {
-				gnome_vfs_mime_set_registered_type_key (type, "description", description);
-				gnome_vfs_mime_set_value (type, "description", description);
-				mime_type = g_strdup (type);
+			if (strlen (mime_type) > 3) {
+				gnome_vfs_mime_set_value (mime_type, 
+							  "description", 
+							  description);
 			}
 			/* Fall through to close dialog */
 
-	        case 1:
 			break;
-			
+	        case 1:
 		default:
 			break;
         }
@@ -852,6 +854,9 @@ nautilus_mime_type_capplet_show_change_extension_window (const char *mime_type)
         switch (gnome_dialog_run (GNOME_DIALOG (dialog))) {
 	        case 0:
 			extensions_list = get_extensions_from_gtk_list (GTK_LIST (list));
+			if (extensions_list == NULL) {
+				extensions_list = g_strdup ("");
+			}
 			break;
 	        case 1:
 	        default:
@@ -859,6 +864,7 @@ nautilus_mime_type_capplet_show_change_extension_window (const char *mime_type)
 	        	break;
 	}        
 	gnome_dialog_close (GNOME_DIALOG (dialog));
+
 
 	return extensions_list;
 }

@@ -100,7 +100,7 @@ GtkWidget *description_entry;
  *  Display capplet
  */
 
-#define nopeMATHIEU_DEBUG
+#define MATHIEU_DEBUG
 
 #ifdef MATHIEU_DEBUG
 #include <signal.h>
@@ -278,62 +278,6 @@ nautilus_mime_type_capplet_add_extension (const char *extension)
 
 }
 
-#ifdef MATHIEU_DEBUG
-
-static void
-add_extension_clicked (GtkWidget *widget, gpointer data)
-{
-	nautilus_mime_type_capplet_show_new_extension_window ();
-}
-
-static void
-remove_extension_clicked (GtkWidget *widget, gpointer data)
-{
-        gint row;
-	gchar *text;
-	gchar *store;
-	const char *mime_type;
-	
-	text = (gchar *)g_malloc (sizeof (gchar) * 1024);
-	gtk_clist_freeze (GTK_CLIST (extension_list));
-	row = GPOINTER_TO_INT (GTK_CLIST (extension_list)->selection->data);
-	gtk_clist_get_text (GTK_CLIST (extension_list), row, 0, &text);
-	store = g_strdup (text);
-	gtk_clist_remove (GTK_CLIST (extension_list), row);
-	gtk_clist_thaw (GTK_CLIST (extension_list));
-
-
-	mime_type = nautilus_mime_type_capplet_get_selected_item_mime_type ();
-	if (mime_type != NULL) {
-		gnome_vfs_mime_remove_extension (mime_type, store);
-	}
-
-	/* Select first item in list */
-	gtk_clist_select_row (GTK_CLIST (extension_list), 0, 0);
-
-	g_free (store);
-}
-
-static void
-extension_list_selected (GtkWidget *clist, gint row, gint column, gpointer data)
-{
-        gboolean deletable;
-
-	deletable = GPOINTER_TO_INT (gtk_clist_get_row_data (GTK_CLIST (clist), row));
-	if (deletable)
-	        gtk_widget_set_sensitive (remove_button, TRUE);
-	else
-	        gtk_widget_set_sensitive (remove_button, FALSE);
-}
-
-static void
-extension_list_deselected (GtkWidget *clist, gint row, gint column, gpointer data)
-{
-        if (g_list_length (GTK_CLIST (clist)->selection) == 0) {
-	        gtk_widget_set_sensitive (remove_button, FALSE);
-	}
-}
-#endif /* MATHIEU_DEBUG */
 
 static void
 mime_list_selected_row_callback (GtkWidget *widget, gint row, gint column, GdkEvent *event, gpointer data)
@@ -501,8 +445,12 @@ update_extensions_list (const char *mime_type)
 	row = get_selected_row_number ();
 
 	pretty_string = gnome_vfs_mime_get_extensions_pretty_string (mime_type);
+	if (pretty_string == NULL) {
+		pretty_string = g_strdup (" ");
+	}
 	gtk_clist_set_text (GTK_CLIST (mime_list),
 			    row, 2, pretty_string);
+
 	g_free (pretty_string);
 
 }
@@ -1140,9 +1088,9 @@ delete_mime_clicked (GtkWidget *widget, gpointer data)
 static void
 add_mime_clicked (GtkWidget *widget, gpointer data)
 {
-	char *text[3];
+	char *text[4];
 	const char *description;
-	char *extensions, *mime_string;
+	char *extensions, *mime_string, *filename;
         gint row;
 	GdkPixbuf *pixbuf;
 	GdkPixmap *pixmap;
@@ -1165,14 +1113,14 @@ add_mime_clicked (GtkWidget *widget, gpointer data)
 		}
 
 		/* Add mime type to second column */
-		text[1] = mime_string;
+		text[1] = g_strdup (mime_string);
 
 		/* Add extension to third columns */
 		extensions = gnome_vfs_mime_get_extensions_pretty_string (mime_string);
 		if (extensions != NULL) {
-			text[2] = extensions;
+			text[2] = g_strdup (extensions);
 		} else {
-			text[2] = "";
+			text[2] = g_strdup ("");
 		}
 
 		/* Add default action to fourth column */
@@ -1180,7 +1128,7 @@ add_mime_clicked (GtkWidget *widget, gpointer data)
 
 		/* Insert item into list */
 		row = gtk_clist_insert (GTK_CLIST (mime_list), 1, text);
-	        gtk_clist_set_row_data (GTK_CLIST (mime_list), row, g_strdup(mime_string));
+	        gtk_clist_set_row_data (GTK_CLIST (mime_list), row, g_strdup (mime_string));
 
 		/* Set description column icon */
 		pixbuf = capplet_get_icon_pixbuf (mime_string, FALSE);
@@ -1213,7 +1161,9 @@ add_mime_clicked (GtkWidget *widget, gpointer data)
 					default_component = gnome_vfs_mime_get_default_component (mime_string);
 					g_free (text[3]);
 					text[3] = name_from_oaf_server_info (default_component);
-					pixbuf = gdk_pixbuf_new_from_file ("/gnome/share/pixmaps/nautilus/gnome-library.png");
+					filename = gnome_vfs_icon_path_from_filename ("nautilus/gnome-library.png");
+					pixbuf = gdk_pixbuf_new_from_file (filename);
+					g_free (filename);
 					CORBA_free (default_component);
 					break;
 					
@@ -1232,10 +1182,13 @@ add_mime_clicked (GtkWidget *widget, gpointer data)
 		}
 		
 		g_free (text[0]);
+		g_free (text[1]);
+		g_free (text[2]);
 		g_free (text[3]);
 		g_free (extensions);
+		g_free (mime_string);
 	}
-	
+
 }
 
 static void
