@@ -312,7 +312,7 @@ icon_selected_cb (GtkButton *button, NautilusMimeIconEntry *icon_entry)
 		gtk_entry_set_text (GTK_ENTRY (entry), icon);
 		entry_changed (NULL, icon_entry);
 	
-		path = nautilus_mime_type_icon_entry_get_filename (NAUTILUS_MIME_ICON_ENTRY (icon_entry));
+		path = nautilus_mime_type_icon_entry_get_relative_filename (NAUTILUS_MIME_ICON_ENTRY (icon_entry));
 		if (path != NULL) {
 			filename = strrchr (path, '/');			
 			if (filename != NULL) {
@@ -487,6 +487,32 @@ nautilus_mime_type_show_icon_selection (NautilusMimeIconEntry *icon_entry)
 			gnome_icon_selection_show_icons(gis);
 		}
 	}
+}
+
+gchar      *
+nautilus_mime_type_icon_entry_get_relative_filename (NautilusMimeIconEntry *ientry)
+{
+  char *filename;
+  char **path_parts;
+
+
+	filename = nautilus_mime_type_icon_entry_get_filename (NAUTILUS_MIME_ICON_ENTRY (ientry));
+
+	path_parts = g_strsplit (filename, "/share/pixmaps/", 0);
+	g_free (filename);
+	filename = NULL;
+
+	if (path_parts[1] != NULL) {
+	  filename = g_strdup (path_parts[1]);
+	} else {
+	  /* FIXME: bugzilla.eazel.com 4797 */
+	  g_warning ("user picked up an icon not in $(prefix)/share/pixmaps\n");
+	  filename = g_strdup ("");
+	}
+
+	g_strfreev (path_parts);
+
+	return filename;
 }
 
 static void
