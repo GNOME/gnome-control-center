@@ -1,3 +1,10 @@
+2001-07-24  Richard Hestilow  <hestilow@ximian.com>
+
+	* config-log.c (parse_line): Fix date parsing to work with DST.
+
+	* bonobo-config-archiver.[ch]: Export a PropertyBag interface that
+	has the last_modified date as a read-only property. 
+
 2001-07-24  Bradford Hovinen  <hovinen@ximian.com>
 
 	* bonobo-config-archiver.c (real_sync): Notify listeners with a sync event

@@ -819,6 +819,7 @@ load_log_entry (ConfigLog *config_log, gboolean from_socket,
 static gboolean
 parse_line (char *buffer, int *id, struct tm *date, char **backend_id) 
 {
+	extern int daylight;
 	sscanf (buffer, "%x", id);
 
 	while (isxdigit (*buffer)) buffer++;
@@ -852,6 +853,9 @@ parse_line (char *buffer, int *id, struct tm *date, char **backend_id)
 	buffer++;
 
 	*backend_id = buffer;
+
+	if (daylight)
+		date->tm_hour--;
 
 	return TRUE;
 }

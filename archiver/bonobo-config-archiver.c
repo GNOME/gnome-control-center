@@ -33,6 +33,8 @@ static GtkObjectClass *parent_class = NULL;
 #define PARENT_TYPE BONOBO_CONFIG_DATABASE_TYPE
 #define FLUSH_INTERVAL 30 /* 30 seconds */
 
+extern int daytime;
+
 static DirEntry *
 dir_lookup_entry (DirData  *dir,
 		  char     *name,
@@ -463,6 +465,38 @@ real_remove_dir (BonoboConfigDatabase *db,
 }
 
 static void
+pb_get_fn (BonoboPropertyBag *bag, BonoboArg *arg,
+	   guint arg_id, CORBA_Environment *ev,
+	   gpointer user_data)
+{
+	BonoboConfigArchiver *archiver_db = BONOBO_CONFIG_ARCHIVER (user_data);
+	gint id;
+	ConfigLog *log;
+	struct tm *mod;
+	time_t val;
+
+	log = CONFIG_LOG (config_log_open (archiver_db->location));
+	id = config_log_get_rollback_id_by_steps (log, 0, archiver_db->real_name);
+	mod = config_log_get_date_for_id (log, id);
+	val = mktime (mod);
+	g_print ("%i\n", mod->tm_hour);
+	//if (daytime)
+	//	val -= 3600;
+
+	BONOBO_ARG_SET_GENERAL (arg, val,
+				TC_ulonglong, CORBA_unsigned_long_long, NULL);
+	gtk_object_destroy (GTK_OBJECT (log));
+}
+
+static void
+pb_set_fn (BonoboPropertyBag *bag, const BonoboArg *arg,
+	   guint arg_id, CORBA_Environment *ev,
+	   gpointer user_data)
+{
+	g_assert_not_reached ();
+}
+
+static void
 bonobo_config_archiver_destroy (GtkObject *object)
 {
 	BonoboConfigArchiver *archiver_db = BONOBO_CONFIG_ARCHIVER (object);
@@ -489,6 +523,9 @@ bonobo_config_archiver_destroy (GtkObject *object)
 	if (archiver_db->es)
 		bonobo_object_unref (BONOBO_OBJECT (archiver_db->es));
 
+	if (archiver_db->pb)
+		bonobo_object_unref (BONOBO_OBJECT (archiver_db->pb));
+			
 	parent_class->destroy (object);
 }
 
@@ -690,6 +727,18 @@ bonobo_config_archiver_new (const char *backend_id, const char *location_id)
 	bonobo_object_add_interface (BONOBO_OBJECT (archiver_db), 
 				     BONOBO_OBJECT (archiver_db->es));
 
+	archiver_db->pb = bonobo_property_bag_new (pb_get_fn,
+						   pb_set_fn,
+						   archiver_db);
+
+	bonobo_object_add_interface (BONOBO_OBJECT (archiver_db), 
+				     BONOBO_OBJECT (archiver_db->pb));
+
+	bonobo_property_bag_add (archiver_db->pb,
+				 "last_modified", 1, TC_ulonglong, NULL,
+		       		 "Date (time_t) of modification", 
+				 BONOBO_PROPERTY_READABLE);
+
 	db = CORBA_Object_duplicate (BONOBO_OBJREF (archiver_db), NULL);
 
 	bonobo_url_register ("BONOBO_CONF:ARCHIVER", real_name, NULL, db, &ev);
@@ -708,6 +757,6 @@ bonobo_config_archiver_new (const char *backend_id, const char *location_id)
 
 	gtk_signal_connect (GTK_OBJECT (archiver_db), "destroy",
 			    GTK_SIGNAL_FUNC (unref_cb), ref_obj);
-
+	
 	return db;
 }

@@ -16,6 +16,7 @@
 #include <gnome-xml/tree.h>
 #include <gnome-xml/parser.h>
 #include <bonobo/bonobo-event-source.h>
+#include <bonobo/bonobo-property-bag.h>
 
 #include "archive.h"
 #include "location.h"
@@ -62,6 +63,7 @@ struct _BonoboConfigArchiver {
 	gchar                *real_name;
 
 	BonoboEventSource    *es;
+	BonoboPropertyBag    *pb;
 };
 
 typedef struct {
