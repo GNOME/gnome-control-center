@@ -1,9 +1,9 @@
 # gnome-control-center Finnish translation
 # Suomennos: http://gnome-fi.sourceforge.net/
 #
-# Copyright (C) 2001 Free Software Foundation, Inc.
-# Mikko Rauhala <mjr@iki.fi>
-# Pauli Virtanen <pauli.virtanen@saunalahti.fi>, 2000-2001
+# Copyright (C) 2002 Free Software Foundation, Inc.
+# Mikko Rauhala <mjr@iki.fi>, x-2000
+# Pauli Virtanen <pauli.virtanen@saunalahti.fi>, 2000-2002
 #
 #
 # There are a lot of comparative word forms used in the screensaver xml
@@ -14,30 +14,18 @@
 # is a bit different, but if I am correct, there are no such things
 # as versions in the archiver program so it does not matter.
 #
+# rollback = palauta asetukset
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-control-center 1.4.0\n"
-"POT-Creation-Date: 2002-01-28 21:49-0600\n"
-"PO-Revision-Date: 2001-07-25 15:02+0300\n"
+"Project-Id-Version: gnome-control-center 1.99.0\n"
+"POT-Creation-Date: 2002-02-05 23:17+0200\n"
+"PO-Revision-Date: 2002-02-09 22:41+0200\n"
 "Last-Translator: Pauli Virtanen <pauli.virtanen@saunalahti.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-15\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: capplets/background/background-properties-capplet.c:291
-#: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:614
-#: capplets/keyboard/gnome-keyboard-properties.c:267
-#: capplets/mouse/gnome-mouse-properties.c:474
-#: capplets/sound/sound-properties-capplet.c:144
-msgid "Retrieve and store legacy settings"
-msgstr ""
-
-#: capplets/background/background-properties-capplet.c:315
-#, fuzzy
-msgid "Background properties"
-msgstr "Taustav‰rit"
 
 #: capplets/background/background.desktop.in.h:1
 msgid "Background"
@@ -45,19 +33,57 @@ msgstr "Tausta"
 
 #: capplets/background/background.desktop.in.h:2
 msgid "Configuration of the desktop's background"
-msgstr "Tyˆpˆyd‰n taustan asetukset"
+msgstr "Ty√∂p√∂yd√§n taustan asetukset"
+
+#: capplets/background/background-properties-capplet.c:459
+#, c-format
+msgid ""
+"Couldn't find the file '%s'.\n"
+"\n"
+"Please make sure it exists and try again, or choose a different background "
+"picture."
+msgstr ""
+"Ei l√∂yt√§nyt tiedostoa \"%s\".\n"
+"\n"
+"Varmista, ett√§ se on olemassa ja yrit√§ uudelleen, tai valitse toinen taustakuva."
+
+#: capplets/background/background-properties-capplet.c:484
+#, c-format
+msgid ""
+"I don't know how to open the file '%s'.\n"
+"Perhaps its a kind of picture that is not yet supported.\n"
+"\n"
+"Please select a different picture instead."
+msgstr ""
+"Ei tied√§, miten tiedosto \"%s\" avataan.\n"
+"Ehk√§p√§ t√§m√§ntyyppisi√§ kuvia ei viel√§ tueta.\n"
+"\n"
+"Valitse toinen kuva."
+
+#: capplets/background/background-properties-capplet.c:779
+#: capplets/common/capplet-util.c:243
+#: capplets/default-applications/gnome-default-applications-properties.c:615
+#: capplets/keyboard/gnome-keyboard-properties.c:267
+#: capplets/mouse/gnome-mouse-properties.c:473
+#: capplets/sound/sound-properties-capplet.c:143
+msgid "Retrieve and store legacy settings"
+msgstr "Hae ja tallenna aikaisempien versioiden asetukset"
+
+#: capplets/background/background-properties-capplet.c:815
+msgid "Background Properties"
+msgstr "Taustan ominaisuudet"
 
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
-msgstr ""
+msgstr "Ota asetukset k√§ytt√∂√∂n ja lopeta"
 
 #: capplets/common/gconf-property-editor.c:144
 msgid "Key"
-msgstr ""
+msgstr "Avain"
 
 #: capplets/common/gconf-property-editor.c:145
 msgid "GConf key to which this property editor is attached"
-msgstr ""
+msgstr "GConf-avain, johon t√§m√§ ominaisuuseditori kiinnittyy"
 
 #: capplets/common/gconf-property-editor.c:151
 msgid "Callback"
@@ -96,489 +122,79 @@ msgstr ""
 
 #: capplets/common/gconf-property-editor.c:175
 msgid "UI Control"
-msgstr ""
+msgstr "K√§ytt√∂liittym√§s√§√§din"
 
 #: capplets/common/gconf-property-editor.c:176
 msgid "Object that controls the property (normally a widget)"
-msgstr ""
+msgstr "Olio (yleens√§ s√§√§din), joka s√§√§t√§√§ ominaisuutta"
 
 #: capplets/default-applications/default-applications.desktop.in.h:1
 msgid "Choose the applications used by default"
-msgstr "Valitse oletuksena k‰ytett‰v‰t sovellukset"
+msgstr "Valitse oletuksena k√§ytett√§v√§t sovellukset"
 
 #: capplets/default-applications/default-applications.desktop.in.h:2
 msgid "Default Applications"
 msgstr "Oletussovellukset"
 
-#: capplets/keyboard/keyboard.desktop.in.h:1
-msgid "Keyboard"
-msgstr "N‰pp‰imistˆ"
-
-#: capplets/keyboard/keyboard.desktop.in.h:2
-msgid "Keyboard Properties"
-msgstr "N‰pp‰imistˆasetukset"
-
-#: capplets/keyboard/gnome-keyboard-properties.c:263
-#: capplets/keyboard/gnome-keyboard-properties.c:265
-#: capplets/sound/sound-properties-capplet.c:140
-#: capplets/sound/sound-properties-capplet.c:142
-msgid ""
-"Just apply settings and quit (compatibility only; now handled by daemon)"
-msgstr ""
-
-#: capplets/mouse/mouse.desktop.in.h:1
-msgid "Mouse"
-msgstr "Hiiri"
-
-#: capplets/mouse/gnome-mouse-properties.c:499
-#: capplets/mouse/mouse.desktop.in.h:2
-msgid "Mouse Properties"
-msgstr "Hiiriasetukset"
-
-#: capplets/sound/sound-properties-capplet.c:172
-#, fuzzy
-msgid "Sound properties"
-msgstr "Taustav‰rit"
-
-#: capplets/sound/sound.desktop.in.h:1
-msgid "Configure GNOME's use of sound"
-msgstr "Muuta GNOMEn ‰‰niasetuksia"
-
-#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
-#: capplets/sound/sound.desktop.in.h:2
-msgid "Sound"
-msgstr "ƒ‰ni"
-
-#: control-center/Gnome.directory.in.in.h:1
-msgid "Main"
-msgstr ""
-
-#: control-center/Gnome.directory.in.in.h:2
-#, fuzzy
-msgid "Main Settings"
-msgstr "Asetukset"
-
-#: control-center/capplet-dir-view-list.c:325
-#, fuzzy, c-format
-msgid "GNOME Control Center: %s"
-msgstr "GNOMEn hallintakeskus"
-
-#: control-center/capplet-dir-view.c:146
-msgid "Layout"
-msgstr ""
-
-#: control-center/capplet-dir-view.c:147
-msgid "Layout to use for this view of the capplets"
-msgstr ""
-
-#: control-center/capplet-dir-view.c:153
-msgid "Capplet directory object"
-msgstr ""
-
-#: control-center/capplet-dir-view.c:154
-msgid "Capplet directory that this view is viewing"
-msgstr ""
-
-#: control-center/capplet-dir-view.c:308 control-center/gnomecc.desktop.in.h:1
-msgid "GNOME Control Center"
-msgstr "GNOMEn hallintakeskus"
-
-#: control-center/capplet-dir-view.c:311
-msgid "Desktop properties manager."
-msgstr ""
-"Tyˆpˆyd‰n asetusten hallinta.\n"
-"Suomennos: http://gnome-fi.sourceforge.net/"
-
-#: control-center/capplet-dir-view.c:445
-#, fuzzy, c-format
-msgid "Gnome Control Center : %s"
-msgstr "GNOMEn hallintakeskus"
-
-#: control-center/capplet-dir-view.c:488
-msgid ""
-"No help is available/installed. Please make sure you\n"
-"have the GNOME User's Guide installed on your system."
-msgstr ""
-"Ohjetta ei ole saatavilla. Ole hyv‰ ja varmista, ett‰\n"
-"olet asentanut GNOME-k‰ytt‰j‰n oppaan."
-
-#: control-center/capplet-dir-view.c:491
-msgid "Close"
-msgstr "Sulje"
-
-#: control-center/gnomecc.desktop.in.h:2
-msgid "The GNOME configuration tool"
-msgstr "GNOMEn asetustyˆkalu"
-
-#: libbackground/applier.c:228
-msgid "Type"
-msgstr ""
-
-#: libbackground/applier.c:229
-msgid ""
-"Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
-"for preview"
-msgstr ""
-
-#: libbackground/applier.c:388
-#, c-format
-msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
-msgstr "Ei voinut ladata kuvaa \"%s\", joten taustakuvaa ei ole."
-
-#: libbackground/applier.c:505
-msgid "Disabled"
-msgstr "Pois k‰ytˆst‰"
-
-#: libsounds/sound-view.c:98
-msgid "The sound file for this event does not exist."
-msgstr ""
-
-#: libsounds/sound-view.c:100
-msgid ""
-"The sound file for this event does not exist.\n"
-"You may want to install the gnome-audio package\n"
-"for a set of default sounds."
-msgstr ""
-
-#: libsounds/sound-view.c:152
-msgid "Event"
-msgstr ""
-
-#: libsounds/sound-view.c:152
-msgid "File to Play"
-msgstr ""
-
-#: libsounds/sound-view.c:185
-msgid "Play"
-msgstr ""
-
-#: libsounds/sound-view.c:191
-#, fuzzy
-msgid "Select sound file"
-msgstr "Valitse katselin"
-
-#: capplets/file-types/file-types.desktop.in.h:1
-msgid "File Types and Programs"
-msgstr ""
-
-#: capplets/file-types/file-types.desktop.in.h:2
-msgid "Specify which programs are used to open or view each file type"
-msgstr ""
-
-#: capplets/file-types/mime-types-model.c:167
-#: capplets/file-types/mime-types-model.c:168
-msgid "Model for categories only"
-msgstr ""
-
-#: capplets/file-types/mime-types-model.c:420
-msgid "Internet Services"
-msgstr ""
-
-#: capplets/file-types/mime-edit-dialog.c:163
-msgid "Extension"
-msgstr ""
-
-#: capplets/file-types/mime-edit-dialog.c:166
-msgid "Edit file type"
-msgstr ""
-
-#: capplets/file-types/mime-category-edit-dialog.c:170
-#: capplets/file-types/mime-edit-dialog.c:203
-#: capplets/file-types/service-edit-dialog.c:165
-#: capplets/file-types/service-edit-dialog.c:166
-#, fuzzy
-msgid "Model"
-msgstr "T_ila:"
-
-#: capplets/file-types/mime-edit-dialog.c:204
-msgid "Underlying model to notify when Ok is clicked"
-msgstr ""
-
-#: capplets/file-types/mime-edit-dialog.c:211
-msgid "MIME type information"
-msgstr ""
-
-#: capplets/file-types/mime-edit-dialog.c:212
-msgid "Structure with data on the MIME type"
-msgstr ""
-
-#: capplets/file-types/mime-edit-dialog.c:218
-msgid "Is add dialog"
-msgstr ""
-
-#: capplets/file-types/mime-edit-dialog.c:219
-msgid "True if this dialog is for adding a MIME type"
-msgstr ""
-
-#: capplets/file-types/mime-edit-dialog.c:386
-#: capplets/file-types/mime-edit-dialog.c:441
-#, fuzzy
-msgid "None"
-msgstr "Pitk‰"
-
-#: capplets/file-types/mime-category-edit-dialog.c:342
-#: capplets/file-types/mime-edit-dialog.c:391
-#: capplets/file-types/mime-edit-dialog.c:491
-#: capplets/file-types/service-edit-dialog.c:350
-#: capplets/file-types/service-edit-dialog.c:396
-msgid "Custom"
-msgstr "Muu"
-
-#: capplets/file-types/mime-edit-dialog.c:670
-msgid ""
-"Invalid MIME type. Please enter a valid MIME type, or leave the field blank "
-"to have one generated for you."
-msgstr ""
-
-#: capplets/file-types/mime-edit-dialog.c:680
-msgid "There already exists a MIME type of that name."
-msgstr ""
-
-#: capplets/file-types/mime-edit-dialog.c:745
-msgid "Category"
-msgstr ""
-
-#: capplets/file-types/mime-edit-dialog.c:750
-msgid "Choose a file category"
-msgstr ""
-
-#: capplets/file-types/mime-category-edit-dialog.c:136
-msgid "Edit file category"
-msgstr ""
-
-#: capplets/file-types/mime-category-edit-dialog.c:171
-msgid "GtkTreeModel that contains the category data"
-msgstr ""
-
-#: capplets/file-types/mime-category-edit-dialog.c:176
-msgid "MIME category info"
-msgstr ""
-
-#: capplets/file-types/mime-category-edit-dialog.c:177
-msgid "Structure containing information on the MIME category"
-msgstr ""
-
-#: capplets/file-types/service-info.c:43
-msgid "Unknown service types"
-msgstr ""
-
-#: capplets/file-types/service-info.c:44
-msgid "World wide web"
-msgstr ""
-
-#: capplets/file-types/service-info.c:45
-msgid "File transfer protocol"
-msgstr ""
-
-#: capplets/file-types/service-info.c:46
-#, fuzzy
-msgid "Detailed documentation"
-msgstr "Oletussijainti"
-
-#: capplets/file-types/service-info.c:47
-msgid "Manual pages"
-msgstr ""
-
-#: capplets/file-types/service-info.c:48
-msgid "Electronic mail transmission"
-msgstr ""
-
-#: capplets/file-types/service-edit-dialog.c:132
-msgid "Edit service information"
-msgstr ""
-
-#: capplets/file-types/service-edit-dialog.c:173
-msgid "Service info"
-msgstr ""
-
-#: capplets/file-types/service-edit-dialog.c:174
-msgid "Structure containing service information"
-msgstr ""
-
-#: capplets/file-types/service-edit-dialog.c:180
-msgid "Is add"
-msgstr ""
-
-#: capplets/file-types/service-edit-dialog.c:181
-msgid "TRUE if this is an add service dialog"
-msgstr ""
-
-#: capplets/file-types/service-edit-dialog.c:486
-#, fuzzy
-msgid "Please enter a protocol name."
-msgstr "Kirjoita komentorivi alle."
-
-#: capplets/file-types/service-edit-dialog.c:497
-msgid ""
-"Invalid protocol name. Please enter a protocol name without any spaces or "
-"punctuation."
-msgstr ""
-
-#: capplets/file-types/service-edit-dialog.c:509
-msgid "There is already a protocol by that name."
-msgstr ""
-
-#.
-#. * Translatable strings file
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/file-types/category-names.h:7
-msgid "Documents"
-msgstr ""
-
-#: capplets/file-types/category-names.h:8
-msgid "Word Processor"
-msgstr ""
-
-#: capplets/file-types/category-names.h:9
-msgid "Published Materials"
-msgstr ""
-
-#: capplets/file-types/category-names.h:10
-msgid "Spreadsheet"
-msgstr ""
-
-#: capplets/file-types/category-names.h:11
-msgid "Presentation"
-msgstr ""
-
-#: capplets/file-types/category-names.h:12
-msgid "Diagram"
-msgstr ""
-
-#: capplets/file-types/category-names.h:13
-msgid "TeX"
-msgstr ""
-
-#: capplets/file-types/category-names.h:14
-msgid "Vector Graphics"
-msgstr ""
-
-#: capplets/file-types/category-names.h:15
-msgid "World Wide Web"
-msgstr ""
-
-#: capplets/file-types/category-names.h:16
-msgid "Plain Text"
-msgstr ""
-
-#: capplets/file-types/category-names.h:17
-msgid "Extended Markup Language (XML)"
-msgstr ""
-
-#: capplets/file-types/category-names.h:18
-#, fuzzy
-msgid "Information"
-msgstr "Hiiriasetukset"
-
-#: capplets/file-types/category-names.h:19
-msgid "Financial"
-msgstr ""
-
-#: capplets/file-types/category-names.h:20
-msgid "Calendar"
-msgstr ""
-
-#: capplets/file-types/category-names.h:21
-msgid "Contacts"
-msgstr ""
-
-#: capplets/file-types/category-names.h:22
-msgid "Packages"
-msgstr ""
-
-#: capplets/file-types/category-names.h:23
-msgid "Software Development"
-msgstr ""
-
-#: capplets/file-types/category-names.h:24
-msgid "Source Code"
-msgstr ""
-
-#: capplets/file-types/category-names.h:25
-msgid "Audio"
-msgstr ""
-
-#: capplets/file-types/category-names.h:26
-#, fuzzy
-msgid "Images"
-msgstr "Kuva:"
-
-#: capplets/file-types/category-names.h:27
-#, fuzzy
-msgid "Video"
-msgstr "Leveys"
-
-#: capplets/theme-switcher/main.c:209
-#, fuzzy
-msgid "Select a theme to install"
-msgstr "Valitse p‰‰te"
-
-#: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
-msgid "Gtk+ Theme Selector"
-msgstr ""
-
-#: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
-msgid "Select which gtk+ theme to use"
-msgstr ""
-
-#: capplets/ui-properties/behavior.desktop.in.h:1
-#, fuzzy
-msgid "Behavior"
-msgstr "Kohdistuksen toiminta"
-
-#: capplets/ui-properties/behavior.desktop.in.h:2
-msgid "Sets the default behavior of GNOME applications"
-msgstr ""
-
-#: capplets/ui-properties/main.c:47
-msgid "Initialize session settings"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:1
-msgid "Control Center Menu"
-msgstr "Hallintakeskuksen valikko"
-
-#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:2
-msgid "Sawfish window manager"
-msgstr "Sawfish-ikkunointiohjelma"
+#: capplets/desktop-links/Advanced.directory.in.in.h:1
+msgid "Advanced"
+msgstr "Lis√§asetukset"
+
+#: capplets/desktop-links/Advanced.directory.in.in.h:2
+msgid "Advanced Settings"
+msgstr "Lis√§asetukset"
+
+#: capplets/desktop-links/cd.desktop.in.in.h:1
+msgid "CD Properties"
+msgstr "CD-asetukset"
+
+#: capplets/desktop-links/cd.desktop.in.in.h:2
+msgid "Configure handling of CD devices"
+msgstr "Muuta CD-asemien k√§sittelytapaa"
+
+#: capplets/desktop-links/legacy-applications.desktop.in.in.h:1
+msgid "Legacy Applications"
+msgstr "Vanhat sovellukset"
+
+#: capplets/desktop-links/legacy-applications.desktop.in.in.h:2
+msgid "Legacy applications settings (grdb)"
+msgstr "Vanhojen sovellusten asetukset (grdb)"
 
 #: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
 msgid "Appearance"
-msgstr "Ulkon‰kˆ"
+msgstr "Ulkon√§k√∂"
 
 #: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:2
 msgid "Configure window appearance"
-msgstr "Muuta ikkunoiden ulkon‰kˆ‰"
+msgstr "Muuta ikkunoiden ulkon√§k√∂√§"
 
 #: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:1
 msgid "Configure key shortcuts"
-msgstr "Muuta pikan‰pp‰imi‰"
+msgstr "Muuta pikan√§pp√§imi√§"
 
 #: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:2
 msgid "Shortcuts"
-msgstr "Pikan‰pp‰imet"
+msgstr "Oikotiet"
 
 #: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:1
 msgid "Configure window focusing"
-msgstr "Muuta ikkunoiden kohdistusta"
+msgstr "Muuta ikkunoiden kohdistamista"
 
 #: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:2
 msgid "Focus behavior"
-msgstr "Kohdistuksen toiminta"
+msgstr "Kohdistaminen"
 
 #: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:1
 msgid "Configure window properties"
-msgstr "Muuta ikkunoiden ominaisuuksia"
+msgstr "Muuta ikkunan ominaisuuksia"
 
 #: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:2
 msgid "Matched Windows"
-msgstr "Erikoisk‰sittely"
+msgstr "Erikoisk√§sittely"
 
 #: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:1
 msgid "Configure window minimization and maximization"
-msgstr "Muuta pienennyksen ja suurennuksen asetuksia"
+msgstr "Muuta ikkunoiden pienennyst√§ ja suurennosta"
 
 #: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:2
 msgid "Minimizing and Maximizing"
@@ -586,7 +202,7 @@ msgstr "Pienennys ja suurennus"
 
 #: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
 msgid "Configure window manager configuration properties"
-msgstr "Muuta ikkunointiohjelman asetusohjelman ominaisuuksia"
+msgstr "Muuta ikkunanointiohjelman asetusohjelman ominaisuuksia"
 
 #: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:2
 msgid "Meta"
@@ -594,7 +210,7 @@ msgstr "Asetusohjelma"
 
 #: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:1
 msgid "Configure miscellaneous window features"
-msgstr "Muuta sekalaisia asetuksia"
+msgstr "Muuta sekalaisia ikkunaominaisuuksia"
 
 #: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
 msgid "Miscellaneous"
@@ -602,7 +218,7 @@ msgstr "Sekalaiset"
 
 #: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:1
 msgid "Configure window move/resize"
-msgstr "Muuta ikkunoiden siirtoa ja koon muuttamista"
+msgstr "Muuta ikkunoiden siirron ja koon muutoksen asetuksia"
 
 #: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:2
 msgid "Moving and Resizing"
@@ -613,68 +229,568 @@ msgid "Configure window placement"
 msgstr "Muuta ikkunoiden sijoittelua"
 
 #: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:2
-#, fuzzy
 msgid "Placement"
 msgstr "Sijoittelu"
 
+#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:1
+msgid "Control Center Menu"
+msgstr "Hallintakeskuksen valikko"
+
+#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:2
+msgid "Sawfish window manager"
+msgstr "Sawfish-ikkunointiohjelma"
+
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:1
 msgid "Enable window manager sound events"
-msgstr "K‰yt‰ toiminto‰‰ni‰ ikkunointiohjelmassa"
+msgstr "K√§yt√§ √§√§ni√§ ikkunointiohjelmassa"
+
+#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
+#: capplets/sound/sound.desktop.in.h:2
+msgid "Sound"
+msgstr "√Ñ√§ni"
 
 #: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:1
 msgid "Configure workspaces"
-msgstr "Muuta tyˆpˆyti‰"
+msgstr "Muuta ty√∂p√∂yti√§"
 
 #: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:2
 msgid "Workspaces"
-msgstr "Tyˆpˆyd‰t"
-
-#: capplets/desktop-links/Advanced.directory.in.in.h:1
-msgid "Advanced"
-msgstr ""
-
-#: capplets/desktop-links/Advanced.directory.in.in.h:2
-#, fuzzy
-msgid "Advanced Settings"
-msgstr "Asetukset"
-
-#: capplets/desktop-links/cd.desktop.in.in.h:1
-#, fuzzy
-msgid "CD Properties"
-msgstr "Hiiriasetukset"
-
-#: capplets/desktop-links/cd.desktop.in.in.h:2
-#, fuzzy
-msgid "Configure handling of CD devices"
-msgstr "Muuta ikkunoiden ominaisuuksia"
-
-#: capplets/desktop-links/legacy-applications.desktop.in.in.h:1
-#, fuzzy
-msgid "Legacy Applications"
-msgstr "Oletussovellukset"
-
-#: capplets/desktop-links/legacy-applications.desktop.in.in.h:2
-msgid "Legacy applications settings (grdb)"
-msgstr ""
-
-#: capplets/desktop-links/panel.desktop.in.in.h:1
-#, fuzzy
-msgid "Global panel properties"
-msgstr "Yleiset arkistointivalitsimet"
-
-#: capplets/desktop-links/panel.desktop.in.in.h:2
-msgid "Panel"
-msgstr ""
+msgstr "Ty√∂p√∂yd√§t"
 
 #: capplets/desktop-links/session.desktop.in.in.h:1
 msgid "Configure which non-session aware programs are started up"
 msgstr ""
+"M√§√§rit√§, mitk√§ istunnonhallinnasta piittaamattomat ohjelmat k√§ynnistyv√§t"
 
 #: capplets/desktop-links/session.desktop.in.in.h:2
 msgid "Startup Programs"
-msgstr ""
+msgstr "K√§ynnistyv√§t ohjelmat"
 
-#, fuzzy
+#.
+#. * Translatable strings file
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: capplets/file-types/category-names.h:7
+msgid "Documents"
+msgstr "Asiakirjat"
+
+#: capplets/file-types/category-names.h:8
+msgid "Word Processor"
+msgstr "Tekstink√§sittely"
+
+#: capplets/file-types/category-names.h:9
+msgid "Published Materials"
+msgstr "Julkaisut"
+
+#: capplets/file-types/category-names.h:10
+msgid "Spreadsheet"
+msgstr "Taulukkolaskenta"
+
+#: capplets/file-types/category-names.h:11
+msgid "Presentation"
+msgstr "Esitys"
+
+#: capplets/file-types/category-names.h:12
+msgid "Diagram"
+msgstr "Kaavio"
+
+#: capplets/file-types/category-names.h:13
+msgid "TeX"
+msgstr "TeX"
+
+#: capplets/file-types/category-names.h:14
+msgid "Vector Graphics"
+msgstr "Vektorigrafiikka"
+
+#: capplets/file-types/category-names.h:15
+msgid "World Wide Web"
+msgstr "WWW"
+
+#: capplets/file-types/category-names.h:16
+msgid "Plain Text"
+msgstr "Pelkk√§ teksti"
+
+#: capplets/file-types/category-names.h:17
+msgid "Extended Markup Language (XML)"
+msgstr "XML"
+
+#: capplets/file-types/category-names.h:18
+msgid "Information"
+msgstr "Tietoja"
+
+#: capplets/file-types/category-names.h:19
+msgid "Financial"
+msgstr "Finanssi"
+
+#: capplets/file-types/category-names.h:20
+msgid "Calendar"
+msgstr "Kalenteri"
+
+#: capplets/file-types/category-names.h:21
+msgid "Contacts"
+msgstr "Yhteystiedot"
+
+#: capplets/file-types/category-names.h:22
+msgid "Packages"
+msgstr "Paketit"
+
+#: capplets/file-types/category-names.h:23
+msgid "Software Development"
+msgstr "Sovellusten kehitt√§minen"
+
+#: capplets/file-types/category-names.h:24
+msgid "Source Code"
+msgstr "L√§hdekoodi"
+
+#: capplets/file-types/category-names.h:25
+msgid "Audio"
+msgstr "√Ñ√§ni"
+
+#: capplets/file-types/category-names.h:26
+msgid "Images"
+msgstr "Kuvat"
+
+#: capplets/file-types/category-names.h:27
+msgid "Video"
+msgstr "Video"
+
+#: capplets/file-types/file-types-capplet.c:212
+msgid "Description"
+msgstr "Kuvaus"
+
+#: capplets/file-types/file-types-capplet.c:219
+msgid "Extensions"
+msgstr "Tiedostop√§√§tteet"
+
+#: capplets/file-types/file-types.desktop.in.h:1
+msgid "File Types and Programs"
+msgstr "Tiedostotyypit ja ohjelmat"
+
+#: capplets/file-types/file-types.desktop.in.h:2
+msgid "Specify which programs are used to open or view each file type"
+msgstr "M√§√§rit√§, mill√§ ohjelmilla tiedostoja k√§sitell√§√§n"
+
+#: capplets/file-types/mime-category-edit-dialog.c:137
+msgid "Edit file category"
+msgstr "Muokkaa tiedostoluokkaa"
+
+#: capplets/file-types/mime-category-edit-dialog.c:171
+#: capplets/file-types/mime-edit-dialog.c:204
+#: capplets/file-types/service-edit-dialog.c:166
+#: capplets/file-types/service-edit-dialog.c:167
+msgid "Model"
+msgstr "Malli"
+
+#: capplets/file-types/mime-category-edit-dialog.c:172
+msgid "GtkTreeModel that contains the category data"
+msgstr "GtkTreeModel, joka sis√§lt√§√§ luokan tiedot"
+
+#: capplets/file-types/mime-category-edit-dialog.c:177
+msgid "MIME category info"
+msgstr "MIME-luokan tiedot"
+
+#: capplets/file-types/mime-category-edit-dialog.c:178
+msgid "Structure containing information on the MIME category"
+msgstr "Tietorakenne, joka sis√§lt√§√§ MIME-luokan tiedot"
+
+#: capplets/file-types/mime-category-edit-dialog.c:343
+#: capplets/file-types/mime-edit-dialog.c:392
+#: capplets/file-types/mime-edit-dialog.c:492
+#: capplets/file-types/service-edit-dialog.c:351
+#: capplets/file-types/service-edit-dialog.c:397
+msgid "Custom"
+msgstr "Muu"
+
+#: capplets/file-types/mime-edit-dialog.c:164
+msgid "Extension"
+msgstr "P√§√§te"
+
+#: capplets/file-types/mime-edit-dialog.c:167
+msgid "Edit file type"
+msgstr "Muokkaa tiedostotyyppi√§"
+
+#: capplets/file-types/mime-edit-dialog.c:205
+msgid "Underlying model to notify when Ok is clicked"
+msgstr "Alla oleva malli, jolle ilmoitetaan OK:n napsauttamisesta"
+
+#: capplets/file-types/mime-edit-dialog.c:212
+msgid "MIME type information"
+msgstr "MIME-tyypin tiedot"
+
+#: capplets/file-types/mime-edit-dialog.c:213
+msgid "Structure with data on the MIME type"
+msgstr "Tietorakenne, joka sis√§lt√§√§ MIME-tyypin tiedot"
+
+#: capplets/file-types/mime-edit-dialog.c:219
+msgid "Is add dialog"
+msgstr "On lis√§ysikkuna"
+
+#: capplets/file-types/mime-edit-dialog.c:220
+msgid "True if this dialog is for adding a MIME type"
+msgstr "Tosi, jos t√§m√§ ikkuna on MIME-tyypin lis√§√§mist√§ varten"
+
+#: capplets/file-types/mime-edit-dialog.c:387
+#: capplets/file-types/mime-edit-dialog.c:442
+msgid "None"
+msgstr "Ei mik√§√§n"
+
+#: capplets/file-types/mime-edit-dialog.c:673
+msgid ""
+"Invalid MIME type. Please enter a valid MIME type, or leave the field blank "
+"to have one generated for you."
+msgstr "Virheellinen MIME-tyyppi. Sy√∂t√§ kelvollinen MIME-tyyppi, tai j√§t√§ kentt√§ tyhj√§ksi, niin sellainen syntyy."
+
+#: capplets/file-types/mime-edit-dialog.c:684
+msgid "There already exists a MIME type of that name."
+msgstr "Samanniminen MIME-tyyppi on jo olemassa."
+
+#: capplets/file-types/mime-edit-dialog.c:748
+msgid "Category"
+msgstr "Luokka"
+
+#: capplets/file-types/mime-edit-dialog.c:753
+msgid "Choose a file category"
+msgstr "Valitse tiedostoluokka"
+
+#: capplets/file-types/mime-types-model.c:167
+#: capplets/file-types/mime-types-model.c:168
+msgid "Model for categories only"
+msgstr "Malli pelkille luokille"
+
+#: capplets/file-types/mime-types-model.c:420
+msgid "Internet Services"
+msgstr "Internet-palvelut"
+
+#: capplets/file-types/service-edit-dialog.c:133
+msgid "Edit service information"
+msgstr "Muokkaa palvelutietoja"
+
+#: capplets/file-types/service-edit-dialog.c:174
+msgid "Service info"
+msgstr "Palvelutiedot"
+
+#: capplets/file-types/service-edit-dialog.c:175
+msgid "Structure containing service information"
+msgstr "Tietorakenne, joka sis√§lt√§√§ palvelun tiedot"
+
+#: capplets/file-types/service-edit-dialog.c:181
+msgid "Is add"
+msgstr "On lis√§ys"
+
+#: capplets/file-types/service-edit-dialog.c:182
+msgid "TRUE if this is an add service dialog"
+msgstr "TOSI, jos t√§m√§ on palvelujen lis√§ysikkuna"
+
+#: capplets/file-types/service-edit-dialog.c:489
+msgid "Please enter a protocol name."
+msgstr "Kirjoita protokollan nimi."
+
+#: capplets/file-types/service-edit-dialog.c:502
+msgid ""
+"Invalid protocol name. Please enter a protocol name without any spaces or "
+"punctuation."
+msgstr "Virheellinen protokollan nimi. Anna protokollan nimi ilman v√§lily√∂ntej√§ tai -merkkej√§."
+
+#: capplets/file-types/service-edit-dialog.c:515
+msgid "There is already a protocol by that name."
+msgstr "Samanniminen protokolla on jo olemassa."
+
+#: capplets/file-types/service-info.c:44
+msgid "Unknown service types"
+msgstr "Tuntematon palvelutyyppi"
+
+#: capplets/file-types/service-info.c:45
+msgid "World wide web"
+msgstr "WWW"
+
+#: capplets/file-types/service-info.c:46
+msgid "File transfer protocol"
+msgstr "FTP-tiedostonsiirto"
+
+#: capplets/file-types/service-info.c:47
+msgid "Detailed documentation"
+msgstr "Yksityiskohtainen ohje"
+
+#: capplets/file-types/service-info.c:48
+msgid "Manual pages"
+msgstr "Manuaalisivut"
+
+#: capplets/file-types/service-info.c:49
+msgid "Electronic mail transmission"
+msgstr "S√§hk√∂postin v√§litys"
+
+#: capplets/keyboard/gnome-keyboard-properties.c:263
+#: capplets/keyboard/gnome-keyboard-properties.c:265
+#: capplets/sound/sound-properties-capplet.c:139
+#: capplets/sound/sound-properties-capplet.c:141
+msgid ""
+"Just apply settings and quit (compatibility only; now handled by daemon)"
+msgstr ""
+"Pelk√§st√§√§n ota muutokset k√§ytt√∂√∂n ja lopeta (vain yhteensopivuuden vuoksi; "
+"nyt t√§m√§n tekee daemon)"
+
+#: capplets/keyboard/keyboard.desktop.in.h:1
+msgid "Keyboard"
+msgstr "N√§pp√§imist√∂"
+
+#: capplets/keyboard/keyboard.desktop.in.h:2
+msgid "Keyboard Properties"
+msgstr "N√§pp√§imist√∂asetukset"
+
+#: capplets/mouse/gnome-mouse-properties.c:498
+#: capplets/mouse/mouse.desktop.in.h:2
+msgid "Mouse Properties"
+msgstr "Hiiriasetukset"
+
+#: capplets/mouse/mouse.desktop.in.h:1
+msgid "Mouse"
+msgstr "Hiiri"
+
+#: capplets/screensaver/screensaver.desktop.in.h:1
+msgid "Configure the settings of the screensaver"
+msgstr "Muokkaa n√§yt√∂ns√§√§st√§j√§n asetuksia"
+
+#: capplets/screensaver/screensaver.desktop.in.h:2
+msgid "Screensaver"
+msgstr "N√§yt√∂ns√§√§st√§j√§"
+
+#: capplets/sound/sound.desktop.in.h:1
+msgid "Configure GNOME's use of sound"
+msgstr "Muokkaa Gnomen √§√§niasetuksia"
+
+#: capplets/sound/sound-properties-capplet.c:171
+msgid "Sound properties"
+msgstr "√Ñ√§niominaisuudet"
+
+#. just 8 short names that will serve as samples for titles in demo
+#: capplets/theme-switcher/control/control.c:19
+msgid "Eenie"
+msgstr "Entten"
+
+#: capplets/theme-switcher/control/control.c:19
+msgid "Mynie"
+msgstr "Teelika"
+
+#: capplets/theme-switcher/control/control.c:19
+msgid "Catcha"
+msgstr "Hissun"
+
+#: capplets/theme-switcher/control/control.c:19
+msgid "By Its"
+msgstr "Vaapula"
+
+#: capplets/theme-switcher/control/control.c:20
+msgid "Meenie"
+msgstr "Tentten"
+
+#: capplets/theme-switcher/control/control.c:20
+msgid "Moe"
+msgstr "Mentten"
+
+#: capplets/theme-switcher/control/control.c:20
+msgid "Tiger"
+msgstr "Kissun"
+
+#: capplets/theme-switcher/control/control.c:20
+msgid "Toe"
+msgstr "Vissun"
+
+#: capplets/theme-switcher/control/control.c:38
+msgid "Selected themes from above will be tested by previewing here."
+msgstr "Yll√§ valitut teemat ovat t√§ss√§ katseltavina."
+
+#. column one
+#: capplets/theme-switcher/control/control.c:43
+msgid "Sample Button"
+msgstr "Painike"
+
+#: capplets/theme-switcher/control/control.c:47
+msgid "Sample Check Button"
+msgstr "Valintaruutu"
+
+#: capplets/theme-switcher/control/control.c:53
+msgid "Sample Text Entry Field"
+msgstr "Tekstikentt√§"
+
+#: capplets/theme-switcher/control/control.c:64
+msgid "Submenu"
+msgstr "Alivalikko"
+
+#: capplets/theme-switcher/control/control.c:69
+msgid "Item 1"
+msgstr "Kohta 1"
+
+#: capplets/theme-switcher/control/control.c:71
+msgid "Another item"
+msgstr "Toinen kohta"
+
+#: capplets/theme-switcher/control/control.c:75
+msgid "Radio Button 1"
+msgstr "Valintanappi 1"
+
+#: capplets/theme-switcher/control/control.c:81
+msgid "Radio Button 2"
+msgstr "Valintanappi 2"
+
+#: capplets/theme-switcher/control/control.c:102
+msgid "One"
+msgstr "Yksi"
+
+#: capplets/theme-switcher/control/control.c:108
+msgid "Two"
+msgstr "Kaksi"
+
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
+msgid "Gtk+ Theme Selector"
+msgstr "Gtk+:n teeman valitsin"
+
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
+msgid "Select which gtk+ theme to use"
+msgstr "Valitse, mit√§ gtk+:n teemaa k√§ytet√§√§n"
+
+#: capplets/theme-switcher/main.c:213
+msgid "Select a theme to install"
+msgstr "Valitse asennettava teema"
+
+#: capplets/ui-properties/behavior.desktop.in.h:1
+msgid "Sets the default behavior of GNOME applications"
+msgstr "Asettaa GNOME-ohjelmien oletustoiminnan"
+
+#: capplets/ui-properties/behavior.desktop.in.h:2
+msgid "Toolbars & Menus"
+msgstr "Ty√∂kalupalkit ja valikot"
+
+#: control-center/capplet-dir-view.c:146
+msgid "Layout"
+msgstr "Asettelu"
+
+#: control-center/capplet-dir-view.c:147
+msgid "Layout to use for this view of the capplets"
+msgstr "T√§m√§n hallintasovelmien n√§kym√§n asettelu"
+
+#: control-center/capplet-dir-view.c:153
+msgid "Capplet directory object"
+msgstr "Hallintasovelmien hakemisto-olio"
+
+#: control-center/capplet-dir-view.c:154
+msgid "Capplet directory that this view is viewing"
+msgstr "T√§m√§n n√§kym√§n n√§ytt√§m√§ hallintasovelmien hakemisto"
+
+#: control-center/capplet-dir-view.c:308 control-center/gnomecc.desktop.in.h:1
+msgid "GNOME Control Center"
+msgstr "GNOMEn hallintakeskus"
+
+#: control-center/capplet-dir-view.c:311
+msgid "Desktop properties manager."
+msgstr ""
+"Ty√∂p√∂yd√§n asetusten hallinta.\n"
+"Suomennos: http://gnome-fi.sourceforge.net/"
+
+#: control-center/capplet-dir-view.c:445
+#, c-format
+msgid "Gnome Control Center : %s"
+msgstr "Gnomen hallintakeskus : %s"
+
+#: control-center/capplet-dir-view.c:488
+msgid ""
+"No help is available/installed. Please make sure you\n"
+"have the GNOME User's Guide installed on your system."
+msgstr ""
+"Ohjetta ei ole saatavilla. Ole hyv√§ ja varmista, ett√§\n"
+"olet asentanut GNOME-k√§ytt√§j√§n oppaan."
+
+#: control-center/capplet-dir-view.c:491
+msgid "Close"
+msgstr "Sulje"
+
+#: control-center/capplet-dir-view-list.c:325
+#, c-format
+msgid "GNOME Control Center: %s"
+msgstr "GNOMEn hallintakeskus: %s"
+
+#: control-center/gnomecc.desktop.in.h:2
+msgid "The GNOME configuration tool"
+msgstr "Gnomen hallintaty√∂kalu"
+
+#: libbackground/applier.c:233
+msgid "Type"
+msgstr "Tyyppi"
+
+#: libbackground/applier.c:234
+msgid ""
+"Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
+"for preview"
+msgstr ""
+"bg_applierin tyyppi: BG_APPLIER_ROOT juuri-ikkunalle ja BG_APPLIER_PREVIEW "
+"esikatselulle"
+
+#: libbackground/applier.c:396
+#, c-format
+msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
+msgstr "Ei voinut ladata kuvaa \"%s\", joten taustakuvaa ei ole."
+
+#: libbackground/applier.c:461
+msgid "Disabled"
+msgstr "Pois k√§yt√∂st√§"
+
+#: libsounds/sound-view.c:99
+msgid "The sound file for this event does not exist."
+msgstr "T√§m√§n tapahtuman √§√§nitiedostoa ei ole olemassa."
+
+#: libsounds/sound-view.c:101
+msgid ""
+"The sound file for this event does not exist.\n"
+"You may want to install the gnome-audio package\n"
+"for a set of default sounds."
+msgstr ""
+"Tapahtuman √§√§nitiedostoa ei ole olemassa.\n"
+"Saatat haluta asentaa gnome-audio-paketin,\n"
+"joka sis√§lt√§√§ valikoiman oletus√§√§ni√§."
+
+#: libsounds/sound-view.c:154
+msgid "Event"
+msgstr "Tapahtuma"
+
+#: libsounds/sound-view.c:154
+msgid "File to Play"
+msgstr "Soitettava tiedosto"
+
+#: libsounds/sound-view.c:187
+msgid "Play"
+msgstr "Soita"
+
+#: libsounds/sound-view.c:193
+msgid "Select sound file"
+msgstr "Valitse √§√§nitiedosto"
+
+#~ msgid "Main"
+#~ msgstr "P√§√§"
+
+#~ msgid "Main Settings"
+#~ msgstr "P√§√§asetukset"
+
+#~ msgid "Iterator"
+#~ msgstr "Iteraattori"
+
+#~ msgid "Behavior"
+#~ msgstr "Toiminta"
+
+#~ msgid "Initialize session settings"
+#~ msgstr "Alusta istunnon asetukset"
+
+#~ msgid "Global panel properties"
+#~ msgstr "Yleiset paneelin ominaisuudet"
+
+#~ msgid "Panel"
+#~ msgstr "Paneeli"
+
+#~ msgid "Information on MIME type to edit"
+#~ msgstr "Muokattava MIME-tyypin tieto"
+
+#~ msgid "GtkTreeIter that contains the category data"
+#~ msgstr "GtkTreeIter, joka sis√§lt√§√§ luokan tiedot"
+
 #~ msgid "Default location"
 #~ msgstr "Oletussijainti"
 
@@ -688,80 +804,79 @@ msgstr ""
 #~ msgstr "Vaihda sijaintiprofiili annetuksi"
 
 #~ msgid "Push configuration data out to client machines (UNIMPLEMENTED)"
-#~ msgstr "Siirr‰ asetustiedot asiakaskoneille (EI TOTEUTETTU)"
+#~ msgstr "Siirr√§ asetustiedot asiakaskoneille (EI TOTEUTETTU)"
 
 #~ msgid "Rename a location to a new name"
-#~ msgstr "Nime‰ sijainti uudelleen"
+#~ msgstr "Nime√§ sijainti uudelleen"
 
 #~ msgid "Add a new location to the archive"
-#~ msgstr "Lis‰‰ uusi sijainti arkistoon"
+#~ msgstr "Lis√§√§ uusi sijainti arkistoon"
 
 #~ msgid "Remove a location from the archive"
 #~ msgstr "Poista sijainti arkistosta"
 
 #~ msgid "Add a given backend to the given location"
-#~ msgstr "Lis‰‰ annettu taustamoduuli annettuun sijaintiin"
+#~ msgstr "Lis√§√§ annettu taustamoduuli annettuun sijaintiin"
 
 #~ msgid "Remove the given backend from the given location"
 #~ msgstr "Poista annettu taustamoduuli annetusta sijainnista"
 
-#, fuzzy
 #~ msgid "Perform garbage collection on the given location"
-#~ msgstr "Uuden sijainnin yl‰sijainti"
+#~ msgstr "Ker√§√§ annetun sijainnin roskat"
 
 #~ msgid "Use the global repository"
-#~ msgstr "K‰yt‰ p‰‰arkistoa"
+#~ msgstr "K√§yt√§ p√§√§arkistoa"
 
 #~ msgid "Identifier of location profile on which to operate"
-#~ msgstr "K‰sitelt‰v‰n sijaintiprofiilin tunnus"
+#~ msgstr "K√§sitelt√§v√§n sijaintiprofiilin tunnus"
 
 #~ msgid "LOCATION"
 #~ msgstr "SIJAINTI"
 
 #~ msgid "Backend being used for this operation"
-#~ msgstr "T‰h‰n toimintaan k‰ytett‰v‰ taustamoduuli"
+#~ msgstr "T√§h√§n toimintaan k√§ytett√§v√§ taustamoduuli"
 
 #~ msgid "BACKEND_ID"
 #~ msgstr "TAUSTAMODUULI_ID"
 
 #~ msgid "Store only the differences with the parent location's config"
-#~ msgstr "Tallenna vain eroavaisuudet yl‰sijainnin asetuksiin verrattuna"
+#~ msgstr "Tallenna vain eroavaisuudet yl√§sijainnin asetuksiin verrattuna"
 
 #~ msgid "Store only those settings set in the previous config"
-#~ msgstr "Tallenna vain edellisiss‰ asetuksissa olleet asetukset"
+#~ msgstr "Tallenna vain edellisiss√§ asetuksissa olleet asetukset"
 
 #~ msgid "Date to which to roll back"
-#~ msgstr "P‰iv‰ys, johon palataan"
+#~ msgstr "P√§iv√§ys, jonka hetkiset asetukset palautetaan"
 
 #~ msgid "DATE"
-#~ msgstr "PƒIVƒYS"
+#~ msgstr "P√ÑIV√ÑYS"
 
 #~ msgid "Roll back all configuration items"
 #~ msgstr "Palauta kaikki asetukset"
 
 #~ msgid "Roll back to the revision REVISION_ID"
-#~ msgstr "Palauta versio VERSIO_ID"
+#~ msgstr "Palauta asetusten versio VERSIO_ID"
 
 #~ msgid "REVISION_ID"
 #~ msgstr "VERSIO_ID"
 
 #~ msgid "Roll back to the last known revision"
-#~ msgstr "Palauta viimeisin tunnettu versio"
+#~ msgstr "Palauta asetusten viimeisin tunnettu versio"
 
 #~ msgid "Roll back by STEPS revisions"
-#~ msgstr "Palaa versioissa takaisin ASKELIA askeleen verran."
+#~ msgstr "Palaa asetusten versioissa takaisin ASKELIA askeleen verran."
 
 #~ msgid "STEPS"
 #~ msgstr "ASKELIA"
 
 #~ msgid "Don't run the backend, just dump the output"
-#~ msgstr "ƒl‰ k‰yt‰ taustamoduulia, vaan n‰yt‰ tulokset"
+#~ msgstr "√Ñl√§ k√§yt√§ taustamoduulia, vaan n√§yt√§ tulokset"
 
 #~ msgid "Parent location for the new location"
-#~ msgstr "Uuden sijainnin yl‰sijainti"
+#~ msgstr "Uuden sijainnin yl√§sijainti"
 
 #~ msgid "PARENT"
-#~ msgstr "YLƒ"
+#~ msgstr "YL√Ñ"
 
 #~ msgid "New name to assign to the location"
 #~ msgstr "Sijainnin uusi nimi"
@@ -770,13 +885,16 @@ msgstr ""
 #~ msgstr "UUSI_NIMI"
 
 #~ msgid "Add/remove this backend to/from the master backend list"
-#~ msgstr "Lis‰‰ tai poista t‰m‰ taustamoduuli p‰‰taustamoduulilistasta"
+#~ msgstr "Lis√§√§ tai poista t√§m√§ taustamoduuli p√§√§taustamoduulilistasta"
 
 #~ msgid "Full containment"
-#~ msgstr "Kokonaan sis‰lt‰minen"
+#~ msgstr "Kokonaan sis√§lt√§minen"
 
 #~ msgid "Partial containment"
-#~ msgstr "Osittainen sis‰lt‰minen"
+#~ msgstr "Osittainen sis√§lt√§minen"
+
+#~ msgid "Global archiver options"
+#~ msgstr "Yleiset arkistointivalitsimet"
 
 #~ msgid "Archiver commands"
 #~ msgstr "Arkistointikomennot"
@@ -785,13 +903,19 @@ msgstr ""
 #~ msgstr "Datan tallennusvalitsimet"
 
 #~ msgid "Options for rolling back"
-#~ msgstr "Datan palautusvalitsimet"
+#~ msgstr "Asetusten palautuksen valitsimet"
 
 #~ msgid "Options for adding or renaming locations"
-#~ msgstr "Sijaintien lis‰‰misen ja nime‰misen valitsimet"
+#~ msgstr "Sijaintien lis√§√§misen ja nime√§misen valitsimet"
 
 #~ msgid "Options for adding and removing backends"
-#~ msgstr "Taustamoduulien lis‰ys- ja poistovalitsimet"
+#~ msgstr "Taustamoduulien lis√§ys- ja poistovalitsimet"
+
+#~ msgid "Wallpaper Selection"
+#~ msgstr "Taustakuvan valinta"
+
+#~ msgid "Can't find an hbox, using a normal file selection"
+#~ msgstr "Ei l√∂yd√§ hboxia: k√§ytt√§√§ tavallista tiedostonvalitsinta"
 
 #~ msgid "Preview"
 #~ msgstr "Esikatselu"
@@ -804,31 +928,31 @@ msgstr ""
 
 #~ msgid "With this option, you can select a predefined Editor as your default"
 #~ msgstr ""
-#~ "T‰ll‰ asetuksella voit valita tietyist‰ editoreista yhden oletukseksesi"
+#~ "T√§ll√§ asetuksella voit valita tietyist√§ editoreista yhden oletukseksesi"
 
 #~ msgid "Custom Editor"
 #~ msgstr "Muu editori"
 
 #~ msgid "With this option you can create your own default editor"
-#~ msgstr "T‰ll‰ oletuksella voit valita oman oletuseditorisi"
+#~ msgstr "T√§ll√§ oletuksella voit valita oman oletuseditorisi"
 
 #~ msgid "Start in Terminal"
-#~ msgstr "Aja p‰‰teikkunassa"
+#~ msgstr "Aja p√§√§teikkunassa"
 
 #~ msgid "Does this editor need to start in an xterm?"
-#~ msgstr "Tarvitseeko t‰m‰ editori p‰‰tett‰ (esim. xterm) toimiakseen?"
+#~ msgstr "Tarvitseeko t√§m√§ editori p√§√§tett√§ (esim. xterm) toimiakseen?"
 
 #~ msgid "Accepts Line Number"
-#~ msgstr "Hyv‰ksyy rivinumeron"
+#~ msgstr "Hyv√§ksyy rivinumeron"
 
 #~ msgid "Does this editor accept line numbers from the command line?"
-#~ msgstr "Voiko t‰lle editorille antaa rivinumeron komentorivill‰?"
+#~ msgstr "Voiko t√§lle editorille antaa rivinumeron komentorivill√§?"
 
 #~ msgid "Command:"
 #~ msgstr "Komento:"
 
 #~ msgid "Please enter the command line used to start this editor"
-#~ msgstr "Kirjoita t‰m‰n editorin k‰ynnist‰v‰ komentorivi"
+#~ msgstr "Kirjoita t√§m√§n editorin k√§ynnist√§v√§ komentorivi"
 
 #~ msgid "Text Editor"
 #~ msgstr "Tekstieditori"
@@ -841,30 +965,30 @@ msgstr ""
 
 #~ msgid ""
 #~ "With this option, you can select a predefined Web Browser as your default"
-#~ msgstr "T‰ll‰ asetuksella voit valita tietyn WWW-selaimen oletukseksesi"
+#~ msgstr "T√§ll√§ asetuksella voit valita tietyn WWW-selaimen oletukseksesi"
 
 #~ msgid "Custom Web Browser"
 #~ msgstr "Muu WWW-selain"
 
 #~ msgid "With this option you can create your own default web browser"
-#~ msgstr "T‰ll‰ asetuksella voit valita oman oletusselaimesi"
+#~ msgstr "T√§ll√§ asetuksella voit valita oman oletusselaimesi"
 
 #~ msgid "Does this web browser need to display in an xterm?"
-#~ msgstr "Tarvitseeko t‰m‰ editori p‰‰tett‰ (esim. xterm) toimiakseen?"
+#~ msgstr "Tarvitseeko t√§m√§ editori p√§√§tett√§ (esim. xterm) toimiakseen?"
 
 #~ msgid "Understands Netscape Remote Control"
-#~ msgstr "Ymm‰rt‰‰ Netscapen ohjausk‰skyj‰"
+#~ msgstr "Ymm√§rt√§√§ Netscapen ohjausk√§skyj√§"
 
 #~ msgid ""
 #~ "Does this web browser support the netscape remote control protocol?  If "
 #~ "in doubt, and this web browser isn't Netscape or Mozilla, it probably "
 #~ "doesn't."
 #~ msgstr ""
-#~ "Ymm‰rt‰‰kˆ t‰m‰ selain Netscapen ohjausk‰skyj‰? Jos et tied‰, ja selain "
-#~ "ei ole Netscape tai Mozilla, niin luultavasti n‰in ei ole."
+#~ "Ymm√§rt√§√§k√∂ t√§m√§ selain Netscapen ohjausk√§skyj√§? Jos et tied√§, ja selain "
+#~ "ei ole Netscape tai Mozilla, niin luultavasti n√§in ei ole."
 
 #~ msgid "Please enter the command line used to start this web browser"
-#~ msgstr "Kirjoita t‰m‰n selaimen k‰ynnist‰v‰ komentorivi"
+#~ msgstr "Kirjoita t√§m√§n selaimen k√§ynnist√§v√§ komentorivi"
 
 #~ msgid "Web Browser"
 #~ msgstr "WWW-selain"
@@ -876,41 +1000,40 @@ msgstr ""
 #~ msgstr "Valitse katselin"
 
 #~ msgid "With this option you can select a predefined help viewer."
-#~ msgstr "T‰ll‰ asetuksella voit valita tietyn ohjekatselimen"
+#~ msgstr "T√§ll√§ asetuksella voit valita tietyn ohjekatselimen"
 
 #~ msgid "Custom Help Viewer"
 #~ msgstr "Muu ohjekatselin"
 
 #~ msgid "With this option you can create your own help viewer"
-#~ msgstr "T‰ll‰ asetuksella voit valita oman ohjekatselimesi"
+#~ msgstr "T√§ll√§ asetuksella voit valita oman ohjekatselimesi"
 
 #~ msgid "Does this help viewer need an xterm for display?"
-#~ msgstr "Tarvitseeko ohjekatselin p‰‰tett‰ (esim. xterm) toimiakseen?"
+#~ msgstr "Tarvitseeko ohjekatselin p√§√§tett√§ (esim. xterm) toimiakseen?"
 
 #~ msgid "Accepts URLs"
-#~ msgstr "Hyv‰ksyy URL:n"
+#~ msgstr "Hyv√§ksyy URL:n"
 
 #~ msgid "Does this help viewer allow URLs for help?"
-#~ msgstr "Voiko t‰lle ohjekatselimelle antaa URL:ia?"
+#~ msgstr "Voiko t√§lle ohjekatselimelle antaa URL:ia?"
 
 #~ msgid "Please enter the command line used to start this help viewer"
-#~ msgstr "Kirjoita t‰m‰n ohjekatselimen k‰ynnist‰v‰ komentorivi"
+#~ msgstr "Kirjoita t√§m√§n ohjekatselimen k√§ynnist√§v√§ komentorivi"
 
 #~ msgid "Help Viewer"
 #~ msgstr "Ohjekatselin"
 
-#, fuzzy
 #~ msgid "Default Terminal"
-#~ msgstr "Valitse p‰‰te"
+#~ msgstr "Oletusp√§√§te"
 
 #~ msgid "With this option you can select a predefined terminal."
-#~ msgstr "T‰ll‰ asetuksella voit valita tietyn p‰‰teohjelman"
+#~ msgstr "T√§ll√§ asetuksella voit valita tietyn p√§√§teohjelman"
 
 #~ msgid "Custom Terminal"
-#~ msgstr "Muu p‰‰teohjelma"
+#~ msgstr "Muu p√§√§teohjelma"
 
 #~ msgid "With this option you can create your own terminal"
-#~ msgstr "T‰ll‰ asetuksella voit valita oman p‰‰teohjelmasi"
+#~ msgstr "T√§ll√§ asetuksella voit valita oman p√§√§teohjelmasi"
 
 #~ msgid "Exec Flag:"
 #~ msgstr "Suoritusvalitsin:"
@@ -919,48 +1042,71 @@ msgstr ""
 #~ "Please enter the flag used by this terminal to specify the command to run "
 #~ "on startup.  For example, in 'xterm' this would be '-e'."
 #~ msgstr ""
-#~ "Anna valitsin, joka saa t‰m‰n p‰‰teohjelman suorittamaan siihen liittyv‰n "
-#~ "komennon k‰ynnistyess‰‰n. Esimerkiksi xtermiss‰ t‰m‰ on '-e'."
+#~ "Anna valitsin, joka saa t√§m√§n p√§√§teohjelman suorittamaan siihen liittyv√§n "
+#~ "komennon k√§ynnistyess√§√§n. Esimerkiksi xtermiss√§ t√§m√§ on '-e'."
 
 #~ msgid "Please enter the command line used to start this terminal"
-#~ msgstr "Kirjoita t‰m‰n p‰‰tteen k‰ynnist‰v‰ komentorivi"
+#~ msgstr "Kirjoita t√§m√§n p√§√§tteen k√§ynnist√§v√§ komentorivi"
 
 #~ msgid "Terminal"
-#~ msgstr "P‰‰te"
+#~ msgstr "P√§√§te"
 
-#, fuzzy
+#~ msgid "Couldn't find pixmap file: %s"
+#~ msgstr "Ei l√∂yt√§nyt kuvatiedostoa: %s"
+
+#~ msgid "Couldn't create pixmap from file: %s"
+#~ msgstr "Ei voinut luoda kuvaa tiedostosta: %s"
+
 #~ msgid "Rollback the capplet given"
-#~ msgstr "Palauta annetun hetken asetukset"
+#~ msgstr "Palauta annetun hallintasovelman asetukset"
 
-#, fuzzy
 #~ msgid "Options for the rollback GUI"
-#~ msgstr "Datan palautusvalitsimet"
+#~ msgstr "Valitsimet asetusten palautuksen k√§ytt√∂liittym√§lle"
 
-#, fuzzy
+#~ msgid "1 year ago"
+#~ msgstr "1 vuosi sitten"
+
+#~ msgid "6 months ago"
+#~ msgstr "6 kuukautta sitten"
+
+#~ msgid "1 month ago"
+#~ msgstr "1 kuukausi sitten"
+
+#~ msgid "1 week ago"
+#~ msgstr "1 viikko sitten"
+
+#~ msgid "3 days ago"
+#~ msgstr "3 p√§iv√§√§ sitten"
+
+#~ msgid "1 day ago"
+#~ msgstr "1 p√§iv√§ sitten"
+
+#~ msgid "1 hour ago"
+#~ msgstr "1 tunti sitten"
+
 #~ msgid "30 minutes ago"
-#~ msgstr "minuutin kuluttua"
+#~ msgstr "30 minuuttia sitten"
 
-#, fuzzy
 #~ msgid "10 minutes ago"
-#~ msgstr "minuutin kuluttua"
+#~ msgstr "10 minuuttia sitten"
 
-#, fuzzy
 #~ msgid "5 minutes ago"
-#~ msgstr "minuutin kuluttua"
+#~ msgstr "5 minuuttia sitten"
 
-#, fuzzy
 #~ msgid "1 minute ago"
-#~ msgstr "minuutin kuluttua"
+#~ msgstr "1 minuutti sitten"
 
-#, fuzzy
 #~ msgid "Current time"
-#~ msgstr "Keskit‰ kuva."
+#~ msgstr "Nykyinen aika"
+
+#~ msgid "Rollback"
+#~ msgstr "Palauta asetukset"
 
 #~ msgid "Custom screensaver. No description available"
-#~ msgstr "Muu n‰ytˆns‰‰st‰j‰. Kuvausta ei ole."
+#~ msgstr "Muu n√§yt√∂ns√§√§st√§j√§. Kuvausta ei ole."
 
-#~ msgid "Screensaver"
-#~ msgstr "N‰ytˆns‰‰st‰j‰"
+#~ msgid "About %s\n"
+#~ msgstr "Tietoja %s\n"
 
 #~ msgid "Name:"
 #~ msgstr "Nimi:"
@@ -968,33 +1114,27 @@ msgstr ""
 #~ msgid "Settings"
 #~ msgstr "Asetukset"
 
-#~ msgid "Description"
-#~ msgstr "Kuvaus"
-
 #~ msgid "label1"
 #~ msgstr "nimike1"
 
 #~ msgid "Demo"
 #~ msgstr "Kokeile"
 
-#~ msgid "There are no configurable settings for this screensaver."
-#~ msgstr "T‰t‰ n‰ytˆns‰‰st‰j‰‰ ei voi s‰‰t‰‰."
-
 #~ msgid ""
 #~ "Cannot find the data to configure this screensaver. Please edit the "
 #~ "command line below."
 #~ msgstr ""
-#~ "T‰lle n‰ytˆns‰‰st‰j‰lle ei lˆydy asetustietoja. Muokkaa alla olevaa "
-#~ "komentorivi‰."
+#~ "T√§lle n√§yt√∂ns√§√§st√§j√§lle ei l√∂ydy asetustietoja. Muokkaa alla olevaa "
+#~ "komentorivi√§."
 
 #~ msgid "Visual:"
 #~ msgstr "Visuaali:"
 
 #~ msgid "Any"
-#~ msgstr "Mik‰ vain"
+#~ msgstr "Mik√§ vain"
 
-#~ msgid "Configure the settings of the screensaver"
-#~ msgstr "Muuta n‰ytˆns‰‰st‰j‰n asetuksia"
+#~ msgid "3d clock"
+#~ msgstr "3d-kello"
 
 #~ msgid "Fast"
 #~ msgstr "Nopea"
@@ -1002,9 +1142,8 @@ msgstr ""
 #~ msgid "High"
 #~ msgstr "Korkea"
 
-#, fuzzy
 #~ msgid "Large"
-#~ msgstr "Kuva:"
+#~ msgstr "Suuri"
 
 #~ msgid "Low"
 #~ msgstr "Alhainen"
@@ -1015,9 +1154,8 @@ msgstr ""
 #~ msgid "Slow"
 #~ msgstr "Hidas"
 
-#, fuzzy
 #~ msgid "Small"
-#~ msgstr "Pallot"
+#~ msgstr "Pieni"
 
 #~ msgid "Twist speed:"
 #~ msgstr "Kiertonopeus:"
@@ -1028,36 +1166,49 @@ msgstr ""
 #~ msgid "Wobble:"
 #~ msgstr "Huojunta:"
 
-#, fuzzy
+#~ msgid ""
+#~ "A cellular automaton that is really a two-dimensional Turing machine: as "
+#~ "the heads (``ants'') walk along the screen, they change pixel values in "
+#~ "their path.  Then, as they pass over changed pixels, their behavior is "
+#~ "influenced.  Written by David Bagley."
+#~ msgstr ""
+#~ "Soluautomaatti, joka on oikeastaan Turingin kone: kun p√§√§t -- eli "
+#~ "\"muurahaiset\" -- kulkevat ruutua pitkin, ne muuttavat matkallaan "
+#~ "pisteiden arvoja. Niiden toiminta vaihtuu, kun ne kulkevat muuttuneiden "
+#~ "pisteiden yli. T√§m√§n n√§yt√∂ns√§√§st√§j√§n on tehnyt David Bagley."
+
 #~ msgid "Ant"
-#~ msgstr "Mik‰ vain"
+#~ msgstr "Muurahaiset"
 
 #~ msgid "Four Sided cells"
 #~ msgstr "Nelisivuiset solut"
 
 #~ msgid "Full Color"
-#~ msgstr "T‰ydet v‰rit"
+#~ msgstr "T√§ydet v√§rit"
+
+#~ msgid "Many"
+#~ msgstr "Monta"
 
 #~ msgid "Monochrome"
-#~ msgstr "Yksiv‰rinen"
+#~ msgstr "Yksiv√§rinen"
 
 #~ msgid "Nine Sided cells"
-#~ msgstr "Yhdeks‰nsivuiset solut"
+#~ msgstr "Yhdeks√§nsivuiset solut"
 
 #~ msgid "Number of colours"
-#~ msgstr "V‰rien m‰‰r‰"
+#~ msgstr "V√§rien m√§√§r√§"
 
 #~ msgid "Random"
 #~ msgstr "Satunnainen"
 
 #~ msgid "Random size upto"
-#~ msgstr "Satunnaisen koon yl‰raja"
+#~ msgstr "Satunnaisen koon yl√§raja"
 
 #~ msgid "Randomize"
 #~ msgstr "Sekoita"
 
 #~ msgid "Sharp turns"
-#~ msgstr "Ter‰v‰t k‰‰nnˆkset"
+#~ msgstr "Ter√§v√§t k√§√§nn√∂kset"
 
 #~ msgid "Six Sided cells"
 #~ msgstr "Kuusisivuiset solut"
@@ -1084,184 +1235,319 @@ msgstr ""
 #~ msgstr "Kaksitoistasivuiset solut"
 
 #~ msgid "number of Ants"
-#~ msgstr "muurahaisten m‰‰r‰"
+#~ msgstr "muurahaisten m√§√§r√§"
 
-#, fuzzy
+#~ msgid "Atlantis"
+#~ msgstr "Atlantis"
+
+#~ msgid ""
+#~ "This is xfishtank writ large: a GL animation of a number of sharks, "
+#~ "dolphins, and whales.  The swimming motions are great.  Originally "
+#~ "written by Mark Kilgard."
+#~ msgstr ""
+#~ "T√§m√§ on kuin xfishtank-ohjelma, mutta n√§ytt√§v√§mpi: kolmiulotteiset "
+#~ "valaat, delfiinit ja hait uivat ruudulla hienosti ymp√§riins√§. Tehnyt "
+#~ "alunperin Mark Kilgard."
+
 #~ msgid "Attraction (balls)"
-#~ msgstr "Kesto (ms)"
+#~ msgstr "Vetovoima (pallot)"
 
 #~ msgid "Balls"
 #~ msgstr "Pallot"
 
 #~ msgid "Color Contrast"
-#~ msgstr "V‰rien kontrasti"
+#~ msgstr "V√§rien kontrasti"
 
 #~ msgid "Length of Trail"
-#~ msgstr "J‰ljen pituus"
+#~ msgstr "J√§ljen pituus"
+
+#~ msgid ""
+#~ "Like qix, this uses a simple motion model to generate many different "
+#~ "display modes.  The control points attract each other up to a certain "
+#~ "distance, and then begin to repel each other.  The attraction/repulsion "
+#~ "is proportional to the distance between any two particles, similar to the "
+#~ "strong and weak nuclear forces.  \n"
+#~ "\n"
+#~ "One of the most interesting ways to watch this hack is simply as bouncing "
+#~ "balls, because their motions and interactions with each other are so "
+#~ "odd.  Sometimes two balls will get into a tight orbit around each other, "
+#~ "to be interrupted later by a third, or by the edge of the screen.  It "
+#~ "looks quite chaotic.  \n"
+#~ "\n"
+#~ "Written by Jamie Zawinski, based on Lisp code by John Pezaris."
+#~ msgstr ""
+#~ "Kuten qix:n t√§m√§n s√§√§st√§j√§n eri toimintatilat perustuvat samaan "
+#~ "yksinkertaiseen liikemalliin. Massapisteet vet√§v√§t toisiaan puoleensa, "
+#~ "kun ne ovat kaukana toisistaan, ja hylkiv√§t toisiaan muulloin. Veto- ja "
+#~ "hylkimisvoiman suuruus on verrannollinen pisteiden v√§liseen et√§isyyteen, "
+#~ "kuten ydinvoimissa.\n"
+#~ "\n"
+#~ "T√§m√§ n√§yt√∂ns√§√§st√§j√§ on varsin kiinnostava, kun massapisteet n√§kyv√§t "
+#~ "yksinkertaisesti kimpolevina ympyr√∂in√§, koska niiden liikeradat sek√§ "
+#~ "vaikutukset toisiinsa ovat kummallisia. Joskus kaksi ympyr√§√§ voi j√§√§d√§ "
+#~ "kiert√§m√§√§n l√§helt√§ toisiaan, kunnes kolmas ympyr√§ tai ruudun reuna "
+#~ "h√§iritsee niit√§, mik√§ n√§ytt√§√§ melko kaoottiselta.\n"
+#~ "\n"
+#~ "Tehnyt Jamie Zawinski  John Pezarisin lisp-ohjelman perusteella."
 
 #~ msgid "Lines"
 #~ msgstr "Viivoja"
 
 #~ msgid "Long"
-#~ msgstr "Pitk‰"
+#~ msgstr "Pitk√§"
 
 #~ msgid "Number of Colors"
-#~ msgstr "V‰rien m‰‰r‰"
+#~ msgstr "V√§rim√§√§r√§"
 
 #~ msgid "Polygons"
 #~ msgstr "Monikulmioita"
 
-#~ msgid "Short"
-#~ msgstr "Lyhyt"
-
 #~ msgid "Splines"
-#~ msgstr "K‰yri‰"
+#~ msgstr "K√§yri√§"
 
 #~ msgid "Tails"
-#~ msgstr "J‰ljet"
+#~ msgstr "J√§ljet"
 
 #~ msgid "Threshold of repulsion"
 #~ msgstr "Poistovoiman kynnys"
 
-#~ msgid "Display screensaver in monochrome."
-#~ msgstr "N‰yt‰ n‰ytˆns‰‰st‰j‰ yksiv‰risen‰"
+#~ msgid "Blaster"
+#~ msgstr "R√§j√§yttimet"
 
-#, fuzzy
+#~ msgid ""
+#~ "Draws a simulation of flying space-combat robots (cleverly disguised as "
+#~ "colored circles) doing battle in front of a moving star field.  Written "
+#~ "by Jonathan Lin."
+#~ msgstr ""
+#~ "Piirt√§√§ lent√§vi√§ avaruustaistelurobotteja, jotka ovat naamioituneet "
+#~ "ovelasti v√§riympyr√∂iksi, taistelemassa liikkuvan t√§htikent√§n edess√§. "
+#~ "Tehnyt Jonathan Lin."
+
+#~ msgid "BlitSpin"
+#~ msgstr "Siirtopy√∂rre"
+
+#~ msgid "Display screensaver in monochrome."
+#~ msgstr "N√§yt√§ yksiv√§risen√§."
+
 #~ msgid "Faster"
 #~ msgstr "Nopea"
 
-#, fuzzy
 #~ msgid "Slower"
 #~ msgstr "Hidas"
 
-#~ msgid "Speed of rotation."
-#~ msgstr "Kiertonopeus."
-
 #~ msgid "Speed of the 90 degree rotation."
-#~ msgstr "90 asteen k‰‰nnˆksen nopeus."
+#~ msgstr "90 asteen k√§√§nn√∂ksen nopeus."
 
-#, fuzzy
+#~ msgid ""
+#~ "The ``blitspin'' hack repeatedly rotates a bitmap by 90 degrees by using "
+#~ "logical operations: the bitmap is divided into quadrants, and the "
+#~ "quadrants are shifted clockwise.  Then the same thing is done again with "
+#~ "progressively smaller quadrants, except that all sub-quadrants of a given "
+#~ "size are rotated in parallel.  Written by Jamie Zawinski based on some "
+#~ "cool SmallTalk code seen in in Byte Magazine in 1981.  \n"
+#~ "\n"
+#~ "As you watch it, the image appears to dissolve into static and then "
+#~ "reconstitute itself, but rotated.  You can provide the image to use, as "
+#~ "an XBM or XPM file, or tell it to grab a screen image and rotate that."
+#~ msgstr ""
+#~ "Siirtopy√∂rre kiert√§√§ kuvaa toistuvasti 90 astetta k√§ytt√§en loogisia "
+#~ "operaatioita: kuva jakautuu nelj√§nneksiin, jotka siirtyv√§t my√∂t√§p√§iv√§√§n. "
+#~ "T√§m√§n j√§lkeen sama tapahtuu yh√§ pienemmille nelj√§nneksille siten, ett√§ "
+#~ "yht√§ suuret kiertyv√§t samanaikaisesti. Tehnyt Jamie Zawinski Byte-"
+#~ "lehdess√§ 1981 olleen hienon SmallTalk-koodin perusteella."
+
+#~ msgid "Bouboule"
+#~ msgstr "Bouboule"
+
 #~ msgid "Colors:"
-#~ msgstr "Sulje"
+#~ msgstr "V√§rej√§:"
+
+#~ msgid "Count:"
+#~ msgstr "M√§√§r√§:"
 
 #~ msgid "Number of Colors."
-#~ msgstr "V‰rien m‰‰r‰."
+#~ msgstr "V√§rim√§√§r√§."
 
 #~ msgid "Number of bubbles to use."
-#~ msgstr "Kuplien m‰‰r‰."
+#~ msgstr "Kuplien m√§√§r√§."
 
 #~ msgid "Speed of Motion."
-#~ msgstr "Liikenopeus"
+#~ msgstr "Liikenopeus."
+
+#~ msgid ""
+#~ "This draws what looks like a spinning, deforming baloon with varying-"
+#~ "sized spots painted on its invisible surface.  Written by Jeremie Petit."
+#~ msgstr ""
+#~ "T√§m√§ s√§√§st√§j√§ n√§ytt√§√§ muotoaan muuttavalta pallolta, jonka l√§pin√§kyv√§ll√§ "
+#~ "pinnalla on erikokoisia t√§pli√§. Tehnyt Jeremie Petit."
 
 #~ msgid "Use red/blue 3d seperation."
 #~ msgstr "Erottele sininen ja punainen 3d-tapaan."
+
+#~ msgid "Braid"
+#~ msgstr "Punos"
+
+#~ msgid ""
+#~ "Draws random color-cycling inter-braided concentric circles.  Written by "
+#~ "John Neil."
+#~ msgstr ""
+#~ "Piirt√§√§ py√∂riv√§v√§risi√§ toisiinsa punoutuneita sis√§kk√§isi√§ ympyr√∂it√§. "
+#~ "Tehnyt John Neil."
+
+#~ msgid "BSOD"
+#~ msgstr "Virheilmoitukset"
+
+#~ msgid "Bubble3D"
+#~ msgstr "3D-kupla"
+
+#~ msgid "Bubbles"
+#~ msgstr "Kuplat"
 
 #~ msgid "Bubbles exist in three dimensions."
 #~ msgstr "Kuplia on monessa tasossa."
 
 #~ msgid "Don't hide bubbles when they pop."
-#~ msgstr "ƒl‰ piilota puhjenneita kuplia."
+#~ msgstr "√Ñl√§ piilota puhjenneita kuplia."
 
 #~ msgid "Draw circles instead of pixmap bubbles."
-#~ msgstr "Piirr‰ ympyrˆit‰ kuvioitujen kuplien sijaan."
+#~ msgstr "Piirr√§ ympyr√∂it√§ kuvioitujen kuplien sijaan."
 
-#, fuzzy
-#~ msgid "Cage"
-#~ msgstr "Kuva:"
+#~ msgid "Bumps"
+#~ msgstr "Kuhmut"
+
+#~ msgid "C Curve"
+#~ msgstr "C-k√§yr√§"
+
+#~ msgid "Compass"
+#~ msgstr "Kompassi"
 
 #~ msgid "Don't use double bufferinge"
-#~ msgstr "ƒl‰ k‰yt‰ kaksoispuskurointia"
+#~ msgstr "√Ñl√§ k√§yt√§ kaksoispuskurointia"
 
 #~ msgid "Use double buffering"
-#~ msgstr "K‰yt‰ kaksoispuskurointia"
+#~ msgstr "K√§yt√§ kaksoispuskurointia"
 
-#, fuzzy
+#~ msgid "Coral"
+#~ msgstr "Koralli"
+
 #~ msgid "Denser"
-#~ msgstr "Tiheys"
+#~ msgstr "Tihe√§"
 
 #~ msgid "Density"
 #~ msgstr "Tiheys"
 
 #~ msgid "Number of seeds"
-#~ msgstr "Siementen m‰‰r‰"
+#~ msgstr "Siementen m√§√§r√§"
 
-#, fuzzy
 #~ msgid "Seeds"
-#~ msgstr "Nopeus"
+#~ msgstr "Siemeni√§"
+
+#~ msgid "Cosmos"
+#~ msgstr "Kosmos"
+
+#~ msgid "Critical"
+#~ msgstr "Kriittinen"
 
 #~ msgid "Cell"
 #~ msgstr "Solu"
 
 #~ msgid "Center image."
-#~ msgstr "Keskit‰ kuva."
+#~ msgstr "Keskit√§ kuva."
+
+#~ msgid "Crystal"
+#~ msgstr "Kide"
 
 #~ msgid "Have at maximum size"
-#~ msgstr "Suurin mahdollinen koko"
+#~ msgstr "N√§yt√§ suurimmillaan"
 
 #~ msgid "Number of polygons to use."
-#~ msgstr "Monikulmioiden m‰‰r‰."
+#~ msgstr "Monikulmioiden m√§√§r√§."
 
-#, fuzzy
 #~ msgid "Cynosure"
-#~ msgstr "Sulje"
+#~ msgstr "Johtot√§hti"
 
-#, fuzzy
 #~ msgid "Less"
-#~ msgstr "Viivoja"
-
-#, fuzzy
-#~ msgid "More"
-#~ msgstr "Hiiri"
+#~ msgstr "V√§h√§n"
 
 #~ msgid "Number of iterations."
-#~ msgstr "L‰pik‰yntien lukum‰‰r‰."
+#~ msgstr "L√§pik√§yntien lukum√§√§r√§."
+
+#~ msgid "DangerBall"
+#~ msgstr "Piikkipallo"
+
+#~ msgid ""
+#~ "Draws a ball that periodically extrudes many random spikes.  Ouch! "
+#~ "Written by Jamie Zawinski."
+#~ msgstr ""
+#~ "Piirt√§√§ pallon, joka ajoittain kasvattaa monia piikkej√§. Auts! Tehnyt "
+#~ "Jamie Zawinski."
+
+#~ msgid "DecayScreen"
+#~ msgstr "Valuva ruutu"
 
 #~ msgid "Cycle through colors."
-#~ msgstr "Kierr‰t‰ v‰rej‰."
+#~ msgstr "Kierr√§t√§ v√§rej√§."
 
-#, fuzzy
 #~ msgid "Deco"
-#~ msgstr "Kokeile"
+#~ msgstr "Koristus"
 
-#, fuzzy
 #~ msgid "Time between redraws:"
-#~ msgstr "Piirtojen v‰linen aika."
+#~ msgstr "Piirtojen v√§linen aika:"
 
 #~ msgid "Use color when drawing."
-#~ msgstr "K‰yt‰ v‰rej‰."
+#~ msgstr "Piirr√§ v√§rillisen√§."
 
-#, fuzzy
+#~ msgid "seconds"
+#~ msgstr "sekuntia"
+
+#~ msgid "Deluxe"
+#~ msgstr "Deluxe"
+
+#~ msgid ""
+#~ "A cellular automaton that starts with a random field, and organizes it "
+#~ "into stripes and spirals.  Written by David Bagley."
+#~ msgstr ""
+#~ "Soluautomaatti, joka j√§rjest√§√§ aluksi satunnaisen kent√§n raidoiksi ja "
+#~ "spiraaleiksi. Tehnyt David Bagley."
+
 #~ msgid "Demon"
-#~ msgstr "Kokeile"
+#~ msgstr "Demoni"
 
-#, fuzzy
 #~ msgid "Discrete"
-#~ msgstr "Erilliset viivat"
+#~ msgstr "Diskreetti"
 
 #~ msgid "Number to use."
-#~ msgstr "K‰ytett‰v‰ lukum‰‰r‰."
+#~ msgstr "Lukum√§√§r√§."
+
+#~ msgid "Distort"
+#~ msgstr "V√§√§rist√§"
+
+#~ msgid "Drift"
+#~ msgstr "Virta"
 
 #~ msgid "Fractals should grow."
 #~ msgstr "Kasvata fraktaaleja."
 
 #~ msgid "Number of pixels to use."
-#~ msgstr "Pikselien lukum‰‰r‰."
+#~ msgstr "Kuvapisteiden lukum√§√§r√§."
 
 #~ msgid "Use lissajous figures to get points."
-#~ msgstr "Piirr‰ pisteet ketjuksi."
+#~ msgstr "Piirr√§ pisteet ketjuiksi."
 
-#, fuzzy
+#~ msgid "Epicycle"
+#~ msgstr "Episykli"
+
 #~ msgid "Seconds"
-#~ msgstr "ƒ‰ni"
+#~ msgstr "Sekuntia"
 
 #~ msgid "Time finished product is shown."
-#~ msgstr "Aika, jonka lopputulos on n‰kyvill‰."
+#~ msgstr "Aika, jonka lopputulos on n√§kyvill√§."
 
 #~ msgid "Number"
-#~ msgstr "M‰‰r‰"
+#~ msgstr "Numero"
 
 #~ msgid "Number of cycles"
-#~ msgstr "Kiertojen m‰‰r‰"
+#~ msgstr "Kierrosten m√§√§r√§"
 
 #~ msgid "Speed of Motion"
 #~ msgstr "Liikenopeus"
@@ -1269,178 +1555,369 @@ msgstr ""
 #~ msgid "Bitmap for flag"
 #~ msgstr "Lipun kuva"
 
+#~ msgid "Flag"
+#~ msgstr "Lippu"
+
 #~ msgid "Random size up to"
-#~ msgstr "Satunnaisen koon yl‰raja"
+#~ msgstr "Satunnaisen koon yl√§raja"
 
 #~ msgid "Text for flag"
 #~ msgstr "Lipun teksti"
 
-#, fuzzy
 #~ msgid "Flame"
-#~ msgstr "Nimi:"
-
-#, fuzzy
-#~ msgid "Iterations:"
-#~ msgstr "L‰pik‰yntien lukum‰‰r‰"
+#~ msgstr "Liekki"
 
 #~ msgid "Number of fractals to generate."
-#~ msgstr "Luotavien fraktaalien m‰‰r‰."
+#~ msgstr "Luotavien fraktaalien m√§√§r√§."
 
 #~ msgid "Pixels per fractal."
-#~ msgstr "Pikseli‰ per fraktaali."
+#~ msgstr "Pikseli√§ per fraktaali."
 
-#, fuzzy
 #~ msgid "Flow"
-#~ msgstr "Hidas"
+#~ msgstr "Virtaus"
 
 #~ msgid "Delay between redraws."
-#~ msgstr "Piirtojen v‰linen viive."
+#~ msgstr "Piirtojen v√§linen viive."
 
-#, fuzzy
 #~ msgid "Forest"
-#~ msgstr "Kokeile"
+#~ msgstr "Mets√§"
 
 #~ msgid "Number of trees to use."
-#~ msgstr "Puiden lukum‰‰r‰."
+#~ msgstr "Puiden m√§√§r√§."
 
-#, fuzzy
+#~ msgid ""
+#~ "This draws fractal trees.  Written by Peter Baumung.  Everybody loves "
+#~ "fractals, right?"
+#~ msgstr ""
+#~ "Piirt√§√§ fraktaalipuita. Tehnyt Peter Baumung. Kaikkihan pit√§v√§t "
+#~ "fraktaaleista?"
+
+#~ msgid "Galaxy"
+#~ msgstr "Galaksi"
+
+#~ msgid "Gears"
+#~ msgstr "Rattaat"
+
+#~ msgid ""
+#~ "Draws a planet bouncing around in space.  Written by David Konerding.  "
+#~ "The built-in image is a map of the earth (extracted from `xearth'), but "
+#~ "you can wrap any texture around the sphere, e.g., the planetary textures "
+#~ "that come with `ssystem'."
+#~ msgstr ""
+#~ "Piirt√§√§ avaruudessa kimpoilevan planeetan. Tehnyt David Konerding. "
+#~ "Oletuskuva on maan kartta (ohjelmasta xearth), mutta voit pinnoittaa "
+#~ "pallon mill√§ tahansa kuvalla, esimerkiksi ssystem-ohjelman planeettojen "
+#~ "kartoilla."
+
+#~ msgid ""
+#~ "Displays a few lines of text spinning around in a solid 3D font.  Written "
+#~ "by Jamie Zawinski."
+#~ msgstr ""
+#~ "Piirt√§√§ kolmiulotteisilla kirjasimilla muutaman rivin teksti√§, joka "
+#~ "py√∂rii ja kieppuu. Tehnyt Jamie Zawinski."
+
 #~ msgid "GLText"
-#~ msgstr "Kokeile"
+#~ msgstr "GLTeksti"
+
+#~ msgid ""
+#~ "Replays historical games of go (aka wei-chi and baduk) on the screen.  By "
+#~ "Scott Draves.  You can find it at <http://www.draves.org/goban/>."
+#~ msgstr ""
+#~ "Toistaa n√§yt√∂ll√§ historiallisia Go-pelej√§ (Go tunnetaan my√∂s nimill√§ wei-"
+#~ "chi ja baduk). Tehnyt Scott Draves. Voit saada t√§m√§n s√§√§st√§j√§n "
+#~ "osoitteesta http://www.draves.org/goban/."
+
+#~ msgid "Goop"
+#~ msgstr "M√∂ykyt"
 
 #~ msgid "Have transparent bubbles."
-#~ msgstr "K‰yt‰ l‰pin‰kyvi‰ kuplia."
+#~ msgstr "Piirr√§ l√§pin√§kyvi√§ kuplia."
 
 #~ msgid "Use additive color model."
-#~ msgstr "K‰yt‰ lis‰‰v‰‰ v‰ritystapaa."
+#~ msgstr "K√§yt√§ lis√§√§v√§√§ v√§ritystapaa."
+
+#~ msgid "Grav"
+#~ msgstr "Painovoima"
 
 #~ msgid "Number of planets to use."
-#~ msgstr "K‰ytett‰vien planeettojen m‰‰r‰."
+#~ msgstr "Planeettojen m√§√§r√§."
 
 #~ msgid "Objects should leave trails behind them."
-#~ msgstr "Osat j‰tt‰v‰t j‰lki‰."
+#~ msgstr "Kappaleet j√§tt√§v√§t j√§lki√§."
 
 #~ msgid "Orbit should decay."
-#~ msgstr "Kiertoradat pienenev‰t."
+#~ msgstr "Suista kappaleita kiertoradoiltaan."
+
+#~ msgid ""
+#~ "This program draws a simple orbital simulation.  If you turn on trails, "
+#~ "it looks kind of like a cloud-chamber photograph.  Written by Greg "
+#~ "Bowering."
+#~ msgstr ""
+#~ "T√§m√§ ohjelma piirt√§√§ yksinkertaisen kiertoratamallin. Jos s√§√§d√§t "
+#~ "kappaleet j√§tt√§m√§√§n j√§lki√§, tulos n√§ytt√§√§ valokuvalta sumukammiosta. "
+#~ "Tehnyt Greg Bowering."
+
+#~ msgid "Greynetic"
+#~ msgstr "Greynetic"
+
+#~ msgid ""
+#~ "This draws random colored and stippled rectangles.  Written by Jamie "
+#~ "Zawinski."
+#~ msgstr ""
+#~ "T√§m√§ ohjelma piirt√§√§ satunnaisen v√§risi√§ ja pilkullisia suorakulmioita. "
+#~ "Tehnyt Jamie Zawinski."
 
 #~ msgid "Animate circles."
-#~ msgstr "Liikuta ympyrˆit‰."
+#~ msgstr "Liikuta ympyr√∂it√§."
 
 #~ msgid "Cycle through colormap."
-#~ msgstr "Kierr‰t‰ v‰rej‰."
+#~ msgstr "Kierr√§t√§ v√§rikarttaa."
+
+#~ msgid "Halo"
+#~ msgstr "Halo"
 
 #~ msgid "Number of circles to use."
-#~ msgstr "K‰ytett‰vien ympyrˆiden m‰‰r‰."
+#~ msgstr "Ympyr√∂iden m√§√§r√§."
 
 #~ msgid "Use a gradient of colors between circles."
-#~ msgstr "Piirr‰ liukuv‰risi‰ ympyrˆit‰."
+#~ msgstr "V√§rit√§ ympyr√∂iden v√§lit v√§riliu'uin."
+
+#~ msgid "Helix"
+#~ msgstr "Kierukka"
 
 #~ msgid "Time between redraws."
-#~ msgstr "Piirtojen v‰linen aika."
+#~ msgstr "Piirtojen v√§linen aika."
+
+#~ msgid "Hopalong"
+#~ msgstr "Hopalong"
 
 #~ msgid "Number of pixels before a color change."
-#~ msgstr "V‰rin vaihtumismatka pikselein‰."
+#~ msgstr "V√§rinvaihtojen v√§listen kuvapisteiden m√§√§r√§."
 
-#, fuzzy
+#~ msgid ""
+#~ "This draws lacy fractal patterns, based on iteration in the imaginary "
+#~ "plane, from a 1986 Scientific American article.  Mostly written by "
+#~ "Patrick Naughton."
+#~ msgstr ""
+#~ "T√§m√§ piirt√§√§ nauhamaisia fraktaaleja, jotka perustuvat iterointiin "
+#~ "kompleksitasossa 1986 Scientific Americanin artikkelissa esitetyll√§ "
+#~ "tavalla. Enimm√§kseen tehnyt Patrick Naughton."
+
+#~ msgid "Hyperball"
+#~ msgstr "Hyperpallo"
+
+#~ msgid ""
+#~ "Hyperball is to hypercube as dodecahedron is to cube: this displays a 2D "
+#~ "projection of the sequence of 3D objects which are the projections of the "
+#~ "4D analog to the dodecahedron.  Written by Joe Keane."
+#~ msgstr ""
+#~ "Hyperpallo on hyperkuutiolle, mit√§ dodekaedri on kuutiolle: t√§m√§ s√§√§st√§j√§ "
+#~ "n√§ytt√§√§ kaksiulotteisen projektion niist√§ kolmeulotteisista kappaleista, "
+#~ "jotka ovat projektio dodekaedrin neliulotteisesta vastineesta. Tehnyt Joe "
+#~ "Keane."
+
 #~ msgid "Closer"
-#~ msgstr "Sulje"
+#~ msgstr "L√§hell√§"
 
 #~ msgid "Distance from center of cube"
-#~ msgstr "Et‰isyys kuution keskelt‰"
+#~ msgstr "Et√§isyys kuution keskelt√§"
+
+#~ msgid "Farther"
+#~ msgstr "Kaukana"
+
+#~ msgid "Hypercube"
+#~ msgstr "Hyperkuutio"
+
+#~ msgid "IFS"
+#~ msgstr "IFS"
+
+#~ msgid "Jigsaw"
+#~ msgstr "Palapeli"
+
+#~ msgid ""
+#~ "This grabs a screen image, carves it up into a jigsaw puzzle, shuffles "
+#~ "it, and then solves the puzzle.  This works especially well when you feed "
+#~ "it an external video signal instead of letting it grab the screen image "
+#~ "(actually, I guess this is generally true...)\tWhen it is grabbing a "
+#~ "video image, it is sometimes pretty hard to guess what the image is going "
+#~ "to look like once the puzzle is solved.  Written by Jamie Zawinski."
+#~ msgstr ""
+#~ "T√§m√§ ottaa kuvan ruudusta, jakaa sen palapelin paloiksi, sekoittaa ne ja "
+#~ "lopuksi kokoaa ne uudelleen. Erityisen hyv√§n tuloksen saa sy√∂tt√§m√§ll√§ "
+#~ "t√§lle n√§yt√∂ns√§√§st√§j√§lle muuta videosignaalia n√§yt√∂n kuvan sijaan, mik√§ "
+#~ "taitaa tosin olla yleisestikin totta...   Kun s√§√§st√§j√§ saa videokuvan, on "
+#~ "joskus varsin vaikea arvata, milt√§ lopputulos n√§ytt√§√§, kun palapeli on "
+#~ "koossa.  Tehnyt Jamie Zawinski."
+
+#~ msgid "Julia"
+#~ msgstr "Julia"
+
+#~ msgid "Kaleidescope"
+#~ msgstr "Kaleidoskooppi"
 
 #~ msgid "Number of segments."
-#~ msgstr "Osien lukum‰‰r‰."
+#~ msgstr "Osien lukum√§√§r√§."
 
 #~ msgid "Number of trails."
-#~ msgstr "J‰lkien lukum‰‰r‰."
+#~ msgstr "J√§lkien lukum√§√§r√§."
+
+#~ msgid "Segments"
+#~ msgstr "Osia"
+
+#~ msgid "Kumppa"
+#~ msgstr "Kumppa"
 
 #~ msgid "Duration of laser burst."
-#~ msgstr "Laserv‰l‰hdyksen kesto."
+#~ msgstr "Laserpurkauksen kesto."
 
-#, fuzzy
+#~ msgid "Laser"
+#~ msgstr "Laser"
+
+#~ msgid "Longer"
+#~ msgstr "Pitk√§"
+
+#~ msgid "Segments:"
+#~ msgstr "Osia:"
+
 #~ msgid "Shorter"
 #~ msgstr "Lyhyt"
 
 #~ msgid "Size of burst."
-#~ msgstr "V‰l‰hdyksen suuruus."
+#~ msgstr "Purkauksen koko."
 
-#, fuzzy
+#~ msgid "Lightning"
+#~ msgstr "Salama"
+
 #~ msgid "Larger"
-#~ msgstr "Kuva:"
+#~ msgstr "Suuri"
 
-#, fuzzy
 #~ msgid "Lisa"
-#~ msgstr "Viivoja"
+#~ msgstr "Lisa"
 
 #~ msgid "Size of object."
 #~ msgstr "Osan koko."
 
+#~ msgid "Smaller"
+#~ msgstr "Pieni"
+
+#~ msgid "Lissie"
+#~ msgstr "Vieteri"
+
 #~ msgid "Number of interpolation steps."
-#~ msgstr "L‰pik‰yntien lukum‰‰r‰."
+#~ msgstr "V√§livaiheiden m√§√§r√§."
 
 #~ msgid "Number of points."
-#~ msgstr "Pisteiden lukum‰‰r‰."
+#~ msgstr "Pisteiden m√§√§r√§."
 
 #~ msgid "Open figures."
 #~ msgstr "Avoimet kuviot."
 
+#~ msgid "Points:"
+#~ msgstr "Pisteit√§:"
+
+#~ msgid "Loop"
+#~ msgstr "Silmukointi"
+
 #~ msgid "Delay between drawing the maze and starting the solution."
-#~ msgstr "Sokkelon piirt‰misen ja ratkaisun etsimisen alun v‰linen viive."
+#~ msgstr "Viive sokkelon luonnin j√§lkeen ja ennen sen ratkaisemista."
 
 #~ msgid "Delay between each step in the maze."
-#~ msgstr "Jokaisen askeleen j‰lkeen oleva viive."
+#~ msgstr "Jokaisen askelen j√§lkeen oleva viive."
 
 #~ msgid "Delay between finishing the maze and starting a new one."
 #~ msgstr ""
-#~ "Viive sokkelon ratkaisemisen j‰lkeen ja ennen uuden sokkelon aloittamista."
+#~ "Viive sokkelon ratkaisemisen j√§lkeen ja ennen uuden sokkelon aloittamista."
+
+#~ msgid "Less Delay"
+#~ msgstr "Pieni viive"
+
+#~ msgid "Maze"
+#~ msgstr "Sokkelo"
+
+#~ msgid "More Delay"
+#~ msgstr "Suuri viive"
 
 #~ msgid "Put a bridge over the logo?"
-#~ msgstr "Lis‰‰ xscreensaverin logon yli viev‰ silta."
+#~ msgstr "Lis√§√§ logon yli viev√§ silta."
 
-#, fuzzy
 #~ msgid "Moebius"
-#~ msgstr "Hiiri"
+#~ msgstr "M√∂bius"
 
 #~ msgid "Maximum radius increment"
-#~ msgstr "Ympyrˆiden suuruus"
+#~ msgstr "Suurin s√§teen lis√§ys"
 
-#, fuzzy
-#~ msgid "Moire"
-#~ msgstr "Hiiri"
+#~ msgid "Moire2"
+#~ msgstr "Moire 2"
 
-#, fuzzy
 #~ msgid "Molecule"
-#~ msgstr "Hiiri"
+#~ msgstr "Molekyyli"
+
+#~ msgid "Morph3D"
+#~ msgstr "3D-muodonmuutos"
+
+#~ msgid "Mountain"
+#~ msgstr "Vuori"
 
 #~ msgid "Draw square at weird starting points."
-#~ msgstr "Piirr‰ neliˆt alkamaan oudoista paikoista."
+#~ msgstr "Piirr√§ neli√∂ kummallisiin aloituspaikkoihin."
+
+#~ msgid "Munch"
+#~ msgstr "Rouskutin"
 
 #~ msgid "Use XOR drawing function."
-#~ msgstr "K‰yt‰ XOR-operaatiota piirt‰ess‰."
+#~ msgstr "Piirr√§ XOR-funktiolla."
+
+#~ msgid "Noseguy"
+#~ msgstr "Nen√§k√§s"
 
 #~ msgid "Maximum number of lines."
-#~ msgstr "Viivojen suurin m‰‰r‰."
+#~ msgstr "Suurin viivojen m√§√§r√§."
+
+#~ msgid "Pedal"
+#~ msgstr "Pedal"
 
 #~ msgid "Time to fade away."
-#~ msgstr "H‰ivytyksen kesto."
+#~ msgstr "H√§ivytysaika."
 
 #~ msgid "Time to show each picture."
-#~ msgstr "Aika, jonka verran jokainen kuva n‰kyy."
+#~ msgstr "Kuvien n√§kymisaika."
 
-#, fuzzy
+#~ msgid "Penetrate"
+#~ msgstr "L√§p√§isy"
+
+#~ msgid ""
+#~ "This hack simulates the classic arcade game Missile Command.  Written by "
+#~ "Adam Miller."
+#~ msgstr ""
+#~ "T√§m√§ s√§√§st√§j√§ j√§ljittelee klassista kolikkopeli√§ Missile Command. Tehnyt "
+#~ "Adam Miller."
+
+#~ msgid "Penrose"
+#~ msgstr "Penrose"
+
+#~ msgid "Petri"
+#~ msgstr "Lasimalja"
+
+#~ msgid "Phosphor"
+#~ msgstr "Fosfori"
+
 #~ msgid "Pipes"
-#~ msgstr "Viivoja"
+#~ msgstr "Putket"
 
 #~ msgid "Frequency of missile launch"
 #~ msgstr "Rakettien laukaisutaajuus"
 
 #~ msgid "Number of particles"
-#~ msgstr "Hiukkasten m‰‰r‰"
+#~ msgstr "Hiukkasten lukum√§√§r√§"
 
 #~ msgid "Particles on screen"
-#~ msgstr "N‰kyvi‰ hiukkasia"
+#~ msgstr "N√§kyvi√§ hiukkasia"
+
+#~ msgid "Pyro"
+#~ msgstr "Ilotulitus"
 
 #~ msgid "Color contrast"
-#~ msgstr "V‰rikontrasti"
+#~ msgstr "V√§rikontrasti"
 
 #~ msgid "Discrete Lines"
 #~ msgstr "Erilliset viivat"
@@ -1449,37 +1926,49 @@ msgstr ""
 #~ msgstr "Pituus"
 
 #~ msgid "Number of points:"
-#~ msgstr "Pisteiden m‰‰r‰:"
+#~ msgstr "Pisteiden m√§√§r√§:"
 
 #~ msgid "Number of trails:"
-#~ msgstr "J‰lkien lukum‰‰r‰:"
+#~ msgstr "J√§lkien lukum√§√§r√§:"
 
 #~ msgid "Solid Trails"
-#~ msgstr "Yhten‰iset j‰ljet"
+#~ msgstr "Yhten√§iset j√§ljet"
 
 #~ msgid "Spread between lines"
-#~ msgstr "Levit‰ viivojen v‰liin"
+#~ msgstr "Levit√§ viivojen v√§liin"
 
 #~ msgid "Trails attract each other"
-#~ msgstr "J‰ljet vet‰v‰t toisiaan puoleensa"
+#~ msgstr "J√§ljet vet√§v√§t toisiaan puoleensa"
 
 #~ msgid "Transparent Trails"
-#~ msgstr "L‰pin‰kyv‰t j‰ljet"
+#~ msgstr "L√§pin√§kyv√§t j√§ljet"
 
 #~ msgid "Width"
 #~ msgstr "Leveys"
 
 #~ msgid "XOR Trails"
-#~ msgstr "XOR-j‰ljet"
+#~ msgstr "XOR-j√§ljet"
+
+#~ msgid "RD-Bomb"
+#~ msgstr "RD-Bomb"
+
+#~ msgid "Ripples (oily)"
+#~ msgstr "V√§reet (√∂ljy)"
+
+#~ msgid "Rocks"
+#~ msgstr "Kivet"
 
 #~ msgid "Delay before next redraw"
-#~ msgstr "Odota ennen uuden piirt‰mist‰"
+#~ msgstr "Odota ennen uuden piirt√§mist√§"
 
 #~ msgid "Number of Iterations"
-#~ msgstr "L‰pik‰yntien lukum‰‰r‰"
+#~ msgstr "L√§pik√§yntien lukum√§√§r√§"
 
 #~ msgid "Offset"
-#~ msgstr "Hajonta"
+#~ msgstr "Et√§isyys"
+
+#~ msgid "Rorschach"
+#~ msgstr "Rorschach"
 
 #~ msgid "Speed to clear the screen"
 #~ msgstr "Ruuduntyjennysnopeus"
@@ -1490,24 +1979,47 @@ msgstr ""
 #~ msgid "With Y-axis Symmetry"
 #~ msgstr "Symmetrinen Y-akselin suhteen"
 
-#, fuzzy
+#~ msgid "Rotor"
+#~ msgstr "Roottori"
+
+#~ msgid "Rubik"
+#~ msgstr "Rubikin kuutio"
+
+#~ msgid "Sierpinski"
+#~ msgstr "Sierpinskin kolmio"
+
+#~ msgid "Sierpinski3D"
+#~ msgstr "Sierpinskin tetraedri"
+
+#~ msgid "Slip"
+#~ msgstr "Luisto"
+
 #~ msgid "Sonar"
-#~ msgstr "ƒ‰ni"
+#~ msgstr "Tutka"
 
-#, fuzzy
-#~ msgid "SpeedMine"
-#~ msgstr "Nopeus"
-
-#, fuzzy
 #~ msgid "Sphere"
-#~ msgstr "Nopeus"
+#~ msgstr "Pallo"
 
-#, fuzzy
+#~ msgid "Spiral"
+#~ msgstr "Spiraali"
+
+#~ msgid "Spotlight"
+#~ msgstr "Valokeila"
+
 #~ msgid "Sproingies"
-#~ msgstr "K‰yri‰"
+#~ msgstr "Pomput"
+
+#~ msgid "Squiral"
+#~ msgstr "Neli√∂spiraali"
+
+#~ msgid "SSystem"
+#~ msgstr "SSystem"
+
+#~ msgid "Stairs"
+#~ msgstr "Portaat"
 
 #~ msgid "Change to display in monochrome."
-#~ msgstr "N‰yt‰ n‰ytˆns‰‰st‰j‰ yksiv‰risen‰."
+#~ msgstr "N√§yt√§ yksiv√§risen√§."
 
 #~ msgid "Duration of current shape."
 #~ msgstr "Nykyisen kuvion kesto."
@@ -1515,86 +2027,375 @@ msgstr ""
 #~ msgid "Quickness of rotation at each step (0 = Random)"
 #~ msgstr "Kiertymisnopeus (0 = satunnainen)"
 
+#~ msgid "Slim"
+#~ msgstr "Kapea"
+
 #~ msgid "Speed of animation."
 #~ msgstr "Liikkumisnopeus."
 
+#~ msgid "Starfish"
+#~ msgstr "Merit√§hti"
+
 #~ msgid "Thickness of color bands (0 = Random)"
-#~ msgstr "V‰rinauhojen leveys (0 = satunnainen)."
+#~ msgstr "V√§rinauhojen leveys (0 = satunnainen)."
 
 #~ msgid "Use raw shapes "
-#~ msgstr "Kuviot eiv‰t j‰t‰ j‰lki‰"
+#~ msgstr "Kuviot eiv√§t j√§t√§ j√§lki√§ "
 
-#, fuzzy
+#~ msgid ""
+#~ "Draws a stream of text slowly scrolling into the distance at an angle, "
+#~ "over a star field, like at the beginning of the movie of the same name.  "
+#~ "Written by Jamie Zawinski and Claudio Matauoka."
+#~ msgstr ""
+#~ "Piirt√§√§ t√§htitaustan p√§√§lle teksti√§, joka etenee kaukaisuuteen, juuri "
+#~ "kuten saman nimisess√§ elokuvassa. Tehneet Jamie Zawinski ja Claudio "
+#~ "Matauoka."
+
+#~ msgid "StarWars"
+#~ msgstr "T√§htien sota"
+
+#~ msgid "Strange"
+#~ msgstr "Outo"
+
+#~ msgid ""
+#~ "This draws strange attractors: it's a colorful, unpredictably-animating "
+#~ "field of dots that swoops and twists around.  The motion is very nice.  "
+#~ "Written by Massimino Pascal."
+#~ msgstr ""
+#~ "Piirt√§√§ outoja attraktoreita, mik√§ n√§ytt√§√§ v√§rikk√§√§lt√§ pistejoukolta, "
+#~ "jonka liikett√§ on vaikea arvata ennalta. Tehnyt Massimino Pascal."
+
+#~ msgid ""
+#~ "Ed Mackey reports that he wrote the first version of this program in "
+#~ "BASIC on a Commodore 64 in 1987, as a 320x200 black and white wireframe.  "
+#~ "Now it is GL and has specular reflections."
+#~ msgstr ""
+#~ "Ed Mackleyn mukaan h√§n kirjoitti t√§m√§n ohjelman ensimm√§isen version "
+#~ "BASICilla Commondore 64:lle vuonna 1987, jolloin tarkkuus oli 320x200 ja "
+#~ "kuvio oli mustavalkoinen viivapiirros. Nyt ohjelma on toteutettu GL:ll√§ "
+#~ "ja siin√§ on mukana my√∂s heijastukset."
+
+#~ msgid "Superquadrics"
+#~ msgstr "Superquadrics"
+
+#~ msgid ""
+#~ "More flowing, swirly patterns.  This version is by M.  Dobie and R.  "
+#~ "Taylor, but you might have seen a Mac program similar to this called "
+#~ "FlowFazer.  There is also a cool Java applet of a similar concept"
+#~ msgstr ""
+#~ "Lis√§√§ virtaavia py√∂rteisi√§ kuvioita. T√§m√§n version ovat tehneet M. Dobie "
+#~ "ja R. Taylor, mutta olet saattanut n√§hd√§ my√∂s samanlaisen Mac-ohjelman "
+#~ "nimelt√§√§n FlowFazer. Olemassa on my√∂s samantyylinen hieno Java-sovelma."
+
+#~ msgid "Swirl"
+#~ msgstr "Py√∂rre"
+
+#~ msgid ""
+#~ "This draws a working analog clock composed of floating, throbbing "
+#~ "bubbles.  Written by Bernd Paysan."
+#~ msgstr ""
+#~ "Piirt√§√§ toimivan viisarikellon, joka koostuu leijuvista ja sykkivist√§ "
+#~ "kuplista. Tehnyt Bernd Paysan."
+
+#~ msgid ""
+#~ "Generates random mountain ranges using iterative subdivision of "
+#~ "triangles.  Written by Tobias Gloth."
+#~ msgstr ""
+#~ "Luo satunnaisia vuoristoja k√§ytt√§m√§ll√§ toistuvaa kolmioiden osiin "
+#~ "jakamista. Tehnyt Tobias Gloth."
+
 #~ msgid "Triangle"
-#~ msgstr "P‰‰te"
+#~ msgstr "Kolmio"
 
-#, fuzzy
+#~ msgid ""
+#~ "This draws line- and arc-based Truchet patterns that tile the screen.  "
+#~ "Written by Adrian Likins."
+#~ msgstr ""
+#~ "Piirt√§√§ viivoista ja kaarista koostuvia ristikkoja, jotka t√§ytt√§v√§t "
+#~ "n√§ytt√∂ruudun. Tehnyt Adrian Likins."
+
 #~ msgid "Truchet"
-#~ msgstr "Muurahaisen kulkema polku"
+#~ msgstr "Ruudukko"
 
-#, fuzzy
+#~ msgid ""
+#~ "This is actually just a shell script that grabs a frame of video from the "
+#~ "system's video input, and then uses some PBM filters (chosen at random) "
+#~ "to manipulate and recombine the video frame in various ways (edge "
+#~ "detection, subtracting the image from a rotated version of itself, etc.)  "
+#~ "Then it displays that image for a few seconds, and does it again.  This "
+#~ "works really well if you just feed broadcast television into it.  \n"
+#~ "\n"
+#~ "Currently, the three lines of the script that actually grab the source "
+#~ "picture are SGI specific, but it should be trivial to adapt it to work on "
+#~ "other systems that can grab video (please send me the changes if you do "
+#~ "this...)"
+#~ msgstr ""
+#~ "T√§m√§ on itse asiassa vain shell-komentojono, joka kaappaa ruudun "
+#~ "j√§rjestelm√§n videosis√§√§ntulosta ja k√§ytt√§√§ siihen satunnaisia PBM-"
+#~ "suodattimia muokatakseen ja yhdistell√§kseen ruutua eri tavoin (reunojen "
+#~ "l√∂yt√§minen, kierretyn kuvan v√§hent√§minen yms.). T√§m√§n j√§lkeen se n√§ytt√§√§ "
+#~ "kuvaa muutaman sekunnin ajan, ja tekee sen j√§lkeen uuden kuvan. Erityisen "
+#~ "hyvin t√§m√§ toimii, jos kuvat saadaan televisiosta.\n"
+#~ "\n"
+#~ "T√§ll√§ hetkell√§ kolme skriptin rivi√§, jotka hankkivat kuvan toimivat vain "
+#~ "SGI:ll√§, mutta niiden muissa j√§rjestelmiss√§ toimiviksi sovittamisen "
+#~ "pit√§isi olla yksinkertaista (l√§het√§ muutokset tekij√§lle, jos saat t√§m√§n "
+#~ "tehty√§...)"
+
+#~ msgid ""
+#~ "This one generates a continuous sequence of small, curvy geometric "
+#~ "patterns.  It scatters them around your screen until it fills up, then it "
+#~ "clears the screen and starts over.  Written by Tracy Camp and David "
+#~ "Hansen."
+#~ msgstr ""
+#~ "Luo jatkuvia pienten geometristen kuvioiden muodostamia rypp√§it√§. Se "
+#~ "levitt√§√§ niit√§ ymp√§ri ruutua, kunnes se t√§yttyy. Ruudun t√§ytytty√§ se "
+#~ "tyhjenee ja piirt√§minen alkaa alusta. Tehneet Tracy Camp ja David Hansen."
+
 #~ msgid "Vines"
-#~ msgstr "Viivoja"
+#~ msgstr "K√∂ynn√∂kset"
+
+#~ msgid ""
+#~ "Draws a colorful random-walk, in various forms.  Written by Rick Campbell."
+#~ msgstr ""
+#~ "Piirt√§√§ v√§rikk√§√§n satunnaisesti etenev√§n j√§ljen. Tehnyt Rick Campbell."
+
+#~ msgid ""
+#~ "An ancient xlock hack that draws multicolored worms that crawl around the "
+#~ "screen.  Written by Brad Taylor, Dave Lemke, Boris Putanec, and Henrik "
+#~ "Theiling."
+#~ msgstr ""
+#~ "Muinainen xlock-n√§yt√∂ns√§√§st√§j√§, joka piirt√§√§ moniv√§risi√§ ruudulla "
+#~ "ry√∂mivi√§ matoja. Tehneet Brad Taylor, Dave Lemke, Boris Putanec ja Henrik "
+#~ "Theiling."
+
+#~ msgid "Worm"
+#~ msgstr "Mato"
+
+#~ msgid "XaoS"
+#~ msgstr "XaoS"
+
+#~ msgid ""
+#~ "XaoS generates fast fly-through animations of the Mandelbrot and other "
+#~ "fractal sets.  Written by Thomas Marsh and Jan Hubicka.  This is not "
+#~ "included with the XScreenSaver package, but if you don't have it already, "
+#~ "you can find it at <http://limax.paru.cas.cz/~hubicka/XaoS/>."
+#~ msgstr ""
+#~ "XaoS piirt√§√§ nopeita l√§pilentoanimaatioita Mandelbrotista ja muista "
+#~ "fraktaaleista. Tehneet Thomas Marsh ja Jan Hubicka. T√§t√§ ohjelmaa ei ole "
+#~ "mukaan XScreenSaver-paketissa, mutta voit hankkia sen osoitteesta <http://"
+#~ "limax.paru.cas.cz/~hubicka/XaoS/>, jos sinulla ei ole sit√§."
+
+#~ msgid ""
+#~ "XDaliClock draws a large digital clock, the numbers of which change by "
+#~ "``melting'' into their new shapes.  Written by Jamie Zawinski.  This is "
+#~ "not included with the XScreenSaver package, but if you don't have it "
+#~ "already, you can find it at <http://www.jwz.org/xdaliclock/>."
+#~ msgstr ""
+#~ "XDaliClock piirt√§√§ suuren numerokellon, jonka numerot muuttuvat "
+#~ "\"sulavasti\" uusiin muotoihinsa. Tehnyt Jamie Zawinski. T√§t√§ ohjelmaa ei "
+#~ "ole mukaan XScreenSaver-paketissa, mutta voit hankkia sen osoitteesta "
+#~ "<http://www.jwz.org/xdaliclock/>, jos sinulla ei ole sit√§."
+
+#~ msgid ""
+#~ "XEarth draws an image of the Earth, as seen from your favorite vantage "
+#~ "point in space, correctly shaded for the current position of the Sun.  "
+#~ "Written by Kirk Johnson.  This is not included with the XScreenSaver "
+#~ "package, but if you don't have it already, you can find it at <http://www."
+#~ "cs.colorado.edu/~tuna/xearth/>."
+#~ msgstr ""
+#~ "XEarth piirt√§√§ kuvan maapallosta, n√§htyn√§ mieluisesta kohdasta "
+#~ "avaruudessa, varjostettuna oikein auringon aseman mukaan. Tehnyt Kirk "
+#~ "Johnson. T√§t√§ ohjelmaa ei ole mukaan XScreenSaver-paketissa, mutta voit "
+#~ "hankkia sen osoitteesta <http://www.cs.colorado.edu/~tuna/xearth/>, jos "
+#~ "sinulla ei ole sit√§."
+
+#~ msgid ""
+#~ "Fish!  This is not included with the XScreenSaver package, but if you "
+#~ "don't have it already, you can find it at <http://metalab.unc.edu/pub/"
+#~ "Linux/X11/demos/>."
+#~ msgstr ""
+#~ "Kaloja! T√§t√§ ohjelmaa ei ole mukaan XScreenSaver-paketissa, mutta voit "
+#~ "hankkia sen osoitteesta <http://metalab.unc.edu/pub/Linux/X11/demos/>, "
+#~ "jos sinulla ei ole sit√§."
+
+#~ msgid ""
+#~ "Draws a simulation of pulsing fire.  It can also take an arbitrary image "
+#~ "and set it on fire too.  Written by Carsten Haitzler, hacked on by many "
+#~ "others."
+#~ msgstr ""
+#~ "Mallintaa sykkivi√§ liekkej√§. Voi my√∂s sytytt√§√§ mink√§ tahansa "
+#~ "kuvatiedoston liekehtim√§√§n. Ohjelman on tehnyt Carsten Haitzler, ja sit√§ "
+#~ "ovat muutelleet monet muut."
+
+#~ msgid "Xflame"
+#~ msgstr "Xliekki"
+
+#~ msgid ""
+#~ "This program behaves schizophrenically and makes a lot of typos.  Written "
+#~ "by Jamie Zawinski.  If you haven't seen Stanley Kubrick's masterpiece, "
+#~ "``The Shining,'' you won't get it.  Those who have describe this hack as "
+#~ "``inspired.''"
+#~ msgstr ""
+#~ "T√§m√§ ohjelma k√§ytt√§ytyy jakomielisesti ja tekee paljon kirjoitusvirheit√§. "
+#~ "Tehnyt Jamie Zawinski. Jos et ole n√§hnyt Stanley Kubrickin mestariteosta "
+#~ "Hohtoa, et varmaankaan ymm√§rr√§. Elokuvan n√§hneet ovat kuvanneet t√§t√§ "
+#~ "n√§yt√∂ns√§√§st√§j√§√§ \"innoittuneeksi\"."
+
+#~ msgid "Xjack"
+#~ msgstr "Xjaakko"
+
+#~ msgid ""
+#~ "This generates pretty fractal pictures by doing funky math involving the "
+#~ "``Lyapunov exponent.''  It has a cool interactive mode, too.  Written by "
+#~ "Ron Record."
+#~ msgstr ""
+#~ "Piirt√§√§ hienoja fraktaalikuvia k√§ytt√§en \"Lyapunovin eksponenttia\" "
+#~ "koskevaa matematiikkaa. Tehnyt Ron Record."
+
+#~ msgid "Xlyap"
+#~ msgstr "Xlyap"
+
+#~ msgid "Xmatrix"
+#~ msgstr "Xmatrix"
+
+#~ msgid "Xmountains"
+#~ msgstr "Xvuoret"
+
+#~ msgid "Xroger"
+#~ msgstr "Xroger"
+
+#~ msgid "Xsnow"
+#~ msgstr "Xlumi"
+
+#~ msgid "XTeeVee"
+#~ msgstr "XTelkku"
+
+#~ msgid "Zoom (Fatbits)"
+#~ msgstr "Suurennos (Paksut pisteet)"
 
 #~ msgid "Add a new screensaver"
-#~ msgstr "Lis‰‰ uusi n‰ytˆns‰‰st‰j‰"
+#~ msgstr "Lis√§√§ uusi n√§yt√∂ns√§√§st√§j√§"
 
 #~ msgid "Select the screensaver to run from the list below:"
-#~ msgstr "Valitse k‰ytett‰v‰ n‰ytˆns‰‰st‰j‰ allaolevasta luettelosta:"
+#~ msgstr "Valitse k√§ytett√§v√§ n√§yt√∂ns√§√§st√§j√§ allaolevasta luettelosta:"
 
 #~ msgid "New screensaver"
-#~ msgstr "Uusi n‰ytˆns‰‰st‰j‰"
+#~ msgstr "Uusi n√§yt√∂ns√§√§st√§j√§"
 
-#, fuzzy
 #~ msgid "GNOME Control Center:"
-#~ msgstr "GNOMEn hallintakeskus"
+#~ msgstr "GNOMEn hallintakeskus:"
 
-#~ msgid "Enable sound server startup"
-#~ msgstr "K‰yt‰ ‰‰nipalvelinta"
+#~ msgid "Could not connect to X Display"
+#~ msgstr "Ei saanut yhteytt√§ X-n√§ytt√∂√∂n"
+
+#~ msgid "Could not duplicate file descriptor"
+#~ msgstr "Ei voinut monistaa tiedostokahvaa"
+
+#~ msgid "Pipe error.\n"
+#~ msgstr "Putkivirhe.\n"
+
+#~ msgid "Cannot fork().\n"
+#~ msgstr "Ei voi fork()ata.\n"
+
+#~ msgid "dup2() error.\n"
+#~ msgstr "dup2()-virhe.\n"
+
+#~ msgid "execl() error, errno=%d\n"
+#~ msgstr "execl()-virhe, errno=%d\n"
+
+#~ msgid ""
+#~ "The password you typed is invalid.\n"
+#~ "Please try again."
+#~ msgstr ""
+#~ "Antamasi salasana on v√§√§r√§.\n"
+#~ "Yrit√§ uudestaan."
+
+#~ msgid ""
+#~ "One or more of the changed fields is invalid.\n"
+#~ "This is probably due to either colons or commas in one of the fields.\n"
+#~ "Please remove those and try again."
+#~ msgstr ""
+#~ "Yksi tai useampi muutetuista kentist√§ on virheellinen.\n"
+#~ "T√§m√§ johtunee kentiss√§ olevista pilkuista tai kaksoispisteist√§.\n"
+#~ "Poista ne ja yrit√§ uudelleen."
+
+#~ msgid "Password resetting error."
+#~ msgstr "Salasanan palautusvirhe."
+
+#~ msgid "Insufficient rights."
+#~ msgstr "Riitt√§m√§tt√∂m√§t oikeudet."
+
+#~ msgid "Invalid call to sub process."
+#~ msgstr "Virheellinen kutsu aliprosessille."
+
+#~ msgid "Out of memory."
+#~ msgstr "Muisti loppui."
+
+#~ msgid "The exec() call failed."
+#~ msgstr "exec() ep√§onnistui."
+
+#~ msgid "Failed to find selected program."
+#~ msgstr "Valitun ohjelman l√∂yt√§minen ep√§onnistui."
+
+#~ msgid "Unknown error."
+#~ msgstr "Tuntematon virhe."
+
+#~ msgid "Unknown exit code."
+#~ msgstr "Tuntematon paluuarvo."
+
+#~ msgid "Input"
+#~ msgstr "Sy√∂te"
 
 #, fuzzy
-#~ msgid "Sound Events"
-#~ msgstr "ƒ‰nitapahtumat"
+#~ msgid "Need %d responses.\n"
+#~ msgstr "Tarvitsee %d vastausta.\n"
 
-#~ msgid "Sounds for events"
-#~ msgstr "ƒ‰nitapahtumat"
+#~ msgid ""
+#~ "In order to make changes to your system, you\n"
+#~ "must enter the administrator (root) password."
+#~ msgstr ""
+#~ "Jotta voit tehd√§ muutokset j√§rjestelm√§√§si,\n"
+#~ "sinun t√§ytyy antaa yll√§pit√§j√§n (root) salasana."
 
-#~ msgid "Background picture"
-#~ msgstr "Taustakuva"
+#~ msgid "Error"
+#~ msgstr "Virhe"
 
-#~ msgid "Centered"
-#~ msgstr "Keskell‰"
+#~ msgid "Run Unprivileged"
+#~ msgstr "Aja ilman erityisoikeuksia"
 
-#~ msgid "Horizontal gradient"
-#~ msgstr "Vaakaliukuv‰ri"
+#~ msgid "Got error %d.\n"
+#~ msgstr "Sai virheen %d.\n"
 
-#~ msgid "Opacity (percent):"
-#~ msgstr "Peitt‰vyys (prosenttia):"
+#~ msgid "Password for %s"
+#~ msgstr "K√§ytt√§j√§n %s salasana"
 
-#~ msgid "Pick a color"
-#~ msgstr "Valitse v‰ri"
+#~ msgid "Block is fine."
+#~ msgstr "Lohko on kunnossa."
 
-#~ msgid "Scaled (keep aspect ratio)"
-#~ msgstr "Sovita (s‰ilyt‰ kuvan suhteet)"
+#~ msgid "Block freed twice."
+#~ msgstr "Lohko vapautettiin kahdesti."
 
-#~ msgid "Solid color"
-#~ msgstr "Yksi v‰ri"
+#~ msgid "Memory before the block was clobbered."
+#~ msgstr "Muisti ennen lohkoa sotkeentui."
 
-#~ msgid "Stretched"
-#~ msgstr "Venytetty"
+#~ msgid "Memory after the block was clobbered."
+#~ msgstr "Muisti lohkon j√§lkeen sotkeentui."
 
-#~ msgid "Style:"
-#~ msgstr "Tapa:"
+#~ msgid "userhelper must be setuid root\n"
+#~ msgstr "userhelper-ohjelman t√§ytyy olla setuid root\n"
 
-#~ msgid "Tiled"
-#~ msgstr "Vierekk‰in"
+#~ msgid "Usage: root-helper fd\n"
+#~ msgstr "K√§ytt√∂: root-helper fd\n"
 
-#~ msgid "Vertical gradient"
-#~ msgstr "Pystyliukuv‰ri"
+#~ msgid "PAM returned = %d\n"
+#~ msgstr "PAM palautti = %d\n"
 
-#, fuzzy
-#~ msgid "Set background image."
-#~ msgstr "Taustakuva"
+#~ msgid "about to authenticate \"%s\"\n"
+#~ msgstr "valmiina todentamaan k√§ytt√§j√§n \"%s\"\n"
+
+#~ msgid "about to exec \"%s\"\n"
+#~ msgstr "valmiina suorittamaan \"%s\"\n"
 
 #~ msgid "Options for the startup hint dialog"
 #~ msgstr "Aloitusvihjeikkunan asetukset"
@@ -1603,23 +2404,22 @@ msgstr ""
 #~ msgstr "Aloitusvihje"
 
 #~ msgid "Bell"
-#~ msgstr "N‰pp‰imistˆpiippaus"
+#~ msgstr "N√§pp√§imist√∂piippaus"
 
 #~ msgid "Click volume"
-#~ msgstr "ƒ‰nen voimakkuus"
+#~ msgstr "Naksauksen √§√§nenvoimakkuus"
 
-#, fuzzy
 #~ msgid "Delay before repeat:"
-#~ msgstr "Odota ennen uuden piirt‰mist‰"
+#~ msgstr "Viive ennen toistoa:"
 
 #~ msgid "Duration (ms)"
 #~ msgstr "Kesto (ms)"
 
 #~ msgid "Enable Keyboard Click"
-#~ msgstr "K‰yt‰ n‰pp‰in‰‰nt‰"
+#~ msgstr "K√§yt√§ n√§pp√§in√§√§nt√§"
 
 #~ msgid "Enable Keyboard Repeat"
-#~ msgstr "K‰yt‰ n‰pp‰intoistoa"
+#~ msgstr "K√§yt√§ n√§pp√§intoistoa"
 
 #~ msgid "Key repeat rate:"
 #~ msgstr "Toistonopeus:"
@@ -1637,13 +2437,13 @@ msgstr ""
 #~ msgstr "Hyvin nopea"
 
 #~ msgid "Very long"
-#~ msgstr "Hyvin pitk‰"
+#~ msgstr "Hyvin pitk√§"
 
 #~ msgid "Volume"
 #~ msgstr "Voimakkuus"
 
 #~ msgid "Left handed"
-#~ msgstr "Vasenk‰tinen"
+#~ msgstr "Vasenk√§tinen"
 
 #~ msgid "Mouse Configuration"
 #~ msgstr "Hiiriasetukset"
@@ -1655,106 +2455,28 @@ msgstr ""
 #~ msgstr "Hiiri on:"
 
 #~ msgid "Right handed"
-#~ msgstr "Oikeak‰tinen"
+#~ msgstr "Oikeak√§tinen"
 
 #~ msgid "Sensitivity:"
 #~ msgstr "Herkkyys:"
 
-#~ msgid "Use"
-#~ msgstr "K‰yt‰"
+#~ msgid "Enable sound server startup"
+#~ msgstr "K√§yt√§ √§√§nipalvelinta"
 
-#~ msgid " Configure..."
-#~ msgstr " Muuta asetuksia..."
+#~ msgid "General"
+#~ msgstr "Yleinen"
 
-#~ msgid "About \"<Screensaver name>\""
-#~ msgstr "Tietoja s‰‰st‰j‰st‰ \"<Screensaver name>\""
+#~ msgid "Sound Events"
+#~ msgstr "√Ñ√§nitapahtumat"
 
-#~ msgid "Black screen only"
-#~ msgstr "Vain tyhj‰ n‰yttˆ"
+#~ msgid "Sounds for events"
+#~ msgstr "√Ñ√§nitapahtumat"
 
-#~ msgid "Configure Power Management"
-#~ msgstr "Muuta virrans‰‰stˆasetuksia"
+#~ msgid "Configuration"
+#~ msgstr "Asetukset"
 
-#~ msgid "Disable screensaver"
-#~ msgstr "Ei n‰ytˆns‰‰st‰j‰‰"
+#~ msgid "Run the capplet CAPPLET"
+#~ msgstr "K√§ynnist√§ komentosovelma KSOVELMA"
 
-#~ msgid "Enable _power management"
-#~ msgstr "K‰yt‰ _virrans‰‰stˆ‰"
-
-#~ msgid "Go to standby mode after"
-#~ msgstr "Siirry valmiustilaan"
-
-#~ msgid "Go to suspend mode after"
-#~ msgstr "Sammuta"
-
-#~ msgid "One screensaver all the time"
-#~ msgstr "Sama n‰ytˆns‰‰st‰j‰ koko ajan."
-
-#~ msgid "R_equire password to unlock screen"
-#~ msgstr "Vaadi _salasana"
-
-#~ msgid "Random (all screensavers)"
-#~ msgstr "Satunnainen (kaikista)"
-
-#~ msgid "Random (checked screensavers)"
-#~ msgstr "Satunnainen (valituista)"
-
-#~ msgid "S_tart screensaver after "
-#~ msgstr "_K‰ynnist‰ n‰ytˆns‰‰st‰j‰ "
-
-#~ msgid "S_witch screensavers after "
-#~ msgstr "Vaihda _n‰ytˆns‰‰st‰j‰‰ "
-
-#~ msgid "Settings for \"<Screensaver name>\""
-#~ msgstr "N‰ytˆns‰‰st‰j‰n \"<N‰ytˆns‰‰st‰j‰n nimi>\" asetukset"
-
-#~ msgid "Shut down monitor after"
-#~ msgstr "Sammuta n‰yttˆ "
-
-#~ msgid ""
-#~ "There are no configurable settings for this\n"
-#~ "screensaver. "
-#~ msgstr "T‰t‰ n‰ytˆns‰‰st‰j‰‰ ei voi s‰‰t‰‰."
-
-#~ msgid "_About this screensaver..."
-#~ msgstr "_Tietoja n‰ytˆns‰‰st‰j‰st‰..."
-
-#~ msgid "_Add"
-#~ msgstr "_Lis‰‰"
-
-#~ msgid "_Remove"
-#~ msgstr "_Poista"
-
-#~ msgid "_Settings"
-#~ msgstr "_Asetukset"
-
-#~ msgid "Browse with multiple windows"
-#~ msgstr "Selaa monessa ikkunassa"
-
-#~ msgid "Browse with single window"
-#~ msgstr "Selaa yhdess‰ ikkunassa"
-
-#~ msgid "Display control panels as HTML"
-#~ msgstr "N‰yt‰ hallintapaneelit HTML:n‰"
-
-#~ msgid "Display control panels as a set of icons"
-#~ msgstr "N‰yt‰ hallintapaneelit kuvakeryhm‰n‰"
-
-#~ msgid "Display control panels as a tree"
-#~ msgstr "N‰yt‰ hallintapaneelit puurakenteessa"
-
-#~ msgid "Launch control panels in separate windows"
-#~ msgstr "K‰ynnist‰ hallintapaneelit eri ikkunoissa"
-
-#~ msgid "New-control-center"
-#~ msgstr "Uusi hallintakeskus"
-
-#~ msgid "Put control panels in the control center's window"
-#~ msgstr "N‰yt‰ hallintapaneelit hallintakeskuksen keski-ikkunassa"
-
-#, fuzzy
-#~ msgid "GNOME Control Center options"
-#~ msgstr "GNOMEn hallintakeskus"
-
-#~ msgid "Delay until repeat:"
-#~ msgstr "Viive ennen toistoa:"
+#~ msgid "CAPPLET"
+#~ msgstr "KSOVELMA"
