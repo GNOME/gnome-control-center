@@ -1,18 +1,13 @@
 # traditional Chinese translation of gnome-control-center.
 # Copyright (C) 1999, 2001, 02, 03 Free Software Foundation, Inc.
-#
-# GNOME 1.x:
 # S.J. Luo <crystal@mickey.ee.nctu.edu.tw>, 1999.
-# Abel Cheung <maddog@linux.org.hk>, 2001-2002.
-#
-# GNOME 2.x:
 # Abel Cheung <maddog@linux.org.hk>, 2001-2003.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.2.0.1\n"
-"POT-Creation-Date: 2003-02-23 23:57+0800\n"
-"PO-Revision-Date: 2003-03-11 14:45+0800\n"
+"POT-Creation-Date: 2003-05-02 09:11+0800\n"
+"PO-Revision-Date: 2003-05-02 20:01+0800\n"
 "Last-Translator: Abel Cheung <maddog@linux.org.hk>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
 "MIME-Version: 1.0\n"
@@ -44,7 +39,7 @@ msgstr "鍵盤"
 msgid "Set your keyboard accessibility preferences"
 msgstr "修改鍵盤輔助功能設定"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.c:57
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.c:60
 msgid ""
 "This system does not seem to have the XKB extension.  The keyboard "
 "accessibility features will not operate without it."
@@ -285,7 +280,7 @@ msgstr "請選取圖案(_P)："
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:724
 #: capplets/keyboard/gnome-keyboard-properties.c:290
-#: capplets/mouse/gnome-mouse-properties.c:714
+#: capplets/mouse/gnome-mouse-properties.c:716
 #: capplets/sound/sound-properties-capplet.c:149
 msgid "Retrieve and store legacy settings"
 msgstr "讀入舊版本的設定"
@@ -529,7 +524,7 @@ msgstr ""
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:1485
+#: capplets/common/gconf-property-editor.c:1486
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -541,7 +536,7 @@ msgstr ""
 "\n"
 "請確定檔案已經存在並再試一次，或是選擇其它背景圖案。"
 
-#: capplets/common/gconf-property-editor.c:1493
+#: capplets/common/gconf-property-editor.c:1494
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -554,7 +549,7 @@ msgstr ""
 "\n"
 "請選擇其它圖案。"
 
-#: capplets/common/gconf-property-editor.c:1584
+#: capplets/common/gconf-property-editor.c:1585
 msgid "Please select an image."
 msgstr "請選取圖像。"
 
@@ -669,7 +664,7 @@ msgstr "此程式可同時開啟多個檔案(_M)"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:26
 msgid "This application needs to be run in a _shell"
-msgstr "此程式需要指令殼 [_shell] 方可運行"
+msgstr "此程式需要指令解譯器[_shell]方可運行"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:27
 msgid "Understands _Netscape Remote Control"
@@ -777,7 +772,7 @@ msgid "Minimizing and Maximizing"
 msgstr "最小化及最大化"
 
 #: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
-#: capplets/windows/gnome-window-properties.c:649
+#: capplets/windows/gnome-window-properties.c:650
 msgid "Meta"
 msgstr "總體"
 
@@ -1040,6 +1035,11 @@ msgstr "分類"
 #: capplets/file-types/mime-edit-dialog.c:932
 msgid "Choose a file category"
 msgstr "請選擇檔案分類"
+
+#: capplets/file-types/mime-type-info.c:602
+#, c-format
+msgid "View as %s"
+msgstr "以 %s 方式顯示"
 
 #: capplets/file-types/mime-type-info.c:668
 msgid "Images"
@@ -1455,7 +1455,7 @@ msgstr "靜"
 msgid "Set your keyboard preferences"
 msgstr "修改鍵盤偏好設定"
 
-#: capplets/mouse/gnome-mouse-properties.c:438
+#: capplets/mouse/gnome-mouse-properties.c:439
 #, c-format
 msgid ""
 "<b>Unknown Cursor</b>\n"
@@ -1464,7 +1464,7 @@ msgstr ""
 "<b>不明的鼠標</b>\n"
 "%s"
 
-#: capplets/mouse/gnome-mouse-properties.c:540
+#: capplets/mouse/gnome-mouse-properties.c:541
 msgid ""
 "<b>Default Cursor - Current</b>\n"
 "The default cursor that ships with X"
@@ -1472,7 +1472,7 @@ msgstr ""
 "<b>預設的鼠標 ─ 目前設定</b>\n"
 "X Window 預設使用的鼠標"
 
-#: capplets/mouse/gnome-mouse-properties.c:543
+#: capplets/mouse/gnome-mouse-properties.c:544
 msgid ""
 "<b>Default Cursor</b>\n"
 "The default cursor that ships with X"
@@ -1480,7 +1480,7 @@ msgstr ""
 "<b>預設的鼠標</b>\n"
 "X Window 預設使用的鼠標"
 
-#: capplets/mouse/gnome-mouse-properties.c:561
+#: capplets/mouse/gnome-mouse-properties.c:562
 msgid ""
 "<b>White Cursor - Current</b>\n"
 "The default cursor inverted"
@@ -1488,7 +1488,7 @@ msgstr ""
 "<b>白色鼠標 ─ 目前設定</b>\n"
 "和預設的鼠標顏色相反"
 
-#: capplets/mouse/gnome-mouse-properties.c:564
+#: capplets/mouse/gnome-mouse-properties.c:565
 msgid ""
 "<b>White Cursor</b>\n"
 "The default cursor inverted"
@@ -1496,7 +1496,7 @@ msgstr ""
 "<b>白色鼠標</b>\n"
 "和預設的鼠標顏色相反"
 
-#: capplets/mouse/gnome-mouse-properties.c:582
+#: capplets/mouse/gnome-mouse-properties.c:583
 msgid ""
 "<b>Large Cursor - Current</b>\n"
 "Large version of normal cursor"
@@ -1504,7 +1504,7 @@ msgstr ""
 "<b>大型鼠標 ─ 目前設定</b>\n"
 "比正常的鼠標較大"
 
-#: capplets/mouse/gnome-mouse-properties.c:585
+#: capplets/mouse/gnome-mouse-properties.c:586
 msgid ""
 "<b>Large Cursor</b>\n"
 "Large version of normal cursor"
@@ -1512,7 +1512,7 @@ msgstr ""
 "<b>大型鼠標</b>\n"
 "比正常的鼠標較大"
 
-#: capplets/mouse/gnome-mouse-properties.c:603
+#: capplets/mouse/gnome-mouse-properties.c:604
 msgid ""
 "<b>Large White Cursor - Current</b>\n"
 "Large version of white cursor"
@@ -1520,7 +1520,7 @@ msgstr ""
 "<b>大型白色鼠標 ─ 目前設定</b>\n"
 "比正常的白色鼠標較大"
 
-#: capplets/mouse/gnome-mouse-properties.c:606
+#: capplets/mouse/gnome-mouse-properties.c:607
 msgid ""
 "<b>Large White Cursor</b>\n"
 "Large version of white cursor"
@@ -1724,7 +1724,7 @@ msgstr "安全 HTTP 代理伺服器(_S)："
 msgid "_Username:"
 msgstr "用戶名稱(_U)："
 
-#: capplets/sound/sound-properties-capplet.c:180
+#: capplets/sound/sound-properties-capplet.c:175
 msgid "Sound preferences"
 msgstr "音效偏好設定"
 
@@ -2069,19 +2069,19 @@ msgstr ""
 "\n"
 "%s"
 
-#: capplets/windows/gnome-window-properties.c:624
+#: capplets/windows/gnome-window-properties.c:625
 msgid "Control"
 msgstr "Control"
 
-#: capplets/windows/gnome-window-properties.c:629
+#: capplets/windows/gnome-window-properties.c:630
 msgid "Alt"
 msgstr "Alt"
 
-#: capplets/windows/gnome-window-properties.c:635
+#: capplets/windows/gnome-window-properties.c:636
 msgid "Hyper"
 msgstr "Hyper"
 
-#: capplets/windows/gnome-window-properties.c:642
+#: capplets/windows/gnome-window-properties.c:643
 msgid "Super (or \"Windows logo\")"
 msgstr "Super (或者「視窗標誌」)"
 
