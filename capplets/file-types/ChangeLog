@@ -1,5 +1,34 @@
 2002-01-25  Bradford Hovinen  <hovinen@ximian.com>
 
+	* mime-edit-dialog.c (store_data): Construct an iterator if the
+	one given is NULL
+	(store_data): Don't notify row deletion if the object was not in
+	the model to begin with
+	(store_data): Don't fetch the old path if this is an add dialog
+	(populate_component_list): Desensitize the component select box if
+	there are no components
+	(populate_application_list): Ditto
+
+	* mime-type-info.c (mime_type_info_new): Initialize the parent
+	field even if the mime type field is NULL
+	(mime_type_info_get_category_name): Don't crash if the parent
+	field is NULL
+
+	* mime-edit-dialog.c (store_data): Generate random MIME type if
+	not already set
+	(validate_data): Implement. Make sure all the data entered are valid
+	(response_cb): Call validate_data
+
+	* file-types-capplet.c (remove_cb): Check the entry type and
+	notify the tree of the deletion; update according to earlier
+	changes
+
+	* mime-edit-dialog.c: Add property is-add
+	(setup_add_dialog): Implement
+	(add_ext_cb): Clear the entry after adding
+	(choose_cat_cb): Pack the tree in a scrolled window
+	(choose_cat_cb): Set the minimum size on the dialog to 300x300
+
 	* mime-type-info.c (mime_type_info_free): Free icon_path
 
 	* mime-edit-dialog.c (fill_dialog): Set icon entry with the full

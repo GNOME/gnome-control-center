@@ -136,19 +136,23 @@ remove_cb (GtkButton *button, GladeXML *dialog)
 	GtkTreeModel      *model;
 	GtkTreeSelection  *selection;
 	GtkTreeIter        iter;
-	GValue             mime_type;
+	GtkTreePath       *path;
+	ModelEntry        *entry;
 
 	treeview = GTK_TREE_VIEW (WID ("mime_types_tree"));
 	selection = gtk_tree_view_get_selection (treeview);
 	gtk_tree_selection_get_selected (selection, &model, &iter);
 
-	mime_type.g_type = G_TYPE_INVALID;
-	gtk_tree_model_get_value (model, &iter, MODEL_COLUMN_MIME_TYPE, &mime_type);
-	remove_list = g_list_prepend (remove_list, g_value_dup_string (&mime_type));
-	mime_type_remove_from_dirty_list (g_value_get_string (&mime_type));
-	g_value_unset (&mime_type);
+	entry = MODEL_ENTRY_FROM_ITER (&iter);
 
-	/* FIXME: Make sure the tree gets notified */
+	if (entry->type == MODEL_ENTRY_MIME_TYPE) {
+		path = gtk_tree_model_get_path (model, &iter);
+		model_entry_remove_child (entry->parent, entry);
+		remove_list = g_list_prepend (remove_list, MIME_TYPE_INFO (entry)->mime_type);
+		mime_type_remove_from_dirty_list (MIME_TYPE_INFO (entry)->mime_type);
+		gtk_tree_model_row_deleted (model, path);
+		gtk_tree_path_free (path);
+	}
 
 	selection_changed_cb (selection, dialog);
 }

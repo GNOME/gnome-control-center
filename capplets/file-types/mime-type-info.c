@@ -80,6 +80,8 @@ mime_type_info_new (const gchar *mime_type)
 		info->mime_type = g_strdup (mime_type);
 
 		mime_type_info_set_category_name (info, get_category_name (mime_type));
+	} else {
+		info->entry.parent = get_model_entries ();
 	}
 
 	return info;
@@ -230,7 +232,7 @@ mime_type_info_get_category_name (const MimeTypeInfo *info)
 	else
 		tmp = info->entry.parent;
 
-	for (; tmp->type != MODEL_ENTRY_NONE; tmp = tmp->parent) {
+	for (; tmp != NULL && tmp->type != MODEL_ENTRY_NONE; tmp = tmp->parent) {
 		g_string_prepend (string, MIME_TYPE_INFO (tmp)->description);
 		g_string_prepend (string, "/");
 	}

@@ -27,16 +27,20 @@
 
 #include <glade/glade.h>
 #include <libgnomevfs/gnome-vfs-mime-handlers.h>
+#include <libgnomevfs/gnome-vfs-utils.h>
 
 #include "mime-edit-dialog.h"
 #include "mime-types-model.h"
+
+#include "libuuid/uuid.h"
 
 #define WID(x) (glade_xml_get_widget (dialog->p->dialog_xml, x))
 
 enum {
 	PROP_0,
 	PROP_MODEL,
-	PROP_ITER
+	PROP_ITER,
+	PROP_IS_ADD
 };
 
 struct _MimeEditDialogPrivate 
@@ -45,6 +49,8 @@ struct _MimeEditDialogPrivate
 	GladeXML     *dialog_xml;
 	GtkWidget    *dialog_win;
 	GtkTreeStore *ext_store;
+
+	gboolean      is_add;
 
 	GtkTreeModel *model;
 	GtkTreeIter  *iter;
@@ -70,6 +76,7 @@ static void mime_edit_dialog_dispose     (GObject        *object);
 static void mime_edit_dialog_finalize    (GObject        *object);
 
 static void fill_dialog                  (MimeEditDialog *dialog);
+static void setup_add_dialog             (MimeEditDialog *dialog);
 
 static void populate_component_list      (MimeEditDialog *dialog);
 static void populate_application_list    (MimeEditDialog *dialog);
@@ -187,6 +194,14 @@ mime_edit_dialog_class_init (MimeEditDialogClass *class)
 				       _("Iterator on the model referring to object to edit"),
 				       G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 
+	g_object_class_install_property
+		(object_class, PROP_IS_ADD,
+		 g_param_spec_boolean ("is-add",
+				       _("Is add dialog"),
+				       _("True if this dialog is for adding a MIME type"),
+				       FALSE,
+				       G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+
 	parent_class = G_OBJECT_CLASS
 		(g_type_class_ref (G_TYPE_OBJECT));
 }
@@ -207,9 +222,25 @@ mime_edit_dialog_set_prop (GObject *object, guint prop_id, const GValue *value, 
 		break;
 
 	case PROP_ITER:
-		mime_edit_dialog->p->iter = gtk_tree_iter_copy (g_value_get_pointer (value));
-		mime_edit_dialog->p->info = MIME_TYPE_INFO (MODEL_ENTRY_FROM_ITER (mime_edit_dialog->p->iter));
-		fill_dialog (mime_edit_dialog);
+		if (g_value_get_pointer (value) != NULL) {
+			mime_edit_dialog->p->iter = gtk_tree_iter_copy (g_value_get_pointer (value));
+			mime_edit_dialog->p->info = MIME_TYPE_INFO (MODEL_ENTRY_FROM_ITER (mime_edit_dialog->p->iter));
+			fill_dialog (mime_edit_dialog);
+
+			gtk_widget_show_all (mime_edit_dialog->p->dialog_win);
+		}
+
+		break;
+
+	case PROP_IS_ADD:
+		mime_edit_dialog->p->is_add = g_value_get_boolean (value);
+
+		if (mime_edit_dialog->p->is_add) {
+			mime_edit_dialog->p->info = mime_type_info_new (NULL);
+			setup_add_dialog (mime_edit_dialog);
+			gtk_widget_show_all (mime_edit_dialog->p->dialog_win);
+		}
+
 		break;
 
 	default:
@@ -263,6 +294,11 @@ mime_edit_dialog_dispose (GObject *object)
 		dialog->p->dialog_win = NULL;
 	}
 
+	if (dialog->p->iter != NULL) {
+		gtk_tree_iter_free (dialog->p->iter);
+		dialog->p->iter = NULL;
+	}
+
 	G_OBJECT_CLASS (parent_class)->dispose (object);
 }
 
@@ -276,7 +312,6 @@ mime_edit_dialog_finalize (GObject *object)
 
 	mime_edit_dialog = MIME_EDIT_DIALOG (object);
 
-	gtk_tree_iter_free (mime_edit_dialog->p->iter);
 	g_free (mime_edit_dialog->p);
 
 	G_OBJECT_CLASS (parent_class)->finalize (object);
@@ -296,6 +331,7 @@ mime_add_dialog_new (GtkTreeModel *model)
 {
 	return g_object_new (mime_edit_dialog_get_type (),
 			     "model", model,
+			     "is-add", TRUE,
 			     NULL);
 }
 
@@ -321,8 +357,28 @@ fill_dialog (MimeEditDialog *dialog)
 	populate_component_list (dialog);
 	populate_application_list (dialog);
 	populate_extensions_list (dialog);
+}
 
-	gtk_widget_show_all (dialog->p->dialog_win);
+static void
+setup_add_dialog (MimeEditDialog *dialog)
+{
+	GtkWidget *menu, *item;
+
+	item = gtk_menu_item_new_with_label (_("None"));
+	menu = gtk_menu_new ();
+	gtk_menu_append (GTK_MENU (menu), item);
+	gtk_option_menu_set_menu (GTK_OPTION_MENU (WID ("component_select")), menu);
+
+	item = gtk_menu_item_new_with_label (_("Custom"));
+	menu = gtk_menu_new ();
+	gtk_menu_append (GTK_MENU (menu), item);
+	gtk_option_menu_set_menu (GTK_OPTION_MENU (WID ("default_action_select")), menu);
+
+	gtk_widget_set_sensitive (WID ("component_box"), FALSE);
+	gtk_widget_set_sensitive (WID ("default_action_box"), FALSE);
+
+	gnome_icon_entry_set_filename (GNOME_ICON_ENTRY (WID ("icon_entry")),
+				       gnome_vfs_icon_path_from_filename ("nautilus/i-regular-24.png"));
 }
 
 static void
@@ -360,6 +416,9 @@ populate_component_list (MimeEditDialog *dialog)
 		gtk_menu_append (menu, menu_item);
 		gtk_widget_show (menu_item);
 	}
+
+	if (i == 0)
+		gtk_widget_set_sensitive (WID ("component_box"), FALSE);
 
 	menu_item = gtk_menu_item_new_with_label (_("None"));
 	gtk_menu_append (menu, menu_item);
@@ -404,6 +463,9 @@ populate_application_list (MimeEditDialog *dialog)
 		gtk_menu_append (menu, menu_item);
 		gtk_widget_show (menu_item);
 	}
+
+	if (i == 0)
+		gtk_widget_set_sensitive (WID ("default_action_box"), FALSE);
 
 	gtk_menu_append (menu, gtk_menu_item_new_with_label (_("Custom")));
 
@@ -470,6 +532,9 @@ store_data (MimeEditDialog *dialog)
 
 	GList         *ext_list;
 
+	uuid_t         mime_uuid;
+	gchar          mime_uuid_str[100];
+
 	GnomeVFSMimeApplication *app;
 
 	GtkTreePath   *path;
@@ -479,7 +544,16 @@ store_data (MimeEditDialog *dialog)
 	dialog->p->info->description = g_strdup (gtk_entry_get_text (GTK_ENTRY (WID ("description_entry"))));
 
 	g_free (dialog->p->info->mime_type);
-	dialog->p->info->mime_type = g_strdup (gtk_entry_get_text (GTK_ENTRY (WID ("mime_type_entry"))));
+	tmp1 = gtk_entry_get_text (GTK_ENTRY (WID ("mime_type_entry")));
+
+	if (tmp1 != NULL && *tmp1 != '\0') {
+		dialog->p->info->mime_type = g_strdup (tmp1);
+	} else {
+		uuid_generate (mime_uuid);
+		uuid_unparse (mime_uuid, mime_uuid_str);
+
+		dialog->p->info->mime_type = g_strconcat ("custom/", mime_uuid_str, NULL);
+	}
 
 	g_free (dialog->p->info->icon_path);
 	dialog->p->info->icon_path = NULL;
@@ -501,7 +575,10 @@ store_data (MimeEditDialog *dialog)
 	tmp1 = gtk_entry_get_text (GTK_ENTRY (WID ("category_entry")));
 	if (strcmp (tmp, tmp1)) {
 		cat_changed = TRUE;
-		old_path = gtk_tree_model_get_path (dialog->p->model, dialog->p->iter);
+
+		if (!dialog->p->is_add)
+			old_path = gtk_tree_model_get_path (dialog->p->model, dialog->p->iter);
+
 		mime_type_info_set_category_name (dialog->p->info, tmp1);
 	}
 	g_free (tmp);
@@ -537,8 +614,16 @@ store_data (MimeEditDialog *dialog)
 	mime_type_append_to_dirty_list (dialog->p->info);
 
 	if (cat_changed) {
-		gtk_tree_model_row_deleted (dialog->p->model, old_path);
-		gtk_tree_path_free (old_path);
+		if (old_path != NULL) {
+			gtk_tree_model_row_deleted (dialog->p->model, old_path);
+			gtk_tree_path_free (old_path);
+		}
+
+		if (dialog->p->iter == NULL) {
+			dialog->p->iter = g_new0 (GtkTreeIter, 1);
+			mime_types_model_construct_iter (MIME_TYPES_MODEL (dialog->p->model),
+							 MODEL_ENTRY (dialog->p->info), dialog->p->iter);
+		}
 
 		path = gtk_tree_model_get_path (dialog->p->model, dialog->p->iter);
 		gtk_tree_model_row_inserted (dialog->p->model, path, dialog->p->iter);
@@ -548,6 +633,30 @@ store_data (MimeEditDialog *dialog)
 		gtk_tree_model_row_changed (dialog->p->model, path, dialog->p->iter);
 		gtk_tree_path_free (path);
 	}
+}
+
+static gboolean
+validate_data (MimeEditDialog *dialog) 
+{
+	const gchar *tmp;
+	GtkWidget *err_dialog;
+
+	tmp = gtk_entry_get_text (GTK_ENTRY (WID ("mime_type_entry")));
+
+	if (tmp != NULL && *tmp != '\0') {
+		if (strchr (tmp, ' ') || !strchr (tmp, '/')) {
+			err_dialog = gnome_error_dialog_parented
+				(_("Invalid MIME type. Please enter a valid MIME type, or"
+				   "leave the field blank to have one generated for you."),
+				 GTK_WINDOW (dialog->p->dialog_win));
+
+			gtk_window_set_modal (GTK_WINDOW (err_dialog), TRUE);
+
+			return FALSE;
+		}
+	}
+
+	return TRUE;
 }
 
 static void
@@ -562,6 +671,8 @@ add_ext_cb (MimeEditDialog *dialog)
 		gtk_tree_store_append (dialog->p->ext_store, &iter, NULL);
 		gtk_tree_store_set (dialog->p->ext_store, &iter, 0, ext_name, -1);
 	}
+
+	gtk_entry_set_text (GTK_ENTRY (WID ("new_ext_entry")), "");
 }
 
 static void
@@ -586,15 +697,18 @@ choose_cat_cb (MimeEditDialog *dialog)
 	GtkTreeIter       iter;
 	GtkWidget        *treeview;
 	GtkWidget        *dialog_win;
+	GtkWidget        *scrolled_win;
 	GtkCellRenderer  *renderer;
 
 	model = GTK_TREE_MODEL (mime_types_model_new (TRUE));
 	treeview = gtk_tree_view_new_with_model (model);
-
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
 	gtk_tree_selection_set_mode (selection, GTK_SELECTION_SINGLE);
-	mime_types_model_construct_iter (MIME_TYPES_MODEL (model), dialog->p->info->entry.parent, &iter);
-	gtk_tree_selection_select_iter (selection, &iter);
+	
+	if (dialog->p->info->entry.parent != NULL) {
+		mime_types_model_construct_iter (MIME_TYPES_MODEL (model), dialog->p->info->entry.parent, &iter);
+		gtk_tree_selection_select_iter (selection, &iter);
+	}
 
 	renderer = gtk_cell_renderer_text_new ();
 	gtk_tree_view_insert_column_with_attributes
@@ -608,7 +722,13 @@ choose_cat_cb (MimeEditDialog *dialog)
 		 GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 		 NULL);
 
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog_win)->vbox), treeview, TRUE, TRUE, GNOME_PAD_SMALL);
+	gtk_widget_set_usize (dialog_win, 300, 300);
+
+	scrolled_win = gtk_scrolled_window_new (NULL, NULL);
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_win), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
+	gtk_container_add (GTK_CONTAINER (scrolled_win), treeview);
+
+	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog_win)->vbox), scrolled_win, TRUE, TRUE, GNOME_PAD_SMALL);
 	gtk_widget_show_all (dialog_win);
 
 	if (gtk_dialog_run (GTK_DIALOG (dialog_win)) == GTK_RESPONSE_OK) {
@@ -644,8 +764,12 @@ default_action_changed_cb (MimeEditDialog *dialog)
 static void
 response_cb (MimeEditDialog *dialog, gint response_id) 
 {
-	if (response_id == GTK_RESPONSE_OK)
-		store_data (dialog);
-
-	g_object_unref (G_OBJECT (dialog));
+	if (response_id == GTK_RESPONSE_OK) {
+		if (validate_data (dialog)) {
+			store_data (dialog);
+			g_object_unref (G_OBJECT (dialog));
+		}
+	} else {
+		g_object_unref (G_OBJECT (dialog));
+	}
 }
