@@ -177,12 +177,22 @@ bg_preferences_clone (const BGPreferences *prefs)
 	new_prefs->orientation        = prefs->orientation;
 	new_prefs->wallpaper_type     = prefs->wallpaper_type;
 
-	if (prefs->color1)
-		new_prefs->color1 = gdk_color_copy (prefs->color1);
-	if (prefs->color2)
-		new_prefs->color2 = gdk_color_copy (prefs->color2);
+	if (new_prefs->color1 != NULL)
+		gdk_color_free (new_prefs->color1);
+	new_prefs->color1 = (prefs->color1 != NULL)
+		? gdk_color_copy (prefs->color1) : NULL;
 
+	if (new_prefs->color2 != NULL)
+		gdk_color_free (new_prefs->color2);
+	new_prefs->color2 = (prefs->color2 != NULL)
+		? gdk_color_copy (prefs->color2) : NULL;
+
+	if (new_prefs->wallpaper_filename != NULL)
+		g_free (new_prefs->wallpaper_filename);
 	new_prefs->wallpaper_filename = g_strdup (prefs->wallpaper_filename);
+
+	if (new_prefs->wallpaper_sel_path != NULL)
+		g_free (new_prefs->wallpaper_sel_path);
 	new_prefs->wallpaper_sel_path = g_strdup (prefs->wallpaper_sel_path);;
 
 	new_prefs->auto_apply         = prefs->auto_apply;
@@ -203,9 +213,19 @@ bg_preferences_finalize (GObject *object)
 	prefs = BG_PREFERENCES (object);
 
 	g_free (prefs->wallpaper_filename);
+	prefs->wallpaper_filename = NULL;
+
 	g_free (prefs->wallpaper_sel_path);
-	g_free (prefs->color1);
-	g_free (prefs->color2);
+	prefs->wallpaper_sel_path = NULL;
+
+	if (prefs->color1 != NULL) {
+		gdk_color_free (prefs->color1);
+		prefs->color1 = NULL;
+	}
+	if (prefs->color2 != NULL) {
+		gdk_color_free (prefs->color2);
+		prefs->color2 = NULL;
+	}
 	
 	parent_class->finalize (object);
 }
@@ -224,12 +244,15 @@ bg_preferences_load (BGPreferences *prefs)
 	prefs->enabled = gconf_client_get_bool (client, BG_PREFERENCES_DRAW_BACKGROUND, &error);
 	prefs->wallpaper_filename = gconf_client_get_string (client, BG_PREFERENCES_PICTURE_FILENAME, &error);
 
+	if (prefs->color1 != NULL)
+		gdk_color_free (prefs->color1);
 	tmp = gconf_client_get_string (client, BG_PREFERENCES_PRIMARY_COLOR, &error);
-	g_free (prefs->color1);
 	prefs->color1 = read_color_from_string (tmp);
 	g_free (tmp);
+
+	if (prefs->color2 != NULL)
+		gdk_color_free (prefs->color2);
 	tmp = gconf_client_get_string (client, BG_PREFERENCES_SECONDARY_COLOR, &error);
-	g_free (prefs->color2);
 	prefs->color2 = read_color_from_string (tmp);
 	g_free (tmp);
 	
@@ -287,9 +310,13 @@ bg_preferences_merge_entry (BGPreferences    *prefs,
 			prefs->wallpaper_enabled = FALSE;
 	}
 	else if (!strcmp (entry->key, BG_PREFERENCES_PRIMARY_COLOR)) {
+		if (prefs->color1 != NULL)
+			gdk_color_free (prefs->color1);
 		prefs->color1 = read_color_from_string (gconf_value_get_string (value));
 	}
 	else if (!strcmp (entry->key, BG_PREFERENCES_SECONDARY_COLOR)) {
+		if (prefs->color2 != NULL)
+			gdk_color_free (prefs->color2);
 		prefs->color2 = read_color_from_string (gconf_value_get_string (value));
 	}
 	else if (!strcmp (entry->key, BG_PREFERENCES_PICTURE_OPACITY)) {
@@ -360,20 +387,13 @@ read_orientation_from_string (gchar *string)
 static GdkColor *
 read_color_from_string (const gchar *string) 
 {
-	GdkColor *color;
-	gint32 rgb;
+	GdkColor color;
 
-	color = g_new0 (GdkColor, 1);
-
-	if (string != NULL) {
-		gdk_color_parse (string, color);
-		rgb = ((color->red >> 8) << 16) ||
-			((color->green >> 8) << 8) ||
-			(color->blue >> 8);
-		gdk_rgb_find_color (gdk_rgb_get_colormap (), color);
-	}
-
-	return color;
+	/* If all else fails use black */
+	if (string == NULL || !gdk_color_parse (string, &color))
+		gdk_color_parse ("black", &color);
+	gdk_rgb_find_color (gdk_rgb_get_colormap (), &color);
+	return gdk_color_copy (&color);
 }
 
 const gchar*

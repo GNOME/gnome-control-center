@@ -1,3 +1,15 @@
+2002-04-19  Jody Goldberg <jody@gnome.org>
+
+	http://bugzilla.gnome.org/show_bug.cgi?id=79149
+	* preferences.c (bg_preferences_clone) : fix leaks and use
+	  gdk_color_free because some wiseguy thought GdkColours should use
+	  memchunks.
+	(bg_preferences_load) : ditto.
+	(bg_preferences_merge_entry) : ditto.
+	(read_color_from_string) : ditto.
+	(bg_preferences_finalize) : ditto. clean out pointers to protect
+	  against multiple calls.
+
 2002-04-17  Rachel Hestilow  <hestilow@ximian.com>
 
 	* applier.c (need_root_pixmap_p): Return TRUE if pixmap is NULL.
