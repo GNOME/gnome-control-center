@@ -56,7 +56,7 @@ make_main(void)
   button = gtk_button_new_with_label (_("Preview"));
   gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (click_preview), NULL);
   gtk_box_pack_start (GTK_BOX (hbxo), button, FALSE, FALSE, 0);
-  button = gtk_button_new_with_label (_("Install"));
+  button = gtk_button_new_with_label (_("Install new\ntheme..."));
   
   /* FIXME: this needs ot actually do something. */
   gtk_box_pack_start (GTK_BOX (hbxo), button, FALSE, FALSE, 0);
@@ -156,7 +156,7 @@ click_try(GtkWidget *widget, gpointer data)
 
   /* hack for enlightenment only!!!! */
   /* FIXME: restart what ever windowmanager you have! */
-  g_snprintf(cmd, sizeof(cmd), "eesh -e \"restart %s/e\"", dir);
+  /*g_snprintf(cmd, sizeof(cmd), "eesh -e \"restart %s/e\"", dir);*/
   printf("%s\n", cmd);
   send_reread();
   use_theme(rc);
@@ -192,7 +192,7 @@ click_revert(GtkWidget *widget, gpointer data)
 
   /* hack for enlightenment only!!!! */
   /* FIXME: restart what ever windowmanager you have! */
-  g_snprintf(cmd, sizeof(cmd), "eesh -e \"restart %s/e\"", dir);
+  /*  g_snprintf(cmd, sizeof(cmd), "eesh -e \"restart %s/e\"", dir);*/
   printf("%s\n", cmd);
   send_reread();
   use_theme(rc);
