@@ -389,7 +389,8 @@ create_dialog (ApplierSet *set)
 	GladeXML  *dialog;
 	GSList *group;
 	int i;
-	const gchar *labels[] = { N_("_Wallpaper"), N_("C_entered"), N_("_Scaled"), N_("S_tretched"), N_("_No Picture") };
+	const gchar *labels[] = { N_("_Wallpaper"), N_("C_entered"), N_("_Scaled"), N_("Stretc_hed"), N_("_No Picture") };
+	GtkWidget *label;
 
 	/* FIXME: What the hell is domain? */
 	dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/background-properties.glade", "prefs_widget", NULL);
@@ -422,6 +423,20 @@ create_dialog (ApplierSet *set)
 	}
 
 	g_slist_free (group);
+
+	label = gtk_label_new_with_mnemonic (_("_Picture"));
+	gtk_frame_set_label_widget (GTK_FRAME (WID ("picture_frame")),
+				    label);
+	gtk_label_set_mnemonic_widget (GTK_LABEL (label),
+			  	       WID ("background_image_button"));
+	gtk_widget_show (label);
+
+	gtk_label_set_mnemonic_widget (GTK_LABEL (WID ("border_shading_label")),
+				       WID ("border_shading"));
+	gtk_label_set_mnemonic_widget (GTK_LABEL (WID ("color1_label")),
+				       WID ("color1"));
+	gtk_label_set_mnemonic_widget (GTK_LABEL (WID ("color2_label")),
+				       WID ("color2"));
 
 	return dialog;
 }
@@ -537,7 +552,7 @@ main (int argc, char **argv)
 		setup_dialog (dialog, NULL, set);
 
 		dialog_win = gtk_dialog_new_with_buttons
-			(_("Background properties"), NULL, -1,
+			(_("Background Preferences"), NULL, -1,
 			 GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
 			 NULL);
 
