@@ -117,11 +117,9 @@ apply_settings (void)
 		if (!rate_set)
 			rate_set = xfree86_set_keyboard_autorepeat_rate (delay, rate);
 #endif
-		if (!rate_set) {
+		if (!rate_set)
 			g_warning ("Neither XKeyboard not Xfree86's keyboard extensions are available,\n"
-				   "no way to support keyboard autorepeat settings");
-			XAutoRepeatOff (GDK_DISPLAY ());
-		}
+				   "no way to support keyboard autorepeat rate settings");
 	} else
 		XAutoRepeatOff (GDK_DISPLAY ());
 
