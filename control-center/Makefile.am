@@ -39,6 +39,7 @@ root_manager_SOURCES = \
 	root-manager.c
 
 root_manager_LDADD = \
+	$(GNOME_LIBDIR)					\
 	$(GNOME_LIBS)
 
 EXTRA_DIST = gnomecc.desktop $(appicon_DATA) $(splash_DATA) $(glade_DATA)

@@ -27,15 +27,15 @@ extract_labels_LDADD = \
 BUILT_SOURCES = ant.xml.h bsod.xml.h compass.xml.h flag.xml.h \
 		qix.xml.h attraction.xml.h
 
-ant.xml.h: ant.xml extract-labels
-	./extract-labels ant.xml
-bsod.xml.h: bsod.xml extract-labels
-	./extract-labels bsod.xml
-compass.xml.h: compass.xml extract-labels
-	./extract-labels compass.xml
-flag.xml.h: flag.xml extract-labels
-	./extract-labels flag.xml
-qix.xml.h: qix.xml extract-labels
-	./extract-labels qix.xml
-attraction.xml.h: attraction.xml extract-labels
-	./extract-labels attraction.xml
+ant.xml.h: $(srcdir)/ant.xml extract-labels
+	./extract-labels $(srcdir)/ant.xml
+bsod.xml.h: $(srcdir)/bsod.xml extract-labels
+	./extract-labels $(srcdir)/bsod.xml
+compass.xml.h: $(srcdir)/compass.xml extract-labels
+	./extract-labels $(srcdir)/compass.xml
+flag.xml.h: $(srcdir)/flag.xml extract-labels
+	./extract-labels $(srcdir)/flag.xml
+qix.xml.h: $(srcdir)/qix.xml extract-labels
+	./extract-labels $(srcdir)/qix.xml
+attraction.xml.h: $(srcdir)/attraction.xml extract-labels
+	./extract-labels $(srcdir)/attraction.xml
