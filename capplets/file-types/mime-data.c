@@ -319,7 +319,7 @@ selected_row_callback (GtkWidget *widget, gint row, gint column, GdkEvent *event
         mi = (MimeInfo *) gtk_clist_get_row_data (GTK_CLIST (widget),row);
         
         if (event && event->type == GDK_2BUTTON_PRESS)
-                launch_edit_window (mi);
+                launch_edit_window (mi->mime_type);
 
         if (g_hash_table_lookup (user_mime_types, mi->mime_type)) {
                 gtk_widget_set_sensitive (delete_button, TRUE);
@@ -360,7 +360,7 @@ edit_clicked (GtkWidget *widget, gpointer data)
                 return;
         mi = (MimeInfo *) gtk_clist_get_row_data (GTK_CLIST (clist), row);
         if (mi)
-                launch_edit_window (mi);
+                launch_edit_window (mi->mime_type);
         gtk_clist_remove (GTK_CLIST (clist), row);
         row = add_mime_vals_to_clist (mi->mime_type, mi, clist);
         gtk_clist_select_row (GTK_CLIST (clist), row, 0);

@@ -1,42 +1,72 @@
+/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
+
+/*
+ *
+ *  Copyright (C) 1998, 1999, 2000 Red Hat, Inc.
+ *  Copyright (C) 2000 Eazel, Inc.
+ *
+ *  This library is free software; you can redistribute it and/or
+ *  modify it under the terms of the GNU General Public
+ *  License as published by the Free Software Foundation; either
+ *  version 2 of the License, or (at your option) any later version.
+ *
+ *  This library is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ *  General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public
+ *  License along with this library; if not, write to the Free
+ *  Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ *
+ *  Authors: Jonathan Blandford <jbr@redhat.com>
+ *  	     Gene Z. Ragan <gzr@eazel.com>
+ *
+ */
+
+/* edit-window.c: Mime capplet editor window */
+
+/*#include <libgnomevfs/gnome-vfs-mime-handlers.h>*/
+
 #include "edit-window.h"
-#include "mime-data.h"
-#include "mime-info.h"
 #include "capplet-widget.h"
 
-
 extern GtkWidget *capplet;
-extern GHashTable *user_mime_types;
 
 typedef struct {
 	GtkWidget *window;
 	GtkWidget *icon_entry;
 	GtkWidget *mime_type;
-/*  	GtkWidget *ext_tag_label; */
 	GtkWidget *regexp1_tag_label;
 	GtkWidget *regexp2_tag_label;
-/*  	GtkWidget *ext_label; */
 	GtkWidget *regexp1_label;
 	GtkWidget *regexp2_label;
-	GtkWidget *open_entry;
-	GtkWidget *edit_entry;
-	GtkWidget *view_entry;
         GtkWidget *ext_scroll;
         GtkWidget *ext_clist;
         GtkWidget *ext_entry;
         GtkWidget *ext_add_button;
         GtkWidget *ext_remove_button;
-	MimeInfo *mi;
-        MimeInfo *user_mi;
-        GList *tmp_ext[2];
+        GtkWidget *application_menu;
+        GtkWidget *component_menu;
+	char 	  *mime_string;
+        GList 	  *tmp_ext[2];
 } edit_window;
+
 static edit_window *main_win = NULL;
 static gboolean changing = TRUE;
+
+/* Local prototypes */
+static void populate_application_menu 	(GtkWidget *application_menu, const char *mime_string);
+static void populate_component_menu 	(GtkWidget *application_menu, const char *mime_string);
+
+
 static void
 destruction_handler (GtkWidget *widget, gpointer data)
 {
 	g_free (main_win);
 	main_win = NULL;
 }
+
 static void
 entry_changed (GtkWidget *widget, gpointer data)
 {
@@ -118,136 +148,21 @@ ext_remove (GtkWidget *widget, gpointer data)
 		capplet_widget_state_changed (CAPPLET_WIDGET (capplet),
 					      TRUE);
 }
+
 static void
-apply_entry_change (GtkWidget *entry, gchar *key, MimeInfo *mi)
+apply_changes (const char *mime_type)
 {
-	const gchar *buf; 
-	gchar *text;
-	/* buf is the value that existed before when we 
-	 * started the capplet */
-	buf = local_mime_get_value (mi->mime_type, key);
-	if (buf == NULL)
-		buf = gnome_mime_get_value (mi->mime_type, key);
-	text = gtk_entry_get_text (GTK_ENTRY (entry));
-	if (text && !*text)
-		text = NULL;
-	
-	/* First we see if they've added something. */
-	if (buf == NULL && text)
-			set_mime_key_value (mi->mime_type, key, text);
-	else {
-		/* Has the value changed? */
-		if (text && strcmp (text, buf))
-			set_mime_key_value (mi->mime_type, key, text);
-		else
-			/* We _REALLY_ need a way to specify in
-			 * user.keys not to use the system defaults.
-			 * (ie. override the system default and
-			 *  query it).
-			 * If we could then we'd set it here. */
-			;
-	}
-}
-static GList*
-copy_mi_extensions (GList *orig)
-{
-        GList *tmp;
-	GList *list = NULL;
-
-        for (tmp = orig; tmp; tmp = tmp->next) {
-	       list = g_list_append (list, g_strdup (tmp->data));
-	}
-	return list;
-}
-static void
-make_readable (MimeInfo *mi)
-{
-       GList *list;
-       GString *extension;
-       
-       extension = g_string_new ("");
-       for (list = ((MimeInfo *) mi)->user_ext[0]; list; list = list->next) {
-	       g_string_append (extension, (gchar *) list->data);
-	       if (list->next != NULL)
-		       g_string_append (extension, ", ");
-       }
-       mi->ext_readable[0] = extension->str;
-       g_string_free (extension, FALSE);
-
-       extension = g_string_new ("");
-       for (list = ((MimeInfo *) mi)->user_ext[1]; list; list = list->next) {
-	       g_string_append (extension, (gchar *) list->data);
-	       if (list->next != NULL)
-		       g_string_append (extension, ", ");
-       }
-       mi->ext_readable[1] = extension->str;
-       g_string_free (extension, FALSE);
-}
-static void
-apply_changes (MimeInfo *mi)
-{
-        GList *tmp;
-	int i;
-
-	apply_entry_change (gnome_icon_entry_gtk_entry (GNOME_ICON_ENTRY (main_win->icon_entry)),
-			    "icon-filename", mi);
-	apply_entry_change (gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (main_win->open_entry)),
-			    "open", mi);
-	apply_entry_change (gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (main_win->view_entry)),
-			    "view", mi);
-	apply_entry_change (gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (main_win->edit_entry)),
-			    "edit", mi);
-
-	if (!main_win->user_mi) {
-	       add_to_key (mi->mime_type, "ext: tmp", user_mime_types, TRUE);
-	       /* the tmp extension will be removed when we copy the tmp_ext 
-		* stuff over the top of it.
-		*/
-	       main_win->user_mi = g_hash_table_lookup (user_mime_types,
-							mi->mime_type);
-	}
-
-	for (i = 0; i < 2; i++) {
-	       if (main_win->tmp_ext[i]) {
-	               main_win->user_mi->user_ext[i] = copy_mi_extensions (main_win->tmp_ext[i]);
-		       mi->user_ext[i] = copy_mi_extensions (main_win->tmp_ext[i]);
-	       } else {
-	               main_win->user_mi->user_ext[i] = NULL;
-		       mi->user_ext[i] = NULL;
-	       }
-	}
-
-	make_readable (main_win->user_mi);
-
-	if (! (main_win->user_mi->ext[0] || main_win->user_mi->ext[1] ||
-	       main_win->user_mi->user_ext[0] || main_win->user_mi->ext[1]))
-	       g_hash_table_remove (user_mime_types, mi->mime_type);
-
-	/* Free the 2 tmp lists */
-	for (i = 0; i < 2; i++) {
-	       if (main_win->tmp_ext[i])
-	               for (tmp = main_win->tmp_ext[i]; tmp; tmp = tmp->next)
-		              g_free (tmp->data);
-	}
 	if (changing == FALSE)
 		capplet_widget_state_changed (CAPPLET_WIDGET (capplet),
 					      TRUE);
 }
-
-#if 0
-static void
-browse_callback (GtkWidget *widget, gpointer data)
-{
-}
-#endif
 
 static void
 initialize_main_win ()
 {
 	GtkWidget *align, *vbox, *hbox, *vbox2, *vbox3;
 	GtkWidget *frame, *table, *label;
-/* 	GtkWidget *button; */
-/* 	GString *extension; */
+
 	gchar *title[2] = {"Extensions"};
 
 	main_win = g_new (edit_window, 1);
@@ -255,6 +170,7 @@ initialize_main_win ()
 					     GNOME_STOCK_BUTTON_OK,
 					     GNOME_STOCK_BUTTON_CANCEL,
 					     NULL);
+
 	gtk_signal_connect (GTK_OBJECT (main_win->window),
 			    "destroy",
 			    destruction_handler,
@@ -269,6 +185,8 @@ initialize_main_win ()
 			    "changed",
 			    entry_changed,
 			    NULL);
+
+			    
 	gtk_box_pack_start (GTK_BOX (vbox), align, FALSE, FALSE, 0);
 
 	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
@@ -351,105 +269,77 @@ initialize_main_win ()
 			    FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (hbox), main_win->regexp2_label, FALSE, FALSE, 0);
 
-	/* Actions box */
-	frame = gtk_frame_new (_("Mime Type Actions"));
+	/* Defaults box */
+	frame = gtk_frame_new (_("Launch Options"));
 	vbox2 = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
 	gtk_box_pack_start (GTK_BOX (vbox), frame, TRUE, TRUE, 0);
 	table = gtk_table_new (3, 2, FALSE);
 	gtk_table_set_row_spacings (GTK_TABLE (table), GNOME_PAD_SMALL);
 	gtk_container_set_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
 	gtk_container_add (GTK_CONTAINER (frame), vbox2);
-	label = gtk_label_new (_("Example: emacs %f"));
+
+	/* Default application label and menu */	
+	label = gtk_label_new (_("Default Application:"));
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
 	gtk_misc_set_padding (GTK_MISC (label), 2, 0);
-	gtk_box_pack_start (GTK_BOX (vbox2), label, FALSE, FALSE, 0);
+	gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 0, 1);
+
+	main_win->application_menu = gtk_option_menu_new();
+	gtk_misc_set_alignment (GTK_MISC (main_win->application_menu), 0.0, 0.5);
+	gtk_misc_set_padding (GTK_MISC (main_win->application_menu), 2, 0);
 	gtk_box_pack_start (GTK_BOX (vbox2), table, FALSE, FALSE, 0);
-	label = gtk_label_new (_("Open"));
+	gtk_table_attach_defaults (GTK_TABLE (table), main_win->application_menu, 1, 2, 0, 1);
+	
+	/* Default component label and menu */	
+	label = gtk_label_new (_("Default Component:"));
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
 	gtk_misc_set_padding (GTK_MISC (label), 2, 0);
-	gtk_table_attach_defaults (GTK_TABLE (table),
-				   label,
-				   0, 1, 0, 1);
-	main_win->open_entry = gnome_file_entry_new ("MIME_CAPPLET_OPEN", _("Select a file..."));
-	gtk_signal_connect (GTK_OBJECT (gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (main_win->open_entry))),
-			    "changed",
-			    entry_changed,
-			    NULL);
+	gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 1, 2);
 
-	gtk_table_attach_defaults (GTK_TABLE (table),
-				   main_win->open_entry,
-				   1, 2, 0, 1);
-	label = gtk_label_new (_("View"));
-	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
-	gtk_misc_set_padding (GTK_MISC (label), 2, 0);
-	gtk_table_attach_defaults (GTK_TABLE (table),
-				   label,
-				   0, 1, 1, 2);
-
-	main_win->view_entry = gnome_file_entry_new ("MIME_CAPPLET_VIEW", _("Select a file..."));
-	gtk_signal_connect (GTK_OBJECT (gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (main_win->view_entry))),
-			    "changed",
-			    entry_changed,
-			    NULL);
-
-	gtk_table_attach_defaults (GTK_TABLE (table),
-				   main_win->view_entry,
-				   1, 2, 1, 2);
-	label = gtk_label_new (_("Edit"));
-	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
-	gtk_misc_set_padding (GTK_MISC (label), 2, 0);
-	gtk_table_attach_defaults (GTK_TABLE (table),
-				   label,
-				   0, 1, 2, 3);
-	main_win->edit_entry = gnome_file_entry_new ("MIME_CAPPLET_EDIT", _("Select a file..."));
-	gtk_signal_connect (GTK_OBJECT (gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (main_win->edit_entry))),
-			    "changed",
-			    entry_changed,
-			    NULL);
-	gtk_table_attach_defaults (GTK_TABLE (table),
-				   main_win->edit_entry,
-				   1, 2, 2, 3);
+	main_win->component_menu = gtk_option_menu_new();
+	gtk_misc_set_alignment (GTK_MISC (main_win->component_menu), 0.0, 0.5);
+	gtk_misc_set_padding (GTK_MISC (main_win->component_menu), 2, 0);
+	gtk_box_pack_start (GTK_BOX (vbox2), table, FALSE, FALSE, 0);
+	gtk_table_attach_defaults (GTK_TABLE (table), main_win->component_menu, 1, 2, 1, 2);	
 }
-static void
-setup_entry (gchar *key, GtkWidget *g_entry, MimeInfo *mi)
-{
-	const gchar *buf;
-	GtkWidget *entry = gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (g_entry));
-	buf = local_mime_get_value (mi->mime_type, key);
-	if (buf == NULL)
-		buf = gnome_mime_get_value (mi->mime_type, key);
-	if (buf)
-		gtk_entry_set_text (GTK_ENTRY (entry), buf);
-	else
-		gtk_entry_set_text (GTK_ENTRY (entry), "");
-}
+
 void
 initialize_main_win_vals (void)
 {
-	MimeInfo *mi;
+	char *mi;
 	gchar *title;
-	gboolean showext = FALSE;
+	/*gboolean showext = FALSE;*/
 	if (main_win == NULL)
 		return;
-	mi = main_win->mi;
+
+	mi = main_win->mime_string;
 	if (mi == NULL)
 		return;
+		
 	/* now we fill in the fields with the mi stuff. */
-
 	changing = TRUE;
-	gtk_label_set_text (GTK_LABEL (main_win->mime_type), mi->mime_type);
+	
+	populate_application_menu (main_win->application_menu, mi);
+	populate_component_menu (main_win->component_menu, mi);
+	
+	gtk_label_set_text (GTK_LABEL (main_win->mime_type), mi);
+
+	/*
+	FIXME
 	gnome_icon_entry_set_icon (GNOME_ICON_ENTRY (main_win->icon_entry),
 				   gnome_mime_get_value (mi->mime_type,
 							 "icon-filename"));
-
+	*/
+	
 	gtk_widget_show_all (GNOME_DIALOG (main_win->window)->vbox);
 	/* we initialize everything */
-	title = g_strdup_printf (_("Set actions for %s"), mi->mime_type);
+	title = g_strdup_printf (_("Set actions for %s"), mi);
 	gtk_window_set_title (GTK_WINDOW (main_win->window), title);
 	g_free (title);
 
 	/* not sure why this is necessary */
 	gtk_clist_clear (GTK_CLIST (main_win->ext_clist));
+	/*
 	if (mi->ext[0]) {
 	        GList *tmp;
                 gchar *extension[1];
@@ -476,6 +366,7 @@ initialize_main_win_vals (void)
 		}
 		showext = TRUE;
 	}
+	
 	if (main_win->tmp_ext[0]) {
 	        GList *tmp;
 		gchar *extension[1];
@@ -502,6 +393,7 @@ initialize_main_win_vals (void)
 		}
 		showext = TRUE;
 	}
+	
 	if (!showext) {
 	        gtk_widget_hide (main_win->ext_clist);
 	        gtk_widget_hide (main_win->ext_entry);
@@ -523,55 +415,100 @@ initialize_main_win_vals (void)
 		gtk_widget_hide (main_win->regexp2_label);
 		gtk_widget_hide (main_win->regexp2_tag_label);
 	}
-	/* initialize the entries */
-	setup_entry ("open", main_win->open_entry, mi);
-	setup_entry ("view", main_win->view_entry, mi);
-	setup_entry ("edit", main_win->edit_entry, mi);
+	*/
+	
 	changing = FALSE;
-
 }
-void
-launch_edit_window (MimeInfo *mi)
-{
-/* 	gint size; */
 
-	if (main_win == NULL)
+void
+launch_edit_window (const char *mime_type)
+{
+	if (main_win == NULL) {
 		initialize_main_win ();
-	main_win->mi = mi;
-	main_win->user_mi = g_hash_table_lookup (user_mime_types, mi->mime_type);
+	}
+
+	strcpy (main_win->mime_string, mime_type);
 	main_win->tmp_ext[0] = NULL;
 	main_win->tmp_ext[1] = NULL;
-	if (main_win->user_mi) {
-	        if (main_win->user_mi->user_ext[0])
-	                main_win->tmp_ext[0] = copy_mi_extensions (main_win->user_mi->user_ext[0]);
-		if (main_win->user_mi->user_ext[1])
-		        main_win->tmp_ext[1] = copy_mi_extensions (main_win->user_mi->user_ext[1]);
-	}
+	
 	initialize_main_win_vals ();
 
 	switch(gnome_dialog_run (GNOME_DIALOG (main_win->window))) {
-	case 0:
-		apply_changes (mi);
-	case 1:
-		main_win->mi = NULL;
-		gtk_widget_hide (main_win->window);
-		break;
+		case 0:
+			apply_changes (mime_type);
+			/* Fall through */
+		case 1:
+			main_win->mime_type = NULL;
+			gtk_widget_hide (main_win->window);
+			break;
 	}
 }
 
 void
 hide_edit_window (void)
 {
-	if (main_win && main_win->mi && main_win->window)
+	if (main_win && main_win->mime_string && main_win->window)
 		gtk_widget_hide (main_win->window);
 }
 void
 show_edit_window (void)
 {
-	if (main_win && main_win->mi && main_win->window)
+	if (main_win && main_win->mime_string && main_win->window)
 		gtk_widget_show (main_win->window);
 }
 
 
 
 
+
+static void
+populate_application_menu (GtkWidget *application_menu, const char *mime_string)
+{
+	GtkWidget *new_menu;
+	GtkWidget *menu_item;
+
+	/*
+	GList *mime_list;
+	mime_list = gnome_vfs_mime_get_short_list_applications (mime_string);
+	*/
+	
+	new_menu = gtk_menu_new ();
+
+	menu_item = gtk_menu_item_new_with_label ("Test Menu One");
+	gtk_menu_append (GTK_MENU (new_menu), menu_item);
+	gtk_widget_show (menu_item);
+
+	menu_item = gtk_menu_item_new_with_label ("Test Menu Two");
+	gtk_menu_append (GTK_MENU (new_menu), menu_item);
+	gtk_widget_show (menu_item);
+
+	menu_item = gtk_menu_item_new_with_label ("This is a reallt long test menu item.");
+	gtk_menu_append (GTK_MENU (new_menu), menu_item);
+	gtk_widget_show (menu_item);
+
+	gtk_option_menu_set_menu (GTK_OPTION_MENU (application_menu), new_menu);
+}
+
+
+static void
+populate_component_menu (GtkWidget *component_menu, const char *mime_string)
+{
+	GtkWidget *new_menu;
+	GtkWidget *menu_item;
+		
+	new_menu = gtk_menu_new ();
+
+	menu_item = gtk_menu_item_new_with_label ("Test Menu One");
+	gtk_menu_append (GTK_MENU (new_menu), menu_item);
+	gtk_widget_show (menu_item);
+
+	menu_item = gtk_menu_item_new_with_label ("Test Menu Two");
+	gtk_menu_append (GTK_MENU (new_menu), menu_item);
+	gtk_widget_show (menu_item);
+
+	menu_item = gtk_menu_item_new_with_label ("This is a reallt long test menu item.");
+	gtk_menu_append (GTK_MENU (new_menu), menu_item);
+	gtk_widget_show (menu_item);
+
+	gtk_option_menu_set_menu (GTK_OPTION_MENU (component_menu), new_menu);
+}
