@@ -12,7 +12,7 @@
 static GladeXML *xml;
 static gchar** themes = NULL;
 static GtkListStore *model;
-static gboolean auto_preview;
+static gboolean ignore_select = FALSE;
 
 enum
 {
@@ -61,7 +61,9 @@ themes_list_refresh (void)
 {
 	GArray *arr;
 	gchar *dir;
+	gchar *def;
 	int i;
+	GtkTreeSelection *sel = gtk_tree_view_get_selection (GTK_TREE_VIEW (glade_xml_get_widget (xml, "tree1")));
 	
 	if (themes)
 		g_strfreev (themes);
@@ -79,6 +81,8 @@ themes_list_refresh (void)
 	themes = (gchar**) arr->data;
 	g_array_free (arr, FALSE);
 
+	def = gconf_client_get_string (gconf_client_get_default (), "/desktop/gnome/interface/gtk_theme", NULL);
+
 	gtk_list_store_clear (model);
 	for (i = 0; themes[i] != NULL; i++)
 	{
@@ -87,6 +91,12 @@ themes_list_refresh (void)
 		basename = g_path_get_basename (themes[i]);
 		gtk_list_store_append (model, &iter);
 		gtk_list_store_set (model, &iter, 0, basename, -1);
+		if (def && !strcmp (def, basename))
+		{
+			ignore_select = TRUE;
+			gtk_tree_selection_select_iter (sel, &iter);
+			ignore_select = FALSE;
+		}
 		g_free (basename);
 	}
 }
@@ -99,6 +109,7 @@ select_foreach_cb (GtkTreeModel *model, GtkTreePath *path,
 	*index = *inds;
 }
 
+#if 0
 static gchar* get_selected_theme (void)
 {
 	int index = -1;
@@ -113,7 +124,7 @@ static gchar* get_selected_theme (void)
 	theme = g_build_filename (themes[index], "gtk-2.0", "gtkrc", NULL);
 	return theme;
 }
-
+#endif
 
 static gchar* get_selected_theme_name (void)
 {
@@ -140,13 +151,6 @@ apply_cb (void)
 }
 
 void
-call_apply (GtkWidget *widget, gpointer data)
-{
-  apply_cb ();
-}
-
-
-void
 response_cb (GtkDialog *dialog, gint r, gpointer data)
 {
 	switch (r)
@@ -157,20 +161,12 @@ response_cb (GtkDialog *dialog, gint r, gpointer data)
 	}
 }
 
-void
-preview_toggled_cb (GtkToggleButton *b, gpointer data)
-{
-	auto_preview = gtk_toggle_button_get_active (b);
-}
-
 static void
 select_cb (GtkTreeSelection *sel, GtkButton *b)
 {
+#if 0
 	GtkWidget *control;
 	gchar *theme;
-
-	if (!(auto_preview || b))
-		return;
 
 	theme = get_selected_theme ();
 	if (!theme)
@@ -181,12 +177,9 @@ select_cb (GtkTreeSelection *sel, GtkButton *b)
 				    "theme", TC_CORBA_string,
 				    theme, NULL);
 	g_free (theme);
-}
-
-void
-preview_cb (GtkButton *b, gpointer data)
-{
-	select_cb (NULL, b);
+#endif
+	if (!ignore_select)
+		apply_cb ();
 }
 
 static void
@@ -254,14 +247,9 @@ main (int argc, char **argv)
 	xml = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/gtk-theme-selector.glade", NULL, NULL);
 	setup_list ();
 	
-	auto_preview = gconf_client_get_bool (gconf_client_get_default (), "/apps/gtk-theme-selector/auto", NULL);
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (glade_xml_get_widget (xml, "check1")), auto_preview);
-			
 	glade_xml_signal_autoconnect (xml);
 	gtk_main ();
  
-	gconf_client_set_bool (gconf_client_get_default (), "/apps/gtk-theme-selector/auto", auto_preview, NULL);
-	
 	return 0;
 }
 
