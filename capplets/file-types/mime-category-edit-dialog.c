@@ -135,8 +135,8 @@ mime_category_edit_dialog_init (MimeCategoryEditDialog *dialog, MimeCategoryEdit
 
 	dialog->p->dialog_win = gtk_dialog_new_with_buttons
 		(_("Edit file category"), NULL, -1,
-		 GTK_STOCK_OK,     GTK_RESPONSE_OK,
 		 GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+		 GTK_STOCK_OK,     GTK_RESPONSE_OK,
 		 NULL);
 
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog->p->dialog_win)->vbox), WID ("mime_category_edit_widget"), TRUE, TRUE, 0);

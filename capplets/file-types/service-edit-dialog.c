@@ -133,8 +133,8 @@ service_edit_dialog_init (ServiceEditDialog *dialog, ServiceEditDialogClass *cla
 
 	dialog->p->dialog_win = gtk_dialog_new_with_buttons
 		(_("Edit service information"), NULL, -1,
-		 GTK_STOCK_OK,     GTK_RESPONSE_OK,
 		 GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+		 GTK_STOCK_OK,     GTK_RESPONSE_OK,
 		 NULL);
 
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog->p->dialog_win)->vbox), WID ("service_edit_widget"), TRUE, TRUE, 0);

@@ -165,8 +165,8 @@ mime_edit_dialog_init (MimeEditDialog *dialog, MimeEditDialogClass *class)
 
 	dialog->p->dialog_win = gtk_dialog_new_with_buttons
 		(_("Edit file type"), NULL, -1,
-		 GTK_STOCK_OK,     GTK_RESPONSE_OK,
 		 GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+		 GTK_STOCK_OK,     GTK_RESPONSE_OK,
 		 NULL);
 
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog->p->dialog_win)->vbox), WID ("edit_widget"), TRUE, TRUE, 0);
@@ -686,31 +686,30 @@ static gboolean
 validate_data (MimeEditDialog *dialog) 
 {
 	const gchar *tmp;
-	GtkWidget *err_dialog = NULL;
+	const gchar *mesg = NULL;
 
 	tmp = gtk_entry_get_text (GTK_ENTRY (WID ("mime_type_entry")));
 
 	if (tmp != NULL && *tmp != '\0') {
 		if (strchr (tmp, ' ') || !strchr (tmp, '/')) {
-			err_dialog = gtk_message_dialog_new (GTK_WINDOW (dialog->p->dialog_win),
-							     0, GTK_MESSAGE_ERROR,
-							     GTK_BUTTONS_OK,
-							     _("Invalid MIME type. Please enter a valid MIME type, or "
-							       "leave the field blank to have one generated for you."));
-		}
-		else if (dialog->p->is_add && (gnome_vfs_mime_type_is_known (tmp) || get_mime_type_info (tmp) != NULL)) {
-			err_dialog = gtk_message_dialog_new (GTK_WINDOW (dialog->p->dialog_win),
-							     0, GTK_MESSAGE_ERROR,
-							     GTK_BUTTONS_OK,
-							     _("There already exists a MIME type of that name."));
+			mesg = _("Invalid MIME type. Please enter a valid MIME type, or "
+				 "leave the field blank to have one generated for you.");
+		} else if (dialog->p->is_add && (gnome_vfs_mime_type_is_known (tmp) ||
+						 get_mime_type_info (tmp) != NULL)) {
+			mesg = _("There already exists a MIME type of that name.");
 		}
 	}
 
-	if (err_dialog != NULL) {
-			gtk_window_set_modal (GTK_WINDOW (err_dialog), TRUE);
+	if (mesg != NULL) {
+		GtkWidget *err_dialog = gtk_message_dialog_new (
+			GTK_WINDOW (dialog->p->dialog_win),
+			GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR,
+			GTK_BUTTONS_OK,
+			mesg);
 		gtk_dialog_run (GTK_DIALOG (err_dialog));
-			return FALSE;
-		}
+		gtk_object_destroy (GTK_OBJECT (err_dialog));
+		return FALSE;
+	}
 	return TRUE;
 }
 
@@ -773,8 +772,8 @@ choose_cat_cb (MimeEditDialog *dialog)
 
 	dialog_win = gtk_dialog_new_with_buttons
 		(_("Choose a file category"), NULL, -1,
-		 GTK_STOCK_OK,     GTK_RESPONSE_OK,
 		 GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+		 GTK_STOCK_OK,     GTK_RESPONSE_OK,
 		 NULL);
 
 	gtk_widget_set_size_request (dialog_win, 300, 300);
