@@ -198,7 +198,6 @@ gconf_property_editor_set_prop (GObject      *object,
 	GConfPropertyEditor *peditor;
 	GConfClient         *client;
 	GConfNotifyFunc      cb;
-	GObject             *det_obj;
 
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (IS_GCONF_PROPERTY_EDITOR (object));
@@ -298,8 +297,8 @@ gconf_peditor_new (gchar                 *key,
 	GConfClient *client;
 	GConfEntry  *gconf_entry;
 
-	g_return_if_fail (key != NULL);
-	g_return_if_fail (cb != NULL);
+	g_return_val_if_fail (key != NULL, NULL);
+	g_return_val_if_fail (cb != NULL, NULL);
 
 	obj = g_object_new (gconf_property_editor_get_type (),
 			    "key", key,
@@ -736,7 +735,6 @@ peditor_numeric_range_value_changed (GConfClient         *client,
 				     GConfPropertyEditor *peditor) 
 {
 	GConfValue *value, *value_wid;
-	GtkAdjustment *adjustment;
 
 	gconf_change_set_remove (peditor->p->changeset, peditor->p->key);
 

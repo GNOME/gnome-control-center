@@ -34,12 +34,6 @@
 
 #include "capplet-util.h"
 
-static CreateDialogFn                 create_dialog_cb = NULL;
-static ApplySettingsFn                apply_settings_cb = NULL;
-static SetupPropertyEditorsFn         setup_property_editors_cb = NULL;
-
-static GConfChangeSet                *changeset;
-
 #if 0
 
 /* apply_cb
