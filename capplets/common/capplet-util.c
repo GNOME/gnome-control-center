@@ -87,6 +87,18 @@ get_moniker_cb (BonoboPropertyBag *bag, BonoboArg *arg, guint arg_id,
 	BONOBO_ARG_SET_STRING (arg, gtk_object_get_data (GTK_OBJECT (control), "moniker"));
 }
 
+/* pf_destroy_cb
+ *
+ * Callback issued when the property frame is destroyed. Ensures that the
+ * configuration database is properly unrefed
+ */
+
+static void
+pf_destroy_cb (BonoboPropertyFrame *pf, Bonobo_ConfigDatabase db) 
+{
+	bonobo_object_release_unref (db, NULL);
+}
+
 /* set_moniker_cb
  *
  * Callback issued when the name of the moniker to be used is set. This function
@@ -113,23 +125,22 @@ set_moniker_cb (BonoboPropertyBag *bag, BonoboArg *arg, guint arg_id,
 	bonobo_property_frame_set_moniker (pf, full_moniker);
 	proxy = BONOBO_OBJREF (pf->proxy);
 
+	db = gtk_object_get_data (GTK_OBJECT (pf), "config-database");
+
+	if (db != CORBA_OBJECT_NIL)
+		bonobo_object_release_unref (db, ev);
+
 	db = bonobo_get_object (moniker, "IDL:Bonobo/ConfigDatabase:1.0", ev);
 
 	if (BONOBO_EX (ev) || db == CORBA_OBJECT_NIL)
 		g_critical ("Could not resolve configuration moniker; will not be able to save settings");
 
 	gtk_object_set_data (GTK_OBJECT (pf), "config-database", db);
+	gtk_signal_connect (GTK_OBJECT (pf), "destroy",
+			    GTK_SIGNAL_FUNC (pf_destroy_cb), db);
 
 	if (setup_cb != NULL)
 		setup_cb (GTK_BIN (pf)->child, proxy);
-}
-
-/* TEMPORARY */
-
-static void
-pbproxy_destroy_cb (BonoboPropertyFrame *pf) 
-{
-	DEBUG_MSG ("Enter: %d", GTK_OBJECT (pf->proxy)->ref_count);
 }
 
 /* get_control_cb
@@ -170,9 +181,6 @@ get_control_cb (BonoboPropertyControl *property_control, gint page_number)
 					 BONOBO_PROPERTY_WRITEABLE);
 
 		bonobo_control_set_automerge (control, TRUE);
-
-		gtk_signal_connect (GTK_OBJECT (pf), "destroy",
-				    GTK_SIGNAL_FUNC (pbproxy_destroy_cb), NULL);
 	} else {
 		return NULL;
 	}
@@ -189,10 +197,16 @@ static void
 quit_cb (BonoboPropertyControl *pc, Bonobo_ConfigDatabase db) 
 {
 	CORBA_Environment ev;
+	Bonobo_EventSource_ListenerId id;
 
+	DEBUG_MSG ("Enter");
 	CORBA_exception_init (&ev);
+	id = (Bonobo_EventSource_ListenerId)
+		gtk_object_get_data (GTK_OBJECT (pc), "listener-id");
+	bonobo_event_source_client_remove_listener (db, id, &ev);
 	bonobo_object_release_unref (db, &ev);
 	CORBA_exception_free (&ev);
+	DEBUG_MSG ("Exit");
 
 	gtk_main_quit ();
 }
@@ -207,6 +221,7 @@ create_control_cb (BonoboGenericFactory *factory, Bonobo_ConfigDatabase db)
 {
 	BonoboPropertyControl *property_control;
 	CORBA_Environment ev;
+	Bonobo_EventSource_ListenerId id;
 
 	CORBA_exception_init (&ev);
 
@@ -215,9 +230,10 @@ create_control_cb (BonoboGenericFactory *factory, Bonobo_ConfigDatabase db)
 	gtk_signal_connect (GTK_OBJECT (property_control), "action",
 			    GTK_SIGNAL_FUNC (apply_cb), NULL);
 
-	bonobo_event_source_client_add_listener
+	id = bonobo_event_source_client_add_listener
 		(db, (BonoboListenerCallbackFn) changed_cb,
 		 "Bonobo/ConfigDatabase:change", &ev, db);
+	gtk_object_set_data (GTK_OBJECT (property_control), "listener-id", (gpointer) id);
 
 	gtk_signal_connect (GTK_OBJECT (property_control), "destroy",
 			    GTK_SIGNAL_FUNC (quit_cb), db);
@@ -385,11 +401,12 @@ capplet_init (int                      argc,
 
 	default_moniker = get_default_moniker (argv[0]);
 	db = bonobo_get_object (default_moniker, "IDL:Bonobo/ConfigDatabase:1.0", &ev);
+
 	if (db == CORBA_OBJECT_NIL) {
 		g_critical ("Cannot open configuration database %s", default_moniker);
-		g_free (default_moniker);
 		exit (-1);
 	}
+
 	g_free (default_moniker);
 
 	if ((apply_only || init_session) && apply_fn != NULL) {

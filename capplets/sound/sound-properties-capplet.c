@@ -110,7 +110,7 @@ create_dialog (void)
 	GladeXML *data;
 	GtkWidget *widget;
 
-	data = glade_xml_new (GLADE_DATADIR "/sound-properties.glade", "prefs_widget");
+	data = glade_xml_new (GNOMECC_GLADE_DIR "/sound-properties.glade", "prefs_widget");
 	widget = glade_xml_get_widget (data, "prefs_widget");
 	gtk_object_set_data (GTK_OBJECT (widget), "glade-data", data);
 

@@ -1,3 +1,13 @@
+2001-07-18  Bradford Hovinen  <hovinen@ximian.com>
+
+	* capplet-util.c (create_control_cb): Store listener id in
+	property control
+	(quit_cb): Remove listener before releasing database
+	(set_moniker_cb): Kill any existing db object in case the moniker
+	is set more than once
+	(set_moniker_cb): Connect destroy signal on pf to pf_destroy_cb
+	(pf_destroy_cb): Implement
+
 2001-07-18  Richard Hestilow  <hestilow@ximian.com>
 	
 	* capplet-util.[ch]: Revert my last proxy-related change.
