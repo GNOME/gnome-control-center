@@ -291,6 +291,28 @@ populate_default_components_box (GtkWidget *box, const char *mime_type)
 }
 
 
+ typedef struct {
+ 	GtkWidget *add_button;
+ 	GtkWidget *edit_button;
+ 	GtkWidget *delete_button;
+ } ButtonHolder;
+
+
+static void
+check_button_status (GtkList *list, GtkWidget *widget, ButtonHolder *button_holder)
+{
+	int length = g_list_length (list->children);
+
+	if (length == 0) {
+		gtk_widget_set_sensitive (button_holder->delete_button, FALSE);
+		gtk_widget_set_sensitive (button_holder->edit_button, FALSE);
+	} else {
+		gtk_widget_set_sensitive (button_holder->delete_button, TRUE);
+		gtk_widget_set_sensitive (button_holder->edit_button, TRUE);
+	}
+}
+
+
 /*
  *  initialize_edit_applications_dialog
  *  
@@ -304,12 +326,13 @@ initialize_edit_applications_dialog (const char *mime_type)
 	GtkWidget *scroller, *label;
 	GtkWidget *button, *list;
 	char *label_text;
+	ButtonHolder *button_holder;
 	
 	edit_application_details = g_new0 (edit_dialog_details, 1);
 
 	edit_application_details->window = gnome_dialog_new (_("Edit Applications List"),
 					     GNOME_STOCK_BUTTON_OK,
-					     GNOME_STOCK_BUTTON_CANCEL,
+					     NULL,
 					     NULL);
 
 	gtk_container_set_border_width (GTK_CONTAINER (edit_application_details->window), GNOME_PAD);
@@ -345,23 +368,36 @@ initialize_edit_applications_dialog (const char *mime_type)
 	gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (scroller), list);
 	gtk_list_set_selection_mode (GTK_LIST (list), GTK_SELECTION_BROWSE);
 
-	/* Add edit buttons */
+	/* Add edit buttons */	
 	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
 	gtk_box_pack_start (GTK_BOX (main_vbox), hbox, FALSE, FALSE, 0);	
+
+	button_holder = g_new (ButtonHolder, 1);
 
 	button = gtk_button_new_with_label (_("Add Application..."));	
 	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
 	gtk_object_set_data_full (GTK_OBJECT (button), "mime_type", g_strdup (mime_type), g_free);
 	gtk_signal_connect (GTK_OBJECT (button), "clicked", show_new_application_window, list);
+	gtk_widget_set_sensitive (GTK_WIDGET (button), TRUE);
+	button_holder->add_button = button;
 	
 	button = gtk_button_new_with_label (_("Edit Application..."));	
 	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);	
 	gtk_signal_connect (GTK_OBJECT (button), "clicked", show_edit_application_window, list);
+	gtk_widget_set_sensitive (GTK_WIDGET (button), FALSE);
+	button_holder->edit_button = button;
 	
 	button = gtk_button_new_with_label (_("Delete Application"));
 	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
 	gtk_signal_connect (GTK_OBJECT (button), "clicked", delete_selected_application, list);
+	gtk_widget_set_sensitive (GTK_WIDGET (button), FALSE);
+	button_holder->delete_button = button;
 
+	/* Watch container so we can update buttons */
+	gtk_signal_connect (GTK_OBJECT (list), "add", check_button_status, button_holder);
+	gtk_signal_connect_full (GTK_OBJECT (list), "remove", check_button_status, NULL, button_holder,
+			    	 g_free, FALSE, FALSE);
+			    	 
 	populate_default_applications_list (list, mime_type);
 
 	gtk_widget_show_all (main_vbox);
@@ -386,7 +422,7 @@ initialize_edit_components_dialog (const char *mime_type)
 
 	edit_component_details->window = gnome_dialog_new (_("Edit Components List"),
 					     GNOME_STOCK_BUTTON_OK,
-					     GNOME_STOCK_BUTTON_CANCEL,
+					     NULL,
 					     NULL);
 
 	gtk_container_set_border_width (GTK_CONTAINER (edit_component_details->window), GNOME_PAD);
