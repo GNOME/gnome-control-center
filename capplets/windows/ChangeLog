@@ -1,3 +1,31 @@
+2002-06-02  Seth Nickell  <snickell@stanford.edu>
+
+	* Makefile.am:
+	* gnome-window-properties.c: (wm_selection_changed),
+	(wm_widget_add_wm), (update_gui), (apply_wm), (create_dialog),
+	(main):
+
+	Split code for changing window managers into libgnome-window-settings.
+	This is so in the future we can potentially move this into gnome-settings-daemon,
+	though for now its not robust enough that we really want to do that.
+	
+	* metacity-window-manager.c: (window_manager_new),
+	(metacity_window_manager_init), (metacity_window_manager_finalize),
+	(metacity_window_manager_class_init),
+	(metacity_window_manager_get_type):
+	* metacity-window-manager.h:
+
+	Update to match changes to gnome-window-manager.h
+	
+	* wm-exec.c:
+	* wm-list.c:
+	* wm-properties.h:
+
+	Move these into libgnome-window-settings.
+
+	(Jacob, I did make dist, and then built the resulting tarball, hope I
+	 don't cause problems this time :-/)
+	
 2002-05-30  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* gnome-window-properties.c (main): Use GETTEXT_PACKAGE, not PACKAGE.

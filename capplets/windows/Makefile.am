@@ -1,13 +1,11 @@
 bin_PROGRAMS = gnome-window-properties
 
 gnome_window_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS) 	\
-		$(top_builddir)/libwindow-settings/libwindow-settings.la
+	-L$(top_builddir)/libwindow-settings/ -lgnome-window-settings
 
 gnome_window_properties_SOURCES = 		\
-	gnome-window-properties.c		\
-	wm-properties.h				\
-	wm-exec.c				\
-	wm-list.c
+	gnome-window-properties.c
+
 
 wms_flags = -export_dynamic -avoid-version
 wmsdir = $(libdir)/window-manager-settings/
@@ -21,7 +19,7 @@ libmetacity_la_SOURCES = 		\
 
 
 libmetacity_la_LDFLAGS = $(wms_flags)
-libmetacity_la_LIBADD =
+#libmetacity_la_LIBADD = $(top_builddir)/libwindow-settings/libwindow-settings.la
 
 
 @INTLTOOL_DESKTOP_RULE@
