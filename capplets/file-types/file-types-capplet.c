@@ -44,6 +44,8 @@
 #include "nautilus-mime-type-capplet.h"
 
 
+#define TOTAL_COLUMNS 4
+
 /* Local Prototypes */
 static void	 init_mime_capplet 	  	(void);
 static void 	 populate_application_menu 	(GtkWidget 	*menu, 	 
@@ -66,7 +68,6 @@ GtkWidget *capplet = NULL;
 GtkWidget *delete_button = NULL;
 GtkWidget *remove_button = NULL;
 GtkWidget *add_button = NULL;
-GtkWidget *info_frame = NULL;
 GtkWidget *icon_entry, *extension_list, *mime_list;
 GtkWidget *default_menu;
 GtkWidget *application_button, *viewer_button;
@@ -135,7 +136,7 @@ populate_extension_list (const char *mime_type, GtkCList *list)
 		}
 	}
 
-	gnome_vfs_mime_extension_list_free (extensions);	
+	gnome_vfs_mime_extensions_list_free (extensions);	
 	
 	/* Select first item in extension list */
 	gtk_clist_select_row (list, 0, 0);
@@ -313,6 +314,7 @@ init_mime_capplet (void)
         GtkWidget *alignment;
         GtkWidget *table, *extensions_table;
 	GList     *children;
+	int index, list_width, column_width;
 	
 	capplet = capplet_widget_new ();
 
@@ -326,17 +328,13 @@ init_mime_capplet (void)
         gtk_box_pack_start (GTK_BOX (main_vbox), hbox, TRUE, TRUE, 0);
         mime_list_container = create_mime_list_and_scroller ();
         gtk_box_pack_start (GTK_BOX (hbox), mime_list_container, TRUE, TRUE, 0);         
-
+	
 	vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
         gtk_box_pack_start (GTK_BOX (hbox), vbox, FALSE, FALSE, 0);
 
-	/* Set up info frame */	
-        info_frame = gtk_frame_new ("");
-        gtk_box_pack_start (GTK_BOX (main_vbox), info_frame, FALSE, FALSE, 0);
-
 	/* Create table */
 	table = gtk_table_new (2, 2, FALSE);
-	gtk_container_add (GTK_CONTAINER (info_frame), table);	
+	gtk_box_pack_start (GTK_BOX (main_vbox), table, FALSE, FALSE, 0);
 	gtk_table_set_row_spacings (GTK_TABLE (table), GNOME_PAD_SMALL);
 	gtk_table_set_col_spacings (GTK_TABLE (table), GNOME_PAD_SMALL);
 	
@@ -374,10 +372,18 @@ init_mime_capplet (void)
 
 	/* Set up bottom left area.  This contains two buttons to add
 	   and delete mime types */
-	vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
+	vbox = gtk_vbox_new (FALSE, 7);
 	gtk_table_attach_defaults ( GTK_TABLE (table), vbox, 0, 1, 1, 2);
+	
+	/* Put in a spacer to make buttons layout as we want them */
+	{
+		GtkWidget *spacer;
+		spacer = gtk_fixed_new ();
+		gtk_box_pack_start (GTK_BOX (vbox), spacer, FALSE, FALSE, 0);
+		gtk_widget_set_usize (spacer, 10, 30);
+	}
 
-	alignment = gtk_alignment_new (0, 0.5, 0, 0);
+	alignment = gtk_alignment_new (0, 0, 0, 0);
 	gtk_box_pack_start (GTK_BOX (vbox), alignment, FALSE, FALSE, 0);
 	
 	button = gtk_button_new_with_label (_("Add new Mime type..."));
@@ -397,6 +403,7 @@ init_mime_capplet (void)
 	
 	vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
 	gtk_container_add (GTK_CONTAINER (frame), vbox);
+	gtk_container_set_border_width (GTK_CONTAINER (vbox), 5);
 
 	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
 	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
@@ -432,6 +439,7 @@ init_mime_capplet (void)
 	gtk_container_add (GTK_CONTAINER (frame), extensions_table);	
 	gtk_table_set_row_spacings (GTK_TABLE (extensions_table), 10);
 	gtk_table_set_col_spacings (GTK_TABLE (extensions_table), 10);
+	gtk_container_set_border_width (GTK_CONTAINER (extensions_table), 5);
 
 	extension_list = gtk_clist_new (1);
 	gtk_clist_column_titles_passive (GTK_CLIST (extension_list));
@@ -470,6 +478,13 @@ init_mime_capplet (void)
 	/* Yes, show all widgets */
         gtk_widget_show_all (capplet);
 
+	/* Make columns all fit within capplet list view bounds */
+	list_width = GTK_WIDGET (mime_list)->allocation.width;
+	column_width = list_width / TOTAL_COLUMNS;
+	for (index = 0; index < TOTAL_COLUMNS; index++) {
+		gtk_clist_set_column_width (GTK_CLIST (mime_list), index, column_width);
+	}
+
         /* Setup capplet signals */
         gtk_signal_connect(GTK_OBJECT(capplet), "ok",
                            GTK_SIGNAL_FUNC(ok_callback), NULL);
@@ -497,9 +512,6 @@ nautilus_mime_type_capplet_update_info (const char *mime_type) {
 	const char *icon_name, *description;
 	char *path;
 	
-	/* Update frame label with mime type */
-	gtk_frame_set_label (GTK_FRAME (info_frame), mime_type);
-
 	/* Update text items */
 	gtk_label_set_text (GTK_LABEL (mime_label), mime_type);
 
@@ -932,17 +944,19 @@ nautilus_mime_type_capplet_update_viewer_info (const char *mime_type)
 
 
 static void
-insert_mime_vals_into_clist (GList *type_list, GtkCList *clist)
+populate_mime_list (GList *type_list, GtkCList *clist)
 {
 	static gchar *text[3];        
 	const char *description;
-	char *extensions;
-	char *mime_string;
+	char *extensions, *mime_string;
         gint row;
 	GList *element;
 	GdkPixbuf *pixbuf;
 	GdkPixmap *pixmap;
 	GdkBitmap *bitmap;
+	GnomeVFSMimeAction *action;
+	GnomeVFSMimeApplication *default_app;
+	OAF_ServerInfo *default_component;
 	
 	for (element = type_list; element != NULL; element= element->next) {
 		mime_string = (char *)element->data;
@@ -962,13 +976,15 @@ insert_mime_vals_into_clist (GList *type_list, GtkCList *clist)
 			text[1] = mime_string;
 
 			/* Add extension to third columns */
-			extensions = gnome_vfs_mime_get_extensions_string (mime_string);
+			extensions = gnome_vfs_mime_get_extensions_pretty_string (mime_string);
 			if (extensions != NULL) {
 				text[2] = extensions;
+			} else {
+				text[2] = "";
 			}
 
 			/* Add default action to fourth column */
-			text[3] = "Action";
+			text[3] = _("None");
 
 			/* Insert item into list */
 			row = gtk_clist_insert (GTK_CLIST (clist), 1, text);
@@ -982,6 +998,28 @@ insert_mime_vals_into_clist (GList *type_list, GtkCList *clist)
 				gdk_pixbuf_unref (pixbuf);
 			}
 
+			/* Set up action column */
+			action = gnome_vfs_mime_get_default_action (mime_string);
+			if (action != NULL) {
+				switch (action->action_type) {
+					case GNOME_VFS_MIME_ACTION_TYPE_APPLICATION:
+						/* Get the default application */
+						default_app = gnome_vfs_mime_get_default_application (mime_string);
+						text[3] = default_app->name;
+						break;
+
+					case GNOME_VFS_MIME_ACTION_TYPE_COMPONENT:
+						/* Get the default component */
+						default_component = gnome_vfs_mime_get_default_component (mime_string);
+						text[3] = name_from_oaf_server_info (default_component);
+						break;
+						
+					default:
+						gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (application_button), TRUE);
+						break;
+				}
+			}
+			
 			pixbuf = gdk_pixbuf_new_from_file ("/gnome/share/pixmaps/nautilus/eazel/i-regular-12.png");
 			if (pixbuf != NULL) {
 				gdk_pixbuf_render_pixmap_and_mask (pixbuf, &pixmap, &bitmap, 100);
@@ -1015,8 +1053,9 @@ static GtkWidget *
 create_mime_list_and_scroller (void)
 {
         GtkWidget *window;
-        gchar *titles[4];
+        gchar *titles[TOTAL_COLUMNS];
 	GList *type_list;
+	int index;
 	        
         titles[0] = _("Description");
         titles[1] = _("Mime Type");
@@ -1027,12 +1066,12 @@ create_mime_list_and_scroller (void)
         gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (window),
                                         GTK_POLICY_AUTOMATIC,
                                         GTK_POLICY_AUTOMATIC);
-	mime_list = gtk_clist_new_with_titles (4, titles);
+	mime_list = gtk_clist_new_with_titles (TOTAL_COLUMNS, titles);
         gtk_clist_set_selection_mode (GTK_CLIST (mime_list), GTK_SELECTION_BROWSE);
         gtk_clist_set_auto_sort (GTK_CLIST (mime_list), TRUE);
 
 	type_list = gnome_vfs_get_registered_mime_types ();
-	insert_mime_vals_into_clist (type_list, GTK_CLIST (mime_list));
+	populate_mime_list (type_list, GTK_CLIST (mime_list));
 	gnome_vfs_mime_registered_mime_type_list_free (type_list);
 	
         gtk_clist_columns_autosize (GTK_CLIST (mime_list));
@@ -1044,7 +1083,11 @@ create_mime_list_and_scroller (void)
 	gtk_signal_connect (GTK_OBJECT (mime_list), "click_column", 
 			    column_clicked, NULL);
 	
-
+	/* Turn off autoresizing of columns */
+	for (index = 0; index < TOTAL_COLUMNS; index++) {
+		gtk_clist_set_column_auto_resize (GTK_CLIST (mime_list), index, FALSE);
+	}
+		
         return window;
 }
 
