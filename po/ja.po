@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center CVS-20010216\n"
-"POT-Creation-Date: 2002-11-23 21:17-0500\n"
+"POT-Creation-Date: 2003-01-10 10:20-0500\n"
 "PO-Revision-Date: 2001-07-20 13:55+0900\n"
 "Last-Translator: Akira TAGOH <tagoh@gnome.gr.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
@@ -16,18 +16,18 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:237
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:238
 #, c-format
 msgid "There was an error launching the mouse preferences dialog: %s"
 msgstr ""
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:331
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:389
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:334
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:392
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr ""
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:462
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:465
 #, fuzzy
 msgid "Select CDE AccessX file"
 msgstr "ファイルの選択..."
@@ -46,7 +46,7 @@ msgstr "キーボードの設定"
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.c:57
 msgid ""
 "This system does not seem to have the XKB extension.  The keyboard "
-"accessibility features will not operate with it."
+"accessibility features will not operate without it."
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
@@ -54,6 +54,7 @@ msgstr ""
 #: capplets/file-types/file-types-properties.glade.h:1
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: capplets/network/gnome-network-preferences.glade.h:2
+#: capplets/theme-switcher/theme-properties.glade.h:1
 #: capplets/theme-switcher/theme-install.glade.h:1
 msgid "*"
 msgstr ""
@@ -240,6 +241,7 @@ msgid "pixels/second"
 msgstr "秒"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:42
+#: capplets/windows/gnome-window-properties.glade.h:7
 msgid "seconds"
 msgstr "秒"
 
@@ -300,8 +302,8 @@ msgstr "アイコン選択..."
 #: capplets/background/background-properties-capplet.c:567
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:712
-#: capplets/keyboard/gnome-keyboard-properties.c:294
-#: capplets/mouse/gnome-mouse-properties.c:751
+#: capplets/keyboard/gnome-keyboard-properties.c:290
+#: capplets/mouse/gnome-mouse-properties.c:712
 #: capplets/sound/sound-properties-capplet.c:149
 msgid "Retrieve and store legacy settings"
 msgstr ""
@@ -814,7 +816,7 @@ msgid "Minimizing and Maximizing"
 msgstr "最大化/最小化"
 
 #: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
-#: capplets/windows/gnome-window-properties.c:600
+#: capplets/windows/gnome-window-properties.c:649
 msgid "Meta"
 msgstr "メタ"
 
@@ -1362,7 +1364,7 @@ msgid "The type of accelerator."
 msgstr ""
 
 #: capplets/keybindings/eggcellrendererkeys.c:219
-#: capplets/keybindings/gnome-keybinding-properties.c:181
+#: capplets/keybindings/gnome-keybinding-properties.c:204
 #: libbackground/applier.c:588
 msgid "Disabled"
 msgstr "無設定"
@@ -1376,42 +1378,44 @@ msgstr ""
 msgid "Type a new accelerator"
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:448
+#: capplets/keybindings/gnome-keybinding-properties.c:540
 #, fuzzy
 msgid "<Unknown Action>"
 msgstr "不明"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:467
+#: capplets/keybindings/gnome-keybinding-properties.c:559
 msgid "Desktop"
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:471
+#: capplets/keybindings/gnome-keybinding-properties.c:563
 #, fuzzy
 msgid "Window Management"
 msgstr "ウィンドウマネージャのエディット"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:593
+#: capplets/keybindings/gnome-keybinding-properties.c:698
 #, c-format
-msgid "That accelerator key is already in use by: %s\n"
+msgid ""
+"The shortcut \"%s\" is already used for:\n"
+" \"%s\"\n"
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:620
+#: capplets/keybindings/gnome-keybinding-properties.c:729
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:771
+#: capplets/keybindings/gnome-keybinding-properties.c:880
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:793
+#: capplets/keybindings/gnome-keybinding-properties.c:902
 #, fuzzy
 msgid "Action"
 msgstr "オプション"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:811
+#: capplets/keybindings/gnome-keybinding-properties.c:921
 #, fuzzy
 msgid "Shortcut"
 msgstr "ショートカット"
@@ -1440,18 +1444,18 @@ msgstr "ショートカット"
 msgid "Assign shortcut keys to commands"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.c:160
+#: capplets/keyboard/gnome-keyboard-properties.c:162
 #, c-format
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.c:273
+#: capplets/keyboard/gnome-keyboard-properties.c:269
 #, fuzzy
 msgid "_Accessibility"
 msgstr "設定"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:290
-#: capplets/keyboard/gnome-keyboard-properties.c:292
+#: capplets/keyboard/gnome-keyboard-properties.c:286
+#: capplets/keyboard/gnome-keyboard-properties.c:288
 #: capplets/sound/sound-properties-capplet.c:145
 #: capplets/sound/sound-properties-capplet.c:147
 msgid ""
@@ -1558,56 +1562,56 @@ msgstr ""
 msgid "Set your keyboard preferences"
 msgstr "キーボードの設定"
 
-#: capplets/mouse/gnome-mouse-properties.c:476
+#: capplets/mouse/gnome-mouse-properties.c:437
 #, c-format
 msgid ""
 "<b>Unknown Cursor</b>\n"
 "%s"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.c:577
+#: capplets/mouse/gnome-mouse-properties.c:538
 msgid ""
 "<b>Default Cursor - Current</b>\n"
 "The default cursor that ships with X"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.c:580
+#: capplets/mouse/gnome-mouse-properties.c:541
 msgid ""
 "<b>Default Cursor</b>\n"
 "The default cursor that ships with X"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.c:598
+#: capplets/mouse/gnome-mouse-properties.c:559
 msgid ""
 "<b>White Cursor - Current</b>\n"
 "The default cursor inverted"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.c:601
+#: capplets/mouse/gnome-mouse-properties.c:562
 msgid ""
 "<b>White Cursor</b>\n"
 "The default cursor inverted"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.c:619
+#: capplets/mouse/gnome-mouse-properties.c:580
 msgid ""
 "<b>Large Cursor - Current</b>\n"
 "Large version of normal cursor"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.c:622
+#: capplets/mouse/gnome-mouse-properties.c:583
 msgid ""
 "<b>Large Cursor</b>\n"
 "Large version of normal cursor"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.c:640
+#: capplets/mouse/gnome-mouse-properties.c:601
 msgid ""
 "<b>Large White Cursor - Current</b>\n"
 "Large version of white cursor"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.c:643
+#: capplets/mouse/gnome-mouse-properties.c:604
 msgid ""
 "<b>Large White Cursor</b>\n"
 "Large version of white cursor"
@@ -1914,86 +1918,103 @@ msgid "Select themes for various parts of the desktop"
 msgstr ""
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
-#: capplets/theme-switcher/theme-properties.glade.h:4
 #, fuzzy
 msgid "Theme"
 msgstr "ツリー"
 
-#: capplets/theme-switcher/theme-properties.glade.h:1
+#: capplets/theme-switcher/theme-properties.glade.h:2
+msgid "<span size=\"larger\" weight=\"bold\">Save theme to disk</span>"
+msgstr ""
+
+#: capplets/theme-switcher/theme-properties.glade.h:3
+#, fuzzy
+msgid "Apply _Background"
+msgstr "バックグラウンド"
+
+#: capplets/theme-switcher/theme-properties.glade.h:4
+#, fuzzy
+msgid "Apply _Font"
+msgstr "バックグラウンド"
+
+#: capplets/theme-switcher/theme-properties.glade.h:5
 #, fuzzy
 msgid "Controls"
 msgstr "一般"
 
-#: capplets/theme-switcher/theme-properties.glade.h:2
+#: capplets/theme-switcher/theme-properties.glade.h:6
 #, fuzzy
 msgid "Icons"
 msgstr "アイコンリスト"
 
-#: capplets/theme-switcher/theme-properties.glade.h:3
+#: capplets/theme-switcher/theme-properties.glade.h:7
 msgid "New themes can also be installed by dragging them into the window."
 msgstr ""
 
-#: capplets/theme-switcher/theme-properties.glade.h:5
+#: capplets/theme-switcher/theme-properties.glade.h:8
+#, fuzzy
+msgid "Short _Description:"
+msgstr "説明"
+
+#: capplets/theme-switcher/theme-properties.glade.h:9
+#, fuzzy
+msgid "Theme Details"
+msgstr "マウスの設定"
+
+#: capplets/theme-switcher/theme-properties.glade.h:10
 #, fuzzy
 msgid "Theme Preferences"
 msgstr "バックグラウンドの色"
 
-#: capplets/theme-switcher/theme-properties.glade.h:6
+#: capplets/theme-switcher/theme-properties.glade.h:11
+#, fuzzy
 msgid ""
-"This theme suggests a matching\n"
+"This theme suggests a\n"
 "background:"
-msgstr ""
+msgstr "デスクトップ背景の設定"
 
-#: capplets/theme-switcher/theme-properties.glade.h:8
+#: capplets/theme-switcher/theme-properties.glade.h:13
 msgid ""
-"This theme suggests a matching\n"
+"This theme suggests a\n"
 "font and background"
 msgstr ""
 
-#: capplets/theme-switcher/theme-properties.glade.h:10
-msgid "This theme suggests a matching font:"
-msgstr ""
-
-#: capplets/theme-switcher/theme-properties.glade.h:11
-#, fuzzy
-msgid "Use _Background"
-msgstr "バックグラウンド"
-
-#: capplets/theme-switcher/theme-properties.glade.h:12
-#, fuzzy
-msgid "Use _Font"
-msgstr "ユーザーフォント"
-
-#: capplets/theme-switcher/theme-properties.glade.h:13
-msgid "Use _Font "
-msgstr ""
-
-#: capplets/theme-switcher/theme-properties.glade.h:14
-#, fuzzy
-msgid "Use _background"
-msgstr "バックグラウンド"
-
 #: capplets/theme-switcher/theme-properties.glade.h:15
+msgid ""
+"This theme suggests a\n"
+"font:"
+msgstr ""
+
+#: capplets/theme-switcher/theme-properties.glade.h:17
 #, fuzzy
 msgid "Window Border"
 msgstr "バックグラウンドの色"
 
-#: capplets/theme-switcher/theme-properties.glade.h:16
+#: capplets/theme-switcher/theme-properties.glade.h:18
+#, fuzzy
+msgid "_Details..."
+msgstr "マウスの設定"
+
+#: capplets/theme-switcher/theme-properties.glade.h:19
 #, fuzzy
 msgid "_Go to theme folder"
 msgstr "サスペンドモードまで"
 
-#: capplets/theme-switcher/theme-properties.glade.h:17
+#: capplets/theme-switcher/theme-properties.glade.h:20
 #, fuzzy
-msgid "_Install New Theme..."
+msgid "_Install theme..."
 msgstr ""
 "新規テーマの\n"
 "インストール..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:18
+#: capplets/theme-switcher/theme-properties.glade.h:21
 #, fuzzy
-msgid "_Save Theme"
+msgid "_Save theme"
 msgstr "ツリー"
+
+#: capplets/theme-switcher/theme-properties.glade.h:22
+#, fuzzy
+msgid "_Theme name:"
+msgstr "名前:"
 
 #: capplets/theme-switcher/theme-install.glade.h:2
 #, fuzzy
@@ -2011,14 +2032,23 @@ msgstr ""
 msgid "_Location of new theme:"
 msgstr "パワーマネジメント"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:615
-msgid "Current modified"
-msgstr ""
-
-#: capplets/theme-switcher/gnome-theme-manager.c:634
+#: capplets/theme-switcher/gnome-theme-details.c:329
+#: capplets/theme-switcher/gnome-theme-manager.c:606
 msgid ""
 "No themes could be found on your system.  This probably means that your "
-"\"Theme Preferences\" dialog was improperly installed."
+"\"Theme Preferences\" dialog was improperly installed, or you haven't "
+"installed the \"gnome-themes\" package."
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-manager.c:662
+#: capplets/theme-switcher/gnome-theme-manager.c:722
+#, fuzzy
+msgid "Custom theme"
+msgstr "カスタム"
+
+#: capplets/theme-switcher/gnome-theme-manager.c:662
+#: capplets/theme-switcher/gnome-theme-manager.c:722
+msgid "You can save this theme by pressing the Save Theme button."
 msgstr ""
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
@@ -2167,7 +2197,7 @@ msgstr ""
 msgid "_Save"
 msgstr "状態"
 
-#: capplets/windows/gnome-window-properties.c:352
+#: capplets/windows/gnome-window-properties.c:378
 #, c-format
 msgid ""
 "<b>Cannot start the preferences application for your window manager</b>\n"
@@ -2175,27 +2205,26 @@ msgid ""
 "%s"
 msgstr ""
 
-#: capplets/windows/gnome-window-properties.c:575
+#: capplets/windows/gnome-window-properties.c:624
 #, fuzzy
 msgid "Control"
 msgstr "一般"
 
-#: capplets/windows/gnome-window-properties.c:580
+#: capplets/windows/gnome-window-properties.c:629
 msgid "Alt"
 msgstr ""
 
-#: capplets/windows/gnome-window-properties.c:586
+#: capplets/windows/gnome-window-properties.c:635
 #, fuzzy
 msgid "Hyper"
 msgstr "MIME型"
 
-#: capplets/windows/gnome-window-properties.c:593
-#, fuzzy
-msgid "Super"
-msgstr "速度"
+#: capplets/windows/gnome-window-properties.c:642
+msgid "Super (or \"Windows logo\")"
+msgstr ""
 
 #: capplets/windows/gnome-window-properties.glade.h:1
-msgid "To _move windows, click while holding down:"
+msgid "To _move a window, press-and-hold this key then grab the window:"
 msgstr ""
 
 #: capplets/windows/gnome-window-properties.glade.h:2
@@ -2204,19 +2233,20 @@ msgid "Window Preferences"
 msgstr "バックグラウンドの色"
 
 #: capplets/windows/gnome-window-properties.glade.h:3
-msgid "_Double-click window titles to:"
+msgid "_Double-click titlebar to perform this action:"
 msgstr ""
 
 #: capplets/windows/gnome-window-properties.glade.h:4
-msgid "_Raise selected windows after a short time"
-msgstr ""
+#, fuzzy
+msgid "_Interval before raising:"
+msgstr "リピートまでの間隔"
 
 #: capplets/windows/gnome-window-properties.glade.h:5
-msgid "_Select windows when the mouse moves over them"
+msgid "_Raise selected windows after an interval"
 msgstr ""
 
 #: capplets/windows/gnome-window-properties.glade.h:6
-msgid "_Tenths of a second before raising the window:"
+msgid "_Select windows when the mouse moves over them"
 msgstr ""
 
 #: capplets/windows/window-properties.desktop.in.h:1
@@ -2454,9 +2484,93 @@ msgstr ""
 msgid "Roll up"
 msgstr ""
 
+#: schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:1
+msgid ""
+"If true, the mime handlers for text/plain and text/* will be kept in sync"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:2
+msgid "Sync text/plain and text/* handlers"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:1
+msgid "Display a dialog when there are errors running XScreenSaver"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:2
 #, fuzzy
-#~ msgid "Apply _Background"
+msgid "Run XScreenSaver at login"
+msgstr "スクリーンセーバーの選択"
+
+#: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:3
+#, fuzzy
+msgid "Show Startup Errors"
+msgstr "スタートアッププログラムの追加"
+
+#: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:4
+#, fuzzy
+msgid "Start XScreenSaver"
+msgstr "スクリーンセーバー起動までの時間"
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:1
+msgid "Antialiasing"
+msgstr ""
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:2
+msgid "DPI"
+msgstr ""
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:3
+#, fuzzy
+msgid "Hinting"
+msgstr "設定"
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:4
+#, fuzzy
+msgid "RGBA Order"
+msgstr "順番"
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:5
+msgid ""
+"Resolution used for converting font sizes to pixel sizes, in dots per inch"
+msgstr ""
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:6
+msgid ""
+"The order of subpixel elements on an LCD screen; only used when antialiasing "
+"is set to \"rgba\". Possible values are: \"rgb\" - red on left, most common. "
+"\"bgr\" - blue on left. \"vrgb\" - red on top. \"vbgr\" - red on bottom."
+msgstr ""
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:7
+msgid ""
+"The type of antialiasing to use when rendering fonts. Possible values are: "
+"\"none\" - no antialiasing. \"grayscale\" - standard grayscale antialiasing. "
+"\"rgba\" - subpixel antialiasing. (LCD screens only)."
+msgstr ""
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:8
+msgid ""
+"The type of hinting to use when rendering fonts. Possible values are: \"none"
+"\" - no hinting, \"slight\", \"medium\", and \"full\" - as much hinting as "
+"possible; may cause distortion of letter forms."
+msgstr ""
+
+#, fuzzy
+#~ msgid "Use _Background"
 #~ msgstr "バックグラウンド"
+
+#, fuzzy
+#~ msgid "Use _Font"
+#~ msgstr "ユーザーフォント"
+
+#, fuzzy
+#~ msgid "Use _background"
+#~ msgstr "バックグラウンド"
+
+#, fuzzy
+#~ msgid "Super"
+#~ msgstr "速度"
 
 #, fuzzy
 #~ msgid "Beep when enabling/disabling _keyboard accessibility features"
@@ -2643,10 +2757,6 @@ msgstr ""
 #~ msgid "_Custom keyboard bell:"
 #~ msgstr "キーボード・ベル"
 
-#, fuzzy
-#~ msgid "_Delay before repeating:"
-#~ msgstr "リピートまでの間隔"
-
 #~ msgid "Keyboard Properties"
 #~ msgstr "キーボードの設定"
 
@@ -2725,10 +2835,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Panel"
 #~ msgstr "キャンセル"
-
-#, fuzzy
-#~ msgid "Startup Programs"
-#~ msgstr "スタートアッププログラムの追加"
 
 #, fuzzy
 #~ msgid "Select an icon..."
@@ -2994,10 +3100,6 @@ msgstr ""
 #~ msgid "_Sound"
 #~ msgstr "サウンド"
 
-#, fuzzy
-#~ msgid "Theme Properties"
-#~ msgstr "マウスの設定"
-
 #~ msgid "At the center of the screen"
 #~ msgstr "画面中央"
 
@@ -3198,10 +3300,6 @@ msgstr ""
 
 #~ msgid "Close"
 #~ msgstr "閉じる"
-
-#, fuzzy
-#~ msgid "Main Settings"
-#~ msgstr "設定"
 
 #, fuzzy
 #~ msgid "Roll back all configuration items"
@@ -3649,10 +3747,6 @@ msgstr ""
 #~ msgstr "スクリーンセーバーを新規に追加"
 
 #, fuzzy
-#~ msgid "S_tart screensaver after "
-#~ msgstr "スクリーンセーバー起動までの時間"
-
-#, fuzzy
 #~ msgid "S_witch screensavers after "
 #~ msgstr "スクリーンセーバー切替の間隔"
 
@@ -3769,9 +3863,6 @@ msgstr ""
 #~ msgid "Demo Previous"
 #~ msgstr "前のをデモ"
 
-#~ msgid "Screensaver Selection"
-#~ msgstr "スクリーンセーバーの選択"
-
 #~ msgid "Security"
 #~ msgstr "セキュリティ"
 
@@ -3853,9 +3944,6 @@ msgstr ""
 
 #~ msgid "This column gives the command used to start a program."
 #~ msgstr "このカラムはプログラムを起動するための命令を表示します。"
-
-#~ msgid "Order"
-#~ msgstr "順番"
 
 #~ msgid "Style"
 #~ msgstr "スタイル"

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.5.6\n"
-"POT-Creation-Date: 2002-11-23 21:17-0500\n"
+"POT-Creation-Date: 2003-01-10 10:20-0500\n"
 "PO-Revision-Date: 2002-09-04 19:06-0300\n"
 "Last-Translator: Gustavo Noronha Silva <kov@debian.org>\n"
 "Language-Team: Debian-BR <debian-l10n-portuguese@lists.debian.org>, "
@@ -17,19 +17,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:237
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:238
 #, fuzzy, c-format
 msgid "There was an error launching the mouse preferences dialog: %s"
 msgstr "Houve um erro ao lançar o capplet de teclado: %s"
 
 # SUN NEW TRANSLATION
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:331
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:389
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:334
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:392
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "Não é possível importar as configurações do AccessX do arquivo '%s'"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:462
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:465
 msgid "Select CDE AccessX file"
 msgstr "Selecione o arquivo CDE AccessX"
 
@@ -46,7 +46,7 @@ msgstr "Defina suas preferências de acessibilidade ao teclado"
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.c:57
 msgid ""
 "This system does not seem to have the XKB extension.  The keyboard "
-"accessibility features will not operate with it."
+"accessibility features will not operate without it."
 msgstr ""
 
 # SUN NEW TRANSLATION
@@ -55,6 +55,7 @@ msgstr ""
 #: capplets/file-types/file-types-properties.glade.h:1
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: capplets/network/gnome-network-preferences.glade.h:2
+#: capplets/theme-switcher/theme-properties.glade.h:1
 #: capplets/theme-switcher/theme-install.glade.h:1
 msgid "*"
 msgstr "*"
@@ -286,6 +287,7 @@ msgstr "pixels/s"
 
 # SUN NEW TRANSLATION
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:42
+#: capplets/windows/gnome-window-properties.glade.h:7
 msgid "seconds"
 msgstr "segundos"
 
@@ -346,8 +348,8 @@ msgstr "Selecione _foto:"
 #: capplets/background/background-properties-capplet.c:567
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:712
-#: capplets/keyboard/gnome-keyboard-properties.c:294
-#: capplets/mouse/gnome-mouse-properties.c:751
+#: capplets/keyboard/gnome-keyboard-properties.c:290
+#: capplets/mouse/gnome-mouse-properties.c:712
 #: capplets/sound/sound-properties-capplet.c:149
 msgid "Retrieve and store legacy settings"
 msgstr "Recuperar e armazenar as configurações legadas"
@@ -903,7 +905,7 @@ msgstr "Minimizando e Maximizando"
 
 # SUN NEW TRANSLATION
 #: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
-#: capplets/windows/gnome-window-properties.c:600
+#: capplets/windows/gnome-window-properties.c:649
 msgid "Meta"
 msgstr "Meta"
 
@@ -1478,7 +1480,7 @@ msgid "The type of accelerator."
 msgstr "O tipo de atalho."
 
 #: capplets/keybindings/eggcellrendererkeys.c:219
-#: capplets/keybindings/gnome-keybinding-properties.c:181
+#: capplets/keybindings/gnome-keybinding-properties.c:204
 #: libbackground/applier.c:588
 msgid "Disabled"
 msgstr "Desativado"
@@ -1495,30 +1497,32 @@ msgid "Type a new accelerator"
 msgstr "Digite um novo atalho"
 
 # SUN NEW TRANSLATION
-#: capplets/keybindings/gnome-keybinding-properties.c:448
+#: capplets/keybindings/gnome-keybinding-properties.c:540
 msgid "<Unknown Action>"
 msgstr "<Ação Desconhecida>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:467
+#: capplets/keybindings/gnome-keybinding-properties.c:559
 msgid "Desktop"
 msgstr "Desktop"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:471
+#: capplets/keybindings/gnome-keybinding-properties.c:563
 msgid "Window Management"
 msgstr "Gerenciamento de Janelas"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:593
+#: capplets/keybindings/gnome-keybinding-properties.c:698
 #, c-format
-msgid "That accelerator key is already in use by: %s\n"
+msgid ""
+"The shortcut \"%s\" is already used for:\n"
+" \"%s\"\n"
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:620
+#: capplets/keybindings/gnome-keybinding-properties.c:729
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Erro definindo novo atalho na base de dados de configuração: %s\n"
 
 # SUN NEW TRANSLATION
-#: capplets/keybindings/gnome-keybinding-properties.c:771
+#: capplets/keybindings/gnome-keybinding-properties.c:880
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1527,11 +1531,11 @@ msgstr ""
 "instalação do GTK+ está incompleta."
 
 # SUN NEW TRANSLATION
-#: capplets/keybindings/gnome-keybinding-properties.c:793
+#: capplets/keybindings/gnome-keybinding-properties.c:902
 msgid "Action"
 msgstr "Ação"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:811
+#: capplets/keybindings/gnome-keybinding-properties.c:921
 msgid "Shortcut"
 msgstr "Atalho"
 
@@ -1556,18 +1560,18 @@ msgstr "Atalhos de edição de _texto:"
 msgid "Assign shortcut keys to commands"
 msgstr "Designar teclas de atalhos a comandos"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:160
+#: capplets/keyboard/gnome-keyboard-properties.c:162
 #, c-format
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "Houve um erro ao lançar o capplet de teclado: %s"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:273
+#: capplets/keyboard/gnome-keyboard-properties.c:269
 msgid "_Accessibility"
 msgstr "_Acessibilidade"
 
 # SUN NEW TRANSLATION
-#: capplets/keyboard/gnome-keyboard-properties.c:290
-#: capplets/keyboard/gnome-keyboard-properties.c:292
+#: capplets/keyboard/gnome-keyboard-properties.c:286
+#: capplets/keyboard/gnome-keyboard-properties.c:288
 #: capplets/sound/sound-properties-capplet.c:145
 #: capplets/sound/sound-properties-capplet.c:147
 msgid ""
@@ -1670,7 +1674,7 @@ msgid "Set your keyboard preferences"
 msgstr "Definir suas preferências de teclado"
 
 # SUN NEW TRANSLATION
-#: capplets/mouse/gnome-mouse-properties.c:476
+#: capplets/mouse/gnome-mouse-properties.c:437
 #, c-format
 msgid ""
 "<b>Unknown Cursor</b>\n"
@@ -1680,7 +1684,7 @@ msgstr ""
 "%s"
 
 # SUN NEW TRANSLATION
-#: capplets/mouse/gnome-mouse-properties.c:577
+#: capplets/mouse/gnome-mouse-properties.c:538
 msgid ""
 "<b>Default Cursor - Current</b>\n"
 "The default cursor that ships with X"
@@ -1689,7 +1693,7 @@ msgstr ""
 "O cursor padrão fornecido com X"
 
 # SUN NEW TRANSLATION
-#: capplets/mouse/gnome-mouse-properties.c:580
+#: capplets/mouse/gnome-mouse-properties.c:541
 msgid ""
 "<b>Default Cursor</b>\n"
 "The default cursor that ships with X"
@@ -1698,7 +1702,7 @@ msgstr ""
 "O cursor padrão fornecido com X"
 
 # SUN NEW TRANSLATION
-#: capplets/mouse/gnome-mouse-properties.c:598
+#: capplets/mouse/gnome-mouse-properties.c:559
 msgid ""
 "<b>White Cursor - Current</b>\n"
 "The default cursor inverted"
@@ -1707,7 +1711,7 @@ msgstr ""
 "O cursor padrão invertido"
 
 # SUN NEW TRANSLATION
-#: capplets/mouse/gnome-mouse-properties.c:601
+#: capplets/mouse/gnome-mouse-properties.c:562
 msgid ""
 "<b>White Cursor</b>\n"
 "The default cursor inverted"
@@ -1716,7 +1720,7 @@ msgstr ""
 "O cursor padrão invertido"
 
 # SUN NEW TRANSLATION
-#: capplets/mouse/gnome-mouse-properties.c:619
+#: capplets/mouse/gnome-mouse-properties.c:580
 msgid ""
 "<b>Large Cursor - Current</b>\n"
 "Large version of normal cursor"
@@ -1725,7 +1729,7 @@ msgstr ""
 "Versão grande do cursor normal"
 
 # SUN NEW TRANSLATION
-#: capplets/mouse/gnome-mouse-properties.c:622
+#: capplets/mouse/gnome-mouse-properties.c:583
 msgid ""
 "<b>Large Cursor</b>\n"
 "Large version of normal cursor"
@@ -1734,7 +1738,7 @@ msgstr ""
 "Versão grande do cursor normal"
 
 # SUN NEW TRANSLATION
-#: capplets/mouse/gnome-mouse-properties.c:640
+#: capplets/mouse/gnome-mouse-properties.c:601
 msgid ""
 "<b>Large White Cursor - Current</b>\n"
 "Large version of white cursor"
@@ -1743,7 +1747,7 @@ msgstr ""
 "Versão grande do cursor branco"
 
 # SUN NEW TRANSLATION
-#: capplets/mouse/gnome-mouse-properties.c:643
+#: capplets/mouse/gnome-mouse-properties.c:604
 msgid ""
 "<b>Large White Cursor</b>\n"
 "Large version of white cursor"
@@ -2084,85 +2088,102 @@ msgid "Select themes for various parts of the desktop"
 msgstr "Selecionar temas para várias partes do desktop"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
-#: capplets/theme-switcher/theme-properties.glade.h:4
 msgid "Theme"
 msgstr "Tema"
 
+#: capplets/theme-switcher/theme-properties.glade.h:2
+msgid "<span size=\"larger\" weight=\"bold\">Save theme to disk</span>"
+msgstr ""
+
 # SUN NEW TRANSLATION
-#: capplets/theme-switcher/theme-properties.glade.h:1
+#: capplets/theme-switcher/theme-properties.glade.h:3
+#, fuzzy
+msgid "Apply _Background"
+msgstr "Plano de Fundo"
+
+#: capplets/theme-switcher/theme-properties.glade.h:4
+#, fuzzy
+msgid "Apply _Font"
+msgstr "Aplicar Agora"
+
+# SUN NEW TRANSLATION
+#: capplets/theme-switcher/theme-properties.glade.h:5
 #, fuzzy
 msgid "Controls"
 msgstr "Controle da Interface de Usuário"
 
 # SUN NEW TRANSLATION
-#: capplets/theme-switcher/theme-properties.glade.h:2
+#: capplets/theme-switcher/theme-properties.glade.h:6
 #, fuzzy
 msgid "Icons"
 msgstr "Somente Ícones"
 
-#: capplets/theme-switcher/theme-properties.glade.h:3
+#: capplets/theme-switcher/theme-properties.glade.h:7
 msgid "New themes can also be installed by dragging them into the window."
 msgstr ""
 "Novos temas podem também ser instalados arrastando-os para esta janela."
 
-#: capplets/theme-switcher/theme-properties.glade.h:5
+#: capplets/theme-switcher/theme-properties.glade.h:8
+#, fuzzy
+msgid "Short _Description:"
+msgstr "_Descrição"
+
+#: capplets/theme-switcher/theme-properties.glade.h:9
+#, fuzzy
+msgid "Theme Details"
+msgstr "Gerenciador de propriedades da área de trabalho."
+
+#: capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Theme Preferences"
 msgstr "Preferências do Tema"
 
-#: capplets/theme-switcher/theme-properties.glade.h:6
+#: capplets/theme-switcher/theme-properties.glade.h:11
+#, fuzzy
 msgid ""
-"This theme suggests a matching\n"
+"This theme suggests a\n"
 "background:"
-msgstr ""
+msgstr "Personalizar o fundo de tela do seu desktop"
 
-#: capplets/theme-switcher/theme-properties.glade.h:8
+#: capplets/theme-switcher/theme-properties.glade.h:13
 msgid ""
-"This theme suggests a matching\n"
+"This theme suggests a\n"
 "font and background"
 msgstr ""
 
-#: capplets/theme-switcher/theme-properties.glade.h:10
-msgid "This theme suggests a matching font:"
-msgstr ""
-
-# SUN NEW TRANSLATION
-#: capplets/theme-switcher/theme-properties.glade.h:11
-#, fuzzy
-msgid "Use _Background"
-msgstr "Plano de Fundo"
-
-#: capplets/theme-switcher/theme-properties.glade.h:12
-#, fuzzy
-msgid "Use _Font"
-msgstr "Fonte"
-
-#: capplets/theme-switcher/theme-properties.glade.h:13
-msgid "Use _Font "
-msgstr ""
-
-# SUN NEW TRANSLATION
-#: capplets/theme-switcher/theme-properties.glade.h:14
-#, fuzzy
-msgid "Use _background"
-msgstr "Plano de Fundo"
-
 #: capplets/theme-switcher/theme-properties.glade.h:15
+msgid ""
+"This theme suggests a\n"
+"font:"
+msgstr ""
+
+#: capplets/theme-switcher/theme-properties.glade.h:17
 #, fuzzy
 msgid "Window Border"
 msgstr "Tema da Borda da Janela"
 
-#: capplets/theme-switcher/theme-properties.glade.h:16
+#: capplets/theme-switcher/theme-properties.glade.h:18
+#, fuzzy
+msgid "_Details..."
+msgstr "De_talhes..."
+
+#: capplets/theme-switcher/theme-properties.glade.h:19
 msgid "_Go to theme folder"
 msgstr "_Ir para a pasta de temas"
 
-#: capplets/theme-switcher/theme-properties.glade.h:17
-msgid "_Install New Theme..."
+#: capplets/theme-switcher/theme-properties.glade.h:20
+#, fuzzy
+msgid "_Install theme..."
 msgstr "_Instalar Novo Tema..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:18
+#: capplets/theme-switcher/theme-properties.glade.h:21
 #, fuzzy
-msgid "_Save Theme"
+msgid "_Save theme"
 msgstr "Tema"
+
+#: capplets/theme-switcher/theme-properties.glade.h:22
+#, fuzzy
+msgid "_Theme name:"
+msgstr "_Nome de Usuário:"
 
 #: capplets/theme-switcher/theme-install.glade.h:2
 msgid "Install new theme"
@@ -2176,15 +2197,24 @@ msgstr "_Instalar"
 msgid "_Location of new theme:"
 msgstr "_Localização do novo tema:"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:615
-#, fuzzy
-msgid "Current modified"
-msgstr "Índice URI atual."
-
-#: capplets/theme-switcher/gnome-theme-manager.c:634
+#: capplets/theme-switcher/gnome-theme-details.c:329
+#: capplets/theme-switcher/gnome-theme-manager.c:606
 msgid ""
 "No themes could be found on your system.  This probably means that your "
-"\"Theme Preferences\" dialog was improperly installed."
+"\"Theme Preferences\" dialog was improperly installed, or you haven't "
+"installed the \"gnome-themes\" package."
+msgstr ""
+
+# SUN NEW TRANSLATION
+#: capplets/theme-switcher/gnome-theme-manager.c:662
+#: capplets/theme-switcher/gnome-theme-manager.c:722
+#, fuzzy
+msgid "Custom theme"
+msgstr "Tema do Cursor"
+
+#: capplets/theme-switcher/gnome-theme-manager.c:662
+#: capplets/theme-switcher/gnome-theme-manager.c:722
+msgid "You can save this theme by pressing the Save Theme button."
 msgstr ""
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
@@ -2336,7 +2366,7 @@ msgstr "_Sair"
 msgid "_Save"
 msgstr "_Salvar"
 
-#: capplets/windows/gnome-window-properties.c:352
+#: capplets/windows/gnome-window-properties.c:378
 #, c-format
 msgid ""
 "<b>Cannot start the preferences application for your window manager</b>\n"
@@ -2345,29 +2375,28 @@ msgid ""
 msgstr ""
 
 # SUN NEW TRANSLATION
-#: capplets/windows/gnome-window-properties.c:575
+#: capplets/windows/gnome-window-properties.c:624
 #, fuzzy
 msgid "Control"
 msgstr "Controle da Interface de Usuário"
 
-#: capplets/windows/gnome-window-properties.c:580
+#: capplets/windows/gnome-window-properties.c:629
 #, fuzzy
 msgid "Alt"
 msgstr "Qualquer"
 
 # SUN NEW TRANSLATION
-#: capplets/windows/gnome-window-properties.c:586
+#: capplets/windows/gnome-window-properties.c:635
 #, fuzzy
 msgid "Hyper"
 msgstr "Tipo"
 
-#: capplets/windows/gnome-window-properties.c:593
-#, fuzzy
-msgid "Super"
-msgstr "Velocidade"
+#: capplets/windows/gnome-window-properties.c:642
+msgid "Super (or \"Windows logo\")"
+msgstr ""
 
 #: capplets/windows/gnome-window-properties.glade.h:1
-msgid "To _move windows, click while holding down:"
+msgid "To _move a window, press-and-hold this key then grab the window:"
 msgstr ""
 
 #: capplets/windows/gnome-window-properties.glade.h:2
@@ -2376,21 +2405,22 @@ msgstr "Preferências de Janelas"
 
 #: capplets/windows/gnome-window-properties.glade.h:3
 #, fuzzy
-msgid "_Double-click window titles to:"
+msgid "_Double-click titlebar to perform this action:"
 msgstr "Fonte do Título da _Janela:"
 
 #: capplets/windows/gnome-window-properties.glade.h:4
-msgid "_Raise selected windows after a short time"
-msgstr ""
+#, fuzzy
+msgid "_Interval before raising:"
+msgstr "Tempo de _Espera antes da repetição:"
 
 #: capplets/windows/gnome-window-properties.glade.h:5
+msgid "_Raise selected windows after an interval"
+msgstr ""
+
+#: capplets/windows/gnome-window-properties.glade.h:6
 #, fuzzy
 msgid "_Select windows when the mouse moves over them"
 msgstr "Selecionar janela quando o mouse passa para cima dela"
-
-#: capplets/windows/gnome-window-properties.glade.h:6
-msgid "_Tenths of a second before raising the window:"
-msgstr ""
 
 #: capplets/windows/window-properties.desktop.in.h:1
 msgid "Window Properties"
@@ -2655,14 +2685,97 @@ msgstr ""
 msgid "Roll up"
 msgstr ""
 
+#: schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:1
+msgid ""
+"If true, the mime handlers for text/plain and text/* will be kept in sync"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:2
+msgid "Sync text/plain and text/* handlers"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:1
+msgid "Display a dialog when there are errors running XScreenSaver"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:2
+msgid "Run XScreenSaver at login"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:3
+#, fuzzy
+msgid "Show Startup Errors"
+msgstr "Programas Iniciais"
+
+#: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:4
+#, fuzzy
+msgid "Start XScreenSaver"
+msgstr "Novo protetor de tela"
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:1
+msgid "Antialiasing"
+msgstr ""
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:2
+msgid "DPI"
+msgstr ""
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:3
+#, fuzzy
+msgid "Hinting"
+msgstr "Dicas:"
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:4
+msgid "RGBA Order"
+msgstr ""
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:5
+msgid ""
+"Resolution used for converting font sizes to pixel sizes, in dots per inch"
+msgstr ""
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:6
+msgid ""
+"The order of subpixel elements on an LCD screen; only used when antialiasing "
+"is set to \"rgba\". Possible values are: \"rgb\" - red on left, most common. "
+"\"bgr\" - blue on left. \"vrgb\" - red on top. \"vbgr\" - red on bottom."
+msgstr ""
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:7
+msgid ""
+"The type of antialiasing to use when rendering fonts. Possible values are: "
+"\"none\" - no antialiasing. \"grayscale\" - standard grayscale antialiasing. "
+"\"rgba\" - subpixel antialiasing. (LCD screens only)."
+msgstr ""
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:8
+msgid ""
+"The type of hinting to use when rendering fonts. Possible values are: \"none"
+"\" - no hinting, \"slight\", \"medium\", and \"full\" - as much hinting as "
+"possible; may cause distortion of letter forms."
+msgstr ""
+
 # SUN NEW TRANSLATION
 #, fuzzy
-#~ msgid "Apply _Background"
+#~ msgid "Use _Background"
 #~ msgstr "Plano de Fundo"
 
 #, fuzzy
-#~ msgid "Apply _Font"
-#~ msgstr "Aplicar Agora"
+#~ msgid "Use _Font"
+#~ msgstr "Fonte"
+
+# SUN NEW TRANSLATION
+#, fuzzy
+#~ msgid "Use _background"
+#~ msgstr "Plano de Fundo"
+
+#, fuzzy
+#~ msgid "Current modified"
+#~ msgstr "Índice URI atual."
+
+#, fuzzy
+#~ msgid "Super"
+#~ msgstr "Velocidade"
 
 # SUN NEW TRANSLATION
 #, fuzzy
@@ -3065,9 +3178,6 @@ msgstr ""
 #~ msgid "_Custom keyboard bell:"
 #~ msgstr "Sinal sonoro do teclado _personalizado:"
 
-#~ msgid "_Delay before repeating:"
-#~ msgstr "Tempo de _Espera antes da repetição:"
-
 #~ msgid "Keyboard Properties"
 #~ msgstr "Propriedades do Teclado"
 
@@ -3164,9 +3274,6 @@ msgstr ""
 #~ msgid "Configure which non-session aware programs are started up"
 #~ msgstr ""
 #~ "Configurar quais programas que não reconhecem sessões são inicializados"
-
-#~ msgid "Startup Programs"
-#~ msgstr "Programas Iniciais"
 
 #~ msgid "Select an icon..."
 #~ msgstr "Selecione um ícone..."
@@ -3531,10 +3638,6 @@ msgstr ""
 # SUN NEW TRANSLATION
 #~ msgid "&lt;i&gt;Small&lt;/i&gt;"
 #~ msgstr "&lt;i&gt;Pequeno&lt;/i&gt;"
-
-#, fuzzy
-#~ msgid "Theme Properties"
-#~ msgstr "Gerenciador de propriedades da área de trabalho."
 
 # SUN NEW TRANSLATION
 #~ msgid "Icons and Text"
@@ -4281,9 +4384,6 @@ msgstr ""
 
 #~ msgid "Select the screensaver to run from the list below:"
 #~ msgstr "Selecione o protetor de tela da lista abaixo:"
-
-#~ msgid "New screensaver"
-#~ msgstr "Novo protetor de tela"
 
 #, fuzzy
 #~ msgid "GNOME Control Center:"

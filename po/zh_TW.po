@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.1.5.1\n"
-"POT-Creation-Date: 2003-01-03 17:30+0800\n"
+"POT-Creation-Date: 2003-01-10 10:20-0500\n"
 "PO-Revision-Date: 2003-01-06 13:34+0800\n"
 "Last-Translator: Abel Cheung <maddog@linux.org.hk>\n"
 "Language-Team: traditional Chinese <zh-l10n@linux.org.tw>\n"
@@ -19,18 +19,18 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:237
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:238
 #, c-format
 msgid "There was an error launching the mouse preferences dialog: %s"
 msgstr "顯示滑鼠偏好設定對話窗時發生錯誤：%s"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:331
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:389
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:334
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:392
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "無法由檔案‘%s’匯入 AccessX 設定"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:462
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:465
 msgid "Select CDE AccessX file"
 msgstr "選擇 CDE AccessX 檔案"
 
@@ -47,7 +47,7 @@ msgstr "修改鍵盤輔助功能設定"
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.c:57
 msgid ""
 "This system does not seem to have the XKB extension.  The keyboard "
-"accessibility features will not operate with it."
+"accessibility features will not operate without it."
 msgstr "本系統似乎沒有 XKB 擴展功能。沒有了該功能，鍵盤輔助功能將無法使用。"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
@@ -283,8 +283,8 @@ msgstr "請選取圖案(_P)："
 #: capplets/background/background-properties-capplet.c:567
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:712
-#: capplets/keyboard/gnome-keyboard-properties.c:294
-#: capplets/mouse/gnome-mouse-properties.c:751
+#: capplets/keyboard/gnome-keyboard-properties.c:290
+#: capplets/mouse/gnome-mouse-properties.c:712
 #: capplets/sound/sound-properties-capplet.c:149
 msgid "Retrieve and store legacy settings"
 msgstr "讀入舊版本的設定"
@@ -1266,7 +1266,7 @@ msgid "The type of accelerator."
 msgstr ""
 
 #: capplets/keybindings/eggcellrendererkeys.c:219
-#: capplets/keybindings/gnome-keybinding-properties.c:202
+#: capplets/keybindings/gnome-keybinding-properties.c:204
 #: libbackground/applier.c:588
 msgid "Disabled"
 msgstr "已停用"
@@ -1280,19 +1280,19 @@ msgstr "請輸入新的快速鍵，或是按 Backspace 清除原有的按鍵"
 msgid "Type a new accelerator"
 msgstr "請輸入新的快速鍵"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:538
+#: capplets/keybindings/gnome-keybinding-properties.c:540
 msgid "<Unknown Action>"
 msgstr "<行動設定不詳>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:557
+#: capplets/keybindings/gnome-keybinding-properties.c:559
 msgid "Desktop"
 msgstr "桌面"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:561
+#: capplets/keybindings/gnome-keybinding-properties.c:563
 msgid "Window Management"
 msgstr "視窗管理"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:696
+#: capplets/keybindings/gnome-keybinding-properties.c:698
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1301,22 +1301,22 @@ msgstr ""
 "捷徑鍵“%s”己經使用於：\n"
 "“%s”\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:727
+#: capplets/keybindings/gnome-keybinding-properties.c:729
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "在組態資料庫中設定新的快速鍵時出現錯誤：%s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:878
+#: capplets/keybindings/gnome-keybinding-properties.c:880
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:900
+#: capplets/keybindings/gnome-keybinding-properties.c:902
 msgid "Action"
 msgstr "行動"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:919
+#: capplets/keybindings/gnome-keybinding-properties.c:921
 msgid "Shortcut"
 msgstr "捷徑鍵"
 
@@ -1341,17 +1341,17 @@ msgstr "編輯文字使用的捷徑鍵組合(_T)："
 msgid "Assign shortcut keys to commands"
 msgstr "為不同的指令分配捷徑鍵"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:160
+#: capplets/keyboard/gnome-keyboard-properties.c:162
 #, c-format
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "啟動鍵盤 capplet 時發生錯誤：%s"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:273
+#: capplets/keyboard/gnome-keyboard-properties.c:269
 msgid "_Accessibility"
 msgstr "輔助功能(_A)"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:290
-#: capplets/keyboard/gnome-keyboard-properties.c:292
+#: capplets/keyboard/gnome-keyboard-properties.c:286
+#: capplets/keyboard/gnome-keyboard-properties.c:288
 #: capplets/sound/sound-properties-capplet.c:145
 #: capplets/sound/sound-properties-capplet.c:147
 msgid ""
@@ -1446,7 +1446,7 @@ msgstr "靜"
 msgid "Set your keyboard preferences"
 msgstr "修改鍵盤偏好設定"
 
-#: capplets/mouse/gnome-mouse-properties.c:476
+#: capplets/mouse/gnome-mouse-properties.c:437
 #, c-format
 msgid ""
 "<b>Unknown Cursor</b>\n"
@@ -1455,7 +1455,7 @@ msgstr ""
 "<b>不明的鼠標</b>\n"
 "%s"
 
-#: capplets/mouse/gnome-mouse-properties.c:577
+#: capplets/mouse/gnome-mouse-properties.c:538
 msgid ""
 "<b>Default Cursor - Current</b>\n"
 "The default cursor that ships with X"
@@ -1463,7 +1463,7 @@ msgstr ""
 "<b>預設的鼠標 ─ 目前設定</b>\n"
 "X Window 預設使用的鼠標"
 
-#: capplets/mouse/gnome-mouse-properties.c:580
+#: capplets/mouse/gnome-mouse-properties.c:541
 msgid ""
 "<b>Default Cursor</b>\n"
 "The default cursor that ships with X"
@@ -1471,7 +1471,7 @@ msgstr ""
 "<b>預設的鼠標</b>\n"
 "X Window 預設使用的鼠標"
 
-#: capplets/mouse/gnome-mouse-properties.c:598
+#: capplets/mouse/gnome-mouse-properties.c:559
 msgid ""
 "<b>White Cursor - Current</b>\n"
 "The default cursor inverted"
@@ -1479,7 +1479,7 @@ msgstr ""
 "<b>白色鼠標 ─ 目前設定</b>\n"
 "和預設的鼠標顏色相反"
 
-#: capplets/mouse/gnome-mouse-properties.c:601
+#: capplets/mouse/gnome-mouse-properties.c:562
 msgid ""
 "<b>White Cursor</b>\n"
 "The default cursor inverted"
@@ -1487,7 +1487,7 @@ msgstr ""
 "<b>白色鼠標</b>\n"
 "和預設的鼠標顏色相反"
 
-#: capplets/mouse/gnome-mouse-properties.c:619
+#: capplets/mouse/gnome-mouse-properties.c:580
 msgid ""
 "<b>Large Cursor - Current</b>\n"
 "Large version of normal cursor"
@@ -1495,7 +1495,7 @@ msgstr ""
 "<b>大型鼠標 ─ 目前設定</b>\n"
 "比正常的鼠標較大"
 
-#: capplets/mouse/gnome-mouse-properties.c:622
+#: capplets/mouse/gnome-mouse-properties.c:583
 msgid ""
 "<b>Large Cursor</b>\n"
 "Large version of normal cursor"
@@ -1503,7 +1503,7 @@ msgstr ""
 "<b>大型鼠標</b>\n"
 "比正常的鼠標較大"
 
-#: capplets/mouse/gnome-mouse-properties.c:640
+#: capplets/mouse/gnome-mouse-properties.c:601
 msgid ""
 "<b>Large White Cursor - Current</b>\n"
 "Large version of white cursor"
@@ -1511,7 +1511,7 @@ msgstr ""
 "<b>大型白色鼠標 ─ 目前設定</b>\n"
 "比正常的白色鼠標較大"
 
-#: capplets/mouse/gnome-mouse-properties.c:643
+#: capplets/mouse/gnome-mouse-properties.c:604
 msgid ""
 "<b>Large White Cursor</b>\n"
 "Large version of white cursor"
@@ -1896,8 +1896,8 @@ msgstr "安裝(_I)"
 msgid "_Location of new theme:"
 msgstr "新佈景主題的位置(_L)："
 
-#: capplets/theme-switcher/gnome-theme-details.c:331
-#: capplets/theme-switcher/gnome-theme-manager.c:604
+#: capplets/theme-switcher/gnome-theme-details.c:329
+#: capplets/theme-switcher/gnome-theme-manager.c:606
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -1906,11 +1906,13 @@ msgstr ""
 "在系統中找不到任何佈景主題。這可能表示「佈景主題偏好設定」並未完全安裝好，或"
 "是您並未安裝“gnome-themes”套件。"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:654
+#: capplets/theme-switcher/gnome-theme-manager.c:662
+#: capplets/theme-switcher/gnome-theme-manager.c:722
 msgid "Custom theme"
 msgstr "自選佈景主題"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:654
+#: capplets/theme-switcher/gnome-theme-manager.c:662
+#: capplets/theme-switcher/gnome-theme-manager.c:722
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "您可按下「儲存佈景主題」按鈕來儲存這個佈景主題。"
 
@@ -2403,10 +2405,10 @@ msgid ""
 "possible; may cause distortion of letter forms."
 msgstr ""
 
-msgid ""
-"This system does not seem to have the XKB extension.  The keyboard "
-"accessibility features will not operate without it."
-msgstr "本系統似乎沒有 XKB 擴展功能。沒有了該功能，鍵盤輔助功能將無法使用。"
+#~ msgid ""
+#~ "This system does not seem to have the XKB extension.  The keyboard "
+#~ "accessibility features will not operate with it."
+#~ msgstr "本系統似乎沒有 XKB 擴展功能。沒有了該功能，鍵盤輔助功能將無法使用。"
 
 #~ msgid "_Location:"
 #~ msgstr "位置(_L)："
