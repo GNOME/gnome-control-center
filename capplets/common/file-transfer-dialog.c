@@ -370,10 +370,14 @@ file_transfer_dialog_update_cb (GnomeVFSAsyncHandle *handle,
 	case GNOME_VFS_XFER_PHASE_INITIAL:
 		gtk_label_set_text (GTK_LABEL (dlg->priv->status),
 				    _("Connecting..."));
+		gtk_window_set_title (GTK_WINDOW (dlg),
+				    _("Connecting..."));
 		break;
 	case GNOME_VFS_XFER_PHASE_READYTOGO:
 	case GNOME_VFS_XFER_PHASE_OPENSOURCE:
 		gtk_label_set_text (GTK_LABEL (dlg->priv->status),
+				    _("Downloading..."));
+		gtk_window_set_title (GTK_WINDOW (dlg),
 				    _("Downloading..."));
 		break;
 	case GNOME_VFS_XFER_PHASE_COMPLETED:
