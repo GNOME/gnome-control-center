@@ -1,6 +1,6 @@
 # control-center de.po
 # Copyright (C) 1998 Free Software Foundation, Inc.
-# Karl Eichwalder <ke@suse.de>, 1999.
+# Karl Eichwalder <ke@suse.de>, 1999, 2000.
 # Matthias Warkus <mawa@iname.com>, 1999.
 # Karsten Weiss <karsten@addx.au.s.shuttle.de>, 1999.
 # Carsten Schaar <nhadcasc@fs-maphy.uni-hannover.de>, 1998.
@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0.51\n"
-"POT-Creation-Date: 2000-02-21 19:30+0100\n"
-"PO-Revision-Date: 1999-09-21 18:58+02:00\n"
+"POT-Creation-Date: 2000-03-27 04:05+0200\n"
+"PO-Revision-Date: 2000-03-27 04:55+02:00\n"
 "Last-Translator: Karl Eichwalder <ke@suse.de>\n"
 "Language-Team: me and my monkey <mawa@iname.com>\n"
 "MIME-Version: 1.0\n"
@@ -347,18 +347,18 @@ msgid "Extension"
 msgstr "Suffixe"
 
 #: capplets/mime-type/mime-data.c:488
-msgid "You must enter a mime-type"
-msgstr "Sie müssen einen Mime-Typ angeben"
+msgid "You must enter a mime-type."
+msgstr "Sie müssen einen Mime-Typ angeben."
 
 #: capplets/mime-type/mime-data.c:493
 msgid ""
 "You must add either a regular-expression or\n"
-"a file-name extension"
+"a file-name extension."
 msgstr ""
 "Sie müssen entweder einen regulären Ausdruck\n"
-"oder ein Dateisuffix hinzufügen"
+"oder ein Dateisuffix hinzufügen."
 
-#: capplets/mime-type/mime-data.c:497
+#: capplets/mime-type/mime-data.c:498
 msgid ""
 "Please put your mime-type in the format:\n"
 "CATEGORY/TYPE\n"
@@ -372,48 +372,69 @@ msgstr ""
 "Zum Beispiel:\n"
 "image/png"
 
-#: capplets/mime-type/mime-data.c:502
-msgid "This mime-type already exists"
-msgstr "Dieser Mime-Typ existiert bereits"
+#: capplets/mime-type/mime-data.c:504
+msgid "This mime-type already exists."
+msgstr "Dieser Mime-Typ existiert bereits."
 
-#: capplets/mime-type/mime-data.c:583 capplets/mime-type/mime-info.c:423
+#: capplets/mime-type/mime-data.c:585
+msgid ""
+"We are unable to create the directory\n"
+"~/.gnome/mime-info.\n"
+"\n"
+"We will not be able to save the state."
+msgstr ""
+"Das Verzeichnis ~/.gnome/mime-info kann\n"
+"nicht angelegt werden.\n"
+"\n"
+"Es ist nicht möglich, den Status zu speichern."
+
+#: capplets/mime-type/mime-data.c:591
+msgid ""
+"We are unable to access the directory\n"
+"~/.gnome/mime-info.\n"
+"\n"
+"We will not be able to save the state."
+msgstr ""
+"Auf das Verzeichnis ~/.gnome/mime-info kann\n"
+"nicht zugegriffen werden.\n"
+"\n"
+"Es ist nicht möglich, den Status zu speichern."
+
+#: capplets/mime-type/mime-data.c:602
+msgid ""
+"Cannot create the file\n"
+"~/.gnome/mime-info/user.mime.\n"
+"\n"
+"We will not be able to save the state."
+msgstr ""
+"Die Datei ~/.gnome/mime-info/user.mime\n"
+"kann nicht erzeugt werden.\n"
+"\n"
+"Es ist nicht möglich, den Status zu speichern."
+
+#: capplets/mime-type/mime-info.c:423
 msgid ""
 "We are unable to create the directory\n"
 "~/.gnome/mime-info\n"
 "\n"
 "We will not be able to save the state."
 msgstr ""
-"Kann das Verzeichnis\n"
-"~/.gnome/mime-info\n"
-"nicht anlegen\n"
+"Das Verzeichnis ~/.gnome/mime-info kann\n"
+"nicht angelegt werden.\n"
 "\n"
-"Wir werden den Status nicht speichern können."
+"Es ist nicht möglich, den Status zu speichern."
 
-#: capplets/mime-type/mime-data.c:589 capplets/mime-type/mime-info.c:429
+#: capplets/mime-type/mime-info.c:429
 msgid ""
 "We are unable to access the directory\n"
 "~/.gnome/mime-info\n"
 "\n"
 "We will not be able to save the state."
 msgstr ""
-"Kann nicht auf das Verzeichnis\n"
-"~/.gnome/mime-info\n"
-"zugreifen\n"
+"Auf das Verzeichnis ~/.gnome/mime-info kann\n"
+"nicht zugegriffen werden.\n"
 "\n"
-"Wir werden den Status nicht speichern können"
-
-#: capplets/mime-type/mime-data.c:600
-msgid ""
-"Cannot create the file\n"
-"~/.gnome/mime-info/user.mime\n"
-"\n"
-"We will not be able to save the state"
-msgstr ""
-"Kann die Datei\n"
-"~/.gnome/mime-info/user.mime\n"
-"nicht erzeugen\n"
-"\n"
-"Wir werden den Status nicht speichern können"
+"Es ist nicht möglich, den Status zu speichern."
 
 #: capplets/mime-type/mime-info.c:440
 msgid ""
@@ -422,11 +443,10 @@ msgid ""
 "\n"
 "We will not be able to save the state"
 msgstr ""
-"Kann die Datei\n"
-"~/.gnome/mime-info/user.keys\n"
-"nicht erzeugen\n"
+"Die Datei ~/.gnome/mime-info/user.keys\n"
+"kann nicht erzeug werden.\n"
 "\n"
-"Wir werden den Status nicht speichern können"
+"Es ist nicht möglich, den Status zu speichern."
 
 #: capplets/mime-type/mime-type-capplet.c:79
 #: capplets/session-properties/session-properties.c:198
@@ -1321,10 +1341,7 @@ msgstr ""
 msgid "OK"
 msgstr "OK"
 
-# Checkit.
-# Where may I find the referenced menu entires? -ke-
 #: capplets/wm-properties/wm-properties-capplet.c:514
-#, fuzzy
 msgid ""
 "Your current window manager has been changed. In order for\n"
 "this change to be saved, you will need to save your current\n"
@@ -1334,12 +1351,13 @@ msgid ""
 "in the main menu, or by turning on \"Save Current Setup\" when\n"
 "you log out.\n"
 msgstr ""
-"Ihr aktueller Windowmanager wurde geändert.  Damit die Änderung\n"
-"gespreichert werden kann, müssen Sie Ihre aktuelle Sitzung\n"
-"speichern.  Dies kann entweder durch Auswahl von \"Aktuelle\n"
-"Sitzung speichern\" unter den \"Einstellungen\" im Hauptmenü oder\n"
-"durch Einschalten von \"Aktuelle Einstellung speichern\", wenn\n"
-"Sie sich abmelden.\n"
+"Ihr aktueller Windowmanager wurde geändert.  Damit die Änderung gespeichert\n"
+"werden kann, müssen Sie den Zustand Ihrer aktuellen Sitzung speichern.  Dies\n"
+"kann entweder durch Auswahl von \"Sitzung jetzt speichern\" sofort geschehen;\n"
+"oder Sie können die Sitzung später speichern.  Diese zweite Variante kann durch\n"
+"Auswahl von \"Aktuelle Einstellung speichern\" unter den \"Einstellungen\" im\n"
+"Hauptmenü oder durch Anwählen von \"Aktuelle Einstellung speichern\" geschehen,\n"
+"wenn Sie sich später abmelden.\n"
 
 #: capplets/wm-properties/wm-properties-capplet.c:521
 msgid "Save Session Later"
@@ -1349,10 +1367,7 @@ msgstr "Sitzung später speichern"
 msgid "Save Session Now"
 msgstr "Sitzung jetzt speichern"
 
-# Checkit.
-# Where may I find the referenced menu entires? -ke-
 #: capplets/wm-properties/wm-properties-capplet.c:524
-#, fuzzy
 msgid ""
 "Your current window manager has been changed. In order for\n"
 "this change to be saved, you will need to save your current\n"
@@ -1361,10 +1376,10 @@ msgid ""
 "\"Save Current Setup\" when you log out.\n"
 msgstr ""
 "Ihr aktueller Windowmanager wurde geändert.  Damit die Änderung\n"
-"gespreichert werden kann, müssen Sie Ihre aktuelle Sitzung\n"
+"gespeichert werden kann, müssen Sie Ihre aktuelle Sitzung\n"
 "speichern.  Dies kann entweder durch Auswahl von \"Aktuelle\n"
 "Sitzung speichern\" unter den \"Einstellungen\" im Hauptmenü oder\n"
-"durch Einschalten von \"Aktuelle Einstellung speichern\", wenn\n"
+"durch Anwählen von \"Aktuelle Einstellung speichern\", wenn\n"
 "Sie sich abmelden.\n"
 
 #: capplets/wm-properties/wm-properties-capplet.c:745
