@@ -30,7 +30,7 @@ pixmapsdir = $(GNOMECC_DATA_DIR)/icons
 desktop_files = $(capplets:=.desktop)
 desktop_in_files = $(desktop_files:.desktop=.desktop.in)
 
-cappletsdir = $(datadir)/control-center/capplets/Sawfish
+cappletsdir = $(datadir)/control-center-2/capplets/Sawfish
 capplets_DATA = $(desktop_files)
 
 EXTRA_DIST = $(desktop_in_files) Sawfish.directory.in.in $(pixmaps_DATA)
@@ -51,7 +51,7 @@ group_icon = sawfish-group.png
 groups_files = $(groups:=.directory)
 groups_in_files = $(groups_files:.directory=.directory.in)
 
-Gnomeccdir = $(datadir)/control-center/capplets/$(groups)
+Gnomeccdir = $(datadir)/control-center-2/capplets/$(groups)
 Gnomecc_DATA = $(groups_files)
 
 $(groups_in_files): %.directory.in: %.directory.in.in
