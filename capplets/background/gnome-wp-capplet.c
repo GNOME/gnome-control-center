@@ -351,10 +351,12 @@ static void gnome_wp_remove_wp (gchar * key, GnomeWPItem * item,
 
   if (item->rowref != NULL && item->deleted == FALSE) {
     path = gtk_tree_row_reference_get_path (item->rowref);
-    gtk_tree_model_get_iter (capplet->model, &iter, path);
-    gtk_tree_path_free (path);
+    if (path != NULL) {
+      gtk_tree_model_get_iter (capplet->model, &iter, path);
+      gtk_tree_path_free (path);
 
-    gtk_list_store_remove (GTK_LIST_STORE (capplet->model), &iter);
+      gtk_list_store_remove (GTK_LIST_STORE (capplet->model), &iter);
+    }
   }
 }
 
@@ -627,24 +629,8 @@ static gboolean gnome_wp_load_stuffs (void * data) {
 				item->scolor->green,
 				item->scolor->blue, 65535);
   } else if (strcmp (style, "none") != 0) {
-    item = gnome_wp_item_new (imagepath, capplet->wphash, capplet->thumbs);
-    if (item != NULL) {
-      wp_props_load_wallpaper (item->filename, item, capplet);
-
-      gnome_wp_capplet_scroll_to_item (capplet, item);
-
-      gnome_color_picker_set_i16 (GNOME_COLOR_PICKER (capplet->pc_picker),
-				  item->pcolor->red,
-				  item->pcolor->green,
-				  item->pcolor->blue, 65535);
-      gnome_color_picker_set_i16 (GNOME_COLOR_PICKER (capplet->sc_picker),
-				  item->scolor->red,
-				  item->scolor->green,
-				  item->scolor->blue, 65535);
-
-      gnome_wp_option_menu_set (capplet, item->options, FALSE);
-      gnome_wp_option_menu_set (capplet, item->shade_type, TRUE);
-    }
+    item = gnome_wp_add_image (capplet, imagepath);
+    gnome_wp_capplet_scroll_to_item (capplet, item);
   }
 
   item = g_hash_table_lookup (capplet->wphash, "(none)");
@@ -665,6 +651,11 @@ static gboolean gnome_wp_load_stuffs (void * data) {
   }
   g_free (imagepath);
   g_free (style);
+
+  if (capplet->uri_list) {
+    gnome_wp_add_images (capplet, capplet->uri_list);
+    g_slist_free (capplet->uri_list);
+  }
 
   return FALSE;
 }
@@ -714,12 +705,8 @@ static void gnome_wp_file_changed (GConfClient * client, guint id,
       if (item != NULL) {
 	gnome_wp_capplet_scroll_to_item (capplet, item);
       } else {
-	item = gnome_wp_item_new (wpfile, capplet->wphash, capplet->thumbs);
-	if (item != NULL) {
-	  wp_props_load_wallpaper (item->filename, item, capplet);
-      
-	  gnome_wp_capplet_scroll_to_item (capplet, item);
-	}
+	item = gnome_wp_add_image (capplet, wpfile);
+	gnome_wp_capplet_scroll_to_item (capplet, item);
       }
     }
     g_free (wpfile);
@@ -910,7 +897,7 @@ static void set_accessible_name (GtkWidget *widget, const gchar *name) {
     atk_object_set_name (obj, name);
 } 
   
-static void wallpaper_properties_init (void) {
+static void wallpaper_properties_init (poptContext ctx) {
   GnomeWPCapplet * capplet;
   GladeXML * dialog;
   GtkWidget * menu, * label;
@@ -922,6 +909,7 @@ static void wallpaper_properties_init (void) {
   GdkPixbuf * pixbuf;
   GdkCursor * cursor;
   gchar * icofile;
+  const gchar ** args;
 
   gtk_rc_parse_string ("style \"wp-tree-defaults\" {\n"
 		       "  GtkTreeView::horizontal-separator = 6\n"
@@ -1226,6 +1214,17 @@ static void wallpaper_properties_init (void) {
   gdk_window_set_cursor (capplet->window->window, cursor);
   gdk_cursor_unref (cursor);
 
+  args = poptGetArgs (ctx);
+  if (args != NULL) {
+    const gchar ** p;
+
+    for (p = args; *p != NULL; p++) {
+      capplet->uri_list = g_slist_append (capplet->uri_list, (gchar *) *p);
+    }
+  }
+
+  poptFreeContext (ctx);
+
   g_idle_add (gnome_wp_load_stuffs, capplet);
 
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (capplet->treeview));
@@ -1246,7 +1245,9 @@ static void wallpaper_properties_init (void) {
 }
 
 gint main (gint argc, gchar *argv[]) {
-  GnomeProgram * proggie;
+  GnomeProgram * program;
+  GValue context = { 0 };
+  poptContext ctx;
 
 #ifdef ENABLE_NLS
   bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
@@ -1254,11 +1255,16 @@ gint main (gint argc, gchar *argv[]) {
   textdomain (GETTEXT_PACKAGE);
 #endif
 
-  proggie = gnome_program_init (PACKAGE, VERSION, LIBGNOMEUI_MODULE,
+  program = gnome_program_init (PACKAGE, VERSION, LIBGNOMEUI_MODULE,
 				argc, argv, GNOME_PARAM_POPT_TABLE,
 				NULL, NULL);
 
-  wallpaper_properties_init ();
+  g_object_get_property (G_OBJECT (program), GNOME_PARAM_POPT_CONTEXT,
+			 g_value_init (&context, G_TYPE_POINTER));
+  ctx = g_value_get_pointer (&context);
+
+  wallpaper_properties_init (ctx);
+
   gtk_main ();
   
   return 0;

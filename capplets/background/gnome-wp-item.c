@@ -61,7 +61,7 @@ GnomeWPItem * gnome_wp_item_new (const gchar * filename,
     item->options = gconf_client_get_string (client, WP_OPTIONS_KEY, NULL);
 
     if (!strcmp (item->options, "none")) {
-      item->options = g_strdup ("wallpaper");
+      item->options = g_strdup ("scaled");
     }
     gnome_wp_item_update_description (item);
      
@@ -70,6 +70,8 @@ GnomeWPItem * gnome_wp_item_new (const gchar * filename,
     gnome_wp_item_free (item);
     item = NULL;
   }
+
+  g_object_unref (client);
 
   return item;
 }

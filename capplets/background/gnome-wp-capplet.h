@@ -42,6 +42,9 @@ typedef struct _GnomeWPCapplet GnomeWPCapplet;
 struct _GnomeWPCapplet {
   GtkWidget * window;
 
+  /* List of files passed to command line */
+  GSList * uri_list;
+
   /* The Tree View */
   GtkWidget * treeview;
   GtkTreeModel * model;

@@ -1,3 +1,23 @@
+2005-01-08  Rodney Dawes  <dobey@novell.com>
+
+	* background.desktop.in.in: Add %F to Exec command line
+
+	* gnome-wp-capplet.[ch] (gnome_wp_remove_wp): Check that the tree path
+	is not NULL before removing items from the list store
+	(gnome_wp_load_stuffs): Don't duplicate the code from
+	gnome_wp_add_image/gnome_wp_capplet_scroll_to_item  here
+	Load any images we were passed on the command line, and free the
+	GSList that they were stored in after doing so
+	(gnome_wp_file_changed): Clean up to just call gnome_wp_add_image and
+	gnome_wp_capplet_scroll_to_item rather than duplicating the code
+	(wallpaper_properties_init): Take a poptContext argument now
+	Parse the poptContext into a GSList for loading the images from
+	(main): Use a clearer variable name for the GnomeProgram object
+	Get the poptContext from the GnomeProgram object and pass it through
+	to wallpaper_properties_init
+
+	Fixes #120720
+
 2005-01-08  Thomas Wood  <thos@gnome.org>
 
 	* gnome-wp-xml.c (gnome_wp_xml_load_xml): Load translated XML
