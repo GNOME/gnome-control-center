@@ -32,11 +32,13 @@
 #include "screensaver-prefs-dialog.h"
 #include "selection-dialog.h" 
 #include "rc-parse.h"
-#include <gal/e-table/e-table.h>
-#include <gal/e-table/e-table-simple.h>
-#include <gal/widgets/e-unicode.h>
 
 #define WID(str) (glade_xml_get_widget (prefs_widget->priv->xml, str))
+
+#define CHECK_WIDTH 20
+
+#include "checked.xpm"
+#include "unchecked.xpm"
 
 static GtkVBoxClass *prefs_widget_parent_class;
 
@@ -49,8 +51,7 @@ enum {
 struct _PrefsWidgetPrivate
 {
 	GladeXML *xml;
-	ETableModel *etm;
-	GtkWidget *table;
+	GtkCList *clist;
 	guint random_timeout;
 	GList *random_current;
 	GtkWindow *parent;
@@ -61,8 +62,15 @@ struct _PrefsWidgetPrivate
 	time_t    standby_time;
 	time_t    suspend_time;
 	time_t    power_down_time;
+
+	/* Clist hack */
+	gboolean realized;
+	GdkPixmap *check;
+	GdkBitmap *cmask;
+	GdkPixmap *blank;
+	GdkBitmap *bmask;
 };
-	
+
 static gint prefs_widget_signals[LAST_SIGNAL] = { 0 };
 
 static void prefs_widget_init             (PrefsWidget *prefs_widget);
@@ -81,20 +89,17 @@ static void option_menu_connect           (GtkOptionMenu *menu,
 static void mode_changed_cb               (GtkWidget *widget,
 					   PrefsWidget *prefs_widget);
 
-static void selection_changed_cb          (ETable *table,
+static void selection_changed_cb          (GtkCList *clist,
+					   gint row, gint column,
+					   GdkEvent *event,
 					   PrefsWidget *prefs_widget);
-static void selection_foreach_func        (int model_row, int *closure);
-
+static void column_clicked_cb		  (GtkCList *clist, gint column,
+					   PrefsWidget *prefs_widget);
 static gint random_timeout_cb             (PrefsWidget *prefs_widget);
 static void set_random_timeout            (PrefsWidget *prefs_widget,
 					   gboolean do_random);
 
-static void popup_item_menu               (ETable *table,
-					   int row, int col, GdkEvent *event,
-					   PrefsWidget *prefs_widget);
-static void double_click_cb		  (ETable *table,
-					   int row, int col, GdkEvent *event,
-					   PrefsWidget *prefs_widget);
+static void double_click_cb		  (PrefsWidget *prefs_widget, int row);
 
 static void about_cb                      (GtkWidget *widget,
 					   PrefsWidget *prefs_widget);
@@ -117,8 +122,6 @@ static void pwr_set_toggled_entry         (PrefsWidget *prefs_widget,
 					   const gchar *entry_str,
 					   time_t value);
 
-static const gchar *table_compute_state   (SelectionMode mode);
-
 static void add_select_cb                 (GtkWidget *widget,
 					   Screensaver *saver,
 					   PrefsWidget *prefs_widget);
@@ -127,25 +130,13 @@ static void screensaver_add_cb            (GtkWidget *button,
 static void screensaver_remove_cb         (GtkWidget *button,
 					   PrefsWidget *prefs_widget);
 
-/* Model declarations */
-static int model_col_count                (ETableModel *etm, void *data);
-static int model_row_count                (ETableModel *etm, void *data);
-static void* model_value_at               (ETableModel *etm, int col, int row,
- 					   void *data);
-static void model_set_value_at            (ETableModel *etm, int col, int row,
-					   const void *val, void *data);
-static gboolean model_is_cell_editable    (ETableModel *etm, int col, int row,
-					   void *data);
-static void* model_duplicate_value        (ETableModel *etm, int col,
-					   const void *value, void *data);
-static void model_free_value              (ETableModel *etm, int col,
-					   void *value, void *data);
-static void* model_initialize_value       (ETableModel *etm, int col,
-					   void *data);
-static gboolean model_value_is_empty      (ETableModel *etm, int col,
-					   const void *value, void *data);
-static char* model_value_to_string        (ETableModel *etm, int col,
-					   const void *value, void *data);
+static void clist_set_state		  (PrefsWidget *prefs_widget,
+					   SelectionMode mode);
+static void reload_clist		  (PrefsWidget *prefs_widget);
+static void clist_toggle_state 		  (PrefsWidget *prefs_widget,
+					   int row, gboolean enable);
+static void realize_cb 			  (GtkWidget *clist,
+					   PrefsWidget *prefs_widget);
 
 guint prefs_widget_get_type (void)
 {
@@ -197,10 +188,8 @@ static void
 prefs_widget_init (PrefsWidget *prefs_widget)
 {
 	GtkWidget *widget;
-	GtkWidget *table;
-	gchar *skel, *spec;
-	gchar *titles[] = { N_("Use"), N_("Screensaver"), NULL };
-	int i;
+	GtkWidget *clist;
+	gchar *titles[] = { NULL, N_("Screensaver"), NULL };
 
 	prefs_widget->priv = g_new0 (PrefsWidgetPrivate, 1);
 	prefs_widget->priv->xml =
@@ -209,62 +198,38 @@ prefs_widget_init (PrefsWidget *prefs_widget)
 	if (!prefs_widget->priv->xml)
 		return;
 	
-	for (i = 0; titles[i] != NULL; i++)
-		titles[i] = gettext (titles[i]);
+	titles[1] = gettext (titles[1]);
 	
-	skel =
-"<ETableSpecification cursor-mode=\"line\" selection-mode=\"single\" draw-focus=\"true\">"
-" <ETableColumn model_col=\"0\" draw_grid=\"true\" _title=\"%s\" expansion=\"0.0\" minimum_width=\"20\" resizable=\"false\" cell=\"checkbox\" compare=\"integer\"/>"
-" <ETableColumn model_col=\"1\" draw_grid=\"true\" _title=\"%s\" expansion=\"1.0\" resizable=\"true\" cell=\"string\" compare=\"string\"/>"
-"  %s"
-"  </ETableSpecification>";
-
-	spec = g_strdup_printf (skel, titles[0], titles[1], table_compute_state (SM_CHOOSE_FROM_LIST));
-	prefs_widget->priv->etm =
-		e_table_simple_new (model_col_count, model_row_count,
-						NULL,
-						model_value_at, model_set_value_at,
-						model_is_cell_editable,
-						NULL, NULL,
-						model_duplicate_value, model_free_value,
-						model_initialize_value,
-						model_value_is_empty,
-						model_value_to_string,
-						prefs_widget);
-		
-	table = e_table_new (prefs_widget->priv->etm, NULL, spec, NULL);
-	prefs_widget->priv->table = table;
-
-	gtk_widget_show (table);
-	g_free (spec);
+	clist = gtk_clist_new_with_titles (2, titles);
+	prefs_widget->priv->clist = GTK_CLIST (clist);
+	gtk_clist_set_column_width (GTK_CLIST (clist), 0, CHECK_WIDTH);
+	gtk_clist_set_selection_mode (GTK_CLIST (clist), GTK_SELECTION_BROWSE);
 
 	widget = WID ("etable_scrolled");
-	gtk_container_add (GTK_CONTAINER (widget), table);
+	gtk_container_add (GTK_CONTAINER (widget), clist);
 	
 	widget = WID ("prefs_widget");
 	gtk_object_ref (GTK_OBJECT (widget));
 	gtk_container_remove (GTK_CONTAINER (WID ("throwaway_window")), widget);
 	gtk_widget_show_all (widget);
 	gtk_box_pack_start (GTK_BOX (prefs_widget), widget, TRUE, TRUE, 0);
-	gtk_object_ref (GTK_OBJECT (widget));
+	gtk_object_unref (GTK_OBJECT (widget));
 	
 	prefs_widget->preview_window = WID ("preview_window");
 
 	prefs_widget->priv->random_timeout = 0;
 
 	/* Signals */
-	gtk_signal_connect (GTK_OBJECT (table), "selection_change",
+	gtk_signal_connect (GTK_OBJECT (clist), "select-row",
 			    GTK_SIGNAL_FUNC (selection_changed_cb),
 			    prefs_widget);
-	/* Disabled for now -- no need for Add/Remove/About */
-#if 0
-	gtk_signal_connect (GTK_OBJECT (table), "right_click",
-			    GTK_SIGNAL_FUNC (popup_item_menu),
+	gtk_signal_connect (GTK_OBJECT (clist), "click-column",
+			    GTK_SIGNAL_FUNC (column_clicked_cb),
 			    prefs_widget);
-#endif
-	gtk_signal_connect (GTK_OBJECT (table), "double_click",
-			    GTK_SIGNAL_FUNC (double_click_cb),
+	gtk_signal_connect (GTK_OBJECT (clist), "realize",
+			    GTK_SIGNAL_FUNC (realize_cb),
 			    prefs_widget);
+	gtk_widget_show (clist);
 
 	widget = WID ("mode_option");
 	option_menu_connect (GTK_OPTION_MENU (widget),
@@ -490,11 +455,10 @@ prefs_widget_set_mode (PrefsWidget *prefs_widget, SelectionMode mode)
 	int count;
 
 	prefs_widget->selection_mode = mode;
-	e_table_set_state (E_TABLE (prefs_widget->priv->table),
-			   table_compute_state (mode));
+	clist_set_state (prefs_widget, mode);
 
-	count = e_table_selected_count (E_TABLE (prefs_widget->priv->table));
-
+	count = g_list_length (prefs_widget->priv->clist->selection);
+	
 	/* Das blinkenpreviews -- if nothing else selected */	
 	if (count || (mode != SM_CHOOSE_FROM_LIST && mode != SM_CHOOSE_RANDOMLY))
 		set_random_timeout (prefs_widget, FALSE);
@@ -541,8 +505,7 @@ prefs_widget_set_mode (PrefsWidget *prefs_widget, SelectionMode mode)
 			i++;
 		}
 			
-		e_selection_model_select_single_row (
-			E_SELECTION_MODEL (E_TABLE (prefs_widget->priv->table)->selection), row);
+		gtk_clist_select_row (prefs_widget->priv->clist, row, 1);
 	}
 
 	if (mode == SM_DISABLE_SCREENSAVER || mode == SM_BLANK_SCREEN)
@@ -552,28 +515,9 @@ prefs_widget_set_mode (PrefsWidget *prefs_widget, SelectionMode mode)
 void
 prefs_widget_set_screensavers (PrefsWidget *prefs_widget, GList *screensavers)
 {
-	int i;
-	GList *l;
-	Screensaver *saver;
-
-	if (prefs_widget->priv->translated)
-	{
-		for (i = 0; prefs_widget->priv->translated[i] != NULL; i++)
-			g_free (prefs_widget->priv->translated[i]);
-		g_free (prefs_widget->priv->translated);
-	}
-	
 	prefs_widget->screensavers = screensavers;
-	/* Good thing this is called infrequently */
-	prefs_widget->priv->translated = g_new0 (gchar*,
-			g_list_length (screensavers) + 1);
-	for (l = screensavers, i = 0; l != NULL; l = l->next, i++)
-	{
-		saver = l->data;
-		prefs_widget->priv->translated[i] = e_utf8_from_locale_string (gettext (saver->label));
-	}
-	
-	e_table_model_changed (prefs_widget->priv->etm);
+	if (prefs_widget->priv->check)
+		reload_clist (prefs_widget);
 }
 
 static void
@@ -594,127 +538,22 @@ set_random_timeout (PrefsWidget *prefs_widget, gboolean do_random)
 	}
 }
 
-static const gchar *
-table_compute_state (SelectionMode mode)
-{
-	if (mode != SM_CHOOSE_FROM_LIST)
-		return "<ETableState><column source=\"1\"/><grouping></grouping></ETableState>";
-	else return "<ETableState><column source=\"0\"/><column source=\"1\"/><grouping></grouping></ETableState>";
-}
-
-static int
-model_col_count (ETableModel *etm, void *data)
-{
-	return 2;
-}
-
-static int
-model_row_count (ETableModel *etm, void *data)
-{
-	PrefsWidget *prefs_widget = PREFS_WIDGET (data);
-
-	return g_list_length (prefs_widget->screensavers);
-}
-
-static void *
-model_value_at (ETableModel *etm, int col, int row, void *data)
-{
-	PrefsWidget *prefs_widget = PREFS_WIDGET (data);
-	Screensaver *saver = g_list_nth_data (prefs_widget->screensavers, row);
-	
-	if (!saver)
-		return NULL;
-	
-	if (col == 0)
-		return GINT_TO_POINTER (saver->enabled);
-	else
-	{
-		return prefs_widget->priv->translated[row]; 
-	}
-}
-
 static void
-model_set_value_at (ETableModel *etm,
-		    int col, int row,
-		    const void *val, void *data)
-{
-	PrefsWidget *prefs_widget = PREFS_WIDGET (data);
-	Screensaver *saver = g_list_nth_data (prefs_widget->screensavers, row);
-	
-	g_assert (col == 0);
-	
-	if (!saver)
-		return;
-
-	saver->enabled = GPOINTER_TO_INT (val);
-	state_changed_cb (GTK_WIDGET (prefs_widget), prefs_widget);
-}
-
-static gboolean
-model_is_cell_editable (ETableModel *etm, int col, int row, void *data)
-{
-	PrefsWidget *prefs_widget = PREFS_WIDGET (data);
-
-	if (prefs_widget->selection_mode == SM_CHOOSE_FROM_LIST)
-		return (col == 0);
-	else
-		return FALSE;
-}
-
-static void *
-model_duplicate_value (ETableModel *etm, int col, const void *value, void *data)
-{
-	if (col == 0)
-	{
-		int tmp = GPOINTER_TO_INT (value);
-		return GINT_TO_POINTER (tmp);
-	}
-	else
-		return g_strdup (value);
-}
-
-static void
-model_free_value (ETableModel *etm, int col, void *value, void *data)
-{
-	if (col != 0)
-		g_free (value);
-}
-
-static void *
-model_initialize_value (ETableModel *etm, int col, void *data)
-{
-	if (col == 0)
-		return GINT_TO_POINTER (0);
-	else
-		return g_strdup ("");
-}
-
-static gboolean
-model_value_is_empty (ETableModel *etm, int col, const void *value, void *data)
-{
-	if (col == 0)
-		return (!GPOINTER_TO_INT (value));
-	else
-		return (!(value && strcmp (value, "") != 0));
-}
-
-static char*
-model_value_to_string (ETableModel *etm, int col, const void *value, void *data)
-{
-	if (col == 0)
-		return g_strdup ("");
-	else
-		return g_strdup (value);
-}
-
-static void
-selection_changed_cb (ETable *table, PrefsWidget *prefs_widget)
+selection_changed_cb (GtkCList *clist, gint r, gint column, GdkEvent *event,
+		      PrefsWidget *prefs_widget)
 {
 	Screensaver *saver;
 	int row = -1;
 
-	e_table_selected_row_foreach (table, selection_foreach_func, &row);
-	
+	if (event && event->type == GDK_2BUTTON_PRESS)
+	{
+		double_click_cb (prefs_widget, row);
+		return;
+	}
+
+	if (GTK_CLIST (clist)->selection)
+		row = GPOINTER_TO_UINT (GTK_CLIST (clist)->selection->data);
+
 	if (row == -1
 	    && (prefs_widget->selection_mode == SM_CHOOSE_RANDOMLY
 		|| prefs_widget->selection_mode == SM_CHOOSE_FROM_LIST))
@@ -738,19 +577,10 @@ selection_changed_cb (ETable *table, PrefsWidget *prefs_widget)
 
 	prefs_widget->selected_saver = saver;	
 	if (prefs_widget->selection_mode == SM_ONE_SCREENSAVER_ONLY)
-		state_changed_cb (GTK_WIDGET (table), prefs_widget);
+		state_changed_cb (GTK_WIDGET (clist), prefs_widget);
 	if (prefs_widget->selection_mode != SM_DISABLE_SCREENSAVER &&
 	    prefs_widget->selection_mode != SM_BLANK_SCREEN)
 		show_preview (saver);
-}
-
-static void
-selection_foreach_func (int model_row, int *closure)
-{
-	g_return_if_fail (closure != NULL);
-
-	/* Selection mode is "single */
-	*closure = model_row;
 }
 
 static gint
@@ -886,21 +716,7 @@ mode_changed_cb (GtkWidget *widget, PrefsWidget *prefs_widget)
 }
 
 static void
-popup_item_menu (ETable *table,
-		 int row, int col, GdkEvent *event,
-		 PrefsWidget *prefs_widget)
-{
-	GtkWidget *menu = WID ("popup_menu");   
-	gtk_widget_show (menu);
-	gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL,
-			prefs_widget,
-			event->button.button, event->button.time);
-}
-
-static void
-double_click_cb (ETable *table,
-		 int row, int col, GdkEvent *event,
-		 PrefsWidget *prefs_widget)
+double_click_cb (PrefsWidget *prefs_widget, int row)
 {
 	settings_cb (NULL, prefs_widget);
 }
@@ -1153,8 +969,7 @@ screensaver_remove_cb (GtkWidget *button, PrefsWidget *prefs_widget)
 		else
 			row--;
 		
-		e_selection_model_select_single_row (
-			E_SELECTION_MODEL (E_TABLE (prefs_widget->priv->table)->selection), row);
+		gtk_clist_select_row (prefs_widget->priv->clist, row, 1);
 	}
 
 	state_changed_cb (button, prefs_widget);
@@ -1170,8 +985,83 @@ add_select_cb (GtkWidget *widget, Screensaver *saver,
 		screensaver_add (saver, prefs_widget->screensavers);
 
 	row = g_list_length (prefs_widget->screensavers) - 1;
-	e_selection_model_select_single_row (
-		E_SELECTION_MODEL (E_TABLE (prefs_widget->priv->table)->selection), row);
+	gtk_clist_select_row (prefs_widget->priv->clist, row, 1);
 
 	settings_cb (widget, prefs_widget);
 }
+
+static void
+column_clicked_cb (GtkCList *clist, gint column, PrefsWidget *prefs_widget)
+{
+	int i;
+	GList *l;
+	
+	if (column != 0)
+		return;
+	
+	i = 0;
+	for (l = prefs_widget->screensavers; l != NULL; l = l->next)
+	{
+		Screensaver *saver = l->data;
+		saver->enabled = !saver->enabled;
+		clist_toggle_state (prefs_widget, i, saver->enabled);
+		i++;
+	}
+}
+
+static void
+clist_set_state (PrefsWidget *prefs_widget, SelectionMode mode)
+{
+	gtk_clist_set_column_visibility (prefs_widget->priv->clist, 0,
+					 (mode == SM_CHOOSE_FROM_LIST));
+}
+
+static void
+reload_clist (PrefsWidget *prefs_widget)
+{
+	GList *l;
+	GtkCList *clist = prefs_widget->priv->clist;
+	int i;
+
+	gtk_clist_freeze (clist);
+	gtk_clist_clear (clist);
+	i = 0;
+	for (l = prefs_widget->screensavers; l != NULL; l = l->next)
+	{
+		Screensaver *saver = l->data;
+		gchar *text[3] = { NULL, NULL, NULL };
+		
+		text[1] = gettext (saver->label);
+		gtk_clist_append (clist, text);
+		clist_toggle_state (prefs_widget, i, saver->enabled);
+		i++;
+	}
+	gtk_clist_thaw (clist);
+}
+
+static void
+clist_toggle_state (PrefsWidget *prefs_widget, int row, gboolean enable)
+{
+	if (!prefs_widget->priv->check)
+		return;
+
+	if (enable)
+		gtk_clist_set_pixmap (prefs_widget->priv->clist, row, 0,
+			prefs_widget->priv->check, prefs_widget->priv->cmask);
+	else
+		gtk_clist_set_pixmap (prefs_widget->priv->clist, row, 0,
+			prefs_widget->priv->blank, prefs_widget->priv->bmask);
+}
+
+static void
+realize_cb (GtkWidget *clist, PrefsWidget *prefs_widget)
+{
+	prefs_widget->priv->check = gdk_pixmap_create_from_xpm_d (
+		clist->window, &prefs_widget->priv->cmask,
+		NULL, checked_xpm);
+	prefs_widget->priv->blank = gdk_pixmap_create_from_xpm_d (
+		clist->window, &prefs_widget->priv->bmask,
+		NULL, unchecked_xpm);
+	reload_clist (prefs_widget);
+}
+
