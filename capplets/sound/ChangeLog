@@ -1,6 +1,20 @@
 2001-07-10  Bradford Hovinen  <hovinen@ximian.com>
 
 	* sound-properties-capplet.c (set_moniker_cb): Make full moniker
+	(apply_settings): Release the return value
+	(main): Support --get-legacy option
+	(get_legacy_settings): Implement
+	(create_control_cb): Connect apply_cb
+	(COPY_FROM_LEGACY): Use bonobo_config_set_...
+	(main): Open config database regardless of what operation is
+	requested; pass to create_control callback
+	(apply_settings): Use bonobo_config_get_...
+	(get_legacy_settings): 
+	(apply_settings): Don't accept CORBA_Environment *ev any more
+	(create_control_cb): Store the config database in the property control
+	(apply_settings): Use the correct setting name
+	(apply_cb): Apply settings and sync
+	(apply_settings): Kill esd when requested
 
 	* sound-properties.xml: Fixed path name
 

@@ -384,7 +384,16 @@ get_root_capplet_dir (void)
 static void
 capplet_ok_cb (GtkWidget *widget, GtkWidget *app) 
 {
+	CORBA_Environment ev;
+	Bonobo_PropertyControl pc;
+
+	CORBA_exception_init (&ev);
+
+	pc = gtk_object_get_data (GTK_OBJECT (app), "property-control");
+	Bonobo_PropertyControl_notifyAction (pc, 0, Bonobo_PropertyControl_APPLY, &ev);
 	gtk_widget_destroy (app);
+
+	CORBA_exception_free (&ev);
 }
 
 static void
@@ -443,6 +452,7 @@ capplet_control_launch (const gchar *capplet_name)
 	/* FIXME: Use a human-readable capplet name here */
 	app = gnome_dialog_new (_("Capplet"), GNOME_STOCK_BUTTON_OK,
 				GNOME_STOCK_BUTTON_CANCEL, NULL);
+	gtk_object_set_data (GTK_OBJECT (app), "property-control", property_control);
 	control = bonobo_widget_new_control_from_objref (control_ref, CORBA_OBJECT_NIL);
 
 	if (control == NULL) {

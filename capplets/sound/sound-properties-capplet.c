@@ -1,7 +1,7 @@
 /* -*- mode: c; style: linux -*- */
 
 /* sound-properties-capplet.c
- * Copyright (C) 2000 Ximian, Inc.
+ * Copyright (C) 2001 Ximian, Inc.
  *
  * Written by Bradford Hovinen <hovinen@ximian.com>
  *
@@ -53,6 +53,27 @@
 #include <esd.h>
 #include <sys/types.h>
 
+/* Macros to make certain repetitive tasks a bit easier */
+
+/* Retrieve a widget from the Glade object */
+
+#define WID(s) glade_xml_get_widget (dialog, s)
+
+/* Copy a setting from the legacy gnome-config settings to the ConfigDatabase */
+
+#define COPY_FROM_LEGACY(type, key, legacy_type, legacy_key)                    \
+	val_##type = gnome_config_get_##legacy_type##_with_default              \
+                (legacy_key, &def);                                             \
+                                                                                \
+	if (!def)                                                               \
+		bonobo_config_set_##type (db, key, val_##type, NULL);           \
+
+/* Create a property editor */
+
+#define CREATE_PEDITOR(type, key, widget)                                       \
+	ed = BONOBO_PEDITOR (bonobo_peditor_##type##_construct (WID (widget))); \
+	bonobo_peditor_set_property (ed, proxy, key, TC_##type, NULL);          \
+
 static BonoboControl *control = NULL;
 static GladeXML      *dialog;
 static GtkWidget     *widget;
@@ -68,19 +89,64 @@ static void start_esd (void);
  */
 
 static void
-apply_settings (Bonobo_ConfigDatabase db, CORBA_Environment *ev) 
+apply_settings (Bonobo_ConfigDatabase db) 
 {
-	CORBA_any *value;
+	gboolean enable_esd;
 
-	value = Bonobo_ConfigDatabase_getValue (db, "enable_esd", NULL, ev);
+	enable_esd = bonobo_config_get_boolean (db, "/main/enable_esd", NULL);
 
-	if (BONOBO_EX (ev)) return;
-
-        if (BONOBO_ARG_GET_BOOLEAN (value) && gnome_sound_connection < 0)
+        if (enable_esd && gnome_sound_connection < 0)
                 start_esd ();
+
+	if (!enable_esd && gnome_sound_connection >= 0)
+		system ("killall esd");
 
 	/* I'm not going to deal with reloading samples until later. It's
 	 * entirely too painful */
+}
+
+/* apply_cb
+ *
+ * Callback issued when the user clicks "Apply" or "Ok". This function is
+ * responsible for making sure the current settings are properly applied. It
+ * does not vary between capplets.
+ */
+
+static void
+apply_cb (BonoboPropertyControl *pc, Bonobo_PropertyControl_Action action) 
+{
+	BonoboPropertyFrame *pf;
+	Bonobo_ConfigDatabase db;
+	CORBA_Environment ev;
+
+	if (action == Bonobo_PropertyControl_APPLY) {
+		CORBA_exception_init (&ev);
+
+		pf = gtk_object_get_data (GTK_OBJECT (pc), "property-frame");
+		db = gtk_object_get_data (GTK_OBJECT (pc), "config-database");
+		bonobo_pbproxy_update (pf->proxy);
+		apply_settings (db);
+		Bonobo_ConfigDatabase_sync (db, &ev);
+
+		CORBA_exception_free (&ev);
+	}
+}
+
+/* get_legacy_settings
+ *
+ * Retrieve older gnome_config -style settings and store them in the
+ * configuration database. This function is written per-capplet.
+ *
+ * In most cases, it's best to use the COPY_FROM_LEGACY macro defined above.
+ */
+
+static void
+get_legacy_settings (Bonobo_ConfigDatabase db) 
+{
+	gboolean val_boolean, def;
+
+	COPY_FROM_LEGACY (boolean, "enable_esd", bool, "/sound/system/settings/start_esd=false");
+	COPY_FROM_LEGACY (boolean, "event_sounds", bool, "/sound/system/settings/event_sounds=false");
 }
 
 /* start_esd
@@ -139,10 +205,6 @@ get_moniker_cb (BonoboPropertyBag *bag, BonoboArg *arg, guint arg_id,
  * labelled must be written once for each capplet.
  */
 
-/* Macro to make it easier to reference Glade widgets */
-
-#define WID(s) glade_xml_get_widget (dialog, s)
-
 static void
 set_moniker_cb (BonoboPropertyBag *bag, BonoboArg *arg, guint arg_id,
 		CORBA_Environment *ev, BonoboControl *control) 
@@ -166,11 +228,8 @@ set_moniker_cb (BonoboPropertyBag *bag, BonoboArg *arg, guint arg_id,
 
 	/* Begin per-capplet part */
 
-	ed = BONOBO_PEDITOR (bonobo_peditor_boolean_construct (WID ("enable_toggle")));
-	bonobo_peditor_set_property (ed, proxy, "start_esd", TC_boolean, NULL);
-
-	ed = BONOBO_PEDITOR (bonobo_peditor_boolean_construct (WID ("events_toggle")));
-	bonobo_peditor_set_property (ed, proxy, "event_sounds", TC_boolean, NULL);
+	CREATE_PEDITOR (boolean, "enable_esd", "enable_toggle");
+	CREATE_PEDITOR (boolean, "event_sound", "events_toggle");
 
 	/* End per-capplet part */
 }
@@ -195,17 +254,16 @@ close_cb (void)
  * whenever capplet activation is requested. Returns a BonoboObject representing
  * the control that encapsulates the object. This function should not vary from
  * capplet to capplet, though it assumes that the dialog data in the glade file
- * has the name "prefs_widget".  */
+ * has the name "prefs_widget".
+ */
 
 static BonoboObject *
-create_dialog_cb (BonoboPropertyControl *property_control, gint page_number, gpointer data) 
+create_dialog_cb (BonoboPropertyControl *property_control, gint page_number) 
 {
 	BonoboPropertyBag    *pb;
 	GtkWidget            *pf;
 
 	if (control == NULL) {
-		DEBUG_MSG ("Creating control");
-
 		dialog = glade_xml_new (GLADE_FILE, "prefs_widget");
 
 		if (dialog == NULL) {
@@ -220,9 +278,9 @@ create_dialog_cb (BonoboPropertyControl *property_control, gint page_number, gpo
 			return NULL;
 		}
 
-		DEBUG_MSG ("Loaded dialog: %p, %p", dialog, widget);
-
 		pf = bonobo_property_frame_new (NULL, NULL);
+		gtk_object_set_data (GTK_OBJECT (property_control),
+				     "property-frame", pf);
 		gtk_container_add (GTK_CONTAINER (pf), widget);
 		gtk_widget_show_all (pf);
 
@@ -259,11 +317,22 @@ create_dialog_cb (BonoboPropertyControl *property_control, gint page_number, gpo
  */
 
 static BonoboObject *
-create_control_cb (BonoboGenericFactory *factory, gpointer data) 
+create_control_cb (BonoboGenericFactory *factory, Bonobo_ConfigDatabase db) 
 {
-	return BONOBO_OBJECT (bonobo_property_control_new
-			      ((BonoboPropertyControlGetControlFn)
-			       create_dialog_cb, 1, NULL));
+	BonoboPropertyControl *property_control;
+	CORBA_Environment ev;
+
+	CORBA_exception_init (&ev);
+
+	property_control = bonobo_property_control_new
+		((BonoboPropertyControlGetControlFn) create_dialog_cb, 1, NULL);
+	gtk_signal_connect (GTK_OBJECT (property_control), "action",
+			    GTK_SIGNAL_FUNC (apply_cb), NULL);
+	gtk_object_set_data (GTK_OBJECT (property_control), "config-database", db);
+
+	CORBA_exception_free (&ev);
+
+	return BONOBO_OBJECT (property_control);
 }
 
 /* main -- This function should not vary from capplet to capplet
@@ -285,14 +354,19 @@ main (int argc, char **argv)
 	CORBA_Environment ev;
 
 	static gboolean apply_only;
+	static gboolean get_legacy;
 	static struct poptOption cap_options[] = {
 		{ "apply", '\0', POPT_ARG_NONE, &apply_only, 0,
 		  N_("Just apply settings and quit"), NULL },
+		{ "get-legacy", '\0', POPT_ARG_NONE, &get_legacy, 0,
+		  N_("Retrieve and store legacy settings"), NULL },
 		{ NULL, '\0', 0, NULL, 0, NULL, NULL }
 	};
 
 	bindtextdomain (PACKAGE, GNOMELOCALEDIR);
 	textdomain (PACKAGE);
+
+	CORBA_exception_init (&ev);
 
 	glade_gnome_init ();
 	gnomelib_register_popt_table (cap_options, _("Capplet options"));
@@ -303,26 +377,26 @@ main (int argc, char **argv)
 	if (bonobo_init (orb, CORBA_OBJECT_NIL, CORBA_OBJECT_NIL) == FALSE)
 		g_error ("Cannot initialize bonobo");
 
-	if (apply_only) {
-		CORBA_exception_init (&ev);
-		db = bonobo_get_object (DEFAULT_MONIKER,
-					"IDL:Bonobo/ConfigDatabase:1.0", &ev);
+	db = bonobo_get_object (DEFAULT_MONIKER, "IDL:Bonobo/ConfigDatabase:1.0", &ev);
 
-		if (db == CORBA_OBJECT_NIL) {
-			g_critical ("Cannot open configuration database");
-			return -1;
-		}
+	if (db == CORBA_OBJECT_NIL) {
+		g_critical ("Cannot open configuration database");
+		return -1;
+	}
 
-		apply_settings (db, &ev);
-
-		CORBA_exception_free (&ev);
-	} else {
+	if (apply_only)
+		apply_settings (db);
+	else if (get_legacy)
+		get_legacy_settings (db);
+	else {
 		factory = bonobo_generic_factory_new
 			("OAFIID:Bonobo_Control_Capplet_sound_properties_Factory",
-			 (BonoboGenericFactoryFn) create_control_cb, NULL);
+			 (BonoboGenericFactoryFn) create_control_cb, db);
 		bonobo_running_context_auto_exit_unref (BONOBO_OBJECT (factory));
 		bonobo_main ();
 	}
+
+	CORBA_exception_free (&ev);
 
 	return 0;
 }
