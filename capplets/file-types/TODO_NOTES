@@ -9,9 +9,12 @@
  - Generate MIME type if field is empty
  - When no apps/components are available, desensitize app/component list
  - Better sorting on the MIME types tree
- - Category selection
  - Don't consider a mime type when generating category handler list if the mime type overrides the category default
  - Implement override_category_default flag
+ - Set the category in mime_type_info_save
+ - Implement setting of default action for a whole category
+ - Implement retrieving the current default action for a whole category
+ - Better code factoring, maybe create a new model type based on MimeTypeInfo?
 
 CVS Surgery
  - Move file-types to gnome-control-center, rename ???
