@@ -264,6 +264,8 @@ mime_edit_dialog_set_prop (GObject *object, guint prop_id, const GValue *value, 
 		if (mime_edit_dialog->p->is_add) {
 			mime_edit_dialog->p->info = mime_type_info_new (NULL, NULL);
 			setup_add_dialog (mime_edit_dialog);
+			gtk_window_set_title (GTK_WINDOW (mime_edit_dialog->p->dialog_win),
+				(_("Add file type")));
 			gtk_widget_show_all (mime_edit_dialog->p->dialog_win);
 		}
 

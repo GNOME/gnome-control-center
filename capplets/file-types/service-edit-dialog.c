@@ -80,8 +80,10 @@ static void populate_app_list               (ServiceEditDialog *dialog);
 static void store_data                      (ServiceEditDialog *dialog);
 static gboolean validate_data               (ServiceEditDialog *dialog);
 
+#ifdef SUPPORT_CHECK_CONTENT
 static void program_sensitive_cb            (ServiceEditDialog *dialog,
 					     GtkToggleButton   *tb);
+#endif
 static void program_changed_cb              (ServiceEditDialog *dialog,
 					     GtkOptionMenu     *option_menu);
 
@@ -219,6 +221,8 @@ service_edit_dialog_set_prop (GObject *object, guint prop_id, const GValue *valu
 		if (dialog->p->is_add) {
 			dialog->p->info = service_info_new (NULL, NULL);
 			setup_add_dialog (dialog);
+			gtk_window_set_title (GTK_WINDOW (dialog->p->dialog_win),
+				(_("Add service")));
 			gtk_widget_show_all (dialog->p->dialog_win);
 		}
 
@@ -536,6 +540,7 @@ validate_data (ServiceEditDialog *dialog)
 	return TRUE;
 }
 
+#ifdef SUPPORT_CHECK_CONTENT
 static void
 program_sensitive_cb (ServiceEditDialog *dialog, GtkToggleButton *tb) 
 {
@@ -545,6 +550,7 @@ program_sensitive_cb (ServiceEditDialog *dialog, GtkToggleButton *tb)
 		 strcmp (dialog->p->info->protocol, "ftp"))
 		gtk_widget_set_sensitive (WID ("program_frame"), FALSE);
 }
+#endif
 
 static void
 program_changed_cb (ServiceEditDialog *dialog, GtkOptionMenu *option_menu)
