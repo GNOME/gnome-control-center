@@ -17,14 +17,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: control-center CVS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-26 19:54+0100\n"
-"PO-Revision-Date: 2004-02-27 01:35+0100\n"
+"POT-Creation-Date: 2004-03-01 20:03+0100\n"
+"PO-Revision-Date: 2004-03-01 00:25+0100\n"
 "Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:1
 msgid "<b>Applications</b>"
@@ -497,38 +497,39 @@ msgstr "_Stijl:"
 msgid "There was an error displaying help: %s"
 msgstr "Er is een fout opgetreden bij de hulpweergave: %s"
 
-#: capplets/background/gnome-wp-capplet.c:171
-msgid "Add Wallpapers"
-msgstr "_Achtergrond toevoegen"
-
-#: capplets/background/gnome-wp-capplet.c:1265
+#: capplets/background/gnome-wp-capplet.c:1269
 msgid "Centered"
 msgstr "Gecentreerd"
 
-#: capplets/background/gnome-wp-capplet.c:1287
+#: capplets/background/gnome-wp-capplet.c:1291
 msgid "Fill Screen"
 msgstr "Schermvullend"
 
-#: capplets/background/gnome-wp-capplet.c:1307
+#: capplets/background/gnome-wp-capplet.c:1311
 msgid "Scaled"
 msgstr "Op schaal"
 
-#: capplets/background/gnome-wp-capplet.c:1327
+#: capplets/background/gnome-wp-capplet.c:1331
 msgid "Tiled"
 msgstr "Tegels"
 
 # Enkele kleur
-#: capplets/background/gnome-wp-capplet.c:1359
+#: capplets/background/gnome-wp-capplet.c:1363
 msgid "Solid Color"
 msgstr "Egale kleur"
 
-#: capplets/background/gnome-wp-capplet.c:1375
+#: capplets/background/gnome-wp-capplet.c:1379
 msgid "Horizontal Gradient"
 msgstr "Horizontaal verlopend"
 
-#: capplets/background/gnome-wp-capplet.c:1391
+#: capplets/background/gnome-wp-capplet.c:1395
 msgid "Vertical Gradient"
 msgstr "Verticaal verlopend"
+
+#: capplets/background/gnome-wp-capplet.c:1432
+#: capplets/background/gnome-wp-capplet.c:1443
+msgid "Add Wallpapers"
+msgstr "_Achtergrond toevoegen"
 
 #: capplets/background/gnome-wp-info.c:49
 msgid "No Wallpaper"
@@ -1149,8 +1150,12 @@ msgid ""
 msgid_plural ""
 "Testing the new settings. If you don't respond in %d seconds the previous "
 "settings will be restored."
-msgstr[0] "De nieuwe instellingen worden getest. Als u niet binnen %d seconde reageert zullen de vorige instellingen worden teruggezet."
-msgstr[1] "De nieuwe instellingen worden getest. Als u niet binnen %d seconden reageert zullen de vorige instellingen worden teruggezet."
+msgstr[0] ""
+"De nieuwe instellingen worden getest. Als u niet binnen %d seconde reageert "
+"zullen de vorige instellingen worden teruggezet."
+msgstr[1] ""
+"De nieuwe instellingen worden getest. Als u niet binnen %d seconden reageert "
+"zullen de vorige instellingen worden teruggezet."
 
 #: capplets/display/main.c:570
 msgid "Do you want to keep this resolution?"
@@ -1654,7 +1659,13 @@ msgid_plural ""
 "effectively use the computer.  It is recommended that you select a size "
 "smaller than %d."
 msgstr[0] ""
+"Het geselecteerde lettertype is %d punt groot, en kan het effectief gebruik "
+"van de computer bemoeilijken. Het is aanbevolen dat u afmetingen kiest die "
+"kleiner zijn dan %d."
 msgstr[1] ""
+"Het geselecteerde lettertype is %d punten groot, en kan het effectief gebruik "
+"van de computer bemoeilijken. Het is aanbevolen dat u afmetingen kiest die "
+"kleiner zijn dan %d."
 
 #: capplets/font/main.c:514
 #, c-format
@@ -1667,7 +1678,13 @@ msgid_plural ""
 "effectively use the computer.  It is recommended that you select a smaller "
 "sized font."
 msgstr[0] ""
+"Het geselecteerde lettertype is %d punt groot, en kan het effectief gebruik "
+"van de computer bemoeilijken. Het is aanbevolen dat u een kleiner lettertype "
+"kiest."
 msgstr[1] ""
+"Het geselecteerde lettertype is %d punten groot, en kan het effectief gebruik "
+"van de computer bemoeilijken. Het is aanbevolen dat u een kleiner lettertype "
+"kiest."
 
 #: capplets/keybindings/eggcellrendererkeys.c:161
 #: capplets/keybindings/eggcellrendererkeys.c:162
@@ -1739,10 +1756,10 @@ msgstr ""
 "Fout bij het instellen van nieuwe sneltoets in configuratiedatabase: %s\n"
 
 #: capplets/keybindings/gnome-keybinding-properties.c:812
-#, fuzzy, c-format
+#, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr ""
-"Fout bij het instellen van nieuwe sneltoets in configuratiedatabase: %s\n"
+"Fout bij het uitzetten van sneltoets in configuratiedatabase: %s\n"
 
 #: capplets/keybindings/gnome-keybinding-properties.c:960
 msgid ""
@@ -1892,9 +1909,8 @@ msgstr ""
 "van langdurig toetsenbordgebruik te voorkomen"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:24
-#, fuzzy
 msgid "Reset to de_faults"
-msgstr "Stan_daardinstellingen gebruiken"
+msgstr "Terug naar stan_daardinstellingen"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:26
 msgid "Typing Break"
@@ -2304,14 +2320,18 @@ msgstr "De opgegeven locatie voor installatie van het themabestand is ongeldig"
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
 "selected as the source location"
-msgstr "%s is het pad waar de themabestanden worden geïnstalleerd. Dit kan niet worden geselecteerd als de bronlocatie"
+msgstr ""
+"%s is het pad waar de themabestanden worden geïnstalleerd. Dit kan niet "
+"worden geselecteerd als de bronlocatie"
 
 # enkelvoud gezet.
 #: capplets/theme-switcher/gnome-theme-manager.c:301
 msgid ""
 "The gnome-theme-manager does not know how to change the themes on the "
 "current window manager."
-msgstr "De gnome-theme-manager weet niet hoe het thema van de huidige window-manager kan worden aangepast."
+msgstr ""
+"De gnome-theme-manager weet niet hoe het thema van de huidige window-manager "
+"kan worden aangepast."
 
 #: capplets/theme-switcher/gnome-theme-manager.c:665
 #: capplets/theme-switcher/gnome-theme-manager.c:725
@@ -2697,7 +2717,10 @@ msgstr "Langzame toetsen waarschuwing"
 msgid ""
 "You just held down the Shift key for 8 seconds.  This is the shortcut for "
 "the Slow Keys feature, which affects the way your keyboard works."
-msgstr "U heeft zojuit de Shift toets gedurende 8 seconden ingedrukt gehouden.  Dat is de sneltoets voor de langzame toetsen modus hetgeen invloed heeft op de manier waarop het toetsenbord functioneert."
+msgstr ""
+"U heeft zojuit de Shift toets gedurende 8 seconden ingedrukt gehouden.  Dat "
+"is de sneltoets voor de langzame toetsen modus hetgeen invloed heeft op de "
+"manier waarop het toetsenbord functioneert."
 
 #: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
 msgid "Do you want to activate Slow Keys?"
@@ -2715,14 +2738,20 @@ msgstr "Plaktoetsen waarschuwing"
 msgid ""
 "You just pressed the Shift key 5 times in a row.  This is the shortcut for "
 "the Sticky Keys feature, which affects the way your keyboard works."
-msgstr "U heeft zojuist de Shift toets 5 keer op een rij ingedrukt.  Dat is de sneltoets voor de plaktoetsen modus, hetgeen invloed heeft op de manier waarop uw toetsenbord functioneert."
+msgstr ""
+"U heeft zojuist de Shift toets 5 keer op een rij ingedrukt.  Dat is de "
+"sneltoets voor de plaktoetsen modus, hetgeen invloed heeft op de manier "
+"waarop uw toetsenbord functioneert."
 
 #: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
 msgid ""
 "You just pressed two keys at once, or pressed the Shift key 5 times in a "
 "row.  This turns off the Sticky Keys feature, which affects the way your "
 "keyboard works."
-msgstr "U heeft zojuist de twee toetsen tegelijk ingedrukt of de Shift toets 5 keer op een rij.  Dat zet de plaktoetsen modus uit, hetgeen invloed heeft op de manier waarop uw toetsenbord functioneert"
+msgstr ""
+"U heeft zojuist de twee toetsen tegelijk ingedrukt of de Shift toets 5 keer "
+"op een rij.  Dat zet de plaktoetsen modus uit, hetgeen invloed heeft op de "
+"manier waarop uw toetsenbord functioneert"
 
 #: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
 msgid "Do you want to activate Sticky Keys?"
@@ -2783,7 +2812,7 @@ msgstr ""
 "Er is een fout opgetreden bij het pogen tot het draaaien van (%s)\n"
 "welke gekoppeld is aan de sleutel (%s)"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:61
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:65
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2797,8 +2826,18 @@ msgid ""
 "- The result of <b>xprop -root | grep XKB</b>\n"
 "- The result of <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/xkb</b>"
 msgstr ""
+"Er is een fout opgetreden bij het activeren van de XKB-configuratie.\n"
+"Waarschijnlijk is het een intern X-server probleem.\n"
+"\n"
+"X-server versiegegevens:\n"
+"%s\n"
+"%d\n"
+"%s\n"
+"Indien u deze situatie als fout rapporteert, voegt u dan alstublieft toe:\n"
+"- Het resultaat van <b>xprop -root | grep XKB</b>\n"
+"- Het resultaat van <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/xkb</b>"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:71
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:75
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2809,6 +2848,17 @@ msgstr ""
 "Er zijn problemen met complexe XKB-configuraties. Deze zijn bekend.\n"
 "Probeer een eenvoudiger configuratie of probeer een nieuwere versie van "
 "XFree."
+
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:151
+#, c-format
+msgid ""
+"You have a keyboard remapping file (%s) in your home directory whose "
+"contents will now be ignored. You can use the keyboard preferences to "
+"restore them."
+msgstr ""
+"U heeft een toetsenbord-herindelingsbestand (%s) in uw persoonlijke map "
+"waarvan de inhoud vanaf nu genegeerd wordt. U kunt de toetsenbordvoorkeuren "
+"gebruiken om ze te herstellen."
 
 #: gnome-settings-daemon/gnome-settings-screensaver.c:92
 #, c-format
@@ -3027,7 +3077,9 @@ msgstr ""
 msgid ""
 "Very soon, XKB settings in gconf will be overridden (from the system "
 "configuration)"
-msgstr "Zeer binnenkort worden XKB instellingen in gconf tenietgedaan (vanuit de systeemconfiguratie)"
+msgstr ""
+"Zeer binnenkort worden XKB instellingen in gconf tenietgedaan (vanuit de "
+"systeemconfiguratie)"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
 msgid "XKB keyboard layout"
@@ -3044,7 +3096,8 @@ msgstr "XKB opties"
 # ASAP zeer binnenkort
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
 msgid "XKB settings in gconf will be overridden from the system ASAP"
-msgstr "XKB instellingen in gconf zullen ASAP worden tenietgedaan door het systeem"
+msgstr ""
+"XKB instellingen in gconf zullen ASAP worden tenietgedaan door het systeem"
 
 #: typing-break/drw-break-window.c:191
 msgid "_Postpone break"
@@ -3438,13 +3491,12 @@ msgid "Launch Web Browser's shortcut."
 msgstr "Sneltoets voor webbrowser opbrengen"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:14
-#, fuzzy
 msgid "Lock Screen"
-msgstr "Scherm"
+msgstr "Scherm vergrendelen"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
 msgid "Lock Screen's shortcut."
-msgstr ""
+msgstr "Sneltoets voor vergrendelen beeldscherm"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
 msgid "Log Out"
@@ -3523,22 +3575,20 @@ msgid "Volume down's shortcut."
 msgstr "Sneltoets voor volume omlaag"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
-#, fuzzy
 msgid "Volume mute"
-msgstr "_Volume"
+msgstr "Volume dempen"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
 msgid "Volume mute's shortcut"
-msgstr ""
+msgstr "Sneltoets voor volume dempen"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:37
-#, fuzzy
 msgid "Volume step"
-msgstr "_Volume"
+msgstr "Volume-stapgrootte"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:38
 msgid "Volume step as percentage of volume."
-msgstr ""
+msgstr "Volume-stapgrootte als percentage van volume."
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:39
 msgid "Volume up"
