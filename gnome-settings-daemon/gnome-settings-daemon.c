@@ -39,6 +39,7 @@
 
 #include "xsettings-manager.h"
 #include "gnome-settings-daemon.h"
+#include "gnome-settings-xmodmap.h"
 
 /*#include "gnome-settings-disk.h"*/
 #include "gnome-settings-font.h"
@@ -275,6 +276,7 @@ gnome_settings_daemon_new (void)
   gnome_settings_xsettings_init (client);
   gnome_settings_mouse_init (client);
 /* Essential - xkb initialization should happen before */
+  gnome_settings_keyboard_xkb_set_post_activation_callback (gnome_settings_load_modmap_files, NULL);
   gnome_settings_keyboard_xkb_init (client);
   gnome_settings_keyboard_init (client);
   gnome_settings_multimedia_keys_init (client);

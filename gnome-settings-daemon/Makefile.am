@@ -53,6 +53,8 @@ gnome_settings_daemon_SOURCES =	\
 	gnome-settings-typing-break.h	\
 	reaper.c			\
 	reaper.h			\
+	gnome-settings-xmodmap.c	\
+	gnome-settings-xmodmap.h	\
 	$(CORBA_GENERATED)
 
 #	$(AccessX_files)		
@@ -92,13 +94,16 @@ IDL_FLAGS = -D__GNOME_SettingsDaemon_COMPILATION -I $(idl_dir) -I $(datadir)/idl
 $(CORBA_GENERATED): $(idl_dir)/GNOME_SettingsDaemon.idl $(ORBIT_IDL)
 	$(ORBIT_IDL) $(IDL_FLAGS) $(idl_dir)/GNOME_SettingsDaemon.idl
 
+Gladedir   = $(GNOMECC_GLADE_DIR)
+Glade_DATA = modmap-dialog.glade
+
 serverfile = GNOME_SettingsDaemon.server.in
 serverdir = $(libdir)/bonobo/servers
 install-data-hook :
 	$(mkinstalldirs) $(DESTDIR)$(serverdir)
 	sed -e "s|\@LIBEXECDIR\@|$(libexecdir)|" $(srcdir)/$(serverfile) > $(DESTDIR)$(serverdir)/$(serverfile:.in=)
 
-EXTRA_DIST = $(serverfile)
+EXTRA_DIST = $(serverfile) $(Glade_DATA)
 CLEANFILES = $(BUILT_SOURCES)
 
 uninstall-local:
