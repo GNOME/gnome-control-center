@@ -104,7 +104,7 @@ mime_type_info_load (GtkTreeModel *model, GtkTreeIter *iter)
 	info->print_line      = g_strdup (gnome_vfs_mime_get_value (info->mime_type, "print-line"));
 	info->default_action  = gnome_vfs_mime_get_default_application (info->mime_type);
 
-	if (!strncmp (info->default_action->id, "custom-", strlen ("custom-"))) {
+	if (info->default_action != NULL && !strncmp (info->default_action->id, "custom-", strlen ("custom-"))) {
 		info->custom_line = g_strdup (info->default_action->command);
 		gnome_vfs_mime_application_free (info->default_action);
 		info->default_action = NULL;

@@ -380,8 +380,9 @@ populate_application_list (MimeEditDialog *dialog)
 
 	if (found_idx < 0) {
 		found_idx = i;
-		gnome_file_entry_set_filename (GNOME_FILE_ENTRY (WID ("program_entry")),
-					       dialog->p->info->default_action->command);
+		if (dialog->p->info->custom_line != NULL)
+			gnome_file_entry_set_filename (GNOME_FILE_ENTRY (WID ("program_entry")),
+						       dialog->p->info->custom_line);
 	} else {
 		gtk_widget_set_sensitive (WID ("program_entry_box"), FALSE);
 	}
