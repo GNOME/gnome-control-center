@@ -1,5 +1,9 @@
 2002-12-02  James Henstridge  <james@daa.com.au>
 
+	* src/ftstream-vfs.c (FT_New_URI_Face): unset the
+	FT_FACE_FLAG_EXTERNAL_STREAM flag on the face, so that it gets
+	freed with the face.  (this is a bit of a hack ...).
+
 	* src/thumbnailer.c (main): fix bound on for loop (gaaaargh).
 	(main): re-enable shutdown of the library
 

@@ -113,5 +113,8 @@ FT_New_URI_Face(FT_Library           library,
 	return error;
     }
 
+    /* so that freetype will free the stream */
+    (*aface)->face_flags &= ~FT_FACE_FLAG_EXTERNAL_STREAM;
+
     return error;
 }
