@@ -40,6 +40,10 @@ gnome_settings_daemon_SOURCES =	\
 	xsettings-manager.h		\
 	gnome-settings-keybindings.c    \
 	gnome-settings-keybindings.h    \
+	gnome-settings-typing-break.c	\
+	gnome-settings-typing-break.h	\
+	reaper.c			\
+	reaper.h			\
 	$(CORBA_GENERATED)
 
 #	$(AccessX_files)		

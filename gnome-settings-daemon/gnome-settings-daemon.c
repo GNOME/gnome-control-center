@@ -53,6 +53,7 @@
 #include "gnome-settings-keybindings.h"
 #include "gnome-settings-gtk1theme.h"
 #include "gnome-settings-xrdb.h"
+#include "gnome-settings-typing-break.h"
 
 #include "GNOME_SettingsDaemon.h"
 
@@ -280,6 +281,7 @@ gnome_settings_daemon_new (void)
   gnome_settings_keybindings_init (client);
   gnome_settings_gtk1_theme_init (client);
   gnome_settings_xrdb_init (client);
+  gnome_settings_typing_break_init (client);
 
   for (list = directories; list; list = list->next)
     {
@@ -329,6 +331,7 @@ gnome_settings_daemon_new (void)
   gnome_settings_keybindings_load (client);
   gnome_settings_gtk1_theme_load (client);
   gnome_settings_xrdb_load (client);
+  gnome_settings_typing_break_load (client);
 
   return G_OBJECT (daemon);
 }

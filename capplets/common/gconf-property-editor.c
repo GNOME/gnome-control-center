@@ -1070,9 +1070,16 @@ peditor_numeric_range_value_changed (GConfClient         *client,
 	if (value != NULL) {
 		value_wid = peditor->p->conv_to_widget_cb (peditor, value);
 
-		g_return_if_fail  (value_wid->type == GCONF_VALUE_FLOAT);
-
-		gtk_adjustment_set_value (GTK_ADJUSTMENT (peditor->p->ui_control), gconf_value_get_float (value_wid));
+		switch (value_wid->type) {
+		case GCONF_VALUE_FLOAT:
+			gtk_adjustment_set_value (GTK_ADJUSTMENT (peditor->p->ui_control), gconf_value_get_float (value_wid));
+			break;
+		case GCONF_VALUE_INT:
+			gtk_adjustment_set_value (GTK_ADJUSTMENT (peditor->p->ui_control), gconf_value_get_int (value_wid));
+			break;
+		default:
+			g_warning ("Unknown type in range peditor: %d\n", value_wid->type);
+		}
 		gconf_value_free (value_wid);
 	}
 }
@@ -1081,11 +1088,36 @@ static void
 peditor_numeric_range_widget_changed (GConfPropertyEditor *peditor,
 				      GtkAdjustment       *adjustment)
 {
-	GConfValue *value, *value_wid;
+	GConfValue *value, *value_wid, *default_value;
 
 	if (!peditor->p->inited) return;
-	value_wid = gconf_value_new (GCONF_VALUE_FLOAT);
-	gconf_value_set_float (value_wid, gtk_adjustment_get_value (adjustment));
+
+	/* We try to get the default type from the schemas.  if not, we default
+	 * to a float.
+	 */
+	default_value = gconf_client_get_default_from_schema (gconf_client_get_default (),
+							      peditor->p->key,
+							      NULL);
+	if (default_value)
+		value_wid = gconf_value_new (default_value->type);
+	else
+		value_wid = gconf_value_new (GCONF_VALUE_FLOAT);
+
+	gconf_value_free (default_value);
+
+	g_assert (value_wid);
+
+	if (value_wid->type == GCONF_VALUE_INT)
+		gconf_value_set_int (value_wid, gtk_adjustment_get_value (adjustment));
+	else if (value_wid->type == GCONF_VALUE_FLOAT)
+		gconf_value_set_float (value_wid, gtk_adjustment_get_value (adjustment));
+	else {
+		g_warning ("unable to set a gconf key for %s of type %d\n",
+			   peditor->p->key,
+			   value_wid->type);
+		gconf_value_free (value_wid);
+		return;
+	}
 	value = peditor->p->conv_from_widget_cb (peditor, value_wid);
 	peditor_set_gconf_value (peditor, peditor->p->key, value);
 	g_signal_emit (peditor, peditor_signals[VALUE_CHANGED], 0, peditor->p->key, value);
@@ -1101,14 +1133,19 @@ gconf_peditor_new_numeric_range (GConfChangeSet *changeset,
 				 ...)
 {
 	GObject *peditor;
-	GObject *adjustment;
+	GObject *adjustment = NULL;
 	va_list var_args;
 
 	g_return_val_if_fail (key != NULL, NULL);
 	g_return_val_if_fail (range != NULL, NULL);
-	g_return_val_if_fail (GTK_IS_RANGE (range), NULL);
+	g_return_val_if_fail (GTK_IS_RANGE (range)||GTK_IS_SPIN_BUTTON (range), NULL);
 
-	adjustment = G_OBJECT (gtk_range_get_adjustment (GTK_RANGE (range)));
+	if (GTK_IS_RANGE (range))
+		adjustment = G_OBJECT (gtk_range_get_adjustment (GTK_RANGE (range)));
+	else if (GTK_IS_SPIN_BUTTON (range))
+		adjustment = G_OBJECT (gtk_spin_button_get_adjustment (GTK_SPIN_BUTTON (range)));
+	else
+		g_assert_not_reached ();
 
 	va_start (var_args, first_property_name);
 
