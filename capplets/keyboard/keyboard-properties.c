@@ -42,8 +42,84 @@
 #include <X11/X.h>
 
 #ifdef HAVE_X11_EXTENSIONS_XF86MISC_H
-#include <X11/extensions/xf86misc.h>
+#  include <X11/extensions/xf86misc.h>
 #endif
+
+/* Conversion between GConf values and widget values */
+
+static GConfValue *
+rate_to_widget (GConfValue *value) 
+{
+	GConfValue *new_value;
+	int rate;
+
+	rate = gconf_value_get_int (value);
+
+	new_value = gconf_value_new (GCONF_VALUE_INT);
+
+	if (rate >= (255 + 192) / 2)
+		gconf_value_set_int (new_value, 0);
+	else if (rate >= (192 + 64) / 2)
+		gconf_value_set_int (new_value, 1);
+	else if (rate >= (64 + 1) / 2)
+		gconf_value_set_int (new_value, 2);
+	else
+		gconf_value_set_int (new_value, 3);
+
+	return new_value;
+}
+
+static GConfValue *
+rate_from_widget (GConfValue *value) 
+{
+	static int rates[] = {
+		255, 192, 64, 1
+	};
+
+	GConfValue *new_value;
+
+	new_value = gconf_value_new (GCONF_VALUE_INT);
+	gconf_value_set_int (new_value, rates[gconf_value_get_int (value)]);
+	return new_value;
+}
+
+static GConfValue *
+delay_to_widget (GConfValue *value) 
+{
+	GConfValue *new_value;
+	int delay;
+
+	delay = gconf_value_get_int (value);
+
+	new_value = gconf_value_new (GCONF_VALUE_INT);
+
+	if (delay >= (1000 + 700) / 2)
+		gconf_value_set_int (new_value, 0);
+	else if (delay >= (700 + 300) / 2)
+		gconf_value_set_int (new_value, 1);
+	else if (delay >= (300) / 2)
+		gconf_value_set_int (new_value, 2);
+	else
+		gconf_value_set_int (new_value, 3);
+
+	return new_value;
+}
+
+static GConfValue *
+delay_from_widget (GConfValue *value) 
+{
+	static int delays[] = {
+		1000, 700, 300, 0
+	};
+
+	GConfValue *new_value;
+
+	new_value = gconf_value_new (GCONF_VALUE_INT);
+	gconf_value_set_int (new_value, delays[gconf_value_get_int (value)]);
+	return new_value;
+}
+
+#if 0
 
 static void
 apply_settings (void)
@@ -53,13 +129,6 @@ apply_settings (void)
 	gboolean repeat, click;
 	int rate, delay, volume;
 	int bell_volume, bell_pitch, bell_duration;
-
-	static int rates[] = {
-		255, 192, 64, 1
-	};
-	static int delays[] = {
-		1000, 700, 300, 0
-	};
 
 #ifdef HAVE_X11_EXTENSIONS_XF86MISC_H
 	XF86MiscKbdSettings kbdsettings;
@@ -86,9 +155,9 @@ apply_settings (void)
 					    &error_base_return) == True)
 		{
 			kbdsettings.type = 0;
-                        kbdsettings.rate = rates[rate];
+                        kbdsettings.rate = rate;
 			g_message ("Setting rate to %d", kbdsettings.rate);
-                        kbdsettings.delay = delays[delay];
+                        kbdsettings.delay = delay;
 			kbdsettings.servnumlock = False;
                         XF86MiscSetKbdSettings (GDK_DISPLAY (), &kbdsettings);
                 } else {
@@ -107,6 +176,8 @@ apply_settings (void)
 	XChangeKeyboardControl (GDK_DISPLAY (), KBKeyClickPercent, 
 				&kbdcontrol);
 }
+
+#endif
 
 static void
 get_legacy_settings (void)
@@ -171,20 +242,31 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 	GObject *peditor;
 
 	peditor = gconf_peditor_new_boolean (changeset, "/gnome/desktop/peripherals/keyboard/repeat", WID ("repeat_toggle"));
-	gconf_peditor_new_select_menu (changeset, "/gnome/desktop/peripherals/keyboard/delay", WID ("delay_menu"));
-	gconf_peditor_new_select_menu (changeset, "/gnome/desktop/peripherals/keyboard/rate", WID ("repeat_menu"));
-
 	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor), WID ("repeat_table"));
 
-	peditor = gconf_peditor_new_boolean (changeset, "/gnome/desktop/peripherals/keyboard/click", WID ("click_toggle"));
-	gconf_peditor_new_int_range (changeset, "/gnome/desktop/peripherals/keyboard/volume", WID ("click_volume_entry"));
+	peditor = gconf_peditor_new_select_menu (changeset, "/gnome/desktop/peripherals/keyboard/delay", WID ("delay_menu"));
 
+	g_object_set (peditor,
+		      "conv-to-widget-cb", delay_to_widget,
+		      "conv-from-widget-cb", delay_from_widget,
+		      NULL);
+
+	peditor = gconf_peditor_new_select_menu (changeset, "/gnome/desktop/peripherals/keyboard/rate", WID ("repeat_menu"));
+
+	g_object_set (peditor,
+		      "conv-to-widget-cb", rate_to_widget,
+		      "conv-from-widget-cb", rate_from_widget,
+		      NULL);
+
+	peditor = gconf_peditor_new_boolean (changeset, "/gnome/desktop/peripherals/keyboard/click", WID ("click_toggle"));
 	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor), WID ("click_hbox"));
 
+	gconf_peditor_new_numeric_range (changeset, "/gnome/desktop/peripherals/keyboard/volume", WID ("click_volume_entry"));
+
 	/* Bell properties */
-	gconf_peditor_new_int_range (changeset, "/gnome/desktop/peripherals/keyboard/bell_volume", WID ("bell_volume_range"));
-	gconf_peditor_new_int_range (changeset, "/gnome/desktop/peripherals/keyboard/bell_pitch", WID ("bell_pitch_range"));
-	gconf_peditor_new_int_range (changeset, "/gnome/desktop/peripherals/keyboard/bell_duration", WID ("bell_duration_range"));
+	gconf_peditor_new_numeric_range (changeset, "/gnome/desktop/peripherals/keyboard/bell_volume", WID ("bell_volume_range"));
+	gconf_peditor_new_numeric_range (changeset, "/gnome/desktop/peripherals/keyboard/bell_pitch", WID ("bell_pitch_range"));
+	gconf_peditor_new_numeric_range (changeset, "/gnome/desktop/peripherals/keyboard/bell_duration", WID ("bell_duration_range"));
 
 	g_signal_connect (G_OBJECT (WID ("bell_test_button")), "clicked", (GCallback) bell_cb, changeset);
 }
