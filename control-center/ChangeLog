@@ -1,3 +1,16 @@
+2002-02-12  Lauris Kaplinski  <lauris@ximian.com>
+
+	* preferences.c (prefs_dialog_ok_cb): Destroy widget instead of
+	gnome_dialog_close
+	(prefs_dialog_cancel_cb): Ditto
+	(prefs_dialog_response): Common button click handler
+	(gnomecc_preferences_get_config_dialog): Connect GtkDialog 'response' signal
+
+	* capplet-dir-view.c (capplet_dir_view_load_dir): Replace deprecated methods,
+	use gdk_pixbuf/gtk_image instead of gnome_pixmap
+	(prefs_changed_cb): Use g_object_set
+	(option_menu_activate): Use g_object_set_data
+
 2002-02-08  Richard Hestilow  <hestilow@ximian.com>
 	
 	* main.c (main): Ignore nautilus if run with --use-shell.

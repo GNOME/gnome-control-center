@@ -21,10 +21,6 @@
  * 02111-1307, USA.
  */
 
-#ifdef GDK_DISABLE_DEPRECATED
-#undef GDK_DISABLE_DEPRECATED
-#endif
-
 #ifdef HAVE_CONFIG_H
 # include "config.h"
 #endif
@@ -454,27 +450,26 @@ bg_applier_get_preview_widget (BGApplier *bg_applier)
 	if (bg_applier->p->preview_widget != NULL)
 		return bg_applier->p->preview_widget;
 
-	filename = gnome_pixmap_file ("monitor.png");
-	visual = gdk_window_get_visual (GDK_ROOT_PARENT ());
-	colormap = gdk_window_get_colormap (GDK_ROOT_PARENT ());
+	filename = gnome_program_locate_file (NULL, GNOME_FILE_DOMAIN_PIXMAP, "monitor.png", TRUE, NULL);
+	visual = gdk_drawable_get_visual (gdk_get_default_root_window ());
+	colormap = gdk_drawable_get_colormap (gdk_get_default_root_window ());
 
-	gtk_widget_push_visual (visual);
 	gtk_widget_push_colormap (colormap);
 
 	pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
 
 	if (pixbuf == NULL) return NULL;
 
-	pixmap = gdk_pixmap_new (GDK_ROOT_PARENT (),
+	pixmap = gdk_pixmap_new (gdk_get_default_root_window (),
 				 gdk_pixbuf_get_width (pixbuf),
 				 gdk_pixbuf_get_height (pixbuf),
 				 visual->depth);
-	mask = gdk_pixmap_new (GDK_ROOT_PARENT (),
+	mask = gdk_pixmap_new (gdk_get_default_root_window (),
 			       gdk_pixbuf_get_width (pixbuf),
 			       gdk_pixbuf_get_height (pixbuf),
 			       1);
 
-	gc = gdk_gc_new (GDK_ROOT_PARENT ());
+	gc = gdk_gc_new (gdk_get_default_root_window ());
 
 	gdk_pixbuf_render_threshold_alpha (pixbuf, mask,
 					   0, 0, 0, 0,
@@ -490,12 +485,11 @@ bg_applier_get_preview_widget (BGApplier *bg_applier)
 				       gdk_pixbuf_get_height (pixbuf),
 				       GDK_RGB_DITHER_MAX, 0, 0);
 
-	bg_applier->p->preview_widget = gtk_pixmap_new (pixmap, mask);
+	bg_applier->p->preview_widget = gtk_image_new_from_pixmap (pixmap, mask);
 	gtk_widget_show (bg_applier->p->preview_widget);
 	g_object_unref (G_OBJECT (pixbuf));
 	g_free (filename);
 
-	gtk_widget_pop_visual ();
 	gtk_widget_pop_colormap ();
 
 	return bg_applier->p->preview_widget;
@@ -558,7 +552,7 @@ draw_disabled_message (GtkWidget *widget)
 			 y + (h - extents.height) / 2 + extents.height / 2,
 			 layout);
 
-	gdk_gc_unref (gc);
+	g_object_unref (G_OBJECT (gc));
 	g_object_unref (G_OBJECT (layout));
 }
 
@@ -675,7 +669,7 @@ render_wallpaper (BGApplier *bg_applier, const BGPreferences *prefs)
 		if (bg_applier->p->wallpaper_pixbuf == NULL)
 			return;
 
-		gdk_window_get_size (GDK_ROOT_PARENT (), &tmp1, &tmp2);
+		gdk_drawable_get_size (gdk_get_default_root_window (), &tmp1, &tmp2);
 		virtual_geom.x = virtual_geom.y = 0;
 		virtual_geom.width = tmp1;
 		virtual_geom.height = tmp2;
@@ -764,7 +758,7 @@ render_to_screen (BGApplier *bg_applier, const BGPreferences *prefs)
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_BG_PREFERENCES (prefs));
 
-	gc = gdk_gc_new (GDK_ROOT_PARENT ());
+	gc = gdk_gc_new (gdk_get_default_root_window ());
 
 	if (bg_applier->p->pixbuf != NULL) {
 		if (bg_applier->p->pixbuf_render_geom.x != 0 ||
@@ -772,7 +766,14 @@ render_to_screen (BGApplier *bg_applier, const BGPreferences *prefs)
 		    bg_applier->p->pixbuf_render_geom.width != bg_applier->p->render_geom.width ||
 		    bg_applier->p->pixbuf_render_geom.height != bg_applier->p->render_geom.height)
 		{
-			gdk_color_alloc (gdk_window_get_colormap (GDK_ROOT_PARENT ()), prefs->color1);
+			gboolean success;
+
+#if 0
+			gdk_color_alloc (gdk_window_get_colormap (gdk_get_default_root_window ()), prefs->color1);
+#else
+			gdk_colormap_alloc_colors (gdk_drawable_get_colormap (gdk_get_default_root_window ()),
+						   prefs->color1, 1, FALSE, TRUE, &success);
+#endif
 			gdk_gc_set_foreground (gc, prefs->color1);
 			gdk_draw_rectangle (bg_applier->p->pixmap, gc, TRUE,
 					    bg_applier->p->render_geom.x,
@@ -793,12 +794,26 @@ render_to_screen (BGApplier *bg_applier, const BGPreferences *prefs)
 			 GDK_RGB_DITHER_MAX, 0, 0);
 	} else {
 		if (bg_applier->p->type == BG_APPLIER_ROOT) {
-			gdk_color_alloc (gdk_window_get_colormap (GDK_ROOT_PARENT()), prefs->color1);
-			gdk_window_set_background (GDK_ROOT_PARENT (), prefs->color1);
-			gdk_window_clear (GDK_ROOT_PARENT ());
+			gboolean success;
+
+#if 0
+			gdk_color_alloc (gdk_window_get_colormap (gdk_get_default_root_window()), prefs->color1);
+#else
+			gdk_colormap_alloc_colors (gdk_drawable_get_colormap (gdk_get_default_root_window ()),
+						   prefs->color1, 1, FALSE, TRUE, &success);
+#endif
+			gdk_window_set_background (gdk_get_default_root_window (), prefs->color1);
+			gdk_window_clear (gdk_get_default_root_window ());
 		}
 		else if (bg_applier->p->type == BG_APPLIER_PREVIEW) {
+			gboolean success;
+
+#if 0
 			gdk_color_alloc (gdk_window_get_colormap (bg_applier->p->preview_widget->window), prefs->color1);
+#else
+			gdk_colormap_alloc_colors (gdk_drawable_get_colormap (gdk_get_default_root_window ()),
+						   prefs->color1, 1, FALSE, TRUE, &success);
+#endif
 			gdk_gc_set_foreground (gc, prefs->color1);
 			gdk_draw_rectangle (bg_applier->p->pixmap, gc, TRUE,
 					    bg_applier->p->render_geom.x,
@@ -851,7 +866,11 @@ create_pixmap (BGApplier *bg_applier, const BGPreferences *prefs)
 		if (!GTK_WIDGET_REALIZED (bg_applier->p->preview_widget))
 			gtk_widget_realize (bg_applier->p->preview_widget);
 
+#if 0
 		bg_applier->p->pixmap = GTK_PIXMAP (bg_applier->p->preview_widget)->pixmap;
+#else
+		gtk_image_get_pixmap (GTK_IMAGE (bg_applier->p->preview_widget), &bg_applier->p->pixmap, NULL);
+#endif
 		bg_applier->p->pixmap_is_set = TRUE;
 		break;
 	}
@@ -1266,7 +1285,7 @@ wallpaper_full_cover_p (const BGApplier *bg_applier, const BGPreferences *prefs)
 	else if (prefs->wallpaper_type == WPTYPE_STRETCHED)
 		return TRUE;
 
-	gdk_window_get_size (GDK_ROOT_PARENT (), &swidth, &sheight);
+	gdk_drawable_get_size (gdk_get_default_root_window (), &swidth, &sheight);
 	pwidth = gdk_pixbuf_get_width (bg_applier->p->wallpaper_pixbuf);
 	pheight = gdk_pixbuf_get_height (bg_applier->p->wallpaper_pixbuf);
 

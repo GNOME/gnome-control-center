@@ -25,6 +25,7 @@
 # include "config.h"
 #endif
 
+#include <string.h>
 #include <stdarg.h>
 
 #include "gconf-property-editor.h"
@@ -899,7 +900,7 @@ peditor_font_value_changed (GConfClient         *client,
 	value = gconf_entry_get_value (entry);
 
 	if (value != NULL) {
-		gchar *font_name;
+		const gchar *font_name;
 
 		value_wid = peditor->p->conv_to_widget_cb (value);
 		font_name = gconf_value_get_string (value_wid);

@@ -26,6 +26,8 @@
 #  include <config.h>
 #endif
 
+#include <string.h>
+
 #include <gnome.h>
 #include <gconf/gconf-client.h>
 #include <glade/glade.h>
@@ -263,7 +265,7 @@ create_dialog (BGApplier *bg_applier)
 /* Callback issued when a button is clicked on the dialog */
 
 static void
-dialog_button_clicked_cb (GnomeDialog *dialog, gint response_id, GConfChangeSet *changeset) 
+dialog_button_clicked_cb (GtkDialog *dialog, gint response_id, GConfChangeSet *changeset) 
 {
 	switch (response_id) {
 	case GTK_RESPONSE_APPLY:

@@ -233,7 +233,7 @@ prefs_dialog_ok_cb (GtkWidget *widget, GladeXML *data)
 
 	prefs = g_object_get_data (G_OBJECT (data), "prefs_struct");
 	read_preferences (data, prefs);
-	gnome_dialog_close (GNOME_DIALOG (prefs_dialog));
+	gtk_widget_destroy (GTK_WIDGET (prefs_dialog));
 	prefs_dialog = NULL;
 	prefs_dialog_data = NULL;
 }
@@ -243,7 +243,7 @@ prefs_dialog_apply_cb (GtkWidget *widget, GladeXML *data)
 {
 	GnomeCCPreferences *prefs;
 
-	prefs = gtk_object_get_data (GTK_OBJECT (data), "prefs_struct");
+	prefs = g_object_get_data (G_OBJECT (data), "prefs_struct");
 	read_preferences (data, prefs);
 }
 
@@ -252,12 +252,12 @@ prefs_dialog_cancel_cb (GtkWidget *widget, GladeXML *data)
 {
 	GnomeCCPreferences *prefs;
 
-	prefs = gtk_object_get_data (GTK_OBJECT (data), "prefs_struct");
+	prefs = g_object_get_data (G_OBJECT (data), "prefs_struct");
 	gnomecc_preferences_copy (prefs, old_prefs);
-	gtk_signal_emit (GTK_OBJECT (prefs),
-			 gnomecc_preferences_signals[CHANGED_SIGNAL]);
+	g_signal_emit (GTK_OBJECT (prefs),
+		       gnomecc_preferences_signals[CHANGED_SIGNAL], 0);
 
-	gnome_dialog_close (GNOME_DIALOG (prefs_dialog));
+	gtk_widget_destroy (GTK_WIDGET (prefs_dialog));
 	prefs_dialog = NULL;
 	prefs_dialog_data = NULL;
 }
@@ -283,6 +283,25 @@ tree_widget_toggled_cb (GtkWidget *widget)
 		 !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)));
 }
 
+static void
+prefs_dialog_response (GtkWidget *widget, gint id, GladeXML *data)
+{
+	switch (id) {
+	case GTK_RESPONSE_OK:
+		prefs_dialog_ok_cb (widget, data);
+		break;
+	case GTK_RESPONSE_APPLY:
+		prefs_dialog_apply_cb (widget, data);
+		break;
+	case GTK_RESPONSE_CANCEL:
+		prefs_dialog_cancel_cb (widget, data);
+		break;
+	default:
+		g_warning ("file %s: line %d: Unknown response id %d", __FILE__, __LINE__, id);
+		break;
+	}
+}
+
 GtkWidget *
 gnomecc_preferences_get_config_dialog (GnomeCCPreferences *prefs) 
 {
@@ -304,6 +323,7 @@ gnomecc_preferences_get_config_dialog (GnomeCCPreferences *prefs)
 	prefs_dialog = glade_xml_get_widget (prefs_dialog_data, 
 					     "preferences_dialog");
 
+#if 0
 	gnome_dialog_button_connect
 		(GNOME_DIALOG (prefs_dialog), 0,
 		 GTK_SIGNAL_FUNC (prefs_dialog_ok_cb),
@@ -318,9 +338,13 @@ gnomecc_preferences_get_config_dialog (GnomeCCPreferences *prefs)
 		(GNOME_DIALOG (prefs_dialog), 2,
 		 GTK_SIGNAL_FUNC (prefs_dialog_cancel_cb),
 		 prefs_dialog_data);
+#else
+	g_signal_connect (G_OBJECT (prefs_dialog), "response",
+			  (GCallback) prefs_dialog_response, prefs_dialog_data);
+#endif
 
-	gtk_object_set_data (GTK_OBJECT (prefs_dialog_data), 
-			     "prefs_struct", prefs);
+	g_object_set_data (G_OBJECT (prefs_dialog_data), 
+			   "prefs_struct", prefs);
 
 	glade_xml_signal_connect (prefs_dialog_data,
 				  "tree_widget_toggled_cb",

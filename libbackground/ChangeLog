@@ -1,3 +1,18 @@
+2002-02-12  Lauris Kaplinski  <lauris@ximian.com>
+
+	* applier.c (draw_disabled_message): Use g_object_unref for GdkGC
+	(render_wallpaper): Use gdk_drawable_get_size
+	(render_to_screen): Use gdk_get_default_root_window
+	(wallpaper_full_cover_p): Ditto
+
+	* preferences.c (read_color_from_string): Use gdk_rgb_find_color
+
+	* applier.c (bg_applier_get_preview_widget): Use gnome_program_locate_file,
+	replace GDK_ROOT_PARENT with gdk_get_default_root_window, deprecated
+	gdk_window_* methods with gdk_drawable_* ones
+	(bg_applier_get_preview_widget): Removed gtk_widget_push_visual,
+	gtk_widget_pop_visual, use gtk_image instead of gtk_pixmap
+
 2002-02-07  Richard Hestilow  <hestilow@ximian.com>
 
 	* applier.c (BGApplierPrivate): Add "timeout" field.

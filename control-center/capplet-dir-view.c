@@ -414,7 +414,7 @@ option_menu_activate (GtkWidget *w, CappletDirEntry *entry)
 {
 	CappletDirView *view;
 
-	view = gtk_object_get_user_data (GTK_OBJECT (w));
+	view = g_object_get_data (G_OBJECT (w), "user_data");
 	if (!IS_CAPPLET_DIR_VIEW (view))
 		return;
 
@@ -449,10 +449,20 @@ capplet_dir_view_load_dir (CappletDirView *view, CappletDir *dir)
 	menu = gtk_menu_new ();
 
 	for (entry = CAPPLET_DIR_ENTRY (dir); entry; entry = CAPPLET_DIR_ENTRY (entry->dir), parents++) {
+		GdkPixbuf *pb, *pbs;
+
 		menuitem = gtk_menu_item_new ();
 		hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
 
+#if 0
 		w = gnome_pixmap_new_from_file_at_size (entry->icon, 16, 16);
+#else
+		pb = gdk_pixbuf_new_from_file (entry->icon, NULL);
+		pbs = gdk_pixbuf_scale_simple (pb, 16, 16, GDK_INTERP_HYPER);
+		w = gtk_image_new_from_pixbuf (pb);
+		g_object_unref (pbs);
+		g_object_unref (pb);
+#endif
 		gtk_box_pack_start (GTK_BOX (hbox), w,
 				    FALSE, FALSE, 0);
 
@@ -463,13 +473,13 @@ capplet_dir_view_load_dir (CappletDirView *view, CappletDir *dir)
 		gtk_container_add (GTK_CONTAINER (menuitem), hbox);
 
 		if (entry != CAPPLET_DIR_ENTRY (dir)) {
-			gtk_object_set_user_data (GTK_OBJECT (menuitem), view);
-			gtk_signal_connect (GTK_OBJECT (menuitem), "activate",
-					    GTK_SIGNAL_FUNC (option_menu_activate),
-					    entry);
+			g_object_set_data (G_OBJECT (menuitem), "user_data", view);
+			g_signal_connect (G_OBJECT (menuitem), "activate",
+					  (GCallback) option_menu_activate,
+					  entry);
 		}
 		
-		gtk_menu_prepend (GTK_MENU (menu), menuitem);
+		gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), menuitem);
 	}
 	gtk_widget_show_all (menu);
 }
@@ -516,7 +526,7 @@ prefs_changed_cb (GnomeCCPreferences *prefs)
 	GList *node;
 
 	for (node = window_list; node; node = node->next)
-		gtk_object_set (GTK_OBJECT (node->data), "layout", prefs->layout, NULL);
+		g_object_set (G_OBJECT (node->data), "layout", prefs->layout, NULL);
 }
 
 void
