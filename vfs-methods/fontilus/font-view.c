@@ -43,6 +43,7 @@
 #include <gdk/gdkx.h>
 #include <libgnomevfs/gnome-vfs.h>
 #include <libgnomevfs/gnome-vfs-mime-handlers.h>
+#include <libgnomeui/libgnomeui.h>
 
 FT_Error FT_New_Face_From_URI(FT_Library library,
 			      const gchar *uri,
@@ -342,6 +343,34 @@ expose_event(GtkWidget *widget, GdkEventExpose *event, GdkPixmap *pixmap)
     return FALSE;
 }
 
+static void
+set_icon(GtkWindow *window, const gchar *uri)
+{
+    GnomeIconTheme *icon_theme;
+    gchar *icon_name = NULL, *icon_file = NULL;
+    GdkPixbuf *pixbuf = NULL;
+
+    icon_theme = gnome_icon_theme_new();
+
+    icon_name = gnome_icon_lookup_sync(icon_theme, NULL, uri, NULL,
+				       GNOME_ICON_LOOKUP_FLAGS_NONE, NULL);
+    if (!icon_name) goto end;
+
+    icon_file = gnome_icon_theme_lookup_icon(icon_theme, icon_name,
+					     48,  NULL, NULL);
+    if (!icon_file) goto end;
+
+    pixbuf = gdk_pixbuf_new_from_file(icon_file, NULL);
+    if (!pixbuf) goto end;
+
+    gtk_window_set_icon(window, pixbuf);
+end:
+    if (pixbuf) g_object_unref(pixbuf);
+    g_free(icon_file);
+    g_free(icon_name);
+    g_object_unref(icon_theme);
+}
+
 int
 main(int argc, char **argv)
 {
@@ -392,6 +421,7 @@ main(int argc, char **argv)
 			face->style_name ? ", " : "",
 			face->style_name, NULL);
     gtk_window_set_title(GTK_WINDOW(window), title);
+    set_icon(GTK_WINDOW(window), argv[1]);
     g_free(title);
     gtk_window_set_resizable(GTK_WINDOW(window), TRUE);
 
