@@ -46,8 +46,8 @@ typedef struct {
         GtkWidget *ext_remove_button;
         GtkWidget *application_menu;
         GtkWidget *component_menu;
-	char 	  mime_string[256]; /* FIXME: Find out max length of mime string */
-        GList 	  *tmp_ext[2];
+	char *mime_string;
+        GList *tmp_ext[2];
         GtkFileSelection *file_selector;
 } edit_window;
 
@@ -63,6 +63,7 @@ static GtkFileSelection *show_file_selector 	   (const char  *title, 		gpointer 
 static void
 destruction_handler (GtkWidget *widget, gpointer data)
 {
+	g_free (main_win->mime_string);
 	g_free (main_win);
 	main_win = NULL;
 }
@@ -167,7 +168,7 @@ initialize_main_win ()
 
 	gchar *title[2] = {"Extensions"};
 
-	main_win = g_new (edit_window, 1);
+	main_win = g_new0 (edit_window, 1);
 	main_win->window = gnome_dialog_new ("",
 					     GNOME_STOCK_BUTTON_OK,
 					     GNOME_STOCK_BUTTON_CANCEL,
@@ -387,7 +388,8 @@ launch_edit_window (const char *mime_type)
 		initialize_main_win ();
 	}
 
-	strcpy (main_win->mime_string, mime_type);
+	g_free (main_win->mime_string);
+	main_win->mime_string = g_strdup (mime_type);
 	main_win->tmp_ext[0] = NULL;
 	main_win->tmp_ext[1] = NULL;
 	
@@ -513,7 +515,7 @@ populate_application_menu (GtkWidget *application_menu, const char *mime_type)
 			/* See if we have a match */
 			if (found_match) {
 				/* Have menu appear with default application selected */
-				gtk_menu_set_active ( GTK_MENU (new_menu), index);
+				gtk_menu_set_active (GTK_MENU (new_menu), index);
 			} else {
 				/* FIXME: What should we do in this case? */
 			}
