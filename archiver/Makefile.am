@@ -65,9 +65,9 @@ EXTRA_DIST = \
 #
 ximian_archiverConf.sh: ximian_archiverConf.sh.in Makefile
 	sed -e 's?\@VERSION\@?$(VERSION)?' \
-	    -e 's?\@XIMIAN_ARCHIVER_LIBDIR\@?$(XIMIAN_ARCHIVER_LIBDIR)?g' \
-	    -e 's?\@XIMIAN_ARCHIVER_LIBS\@?$(XIMIAN_ARCHIVER_LIBS)?g' \
-	    -e 's?\@XIMIAN_ARCHIVER_INCLUDEDIR\@?$(XIMIAN_ARCHIVER_INCLUDEDIR)?g' \
+	    -e 's?\@XIMIAN_ARCHIVER_LIBDIR\@?$(XIMIAN_ARCHIVER_LIBDIR_CONF)?g' \
+	    -e 's?\@XIMIAN_ARCHIVER_LIBS\@?$(XIMIAN_ARCHIVER_LIBS_CONF)?g' \
+	    -e 's?\@XIMIAN_ARCHIVER_INCLUDEDIR\@?$(XIMIAN_ARCHIVER_INCLUDEDIR_CONF)?g' \
 	    < $(srcdir)/ximian_archiverConf.sh.in > ximian_archiverConf.tmp \
 	  && mv ximian_archiverConf.tmp ximian_archiverConf.sh
 
