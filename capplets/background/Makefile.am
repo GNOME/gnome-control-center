@@ -16,12 +16,12 @@ INCLUDES = \
 	-DGNOME_ICONDIR=\""${prefix}/share/pixmaps"\"	\
 	-DG_LOG_DOMAIN=\"background-properties\"	\
 	-DGLADE_DATADIR=\""$(Gladedir)"\"		\
+	-I$(top_srcdir)/libcapplet                      \
 	$(GNOME_INCLUDEDIR)				\
 	$(LIBGLADE_CFLAGS)				\
 	$(XML_CFLAGS)					\
 	-I$(top_srcdir)/				\
-	-I$(top_srcdir)/intl				\
-	-I$(top_srcdir)/libcapplet
+	-I$(top_srcdir)/intl
 
 bin_PROGRAMS = background-properties-capplet
 

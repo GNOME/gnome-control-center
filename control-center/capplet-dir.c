@@ -312,7 +312,7 @@ start_capplet_through_root_manager (GnomeDesktopEntry *gde)
 
 			dup2 (pipe_fd[0], 0);
       
-			for (i = 3; i < OPEN_MAX; i++) close(i);
+			for (i = 3; i < FOPEN_MAX; i++) close(i);
 
 			arg[0] = gnome_is_program_in_path ("root-manager");
 			arg[1] = NULL;

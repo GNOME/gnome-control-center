@@ -1,3 +1,10 @@
+2000-10-14  Bradford Hovinen  <hovinen@helixcode.com>
+
+	Courtesy John B Tunison <jtunison@andrew.cmu.edu>:
+	* capplet-dir.c (start_capplet_through_root_manager): Use
+	FOPEN_MAX rather than OPEN_MAX, since some people don't seem to be
+	have OPEN_MAX defined by default
+
 2000-08-22  Bradford Hovinen  <hovinen@helixcode.com>
 
 	* Makefile.am (INCLUDES): Changed SETTINGS_DIR to

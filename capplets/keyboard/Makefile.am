@@ -16,12 +16,12 @@ INCLUDES = \
 	-DGNOME_ICONDIR=\""${prefix}/share/pixmaps"\"	\
 	-DG_LOG_DOMAIN=\"keyboard-properties\"		\
 	-DGLADE_DATADIR=\""$(Gladedir)"\"		\
+	-I$(top_srcdir)/libcapplet			\
 	$(GNOME_INCLUDEDIR)				\
 	$(XML_CFLAGS)					\
 	$(LIBGLADE_CFLAGS)				\
 	-I$(top_srcdir)/				\
-	-I$(top_srcdir)/intl				\
-	-I$(top_srcdir)/libcapplet
+	-I$(top_srcdir)/intl				
 
 bin_PROGRAMS = keyboard-properties-capplet
 
