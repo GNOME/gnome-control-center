@@ -107,6 +107,8 @@ setup_dialog (GladeXML *dialog, Bonobo_PropertyBag bag)
 {
 	CREATE_PEDITOR (boolean, "enable_esd", "enable_toggle");
 	CREATE_PEDITOR (boolean, "event_sounds", "events_toggle");
+
+	bonobo_peditor_set_guard (WID ("events_toggle"), bag, "enable_esd");
 }
 
 /* get_legacy_settings
