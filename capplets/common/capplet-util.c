@@ -219,9 +219,12 @@ quit_cb (BonoboPropertyControl *pc, Bonobo_ConfigDatabase db)
 static BonoboObject *
 create_control_cb (BonoboGenericFactory *factory, Bonobo_ConfigDatabase db) 
 {
-	BonoboPropertyControl *property_control;
-	CORBA_Environment ev;
-	Bonobo_EventSource_ListenerId id;
+	static BonoboPropertyControl  *property_control = NULL;
+	CORBA_Environment              ev;
+	Bonobo_EventSource_ListenerId  id;
+
+	if (property_control != NULL)
+		return NULL;
 
 	CORBA_exception_init (&ev);
 
