@@ -1,3 +1,71 @@
+2002-06-02  Seth Nickell  <snickell@stanford.edu>
+
+	* .cvsignore:
+
+	Update to deal with the .pc file that gets generated.
+	
+	* Makefile.am:
+
+	Build a real library, not just a non-installed. This is to get around
+	problems dealing with GObject inheritance and static memory problems. We
+	have a run time loaded object deriving from the library, so it has to link it in. But then
+	the problem that occurs is that both the run-time loaded library and the
+	program that calls it statically link the .la in. Then they have different
+	memory spaces, and type registration goes to pot. Open to suggestions if there's
+	a way of doing this without making an installed library.
+	
+	* gnome-window-manager.c: (gnome_window_manager_new),
+	(gnome_window_manager_get_name), (gnome_window_manager_set_theme),
+	(gnome_window_manager_get_theme_list),
+	(gnome_window_manager_set_font),
+	(gnome_window_manager_get_focus_follows_mouse),
+	(gnome_window_manager_set_focus_follows_mouse),
+	(gnome_window_manager_init), (gnome_window_manager_finalize),
+	(gnome_window_manager_class_init), (gnome_window_manager_get_type):
+	* gnome-window-manager.h:
+
+	Lots of formatting fixes, change some of the boilerplate.
+
+	* gnome-window-settings-2.0.pc.in:
+
+	Since we're installing a library, go the whole way. Its good to make this
+	easy to depend on for external window managers anyway, now that I think
+	of it.
+	
+	* gnome-wm-manager.c: (gnome_wm_manager_init),
+	(gnome_wm_manager_get_list), (gnome_wm_manager_set_current),
+	(gnome_wm_manager_get_current),
+	(gnome_wm_manager_change_wm_to_settings), (restart_label_update),
+	(restart_dialog_raise), (restart_dialog_destroyed),
+	(show_restart_dialog), (hide_restart_dialog), (init_session),
+	(update_session), (init_callback), (restart_finalize),
+	(restart_failure), (show_restart_info), (restart_finish),
+	(restart_callback), (restart), (revert_callback),
+	(cancel_callback):
+	* gnome-wm-manager.h:
+
+	Add code for doing the window manager switch to the library,
+	snitched out of wm-properties. Its probably a little broken right now.
+	
+	* wm-exec.c: (wm_is_running), (find_gnome_wm_window),
+	(find_wm_window_from_client), (window_has_wm_state),
+	(descendent_has_wm_state), (find_wm_window_from_hunt),
+	(find_wm_window), (start_timeout), (start_do), (kill_timeout),
+	(wm_restart), (wm_guess_current):
+	* wm-list.c: (is_blank), (wm_compare), (wm_free),
+	(wm_check_present), (wm_copy), (wm_list_find), (wm_list_find_exec),
+	(wm_list_find_files), (wm_list_read_dir), (wm_list_init),
+	(wm_list_save), (wm_list_revert), (wm_list_add), (wm_list_delete),
+	(wm_list_set_current), (wm_list_get_current), (wm_list_get_revert),
+	(wm_read_from_xml), (wm_list_read_from_xml), (wm_write_to_xml),
+	(wm_list_write_to_xml), (xml_read_bool), (xml_write_bool):
+	* wm-properties.h:
+
+	Take wm-switching code out of the capplet, move it here.
+
+	(Jacob, I did a make dist and build the resulting tarball, hope things
+	 don't break for you this time ... )
+
 2002-05-15  jacob berkman  <jacob@ximian.com>
 
 	* Makefile.am: don't link against libs, like libbackground does
