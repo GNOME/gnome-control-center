@@ -451,8 +451,6 @@ bg_applier_apply_prefs (BGApplier           *bg_applier,
 				gdk_pixbuf_new_from_file (new_prefs->wallpaper_filename, NULL);
 
 			if (bg_applier->p->wallpaper_pixbuf == NULL) {
-				g_warning (_("Could not load pixbuf \"%s\"; disabling wallpaper."),
-					   new_prefs->wallpaper_filename);
 				new_prefs->wallpaper_enabled = FALSE;
 			}
 			else if (bg_applier->p->type == BG_APPLIER_ROOT) {
