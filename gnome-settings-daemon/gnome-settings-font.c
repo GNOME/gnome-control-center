@@ -27,17 +27,17 @@ load_cursor (GConfClient *client)
   gchar *mkfontdir_cmd;
 
   /* setting up the dir */
-  font_dir_name = g_build_path (G_DIR_SEPARATOR_S, g_get_home_dir (), ".gnome", NULL);
+  font_dir_name = g_build_path (G_DIR_SEPARATOR_S, g_get_home_dir (), ".gnome2", NULL);
   if (! g_file_test (font_dir_name, G_FILE_TEST_EXISTS))
     mkdir (font_dir_name, 0755);
   g_free (font_dir_name);
   
-  font_dir_name = g_build_path (G_DIR_SEPARATOR_S, g_get_home_dir (), ".gnome/share", NULL);
+  font_dir_name = g_build_path (G_DIR_SEPARATOR_S, g_get_home_dir (), ".gnome2/share", NULL);
   if (! g_file_test (font_dir_name, G_FILE_TEST_EXISTS))
     mkdir (font_dir_name, 0755);
   g_free (font_dir_name);
 
-  font_dir_name = g_build_path (G_DIR_SEPARATOR_S, g_get_home_dir (), ".gnome/share/fonts", NULL);
+  font_dir_name = g_build_path (G_DIR_SEPARATOR_S, g_get_home_dir (), ".gnome2/share/fonts", NULL);
   if (! g_file_test (font_dir_name, G_FILE_TEST_EXISTS))
     mkdir (font_dir_name, 0755);
 
@@ -59,7 +59,7 @@ load_cursor (GConfClient *client)
       return;
     }
 
-  dir_name = g_build_path (G_DIR_SEPARATOR_S, g_get_home_dir (), ".gnome/share/cursor-fonts", NULL);
+  dir_name = g_build_path (G_DIR_SEPARATOR_S, g_get_home_dir (), ".gnome2/share/cursor-fonts", NULL);
   if (! g_file_test (dir_name, G_FILE_TEST_EXISTS))
     mkdir (dir_name, 0755);
 
