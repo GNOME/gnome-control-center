@@ -318,13 +318,8 @@ load_pixbufs (void)
 static void
 setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 {
-	GtkWidget   *widget;
 	GObject     *peditor;
 	GConfValue  *value;
-
-	int          double_click;
-	int          threshold;
-	gfloat       acceleration;
 
 	/* Buttons page
 	 */
@@ -424,7 +419,6 @@ main (int argc, char **argv)
 	GladeXML       *dialog;
 	GtkWidget      *dialog_win;
 
-	static gboolean apply_only;
 	static gboolean get_legacy;
 	static struct poptOption cap_options[] = {
 		{ "get-legacy", '\0', POPT_ARG_NONE, &get_legacy, 0,
