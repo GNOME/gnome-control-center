@@ -22,6 +22,6 @@ libuuid_a_SOURCES = \
 	$(NULL)
 
 INCLUDES = \
-	@GLIB_CFLAGS@	\
+	$(GNOMECC_CAPPLETS_CFLAGS) \
 	$(WERROR)	\
 	$(NULL)

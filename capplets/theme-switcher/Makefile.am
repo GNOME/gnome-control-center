@@ -9,11 +9,11 @@ gtk2_theme_selector_capplet_LDFLAGS = -export-dynamic
 
 @INTLTOOL_DESKTOP_RULE@
 
-desktopdir = $(GNOMECC_DATA_DIR)/capplets/Advanced
+desktopdir = $(GNOMECC_DESKTOP_DIR)/Advanced
 Desktop_in_files = gtk-theme-selector.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
-gladedir = $(GNOMECC_DATA_DIR)/interfaces
+gladedir = $(GNOMECC_GLADE_DIR)
 glade_DATA = gtk-theme-selector.glade
 
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)

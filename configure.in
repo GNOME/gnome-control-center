@@ -49,6 +49,7 @@ PKG_CHECK_MODULES(GNOMECC, $COMMON_MODULES libxml-2.0 gnome-desktop-2.0)
 PKG_CHECK_MODULES(GNOME_SETTINGS_DAEMON, gtk+-2.0 gconf-2.0 libgnomeui-2.0 esound)
 PKG_CHECK_MODULES(OLD_CAPPLET, libgnomeui-2.0 libglade-2.0)
 PKG_CHECK_MODULES(GNOME, libgnomeui-2.0)
+PKG_CHECK_MODULES(VFS_CAPPLET, $COMMON_MODULES gnome-vfs-module-2.0 gnome-vfs-2.0)
 
 if test "$XSCREENSAVER" = no ; then
  	AC_MSG_ERROR(xscreensaver was not found. It can be downloaded from http://www.jwz.org/xscreensaver/.)
@@ -86,6 +87,9 @@ GNOMECC_CAPPLETS_LIBS="${CAPPLET_LIBS} ${COMMON_LIBS}"
 GNOMECC_CAPPLETS_CLEANFILES="\$(desktop) \$(desktop).in"
 GNOMECC_CAPPLETS_EXTRA_DIST="ChangeLog \$(desktop).in.in \$(cappletname)-capplet.png \$(cappletname)-properties.glade \$(pixmaps_DATA)"
 
+VFS_CAPPLET_CFLAGS="${VFS_CFLAGS} ${EXTRA_CFLAGS}"
+VFS_CAPPLET_LIBS="${VFS_LIBS} ${EXTRA_LIBS}"
+
 AC_SUBST(GNOMECC_CAPPLETS_EXTRA_DIST)
 AC_SUBST(GNOMECC_CAPPLETS_CLEANFILES)
 AC_SUBST(GNOMECC_CAPPLETS_CFLAGS)
@@ -93,6 +97,9 @@ AC_SUBST(GNOMECC_CAPPLETS_LIBS)
 
 AC_SUBST(GNOME_SETTINGS_DAEMON_CFLAGS)
 AC_SUBST(GNOME_SETTINGS_DAEMON_LIBS)
+
+AC_SUBST(VFS_CAPPLET_CFLAGS)
+AC_SUBST(VFS_CAPPLET_LIBS)
 
 dnl ==============================================
 dnl End: Define the main variables
@@ -160,8 +167,15 @@ capplets/common/Makefile
 capplets/background/Makefile
 capplets/default-applications/Makefile
 capplets/desktop-links/Makefile
+capplets/desktop-links/Sawfish/Makefile
+capplets/file-types/Makefile
+capplets/file-types/libuuid/Makefile
 capplets/keyboard/Makefile
 capplets/mouse/Makefile
+capplets/screensaver/Makefile
 capplets/sound/Makefile
+capplets/theme-switcher/Makefile
+capplets/theme-switcher/control/Makefile
+capplets/ui-properties/Makefile
 libsounds/Makefile
 idl/Makefile])

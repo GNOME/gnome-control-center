@@ -11,10 +11,10 @@ gnome2_ui_properties_SOURCES = \
 
 @INTLTOOL_DESKTOP_RULE@
 
-desktopdir = $(GNOMECC_DATA_DIR)/capplets/Advanced
+desktopdir = $(GNOMECC_DESKTOP_DIR)/Advanced
 Desktop_in_files = behavior.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
-Gladedir   = $(GNOMECC_DATA_DIR)/interfaces
+Gladedir   = $(GNOMECC_GLADE_DIR)
 Glade_DATA = behavior-properties.glade
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)

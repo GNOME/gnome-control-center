@@ -15,10 +15,10 @@ gnome2_file_types_properties_SOURCES =					\
 
 @INTLTOOL_DESKTOP_RULE@
 
-Gladedir   = $(GNOMECC_DATA_DIR)/interfaces
+Gladedir   = $(GNOMECC_GLADE_DIR)
 Glade_DATA = file-types-properties.glade
 
-desktopdir = $(GNOMECC_DATA_DIR)/capplets/Advanced
+desktopdir = $(GNOMECC_DESKTOP_DIR)/Advanced
 Desktop_in_files = file-types.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
