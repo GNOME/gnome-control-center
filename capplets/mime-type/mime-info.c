@@ -389,6 +389,8 @@ write_mime_foreach (gpointer mime_type, gpointer gmc, gpointer data)
 	gchar *buf;
 	GnomeMimeContext *context = (GnomeMimeContext *) gmc;
 
+	if (context == NULL) return;
+
 	buf = g_strconcat ((gchar *) mime_type, ":\n", NULL);
 	fwrite (buf, 1, strlen (buf), (FILE *) data);
 	g_free (buf);
