@@ -159,6 +159,8 @@ GdkPixbuf * gnome_wp_item_get_thumbnail (GnomeWPItem * item,
     gnome_thumbnail_factory_save_thumbnail (thumbs, pixbuf,
 					    gnome_vfs_escape_path_string (item->filename),
 					    item->fileinfo->mtime);
+    g_object_unref (pixbuf);
+    pixbuf = gdk_pixbuf_new_from_file (item->fileinfo->thumburi, NULL);
   }
 
   if (pixbuf != NULL) {
