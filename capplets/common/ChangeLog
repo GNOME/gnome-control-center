@@ -1,3 +1,12 @@
+2003-03-27  Andrew Sobala  <aes@gnome.org>
+
+	* gnome-theme-info.c: (gnome_theme_read_meta_theme),
+	(update_common_theme_dir_index):
+	s/read_meta_theme/gnome_theme_read_meta_theme/; enable the reading of
+	themes that just use [X-GNOME-Metatheme] without pretending to be a
+	.desktop file
+	* gnome-theme-info.h: exposed gnome_theme_read_meta_theme
+
 Tue Feb  4 17:09:18 2003  Jonathan Blandford  <jrb@redhat.com>
 
 	* Release 2.2.0.1

@@ -27,6 +27,7 @@
 #define GNOME_THEME_INFO_H
 
 #include <glib.h>
+#include <libgnomevfs/gnome-vfs.h>
 
 
 typedef enum {
@@ -117,7 +118,7 @@ GnomeThemeMetaInfo *gnome_theme_meta_info_find_by_uri      (const char         *
 GList              *gnome_theme_meta_info_find_all         (void);
 gint                gnome_theme_meta_info_compare          (GnomeThemeMetaInfo *a,
 							    GnomeThemeMetaInfo *b);
-
+GnomeThemeMetaInfo *gnome_theme_read_meta_theme                      (GnomeVFSURI *meta_theme_uri);
 
 /* Other */
 void                gnome_theme_init                       (gboolean           *monitor_not_added);

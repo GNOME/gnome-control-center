@@ -7,6 +7,8 @@
 #include <libgnome/gnome-desktop-item.h>
 #include "gnome-theme-info.h"
 
+#define THEME_NAME "X-GNOME-Metatheme/Name"
+#define THEME_COMMENT "X-GNOME-Metatheme/Comment"
 #define GTK_THEME_KEY "X-GNOME-Metatheme/GtkTheme"
 #define METACITY_THEME_KEY "X-GNOME-Metatheme/MetacityTheme"
 #define SAWFISH_THEME_KEY "X-GNOME-Metatheme/SawfishTheme"
@@ -87,7 +89,7 @@ static void                remove_data_from_hash_by_name        (GHashTable     
 static gpointer            get_data_from_hash_by_name           (GHashTable                     *hash_table,
 								 const gchar                    *name,
 								 gint                            priority);
-static GnomeThemeMetaInfo *read_meta_theme                      (GnomeVFSURI                    *meta_theme_uri);
+
 static GnomeThemeIconInfo *read_icon_theme                      (GnomeVFSURI                    *icon_theme_uri);
 static void                handle_change_signal                 (GnomeThemeType                  type,
 								 gpointer                        theme,
@@ -294,8 +296,8 @@ get_data_from_hash_by_name (GHashTable  *hash_table,
   return NULL;
 }  
   
-static GnomeThemeMetaInfo *
-read_meta_theme (GnomeVFSURI *meta_theme_uri)
+GnomeThemeMetaInfo *
+gnome_theme_read_meta_theme (GnomeVFSURI *meta_theme_uri)
 {
   GnomeThemeMetaInfo *meta_theme_info;
   GnomeVFSURI *common_theme_dir_uri;
@@ -316,16 +318,23 @@ read_meta_theme (GnomeVFSURI *meta_theme_uri)
   meta_theme_info->path = meta_theme_file;
   meta_theme_info->name = gnome_vfs_uri_extract_short_name (common_theme_dir_uri);
   gnome_vfs_uri_unref (common_theme_dir_uri);
+  str = gnome_desktop_item_get_localestring (meta_theme_ditem, THEME_NAME);
 
-  str = gnome_desktop_item_get_localestring (meta_theme_ditem, GNOME_DESKTOP_ITEM_NAME);
-  if (str == NULL)
-    {
-      gnome_theme_meta_info_free (meta_theme_info);
-      return NULL;
-    }
+  if (!str)
+     {
+     str = gnome_desktop_item_get_localestring (meta_theme_ditem, GNOME_DESKTOP_ITEM_NAME);
+     if (!str) /* shouldn't reach */
+       {
+         gnome_theme_meta_info_free (meta_theme_info);
+         return NULL;
+       }
+     }
+     
   meta_theme_info->readable_name = g_strdup (str);
 
-  str = gnome_desktop_item_get_localestring (meta_theme_ditem, GNOME_DESKTOP_ITEM_COMMENT);
+  str = gnome_desktop_item_get_localestring (meta_theme_ditem, THEME_COMMENT);
+  if (str == NULL)
+    str = gnome_desktop_item_get_localestring (meta_theme_ditem, GNOME_DESKTOP_ITEM_COMMENT);
   if (str != NULL)
     meta_theme_info->comment = g_strdup (str);
 
@@ -641,7 +650,7 @@ update_common_theme_dir_index (GnomeVFSURI *theme_index_uri,
 	}
       else
 	{
-	  theme_info = read_meta_theme (theme_index_uri);
+	  theme_info = gnome_theme_read_meta_theme (theme_index_uri);
 	  if (theme_info)
 	    {
 	      ((GnomeThemeMetaInfo *) theme_info)->priority = priority;
