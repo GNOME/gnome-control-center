@@ -126,7 +126,7 @@ AM_CONDITIONAL(MONIKER_ENABLE, test "x$moniker_enable" = "xyes")
 dnl ==============================================
 dnl Check that we meet the  dependencies
 dnl ==============================================
-capplet_modules="libcapplet >= 1.4.0 libglade-gnome gdk_pixbuf gdk_pixbuf_xlib gal > 0.8"
+capplet_modules="libcapplet >= 1.5.2 libglade-gnome gdk_pixbuf gdk_pixbuf_xlib gal > 0.8"
 PKG_CHECK_MODULES(CAPPLET, $capplet_modules $PKG_BONOBO_CONF_CHECK)
 PKG_CHECK_MODULES(GNOMECC, gnomeui libglade xml gdk_pixbuf gnomecanvaspixbuf $PKG_BONOBO_CHECK gtkhtml >= 0.9)
 PKG_CHECK_MODULES(RMHELPER, gnomeui gnomecanvaspixbuf)
