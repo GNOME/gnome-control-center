@@ -5,13 +5,17 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.2.0\n"
-"POT-Creation-Date: 2001-09-23 01:08+0200\n"
+"POT-Creation-Date: 2001-11-25 01:34+0100\n"
 "PO-Revision-Date: 2001-08-19 14:26+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: archiver/archive.c:614
+msgid "Default location"
+msgstr "Privzeta lokacija"
 
 #: archiver/config-archiver.c:307 archiver/location.c:460
 msgid "Default Location"
@@ -174,12 +178,21 @@ msgstr "Mo¾nosti za dodajanje ali preimenovanje lokacij"
 msgid "Options for adding and removing backends"
 msgstr ""
 
-#: capplets/background/applier.c:381
+#: capplets/background/applier.c:223
+msgid "Type"
+msgstr ""
+
+#: capplets/background/applier.c:224
+msgid ""
+"Type of applier: APPLIER_ROOT for root window or APPLIER_PREVIEW for preview"
+msgstr ""
+
+#: capplets/background/applier.c:385
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr "Nisem mogel nalo¾iti slike \"%s\"; tapete izkljuèene."
 
-#: capplets/background/applier.c:520
+#: capplets/background/applier.c:491
 msgid "Disabled"
 msgstr "Izkljuèeno"
 
@@ -247,38 +260,13 @@ msgstr ""
 msgid "Vertical gradient"
 msgstr "Navpièni preliv"
 
-#: capplets/background/prefs-widget.c:362
-msgid "(None)"
-msgstr "(Brez)"
-
-#: capplets/background/prefs-widget.c:611
-msgid "Wallpaper Selection"
-msgstr "Izbira tapet"
-
-#: capplets/background/prefs-widget.c:618
-msgid "Can't find an hbox, using a normal file selection"
-msgstr "Ne najdem hbox-a, uporabljam obièajno izbiranje datotek"
-
-#: capplets/background/prefs-widget.c:624
-#: capplets/screensaver/screensaver-properties.glade.h:11
-msgid "Preview"
-msgstr "Predogled"
-
-#: capplets/common/capplet-util.c:500
+#: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr "Le uveljavi nastavitve in konèaj"
 
-#: capplets/common/capplet-util.c:502
-msgid "Initialize the session"
-msgstr "Inicializiraj sejo"
-
-#: capplets/common/capplet-util.c:504
+#: capplets/common/capplet-util.c:243
 msgid "Retrieve and store legacy settings"
 msgstr ""
-
-#: capplets/common/capplet-util.c:513
-msgid "Capplet options"
-msgstr "Mo¾nosti nastavitvenega vstavka"
 
 #: capplets/default-applications/default-applications.desktop.in.in.h:1
 msgid "Choose the applications used by default"
@@ -609,16 +597,12 @@ msgstr "Obèutljivost"
 msgid "Custom screensaver. No description available"
 msgstr "Nestandarden ohranjevalnik zaslona. Opis ni dostopen"
 
-#: capplets/screensaver/prefs-widget.c:202
-msgid "Use"
-msgstr "Uporabi"
-
-#: capplets/screensaver/prefs-widget.c:202
+#: capplets/screensaver/prefs-widget.c:192
 #: capplets/screensaver/screensaver.desktop.in.in.h:2
 msgid "Screensaver"
 msgstr "Ohranjevalnik zaslona"
 
-#: capplets/screensaver/prefs-widget.c:920
+#: capplets/screensaver/prefs-widget.c:740
 #, c-format
 msgid "About %s\n"
 msgstr "O %s\n"
@@ -723,6 +707,10 @@ msgstr "Pojdi v spanje po"
 #: capplets/screensaver/screensaver-properties.glade.h:10
 msgid "One screensaver all the time"
 msgstr "En ohranjevalnik ves èas"
+
+#: capplets/screensaver/screensaver-properties.glade.h:11
+msgid "Preview"
+msgstr "Predogled"
 
 #: capplets/screensaver/screensaver-properties.glade.h:12
 msgid "R_equire password to unlock screen"
@@ -1759,6 +1747,7 @@ msgid ""
 "This repeatedly generates spirally string-art-ish patterns.  Written by "
 "Jamie Zawinski."
 msgstr ""
+"Ponavljajoèe generira spiralno zavite vzorce.  Napisal Jamie Zawinski."
 
 #: capplets/screensaver/screensavers/helix.xml.h:4
 msgid "Time between redraws."
@@ -1811,7 +1800,7 @@ msgstr ""
 
 #: capplets/screensaver/screensavers/ifs.xml.h:2
 msgid "IFS"
-msgstr ""
+msgstr "IFS"
 
 #: capplets/screensaver/screensavers/ifs.xml.h:4
 msgid ""
@@ -2083,8 +2072,9 @@ msgid ""
 "are built in, and it can also read PDB (Protein Data Base) files as input.  "
 "Written by Jamie Zawinski."
 msgstr ""
-"Ri¹e veè razliènih predstavitev molekul. Nekatere obièajne molekule "
-"so vgrajene, hkrati pa lahko kot vhod bere PDB (zbirko podatkov o proteinih).  Napisal Jamie Zawinski."
+"Ri¹e veè razliènih predstavitev molekul. Nekatere obièajne molekule so "
+"vgrajene, hkrati pa lahko kot vhod bere PDB (zbirko podatkov o proteinih).  "
+"Napisal Jamie Zawinski."
 
 #: capplets/screensaver/screensavers/molecule.xml.h:2
 msgid "Molecule"
@@ -2095,7 +2085,9 @@ msgid ""
 "Another 3d shape-changing GL hack, by Marcelo Vianna.  It has the same shiny-"
 "plastic feel as Superquadrics, as many computer-generated objects do..."
 msgstr ""
-"©e en hack spreminjanja 3d oblike s strani Marcela Vianne.  Daje enak obèutek svetleèe plastike kot Superquadrics in veèina raèunalni¹ko generiranih objektov..."
+"©e en hack spreminjanja 3d oblike s strani Marcela Vianne.  Daje enak "
+"obèutek svetleèe plastike kot Superquadrics in veèina raèunalni¹ko "
+"generiranih objektov..."
 
 #: capplets/screensaver/screensavers/morph3d.xml.h:2
 msgid "Morph3D"
@@ -2133,10 +2125,9 @@ msgstr ""
 "        XOR 1,2\t\t\t\t\t\t\t      \n"
 "        JRST .-4\t\t\t\t\t\t      \n"
 "\t\t\t\t\t\t\t\t      \n"
-"Kot je poroèal HAKMEM leta 1962, je Jackson Wright napisal zgornjo PDP-1 kodo.  "
-"35 let pozneje ta koda ¹e vedno ¾ivi v tem hacku.  ©tevilo vrstic "
-"okoli kode se je od takrat opazno poveèalo.  "
-"Napisal Tim Showalter."
+"Kot je poroèal HAKMEM leta 1962, je Jackson Wright napisal zgornjo PDP-1 "
+"kodo.  35 let pozneje ta koda ¹e vedno ¾ivi v tem hacku.  ©tevilo vrstic "
+"okoli kode se je od takrat opazno poveèalo.  Napisal Tim Showalter."
 
 #: capplets/screensaver/screensavers/munch.xml.h:10
 msgid "Draw square at weird starting points."
@@ -2155,7 +2146,8 @@ msgid ""
 "Draws different shapes composed of nervously vibrating squiggles, as if seen "
 "through a camera operated by a monkey on crack.  By Dan Bornstein."
 msgstr ""
-"Ri¹e razliène oblike sestavljene iz nervozno vibrajoèih delov, kot se jih vidi skozi kamero s katero operira zadeta opica.  Napisal Dan Bornstein."
+"Ri¹e razliène oblike sestavljene iz nervozno vibrajoèih delov, kot se jih "
+"vidi skozi kamero s katero operira zadeta opica.  Napisal Dan Bornstein."
 
 #: capplets/screensaver/screensavers/nerverot.xml.h:2
 msgid "NerveRot"
@@ -2242,14 +2234,13 @@ msgid ""
 msgstr ""
 
 #: capplets/screensaver/screensavers/phosphor.xml.h:1
-#, fuzzy
 msgid ""
 "Draws a simulation of an old terminal, with large pixels and long-sustain "
 "phosphor.  It can run any program as a source of the text it displays.  "
 "Written by Jamie Zawinski."
 msgstr ""
 "Ri¹e simulacijo starega terminala z velikimi piksli in dolgo osvetljenim "
-"fosforjem."
+"fosforjem.  Kot izvor besedila, ki ga poka¾e, lahko slu¾i katerikoli program.  Napisal Jamie Zawinski."
 
 #: capplets/screensaver/screensavers/phosphor.xml.h:2
 msgid "Phosphor"
@@ -2271,11 +2262,11 @@ msgid ""
 "and mipmaps, plus a ``frames per second'' meter so that you can tell how "
 "fast your graphics card is...  Requires OpenGL.  Written by David Konerding."
 msgstr ""
+"Ri¹e nekaj sekajoèih se ravnin, uporablja tudi aplha blending, meglo, teksture, mipmape in ima merilec ''okvirjev na seknod'', tako da lahko pove, kako hitra je va¹a grafièna kartica...  Zahteva OpenGL.  Napisal David Konerding. "
 
 #: capplets/screensaver/screensavers/pulsar.xml.h:2
-#, fuzzy
 msgid "Pulsar"
-msgstr "Zaigraj"
+msgstr "Pulzar"
 
 #: capplets/screensaver/screensavers/pyro.xml.h:1
 msgid "Frequency of missile launch"
@@ -2360,16 +2351,15 @@ msgid ""
 "of growing square-like shapes that, once they overtake each other, react in "
 "unpredictable ways.  ``RD'' stands for reaction-diffusion."
 msgstr ""
+"©e ena varijacija programa `Bomba' Scotta Dravesa. Ta ri¹e mre¾o rastoèih kvadratom podobnih oblik, ki, ko prevzamejo druga drugo, reagirajo na nepredvidljiv naèin.  ``RD'' pomeni reakcija-difuzija."
 
 #: capplets/screensaver/screensavers/rd-bomb.xml.h:2
-#, fuzzy
 msgid "RD-Bomb"
-msgstr "Rd-bomba"
+msgstr "RD-bomba"
 
 #: capplets/screensaver/screensavers/ripples.xml.h:1
-#, fuzzy
 msgid "Ripples (oily)"
-msgstr "Valovèki"
+msgstr "Valovèki (oljni)"
 
 #: capplets/screensaver/screensavers/ripples.xml.h:2
 msgid ""
@@ -2388,6 +2378,7 @@ msgid ""
 "rotation and direction.  It can also display 3D separations for red/blue "
 "glasses!  Mostly written by Jamie Zawinski."
 msgstr ""
+"To ri¹e animacijo leta skozi pas asteroidov s spremembami smeri in vrtenjem.  Prika¾e lahko tudi sparacije za 3D redèe/modra oèala!  Veèinoma napisal Jamie Zawinski."
 
 #: capplets/screensaver/screensavers/rorschach.xml.h:1
 msgid "Delay before next redraw"
@@ -2442,11 +2433,11 @@ msgid ""
 "Creates a collage of rotated and scaled portions of the screen.  Written by "
 "Claudio Matsuoka."
 msgstr ""
+"Ustvari kola¾ iz zasukanih in skaliranih slik zaslona.  Napisal Claudio Matsuoka."
 
 #: capplets/screensaver/screensavers/rotzoomer.xml.h:2
-#, fuzzy
 msgid "RotZoomer"
-msgstr "Rotor"
+msgstr "RotoZoomer"
 
 #: capplets/screensaver/screensavers/rubik.xml.h:1
 msgid ""
@@ -2455,32 +2446,29 @@ msgid ""
 msgstr ""
 
 #: capplets/screensaver/screensavers/rubik.xml.h:2
-#, fuzzy
 msgid "Rubik"
 msgstr "Rubikova kocka"
 
 #: capplets/screensaver/screensavers/shadebobs.xml.h:1
-#, fuzzy
 msgid "ShadeBobs"
 msgstr "Senèeni bobi"
 
 #: capplets/screensaver/screensavers/shadebobs.xml.h:2
-#, fuzzy
 msgid ""
 "This draws smoothly-shaded oscilating oval patterns, that look something "
 "like vapor trails or neon tubes.  Written by Shane Smit."
-msgstr "Ri¹e mehko senèene kro¾ne ovalne vzorce, ki spominjajo na sledi hlapov"
+msgstr "Ri¹e mehko senèene kro¾ne ovalne vzorce, ki spominjajo na sledi hlapov ali neonske cevi.  Napisal Shane Smit."
 
 #: capplets/screensaver/screensavers/sierpinski3d.xml.h:1
-#, fuzzy
 msgid "Sierpinski3D"
-msgstr "Sierpinski"
+msgstr "Sierpinski3D"
 
 #: capplets/screensaver/screensavers/sierpinski3d.xml.h:2
 msgid ""
 "This draws the three-dimensional variant of the recursive Sierpinski "
 "triangle fractal, using GL.  Written by Tim Robinson and Jamie Zawinski."
 msgstr ""
+"Ri¹e trodimenzionalno razlièico rekurzivnega Sierpiskijevega trikotnega fraktala z uporabo OpenGl.  Nappisala Tim Robinson in Jamie Zawinski."
 
 #: capplets/screensaver/screensavers/sierpinski.xml.h:3
 msgid "Sierpinski"
@@ -2491,6 +2479,7 @@ msgid ""
 "This draws the two-dimensional variant of the recursive Sierpinski triangle "
 "fractal.  Written by Desmond Daignault."
 msgstr ""
+"Ri¹e dvodimenizonalno razlièico fraktalnega trikotnika Sierpinskega.  Napisal Desmond Daignault."
 
 #: capplets/screensaver/screensavers/slidescreen.xml.h:1
 #, fuzzy
@@ -2935,6 +2924,7 @@ msgid ""
 "A rendition of the text scrolls seen in the movie ``The Matrix.'' Written by "
 "Jamie Zawinski."
 msgstr ""
+"Prikaz premikanja besedila, kot je bil viden v filmu Matrica.  Napisal Jamie Zawinski."
 
 #: capplets/screensaver/screensavers/xmatrix.xml.h:2
 msgid "Xmatrix"
@@ -2972,6 +2962,7 @@ msgid ""
 "The XScreenSaver logo.  Don't you hate it?  So do I.  Would you like to "
 "design a new logo for XScreenSaver?\tIf so, send jwz your submissions."
 msgstr ""
+"Logotip ohranjevalnika zaslona X.  Ga ne sovra¾ite?  Tudi jaz ga.  ®elite oblikovati nov logotip za ohranjevalnik zaslona X?\nV tem primeru po¹ljite prispevke jwz-ju."
 
 #: capplets/screensaver/screensavers/xroger.xml.h:3
 msgid "Xroger"
@@ -2982,10 +2973,11 @@ msgid ""
 "Draws falling snow and the occasional tiny Santa.  By Rick Jansen.  You can "
 "find it at <http://www.euronet.nl/~rja/Xsnow/>."
 msgstr ""
+"Ri¹e padanje snega in obèasno majhnega bo¾ièka.  Napisal Rick Jansen.  Program najdete na <http://www.euronet.nl/~rja/Xsnow/>."
 
 #: capplets/screensaver/screensavers/xsnow.xml.h:2
 msgid "Xsnow"
-msgstr ""
+msgstr "Xsneg"
 
 #: capplets/screensaver/screensavers/xspirograph.xml.h:1
 msgid ""
@@ -2998,22 +2990,20 @@ msgid "XSpiroGraph"
 msgstr ""
 
 #: capplets/screensaver/screensavers/xteevee.xml.h:1
-#, fuzzy
 msgid "XTeeVee"
-msgstr "XTV"
+msgstr "XTeeVee"
 
 #: capplets/screensaver/screensavers/xteevee.xml.h:2
-#, fuzzy
 msgid ""
 "XTeeVee simulates various television problems, including static, loss of "
 "vertical hold, and a test pattern.  By Greg Knauss."
 msgstr ""
 "Simulira razliène probleme televizije kot so ¹um, izguba vertikalne "
-"sinhronizacije in testne slike."
+"sinhronizacije in testne slike.  Napisal Greg Knauss."
 
 #: capplets/screensaver/screensavers/zoom.xml.h:1
 msgid "Zoom (Fatbits)"
-msgstr ""
+msgstr "Zoom (Fatbits)"
 
 #: capplets/screensaver/screensavers/zoom.xml.h:2
 msgid ""
@@ -3021,6 +3011,8 @@ msgid ""
 "option the result is like looking through many overlapping lenses rather "
 "than just a simple zoom.  Written by James Macnicol."
 msgstr ""
+"Poveèa del zaslona in se nato premika okoli.  Z -lenses je rezultat "
+"kot, da bi gledal èez veè prekritih leè in ne skozi enostavno poveèavo.  Napisal James Macnicol."
 
 #: capplets/screensaver/selection-dialog.c:99
 msgid "Add a new screensaver"
@@ -3051,23 +3043,31 @@ msgid "Enable sound server startup"
 msgstr "Vkljuèi zagon stre¾nika za zvok"
 
 #: capplets/sound/sound-properties.glade.h:2
+msgid "General"
+msgstr "Splo¹no"
+
+#: capplets/sound/sound-properties.glade.h:3
+msgid "Sound Events"
+msgstr "Zvoèni dogodki"
+
+#: capplets/sound/sound-properties.glade.h:4
 msgid "Sounds for events"
 msgstr "Zvoki ob dogodkih"
 
-#: control-center/capplet-dir-view.c:296 control-center/gnomecc.desktop.in.h:1
+#: control-center/capplet-dir-view.c:298 control-center/gnomecc.desktop.in.h:1
 msgid "GNOME Control Center"
 msgstr "Kontrolni center GNOME"
 
-#: control-center/capplet-dir-view.c:297
+#: control-center/capplet-dir-view.c:299
 msgid "Desktop properties manager."
 msgstr "Upravljalnik lastnosti namizja."
 
-#: control-center/capplet-dir-view.c:408
+#: control-center/capplet-dir-view.c:413
 #, c-format
 msgid "Gnome Control Center : %s"
 msgstr "Kontrolni center Gnome : %s"
 
-#: control-center/capplet-dir-view.c:456
+#: control-center/capplet-dir-view.c:461
 msgid ""
 "No help is available/installed. Please make sure you\n"
 "have the GNOME User's Guide installed on your system."
@@ -3075,11 +3075,11 @@ msgstr ""
 "Pomoè za te nastavitve ni na voljo / ni name¹èena. Prosim preprièajte se,\n"
 "da imate GNOME Uporabni¹ki Vodiè name¹èen na va¹em sistemu."
 
-#: control-center/capplet-dir-view.c:459
+#: control-center/capplet-dir-view.c:464
 msgid "Close"
 msgstr "Zapri"
 
-#: control-center/capplet-dir-view-html.c:150
+#: control-center/capplet-dir-view-html.c:145
 msgid "GNOME Control Center:"
 msgstr "Kontrolni center GNOME:"
 
@@ -3124,28 +3124,43 @@ msgid "Put control panels in the control center's window"
 msgstr "Postavi kontrolne pulte v okno kontrolnega centra"
 
 #: control-center/Gnome.directory.in.in.h:1
-#, fuzzy
 msgid "Main"
-msgstr "Veliko"
+msgstr "Glavna"
 
 #: control-center/Gnome.directory.in.in.h:2
-#, fuzzy
 msgid "Main Settings"
-msgstr "Nakljuène Nastavitve"
+msgstr "Glavne nastavitve"
 
-#: control-center/main.c:46
-#, fuzzy
+#: control-center/main.c:40
 msgid "Configuration"
-msgstr "Nastavitve"
+msgstr "Nastavitv"
 
-#: control-center/main.c:72
+#: control-center/main.c:63
 msgid "Run the capplet CAPPLET"
 msgstr "Po¾eni nastavitveni vstavek CAPPLET"
 
-#: control-center/main.c:72
+#: control-center/main.c:63
 msgid "CAPPLET"
 msgstr "CAPPLET"
 
-#: control-center/main.c:80
+#: control-center/main.c:70
 msgid "GNOME Control Center options"
 msgstr "Mo¾nosti Kontrolnega centra GNOME"
+
+#~ msgid "(None)"
+#~ msgstr "(Brez)"
+
+#~ msgid "Wallpaper Selection"
+#~ msgstr "Izbira tapet"
+
+#~ msgid "Can't find an hbox, using a normal file selection"
+#~ msgstr "Ne najdem hbox-a, uporabljam obièajno izbiranje datotek"
+
+#~ msgid "Initialize the session"
+#~ msgstr "Inicializiraj sejo"
+
+#~ msgid "Capplet options"
+#~ msgstr "Mo¾nosti nastavitvenega vstavka"
+
+#~ msgid "Use"
+#~ msgstr "Uporabi"
