@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0.5\n"
-"POT-Creation-Date: 2000-05-22 15:22+0200\n"
+"POT-Creation-Date: 2000-05-22 13:57-0400\n"
 "PO-Revision-Date: 1999-09-27 19:00+0100\n"
 "Last-Translator: Richard Hult <rhult@hem2.passagen.se>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -68,6 +68,7 @@ msgstr "Kan inte hitta hbox, använder en vanlig filväljare"
 
 #: capplets/background-properties/property-background.c:860
 #: capplets/background-properties/property-background.c:1297
+#: capplets/keyboard-properties/keyboard-properties.c:342
 #: capplets/screensaver-properties/screensaver-dialog.c:25
 #: capplets/theme-switcher/gui.c:226 capplets/theme-switcher/gui.c:298
 msgid "Preview"
@@ -103,6 +104,8 @@ msgstr "Sida-vid-sida"
 
 #: capplets/background-properties/property-background.c:1098
 #: capplets/gnome-edit-properties/gnome-edit-properties.c:179
+#: capplets/keyboard-properties/keyboard-properties.c:91
+#: capplets/keyboard-properties/keyboard-properties.c:410
 #: capplets/mouse-properties/mouse-properties.c:111
 #: capplets/screensaver-properties/callbacks.c:802
 #: capplets/session-properties/session-properties.c:319
@@ -120,6 +123,8 @@ msgstr ""
 
 #: capplets/background-properties/property-background.c:1100
 #: capplets/gnome-edit-properties/gnome-edit-properties.c:181
+#: capplets/keyboard-properties/keyboard-properties.c:93
+#: capplets/keyboard-properties/keyboard-properties.c:412
 #: capplets/mouse-properties/mouse-properties.c:113
 #: capplets/screensaver-properties/callbacks.c:804
 #: capplets/session-properties/session-properties.c:321
@@ -551,6 +556,67 @@ msgstr " minuter efter att skärmsläckaren startat."
 #: capplets/screensaver-properties/screensaver-properties-capplet.c:151
 msgid "Screen Saver Demo"
 msgstr "Demo"
+
+#: capplets/keyboard-properties/keyboard-properties.c:250
+msgid "Keyboard bell"
+msgstr "Tangentbordsljud"
+
+#: capplets/keyboard-properties/keyboard-properties.c:258
+msgid "Volume"
+msgstr "Volym"
+
+#: capplets/keyboard-properties/keyboard-properties.c:261
+msgid "Pitch (Hz)"
+msgstr "Tonläge (Hz)"
+
+#: capplets/keyboard-properties/keyboard-properties.c:264
+msgid "Duration (ms)"
+msgstr "Längd (ms)"
+
+#: capplets/keyboard-properties/keyboard-properties.c:276
+msgid "Test"
+msgstr "Test"
+
+#: capplets/keyboard-properties/keyboard-properties.c:294
+msgid "Keyboard repeat rate"
+msgstr "Repeteringshastighet"
+
+#: capplets/keyboard-properties/keyboard-properties.c:304
+msgid "Enable auto-repeat"
+msgstr "Aktivera autorepetering"
+
+#: capplets/keyboard-properties/keyboard-properties.c:313
+msgid "Repeat rate"
+msgstr "Repeteringshastighet"
+
+#: capplets/keyboard-properties/keyboard-properties.c:316
+msgid "Repeat Delay"
+msgstr "Tid innan repetering"
+
+#: capplets/keyboard-properties/keyboard-properties.c:318
+msgid "Keyboard click"
+msgstr "Tangentbordsklick"
+
+#: capplets/keyboard-properties/keyboard-properties.c:327
+msgid "Click on keypress"
+msgstr "Klicka vid tangentnedslag"
+
+#: capplets/keyboard-properties/keyboard-properties.c:336
+msgid "Click volume"
+msgstr "Klickvolym"
+
+#: capplets/keyboard-properties/keyboard-properties.c:347
+msgid "Test settings"
+msgstr "Prova inställningar"
+
+#: capplets/keyboard-properties/keyboard-properties.c:453
+msgid ""
+"an initialization error occurred while starting "
+"'keyboard-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"ett fel uppstod vid start av 'keyboard-properties-capplet'.\n"
+"avbryter...\n"
 
 #: capplets/session-properties/chooser.c:57
 msgid "Session"
@@ -1350,16 +1416,16 @@ msgstr "GNOME kontrollpanel"
 msgid "Desktop Properties manager."
 msgstr "Egenskaper för skrivbordet."
 
-#: control-center/capplet-manager.c:181
+#: control-center/capplet-manager.c:179
 msgid "Try"
 msgstr "Försök"
 
-#: control-center/capplet-manager.c:187
+#: control-center/capplet-manager.c:185
 msgid "Revert"
 msgstr "Återgå"
 
 #. set the help item
-#: control-center/capplet-manager.c:210
+#: control-center/capplet-manager.c:208
 #, c-format
 msgid "Help with '%s' settings"
 msgstr "Hjälp för inställningar för \"%s\""
@@ -1482,58 +1548,11 @@ msgstr "Värdnamn:"
 #~ msgid "Keyboard Bell"
 #~ msgstr "Tangentbordsljud"
 
-#~ msgid "Volume"
-#~ msgstr "Volym"
-
-#~ msgid "Pitch (Hz)"
-#~ msgstr "Tonläge (Hz)"
-
-#~ msgid "Duration (ms)"
-#~ msgstr "Längd (ms)"
-
-#~ msgid "Test"
-#~ msgstr "Test"
-
 #~ msgid ""
 #~ "an initialization error occurred while starting 'bell-properties-capplet'.\n"
 #~ "aborting...\n"
 #~ msgstr ""
 #~ "ett fel uppstod vid start av 'bell-properties-capplet'.\n"
-#~ "avbryter...\n"
-
-#~ msgid "Keyboard bell"
-#~ msgstr "Tangentbordsljud"
-
-#~ msgid "Keyboard repeat rate"
-#~ msgstr "Repeteringshastighet"
-
-#~ msgid "Enable auto-repeat"
-#~ msgstr "Aktivera autorepetering"
-
-#~ msgid "Repeat rate"
-#~ msgstr "Repeteringshastighet"
-
-#~ msgid "Repeat Delay"
-#~ msgstr "Tid innan repetering"
-
-#~ msgid "Keyboard click"
-#~ msgstr "Tangentbordsklick"
-
-#~ msgid "Click on keypress"
-#~ msgstr "Klicka vid tangentnedslag"
-
-#~ msgid "Click volume"
-#~ msgstr "Klickvolym"
-
-#~ msgid "Test settings"
-#~ msgstr "Prova inställningar"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting "
-#~ "'keyboard-properties-capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "ett fel uppstod vid start av 'keyboard-properties-capplet'.\n"
 #~ "avbryter...\n"
 
 #~ msgid "Cancel"
