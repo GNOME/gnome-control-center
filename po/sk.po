@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.5.1\n"
-"POT-Creation-Date: 2001-12-20 10:42-0500\n"
-"PO-Revision-Date: 2001-12-13 14:17CET\n"
+"POT-Creation-Date: 2002-01-09 17:15+0100\n"
+"PO-Revision-Date: 2002-01-09 17:33CET\n"
 "Last-Translator: Stanislav Visnovsky <visnovsky@nenya.ms.mff.cuni.cz>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
@@ -18,237 +18,250 @@ msgstr ""
 msgid "Default location"
 msgstr "©tandardné umiestnenie"
 
+#: archiver/config-archiver.c:81 archiver/main.c:78
+msgid "Store XML data in the archive"
+msgstr "Ulo¾i» XML dáta do archívu"
+
+#: archiver/config-archiver.c:83 archiver/main.c:80
+msgid "Roll back the configuration to a given point"
+msgstr "Vráti» spä» nastavenie a¾ po daný bod"
+
+#: archiver/config-archiver.c:85 archiver/main.c:82
+msgid "Change the location profile to the given one"
+msgstr "Zmeni» profil umiestnenia na daný"
+
+#: archiver/config-archiver.c:87 archiver/main.c:84
+msgid "Push configuration data out to client machines (UNIMPLEMENTED)"
+msgstr "Presunú» nastavenie na klientské poèítaèe (NEIMPLEMENTOVANÉ)"
+
+#: archiver/config-archiver.c:89 archiver/main.c:86
+msgid "Rename a location to a new name"
+msgstr "Premenova» umiestnenie"
+
+#: archiver/config-archiver.c:91 archiver/main.c:88
+msgid "Add a new location to the archive"
+msgstr "Prida» nové umiestnenie do archívu"
+
+#: archiver/config-archiver.c:93 archiver/main.c:90
+msgid "Remove a location from the archive"
+msgstr "Odstráni» umiestnenie z archívu"
+
+#: archiver/config-archiver.c:95 archiver/main.c:92
+msgid "Add a given backend to the given location"
+msgstr "Prida» daný stroj do daného umiestnenia"
+
+#: archiver/config-archiver.c:97 archiver/main.c:94
+msgid "Remove the given backend from the given location"
+msgstr "Odstráni» daný stroj z daného umiestnenia"
+
+#: archiver/config-archiver.c:99 archiver/main.c:96
+msgid "Perform garbage collection on the given location"
+msgstr "Vykoná upratovanie zadaného miesta"
+
+#: archiver/config-archiver.c:105 archiver/main.c:102
+msgid "Use the global repository"
+msgstr "Pou¾i» globálny sklad"
+
+#: archiver/config-archiver.c:107 archiver/main.c:104
+msgid "Identifier of location profile on which to operate"
+msgstr "Identifikátor profilu umiestnenia, s ktorým pracova»"
+
+#: archiver/config-archiver.c:108 archiver/main.c:105
+msgid "LOCATION"
+msgstr "UMIESTNENIE"
+
+#: archiver/config-archiver.c:110 archiver/main.c:107
+msgid "Backend being used for this operation"
+msgstr "Stroj pou¾itý pre túto operáciu"
+
+#: archiver/config-archiver.c:110 archiver/main.c:107
+msgid "BACKEND_ID"
+msgstr "ID_STROJA"
+
+#: archiver/config-archiver.c:116 archiver/main.c:113
+msgid "Store only the differences with the parent location's config"
+msgstr "Ulo¾i» iba rozdiely oproti rodièovskému nastaveniu"
+
+#: archiver/config-archiver.c:118 archiver/main.c:115
+msgid "Store only those settings set in the previous config"
+msgstr "Ulo¾i» iba nastavenia existujúce v predchádzajúcom nastavení"
+
+#: archiver/config-archiver.c:124 archiver/main.c:121
+msgid "Date to which to roll back"
+msgstr "Dátum, ku ktorému sa vráti»"
+
+#: archiver/config-archiver.c:124 archiver/main.c:121
+msgid "DATE"
+msgstr "DÁTUM"
+
+#: archiver/config-archiver.c:126 archiver/main.c:123
+msgid "Roll back all configuration items"
+msgstr "Vráti» spä» celé nastavenie"
+
+#: archiver/config-archiver.c:128 archiver/main.c:125
+msgid "Roll back to the revision REVISION_ID"
+msgstr "Vráti» nastavenie ID_REVÍZIE"
+
+#: archiver/config-archiver.c:128 archiver/main.c:125
+msgid "REVISION_ID"
+msgstr "ID_REVÍZIE"
+
+#: archiver/config-archiver.c:130 archiver/main.c:127
+msgid "Roll back to the last known revision"
+msgstr "Vráti» spä» posledné známe nastavenie"
+
+#: archiver/config-archiver.c:132 archiver/main.c:129
+msgid "Roll back by STEPS revisions"
+msgstr "Vráti» o KROKY revízií nastavenia"
+
+#: archiver/config-archiver.c:132 archiver/main.c:129
+msgid "STEPS"
+msgstr "KROKY"
+
+#: archiver/config-archiver.c:134 archiver/main.c:131
+msgid "Don't run the backend, just dump the output"
+msgstr "Nespú¹ta» stroj, iba vypísa» výstup"
+
+#: archiver/config-archiver.c:140 archiver/main.c:137
+msgid "Parent location for the new location"
+msgstr "Rodièovské umiestnenie pre nové umiestnenie"
+
+#: archiver/config-archiver.c:140 archiver/main.c:137
+msgid "PARENT"
+msgstr "RODIÈ"
+
+#: archiver/config-archiver.c:142 archiver/main.c:139
+msgid "New name to assign to the location"
+msgstr "Nové meno pre toto umiestnenie"
+
+#: archiver/config-archiver.c:142 archiver/main.c:139
+msgid "NEW_NAME"
+msgstr "NOVÉ_MENO"
+
+#: archiver/config-archiver.c:148 archiver/main.c:145
+msgid "Add/remove this backend to/from the master backend list"
+msgstr "Prida»/odstráni» tento stroj do/z hlavného zoznamu strojov"
+
+#: archiver/config-archiver.c:150 archiver/main.c:147
+msgid "Full containment"
+msgstr "Plné obsahovanie"
+
+#: archiver/config-archiver.c:152 archiver/main.c:149
+msgid "Partial containment"
+msgstr "Èiastoèné obsahovanie"
+
 #: archiver/config-archiver.c:307 archiver/location.c:460
 msgid "Default Location"
 msgstr "©tandardné umiestnenie"
 
-#: archiver/config-archiver.c:81
-msgid "Store XML data in the archive"
-msgstr "Ulo¾i» XML dáta do archívu"
-
-#: archiver/config-archiver.c:83
-msgid "Roll back the configuration to a given point"
-msgstr "Vráti» spä» nastavenie a¾ po daný bod"
-
-#: archiver/config-archiver.c:85
-msgid "Change the location profile to the given one"
-msgstr "Zmeni» profil umiestnenia na daný"
-
-#: archiver/config-archiver.c:87
-msgid "Push configuration data out to client machines (UNIMPLEMENTED)"
-msgstr "Presunú» nastavenie na klientské poèítaèe (NEIMPLEMENTOVANÉ)"
-
-#: archiver/config-archiver.c:89
-msgid "Rename a location to a new name"
-msgstr "Premenova» umiestnenie"
-
-#: archiver/config-archiver.c:91
-msgid "Add a new location to the archive"
-msgstr "Prida» nové umiestnenie do archívu"
-
-#: archiver/config-archiver.c:93
-msgid "Remove a location from the archive"
-msgstr "Odstráni» umiestnenie z archívu"
-
-#: archiver/config-archiver.c:95
-msgid "Add a given backend to the given location"
-msgstr "Prida» daný stroj do daného umiestnenia"
-
-#: archiver/config-archiver.c:97
-msgid "Remove the given backend from the given location"
-msgstr "Odstráni» daný stroj z daného umiestnenia"
-
-#: archiver/config-archiver.c:99
-msgid "Perform garbage collection on the given location"
-msgstr "Vykoná upratovanie zadaného miesta"
-
-#: archiver/config-archiver.c:105
-msgid "Use the global repository"
-msgstr "Pou¾i» globálny sklad"
-
-#: archiver/config-archiver.c:107
-msgid "Identifier of location profile on which to operate"
-msgstr "Identifikátor profilu umiestnenia, s ktorým pracova»"
-
-#: archiver/config-archiver.c:108
-msgid "LOCATION"
-msgstr "UMIESTNENIE"
-
-#: archiver/config-archiver.c:110
-msgid "Backend being used for this operation"
-msgstr "Stroj pou¾itý pre túto operáciu"
-
-#: archiver/config-archiver.c:110
-msgid "BACKEND_ID"
-msgstr "ID_STROJA"
-
-#: archiver/config-archiver.c:116
-msgid "Store only the differences with the parent location's config"
-msgstr "Ulo¾i» iba rozdiely oproti rodièovskému nastaveniu"
-
-#: archiver/config-archiver.c:118
-msgid "Store only those settings set in the previous config"
-msgstr "Ulo¾i» iba nastavenia existujúce v predchádzajúcom nastavení"
-
-#: archiver/config-archiver.c:124
-msgid "Date to which to roll back"
-msgstr "Dátum, ku ktorému sa vráti»"
-
-#: archiver/config-archiver.c:124
-msgid "DATE"
-msgstr "DÁTUM"
-
-#: archiver/config-archiver.c:126
-msgid "Roll back all configuration items"
-msgstr "Vráti» spä» celé nastavenie"
-
-#: archiver/config-archiver.c:128
-msgid "Roll back to the revision REVISION_ID"
-msgstr "Vráti» nastavenie ID_REVÍZIE"
-
-#: archiver/config-archiver.c:128
-msgid "REVISION_ID"
-msgstr "ID_REVÍZIE"
-
-#: archiver/config-archiver.c:130
-msgid "Roll back to the last known revision"
-msgstr "Vráti» spä» posledné známe nastavenie"
-
-#: archiver/config-archiver.c:132
-msgid "Roll back by STEPS revisions"
-msgstr "Vráti» o KROKY revízií nastavenia"
-
-#: archiver/config-archiver.c:132
-msgid "STEPS"
-msgstr "KROKY"
-
-#: archiver/config-archiver.c:134
-msgid "Don't run the backend, just dump the output"
-msgstr "Nespú¹ta» stroj, iba vypísa» výstup"
-
-#: archiver/config-archiver.c:140
-msgid "Parent location for the new location"
-msgstr "Rodièovské umiestnenie pre nové umiestnenie"
-
-#: archiver/config-archiver.c:140
-msgid "PARENT"
-msgstr "RODIÈ"
-
-#: archiver/config-archiver.c:142
-msgid "New name to assign to the location"
-msgstr "Nové meno pre toto umiestnenie"
-
-#: archiver/config-archiver.c:142
-msgid "NEW_NAME"
-msgstr "NOVÉ_MENO"
-
-#: archiver/config-archiver.c:148
-msgid "Add/remove this backend to/from the master backend list"
-msgstr "Prida»/odstráni» tento stroj do/z hlavného zoznamu strojov"
-
-#: archiver/config-archiver.c:150
-msgid "Full containment"
-msgstr "Plné obsahovanie"
-
-#: archiver/config-archiver.c:152
-msgid "Partial containment"
-msgstr "Èiastoèné obsahovanie"
-
-#: archiver/config-archiver.c:369
+#: archiver/config-archiver.c:369 archiver/main.c:323
 msgid "Global archiver options"
 msgstr "Globálne nastavenie archivátora"
 
-#: archiver/config-archiver.c:371
+#: archiver/config-archiver.c:371 archiver/main.c:325
 msgid "Archiver commands"
 msgstr "Príkazy archivátora"
 
-#: archiver/config-archiver.c:373
+#: archiver/config-archiver.c:373 archiver/main.c:327
 msgid "Options for storing data"
 msgstr "Mo¾nosti pre ukladanie dát"
 
-#: archiver/config-archiver.c:375
+#: archiver/config-archiver.c:375 archiver/main.c:329
 msgid "Options for rolling back"
 msgstr "Mo¾nosti pre návrat k star¹ím konfiguráciám"
 
-#: archiver/config-archiver.c:377
+#: archiver/config-archiver.c:377 archiver/main.c:331
 msgid "Options for adding or renaming locations"
 msgstr "Mo¾nosti pre pridanie a premenovanie umiestnení"
 
-#: archiver/config-archiver.c:380
+#: archiver/config-archiver.c:380 archiver/main.c:334
 msgid "Options for adding and removing backends"
 msgstr "Mo¾nosti pre pridanie a odstránenie strojov"
 
-#: capplets/background/background.desktop.in.in.h:1
-msgid "Background"
-msgstr "Pozadie"
-
-#: capplets/background/background.desktop.in.in.h:2
-msgid "Configuration of the desktop's background"
-msgstr "Nastavenie pozadia plochy"
-
-#: capplets/background/background-properties-capplet.c:288
-#: capplets/common/capplet-util.c:249
+#: capplets/background/background-properties-capplet.c:291
+#: capplets/common/capplet-util.c:243
 msgid "Retrieve and store legacy settings"
 msgstr "Získa» a ulo¾i» predchádzajúce nastavenie"
 
-#: capplets/background/background-properties-capplet.c:313
+#: capplets/background/background-properties-capplet.c:317
 msgid "Background properties"
 msgstr "Vlastnosti pozadia"
 
-#: capplets/common/capplet-util.c:245 capplets/common/capplet-util.c:247
+#: capplets/background/background.desktop.in.h:1
+msgid "Background"
+msgstr "Pozadie"
+
+#: capplets/background/background.desktop.in.h:2
+msgid "Configuration of the desktop's background"
+msgstr "Nastavenie pozadia plochy"
+
+#: capplets/background/prefs-widget.c:362
+msgid "(None)"
+msgstr "(®iadne)"
+
+#: capplets/background/prefs-widget.c:611
+msgid "Wallpaper Selection"
+msgstr "Výber tapety"
+
+#: capplets/background/prefs-widget.c:618
+msgid "Can't find an hbox, using a normal file selection"
+msgstr "Nepodarilo sa nájs» hbox, pou¾ije normálny výber súboru"
+
+#: capplets/background/prefs-widget.c:624
+msgid "Preview"
+msgstr "Náhµad"
+
+#: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr "Iba pou¾i» nastavenie a skonèi»"
 
-#: capplets/common/gconf-property-editor.c:140
+#: capplets/common/gconf-property-editor.c:144
 msgid "Key"
-msgstr ""
+msgstr "Kµúè"
 
-#: capplets/common/gconf-property-editor.c:141
+#: capplets/common/gconf-property-editor.c:145
 msgid "GConf key to which this property editor is attached"
-msgstr ""
+msgstr "GConf kµúè, ku ktorému je tento editor vlastností pripojený"
 
-#: capplets/common/gconf-property-editor.c:147
+#: capplets/common/gconf-property-editor.c:151
 msgid "Callback"
-msgstr ""
+msgstr "Spätné volanie"
 
-#: capplets/common/gconf-property-editor.c:148
+#: capplets/common/gconf-property-editor.c:152
 msgid "Issue this callback when the value associated with key gets changed"
-msgstr ""
+msgstr "Zavola» toto volanie pri zmene asociovaného kµúèa"
 
-#: capplets/common/gconf-property-editor.c:153
+#: capplets/common/gconf-property-editor.c:157
 msgid "Change set"
-msgstr ""
+msgstr "Zmeni» mno¾inu"
 
-#: capplets/common/gconf-property-editor.c:154
-msgid ""
-"GConf change set containing data to be forwarded to the gconf client on apply"
-msgstr ""
+#: capplets/common/gconf-property-editor.c:158
+msgid "GConf change set containing data to be forwarded to the gconf client on apply"
+msgstr "GConf zmení mno¾inu obsahujúu dáta posielané pri odpovedi klientovi"
 
-#: capplets/common/gconf-property-editor.c:159
+#: capplets/common/gconf-property-editor.c:163
 msgid "Conversion to widget callback"
-msgstr ""
+msgstr "Spätné volanie pre prevod do prvku"
 
-#: capplets/common/gconf-property-editor.c:160
-msgid ""
-"Callback to be issued when data are to be converted from GConf to the widget"
-msgstr ""
+#: capplets/common/gconf-property-editor.c:164
+msgid "Callback to be issued when data are to be converted from GConf to the widget"
+msgstr "Volanie, ktoré sa má pou¾i» po prevode dát z GConf do prvku"
 
-#: capplets/common/gconf-property-editor.c:165
+#: capplets/common/gconf-property-editor.c:169
 msgid "Conversion from widget callback"
-msgstr ""
+msgstr "Spätné volanie pre prevod z prvku"
 
-#: capplets/common/gconf-property-editor.c:166
-msgid ""
-"Callback to be issued when data are to be converted to GConf from the widget"
-msgstr ""
+#: capplets/common/gconf-property-editor.c:170
+msgid "Callback to be issued when data are to be converted to GConf from the widget"
+msgstr "Volanie, ktoré sa má pou¾i» po prevode dát do GConf z prvku"
 
-#: capplets/common/gconf-property-editor.c:171
+#: capplets/common/gconf-property-editor.c:175
 msgid "UI Control"
-msgstr ""
+msgstr "Ovládanie rozhrania"
 
-#: capplets/common/gconf-property-editor.c:172
+#: capplets/common/gconf-property-editor.c:176
 msgid "Object that controls the property (normally a widget)"
-msgstr ""
+msgstr "Objekt, ktorý ovláda vlastnos» (normálne prvok)"
 
 #: capplets/default-applications/default-applications.desktop.in.in.h:1
 msgid "Choose the applications used by default"
@@ -322,8 +335,7 @@ msgid "Select a Web Browser"
 msgstr "Vyberte prehliadaè WWW"
 
 #: capplets/default-applications/interface.c:270
-msgid ""
-"With this option, you can select a predefined Web Browser as your default"
+msgid "With this option, you can select a predefined Web Browser as your default"
 msgstr "Táto voµba umo¾òuje vybra» ¹tandardný prehliadaè WWW"
 
 #: capplets/default-applications/interface.c:290
@@ -448,28 +460,92 @@ msgstr "Nepodarilo sa nájs» súbor pixmap: %s"
 msgid "Couldn't create pixmap from file: %s"
 msgstr "Neporadilo sa vytvori» pixmap zo súboru: %s"
 
-#: capplets/keyboard/keyboard.desktop.in.in.h:1
+#: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "Klávesnica"
 
-#: capplets/keyboard/keyboard.desktop.in.in.h:2
+#: capplets/keyboard/keyboard.desktop.in.h:2
 msgid "Keyboard Properties"
 msgstr "Vlastnosti klávesnice"
 
-#: capplets/mouse/mouse.desktop.in.in.h:1
+#: capplets/mouse/mouse.desktop.in.h:1
 msgid "Mouse"
 msgstr "My¹"
 
-#: capplets/mouse/mouse.desktop.in.in.h:2
+#: capplets/mouse/mouse.desktop.in.h:2
 msgid "Mouse Properties"
 msgstr "Vlastnosti my¹i"
 
-#: capplets/screensaver/preferences.c:813
+#: capplets/rollback/main.c:39
+msgid "Rollback the capplet given"
+msgstr "Vráti» spä» nastavenie z appletu ovládacie centra"
+
+#: capplets/rollback/main.c:41
+msgid "Operate on global backends"
+msgstr "Pracova» s globálnymi strojmi"
+
+#: capplets/rollback/main.c:56
+msgid "Options for the rollback GUI"
+msgstr "Mo¾nosti pre grafické rozhranie návratu"
+
+#: capplets/rollback/rollback-capplet-dialog.c:46
+msgid "1 year ago"
+msgstr "pred rokom"
+
+#: capplets/rollback/rollback-capplet-dialog.c:46
+msgid "6 months ago"
+msgstr "pred 6 mesiacmi"
+
+#: capplets/rollback/rollback-capplet-dialog.c:46
+msgid "1 month ago"
+msgstr "pred mesiacom"
+
+#: capplets/rollback/rollback-capplet-dialog.c:46
+msgid "1 week ago"
+msgstr "pred tý¾dòom"
+
+#: capplets/rollback/rollback-capplet-dialog.c:47
+msgid "3 days ago"
+msgstr "pred 3 dòami"
+
+#: capplets/rollback/rollback-capplet-dialog.c:47
+msgid "1 day ago"
+msgstr "vèera"
+
+#: capplets/rollback/rollback-capplet-dialog.c:47
+msgid "1 hour ago"
+msgstr "pred hodinou"
+
+#: capplets/rollback/rollback-capplet-dialog.c:47
+msgid "30 minutes ago"
+msgstr "pred 30 minútami"
+
+#: capplets/rollback/rollback-capplet-dialog.c:48
+msgid "10 minutes ago"
+msgstr "pred 10 minútami"
+
+#: capplets/rollback/rollback-capplet-dialog.c:48
+msgid "5 minutes ago"
+msgstr "pred 5 minútami"
+
+#: capplets/rollback/rollback-capplet-dialog.c:48
+msgid "1 minute ago"
+msgstr "pred minútou"
+
+#: capplets/rollback/rollback-capplet-dialog.c:48
+msgid "Current time"
+msgstr "Aktuálny èas"
+
+#: capplets/rollback/rollback-capplet-dialog.c:169
+msgid "Rollback"
+msgstr "Vráti» spä»"
+
+#: capplets/screensaver/preferences.c:815
 msgid "Custom screensaver. No description available"
 msgstr "Vlastný ¹etriè. Popis nie je k dispozícii"
 
 #: capplets/screensaver/prefs-widget.c:192
-#: capplets/screensaver/screensaver.desktop.in.in.h:2
+#: capplets/screensaver/screensaver.desktop.in.h:2
 msgid "Screensaver"
 msgstr "©etriè obrazovky"
 
@@ -477,10 +553,6 @@ msgstr "©etriè obrazovky"
 #, c-format
 msgid "About %s\n"
 msgstr "O %s\n"
-
-#: capplets/screensaver/screensaver.desktop.in.in.h:1
-msgid "Configure the settings of the screensaver"
-msgstr "Nastaví ¹etriè"
 
 #: capplets/screensaver/screensaver-prefs-dialog.c:185
 msgid "Name:"
@@ -531,6 +603,10 @@ msgstr "Viditeµné:"
 #: capplets/screensaver/screensaver-prefs-dialog.c:1711
 msgid "Any"
 msgstr "¥ubovoµné"
+
+#: capplets/screensaver/screensaver.desktop.in.h:1
+msgid "Configure the settings of the screensaver"
+msgstr "Nastaví ¹etriè"
 
 #: capplets/screensaver/screensavers/3d_clock.xml.h:1
 msgid "3d clock"
@@ -1252,8 +1328,7 @@ msgstr "Urèi» maximálnu veµkos»"
 msgid ""
 "Moving polygons, similar to a kaleidescope (more like a kaleidescope than "
 "the hack called `kaleid,' actually.) This one by Jouk Jansen."
-msgstr ""
-"Posúvajúce sa mnohouholníky, podobné kaleidoskopu. Vytvoril Jouk Jansen."
+msgstr "Posúvajúce sa mnohouholníky, podobné kaleidoskopu. Vytvoril Jouk Jansen."
 
 #: capplets/screensaver/screensavers/crystal.xml.h:11
 msgid "Number of polygons to use."
@@ -1307,8 +1382,7 @@ msgstr "DangerBall"
 msgid ""
 "Draws a ball that periodically extrudes many random spikes. Ouch! Written by "
 "Jamie Zawinski."
-msgstr ""
-"Kreslí loptu, z ktorej sa opakovane vysúvajú kopie. Napísal Jamie Zawinski."
+msgstr "Kreslí loptu, z ktorej sa opakovane vysúvajú kopie. Napísal Jamie Zawinski."
 
 #: capplets/screensaver/screensavers/decayscreen.xml.h:1
 msgid "DecayScreen"
@@ -1612,8 +1686,7 @@ msgstr "Poèet stromov."
 msgid ""
 "This draws fractal trees. Written by Peter Baumung. Everybody loves "
 "fractals, right?"
-msgstr ""
-"Kreslí fraktálne stromy. Napísal Paterm Baumung. Ka¾dý má rád fraktály, v¹ak?"
+msgstr "Kreslí fraktálne stromy. Napísal Paterm Baumung. Ka¾dý má rád fraktály, v¹ak?"
 
 #: capplets/screensaver/screensavers/galaxy.xml.h:1
 msgid "Galaxy"
@@ -1645,8 +1718,7 @@ msgstr ""
 msgid ""
 "Draws a rippling waves on a rotating wireframe grid, using GL. Written by "
 "Josiah Pease."
-msgstr ""
-"Kreslí vlny rotujúceho mrie¾kového modelu pomocou GL. Napísal Josiah Pease."
+msgstr "Kreslí vlny rotujúceho mrie¾kového modelu pomocou GL. Napísal Josiah Pease."
 
 #: capplets/screensaver/screensavers/gflux.xml.h:2
 msgid "GFlux"
@@ -1745,8 +1817,7 @@ msgid "Greynetic"
 msgstr "Greynetic"
 
 #: capplets/screensaver/screensavers/greynetic.xml.h:6
-msgid ""
-"This draws random colored and stippled rectangles. Written by Jamie Zawinski."
+msgid "This draws random colored and stippled rectangles. Written by Jamie Zawinski."
 msgstr "Kreslí náhodne vyfarbené a vyplnené obdå¾niky. Napísal Jamie Zawinski."
 
 #: capplets/screensaver/screensavers/halo.xml.h:1
@@ -2171,23 +2242,6 @@ msgstr ""
 msgid "Moebius"
 msgstr "Moebius"
 
-#: capplets/screensaver/screensavers/moire2.xml.h:1
-msgid ""
-"Another example of the fun you can have with moire interference patterns; "
-"this hack generates fields of concentric circles or ovals, and combines the "
-"planes with various operations. The planes are moving independently of one "
-"another, causing the interference lines to ``spray.'' Written by Jamie "
-"Zawinski."
-msgstr ""
-"Dal¹í príklad zábavných interferenèných vzoriek moire, kde sa generuje pole "
-"sústredných kru¾níc a oválov a kombinuje vrstvy rôznymi operáciami. Vrstvy "
-"sa nezávisle pohybujú, tak¾e interferenèné èiary vyzerajú ako sprej. Napísal "
-"Jamie Zawinski."
-
-#: capplets/screensaver/screensavers/moire2.xml.h:2
-msgid "Moire2"
-msgstr "Moire2"
-
 #: capplets/screensaver/screensavers/moire.xml.h:5
 msgid "Maximum radius increment"
 msgstr "Maximálne zväè¹enie polomeru"
@@ -2210,6 +2264,23 @@ msgstr ""
 "kreslené, ale zobrazujú sa ako výsledok interferencie. Napísal Jamie "
 "Zawinski, in¹pirácia Java program od Michaela Baynea. Ako hovorí, krása "
 "tohto ¹etrièa je, ¾e srdcom algoritmu je dvojica cyklov a trochu matematicky."
+
+#: capplets/screensaver/screensavers/moire2.xml.h:1
+msgid ""
+"Another example of the fun you can have with moire interference patterns; "
+"this hack generates fields of concentric circles or ovals, and combines the "
+"planes with various operations. The planes are moving independently of one "
+"another, causing the interference lines to ``spray.'' Written by Jamie "
+"Zawinski."
+msgstr ""
+"Dal¹í príklad zábavných interferenèných vzoriek moire, kde sa generuje pole "
+"sústredných kru¾níc a oválov a kombinuje vrstvy rôznymi operáciami. Vrstvy "
+"sa nezávisle pohybujú, tak¾e interferenèné èiary vyzerajú ako sprej. Napísal "
+"Jamie Zawinski."
+
+#: capplets/screensaver/screensavers/moire2.xml.h:2
+msgid "Moire2"
+msgstr "Moire2"
 
 #: capplets/screensaver/screensavers/molecule.xml.h:1
 msgid ""
@@ -2432,8 +2503,7 @@ msgid "Pyro"
 msgstr "Pyro"
 
 #: capplets/screensaver/screensavers/pyro.xml.h:9
-msgid ""
-"Pyro draws exploding fireworks. Blah blah blah. Written by Jamie Zawinski."
+msgid "Pyro draws exploding fireworks. Blah blah blah. Written by Jamie Zawinski."
 msgstr "Pyro kreslí ohòostroj. Bla bla bla. Napísal Jamie Zawinski."
 
 #: capplets/screensaver/screensavers/qix.xml.h:1
@@ -2637,18 +2707,6 @@ msgstr ""
 "Kreslí tieòované oscilujúce oválne vzorky, ktoré sa podobajú neónovým "
 "trubiciam. Napísal Shane Smit."
 
-#: capplets/screensaver/screensavers/sierpinski3d.xml.h:1
-msgid "Sierpinski3D"
-msgstr "Sierpinski3D"
-
-#: capplets/screensaver/screensavers/sierpinski3d.xml.h:2
-msgid ""
-"This draws the three-dimensional variant of the recursive Sierpinski "
-"triangle fractal, using GL. Written by Tim Robinson and Jamie Zawinski."
-msgstr ""
-"Kreslí trojrozmernú variantu rekurzívneho trojuholníkového fraktálu "
-"Sierpinskeho pomocou GL. Napísal Tim Robinson a Jamie Zawinski."
-
 #: capplets/screensaver/screensavers/sierpinski.xml.h:5
 msgid "Sierpinski"
 msgstr "Sierpinski"
@@ -2660,6 +2718,18 @@ msgid ""
 msgstr ""
 "Kreslí dvojrozmerný rekurzívny trojuholníkový Sierpinskeho fraktál. Napísal "
 "Tim Robinson a Jamie Zawinski."
+
+#: capplets/screensaver/screensavers/sierpinski3d.xml.h:1
+msgid "Sierpinski3D"
+msgstr "Sierpinski3D"
+
+#: capplets/screensaver/screensavers/sierpinski3d.xml.h:2
+msgid ""
+"This draws the three-dimensional variant of the recursive Sierpinski "
+"triangle fractal, using GL. Written by Tim Robinson and Jamie Zawinski."
+msgstr ""
+"Kreslí trojrozmernú variantu rekurzívneho trojuholníkového fraktálu "
+"Sierpinskeho pomocou GL. Napísal Tim Robinson a Jamie Zawinski."
 
 #: capplets/screensaver/screensavers/slidescreen.xml.h:1
 msgid "SlideScreen"
@@ -2722,8 +2792,7 @@ msgid ""
 "============================================================================= ! ! "
 "Documentation for some programs that are not bundled with XScreenSaver ! !"
 "============================================================================="
-msgstr ""
-"Simuluje zrýchµujúce kamene alebo tancujúceho èerva. Napísal Conrad Parker."
+msgstr "Simuluje zrýchµujúce kamene alebo tancujúceho èerva. Napísal Conrad Parker."
 
 #: capplets/screensaver/screensavers/speedmine.xml.h:2
 msgid "SpeedMine"
@@ -2934,8 +3003,7 @@ msgstr "T3D"
 msgid ""
 "This draws a working analog clock composed of floating, throbbing bubbles. "
 "Written by Bernd Paysan."
-msgstr ""
-"Kreslí analógové hodiny zlo¾ené z plávajúcich bublín. Napísal Bernd Paysan."
+msgstr "Kreslí analógové hodiny zlo¾ené z plávajúcich bublín. Napísal Bernd Paysan."
 
 #: capplets/screensaver/screensavers/triangle.xml.h:3
 msgid ""
@@ -2953,8 +3021,7 @@ msgstr "Triangle"
 msgid ""
 "This draws line- and arc-based Truchet patterns that tile the screen. "
 "Written by Adrian Likins."
-msgstr ""
-"Kreslí Truchetove vzory zlo¾ené z èiar a oblúkov. Napísal Adrian Likins."
+msgstr "Kreslí Truchetove vzory zlo¾ené z èiar a oblúkov. Napísal Adrian Likins."
 
 #: capplets/screensaver/screensavers/truchet.xml.h:2
 msgid "Truchet"
@@ -2999,8 +3066,7 @@ msgid "Vines"
 msgstr "Vines"
 
 #: capplets/screensaver/screensavers/wander.xml.h:1
-msgid ""
-"Draws a colorful random-walk, in various forms. Written by Rick Campbell."
+msgid "Draws a colorful random-walk, in various forms. Written by Rick Campbell."
 msgstr "Kreslí farebnú cestu v rôznych formách. Napísal Rick Campbell."
 
 #: capplets/screensaver/screensavers/wander.xml.h:2
@@ -3043,8 +3109,7 @@ msgstr "WhirlwindWarp"
 
 #: capplets/screensaver/screensavers/whirlygig.xml.h:1
 msgid "Draws zooming chains of sinusoidal spots. Written by Ashton Trey Belew."
-msgstr ""
-"Kreslí zväè¹ujúce sa re»azce sinusoidových bodov. Napísal Ashton Trey Belew."
+msgstr "Kreslí zväè¹ujúce sa re»azce sinusoidových bodov. Napísal Ashton Trey Belew."
 
 #: capplets/screensaver/screensavers/whirlygig.xml.h:2
 msgid "WhirlyGig"
@@ -3168,8 +3233,7 @@ msgstr "Xlyap"
 msgid ""
 "A rendition of the text scrolls seen in the movie ``The Matrix.'' Written by "
 "Jamie Zawinski."
-msgstr ""
-"Obraz posúvajúceho sa textu ako vo filme \"Matrix\". Napísal Jamie Zawinski."
+msgstr "Obraz posúvajúceho sa textu ako vo filme \"Matrix\". Napísal Jamie Zawinski."
 
 #: capplets/screensaver/screensavers/xmatrix.xml.h:2
 msgid "Xmatrix"
@@ -3282,83 +3346,9 @@ msgstr "Vlastný"
 msgid "New screensaver"
 msgstr "Nový ¹etriè"
 
-#: capplets/sound/sound.desktop.in.in.h:1
-msgid "Configure GNOME's use of sound"
-msgstr "Nastavenie zvuku v GNOME"
-
-#: capplets/sound/sound.desktop.in.in.h:2
-msgid "Sound"
-msgstr "Zvuk"
-
-#: capplets/sound/sound-properties.glade.h:1
-msgid "Enable sound server startup"
-msgstr "Povoli» spustenie zvukového serveru"
-
-#: capplets/sound/sound-properties.glade.h:2
-msgid "General"
-msgstr "V¹eobecné"
-
-#: capplets/sound/sound-properties.glade.h:3
-msgid "Sound Events"
-msgstr "Zvukové udalosti"
-
-#: capplets/sound/sound-properties.glade.h:4
-msgid "Sounds for events"
-msgstr "Zvuky pre udalosti"
-
-#: control-center/capplet-dir-view.c:147
-msgid "Layout"
-msgstr ""
-
-#: control-center/capplet-dir-view.c:148
-msgid "Layout to use for this view of the capplets"
-msgstr ""
-
-#: control-center/capplet-dir-view.c:154
-msgid "Capplet directory object"
-msgstr ""
-
-#: control-center/capplet-dir-view.c:155
-msgid "Capplet directory that this view is viewing"
-msgstr ""
-
-#: control-center/capplet-dir-view.c:320 control-center/gnomecc.desktop.in.h:1
-msgid "GNOME Control Center"
-msgstr "GNOME Ovládacie centrum"
-
-#: control-center/capplet-dir-view.c:323
-msgid "Desktop properties manager."
-msgstr "Správca nastavenia."
-
-#: control-center/capplet-dir-view.c:448
-#, c-format
-msgid "Gnome Control Center : %s"
-msgstr "GNOME Ovládacie centrum: %s"
-
-#: control-center/capplet-dir-view.c:493
-msgid ""
-"No help is available/installed. Please make sure you\n"
-"have the GNOME User's Guide installed on your system."
-msgstr ""
-"Pre tieto nastavenia nie je pomocník k dispozícii. Prosím, overte, ¾e\n"
-"máte nain¹talovaný Pou¾ívateµský manuál GNOME."
-
-#: control-center/capplet-dir-view.c:496
-msgid "Close"
-msgstr "Zavrie»"
-
-#: control-center/capplet-dir-view-html.c:145
-msgid "GNOME Control Center:"
-msgstr "GNOME Ovládacie centrum:"
-
-#: control-center/capplet-dir-view-list.c:321
-#, fuzzy, c-format
-msgid "GNOME Control Center: %s"
-msgstr "GNOME Ovládacie centrum:"
-
-#: control-center/gnomecc.desktop.in.h:2
-msgid "The GNOME configuration tool"
-msgstr "Nástroj pre nastavenie GNOME"
+#: capplets/sound/prefs-widget.c:138
+msgid "Play"
+msgstr "Hra»"
 
 #: control-center/Gnome.directory.in.in.h:1
 msgid "Main"
@@ -3368,122 +3358,263 @@ msgstr "Hlavné"
 msgid "Main Settings"
 msgstr "Hlavné nastavenie"
 
-#: libbackground/applier.c:229
-msgid "Type"
-msgstr ""
+#: control-center/capplet-dir-view-html.c:145
+msgid "GNOME Control Center:"
+msgstr "GNOME Ovládacie centrum:"
 
-#: libbackground/applier.c:230
+#: control-center/capplet-dir-view-list.c:325
+#, c-format
+msgid "GNOME Control Center: %s"
+msgstr "GNOME Ovládacie centrum: %s"
+
+#: control-center/capplet-dir-view.c:146
+msgid "Layout"
+msgstr "Rozmiestnenie"
+
+#: control-center/capplet-dir-view.c:147
+msgid "Layout to use for this view of the capplets"
+msgstr "Rozmiestnenie pou¾ité pre tento pohµad appletov ovládacie centra"
+
+#: control-center/capplet-dir-view.c:153
+msgid "Capplet directory object"
+msgstr "Objekt prieèinku appletu ovládacieho centra"
+
+#: control-center/capplet-dir-view.c:154
+msgid "Capplet directory that this view is viewing"
+msgstr "Prieèinok appletu ovládacieho centra, ktorý je zobrazený týmto pohµadom"
+
+#: control-center/capplet-dir-view.c:308 control-center/gnomecc.desktop.in.h:1
+msgid "GNOME Control Center"
+msgstr "GNOME Ovládacie centrum"
+
+#: control-center/capplet-dir-view.c:311
+msgid "Desktop properties manager."
+msgstr "Správca nastavenia."
+
+#: control-center/capplet-dir-view.c:445
+#, c-format
+msgid "Gnome Control Center : %s"
+msgstr "GNOME Ovládacie centrum: %s"
+
+#: control-center/capplet-dir-view.c:488
+msgid ""
+"No help is available/installed. Please make sure you\n"
+"have the GNOME User's Guide installed on your system."
+msgstr ""
+"Pre tieto nastavenia nie je pomocník k dispozícii. Prosím, overte, ¾e\n"
+"máte nain¹talovaný Pou¾ívateµský manuál GNOME."
+
+#: control-center/capplet-dir-view.c:491
+msgid "Close"
+msgstr "Zavrie»"
+
+#: control-center/gnomecc.desktop.in.h:2
+msgid "The GNOME configuration tool"
+msgstr "Nástroj pre nastavenie GNOME"
+
+#: libbackground/applier.c:228
+msgid "Type"
+msgstr "Typ"
+
+#: libbackground/applier.c:229
 msgid ""
 "Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
 "for preview"
 msgstr ""
+"Typ bg_applier: BG_APPLIER_ROOT pre koreòové okno alebo "
+"BG_APPLIER_PREVIEW pre náhµad"
 
-#: libbackground/applier.c:385
+#: libbackground/applier.c:388
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
-msgstr ""
+msgstr "Nepodarilo sa naèíta» obrázok \"%s\", zakazujem tapetu."
 
-#: libbackground/applier.c:501
+#: libbackground/applier.c:505
 msgid "Disabled"
-msgstr ""
+msgstr "Zakázané"
 
-#: libsounds/sound-view.c:98
-msgid "The sound file for this event does not exist."
-msgstr ""
+#: root-manager/root-manager-helper.c:54
+msgid "Could not connect to X Display"
+msgstr "Nepodarilo sa pripoji» k X displeju"
 
-#: libsounds/sound-view.c:100
+#: root-manager/root-manager-helper.c:60
+msgid "Could not duplicate file descriptor"
+msgstr "Nepodarilo sa duplikova» deskriptor súboru"
+
+#: root-manager/root-manager-wrap.c:56
+msgid "Pipe error.\n"
+msgstr "Chyba rúry.\n"
+
+#: root-manager/root-manager-wrap.c:62
+msgid "Cannot fork().\n"
+msgstr "Nepodarilo sa vykona» fork().\n"
+
+#: root-manager/root-manager-wrap.c:83 root-manager/root-manager-wrap.c:93
+msgid "dup2() error.\n"
+msgstr "Chyba dup2().\n"
+
+#: root-manager/root-manager-wrap.c:123
+#, c-format
+msgid "execl() error, errno=%d\n"
+msgstr "Chyba execl(), errno=%d\n"
+
+#: root-manager/root-manager-wrap.c:152
+msgid "Information updated."
+msgstr "Informácia aktualizovaná."
+
+#: root-manager/root-manager-wrap.c:155
 msgid ""
-"The sound file for this event does not exist.\n"
-"You may want to install the gnome-audio package\n"
-"for a set of default sounds."
+"The password you typed is invalid.\n"
+"Please try again."
 msgstr ""
+"Zadané heslo nie je správne.\n"
+"Prosím, skúste to znovu."
 
-#: libsounds/sound-view.c:152
-msgid "Event"
+#: root-manager/root-manager-wrap.c:158
+msgid ""
+"One or more of the changed fields is invalid.\n"
+"This is probably due to either colons or commas in one of the fields.\n"
+"Please remove those and try again."
 msgstr ""
+"Jedno alebo viac zmenených polí je neplatných.\n"
+"Mo¾no je v nich dvojbodka alebo bodkoèiarka.\n"
+"Prosím, odstráòte tieto znaky a skúste to znovu."
 
-#: libsounds/sound-view.c:152
-msgid "File to Play"
+#: root-manager/root-manager-wrap.c:161
+msgid "Password resetting error."
+msgstr "Chyba pri resetovaní hesla."
+
+#: root-manager/root-manager-wrap.c:164
+msgid ""
+"Some systems files are locked.\n"
+"Please try again in a few moments."
 msgstr ""
+"Niektoré systémové súbory sú zamknuté.\n"
+"Prosím, skúste to za chvíµu."
 
-#: libsounds/sound-view.c:185
-#, fuzzy
-msgid "Play"
-msgstr "Pulsar"
+#: root-manager/root-manager-wrap.c:167
+msgid "Unknown user."
+msgstr "Neznámy pou¾ívateµ."
 
-#: libsounds/sound-view.c:190
-#, fuzzy
-msgid "Select sound file"
-msgstr "Vyberte prehliadaè"
+#: root-manager/root-manager-wrap.c:170
+msgid "Insufficient rights."
+msgstr "Nedostatoèné práva."
 
-#~ msgid "Options for the startup hint dialog"
-#~ msgstr "Mo¾nosti pre dialóg rád pri ¹tarte"
+#: root-manager/root-manager-wrap.c:173
+msgid "Invalid call to sub process."
+msgstr "Neplatné volanie podprocesu."
 
-#~ msgid "Startup Hint"
-#~ msgstr "Rady pri ¹tarte"
+#: root-manager/root-manager-wrap.c:176
+msgid ""
+"Your current shell is not listed in /etc/shells.\n"
+"You are not allowed to change your shell.\n"
+"Consult your system administrator."
+msgstr ""
+"Aktuálny shell nie je v súbore /etc/shells.\n"
+"Nemáte právo zmeni» vá¹ shell.\n"
+"Obrá»te sa na administrátora systému."
 
-#~ msgid "Bell"
-#~ msgstr "Zvonèek"
+#. well, this is unlikely to work either, but at least we tried...
+#: root-manager/root-manager-wrap.c:180
+msgid "Out of memory."
+msgstr "Nedostatok pamäti."
 
-#~ msgid "Click volume"
-#~ msgstr "Hlasitos» stlaèenia klávesy"
+#: root-manager/root-manager-wrap.c:183
+msgid "The exec() call failed."
+msgstr "Zlyhalo volanie exec()."
 
-#~ msgid "Delay before repeat:"
-#~ msgstr "Pauza pred opakovaním:"
+#: root-manager/root-manager-wrap.c:186
+msgid "Failed to find selected program."
+msgstr "Nepodarilo sa nájs» vybraný program."
 
-#~ msgid "Duration (ms)"
-#~ msgstr "Då¾ka (ms)"
+#: root-manager/root-manager-wrap.c:189
+msgid "Unknown error."
+msgstr "Neznáma chyba."
 
-#~ msgid "Enable Keyboard Click"
-#~ msgstr "Povoli» zvuk klávesnice"
+#: root-manager/root-manager-wrap.c:192
+msgid "Unknown exit code."
+msgstr "Neznámy kód ukonèenia."
 
-#~ msgid "Enable Keyboard Repeat"
-#~ msgstr "Povoli» automatické opakovanie"
+#: root-manager/root-manager-wrap.c:280
+msgid "Input"
+msgstr "Vstup"
 
-#~ msgid "Key repeat rate:"
-#~ msgstr "Rýchlos» opakovania kláves:"
+#: root-manager/root-manager-wrap.c:386
+#, c-format
+msgid "Need %d responses.\n"
+msgstr "Potrebných %d odpovedí.\n"
 
-#~ msgid "Medium"
-#~ msgstr "Stredné"
+#: root-manager/root-manager-wrap.c:411
+msgid ""
+"In order to make changes to your system, you\n"
+"must enter the administrator (root) password."
+msgstr ""
+"Aby ste mohli zmeni» vá¹ systém, musíte zada»\n"
+"heslo administrátora (root)."
 
-#~ msgid "Pitch (Hz)"
-#~ msgstr "Vý¹ka (Hz)"
+#: root-manager/root-manager-wrap.c:425
+msgid "Error"
+msgstr "Chyba"
 
-#~ msgid "Test"
-#~ msgstr "Test"
+#: root-manager/root-manager-wrap.c:439
+#, c-format
+msgid "You want %d response(s) from %d entry fields!?!?!\n"
+msgstr "Chcete %d odpovedí z %d polo¾iek!?!?!\n"
 
-#~ msgid "Very fast"
-#~ msgstr "Veµmi rýchle"
+#: root-manager/root-manager-wrap.c:445
+msgid "Run Unprivileged"
+msgstr "Spusti» bez práv"
 
-#~ msgid "Very long"
-#~ msgstr "Veµmi dlhé"
+#: root-manager/root-manager.c:110
+#, c-format
+msgid "Got error %d.\n"
+msgstr "Získaná chyba %d.\n"
 
-#~ msgid "Volume"
-#~ msgstr "Hlasitos»"
+#: root-manager/root-manager.c:206
+#, c-format
+msgid "Password for %s"
+msgstr "Heslo pre %s"
 
-#~ msgid "Left handed"
-#~ msgstr "Pre µavákov"
+#: root-manager/root-manager.c:401
+msgid "Consistency checking is not turned on."
+msgstr "Kontrola konzistencie nebola zapnutá."
 
-#~ msgid "Mouse Configuration"
-#~ msgstr "Nastavenie my¹i"
+#: root-manager/root-manager.c:403
+msgid "Block is fine."
+msgstr "Blok je v poriadku."
 
-#~ msgid "Mouse speed:"
-#~ msgstr "Rýchlos» pohybu:"
+#: root-manager/root-manager.c:405
+msgid "Block freed twice."
+msgstr "Blok uvoµnený dvakrát."
 
-#~ msgid "My mouse is:"
-#~ msgstr "Moja my¹ je:"
+#: root-manager/root-manager.c:407
+msgid "Memory before the block was clobbered."
+msgstr "Pamä» pred blokom bola po¹kodená."
 
-#~ msgid "Right handed"
-#~ msgstr "Pre pravákov"
+#: root-manager/root-manager.c:409
+msgid "Memory after the block was clobbered."
+msgstr "Pamä» za blokom bola po¹kodená."
 
-#~ msgid "Sensitivity:"
-#~ msgstr "Citlivos»:"
+#: root-manager/root-manager.c:439
+msgid "userhelper must be setuid root\n"
+msgstr "userhelper musí by» nastavený ako setuid root\n"
 
-#~ msgid "Configuration"
-#~ msgstr "Nastavenie"
+#: root-manager/root-manager.c:444 root-manager/root-manager.c:450
+msgid "Usage: root-helper fd\n"
+msgstr "Pou¾itie: root-helper fd\n"
 
-#~ msgid "Run the capplet CAPPLET"
-#~ msgstr "Spusti» applet pre ovládacie centrum CAPPLET"
+#: root-manager/root-manager.c:554
+#, c-format
+msgid "PAM returned = %d\n"
+msgstr "PAM vrátil = %d\n"
 
-#~ msgid "CAPPLET"
-#~ msgstr "CAPPLET"
+#: root-manager/root-manager.c:555
+#, c-format
+msgid "about to authenticate \"%s\"\n"
+msgstr "chystám sa prihlási» \"%s\"\n"
+
+#: root-manager/root-manager.c:632 root-manager/root-manager.c:700
+#, c-format
+msgid "about to exec \"%s\"\n"
+msgstr "chystám sa spusti» \"%s\"\n"
+
