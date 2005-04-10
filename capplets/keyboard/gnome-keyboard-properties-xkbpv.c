@@ -46,7 +46,7 @@ extern void _XklXkbConfigCleanupNative( XkbComponentNamesPtr componentNamesPtr )
 /* */
 #endif
 
-static KeyboardDrawingGroupLevel groupsLevels[] = {{0,0},{0,1},{0,2},{0,3}};
+static KeyboardDrawingGroupLevel groupsLevels[] = {{0,1},{0,3},{0,0},{0,2}};
 static KeyboardDrawingGroupLevel * pGroupsLevels[] = {
 groupsLevels, groupsLevels+1, groupsLevels+2, groupsLevels+3 };
 
