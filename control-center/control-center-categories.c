@@ -137,8 +137,8 @@ populate_category (ControlCenterCategory *category,
 	for (l = menu_entries; l; l = l->next) {
 		MenuTreeEntry *menu_entry = l->data;
 
-		entries = g_slist_prepend (entries,
-					   control_center_entry_new (category, menu_entry));
+		entries = g_slist_append (entries,
+					  control_center_entry_new (category, menu_entry));
 
 		menu_tree_entry_unref (menu_entry);
 	}
