@@ -138,9 +138,9 @@ populate_category (ControlCenterCategory *category,
 		GMenuTreeItem *item = l->data;
 
 		if (gmenu_tree_item_get_type (item) == GMENU_TREE_ITEM_ENTRY)
-			entries = g_slist_prepend (entries,
-						   control_center_entry_new (category,
-									     GMENU_TREE_ENTRY (item)));
+			entries = g_slist_append (entries,
+						  control_center_entry_new (category,
+									    GMENU_TREE_ENTRY (item)));
 
 		gmenu_tree_item_unref (item);
 	}
