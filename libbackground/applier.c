@@ -484,138 +484,6 @@ bg_applier_new_for_screen (BGApplierType  type,
 }
 
 static void
-size_prepared_cb (GdkPixbufLoader *loader, 
-		  int              width,
-		  int              height,
-		  gpointer         data)
-{
-	struct {
-		int width;
-		int height;
-	  gboolean keep_aspect_ratio;
-	} *info = data;
-
-	if (info->keep_aspect_ratio) {
-	  if (width < 0)
-	    width = 512;
-	  if (height < 0)
-	    height = 512;
-
-	  if ((double)height * (double)info->width >
-	      (double)width * (double)info->height) {
-	    width = 0.5 + (double)width * (double)info->height / (double)height;
-	    height = info->height;
-	  } else {
-	    height = 0.5 + (double)height * (double)info->width / (double)width;
-	    width = info->width;
-	  }
-	} else {
-	  width = info->width;
-	  height = info->height;
-	}
-
-	gdk_pixbuf_loader_set_size (loader, width, height);
-}
-
-/**
- * egg_pixbuf_new_from_file_at_size:
- * @filename: Name of file to load.
- * @width: The width the image should have
- * @height: The height the image should have
- * @error: Return location for an error
- *
- * Creates a new pixbuf by loading an image from a file.  The file format is
- * detected automatically. If %NULL is returned, then @error will be set.
- * Possible errors are in the #GDK_PIXBUF_ERROR and #G_FILE_ERROR domains.
- * The image will be scaled to fit in the requested size, preserving its aspect ratio.
- *
- * Return value: A newly-created pixbuf with a reference count of 1, or %NULL if
- * any of several error conditions occurred:  the file could not be opened,
- * there was no loader for the file's format, there was not enough memory to
- * allocate the image buffer, or the image file contained invalid data.
- *
- * Since: 2.4
- **/
-static GdkPixbuf *
-egg_pixbuf_new_from_file_at_size (const char *filename,
-				  int         width, 
-				  int         height,
-				  gboolean    keep_aspect_ratio,
-				  GError    **error)
-{
-	GdkPixbufLoader *loader;
-	GdkPixbuf       *pixbuf;
-
-	guchar buffer [4096];
-	int length;
-	FILE *f;
-	struct {
-		gint width;
-		gint height;
-	  gboolean keep_aspect_ratio;
-	} info;
-
-	g_return_val_if_fail (filename != NULL, NULL);
-        g_return_val_if_fail (width > 0 && height > 0, NULL);
-
-	f = fopen (filename, "rb");
-	if (!f) {
-                g_set_error (error,
-                             G_FILE_ERROR,
-                             g_file_error_from_errno (errno),
-/* FIXME warning store translation here after gnome-2-6 branches */
-                             "Failed to open file '%s': %s",
-                             filename, g_strerror (errno));
-		return NULL;
-        }
-
-	loader = gdk_pixbuf_loader_new ();
-
-	info.width = width;
-	info.height = height;
-	info.keep_aspect_ratio = keep_aspect_ratio;
-		
-	g_signal_connect (loader, "size-prepared", G_CALLBACK (size_prepared_cb), &info);
-
-	while (!feof (f)) {
-		length = fread (buffer, 1, sizeof (buffer), f);
-		if (length > 0)
-			if (!gdk_pixbuf_loader_write (loader, buffer, length, error)) {
-				gdk_pixbuf_loader_close (loader, NULL);
-				fclose (f);
-				g_object_unref (loader);
-				return NULL;
-			}
-	}
-
-	fclose (f);
-
-	if (!gdk_pixbuf_loader_close (loader, error)) {
-		g_object_unref (loader);
-		return NULL;
-	}
-
-	pixbuf = gdk_pixbuf_loader_get_pixbuf (loader);
-
-	if (!pixbuf) {
-		g_object_unref (loader);
-		g_set_error (error,
-                             GDK_PIXBUF_ERROR,
-                             GDK_PIXBUF_ERROR_FAILED,
-/* FIXME warning store translation here after gnome-2-6 branches */
-                             "Failed to load image '%s': reason not known, probably a corrupt image file",
-                             filename);
-		return NULL;
-	}
-
-	g_object_ref (pixbuf);
-
-	g_object_unref (loader);
-
-	return pixbuf;
-}
-
-static void
 refresh_render (BGApplier *bg_applier,
 		BGPreferences *prefs,
 		gboolean need_wallpaper_load)
@@ -642,11 +510,11 @@ refresh_render (BGApplier *bg_applier,
 			if (prefs->wallpaper_type == WPTYPE_STRETCHED ||
 			    prefs->wallpaper_type == WPTYPE_SCALED) {
 				bg_applier->p->wallpaper_pixbuf = 
-					egg_pixbuf_new_from_file_at_size (prefs->wallpaper_filename,
-									  bg_applier->p->render_geom.width,
-									  bg_applier->p->render_geom.height,
-									  prefs->wallpaper_type == WPTYPE_SCALED,
-									  NULL);
+					gdk_pixbuf_new_from_file_at_scale (prefs->wallpaper_filename,
+									   bg_applier->p->render_geom.width,
+									   bg_applier->p->render_geom.height,
+									   prefs->wallpaper_type == WPTYPE_SCALED,
+									   NULL);
 			} else {
 				bg_applier->p->wallpaper_pixbuf = 
 					gdk_pixbuf_new_from_file (prefs->wallpaper_filename, NULL);

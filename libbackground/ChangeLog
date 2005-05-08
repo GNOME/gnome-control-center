@@ -1,3 +1,10 @@
+2005-05-08  Richard Hoelscher  <rah@rahga.com>
+
+	* applier.c (refresh_render): Remove egg_pixbuf_new_from_file_at_size,
+	using the gtk+-2.6 function for this instead.
+
+	Fixes #169757
+
 2005-02-10  Rodney Dawes  <dobey@novell.com>
 
 	* Makefile.am: Don't define GNOME_ICONDIR as libbackground does not
