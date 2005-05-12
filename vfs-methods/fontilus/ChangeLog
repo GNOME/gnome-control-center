@@ -1,3 +1,9 @@
+2005-05-12  James Henstridge  <james@jamesh.id.au>
+
+	* font-method.c (ensure_font_list): use NULL as the var args
+	terminator rather than 0.  Patch from Stanislav Brabec
+	<sbrabec@suse.cz>, fixing bug #302056.
+
 2005-02-02  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* font-method.c: (fill_file_info): Plug a leak.
