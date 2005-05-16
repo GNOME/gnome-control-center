@@ -1,3 +1,16 @@
+2005-05-14  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* gnomecc-canvas.[ch]: new widget that inherits from GnomeCanvas, the
+	drawing logic has been mostly moved from control-center.c, but the
+	layout function has been quite improved (now handles RTL/LTR
+	correctly, assigns a fixed width to all items and caches some things
+	to make things a bit faster)
+	
+	* control-center.c: removed canvas drawing logic, and use the new
+	widget
+
+	* Makefile.am: include gnomecc-canvas.[ch]
+
 2005-05-02  Frederic Crozat  <fcrozat@mandriva.com>
 
 	* control-center-categories.c: (populate_category):

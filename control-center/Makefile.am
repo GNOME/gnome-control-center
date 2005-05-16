@@ -20,7 +20,9 @@ gnome_control_center_SOURCES = \
 	gnomecc-rounded-rect.c		\
 	gnomecc-rounded-rect.h		\
 	gnomecc-event-box.c		\
-	gnomecc-event-box.h
+	gnomecc-event-box.h		\
+	gnomecc-canvas.c		\
+	gnomecc-canvas.h
 
 gnome_control_center_LDADD = $(GNOMECC_LIBS)
 
