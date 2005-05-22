@@ -1,9 +1,10 @@
 #include <config.h>
 #include <string.h>
 #include <stdio.h>
-#include <glib.h>
-#include <libgnome/gnome-i18n.h>
 #include <locale.h>
+#include <glib.h>
+#include <glib/gi18n.h>
+#include <gconf/gconf-client.h>
 
 #include "gnome-settings-daemon.h"
 #include "gnome-settings-xsettings.h"
@@ -253,6 +254,7 @@ xft_callback (GConfEntry *entry)
   client = gconf_client_get_default ();
 
   gnome_settings_update_xft (client);
+  g_object_unref (client);
 
   for (i = 0; managers [i]; i++)  
     xsettings_manager_notify (managers [i]);

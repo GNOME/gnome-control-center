@@ -24,9 +24,9 @@
 #ifndef __GNOME_SETTINGS_DAEMON_H
 #define __GNOME_SETTINGS_DAEMON_H
 
+#include <gtk/gtk.h>
 #include <gconf/gconf.h>
 #include <gconf/gconf-client.h>
-#include <gtk/gtk.h>
 
 #include <bonobo/bonobo-object.h>
 

@@ -27,8 +27,8 @@
 #include <sys/types.h>
 #include <dirent.h>
 #include <string.h>
+#include <glib/gi18n.h>
 #include <gconf/gconf-client.h>
-#include <libgnome/gnome-i18n.h>
 
 #include "metacity-window-manager.h"
 

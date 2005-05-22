@@ -27,7 +27,6 @@
 #include <config.h>
 #endif
 
-#include <gconf/gconf-client.h>
 #include <glade/glade.h>
 #include <gnome-wm-manager.h>
 
@@ -42,7 +41,6 @@ typedef struct
         GtkWidget *radio;
 } MouseClickModifier;
 
-static GConfClient *gconf_client;
 static GladeXML *dialog;
 static GnomeWindowManager *current_wm; /* may be NULL */
 static GtkWidget *dialog_win;
@@ -430,8 +428,6 @@ main (int argc, char **argv)
 			    LIBGNOMEUI_MODULE, argc, argv,
 			    NULL);
 
-        gconf_client = gconf_client_get_default ();
-        
         gnome_wm_manager_init ();
 
         screen = gdk_display_get_default_screen (gdk_display_get_default ());

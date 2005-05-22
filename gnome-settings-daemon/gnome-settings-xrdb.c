@@ -25,7 +25,8 @@
 #include <errno.h>
 #include <stdio.h>
 #include <string.h>
-#include <libgnome/gnome-i18n.h>
+#include <glib/gi18n.h>
+#include <gtk/gtkwindow.h>
 #include <gconf/gconf-client.h>
 
 #include "gnome-settings-daemon.h"

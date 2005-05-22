@@ -99,8 +99,6 @@ enum
 #define CURSOR_FONT_KEY  "/desktop/gnome/peripherals/mouse/cursor_font"
 #define CURSOR_SIZE_KEY  "/desktop/gnome/peripherals/mouse/cursor_size"
 
-GConfClient *client;
-
 #ifdef HAVE_XCURSOR
 static gboolean server_supports_xcursor = TRUE;
 #else
@@ -338,15 +336,19 @@ event_box_button_press_event (GtkWidget   *widget,
 	static guint               test_maybe_timeout_id  = 0;
 	static guint32             double_click_timestamp = 0;
 	GtkWidget                  *image;
+	GConfClient               *client;
 
 	if (event->type != GDK_BUTTON_PRESS)
 		return FALSE;
 
 	image = g_object_get_data (G_OBJECT (widget), "image");
 	
-	if (!(changeset && gconf_change_set_check_value (changeset, DOUBLE_CLICK_KEY, &value))) 
-		double_click_time = gconf_client_get_int (gconf_client_get_default (), DOUBLE_CLICK_KEY, NULL);
-	else
+	if (!(changeset && gconf_change_set_check_value (changeset, DOUBLE_CLICK_KEY, &value))) {
+		client = gconf_client_get_default();
+		double_click_time = gconf_client_get_int (client, DOUBLE_CLICK_KEY, NULL);
+		g_object_unref (client);
+
+	} else
 		double_click_time = gconf_value_get_int (value);
 
 	if (test_maybe_timeout_id != 0)
@@ -511,6 +513,7 @@ cursor_changed (GtkTreeSelection *selection,
 	GtkTreeModel *model = NULL;
 	GtkTreeIter iter;
 	gchar *cursor_font = NULL;
+	GConfClient *client = gconf_client_get_default ();
 
 	if (! gtk_tree_selection_get_selected (selection, &model, &iter))
 		return;
@@ -519,12 +522,13 @@ cursor_changed (GtkTreeSelection *selection,
 			    COLUMN_FONT_PATH, &cursor_font,
 			    -1);
 	if (cursor_font != NULL) {
-		gconf_client_set_string (gconf_client_get_default (),
+		gconf_client_set_string (client,
 					 CURSOR_FONT_KEY, cursor_font, NULL);
 		g_free (cursor_font);
 	} else
-		gconf_client_unset (gconf_client_get_default (),
+		gconf_client_unset (client,
 				    CURSOR_FONT_KEY, NULL);
+	g_object_unref (client);
 }
 
 /* Set up the property editors in the dialog. */
@@ -548,6 +552,8 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 	gboolean           found_default;
 	gchar             *message;
 
+	GConfClient       *client = gconf_client_get_default ();
+
 	program = gnome_program_get ();
 	found_default = FALSE;
 	
@@ -558,7 +564,7 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 	g_signal_connect (peditor, "value-changed", (GCallback) left_handed_toggle_cb, WID ("orientation_image"));
 
 	/* Make sure the image gets initialized correctly */
-	value = gconf_client_get (gconf_client_get_default (), "/desktop/gnome/peripherals/mouse/left_handed", NULL);
+	value = gconf_client_get (client, "/desktop/gnome/peripherals/mouse/left_handed", NULL);
 	left_handed_toggle_cb (GCONF_PROPERTY_EDITOR (peditor), NULL, value, WID ("orientation_image"));
 	gconf_value_free (value);
 
@@ -724,13 +730,14 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 		 NULL);
 
 	/* listen to cursors changing */
-        gconf_client_notify_add (gconf_client_get_default (),
+        gconf_client_notify_add (client,
 				 CURSOR_FONT_KEY,
 				 cursor_font_changed,
 				 tree_view, NULL, NULL);
 
 	/* and set it up initially... */
-	cursor_font_changed (gconf_client_get_default (), 0, NULL, tree_view);
+	cursor_font_changed (client, 0, NULL, tree_view);
+	g_object_unref (client);
 }
 
 /* Construct the dialog */
@@ -829,6 +836,7 @@ main (int argc, char **argv)
 
 	client = gconf_client_get_default ();
 	gconf_client_add_dir (client, "/desktop/gnome/peripherals/mouse", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
+	g_object_unref (client);
 
 	if (get_legacy) {
 		get_legacy_settings ();

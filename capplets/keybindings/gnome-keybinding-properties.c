@@ -391,6 +391,8 @@ clear_old_model (GladeXML  *dialog,
       g_object_unref (model);
     }
 
+  g_object_unref (client);
+
   model = (GtkTreeModel *) gtk_tree_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER);
   
   sort_model = gtk_tree_model_sort_new_with_model (model);
@@ -425,13 +427,17 @@ static gboolean
 should_show_key (const KeyListEntry *entry)
 {
   gint workspaces;
-  
+  GConfClient *client;
+ 
   switch (entry->visibility) {
   case ALWAYS_VISIBLE:
     return TRUE;
   case N_WORKSPACES_GT:
-    workspaces = gconf_client_get_int (gconf_client_get_default (),
+    client = gconf_client_get_default();
+    workspaces = gconf_client_get_int (client,
 				       "/apps/metacity/general/num_workspaces", NULL);
+    g_object_unref (client);
+
     if (workspaces > entry->data)
       return TRUE;
     else
@@ -543,6 +549,8 @@ append_keys_to_tree (GladeXML           *dialog,
       gconf_entry_free (entry);
       gconf_schema_free (schema);
     }
+
+  g_object_unref (client);
 
   if (i == 0)
       gtk_widget_hide (WID ("shortcuts_vbox"));
@@ -884,6 +892,7 @@ setup_dialog (GladeXML *dialog)
 			   "/apps/metacity/general/num_workspaces",
 			   (GConfClientNotifyFunc) &key_entry_controlling_key_changed,
 			   dialog, NULL, NULL);
+  g_object_unref (client);
 
   /* set up the dialog */
   reload_key_entries (wm_common_get_current_window_manager(), dialog);

@@ -26,9 +26,10 @@
 #endif
 
 #include <stdlib.h>
+#include <string.h>
 
-#include <gnome.h>
-#include <bonobo.h>
+#include <glib.h>
+#include <gdk/gdk.h>
 
 #include "preferences.h"
 
@@ -274,6 +275,8 @@ bg_preferences_load (BGPreferences *prefs)
 	} else {
 	  prefs->wallpaper_enabled = TRUE;
 	}
+
+	g_object_unref (client);
 }
 
 /* Parse the event name given (the event being notification of a property having
@@ -439,10 +442,13 @@ bg_preferences_save (BGPreferences *prefs)
 {
 	GConfChangeSet *cs;
 	gchar *tmp;
+	GConfClient *client;
 	
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_BG_PREFERENCES (prefs));
 
+	client = gconf_client_get_default();
+	
 	cs = gconf_change_set_new ();
 	gconf_change_set_set_bool (cs, BG_PREFERENCES_DRAW_BACKGROUND, prefs->enabled);
 	if (prefs->wallpaper_enabled)
@@ -468,8 +474,9 @@ bg_preferences_save (BGPreferences *prefs)
 
 	gconf_change_set_set_string (cs, BG_PREFERENCES_COLOR_SHADING_TYPE, bg_preferences_get_orientation_as_string (prefs->orientation));
 
-	gconf_client_commit_change_set (gconf_client_get_default (), cs, TRUE, NULL);
+	gconf_client_commit_change_set (client, cs, TRUE, NULL);
 	gconf_change_set_unref (cs);
+	g_object_unref (client);
 }
 
 

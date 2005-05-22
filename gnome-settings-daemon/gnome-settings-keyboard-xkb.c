@@ -26,7 +26,7 @@
 # include "config.h"
 #endif
 
-//#include <glib/gstrfuncs.h>
+#include <glib/gi18n.h>
 #include <gdk/gdk.h>
 #include <gdk/gdkx.h>
 #include <gconf/gconf-client.h>
@@ -34,8 +34,6 @@
 
 #include <string.h>
 #include <time.h>
-
-#include <libgnome/gnome-i18n.h>
 
 #include <libxklavier/xklavier.h>
 #include <libxklavier/xklavier_config.h>

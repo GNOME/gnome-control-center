@@ -20,17 +20,18 @@
  *
  * Authors:  Owen Taylor, Havoc Pennington
  */
+#include <config.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 
-#include <gtk/gtk.h>
 #include <gdk/gdkx.h>
+#include <gtk/gtk.h>
+
 
 #include <gconf/gconf.h>
 #include <libgnome/gnome-init.h>
 #include <libgnomeui/gnome-ui-init.h>
-#include <config.h>
 
 #include <errno.h>
 #include <sys/types.h>
@@ -276,7 +277,7 @@ gnome_settings_daemon_new (void)
   gnome_settings_xsettings_init (client);
   gnome_settings_mouse_init (client);
 /* Essential - xkb initialization should happen before */
-  gnome_settings_keyboard_xkb_set_post_activation_callback (gnome_settings_load_modmap_files, NULL);
+  gnome_settings_keyboard_xkb_set_post_activation_callback ((PostActivationCallback)gnome_settings_load_modmap_files, NULL);
   gnome_settings_keyboard_xkb_init (client);
   gnome_settings_keyboard_init (client);
   gnome_settings_multimedia_keys_init (client);
@@ -344,6 +345,8 @@ gnome_settings_daemon_new (void)
   gnome_settings_gtk1_theme_load (client);
   gnome_settings_xrdb_load (client);
   gnome_settings_typing_break_load (client);
+
+  g_object_unref (client);
 
   return G_OBJECT (daemon);
 }

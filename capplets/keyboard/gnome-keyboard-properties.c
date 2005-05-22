@@ -242,6 +242,7 @@ main (int argc, char **argv)
 	client = gconf_client_get_default ();
 	gconf_client_add_dir (client, "/desktop/gnome/peripherals/keyboard", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 	gconf_client_add_dir (client, "/desktop/gnome/interface", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
+	g_object_unref (client);
 
 	if (get_legacy) {
 		get_legacy_settings ();

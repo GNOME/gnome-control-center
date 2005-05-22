@@ -20,13 +20,17 @@
  * 02111-1307, USA.
  */
 
+#include <config.h>
 
+#include "gnome-settings-xmodmap.h"
+
+#include <string.h>
+
+#include <glib.h>
+#include <gtk/gtk.h>
+#include <gconf/gconf-client.h>
 
 #include <glade/glade.h>
-#include <gnome.h>
-#include <gconf/gconf-client.h>
-#include "gnome-settings-xmodmap.h"
-#include "config.h"
 
 static const char DISABLE_XMM_WARNING_KEY[] =
     "/desktop/gnome/peripherals/keyboard/disable_xmm_and_xkb_warning";
@@ -48,7 +52,7 @@ check_button_callback (GtkWidget *chk_button,
 		gconf_client_set_bool (confClient, DISABLE_XMM_WARNING_KEY, FALSE,
 				       NULL);
 	}
-
+	g_object_unref (confClient);
 }
 
 void
@@ -65,6 +69,7 @@ gnome_settings_load_modmap_files ()
 		tmp = tmp->next;
 		g_free (command);
 	}
+	g_object_unref (confClient);
 }
 
 static void
@@ -336,6 +341,7 @@ gnome_settings_modmap_dialog_call (void)
 	gtk_tree_view_column_set_sort_column_id (column, 0);
 
 	loaded_files = gconf_client_get_list (confClient, LOADED_FILES_KEY, GCONF_VALUE_STRING, NULL);
+	g_object_unref (confClient);
 
 	/* Add the data */
 	tmp = loaded_files;

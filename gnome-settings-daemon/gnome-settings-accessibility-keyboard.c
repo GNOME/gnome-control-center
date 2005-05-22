@@ -23,9 +23,11 @@
 
 #include "config.h"
 
-#include <libgnome/gnome-i18n.h>
+#include <glib/gi18n.h>
 #include <gdk/gdk.h>
 #include <gdk/gdkx.h>
+#include <gtk/gtk.h>
+
 #include <gconf/gconf-client.h>
 #include <libgnome/gnome-help.h>
 
@@ -285,12 +287,13 @@ set_server_from_gconf (GConfEntry *ignored)
 
 	XSync (GDK_DISPLAY (), FALSE);
 	gdk_error_trap_pop ();
+
+	g_object_unref (client);
 }
 
 static gboolean
 ax_response_callback (gint response_id, guint revert_controls_mask, gboolean enabled)
 {
-	GConfClient *client = gconf_client_get_default ();
 	GError *err = NULL;
 	gboolean success;
 
@@ -298,6 +301,9 @@ ax_response_callback (gint response_id, guint revert_controls_mask, gboolean ena
 	{
 	    case GTK_RESPONSE_REJECT:
 	    case GTK_RESPONSE_CANCEL:
+		{
+		    GConfClient *client = gconf_client_get_default ();
+
 		    /* we're reverting, so we invert sense of 'enabled' flag */
 		    d ("cancelling AccessX request");
 		    if (revert_controls_mask == XkbStickyKeysMask)
@@ -315,6 +321,7 @@ ax_response_callback (gint response_id, guint revert_controls_mask, gboolean ena
 		    gconf_client_suggest_sync (client, NULL);
 		    set_server_from_gconf (NULL);
 		    break;
+		}
 	    case GTK_RESPONSE_HELP:
 		    gnome_help_display_desktop (NULL,
 						"user-guide",
@@ -537,6 +544,7 @@ set_gconf_from_server (GConfEntry *ignored)
 		gconf_client_suggest_sync (client, NULL);
 	}
 	gconf_change_set_unref (cs);
+	g_object_unref (client);
 }
 
 static GdkFilterReturn 

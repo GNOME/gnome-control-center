@@ -788,6 +788,7 @@ main (int argc, char **argv)
 		dialog = create_dialog (client);
 		gtk_main ();
 	}
+	g_object_unref (client);
 
 	return 0;
 }

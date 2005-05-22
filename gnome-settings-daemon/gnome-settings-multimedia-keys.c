@@ -21,12 +21,15 @@
 
 #include <config.h>
 
+#include <string.h>
 #include <sys/file.h>
 #include <X11/X.h>
 
 /* Gnome headers */
+#include <glib/gi18n.h>
 #include <gdk/gdkx.h>
-#include <gnome.h>
+#include <gtk/gtk.h>
+
 #include <glade/glade.h>
 #include <gconf/gconf-client.h>
 

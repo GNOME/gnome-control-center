@@ -1,5 +1,4 @@
-#include <config.h>
-#include <gtk/gtk.h>
+#include <glib.h>
 
 typedef union {
 	guint flags;

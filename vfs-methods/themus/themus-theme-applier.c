@@ -19,6 +19,7 @@
 
 #include <stdlib.h>
 
+#include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <glade/glade.h>
 #include <libgnome/libgnome.h>
@@ -34,7 +35,6 @@ int main (int argc, char **argv)
 {
 	GnomeVFSURI *uri;
 	GnomeThemeMetaInfo *theme;
-	GConfClient *client;
 	GnomeProgram *program;
 	GladeXML *font_xml;
 	GtkWidget *font_dialog;
@@ -90,8 +90,9 @@ int main (int argc, char **argv)
 	gnome_meta_theme_set (theme);
 			
 	if (apply_font) {
-		client = gconf_client_get_default ();
+		GConfClient *client = gconf_client_get_default ();
 		gconf_client_set_string (client, FONT_KEY, theme->application_font, NULL);
+		g_object_unref (client);
 	}
 		
 	return 0;

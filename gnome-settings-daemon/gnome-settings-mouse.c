@@ -1,10 +1,13 @@
+#include <string.h>
+#include <math.h>
+
 #include <gdk/gdk.h>
 #include <gdk/gdkx.h>
-#include <gconf/gconf.h>
-#include <math.h>
 #include <gdk/gdkkeysyms.h>
 #include <X11/keysym.h>
-#include <string.h>
+
+#include <gconf/gconf.h>
+
 #include "gnome-settings-locate-pointer.h"
 #include "gnome-settings-daemon.h"
 

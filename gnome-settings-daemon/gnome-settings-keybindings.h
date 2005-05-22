@@ -25,6 +25,8 @@
 #define __GNOME_SETTINGS_KEYBINDINGS_H__
 
 #include <gconf/gconf.h>
+#include <gconf/gconf-client.h>
+
 void gnome_settings_keybindings_init (GConfClient *client);
 void gnome_settings_keybindings_load (GConfClient *client);
 

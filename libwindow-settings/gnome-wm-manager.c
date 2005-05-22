@@ -29,10 +29,10 @@
 #include "gnome-wm-manager.h"
 
 #include <glib.h>
+#include <glib/gi18n.h>
 #include <gdk/gdk.h>
 #include <gdk/gdkx.h>
 #include <libgnome/gnome-util.h>
-#include <libgnome/gnome-i18n.h>
 
 #include <sys/types.h>
 #include <dirent.h>

@@ -21,18 +21,6 @@
 #  include <config.h>
 #endif
 
-#ifdef ENABLE_NLS
-#  include <libintl.h>
-#  define _(String) gettext(String)
-#  define N_(String) gettext_noop(String)
-#else
-#  define _(String) (String)
-#  define N_(String) (String)
-#  define textdomain(String) (String)
-#  define bindtextdomain(Domain,Directory) (Domain)
-#  define bind_textdomain_codeset(Domain,Codeset) (Domain)
-#endif
-
 #include <ft2build.h>
 #include FT_FREETYPE_H
 #include FT_TYPE1_TABLES_H
@@ -40,11 +28,13 @@
 #include FT_TRUETYPE_IDS_H
 #include <X11/Xlib.h>
 #include <X11/Xft/Xft.h>
+
+#include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>
 #include <libgnomevfs/gnome-vfs.h>
 #include <libgnomevfs/gnome-vfs-mime-handlers.h>
-#include <libgnomeui/libgnomeui.h>
+#include <libgnomeui/gnome-icon-lookup.h>
 
 FT_Error FT_New_Face_From_URI(FT_Library library,
 			      const gchar *uri,

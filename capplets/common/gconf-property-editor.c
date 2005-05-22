@@ -261,6 +261,7 @@ gconf_property_editor_set_prop (GObject      *object,
 			gconf_client_notify_add (client, peditor->p->key,
 						 peditor->p->callback,
 						 peditor, NULL, NULL);
+		g_object_unref (client);
 		break;
 
 	case PROP_CHANGESET:
@@ -340,6 +341,7 @@ gconf_property_editor_finalize (GObject *object)
 		client = gconf_client_get_default ();		
 		gconf_client_notify_remove (client,
 					    gconf_property_editor->p->handler_id);
+		g_object_unref (client);
 	}
 	
 	g_free (gconf_property_editor->p);
@@ -408,10 +410,14 @@ peditor_set_gconf_value (GConfPropertyEditor *peditor,
 			 const gchar         *key,
 			 GConfValue          *value) 
 {
+	GConfClient *client = gconf_client_get_default();
+
 	if (peditor->p->changeset != NULL)
 		gconf_change_set_set (peditor->p->changeset, peditor->p->key, value);
 	else
-		gconf_client_set (gconf_client_get_default (), peditor->p->key, value, NULL);
+		gconf_client_set (client, peditor->p->key, value, NULL);
+
+	g_object_unref (client);
 }
 
 static void
@@ -1107,15 +1113,20 @@ peditor_numeric_range_widget_changed (GConfPropertyEditor *peditor,
 				      GtkAdjustment       *adjustment)
 {
 	GConfValue *value, *value_wid, *default_value;
+	GConfClient *client;
 
 	if (!peditor->p->inited) return;
 
 	/* We try to get the default type from the schemas.  if not, we default
 	 * to a float.
 	 */
-	default_value = gconf_client_get_default_from_schema (gconf_client_get_default (),
+	client = gconf_client_get_default();
+
+	default_value = gconf_client_get_default_from_schema (client,
 							      peditor->p->key,
 							      NULL);
+	g_object_unref (client);
+
 	if (default_value)
 		value_wid = gconf_value_new (default_value->type);
 	else {
@@ -1225,6 +1236,7 @@ gconf_peditor_widget_set_guard (GConfPropertyEditor *peditor,
 	client = gconf_client_get_default ();
 	
 	value = gconf_client_get (client, peditor->p->key, NULL);
+	g_object_unref (client);
 
 	if (value) {
 		gtk_widget_set_sensitive (widget, guard_get_bool (peditor, value));
@@ -1615,6 +1627,7 @@ peditor_image_clicked_cb (GConfPropertyEditor *peditor, GtkButton *button)
 	{
 		GConfClient *client = gconf_client_get_default ();
 		value = gconf_client_get (client, peditor->p->key, NULL);
+		g_object_unref (client);
 	}
 	
 	value_wid = peditor->p->conv_to_widget_cb (peditor, value);

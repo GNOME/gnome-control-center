@@ -23,10 +23,10 @@
 #include <config.h>
 #include <string.h>
 #include <math.h>
+#include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 #include <gconf/gconf-client.h>
-#include <libgnome/gnome-i18n.h>
 #include "drwright.h"
 #include "drw-utils.h"
 #include "drw-break-window.h"
@@ -151,18 +151,21 @@ drw_break_window_init (DrwBreakWindow *window)
 	GdkRectangle        monitor;
 	gint                right_padding;
 	gint                bottom_padding;
-
+	GConfClient	    *client;
 
         priv = g_new0 (DrwBreakWindowPriv, 1);
         window->priv = priv;
 
-	priv->break_time = 60 * gconf_client_get_int (gconf_client_get_default (),
+	client = gconf_client_get_default();
+
+	priv->break_time = 60 * gconf_client_get_int (client,
 						      GCONF_PATH "/break_time",
 						      NULL);
 	
-	allow_postpone = gconf_client_get_bool (gconf_client_get_default (),
+	allow_postpone = gconf_client_get_bool (client,
 					      GCONF_PATH "/allow_postpone",
 					      NULL);
+	g_object_unref (client);
 
 	GTK_WINDOW (window)->type = GTK_WINDOW_POPUP;
 
@@ -414,12 +417,14 @@ postpone_entry_activate_cb (GtkWidget      *entry,
 {
 	const gchar *str;
 	const gchar *phrase;
+	GConfClient *client = gconf_client_get_default();
 
 	str = gtk_entry_get_text (GTK_ENTRY (entry));
 
-	phrase = gconf_client_get_string (gconf_client_get_default (),
+	phrase = gconf_client_get_string (client,
 					  GCONF_PATH "/unlock_phrase",
 					  NULL);
+	g_object_unref (client);
 	
 	if (!strcmp (str, phrase)) {
 		g_signal_emit (window, signals[POSTPONE], 0, NULL);

@@ -23,6 +23,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include <glib/gi18n.h>
 #include <gtk/gtkalignment.h>
 #include <gtk/gtkframe.h>
 #include <gtk/gtkimage.h>
@@ -30,7 +31,6 @@
 #include <gtk/gtkdnd.h>
 
 #include <libgnomevfs/gnome-vfs-ops.h>
-#include <libgnome/gnome-i18n.h>
 
 #include "e-image-chooser.h"
 #include "e-util-marshal.h"

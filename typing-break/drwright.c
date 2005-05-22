@@ -21,17 +21,22 @@
  */
 
 #include <config.h>
+
+#include "drwright.h"
+
 #include <time.h>
 #include <string.h>
 #include <math.h>
+
+#include <glib/gi18n.h>
 #include <gdk/gdk.h>
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtk.h>
 #include <libgnomeui/gnome-stock-icons.h>
 #include <libgnomeui/gnome-client.h>
-#include <libgnome/gnome-i18n.h>
+
 #include <gconf/gconf-client.h>
-#include "drwright.h"
+
 #include "drw-break-window.h"
 #include "drw-monitor.h"
 #include "drw-utils.h"
@@ -139,7 +144,6 @@ static GtkItemFactoryEntry popup_items[] = {
 	{ N_("/_Take a Break"), NULL, GIF_CB (popup_break_cb),       POPUP_ITEM_BREAK,   "<Item>",       NULL }
 };
 
-GConfClient *client = NULL;
 extern gboolean debug;
 
 static void
@@ -911,6 +915,7 @@ drwright_new (void)
 {
 	DrWright  *dr;
 	GtkWidget *item;
+	GConfClient *client;
 
         dr = g_new0 (DrWright, 1);
 
@@ -939,6 +944,8 @@ drwright_new (void)
 		client,
 		GCONF_PATH "/enabled",
 		NULL);
+
+	g_object_unref (client);
 
 	if (debug) {
 		setup_debug_values (dr);

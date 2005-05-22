@@ -269,7 +269,6 @@ update_gconf_key_from_selection (GtkTreeSelection *selection,
 void
 gnome_theme_details_init (void)
 {
-  GConfClient *client;
   GtkWidget *parent, *widget;
   GnomeWindowManager *window_manager;
   GladeXML *dialog;
@@ -279,7 +278,6 @@ gnome_theme_details_init (void)
   theme_details_initted = TRUE;
 
   dialog = gnome_theme_manager_get_theme_dialog ();
-  client = gconf_client_get_default ();
   window_manager = gnome_wm_manager_get_current (gdk_display_get_default_screen (gdk_display_get_default ()));
   parent = WID ("theme_details_dialog");
 
@@ -565,5 +563,6 @@ gnome_theme_details_update_from_gconf (void)
   tree_view = WID ("icon_theme_treeview");
   theme = gconf_client_get_string (client, ICON_THEME_KEY, NULL);
   update_list_something (tree_view, theme);
+  g_object_unref (client);
   g_free (theme);
 }

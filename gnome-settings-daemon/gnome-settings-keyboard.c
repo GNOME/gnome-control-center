@@ -106,6 +106,7 @@ apply_settings (void)
 	volume_string = gconf_client_get_string (client, "/desktop/gnome/peripherals/keyboard/bell_mode", NULL);
 	bell_volume   = (volume_string && !strcmp (volume_string, "on")) ? 50 : 0;
 	g_free (volume_string);
+	g_object_unref (client);
 
 	gdk_error_trap_push ();
         if (repeat) {

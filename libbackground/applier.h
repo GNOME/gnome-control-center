@@ -28,7 +28,6 @@
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
 #include <X11/Xlib.h>
-#include <pthread.h>
 
 #include "preferences.h"
 

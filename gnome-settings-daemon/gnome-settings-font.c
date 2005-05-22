@@ -1,8 +1,7 @@
 #include <config.h>
-#include <gdk/gdkx.h>
-#include <gconf/gconf.h>
-#include <libgnome/gnome-i18n.h>
+
 #include "gnome-settings-daemon.h"
+
 #include <dirent.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -10,6 +9,11 @@
 #include <dirent.h>
 #include <string.h>
 
+#include <glib/gi18n.h>
+#include <gdk/gdkx.h>
+#include <gtk/gtk.h>
+
+#include <gconf/gconf.h>
 
 static void
 load_xcursor_theme (GConfClient *client)

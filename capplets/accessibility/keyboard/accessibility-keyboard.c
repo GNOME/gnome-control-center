@@ -386,6 +386,8 @@ load_CDE_file (GtkFileChooser *fchooser)
 	found |= xrm_get_bool (client, &db, CONFIG_ROOT "/enable",
 		"*EnableAccessXToggle.set",	"AccessX*ToggleButtonGadget.XmCSet");
 
+	g_object_unref (client);
+
 	if (!found) {
 		/* it would be nice to have a better message bu that would
 		 * break string freeze
@@ -460,6 +462,7 @@ setup_accessX_dialog (GConfChangeSet *changeset)
 
 	client = gconf_client_get_default ();
 	gconf_client_add_dir (client, CONFIG_ROOT, GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
+	g_object_unref (client);
 
 	setup_dialog (dialog, changeset);
 

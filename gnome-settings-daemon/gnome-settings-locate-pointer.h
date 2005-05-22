@@ -17,6 +17,8 @@
 #ifndef LOCATE_POINTER_H
 #define LOCATE_POINTER_H
 
+#include <gdk/gdkscreen.h>
+
 void gnome_settings_locate_pointer (GdkScreen *screen);
 
 #endif

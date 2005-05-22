@@ -2,10 +2,10 @@
 
 #include <string.h>
 #include <X11/keysym.h>
+#include <glib/gi18n.h>
 #include <gdk/gdk.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>
-#include <libgnome/gnome-i18n.h>
 #include "gnome-settings-daemon.h"
 #include "gnome-settings-keybindings.h"
 #include "eggaccelerators.h"
@@ -178,6 +178,7 @@ bindings_get_entry (char *subdir)
   char *gconf_key;
   char *action = NULL;
   char *key = NULL;
+  GConfClient *client = gconf_client_get_default();
   
   g_return_val_if_fail (subdir != NULL, FALSE);
   
@@ -188,7 +189,8 @@ bindings_get_entry (char *subdir)
     return FALSE;
 
   /* Get entries for this binding */
-  list = gconf_client_all_entries (gconf_client_get_default (), subdir, NULL);
+  list = gconf_client_all_entries (client, subdir, NULL);
+  g_object_unref (client);
 
   for (li = list; li != NULL; li = li->next)
     {

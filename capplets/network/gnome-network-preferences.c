@@ -126,7 +126,7 @@ cb_add_url (GtkButton *button, gpointer data)
 		
 	client = gconf_client_get_default ();
 	gconf_client_set_list (client, IGNORE_HOSTS_KEY, GCONF_VALUE_STRING, ignore_hosts, NULL);
-
+	g_object_unref (client);
 }
 
 static void
@@ -161,6 +161,7 @@ cb_remove_url (GtkButton *button, gpointer data)
 		
 		client = gconf_client_get_default ();
 		gconf_client_set_list(client, IGNORE_HOSTS_KEY, GCONF_VALUE_STRING, ignore_hosts, NULL);
+		g_object_unref (client);
 	}
 }
 
@@ -395,6 +396,8 @@ setup_dialog (GladeXML *dialog)
 
 	gtk_label_set_use_markup (GTK_LABEL (WID ("label_ignore_host")), TRUE);
 	ignore_hosts = gconf_client_get_list(client, IGNORE_HOSTS_KEY, GCONF_VALUE_STRING, NULL);
+	g_object_unref (client);
+
 	model = create_listmodel();
 	populate_listmodel(GTK_LIST_STORE(model), ignore_hosts);
 	config_treeview(GTK_TREE_VIEW(WID("treeview_ignore_host")), model);

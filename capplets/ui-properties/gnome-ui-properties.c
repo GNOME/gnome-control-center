@@ -223,6 +223,7 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
   GtkWidget *widget;
   GObject *peditor;
   char *toolbar_style;
+  GConfClient *client = gconf_client_get_default ();
 
   peditor = gconf_peditor_new_boolean
     (changeset, "/desktop/gnome/interface/toolbar_detachable", WID ("detachable_toolbars_toggle"), NULL);
@@ -240,7 +241,7 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
     G_CALLBACK (menus_have_icons_cb), dialog);
   
   set_have_icons (dialog, 
-		  gconf_client_get_bool (gconf_client_get_default (),
+		  gconf_client_get_bool (client,
 					 "/desktop/gnome/interface/menus_have_icons",
 					 NULL));
 
@@ -264,14 +265,15 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 	G_CALLBACK (dialog_button_clicked_cb), changeset);
 
   show_handlebar (dialog, 
-		  gconf_client_get_bool (gconf_client_get_default (),
+		  gconf_client_get_bool (client,
 					 "/desktop/gnome/interface/toolbar_detachable",
 					 NULL));
 
-  toolbar_style = gconf_client_get_string (gconf_client_get_default (),
+  toolbar_style = gconf_client_get_string (client,
 					   "/desktop/gnome/interface/toolbar_style", 
 					   NULL);
-  
+  g_object_unref (client);
+
   set_toolbar_style (dialog, toolbar_style);
 
   g_free (toolbar_style);
@@ -299,7 +301,7 @@ main (int argc, char **argv)
 
   client = gconf_client_get_default ();
   gconf_client_add_dir (client, "/desktop/gnome/interface", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
-
+  g_object_unref (client);
   dialog = create_dialog ();
   setup_dialog (dialog, changeset);
   gtk_main ();

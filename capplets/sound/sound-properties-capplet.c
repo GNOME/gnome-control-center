@@ -285,6 +285,7 @@ main (int argc, char **argv)
 		gconf_change_set_unref (changeset);
 	}
 	
+	g_object_unref (client);
 	g_object_unref (dialog);
 	return 0;
 }

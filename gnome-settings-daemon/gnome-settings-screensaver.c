@@ -24,8 +24,9 @@
 
 #include <config.h>
 
-#include <libgnome/gnome-i18n.h>
 #include "gnome-settings-screensaver.h"
+
+#include <glib/gi18n.h>
 
 #include <gtk/gtkcheckbutton.h>
 #include <gtk/gtkbox.h>
@@ -61,6 +62,7 @@ key_toggled_cb (GtkWidget *toggle, gpointer data)
 			       gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (toggle))
 			       ? 0 : 1,
 			       NULL);
+	g_object_unref (client);
 }
 
 void

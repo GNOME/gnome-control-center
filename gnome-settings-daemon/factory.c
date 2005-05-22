@@ -6,6 +6,8 @@
 #include <bonobo/bonobo-object.h>
 #include <bonobo/bonobo-generic-factory.h>
 
+#include <gconf/gconf.h>
+
 #include <libgnome/gnome-init.h>
 #include <libgnomeui/gnome-ui-init.h>
 #include <libgnomeui/gnome-client.h>

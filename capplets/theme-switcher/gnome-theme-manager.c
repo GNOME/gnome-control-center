@@ -317,6 +317,8 @@ load_meta_themes (GtkTreeView *tree_view,
 
   current_gtk_theme = gconf_client_get_string (client, GTK_THEME_KEY, NULL);
   current_icon_theme = gconf_client_get_string (client, ICON_THEME_KEY, NULL);
+  g_object_unref (client);
+
   window_manager = gnome_wm_manager_get_current (gdk_display_get_default_screen (gdk_display_get_default ()));
   wm_settings.flags = GNOME_WM_SETTING_THEME;
 
@@ -577,6 +579,8 @@ meta_theme_selection_changed (GtkTreeSelection *selection,
     /* Get the settings */
     current_gtk_theme = gconf_client_get_string (client, GTK_THEME_KEY, NULL);
     current_icon_theme = gconf_client_get_string (client, ICON_THEME_KEY, NULL);
+    g_object_unref (client);
+
     window_manager = gnome_wm_manager_get_current (gdk_display_get_default_screen (gdk_display_get_default ()));
     wm_settings.flags = GNOME_WM_SETTING_THEME;
     if (window_manager) {
@@ -785,6 +789,8 @@ update_settings_from_gconf_idle (gpointer data)
   /* Get the settings */
   current_gtk_theme = gconf_client_get_string (client, GTK_THEME_KEY, NULL);
   current_icon_theme = gconf_client_get_string (client, ICON_THEME_KEY, NULL);
+  g_object_unref (client);
+
   window_manager = gnome_wm_manager_get_current (gdk_display_get_default_screen (gdk_display_get_default ()));
   wm_settings.flags = GNOME_WM_SETTING_THEME;
   if (window_manager) {
@@ -978,7 +984,7 @@ update_font_button_state (GladeXML *dialog)
 
       g_free (str);
     }  
-  
+  g_object_unref (client);  
 }
 
 static void
@@ -1125,6 +1131,7 @@ apply_font_clicked (GtkWidget *button,
 
       gconf_client_set_string (client, FONT_KEY, meta_theme_info->application_font, NULL);
     }  
+  g_object_unref (client);
 }
 
 static void
@@ -1197,6 +1204,8 @@ setup_dialog (GladeXML *dialog)
 			   FONT_KEY,
 			   (GConfClientNotifyFunc) &font_key_changed,
 			   dialog, NULL, NULL);
+  g_object_unref (client);
+
   if (window_manager)
     g_signal_connect (G_OBJECT (window_manager),
 		      "settings_changed",
@@ -1415,6 +1424,7 @@ get_default_string_from_key (const char *key)
 
   client = gconf_client_get_default ();
   value = gconf_client_get_default_from_schema (client, key, &error);
+  g_object_unref (client);
 
   if (error)
     {

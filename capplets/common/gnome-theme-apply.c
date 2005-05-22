@@ -61,4 +61,5 @@ gnome_meta_theme_set (GnomeThemeMetaInfo *meta_theme_info)
       gconf_client_set_string (client, ICON_THEME_KEY, meta_theme_info->icon_theme_name, NULL);
     }
   g_free (old_key);
+  g_object_unref (client);
 }
