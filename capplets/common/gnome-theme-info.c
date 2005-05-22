@@ -386,6 +386,7 @@ read_icon_theme (GnomeVFSURI *icon_theme_uri)
   GnomeDesktopItem *icon_theme_ditem;
   char *icon_theme_file;
   const gchar *name;
+  const gchar *hidden_theme_icon;
 
   icon_theme_file = gnome_vfs_uri_to_string (icon_theme_uri, GNOME_VFS_URI_HIDE_NONE);
   icon_theme_ditem = gnome_desktop_item_new_from_uri (icon_theme_file, 0, NULL);
@@ -402,10 +403,20 @@ read_icon_theme (GnomeVFSURI *icon_theme_uri)
       g_free (icon_theme_file);
       return NULL;
     }
+  hidden_theme_icon = gnome_desktop_item_get_string (icon_theme_ditem, "Icon Theme/Hidden");
 
-  icon_theme_info = gnome_theme_icon_info_new ();
-  icon_theme_info->name = g_strdup (name);
-  icon_theme_info->path = icon_theme_file;
+  if (hidden_theme_icon == NULL || 
+      strcmp (hidden_theme_icon, "false") == 0) 
+    {
+      icon_theme_info = gnome_theme_icon_info_new ();
+      icon_theme_info->name = g_strdup (name);
+      icon_theme_info->path = icon_theme_file;
+    }
+  else 
+    {
+      gnome_desktop_item_unref (icon_theme_ditem);
+      return NULL;
+    }
 
   gnome_desktop_item_unref (icon_theme_ditem);
 
