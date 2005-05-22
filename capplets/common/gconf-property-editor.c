@@ -1256,131 +1256,44 @@ gconf_value_float_to_int (GConfPropertyEditor *ignored, const GConfValue *value)
 	return new_value;
 }
 
-static gint
-peditor_font_get_size (const gchar *font_str)
-{
-	PangoFontDescription *desc;
-	int size;
-	
-	g_return_val_if_fail (font_str != NULL, -1);
-	
-	desc = pango_font_description_from_string (font_str);
-	size = pango_font_description_get_size (desc);
-	pango_font_description_free (desc);
-
-	return size / PANGO_SCALE;
-}
-
-static gchar* 
-peditor_font_get_name (const gchar *font_str)
-{
-	PangoFontDescription *desc;
-	gchar *name;
-
-	g_return_val_if_fail (font_str != NULL, NULL);
-	
-	desc = pango_font_description_from_string (font_str);
-	pango_font_description_unset_fields (desc, PANGO_FONT_MASK_SIZE);
-	name = pango_font_description_to_string (desc);
-	pango_font_description_free (desc);
-
-	return name;
-}
-
-static void
-peditor_font_merge_setting (GnomeFontPicker *font_picker, GConfValue *value, GConfPEditorFontType font_type)
-{
-	PangoFontDescription *desc;
-	gchar *font_str;
-	
-	g_return_if_fail (GNOME_IS_FONT_PICKER (font_picker));
-	g_return_if_fail (value != NULL);
-	
-	
-	desc = pango_font_description_from_string (gnome_font_picker_get_font_name (font_picker));
-	
-	if (font_type == PEDITOR_FONT_SIZE)
-	{
-		pango_font_description_set_size (desc, gconf_value_get_int (value) * PANGO_SCALE);
-	}
-	else
-	{
-		PangoFontDescription *new_desc;
-		new_desc = pango_font_description_from_string (gconf_value_get_string (value));
-		if (font_type == PEDITOR_FONT_NAME)
-			pango_font_description_set_size (new_desc, pango_font_description_get_size (desc));
-		pango_font_description_free (desc);
-		desc = new_desc;
-	}
-
-	font_str = pango_font_description_to_string (desc);
-	g_object_set (G_OBJECT (font_picker),
-		      "font_name", font_str,
-		      "label-font-size", pango_font_description_get_size (desc) / PANGO_SCALE,
-		      NULL);
-	g_free (font_str);
-	pango_font_description_free (desc);
-}
-
 static void
 peditor_font_value_changed (GConfClient         *client,
-			     guint                cnxn_id,
-			     GConfEntry          *entry,
-			     GConfPropertyEditor *peditor) 
+			    guint                cnxn_id,
+			    GConfEntry          *entry,
+			    GConfPropertyEditor *peditor) 
 {
 	GConfValue *value, *value_wid;
-	GConfPEditorFontType font_type;
 
 	if (peditor->p->changeset != NULL)
 		gconf_change_set_remove (peditor->p->changeset, peditor->p->key);
 
-	font_type = GPOINTER_TO_UINT (peditor->p->data);
 	value = gconf_entry_get_value (entry);
-
 	if (value != NULL) {
+		const gchar *font;
+
 		value_wid = peditor->p->conv_to_widget_cb (peditor, value);
-		peditor_font_merge_setting (GNOME_FONT_PICKER (peditor->p->ui_control), value_wid, font_type);
+		font = gconf_value_get_string (value_wid);
+		gtk_font_button_set_font_name (GTK_FONT_BUTTON (peditor->p->ui_control),
+					       font);
 		gconf_value_free (value_wid);
 	}
 }
 
 static void
 peditor_font_widget_changed (GConfPropertyEditor *peditor,
-			      gchar              *font_str,
-			      GnomeFontPicker    *font_picker)
+			     GtkFontButton       *font_button)
 {
+	const gchar *font_name;
 	GConfValue *value, *value_wid = NULL;
-	GConfPEditorFontType font_type;
-	gchar *font_name;
-	int font_size;
 
-	if (!peditor->p->inited) return;
+	if (!peditor->p->inited)
+		return;
 
-	font_type = GPOINTER_TO_UINT (peditor->p->data);
+	font_name = gtk_font_button_get_font_name (font_button);
 
-	font_size = peditor_font_get_size (font_str);
-	g_object_set (G_OBJECT (peditor->p->ui_control),
-		      "label-font-size", font_size,
-		      NULL);
-	
-	switch (font_type)
-	{
-		case PEDITOR_FONT_NAME:
-			value_wid = gconf_value_new (GCONF_VALUE_STRING);
-			font_name = peditor_font_get_name (font_str);
-			gconf_value_set_string (value_wid, font_name);
-			g_free (font_name);
-			break;
-		case PEDITOR_FONT_SIZE:
-			value_wid = gconf_value_new (GCONF_VALUE_INT);
-			gconf_value_set_int (value_wid, font_size);
-			break;
-		case PEDITOR_FONT_COMBINED:
-			value_wid = gconf_value_new (GCONF_VALUE_STRING);
-			gconf_value_set_string (value_wid, font_str);
-			break;
-	}
-	
+	value_wid = gconf_value_new (GCONF_VALUE_STRING);
+	gconf_value_set_string (value_wid, font_name);
+
 	value = peditor->p->conv_from_widget_cb (peditor, value_wid);
 
 	peditor_set_gconf_value (peditor, peditor->p->key, value);
@@ -1393,8 +1306,7 @@ peditor_font_widget_changed (GConfPropertyEditor *peditor,
 GObject *
 gconf_peditor_new_font (GConfChangeSet *changeset,
 			gchar *key,
-			GtkWidget *font_picker,
-			GConfPEditorFontType font_type,
+			GtkWidget *font_button,
 			gchar *first_property_name,
 			...)
 {
@@ -1402,24 +1314,21 @@ gconf_peditor_new_font (GConfChangeSet *changeset,
 	va_list var_args;
 
 	g_return_val_if_fail (key != NULL, NULL);
-	g_return_val_if_fail (font_picker != NULL, NULL);
-	g_return_val_if_fail (GNOME_IS_FONT_PICKER (font_picker), NULL);
+	g_return_val_if_fail (GTK_IS_FONT_BUTTON (font_button), NULL);
 
 	va_start (var_args, first_property_name);
 	
-	peditor = gconf_peditor_new
-		(key,
-		 (GConfClientNotifyFunc) peditor_font_value_changed,
-		 changeset,
-		 G_OBJECT (font_picker),
-		 first_property_name,
-		 var_args,
-		 "data", GUINT_TO_POINTER (font_type),
-		 NULL);
+	peditor = gconf_peditor_new (key,
+				     (GConfClientNotifyFunc) peditor_font_value_changed,
+				     changeset,
+				     G_OBJECT (font_button),
+				     first_property_name,
+				     var_args,
+				     NULL);
 
 	va_end (var_args);
 
-	g_signal_connect_swapped (G_OBJECT (font_picker), "font_set",
+	g_signal_connect_swapped (font_button, "font_set",
 				  (GCallback) peditor_font_widget_changed, peditor);
 
 	return peditor;

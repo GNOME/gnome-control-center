@@ -1,5 +1,13 @@
 2005-05-22  Sebastien Bacher  <seb128@debian.org>
 
+	* gconf-property-editor.c: (peditor_font_value_changed),
+	(peditor_font_widget_changed), (gconf_peditor_new_font):
+	* gconf-property-editor.h: 
+	port of the font capplet to gtk_font_button and some cleanup, 
+	patch from paolo borelli <pborelli@katamail.com> (Closes: #160016).
+
+2005-05-22  Sebastien Bacher  <seb128@debian.org>
+
 	* theme-thumbnail.c: (create_image): fix the theme preview crasher with
 	xorg/composite, patch from Colin Gibbs <colin@gibbsonline.net>
 	(Closes: #152490).

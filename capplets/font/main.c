@@ -46,16 +46,6 @@ static gchar *old_font = NULL;
 
 #define MAX_FONT_POINT_WITHOUT_WARNING 32
 #define MAX_FONT_SIZE_WITHOUT_WARNING MAX_FONT_POINT_WITHOUT_WARNING*1024
-#define PICKER_DIALOG_DATA_STRING "picker-dialog-data-string"
-static GladeXML *
-create_dialog (void)
-{
-  GladeXML *dialog;
-
-  dialog = glade_xml_new (GLADEDIR "/font-properties.glade", "font_dialog", NULL);
-
-  return dialog;
-}
 
 static void
 cb_dialog_response (GtkDialog *dialog, gint response_id)
@@ -447,8 +437,6 @@ metacity_changed (GConfClient *client,
 		metacity_titlebar_load_sensitivity (client, user_data);
 }
 
-
-
 /* returns 0 if the font is safe, otherwise returns the size in points. */
 static gint
 new_font_dangerous (const char *new_font)
@@ -477,14 +465,11 @@ application_font_to_gconf (GConfPropertyEditor *peditor,
 {
 	GConfValue *new_value;
 	const char *new_font;
-	GtkWidget *font_picker;
-	GladeXML *dialog;
+	GtkWidget *font_button;
 	gint danger_level;
 
-	font_picker = (GtkWidget *) gconf_property_editor_get_ui_control (peditor);
-	g_assert (font_picker);
-
-	dialog = glade_xml_new (GLADEDIR "/font-properties.glade", "font_size_warning_dialog", NULL);
+	font_button = GTK_WIDGET (gconf_property_editor_get_ui_control (peditor));
+	g_return_val_if_fail (font_button != NULL, NULL);
 
 	new_value = gconf_value_new (GCONF_VALUE_STRING);
 	new_font = gconf_value_get_string (value);
@@ -496,34 +481,58 @@ application_font_to_gconf (GConfPropertyEditor *peditor,
 
 	danger_level = new_font_dangerous (new_font);
 	if (danger_level) {
-		GtkWidget *font_size_warning_dialog;
+		GtkWidget *warning_dialog;
 		gchar *warning_label;
 		gchar *warning_label2;
 
-		font_size_warning_dialog = WID ("font_size_warning_dialog");
+		warning_label = g_strdup (_("Font may be too large"));
+
 		if (danger_level > MAX_FONT_POINT_WITHOUT_WARNING) {
-			warning_label = g_strdup_printf ("<span weight=\"bold\" size=\"larger\">%s</span>\n\n%s",
-							 _("Font may be too large"),
-							 ngettext ("The font selected is %d point large, and may make it difficult to effectively use the computer.  It is recommended that you select a size smaller than %d.",
-								   "The font selected is %d points large, and may make it difficult to effectively use the computer.  It is recommended that you select a size smaller than %d.",
-								   danger_level));
-			warning_label2 = g_strdup_printf (warning_label, danger_level, MAX_FONT_POINT_WITHOUT_WARNING);
+			warning_label2 = g_strdup_printf (ngettext (
+				"The font selected is %d point large, "
+				"and may make it difficult to effectively "
+				"use the computer.  It is recommended that "
+				"you select a size smaller than %d.",
+				"The font selected is %d points large, "
+				"and may make it difficult to effectively "
+				"use the computer. It is recommended that "
+				"you select a size smaller than %d.",
+				danger_level),
+				danger_level,
+				MAX_FONT_POINT_WITHOUT_WARNING);
 		} else {
-			warning_label = g_strdup_printf ("<span weight=\"bold\" size=\"larger\">%s</span>\n\n%s",
-							 _("Font may be too large"),
-							 ngettext ("The font selected is %d point large, and may make it difficult to effectively use the computer.  It is recommended that you select a smaller sized font.",
-								   "The font selected is %d points large, and may make it difficult to effectively use the computer.  It is recommended that you select a smaller sized font.",
-								   danger_level));
-			warning_label2 = g_strdup_printf (warning_label, danger_level);
+			warning_label2 = g_strdup_printf (ngettext (
+				"The font selected is %d point large, "
+				"and may make it difficult to effectively "
+				"use the computer.  It is recommended that "
+				"you select a smaller sized font.",
+				"The font selected is %d points large, "
+				"and may make it difficult to effectively "
+				"use the computer. It is recommended that "
+				"you select a smaller sized font.",
+				danger_level),
+				danger_level);
 		}
-		gtk_label_set_markup (GTK_LABEL (WID ("font_size_warning_label")), warning_label2);
-		if (gtk_dialog_run (GTK_DIALOG (font_size_warning_dialog)) == 1) {
+
+		warning_dialog = gtk_message_dialog_new (NULL,
+							 GTK_DIALOG_MODAL,
+							 GTK_MESSAGE_WARNING,
+							 GTK_BUTTONS_OK_CANCEL,
+							 warning_label);
+
+		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (warning_dialog),
+							  warning_label2);
+		g_free (warning_label);
+		g_free (warning_label2);
+
+		if (gtk_dialog_run (GTK_DIALOG (warning_dialog)) == GTK_RESPONSE_OK) {
 			gconf_value_set_string (new_value, new_font);
 		} else {
 			gconf_value_set_string (new_value, old_font);
-			gnome_font_picker_set_font_name (GNOME_FONT_PICKER (font_picker), old_font);
+			gtk_font_button_set_font_name (GTK_FONT_BUTTON (font_button), old_font);
 		}
-		gtk_widget_destroy (font_size_warning_dialog);
+
+		gtk_widget_destroy (warning_dialog);
 	} else {
 		gconf_value_set_string (new_value, new_font);
 	}
@@ -532,86 +541,92 @@ application_font_to_gconf (GConfPropertyEditor *peditor,
 }
 
 static void
-application_font_changed (GtkWidget *font_picker)
+application_font_changed (GtkWidget *font_button)
 {
 	const gchar *font;
 
-	font = gnome_font_picker_get_font_name (GNOME_FONT_PICKER (font_picker));
+	font = gtk_font_button_get_font_name (GTK_FONT_BUTTON (font_button));
 	g_free (old_font);
 	old_font = g_strdup (font);
 }
 
 static void
-setup_dialog (GladeXML *dialog)
+setup_dialog (void)
 {
-  GConfClient *client;
-  GtkWidget *widget;
-  GObject *peditor;
+	GladeXML *dialog;
+	GConfClient *client;
+	GtkWidget *widget;
+	GObject *peditor;
 
-  client = gconf_client_get_default ();
+	dialog = glade_xml_new (GLADEDIR "/font-properties.glade", "font_dialog", NULL);
+	if (!dialog) {
+		g_warning ("could not load font-properties.glade");
+		return;
+	}
 
-  gconf_client_add_dir (client, "/desktop/gnome/interface", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
-  gconf_client_add_dir (client, "/apps/nautilus/preferences", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
-  gconf_client_add_dir (client, METACITY_DIR, GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
+	client = gconf_client_get_default ();
+
+	gconf_client_add_dir (client, "/desktop/gnome/interface", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
+	gconf_client_add_dir (client, "/apps/nautilus/preferences", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
+	gconf_client_add_dir (client, METACITY_DIR, GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 #ifdef HAVE_XFT2
-  gconf_client_add_dir (client, FONT_RENDER_DIR, GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
+	gconf_client_add_dir (client, FONT_RENDER_DIR, GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 #endif  /* HAVE_XFT2 */
 
-  g_object_set_data (G_OBJECT (WID ("application_font")), PICKER_DIALOG_DATA_STRING, dialog);
-  peditor = gconf_peditor_new_font (NULL, GTK_FONT_KEY,
-		  		    WID ("application_font"),
-				    PEDITOR_FONT_COMBINED,
-				    "conv-from-widget-cb", application_font_to_gconf,
-				    NULL);
-  g_signal_connect_swapped (G_OBJECT (peditor), "value-changed", (GCallback) application_font_changed, WID ("application_font"));
-  application_font_changed (WID ("application_font"));
-  peditor = gconf_peditor_new_font (NULL, DESKTOP_FONT_KEY,
-		  		    WID ("desktop_font"),
-				    PEDITOR_FONT_COMBINED, NULL);
+	peditor = gconf_peditor_new_font (NULL, GTK_FONT_KEY,
+					  WID ("application_font"),
+					  "conv-from-widget-cb", application_font_to_gconf,
+					  NULL);
+	g_signal_connect_swapped (peditor, "value-changed",
+				  G_CALLBACK (application_font_changed), WID ("application_font"));
+	application_font_changed (WID ("application_font"));
 
-  peditor = gconf_peditor_new_font (NULL, WINDOW_TITLE_FONT_KEY,
-		  		    WID ("window_title_font"),
-				    PEDITOR_FONT_COMBINED, NULL);
+	peditor = gconf_peditor_new_font (NULL, DESKTOP_FONT_KEY,
+					  WID ("desktop_font"),
+					  NULL);
 
-  peditor = gconf_peditor_new_font (NULL, MONOSPACE_FONT_KEY,
-		  		    WID ("monospace_font"),
-				    PEDITOR_FONT_COMBINED, NULL);
+	peditor = gconf_peditor_new_font (NULL, WINDOW_TITLE_FONT_KEY,
+					  WID ("window_title_font"),
+					  NULL);
 
-  gconf_client_notify_add (client, METACITY_DIR,
-			   metacity_changed,
-			   dialog, NULL, NULL);
+	peditor = gconf_peditor_new_font (NULL, MONOSPACE_FONT_KEY,
+					  WID ("monospace_font"),
+					  NULL);
 
-  metacity_titlebar_load_sensitivity (client, dialog);
+	gconf_client_notify_add (client, METACITY_DIR,
+				 metacity_changed,
+				 dialog, NULL, NULL);
 
-  widget = WID ("font_dialog");
-  capplet_set_icon (widget, "gnome-settings-font");
+	metacity_titlebar_load_sensitivity (client, dialog);
+
+	widget = WID ("font_dialog");
+	capplet_set_icon (widget, "gnome-settings-font");
 
 #ifdef HAVE_XFT2
-  setup_font_pair (WID ("monochrome_radio"),    WID ("monochrome_sample"),    ANTIALIAS_NONE,      HINT_FULL);
-  setup_font_pair (WID ("best_shapes_radio"),   WID ("best_shapes_sample"),   ANTIALIAS_GRAYSCALE, HINT_MEDIUM);
-  setup_font_pair (WID ("best_contrast_radio"), WID ("best_contrast_sample"), ANTIALIAS_GRAYSCALE, HINT_FULL);
-  setup_font_pair (WID ("subpixel_radio"),      WID ("subpixel_sample"),      ANTIALIAS_RGBA,      HINT_FULL);
+	setup_font_pair (WID ("monochrome_radio"),    WID ("monochrome_sample"),    ANTIALIAS_NONE,      HINT_FULL);
+	setup_font_pair (WID ("best_shapes_radio"),   WID ("best_shapes_sample"),   ANTIALIAS_GRAYSCALE, HINT_MEDIUM);
+	setup_font_pair (WID ("best_contrast_radio"), WID ("best_contrast_sample"), ANTIALIAS_GRAYSCALE, HINT_FULL);
+	setup_font_pair (WID ("subpixel_radio"),      WID ("subpixel_sample"),      ANTIALIAS_RGBA,      HINT_FULL);
 
-  font_render_load ();
+	font_render_load ();
 
-  gconf_client_notify_add (client, FONT_RENDER_DIR,
-			   font_render_changed,
-			   NULL, NULL, NULL);
+	gconf_client_notify_add (client, FONT_RENDER_DIR,
+				 font_render_changed,
+				 NULL, NULL, NULL);
 
-  g_signal_connect (WID ("details_button"),
- 		    "clicked",
- 		    G_CALLBACK (cb_show_details), widget);
+	g_signal_connect (WID ("details_button"), "clicked",
+			  G_CALLBACK (cb_show_details), widget);
 #else /* !HAVE_XFT2 */
-  gtk_widget_hide (WID ("font_render_frame"));
+	gtk_widget_hide (WID ("font_render_frame"));
 #endif /* HAVE_XFT2 */
 
-  g_signal_connect (G_OBJECT (widget),
-    "response",
-    G_CALLBACK (cb_dialog_response), NULL);
+	g_signal_connect (widget, "response",
+			  G_CALLBACK (cb_dialog_response), NULL);
 
-  gtk_widget_show (widget);
+	gtk_widget_show (widget);
 
-  g_object_unref (client);
+	g_object_unref (dialog);
+	g_object_unref (client);
 }
 
 #ifdef HAVE_XFT2
@@ -808,11 +823,17 @@ cb_show_details (GtkWidget *button,
 
 	if (!details_dialog) {
 		GConfClient *client = gconf_client_get_default ();
-		GladeXML *dialog = glade_xml_new (GLADEDIR "/font-properties.glade", "render_details", NULL);
+		GladeXML *dialog;
 		GtkWidget *dpi_spinner;
 		GnomeVFSURI *uri;
 		int dpi;
 		GtkAdjustment *adjustment;
+
+		dialog = glade_xml_new (GLADEDIR "/font-properties.glade", "render_details", NULL);
+		if (!dialog) {
+			g_warning ("could not load font-properties.glade");
+			return;
+		}
 
 		details_dialog = WID ("render_details");
 		uri = gnome_vfs_uri_new ("fonts:///");
@@ -888,6 +909,7 @@ cb_show_details (GtkWidget *button,
 				  "delete_event",
 				  G_CALLBACK (gtk_true), NULL);
 
+		g_object_unref (dialog);
 		g_object_unref (client);
 	}
 
@@ -898,23 +920,20 @@ cb_show_details (GtkWidget *button,
 int
 main (int argc, char *argv[])
 {
-  GladeXML *dialog;
+	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
+	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+	textdomain (GETTEXT_PACKAGE);
 
-  bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
-  bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-  textdomain (GETTEXT_PACKAGE);
+	gnome_program_init ("gnome-font-properties", VERSION,
+			    LIBGNOMEUI_MODULE, argc, argv,
+			    GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
+			    NULL);
 
-  gnome_program_init ("gnome-font-properties", VERSION,
-		      LIBGNOMEUI_MODULE, argc, argv,
-		      GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
-		      NULL);
+	activate_settings_daemon ();
 
-  activate_settings_daemon ();
+	setup_dialog ();
 
-  dialog = create_dialog ();
-  setup_dialog (dialog);
+	gtk_main ();
 
-  gtk_main ();
-
-  return 0;
+	return 0;
 }

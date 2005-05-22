@@ -41,13 +41,6 @@ typedef struct _GConfPropertyEditorPrivate GConfPropertyEditorPrivate;
 typedef GConfValue *(*GConfPEditorValueConvFn) (GConfPropertyEditor *peditor, const GConfValue *);
 typedef int	    (*GConfPEditorGetValueFn)  (GConfPropertyEditor *peditor, gpointer data);
 
-typedef enum
-{
-	PEDITOR_FONT_NAME,
-	PEDITOR_FONT_SIZE,
-	PEDITOR_FONT_COMBINED
-} GConfPEditorFontType;
-
 struct _GConfPropertyEditor 
 {
 	GObject parent;
@@ -142,8 +135,7 @@ GObject *gconf_peditor_new_numeric_range (GConfChangeSet          *changeset,
 
 GObject *gconf_peditor_new_font          (GConfChangeSet          *changeset,
 					  gchar                   *key,
-					  GtkWidget               *font_picker,
-					  GConfPEditorFontType	   font_type,
+					  GtkWidget               *font_button,
 					  gchar                   *first_property_name,
 					  ...);
 
