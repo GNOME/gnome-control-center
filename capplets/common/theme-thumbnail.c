@@ -174,7 +174,7 @@ create_image (ThemeThumbnailData *theme_thumbnail_data,
 
   /* Create a pixmap */
   visual = gtk_widget_get_visual (window);
-  pixmap = gdk_pixmap_new (NULL, ICON_SIZE_WIDTH, ICON_SIZE_HEIGHT, gdk_visual_get_best_depth());
+  pixmap = gdk_pixmap_new (NULL, ICON_SIZE_WIDTH, ICON_SIZE_HEIGHT, visual->depth);
   gdk_drawable_set_colormap (GDK_DRAWABLE (pixmap), gtk_widget_get_colormap (window));
 
   /* Draw the window */
