@@ -1,3 +1,19 @@
+2005-06-03  Anders Carlsson  <andersca@imendio.com>
+
+	* Makefile.am:
+	* clipboard-manager.c:
+	* clipboard-manager.h:
+	* list.c:
+	* list.h:
+	* xutils.c
+	* xutils.h:
+	Add clipboard manager files.
+	
+	* gnome-settings-daemon.c: (clipboard_manager_terminate_cb),
+	(clipboard_manager_event_filter), (clipboard_manager_watch_cb),
+	(finalize), (gnome_settings_daemon_new):
+	Use clipboard manager for persistent clipboard storage.
+	
 2005-05-31  Rodrigo Moya <rodrigo@novell.com>
 
 	* GNOME_Settings_Daemon.server.in: added name and description

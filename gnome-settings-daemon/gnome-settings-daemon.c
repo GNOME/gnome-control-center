@@ -61,6 +61,8 @@
 
 #include "GNOME_SettingsDaemon.h"
 
+#include "clipboard-manager.h"
+
 static GObjectClass *parent_class = NULL;
 
 struct _GnomeSettingsDaemonPrivate {
@@ -69,6 +71,7 @@ struct _GnomeSettingsDaemonPrivate {
 
 static GSList *directories = NULL;
 XSettingsManager **managers = NULL;
+static ClipboardManager *clipboard_manager;
 
 typedef struct DirElement
 {
@@ -137,6 +140,53 @@ config_notify (GConfClient *client,
 }
 
 static void
+clipboard_manager_terminate_cb (void *data)
+{
+  /* Do nothing */
+}
+
+static GdkFilterReturn 
+clipboard_manager_event_filter (GdkXEvent *xevent,
+				GdkEvent  *event,
+				gpointer   data)
+{
+  if (clipboard_manager_process_event (clipboard_manager,
+				       (XEvent *)xevent))
+    return GDK_FILTER_REMOVE;
+  else
+    return GDK_FILTER_CONTINUE;
+}
+
+static void
+clipboard_manager_watch_cb (Window  window,
+			    Bool    is_start,
+			    long    mask,
+			    void   *cb_data)
+{
+  GdkWindow *gdkwin;
+  GdkDisplay *display;
+
+  display = gdk_display_get_default ();
+  gdkwin = gdk_window_lookup_for_display (display, window);
+
+  if (is_start)
+    {
+      if (!gdkwin)
+	gdkwin = gdk_window_foreign_new_for_display (display, window);
+      else
+	g_object_ref (gdkwin);
+      
+      gdk_window_add_filter (gdkwin, clipboard_manager_event_filter, NULL);
+    }
+  else
+    {
+      g_assert (gdkwin);
+      gdk_window_remove_filter (gdkwin, clipboard_manager_event_filter, NULL);
+      g_object_unref (gdkwin);
+    }
+}
+
+static void
 terminate_cb (void *data)
 {
   gboolean *terminated = data;
@@ -188,6 +238,8 @@ finalize (GObject *object)
 
 	for (i = 0; managers && managers [i]; i++)
 		xsettings_manager_destroy (managers [i]);
+
+	clipboard_manager_destroy (clipboard_manager);
 
 	g_free (daemon->private);
 	daemon->private = NULL;
@@ -241,7 +293,8 @@ gnome_settings_daemon_new (void)
       fprintf (stderr, "You can only run one xsettings manager at a time; exiting\n");
       exit (1);
     }
-      
+
+  
   if (!terminated)
     {
       managers = g_new (XSettingsManager *, n_screens + 1);
@@ -265,6 +318,16 @@ gnome_settings_daemon_new (void)
 
       g_assert (i == n_screens);
       managers [i] = NULL;
+    }
+
+  if (!clipboard_manager_check_running (GDK_DISPLAY_XDISPLAY (display)))
+    {
+      clipboard_manager = clipboard_manager_new (GDK_DISPLAY_XDISPLAY (display),
+						 gdk_error_trap_push,
+						 gdk_error_trap_pop,
+						 clipboard_manager_terminate_cb,
+						 clipboard_manager_watch_cb,
+						 NULL);
     }
 
   /* We use GConfClient not GConfClient because a cache isn't useful
@@ -316,7 +379,7 @@ gnome_settings_daemon_new (void)
           g_error_free (error);
         }
     }
- 
+
   for (i = 0; i < n_screens; i++) 
     {
       GdkScreen *screen;

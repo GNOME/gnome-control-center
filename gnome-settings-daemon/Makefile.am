@@ -55,6 +55,12 @@ gnome_settings_daemon_SOURCES =	\
 	reaper.h			\
 	gnome-settings-xmodmap.c	\
 	gnome-settings-xmodmap.h	\
+	list.c				\
+	list.h				\
+	xutils.c			\
+	xutils.h			\
+	clipboard-manager.c		\
+	clipboard-manager.h		\
 	$(CORBA_GENERATED)
 
 #	$(AccessX_files)		
