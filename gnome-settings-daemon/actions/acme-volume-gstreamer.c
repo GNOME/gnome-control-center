@@ -40,6 +40,7 @@ struct AcmeVolumeGStreamerPrivate
   	GstMixer      *mixer;
   	GstMixerTrack *track;
  	guint timer_id;
+	gint state;
 };
 
 static GObjectClass *parent_class = NULL;
@@ -87,52 +88,78 @@ acme_volume_gstreamer_set_mute (AcmeVolume *vol, gboolean val)
 	gst_mixer_set_mute (self->_priv->mixer,
 			    self->_priv->track,
 			    val);
-	
+
+	if (val)
+		self->_priv->state |= 1;
+	else {
+		GstMixerTrack *track = self->_priv->track;
+		gint *volumes, n;
+
+		self->_priv->state &= ~1;
+		volumes = g_new0 (gint, track->num_channels);
+		for (n = 0; n < track->num_channels; n++)
+			volumes[n] = (self->_priv->state >> 1) /
+				track->num_channels;
+		gst_mixer_set_volume (self->_priv->mixer, track, volumes);
+		g_free (volumes);
+	}
+
 	acme_volume_gstreamer_close (self);
+}
+
+static void
+update_state (AcmeVolumeGStreamer * self)
+{
+	gint *volumes, vol = 0, n;
+	GstMixerTrack *track = self->_priv->track;
+
+	/* update mixer by getting volume */
+	volumes = g_new0 (gint, track->num_channels);
+	gst_mixer_get_volume (self->_priv->mixer, track, volumes);
+	for (n = 0; n < track->num_channels; n++)
+		vol += volumes[n];
+	g_free (volumes);
+
+	/* update mute flag, and volume if not muted */
+	if (GST_MIXER_TRACK_HAS_FLAG (track, GST_MIXER_TRACK_MUTE) ||
+	    (vol == 0 && (self->_priv->state >> 1) != 0))
+		self->_priv->state |= 1;
+	else
+		self->_priv->state = vol << 1;
 }
 
 static gboolean
 acme_volume_gstreamer_get_mute (AcmeVolume *vol)
 {
 	AcmeVolumeGStreamer *self = (AcmeVolumeGStreamer *) vol;
-	gboolean mute;
 
 	if (acme_volume_gstreamer_open (self) == FALSE)
 		return FALSE;
 
-	mute = GST_MIXER_TRACK_HAS_FLAG (self->_priv->track,
-					 GST_MIXER_TRACK_MUTE);
-
+	update_state (self);
 	acme_volume_gstreamer_close (self);
 
-	return mute;
+	return (self->_priv->state & 1);
 }
 
 static int
 acme_volume_gstreamer_get_volume (AcmeVolume *vol)
 {
-	gint i, vol_total = 0, *volumes;
 	double volume;
 	AcmeVolumeGStreamer *self = (AcmeVolumeGStreamer *) vol;
-	GstMixerTrack *track;
+	GstMixerTrack *track = self->_priv->track;
 	
 	if (acme_volume_gstreamer_open (self) == FALSE)
 		return 0;
 
-	track = self->_priv->track;
+	update_state (self);
 
-	volumes = g_new0 (gint, track->num_channels);
-	gst_mixer_get_volume (self->_priv->mixer, track, volumes);
-	for (i = 0; i < track->num_channels; ++i)
-		vol_total += volumes[i];
-	g_free (volumes);
+	/* normalize to [0,100] scale that acme wants */
+	volume = (self->_priv->state >> 1) / (double) track->num_channels;
+	volume = 100 * (volume - track->min_volume) /
+		(track->max_volume - track->min_volume);
 
 	acme_volume_gstreamer_close (self);
-	
-	volume = vol_total / (double)track->num_channels;
-
-	/* Normalize the volume to the [0, 100] scale that acme expects. */
-	volume = 100 * (volume - track->min_volume) / (track->max_volume - track->min_volume);
 
 	return (gint) volume;
 }
@@ -140,8 +167,7 @@ acme_volume_gstreamer_get_volume (AcmeVolume *vol)
 static void
 acme_volume_gstreamer_set_volume (AcmeVolume *vol, int val)
 {
-	gint i, *volumes;
-	double volume;
+	gint i, *volumes, volume;
 	AcmeVolumeGStreamer *self = (AcmeVolumeGStreamer *) vol;
 	GstMixerTrack *track;
 
@@ -152,7 +178,8 @@ acme_volume_gstreamer_set_volume (AcmeVolume *vol, int val)
 	val = CLAMP (val, 0, 100);
 
 	/* Rescale the volume from [0, 100] to [track min, track max]. */
-	volume = (val / 100.0) * (track->max_volume - track->min_volume) + track->min_volume;
+	volume = (val / 100.0) * (track->max_volume - track->min_volume) +
+		track->min_volume;
 
 	volumes = g_new (gint, track->num_channels);
 	for (i = 0; i < track->num_channels; ++i)
@@ -160,6 +187,10 @@ acme_volume_gstreamer_set_volume (AcmeVolume *vol, int val)
 	gst_mixer_set_volume (self->_priv->mixer, track, volumes);
 	g_free (volumes);
  	
+	/* update state */
+	self->_priv->state = (self->_priv->state & 1) |
+		((volume * track->num_channels) << 1);
+
  	acme_volume_gstreamer_close (self);
 }
  

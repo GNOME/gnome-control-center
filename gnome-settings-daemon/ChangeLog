@@ -1,3 +1,17 @@
+2005-06-05  Ronald S. Bultje  <rbultje@ronald.bitfreak.net>
+
+	* actions/Makefile.am:
+	* actions/acme-volume-gstreamer.c:
+	(acme_volume_gstreamer_set_mute), (update_state),
+	(acme_volume_gstreamer_get_mute),
+	(acme_volume_gstreamer_get_volume),
+	(acme_volume_gstreamer_set_volume):
+	  Fix mute handling, particularly for devices without hardware
+	  mute support or with applications that use volume=0 for mute.
+	  Also fix the fact that we linked against all of ALSA, OSS and
+	  GStreamer if they were all available; default to GStreamer.
+	  Fixes #306036.
+
 2005-06-03  Anders Carlsson  <andersca@imendio.com>
 
 	* Makefile.am:
