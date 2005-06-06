@@ -27,6 +27,7 @@
 #include <gconf/gconf-client.h>
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtk.h>
+#include <atk/atk.h>
 
 #define GNOMECC_CANVAS_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GNOMECC_TYPE_CANVAS, GnomeccCanvasPrivate))
 
@@ -59,6 +60,9 @@ struct _GnomeccCanvasPrivate {
 	gdouble max_item_width;
 	gdouble max_item_height;
 	gdouble max_icon_height;
+
+	/* accessibility stuff */
+	GHashTable *accessible_children;
 };
 
 typedef struct {
@@ -79,6 +83,7 @@ typedef struct {
 
 	gint n_category;
 	gint n_entry;
+	gint index;
 } EntryInfo;
 
 typedef struct {
@@ -122,6 +127,9 @@ static void gnomecc_canvas_style_set       (GtkWidget     *canvas,
 					    GtkStyle      *previous_style);
 static void gnomecc_canvas_realize         (GtkWidget     *canvas);
 
+static AtkObject* gnomecc_canvas_get_accessible (GtkWidget *widget);
+
+
 
 G_DEFINE_TYPE (GnomeccCanvas, gnomecc_canvas, GNOME_TYPE_CANVAS);
 
@@ -140,6 +148,7 @@ gnomecc_canvas_class_init (GnomeccCanvasClass *class)
 	widget_class->style_set = gnomecc_canvas_style_set;
 	widget_class->size_allocate = gnomecc_canvas_size_allocate;
 	widget_class->realize = gnomecc_canvas_realize;
+	widget_class->get_accessible = gnomecc_canvas_get_accessible;
 
 	class->changed = NULL;
 
@@ -181,6 +190,8 @@ gnomecc_canvas_init (GnomeccCanvas *canvas)
 	priv->max_item_height = 0;
 	priv->items_per_row = 0;
 	priv->rtl = (gtk_widget_get_direction (GTK_WIDGET (canvas)) == GTK_TEXT_DIR_RTL);
+
+	priv->accessible_children = g_hash_table_new (g_int_hash, g_int_equal);
 
 	gtk_widget_show_all (GTK_WIDGET (canvas));
 }
@@ -368,7 +379,7 @@ cb_canvas_event (GnomeCanvasItem *item, GdkEvent *event, GnomeccCanvas *canvas)
 
 	if (priv->selected)
 		ei = priv->selected->user_data;
-		
+
 	n_entry = 0;
 	n_category = 0;
 	n_categories = priv->info->n_categories;
@@ -589,10 +600,11 @@ build_canvas (GnomeccCanvas *canvas)
 {
 	GnomeccCanvasPrivate *priv;
 	GnomeCanvas *gcanvas;
-	int i, j;
+	int i, j, index;
 
 	priv = GNOMECC_CANVAS_GET_PRIVATE (canvas);
 	gcanvas = GNOME_CANVAS (canvas);
+	index = 0;
 
 	priv->under_cover = gnome_canvas_item_new (gnome_canvas_root (gcanvas),
 						   gnomecc_event_box_get_type(),
@@ -703,12 +715,14 @@ build_canvas (GnomeccCanvas *canvas)
 
 			ei->n_category = i;
 			ei->n_entry = j;
-			
+			ei->index = index;
+
 			g_signal_connect (ei->cover, "event",
 				G_CALLBACK (cover_event),
 				priv->info->categories[i]->entries[j]);
 
 			setup_entry (canvas, priv->info->categories[i]->entries[j]);
+			index++;
 		}
 	}
 }
@@ -1022,4 +1036,689 @@ gnomecc_canvas_new (ControlCenterInformation *info)
 	return g_object_new (GNOMECC_TYPE_CANVAS,
 			     "info", info,
 			     NULL);
+}
+
+/* Accessibility support */
+static gpointer accessible_parent_class;
+static gpointer accessible_item_parent_class;
+
+enum {
+	ACTION_ACTIVATE,
+	LAST_ACTION
+};
+
+typedef struct {
+	AtkObject parent;
+
+	ControlCenterEntry *entry;
+	AtkStateSet *state_set;
+
+	guint action_idle_handler;
+} GnomeccCanvasItemAccessible;
+
+typedef struct {
+	AtkObjectClass parent_class;
+} GnomeccCanvasItemAccessibleClass;
+
+static const gchar *const action_names[] = 
+{
+	"activate",
+	NULL
+};
+
+static const gchar *const action_descriptions[] =
+{
+	"Activate item",
+	NULL
+};
+
+static void
+gnomecc_canvas_item_accessible_get_extents (AtkComponent *component,
+					    gint         *x,
+					    gint         *y,
+					    gint         *width,
+					    gint         *height,
+					    AtkCoordType  coord_type)
+{
+	GnomeccCanvasItemAccessible *item;
+	GnomeccCanvas *canvas;
+	GnomeCanvasItem *cover;
+	AtkObject *parent_object;
+	gint p_x, p_y;
+
+	item = (GnomeccCanvasItemAccessible *) component;
+
+	canvas = ((EntryInfo *) item->entry->user_data)->canvas;
+	parent_object = gtk_widget_get_accessible (GTK_WIDGET (canvas));
+	atk_component_get_position (ATK_COMPONENT (parent_object), &p_x, &p_y, coord_type);
+
+	/* the cover pretty much represents the item size */
+	cover = GNOME_CANVAS_ITEM (((EntryInfo *)item->entry->user_data)->cover);
+
+	*x = p_x + cover->x1;
+	*y = p_y + cover->y1;
+	*width  = cover->x2 - cover->x1;
+	*height = cover->y2 - cover->y1;
+}
+
+static void
+atk_component_item_interface_init (AtkComponentIface *iface)
+{
+	iface->get_extents = gnomecc_canvas_item_accessible_get_extents;
+}
+
+static gboolean
+idle_do_action (gpointer data)
+{
+	GnomeccCanvasItemAccessible *item;
+
+	item = (GnomeccCanvasItemAccessible *) data;
+
+	item->action_idle_handler = 0;
+	activate_entry (item->entry);
+
+	return FALSE;
+}
+
+static gboolean
+gnomecc_canvas_item_accessible_action_do_action (AtkAction *action,
+						 gint       index)
+{
+	GnomeccCanvasItemAccessible *item;
+
+	if (index < 0 || index >= LAST_ACTION) 
+		return FALSE;
+
+	item = (GnomeccCanvasItemAccessible *) action;
+
+	switch (index) {
+	case ACTION_ACTIVATE:
+		if (!item->action_idle_handler)
+			item->action_idle_handler = g_idle_add (idle_do_action, item);
+		break;
+	default:
+		g_assert_not_reached ();
+		return FALSE;
+	}        
+
+	return TRUE;
+}
+
+static gint
+gnomecc_canvas_item_accessible_action_get_n_actions (AtkAction *action)
+{
+        return LAST_ACTION;
+}
+
+static const gchar *
+gnomecc_canvas_item_accessible_action_get_description (AtkAction *action,
+                                                      gint       index)
+{
+	if (index < 0 || index >= LAST_ACTION) 
+		return NULL;
+
+	return action_descriptions[index];
+}
+
+static const gchar *
+gnomecc_canvas_item_accessible_action_get_name (AtkAction *action,
+                                               gint       index)
+{
+	if (index < 0 || index >= LAST_ACTION) 
+		return NULL;
+
+	return action_names[index];
+}
+
+static void
+atk_action_item_interface_init (AtkActionIface *iface)
+{
+	iface->do_action = gnomecc_canvas_item_accessible_action_do_action;
+	iface->get_n_actions = gnomecc_canvas_item_accessible_action_get_n_actions;
+	iface->get_description = gnomecc_canvas_item_accessible_action_get_description;
+	iface->get_name = gnomecc_canvas_item_accessible_action_get_name;
+}
+
+static gint
+gnomecc_canvas_item_accessible_get_index_in_parent (AtkObject *object)
+{
+	GnomeccCanvasItemAccessible *item;
+
+	item = (GnomeccCanvasItemAccessible *) object;
+
+	return ((EntryInfo *) item->entry->user_data)->index;
+}
+
+static G_CONST_RETURN gchar*
+gnomecc_canvas_item_accessible_get_name (AtkObject *object)
+{
+	GnomeccCanvasItemAccessible *item;
+
+	if (object->name)
+		return object->name;
+	else {
+		item = (GnomeccCanvasItemAccessible *) object;
+
+		if (item->entry && item->entry->title)
+			return item->entry->title;
+		else
+			return "Item with no description";
+	}
+}
+
+static AtkObject*
+gnomecc_canvas_item_accessible_get_parent (AtkObject *object)
+{
+	GnomeccCanvasItemAccessible *item;
+	GnomeccCanvas *canvas;
+
+	item = (GnomeccCanvasItemAccessible *) object;
+	canvas = ((EntryInfo *) item->entry->user_data)->canvas;
+
+	return gtk_widget_get_accessible (GTK_WIDGET (canvas));
+}
+
+static AtkStateSet*
+gnomecc_canvas_item_accessible_ref_state_set (AtkObject *object)
+{
+	GnomeccCanvasItemAccessible *item;
+	GnomeccCanvasPrivate *priv;
+	GnomeccCanvas *canvas;
+
+	item   = (GnomeccCanvasItemAccessible *) object;
+	canvas = ((EntryInfo *) item->entry->user_data)->canvas;
+	priv   = GNOMECC_CANVAS_GET_PRIVATE (canvas);
+
+	if (item->entry == priv->selected)
+		atk_state_set_add_state (item->state_set, ATK_STATE_FOCUSED);
+	else
+		atk_state_set_remove_state (item->state_set, ATK_STATE_FOCUSED);
+
+	return g_object_ref (item->state_set);
+}
+
+static void
+gnomecc_canvas_item_accessible_class_init (AtkObjectClass *class)
+{
+	GObjectClass *object_class;
+
+	accessible_item_parent_class = g_type_class_peek_parent (class);
+
+	object_class = (GObjectClass *)class;
+
+	class->get_index_in_parent = gnomecc_canvas_item_accessible_get_index_in_parent; 
+	class->get_name = gnomecc_canvas_item_accessible_get_name;
+	class->get_parent = gnomecc_canvas_item_accessible_get_parent; 
+	class->ref_state_set = gnomecc_canvas_item_accessible_ref_state_set;
+}
+
+static void
+gnomecc_canvas_item_accessible_object_init (GnomeccCanvasItemAccessible *item)
+{
+	item->state_set = atk_state_set_new ();
+
+	atk_state_set_add_state (item->state_set, ATK_STATE_ENABLED);
+	atk_state_set_add_state (item->state_set, ATK_STATE_FOCUSABLE);
+	atk_state_set_add_state (item->state_set, ATK_STATE_SENSITIVE);
+	atk_state_set_add_state (item->state_set, ATK_STATE_SELECTABLE);
+	atk_state_set_add_state (item->state_set, ATK_STATE_VISIBLE);
+
+	item->action_idle_handler = 0;
+}
+
+static GType
+gnomecc_canvas_item_accessible_get_type (void)
+{
+	static GType type = 0;
+
+	if (type == 0) {
+		static const GTypeInfo info = {
+			sizeof (GnomeccCanvasItemAccessibleClass),
+			(GBaseInitFunc) NULL, /* base init */
+			(GBaseFinalizeFunc) NULL, /* base finalize */
+			(GClassInitFunc) gnomecc_canvas_item_accessible_class_init, /* class init */
+			(GClassFinalizeFunc) NULL, /* class finalize */
+			NULL, /* class data */
+			sizeof (GnomeccCanvasItemAccessible), /* instance size */
+			0, /* nb preallocs */
+			(GInstanceInitFunc) gnomecc_canvas_item_accessible_object_init, /* instance init */
+			NULL /* value table */
+		};
+
+		static const GInterfaceInfo atk_component_info = {
+			(GInterfaceInitFunc) atk_component_item_interface_init,
+			(GInterfaceFinalizeFunc) NULL,
+			NULL
+		};
+
+		static const GInterfaceInfo atk_action_info = {
+			(GInterfaceInitFunc) atk_action_item_interface_init,
+			(GInterfaceFinalizeFunc) NULL,
+			NULL
+		};
+
+		type = g_type_register_static (ATK_TYPE_OBJECT,
+					       "GnomeccCanvasItemAccessible", &info, 0);
+
+		g_type_add_interface_static (type, ATK_TYPE_COMPONENT,
+					     &atk_component_info);
+		g_type_add_interface_static (type, ATK_TYPE_ACTION,
+					     &atk_action_info);
+	}
+
+	return type;
+}
+
+static gint
+gnomecc_canvas_accessible_get_n_children (AtkObject *accessible)
+{
+	GnomeccCanvasPrivate *priv;
+	GnomeccCanvas *canvas;
+	GtkWidget *widget;
+	gint i, count;
+
+	widget = GTK_ACCESSIBLE (accessible)->widget;
+
+	if (!widget)
+		return 0;
+
+	canvas = GNOMECC_CANVAS (widget);
+	priv   = GNOMECC_CANVAS_GET_PRIVATE (canvas);
+	count  = 0;
+
+	for (i = 0; i < priv->info->n_categories; i++)
+		count += priv->info->categories[i]->n_entries;
+
+	return count;
+}
+
+static ControlCenterEntry*
+gnomecc_canvas_accessible_get_entry (GnomeccCanvas *canvas, gint index)
+{
+	GnomeccCanvasPrivate *priv;
+	gint i, count;
+
+	priv  = GNOMECC_CANVAS_GET_PRIVATE (canvas);
+	count = 0;
+
+	for (i = 0; i < priv->info->n_categories; i++) {
+		if (index >= count &&
+		    index < count + priv->info->categories[i]->n_entries) {
+			return priv->info->categories[i]->entries[index - count];
+		} else
+			count += priv->info->categories [i]->n_entries;
+	}
+
+	return NULL;
+}
+
+static AtkObject*
+gnomecc_canvas_accessible_ref_child (AtkObject *accessible, gint index)
+{
+	GnomeccCanvasItemAccessible *item;
+	ControlCenterEntry *entry;
+	GnomeccCanvasPrivate *priv;
+	GnomeccCanvas *canvas;
+	GtkWidget *widget;
+	AtkObject *object;
+
+	widget = GTK_ACCESSIBLE (accessible)->widget;
+
+	if (!widget)
+		return NULL;
+
+	canvas = GNOMECC_CANVAS (widget);
+	priv   = GNOMECC_CANVAS_GET_PRIVATE (canvas);
+	entry  = gnomecc_canvas_accessible_get_entry (canvas, index);
+
+	if (!entry)
+		return NULL;
+
+	object = g_hash_table_lookup (priv->accessible_children, &index);
+
+	if (!object) {
+		object = g_object_new (gnomecc_canvas_item_accessible_get_type (), NULL);
+		item   = (GnomeccCanvasItemAccessible *) object;
+
+		object->role = ATK_ROLE_ICON;
+		item->entry  = entry;
+
+		g_hash_table_insert (priv->accessible_children,
+				     &((EntryInfo *) entry->user_data)->index, object);
+	}
+
+	return g_object_ref (object);
+}
+
+static void
+gnomecc_canvas_accessible_initialize (AtkObject *accessible, gpointer data)
+{
+	if (ATK_OBJECT_CLASS (accessible_parent_class)->initialize)
+		ATK_OBJECT_CLASS (accessible_parent_class)->initialize (accessible, data);
+
+	accessible->role = ATK_ROLE_LAYERED_PANE;
+}
+
+static void
+gnomecc_canvas_accessible_class_init (AtkObjectClass *class)
+{
+	GObjectClass *object_class;
+	GtkAccessibleClass *accessible_class;
+
+	accessible_parent_class = g_type_class_peek_parent (class);
+
+	object_class = (GObjectClass *)class;
+	accessible_class = (GtkAccessibleClass *)class;
+
+	class->get_n_children = gnomecc_canvas_accessible_get_n_children;
+	class->ref_child = gnomecc_canvas_accessible_ref_child;
+	class->initialize = gnomecc_canvas_accessible_initialize;
+}
+
+static gboolean
+gnomecc_canvas_accessible_add_selection (AtkSelection *selection, gint i)
+{
+	GnomeccCanvasPrivate *priv;
+	GnomeccCanvas *canvas;
+	GtkWidget *widget;
+	ControlCenterEntry *entry;
+
+	widget = GTK_ACCESSIBLE (selection)->widget;
+
+	if (!widget)
+		return FALSE;
+
+	canvas = GNOMECC_CANVAS (widget);
+	priv   = GNOMECC_CANVAS_GET_PRIVATE (canvas);
+
+	entry = gnomecc_canvas_accessible_get_entry (canvas, i);
+	select_entry (canvas, entry);
+
+	return TRUE;
+}
+
+static gboolean
+gnomecc_canvas_accessible_clear_selection (AtkSelection *selection)
+{
+	GnomeccCanvas *canvas;
+	GtkWidget *widget;
+
+	widget = GTK_ACCESSIBLE (selection)->widget;
+
+	if (!widget)
+		return FALSE;
+
+	canvas = GNOMECC_CANVAS (widget);
+	select_entry (canvas, NULL);
+
+	return TRUE;
+}
+
+static AtkObject*
+gnomecc_canvas_accessible_ref_selection (AtkSelection *selection, gint i)
+{
+	GnomeccCanvasPrivate *priv;
+	GnomeccCanvas *canvas;
+	GtkWidget *widget;
+
+	widget = GTK_ACCESSIBLE (selection)->widget;
+
+	if (!widget)
+		return NULL;
+
+	canvas = GNOMECC_CANVAS (widget);
+	priv   = GNOMECC_CANVAS_GET_PRIVATE (canvas);
+
+	if (priv->selected)
+		return atk_object_ref_accessible_child (gtk_widget_get_accessible (widget),
+							((EntryInfo *)priv->selected->user_data)->index);
+	return NULL;
+}
+
+static gint
+gnomecc_canvas_accessible_get_selection_count (AtkSelection *selection)
+{
+	GnomeccCanvasPrivate *priv;
+	GnomeccCanvas *canvas;
+	GtkWidget *widget;
+
+	widget = GTK_ACCESSIBLE (selection)->widget;
+
+	if (!widget)
+		return 0;
+
+	canvas = GNOMECC_CANVAS (widget);
+	priv   = GNOMECC_CANVAS_GET_PRIVATE (canvas);
+
+	return (priv->selected) ? 1 : 0;
+}
+
+static gboolean
+gnomecc_canvas_accessible_is_child_selected (AtkSelection *selection, gint i)
+{
+	GnomeccCanvasPrivate *priv;
+	GnomeccCanvas *canvas;
+	GtkWidget *widget;
+
+	widget = GTK_ACCESSIBLE (selection)->widget;
+
+	if (!widget)
+		return FALSE;
+
+	canvas = GNOMECC_CANVAS (widget);
+	priv   = GNOMECC_CANVAS_GET_PRIVATE (canvas);
+
+	return (priv->selected == gnomecc_canvas_accessible_get_entry (canvas, i));
+}
+
+static gboolean
+gnomecc_canvas_accessible_remove_selection (AtkSelection *selection, gint i)
+{
+	/* There can be only one item selected */
+	return gnomecc_canvas_accessible_clear_selection (selection);
+}
+
+static gboolean
+gnomecc_canvas_accessible_select_all_selection (AtkSelection *selection)
+{
+	/* This can't happen */
+	return FALSE;
+}
+
+static void
+gnomecc_canvas_accessible_selection_interface_init (AtkSelectionIface *iface)
+{
+	iface->add_selection = gnomecc_canvas_accessible_add_selection;
+	iface->clear_selection = gnomecc_canvas_accessible_clear_selection;
+	iface->ref_selection = gnomecc_canvas_accessible_ref_selection;
+	iface->get_selection_count = gnomecc_canvas_accessible_get_selection_count;
+	iface->is_child_selected = gnomecc_canvas_accessible_is_child_selected;
+	iface->remove_selection = gnomecc_canvas_accessible_remove_selection;
+	iface->select_all_selection = gnomecc_canvas_accessible_select_all_selection;
+}
+
+static AtkObject*
+gnomecc_canvas_accessible_ref_accessible_at_point (AtkComponent *component,
+						   gint          x,
+						   gint          y,
+						   AtkCoordType  coord_type)
+{
+	GtkWidget *widget;
+	GnomeccCanvasPrivate *priv;
+	GnomeccCanvas *canvas;
+	EntryInfo *entry;
+	gint x_pos, y_pos, x_w, y_w;
+	gint i, j;
+
+	widget = GTK_ACCESSIBLE (component)->widget;
+
+	if (widget == NULL)
+		return NULL;
+
+	canvas = GNOMECC_CANVAS (widget);
+	priv   = GNOMECC_CANVAS_GET_PRIVATE (canvas);
+
+	atk_component_get_extents (component, &x_pos, &y_pos, NULL, NULL, coord_type);
+	x_w = x - x_pos;
+	y_w = y - y_pos;
+
+	for (i = 0; i < priv->info->n_categories; i++) {
+		for (j = 0; j < priv->info->categories[i]->n_entries; j++) {
+			entry = (EntryInfo *) priv->info->categories[i]->entries[j];
+			
+			if (x_w > entry->cover->x1 &&
+			    x_w < entry->cover->x2 &&
+			    y_w > entry->cover->y1 &&
+			    y_w < entry->cover->y2)
+				return gnomecc_canvas_accessible_ref_child (ATK_OBJECT (component), entry->index);
+		}
+	}
+
+	return NULL;
+}
+
+static void
+atk_component_interface_init (AtkComponentIface *iface)
+{
+	iface->ref_accessible_at_point = gnomecc_canvas_accessible_ref_accessible_at_point;
+}
+
+static GType
+gnomecc_canvas_accessible_get_type (void)
+{
+	static GType type = 0;
+	AtkObjectFactory *factory;
+	GType derived_type;
+	GTypeQuery query;
+	GType derived_atk_type;
+
+	if (type == 0) {
+		static GTypeInfo info = {
+			0, /* class size */
+			(GBaseInitFunc) NULL, /* base init */
+			(GBaseFinalizeFunc) NULL, /* base finalize */
+			(GClassInitFunc) gnomecc_canvas_accessible_class_init,
+			(GClassFinalizeFunc) NULL, /* class finalize */
+			NULL, /* class data */
+			0, /* instance size */
+			0, /* nb preallocs */
+			(GInstanceInitFunc) NULL, /* instance init */
+			NULL /* value table */
+		};
+
+		static const GInterfaceInfo  atk_component_info = {
+			(GInterfaceInitFunc) atk_component_interface_init,
+			(GInterfaceFinalizeFunc) NULL,
+			NULL
+		};
+
+		static const GInterfaceInfo atk_selection_info = {
+			(GInterfaceInitFunc) gnomecc_canvas_accessible_selection_interface_init,
+			(GInterfaceFinalizeFunc) NULL,
+			NULL
+		};
+
+		derived_type = g_type_parent (GNOMECC_TYPE_CANVAS);
+		factory = atk_registry_get_factory (atk_get_default_registry (),
+						    derived_type);
+
+		derived_atk_type = atk_object_factory_get_accessible_type (factory);
+		g_type_query (derived_atk_type, &query);
+
+		info.class_size = query.class_size;
+		info.instance_size = query.instance_size;
+
+		type = g_type_register_static (derived_atk_type,
+					       "GnomeccCanvasAccessible",
+					       &info, 0);
+
+		g_type_add_interface_static (type,
+					     ATK_TYPE_COMPONENT,
+					     &atk_component_info);
+		g_type_add_interface_static (type,
+					     ATK_TYPE_SELECTION,
+					     &atk_selection_info);
+	}
+
+	return type;
+}
+
+static AtkObject*
+gnomecc_canvas_accessible_new (GObject *object)
+{
+	AtkObject *accessible;
+
+	accessible = g_object_new (gnomecc_canvas_accessible_get_type (), NULL);
+	atk_object_initialize (accessible, object);
+
+	return accessible;
+}
+
+static AtkObject*
+gnomecc_canvas_accessible_factory_create_accessible (GObject *object)
+{
+	return gnomecc_canvas_accessible_new (object);
+}
+
+static void
+gnomecc_canvas_accessible_factory_class_init (AtkObjectFactoryClass *class)
+{
+	class->create_accessible   = gnomecc_canvas_accessible_factory_create_accessible;
+	class->get_accessible_type = gnomecc_canvas_accessible_get_type;
+}
+
+static GType
+gnomecc_canvas_accessible_factory_get_type (void)
+{
+	static GType type = 0;
+
+	if (type == 0) {
+		static const GTypeInfo info = {
+			sizeof (AtkObjectFactoryClass),
+			NULL,           /* base_init */
+			NULL,           /* base_finalize */
+			(GClassInitFunc) gnomecc_canvas_accessible_factory_class_init,
+			NULL,           /* class_finalize */
+			NULL,           /* class_data */
+			sizeof (AtkObjectFactory),
+			0,             /* n_preallocs */
+			NULL, NULL
+		};
+
+		type = g_type_register_static (ATK_TYPE_OBJECT_FACTORY,
+					       "GnomeccCanvasAccessibleFactory",
+					       &info, 0);
+	}
+
+	return type;
+}
+
+static AtkObject*
+gnomecc_canvas_get_accessible (GtkWidget *widget)
+{
+	static gboolean already_here = FALSE;
+
+	if (!already_here) {
+		AtkObjectFactory *factory;
+		AtkRegistry *registry;
+		GType derived_type;
+		GType derived_atk_type;
+
+		already_here = TRUE;
+
+		derived_type = g_type_parent (GNOMECC_TYPE_CANVAS);
+
+		registry = atk_get_default_registry ();
+		factory  = atk_registry_get_factory (registry, derived_type);
+
+		derived_atk_type = atk_object_factory_get_accessible_type (factory);
+
+		if (g_type_is_a (derived_atk_type, GTK_TYPE_ACCESSIBLE)) {
+			atk_registry_set_factory_type (registry,
+						       GNOMECC_TYPE_CANVAS,
+						       gnomecc_canvas_accessible_factory_get_type ());
+		}
+	}
+
+	return (* GTK_WIDGET_CLASS (gnomecc_canvas_parent_class)->get_accessible) (widget);
 }
