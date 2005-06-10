@@ -1,3 +1,10 @@
+2005-06-10  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* applier.c: (render_wallpaper), (is_nautilus_running):
+	Fix build issues with gcc4. Remove unneeded #include <bonobo.h>
+	* applier.h: Remove #include <pthread.h> since it doesn't seem
+	to be used.
+
 2005-02-10  Rodney Dawes  <dobey@novell.com>
 
 	* Makefile.am: Don't define GNOME_ICONDIR as libbackground does not
