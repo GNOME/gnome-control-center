@@ -758,8 +758,8 @@ render_background (BGApplier *bg_applier, const BGPreferences *prefs)
 static void
 render_wallpaper (BGApplier *bg_applier, const BGPreferences *prefs) 
 {
-	GdkRectangle  src_geom;
-	GdkRectangle  dest_geom;
+	GdkRectangle  src_geom = { 0, };
+	GdkRectangle  dest_geom = { 0, };
 	GdkRectangle  virtual_geom;
 	GdkPixbuf    *prescaled_pixbuf = NULL;
 	guint         alpha;
@@ -1624,8 +1624,8 @@ is_nautilus_running (void)
 	    bytes_after == 0 &&
 	    actual_format == 8 &&
 	    data != NULL &&
-	    !strcmp (data, "desktop_window") &&
-	    !strcmp (data + strlen (data) + 1, "Nautilus"))
+	    !strcmp ((char *)data, "desktop_window") &&
+	    !strcmp ((char *)data + strlen ((char *)data) + 1, "Nautilus"))
 		running = TRUE;
 	else
 		running = FALSE;
