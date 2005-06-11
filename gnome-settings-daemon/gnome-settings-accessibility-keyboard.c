@@ -48,10 +48,6 @@
 #endif
 
 static int xkbEventBase;
-static GtkWidget *ax_slowkeys_dialog = NULL;
-static GtkWidget *ax_slowkeys_dialog_hbox = NULL;
-static GtkWidget *ax_stickykeys_dialog = NULL;
-static GtkWidget *ax_stickykeys_dialog_hbox = NULL;
 static gboolean  stickykeys_shortcut_val;
 static gboolean  slowkeys_shortcut_val;
 
@@ -299,6 +295,7 @@ ax_response_callback (gint response_id, guint revert_controls_mask, gboolean ena
 
 	switch (response_id)
 	{
+	    case GTK_RESPONSE_DELETE_EVENT:
 	    case GTK_RESPONSE_REJECT:
 	    case GTK_RESPONSE_CANCEL:
 		{
@@ -353,59 +350,38 @@ static void
 ax_stickykeys_response (GtkDialog *dialog, gint response_id, gpointer data)
 {
 	gboolean *enabled = data;
+
 	if (ax_response_callback (response_id, XkbStickyKeysMask, *enabled))
-	{
-		gtk_widget_destroy (ax_stickykeys_dialog);
-		ax_stickykeys_dialog = NULL;
-	}
+		gtk_widget_destroy (GTK_WIDGET (dialog));
 }
 
 static void
 ax_slowkeys_response (GtkDialog *dialog, gint response_id, gpointer data)
 {
 	gboolean *enabled = data;
+
 	if (ax_response_callback (response_id, XkbSlowKeysMask, *enabled))
-	{
-		gtk_widget_destroy (ax_slowkeys_dialog);
-		ax_slowkeys_dialog = NULL;
-	}
+		gtk_widget_destroy (GTK_WIDGET (dialog));
 }
 
 static GtkWidget*
-warning_dialog_post (GtkWidget *dialog, GtkWidget **hbox, GCallback response, 
-		     gboolean *enabled, gchar *title, gchar *user_action_string, gchar *query)
+warning_dialog_post (GCallback response, gboolean *enabled,
+		     gchar *title, gchar *user_action_string, gchar *query)
 {
-	GtkWidget *label;
-	gchar *label_markup_string = g_strconcat ("<span weight=\"bold\" size=\"larger\">", 
-						  query, "</span>\n\n", user_action_string, NULL);
+	GtkWidget *dialog;
 
-	if (!dialog)
-	{
-		dialog = gtk_dialog_new_with_buttons (title, NULL, 0, 
-						      GTK_STOCK_CANCEL,
-						      GTK_RESPONSE_REJECT,
-						      GTK_STOCK_HELP,
-						      GTK_RESPONSE_HELP,
-						      GTK_STOCK_OK,
-						      GTK_RESPONSE_OK,
-						      NULL);
-		g_signal_connect (G_OBJECT (dialog),
-				  "response",
-				  G_CALLBACK (response),
-				  enabled);
-	}
-	else
-	{
-		gtk_widget_destroy (*hbox);
-	}
-	*hbox = gtk_hbox_new (FALSE, 10);
-	gtk_container_add (GTK_CONTAINER (*hbox), gtk_image_new_from_stock (GTK_STOCK_DIALOG_WARNING, GTK_ICON_SIZE_DIALOG));
-	label = gtk_label_new (NULL);
-	gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
-	gtk_label_set_markup (GTK_LABEL (label), label_markup_string);
-	g_free (label_markup_string);
-	gtk_container_add (GTK_CONTAINER (*hbox), label);
-	gtk_container_add (GTK_CONTAINER (GTK_DIALOG (dialog)->vbox), *hbox);
+	dialog = gtk_message_dialog_new (NULL, 0,
+					 GTK_MESSAGE_WARNING,
+					 GTK_BUTTONS_OK_CANCEL,
+					 query);
+	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), user_action_string);
+	gtk_dialog_add_button (GTK_DIALOG (dialog), GTK_STOCK_HELP, GTK_RESPONSE_HELP);
+	gtk_window_set_title (GTK_WINDOW (dialog), title);
+
+	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+
+	g_signal_connect (G_OBJECT (dialog), "response",
+			  G_CALLBACK (response), enabled);
 	gtk_widget_show_all (dialog);
 
 	return dialog;
@@ -415,29 +391,28 @@ static void
 ax_slowkeys_warning_dialog_post (gboolean enabled)
 {
 	slowkeys_shortcut_val = enabled;
-	ax_slowkeys_dialog = warning_dialog_post (ax_slowkeys_dialog,
-						  &ax_slowkeys_dialog_hbox,
-						  (GCallback) ax_slowkeys_response,
-						  &slowkeys_shortcut_val,
-						  _("Slow Keys Alert"),
-						  _("You just held down the Shift key for 8 seconds.  This is the shortcut for the Slow Keys feature, which affects the way your keyboard works."),
-						  enabled ? _("Do you want to activate Slow Keys?") : 
-						  _("Do you want to deactivate Slow Keys?"));
+	warning_dialog_post ((GCallback) ax_slowkeys_response,
+			     &slowkeys_shortcut_val,
+			     _("Slow Keys Alert"),
+			     _("You just held down the Shift key for 8 seconds.  This is the shortcut "
+			       "for the Slow Keys feature, which affects the way your keyboard works."),
+			     enabled ? _("Do you want to activate Slow Keys?") : 
+			     _("Do you want to deactivate Slow Keys?"));
 }
 
 static void
 ax_stickykeys_warning_dialog_post (gboolean enabled)
 {
 	stickykeys_shortcut_val = enabled;
-	ax_stickykeys_dialog = warning_dialog_post (ax_stickykeys_dialog,
-						    &ax_stickykeys_dialog_hbox,
-						    (GCallback) ax_stickykeys_response,
-						    &stickykeys_shortcut_val,
-						    _("Sticky Keys Alert"),
-						    enabled ? _("You just pressed the Shift key 5 times in a row.  This is the shortcut for the Sticky Keys feature, which affects the way your keyboard works.") : 
-						    _("You just pressed two keys at once, or pressed the Shift key 5 times in a row.  This turns off the Sticky Keys feature, which affects the way your keyboard works."),
-						    enabled ? _("Do you want to activate Sticky Keys?") : 
-						    _("Do you want to deactivate Sticky Keys?"));
+	warning_dialog_post ((GCallback) ax_stickykeys_response,
+			     &stickykeys_shortcut_val,
+			     _("Sticky Keys Alert"),
+			     enabled ? _("You just pressed the Shift key 5 times in a row.  This is the shortcut "
+					 "for the Sticky Keys feature, which affects the way your keyboard works.") : 
+			     _("You just pressed two keys at once, or pressed the Shift key 5 times in a row.  "
+			       "This turns off the Sticky Keys feature, which affects the way your keyboard works."),
+			     enabled ? _("Do you want to activate Sticky Keys?") : 
+			     _("Do you want to deactivate Sticky Keys?"));
 }
 
 static void
