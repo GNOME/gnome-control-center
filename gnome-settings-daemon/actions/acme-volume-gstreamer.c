@@ -147,10 +147,11 @@ acme_volume_gstreamer_get_volume (AcmeVolume *vol)
 {
 	double volume;
 	AcmeVolumeGStreamer *self = (AcmeVolumeGStreamer *) vol;
-	GstMixerTrack *track = self->_priv->track;
+	GstMixerTrack *track;
 	
 	if (acme_volume_gstreamer_open (self) == FALSE)
 		return 0;
+	track = self->_priv->track;
 
 	update_state (self);
 
