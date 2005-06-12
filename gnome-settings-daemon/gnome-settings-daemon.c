@@ -180,7 +180,8 @@ clipboard_manager_watch_cb (Window  window,
     }
   else
     {
-      g_assert (gdkwin);
+      if (!gdkwin)
+	return;
       gdk_window_remove_filter (gdkwin, clipboard_manager_event_filter, NULL);
       g_object_unref (gdkwin);
     }
