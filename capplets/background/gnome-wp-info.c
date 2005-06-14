@@ -28,15 +28,11 @@ GnomeWPInfo * gnome_wp_info_new (const gchar * uri,
   GnomeVFSFileInfo * info;
   GnomeVFSResult result;
 
-  gchar *escaped_uri = gnome_vfs_escape_path_string (uri);
-
   info = gnome_vfs_file_info_new ();
-  result = gnome_vfs_get_file_info (escaped_uri, info,
+  result = gnome_vfs_get_file_info (gnome_vfs_escape_path_string (uri), info,
 				    GNOME_VFS_FILE_INFO_DEFAULT |
 				    GNOME_VFS_FILE_INFO_GET_MIME_TYPE |
 				    GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
-  g_free (escaped_uri);
-
   if (info == NULL || info->mime_type == NULL || result != GNOME_VFS_OK) {
     if (!strcmp (uri, "(none)")) {
       new = g_new0 (GnomeWPInfo, 1);
