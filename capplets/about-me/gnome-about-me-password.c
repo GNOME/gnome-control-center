@@ -27,27 +27,41 @@
 
 #include <gnome.h>
 #include <pwd.h>
+#include <stdlib.h>
 #include <glade/glade.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/ioctl.h>
 #include <sys/wait.h>
+#include <sys/poll.h>
 #include <termios.h>
 #include <pty.h>
+#include <crack.h>
 
 #include "capplet-util.h"
+#include "eel-alert-dialog.h"
 
 typedef struct {
-	GtkWidget *dialog;
+	GladeXML  *xml;
+
 	GtkWidget *old_password;
 	GtkWidget *new_password;
 	GtkWidget *retyped_password;
 
-	/* Communication with the passwd program */
-        FILE *backend_stream;
-        int   backend_master_fd;
-        int   backend_pid;
         guint timeout_id;
+        guint check_password_timeout_id;
+
+        gboolean good_password;
+
+	/* Communication with the passwd program */
+        int   backend_pid;
+
+        int   write_fd;
+        int   read_fd;
+        
+	FILE *write_stream;
+	FILE *read_stream;
+           
 } PasswordDialog;
 
 enum
@@ -63,57 +77,62 @@ static void passdlg_set_busy (PasswordDialog *dlg, gboolean busy);
 static gboolean
 wait_child (PasswordDialog *pdialog)
 {
-	GtkWidget *dialog;
 	gint status, pid;
-	gchar *primary_text   = NULL;
-	gchar *secondary_text = NULL;
+	gchar *msg, *details, *title;
+	GladeXML *dialog;
+	GtkWidget *wmessage, *wbulb;
+	GtkWidget *wedialog;
 
+	dialog = pdialog->xml;
+
+	wmessage = WID ("message");
+	wbulb = WID ("bulb");
+	
 	pid = waitpid (pdialog->backend_pid, &status, WNOHANG);
+	passdlg_set_busy (pdialog, FALSE);
 
 	if (pid > 0) {
 
 		if (WIFEXITED (status) && (WEXITSTATUS(status) == 0)) {
-			passdlg_set_busy (pdialog, FALSE);
-			primary_text = g_strdup (_("Password changed successfully"));
-
-			dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_DESTROY_WITH_PARENT,
-							 GTK_MESSAGE_INFO,
-						 	 GTK_BUTTONS_CLOSE,
-							 primary_text, secondary_text);
-			g_signal_connect (G_OBJECT (dialog), "response",
-					  G_CALLBACK (gtk_widget_destroy), NULL);
-			gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
-			gtk_widget_show (dialog);
+			gtk_main_quit ();
 
 			return FALSE;
 		} else if ((WIFEXITED (status)) && (WEXITSTATUS (status)) && (WEXITSTATUS(status) < 255)) {
-			/* the proccess was running su */
-			primary_text   = g_strdup (_("The entered password is invalid"));
-			secondary_text = g_strdup (_("Check that you typed it correctly "
-						     "and that you haven't activated the \"caps lock\" key"));
+			msg = g_strdup (_("<b>Old password is incorret, please retype it</b>"));
+
+			gtk_label_set_markup (GTK_LABEL (wmessage), msg);
+			g_free (msg);
+
+			gtk_image_set_from_file (GTK_IMAGE (wbulb),
+						 GNOMECC_DATA_DIR "/pixmaps/gnome-about-me-bulb-off.png");
+
+
+			return FALSE;
 		} else if ((WIFEXITED (status)) && (WEXITSTATUS (status)) && (WEXITSTATUS (status) == 255)) {
-			primary_text = g_strdup (_("Could not run passwd"));
-			secondary_text = g_strdup (_("Check that you have permissions to run this command"));
+			msg = g_strdup (_("Symtem error has ocurred"));
+			details = g_strdup (_("Could not run /usr/bin/passwd"));
+			title = g_strdup (_("Unable to launch backend"));
 		} else {
-			primary_text = g_strdup (_("An unexpected error has ocurred"));
+			msg = g_strdup (_("Unexpected error has ocurred"));
+			title = g_strdup (_("Unexpected error has ocurred"));
+			details = NULL;
 		}
 		
-		if (primary_text) {
-			passdlg_set_busy (pdialog, FALSE);
-			dialog = gtk_message_dialog_new (NULL,
-						         GTK_DIALOG_DESTROY_WITH_PARENT,
-							 GTK_MESSAGE_ERROR,
-							 GTK_BUTTONS_CLOSE,
-							 primary_text, secondary_text);
+		wedialog = eel_alert_dialog_new (NULL, 0, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, 
+						 msg, NULL, title);
 
-			g_signal_connect (G_OBJECT (dialog), "response",
+		if (details != NULL)
+			eel_alert_dialog_set_details_label (EEL_ALERT_DIALOG (wedialog), details);
+
+			g_signal_connect (G_OBJECT (wedialog), "response",
 					  G_CALLBACK (gtk_widget_destroy), NULL);
-			gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
-			gtk_widget_show (dialog);
 
-			g_free (primary_text);
-			g_free (secondary_text);
-		}
+		gtk_window_set_resizable (GTK_WINDOW (wedialog), FALSE);
+		gtk_widget_show (wedialog);
+
+		g_free (msg);
+		g_free (title);
+		g_free (details);
 
 		return FALSE;
 	}
@@ -130,57 +149,59 @@ is_string_complete (gchar *str, GSList *list)
 		return FALSE;
   
 	for (elem = list; elem; elem = g_slist_next (elem))
-		if (g_strrstr (str, elem->data) != NULL)
+		if (g_strrstr (str, elem->data) != NULL) {
 			return TRUE;
+		}
   
 	return FALSE;
 }
  
+static gchar*
+read_everything (PasswordDialog *pdialog, gchar *needle, va_list ap)
+{
+	GString *str  = g_string_new ("");
+	GSList  *list = NULL;
+	gchar*arg, *ptr, c;
+
+	list = g_slist_prepend (list, needle);
+  
+	while ((arg = va_arg (ap, char*)) != NULL)
+		list = g_slist_prepend (list, arg);
+  
+	va_end (ap);
+ 
+	while (!is_string_complete (str->str, list)) {
+		c = fgetc (pdialog->read_stream);
+ 
+		if (c != EOF)
+			g_string_append_c (str, c);
+	}
+ 
+        ptr = str->str;
+        g_string_free (str, FALSE);
+  
+	return ptr;
+}
+ 
+static void
+poll_backend (PasswordDialog *pdialog)
+{
+	struct pollfd fd;
+
+	fd.fd = pdialog->read_fd;
+	fd.events = POLLIN || POLLPRI;
+
+	while (poll (&fd, 1, 100) <= 0) {
+		while (gtk_events_pending ())
+			gtk_main_iteration ();
+	}
+}
+
 static char *
 read_from_backend_va (PasswordDialog *pdialog, gchar *needle, va_list ap)
 {
-	GString *str = g_string_new ("");
-	gboolean may_exit = FALSE;
-	gint i = 0;
-	gchar c, *ptr, *arg;
-	GSList *list = NULL;
- 
-	list = g_slist_prepend (list, needle);
-
-	while ((arg = va_arg (ap, char*)) != NULL)
-		list = g_slist_prepend (list, arg);
-	va_end (ap);
-
-	while (!is_string_complete (str->str, list)) {
-		c = fgetc (pdialog->backend_stream);
-		i++;
-
-		if (*str->str)
-			g_string_append_c (str, c);
-		else {
-			/* the string is still empty, read with O_NONBLOCK until
-			 *  it gets a char, this is done for not blocking the UI
-			 */
-			if (c != EOF) {
-				g_string_append_c (str, c);
-				fcntl (pdialog->backend_master_fd, F_SETFL, 0);
-			}
-			usleep (500);
-		}
-
-		/* ugly hack for redrawing UI without too much overload */
-		if (i == REDRAW_NCHARS) {
-			while (gtk_events_pending ())
-				gtk_main_iteration ();
-			i = 0;
-		}
-	}
- 
-	fcntl (pdialog->backend_master_fd, F_SETFL, O_NONBLOCK);
-	ptr = str->str;
-	g_string_free (str, FALSE);
- 
-	return ptr;
+	poll_backend (pdialog);
+	return read_everything (pdialog, needle, ap);
 }
 
 static gchar*
@@ -198,11 +219,10 @@ write_to_backend (PasswordDialog *pdialog, char *str)
 	gint nread = 0;
 	int ret;
 
-	/* turn the descriptor blocking for writing the configuration */
-	fcntl (pdialog->backend_master_fd, F_SETFL, 0);
- 
 	do {
-		ret = fputc (str [nread], pdialog->backend_stream);
+		ret = fputc (str [nread], pdialog->write_stream);
+ 
+		usleep (1000);
  
 		if (ret != EOF)
 			nread++;
@@ -213,23 +233,25 @@ write_to_backend (PasswordDialog *pdialog, char *str)
 		gtk_main_iteration ();
 	} while (nread < strlen (str));
   
-	while (fflush (pdialog->backend_stream) != 0);
- 
-	fcntl (pdialog->backend_master_fd, F_SETFL, O_NONBLOCK);
+	while (fflush (pdialog->write_stream) != 0);
 }
 
 static void
 passdlg_set_busy (PasswordDialog *pdialog, gboolean busy)
 {
-	GtkWindow  *toplevel = GTK_WINDOW (pdialog->dialog);
+	GladeXML   *dialog;
+	GtkWidget  *toplevel;
 	GdkCursor  *cursor = NULL;
 	GdkDisplay *display;
-                        
-	display = gtk_widget_get_display (GTK_WIDGET (toplevel));
+
+	dialog = pdialog->xml;
+	toplevel = WID ("change-password");
+
+	display = gtk_widget_get_display (toplevel);
 	if (busy)
 		cursor = gdk_cursor_new_for_display (display, GDK_WATCH);
 	
-	gdk_window_set_cursor (GTK_WIDGET (toplevel)->window, cursor);
+	gdk_window_set_cursor (toplevel->window, cursor);
 	gdk_display_flush (display);
 
 	if (busy)
@@ -237,97 +259,263 @@ passdlg_set_busy (PasswordDialog *pdialog, gboolean busy)
 }
 
 
-static void
-passdlg_button_clicked_cb (GtkDialog *dialog, gint response_id, PasswordDialog *pdialog) 
+static gint
+update_password (PasswordDialog *pdialog) 
 {
-	      
+	GtkWidget *wopasswd, *wnpasswd, *wrnpasswd;
 	char *new_password;
 	char *retyped_password;
 	char *old_password;
-	char *args[2];
 	gchar *s;
+	GladeXML *dialog;
+	
+	dialog = pdialog->xml;
+	
+	wopasswd = WID ("old-password");
+	wnpasswd = WID ("new-password");
+	wrnpasswd = WID ("retyped-password");
+
+	/* */
+	old_password = g_strdup_printf ("%s\n", gtk_entry_get_text (GTK_ENTRY (wopasswd)));
+	new_password = g_strdup_printf ("%s\n", gtk_entry_get_text (GTK_ENTRY (wnpasswd)));
+	retyped_password = g_strdup_printf ("%s\n", gtk_entry_get_text (GTK_ENTRY (wrnpasswd)));
+
+	/* Set the busy cursor as this can be a long process */
+	passdlg_set_busy (pdialog, TRUE);
+
+	s = read_from_backend (pdialog, "assword: ", NULL);
+	g_free (s);
+
+	write_to_backend (pdialog, old_password);
+
+	/* New password */
+	s = read_from_backend (pdialog, "assword: ", "failure", NULL);
+	if (g_strrstr (s, "failure") != NULL) {
+		g_free (s);
+		return -1;
+	}
+	g_free (s);
+
+	write_to_backend (pdialog, new_password);
+
+	/* Retype password */		
+	s = read_from_backend (pdialog, "assword: ", NULL);
+	g_free (s);
+		
+	write_to_backend (pdialog, retyped_password);
+	
+	s = read_from_backend (pdialog, "successfully", "Bad:", "recovered",  NULL);
+	if (g_strrstr (s, "recovered") != NULL) {
+		return -2;
+	} else if (g_strrstr (s, "Bad") != NULL) {
+		return -3;
+	}
+
+	return 0;
+}
+
+static void
+spawn_passwd (PasswordDialog *pdialog)
+{
+	char *args[2];
+	int p[2];
+
+	/* Prepare the execution environment of passwd */
+	args[0] = "/usr/bin/passwd";
+	args[1] = NULL;
+
+	pipe (p);
+	pdialog->backend_pid = forkpty (&pdialog->write_fd, NULL, NULL, NULL);
+	if (pdialog->backend_pid < 0) {
+		g_warning ("could not fork to backend");
+		gtk_main_quit ();
+	} else if (pdialog->backend_pid == 0) {
+		dup2 (p[1], 1);
+		dup2 (p[1], 2);
+		close (p[0]);
+
+		unsetenv("LC_ALL");
+		unsetenv("LC_MESSAGES");
+		unsetenv("LANG");
+		unsetenv("LANGUAGE");
+
+		execv (args[0], args);
+		exit (255);
+	} else {
+		close (p[1]);
+		pdialog->read_fd = p[0];
+		pdialog->timeout_id = g_timeout_add (4000, (GSourceFunc) wait_child, pdialog);
+
+		pdialog->read_stream = fdopen (pdialog->read_fd, "r");;
+		pdialog->write_stream = fdopen (pdialog->write_fd, "w");
+
+		setvbuf (pdialog->read_stream, NULL, _IONBF, 0);
+		fcntl (pdialog->read_fd, F_SETFL, 0);
+	}
+}
+
+static void
+passdlg_button_clicked_cb (GtkDialog *widget, gint response_id, PasswordDialog *pdialog) 
+{
+	GladeXML *dialog;
+	GtkWidget *wmessage, *wbulb;
+	gchar *msg;
+	gint ret;
+
+	dialog = pdialog->xml;
+
+	wmessage = WID ("message");
+	wbulb = WID ("bulb");
 
 	if (response_id == GTK_RESPONSE_OK) {
-		/* */
-		old_password = g_strdup_printf ("%s\n", gtk_entry_get_text (GTK_ENTRY (pdialog->old_password)));
-		new_password = g_strdup_printf ("%s\n", gtk_entry_get_text (GTK_ENTRY (pdialog->new_password)));
-		retyped_password = g_strdup_printf ("%s\n", gtk_entry_get_text (GTK_ENTRY (pdialog->retyped_password)));
+		spawn_passwd (pdialog);
 
-		/* Set the busy cursor as this can be a long process */
-		passdlg_set_busy (pdialog, TRUE);
+		ret = update_password (pdialog);
+		passdlg_set_busy (pdialog, FALSE);
 
-		/* Prepare the execution environment of passwd */
-		args[0] = "/usr/bin/passwd";
-		args[1] = NULL;
+		/* No longer need the wait_child fallback, remove the timeout */
+		g_source_remove (pdialog->timeout_id);
 
-		pdialog->backend_pid = forkpty (&pdialog->backend_master_fd, NULL, NULL, NULL);
-		if (pdialog->backend_pid < 0) {
-			g_warning ("could not fork to backend");
+		if (ret == -1) {
+			msg = g_strdup (_("<b>Old password is incorret, please retype it</b>"));
+			gtk_label_set_markup (GTK_LABEL (wmessage), msg);
+			g_free (msg);
+
+			gtk_image_set_from_file (GTK_IMAGE (wbulb),
+						 GNOMECC_DATA_DIR "/pixmaps/gnome-about-me-bulb-off.png");
+
+		}
+
+		/* This is the standard way of returning from the dialog with passwd 
+		 * If we return this way we can safely kill passwd as it has completed
+		 * its task. In case of problems we still have the wait_child fallback
+		 */
+		fclose (pdialog->write_stream);
+		fclose (pdialog->read_stream);
+		
+		close (pdialog->read_fd);
+		close (pdialog->write_fd);
+
+		kill (pdialog->backend_pid, 9);
+
+		if (ret == 0)
 			gtk_main_quit ();
-		} else if (pdialog->backend_pid == 0) {
-			execv (args[0], args);
-			exit (255);
-		} else {
-			fcntl (pdialog->backend_master_fd, F_SETFL, O_NONBLOCK);
-			pdialog->timeout_id = g_timeout_add (1000, (GSourceFunc) wait_child, pdialog);
-			pdialog->backend_stream = fdopen (pdialog->backend_master_fd, "a+");
-		}
-
-		/* Send current password to backend */
-		s = read_from_backend (pdialog, "assword:", ": ", NULL);
-		write_to_backend (pdialog, old_password);
-
-		s = read_from_backend (pdialog, "assword:", ": ", "\n", NULL);
-		while (strlen(s) < 4) {
-			usleep(1000);
-			s = read_from_backend (pdialog, "assword:", ": ", "\n", NULL);
-		}
-
-		/* Send new password to backend */
-		write_to_backend (pdialog, new_password);
-
-		s = read_from_backend (pdialog, "assword:", ": ", "\n", NULL);
-		while (strlen(s) < 4) {
-			usleep(1000);
-			s = read_from_backend (pdialog, "assword:", ": ", "\n", NULL);
-		}
-
-		/* Send new and retyped password to backend */
-		write_to_backend (pdialog, retyped_password);
-		s = read_from_backend (pdialog, "assword:", ": ", "\n", NULL);
-		while (strlen(s) < 4) {
-			usleep(1000);
-			s = read_from_backend (pdialog, "\n", NULL);
-		}
-
 	} else {
 		gtk_main_quit ();
 	}
 }
 
+static gboolean
+passdlg_check_password_timeout_cb (PasswordDialog *pdialog)
+{
+	const gchar *password;
+	const gchar *retyped_password;
+	char *msg, *msgtmp;
+	gboolean good_password;
+
+	GtkWidget *wbulb, *wok, *wmessage;
+	GtkWidget *wnpassword, *wrnpassword;
+	GladeXML *dialog;
+
+	dialog = pdialog->xml;
+
+	wnpassword  = WID ("new-password");
+	wrnpassword = WID ("retyped-password");
+	wmessage = WID ("message");
+	wbulb = WID ("bulb");
+	wok   = WID ("ok");
+
+	password = gtk_entry_get_text (GTK_ENTRY (wnpassword));
+	retyped_password = gtk_entry_get_text (GTK_ENTRY (wrnpassword));
+
+	if (strlen (password) == 0 || strlen (retyped_password) == 0) {
+		gtk_image_set_from_file (GTK_IMAGE (wbulb),
+					 GNOMECC_DATA_DIR "/pixmaps/gnome-about-me-bulb-off.png");
+		gtk_label_set_markup (GTK_LABEL (wmessage), NULL);
+
+		return FALSE;
+	}
+
+	if (strcmp (password, retyped_password) != 0) {
+		msg = g_strdup ("<b>Please type the password again, it is wrong.</b>");
+		good_password = FALSE;
+	} else {
+		msgtmp = FascistCheck (password, CRACKLIB_DICTPATH);
+
+		if (msgtmp == NULL) {
+			msg = g_strdup ("<b>Push on the ok button to change the password</b>");
+			good_password = TRUE;
+		} else {
+			msg = g_strdup_printf ("<b>%s</b>", msgtmp);
+			g_free (msgtmp);
+			good_password = FALSE;
+		}
+	}
+
+	if (good_password && pdialog->good_password == FALSE) {
+		gtk_image_set_from_file (GTK_IMAGE (wbulb), 
+		 			 GNOMECC_DATA_DIR "/pixmaps/gnome-about-me-bulb-on.png");
+		gtk_widget_set_sensitive (wok, TRUE);
+	} else if (good_password == FALSE && pdialog->good_password == TRUE) {
+		gtk_image_set_from_file (GTK_IMAGE (wbulb), 
+		 			 GNOMECC_DATA_DIR "/pixmaps/gnome-about-me-bulb-off.png");
+		gtk_widget_set_sensitive (wok, FALSE);
+	}
+
+	pdialog->good_password = good_password;
+
+	gtk_label_set_markup (GTK_LABEL (wmessage), msg);
+	g_free (msg);
+
+	return FALSE;
+}
+
+
+static void 
+passdlg_check_password (GtkEntry *entry, PasswordDialog *pdialog)
+{
+	if (pdialog->check_password_timeout_id) {
+		g_source_remove (pdialog->check_password_timeout_id);
+	}
+
+	pdialog->check_password_timeout_id =
+		g_timeout_add (300, (GSourceFunc) passdlg_check_password_timeout_cb, pdialog);
+	
+}
+
 void
-gnome_about_me_password (void)
+gnome_about_me_password (GtkWindow *parent)
 {
 	PasswordDialog *pdialog;
+	GtkWidget *wpassdlg;
 	GladeXML *dialog;
 	
 	pdialog = g_new0 (PasswordDialog, 1);
 
 	dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/gnome-about-me.glade", "change-password", NULL);
 
-	pdialog->dialog = WID ("change-password");
-	g_signal_connect (G_OBJECT (pdialog->dialog), "response",
+	pdialog->xml = dialog;
+
+	wpassdlg = WID ("change-password");
+	g_signal_connect (G_OBJECT (wpassdlg), "response",
 			  G_CALLBACK (passdlg_button_clicked_cb), pdialog);
 
-	pdialog->old_password = WID ("old-password");
-	pdialog->new_password = WID ("new-password");
-	pdialog->retyped_password = WID ("retyped-password");
+	pdialog->good_password = FALSE;
 
-	gtk_window_set_resizable (GTK_WINDOW (pdialog->dialog), FALSE);
-	gtk_widget_show_all (pdialog->dialog);
+	g_signal_connect (G_OBJECT (WID ("new-password")), "changed", 
+			  G_CALLBACK (passdlg_check_password), pdialog);
+	g_signal_connect (G_OBJECT (WID ("retyped-password")), "changed", 
+			  G_CALLBACK (passdlg_check_password), pdialog);
+
+	gtk_image_set_from_file (GTK_IMAGE (WID ("bulb")), GNOMECC_DATA_DIR "/pixmaps/gnome-about-me-bulb-off.png");
+	gtk_widget_set_sensitive (WID ("ok"), FALSE);
+	
+	gtk_window_set_resizable (GTK_WINDOW (wpassdlg), FALSE);
+	gtk_window_set_transient_for (GTK_WINDOW (wpassdlg), GTK_WINDOW (parent));
+	gtk_widget_show_all (wpassdlg);
 	gtk_main ();
 
-	gtk_widget_destroy (pdialog->dialog);
-	g_object_unref (G_OBJECT (dialog));
+	gtk_widget_destroy (wpassdlg);
+	g_object_unref (G_OBJECT (wpassdlg));
 	g_free (pdialog);
 }

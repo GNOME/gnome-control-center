@@ -55,6 +55,8 @@ typedef struct {
 	gboolean      create_self;
 
 	gchar        *person;
+
+	guint	      commit_timeout_id;
 } GnomeAboutMe;
 
 static GnomeAboutMe *me;
@@ -152,6 +154,16 @@ about_me_commit (GnomeAboutMe *me)
 	me->create_self = FALSE;
 }
 
+static gboolean 
+about_me_commit_from_timeout (GnomeAboutMe *me)
+{
+	g_print ("commit from timeout\n");
+
+	about_me_commit (me);
+
+	return FALSE;
+}
+
 static gboolean
 about_me_focus_out (GtkWidget *widget, GdkEventFocus *event, GnomeAboutMe *me)
 {
@@ -198,8 +210,12 @@ about_me_focus_out (GtkWidget *widget, GdkEventFocus *event, GnomeAboutMe *me)
 
 	g_free (str);
 
-	about_me_commit (me);	
-	
+	if (me->commit_timeout_id) {
+		g_source_remove (me->commit_timeout_id);
+	}
+
+	me->commit_timeout_id = g_timeout_add (600, (GSourceFunc) about_me_commit_from_timeout, me);
+
 	return FALSE;
 }
 
@@ -391,15 +407,17 @@ about_me_update_photo (GnomeAboutMe *me)
 		e_contact_set (me->contact, E_CONTACT_PHOTO, photo);
 
 		/* Save the image for GDM */
-		file = g_strdup_printf ("%s/.gnome2/face.png", g_get_home_dir ());
+		file = g_strdup_printf ("%s/.face", g_get_home_dir ());
 		fp = fopen (file, "wb");
 		fwrite (photo->data, 1, photo->length, fp);
 		fclose (fp);
 
 		/* Update GDM configuration */
+		/*
 		gnome_config_set_string ("/gdmphotosetup/last/picture", file);
 		gnome_config_set_string ("/gdm/face/picture", file);
 		gnome_config_sync ();
+		*/
 		g_free (file);	
 
 		e_contact_photo_free (photo);
@@ -579,9 +597,12 @@ about_me_button_clicked_cb (GtkDialog *dialog, gint response_id, GnomeAboutMe *m
 }
 
 static void
-about_me_passwd_clicked_cb (GtkWidget *button, gpointer data)
+about_me_passwd_clicked_cb (GtkWidget *button, GnomeAboutMe *me)
 {
-	gnome_about_me_password ();
+	GladeXML *dialog;
+	
+	dialog = me->dialog;
+	gnome_about_me_password (WID ("about-me-dialog"));
 }
 
 static void
@@ -659,11 +680,12 @@ about_me_setup_dialog (void)
 	about_me_load_photo (me, me->contact);
 
 	widget = WID ("fullname"); 
-	if (tok[0] == NULL || strlen(tok[0]) == 0) {
-		str = g_strdup ("<b><span size=\"xx-large\">COMO LO HAGO?</span></b>");
+	if (tok[0] == NULL || strlen (tok[0]) == 0) {
+		str = g_strdup_printf ("<b><span size=\"xx-large\">%s</span></b>", user);
 	} else {
 		str = g_strdup_printf ("<b><span size=\"xx-large\">%s</span></b>", tok[0]);
 	}
+
 	gtk_label_set_markup (GTK_LABEL (widget), str);
 	g_free (str);
 
@@ -671,13 +693,17 @@ about_me_setup_dialog (void)
 	gtk_label_set_text (GTK_LABEL (widget), user);
 
 	widget = WID ("about-me-dialog");
-	str = g_strdup_printf ("About %s", tok[0]);
+	if (tok[0] == NULL || strlen (tok[0]) == 0) {
+		str = g_strdup_printf ("About %s", user);
+	} else {
+		str = g_strdup_printf ("About %s", tok[0]);
+	}
 	gtk_window_set_title (GTK_WINDOW (widget), str);
 	g_free (str);
 
 	widget = WID("password");
 	g_signal_connect (G_OBJECT (widget), "clicked",
-			  G_CALLBACK (about_me_passwd_clicked_cb), NULL);
+			  G_CALLBACK (about_me_passwd_clicked_cb), me);
 
 	widget = WID ("button-image");
 	g_signal_connect (G_OBJECT (widget), "clicked",

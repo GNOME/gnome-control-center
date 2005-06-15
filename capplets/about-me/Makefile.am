@@ -1,15 +1,20 @@
+SUBDIRS = cracklib 
+
 bin_PROGRAMS = gnome-about-me
 
 pixmapdir = $(GNOMECC_PIXMAPS_DIR)
-pixmap_DATA = \
-	gnome-about-me.png
+pixmap_DATA = 				\
+	gnome-about-me.png		\
+	gnome-about-me-bulb-on.png	\
+	gnome-about-me-bulb-off.png
 
-gnome_about_me_LDADD = $(GNOMECC_CAPPLETS_LIBS) $(LIBEBOOK_LIBS) -lutil
+gnome_about_me_LDADD = $(GNOMECC_CAPPLETS_LIBS) $(LIBEBOOK_LIBS) -lutil cracklib/libcracklib.a
 gnome_about_me_SOURCES = 		\
-	e-util-marshal.c				\
-	e-util-marshal.h				\
+	eel-alert-dialog.c		\
+	e-util-marshal.c		\
+	e-util-marshal.h		\
 	gnome-about-me-password.c	\
-	e-image-chooser.c				\
+	e-image-chooser.c		\
 	gnome-about-me.c
 
 e-util-marshal.h: e-util-marshal.list
