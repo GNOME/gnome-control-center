@@ -507,6 +507,5 @@ gnome_about_me_password (GtkWindow *parent)
 	gtk_main ();
 
 	gtk_widget_destroy (wpassdlg);
-	g_object_unref (G_OBJECT (wpassdlg));
 	g_free (pdialog);
 }
