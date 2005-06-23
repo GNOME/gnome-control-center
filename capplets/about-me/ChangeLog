@@ -1,3 +1,17 @@
+2005-06-22  Diego Gonzalez <diego@pemas.net>
+
+	* Makefile.am: remove cracklib
+	* gnome-about-me-password.c (passdlg_check_password_timeout_cb): 
+	  remove dependencies on cracklib
+	* cracklib/*: remove it
+
+2005-06-21  Diego Gonzalez <diego@pemas.net>
+
+	* gnome-about-me.c: Improve some error messages
+	  about_me_error: new function
+	* (about_me_load_info): Avoid crashing when switching to the Address tab
+	* (about_me_commit): generate a good file_as field, code taken from evolution
+
 2005-06-15  Diego Gonzalez <diego@pemas.net>
 
 	* gnome-about-me.glade: Change the look of the "change Password"

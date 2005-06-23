@@ -36,7 +36,6 @@
 #include <sys/poll.h>
 #include <termios.h>
 #include <pty.h>
-#include <crack.h>
 
 #include "capplet-util.h"
 #include "eel-alert-dialog.h"
@@ -440,16 +439,8 @@ passdlg_check_password_timeout_cb (PasswordDialog *pdialog)
 		msg = g_strdup ("<b>Please type the password again, it is wrong.</b>");
 		good_password = FALSE;
 	} else {
-		msgtmp = FascistCheck (password, CRACKLIB_DICTPATH);
-
-		if (msgtmp == NULL) {
-			msg = g_strdup ("<b>Push on the ok button to change the password</b>");
-			good_password = TRUE;
-		} else {
-			msg = g_strdup_printf ("<b>%s</b>", msgtmp);
-			g_free (msgtmp);
-			good_password = FALSE;
-		}
+		msg = g_strdup ("<b>Push on the ok button to change the password</b>");
+		good_password = TRUE;
 	}
 
 	if (good_password && pdialog->good_password == FALSE) {

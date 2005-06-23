@@ -38,25 +38,27 @@
 #include "capplet-util.h"
 
 typedef struct {
-	EContact *contact;
-	EBook    *book;
+	EContact 	*contact;
+	EBook    	*book;
 	
-	GladeXML *dialog;
+	GladeXML 	*dialog;
 
-	GtkWidget    *fsel;
-	GdkScreen    *screen;
-	GtkIconTheme *theme;
+	GtkWidget    	*fsel;
+	GdkScreen    	*screen;
+	GtkIconTheme 	*theme;
 
 	EContactAddress *addr1;
 	EContactAddress *addr2;
 
-	gboolean      have_image;
-	gboolean      image_changed;
-	gboolean      create_self;
+	gboolean      	 have_image;
+	gboolean      	 image_changed;
+	gboolean      	 create_self;
 
-	gchar        *person;
+	gchar        	*person;
+	gchar 		*login;
+	gchar 		*username;
 
-	guint	      commit_timeout_id;
+	guint	      	 commit_timeout_id;
 } GnomeAboutMe;
 
 static GnomeAboutMe *me;
@@ -132,15 +134,51 @@ enum
 static void about_me_set_address_field (EContactAddress *, guint, gchar *);
 
 
+/*** Utility functions ***/
+static void
+about_me_error (GtkWidget *parent, gchar *str)
+{
+	GtkWidget *warn;
+	
+	warn = gtk_message_dialog_new (GTK_WINDOW (parent), 
+				       GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR,
+				       GTK_BUTTONS_OK, str);
+
+	g_signal_connect (warn, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+}
+
+
 /********************/
 static void
 about_me_commit (GnomeAboutMe *me)
 {
+	EContactName *name;
+	char *fileas;
+	char *strings[4], **stringptr;
 	GError *error = NULL;
+
+
 	if (me->create_self) {
-		e_contact_set (me->contact, E_CONTACT_FILE_AS, "asdffff");
+		if (me->username == NULL)
+			fileas = g_strdup ("Myself");
+		else {
+			name = e_contact_name_from_string (me->username);
+
+			stringptr = strings;
+			if (name->family && *name->family)
+				*(stringptr++) = name->family;
+			if (name->given && *name->given)
+				*(stringptr++) = name->given;
+			*stringptr = NULL;
+			fileas = g_strjoinv (", ", strings);
+		}
+
+		e_contact_set (me->contact, E_CONTACT_FILE_AS, fileas);
 		e_contact_set (me->contact, E_CONTACT_NICKNAME, "nickname");
-		e_contact_set (me->contact, E_CONTACT_FULL_NAME, "fullname");
+		e_contact_set (me->contact, E_CONTACT_FULL_NAME, me->username);
+
+		e_contact_name_free (name);
+		g_free (fileas);
 	}
 
 	if (me->create_self) {
@@ -157,8 +195,6 @@ about_me_commit (GnomeAboutMe *me)
 static gboolean 
 about_me_commit_from_timeout (GnomeAboutMe *me)
 {
-	g_print ("commit from timeout\n");
-
 	about_me_commit (me);
 
 	return FALSE;
@@ -178,7 +214,6 @@ about_me_focus_out (GtkWidget *widget, GdkEventFocus *event, GnomeAboutMe *me)
 			break;
 
 	if (ids[i].cid == 0) {
-		g_warning ("returning at invalid point\n");
 		return FALSE;
 	}
 
@@ -198,6 +233,7 @@ about_me_focus_out (GtkWidget *widget, GdkEventFocus *event, GnomeAboutMe *me)
 
 	str = str ? str : "";
 	
+	/* FIXME: i'm getting an empty address field in evolution */
 	if (i >= ADDRESS_HOME && i < ADDRESS_WORK) {
 		about_me_set_address_field (me->addr1, ids[i].cid, str);
 		e_contact_set (me->contact, E_CONTACT_ADDRESS_HOME, me->addr1);
@@ -319,6 +355,7 @@ about_me_set_address_field (EContactAddress *addr, guint cid, gchar *str)
 }
 
 /**
+ * about_me_load_string_field:
  *
  * wid: glade widget name
  * cid: id of the field (EDS id)
@@ -366,14 +403,13 @@ about_me_load_string_field (GnomeAboutMe *me, const gchar *wid, guint cid, guint
 static void
 about_me_load_photo (GnomeAboutMe *me, EContact *contact)
 {
-
 	GtkWidget     *widget;
 	GladeXML      *dialog;
 	EContactPhoto *photo;
 
 	dialog = me->dialog;
 
-	widget = WID("image-chooser");
+	widget = WID ("image-chooser");
 
 	e_image_chooser_set_from_file (E_IMAGE_CHOOSER (widget), me->person);
 
@@ -447,6 +483,9 @@ about_me_load_info (GnomeAboutMe *me)
 		me->addr2 = e_contact_get (me->contact, E_CONTACT_ADDRESS_WORK);
 		if (me->addr2 == NULL)
 			me->addr2 = g_new0 (EContactAddress, 1);
+	} else {
+		me->addr1 = g_new0 (EContactAddress, 1);
+		me->addr2 = g_new0 (EContactAddress, 1);
 	}
 
 	for (i = 0; ids[i].wid != NULL; i++) {
@@ -639,7 +678,7 @@ about_me_setup_dialog (void)
 
 	g_signal_connect_object (me->theme, "changed",
 				 G_CALLBACK (about_me_icon_theme_changed),
-				 GTK_WIDGET (WID("about-me-dialog")),
+				 GTK_WIDGET (WID ("about-me-dialog")),
 				 G_CONNECT_SWAPPED);
 
 	/* Get the self contact */
@@ -656,8 +695,10 @@ about_me_setup_dialog (void)
 			if (me->book == NULL)
 				g_print ("error message: %s\n", error->message);
 
-			if (e_book_open (me->book, FALSE, NULL) == FALSE)
-				g_print ("unable to open book, bailing out\n");
+			if (e_book_open (me->book, FALSE, NULL) == FALSE) {
+				about_me_error (WID ("about-me-dialog"), 
+						_("Unable to open address book"));
+			}
 		} 
 	}
 
@@ -666,7 +707,8 @@ about_me_setup_dialog (void)
 	setpwent ();
 	pwent = getpwnam (user);
 	if (pwent == NULL) {
-		printf ("error\n");
+		about_me_error (WID ("about-me-dialog"), 
+				_("Unknown login ID, the user database might be corrupted"));
 		return ;
 	}
 	gchar **tok;
@@ -674,7 +716,11 @@ about_me_setup_dialog (void)
 
 	/************************************************/
 
-	/* Fill in the blanks */
+	me->login = g_strdup (user);
+	if (tok[0] == NULL || strlen (tok[0]) == 0)
+		me->username = NULL;
+	else
+		me->username = g_strdup (tok[0]);
 
 	/* Contact Tab */
 	about_me_load_photo (me, me->contact);

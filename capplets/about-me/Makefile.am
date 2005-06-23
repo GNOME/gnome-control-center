@@ -1,5 +1,3 @@
-SUBDIRS = cracklib 
-
 bin_PROGRAMS = gnome-about-me
 
 pixmapdir = $(GNOMECC_PIXMAPS_DIR)
@@ -8,7 +6,7 @@ pixmap_DATA = 				\
 	gnome-about-me-bulb-on.png	\
 	gnome-about-me-bulb-off.png
 
-gnome_about_me_LDADD = $(GNOMECC_CAPPLETS_LIBS) $(LIBEBOOK_LIBS) -lutil cracklib/libcracklib.a
+gnome_about_me_LDADD = $(GNOMECC_CAPPLETS_LIBS) $(LIBEBOOK_LIBS) -lutil
 gnome_about_me_SOURCES = 		\
 	eel-alert-dialog.c		\
 	e-util-marshal.c		\
