@@ -41,5 +41,5 @@ Gladedir   = $(GNOMECC_GLADE_DIR)
 Glade_DATA = gnome-about-me.glade
 
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS) $(LIBEBOOK_CFLAGS)
-CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(desktop_DATA)
-EXTRA_DIST = e-util-marshal.list $(Glade_DATA) $(Desktop_in_files) $(pixmap_DATA)
+CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA)
+EXTRA_DIST = e-util-marshal.list $(Glade_DATA) $(pixmap_DATA)
