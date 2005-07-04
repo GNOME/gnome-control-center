@@ -9,10 +9,14 @@ pixmap_DATA = 				\
 gnome_about_me_LDADD = $(GNOMECC_CAPPLETS_LIBS) $(LIBEBOOK_LIBS) -lutil
 gnome_about_me_SOURCES = 		\
 	eel-alert-dialog.c		\
+	eel-alert-dialog.h		\
+	eel-gtk-macros.h		\
 	e-util-marshal.c		\
 	e-util-marshal.h		\
 	gnome-about-me-password.c	\
+	gnome-about-me-password.h	\
 	e-image-chooser.c		\
+	e-image-chooser.h		\
 	gnome-about-me.c
 
 e-util-marshal.h: e-util-marshal.list
