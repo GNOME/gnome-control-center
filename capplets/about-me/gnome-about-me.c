@@ -412,27 +412,71 @@ about_me_update_photo (GnomeAboutMe *me)
 	gchar         *file;
 	FILE	      *fp;
 
+	char 	      *data;
+	int 	       length;
+
 	dialog = me->dialog;
 
+
 	if (me->image_changed && me->have_image) {
+		GdkPixbufLoader *loader = gdk_pixbuf_loader_new ();
+		GdkPixbuf *pixbuf, *scaled;
+		int height, width;
+		gboolean do_scale = FALSE;
+		float scale;
+		
 		widget = WID ("image-chooser");
+		e_image_chooser_get_image_data (E_IMAGE_CHOOSER (widget), &data, &length);
+
+		/* Before updating the image in EDS scale it to a reasonable size
+		   so that the user doesn't get an application that does not respond
+		   or that takes 100% CPU */
+		gdk_pixbuf_loader_write (loader, data, length, NULL);
+		
+		pixbuf = gdk_pixbuf_loader_get_pixbuf (loader);
+		
+		if (pixbuf)
+			gdk_pixbuf_ref (pixbuf);
+			
+		gdk_pixbuf_loader_close (loader, NULL);
+
+		g_object_unref (loader);
+		
+		height = gdk_pixbuf_get_height (pixbuf);
+		width = gdk_pixbuf_get_width (pixbuf);
+		
+		if (height > width && height > 200) {
+			scale = (float)200/height;
+			do_scale = TRUE;
+		} else if (width > height && width > 200) {
+			scale = (float)200/width;
+			do_scale = TRUE;
+		}
+
+		if (do_scale) {
+			char *scaled_data = NULL;
+			int   scaled_length;
+			
+			scaled = gdk_pixbuf_scale_simple (pixbuf, width*scale, height*scale, GDK_INTERP_BILINEAR);
+			gdk_pixbuf_save_to_buffer (scaled, &scaled_data, &scaled_length, "png", NULL, NULL);
+			
+			g_free (data);
+			data = scaled_data;
+			length = scaled_length;
+		}
 
 		photo = g_new0 (EContactPhoto, 1);
-		e_image_chooser_get_image_data (E_IMAGE_CHOOSER (widget), &photo->data, &photo->length);
+		photo->data = data;
+		photo->length = length;
 		e_contact_set (me->contact, E_CONTACT_PHOTO, photo);
 
 		/* Save the image for GDM */
+		/* FIXME: I would have to read the default used by the gdmgreeter program */
 		file = g_strdup_printf ("%s/.face", g_get_home_dir ());
 		fp = fopen (file, "wb");
 		fwrite (photo->data, 1, photo->length, fp);
 		fclose (fp);
 
-		/* Update GDM configuration */
-		/*
-		gnome_config_set_string ("/gdmphotosetup/last/picture", file);
-		gnome_config_set_string ("/gdm/face/picture", file);
-		gnome_config_sync ();
-		*/
 		g_free (file);	
 
 		e_contact_photo_free (photo);
@@ -473,9 +517,9 @@ about_me_load_info (GnomeAboutMe *me)
 }
 
 GtkWidget *
-eab_create_image_chooser_widget(gchar *name,
-				gchar *string1, gchar *string2,
-				gint int1, gint int2)
+eab_create_image_chooser_widget (gchar *name,
+				 gchar *string1, gchar *string2,
+				 gint int1, gint int2)
 {
 	GtkWidget *w = NULL;
 

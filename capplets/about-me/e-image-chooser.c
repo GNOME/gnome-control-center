@@ -256,7 +256,6 @@ set_image_from_data (EImageChooser *chooser,
 		else if (chooser->priv->image_height < new_height
 			 || chooser->priv->image_width < new_width) {
 			/* we need to scale down */
-			g_print ("we need to scale down\n");
 			if (new_height > new_width)
 				scale = (float)chooser->priv->image_height / new_height;
 			else
@@ -264,7 +263,6 @@ set_image_from_data (EImageChooser *chooser,
 		}
 		else {
 			/* we need to scale up */
-			g_print ("we need to scale up\n");
 			if (new_height > new_width)
 				scale = (float)new_height / chooser->priv->image_height;
 			else
