@@ -2,11 +2,11 @@ bin_PROGRAMS = gnome-about-me
 
 pixmapdir = $(GNOMECC_PIXMAPS_DIR)
 pixmap_DATA = 				\
-	gnome-about-me.png		\
 	gnome-about-me-bulb-on.png	\
 	gnome-about-me-bulb-off.png
 
 gnome_about_me_LDADD = $(GNOMECC_CAPPLETS_LIBS) $(LIBEBOOK_LIBS) -lutil
+gnome_about_me_LDFLAGS = -export-dynamic
 gnome_about_me_SOURCES = 		\
 	eel-alert-dialog.c		\
 	eel-alert-dialog.h		\
@@ -21,13 +21,13 @@ gnome_about_me_SOURCES = 		\
 
 e-util-marshal.h: e-util-marshal.list
 	( @GLIB_GENMARSHAL@ --prefix=e_util_marshal $(srcdir)/e-util-marshal.list \
-	 							--header > util-marshal.tmp \
+	 --header > util-marshal.tmp \
 			&& mv util-marshal.tmp e-util-marshal.h ) \
 		|| ( rm -f util-marshal.tmp && exit 1 )
 
 e-util-marshal.c: e-util-marshal.h
 	( @GLIB_GENMARSHAL@ --prefix=e_util_marshal $(srcdir)/e-util-marshal.list \
-	 							--body > util-marshal.tmp \
+	 --body > util-marshal.tmp \
 			&& mv util-marshal.tmp e-util-marshal.c ) \
 		|| ( rm -f util-marshal.tmp && exit 1 )
 

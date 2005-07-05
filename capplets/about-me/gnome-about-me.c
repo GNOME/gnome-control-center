@@ -29,7 +29,6 @@
 #include <glade/glade.h>
 #include <pwd.h>
 #include <unistd.h>
-#include <bonobo/bonobo-main.h>
 #include <libebook/e-book.h>
 
 #include "e-image-chooser.h"
@@ -43,7 +42,6 @@ typedef struct {
 	
 	GladeXML 	*dialog;
 
-	GtkWidget    	*fsel;
 	GdkScreen    	*screen;
 	GtkIconTheme 	*theme;
 
@@ -125,26 +123,22 @@ struct WidToCid ids[] = {
         {     NULL,            0                             }
 };
 
-enum
-{
-	RESPONSE_APPLY = 1,
-	RESPONSE_CLOSE
-};
 
 static void about_me_set_address_field (EContactAddress *, guint, gchar *);
 
 
 /*** Utility functions ***/
 static void
-about_me_error (GtkWidget *parent, gchar *str)
+about_me_error (GtkWindow *parent, gchar *str)
 {
-	GtkWidget *warn;
+	GtkWidget *dialog;
 	
-	warn = gtk_message_dialog_new (GTK_WINDOW (parent), 
-				       GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR,
-				       GTK_BUTTONS_OK, str);
+	dialog = gtk_message_dialog_new (parent, 
+				         GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR,
+				         GTK_BUTTONS_OK, str);
 
-	g_signal_connect (warn, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+	gtk_dialog_run (GTK_DIALOG (dialog));
+	gtk_widget_destroy (dialog);
 }
 
 
@@ -186,7 +180,7 @@ about_me_commit (GnomeAboutMe *me)
 		e_book_set_self (me->book, me->contact, &error);
 	} else {
 		if (e_book_commit_contact (me->book, me->contact, &error) == FALSE)
-			g_print ("There was an undeterminad error\n");
+			g_print ("There was an undetermined error\n");
 	}
 
 	me->create_self = FALSE;
@@ -255,8 +249,6 @@ about_me_focus_out (GtkWidget *widget, GdkEventFocus *event, GnomeAboutMe *me)
 	return FALSE;
 }
 
-/********************/
-
 static char *
 get_user_login (void)
 {
@@ -271,19 +263,6 @@ get_user_login (void)
 /*
  * Helpers
  */
-
-GtkWidget * 
-about_me_get_widget (GladeXML *dialog, gchar *name, gint suffix)
-{
-	GtkWidget *widget;
-	gchar *str;
-
-	str = g_strdup_printf ("%s-%d", name, suffix);
-	widget = WID(str);
-	g_free (str);
-
-	return widget;
-}
 
 static gchar *
 about_me_get_address_field (EContactAddress *addr, guint cid)
@@ -506,87 +485,51 @@ eab_create_image_chooser_widget(gchar *name,
 	return w;
 }
 
-/*
- * Functions to handle the photo changing stuff
- */
-
-static void
-image_selected (GnomeAboutMe *me)
-{
-	GtkWidget *widget;
-	GladeXML  *dialog;
-	gchar     *image;
-
-	me->have_image = TRUE;
-	me->image_changed = TRUE;
-
-	dialog = me->dialog;
-
-	widget = WID ("image-chooser");
-
-	/* obtener el fichero seleccionado */
-	image = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (me->fsel));
-	e_image_chooser_set_from_file (E_IMAGE_CHOOSER (widget), image);
-	g_free (image);
-
-	about_me_update_photo (me);
-
-	return;
-}
-
-static void
-image_cleared (GnomeAboutMe *me)
-{
-	GtkWidget *widget;
-	GladeXML  *dialog;
-
-	me->have_image = FALSE;
-	me->image_changed = TRUE;
-
-	dialog = me->dialog;
-
-	widget = WID ("image-chooser");
-
-	e_image_chooser_set_from_file (E_IMAGE_CHOOSER (widget), me->person);
-	about_me_update_photo (me);
-
-	return;
-}
-
-static void
-about_me_file_chooser_response (GtkWidget *widget, gint response, GnomeAboutMe *me)
-{
-	if (response == GTK_RESPONSE_ACCEPT)
-		image_selected (me);
-	else if (response == GTK_RESPONSE_NO)
-		image_cleared (me);
-
-	gtk_widget_hide (me->fsel);
-}
-
 static void
 about_me_image_clicked_cb (GtkWidget *button, GnomeAboutMe *me)
 {
-	char *title = _("Select Image");
-	char *noimage = _("No Image");
+	GtkWidget *chooser_dialog;
+	gint response;
+	GtkWidget *image_chooser;
+	GladeXML  *dialog;
 	
-	me->fsel = gtk_file_chooser_dialog_new (title, NULL,
-						GTK_FILE_CHOOSER_ACTION_OPEN,
-						GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-						GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
-						noimage, GTK_RESPONSE_NO,
-						NULL);
-	gtk_dialog_set_default_response (GTK_DIALOG (me->fsel), GTK_RESPONSE_ACCEPT);
+	dialog = me->dialog;
+	image_chooser = WID ("image-chooser");
 
-	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (me->fsel), g_get_home_dir ());
 
-	g_signal_connect (me->fsel, "response",
-			  G_CALLBACK (about_me_file_chooser_response), me);
+	chooser_dialog = gtk_file_chooser_dialog_new (_("Select Image"), GTK_WINDOW (WID ("about-me-dialog")),
+							GTK_FILE_CHOOSER_ACTION_OPEN,
+							GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+							GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
+							_("No Image"), GTK_RESPONSE_NO,
+							NULL);
+	gtk_window_set_modal (GTK_WINDOW (chooser_dialog), TRUE);
+	gtk_dialog_set_default_response (GTK_DIALOG (chooser_dialog), GTK_RESPONSE_ACCEPT);
+	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (chooser_dialog), g_get_home_dir ());
 
-	gtk_window_present (GTK_WINDOW (me->fsel));
+	response=gtk_dialog_run (GTK_DIALOG (chooser_dialog));
+
+	if (response == GTK_RESPONSE_ACCEPT) {
+		gchar* filename;
+
+		filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (chooser_dialog));
+		me->have_image = TRUE;
+		me->image_changed = TRUE;
+
+		e_image_chooser_set_from_file (E_IMAGE_CHOOSER (image_chooser), filename);
+		g_free (filename);
+		about_me_update_photo (me);	
+	} else if (response == GTK_RESPONSE_NO) {
+		me->have_image = FALSE;
+		me->image_changed = TRUE;
+		e_image_chooser_set_from_file (E_IMAGE_CHOOSER (image_chooser), me->person);
+		about_me_update_photo (me);
+	}
+
+	gtk_widget_destroy (chooser_dialog);
 }
 
-
+
 
 /* About Me Dialog Callbacks */
 
@@ -641,13 +584,14 @@ about_me_passwd_clicked_cb (GtkWidget *button, GnomeAboutMe *me)
 	GladeXML *dialog;
 	
 	dialog = me->dialog;
-	gnome_about_me_password (WID ("about-me-dialog"));
+	gnome_about_me_password (GTK_WINDOW (WID ("about-me-dialog")));
 }
 
 static void
 about_me_setup_dialog (void)
 {
 	GtkWidget    *widget;
+	GtkWidget    *main_dialog;
 	GtkIconInfo  *icon;
 	GladeXML     *dialog;
 	GError 	     *error = NULL;
@@ -663,8 +607,16 @@ about_me_setup_dialog (void)
 
 	me->dialog = dialog;
 
+	/* Connect the close button signal */
+	main_dialog = WID ("about-me-dialog");
+	g_signal_connect (G_OBJECT (main_dialog), "response",
+			  G_CALLBACK (about_me_button_clicked_cb), me);
+
+	gtk_window_set_resizable (GTK_WINDOW (main_dialog), FALSE);
+	capplet_set_icon (main_dialog, "user-info");
+
 	/* Setup theme details */
-	me->screen = gtk_window_get_screen (WID ("about-me-dialog"));
+	me->screen = gtk_window_get_screen (GTK_WINDOW (main_dialog));
 	me->theme = gtk_icon_theme_get_for_screen (me->screen);
 
 	icon = gtk_icon_theme_lookup_icon (me->theme, "stock_person", 80, 0);
@@ -678,7 +630,7 @@ about_me_setup_dialog (void)
 
 	g_signal_connect_object (me->theme, "changed",
 				 G_CALLBACK (about_me_icon_theme_changed),
-				 GTK_WIDGET (WID ("about-me-dialog")),
+				 main_dialog,
 				 G_CONNECT_SWAPPED);
 
 	/* Get the self contact */
@@ -696,7 +648,7 @@ about_me_setup_dialog (void)
 				g_print ("error message: %s\n", error->message);
 
 			if (e_book_open (me->book, FALSE, NULL) == FALSE) {
-				about_me_error (WID ("about-me-dialog"), 
+				about_me_error (GTK_WINDOW (main_dialog), 
 						_("Unable to open address book"));
 			}
 		} 
@@ -707,7 +659,7 @@ about_me_setup_dialog (void)
 	setpwent ();
 	pwent = getpwnam (user);
 	if (pwent == NULL) {
-		about_me_error (WID ("about-me-dialog"), 
+		about_me_error (GTK_WINDOW (WID ("about-me-dialog")), 
 				_("Unknown login ID, the user database might be corrupted"));
 		return ;
 	}
@@ -738,13 +690,12 @@ about_me_setup_dialog (void)
 	widget = WID ("login");
 	gtk_label_set_text (GTK_LABEL (widget), user);
 
-	widget = WID ("about-me-dialog");
 	if (tok[0] == NULL || strlen (tok[0]) == 0) {
 		str = g_strdup_printf ("About %s", user);
 	} else {
 		str = g_strdup_printf ("About %s", tok[0]);
 	}
-	gtk_window_set_title (GTK_WINDOW (widget), str);
+	gtk_window_set_title (GTK_WINDOW (main_dialog), str);
 	g_free (str);
 
 	widget = WID("password");
@@ -757,17 +708,7 @@ about_me_setup_dialog (void)
 
 	about_me_load_info (me);
 
-	/* Connect the close button signal */
-	widget = WID ("about-me-dialog");
-	g_signal_connect (G_OBJECT (widget), "response",
-			  G_CALLBACK (about_me_button_clicked_cb), me);
-
-	/* TODO: Set dialog icon */
-	gtk_window_set_resizable (GTK_WINDOW (widget), FALSE);
-
-	capplet_set_icon (widget, "gnome-about-me.png");
-
-	gtk_widget_show_all (widget);
+	gtk_widget_show_all (main_dialog);
 }
 
 int
@@ -781,9 +722,6 @@ main (int argc, char **argv)
 		LIBGNOMEUI_MODULE, argc, argv,
 		GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
 		NULL);
-
-	if (bonobo_init (&argc, argv) == FALSE)
-		g_error ("Could not initialize Bonobo");
 
 	about_me_setup_dialog ();
 	gtk_main ();

@@ -1,3 +1,18 @@
+2005-07-05  Diego Gonzalez  <diego@pemas.net
+
+	Patch by Jaap A. Haitsma <jaap@haitsma.org>
+
+	* gnome-about-me.c: Remove use of bonobo, we don't need it.
+	* gnome-about-me.c: Reorder some of the code and simplify file
+	  chooser, also avoid having more than on instance of the 
+	  file chooser dialog opened.
+	* gnome-about-me.glade: remove some garbage that was left
+	* gnome-about-me.desktop.in.in: set the correct bugzilla component
+	  and icon.
+	* Makefile.am: fix so that the custom dialog works in glade
+	  (bug 309353)
+	* Set dialog icon (bug 309342)
+
 2005-07-05  Sebastien Bacher  <seb128@debian.org>
 
 	* Makefile.am: fix the list of desktop files for the tarball.
