@@ -107,8 +107,8 @@ activation_error (void)
 							      "- X server with incompatible libxkbfile implementation\n\n"
 							      "X server version data:\n%s\n%d\n%s\n"
 							      "If you report this situation as a bug, please include:\n"
-							      "- The result of %s\n"
-							      "- The result of %s"),
+							      "- The result of <b>%s</b>\n"
+							      "- The result of <b>%s</b>"),
 							     vendor,
 							     release,
 							     badXFree430Release
@@ -118,8 +118,8 @@ activation_error (void)
 							      "There are known problems with complex XKB configurations.\n"
 							      "Try using simpler configuration or taking more fresh version of XFree software.")
 							     : "",
-							     "<b>xprop -root | grep XKB</b>",
-							     "<b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/kbd</b>");
+							     "xprop -root | grep XKB",
+							     "gconftool-2 -R /desktop/gnome/peripherals/keyboard/kbd");
 	g_signal_connect (dialog, "response",
 			  G_CALLBACK (gtk_widget_destroy), NULL);
 	gtk_widget_show (dialog);
