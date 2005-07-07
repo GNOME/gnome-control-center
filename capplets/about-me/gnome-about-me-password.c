@@ -108,12 +108,12 @@ wait_child (PasswordDialog *pdialog)
 
 			return FALSE;
 		} else if ((WIFEXITED (status)) && (WEXITSTATUS (status)) && (WEXITSTATUS (status) == 255)) {
-			msg = g_strdup (_("Symtem error has ocurred"));
+			msg = g_strdup (_("Symtem error has occurred"));
 			details = g_strdup (_("Could not run /usr/bin/passwd"));
 			title = g_strdup (_("Unable to launch backend"));
 		} else {
-			msg = g_strdup (_("Unexpected error has ocurred"));
-			title = g_strdup (_("Unexpected error has ocurred"));
+			msg = g_strdup (_("Unexpected error has occurred"));
+			title = g_strdup (_("Unexpected error has occurred"));
 			details = NULL;
 		}
 		

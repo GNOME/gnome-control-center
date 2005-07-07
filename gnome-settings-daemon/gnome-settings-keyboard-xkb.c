@@ -116,7 +116,7 @@ activation_error (void)
 							     _
 							     ("You are using XFree 4.3.0.\n"
 							      "There are known problems with complex XKB configurations.\n"
-							      "Try using simpler configuration or taking more fresh version of XFree software.")
+							      "Try using a simpler configuration or taking a fresher version of XFree software.")
 							     : "",
 							     "xprop -root | grep XKB",
 							     "gconftool-2 -R /desktop/gnome/peripherals/keyboard/kbd");
