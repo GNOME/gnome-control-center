@@ -205,14 +205,17 @@ GdkPixbuf * gnome_wp_item_get_thumbnail (GnomeWPItem * item,
   } else if (!strcmp (item->filename, "(none)")) {
     return bgpixbuf;
   } else {
+    gchar * escaped_path;
+
+    escaped_path = gnome_vfs_escape_path_string (item->filename);
+
     pixbuf = gnome_thumbnail_factory_generate_thumbnail (thumbs,
-							 gnome_vfs_escape_path_string (item->filename),
+							 escaped_path,
 							 item->fileinfo->mime_type);
     gnome_thumbnail_factory_save_thumbnail (thumbs, pixbuf,
-					    gnome_vfs_escape_path_string (item->filename),
+					    escaped_path,
 					    item->fileinfo->mtime);
-    g_object_unref (pixbuf);
-    pixbuf = gdk_pixbuf_new_from_file (item->fileinfo->thumburi, NULL);
+    g_free (escaped_path);
   }
 
   if (pixbuf != NULL) {
