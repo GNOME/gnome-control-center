@@ -1,5 +1,15 @@
 2005-07-10  Rodney Dawes  <dobey@novell.com>
 
+	* gnome-wp-capplet.[ch]:
+	(gnome_wp_icon_theme_changed):
+	(wallpaper_properties_init):
+	Update to use GtkIconTheme rather than GnomeIconTheme
+	Based on patch from Jan de Groot
+
+	Fixes #171677
+
+2005-07-10  Rodney Dawes  <dobey@novell.com>
+
 	* gnome-wp-info.c (gnome_wp_info_new): Fix some memory leaks by using
 	a separate variable to store the escaped path, and md5sum
 
