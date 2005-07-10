@@ -41,6 +41,10 @@
 #include <sys/stat.h>
 #include <dirent.h>
 
+#ifdef HAVE_XCURSOR
+#include <X11/Xcursor/Xcursor.h>
+#endif
+
 /******************************************************************************/
 /* A quick custom widget to ensure that the left handed toggle works no matter
  * which button is pressed.
@@ -89,6 +93,7 @@ enum
 	COLUMN_PIXBUF,
 	COLUMN_TEXT,
 	COLUMN_FONT_PATH,
+	COLUMN_SIZE,
 	N_COLUMNS
 };
 
@@ -98,12 +103,7 @@ enum
 #define DOUBLE_CLICK_KEY "/desktop/gnome/peripherals/mouse/double_click"
 #define CURSOR_FONT_KEY  "/desktop/gnome/peripherals/mouse/cursor_font"
 #define CURSOR_SIZE_KEY  "/desktop/gnome/peripherals/mouse/cursor_size"
-
-#ifdef HAVE_XCURSOR
-static gboolean server_supports_xcursor = TRUE;
-#else
-static gboolean server_supports_xcursor = FALSE;
-#endif
+#define CURSOR_THEME_KEY "/desktop/gnome/peripherals/mouse/cursor_theme"
 
 /* State in testing the double-click speed. Global for a great deal of
  * convenience
@@ -238,6 +238,7 @@ drag_threshold_from_gconf (GConfPropertyEditor *peditor,
 	return new_value;
 }
 
+#ifdef HAVE_XCURSOR
 static GConfValue *
 cursor_size_to_widget (GConfPropertyEditor *peditor, const GConfValue *value)
 {
@@ -274,6 +275,7 @@ cursor_size_from_widget (GConfPropertyEditor *peditor, const GConfValue *value)
 	radio_val = gconf_value_get_int (value);
 
 	new_value = gconf_value_new (GCONF_VALUE_INT);
+
 	switch (radio_val) {
 	case 0:
 		gconf_value_set_int (new_value, 12);
@@ -291,6 +293,7 @@ cursor_size_from_widget (GConfPropertyEditor *peditor, const GConfValue *value)
 
 	return new_value;
 }
+#endif
 
 /* Retrieve legacy settings */
 
@@ -332,8 +335,8 @@ event_box_button_press_event (GtkWidget   *widget,
 	gint                       double_click_time;
 	GConfValue                *value;
 	static struct test_data_t  data;
-	static guint               test_on_timeout_id     = 0;
-	static guint               test_maybe_timeout_id  = 0;
+	static gint                test_on_timeout_id     = 0;
+	static gint                test_maybe_timeout_id  = 0;
 	static guint32             double_click_timestamp = 0;
 	GtkWidget                  *image;
 	GConfClient               *client;
@@ -456,6 +459,51 @@ read_cursor_font (void)
 	return NULL;
 }
 
+#ifdef HAVE_XCURSOR
+static void
+cursor_theme_changed (GConfClient *client,
+		      guint        cnxn_id,
+		      GConfEntry  *entry,
+		      gpointer     user_data)
+{
+	GtkTreeIter       iter;
+	GtkTreeView     * view      = GTK_TREE_VIEW(user_data);
+	GtkTreeSelection* selection = gtk_tree_view_get_selection(view);
+	GtkTreeModel    * smodel    = gtk_tree_view_get_model(view);
+	GtkTreeModel    * model     = gtk_tree_model_sort_get_model(GTK_TREE_MODEL_SORT(smodel));
+	gchar           * theme     = gconf_client_get_string (client, CURSOR_THEME_KEY, NULL);
+	gtk_tree_model_get_iter_root(model, &iter);
+	gint              size      = gconf_client_get_int (client, CURSOR_SIZE_KEY, NULL);
+	gtk_tree_model_get_iter_root(model, &iter);
+
+	do {
+		gchar* theme_name;
+		gint cursor_size;
+
+		gtk_tree_model_get(model, &iter,
+				   COLUMN_FONT_PATH, &theme_name,
+				   COLUMN_SIZE, &cursor_size,
+				   -1);
+
+		if(theme_name && theme && !strcmp(theme_name, theme) && cursor_size == size) {
+			GtkTreeIter sort_iter;
+			gtk_tree_model_sort_convert_child_iter_to_iter
+				(GTK_TREE_MODEL_SORT(smodel), &sort_iter, &iter);
+			gtk_tree_selection_select_iter(selection, &sort_iter);
+			g_free(theme);
+			g_free(theme_name);
+			return;
+		}
+		g_free(theme_name);
+	} while (gtk_tree_model_iter_next(model, &iter));
+
+	/* we didn't find it */
+	gtk_tree_selection_unselect_all(gtk_tree_view_get_selection(view));
+	g_free(theme);
+}
+
+#else /* !HAVE_XCURSOR */
+
 static void
 cursor_font_changed (GConfClient *client,
 		     guint        cnxn_id,
@@ -467,25 +515,30 @@ cursor_font_changed (GConfClient *client,
 	gchar *cursor_text;
 	GtkTreeIter iter;
 	GtkTreeModel *model;
+	GtkTreeModel *smodel;
 	GtkTreeSelection *selection;
 
 	tree_view = GTK_TREE_VIEW (user_data);
 	selection = gtk_tree_view_get_selection (tree_view);
-	model = gtk_tree_view_get_model (tree_view);
+	smodel = gtk_tree_view_get_model (tree_view);
+	model = gtk_tree_model_sort_get_model (GTK_TREE_MODEL_SORT(smodel));
 
 	cursor_font = gconf_client_get_string (client, CURSOR_FONT_KEY, NULL);
 	gtk_tree_model_get_iter_root (model, &iter);
 
 	do {
 		gchar *temp_cursor_font;
+		GtkTreeIter sort_iter;
 		gtk_tree_model_get (model, &iter,
 				    COLUMN_FONT_PATH, &temp_cursor_font,
 				    -1);
+		gtk_tree_model_sort_convert_child_iter_to_iter
+			(GTK_TREE_MODEL_SORT(smodel), &sort_iter, &iter);
 		if ((temp_cursor_font == NULL && cursor_font == NULL) ||
 		    ((temp_cursor_font != NULL && cursor_font != NULL) &&
 		     (!strcmp (cursor_font, temp_cursor_font)))) {
-			if (!gtk_tree_selection_iter_is_selected (selection, &iter))
-				gtk_tree_selection_select_iter (selection, &iter);
+			if (!gtk_tree_selection_iter_is_selected (selection, &sort_iter))
+				gtk_tree_selection_select_iter (selection, &sort_iter);
 			g_free (temp_cursor_font);
 			g_free (cursor_font);
 			return;
@@ -505,6 +558,7 @@ cursor_font_changed (GConfClient *client,
 	g_free (cursor_font);
 	g_free (cursor_text);
 }
+#endif /* !HAVE_XCURSOR */
 
 static void
 cursor_changed (GtkTreeSelection *selection,
@@ -513,6 +567,7 @@ cursor_changed (GtkTreeSelection *selection,
 	GtkTreeModel *model = NULL;
 	GtkTreeIter iter;
 	gchar *cursor_font = NULL;
+	gint cursor_size;
 	GConfClient *client = gconf_client_get_default ();
 
 	if (! gtk_tree_selection_get_selected (selection, &model, &iter))
@@ -520,15 +575,243 @@ cursor_changed (GtkTreeSelection *selection,
 
 	gtk_tree_model_get (model, &iter,
 			    COLUMN_FONT_PATH, &cursor_font,
+			    COLUMN_SIZE, &cursor_size,
 			    -1);
 	if (cursor_font != NULL) {
+#ifdef HAVE_XCURSOR
+		gconf_client_set_string (client,
+					 CURSOR_THEME_KEY, cursor_font, NULL);
+		gconf_client_set_int (client,
+				      CURSOR_SIZE_KEY, cursor_size, NULL);
+#else
 		gconf_client_set_string (client,
 					 CURSOR_FONT_KEY, cursor_font, NULL);
 		g_free (cursor_font);
-	} else
+#endif
+	} else {
+#ifdef HAVE_XCURSOR
+		gconf_client_unset (client,
+				    CURSOR_THEME_KEY, NULL);
+		gconf_client_unset (client,
+				    CURSOR_SIZE_KEY, NULL);
+#else
 		gconf_client_unset (client,
 				    CURSOR_FONT_KEY, NULL);
+#endif
+	}
 	g_object_unref (client);
+}
+
+#ifdef HAVE_XCURSOR
+static GdkPixbuf*
+gdk_pixbuf_from_xcursor_image(XcursorImage* cursor) {
+	GdkPixbuf* pixbuf;
+#define BUF_SIZE sizeof(guint32) * cursor->width * cursor->height
+	guchar* buf = malloc(BUF_SIZE);
+	guchar* it;
+	memset(buf, '\0', BUF_SIZE);
+
+	for(it = buf; it < (buf + BUF_SIZE); it += 4) {
+		// can we get rid of this by using guint32 ?
+#if G_BYTE_ORDER == G_LITTLE_ENDIAN
+		// on little endianess it's BGRA to RGBA
+		it[0] = ((guchar*)(cursor->pixels))[it - buf + 2];
+		it[1] = ((guchar*)(cursor->pixels))[it - buf + 1];
+		it[2] = ((guchar*)(cursor->pixels))[it - buf + 0];
+		it[3] = ((guchar*)(cursor->pixels))[it - buf + 3];
+#else
+		// on big endianess it's ARGB to RGBA
+		it[0] = ((guchar*)cursor->pixels)[it - buf + 1];
+		it[1] = ((guchar*)cursor->pixels)[it - buf + 2];
+		it[2] = ((guchar*)cursor->pixels)[it - buf + 3];
+		it[3] = ((guchar*)cursor->pixels)[it - buf + 0];
+#endif
+	}
+
+	pixbuf = gdk_pixbuf_new_from_data((const guchar *)buf,
+			GDK_COLORSPACE_RGB, TRUE, 8,
+			cursor->width, cursor->height,
+			cursor->width * 4,
+			(GdkPixbufDestroyNotify)g_free,
+			NULL);
+
+	if(!pixbuf) {
+		g_free(buf);
+	}
+
+	return pixbuf;
+}
+#endif
+
+static void
+populate_tree_model(GtkTreeModelSort* model, GtkTreeSelection* selection) {
+#ifdef HAVE_XCURSOR
+	// add the XCursor themes - paths taken from <xc/lib/Xcursor.library.c>
+	const gchar* const paths[] = {
+		"%s/.icons/",
+		"/usr/share/icons/",
+		"/usr/share/pixmaps/",
+		"/usr/X11R6/lib/X11/icons/",
+		NULL
+	};
+	const gchar* const * iterator;
+	GConfClient* client = gconf_client_get_default();
+	GtkListStore* store = GTK_LIST_STORE(gtk_tree_model_sort_get_model(model));
+	gchar* current_theme = gconf_client_get_string(client, CURSOR_THEME_KEY, NULL);
+	gint current_size = gconf_client_get_int(client, CURSOR_SIZE_KEY, NULL);
+	g_object_unref(client);
+	client = NULL;
+
+	for(iterator = paths; *iterator; iterator++) {
+		gchar*       fname = NULL;
+		GDir*        folder = NULL;
+		const gchar* name;
+		
+		if(strchr(*iterator, '%')) {
+			fname = g_strdup_printf(*iterator, g_getenv("HOME"));
+		} else {
+			fname = g_strdup(*iterator);
+		}
+
+		folder = g_dir_open(fname, 0, NULL);
+		
+		while(folder && (name = g_dir_read_name(folder))) {
+			gchar* cursor_dir = g_strdup_printf("%s%s/cursors/", fname, name);
+			XcursorImage* cursor;
+			gint sizes[] = { 12, 16, 24, 32, 36, 48, 0 };
+			gint i;
+			GtkTreeIter iter;
+			
+			if(!g_file_test(cursor_dir, G_FILE_TEST_EXISTS)) {
+				g_free(cursor_dir);
+				continue;
+			}
+			
+			for (i = 0; sizes[i] != 0; i++) {
+				cursor = XcursorLibraryLoadImage("left_ptr", name, sizes[i]);
+				if (cursor->size != sizes[i]) {
+					XcursorImageDestroy (cursor);
+					cursor = NULL;
+				}
+				
+				if(cursor) {
+					GdkPixbuf* pixbuf = gdk_pixbuf_from_xcursor_image(cursor);
+
+					if(pixbuf) {
+						gtk_list_store_append(store, &iter);
+						gtk_list_store_set(store, &iter,
+								   COLUMN_PIXBUF, pixbuf,
+								   COLUMN_TEXT, name,
+								   COLUMN_FONT_PATH, name,
+								   COLUMN_SIZE, sizes[i],
+								   -1);
+						g_object_unref(pixbuf);
+						
+						if(current_theme != NULL && !strcmp(current_theme, name) &&
+							current_size == sizes[i]) {
+							GtkTreeIter sort_iter;
+							gtk_tree_model_sort_convert_child_iter_to_iter(model,
+												       &sort_iter,
+												       &iter);
+							gtk_tree_selection_select_iter(selection,
+										       &sort_iter);
+						}
+					}
+				}
+			}
+			
+			g_free(cursor_dir);
+		}
+
+		if(folder) {
+			g_dir_close(folder);
+		}
+		g_free(fname);
+	}
+	
+	g_free(current_theme);
+#else /* !HAVE_XCURSOR */
+	gchar* cursor_font;
+	static const gchar* builtins[][5] = {
+		{
+			"gnome/cursor-fonts/cursor-normal.pcf",
+		       	N_("Default Cursor"),
+		       	N_("Default Cursor - Current"),
+		       	N_("The default cursor that ships with X"),
+			"mouse-cursor-normal.png"
+		}, {
+			"gnome/cursor-fonts/cursor-white.pcf",
+		      	N_("White Cursor"),
+		     	N_("White Cursor - Current"),
+		     	N_("The default cursor inverted"),
+			"mouse-cursor-white.png"
+		}, {
+			"gnome/cursor-fonts/cursor-large.pcf",
+		      	N_("Large Cursor"),
+		     	N_("Large Cursor - Current"),
+		     	N_("Large version of normal cursor"),
+			"mouse-cursor-normal-large.png"
+		}, {
+			"gnome/cursor-fonts/cursor-large-white.pcf",
+			N_("Large White Cursor - Current"),
+			N_("Large White Cursor"),
+			N_("Large version of white cursor"),
+			"mouse-cursor-white-large.png"
+		}
+	};
+	GtkListStore* store = GTK_LIST_STORE(gtk_tree_model_sort_get_model(model));
+	guint i;
+	// add the default x font cursors
+	cursor_font = read_cursor_font();
+
+	for(i = 0; i < G_N_ELEMENTS(builtins); i++) {
+		GtkTreeIter iter;
+		gchar* cursor_string;
+		gchar* filename;
+		GdkPixbuf* pixbuf;
+
+		filename = gnome_program_locate_file (gnome_program_get(), GNOME_FILE_DOMAIN_APP_PIXMAP, builtins[i][4], TRUE, NULL);
+		pixbuf = gdk_pixbuf_new_from_file(filename, NULL);
+		g_free(filename);
+
+		filename = gnome_program_locate_file (gnome_program_get(), GNOME_FILE_DOMAIN_DATADIR, builtins[i][0], FALSE, NULL);
+		if(cursor_font && !strcmp(cursor_font, filename)) {
+			cursor_string = g_strdup_printf("<b>%s</b>\n%s", ((const gchar*)builtins[i][2]), _((const gchar*)builtins[i][3]));
+		} else {
+			cursor_string = g_strdup_printf("<b>%s</b>\n%s", _((const gchar*)builtins[i][1]), _((const gchar*)builtins[i][3]));
+		}
+		gtk_list_store_append(store, &iter);
+		gtk_list_store_set(store, &iter,
+				   COLUMN_PIXBUF, pixbuf,
+				   COLUMN_TEXT, cursor_string,
+				   COLUMN_FONT_PATH, filename,
+				   -1);
+
+		if(cursor_font && !strcmp(cursor_font, filename)) {
+			GtkTreeIter sort_iter;
+			gtk_tree_model_sort_convert_child_iter_to_iter(model,
+						&sort_iter,
+						&iter);
+			gtk_tree_selection_select_iter(selection, &sort_iter);
+		}
+
+		g_free(cursor_string);
+		g_free(filename);
+	}
+
+	if(0 == gtk_tree_selection_count_selected_rows(selection)) {
+		GtkTreeIter child_iter,
+			    sort_iter;
+		gtk_tree_model_iter_nth_child(GTK_TREE_MODEL(store), &child_iter, NULL, 0);
+		gtk_tree_model_sort_convert_child_iter_to_iter(model,
+					&sort_iter,
+					&child_iter);
+		gtk_tree_selection_select_iter(selection,
+					       &sort_iter);
+	}
+	
+	g_free(cursor_font);
+#endif
 }
 
 /* Set up the property editors in the dialog. */
@@ -541,14 +824,9 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 	GtkTreeModel      *model;
 	GtkCellRenderer   *renderer;
 	GtkTreeViewColumn *column;
-	GtkTreeIter        iter;
 	GConfValue        *value;
-	gchar             *filename;
-	GdkPixbuf         *pixbuf;
 	GnomeProgram      *program;
 	gchar             *cursor_font;
-	gchar             *font_path;
-	gchar             *cursor_string;
 	gboolean           found_default;
 	gchar             *message;
 
@@ -588,15 +866,13 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 	/* Cursors page */
 	tree_view = WID ("cursor_tree");
 	cursor_font = read_cursor_font ();
-
-
-					
 	
-	model = (GtkTreeModel *) gtk_list_store_new (N_COLUMNS, GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_STRING);
-	gtk_tree_view_set_model (GTK_TREE_VIEW (tree_view), model);
+	model = (GtkTreeModel *) gtk_list_store_new (N_COLUMNS, GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_INT);
+	model = (GtkTreeModel *) gtk_tree_model_sort_new_with_model (model);
+	gtk_tree_view_set_model (GTK_TREE_VIEW (tree_view),
+				 model);
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tree_view));
 	gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
-	g_signal_connect (G_OBJECT (selection), "changed", G_CALLBACK (cursor_changed), NULL);
 	column = gtk_tree_view_column_new ();
 	renderer = gtk_cell_renderer_pixbuf_new ();
 	gtk_tree_view_column_pack_start (column, renderer, FALSE);
@@ -609,106 +885,19 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 					     "markup", COLUMN_TEXT,
 					     NULL);
 
-	/* Default cursor */
-	filename = gnome_program_locate_file (program, GNOME_FILE_DOMAIN_APP_PIXMAP, "mouse-cursor-normal.png", TRUE, NULL);
-	pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
-	g_free (filename);
-
-	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-	if (cursor_font == NULL) {
-		cursor_string = g_strdup_printf ("<b>%s</b>\n%s", _("Default Cursor - Current"), _("The default cursor that ships with X"));
-		found_default = TRUE;
-	} else {
-		cursor_string = g_strdup_printf ("<b>%s</b>\n%s", _("Default Cursor"), _("The default cursor that ships with X"));
-	}
-
-	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
-			    COLUMN_PIXBUF, pixbuf,
-			    COLUMN_TEXT, cursor_string,
-			    COLUMN_FONT_PATH, NULL,
-			    -1);
-	g_free (cursor_string);
-
-	/* Inverted cursor */
-	filename = gnome_program_locate_file (program, GNOME_FILE_DOMAIN_APP_PIXMAP, "mouse-cursor-white.png", TRUE, NULL);
-	pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
-	g_free (filename);
-	font_path = gnome_program_locate_file (program, GNOME_FILE_DOMAIN_DATADIR, "gnome/cursor-fonts/cursor-white.pcf", FALSE, NULL);
-
-	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-	if (cursor_font && ! strcmp (cursor_font, font_path)) {
-		cursor_string = g_strdup_printf ("<b>%s</b>\n%s", _("White Cursor - Current"), _("The default cursor inverted"));
-		found_default = TRUE;
-	} else {
-		cursor_string = g_strdup_printf ("<b>%s</b>\n%s", _("White Cursor"), _("The default cursor inverted"));
-	}
-
-	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
-			    COLUMN_PIXBUF, pixbuf,
-			    COLUMN_TEXT, cursor_string,
-			    COLUMN_FONT_PATH, font_path,
-			    -1);
-	g_free (font_path);
-	g_free (cursor_string);
-
-	/* Large cursor */
-	filename = gnome_program_locate_file (program, GNOME_FILE_DOMAIN_APP_PIXMAP, "mouse-cursor-normal-large.png", TRUE, NULL);
-	pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
-	g_free (filename);
-	font_path = gnome_program_locate_file (program, GNOME_FILE_DOMAIN_DATADIR, "gnome/cursor-fonts/cursor-large.pcf", FALSE, NULL);
-
-	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-	if (cursor_font && ! strcmp (cursor_font, font_path)) {
-		cursor_string = g_strdup_printf ("<b>%s</b>\n%s", _("Large Cursor - Current"), _("Large version of normal cursor"));
-		found_default = TRUE;
-	} else {
-		cursor_string = g_strdup_printf ("<b>%s</b>\n%s", _("Large Cursor"), _("Large version of normal cursor"));
-	}
-
-	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
-			    COLUMN_PIXBUF, pixbuf,
-			    COLUMN_TEXT, cursor_string,
-			    COLUMN_FONT_PATH, font_path,
-			    -1);
-	g_free (font_path);
-	g_free (cursor_string);
-
-	/* Large inverted cursor */
-	filename = gnome_program_locate_file (program, GNOME_FILE_DOMAIN_APP_PIXMAP, "mouse-cursor-white-large.png", TRUE, NULL);
-	pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
-	g_free (filename);
-	font_path = gnome_program_locate_file (program, GNOME_FILE_DOMAIN_DATADIR, "gnome/cursor-fonts/cursor-large-white.pcf", FALSE, NULL);
-
-	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-	if (cursor_font && ! strcmp (cursor_font, font_path)) {
-		cursor_string = g_strdup_printf ("<b>%s</b>\n%s", _("Large White Cursor - Current"), _("Large version of white cursor"));
-		found_default = TRUE;
-	} else {
-		cursor_string = g_strdup_printf ("<b>%s</b>\n%s", _("Large White Cursor"), _("Large version of white cursor"));
-	}
-
-	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
-			    COLUMN_PIXBUF, pixbuf,
-			    COLUMN_TEXT, cursor_string,
-			    COLUMN_FONT_PATH, font_path,
-			    -1);
-	g_free (font_path);
-	g_free (cursor_string);
-
-	g_free (cursor_font);
-
+	/* Add the cursors */
+	populate_tree_model(GTK_TREE_MODEL_SORT(model), selection);
+	g_signal_connect (G_OBJECT (selection), "changed", G_CALLBACK (cursor_changed), NULL);
 	gtk_tree_view_append_column (GTK_TREE_VIEW (tree_view), column);
 	
 	gconf_peditor_new_boolean
 		(changeset, "/desktop/gnome/peripherals/mouse/locate_pointer", WID ("locate_pointer_toggle"), NULL);
 
-	gconf_peditor_new_select_radio (changeset,
-					CURSOR_SIZE_KEY,
-					gtk_radio_button_get_group (GTK_RADIO_BUTTON (WID ("cursor_size_small_radio"))),
-					"conv-to-widget-cb", cursor_size_to_widget,
-					"conv-from-widget-cb", cursor_size_from_widget,
-					NULL);
-					
+	peditor = gconf_peditor_new_select_menu
+		(changeset, "/desktop/gnome/peripherals/mouse/cursor_size", WID ("cursor_size_omenu"),
+		 "conv-to-widget-cb", cursor_size_to_widget,
+		 "conv-from-widget-cb", cursor_size_from_widget,
+		 NULL);
 
         /* Motion page */
 	/* speed */
@@ -729,14 +918,20 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 		 "conv-to-widget-cb", drag_threshold_from_gconf,
 		 NULL);
 
-	/* listen to cursors changing */
+	/* listen to cursors changing and set it up initially */
+#ifdef HAVE_XCURSOR
+	gconf_client_notify_add (client,
+				 CURSOR_THEME_KEY,
+				 cursor_theme_changed,
+				 tree_view, NULL, NULL);
+	cursor_theme_changed (client, 0, NULL, tree_view);
+#else
         gconf_client_notify_add (client,
 				 CURSOR_FONT_KEY,
 				 cursor_font_changed,
 				 tree_view, NULL, NULL);
-
-	/* and set it up initially... */
 	cursor_font_changed (client, 0, NULL, tree_view);
+#endif
 	g_object_unref (client);
 }
 
@@ -754,26 +949,10 @@ create_dialog (void)
 
 	dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/gnome-mouse-properties.glade", "mouse_properties_dialog", NULL);
 
-	if (server_supports_xcursor) {
-		gtk_widget_hide (WID ("cursor_font_vbox"));
-		gtk_widget_show (WID ("cursor_size_vbox"));
-		text = g_strdup_printf ("<b>%s</b>", _("Cursor Size"));
-		gtk_label_set_markup (GTK_LABEL (WID ("cursor_category_label")), text);
-		g_free (text);
-		gtk_box_set_child_packing (GTK_BOX (WID ("cursors_vbox")),
-					   WID ("cursor_appearance_vbox"),
-					   FALSE, TRUE, 0, GTK_PACK_START);
-	} else {
-		gtk_widget_hide (WID ("cursor_size_vbox"));
-		gtk_widget_show (WID ("cursor_font_vbox"));
-		text = g_strdup_printf ("<b>%s</b>", _("Cursor Theme"));
-		gtk_label_set_markup (GTK_LABEL (WID ("cursor_category_label")), text);
-		g_free (text);
-		gtk_box_set_child_packing (GTK_BOX (WID ("cursors_vbox")),
-					   WID ("cursor_appearance_vbox"),
-					   TRUE, TRUE, 0, GTK_PACK_START);
-	}
-	
+	text = g_strdup_printf ("<b>%s</b>", _("Cursor Theme"));
+	gtk_label_set_markup (GTK_LABEL (WID ("cursor_category_label")), text);
+	g_free (text);
+
 	size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 	gtk_size_group_add_widget (size_group, WID ("acceleration_label"));
 	gtk_size_group_add_widget (size_group, WID ("sensitivity_label"));

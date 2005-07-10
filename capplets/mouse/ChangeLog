@@ -1,3 +1,15 @@
+2005-07-10  Sebastien Bacher  <seb128@debian.org>
+
+	* gnome-mouse-properties.c: (cursor_size_from_widget),
+	(event_box_button_press_event), (cursor_theme_changed),
+	(cursor_font_changed), (cursor_changed),
+	(gdk_pixbuf_from_xcursor_image), (populate_tree_model),
+	(setup_dialog), (create_dialog):
+	* gnome-mouse-properties.glade:
+	new cursor theme manager for the mouse capplet, 
+	patch by Sven Herzberg <herzi@gnome-de.org> with changes 
+	by Matthias Clasen <mclasen@redhat.com> (Closes: #110670).
+
 2005-01-04  Sebastien Bacher  <seb128@debian.org>
 
 	* gnome-mouse-properties.glade: fixed a grammar error (Closes: #131521)
