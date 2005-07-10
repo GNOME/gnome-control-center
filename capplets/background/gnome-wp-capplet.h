@@ -74,7 +74,7 @@ struct _GnomeWPCapplet {
 
   /* Thumbnailing and Icon Theme stuff */
   GnomeThumbnailFactory * thumbs;
-  GnomeIconTheme * theme;
+  GtkIconTheme * theme;
 
   /* Hash Table of Wallpapers */
   GHashTable * wphash;

@@ -802,69 +802,61 @@ static void gnome_wp_delay_changed (GConfClient * client, guint id,
   capplet->delay = gconf_value_get_int (entry->value);
 }
 
-static void gnome_wp_icon_theme_changed (GnomeIconTheme * theme,
+static void gnome_wp_icon_theme_changed (GtkIconTheme * theme,
 					 GnomeWPCapplet * capplet) {
   GdkPixbuf * pixbuf;
-  gchar * icofile;
+  GtkIconInfo * icon_info = NULL;
 
-  icofile = gnome_icon_theme_lookup_icon (capplet->theme,
+  icon_info = gtk_icon_theme_lookup_icon (capplet->theme,
 					  "gnome-settings-background",
-					  48, NULL, NULL);
-  if (icofile != NULL) {
-    pixbuf = gdk_pixbuf_new_from_file (icofile, NULL);
+					  48, 0);
+  if (icon_info != NULL) {
+    pixbuf = gtk_icon_info_load_icon (icon_info, NULL);
+    gtk_icon_info_free (icon_info);
     gtk_window_set_icon (GTK_WINDOW (capplet->window), NULL);
-    gtk_window_set_default_icon_from_file (icofile, NULL);
+    gtk_window_set_default_icon (pixbuf);
     g_object_unref (pixbuf);
   }
-  g_free (icofile);
 
-  icofile = gnome_icon_theme_lookup_icon (capplet->theme,
+  icon_info = gtk_icon_theme_lookup_icon (capplet->theme,
 					  "stock_wallpaper-center",
-					  16, NULL, NULL);
-  if (icofile != NULL) {
-    GdkPixbuf * pixbuf;
-
-    pixbuf = gdk_pixbuf_new_from_file (icofile, NULL);
+					  16, 0);
+  if (icon_info != NULL) {
+    pixbuf = gtk_icon_info_load_icon (icon_info, NULL);
+    gtk_icon_info_free (icon_info);
     gtk_image_set_from_pixbuf (GTK_IMAGE (capplet->citem), pixbuf);
     g_object_unref (pixbuf);
   }
-  g_free (icofile);
 
-  icofile = gnome_icon_theme_lookup_icon (capplet->theme,
+  icon_info = gtk_icon_theme_lookup_icon (capplet->theme,
 					  "stock_wallpaper-fill",
-					  16, NULL, NULL);
-  if (icofile != NULL) {
-    GdkPixbuf * pixbuf;
-
-    pixbuf = gdk_pixbuf_new_from_file (icofile, NULL);
+					  16, 0);
+  if (icon_info != NULL) {
+    pixbuf = gtk_icon_info_load_icon (icon_info, NULL);
+    gtk_icon_info_free (icon_info);
     gtk_image_set_from_pixbuf (GTK_IMAGE (capplet->fitem), pixbuf);
     g_object_unref (pixbuf);
   }
-  g_free (icofile);
 
-  icofile = gnome_icon_theme_lookup_icon (capplet->theme,
+  icon_info = gtk_icon_theme_lookup_icon (capplet->theme,
 					  "stock_wallpaper-scale",
-					  16, NULL, NULL);
-  if (icofile != NULL) {
-    GdkPixbuf * pixbuf;
-
-    pixbuf = gdk_pixbuf_new_from_file (icofile, NULL);
+					  16, 0);
+  if (icon_info != NULL) {
+    pixbuf = gtk_icon_info_load_icon (icon_info, NULL);
+    gtk_icon_info_free (icon_info);
     gtk_image_set_from_pixbuf (GTK_IMAGE (capplet->sitem), pixbuf);
     g_object_unref (pixbuf);
   }
-  g_free (icofile);
 
-  icofile = gnome_icon_theme_lookup_icon (capplet->theme,
+  icon_info = gtk_icon_theme_lookup_icon (capplet->theme,
 					  "stock_wallpaper-tile",
-					  16, NULL, NULL);
-  if (icofile != NULL) {
-    GdkPixbuf * pixbuf;
-
-    pixbuf = gdk_pixbuf_new_from_file (icofile, NULL);
+					  16, 0);
+  if (icon_info != NULL) {
+    pixbuf = gtk_icon_info_load_icon (icon_info, NULL);
+    gtk_icon_info_free (icon_info);
     gtk_image_set_from_pixbuf (GTK_IMAGE (capplet->witem), pixbuf);
     g_object_unref (pixbuf);
   }
-  g_free (icofile);
 }
 
 static GladeXML * gnome_wp_create_dialog (void) {
@@ -936,8 +928,8 @@ static void wallpaper_properties_init (poptContext ctx) {
   GtkTreeSelection * selection;
   GdkPixbuf * pixbuf;
   GdkCursor * cursor;
-  gchar * icofile;
   const gchar ** args;
+  GtkIconInfo * icon_info = NULL;
 
   gtk_rc_parse_string ("style \"wp-tree-defaults\" {\n"
 		       "  GtkTreeView::horizontal-separator = 6\n"
@@ -994,8 +986,7 @@ static void wallpaper_properties_init (poptContext ctx) {
 					   gnome_wp_item_free);
 
   capplet->thumbs = gnome_thumbnail_factory_new (GNOME_THUMBNAIL_SIZE_NORMAL);
-  capplet->theme = gnome_icon_theme_new ();
-  gnome_icon_theme_set_allow_svg (capplet->theme, TRUE);
+  capplet->theme = gtk_icon_theme_get_default ();
 
   g_signal_connect (G_OBJECT (capplet->theme), "changed",
 		    G_CALLBACK (gnome_wp_icon_theme_changed), capplet);
@@ -1003,16 +994,16 @@ static void wallpaper_properties_init (poptContext ctx) {
   dialog = gnome_wp_create_dialog ();
   capplet->window = glade_xml_get_widget (dialog,"gnome_wp_properties");
 
-  icofile = gnome_icon_theme_lookup_icon (capplet->theme,
+  icon_info = gtk_icon_theme_lookup_icon (capplet->theme,
 					  "gnome-settings-background",
-					  48, NULL, NULL);
-  if (icofile != NULL) {
-    pixbuf = gdk_pixbuf_new_from_file (icofile, NULL);
-    gtk_window_set_default_icon_from_file (icofile, NULL);
+					  48, 0);
+  if (icon_info != NULL) {
+    pixbuf = gtk_icon_info_load_icon (icon_info, NULL);
+    gtk_icon_info_free (icon_info);
+    gtk_window_set_default_icon (pixbuf);
     gtk_window_set_icon (GTK_WINDOW (capplet->window), pixbuf);
     g_object_unref (pixbuf);
   }
-  g_free (icofile);
 
   gtk_widget_realize (capplet->window);
 
@@ -1060,22 +1051,25 @@ static void wallpaper_properties_init (poptContext ctx) {
   capplet->wp_opts = glade_xml_get_widget (dialog,"style_menu");
 
   menu = gtk_menu_new ();
+
   mitem = gtk_menu_item_new ();
   set_accessible_name (mitem, _("Centered")); 
-  icofile = gnome_icon_theme_lookup_icon (capplet->theme,
+  icon_info = gtk_icon_theme_lookup_icon (capplet->theme,
 					  "stock_wallpaper-center",
-					  16, NULL, NULL);
+					  16, 0);
 
   mbox = gtk_hbox_new (FALSE, 6);
   gtk_container_add (GTK_CONTAINER (mitem), mbox);
   gtk_widget_show (mbox);
 
-  if (icofile != NULL) {
-    capplet->citem = gtk_image_new_from_file (icofile);
+  if (icon_info != NULL) {
+    pixbuf = gtk_icon_info_load_icon (icon_info, NULL);
+    gtk_icon_info_free (icon_info);
+    capplet->citem = gtk_image_new_from_pixbuf (pixbuf);
     gtk_box_pack_start (GTK_BOX (mbox), capplet->citem, FALSE, FALSE, 0);
     gtk_widget_show (capplet->citem);
+    g_object_unref (pixbuf);
   }
-  g_free (icofile);
     
   label = gtk_label_new (_("Centered"));
   gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
@@ -1086,19 +1080,21 @@ static void wallpaper_properties_init (poptContext ctx) {
 
   mitem = gtk_menu_item_new ();
   set_accessible_name (mitem, _("Fill Screen"));
-  icofile = gnome_icon_theme_lookup_icon (capplet->theme,
+  icon_info = gtk_icon_theme_lookup_icon (capplet->theme,
 					  "stock_wallpaper-fill",
-					  16, NULL, NULL);
+					  16, 0);
   mbox = gtk_hbox_new (FALSE, 6);
   gtk_container_add (GTK_CONTAINER (mitem), mbox);
   gtk_widget_show (mbox);
 
-  if (icofile != NULL) {
-    capplet->fitem = gtk_image_new_from_file (icofile);
+  if (icon_info != NULL) {
+    pixbuf = gtk_icon_info_load_icon (icon_info, NULL);
+    gtk_icon_info_free (icon_info);
+    capplet->fitem = gtk_image_new_from_pixbuf (pixbuf);
     gtk_box_pack_start (GTK_BOX (mbox), capplet->fitem, FALSE, FALSE, 0);
     gtk_widget_show (capplet->fitem);
+    g_object_unref (pixbuf);
   }
-  g_free (icofile);
 
   label = gtk_label_new (_("Fill Screen"));
   gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
@@ -1109,19 +1105,21 @@ static void wallpaper_properties_init (poptContext ctx) {
 
   mitem = gtk_menu_item_new ();
   set_accessible_name (mitem, _("Scaled"));
-  icofile = gnome_icon_theme_lookup_icon (capplet->theme,
+  icon_info = gtk_icon_theme_lookup_icon (capplet->theme,
 					  "stock_wallpaper-scale",
-					  16, NULL, NULL);
+					  16, 0);
   mbox = gtk_hbox_new (FALSE, 6);
   gtk_container_add (GTK_CONTAINER (mitem), mbox);
   gtk_widget_show (mbox);
 
-  if (icofile != NULL) {
-    capplet->sitem = gtk_image_new_from_file (icofile);
+  if (icon_info != NULL) {
+    pixbuf = gtk_icon_info_load_icon (icon_info, NULL);
+    gtk_icon_info_free (icon_info);
+    capplet->sitem = gtk_image_new_from_pixbuf (pixbuf);
     gtk_box_pack_start (GTK_BOX (mbox), capplet->sitem, FALSE, FALSE, 0);
     gtk_widget_show (capplet->sitem);
+    g_object_unref (pixbuf);
   }
-  g_free (icofile);
 
   label = gtk_label_new (_("Scaled"));
   gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
@@ -1132,19 +1130,21 @@ static void wallpaper_properties_init (poptContext ctx) {
 
   mitem = gtk_menu_item_new ();
   set_accessible_name (mitem, _("Tiled"));
-  icofile = gnome_icon_theme_lookup_icon (capplet->theme,
+  icon_info = gtk_icon_theme_lookup_icon (capplet->theme,
 					  "stock_wallpaper-tile",
-					  16, NULL, NULL);
+					  16, 0);
   mbox = gtk_hbox_new (FALSE, 6);
   gtk_container_add (GTK_CONTAINER (mitem), mbox);
   gtk_widget_show (mbox);
 
-  if (icofile != NULL) {
-    capplet->witem = gtk_image_new_from_file (icofile);
+  if (icon_info != NULL) {
+    pixbuf = gtk_icon_info_load_icon (icon_info, NULL);
+    gtk_icon_info_free (icon_info);
+    capplet->witem = gtk_image_new_from_pixbuf (pixbuf);
     gtk_box_pack_start (GTK_BOX (mbox), capplet->witem, FALSE, FALSE, 0);
     gtk_widget_show (capplet->witem);
+    g_object_unref (pixbuf);
   }
-  g_free (icofile);
 
   label = gtk_label_new (_("Tiled"));
   gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
