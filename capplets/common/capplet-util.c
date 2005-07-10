@@ -356,21 +356,22 @@ capplet_set_icon (GtkWidget *window, char const *icon_file_name)
 	char *tmp;
 	char *p;
 	GdkPixbuf *icon_pixbuf = NULL;
-	GnomeIconTheme *icon_theme;
+	GtkIconTheme *icon_theme;
+	GtkIconInfo  *icon_info;
 
 	/* First look up from the icon theme */
-	icon_theme = gnome_icon_theme_new ();
+	icon_theme = gtk_icon_theme_get_default ();
 
 	tmp = g_strdup (icon_file_name);
 	p = strrchr (tmp, '.');
 	if (p)
 		p[0] = '\0';
 
-	path = gnome_icon_theme_lookup_icon (icon_theme, tmp, 48, NULL, NULL);
-	
-	if (path != NULL) {
-		icon_pixbuf = gdk_pixbuf_new_from_file (path, NULL);
-		g_free (path);
+	icon_info = gtk_icon_theme_lookup_icon (icon_theme, tmp, 48, 0);
+
+	if (icon_info != NULL) {
+		icon_pixbuf = gtk_icon_info_load_icon (icon_info, NULL);
+		gtk_icon_info_free (icon_info);
 	}
 
 	g_free (tmp);
