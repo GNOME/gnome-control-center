@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-08 20:02+0200\n"
-"PO-Revision-Date: 2005-07-08 20:29+0200\n"
+"POT-Creation-Date: 2005-07-11 19:20+0200\n"
+"PO-Revision-Date: 2005-07-11 19:29+0200\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
@@ -586,8 +586,8 @@ msgstr "bodov/sekundu"
 #. set the timeout value  label with correct value of timeout
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
 #: ../capplets/mouse/gnome-mouse-properties.c:131
-#: ../capplets/mouse/gnome-mouse-properties.c:584
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
+#: ../capplets/mouse/gnome-mouse-properties.c:862
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:28
 #: ../capplets/windows/gnome-window-properties.glade.h:10
 msgid "seconds"
 msgstr "sekúnd"
@@ -631,22 +631,22 @@ msgstr "Š_týl:"
 msgid "There was an error displaying help: %s"
 msgstr "Pri pokuse o zobrazenie Pomocníka nastala chyba: %s"
 
-#: ../capplets/background/gnome-wp-capplet.c:1064
-#: ../capplets/background/gnome-wp-capplet.c:1080
+#: ../capplets/background/gnome-wp-capplet.c:1056
+#: ../capplets/background/gnome-wp-capplet.c:1074
 msgid "Centered"
 msgstr "V strede"
 
-#: ../capplets/background/gnome-wp-capplet.c:1088
-#: ../capplets/background/gnome-wp-capplet.c:1103
+#: ../capplets/background/gnome-wp-capplet.c:1082
+#: ../capplets/background/gnome-wp-capplet.c:1099
 msgid "Fill Screen"
 msgstr "Na celú obrazovku"
 
-#: ../capplets/background/gnome-wp-capplet.c:1111
-#: ../capplets/background/gnome-wp-capplet.c:1126
+#: ../capplets/background/gnome-wp-capplet.c:1107
+#: ../capplets/background/gnome-wp-capplet.c:1124
 msgid "Scaled"
 msgstr "Škálované"
 
-#: ../capplets/background/gnome-wp-capplet.c:1134
+#: ../capplets/background/gnome-wp-capplet.c:1132
 #: ../capplets/background/gnome-wp-capplet.c:1149
 msgid "Tiled"
 msgstr "Dlaždice"
@@ -671,12 +671,12 @@ msgstr "Vertikálny prechod"
 msgid "Add Wallpaper"
 msgstr "Pridať tapetu"
 
-#: ../capplets/background/gnome-wp-info.c:49
+#: ../capplets/background/gnome-wp-info.c:57
 msgid "No Wallpaper"
 msgstr "Bez tapety"
 
-#: ../capplets/background/gnome-wp-item.c:289
-#: ../capplets/background/gnome-wp-item.c:291
+#: ../capplets/background/gnome-wp-item.c:292
+#: ../capplets/background/gnome-wp-item.c:294
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "bodov"
@@ -709,7 +709,7 @@ msgstr "Iba použiť nastavenie a skončiť"
 #: ../capplets/common/capplet-util.c:243
 #: ../capplets/default-applications/gnome-default-applications-properties.c:765
 #: ../capplets/keyboard/gnome-keyboard-properties.c:225
-#: ../capplets/mouse/gnome-mouse-properties.c:819
+#: ../capplets/mouse/gnome-mouse-properties.c:998
 #: ../capplets/sound/sound-properties-capplet.c:244
 msgid "Retrieve and store legacy settings"
 msgstr "Získať a uložiť predchádzajúce nastavenie"
@@ -1310,7 +1310,6 @@ msgid "_Full"
 msgstr "Ú_plný"
 
 #: ../capplets/font/font-properties.glade.h:22
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:22
 msgid "_Medium"
 msgstr "_Stredný"
 
@@ -1682,67 +1681,59 @@ msgstr "minút"
 msgid "Set your keyboard preferences"
 msgstr "Nastavenie klávesnice"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:498
+#: ../capplets/mouse/gnome-mouse-properties.c:551
 msgid "Unknown Cursor"
 msgstr "Neznámy kurzor"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:619
-msgid "Default Cursor - Current"
-msgstr "Štandardný kurzor - aktuálny"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:619
-#: ../capplets/mouse/gnome-mouse-properties.c:622
-msgid "The default cursor that ships with X"
-msgstr "Štandardný kurzor dodávaný s X"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:622
+#: ../capplets/mouse/gnome-mouse-properties.c:738
 msgid "Default Cursor"
 msgstr "Štandardný kurzor"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:640
-msgid "White Cursor - Current"
-msgstr "Biely kurzor - aktuálny"
+#: ../capplets/mouse/gnome-mouse-properties.c:739
+msgid "Default Cursor - Current"
+msgstr "Štandardný kurzor - aktuálny"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:640
-#: ../capplets/mouse/gnome-mouse-properties.c:643
-msgid "The default cursor inverted"
-msgstr "Invertovaný štandardný kurzor"
+#: ../capplets/mouse/gnome-mouse-properties.c:740
+msgid "The default cursor that ships with X"
+msgstr "Štandardný kurzor dodávaný s X"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:643
+#: ../capplets/mouse/gnome-mouse-properties.c:744
 msgid "White Cursor"
 msgstr "Biely kurzor"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:662
-msgid "Large Cursor - Current"
-msgstr "Veľký kurzor - aktuálny"
+#: ../capplets/mouse/gnome-mouse-properties.c:745
+msgid "White Cursor - Current"
+msgstr "Biely kurzor - aktuálny"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:662
-#: ../capplets/mouse/gnome-mouse-properties.c:665
-msgid "Large version of normal cursor"
-msgstr "Veľká verzia normálneho kurzoru"
+#: ../capplets/mouse/gnome-mouse-properties.c:746
+msgid "The default cursor inverted"
+msgstr "Invertovaný štandardný kurzor"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:665
+#: ../capplets/mouse/gnome-mouse-properties.c:750
 msgid "Large Cursor"
 msgstr "Veľký kurzor"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:684
+#: ../capplets/mouse/gnome-mouse-properties.c:751
+msgid "Large Cursor - Current"
+msgstr "Veľký kurzor - aktuálny"
+
+#: ../capplets/mouse/gnome-mouse-properties.c:752
+msgid "Large version of normal cursor"
+msgstr "Veľká verzia normálneho kurzoru"
+
+#: ../capplets/mouse/gnome-mouse-properties.c:756
 msgid "Large White Cursor - Current"
 msgstr "Veľký biely kurzor - aktuálny"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:684
-#: ../capplets/mouse/gnome-mouse-properties.c:687
-msgid "Large version of white cursor"
-msgstr "Veľká verzia bieleho kurzoru"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:687
+#: ../capplets/mouse/gnome-mouse-properties.c:757
 msgid "Large White Cursor"
 msgstr "Veľký biely kurzor"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:760
-msgid "Cursor Size"
-msgstr "Veľkosť kurzoru"
+#: ../capplets/mouse/gnome-mouse-properties.c:758
+msgid "Large version of white cursor"
+msgstr "Veľká verzia bieleho kurzoru"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:769
+#: ../capplets/mouse/gnome-mouse-properties.c:952
 msgid "Cursor Theme"
 msgstr "Kurzorová téma"
 
@@ -1803,46 +1794,54 @@ msgid "Buttons"
 msgstr "Tlačidlá"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:15
+msgid "Cursor Size:"
+msgstr "Veľkosť kurzora:"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:16
 msgid "Cursors"
 msgstr "Kurzory"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:16
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
 msgid "Highlight the _pointer when you press Ctrl"
 msgstr "Zvýrazniť _kurzor pri stlačení Ctrl"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
+msgid "Large"
+msgstr "Veľké"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
+msgid "Medium"
+msgstr "Stredné"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:20
 msgid "Motion"
 msgstr "Pohyb"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:21
 msgid "Mouse Preferences"
 msgstr "Nastavenie myši"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:22
+msgid "Small"
+msgstr "Malé"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:23
 msgid "_Acceleration:"
 msgstr "_Zrýchlenie:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:20
-msgid "_Large"
-msgstr "_Veľká"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:21
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:24
 msgid "_Left-handed mouse"
 msgstr "Pre ľa_vákov"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:23
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:25
 msgid "_Sensitivity:"
 msgstr "_Citlivosť:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:24
-msgid "_Small"
-msgstr "_Malá"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:25
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:26
 msgid "_Threshold:"
 msgstr "_Hranica:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:26
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
 msgid "_Timeout:"
 msgstr "Ča_kanie:"
 
@@ -2584,7 +2583,8 @@ msgid ""
 msgstr ""
 "Používate XFree 4.3.0.\n"
 "Sú známe problémy so zložitými nastaveniami XKB.\n"
-"Skúste použiť jednoduchšiu konfiguráciu alebo použite novšiu verziu XFree softvéru."
+"Skúste použiť jednoduchšiu konfiguráciu alebo použite novšiu verziu XFree "
+"softvéru."
 
 #: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:230
 msgid "Do _not show this warning again"
