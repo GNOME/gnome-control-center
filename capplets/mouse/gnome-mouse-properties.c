@@ -238,7 +238,6 @@ drag_threshold_from_gconf (GConfPropertyEditor *peditor,
 	return new_value;
 }
 
-#ifdef HAVE_XCURSOR
 static GConfValue *
 cursor_size_to_widget (GConfPropertyEditor *peditor, const GConfValue *value)
 {
@@ -293,7 +292,6 @@ cursor_size_from_widget (GConfPropertyEditor *peditor, const GConfValue *value)
 
 	return new_value;
 }
-#endif
 
 /* Retrieve legacy settings */
 
