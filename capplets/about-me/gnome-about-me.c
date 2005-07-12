@@ -664,9 +664,6 @@ about_me_setup_dialog (void)
 	me->theme = gtk_icon_theme_get_for_screen (me->screen);
 
 	icon = gtk_icon_theme_lookup_icon (me->theme, "stock_person", 80, 0);
-	if (icon == NULL) {
-		g_print ("Icon not found\n");
-	}
 
 	me->person = g_strdup (gtk_icon_info_get_filename (icon));
 

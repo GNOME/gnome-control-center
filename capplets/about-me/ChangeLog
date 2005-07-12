@@ -1,3 +1,21 @@
+2005-07-11  Diego Gonzalez  <diego@pemas.net>
+
+	* e-image-chooser.c: remove gdk_pixbuf_unref calls which are
+	  deprecated and use g_object_unref instead
+
+2005-07-11  Diego Gonzalez  <diego@pemas.net>
+
+	* gnome-about-me-password.c: fix some string errors
+
+	  Fixes bug 309951 and bug 309950
+2005-07-10  Dennis Cranston <dennis_cranston at yahoo com>
+
+	* gnome-about-me.glade:  HIG fixes; fix widget padding,
+	use sentence capitalization for text field labels, fix 
+	mnemonic conflics, and remove mnemonics from tab labels.
+
+	Also fixes bug 309952
+	
 2005-07-08  Sebastien Bacher  <seb128@debian.org>
 
 	* gnome-about-me.desktop.in: this file is not useful on the CVS.

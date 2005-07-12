@@ -296,11 +296,11 @@ set_image_from_data (EImageChooser *chooser,
 					      chooser->priv->image_height / 2 - new_height / 2);
 
 			gtk_image_set_from_pixbuf (GTK_IMAGE (chooser->priv->image), composite);
-			gdk_pixbuf_unref (scaled);
-			gdk_pixbuf_unref (composite);
+			g_object_unref (scaled);
+			g_object_unref (composite);
 		}
 
-		gdk_pixbuf_unref (pixbuf);
+		g_object_unref (pixbuf);
 
 		g_free (chooser->priv->image_buf);
 		chooser->priv->image_buf = data;

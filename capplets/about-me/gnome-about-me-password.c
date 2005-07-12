@@ -97,7 +97,8 @@ wait_child (PasswordDialog *pdialog)
 
 			return FALSE;
 		} else if ((WIFEXITED (status)) && (WEXITSTATUS (status)) && (WEXITSTATUS(status) < 255)) {
-			msg = g_strdup (_("<b>Old password is incorret, please retype it</b>"));
+
+			msg = g_strdup_printf ("<b>%s</b>", _("Old password is incorrect, please retype it"));
 
 			gtk_label_set_markup (GTK_LABEL (wmessage), msg);
 			g_free (msg);
@@ -108,7 +109,7 @@ wait_child (PasswordDialog *pdialog)
 
 			return FALSE;
 		} else if ((WIFEXITED (status)) && (WEXITSTATUS (status)) && (WEXITSTATUS (status) == 255)) {
-			msg = g_strdup (_("Symtem error has occurred"));
+			msg = g_strdup (_("System error has occurred"));
 			details = g_strdup (_("Could not run /usr/bin/passwd"));
 			title = g_strdup (_("Unable to launch backend"));
 		} else {
@@ -376,7 +377,7 @@ passdlg_button_clicked_cb (GtkDialog *widget, gint response_id, PasswordDialog *
 		g_source_remove (pdialog->timeout_id);
 
 		if (ret == -1) {
-			msg = g_strdup (_("<b>Old password is incorret, please retype it</b>"));
+			msg = g_strdup_printf ("<b>%s</b>", _("Old password is incorrect, please retype it"));
 			gtk_label_set_markup (GTK_LABEL (wmessage), msg);
 			g_free (msg);
 
