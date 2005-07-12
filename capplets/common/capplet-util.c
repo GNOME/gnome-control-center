@@ -375,7 +375,6 @@ capplet_set_icon (GtkWidget *window, char const *icon_file_name)
 	}
 
 	g_free (tmp);
-	g_object_unref (icon_theme);
 
 	if (icon_pixbuf == NULL) {
 		/* Then we fallback to the control center icon location */
