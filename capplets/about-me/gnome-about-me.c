@@ -36,8 +36,8 @@
 
 #include "capplet-util.h"
 
-#define MAX_HEIGHT 200
-#define MAX_WIDTH  200
+#define MAX_HEIGHT 150
+#define MAX_WIDTH  150
 
 typedef struct {
 	EContact 	*contact;
