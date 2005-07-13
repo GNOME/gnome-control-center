@@ -146,41 +146,21 @@ e_image_chooser_class_init (EImageChooserClass *klass)
 	object_class->dispose = e_image_chooser_dispose;
 }
 
-#if UI_CHANGE_OK
-static void
-browse_for_image_cb (GtkWidget *button, gpointer data)
-{
-}
-#endif
-
 static void
 e_image_chooser_init (EImageChooser *chooser)
 {
 	EImageChooserPrivate *priv;
-	GtkWidget *alignment;
 
 	priv = chooser->priv = g_new0 (EImageChooserPrivate, 1);
 
-	alignment = gtk_alignment_new (0, 0, 0, 0);
 	priv->frame = gtk_frame_new ("");
 	priv->image = gtk_image_new ();
 
-	gtk_container_add (GTK_CONTAINER (alignment), priv->image);
-
-#if UI_CHANGE_OK
-	priv->browse_button = gtk_button_new_with_label (_("Choose Image"));
-#endif
-
 	gtk_frame_set_shadow_type (GTK_FRAME (priv->frame), GTK_SHADOW_NONE);
 
-	gtk_container_add (GTK_CONTAINER (priv->frame), alignment);
+	gtk_container_add (GTK_CONTAINER (priv->frame), priv->image);
 	gtk_box_set_homogeneous (GTK_BOX (chooser), FALSE);
 	gtk_box_pack_start (GTK_BOX (chooser), priv->frame, TRUE, TRUE, 0);
-#if UI_CHANGE_OK
-	gtk_box_pack_start (GTK_BOX (chooser), priv->browse_button, FALSE, FALSE, 0);
-
-	g_signal_connect (priv->browse_button, "clicked", G_CALLBACK (browse_for_image_cb), NULL);
-#endif
 
 	gtk_drag_dest_set (priv->image, 0, image_drag_types, num_image_drag_types, GDK_ACTION_COPY);
 	g_signal_connect (priv->image,
@@ -193,9 +173,6 @@ e_image_chooser_init (EImageChooser *chooser)
 			  "drag_data_received", G_CALLBACK (image_drag_data_received_cb), chooser);
 
 	gtk_widget_show_all (priv->frame);
-#if UI_CHANGE_OK
-	gtk_widget_show (priv->browse_button);
-#endif
 
 	/* we default to being editable */
 	priv->editable = TRUE;
@@ -393,6 +370,7 @@ image_drag_data_received_cb (GtkWidget *widget,
 			     GtkSelectionData *selection_data,
 			     guint info, guint time, EImageChooser *chooser)
 {
+
 	char *target_type;
 	gboolean handled = FALSE;
 
@@ -411,41 +389,28 @@ image_drag_data_received_cb (GtkWidget *widget,
 		else
 			uri = g_strdup (selection_data->data);
 
-		printf ("uri == %s\n", uri);
-
 		result = gnome_vfs_open (&handle, uri, GNOME_VFS_OPEN_READ);
 		if (result == GNOME_VFS_OK) {
+
 			result = gnome_vfs_get_file_info_from_handle (handle, &info, GNOME_VFS_FILE_INFO_DEFAULT);
 			if (result == GNOME_VFS_OK) {
-				GnomeVFSFileSize num_left;
 				GnomeVFSFileSize num_read;
-				GnomeVFSFileSize total_read;
 
-				printf ("file size = %d\n", (int)info.size);
 				buf = g_malloc (info.size);
 
-				num_left = info.size;
-				total_read = 0;
-
-				while ((result = gnome_vfs_read (handle, buf + total_read, num_left, &num_read)) == GNOME_VFS_OK) {
-					num_left -= num_read;
-					total_read += num_read;
-				}
-
-				printf ("read %d bytes\n", (int)total_read);
-				if (set_image_from_data (chooser, buf, total_read)) {
-					handled = TRUE;
-				}
-				else {
-					/* XXX we should pop up a warning dialog here */
+				result = gnome_vfs_read (handle, buf, info.size, &num_read);
+				if (result == GNOME_VFS_OK) {
+					if (set_image_from_data (chooser, buf, num_read))
+						handled = TRUE;
+					else
+						g_free (buf);
+				} else {
 					g_free (buf);
 				}
 			}
 
 			gnome_vfs_close (handle);
-		}
-		else {
-			printf ("gnome_vfs_open failed (%s)\n", gnome_vfs_result_to_string (result));
+
 		}
 
 		g_free (uri);

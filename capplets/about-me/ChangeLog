@@ -1,5 +1,24 @@
 2005-07-13  Diego Gonzalez  <diego@pemas.net>
 
+	* e-image-chooser.c (image_drag_data_received_cb): fix image loading
+	  when draging an image on the image button, it was getting hanged.
+	  (e_image_chooser_init): fix the positioning of the image on the button, 
+	  still not perfect but a bit better.
+	  
+	  Also included in this patch are several cleanups to the code.
+
+	  Fixes bug 309628 and partially bugs 309629 and 309387
+
+	* gnome-about-me.c (about_me_setup_dialog): connect to the changed
+	  signal on the image-chooser, so that we are notified when the
+	  user changes the image using DnD.
+	  (about_me_image_changed_cb): new function, it is called whenever 
+	  the user changes the image using D&D.
+
+	  Mark two strings for translation.
+	  
+2005-07-13  Diego Gonzalez  <diego@pemas.net>
+
 	* gnome-about-me.c (about_me_button_clicked_cb): if 
 	  the saving timeout has not yet expired and we click 
 	  exit then commit the changes so that we don't loose 

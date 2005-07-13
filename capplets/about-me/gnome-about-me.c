@@ -36,6 +36,9 @@
 
 #include "capplet-util.h"
 
+#define MAX_HEIGHT 200
+#define MAX_WIDTH  200
+
 typedef struct {
 	EContact 	*contact;
 	EBook    	*book;
@@ -448,11 +451,11 @@ about_me_update_photo (GnomeAboutMe *me)
 		height = gdk_pixbuf_get_height (pixbuf);
 		width = gdk_pixbuf_get_width (pixbuf);
 		
-		if (height > width && height > 200) {
-			scale = (float)200/height;
+		if (height >= width && height > MAX_HEIGHT) {
+			scale = (float)MAX_HEIGHT/height;
 			do_scale = TRUE;
-		} else if (width > height && width > 200) {
-			scale = (float)200/width;
+		} else if (width > height && width > MAX_WIDTH) {
+			scale = (float)MAX_WIDTH/width;
 			do_scale = TRUE;
 		}
 
@@ -461,7 +464,8 @@ about_me_update_photo (GnomeAboutMe *me)
 			gsize scaled_length;
 			
 			scaled = gdk_pixbuf_scale_simple (pixbuf, width*scale, height*scale, GDK_INTERP_BILINEAR);
-			gdk_pixbuf_save_to_buffer (scaled, &scaled_data, &scaled_length, "png", NULL, NULL);
+			gdk_pixbuf_save_to_buffer (scaled, &scaled_data, &scaled_length, "png", NULL, 
+						   "compression", "9", NULL);
 			
 			g_free (data);
 			data = scaled_data;
@@ -543,7 +547,6 @@ about_me_image_clicked_cb (GtkWidget *button, GnomeAboutMe *me)
 	dialog = me->dialog;
 	image_chooser = WID ("image-chooser");
 
-
 	chooser_dialog = gtk_file_chooser_dialog_new (_("Select Image"), GTK_WINDOW (WID ("about-me-dialog")),
 							GTK_FILE_CHOOSER_ACTION_OPEN,
 							GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
@@ -576,7 +579,13 @@ about_me_image_clicked_cb (GtkWidget *button, GnomeAboutMe *me)
 	gtk_widget_destroy (chooser_dialog);
 }
 
-
+static void
+about_me_image_changed_cb (GtkWidget *widget, GnomeAboutMe *me)
+{
+	me->have_image = TRUE;
+	me->image_changed = TRUE;
+	about_me_update_photo (me);
+}
 
 /* About Me Dialog Callbacks */
 
@@ -740,20 +749,24 @@ about_me_setup_dialog (void)
 	gtk_label_set_text (GTK_LABEL (widget), user);
 
 	if (tok[0] == NULL || strlen (tok[0]) == 0) {
-		str = g_strdup_printf ("About %s", user);
+		str = g_strdup_printf (_("About %s"), user);
 	} else {
-		str = g_strdup_printf ("About %s", tok[0]);
+		str = g_strdup_printf (_("About %s"), tok[0]);
 	}
 	gtk_window_set_title (GTK_WINDOW (main_dialog), str);
 	g_free (str);
 
-	widget = WID("password");
+	widget = WID ("password");
 	g_signal_connect (G_OBJECT (widget), "clicked",
 			  G_CALLBACK (about_me_passwd_clicked_cb), me);
 
 	widget = WID ("button-image");
 	g_signal_connect (G_OBJECT (widget), "clicked",
 			  G_CALLBACK (about_me_image_clicked_cb), me);
+
+	widget = WID ("image-chooser");
+	g_signal_connect (G_OBJECT (widget), "changed",
+			  G_CALLBACK (about_me_image_changed_cb), me);
 
 	about_me_load_info (me);
 
