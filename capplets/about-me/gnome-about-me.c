@@ -147,10 +147,13 @@ static void
 about_me_commit (GnomeAboutMe *me)
 {
 	EContactName *name;
-	char *fileas;
-	char *strings[4], **stringptr;
-	GError *error = NULL;
+	GError *error;
 
+	char *strings[4], **stringptr;
+	char *fileas;
+
+	name = NULL;
+	error = NULL;
 
 	if (me->create_self) {
 		if (me->username == NULL)
@@ -412,8 +415,8 @@ about_me_update_photo (GnomeAboutMe *me)
 	gchar         *file;
 	FILE	      *fp;
 
-	char 	      *data;
-	int 	       length;
+	gchar 	      *data;
+	gsize 	       length;
 
 	dialog = me->dialog;
 
@@ -431,7 +434,7 @@ about_me_update_photo (GnomeAboutMe *me)
 		/* Before updating the image in EDS scale it to a reasonable size
 		   so that the user doesn't get an application that does not respond
 		   or that takes 100% CPU */
-		gdk_pixbuf_loader_write (loader, data, length, NULL);
+		gdk_pixbuf_loader_write (loader, (guchar *)data, length, NULL);
 		
 		pixbuf = gdk_pixbuf_loader_get_pixbuf (loader);
 		
@@ -455,7 +458,7 @@ about_me_update_photo (GnomeAboutMe *me)
 
 		if (do_scale) {
 			char *scaled_data = NULL;
-			int   scaled_length;
+			gsize scaled_length;
 			
 			scaled = gdk_pixbuf_scale_simple (pixbuf, width*scale, height*scale, GDK_INTERP_BILINEAR);
 			gdk_pixbuf_save_to_buffer (scaled, &scaled_data, &scaled_length, "png", NULL, NULL);
@@ -608,6 +611,11 @@ about_me_button_clicked_cb (GtkDialog *dialog, gint response_id, GnomeAboutMe *m
 	if (response_id == GTK_RESPONSE_HELP)
 		g_print ("Help goes here");
 	else {
+		if (me->commit_timeout_id) {
+			g_source_remove (me->commit_timeout_id);
+			about_me_commit (me);
+		}
+
 		e_contact_address_free (me->addr1);
 		e_contact_address_free (me->addr2);
 

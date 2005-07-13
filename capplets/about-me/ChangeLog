@@ -1,3 +1,12 @@
+2005-07-13  Diego Gonzalez  <diego@pemas.net>
+
+	* gnome-about-me.c (about_me_button_clicked_cb): if 
+	  the saving timeout has not yet expired and we click 
+	  exit then commit the changes so that we don't loose 
+	  any data.
+
+	  Fixes bug 309737.
+
 2005-07-12  Diego Gonzalez  <diego@pemas.net>
 
 	* gnome-about-me.png: this file is no longer used.
