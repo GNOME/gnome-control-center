@@ -69,11 +69,17 @@ GnomeWPInfo * gnome_wp_info_new (const gchar * uri,
 						    escaped_path,
 						    info->mtime);
     if (new->thumburi == NULL) {
+      gchar * md5sum;
+
+      md5sum = gnome_thumbnail_md5 (escaped_path);
+
       new->thumburi = g_strconcat (g_get_home_dir (),
 				   "/.thumbnails/normal/",
-				   escaped_path,
+				   md5sum,
 				   ".png",
 				   NULL);
+
+      g_free (md5sum);
     }
     new->name = g_strdup (info->name);
     new->mime_type = g_strdup (info->mime_type);
