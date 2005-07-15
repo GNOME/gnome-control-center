@@ -106,6 +106,9 @@ static void gnome_wp_xml_load_xml (GnomeWPCapplet * capplet,
 
   wplist = xmlParseFile (filename);
 
+  if (!wplist)
+    return;
+
   root = xmlDocGetRootElement (wplist);
 
   for (list = root->children; list != NULL; list = list->next) {
