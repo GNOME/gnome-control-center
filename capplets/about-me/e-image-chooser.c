@@ -22,6 +22,7 @@
 
 #include <string.h>
 
+#include <glib-object.h>
 #include <glib/gi18n.h>
 #include <gtk/gtkalignment.h>
 #include <gtk/gtkframe.h>
@@ -32,7 +33,6 @@
 #include <libgnomevfs/gnome-vfs-ops.h>
 
 #include "e-image-chooser.h"
-#include "e-util-marshal.h"
 
 struct _EImageChooserPrivate {
 
@@ -136,7 +136,7 @@ e_image_chooser_class_init (EImageChooserClass *klass)
 			      G_SIGNAL_RUN_FIRST,
 			      G_STRUCT_OFFSET (EImageChooserClass, changed),
 			      NULL, NULL,
-			      e_util_marshal_NONE__NONE,
+			      g_cclosure_marshal_VOID__VOID,
 			      GTK_TYPE_NONE, 0);
 
 	/*

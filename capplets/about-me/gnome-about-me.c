@@ -229,10 +229,10 @@ about_me_focus_out (GtkWidget *widget, GdkEventFocus *event, GnomeAboutMe *me)
 		iter_end = iter_start;
 		gtk_text_iter_forward_to_end (&iter_end);
 		str = gtk_text_iter_get_text (&iter_start, &iter_end);
+	} else {
+		str = "";
 	}
 
-	str = str ? str : "";
-	
 	/* FIXME: i'm getting an empty address field in evolution */
 	if (i >= ADDRESS_HOME && i < ADDRESS_WORK) {
 		about_me_set_address_field (me->addr1, ids[i].cid, str);
@@ -273,10 +273,11 @@ get_user_login (void)
 static gchar *
 about_me_get_address_field (EContactAddress *addr, guint cid)
 {
-	gchar *str = NULL;
+	gchar *str;
 	
-	if (addr == NULL)
+	if (addr == NULL) {
 		return NULL;
+	}
 
 	switch (cid) {
 		case ADDRESS_STREET:
@@ -296,6 +297,9 @@ about_me_get_address_field (EContactAddress *addr, guint cid)
 			break;
 		case ADDRESS_COUNTRY:
 			str = addr->country;
+			break;
+		default:
+			str = NULL;
 			break;
 	}
 
@@ -666,6 +670,11 @@ about_me_setup_dialog (void)
 	dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/gnome-about-me.glade", 
 				"about-me-dialog", NULL);
 
+	if (dialog == NULL) {
+		g_error ("Unable to load glade file.");
+		exit (1);
+	}
+
 	me->dialog = dialog;
 
 	/* Connect the close button signal */
@@ -696,18 +705,21 @@ about_me_setup_dialog (void)
 		me->create_self = TRUE;
 		
 		me->contact = e_contact_new ();
-		g_print ("%s\n", error->message);
 
+		g_warning ("%s\n", error->message);
 		g_clear_error (&error);
 
 		if (me->book == NULL) {
 			me->book = e_book_new_system_addressbook (&error);
-			if (me->book == NULL)
-				g_print ("error message: %s\n", error->message);
+			if (me->book == NULL || error != NULL) {
+				g_error ("%s\n", error->message);
+				g_clear_error (&error);
+			}
 
 			if (e_book_open (me->book, FALSE, NULL) == FALSE) {
 				about_me_error (GTK_WINDOW (main_dialog), 
 						_("Unable to open address book"));
+				g_clear_error (&error);
 			}
 		} 
 	}

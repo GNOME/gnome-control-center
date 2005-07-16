@@ -11,25 +11,11 @@ gnome_about_me_SOURCES = 		\
 	eel-alert-dialog.c		\
 	eel-alert-dialog.h		\
 	eel-gtk-macros.h		\
-	e-util-marshal.c		\
-	e-util-marshal.h		\
 	gnome-about-me-password.c	\
 	gnome-about-me-password.h	\
 	e-image-chooser.c		\
 	e-image-chooser.h		\
 	gnome-about-me.c
-
-e-util-marshal.h: e-util-marshal.list
-	( @GLIB_GENMARSHAL@ --prefix=e_util_marshal $(srcdir)/e-util-marshal.list \
-	 --header > util-marshal.tmp \
-			&& mv util-marshal.tmp e-util-marshal.h ) \
-		|| ( rm -f util-marshal.tmp && exit 1 )
-
-e-util-marshal.c: e-util-marshal.h
-	( @GLIB_GENMARSHAL@ --prefix=e_util_marshal $(srcdir)/e-util-marshal.list \
-	 --body > util-marshal.tmp \
-			&& mv util-marshal.tmp e-util-marshal.c ) \
-		|| ( rm -f util-marshal.tmp && exit 1 )
 
 @INTLTOOL_DESKTOP_RULE@
 
@@ -42,4 +28,4 @@ Glade_DATA = gnome-about-me.glade
 
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS) $(LIBEBOOK_CFLAGS)
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA)
-EXTRA_DIST = e-util-marshal.list $(Glade_DATA) $(pixmap_DATA)
+EXTRA_DIST = $(Glade_DATA) $(pixmap_DATA)

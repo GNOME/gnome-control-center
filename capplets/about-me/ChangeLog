@@ -1,3 +1,15 @@
+2005-07-16  Diego Gonzalez  <diego@pemas.net>
+
+        * Makefile.am: Don't build e-util-marshal, as we can use
+          the glib marshallers.
+        * e-image-chooser.c: (e_image_chooser_class_init): Use standard
+          glib marshallers.
+        * gnome-about-me.c: (about_me_focus_out),
+          (about_me_get_address_field), (about_me_setup_dialog): Add some
+          error checking.
+
+        Patch by James Bowes.
+
 2005-07-13  Sebastien Bacher  <seb128@debian.org>
 
 	* .cvsignore: new file.
