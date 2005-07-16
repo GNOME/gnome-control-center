@@ -1,3 +1,15 @@
+2005-07-12  Dennis Cranston <dennis_cranston at yahoo com>
+
+	* gnome-about-me-password.c (passdlg_check_password_timeout_cb):
+	  Set a default message. Use g_strconcat() instead of g_strdup()
+	  and mark strings for translation; (gnome_about_me_password):
+	  Set the window icon.
+
+	* gnome-about-me.glade:  Rearrange the change password dialog.
+	  Relabel the ok button to 'Change Password'.
+
+	Closes bug 310307
+
 2005-07-16  Diego Gonzalez  <diego@pemas.net>
 
         * Makefile.am: Don't build e-util-marshal, as we can use

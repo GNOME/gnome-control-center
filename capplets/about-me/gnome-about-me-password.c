@@ -431,16 +431,18 @@ passdlg_check_password_timeout_cb (PasswordDialog *pdialog)
 	if (strlen (password) == 0 || strlen (retyped_password) == 0) {
 		gtk_image_set_from_file (GTK_IMAGE (wbulb),
 					 GNOMECC_DATA_DIR "/pixmaps/gnome-about-me-bulb-off.png");
-		gtk_label_set_markup (GTK_LABEL (wmessage), NULL);
+		msg = g_strconcat ("<b>", _("Please type the passwords."), "</b>", NULL);
+		gtk_label_set_markup (GTK_LABEL (wmessage), msg);
+		g_free (msg);
 
 		return FALSE;
 	}
 
 	if (strcmp (password, retyped_password) != 0) {
-		msg = g_strdup ("<b>Please type the password again, it is wrong.</b>");
+		msg = g_strconcat ("<b>", _("Please type the password again, it is wrong."), "</b>", NULL);
 		good_password = FALSE;
 	} else {
-		msg = g_strdup ("<b>Push on the ok button to change the password</b>");
+		msg = g_strconcat ("<b>", _("Click the Change Password button to change the password."), "</b>", NULL);
 		good_password = TRUE;
 	}
 
@@ -489,6 +491,7 @@ gnome_about_me_password (GtkWindow *parent)
 	pdialog->xml = dialog;
 
 	wpassdlg = WID ("change-password");
+	capplet_set_icon (wpassdlg, "user-info");
 	g_signal_connect (G_OBJECT (wpassdlg), "response",
 			  G_CALLBACK (passdlg_button_clicked_cb), pdialog);
 
