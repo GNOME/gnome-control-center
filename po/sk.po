@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-13 07:01+0200\n"
-"PO-Revision-Date: 2005-07-13 07:03+0200\n"
+"POT-Creation-Date: 2005-07-18 20:21+0200\n"
+"PO-Revision-Date: 2005-07-18 20:26+0200\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
@@ -54,7 +54,7 @@ msgid "Show more _details"
 msgstr "Zobraziť viac _podrobností"
 
 #: ../capplets/about-me/gnome-about-me.desktop.in.in.h:1
-#: ../capplets/about-me/gnome-about-me.glade.h:11
+#: ../capplets/about-me/gnome-about-me.glade.h:14
 msgid "About Me"
 msgstr "O mne"
 
@@ -62,25 +62,27 @@ msgstr "O mne"
 msgid "Set your personal information"
 msgstr "Nastaviť vaše osobné informácie"
 
-#: ../capplets/about-me/e-image-chooser.c:171
-msgid "Choose Image"
-msgstr "Zvoliť obrázok"
-
-#: ../capplets/about-me/gnome-about-me.c:544
+#: ../capplets/about-me/gnome-about-me.c:554
 msgid "Select Image"
 msgstr "Vybrať obrázok"
 
-#: ../capplets/about-me/gnome-about-me.c:548
+#: ../capplets/about-me/gnome-about-me.c:556
 msgid "No Image"
 msgstr "Bez obrázka"
 
-#: ../capplets/about-me/gnome-about-me.c:693
+#: ../capplets/about-me/gnome-about-me.c:721
 msgid "Unable to open address book"
 msgstr "Nepodarilo sa otvoriť adresár"
 
-#: ../capplets/about-me/gnome-about-me.c:704
+#: ../capplets/about-me/gnome-about-me.c:733
 msgid "Unknown login ID, the user database might be corrupted"
 msgstr "Neznáme prihlasovacie ID, databáza používateľov je možno poškodená"
+
+#: ../capplets/about-me/gnome-about-me.c:764
+#: ../capplets/about-me/gnome-about-me.c:766
+#, c-format
+msgid "About %s"
+msgstr "O %s"
 
 #: ../capplets/about-me/gnome-about-me-password.c:101
 #: ../capplets/about-me/gnome-about-me-password.c:380
@@ -104,177 +106,234 @@ msgstr "Nepodarilo sa spustiť pozadie"
 msgid "Unexpected error has occurred"
 msgstr "Vyskytla sa neočakávaná chyba"
 
+#: ../capplets/about-me/gnome-about-me-password.c:434
+msgid "Please type the passwords."
+msgstr "Prosím, zadajte heslá."
+
+#: ../capplets/about-me/gnome-about-me-password.c:442
+msgid "Please type the password again, it is wrong."
+msgstr "Prosím, zadajte heslo znova, je nesprávne."
+
+#: ../capplets/about-me/gnome-about-me-password.c:445
+msgid "Click the Change Password button to change the password."
+msgstr "Pre zmenu hesla kliknite na tlačidlo Zmeniť heslo."
+
 #: ../capplets/about-me/gnome-about-me.glade.h:1
 #: ../vfs-methods/themus/apply-font.glade.h:1
 msgid " "
 msgstr " "
 
 #: ../capplets/about-me/gnome-about-me.glade.h:2
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
+#: ../capplets/font/font-properties.glade.h:1
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:1
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:1
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:1
+msgid "    "
+msgstr "    "
+
+#: ../capplets/about-me/gnome-about-me.glade.h:3
 msgid "<b>Email</b>"
 msgstr "<b>Elektronická pošta</b>"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:3
+#: ../capplets/about-me/gnome-about-me.glade.h:4
 msgid "<b>Home</b>"
 msgstr "<b>Domov</b>"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:4
+#: ../capplets/about-me/gnome-about-me.glade.h:5
 msgid "<b>Instant Messaging</b>"
 msgstr "<b>Priama komunikácia</b>"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:5
+#: ../capplets/about-me/gnome-about-me.glade.h:6
 msgid "<b>Job</b>"
 msgstr "<b>Zamestnanie</b>"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:6
+#: ../capplets/about-me/gnome-about-me.glade.h:7
+msgid "<b>Please type the passwords.</b>"
+msgstr "<b>Prosím, zadajte heslá.</b>"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:8
 msgid "<b>Telephone</b>"
 msgstr "<b>Telefón</b>"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:7
+#: ../capplets/about-me/gnome-about-me.glade.h:9
 msgid "<b>Web</b>"
 msgstr "<b>WWW</b>"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:8
+#: ../capplets/about-me/gnome-about-me.glade.h:10
 msgid "<b>Work</b>"
 msgstr "<b>Práca</b>"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:9
+#: ../capplets/about-me/gnome-about-me.glade.h:11
 msgid "A_IM/iChat:"
 msgstr "A_IM/iChat:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:10
+#: ../capplets/about-me/gnome-about-me.glade.h:12
+msgid "A_ddress:"
+msgstr "A_dresa:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:13
 msgid "A_ssistant:"
 msgstr "A_sistent:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:12
+#: ../capplets/about-me/gnome-about-me.glade.h:15
+msgid "Address"
+msgstr "A_dresa"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:16
 msgid "C_ity:"
 msgstr "M_esto:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:13
+#: ../capplets/about-me/gnome-about-me.glade.h:17
 msgid "C_ompany:"
 msgstr "Sp_oločnosť:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:14
+#: ../capplets/about-me/gnome-about-me.glade.h:18
 msgid "Cale_ndar:"
 msgstr "Kale_ndár:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:15
-msgid "Change Passwo_rd"
-msgstr "Zmeniť hes_lo"
+#: ../capplets/about-me/gnome-about-me.glade.h:19
+msgid "Change Passwo_rd..."
+msgstr "Zmeniť hes_lo..."
 
-#: ../capplets/about-me/gnome-about-me.glade.h:16
+#: ../capplets/about-me/gnome-about-me.glade.h:20
 msgid "Change Password"
 msgstr "Zmeniť heslo"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:17
+#: ../capplets/about-me/gnome-about-me.glade.h:21
+msgid "Ci_ty:"
+msgstr "Mes_to:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:22
 msgid "Co_untry:"
 msgstr "Kr_ajina:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:18
+#: ../capplets/about-me/gnome-about-me.glade.h:23
+msgid "Contact"
+msgstr "Kontakt"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:24
+msgid "Cou_ntry:"
+msgstr "Kraji_na:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:25
 msgid "Full Name"
 msgstr "Celé meno"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:19
+#: ../capplets/about-me/gnome-about-me.glade.h:26
+msgid "Hom_e:"
+msgstr "Dom_ov:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:27
 msgid "IC_Q:"
 msgstr "IC_Q:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:20
+#: ../capplets/about-me/gnome-about-me.glade.h:28
 msgid "M_SN:"
 msgstr "M_SN:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:21
-msgid "New Password:"
-msgstr "Nové heslo:"
+#: ../capplets/about-me/gnome-about-me.glade.h:29
+msgid "Old pa_ssword:"
+msgstr "Staré he_slo:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:22
-msgid "Old Password:"
-msgstr "Staré heslo:"
+#: ../capplets/about-me/gnome-about-me.glade.h:30
+msgid "P.O. _box:"
+msgstr "P.O. _Box:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:23
-msgid "P_O Box:"
-msgstr "P_O Box:"
+#: ../capplets/about-me/gnome-about-me.glade.h:31
+msgid "P._O. box:"
+msgstr "P._O. Box:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:24
-msgid "Retype New Password:"
-msgstr "Znova zadať nové heslo:"
+#: ../capplets/about-me/gnome-about-me.glade.h:32
+msgid "Personal Info"
+msgstr "Osobné informácie"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:25
-msgid "User Name:"
+#: ../capplets/about-me/gnome-about-me.glade.h:33
+msgid "State/Pro_vince:"
+msgstr "Štát/pro_vincia:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:34
+msgid "User name:"
 msgstr "Meno používateľa:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:26
-msgid "Web _Log:"
+#: ../capplets/about-me/gnome-about-me.glade.h:35
+msgid "Web _log:"
 msgstr "WWW _záznam:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:27
-msgid "Work _Fax:"
+#: ../capplets/about-me/gnome-about-me.glade.h:36
+msgid "Wor_k:"
+msgstr "_Práca:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:37
+msgid "Work _fax:"
 msgstr "_Fax do práce:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:28
-msgid "_Address"
-msgstr "_Adresa"
+#: ../capplets/about-me/gnome-about-me.glade.h:38
+msgid "Zip/_Postal code:"
+msgstr "_PSČ:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:29
+#: ../capplets/about-me/gnome-about-me.glade.h:39
 msgid "_Address:"
 msgstr "_Adresa:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:30
-msgid "_Contact"
-msgstr "_Kontakt"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:31
+#: ../capplets/about-me/gnome-about-me.glade.h:40
 msgid "_Department:"
 msgstr "_Oddelenie:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:32
+#: ../capplets/about-me/gnome-about-me.glade.h:41
 msgid "_Groupwise:"
 msgstr "_Skupina:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:33
-msgid "_Home Page:"
+#: ../capplets/about-me/gnome-about-me.glade.h:42
+msgid "_Home page:"
 msgstr "_Domovská stránka:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:34
+#: ../capplets/about-me/gnome-about-me.glade.h:43
 msgid "_Home:"
 msgstr "_Domov:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:35
+#: ../capplets/about-me/gnome-about-me.glade.h:44
 msgid "_Jabber:"
 msgstr "_Jabber:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:36
+#: ../capplets/about-me/gnome-about-me.glade.h:45
 msgid "_Manager:"
 msgstr "_Manažér:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:37
+#: ../capplets/about-me/gnome-about-me.glade.h:46
 msgid "_Mobile:"
 msgstr "_Mobil:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:38
-msgid "_Personal Info"
-msgstr "_Osobné informácie"
+#: ../capplets/about-me/gnome-about-me.glade.h:47
+msgid "_New password:"
+msgstr "_Nové heslo:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:39
+#: ../capplets/about-me/gnome-about-me.glade.h:48
 msgid "_Profession:"
 msgstr "_Profesia:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:40
+#: ../capplets/about-me/gnome-about-me.glade.h:49
+msgid "_Retype new password:"
+msgstr "_Znova zadať nové heslo:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:50
 msgid "_State/Province:"
 msgstr "_Štát/provincia:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:41
+#: ../capplets/about-me/gnome-about-me.glade.h:51
 msgid "_Title:"
 msgstr "_Nadpis:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:42
+#: ../capplets/about-me/gnome-about-me.glade.h:52
 msgid "_Work:"
 msgstr "_Práca:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:43
+#: ../capplets/about-me/gnome-about-me.glade.h:53
 msgid "_Yahoo:"
 msgstr "_Yahoo:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:44
-msgid "_Zip/Postal Code:"
+#: ../capplets/about-me/gnome-about-me.glade.h:54
+msgid "_Zip/Postal code:"
 msgstr "_PSČ:"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:1
@@ -394,18 +453,9 @@ msgstr ""
 "Tento systém asi nemá rozšírenie XKB. Funkcie pre sprístupnenie klávesnice "
 "nebudú fungovať."
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
-#: ../capplets/font/font-properties.glade.h:1
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:1
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:1
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:1
-msgid "    "
-msgstr "    "
-
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:1
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:2
-#: ../capplets/network/gnome-network-preferences.glade.h:2
 #: ../capplets/theme-switcher/theme-install.glade.h:1
 #: ../capplets/theme-switcher/theme-properties.glade.h:1
 msgid "*"
@@ -1865,6 +1915,10 @@ msgstr "Nastaviť predvoľby vášho sieťového proxy"
 msgid "      "
 msgstr "      "
 
+#: ../capplets/network/gnome-network-preferences.glade.h:2
+msgid "<b>D_irect internet connection</b>"
+msgstr "<b>Pr_iame pripojenie na internet</b>"
+
 #: ../capplets/network/gnome-network-preferences.glade.h:3
 msgid "<b>Ignore Host List</b>"
 msgstr "<b>Zoznam ignorovaných hostiteľov</b>"
@@ -1874,66 +1928,62 @@ msgid "<b>_Automatic proxy configuration</b>"
 msgstr "<b>_Automatické nastavenie proxy</b>"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:5
-msgid "<b>_Direct internet connection</b>"
-msgstr "<b>_Priame pripojenie na Internet</b>"
-
-#: ../capplets/network/gnome-network-preferences.glade.h:6
 msgid "<b>_Manual proxy configuration</b>"
 msgstr "<b>_Ručné nastavenie proxy</b>"
 
-#: ../capplets/network/gnome-network-preferences.glade.h:7
+#: ../capplets/network/gnome-network-preferences.glade.h:6
 msgid "<b>_Use authentication</b>"
 msgstr "<b>_Použiť prihlásenie</b>"
 
-#: ../capplets/network/gnome-network-preferences.glade.h:8
+#: ../capplets/network/gnome-network-preferences.glade.h:7
 msgid "Advanced Configuration"
 msgstr "Pokročilá konfigurácia"
 
-#: ../capplets/network/gnome-network-preferences.glade.h:9
+#: ../capplets/network/gnome-network-preferences.glade.h:8
 msgid "Autoconfiguration _URL:"
 msgstr "_URL pre automatické nastavenie:"
 
-#: ../capplets/network/gnome-network-preferences.glade.h:10
+#: ../capplets/network/gnome-network-preferences.glade.h:9
 msgid "HTTP Proxy Details"
 msgstr "Detaily proxy HTTP"
 
-#: ../capplets/network/gnome-network-preferences.glade.h:11
+#: ../capplets/network/gnome-network-preferences.glade.h:10
 msgid "H_TTP proxy:"
 msgstr "_HTTP proxy:"
 
-#: ../capplets/network/gnome-network-preferences.glade.h:12
+#: ../capplets/network/gnome-network-preferences.glade.h:11
 msgid "Network Proxy Preferences"
 msgstr "Predvoľby sieťového proxy"
 
-#: ../capplets/network/gnome-network-preferences.glade.h:13
+#: ../capplets/network/gnome-network-preferences.glade.h:12
 msgid "Port:"
 msgstr "Port:"
 
-#: ../capplets/network/gnome-network-preferences.glade.h:14
+#: ../capplets/network/gnome-network-preferences.glade.h:13
 msgid "Proxy Configuration"
 msgstr "Konfigurácia proxy"
 
-#: ../capplets/network/gnome-network-preferences.glade.h:15
+#: ../capplets/network/gnome-network-preferences.glade.h:14
 msgid "S_ocks host:"
 msgstr "Hostiteľ S_ocks:"
 
-#: ../capplets/network/gnome-network-preferences.glade.h:16
+#: ../capplets/network/gnome-network-preferences.glade.h:15
 msgid "U_sername:"
 msgstr "Meno po_užívateľa:"
 
-#: ../capplets/network/gnome-network-preferences.glade.h:17
+#: ../capplets/network/gnome-network-preferences.glade.h:16
 msgid "_Details"
 msgstr "_Detaily"
 
-#: ../capplets/network/gnome-network-preferences.glade.h:18
+#: ../capplets/network/gnome-network-preferences.glade.h:17
 msgid "_FTP proxy:"
 msgstr "_FTP proxy:"
 
-#: ../capplets/network/gnome-network-preferences.glade.h:19
+#: ../capplets/network/gnome-network-preferences.glade.h:18
 msgid "_Password:"
 msgstr "_Heslo:"
 
-#: ../capplets/network/gnome-network-preferences.glade.h:20
+#: ../capplets/network/gnome-network-preferences.glade.h:19
 msgid "_Secure HTTP proxy:"
 msgstr "_Secure HTTP proxy:"
 
