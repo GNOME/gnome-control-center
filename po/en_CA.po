@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-10 17:56-0400\n"
-"PO-Revision-Date: 2005-07-10 19:59-0400\n"
+"POT-Creation-Date: 2005-07-18 04:35-0400\n"
+"PO-Revision-Date: 2005-07-18 19:59-0400\n"
 "Last-Translator: Adam Weinberger <adamw@gnome.org>\n"
 "Language-Team: Canadian English <adamw@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -46,7 +46,7 @@ msgid "Show more _details"
 msgstr "Show more _details"
 
 #: capplets/about-me/gnome-about-me.desktop.in.in.h:1
-#: capplets/about-me/gnome-about-me.glade.h:11
+#: capplets/about-me/gnome-about-me.glade.h:14
 msgid "About Me"
 msgstr "About Me"
 
@@ -54,47 +54,61 @@ msgstr "About Me"
 msgid "Set your personal information"
 msgstr "Set your personal information"
 
-#: capplets/about-me/e-image-chooser.c:171
-msgid "Choose Image"
-msgstr "Choose Image"
-
-#: capplets/about-me/gnome-about-me.c:544
+#: capplets/about-me/gnome-about-me.c:554
 msgid "Select Image"
 msgstr "Select Image"
 
-#: capplets/about-me/gnome-about-me.c:548
+#: capplets/about-me/gnome-about-me.c:556
 msgid "No Image"
 msgstr "No Image"
 
-#: capplets/about-me/gnome-about-me.c:696
+#: capplets/about-me/gnome-about-me.c:721
 msgid "Unable to open address book"
 msgstr "Unable to open address book"
 
-#: capplets/about-me/gnome-about-me.c:707
+#: capplets/about-me/gnome-about-me.c:733
 msgid "Unknown login ID, the user database might be corrupted"
 msgstr "Unknown login ID; the user database might be corrupted"
 
-#: capplets/about-me/gnome-about-me-password.c:100
-#: capplets/about-me/gnome-about-me-password.c:379
-msgid "<b>Old password is incorret, please retype it</b>"
-msgstr "<b>Old password is incorrect. Please retype it</b>"
+#: capplets/about-me/gnome-about-me.c:764
+#: capplets/about-me/gnome-about-me.c:766
+#, c-format
+msgid "About %s"
+msgstr "About %s"
 
-#: capplets/about-me/gnome-about-me-password.c:111
-msgid "Symtem error has occurred"
-msgstr "Symtem error has occurred"
+#: capplets/about-me/gnome-about-me-password.c:101
+#: capplets/about-me/gnome-about-me-password.c:380
+msgid "Old password is incorrect, please retype it"
+msgstr "Old password is incorrect; please retype it"
 
 #: capplets/about-me/gnome-about-me-password.c:112
+msgid "System error has occurred"
+msgstr "System error has occurred"
+
+#: capplets/about-me/gnome-about-me-password.c:113
 msgid "Could not run /usr/bin/passwd"
 msgstr "Could not run /usr/bin/passwd"
 
-#: capplets/about-me/gnome-about-me-password.c:113
+#: capplets/about-me/gnome-about-me-password.c:114
 msgid "Unable to launch backend"
 msgstr "Unable to launch backend"
 
-#: capplets/about-me/gnome-about-me-password.c:115
 #: capplets/about-me/gnome-about-me-password.c:116
+#: capplets/about-me/gnome-about-me-password.c:117
 msgid "Unexpected error has occurred"
 msgstr "Unexpected error has occurred"
+
+#: capplets/about-me/gnome-about-me-password.c:434
+msgid "Please type the passwords."
+msgstr "Please type the passwords."
+
+#: capplets/about-me/gnome-about-me-password.c:442
+msgid "Please type the password again, it is wrong."
+msgstr "Incorrect password; please type the password again."
+
+#: capplets/about-me/gnome-about-me-password.c:445
+msgid "Click the Change Password button to change the password."
+msgstr "Click the Change Password button to change the password."
 
 #: capplets/about-me/gnome-about-me.glade.h:1
 #: vfs-methods/themus/apply-font.glade.h:1
@@ -102,172 +116,217 @@ msgid " "
 msgstr " "
 
 #: capplets/about-me/gnome-about-me.glade.h:2
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
+#: capplets/font/font-properties.glade.h:1
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:1
+#: capplets/mouse/gnome-mouse-properties.glade.h:1
+#: capplets/ui-properties/gnome-ui-properties.glade.h:1
+msgid "    "
+msgstr "    "
+
+#: capplets/about-me/gnome-about-me.glade.h:3
 msgid "<b>Email</b>"
 msgstr "<b>Email</b>"
 
-#: capplets/about-me/gnome-about-me.glade.h:3
+#: capplets/about-me/gnome-about-me.glade.h:4
 msgid "<b>Home</b>"
 msgstr "<b>Home</b>"
 
-#: capplets/about-me/gnome-about-me.glade.h:4
+#: capplets/about-me/gnome-about-me.glade.h:5
 msgid "<b>Instant Messaging</b>"
 msgstr "<b>Instant Messaging</b>"
 
-#: capplets/about-me/gnome-about-me.glade.h:5
+#: capplets/about-me/gnome-about-me.glade.h:6
 msgid "<b>Job</b>"
 msgstr "<b>Job</b>"
 
-#: capplets/about-me/gnome-about-me.glade.h:6
+#: capplets/about-me/gnome-about-me.glade.h:7
+msgid "<b>Please type the passwords.</b>"
+msgstr "<b>Please type the passwords.</b>"
+
+#: capplets/about-me/gnome-about-me.glade.h:8
 msgid "<b>Telephone</b>"
 msgstr "<b>Telephone</b>"
 
-#: capplets/about-me/gnome-about-me.glade.h:7
+#: capplets/about-me/gnome-about-me.glade.h:9
 msgid "<b>Web</b>"
 msgstr "<b>Web</b>"
 
-#: capplets/about-me/gnome-about-me.glade.h:8
+#: capplets/about-me/gnome-about-me.glade.h:10
 msgid "<b>Work</b>"
 msgstr "<b>Work</b>"
 
-#: capplets/about-me/gnome-about-me.glade.h:9
+#: capplets/about-me/gnome-about-me.glade.h:11
 msgid "A_IM/iChat:"
 msgstr "A_IM/iChat:"
 
-#: capplets/about-me/gnome-about-me.glade.h:10
+#: capplets/about-me/gnome-about-me.glade.h:12
+msgid "A_ddress:"
+msgstr "A_ddress:"
+
+#: capplets/about-me/gnome-about-me.glade.h:13
 msgid "A_ssistant:"
 msgstr "A_ssistant:"
 
-#: capplets/about-me/gnome-about-me.glade.h:12
+#: capplets/about-me/gnome-about-me.glade.h:15
+msgid "Address"
+msgstr "Address"
+
+#: capplets/about-me/gnome-about-me.glade.h:16
 msgid "C_ity:"
 msgstr "C_ity:"
 
-#: capplets/about-me/gnome-about-me.glade.h:13
+#: capplets/about-me/gnome-about-me.glade.h:17
 msgid "C_ompany:"
 msgstr "C_ompany:"
 
-#: capplets/about-me/gnome-about-me.glade.h:14
+#: capplets/about-me/gnome-about-me.glade.h:18
 msgid "Cale_ndar:"
 msgstr "Cale_ndar:"
 
-#: capplets/about-me/gnome-about-me.glade.h:15
-msgid "Change Passwo_rd"
-msgstr "Change Passwo_rd"
+#: capplets/about-me/gnome-about-me.glade.h:19
+msgid "Change Passwo_rd..."
+msgstr "Change Passwo_rd..."
 
-#: capplets/about-me/gnome-about-me.glade.h:16
+#: capplets/about-me/gnome-about-me.glade.h:20
 msgid "Change Password"
 msgstr "Change Password"
 
-#: capplets/about-me/gnome-about-me.glade.h:17
+#: capplets/about-me/gnome-about-me.glade.h:21
+msgid "Ci_ty:"
+msgstr "Ci_ty:"
+
+#: capplets/about-me/gnome-about-me.glade.h:22
 msgid "Co_untry:"
 msgstr "Co_untry:"
 
-#: capplets/about-me/gnome-about-me.glade.h:18
+#: capplets/about-me/gnome-about-me.glade.h:23
+msgid "Contact"
+msgstr "Contact"
+
+#: capplets/about-me/gnome-about-me.glade.h:24
+msgid "Cou_ntry:"
+msgstr "Cou_ntry:"
+
+#: capplets/about-me/gnome-about-me.glade.h:25
 msgid "Full Name"
 msgstr "Full Name"
 
-#: capplets/about-me/gnome-about-me.glade.h:19
+#: capplets/about-me/gnome-about-me.glade.h:26
+msgid "Hom_e:"
+msgstr "Hom_e:"
+
+#: capplets/about-me/gnome-about-me.glade.h:27
 msgid "IC_Q:"
 msgstr "IC_Q:"
 
-#: capplets/about-me/gnome-about-me.glade.h:20
+#: capplets/about-me/gnome-about-me.glade.h:28
 msgid "M_SN:"
 msgstr "M_SN:"
 
-#: capplets/about-me/gnome-about-me.glade.h:21
-msgid "New Password:"
-msgstr "New Password:"
-
-#: capplets/about-me/gnome-about-me.glade.h:22
-msgid "Old Password:"
-msgstr "Old Password:"
-
-#: capplets/about-me/gnome-about-me.glade.h:23
-msgid "P_O Box:"
-msgstr "P_O Box:"
-
-#: capplets/about-me/gnome-about-me.glade.h:24
-msgid "Retype New Password:"
-msgstr "Retype New Password:"
-
-#: capplets/about-me/gnome-about-me.glade.h:25
-msgid "User Name:"
-msgstr "User Name:"
-
-#: capplets/about-me/gnome-about-me.glade.h:26
-msgid "Web _Log:"
-msgstr "Web _Log:"
-
-#: capplets/about-me/gnome-about-me.glade.h:27
-msgid "Work _Fax:"
-msgstr "Work _Fax:"
-
-#: capplets/about-me/gnome-about-me.glade.h:28
-msgid "_Address"
-msgstr "_Address"
-
 #: capplets/about-me/gnome-about-me.glade.h:29
+msgid "Old pa_ssword:"
+msgstr "Old pa_ssword:"
+
+#: capplets/about-me/gnome-about-me.glade.h:30
+msgid "P.O. _box:"
+msgstr "P.O. _box:"
+
+#: capplets/about-me/gnome-about-me.glade.h:31
+msgid "P._O. box:"
+msgstr "P._O. box:"
+
+#: capplets/about-me/gnome-about-me.glade.h:32
+msgid "Personal Info"
+msgstr "Personal Info"
+
+#: capplets/about-me/gnome-about-me.glade.h:33
+msgid "State/Pro_vince:"
+msgstr "Pro_vince/State:"
+
+#: capplets/about-me/gnome-about-me.glade.h:34
+msgid "User name:"
+msgstr "User name:"
+
+#: capplets/about-me/gnome-about-me.glade.h:35
+msgid "Web _log:"
+msgstr "Web _log:"
+
+#: capplets/about-me/gnome-about-me.glade.h:36
+msgid "Wor_k:"
+msgstr "Wor_k:"
+
+#: capplets/about-me/gnome-about-me.glade.h:37
+msgid "Work _fax:"
+msgstr "Work _fax:"
+
+#: capplets/about-me/gnome-about-me.glade.h:38
+msgid "Zip/_Postal code:"
+msgstr "_Postal/Zip Code:"
+
+#: capplets/about-me/gnome-about-me.glade.h:39
 msgid "_Address:"
 msgstr "_Address:"
 
-#: capplets/about-me/gnome-about-me.glade.h:30
-msgid "_Contact"
-msgstr "_Contact"
-
-#: capplets/about-me/gnome-about-me.glade.h:31
+#: capplets/about-me/gnome-about-me.glade.h:40
 msgid "_Department:"
 msgstr "_Department:"
 
-#: capplets/about-me/gnome-about-me.glade.h:32
+#: capplets/about-me/gnome-about-me.glade.h:41
 msgid "_Groupwise:"
 msgstr "_Groupwise:"
 
-#: capplets/about-me/gnome-about-me.glade.h:33
-msgid "_Home Page:"
-msgstr "_Home Page:"
+#: capplets/about-me/gnome-about-me.glade.h:42
+msgid "_Home page:"
+msgstr "_Home page:"
 
-#: capplets/about-me/gnome-about-me.glade.h:34
+#: capplets/about-me/gnome-about-me.glade.h:43
 msgid "_Home:"
 msgstr "_Home:"
 
-#: capplets/about-me/gnome-about-me.glade.h:35
+#: capplets/about-me/gnome-about-me.glade.h:44
 msgid "_Jabber:"
 msgstr "_Jabber:"
 
-#: capplets/about-me/gnome-about-me.glade.h:36
+#: capplets/about-me/gnome-about-me.glade.h:45
 msgid "_Manager:"
 msgstr "_Manager:"
 
-#: capplets/about-me/gnome-about-me.glade.h:37
+#: capplets/about-me/gnome-about-me.glade.h:46
 msgid "_Mobile:"
 msgstr "_Mobile:"
 
-#: capplets/about-me/gnome-about-me.glade.h:38
-msgid "_Personal Info"
-msgstr "_Personal Info"
+#: capplets/about-me/gnome-about-me.glade.h:47
+msgid "_New password:"
+msgstr "_New password:"
 
-#: capplets/about-me/gnome-about-me.glade.h:39
+#: capplets/about-me/gnome-about-me.glade.h:48
 msgid "_Profession:"
 msgstr "_Profession:"
 
-#: capplets/about-me/gnome-about-me.glade.h:40
+#: capplets/about-me/gnome-about-me.glade.h:49
+msgid "_Retype new password:"
+msgstr "_Retype new password:"
+
+#: capplets/about-me/gnome-about-me.glade.h:50
 msgid "_State/Province:"
 msgstr "_State/Province:"
 
-#: capplets/about-me/gnome-about-me.glade.h:41
+#: capplets/about-me/gnome-about-me.glade.h:51
 msgid "_Title:"
 msgstr "_Title:"
 
-#: capplets/about-me/gnome-about-me.glade.h:42
+#: capplets/about-me/gnome-about-me.glade.h:52
 msgid "_Work:"
 msgstr "_Work:"
 
-#: capplets/about-me/gnome-about-me.glade.h:43
+#: capplets/about-me/gnome-about-me.glade.h:53
 msgid "_Yahoo:"
 msgstr "_Yahoo:"
 
-#: capplets/about-me/gnome-about-me.glade.h:44
-msgid "_Zip/Postal Code:"
-msgstr "_Zip/Postal Code:"
+#: capplets/about-me/gnome-about-me.glade.h:54
+msgid "_Zip/Postal code:"
+msgstr "Postal/_Zip code:"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:1
 msgid "<b>Applications</b>"
@@ -388,18 +447,9 @@ msgstr ""
 "This system does not seem to have the XKB extension.  The keyboard "
 "accessibility features will not operate without it."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
-#: capplets/font/font-properties.glade.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:1
-#: capplets/mouse/gnome-mouse-properties.glade.h:1
-#: capplets/ui-properties/gnome-ui-properties.glade.h:1
-msgid "    "
-msgstr "    "
-
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:1
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:2
-#: capplets/network/gnome-network-preferences.glade.h:2
 #: capplets/theme-switcher/theme-install.glade.h:1
 #: capplets/theme-switcher/theme-properties.glade.h:1
 msgid "*"
@@ -582,7 +632,7 @@ msgstr "pixels/second"
 #. set the timeout value  label with correct value of timeout
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
 #: capplets/mouse/gnome-mouse-properties.c:131
-#: capplets/mouse/gnome-mouse-properties.c:862
+#: capplets/mouse/gnome-mouse-properties.c:860
 #: capplets/mouse/gnome-mouse-properties.glade.h:28
 #: capplets/windows/gnome-window-properties.glade.h:10
 msgid "seconds"
@@ -704,7 +754,7 @@ msgstr "Just apply settings and quit"
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:765
 #: capplets/keyboard/gnome-keyboard-properties.c:225
-#: capplets/mouse/gnome-mouse-properties.c:998
+#: capplets/mouse/gnome-mouse-properties.c:996
 #: capplets/sound/sound-properties-capplet.c:244
 msgid "Retrieve and store legacy settings"
 msgstr "Retrieve and store legacy settings"
@@ -1670,59 +1720,59 @@ msgstr "minutes"
 msgid "Set your keyboard preferences"
 msgstr "Set your keyboard preferences"
 
-#: capplets/mouse/gnome-mouse-properties.c:551
+#: capplets/mouse/gnome-mouse-properties.c:549
 msgid "Unknown Cursor"
 msgstr "Unknown Cursor"
 
-#: capplets/mouse/gnome-mouse-properties.c:738
+#: capplets/mouse/gnome-mouse-properties.c:736
 msgid "Default Cursor"
 msgstr "Default Cursor"
 
-#: capplets/mouse/gnome-mouse-properties.c:739
+#: capplets/mouse/gnome-mouse-properties.c:737
 msgid "Default Cursor - Current"
 msgstr "Default Cursor - Current"
 
-#: capplets/mouse/gnome-mouse-properties.c:740
+#: capplets/mouse/gnome-mouse-properties.c:738
 msgid "The default cursor that ships with X"
 msgstr "The default cursor that ships with X"
 
-#: capplets/mouse/gnome-mouse-properties.c:744
+#: capplets/mouse/gnome-mouse-properties.c:742
 msgid "White Cursor"
 msgstr "White Cursor"
 
-#: capplets/mouse/gnome-mouse-properties.c:745
+#: capplets/mouse/gnome-mouse-properties.c:743
 msgid "White Cursor - Current"
 msgstr "White Cursor - Current"
 
-#: capplets/mouse/gnome-mouse-properties.c:746
+#: capplets/mouse/gnome-mouse-properties.c:744
 msgid "The default cursor inverted"
 msgstr "The default cursor inverted"
 
-#: capplets/mouse/gnome-mouse-properties.c:750
+#: capplets/mouse/gnome-mouse-properties.c:748
 msgid "Large Cursor"
 msgstr "Large Cursor"
 
-#: capplets/mouse/gnome-mouse-properties.c:751
+#: capplets/mouse/gnome-mouse-properties.c:749
 msgid "Large Cursor - Current"
 msgstr "Large Cursor - Current"
 
-#: capplets/mouse/gnome-mouse-properties.c:752
+#: capplets/mouse/gnome-mouse-properties.c:750
 msgid "Large version of normal cursor"
 msgstr "Large version of normal cursor"
 
-#: capplets/mouse/gnome-mouse-properties.c:756
+#: capplets/mouse/gnome-mouse-properties.c:754
 msgid "Large White Cursor - Current"
 msgstr "Large White Cursor - Current"
 
-#: capplets/mouse/gnome-mouse-properties.c:757
+#: capplets/mouse/gnome-mouse-properties.c:755
 msgid "Large White Cursor"
 msgstr "Large White Cursor"
 
-#: capplets/mouse/gnome-mouse-properties.c:758
+#: capplets/mouse/gnome-mouse-properties.c:756
 msgid "Large version of white cursor"
 msgstr "Large version of white cursor"
 
-#: capplets/mouse/gnome-mouse-properties.c:952
+#: capplets/mouse/gnome-mouse-properties.c:950
 msgid "Cursor Theme"
 msgstr "Cursor Theme"
 
@@ -1854,6 +1904,10 @@ msgstr "Set your network proxy preferences"
 msgid "      "
 msgstr "      "
 
+#: capplets/network/gnome-network-preferences.glade.h:2
+msgid "<b>D_irect internet connection</b>"
+msgstr "<b>D_irect internet connection</b>"
+
 #: capplets/network/gnome-network-preferences.glade.h:3
 msgid "<b>Ignore Host List</b>"
 msgstr "<b>Ignore Host List</b>"
@@ -1863,66 +1917,62 @@ msgid "<b>_Automatic proxy configuration</b>"
 msgstr "<b>_Automatic proxy configuration</b>"
 
 #: capplets/network/gnome-network-preferences.glade.h:5
-msgid "<b>_Direct internet connection</b>"
-msgstr "<b>_Direct internet connection</b>"
-
-#: capplets/network/gnome-network-preferences.glade.h:6
 msgid "<b>_Manual proxy configuration</b>"
 msgstr "<b>_Manual proxy configuration</b>"
 
-#: capplets/network/gnome-network-preferences.glade.h:7
+#: capplets/network/gnome-network-preferences.glade.h:6
 msgid "<b>_Use authentication</b>"
 msgstr "<b>_Use authentication</b>"
 
-#: capplets/network/gnome-network-preferences.glade.h:8
+#: capplets/network/gnome-network-preferences.glade.h:7
 msgid "Advanced Configuration"
 msgstr "Advanced Configuration"
 
-#: capplets/network/gnome-network-preferences.glade.h:9
+#: capplets/network/gnome-network-preferences.glade.h:8
 msgid "Autoconfiguration _URL:"
 msgstr "Autoconfiguration _URL:"
 
-#: capplets/network/gnome-network-preferences.glade.h:10
+#: capplets/network/gnome-network-preferences.glade.h:9
 msgid "HTTP Proxy Details"
 msgstr "HTTP Proxy Details"
 
-#: capplets/network/gnome-network-preferences.glade.h:11
+#: capplets/network/gnome-network-preferences.glade.h:10
 msgid "H_TTP proxy:"
 msgstr "H_TTP proxy:"
 
-#: capplets/network/gnome-network-preferences.glade.h:12
+#: capplets/network/gnome-network-preferences.glade.h:11
 msgid "Network Proxy Preferences"
 msgstr "Network Proxy Preferences"
 
-#: capplets/network/gnome-network-preferences.glade.h:13
+#: capplets/network/gnome-network-preferences.glade.h:12
 msgid "Port:"
 msgstr "Port:"
 
-#: capplets/network/gnome-network-preferences.glade.h:14
+#: capplets/network/gnome-network-preferences.glade.h:13
 msgid "Proxy Configuration"
 msgstr "Proxy Configuration"
 
-#: capplets/network/gnome-network-preferences.glade.h:15
+#: capplets/network/gnome-network-preferences.glade.h:14
 msgid "S_ocks host:"
 msgstr "S_ocks host:"
 
-#: capplets/network/gnome-network-preferences.glade.h:16
+#: capplets/network/gnome-network-preferences.glade.h:15
 msgid "U_sername:"
 msgstr "U_sername:"
 
-#: capplets/network/gnome-network-preferences.glade.h:17
+#: capplets/network/gnome-network-preferences.glade.h:16
 msgid "_Details"
 msgstr "_Details"
 
-#: capplets/network/gnome-network-preferences.glade.h:18
+#: capplets/network/gnome-network-preferences.glade.h:17
 msgid "_FTP proxy:"
 msgstr "_FTP proxy:"
 
-#: capplets/network/gnome-network-preferences.glade.h:19
+#: capplets/network/gnome-network-preferences.glade.h:18
 msgid "_Password:"
 msgstr "_Password:"
 
-#: capplets/network/gnome-network-preferences.glade.h:20
+#: capplets/network/gnome-network-preferences.glade.h:19
 msgid "_Secure HTTP proxy:"
 msgstr "_Secure HTTP proxy:"
 
@@ -2669,12 +2719,12 @@ msgid "Do _not show this warning again."
 msgstr "Do _not show this warning again."
 
 #: gnome-settings-daemon/modmap-dialog.glade.h:3
-msgid "Do you like to load the modmap file(s)?"
-msgstr "Would you like to load the modmap file(s)?"
-
-#: gnome-settings-daemon/modmap-dialog.glade.h:4
 msgid "Load modmap files"
 msgstr "Load modmap files"
+
+#: gnome-settings-daemon/modmap-dialog.glade.h:4
+msgid "Would you like to load the modmap file(s)?"
+msgstr "Would you like to load the modmap file(s)?"
 
 #: gnome-settings-daemon/modmap-dialog.glade.h:5
 msgid "_Load"
