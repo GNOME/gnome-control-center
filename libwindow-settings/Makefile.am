@@ -34,10 +34,7 @@ pkgconfig_DATA = gnome-window-settings-2.0.pc
 
 EXTRA_DIST = 					\
 	gnome-window-settings-2.0.pc.in		\
-	ChangeLog				\
-	wm-exec.c				\
-	wm-list.c				\
-	wm-properties.h
+	ChangeLog
 
 wms_flags = -export_dynamic -avoid-version
 wmsdir = $(WM_MODULE_DIR)
