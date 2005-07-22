@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: control-center CVS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-10 06:04+0000\n"
+"POT-Creation-Date: 2005-07-22 06:17+0000\n"
 "PO-Revision-Date: 2005-07-10 15:08+0100\n"
 "Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -57,7 +57,7 @@ msgid "Show more _details"
 msgstr "Meer _details tonen"
 
 #: ../capplets/about-me/gnome-about-me.desktop.in.in.h:1
-#: ../capplets/about-me/gnome-about-me.glade.h:11
+#: ../capplets/about-me/gnome-about-me.glade.h:14
 msgid "About Me"
 msgstr "Over mij"
 
@@ -65,47 +65,61 @@ msgstr "Over mij"
 msgid "Set your personal information"
 msgstr "Persoonlijk informatie instellen"
 
-#: ../capplets/about-me/e-image-chooser.c:171
-msgid "Choose Image"
-msgstr "Kies een afbeelding"
-
-#: ../capplets/about-me/gnome-about-me.c:544
+#: ../capplets/about-me/gnome-about-me.c:554
 msgid "Select Image"
 msgstr "Afbeelding selecteren"
 
-#: ../capplets/about-me/gnome-about-me.c:548
+#: ../capplets/about-me/gnome-about-me.c:556
 msgid "No Image"
 msgstr "Geen afbeelding"
 
-#: ../capplets/about-me/gnome-about-me.c:696
+#: ../capplets/about-me/gnome-about-me.c:721
 msgid "Unable to open address book"
 msgstr "Kan adresboek niet openen"
 
-#: ../capplets/about-me/gnome-about-me.c:707
+#: ../capplets/about-me/gnome-about-me.c:733
 msgid "Unknown login ID, the user database might be corrupted"
 msgstr "Onbekend aanmeldings-ID, de gebruikersdatabase is misschien beschadigd"
 
-#: ../capplets/about-me/gnome-about-me-password.c:100
-#: ../capplets/about-me/gnome-about-me-password.c:379
-msgid "<b>Old password is incorret, please retype it</b>"
-msgstr "<b>Oude wachtwoord is onjuist, voer het opnieuw in</b>"
+#: ../capplets/about-me/gnome-about-me.c:764
+#: ../capplets/about-me/gnome-about-me.c:766
+#, c-format
+msgid "About %s"
+msgstr "Over %s"
 
-#: ../capplets/about-me/gnome-about-me-password.c:111
-msgid "Symtem error has occurred"
-msgstr "Er is een systeemfout opgetreden"
+#: ../capplets/about-me/gnome-about-me-password.c:101
+#: ../capplets/about-me/gnome-about-me-password.c:380
+msgid "Old password is incorrect, please retype it"
+msgstr "Oude wachtwoord is onjuist, voer het opnieuw in"
 
 #: ../capplets/about-me/gnome-about-me-password.c:112
+msgid "System error has occurred"
+msgstr "Er is een systeemfout opgetreden"
+
+#: ../capplets/about-me/gnome-about-me-password.c:113
 msgid "Could not run /usr/bin/passwd"
 msgstr "Kan /usr/bin/passwd niet uitvoeren"
 
-#: ../capplets/about-me/gnome-about-me-password.c:113
+#: ../capplets/about-me/gnome-about-me-password.c:114
 msgid "Unable to launch backend"
 msgstr "Kan back-end niet opstarten"
 
-#: ../capplets/about-me/gnome-about-me-password.c:115
 #: ../capplets/about-me/gnome-about-me-password.c:116
+#: ../capplets/about-me/gnome-about-me-password.c:117
 msgid "Unexpected error has occurred"
 msgstr "Een onverwachte fout is opgetreden"
+
+#: ../capplets/about-me/gnome-about-me-password.c:434
+msgid "Please type the passwords."
+msgstr "Vul de wachtwoorden in."
+
+#: ../capplets/about-me/gnome-about-me-password.c:442
+msgid "Please type the password again, it is wrong."
+msgstr "Vul het wachtwoord opnieuw in, het is onjuist."
+
+#: ../capplets/about-me/gnome-about-me-password.c:445
+msgid "Click the Change Password button to change the password."
+msgstr "Klik op de knop 'Wachtwoord wijzigen' om het wachtwoord te wijzigen."
 
 #: ../capplets/about-me/gnome-about-me.glade.h:1
 #: ../vfs-methods/themus/apply-font.glade.h:1
@@ -113,171 +127,216 @@ msgid " "
 msgstr " "
 
 #: ../capplets/about-me/gnome-about-me.glade.h:2
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
+#: ../capplets/font/font-properties.glade.h:1
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:1
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:1
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:1
+msgid "    "
+msgstr "    "
+
+#: ../capplets/about-me/gnome-about-me.glade.h:3
 msgid "<b>Email</b>"
 msgstr "<b>E-mail</b>"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:3
+#: ../capplets/about-me/gnome-about-me.glade.h:4
 msgid "<b>Home</b>"
 msgstr "<b>Thuis</b>"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:4
+#: ../capplets/about-me/gnome-about-me.glade.h:5
 msgid "<b>Instant Messaging</b>"
 msgstr "<b>Directe berichten</b>"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:5
+#: ../capplets/about-me/gnome-about-me.glade.h:6
 msgid "<b>Job</b>"
 msgstr "<b>Baan</b>"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:6
+#: ../capplets/about-me/gnome-about-me.glade.h:7
+msgid "<b>Please type the passwords.</b>"
+msgstr "<b>Vul de wachtwoorden in.</b>"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:8
 msgid "<b>Telephone</b>"
 msgstr "<b>Telefoon</b>"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:7
+#: ../capplets/about-me/gnome-about-me.glade.h:9
 msgid "<b>Web</b>"
 msgstr "<b>Web</b>"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:8
+#: ../capplets/about-me/gnome-about-me.glade.h:10
 msgid "<b>Work</b>"
 msgstr "<b>Werk</b>"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:9
+#: ../capplets/about-me/gnome-about-me.glade.h:11
 msgid "A_IM/iChat:"
 msgstr "A_IM/iChat:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:10
+#: ../capplets/about-me/gnome-about-me.glade.h:12
+msgid "A_ddress:"
+msgstr "_Adres:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:13
 msgid "A_ssistant:"
 msgstr "A_ssistent:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:12
+#: ../capplets/about-me/gnome-about-me.glade.h:15
+msgid "Address"
+msgstr "Adres"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:16
 msgid "C_ity:"
 msgstr "S_tad:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:13
+#: ../capplets/about-me/gnome-about-me.glade.h:17
 msgid "C_ompany:"
 msgstr "_Bedrijf:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:14
+#: ../capplets/about-me/gnome-about-me.glade.h:18
 msgid "Cale_ndar:"
 msgstr "Kale_nder:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:15
-msgid "Change Passwo_rd"
-msgstr "Wachtw_oord wijzigen"
+#: ../capplets/about-me/gnome-about-me.glade.h:19
+msgid "Change Passwo_rd..."
+msgstr "Wachtw_oord wijzigen..."
 
-#: ../capplets/about-me/gnome-about-me.glade.h:16
+#: ../capplets/about-me/gnome-about-me.glade.h:20
 msgid "Change Password"
 msgstr "Wachtwoord wijzigen"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:17
+#: ../capplets/about-me/gnome-about-me.glade.h:21
+msgid "Ci_ty:"
+msgstr "S_tad:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:22
 msgid "Co_untry:"
 msgstr "_Land:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:18
+#: ../capplets/about-me/gnome-about-me.glade.h:23
+msgid "Contact"
+msgstr "Contactinformatie"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:24
+msgid "Cou_ntry:"
+msgstr "_Land:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:25
 msgid "Full Name"
 msgstr "Volledige naam"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:19
+#: ../capplets/about-me/gnome-about-me.glade.h:26
+msgid "Hom_e:"
+msgstr "_Thuis:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:27
 msgid "IC_Q:"
 msgstr "IC_Q:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:20
+#: ../capplets/about-me/gnome-about-me.glade.h:28
 msgid "M_SN:"
 msgstr "_MSN:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:21
-msgid "New Password:"
-msgstr "Nieuw wachtwoord:"
+#: ../capplets/about-me/gnome-about-me.glade.h:29
+msgid "Old pa_ssword:"
+msgstr "Ou_d wachtwoord:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:22
-msgid "Old Password:"
-msgstr "Oud wachtwoord:"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:23
-msgid "P_O Box:"
+#: ../capplets/about-me/gnome-about-me.glade.h:30
+msgid "P.O. _box:"
 msgstr "_Postbus:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:24
-msgid "Retype New Password:"
-msgstr "Wachtwoord nogmaals intypen:"
+#: ../capplets/about-me/gnome-about-me.glade.h:31
+msgid "P._O. box:"
+msgstr "P_ostbus:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:25
-msgid "User Name:"
+#: ../capplets/about-me/gnome-about-me.glade.h:32
+msgid "Personal Info"
+msgstr "Persoonlijke gegevens"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:33
+msgid "State/Pro_vince:"
+msgstr "Staat/Pro_vincie:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:34
+msgid "User name:"
 msgstr "Gebruikersnaam:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:26
-msgid "Web _Log:"
+#: ../capplets/about-me/gnome-about-me.glade.h:35
+msgid "Web _log:"
 msgstr "_Weblog:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:27
-msgid "Work _Fax:"
+#: ../capplets/about-me/gnome-about-me.glade.h:36
+msgid "Wor_k:"
+msgstr "_Werk:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:37
+msgid "Work _fax:"
 msgstr "_Fax werk:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:28
-msgid "_Address"
-msgstr "_Adres"
+#: ../capplets/about-me/gnome-about-me.glade.h:38
+msgid "Zip/_Postal code:"
+msgstr "Post_code:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:29
+#: ../capplets/about-me/gnome-about-me.glade.h:39
 msgid "_Address:"
 msgstr "_Adres:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:30
-msgid "_Contact"
-msgstr "_Contact"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:31
+#: ../capplets/about-me/gnome-about-me.glade.h:40
 msgid "_Department:"
 msgstr "Af_deling:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:32
+#: ../capplets/about-me/gnome-about-me.glade.h:41
 msgid "_Groupwise:"
 msgstr "_Groupwise:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:33
-msgid "_Home Page:"
+#: ../capplets/about-me/gnome-about-me.glade.h:42
+msgid "_Home page:"
 msgstr "T_huispagina:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:34
+#: ../capplets/about-me/gnome-about-me.glade.h:43
 msgid "_Home:"
 msgstr "_Thuis:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:35
+#: ../capplets/about-me/gnome-about-me.glade.h:44
 msgid "_Jabber:"
 msgstr "_Jabber:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:36
+#: ../capplets/about-me/gnome-about-me.glade.h:45
 msgid "_Manager:"
 msgstr "_Manager:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:37
+#: ../capplets/about-me/gnome-about-me.glade.h:46
 msgid "_Mobile:"
 msgstr "_Mobiel:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:38
-msgid "_Personal Info"
-msgstr "_Persoonlijke gegevens"
+#: ../capplets/about-me/gnome-about-me.glade.h:47
+msgid "_New password:"
+msgstr "_Nieuw wachtwoord:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:39
+#: ../capplets/about-me/gnome-about-me.glade.h:48
 msgid "_Profession:"
 msgstr "B_eroep:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:40
+#: ../capplets/about-me/gnome-about-me.glade.h:49
+msgid "_Retype new password:"
+msgstr "Wachtwoord no_gmaals intypen:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:50
 msgid "_State/Province:"
 msgstr "Staat/Pro_vincie:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:41
+#: ../capplets/about-me/gnome-about-me.glade.h:51
 msgid "_Title:"
 msgstr "_Titel:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:42
+#: ../capplets/about-me/gnome-about-me.glade.h:52
 msgid "_Work:"
 msgstr "_Werk:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:43
+#: ../capplets/about-me/gnome-about-me.glade.h:53
 msgid "_Yahoo:"
 msgstr "_Yahoo:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:44
-msgid "_Zip/Postal Code:"
+#: ../capplets/about-me/gnome-about-me.glade.h:54
+msgid "_Zip/Postal code:"
 msgstr "Post_code:"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:1
@@ -404,18 +463,9 @@ msgstr ""
 "Dit systeem lijkt geen XKB-uitbreiding te hebben. De toetsenbord-"
 "toegankelijkheidsfuncties zullen niet werken zonder deze uitbreiding."
 
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
-#: ../capplets/font/font-properties.glade.h:1
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:1
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:1
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:1
-msgid "    "
-msgstr "    "
-
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:1
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:2
-#: ../capplets/network/gnome-network-preferences.glade.h:2
 #: ../capplets/theme-switcher/theme-install.glade.h:1
 #: ../capplets/theme-switcher/theme-properties.glade.h:1
 msgid "*"
@@ -599,8 +649,8 @@ msgstr "pixels/seconde"
 #. set the timeout value  label with correct value of timeout
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
 #: ../capplets/mouse/gnome-mouse-properties.c:131
-#: ../capplets/mouse/gnome-mouse-properties.c:584
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
+#: ../capplets/mouse/gnome-mouse-properties.c:860
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:28
 #: ../capplets/windows/gnome-window-properties.glade.h:10
 msgid "seconds"
 msgstr "seconden"
@@ -644,22 +694,22 @@ msgstr "_Stijl:"
 msgid "There was an error displaying help: %s"
 msgstr "Er is een fout opgetreden bij de hulpweergave: %s"
 
-#: ../capplets/background/gnome-wp-capplet.c:1064
-#: ../capplets/background/gnome-wp-capplet.c:1080
+#: ../capplets/background/gnome-wp-capplet.c:1056
+#: ../capplets/background/gnome-wp-capplet.c:1074
 msgid "Centered"
 msgstr "Gecentreerd"
 
-#: ../capplets/background/gnome-wp-capplet.c:1088
-#: ../capplets/background/gnome-wp-capplet.c:1103
+#: ../capplets/background/gnome-wp-capplet.c:1082
+#: ../capplets/background/gnome-wp-capplet.c:1099
 msgid "Fill Screen"
 msgstr "Schermvullend"
 
-#: ../capplets/background/gnome-wp-capplet.c:1111
-#: ../capplets/background/gnome-wp-capplet.c:1126
+#: ../capplets/background/gnome-wp-capplet.c:1107
+#: ../capplets/background/gnome-wp-capplet.c:1124
 msgid "Scaled"
 msgstr "Op schaal"
 
-#: ../capplets/background/gnome-wp-capplet.c:1134
+#: ../capplets/background/gnome-wp-capplet.c:1132
 #: ../capplets/background/gnome-wp-capplet.c:1149
 msgid "Tiled"
 msgstr "Tegels"
@@ -685,12 +735,12 @@ msgstr "Verticaal verlopend"
 msgid "Add Wallpaper"
 msgstr "Achtergrond toevoegen"
 
-#: ../capplets/background/gnome-wp-info.c:49
+#: ../capplets/background/gnome-wp-info.c:57
 msgid "No Wallpaper"
 msgstr "Geen achtergrond"
 
-#: ../capplets/background/gnome-wp-item.c:289
-#: ../capplets/background/gnome-wp-item.c:291
+#: ../capplets/background/gnome-wp-item.c:292
+#: ../capplets/background/gnome-wp-item.c:294
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "beeldpunt"
@@ -722,7 +772,7 @@ msgstr "Instellingen toepassen en afsluiten"
 #: ../capplets/common/capplet-util.c:243
 #: ../capplets/default-applications/gnome-default-applications-properties.c:765
 #: ../capplets/keyboard/gnome-keyboard-properties.c:225
-#: ../capplets/mouse/gnome-mouse-properties.c:819
+#: ../capplets/mouse/gnome-mouse-properties.c:996
 #: ../capplets/sound/sound-properties-capplet.c:244
 msgid "Retrieve and store legacy settings"
 msgstr "Standaardinstellingen terughalen en opslaan"
@@ -1329,7 +1379,6 @@ msgid "_Full"
 msgstr "Vo_lledig"
 
 #: ../capplets/font/font-properties.glade.h:22
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:22
 msgid "_Medium"
 msgstr "_Medium"
 
@@ -1704,67 +1753,59 @@ msgstr "minuten"
 msgid "Set your keyboard preferences"
 msgstr "Uw toetsenbordvoorkeuren instellen"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:498
+#: ../capplets/mouse/gnome-mouse-properties.c:549
 msgid "Unknown Cursor"
 msgstr "Onbekende cursor"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:619
-msgid "Default Cursor - Current"
-msgstr "Standaard cursor - huidige"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:619
-#: ../capplets/mouse/gnome-mouse-properties.c:622
-msgid "The default cursor that ships with X"
-msgstr "De standaard cursor die meegeleverd wordt met X "
-
-#: ../capplets/mouse/gnome-mouse-properties.c:622
+#: ../capplets/mouse/gnome-mouse-properties.c:736
 msgid "Default Cursor"
 msgstr "Standaard cursor"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:640
-msgid "White Cursor - Current"
-msgstr "Witte cursor - huidige"
+#: ../capplets/mouse/gnome-mouse-properties.c:737
+msgid "Default Cursor - Current"
+msgstr "Standaard cursor - huidige"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:640
-#: ../capplets/mouse/gnome-mouse-properties.c:643
-msgid "The default cursor inverted"
-msgstr "De standaard cursor geïnverteerd"
+#: ../capplets/mouse/gnome-mouse-properties.c:738
+msgid "The default cursor that ships with X"
+msgstr "De standaard cursor die meegeleverd wordt met X "
 
-#: ../capplets/mouse/gnome-mouse-properties.c:643
+#: ../capplets/mouse/gnome-mouse-properties.c:742
 msgid "White Cursor"
 msgstr "Witte cursor"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:662
-msgid "Large Cursor - Current"
-msgstr "Grote cursor - huidige"
+#: ../capplets/mouse/gnome-mouse-properties.c:743
+msgid "White Cursor - Current"
+msgstr "Witte cursor - huidige"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:662
-#: ../capplets/mouse/gnome-mouse-properties.c:665
-msgid "Large version of normal cursor"
-msgstr "Grotere versie van de normale cursor"
+#: ../capplets/mouse/gnome-mouse-properties.c:744
+msgid "The default cursor inverted"
+msgstr "De standaard cursor geïnverteerd"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:665
+#: ../capplets/mouse/gnome-mouse-properties.c:748
 msgid "Large Cursor"
 msgstr "Grote cursor"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:684
+#: ../capplets/mouse/gnome-mouse-properties.c:749
+msgid "Large Cursor - Current"
+msgstr "Grote cursor - huidige"
+
+#: ../capplets/mouse/gnome-mouse-properties.c:750
+msgid "Large version of normal cursor"
+msgstr "Grotere versie van de normale cursor"
+
+#: ../capplets/mouse/gnome-mouse-properties.c:754
 msgid "Large White Cursor - Current"
 msgstr "Grote witte cursor - huidige"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:684
-#: ../capplets/mouse/gnome-mouse-properties.c:687
-msgid "Large version of white cursor"
-msgstr "Grote versie van de witte cursor"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:687
+#: ../capplets/mouse/gnome-mouse-properties.c:755
 msgid "Large White Cursor"
 msgstr "Grote witte cursor"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:760
-msgid "Cursor Size"
-msgstr "Cursorgrootte"
+#: ../capplets/mouse/gnome-mouse-properties.c:756
+msgid "Large version of white cursor"
+msgstr "Grote versie van de witte cursor"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:769
+#: ../capplets/mouse/gnome-mouse-properties.c:950
 msgid "Cursor Theme"
 msgstr "Cursorthema"
 
@@ -1825,47 +1866,55 @@ msgid "Buttons"
 msgstr "Knoppen"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:15
+msgid "Cursor Size:"
+msgstr "Cursorgrootte:"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:16
 msgid "Cursors"
 msgstr "Cursors"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:16
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
 msgid "Highlight the _pointer when you press Ctrl"
 msgstr "Aanwijzer o_plichten bij het indrukken van Ctrl"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
+msgid "Large"
+msgstr "Groot"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
+msgid "Medium"
+msgstr "Medium"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:20
 msgid "Motion"
 msgstr "Beweging"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:21
 msgid "Mouse Preferences"
 msgstr "Muisvoorkeuren"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:22
+msgid "Small"
+msgstr "Klein"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:23
 msgid "_Acceleration:"
 msgstr "Ver_snelling:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:20
-msgid "_Large"
-msgstr "_Groot"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:21
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:24
 msgid "_Left-handed mouse"
 msgstr "_Linkshandige muis"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:23
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:25
 msgid "_Sensitivity:"
 msgstr "_Gevoeligheid:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:24
-msgid "_Small"
-msgstr "_Klein"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:25
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:26
 msgid "_Threshold:"
 msgstr "_Drempelwaarde:"
 
 # Is dit intervaltijd uit de dubbelklik-pref of iets anders?
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:26
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
 msgid "_Timeout:"
 msgstr "In_tervaltijd:"
 
@@ -1889,6 +1938,10 @@ msgstr "Netwerkproxy-voorkeuren instellen"
 msgid "      "
 msgstr "      "
 
+#: ../capplets/network/gnome-network-preferences.glade.h:2
+msgid "<b>D_irect internet connection</b>"
+msgstr "<b>_Directe internetverbinding</b>"
+
 #: ../capplets/network/gnome-network-preferences.glade.h:3
 msgid "<b>Ignore Host List</b>"
 msgstr "<b>Lijst van te negeren hostcomputers</b>"
@@ -1898,66 +1951,62 @@ msgid "<b>_Automatic proxy configuration</b>"
 msgstr "<b>_Automatische proxyconfiguratie</b>"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:5
-msgid "<b>_Direct internet connection</b>"
-msgstr "<b>_Directe internetverbinding</b>"
-
-#: ../capplets/network/gnome-network-preferences.glade.h:6
 msgid "<b>_Manual proxy configuration</b>"
 msgstr "<b>Hand_matige proxyconfiguratie</b>"
 
-#: ../capplets/network/gnome-network-preferences.glade.h:7
+#: ../capplets/network/gnome-network-preferences.glade.h:6
 msgid "<b>_Use authentication</b>"
 msgstr "<b>_Verificatie gebruiken</b>"
 
-#: ../capplets/network/gnome-network-preferences.glade.h:8
+#: ../capplets/network/gnome-network-preferences.glade.h:7
 msgid "Advanced Configuration"
 msgstr "Geavanceerde configuratie"
 
-#: ../capplets/network/gnome-network-preferences.glade.h:9
+#: ../capplets/network/gnome-network-preferences.glade.h:8
 msgid "Autoconfiguration _URL:"
 msgstr "Autoconfiguratie-_URL:"
 
-#: ../capplets/network/gnome-network-preferences.glade.h:10
+#: ../capplets/network/gnome-network-preferences.glade.h:9
 msgid "HTTP Proxy Details"
 msgstr "Details HTTP-proxy"
 
-#: ../capplets/network/gnome-network-preferences.glade.h:11
+#: ../capplets/network/gnome-network-preferences.glade.h:10
 msgid "H_TTP proxy:"
 msgstr "HTT_P-proxy:"
 
-#: ../capplets/network/gnome-network-preferences.glade.h:12
+#: ../capplets/network/gnome-network-preferences.glade.h:11
 msgid "Network Proxy Preferences"
 msgstr "Netwerkproxy-voorkeuren"
 
-#: ../capplets/network/gnome-network-preferences.glade.h:13
+#: ../capplets/network/gnome-network-preferences.glade.h:12
 msgid "Port:"
 msgstr "Poort:"
 
-#: ../capplets/network/gnome-network-preferences.glade.h:14
+#: ../capplets/network/gnome-network-preferences.glade.h:13
 msgid "Proxy Configuration"
 msgstr "Proxyconfiguratie"
 
-#: ../capplets/network/gnome-network-preferences.glade.h:15
+#: ../capplets/network/gnome-network-preferences.glade.h:14
 msgid "S_ocks host:"
 msgstr "S_ocks-hostnaam:"
 
-#: ../capplets/network/gnome-network-preferences.glade.h:16
+#: ../capplets/network/gnome-network-preferences.glade.h:15
 msgid "U_sername:"
 msgstr "_Gebruikersnaam:"
 
-#: ../capplets/network/gnome-network-preferences.glade.h:17
+#: ../capplets/network/gnome-network-preferences.glade.h:16
 msgid "_Details"
 msgstr "_Details"
 
-#: ../capplets/network/gnome-network-preferences.glade.h:18
+#: ../capplets/network/gnome-network-preferences.glade.h:17
 msgid "_FTP proxy:"
 msgstr "_FTP proxy:"
 
-#: ../capplets/network/gnome-network-preferences.glade.h:19
+#: ../capplets/network/gnome-network-preferences.glade.h:18
 msgid "_Password:"
 msgstr "_Wachtwoord:"
 
-#: ../capplets/network/gnome-network-preferences.glade.h:20
+#: ../capplets/network/gnome-network-preferences.glade.h:19
 msgid "_Secure HTTP proxy:"
 msgstr "Beve_iligde HTTP proxy:"
 
@@ -2716,12 +2765,12 @@ msgid "Do _not show this warning again."
 msgstr "_Deze waarschuwing niet nogmaals weergeven."
 
 #: ../gnome-settings-daemon/modmap-dialog.glade.h:3
-msgid "Do you like to load the modmap file(s)?"
-msgstr "Wilt u de modmap-bestand(en) laden?"
-
-#: ../gnome-settings-daemon/modmap-dialog.glade.h:4
 msgid "Load modmap files"
 msgstr "Modmap-bestanden laden"
+
+#: ../gnome-settings-daemon/modmap-dialog.glade.h:4
+msgid "Would you like to load the modmap file(s)?"
+msgstr "Wilt u de modmap-bestand(en) laden?"
 
 #: ../gnome-settings-daemon/modmap-dialog.glade.h:5
 msgid "_Load"
@@ -3399,3 +3448,5 @@ msgstr "Of geïnstalleerde thema's als miniatuur weergegeven moeten worden"
 msgid "Whether to thumbnail themes"
 msgstr "Of thema's als miniatuur weergegeven moeten worden"
 
+#~ msgid "Choose Image"
+#~ msgstr "Kies een afbeelding"
