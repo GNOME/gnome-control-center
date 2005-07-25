@@ -191,10 +191,17 @@ apply_config (struct DisplayInfo *info)
 
   update_display_info (info, display);
   
-  /* xscreensaver should handle this itself, but does not currently so we hack
-   * it.  Ignore failures in case xscreensaver is not installed */
-  if (changed)
-   g_spawn_command_line_async ("xscreensaver-command -restart", NULL);
+  if (changed) {
+    gchar *cmd;
+
+    if ((cmd = g_find_program_in_path ("gnome-screensaver-command")))
+      g_free (cmd);
+    else {
+      /* xscreensaver should handle this itself, but does not currently so we hack
+       * it.  Ignore failures in case xscreensaver is not installed */
+      g_spawn_command_line_async ("xscreensaver-command -restart", NULL);
+    }
+  }
 
   return changed;
 }
@@ -206,6 +213,7 @@ revert_config (struct DisplayInfo *info)
   GdkDisplay *display;
   Display *xdisplay;
   GdkScreen *screen;
+  char *cmd;
 
   display = gdk_display_get_default ();
   xdisplay = gdk_x11_display_get_xdisplay (display);
@@ -240,10 +248,14 @@ revert_config (struct DisplayInfo *info)
       generate_rate_menu (screen_info);
     }
 
-  /* xscreensaver should handle this itself, but does not currently so we hack
-   * it.  Ignore failures in case xscreensaver is not installed */
-  g_spawn_command_line_async ("xscreensaver-command -restart", NULL);
-  
+  if ((cmd = g_find_program_in_path ("gnome-screensaver-command")))
+    g_free (cmd);
+  else {
+    /* xscreensaver should handle this itself, but does not currently so we hack
+     * it.  Ignore failures in case xscreensaver is not installed */
+    g_spawn_command_line_async ("xscreensaver-command -restart", NULL);
+  }
+
   return 0;
 }
 
