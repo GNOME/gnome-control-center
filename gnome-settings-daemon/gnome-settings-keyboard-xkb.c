@@ -240,6 +240,9 @@ gnome_settings_keyboard_xkb_analyze_sysconfig (void)
 									     _
 									     ("The X system keyboard settings differ from your current GNOME "
 									      "keyboard settings.  Which set would you like to use?"));
+
+			gtk_window_set_icon_name (GTK_WINDOW (msg), "gnome-dev-keyboard");
+
 			gtk_container_set_border_width (GTK_CONTAINER (alignDontShowAgain), 
 						        12);
 			gtk_container_add (GTK_CONTAINER (alignDontShowAgain), 

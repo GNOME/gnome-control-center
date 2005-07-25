@@ -377,6 +377,7 @@ warning_dialog_post (GCallback response, gboolean *enabled,
 	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), user_action_string);
 	gtk_dialog_add_button (GTK_DIALOG (dialog), GTK_STOCK_HELP, GTK_RESPONSE_HELP);
 	gtk_window_set_title (GTK_WINDOW (dialog), title);
+	gtk_window_set_icon_name (GTK_WINDOW (dialog), "gnome-dev-keyboard");
 
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
 
