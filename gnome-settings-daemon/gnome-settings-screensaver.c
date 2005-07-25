@@ -35,6 +35,7 @@
 #define START_SCREENSAVER_KEY   "/apps/gnome_settings_daemon/screensaver/start_screensaver"
 #define SHOW_STARTUP_ERRORS_KEY "/apps/gnome_settings_daemon/screensaver/show_startup_errors"
 #define XSCREENSAVER_COMMAND    "xscreensaver -nosplash"
+#define GSCREENSAVER_COMMAND    "gnome-screensaver"
 
 void
 gnome_settings_screensaver_init (GConfClient *client)
@@ -42,8 +43,12 @@ gnome_settings_screensaver_init (GConfClient *client)
 	/*
 	 * do nothing.
 	 *
-	 * our settings only apply to startup, and the screensaver
-	 * settings are all in xscreensaver and not gconf.
+	 * with gnome-screensaver, all settings are loaded internally
+	 * from gconf at startup
+	 *
+	 * with xscreensaver, our settings only apply to startup, and
+	 * the screensaver settings are all in xscreensaver and not
+	 * gconf.
 	 *
 	 * we could have xscreensaver-demo run gconftool-2 directly,
 	 * and start / stop xscreensaver here
@@ -69,16 +74,30 @@ void
 gnome_settings_screensaver_load (GConfClient *client)
 {
 	GError *gerr = NULL;
-	gboolean start_screensaver;
+	gboolean start_screensaver, use_gscreensaver = FALSE;
 	gboolean show_error;
 	GtkWidget *dialog, *toggle;
+	gchar *ss_command;
  
 	start_screensaver = gconf_client_get_bool (client, START_SCREENSAVER_KEY, NULL);
 
 	if (!start_screensaver)
 		return;
 
-	if (g_spawn_command_line_async (XSCREENSAVER_COMMAND, &gerr))
+	if ((ss_command = g_find_program_in_path ("gnome-screensaver")))
+		use_gscreensaver = TRUE;
+	else {
+		if (!(ss_command = g_find_program_in_path ("xscreensaver")))
+			return;
+	}
+
+	g_free (ss_command);
+	if (use_gscreensaver)
+		ss_command = GSCREENSAVER_COMMAND;
+	else
+		ss_command = XSCREENSAVER_COMMAND;
+
+	if (g_spawn_command_line_async (ss_command, &gerr))
 		return;
 	
 	show_error = gconf_client_get_bool (client, SHOW_STARTUP_ERRORS_KEY, NULL);

@@ -804,6 +804,8 @@ do_sound_action (Acme *acme, int type)
 static void
 do_action (Acme *acme, int type)
 {
+	gchar *cmd;
+
 	switch (type) {
 	case MUTE_KEY:
 	case VOLUME_DOWN_KEY:
@@ -829,7 +831,12 @@ do_action (Acme *acme, int type)
 		do_sleep_action ("apm", "xset dpms force off");
 		break;
 	case SCREENSAVER_KEY:
-		execute ("xscreensaver-command -lock", FALSE);
+		if ((cmd = g_find_program_in_path ("gnome-screensaver-command")))
+			execute ("gnome-screensaver-command --lock", FALSE);
+		else
+			execute ("xscreensaver-command -lock", FALSE);
+
+		g_free (cmd);
 		break;
 	case HELP_KEY:
 		do_help_action (acme);
