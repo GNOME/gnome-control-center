@@ -1,3 +1,16 @@
+2005-07-25  Sebastien Bacher <seb128@debian.org>
+
+	* gnome-background-properties.glade: Replace GnomeColorPicker with
+	the GtkColorButton widget
+	Some properties were added by newer version of glade
+
+	* gnome-wp-capplet.c (gnome_wp_props_wp_set):
+	(gnome_wp_[s]color_changed, gnome_wp_color[12]_changed):
+	(gnome_wp_load_stuffs, wallpaper_properties_init):
+	Update to use the API for GtkColorButton instead of GnomeColorPicker
+
+	Fixes #171676
+
 2005-07-14  Rodney Dawes  <dobey@novell.com>
 
 	* gnome-wp-xml.c (gnome_wp_xml_load_xml): If xmlParseFile returns

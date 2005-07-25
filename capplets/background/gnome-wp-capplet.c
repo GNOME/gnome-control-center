@@ -306,14 +306,8 @@ static gboolean gnome_wp_props_wp_set (GnomeWPCapplet * capplet) {
 
     gconf_change_set_unref (cs);
 
-    gnome_color_picker_set_i16 (GNOME_COLOR_PICKER (capplet->pc_picker),
-				item->pcolor->red,
-				item->pcolor->green,
-				item->pcolor->blue, 65535);
-    gnome_color_picker_set_i16 (GNOME_COLOR_PICKER (capplet->sc_picker),
-				item->scolor->red,
-				item->scolor->green,
-				item->scolor->blue, 65535);
+    gtk_color_button_set_color (GTK_COLOR_BUTTON (capplet->pc_picker), item->pcolor);
+    gtk_color_button_set_color (GTK_COLOR_BUTTON (capplet->sc_picker), item->scolor);
 
     g_free (wpfile);
 
@@ -509,20 +503,18 @@ static void gnome_wp_color_changed (GnomeWPCapplet * capplet,
   }
 
   g_free (item->pri_color);
-  gnome_color_picker_get_i16 (GNOME_COLOR_PICKER (capplet->pc_picker),
-			      &item->pcolor->red,
-			      &item->pcolor->green,
-			      &item->pcolor->blue, NULL);
+
+  gtk_color_button_get_color (GTK_COLOR_BUTTON (capplet->pc_picker), item->pcolor);
+
   item->pri_color = g_strdup_printf ("#%02X%02X%02X",
 				     item->pcolor->red >> 8,
 				     item->pcolor->green >> 8,
 				     item->pcolor->blue >> 8);
 
   g_free (item->sec_color);
-  gnome_color_picker_get_i16 (GNOME_COLOR_PICKER (capplet->sc_picker),
-			      &item->scolor->red,
-			      &item->scolor->green,
-			      &item->scolor->blue, NULL);
+
+  gtk_color_button_get_color (GTK_COLOR_BUTTON (capplet->sc_picker), item->scolor);
+
   item->sec_color = g_strdup_printf ("#%02X%02X%02X",
 				     item->scolor->red >> 8,
 				     item->scolor->green >> 8,
@@ -553,7 +545,6 @@ static void gnome_wp_color_changed (GnomeWPCapplet * capplet,
 }
 
 static void gnome_wp_scolor_changed (GtkWidget * widget,
-				     guint r, guint g, guint b, guint a,
 				     GnomeWPCapplet * capplet) {
   gnome_wp_color_changed (capplet, TRUE);
 }
@@ -620,14 +611,9 @@ static gboolean gnome_wp_load_stuffs (void * data) {
     gnome_wp_option_menu_set (capplet, item->options, FALSE);
     gnome_wp_option_menu_set (capplet, item->shade_type, TRUE);
 
-    gnome_color_picker_set_i16 (GNOME_COLOR_PICKER (capplet->pc_picker),
-				item->pcolor->red,
-				item->pcolor->green,
-				item->pcolor->blue, 65535);
-    gnome_color_picker_set_i16 (GNOME_COLOR_PICKER (capplet->sc_picker),
-				item->scolor->red,
-				item->scolor->green,
-				item->scolor->blue, 65535);
+    gtk_color_button_set_color (GTK_COLOR_BUTTON (capplet->pc_picker), item->pcolor);
+    gtk_color_button_set_color (GTK_COLOR_BUTTON (capplet->sc_picker), item->pcolor);
+
   } else if (strcmp (style, "none") != 0) {
     item = gnome_wp_add_image (capplet, imagepath);
     gnome_wp_capplet_scroll_to_item (capplet, item);
@@ -770,10 +756,8 @@ static void gnome_wp_color1_changed (GConfClient * client, guint id,
 
   gdk_color_parse (colorhex, &color);
 
-  gnome_color_picker_set_i16 (GNOME_COLOR_PICKER (capplet->pc_picker),
-			      color.red,
-			      color.green,
-			      color.blue, 65535);
+  gtk_color_button_set_color (GTK_COLOR_BUTTON (capplet->pc_picker), &color);
+
 
   gnome_wp_color_changed (capplet, FALSE);
 }
@@ -788,10 +772,7 @@ static void gnome_wp_color2_changed (GConfClient * client, guint id,
 
   gdk_color_parse (colorhex, &color);
 
-  gnome_color_picker_set_i16 (GNOME_COLOR_PICKER (capplet->sc_picker),
-			      color.red,
-			      color.green,
-			      color.blue, 65535);
+  gtk_color_button_set_color (GTK_COLOR_BUTTON (capplet->sc_picker), &color);
 
   gnome_wp_color_changed (capplet, FALSE);
 }
@@ -1225,11 +1206,11 @@ static void wallpaper_properties_init (poptContext ctx) {
 		    G_CALLBACK (gnome_wp_shade_type_changed), capplet);
 
   capplet->pc_picker = glade_xml_get_widget (dialog,"pcpicker");
-  g_signal_connect (G_OBJECT (capplet->pc_picker), "color_set",
+  g_signal_connect (G_OBJECT (capplet->pc_picker), "color-set",
 		    G_CALLBACK (gnome_wp_scolor_changed), capplet);
 
   capplet->sc_picker = glade_xml_get_widget (dialog,"scpicker");
-  g_signal_connect (G_OBJECT (capplet->sc_picker), "color_set",
+  g_signal_connect (G_OBJECT (capplet->sc_picker), "color-set",
 		    G_CALLBACK (gnome_wp_scolor_changed), capplet);
   
   g_signal_connect (G_OBJECT (capplet->window), "response",
