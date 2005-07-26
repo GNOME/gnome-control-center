@@ -387,7 +387,7 @@ static void wallpaper_properties_clicked (GtkWidget * dialog,
   }
 }
 
-static void gnome_wp_scale_type_changed (GtkMenuShell * shell,
+static void gnome_wp_scale_type_changed (GtkOptionMenu * option_menu,
 					 GnomeWPCapplet * capplet) {
   GnomeWPItem * item = NULL;
   GdkPixbuf * pixbuf;
@@ -433,7 +433,7 @@ static void gnome_wp_scale_type_changed (GtkMenuShell * shell,
 			   item->options, NULL);
 }
 
-static void gnome_wp_shade_type_changed (GtkMenuShell * shell,
+static void gnome_wp_shade_type_changed (GtkOptionMenu * option_menu,
 					 GnomeWPCapplet * capplet) {
   GnomeWPItem * item = NULL;
   GtkTreeIter iter;
@@ -1136,7 +1136,7 @@ static void wallpaper_properties_init (poptContext ctx) {
 
   gtk_option_menu_set_menu (GTK_OPTION_MENU (capplet->wp_opts), menu);
 
-  g_signal_connect (G_OBJECT (menu), "deactivate",
+  g_signal_connect (G_OBJECT (capplet->wp_opts), "changed",
 		    G_CALLBACK (gnome_wp_scale_type_changed), capplet);
 
   add_button = glade_xml_get_widget (dialog,"add_button");
@@ -1202,7 +1202,7 @@ static void wallpaper_properties_init (poptContext ctx) {
   gtk_menu_append (GTK_MENU (menu), mitem);
 
   gtk_option_menu_set_menu (GTK_OPTION_MENU (capplet->color_opt), menu);
-  g_signal_connect (G_OBJECT (menu), "deactivate",
+  g_signal_connect (G_OBJECT (capplet->color_opt), "changed",
 		    G_CALLBACK (gnome_wp_shade_type_changed), capplet);
 
   capplet->pc_picker = glade_xml_get_widget (dialog,"pcpicker");
