@@ -27,6 +27,8 @@
 #include <libxklavier/xklavier_config.h>
 #include <gconf/gconf-client.h>
 
+#include "libgswitchit/gswitchit_config.h"
+
 G_BEGIN_DECLS
 
 #define SEL_LAYOUT_TREE_COL_DESCRIPTION 0
@@ -39,6 +41,7 @@ G_BEGIN_DECLS
 #define CWID(s) glade_xml_get_widget (chooserDialog, s)
 
 extern GConfClient *xkbGConfClient;
+extern GSwitchItKbdConfig initialConfig;
 
 extern void setup_xkb_tabs (GladeXML * dialog, 
                             GConfChangeSet * changeset);
@@ -64,6 +67,8 @@ extern void xkb_layouts_prepare_selected_tree (GladeXML * dialog,
 
 extern void xkb_options_prepare_selected_tree (GladeXML * dialog);
 
+extern void xkb_options_load_options (GladeXML * dialog);
+
 extern void clear_xkb_elements_list (GSList * list);
 
 extern char *xci_desc_to_utf8 (XklConfigItem * ci);
@@ -81,20 +86,13 @@ extern void xkb_layout_choose (GladeXML * dialog);
 extern void xkb_layouts_enable_disable_default (GladeXML * dialog, 
                                                 gboolean enable);
 
-#define xkb_layouts_get_selected_list() \
-        gconf_client_get_list (gconf_client_get_default (), \
-                                      GSWITCHIT_KBD_CONFIG_KEY_LAYOUTS, \
-                                      GCONF_VALUE_STRING, NULL)
+extern GSList *xkb_layouts_get_selected_list (void);
+extern GSList *xkb_options_get_selected_list (void);
 
 #define xkb_layouts_set_selected_list(list) \
         gconf_client_set_list (gconf_client_get_default (), \
                                GSWITCHIT_KBD_CONFIG_KEY_LAYOUTS, \
                                GCONF_VALUE_STRING, (list), NULL)
-
-#define xkb_options_get_selected_list() \
-        gconf_client_get_list (gconf_client_get_default (), \
-                                      GSWITCHIT_KBD_CONFIG_KEY_OPTIONS, \
-                                      GCONF_VALUE_STRING, NULL)
 
 #define xkb_options_set_selected_list(list) \
         gconf_client_set_list (gconf_client_get_default (), \

@@ -65,6 +65,28 @@ clear_xkb_elements_list (GSList * list)
     }
 }
 
+GSList *
+xkb_layouts_get_selected_list (void)
+{
+  GSList *retval;
+
+  retval = gconf_client_get_list (xkbGConfClient,
+				  GSWITCHIT_KBD_CONFIG_KEY_LAYOUTS,
+				  GCONF_VALUE_STRING,
+				  NULL);
+  if (retval == NULL)
+    {
+      GSList *curLayout;
+
+      for (curLayout = initialConfig.layouts; curLayout != NULL; curLayout = curLayout->next)
+	retval = g_slist_prepend (retval, g_strdup (curLayout->data));
+
+      retval = g_slist_reverse (retval);
+    }
+
+  return retval;
+}
+
 static void
 save_default_group (int aDefaultGroup)
 {

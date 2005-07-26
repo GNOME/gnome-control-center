@@ -8,8 +8,10 @@
       <type>bool</type>
       <default>true</default>
       <locale name="C">
-        <short>Keyboard settings in gconf will be overridden from the system ASAP</short>
-        <long>Very soon, keyboard settings in gconf will be overridden (from the system configuration)</long>
+        <short>Keyboard settings in gconf will be overridden from the system ASAP (deprecated)</short>
+        <long>Very soon, keyboard settings in gconf will be overridden (from the system configuration)
+              This key has been deprecated since GNOME 2.12, please unset the model, layouts and
+              options keys to get the default system configuration.</long>
       </locale>
     </schema>
 
@@ -18,7 +20,7 @@
       <applyto>/desktop/gnome/peripherals/keyboard/kbd/model</applyto>
       <owner>gnome</owner>    
       <type>string</type>
-      <default>pc105</default>
+      <default></default>
       <locale name="C">
         <short>Keyboard model</short>
         <long>keyboard model</long>
@@ -31,7 +33,7 @@
       <owner>gnome</owner>    
       <type>list</type>
       <list_type>string</list_type>
-      <default>[us]</default>
+      <default>[]</default>
       <locale name="C">
         <short>Keyboard layout</short>
         <long>keyboard layout</long>

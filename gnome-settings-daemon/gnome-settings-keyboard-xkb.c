@@ -150,28 +150,22 @@ apply_xkb_settings (void)
 	GSwitchItKbdConfigInit (&currentSysKbdConfig, confClient);
 	g_object_unref (confClient);
 
-	GSwitchItKbdConfigLoadFromGConf (&currentKbdConfig);
+	GSwitchItKbdConfigLoadFromGConf (&currentKbdConfig, &initialSysKbdConfig);
 
-	if (currentKbdConfig.overrideSettings) {
-		/* initialization - from the system settings */
-		GSwitchItKbdConfigSaveToGConf (&initialSysKbdConfig);
-	} else {
-		GSwitchItKbdConfigLoadFromXCurrent (&currentSysKbdConfig);
-		/* Activate - only if different! */
-		if (!GSwitchItKbdConfigEquals (&currentKbdConfig, &currentSysKbdConfig))
-		{
-			if (GSwitchItKbdConfigActivate (&currentKbdConfig)) {
-				if (paCallback != NULL) {
-					(*paCallback) (paCallbackUserData);
-				}
-			} else {
-				g_warning
-				    ("Could not activate the XKB configuration");
-				activation_error ();
+	GSwitchItKbdConfigLoadFromXCurrent (&currentSysKbdConfig);
+	/* Activate - only if different! */
+	if (!GSwitchItKbdConfigEquals (&currentKbdConfig, &currentSysKbdConfig)) {
+		if (GSwitchItKbdConfigActivate (&currentKbdConfig)) {
+			GSwitchItKbdConfigSaveToGConfBackup (&initialSysKbdConfig);
+			if (paCallback != NULL) {
+				(*paCallback) (paCallbackUserData);
 			}
-		} else
-			XklDebug (100, "Actual KBD configuration was not changed: redundant notification\n");
-	}
+		} else {
+			g_warning ("Could not activate the XKB configuration");
+			activation_error ();
+		}
+	} else
+		XklDebug (100, "Actual KBD configuration was not changed: redundant notification\n");
 
 	GSwitchItKbdConfigTerm (&currentSysKbdConfig);
 }
@@ -181,25 +175,29 @@ gnome_settings_keyboard_xkb_sysconfig_changed_response (GtkDialog * dialog,
 							SysConfigChangedMsgResponse
 							what2do)
 {
+	GConfClient *confClient;
+	GSwitchItKbdConfig emptyKbdConfig;
 	gboolean dontShowAgain = gtk_toggle_button_get_active (
 		GTK_TOGGLE_BUTTON (g_object_get_data (G_OBJECT (dialog), "chkDontShowAgain")));
 
+	confClient = gconf_client_get_default ();
+
 	switch (what2do) {
 	case RESPONSE_USE_X:
-		GSwitchItKbdConfigSaveToGConf (&initialSysKbdConfig);
+		GSwitchItKbdConfigInit (&emptyKbdConfig, confClient);
+		GSwitchItKbdConfigSaveToGConf (&emptyKbdConfig);
 		break;
 	case RESPONSE_USE_GNOME:
 		/* Do absolutely nothing - just keep things the way they are */
 		break;
 	}
 
-	if (dontShowAgain) {
-		GConfClient *confClient;
-		confClient = gconf_client_get_default ();
+	if (dontShowAgain)
 		gconf_client_set_bool (confClient, DISABLE_SYSCONF_CHANGED_WARNING_KEY, TRUE, NULL);
-		g_object_unref (confClient);
-	}
+
 	gtk_widget_destroy (GTK_WIDGET (dialog));
+
+	g_object_unref (confClient);
 }
 
 static void
@@ -218,7 +216,6 @@ gnome_settings_keyboard_xkb_analyze_sysconfig (void)
 	g_object_unref (confClient);
 	GSwitchItKbdConfigLoadFromGConfBackup (&backupGConfKbdConfig);
 	GSwitchItKbdConfigLoadFromXInitial (&initialSysKbdConfig);
-	initialSysKbdConfig.overrideSettings = FALSE;
 
 	isConfigChanged = g_slist_length (backupGConfKbdConfig.layouts) &&
 	    !GSwitchItKbdConfigEquals (&initialSysKbdConfig, &backupGConfKbdConfig);
@@ -265,7 +262,6 @@ gnome_settings_keyboard_xkb_analyze_sysconfig (void)
 			gtk_widget_show_all (msg);
 		}
 	}
-	GSwitchItKbdConfigSaveToGConfBackup (&initialSysKbdConfig);
 	GSwitchItKbdConfigTerm (&backupGConfKbdConfig);
 }
 

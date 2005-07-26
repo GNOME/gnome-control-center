@@ -1,3 +1,31 @@
+2005-07-20  Rodrigo Moya <rodrigo@novell.com>
+
+	* gnome-settings-screensaver.c (gnome_settings_screensaver_load):
+	* gnome-settings-multimedia-keys.c (do_action): try to run
+	gnome-screensaver, and if that fails, run xscreensaver.
+
+2005-07-15  Mark McLoughlin  <mark@skynet.ie>
+
+	Change the way XKB GConf preferences are handled so that:
+	  1) GConf keys are never written unless the user changes
+	     the preferences
+	  2) If the keys are unset, the default XKB settings are
+	     used
+
+	See bug #310513
+
+	* gnome-settings-keyboard-xkb.c:
+	(apply_xkb_settings): use the default XKB settings for
+	any unset GConf keys, and only save a copy of the default
+	XKB config to GConf when we're actually apply a config
+	that is different from the default.
+	(gnome_settings_keyboard_xkb_sysconfig_changed_response):
+	If the user decides to go back to the default XKB settings,
+	just unset the GConf keys.
+	(gnome_settings_keyboard_xkb_analyze_sysconfig): ignore
+	overrideSettings and don't save a back of the XKB defaults
+	at startup.
+
 2005-07-25  Sebastien Bacher  <seb128@debian.org>
 
 	* gnome-settings-accessibility-keyboard.c: (warning_dialog_post):
@@ -5,12 +33,6 @@
 	(gnome_settings_keyboard_xkb_analyze_sysconfig):
 	set windows' icons, patch by Jaap A. Haitsma <jaap@haitsma.org>
 	(Closes: #305096).
-
-2005-07-20  Rodrigo Moya <rodrigo@novell.com>
-
-	* gnome-settings-screensaver.c (gnome_settings_screensaver_load):
-	* gnome-settings-multimedia-keys.c (do_action): try to run
-	gnome-screensaver, and if that fails, run xscreensaver.
 
 2005-07-12  Sebastien Bacher  <seb128@debian.org>
 

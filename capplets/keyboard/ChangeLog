@@ -1,3 +1,29 @@
+2005-07-15  Mark McLoughlin  <mark@skynet.ie>
+
+	Re-work the way some of the XKB GConf keys are handled.
+	See bug #310513
+
+	* gnome-keyboard-properties-xkb.c:
+	(set_model_text), (model_key_changed), (setup_model_entry),
+	(setup_xkb_tabs): make the "model" entry not be a peditor
+	to we can correctly display the XKB default if the GConf
+	key is unset.
+	(enable_disable_restoring): update for API change.
+	(reset_to_defaults): reset to defaults by unsetting the
+	GConf keys rather than setting overrideSettings to true.
+	
+	* gnome-keyboard-properties-xkblt.c:
+	(xkb_layouts_get_selected_list): if the "layouts" key is unset,
+	use the layouts list from the XKB defaults.
+	
+	* gnome-keyboard-properties-xkbot.c:
+	(xkb_options_get_selected_list): ditto for the "options" key.
+	
+	* gnome-keyboard-properties-xkb.h: include gswitchit_config.h,
+	declare xkb_options_load_options to avoid warnings, make
+	xkb_(layouts|options)_get_selected_list() functions instead
+	of macros.
+
 2005-05-22  Sebastien Bacher  <seb128@debian.org>
 
 	* gnome-keyboard-properties-xkbot.c: (xkb_options_add_group):

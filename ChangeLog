@@ -15,6 +15,14 @@
 
 	* configure.in: use pkg-config to check for xcursor
 
+2005-07-15  Mark McLoughlin  <mark@skynet.ie>
+
+	See bug #310513
+
+	* schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in:
+	Deprecate the overrideSettings key and make the keys unset
+	by default (we want to use the XKB settings by default)
+
 2005-07-13  Sebastien Bacher  <seb128@debian.org>
 
 	* configure.in: update to 2.11.7.

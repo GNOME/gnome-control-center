@@ -40,7 +40,7 @@
 
 #include "gnome-keyboard-properties-xkb.h"
 
-static GSwitchItKbdConfig initialConfig;
+GSwitchItKbdConfig initialConfig;
 
 GConfClient *xkbGConfClient;
 
@@ -52,50 +52,67 @@ xci_desc_to_utf8 (XklConfigItem * ci)
     g_locale_to_utf8 (sd, -1, NULL, NULL, NULL);
 }
 
-static GConfValue *
-model_from_widget (GConfPropertyEditor * peditor, GConfValue * value)
+static void
+set_model_text (GtkWidget  * entry,
+		GConfValue * value)
 {
-  GConfValue *new_value;
+  XklConfigItem ci;
+  const char * model = NULL;
 
-  new_value = gconf_value_new (GCONF_VALUE_STRING);
-
-  if (value->type == GCONF_VALUE_STRING)
+  if (value != NULL && value->type == GCONF_VALUE_STRING)
     {
-      GObject* widget = gconf_property_editor_get_ui_control(peditor);
-      gchar* n = g_object_get_data (widget, "xkbModelName");
-      gconf_value_set_string (new_value, n);
+      model = gconf_value_get_string (value);
+      if (model != NULL && model[0] == '\0')
+	model = NULL;
+    }
+
+  if (model == NULL)
+    model = initialConfig.model;
+
+  g_snprintf (ci.name, sizeof (ci.name), "%s", model);
+
+  if (XklConfigFindModel (&ci))
+    {
+      char * d;
+
+      d = xci_desc_to_utf8 (&ci);
+      gtk_entry_set_text (GTK_ENTRY (entry), d);
+      g_free (d);
     }
   else
-    gconf_value_set_string (new_value, _("Unknown"));
-
-  return new_value;
+    {
+      gtk_entry_set_text (GTK_ENTRY (entry), _("Unknown"));
+    }
 }
 
-static GConfValue *
-model_to_widget (GConfPropertyEditor * peditor, GConfValue * value)
+static void
+model_key_changed (GConfClient * client,
+		   guint         cnxn_id,
+		   GConfEntry  * entry,
+		   GladeXML    * dialog)
 {
-  GConfValue *new_value;
+  set_model_text (WID ("xkb_model"),
+		  gconf_entry_get_value (entry));
 
-  new_value = gconf_value_new (GCONF_VALUE_STRING);
+  enable_disable_restoring (dialog);
+}
 
-  if (value->type == GCONF_VALUE_STRING)
-    {
-      XklConfigItem ci;
-      g_snprintf( ci.name, sizeof (ci.name), "%s", gconf_value_get_string( value ) );
-      if ( XklConfigFindModel( &ci ) )
-      {
-        GObject* widget = gconf_property_editor_get_ui_control(peditor);
-        gchar* d = xci_desc_to_utf8 (&ci);
+static void
+setup_model_entry (GladeXML * dialog)
+{
+  GConfValue * value;
 
-        g_object_set_data_full (widget, "xkbModelName", g_strdup (ci.name), g_free);
-        gconf_value_set_string (new_value, d);
-        g_free (d);
-      }
-      else
-        gconf_value_set_string (new_value, _("Unknown"));
-    }
+  value = gconf_client_get (xkbGConfClient,
+			    GSWITCHIT_KBD_CONFIG_KEY_MODEL,
+			    NULL);
+  set_model_text (WID ("xkb_model"), value);
+  if (value != NULL)
+    gconf_value_free (value);
 
-  return new_value;
+  gconf_client_notify_add (xkbGConfClient,
+			   GSWITCHIT_KBD_CONFIG_KEY_MODEL,
+			   (GConfClientNotifyFunc) model_key_changed,
+			   dialog, NULL, NULL);
 }
 
 static void
@@ -112,17 +129,14 @@ cleanup_xkb_tabs (GladeXML * dialog)
 static void
 reset_to_defaults (GtkWidget * button, GladeXML * dialog)
 {
-  gconf_client_set_bool (xkbGConfClient,
-			 GSWITCHIT_KBD_CONFIG_KEY_OVERRIDE_SETTINGS,
-			 TRUE, NULL);
-  /* all the rest is g-s-d's business */
-}
+  GSwitchItKbdConfig emptyKbdConfig;
 
-static void
-update_model (GConfClient * client,
-	      guint cnxn_id, GConfEntry * entry, GladeXML * dialog)
-{
-  enable_disable_restoring (dialog);
+  GSwitchItKbdConfigInit (&emptyKbdConfig, xkbGConfClient);
+  GSwitchItKbdConfigSaveToGConfBackup (&emptyKbdConfig);
+  GSwitchItKbdConfigSaveToGConf (&emptyKbdConfig);
+  GSwitchItKbdConfigTerm (&emptyKbdConfig);
+
+  /* all the rest is g-s-d's business */
 }
 
 static void
@@ -144,11 +158,10 @@ setup_xkb_tabs (GladeXML * dialog, GConfChangeSet * changeset)
   XklConfigInit ();
   XklConfigLoadRegistry ();
 
-  gconf_peditor_new_string
-    (changeset, (gchar *) GSWITCHIT_KBD_CONFIG_KEY_MODEL,
-     WID ("xkb_model"),
-     "conv-to-widget-cb", model_to_widget,
-     "conv-from-widget-cb", model_from_widget, NULL);
+  GSwitchItKbdConfigInit (&initialConfig, xkbGConfClient);
+  GSwitchItKbdConfigLoadFromXInitial (&initialConfig);
+
+  setup_model_entry (dialog);
 
   peditor = gconf_peditor_new_boolean
     (changeset, (gchar *) GSWITCHIT_CONFIG_KEY_GROUP_PER_WINDOW, 
@@ -177,14 +190,6 @@ setup_xkb_tabs (GladeXML * dialog, GConfChangeSet * changeset)
   g_signal_connect (G_OBJECT (WID ("keyboard_dialog")),
 		    "destroy", G_CALLBACK (cleanup_xkb_tabs), dialog);
 
-  gconf_client_notify_add (xkbGConfClient,
-			   GSWITCHIT_KBD_CONFIG_KEY_MODEL,
-			   (GConfClientNotifyFunc)
-			   update_model, dialog, NULL, NULL);
-
-  GSwitchItKbdConfigInit (&initialConfig, xkbGConfClient);
-  GSwitchItKbdConfigLoadFromXInitial (&initialConfig);
-
   enable_disable_restoring (dialog);
   xkb_layouts_enable_disable_default (dialog, 
                                       gconf_client_get_bool (xkbGConfClient, 
@@ -199,7 +204,7 @@ enable_disable_restoring (GladeXML * dialog)
   gboolean enable;
 
   GSwitchItKbdConfigInit (&gswic, xkbGConfClient);
-  GSwitchItKbdConfigLoadFromGConf (&gswic);
+  GSwitchItKbdConfigLoadFromGConf (&gswic, NULL);
 
   enable = !GSwitchItKbdConfigEquals (&gswic, &initialConfig);
 

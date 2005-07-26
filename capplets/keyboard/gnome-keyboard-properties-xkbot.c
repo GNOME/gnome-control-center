@@ -51,6 +51,28 @@ static GSList *currentRadioGroup = NULL;
 #define GCONFSTATE_PROP "gconfState"
 #define EXPANDERS_PROP "expandersList"
 
+GSList *
+xkb_options_get_selected_list (void)
+{
+  GSList *retval;
+
+  retval = gconf_client_get_list (xkbGConfClient,
+                                  GSWITCHIT_KBD_CONFIG_KEY_OPTIONS,
+                                  GCONF_VALUE_STRING,
+                                  NULL);
+  if (retval == NULL)
+    {
+      GSList *curOption;
+
+      for (curOption = initialConfig.options; curOption != NULL; curOption = curOption->next)
+        retval = g_slist_prepend (retval, g_strdup (curOption->data));
+
+      retval = g_slist_reverse (retval);
+    }
+
+  return retval;
+}
+
 static GtkWidget *
 xkb_options_get_expander (GtkWidget * option_button)
 {
