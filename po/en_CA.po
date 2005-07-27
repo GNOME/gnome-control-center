@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-26 04:06-0400\n"
-"PO-Revision-Date: 2005-07-26 19:59-0400\n"
+"POT-Creation-Date: 2005-07-27 07:23-0400\n"
+"PO-Revision-Date: 2005-07-27 19:59-0400\n"
 "Last-Translator: Adam Weinberger <adamw@gnome.org>\n"
 "Language-Team: Canadian English <adamw@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -1524,12 +1524,11 @@ msgstr ""
 msgid "Assign shortcut keys to commands"
 msgstr "Assign shortcut keys to commands"
 
-#: capplets/keyboard/gnome-keyboard-properties-xkb.c:69
-#: capplets/keyboard/gnome-keyboard-properties-xkb.c:95
+#: capplets/keyboard/gnome-keyboard-properties-xkb.c:84
 msgid "Unknown"
 msgstr "Unknown"
 
-#: capplets/keyboard/gnome-keyboard-properties-xkblt.c:251
+#: capplets/keyboard/gnome-keyboard-properties-xkblt.c:273
 msgid "Layout"
 msgstr "Layout"
 
@@ -1537,8 +1536,8 @@ msgstr "Layout"
 #. the below options are to be included in the selected list.
 #. This is a HIG-compliant alternative to allowing no
 #. selection in the group.
-#: capplets/keyboard/gnome-keyboard-properties-xkblt.c:255
-#: capplets/keyboard/gnome-keyboard-properties-xkbot.c:206
+#: capplets/keyboard/gnome-keyboard-properties-xkblt.c:277
+#: capplets/keyboard/gnome-keyboard-properties-xkbot.c:228
 msgid "Default"
 msgstr "Default"
 
@@ -2626,11 +2625,11 @@ msgstr ""
 "There are known problems with complex XKB configurations.\n"
 "Try using a simpler configuration or using a newer version of XFree software."
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:230
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:227
 msgid "Do _not show this warning again"
 msgstr "Do _not show this warning again"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:241
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:238
 msgid ""
 "The X system keyboard settings differ from your current GNOME keyboard "
 "settings.  Which set would you like to use?"
@@ -2638,11 +2637,11 @@ msgstr ""
 "The X system keyboard settings differ from your current GNOME keyboard "
 "settings.  Which set would you like to use?"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:254
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:251
 msgid "Use X settings"
 msgstr "Use X settings"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:256
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:253
 msgid "Use GNOME settings"
 msgstr "Use GNOME settings"
 
@@ -2774,7 +2773,7 @@ msgstr "Screen"
 msgid "Screen on which BGApplier is to draw"
 msgstr "Screen on which BGApplier is to draw"
 
-#: libgswitchit/gswitchit_config.c:1016
+#: libgswitchit/gswitchit_config.c:1035
 #, c-format
 msgid "There was an error loading an image: %s"
 msgstr "There was an error loading an image: %s"
@@ -3062,8 +3061,12 @@ msgid "Keyboard options"
 msgstr "Keyboard options"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:9
-msgid "Keyboard settings in gconf will be overridden from the system ASAP"
-msgstr "Keyboard settings in gconf will soon be overridden by the system"
+msgid ""
+"Keyboard settings in gconf will be overridden from the system ASAP "
+"(deprecated)"
+msgstr ""
+"Keyboard settings in GConf will be overridden from the system ASAP "
+"(deprecated)"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:10
 msgid "Save/restore indicators together with layout groups"
@@ -3088,10 +3091,12 @@ msgstr "Suppress the \"X sysconfig changed\" warning message"
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:14
 msgid ""
 "Very soon, keyboard settings in gconf will be overridden (from the system "
-"configuration)"
+"configuration) This key has been deprecated since GNOME 2.12, please unset "
+"the model, layouts and options keys to get the default system configuration."
 msgstr ""
-"Very soon, keyboard settings in gconf will be overridden (by the system "
-"configuration)"
+"Very soon, keyboard settings in GConf will be overridden (from the system "
+"configuration). This key has been deprecated since GNOME 2.12. Please unset "
+"the model, layouts and options keys to get the default system configuration."
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:15
 msgid "keyboard layout"
