@@ -1,10 +1,11 @@
 AC_INIT([control-center], [2.11.90],
         [http://bugzilla.gnome.org/enter_bug.cgi?product=control-center])
 
+AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_SRCDIR([control-center])
 AC_CONFIG_HEADERS([config.h])
 
-AM_INIT_AUTOMAKE
+AM_INIT_AUTOMAKE([1.9 tar-ustar])
 AM_MAINTAINER_MODE
 
 AC_SUBST([ACLOCAL_AMFLAGS], ["\${ACLOCAL_FLAGS}"])
@@ -16,6 +17,9 @@ AC_ISC_POSIX
 AC_PROG_CC
 AC_STDC_HEADERS
 AM_PROG_LIBTOOL
+
+# Use the GNOME documentation framework
+GNOME_DOC_INIT
 
 m4_define(gnomevfs_minver, 2.0.0)
 m4_define(fontconfig_minver, 1.0.0)
@@ -548,6 +552,7 @@ capplets/accessibility/at-properties/Makefile
 capplets/network/Makefile
 capplets/windows/Makefile
 capplets/about-me/Makefile
+help/Makefile
 typing-break/Makefile
 schemas/Makefile
 libsounds/Makefile

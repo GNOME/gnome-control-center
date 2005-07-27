@@ -24,4 +24,4 @@ if ! which gnome-autogen.sh ; then
   exit 1
 fi
 
-REQUIRED_AUTOMAKE_VERSION=1.7 . gnome-autogen.sh
+REQUIRED_AUTOMAKE_VERSION=1.9 . gnome-autogen.sh

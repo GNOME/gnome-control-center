@@ -1,4 +1,4 @@
-SUBDIRS = po libsounds libbackground libwindow-settings libgswitchit libkbdraw gnome-settings-daemon capplets control-center vfs-methods idl schemas $(TYPING_BREAK)
+SUBDIRS = po libsounds libbackground libwindow-settings libgswitchit libkbdraw gnome-settings-daemon capplets control-center help vfs-methods idl schemas $(TYPING_BREAK)
 
 #I removed the root-manager for now
 #
@@ -14,10 +14,14 @@ dist-hook: control-center.spec
 DISTCLEANFILES = \
   intltool-extract \
   intltool-merge \
-  intltool-update
+  intltool-update \
+  gnome-doc-utils.make
 
 EXTRA_DIST = \
 	control-center.spec.in	\
 	intltool-extract.in \
 	intltool-merge.in \
-	intltool-update.in
+	intltool-update.in \
+	gnome-doc-utils.make
+
+DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper
