@@ -394,7 +394,11 @@ capplet_set_icon (GtkWidget *window, char const *icon_file_name)
 	}
 
 	if (icon_pixbuf != NULL) {
+		/* Make sure that every window gets an icon */
+		gtk_window_set_default_icon (icon_pixbuf);
+
 		gtk_window_set_icon (GTK_WINDOW (window), icon_pixbuf);
+
 		g_object_unref (icon_pixbuf);
 	}
 }
