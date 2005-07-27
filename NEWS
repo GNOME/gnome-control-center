@@ -1,3 +1,51 @@
+gnome-control-center 2.11.90
+
+general:
+
+- change the way XKB GConf preferences are handled so that:
+  1) GConf keys are never written unless the user changes the preferences
+  2) If the keys are unset, the default XKB settings are used
+  (Mark McLoughlin) (#310513)
+- remove wm-properties (Mark McLoughlin)
+- set windows' icon for the keyboard dialogs (Jaap A. Haitsma) (#305096)
+- set a default icon for the capplets (Jaap A. Haitsma) (#305086)
+- try to run gnome-screensaver before xscreensaver (Rodrigo Moya) (#302347)
+
+about-me:
+
+- change the order of the buttons to match the HIG (Denis Cranston) (#309632)
+
+background:
+
+- if xmlParseFile returns NULL, then just return, rather than trying to parse 
+  the document (Rodney Dawes) (#310041)
+- update menu option when scrolling with the mouse (Sebastien Bacher) (#157396)
+- use GtkColorButton instead of GnomeColorPicker (Sebastien Bacher) (#171676)
+
+ui-properties:
+
+- show a label with the "Text beside icons" mode (Sebastien Bacher) (#308845)
+
+translations:
+
+Rostislav \"zbrox\" Raykov (bg)
+Miloslav Trmac (cs)
+Kostas Papadimas (el)
+Adam Weinberger (en_CA)
+Francisco Javier F. Serrador (es)
+Priit Laes (et)
+Ignacio Casal Quinteiro (gl)
+Ankit Patel (gu)
+Takeshi AIHANA (ja)
+Terance Edward Sola (nb)
+Reinout van Schouwen (nl)
+Terance Edward Sola (no)
+Marcel Telka (sk)
+Theppitak Karoonboonyanan (th)
+Clytie Siddall (vi)
+Funda Wang (zh_CN)
+
+------------------------------------------------------------------------------
 gnome-control-center 2.11.6
 
 general:
