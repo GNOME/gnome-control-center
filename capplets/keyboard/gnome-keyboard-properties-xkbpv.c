@@ -84,16 +84,13 @@ xkb_layout_preview_update (GladeXML * chooserDialog)
       if (XklConfigGetFromServer (&data))
         {
           if( ( p = data.layouts ) != NULL )
-          {
             for( i = data.numLayouts; --i >= 0; )
               free( *p++ );
-          }
 
           if( ( p = data.variants ) != NULL )
-          {
             for( i = data.numVariants; --i >= 0; )
               free( *p++ );
-          }
+          
           data.numLayouts =
           data.numVariants = 1;
           data.layouts = realloc (data.layouts, sizeof (char*));
