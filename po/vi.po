@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center for Gnome 2.12\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-26 06:20+0000\n"
-"PO-Revision-Date: 2005-07-26 18:19+0930\n"
+"POT-Creation-Date: 2005-07-30 06:17+0000\n"
+"PO-Revision-Date: 2005-07-30 23:18+0930\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <gnomevi-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -1525,12 +1525,11 @@ msgstr ""
 msgid "Assign shortcut keys to commands"
 msgstr "Gán phím tắt cho lệnh"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkb.c:69
-#: ../capplets/keyboard/gnome-keyboard-properties-xkb.c:95
+#: ../capplets/keyboard/gnome-keyboard-properties-xkb.c:84
 msgid "Unknown"
 msgstr "Không biết"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:251
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:273
 msgid "Layout"
 msgstr "Bố trí"
 
@@ -1538,8 +1537,8 @@ msgstr "Bố trí"
 #. the below options are to be included in the selected list.
 #. This is a HIG-compliant alternative to allowing no
 #. selection in the group.
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:255
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:206
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:277
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:228
 msgid "Default"
 msgstr "Mặc định"
 
@@ -2632,11 +2631,11 @@ msgstr ""
 "Hãy thử dùng cấu hình đơn giản hơn hoặc sử dụng một phiên bản phần mềm XFree "
 "mới hơn."
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:230
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:227
 msgid "Do _not show this warning again"
 msgstr "Đừn_g hiện cảnh báo này lần nữa"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:241
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:238
 msgid ""
 "The X system keyboard settings differ from your current GNOME keyboard "
 "settings.  Which set would you like to use?"
@@ -2644,11 +2643,11 @@ msgstr ""
 "Thiết lập bàn phím của X khác với thiết lập hiện thời GNOME của bạn. Bạn "
 "muốn dùng cái nào?"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:254
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:251
 msgid "Use X settings"
 msgstr "Dùng thiết lập X"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:256
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:253
 msgid "Use GNOME settings"
 msgstr "Dùng thiết lập GNOME"
 
@@ -2780,7 +2779,7 @@ msgstr "Màn hình"
 msgid "Screen on which BGApplier is to draw"
 msgstr "Màn hình để vẽ BGApplier (áp dụng nền)"
 
-#: ../libgswitchit/gswitchit_config.c:1016
+#: ../libgswitchit/gswitchit_config.c:1035
 #, c-format
 msgid "There was an error loading an image: %s"
 msgstr "Gặp lỗi khi tải ảnh: %s"
@@ -3069,10 +3068,12 @@ msgid "Keyboard options"
 msgstr "Tùy chọn bàn phím"
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:9
-msgid "Keyboard settings in gconf will be overridden from the system ASAP"
+msgid ""
+"Keyboard settings in gconf will be overridden from the system ASAP "
+"(deprecated)"
 msgstr ""
 "Thiết lập bàn phím trong GConf sẽ bị ghi đè từ hệ thống ngay càng sớm càng "
-"tốt."
+"tốt (bị phản đối)."
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:10
 msgid "Save/restore indicators together with layout groups"
@@ -3097,10 +3098,9 @@ msgstr "Thu hồi thông điệp cảnh báo «Cấu hình hệ thống X đã t
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:14
 msgid ""
 "Very soon, keyboard settings in gconf will be overridden (from the system "
-"configuration)"
-msgstr ""
-"Thiết lập bàn phím trong GConf sẽ bị ghi đè trong chốc nữa (từ cấu hình hệ "
-"thống)"
+"configuration) This key has been deprecated since GNOME 2.12, please unset "
+"the model, layouts and options keys to get the default system configuration."
+msgstr "Cấu hình hệ thống sắp đè thiết lập bàn phím trong GConf. Khóa này bị phản đối từ Gnome 2.12 thì bạn nên bỏ lập mẫu, các bố trí và phím tùy chọn để trở về cấu hình hệ thống mặc định."
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:15
 msgid "keyboard layout"
