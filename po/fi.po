@@ -4,6 +4,7 @@
 # Copyright (C) 2004 Free Software Foundation, Inc.
 # Mikko Rauhala <mjr@iki.fi>, x-2000
 # Pauli Virtanen <pauli.virtanen@hut.fi>, 2000-2004
+# Ilkka Tuohela <hile@iki.fi>, 2005.
 #
 # sticky key = pohjaan jäävä näppäin
 # bounce key = kimmonäppäin
@@ -12,34 +13,338 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-control-center 1.99.0\n"
+"Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-14 20:52+0100\n"
-"PO-Revision-Date: 2005-02-18 22:02+0200\n"
-"Last-Translator: Pauli Virtanen <pauli.virtanen@hut.fi>\n"
+"POT-Creation-Date: 2005-07-31 22:22+0300\n"
+"PO-Revision-Date: 2005-07-31 22:37+0300\n"
+"Last-Translator: Ilkka Tuohela <hile@iki.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n == 1 ? 0 : 1;\n"
 
-#: capplets/about-me/gnome-about-me.desktop.in.h:1
-msgid "About me"
+#: ../capplets/about-me/eel-alert-dialog.c:114
+msgid "Image/label border"
+msgstr "Kuvan/nimen reuna"
+
+#: ../capplets/about-me/eel-alert-dialog.c:115
+msgid "Width of border around the label and image in the alert dialog"
+msgstr "Kuvaa ja nimeä ympäröivän reunan leveys varoitusikkunassa"
+
+#: ../capplets/about-me/eel-alert-dialog.c:124
+msgid "Alert Type"
+msgstr "Hälytystyyppi"
+
+#: ../capplets/about-me/eel-alert-dialog.c:125
+msgid "The type of alert"
+msgstr "Hälytyksen tyyppi."
+
+#: ../capplets/about-me/eel-alert-dialog.c:133
+msgid "Alert Buttons"
+msgstr "Hälytyspainikkeet"
+
+#: ../capplets/about-me/eel-alert-dialog.c:134
+msgid "The buttons shown in the alert dialog"
+msgstr "Varoitusikkunassa näytettävät painikkeet"
+
+#: ../capplets/about-me/eel-alert-dialog.c:198
+msgid "Show more _details"
+msgstr "Näytä _lisää tietoja"
+
+#: ../capplets/about-me/gnome-about-me.desktop.in.in.h:1
+#: ../capplets/about-me/gnome-about-me.glade.h:14
+msgid "About Me"
 msgstr "Tietoja itsestä"
 
-#: capplets/about-me/gnome-about-me.desktop.in.h:2
-msgid "Information about myself"
-msgstr "Tietoja itsestä"
+#: ../capplets/about-me/gnome-about-me.desktop.in.in.h:2
+msgid "Set your personal information"
+msgstr "Aseta omat tiedot"
 
-#: capplets/accessibility/at-properties/at-enable-dialog.glade.h:1
+#: ../capplets/about-me/gnome-about-me.c:554
+msgid "Select Image"
+msgstr "Valitse kuva"
+
+#: ../capplets/about-me/gnome-about-me.c:556
+msgid "No Image"
+msgstr "Ei kuvaa"
+
+#: ../capplets/about-me/gnome-about-me.c:721
+msgid "Unable to open address book"
+msgstr "Osoitekirjaa ei voitu avata"
+
+#: ../capplets/about-me/gnome-about-me.c:733
+msgid "Unknown login ID, the user database might be corrupted"
+msgstr "Tuntematon kirjautumistunniste, käyttäjätietokanta voi olla "
+"vioittunut"
+
+#: ../capplets/about-me/gnome-about-me.c:764
+#: ../capplets/about-me/gnome-about-me.c:766
+#, c-format
+msgid "About %s"
+msgstr "%s tiedot"
+
+#: ../capplets/about-me/gnome-about-me-password.c:101
+#: ../capplets/about-me/gnome-about-me-password.c:380
+msgid "Old password is incorrect, please retype it"
+msgstr "Vanha salasana on väärin, kirjoita se uudestaan"
+
+#: ../capplets/about-me/gnome-about-me-password.c:112
+msgid "System error has occurred"
+msgstr "Tapahtui järjestelmävirhe"
+
+#: ../capplets/about-me/gnome-about-me-password.c:113
+msgid "Could not run /usr/bin/passwd"
+msgstr "Ohjelman /usr/bin/passwd suoritus epäonnistui"
+
+#: ../capplets/about-me/gnome-about-me-password.c:114
+msgid "Unable to launch backend"
+msgstr "Taustajärjestelmän käynnistys epäonnistui"
+
+#: ../capplets/about-me/gnome-about-me-password.c:116
+#: ../capplets/about-me/gnome-about-me-password.c:117
+msgid "Unexpected error has occurred"
+msgstr "Tapahtui odottamaton virhe"
+
+#: ../capplets/about-me/gnome-about-me-password.c:434
+msgid "Please type the passwords."
+msgstr "Syötä salasanat."
+
+#: ../capplets/about-me/gnome-about-me-password.c:442
+msgid "Please type the password again, it is wrong."
+msgstr "Salasana on väärin, syötä se uudestaan."
+
+#: ../capplets/about-me/gnome-about-me-password.c:445
+msgid "Click the Change Password button to change the password."
+msgstr "Vaihda salasana napsauttamalla \"Vaihda Salasana\"-painiketta"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:1
+#: ../vfs-methods/themus/apply-font.glade.h:1
+msgid " "
+msgstr " "
+
+#: ../capplets/about-me/gnome-about-me.glade.h:2
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
+#: ../capplets/font/font-properties.glade.h:1
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:1
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:1
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:1
+msgid "    "
+msgstr "    "
+
+#: ../capplets/about-me/gnome-about-me.glade.h:3
+msgid "<b>Email</b>"
+msgstr "<b>Sähköposti</b>"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:4
+msgid "<b>Home</b>"
+msgstr "<b>Koti</b>"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:5
+msgid "<b>Instant Messaging</b>"
+msgstr "<b>Pikaviestintä</b>"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:6
+msgid "<b>Job</b>"
+msgstr "<b>Työ</b>"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:7
+msgid "<b>Please type the passwords.</b>"
+msgstr "<b>Syötä salasanat.</b>"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:8
+msgid "<b>Telephone</b>"
+msgstr "<b>Puhelin</b>"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:9
+msgid "<b>Web</b>"
+msgstr "<b>WWW</b>"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:10
+msgid "<b>Work</b>"
+msgstr "<b>Työ</b>"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:11
+msgid "A_IM/iChat:"
+msgstr "A_IM/iChat:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:12
+msgid "A_ddress:"
+msgstr "_Osoite:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:13
+msgid "A_ssistant:"
+msgstr "A_ssistentti:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:15
+msgid "Address"
+msgstr "Osoite"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:16
+msgid "C_ity:"
+msgstr "_Kaupunki"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:17
+msgid "C_ompany:"
+msgstr "_Yhtiö:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:18
+msgid "Cale_ndar:"
+msgstr "K_alenteri:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:19
+msgid "Change Passwo_rd..."
+msgstr "Vaihda _salasana..."
+
+#: ../capplets/about-me/gnome-about-me.glade.h:20
+msgid "Change Password"
+msgstr "Vaihda salasana"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:21
+msgid "Ci_ty:"
+msgstr "_Kaupunki"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:22
+msgid "Co_untry:"
+msgstr "_Maa:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:23
+msgid "Contact"
+msgstr "Yhteystiedot"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:24
+msgid "Cou_ntry:"
+msgstr "_Maa:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:25
+msgid "Full Name"
+msgstr "Koko nimi"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:26
+msgid "Hom_e:"
+msgstr "_Koti:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:27
+msgid "IC_Q:"
+msgstr "IC_Q:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:28
+msgid "M_SN:"
+msgstr "_MSN:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:29
+msgid "Old pa_ssword:"
+msgstr "Vanha _salasana:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:30
+msgid "P.O. _box:"
+msgstr "_Postilokero:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:31
+msgid "P._O. box:"
+msgstr "Postilokero:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:32
+msgid "Personal Info"
+msgstr "Henkilötiedot"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:33
+msgid "State/Pro_vince:"
+msgstr "Lääni tai osa_valtio:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:34
+msgid "User name:"
+msgstr "Käyttäjä_tunnus:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:35
+msgid "Web _log:"
+msgstr "WWW-_loki:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:36
+msgid "Wor_k:"
+msgstr "_Työ:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:37
+msgid "Work _fax:"
+msgstr "Työ-_fax:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:38
+msgid "Zip/_Postal code:"
+msgstr "_Postinumero:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:39
+msgid "_Address:"
+msgstr "_Osoite:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:40
+msgid "_Department:"
+msgstr "_Laitos:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:41
+msgid "_Groupwise:"
+msgstr "_Groupwise:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:42
+msgid "_Home page:"
+msgstr "Koti_sivu:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:43
+msgid "_Home:"
+msgstr "_Koti:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:44
+msgid "_Jabber:"
+msgstr "_Jabber:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:45
+msgid "_Manager:"
+msgstr "_Johtaja:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:46
+msgid "_Mobile:"
+msgstr "_Matkapuhelin:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:47
+msgid "_New password:"
+msgstr "U_usi salasana:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:48
+msgid "_Profession:"
+msgstr "_Ammatti:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:49
+msgid "_Retype new password:"
+msgstr "Kirjoita uusi salasana uudelleen:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:50
+msgid "_State/Province:"
+msgstr "_Lääni tai osavaltio:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:51
+msgid "_Title:"
+msgstr "_Arvonimi:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:52
+msgid "_Work:"
+msgstr "_Työ:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:53
+msgid "_Yahoo:"
+msgstr "_Yahoo:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:54
+msgid "_Zip/Postal code:"
+msgstr "Postinumero:"
+
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:1
 msgid "<b>Applications</b>"
 msgstr "<b>Sovellukset</b>"
 
-#: capplets/accessibility/at-properties/at-enable-dialog.glade.h:2
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:2
 msgid "<b>Support</b>"
 msgstr "<b>Tuki</b>"
 
-#: capplets/accessibility/at-properties/at-enable-dialog.glade.h:3
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:3
 msgid ""
 "<small><i><b>Note:</b> Changes to this setting will not take effect until "
 "you next log in.</i></small>"
@@ -47,44 +352,44 @@ msgstr ""
 "<small><i><b>Huomaa:</b> Tämän asetuksen muutokset tulevat voimaan vasta "
 "seuraavan kerran sisään kirjauduttaessa.</i></small>"
 
-#: capplets/accessibility/at-properties/at-enable-dialog.glade.h:4
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:4
 msgid "Assistive Technology Preferences"
 msgstr "Esteettömyysohjelma-asetukset"
 
-#: capplets/accessibility/at-properties/at-enable-dialog.glade.h:5
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:5
 msgid "Close and _Log Out"
 msgstr "Sulje ja _kirjaudu ulos"
 
-#: capplets/accessibility/at-properties/at-enable-dialog.glade.h:6
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:6
 msgid "Start these assistive technologies every time you log in:"
 msgstr ""
 "Käynnistä seuraavat esteettömyysohjelmat joka kerta sisään kirjauduttaessa:"
 
-#: capplets/accessibility/at-properties/at-enable-dialog.glade.h:7
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:7
 msgid "_Enable assistive technologies"
 msgstr "_Käytä esteettömyysohjelmia"
 
-#: capplets/accessibility/at-properties/at-enable-dialog.glade.h:8
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:8
 msgid "_Magnifier"
 msgstr "_Suurennos"
 
-#: capplets/accessibility/at-properties/at-enable-dialog.glade.h:9
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:9
 msgid "_On-screen keyboard"
 msgstr "_Ruudulla näkyvä näppäimistö"
 
-#: capplets/accessibility/at-properties/at-enable-dialog.glade.h:10
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:10
 msgid "_Screenreader"
 msgstr "_Näytön luku"
 
-#: capplets/accessibility/at-properties/at-properties.desktop.in.in.h:1
+#: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:1
 msgid "Assistive Technology Support"
 msgstr "Esteettömyysohjelmatuki"
 
-#: capplets/accessibility/at-properties/at-properties.desktop.in.in.h:2
+#: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:2
 msgid "Enable support for GNOME assistive technologies at login"
 msgstr "Ota käyttöön tuki Gnomen esteettömyysohjelmille sisään kirjauduttaessa"
 
-#: capplets/accessibility/at-properties/main.c:60
+#: ../capplets/accessibility/at-properties/main.c:60
 msgid ""
 "No Assistive Technology is available on your system.  The 'gok' package must "
 "be installed in order to get on-screen keyboard support, and the "
@@ -95,7 +400,7 @@ msgstr ""
 "asennettuna näppäimistön näyttämiseksi ruudulla, ja \"gnopernicus\"-paketti "
 "näytön lukua ja suurentamista varten."
 
-#: capplets/accessibility/at-properties/main.c:62
+#: ../capplets/accessibility/at-properties/main.c:62
 msgid ""
 "Not all available assistive technologies are installed on your system.  The "
 "'gok' package must be installed in order to get on-screen keyboard support."
@@ -103,7 +408,7 @@ msgstr ""
 "Kaikkia mahdollisia esteettömyysohjelmia ei ole asennettu järjestelmään.  "
 "\"gok\"-paketti täytyy olla asennettuna  näppäimistön näyttämiseksi ruudulla."
 
-#: capplets/accessibility/at-properties/main.c:64
+#: ../capplets/accessibility/at-properties/main.c:64
 msgid ""
 "Not all available assistive technologies are installed on your system.  The "
 "'gnopernicus' package must be installed for screenreading and magnifying "
@@ -113,36 +418,36 @@ msgstr ""
 "\"gnopernicus\"-paketti täytyy olla asennettuna näytön lukua ja "
 "suurentamista varten."
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:241
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:241
 #, c-format
 msgid "There was an error launching the mouse preferences dialog: %s"
 msgstr "Hiiren asetusikkunan käynnistys epäonnistui: %s"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:337
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:396
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:337
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:398
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "AccessX-asetusten tuonti tiedostosta \"%s\" epäonnistui"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:433
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:435
 msgid "Import Feature Settings File"
 msgstr "Tuo ominaisuuksien asetustiedosto"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:437
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:439
 msgid "_Import"
 msgstr "_Tuo"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
-#: capplets/keyboard/keyboard.desktop.in.in.h:1
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.in.h:1
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:20
+#: ../capplets/keyboard/keyboard.desktop.in.in.h:1
 msgid "Keyboard"
 msgstr "Näppäimistö"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.in.h:2
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.in.h:2
 msgid "Set your keyboard accessibility preferences"
 msgstr "Muuta näppäimistön esteettömyysasetuksia"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.c:59
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.c:59
 msgid ""
 "This system does not seem to have the XKB extension.  The keyboard "
 "accessibility features will not operate without it."
@@ -150,104 +455,95 @@ msgstr ""
 "Tässä järjestelmässä ei vaikuta olevan XKB-laajennosta. Näppäimistön "
 "esteettömyysominaisuudet eivät toimi ilman sitä."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
-#: capplets/font/font-properties.glade.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:1
-#: capplets/mouse/gnome-mouse-properties.glade.h:1
-#: capplets/ui-properties/gnome-ui-properties.glade.h:1
-msgid "    "
-msgstr "    "
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:2
-#: capplets/network/gnome-network-preferences.glade.h:2
-#: capplets/theme-switcher/theme-install.glade.h:1
-#: capplets/theme-switcher/theme-properties.glade.h:1
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:1
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:2
+#: ../capplets/theme-switcher/theme-install.glade.h:1
+#: ../capplets/theme-switcher/theme-properties.glade.h:1
 msgid "*"
 msgstr "*"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
 msgid "<b>Enable Bo_unce Keys</b>"
 msgstr "<b>Käytä _kimmonäppäimiä</b>"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
 msgid "<b>Enable Slo_w Keys</b>"
 msgstr "<b>Käytä h_itaita näppäimiä</b>"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
 msgid "<b>Enable _Mouse Keys</b>"
 msgstr "<b>Käytä _hiirinäppäimiä</b>"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
 msgid "<b>Enable _Repeat Keys</b>"
 msgstr "<b>Käytä _toistonäppäimiä</b>"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
 msgid "<b>Enable _Sticky Keys</b>"
 msgstr "<b>Kä_ytä pohjaan jääviä näppäimiä</b>"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
 msgid "<b>Features</b>"
 msgstr "<b>Ominaisuudet</b>"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
 msgid "<b>Toggle Keys</b>"
 msgstr "<b>Piippaavat näppäimet</b>"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
 msgid "Basic"
 msgstr "Perusteet"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:11
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:11
 msgid "Beep if key is re_jected"
 msgstr "Piippaa kun painallus _jää huomiotta"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:12
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:12
 msgid "Beep when _features turned on or off from keyboard"
 msgstr ""
 "Piippaa, kun _ominaisuuksia otetaan käyttöön tai poistetaan\n"
 "käytöstä näppäimistön avulla"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:13
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:13
 msgid "Beep when _modifier is pressed"
 msgstr "P_iippaa, kun muunnosnäppäintä painetaan"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
 msgid "Beep when an LED is turned on and two beeps when one is turned off."
 msgstr ""
 "Piippaa kerran, kun jokin näppäimistön valoista syttyy ja kahdesti kun "
 "sammuu."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
 msgid "Beep when key is:"
 msgstr "Piippaa kun näppäin on:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:16
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:16
 msgid "Del_ay:"
 msgstr "_Viive:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:17
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:17
 msgid "Delay between keypress and pointer mo_vement:"
 msgstr "Aloita _liike, kun painalluksesta on kulunut:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:18
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:18
 msgid "Disa_ble if two keys pressed together"
 msgstr "Poi_sta käytöstä jos kahta näppäintä painetaan samalla"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:19
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:19
 msgid "E_nable Toggle Keys"
 msgstr "Käytä piippaavia _näppäimiä"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:20
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:20
 msgid "Filters"
 msgstr "Suodattimet"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:21
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:21
 msgid "I_gnore duplicate keypresses within:"
 msgstr "_Sivuuta monikertaiset näppäilyt aikana:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:22
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:22
 msgid ""
 "Ignore all subsequent presses of the SAME key if they happen within a user "
 "selectable period of time."
@@ -255,29 +551,29 @@ msgstr ""
 "Sivuuta kaikki peräkkäiset saman näppäimen painallukset, jotka tapahtuvat "
 "säädettävän ajan kuluessa."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:23
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:23
 msgid "Keyboard Accessibility Preferences (AccessX)"
 msgstr "Näppäimistön esteettömyysasetukset (AccessX)"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
 msgid "Ma_ximum pointer speed:"
 msgstr "S_uurin osoittimen nopeus:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
 msgid "Mouse Keys"
 msgstr "Hiirinäppäimet"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
 msgid "Mouse _Preferences..."
 msgstr "Hiiren asetukset..."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
 msgid ""
 "Only accept keys after they have been pressed and held for a user adjustable "
 "amount of time."
 msgstr "Hyväksy vain määritellyn ajan pohjassa olleet näppäinten painallukset"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:28
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:28
 msgid ""
 "Perform multiple simultaneous key press operations by pressing modifier keys "
 "in sequence."
@@ -285,164 +581,164 @@ msgstr ""
 "Korvaa monen muunnosnäppäimen (Control yms.) painaminen samaan aikaan niiden "
 "näppäilemisellä peräkkäin."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:29
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:29
 msgid "S_peed:"
 msgstr "_Nopeus:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:30
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:30
 msgid "Time to acce_lerate to maximum speed:"
 msgstr "Suurimpaan n_opeuteen kiihtymisaika:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:31
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:31
 msgid "Turn the numeric keypad into a mouse control pad."
 msgstr "Tee numeronäppäimistöstä hiiren ohjauspainikkeet."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:32
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:32
 msgid "_Disable if unused for:"
 msgstr "_Poista käytöstä jos käyttämättömänä:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
 msgid "_Enable keyboard accessibility features"
 msgstr "_Käytä näppäimistön esteettömyysominaisuuksia"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
 msgid "_Import Feature Settings..."
 msgstr "_Tuo ominaisuuksien asetukset..."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:35
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:35
 msgid "_Only accept keys held for:"
 msgstr "Hy_väksy vain näppäilyt, jotka kestävät pidempään kuin:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:39
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:39
 msgid "_Type to test settings:"
 msgstr "Kokeile _asetuksia kirjoittamalla:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:37
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:37
 msgid "_accepted"
 msgstr "_hyväksytty"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:38
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:38
 msgid "_pressed"
 msgstr "_painettu"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:39
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:39
 msgid "_rejected"
 msgstr "h_ylätty"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:40
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:40
 msgid "characters/second"
 msgstr "merkkiä/s"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:41
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:41
 msgid "milliseconds"
 msgstr "millisekuntia"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:42
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:42
 msgid "pixels/second"
 msgstr "kuvapistettä/s"
 
 #. set the timeout value  label with correct value of timeout
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
-#: capplets/mouse/gnome-mouse-properties.c:133
-#: capplets/mouse/gnome-mouse-properties.c:578
-#: capplets/mouse/gnome-mouse-properties.glade.h:27
-#: capplets/windows/gnome-window-properties.glade.h:10
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
+#: ../capplets/mouse/gnome-mouse-properties.c:131
+#: ../capplets/mouse/gnome-mouse-properties.c:862
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
+#: ../capplets/windows/gnome-window-properties.glade.h:10
 msgid "seconds"
 msgstr "sekuntia"
 
-#: capplets/background/background.desktop.in.in.h:1
+#: ../capplets/background/background.desktop.in.in.h:1
 msgid "Change your Desktop Background settings"
 msgstr "Muuta työpöydän taustan asetuksia"
 
-#: capplets/background/background.desktop.in.in.h:2
+#: ../capplets/background/background.desktop.in.in.h:2
 msgid "Desktop Background"
 msgstr "Työpöydän tausta"
 
-#: capplets/background/gnome-background-properties.glade.h:1
+#: ../capplets/background/gnome-background-properties.glade.h:1
 msgid "<b>Desktop _Wallpaper</b>"
 msgstr "<b>Työpöydän t_austa</b>"
 
-#: capplets/background/gnome-background-properties.glade.h:2
+#: ../capplets/background/gnome-background-properties.glade.h:2
 msgid "<b>_Desktop Colors</b>"
 msgstr "<b>_Työpöydän värit</b> "
 
-#: capplets/background/gnome-background-properties.glade.h:3
+#: ../capplets/background/gnome-background-properties.glade.h:3
 msgid "Desktop Background Preferences"
 msgstr "Työpöydän taustan asetukset"
 
-#: capplets/background/gnome-background-properties.glade.h:4
-msgid "Pick a color"
-msgstr "Valitse väri"
+#: ../capplets/background/gnome-background-properties.glade.h:4
+msgid "Open a dialog to specify the color"
+msgstr "Avaa ikkuna, josta voit valita värin"
 
-#: capplets/background/gnome-background-properties.glade.h:5
+#: ../capplets/background/gnome-background-properties.glade.h:5
 msgid "_Add Wallpaper"
 msgstr "_Lisää tausta"
 
-#: capplets/background/gnome-background-properties.glade.h:6
+#: ../capplets/background/gnome-background-properties.glade.h:6
 msgid "_Style:"
 msgstr "_Tyyli:"
 
-#: capplets/background/gnome-wp-capplet.c:72
-#: capplets/common/capplet-util.c:340
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:326
+#: ../capplets/background/gnome-wp-capplet.c:72
+#: ../capplets/common/capplet-util.c:340
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:333
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "Virhe ohjeen näyttämisessä: %s"
 
-#: capplets/background/gnome-wp-capplet.c:1061
-#: capplets/background/gnome-wp-capplet.c:1077
+#: ../capplets/background/gnome-wp-capplet.c:1037
+#: ../capplets/background/gnome-wp-capplet.c:1055
 msgid "Centered"
 msgstr "Keskellä"
 
-#: capplets/background/gnome-wp-capplet.c:1085
-#: capplets/background/gnome-wp-capplet.c:1100
+#: ../capplets/background/gnome-wp-capplet.c:1063
+#: ../capplets/background/gnome-wp-capplet.c:1080
 msgid "Fill Screen"
 msgstr "Täytä ruutu"
 
-#: capplets/background/gnome-wp-capplet.c:1108
-#: capplets/background/gnome-wp-capplet.c:1123
+#: ../capplets/background/gnome-wp-capplet.c:1088
+#: ../capplets/background/gnome-wp-capplet.c:1105
 msgid "Scaled"
 msgstr "Sovitettu"
 
-#: capplets/background/gnome-wp-capplet.c:1131
-#: capplets/background/gnome-wp-capplet.c:1146
+#: ../capplets/background/gnome-wp-capplet.c:1113
+#: ../capplets/background/gnome-wp-capplet.c:1130
 msgid "Tiled"
 msgstr "Vierekkäin"
 
-#: capplets/background/gnome-wp-capplet.c:1170
-#: capplets/background/gnome-wp-capplet.c:1179
+#: ../capplets/background/gnome-wp-capplet.c:1154
+#: ../capplets/background/gnome-wp-capplet.c:1163
 msgid "Solid Color"
 msgstr "Yhtenäinen väri"
 
-#: capplets/background/gnome-wp-capplet.c:1187
-#: capplets/background/gnome-wp-capplet.c:1196
+#: ../capplets/background/gnome-wp-capplet.c:1171
+#: ../capplets/background/gnome-wp-capplet.c:1180
 msgid "Horizontal Gradient"
 msgstr "Vaakaväriliuku"
 
-#: capplets/background/gnome-wp-capplet.c:1204
-#: capplets/background/gnome-wp-capplet.c:1213
+#: ../capplets/background/gnome-wp-capplet.c:1188
+#: ../capplets/background/gnome-wp-capplet.c:1197
 msgid "Vertical Gradient"
 msgstr "Pystyväriliuku"
 
 #. Create the file chooser dialog stuff here
-#: capplets/background/gnome-wp-capplet.c:1260
+#: ../capplets/background/gnome-wp-capplet.c:1244
 msgid "Add Wallpaper"
 msgstr "Lisää tausta"
 
-#: capplets/background/gnome-wp-info.c:49
+#: ../capplets/background/gnome-wp-info.c:57
 msgid "No Wallpaper"
 msgstr "Ei taustaa"
 
-#: capplets/background/gnome-wp-item.c:289
-#: capplets/background/gnome-wp-item.c:291
+#: ../capplets/background/gnome-wp-item.c:292
+#: ../capplets/background/gnome-wp-item.c:294
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "kuvapiste"
 msgstr[1] "kuvapistettä"
 
-#: capplets/common/activate-settings-daemon.c:18
+#: ../capplets/common/activate-settings-daemon.c:18
 msgid ""
 "Unable to start the settings manager 'gnome-settings-daemon'.\n"
 "Without the GNOME settings manager running, some preferences may not take "
@@ -455,166 +751,163 @@ msgstr ""
 "Tämä voi johtua ongelmasta Bonobossa tai siitä, että jokin muu kuin Gnomen "
 "asetushallinta on käynnissä ja häiritsee Gnomen asetushallintaa."
 
-#: capplets/common/capplet-stock-icons.c:94
+#: ../capplets/common/capplet-stock-icons.c:94
 #, c-format
 msgid "Unable to load capplet stock icon '%s'\n"
 msgstr ""
 "Hallintasovelman (capplet) peruskuvakkeen \"%s\" lataaminen ei onnistu\n"
 
-#: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
+#: ../capplets/common/capplet-util.c:239 ../capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr "Ota asetukset käyttöön ja lopeta"
 
-#: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:765
-#: capplets/keyboard/gnome-keyboard-properties.c:225
-#: capplets/mouse/gnome-mouse-properties.c:812
-#: capplets/sound/sound-properties-capplet.c:244
+#: ../capplets/common/capplet-util.c:243
+#: ../capplets/default-applications/gnome-default-applications-properties.c:765
+#: ../capplets/keyboard/gnome-keyboard-properties.c:225
+#: ../capplets/mouse/gnome-mouse-properties.c:998
+#: ../capplets/sound/sound-properties-capplet.c:244
 msgid "Retrieve and store legacy settings"
 msgstr "Hae ja tallenna aikaisempien versioiden asetukset"
 
-#: capplets/common/file-transfer-dialog.c:95
+#: ../capplets/common/file-transfer-dialog.c:94
 #, c-format
-msgid "%i of %i"
-msgstr "%i / %i"
+msgid "Copying file: %i of %i"
+msgstr "Kopioidaan tiedostoa: %i/%i"
 
-#: capplets/common/file-transfer-dialog.c:119
+#: ../capplets/common/file-transfer-dialog.c:122
 #, c-format
-msgid "Transferring: %s"
-msgstr "%s siirtyy"
+msgid "Copying '%s'"
+msgstr "Kopioidaan \"%s\""
 
-#: capplets/common/file-transfer-dialog.c:126
-#, c-format
-msgid "From: %s"
-msgstr "Lähde: %s"
-
-#: capplets/common/file-transfer-dialog.c:134
-#, c-format
-msgid "To: %s"
-msgstr "Kohde: %s"
-
-#: capplets/common/file-transfer-dialog.c:185
+#: ../capplets/common/file-transfer-dialog.c:193
 msgid "From URI"
 msgstr "Lähde-URI"
 
-#: capplets/common/file-transfer-dialog.c:186
+#: ../capplets/common/file-transfer-dialog.c:194
 msgid "URI currently transferring from"
 msgstr "URI, josta siirtyy nyt"
 
-#: capplets/common/file-transfer-dialog.c:193
+#: ../capplets/common/file-transfer-dialog.c:201
 msgid "To URI"
 msgstr "Kohde-URI"
 
-#: capplets/common/file-transfer-dialog.c:194
+#: ../capplets/common/file-transfer-dialog.c:202
 msgid "URI currently transferring to"
 msgstr "URI, johon siirtyy nyt"
 
-#: capplets/common/file-transfer-dialog.c:201
+#: ../capplets/common/file-transfer-dialog.c:209
 msgid "Fraction completed"
 msgstr "Valmis osuus"
 
-#: capplets/common/file-transfer-dialog.c:202
+#: ../capplets/common/file-transfer-dialog.c:210
 msgid "Fraction of transfer currently completed"
 msgstr "Siirrosta tällä hetkellä valmis osuus"
 
-#: capplets/common/file-transfer-dialog.c:209
+#: ../capplets/common/file-transfer-dialog.c:217
 msgid "Current URI index"
 msgstr "Nykyinen URI-numero"
 
-#: capplets/common/file-transfer-dialog.c:210
+#: ../capplets/common/file-transfer-dialog.c:218
 msgid "Current URI index - starts from 1"
 msgstr "Nykyinen URI-numero - alkaa yhdestä"
 
-#: capplets/common/file-transfer-dialog.c:217
+#: ../capplets/common/file-transfer-dialog.c:225
 msgid "Total URIs"
 msgstr "URI:eja yhteensä"
 
-#: capplets/common/file-transfer-dialog.c:218
+#: ../capplets/common/file-transfer-dialog.c:226
 msgid "Total number of URIs"
 msgstr "URI:ien määrä yhteensä"
 
-#: capplets/common/file-transfer-dialog.c:372
-#: capplets/common/file-transfer-dialog.c:374
+#: ../capplets/common/file-transfer-dialog.c:327
+#: ../capplets/common/file-transfer-dialog.c:369
+msgid "Copying files"
+msgstr "Kopioidaan tiedostoja"
+
+#: ../capplets/common/file-transfer-dialog.c:345
+msgid "From:"
+msgstr "Lähde: "
+
+#: ../capplets/common/file-transfer-dialog.c:349
+msgid "To:"
+msgstr "Kohde: "
+
+#: ../capplets/common/file-transfer-dialog.c:448
 msgid "Connecting..."
 msgstr "Yhdistyy..."
 
-#: capplets/common/file-transfer-dialog.c:379
-#: capplets/common/file-transfer-dialog.c:381
-msgid "Downloading..."
-msgstr "Tallentuu..."
-
-#: capplets/common/gconf-property-editor.c:170
+#: ../capplets/common/gconf-property-editor.c:170
 msgid "Key"
 msgstr "Avain"
 
-#: capplets/common/gconf-property-editor.c:171
+#: ../capplets/common/gconf-property-editor.c:171
 msgid "GConf key to which this property editor is attached"
 msgstr "GConf-avain, johon tämä ominaisuuseditori on liitetty"
 
-#: capplets/common/gconf-property-editor.c:177
+#: ../capplets/common/gconf-property-editor.c:177
 msgid "Callback"
 msgstr "Paluukutsu"
 
-#: capplets/common/gconf-property-editor.c:178
+#: ../capplets/common/gconf-property-editor.c:178
 msgid "Issue this callback when the value associated with key gets changed"
 msgstr "Kutsu tätä, kun avaimeen liittyvä arvo muuttuu"
 
-#: capplets/common/gconf-property-editor.c:183
+#: ../capplets/common/gconf-property-editor.c:183
 msgid "Change set"
 msgstr "Muutosjoukko"
 
-#: capplets/common/gconf-property-editor.c:184
+#: ../capplets/common/gconf-property-editor.c:184
 msgid ""
 "GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr ""
 "GConf-muutosjoukko, joka sisältää datan, joka lähtee asetukset "
 "toteutettaessa gconf-asiakkaalle"
 
-#: capplets/common/gconf-property-editor.c:189
+#: ../capplets/common/gconf-property-editor.c:189
 msgid "Conversion to widget callback"
 msgstr "Säätimeenmuunnoksen kutsu"
 
-#: capplets/common/gconf-property-editor.c:190
+#: ../capplets/common/gconf-property-editor.c:190
 msgid ""
 "Callback to be issued when data are to be converted from GConf to the widget"
 msgstr "Funktio, jota kutsutaan, kun data muuntuu GConfista säätimeen"
 
-#: capplets/common/gconf-property-editor.c:195
+#: ../capplets/common/gconf-property-editor.c:195
 msgid "Conversion from widget callback"
 msgstr "Säätimestämuunnoksen kutsu"
 
-#: capplets/common/gconf-property-editor.c:196
+#: ../capplets/common/gconf-property-editor.c:196
 msgid ""
 "Callback to be issued when data are to be converted to GConf from the widget"
 msgstr "Funktio, jota kutsutaan, kun data muuntuu säätimestä GConfiin"
 
-#: capplets/common/gconf-property-editor.c:201
+#: ../capplets/common/gconf-property-editor.c:201
 msgid "UI Control"
 msgstr "Käyttöliittymäsäädin"
 
-#: capplets/common/gconf-property-editor.c:202
+#: ../capplets/common/gconf-property-editor.c:202
 msgid "Object that controls the property (normally a widget)"
 msgstr "Olio (yleensä säädin), joka säätää ominaisuutta"
 
-#: capplets/common/gconf-property-editor.c:217
+#: ../capplets/common/gconf-property-editor.c:217
 msgid "Property editor object data"
 msgstr "Ominaisuusmuokkaimen oliotietoja"
 
-#: capplets/common/gconf-property-editor.c:218
+#: ../capplets/common/gconf-property-editor.c:218
 msgid "Custom data required by the specific property editor"
 msgstr "Tietyn ominaisuusmuokkaimen vaatima muu data"
 
-#: capplets/common/gconf-property-editor.c:224
+#: ../capplets/common/gconf-property-editor.c:224
 msgid "Property editor data freeing callback"
 msgstr "Ominaisuusmuokkaimen datan vapauttamisen paluukutsu"
 
-#: capplets/common/gconf-property-editor.c:225
+#: ../capplets/common/gconf-property-editor.c:225
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr ""
 "Funktio, joka saa kutsun kun ominaisuusmuokkainolion dataa ollaan "
 "vapauttamassa"
 
-#: capplets/common/gconf-property-editor.c:1545
+#: ../capplets/common/gconf-property-editor.c:1466
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -627,7 +920,7 @@ msgstr ""
 "Varmista, että se on olemassa ja yritä uudelleen tai valitse toinen "
 "taustakuva."
 
-#: capplets/common/gconf-property-editor.c:1553
+#: ../capplets/common/gconf-property-editor.c:1474
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -640,69 +933,69 @@ msgstr ""
 "\n"
 "Valitse toinen kuva."
 
-#: capplets/common/gconf-property-editor.c:1672
+#: ../capplets/common/gconf-property-editor.c:1593
 msgid "Please select an image."
 msgstr "Valitse kuva"
 
-#: capplets/common/gconf-property-editor.c:1677
+#: ../capplets/common/gconf-property-editor.c:1598
 msgid "_Select"
 msgstr "_Valittu"
 
-#: capplets/default-applications/default-applications.desktop.in.in.h:1
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:18
+#: ../capplets/default-applications/default-applications.desktop.in.in.h:1
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:18
 msgid "Preferred Applications"
 msgstr "Oletussovellukset"
 
-#: capplets/default-applications/default-applications.desktop.in.in.h:2
+#: ../capplets/default-applications/default-applications.desktop.in.in.h:2
 msgid "Select your default applications"
 msgstr "Valitse oletusohjelmasi"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:9
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:9
 msgid "Debian Sensible Browser"
 msgstr "Debianin oletusarvoinen selain"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:10
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:10
 msgid "Epiphany"
 msgstr "Epiphany"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:11
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:11
 msgid "Galeon"
 msgstr "Galeon"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:12
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:12
 msgid "Encompass"
 msgstr "Encompass"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:13
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:13
 msgid "Firebird"
 msgstr "Firebird"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:14
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:14
 msgid "Firefox"
 msgstr "Firefox"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:15
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:16
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:15
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:16
 msgid "Mozilla"
 msgstr "Mozilla"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:17
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:17
 msgid "Netscape Communicator"
 msgstr "Netscape Communicator"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:18
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:18
 msgid "Konqueror"
 msgstr "Konqueror"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:19
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:19
 msgid "W3M Text Browser"
 msgstr "W3M, WWW-tekstiselain"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:20
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:20
 msgid "Lynx Text Browser"
 msgstr "Lynx, WWW-tekstiselain"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:21
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:21
 msgid "Links Text Browser"
 msgstr "Links, WWW-tekstiselain"
 
@@ -710,140 +1003,141 @@ msgstr "Links, WWW-tekstiselain"
 #. * there is only one (the first entry in this list) Evolution entry
 #. * in the list shown to the user
 #.
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:36
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:37
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:38
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:39
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:40
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:41
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:36
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:37
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:38
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:39
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:40
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:41
 msgid "Evolution Mail Reader"
 msgstr "Evolution-postiohjelma"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:42
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:42
 msgid "Balsa"
 msgstr "Balsa"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:43
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:43
 msgid "KMail"
 msgstr "KMail"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:44
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:44
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:45
 msgid "Thunderbird"
 msgstr "Thunderbird"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:45
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:46
 msgid "Mozilla Mail"
 msgstr "Mozilla Mail"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:46
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:47
 msgid "Mutt"
 msgstr "Mutt"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:57
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:58
 msgid "Debian Terminal Emulator"
 msgstr "Debianin oletusarvoinen pääte"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:58
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:59
 msgid "GNOME Terminal"
 msgstr "GNOME-pääte"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:59
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:60
 msgid "Standard XTerminal"
 msgstr "Tavallinen X-pääte"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:60
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:61
 msgid "NXterm"
 msgstr "NXterm"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:61
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:62
 msgid "RXVT"
 msgstr "RXVT"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:62
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:63
 msgid "aterm"
 msgstr "aterm"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:63
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:64
 msgid "ETerm"
 msgstr "ETerm"
 
-#: capplets/default-applications/gnome-default-applications-properties.c:123
+#: ../capplets/default-applications/gnome-default-applications-properties.c:123
 msgid "Please specify a name and a command for this editor."
 msgstr "Anna tämän editorin nimi ja komento."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:2
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:2
 msgid "Add..."
 msgstr "Lisää..."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:3
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:3
 msgid "C_ustom"
 msgstr "_Muu"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:4
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:4
 msgid "C_ustom:"
 msgstr "_Muu"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:5
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:5
 msgid "Can open _URIs"
 msgstr "Voi avata _URI:ta"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:6
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:6
 msgid "Can open multiple _files"
 msgstr "Voi _avata useita tiedostoja"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:7
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:7
 msgid "Co_mmand:"
 msgstr "Ko_mento:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:8
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:8
 msgid "Custom Editor Properties"
 msgstr "Muun editorin ominaisuudet"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:9
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:9
 msgid "Default Mail Reader"
 msgstr "Oletusarvoinen postiohjelma"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:10
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:10
 msgid "Default Terminal"
 msgstr "Oletusarvoinen pääte"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:11
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:11
 msgid "Default Text Editor"
 msgstr "Oletusarvoinen tekstieditori"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:12
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:12
 msgid "Default Web Browser"
 msgstr "Oletusarvoinen WWW-selain"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:13
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:13
 msgid "Default Window Manager"
 msgstr "Oletusarvoinen ikkunointiohjelma"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:14
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:14
 msgid "Delete"
 msgstr "Poista"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:15
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:15
 msgid "E_xec Flag:"
 msgstr "_Valitsin:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:16
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:16
 msgid "Edit..."
 msgstr "Muokkaa..."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:17
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:17
 msgid "Mail Reader"
 msgstr "Sähköpostiohjelma"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:19
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:19
 msgid "Run in a _terminal"
 msgstr "Käynnistä _päätteessä"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:20
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:20
 msgid "Run in a t_erminal"
 msgstr "Käynnistä _päätteessä"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:21
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:21
 msgid ""
 "Select the window manager you want.  You will need to hit apply, wave the "
 "magic wand, and do a magic dance for it to work."
@@ -852,90 +1146,90 @@ msgstr ""
 "painiketta, heiluttaa taikasauvaa ja tanssia sadetanssi saadaksesi sen "
 "toimimaan."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:22
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:22
 msgid "Terminal"
 msgstr "Pääte"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:23
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:23
 msgid "Text Editor"
 msgstr "Tekstieditori"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:24
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:24
 msgid "Understands _Netscape Remote Control"
 msgstr "Ymmärtää _Netscapen ohjauskomentoja"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:25
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:25
 msgid "Use this _editor to open text files in the file manager"
 msgstr "Avaa tekstitiedostot tällä _editorilla tiedostonhallinnassa"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:26
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:26
 msgid "Web Browser"
 msgstr "WWW-selain"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:27
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:27
 msgid "Window Manager"
 msgstr "Ikkunointiohjelma"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:28
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:28
 msgid "_Command:"
 msgstr "_Komento:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:29
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:29
 msgid "_Name:"
 msgstr "_Nimi:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:30
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:30
 msgid "_Properties..."
 msgstr "_Ominaisuudet..."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:31
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:31
 msgid "_Select:"
 msgstr "_Valitse:"
 
-#: capplets/display/display-properties.desktop.in.in.h:1
+#: ../capplets/display/display-properties.desktop.in.in.h:1
 msgid "Change screen resolution"
 msgstr "Muuta näytön tarkkuutta"
 
-#: capplets/display/display-properties.desktop.in.in.h:2
+#: ../capplets/display/display-properties.desktop.in.in.h:2
 msgid "Screen Resolution"
 msgstr "Näytön tarkkuus"
 
-#: capplets/display/main.c:333
+#: ../capplets/display/main.c:345
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: capplets/display/main.c:436
+#: ../capplets/display/main.c:448
 msgid "_Resolution:"
 msgstr "_Tarkkuus:"
 
-#: capplets/display/main.c:455
+#: ../capplets/display/main.c:467
 msgid "Re_fresh rate:"
 msgstr "_Virkistystaajuus:"
 
-#: capplets/display/main.c:476
+#: ../capplets/display/main.c:488
 msgid "Default Settings"
 msgstr "Oletusasetukset"
 
-#: capplets/display/main.c:478
+#: ../capplets/display/main.c:490
 #, c-format
 msgid "Screen %d Settings\n"
 msgstr "Näytön %d asetukset\n"
 
-#: capplets/display/main.c:504
+#: ../capplets/display/main.c:516
 msgid "Screen Resolution Preferences"
 msgstr "Näytön tarkkuuden asetukset"
 
-#: capplets/display/main.c:541
+#: ../capplets/display/main.c:553
 #, c-format
 msgid "_Make default for this computer (%s) only"
 msgstr "Aseta vain tämän _koneen (%s) oletusarvoksi"
 
-#: capplets/display/main.c:559
+#: ../capplets/display/main.c:571
 msgid "Options"
 msgstr "Asetukset"
 
-#: capplets/display/main.c:580
+#: ../capplets/display/main.c:592
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d second the previous "
@@ -950,23 +1244,23 @@ msgstr[1] ""
 "Uusien asetusten kokeilu. Jos et vastaa %d sekunnin kuluessa, edelliset "
 "asetukset palautuvat."
 
-#: capplets/display/main.c:626
+#: ../capplets/display/main.c:638
 msgid "Keep Resolution"
 msgstr "Säilytä tarkkuus"
 
-#: capplets/display/main.c:630
+#: ../capplets/display/main.c:642
 msgid "Do you want to keep this resolution?"
 msgstr "Haluatko käyttää tätä tarkkuutta?"
 
-#: capplets/display/main.c:655
+#: ../capplets/display/main.c:667
 msgid "Use _previous resolution"
 msgstr "Käytä _edellistä tarkkuutta"
 
-#: capplets/display/main.c:655
+#: ../capplets/display/main.c:667
 msgid "_Keep resolution"
 msgstr "_Pidä tarkkuus"
 
-#: capplets/display/main.c:806
+#: ../capplets/display/main.c:818
 msgid ""
 "The X Server does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
@@ -974,7 +1268,7 @@ msgstr ""
 "X-palvelin ei tue XRandR-laajennosta, joten näytön tarkkuutta ei voi vaihtaa "
 "sen ollessa käynnissä."
 
-#: capplets/display/main.c:814
+#: ../capplets/display/main.c:826
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
@@ -982,154 +1276,135 @@ msgstr ""
 "XRandR-laajennoksen versio ei ole yhteensopiva tämän ohjelman kanssa, joten "
 "tarkkuutta ei voi muuttaa käytön aikana."
 
-#: capplets/font/font-properties.desktop.in.in.h:1
+#: ../capplets/font/font-properties.desktop.in.in.h:1
 msgid "Font"
 msgstr "Kirjasinlajit"
 
-#: capplets/font/font-properties.desktop.in.in.h:2
+#: ../capplets/font/font-properties.desktop.in.in.h:2
 msgid "Select fonts for the desktop"
 msgstr "Valitse työpöydän kirjasinlajit"
 
-#: capplets/font/font-properties.glade.h:2
+#: ../capplets/font/font-properties.glade.h:2
 msgid "<b>Font Rendering</b>"
 msgstr "<b>Kirjasimien piirtyminen</b>"
 
-#: capplets/font/font-properties.glade.h:3
+#: ../capplets/font/font-properties.glade.h:3
 msgid "<b>Hinting</b>:"
 msgstr "<b>Ohjeistus</b>:"
 
-#: capplets/font/font-properties.glade.h:4
+#: ../capplets/font/font-properties.glade.h:4
 msgid "<b>Smoothing</b>:"
 msgstr "<b>Pehmennys</b>:"
 
-#: capplets/font/font-properties.glade.h:5
+#: ../capplets/font/font-properties.glade.h:5
 msgid "<b>Subpixel order</b>:"
 msgstr "<b>Osapikselien järjestys</b>:"
 
-#: capplets/font/font-properties.glade.h:6
+#: ../capplets/font/font-properties.glade.h:6
 msgid "Best _shapes"
 msgstr "Parhaat _muodot"
 
-#: capplets/font/font-properties.glade.h:7
+#: ../capplets/font/font-properties.glade.h:7
 msgid "Best co_ntrast"
 msgstr "Paras _kontrasti"
 
-#: capplets/font/font-properties.glade.h:8
+#: ../capplets/font/font-properties.glade.h:8
 msgid "D_etails..."
 msgstr "_Lisätiedot..."
 
-#: capplets/font/font-properties.glade.h:9
+#: ../capplets/font/font-properties.glade.h:9
 msgid "Font Preferences"
 msgstr "Kirjasinasetukset"
 
-#: capplets/font/font-properties.glade.h:10
+#: ../capplets/font/font-properties.glade.h:10
 msgid "Font Rendering Details"
 msgstr "Kirjasimien piirtymisasetukset"
 
-#: capplets/font/font-properties.glade.h:11
+#: ../capplets/font/font-properties.glade.h:11
 msgid "Go _to font folder"
 msgstr "Siirry kir_jasinkansioon"
 
-#: capplets/font/font-properties.glade.h:12
+#: ../capplets/font/font-properties.glade.h:12
 msgid "Gra_yscale"
 msgstr "_Harmaasävy"
 
-#: capplets/font/font-properties.glade.h:13
+#: ../capplets/font/font-properties.glade.h:13
 msgid "N_one"
 msgstr "E_i mikään"
 
-#: capplets/font/font-properties.glade.h:14
+#: ../capplets/font/font-properties.glade.h:14
 msgid "R_esolution:"
 msgstr "_Tarkkuus:"
 
-#: capplets/font/font-properties.glade.h:15
-msgid "Set the font for applications"
-msgstr "Aseta ohjelmien kirjasinlaji"
-
-#: capplets/font/font-properties.glade.h:16
-msgid "Set the font for the icons on the desktop"
-msgstr "Aseta työpöydän kuvakkeiden kirjasinlaji"
-
-#: capplets/font/font-properties.glade.h:17
-msgid "Set the monospace font for terminals and similar applications"
-msgstr ""
-"Aseta päätteiden ja niiden kaltaisten ohjelmien käyttämä tasavälinen "
-"kirjasinlaji"
-
-#: capplets/font/font-properties.glade.h:18
+#: ../capplets/font/font-properties.glade.h:15
 msgid "Sub_pixel (LCDs)"
 msgstr "Osa_pikseli (LCD:t)"
 
-#: capplets/font/font-properties.glade.h:19
+#: ../capplets/font/font-properties.glade.h:16
 msgid "Sub_pixel smoothing (LCDs)"
 msgstr "Osapikselien pe_hmennys (LCD:t)"
 
-#: capplets/font/font-properties.glade.h:20
+#: ../capplets/font/font-properties.glade.h:17
 msgid "VB_GR"
 msgstr "VB_GR"
 
-#: capplets/font/font-properties.glade.h:21
+#: ../capplets/font/font-properties.glade.h:18
 msgid "_Application font:"
 msgstr "So_velluksien kirjasin:"
 
-#: capplets/font/font-properties.glade.h:22
+#: ../capplets/font/font-properties.glade.h:19
 msgid "_BGR"
 msgstr "_BGR"
 
-#: capplets/font/font-properties.glade.h:23
+#: ../capplets/font/font-properties.glade.h:20
 msgid "_Desktop font:"
 msgstr "_Työpöydän kirjasin:"
 
-#: capplets/font/font-properties.glade.h:24
+#: ../capplets/font/font-properties.glade.h:21
 msgid "_Full"
 msgstr "_Täysi"
 
-#: capplets/font/font-properties.glade.h:25
-#: capplets/mouse/gnome-mouse-properties.glade.h:22
+#: ../capplets/font/font-properties.glade.h:22
 msgid "_Medium"
 msgstr "_Kohtalainen"
 
-#: capplets/font/font-properties.glade.h:26
+#: ../capplets/font/font-properties.glade.h:23
 msgid "_Monochrome"
 msgstr "_Yksivärinen"
 
-#: capplets/font/font-properties.glade.h:27
+#: ../capplets/font/font-properties.glade.h:24
 msgid "_None"
 msgstr "_Ei mikään"
 
-#: capplets/font/font-properties.glade.h:28
+#: ../capplets/font/font-properties.glade.h:25
 msgid "_RGB"
 msgstr "_RGB"
 
-#: capplets/font/font-properties.glade.h:29
+#: ../capplets/font/font-properties.glade.h:26
 msgid "_Slight"
 msgstr "Hie_man"
 
-#: capplets/font/font-properties.glade.h:30
+#: ../capplets/font/font-properties.glade.h:27
 msgid "_Terminal font:"
 msgstr "_Päätteen kirjasin:"
 
-#: capplets/font/font-properties.glade.h:31
-msgid "_Use Font"
-msgstr "_Käytä kirjasinta"
-
-#: capplets/font/font-properties.glade.h:32
+#: ../capplets/font/font-properties.glade.h:28
 msgid "_VRGB"
 msgstr "_VRGB"
 
-#: capplets/font/font-properties.glade.h:33
+#: ../capplets/font/font-properties.glade.h:29
 msgid "_Window title font:"
 msgstr "_Ikkunoiden otsikon kirjasin:"
 
-#: capplets/font/font-properties.glade.h:34
+#: ../capplets/font/font-properties.glade.h:30
 msgid "dots per inch"
 msgstr "pisteitä tuumaa kohden (DPI)"
 
-#: capplets/font/main.c:506 capplets/font/main.c:513
+#: ../capplets/font/main.c:488
 msgid "Font may be too large"
 msgstr "Kirjasin saattaa olla liian suuri"
 
-#: capplets/font/main.c:507
+#: ../capplets/font/main.c:492
 #, c-format
 msgid ""
 "The font selected is %d point large, and may make it difficult to "
@@ -1137,7 +1412,7 @@ msgid ""
 "smaller than %d."
 msgid_plural ""
 "The font selected is %d points large, and may make it difficult to "
-"effectively use the computer.  It is recommended that you select a size "
+"effectively use the computer. It is recommended that you select a size "
 "smaller than %d."
 msgstr[0] ""
 "Valittu kirjasinlaji on yhden pisteen kokoinen, mikä voi haitata koneen "
@@ -1146,7 +1421,7 @@ msgstr[1] ""
 "Valittu kirjasinlaji on %d pisteen kokoinen, mikä voi haitata koneen "
 "käyttöä. On suositeltavaa, että valitset %d pistettä pienemmän koon."
 
-#: capplets/font/main.c:514
+#: ../capplets/font/main.c:505
 #, c-format
 msgid ""
 "The font selected is %d point large, and may make it difficult to "
@@ -1154,7 +1429,7 @@ msgid ""
 "sized font."
 msgid_plural ""
 "The font selected is %d points large, and may make it difficult to "
-"effectively use the computer.  It is recommended that you select a smaller "
+"effectively use the computer. It is recommended that you select a smaller "
 "sized font."
 msgstr[0] ""
 "Valittu kirjasinlaji on yhden pisteen kokoinen, mikä voi haitata koneen "
@@ -1163,57 +1438,57 @@ msgstr[1] ""
 "Valittu kirjasinlaji on %d pisteen kokoinen, mikä voi haitata koneen "
 "käyttöä. On suositeltavaa, että valitset pienemmän kirjasinlajin."
 
-#: capplets/keybindings/eggcellrendererkeys.c:21
+#: ../capplets/keybindings/eggcellrendererkeys.c:21
 msgid "New accelerator..."
 msgstr "Uusi pikanäppäin..."
 
-#: capplets/keybindings/eggcellrendererkeys.c:163
-#: capplets/keybindings/eggcellrendererkeys.c:164
+#: ../capplets/keybindings/eggcellrendererkeys.c:163
+#: ../capplets/keybindings/eggcellrendererkeys.c:164
 msgid "Accelerator key"
 msgstr "Pikanäppäin"
 
-#: capplets/keybindings/eggcellrendererkeys.c:173
-#: capplets/keybindings/eggcellrendererkeys.c:174
+#: ../capplets/keybindings/eggcellrendererkeys.c:173
+#: ../capplets/keybindings/eggcellrendererkeys.c:174
 msgid "Accelerator modifiers"
 msgstr "Pikanäppäimen muunnosnäppäimet"
 
-#: capplets/keybindings/eggcellrendererkeys.c:182
-#: capplets/keybindings/eggcellrendererkeys.c:183
+#: ../capplets/keybindings/eggcellrendererkeys.c:182
+#: ../capplets/keybindings/eggcellrendererkeys.c:183
 msgid "Accelerator keycode"
 msgstr "Pikanäppäinkoodi"
 
-#: capplets/keybindings/eggcellrendererkeys.c:193
+#: ../capplets/keybindings/eggcellrendererkeys.c:193
 msgid "Accel Mode"
 msgstr "Pikanäppäintila"
 
-#: capplets/keybindings/eggcellrendererkeys.c:194
+#: ../capplets/keybindings/eggcellrendererkeys.c:194
 msgid "The type of accelerator."
 msgstr "Pikanäppäimen tyyppi."
 
-#: capplets/keybindings/eggcellrendererkeys.c:242
-#: capplets/keybindings/gnome-keybinding-properties.c:197
-#: libbackground/applier.c:757 typing-break/drwright.c:473
+#: ../capplets/keybindings/eggcellrendererkeys.c:242
+#: ../capplets/keybindings/gnome-keybinding-properties.c:197
+#: ../libbackground/applier.c:624 ../typing-break/drwright.c:477
 msgid "Disabled"
 msgstr "Ei käytössä"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:539
+#: ../capplets/keybindings/gnome-keybinding-properties.c:545
 msgid "<Unknown Action>"
 msgstr "<Tuntematon toiminto>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:558
+#: ../capplets/keybindings/gnome-keybinding-properties.c:566
 msgid "Desktop"
 msgstr "Työpöytä"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:559
-#: capplets/sound/gnome-settings-sound.desktop.in.in.h:2
+#: ../capplets/keybindings/gnome-keybinding-properties.c:567
+#: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
 msgid "Sound"
 msgstr "Ääni"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:563
+#: ../capplets/keybindings/gnome-keybinding-properties.c:571
 msgid "Window Management"
 msgstr "Ikkunointi"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:660
+#: ../capplets/keybindings/gnome-keybinding-properties.c:668
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1222,30 +1497,30 @@ msgstr ""
 "Pikanäppäimeen \"%s\" on jo kytketty toiminto\n"
 "\"%s\"\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:692
+#: ../capplets/keybindings/gnome-keybinding-properties.c:700
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Virhe uuden pikanäppäimen asetustietokantaan asettamisessa: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:742
+#: ../capplets/keybindings/gnome-keybinding-properties.c:750
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "Virhe pikanäppäimen asetustietokannasta poistamisessa: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:849
+#: ../capplets/keybindings/gnome-keybinding-properties.c:857
 msgid "Action"
 msgstr "Toiminto"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:873
+#: ../capplets/keybindings/gnome-keybinding-properties.c:881
 msgid "Shortcut"
 msgstr "Pikanäppäin"
 
-#: capplets/keybindings/gnome-keybinding-properties.glade.h:1
-#: capplets/keybindings/keybinding.desktop.in.in.h:2
+#: ../capplets/keybindings/gnome-keybinding-properties.glade.h:1
+#: ../capplets/keybindings/keybinding.desktop.in.in.h:2
 msgid "Keyboard Shortcuts"
 msgstr "Pikanäppäimet"
 
-#: capplets/keybindings/gnome-keybinding-properties.glade.h:2
+#: ../capplets/keybindings/gnome-keybinding-properties.glade.h:2
 msgid ""
 "To edit a shortcut key, click on the corresponding row and type a new "
 "accelerator, or press backspace to clear."
@@ -1253,16 +1528,15 @@ msgstr ""
 "Pikanäppäintä voi muokata napsauttamalla sen riviä ja näppäilemällä uusi "
 "näppäinyhdistelmä. Askepalauttimen painaminen tyhjentää pikanäppäimen."
 
-#: capplets/keybindings/keybinding.desktop.in.in.h:1
+#: ../capplets/keybindings/keybinding.desktop.in.in.h:1
 msgid "Assign shortcut keys to commands"
 msgstr "Liitä pikanäppäimiä komentoihin"
 
-#: capplets/keyboard/gnome-keyboard-properties-xkb.c:69
-#: capplets/keyboard/gnome-keyboard-properties-xkb.c:95
+#: ../capplets/keyboard/gnome-keyboard-properties-xkb.c:84
 msgid "Unknown"
 msgstr "Tuntematon"
 
-#: capplets/keyboard/gnome-keyboard-properties-xkblt.c:251
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:273
 msgid "Layout"
 msgstr "Asettelu"
 
@@ -1270,123 +1544,123 @@ msgstr "Asettelu"
 #. the below options are to be included in the selected list.
 #. This is a HIG-compliant alternative to allowing no
 #. selection in the group.
-#: capplets/keyboard/gnome-keyboard-properties-xkblt.c:255
-#: capplets/keyboard/gnome-keyboard-properties-xkbot.c:206
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:277
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:228
 msgid "Default"
 msgstr "Oletus"
 
-#: capplets/keyboard/gnome-keyboard-properties-xkbmc.c:75
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:75
 msgid "Models"
 msgstr "Mallit"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:106
+#: ../capplets/keyboard/gnome-keyboard-properties.c:106
 #, c-format
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "Näppäimistön hallintasovelman käynnistys epäonnistui: %s"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:202
+#: ../capplets/keyboard/gnome-keyboard-properties.c:202
 msgid "_Accessibility"
 msgstr "_Esteettömyys"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:221
-#: capplets/keyboard/gnome-keyboard-properties.c:223
-#: capplets/sound/sound-properties-capplet.c:240
-#: capplets/sound/sound-properties-capplet.c:242
+#: ../capplets/keyboard/gnome-keyboard-properties.c:221
+#: ../capplets/keyboard/gnome-keyboard-properties.c:223
+#: ../capplets/sound/sound-properties-capplet.c:240
+#: ../capplets/sound/sound-properties-capplet.c:242
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
 "Pelkästään ota muutokset käyttöön ja lopeta (vain yhteensopivuuden vuoksi; "
 "nyt tämän tekee demoni)"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:227
+#: ../capplets/keyboard/gnome-keyboard-properties.c:227
 msgid "Start the page with the typing break settings showing"
 msgstr "Käynnisty kirjoitustaukoasetusten säätövälilehti näkyvänä."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:3
 msgid "..."
 msgstr "..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "<b>Cursor Blinking</b>"
 msgstr "<b>Kohdistimen vilkunta</b>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:5
 msgid "<b>Repeat Keys</b>"
 msgstr "<b>Toistonäppäimet</b>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "<b>_Lock screen to enforce typing break</b>"
 msgstr "<b>_Lukitse näyttö, jotta tauko on pakko pitää</b>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>Nopea</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>Pitkä</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>Lyhyt</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Hidas</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "A_vailable layouts:"
 msgstr "_Mahdolliset asettelut:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "All_ow postponing of breaks"
 msgstr "S_alli taukojen lykkäys"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Check if breaks are allowed to be postponed"
 msgstr "Tarkista, voiko taukoja lykätä"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Choose A Keyboard Model"
 msgstr "Valitse näppäimistön malli"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:15
 msgid "Choose A Layout"
 msgstr "Valitse näppäimistön asettelu"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:16
 msgid "Cursor _blinks in text boxes and fields"
 msgstr "_Kohdistin vilkkuu tekstilaatikoissa"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:17
 msgid "Duration of the break when typing is disallowed"
 msgstr "Kirjoitustauon kesto"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:18
 msgid "Duration of work before forcing a break"
 msgstr "Työskentelyaika taukojen välillä"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:19
 msgid "Key presses _repeat when key is held down"
 msgstr "Painallus _toistuu, kun näppäintä pidetään painettuna"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:21
 msgid "Keyboard Preferences"
 msgstr "Näppäimistöasetukset"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:22
 msgid "Keyboard _model:"
 msgstr "Näppäimistö_malli"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "Layout Options"
 msgstr "Asettelun valinnat"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:24
 msgid "Layouts"
 msgstr "Asettelut"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid ""
 "Lock screen after a certain duration to help prevent repetitive keyboard use "
 "injuries"
@@ -1394,371 +1668,360 @@ msgstr ""
 "Lukitse näyttö tietyin väliajoin näppäimistön toistuvasta käytöstä johtuvien "
 "vammojen estämiseksi"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:26
 msgid "Microsoft Natural Keyboard"
 msgstr "Microsoft Natural -näppäimistö"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:27
 msgid "Preview:"
 msgstr "Esikatselu:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:28
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:28
 msgid "Reset To De_faults"
 msgstr "Palauta _oletusarvot"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:30
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:30
 msgid "Separate _group for each window"
 msgstr "Eri _ryhmä joka ikkunaa kohden"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:31
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:31
 msgid "Typing Break"
 msgstr "Kirjoitustauko"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:32
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:32
 msgid "_Accessibility..."
 msgstr "_Esteettömyys..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:33
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:33
 msgid "_Add..."
 msgstr "_Lisää..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:34
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:34
 msgid "_Break interval lasts:"
 msgstr "_Taukoaika kestää:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:35
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:35
 msgid "_Delay:"
 msgstr "_Viive:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:36
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:36
 msgid "_Models:"
 msgstr "_Mallit:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:37
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:37
 msgid "_Selected layouts:"
 msgstr "_Valitut asettelut:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:38
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:38
 msgid "_Speed:"
 msgstr "_Nopeus:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:40
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:40
 msgid "_Work interval lasts:"
 msgstr "T_yöskentelyaika kestää:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:41
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:41
 msgid "minutes"
 msgstr "minuuttia"
 
-#: capplets/keyboard/keyboard.desktop.in.in.h:2
+#: ../capplets/keyboard/keyboard.desktop.in.in.h:2
 msgid "Set your keyboard preferences"
 msgstr "Muuta näppäimistöasetuksia"
 
-#: capplets/mouse/gnome-mouse-properties.c:496
+#: ../capplets/mouse/gnome-mouse-properties.c:551
 msgid "Unknown Cursor"
 msgstr "Tuntematon osoitin"
 
-#: capplets/mouse/gnome-mouse-properties.c:613
-msgid "Default Cursor - Current"
-msgstr "Oletusosoitin - nykyinen"
-
-#: capplets/mouse/gnome-mouse-properties.c:613
-#: capplets/mouse/gnome-mouse-properties.c:616
-msgid "The default cursor that ships with X"
-msgstr "X:n mukana tuleva oletusosoitin"
-
-#: capplets/mouse/gnome-mouse-properties.c:616
+#: ../capplets/mouse/gnome-mouse-properties.c:738
 msgid "Default Cursor"
 msgstr "Oletusosoitin"
 
-#: capplets/mouse/gnome-mouse-properties.c:634
-msgid "White Cursor - Current"
-msgstr "Valkoinen osoitin - nykyinen"
+#: ../capplets/mouse/gnome-mouse-properties.c:739
+msgid "Default Cursor - Current"
+msgstr "Oletusosoitin - nykyinen"
 
-#: capplets/mouse/gnome-mouse-properties.c:634
-#: capplets/mouse/gnome-mouse-properties.c:637
-msgid "The default cursor inverted"
-msgstr "Oletusosoitin käänteisin värein"
+#: ../capplets/mouse/gnome-mouse-properties.c:740
+msgid "The default cursor that ships with X"
+msgstr "X:n mukana tuleva oletusosoitin"
 
-#: capplets/mouse/gnome-mouse-properties.c:637
+#: ../capplets/mouse/gnome-mouse-properties.c:744
 msgid "White Cursor"
 msgstr "Valkoinen osoitin"
 
-#: capplets/mouse/gnome-mouse-properties.c:656
-msgid "Large Cursor - Current"
-msgstr "Suuri osoitin - nykyinen"
+#: ../capplets/mouse/gnome-mouse-properties.c:745
+msgid "White Cursor - Current"
+msgstr "Valkoinen osoitin - nykyinen"
 
-#: capplets/mouse/gnome-mouse-properties.c:656
-#: capplets/mouse/gnome-mouse-properties.c:659
-msgid "Large version of normal cursor"
-msgstr "Suuri versio tavallisesta osoittimesta"
+#: ../capplets/mouse/gnome-mouse-properties.c:746
+msgid "The default cursor inverted"
+msgstr "Oletusosoitin käänteisin värein"
 
-#: capplets/mouse/gnome-mouse-properties.c:659
+#: ../capplets/mouse/gnome-mouse-properties.c:750
 msgid "Large Cursor"
 msgstr "Suuri osoitin"
 
-#: capplets/mouse/gnome-mouse-properties.c:678
+#: ../capplets/mouse/gnome-mouse-properties.c:751
+msgid "Large Cursor - Current"
+msgstr "Suuri osoitin - nykyinen"
+
+#: ../capplets/mouse/gnome-mouse-properties.c:752
+msgid "Large version of normal cursor"
+msgstr "Suuri versio tavallisesta osoittimesta"
+
+#: ../capplets/mouse/gnome-mouse-properties.c:756
 msgid "Large White Cursor - Current"
 msgstr "Suuri valkoinen osoitin - nykyinen"
 
-#: capplets/mouse/gnome-mouse-properties.c:678
-#: capplets/mouse/gnome-mouse-properties.c:681
-msgid "Large version of white cursor"
-msgstr "Suuri versio valkoisesta osoittimesta"
-
-#: capplets/mouse/gnome-mouse-properties.c:681
+#: ../capplets/mouse/gnome-mouse-properties.c:757
 msgid "Large White Cursor"
 msgstr "Suuri valkoinen osoitin"
 
-#: capplets/mouse/gnome-mouse-properties.c:753
-msgid "Cursor Size"
-msgstr "Osoittimen koko"
+#: ../capplets/mouse/gnome-mouse-properties.c:758
+msgid "Large version of white cursor"
+msgstr "Suuri versio valkoisesta osoittimesta"
 
-#: capplets/mouse/gnome-mouse-properties.c:762
+#: ../capplets/mouse/gnome-mouse-properties.c:952
 msgid "Cursor Theme"
 msgstr "Osoittimen teema"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:2
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:2
 msgid "<b>Double-Click Timeout </b>"
 msgstr "<b>Kaksoisnapsautuksen aikaraja</b>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:3
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:3
 msgid "<b>Drag and Drop</b>"
 msgstr "<b>Veto ja pudotus</b>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:4
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:4
 msgid "<b>Locate Pointer</b>"
 msgstr "<b>Paikanna osoitin</b>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:5
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:5
 msgid "<b>Mouse Orientation</b>"
 msgstr "<b>Hiiren asento</b>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:6
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:6
 msgid "<b>Speed</b>"
 msgstr "<b>Nopeus</b>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:7
-msgid ""
-"<i><small><b>Note:</b> Changes to this setting will not take effect until "
-"next time you log in.</small></i>"
-msgstr ""
-"<i><small><b>Huomaa:</b> Tämän asetuksen muutokset tulevat voimaan vasta "
-"seuraavan kerran sisään kirjauduttaessa.</small></i>"
-
-#: capplets/mouse/gnome-mouse-properties.glade.h:8
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:7
 msgid "<i>Fast</i>"
 msgstr "<i>Nopea</i>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:9
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid "<i>High</i>"
 msgstr "<i>Korkea</i>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:10
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:9
 msgid "<i>Large</i>"
 msgstr "<i>Suuri</i>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:11
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:10
 msgid "<i>Low</i>"
 msgstr "<i>Matala</i>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:12
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:11
 msgid "<i>Slow</i>"
 msgstr "<i>Hidas</i>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:13
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:12
 msgid "<i>Small</i>"
 msgstr "<i>Pieni</i>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:14
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:13
 msgid "Buttons"
 msgstr "Painikkeet"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:15
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:14
+msgid "Cursor Size:"
+msgstr "Osoittimen koko:"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:15
 msgid "Cursors"
 msgstr "Osoittimet"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:16
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:16
 msgid "Highlight the _pointer when you press Ctrl"
 msgstr "Korosta _osoitin, kun Controlia painetaan"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:17
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
+msgid "Large"
+msgstr "Suuri"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
+msgid "Medium"
+msgstr "Kohtalainen"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
 msgid "Motion"
 msgstr "Liike"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:18
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:20
 msgid "Mouse Preferences"
 msgstr "Hiiriasetukset"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:19
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:21
+msgid "Small"
+msgstr "Pieni"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:22
 msgid "_Acceleration:"
 msgstr "_Kiihdytys:"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:20
-msgid "_Large"
-msgstr "_Suuri"
-
-#: capplets/mouse/gnome-mouse-properties.glade.h:21
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:23
 msgid "_Left-handed mouse"
 msgstr "V_asenkätinen hiiri"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:23
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:24
 msgid "_Sensitivity:"
 msgstr "_Herkkyys:"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:24
-msgid "_Small"
-msgstr "P_ieni"
-
-#: capplets/mouse/gnome-mouse-properties.glade.h:25
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:25
 msgid "_Threshold:"
 msgstr "_Kynnys:"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:26
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:26
 msgid "_Timeout:"
 msgstr "_Aikaraja:"
 
-#: capplets/mouse/gnome-settings-mouse.desktop.in.in.h:1
+#: ../capplets/mouse/gnome-settings-mouse.desktop.in.in.h:1
 msgid "Mouse"
 msgstr "Hiiri"
 
-#: capplets/mouse/gnome-settings-mouse.desktop.in.in.h:2
+#: ../capplets/mouse/gnome-settings-mouse.desktop.in.in.h:2
 msgid "Set your mouse preferences"
 msgstr "Muuta hiiriasetuksia"
 
-#: capplets/network/gnome-network-preferences.desktop.in.in.h:1
+#: ../capplets/network/gnome-network-preferences.desktop.in.in.h:1
 msgid "Network Proxy"
 msgstr "Välipalvelin"
 
-#: capplets/network/gnome-network-preferences.desktop.in.in.h:2
+#: ../capplets/network/gnome-network-preferences.desktop.in.in.h:2
 msgid "Set your network proxy preferences"
 msgstr "Muuta välityspalvelinasetuksia"
 
-#: capplets/network/gnome-network-preferences.glade.h:1
+#: ../capplets/network/gnome-network-preferences.glade.h:1
 msgid "      "
 msgstr "      "
 
-#: capplets/network/gnome-network-preferences.glade.h:3
-msgid "<b>Ignore host list</b>"
-msgstr "<b>Sivuutettavien koneiden luettelo</b>"
+#: ../capplets/network/gnome-network-preferences.glade.h:2
+msgid "<b>D_irect internet connection</b>"
+msgstr "<b>_Suora internet-yhteys</b>"
 
-#: capplets/network/gnome-network-preferences.glade.h:4
+#: ../capplets/network/gnome-network-preferences.glade.h:3
+msgid "<b>Ignore Host List</b>"
+msgstr "<b>Huomiotta otettavien koneiden luettelo</b>"
+
+#: ../capplets/network/gnome-network-preferences.glade.h:4
 msgid "<b>_Automatic proxy configuration</b>"
 msgstr "<b>_Automaattinen välipalvelimen määritys</b>"
 
-#: capplets/network/gnome-network-preferences.glade.h:5
-msgid "<b>_Direct internet connection</b>"
-msgstr "<b>_Suora internet-yhteys</b>"
-
-#: capplets/network/gnome-network-preferences.glade.h:6
+#: ../capplets/network/gnome-network-preferences.glade.h:5
 msgid "<b>_Manual proxy configuration</b>"
 msgstr "<b>_Välipalvelinten asetus käsin</b>"
 
-#: capplets/network/gnome-network-preferences.glade.h:7
+#: ../capplets/network/gnome-network-preferences.glade.h:6
 msgid "<b>_Use authentication</b>"
 msgstr "<b>_Todentaminen käytössä</b>"
 
-#: capplets/network/gnome-network-preferences.glade.h:8
+#: ../capplets/network/gnome-network-preferences.glade.h:7
 msgid "Advanced Configuration"
 msgstr "Lisäasetukset"
 
-#: capplets/network/gnome-network-preferences.glade.h:9
+#: ../capplets/network/gnome-network-preferences.glade.h:8
 msgid "Autoconfiguration _URL:"
 msgstr "Automaattiasetuksen _URL:"
 
-#: capplets/network/gnome-network-preferences.glade.h:10
+#: ../capplets/network/gnome-network-preferences.glade.h:9
 msgid "HTTP Proxy Details"
 msgstr "HTTP-välityspalvelimen lisäasetukset"
 
-#: capplets/network/gnome-network-preferences.glade.h:11
+#: ../capplets/network/gnome-network-preferences.glade.h:10
 msgid "H_TTP proxy:"
 msgstr "H_TTP-välityspalvelin:"
 
-#: capplets/network/gnome-network-preferences.glade.h:12
+#: ../capplets/network/gnome-network-preferences.glade.h:11
 msgid "Network Proxy Preferences"
 msgstr "Välipalvelinasetukset"
 
-#: capplets/network/gnome-network-preferences.glade.h:13
+#: ../capplets/network/gnome-network-preferences.glade.h:12
 msgid "Port:"
 msgstr "Portti:"
 
-#: capplets/network/gnome-network-preferences.glade.h:14
+#: ../capplets/network/gnome-network-preferences.glade.h:13
 msgid "Proxy Configuration"
 msgstr "Välipalvelinasetukset"
 
-#: capplets/network/gnome-network-preferences.glade.h:15
+#: ../capplets/network/gnome-network-preferences.glade.h:14
 msgid "S_ocks host:"
 msgstr "S_ocks-isäntäkone:"
 
-#: capplets/network/gnome-network-preferences.glade.h:16
+#: ../capplets/network/gnome-network-preferences.glade.h:15
 msgid "U_sername:"
 msgstr "Käyttäjä_tunnus:"
 
-#: capplets/network/gnome-network-preferences.glade.h:17
+#: ../capplets/network/gnome-network-preferences.glade.h:16
 msgid "_Details"
 msgstr "_Lisäasetukset"
 
-#: capplets/network/gnome-network-preferences.glade.h:18
+#: ../capplets/network/gnome-network-preferences.glade.h:17
 msgid "_FTP proxy:"
 msgstr "_FTP-välipalvelin:"
 
-#: capplets/network/gnome-network-preferences.glade.h:19
+#: ../capplets/network/gnome-network-preferences.glade.h:18
 msgid "_Password:"
 msgstr "_Salasana:"
 
-#: capplets/network/gnome-network-preferences.glade.h:20
+#: ../capplets/network/gnome-network-preferences.glade.h:19
 msgid "_Secure HTTP proxy:"
 msgstr "Tu_rva-HTTP-välipalvelin:"
 
-#: capplets/sound/gnome-settings-sound.desktop.in.in.h:1
+#: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:1
 msgid "Enable sound and associate sounds with events"
 msgstr "Ota äänet käyttöön ja liitä niitä tapahtumiin"
 
-#: capplets/sound/sound-properties-capplet.c:271
-msgid "Sound preferences"
-msgstr "Ääniasetukset"
-
-#: capplets/sound/sound-properties.glade.h:1
-msgid "E_nable sound server startup"
-msgstr "_Ota äänipalvelin käyttöön käynnistyessä"
-
-#: capplets/sound/sound-properties.glade.h:2
-msgid "Flash _entire screen"
-msgstr "Välkäytä _koko näyttöä"
-
-#: capplets/sound/sound-properties.glade.h:3
-msgid "Flash _window titlebar"
-msgstr "Välkäytä _ikkunan otsikkopalkkia"
-
-#: capplets/sound/sound-properties.glade.h:4
-msgid "General"
-msgstr "Yleistä"
-
-#: capplets/sound/sound-properties.glade.h:5
-msgid "Sound Events"
-msgstr "Äänitapahtumat"
-
-#: capplets/sound/sound-properties.glade.h:6
+#: ../capplets/sound/sound-properties-capplet.c:271
+#: ../capplets/sound/sound-properties.glade.h:6
 msgid "Sound Preferences"
 msgstr "Ääniasetukset"
 
-#: capplets/sound/sound-properties.glade.h:7
+#: ../capplets/sound/sound-properties.glade.h:1
+msgid "E_nable sound server startup"
+msgstr "_Ota äänipalvelin käyttöön käynnistyessä"
+
+#: ../capplets/sound/sound-properties.glade.h:2
+msgid "Flash _entire screen"
+msgstr "Välkäytä _koko näyttöä"
+
+#: ../capplets/sound/sound-properties.glade.h:3
+msgid "Flash _window titlebar"
+msgstr "Välkäytä _ikkunan otsikkopalkkia"
+
+#: ../capplets/sound/sound-properties.glade.h:4
+msgid "General"
+msgstr "Yleistä"
+
+#: ../capplets/sound/sound-properties.glade.h:5
+msgid "Sound Events"
+msgstr "Äänitapahtumat"
+
+#: ../capplets/sound/sound-properties.glade.h:7
 msgid "System Bell"
 msgstr "Järjestelmän äänimerkki"
 
-#: capplets/sound/sound-properties.glade.h:8
+#: ../capplets/sound/sound-properties.glade.h:8
 msgid "_Sound an audible bell"
 msgstr "_Kuuluva äänimerkki"
 
-#: capplets/sound/sound-properties.glade.h:9
+#: ../capplets/sound/sound-properties.glade.h:9
 msgid "_Sounds for events"
 msgstr "_Tapahtumien äänet"
 
-#: capplets/sound/sound-properties.glade.h:10
+#: ../capplets/sound/sound-properties.glade.h:10
 msgid "_Visual feedback:"
 msgstr "_Näkyvä merkki:"
 
-#: capplets/theme-switcher/gnome-theme-details.c:349
+#: ../capplets/theme-switcher/gnome-theme-details.c:347
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -1768,15 +2031,15 @@ msgstr ""
 "asetusikkuna on asennettu väärin, tai että \"gnome-themes\"-pakettia ei ole "
 "asennettu."
 
-#: capplets/theme-switcher/gnome-theme-installer.c:227
+#: ../capplets/theme-switcher/gnome-theme-installer.c:227
 msgid "This theme is not in a supported format."
 msgstr "Tämä teema ei ole tuetun muotoinen."
 
-#: capplets/theme-switcher/gnome-theme-installer.c:244
+#: ../capplets/theme-switcher/gnome-theme-installer.c:244
 msgid "Failed to create temporary directory"
 msgstr "Väliaikaisen hakemiston luominen epäonnistui"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:264
+#: ../capplets/theme-switcher/gnome-theme-installer.c:264
 msgid ""
 "Can not install theme. \n"
 "The bzip2 utility is not installed."
@@ -1784,13 +2047,13 @@ msgstr ""
 "Teeman asennus ei onnistu.\n"
 "bzip2-apuohjelmaa ei ole asennettu."
 
-#: capplets/theme-switcher/gnome-theme-installer.c:282
-#: capplets/theme-switcher/gnome-theme-installer.c:319
-#: capplets/theme-switcher/gnome-theme-installer.c:399
+#: ../capplets/theme-switcher/gnome-theme-installer.c:282
+#: ../capplets/theme-switcher/gnome-theme-installer.c:319
+#: ../capplets/theme-switcher/gnome-theme-installer.c:399
 msgid "Installation Failed"
 msgstr "Asennus epäonnistui"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:302
+#: ../capplets/theme-switcher/gnome-theme-installer.c:302
 msgid ""
 "Can not install themes. \n"
 "The gzip utility is not installed."
@@ -1798,7 +2061,7 @@ msgstr ""
 "Teeman asennus ei onnistu.\n"
 "gzip-apuohjelmaa ei ole asennettu."
 
-#: capplets/theme-switcher/gnome-theme-installer.c:340
+#: ../capplets/theme-switcher/gnome-theme-installer.c:340
 #, c-format
 msgid ""
 "Icon Theme %s correctly installed.\n"
@@ -1807,12 +2070,12 @@ msgstr ""
 "Kuvaketeeman %s asennus onnistui.\n"
 "Voit valita sen teeman lisätiedoista."
 
-#: capplets/theme-switcher/gnome-theme-installer.c:343
+#: ../capplets/theme-switcher/gnome-theme-installer.c:343
 #, c-format
 msgid "Gnome Theme %s correctly installed"
 msgstr "Gnomen teeman %s asennus onnistui."
 
-#: capplets/theme-switcher/gnome-theme-installer.c:346
+#: ../capplets/theme-switcher/gnome-theme-installer.c:346
 #, c-format
 msgid ""
 "Windows Border Theme %s correctly installed.\n"
@@ -1821,7 +2084,7 @@ msgstr ""
 "Ikkunoiden kehysten teeman %s asennus onnistui.\n"
 "Voit valita sen teeman lisätiedoista."
 
-#: capplets/theme-switcher/gnome-theme-installer.c:349
+#: ../capplets/theme-switcher/gnome-theme-installer.c:349
 #, c-format
 msgid ""
 "Controls Theme %s correctly installed.\n"
@@ -1830,23 +2093,23 @@ msgstr ""
 "Säädinten teema %s asennettu onnistuneesti.\n"
 "Voit valita sen teeman lisätiedoista."
 
-#: capplets/theme-switcher/gnome-theme-installer.c:357
+#: ../capplets/theme-switcher/gnome-theme-installer.c:357
 msgid "The theme is an engine. You need to compile the theme."
 msgstr "Teema on käyttöliittymämoottori. Se täytyy kääntää ensin."
 
-#: capplets/theme-switcher/gnome-theme-installer.c:374
+#: ../capplets/theme-switcher/gnome-theme-installer.c:374
 msgid "The file format is invalid"
 msgstr "Tiedostomuoto on virheellinen"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:468
+#: ../capplets/theme-switcher/gnome-theme-installer.c:468
 msgid "No theme file location specified to install"
 msgstr "Asennettavan teematiedoston sijaintia ei annettu"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:485
+#: ../capplets/theme-switcher/gnome-theme-installer.c:485
 msgid "The theme file location specified to install is invalid"
 msgstr "Annettu asennettavan teematiedoston sijainti on virheellinen"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:505
+#: ../capplets/theme-switcher/gnome-theme-installer.c:505
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -1855,11 +2118,11 @@ msgstr ""
 "Oikeudet eivät riitä teeman asentamiseen sijaintiin:\n"
 "%s"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:526
+#: ../capplets/theme-switcher/gnome-theme-installer.c:526
 msgid "The file format is invalid."
 msgstr "Tiedostomuoto on virheellinen."
 
-#: capplets/theme-switcher/gnome-theme-installer.c:553
+#: ../capplets/theme-switcher/gnome-theme-installer.c:553
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
@@ -1868,7 +2131,7 @@ msgstr ""
 "%s on polku, jonne teematiedostot asentuvat. Tätä ei voi valita "
 "lähdesijainniksi"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:607
+#: ../capplets/theme-switcher/gnome-theme-installer.c:607
 msgid ""
 "Cannot install theme.\n"
 "The tar program is not installed on your system."
@@ -1876,16 +2139,16 @@ msgstr ""
 "Teeman asennus ei onnistu.\n"
 "tar-ohjelmaa ei ole asennettu."
 
-#: capplets/theme-switcher/gnome-theme-manager.c:676
+#: ../capplets/theme-switcher/gnome-theme-manager.c:680
 msgid "Custom theme"
 msgstr "Muu teema"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:676
+#: ../capplets/theme-switcher/gnome-theme-manager.c:680
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr ""
 "Voit tallentaa tämän teeman napsauttamalla \"Tallenna teema\"-painiketta."
 
-#: capplets/theme-switcher/gnome-theme-manager.c:1466
+#: ../capplets/theme-switcher/gnome-theme-manager.c:1476
 msgid ""
 "The default theme schemas could not be found on your system.  This means "
 "that you probably don't have metacity installed, or that your gconf is "
@@ -1894,236 +2157,236 @@ msgstr ""
 "Oletusteeman kaavaimia ei löytynyt. Tämä merkitsee, että Metacity ei ole "
 "asennettu tai Gconfin asetuksissa on vikaa."
 
-#: capplets/theme-switcher/gnome-theme-save.c:72
+#: ../capplets/theme-switcher/gnome-theme-save.c:72
 msgid "Theme name must be present"
 msgstr "Teeman nimi täytyy olla olemassa"
 
-#: capplets/theme-switcher/gnome-theme-save.c:104
+#: ../capplets/theme-switcher/gnome-theme-save.c:104
 msgid "The theme already exists. Would you like to replace it?"
 msgstr "Teema on jo olemassa. Haluatko korvata sen?"
 
-#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:1
+#: ../capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:1
 msgid "Select themes for various parts of the desktop"
 msgstr "Valitse työpöydän eri osien teemat"
 
-#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:2
-#: vfs-methods/themus/themus-properties-main.c:92
+#: ../capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:2
+#: ../vfs-methods/themus/themus-properties-main.c:92
 msgid "Theme"
 msgstr "Teema"
 
-#: capplets/theme-switcher/theme-install.glade.h:2
+#: ../capplets/theme-switcher/theme-install.glade.h:2
 msgid "<span size=\"larger\" weight=\"bold\">Install a Theme</span>"
 msgstr "<span size=\"larger\" weight=\"bold\">Asenna teema</span>"
 
-#: capplets/theme-switcher/theme-install.glade.h:3
+#: ../capplets/theme-switcher/theme-install.glade.h:3
 msgid "Theme Installation"
 msgstr "Teeman asennus"
 
-#: capplets/theme-switcher/theme-install.glade.h:4
+#: ../capplets/theme-switcher/theme-install.glade.h:4
 msgid "_Install"
 msgstr "_Asenna"
 
-#: capplets/theme-switcher/theme-install.glade.h:5
+#: ../capplets/theme-switcher/theme-install.glade.h:5
 msgid "_Location:"
 msgstr "Si_jainti:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:2
+#: ../capplets/theme-switcher/theme-properties.glade.h:2
 msgid "<span size=\"larger\" weight=\"bold\">Save Theme to Disk</span>"
 msgstr "<span size=\"larger\" weight=\"bold\">Tallenna teema levylle</span>"
 
-#: capplets/theme-switcher/theme-properties.glade.h:3
+#: ../capplets/theme-switcher/theme-properties.glade.h:3
 msgid "Apply _Background"
 msgstr "Käytä _taustaa"
 
-#: capplets/theme-switcher/theme-properties.glade.h:4
+#: ../capplets/theme-switcher/theme-properties.glade.h:4
 msgid "Apply _Font"
 msgstr "Käytä _kirjasinta"
 
-#: capplets/theme-switcher/theme-properties.glade.h:5
+#: ../capplets/theme-switcher/theme-properties.glade.h:5
 msgid "Controls"
 msgstr "Säätimet"
 
-#: capplets/theme-switcher/theme-properties.glade.h:6
+#: ../capplets/theme-switcher/theme-properties.glade.h:6
 msgid "Icons"
 msgstr "Kuvakkeet"
 
-#: capplets/theme-switcher/theme-properties.glade.h:7
+#: ../capplets/theme-switcher/theme-properties.glade.h:7
 msgid "New themes can also be installed by dragging them into the window."
 msgstr "Uusia teemoja voi asentaa myös pudottamalla ne tähän ikkunaan."
 
-#: capplets/theme-switcher/theme-properties.glade.h:8
+#: ../capplets/theme-switcher/theme-properties.glade.h:8
 msgid "Save Theme"
 msgstr "Tallenna teema"
 
-#: capplets/theme-switcher/theme-properties.glade.h:9
+#: ../capplets/theme-switcher/theme-properties.glade.h:9
 msgid "Select theme for the desktop"
 msgstr "Valitse työpöydän teema"
 
-#: capplets/theme-switcher/theme-properties.glade.h:10
+#: ../capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Short _description:"
 msgstr "Lyhyt _kuvaus:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:11
+#: ../capplets/theme-switcher/theme-properties.glade.h:11
 msgid "Theme Details"
 msgstr "Teeman lisätiedot"
 
-#: capplets/theme-switcher/theme-properties.glade.h:12
+#: ../capplets/theme-switcher/theme-properties.glade.h:12
 msgid "Theme Preferences"
 msgstr "Teema-asetukset"
 
-#: capplets/theme-switcher/theme-properties.glade.h:13
+#: ../capplets/theme-switcher/theme-properties.glade.h:13
 msgid "Theme _Details"
 msgstr "Teeman _lisätiedot"
 
-#: capplets/theme-switcher/theme-properties.glade.h:14
+#: ../capplets/theme-switcher/theme-properties.glade.h:14
 msgid "This theme does not suggest any particular font or background."
 msgstr "Tämä teema ei ehdota kirjasinta tai taustaa"
 
-#: capplets/theme-switcher/theme-properties.glade.h:15
+#: ../capplets/theme-switcher/theme-properties.glade.h:15
 msgid "This theme suggests a background:"
 msgstr "Tämä teema ehdottaa taustaa:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:16
+#: ../capplets/theme-switcher/theme-properties.glade.h:16
 msgid "This theme suggests a font and a background:"
 msgstr "Tämä teema ehdottaa kirjasinta ja taustaa:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:17
+#: ../capplets/theme-switcher/theme-properties.glade.h:17
 msgid "This theme suggests a font:"
 msgstr "Tämä teema ehdottaa kirjasinta:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:18
+#: ../capplets/theme-switcher/theme-properties.glade.h:18
 msgid "Window Border"
 msgstr "Ikkunoiden reunat"
 
-#: capplets/theme-switcher/theme-properties.glade.h:19
+#: ../capplets/theme-switcher/theme-properties.glade.h:19
 msgid "_Go To Theme Folder"
 msgstr "_Siirry teemakansioon"
 
-#: capplets/theme-switcher/theme-properties.glade.h:20
+#: ../capplets/theme-switcher/theme-properties.glade.h:20
 msgid "_Install Theme..."
 msgstr "_Asenna teema..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:21
+#: ../capplets/theme-switcher/theme-properties.glade.h:21
 msgid "_Revert"
 msgstr "_Palauta"
 
-#: capplets/theme-switcher/theme-properties.glade.h:22
+#: ../capplets/theme-switcher/theme-properties.glade.h:22
 msgid "_Save Theme..."
 msgstr "_Tallenna teema..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:23
+#: ../capplets/theme-switcher/theme-properties.glade.h:23
 msgid "_Theme name:"
 msgstr "Teeman _nimi:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:24
+#: ../capplets/theme-switcher/theme-properties.glade.h:24
 msgid "theme selection tree"
 msgstr "teeman valintapuu"
 
-#: capplets/ui-properties/gnome-ui-properties.desktop.in.in.h:1
+#: ../capplets/ui-properties/gnome-ui-properties.desktop.in.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
 msgstr "Muokkaa sovelmien työkalupalkkien ja valikkojen ulkoasua"
 
-#: capplets/ui-properties/gnome-ui-properties.desktop.in.in.h:2
+#: ../capplets/ui-properties/gnome-ui-properties.desktop.in.in.h:2
 msgid "Menus & Toolbars"
 msgstr "Valikko- ja työkalupalkit"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:2
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:2
 msgid "<b>Behavior and Appearance</b>"
 msgstr "<b>Toiminta ja ulkonäkö</b>"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:3
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:3
 msgid "<b>Preview</b>"
 msgstr "<b>Esikatselu</b>"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:4
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:4
 msgid "C_ut"
 msgstr "_Leikkaa"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:5
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:5
 msgid "Icons only"
 msgstr "Vain kuvakkeet"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:6
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:6
 msgid "Menu and Toolbar Preferences"
 msgstr "Valikko- ja työkalupalkkien asetukset"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:7
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:7
 msgid "New File"
 msgstr "Uusi tiedosto"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:8
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:8
 msgid "Open File"
 msgstr "Avaa tiedosto"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:9
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:9
 msgid "Save File"
 msgstr "Tallenna tiedosto"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:10
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:10
 msgid "Show _icons in menus"
 msgstr "_Näytä kuvakkeet valikoissa"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:11
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:11
 msgid "Text below icons"
 msgstr "Teksti kuvakkeiden alla"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:12
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:12
 msgid "Text beside icons"
 msgstr "Teksti kuvakkeiden vierellä"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:13
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:13
 msgid "Text only"
 msgstr "Pelkkä teksti"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:14
-msgid "Toolbar _button labels: "
-msgstr "Työkalupalkkien _painikkeiden nimiöt:"
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:14
+msgid "Toolbar _button labels:"
+msgstr "Työkalupalkkien _painikkeiden nimet:"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:15
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:15
 msgid "_Copy"
 msgstr "_Kopioi"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:16
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:16
 msgid "_Detachable toolbars"
 msgstr "_Irrotettavat työkalupalkit"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:17
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:17
 msgid "_Edit"
 msgstr "_Muokkaa"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:18
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:18
 msgid "_Editable menu accelerators"
 msgstr "_Muokattavat valikoiden pikanäppäimet"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:19
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:19
 msgid "_File"
 msgstr "_Tiedosto"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:20
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:20
 msgid "_New"
 msgstr "_Uusi"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:21
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:21
 msgid "_Open"
 msgstr "_Avaa"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:22
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:22
 msgid "_Paste"
 msgstr "L_iitä"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:23
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:23
 msgid "_Print"
 msgstr "Tul_osta"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:24
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:24
 msgid "_Quit"
 msgstr "_Lopeta"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:25
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:25
 msgid "_Save"
 msgstr "_Tallenna"
 
-#: capplets/windows/gnome-window-properties.c:388
+#: ../capplets/windows/gnome-window-properties.c:386
 #, c-format
 msgid ""
 "<b>Cannot start the preferences application for your window manager</b>\n"
@@ -2134,101 +2397,100 @@ msgstr ""
 "\n"
 "%s"
 
-#: capplets/windows/gnome-window-properties.c:648
+#: ../capplets/windows/gnome-window-properties.c:644
 msgid "Control"
 msgstr "Control"
 
-#: capplets/windows/gnome-window-properties.c:653
+#: ../capplets/windows/gnome-window-properties.c:649
 msgid "Alt"
 msgstr "Alt"
 
-#: capplets/windows/gnome-window-properties.c:659
+#: ../capplets/windows/gnome-window-properties.c:655
 msgid "Hyper"
 msgstr "Hyper"
 
-#: capplets/windows/gnome-window-properties.c:666
+#: ../capplets/windows/gnome-window-properties.c:662
 msgid "Super (or \"Windows logo\")"
 msgstr "Super (tai \"Windows-logo\")"
 
-#: capplets/windows/gnome-window-properties.c:673
+#: ../capplets/windows/gnome-window-properties.c:669
 msgid "Meta"
 msgstr "Meta"
 
-#: capplets/windows/gnome-window-properties.glade.h:1
+#: ../capplets/windows/gnome-window-properties.glade.h:1
 msgid "<b>Movement Key</b>"
 msgstr "<b>Liikuttamisnäppäin</b>"
 
-#: capplets/windows/gnome-window-properties.glade.h:2
+#: ../capplets/windows/gnome-window-properties.glade.h:2
 msgid "<b>Titlebar Action</b>"
 msgstr "<b>Otsikkopalkin toiminta</b>"
 
-#: capplets/windows/gnome-window-properties.glade.h:3
+#: ../capplets/windows/gnome-window-properties.glade.h:3
 msgid "<b>Window Selection</b>"
 msgstr "<b>Ikkunoiden valinta</b>"
 
-#: capplets/windows/gnome-window-properties.glade.h:4
+#: ../capplets/windows/gnome-window-properties.glade.h:4
 msgid "To _move a window, press-and-hold this key then grab the window:"
 msgstr "Siirrä ikkunoita _hiirellä tarttumalla, kun painettuna on:"
 
-#: capplets/windows/gnome-window-properties.glade.h:5
+#: ../capplets/windows/gnome-window-properties.glade.h:5
 msgid "Window Preferences"
 msgstr "Ikkuna-asetukset"
 
-#: capplets/windows/gnome-window-properties.glade.h:6
+#: ../capplets/windows/gnome-window-properties.glade.h:6
 msgid "_Double-click titlebar to perform this action:"
 msgstr "Ikkunan _otsikkoa kaksoisnapsauttamalla käynnistyy tämä komento:"
 
-#: capplets/windows/gnome-window-properties.glade.h:7
+#: ../capplets/windows/gnome-window-properties.glade.h:7
 msgid "_Interval before raising:"
 msgstr "_Viive ennen nostoa:"
 
-#: capplets/windows/gnome-window-properties.glade.h:8
+#: ../capplets/windows/gnome-window-properties.glade.h:8
 msgid "_Raise selected windows after an interval"
 msgstr "_Nosta valitut ikkunat tietyn ajan kuluttua"
 
-#: capplets/windows/gnome-window-properties.glade.h:9
+#: ../capplets/windows/gnome-window-properties.glade.h:9
 msgid "_Select windows when the mouse moves over them"
 msgstr "V_alitse ikkunat, kun hiiri liikkuu niiden päälle"
 
-#: capplets/windows/window-properties.desktop.in.in.h:1
+#: ../capplets/windows/window-properties.desktop.in.in.h:1
 msgid "Set your window properties"
 msgstr "Muuta ikkunaominaisuuksia"
 
-#: capplets/windows/window-properties.desktop.in.in.h:2
+#: ../capplets/windows/window-properties.desktop.in.in.h:2
 msgid "Windows"
 msgstr "Ikkunat"
 
-#: control-center/control-center-categories.c:249
+#: ../control-center/control-center-categories.c:257
 msgid "Others"
 msgstr "Muut"
 
-#: control-center/control-center.c:1010
-#: control-center/gnomecc.desktop.in.in.h:1
-msgid "GNOME Control Center"
-msgstr "Gnomen hallintakeskus"
-
-#: control-center/control-center.c:1126
+#: ../control-center/control-center.c:42
 msgid "Desktop Preferences"
 msgstr "Työpöydän asetukset"
 
-#: control-center/gnomecc.desktop.in.in.h:2
-#: vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:2
+#: ../control-center/gnomecc.desktop.in.in.h:1
+msgid "GNOME Control Center"
+msgstr "Gnomen hallintakeskus"
+
+#: ../control-center/gnomecc.desktop.in.in.h:2
+#: ../vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:2
 msgid "The GNOME configuration tool"
 msgstr "Gnomen hallintatyökalu"
 
-#: gnome-settings-daemon/actions/acme.glade.h:1
+#: ../gnome-settings-daemon/actions/acme.glade.h:1
 msgid "Volume"
 msgstr "Äänenvoimakkuus"
 
-#: gnome-settings-daemon/factory.c:34
+#: ../gnome-settings-daemon/factory.c:36
 msgid "Could not initialize Bonobo"
 msgstr "Bonobon alustus epäonnistui"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:397
 msgid "Slow Keys Alert"
 msgstr "Hitaat näppäimet -ilmoitus"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:398
 msgid ""
 "You just held down the Shift key for 8 seconds.  This is the shortcut for "
 "the Slow Keys feature, which affects the way your keyboard works."
@@ -2236,19 +2498,19 @@ msgstr ""
 "Pidit juuri vaihtonäppäintä painettuna 8 sekuntia. Tämä on hitaat näppäimet -"
 "ominaisuuden pikanäppäily, ja muuttaa tapaa, jolla näppäimistö toimii."
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:414
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:400
 msgid "Do you want to activate Slow Keys?"
 msgstr "Haluatko ottaa hitaat näppäimet käyttöön?"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:415
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:401
 msgid "Do you want to deactivate Slow Keys?"
 msgstr "Haluatko poistaa hitaat näppäimet käytöstä?"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:410
 msgid "Sticky Keys Alert"
 msgstr "Pohjaan jäävät näppäimet -ilmoitus"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
 msgid ""
 "You just pressed the Shift key 5 times in a row.  This is the shortcut for "
 "the Sticky Keys feature, which affects the way your keyboard works."
@@ -2257,7 +2519,7 @@ msgstr ""
 "näppäimet -ominaisuuden pikanäppäily, ja muuttaa tapaa, jolla näppäimistö "
 "toimii."
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
 msgid ""
 "You just pressed two keys at once, or pressed the Shift key 5 times in a "
 "row.  This turns off the Sticky Keys feature, which affects the way your "
@@ -2267,15 +2529,15 @@ msgstr ""
 "peräkkäin. Tämä on pohjaan jäävät näppäimet -ominaisuuden pikanäppäily, ja "
 "muuttaa tapaa, jolla näppäimistö toimii."
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:429
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:415
 msgid "Do you want to activate Sticky Keys?"
 msgstr "Haluatko ottaa pohjaan jäävät näppäimet käyttöön?"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:430
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:416
 msgid "Do you want to deactivate Sticky Keys?"
 msgstr "Haluatko poistaa pohjaan jäävät näppäimet käytöstä?"
 
-#: gnome-settings-daemon/gnome-settings-font.c:102
+#: ../gnome-settings-daemon/gnome-settings-font.c:106
 #, c-format
 msgid ""
 "Cannot create the directory \"%s\".\n"
@@ -2284,37 +2546,37 @@ msgstr ""
 "Kansion \"%s\" luonti epäonnistui.\n"
 "Tätä tarvittaisiin osoittimien vaihtamiseksi."
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:207
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:209
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr "Näppäinsidonnan (%s) toiminto on määritelty useaan kertaan\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:220
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:222
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr "Näppäinsidonnan (%s) sidonta on määritelty useaan kertaan\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:226
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:228
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr "Näppäinsidonta (%s) on epätäydellinen\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:254
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:256
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr "Näppäinsidonta (%s) on virheellinen\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:290
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:292
 #, c-format
 msgid "It seems that another application already has access to key '%d'."
 msgstr "Ilmeisesti jokin toinen sovellus käyttää jo avainta \"%d\""
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:359
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:361
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr "Näppäinsidonta (%s) on jo käytössä\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:434
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:436
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -2323,7 +2585,7 @@ msgstr ""
 "Näppäimeen (%2$s) kytketyn toiminnon\n"
 "(%1$s) suorittaminen epäonnistui."
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:99
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:103
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2337,8 +2599,8 @@ msgid ""
 "%d\n"
 "%s\n"
 "If you report this situation as a bug, please include:\n"
-"- The result of %s\n"
-"- The result of %s"
+"- The result of <b>%s</b>\n"
+"- The result of <b>%s</b>"
 msgstr ""
 "XKB-asetusten käyttöönotto epäonnistui.\n"
 "Syynä on voi eri tapauksissa olla:\n"
@@ -2351,27 +2613,26 @@ msgstr ""
 "%d\n"
 "%s\n"
 "Jos lähetät tästä vikailmoituksen, sisällytä mukaan:\n"
-"- Komennon %s tuloste\n"
-"- Komennon %s tuloste"
+"- Komennon <b>%s</b> tuloste\n"
+"- Komennon <b>%s</b> tuloste"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:113
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:117
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
-"Try using simpler configuration or taking more fresh version of XFree "
+"Try using a simpler configuration or taking a fresher version of XFree "
 "software."
 msgstr ""
 "Käytät XFreen versiota 4.3.0.\n"
 "Tunnetusti ongelmia voi ilmetä monimutkaisten XKB-asetusten kanssa.\n"
 "Yritä yksinkertaisempien asetusten käyttämistä tai uudemman XFree-"
-"ohjelmiston\n"
 "version hankkimista."
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:226
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:227
 msgid "Do _not show this warning again"
 msgstr "_Älä näytä tätä varoitusta uudestaan"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:237
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:238
 msgid ""
 "The X system keyboard settings differ from your current GNOME keyboard "
 "settings.  Which set would you like to use?"
@@ -2379,15 +2640,15 @@ msgstr ""
 "X-järjestelmän näppäimistöasetukset eroavat nykyisistä Gnome-työpöydän "
 "asetuksista. Kumpia asetuksia haluat käyttää?"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:247
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:251
 msgid "Use X settings"
 msgstr "Käytä X:n asetuksia"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:249
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:253
 msgid "Use GNOME settings"
 msgstr "Käytä Gnomen asetuksia"
 
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:126
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:129
 #, c-format
 msgid ""
 "Couldn't execute command: %s\n"
@@ -2396,7 +2657,7 @@ msgstr ""
 "Komennon suoritus ei onnistunut: %s\n"
 "Tarkista, että tämä komento on olemassa."
 
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:142
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:145
 msgid ""
 "Couldn't put the machine to sleep.\n"
 "Verify that the machine is correctly configured."
@@ -2404,12 +2665,12 @@ msgstr ""
 "Koneen virransäästötilan aktivointi ei onnistunut.\n"
 "Tarkista, että tietokoneesi asetukset ovat oikein."
 
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:152
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:155
 #, c-format
 msgid "Permissions on the file %s are broken\n"
 msgstr "Tiedoston %s oikeudet ovat rikki\n"
 
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:197
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:200
 msgid ""
 "Couldn't load the Glade file.\n"
 "Make sure that this daemon is properly installed."
@@ -2417,7 +2678,7 @@ msgstr ""
 "Glade-tiedoston lataaminen ei onnistunut.\n"
 "Varmista, että tämä daemon on asennettu oikein."
 
-#: gnome-settings-daemon/gnome-settings-screensaver.c:92
+#: ../gnome-settings-daemon/gnome-settings-screensaver.c:113
 #, c-format
 msgid ""
 "There was an error starting up the screensaver:\n"
@@ -2432,58 +2693,58 @@ msgstr ""
 "\n"
 "Näytönsäästäjät eivät toimi tämän istunnon aikana."
 
-#: gnome-settings-daemon/gnome-settings-screensaver.c:102
+#: ../gnome-settings-daemon/gnome-settings-screensaver.c:123
 msgid "_Do not show this message again"
 msgstr "_Älä näytä tätä viestiä uudestaan"
 
-#: gnome-settings-daemon/gnome-settings-sound.c:128
+#: ../gnome-settings-daemon/gnome-settings-sound.c:129
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Äänitiedoston %s latautuminen ääneksi %s epäonnistui"
 
-#: gnome-settings-daemon/gnome-settings-xrdb.c:213
-#: gnome-settings-daemon/gnome-settings-xrdb.c:261
+#: ../gnome-settings-daemon/gnome-settings-xrdb.c:214
+#: ../gnome-settings-daemon/gnome-settings-xrdb.c:262
 msgid "Cannot determine user's home directory"
 msgstr "Virhe käyttäjän kotikansion määrittämisessä"
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:208
+#: ../gnome-settings-daemon/gnome-settings-xsettings.c:215
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "GConf-avaimen %s tyyppi on %s, mutta sen piti olla %s\n"
 
-#: gnome-settings-daemon/modmap-dialog.glade.h:1
+#: ../gnome-settings-daemon/modmap-dialog.glade.h:1
 msgid "A_vailable files:"
 msgstr "_Mahdolliset tiedostot:"
 
-#: gnome-settings-daemon/modmap-dialog.glade.h:2
+#: ../gnome-settings-daemon/modmap-dialog.glade.h:2
 msgid "Do _not show this warning again."
 msgstr "_Älä näytä tätä varoitusta uudestaan"
 
-#: gnome-settings-daemon/modmap-dialog.glade.h:3
-msgid "Do you like to load the modmap file(s)?"
-msgstr "Haluatko ladata modmap-tiedostot?"
-
-#: gnome-settings-daemon/modmap-dialog.glade.h:4
+#: ../gnome-settings-daemon/modmap-dialog.glade.h:3
 msgid "Load modmap files"
 msgstr "Ladataan modmap-tiedostot"
 
-#: gnome-settings-daemon/modmap-dialog.glade.h:5
+#: ../gnome-settings-daemon/modmap-dialog.glade.h:4
+msgid "Would you like to load the modmap file(s)?"
+msgstr "Haluatko ladata modmap-tiedostot?"
+
+#: ../gnome-settings-daemon/modmap-dialog.glade.h:5
 msgid "_Load"
 msgstr "_Lataa"
 
-#: gnome-settings-daemon/modmap-dialog.glade.h:6
+#: ../gnome-settings-daemon/modmap-dialog.glade.h:6
 msgid "_Loaded files:"
 msgstr "_Ladatut tiedostot:"
 
-#: gnome-settings-daemon/reaper.c:103
+#: ../gnome-settings-daemon/reaper.c:103
 msgid "Error creating signal pipe."
 msgstr "Virhe signaaliputken luonnissa."
 
-#: libbackground/applier.c:256
+#: ../libbackground/applier.c:255
 msgid "Type"
 msgstr "Tyyppi"
 
-#: libbackground/applier.c:257
+#: ../libbackground/applier.c:256
 msgid ""
 "Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
 "for preview"
@@ -2491,35 +2752,40 @@ msgstr ""
 "bg_applierin tyyppi: BG_APPLIER_ROOT juuri-ikkunalle ja BG_APPLIER_PREVIEW "
 "esikatselulle"
 
-#: libbackground/applier.c:264
+#: ../libbackground/applier.c:263
 msgid "Preview Width"
 msgstr "Esikatseluleveys"
 
-#: libbackground/applier.c:265
+#: ../libbackground/applier.c:264
 msgid "Width if applier is a preview: Defaults to 64."
 msgstr "Leveys, jos käyttöönotin on esikatselin: oletus 64."
 
-#: libbackground/applier.c:272
+#: ../libbackground/applier.c:271
 msgid "Preview Height"
 msgstr "Esikatselukorkeus"
 
-#: libbackground/applier.c:273
+#: ../libbackground/applier.c:272
 msgid "Height if applier is a preview: Defaults to 48."
 msgstr "Korkeus jos käyttöönotin on esikatselin: oletus 48"
 
-#: libbackground/applier.c:280
+#: ../libbackground/applier.c:279
 msgid "Screen"
 msgstr "Näyttö"
 
-#: libbackground/applier.c:281
+#: ../libbackground/applier.c:280
 msgid "Screen on which BGApplier is to draw"
 msgstr "Näyttö, jolle BGApplier piirtää"
 
-#: libsounds/sound-view.c:122 libsounds/sound-view.c:147
+#: ../libgswitchit/gswitchit_config.c:1035
+#, c-format
+msgid "There was an error loading an image: %s"
+msgstr "Virhe ladattaessa kuvaa: %s"
+
+#: ../libsounds/sound-view.c:122 ../libsounds/sound-view.c:147
 msgid "The sound file for this event does not exist."
 msgstr "Tämän tapahtuman äänitiedostoa ei ole."
 
-#: libsounds/sound-view.c:149
+#: ../libsounds/sound-view.c:149
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package\n"
@@ -2529,239 +2795,239 @@ msgstr ""
 "Saatat haluta asentaa gnome-audio-paketin,\n"
 "joka sisältää valikoiman oletusääniä."
 
-#: libsounds/sound-view.c:224
+#: ../libsounds/sound-view.c:224
 #, c-format
 msgid "The file %s is not a valid wav file"
 msgstr "Tiedosto %s ei ole kelvollinen WAV-tiedosto"
 
-#: libsounds/sound-view.c:289
+#: ../libsounds/sound-view.c:289
 msgid "Event"
 msgstr "Tapahtuma"
 
-#: libsounds/sound-view.c:298
+#: ../libsounds/sound-view.c:298
 msgid "Sound File"
 msgstr "Äänitiedosto"
 
-#: libsounds/sound-view.c:314
+#: ../libsounds/sound-view.c:314
 msgid "_Sounds:"
 msgstr "_Äänet:"
 
-#: libsounds/sound-view.c:328
+#: ../libsounds/sound-view.c:328
 msgid "Sound _file:"
 msgstr "Ääni_tiedosto:"
 
-#: libsounds/sound-view.c:332
+#: ../libsounds/sound-view.c:332
 msgid "Select Sound File"
 msgstr "Valitse äänitiedosto"
 
-#: libsounds/sound-view.c:356
+#: ../libsounds/sound-view.c:356
 msgid "_Play"
 msgstr "_Soita"
 
-#: libsounds/sound-view.c:366
+#: ../libsounds/sound-view.c:366
 msgid "_Remove"
 msgstr "_Poista"
 
-#: libwindow-settings/gnome-wm-manager.c:320
+#: ../libwindow-settings/gnome-wm-manager.c:320
 #, c-format
 msgid "Window manager \"%s\" has not registered a configuration tool\n"
 msgstr "Ikkunointiohjelma \"%s\" ei ole ilmoittanut hallintatyökalua\n"
 
-#: libwindow-settings/metacity-window-manager.c:378
+#: ../libwindow-settings/metacity-window-manager.c:378
 msgid "Maximize"
 msgstr "Suurenna"
 
-#: libwindow-settings/metacity-window-manager.c:379
+#: ../libwindow-settings/metacity-window-manager.c:379
 msgid "Roll up"
 msgstr "Rullaa"
 
-#: schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:1
+#: ../schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:1
 msgid ""
 "If true, the mime handlers for text/plain and text/* will be kept in sync"
 msgstr ""
 "Jos tosi, pysyvät mime-tyyppien text/plain ja text/* käsittelimet samoina"
 
-#: schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:2
+#: ../schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:2
 msgid "Sync text/plain and text/* handlers"
 msgstr "Pidä tyyppien text/plain ja text/* käsittelimet samoina"
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:1
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:1
 msgid "Brightness down"
 msgstr "Vähennä kirkkautta"
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:2
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:2
 msgid "Brightness down's shortcut."
 msgstr "Kirkkautta vähentävä pikanäppäin."
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:3
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:3
 msgid "Brightness up"
 msgstr "Lisää kirkkautta"
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:4
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:4
 msgid "Brightness up's shortcut."
 msgstr "Kirkkautta lisäävä pikanäppäin."
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:5
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:5
 msgid "E-mail"
 msgstr "Sähköposti"
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:6
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:6
 msgid "E-mail's shortcut."
 msgstr "Sähköpostin pikanäppäin."
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:7
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:7
 msgid "Eject"
 msgstr "Poista asemasta"
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:8
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:8
 msgid "Eject's shortcut."
 msgstr "Asemasta poistava pikanäppäin."
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:9
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:9
 msgid "Home folder"
 msgstr "Kotikansio"
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:10
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:10
 msgid "Home folder's shortcut."
 msgstr "Kotikansion pikanäppäin."
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
 msgid "Launch help browser"
 msgstr "Käynnistä ohjeselain"
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:12
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:12
 msgid "Launch help browser's shortcut."
 msgstr "Ohjeselaimen käynnistävä pikanäppäin."
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:13
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:13
 msgid "Launch web browser"
 msgstr "Käynnistä WWW-selain"
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:14
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:14
 msgid "Launch web browser's shortcut."
 msgstr "WWW-selaimen käynnistävä pikanäppäin."
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
 msgid "Lock screen"
 msgstr "Lukitse näyttö"
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
 msgid "Lock screen's shortcut."
 msgstr "Näytön lukitseva pikanäppäin."
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
 msgid "Log out"
 msgstr "Kirjaudu ulos"
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
 msgid "Log out's shortcut."
 msgstr "Ulos kirjaava pikanäppäin."
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
 msgid "Next track key's shortcut."
 msgstr "Seuraavan kappaleen pikanäppäin."
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
 msgid "Pause"
 msgstr "Tauko"
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
 msgid "Pause key's shortcut."
 msgstr "Tauon pikanäppäin."
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
 msgid "Play (or play/pause)"
 msgstr "Soita (tai tauko)"
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
 msgid "Play (or play/pause) key's shortcut."
 msgstr "Soiton (tai tauon) aloittava pikanäppäin."
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
 msgid "Previous track key's shortcut."
 msgstr "Edellisen kappaleen pikanäppäin."
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
 msgid "Search"
 msgstr "Etsi"
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
 msgid "Search's shortcut."
 msgstr "Etsinnän pikanäppäin."
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
 msgid "Skip to next track"
 msgstr "Seuraava kappale"
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
 msgid "Skip to previous track"
 msgstr "Edellinen kappale"
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
 msgid "Sleep"
 msgstr "Virransäästö"
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
 msgid "Sleep's shortcut."
 msgstr "Virransäästötilan pikanäppäin."
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
 msgid "Stop playback key"
 msgstr "Pysäytä soitto"
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
 msgid "Stop playback key's shortcut."
 msgstr "Soiton pysäyttävä pikanäppäin."
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
 msgid "Volume down"
 msgstr "Vähennä äänenvoimakkutta"
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
 msgid "Volume down's shortcut."
 msgstr "Äänenvoimakkuutta vähentävä pikanäppäin."
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
 msgid "Volume mute"
 msgstr "Hiljennä ääni"
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
 msgid "Volume mute's shortcut"
 msgstr "Äänen hiljentävä pikanäppäin."
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:37
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:37
 msgid "Volume step"
 msgstr "Askella äänenvoimakkuutta"
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:38
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:38
 msgid "Volume step as percentage of volume."
 msgstr "Muuta äänenvoimakkuutta tietyn osuuden verran."
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:39
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:39
 msgid "Volume up"
 msgstr "Kasvata äänenvoimakkuutta"
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
 msgid "Volume up's shortcut."
 msgstr "Äänenvoimakkuutta kasvattava pikanäppäin."
 
-#: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:1
-msgid "Display a dialog when there are errors running XScreenSaver"
-msgstr "Näytä ikkuna, kun XScreenSaverin suorittamisessa on ongelmia."
+#: ../schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:1
+msgid "Display a dialog when there are errors running the screensaver"
+msgstr "Näytä ikkuna, kun näytönsäästäjän suorittamisessa on ongelmia."
 
-#: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:2
-msgid "Run XScreenSaver at login"
-msgstr "Käynnistä XSCreenSaver sisään kirjauduttaessa"
+#: ../schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:2
+msgid "Run screensaver at login"
+msgstr "Käynnistä näytönsäästäjä sisäänkirjauduttaessa"
 
-#: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:3
+#: ../schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:3
 msgid "Show Startup Errors"
 msgstr "Näytä käynnistysvirheet"
 
-#: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:4
-msgid "Start XScreenSaver"
-msgstr "Käynnistä XScreenSaver"
+#: ../schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:4
+msgid "Start screensaver"
+msgstr "Käynnistä näytönsäästäjä"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:1
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:1
 msgid ""
 "A collection of scripts to run whenever the keyboard state is reloaded. "
 "Useful for re-applying xmodmap based adjustments"
@@ -2770,49 +3036,51 @@ msgstr ""
 "uudelleen. Tämä on hyödyllistä xmodmap-pohjaisten säätöjen ottamisessa "
 "uudelleen käyttöön"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
 msgid "A list of modmap files available in the $HOME directory."
 msgstr "Luettelo modmap-tiedostoista kotikansiossa $HOME."
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
 msgid "Default group, assigned on window creation"
 msgstr "Oletusryhmä, asetetaan kun ikkuna luodaan"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
 msgid "Keep and manage separate group per window"
 msgstr "Pidä ja hallinnoi erillistä ryhmää joka ikkunaa kohden"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
 msgid "Keyboard Update Handlers"
 msgstr "Näppäimistön päivitysten käsittely"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:6
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:6
 msgid "Keyboard layout"
 msgstr "Näppäimistön asettelu"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:7
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:7
 msgid "Keyboard model"
 msgstr "Näppäimistön malli"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:8
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:8
 msgid "Keyboard options"
 msgstr "Näppäimistön asetukset"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:9
-msgid "Keyboard settings in gconf will be overridden from the system ASAP"
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:9
+msgid ""
+"Keyboard settings in gconf will be overridden from the system ASAP "
+"(deprecated)"
 msgstr ""
-"Järjestelmän asetukset tulevat sivuuttamaan GConfissa olevat XKB-asetukset "
-"mahdollisimman pian"
+"Järjestelmän asetukset tulevat sivuuttamaan GConfissa olevat "
+"XKB-asetukset mahdollisimman pian (vanhentunut)"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:10
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:10
 msgid "Save/restore indicators together with layout groups"
 msgstr "Tallenna ja palauta -ilmaisimet yhdessä asetteluryhmien kanssa"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:11
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:11
 msgid "Show layout names instead of group names"
 msgstr "Näytä asetteluiden nimet ryhmien nimien sijaan"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:12
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:12
 msgid ""
 "Show layout names instead of group names (only for versions of XFree "
 "supporting multiple layouts)"
@@ -2820,63 +3088,66 @@ msgstr ""
 "Näytä asetteluiden nimet ryhmien nimien sijaan (vain useita asetteluja "
 "tukevat XFreen versiot)"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:13
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:13
 msgid "Suppress the \"X sysconfig changed\" warning message"
 msgstr "Vaienna \"X-järjestelmäasetukset muuttuneet\"-varoitus"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:14
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:14
 msgid ""
 "Very soon, keyboard settings in gconf will be overridden (from the system "
-"configuration)"
+"configuration) This key has been deprecated since GNOME 2.12, please unset "
+"the model, layouts and options keys to get the default system configuration."
 msgstr ""
-"Hyvin pian XKB-asetukset GConfissa sivuutetaan (järjestelmäasetukset tulevat "
-"voimaan niiden sijaan)"
+"Hyvin pian gconfiin tallennettuja näppäimistöasetuksia ei tulla enää "
+"ottamaan huomioon. Tämä avain on vanhentunut Gnome 2.12 versiosta alkaen. "
+"Ole hyvä ja poista avaimet model, layouts ja options, jotta saat "
+"järjestelmän oletusasetukset käyttöön."
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:15
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:15
 msgid "keyboard layout"
 msgstr "näppäimistön asettelu"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:16
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:16
 msgid "keyboard model"
 msgstr "näppäimistön malli"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:17
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:17
 msgid "modmap file list"
 msgstr "modmap-tiedostoluettelo"
 
-#: typing-break/drw-break-window.c:209
+#: ../typing-break/drw-break-window.c:212
 msgid "_Postpone break"
 msgstr "_Lykkää taukoa"
 
-#: typing-break/drw-break-window.c:256
+#: ../typing-break/drw-break-window.c:259
 msgid "Take a break!"
 msgstr "Pidäpä tauko!"
 
 #. { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
-#: typing-break/drwright.c:136
+#: ../typing-break/drwright.c:141
 msgid "/_Preferences"
 msgstr "/_Asetukset"
 
-#: typing-break/drwright.c:137
+#: ../typing-break/drwright.c:142
 msgid "/_About"
 msgstr "/_Tietoja"
 
-#: typing-break/drwright.c:139
+#: ../typing-break/drwright.c:144
 msgid "/_Take a Break"
 msgstr "/_Pidä tauko"
 
-#: typing-break/drwright.c:491
+#: ../typing-break/drwright.c:495
 #, c-format
 msgid "%d minute until the next break"
 msgid_plural "%d minutes until the next break"
 msgstr[0] "%d minuutti seuraavaan taukoon"
 msgstr[1] "%d minuuttia seuraavaan taukoon"
 
-#: typing-break/drwright.c:495
+#: ../typing-break/drwright.c:499
 msgid "Less than one minute until the next break"
 msgstr "Alle yksi minuutti seuraavaan taukoon"
 
-#: typing-break/drwright.c:583
+#: ../typing-break/drwright.c:587
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
@@ -2885,31 +3156,31 @@ msgstr ""
 "Kirjoitustaukojen ominaisuusikkunan avaaminen ei onnistunut, sillä seuraava "
 "virhe tapahtui: %s"
 
-#: typing-break/drwright.c:631
+#: ../typing-break/drwright.c:635
 msgid "About GNOME Typing Monitor"
 msgstr "Gnomen kirjoituksen tarkkailin"
 
-#: typing-break/drwright.c:655
+#: ../typing-break/drwright.c:659
 msgid "A computer break reminder."
 msgstr "Tietokoneen käyttötauoista muistuttava ohjelma."
 
-#: typing-break/drwright.c:656
+#: ../typing-break/drwright.c:660
 msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
 msgstr "Tehnyt Richard Hult &lt;richard@imendio.com&gt;"
 
-#: typing-break/drwright.c:657
+#: ../typing-break/drwright.c:661
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Anders Carlsson lisäsi silmänruokaa"
 
-#: typing-break/drwright.c:833
+#: ../typing-break/drwright.c:837
 msgid "Break reminder"
 msgstr "Taukomuistutin"
 
-#: typing-break/main.c:93
+#: ../typing-break/main.c:93
 msgid "The typing monitor is already running."
 msgstr "Kirjoituksen tarkkailin on jo käynnissä."
 
-#: typing-break/main.c:106
+#: ../typing-break/main.c:106
 msgid ""
 "The typing monitor uses the notification area to display information. You "
 "don't seem to have a notification area on your panel. You can add it by "
@@ -2921,214 +3192,258 @@ msgstr ""
 "napsauttamalla paneelia hiiren oikealla painikkeella ja valitsemalla \"Lisää "
 "paneeliin\" ja valitsemalla \"Ilmoitusalue\"."
 
-#: vfs-methods/fontilus/font-view.c:125
+#: ../vfs-methods/fontilus/font-view.c:115
 msgid "The quick brown fox jumps over the lazy dog. 0123456789"
 msgstr "Abcdefghijklmnopqrsštuvwxyzåäö. 0123456789"
 
-#: vfs-methods/fontilus/font-view.c:285
+#: ../vfs-methods/fontilus/font-view.c:275
 msgid "Name:"
 msgstr "Nimi:"
 
-#: vfs-methods/fontilus/font-view.c:288
+#: ../vfs-methods/fontilus/font-view.c:278
 msgid "Style:"
 msgstr "Tyyli:"
 
-#: vfs-methods/fontilus/font-view.c:297
+#: ../vfs-methods/fontilus/font-view.c:287
 msgid "Type:"
 msgstr "Tyyppi:"
 
-#: vfs-methods/fontilus/font-view.c:304
+#: ../vfs-methods/fontilus/font-view.c:294
 msgid "Size:"
 msgstr "Koko:"
 
-#: vfs-methods/fontilus/font-view.c:348 vfs-methods/fontilus/font-view.c:361
+#: ../vfs-methods/fontilus/font-view.c:338
+#: ../vfs-methods/fontilus/font-view.c:351
 msgid "Version:"
 msgstr "Versio:"
 
-#: vfs-methods/fontilus/font-view.c:352 vfs-methods/fontilus/font-view.c:363
+#: ../vfs-methods/fontilus/font-view.c:342
+#: ../vfs-methods/fontilus/font-view.c:353
 msgid "Copyright:"
 msgstr "Tekijänoikeus:"
 
-#: vfs-methods/fontilus/font-view.c:356
+#: ../vfs-methods/fontilus/font-view.c:346
 msgid "Description:"
 msgstr "Kuvaus:"
 
-#: vfs-methods/fontilus/font-view.c:417
+#: ../vfs-methods/fontilus/font-view.c:407
 #, c-format
 msgid "usage: %s fontfile\n"
 msgstr "käyttö: %s kirjasinlajitiedosto\n"
 
-#: vfs-methods/fontilus/fontilus-context-menu.c:132
+#: ../vfs-methods/fontilus/fontilus-context-menu.c:132
 msgid "Set as Application Font"
 msgstr "Vaihda sovellusten kirjasimeksi"
 
-#: vfs-methods/fontilus/fontilus-context-menu.c:133
+#: ../vfs-methods/fontilus/fontilus-context-menu.c:133
 msgid "Sets the default application font"
 msgstr "Valitse oletusarvoiseksi sovellusten kirjasimeksi"
 
-#: vfs-methods/fontilus/fontilus.schemas.in.h:1
+#: ../vfs-methods/fontilus/fontilus.schemas.in.h:1
 msgid "If set to true, then OpenType fonts will be thumbnailed."
 msgstr "Jos tosi, OpenType-kirjasimista luodaan pienoiskuvia."
 
-#: vfs-methods/fontilus/fontilus.schemas.in.h:2
+#: ../vfs-methods/fontilus/fontilus.schemas.in.h:2
 msgid "If set to true, then PCF fonts will be thumbnailed."
 msgstr "Jos tosi, PCF-kirjasimista luodaan pienoiskuvia."
 
-#: vfs-methods/fontilus/fontilus.schemas.in.h:3
+#: ../vfs-methods/fontilus/fontilus.schemas.in.h:3
 msgid "If set to true, then TrueType fonts will be thumbnailed."
 msgstr "Jos tosi, TrueType-kirjasimista luodaan pienoiskuvia."
 
-#: vfs-methods/fontilus/fontilus.schemas.in.h:4
+#: ../vfs-methods/fontilus/fontilus.schemas.in.h:4
 msgid "If set to true, then Type1 fonts will be thumbnailed."
 msgstr "Jos tosi, Type1-kirjasimista luodaan pienoiskuvia."
 
-#: vfs-methods/fontilus/fontilus.schemas.in.h:5
+#: ../vfs-methods/fontilus/fontilus.schemas.in.h:5
 msgid ""
 "Set this key to the command used to create thumbnails for OpenType fonts."
 msgstr ""
 "Aseta tähän avaimeen komento, joka luo pienoiskuvia OpenType-kirjasimista."
 
-#: vfs-methods/fontilus/fontilus.schemas.in.h:6
+#: ../vfs-methods/fontilus/fontilus.schemas.in.h:6
 msgid "Set this key to the command used to create thumbnails for PCF fonts."
 msgstr "Aseta tähän avaimeen komento, joka luo pienoiskuvia PCF-kirjasimista."
 
-#: vfs-methods/fontilus/fontilus.schemas.in.h:7
+#: ../vfs-methods/fontilus/fontilus.schemas.in.h:7
 msgid ""
 "Set this key to the command used to create thumbnails for TrueType fonts."
 msgstr ""
 "Aseta tähän avaimeen komento, joka luo pienoiskuvia TrueType-kirjasimista."
 
-#: vfs-methods/fontilus/fontilus.schemas.in.h:8
+#: ../vfs-methods/fontilus/fontilus.schemas.in.h:8
 msgid "Set this key to the command used to create thumbnails for Type1 fonts."
 msgstr ""
 "Aseta tähän avaimeen komento, joka luo pienoiskuvia Type1-kirjasimista."
 
-#: vfs-methods/fontilus/fontilus.schemas.in.h:9
+#: ../vfs-methods/fontilus/fontilus.schemas.in.h:9
 msgid "Thumbnail command for OpenType fonts"
 msgstr "Pienoiskuvakomento OpenType-kirjasimille"
 
-#: vfs-methods/fontilus/fontilus.schemas.in.h:10
+#: ../vfs-methods/fontilus/fontilus.schemas.in.h:10
 msgid "Thumbnail command for PCF fonts"
 msgstr "Pienoiskuvakomento PCF-kirjasimille"
 
-#: vfs-methods/fontilus/fontilus.schemas.in.h:11
+#: ../vfs-methods/fontilus/fontilus.schemas.in.h:11
 msgid "Thumbnail command for TrueType fonts"
 msgstr "Pienoiskuvakomento TrueType-kirjasimille"
 
-#: vfs-methods/fontilus/fontilus.schemas.in.h:12
+#: ../vfs-methods/fontilus/fontilus.schemas.in.h:12
 msgid "Thumbnail command for Type1 fonts"
 msgstr "Pienoiskuvakomento Type1-kirjasimille"
 
-#: vfs-methods/fontilus/fontilus.schemas.in.h:13
+#: ../vfs-methods/fontilus/fontilus.schemas.in.h:13
 msgid "Whether to thumbnail OpenType fonts"
 msgstr "Luodaanko OpenType-kirjasimista pienoiskuvat"
 
-#: vfs-methods/fontilus/fontilus.schemas.in.h:14
+#: ../vfs-methods/fontilus/fontilus.schemas.in.h:14
 msgid "Whether to thumbnail PCF fonts"
 msgstr "Luodaanko PCF-kirjasimista pienoiskuvat"
 
-#: vfs-methods/fontilus/fontilus.schemas.in.h:15
+#: ../vfs-methods/fontilus/fontilus.schemas.in.h:15
 msgid "Whether to thumbnail TrueType fonts"
 msgstr "Luodaanko TrueType-kirjasimista pienoiskuvat"
 
-#: vfs-methods/fontilus/fontilus.schemas.in.h:16
+#: ../vfs-methods/fontilus/fontilus.schemas.in.h:16
 msgid "Whether to thumbnail Type1 fonts"
 msgstr "Luodaanko Type1-kirjasimista pienoiskuvat"
 
-#: vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:1
+#: ../vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:1
 msgid "GNOME Font Viewer"
 msgstr "Gnomen kirjasinlajien katseluohjelma"
 
-#: vfs-methods/themus/apply-font.glade.h:1
-msgid " "
-msgstr " "
-
-#: vfs-methods/themus/apply-font.glade.h:2
+#: ../vfs-methods/themus/apply-font.glade.h:2
 msgid "<span weight=\"bold\" size=\"larger\">Apply new font?</span>"
 msgstr ""
 "<span weight=\"bold\" size=\"larger\">Otetaanko uusi kirjasin käyttöön?</"
 "span>"
 
-#: vfs-methods/themus/apply-font.glade.h:3
+#: ../vfs-methods/themus/apply-font.glade.h:3
 msgid "Do _not apply font"
 msgstr "_Älä käytä kirjasinta"
 
-#: vfs-methods/themus/apply-font.glade.h:4
+#: ../vfs-methods/themus/apply-font.glade.h:4
 msgid ""
 "The theme you have selected suggests a new font. A preview of the font is "
 "shown below."
 msgstr "Valittu teema ehdottaa uutta kirjasinta, josta esimerkki näkyy alla."
 
-#: vfs-methods/themus/apply-font.glade.h:5
+#: ../vfs-methods/themus/apply-font.glade.h:5
 msgid "_Apply font"
 msgstr "Käytä _kirjasinta"
 
-#: vfs-methods/themus/theme-method.c:520
+#: ../vfs-methods/themus/theme-method.c:520
 msgid "Themes"
 msgstr "Teemat"
 
-#: vfs-methods/themus/themus-properties-view.c:126
+#: ../vfs-methods/themus/themus-properties-view.c:126
 msgid "Description"
 msgstr "Kuvaus"
 
-#: vfs-methods/themus/themus-properties-view.c:133
+#: ../vfs-methods/themus/themus-properties-view.c:133
 msgid "Control theme"
 msgstr "Säädinteema"
 
-#: vfs-methods/themus/themus-properties-view.c:139
+#: ../vfs-methods/themus/themus-properties-view.c:139
 msgid "Window border theme"
 msgstr "Ikkunoiden reunojen teema"
 
-#: vfs-methods/themus/themus-properties-view.c:145
+#: ../vfs-methods/themus/themus-properties-view.c:145
 msgid "Icon theme"
 msgstr "Kuvaketeema"
 
 #. translators: you may want to include non-western chars here
-#: vfs-methods/themus/themus-theme-applier.c:78
+#: ../vfs-methods/themus/themus-theme-applier.c:78
 msgid "ABCDEFG"
 msgstr "ABCDEFGÅÄÖ"
 
-#: vfs-methods/themus/themus-theme-applier.desktop.in.in.h:1
+#: ../vfs-methods/themus/themus-theme-applier.desktop.in.in.h:1
 msgid "Apply theme"
 msgstr "Käytä teemaa"
 
-#: vfs-methods/themus/themus-theme-applier.desktop.in.in.h:2
+#: ../vfs-methods/themus/themus-theme-applier.desktop.in.in.h:2
 msgid "Sets the default theme"
 msgstr "Aseta teema oletusarvoiseksi"
 
-#: vfs-methods/themus/themus.schemas.in.h:1
+#: ../vfs-methods/themus/themus.schemas.in.h:1
 msgid "If set to true, then installed themes will be thumbnailed."
 msgstr "Jos tosi, joka asennetulle teemalle luodaan pienoiskuva."
 
-#: vfs-methods/themus/themus.schemas.in.h:2
+#: ../vfs-methods/themus/themus.schemas.in.h:2
 msgid "If set to true, then themes will be thumbnailed."
 msgstr "Jos tosi, joka teemalle luodaan pienoiskuva."
 
-#: vfs-methods/themus/themus.schemas.in.h:3
+#: ../vfs-methods/themus/themus.schemas.in.h:3
 msgid ""
 "Set this key to the command used to create thumbnails for installed themes."
 msgstr ""
 "Aseta tähän avaimeen komento, joka luo pienoiskuvia asennetuille teemoille."
 
-#: vfs-methods/themus/themus.schemas.in.h:4
+#: ../vfs-methods/themus/themus.schemas.in.h:4
 msgid "Set this key to the command used to create thumbnails for themes."
 msgstr "Aseta tähän avaimeen komento, joka luo pienoiskuvia teemoille."
 
-#: vfs-methods/themus/themus.schemas.in.h:5
+#: ../vfs-methods/themus/themus.schemas.in.h:5
 msgid "Thumbnail command for installed themes"
 msgstr "Asennettujen teemojen pienoiskuvien luontikomento"
 
-#: vfs-methods/themus/themus.schemas.in.h:6
+#: ../vfs-methods/themus/themus.schemas.in.h:6
 msgid "Thumbnail command for themes"
 msgstr "Teemojen pienoiskuvien luontikomento"
 
-#: vfs-methods/themus/themus.schemas.in.h:7
+#: ../vfs-methods/themus/themus.schemas.in.h:7
 msgid "Whether to thumbnail installed themes"
 msgstr "Luodaanko asennetuille teemoille pienoiskuvat"
 
-#: vfs-methods/themus/themus.schemas.in.h:8
+#: ../vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Luodaanko teemoille pienoiskuvat"
+
+#~ msgid "Information about myself"
+#~ msgstr "Tietoja itsestä"
+
+#~ msgid "Pick a color"
+#~ msgstr "Valitse väri"
+
+#~ msgid "%i of %i"
+#~ msgstr "%i / %i"
+
+#~ msgid "Transferring: %s"
+#~ msgstr "%s siirtyy"
+
+#~ msgid "Downloading..."
+#~ msgstr "Tallentuu..."
+
+#~ msgid "Set the font for applications"
+#~ msgstr "Aseta ohjelmien kirjasinlaji"
+
+#~ msgid "Set the font for the icons on the desktop"
+#~ msgstr "Aseta työpöydän kuvakkeiden kirjasinlaji"
+
+#~ msgid "Set the monospace font for terminals and similar applications"
+#~ msgstr ""
+#~ "Aseta päätteiden ja niiden kaltaisten ohjelmien käyttämä tasavälinen "
+#~ "kirjasinlaji"
+
+#~ msgid "_Use Font"
+#~ msgstr "_Käytä kirjasinta"
+
+#~ msgid ""
+#~ "<i><small><b>Note:</b> Changes to this setting will not take effect until "
+#~ "next time you log in.</small></i>"
+#~ msgstr ""
+#~ "<i><small><b>Huomaa:</b> Tämän asetuksen muutokset tulevat voimaan vasta "
+#~ "seuraavan kerran sisään kirjauduttaessa.</small></i>"
+
+#~ msgid "Sound preferences"
+#~ msgstr "Ääniasetukset"
+
+#~ msgid ""
+#~ "Very soon, keyboard settings in gconf will be overridden (from the system "
+#~ "configuration)"
+#~ msgstr ""
+#~ "Hyvin pian XKB-asetukset GConfissa sivuutetaan (järjestelmäasetukset "
+#~ "tulevat voimaan niiden sijaan)"
 
 #~ msgid "Choose Image"
 #~ msgstr "Valitse kuva"
@@ -3146,143 +3461,11 @@ msgstr "Luodaanko teemoille pienoiskuvat"
 #~ "Tarkista, että kirjoitit sen oikein, ja että \"Caps Lock\"-näppäin ei ole "
 #~ "päällä."
 
-#~ msgid "Could not run passwd"
-#~ msgstr "Ohjelman passwd suoritus epäonnistui"
-
 #~ msgid "Check that you have permissions to run this command"
 #~ msgstr "Tarkista että sinulla on oikeudet suorittaa tämä komento"
 
-#~ msgid "An unexpected error has ocurred"
-#~ msgstr "Odottamaton virhe tapahtui"
-
-#~ msgid "Select Image"
-#~ msgstr "Valitse kuva"
-
-#~ msgid "No Image"
-#~ msgstr "Ei kuvaa"
-
-#~ msgid "<b>Email</b>"
-#~ msgstr "<b>Sähköposti</b>"
-
-#~ msgid "<b>Home</b>"
-#~ msgstr "<b>Koti</b>"
-
-#~ msgid "<b>Instant Messaging</b>"
-#~ msgstr "<b>Pikaviestintä</b>"
-
-#~ msgid "<b>Job</b>"
-#~ msgstr "<b>Työ</b>"
-
-#~ msgid "<b>Telephone</b>"
-#~ msgstr "<b>Puhelin</b>"
-
-#~ msgid "<b>Web</b>"
-#~ msgstr "<b>WWW</b>"
-
-#~ msgid "<b>Work</b>"
-#~ msgstr "<b>Työ</b>"
-
-#~ msgid "A_IM/iChat:"
-#~ msgstr "A_IM/iChat:"
-
-#~ msgid "A_ssistant:"
-#~ msgstr "A_ssistentti:"
-
-#~ msgid "C_ity:"
-#~ msgstr "_Kaupunki"
-
-#~ msgid "C_ompany:"
-#~ msgstr "_Yhtiö:"
-
-#~ msgid "Cale_ndar:"
-#~ msgstr "K_alenteri:"
-
-#~ msgid "Change Passwo_rd"
-#~ msgstr "Vaihda _salasana"
-
-#~ msgid "Change Password"
-#~ msgstr "Vaihda salasana"
-
-#~ msgid "Co_untry:"
-#~ msgstr "_Maa:"
-
-#~ msgid "IC_Q:"
-#~ msgstr "IC_Q:"
-
-#~ msgid "M_SN:"
-#~ msgstr "_MSN:"
-
-#~ msgid "New Password:"
-#~ msgstr "Uusi salasana:"
-
-#~ msgid "Old Password:"
-#~ msgstr "Vanha salasana:"
-
-#~ msgid "P_O Box:"
-#~ msgstr "_Postilokero:"
-
-#~ msgid "Retype New Password:"
-#~ msgstr "Kirjoita uusi salasana uudelleen:"
-
 #~ msgid "User Name:"
 #~ msgstr "Käyttäjätunnus:"
-
-#~ msgid "Web _Log:"
-#~ msgstr "WWW-_loki:"
-
-#~ msgid "Work _Fax:"
-#~ msgstr "Työ-_fax:"
-
-#~ msgid "_Address"
-#~ msgstr "_Osoite"
-
-#~ msgid "_Address:"
-#~ msgstr "_Osoite:"
-
-#~ msgid "_Contact"
-#~ msgstr "_Yhteystiedot"
-
-#~ msgid "_Department:"
-#~ msgstr "_Laitos:"
-
-#~ msgid "_Groupwise:"
-#~ msgstr "_Groupwise:"
-
-#~ msgid "_Home Page:"
-#~ msgstr "Koti_sivu:"
-
-#~ msgid "_Home:"
-#~ msgstr "_Koti:"
-
-#~ msgid "_Jabber:"
-#~ msgstr "_Jabber:"
-
-#~ msgid "_Manager:"
-#~ msgstr "_Johtaja:"
-
-#~ msgid "_Mobile:"
-#~ msgstr "_Matkapuhelin:"
-
-#~ msgid "_Personal Info"
-#~ msgstr "_Henkilötiedot:"
-
-#~ msgid "_Profession:"
-#~ msgstr "_Ammatti:"
-
-#~ msgid "_State/Province:"
-#~ msgstr "_Lääni tai osavaltio:"
-
-#~ msgid "_Title:"
-#~ msgstr "_Arvonimi:"
-
-#~ msgid "_Work:"
-#~ msgstr "_Työ:"
-
-#~ msgid "_Yahoo:"
-#~ msgstr "_Yahoo:"
-
-#~ msgid "_Zip/Postal Code:"
-#~ msgstr "_Postinumero:"
 
 #~ msgid "asdfasdfasdfasdfasdf"
 #~ msgstr "asdfasdfasdfasdfasdf"
@@ -3401,9 +3584,6 @@ msgstr "Luodaanko teemoille pienoiskuvat"
 #~ msgid "Underlying model to notify when Ok is clicked"
 #~ msgstr "Alla oleva malli, joka saa tiedon OK:n napsauttamisesta"
 
-#~ msgid "MIME type information"
-#~ msgstr "MIME-tyypin tiedot"
-
 #~ msgid "Structure with data on the MIME type"
 #~ msgstr "Tietorakenne, joka sisältää MIME-tyypin tiedot"
 
@@ -3412,9 +3592,6 @@ msgstr "Luodaanko teemoille pienoiskuvat"
 
 #~ msgid "True if this dialog is for adding a MIME type"
 #~ msgstr "Tosi, jos tämä ikkuna on MIME-tyypin lisäämistä varten"
-
-#~ msgid "Add File Type"
-#~ msgstr "Lisää tiedostotyyppi"
 
 #~ msgid "Misc"
 #~ msgstr "Sekalaista"
