@@ -124,13 +124,15 @@ double_click_from_gconf (GConfPropertyEditor *peditor, const GConfValue *value)
 	return new_value;
 }
 
-static void
-delay_value_changed_cb (GtkWidget *range,
+static gboolean
+delay_value_changed_cb (GtkWidget *range, GtkScrollType scroll, gdouble value,
 			gpointer   dialog)
 {
-	gchar *message = g_strdup_printf ("%.1f %s", gtk_range_get_value (GTK_RANGE (WID ("delay_scale"))) / 1000.0, _("seconds"));
+	gchar *message = g_strdup_printf ("%.1f %s", value / 1000.0, _("seconds"));
 	gtk_label_set_label ((GtkLabel*) WID ("delay_label"), message);
 	g_free (message);
+
+	return FALSE;
 }
 
 static void
@@ -849,7 +851,7 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 		(changeset, DOUBLE_CLICK_KEY, WID ("delay_scale"),
 		 "conv-to-widget-cb", double_click_from_gconf,
 		 NULL);
-	g_signal_connect (G_OBJECT (WID ("delay_scale")), "value_changed", (GCallback) delay_value_changed_cb, dialog);
+	g_signal_connect (G_OBJECT (WID ("delay_scale")), "change_value", (GCallback) delay_value_changed_cb, dialog);
 	gtk_widget_set_size_request (WID ("delay_scale"), 150, -1);
 	gtk_image_set_from_stock (GTK_IMAGE (WID ("double_click_image")), MOUSE_DBLCLCK_OFF, mouse_capplet_dblclck_icon_get_size ());
 	g_object_set_data (G_OBJECT (WID ("double_click_eventbox")), "image", WID ("double_click_image"));
