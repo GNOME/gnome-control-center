@@ -471,10 +471,11 @@ cursor_theme_changed (GConfClient *client,
 	GtkTreeSelection* selection = gtk_tree_view_get_selection(view);
 	GtkTreeModel    * smodel    = gtk_tree_view_get_model(view);
 	GtkTreeModel    * model     = gtk_tree_model_sort_get_model(GTK_TREE_MODEL_SORT(smodel));
-	gchar           * theme     = gconf_client_get_string (client, CURSOR_THEME_KEY, NULL);
+	gchar           * theme;
 	gint              size      = gconf_client_get_int (client, CURSOR_SIZE_KEY, NULL);
 
 	g_return_if_fail (gtk_tree_model_get_iter_first (model, &iter));
+	theme = gconf_client_get_string (client, CURSOR_THEME_KEY, NULL);
 
 	do {
 		gchar* theme_name;

@@ -1,5 +1,10 @@
 2005-08-01  Sebastien Bacher  <seb128@debian.org>
 
+	* gnome-mouse-properties.c: (cursor_theme_changed): no need to allocate
+	a string for the theme when there is no theme installed.
+
+2005-08-01  Sebastien Bacher  <seb128@debian.org>
+
 	* gnome-mouse-properties.c: (cursor_theme_changed):
 	don't crash if there is no cursor theme installed (Closes: #311599).
 
