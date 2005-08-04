@@ -270,6 +270,7 @@ static void
 add_face_info(GtkWidget *table, gint *row_p, const gchar *uri, FT_Face face)
 {
     GnomeVFSFileInfo *file_info;
+    GnomeVFSResult res;
     PS_FontInfoRec ps_info;
 
     add_row(table, row_p, _("Name:"), face->family_name, FALSE);
@@ -278,16 +279,16 @@ add_face_info(GtkWidget *table, gint *row_p, const gchar *uri, FT_Face face)
 	add_row(table, row_p, _("Style:"), face->style_name, FALSE);
 
     file_info = gnome_vfs_file_info_new();
-    if (gnome_vfs_get_file_info
-	(uri, file_info, GNOME_VFS_FILE_INFO_GET_MIME_TYPE) == GNOME_VFS_OK) {
-
+    res = gnome_vfs_get_file_info(uri, file_info,
+				  GNOME_VFS_FILE_INFO_GET_MIME_TYPE |
+				  GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
+    if (res == GNOME_VFS_OK) {
 	if ((file_info->valid_fields&GNOME_VFS_FILE_INFO_FIELDS_MIME_TYPE)!=0){
 	    const gchar *type = gnome_vfs_mime_get_description(file_info->mime_type);
 
 	    add_row(table, row_p, _("Type:"),
 		    type ? type : file_info->mime_type, FALSE);
 	}
-
 	if ((file_info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_SIZE) != 0) {
 	    gchar *size;
 	    size = gnome_vfs_format_file_size_for_display(file_info->size);
