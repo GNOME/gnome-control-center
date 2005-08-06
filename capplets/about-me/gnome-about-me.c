@@ -652,7 +652,7 @@ about_me_passwd_clicked_cb (GtkWidget *button, GnomeAboutMe *me)
 	gnome_about_me_password (GTK_WINDOW (WID ("about-me-dialog")));
 }
 
-static void
+static gint
 about_me_setup_dialog (void)
 {
 	GtkWidget    *widget;
@@ -702,6 +702,12 @@ about_me_setup_dialog (void)
 
 	/* Get the self contact */
 	if (!e_book_get_self (&me->contact, &me->book, &error)) {
+		if (error->code == E_BOOK_ERROR_PROTOCOL_NOT_SUPPORTED) {
+			about_me_error (NULL, _("There was an error while trying to get the addressbook information\n" \
+						"Evolution Data Server can't handle the protocol"));
+			return -1;
+		}	
+
 		me->create_self = TRUE;
 		
 		me->contact = e_contact_new ();
@@ -731,7 +737,7 @@ about_me_setup_dialog (void)
 	if (pwent == NULL) {
 		about_me_error (GTK_WINDOW (WID ("about-me-dialog")), 
 				_("Unknown login ID, the user database might be corrupted"));
-		return ;
+		return -1;
 	}
 	gchar **tok;
 	tok = g_strsplit (pwent->pw_gecos, ",", 0);
@@ -783,6 +789,8 @@ about_me_setup_dialog (void)
 	about_me_load_info (me);
 
 	gtk_widget_show_all (main_dialog);
+
+	return 0;
 }
 
 int
@@ -797,8 +805,11 @@ main (int argc, char **argv)
 		GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
 		NULL);
 
-	about_me_setup_dialog ();
-	gtk_main ();
+	if (about_me_setup_dialog () == -1) {
+		return -1;
+	} else {
+		gtk_main ();
+	}
 
 	return 0;
 }

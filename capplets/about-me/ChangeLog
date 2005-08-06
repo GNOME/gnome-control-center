@@ -1,5 +1,13 @@
 2005-08-06  Diego Gonzalez <diego@pemas.net>
 
+	* gnome-about-me.c (about_me_setup_dialog): handle protocol errors
+	  from EDS.
+	
+	This make the capplet not crash and fixes bug 312450, but the real
+	problem is on EDS, not here.
+
+2005-08-06  Diego Gonzalez <diego@pemas.net>
+
 	* gnome-about-me-password.c (update_password): change signature and
 	  handle error conditions from passwd.
 	  (passdlg_process_response): adapt to changes in update_password
