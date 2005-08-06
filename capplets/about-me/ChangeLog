@@ -1,5 +1,14 @@
 2005-08-06  Diego Gonzalez <diego@pemas.net>
 
+	* gnome-about-me-password.c (update_password): change signature and
+	  handle error conditions from passwd.
+	  (passdlg_process_response): adapt to changes in update_password
+	  to show the error strings returned.
+	
+	Fixes bug 312092.
+
+2005-08-06  Diego Gonzalez <diego@pemas.net>
+
 	* gnome-about-me-password.c (gnome_about_me_password): avoid using
 	  gtk_main and use gtk_dialog_run instead.
 	  (passdlg_button_clicked_cb): rename to passdlg_process_response

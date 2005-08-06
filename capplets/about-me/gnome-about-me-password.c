@@ -260,7 +260,7 @@ passdlg_set_busy (PasswordDialog *pdialog, gboolean busy)
 
 
 static gint
-update_password (PasswordDialog *pdialog) 
+update_password (PasswordDialog *pdialog, gchar **msg)
 {
 	GtkWidget *wopasswd, *wnpasswd, *wrnpasswd;
 	char *new_password;
@@ -268,12 +268,15 @@ update_password (PasswordDialog *pdialog)
 	char *old_password;
 	gchar *s;
 	GladeXML *dialog;
+	gint retcode;
 	
 	dialog = pdialog->xml;
 	
 	wopasswd = WID ("old-password");
 	wnpasswd = WID ("new-password");
 	wrnpasswd = WID ("retyped-password");
+
+	retcode = 0;
 
 	/* */
 	old_password = g_strdup_printf ("%s\n", gtk_entry_get_text (GTK_ENTRY (wopasswd)));
@@ -304,14 +307,29 @@ update_password (PasswordDialog *pdialog)
 		
 	write_to_backend (pdialog, retyped_password);
 	
-	s = read_from_backend (pdialog, "successfully", "Bad:", "recovered",  NULL);
+	s = read_from_backend (pdialog, "successfully", "short", "panlindrome", "simple", "similar", "one", "recovered",  NULL);
 	if (g_strrstr (s, "recovered") != NULL) {
-		return -2;
-	} else if (g_strrstr (s, "Bad") != NULL) {
-		return -3;
+		retcode = -2;
+	} else if (g_strrstr (s, "short") != NULL) {
+		*msg = g_strdup (_("Password is too short"));
+		retcode = -3;
+	} else if (g_strrstr (s, "panlindrome") != NULL) {
+		*msg = g_strdup (_("Password is too simple"));
+		retcode = -3;
+	} else if (g_strrstr (s, "simple") != NULL) {
+		*msg = g_strdup (_("Password is to simple"));
+		retcode = -3;
+	} else if (g_strrstr (s, "similar") != NULL) {
+		*msg = g_strdup (_("Old and new passwords are too similar"));
+		retcode = -3;
+	} else if (g_strrstr (s, "one") != NULL) {
+		*msg = g_strdup (_("Old and new password are the same"));
+		retcode = -3;
 	}
 
-	return 0;
+	g_free (s);
+	
+	return retcode;
 }
 
 static gint
@@ -362,7 +380,7 @@ passdlg_check_password_timeout_cb (PasswordDialog *pdialog)
 {
 	const gchar *password;
 	const gchar *retyped_password;
-	char *msg, *msgtmp;
+	char *msg;
 	gboolean good_password;
 
 	GtkWidget *wbulb, *wok, *wmessage;
@@ -434,7 +452,7 @@ passdlg_process_response (PasswordDialog *pdialog, gint response_id)
 {
 	GladeXML *dialog;
 	GtkWidget *wmessage, *wbulb;
-	gchar *msg;
+	gchar *msg, *msgerr;
 	gint ret;
 
 	dialog = pdialog->xml;
@@ -442,12 +460,14 @@ passdlg_process_response (PasswordDialog *pdialog, gint response_id)
 	wmessage = WID ("message");
 	wbulb = WID ("bulb");
 
+	msgerr = NULL;
+
 	if (response_id == GTK_RESPONSE_OK) {
 		ret = spawn_passwd (pdialog);
 		if (ret < 0)
 			return 1;
 
-		ret = update_password (pdialog);
+		ret = update_password (pdialog, &msgerr);
 		passdlg_set_busy (pdialog, FALSE);
 
 		/* No longer need the wait_child fallback, remove the timeout */
@@ -461,6 +481,17 @@ passdlg_process_response (PasswordDialog *pdialog, gint response_id)
 			gtk_image_set_from_file (GTK_IMAGE (wbulb),
 						 GNOMECC_DATA_DIR "/pixmaps/gnome-about-me-bulb-off.png");
 
+			return -1;
+		} else if (ret == -3) {
+			msg = g_strdup_printf ("<b>%s</b>", msgerr);
+			gtk_label_set_markup (GTK_LABEL (wmessage), msg);
+			g_free (msg);
+			
+			gtk_image_set_from_file (GTK_IMAGE (wbulb),
+						 GNOMECC_DATA_DIR "/pixmaps/gnome-about-me-bulb-off.png");
+						 
+			g_free (msgerr);
+			
 			return -1;
 		}
 
