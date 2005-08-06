@@ -93,7 +93,7 @@ wait_child (PasswordDialog *pdialog)
 	if (pid > 0) {
 
 		if (WIFEXITED (status) && (WEXITSTATUS(status) == 0)) {
-			gtk_main_quit ();
+			/* I need to quit here */
 
 			return FALSE;
 		} else if ((WIFEXITED (status)) && (WEXITSTATUS (status)) && (WEXITSTATUS(status) < 255)) {
@@ -314,7 +314,7 @@ update_password (PasswordDialog *pdialog)
 	return 0;
 }
 
-static void
+static gint
 spawn_passwd (PasswordDialog *pdialog)
 {
 	char *args[2];
@@ -328,7 +328,7 @@ spawn_passwd (PasswordDialog *pdialog)
 	pdialog->backend_pid = forkpty (&pdialog->write_fd, NULL, NULL, NULL);
 	if (pdialog->backend_pid < 0) {
 		g_warning ("could not fork to backend");
-		gtk_main_quit ();
+		return -1;
 	} else if (pdialog->backend_pid == 0) {
 		dup2 (p[1], 1);
 		dup2 (p[1], 2);
@@ -352,58 +352,10 @@ spawn_passwd (PasswordDialog *pdialog)
 		setvbuf (pdialog->read_stream, NULL, _IONBF, 0);
 		fcntl (pdialog->read_fd, F_SETFL, 0);
 	}
+
+	return 1;
 }
 
-static void
-passdlg_button_clicked_cb (GtkDialog *widget, gint response_id, PasswordDialog *pdialog) 
-{
-	GladeXML *dialog;
-	GtkWidget *wmessage, *wbulb;
-	gchar *msg;
-	gint ret;
-
-	dialog = pdialog->xml;
-
-	wmessage = WID ("message");
-	wbulb = WID ("bulb");
-
-	if (response_id == GTK_RESPONSE_OK) {
-		spawn_passwd (pdialog);
-
-		ret = update_password (pdialog);
-		passdlg_set_busy (pdialog, FALSE);
-
-		/* No longer need the wait_child fallback, remove the timeout */
-		g_source_remove (pdialog->timeout_id);
-
-		if (ret == -1) {
-			msg = g_strdup_printf ("<b>%s</b>", _("Old password is incorrect, please retype it"));
-			gtk_label_set_markup (GTK_LABEL (wmessage), msg);
-			g_free (msg);
-
-			gtk_image_set_from_file (GTK_IMAGE (wbulb),
-						 GNOMECC_DATA_DIR "/pixmaps/gnome-about-me-bulb-off.png");
-
-		}
-
-		/* This is the standard way of returning from the dialog with passwd 
-		 * If we return this way we can safely kill passwd as it has completed
-		 * its task. In case of problems we still have the wait_child fallback
-		 */
-		fclose (pdialog->write_stream);
-		fclose (pdialog->read_stream);
-		
-		close (pdialog->read_fd);
-		close (pdialog->write_fd);
-
-		kill (pdialog->backend_pid, 9);
-
-		if (ret == 0)
-			gtk_main_quit ();
-	} else {
-		gtk_main_quit ();
-	}
-}
 
 static gboolean
 passdlg_check_password_timeout_cb (PasswordDialog *pdialog)
@@ -477,12 +429,67 @@ passdlg_check_password (GtkEntry *entry, PasswordDialog *pdialog)
 	
 }
 
+static gint
+passdlg_process_response (PasswordDialog *pdialog, gint response_id) 
+{
+	GladeXML *dialog;
+	GtkWidget *wmessage, *wbulb;
+	gchar *msg;
+	gint ret;
+
+	dialog = pdialog->xml;
+
+	wmessage = WID ("message");
+	wbulb = WID ("bulb");
+
+	if (response_id == GTK_RESPONSE_OK) {
+		ret = spawn_passwd (pdialog);
+		if (ret < 0)
+			return 1;
+
+		ret = update_password (pdialog);
+		passdlg_set_busy (pdialog, FALSE);
+
+		/* No longer need the wait_child fallback, remove the timeout */
+		g_source_remove (pdialog->timeout_id);
+
+		if (ret == -1) {
+			msg = g_strdup_printf ("<b>%s</b>", _("Old password is incorrect, please retype it"));
+			gtk_label_set_markup (GTK_LABEL (wmessage), msg);
+			g_free (msg);
+
+			gtk_image_set_from_file (GTK_IMAGE (wbulb),
+						 GNOMECC_DATA_DIR "/pixmaps/gnome-about-me-bulb-off.png");
+
+			return -1;
+		}
+
+		/* This is the standard way of returning from the dialog with passwd 
+		 * If we return this way we can safely kill passwd as it has completed
+		 * its task. In case of problems we still have the wait_child fallback
+		 */
+		fclose (pdialog->write_stream);
+		fclose (pdialog->read_stream);
+		
+		close (pdialog->read_fd);
+		close (pdialog->write_fd);
+
+		kill (pdialog->backend_pid, 9);
+
+		if (ret == 0)
+			return 1;
+	} else {
+		return 1;
+	}
+}
+
 void
 gnome_about_me_password (GtkWindow *parent)
 {
 	PasswordDialog *pdialog;
 	GtkWidget *wpassdlg;
 	GladeXML *dialog;
+	gint result;
 	
 	pdialog = g_new0 (PasswordDialog, 1);
 
@@ -492,8 +499,6 @@ gnome_about_me_password (GtkWindow *parent)
 
 	wpassdlg = WID ("change-password");
 	capplet_set_icon (wpassdlg, "user-info");
-	g_signal_connect (G_OBJECT (wpassdlg), "response",
-			  G_CALLBACK (passdlg_button_clicked_cb), pdialog);
 
 	pdialog->good_password = FALSE;
 
@@ -508,7 +513,15 @@ gnome_about_me_password (GtkWindow *parent)
 	gtk_window_set_resizable (GTK_WINDOW (wpassdlg), FALSE);
 	gtk_window_set_transient_for (GTK_WINDOW (wpassdlg), GTK_WINDOW (parent));
 	gtk_widget_show_all (wpassdlg);
-	gtk_main ();
+
+
+retry:
+	result = gtk_dialog_run (GTK_DIALOG (wpassdlg));
+
+	result = passdlg_process_response (pdialog, result);
+
+	if (result <= 0)
+		goto retry;
 
 	gtk_widget_destroy (wpassdlg);
 	g_free (pdialog);

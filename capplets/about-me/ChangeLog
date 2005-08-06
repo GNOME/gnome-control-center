@@ -1,4 +1,16 @@
-2005-07-16  Diego Gonzalez <diego@pemas.net>
+2005-08-06  Diego Gonzalez <diego@pemas.net>
+
+	* gnome-about-me-password.c (gnome_about_me_password): avoid using
+	  gtk_main and use gtk_dialog_run instead.
+	  (passdlg_button_clicked_cb): rename to passdlg_process_response
+	  (spawn_passwd): return a value, so that we can see if we need to
+	  exit without using gtk_main_quit
+	  (wait_child) avoid use of gtk_main_quit. More work is required on
+	  this case, but for now it will be enough.
+
+	Fixes bugs 312580 and 309736.	  	
+
+2005-07-16  Diego Gonzaler <diego@pemas.net>
 
 	* gnome-about-me.c (about_me_image_clicked_cb): change the order
 	  of the buttons to match the HIG.
