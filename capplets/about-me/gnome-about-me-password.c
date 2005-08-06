@@ -412,7 +412,7 @@ passdlg_check_password_timeout_cb (PasswordDialog *pdialog)
 		msg = g_strconcat ("<b>", _("Please type the password again, it is wrong."), "</b>", NULL);
 		good_password = FALSE;
 	} else {
-		msg = g_strconcat ("<b>", _("Click the Change Password button to change the password."), "</b>", NULL);
+		msg = g_strconcat ("<b>", _("Click on Change Password to change the password."), "</b>", NULL);
 		good_password = TRUE;
 	}
 
