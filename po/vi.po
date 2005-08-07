@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center for Gnome 2.12\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-30 06:17+0000\n"
-"PO-Revision-Date: 2005-07-30 23:18+0930\n"
+"POT-Creation-Date: 2005-08-06 22:14+0000\n"
+"PO-Revision-Date: 2005-08-07 17:45+0930\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <gnomevi-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -62,22 +62,29 @@ msgstr "Chọn ảnh"
 msgid "No Image"
 msgstr "Không ảnh"
 
-#: ../capplets/about-me/gnome-about-me.c:721
+#: ../capplets/about-me/gnome-about-me.c:706
+msgid ""
+"There was an error while trying to get the addressbook information\n"
+"Evolution Data Server can't handle the protocol"
+msgstr "Gặp lỗi khi cố gọi thông tin sổ địa chỉ.\n"
+"Trình phục vụ Dữ liệu Evolution không thể quản lý giao thức."
+
+#: ../capplets/about-me/gnome-about-me.c:727
 msgid "Unable to open address book"
 msgstr "Không mở được sổ địa chỉ"
 
-#: ../capplets/about-me/gnome-about-me.c:733
+#: ../capplets/about-me/gnome-about-me.c:739
 msgid "Unknown login ID, the user database might be corrupted"
 msgstr "Không biết thông tin đăng nhập, có lẽ cơ sở dữ liệu người dùng bị hỏng"
 
-#: ../capplets/about-me/gnome-about-me.c:764
-#: ../capplets/about-me/gnome-about-me.c:766
+#: ../capplets/about-me/gnome-about-me.c:770
+#: ../capplets/about-me/gnome-about-me.c:772
 #, c-format
 msgid "About %s"
 msgstr "Giới thiệu %s"
 
 #: ../capplets/about-me/gnome-about-me-password.c:101
-#: ../capplets/about-me/gnome-about-me-password.c:380
+#: ../capplets/about-me/gnome-about-me-password.c:477
 msgid "Old password is incorrect, please retype it"
 msgstr "Mật khẩu cũ không đúng nên hãy gõ lại"
 
@@ -98,17 +105,37 @@ msgstr "Không thể khởi chạy hậu phương"
 msgid "Unexpected error has occurred"
 msgstr "Gặp lỗi bất ngờ"
 
-#: ../capplets/about-me/gnome-about-me-password.c:434
+#: ../capplets/about-me/gnome-about-me-password.c:314
+msgid "Password is too short"
+msgstr "Mật khẩu quá ngắn"
+
+#: ../capplets/about-me/gnome-about-me-password.c:317
+msgid "Password is too simple"
+msgstr "Mật khẩu quá đơn giản"
+
+#: ../capplets/about-me/gnome-about-me-password.c:320
+msgid "Password is to simple"
+msgstr "Mật khẩu quá đơn giản"
+
+#: ../capplets/about-me/gnome-about-me-password.c:323
+msgid "Old and new passwords are too similar"
+msgstr "Hai mật khẩu cũ và mật khẩu mới quá tương tư"
+
+#: ../capplets/about-me/gnome-about-me-password.c:326
+msgid "Old and new password are the same"
+msgstr "Hai mật khẩu cũ và mật khẩu mới là cùng một mật khẩu"
+
+#: ../capplets/about-me/gnome-about-me-password.c:404
 msgid "Please type the passwords."
 msgstr "Hãy gõ những mật khẩu"
 
-#: ../capplets/about-me/gnome-about-me-password.c:442
+#: ../capplets/about-me/gnome-about-me-password.c:412
 msgid "Please type the password again, it is wrong."
 msgstr "Hãy gõ lại mật khẩu vì nó không đúng."
 
-#: ../capplets/about-me/gnome-about-me-password.c:445
-msgid "Click the Change Password button to change the password."
-msgstr "Hãy nhắp vào nút «Đổi mật khẩu» để thay đổi mật khẩu."
+#: ../capplets/about-me/gnome-about-me-password.c:415
+msgid "Click on Change Password to change the password."
+msgstr "Hãy nhắp vào nút « Đổi mật khẩu » để thay đổi mật khẩu."
 
 #: ../capplets/about-me/gnome-about-me.glade.h:1
 #: ../vfs-methods/themus/apply-font.glade.h:1
@@ -631,8 +658,8 @@ msgstr "điểm ảnh/giây"
 #. set the timeout value  label with correct value of timeout
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
 #: ../capplets/mouse/gnome-mouse-properties.c:131
-#: ../capplets/mouse/gnome-mouse-properties.c:860
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:28
+#: ../capplets/mouse/gnome-mouse-properties.c:863
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
 #: ../capplets/windows/gnome-window-properties.glade.h:10
 msgid "seconds"
 msgstr "giây"
@@ -751,7 +778,7 @@ msgstr "Chỉ áp dụng các thiết lập rồi thoát"
 #: ../capplets/common/capplet-util.c:243
 #: ../capplets/default-applications/gnome-default-applications-properties.c:765
 #: ../capplets/keyboard/gnome-keyboard-properties.c:225
-#: ../capplets/mouse/gnome-mouse-properties.c:996
+#: ../capplets/mouse/gnome-mouse-properties.c:999
 #: ../capplets/sound/sound-properties-capplet.c:244
 msgid "Retrieve and store legacy settings"
 msgstr "Nhận và lưu thiết lập cũ"
@@ -1721,59 +1748,59 @@ msgstr "phút"
 msgid "Set your keyboard preferences"
 msgstr "Lập các tùy thích cho bàn phím của bạn"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:549
+#: ../capplets/mouse/gnome-mouse-properties.c:552
 msgid "Unknown Cursor"
 msgstr "Con chạy lạ"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:736
+#: ../capplets/mouse/gnome-mouse-properties.c:739
 msgid "Default Cursor"
 msgstr "Con chạy mặc định"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:737
+#: ../capplets/mouse/gnome-mouse-properties.c:740
 msgid "Default Cursor - Current"
 msgstr "Con chạy mặc định — hiện thời"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:738
+#: ../capplets/mouse/gnome-mouse-properties.c:741
 msgid "The default cursor that ships with X"
 msgstr "Con chạy mặc định đi kèm với X"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:742
+#: ../capplets/mouse/gnome-mouse-properties.c:745
 msgid "White Cursor"
 msgstr "Con chạy trắng"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:743
+#: ../capplets/mouse/gnome-mouse-properties.c:746
 msgid "White Cursor - Current"
 msgstr "Con chạy trắng — hiện thời"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:744
+#: ../capplets/mouse/gnome-mouse-properties.c:747
 msgid "The default cursor inverted"
 msgstr "Con chạy mặc định đảo màu"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:748
+#: ../capplets/mouse/gnome-mouse-properties.c:751
 msgid "Large Cursor"
 msgstr "Con chạy lớn"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:749
+#: ../capplets/mouse/gnome-mouse-properties.c:752
 msgid "Large Cursor - Current"
 msgstr "Con chạy lớn — hiện thời"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:750
+#: ../capplets/mouse/gnome-mouse-properties.c:753
 msgid "Large version of normal cursor"
 msgstr "Phiên bản lớn của con chạy thường"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:754
+#: ../capplets/mouse/gnome-mouse-properties.c:757
 msgid "Large White Cursor - Current"
 msgstr "Con chạy trắng lớn — hiện thời"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:755
+#: ../capplets/mouse/gnome-mouse-properties.c:758
 msgid "Large White Cursor"
 msgstr "Con chạy trắng lớn"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:756
+#: ../capplets/mouse/gnome-mouse-properties.c:759
 msgid "Large version of white cursor"
 msgstr "Phiên bản lớn của con chạy trắng"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:950
+#: ../capplets/mouse/gnome-mouse-properties.c:953
 msgid "Cursor Theme"
 msgstr "Sắc thái con chạy"
 
@@ -1798,90 +1825,82 @@ msgid "<b>Speed</b>"
 msgstr "<b>Tốc độ</b>"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:7
-msgid ""
-"<i><small><b>Note:</b> Changes to this setting will not take effect until "
-"next time you log in.</small></i>"
-msgstr ""
-"<small><i><b>Chú ý:</b> Những thay đổi trong thiết lập này sẽ không tác động "
-"cho đến lần đăng nhập kế tiếp của bạn.</i></small>"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid "<i>Fast</i>"
 msgstr "<i>Nhanh</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:9
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid "<i>High</i>"
 msgstr "<i>Cao</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:10
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:9
 msgid "<i>Large</i>"
 msgstr "<i>Lớn</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:11
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:10
 msgid "<i>Low</i>"
 msgstr "<i>Thấp</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:12
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:11
 msgid "<i>Slow</i>"
 msgstr "<i>Chậm</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:13
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:12
 msgid "<i>Small</i>"
 msgstr "<i>Nhỏ</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:14
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:13
 msgid "Buttons"
 msgstr "Nút"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:15
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:14
 msgid "Cursor Size:"
 msgstr "Cỡ con chạy"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:16
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:15
 msgid "Cursors"
 msgstr "Con chạy"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:16
 msgid "Highlight the _pointer when you press Ctrl"
 msgstr "_Tô sáng con trỏ khi nhấn phím Ctrl"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
 msgid "Large"
 msgstr "_Lớn"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
 msgid "Medium"
 msgstr "Trung _bình"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:20
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
 msgid "Motion"
 msgstr "Chuyển động"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:21
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:20
 msgid "Mouse Preferences"
 msgstr "Tùy thích con chuột"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:22
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:21
 msgid "Small"
 msgstr "Nhỏ"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:23
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:22
 msgid "_Acceleration:"
 msgstr "_Phím tắt:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:24
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:23
 msgid "_Left-handed mouse"
 msgstr "Chuột tay _trái"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:25
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:24
 msgid "_Sensitivity:"
 msgstr "Độ _nhạy:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:26
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:25
 msgid "_Threshold:"
 msgstr "_Ngưỡng:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:26
 msgid "_Timeout:"
 msgstr "_Thời hạn:"
 
@@ -3100,7 +3119,10 @@ msgid ""
 "Very soon, keyboard settings in gconf will be overridden (from the system "
 "configuration) This key has been deprecated since GNOME 2.12, please unset "
 "the model, layouts and options keys to get the default system configuration."
-msgstr "Cấu hình hệ thống sắp đè thiết lập bàn phím trong GConf. Khóa này bị phản đối từ Gnome 2.12 thì bạn nên bỏ lập mẫu, các bố trí và phím tùy chọn để trở về cấu hình hệ thống mặc định."
+msgstr ""
+"Cấu hình hệ thống sắp đè thiết lập bàn phím trong GConf. Khóa này bị phản "
+"đối từ Gnome 2.12 thì bạn nên bỏ lập mẫu, các bố trí và phím tùy chọn để trở "
+"về cấu hình hệ thống mặc định."
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:15
 msgid "keyboard layout"
@@ -3194,37 +3216,37 @@ msgstr ""
 "ăằẳẵắặâầẩẫấậêềểễếệôồổỗốộưừửữứựơờởỡớợ The quick brown fox jumps over the lazy "
 "dog. 0123456789 «» àảãáạèẻẽéẹìỉĩíịỳỷỹýỵòỏõóọùủũúụ?!:;,.₫"
 
-#: ../vfs-methods/fontilus/font-view.c:275
+#: ../vfs-methods/fontilus/font-view.c:276
 msgid "Name:"
 msgstr "Tên:"
 
-#: ../vfs-methods/fontilus/font-view.c:278
+#: ../vfs-methods/fontilus/font-view.c:279
 msgid "Style:"
 msgstr "Kiểu dạng:"
 
-#: ../vfs-methods/fontilus/font-view.c:287
+#: ../vfs-methods/fontilus/font-view.c:289
 msgid "Type:"
 msgstr "Loại:"
 
-#: ../vfs-methods/fontilus/font-view.c:294
+#: ../vfs-methods/fontilus/font-view.c:295
 msgid "Size:"
 msgstr "Cỡ:"
 
-#: ../vfs-methods/fontilus/font-view.c:338
-#: ../vfs-methods/fontilus/font-view.c:351
+#: ../vfs-methods/fontilus/font-view.c:339
+#: ../vfs-methods/fontilus/font-view.c:352
 msgid "Version:"
 msgstr "Phiên bản:"
 
-#: ../vfs-methods/fontilus/font-view.c:342
-#: ../vfs-methods/fontilus/font-view.c:353
+#: ../vfs-methods/fontilus/font-view.c:343
+#: ../vfs-methods/fontilus/font-view.c:354
 msgid "Copyright:"
 msgstr "Bản quyền:"
 
-#: ../vfs-methods/fontilus/font-view.c:346
+#: ../vfs-methods/fontilus/font-view.c:347
 msgid "Description:"
 msgstr "Mô tả:"
 
-#: ../vfs-methods/fontilus/font-view.c:407
+#: ../vfs-methods/fontilus/font-view.c:408
 #, c-format
 msgid "usage: %s fontfile\n"
 msgstr "cách sử dụng: %s tên_tập_tin_phông_chữ\n"
