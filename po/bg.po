@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.10\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-06 18:31+0300\n"
-"PO-Revision-Date: 2005-08-06 18:29+0300\n"
+"POT-Creation-Date: 2005-08-07 13:44+0300\n"
+"PO-Revision-Date: 2005-08-07 13:43+0300\n"
 "Last-Translator: Rostislav \"zbrox\" Raykov <zbrox@i-space.org>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
 "MIME-Version: 1.0\n"
@@ -63,24 +63,32 @@ msgstr "Избор на изображение"
 msgid "No Image"
 msgstr "Няма изображение"
 
-#: ../capplets/about-me/gnome-about-me.c:721
+#: ../capplets/about-me/gnome-about-me.c:706
+msgid ""
+"There was an error while trying to get the addressbook information\n"
+"Evolution Data Server can't handle the protocol"
+msgstr ""
+"Грешки при опита за получаване на информация за адресната книга\n"
+"Evolution Data Server не може да обработи протокола"
+
+#: ../capplets/about-me/gnome-about-me.c:727
 msgid "Unable to open address book"
 msgstr "Не може да се отвори адресника."
 
-#: ../capplets/about-me/gnome-about-me.c:733
+#: ../capplets/about-me/gnome-about-me.c:739
 msgid "Unknown login ID, the user database might be corrupted"
 msgstr ""
 "Непознато потребителско ID, базата данни за потребителите може да е "
 "повредена."
 
-#: ../capplets/about-me/gnome-about-me.c:764
-#: ../capplets/about-me/gnome-about-me.c:766
+#: ../capplets/about-me/gnome-about-me.c:770
+#: ../capplets/about-me/gnome-about-me.c:772
 #, c-format
 msgid "About %s"
 msgstr "Относно %s"
 
 #: ../capplets/about-me/gnome-about-me-password.c:101
-#: ../capplets/about-me/gnome-about-me-password.c:380
+#: ../capplets/about-me/gnome-about-me-password.c:477
 msgid "Old password is incorrect, please retype it"
 msgstr "Старата парола е неправилна. Въведете я отново."
 
@@ -101,16 +109,36 @@ msgstr "Не може да се пусне основната програма"
 msgid "Unexpected error has occurred"
 msgstr "Непозната грешка"
 
-#: ../capplets/about-me/gnome-about-me-password.c:434
+#: ../capplets/about-me/gnome-about-me-password.c:314
+msgid "Password is too short"
+msgstr "Паролата е прекалено кратка"
+
+#: ../capplets/about-me/gnome-about-me-password.c:317
+msgid "Password is too simple"
+msgstr "Паролата е прекалено проста"
+
+#: ../capplets/about-me/gnome-about-me-password.c:320
+msgid "Password is to simple"
+msgstr "Паролата е прекалено проста"
+
+#: ../capplets/about-me/gnome-about-me-password.c:323
+msgid "Old and new passwords are too similar"
+msgstr "Старата и новата парола прекалено много си приличат"
+
+#: ../capplets/about-me/gnome-about-me-password.c:326
+msgid "Old and new password are the same"
+msgstr "Старата и новата парола са еднакви"
+
+#: ../capplets/about-me/gnome-about-me-password.c:404
 msgid "Please type the passwords."
 msgstr "Въведете паролите."
 
-#: ../capplets/about-me/gnome-about-me-password.c:442
+#: ../capplets/about-me/gnome-about-me-password.c:412
 msgid "Please type the password again, it is wrong."
 msgstr "Въведете паролата отново, тази е грешна."
 
-#: ../capplets/about-me/gnome-about-me-password.c:445
-msgid "Click the Change Password button to change the password."
+#: ../capplets/about-me/gnome-about-me-password.c:415
+msgid "Click on Change Password to change the password."
 msgstr "Натиснете бутона „Смяна на парола“, за да смените паролата си."
 
 #: ../capplets/about-me/gnome-about-me.glade.h:1
@@ -249,7 +277,7 @@ msgstr "Щат/Провинция:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:34
 msgid "User name:"
-msgstr "Потребителко име:"
+msgstr "Потребителско име:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:35
 msgid "Web _log:"
@@ -988,15 +1016,15 @@ msgstr "Konqueror"
 
 #: ../capplets/default-applications/gnome-default-applications-properties-structs.c:19
 msgid "W3M Text Browser"
-msgstr "W3M текстов Интернет браузър"
+msgstr "W3M - текстов браузър за Интернет"
 
 #: ../capplets/default-applications/gnome-default-applications-properties-structs.c:20
 msgid "Lynx Text Browser"
-msgstr "Lynx текстов Интернет браузър"
+msgstr "Lynx - текстов браузър за Интернет"
 
 #: ../capplets/default-applications/gnome-default-applications-properties-structs.c:21
 msgid "Links Text Browser"
-msgstr "Links текстов Интернет браузър"
+msgstr "Links - текстов браузър за Интернет"
 
 #. The code in gnome-default-applications-properties.c makes sure
 #. * there is only one (the first entry in this list) Evolution entry
@@ -1196,7 +1224,7 @@ msgstr "Разделителна способност"
 #: ../capplets/display/main.c:345
 #, c-format
 msgid "%d Hz"
-msgstr "%d херца"
+msgstr "%d Hz"
 
 #: ../capplets/display/main.c:448
 msgid "_Resolution:"
@@ -1956,7 +1984,7 @@ msgstr "Socks хост:"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:15
 msgid "U_sername:"
-msgstr "Потр_ебителко име:"
+msgstr "Потр_ебителско име:"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:16
 msgid "_Details"
@@ -2407,7 +2435,7 @@ msgstr "Alt"
 
 #: ../capplets/windows/gnome-window-properties.c:655
 msgid "Hyper"
-msgstr "Хипер"
+msgstr "Hyper"
 
 #: ../capplets/windows/gnome-window-properties.c:662
 msgid "Super (or \"Windows logo\")"
@@ -3118,7 +3146,7 @@ msgstr "модел на клавиатурата"
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:17
 msgid "modmap file list"
-msgstr "modmap file list"
+msgstr "файл със списък на подредби"
 
 #: ../typing-break/drw-break-window.c:212
 msgid "_Postpone break"
