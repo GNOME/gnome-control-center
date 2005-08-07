@@ -1,3 +1,4 @@
+# translation of nb.po to Norwegian Bokmal
 # Norwegian translation of control-center (bokmål dialect).
 # Copyright (C) 1999-2005 Free Software Foundation, Inc.
 # Kjartan Maraas <kmaraas@gnome.org>, 1999-2005.
@@ -7,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-03 10:20+0200\n"
-"PO-Revision-Date: 2005-08-03 10:24+0200\n"
-"Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
+"POT-Creation-Date: 2005-08-07 15:59+0200\n"
+"PO-Revision-Date: 2005-08-07 15:53+0200\n"
+"Last-Translator: Terance Edward Sola <terance@lyse.net>\n"
 "Language-Team: Norwegian Bokmal <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -61,22 +62,30 @@ msgstr "Velg bilde"
 msgid "No Image"
 msgstr "Ingen bilder"
 
-#: ../capplets/about-me/gnome-about-me.c:721
+#: ../capplets/about-me/gnome-about-me.c:706
+msgid ""
+"There was an error while trying to get the addressbook information\n"
+"Evolution Data Server can't handle the protocol"
+msgstr ""
+"Det oppstod en feil under forsøk på å få informasjon om adresseboken\n"
+"Evolution Data Server kan ikke håndtere protokollen"
+
+#: ../capplets/about-me/gnome-about-me.c:727
 msgid "Unable to open address book"
 msgstr "Kunne ikke åpne adressebok"
 
-#: ../capplets/about-me/gnome-about-me.c:733
+#: ../capplets/about-me/gnome-about-me.c:739
 msgid "Unknown login ID, the user database might be corrupted"
 msgstr "Ukjent logg inn-id, brukerdatabasen er kanskje skadet"
 
-#: ../capplets/about-me/gnome-about-me.c:764
-#: ../capplets/about-me/gnome-about-me.c:766
+#: ../capplets/about-me/gnome-about-me.c:770
+#: ../capplets/about-me/gnome-about-me.c:772
 #, c-format
 msgid "About %s"
 msgstr "Om %s"
 
 #: ../capplets/about-me/gnome-about-me-password.c:101
-#: ../capplets/about-me/gnome-about-me-password.c:380
+#: ../capplets/about-me/gnome-about-me-password.c:477
 msgid "Old password is incorrect, please retype it"
 msgstr "Det gamle passordet er feil, skriv det en gang til"
 
@@ -97,17 +106,37 @@ msgstr "Kunne ikke kjøre bakstykke"
 msgid "Unexpected error has occurred"
 msgstr "Uventet feil intraff"
 
-#: ../capplets/about-me/gnome-about-me-password.c:434
+#: ../capplets/about-me/gnome-about-me-password.c:314
+msgid "Password is too short"
+msgstr "Passordet er for kort"
+
+#: ../capplets/about-me/gnome-about-me-password.c:317
+msgid "Password is too simple"
+msgstr "Passordet er for enkelt"
+
+#: ../capplets/about-me/gnome-about-me-password.c:320
+msgid "Password is to simple"
+msgstr "Passordet er for enkelt"
+
+#: ../capplets/about-me/gnome-about-me-password.c:323
+msgid "Old and new passwords are too similar"
+msgstr "Gammelt og nytt passord er for like"
+
+#: ../capplets/about-me/gnome-about-me-password.c:326
+msgid "Old and new password are the same"
+msgstr "Gammelt og nytt passord er det samme"
+
+#: ../capplets/about-me/gnome-about-me-password.c:404
 msgid "Please type the passwords."
 msgstr "Vennligst oppgi passordene."
 
-#: ../capplets/about-me/gnome-about-me-password.c:442
+#: ../capplets/about-me/gnome-about-me-password.c:412
 msgid "Please type the password again, it is wrong."
 msgstr "Vennligst oppgi passordet på nytt. Det var feil."
 
-#: ../capplets/about-me/gnome-about-me-password.c:445
-msgid "Click the Change Password button to change the password."
-msgstr "Klikk på knappen Bytt passord for å bytte passord."
+#: ../capplets/about-me/gnome-about-me-password.c:415
+msgid "Click on Change Password to change the password."
+msgstr "Trykk på «Endre passord» for å endre passord."
 
 #: ../capplets/about-me/gnome-about-me.glade.h:1
 #: ../vfs-methods/themus/apply-font.glade.h:1
@@ -1499,11 +1528,11 @@ msgstr "Feil under setting av ny snarvei i konfigurasjonsdatabasen: %s\n"
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "Feil under fjerning av snarveitast i konfigurasjonsdatabasen: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:858
+#: ../capplets/keybindings/gnome-keybinding-properties.c:857
 msgid "Action"
 msgstr "Handling"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:882
+#: ../capplets/keybindings/gnome-keybinding-properties.c:881
 msgid "Shortcut"
 msgstr "Snarvei"
 
@@ -2139,7 +2168,7 @@ msgstr "Egendefinert tema"
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "Du kan lagre dette temaet ved å klikke på «Lagre tema»-knappen."
 
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1477
+#: ../capplets/theme-switcher/gnome-theme-manager.c:1476
 msgid ""
 "The default theme schemas could not be found on your system.  This means "
 "that you probably don't have metacity installed, or that your gconf is "
@@ -3087,7 +3116,11 @@ msgid ""
 "Very soon, keyboard settings in gconf will be overridden (from the system "
 "configuration) This key has been deprecated since GNOME 2.12, please unset "
 "the model, layouts and options keys to get the default system configuration."
-msgstr "Tastaturinnstillinger i gconf vil bli overstyrt fra systemkonfigurasjonen i nær framtid. Denne nøkkelen er under utfasing fra GNOME 2.12. Vennligst fjern verdiene for modell, utforming og alternative taster for å ta i bruk forvalgt systemkonfigurasjon."
+msgstr ""
+"Tastaturinnstillinger i gconf vil bli overstyrt fra systemkonfigurasjonen i "
+"nær framtid. Denne nøkkelen er under utfasing fra GNOME 2.12. Vennligst "
+"fjern verdiene for modell, utforming og alternative taster for å ta i bruk "
+"forvalgt systemkonfigurasjon."
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:15
 msgid "keyboard layout"
@@ -3180,37 +3213,37 @@ msgstr ""
 msgid "The quick brown fox jumps over the lazy dog. 0123456789"
 msgstr "Den raske brune reven hopper over den late hunden. 0123456789"
 
-#: ../vfs-methods/fontilus/font-view.c:275
+#: ../vfs-methods/fontilus/font-view.c:276
 msgid "Name:"
 msgstr "Navn:"
 
-#: ../vfs-methods/fontilus/font-view.c:278
+#: ../vfs-methods/fontilus/font-view.c:279
 msgid "Style:"
 msgstr "Stil:"
 
-#: ../vfs-methods/fontilus/font-view.c:287
+#: ../vfs-methods/fontilus/font-view.c:289
 msgid "Type:"
 msgstr "Type:"
 
-#: ../vfs-methods/fontilus/font-view.c:294
+#: ../vfs-methods/fontilus/font-view.c:295
 msgid "Size:"
 msgstr "Størrelse:"
 
-#: ../vfs-methods/fontilus/font-view.c:338
-#: ../vfs-methods/fontilus/font-view.c:351
+#: ../vfs-methods/fontilus/font-view.c:339
+#: ../vfs-methods/fontilus/font-view.c:352
 msgid "Version:"
 msgstr "Versjon:"
 
-#: ../vfs-methods/fontilus/font-view.c:342
-#: ../vfs-methods/fontilus/font-view.c:353
+#: ../vfs-methods/fontilus/font-view.c:343
+#: ../vfs-methods/fontilus/font-view.c:354
 msgid "Copyright:"
 msgstr "Opphavsrett:"
 
-#: ../vfs-methods/fontilus/font-view.c:346
+#: ../vfs-methods/fontilus/font-view.c:347
 msgid "Description:"
 msgstr "Beskrivelse:"
 
-#: ../vfs-methods/fontilus/font-view.c:407
+#: ../vfs-methods/fontilus/font-view.c:408
 #, c-format
 msgid "usage: %s fontfile\n"
 msgstr "bruk: %s skriftfil\n"
