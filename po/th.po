@@ -6,13 +6,14 @@
 # Supranee Thirawatthanasuk <supranee@opentle.org>, 2004.
 # Surichat Sumrit <nook@opentle.org>, 2004.
 # Chanchai Junlouchai <taz@opentle.org>, 2004.
+# Theppitak Karoonboonyanan <thep@linux.thai.net>, 2004, 2005.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-30 13:43+0700\n"
-"PO-Revision-Date: 2005-08-02 20:29+0700\n"
+"POT-Creation-Date: 2005-08-07 14:14+0700\n"
+"PO-Revision-Date: 2005-08-07 14:18+0700\n"
 "Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
 "Language-Team: Thai <L10n@opentle.org>\n"
 "MIME-Version: 1.0\n"
@@ -65,22 +66,30 @@ msgstr "กำหนดรูป"
 msgid "No Image"
 msgstr "ไม่มีรูป"
 
-#: capplets/about-me/gnome-about-me.c:721
+#: capplets/about-me/gnome-about-me.c:706
+msgid ""
+"There was an error while trying to get the addressbook information\n"
+"Evolution Data Server can't handle the protocol"
+msgstr ""
+"เกิดข้อผิดพลาดขณะพยายามอ่านข้อมูลสมุดที่อยู่\n"
+"Evolution Data Server ไม่สามารถจัดการกับโพรโตคอลได้"
+
+#: capplets/about-me/gnome-about-me.c:727
 msgid "Unable to open address book"
 msgstr "เปิดสมุดที่อยู่ไม่สำเร็จ"
 
-#: capplets/about-me/gnome-about-me.c:733
+#: capplets/about-me/gnome-about-me.c:739
 msgid "Unknown login ID, the user database might be corrupted"
 msgstr "ไม่รู้จักชื่อผู้ใช้ที่ระบุ ฐานข้อมูลผู้ใช้อาจจะเสียก็ได้"
 
-#: capplets/about-me/gnome-about-me.c:764
-#: capplets/about-me/gnome-about-me.c:766
+#: capplets/about-me/gnome-about-me.c:770
+#: capplets/about-me/gnome-about-me.c:772
 #, c-format
 msgid "About %s"
 msgstr "เกี่ยวกับ %s"
 
 #: capplets/about-me/gnome-about-me-password.c:101
-#: capplets/about-me/gnome-about-me-password.c:380
+#: capplets/about-me/gnome-about-me-password.c:477
 msgid "Old password is incorrect, please retype it"
 msgstr "รหัสผ่านเดิมไม่ถูกต้อง กรุณาป้อนใหม่"
 
@@ -101,16 +110,36 @@ msgstr "เรียกแบ็กเอ็นด์ไม่สำเร็จ
 msgid "Unexpected error has occurred"
 msgstr "เกิดข้อผิดพลาดที่ไม่รู้จัก"
 
-#: capplets/about-me/gnome-about-me-password.c:434
+#: capplets/about-me/gnome-about-me-password.c:314
+msgid "Password is too short"
+msgstr "รหัสผ่านสั้นเกินไป"
+
+#: capplets/about-me/gnome-about-me-password.c:317
+msgid "Password is too simple"
+msgstr "รหัสผ่านเดาง่ายเกินไป"
+
+#: capplets/about-me/gnome-about-me-password.c:320
+msgid "Password is to simple"
+msgstr "รหัสผ่านเดาง่ายเกินไป"
+
+#: capplets/about-me/gnome-about-me-password.c:323
+msgid "Old and new passwords are too similar"
+msgstr "รหัสผ่านใหม่คล้ายกับรหัสผ่านเก่าเกินไป"
+
+#: capplets/about-me/gnome-about-me-password.c:326
+msgid "Old and new password are the same"
+msgstr "รหัสผ่านใหม่เหมือนกันกับรหัสผ่านเก่า"
+
+#: capplets/about-me/gnome-about-me-password.c:404
 msgid "Please type the passwords."
 msgstr "กรุณาป้อนรหัสผ่านด้วย"
 
-#: capplets/about-me/gnome-about-me-password.c:442
+#: capplets/about-me/gnome-about-me-password.c:412
 msgid "Please type the password again, it is wrong."
 msgstr "รหัสผ่านไม่ตรงกัน กรุณาป้อนใหม่"
 
-#: capplets/about-me/gnome-about-me-password.c:445
-msgid "Click the Change Password button to change the password."
+#: capplets/about-me/gnome-about-me-password.c:415
+msgid "Click on Change Password to change the password."
 msgstr "กดปุ่ม \"เปลี่ยนรหัสผ่าน\" เพื่อเปลี่ยนรหัสผ่านของคุณ"
 
 #: capplets/about-me/gnome-about-me.glade.h:1
@@ -624,8 +653,8 @@ msgstr "พิกเซล/วินาที"
 #. set the timeout value  label with correct value of timeout
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
 #: capplets/mouse/gnome-mouse-properties.c:131
-#: capplets/mouse/gnome-mouse-properties.c:860
-#: capplets/mouse/gnome-mouse-properties.glade.h:28
+#: capplets/mouse/gnome-mouse-properties.c:863
+#: capplets/mouse/gnome-mouse-properties.glade.h:27
 #: capplets/windows/gnome-window-properties.glade.h:10
 msgid "seconds"
 msgstr "วินาที"
@@ -745,7 +774,7 @@ msgstr "ใช้ค่าที่ตั้งและปิดหน้าต
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:765
 #: capplets/keyboard/gnome-keyboard-properties.c:225
-#: capplets/mouse/gnome-mouse-properties.c:996
+#: capplets/mouse/gnome-mouse-properties.c:999
 #: capplets/sound/sound-properties-capplet.c:244
 msgid "Retrieve and store legacy settings"
 msgstr "อ่านค่าที่ตั้งไว้ในรุ่นก่อน"
@@ -1700,59 +1729,59 @@ msgstr "นาที"
 msgid "Set your keyboard preferences"
 msgstr "ตั้งค่าสำหรับแป้นพิมพ์"
 
-#: capplets/mouse/gnome-mouse-properties.c:549
+#: capplets/mouse/gnome-mouse-properties.c:552
 msgid "Unknown Cursor"
 msgstr "ตัวชี้ที่ไม่รู้จัก"
 
-#: capplets/mouse/gnome-mouse-properties.c:736
+#: capplets/mouse/gnome-mouse-properties.c:739
 msgid "Default Cursor"
 msgstr "ตัวชี้ปริยาย"
 
-#: capplets/mouse/gnome-mouse-properties.c:737
+#: capplets/mouse/gnome-mouse-properties.c:740
 msgid "Default Cursor - Current"
 msgstr "ตัวชี้ปริยาย - ใช้อยู่"
 
-#: capplets/mouse/gnome-mouse-properties.c:738
+#: capplets/mouse/gnome-mouse-properties.c:741
 msgid "The default cursor that ships with X"
 msgstr "ตัวชี้ปริยายซึ่งมากับ X"
 
-#: capplets/mouse/gnome-mouse-properties.c:742
+#: capplets/mouse/gnome-mouse-properties.c:745
 msgid "White Cursor"
 msgstr "ตัวชี้ขาว"
 
-#: capplets/mouse/gnome-mouse-properties.c:743
+#: capplets/mouse/gnome-mouse-properties.c:746
 msgid "White Cursor - Current"
 msgstr "ตัวชี้ขาว - ใช้อยู่"
 
-#: capplets/mouse/gnome-mouse-properties.c:744
+#: capplets/mouse/gnome-mouse-properties.c:747
 msgid "The default cursor inverted"
 msgstr "ตัวชี้ปริยายแต่กลับสี"
 
-#: capplets/mouse/gnome-mouse-properties.c:748
+#: capplets/mouse/gnome-mouse-properties.c:751
 msgid "Large Cursor"
 msgstr "ตัวชี้ใหญ่"
 
-#: capplets/mouse/gnome-mouse-properties.c:749
+#: capplets/mouse/gnome-mouse-properties.c:752
 msgid "Large Cursor - Current"
 msgstr "ตัวชี้ใหญ่ - ใช้อยู่"
 
-#: capplets/mouse/gnome-mouse-properties.c:750
+#: capplets/mouse/gnome-mouse-properties.c:753
 msgid "Large version of normal cursor"
 msgstr "ตัวชี้ปริยายเอามาขยายใหญ่"
 
-#: capplets/mouse/gnome-mouse-properties.c:754
+#: capplets/mouse/gnome-mouse-properties.c:757
 msgid "Large White Cursor - Current"
 msgstr "ตัวชี้ขาวใหญ่ - ใช้อยู่"
 
-#: capplets/mouse/gnome-mouse-properties.c:755
+#: capplets/mouse/gnome-mouse-properties.c:758
 msgid "Large White Cursor"
 msgstr "ตัวชี้ขาวใหญ่"
 
-#: capplets/mouse/gnome-mouse-properties.c:756
+#: capplets/mouse/gnome-mouse-properties.c:759
 msgid "Large version of white cursor"
 msgstr "ตัวชี้ขาวเอามาขยายใหญ่"
 
-#: capplets/mouse/gnome-mouse-properties.c:950
+#: capplets/mouse/gnome-mouse-properties.c:953
 msgid "Cursor Theme"
 msgstr "ชุดรูปแบบตัวชี้"
 
@@ -1777,89 +1806,82 @@ msgid "<b>Speed</b>"
 msgstr "<b>ความเร็ว</b>"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:7
-msgid ""
-"<i><small><b>Note:</b> Changes to this setting will not take effect until "
-"next time you log in.</small></i>"
-msgstr ""
-"<i><small><b>โปรดทราบ:</b> จะเริ่มใช้ค่าตั้งที่เปลี่ยนนี้เมื่อคุณเข้าระบบครั้งต่อไป</small></i>"
-
-#: capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid "<i>Fast</i>"
 msgstr "<i>เร็ว</i>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:9
+#: capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid "<i>High</i>"
 msgstr "<i>สูง</i>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:10
+#: capplets/mouse/gnome-mouse-properties.glade.h:9
 msgid "<i>Large</i>"
 msgstr "<i>ไกล</i>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:11
+#: capplets/mouse/gnome-mouse-properties.glade.h:10
 msgid "<i>Low</i>"
 msgstr "<i>ต่ำ</i>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:12
+#: capplets/mouse/gnome-mouse-properties.glade.h:11
 msgid "<i>Slow</i>"
 msgstr "<i>ช้า</i>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:13
+#: capplets/mouse/gnome-mouse-properties.glade.h:12
 msgid "<i>Small</i>"
 msgstr "<i>สั้น</i>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:14
+#: capplets/mouse/gnome-mouse-properties.glade.h:13
 msgid "Buttons"
 msgstr "ปุ่ม"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:15
+#: capplets/mouse/gnome-mouse-properties.glade.h:14
 msgid "Cursor Size:"
 msgstr "ขนาดตัวชี้:"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:16
+#: capplets/mouse/gnome-mouse-properties.glade.h:15
 msgid "Cursors"
 msgstr "ตัวชี้"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:17
+#: capplets/mouse/gnome-mouse-properties.glade.h:16
 msgid "Highlight the _pointer when you press Ctrl"
 msgstr "เ_น้นตัวชี้เมื่อคุณกดปุ่ม Ctrl"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:18
+#: capplets/mouse/gnome-mouse-properties.glade.h:17
 msgid "Large"
 msgstr "ใหญ่"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:19
+#: capplets/mouse/gnome-mouse-properties.glade.h:18
 msgid "Medium"
 msgstr "กลาง"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:20
+#: capplets/mouse/gnome-mouse-properties.glade.h:19
 msgid "Motion"
 msgstr "การเคลื่อนไหว"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:21
+#: capplets/mouse/gnome-mouse-properties.glade.h:20
 msgid "Mouse Preferences"
 msgstr "ค่าตั้งสำหรับเมาส์"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:22
+#: capplets/mouse/gnome-mouse-properties.glade.h:21
 msgid "Small"
 msgstr "เล็ก"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:23
+#: capplets/mouse/gnome-mouse-properties.glade.h:22
 msgid "_Acceleration:"
 msgstr "ความ_เร่ง:"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:24
+#: capplets/mouse/gnome-mouse-properties.glade.h:23
 msgid "_Left-handed mouse"
 msgstr "เ_มาส์มือซ้าย"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:25
+#: capplets/mouse/gnome-mouse-properties.glade.h:24
 msgid "_Sensitivity:"
 msgstr "_ความตอบสนอง"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:26
+#: capplets/mouse/gnome-mouse-properties.glade.h:25
 msgid "_Threshold:"
 msgstr "_ระยะเริ่มลาก:"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:27
+#: capplets/mouse/gnome-mouse-properties.glade.h:26
 msgid "_Timeout:"
 msgstr "_ภายใน:"
 
@@ -3034,8 +3056,7 @@ msgstr "ตัวเลือกของแป้นพิมพ์"
 msgid ""
 "Keyboard settings in gconf will be overridden from the system ASAP "
 "(deprecated)"
-msgstr "การตั้งค่าแป้นพิมพ์ใน gconf จะถูกแทนที่โดยระบบทันทีที่เป็นไปได้ "
-"(เลิกใช้แล้ว)"
+msgstr "การตั้งค่าแป้นพิมพ์ใน gconf จะถูกแทนที่โดยระบบทันทีที่เป็นไปได้ (เลิกใช้แล้ว)"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:10
 msgid "Save/restore indicators together with layout groups"
@@ -3061,9 +3082,9 @@ msgid ""
 "configuration) This key has been deprecated since GNOME 2.12, please unset "
 "the model, layouts and options keys to get the default system configuration."
 msgstr ""
-"อีกไม่นาน การตั้งค่าของแป้นพิมพ์ใน gconf จะถูกแทนที่โดยค่าตั้งของระบบ "
-"คีย์นี้เลิกใช้แล้วตั้งแต่ GNOME 2.12 เป็นต้นไป กรุณาลบค่าคีย์เกี่ยวกับรุ่น,ผัง "
-"และตัวเลือกของแป้นพิมพ์ เพื่อใช้ค่าตั้งปกติของระบบ"
+"อีกไม่นาน การตั้งค่าของแป้นพิมพ์ใน gconf จะถูกแทนที่โดยค่าตั้งของระบบ คีย์นี้เลิกใช้แล้วตั้งแต่ "
+"GNOME 2.12 เป็นต้นไป กรุณาลบค่าคีย์เกี่ยวกับรุ่น,ผัง และตัวเลือกของแป้นพิมพ์ "
+"เพื่อใช้ค่าตั้งปกติของระบบ"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:15
 msgid "keyboard layout"
@@ -3155,37 +3176,37 @@ msgstr ""
 msgid "The quick brown fox jumps over the lazy dog. 0123456789"
 msgstr "ถ้ารู้ประโยคดีๆเป็นตัวอย่างอักษร กรุณาแจ้ง L10N@opentle.org"
 
-#: vfs-methods/fontilus/font-view.c:275
+#: vfs-methods/fontilus/font-view.c:276
 msgid "Name:"
 msgstr "ชื่อ:"
 
-#: vfs-methods/fontilus/font-view.c:278
+#: vfs-methods/fontilus/font-view.c:279
 msgid "Style:"
 msgstr "ลักษณะ:"
 
-#: vfs-methods/fontilus/font-view.c:287
+#: vfs-methods/fontilus/font-view.c:289
 msgid "Type:"
 msgstr "ชนิด:"
 
-#: vfs-methods/fontilus/font-view.c:294
+#: vfs-methods/fontilus/font-view.c:295
 msgid "Size:"
 msgstr "ขนาด:"
 
-#: vfs-methods/fontilus/font-view.c:338
-#: vfs-methods/fontilus/font-view.c:351
+#: vfs-methods/fontilus/font-view.c:339
+#: vfs-methods/fontilus/font-view.c:352
 msgid "Version:"
 msgstr "รุ่น:"
 
-#: vfs-methods/fontilus/font-view.c:342
-#: vfs-methods/fontilus/font-view.c:353
+#: vfs-methods/fontilus/font-view.c:343
+#: vfs-methods/fontilus/font-view.c:354
 msgid "Copyright:"
 msgstr "สงวนลิขสิทธิ์:"
 
-#: vfs-methods/fontilus/font-view.c:346
+#: vfs-methods/fontilus/font-view.c:347
 msgid "Description:"
 msgstr "คำอธิบาย:"
 
-#: vfs-methods/fontilus/font-view.c:407
+#: vfs-methods/fontilus/font-view.c:408
 #, c-format
 msgid "usage: %s fontfile\n"
 msgstr "วิธีใช้: %s แฟ้มอักษร\n"
@@ -3346,11 +3367,18 @@ msgstr "คำสั่งสร้างรูปย่อสำหรับช
 
 #: vfs-methods/themus/themus.schemas.in.h:7
 msgid "Whether to thumbnail installed themes"
-msgstr "ว่าจะสร้างรูปย่อสำหรับชุดตกแต่งที่มี หรือไม่"
+msgstr "กำหนดว่าจะสร้างรูปย่อสำหรับชุดตกแต่งที่ติดตั้งไว้หรือไม่"
 
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
-msgstr "ว่าจะสร้างรูปย่อสำหรับชุดตกแต่ง หรือไม่"
+msgstr "กำหนดว่าจะสร้างรูปย่อสำหรับชุดตกแต่งหรือไม่"
+
+#~ msgid ""
+#~ "<i><small><b>Note:</b> Changes to this setting will not take effect until "
+#~ "next time you log in.</small></i>"
+#~ msgstr ""
+#~ "<i><small><b>โปรดทราบ:</b> จะเริ่มใช้ค่าตั้งที่เปลี่ยนนี้เมื่อคุณเข้าระบบครั้งต่อไป</small></"
+#~ "i>"
 
 #~ msgid ""
 #~ "Very soon, keyboard settings in gconf will be overridden (from the system "
@@ -3687,7 +3715,7 @@ msgstr "ว่าจะสร้างรูปย่อสำหรับชุ
 #~ "\"none\" - no hinting, \"slight\", \"medium\", and \"full\" - as much "
 #~ "hinting as possible; may cause distortion of letter forms."
 #~ msgstr ""
-#~ "ว่าจะใช้ข้อมูลใบ้การวาดอักษร (hinting) มากขนาดไหน ค่าที่ตั้งได้คือ \"none\" ถ้าจะไม่ใช้  "
+#~ "กำหนดว่าจะใช้ข้อมูลใบ้การวาดอักษร (hinting) มากขนาดไหน ค่าที่ตั้งได้คือ \"none\" ถ้าจะไม่ใช้  "
 #~ "\"slight\" \"medium\" และ \"full\"  ถ้าใช้ข้อมูลใบ้มากๆ "
 #~ "รูปทรงอักษรอาจจะบิดเบือนไปบ้าง"
 
