@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-31 22:22+0300\n"
-"PO-Revision-Date: 2005-07-31 22:37+0300\n"
+"POT-Creation-Date: 2005-08-07 13:32+0300\n"
+"PO-Revision-Date: 2005-08-07 13:35+0300\n"
 "Last-Translator: Ilkka Tuohela <hile@iki.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -69,23 +69,30 @@ msgstr "Valitse kuva"
 msgid "No Image"
 msgstr "Ei kuvaa"
 
-#: ../capplets/about-me/gnome-about-me.c:721
+#: ../capplets/about-me/gnome-about-me.c:706
+msgid ""
+"There was an error while trying to get the addressbook information\n"
+"Evolution Data Server can't handle the protocol"
+msgstr ""
+"Tapahtui virhe haettaessa osoitekirjan tietoja\n"
+"Evolution Data Server ei osaa käsitellä tätä protokollaa"
+
+#: ../capplets/about-me/gnome-about-me.c:727
 msgid "Unable to open address book"
 msgstr "Osoitekirjaa ei voitu avata"
 
-#: ../capplets/about-me/gnome-about-me.c:733
+#: ../capplets/about-me/gnome-about-me.c:739
 msgid "Unknown login ID, the user database might be corrupted"
-msgstr "Tuntematon kirjautumistunniste, käyttäjätietokanta voi olla "
-"vioittunut"
+msgstr "Tuntematon kirjautumistunniste, käyttäjätietokanta voi olla vioittunut"
 
-#: ../capplets/about-me/gnome-about-me.c:764
-#: ../capplets/about-me/gnome-about-me.c:766
+#: ../capplets/about-me/gnome-about-me.c:770
+#: ../capplets/about-me/gnome-about-me.c:772
 #, c-format
 msgid "About %s"
 msgstr "%s tiedot"
 
 #: ../capplets/about-me/gnome-about-me-password.c:101
-#: ../capplets/about-me/gnome-about-me-password.c:380
+#: ../capplets/about-me/gnome-about-me-password.c:477
 msgid "Old password is incorrect, please retype it"
 msgstr "Vanha salasana on väärin, kirjoita se uudestaan"
 
@@ -106,17 +113,37 @@ msgstr "Taustajärjestelmän käynnistys epäonnistui"
 msgid "Unexpected error has occurred"
 msgstr "Tapahtui odottamaton virhe"
 
-#: ../capplets/about-me/gnome-about-me-password.c:434
+#: ../capplets/about-me/gnome-about-me-password.c:314
+msgid "Password is too short"
+msgstr "Salasana on liian lyhyt"
+
+#: ../capplets/about-me/gnome-about-me-password.c:317
+msgid "Password is too simple"
+msgstr "Salasana on liian yksinkertainen"
+
+#: ../capplets/about-me/gnome-about-me-password.c:320
+msgid "Password is to simple"
+msgstr "Salasana on liian yksinkertainen"
+
+#: ../capplets/about-me/gnome-about-me-password.c:323
+msgid "Old and new passwords are too similar"
+msgstr "Vanha ja uusi salasana ovat liian samanlaiset"
+
+#: ../capplets/about-me/gnome-about-me-password.c:326
+msgid "Old and new password are the same"
+msgstr "Vanha ja uusi salasana on sama"
+
+#: ../capplets/about-me/gnome-about-me-password.c:404
 msgid "Please type the passwords."
 msgstr "Syötä salasanat."
 
-#: ../capplets/about-me/gnome-about-me-password.c:442
+#: ../capplets/about-me/gnome-about-me-password.c:412
 msgid "Please type the password again, it is wrong."
 msgstr "Salasana on väärin, syötä se uudestaan."
 
-#: ../capplets/about-me/gnome-about-me-password.c:445
-msgid "Click the Change Password button to change the password."
-msgstr "Vaihda salasana napsauttamalla \"Vaihda Salasana\"-painiketta"
+#: ../capplets/about-me/gnome-about-me-password.c:415
+msgid "Click on Change Password to change the password."
+msgstr "Vaihda salasana napsauttamalla \"Vaihda Salasana\"-painiketta."
 
 #: ../capplets/about-me/gnome-about-me.glade.h:1
 #: ../vfs-methods/themus/apply-font.glade.h:1
@@ -642,7 +669,7 @@ msgstr "kuvapistettä/s"
 #. set the timeout value  label with correct value of timeout
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
 #: ../capplets/mouse/gnome-mouse-properties.c:131
-#: ../capplets/mouse/gnome-mouse-properties.c:862
+#: ../capplets/mouse/gnome-mouse-properties.c:863
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:27
 #: ../capplets/windows/gnome-window-properties.glade.h:10
 msgid "seconds"
@@ -764,7 +791,7 @@ msgstr "Ota asetukset käyttöön ja lopeta"
 #: ../capplets/common/capplet-util.c:243
 #: ../capplets/default-applications/gnome-default-applications-properties.c:765
 #: ../capplets/keyboard/gnome-keyboard-properties.c:225
-#: ../capplets/mouse/gnome-mouse-properties.c:998
+#: ../capplets/mouse/gnome-mouse-properties.c:999
 #: ../capplets/sound/sound-properties-capplet.c:244
 msgid "Retrieve and store legacy settings"
 msgstr "Hae ja tallenna aikaisempien versioiden asetukset"
@@ -1728,59 +1755,59 @@ msgstr "minuuttia"
 msgid "Set your keyboard preferences"
 msgstr "Muuta näppäimistöasetuksia"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:551
+#: ../capplets/mouse/gnome-mouse-properties.c:552
 msgid "Unknown Cursor"
 msgstr "Tuntematon osoitin"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:738
+#: ../capplets/mouse/gnome-mouse-properties.c:739
 msgid "Default Cursor"
 msgstr "Oletusosoitin"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:739
+#: ../capplets/mouse/gnome-mouse-properties.c:740
 msgid "Default Cursor - Current"
 msgstr "Oletusosoitin - nykyinen"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:740
+#: ../capplets/mouse/gnome-mouse-properties.c:741
 msgid "The default cursor that ships with X"
 msgstr "X:n mukana tuleva oletusosoitin"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:744
+#: ../capplets/mouse/gnome-mouse-properties.c:745
 msgid "White Cursor"
 msgstr "Valkoinen osoitin"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:745
+#: ../capplets/mouse/gnome-mouse-properties.c:746
 msgid "White Cursor - Current"
 msgstr "Valkoinen osoitin - nykyinen"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:746
+#: ../capplets/mouse/gnome-mouse-properties.c:747
 msgid "The default cursor inverted"
 msgstr "Oletusosoitin käänteisin värein"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:750
+#: ../capplets/mouse/gnome-mouse-properties.c:751
 msgid "Large Cursor"
 msgstr "Suuri osoitin"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:751
+#: ../capplets/mouse/gnome-mouse-properties.c:752
 msgid "Large Cursor - Current"
 msgstr "Suuri osoitin - nykyinen"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:752
+#: ../capplets/mouse/gnome-mouse-properties.c:753
 msgid "Large version of normal cursor"
 msgstr "Suuri versio tavallisesta osoittimesta"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:756
+#: ../capplets/mouse/gnome-mouse-properties.c:757
 msgid "Large White Cursor - Current"
 msgstr "Suuri valkoinen osoitin - nykyinen"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:757
+#: ../capplets/mouse/gnome-mouse-properties.c:758
 msgid "Large White Cursor"
 msgstr "Suuri valkoinen osoitin"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:758
+#: ../capplets/mouse/gnome-mouse-properties.c:759
 msgid "Large version of white cursor"
 msgstr "Suuri versio valkoisesta osoittimesta"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:952
+#: ../capplets/mouse/gnome-mouse-properties.c:953
 msgid "Cursor Theme"
 msgstr "Osoittimen teema"
 
@@ -2625,8 +2652,8 @@ msgid ""
 msgstr ""
 "Käytät XFreen versiota 4.3.0.\n"
 "Tunnetusti ongelmia voi ilmetä monimutkaisten XKB-asetusten kanssa.\n"
-"Yritä yksinkertaisempien asetusten käyttämistä tai uudemman XFree-"
-"version hankkimista."
+"Yritä yksinkertaisempien asetusten käyttämistä tai uudemman XFree-version "
+"hankkimista."
 
 #: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:227
 msgid "Do _not show this warning again"
@@ -3069,8 +3096,8 @@ msgid ""
 "Keyboard settings in gconf will be overridden from the system ASAP "
 "(deprecated)"
 msgstr ""
-"Järjestelmän asetukset tulevat sivuuttamaan GConfissa olevat "
-"XKB-asetukset mahdollisimman pian (vanhentunut)"
+"Järjestelmän asetukset tulevat sivuuttamaan GConfissa olevat XKB-asetukset "
+"mahdollisimman pian (vanhentunut)"
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:10
 msgid "Save/restore indicators together with layout groups"
@@ -3196,37 +3223,37 @@ msgstr ""
 msgid "The quick brown fox jumps over the lazy dog. 0123456789"
 msgstr "Abcdefghijklmnopqrsštuvwxyzåäö. 0123456789"
 
-#: ../vfs-methods/fontilus/font-view.c:275
+#: ../vfs-methods/fontilus/font-view.c:276
 msgid "Name:"
 msgstr "Nimi:"
 
-#: ../vfs-methods/fontilus/font-view.c:278
+#: ../vfs-methods/fontilus/font-view.c:279
 msgid "Style:"
 msgstr "Tyyli:"
 
-#: ../vfs-methods/fontilus/font-view.c:287
+#: ../vfs-methods/fontilus/font-view.c:289
 msgid "Type:"
 msgstr "Tyyppi:"
 
-#: ../vfs-methods/fontilus/font-view.c:294
+#: ../vfs-methods/fontilus/font-view.c:295
 msgid "Size:"
 msgstr "Koko:"
 
-#: ../vfs-methods/fontilus/font-view.c:338
-#: ../vfs-methods/fontilus/font-view.c:351
+#: ../vfs-methods/fontilus/font-view.c:339
+#: ../vfs-methods/fontilus/font-view.c:352
 msgid "Version:"
 msgstr "Versio:"
 
-#: ../vfs-methods/fontilus/font-view.c:342
-#: ../vfs-methods/fontilus/font-view.c:353
+#: ../vfs-methods/fontilus/font-view.c:343
+#: ../vfs-methods/fontilus/font-view.c:354
 msgid "Copyright:"
 msgstr "Tekijänoikeus:"
 
-#: ../vfs-methods/fontilus/font-view.c:346
+#: ../vfs-methods/fontilus/font-view.c:347
 msgid "Description:"
 msgstr "Kuvaus:"
 
-#: ../vfs-methods/fontilus/font-view.c:407
+#: ../vfs-methods/fontilus/font-view.c:408
 #, c-format
 msgid "usage: %s fontfile\n"
 msgstr "käyttö: %s kirjasinlajitiedosto\n"
