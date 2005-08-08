@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.gu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-28 06:17+0000\n"
-"PO-Revision-Date: 2005-07-28 12:20+0530\n"
+"POT-Creation-Date: 2005-08-07 22:13+0000\n"
+"PO-Revision-Date: 2005-08-08 10:11+0530\n"
 "Last-Translator: Ankit Patel <ankit644@yahoo.com>\n"
 "Language-Team: Gujarati <indianoss-gujarati@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -13,6 +13,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9.1\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n\n"
+"\n"
 "\n"
 
 #: ../capplets/about-me/eel-alert-dialog.c:114
@@ -60,22 +61,30 @@ msgstr "ઈમેજ પસંદ કરો"
 msgid "No Image"
 msgstr "કોઈ ઈમેજ નથી"
 
-#: ../capplets/about-me/gnome-about-me.c:721
+#: ../capplets/about-me/gnome-about-me.c:706
+msgid ""
+"There was an error while trying to get the addressbook information\n"
+"Evolution Data Server can't handle the protocol"
+msgstr ""
+"સરનામાપુસ્તિકા જાણકારી મેળવવાનો પ્રયત્ન કરતી વખતે ભૂલ હતી\n"
+"ઈવોલ્યુશન ડેટા સર્વર પ્રોટોકોલ નિયંત્રિત કરી શકતી નથી"
+
+#: ../capplets/about-me/gnome-about-me.c:727
 msgid "Unable to open address book"
 msgstr "સરનામા પુસ્તિકા ખોલવામાં અસમર્થ"
 
-#: ../capplets/about-me/gnome-about-me.c:733
+#: ../capplets/about-me/gnome-about-me.c:739
 msgid "Unknown login ID, the user database might be corrupted"
 msgstr "અજ્ઞાત પ્રવેશ ID, વપરાશકર્તા ડેટાબેઝ કદાચ બગડી ગયો હશે"
 
-#: ../capplets/about-me/gnome-about-me.c:764
-#: ../capplets/about-me/gnome-about-me.c:766
+#: ../capplets/about-me/gnome-about-me.c:770
+#: ../capplets/about-me/gnome-about-me.c:772
 #, c-format
 msgid "About %s"
 msgstr "%s વિશે"
 
 #: ../capplets/about-me/gnome-about-me-password.c:101
-#: ../capplets/about-me/gnome-about-me-password.c:380
+#: ../capplets/about-me/gnome-about-me-password.c:477
 msgid "Old password is incorrect, please retype it"
 msgstr "જૂનો પાસવર્ડ અયોગ્ય છે, મહેરબાની કરીને તેને ફરીથી લખો"
 
@@ -96,17 +105,37 @@ msgstr "બેકેન્ડ લોન્ચ કરવામાં અસમર
 msgid "Unexpected error has occurred"
 msgstr "અનિચ્છનિય ભૂલ ઉદ્દભવી"
 
-#: ../capplets/about-me/gnome-about-me-password.c:434
+#: ../capplets/about-me/gnome-about-me-password.c:314
+msgid "Password is too short"
+msgstr "પાસવર્ડ ખૂબ ટુંકો છે"
+
+#: ../capplets/about-me/gnome-about-me-password.c:317
+msgid "Password is too simple"
+msgstr "પાસવર્ડ ખૂબ સરળ છે"
+
+#: ../capplets/about-me/gnome-about-me-password.c:320
+msgid "Password is to simple"
+msgstr "પાસવર્ડ સરળ છે"
+
+#: ../capplets/about-me/gnome-about-me-password.c:323
+msgid "Old and new passwords are too similar"
+msgstr "જૂના અને નવા પાસવર્ડો ખૂબ સરખા છે"
+
+#: ../capplets/about-me/gnome-about-me-password.c:326
+msgid "Old and new password are the same"
+msgstr "જૂના અને નવા પાસવર્ડ સરખા છે"
+
+#: ../capplets/about-me/gnome-about-me-password.c:404
 msgid "Please type the passwords."
 msgstr "મહેરબાની કરીને પાસવર્ડો લખો."
 
-#: ../capplets/about-me/gnome-about-me-password.c:442
+#: ../capplets/about-me/gnome-about-me-password.c:412
 msgid "Please type the password again, it is wrong."
 msgstr "મહેરબાની કરીને પાસવર્ડ ફરીથી લખો. તે ખોટો છે."
 
-#: ../capplets/about-me/gnome-about-me-password.c:445
-msgid "Click the Change Password button to change the password."
-msgstr "પાસવર્ડ બદલવા માટે પાસવર્ડ બદલો બટન ક્લિક કરો."
+#: ../capplets/about-me/gnome-about-me-password.c:415
+msgid "Click on Change Password to change the password."
+msgstr "પાસવર્ડ બદલવા માટે પાસવર્ડ બદલો પર ક્લિક કરો"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:1
 #: ../vfs-methods/themus/apply-font.glade.h:1
@@ -628,8 +657,8 @@ msgstr "બિંદુઓ/સેકન્ડ"
 #. set the timeout value  label with correct value of timeout
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
 #: ../capplets/mouse/gnome-mouse-properties.c:131
-#: ../capplets/mouse/gnome-mouse-properties.c:860
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:28
+#: ../capplets/mouse/gnome-mouse-properties.c:863
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
 #: ../capplets/windows/gnome-window-properties.glade.h:10
 msgid "seconds"
 msgstr "સેકન્ડ"
@@ -749,7 +778,7 @@ msgstr "સુયોજનાને અમલમાં મૂકો અને �
 #: ../capplets/common/capplet-util.c:243
 #: ../capplets/default-applications/gnome-default-applications-properties.c:765
 #: ../capplets/keyboard/gnome-keyboard-properties.c:225
-#: ../capplets/mouse/gnome-mouse-properties.c:996
+#: ../capplets/mouse/gnome-mouse-properties.c:999
 #: ../capplets/sound/sound-properties-capplet.c:244
 msgid "Retrieve and store legacy settings"
 msgstr "લેગસી સુયોજનાઓ ફરીથી મેળવો અને સંગ્રહિત કરો"
@@ -1725,59 +1754,59 @@ msgstr "મિનિટો"
 msgid "Set your keyboard preferences"
 msgstr "તમારા કીબાેર્ડની પસંદગીઓ ગોઠવો"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:549
+#: ../capplets/mouse/gnome-mouse-properties.c:552
 msgid "Unknown Cursor"
 msgstr "અજાણ્યુ કર્સર"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:736
+#: ../capplets/mouse/gnome-mouse-properties.c:739
 msgid "Default Cursor"
 msgstr "મૂળભુત કર્સર"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:737
+#: ../capplets/mouse/gnome-mouse-properties.c:740
 msgid "Default Cursor - Current"
 msgstr "મૂળભુત કર્સર - વર્તમાન"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:738
+#: ../capplets/mouse/gnome-mouse-properties.c:741
 msgid "The default cursor that ships with X"
 msgstr "મૂળભુત કર્સર કે જે X ની સાથે આવે છે"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:742
+#: ../capplets/mouse/gnome-mouse-properties.c:745
 msgid "White Cursor"
 msgstr "સફેદ કર્સર"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:743
+#: ../capplets/mouse/gnome-mouse-properties.c:746
 msgid "White Cursor - Current"
 msgstr "સફેદ કર્સર - વર્તમાન"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:744
+#: ../capplets/mouse/gnome-mouse-properties.c:747
 msgid "The default cursor inverted"
 msgstr "મૂળભુત કર્સર બદલાઈ ગયું"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:748
+#: ../capplets/mouse/gnome-mouse-properties.c:751
 msgid "Large Cursor"
 msgstr "મોટું કર્સર"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:749
+#: ../capplets/mouse/gnome-mouse-properties.c:752
 msgid "Large Cursor - Current"
 msgstr "મોટું કર્સર - વર્તમાન"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:750
+#: ../capplets/mouse/gnome-mouse-properties.c:753
 msgid "Large version of normal cursor"
 msgstr "સામાન્ય કર્સરની મોટી આવૃત્તિ"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:754
+#: ../capplets/mouse/gnome-mouse-properties.c:757
 msgid "Large White Cursor - Current"
 msgstr "મોટું સફેદ કર્સર - વર્તમાન"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:755
+#: ../capplets/mouse/gnome-mouse-properties.c:758
 msgid "Large White Cursor"
 msgstr "મોટું સફેદ કર્સર"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:756
+#: ../capplets/mouse/gnome-mouse-properties.c:759
 msgid "Large version of white cursor"
 msgstr "સફેદ કર્સરની મોટી આવૃત્તિ"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:950
+#: ../capplets/mouse/gnome-mouse-properties.c:953
 msgid "Cursor Theme"
 msgstr "કર્સરની થીમ"
 
@@ -1802,90 +1831,82 @@ msgid "<b>Speed</b>"
 msgstr "<b>ઝડપ</b>"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:7
-msgid ""
-"<i><small><b>Note:</b> Changes to this setting will not take effect until "
-"next time you log in.</small></i>"
-msgstr ""
-"<i><small><b>નોંધ:</b> તમે જ્યાં સુધી ફરીથી અંદર દાખલ નહિં થાઓ ત્યાં સુધી આ સુયોજનાં "
-"ફેરફારો અસર કરશે નહિં.</small></i>"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid "<i>Fast</i>"
 msgstr "<i>ઝડપી</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:9
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid "<i>High</i>"
 msgstr "<i>ઊંચુ</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:10
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:9
 msgid "<i>Large</i>"
 msgstr "<i>મોટુ</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:11
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:10
 msgid "<i>Low</i>"
 msgstr "<i>નીચુ</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:12
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:11
 msgid "<i>Slow</i>"
 msgstr "<i>ધીમુ</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:13
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:12
 msgid "<i>Small</i>"
 msgstr "<i>નાનુ</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:14
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:13
 msgid "Buttons"
 msgstr "બટનો"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:15
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:14
 msgid "Cursor Size:"
 msgstr "કર્સરનું માપ:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:16
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:15
 msgid "Cursors"
 msgstr "કર્સરો"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:16
 msgid "Highlight the _pointer when you press Ctrl"
 msgstr "જ્યારે તમે Ctrl કી દબાવો ત્યારે નિર્દેશકને પ્રકાશિત કરો (_p)"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
 msgid "Large"
 msgstr "વિશાળ"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
 msgid "Medium"
 msgstr "મધ્યમ"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:20
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
 msgid "Motion"
 msgstr "ગતિ"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:21
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:20
 msgid "Mouse Preferences"
 msgstr "માઉસની પસંદગીઓ"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:22
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:21
 msgid "Small"
 msgstr "નાનું"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:23
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:22
 msgid "_Acceleration:"
 msgstr "પ્રવેગ (_A):"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:24
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:23
 msgid "_Left-handed mouse"
 msgstr "ડાબા હાથવાળુ માઉસ (_L)"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:25
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:24
 msgid "_Sensitivity:"
 msgstr "ચેતના (_S):"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:26
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:25
 msgid "_Threshold:"
 msgstr "થ્રેશોલ્ડ (_T):"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:26
 msgid "_Timeout:"
 msgstr "સમય સમાપ્ત (_T):"
 
@@ -3115,7 +3136,10 @@ msgid ""
 "Very soon, keyboard settings in gconf will be overridden (from the system "
 "configuration) This key has been deprecated since GNOME 2.12, please unset "
 "the model, layouts and options keys to get the default system configuration."
-msgstr "ખૂબ જલદી, gconf માં કીબોર્ડ સુયોજનો ફરીથી લખાઈ જશે (સિસ્ટમ રૂપરેખામાંથી) આ કી GNOME 2.12 આવ્યું ત્યારથી ઉતારી પડાયેલ છે, મહેરબાની કરીને મૂળભુત સિસ્ટમ રૂપરેખાંકન મેળવવા માટે મોડેલ, લેઆઉટો અને વિકલ્પો કીઓ અસુયોજિત કરો."
+msgstr ""
+"ખૂબ જલદી, gconf માં કીબોર્ડ સુયોજનો ફરીથી લખાઈ જશે (સિસ્ટમ રૂપરેખામાંથી) આ કી GNOME "
+"2.12 આવ્યું ત્યારથી ઉતારી પડાયેલ છે, મહેરબાની કરીને મૂળભુત સિસ્ટમ રૂપરેખાંકન મેળવવા માટે "
+"મોડેલ, લેઆઉટો અને વિકલ્પો કીઓ અસુયોજિત કરો."
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:15
 msgid "keyboard layout"
@@ -3207,37 +3231,37 @@ msgstr ""
 msgid "The quick brown fox jumps over the lazy dog. 0123456789"
 msgstr "આઈઊએઔકખગઘઙચછજઝતથદધનટઠડઢણપફબભમયરલવશષસહ ૦૧૨૩૪૫૬૭૮૯"
 
-#: ../vfs-methods/fontilus/font-view.c:275
+#: ../vfs-methods/fontilus/font-view.c:276
 msgid "Name:"
 msgstr "નામ:"
 
-#: ../vfs-methods/fontilus/font-view.c:278
+#: ../vfs-methods/fontilus/font-view.c:279
 msgid "Style:"
 msgstr "શૈલી:"
 
-#: ../vfs-methods/fontilus/font-view.c:287
+#: ../vfs-methods/fontilus/font-view.c:289
 msgid "Type:"
 msgstr "પ્રકાર:"
 
-#: ../vfs-methods/fontilus/font-view.c:294
+#: ../vfs-methods/fontilus/font-view.c:295
 msgid "Size:"
 msgstr "માપ:"
 
-#: ../vfs-methods/fontilus/font-view.c:338
-#: ../vfs-methods/fontilus/font-view.c:351
+#: ../vfs-methods/fontilus/font-view.c:339
+#: ../vfs-methods/fontilus/font-view.c:352
 msgid "Version:"
 msgstr "આવૃત્તિ:"
 
-#: ../vfs-methods/fontilus/font-view.c:342
-#: ../vfs-methods/fontilus/font-view.c:353
+#: ../vfs-methods/fontilus/font-view.c:343
+#: ../vfs-methods/fontilus/font-view.c:354
 msgid "Copyright:"
 msgstr "મદ્રણાધિકાર:"
 
-#: ../vfs-methods/fontilus/font-view.c:346
+#: ../vfs-methods/fontilus/font-view.c:347
 msgid "Description:"
 msgstr "વર્ણન:"
 
-#: ../vfs-methods/fontilus/font-view.c:407
+#: ../vfs-methods/fontilus/font-view.c:408
 #, c-format
 msgid "usage: %s fontfile\n"
 msgstr "વપરાશ: %s ફોન્ટફાઈલ\n"
