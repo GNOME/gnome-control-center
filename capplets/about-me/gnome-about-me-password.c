@@ -307,7 +307,7 @@ update_password (PasswordDialog *pdialog, gchar **msg)
 		
 	write_to_backend (pdialog, retyped_password);
 	
-	s = read_from_backend (pdialog, "successfully", "short", "panlindrome", "simple", "similar", "one", "recovered",  NULL);
+	s = read_from_backend (pdialog, "successfully", "short", "panlindrome", "simple", "similar", "one", "recovered",  "unchanged", NULL);
 	if (g_strrstr (s, "recovered") != NULL) {
 		retcode = -2;
 	} else if (g_strrstr (s, "short") != NULL) {
@@ -323,6 +323,10 @@ update_password (PasswordDialog *pdialog, gchar **msg)
 		*msg = g_strdup (_("Old and new passwords are too similar"));
 		retcode = -3;
 	} else if (g_strrstr (s, "one") != NULL) {
+		*msg = g_strdup (_("Old and new password are the same"));
+		retcode = -3;
+	} else if (g_strrstr (s, "unchanged") != NULL) {
+		kill (pdialog->backend_pid, SIGKILL);
 		*msg = g_strdup (_("Old and new password are the same"));
 		retcode = -3;
 	}
