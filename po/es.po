@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center-2.12\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-30 02:05+0200\n"
-"PO-Revision-Date: 2005-07-30 02:11+0200\n"
+"POT-Creation-Date: 2005-08-10 20:18+0200\n"
+"PO-Revision-Date: 2005-08-10 20:31+0200\n"
 "Last-Translator: \n"
 "Language-Team:  <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -70,23 +70,31 @@ msgstr "Seleccionar imagen"
 msgid "No Image"
 msgstr "Sin imagen"
 
-#: ../capplets/about-me/gnome-about-me.c:721
+#: ../capplets/about-me/gnome-about-me.c:706
+msgid ""
+"There was an error while trying to get the addressbook information\n"
+"Evolution Data Server can't handle the protocol"
+msgstr ""
+"<Hubo un error al intentar obtener la información de la libreta de direcciones\n"
+"Evolution Data Server no puede manipular el protocolo"
+
+#: ../capplets/about-me/gnome-about-me.c:727
 msgid "Unable to open address book"
 msgstr "Imposible abrir la libreta de direcciones"
 
-#: ../capplets/about-me/gnome-about-me.c:733
+#: ../capplets/about-me/gnome-about-me.c:739
 msgid "Unknown login ID, the user database might be corrupted"
 msgstr ""
 "ID de inicio desconocido, la base de datos de usuarios quizá esté corrupta"
 
-#: ../capplets/about-me/gnome-about-me.c:764
-#: ../capplets/about-me/gnome-about-me.c:766
+#: ../capplets/about-me/gnome-about-me.c:770
+#: ../capplets/about-me/gnome-about-me.c:772
 #, c-format
 msgid "About %s"
 msgstr "Acerca de %s"
 
 #: ../capplets/about-me/gnome-about-me-password.c:101
-#: ../capplets/about-me/gnome-about-me-password.c:380
+#: ../capplets/about-me/gnome-about-me-password.c:481
 msgid "Old password is incorrect, please retype it"
 msgstr "La contraseña antigua es incorrecta, por favor, vuelva a teclearla"
 
@@ -107,17 +115,38 @@ msgstr "Imposible lanzar el backend"
 msgid "Unexpected error has occurred"
 msgstr "Ha ocurrido un error inesperado"
 
-#: ../capplets/about-me/gnome-about-me-password.c:434
+#: ../capplets/about-me/gnome-about-me-password.c:314
+msgid "Password is too short"
+msgstr "La contraseña es demasiado corta"
+
+#: ../capplets/about-me/gnome-about-me-password.c:317
+msgid "Password is too simple"
+msgstr "La contraseña es demasiado simple"
+
+#: ../capplets/about-me/gnome-about-me-password.c:320
+msgid "Password is to simple"
+msgstr ""
+
+#: ../capplets/about-me/gnome-about-me-password.c:323
+msgid "Old and new passwords are too similar"
+msgstr "La contraseña antigua y la nueva son demasiado similares"
+
+#: ../capplets/about-me/gnome-about-me-password.c:326
+#: ../capplets/about-me/gnome-about-me-password.c:330
+msgid "Old and new password are the same"
+msgstr "La contraseña nueva y la antigua son la misma"
+
+#: ../capplets/about-me/gnome-about-me-password.c:408
 msgid "Please type the passwords."
 msgstr "Teclee las contraseñas."
 
-#: ../capplets/about-me/gnome-about-me-password.c:442
+#: ../capplets/about-me/gnome-about-me-password.c:416
 msgid "Please type the password again, it is wrong."
 msgstr "Por favor, teclee la contraseña de nuevo, está mal."
 
-#: ../capplets/about-me/gnome-about-me-password.c:445
-msgid "Click the Change Password button to change the password."
-msgstr "Pulse el botón «Cambiar contraseña» para cambiar la contraseña."
+#: ../capplets/about-me/gnome-about-me-password.c:419
+msgid "Click on Change Password to change the password."
+msgstr "Pulse en «Cambiar contraseña» para cambiar la contraseña."
 
 #: ../capplets/about-me/gnome-about-me.glade.h:1
 #: ../vfs-methods/themus/apply-font.glade.h:1
@@ -175,7 +204,7 @@ msgstr "_Dirección:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:13
 msgid "A_ssistant:"
-msgstr "Asistente:"
+msgstr "_Asistente:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:15
 msgid "Address"
@@ -645,8 +674,8 @@ msgstr "píxeles/segundo"
 #. set the timeout value  label with correct value of timeout
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
 #: ../capplets/mouse/gnome-mouse-properties.c:131
-#: ../capplets/mouse/gnome-mouse-properties.c:860
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:28
+#: ../capplets/mouse/gnome-mouse-properties.c:863
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
 #: ../capplets/windows/gnome-window-properties.glade.h:10
 msgid "seconds"
 msgstr "segundos"
@@ -768,7 +797,7 @@ msgstr "Aplicar los cambios y salir"
 #: ../capplets/common/capplet-util.c:243
 #: ../capplets/default-applications/gnome-default-applications-properties.c:765
 #: ../capplets/keyboard/gnome-keyboard-properties.c:225
-#: ../capplets/mouse/gnome-mouse-properties.c:996
+#: ../capplets/mouse/gnome-mouse-properties.c:999
 #: ../capplets/sound/sound-properties-capplet.c:244
 msgid "Retrieve and store legacy settings"
 msgstr "Obtener y almacenar configuración heredada"
@@ -1743,59 +1772,59 @@ msgstr "minutos"
 msgid "Set your keyboard preferences"
 msgstr "Establece sus preferencias del teclado"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:549
+#: ../capplets/mouse/gnome-mouse-properties.c:552
 msgid "Unknown Cursor"
 msgstr "Cursor desconocido"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:736
+#: ../capplets/mouse/gnome-mouse-properties.c:739
 msgid "Default Cursor"
 msgstr "Cursor predeterminado"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:737
+#: ../capplets/mouse/gnome-mouse-properties.c:740
 msgid "Default Cursor - Current"
 msgstr "Cursor predeterminado - Actual"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:738
+#: ../capplets/mouse/gnome-mouse-properties.c:741
 msgid "The default cursor that ships with X"
 msgstr "El cursor predeterminado que incorpora X"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:742
+#: ../capplets/mouse/gnome-mouse-properties.c:745
 msgid "White Cursor"
 msgstr "Cursor blanco"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:743
+#: ../capplets/mouse/gnome-mouse-properties.c:746
 msgid "White Cursor - Current"
 msgstr "Cursor blanco - Actual"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:744
+#: ../capplets/mouse/gnome-mouse-properties.c:747
 msgid "The default cursor inverted"
 msgstr "El cursor predeterminado invertido"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:748
+#: ../capplets/mouse/gnome-mouse-properties.c:751
 msgid "Large Cursor"
 msgstr "Cursor grande"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:749
+#: ../capplets/mouse/gnome-mouse-properties.c:752
 msgid "Large Cursor - Current"
 msgstr "Cursor grande - Actual"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:750
+#: ../capplets/mouse/gnome-mouse-properties.c:753
 msgid "Large version of normal cursor"
 msgstr "Versión de gran tamaño del cursor normal"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:754
+#: ../capplets/mouse/gnome-mouse-properties.c:757
 msgid "Large White Cursor - Current"
 msgstr "Cursor blanco grande - Actual"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:755
+#: ../capplets/mouse/gnome-mouse-properties.c:758
 msgid "Large White Cursor"
 msgstr "Cursor blanco grande"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:756
+#: ../capplets/mouse/gnome-mouse-properties.c:759
 msgid "Large version of white cursor"
 msgstr "Versión de gran tamaño del cursor blanco"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:950
+#: ../capplets/mouse/gnome-mouse-properties.c:953
 msgid "Cursor Theme"
 msgstr "Tema del cursor"
 
@@ -1820,90 +1849,82 @@ msgid "<b>Speed</b>"
 msgstr "<b>Velocidad</b>"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:7
-msgid ""
-"<i><small><b>Note:</b> Changes to this setting will not take effect until "
-"next time you log in.</small></i>"
-msgstr ""
-"<i><small><b>Nota:</b> Los cambios a esta configuración no tendrán efecto "
-"hasta la siguiente vez que inicie una sesión.</small></i>"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid "<i>Fast</i>"
 msgstr "<i>Rápido</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:9
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid "<i>High</i>"
 msgstr "<i>Alto</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:10
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:9
 msgid "<i>Large</i>"
 msgstr "<i>Grande</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:11
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:10
 msgid "<i>Low</i>"
 msgstr "<i>Bajo</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:12
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:11
 msgid "<i>Slow</i>"
 msgstr "<i>Lento</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:13
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:12
 msgid "<i>Small</i>"
 msgstr "<i>Pequeño</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:14
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:13
 msgid "Buttons"
 msgstr "Botones"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:15
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:14
 msgid "Cursor Size:"
 msgstr "Tamaño del cursor:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:16
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:15
 msgid "Cursors"
 msgstr "Cursores"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:16
 msgid "Highlight the _pointer when you press Ctrl"
 msgstr "Resaltar el _puntero al pulsar Ctrl"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
 msgid "Large"
 msgstr "Grande"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
 msgid "Medium"
 msgstr "Mediana"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:20
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
 msgid "Motion"
 msgstr "Movimiento"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:21
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:20
 msgid "Mouse Preferences"
 msgstr "Preferencias del ratón"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:22
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:21
 msgid "Small"
 msgstr "Pequeña"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:23
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:22
 msgid "_Acceleration:"
 msgstr "_Aceleración:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:24
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:23
 msgid "_Left-handed mouse"
 msgstr "Ratón para _zurdos"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:25
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:24
 msgid "_Sensitivity:"
 msgstr "_Sensibilidad:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:26
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:25
 msgid "_Threshold:"
 msgstr "_Umbral:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:26
 msgid "_Timeout:"
 msgstr "_Tiempo de espera:"
 
@@ -3110,7 +3131,9 @@ msgstr "Opciones del teclado"
 msgid ""
 "Keyboard settings in gconf will be overridden from the system ASAP "
 "(deprecated)"
-msgstr "Los ajustes del teclado en gconf será ignorados del sistema tan pronto como sea posible (obsoleto)"
+msgstr ""
+"Los ajustes del teclado en gconf será ignorados del sistema tan pronto como "
+"sea posible (obsoleto)"
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:10
 msgid "Save/restore indicators together with layout groups"
@@ -3139,7 +3162,11 @@ msgid ""
 "Very soon, keyboard settings in gconf will be overridden (from the system "
 "configuration) This key has been deprecated since GNOME 2.12, please unset "
 "the model, layouts and options keys to get the default system configuration."
-msgstr "Muy pronto, los ajustes de teclado en gconf no serán tenidos en cuenta (de la configuración del sistema) Esta clave es obsoleta desde Gnome 2.12, por favor, restablezca el modelo, distribuciones y teclas de opciones para obtener la configuración predeterminada del sistema."
+msgstr ""
+"Muy pronto, los ajustes de teclado en gconf no serán tenidos en cuenta (de "
+"la configuración del sistema) Esta clave es obsoleta desde Gnome 2.12, por "
+"favor, restablezca el modelo, distribuciones y teclas de opciones para "
+"obtener la configuración predeterminada del sistema."
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:15
 msgid "keyboard layout"
@@ -3237,37 +3264,37 @@ msgstr ""
 "El veloz murciélago hindú comía feliz cardillo y kiwi. La cigüeña tocaba el "
 "saxofón detrás del palenque de paja. 0123456789"
 
-#: ../vfs-methods/fontilus/font-view.c:275
+#: ../vfs-methods/fontilus/font-view.c:276
 msgid "Name:"
 msgstr "Nombre:"
 
-#: ../vfs-methods/fontilus/font-view.c:278
+#: ../vfs-methods/fontilus/font-view.c:279
 msgid "Style:"
 msgstr "Estilo:"
 
-#: ../vfs-methods/fontilus/font-view.c:287
+#: ../vfs-methods/fontilus/font-view.c:289
 msgid "Type:"
 msgstr "Tipo:"
 
-#: ../vfs-methods/fontilus/font-view.c:294
+#: ../vfs-methods/fontilus/font-view.c:295
 msgid "Size:"
 msgstr "Tamaño:"
 
-#: ../vfs-methods/fontilus/font-view.c:338
-#: ../vfs-methods/fontilus/font-view.c:351
+#: ../vfs-methods/fontilus/font-view.c:339
+#: ../vfs-methods/fontilus/font-view.c:352
 msgid "Version:"
 msgstr "Versión:"
 
-#: ../vfs-methods/fontilus/font-view.c:342
-#: ../vfs-methods/fontilus/font-view.c:353
+#: ../vfs-methods/fontilus/font-view.c:343
+#: ../vfs-methods/fontilus/font-view.c:354
 msgid "Copyright:"
 msgstr "Copyright:"
 
-#: ../vfs-methods/fontilus/font-view.c:346
+#: ../vfs-methods/fontilus/font-view.c:347
 msgid "Description:"
 msgstr "Descripción:"
 
-#: ../vfs-methods/fontilus/font-view.c:407
+#: ../vfs-methods/fontilus/font-view.c:408
 #, c-format
 msgid "usage: %s fontfile\n"
 msgstr "uso: %s archivo de tipografías\n"
@@ -3456,6 +3483,13 @@ msgstr "Indica si se deben miniaturizar los temas instalados"
 #: ../vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Indica si hay que miniaturizar los temas"
+
+#~ msgid ""
+#~ "<i><small><b>Note:</b> Changes to this setting will not take effect until "
+#~ "next time you log in.</small></i>"
+#~ msgstr ""
+#~ "<i><small><b>Nota:</b> Los cambios a esta configuración no tendrán efecto "
+#~ "hasta la siguiente vez que inicie una sesión.</small></i>"
 
 #~ msgid "Pick a color"
 #~ msgstr "Elija un color"
