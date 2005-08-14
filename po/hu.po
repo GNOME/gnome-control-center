@@ -11,17 +11,17 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-control-center.gnome-2-10\n"
+"Project-Id-Version: gnome-control-center.HEAD.hu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-03 14:20+0000\n"
-"PO-Revision-Date: 2005-08-04 12:37+0200\n"
+"POT-Creation-Date: 2005-08-14 06:27+0000\n"
+"PO-Revision-Date: 2005-08-14 11:56+0200\n"
 "Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
 "Language-Team: Hungarian <gnome@gnome.hu>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms:  nplurals=1; plural=0;\n"
-"X-Generator: KBabel 1.10.1\n"
+"X-Generator: KBabel 1.10\n"
 
 #: ../capplets/about-me/eel-alert-dialog.c:114
 msgid "Image/label border"
@@ -70,24 +70,32 @@ msgstr "Kép kiválasztása"
 msgid "No Image"
 msgstr "Nincs kép"
 
-#: ../capplets/about-me/gnome-about-me.c:721
+#: ../capplets/about-me/gnome-about-me.c:706
+msgid ""
+"There was an error while trying to get the addressbook information\n"
+"Evolution Data Server can't handle the protocol"
+msgstr ""
+"Hiba történt a címjegyzék-információ lekérésére tett kísérlet közben\n"
+"Az Evolution adatkiszolgáló nem tudta kezelni a protokollt"
+
+#: ../capplets/about-me/gnome-about-me.c:727
 msgid "Unable to open address book"
 msgstr "Nem lehet megnyitni a címjegyzéket"
 
-#: ../capplets/about-me/gnome-about-me.c:733
+#: ../capplets/about-me/gnome-about-me.c:739
 msgid "Unknown login ID, the user database might be corrupted"
 msgstr ""
 "Ismeretlen bejelentkezési azonosító, lehetséges, hogy a felhasználói "
 "adatbázis megsérült"
 
-#: ../capplets/about-me/gnome-about-me.c:764
-#: ../capplets/about-me/gnome-about-me.c:766
+#: ../capplets/about-me/gnome-about-me.c:770
+#: ../capplets/about-me/gnome-about-me.c:772
 #, c-format
 msgid "About %s"
 msgstr "%s névjegye"
 
 #: ../capplets/about-me/gnome-about-me-password.c:101
-#: ../capplets/about-me/gnome-about-me-password.c:380
+#: ../capplets/about-me/gnome-about-me-password.c:481
 msgid "Old password is incorrect, please retype it"
 msgstr "A régi jelszó helytelen, kérem írja be újra"
 
@@ -108,16 +116,37 @@ msgstr "A háttér nem indítható"
 msgid "Unexpected error has occurred"
 msgstr "Váratlan hiba történt"
 
-#: ../capplets/about-me/gnome-about-me-password.c:434
+#: ../capplets/about-me/gnome-about-me-password.c:314
+msgid "Password is too short"
+msgstr "A jelszó túl rövid"
+
+#: ../capplets/about-me/gnome-about-me-password.c:317
+msgid "Password is too simple"
+msgstr "A jelszó túl egyszerű"
+
+#: ../capplets/about-me/gnome-about-me-password.c:320
+msgid "Password is to simple"
+msgstr "A jelszó túl egyszerű"
+
+#: ../capplets/about-me/gnome-about-me-password.c:323
+msgid "Old and new passwords are too similar"
+msgstr "A régi és új jelszavak túlságosan hasonlítanak"
+
+#: ../capplets/about-me/gnome-about-me-password.c:326
+#: ../capplets/about-me/gnome-about-me-password.c:330
+msgid "Old and new password are the same"
+msgstr "A régi és új jelszavak megegyeznek"
+
+#: ../capplets/about-me/gnome-about-me-password.c:408
 msgid "Please type the passwords."
 msgstr "Kérem írja be a jelszavakat."
 
-#: ../capplets/about-me/gnome-about-me-password.c:442
+#: ../capplets/about-me/gnome-about-me-password.c:416
 msgid "Please type the password again, it is wrong."
 msgstr "Kérem írja be újra a jelszót, mert az hibás."
 
-#: ../capplets/about-me/gnome-about-me-password.c:445
-msgid "Click the Change Password button to change the password."
+#: ../capplets/about-me/gnome-about-me-password.c:419
+msgid "Click on Change Password to change the password."
 msgstr "Kattintson a Jelszó megváltoztatása gombra a jelszó megváltoztatásához."
 
 #: ../capplets/about-me/gnome-about-me.glade.h:1
@@ -1500,7 +1529,9 @@ msgstr ""
 #: ../capplets/keybindings/gnome-keybinding-properties.c:750
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
-msgstr "Hiba történt a gyorsbillentyű visszaállításánál a konfigurációs adatbázisban: %s\n"
+msgstr ""
+"Hiba történt a gyorsbillentyű visszaállításánál a konfigurációs "
+"adatbázisban: %s\n"
 
 #: ../capplets/keybindings/gnome-keybinding-properties.c:857
 msgid "Action"
@@ -3100,7 +3131,11 @@ msgid ""
 "Very soon, keyboard settings in gconf will be overridden (from the system "
 "configuration) This key has been deprecated since GNOME 2.12, please unset "
 "the model, layouts and options keys to get the default system configuration."
-msgstr "A gconf-ban lévő billentyűzetbeállítások felül lesznek írva (a rendszerbeállításból). Ez a kulcs a GNOME 2.12 óta elavult, kérem állítsa vissza a modellt, a kiosztásokat és az opcióbillentyűket az alapértelmezett rendszerbeállítás megkapásához."
+msgstr ""
+"A gconf-ban lévő billentyűzetbeállítások felül lesznek írva (a "
+"rendszerbeállításból). Ez a kulcs a GNOME 2.12 óta elavult, kérem állítsa "
+"vissza a modellt, a kiosztásokat és az opcióbillentyűket az alapértelmezett "
+"rendszerbeállítás megkapásához."
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:15
 msgid "keyboard layout"
@@ -3196,37 +3231,37 @@ msgstr ""
 msgid "The quick brown fox jumps over the lazy dog. 0123456789"
 msgstr "Árvíztűrő tükörfúrógép. 0123456789"
 
-#: ../vfs-methods/fontilus/font-view.c:275
+#: ../vfs-methods/fontilus/font-view.c:276
 msgid "Name:"
 msgstr "Név:"
 
-#: ../vfs-methods/fontilus/font-view.c:278
+#: ../vfs-methods/fontilus/font-view.c:279
 msgid "Style:"
 msgstr "Stílus:"
 
-#: ../vfs-methods/fontilus/font-view.c:287
+#: ../vfs-methods/fontilus/font-view.c:289
 msgid "Type:"
 msgstr "Típus:"
 
-#: ../vfs-methods/fontilus/font-view.c:294
+#: ../vfs-methods/fontilus/font-view.c:295
 msgid "Size:"
 msgstr "Méret:"
 
-#: ../vfs-methods/fontilus/font-view.c:338
-#: ../vfs-methods/fontilus/font-view.c:351
+#: ../vfs-methods/fontilus/font-view.c:339
+#: ../vfs-methods/fontilus/font-view.c:352
 msgid "Version:"
 msgstr "Verzió:"
 
-#: ../vfs-methods/fontilus/font-view.c:342
-#: ../vfs-methods/fontilus/font-view.c:353
+#: ../vfs-methods/fontilus/font-view.c:343
+#: ../vfs-methods/fontilus/font-view.c:354
 msgid "Copyright:"
 msgstr "Copyright:"
 
-#: ../vfs-methods/fontilus/font-view.c:346
+#: ../vfs-methods/fontilus/font-view.c:347
 msgid "Description:"
 msgstr "Leírás:"
 
-#: ../vfs-methods/fontilus/font-view.c:407
+#: ../vfs-methods/fontilus/font-view.c:408
 #, c-format
 msgid "usage: %s fontfile\n"
 msgstr "használat: %s betűkészletfájl\n"
