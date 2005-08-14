@@ -121,6 +121,7 @@ create_image (ThemeThumbnailData *theme_thumbnail_data,
   GdkPixbuf *folder_icon;
   GtkIconInfo *folder_icon_info;
   const gchar *filename;
+  gchar *example_icon_name;
 
   settings = gtk_settings_get_default ();
   g_object_set (G_OBJECT (settings),
@@ -197,11 +198,21 @@ create_image (ThemeThumbnailData *theme_thumbnail_data,
   icon_theme = gtk_icon_theme_new ();
   gtk_icon_theme_set_custom_theme (icon_theme, (char *) theme_thumbnail_data->icon_theme_name->data);
 
-  /* Have to try both "folder" and "gnome-fs-directory" seems themes seem to use either name */
-  folder_icon_info = gtk_icon_theme_lookup_icon (icon_theme, "folder", 48, GTK_ICON_LOOKUP_FORCE_SVG);
-  if (folder_icon_info == NULL) {
+  folder_icon_info = NULL;
+  /* Get the Example icon name in the theme if specified */
+  example_icon_name = gtk_icon_theme_get_example_icon_name (icon_theme);
+  if (example_icon_name != NULL)
+    folder_icon_info = gtk_icon_theme_lookup_icon (icon_theme, example_icon_name, 48, GTK_ICON_LOOKUP_FORCE_SVG);
+  g_free (example_icon_name);
+
+  /* If an Example is not specified, fall back to using the folder icons in
+     the order of Icon Nameing Spec, "gnome-fs-directory", and "folder" */
+  if (folder_icon_info == NULL)
+    folder_icon_info = gtk_icon_theme_lookup_icon (icon_theme, "x-directory-normal", 48, GTK_ICON_LOOKUP_FORCE_SVG);
+  if (folder_icon_info == NULL)
     folder_icon_info = gtk_icon_theme_lookup_icon (icon_theme, "gnome-fs-directory", 48, GTK_ICON_LOOKUP_FORCE_SVG);
-  }
+  if (folder_icon_info == NULL)
+    folder_icon_info = gtk_icon_theme_lookup_icon (icon_theme, "folder", 48, GTK_ICON_LOOKUP_FORCE_SVG);
  
   g_object_unref (icon_theme);
 
