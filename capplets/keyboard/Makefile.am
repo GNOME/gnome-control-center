@@ -9,7 +9,7 @@ gnome_keyboard_properties_SOURCES = gnome-keyboard-properties.c \
                                     gnome-keyboard-properties-xkb.h
 gnome_keyboard_properties_LDADD =				\
 	../accessibility/keyboard/libaccessibility-keyboard.a 	\
-	$(GNOMECC_CAPPLETS_LIBS) $(LIBXKLAVIER_LIBS) \
+	$(GNOMECC_CAPPLETS_LIBS) $(LIBXKLAVIER_LIBS) $(PANGOXFT_LIBS) \
 	../../libgswitchit/libgswitchit.a \
 	../../libkbdraw/libkbdraw.a
 

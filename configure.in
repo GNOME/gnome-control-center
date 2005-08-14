@@ -125,6 +125,8 @@ fi
 PKG_CHECK_MODULES(FONT_CAPPLET, $COMMON_MODULES $xft_modules)
 
 PKG_CHECK_MODULES(AT_CAPPLET, $COMMON_MODULES)
+
+PKG_CHECK_MODULES(PANGOXFT, pangoxft >= 1.8)
 				
 dnl
 dnl Check for XRandR, needed for display capplet
