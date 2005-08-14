@@ -317,7 +317,7 @@ update_password (PasswordDialog *pdialog, gchar **msg)
 		*msg = g_strdup (_("Password is too simple"));
 		retcode = -3;
 	} else if (g_strrstr (s, "simple") != NULL) {
-		*msg = g_strdup (_("Password is to simple"));
+		*msg = g_strdup (_("Password is too simple"));
 		retcode = -3;
 	} else if (g_strrstr (s, "similar") != NULL) {
 		*msg = g_strdup (_("Old and new passwords are too similar"));
