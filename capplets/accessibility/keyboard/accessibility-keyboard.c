@@ -207,10 +207,10 @@ setup_ranges (GladeXML *dialog, GConfChangeSet *changeset)
 
 		adjustment->value = ranges [i].default_val;
 		adjustment->lower = ranges [i].min_val;
-		adjustment->upper = ranges [i].max_val + ranges [i].step_size;
+		adjustment->upper = ranges [i].max_val;
 		adjustment->step_increment = ranges [i].step_size;
 		adjustment->page_increment = ranges [i].step_size;
-		adjustment->page_size = ranges [i].step_size;
+		adjustment->page_size = 0;
 
 		gtk_adjustment_changed (adjustment);
 		gtk_spin_button_configure (GTK_SPIN_BUTTON (spin), adjustment,
