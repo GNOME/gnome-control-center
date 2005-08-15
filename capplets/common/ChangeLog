@@ -7,6 +7,11 @@
 	spec lists x-directory-normal for standard folders, so we should prefer
 	that above other folders
 
+	This fixes issues with the wrong icon being drawn in the thumbnail, due
+	to the icon theme providing the gnome folder icon, but inheriting from
+	another theme which provides a different icon named "folder" for KDE or
+	other desktops
+
 2005-07-27  Sebastien Bacher  <seb128@debian.org>
 
 	* capplet-util.c: (capplet_set_icon): set a default icon for capplets, 
