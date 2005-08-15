@@ -161,7 +161,8 @@ read_everything (PasswordDialog *pdialog, gchar *needle, va_list ap)
 {
 	GString *str  = g_string_new ("");
 	GSList  *list = NULL;
-	gchar*arg, *ptr, c;
+	gchar*arg, *ptr;
+	int c;
 
 	list = g_slist_prepend (list, needle);
   
@@ -307,7 +308,7 @@ update_password (PasswordDialog *pdialog, gchar **msg)
 		
 	write_to_backend (pdialog, retyped_password);
 	
-	s = read_from_backend (pdialog, "successfully", "short", "panlindrome", "simple", "similar", "one", "recovered",  "unchanged", NULL);
+	s = read_from_backend (pdialog, "successfully", "short", "panlindrome", "simple", "similar", "wrapped", "recovered",  "unchanged", NULL);
 	if (g_strrstr (s, "recovered") != NULL) {
 		retcode = -2;
 	} else if (g_strrstr (s, "short") != NULL) {
@@ -319,11 +320,8 @@ update_password (PasswordDialog *pdialog, gchar **msg)
 	} else if (g_strrstr (s, "simple") != NULL) {
 		*msg = g_strdup (_("Password is too simple"));
 		retcode = -3;
-	} else if (g_strrstr (s, "similar") != NULL) {
+	} else if ((g_strrstr (s, "similar") != NULL) || (g_strrstr (s, "wrapped") != NULL)) {
 		*msg = g_strdup (_("Old and new passwords are too similar"));
-		retcode = -3;
-	} else if (g_strrstr (s, "one") != NULL) {
-		*msg = g_strdup (_("Old and new password are the same"));
 		retcode = -3;
 	} else if (g_strrstr (s, "unchanged") != NULL) {
 		kill (pdialog->backend_pid, SIGKILL);
@@ -447,7 +445,7 @@ passdlg_check_password (GtkEntry *entry, PasswordDialog *pdialog)
 	}
 
 	pdialog->check_password_timeout_id =
-		g_timeout_add (300, (GSourceFunc) passdlg_check_password_timeout_cb, pdialog);
+		g_timeout_add (500, (GSourceFunc) passdlg_check_password_timeout_cb, pdialog);
 	
 }
 
@@ -550,13 +548,10 @@ gnome_about_me_password (GtkWindow *parent)
 	gtk_widget_show_all (wpassdlg);
 
 
-retry:
-	result = gtk_dialog_run (GTK_DIALOG (wpassdlg));
-
-	result = passdlg_process_response (pdialog, result);
-
-	if (result <= 0)
-		goto retry;
+	do {
+		result = gtk_dialog_run (GTK_DIALOG (wpassdlg));
+		result = passdlg_process_response (pdialog, result);
+	} while (result <= 0);
 
 	gtk_widget_destroy (wpassdlg);
 	g_free (pdialog);
