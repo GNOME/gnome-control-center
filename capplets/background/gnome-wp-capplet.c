@@ -39,6 +39,8 @@ static void wp_props_load_wallpaper (gchar * key,
 				     GnomeWPItem * item,
 				     GnomeWPCapplet * capplet);
 
+static void gnome_wp_set_sensitivities (GnomeWPCapplet* capplet);
+
 static void wp_properties_error_dialog (GtkWindow * parent, char const * msg,
 					GError * err) {
   if (err != NULL) {
@@ -284,13 +286,11 @@ static gboolean gnome_wp_props_wp_set (GnomeWPCapplet * capplet) {
 
     cs = gconf_change_set_new ();
 
+    gnome_wp_set_sensitivities (capplet);
+
     if (!strcmp (item->filename, "(none)")) {
       gconf_change_set_set_string (cs, WP_OPTIONS_KEY, "none");
-      gtk_widget_set_sensitive (capplet->wp_opts, FALSE);
-      gtk_widget_set_sensitive (capplet->rm_button, FALSE);
     } else {
-      gtk_widget_set_sensitive (capplet->wp_opts, TRUE);
-      gtk_widget_set_sensitive (capplet->rm_button, TRUE);
       gconf_change_set_set_string (cs, WP_FILE_KEY, item->filename);
       gconf_change_set_set_string (cs, WP_OPTIONS_KEY, item->options);
       gnome_wp_option_menu_set (capplet, item->options, FALSE);
@@ -732,6 +732,8 @@ static void gnome_wp_shading_changed (GConfClient * client, guint id,
   GnomeWPItem * item;
   gchar * wpfile;
 
+  gnome_wp_set_sensitivities (capplet);
+
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (capplet->treeview));
   if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
     gtk_tree_model_get (model, &iter, 2, &wpfile, -1);
@@ -767,6 +769,8 @@ static void gnome_wp_color2_changed (GConfClient * client, guint id,
 				     GnomeWPCapplet * capplet) {
   GdkColor color;
   const gchar * colorhex;
+
+  gnome_wp_set_sensitivities (capplet);
 
   colorhex = gconf_value_get_string (entry->value);
 
@@ -1240,6 +1244,8 @@ static void wallpaper_properties_init (poptContext ctx) {
   g_signal_connect (G_OBJECT (selection), "changed",
 		    G_CALLBACK (gnome_wp_props_wp_selected), capplet);
 
+  gnome_wp_set_sensitivities (capplet);
+
   /* Create the file chooser dialog stuff here */
   capplet->filesel = gtk_file_chooser_dialog_new_with_backend (_("Add Wallpaper"),
 							       GTK_WINDOW (capplet->window),
@@ -1265,6 +1271,50 @@ static void wallpaper_properties_init (poptContext ctx) {
 
   g_signal_connect (capplet->filesel, "update-preview",
 		    G_CALLBACK (gnome_wp_update_preview), capplet);
+}
+
+static void gnome_wp_set_sensitivities (GnomeWPCapplet* capplet) {
+  GtkTreeIter iter;
+  GtkTreeModel * model;
+  GtkTreeSelection * selection;
+  GnomeWPItem * item;
+  gchar * wpfile;
+  gchar * filename = NULL;
+
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (capplet->treeview));
+  if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
+    gtk_tree_model_get (model, &iter, 2, &wpfile, -1);
+    
+    item = g_hash_table_lookup (capplet->wphash, wpfile);
+    filename = item->filename;
+    g_free (wpfile);
+  }
+
+  if (!gconf_client_key_is_writable (capplet->client, WP_OPTIONS_KEY, NULL)
+      || (filename && !strcmp (filename, "(none)"))) 
+    gtk_widget_set_sensitive (capplet->wp_opts, FALSE);
+  else
+    gtk_widget_set_sensitive (capplet->wp_opts, TRUE);
+  
+  if (!gconf_client_key_is_writable (capplet->client, WP_SHADING_KEY, NULL))
+    gtk_widget_set_sensitive (capplet->color_opt, FALSE);
+  else
+    gtk_widget_set_sensitive (capplet->color_opt, TRUE);
+
+  if (!gconf_client_key_is_writable (capplet->client, WP_PCOLOR_KEY, NULL))
+    gtk_widget_set_sensitive (capplet->pc_picker, FALSE);
+  else
+    gtk_widget_set_sensitive (capplet->pc_picker, TRUE);
+
+  if (!gconf_client_key_is_writable (capplet->client, WP_SCOLOR_KEY, NULL))
+    gtk_widget_set_sensitive (capplet->sc_picker, FALSE);
+  else
+    gtk_widget_set_sensitive (capplet->sc_picker, TRUE);
+
+  if (!filename || !strcmp (filename, "(none)"))
+    gtk_widget_set_sensitive (capplet->rm_button, FALSE);
+  else
+    gtk_widget_set_sensitive (capplet->rm_button, TRUE);    
 }
 
 gint main (gint argc, gchar *argv[]) {

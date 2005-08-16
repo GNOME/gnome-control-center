@@ -1,3 +1,15 @@
+2005-08-15  Veerapuram Varadhan <vvaradhan@novell.com>
+
+	* gnome-wp-capplet.c (gnome_wp_props_wp_set):
+	(gnome_wp_color[12]_changed, gnome_wp_options_changed):
+	(gnome_wp_shading_changed, wallpaper_properties_init):
+	Enable/disable the style-menu, shading-menu and color-picker
+	buttons w.r.t gconf-keys.
+	(gnome_wp_set_sensitivities): Utility function to take care of
+	enabling/disabling widgets w.r.t gconf-keys.
+	(gnome_wp_props_wp_set): Don't set the sensitivity of the remove and
+	style buttons here. Just call the new method to do it instead
+
 2005-07-25  Sebastien Bacher <seb128@debian.org>
 
 	* gnome-wp-capplet.c (gnome_wp_{scale,shade}_type_changed):
