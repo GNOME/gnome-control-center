@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GNOME control center HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-20 14:15+0000\n"
-"PO-Revision-Date: 2005-08-03 17:38+0300\n"
+"POT-Creation-Date: 2005-08-16 06:25+0000\n"
+"PO-Revision-Date: 2005-08-16 16:31+0300\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -67,22 +67,28 @@ msgstr "Vali pilt"
 msgid "No Image"
 msgstr "Pilt puudub"
 
-#: ../capplets/about-me/gnome-about-me.c:721
+#: ../capplets/about-me/gnome-about-me.c:706
+msgid ""
+"There was an error while trying to get the addressbook information\n"
+"Evolution Data Server can't handle the protocol"
+msgstr ""
+
+#: ../capplets/about-me/gnome-about-me.c:727
 msgid "Unable to open address book"
 msgstr "Aadressiraamatut pole võimalik avada"
 
-#: ../capplets/about-me/gnome-about-me.c:733
+#: ../capplets/about-me/gnome-about-me.c:739
 msgid "Unknown login ID, the user database might be corrupted"
 msgstr ""
 
-#: ../capplets/about-me/gnome-about-me.c:764
-#: ../capplets/about-me/gnome-about-me.c:766
+#: ../capplets/about-me/gnome-about-me.c:770
+#: ../capplets/about-me/gnome-about-me.c:772
 #, c-format
 msgid "About %s"
 msgstr "Teave %s kohta"
 
 #: ../capplets/about-me/gnome-about-me-password.c:101
-#: ../capplets/about-me/gnome-about-me-password.c:380
+#: ../capplets/about-me/gnome-about-me-password.c:479
 msgid "Old password is incorrect, please retype it"
 msgstr "Vana parool on vigane, palun sisesta see uuesti"
 
@@ -103,16 +109,33 @@ msgstr ""
 msgid "Unexpected error has occurred"
 msgstr "Tekkis ootamatu viga"
 
-#: ../capplets/about-me/gnome-about-me-password.c:434
+#: ../capplets/about-me/gnome-about-me-password.c:315
+msgid "Password is too short"
+msgstr ""
+
+#: ../capplets/about-me/gnome-about-me-password.c:318
+#: ../capplets/about-me/gnome-about-me-password.c:321
+msgid "Password is too simple"
+msgstr ""
+
+#: ../capplets/about-me/gnome-about-me-password.c:324
+msgid "Old and new passwords are too similar"
+msgstr ""
+
+#: ../capplets/about-me/gnome-about-me-password.c:328
+msgid "Old and new password are the same"
+msgstr ""
+
+#: ../capplets/about-me/gnome-about-me-password.c:406
 msgid "Please type the passwords."
 msgstr "Palun sisesta paroolid."
 
-#: ../capplets/about-me/gnome-about-me-password.c:442
+#: ../capplets/about-me/gnome-about-me-password.c:414
 msgid "Please type the password again, it is wrong."
 msgstr "Parool on on vale, palun sisesta see uuesti."
 
-#: ../capplets/about-me/gnome-about-me-password.c:445
-msgid "Click the Change Password button to change the password."
+#: ../capplets/about-me/gnome-about-me-password.c:417
+msgid "Click on Change Password to change the password."
 msgstr ""
 
 #: ../capplets/about-me/gnome-about-me.glade.h:1
@@ -342,8 +365,12 @@ msgid "<b>Support</b>"
 msgstr "<b>Toetus</b>"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:3
-msgid "<small><i><b>Note:</b> Changes to this setting will not take effect until you next log in.</i></small>"
-msgstr "<small><i><b>Märkus:</b> Selle sätte muudatused rakenduvad alles järgmisel sisselogimisel.</i></small>"
+msgid ""
+"<small><i><b>Note:</b> Changes to this setting will not take effect until "
+"you next log in.</i></small>"
+msgstr ""
+"<small><i><b>Märkus:</b> Selle sätte muudatused rakenduvad alles järgmisel "
+"sisselogimisel.</i></small>"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:4
 msgid "Assistive Technology Preferences"
@@ -382,20 +409,29 @@ msgid "Enable support for GNOME assistive technologies at login"
 msgstr "GNOME abistava tehnika toe lubamine sisselogimisel"
 
 #: ../capplets/accessibility/at-properties/main.c:60
-msgid "No Assistive Technology is available on your system.  The 'gok' package must be installed in order to get on-screen keyboard support, and the 'gnopernicus' package must be installed for screenreading and magnifying capabilities."
+msgid ""
+"No Assistive Technology is available on your system.  The 'gok' package must "
+"be installed in order to get on-screen keyboard support, and the "
+"'gnopernicus' package must be installed for screenreading and magnifying "
+"capabilities."
 msgstr ""
 "Abistav tehnika pole sinu süsteemis saadaval. Ekraaniklaviatuuri toe "
 "saamiseks tuleb paigaldada pakk 'gok' ja ekraanilt lugemise ning luubi toe "
 "saamiseks tuleb paigaldada pakk 'gnopernicus'."
 
 #: ../capplets/accessibility/at-properties/main.c:62
-msgid "Not all available assistive technologies are installed on your system.  The 'gok' package must be installed in order to get on-screen keyboard support."
+msgid ""
+"Not all available assistive technologies are installed on your system.  The "
+"'gok' package must be installed in order to get on-screen keyboard support."
 msgstr ""
 "Mitte kõik abistava tehnikad pole sinu süsteemi paigaldatud. "
 "Ekraaniklaviatuuri toe saamiseks tuleb paigaldada pakk 'gok'."
 
 #: ../capplets/accessibility/at-properties/main.c:64
-msgid "Not all available assistive technologies are installed on your system.  The 'gnopernicus' package must be installed for screenreading and magnifying capabilities."
+msgid ""
+"Not all available assistive technologies are installed on your system.  The "
+"'gnopernicus' package must be installed for screenreading and magnifying "
+"capabilities."
 msgstr ""
 "Mitte kõik abistava tehnikad pole sinu süsteemi paigaldatud. Ekraanilt "
 "lugemise ning luubi toe saamiseks tuleb paigaldada pakk 'gnopernicus'."
@@ -430,7 +466,9 @@ msgid "Set your keyboard accessibility preferences"
 msgstr "Klaviatuurikasutuse hõlbustuste seadmine"
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.c:59
-msgid "This system does not seem to have the XKB extension.  The keyboard accessibility features will not operate without it."
+msgid ""
+"This system does not seem to have the XKB extension.  The keyboard "
+"accessibility features will not operate without it."
 msgstr ""
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
@@ -487,7 +525,9 @@ msgstr "Muuteklahvi vajutamisel tehakse _piiksu"
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
 msgid "Beep when an LED is turned on and two beeps when one is turned off."
-msgstr "Klaviatuuri valgusdioodi (LED) sisselülitamisel tehakse piiksu ja väljalülitamisel kaks piiksu."
+msgstr ""
+"Klaviatuuri valgusdioodi (LED) sisselülitamisel tehakse piiksu ja "
+"väljalülitamisel kaks piiksu."
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
 msgid "Beep when key is:"
@@ -518,8 +558,12 @@ msgid "I_gnore duplicate keypresses within:"
 msgstr "_Eirata klahvide korduvvajutusi selle aja sees:"
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:22
-msgid "Ignore all subsequent presses of the SAME key if they happen within a user selectable period of time."
-msgstr "Eiratakse järjestikuseid SAMA klahvi vajutusi, kui need toimuvad kasutaja määratud vahemiku jooksul."
+msgid ""
+"Ignore all subsequent presses of the SAME key if they happen within a user "
+"selectable period of time."
+msgstr ""
+"Eiratakse järjestikuseid SAMA klahvi vajutusi, kui need toimuvad kasutaja "
+"määratud vahemiku jooksul."
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:23
 msgid "Keyboard Accessibility Preferences (AccessX)"
@@ -538,12 +582,18 @@ msgid "Mouse _Preferences..."
 msgstr "Hiire _eelistused..."
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
-msgid "Only accept keys after they have been pressed and held for a user adjustable amount of time."
-msgstr "Lubab ainult klahvivajutusi, mis kestavad kauem kui kasutaja määratud aeg."
+msgid ""
+"Only accept keys after they have been pressed and held for a user adjustable "
+"amount of time."
+msgstr ""
+"Lubab ainult klahvivajutusi, mis kestavad kauem kui kasutaja määratud aeg."
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:28
-msgid "Perform multiple simultaneous key press operations by pressing modifier keys in sequence."
-msgstr "Koostab klahvikombinatsioonid, vajutades muuteklahve järjest ükshaaval."
+msgid ""
+"Perform multiple simultaneous key press operations by pressing modifier keys "
+"in sequence."
+msgstr ""
+"Koostab klahvikombinatsioonid, vajutades muuteklahve järjest ükshaaval."
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:29
@@ -606,8 +656,8 @@ msgstr "pikslit/sek"
 #. set the timeout value  label with correct value of timeout
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
 #: ../capplets/mouse/gnome-mouse-properties.c:131
-#: ../capplets/mouse/gnome-mouse-properties.c:860
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:28
+#: ../capplets/mouse/gnome-mouse-properties.c:863
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
 #: ../capplets/windows/gnome-window-properties.glade.h:10
 msgid "seconds"
 msgstr "sekundit"
@@ -633,8 +683,8 @@ msgid "Desktop Background Preferences"
 msgstr "Töölaua tausta eelistused"
 
 #: ../capplets/background/gnome-background-properties.glade.h:4
-msgid "Pick a color"
-msgstr "Värvuse valimine"
+msgid "Open a dialog to specify the color"
+msgstr ""
 
 #: ../capplets/background/gnome-background-properties.glade.h:5
 msgid "_Add Wallpaper"
@@ -651,43 +701,43 @@ msgstr "_Laad:"
 msgid "There was an error displaying help: %s"
 msgstr "Abiteabe kuvamisel tekkis viga: %s"
 
-#: ../capplets/background/gnome-wp-capplet.c:1056
-#: ../capplets/background/gnome-wp-capplet.c:1074
+#: ../capplets/background/gnome-wp-capplet.c:1037
+#: ../capplets/background/gnome-wp-capplet.c:1055
 msgid "Centered"
 msgstr "Keskel"
 
-#: ../capplets/background/gnome-wp-capplet.c:1082
-#: ../capplets/background/gnome-wp-capplet.c:1099
+#: ../capplets/background/gnome-wp-capplet.c:1063
+#: ../capplets/background/gnome-wp-capplet.c:1080
 msgid "Fill Screen"
 msgstr "Üle ekraani"
 
-#: ../capplets/background/gnome-wp-capplet.c:1107
-#: ../capplets/background/gnome-wp-capplet.c:1124
+#: ../capplets/background/gnome-wp-capplet.c:1088
+#: ../capplets/background/gnome-wp-capplet.c:1105
 msgid "Scaled"
 msgstr "Skaleeritud"
 
-#: ../capplets/background/gnome-wp-capplet.c:1132
-#: ../capplets/background/gnome-wp-capplet.c:1149
+#: ../capplets/background/gnome-wp-capplet.c:1113
+#: ../capplets/background/gnome-wp-capplet.c:1130
 msgid "Tiled"
 msgstr "Paanidena"
 
-#: ../capplets/background/gnome-wp-capplet.c:1173
-#: ../capplets/background/gnome-wp-capplet.c:1182
+#: ../capplets/background/gnome-wp-capplet.c:1154
+#: ../capplets/background/gnome-wp-capplet.c:1163
 msgid "Solid Color"
 msgstr "Ühtlane värv"
 
-#: ../capplets/background/gnome-wp-capplet.c:1190
-#: ../capplets/background/gnome-wp-capplet.c:1199
+#: ../capplets/background/gnome-wp-capplet.c:1171
+#: ../capplets/background/gnome-wp-capplet.c:1180
 msgid "Horizontal Gradient"
 msgstr "Horisontaalse üleminekuga"
 
-#: ../capplets/background/gnome-wp-capplet.c:1207
-#: ../capplets/background/gnome-wp-capplet.c:1216
+#: ../capplets/background/gnome-wp-capplet.c:1188
+#: ../capplets/background/gnome-wp-capplet.c:1197
 msgid "Vertical Gradient"
 msgstr "Vertikaalse üleminekuga"
 
 #. Create the file chooser dialog stuff here
-#: ../capplets/background/gnome-wp-capplet.c:1263
+#: ../capplets/background/gnome-wp-capplet.c:1244
 msgid "Add Wallpaper"
 msgstr "Tapeedi lisamine"
 
@@ -705,7 +755,10 @@ msgstr[1] ""
 #: ../capplets/common/activate-settings-daemon.c:18
 msgid ""
 "Unable to start the settings manager 'gnome-settings-daemon'.\n"
-"Without the GNOME settings manager running, some preferences may not take effect. This could indicate a problem with Bonobo, or a non-GNOME (e.g. KDE) settings manager may already be active and conflicting with the GNOME settings manager."
+"Without the GNOME settings manager running, some preferences may not take "
+"effect. This could indicate a problem with Bonobo, or a non-GNOME (e.g. KDE) "
+"settings manager may already be active and conflicting with the GNOME "
+"settings manager."
 msgstr ""
 
 #: ../capplets/common/capplet-stock-icons.c:94
@@ -713,15 +766,14 @@ msgstr ""
 msgid "Unable to load capplet stock icon '%s'\n"
 msgstr ""
 
-#: ../capplets/common/capplet-util.c:239
-#: ../capplets/common/capplet-util.c:241
+#: ../capplets/common/capplet-util.c:239 ../capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr "Rakenda sätted ja lõpeta"
 
 #: ../capplets/common/capplet-util.c:243
 #: ../capplets/default-applications/gnome-default-applications-properties.c:765
 #: ../capplets/keyboard/gnome-keyboard-properties.c:225
-#: ../capplets/mouse/gnome-mouse-properties.c:996
+#: ../capplets/mouse/gnome-mouse-properties.c:999
 #: ../capplets/sound/sound-properties-capplet.c:244
 msgid "Retrieve and store legacy settings"
 msgstr ""
@@ -814,7 +866,8 @@ msgid "Change set"
 msgstr ""
 
 #: ../capplets/common/gconf-property-editor.c:184
-msgid "GConf change set containing data to be forwarded to the gconf client on apply"
+msgid ""
+"GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr ""
 
 #: ../capplets/common/gconf-property-editor.c:189
@@ -822,7 +875,8 @@ msgid "Conversion to widget callback"
 msgstr ""
 
 #: ../capplets/common/gconf-property-editor.c:190
-msgid "Callback to be issued when data are to be converted from GConf to the widget"
+msgid ""
+"Callback to be issued when data are to be converted from GConf to the widget"
 msgstr ""
 
 #: ../capplets/common/gconf-property-editor.c:195
@@ -830,7 +884,8 @@ msgid "Conversion from widget callback"
 msgstr ""
 
 #: ../capplets/common/gconf-property-editor.c:196
-msgid "Callback to be issued when data are to be converted to GConf from the widget"
+msgid ""
+"Callback to be issued when data are to be converted to GConf from the widget"
 msgstr ""
 
 #: ../capplets/common/gconf-property-editor.c:201
@@ -862,11 +917,13 @@ msgstr ""
 msgid ""
 "Couldn't find the file '%s'.\n"
 "\n"
-"Please make sure it exists and try again, or choose a different background picture."
+"Please make sure it exists and try again, or choose a different background "
+"picture."
 msgstr ""
 "Ei leia faili '%s'.\n"
 "\n"
-"Palun kontrolli, kas fail on olemas ja proovi uuesti või vali teine taustapilt."
+"Palun kontrolli, kas fail on olemas ja proovi uuesti või vali teine "
+"taustapilt."
 
 #: ../capplets/common/gconf-property-editor.c:1474
 #, c-format
@@ -1086,8 +1143,12 @@ msgid "Run in a t_erminal"
 msgstr "Käivitada t_erminalis"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:21
-msgid "Select the window manager you want.  You will need to hit apply, wave the magic wand, and do a magic dance for it to work."
-msgstr "Vali omale meelepärane aknahaldur.  Selleks, et see kõik ka töötaks, pead sa klõpsama nupul Rakenda, viibutama võlukepikest ja tantsima võlutantsu."
+msgid ""
+"Select the window manager you want.  You will need to hit apply, wave the "
+"magic wand, and do a magic dance for it to work."
+msgstr ""
+"Vali omale meelepärane aknahaldur.  Selleks, et see kõik ka töötaks, pead sa "
+"klõpsama nupul Rakenda, viibutama võlukepikest ja tantsima võlutantsu."
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:22
 msgid "Terminal"
@@ -1137,70 +1198,82 @@ msgstr "Muuda ekraani eraldusvõimet"
 msgid "Screen Resolution"
 msgstr "Ekraani eraldusvõime"
 
-#: ../capplets/display/main.c:333
+#: ../capplets/display/main.c:345
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../capplets/display/main.c:436
+#: ../capplets/display/main.c:448
 msgid "_Resolution:"
 msgstr "_Eraldusvõime:"
 
-#: ../capplets/display/main.c:455
+#: ../capplets/display/main.c:467
 msgid "Re_fresh rate:"
 msgstr "_Värskendussagedus:"
 
-#: ../capplets/display/main.c:476
+#: ../capplets/display/main.c:488
 msgid "Default Settings"
 msgstr "Vaikimisi sätted"
 
-#: ../capplets/display/main.c:478
+#: ../capplets/display/main.c:490
 #, c-format
 msgid "Screen %d Settings\n"
 msgstr "Ekraani %d sätted\n"
 
-#: ../capplets/display/main.c:504
+#: ../capplets/display/main.c:516
 msgid "Screen Resolution Preferences"
 msgstr "Ekraani eraldusvõime eelistused"
 
-#: ../capplets/display/main.c:541
+#: ../capplets/display/main.c:553
 #, c-format
 msgid "_Make default for this computer (%s) only"
 msgstr "_Määrata vaikimisi ainult selle arvuti (%s) jaoks"
 
-#: ../capplets/display/main.c:559
+#: ../capplets/display/main.c:571
 msgid "Options"
 msgstr "Valikud"
 
-#: ../capplets/display/main.c:580
+#: ../capplets/display/main.c:592
 #, c-format
-msgid "Testing the new settings. If you don't respond in %d second the previous settings will be restored."
-msgid_plural "Testing the new settings. If you don't respond in %d seconds the previous settings will be restored."
-msgstr[0] "Uute sätete testimine. Kui sa ei reageeri %d sekundi jooksul, siis taastatakse eelmised sätted."
-msgstr[1] "Uute sätete testimine. Kui sa ei reageeri %d sekundi jooksul, siis taastatakse eelmised sätted."
+msgid ""
+"Testing the new settings. If you don't respond in %d second the previous "
+"settings will be restored."
+msgid_plural ""
+"Testing the new settings. If you don't respond in %d seconds the previous "
+"settings will be restored."
+msgstr[0] ""
+"Uute sätete testimine. Kui sa ei reageeri %d sekundi jooksul, siis "
+"taastatakse eelmised sätted."
+msgstr[1] ""
+"Uute sätete testimine. Kui sa ei reageeri %d sekundi jooksul, siis "
+"taastatakse eelmised sätted."
 
-#: ../capplets/display/main.c:626
+#: ../capplets/display/main.c:638
 msgid "Keep Resolution"
 msgstr "Jätka selle eraldusvõimega"
 
-#: ../capplets/display/main.c:630
+#: ../capplets/display/main.c:642
 msgid "Do you want to keep this resolution?"
 msgstr "Kas tahad seda eraldusvõimet kasutada?"
 
-#: ../capplets/display/main.c:655
+#: ../capplets/display/main.c:667
 msgid "Use _previous resolution"
 msgstr "Kasuta _eelmist eraldusvõimet"
 
-#: ../capplets/display/main.c:655
+#: ../capplets/display/main.c:667
 msgid "_Keep resolution"
 msgstr "_Jätka selle eraldusvõimega"
 
-#: ../capplets/display/main.c:806
-msgid "The X Server does not support the XRandR extension.  Runtime resolution changes to the display size are not available."
+#: ../capplets/display/main.c:818
+msgid ""
+"The X Server does not support the XRandR extension.  Runtime resolution "
+"changes to the display size are not available."
 msgstr ""
 
-#: ../capplets/display/main.c:814
-msgid "The version of the XRandR extension is incompatible with this program. Runtime changes to the display size are not available."
+#: ../capplets/display/main.c:826
+msgid ""
+"The version of the XRandR extension is incompatible with this program. "
+"Runtime changes to the display size are not available."
 msgstr ""
 
 #: ../capplets/font/font-properties.desktop.in.in.h:1
@@ -1333,15 +1406,27 @@ msgstr "Šrift võib liiga suur olla"
 
 #: ../capplets/font/main.c:492
 #, c-format
-msgid "The font selected is %d point large, and may make it difficult to effectively use the computer.  It is recommended that you select a size smaller than %d."
-msgid_plural "The font selected is %d points large, and may make it difficult to effectively use the computer. It is recommended that you select a size smaller than %d."
+msgid ""
+"The font selected is %d point large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a size "
+"smaller than %d."
+msgid_plural ""
+"The font selected is %d points large, and may make it difficult to "
+"effectively use the computer. It is recommended that you select a size "
+"smaller than %d."
 msgstr[0] ""
 msgstr[1] ""
 
 #: ../capplets/font/main.c:505
 #, c-format
-msgid "The font selected is %d point large, and may make it difficult to effectively use the computer.  It is recommended that you select a smaller sized font."
-msgid_plural "The font selected is %d points large, and may make it difficult to effectively use the computer. It is recommended that you select a smaller sized font."
+msgid ""
+"The font selected is %d point large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a smaller "
+"sized font."
+msgid_plural ""
+"The font selected is %d points large, and may make it difficult to "
+"effectively use the computer. It is recommended that you select a smaller "
+"sized font."
 msgstr[0] ""
 msgstr[1] ""
 
@@ -1374,8 +1459,7 @@ msgstr ""
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
 #: ../capplets/keybindings/gnome-keybinding-properties.c:197
-#: ../libbackground/applier.c:624
-#: ../typing-break/drwright.c:477
+#: ../libbackground/applier.c:624 ../typing-break/drwright.c:477
 msgid "Disabled"
 msgstr "Välja lülitatud"
 
@@ -1427,19 +1511,22 @@ msgid "Keyboard Shortcuts"
 msgstr "Kiirklahvid"
 
 #: ../capplets/keybindings/gnome-keybinding-properties.glade.h:2
-msgid "To edit a shortcut key, click on the corresponding row and type a new accelerator, or press backspace to clear."
-msgstr "Kiirklahvi muutmiseks kliki vastaval real ja sisesta uus kiirklahv. Nullimiseks vajuta Backspace klahvi."
+msgid ""
+"To edit a shortcut key, click on the corresponding row and type a new "
+"accelerator, or press backspace to clear."
+msgstr ""
+"Kiirklahvi muutmiseks kliki vastaval real ja sisesta uus kiirklahv. "
+"Nullimiseks vajuta Backspace klahvi."
 
 #: ../capplets/keybindings/keybinding.desktop.in.in.h:1
 msgid "Assign shortcut keys to commands"
 msgstr "Käskudele kiirklahvide seadmine"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkb.c:69
-#: ../capplets/keyboard/gnome-keyboard-properties-xkb.c:95
+#: ../capplets/keyboard/gnome-keyboard-properties-xkb.c:84
 msgid "Unknown"
 msgstr "Tundmatu"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:251
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:273
 msgid "Layout"
 msgstr "Paigutus"
 
@@ -1447,8 +1534,8 @@ msgstr "Paigutus"
 #. the below options are to be included in the selected list.
 #. This is a HIG-compliant alternative to allowing no
 #. selection in the group.
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:255
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:206
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:277
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:228
 msgid "Default"
 msgstr "Vaikimisi"
 
@@ -1469,7 +1556,8 @@ msgstr "_Hõlbustused"
 #: ../capplets/keyboard/gnome-keyboard-properties.c:223
 #: ../capplets/sound/sound-properties-capplet.c:240
 #: ../capplets/sound/sound-properties-capplet.c:242
-msgid "Just apply settings and quit (compatibility only; now handled by daemon)"
+msgid ""
+"Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:227
@@ -1514,11 +1602,11 @@ msgstr "Võimalikud paigutused:"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "All_ow postponing of breaks"
-msgstr ""
+msgstr "_Puhkepauside edasilükkamine lubatud"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Check if breaks are allowed to be postponed"
-msgstr ""
+msgstr "Märgitakse juhul, kui puhkepauside edasilükkamine on lubatud"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Choose A Keyboard Model"
@@ -1534,11 +1622,11 @@ msgstr "Kursor _vilgub tekstiväljades"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:17
 msgid "Duration of the break when typing is disallowed"
-msgstr ""
+msgstr "Puhkepausi kestus, mille vältel on klaviatuurilt sisestused keelatud"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:18
 msgid "Duration of work before forcing a break"
-msgstr ""
+msgstr "Töö kestus enne puhkepausi kehtestamist"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:19
 msgid "Key presses _repeat when key is held down"
@@ -1561,7 +1649,9 @@ msgid "Layouts"
 msgstr "Paigutused"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:25
-msgid "Lock screen after a certain duration to help prevent repetitive keyboard use injuries"
+msgid ""
+"Lock screen after a certain duration to help prevent repetitive keyboard use "
+"injuries"
 msgstr ""
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:26
@@ -1624,59 +1714,59 @@ msgstr "minutit"
 msgid "Set your keyboard preferences"
 msgstr "Klaviatuuri eelistuste seadmine"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:549
+#: ../capplets/mouse/gnome-mouse-properties.c:552
 msgid "Unknown Cursor"
 msgstr "Tundmatu kursor"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:736
+#: ../capplets/mouse/gnome-mouse-properties.c:739
 msgid "Default Cursor"
 msgstr "Vaikimisi kursor"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:737
+#: ../capplets/mouse/gnome-mouse-properties.c:740
 msgid "Default Cursor - Current"
 msgstr "Vaikimisi kursor - käesolev"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:738
+#: ../capplets/mouse/gnome-mouse-properties.c:741
 msgid "The default cursor that ships with X"
 msgstr "X-i vaikimisi kursor"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:742
+#: ../capplets/mouse/gnome-mouse-properties.c:745
 msgid "White Cursor"
 msgstr "Valge kursor"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:743
+#: ../capplets/mouse/gnome-mouse-properties.c:746
 msgid "White Cursor - Current"
 msgstr "Valge kursor - käesolev"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:744
+#: ../capplets/mouse/gnome-mouse-properties.c:747
 msgid "The default cursor inverted"
 msgstr "Vaikimisi kursor negatiivis"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:748
+#: ../capplets/mouse/gnome-mouse-properties.c:751
 msgid "Large Cursor"
 msgstr "Suur kursor"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:749
+#: ../capplets/mouse/gnome-mouse-properties.c:752
 msgid "Large Cursor - Current"
 msgstr "Suur kursor - käesolev"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:750
+#: ../capplets/mouse/gnome-mouse-properties.c:753
 msgid "Large version of normal cursor"
 msgstr "Tavalise kursori suurem versioon"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:754
+#: ../capplets/mouse/gnome-mouse-properties.c:757
 msgid "Large White Cursor - Current"
 msgstr "Suur·valge·kursor·-·praegune"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:755
+#: ../capplets/mouse/gnome-mouse-properties.c:758
 msgid "Large White Cursor"
 msgstr "Suur valge kursor"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:756
+#: ../capplets/mouse/gnome-mouse-properties.c:759
 msgid "Large version of white cursor"
 msgstr "Valge kursori suurem versioon"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:950
+#: ../capplets/mouse/gnome-mouse-properties.c:953
 msgid "Cursor Theme"
 msgstr "Kursori teema"
 
@@ -1701,86 +1791,82 @@ msgid "<b>Speed</b>"
 msgstr "<b>Kiirus</b>"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:7
-msgid "<i><small><b>Note:</b> Changes to this setting will not take effect until next time you log in.</small></i>"
-msgstr "<i><small><b>Märkus:</b> Selle sätte muudatused rakenduvad alles järgmisel sisselogimisel.</small></i>"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid "<i>Fast</i>"
 msgstr "<i>Kiire</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:9
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid "<i>High</i>"
 msgstr "<i>Kõrge</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:10
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:9
 msgid "<i>Large</i>"
 msgstr "<i>Suur</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:11
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:10
 msgid "<i>Low</i>"
 msgstr "<i>Madal</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:12
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:11
 msgid "<i>Slow</i>"
 msgstr "<i>Aeglane</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:13
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:12
 msgid "<i>Small</i>"
 msgstr "<i>Väike</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:14
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:13
 msgid "Buttons"
 msgstr "Nupud"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:15
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:14
 msgid "Cursor Size:"
 msgstr "Kursori suurus:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:16
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:15
 msgid "Cursors"
 msgstr "Kursorid"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:16
 msgid "Highlight the _pointer when you press Ctrl"
 msgstr "Kursori _rõhutamine Ctrl klahvi vajutamise peale"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
 msgid "Large"
 msgstr "Suur"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
 msgid "Medium"
 msgstr "Keskmine"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:20
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
 msgid "Motion"
 msgstr "Liikumine"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:21
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:20
 msgid "Mouse Preferences"
 msgstr "Hiire eelistused"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:22
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:21
 msgid "Small"
 msgstr "Väike"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:23
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:22
 msgid "_Acceleration:"
 msgstr "K_iirendus:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:24
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:23
 msgid "_Left-handed mouse"
 msgstr "V_asakukäelise hiir"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:25
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:24
 msgid "_Sensitivity:"
 msgstr "_Tundlikkus:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:26
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:25
 msgid "_Threshold:"
 msgstr "_Lävi:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:26
 msgid "_Timeout:"
 msgstr "_Ajapiirang:"
 
@@ -1922,7 +2008,10 @@ msgid "_Visual feedback:"
 msgstr "_Visuaalne märguanne:"
 
 #: ../capplets/theme-switcher/gnome-theme-details.c:347
-msgid "No themes could be found on your system.  This probably means that your \"Theme Preferences\" dialog was improperly installed, or you haven't installed the \"gnome-themes\" package."
+msgid ""
+"No themes could be found on your system.  This probably means that your "
+"\"Theme Preferences\" dialog was improperly installed, or you haven't "
+"installed the \"gnome-themes\" package."
 msgstr ""
 
 #: ../capplets/theme-switcher/gnome-theme-installer.c:227
@@ -2010,7 +2099,9 @@ msgstr "Failivorming on vigane."
 
 #: ../capplets/theme-switcher/gnome-theme-installer.c:553
 #, c-format
-msgid "%s is the path where the theme files will be installed. This can not be selected as the source location"
+msgid ""
+"%s is the path where the theme files will be installed. This can not be "
+"selected as the source location"
 msgstr ""
 
 #: ../capplets/theme-switcher/gnome-theme-installer.c:607
@@ -2030,7 +2121,10 @@ msgid "You can save this theme by pressing the Save Theme button."
 msgstr "Sul on võimalik seda teemat \"Salvesta teema\" nupu abil salvestada."
 
 #: ../capplets/theme-switcher/gnome-theme-manager.c:1476
-msgid "The default theme schemas could not be found on your system.  This means that you probably don't have metacity installed, or that your gconf is configured incorrectly."
+msgid ""
+"The default theme schemas could not be found on your system.  This means "
+"that you probably don't have metacity installed, or that your gconf is "
+"configured incorrectly."
 msgstr ""
 
 #: ../capplets/theme-switcher/gnome-theme-save.c:72
@@ -2068,7 +2162,8 @@ msgstr "_Asukoht:"
 
 #: ../capplets/theme-switcher/theme-properties.glade.h:2
 msgid "<span size=\"larger\" weight=\"bold\">Save Theme to Disk</span>"
-msgstr "<span size=\"larger\" weight=\"bold\">Teema salvestamine kettale</span>"
+msgstr ""
+"<span size=\"larger\" weight=\"bold\">Teema salvestamine kettale</span>"
 
 #: ../capplets/theme-switcher/theme-properties.glade.h:3
 msgid "Apply _Background"
@@ -2156,7 +2251,7 @@ msgstr "_Teema nimi:"
 
 #: ../capplets/theme-switcher/theme-properties.glade.h:24
 msgid "theme selection tree"
-msgstr ""
+msgstr "teemavaliku puu"
 
 #: ../capplets/ui-properties/gnome-ui-properties.desktop.in.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
@@ -2307,7 +2402,8 @@ msgstr "<b>Akna valimine</b>"
 
 #: ../capplets/windows/gnome-window-properties.glade.h:4
 msgid "To _move a window, press-and-hold this key then grab the window:"
-msgstr "Akna _liigutamiseks vajuta ning hoia all seda klahvi, seejärel haara aknast:"
+msgstr ""
+"Akna _liigutamiseks vajuta ning hoia all seda klahvi, seejärel haara aknast:"
 
 #: ../capplets/windows/gnome-window-properties.glade.h:5
 msgid "Window Preferences"
@@ -2362,39 +2458,46 @@ msgstr "Helitugevus"
 msgid "Could not initialize Bonobo"
 msgstr "Bonobo'd pole võimalik lähtestada"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:396
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:397
 msgid "Slow Keys Alert"
 msgstr ""
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:397
-msgid "You just held down the Shift key for 8 seconds.  This is the shortcut for the Slow Keys feature, which affects the way your keyboard works."
-msgstr ""
-
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:399
-msgid "Do you want to activate Slow Keys?"
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:398
+msgid ""
+"You just held down the Shift key for 8 seconds.  This is the shortcut for "
+"the Slow Keys feature, which affects the way your keyboard works."
 msgstr ""
 
 #: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:400
+msgid "Do you want to activate Slow Keys?"
+msgstr ""
+
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:401
 msgid "Do you want to deactivate Slow Keys?"
 msgstr ""
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:409
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:410
 msgid "Sticky Keys Alert"
 msgstr ""
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:410
-msgid "You just pressed the Shift key 5 times in a row.  This is the shortcut for the Sticky Keys feature, which affects the way your keyboard works."
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
+msgid ""
+"You just pressed the Shift key 5 times in a row.  This is the shortcut for "
+"the Sticky Keys feature, which affects the way your keyboard works."
 msgstr ""
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
-msgid "You just pressed two keys at once, or pressed the Shift key 5 times in a row.  This turns off the Sticky Keys feature, which affects the way your keyboard works."
-msgstr ""
-
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:414
-msgid "Do you want to activate Sticky Keys?"
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
+msgid ""
+"You just pressed two keys at once, or pressed the Shift key 5 times in a "
+"row.  This turns off the Sticky Keys feature, which affects the way your "
+"keyboard works."
 msgstr ""
 
 #: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:415
+msgid "Do you want to activate Sticky Keys?"
+msgstr ""
+
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:416
 msgid "Do you want to deactivate Sticky Keys?"
 msgstr ""
 
@@ -2466,15 +2569,18 @@ msgstr ""
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
-"Try using a simpler configuration or taking a fresher version of XFree software."
+"Try using a simpler configuration or taking a fresher version of XFree "
+"software."
 msgstr ""
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:230
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:227
 msgid "Do _not show this warning again"
 msgstr "Seda _hoiatust uuesti mitte näidata"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:241
-msgid "The X system keyboard settings differ from your current GNOME keyboard settings.  Which set would you like to use?"
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:238
+msgid ""
+"The X system keyboard settings differ from your current GNOME keyboard "
+"settings.  Which set would you like to use?"
 msgstr ""
 
 #: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:251
@@ -2511,7 +2617,7 @@ msgid ""
 "Make sure that this daemon is properly installed."
 msgstr ""
 
-#: ../gnome-settings-daemon/gnome-settings-screensaver.c:94
+#: ../gnome-settings-daemon/gnome-settings-screensaver.c:113
 #, c-format
 msgid ""
 "There was an error starting up the screensaver:\n"
@@ -2526,7 +2632,7 @@ msgstr ""
 "\n"
 "Ekraanisäästja funktsionaalsus selle seansi jooksul ei tööta."
 
-#: ../gnome-settings-daemon/gnome-settings-screensaver.c:104
+#: ../gnome-settings-daemon/gnome-settings-screensaver.c:123
 msgid "_Do not show this message again"
 msgstr "_Ära näita seda teadet uuesti"
 
@@ -2543,7 +2649,7 @@ msgstr ""
 #: ../gnome-settings-daemon/gnome-settings-xsettings.c:215
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
-msgstr ""
+msgstr "GConf võti %s on tüübiga %s, eeldatakse tüüpi %s\n"
 
 #: ../gnome-settings-daemon/modmap-dialog.glade.h:1
 msgid "A_vailable files:"
@@ -2578,7 +2684,9 @@ msgid "Type"
 msgstr "Tüüp"
 
 #: ../libbackground/applier.c:256
-msgid "Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW for preview"
+msgid ""
+"Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
+"for preview"
 msgstr ""
 
 #: ../libbackground/applier.c:263
@@ -2605,13 +2713,12 @@ msgstr "Ekraan"
 msgid "Screen on which BGApplier is to draw"
 msgstr ""
 
-#: ../libgswitchit/gswitchit_config.c:1016
+#: ../libgswitchit/gswitchit_config.c:1035
 #, c-format
 msgid "There was an error loading an image: %s"
 msgstr "Pildi laadimisel tekkis viga: %s"
 
-#: ../libsounds/sound-view.c:122
-#: ../libsounds/sound-view.c:147
+#: ../libsounds/sound-view.c:122 ../libsounds/sound-view.c:147
 msgid "The sound file for this event does not exist."
 msgstr "Selle sündmuse jaoks pole helifaili olemas."
 
@@ -2621,6 +2728,9 @@ msgid ""
 "You may want to install the gnome-audio package\n"
 "for a set of default sounds."
 msgstr ""
+"Selle sündmuse jaoks pole helifaili. Võib-olla\n"
+"on sul vaja vaikimisi määratud helide jaoks\n"
+"tarvis paigaldada gnome-audio pakk."
 
 #: ../libsounds/sound-view.c:224
 #, c-format
@@ -2669,12 +2779,13 @@ msgid "Roll up"
 msgstr "kerib kokku"
 
 #: ../schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:1
-msgid "If true, the mime handlers for text/plain and text/* will be kept in sync"
+msgid ""
+"If true, the mime handlers for text/plain and text/* will be kept in sync"
 msgstr ""
 
 #: ../schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:2
 msgid "Sync text/plain and text/* handlers"
-msgstr ""
+msgstr "text/plain ja text/* käsitlejate sünkroniseerimine"
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:1
 msgid "Brightness down"
@@ -2814,11 +2925,11 @@ msgstr "Heli vaiksemakskeeramise kiirklahv."
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
 msgid "Volume mute"
-msgstr "Hääle keelamine"
+msgstr "Heli vaigistamine"
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
 msgid "Volume mute's shortcut"
-msgstr "Heli keelamise kiirklahv."
+msgstr "Heli vaigistamise kiirklahv"
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:37
 msgid "Volume step"
@@ -2837,23 +2948,25 @@ msgid "Volume up's shortcut."
 msgstr "Heli valjemakskeeramise kiirklahv."
 
 #: ../schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:1
-msgid "Display a dialog when there are errors running XScreenSaver"
+msgid "Display a dialog when there are errors running the screensaver"
 msgstr ""
 
 #: ../schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:2
-msgid "Run XScreenSaver at login"
-msgstr "XScreenSaver'i käivitamine sisselogimisel"
+msgid "Run screensaver at login"
+msgstr "Ekraanisäästja käivitamine sisselogimisel"
 
 #: ../schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:3
 msgid "Show Startup Errors"
-msgstr ""
+msgstr "Käivitusvigade näitamine"
 
 #: ../schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:4
-msgid "Start XScreenSaver"
-msgstr ""
+msgid "Start screensaver"
+msgstr "Ekraanisäästja käivitamine"
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:1
-msgid "A collection of scripts to run whenever the keyboard state is reloaded. Useful for re-applying xmodmap based adjustments"
+msgid ""
+"A collection of scripts to run whenever the keyboard state is reloaded. "
+"Useful for re-applying xmodmap based adjustments"
 msgstr ""
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
@@ -2885,7 +2998,9 @@ msgid "Keyboard options"
 msgstr "Klaviatuuri valikud"
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:9
-msgid "Keyboard settings in gconf will be overridden from the system ASAP"
+msgid ""
+"Keyboard settings in gconf will be overridden from the system ASAP "
+"(deprecated)"
 msgstr ""
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:10
@@ -2894,10 +3009,12 @@ msgstr ""
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:11
 msgid "Show layout names instead of group names"
-msgstr ""
+msgstr "Grupinimede asemel paigutuste nimede näitamine"
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:12
-msgid "Show layout names instead of group names (only for versions of XFree supporting multiple layouts)"
+msgid ""
+"Show layout names instead of group names (only for versions of XFree "
+"supporting multiple layouts)"
 msgstr ""
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:13
@@ -2905,7 +3022,10 @@ msgid "Suppress the \"X sysconfig changed\" warning message"
 msgstr ""
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:14
-msgid "Very soon, keyboard settings in gconf will be overridden (from the system configuration)"
+msgid ""
+"Very soon, keyboard settings in gconf will be overridden (from the system "
+"configuration) This key has been deprecated since GNOME 2.12, please unset "
+"the model, layouts and options keys to get the default system configuration."
 msgstr ""
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:15
@@ -2922,11 +3042,11 @@ msgstr "modmap failide loend"
 
 #: ../typing-break/drw-break-window.c:212
 msgid "_Postpone break"
-msgstr ""
+msgstr "_Lükka puhkepaus edasi"
 
 #: ../typing-break/drw-break-window.c:259
 msgid "Take a break!"
-msgstr ""
+msgstr "Tee üks puhkepaus!"
 
 #. { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
 #: ../typing-break/drwright.c:141
@@ -2945,16 +3065,18 @@ msgstr ""
 #, c-format
 msgid "%d minute until the next break"
 msgid_plural "%d minutes until the next break"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d minut järgmise puhkepausini"
+msgstr[1] "%d minutit järgmise puhkepausini"
 
 #: ../typing-break/drwright.c:499
 msgid "Less than one minute until the next break"
-msgstr ""
+msgstr "Järgmise puhkepausini on vähem kui minut"
 
 #: ../typing-break/drwright.c:587
 #, c-format
-msgid "Unable to bring up the typing break properties dialog with the following error: %s"
+msgid ""
+"Unable to bring up the typing break properties dialog with the following "
+"error: %s"
 msgstr ""
 
 #: ../typing-break/drwright.c:635
@@ -2963,7 +3085,7 @@ msgstr ""
 
 #: ../typing-break/drwright.c:659
 msgid "A computer break reminder."
-msgstr ""
+msgstr "Puhkepausist meeldetuletaja."
 
 #: ../typing-break/drwright.c:660
 msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
@@ -2982,44 +3104,48 @@ msgid "The typing monitor is already running."
 msgstr ""
 
 #: ../typing-break/main.c:106
-msgid "The typing monitor uses the notification area to display information. You don't seem to have a notification area on your panel. You can add it by right-clicking on your panel and choosing 'Add to panel', selecting 'Notification area' and clicking 'Add'."
+msgid ""
+"The typing monitor uses the notification area to display information. You "
+"don't seem to have a notification area on your panel. You can add it by "
+"right-clicking on your panel and choosing 'Add to panel', selecting "
+"'Notification area' and clicking 'Add'."
 msgstr ""
 
 #: ../vfs-methods/fontilus/font-view.c:115
 msgid "The quick brown fox jumps over the lazy dog. 0123456789"
 msgstr ""
 
-#: ../vfs-methods/fontilus/font-view.c:275
+#: ../vfs-methods/fontilus/font-view.c:276
 msgid "Name:"
 msgstr "Nimi:"
 
-#: ../vfs-methods/fontilus/font-view.c:278
+#: ../vfs-methods/fontilus/font-view.c:279
 msgid "Style:"
 msgstr "Laad:"
 
-#: ../vfs-methods/fontilus/font-view.c:287
+#: ../vfs-methods/fontilus/font-view.c:289
 msgid "Type:"
 msgstr "Tüüp:"
 
-#: ../vfs-methods/fontilus/font-view.c:294
+#: ../vfs-methods/fontilus/font-view.c:295
 msgid "Size:"
 msgstr "Suurus:"
 
-#: ../vfs-methods/fontilus/font-view.c:338
-#: ../vfs-methods/fontilus/font-view.c:351
+#: ../vfs-methods/fontilus/font-view.c:339
+#: ../vfs-methods/fontilus/font-view.c:352
 msgid "Version:"
 msgstr "Versioon:"
 
-#: ../vfs-methods/fontilus/font-view.c:342
-#: ../vfs-methods/fontilus/font-view.c:353
+#: ../vfs-methods/fontilus/font-view.c:343
+#: ../vfs-methods/fontilus/font-view.c:354
 msgid "Copyright:"
 msgstr "Autoriõigused:"
 
-#: ../vfs-methods/fontilus/font-view.c:346
+#: ../vfs-methods/fontilus/font-view.c:347
 msgid "Description:"
 msgstr "Kirjeldus:"
 
-#: ../vfs-methods/fontilus/font-view.c:407
+#: ../vfs-methods/fontilus/font-view.c:408
 #, c-format
 msgid "usage: %s fontfile\n"
 msgstr "kasutamine: %s kirjatüübifail\n"
@@ -3049,7 +3175,8 @@ msgid "If set to true, then Type1 fonts will be thumbnailed."
 msgstr ""
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:5
-msgid "Set this key to the command used to create thumbnails for OpenType fonts."
+msgid ""
+"Set this key to the command used to create thumbnails for OpenType fonts."
 msgstr ""
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:6
@@ -3057,7 +3184,8 @@ msgid "Set this key to the command used to create thumbnails for PCF fonts."
 msgstr ""
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:7
-msgid "Set this key to the command used to create thumbnails for TrueType fonts."
+msgid ""
+"Set this key to the command used to create thumbnails for TrueType fonts."
 msgstr ""
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:8
@@ -3102,14 +3230,16 @@ msgstr "GNOME kirjatüübivaatur"
 
 #: ../vfs-methods/themus/apply-font.glade.h:2
 msgid "<span weight=\"bold\" size=\"larger\">Apply new font?</span>"
-msgstr ""
+msgstr "<span weight=\"bold\" size=\"larger\">Rakendada uus kirjatüüp?</span>"
 
 #: ../vfs-methods/themus/apply-font.glade.h:3
 msgid "Do _not apply font"
-msgstr ""
+msgstr "Ära rake_nda kirjatüüpi"
 
 #: ../vfs-methods/themus/apply-font.glade.h:4
-msgid "The theme you have selected suggests a new font. A preview of the font is shown below."
+msgid ""
+"The theme you have selected suggests a new font. A preview of the font is "
+"shown below."
 msgstr ""
 
 #: ../vfs-methods/themus/apply-font.glade.h:5
@@ -3158,7 +3288,8 @@ msgid "If set to true, then themes will be thumbnailed."
 msgstr ""
 
 #: ../vfs-methods/themus/themus.schemas.in.h:3
-msgid "Set this key to the command used to create thumbnails for installed themes."
+msgid ""
+"Set this key to the command used to create thumbnails for installed themes."
 msgstr ""
 
 #: ../vfs-methods/themus/themus.schemas.in.h:4
@@ -3181,21 +3312,37 @@ msgstr "Kas teha paigaldatud teemadest pisipilte"
 msgid "Whether to thumbnail themes"
 msgstr "Kas teha teemadest pisipilte"
 
+#~ msgid "Pick a color"
+#~ msgstr "Värvuse valimine"
+
+#~ msgid ""
+#~ "<i><small><b>Note:</b> Changes to this setting will not take effect until "
+#~ "next time you log in.</small></i>"
+#~ msgstr ""
+#~ "<i><small><b>Märkus:</b> Selle sätte muudatused rakenduvad alles "
+#~ "järgmisel sisselogimisel.</small></i>"
+
 #~ msgid "%i of %i"
 #~ msgstr "%i. %i-st"
+
 #~ msgid "Transferring: %s"
 #~ msgstr "Edastatav: %s"
+
 #~ msgid "Downloading..."
 #~ msgstr "Allalaadimine..."
+
 #~ msgid "Set the font for applications"
 #~ msgstr "Rakendustes kasutatava kirjatüübi seadmine"
+
 #~ msgid "Set the font for the icons on the desktop"
 #~ msgstr "Töölaua ikoonide kirjatüübi seadmine"
+
 #~ msgid "Set the monospace font for terminals and similar applications"
 #~ msgstr ""
 #~ "Terminalides ja sarnastes rakendustes kasutatava kirjatüübi seadmine"
+
 #~ msgid "_Use Font"
 #~ msgstr "_Kasuta kirjatüüpi"
+
 #~ msgid "Sound preferences"
 #~ msgstr "Heli eelistused"
-
