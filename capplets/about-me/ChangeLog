@@ -1,3 +1,21 @@
+2005-08-16  Diego Gonzalez  <diego@pemas.net>
+
+	* gnome-about-me.glade: revert the part of the previous patch that
+	  modified the UI, as we are in UI freeze.
+
+2005-08-15 Olaf Heiring <olh@suse.de>
+
+	* gnome-about-me-password.c (read_everything): use integer to avoid
+	  comparison being always true due to limited range.
+
+2005-08-15 Diego Gonzalez <diego@pemas.net>
+
+	* gnome-about-me-password.c (update_password): use "wrapped" instead
+	  of "one" to handler the case where the passwd command finds the
+	  password wrapped. Use a long delay period.
+
+	Patch by Jaap Hatsima. 
+
 2005-08-14  Francisco Javier F. Serrador  <serrador@cvs.gnome.org>
 
 	* gnome-about-me-password.c (update_password): Replace "passwod is
