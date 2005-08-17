@@ -919,12 +919,7 @@ static void wallpaper_properties_init (poptContext ctx) {
   gtk_rc_parse_string ("style \"wp-tree-defaults\" {\n"
 		       "  GtkTreeView::horizontal-separator = 6\n"
 		       "} widget_class \"*TreeView*\""
-		       " style \"wp-tree-defaults\"\n\n"
-		       "style \"wp-dialog-defaults\" {\n"
-		       "  GtkDialog::action-area-border = 0\n"
-		       "  GtkDialog::content-area-border = 0\n"
-		       "} widget_class \"*GtkDialog*\""
-		       " style \"wp-dialog-defaults\"");
+		       " style \"wp-tree-defaults\"");
 
   capplet = g_new0 (GnomeWPCapplet, 1);
 
@@ -992,6 +987,8 @@ static void wallpaper_properties_init (poptContext ctx) {
 
   gtk_widget_realize (capplet->window);
 
+  gtk_widget_ensure_style (capplet->window);
+  gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (capplet->window)->vbox), 0);
   gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (capplet->window)->action_area), 12);
 
   /* Drag and Drop Support */

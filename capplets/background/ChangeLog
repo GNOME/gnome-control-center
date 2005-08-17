@@ -1,3 +1,11 @@
+2005-08-17  Rodney Dawes  <dobey@novell.com>
+
+	* gnome-wp-capplet.c (wallpaper_properties_init): Replace the changing
+	of some GtkDialog defaults through style properties with calls to
+	gtk_widget_ensure_style and gtk_container_set_border_width
+
+	Fixes #313680
+
 2005-08-15  Veerapuram Varadhan <vvaradhan@novell.com>
 
 	* gnome-wp-capplet.c (gnome_wp_props_wp_set):
