@@ -334,6 +334,11 @@ drw_break_window_dispose (GObject *object)
         
         priv = window->priv;
 
+	if (priv->timer) {
+		g_timer_destroy (priv->timer);
+		priv->timer = NULL;
+	}
+
 	if (priv->clock_timeout_id != 0) {
 		g_source_remove (priv->clock_timeout_id);
 		priv->clock_timeout_id = 0;
