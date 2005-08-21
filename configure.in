@@ -268,7 +268,7 @@ dnl ==============================================
 AC_ARG_ENABLE(aboutme,
    AC_HELP_STRING([--enable-aboutme],
                   [Enable about-me capplet]),,
-   enable_aboutme=yes)
+   enable_aboutme=$enableval)
 
 if test "x$enable_aboutme" = "xyes"; then
   LIBEBOOK_REQUIREMENT="libebook-1.2 >= 1.3.0"
