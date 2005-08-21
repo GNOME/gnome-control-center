@@ -262,7 +262,7 @@ static void gnome_wp_option_menu_set (GnomeWPCapplet * capplet,
     } else if (!strcmp (value, "scaled")) {
       gtk_option_menu_set_history (GTK_OPTION_MENU (capplet->wp_opts),
 				   GNOME_WP_SCALE_TYPE_SCALED);
-    } else {
+    } else if (strcmp (value, "none") != 0) {
       gtk_option_menu_set_history (GTK_OPTION_MENU (capplet->wp_opts),
 				   GNOME_WP_SCALE_TYPE_TILED);
     }
