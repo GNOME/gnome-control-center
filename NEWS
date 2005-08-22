@@ -1,3 +1,54 @@
+gnome-control-center 2.11.92
+
+about-me:
+- typo fix (Francisco Javier F. Serrado) (#312845)
+- use "wrapped" instead of "one" to handler the case where the passwd command 
+  finds the password wrapped. Use a long delay period. 
+  (Jaap Hatsima) (#312092)
+- use integer to avoid comparison being always true due to limited range
+  (Olaf Heiring).
+
+background:
+
+- Enable/disable the style-menu, shading-menu and color-picker buttons 
+  w.r.t gconf-keys (Veerapuram Varadhan).
+- Replace the changing of some GtkDialog defaults through style properties with
+  calls to gtk_widget_ensure_style and gtk_container_set_border_width
+  (Rodney Dawes) (#313680)
+- If the value for the "picture_options" key is set to "none", don't set the 
+  optin menu for the scaling options to tiled (Rodney Dawes) (#313883).
+
+common:
+- Get the Example icon that is specified by the icon theme, if it exists, 
+  and then fall back through a better list of icons to use (Rodney Dawes).
+
+keyboard:
+- don't use a page value, fix the different behaviour between widgets
+  (Sebastien Bacher) (#301470).
+
+other:
+- configure fixes (Sergey V. Udaltsov, Ray Strode, Christian Persch)
+- fix a leak (Rodrigo Moya)
+
+translations:
+Jens Seidel (de)
+Kostas Papadimas (el)
+Francisco Javier F. Serrador (es)
+Ivar Smolin (et)
+Gabor Kelemen (hu)
+Mohammad DAMT (id)
+Takeshi AIHANA (ja)
+Žygimantas Beručka (lt)
+Terance Edward Sola (nb)
+Terance Edward Sola (no)
+Sebastian Ivan (ro)
+Слободан Д. Средојевић (sr)
+Baris Cicek (tr)
+Maxim V. Dziumanenko (uk)
+Funda Wang (zh_CN)
+Woodman Tuen (zh_TW)
+
+------------------------------------------------------------------------------
 gnome-control-center 2.11.91
 
 about-me:
