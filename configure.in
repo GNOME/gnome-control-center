@@ -23,7 +23,7 @@ GNOME_DOC_INIT
 
 m4_define(gnomevfs_minver, 2.0.0)
 m4_define(fontconfig_minver, 1.0.0)
-m4_define(xft_minver, 2.1.7)
+m4_define(xft_minver, 2.1.2)
 m4_define(gtk_minver, 2.6.0)
 m4_define(libbonobo_minver, 2.0.0)
 m4_define(libgnomeui_minver, 2.2.0)
@@ -98,7 +98,7 @@ COMMON_MODULES="gtk+-2.0 >= 2.3.0 dnl
  libbonoboui-2.0 dnl
  gnome-desktop-2.0 >= 2.2.0"
 PKG_CHECK_MODULES(CAPPLET, $COMMON_MODULES)
-PKG_CHECK_MODULES(GNOMECC, $COMMON_MODULES libgnome-menu >= 2.11.1)
+PKG_CHECK_MODULES(GNOMECC, $COMMON_MODULES libgnome-menu >= 2.10.1)
 PKG_CHECK_MODULES(GNOME_SETTINGS_DAEMON,
   [gtk+-2.0 gconf-2.0 libgnomeui-2.0 esound gnome-desktop-2.0 libglade-2.0])
 PKG_CHECK_MODULES(OLD_CAPPLET, libgnomeui-2.0 libglade-2.0)
@@ -126,8 +126,6 @@ PKG_CHECK_MODULES(FONT_CAPPLET, $COMMON_MODULES $xft_modules)
 
 PKG_CHECK_MODULES(AT_CAPPLET, $COMMON_MODULES)
 
-PKG_CHECK_MODULES(PANGOXFT, pangoxft >= 1.8)
-				
 dnl
 dnl Check for XRandR, needed for display capplet
 dnl		
