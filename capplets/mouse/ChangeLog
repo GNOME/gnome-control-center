@@ -1,3 +1,9 @@
+2005-08-24  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* gnome-mouse-properties.c: (cursor_changed): Move the call to
+	g_free (cursor_font) outside of the conditional so it gets free'd
+	in both cases.
+
 2005-08-01  Sebastien Bacher  <seb128@debian.org>
 
 	* gnome-mouse-properties.c: (cursor_theme_changed): no need to allocate

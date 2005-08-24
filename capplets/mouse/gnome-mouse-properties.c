@@ -587,8 +587,8 @@ cursor_changed (GtkTreeSelection *selection,
 #else
 		gconf_client_set_string (client,
 					 CURSOR_FONT_KEY, cursor_font, NULL);
-		g_free (cursor_font);
 #endif
+		g_free (cursor_font);
 	} else {
 #ifdef HAVE_XCURSOR
 		gconf_client_unset (client,
