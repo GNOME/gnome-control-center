@@ -4,13 +4,14 @@
 # Ivan Vilata i Balaguer <ivan@selidor.net>, 1999, 2000.
 # Softcatalà <linux@softcatala.org>, 2000, 2001.
 # Jordi Mallach <jordi@sindominio.net>, 2002, 2003, 2004, 2005.
+# Xavier Conde Rueda <xavi.conde@gmail.com>, 2005 
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-control-center 2.7.90\n"
+"Project-Id-Version: gnome-control-center 2.11.92\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-15 01:51+0100\n"
-"PO-Revision-Date: 2005-02-14 15:33+0100\n"
+"POT-Creation-Date: 2005-08-25 14:48+0000\n"
+"PO-Revision-Date: 2005-08-25 15:33+0100\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
 "MIME-Version: 1.0\n"
@@ -18,14 +19,354 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms nplurals=2; plural=n!=1;\n"
 
-#: ../capplets/about-me/gnome-about-me.desktop.in.h:1
-msgid "About me"
-msgstr "Quant a mi"
+#: ../capplets/about-me/eel-alert-dialog.c:114
+msgid "Image/label border"
+msgstr "Vora de la imatge/etiqueta"
+
+#: ../capplets/about-me/eel-alert-dialog.c:115
+msgid "Width of border around the label and image in the alert dialog"
+msgstr "Amplada de la vora al voltant de l'etiqueta i la imatge en el quadre de diàleg"
 
 #
-#: ../capplets/about-me/gnome-about-me.desktop.in.h:2
-msgid "Information about myself"
-msgstr "Informació quant a mi"
+#: ../capplets/about-me/eel-alert-dialog.c:124
+msgid "Alert Type"
+msgstr "Tipus d'alerta"
+
+#: ../capplets/about-me/eel-alert-dialog.c:125
+msgid "The type of alert"
+msgstr "El tipus d'alerta"
+
+#: ../capplets/about-me/eel-alert-dialog.c:133
+msgid "Alert Buttons"
+msgstr "Botons d'alerta"
+
+#: ../capplets/about-me/eel-alert-dialog.c:134
+msgid "The buttons shown in the alert dialog"
+msgstr "Els botons mostrats en el diàleg d'alerta"
+
+#: ../capplets/about-me/eel-alert-dialog.c:198
+msgid "Show more _details"
+msgstr "Mostra més _detalls"
+
+#: ../capplets/about-me/gnome-about-me.desktop.in.in.h:1
+#: ../capplets/about-me/gnome-about-me.glade.h:14
+msgid "About Me"
+msgstr "Quant a mi"
+
+#: ../capplets/about-me/gnome-about-me.desktop.in.in.h:2
+msgid "Set your personal information"
+msgstr "Establiu la vostra informació personal"
+
+#
+#: ../capplets/about-me/gnome-about-me.c:554
+msgid "Select Image"
+msgstr "Seleccioneu una imatge" 
+
+#: ../capplets/about-me/gnome-about-me.c:556
+msgid "No Image"
+msgstr "Cap imatge"
+
+#: ../capplets/about-me/gnome-about-me.c:706
+msgid ""
+"There was an error while trying to get the addressbook information\n"
+"Evolution Data Server can't handle the protocol"
+msgstr ""
+"S'ha produït un error en intentar obtenir la informació de la llibreta\n"
+"d'adreces. El servidor de dades d'Evolution no pot gestionar el protocol"
+
+#: ../capplets/about-me/gnome-about-me.c:727
+msgid "Unable to open address book"
+msgstr "No es pot obrir la llibreta d'adreces"
+
+#: ../capplets/about-me/gnome-about-me.c:739
+msgid "Unknown login ID, the user database might be corrupted"
+msgstr "No es coneix l'ID d'entrada, la base de dades d'usuaris pot estar corrumpuda"
+
+#: ../capplets/about-me/gnome-about-me.c:770
+#: ../capplets/about-me/gnome-about-me.c:772
+#, c-format
+msgid "About %s"
+msgstr "Quant a %s"
+
+#: ../capplets/about-me/gnome-about-me-password.c:101
+#: ../capplets/about-me/gnome-about-me-password.c:479
+msgid "Old password is incorrect, please retype it"
+msgstr "La contrasenya anterior és incorrecta. Escriviu-la de nou"
+
+#: ../capplets/about-me/gnome-about-me-password.c:112
+msgid "System error has occurred"
+msgstr "S'ha produït un error del sistema"
+
+#: ../capplets/about-me/gnome-about-me-password.c:113
+msgid "Could not run /usr/bin/passwd"
+msgstr "No es pot executar /usr/bin/passwd"
+
+#: ../capplets/about-me/gnome-about-me-password.c:114
+msgid "Unable to launch backend"
+msgstr "No es pot executar el programa de suport"
+
+#: ../capplets/about-me/gnome-about-me-password.c:116
+#: ../capplets/about-me/gnome-about-me-password.c:117
+msgid "Unexpected error has occurred"
+msgstr "S'ha produït un error inesperat"
+
+#: ../capplets/about-me/gnome-about-me-password.c:315
+msgid "Password is too short"
+msgstr "La contrasenya és massa curta"
+
+#: ../capplets/about-me/gnome-about-me-password.c:318
+#: ../capplets/about-me/gnome-about-me-password.c:321
+msgid "Password is too simple"
+msgstr "La contrasenya és massa senzilla"
+
+#: ../capplets/about-me/gnome-about-me-password.c:324
+msgid "Old and new passwords are too similar"
+msgstr "La contrasenya nova i l'anterior són massa semblants"
+
+#: ../capplets/about-me/gnome-about-me-password.c:328
+msgid "Old and new password are the same"
+msgstr "La contrasenya nova i la vella són iguals"
+
+#: ../capplets/about-me/gnome-about-me-password.c:406
+msgid "Please type the passwords."
+msgstr "Escriviu la contrasenya."
+
+#: ../capplets/about-me/gnome-about-me-password.c:414
+msgid "Please type the password again, it is wrong."
+msgstr "La contrasenya és incorrecta. Escriviu-la de nou."
+
+#: ../capplets/about-me/gnome-about-me-password.c:417
+msgid "Click on Change Password to change the password."
+msgstr "Cliqueu \"Canvia la contrasenya\" per canviar-la."
+
+#: ../capplets/about-me/gnome-about-me.glade.h:1
+#: ../vfs-methods/themus/apply-font.glade.h:1
+msgid " "
+msgstr " "
+
+#: ../capplets/about-me/gnome-about-me.glade.h:2
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
+#: ../capplets/font/font-properties.glade.h:1
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:1
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:1
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:1
+msgid "    "
+msgstr "    "
+
+#: ../capplets/about-me/gnome-about-me.glade.h:3
+msgid "<b>Email</b>"
+msgstr "<i>Correu electrònic</i>"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:4
+msgid "<b>Home</b>"
+msgstr "<b>Casa</b>"
+
+#
+#: ../capplets/about-me/gnome-about-me.glade.h:5
+msgid "<b>Instant Messaging</b>"
+msgstr "<b>Missatgeria instantània</b>"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:6
+msgid "<b>Job</b>"
+msgstr "<b>Ocupació</b>"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:7
+msgid "<b>Please type the passwords.</b>"
+msgstr "<b>Escriviu la contrasenya.</b>"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:8
+msgid "<b>Telephone</b>"
+msgstr "<b>Telèfon</b>"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:9
+msgid "<b>Web</b>"
+msgstr "<b>Web</b>"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:10
+msgid "<b>Work</b>"
+msgstr "<b>Treball</b>"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:11
+msgid "A_IM/iChat:"
+msgstr "A_IM/iChat:"
+
+#
+#: ../capplets/about-me/gnome-about-me.glade.h:12
+msgid "A_ddress:"
+msgstr "A_dreça:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:13
+msgid "A_ssistant:"
+msgstr "A_ssistent:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:15
+msgid "Address"
+msgstr "Adreça"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:16
+msgid "C_ity:"
+msgstr "C_iutat:"
+
+#
+#: ../capplets/about-me/gnome-about-me.glade.h:17
+msgid "C_ompany:"
+msgstr "E_mpresa:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:18
+msgid "Cale_ndar:"
+msgstr "Cale_ndari"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:19
+msgid "Change Passwo_rd..."
+msgstr "Canvia la cont_rasenya..."
+
+#: ../capplets/about-me/gnome-about-me.glade.h:20
+msgid "Change Password"
+msgstr "Canvia la contrasenya"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:21
+msgid "Ci_ty:"
+msgstr "Ciu_tat:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:22
+msgid "Co_untry:"
+msgstr "_País:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:23
+msgid "Contact"
+msgstr "Contactes"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:24
+msgid "Cou_ntry:"
+msgstr "Paí_s:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:25
+msgid "Full Name"
+msgstr "Nom complet"
+
+#
+#: ../capplets/about-me/gnome-about-me.glade.h:26
+msgid "Hom_e:"
+msgstr "Ca_sa:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:27
+msgid "IC_Q:"
+msgstr "IC_Q"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:28
+msgid "M_SN:"
+msgstr "M_SN"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:29
+msgid "Old pa_ssword:"
+msgstr "Contra_senya vella:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:30
+msgid "P.O. _box:"
+msgstr "Apartat de _correus:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:31
+msgid "P._O. box:"
+msgstr "A_partat de correus:"
+
+#
+#: ../capplets/about-me/gnome-about-me.glade.h:32
+msgid "Personal Info"
+msgstr "Informació personal"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:33
+msgid "State/Pro_vince:"
+msgstr "Comunitat/Pro_víncia:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:34
+msgid "User name:"
+msgstr "Nom d'usuari:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:35
+msgid "Web _log:"
+msgstr "Web _log:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:36
+msgid "Wor_k:"
+msgstr "_Feina:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:37
+msgid "Work _fax:"
+msgstr "Fa_x de la feina:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:38
+msgid "Zip/_Postal code:"
+msgstr "Codi _postal:"
+
+#
+#: ../capplets/about-me/gnome-about-me.glade.h:39
+msgid "_Address:"
+msgstr "_Adreça:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:40
+msgid "_Department:"
+msgstr "_Departament"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:41
+msgid "_Groupwise:"
+msgstr "_GroupWise"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:42
+msgid "_Home page:"
+msgstr "Pà_gina personal:"
+
+#
+#: ../capplets/about-me/gnome-about-me.glade.h:43
+msgid "_Home:"
+msgstr "_Inici:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:44
+msgid "_Jabber:"
+msgstr "_Jabber"
+
+#
+#: ../capplets/about-me/gnome-about-me.glade.h:45
+msgid "_Manager:"
+msgstr "Ges_tor:"
+
+#
+#: ../capplets/about-me/gnome-about-me.glade.h:46
+msgid "_Mobile:"
+msgstr "_Mòbil:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:47
+msgid "_New password:"
+msgstr "_Nova contrasenya:"
+
+#
+#: ../capplets/about-me/gnome-about-me.glade.h:48
+msgid "_Profession:"
+msgstr "_Professió:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:49
+msgid "_Retype new password:"
+msgstr "Torneu a escriure la _contrasenya:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:50
+msgid "_State/Province:"
+msgstr "Comunitat/pro_víncia:"
+
+#
+#: ../capplets/about-me/gnome-about-me.glade.h:51
+msgid "_Title:"
+msgstr "_Títol:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:52
+msgid "_Work:"
+msgstr "_Feina:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:53
+msgid "_Yahoo:"
+msgstr "_Yahoo:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:54
+msgid "_Zip/Postal code:"
+msgstr "Co_di postal:"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:1
 msgid "<b>Applications</b>"
@@ -54,7 +395,7 @@ msgstr "Tanca i _surt"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:6
 msgid "Start these assistive technologies every time you log in:"
-msgstr "Inicia aquestes tecnologies assistives cada vegada que entri:"
+msgstr "Inicia aquestes tecnologies assistives cada vegada que s'entri:"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:7
 msgid "_Enable assistive technologies"
@@ -118,16 +459,16 @@ msgstr ""
 "S'ha produït un error en executar el diàleg de preferències del ratolí: %s"
 
 #: ../capplets/accessibility/keyboard/accessibility-keyboard.c:337
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:396
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:398
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "No s'ha pogut importar els paràmetres d'AccessX del fitxer «%s»"
 
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:433
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:435
 msgid "Import Feature Settings File"
 msgstr "Fitxer d'importació dels paràmetres de les funcionalitats"
 
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:437
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:439
 msgid "_Import"
 msgstr "_Importa"
 
@@ -147,20 +488,11 @@ msgid ""
 "accessibility features will not operate without it."
 msgstr ""
 "Sembla que aquest sistema que no té l'extensió XKB. Les funcionalitats "
-"d'accessibilitat del teclat no funcionaran sense."
-
-#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
-#: ../capplets/font/font-properties.glade.h:1
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:1
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:1
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:1
-msgid "    "
-msgstr "    "
+"d'accessibilitat del teclat no funcionaran."
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:1
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:2
-#: ../capplets/network/gnome-network-preferences.glade.h:2
 #: ../capplets/theme-switcher/theme-install.glade.h:1
 #: ../capplets/theme-switcher/theme-properties.glade.h:1
 msgid "*"
@@ -176,7 +508,7 @@ msgstr "<b>Habilita les tecles len_tes</b>"
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
 msgid "<b>Enable _Mouse Keys</b>"
-msgstr "<b>Habilita les tecles del _ratolí</b>"
+msgstr "<b>_Habilita les tecles del ratolí</b>"
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
 msgid "<b>Enable _Repeat Keys</b>"
@@ -284,8 +616,8 @@ msgid ""
 "Perform multiple simultaneous key press operations by pressing modifier keys "
 "in sequence."
 msgstr ""
-"Fes que en prémer tecles modificadores en una seqüència es pugui simular la polsació de "
-"múltiples tecles alhora."
+"Fes que en prémer tecles modificadores en una seqüència es pugui simular la "
+"polsació de múltiples tecles alhora."
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:29
@@ -347,8 +679,8 @@ msgstr "píxels/segon"
 
 #. set the timeout value  label with correct value of timeout
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
-#: ../capplets/mouse/gnome-mouse-properties.c:133
-#: ../capplets/mouse/gnome-mouse-properties.c:578
+#: ../capplets/mouse/gnome-mouse-properties.c:131
+#: ../capplets/mouse/gnome-mouse-properties.c:863
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:27
 #: ../capplets/windows/gnome-window-properties.glade.h:10
 msgid "seconds"
@@ -376,8 +708,8 @@ msgid "Desktop Background Preferences"
 msgstr "Preferències del fons de l'escriptori"
 
 #: ../capplets/background/gnome-background-properties.glade.h:4
-msgid "Pick a color"
-msgstr "Tria un color"
+msgid "Open a dialog to specify the color"
+msgstr "Obre un diàleg per a especificar el color"
 
 #: ../capplets/background/gnome-background-properties.glade.h:5
 msgid "_Add Wallpaper"
@@ -387,62 +719,62 @@ msgstr "_Afegeix un paper de fons"
 msgid "_Style:"
 msgstr "E_stil:"
 
-#: ../capplets/background/gnome-wp-capplet.c:72
+#: ../capplets/background/gnome-wp-capplet.c:74
 #: ../capplets/common/capplet-util.c:340
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:326
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:333
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "S'ha produït un error en mostrar l'ajuda: %s"
 
 #
-#: ../capplets/background/gnome-wp-capplet.c:1061
-#: ../capplets/background/gnome-wp-capplet.c:1077
+#: ../capplets/background/gnome-wp-capplet.c:1038
+#: ../capplets/background/gnome-wp-capplet.c:1056
 msgid "Centered"
 msgstr "Centrat"
 
-#: ../capplets/background/gnome-wp-capplet.c:1085
-#: ../capplets/background/gnome-wp-capplet.c:1100
+#: ../capplets/background/gnome-wp-capplet.c:1064
+#: ../capplets/background/gnome-wp-capplet.c:1081
 msgid "Fill Screen"
 msgstr "Omplint"
 
 #
-#: ../capplets/background/gnome-wp-capplet.c:1108
-#: ../capplets/background/gnome-wp-capplet.c:1123
+#: ../capplets/background/gnome-wp-capplet.c:1089
+#: ../capplets/background/gnome-wp-capplet.c:1106
 msgid "Scaled"
 msgstr "Escalat"
 
 #
+#: ../capplets/background/gnome-wp-capplet.c:1114
 #: ../capplets/background/gnome-wp-capplet.c:1131
-#: ../capplets/background/gnome-wp-capplet.c:1146
 msgid "Tiled"
 msgstr "Mosaic"
 
-#: ../capplets/background/gnome-wp-capplet.c:1170
-#: ../capplets/background/gnome-wp-capplet.c:1179
+#: ../capplets/background/gnome-wp-capplet.c:1155
+#: ../capplets/background/gnome-wp-capplet.c:1164
 msgid "Solid Color"
 msgstr "Color sòlid"
 
-#: ../capplets/background/gnome-wp-capplet.c:1187
-#: ../capplets/background/gnome-wp-capplet.c:1196
+#: ../capplets/background/gnome-wp-capplet.c:1172
+#: ../capplets/background/gnome-wp-capplet.c:1181
 msgid "Horizontal Gradient"
 msgstr "Degradat horitzontal"
 
-#: ../capplets/background/gnome-wp-capplet.c:1204
-#: ../capplets/background/gnome-wp-capplet.c:1213
+#: ../capplets/background/gnome-wp-capplet.c:1189
+#: ../capplets/background/gnome-wp-capplet.c:1198
 msgid "Vertical Gradient"
 msgstr "Degradat vertical"
 
 #. Create the file chooser dialog stuff here
-#: ../capplets/background/gnome-wp-capplet.c:1260
+#: ../capplets/background/gnome-wp-capplet.c:1247
 msgid "Add Wallpaper"
 msgstr "Afegeix un paper de fons"
 
-#: ../capplets/background/gnome-wp-info.c:49
+#: ../capplets/background/gnome-wp-info.c:57
 msgid "No Wallpaper"
 msgstr "Sense paper de fons"
 
-#: ../capplets/background/gnome-wp-item.c:289
-#: ../capplets/background/gnome-wp-item.c:291
+#: ../capplets/background/gnome-wp-item.c:292
+#: ../capplets/background/gnome-wp-item.c:294
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "píxel"
@@ -474,80 +806,77 @@ msgstr "Aplica els paràmetres i surt"
 #: ../capplets/common/capplet-util.c:243
 #: ../capplets/default-applications/gnome-default-applications-properties.c:765
 #: ../capplets/keyboard/gnome-keyboard-properties.c:225
-#: ../capplets/mouse/gnome-mouse-properties.c:812
+#: ../capplets/mouse/gnome-mouse-properties.c:999
 #: ../capplets/sound/sound-properties-capplet.c:244
 msgid "Retrieve and store legacy settings"
 msgstr "Recupera i desa els paràmetres originals"
 
-#: ../capplets/common/file-transfer-dialog.c:95
+#: ../capplets/common/file-transfer-dialog.c:94
 #, c-format
-msgid "%i of %i"
-msgstr "%i de %i"
+msgid "Copying file: %i of %i"
+msgstr "S'està copiant el fitxer: %i de %i"
 
-#: ../capplets/common/file-transfer-dialog.c:119
+#: ../capplets/common/file-transfer-dialog.c:122
 #, c-format
-msgid "Transferring: %s"
-msgstr "S'està transferint: %s"
+msgid "Copying '%s'"
+msgstr "S'està copiant '%s'"
 
-#: ../capplets/common/file-transfer-dialog.c:126
-#, c-format
-msgid "From: %s"
-msgstr "Des de: %s"
-
-#: ../capplets/common/file-transfer-dialog.c:134
-#, c-format
-msgid "To: %s"
-msgstr "A: %s"
-
-#: ../capplets/common/file-transfer-dialog.c:185
+#: ../capplets/common/file-transfer-dialog.c:193
 msgid "From URI"
-msgstr "Des de URI"
+msgstr "Des de la URI"
 
-#: ../capplets/common/file-transfer-dialog.c:186
+#: ../capplets/common/file-transfer-dialog.c:194
 msgid "URI currently transferring from"
 msgstr "URI de la que s'està transferint actualment"
 
-#: ../capplets/common/file-transfer-dialog.c:193
+#: ../capplets/common/file-transfer-dialog.c:201
 msgid "To URI"
 msgstr "A URI"
 
-#: ../capplets/common/file-transfer-dialog.c:194
+#: ../capplets/common/file-transfer-dialog.c:202
 msgid "URI currently transferring to"
 msgstr "URI a la que s'està transferint actualment"
 
-#: ../capplets/common/file-transfer-dialog.c:201
+#: ../capplets/common/file-transfer-dialog.c:209
 msgid "Fraction completed"
 msgstr "Fracció completada"
 
-#: ../capplets/common/file-transfer-dialog.c:202
+#: ../capplets/common/file-transfer-dialog.c:210
 msgid "Fraction of transfer currently completed"
 msgstr "Fracció de la transferència completada actualment"
 
-#: ../capplets/common/file-transfer-dialog.c:209
+#: ../capplets/common/file-transfer-dialog.c:217
 msgid "Current URI index"
 msgstr "Índex URI actual"
 
-#: ../capplets/common/file-transfer-dialog.c:210
+#: ../capplets/common/file-transfer-dialog.c:218
 msgid "Current URI index - starts from 1"
 msgstr "Índex URI actual - comença des de 1"
 
-#: ../capplets/common/file-transfer-dialog.c:217
+#: ../capplets/common/file-transfer-dialog.c:225
 msgid "Total URIs"
 msgstr "URI totals"
 
-#: ../capplets/common/file-transfer-dialog.c:218
+#: ../capplets/common/file-transfer-dialog.c:226
 msgid "Total number of URIs"
 msgstr "Nombre total d'URI"
 
-#: ../capplets/common/file-transfer-dialog.c:372
-#: ../capplets/common/file-transfer-dialog.c:374
+#: ../capplets/common/file-transfer-dialog.c:327
+#: ../capplets/common/file-transfer-dialog.c:369
+msgid "Copying files"
+msgstr "S'està copiant fitxers"
+
+#: ../capplets/common/file-transfer-dialog.c:345
+msgid "From:"
+msgstr "Des de:"
+
+#: ../capplets/common/file-transfer-dialog.c:349
+msgid "To:"
+msgstr "A:"
+
+#: ../capplets/common/file-transfer-dialog.c:448
 msgid "Connecting..."
 msgstr "S'està connectant..."
-
-#: ../capplets/common/file-transfer-dialog.c:379
-#: ../capplets/common/file-transfer-dialog.c:381
-msgid "Downloading..."
-msgstr "S'esta descarregant..."
 
 #: ../capplets/common/gconf-property-editor.c:170
 msgid "Key"
@@ -586,7 +915,7 @@ msgid ""
 "Callback to be issued when data are to be converted from GConf to the widget"
 msgstr ""
 "La crida de retorn que s'emetrà quan les dades es converteixin des del GConf "
-"cap el giny"
+"cap al giny"
 
 #: ../capplets/common/gconf-property-editor.c:195
 msgid "Conversion from widget callback"
@@ -617,15 +946,15 @@ msgstr ""
 
 #: ../capplets/common/gconf-property-editor.c:224
 msgid "Property editor data freeing callback"
-msgstr "Les dades de l'editor de propietats lliurant crida de retorn"
+msgstr "Crida de retorn que allibera les dades de l'editor de propietats"
 
 #: ../capplets/common/gconf-property-editor.c:225
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr ""
 "Crida de retorn que s'emetrà quan les dades objecte de l'editor de "
-"propietats es lliurin"
+"propietats es lliuri"
 
-#: ../capplets/common/gconf-property-editor.c:1545
+#: ../capplets/common/gconf-property-editor.c:1466
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -638,7 +967,7 @@ msgstr ""
 "Assegureu-vos de que existeix i intenteu-ho de nou, o escolliu una imatge de "
 "fons diferent."
 
-#: ../capplets/common/gconf-property-editor.c:1553
+#: ../capplets/common/gconf-property-editor.c:1474
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -646,17 +975,17 @@ msgid ""
 "\n"
 "Please select a different picture instead."
 msgstr ""
-"No se sap com obrir el fitxer «%s».\n"
-"Pot ser que es tracti d'un tipus d'imatge que no està suportada.\n"
+"No es pot obrir el fitxer «%s».\n"
+"Pot ser que es tracti d'un tipus d'imatge que no està suportat.\n"
 "\n"
-"Seleccioneu una altre imatge."
+"Seleccioneu una altra imatge."
 
-#: ../capplets/common/gconf-property-editor.c:1672
+#: ../capplets/common/gconf-property-editor.c:1593
 msgid "Please select an image."
 msgstr "Seleccioneu una imatge."
 
 #
-#: ../capplets/common/gconf-property-editor.c:1677
+#: ../capplets/common/gconf-property-editor.c:1598
 msgid "_Select"
 msgstr "_Selecciona"
 
@@ -747,45 +1076,46 @@ msgid "KMail"
 msgstr "KMail"
 
 #: ../capplets/default-applications/gnome-default-applications-properties-structs.c:44
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:45
 msgid "Thunderbird"
 msgstr "Thunderbird"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:45
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:46
 msgid "Mozilla Mail"
 msgstr "Mozilla Mail"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:46
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:47
 msgid "Mutt"
 msgstr "Mutt"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:57
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:58
 msgid "Debian Terminal Emulator"
 msgstr "Emulador de terminal de Debian"
 
 #
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:58
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:59
 msgid "GNOME Terminal"
 msgstr "Terminal del GNOME"
 
 #
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:59
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:60
 msgid "Standard XTerminal"
 msgstr "XTerminal estàndard"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:60
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:61
 msgid "NXterm"
 msgstr "NXterm"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:61
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:62
 msgid "RXVT"
 msgstr "RXVT"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:62
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:63
 msgid "aterm"
 msgstr "aterm"
 
 #
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:63
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:64
 msgid "ETerm"
 msgstr "ETerm"
 
@@ -940,44 +1270,44 @@ msgstr "Canvia la resolució de la pantalla"
 msgid "Screen Resolution"
 msgstr "Resolució de la pantalla"
 
-#: ../capplets/display/main.c:333
+#: ../capplets/display/main.c:345
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../capplets/display/main.c:436
+#: ../capplets/display/main.c:448
 msgid "_Resolution:"
 msgstr "_Resolució:"
 
-#: ../capplets/display/main.c:455
+#: ../capplets/display/main.c:467
 msgid "Re_fresh rate:"
 msgstr "Ràtio de re_fresc:"
 
-#: ../capplets/display/main.c:476
+#: ../capplets/display/main.c:488
 msgid "Default Settings"
 msgstr "Configuració per defecte"
 
 #
-#: ../capplets/display/main.c:478
+#: ../capplets/display/main.c:490
 #, c-format
 msgid "Screen %d Settings\n"
 msgstr "Configuració de la pantalla %d\n"
 
 #
-#: ../capplets/display/main.c:504
+#: ../capplets/display/main.c:516
 msgid "Screen Resolution Preferences"
 msgstr "Preferències de la resolució de la pantalla"
 
-#: ../capplets/display/main.c:541
+#: ../capplets/display/main.c:553
 #, c-format
 msgid "_Make default for this computer (%s) only"
 msgstr "_Fes-lo el valor predeterminat només per a aquest ordinador (%s)"
 
-#: ../capplets/display/main.c:559
+#: ../capplets/display/main.c:571
 msgid "Options"
 msgstr "Opcions"
 
-#: ../capplets/display/main.c:580
+#: ../capplets/display/main.c:592
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d second the previous "
@@ -992,31 +1322,31 @@ msgstr[1] ""
 "S'està provant la nova configuració. Si no l'accepteu d'aquí a %d segons, es "
 "restaurarà l'anterior configuració."
 
-#: ../capplets/display/main.c:626
+#: ../capplets/display/main.c:638
 msgid "Keep Resolution"
 msgstr "Conserva la resolució"
 
-#: ../capplets/display/main.c:630
+#: ../capplets/display/main.c:642
 msgid "Do you want to keep this resolution?"
 msgstr "Voleu conservar aquesta resolució?"
 
-#: ../capplets/display/main.c:655
+#: ../capplets/display/main.c:667
 msgid "Use _previous resolution"
 msgstr "Utilitza la resolució _anterior"
 
-#: ../capplets/display/main.c:655
+#: ../capplets/display/main.c:667
 msgid "_Keep resolution"
 msgstr "_Conserva la resolució"
 
-#: ../capplets/display/main.c:806
+#: ../capplets/display/main.c:818
 msgid ""
 "The X Server does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
 msgstr ""
 "El servidor d'X no implementa l'extensió XRandR. Els canvis de la resolució "
-"en execució a la mida de la visualitzación no estan disponibles."
+"en execució a la mida de la visualització no estan disponibles."
 
-#: ../capplets/display/main.c:814
+#: ../capplets/display/main.c:826
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
@@ -1091,96 +1421,77 @@ msgid "R_esolution:"
 msgstr "R_esolució:"
 
 #: ../capplets/font/font-properties.glade.h:15
-msgid "Set the font for applications"
-msgstr "Configura el tipus de lletra de les aplicacions"
-
-#: ../capplets/font/font-properties.glade.h:16
-msgid "Set the font for the icons on the desktop"
-msgstr "Configura el tipus de lletra de les icones de l'escriptori"
-
-#: ../capplets/font/font-properties.glade.h:17
-msgid "Set the monospace font for terminals and similar applications"
-msgstr ""
-"Estableix la font d'amplada fixa per a terminals i aplicacions similars"
-
-#: ../capplets/font/font-properties.glade.h:18
 msgid "Sub_pixel (LCDs)"
 msgstr "Sub_píxel (LCD)"
 
-#: ../capplets/font/font-properties.glade.h:19
+#: ../capplets/font/font-properties.glade.h:16
 msgid "Sub_pixel smoothing (LCDs)"
 msgstr "Suavitzat de sub_píxels (LCD)"
 
-#: ../capplets/font/font-properties.glade.h:20
+#: ../capplets/font/font-properties.glade.h:17
 msgid "VB_GR"
 msgstr "VB_GR"
 
-#: ../capplets/font/font-properties.glade.h:21
+#: ../capplets/font/font-properties.glade.h:18
 msgid "_Application font:"
 msgstr "Tipus de lletra de les _aplicacions:"
 
-#: ../capplets/font/font-properties.glade.h:22
+#: ../capplets/font/font-properties.glade.h:19
 msgid "_BGR"
 msgstr "_BGR"
 
 #
-#: ../capplets/font/font-properties.glade.h:23
+#: ../capplets/font/font-properties.glade.h:20
 msgid "_Desktop font:"
-msgstr "Tipus de lletra de l'escrip_tori"
+msgstr "Tipus de lletra de l'escrip_tori:"
 
 #
-#: ../capplets/font/font-properties.glade.h:24
+#: ../capplets/font/font-properties.glade.h:21
 msgid "_Full"
 msgstr "_Complet"
 
-#: ../capplets/font/font-properties.glade.h:25
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:22
+#: ../capplets/font/font-properties.glade.h:22
 msgid "_Medium"
 msgstr "_Mitjà"
 
-#: ../capplets/font/font-properties.glade.h:26
+#: ../capplets/font/font-properties.glade.h:23
 msgid "_Monochrome"
-msgstr "_Monocrom"
+msgstr "Mon_ocrom"
 
-#: ../capplets/font/font-properties.glade.h:27
+#: ../capplets/font/font-properties.glade.h:24
 msgid "_None"
 msgstr "_Cap"
 
-#: ../capplets/font/font-properties.glade.h:28
+#: ../capplets/font/font-properties.glade.h:25
 msgid "_RGB"
 msgstr "_RGB"
 
-#: ../capplets/font/font-properties.glade.h:29
+#: ../capplets/font/font-properties.glade.h:26
 msgid "_Slight"
 msgstr "_Lleuger"
 
 #
-#: ../capplets/font/font-properties.glade.h:30
+#: ../capplets/font/font-properties.glade.h:27
 msgid "_Terminal font:"
 msgstr "Tipus de lletra del _terminal:"
 
-#
-#: ../capplets/font/font-properties.glade.h:31
-msgid "_Use Font"
-msgstr "_Utilitza el tipus de lletra"
-
-#: ../capplets/font/font-properties.glade.h:32
+#: ../capplets/font/font-properties.glade.h:28
 msgid "_VRGB"
 msgstr "_VRGB"
 
-#: ../capplets/font/font-properties.glade.h:33
+#: ../capplets/font/font-properties.glade.h:29
 msgid "_Window title font:"
 msgstr "Tipus de lletra del títol de les _finestres:"
 
-#: ../capplets/font/font-properties.glade.h:34
+#: ../capplets/font/font-properties.glade.h:30
 msgid "dots per inch"
 msgstr "punts per polzada"
 
-#: ../capplets/font/main.c:506 ../capplets/font/main.c:513
+#: ../capplets/font/main.c:488
 msgid "Font may be too large"
 msgstr "El tipus de lletra pot ser massa gran"
 
-#: ../capplets/font/main.c:507
+#: ../capplets/font/main.c:492
 #, c-format
 msgid ""
 "The font selected is %d point large, and may make it difficult to "
@@ -1188,18 +1499,18 @@ msgid ""
 "smaller than %d."
 msgid_plural ""
 "The font selected is %d points large, and may make it difficult to "
-"effectively use the computer.  It is recommended that you select a size "
+"effectively use the computer. It is recommended that you select a size "
 "smaller than %d."
 msgstr[0] ""
-"El tipus de lletra seleccionat té una mida de %d punt, i pot fer que siga "
-"difícil l'ús de l'ordinador. Es recomana que utilitzeu una mida per sota de %"
+"El tipus de lletra seleccionat té una mida de %d punt, i pot fer que sigui "
+"difícil fer servir l'ordinador. Es recomana que utilitzeu una mida per sota de %"
 "d."
 msgstr[1] ""
-"El tipus de lletra seleccionat té una mida de %d punts, i pot fer que siga "
-"difícil l'ús de l'ordinador. Es recomana que utilitzeu una mida per sota de %"
+"El tipus de lletra seleccionat té una mida de %d punts, i pot fer que sigui "
+"difícil fer servir l'ordinador. Es recomana que utilitzeu una mida per sota de %"
 "d."
 
-#: ../capplets/font/main.c:514
+#: ../capplets/font/main.c:505
 #, c-format
 msgid ""
 "The font selected is %d point large, and may make it difficult to "
@@ -1207,14 +1518,14 @@ msgid ""
 "sized font."
 msgid_plural ""
 "The font selected is %d points large, and may make it difficult to "
-"effectively use the computer.  It is recommended that you select a smaller "
+"effectively use the computer. It is recommended that you select a smaller "
 "sized font."
 msgstr[0] ""
-"El tipus de lletra seleccionat té una mida de %d punt, i pot fer que siga "
-"difícil l'ús de l'ordinador. Es recomana que utilitzeu una font més petita."
+"El tipus de lletra seleccionat té una mida de %d punt, i pot fer que sigui "
+"difícil fer servir l'ordinador. Es recomana que utilitzeu una mida més petita."
 msgstr[1] ""
-"El tipus de lletra seleccionat té una mida de %d punts, i pot fer que siga "
-"difícil l'ús de l'ordinador. Es recomana que utilitzeu una font més petita."
+"El tipus de lletra seleccionat té una mida de %d punts, i pot fer que sigui "
+"difícil fer servir l'ordinador. Es recomana que utilitzeu una mida més petita."
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:21
 msgid "New accelerator..."
@@ -1248,30 +1559,30 @@ msgstr "El tipus d'accelerador."
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
 #: ../capplets/keybindings/gnome-keybinding-properties.c:197
-#: ../libbackground/applier.c:757 ../typing-break/drwright.c:473
+#: ../libbackground/applier.c:624 ../typing-break/drwright.c:477
 msgid "Disabled"
 msgstr "Inhabilitat"
 
 #
-#: ../capplets/keybindings/gnome-keybinding-properties.c:539
+#: ../capplets/keybindings/gnome-keybinding-properties.c:545
 msgid "<Unknown Action>"
 msgstr "<Acció Desconeguda>"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:558
+#: ../capplets/keybindings/gnome-keybinding-properties.c:566
 msgid "Desktop"
 msgstr "Escriptori"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:559
+#: ../capplets/keybindings/gnome-keybinding-properties.c:567
 #: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
 msgid "Sound"
 msgstr "So"
 
 #
-#: ../capplets/keybindings/gnome-keybinding-properties.c:563
+#: ../capplets/keybindings/gnome-keybinding-properties.c:571
 msgid "Window Management"
 msgstr "Gestió de finestres"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:660
+#: ../capplets/keybindings/gnome-keybinding-properties.c:668
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1280,27 +1591,27 @@ msgstr ""
 "La drecera «%s» ja s'utilitza per a:\n"
 " «%s»\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:692
+#: ../capplets/keybindings/gnome-keybinding-properties.c:700
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr ""
 "S'ha produït un error en establir un nou accelerador en la base de dades de "
 "la configuració: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:742
+#: ../capplets/keybindings/gnome-keybinding-properties.c:750
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr ""
-"S'ha produït un error en desestablir un accelerador en la base de dades de "
+"S'ha produït un error en netejar un accelerador en la base de dades de "
 "la configuració: %s\n"
 
 #
-#: ../capplets/keybindings/gnome-keybinding-properties.c:849
+#: ../capplets/keybindings/gnome-keybinding-properties.c:857
 msgid "Action"
 msgstr "Acció"
 
 #
-#: ../capplets/keybindings/gnome-keybinding-properties.c:873
+#: ../capplets/keybindings/gnome-keybinding-properties.c:881
 msgid "Shortcut"
 msgstr "Drecera"
 
@@ -1314,20 +1625,19 @@ msgid ""
 "To edit a shortcut key, click on the corresponding row and type a new "
 "accelerator, or press backspace to clear."
 msgstr ""
-"Per editar una drecera, feu clic en la fila corresponent i teclegeu un "
+"Per editar una drecera, feu clic en la fila corresponent i premeu un "
 "accelerador nou, o premeu la tecla de retrocés per a netejar."
 
 #: ../capplets/keybindings/keybinding.desktop.in.in.h:1
 msgid "Assign shortcut keys to commands"
 msgstr "Assigna dreceres a ordres"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkb.c:69
-#: ../capplets/keyboard/gnome-keyboard-properties-xkb.c:95
+#: ../capplets/keyboard/gnome-keyboard-properties-xkb.c:84
 msgid "Unknown"
 msgstr "Desconegut"
 
 #
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:251
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:273
 msgid "Layout"
 msgstr "Format"
 
@@ -1335,8 +1645,8 @@ msgstr "Format"
 #. the below options are to be included in the selected list.
 #. This is a HIG-compliant alternative to allowing no
 #. selection in the group.
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:255
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:206
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:277
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:228
 msgid "Default"
 msgstr "Predeterminat"
 
@@ -1348,7 +1658,7 @@ msgstr "Models"
 #: ../capplets/keyboard/gnome-keyboard-properties.c:106
 #, c-format
 msgid "There was an error launching the keyboard capplet : %s"
-msgstr "S'ha produït un error en executar la capplet del teclat: %s"
+msgstr "S'ha produït un error en executar l'aplicació de configuració del teclat: %s"
 
 #
 #: ../capplets/keyboard/gnome-keyboard-properties.c:202
@@ -1528,71 +1838,62 @@ msgstr "minuts"
 msgid "Set your keyboard preferences"
 msgstr "Estableix les preferències del teclat"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:496
+#: ../capplets/mouse/gnome-mouse-properties.c:552
 msgid "Unknown Cursor"
 msgstr "Cursor desconegut"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:613
+#
+#: ../capplets/mouse/gnome-mouse-properties.c:739
+msgid "Default Cursor"
+msgstr "Cursor per defecte"
+
+#: ../capplets/mouse/gnome-mouse-properties.c:740
 msgid "Default Cursor - Current"
 msgstr "Cursor per defecte - Actual"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:613
-#: ../capplets/mouse/gnome-mouse-properties.c:616
+#: ../capplets/mouse/gnome-mouse-properties.c:741
 msgid "The default cursor that ships with X"
 msgstr "El cursor per defecte que s'envia amb X"
 
 #
-#: ../capplets/mouse/gnome-mouse-properties.c:616
-msgid "Default Cursor"
-msgstr "Cursor per defecte"
+#: ../capplets/mouse/gnome-mouse-properties.c:745
+msgid "White Cursor"
+msgstr "Cursor blanc"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:634
+#: ../capplets/mouse/gnome-mouse-properties.c:746
 msgid "White Cursor - Current"
 msgstr "Cursor blanc - Actual"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:634
-#: ../capplets/mouse/gnome-mouse-properties.c:637
+#: ../capplets/mouse/gnome-mouse-properties.c:747
 msgid "The default cursor inverted"
 msgstr "El cursor per defecte invertit"
 
 #
-#: ../capplets/mouse/gnome-mouse-properties.c:637
-msgid "White Cursor"
-msgstr "Cursor blanc"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:656
-msgid "Large Cursor - Current"
-msgstr "Cursor gran - Actual"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:656
-#: ../capplets/mouse/gnome-mouse-properties.c:659
-msgid "Large version of normal cursor"
-msgstr "La versió gran del cursor normal"
-
-#
-#: ../capplets/mouse/gnome-mouse-properties.c:659
+#: ../capplets/mouse/gnome-mouse-properties.c:751
 msgid "Large Cursor"
 msgstr "Cursor gran"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:678
+#: ../capplets/mouse/gnome-mouse-properties.c:752
+msgid "Large Cursor - Current"
+msgstr "Cursor gran - Actual"
+
+#: ../capplets/mouse/gnome-mouse-properties.c:753
+msgid "Large version of normal cursor"
+msgstr "La versió gran del cursor normal"
+
+#: ../capplets/mouse/gnome-mouse-properties.c:757
 msgid "Large White Cursor - Current"
 msgstr "Cursor blanc gran - Actual"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:678
-#: ../capplets/mouse/gnome-mouse-properties.c:681
-msgid "Large version of white cursor"
-msgstr "La versió gran del cursor blanc"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:681
+#: ../capplets/mouse/gnome-mouse-properties.c:758
 msgid "Large White Cursor"
 msgstr "Cursor blanc gran"
 
-#
-#: ../capplets/mouse/gnome-mouse-properties.c:753
-msgid "Cursor Size"
-msgstr "Mida del cursor"
+#: ../capplets/mouse/gnome-mouse-properties.c:759
+msgid "Large version of white cursor"
+msgstr "La versió gran del cursor blanc"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:762
+#: ../capplets/mouse/gnome-mouse-properties.c:953
 msgid "Cursor Theme"
 msgstr "Tema del cursor"
 
@@ -1617,40 +1918,37 @@ msgid "<b>Speed</b>"
 msgstr "<b>Velocitat</b>"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:7
-msgid ""
-"<i><small><b>Note:</b> Changes to this setting will not take effect until "
-"next time you log in.</small></i>"
-msgstr ""
-"<i><small><b>Nota:</b> Els canvis a aquesta configuració no tindran efecte "
-"fins que no torneu a entrar.</small></i>"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid "<i>Fast</i>"
 msgstr "<i>Ràpid</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:9
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid "<i>High</i>"
 msgstr "<i>Alt</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:10
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:9
 msgid "<i>Large</i>"
 msgstr "<i>Gran</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:11
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:10
 msgid "<i>Low</i>"
 msgstr "<i>Baix</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:12
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:11
 msgid "<i>Slow</i>"
 msgstr "<i>Lent</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:13
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:12
 msgid "<i>Small</i>"
 msgstr "<i>Petit</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:14
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:13
 msgid "Buttons"
 msgstr "Botons"
+
+#
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:14
+msgid "Cursor Size:"
+msgstr "Mida del cursor:"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:15
 msgid "Cursors"
@@ -1661,33 +1959,37 @@ msgid "Highlight the _pointer when you press Ctrl"
 msgstr "Ressalta el _punter quan es premi Ctrl"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:17
+msgid "Large"
+msgstr "Gran"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
+msgid "Medium"
+msgstr "Mitjà"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
 msgid "Motion"
 msgstr "Moviment"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:20
 msgid "Mouse Preferences"
 msgstr "Preferències del ratolí"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
+#
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:21
+msgid "Small"
+msgstr "Petit"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:22
 msgid "_Acceleration:"
 msgstr "_Acceleració:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:20
-msgid "_Large"
-msgstr "_Gran"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:21
-msgid "_Left-handed mouse"
-msgstr "Rato_lí per esquerrans"
-
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:23
+msgid "_Left-handed mouse"
+msgstr "Rato_lí per a esquerrans"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:24
 msgid "_Sensitivity:"
 msgstr "_Sensibilitat:"
-
-#
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:24
-msgid "_Small"
-msgstr "_Petit"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:25
 msgid "_Threshold:"
@@ -1717,8 +2019,12 @@ msgstr "Establiu les preferències del servidor intermediari de xarxa"
 msgid "      "
 msgstr "      "
 
+#: ../capplets/network/gnome-network-preferences.glade.h:2
+msgid "<b>D_irect internet connection</b>"
+msgstr "<b>Connexió directa a _internet</b>"
+
 #: ../capplets/network/gnome-network-preferences.glade.h:3
-msgid "<b>Ignore host list</b>"
+msgid "<b>Ignore Host List</b>"
 msgstr "<b>Llista d'ordindors a ignorar</b>"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:4
@@ -1726,69 +2032,65 @@ msgid "<b>_Automatic proxy configuration</b>"
 msgstr "<b>Configuració _automàtica del servidor intermediari</b>"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:5
-msgid "<b>_Direct internet connection</b>"
-msgstr "<b>Connexió _directa a internet</b>"
-
-#: ../capplets/network/gnome-network-preferences.glade.h:6
 msgid "<b>_Manual proxy configuration</b>"
 msgstr "<b>Configuració _manual del servidor intermediari</b>"
 
-#: ../capplets/network/gnome-network-preferences.glade.h:7
+#: ../capplets/network/gnome-network-preferences.glade.h:6
 msgid "<b>_Use authentication</b>"
 msgstr "<b>_Utilitza autenticació</b>"
 
 #
-#: ../capplets/network/gnome-network-preferences.glade.h:8
+#: ../capplets/network/gnome-network-preferences.glade.h:7
 msgid "Advanced Configuration"
 msgstr "Configuracions avançades"
 
-#: ../capplets/network/gnome-network-preferences.glade.h:9
+#: ../capplets/network/gnome-network-preferences.glade.h:8
 msgid "Autoconfiguration _URL:"
 msgstr "_URL d'autoconfiguració:"
 
-#: ../capplets/network/gnome-network-preferences.glade.h:10
+#: ../capplets/network/gnome-network-preferences.glade.h:9
 msgid "HTTP Proxy Details"
-msgstr "Detalls del servidor intermediari d'HTTP"
+msgstr "Detalls del servidor intermediari de HTTP"
+
+#: ../capplets/network/gnome-network-preferences.glade.h:10
+msgid "H_TTP proxy:"
+msgstr "Servidor intermediari de H_TTP:"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:11
-msgid "H_TTP proxy:"
-msgstr "Servidor intermediari d'H_TTP:"
-
-#: ../capplets/network/gnome-network-preferences.glade.h:12
 msgid "Network Proxy Preferences"
 msgstr "Preferències del servidor intermediari de xarxa"
 
-#: ../capplets/network/gnome-network-preferences.glade.h:13
+#: ../capplets/network/gnome-network-preferences.glade.h:12
 msgid "Port:"
 msgstr "Port:"
 
-#: ../capplets/network/gnome-network-preferences.glade.h:14
+#: ../capplets/network/gnome-network-preferences.glade.h:13
 msgid "Proxy Configuration"
 msgstr "Configuració del servidor intermediari"
 
-#: ../capplets/network/gnome-network-preferences.glade.h:15
+#: ../capplets/network/gnome-network-preferences.glade.h:14
 msgid "S_ocks host:"
 msgstr "Servidor de s_ocks:"
 
-#: ../capplets/network/gnome-network-preferences.glade.h:16
+#: ../capplets/network/gnome-network-preferences.glade.h:15
 msgid "U_sername:"
 msgstr "Nom d'u_suari:"
 
-#: ../capplets/network/gnome-network-preferences.glade.h:17
+#: ../capplets/network/gnome-network-preferences.glade.h:16
 msgid "_Details"
 msgstr "_Detalls"
 
-#: ../capplets/network/gnome-network-preferences.glade.h:18
+#: ../capplets/network/gnome-network-preferences.glade.h:17
 msgid "_FTP proxy:"
-msgstr "Servidor intermediari d'_FTP:"
+msgstr "Servidor intermediari de _FTP:"
 
-#: ../capplets/network/gnome-network-preferences.glade.h:19
+#: ../capplets/network/gnome-network-preferences.glade.h:18
 msgid "_Password:"
 msgstr "_Contrasenya:"
 
-#: ../capplets/network/gnome-network-preferences.glade.h:20
+#: ../capplets/network/gnome-network-preferences.glade.h:19
 msgid "_Secure HTTP proxy:"
-msgstr "Servidor intermediari d'HTTP _segur:"
+msgstr "Servidor intermediari de HTTP _segur:"
 
 #
 #: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:1
@@ -1797,8 +2099,9 @@ msgstr "Habilita les incidències sonores i associa sons amb incidències"
 
 #
 #: ../capplets/sound/sound-properties-capplet.c:271
-msgid "Sound preferences"
-msgstr "Preferències de So"
+#: ../capplets/sound/sound-properties.glade.h:6
+msgid "Sound Preferences"
+msgstr "Preferències de so"
 
 #
 #: ../capplets/sound/sound-properties.glade.h:1
@@ -1823,11 +2126,6 @@ msgstr "General"
 msgid "Sound Events"
 msgstr "Events de so"
 
-#
-#: ../capplets/sound/sound-properties.glade.h:6
-msgid "Sound Preferences"
-msgstr "Preferències de so"
-
 #: ../capplets/sound/sound-properties.glade.h:7
 msgid "System Bell"
 msgstr "Efecte sonor"
@@ -1839,20 +2137,20 @@ msgstr "Fes _sonar un senyal"
 #
 #: ../capplets/sound/sound-properties.glade.h:9
 msgid "_Sounds for events"
-msgstr "_Sons pels esdeveniments"
+msgstr "_Sons per als esdeveniments"
 
 #: ../capplets/sound/sound-properties.glade.h:10
 msgid "_Visual feedback:"
 msgstr "Resposta _visual:"
 
-#: ../capplets/theme-switcher/gnome-theme-details.c:349
+#: ../capplets/theme-switcher/gnome-theme-details.c:347
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
 "installed the \"gnome-themes\" package."
 msgstr ""
-"No s'ha trobat cap tema en aquest sistema. Això probablement significa que "
-"el diàleg de «Preferències dels temes» s'hagi instal·lat incorrectament, o "
+"No s'ha trobat cap tema en aquest sistema. Probablement es deu a que "
+"el diàleg de «Preferències dels temes» s'ha instal·lat incorrectament, o "
 "no s'ha instal·lat el paquet «gnome-themes»."
 
 #: ../capplets/theme-switcher/gnome-theme-installer.c:227
@@ -1897,7 +2195,7 @@ msgstr ""
 #: ../capplets/theme-switcher/gnome-theme-installer.c:343
 #, c-format
 msgid "Gnome Theme %s correctly installed"
-msgstr "S'ha instal·lat correctament el tema del Gnome %s"
+msgstr "S'ha instal·lat correctament el tema del GNOME «%s»"
 
 #: ../capplets/theme-switcher/gnome-theme-installer.c:346
 #, c-format
@@ -1940,7 +2238,7 @@ msgid ""
 "Insufficient permissions to install the theme in:\n"
 "%s"
 msgstr ""
-"No teniu prou permisos per instal·lar el tema a:\n"
+"No teniu prou permisos per a instal·lar el tema a:\n"
 "%s"
 
 #: ../capplets/theme-switcher/gnome-theme-installer.c:526
@@ -1964,15 +2262,15 @@ msgstr ""
 "No es pot instal·lar el tema.\n"
 "El programa tar no està instal·lat en aquest sistema."
 
-#: ../capplets/theme-switcher/gnome-theme-manager.c:676
+#: ../capplets/theme-switcher/gnome-theme-manager.c:680
 msgid "Custom theme"
 msgstr "Tema personalitzat"
 
-#: ../capplets/theme-switcher/gnome-theme-manager.c:676
+#: ../capplets/theme-switcher/gnome-theme-manager.c:680
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "Podeu desar aquest tema prement el botó «Desa el tema»."
 
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1466
+#: ../capplets/theme-switcher/gnome-theme-manager.c:1476
 msgid ""
 "The default theme schemas could not be found on your system.  This means "
 "that you probably don't have metacity installed, or that your gconf is "
@@ -2131,7 +2429,7 @@ msgstr "<b>Previsualització</b>"
 
 #: ../capplets/ui-properties/gnome-ui-properties.glade.h:4
 msgid "C_ut"
-msgstr "Ta_lla"
+msgstr "Reta_lla"
 
 #: ../capplets/ui-properties/gnome-ui-properties.glade.h:5
 msgid "Icons only"
@@ -2171,8 +2469,8 @@ msgid "Text only"
 msgstr "Només text"
 
 #: ../capplets/ui-properties/gnome-ui-properties.glade.h:14
-msgid "Toolbar _button labels: "
-msgstr "Etiquetes dels _botons: "
+msgid "Toolbar _button labels:"
+msgstr "Etiquetes del _botó de la barra d'eines:"
 
 #: ../capplets/ui-properties/gnome-ui-properties.glade.h:15
 msgid "_Copy"
@@ -2222,7 +2520,7 @@ msgstr "_Surt"
 msgid "_Save"
 msgstr "_Desa"
 
-#: ../capplets/windows/gnome-window-properties.c:388
+#: ../capplets/windows/gnome-window-properties.c:386
 #, c-format
 msgid ""
 "<b>Cannot start the preferences application for your window manager</b>\n"
@@ -2234,23 +2532,23 @@ msgstr ""
 "\n"
 "%s"
 
-#: ../capplets/windows/gnome-window-properties.c:648
+#: ../capplets/windows/gnome-window-properties.c:644
 msgid "Control"
 msgstr "Control"
 
-#: ../capplets/windows/gnome-window-properties.c:653
+#: ../capplets/windows/gnome-window-properties.c:649
 msgid "Alt"
 msgstr "Alt"
 
-#: ../capplets/windows/gnome-window-properties.c:659
+#: ../capplets/windows/gnome-window-properties.c:655
 msgid "Hyper"
 msgstr "Hiper"
 
-#: ../capplets/windows/gnome-window-properties.c:666
+#: ../capplets/windows/gnome-window-properties.c:662
 msgid "Super (or \"Windows logo\")"
 msgstr "Súper (o «logotip del Windows»)"
 
-#: ../capplets/windows/gnome-window-properties.c:673
+#: ../capplets/windows/gnome-window-properties.c:669
 msgid "Meta"
 msgstr "Meta"
 
@@ -2268,11 +2566,12 @@ msgstr "<b>Selecció de finestra</b>"
 
 # Agarreu... si soc de l'horta jo... jm
 # Solució de compromís :) josep
+# A veure jo :O xavi
 #: ../capplets/windows/gnome-window-properties.glade.h:4
 msgid "To _move a window, press-and-hold this key then grab the window:"
 msgstr ""
-"Per a _moure una finestra, premeu i manteniu aquesta tecla i després "
-"seleccioneu la finestra:"
+"Per a _moure una finestra, mantingueu premuda aquesta tecla i després "
+"seleccioneu-la:"
 
 #: ../capplets/windows/gnome-window-properties.glade.h:5
 msgid "Window Preferences"
@@ -2306,19 +2605,18 @@ msgid "Windows"
 msgstr "Finestres"
 
 #
-#: ../control-center/control-center-categories.c:249
+#: ../control-center/control-center-categories.c:257
 msgid "Others"
 msgstr "Altres"
 
-#: ../control-center/control-center.c:1010
+#
+#: ../control-center/control-center.c:42
+msgid "Desktop Preferences"
+msgstr "Preferències de l'escriptori"
+
 #: ../control-center/gnomecc.desktop.in.in.h:1
 msgid "GNOME Control Center"
 msgstr "Centre de control del GNOME"
-
-#
-#: ../control-center/control-center.c:1126
-msgid "Desktop Preferences"
-msgstr "Preferències de l'escriptori"
 
 #: ../control-center/gnomecc.desktop.in.in.h:2
 #: ../vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:2
@@ -2330,15 +2628,15 @@ msgstr "L'eina de configuració del GNOME"
 msgid "Volume"
 msgstr "Volum"
 
-#: ../gnome-settings-daemon/factory.c:34
+#: ../gnome-settings-daemon/factory.c:36
 msgid "Could not initialize Bonobo"
 msgstr "No s'ha pogut inicialitzar Bonobo"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:397
 msgid "Slow Keys Alert"
 msgstr "Alerta de «tecles lentes»"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:398
 msgid ""
 "You just held down the Shift key for 8 seconds.  This is the shortcut for "
 "the Slow Keys feature, which affects the way your keyboard works."
@@ -2347,19 +2645,19 @@ msgstr ""
 "drecera per a la funcionalitat «tecles lentes», que afecta la forma de "
 "funcionar del teclat."
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:414
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:400
 msgid "Do you want to activate Slow Keys?"
 msgstr "Voleu activar les «tecles lentes»?"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:415
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:401
 msgid "Do you want to deactivate Slow Keys?"
 msgstr "Voleu desactivar les «tecles lentes»?"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:410
 msgid "Sticky Keys Alert"
 msgstr "Alerta de «tecles enganxoses»"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
 msgid ""
 "You just pressed the Shift key 5 times in a row.  This is the shortcut for "
 "the Sticky Keys feature, which affects the way your keyboard works."
@@ -2368,7 +2666,7 @@ msgstr ""
 "per a la funcionalitat «tecles enganxoses», que afecta la forma de funcionar "
 "del teclat."
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
 msgid ""
 "You just pressed two keys at once, or pressed the Shift key 5 times in a "
 "row.  This turns off the Sticky Keys feature, which affects the way your "
@@ -2378,15 +2676,15 @@ msgstr ""
 "seguides. Això desactiva les «tecles enganxoes», que afecten la forma de "
 "funcionar del teclat."
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:429
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:415
 msgid "Do you want to activate Sticky Keys?"
 msgstr "Voleu activar les «tecles enganxoses»?"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:430
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:416
 msgid "Do you want to deactivate Sticky Keys?"
 msgstr "Voleu desactivar les «tecles enganxoses»?"
 
-#: ../gnome-settings-daemon/gnome-settings-font.c:102
+#: ../gnome-settings-daemon/gnome-settings-font.c:106
 #, c-format
 msgid ""
 "Cannot create the directory \"%s\".\n"
@@ -2395,37 +2693,37 @@ msgstr ""
 "No s'ha pogut crear el directori «%s».\n"
 "Es necessita per a poder canviar els cursors."
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:207
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:209
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr "L'assignació de tecla (%s) té l'acció definida múltiples vegades\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:220
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:222
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr "L'assignació de tecla (%s)està definit diverses vegades\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:226
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:228
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr "L'assignació de tecla (%s) és incompleta\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:254
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:256
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr "L'assignació de tecla (%s) no és vàlida\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:290
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:292
 #, c-format
 msgid "It seems that another application already has access to key '%d'."
 msgstr "Sembla que una altra aplicació ja té accés a la tecla «%d»."
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:359
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:361
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr "L'assignació de tecla (%s) ja està en ús\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:434
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:436
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -2434,7 +2732,7 @@ msgstr ""
 "S'ha produït un error en intentar executar (%s)\n"
 "que està enllaçat a la tecla (%s)"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:99
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:103
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2448,8 +2746,8 @@ msgid ""
 "%d\n"
 "%s\n"
 "If you report this situation as a bug, please include:\n"
-"- The result of %s\n"
-"- The result of %s"
+"- The result of <b>%s</b>\n"
+"- The result of <b>%s</b>"
 msgstr ""
 "S'ha produït un error en activar la configuració XKB.\n"
 "Això pot passar per diversos motius:\n"
@@ -2461,15 +2759,15 @@ msgstr ""
 "%s\n"
 "%d\n"
 "%s\n"
-"Si informeu d'aquesta situació en un informe d'error, si us plau, incloeu:\n"
-"- El resultat de %s\n"
-"- El resultat de %s"
+"Si informeu d'aquesta situació en un informe d'error, incloeu:\n"
+"- El resultat de <b>%s</b>\n"
+"- El resultat de <b>%s</b>"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:113
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:117
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
-"Try using simpler configuration or taking more fresh version of XFree "
+"Try using a simpler configuration or taking a fresher version of XFree "
 "software."
 msgstr ""
 "Esteu usant XFree 4.3.0.\n"
@@ -2477,11 +2775,11 @@ msgstr ""
 "Intenteu usar una configuració més simple o usar una versió més moderna del "
 "programari XFree."
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:226
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:227
 msgid "Do _not show this warning again"
 msgstr "_No tornis a mostrar aquest missatge"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:237
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:238
 msgid ""
 "The X system keyboard settings differ from your current GNOME keyboard "
 "settings.  Which set would you like to use?"
@@ -2490,15 +2788,15 @@ msgstr ""
 "paràmetres actuals del teclat. Quins paràmetres voleu utilitzar?"
 
 #
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:247
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:251
 msgid "Use X settings"
 msgstr "Utilitza els paràmetres d'X"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:249
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:253
 msgid "Use GNOME settings"
 msgstr "Utilitza els paràmetres del GNOME"
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:126
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:129
 #, c-format
 msgid ""
 "Couldn't execute command: %s\n"
@@ -2507,7 +2805,7 @@ msgstr ""
 "No s'ha pogut executar l'ordre: %s\n"
 "Verifiqueu que aquesta ordre existeix."
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:142
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:145
 msgid ""
 "Couldn't put the machine to sleep.\n"
 "Verify that the machine is correctly configured."
@@ -2515,12 +2813,12 @@ msgstr ""
 "No s'ha pogut posar l'ordinador a dormir.\n"
 "Comproveu que l'ordinador està configurat correctament."
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:152
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:155
 #, c-format
 msgid "Permissions on the file %s are broken\n"
 msgstr "Els permisos del fitxer %s estan trencats\n"
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:197
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:200
 msgid ""
 "Couldn't load the Glade file.\n"
 "Make sure that this daemon is properly installed."
@@ -2528,7 +2826,7 @@ msgstr ""
 "No s'ha pogut carreglar el fitxer Glade.\n"
 "Assegureu-vos que aquest dimoni esta ben configurat."
 
-#: ../gnome-settings-daemon/gnome-settings-screensaver.c:92
+#: ../gnome-settings-daemon/gnome-settings-screensaver.c:113
 #, c-format
 msgid ""
 "There was an error starting up the screensaver:\n"
@@ -2543,21 +2841,21 @@ msgstr ""
 "\n"
 "La funcionalitat de protecció de pantalla no funcionarà en aquesta sessió."
 
-#: ../gnome-settings-daemon/gnome-settings-screensaver.c:102
+#: ../gnome-settings-daemon/gnome-settings-screensaver.c:123
 msgid "_Do not show this message again"
 msgstr "_No tornis a mostrar aquest missatge"
 
-#: ../gnome-settings-daemon/gnome-settings-sound.c:128
+#: ../gnome-settings-daemon/gnome-settings-sound.c:129
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "No s'ha pogut carregar el fitxer de so %s com una mostra %s"
 
-#: ../gnome-settings-daemon/gnome-settings-xrdb.c:213
-#: ../gnome-settings-daemon/gnome-settings-xrdb.c:261
+#: ../gnome-settings-daemon/gnome-settings-xrdb.c:214
+#: ../gnome-settings-daemon/gnome-settings-xrdb.c:262
 msgid "Cannot determine user's home directory"
 msgstr "No es pot determinar el directori de l'usuari"
 
-#: ../gnome-settings-daemon/gnome-settings-xsettings.c:208
+#: ../gnome-settings-daemon/gnome-settings-xsettings.c:215
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr ""
@@ -2573,12 +2871,12 @@ msgid "Do _not show this warning again."
 msgstr "_No tornis a mostrar aquest missatge"
 
 #: ../gnome-settings-daemon/modmap-dialog.glade.h:3
-msgid "Do you like to load the modmap file(s)?"
-msgstr "Voleu carregar els fitxers modmap?"
-
-#: ../gnome-settings-daemon/modmap-dialog.glade.h:4
 msgid "Load modmap files"
 msgstr "Carrega els fitxers modmap"
+
+#: ../gnome-settings-daemon/modmap-dialog.glade.h:4
+msgid "Would you like to load the modmap file(s)?"
+msgstr "Voleu carregar els fitxers modmap?"
 
 #: ../gnome-settings-daemon/modmap-dialog.glade.h:5
 msgid "_Load"
@@ -2593,11 +2891,11 @@ msgstr "Fitxers _carregats:"
 msgid "Error creating signal pipe."
 msgstr "S'ha produït un error en crear el conducte de senyal."
 
-#: ../libbackground/applier.c:256
+#: ../libbackground/applier.c:255
 msgid "Type"
 msgstr "Tipus"
 
-#: ../libbackground/applier.c:257
+#: ../libbackground/applier.c:256
 msgid ""
 "Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
 "for preview"
@@ -2606,30 +2904,35 @@ msgstr ""
 "APPLIER_PREVIEW per a previsualització"
 
 #
-#: ../libbackground/applier.c:264
+#: ../libbackground/applier.c:263
 msgid "Preview Width"
 msgstr "Amplada de la previsualització"
 
-#: ../libbackground/applier.c:265
+#: ../libbackground/applier.c:264
 msgid "Width if applier is a preview: Defaults to 64."
 msgstr "Amplada si l'aplicador és una previsualització: Per defecte a 64."
 
 #
-#: ../libbackground/applier.c:272
+#: ../libbackground/applier.c:271
 msgid "Preview Height"
 msgstr "Alçada de la previsualització"
 
-#: ../libbackground/applier.c:273
+#: ../libbackground/applier.c:272
 msgid "Height if applier is a preview: Defaults to 48."
 msgstr "Alçada si l'aplicador és una previsualització: Per defecte a 48."
 
-#: ../libbackground/applier.c:280
+#: ../libbackground/applier.c:279
 msgid "Screen"
 msgstr "Pantalla"
 
-#: ../libbackground/applier.c:281
+#: ../libbackground/applier.c:280
 msgid "Screen on which BGApplier is to draw"
 msgstr "Pantalla on BGApplier ha de dibuixar"
+
+#: ../libgswitchit/gswitchit_config.c:1035
+#, c-format
+msgid "There was an error loading an image: %s"
+msgstr "S'ha produït un error en carregar una imatge: %s"
 
 #: ../libsounds/sound-view.c:122 ../libsounds/sound-view.c:147
 msgid "The sound file for this event does not exist."
@@ -2875,12 +3178,12 @@ msgid "Volume up's shortcut."
 msgstr "Drecera per apujar el volum."
 
 #: ../schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:1
-msgid "Display a dialog when there are errors running XScreenSaver"
-msgstr "Mostra un diàleg quan hi ha errors a l'executar XScreenSaver"
+msgid "Display a dialog when there are errors running the screensaver"
+msgstr "Mostra un diàleg quan hi ha errors en executar el salvapantalles"
 
 #: ../schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:2
-msgid "Run XScreenSaver at login"
-msgstr "Executa XScreenSaver a l'entrada"
+msgid "Run screensaver at login"
+msgstr "Executa el salvapantalles a l'entrada"
 
 #
 #: ../schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:3
@@ -2888,8 +3191,8 @@ msgid "Show Startup Errors"
 msgstr "Mostra els errors de l'inici"
 
 #: ../schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:4
-msgid "Start XScreenSaver"
-msgstr "Inicia l'XScreenSaver"
+msgid "Start screensaver"
+msgstr "Inicia el salvapantalles"
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:1
 msgid ""
@@ -2930,10 +3233,12 @@ msgid "Keyboard options"
 msgstr "Opcions del Teclat"
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:9
-msgid "Keyboard settings in gconf will be overridden from the system ASAP"
+msgid ""
+"Keyboard settings in gconf will be overridden from the system ASAP "
+"(deprecated)"
 msgstr ""
 "Els paràmetres del teclat del gconf se sobreescriuran del sistema així que "
-"sigui possible"
+"sigui possible (obsolet)"
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:10
 msgid "Save/restore indicators together with layout groups"
@@ -2959,10 +3264,12 @@ msgstr "Elimina el missatge d'avís «Ha canviat el sysconfig d'X»"
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:14
 msgid ""
 "Very soon, keyboard settings in gconf will be overridden (from the system "
-"configuration)"
+"configuration) This key has been deprecated since GNOME 2.12, please unset "
+"the model, layouts and options keys to get the default system configuration."
 msgstr ""
-"Molt aviat se sobreescriuran els paràmetres del teclat del gconf (des de la "
-"configuració del sistema)"
+"Molt aviat, la configuració de teclat del gconf serà eliminada (de la configuració del sistema). "
+"Aquesta clau ha esdevingut obsoleta des del GNOME 2.12. Desfeu la configuració "
+"del model, disposicions i opcions de teclat per a obtenir la configuració predeterminada del sistema."
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:15
 msgid "keyboard layout"
@@ -2976,40 +3283,40 @@ msgstr "model del teclat"
 msgid "modmap file list"
 msgstr "llista de fitxers modmap"
 
-#: ../typing-break/drw-break-window.c:209
+#: ../typing-break/drw-break-window.c:212
 msgid "_Postpone break"
 msgstr "A_jorna el descans"
 
-#: ../typing-break/drw-break-window.c:256
+#: ../typing-break/drw-break-window.c:259
 msgid "Take a break!"
 msgstr "Descanseu!"
 
 #
 #. { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
-#: ../typing-break/drwright.c:136
+#: ../typing-break/drwright.c:141
 msgid "/_Preferences"
 msgstr "/_Preferències"
 
-#: ../typing-break/drwright.c:137
+#: ../typing-break/drwright.c:142
 msgid "/_About"
 msgstr "/_Quant a"
 
-#: ../typing-break/drwright.c:139
+#: ../typing-break/drwright.c:144
 msgid "/_Take a Break"
 msgstr "/_Inicia un descans"
 
-#: ../typing-break/drwright.c:491
+#: ../typing-break/drwright.c:495
 #, c-format
 msgid "%d minute until the next break"
 msgid_plural "%d minutes until the next break"
 msgstr[0] "%d minut fins el següent descans"
 msgstr[1] "%d minuts fins el següent descans"
 
-#: ../typing-break/drwright.c:495
+#: ../typing-break/drwright.c:499
 msgid "Less than one minute until the next break"
 msgstr "Menys d'un minut fins el següent descans"
 
-#: ../typing-break/drwright.c:583
+#: ../typing-break/drwright.c:587
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
@@ -3018,23 +3325,23 @@ msgstr ""
 "No s'ha pogut mostrar el diàleg de les propietats del descans de tecleig amb "
 "el següent error: %s"
 
-#: ../typing-break/drwright.c:631
+#: ../typing-break/drwright.c:635
 msgid "About GNOME Typing Monitor"
 msgstr "Quant al Monitor de tecleig del GNOME"
 
-#: ../typing-break/drwright.c:655
+#: ../typing-break/drwright.c:659
 msgid "A computer break reminder."
 msgstr "Recordador de descansos de l'ordinador."
 
-#: ../typing-break/drwright.c:656
+#: ../typing-break/drwright.c:660
 msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
 msgstr "Escrit per Richard Hult &lt;richard@imendio.com&gt;"
 
-#: ../typing-break/drwright.c:657
+#: ../typing-break/drwright.c:661
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Detalls artístics per Anders Carlsson"
 
-#: ../typing-break/drwright.c:833
+#: ../typing-break/drwright.c:837
 msgid "Break reminder"
 msgstr "Recordador de descansos"
 
@@ -3054,44 +3361,44 @@ msgstr ""
 "Podeu afegir-la-hi fent clic amb el botó dret al quadre i seleccionant "
 "«Afegeix al quadre», després seleccioneu i afegiu «Àrea de notificació»."
 
-#: ../vfs-methods/fontilus/font-view.c:125
+#: ../vfs-methods/fontilus/font-view.c:115
 msgid "The quick brown fox jumps over the lazy dog. 0123456789"
 msgstr "A la taula i al llit, al primer crit. 0123456789"
 
 #
-#: ../vfs-methods/fontilus/font-view.c:285
+#: ../vfs-methods/fontilus/font-view.c:276
 msgid "Name:"
 msgstr "Nom:"
 
-#: ../vfs-methods/fontilus/font-view.c:288
+#: ../vfs-methods/fontilus/font-view.c:279
 msgid "Style:"
 msgstr "Estil:"
 
-#: ../vfs-methods/fontilus/font-view.c:297
+#: ../vfs-methods/fontilus/font-view.c:289
 msgid "Type:"
 msgstr "Tipus:"
 
-#: ../vfs-methods/fontilus/font-view.c:304
+#: ../vfs-methods/fontilus/font-view.c:295
 msgid "Size:"
 msgstr "Mida:"
 
 #
-#: ../vfs-methods/fontilus/font-view.c:348
-#: ../vfs-methods/fontilus/font-view.c:361
+#: ../vfs-methods/fontilus/font-view.c:339
+#: ../vfs-methods/fontilus/font-view.c:352
 msgid "Version:"
 msgstr "Versió:"
 
-#: ../vfs-methods/fontilus/font-view.c:352
-#: ../vfs-methods/fontilus/font-view.c:363
+#: ../vfs-methods/fontilus/font-view.c:343
+#: ../vfs-methods/fontilus/font-view.c:354
 msgid "Copyright:"
 msgstr "Copyright:"
 
 #
-#: ../vfs-methods/fontilus/font-view.c:356
+#: ../vfs-methods/fontilus/font-view.c:347
 msgid "Description:"
 msgstr "Descripció:"
 
-#: ../vfs-methods/fontilus/font-view.c:417
+#: ../vfs-methods/fontilus/font-view.c:408
 #, c-format
 msgid "usage: %s fontfile\n"
 msgstr "forma d'ús: %s fitxer de tipus de lletra\n"
@@ -3156,19 +3463,19 @@ msgstr ""
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:9
 msgid "Thumbnail command for OpenType fonts"
-msgstr "Ordre de miniaturització pera tipus de lletra OpenType"
+msgstr "Ordre de miniaturització per a tipus de lletra OpenType"
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:10
 msgid "Thumbnail command for PCF fonts"
-msgstr "Ordre de miniaturització pera tipus de lletra PCF"
+msgstr "Ordre de miniaturització per a tipus de lletra PCF"
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:11
 msgid "Thumbnail command for TrueType fonts"
-msgstr "Ordre de miniaturització pera tipus de lletra TrueType"
+msgstr "Ordre de miniaturització per a tipus de lletra TrueType"
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:12
 msgid "Thumbnail command for Type1 fonts"
-msgstr "Ordre de miniaturització pera tipus de lletra Type1"
+msgstr "Ordre de miniaturització per a tipus de lletra Type1"
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:13
 msgid "Whether to thumbnail OpenType fonts"
@@ -3190,10 +3497,6 @@ msgstr "Si s'han de miniaturitzar els tipus de lletra Type1"
 msgid "GNOME Font Viewer"
 msgstr "Visualitzador de tipus de lletra del GNOME"
 
-#: ../vfs-methods/themus/apply-font.glade.h:1
-msgid " "
-msgstr " "
-
 #: ../vfs-methods/themus/apply-font.glade.h:2
 msgid "<span weight=\"bold\" size=\"larger\">Apply new font?</span>"
 msgstr ""
@@ -3202,15 +3505,15 @@ msgstr ""
 
 #: ../vfs-methods/themus/apply-font.glade.h:3
 msgid "Do _not apply font"
-msgstr "_No apliques el tipus de lletra"
+msgstr "_No apliquis el tipus de lletra"
 
 #: ../vfs-methods/themus/apply-font.glade.h:4
 msgid ""
 "The theme you have selected suggests a new font. A preview of the font is "
 "shown below."
 msgstr ""
-"El tema que heu seleccionat suggereix un nou tipus de lletra. Es mostra una "
-"previsualització del tipus de lletra aquí sota."
+"El tema que heu seleccionat suggereix un nou tipus de lletra. A sota es mostra una "
+"previsualització del tipus de lletra."
 
 #: ../vfs-methods/themus/apply-font.glade.h:5
 msgid "_Apply font"
@@ -3290,134 +3593,58 @@ msgid "Whether to thumbnail themes"
 msgstr "Si s'han de miniaturitzar els temes"
 
 #
-#, fuzzy
-#~ msgid "Select Image"
-#~ msgstr "Seleccioneu un fitxer..."
+#~ msgid "Information about myself"
+#~ msgstr "Informació quant a mi"
 
-#, fuzzy
-#~ msgid "No Image"
-#~ msgstr "Imatges"
+#~ msgid "Pick a color"
+#~ msgstr "Tria un color"
 
-#, fuzzy
-#~ msgid "<b>Email</b>"
-#~ msgstr "<i>Petit</i>"
+#~ msgid "%i of %i"
+#~ msgstr "%i de %i"
 
-#, fuzzy
-#~ msgid "<b>Home</b>"
-#~ msgstr "<b>Velocitat</b>"
+#~ msgid "Transferring: %s"
+#~ msgstr "S'està transferint: %s"
 
-#
-#, fuzzy
-#~ msgid "<b>Instant Messaging</b>"
-#~ msgstr "<b>Representació dels tipus de lletra</b>"
+#~ msgid "To: %s"
+#~ msgstr "A: %s"
 
-#, fuzzy
-#~ msgid "<b>Job</b>"
-#~ msgstr "<b>Suport</b>"
+#~ msgid "Downloading..."
+#~ msgstr "S'esta descarregant..."
 
-#, fuzzy
-#~ msgid "<b>Telephone</b>"
-#~ msgstr "<b>Tecles de commutació</b>"
+#~ msgid "Set the font for applications"
+#~ msgstr "Configura el tipus de lletra de les aplicacions"
 
-#, fuzzy
-#~ msgid "<b>Web</b>"
-#~ msgstr "<b>Velocitat</b>"
+#~ msgid "Set the font for the icons on the desktop"
+#~ msgstr "Configura el tipus de lletra de les icones de l'escriptori"
 
-#, fuzzy
-#~ msgid "<b>Work</b>"
-#~ msgstr "<b>Suport</b>"
-
-#, fuzzy
-#~ msgid "C_ity:"
-#~ msgstr "E_stil:"
+#~ msgid "Set the monospace font for terminals and similar applications"
+#~ msgstr ""
+#~ "Estableix la font d'amplada fixa per a terminals i aplicacions similars"
 
 #
-#, fuzzy
-#~ msgid "C_ompany:"
-#~ msgstr "_Ordre:"
+#~ msgid "_Use Font"
+#~ msgstr "_Utilitza el tipus de lletra"
 
-#, fuzzy
-#~ msgid "Cale_ndar:"
-#~ msgstr "Calendari"
+#~ msgid ""
+#~ "<i><small><b>Note:</b> Changes to this setting will not take effect until "
+#~ "next time you log in.</small></i>"
+#~ msgstr ""
+#~ "<i><small><b>Nota:</b> Els canvis a aquesta configuració no tindran "
+#~ "efecte fins que no torneu a entrar.</small></i>"
 
-#, fuzzy
-#~ msgid "Change Passwo_rd"
-#~ msgstr "Conjunt de canvis"
+#
+#~ msgid "Sound preferences"
+#~ msgstr "Preferències de So"
 
-#, fuzzy
-#~ msgid "Change Password"
-#~ msgstr "Conjunt de canvis"
+#~ msgid ""
+#~ "Very soon, keyboard settings in gconf will be overridden (from the system "
+#~ "configuration)"
+#~ msgstr ""
+#~ "Molt aviat se sobreescriuran els paràmetres del teclat del gconf (des de "
+#~ "la configuració del sistema)"
 
-#, fuzzy
-#~ msgid "Co_untry:"
-#~ msgstr "Control"
-
-#, fuzzy
-#~ msgid "New Password:"
-#~ msgstr "_Contrasenya:"
-
-#, fuzzy
-#~ msgid "Old Password:"
-#~ msgstr "_Contrasenya:"
-
-#, fuzzy
-#~ msgid "Retype New Password:"
-#~ msgstr "_Contrasenya:"
-
-#, fuzzy
 #~ msgid "User Name:"
 #~ msgstr "Nom d'u_suari:"
-
-#, fuzzy
-#~ msgid "_Address"
-#~ msgstr "_pressionada"
-
-#
-#, fuzzy
-#~ msgid "_Address:"
-#~ msgstr "_Afegeix:"
-
-#, fuzzy
-#~ msgid "_Contact"
-#~ msgstr "Contactes"
-
-#, fuzzy
-#~ msgid "_Home Page:"
-#~ msgstr "Nom del _tema:"
-
-#
-#, fuzzy
-#~ msgid "_Home:"
-#~ msgstr "_Nom:"
-
-#
-#, fuzzy
-#~ msgid "_Manager:"
-#~ msgstr "Gestor de finestres:"
-
-#
-#, fuzzy
-#~ msgid "_Mobile:"
-#~ msgstr "_Fitxer"
-
-#
-#, fuzzy
-#~ msgid "_Personal Info"
-#~ msgstr "Tipus de lletra del _terminal:"
-
-#
-#, fuzzy
-#~ msgid "_Profession:"
-#~ msgstr "Versió:"
-
-#
-#, fuzzy
-#~ msgid "_Title:"
-#~ msgstr "_Mosaic"
-
-#, fuzzy
-#~ msgid "_Work:"
-#~ msgstr "Co_lor:"
 
 #~ msgid "Are you sure you want to permanently delete this entry?"
 #~ msgstr "Esteu segur que voleu suprimir aquesta entrada permanentment?"
@@ -3548,9 +3775,6 @@ msgstr "Si s'han de miniaturitzar els temes"
 #~ msgid "Underlying model to notify when Ok is clicked"
 #~ msgstr "El model subjacent al qual notificar quan es fa clic en D'acord"
 
-#~ msgid "MIME type information"
-#~ msgstr "Informació de tipus MIME"
-
 #~ msgid "Structure with data on the MIME type"
 #~ msgstr "Estructura amb les dades del tipus de MIME"
 
@@ -3559,10 +3783,6 @@ msgstr "Si s'han de miniaturitzar els temes"
 
 #~ msgid "True if this dialog is for adding a MIME type"
 #~ msgstr "VERITAT si aquest diàleg s'està afegint a un tipus de MIME"
-
-#
-#~ msgid "Add File Type"
-#~ msgstr "Afegeix un tipus de fitxer"
 
 #~ msgid "Misc"
 #~ msgstr "Miscel·lània"
@@ -3760,15 +3980,6 @@ msgstr "Si s'han de miniaturitzar els temes"
 #~ msgid "Keyboard layout preview"
 #~ msgstr "Previsualització de la disposició de teclat"
 
-#~ msgid "FTP proxy port"
-#~ msgstr "Port del servidor intermediari d'FTP"
-
-#~ msgid "HTTP proxy port"
-#~ msgstr "Port del servidor intermediari d'HTTP"
-
-#~ msgid "Secure HTTP proxy port"
-#~ msgstr "Port del servidor intermediari d'HTTP segur"
-
 #~ msgid "Socks host port"
 #~ msgstr "Port del servidor de s_ocks"
 
@@ -3864,7 +4075,7 @@ msgstr "Si s'han de miniaturitzar els temes"
 #~ msgstr "Gestor de propietats de l'escriptori."
 
 #~ msgid "Gnome Control Center : %s"
-#~ msgstr "Centre de Control del Gnome: %s"
+#~ msgstr "Centre de Control del GNOME: %s"
 
 #~ msgid "Gnome Control Center"
 #~ msgstr "Centre de Control del GNOME"
@@ -4039,9 +4250,6 @@ msgstr "Si s'han de miniaturitzar els temes"
 
 #~ msgid "One"
 #~ msgstr "Un"
-
-#~ msgid "Two"
-#~ msgstr "Dos"
 
 #~ msgid "_Left color:"
 #~ msgstr "Co_lor esquerre:"
