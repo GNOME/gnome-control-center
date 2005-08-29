@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-05 06:28+0000\n"
-"PO-Revision-Date: 2005-08-05 12:20+0200\n"
+"POT-Creation-Date: 2005-08-29 14:37+0000\n"
+"PO-Revision-Date: 2005-08-29 22:33+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -65,22 +65,30 @@ msgstr "Zvolit obrázek"
 msgid "No Image"
 msgstr "Žádný obrázek"
 
-#: ../capplets/about-me/gnome-about-me.c:721
+#: ../capplets/about-me/gnome-about-me.c:706
+msgid ""
+"There was an error while trying to get the addressbook information\n"
+"Evolution Data Server can't handle the protocol"
+msgstr ""
+"Při pokusu získat informace o adresáři došlo k chybě\n"
+"Evolution Data Server neumí zpracovat protokol"
+
+#: ../capplets/about-me/gnome-about-me.c:727
 msgid "Unable to open address book"
 msgstr "Nemohu otevřít adresář"
 
-#: ../capplets/about-me/gnome-about-me.c:733
+#: ../capplets/about-me/gnome-about-me.c:739
 msgid "Unknown login ID, the user database might be corrupted"
 msgstr "Neznámé přihlašovací ID, databáze uživatelů je možná poškozena"
 
-#: ../capplets/about-me/gnome-about-me.c:764
-#: ../capplets/about-me/gnome-about-me.c:766
+#: ../capplets/about-me/gnome-about-me.c:770
+#: ../capplets/about-me/gnome-about-me.c:772
 #, c-format
 msgid "About %s"
 msgstr "O %s"
 
 #: ../capplets/about-me/gnome-about-me-password.c:101
-#: ../capplets/about-me/gnome-about-me-password.c:380
+#: ../capplets/about-me/gnome-about-me-password.c:479
 msgid "Old password is incorrect, please retype it"
 msgstr "Staré heslo není správné, napište je prosím znovu"
 
@@ -101,17 +109,34 @@ msgstr "Nemohu spustit backend"
 msgid "Unexpected error has occurred"
 msgstr "Došlo k neočekávané chybě"
 
-#: ../capplets/about-me/gnome-about-me-password.c:434
+#: ../capplets/about-me/gnome-about-me-password.c:315
+msgid "Password is too short"
+msgstr "Heslo je příliš krátké"
+
+#: ../capplets/about-me/gnome-about-me-password.c:318
+#: ../capplets/about-me/gnome-about-me-password.c:321
+msgid "Password is too simple"
+msgstr "Heslo je příliš jednoduché"
+
+#: ../capplets/about-me/gnome-about-me-password.c:324
+msgid "Old and new passwords are too similar"
+msgstr "Staré a nové heslo jsou si příliš podobné"
+
+#: ../capplets/about-me/gnome-about-me-password.c:328
+msgid "Old and new password are the same"
+msgstr "Staré a nové heslo je stejné"
+
+#: ../capplets/about-me/gnome-about-me-password.c:406
 msgid "Please type the passwords."
 msgstr "Zadejte prosím hesla."
 
-#: ../capplets/about-me/gnome-about-me-password.c:442
+#: ../capplets/about-me/gnome-about-me-password.c:414
 msgid "Please type the password again, it is wrong."
 msgstr "Zadejte prosím heslo znovu, bylo špatně."
 
-#: ../capplets/about-me/gnome-about-me-password.c:445
-msgid "Click the Change Password button to change the password."
-msgstr "Změňte heslo kliknutím na tlačítko Změnit heslo."
+#: ../capplets/about-me/gnome-about-me-password.c:417
+msgid "Click on Change Password to change the password."
+msgstr "Změňte heslo kliknutím na Změnit heslo."
 
 #: ../capplets/about-me/gnome-about-me.glade.h:1
 #: ../vfs-methods/themus/apply-font.glade.h:1
@@ -673,50 +698,50 @@ msgstr "_Přidat tapetu"
 msgid "_Style:"
 msgstr "_Styl:"
 
-#: ../capplets/background/gnome-wp-capplet.c:72
+#: ../capplets/background/gnome-wp-capplet.c:74
 #: ../capplets/common/capplet-util.c:340
 #: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:333
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "Při zobrazování nápovědy došlo k chybě: %s"
 
-#: ../capplets/background/gnome-wp-capplet.c:1037
-#: ../capplets/background/gnome-wp-capplet.c:1055
+#: ../capplets/background/gnome-wp-capplet.c:1038
+#: ../capplets/background/gnome-wp-capplet.c:1056
 msgid "Centered"
 msgstr "Na střed"
 
-#: ../capplets/background/gnome-wp-capplet.c:1063
-#: ../capplets/background/gnome-wp-capplet.c:1080
+#: ../capplets/background/gnome-wp-capplet.c:1064
+#: ../capplets/background/gnome-wp-capplet.c:1081
 msgid "Fill Screen"
 msgstr "Vyplnit obrazovku"
 
-#: ../capplets/background/gnome-wp-capplet.c:1088
-#: ../capplets/background/gnome-wp-capplet.c:1105
+#: ../capplets/background/gnome-wp-capplet.c:1089
+#: ../capplets/background/gnome-wp-capplet.c:1106
 msgid "Scaled"
 msgstr "Přizpůsobená"
 
-#: ../capplets/background/gnome-wp-capplet.c:1113
-#: ../capplets/background/gnome-wp-capplet.c:1130
+#: ../capplets/background/gnome-wp-capplet.c:1114
+#: ../capplets/background/gnome-wp-capplet.c:1131
 msgid "Tiled"
 msgstr "Tapeta"
 
-#: ../capplets/background/gnome-wp-capplet.c:1154
-#: ../capplets/background/gnome-wp-capplet.c:1163
+#: ../capplets/background/gnome-wp-capplet.c:1155
+#: ../capplets/background/gnome-wp-capplet.c:1164
 msgid "Solid Color"
 msgstr "Plná barva"
 
-#: ../capplets/background/gnome-wp-capplet.c:1171
-#: ../capplets/background/gnome-wp-capplet.c:1180
+#: ../capplets/background/gnome-wp-capplet.c:1172
+#: ../capplets/background/gnome-wp-capplet.c:1181
 msgid "Horizontal Gradient"
 msgstr "Vodorovný přechod"
 
-#: ../capplets/background/gnome-wp-capplet.c:1188
-#: ../capplets/background/gnome-wp-capplet.c:1197
+#: ../capplets/background/gnome-wp-capplet.c:1189
+#: ../capplets/background/gnome-wp-capplet.c:1198
 msgid "Vertical Gradient"
 msgstr "Svislý přechod"
 
 #. Create the file chooser dialog stuff here
-#: ../capplets/background/gnome-wp-capplet.c:1244
+#: ../capplets/background/gnome-wp-capplet.c:1247
 msgid "Add Wallpaper"
 msgstr "Přidat tapetu"
 
@@ -3073,7 +3098,9 @@ msgstr "Možnosti klávesnice"
 msgid ""
 "Keyboard settings in gconf will be overridden from the system ASAP "
 "(deprecated)"
-msgstr "Nastavení klávesnice v gconf budou co nejdříve nahrazena nastaveními v systému (zastaralé)"
+msgstr ""
+"Nastavení klávesnice v gconf budou co nejdříve nahrazena nastaveními v "
+"systému (zastaralé)"
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:10
 msgid "Save/restore indicators together with layout groups"
@@ -3100,7 +3127,10 @@ msgid ""
 "Very soon, keyboard settings in gconf will be overridden (from the system "
 "configuration) This key has been deprecated since GNOME 2.12, please unset "
 "the model, layouts and options keys to get the default system configuration."
-msgstr "Velmi brzo budou nastavení klávesnice v gconf nahrazena (nastavením systému) Tento klíč je zastarlý od GNOME 2.12, pro získání implicitního nastavení systému prosím zrušte nastavení klíčů model, layouts a options."
+msgstr ""
+"Velmi brzo budou nastavení klávesnice v gconf nahrazena (nastavením systému) "
+"Tento klíč je zastarlý od GNOME 2.12, pro získání implicitního nastavení "
+"systému prosím zrušte nastavení klíčů model, layouts a options."
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:15
 msgid "keyboard layout"
