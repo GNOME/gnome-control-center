@@ -648,20 +648,31 @@ static void
 populate_tree_model(GtkTreeModelSort* model, GtkTreeSelection* selection) {
 #ifdef HAVE_XCURSOR
 	// add the XCursor themes - paths taken from <xc/lib/Xcursor.library.c>
-	const gchar* const paths[] = {
+	const gchar* const path_defs[] = {
 		"%s/.icons/",
 		"/usr/share/icons/",
 		"/usr/share/pixmaps/",
 		"/usr/X11R6/lib/X11/icons/",
 		NULL
 	};
-	const gchar* const * iterator;
+
+	gchar **iterator = NULL;
+	gchar **paths = NULL;
+
 	GConfClient* client = gconf_client_get_default();
 	GtkListStore* store = GTK_LIST_STORE(gtk_tree_model_sort_get_model(model));
 	gchar* current_theme = gconf_client_get_string(client, CURSOR_THEME_KEY, NULL);
 	gint current_size = gconf_client_get_int(client, CURSOR_SIZE_KEY, NULL);
 	g_object_unref(client);
 	client = NULL;
+
+	const gchar *xpaths = g_getenv ("XCURSOR_PATH");
+
+	if (xpaths != NULL) {
+		paths = g_strsplit (xpaths, ":", 0);
+	} else {
+		paths = g_strdupv ((gchar **) path_defs);
+	}
 
 	for(iterator = paths; *iterator; iterator++) {
 		gchar*       fname = NULL;
@@ -677,7 +688,7 @@ populate_tree_model(GtkTreeModelSort* model, GtkTreeSelection* selection) {
 		folder = g_dir_open(fname, 0, NULL);
 		
 		while(folder && (name = g_dir_read_name(folder))) {
-			gchar* cursor_dir = g_strdup_printf("%s%s/cursors/", fname, name);
+			gchar* cursor_dir = g_strdup_printf("%s/%s/cursors/", fname, name);
 			XcursorImage* cursor;
 			gint sizes[] = { 12, 16, 24, 32, 36, 48, 0 };
 			gint i;
@@ -731,6 +742,10 @@ populate_tree_model(GtkTreeModelSort* model, GtkTreeSelection* selection) {
 	}
 	
 	g_free(current_theme);
+
+	if (xpaths != NULL) {
+		g_strfreev (paths);
+	}
 #else /* !HAVE_XCURSOR */
 	gchar* cursor_font;
 	static const gchar* builtins[][5] = {
