@@ -12,14 +12,13 @@
 # Hendrik Richter <hendi@gnome-de.org>, 2005.
 # Jens Seidel <jseidel@cvs.gnome.org>, 2005.
 # 
-# 
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-27 15:04+0200\n"
-"PO-Revision-Date: 2005-08-19 15:02+0200\n"
-"Last-Translator: Jens Seidel <jseidel@cvs.gnome.org>\n"
+"POT-Creation-Date: 2005-08-30 18:29+0200\n"
+"PO-Revision-Date: 2005-08-30 18:34+0200\n"
+"Last-Translator: Hendrik Richter <hendi@gnome-de.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -71,22 +70,31 @@ msgstr "Bild auswählen"
 msgid "No Image"
 msgstr "Kein Bild"
 
-#: ../capplets/about-me/gnome-about-me.c:721
+#: ../capplets/about-me/gnome-about-me.c:706
+msgid ""
+"There was an error while trying to get the addressbook information\n"
+"Evolution Data Server can't handle the protocol"
+msgstr ""
+"Beim Auslesen der Informationen aus dem Adressbuch ist ein Fehler "
+"aufgetreten\n"
+"Evolution-Data-Server kann dieses Protokoll nicht verwenden"
+
+#: ../capplets/about-me/gnome-about-me.c:727
 msgid "Unable to open address book"
 msgstr "Adressbuch konnte nicht geöffnet werden"
 
-#: ../capplets/about-me/gnome-about-me.c:733
+#: ../capplets/about-me/gnome-about-me.c:739
 msgid "Unknown login ID, the user database might be corrupted"
 msgstr "Unbekannte Anmelde-ID - die Benutzerdatenbank ist womöglich beschädigt"
 
-#: ../capplets/about-me/gnome-about-me.c:764
-#: ../capplets/about-me/gnome-about-me.c:766
+#: ../capplets/about-me/gnome-about-me.c:770
+#: ../capplets/about-me/gnome-about-me.c:772
 #, c-format
 msgid "About %s"
 msgstr "Persönliche Angaben von %s"
 
 #: ../capplets/about-me/gnome-about-me-password.c:101
-#: ../capplets/about-me/gnome-about-me-password.c:380
+#: ../capplets/about-me/gnome-about-me-password.c:479
 msgid "Old password is incorrect, please retype it"
 msgstr "Das alte Passwort ist falsch, bitte geben Sie es erneut ein"
 
@@ -107,18 +115,34 @@ msgstr "Das Backend konnte nicht gestartet werden"
 msgid "Unexpected error has occurred"
 msgstr "Ein unerwarteter Fehler ist aufgetreten"
 
-#: ../capplets/about-me/gnome-about-me-password.c:434
+#: ../capplets/about-me/gnome-about-me-password.c:315
+msgid "Password is too short"
+msgstr "Passwort ist zu kurz"
+
+#: ../capplets/about-me/gnome-about-me-password.c:318
+#: ../capplets/about-me/gnome-about-me-password.c:321
+msgid "Password is too simple"
+msgstr "Passwort ist zu einfach"
+
+#: ../capplets/about-me/gnome-about-me-password.c:324
+msgid "Old and new passwords are too similar"
+msgstr "Altes und neues Passwort sind sich zu ähnlich"
+
+#: ../capplets/about-me/gnome-about-me-password.c:328
+msgid "Old and new password are the same"
+msgstr "Altes und neues Passwort stimmen überein"
+
+#: ../capplets/about-me/gnome-about-me-password.c:406
 msgid "Please type the passwords."
 msgstr "Bitte geben Sie die Passwörter ein."
 
-#: ../capplets/about-me/gnome-about-me-password.c:442
+#: ../capplets/about-me/gnome-about-me-password.c:414
 msgid "Please type the password again, it is wrong."
 msgstr "Bitte geben Sie das Passwort erneut ein, da es falsch ist."
 
-#: ../capplets/about-me/gnome-about-me-password.c:445
-msgid "Click the Change Password button to change the password."
-msgstr ""
-"Klicken Sie auf den Schalter »Passwort ändern« um das Passwort zu ändern."
+#: ../capplets/about-me/gnome-about-me-password.c:417
+msgid "Click on Change Password to change the password."
+msgstr "Klicken Sie auf »Passwort ändern« um das Passwort zu ändern."
 
 #: ../capplets/about-me/gnome-about-me.glade.h:1
 #: ../vfs-methods/themus/apply-font.glade.h:1
@@ -651,8 +675,8 @@ msgstr "Pixel/Sekunde"
 #. set the timeout value  label with correct value of timeout
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
 #: ../capplets/mouse/gnome-mouse-properties.c:131
-#: ../capplets/mouse/gnome-mouse-properties.c:860
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:28
+#: ../capplets/mouse/gnome-mouse-properties.c:878
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
 #: ../capplets/windows/gnome-window-properties.glade.h:10
 msgid "seconds"
 msgstr "Sekunden"
@@ -689,50 +713,50 @@ msgstr "Hintergrund hin_zufügen"
 msgid "_Style:"
 msgstr "_Stil:"
 
-#: ../capplets/background/gnome-wp-capplet.c:72
+#: ../capplets/background/gnome-wp-capplet.c:74
 #: ../capplets/common/capplet-util.c:340
 #: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:333
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "Fehler beim Anzeigen der Hilfe: %s"
 
-#: ../capplets/background/gnome-wp-capplet.c:1037
-#: ../capplets/background/gnome-wp-capplet.c:1055
+#: ../capplets/background/gnome-wp-capplet.c:1038
+#: ../capplets/background/gnome-wp-capplet.c:1056
 msgid "Centered"
 msgstr "Zentrieren"
 
-#: ../capplets/background/gnome-wp-capplet.c:1063
-#: ../capplets/background/gnome-wp-capplet.c:1080
+#: ../capplets/background/gnome-wp-capplet.c:1064
+#: ../capplets/background/gnome-wp-capplet.c:1081
 msgid "Fill Screen"
 msgstr "Bildschirm füllen"
 
-#: ../capplets/background/gnome-wp-capplet.c:1088
-#: ../capplets/background/gnome-wp-capplet.c:1105
+#: ../capplets/background/gnome-wp-capplet.c:1089
+#: ../capplets/background/gnome-wp-capplet.c:1106
 msgid "Scaled"
 msgstr "Skalieren"
 
-#: ../capplets/background/gnome-wp-capplet.c:1113
-#: ../capplets/background/gnome-wp-capplet.c:1130
+#: ../capplets/background/gnome-wp-capplet.c:1114
+#: ../capplets/background/gnome-wp-capplet.c:1131
 msgid "Tiled"
 msgstr "Kacheln"
 
-#: ../capplets/background/gnome-wp-capplet.c:1154
-#: ../capplets/background/gnome-wp-capplet.c:1163
+#: ../capplets/background/gnome-wp-capplet.c:1155
+#: ../capplets/background/gnome-wp-capplet.c:1164
 msgid "Solid Color"
 msgstr "Einfarbig"
 
-#: ../capplets/background/gnome-wp-capplet.c:1171
-#: ../capplets/background/gnome-wp-capplet.c:1180
+#: ../capplets/background/gnome-wp-capplet.c:1172
+#: ../capplets/background/gnome-wp-capplet.c:1181
 msgid "Horizontal Gradient"
 msgstr "Horizontaler Verlauf"
 
-#: ../capplets/background/gnome-wp-capplet.c:1188
-#: ../capplets/background/gnome-wp-capplet.c:1197
+#: ../capplets/background/gnome-wp-capplet.c:1189
+#: ../capplets/background/gnome-wp-capplet.c:1198
 msgid "Vertical Gradient"
 msgstr "Vertikaler Verlauf"
 
 #. Create the file chooser dialog stuff here
-#: ../capplets/background/gnome-wp-capplet.c:1244
+#: ../capplets/background/gnome-wp-capplet.c:1247
 msgid "Add Wallpaper"
 msgstr "Hintergrund hinzufügen"
 
@@ -775,7 +799,7 @@ msgstr "Nur Einstellungen anwenden und beenden"
 #: ../capplets/common/capplet-util.c:243
 #: ../capplets/default-applications/gnome-default-applications-properties.c:765
 #: ../capplets/keyboard/gnome-keyboard-properties.c:225
-#: ../capplets/mouse/gnome-mouse-properties.c:996
+#: ../capplets/mouse/gnome-mouse-properties.c:1014
 #: ../capplets/sound/sound-properties-capplet.c:244
 msgid "Retrieve and store legacy settings"
 msgstr "Übernommene Einstellungen finden und speichern"
@@ -1757,59 +1781,59 @@ msgstr "Minuten"
 msgid "Set your keyboard preferences"
 msgstr "Die Tastatureinstellungen festlegen"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:549
+#: ../capplets/mouse/gnome-mouse-properties.c:552
 msgid "Unknown Cursor"
 msgstr "Unbekannter Zeiger"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:736
+#: ../capplets/mouse/gnome-mouse-properties.c:754
 msgid "Default Cursor"
 msgstr "Vorgabezeiger"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:737
+#: ../capplets/mouse/gnome-mouse-properties.c:755
 msgid "Default Cursor - Current"
 msgstr "Vorgabezeiger - momentan verwendet"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:738
+#: ../capplets/mouse/gnome-mouse-properties.c:756
 msgid "The default cursor that ships with X"
 msgstr "Der mit X ausgelieferte Vorgabezeiger"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:742
+#: ../capplets/mouse/gnome-mouse-properties.c:760
 msgid "White Cursor"
 msgstr "Weißer Zeiger"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:743
+#: ../capplets/mouse/gnome-mouse-properties.c:761
 msgid "White Cursor - Current"
 msgstr "Weißer Zeiger - momentan verwendet"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:744
+#: ../capplets/mouse/gnome-mouse-properties.c:762
 msgid "The default cursor inverted"
 msgstr "Der invertierte Vorgabezeiger"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:748
+#: ../capplets/mouse/gnome-mouse-properties.c:766
 msgid "Large Cursor"
 msgstr "Großer Zeiger"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:749
+#: ../capplets/mouse/gnome-mouse-properties.c:767
 msgid "Large Cursor - Current"
 msgstr "Großer Zeiger - momentan verwendet"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:750
+#: ../capplets/mouse/gnome-mouse-properties.c:768
 msgid "Large version of normal cursor"
 msgstr "Große Version des normalen Zeigers"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:754
+#: ../capplets/mouse/gnome-mouse-properties.c:772
 msgid "Large White Cursor - Current"
 msgstr "Großer weißer Zeiger - Momentan verwendet"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:755
+#: ../capplets/mouse/gnome-mouse-properties.c:773
 msgid "Large White Cursor"
 msgstr "Großer weißer Zeiger"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:756
+#: ../capplets/mouse/gnome-mouse-properties.c:774
 msgid "Large version of white cursor"
 msgstr "Große Version des weißen Zeigers"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:950
+#: ../capplets/mouse/gnome-mouse-properties.c:968
 msgid "Cursor Theme"
 msgstr "Zeigerthema"
 
@@ -1835,90 +1859,82 @@ msgid "<b>Speed</b>"
 msgstr "<b>Geschwindigkeit</b>"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:7
-msgid ""
-"<i><small><b>Note:</b> Changes to this setting will not take effect until "
-"next time you log in.</small></i>"
-msgstr ""
-"<i><small><b>Hinweis:</b> Änderungen an dieser Einstellung werden erst bei "
-"der nächsten Anmeldung wirksam.</small></i>"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid "<i>Fast</i>"
 msgstr "<i>Hoch</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:9
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid "<i>High</i>"
 msgstr "<i>Hoch</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:10
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:9
 msgid "<i>Large</i>"
 msgstr "<i>Hoch</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:11
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:10
 msgid "<i>Low</i>"
 msgstr "<i>Gering</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:12
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:11
 msgid "<i>Slow</i>"
 msgstr "<i>Gering</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:13
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:12
 msgid "<i>Small</i>"
 msgstr "<i>Gering</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:14
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:13
 msgid "Buttons"
 msgstr "Tasten"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:15
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:14
 msgid "Cursor Size:"
 msgstr "Zeigergröße:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:16
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:15
 msgid "Cursors"
 msgstr "Zeiger"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:16
 msgid "Highlight the _pointer when you press Ctrl"
 msgstr "Den Zeiger beim Drücken von Strg _hervorheben"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
 msgid "Large"
 msgstr "Groß"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
 msgid "Medium"
 msgstr "Mittel"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:20
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
 msgid "Motion"
 msgstr "Bewegung"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:21
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:20
 msgid "Mouse Preferences"
 msgstr "Mauseinstellungen"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:22
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:21
 msgid "Small"
 msgstr "Klein"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:23
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:22
 msgid "_Acceleration:"
 msgstr "_Beschleunigung:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:24
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:23
 msgid "_Left-handed mouse"
 msgstr "Mit _links bediente Maus"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:25
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:24
 msgid "_Sensitivity:"
 msgstr "_Empfindlichkeit:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:26
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:25
 msgid "_Threshold:"
 msgstr "_Schwellwert:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:26
 msgid "_Timeout:"
 msgstr "_Intervall:"
 
@@ -3254,37 +3270,37 @@ msgid "The quick brown fox jumps over the lazy dog. 0123456789"
 msgstr ""
 "Franz jagt im komplett verwahrlosten Taxi quer durch Bayern. 0123456789"
 
-#: ../vfs-methods/fontilus/font-view.c:275
+#: ../vfs-methods/fontilus/font-view.c:276
 msgid "Name:"
 msgstr "Name:"
 
-#: ../vfs-methods/fontilus/font-view.c:278
+#: ../vfs-methods/fontilus/font-view.c:279
 msgid "Style:"
 msgstr "Stil:"
 
-#: ../vfs-methods/fontilus/font-view.c:287
+#: ../vfs-methods/fontilus/font-view.c:289
 msgid "Type:"
 msgstr "Typ:"
 
-#: ../vfs-methods/fontilus/font-view.c:294
+#: ../vfs-methods/fontilus/font-view.c:295
 msgid "Size:"
 msgstr "Größe:"
 
-#: ../vfs-methods/fontilus/font-view.c:338
-#: ../vfs-methods/fontilus/font-view.c:351
+#: ../vfs-methods/fontilus/font-view.c:339
+#: ../vfs-methods/fontilus/font-view.c:352
 msgid "Version:"
 msgstr "Version:"
 
-#: ../vfs-methods/fontilus/font-view.c:342
-#: ../vfs-methods/fontilus/font-view.c:353
+#: ../vfs-methods/fontilus/font-view.c:343
+#: ../vfs-methods/fontilus/font-view.c:354
 msgid "Copyright:"
 msgstr "Copyright:"
 
-#: ../vfs-methods/fontilus/font-view.c:346
+#: ../vfs-methods/fontilus/font-view.c:347
 msgid "Description:"
 msgstr "Beschreibung:"
 
-#: ../vfs-methods/fontilus/font-view.c:407
+#: ../vfs-methods/fontilus/font-view.c:408
 #, c-format
 msgid "usage: %s fontfile\n"
 msgstr "Aufruf: %s Schriftddatei\n"
@@ -3467,3 +3483,10 @@ msgstr "Miniatur-Vorschaubilder installierter Themen anzeigen?"
 #: ../vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Miniatur-Vorschaubilder von Themen anzeigen?"
+
+#~ msgid ""
+#~ "<i><small><b>Note:</b> Changes to this setting will not take effect until "
+#~ "next time you log in.</small></i>"
+#~ msgstr ""
+#~ "<i><small><b>Hinweis:</b> Änderungen an dieser Einstellung werden erst "
+#~ "bei der nächsten Anmeldung wirksam.</small></i>"
