@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-03-13 18:10+0200\n"
-"PO-Revision-Date: 2005-03-12 18:49+0200\n"
+"POT-Creation-Date: 2005-09-01 19:25+0300\n"
+"PO-Revision-Date: 2005-09-01 09:22+0200\n"
 "Last-Translator: Baris Cicek <baris@teamforce.name.tr>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -18,15 +18,352 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: KBabel 1.9.1\n"
 
-#: capplets/accessibility/at-properties/at-enable-dialog.glade.h:1
+#: ../capplets/about-me/eel-alert-dialog.c:114
+msgid "Image/label border"
+msgstr "Resim/etiket kenarlığı"
+
+#: ../capplets/about-me/eel-alert-dialog.c:115
+msgid "Width of border around the label and image in the alert dialog"
+msgstr ""
+"Uyarı penceresindeki resmin ve etiketin çevresindeki kenarlığın genişliği"
+
+#: ../capplets/about-me/eel-alert-dialog.c:124
+msgid "Alert Type"
+msgstr "Uyarı Türü"
+
+#: ../capplets/about-me/eel-alert-dialog.c:125
+msgid "The type of alert"
+msgstr "Uyarının türü"
+
+#: ../capplets/about-me/eel-alert-dialog.c:133
+msgid "Alert Buttons"
+msgstr "Uyarı Düğmeleri"
+
+#: ../capplets/about-me/eel-alert-dialog.c:134
+msgid "The buttons shown in the alert dialog"
+msgstr "Uyarı penceresinde gösterilen düğmeler"
+
+#: ../capplets/about-me/eel-alert-dialog.c:198
+msgid "Show more _details"
+msgstr "Daha fazla _ayrıntı göster"
+
+#: ../capplets/about-me/gnome-about-me.desktop.in.in.h:1
+#: ../capplets/about-me/gnome-about-me.glade.h:14
+msgid "About Me"
+msgstr "Benim Hakkımda"
+
+#: ../capplets/about-me/gnome-about-me.desktop.in.in.h:2
+msgid "Set your personal information"
+msgstr "Kişisel bilgilerinizi ayarlayın"
+
+#: ../capplets/about-me/gnome-about-me.c:554
+msgid "Select Image"
+msgstr "Resim Seç"
+
+#: ../capplets/about-me/gnome-about-me.c:556
+msgid "No Image"
+msgstr "Resim Yok"
+
+#: ../capplets/about-me/gnome-about-me.c:706
+msgid ""
+"There was an error while trying to get the addressbook information\n"
+"Evolution Data Server can't handle the protocol"
+msgstr ""
+"Adres defteri bilgileri alınmaya çalışılırken bir hata oluştu\n"
+"Evolution Veri Sunucusu bu protokolü işleyemiyor"
+
+#: ../capplets/about-me/gnome-about-me.c:727
+msgid "Unable to open address book"
+msgstr "Adres defteri açılamadı"
+
+#: ../capplets/about-me/gnome-about-me.c:739
+msgid "Unknown login ID, the user database might be corrupted"
+msgstr "Bilinmeyen giriş ID'si, kullanıcı veritabanı bozulmuş olabilir"
+
+#: ../capplets/about-me/gnome-about-me.c:770
+#: ../capplets/about-me/gnome-about-me.c:772
+#, c-format
+msgid "About %s"
+msgstr "%s Hakkında"
+
+#: ../capplets/about-me/gnome-about-me-password.c:101
+#: ../capplets/about-me/gnome-about-me-password.c:479
+msgid "Old password is incorrect, please retype it"
+msgstr "Eski parola doğru değil, lütfen tekrar yazın"
+
+#: ../capplets/about-me/gnome-about-me-password.c:112
+msgid "System error has occurred"
+msgstr "Sistem hatası oluştu"
+
+#: ../capplets/about-me/gnome-about-me-password.c:113
+msgid "Could not run /usr/bin/passwd"
+msgstr "/usr/bin/passwd çalıştırılamadı"
+
+#: ../capplets/about-me/gnome-about-me-password.c:114
+msgid "Unable to launch backend"
+msgstr "Araç çalıştırılamadı"
+
+#: ../capplets/about-me/gnome-about-me-password.c:116
+#: ../capplets/about-me/gnome-about-me-password.c:117
+msgid "Unexpected error has occurred"
+msgstr "Beklenmeyen bir hata oluştu"
+
+#: ../capplets/about-me/gnome-about-me-password.c:315
+msgid "Password is too short"
+msgstr "Parola çok kısa"
+
+#: ../capplets/about-me/gnome-about-me-password.c:318
+#: ../capplets/about-me/gnome-about-me-password.c:321
+msgid "Password is too simple"
+msgstr "Parola çok basit"
+
+#: ../capplets/about-me/gnome-about-me-password.c:324
+msgid "Old and new passwords are too similar"
+msgstr "Eski ve yeni parolalar birbirine çok benziyor"
+
+#: ../capplets/about-me/gnome-about-me-password.c:328
+msgid "Old and new password are the same"
+msgstr "Eski ve yeni parolalar birbirinin aynısı"
+
+#: ../capplets/about-me/gnome-about-me-password.c:406
+msgid "Please type the passwords."
+msgstr "Lütfen parolaları bir daha yazın."
+
+#: ../capplets/about-me/gnome-about-me-password.c:414
+msgid "Please type the password again, it is wrong."
+msgstr "Lütfen parolayı bir daha yazın, parola yanlış."
+
+#: ../capplets/about-me/gnome-about-me-password.c:417
+msgid "Click on Change Password to change the password."
+msgstr "Parolayı değiştirmek için Parola Değiştir'in üzerine tıklayın."
+
+#: ../capplets/about-me/gnome-about-me.glade.h:1
+#: ../vfs-methods/themus/apply-font.glade.h:1
+msgid " "
+msgstr " "
+
+#: ../capplets/about-me/gnome-about-me.glade.h:2
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
+#: ../capplets/font/font-properties.glade.h:1
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:1
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:1
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:1
+msgid "    "
+msgstr "    "
+
+#: ../capplets/about-me/gnome-about-me.glade.h:3
+msgid "<b>Email</b>"
+msgstr "<b>E-posta</b>"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:4
+msgid "<b>Home</b>"
+msgstr "<b>Ev</b>"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:5
+msgid "<b>Instant Messaging</b>"
+msgstr "<b>Anında Mesajlaşma</b>"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:6
+msgid "<b>Job</b>"
+msgstr "<b>Meslek</b>"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:7
+msgid "<b>Please type the passwords.</b>"
+msgstr "<b>Lütfen parolaları yazın.</b>"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:8
+msgid "<b>Telephone</b>"
+msgstr "<b>Telefon</b>"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:9
+msgid "<b>Web</b>"
+msgstr "<b>Web</b>"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:10
+msgid "<b>Work</b>"
+msgstr "<b>İş</b>"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:11
+msgid "A_IM/iChat:"
+msgstr "A_IM/iChat:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:12
+msgid "A_ddress:"
+msgstr "_Adres:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:13
+msgid "A_ssistant:"
+msgstr "_Yardımcı:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:15
+msgid "Address"
+msgstr "Adres"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:16
+msgid "C_ity:"
+msgstr "Ş_ehir:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:17
+msgid "C_ompany:"
+msgstr "Şi_rket:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:18
+msgid "Cale_ndar:"
+msgstr "_Takvim:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:19
+msgid "Change Passwo_rd..."
+msgstr "Parola _Değiştir..."
+
+#: ../capplets/about-me/gnome-about-me.glade.h:20
+msgid "Change Password"
+msgstr "Parola Değiştir"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:21
+msgid "Ci_ty:"
+msgstr "Ş_ehir:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:22
+msgid "Co_untry:"
+msgstr "Ü_lke:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:23
+msgid "Contact"
+msgstr "Bağlantı"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:24
+msgid "Cou_ntry:"
+msgstr "Ül_ke:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:25
+msgid "Full Name"
+msgstr "Tam İsim"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:26
+msgid "Hom_e:"
+msgstr "_Ev:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:27
+msgid "IC_Q:"
+msgstr "IC_Q:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:28
+msgid "M_SN:"
+msgstr "M_SN:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:29
+msgid "Old pa_ssword:"
+msgstr "Eski _parola:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:30
+msgid "P.O. _box:"
+msgstr "Posta _Kutusu:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:31
+msgid "P._O. box:"
+msgstr "P_osta Kutusu:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:32
+msgid "Personal Info"
+msgstr "Kişisel Bilgi"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:33
+msgid "State/Pro_vince:"
+msgstr "Eyalet/_Mahalle:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:34
+msgid "User name:"
+msgstr "_Kullanıcı adı:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:35
+msgid "Web _log:"
+msgstr "Web _günlüğü:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:36
+msgid "Wor_k:"
+msgstr "_İş:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:37
+msgid "Work _fax:"
+msgstr "İş _faks:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:38
+msgid "Zip/_Postal code:"
+msgstr "_Posta kodu:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:39
+msgid "_Address:"
+msgstr "_Adres:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:40
+msgid "_Department:"
+msgstr "_Departman:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:41
+msgid "_Groupwise:"
+msgstr "_Groupwise:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:42
+msgid "_Home page:"
+msgstr "_Başlangıç sayfası:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:43
+msgid "_Home:"
+msgstr "_İş:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:44
+msgid "_Jabber:"
+msgstr "_Jabber:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:45
+msgid "_Manager:"
+msgstr "_Yönetici:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:46
+msgid "_Mobile:"
+msgstr "_Mobil:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:47
+msgid "_New password:"
+msgstr "Yeni p_arola:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:48
+msgid "_Profession:"
+msgstr "Uzmanlık a_lanı:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:49
+msgid "_Retype new password:"
+msgstr "_Yeni parolayı tekrar yazın:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:50
+msgid "_State/Province:"
+msgstr "_Eyalet/Mahalle:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:51
+msgid "_Title:"
+msgstr "Ü_nvan:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:52
+msgid "_Work:"
+msgstr "_İş:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:53
+msgid "_Yahoo:"
+msgstr "_Yahoo:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:54
+msgid "_Zip/Postal code:"
+msgstr "_Posta kodu:"
+
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:1
 msgid "<b>Applications</b>"
 msgstr "<b>Uygulamalar</b>"
 
-#: capplets/accessibility/at-properties/at-enable-dialog.glade.h:2
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:2
 msgid "<b>Support</b>"
 msgstr "<b>Destek</b>"
 
-#: capplets/accessibility/at-properties/at-enable-dialog.glade.h:3
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:3
 msgid ""
 "<small><i><b>Note:</b> Changes to this setting will not take effect until "
 "you next log in.</i></small>"
@@ -34,43 +371,43 @@ msgstr ""
 "<small><i><b>Not:</b> Bu ayarlardaki değişiklikler bir dahaki girişinize "
 "kadar etkin olmayacak.</i></small>"
 
-#: capplets/accessibility/at-properties/at-enable-dialog.glade.h:4
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:4
 msgid "Assistive Technology Preferences"
 msgstr "Yardımcı Teknoloji Tercihleri"
 
-#: capplets/accessibility/at-properties/at-enable-dialog.glade.h:5
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:5
 msgid "Close and _Log Out"
 msgstr "Kapat ve Çı_k"
 
-#: capplets/accessibility/at-properties/at-enable-dialog.glade.h:6
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:6
 msgid "Start these assistive technologies every time you log in:"
 msgstr "Bu yardımcı teknolojileri her girişte başlat:"
 
-#: capplets/accessibility/at-properties/at-enable-dialog.glade.h:7
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:7
 msgid "_Enable assistive technologies"
 msgstr "_Yardımcı teknolojileri etkinleştir"
 
-#: capplets/accessibility/at-properties/at-enable-dialog.glade.h:8
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:8
 msgid "_Magnifier"
 msgstr "_Büyüteç"
 
-#: capplets/accessibility/at-properties/at-enable-dialog.glade.h:9
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:9
 msgid "_On-screen keyboard"
 msgstr "_Ekran klavyesi"
 
-#: capplets/accessibility/at-properties/at-enable-dialog.glade.h:10
+#: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:10
 msgid "_Screenreader"
 msgstr "_Ekran okuyucu"
 
-#: capplets/accessibility/at-properties/at-properties.desktop.in.in.h:1
+#: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:1
 msgid "Assistive Technology Support"
 msgstr "Yardımcı Teknoloji Desteği"
 
-#: capplets/accessibility/at-properties/at-properties.desktop.in.in.h:2
+#: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:2
 msgid "Enable support for GNOME assistive technologies at login"
 msgstr "GNOME yardımcı teknolojilerini girişte etkin hale getir"
 
-#: capplets/accessibility/at-properties/main.c:60
+#: ../capplets/accessibility/at-properties/main.c:60
 msgid ""
 "No Assistive Technology is available on your system.  The 'gok' package must "
 "be installed in order to get on-screen keyboard support, and the "
@@ -82,7 +419,7 @@ msgstr ""
 "büyüteç ve ekran okuyucu yeteneklerinin olması için de 'gnopernicus' "
 "paketinin kurulmuş olması gerekiyor."
 
-#: capplets/accessibility/at-properties/main.c:62
+#: ../capplets/accessibility/at-properties/main.c:62
 msgid ""
 "Not all available assistive technologies are installed on your system.  The "
 "'gok' package must be installed in order to get on-screen keyboard support."
@@ -90,7 +427,7 @@ msgstr ""
 "Sisteminizde bütün yardımcı teknolojiler yüklü değil.  Ekran klavyesi "
 "desteği için 'gok' paketinin yüklü olması gerekiyor."
 
-#: capplets/accessibility/at-properties/main.c:64
+#: ../capplets/accessibility/at-properties/main.c:64
 msgid ""
 "Not all available assistive technologies are installed on your system.  The "
 "'gnopernicus' package must be installed for screenreading and magnifying "
@@ -99,36 +436,36 @@ msgstr ""
 "Sisteminizde bütün yardımcı teknolojiler yüklü değil.  Büyüteç ve ekran "
 "okuyucu yetenekleri için 'gnopernicus' paketinin yüklü olması gerekiyor."
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:241
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:241
 #, c-format
 msgid "There was an error launching the mouse preferences dialog: %s"
 msgstr "Fare tercihleri penceresinin başlatılmasında bir hata oluştu: %s"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:337
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:396
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:337
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:398
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "AccessX ayarları '%s' dosyasından alınamadı"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:433
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:435
 msgid "Import Feature Settings File"
 msgstr "Özellik Ayarları Dosyasını Al"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:437
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:439
 msgid "_Import"
 msgstr "_Aktar"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
-#: capplets/keyboard/keyboard.desktop.in.in.h:1
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.in.h:1
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:20
+#: ../capplets/keyboard/keyboard.desktop.in.in.h:1
 msgid "Keyboard"
 msgstr "Klavye"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.in.h:2
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.in.h:2
 msgid "Set your keyboard accessibility preferences"
 msgstr "Klavye erişilebilirlik tercihlerini ayarlayın"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.c:59
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.c:59
 msgid ""
 "This system does not seem to have the XKB extension.  The keyboard "
 "accessibility features will not operate without it."
@@ -136,100 +473,91 @@ msgstr ""
 "Bu sistemde XKB eklentisi bulunamadı.  Klavye erişim özellikleri bu eklenti "
 "olmadan çalışmayacaktır."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
-#: capplets/font/font-properties.glade.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:1
-#: capplets/mouse/gnome-mouse-properties.glade.h:1
-#: capplets/ui-properties/gnome-ui-properties.glade.h:1
-msgid "    "
-msgstr "    "
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:2
-#: capplets/network/gnome-network-preferences.glade.h:2
-#: capplets/theme-switcher/theme-install.glade.h:1
-#: capplets/theme-switcher/theme-properties.glade.h:1
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:1
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:2
+#: ../capplets/theme-switcher/theme-install.glade.h:1
+#: ../capplets/theme-switcher/theme-properties.glade.h:1
 msgid "*"
 msgstr "*"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
 msgid "<b>Enable Bo_unce Keys</b>"
 msgstr "<b>Tuş _Sıçratmasını Etkinleştir</b>"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
 msgid "<b>Enable Slo_w Keys</b>"
 msgstr "<b>Tuş _Yavaşlatmasını Etkinleştir</b>"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
 msgid "<b>Enable _Mouse Keys</b>"
 msgstr "<b>_Fare Tuşlarını Etkinleştir</b>"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
 msgid "<b>Enable _Repeat Keys</b>"
 msgstr "<b>Tuş _Tekrarlamasını Etkinleştir</b>"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
 msgid "<b>Enable _Sticky Keys</b>"
 msgstr "<b>_Yapışkan Tuşları Etkinleştir</b>"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
 msgid "<b>Features</b>"
 msgstr "<b>Özellikler</b>"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
 msgid "<b>Toggle Keys</b>"
 msgstr "<b>Aç/Kapat Tuşları</b>"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
 msgid "Basic"
 msgstr "Temel"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:11
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:11
 msgid "Beep if key is re_jected"
 msgstr "Tuş _kabul edilmediğinde biple"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:12
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:12
 msgid "Beep when _features turned on or off from keyboard"
 msgstr "Özellikler klavyeden kapatıldığında ya da _açıldığında biple"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:13
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:13
 msgid "Beep when _modifier is pressed"
 msgstr "_Değiştirici tuş basıldığında biple"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
 msgid "Beep when an LED is turned on and two beeps when one is turned off."
 msgstr "Bir LED yandığında biple ve söndüğünde çift biple."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
 msgid "Beep when key is:"
 msgstr "Tuş bu ise biple:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:16
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:16
 msgid "Del_ay:"
 msgstr "_Gecikme:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:17
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:17
 msgid "Delay between keypress and pointer mo_vement:"
 msgstr "Tuş bası_mı ve imleç hareketi arasındaki gecikme süresi:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:18
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:18
 msgid "Disa_ble if two keys pressed together"
 msgstr "Eğer iki tuşa _birlikte basılırsa etkisizleştir"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:19
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:19
 msgid "E_nable Toggle Keys"
 msgstr "_Aç/Kapat Tuşlarını Etkinleştir"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:20
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:20
 msgid "Filters"
 msgstr "Filtreler"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:21
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:21
 msgid "I_gnore duplicate keypresses within:"
 msgstr "_Bu sürede çoklu tuş basmalarını yoksay:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:22
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:22
 msgid ""
 "Ignore all subsequent presses of the SAME key if they happen within a user "
 "selectable period of time."
@@ -237,23 +565,23 @@ msgstr ""
 "Kullanıcının seçtiği zaman aralığı içinde birden fazla kez aynı tuşa "
 "basılmasını yoksay."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:23
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:23
 msgid "Keyboard Accessibility Preferences (AccessX)"
 msgstr "Klavye Erişilebilirlik Tercihleri (AccessX)"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
 msgid "Ma_ximum pointer speed:"
 msgstr "_Azami imleç hızı:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
 msgid "Mouse Keys"
 msgstr "Fare Tuşları"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
 msgid "Mouse _Preferences..."
 msgstr "_Fare Tercihleri..."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
 msgid ""
 "Only accept keys after they have been pressed and held for a user adjustable "
 "amount of time."
@@ -261,7 +589,7 @@ msgstr ""
 "Sadece basıldıktan sonra kullanıcının belirlediği bir süre basılı beklenen "
 "tuşları kabul et."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:28
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:28
 msgid ""
 "Perform multiple simultaneous key press operations by pressing modifier keys "
 "in sequence."
@@ -269,164 +597,164 @@ msgstr ""
 "Aynı anda birden fazla tuş basma işlemini, değiştirici tuşlara sırayla "
 "basıldığında gerçekleştir."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:29
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:29
 msgid "S_peed:"
 msgstr "_Hız:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:30
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:30
 msgid "Time to acce_lerate to maximum speed:"
 msgstr "_Azami hıza gelmek için geçen süre:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:31
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:31
 msgid "Turn the numeric keypad into a mouse control pad."
 msgstr "Nümerik klavyeyi fare kontrol klavyesine dönüştür."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:32
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:32
 msgid "_Disable if unused for:"
 msgstr "_Bu süre boyunca kullanılmazsa etkisizleştir:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
 msgid "_Enable keyboard accessibility features"
 msgstr "_Klavye erişilebilirlik özelliklerini etkinleştir"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
 msgid "_Import Feature Settings..."
 msgstr "Ö_zellik Ayarlarını Al..."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:35
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:35
 msgid "_Only accept keys held for:"
 msgstr "_Sadece bu süre basılan tuşları kabul et:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:39
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:39
 msgid "_Type to test settings:"
 msgstr "_Ayarları kontrol etmek için deneyin:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:37
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:37
 msgid "_accepted"
 msgstr "_kabul edildi"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:38
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:38
 msgid "_pressed"
 msgstr "_basıldı"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:39
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:39
 msgid "_rejected"
 msgstr "k_abul edilmedi"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:40
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:40
 msgid "characters/second"
 msgstr "karakter/saniye"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:41
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:41
 msgid "milliseconds"
 msgstr "milisaniye"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:42
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:42
 msgid "pixels/second"
 msgstr "piksel/saniye"
 
 #. set the timeout value  label with correct value of timeout
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
-#: capplets/mouse/gnome-mouse-properties.c:133
-#: capplets/mouse/gnome-mouse-properties.c:578
-#: capplets/mouse/gnome-mouse-properties.glade.h:27
-#: capplets/windows/gnome-window-properties.glade.h:10
+#: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
+#: ../capplets/mouse/gnome-mouse-properties.c:131
+#: ../capplets/mouse/gnome-mouse-properties.c:878
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
+#: ../capplets/windows/gnome-window-properties.glade.h:10
 msgid "seconds"
 msgstr "saniye"
 
-#: capplets/background/background.desktop.in.in.h:1
+#: ../capplets/background/background.desktop.in.in.h:1
 msgid "Change your Desktop Background settings"
 msgstr "Masaüstü Arkaplan özelliklerini değiştirin"
 
-#: capplets/background/background.desktop.in.in.h:2
+#: ../capplets/background/background.desktop.in.in.h:2
 msgid "Desktop Background"
 msgstr "Masaüstü Arkaplanı"
 
-#: capplets/background/gnome-background-properties.glade.h:1
+#: ../capplets/background/gnome-background-properties.glade.h:1
 msgid "<b>Desktop _Wallpaper</b>"
 msgstr "<b>Masaüstü _Duvar Kağıdı</b>"
 
-#: capplets/background/gnome-background-properties.glade.h:2
+#: ../capplets/background/gnome-background-properties.glade.h:2
 msgid "<b>_Desktop Colors</b>"
 msgstr "<b>_Masaüstü Renkleri</b> "
 
-#: capplets/background/gnome-background-properties.glade.h:3
+#: ../capplets/background/gnome-background-properties.glade.h:3
 msgid "Desktop Background Preferences"
 msgstr "Masaüstü Arkaplan Tercihleri"
 
-#: capplets/background/gnome-background-properties.glade.h:4
-msgid "Pick a color"
-msgstr "Bir renk seçin"
+#: ../capplets/background/gnome-background-properties.glade.h:4
+msgid "Open a dialog to specify the color"
+msgstr "Bir renk belirtmek için pencere aç"
 
-#: capplets/background/gnome-background-properties.glade.h:5
+#: ../capplets/background/gnome-background-properties.glade.h:5
 msgid "_Add Wallpaper"
 msgstr "_Duvar Kağıdı Ekle"
 
-#: capplets/background/gnome-background-properties.glade.h:6
+#: ../capplets/background/gnome-background-properties.glade.h:6
 msgid "_Style:"
 msgstr "_Stil:"
 
-#: capplets/background/gnome-wp-capplet.c:72
-#: capplets/common/capplet-util.c:340
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:326
+#: ../capplets/background/gnome-wp-capplet.c:74
+#: ../capplets/common/capplet-util.c:340
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:333
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "Yardım dosyasının görüntülenmesinde bir hata oluştu: %s"
 
-#: capplets/background/gnome-wp-capplet.c:1064
-#: capplets/background/gnome-wp-capplet.c:1080
+#: ../capplets/background/gnome-wp-capplet.c:1038
+#: ../capplets/background/gnome-wp-capplet.c:1056
 msgid "Centered"
 msgstr "Ortalanmış"
 
-#: capplets/background/gnome-wp-capplet.c:1088
-#: capplets/background/gnome-wp-capplet.c:1103
+#: ../capplets/background/gnome-wp-capplet.c:1064
+#: ../capplets/background/gnome-wp-capplet.c:1081
 msgid "Fill Screen"
 msgstr "Ekranı Doldur"
 
-#: capplets/background/gnome-wp-capplet.c:1111
-#: capplets/background/gnome-wp-capplet.c:1126
+#: ../capplets/background/gnome-wp-capplet.c:1089
+#: ../capplets/background/gnome-wp-capplet.c:1106
 msgid "Scaled"
 msgstr "Odaklanmış"
 
-#: capplets/background/gnome-wp-capplet.c:1134
-#: capplets/background/gnome-wp-capplet.c:1149
+#: ../capplets/background/gnome-wp-capplet.c:1114
+#: ../capplets/background/gnome-wp-capplet.c:1131
 msgid "Tiled"
 msgstr "Döşeli"
 
-#: capplets/background/gnome-wp-capplet.c:1173
-#: capplets/background/gnome-wp-capplet.c:1182
+#: ../capplets/background/gnome-wp-capplet.c:1155
+#: ../capplets/background/gnome-wp-capplet.c:1164
 msgid "Solid Color"
 msgstr "Sabit Renk"
 
-#: capplets/background/gnome-wp-capplet.c:1190
-#: capplets/background/gnome-wp-capplet.c:1199
+#: ../capplets/background/gnome-wp-capplet.c:1172
+#: ../capplets/background/gnome-wp-capplet.c:1181
 msgid "Horizontal Gradient"
 msgstr "Dikey Geçiş"
 
-#: capplets/background/gnome-wp-capplet.c:1207
-#: capplets/background/gnome-wp-capplet.c:1216
+#: ../capplets/background/gnome-wp-capplet.c:1189
+#: ../capplets/background/gnome-wp-capplet.c:1198
 msgid "Vertical Gradient"
 msgstr "Yatay Geçiş"
 
 #. Create the file chooser dialog stuff here
-#: capplets/background/gnome-wp-capplet.c:1263
+#: ../capplets/background/gnome-wp-capplet.c:1247
 msgid "Add Wallpaper"
 msgstr "Duvar Kağıdı Ekle"
 
-#: capplets/background/gnome-wp-info.c:49
+#: ../capplets/background/gnome-wp-info.c:57
 msgid "No Wallpaper"
 msgstr "Duvar Kağıdı Yok"
 
-#: capplets/background/gnome-wp-item.c:289
-#: capplets/background/gnome-wp-item.c:291
+#: ../capplets/background/gnome-wp-item.c:292
+#: ../capplets/background/gnome-wp-item.c:294
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "piksel"
 msgstr[1] ""
 
-#: capplets/common/activate-settings-daemon.c:18
+#: ../capplets/common/activate-settings-daemon.c:18
 msgid ""
 "Unable to start the settings manager 'gnome-settings-daemon'.\n"
 "Without the GNOME settings manager running, some preferences may not take "
@@ -439,164 +767,161 @@ msgstr ""
 "GNOME harici (örneğin KDE) ayar sisteminin etkin olduğunu ve GNOME ayar "
 "yöneticisiyle çakıştığını gösterebilir."
 
-#: capplets/common/capplet-stock-icons.c:94
+#: ../capplets/common/capplet-stock-icons.c:94
 #, c-format
 msgid "Unable to load capplet stock icon '%s'\n"
 msgstr "'%s' simgesi yüklenemedi\n"
 
-#: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
+#: ../capplets/common/capplet-util.c:239 ../capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr "Sadece ayarları uygula ve çık"
 
-#: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:765
-#: capplets/keyboard/gnome-keyboard-properties.c:225
-#: capplets/mouse/gnome-mouse-properties.c:812
-#: capplets/sound/sound-properties-capplet.c:244
+#: ../capplets/common/capplet-util.c:243
+#: ../capplets/default-applications/gnome-default-applications-properties.c:765
+#: ../capplets/keyboard/gnome-keyboard-properties.c:225
+#: ../capplets/mouse/gnome-mouse-properties.c:1014
+#: ../capplets/sound/sound-properties-capplet.c:244
 msgid "Retrieve and store legacy settings"
 msgstr "Eski ayarları al ve sakla"
 
-#: capplets/common/file-transfer-dialog.c:95
+#: ../capplets/common/file-transfer-dialog.c:94
 #, c-format
-msgid "%i of %i"
-msgstr "%i / %i"
+msgid "Copying file: %i of %i"
+msgstr "Dosya kopyalanıyor: %i / %i"
 
-#: capplets/common/file-transfer-dialog.c:119
+#: ../capplets/common/file-transfer-dialog.c:122
 #, c-format
-msgid "Transferring: %s"
-msgstr "Aktarılıyor: %s"
+msgid "Copying '%s'"
+msgstr "'%s' kopyalanıyor"
 
-#: capplets/common/file-transfer-dialog.c:126
-#, c-format
-msgid "From: %s"
-msgstr "Kaynak: %s"
-
-#: capplets/common/file-transfer-dialog.c:134
-#, c-format
-msgid "To: %s"
-msgstr "Hedef: %s"
-
-#: capplets/common/file-transfer-dialog.c:185
+#: ../capplets/common/file-transfer-dialog.c:193
 msgid "From URI"
 msgstr "Kaynak URI"
 
-#: capplets/common/file-transfer-dialog.c:186
+#: ../capplets/common/file-transfer-dialog.c:194
 msgid "URI currently transferring from"
 msgstr "URI buradan aktarıyor"
 
-#: capplets/common/file-transfer-dialog.c:193
+#: ../capplets/common/file-transfer-dialog.c:201
 msgid "To URI"
 msgstr "Hedef URI"
 
-#: capplets/common/file-transfer-dialog.c:194
+#: ../capplets/common/file-transfer-dialog.c:202
 msgid "URI currently transferring to"
 msgstr "URI halen buraya aktarıyor"
 
-#: capplets/common/file-transfer-dialog.c:201
+#: ../capplets/common/file-transfer-dialog.c:209
 msgid "Fraction completed"
 msgstr "İşlem tamamlandı"
 
-#: capplets/common/file-transfer-dialog.c:202
+#: ../capplets/common/file-transfer-dialog.c:210
 msgid "Fraction of transfer currently completed"
 msgstr "Transfer işlemi şu anda tamamlandı"
 
-#: capplets/common/file-transfer-dialog.c:209
+#: ../capplets/common/file-transfer-dialog.c:217
 msgid "Current URI index"
 msgstr "Güncel URI dizini"
 
-#: capplets/common/file-transfer-dialog.c:210
+#: ../capplets/common/file-transfer-dialog.c:218
 msgid "Current URI index - starts from 1"
 msgstr "Güncel URI dizini - 1'den başlar"
 
-#: capplets/common/file-transfer-dialog.c:217
+#: ../capplets/common/file-transfer-dialog.c:225
 msgid "Total URIs"
 msgstr "Toplam URI"
 
-#: capplets/common/file-transfer-dialog.c:218
+#: ../capplets/common/file-transfer-dialog.c:226
 msgid "Total number of URIs"
 msgstr "Toplam URI sayısı"
 
-#: capplets/common/file-transfer-dialog.c:372
-#: capplets/common/file-transfer-dialog.c:374
+#: ../capplets/common/file-transfer-dialog.c:327
+#: ../capplets/common/file-transfer-dialog.c:369
+msgid "Copying files"
+msgstr "Dosyalar kopyalanıyor"
+
+#: ../capplets/common/file-transfer-dialog.c:345
+msgid "From:"
+msgstr "Gönderen:"
+
+#: ../capplets/common/file-transfer-dialog.c:349
+msgid "To:"
+msgstr "Alan:"
+
+#: ../capplets/common/file-transfer-dialog.c:448
 msgid "Connecting..."
 msgstr "Bağlantı kuruluyor..."
 
-#: capplets/common/file-transfer-dialog.c:379
-#: capplets/common/file-transfer-dialog.c:381
-msgid "Downloading..."
-msgstr "İndiriliyor..."
-
-#: capplets/common/gconf-property-editor.c:170
+#: ../capplets/common/gconf-property-editor.c:170
 msgid "Key"
 msgstr "Anahtar"
 
-#: capplets/common/gconf-property-editor.c:171
+#: ../capplets/common/gconf-property-editor.c:171
 msgid "GConf key to which this property editor is attached"
 msgstr "Bu özellik düzenleyicisinin bağlı olduğu GConf tuşu"
 
-#: capplets/common/gconf-property-editor.c:177
+#: ../capplets/common/gconf-property-editor.c:177
 msgid "Callback"
 msgstr "Geriçağır"
 
-#: capplets/common/gconf-property-editor.c:178
+#: ../capplets/common/gconf-property-editor.c:178
 msgid "Issue this callback when the value associated with key gets changed"
 msgstr "Bu geriçağırımı anahtar ile alakalı değer değiştiği zaman kullanın"
 
-#: capplets/common/gconf-property-editor.c:183
+#: ../capplets/common/gconf-property-editor.c:183
 msgid "Change set"
 msgstr "Değiştirme takımı"
 
-#: capplets/common/gconf-property-editor.c:184
+#: ../capplets/common/gconf-property-editor.c:184
 msgid ""
 "GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr ""
 "GConf değiştirme takımı gconf istemcisine uygulandığında yönlendirilecek "
 "verileri içerir"
 
-#: capplets/common/gconf-property-editor.c:189
+#: ../capplets/common/gconf-property-editor.c:189
 msgid "Conversion to widget callback"
 msgstr "Parçacık geriçağırımına dönüşüm"
 
-#: capplets/common/gconf-property-editor.c:190
+#: ../capplets/common/gconf-property-editor.c:190
 msgid ""
 "Callback to be issued when data are to be converted from GConf to the widget"
 msgstr "Veri GConf'dan parçacığa dönüştüğünde uygulanacak geriçağırım"
 
-#: capplets/common/gconf-property-editor.c:195
+#: ../capplets/common/gconf-property-editor.c:195
 msgid "Conversion from widget callback"
 msgstr "Parçacıktan dönüşüm geriçağırımı"
 
-#: capplets/common/gconf-property-editor.c:196
+#: ../capplets/common/gconf-property-editor.c:196
 msgid ""
 "Callback to be issued when data are to be converted to GConf from the widget"
 msgstr "Veri parçacıktan GConf'a dönüştüğünde uygulanacak geriçağırım"
 
-#: capplets/common/gconf-property-editor.c:201
+#: ../capplets/common/gconf-property-editor.c:201
 msgid "UI Control"
 msgstr "Arayüz Kontrolü"
 
-#: capplets/common/gconf-property-editor.c:202
+#: ../capplets/common/gconf-property-editor.c:202
 msgid "Object that controls the property (normally a widget)"
 msgstr "Bir özelliği kontrol eden nesne (genellikle bir parçacık)"
 
-#: capplets/common/gconf-property-editor.c:217
+#: ../capplets/common/gconf-property-editor.c:217
 msgid "Property editor object data"
 msgstr "Özellik düzenleyici nesne verisi"
 
-#: capplets/common/gconf-property-editor.c:218
+#: ../capplets/common/gconf-property-editor.c:218
 msgid "Custom data required by the specific property editor"
 msgstr "Belli özellik düzenleyicileri için gerekli tercihsel veri"
 
-#: capplets/common/gconf-property-editor.c:224
+#: ../capplets/common/gconf-property-editor.c:224
 msgid "Property editor data freeing callback"
 msgstr "Özellik düzenleyici veri boşaltma geriçağırımı"
 
-#: capplets/common/gconf-property-editor.c:225
+#: ../capplets/common/gconf-property-editor.c:225
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr ""
 "Özellik düzenleyici nesne verisi boşaltılacağında kullanılacak geriçağırım"
 
-#: capplets/common/gconf-property-editor.c:1545
+#: ../capplets/common/gconf-property-editor.c:1466
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -609,7 +934,7 @@ msgstr ""
 "Lütfen dosyanın bulunduğundan emin olun ve tekrar deneyin, ya da farklı bir "
 "arkaplan resmi kullanın."
 
-#: capplets/common/gconf-property-editor.c:1553
+#: ../capplets/common/gconf-property-editor.c:1474
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -622,69 +947,69 @@ msgstr ""
 "\n"
 "Lütfen bunun yerine başka bir resim seçin."
 
-#: capplets/common/gconf-property-editor.c:1672
+#: ../capplets/common/gconf-property-editor.c:1593
 msgid "Please select an image."
 msgstr "Lütfen bir resim seçin."
 
-#: capplets/common/gconf-property-editor.c:1677
+#: ../capplets/common/gconf-property-editor.c:1598
 msgid "_Select"
 msgstr "_Seç"
 
-#: capplets/default-applications/default-applications.desktop.in.in.h:1
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:18
+#: ../capplets/default-applications/default-applications.desktop.in.in.h:1
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:18
 msgid "Preferred Applications"
 msgstr "Tercih Edilen Uygulamalar"
 
-#: capplets/default-applications/default-applications.desktop.in.in.h:2
+#: ../capplets/default-applications/default-applications.desktop.in.in.h:2
 msgid "Select your default applications"
 msgstr "Öntanımlı uygulamalarınızı seçin"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:9
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:9
 msgid "Debian Sensible Browser"
 msgstr "Debian Duyarlı Tarayıcı"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:10
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:10
 msgid "Epiphany"
 msgstr "Epiphany"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:11
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:11
 msgid "Galeon"
 msgstr "Galeon"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:12
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:12
 msgid "Encompass"
 msgstr "Encompass"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:13
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:13
 msgid "Firebird"
 msgstr "Firebird"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:14
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:14
 msgid "Firefox"
 msgstr "Firefox"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:15
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:16
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:15
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:16
 msgid "Mozilla"
 msgstr "Mozilla"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:17
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:17
 msgid "Netscape Communicator"
 msgstr "Netscape Communicator"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:18
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:18
 msgid "Konqueror"
 msgstr "Konqueror"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:19
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:19
 msgid "W3M Text Browser"
 msgstr "W3M Metin Web Tarayıcı"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:20
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:20
 msgid "Lynx Text Browser"
 msgstr "Lynx Metin Web Tarayıcı"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:21
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:21
 msgid "Links Text Browser"
 msgstr "Links Metin Web Tarayıcı"
 
@@ -692,140 +1017,141 @@ msgstr "Links Metin Web Tarayıcı"
 #. * there is only one (the first entry in this list) Evolution entry
 #. * in the list shown to the user
 #.
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:36
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:37
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:38
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:39
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:40
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:41
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:36
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:37
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:38
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:39
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:40
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:41
 msgid "Evolution Mail Reader"
 msgstr "Evolution E-posta Okuyucu"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:42
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:42
 msgid "Balsa"
 msgstr "Balsa"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:43
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:43
 msgid "KMail"
 msgstr "KMail"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:44
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:44
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:45
 msgid "Thunderbird"
 msgstr "Thunderbird"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:45
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:46
 msgid "Mozilla Mail"
 msgstr "Mozilla Mail"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:46
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:47
 msgid "Mutt"
 msgstr "Mutt"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:57
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:58
 msgid "Debian Terminal Emulator"
 msgstr "Debian Terminal Uygulaması"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:58
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:59
 msgid "GNOME Terminal"
 msgstr "GNOME Terminal"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:59
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:60
 msgid "Standard XTerminal"
 msgstr "Standart X Terminali"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:60
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:61
 msgid "NXterm"
 msgstr "NXterm"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:61
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:62
 msgid "RXVT"
 msgstr "RXVT"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:62
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:63
 msgid "aterm"
 msgstr "aterm"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:63
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:64
 msgid "ETerm"
 msgstr "ETerm"
 
-#: capplets/default-applications/gnome-default-applications-properties.c:123
+#: ../capplets/default-applications/gnome-default-applications-properties.c:123
 msgid "Please specify a name and a command for this editor."
 msgstr "Lütfen bu düzenleyici için bir isim ve bir komut girin."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:2
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:2
 msgid "Add..."
 msgstr "Ekle..."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:3
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:3
 msgid "C_ustom"
 msgstr "Ö_zel"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:4
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:4
 msgid "C_ustom:"
 msgstr "Ö_zel:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:5
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:5
 msgid "Can open _URIs"
 msgstr "URI'leri _açabilsin"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:6
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:6
 msgid "Can open multiple _files"
 msgstr "Birden fazla _dosya açabilsin"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:7
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:7
 msgid "Co_mmand:"
 msgstr "Kom_ut:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:8
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:8
 msgid "Custom Editor Properties"
 msgstr "Özel Düzenleyici Özellikleri"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:9
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:9
 msgid "Default Mail Reader"
 msgstr "Öntanımlı E-posta Okuyucu"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:10
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:10
 msgid "Default Terminal"
 msgstr "Öntanımlı Terminal"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:11
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:11
 msgid "Default Text Editor"
 msgstr "Öntanımlı Metin Düzenleyici"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:12
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:12
 msgid "Default Web Browser"
 msgstr "Öntanımlı Web Tarayıcı"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:13
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:13
 msgid "Default Window Manager"
 msgstr "Öntanımlı Pencere Yöneticisi"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:14
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:14
 msgid "Delete"
 msgstr "Sil"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:15
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:15
 msgid "E_xec Flag:"
 msgstr "Ç_alıştırma Bayrağı:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:16
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:16
 msgid "Edit..."
 msgstr "Düzenle..."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:17
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:17
 msgid "Mail Reader"
 msgstr "E-posta Okuyucu"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:19
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:19
 msgid "Run in a _terminal"
 msgstr "_Terminalde çalıştır"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:20
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:20
 msgid "Run in a t_erminal"
 msgstr "T_erminalde çalıştır"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:21
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:21
 msgid ""
 "Select the window manager you want.  You will need to hit apply, wave the "
 "magic wand, and do a magic dance for it to work."
@@ -833,91 +1159,91 @@ msgstr ""
 "İstediğiniz bir pencere yöneticisini seçiniz.  Çalıştırmak için uygulaya "
 "basıp büyülü çubuğunuzu sallayıp, büyülü dansı yapmanız gerekiyor."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:22
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:22
 msgid "Terminal"
 msgstr "Terminal"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:23
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:23
 msgid "Text Editor"
 msgstr "Metin Düzenleyici"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:24
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:24
 msgid "Understands _Netscape Remote Control"
 msgstr "_Netscape Uzaktan Kontrolünü Kullanır"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:25
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:25
 msgid "Use this _editor to open text files in the file manager"
 msgstr ""
 "Dosya _yöneticisi içinde metin dosyalarını açmak için bu düzenleyiciyi kullan"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:26
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:26
 msgid "Web Browser"
 msgstr "Web Tarayıcı"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:27
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:27
 msgid "Window Manager"
 msgstr "Pencere Yöneticisi"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:28
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:28
 msgid "_Command:"
 msgstr "Kom_ut:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:29
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:29
 msgid "_Name:"
 msgstr "İ_sim:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:30
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:30
 msgid "_Properties..."
 msgstr "Ö_zellikler..."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:31
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:31
 msgid "_Select:"
 msgstr "_Seç:"
 
-#: capplets/display/display-properties.desktop.in.in.h:1
+#: ../capplets/display/display-properties.desktop.in.in.h:1
 msgid "Change screen resolution"
 msgstr "Ekran çözünürlüğünü değiştir"
 
-#: capplets/display/display-properties.desktop.in.in.h:2
+#: ../capplets/display/display-properties.desktop.in.in.h:2
 msgid "Screen Resolution"
 msgstr "Ekran Çözünürlüğü"
 
-#: capplets/display/main.c:333
+#: ../capplets/display/main.c:345
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: capplets/display/main.c:436
+#: ../capplets/display/main.c:448
 msgid "_Resolution:"
 msgstr "_Çözünürlük:"
 
-#: capplets/display/main.c:455
+#: ../capplets/display/main.c:467
 msgid "Re_fresh rate:"
 msgstr "_Tazeleme hızı:"
 
-#: capplets/display/main.c:476
+#: ../capplets/display/main.c:488
 msgid "Default Settings"
 msgstr "Öntanımlı Ayarlar"
 
-#: capplets/display/main.c:478
+#: ../capplets/display/main.c:490
 #, c-format
 msgid "Screen %d Settings\n"
 msgstr "%d. Ekran Ayarları\n"
 
-#: capplets/display/main.c:504
+#: ../capplets/display/main.c:516
 msgid "Screen Resolution Preferences"
 msgstr "Ekran Çözünürlük Tercihleri"
 
-#: capplets/display/main.c:541
+#: ../capplets/display/main.c:553
 #, c-format
 msgid "_Make default for this computer (%s) only"
 msgstr "_Sadece bu bilgisayar (%s) için öntanımlı yap"
 
-#: capplets/display/main.c:559
+#: ../capplets/display/main.c:571
 msgid "Options"
 msgstr "Seçenekler"
 
-#: capplets/display/main.c:580
+#: ../capplets/display/main.c:592
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d second the previous "
@@ -932,23 +1258,23 @@ msgstr[1] ""
 "Yeni ayarlar deneniyor. Eğer %d saniye içinde cevap vermezseniz önceki "
 "ayarlara dönülecek."
 
-#: capplets/display/main.c:626
+#: ../capplets/display/main.c:638
 msgid "Keep Resolution"
 msgstr "Bu Çözünürlüğü Kullan"
 
-#: capplets/display/main.c:630
+#: ../capplets/display/main.c:642
 msgid "Do you want to keep this resolution?"
 msgstr "Bu çözünürlüğü tutmak istiyor musunuz?"
 
-#: capplets/display/main.c:655
+#: ../capplets/display/main.c:667
 msgid "Use _previous resolution"
 msgstr "Ö_nceki çözünürlüğü kullan"
 
-#: capplets/display/main.c:655
+#: ../capplets/display/main.c:667
 msgid "_Keep resolution"
 msgstr "_Bu çözünürlüğü kullan"
 
-#: capplets/display/main.c:806
+#: ../capplets/display/main.c:818
 msgid ""
 "The X Server does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
@@ -956,7 +1282,7 @@ msgstr ""
 "X Sunucu XRandR eklentisini desteklemiyor.  Grafiksel arayüzde anında "
 "çözünürlük değişikliği yapılamaz."
 
-#: capplets/display/main.c:814
+#: ../capplets/display/main.c:826
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
@@ -964,153 +1290,135 @@ msgstr ""
 "XRandR eklentisinin sürümü bu program ile uyumsuz.  Grafiksel arayüzde "
 "anında çözünürlük değişikliği yapılamaz."
 
-#: capplets/font/font-properties.desktop.in.in.h:1
+#: ../capplets/font/font-properties.desktop.in.in.h:1
 msgid "Font"
 msgstr "Yazıtipi"
 
-#: capplets/font/font-properties.desktop.in.in.h:2
+#: ../capplets/font/font-properties.desktop.in.in.h:2
 msgid "Select fonts for the desktop"
 msgstr "Masaüstü için yazıtipi seçin"
 
-#: capplets/font/font-properties.glade.h:2
+#: ../capplets/font/font-properties.glade.h:2
 msgid "<b>Font Rendering</b>"
 msgstr "<b>Yazıtipi Tarama</b>"
 
-#: capplets/font/font-properties.glade.h:3
+#: ../capplets/font/font-properties.glade.h:3
 msgid "<b>Hinting</b>:"
 msgstr "<b>Düzeltme</b>:"
 
-#: capplets/font/font-properties.glade.h:4
+#: ../capplets/font/font-properties.glade.h:4
 msgid "<b>Smoothing</b>:"
 msgstr "<b>Yumuşatma</b>:"
 
-#: capplets/font/font-properties.glade.h:5
+#: ../capplets/font/font-properties.glade.h:5
 msgid "<b>Subpixel order</b>:"
 msgstr "<b>Alt benek sırası</b>:"
 
-#: capplets/font/font-properties.glade.h:6
+#: ../capplets/font/font-properties.glade.h:6
 msgid "Best _shapes"
 msgstr "_En iyi şekiller"
 
-#: capplets/font/font-properties.glade.h:7
+#: ../capplets/font/font-properties.glade.h:7
 msgid "Best co_ntrast"
 msgstr "E_n iyi koyuluk"
 
-#: capplets/font/font-properties.glade.h:8
+#: ../capplets/font/font-properties.glade.h:8
 msgid "D_etails..."
 msgstr "_Ayrıntılar..."
 
-#: capplets/font/font-properties.glade.h:9
+#: ../capplets/font/font-properties.glade.h:9
 msgid "Font Preferences"
 msgstr "Yazıtipi Özellikleri"
 
-#: capplets/font/font-properties.glade.h:10
+#: ../capplets/font/font-properties.glade.h:10
 msgid "Font Rendering Details"
 msgstr "Yazıtipi Tarama Ayrıntıları"
 
-#: capplets/font/font-properties.glade.h:11
+#: ../capplets/font/font-properties.glade.h:11
 msgid "Go _to font folder"
 msgstr "Yazıtipi _klasörüne git"
 
-#: capplets/font/font-properties.glade.h:12
+#: ../capplets/font/font-properties.glade.h:12
 msgid "Gra_yscale"
 msgstr "_Griölçek"
 
-#: capplets/font/font-properties.glade.h:13
+#: ../capplets/font/font-properties.glade.h:13
 msgid "N_one"
 msgstr "_Hiçbiri"
 
-#: capplets/font/font-properties.glade.h:14
+#: ../capplets/font/font-properties.glade.h:14
 msgid "R_esolution:"
 msgstr "_Çözünürlük:"
 
-#: capplets/font/font-properties.glade.h:15
-msgid "Set the font for applications"
-msgstr "Uygulamaların yazıtipini ayarla"
-
-#: capplets/font/font-properties.glade.h:16
-msgid "Set the font for the icons on the desktop"
-msgstr "Masaüstü simgelerinin yazıtipini ayarla"
-
-#: capplets/font/font-properties.glade.h:17
-msgid "Set the monospace font for terminals and similar applications"
-msgstr ""
-"Terminal konsolu ve benzer uygulamalar için eş aralıklı yazıtipini seçin"
-
-#: capplets/font/font-properties.glade.h:18
+#: ../capplets/font/font-properties.glade.h:15
 msgid "Sub_pixel (LCDs)"
 msgstr "Alt _benek (LCD ekranlar)"
 
-#: capplets/font/font-properties.glade.h:19
+#: ../capplets/font/font-properties.glade.h:16
 msgid "Sub_pixel smoothing (LCDs)"
 msgstr "Alt _benek yumuşatma (LCD ekranlar)"
 
-#: capplets/font/font-properties.glade.h:20
+#: ../capplets/font/font-properties.glade.h:17
 msgid "VB_GR"
 msgstr "VB_GR"
 
-#: capplets/font/font-properties.glade.h:21
+#: ../capplets/font/font-properties.glade.h:18
 msgid "_Application font:"
 msgstr "_Uygulama yazıtipi:"
 
-#: capplets/font/font-properties.glade.h:22
+#: ../capplets/font/font-properties.glade.h:19
 msgid "_BGR"
 msgstr "_BGR"
 
-#: capplets/font/font-properties.glade.h:23
+#: ../capplets/font/font-properties.glade.h:20
 msgid "_Desktop font:"
 msgstr "_Masaüstü yazıtipi:"
 
-#: capplets/font/font-properties.glade.h:24
+#: ../capplets/font/font-properties.glade.h:21
 msgid "_Full"
 msgstr "_Tam"
 
-#: capplets/font/font-properties.glade.h:25
-#: capplets/mouse/gnome-mouse-properties.glade.h:22
+#: ../capplets/font/font-properties.glade.h:22
 msgid "_Medium"
 msgstr "_Orta"
 
-#: capplets/font/font-properties.glade.h:26
+#: ../capplets/font/font-properties.glade.h:23
 msgid "_Monochrome"
 msgstr "_Siyah-beyaz"
 
-#: capplets/font/font-properties.glade.h:27
+#: ../capplets/font/font-properties.glade.h:24
 msgid "_None"
 msgstr "_Hiçbiri"
 
-#: capplets/font/font-properties.glade.h:28
+#: ../capplets/font/font-properties.glade.h:25
 msgid "_RGB"
 msgstr "_RGB"
 
-#: capplets/font/font-properties.glade.h:29
+#: ../capplets/font/font-properties.glade.h:26
 msgid "_Slight"
 msgstr "_Hafif"
 
-#: capplets/font/font-properties.glade.h:30
+#: ../capplets/font/font-properties.glade.h:27
 msgid "_Terminal font:"
 msgstr "_Terminal yazıtipi:"
 
-#: capplets/font/font-properties.glade.h:31
-msgid "_Use Font"
-msgstr "Yazıtipi _Kullan"
-
-#: capplets/font/font-properties.glade.h:32
+#: ../capplets/font/font-properties.glade.h:28
 msgid "_VRGB"
 msgstr "_VRGB"
 
-#: capplets/font/font-properties.glade.h:33
+#: ../capplets/font/font-properties.glade.h:29
 msgid "_Window title font:"
 msgstr "_Pencere başlık yazıtipi:"
 
-#: capplets/font/font-properties.glade.h:34
+#: ../capplets/font/font-properties.glade.h:30
 msgid "dots per inch"
 msgstr "inç başına nokta"
 
-#: capplets/font/main.c:506 capplets/font/main.c:513
+#: ../capplets/font/main.c:488
 msgid "Font may be too large"
 msgstr "Yazıtipi çok büyük olabilir"
 
-#: capplets/font/main.c:507
+#: ../capplets/font/main.c:492
 #, c-format
 msgid ""
 "The font selected is %d point large, and may make it difficult to "
@@ -1118,7 +1426,7 @@ msgid ""
 "smaller than %d."
 msgid_plural ""
 "The font selected is %d points large, and may make it difficult to "
-"effectively use the computer.  It is recommended that you select a size "
+"effectively use the computer. It is recommended that you select a size "
 "smaller than %d."
 msgstr[0] ""
 "Seçtiğiniz yazıtipi %d nokta büyüklüğünde, bu bilgisayarınızı etkili "
@@ -1129,7 +1437,7 @@ msgstr[1] ""
 "kullanmanızı zorlaştırabilir.  %d büyüklüğünden daha küçük bir boyut "
 "seçmenizi tavsiye ediyoruz."
 
-#: capplets/font/main.c:514
+#: ../capplets/font/main.c:505
 #, c-format
 msgid ""
 "The font selected is %d point large, and may make it difficult to "
@@ -1137,7 +1445,7 @@ msgid ""
 "sized font."
 msgid_plural ""
 "The font selected is %d points large, and may make it difficult to "
-"effectively use the computer.  It is recommended that you select a smaller "
+"effectively use the computer. It is recommended that you select a smaller "
 "sized font."
 msgstr[0] ""
 "Seçtiğiniz yazıtipi %d nokta büyüklüğünde, bu bilgisayarınızı etkili "
@@ -1147,57 +1455,57 @@ msgstr[1] ""
 "Seçtiğiniz yazıtipi %d nokta büyüklüğünde, bu bilgisayarınızı etkili "
 "kullanmanızı zorlaştırabilir.  Daha küçük boyutta yazıtipi seçmenizi tavsiye "
 
-#: capplets/keybindings/eggcellrendererkeys.c:21
+#: ../capplets/keybindings/eggcellrendererkeys.c:21
 msgid "New accelerator..."
 msgstr "Yeni hızlandırıcı..."
 
-#: capplets/keybindings/eggcellrendererkeys.c:163
-#: capplets/keybindings/eggcellrendererkeys.c:164
+#: ../capplets/keybindings/eggcellrendererkeys.c:163
+#: ../capplets/keybindings/eggcellrendererkeys.c:164
 msgid "Accelerator key"
 msgstr "Hızlandırma tuşu"
 
-#: capplets/keybindings/eggcellrendererkeys.c:173
-#: capplets/keybindings/eggcellrendererkeys.c:174
+#: ../capplets/keybindings/eggcellrendererkeys.c:173
+#: ../capplets/keybindings/eggcellrendererkeys.c:174
 msgid "Accelerator modifiers"
 msgstr "Hızlandırma düzenleyicileri"
 
-#: capplets/keybindings/eggcellrendererkeys.c:182
-#: capplets/keybindings/eggcellrendererkeys.c:183
+#: ../capplets/keybindings/eggcellrendererkeys.c:182
+#: ../capplets/keybindings/eggcellrendererkeys.c:183
 msgid "Accelerator keycode"
 msgstr "Hızlandırma tuşkodu"
 
-#: capplets/keybindings/eggcellrendererkeys.c:193
+#: ../capplets/keybindings/eggcellrendererkeys.c:193
 msgid "Accel Mode"
 msgstr "Hızlandırma Kipi"
 
-#: capplets/keybindings/eggcellrendererkeys.c:194
+#: ../capplets/keybindings/eggcellrendererkeys.c:194
 msgid "The type of accelerator."
 msgstr "Hızlandırıcı türü."
 
-#: capplets/keybindings/eggcellrendererkeys.c:242
-#: capplets/keybindings/gnome-keybinding-properties.c:197
-#: libbackground/applier.c:757 typing-break/drwright.c:473
+#: ../capplets/keybindings/eggcellrendererkeys.c:242
+#: ../capplets/keybindings/gnome-keybinding-properties.c:197
+#: ../libbackground/applier.c:624 ../typing-break/drwright.c:477
 msgid "Disabled"
 msgstr "Kapalı"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:539
+#: ../capplets/keybindings/gnome-keybinding-properties.c:545
 msgid "<Unknown Action>"
 msgstr "<Bilinmeyen Eylem>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:558
+#: ../capplets/keybindings/gnome-keybinding-properties.c:566
 msgid "Desktop"
 msgstr "Masaüstü"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:559
-#: capplets/sound/gnome-settings-sound.desktop.in.in.h:2
+#: ../capplets/keybindings/gnome-keybinding-properties.c:567
+#: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
 msgid "Sound"
 msgstr "Ses"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:563
+#: ../capplets/keybindings/gnome-keybinding-properties.c:571
 msgid "Window Management"
 msgstr "Pencere Yönetimi"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:660
+#: ../capplets/keybindings/gnome-keybinding-properties.c:668
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1206,30 +1514,30 @@ msgstr ""
 "\"%s\" kısayolu bu işlem için kullanılıyor:\n"
 "\"%s\"\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:692
+#: ../capplets/keybindings/gnome-keybinding-properties.c:700
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Yeni hızlandırıcıyı yapılandırma veritabanına eklerken hata oldu: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:742
+#: ../capplets/keybindings/gnome-keybinding-properties.c:750
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "Hızlandırıcıyı yapılandırma veritabanından silerken hata oluştu: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:849
+#: ../capplets/keybindings/gnome-keybinding-properties.c:857
 msgid "Action"
 msgstr "Eylem"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:873
+#: ../capplets/keybindings/gnome-keybinding-properties.c:881
 msgid "Shortcut"
 msgstr "Kısayol"
 
-#: capplets/keybindings/gnome-keybinding-properties.glade.h:1
-#: capplets/keybindings/keybinding.desktop.in.in.h:2
+#: ../capplets/keybindings/gnome-keybinding-properties.glade.h:1
+#: ../capplets/keybindings/keybinding.desktop.in.in.h:2
 msgid "Keyboard Shortcuts"
 msgstr "Klavye Kısayolları"
 
-#: capplets/keybindings/gnome-keybinding-properties.glade.h:2
+#: ../capplets/keybindings/gnome-keybinding-properties.glade.h:2
 msgid ""
 "To edit a shortcut key, click on the corresponding row and type a new "
 "accelerator, or press backspace to clear."
@@ -1237,16 +1545,15 @@ msgstr ""
 "Yeni bir hızlandırıcı gimek için, ilgili satıra tıklayın, yeni bir "
 "hızlandırıcı girin, ya da temizlemek için Backspace tuşunu kullanın."
 
-#: capplets/keybindings/keybinding.desktop.in.in.h:1
+#: ../capplets/keybindings/keybinding.desktop.in.in.h:1
 msgid "Assign shortcut keys to commands"
 msgstr "Komutlara kısayol ata"
 
-#: capplets/keyboard/gnome-keyboard-properties-xkb.c:69
-#: capplets/keyboard/gnome-keyboard-properties-xkb.c:95
+#: ../capplets/keyboard/gnome-keyboard-properties-xkb.c:84
 msgid "Unknown"
 msgstr "Bilinmeyen"
 
-#: capplets/keyboard/gnome-keyboard-properties-xkblt.c:251
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:273
 msgid "Layout"
 msgstr "Düzen"
 
@@ -1254,123 +1561,123 @@ msgstr "Düzen"
 #. the below options are to be included in the selected list.
 #. This is a HIG-compliant alternative to allowing no
 #. selection in the group.
-#: capplets/keyboard/gnome-keyboard-properties-xkblt.c:255
-#: capplets/keyboard/gnome-keyboard-properties-xkbot.c:206
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:277
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:228
 msgid "Default"
 msgstr "Öntanımlı"
 
-#: capplets/keyboard/gnome-keyboard-properties-xkbmc.c:75
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:75
 msgid "Models"
 msgstr "Modeller"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:106
+#: ../capplets/keyboard/gnome-keyboard-properties.c:106
 #, c-format
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "Klavye programcığı başlatılırken hata oluştu: %s"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:202
+#: ../capplets/keyboard/gnome-keyboard-properties.c:202
 msgid "_Accessibility"
 msgstr "E_rişilebilirlik"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:221
-#: capplets/keyboard/gnome-keyboard-properties.c:223
-#: capplets/sound/sound-properties-capplet.c:240
-#: capplets/sound/sound-properties-capplet.c:242
+#: ../capplets/keyboard/gnome-keyboard-properties.c:221
+#: ../capplets/keyboard/gnome-keyboard-properties.c:223
+#: ../capplets/sound/sound-properties-capplet.c:240
+#: ../capplets/sound/sound-properties-capplet.c:242
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
 "Sadece ayarları uygula ve çık (uyumluluk için, şimdi daemon taraından "
 "yapılır)"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:227
+#: ../capplets/keyboard/gnome-keyboard-properties.c:227
 msgid "Start the page with the typing break settings showing"
 msgstr "Yazım molası ayarlarını göstererek sayfayı başlat"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:3
 msgid "..."
 msgstr "..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "<b>Cursor Blinking</b>"
 msgstr "<b>İmleç Yanıp Sönme</b>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:5
 msgid "<b>Repeat Keys</b>"
 msgstr "<b>Tekrarlama Tuşları</b>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "<b>_Lock screen to enforce typing break</b>"
 msgstr "<b>_Yazım molasını mecbur kılmak için ekranı kilitle</b>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>Hızlı</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>Uzun</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>Kısa</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Yavaş</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "A_vailable layouts:"
 msgstr "_Geçerli düzenler:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "All_ow postponing of breaks"
 msgstr "_Molaların ertelenmesine izin ver"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Check if breaks are allowed to be postponed"
 msgstr "Molaların ertelenmesine izin verilip verilmediğini kontrol eder"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Choose A Keyboard Model"
 msgstr "Bir Klavye Modeli Seçin"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:15
 msgid "Choose A Layout"
 msgstr "Bir Düzen Seçin"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:16
 msgid "Cursor _blinks in text boxes and fields"
 msgstr "_Metin kutucuğu ve alanlarında imlecin yanıp sönmesi"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:17
 msgid "Duration of the break when typing is disallowed"
 msgstr "Yazmaya izin verilmediğinde molanın süresi"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:18
 msgid "Duration of work before forcing a break"
 msgstr "Molaya zorlanmadan önceki süre"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:19
 msgid "Key presses _repeat when key is held down"
 msgstr "Tuş _basılı bırakıldığında klavye tekrar etsin"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:21
 msgid "Keyboard Preferences"
 msgstr "Klavye Tercihleri"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:22
 msgid "Keyboard _model:"
 msgstr "Klavye _modeli:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "Layout Options"
 msgstr "Düzen Seçenekleri"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:24
 msgid "Layouts"
 msgstr "Düzenler"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid ""
 "Lock screen after a certain duration to help prevent repetitive keyboard use "
 "injuries"
@@ -1378,371 +1685,360 @@ msgstr ""
 "Sürekli klavye kullanmaktan doğan rahatsızlıkları engellemek için ekranı "
 "belirli bir süre kilitle"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:26
 msgid "Microsoft Natural Keyboard"
 msgstr "Microsoft Natural Klavyesi"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:27
 msgid "Preview:"
 msgstr "Önizleme:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:28
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:28
 msgid "Reset To De_faults"
 msgstr "Öntanımlılara _Dön"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:30
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:30
 msgid "Separate _group for each window"
 msgstr "Her pencere için ayrı _grup"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:31
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:31
 msgid "Typing Break"
 msgstr "Yazım Molası"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:32
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:32
 msgid "_Accessibility..."
 msgstr "_Erişilebilirlik..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:33
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:33
 msgid "_Add..."
 msgstr "_Ekle..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:34
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:34
 msgid "_Break interval lasts:"
 msgstr "_Mola aralıkları sonlanması:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:35
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:35
 msgid "_Delay:"
 msgstr "_Gecikme:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:36
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:36
 msgid "_Models:"
 msgstr "_Modeller:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:37
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:37
 msgid "_Selected layouts:"
 msgstr "_Seçili düzenler:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:38
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:38
 msgid "_Speed:"
 msgstr "_Hız:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:40
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:40
 msgid "_Work interval lasts:"
 msgstr "_Çalışma aralıkları sonlanması:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:41
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:41
 msgid "minutes"
 msgstr "dakika"
 
-#: capplets/keyboard/keyboard.desktop.in.in.h:2
+#: ../capplets/keyboard/keyboard.desktop.in.in.h:2
 msgid "Set your keyboard preferences"
 msgstr "Klavye tercihlerini yapın"
 
-#: capplets/mouse/gnome-mouse-properties.c:496
+#: ../capplets/mouse/gnome-mouse-properties.c:552
 msgid "Unknown Cursor"
 msgstr "Bilinmeyen İmleç"
 
-#: capplets/mouse/gnome-mouse-properties.c:613
-msgid "Default Cursor - Current"
-msgstr "Öntanımlı İmleç - Şimdiki"
-
-#: capplets/mouse/gnome-mouse-properties.c:613
-#: capplets/mouse/gnome-mouse-properties.c:616
-msgid "The default cursor that ships with X"
-msgstr "X Window ile birlikte gelen imleç"
-
-#: capplets/mouse/gnome-mouse-properties.c:616
+#: ../capplets/mouse/gnome-mouse-properties.c:754
 msgid "Default Cursor"
 msgstr "Öntanımlı İmleç"
 
-#: capplets/mouse/gnome-mouse-properties.c:634
-msgid "White Cursor - Current"
-msgstr "Beyaz İmleç - Şimdiki"
+#: ../capplets/mouse/gnome-mouse-properties.c:755
+msgid "Default Cursor - Current"
+msgstr "Öntanımlı İmleç - Şimdiki"
 
-#: capplets/mouse/gnome-mouse-properties.c:634
-#: capplets/mouse/gnome-mouse-properties.c:637
-msgid "The default cursor inverted"
-msgstr "Öntanımlı imlecin ters çevrilmiş hali"
+#: ../capplets/mouse/gnome-mouse-properties.c:756
+msgid "The default cursor that ships with X"
+msgstr "X Window ile birlikte gelen imleç"
 
-#: capplets/mouse/gnome-mouse-properties.c:637
+#: ../capplets/mouse/gnome-mouse-properties.c:760
 msgid "White Cursor"
 msgstr "Beyaz İmleç"
 
-#: capplets/mouse/gnome-mouse-properties.c:656
-msgid "Large Cursor - Current"
-msgstr "Büyük İmleç - Şimdiki"
+#: ../capplets/mouse/gnome-mouse-properties.c:761
+msgid "White Cursor - Current"
+msgstr "Beyaz İmleç - Şimdiki"
 
-#: capplets/mouse/gnome-mouse-properties.c:656
-#: capplets/mouse/gnome-mouse-properties.c:659
-msgid "Large version of normal cursor"
-msgstr "Normal imlecin büyük hali"
+#: ../capplets/mouse/gnome-mouse-properties.c:762
+msgid "The default cursor inverted"
+msgstr "Öntanımlı imlecin ters çevrilmiş hali"
 
-#: capplets/mouse/gnome-mouse-properties.c:659
+#: ../capplets/mouse/gnome-mouse-properties.c:766
 msgid "Large Cursor"
 msgstr "Büyük İmleç"
 
-#: capplets/mouse/gnome-mouse-properties.c:678
+#: ../capplets/mouse/gnome-mouse-properties.c:767
+msgid "Large Cursor - Current"
+msgstr "Büyük İmleç - Şimdiki"
+
+#: ../capplets/mouse/gnome-mouse-properties.c:768
+msgid "Large version of normal cursor"
+msgstr "Normal imlecin büyük hali"
+
+#: ../capplets/mouse/gnome-mouse-properties.c:772
 msgid "Large White Cursor - Current"
 msgstr "Büyük Beyaz İmleç - Şimdiki"
 
-#: capplets/mouse/gnome-mouse-properties.c:678
-#: capplets/mouse/gnome-mouse-properties.c:681
-msgid "Large version of white cursor"
-msgstr "Beyaz imlecin büyük hali"
-
-#: capplets/mouse/gnome-mouse-properties.c:681
+#: ../capplets/mouse/gnome-mouse-properties.c:773
 msgid "Large White Cursor"
 msgstr "Büyük Beyaz İmleç"
 
-#: capplets/mouse/gnome-mouse-properties.c:753
-msgid "Cursor Size"
-msgstr "İmleç Boyu"
+#: ../capplets/mouse/gnome-mouse-properties.c:774
+msgid "Large version of white cursor"
+msgstr "Beyaz imlecin büyük hali"
 
-#: capplets/mouse/gnome-mouse-properties.c:762
+#: ../capplets/mouse/gnome-mouse-properties.c:968
 msgid "Cursor Theme"
 msgstr "İmleç Teması"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:2
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:2
 msgid "<b>Double-Click Timeout </b>"
 msgstr "<b>Çift Tıklama Zaman Aralığı</b>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:3
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:3
 msgid "<b>Drag and Drop</b>"
 msgstr "<b>Sürükle Bırak</b>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:4
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:4
 msgid "<b>Locate Pointer</b>"
 msgstr "<b>İşaretleyiçiyi Konumlandır</b>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:5
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:5
 msgid "<b>Mouse Orientation</b>"
 msgstr "<b>Fare Konumu</b>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:6
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:6
 msgid "<b>Speed</b>"
 msgstr "<b>Hız</b>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:7
-msgid ""
-"<i><small><b>Note:</b> Changes to this setting will not take effect until "
-"next time you log in.</small></i>"
-msgstr ""
-"<i><small><b>Not:</b> Sisteme yeniden girene kadar.değişiklikler etkin "
-"olmayacaktır.</small></i>"
-
-#: capplets/mouse/gnome-mouse-properties.glade.h:8
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:7
 msgid "<i>Fast</i>"
 msgstr "<i>Hızlı</i>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:9
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid "<i>High</i>"
 msgstr "<i>Yüksek</i>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:10
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:9
 msgid "<i>Large</i>"
 msgstr "<i>Büyük</i>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:11
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:10
 msgid "<i>Low</i>"
 msgstr "<i>Düşük</i>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:12
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:11
 msgid "<i>Slow</i>"
 msgstr "<i>Yavaş</i>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:13
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:12
 msgid "<i>Small</i>"
 msgstr "<i>Küçük</i> "
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:14
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:13
 msgid "Buttons"
 msgstr "Düğmeler"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:15
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:14
+msgid "Cursor Size:"
+msgstr "İmleç Boyutu:"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:15
 msgid "Cursors"
 msgstr "İmleçler"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:16
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:16
 msgid "Highlight the _pointer when you press Ctrl"
 msgstr "Ctrl tuşuna _bastığında imleçin yerini belirt"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:17
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
+msgid "Large"
+msgstr "Büyük"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
+msgid "Medium"
+msgstr "Orta"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
 msgid "Motion"
 msgstr "Hareket"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:18
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:20
 msgid "Mouse Preferences"
 msgstr "Fare Tercihleri"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:19
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:21
+msgid "Small"
+msgstr "Küçük"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:22
 msgid "_Acceleration:"
 msgstr "_Hızlanma:"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:20
-msgid "_Large"
-msgstr "_Büyük"
-
-#: capplets/mouse/gnome-mouse-properties.glade.h:21
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:23
 msgid "_Left-handed mouse"
 msgstr "_Sol elli fare"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:23
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:24
 msgid "_Sensitivity:"
 msgstr "_Duyarlılık:"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:24
-msgid "_Small"
-msgstr "_Küçük"
-
-#: capplets/mouse/gnome-mouse-properties.glade.h:25
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:25
 msgid "_Threshold:"
 msgstr "_Alınacak yol:"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:26
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:26
 msgid "_Timeout:"
 msgstr "_Zaman aşımı:"
 
-#: capplets/mouse/gnome-settings-mouse.desktop.in.in.h:1
+#: ../capplets/mouse/gnome-settings-mouse.desktop.in.in.h:1
 msgid "Mouse"
 msgstr "Fare"
 
-#: capplets/mouse/gnome-settings-mouse.desktop.in.in.h:2
+#: ../capplets/mouse/gnome-settings-mouse.desktop.in.in.h:2
 msgid "Set your mouse preferences"
 msgstr "Fare tercihlerini yapın"
 
-#: capplets/network/gnome-network-preferences.desktop.in.in.h:1
+#: ../capplets/network/gnome-network-preferences.desktop.in.in.h:1
 msgid "Network Proxy"
 msgstr "Ağ Vekili"
 
-#: capplets/network/gnome-network-preferences.desktop.in.in.h:2
+#: ../capplets/network/gnome-network-preferences.desktop.in.in.h:2
 msgid "Set your network proxy preferences"
 msgstr "Ağ vekil tercihlerini ayarlayın"
 
-#: capplets/network/gnome-network-preferences.glade.h:1
+#: ../capplets/network/gnome-network-preferences.glade.h:1
 msgid "      "
 msgstr "      "
 
-#: capplets/network/gnome-network-preferences.glade.h:3
-msgid "<b>Ignore host list</b>"
-msgstr "<b>Makine listesini yok say</b>"
+#: ../capplets/network/gnome-network-preferences.glade.h:2
+msgid "<b>D_irect internet connection</b>"
+msgstr "<b>Doğrudan _Internet bağlantısı</b>"
 
-#: capplets/network/gnome-network-preferences.glade.h:4
+#: ../capplets/network/gnome-network-preferences.glade.h:3
+msgid "<b>Ignore Host List</b>"
+msgstr "<b>Makine Listesini Yok Say</b>"
+
+#: ../capplets/network/gnome-network-preferences.glade.h:4
 msgid "<b>_Automatic proxy configuration</b>"
 msgstr "<b>_Otomatik vekil ayarları</b>"
 
-#: capplets/network/gnome-network-preferences.glade.h:5
-msgid "<b>_Direct internet connection</b>"
-msgstr "<b>Doğrudan _Internet bağlantısı</b>"
-
-#: capplets/network/gnome-network-preferences.glade.h:6
+#: ../capplets/network/gnome-network-preferences.glade.h:5
 msgid "<b>_Manual proxy configuration</b>"
 msgstr "<b>Elle _vekil ayarı</b>"
 
-#: capplets/network/gnome-network-preferences.glade.h:7
+#: ../capplets/network/gnome-network-preferences.glade.h:6
 msgid "<b>_Use authentication</b>"
 msgstr "<b>Kimlik _doğrulama kullan</b>"
 
-#: capplets/network/gnome-network-preferences.glade.h:8
+#: ../capplets/network/gnome-network-preferences.glade.h:7
 msgid "Advanced Configuration"
 msgstr "Gelişmiş Yapılandırma"
 
-#: capplets/network/gnome-network-preferences.glade.h:9
+#: ../capplets/network/gnome-network-preferences.glade.h:8
 msgid "Autoconfiguration _URL:"
 msgstr "_Otomatik yapılandırma URL'si:"
 
-#: capplets/network/gnome-network-preferences.glade.h:10
+#: ../capplets/network/gnome-network-preferences.glade.h:9
 msgid "HTTP Proxy Details"
 msgstr "HTTP Vekil Ayrıntıları"
 
-#: capplets/network/gnome-network-preferences.glade.h:11
+#: ../capplets/network/gnome-network-preferences.glade.h:10
 msgid "H_TTP proxy:"
 msgstr "_HTTP vekili:"
 
-#: capplets/network/gnome-network-preferences.glade.h:12
+#: ../capplets/network/gnome-network-preferences.glade.h:11
 msgid "Network Proxy Preferences"
 msgstr "Ağ Vekil Tercihleri"
 
-#: capplets/network/gnome-network-preferences.glade.h:13
+#: ../capplets/network/gnome-network-preferences.glade.h:12
 msgid "Port:"
 msgstr "Port:"
 
-#: capplets/network/gnome-network-preferences.glade.h:14
+#: ../capplets/network/gnome-network-preferences.glade.h:13
 msgid "Proxy Configuration"
 msgstr "Vekil Yapılandırması"
 
-#: capplets/network/gnome-network-preferences.glade.h:15
+#: ../capplets/network/gnome-network-preferences.glade.h:14
 msgid "S_ocks host:"
 msgstr "S_ocks makinesi:"
 
-#: capplets/network/gnome-network-preferences.glade.h:16
+#: ../capplets/network/gnome-network-preferences.glade.h:15
 msgid "U_sername:"
 msgstr "_Kullanıcı adı:"
 
-#: capplets/network/gnome-network-preferences.glade.h:17
+#: ../capplets/network/gnome-network-preferences.glade.h:16
 msgid "_Details"
 msgstr "_Ayrıntılar"
 
-#: capplets/network/gnome-network-preferences.glade.h:18
+#: ../capplets/network/gnome-network-preferences.glade.h:17
 msgid "_FTP proxy:"
 msgstr "_FTP vekili:"
 
-#: capplets/network/gnome-network-preferences.glade.h:19
+#: ../capplets/network/gnome-network-preferences.glade.h:18
 msgid "_Password:"
 msgstr "_Parola:"
 
-#: capplets/network/gnome-network-preferences.glade.h:20
+#: ../capplets/network/gnome-network-preferences.glade.h:19
 msgid "_Secure HTTP proxy:"
 msgstr "_Güvenli HTTP vekili:"
 
-#: capplets/sound/gnome-settings-sound.desktop.in.in.h:1
+#: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:1
 msgid "Enable sound and associate sounds with events"
 msgstr "Sesi etkinleştir ve seslerle eylemleri ilişkilendir"
 
-#: capplets/sound/sound-properties-capplet.c:271
-msgid "Sound preferences"
-msgstr "Ses tercihleri"
-
-#: capplets/sound/sound-properties.glade.h:1
-msgid "E_nable sound server startup"
-msgstr "_Başlangıçta ses sunucusunu çalıştır"
-
-#: capplets/sound/sound-properties.glade.h:2
-msgid "Flash _entire screen"
-msgstr "_Tüm ekranı flaşlat"
-
-#: capplets/sound/sound-properties.glade.h:3
-msgid "Flash _window titlebar"
-msgstr "P_encere başlık çubuğunu flaşlat"
-
-#: capplets/sound/sound-properties.glade.h:4
-msgid "General"
-msgstr "Genel"
-
-#: capplets/sound/sound-properties.glade.h:5
-msgid "Sound Events"
-msgstr "Ses Olayları"
-
-#: capplets/sound/sound-properties.glade.h:6
+#: ../capplets/sound/sound-properties-capplet.c:271
+#: ../capplets/sound/sound-properties.glade.h:6
 msgid "Sound Preferences"
 msgstr "Ses Tercihleri"
 
-#: capplets/sound/sound-properties.glade.h:7
+#: ../capplets/sound/sound-properties.glade.h:1
+msgid "E_nable sound server startup"
+msgstr "_Başlangıçta ses sunucusunu çalıştır"
+
+#: ../capplets/sound/sound-properties.glade.h:2
+msgid "Flash _entire screen"
+msgstr "_Tüm ekranı flaşlat"
+
+#: ../capplets/sound/sound-properties.glade.h:3
+msgid "Flash _window titlebar"
+msgstr "P_encere başlık çubuğunu flaşlat"
+
+#: ../capplets/sound/sound-properties.glade.h:4
+msgid "General"
+msgstr "Genel"
+
+#: ../capplets/sound/sound-properties.glade.h:5
+msgid "Sound Events"
+msgstr "Ses Olayları"
+
+#: ../capplets/sound/sound-properties.glade.h:7
 msgid "System Bell"
 msgstr "Sistem Zili"
 
-#: capplets/sound/sound-properties.glade.h:8
+#: ../capplets/sound/sound-properties.glade.h:8
 msgid "_Sound an audible bell"
 msgstr "_Duyulabilir bir zil sesi çıkar"
 
-#: capplets/sound/sound-properties.glade.h:9
+#: ../capplets/sound/sound-properties.glade.h:9
 msgid "_Sounds for events"
 msgstr "_Olaylar için sesler"
 
-#: capplets/sound/sound-properties.glade.h:10
+#: ../capplets/sound/sound-properties.glade.h:10
 msgid "_Visual feedback:"
 msgstr "_Görsel bildirim:"
 
-#: capplets/theme-switcher/gnome-theme-details.c:349
+#: ../capplets/theme-switcher/gnome-theme-details.c:347
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -1751,15 +2047,15 @@ msgstr ""
 "Sistemde hiç tema bulunamadı.  Bu \"gnome-themes\" paketi kurulmamış, ya da "
 "\"Tema Tercihleri\" penceresi hatalı yüklenmiş anlamına gelebilir."
 
-#: capplets/theme-switcher/gnome-theme-installer.c:227
+#: ../capplets/theme-switcher/gnome-theme-installer.c:227
 msgid "This theme is not in a supported format."
 msgstr "Bu tema desteklenen bir biçimde değil."
 
-#: capplets/theme-switcher/gnome-theme-installer.c:244
+#: ../capplets/theme-switcher/gnome-theme-installer.c:244
 msgid "Failed to create temporary directory"
 msgstr "Geçici dizin yaratılma başarısız oldu"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:264
+#: ../capplets/theme-switcher/gnome-theme-installer.c:264
 msgid ""
 "Can not install theme. \n"
 "The bzip2 utility is not installed."
@@ -1767,13 +2063,13 @@ msgstr ""
 "Tema kurulamıyor. \n"
 "bzip2 uygulaması kurulu değil."
 
-#: capplets/theme-switcher/gnome-theme-installer.c:282
-#: capplets/theme-switcher/gnome-theme-installer.c:319
-#: capplets/theme-switcher/gnome-theme-installer.c:399
+#: ../capplets/theme-switcher/gnome-theme-installer.c:282
+#: ../capplets/theme-switcher/gnome-theme-installer.c:319
+#: ../capplets/theme-switcher/gnome-theme-installer.c:399
 msgid "Installation Failed"
 msgstr "Kurulum Başarısız"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:302
+#: ../capplets/theme-switcher/gnome-theme-installer.c:302
 msgid ""
 "Can not install themes. \n"
 "The gzip utility is not installed."
@@ -1781,7 +2077,7 @@ msgstr ""
 "Temalar kurulamıyor. \n"
 "gzip uygulaması kurulu değil."
 
-#: capplets/theme-switcher/gnome-theme-installer.c:340
+#: ../capplets/theme-switcher/gnome-theme-installer.c:340
 #, c-format
 msgid ""
 "Icon Theme %s correctly installed.\n"
@@ -1790,12 +2086,12 @@ msgstr ""
 "%s Simge Teması başarıyla kuruldu.\n"
 "Onu tema detaylarından seçebilirsiniz."
 
-#: capplets/theme-switcher/gnome-theme-installer.c:343
+#: ../capplets/theme-switcher/gnome-theme-installer.c:343
 #, c-format
 msgid "Gnome Theme %s correctly installed"
 msgstr "%s Gnome Teması başarıyla kuruldu"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:346
+#: ../capplets/theme-switcher/gnome-theme-installer.c:346
 #, c-format
 msgid ""
 "Windows Border Theme %s correctly installed.\n"
@@ -1804,7 +2100,7 @@ msgstr ""
 "%s Pencere Kenarı Teması başarıyla kuruldu.\n"
 "Onu tema detaylarından seçebilirsiniz."
 
-#: capplets/theme-switcher/gnome-theme-installer.c:349
+#: ../capplets/theme-switcher/gnome-theme-installer.c:349
 #, c-format
 msgid ""
 "Controls Theme %s correctly installed.\n"
@@ -1813,23 +2109,23 @@ msgstr ""
 "%s Denetimler Teması başarıyla kuruldu.\n"
 "Onu tema detaylarından seçebilirsiniz."
 
-#: capplets/theme-switcher/gnome-theme-installer.c:357
+#: ../capplets/theme-switcher/gnome-theme-installer.c:357
 msgid "The theme is an engine. You need to compile the theme."
 msgstr "Tema bir aygıttır. Temayı derlemeniz gerekiyor."
 
-#: capplets/theme-switcher/gnome-theme-installer.c:374
+#: ../capplets/theme-switcher/gnome-theme-installer.c:374
 msgid "The file format is invalid"
 msgstr "Dosya biçimi geçerli değil"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:468
+#: ../capplets/theme-switcher/gnome-theme-installer.c:468
 msgid "No theme file location specified to install"
 msgstr "Yüklemek için bir tema dosyası belirtilmedi"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:485
+#: ../capplets/theme-switcher/gnome-theme-installer.c:485
 msgid "The theme file location specified to install is invalid"
 msgstr "Yüklemek için belirtilen tema dosyası konumu geçerli değil"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:505
+#: ../capplets/theme-switcher/gnome-theme-installer.c:505
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -1838,11 +2134,11 @@ msgstr ""
 "Temayı aşağıdaki konuma kurmak için yetersiz izin:\n"
 "%s"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:526
+#: ../capplets/theme-switcher/gnome-theme-installer.c:526
 msgid "The file format is invalid."
 msgstr "Dosya biçimi geçerli değil."
 
-#: capplets/theme-switcher/gnome-theme-installer.c:553
+#: ../capplets/theme-switcher/gnome-theme-installer.c:553
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
@@ -1850,7 +2146,7 @@ msgid ""
 msgstr ""
 "%s tema dosyasının yükleneceği yoldur. Bu kaynak konumu olarak seçilemez"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:607
+#: ../capplets/theme-switcher/gnome-theme-installer.c:607
 msgid ""
 "Cannot install theme.\n"
 "The tar program is not installed on your system."
@@ -1858,15 +2154,15 @@ msgstr ""
 "Tema kurulamıyor.\n"
 "Tar programı sisteminizde kurulu değil."
 
-#: capplets/theme-switcher/gnome-theme-manager.c:676
+#: ../capplets/theme-switcher/gnome-theme-manager.c:680
 msgid "Custom theme"
 msgstr "Özel tema"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:676
+#: ../capplets/theme-switcher/gnome-theme-manager.c:680
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "Bu temayı Temayı Kaydet düğmesine tıklayarak kaydedebilirsiniz."
 
-#: capplets/theme-switcher/gnome-theme-manager.c:1466
+#: ../capplets/theme-switcher/gnome-theme-manager.c:1476
 msgid ""
 "The default theme schemas could not be found on your system.  This means "
 "that you probably don't have metacity installed, or that your gconf is "
@@ -1876,238 +2172,238 @@ msgstr ""
 "şekilde yüklenmediği, ya da gconf'un yanlış yapılandırıldığı anlamına "
 "gelebilir."
 
-#: capplets/theme-switcher/gnome-theme-save.c:72
+#: ../capplets/theme-switcher/gnome-theme-save.c:72
 msgid "Theme name must be present"
 msgstr "Bir tema adı bulunmalıdır"
 
-#: capplets/theme-switcher/gnome-theme-save.c:104
+#: ../capplets/theme-switcher/gnome-theme-save.c:104
 msgid "The theme already exists. Would you like to replace it?"
 msgstr "Tema zaten mevcut. Onun yerin koymak ister misinz?"
 
-#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:1
+#: ../capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:1
 msgid "Select themes for various parts of the desktop"
 msgstr "Masaüstü farklı noktaları için tema seçin"
 
-#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:2
-#: vfs-methods/themus/themus-properties-main.c:92
+#: ../capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:2
+#: ../vfs-methods/themus/themus-properties-main.c:92
 msgid "Theme"
 msgstr "Tema"
 
-#: capplets/theme-switcher/theme-install.glade.h:2
+#: ../capplets/theme-switcher/theme-install.glade.h:2
 msgid "<span size=\"larger\" weight=\"bold\">Install a Theme</span>"
 msgstr "<span size=\"larger\" weight=\"bold\">Bir Tema Kur</span>"
 
-#: capplets/theme-switcher/theme-install.glade.h:3
+#: ../capplets/theme-switcher/theme-install.glade.h:3
 msgid "Theme Installation"
 msgstr "Tema Kurulumu"
 
-#: capplets/theme-switcher/theme-install.glade.h:4
+#: ../capplets/theme-switcher/theme-install.glade.h:4
 msgid "_Install"
 msgstr "_Kur"
 
-#: capplets/theme-switcher/theme-install.glade.h:5
+#: ../capplets/theme-switcher/theme-install.glade.h:5
 msgid "_Location:"
 msgstr "K_onum:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:2
+#: ../capplets/theme-switcher/theme-properties.glade.h:2
 msgid "<span size=\"larger\" weight=\"bold\">Save Theme to Disk</span>"
 msgstr "<span size=\"larger\" weight=\"bold\">Temayı Diske Kaydet</span>"
 
-#: capplets/theme-switcher/theme-properties.glade.h:3
+#: ../capplets/theme-switcher/theme-properties.glade.h:3
 msgid "Apply _Background"
 msgstr "Arkaplanı _Uygula"
 
-#: capplets/theme-switcher/theme-properties.glade.h:4
+#: ../capplets/theme-switcher/theme-properties.glade.h:4
 msgid "Apply _Font"
 msgstr "_Yazıtipini Uygula"
 
-#: capplets/theme-switcher/theme-properties.glade.h:5
+#: ../capplets/theme-switcher/theme-properties.glade.h:5
 msgid "Controls"
 msgstr "Denetimler"
 
-#: capplets/theme-switcher/theme-properties.glade.h:6
+#: ../capplets/theme-switcher/theme-properties.glade.h:6
 msgid "Icons"
 msgstr "Simgeler"
 
-#: capplets/theme-switcher/theme-properties.glade.h:7
+#: ../capplets/theme-switcher/theme-properties.glade.h:7
 msgid "New themes can also be installed by dragging them into the window."
 msgstr ""
 "Yeni temalar, tema dosyalarını bu pencereye sürüklemek yöntemiyle de "
 "kurulabilir."
 
-#: capplets/theme-switcher/theme-properties.glade.h:8
+#: ../capplets/theme-switcher/theme-properties.glade.h:8
 msgid "Save Theme"
 msgstr "Temayı Kaydet"
 
-#: capplets/theme-switcher/theme-properties.glade.h:9
+#: ../capplets/theme-switcher/theme-properties.glade.h:9
 msgid "Select theme for the desktop"
 msgstr "Masaüstü için tema seçin"
 
-#: capplets/theme-switcher/theme-properties.glade.h:10
+#: ../capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Short _description:"
 msgstr "Kısa _açıklama:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:11
+#: ../capplets/theme-switcher/theme-properties.glade.h:11
 msgid "Theme Details"
 msgstr "Tema Detayları"
 
-#: capplets/theme-switcher/theme-properties.glade.h:12
+#: ../capplets/theme-switcher/theme-properties.glade.h:12
 msgid "Theme Preferences"
 msgstr "Tema Tercihleri"
 
-#: capplets/theme-switcher/theme-properties.glade.h:13
+#: ../capplets/theme-switcher/theme-properties.glade.h:13
 msgid "Theme _Details"
 msgstr "Tema _Detayları"
 
-#: capplets/theme-switcher/theme-properties.glade.h:14
+#: ../capplets/theme-switcher/theme-properties.glade.h:14
 msgid "This theme does not suggest any particular font or background."
 msgstr "Bu tema belirli bir yazıtipi veya arkaplan önermiyor."
 
-#: capplets/theme-switcher/theme-properties.glade.h:15
+#: ../capplets/theme-switcher/theme-properties.glade.h:15
 msgid "This theme suggests a background:"
 msgstr "Bu tema bir arkaplan öneriyor:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:16
+#: ../capplets/theme-switcher/theme-properties.glade.h:16
 msgid "This theme suggests a font and a background:"
 msgstr "Bu tema bir yazıtipi ve arkaplan öneriyor:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:17
+#: ../capplets/theme-switcher/theme-properties.glade.h:17
 msgid "This theme suggests a font:"
 msgstr "Bu tema bir yazıtipi öneriyor:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:18
+#: ../capplets/theme-switcher/theme-properties.glade.h:18
 msgid "Window Border"
 msgstr "Pencere Kenarı"
 
-#: capplets/theme-switcher/theme-properties.glade.h:19
+#: ../capplets/theme-switcher/theme-properties.glade.h:19
 msgid "_Go To Theme Folder"
 msgstr "_Tema Klasörüne Git"
 
-#: capplets/theme-switcher/theme-properties.glade.h:20
+#: ../capplets/theme-switcher/theme-properties.glade.h:20
 msgid "_Install Theme..."
 msgstr "_Tema Kur..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:21
+#: ../capplets/theme-switcher/theme-properties.glade.h:21
 msgid "_Revert"
 msgstr "_Başa dön"
 
-#: capplets/theme-switcher/theme-properties.glade.h:22
+#: ../capplets/theme-switcher/theme-properties.glade.h:22
 msgid "_Save Theme..."
 msgstr "_Temayı Kaydet..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:23
+#: ../capplets/theme-switcher/theme-properties.glade.h:23
 msgid "_Theme name:"
 msgstr "_Tema adı:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:24
+#: ../capplets/theme-switcher/theme-properties.glade.h:24
 msgid "theme selection tree"
 msgstr "tema seçim ağacı"
 
-#: capplets/ui-properties/gnome-ui-properties.desktop.in.in.h:1
+#: ../capplets/ui-properties/gnome-ui-properties.desktop.in.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
 msgstr "Uygulamalardaki araç ve menü çubuğunun görünümünü yapılandırın"
 
-#: capplets/ui-properties/gnome-ui-properties.desktop.in.in.h:2
+#: ../capplets/ui-properties/gnome-ui-properties.desktop.in.in.h:2
 msgid "Menus & Toolbars"
 msgstr "Menüler ve Araç Çubuğu"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:2
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:2
 msgid "<b>Behavior and Appearance</b>"
 msgstr "<b>Davranış ve Görünüm</b>"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:3
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:3
 msgid "<b>Preview</b>"
 msgstr "<b>Önizleme</b>"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:4
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:4
 msgid "C_ut"
 msgstr "_Kes"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:5
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:5
 msgid "Icons only"
 msgstr "Sadece simgeler"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:6
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:6
 msgid "Menu and Toolbar Preferences"
 msgstr "Menü ve Araç Çubuğu Tercihleri"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:7
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:7
 msgid "New File"
 msgstr "Yeni Dosya"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:8
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:8
 msgid "Open File"
 msgstr "Dosya Aç"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:9
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:9
 msgid "Save File"
 msgstr "Kaydet"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:10
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:10
 msgid "Show _icons in menus"
 msgstr "Menülerde _simge göster"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:11
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:11
 msgid "Text below icons"
 msgstr "Simgelerin altında metin"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:12
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:12
 msgid "Text beside icons"
 msgstr "Simgelerin yanında metin"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:13
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:13
 msgid "Text only"
 msgstr "Sadece metin"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:14
-msgid "Toolbar _button labels: "
-msgstr "Araç çubuğu _düğme etiketleri: "
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:14
+msgid "Toolbar _button labels:"
+msgstr "Araç çubuğu _düğme etiketleri:"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:15
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:15
 msgid "_Copy"
 msgstr "K_opyala"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:16
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:16
 msgid "_Detachable toolbars"
 msgstr "_Ayrılabilir araç çubukları"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:17
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:17
 msgid "_Edit"
 msgstr "_Düzenle"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:18
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:18
 msgid "_Editable menu accelerators"
 msgstr "_Düzenlemebilir menü hızlandırıcıları"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:19
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:19
 msgid "_File"
 msgstr "_Dosya"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:20
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:20
 msgid "_New"
 msgstr "_Yeni"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:21
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:21
 msgid "_Open"
 msgstr "_Aç"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:22
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:22
 msgid "_Paste"
 msgstr "_Yapıştır"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:23
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:23
 msgid "_Print"
 msgstr "Y_azdır"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:24
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:24
 msgid "_Quit"
 msgstr "Çı_k"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:25
+#: ../capplets/ui-properties/gnome-ui-properties.glade.h:25
 msgid "_Save"
 msgstr "_Kaydet"
 
-#: capplets/windows/gnome-window-properties.c:388
+#: ../capplets/windows/gnome-window-properties.c:386
 #, c-format
 msgid ""
 "<b>Cannot start the preferences application for your window manager</b>\n"
@@ -2118,102 +2414,101 @@ msgstr ""
 "\n"
 "%s"
 
-#: capplets/windows/gnome-window-properties.c:648
+#: ../capplets/windows/gnome-window-properties.c:644
 msgid "Control"
 msgstr "Kontrol"
 
-#: capplets/windows/gnome-window-properties.c:653
+#: ../capplets/windows/gnome-window-properties.c:649
 msgid "Alt"
 msgstr "Alt"
 
-#: capplets/windows/gnome-window-properties.c:659
+#: ../capplets/windows/gnome-window-properties.c:655
 msgid "Hyper"
 msgstr "Hiper"
 
-#: capplets/windows/gnome-window-properties.c:666
+#: ../capplets/windows/gnome-window-properties.c:662
 msgid "Super (or \"Windows logo\")"
 msgstr "Süper (ya da \"Windows logosu\")"
 
-#: capplets/windows/gnome-window-properties.c:673
+#: ../capplets/windows/gnome-window-properties.c:669
 msgid "Meta"
 msgstr "Meta"
 
-#: capplets/windows/gnome-window-properties.glade.h:1
+#: ../capplets/windows/gnome-window-properties.glade.h:1
 msgid "<b>Movement Key</b>"
 msgstr "<b>Hareket Tuşu</b>"
 
-#: capplets/windows/gnome-window-properties.glade.h:2
+#: ../capplets/windows/gnome-window-properties.glade.h:2
 msgid "<b>Titlebar Action</b>"
 msgstr "<b>Başlık Çubuğu Eylemi</b>"
 
-#: capplets/windows/gnome-window-properties.glade.h:3
+#: ../capplets/windows/gnome-window-properties.glade.h:3
 msgid "<b>Window Selection</b>"
 msgstr "<b>Pencere Seçimi</b>"
 
-#: capplets/windows/gnome-window-properties.glade.h:4
+#: ../capplets/windows/gnome-window-properties.glade.h:4
 msgid "To _move a window, press-and-hold this key then grab the window:"
 msgstr ""
 "_Bir pencereyi taşımak için, bu tuşa basılı tutarak pencereyi sürükleyin:"
 
-#: capplets/windows/gnome-window-properties.glade.h:5
+#: ../capplets/windows/gnome-window-properties.glade.h:5
 msgid "Window Preferences"
 msgstr "Pencere Tercihleri"
 
-#: capplets/windows/gnome-window-properties.glade.h:6
+#: ../capplets/windows/gnome-window-properties.glade.h:6
 msgid "_Double-click titlebar to perform this action:"
 msgstr "_Bu işlemi gerçekleştirmek için başlık çubuğuna çift tıklayın:"
 
-#: capplets/windows/gnome-window-properties.glade.h:7
+#: ../capplets/windows/gnome-window-properties.glade.h:7
 msgid "_Interval before raising:"
 msgstr "_Yükseltmeden önceki gecikme:"
 
-#: capplets/windows/gnome-window-properties.glade.h:8
+#: ../capplets/windows/gnome-window-properties.glade.h:8
 msgid "_Raise selected windows after an interval"
 msgstr "_Belirli bir süre sonra seçilen pencereleri yükselt"
 
-#: capplets/windows/gnome-window-properties.glade.h:9
+#: ../capplets/windows/gnome-window-properties.glade.h:9
 msgid "_Select windows when the mouse moves over them"
 msgstr "_Fare bir pencerenin üzerine geldiğinde onu yükselt"
 
-#: capplets/windows/window-properties.desktop.in.in.h:1
+#: ../capplets/windows/window-properties.desktop.in.in.h:1
 msgid "Set your window properties"
 msgstr "Pencere özelliklerinizi ayarlayın"
 
-#: capplets/windows/window-properties.desktop.in.in.h:2
+#: ../capplets/windows/window-properties.desktop.in.in.h:2
 msgid "Windows"
 msgstr "Pencereler"
 
-#: control-center/control-center-categories.c:249
+#: ../control-center/control-center-categories.c:257
 msgid "Others"
 msgstr "Diğerleri"
 
-#: control-center/control-center.c:1010
-#: control-center/gnomecc.desktop.in.in.h:1
-msgid "GNOME Control Center"
-msgstr "GNOME Kontrol Merkezi"
-
-#: control-center/control-center.c:1126
+#: ../control-center/control-center.c:42
 msgid "Desktop Preferences"
 msgstr "Masaüstü Tercihleri"
 
-#: control-center/gnomecc.desktop.in.in.h:2
-#: vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:2
+#: ../control-center/gnomecc.desktop.in.in.h:1
+msgid "GNOME Control Center"
+msgstr "GNOME Kontrol Merkezi"
+
+#: ../control-center/gnomecc.desktop.in.in.h:2
+#: ../vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:2
 msgid "The GNOME configuration tool"
 msgstr "GNOME yapılandırma aracı"
 
-#: gnome-settings-daemon/actions/acme.glade.h:1
+#: ../gnome-settings-daemon/actions/acme.glade.h:1
 msgid "Volume"
 msgstr "Ses"
 
-#: gnome-settings-daemon/factory.c:34
+#: ../gnome-settings-daemon/factory.c:36
 msgid "Could not initialize Bonobo"
 msgstr "Bonobo ilklendirilemedi"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:397
 msgid "Slow Keys Alert"
 msgstr "Tuş Yavaşlatması Uyarısı"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:398
 msgid ""
 "You just held down the Shift key for 8 seconds.  This is the shortcut for "
 "the Slow Keys feature, which affects the way your keyboard works."
@@ -2221,19 +2516,19 @@ msgstr ""
 "Sadece Shift tuşunu 8 saniye basılı tutun.  Bu klavyenizin çalışma biçimini "
 "etkileyecek Tuş Yavaşlatması özelliği için bir kısayoldur."
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:414
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:400
 msgid "Do you want to activate Slow Keys?"
 msgstr "Tuş Yavaşlatmasını aktif hale getirmek istiyor musunuz?"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:415
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:401
 msgid "Do you want to deactivate Slow Keys?"
 msgstr "Tuş Yavaşlatmasını kapatmak istiyor musunuz?"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:410
 msgid "Sticky Keys Alert"
 msgstr "Yapışkan Tuş Uyarısı"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
 msgid ""
 "You just pressed the Shift key 5 times in a row.  This is the shortcut for "
 "the Sticky Keys feature, which affects the way your keyboard works."
@@ -2241,7 +2536,7 @@ msgstr ""
 "Sadece Shift tuşuna 5 kere ard arda basın.  Bu klavyenizin çalışma biçimini "
 "etkileyecek Yapışkan Tuşlar özelliği için bir kısayoldur."
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
 msgid ""
 "You just pressed two keys at once, or pressed the Shift key 5 times in a "
 "row.  This turns off the Sticky Keys feature, which affects the way your "
@@ -2250,15 +2545,15 @@ msgstr ""
 "Aynı anda iki tuşa bastınız veya Shift tuşuna ard arda 5 kere bastınız.  Bu "
 "klavyenizin çalışma biçimini etkileyecek Yapışkan Tuşlar özelliğini kapatır."
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:429
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:415
 msgid "Do you want to activate Sticky Keys?"
 msgstr "Yapışkan Tuşlar özelliğini aktif hale getirmek istiyor musunuz?"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:430
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:416
 msgid "Do you want to deactivate Sticky Keys?"
 msgstr "Yapışkan Tuşları kapatmak istiyor musunuz?"
 
-#: gnome-settings-daemon/gnome-settings-font.c:102
+#: ../gnome-settings-daemon/gnome-settings-font.c:106
 #, c-format
 msgid ""
 "Cannot create the directory \"%s\".\n"
@@ -2267,37 +2562,37 @@ msgstr ""
 "\"%s\" dizini yaratılamadı.\n"
 "Bu imleçleri değiştirmek için gerekli."
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:207
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:209
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr "Tuş Bağıntısı (%s) işlevi birden fazla seferdir belirtilmiş\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:220
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:222
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr "Tuş Bağıntısı (%s) bağlaması birden fazla seferdir belirtilmiş\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:226
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:228
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr "Tuş Bağıntısı (%s) tamamlanmamış\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:254
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:256
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr "Tuş Bağıntısı (%s) geçersiz\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:290
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:292
 #, c-format
 msgid "It seems that another application already has access to key '%d'."
 msgstr "Başka bir uygulamanın '%d' tuşuna zaten erişimi var gibi görülüyor."
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:359
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:361
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr "Tuş Bağıntısı (%s) zaten kullanımda\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:434
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:436
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -2306,7 +2601,7 @@ msgstr ""
 "(%s) çalıştırırken hata\n"
 "(%s) tuşu ile bağlı"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:105
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:103
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2320,11 +2615,10 @@ msgid ""
 "%d\n"
 "%s\n"
 "If you report this situation as a bug, please include:\n"
-"- The result of %s\n"
-"- The result of %s"
+"- The result of <b>%s</b>\n"
+"- The result of <b>%s</b>"
 msgstr ""
 "XKB yapılandırılması etkinleştirilirken hata.\n"
-"Muhtemelen dahili X sunucu sorunu.\n"
 "Çeşitli sebeplerden bu oluşabilir:\n"
 "- libxklavier kütüphanesindeki bir hatadan\n"
 "- X sunucusundaki (xkbcomp, xmodmap araçları) bir hatadan\n"
@@ -2338,11 +2632,11 @@ msgstr ""
 "- %s sonucu\n"
 "- %s sonucu"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:119
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:117
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
-"Try using simpler configuration or taking more fresh version of XFree "
+"Try using a simpler configuration or taking a fresher version of XFree "
 "software."
 msgstr ""
 "XFree 4.3.0 kullanıyosunuz.\n"
@@ -2350,11 +2644,11 @@ msgstr ""
 "Daha basit bir yapılandırma deneyin ya da daha yeni bir XFree yazılım sürümü "
 "edinin."
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:232
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:227
 msgid "Do _not show this warning again"
 msgstr "_Bu uyarıyı bir daha gösterme"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:243
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:238
 msgid ""
 "The X system keyboard settings differ from your current GNOME keyboard "
 "settings.  Which set would you like to use?"
@@ -2362,15 +2656,15 @@ msgstr ""
 "X sistemi klavye ayarları sizin mevcut GNOME klavye ayarlarınızdan farklı. "
 "Hangi ayarı kullanmak istersiniz?"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:253
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:251
 msgid "Use X settings"
 msgstr "X ayarlarını kullan"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:255
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:253
 msgid "Use GNOME settings"
 msgstr "GNOME ayarlarını kullan"
 
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:126
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:129
 #, c-format
 msgid ""
 "Couldn't execute command: %s\n"
@@ -2379,7 +2673,7 @@ msgstr ""
 "Komut çalıştırılamadı: %s\n"
 "Bu komutun bulunup bulunmadığını kontrol edin."
 
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:142
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:145
 msgid ""
 "Couldn't put the machine to sleep.\n"
 "Verify that the machine is correctly configured."
@@ -2387,12 +2681,12 @@ msgstr ""
 "Makine uyku kipine konulamadı.\n"
 "Makinenin doğru ayarlanıp ayarlanmadığını kontrol edin."
 
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:152
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:155
 #, c-format
 msgid "Permissions on the file %s are broken\n"
 msgstr "%s dosyasu üzerindeki yetkiler yanlış\n"
 
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:197
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:200
 msgid ""
 "Couldn't load the Glade file.\n"
 "Make sure that this daemon is properly installed."
@@ -2400,7 +2694,7 @@ msgstr ""
 "Glade dosyası yüklenemedi.\n"
 "Bu daemon'un doğru yüklendiğinden emin olun."
 
-#: gnome-settings-daemon/gnome-settings-screensaver.c:92
+#: ../gnome-settings-daemon/gnome-settings-screensaver.c:113
 #, c-format
 msgid ""
 "There was an error starting up the screensaver:\n"
@@ -2415,58 +2709,58 @@ msgstr ""
 "\n"
 "Ekran koruyucu etkinlikleri oturumda çalışmayacak."
 
-#: gnome-settings-daemon/gnome-settings-screensaver.c:102
+#: ../gnome-settings-daemon/gnome-settings-screensaver.c:123
 msgid "_Do not show this message again"
 msgstr "_Bu mesajı bir daha gösterme"
 
-#: gnome-settings-daemon/gnome-settings-sound.c:128
+#: ../gnome-settings-daemon/gnome-settings-sound.c:129
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "%s dosyasını %s örneği olarak yükleyemedi"
 
-#: gnome-settings-daemon/gnome-settings-xrdb.c:213
-#: gnome-settings-daemon/gnome-settings-xrdb.c:261
+#: ../gnome-settings-daemon/gnome-settings-xrdb.c:214
+#: ../gnome-settings-daemon/gnome-settings-xrdb.c:262
 msgid "Cannot determine user's home directory"
 msgstr "Kullanıcı'nın ana dizini belirlenemedi"
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:208
+#: ../gnome-settings-daemon/gnome-settings-xsettings.c:215
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "GConf anahtarı %s, %s türüne ayarlanmış, fakat olması gereken tür %s\n"
 
-#: gnome-settings-daemon/modmap-dialog.glade.h:1
+#: ../gnome-settings-daemon/modmap-dialog.glade.h:1
 msgid "A_vailable files:"
 msgstr "_Geçerli dosyalar:"
 
-#: gnome-settings-daemon/modmap-dialog.glade.h:2
+#: ../gnome-settings-daemon/modmap-dialog.glade.h:2
 msgid "Do _not show this warning again."
 msgstr "_Bu uyarıyı bir daha gösterme."
 
-#: gnome-settings-daemon/modmap-dialog.glade.h:3
-msgid "Do you like to load the modmap file(s)?"
-msgstr "Modmap dosyalarını yüklemek ister misiniz?"
-
-#: gnome-settings-daemon/modmap-dialog.glade.h:4
+#: ../gnome-settings-daemon/modmap-dialog.glade.h:3
 msgid "Load modmap files"
 msgstr "Modmap dosyalarını yükle"
 
-#: gnome-settings-daemon/modmap-dialog.glade.h:5
+#: ../gnome-settings-daemon/modmap-dialog.glade.h:4
+msgid "Would you like to load the modmap file(s)?"
+msgstr "Modmap dosyalarını yüklemek ister misiniz?"
+
+#: ../gnome-settings-daemon/modmap-dialog.glade.h:5
 msgid "_Load"
 msgstr "_Yükle"
 
-#: gnome-settings-daemon/modmap-dialog.glade.h:6
+#: ../gnome-settings-daemon/modmap-dialog.glade.h:6
 msgid "_Loaded files:"
 msgstr "_Yüklenen dosyalar:"
 
-#: gnome-settings-daemon/reaper.c:103
+#: ../gnome-settings-daemon/reaper.c:103
 msgid "Error creating signal pipe."
 msgstr "Sinyal borusu yaratırken hata."
 
-#: libbackground/applier.c:256
+#: ../libbackground/applier.c:255
 msgid "Type"
 msgstr "Tür"
 
-#: libbackground/applier.c:257
+#: ../libbackground/applier.c:256
 msgid ""
 "Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
 "for preview"
@@ -2474,35 +2768,40 @@ msgstr ""
 "bg_applier türü: root penceresi için BG_APPLIER_ROOT veya önizleme için "
 "BG_APPLIER_PREVIEW"
 
-#: libbackground/applier.c:264
+#: ../libbackground/applier.c:263
 msgid "Preview Width"
 msgstr "Önizleme Genişliği"
 
-#: libbackground/applier.c:265
+#: ../libbackground/applier.c:264
 msgid "Width if applier is a preview: Defaults to 64."
 msgstr "Uygulayıcı önizleme ise genişlik: Öntanımlı olarak 64."
 
-#: libbackground/applier.c:272
+#: ../libbackground/applier.c:271
 msgid "Preview Height"
 msgstr "Önizleme Yüksekliği"
 
-#: libbackground/applier.c:273
+#: ../libbackground/applier.c:272
 msgid "Height if applier is a preview: Defaults to 48."
 msgstr "Uygulayıcı önizleme ise yükseklik: Öntanımlı olarak 48."
 
-#: libbackground/applier.c:280
+#: ../libbackground/applier.c:279
 msgid "Screen"
 msgstr "Ekran"
 
-#: libbackground/applier.c:281
+#: ../libbackground/applier.c:280
 msgid "Screen on which BGApplier is to draw"
 msgstr "BGApplier'ın çizileceği ekran"
 
-#: libsounds/sound-view.c:122 libsounds/sound-view.c:147
+#: ../libgswitchit/gswitchit_config.c:1035
+#, c-format
+msgid "There was an error loading an image: %s"
+msgstr "Resim yüklerken bir hata oluştu: %s"
+
+#: ../libsounds/sound-view.c:122 ../libsounds/sound-view.c:147
 msgid "The sound file for this event does not exist."
 msgstr "Bu olay için ses dosyası bulunamadı."
 
-#: libsounds/sound-view.c:149
+#: ../libsounds/sound-view.c:149
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package\n"
@@ -2512,239 +2811,239 @@ msgstr ""
 "Öntanımlı bir dizi ses için gnome-audio package\n"
 "kurabilirsiniz."
 
-#: libsounds/sound-view.c:224
+#: ../libsounds/sound-view.c:224
 #, c-format
 msgid "The file %s is not a valid wav file"
 msgstr "%s dosyası geçerli bir wav dosyası değil"
 
-#: libsounds/sound-view.c:289
+#: ../libsounds/sound-view.c:289
 msgid "Event"
 msgstr "Olay"
 
-#: libsounds/sound-view.c:298
+#: ../libsounds/sound-view.c:298
 msgid "Sound File"
 msgstr "Ses Dosyası"
 
-#: libsounds/sound-view.c:314
+#: ../libsounds/sound-view.c:314
 msgid "_Sounds:"
 msgstr "_Sesler:"
 
-#: libsounds/sound-view.c:328
+#: ../libsounds/sound-view.c:328
 msgid "Sound _file:"
 msgstr "_Ses dosyası:"
 
-#: libsounds/sound-view.c:332
+#: ../libsounds/sound-view.c:332
 msgid "Select Sound File"
 msgstr "Ses Dosyasını Seçin"
 
-#: libsounds/sound-view.c:356
+#: ../libsounds/sound-view.c:356
 msgid "_Play"
 msgstr "Ç_al"
 
-#: libsounds/sound-view.c:366
+#: ../libsounds/sound-view.c:366
 msgid "_Remove"
 msgstr "_Sil"
 
-#: libwindow-settings/gnome-wm-manager.c:320
+#: ../libwindow-settings/gnome-wm-manager.c:320
 #, c-format
 msgid "Window manager \"%s\" has not registered a configuration tool\n"
 msgstr "Pencere yöneticisi \"%s\" bir yapılandırma aygıtına kayıtlı değil\n"
 
-#: libwindow-settings/metacity-window-manager.c:378
+#: ../libwindow-settings/metacity-window-manager.c:378
 msgid "Maximize"
 msgstr "Büyüt"
 
-#: libwindow-settings/metacity-window-manager.c:379
+#: ../libwindow-settings/metacity-window-manager.c:379
 msgid "Roll up"
 msgstr "Yukarı sar"
 
-#: schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:1
+#: ../schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:1
 msgid ""
 "If true, the mime handlers for text/plain and text/* will be kept in sync"
 msgstr "Eger seçiliyse, text/plain ve text/* mime işleyicileri aynı tutulacak"
 
-#: schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:2
+#: ../schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:2
 msgid "Sync text/plain and text/* handlers"
 msgstr "text/plain ve text/* işleyicilierini ortak kullan"
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:1
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:1
 msgid "Brightness down"
 msgstr "Parlaklık azalt"
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:2
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:2
 msgid "Brightness down's shortcut."
 msgstr "Parlaklık azalt kısayolu."
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:3
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:3
 msgid "Brightness up"
 msgstr "Parlaklık arttır"
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:4
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:4
 msgid "Brightness up's shortcut."
 msgstr "Parlaklık arttır kısayolu."
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:5
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:5
 msgid "E-mail"
 msgstr "E-posta"
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:6
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:6
 msgid "E-mail's shortcut."
 msgstr "E-posta kısayolu."
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:7
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:7
 msgid "Eject"
 msgstr "Çıkart"
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:8
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:8
 msgid "Eject's shortcut."
 msgstr "Çıkart kısayolu."
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:9
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:9
 msgid "Home folder"
 msgstr "Başlangıç klasörü"
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:10
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:10
 msgid "Home folder's shortcut."
 msgstr "Başlangıç klasörünün kısayolu."
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
 msgid "Launch help browser"
 msgstr "Yardım tarayıcı aç"
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:12
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:12
 msgid "Launch help browser's shortcut."
 msgstr "Yardım tarayıcı aç'ın kısayolu."
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:13
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:13
 msgid "Launch web browser"
 msgstr "Web tarayıcı aç"
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:14
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:14
 msgid "Launch web browser's shortcut."
 msgstr "Web tarayıcı aç'ın kısayolu."
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
 msgid "Lock screen"
 msgstr "Ekranı kilitle"
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
 msgid "Lock screen's shortcut."
 msgstr "Ekranı kilitle'nin kısayolu."
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
 msgid "Log out"
 msgstr "Çıkış"
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
 msgid "Log out's shortcut."
 msgstr "Çıkış'ın kısayolu."
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
 msgid "Next track key's shortcut."
 msgstr "Sonraki parça tuşu kısayolu."
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
 msgid "Pause"
 msgstr "Duraklat"
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
 msgid "Pause key's shortcut."
 msgstr "Duraklat tuşu kısayolu."
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
 msgid "Play (or play/pause)"
 msgstr "Çal (veya çal/duraklat)"
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
 msgid "Play (or play/pause) key's shortcut."
 msgstr "Çal (veya çal/duraklat)'ın kısayolu."
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
 msgid "Previous track key's shortcut."
 msgstr "Önceki parça tuşu kısayolu."
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
 msgid "Search"
 msgstr "Arama"
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
 msgid "Search's shortcut."
 msgstr "Arama kısayolu."
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
 msgid "Skip to next track"
 msgstr "Diğer parçaya atla"
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
 msgid "Skip to previous track"
 msgstr "Bir önceki parçaya geç"
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
 msgid "Sleep"
 msgstr "Uyu"
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
 msgid "Sleep's shortcut."
 msgstr "Uyu kısayolu."
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
 msgid "Stop playback key"
 msgstr "Çaldırmayı durdurma tuşu"
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
 msgid "Stop playback key's shortcut."
 msgstr "Çaldırmayı durdurma tuşu kısayolu."
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
 msgid "Volume down"
 msgstr "Sesi azalt"
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
 msgid "Volume down's shortcut."
 msgstr "Sesi azalt kısayolu."
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
 msgid "Volume mute"
 msgstr "Sesi kes"
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
 msgid "Volume mute's shortcut"
 msgstr "Sesi kes kısayolu"
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:37
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:37
 msgid "Volume step"
 msgstr "Ses basamağı"
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:38
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:38
 msgid "Volume step as percentage of volume."
 msgstr "Yüzde olarak ses basamağı."
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:39
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:39
 msgid "Volume up"
 msgstr "Sesi arttır"
 
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
 msgid "Volume up's shortcut."
 msgstr "Sesi arttır kısayolu."
 
-#: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:1
-msgid "Display a dialog when there are errors running XScreenSaver"
+#: ../schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:1
+msgid "Display a dialog when there are errors running the screensaver"
 msgstr ""
-"XScreenSaver çalıştırırken oluşan hatalarda bir iletişim penceresi göster"
+"Ekran koruyucu çalıştırırken oluşan hatalarda bir iletişim penceresi göster"
 
-#: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:2
-msgid "Run XScreenSaver at login"
-msgstr "Girişte XScreenSaver programını çalıştır"
+#: ../schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:2
+msgid "Run screensaver at login"
+msgstr "Girişte ekran koruyucu çalıştır"
 
-#: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:3
+#: ../schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:3
 msgid "Show Startup Errors"
 msgstr "Başlangıç Hatalarını Göster"
 
-#: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:4
-msgid "Start XScreenSaver"
-msgstr "XScreenSaver'ı Çalıştır"
+#: ../schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:4
+msgid "Start screensaver"
+msgstr "Ekran koruyucuyu başlat"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:1
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:1
 msgid ""
 "A collection of scripts to run whenever the keyboard state is reloaded. "
 "Useful for re-applying xmodmap based adjustments"
@@ -2752,48 +3051,51 @@ msgstr ""
 "Klavye durumu yeniden yüklendiğinde çalıştırılacak betikler bütünü. xmodmap "
 "tabanlı ayarları tekrar uygulamak için kullanışlıdır"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
 msgid "A list of modmap files available in the $HOME directory."
 msgstr "$HOME dizininde mevcut olan modmap dosyaları listesi."
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
 msgid "Default group, assigned on window creation"
 msgstr "Öntanımlı grup, pencere oluştururken atanır"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
 msgid "Keep and manage separate group per window"
 msgstr "Her pencere için ayrı grup tut ve yönet"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
 msgid "Keyboard Update Handlers"
 msgstr "Klavye Güncelleme İşleyicileri"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:6
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:6
 msgid "Keyboard layout"
 msgstr "Klavye düzeni"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:7
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:7
 msgid "Keyboard model"
 msgstr "Klavye modeli"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:8
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:8
 msgid "Keyboard options"
 msgstr "Klavye seçenekleri"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:9
-msgid "Keyboard settings in gconf will be overridden from the system ASAP"
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:9
+msgid ""
+"Keyboard settings in gconf will be overridden from the system ASAP "
+"(deprecated)"
 msgstr ""
-"gconf içindeki klavye seçenekleri yerine sistem seçenekleri kullanılacak ASAP"
+"gconf içindeki klavye seçenekleri yerine sistem seçenekleri kullanılacak "
+"ASAP (kullanılmıyor)"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:10
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:10
 msgid "Save/restore indicators together with layout groups"
 msgstr "Düzen gruplarıyla birlikte belirticileri kaydet/geri al"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:11
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:11
 msgid "Show layout names instead of group names"
 msgstr "Grup adları yerine düzen adlarını göster"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:12
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:12
 msgid ""
 "Show layout names instead of group names (only for versions of XFree "
 "supporting multiple layouts)"
@@ -2801,63 +3103,66 @@ msgstr ""
 "Grup adları yerine düzen adlarını göster (sadece birden daha fazla düzen "
 "destekleyen XFree sürümleri için)"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:13
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:13
 msgid "Suppress the \"X sysconfig changed\" warning message"
 msgstr "\"X sysconfig değişti\" uyarı mesajını gösterme"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:14
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:14
 msgid ""
 "Very soon, keyboard settings in gconf will be overridden (from the system "
-"configuration)"
+"configuration) This key has been deprecated since GNOME 2.12, please unset "
+"the model, layouts and options keys to get the default system configuration."
 msgstr ""
-"Çok yakında, gconf içindeki klavye ayarları yerine sistem yapılandırması "
-"ayarları kullanılacak"
+"Çok yakında gconf içindeki klavye seçeneklerinin yerine yeni seçenekler "
+"gelecek (sistem yapılandırmasından) Bu anahtar GNOME 2.12 sonrası "
+"geçerliliğini yitirdi, lütfen modeli, düzenleri ve tuş seçenekleri "
+"ayarlarını öntanımlı değerleri almak için kaldırın."
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:15
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:15
 msgid "keyboard layout"
 msgstr "klavye düzeni"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:16
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:16
 msgid "keyboard model"
 msgstr "klavye modeli"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:17
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:17
 msgid "modmap file list"
 msgstr "modmap dosya listesi"
 
-#: typing-break/drw-break-window.c:209
+#: ../typing-break/drw-break-window.c:212
 msgid "_Postpone break"
 msgstr "_Molayı ertele"
 
-#: typing-break/drw-break-window.c:256
+#: ../typing-break/drw-break-window.c:259
 msgid "Take a break!"
 msgstr "Mola verin!"
 
 #. { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
-#: typing-break/drwright.c:136
+#: ../typing-break/drwright.c:141
 msgid "/_Preferences"
 msgstr "/_Tercihler"
 
-#: typing-break/drwright.c:137
+#: ../typing-break/drwright.c:142
 msgid "/_About"
 msgstr "/_Hakkında"
 
-#: typing-break/drwright.c:139
+#: ../typing-break/drwright.c:144
 msgid "/_Take a Break"
 msgstr "/_Mola ver"
 
-#: typing-break/drwright.c:491
+#: ../typing-break/drwright.c:495
 #, c-format
 msgid "%d minute until the next break"
 msgid_plural "%d minutes until the next break"
 msgstr[0] "Sonraki molaya kadar %d dakika kaldı"
 msgstr[1] "Sonraki molaya kadar %d dakika kaldı"
 
-#: typing-break/drwright.c:495
+#: ../typing-break/drwright.c:499
 msgid "Less than one minute until the next break"
 msgstr "Sonraki molaya bir dakikadan az bir zaman kaldı"
 
-#: typing-break/drwright.c:583
+#: ../typing-break/drwright.c:587
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
@@ -2865,31 +3170,31 @@ msgid ""
 msgstr ""
 "Bu hata yüzünde yazım molası özellikleri penceresi yukarı getirilemiyor: %s"
 
-#: typing-break/drwright.c:631
+#: ../typing-break/drwright.c:635
 msgid "About GNOME Typing Monitor"
 msgstr "GNOME Yazım Gözetleyicisi Hakkında"
 
-#: typing-break/drwright.c:655
+#: ../typing-break/drwright.c:659
 msgid "A computer break reminder."
 msgstr "Bilgisayar molası hatırlatıcısı."
 
-#: typing-break/drwright.c:656
+#: ../typing-break/drwright.c:660
 msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
 msgstr "Richard Hult &lt;richard@imendio.com&gt; taraından yazıldı"
 
-#: typing-break/drwright.c:657
+#: ../typing-break/drwright.c:661
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Eye candy, Anders Carlsson tarafından eklendi"
 
-#: typing-break/drwright.c:833
+#: ../typing-break/drwright.c:837
 msgid "Break reminder"
 msgstr "Mola hatırlatıcısı"
 
-#: typing-break/main.c:93
+#: ../typing-break/main.c:93
 msgid "The typing monitor is already running."
 msgstr "Yazım gözetleyicisi zaten çalışıyor."
 
-#: typing-break/main.c:106
+#: ../typing-break/main.c:106
 msgid ""
 "The typing monitor uses the notification area to display information. You "
 "don't seem to have a notification area on your panel. You can add it by "
@@ -2900,138 +3205,136 @@ msgstr ""
 "Panelinizde uyarı alanı yok gibi görülüyor. Panele sağ tıklayıp 'Panele "
 "ekle', 'Uyarı alanı' ve 'Ekle'yi tıklayarak alanı ekleyebilirsiniz."
 
-#: vfs-methods/fontilus/font-view.c:125
+#: ../vfs-methods/fontilus/font-view.c:115
 msgid "The quick brown fox jumps over the lazy dog. 0123456789"
 msgstr ""
 "Muş sefahat pasajı önündeki borçlu yorgun bir ağızla cevapladı. 0123456789"
 
-#: vfs-methods/fontilus/font-view.c:285
+#: ../vfs-methods/fontilus/font-view.c:276
 msgid "Name:"
 msgstr "İsim:"
 
-#: vfs-methods/fontilus/font-view.c:288
+#: ../vfs-methods/fontilus/font-view.c:279
 msgid "Style:"
 msgstr "Stil:"
 
-#: vfs-methods/fontilus/font-view.c:297
+#: ../vfs-methods/fontilus/font-view.c:289
 msgid "Type:"
 msgstr "Tür:"
 
-#: vfs-methods/fontilus/font-view.c:304
+#: ../vfs-methods/fontilus/font-view.c:295
 msgid "Size:"
 msgstr "Boyut:"
 
-#: vfs-methods/fontilus/font-view.c:348 vfs-methods/fontilus/font-view.c:361
+#: ../vfs-methods/fontilus/font-view.c:339
+#: ../vfs-methods/fontilus/font-view.c:352
 msgid "Version:"
 msgstr "Sürüm:"
 
-#: vfs-methods/fontilus/font-view.c:352 vfs-methods/fontilus/font-view.c:363
+#: ../vfs-methods/fontilus/font-view.c:343
+#: ../vfs-methods/fontilus/font-view.c:354
 msgid "Copyright:"
 msgstr "Telif:"
 
-#: vfs-methods/fontilus/font-view.c:356
+#: ../vfs-methods/fontilus/font-view.c:347
 msgid "Description:"
 msgstr "Açıklama:"
 
-#: vfs-methods/fontilus/font-view.c:417
+#: ../vfs-methods/fontilus/font-view.c:408
 #, c-format
 msgid "usage: %s fontfile\n"
 msgstr "kullanım: %s yazıtipi-dosyası\n"
 
-#: vfs-methods/fontilus/fontilus-context-menu.c:132
+#: ../vfs-methods/fontilus/fontilus-context-menu.c:132
 msgid "Set as Application Font"
 msgstr "Uygulama Yazıtipi Olarak Tanımla"
 
-#: vfs-methods/fontilus/fontilus-context-menu.c:133
+#: ../vfs-methods/fontilus/fontilus-context-menu.c:133
 msgid "Sets the default application font"
 msgstr "Öntanımlı uygulama yazıtipini seçin"
 
-#: vfs-methods/fontilus/fontilus.schemas.in.h:1
+#: ../vfs-methods/fontilus/fontilus.schemas.in.h:1
 msgid "If set to true, then OpenType fonts will be thumbnailed."
 msgstr "Eğer doğruya ayarlı ise, OpenType yazıtipleri örneklendirilecek."
 
-#: vfs-methods/fontilus/fontilus.schemas.in.h:2
+#: ../vfs-methods/fontilus/fontilus.schemas.in.h:2
 msgid "If set to true, then PCF fonts will be thumbnailed."
 msgstr "Eğer doğru'ya ayarlı ise, PCF yazıtipleri örneklendirilecek."
 
-#: vfs-methods/fontilus/fontilus.schemas.in.h:3
+#: ../vfs-methods/fontilus/fontilus.schemas.in.h:3
 msgid "If set to true, then TrueType fonts will be thumbnailed."
 msgstr "Eğer doğru'ya ayarlı ise, TrueType yazıtipleri örneklendirilecek."
 
-#: vfs-methods/fontilus/fontilus.schemas.in.h:4
+#: ../vfs-methods/fontilus/fontilus.schemas.in.h:4
 msgid "If set to true, then Type1 fonts will be thumbnailed."
 msgstr "Eğer doğru'ya ayarlı ise, Type1 yazıtipleri örneklendirilecek."
 
-#: vfs-methods/fontilus/fontilus.schemas.in.h:5
+#: ../vfs-methods/fontilus/fontilus.schemas.in.h:5
 msgid ""
 "Set this key to the command used to create thumbnails for OpenType fonts."
 msgstr ""
 "Bu anahtarı OpenType yazıtipleri için örnek oluşturacak komuta ayarlayın."
 
-#: vfs-methods/fontilus/fontilus.schemas.in.h:6
+#: ../vfs-methods/fontilus/fontilus.schemas.in.h:6
 msgid "Set this key to the command used to create thumbnails for PCF fonts."
 msgstr "Bu anahtarı PCF yazıtipleri için örnek oluşturacak komuta ayarlayın."
 
-#: vfs-methods/fontilus/fontilus.schemas.in.h:7
+#: ../vfs-methods/fontilus/fontilus.schemas.in.h:7
 msgid ""
 "Set this key to the command used to create thumbnails for TrueType fonts."
 msgstr ""
 "Bu anahtarı TrueType yazıtipleri için örnek oluşturacak komuta ayarlayın."
 
-#: vfs-methods/fontilus/fontilus.schemas.in.h:8
+#: ../vfs-methods/fontilus/fontilus.schemas.in.h:8
 msgid "Set this key to the command used to create thumbnails for Type1 fonts."
 msgstr "Bu anahtarı Type1 yazıtipleri için örnek oluşturacak komuta ayarlayın."
 
-#: vfs-methods/fontilus/fontilus.schemas.in.h:9
+#: ../vfs-methods/fontilus/fontilus.schemas.in.h:9
 msgid "Thumbnail command for OpenType fonts"
 msgstr "OpenType yazıtipleri için örnekleme komutu"
 
-#: vfs-methods/fontilus/fontilus.schemas.in.h:10
+#: ../vfs-methods/fontilus/fontilus.schemas.in.h:10
 msgid "Thumbnail command for PCF fonts"
 msgstr "PCF yazıtipleri için örnekleme komutu"
 
-#: vfs-methods/fontilus/fontilus.schemas.in.h:11
+#: ../vfs-methods/fontilus/fontilus.schemas.in.h:11
 msgid "Thumbnail command for TrueType fonts"
 msgstr "TrueType yazıtipleri için örnekleme komutu"
 
-#: vfs-methods/fontilus/fontilus.schemas.in.h:12
+#: ../vfs-methods/fontilus/fontilus.schemas.in.h:12
 msgid "Thumbnail command for Type1 fonts"
 msgstr "Type1 yazıtipleri için örnekleme komutu"
 
-#: vfs-methods/fontilus/fontilus.schemas.in.h:13
+#: ../vfs-methods/fontilus/fontilus.schemas.in.h:13
 msgid "Whether to thumbnail OpenType fonts"
 msgstr "OpenType yazıtiplerinin örneklendirilip yada örneklendirilmeyeceği"
 
-#: vfs-methods/fontilus/fontilus.schemas.in.h:14
+#: ../vfs-methods/fontilus/fontilus.schemas.in.h:14
 msgid "Whether to thumbnail PCF fonts"
 msgstr "PCF yazıtiplerinin örneklendirilip yada örneklendirilmeyeceği"
 
-#: vfs-methods/fontilus/fontilus.schemas.in.h:15
+#: ../vfs-methods/fontilus/fontilus.schemas.in.h:15
 msgid "Whether to thumbnail TrueType fonts"
 msgstr "TrueType yazıtiplerinin örneklendirilip yada örneklendirilmeyeceği"
 
-#: vfs-methods/fontilus/fontilus.schemas.in.h:16
+#: ../vfs-methods/fontilus/fontilus.schemas.in.h:16
 msgid "Whether to thumbnail Type1 fonts"
 msgstr "Type1 yazıtiplerinin örneklendirilip yada örneklendirilmeyeceği"
 
-#: vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:1
+#: ../vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:1
 msgid "GNOME Font Viewer"
 msgstr "GNOME Yazıtipi Görüntüleyici"
 
-#: vfs-methods/themus/apply-font.glade.h:1
-msgid " "
-msgstr " "
-
-#: vfs-methods/themus/apply-font.glade.h:2
+#: ../vfs-methods/themus/apply-font.glade.h:2
 msgid "<span weight=\"bold\" size=\"larger\">Apply new font?</span>"
 msgstr ""
 "<span weight=\"bold\" size=\"larger\">Yeni yazıtipi uygulansın mı?</span>"
 
-#: vfs-methods/themus/apply-font.glade.h:3
+#: ../vfs-methods/themus/apply-font.glade.h:3
 msgid "Do _not apply font"
 msgstr "_Yazıtipini uygulama"
 
-#: vfs-methods/themus/apply-font.glade.h:4
+#: ../vfs-methods/themus/apply-font.glade.h:4
 msgid ""
 "The theme you have selected suggests a new font. A preview of the font is "
 "shown below."
@@ -3039,72 +3342,114 @@ msgstr ""
 "Seçtiğiniz tema yeni bir yazıtipi öneriyor. Yazıtipinin önizlemesi aşagıda "
 "gösterildiği gibi."
 
-#: vfs-methods/themus/apply-font.glade.h:5
+#: ../vfs-methods/themus/apply-font.glade.h:5
 msgid "_Apply font"
 msgstr "_Yazıtipini uygula"
 
-#: vfs-methods/themus/theme-method.c:520
+#: ../vfs-methods/themus/theme-method.c:520
 msgid "Themes"
 msgstr "Temalar"
 
-#: vfs-methods/themus/themus-properties-view.c:126
+#: ../vfs-methods/themus/themus-properties-view.c:126
 msgid "Description"
 msgstr "Açıklama"
 
-#: vfs-methods/themus/themus-properties-view.c:133
+#: ../vfs-methods/themus/themus-properties-view.c:133
 msgid "Control theme"
 msgstr "Kontrol teması"
 
-#: vfs-methods/themus/themus-properties-view.c:139
+#: ../vfs-methods/themus/themus-properties-view.c:139
 msgid "Window border theme"
 msgstr "Pencera kenar teması"
 
-#: vfs-methods/themus/themus-properties-view.c:145
+#: ../vfs-methods/themus/themus-properties-view.c:145
 msgid "Icon theme"
 msgstr "Simge teması"
 
 #. translators: you may want to include non-western chars here
-#: vfs-methods/themus/themus-theme-applier.c:78
+#: ../vfs-methods/themus/themus-theme-applier.c:78
 msgid "ABCDEFG"
 msgstr "ABCÇDEFGĞŞİÜÖ"
 
-#: vfs-methods/themus/themus-theme-applier.desktop.in.in.h:1
+#: ../vfs-methods/themus/themus-theme-applier.desktop.in.in.h:1
 msgid "Apply theme"
 msgstr "Temayı uygula"
 
-#: vfs-methods/themus/themus-theme-applier.desktop.in.in.h:2
+#: ../vfs-methods/themus/themus-theme-applier.desktop.in.in.h:2
 msgid "Sets the default theme"
 msgstr "Öntanımlı temayı ayarla"
 
-#: vfs-methods/themus/themus.schemas.in.h:1
+#: ../vfs-methods/themus/themus.schemas.in.h:1
 msgid "If set to true, then installed themes will be thumbnailed."
 msgstr "Eğer doğruya ayarlıysa, yüklenmiş temalar örneklendirilecek."
 
-#: vfs-methods/themus/themus.schemas.in.h:2
+#: ../vfs-methods/themus/themus.schemas.in.h:2
 msgid "If set to true, then themes will be thumbnailed."
 msgstr "Eğer doğruya ayarlıysa, temalar örneklendirilecek."
 
-#: vfs-methods/themus/themus.schemas.in.h:3
+#: ../vfs-methods/themus/themus.schemas.in.h:3
 msgid ""
 "Set this key to the command used to create thumbnails for installed themes."
 msgstr "Bu anahtarı yüklenmiş temalar için örnek oluşturacak komuta ayarlayın."
 
-#: vfs-methods/themus/themus.schemas.in.h:4
+#: ../vfs-methods/themus/themus.schemas.in.h:4
 msgid "Set this key to the command used to create thumbnails for themes."
 msgstr "Bu anahtarı temalar için örnek oluşturacak komuta ayarlayın."
 
-#: vfs-methods/themus/themus.schemas.in.h:5
+#: ../vfs-methods/themus/themus.schemas.in.h:5
 msgid "Thumbnail command for installed themes"
 msgstr "Yüklenmiş temalar için örneklendirme komutu"
 
-#: vfs-methods/themus/themus.schemas.in.h:6
+#: ../vfs-methods/themus/themus.schemas.in.h:6
 msgid "Thumbnail command for themes"
 msgstr "Temalar için örneklendirme komutu"
 
-#: vfs-methods/themus/themus.schemas.in.h:7
+#: ../vfs-methods/themus/themus.schemas.in.h:7
 msgid "Whether to thumbnail installed themes"
 msgstr "Yüklenmiş temaların örneklendirilip yada örneklendirilmeyeceği"
 
-#: vfs-methods/themus/themus.schemas.in.h:8
+#: ../vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Temaların örneklendirilip yada örneklendirilmeyeceği"
+
+#~ msgid "Pick a color"
+#~ msgstr "Bir renk seçin"
+
+#~ msgid "%i of %i"
+#~ msgstr "%i / %i"
+
+#~ msgid "Transferring: %s"
+#~ msgstr "Aktarılıyor: %s"
+
+#~ msgid "Downloading..."
+#~ msgstr "İndiriliyor..."
+
+#~ msgid "Set the font for applications"
+#~ msgstr "Uygulamaların yazıtipini ayarla"
+
+#~ msgid "Set the font for the icons on the desktop"
+#~ msgstr "Masaüstü simgelerinin yazıtipini ayarla"
+
+#~ msgid "Set the monospace font for terminals and similar applications"
+#~ msgstr ""
+#~ "Terminal konsolu ve benzer uygulamalar için eş aralıklı yazıtipini seçin"
+
+#~ msgid "_Use Font"
+#~ msgstr "Yazıtipi _Kullan"
+
+#~ msgid ""
+#~ "<i><small><b>Note:</b> Changes to this setting will not take effect until "
+#~ "next time you log in.</small></i>"
+#~ msgstr ""
+#~ "<i><small><b>Not:</b> Sisteme yeniden girene kadar.değişiklikler etkin "
+#~ "olmayacaktır.</small></i>"
+
+#~ msgid "Sound preferences"
+#~ msgstr "Ses tercihleri"
+
+#~ msgid ""
+#~ "Very soon, keyboard settings in gconf will be overridden (from the system "
+#~ "configuration)"
+#~ msgstr ""
+#~ "Çok yakında, gconf içindeki klavye ayarları yerine sistem yapılandırması "
+#~ "ayarları kullanılacak"
