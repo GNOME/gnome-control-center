@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-03 21:37+0200\n"
-"PO-Revision-Date: 2005-08-03 21:40+0200\n"
+"POT-Creation-Date: 2005-09-03 21:54+0200\n"
+"PO-Revision-Date: 2005-09-03 21:58+0200\n"
 "Last-Translator: Slobodan D. Sredojević <slobo@akrep.be>\n"
 "Language-Team: Serbian (sr) <gnom@prevod.org>\n"
 "MIME-Version: 1.0\n"
@@ -65,22 +65,30 @@ msgstr "Izbor slike"
 msgid "No Image"
 msgstr "Bez slike"
 
-#: ../capplets/about-me/gnome-about-me.c:721
+#: ../capplets/about-me/gnome-about-me.c:706
+msgid ""
+"There was an error while trying to get the addressbook information\n"
+"Evolution Data Server can't handle the protocol"
+msgstr ""
+"Došlo je do greške u pokušaju pribavljanja podataka adresara\n"
+"Poslužitelj podataka Evolucije ne prihvata dati protokol"
+
+#: ../capplets/about-me/gnome-about-me.c:727
 msgid "Unable to open address book"
 msgstr "Ne mogu da otvorim imenik"
 
-#: ../capplets/about-me/gnome-about-me.c:733
+#: ../capplets/about-me/gnome-about-me.c:739
 msgid "Unknown login ID, the user database might be corrupted"
 msgstr "Nepoznati IB korisnika — možda je baza korisnika oštećena"
 
-#: ../capplets/about-me/gnome-about-me.c:764
-#: ../capplets/about-me/gnome-about-me.c:766
+#: ../capplets/about-me/gnome-about-me.c:770
+#: ../capplets/about-me/gnome-about-me.c:772
 #, c-format
 msgid "About %s"
 msgstr "%s"
 
 #: ../capplets/about-me/gnome-about-me-password.c:101
-#: ../capplets/about-me/gnome-about-me-password.c:380
+#: ../capplets/about-me/gnome-about-me-password.c:479
 msgid "Old password is incorrect, please retype it"
 msgstr "Stara lozinka je netačna, molim unesite je ponovo"
 
@@ -101,16 +109,33 @@ msgstr "Ne mogu da pokrenem pozadinski proces"
 msgid "Unexpected error has occurred"
 msgstr "Dogodila se neočekivana greška"
 
-#: ../capplets/about-me/gnome-about-me-password.c:434
+#: ../capplets/about-me/gnome-about-me-password.c:315
+msgid "Password is too short"
+msgstr "Lozinka je prekratka"
+
+#: ../capplets/about-me/gnome-about-me-password.c:318
+#: ../capplets/about-me/gnome-about-me-password.c:321
+msgid "Password is too simple"
+msgstr "Lozinka je suviše jednostavna"
+
+#: ../capplets/about-me/gnome-about-me-password.c:324
+msgid "Old and new passwords are too similar"
+msgstr "Stara i nova lozinka su suviše slične"
+
+#: ../capplets/about-me/gnome-about-me-password.c:328
+msgid "Old and new password are the same"
+msgstr "Stara i nova lozinka su iste"
+
+#: ../capplets/about-me/gnome-about-me-password.c:406
 msgid "Please type the passwords."
 msgstr "Ukucajte loѕinke."
 
-#: ../capplets/about-me/gnome-about-me-password.c:442
+#: ../capplets/about-me/gnome-about-me-password.c:414
 msgid "Please type the password again, it is wrong."
 msgstr "Ponovo ukucajte lozinke, neispravne su."
 
-#: ../capplets/about-me/gnome-about-me-password.c:445
-msgid "Click the Change Password button to change the password."
+#: ../capplets/about-me/gnome-about-me-password.c:417
+msgid "Click on Change Password to change the password."
 msgstr "Kliknite na dugme Promeni lozinku da izmenite lozinku."
 
 #: ../capplets/about-me/gnome-about-me.glade.h:1
@@ -636,7 +661,7 @@ msgstr "piksela u sekundi"
 #. set the timeout value  label with correct value of timeout
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
 #: ../capplets/mouse/gnome-mouse-properties.c:131
-#: ../capplets/mouse/gnome-mouse-properties.c:863
+#: ../capplets/mouse/gnome-mouse-properties.c:878
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:27
 #: ../capplets/windows/gnome-window-properties.glade.h:10
 msgid "seconds"
@@ -675,50 +700,50 @@ msgstr "_Dodaj"
 msgid "_Style:"
 msgstr "_Stil:"
 
-#: ../capplets/background/gnome-wp-capplet.c:72
+#: ../capplets/background/gnome-wp-capplet.c:74
 #: ../capplets/common/capplet-util.c:340
 #: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:333
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "Došlo je do greške prilikom prikazivanja pomoći: %s"
 
-#: ../capplets/background/gnome-wp-capplet.c:1037
-#: ../capplets/background/gnome-wp-capplet.c:1055
+#: ../capplets/background/gnome-wp-capplet.c:1038
+#: ../capplets/background/gnome-wp-capplet.c:1056
 msgid "Centered"
 msgstr "Centrirano"
 
-#: ../capplets/background/gnome-wp-capplet.c:1063
-#: ../capplets/background/gnome-wp-capplet.c:1080
+#: ../capplets/background/gnome-wp-capplet.c:1064
+#: ../capplets/background/gnome-wp-capplet.c:1081
 msgid "Fill Screen"
 msgstr "Ispuni ekran"
 
-#: ../capplets/background/gnome-wp-capplet.c:1088
-#: ../capplets/background/gnome-wp-capplet.c:1105
+#: ../capplets/background/gnome-wp-capplet.c:1089
+#: ../capplets/background/gnome-wp-capplet.c:1106
 msgid "Scaled"
 msgstr "Srazmerno"
 
-#: ../capplets/background/gnome-wp-capplet.c:1113
-#: ../capplets/background/gnome-wp-capplet.c:1130
+#: ../capplets/background/gnome-wp-capplet.c:1114
+#: ../capplets/background/gnome-wp-capplet.c:1131
 msgid "Tiled"
 msgstr "Popločano"
 
-#: ../capplets/background/gnome-wp-capplet.c:1154
-#: ../capplets/background/gnome-wp-capplet.c:1163
+#: ../capplets/background/gnome-wp-capplet.c:1155
+#: ../capplets/background/gnome-wp-capplet.c:1164
 msgid "Solid Color"
 msgstr "Puna boja"
 
-#: ../capplets/background/gnome-wp-capplet.c:1171
-#: ../capplets/background/gnome-wp-capplet.c:1180
+#: ../capplets/background/gnome-wp-capplet.c:1172
+#: ../capplets/background/gnome-wp-capplet.c:1181
 msgid "Horizontal Gradient"
 msgstr "Vodoravno nijansirano"
 
-#: ../capplets/background/gnome-wp-capplet.c:1188
-#: ../capplets/background/gnome-wp-capplet.c:1197
+#: ../capplets/background/gnome-wp-capplet.c:1189
+#: ../capplets/background/gnome-wp-capplet.c:1198
 msgid "Vertical Gradient"
 msgstr "Uspravno nijansirano"
 
 #. Create the file chooser dialog stuff here
-#: ../capplets/background/gnome-wp-capplet.c:1244
+#: ../capplets/background/gnome-wp-capplet.c:1247
 msgid "Add Wallpaper"
 msgstr "Dodaj pozadinu"
 
@@ -760,7 +785,7 @@ msgstr "Samo primeni postavke i izađi"
 #: ../capplets/common/capplet-util.c:243
 #: ../capplets/default-applications/gnome-default-applications-properties.c:765
 #: ../capplets/keyboard/gnome-keyboard-properties.c:225
-#: ../capplets/mouse/gnome-mouse-properties.c:999
+#: ../capplets/mouse/gnome-mouse-properties.c:1014
 #: ../capplets/sound/sound-properties-capplet.c:244
 msgid "Retrieve and store legacy settings"
 msgstr "Povrati i uskladišti početna podešavanja"
@@ -1742,55 +1767,55 @@ msgstr "Podesite vašu tastaturu"
 msgid "Unknown Cursor"
 msgstr "Nepoznat kursor"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:739
+#: ../capplets/mouse/gnome-mouse-properties.c:754
 msgid "Default Cursor"
 msgstr "Osnovni kurzor"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:740
+#: ../capplets/mouse/gnome-mouse-properties.c:755
 msgid "Default Cursor - Current"
 msgstr "Osnovni kurzor — tekući"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:741
+#: ../capplets/mouse/gnome-mouse-properties.c:756
 msgid "The default cursor that ships with X"
 msgstr "Osnovni kurzor koji dolazi sa Iksom"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:745
+#: ../capplets/mouse/gnome-mouse-properties.c:760
 msgid "White Cursor"
 msgstr "Beli kurzor"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:746
+#: ../capplets/mouse/gnome-mouse-properties.c:761
 msgid "White Cursor - Current"
 msgstr "Beli kurzor — tekući"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:747
+#: ../capplets/mouse/gnome-mouse-properties.c:762
 msgid "The default cursor inverted"
 msgstr "Osnovni kurzor obrnutih boja"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:751
+#: ../capplets/mouse/gnome-mouse-properties.c:766
 msgid "Large Cursor"
 msgstr "Veliki kurzor"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:752
+#: ../capplets/mouse/gnome-mouse-properties.c:767
 msgid "Large Cursor - Current"
 msgstr "Veliki kurzor — tekući"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:753
+#: ../capplets/mouse/gnome-mouse-properties.c:768
 msgid "Large version of normal cursor"
 msgstr "Veća varijanta normalnog kurzora"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:757
+#: ../capplets/mouse/gnome-mouse-properties.c:772
 msgid "Large White Cursor - Current"
 msgstr "Veliki beli kurzor — tekući"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:758
+#: ../capplets/mouse/gnome-mouse-properties.c:773
 msgid "Large White Cursor"
 msgstr "Veliki beli kurzor"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:759
+#: ../capplets/mouse/gnome-mouse-properties.c:774
 msgid "Large version of white cursor"
 msgstr "Veća varijanta belog kursora<"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:953
+#: ../capplets/mouse/gnome-mouse-properties.c:968
 msgid "Cursor Theme"
 msgstr "Izgled kurzora"
 
@@ -3077,7 +3102,9 @@ msgstr "Opcije tastature"
 msgid ""
 "Keyboard settings in gconf will be overridden from the system ASAP "
 "(deprecated)"
-msgstr "Podešavanja tastature u GKonfu će ubrzo biti prevaziđena od strane sistema (zastarelo)"
+msgstr ""
+"Podešavanja tastature u GKonfu će ubrzo biti prevaziđena od strane sistema "
+"(zastarelo)"
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:10
 msgid "Save/restore indicators together with layout groups"
@@ -3104,7 +3131,10 @@ msgid ""
 "Very soon, keyboard settings in gconf will be overridden (from the system "
 "configuration) This key has been deprecated since GNOME 2.12, please unset "
 "the model, layouts and options keys to get the default system configuration."
-msgstr "Podešavanja tastature u GKonfu će ubrzo biti prevaziđena (iz podešavanja sistema)  Ovaj ključ je zastareo počevši od Gnoma 2.12, izbacite postavke modela, rasporeda i opcija da biste dobili podrazumevano podešavanje sistema."
+msgstr ""
+"Podešavanja tastature u GKonfu će ubrzo biti prevaziđena (iz podešavanja "
+"sistema)  Ovaj ključ je zastareo počevši od Gnoma 2.12, izbacite postavke "
+"modela, rasporeda i opcija da biste dobili podrazumevano podešavanje sistema."
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:15
 msgid "keyboard layout"
@@ -3201,37 +3231,37 @@ msgid "The quick brown fox jumps over the lazy dog. 0123456789"
 msgstr ""
 "Ajšo, lepoto i čežnjo, za ljubav srca moga dođi u Hadžiće na kafu. 0123456789"
 
-#: ../vfs-methods/fontilus/font-view.c:275
+#: ../vfs-methods/fontilus/font-view.c:276
 msgid "Name:"
 msgstr "Ime:"
 
-#: ../vfs-methods/fontilus/font-view.c:278
+#: ../vfs-methods/fontilus/font-view.c:279
 msgid "Style:"
 msgstr "Stil:"
 
-#: ../vfs-methods/fontilus/font-view.c:287
+#: ../vfs-methods/fontilus/font-view.c:289
 msgid "Type:"
 msgstr "Tip:"
 
-#: ../vfs-methods/fontilus/font-view.c:294
+#: ../vfs-methods/fontilus/font-view.c:295
 msgid "Size:"
 msgstr "Veličina:"
 
-#: ../vfs-methods/fontilus/font-view.c:338
-#: ../vfs-methods/fontilus/font-view.c:351
+#: ../vfs-methods/fontilus/font-view.c:339
+#: ../vfs-methods/fontilus/font-view.c:352
 msgid "Version:"
 msgstr "Verzija:"
 
-#: ../vfs-methods/fontilus/font-view.c:342
-#: ../vfs-methods/fontilus/font-view.c:353
+#: ../vfs-methods/fontilus/font-view.c:343
+#: ../vfs-methods/fontilus/font-view.c:354
 msgid "Copyright:"
 msgstr "Autorska prava:"
 
-#: ../vfs-methods/fontilus/font-view.c:346
+#: ../vfs-methods/fontilus/font-view.c:347
 msgid "Description:"
 msgstr "Opis:"
 
-#: ../vfs-methods/fontilus/font-view.c:407
+#: ../vfs-methods/fontilus/font-view.c:408
 #, c-format
 msgid "usage: %s fontfile\n"
 msgstr "upotreba: %s datoteka slovnog lika\n"
