@@ -919,7 +919,11 @@ static void wallpaper_properties_init (poptContext ctx) {
   gtk_rc_parse_string ("style \"wp-tree-defaults\" {\n"
 		       "  GtkTreeView::horizontal-separator = 6\n"
 		       "} widget_class \"*TreeView*\""
-		       " style \"wp-tree-defaults\"");
+		       " style \"wp-tree-defaults\"\n"
+		       "style \"wp-dialog-defaults\" {\n"
+		       "  GtkDialog::action-area-border = 12\n"
+		       "} widget_class \"*Dialog*\""
+		       " style \"wp-dialog-defaults\"\n");
 
   capplet = g_new0 (GnomeWPCapplet, 1);
 
