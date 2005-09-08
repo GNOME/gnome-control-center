@@ -128,7 +128,14 @@ static gboolean
 delay_value_changed_cb (GtkWidget *range, GtkScrollType scroll, gdouble value,
 			gpointer   dialog)
 {
-	gchar *message = g_strdup_printf ("%.1f %s", value / 1000.0, _("seconds"));
+	gchar *message;
+
+	if (value < 100)
+		value = 100;
+	else if (value > 1000)
+		value = 1000;
+
+	message = g_strdup_printf ("%.1f %s", value / 1000.0, _("seconds"));
 	gtk_label_set_label ((GtkLabel*) WID ("delay_label"), message);
 	g_free (message);
 
