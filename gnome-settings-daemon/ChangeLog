@@ -1,3 +1,20 @@
+2005-09-12  Ray Strode  <rstrode@redhat.com>
+
+	Remap buttons on auxillary mice for left-handed 
+	mode (bug 314409).
+
+	* gnome-settings-mouse.c  (supports_xinput_devices): new
+	function to detect XInput Extension
+	(configure_button_layout): new function to set up
+	logical mouse button layout for left or right handed
+	mode
+	(xinput_device_has_buttons): new function to detect if
+	an xinput device has buttons to reconfigure
+	(set_xinput_devices_left_handed): new function to set
+	auxillary mice into left-handed mode
+	(set_left_handed): call set_xinput_devices_left_handed
+	if available
+
 2005-08-03  Sebastien Bacher  <seb128@debian.org>
 
 	* actions/Makefile.am: fix the build without gstreamer and with alsa,
