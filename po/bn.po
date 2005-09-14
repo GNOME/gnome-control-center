@@ -1,15 +1,15 @@
 # Bangla Translation of the Gnome Control Center po file.
-# Copyright (c)  2004 Free Software Foundation, Inc.
+# Copyright (c)  2003-2005 Free Software Foundation, Inc.
 # This file is distributed under the same license as the Gnome Control Center package.
-# Progga <progga@BengaLinux.Org>, 2003, 2004.
+# Progga <progga@BengaLinux.Org>, 2003-2005.
 #
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Gnome Control Center 2.2\n"
+"Project-Id-Version: Gnome Control Center 2.12\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-12 15:51+0100\n"
-"PO-Revision-Date: 2004-08-29 20:00+0600\n"
+"POT-Creation-Date: 2005-09-14 19:40+0530\n"
+"PO-Revision-Date: 2005-09-05 23:30+0600\n"
 "Last-Translator: Progga <progga@BengaLinux.Org>\n"
 "Language-Team: Bangla <gnome-translation@BengaLinux.Org>\n"
 "MIME-Version: 1.0\n"
@@ -17,250 +17,349 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: capplets/about-me/e-image-chooser.c:172
-msgid "Choose Image"
-msgstr ""
+#: capplets/about-me/eel-alert-dialog.c:114
+msgid "Image/label border"
+msgstr "ছবি/লেবেল-এর সীমানা"
 
-#: capplets/about-me/gnome-about-me-password.c:77
-msgid "Password changed successfully"
-msgstr ""
+#: capplets/about-me/eel-alert-dialog.c:115
+msgid "Width of border around the label and image in the alert dialog"
+msgstr "সতর্ককারী ডায়ালগে লেবেল এবং ছবির চারপাশের সীমানার প্রস্থ"
 
-#. the proccess was running su
-#: capplets/about-me/gnome-about-me-password.c:91
-msgid "The entered password is invalid"
-msgstr ""
+#: capplets/about-me/eel-alert-dialog.c:124
+msgid "Alert Type"
+msgstr "সতর্কবাণীর ধরন"
 
-#: capplets/about-me/gnome-about-me-password.c:92
-msgid ""
-"Check that you typed it correctly and that you haven't activated the \"caps "
-"lock\" key"
-msgstr ""
+#: capplets/about-me/eel-alert-dialog.c:125
+msgid "The type of alert"
+msgstr "সতর্কবাণীর ধরন"
 
-#: capplets/about-me/gnome-about-me-password.c:95
-msgid "Could not run passwd"
-msgstr ""
+# FIXME
+#: capplets/about-me/eel-alert-dialog.c:133
+msgid "Alert Buttons"
+msgstr "সতর্কবাণীর বাটন"
 
-#: capplets/about-me/gnome-about-me-password.c:96
-msgid "Check that you have permissions to run this command"
-msgstr ""
+#: capplets/about-me/eel-alert-dialog.c:134
+msgid "The buttons shown in the alert dialog"
+msgstr "সতর্ককারী ডায়ালগে প্রদর্শিত বাটন"
 
-#: capplets/about-me/gnome-about-me-password.c:98
-msgid "An unexpected error has ocurred"
-msgstr ""
+#: capplets/about-me/eel-alert-dialog.c:198
+msgid "Show more _details"
+msgstr "আরো বিস্তারিত বিবরণ দেখাও (_র)"
 
-#: capplets/about-me/gnome-about-me.c:501
-#, fuzzy
+#: capplets/about-me/gnome-about-me.desktop.in.in.h:1
+#: capplets/about-me/gnome-about-me.glade.h:14
+msgid "About Me"
+msgstr "আমার পরিচিতি"
+
+#: capplets/about-me/gnome-about-me.desktop.in.in.h:2
+msgid "Set your personal information"
+msgstr "আপনার ব্যক্তিগত তথ্য লিখুন"
+
+#: capplets/about-me/gnome-about-me.c:554
 msgid "Select Image"
-msgstr "বাছাই (_ব)"
+msgstr "ছবি বেছে নিন"
 
-#: capplets/about-me/gnome-about-me.c:502
-#, fuzzy
+#: capplets/about-me/gnome-about-me.c:556
 msgid "No Image"
-msgstr "ছবি"
+msgstr "কোন ছবি নেই"
+
+# FIXME
+#: capplets/about-me/gnome-about-me.c:706
+msgid ""
+"There was an error while trying to get the addressbook information\n"
+"Evolution Data Server can't handle the protocol"
+msgstr ""
+"ঠিকানা-বই সংক্রান্ত তথ্য সংগ্রহের সময় একটি সমস্যা হয়েছে।\n"
+"ব্যবহৃত প্রোটোকলকে ইভলুশন ডেটা সার্ভার বুঝতে পারছে না"
+
+#: capplets/about-me/gnome-about-me.c:727
+msgid "Unable to open address book"
+msgstr "ঠিকানা-বই খোলা যায় নি"
+
+#: capplets/about-me/gnome-about-me.c:739
+msgid "Unknown login ID, the user database might be corrupted"
+msgstr "অজ্ঞাত লগ-ইন আই.ডি., সম্ভবত ব্যবহারকারী-বিষয়ক ডেটাবেসটি ত্রুটিপূর্ণ"
+
+#: capplets/about-me/gnome-about-me.c:770
+#: capplets/about-me/gnome-about-me.c:772
+#, c-format
+msgid "About %s"
+msgstr "%s-এর পরিচিতি"
+
+#: capplets/about-me/gnome-about-me-password.c:101
+#: capplets/about-me/gnome-about-me-password.c:479
+msgid "Old password is incorrect, please retype it"
+msgstr "পুরনো পাসওয়ার্ডটি ভুল, অনুগ্রহপূর্বক পাসওয়ার্ডটি পুনরায় লিখুন"
+
+#: capplets/about-me/gnome-about-me-password.c:112
+msgid "System error has occurred"
+msgstr "সিস্টেম সংক্রান্ত সমস্যা হয়েছে"
+
+#: capplets/about-me/gnome-about-me-password.c:113
+msgid "Could not run /usr/bin/passwd"
+msgstr "/usr/bin/passwd -কে চালানো যায় নি"
+
+#: capplets/about-me/gnome-about-me-password.c:114
+msgid "Unable to launch backend"
+msgstr "ব্যাক-এন্ড চালু করা যায় নি"
+
+#: capplets/about-me/gnome-about-me-password.c:116
+#: capplets/about-me/gnome-about-me-password.c:117
+msgid "Unexpected error has occurred"
+msgstr "একটি অপ্রত্যাশিত সমস্যা হয়েছে"
+
+#: capplets/about-me/gnome-about-me-password.c:315
+msgid "Password is too short"
+msgstr "পাসওয়ার্ডটি বেশি ছোট"
+
+#: capplets/about-me/gnome-about-me-password.c:318
+#: capplets/about-me/gnome-about-me-password.c:321
+msgid "Password is too simple"
+msgstr "পাসওয়ার্ডটি বেশি সহজ"
+
+#: capplets/about-me/gnome-about-me-password.c:324
+msgid "Old and new passwords are too similar"
+msgstr "পুরনো ও নতুন পাসওয়ার্ডের মধ্যে মিল খুবই বেশি"
+
+#: capplets/about-me/gnome-about-me-password.c:328
+msgid "Old and new password are the same"
+msgstr "পুরনো ও নতুন পাসওয়ার্ডদ্বয় অভিন্ন"
+
+#: capplets/about-me/gnome-about-me-password.c:406
+msgid "Please type the passwords."
+msgstr "অনুগ্রহপূর্বক পাসওয়ার্ডটি লিখুন।"
+
+#: capplets/about-me/gnome-about-me-password.c:414
+msgid "Please type the password again, it is wrong."
+msgstr "আপনি ভুল পাসওয়ার্ড লিখেছেন, অনুগ্রহপূর্বক পুনরায় লিখুন।"
+
+#: capplets/about-me/gnome-about-me-password.c:417
+msgid "Click on Change Password to change the password."
+msgstr "পাসওয়ার্ড পরিবর্তনের জন্য 'পাসওয়ার্ড পরিবর্তন' -এ ক্লিক করুন।"
 
 #: capplets/about-me/gnome-about-me.glade.h:1
-#, fuzzy
-msgid "<b>Email</b>"
-msgstr "<i>ছোট</i>"
+#: vfs-methods/themus/apply-font.glade.h:1
+msgid " "
+msgstr " "
 
 #: capplets/about-me/gnome-about-me.glade.h:2
-#, fuzzy
-msgid "<b>Home</b>"
-msgstr "<b>গতি</b>"
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
+#: capplets/font/font-properties.glade.h:1
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:1
+#: capplets/mouse/gnome-mouse-properties.glade.h:1
+#: capplets/ui-properties/gnome-ui-properties.glade.h:1
+msgid "    "
+msgstr "    "
 
 #: capplets/about-me/gnome-about-me.glade.h:3
-#, fuzzy
-msgid "<b>Instant Messaging</b>"
-msgstr "<b>ফন্ট আঁকা</b>"
+msgid "<b>Email</b>"
+msgstr "<i>ই-মেইল</i>"
 
+# FIXME
 #: capplets/about-me/gnome-about-me.glade.h:4
-#, fuzzy
-msgid "<b>Job</b>"
-msgstr "<b>সহায়তা</b>"
+msgid "<b>Home</b>"
+msgstr "<b>ব্যক্তিগত ফোল্ডার</b>"
 
 #: capplets/about-me/gnome-about-me.glade.h:5
-#, fuzzy
-msgid "<b>Telephone</b>"
-msgstr "<b>টোগল কী (key)</b>"
+msgid "<b>Instant Messaging</b>"
+msgstr "<b>তাত্‍ক্ষণিক বার্তা</b>"
 
 #: capplets/about-me/gnome-about-me.glade.h:6
-#, fuzzy
-msgid "<b>Web</b>"
-msgstr "<b>গতি</b>"
+msgid "<b>Job</b>"
+msgstr "<b>কাজ</b>"
 
 #: capplets/about-me/gnome-about-me.glade.h:7
-#, fuzzy
-msgid "<b>Work</b>"
-msgstr "<b>সহায়তা</b>"
+msgid "<b>Please type the passwords.</b>"
+msgstr "<b>অনুগ্রহপূর্বক পাসওয়ার্ডগুলো লিখুন।</b>"
 
 #: capplets/about-me/gnome-about-me.glade.h:8
-msgid "A_IM/iChat:"
-msgstr ""
+msgid "<b>Telephone</b>"
+msgstr "<b>টেলিফোন</b>"
 
 #: capplets/about-me/gnome-about-me.glade.h:9
-msgid "A_ssistant:"
-msgstr ""
+msgid "<b>Web</b>"
+msgstr "<b>ওয়েব</b>"
 
 #: capplets/about-me/gnome-about-me.glade.h:10
-#, fuzzy
-msgid "About Me"
-msgstr "পরিচিতি (_প)"
+msgid "<b>Work</b>"
+msgstr "<b>কাজ</b>"
 
 #: capplets/about-me/gnome-about-me.glade.h:11
-#, fuzzy
-msgid "C_ity:"
-msgstr "ধরন (_ধ):"
+msgid "A_IM/iChat:"
+msgstr "এ.আই.এম./আই-চ্যাট (_ই):"
 
 #: capplets/about-me/gnome-about-me.glade.h:12
-#, fuzzy
-msgid "C_ompany:"
-msgstr "কমান্ড (_ক):"
+msgid "A_ddress:"
+msgstr "ঠিকানা (_ঠ):"
 
 #: capplets/about-me/gnome-about-me.glade.h:13
-#, fuzzy
-msgid "Cale_ndar:"
-msgstr "বিভাগ (_ভ):"
-
-#: capplets/about-me/gnome-about-me.glade.h:14
-#, fuzzy
-msgid "Change Passwo_rd"
-msgstr "সেট পরিবর্তন করো"
+msgid "A_ssistant:"
+msgstr "সহকারী (_হ):"
 
 #: capplets/about-me/gnome-about-me.glade.h:15
-#, fuzzy
-msgid "Change Password"
-msgstr "সেট পরিবর্তন করো"
+msgid "Address"
+msgstr "ঠিকানা"
 
 #: capplets/about-me/gnome-about-me.glade.h:16
-#, fuzzy
-msgid "Co_untry:"
-msgstr "নিয়ন্ত্রণ"
+msgid "C_ity:"
+msgstr "শহর (_শ):"
 
 #: capplets/about-me/gnome-about-me.glade.h:17
-msgid "IC_Q:"
-msgstr ""
+msgid "C_ompany:"
+msgstr "কোম্পানি (_ক):"
 
 #: capplets/about-me/gnome-about-me.glade.h:18
-msgid "M_SN:"
-msgstr ""
+msgid "Cale_ndar:"
+msgstr "বর্ষপঞ্জি (_ব):"
 
 #: capplets/about-me/gnome-about-me.glade.h:19
-#, fuzzy
-msgid "New Password:"
-msgstr "পাসওয়ার্ড (_প):"
+msgid "Change Passwo_rd..."
+msgstr "পাসওয়ার্ড পরিবর্তন... (_প)"
 
 #: capplets/about-me/gnome-about-me.glade.h:20
-#, fuzzy
-msgid "Old Password:"
-msgstr "পাসওয়ার্ড (_প):"
+msgid "Change Password"
+msgstr "পাসওয়ার্ড পরিবর্তন"
 
 #: capplets/about-me/gnome-about-me.glade.h:21
-msgid "P_O Box:"
-msgstr ""
+msgid "Ci_ty:"
+msgstr "শহর (_শ):"
 
 #: capplets/about-me/gnome-about-me.glade.h:22
-#, fuzzy
-msgid "Retype New Password:"
-msgstr "পাসওয়ার্ড (_প):"
+msgid "Co_untry:"
+msgstr "দেশ (_দ):"
 
 #: capplets/about-me/gnome-about-me.glade.h:23
-#, fuzzy
-msgid "User Name:"
-msgstr "ব্যবহারকারীর-নাম (_র):"
+msgid "Contact"
+msgstr "যোগাযোগ"
 
 #: capplets/about-me/gnome-about-me.glade.h:24
-msgid "Web _Log:"
-msgstr ""
+msgid "Cou_ntry:"
+msgstr "দেশ (_দ):"
 
 #: capplets/about-me/gnome-about-me.glade.h:25
-msgid "Work _Fax:"
-msgstr ""
+msgid "Full Name"
+msgstr "পূর্ণ নাম"
 
+# FIXME
 #: capplets/about-me/gnome-about-me.glade.h:26
-#, fuzzy
-msgid "_Address"
-msgstr "চাপা হয়েছে (_চ)"
+msgid "Hom_e:"
+msgstr "বাসা (_ব):"
 
 #: capplets/about-me/gnome-about-me.glade.h:27
-#, fuzzy
-msgid "_Address:"
-msgstr "যোগ করো (_য):"
+msgid "IC_Q:"
+msgstr "আই.সি.কিউ. (_আ):"
 
 #: capplets/about-me/gnome-about-me.glade.h:28
-#, fuzzy
-msgid "_Contact"
-msgstr "সূচি (_চ)"
+msgid "M_SN:"
+msgstr "এম.এস.এন. (_এ):"
 
 #: capplets/about-me/gnome-about-me.glade.h:29
-msgid "_Department:"
-msgstr ""
+msgid "Old pa_ssword:"
+msgstr "পুরনো পাসওয়ার্ড (_প):"
 
 #: capplets/about-me/gnome-about-me.glade.h:30
-msgid "_Groupwise:"
-msgstr ""
+msgid "P.O. _box:"
+msgstr "পি.ও. বক্স (_ব):"
 
 #: capplets/about-me/gnome-about-me.glade.h:31
-#, fuzzy
-msgid "_Home Page:"
-msgstr "থিমের নাম (_থ):"
+msgid "P._O. box:"
+msgstr "পি.ও. বক্স (_ও):"
 
 #: capplets/about-me/gnome-about-me.glade.h:32
-#, fuzzy
-msgid "_Home:"
-msgstr "নাম (_ন):"
+msgid "Personal Info"
+msgstr "ব্যক্তিগত তথ্য"
 
 #: capplets/about-me/gnome-about-me.glade.h:33
-msgid "_Jabber:"
-msgstr ""
+msgid "State/Pro_vince:"
+msgstr "রাজ্য/প্রদেশ (_র):"
 
 #: capplets/about-me/gnome-about-me.glade.h:34
-#, fuzzy
-msgid "_Manager:"
-msgstr "বিবর্ধক (_ধ)"
+msgid "User name:"
+msgstr "ব্যবহারকারীর-নাম:"
 
 #: capplets/about-me/gnome-about-me.glade.h:35
-#, fuzzy
-msgid "_Mobile:"
-msgstr "ফাইল (_ফ)"
+msgid "Web _log:"
+msgstr "ওয়েব লগ (_ল):"
 
+# FIXME
 #: capplets/about-me/gnome-about-me.glade.h:36
-#, fuzzy
-msgid "_Personal Info"
-msgstr "টার্মিনালে ব্যবহৃত ফন্ট (_ট):"
+msgid "Wor_k:"
+msgstr "অফিস (_অ):"
 
 #: capplets/about-me/gnome-about-me.glade.h:37
-#, fuzzy
-msgid "_Profession:"
-msgstr "সংস্করণ:"
+msgid "Work _fax:"
+msgstr "অফিসের ফ্যাক্স (_ফ):"
 
 #: capplets/about-me/gnome-about-me.glade.h:38
-msgid "_State/Province:"
-msgstr ""
+msgid "Zip/_Postal code:"
+msgstr "জিপ/পোস্টাল কোড (_ড):"
 
 #: capplets/about-me/gnome-about-me.glade.h:39
-#, fuzzy
-msgid "_Title:"
-msgstr "ধরন (_ধ):"
+msgid "_Address:"
+msgstr "ঠিকানা (_ঠ):"
 
 #: capplets/about-me/gnome-about-me.glade.h:40
-msgid "_Work:"
-msgstr ""
+msgid "_Department:"
+msgstr "বিভাগ (_গ):"
 
 #: capplets/about-me/gnome-about-me.glade.h:41
-msgid "_Yahoo:"
-msgstr ""
+msgid "_Groupwise:"
+msgstr "গ্রুপভিত্তিক (_প):"
 
+# FIXME
 #: capplets/about-me/gnome-about-me.glade.h:42
-msgid "_Zip/Postal Code:"
-msgstr ""
+msgid "_Home page:"
+msgstr "মূল ওয়েবপেজ (_ও):"
 
+# FIXME
 #: capplets/about-me/gnome-about-me.glade.h:43
-msgid "asdfasdfasdfasdfasdf"
-msgstr ""
+msgid "_Home:"
+msgstr "বাসা (_ব):"
 
 #: capplets/about-me/gnome-about-me.glade.h:44
-msgid "gdsdfgsdfgsdfg"
-msgstr ""
+msgid "_Jabber:"
+msgstr "জ্যাবর (_জ):"
+
+#: capplets/about-me/gnome-about-me.glade.h:45
+msgid "_Manager:"
+msgstr "ব্যবস্থাপক (_থ):"
+
+#: capplets/about-me/gnome-about-me.glade.h:46
+msgid "_Mobile:"
+msgstr "মোবাইল (_ম):"
+
+#: capplets/about-me/gnome-about-me.glade.h:47
+msgid "_New password:"
+msgstr "নতুন পাসওয়ার্ড (_ন):"
+
+#: capplets/about-me/gnome-about-me.glade.h:48
+msgid "_Profession:"
+msgstr "পেশা (_প):"
+
+#: capplets/about-me/gnome-about-me.glade.h:49
+msgid "_Retype new password:"
+msgstr "নতুন পাসওয়ার্ডটি পুনরায় লিখুন (_ল):"
+
+#: capplets/about-me/gnome-about-me.glade.h:50
+msgid "_State/Province:"
+msgstr "রাজ্য/প্রদেশ (_র):"
+
+#: capplets/about-me/gnome-about-me.glade.h:51
+msgid "_Title:"
+msgstr "শিরোনাম (_শ):"
+
+# FIXME
+#: capplets/about-me/gnome-about-me.glade.h:52
+msgid "_Work:"
+msgstr "কাজ (_জ):"
+
+#: capplets/about-me/gnome-about-me.glade.h:53
+msgid "_Yahoo:"
+msgstr "ইয়াহু (_ই):"
+
+#: capplets/about-me/gnome-about-me.glade.h:54
+msgid "_Zip/Postal code:"
+msgstr "জিপ/পোস্টাল কোড (_ড):"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:1
 msgid "<b>Applications</b>"
@@ -348,16 +447,16 @@ msgid "There was an error launching the mouse preferences dialog: %s"
 msgstr "মাউসের বৈশিষ্ট্য নিয়ন্ত্রণকারী ডায়ালগ চালু করতে সমস্যা হয়েছে: %s"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:337
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:396
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:398
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "'%s' ফাইল থেকে এক্সেসএক্স এর মানগুলো পড়া যায় নি"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:433
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:435
 msgid "Import Feature Settings File"
 msgstr "বৈশিষ্ট্য সংরক্ষণকারী ফাইল আমদানী (Import) করো"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:437
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:439
 msgid "_Import"
 msgstr "আমদানী (Import) (_আ)"
 
@@ -379,18 +478,9 @@ msgstr ""
 "মনে হচ্ছে এই সিস্টেমটিতে XKB ব্যবহৃত হচ্ছে না। এটি ব্যতিত কীবোর্ড ব্যবহার সংক্রান্ত "
 "বৈশিষ্ট্যাবলী কার্যকর হবে না।"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
-#: capplets/font/font-properties.glade.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:1
-#: capplets/mouse/gnome-mouse-properties.glade.h:1
-#: capplets/ui-properties/gnome-ui-properties.glade.h:1
-msgid "    "
-msgstr "    "
-
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:1
-#: capplets/file-types/file-types-properties.glade.h:1
-#: capplets/network/gnome-network-preferences.glade.h:2
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:2
 #: capplets/theme-switcher/theme-install.glade.h:1
 #: capplets/theme-switcher/theme-properties.glade.h:1
 msgid "*"
@@ -573,8 +663,8 @@ msgstr "পিক্সেল/সেকেন্ড"
 
 #. set the timeout value  label with correct value of timeout
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
-#: capplets/mouse/gnome-mouse-properties.c:133
-#: capplets/mouse/gnome-mouse-properties.c:578
+#: capplets/mouse/gnome-mouse-properties.c:138
+#: capplets/mouse/gnome-mouse-properties.c:885
 #: capplets/mouse/gnome-mouse-properties.glade.h:27
 #: capplets/windows/gnome-window-properties.glade.h:10
 msgid "seconds"
@@ -601,8 +691,8 @@ msgid "Desktop Background Preferences"
 msgstr "ডেস্কটপের পটভূমি সংক্রান্ত পছন্দ"
 
 #: capplets/background/gnome-background-properties.glade.h:4
-msgid "Pick a color"
-msgstr "একটি রং বেছে নিন"
+msgid "Open a dialog to specify the color"
+msgstr "রং নির্ধারণের জন্য একটি ডায়ালগ খোলো"
 
 #: capplets/background/gnome-background-properties.glade.h:5
 msgid "_Add Wallpaper"
@@ -612,65 +702,65 @@ msgstr "ওয়ালপেপার যোগ করো (_য)"
 msgid "_Style:"
 msgstr "ধরন (_ধ):"
 
-#: capplets/background/gnome-wp-capplet.c:72
+#: capplets/background/gnome-wp-capplet.c:74
 #: capplets/common/capplet-util.c:340
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:326
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:333
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "সাহায্যকারী তথ্য দেখাতে সমস্যা হয়েছে: %s"
 
-#: capplets/background/gnome-wp-capplet.c:1064
-#: capplets/background/gnome-wp-capplet.c:1080
+#: capplets/background/gnome-wp-capplet.c:1042
+#: capplets/background/gnome-wp-capplet.c:1060
 msgid "Centered"
 msgstr "কেন্দ্রে অবস্থিত"
 
-#: capplets/background/gnome-wp-capplet.c:1088
-#: capplets/background/gnome-wp-capplet.c:1103
+#: capplets/background/gnome-wp-capplet.c:1068
+#: capplets/background/gnome-wp-capplet.c:1085
 msgid "Fill Screen"
 msgstr "পর্দা জুড়ে প্রদর্শন করো"
 
 # FIXME
-#: capplets/background/gnome-wp-capplet.c:1111
-#: capplets/background/gnome-wp-capplet.c:1126
+#: capplets/background/gnome-wp-capplet.c:1093
+#: capplets/background/gnome-wp-capplet.c:1110
 msgid "Scaled"
-msgstr "মাপানুসারে"
+msgstr "মাপ অনুসারে"
 
-#: capplets/background/gnome-wp-capplet.c:1134
-#: capplets/background/gnome-wp-capplet.c:1149
+#: capplets/background/gnome-wp-capplet.c:1118
+#: capplets/background/gnome-wp-capplet.c:1135
 msgid "Tiled"
 msgstr "টাইলযুক্ত"
 
-#: capplets/background/gnome-wp-capplet.c:1173
-#: capplets/background/gnome-wp-capplet.c:1182
+#: capplets/background/gnome-wp-capplet.c:1159
+#: capplets/background/gnome-wp-capplet.c:1168
 msgid "Solid Color"
 msgstr "সুষম রং"
 
-#: capplets/background/gnome-wp-capplet.c:1190
-#: capplets/background/gnome-wp-capplet.c:1199
+#: capplets/background/gnome-wp-capplet.c:1176
+#: capplets/background/gnome-wp-capplet.c:1185
 msgid "Horizontal Gradient"
 msgstr "অনুভূমিক ঢালের মাত্রা"
 
-#: capplets/background/gnome-wp-capplet.c:1207
-#: capplets/background/gnome-wp-capplet.c:1216
+#: capplets/background/gnome-wp-capplet.c:1193
+#: capplets/background/gnome-wp-capplet.c:1202
 msgid "Vertical Gradient"
 msgstr "উল্লম্ব ঢালের মাত্রা"
 
 #. Create the file chooser dialog stuff here
-#: capplets/background/gnome-wp-capplet.c:1263
+#: capplets/background/gnome-wp-capplet.c:1251
 msgid "Add Wallpaper"
 msgstr "ওয়ালপেপার যোগ করো"
 
 # FIXME
-#: capplets/background/gnome-wp-info.c:49
+#: capplets/background/gnome-wp-info.c:57
 msgid "No Wallpaper"
 msgstr "ওয়ালপেপার প্রয়োজন নেই"
 
-#: capplets/background/gnome-wp-item.c:289
-#: capplets/background/gnome-wp-item.c:291
+#: capplets/background/gnome-wp-item.c:292
+#: capplets/background/gnome-wp-item.c:294
 msgid "pixel"
 msgid_plural "pixels"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "পিক্সেল"
+msgstr[1] "পিক্সেল"
 
 #: capplets/common/activate-settings-daemon.c:18
 msgid ""
@@ -698,81 +788,78 @@ msgstr "বৈশিষ্ট্যাবলী কার্যকর করে 
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:765
 #: capplets/keyboard/gnome-keyboard-properties.c:225
-#: capplets/mouse/gnome-mouse-properties.c:812
+#: capplets/mouse/gnome-mouse-properties.c:1021
 #: capplets/sound/sound-properties-capplet.c:244
 msgid "Retrieve and store legacy settings"
 msgstr "পূর্বে ব্যবহৃত মানগুলো খুঁজে বের করে সংরক্ষণ করো"
 
-#: capplets/common/file-transfer-dialog.c:95
+#: capplets/common/file-transfer-dialog.c:94
 #, c-format
-msgid "%i of %i"
-msgstr "%i এর %i"
+msgid "Copying file: %i of %i"
+msgstr "ফাইল কপি করা হচ্ছে: %2$i এর %1$i"
 
-#: capplets/common/file-transfer-dialog.c:119
+#: capplets/common/file-transfer-dialog.c:122
 #, c-format
-msgid "Transferring: %s"
-msgstr "স্থানান্তরিত হছে: %s"
+msgid "Copying '%s'"
+msgstr " '%s'-কে কপি করা হচ্ছে"
 
-#: capplets/common/file-transfer-dialog.c:126
-#, c-format
-msgid "From: %s"
-msgstr "প্রেরক: %s"
-
-#: capplets/common/file-transfer-dialog.c:134
-#, c-format
-msgid "To: %s"
-msgstr "প্রাপক: %s"
-
-#: capplets/common/file-transfer-dialog.c:185
+#: capplets/common/file-transfer-dialog.c:193
 msgid "From URI"
 msgstr "এই ইউ.আর.আই. থেকে"
 
-#: capplets/common/file-transfer-dialog.c:186
+#: capplets/common/file-transfer-dialog.c:194
 msgid "URI currently transferring from"
 msgstr "যে ইউ.আর.আই. থেকে বর্তমানে স্থানান্তরিত হচ্ছে"
 
-#: capplets/common/file-transfer-dialog.c:193
+#: capplets/common/file-transfer-dialog.c:201
 msgid "To URI"
 msgstr "এই ইউ.আর.আই. এর উদ্দেশ্যে"
 
-#: capplets/common/file-transfer-dialog.c:194
+#: capplets/common/file-transfer-dialog.c:202
 msgid "URI currently transferring to"
 msgstr "যে ইউ.আর.আই.-এ বর্তমানে স্থানান্তরিত হচ্ছে"
 
-#: capplets/common/file-transfer-dialog.c:201
+#: capplets/common/file-transfer-dialog.c:209
 msgid "Fraction completed"
 msgstr "আংশিক সম্পন্ন"
 
 # FIXME: ভাল শোনাচ্ছে না ;-(
-#: capplets/common/file-transfer-dialog.c:202
+#: capplets/common/file-transfer-dialog.c:210
 msgid "Fraction of transfer currently completed"
-msgstr "এ পর্যন্ত স্থানান্তরিত তথ্যের ভগ্নাংশ"
+msgstr "এ পর্যন্ত স্থানান্তরিত তথ্যের পরিমাণ (ভগ্নাংশ হিসেবে)"
 
-#: capplets/common/file-transfer-dialog.c:209
+#: capplets/common/file-transfer-dialog.c:217
 msgid "Current URI index"
 msgstr "বর্তমান ইউ.আর.আই. সূচি"
 
-#: capplets/common/file-transfer-dialog.c:210
+#: capplets/common/file-transfer-dialog.c:218
 msgid "Current URI index - starts from 1"
 msgstr "বর্তমান ইউ.আর.আই. সূচি - আরম্ভ হয়েছে ১ থেকে"
 
-#: capplets/common/file-transfer-dialog.c:217
+#: capplets/common/file-transfer-dialog.c:225
 msgid "Total URIs"
 msgstr "সর্বমোট ইউ.আর.আই."
 
-#: capplets/common/file-transfer-dialog.c:218
+#: capplets/common/file-transfer-dialog.c:226
 msgid "Total number of URIs"
 msgstr "সর্বমোট ইউ.আর.আই. সংখ্যা"
 
-#: capplets/common/file-transfer-dialog.c:372
-#: capplets/common/file-transfer-dialog.c:374
+#: capplets/common/file-transfer-dialog.c:327
+#: capplets/common/file-transfer-dialog.c:369
+msgid "Copying files"
+msgstr "ফাইল কপি করা হচ্ছে"
+
+#: capplets/common/file-transfer-dialog.c:345
+msgid "From:"
+msgstr "উত্‍স:"
+
+#: capplets/common/file-transfer-dialog.c:349
+msgid "To:"
+msgstr "গন্তব্য:"
+
+#: capplets/common/file-transfer-dialog.c:448
 msgid "Connecting..."
 msgstr "সংযুক্ত হচ্ছে..."
-
-#: capplets/common/file-transfer-dialog.c:379
-#: capplets/common/file-transfer-dialog.c:381
-msgid "Downloading..."
-msgstr "ডাউনলোড হচ্ছে..."
 
 #: capplets/common/gconf-property-editor.c:170
 msgid "Key"
@@ -843,7 +930,7 @@ msgstr ""
 "বৈশিষ্ট্য নির্ধারণী এডিটরের অবজেক্টবিষয়ক তথ্যের ওপর থেকে নিয়ন্ত্রণ প্রত্যাহারের সময় "
 "যে কলব্যাকটি ব্যবহৃত হবে"
 
-#: capplets/common/gconf-property-editor.c:1545
+#: capplets/common/gconf-property-editor.c:1466
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -856,7 +943,7 @@ msgstr ""
 "দয়া করে নিশ্চিত হোন যে ফাইলটি আসলেই আছে কিনা এবং তারপর আবার চেষ্টা করুন, অথবা "
 "পটভূমির জন্য অন্য কোন ছবি বেছে নিন।"
 
-#: capplets/common/gconf-property-editor.c:1553
+#: capplets/common/gconf-property-editor.c:1474
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -869,11 +956,11 @@ msgstr ""
 "\n"
 "অনুগ্রহপূর্বক অন্য একটি ছবি বেছে নিন।"
 
-#: capplets/common/gconf-property-editor.c:1672
+#: capplets/common/gconf-property-editor.c:1593
 msgid "Please select an image."
 msgstr "অনুগ্রহপূর্বক একটি ছবি বেছে নিন।"
 
-#: capplets/common/gconf-property-editor.c:1677
+#: capplets/common/gconf-property-editor.c:1598
 msgid "_Select"
 msgstr "বাছাই (_ব)"
 
@@ -886,10 +973,10 @@ msgstr "পছন্দের অ্যাপলিকেশন"
 msgid "Select your default applications"
 msgstr "যে অ্যাপলিকেশনটি ডিফল্ট হিসেবে ব্যবহার করতে চান তা বেছে নিন"
 
+# FIXME
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:9
-#, fuzzy
 msgid "Debian Sensible Browser"
-msgstr "ডিফল্ট ওয়েব ব্রাউজার"
+msgstr "ডেবিয়ান সেনসিবল ব্রাউজার"
 
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:10
 msgid "Epiphany"
@@ -904,19 +991,17 @@ msgid "Encompass"
 msgstr "এনকম্পাস"
 
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:13
-#, fuzzy
 msgid "Firebird"
-msgstr "ফায়ারবার্ড/ফায়ারফক্স"
+msgstr "ফায়ারবার্ড"
 
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:14
 msgid "Firefox"
-msgstr ""
+msgstr "ফায়ারফক্স"
 
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:15
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:16
-#, fuzzy
 msgid "Mozilla"
-msgstr "মোজিলা মেইল"
+msgstr "মোজিলা"
 
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:17
 msgid "Netscape Communicator"
@@ -960,45 +1045,43 @@ msgid "KMail"
 msgstr "কে-মেইল"
 
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:44
-msgid "Thunderbird"
-msgstr ""
-
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:45
+msgid "Thunderbird"
+msgstr "থান্ডারবার্ড"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:46
 msgid "Mozilla Mail"
 msgstr "মোজিলা মেইল"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:46
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:47
 msgid "Mutt"
 msgstr "মাট"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:57
-#, fuzzy
-msgid "Debian Terminal Emulator"
-msgstr "ডিফল্ট টার্মিনাল"
-
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:58
-#, fuzzy
-msgid "GNOME Terminal"
-msgstr "টার্মিনাল"
+msgid "Debian Terminal Emulator"
+msgstr "ডেবিয়ান টার্মিনাল এমুলেটর"
 
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:59
+msgid "GNOME Terminal"
+msgstr "গনোম টার্মিনাল"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:60
 msgid "Standard XTerminal"
 msgstr "প্রমিত এক্স টার্মিনাল"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:60
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:61
 msgid "NXterm"
 msgstr "এন-এক্সটার্ম"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:61
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:62
 msgid "RXVT"
 msgstr "আর.এক্স.ভি.টি."
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:62
-#, fuzzy
-msgid "aterm"
-msgstr "এন-এক্সটার্ম"
-
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:63
+msgid "aterm"
+msgstr "এ-টার্ম"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:64
 msgid "ETerm"
 msgstr "ই-টার্ম"
 
@@ -1011,23 +1094,20 @@ msgid "Add..."
 msgstr "যোগ করো..."
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:3
-#, fuzzy
 msgid "C_ustom"
-msgstr "স্বনির্বাচিত"
+msgstr "স্বনির্বাচিত (_স)"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:4
-#, fuzzy
 msgid "C_ustom:"
-msgstr "স্বনির্বাচিত"
+msgstr "স্বনির্বাচিত (_স):"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:5
 msgid "Can open _URIs"
-msgstr ""
+msgstr "ইউ.আর.আই. খুলতে পারে (_ই)"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:6
-#, fuzzy
 msgid "Can open multiple _files"
-msgstr "এই অ্যাপলিকেশনটি একাধিক ফাইল নিয়ে কাজ করতে পারে (_এ)"
+msgstr "একাধিক ফাইল নিয়ে কাজ করতে পারে (_এ)"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:7
 msgid "Co_mmand:"
@@ -1035,7 +1115,7 @@ msgstr "কমান্ড (_ক):"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:8
 msgid "Custom Editor Properties"
-msgstr "স্বনির্বাচিত  এডিটরের বৈশিষ্ট্যাবলী"
+msgstr "স্বনির্বাচিত সম্পাদকের বৈশিষ্ট্য"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:9
 msgid "Default Mail Reader"
@@ -1074,14 +1154,12 @@ msgid "Mail Reader"
 msgstr "মেইল পাঠক"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:19
-#, fuzzy
 msgid "Run in a _terminal"
-msgstr "টার্মিনালে চালান (_ম)"
+msgstr "টার্মিনালে চালাও (_ট)"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:20
-#, fuzzy
 msgid "Run in a t_erminal"
-msgstr "টার্মিনালে চালান (_ম)"
+msgstr "টার্মিনালে চালাও (_র)"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:21
 msgid ""
@@ -1117,12 +1195,10 @@ msgid "Window Manager"
 msgstr "উইন্ডো ম্যানেজার"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:28
-#, fuzzy
 msgid "_Command:"
 msgstr "কমান্ড (_ক):"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:29
-#: capplets/file-types/file-types-properties.glade.h:23
 msgid "_Name:"
 msgstr "নাম (_ন):"
 
@@ -1131,9 +1207,8 @@ msgid "_Properties..."
 msgstr "বৈশিষ্ট্যাবলী... (_ব)"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:31
-#, fuzzy
 msgid "_Select:"
-msgstr "বাছাই (_ব)"
+msgstr "বাছাই (_ব):"
 
 #: capplets/display/display-properties.desktop.in.in.h:1
 msgid "Change screen resolution"
@@ -1143,42 +1218,42 @@ msgstr "স্ক্রিনের রেজলুশন পরিবর্ত�
 msgid "Screen Resolution"
 msgstr "স্ক্রিনের রেজলুশন"
 
-#: capplets/display/main.c:333
+#: capplets/display/main.c:345
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: capplets/display/main.c:436
+#: capplets/display/main.c:448
 msgid "_Resolution:"
 msgstr "স্ক্রিনের রেজলুশন (_র):"
 
-#: capplets/display/main.c:455
+#: capplets/display/main.c:467
 msgid "Re_fresh rate:"
 msgstr "রিফ্রেশ করার গতি (_ফ):"
 
-#: capplets/display/main.c:476
+#: capplets/display/main.c:488
 msgid "Default Settings"
 msgstr "ডিফল্ট বৈশিষ্ট্যাবলী"
 
-#: capplets/display/main.c:478
+#: capplets/display/main.c:490
 #, c-format
 msgid "Screen %d Settings\n"
 msgstr "স্ক্রিন %d-এর বৈশিষ্ট্যাবলী\n"
 
-#: capplets/display/main.c:504
+#: capplets/display/main.c:516
 msgid "Screen Resolution Preferences"
 msgstr "স্ক্রিন রেজলুশন সম্পর্কিত পছন্দ"
 
-#: capplets/display/main.c:541
+#: capplets/display/main.c:553
 #, c-format
 msgid "_Make default for this computer (%s) only"
 msgstr "শুধুমাত্র এই কম্পিউটার (%s)-এর জন্য ডিফল্ট করো (_র)"
 
-#: capplets/display/main.c:559
+#: capplets/display/main.c:571
 msgid "Options"
 msgstr "অপশন"
 
-#: capplets/display/main.c:580
+#: capplets/display/main.c:592
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d second the previous "
@@ -1193,23 +1268,23 @@ msgstr[1] ""
 "নতুন বৈশিষ্ট্যসমূহ পরীক্ষা করা হচ্ছে। আপনি যদি %d সেকেন্ডের মধ্যে কোন সাড়া না দেন "
 "তবে পুরনো মানগুলোকেই আবার ব্যবহার করা হবে।"
 
-#: capplets/display/main.c:626
+#: capplets/display/main.c:638
 msgid "Keep Resolution"
 msgstr "এই রেজলুশনই ব্যবহার করো"
 
-#: capplets/display/main.c:630
+#: capplets/display/main.c:642
 msgid "Do you want to keep this resolution?"
 msgstr "আপনি কি এই রেজলুশনেই কাজ করতে চান?"
 
-#: capplets/display/main.c:655
+#: capplets/display/main.c:667
 msgid "Use _previous resolution"
 msgstr "পূর্বের রেজলুশন ব্যবহার করো (_প)"
 
-#: capplets/display/main.c:655
+#: capplets/display/main.c:667
 msgid "_Keep resolution"
 msgstr "এই রেজলুশনই ব্যবহার করো (_ক)"
 
-#: capplets/display/main.c:806
+#: capplets/display/main.c:818
 msgid ""
 "The X Server does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
@@ -1217,328 +1292,13 @@ msgstr ""
 "ei এক্স-সার্ভার XRandR এক্সটেনশন সমর্থন করে না। তাই সার্ভার চলাকালীন ডিসপ্লে "
 "ক্ষেত্রের রেজলুশন পরিবর্তন করা সম্ভব নয়।"
 
-#: capplets/display/main.c:814
+#: capplets/display/main.c:826
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
 msgstr ""
 "এই প্রোগ্রামটি XRandR এক্সটেনশনের এই সংস্করণটি ব্যবহার করতে পারে না। তাই সার্ভার "
 "চলাকালীন রেসলুশন পরিবর্তন করা সম্ভব নয়।"
-
-#: capplets/file-types/file-types-capplet.c:158
-msgid "Are you sure you want to permanently delete this entry?"
-msgstr "আপনি কি এই এন্ট্রিটি স্থায়ীভাবে মোছার ব্যাপারে নিশ্চিত?"
-
-#: capplets/file-types/file-types-capplet.c:210
-#: vfs-methods/themus/themus-properties-view.c:126
-msgid "Description"
-msgstr "বর্ণনা"
-
-#: capplets/file-types/file-types-capplet.c:232
-msgid "Extensions"
-msgstr "বর্ধিতাংশ"
-
-#: capplets/file-types/file-types-capplet.desktop.in.in.h:1
-#: capplets/file-types/file-types-properties.glade.h:11
-msgid "File Types and Programs"
-msgstr "ফাইলের ধরন ও বিভিন্ন প্রোগ্রাম"
-
-#: capplets/file-types/file-types-capplet.desktop.in.in.h:2
-msgid "Specify which programs are used to open or view each file type"
-msgstr "প্রত্যেক প্রকারের ফাইল ব্যবহারের জন্য কি প্রোগ্রাম ব্যবহৃত হবে তা নির্ধারণ করুন"
-
-#: capplets/file-types/file-types-properties.glade.h:2
-msgid "Actions"
-msgstr "কাজ"
-
-#: capplets/file-types/file-types-properties.glade.h:3
-msgid "Add _File Type..."
-msgstr "এই  ফাইলটির ধরনকে তালিকাভুক্ত করুন... (_ফ)"
-
-#: capplets/file-types/file-types-properties.glade.h:4
-msgid "Add _Service..."
-msgstr "এ ধরনের _সার্ভিসকে তালিকাভুক্ত করুন... (_স)"
-
-#: capplets/file-types/file-types-properties.glade.h:5
-msgid "Browse icons"
-msgstr "ব্রাউজ করার আইকন"
-
-#: capplets/file-types/file-types-properties.glade.h:6
-msgid "C_hoose..."
-msgstr "বেছে নিন... (_ব)"
-
-#: capplets/file-types/file-types-properties.glade.h:7
-msgid "Cate_gory:"
-msgstr "বিভাগ (_ভ):"
-
-#: capplets/file-types/file-types-properties.glade.h:8
-msgid "D_efault action:"
-msgstr "ডিফল্ট কাজ (_ট)):"
-
-#: capplets/file-types/file-types-properties.glade.h:9
-msgid "Default _action:"
-msgstr "ডিফল্ট কাজ (_ক):"
-
-#: capplets/file-types/file-types-properties.glade.h:10
-#: capplets/file-types/mime-edit-dialog.c:208
-msgid "Edit file type"
-msgstr "ফাইলের ধরন এডিট করুন"
-
-#: capplets/file-types/file-types-properties.glade.h:12
-msgid "Filename extensions:"
-msgstr "ফাইলের নামের শেষাংশ:"
-
-#: capplets/file-types/file-types-properties.glade.h:13
-msgid "Look at content"
-msgstr "বিষয়বস্তু"
-
-#: capplets/file-types/file-types-properties.glade.h:14
-msgid "P_rogram:"
-msgstr "প্রোগ্রাম (_গ):"
-
-#: capplets/file-types/file-types-properties.glade.h:15
-msgid "Program to Run"
-msgstr "যে প্রোগ্রামটি চালানো হবে"
-
-#: capplets/file-types/file-types-properties.glade.h:16
-msgid "Run a program"
-msgstr "একটি প্রোগ্রাম চালান"
-
-#: capplets/file-types/file-types-properties.glade.h:17
-msgid "Run in _Terminal"
-msgstr "টার্মিনালে চালান (_ম)"
-
-#: capplets/file-types/file-types-properties.glade.h:18
-msgid "Use parent category _defaults"
-msgstr "উর্ধ্বস্থ ফোল্ডারের ডিফল্ট ব্যবহার করো (_ড)"
-
-#: capplets/file-types/file-types-properties.glade.h:19
-msgid "_Add:"
-msgstr "যোগ করো (_য):"
-
-#: capplets/file-types/file-types-properties.glade.h:20
-msgid "_Description:"
-msgstr "বর্ণনা (_ব):"
-
-#: capplets/file-types/file-types-properties.glade.h:21
-msgid "_Edit..."
-msgstr "সম্পাদন... (_স)"
-
-#: capplets/file-types/file-types-properties.glade.h:22
-msgid "_MIME type:"
-msgstr "মাইম-এর প্রকৃতি (_ই):"
-
-#: capplets/file-types/file-types-properties.glade.h:24
-msgid "_Program to run:"
-msgstr "যে প্রোগ্রামটি চালানো হবে (_র):"
-
-#: capplets/file-types/file-types-properties.glade.h:25
-msgid "_Protocol:"
-msgstr "প্রোটোকল (_ল):"
-
-#: capplets/file-types/file-types-properties.glade.h:26
-#: libsounds/sound-view.c:366
-msgid "_Remove"
-msgstr "সরিয়ে ফেলো (_য়)"
-
-#: capplets/file-types/file-types-properties.glade.h:27
-msgid "_Viewer component:"
-msgstr "ভিউয়ার কম্পোনেন্ট (_ভ):"
-
-#: capplets/file-types/file-types.desktop.in.in.h:1
-msgid "File types and programs"
-msgstr "ফাইলের ধরন ও বিভিন্ন প্রোগ্রাম"
-
-#: capplets/file-types/file-types.desktop.in.in.h:2
-msgid "Specify which programs are used to open or view each type of file"
-msgstr "প্রত্যেক প্রকারের ফাইল ব্যবহারের জন্য কি প্রোগ্রাম ব্যবহত হবে তা নির্ধারণ করুন"
-
-#: capplets/file-types/mime-category-edit-dialog.c:138
-msgid "Edit file category"
-msgstr "ফাইলের শ্রেণীবিভাগ সম্পাদন করো"
-
-#: capplets/file-types/mime-category-edit-dialog.c:172
-#: capplets/file-types/mime-edit-dialog.c:255
-#: capplets/file-types/service-edit-dialog.c:170
-#: capplets/file-types/service-edit-dialog.c:171
-msgid "Model"
-msgstr "মডেল"
-
-#: capplets/file-types/mime-category-edit-dialog.c:173
-msgid "GtkTreeModel that contains the category data"
-msgstr "যে GtkTreeModel-এ শ্রেণীবিভাগ সংক্রান্ত তথ্য রয়েছে"
-
-#: capplets/file-types/mime-category-edit-dialog.c:178
-msgid "MIME category info"
-msgstr "মাইম-এর শ্রেণীবিভাগ সংক্রান্ত তথ্য"
-
-#: capplets/file-types/mime-category-edit-dialog.c:179
-msgid "Structure containing information on the MIME category"
-msgstr "মাইম-এর শ্রেণীবিভাগ সংক্রান্ত তথ্যমালা"
-
-#: capplets/file-types/mime-category-edit-dialog.c:344
-#: capplets/file-types/mime-edit-dialog.c:489
-#: capplets/file-types/mime-edit-dialog.c:594
-#: capplets/file-types/service-edit-dialog.c:358
-#: capplets/file-types/service-edit-dialog.c:407
-msgid "Custom"
-msgstr "স্বনির্বাচিত"
-
-#: capplets/file-types/mime-edit-dialog.c:205
-msgid "Extension"
-msgstr "বর্ধিতাংশ"
-
-#: capplets/file-types/mime-edit-dialog.c:256
-msgid "Underlying model to notify when Ok is clicked"
-msgstr "'ঠিক আছে' ক্লিক করা হলে নিম্নস্থ মডেল তা জানাবে"
-
-#: capplets/file-types/mime-edit-dialog.c:263
-msgid "MIME type information"
-msgstr "মাইম-এর প্রকৃতি সংক্রান্ত তথ্য"
-
-#: capplets/file-types/mime-edit-dialog.c:264
-msgid "Structure with data on the MIME type"
-msgstr "মাইম-এর প্রকৃতি সংক্রান্ত তথ্যমালা"
-
-# FIXME
-#: capplets/file-types/mime-edit-dialog.c:270
-msgid "Is add dialog"
-msgstr "এটি কি যোগসূচক ডায়ালগ"
-
-#: capplets/file-types/mime-edit-dialog.c:271
-msgid "True if this dialog is for adding a MIME type"
-msgstr "এই ডায়ালগটি মাইম-এর প্রকৃতি যোগ করার জন্য হলে ফলাফল সত্য"
-
-#: capplets/file-types/mime-edit-dialog.c:320
-msgid "Add File Type"
-msgstr "ফাইলের ধরন যোগ করো"
-
-#: capplets/file-types/mime-edit-dialog.c:432
-#: capplets/file-types/mime-type-info.c:766
-msgid "Misc"
-msgstr "বিবিধ"
-
-#: capplets/file-types/mime-edit-dialog.c:484
-#: capplets/file-types/mime-edit-dialog.c:545
-msgid "None"
-msgstr "একটিও নয়"
-
-#: capplets/file-types/mime-edit-dialog.c:850
-#: capplets/file-types/mime-edit-dialog.c:864
-msgid ""
-"Please enter a valid MIME type.  It should be of the form class/type and may "
-"not contain any spaces."
-msgstr ""
-"অনুগ্রহপূর্বক সঠিক ধরনের মাইম লিখুন। এটি লিখতে হবে এভাবে - শ্রেণী/ধরন আর লেখার "
-"মধ্যে কোন স্পেস থাকবে না।"
-
-#: capplets/file-types/mime-edit-dialog.c:857
-msgid "A MIME type with that name already exists, overwrite?"
-msgstr "এই নামে একটি মাইম প্রকৃতি এখনই আছে, সেটার ওপরেই কি লেখা হবে ?।"
-
-#: capplets/file-types/mime-edit-dialog.c:929
-msgid "Category"
-msgstr "শ্রেণী"
-
-#: capplets/file-types/mime-edit-dialog.c:934
-msgid "Choose a file category"
-msgstr "ফাইলবিষয়ক একটি শ্রেণী বেছে নিন"
-
-#: capplets/file-types/mime-type-info.c:694
-#, c-format
-msgid "View as %s"
-msgstr "%s হিসাবে দেখাও"
-
-#: capplets/file-types/mime-type-info.c:760
-msgid "Images"
-msgstr "ছবি"
-
-#: capplets/file-types/mime-type-info.c:762
-msgid "Video"
-msgstr "ভিডিও"
-
-#: capplets/file-types/mime-type-info.c:764
-msgid "Audio"
-msgstr "শব্দ"
-
-#: capplets/file-types/mime-types-model.c:167
-#: capplets/file-types/mime-types-model.c:168
-msgid "Model for categories only"
-msgstr "শুধুমাত্র শ্রেণীসমূহের জন্য মডেল"
-
-#: capplets/file-types/mime-types-model.c:422
-msgid "Internet Services"
-msgstr "ইন্টারনেট সার্ভিস"
-
-#: capplets/file-types/service-edit-dialog.c:135
-msgid "Edit service information"
-msgstr "সার্ভিস সংক্রান্ত তথ্যাবলী সম্পাদন করো"
-
-#: capplets/file-types/service-edit-dialog.c:178
-msgid "Service info"
-msgstr "সার্ভিস সংক্রান্ত তথ্য"
-
-#: capplets/file-types/service-edit-dialog.c:179
-msgid "Structure containing service information"
-msgstr "সার্ভিস সংক্রান্ত তথ্যাবলী"
-
-# FIXME
-#: capplets/file-types/service-edit-dialog.c:185
-msgid "Is add"
-msgstr "এটি কি যোগ"
-
-#: capplets/file-types/service-edit-dialog.c:186
-msgid "TRUE if this is an add service dialog"
-msgstr "এই ডায়ালগটি সার্ভিস যোগ করার জন্য হলে ফলাফল সত্য"
-
-#: capplets/file-types/service-edit-dialog.c:225
-msgid "Add Service"
-msgstr "সার্ভিস যোগ করো"
-
-#: capplets/file-types/service-edit-dialog.c:497
-msgid "Please enter a protocol name."
-msgstr "অনুগ্রহপূর্বক একটি প্রোটোকলের নাম লিখুন।"
-
-#: capplets/file-types/service-edit-dialog.c:509
-msgid ""
-"Invalid protocol name. Please enter a protocol name without any spaces or "
-"punctuation."
-msgstr ""
-"প্রোটোকলের নাম ভুল লেখা হয়েছে। অনুগ্রহপূর্বক কোন স্পেস বা বিরাম চিহ্ন ব্যতিত "
-"প্রোটোকলের নাম লিখুন।"
-
-#: capplets/file-types/service-edit-dialog.c:523
-msgid "There is already a protocol by that name."
-msgstr "এই নামে ইতিমধ্যেই একটি প্রোটোকল আছে।"
-
-#: capplets/file-types/service-info.c:44
-msgid "Unknown service types"
-msgstr "সার্ভিসের ধরন অজ্ঞাত"
-
-#: capplets/file-types/service-info.c:45
-msgid "World wide web"
-msgstr "ওয়ার্ল্ড ওয়াইড ওয়েব"
-
-#: capplets/file-types/service-info.c:46
-msgid "File transfer protocol"
-msgstr "ফাইল স্থানান্তর প্রোটোকল"
-
-#: capplets/file-types/service-info.c:47
-msgid "Detailed documentation"
-msgstr "বিস্তারিত তথ্যমালা"
-
-#: capplets/file-types/service-info.c:48
-msgid "Manual pages"
-msgstr "নির্দেশিকার পৃষ্ঠা"
-
-#: capplets/file-types/service-info.c:49
-msgid "Electronic mail transmission"
-msgstr "ইলেকট্রনিক মেইল আদান-প্রদান"
-
-#: capplets/file-types/service-info.c:50
-#, fuzzy
-msgid "GNOME documentation"
-msgstr "গনোমবিষয়ক তথ্যমালা"
 
 #: capplets/font/font-properties.desktop.in.in.h:1
 msgid "Font"
@@ -1601,91 +1361,74 @@ msgid "R_esolution:"
 msgstr "রেজলুশন (_র):"
 
 #: capplets/font/font-properties.glade.h:15
-msgid "Set the font for applications"
-msgstr "অ্যাপলিকেশনগুলোর জন্য ফন্ট বেছে নিন"
-
-#: capplets/font/font-properties.glade.h:16
-msgid "Set the font for the icons on the desktop"
-msgstr "ডেস্কটপের আইকনগুলোর জন্য ফন্ট বেছে নিন"
-
-#: capplets/font/font-properties.glade.h:17
-msgid "Set the monospace font for terminals and similar applications"
-msgstr "টার্মিনাল ও এ জাতীয় অন্যান্য অ্যাপলিকেশনের জন্য মনোস্পেস ফন্ট বেছে নিন"
-
-#: capplets/font/font-properties.glade.h:18
 msgid "Sub_pixel (LCDs)"
 msgstr "সাবপিক্সেল (LCD) (_প)"
 
-#: capplets/font/font-properties.glade.h:19
+#: capplets/font/font-properties.glade.h:16
 msgid "Sub_pixel smoothing (LCDs)"
 msgstr "সাবপিক্সেল স্মুদিং (LCD) (_ল)"
 
-#: capplets/font/font-properties.glade.h:20
+#: capplets/font/font-properties.glade.h:17
 msgid "VB_GR"
 msgstr "ভিবিজিআর (_জ)"
 
-#: capplets/font/font-properties.glade.h:21
+#: capplets/font/font-properties.glade.h:18
 msgid "_Application font:"
 msgstr "অ্যাপলিকেশনে ব্যবহৃত ফন্ট (_অ):"
 
-#: capplets/font/font-properties.glade.h:22
+#: capplets/font/font-properties.glade.h:19
 msgid "_BGR"
 msgstr "বিজিআর (_ব)"
 
-#: capplets/font/font-properties.glade.h:23
+#: capplets/font/font-properties.glade.h:20
 msgid "_Desktop font:"
 msgstr "ডেস্কটপে ব্যবহৃত ফন্ট (_ড):"
 
-#: capplets/font/font-properties.glade.h:24
+#: capplets/font/font-properties.glade.h:21
 msgid "_Full"
 msgstr "সম্পূর্ণ (_স)"
 
-#: capplets/font/font-properties.glade.h:25
-#: capplets/mouse/gnome-mouse-properties.glade.h:22
+#: capplets/font/font-properties.glade.h:22
 msgid "_Medium"
 msgstr "মধ্যম (_ম)"
 
-#: capplets/font/font-properties.glade.h:26
+#: capplets/font/font-properties.glade.h:23
 msgid "_Monochrome"
 msgstr "মনোক্রম (_ক)"
 
-#: capplets/font/font-properties.glade.h:27
+#: capplets/font/font-properties.glade.h:24
 msgid "_None"
 msgstr "একটিও নয় (_এ)"
 
-#: capplets/font/font-properties.glade.h:28
+#: capplets/font/font-properties.glade.h:25
 msgid "_RGB"
 msgstr "আর.জি.বি. (_র)"
 
-#: capplets/font/font-properties.glade.h:29
+#: capplets/font/font-properties.glade.h:26
 msgid "_Slight"
 msgstr "স্বল্প (_ল)"
 
-#: capplets/font/font-properties.glade.h:30
+#: capplets/font/font-properties.glade.h:27
 msgid "_Terminal font:"
 msgstr "টার্মিনালে ব্যবহৃত ফন্ট (_ট):"
 
-#: capplets/font/font-properties.glade.h:31
-msgid "_Use Font"
-msgstr "ব্যবহৃত ফন্ট (_ফ)"
-
-#: capplets/font/font-properties.glade.h:32
+#: capplets/font/font-properties.glade.h:28
 msgid "_VRGB"
 msgstr "ভি.আর.জি.বি. (_ভ)"
 
-#: capplets/font/font-properties.glade.h:33
+#: capplets/font/font-properties.glade.h:29
 msgid "_Window title font:"
 msgstr "উইন্ডোর শিরোনামে ব্যবহৃত ফন্ট (_উ):"
 
-#: capplets/font/font-properties.glade.h:34
+#: capplets/font/font-properties.glade.h:30
 msgid "dots per inch"
 msgstr "প্রতি ইঞ্চিতে ডটের সংখ্যা"
 
-#: capplets/font/main.c:506 capplets/font/main.c:513
+#: capplets/font/main.c:488
 msgid "Font may be too large"
 msgstr "ফন্টটি সম্ভবত অত্যধিক বড়"
 
-#: capplets/font/main.c:507
+#: capplets/font/main.c:492
 #, c-format
 msgid ""
 "The font selected is %d point large, and may make it difficult to "
@@ -1693,7 +1436,7 @@ msgid ""
 "smaller than %d."
 msgid_plural ""
 "The font selected is %d points large, and may make it difficult to "
-"effectively use the computer.  It is recommended that you select a size "
+"effectively use the computer. It is recommended that you select a size "
 "smaller than %d."
 msgstr[0] ""
 " বর্তমানে ফন্টের বাছাইকৃত আকার %d; কিন্তু এত বড় আকার বাছাই করলে ভালভাবে কম্পিউটার "
@@ -1704,7 +1447,7 @@ msgstr[1] ""
 "ব্যবহার করাই কঠিন হয়ে যাবে।  তাই আপনাকে আরো ছোট আকার বাছাই করার জন্য পরামর্শ "
 "দেওয়া যাচ্ছে।"
 
-#: capplets/font/main.c:514
+#: capplets/font/main.c:505
 #, c-format
 msgid ""
 "The font selected is %d point large, and may make it difficult to "
@@ -1712,7 +1455,7 @@ msgid ""
 "sized font."
 msgid_plural ""
 "The font selected is %d points large, and may make it difficult to "
-"effectively use the computer.  It is recommended that you select a smaller "
+"effectively use the computer. It is recommended that you select a smaller "
 "sized font."
 msgstr[0] ""
 "বাছাইকৃত ফন্টের আকার %d; কিন্তু এত বড় আকারের ফন্ট বাছাই করলে ভালভাবে কম্পিউটার "
@@ -1752,28 +1495,28 @@ msgstr "চটপট কী-এর (Key) ধরন।"
 
 #: capplets/keybindings/eggcellrendererkeys.c:242
 #: capplets/keybindings/gnome-keybinding-properties.c:197
-#: libbackground/applier.c:757 typing-break/drwright.c:473
+#: libbackground/applier.c:624 typing-break/drwright.c:477
 msgid "Disabled"
 msgstr "নিষ্ক্রিয়"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:539
+#: capplets/keybindings/gnome-keybinding-properties.c:545
 msgid "<Unknown Action>"
 msgstr "<Unknown Action>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:558
+#: capplets/keybindings/gnome-keybinding-properties.c:566
 msgid "Desktop"
 msgstr "ডেস্কটপ"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:559
+#: capplets/keybindings/gnome-keybinding-properties.c:567
 #: capplets/sound/gnome-settings-sound.desktop.in.in.h:2
 msgid "Sound"
 msgstr "শব্দ"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:563
+#: capplets/keybindings/gnome-keybinding-properties.c:571
 msgid "Window Management"
 msgstr "উইন্ডো ব্যবস্থাপনা"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:660
+#: capplets/keybindings/gnome-keybinding-properties.c:668
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1782,21 +1525,21 @@ msgstr ""
 "শর্টকাট \"%s\" এমুহূর্তে :\n"
 " \"%s\" এর জন্য ব্যবহৃত হচ্ছে\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:692
+#: capplets/keybindings/gnome-keybinding-properties.c:700
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "কনফিগারেশন ডাটাবেসের জন্য নতুন চটপট কী (Key) স্থাপনে সমস্যা হয়েছে: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:742
+#: capplets/keybindings/gnome-keybinding-properties.c:750
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "কনফিগারেশন ডাটাবেস থেকে চটপট কী (Key) সরিয়ে ফেলতে সমস্যা হয়েছে: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:831
+#: capplets/keybindings/gnome-keybinding-properties.c:857
 msgid "Action"
 msgstr "কাজ"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:855
+#: capplets/keybindings/gnome-keybinding-properties.c:881
 msgid "Shortcut"
 msgstr "শর্টকাট"
 
@@ -1817,21 +1560,24 @@ msgstr ""
 msgid "Assign shortcut keys to commands"
 msgstr "বিভিন্ন কমান্ডের জন্য শর্টকাট নির্ধারণ করুন"
 
-#: capplets/keyboard/gnome-keyboard-properties-xkb.c:69
-#: capplets/keyboard/gnome-keyboard-properties-xkb.c:95
+#: capplets/keyboard/gnome-keyboard-properties-xkb.c:84
 msgid "Unknown"
 msgstr "অজ্ঞাত"
 
-#: capplets/keyboard/gnome-keyboard-properties-xkblt.c:251
+#: capplets/keyboard/gnome-keyboard-properties-xkblt.c:273
 msgid "Layout"
 msgstr "বিন্যাস"
 
-#: capplets/keyboard/gnome-keyboard-properties-xkblt.c:255
-#, fuzzy
+#. The first radio in a group is to be "Default", meaning none of
+#. the below options are to be included in the selected list.
+#. This is a HIG-compliant alternative to allowing no
+#. selection in the group.
+#: capplets/keyboard/gnome-keyboard-properties-xkblt.c:277
+#: capplets/keyboard/gnome-keyboard-properties-xkbot.c:228
 msgid "Default"
-msgstr "ডিফল্ট কার্সার"
+msgstr "ডিফল্ট"
 
-#: capplets/keyboard/gnome-keyboard-properties-xkbmc.c:78
+#: capplets/keyboard/gnome-keyboard-properties-xkbmc.c:75
 msgid "Models"
 msgstr "মডেল"
 
@@ -1852,51 +1598,47 @@ msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
 "এই মানগুলোকে কার্যকর করুন এবং তারপর প্রোগ্রামটি বন্ধ করে দিন (শুধুমাত্র সঙ্গতির জন্য; "
-"এখন এটি ডীমনের নিয়ন্ত্রণাধীন)"
+"এখন এটি ডেইমনের নিয়ন্ত্রণাধীন)"
 
 #: capplets/keyboard/gnome-keyboard-properties.c:227
 msgid "Start the page with the typing break settings showing"
 msgstr "পৃষ্ঠাটির প্রদর্শন আরম্ভ করার সময় টাইপিং বিরতির বৈশিষ্ট্য দেখাও"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:2
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
 msgid "..."
 msgstr "..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "<b>Cursor Blinking</b>"
 msgstr "<b>কার্সার জ্বলছে-নিভছে</b>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
 msgid "<b>Repeat Keys</b>"
 msgstr "<b>পুনরাবৃত্তি কী (key)</b>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "<b>_Lock screen to enforce typing break</b>"
 msgstr "<b>টাইপিং বিরতি আরোপ করার স্ক্রিন লক (_ল)</b>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>দ্রুত</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>দীর্ঘ</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>ছোট</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>ধীর</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "A_vailable layouts:"
 msgstr "ব্যবহারযোগ্য বিন্যাস (_ব):"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
-msgid "A_vailable options:"
-msgstr "ব্যবহারযোগ্য অপশন (_হ):"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "All_ow postponing of breaks"
@@ -1907,14 +1649,12 @@ msgid "Check if breaks are allowed to be postponed"
 msgstr "বিরতি বাতিল করা যায় কিনা তা যাচাই করুন"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:14
-#, fuzzy
 msgid "Choose A Keyboard Model"
-msgstr "কীবোর্ড মডেল বেছে নিন"
+msgstr "যে কোন একটি কীবোর্ড মডেল বেছে নিন"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:15
-#, fuzzy
 msgid "Choose A Layout"
-msgstr "বন্ধ করে লগ-আউট করো (_ল)"
+msgstr "যে কোন একটি কীবোর্ড লে-আউট বেছে নিন"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:16
 msgid "Cursor _blinks in text boxes and fields"
@@ -1960,19 +1700,17 @@ msgid "Microsoft Natural Keyboard"
 msgstr "মাইক্রোসফট ন্যাচারাল কীবোর্ড"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:27
-#, fuzzy
 msgid "Preview:"
-msgstr "প্রাকদর্শন (_প)"
+msgstr "প্রাকদর্শন:"
 
 # FIXME
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:28
-#, fuzzy
 msgid "Reset To De_faults"
-msgstr "ডিফল্ট-এ রিসেট করো"
+msgstr "ডিফল্ট-এ রিসেট করো (_ড)"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:30
 msgid "Separate _group for each window"
-msgstr ""
+msgstr "প্রতিটি গ্রুপের জন্য পৃথক উইন্ডো থাকবে (_গ)"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:31
 msgid "Typing Break"
@@ -1983,25 +1721,24 @@ msgid "_Accessibility..."
 msgstr "সহায়ক প্রযুক্তি... (_স)"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:33
+msgid "_Add..."
+msgstr "যোগ করো... (_য)"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:34
 msgid "_Break interval lasts:"
 msgstr "বিরতির দৈর্ঘ্য (_দ):"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:34
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:35
 msgid "_Delay:"
 msgstr "বিলম্ব (_ব):"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:35
-#, fuzzy
-msgid "_Models:"
-msgstr "মডেল (_ম)"
-
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:36
-msgid "_Selected layouts:"
-msgstr "বাছাইকৃত বিন্যাস (_ব):"
+msgid "_Models:"
+msgstr "মডেল (_ম):"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:37
-msgid "_Selected options:"
-msgstr "বাছাইকৃত অপশন (_অ):"
+msgid "_Selected layouts:"
+msgstr "বাছাইকৃত বিন্যাস (_ব):"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:38
 msgid "_Speed:"
@@ -2019,76 +1756,59 @@ msgstr "মিনিট"
 msgid "Set your keyboard preferences"
 msgstr "কীবোর্ড সম্পর্কিত পছন্দ নির্ধারণ করুন"
 
-#: capplets/localization/localization.desktop.in.in.h:1
-msgid "Language and Culture"
-msgstr ""
-
-#: capplets/localization/localization.desktop.in.in.h:2
-#, fuzzy
-msgid "Set your language and culture preferences"
-msgstr "মাউস সম্পর্কিত পছন্দ নির্ধারণ করুন"
-
-#: capplets/mouse/gnome-mouse-properties.c:496
+#: capplets/mouse/gnome-mouse-properties.c:559
 msgid "Unknown Cursor"
 msgstr "অজানা কার্সার"
 
-#: capplets/mouse/gnome-mouse-properties.c:613
-msgid "Default Cursor - Current"
-msgstr "ডিফল্ট কার্সার - বর্তমানে যা আছে"
-
-#: capplets/mouse/gnome-mouse-properties.c:613
-#: capplets/mouse/gnome-mouse-properties.c:616
-msgid "The default cursor that ships with X"
-msgstr "এক্স এর সাথে যে ডিফল্ট কার্সারটি দেওয়া হয়ে থাকে"
-
-#: capplets/mouse/gnome-mouse-properties.c:616
+#: capplets/mouse/gnome-mouse-properties.c:761
 msgid "Default Cursor"
 msgstr "ডিফল্ট কার্সার"
 
-#: capplets/mouse/gnome-mouse-properties.c:634
-msgid "White Cursor - Current"
-msgstr "সাদা কার্সার - বর্তমানে যা আছে"
+#: capplets/mouse/gnome-mouse-properties.c:762
+msgid "Default Cursor - Current"
+msgstr "ডিফল্ট কার্সার - বর্তমানে যা আছে"
 
-#: capplets/mouse/gnome-mouse-properties.c:634
-#: capplets/mouse/gnome-mouse-properties.c:637
-msgid "The default cursor inverted"
-msgstr "ডিফল্ট কার্সার উল্টো করে দেওয়া হয়েছে"
+#: capplets/mouse/gnome-mouse-properties.c:763
+msgid "The default cursor that ships with X"
+msgstr "এক্স এর সাথে যে ডিফল্ট কার্সারটি দেওয়া হয়ে থাকে"
 
-#: capplets/mouse/gnome-mouse-properties.c:637
+#: capplets/mouse/gnome-mouse-properties.c:767
 msgid "White Cursor"
 msgstr "সাদা কার্সার"
 
-#: capplets/mouse/gnome-mouse-properties.c:656
-msgid "Large Cursor - Current"
-msgstr "বড় কার্সার - বর্তমানে যা আছে"
+#: capplets/mouse/gnome-mouse-properties.c:768
+msgid "White Cursor - Current"
+msgstr "সাদা কার্সার - বর্তমানে যা আছে"
 
-#: capplets/mouse/gnome-mouse-properties.c:656
-#: capplets/mouse/gnome-mouse-properties.c:659
-msgid "Large version of normal cursor"
-msgstr "সাধারণ কার্সারের বর্ধিতরূপ"
+#: capplets/mouse/gnome-mouse-properties.c:769
+msgid "The default cursor inverted"
+msgstr "ডিফল্ট কার্সার উল্টো করে দেওয়া হয়েছে"
 
-#: capplets/mouse/gnome-mouse-properties.c:659
+#: capplets/mouse/gnome-mouse-properties.c:773
 msgid "Large Cursor"
 msgstr "বড় কার্সার"
 
-#: capplets/mouse/gnome-mouse-properties.c:678
+#: capplets/mouse/gnome-mouse-properties.c:774
+msgid "Large Cursor - Current"
+msgstr "বড় কার্সার - বর্তমানে যা আছে"
+
+#: capplets/mouse/gnome-mouse-properties.c:775
+msgid "Large version of normal cursor"
+msgstr "সাধারণ কার্সারের বর্ধিতরূপ"
+
+#: capplets/mouse/gnome-mouse-properties.c:779
 msgid "Large White Cursor - Current"
 msgstr "বড় সাদা কার্সার - বর্তমানে যেটি ব্যবহৃত হচ্ছে"
 
-#: capplets/mouse/gnome-mouse-properties.c:678
-#: capplets/mouse/gnome-mouse-properties.c:681
-msgid "Large version of white cursor"
-msgstr "সাদা কার্সারের বর্ধিতরূপ"
-
-#: capplets/mouse/gnome-mouse-properties.c:681
+#: capplets/mouse/gnome-mouse-properties.c:780
 msgid "Large White Cursor"
 msgstr "বড় সাদা কার্সার"
 
-#: capplets/mouse/gnome-mouse-properties.c:753
-msgid "Cursor Size"
-msgstr "কার্সারের আয়তন"
+#: capplets/mouse/gnome-mouse-properties.c:781
+msgid "Large version of white cursor"
+msgstr "সাদা কার্সারের বর্ধিতরূপ"
 
-#: capplets/mouse/gnome-mouse-properties.c:762
+#: capplets/mouse/gnome-mouse-properties.c:975
 msgid "Cursor Theme"
 msgstr "কার্সারের থিম"
 
@@ -2113,41 +1833,36 @@ msgid "<b>Speed</b>"
 msgstr "<b>গতি</b>"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:7
-#, fuzzy
-msgid ""
-"<i><small><b>Note:</b> Changes to this setting will not take effect until "
-"next time you log in.</small></i>"
-msgstr ""
-"<i><small><b>নোট:</b> পুনরায় লগ-ইন না করা পর্যন্ত এই পরিবর্তনটি কার্যকর হবে না।</"
-"small></i>"
-
-#: capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid "<i>Fast</i>"
 msgstr "<i>দ্রুত</i>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:9
+#: capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid "<i>High</i>"
 msgstr "<i>উচ্চ</i>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:10
+#: capplets/mouse/gnome-mouse-properties.glade.h:9
 msgid "<i>Large</i>"
 msgstr "<i>বড়</i>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:11
+#: capplets/mouse/gnome-mouse-properties.glade.h:10
 msgid "<i>Low</i>"
 msgstr "<i>নীচু</i>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:12
+#: capplets/mouse/gnome-mouse-properties.glade.h:11
 msgid "<i>Slow</i>"
 msgstr "<i>ধীর</i>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:13
+#: capplets/mouse/gnome-mouse-properties.glade.h:12
 msgid "<i>Small</i>"
 msgstr "<i>ছোট</i>"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:14
+#: capplets/mouse/gnome-mouse-properties.glade.h:13
 msgid "Buttons"
 msgstr "বাটন"
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:14
+msgid "Cursor Size:"
+msgstr "কার্সারের আকার:"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:15
 msgid "Cursors"
@@ -2158,32 +1873,36 @@ msgid "Highlight the _pointer when you press Ctrl"
 msgstr "Ctrl চাপলে পয়েন্টারের ঔজ্জ্বল্য বাড়াও (_প)"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:17
+msgid "Large"
+msgstr "বড়"
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:18
+msgid "Medium"
+msgstr "মধ্যম"
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:19
 msgid "Motion"
 msgstr "গতি"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:18
+#: capplets/mouse/gnome-mouse-properties.glade.h:20
 msgid "Mouse Preferences"
 msgstr "মাউস সম্পর্কিত পছন্দ"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:19
+#: capplets/mouse/gnome-mouse-properties.glade.h:21
+msgid "Small"
+msgstr "ছোট"
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:22
 msgid "_Acceleration:"
 msgstr "গতিবৃদ্ধি (_গ):"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:20
-msgid "_Large"
-msgstr "বড় (_ড়)"
-
-#: capplets/mouse/gnome-mouse-properties.glade.h:21
+#: capplets/mouse/gnome-mouse-properties.glade.h:23
 msgid "_Left-handed mouse"
 msgstr "বাঁহাতি মাউস (_ব)"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:23
+#: capplets/mouse/gnome-mouse-properties.glade.h:24
 msgid "_Sensitivity:"
 msgstr "সংবেদনশীলতা (_দ):"
-
-#: capplets/mouse/gnome-mouse-properties.glade.h:24
-msgid "_Small"
-msgstr "ছোট (_ছ)"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:25
 msgid "_Threshold:"
@@ -2206,86 +1925,82 @@ msgid "Network Proxy"
 msgstr "নেটওয়ার্ক প্রক্সি"
 
 #: capplets/network/gnome-network-preferences.desktop.in.in.h:2
-#, fuzzy
 msgid "Set your network proxy preferences"
-msgstr "নেটওয়ার্ক প্রক্সি সম্পর্কিত পছন্দ"
+msgstr "নেটওয়ার্ক প্রক্সি সম্পর্কিত পছন্দ নির্ধারণ করুন"
 
 #: capplets/network/gnome-network-preferences.glade.h:1
 msgid "      "
 msgstr "      "
 
+#: capplets/network/gnome-network-preferences.glade.h:2
+msgid "<b>D_irect internet connection</b>"
+msgstr "<b>সরাসরি ইন্টারনেট সংযোগ (_র)</b>"
+
 #: capplets/network/gnome-network-preferences.glade.h:3
-msgid "<b>Ignore host list</b>"
-msgstr ""
+msgid "<b>Ignore Host List</b>"
+msgstr "<b>যে সব হোস্টকে অগ্রাহ্য করা হবে তাদের তালিকা</b>"
 
 #: capplets/network/gnome-network-preferences.glade.h:4
 msgid "<b>_Automatic proxy configuration</b>"
 msgstr "<b>স্বয়ংক্রিয় প্রক্সি কনফিগারেশন (_স)<b>"
 
 #: capplets/network/gnome-network-preferences.glade.h:5
-msgid "<b>_Direct internet connection</b>"
-msgstr "<b>সরাসরি ইন্টারনেট সংযোগ (_র)</b>"
-
-#: capplets/network/gnome-network-preferences.glade.h:6
 msgid "<b>_Manual proxy configuration</b>"
 msgstr "<b>স্বহস্তে প্রক্সি কনফিগারেশন (_হ)</b>"
 
-#: capplets/network/gnome-network-preferences.glade.h:7
+#: capplets/network/gnome-network-preferences.glade.h:6
 msgid "<b>_Use authentication</b>"
 msgstr "<b>পরিচয়প্রমাণকারী প্রক্রিয়া ব্যবহার করো (_ব)</b>"
 
-#: capplets/network/gnome-network-preferences.glade.h:8
-#, fuzzy
+#: capplets/network/gnome-network-preferences.glade.h:7
 msgid "Advanced Configuration"
-msgstr "স্বয়ংক্রিয় কনফিগারেশনের ইউ.আর.এল. (_ই):"
+msgstr "অগ্রসর কনফিগারেশন"
 
-#: capplets/network/gnome-network-preferences.glade.h:9
+#: capplets/network/gnome-network-preferences.glade.h:8
 msgid "Autoconfiguration _URL:"
 msgstr "স্বয়ংক্রিয় কনফিগারেশনের ইউ.আর.এল. (_ই):"
 
-#: capplets/network/gnome-network-preferences.glade.h:10
+#: capplets/network/gnome-network-preferences.glade.h:9
 msgid "HTTP Proxy Details"
 msgstr "এইচ.টি.টি.পি. প্রক্সির খুঁটিনাটি"
 
-#: capplets/network/gnome-network-preferences.glade.h:11
+#: capplets/network/gnome-network-preferences.glade.h:10
 msgid "H_TTP proxy:"
 msgstr "এইচ.টি.টি.পি. প্রক্সি (_ট):"
 
-#: capplets/network/gnome-network-preferences.glade.h:12
-#, fuzzy
+#: capplets/network/gnome-network-preferences.glade.h:11
 msgid "Network Proxy Preferences"
 msgstr "নেটওয়ার্ক প্রক্সি সম্পর্কিত পছন্দ"
 
-#: capplets/network/gnome-network-preferences.glade.h:13
+#: capplets/network/gnome-network-preferences.glade.h:12
 msgid "Port:"
 msgstr "পোর্ট:"
 
-#: capplets/network/gnome-network-preferences.glade.h:14
-#, fuzzy
+#: capplets/network/gnome-network-preferences.glade.h:13
 msgid "Proxy Configuration"
-msgstr "নেটওয়ার্ক প্রক্সি কনফিগারেশন"
+msgstr "প্রক্সি কনফিগারেশন"
 
-#: capplets/network/gnome-network-preferences.glade.h:15
+#: capplets/network/gnome-network-preferences.glade.h:14
 msgid "S_ocks host:"
 msgstr "Socks হোস্ট (_ক):"
 
-#: capplets/network/gnome-network-preferences.glade.h:16
+#: capplets/network/gnome-network-preferences.glade.h:15
 msgid "U_sername:"
 msgstr "ব্যবহারকারীর-নাম (_র):"
 
-#: capplets/network/gnome-network-preferences.glade.h:17
+#: capplets/network/gnome-network-preferences.glade.h:16
 msgid "_Details"
 msgstr "বিস্তারিত (_ত)"
 
-#: capplets/network/gnome-network-preferences.glade.h:18
+#: capplets/network/gnome-network-preferences.glade.h:17
 msgid "_FTP proxy:"
 msgstr "এফ.টি.পি. প্রক্সি (_এ):"
 
-#: capplets/network/gnome-network-preferences.glade.h:19
+#: capplets/network/gnome-network-preferences.glade.h:18
 msgid "_Password:"
 msgstr "পাসওয়ার্ড (_প):"
 
-#: capplets/network/gnome-network-preferences.glade.h:20
+#: capplets/network/gnome-network-preferences.glade.h:19
 msgid "_Secure HTTP proxy:"
 msgstr "নিরাপদ এইচ.টি.টি.পি. প্রক্সি (_ন):"
 
@@ -2294,7 +2009,8 @@ msgid "Enable sound and associate sounds with events"
 msgstr "শব্দ সক্রিয় করো ও বিভিন্ন ইভেন্টের সাথে মিলিয়ে শব্দ নির্বাচন করো"
 
 #: capplets/sound/sound-properties-capplet.c:271
-msgid "Sound preferences"
+#: capplets/sound/sound-properties.glade.h:6
+msgid "Sound Preferences"
 msgstr "শব্দ সংক্রান্ত পছন্দ"
 
 #: capplets/sound/sound-properties.glade.h:1
@@ -2317,10 +2033,6 @@ msgstr "সাধারণ"
 msgid "Sound Events"
 msgstr "শব্দ সংক্রান্ত ইভেন্ট"
 
-#: capplets/sound/sound-properties.glade.h:6
-msgid "Sound Preferences"
-msgstr "শব্দ সংক্রান্ত পছন্দ"
-
 #: capplets/sound/sound-properties.glade.h:7
 msgid "System Bell"
 msgstr "সিস্টেমের ঘন্টাধ্বনি"
@@ -2338,7 +2050,7 @@ msgstr "বিভিন্ন ইভেন্টের জন্য শব্দ
 msgid "_Visual feedback:"
 msgstr "চিত্রভিত্তিক মন্তব্য (_চ):"
 
-#: capplets/theme-switcher/gnome-theme-details.c:370
+#: capplets/theme-switcher/gnome-theme-details.c:347
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -2348,26 +2060,98 @@ msgstr ""
 "সঠিকভাবে ইনস্টল করা হয় নি অথবা আপনি \"গনোম থিম\" নামের প্যাকেজটিই ইনস্টল করেন "
 "নি।"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:103
+#: capplets/theme-switcher/gnome-theme-installer.c:227
 msgid "This theme is not in a supported format."
-msgstr ""
+msgstr "এই থিমটি একটি অসমর্থিত ফরমেটে আছে।"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:139
+#: capplets/theme-switcher/gnome-theme-installer.c:244
+msgid "Failed to create temporary directory"
+msgstr "অস্থায়ী ডিরেক্টরি তৈরি করা যায় নি"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:264
+msgid ""
+"Can not install theme. \n"
+"The bzip2 utility is not installed."
+msgstr ""
+"থিম ইনস্টল করা যায় নি। \n"
+"bzip2 নামক ইউটিলিটি ইনস্টল করা নেই।"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:282
+#: capplets/theme-switcher/gnome-theme-installer.c:319
+#: capplets/theme-switcher/gnome-theme-installer.c:399
+msgid "Installation Failed"
+msgstr "ইনস্টলেশন প্রক্রিয়া ব্যর্থ হয়েছে"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:302
+msgid ""
+"Can not install themes. \n"
+"The gzip utility is not installed."
+msgstr ""
+"থিম ইনস্টল করা যায় নি। \n"
+"gzip নামক ইউটিলিটি ইনস্টল করা নেই।"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:340
+#, c-format
+msgid ""
+"Icon Theme %s correctly installed.\n"
+"You can select it in the theme details."
+msgstr ""
+"আইকন-এর থিম %s ভালভাবেই ইনস্টল হয়েছে।\n"
+"আপনি এখন একে 'থিম-এর বিস্তারিত' থেকে নির্বাচন করতে পারবেন।"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:343
+#, c-format
+msgid "Gnome Theme %s correctly installed"
+msgstr "গনোম থিম %s ভালভাবে ইনস্টল হয়েছে"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:346
+#, c-format
+msgid ""
+"Windows Border Theme %s correctly installed.\n"
+"You can select it in the theme details."
+msgstr ""
+"উইন্ডো'র প্রান্তসীমার থিম %s ভালভাবে ইনস্টল হয়েছে।\n"
+"আপনি এখন একে 'থিম-এর বিস্তারিত' থেকে নির্বাচন করতে পারবেন।"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:349
+#, c-format
+msgid ""
+"Controls Theme %s correctly installed.\n"
+"You can select it in the theme details."
+msgstr ""
+"নিয়ন্ত্রণ বিষয়ক থিম %s ভালভাবে ইনস্টল হয়েছে।\n"
+"আপনি এখন একে 'থিম-এর বিস্তারিত' থেকে নির্বাচন করতে পারবেন।"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:357
+msgid "The theme is an engine. You need to compile the theme."
+msgstr "থিম এক প্রকার ইঞ্জিন।  আপনাকে তাই থিম কম্পাইল করতে হবে।"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:374
+msgid "The file format is invalid"
+msgstr "ফাইল বিন্যাস অবৈধ"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:468
 msgid "No theme file location specified to install"
 msgstr "ইনস্টল করার জন্য কোন থিম ফাইলের অবস্থান উল্লেখ করা হয় নি"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:156
+#: capplets/theme-switcher/gnome-theme-installer.c:485
 msgid "The theme file location specified to install is invalid"
 msgstr "ইনস্টল করার জন্য থিম ফাইলের যে অবস্থান উল্লেখ করা হয়েছে তা ভুল"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:176
+#: capplets/theme-switcher/gnome-theme-installer.c:505
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
 "%s"
 msgstr ""
+"থিমটি এখানে ইনস্টল করার জন্য প্রয়োজনীয় অনুমতি নেই:\n"
+"%s"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:216
+#: capplets/theme-switcher/gnome-theme-installer.c:526
+msgid "The file format is invalid."
+msgstr "ফাইলের বিন্যাস অবৈধ।"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:553
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
@@ -2376,15 +2160,23 @@ msgstr ""
 "থিম ফাইলগুলো %s পাথ-এ (Path) ইনস্টল করা হবে।  এই পাথকে তাই থিম ফাইলের উত্‍স "
 "হিসেবে নির্বাচন করা যাবে না"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:676
+#: capplets/theme-switcher/gnome-theme-installer.c:607
+msgid ""
+"Cannot install theme.\n"
+"The tar program is not installed on your system."
+msgstr ""
+"থিম ইনস্টল করা যাচ্ছে না।\n"
+"কারণ আপনার সিস্টেমে tar নামক প্রোগ্রামটি ইনস্টল করা নেই।"
+
+#: capplets/theme-switcher/gnome-theme-manager.c:680
 msgid "Custom theme"
 msgstr "স্বনির্বাচিত থিম"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:676
+#: capplets/theme-switcher/gnome-theme-manager.c:680
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "থিম সংরক্ষণ করার বাটনে চাপ দিয়ে আপনি এই থিমটিকে সংরক্ষণ করতে পারেন।"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:1454
+#: capplets/theme-switcher/gnome-theme-manager.c:1476
 msgid ""
 "The default theme schemas could not be found on your system.  This means "
 "that you probably don't have metacity installed, or that your gconf is "
@@ -2575,7 +2367,7 @@ msgid "Text only"
 msgstr "শুধুমাত্র টেক্সট"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:14
-msgid "Toolbar _button labels: "
+msgid "Toolbar _button labels:"
 msgstr "টুলবারের বাটনের লেবেল (_ব):"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:15
@@ -2591,44 +2383,38 @@ msgid "_Edit"
 msgstr "সম্পাদন (_ম)"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:18
+msgid "_Editable menu accelerators"
+msgstr "মেনুর জন্য সম্পাদনযোগ্য চটপট কী (Key) (_স)"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:19
 msgid "_File"
 msgstr "ফাইল (_ফ)"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:19
+#: capplets/ui-properties/gnome-ui-properties.glade.h:20
 msgid "_New"
 msgstr "নতুন (_ন)"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:20
+#: capplets/ui-properties/gnome-ui-properties.glade.h:21
 msgid "_Open"
 msgstr "খোলা (_খ)"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:21
+#: capplets/ui-properties/gnome-ui-properties.glade.h:22
 msgid "_Paste"
 msgstr "সাঁটা (_স)"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:22
+#: capplets/ui-properties/gnome-ui-properties.glade.h:23
 msgid "_Print"
 msgstr "মুদ্রণ (_দ)"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:23
+#: capplets/ui-properties/gnome-ui-properties.glade.h:24
 msgid "_Quit"
 msgstr "প্রস্থান (_প)"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:24
+#: capplets/ui-properties/gnome-ui-properties.glade.h:25
 msgid "_Save"
 msgstr "সংরক্ষণ (_স)"
 
-#: capplets/url-properties/url-properties.desktop.in.in.h:1
-#: capplets/url-properties/url.desktop.in.in.h:1
-msgid "Configure which programs are used to display URLs"
-msgstr ""
-
-#: capplets/url-properties/url-properties.desktop.in.in.h:2
-#: capplets/url-properties/url.desktop.in.in.h:2
-msgid "URL Handlers"
-msgstr ""
-
-#: capplets/windows/gnome-window-properties.c:388
+#: capplets/windows/gnome-window-properties.c:386
 #, c-format
 msgid ""
 "<b>Cannot start the preferences application for your window manager</b>\n"
@@ -2640,23 +2426,23 @@ msgstr ""
 "\n"
 "%s"
 
-#: capplets/windows/gnome-window-properties.c:648
+#: capplets/windows/gnome-window-properties.c:644
 msgid "Control"
 msgstr "নিয়ন্ত্রণ"
 
-#: capplets/windows/gnome-window-properties.c:653
+#: capplets/windows/gnome-window-properties.c:649
 msgid "Alt"
 msgstr "Alt"
 
-#: capplets/windows/gnome-window-properties.c:659
+#: capplets/windows/gnome-window-properties.c:655
 msgid "Hyper"
 msgstr "হাইপার"
 
-#: capplets/windows/gnome-window-properties.c:666
+#: capplets/windows/gnome-window-properties.c:662
 msgid "Super (or \"Windows logo\")"
 msgstr "সুপার (অথবা \"উইন্ডোস লোগো\")"
 
-#: capplets/windows/gnome-window-properties.c:673
+#: capplets/windows/gnome-window-properties.c:669
 msgid "Meta"
 msgstr "মেটা"
 
@@ -2698,57 +2484,24 @@ msgid "_Select windows when the mouse moves over them"
 msgstr "কোন উইন্ডোর ওপর মাউস অবস্থান করলে তা সক্রিয় হয়ে উঠবে (_ক)"
 
 #: capplets/windows/window-properties.desktop.in.in.h:1
-#, fuzzy
 msgid "Set your window properties"
-msgstr "উইন্ডোর বৈশিষ্ট্যাবলী"
+msgstr "উইন্ডোর বৈশিষ্ট্য নির্ধারণ করুন"
 
 #: capplets/windows/window-properties.desktop.in.in.h:2
 msgid "Windows"
 msgstr "উইন্ডো"
 
-#: control-center/GNOME_ControlCenter.server.in.h:1
-msgid "Control Center"
-msgstr "নিয়ন্ত্রণ কেন্দ্র"
-
-# FIXME
-#: control-center/GNOME_ControlCenter.server.in.h:2
-msgid "Control Center Viewer"
-msgstr "নিয়ন্ত্রণ কেন্দ্রের প্রদর্শক"
-
-# FIXME
-#: control-center/GNOME_ControlCenter.server.in.h:3
-msgid "Control Center view"
-msgstr "নিয়ন্ত্রণ কেন্দ্রের ভিউ"
-
-#: control-center/GNOME_ControlCenter.server.in.h:4
-msgid "Control Center view component"
-msgstr "নিয়ন্ত্রণ কেন্দ্রের ভিউ কম্পোনেন্ট"
-
-#: control-center/GNOME_ControlCenter.server.in.h:5
-msgid "Control Center view component's factory"
-msgstr "নিয়ন্ত্রণ কেন্দ্রের ভিউ কম্পোনেন্ট-এর ফ্যাক্টরি"
-
-#: control-center/GNOME_ControlCenter.server.in.h:6
-msgid "Control Center view factory"
-msgstr "নিয়ন্ত্রণ কেন্দ্রের ভিউ ফ্যাক্টরি"
-
-#: control-center/GNOME_ControlCenter.server.in.h:7
-msgid "View as Control Center"
-msgstr "নিয়ন্ত্রণ কেন্দ্র হিসেবে দেখাও"
-
-#: control-center/control-center-categories.c:248
+#: control-center/control-center-categories.c:257
 msgid "Others"
 msgstr "অন্যান্য"
 
-#: control-center/control-center.c:1005
+#: control-center/control-center.c:42
+msgid "Desktop Preferences"
+msgstr "ডেস্কটপ সংক্রান্ত পছন্দ"
+
 #: control-center/gnomecc.desktop.in.in.h:1
 msgid "GNOME Control Center"
 msgstr "গনোম নিয়ন্ত্রণ কেন্দ্র"
-
-#: control-center/control-center.c:1121
-#, fuzzy
-msgid "Desktop Preferences"
-msgstr "ডেস্কটপের পটভূমি সংক্রান্ত পছন্দ"
 
 #: control-center/gnomecc.desktop.in.in.h:2
 #: vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:2
@@ -2759,16 +2512,16 @@ msgstr "গনোম কনফিগারেশন প্রক্রিয়া"
 msgid "Volume"
 msgstr "ভলিউম"
 
-#: gnome-settings-daemon/factory.c:34
+#: gnome-settings-daemon/factory.c:36
 msgid "Could not initialize Bonobo"
 msgstr "বনোবো চালু করা যায় নি"
 
 # FIXME
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:397
 msgid "Slow Keys Alert"
-msgstr "ধীর কী (Key) সতর্কবাণী"
+msgstr "ধীর কী (Key) সম্পর্কিত সতর্কবাণী"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:398
 msgid ""
 "You just held down the Shift key for 8 seconds.  This is the shortcut for "
 "the Slow Keys feature, which affects the way your keyboard works."
@@ -2776,20 +2529,20 @@ msgstr ""
 "আপনি এইমাত্র শিফ্‌ট কী-কে ৮ সেকেন্ড যাবত্‍ চেপে রেখেছিলেন।  এটি হল ধীর কী (Key) "
 "সক্রিয়কারক শর্টকাট যা সম্পূর্ণ কীবোর্ড ব্যবস্থা কীভাবে কাজ করবে তা নির্ধারণ করে।"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:414
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:400
 msgid "Do you want to activate Slow Keys?"
 msgstr "আপনি কি ধীর কী (Key) সক্রিয় করতে চান?"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:415
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:401
 msgid "Do you want to deactivate Slow Keys?"
 msgstr "আপনি কি ধীর কী (Key) নিষ্ক্রিয় করতে চান?"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:410
 msgid "Sticky Keys Alert"
-msgstr "স্টিকি কী (Key) সতর্কবাণী"
+msgstr "স্টিকি কী (Key) সম্পর্কিত সতর্কবাণী"
 
 # FIXME
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
 msgid ""
 "You just pressed the Shift key 5 times in a row.  This is the shortcut for "
 "the Sticky Keys feature, which affects the way your keyboard works."
@@ -2797,7 +2550,7 @@ msgstr ""
 "আপনি এইমাত্র শিফ্‌ট কী-কে ৫ সেকেন্ড যাবত্‍ চেপে রেখেছিলেন।  এটি হল স্টিকি কী (Key) "
 "সক্রিয়কারক শর্টকাট যা সম্পূর্ণ কীবোর্ড ব্যবস্থা কীভাবে কাজ করবে তা নির্ধারণ করে।"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
 msgid ""
 "You just pressed two keys at once, or pressed the Shift key 5 times in a "
 "row.  This turns off the Sticky Keys feature, which affects the way your "
@@ -2807,15 +2560,15 @@ msgstr ""
 "চেপেছেন।  এর ফলে স্টিকি কী (Key) নিষ্ক্রিয় হয়ে যায় যা সম্পূর্ণ কীবোর্ড ব্যবস্থা "
 "কীভাবে কাজ করবে তা নির্ধারণ করে।"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:429
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:415
 msgid "Do you want to activate Sticky Keys?"
 msgstr "আপনি কি স্টিকি কী (Key) সক্রিয় করতে চান?"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:430
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:416
 msgid "Do you want to deactivate Sticky Keys?"
 msgstr "আপনি কি স্টিকি কী (Key) নিষ্ক্রিয় করতে চান?"
 
-#: gnome-settings-daemon/gnome-settings-font.c:102
+#: gnome-settings-daemon/gnome-settings-font.c:106
 #, c-format
 msgid ""
 "Cannot create the directory \"%s\".\n"
@@ -2824,37 +2577,37 @@ msgstr ""
 "ডিরেক্টরি \"%s\" তৈরি করা যায় নি।\n"
 "কার্সার পরিবর্তনের জন্য এটি করা প্রয়োজন।"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:207
+#: gnome-settings-daemon/gnome-settings-keybindings.c:209
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr "কী (key) বাইন্ডিং (%s) এর কাজ একাধিকবার উল্লেখ করা হয়েছে\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:220
+#: gnome-settings-daemon/gnome-settings-keybindings.c:222
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr "কী (key) বাইন্ডিং (%s) এর বাইন্ডিং একাধিকবার উল্লেখ করা হয়েছে\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:226
+#: gnome-settings-daemon/gnome-settings-keybindings.c:228
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr "কী (key) বাইন্ডিং (%s) অসম্পূর্ণ\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:254
+#: gnome-settings-daemon/gnome-settings-keybindings.c:256
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr "কী (key) বাইন্ডিং (%s) সঠিক নয়\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:290
+#: gnome-settings-daemon/gnome-settings-keybindings.c:292
 #, c-format
 msgid "It seems that another application already has access to key '%d'."
 msgstr "মনে হচ্ছে অপর একটি অ্যাপলিকেশন ইতিমধ্যেই '%d' কী (Key) ব্যবহার করছে।"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:359
+#: gnome-settings-daemon/gnome-settings-keybindings.c:361
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr "কী (key) বাইন্ডিং (%s) ইতিমধ্যেই ব্যবহৃত হচ্ছে\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:434
+#: gnome-settings-daemon/gnome-settings-keybindings.c:436
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -2863,25 +2616,28 @@ msgstr ""
 "কী (key) (%s) এর সাথে যুক্ত\n"
 "(%s) চালাতে সমস্যা হয়েছে"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:96
-#, fuzzy, c-format
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:103
+#, c-format
 msgid ""
 "Error activating XKB configuration.\n"
-"It can have under various circumstances:\n"
+"It can happen under various circumstances:\n"
 "- a bug in libxklavier library\n"
 "- a bug in X server (xkbcomp, xmodmap utilities)\n"
-"- X server with incompatible libxkbfile implemenation\n"
+"- X server with incompatible libxkbfile implementation\n"
 "\n"
 "X server version data:\n"
 "%s\n"
 "%d\n"
 "%s\n"
 "If you report this situation as a bug, please include:\n"
-"- The result of <b>xprop -root | grep XKB</b>\n"
-"- The result of <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/kbd</b>"
+"- The result of <b>%s</b>\n"
+"- The result of <b>%s</b>"
 msgstr ""
 "XKB-এর কনফিগারেশন সক্রিয়করণে সমস্যা হয়েছে।\n"
-"সম্ভবত এটি এক্স সার্ভারের একটি নিজস্ব সমস্যা।\n"
+"যে সব কারণে এটি ঘটতে পারে:\n"
+"- libxklavier লাইব্রেরির কোন বাগ-এর জন্য\n"
+"- এক্স সার্ভারের (xkbcomp, xmodmap ইউটিলিটি) কোন বাগ-এর জন্য\n"
+"- এক্স সার্ভারের সাথে libxkbfile এর অসামঞ্জস্য\n"
 "\n"
 "এক্স সার্ভারের সংস্করণ তথ্য:\n"
 "%s\n"
@@ -2889,14 +2645,14 @@ msgstr ""
 "%s\n"
 "এই অবস্থাটির জন্য আপনি যদি বাগ রিপোর্ট প্রেরণ করেন তবে অনুগ্রহপূর্বক অন্যান্যের সাথে "
 "এই তথ্যাবলীও পাঠান:\n"
-"- <b>xprop -root | grep XKB</b> কমান্ডের ফলাফল\n"
-"- <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/xkb</b> কমান্ডের ফলাফল"
+"- <b>%s</b> কমান্ডের ফলাফল\n"
+"- <b>%s</b> কমান্ডের ফলাফল"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:110
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:117
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
-"Try using simpler configuration or taking more fresh version of XFree "
+"Try using a simpler configuration or taking a fresher version of XFree "
 "software."
 msgstr ""
 "আপনি ব্যবহার করছেন এক্স-ফ্রী (XFree) ৪.৩.০ ।\n"
@@ -2904,7 +2660,11 @@ msgstr ""
 "তাই চেষ্টা করুন সহজ ধরনের কনফিগারেশন ব্যবহার করতে অথবা এক্স-ফ্রী সফটওয়ারের "
 "অপেক্ষাকৃত নতুন সংস্করণ ব্যবহার করতে।"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:213
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:227
+msgid "Do _not show this warning again"
+msgstr "আর কখনো এই সতর্কবাণী দেখাবে না (_ন)"
+
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:238
 msgid ""
 "The X system keyboard settings differ from your current GNOME keyboard "
 "settings.  Which set would you like to use?"
@@ -2912,26 +2672,15 @@ msgstr ""
 "গনোম কীবোর্ডের বর্তমান বৈশিষ্ট্যের সাথে এক্স কীবোর্ডের বৈশিষ্ট্যের পার্থক্য রয়েছে।  এ "
 "অবস্থায় আপনি কোন কীবোর্ডটি ব্যবহার করতে চান?"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:216
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:251
 msgid "Use X settings"
 msgstr "এক্স-এর বৈশিষ্ট্য ব্যবহার করো"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:218
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:253
 msgid "Use GNOME settings"
 msgstr "গনোম-এর বৈশিষ্ট্য ব্যবহার করো"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:270
-#, c-format
-msgid ""
-"You have a keyboard remapping file (%s) in your home directory whose "
-"contents will now be ignored. You can use the keyboard preferences to "
-"restore them."
-msgstr ""
-"আপনার ব্যক্তিগত ডিরেক্টরিতে কীবোর্ড পুনঃবিন্যস্তকারী একটি ফাইল (%s) আছে যা এখন "
-"অগ্রাহ্য করা হবে।  তবে কীবোর্ড সংক্রান্ত পছন্দ নিয়ন্ত্রক থেকে এগুলোকে পুনরুদ্ধার করতে "
-"পারবেন।"
-
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:126
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:129
 #, c-format
 msgid ""
 "Couldn't execute command: %s\n"
@@ -2940,7 +2689,7 @@ msgstr ""
 "এই কমান্ডটি চালানো যায় নি: %s\n"
 "এই কমান্ডের অস্তিত্ব সম্পর্কে নিশ্চিত হোন।"
 
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:142
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:145
 msgid ""
 "Couldn't put the machine to sleep.\n"
 "Verify that the machine is correctly configured."
@@ -2948,12 +2697,12 @@ msgstr ""
 "কম্পিউটারকে স্থগিতাবস্থায় নিয়ে যাওয়া যায় নি।\n"
 "কম্পিউটারটি সঠিকভাবে কনফিগার করা আছে কিনা তা নিশ্চিত হোন।"
 
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:152
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:155
 #, c-format
 msgid "Permissions on the file %s are broken\n"
 msgstr "%s ফাইলের অনুমতি অচল\n"
 
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:197
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:200
 msgid ""
 "Couldn't load the Glade file.\n"
 "Make sure that this daemon is properly installed."
@@ -2961,7 +2710,7 @@ msgstr ""
 "গ্লেড (Glade) ফাইল লোড করা যায় নি।\n"
 "এই ডীমনটি সঠিকভাবে ইনস্টল করা আছে কিনা তা নিশ্চিত হোন।"
 
-#: gnome-settings-daemon/gnome-settings-screensaver.c:92
+#: gnome-settings-daemon/gnome-settings-screensaver.c:113
 #, c-format
 msgid ""
 "There was an error starting up the screensaver:\n"
@@ -2976,34 +2725,58 @@ msgstr ""
 "\n"
 "এই সেশনে কোন স্ক্রিন সেভার কাজ করবে না।"
 
-#: gnome-settings-daemon/gnome-settings-screensaver.c:102
+#: gnome-settings-daemon/gnome-settings-screensaver.c:123
 msgid "_Do not show this message again"
 msgstr "আর কখনো এই তথ্যটি দেখাবে না (_ন)"
 
-#: gnome-settings-daemon/gnome-settings-sound.c:128
+#: gnome-settings-daemon/gnome-settings-sound.c:129
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "নমুনা %s হিসেবে শব্দের ফাইল %s ব্যবহার করা যাচ্ছে না"
 
-#: gnome-settings-daemon/gnome-settings-xrdb.c:213
-#: gnome-settings-daemon/gnome-settings-xrdb.c:261
+#: gnome-settings-daemon/gnome-settings-xrdb.c:214
+#: gnome-settings-daemon/gnome-settings-xrdb.c:262
 msgid "Cannot determine user's home directory"
 msgstr "ব্যবহারকারীর ব্যক্তিগত ডিরেক্টরি (Home) খুঁজে পাওয়া যাচ্ছে না"
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:208
+#: gnome-settings-daemon/gnome-settings-xsettings.c:215
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "জীকন্‌ফ কী (key) %s এর মান %s করা হলেও তা %s হওয়ার কথা\n"
+
+#: gnome-settings-daemon/modmap-dialog.glade.h:1
+msgid "A_vailable files:"
+msgstr "ব্যবহারযোগ্য ফাইল (_ব):"
+
+#: gnome-settings-daemon/modmap-dialog.glade.h:2
+msgid "Do _not show this warning again."
+msgstr "আর কখনোই এই সতর্কবাণীটি দেখাবে না (_ন) ।"
+
+#: gnome-settings-daemon/modmap-dialog.glade.h:3
+msgid "Load modmap files"
+msgstr "modmap-এর ফাইল লোড করো"
+
+#: gnome-settings-daemon/modmap-dialog.glade.h:4
+msgid "Would you like to load the modmap file(s)?"
+msgstr "আপনি কি modmap-এর ফাইল লোড করতে চান?"
+
+#: gnome-settings-daemon/modmap-dialog.glade.h:5
+msgid "_Load"
+msgstr "লোড করো (_ল)"
+
+#: gnome-settings-daemon/modmap-dialog.glade.h:6
+msgid "_Loaded files:"
+msgstr "লোডকৃত ফাইল (_ফ):"
 
 #: gnome-settings-daemon/reaper.c:103
 msgid "Error creating signal pipe."
 msgstr "সিগনাল পাইপ তৈরি করতে সমস্যা।"
 
-#: libbackground/applier.c:256
+#: libbackground/applier.c:255
 msgid "Type"
 msgstr "ধরন"
 
-#: libbackground/applier.c:257
+#: libbackground/applier.c:256
 msgid ""
 "Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
 "for preview"
@@ -3011,29 +2784,34 @@ msgstr ""
 "পটভূমি_নির্ধারক এর ধরন: মূল উইন্ডোর জন্য BG_APPLIER_ROOT  অথবা প্রাকদর্শনের জন্য "
 "BG_APPLIER_PREVIEW"
 
-#: libbackground/applier.c:264
+#: libbackground/applier.c:263
 msgid "Preview Width"
 msgstr "প্রাকদর্শনে ব্যবহৃত দৈর্ঘ্য"
 
-#: libbackground/applier.c:265
+#: libbackground/applier.c:264
 msgid "Width if applier is a preview: Defaults to 64."
 msgstr "নির্ধারক যদি প্রাকদর্শনের জন্য হয় তবে দৈর্ঘ্য: ডিফল্ট মান হল ৬৪।"
 
-#: libbackground/applier.c:272
+#: libbackground/applier.c:271
 msgid "Preview Height"
 msgstr "প্রাকদর্শনে ব্যবহৃত উচ্চতা"
 
-#: libbackground/applier.c:273
+#: libbackground/applier.c:272
 msgid "Height if applier is a preview: Defaults to 48."
 msgstr "নির্ধারক যদি প্রাকদর্শনের জন্য হয় তবে উচ্চতা: ডিফল্ট মান হল ৪৮।"
 
-#: libbackground/applier.c:280
+#: libbackground/applier.c:279
 msgid "Screen"
 msgstr "পর্দা"
 
-#: libbackground/applier.c:281
+#: libbackground/applier.c:280
 msgid "Screen on which BGApplier is to draw"
-msgstr "BGApplier যে পর্দার ওপর আঁকবে"
+msgstr "BGApplier যে পর্দার উপর আঁকবে"
+
+#: libgswitchit/gswitchit_config.c:1035
+#, c-format
+msgid "There was an error loading an image: %s"
+msgstr "এই ছবিটি লোড করতে গিয়ে একটি সমস্যা হয়েছে: %s"
 
 #: libsounds/sound-view.c:122 libsounds/sound-view.c:147
 msgid "The sound file for this event does not exist."
@@ -3077,6 +2855,10 @@ msgstr "শব্দের ফাইলটি বেছে নিন"
 #: libsounds/sound-view.c:356
 msgid "_Play"
 msgstr "বাজাও (_জ)"
+
+#: libsounds/sound-view.c:366
+msgid "_Remove"
+msgstr "সরিয়ে ফেলো (_য়)"
 
 #: libwindow-settings/gnome-wm-manager.c:320
 #, c-format
@@ -3269,182 +3051,143 @@ msgid "Volume up's shortcut."
 msgstr "শব্দমাত্রা বৃদ্ধিকারী শর্টকাট।"
 
 #: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:1
-msgid "Display a dialog when there are errors running XScreenSaver"
-msgstr "এক্সস্ক্রিনসেভার চালাতে সমস্যা হলে একটি ডায়ালগ প্রদর্শন করো"
+msgid "Display a dialog when there are errors running the screensaver"
+msgstr "স্ক্রিনসেভার চালাতে সমস্যা হলে একটি ডায়ালগ প্রদর্শন করো"
 
 #: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:2
-msgid "Run XScreenSaver at login"
-msgstr "লগ-ইন-এর সময় এক্সস্ক্রিনসেভার চালাও"
+msgid "Run screensaver at login"
+msgstr "লগ-ইন-এর সময় স্ক্রিনসেভার চালাও"
 
 #: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:3
 msgid "Show Startup Errors"
 msgstr "চালু হওয়ার সময় যেসব সমস্যা হবে তা প্রদর্শন করো"
 
 #: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:4
-msgid "Start XScreenSaver"
-msgstr "এক্সস্ক্রিনসেভার চালু করো"
-
-#: schemas/desktop_gnome_font_rendering.schemas.in.h:1
-msgid "Antialiasing"
-msgstr "অ্যান্টিএলিয়াসিং"
-
-#: schemas/desktop_gnome_font_rendering.schemas.in.h:2
-msgid "DPI"
-msgstr "ডিপিআই"
-
-#: schemas/desktop_gnome_font_rendering.schemas.in.h:3
-msgid "Hinting"
-msgstr "হিন্টিং"
-
-#: schemas/desktop_gnome_font_rendering.schemas.in.h:4
-msgid "RGBA Order"
-msgstr "আরজিবিএ-এর ধারা"
-
-#: schemas/desktop_gnome_font_rendering.schemas.in.h:5
-msgid ""
-"Resolution used for converting font sizes to pixel sizes, in dots per inch"
-msgstr ""
-"ফন্টের আকারকে পিক্সেলের আকারে পরিবর্তনে ব্যবহৃত রেজলুশন (ইঞ্চি প্রতি ডট হিসেবে)"
-
-#: schemas/desktop_gnome_font_rendering.schemas.in.h:6
-msgid ""
-"The order of subpixel elements on an LCD screen; only used when antialiasing "
-"is set to \"rgba\". Possible values are: \"rgb\" - red on left, most common. "
-"\"bgr\" - blue on left. \"vrgb\" - red on top. \"vbgr\" - red on bottom."
-msgstr ""
-"এল.সি.ডি. পর্দায় সাবপিক্সেলের ধারা; অ্যান্টিএলিয়াসিঙের মান \"আর.জি.বি.এ.\" হলেই "
-"কেবল এটি ব্যবহৃত হয়। সম্ভাব্য মানগুলো হল: \"আর.জি.বি.\" - বামপার্শ্বে লাল, এটিই "
-"বহুলব্যবহৃত। \"বি.জি.আর.\" - বামপার্শ্বে নীল। \"ভি.আর.জি.বি.\" - উপরের দিকে লাল। "
-"\"ভি.বি.জি.আর.\" - নিচের দিকে লাল।"
-
-#: schemas/desktop_gnome_font_rendering.schemas.in.h:7
-msgid ""
-"The type of antialiasing to use when rendering fonts. Possible values are: "
-"\"none\" - no antialiasing. \"grayscale\" - standard grayscale antialiasing. "
-"\"rgba\" - subpixel antialiasing. (LCD screens only)."
-msgstr ""
-"ফন্ট ব্যবহারের সময় যে ধরনের অ্যান্টিএলিয়াসিং প্রযুক্ত হবে। সম্ভাব্য মানগুলো হল: \"বন্ধ"
-"\" - অ্যান্টিএলিয়াসিং ব্যবহৃত হবে না। \"গ্রেস্কেল\" - সাধারণ গ্রেস্কেল "
-"অ্যান্টিএলিয়াসিং ব্যবহৃত হবে। \"আর.জি.বি.এ.\" - সাবপিক্সেল অ্যান্টিএলিয়াসিং ব্যবহৃত "
-"হবে। (শুধুমাত্র এল.সি.ডি. পর্দার জন্য)।"
-
-#: schemas/desktop_gnome_font_rendering.schemas.in.h:8
-msgid ""
-"The type of hinting to use when rendering fonts. Possible values are: \"none"
-"\" - no hinting, \"slight\", \"medium\", and \"full\" - as much hinting as "
-"possible; may cause distortion of letter forms."
-msgstr ""
-"ফন্ট ব্যবহারের সময় যে ধরনের হিন্টিং প্রযুক্ত হবে। সম্ভাব্য মানগুলো হল: \"বন্ধ\" - "
-"হিন্টিং ব্যবহৃত হবে না, \"সামান্য\", \"মধ্যম\", এবং \"সম্পূর্ণ\" - সর্বোচ্চ হিন্টিং; "
-"এটি ব্যবহার করলে অক্ষরের চেহারায় বিকৃতি দেখা দেওয়ার সম্ভাবনা রয়েছে।"
+msgid "Start screensaver"
+msgstr "স্ক্রিনসেভার চালু করো"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:1
 msgid ""
 "A collection of scripts to run whenever the keyboard state is reloaded. "
 "Useful for re-applying xmodmap based adjustments"
 msgstr ""
+"কীবোর্ড কনফিগারেশন রিলোড করার পর চালানোর জন্য কিছু স্ক্রিপ্ট।  এরা xmodmap-ভিত্তিক "
+"পরিবর্তন পুনঃকার্যকর করতে সহায়ক"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
-msgid "Default group, assigned on window creation"
-msgstr ""
+msgid "A list of modmap files available in the $HOME directory."
+msgstr "$HOME ডিরেক্টরিতে অবস্থিত modmap ফাইলগুলোর একটি তালিকা।"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
-msgid "Keep and manage separate group per window"
-msgstr ""
+msgid "Default group, assigned on window creation"
+msgstr "ডিফল্ট গ্রুপ, উইন্ডো তৈরির সময় নির্দিষ্ট করা হয়"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
-#, fuzzy
-msgid "Keyboard Update Handlers"
-msgstr "কীবোর্ডের মডেল (_ম):"
+msgid "Keep and manage separate group per window"
+msgstr "উইন্ডো প্রতি পৃথক গ্রুপ বরাদ্দ ও রক্ষণাবেক্ষণ করো"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
-#, fuzzy
-msgid "Keyboard layout"
-msgstr "XKB কীবোর্ড বিন্যাস (Layout)"
+msgid "Keyboard Update Handlers"
+msgstr "কীবোর্ড আপডেট ব্যবস্থাপক"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:6
-#, fuzzy
-msgid "Keyboard model"
-msgstr "কীবোর্ডের মডেল (_ম):"
+msgid "Keyboard layout"
+msgstr "কীবোর্ড বিন্যাস (Layout)"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:7
-#, fuzzy
-msgid "Keyboard options"
-msgstr "কীবোর্ড শর্টকাট"
+msgid "Keyboard model"
+msgstr "কীবোর্ডের মডেল"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:8
-#, fuzzy
-msgid "Keyboard settings in gconf will be overridden from the system ASAP"
-msgstr ""
-"যত দ্রুত সম্ভব সিস্টেম থেকে gconf-এর XKB সংক্রান্ত বৈশিষ্ট্যাবলী অগ্রাহ্য (Override) "
-"করা হবে"
+msgid "Keyboard options"
+msgstr "কীবোর্ড সংক্রান্ত অপশন"
 
+# FIXME
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:9
-msgid "Save/restore indicators together with layout groups"
+msgid ""
+"Keyboard settings in gconf will be overridden from the system ASAP "
+"(deprecated)"
 msgstr ""
+"যত দ্রুত সম্ভব সিস্টেম থেকে gconf-এর কীবোর্ড সংক্রান্ত বৈশিষ্ট্যাবলী অগ্রাহ্য "
+"(Override) করা হবে (বর্জনীয়)"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:10
-msgid "Show layout names instead of group names"
-msgstr ""
+msgid "Save/restore indicators together with layout groups"
+msgstr "কীবোর্ড বিন্যাসের (Layout) সাথে নির্দেশকও (Indicator) সংরক্ষণ/পুনরুদ্ধার করো"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:11
+msgid "Show layout names instead of group names"
+msgstr "গ্রুপ নামের পরিবর্তে কীবোর্ড বিন্যাসের (Layout) নাম প্রদর্শন করো"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:12
 msgid ""
 "Show layout names instead of group names (only for versions of XFree "
 "supporting multiple layouts)"
 msgstr ""
+"গ্রুপ নামের পরিবর্তে কীবোর্ড বিন্যাসের (Layout) নাম প্রদর্শন করো (শুধুমাত্র একাধিক "
+"বিন্যাস সমর্থনকারী XFree-এর ক্ষেত্রে প্রযোজ্য)"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:12
-#, fuzzy
-msgid ""
-"Very soon, keyboard settings in gconf will be overridden (from the system "
-"configuration)"
-msgstr ""
-"অল্প কিছুক্ষণের মধ্যেই gconf-এর XKB সংক্রান্ত বৈশিষ্ট্যাবলী অগ্রাহ্য (Override) করা "
-"হবে (সিস্টেম কনফিগারেশন থেকে)"
-
+# FIXME
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:13
-#, fuzzy
-msgid "keyboard layout"
-msgstr "XKB কীবোর্ড বিন্যাস (Layout)"
+msgid "Suppress the \"X sysconfig changed\" warning message"
+msgstr "\"X sysconfig changed\" - এই সতর্কবাণীটি বন্ধ করো"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:14
-#, fuzzy
-msgid "keyboard model"
-msgstr "XKB কীবোর্ড মডেল"
+msgid ""
+"Very soon, keyboard settings in gconf will be overridden (from the system "
+"configuration) This key has been deprecated since GNOME 2.12, please unset "
+"the model, layouts and options keys to get the default system configuration."
+msgstr ""
+"অতি শীঘ্রই, gconf-এর কীবোর্ড সংক্রান্ত মানগুলোকে (সিস্টেম কমফিগারেশনের অনুকূলে) "
+"অগ্রাহ্য করা হবে।  গনোম ২.১২ থেকে এই কী-কে ব্যবহার না করার পরামর্শ দেওয়া হচ্ছে, "
+"ডিফল্ট সিস্টেম কনফিগারেশন ব্যবহারের জন্য অনুগ্রহপূর্বক gconf-এর মডেল, লেআউট ও অপশন "
+"কী নিষ্ক্রিয় করুন।"
 
-#: typing-break/drw-break-window.c:209
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:15
+msgid "keyboard layout"
+msgstr "কীবোর্ড বিন্যাস (Layout)"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:16
+msgid "keyboard model"
+msgstr "কীবোর্ড মডেল"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:17
+msgid "modmap file list"
+msgstr "modmap ফাইলের তালিকা"
+
+#: typing-break/drw-break-window.c:212
 msgid "_Postpone break"
 msgstr "না না - অনেক কাজ বাকি - এখন বিরতি নেওয়া যাবে না (_ব)"
 
-#: typing-break/drw-break-window.c:256
+#: typing-break/drw-break-window.c:259
 msgid "Take a break!"
 msgstr "অনেক কাজ করেছেন - এখন একটা বিরতি নিয়ে একটু জিরিয়ে নিন!"
 
 #. { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
-#: typing-break/drwright.c:136
+#: typing-break/drwright.c:141
 msgid "/_Preferences"
 msgstr "/পছন্দ (_প)"
 
-#: typing-break/drwright.c:137
+#: typing-break/drwright.c:142
 msgid "/_About"
 msgstr "/পরিচিতি (_চ)"
 
-#: typing-break/drwright.c:139
+#: typing-break/drwright.c:144
 msgid "/_Take a Break"
 msgstr "/বিরতি নিন (_ব)"
 
-#: typing-break/drwright.c:491
+#: typing-break/drwright.c:495
 #, c-format
 msgid "%d minute until the next break"
 msgid_plural "%d minutes until the next break"
 msgstr[0] "পরবর্তী বিরতি %d মিনিট পরে"
 msgstr[1] "পরবর্তী বিরতি %d মিনিট পরে"
 
-#: typing-break/drwright.c:495
+#: typing-break/drwright.c:499
 msgid "Less than one minute until the next break"
 msgstr "পরবর্তী বিরতি আর মিনিট খানেকের মধ্যেই"
 
-#: typing-break/drwright.c:583
+#: typing-break/drwright.c:587
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
@@ -3452,23 +3195,23 @@ msgid ""
 msgstr ""
 "নিম্নোক্ত সমস্যার কারণে টাইপিং বিরতির বৈশিষ্টাসূচক ডায়ালগটিকে চালানো গেল না: %s"
 
-#: typing-break/drwright.c:631
+#: typing-break/drwright.c:635
 msgid "About GNOME Typing Monitor"
 msgstr "গনোম টাইপিং মনিটর পরিচিতি"
 
-#: typing-break/drwright.c:655
+#: typing-break/drwright.c:659
 msgid "A computer break reminder."
 msgstr "বিরতি স্মরণ করিয়ে দেওয়ার একটি কম্পিউটার প্রোগ্রাম।"
 
-#: typing-break/drwright.c:656
+#: typing-break/drwright.c:660
 msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
 msgstr "এই প্রোগ্রামটি তৈরি করেছেন রিচার্ড হাল্ট &lt;richard@imendio.com&gt;"
 
-#: typing-break/drwright.c:657
+#: typing-break/drwright.c:661
 msgid "Eye candy added by Anders Carlsson"
 msgstr "অপ্রয়োজনীয় সব রংচং যোগ করেছেন এন্ডের্স কার্লসন"
 
-#: typing-break/drwright.c:832
+#: typing-break/drwright.c:837
 msgid "Break reminder"
 msgstr "বিরতি মনে করিয়ে দেওয়ার প্রোগ্রাম"
 
@@ -3480,46 +3223,47 @@ msgstr "টাইপিং মনিটর তো আগে থেকেই চ�
 msgid ""
 "The typing monitor uses the notification area to display information. You "
 "don't seem to have a notification area on your panel. You can add it by "
-"right-clicking on your panel and choose 'Add to panel -> Utilities -> "
-"Notification area'."
+"right-clicking on your panel and choosing 'Add to panel', selecting "
+"'Notification area' and clicking 'Add'."
 msgstr ""
-"তথ্য প্রদর্শনের জন্য টাইপিং মনিটরটি বিজ্ঞপ্তিস্থলকে ব্যবহার করে। মনে হচ্ছে আপনার "
-"প্যানেলে কোন বিজ্ঞপ্তিস্থল নেই। আপনি চাইলে প্যানেলে মাউসের ডান বাটন ক্লিক করে "
-"'প্যানেলে যোগ করো->ইউটিলিটি->বিজ্ঞপ্তিস্থল' থেকে সেটাকে যোগ করে নিতে পারেন।"
+"তথ্য প্রদর্শনের জন্য টাইপিং মনিটরটি বিজ্ঞপ্তিস্থলকে ব্যবহার করে।  মনে হচ্ছে আপনার "
+"প্যানেলে কোন বিজ্ঞপ্তিস্থল নেই।  এটি যোগ করতে চাইলে প্যানেলে মাউসের ডান বাটন ক্লিক "
+"করে 'প্যানেলে যোগ করো' বেছে নিয়ে 'বিজ্ঞপ্তিস্থল' নির্বাচন করুন ও তারপর 'যোগ' -এ "
+"ক্লিক করুন।"
 
-#: vfs-methods/fontilus/font-view.c:125
+#: vfs-methods/fontilus/font-view.c:115
 msgid "The quick brown fox jumps over the lazy dog. 0123456789"
-msgstr "আবার আসিব ফিরে ধানসিড়িটির তীরে - এই বাংলায়। ১২৩৪৫৬৭৮৯০"
+msgstr "আবার আসিব ফিরে ধানসিড়িটির তীরে - এই বাংলায়।  ১২৩৪৫৬৭৮৯০"
 
-#: vfs-methods/fontilus/font-view.c:285
+#: vfs-methods/fontilus/font-view.c:276
 msgid "Name:"
 msgstr "নাম:"
 
-#: vfs-methods/fontilus/font-view.c:288
+#: vfs-methods/fontilus/font-view.c:279
 msgid "Style:"
 msgstr "বর্গ:"
 
-#: vfs-methods/fontilus/font-view.c:297
+#: vfs-methods/fontilus/font-view.c:289
 msgid "Type:"
 msgstr "ধরন:"
 
-#: vfs-methods/fontilus/font-view.c:304
+#: vfs-methods/fontilus/font-view.c:295
 msgid "Size:"
 msgstr "আয়তন:"
 
-#: vfs-methods/fontilus/font-view.c:348 vfs-methods/fontilus/font-view.c:361
+#: vfs-methods/fontilus/font-view.c:339 vfs-methods/fontilus/font-view.c:352
 msgid "Version:"
 msgstr "সংস্করণ:"
 
-#: vfs-methods/fontilus/font-view.c:352 vfs-methods/fontilus/font-view.c:363
+#: vfs-methods/fontilus/font-view.c:343 vfs-methods/fontilus/font-view.c:354
 msgid "Copyright:"
 msgstr "সত্ত্বাধিকার:"
 
-#: vfs-methods/fontilus/font-view.c:356
+#: vfs-methods/fontilus/font-view.c:347
 msgid "Description:"
 msgstr "বর্ণনা:"
 
-#: vfs-methods/fontilus/font-view.c:417
+#: vfs-methods/fontilus/font-view.c:408
 #, c-format
 msgid "usage: %s fontfile\n"
 msgstr "ব্যবহারবিধি: %s ফন্টফাইল\n"
@@ -3529,9 +3273,8 @@ msgid "Set as Application Font"
 msgstr "অ্যাপলিকেশনে ব্যবহৃত ফন্ট"
 
 #: vfs-methods/fontilus/fontilus-context-menu.c:133
-#, fuzzy
 msgid "Sets the default application font"
-msgstr "যে অ্যাপলিকেশনটি ডিফল্ট হিসেবে ব্যবহার করতে চান তা বেছে নিন"
+msgstr "ডিফল্ট অ্যাপলিকেশন ফন্টের ব্যবহার নির্ধারণ করে"
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:1
 msgid "If set to true, then OpenType fonts will be thumbnailed."
@@ -3552,20 +3295,20 @@ msgstr "সত্য (true) হলে টাইপ-ওয়ান ফন্টক�
 #: vfs-methods/fontilus/fontilus.schemas.in.h:5
 msgid ""
 "Set this key to the command used to create thumbnails for OpenType fonts."
-msgstr "ওপেন টাইপ ফন্টের থাম্বনেইল তৈরির কমান্ড চালানোর জন্য এই কী-কে নির্ধারন করুন।"
+msgstr "ওপেন টাইপ ফন্টের থাম্বনেইল তৈরির কমান্ড চালানোর জন্য এই কী-কে নির্ধারণ করুন।"
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:6
 msgid "Set this key to the command used to create thumbnails for PCF fonts."
-msgstr "পিসিএফ ফন্টের থাম্বনেইল তৈরির কমান্ড চালানোর জন্য এই কী-কে নির্ধারন করুন।"
+msgstr "পি.সি.এফ. ফন্টের থাম্বনেইল তৈরির কমান্ড চালানোর জন্য এই কী-কে নির্ধারণ করুন।"
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:7
 msgid ""
 "Set this key to the command used to create thumbnails for TrueType fonts."
-msgstr "ট্রু টাইপ ফন্টের থাম্বনেইল তৈরির কমান্ড চালানোর জন্য এই কী-কে নির্ধারন করুন।"
+msgstr "ট্রু টাইপ ফন্টের থাম্বনেইল তৈরির কমান্ড চালানোর জন্য এই কী-কে নির্ধারণ করুন।"
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:8
 msgid "Set this key to the command used to create thumbnails for Type1 fonts."
-msgstr "টাইপ-ওয়ান ফন্টের থাম্বনেইল তৈরির কমান্ড চালানোর জন্য এই কী-কে নির্ধারন করুন।"
+msgstr "টাইপ-ওয়ান ফন্টের থাম্বনেইল তৈরির কমান্ড চালানোর জন্য এই কী-কে নির্ধারণ করুন।"
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:9
 msgid "Thumbnail command for OpenType fonts"
@@ -3573,7 +3316,7 @@ msgstr "ওপেন টাইপ ফন্টের থাম্বনেইল
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:10
 msgid "Thumbnail command for PCF fonts"
-msgstr "পিসিএফ ফন্টের থাম্বনেইল বানানোর কমান্ড"
+msgstr "পি.সি.এফ. ফন্টের থাম্বনেইল বানানোর কমান্ড"
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:11
 msgid "Thumbnail command for TrueType fonts"
@@ -3589,7 +3332,7 @@ msgstr "ওপেন টাইপ ফন্টের থাম্বনেইল
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:14
 msgid "Whether to thumbnail PCF fonts"
-msgstr "পিসিএফ ফন্টের থাম্বনেইল বানানো হবে কিনা"
+msgstr "পি.সি.এফ. ফন্টের থাম্বনেইল বানানো হবে কিনা"
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:15
 msgid "Whether to thumbnail TrueType fonts"
@@ -3600,13 +3343,8 @@ msgid "Whether to thumbnail Type1 fonts"
 msgstr "টাইপ-ওয়ান ফন্টের থাম্বনেইল বানানো হবে কিনা"
 
 #: vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:1
-#, fuzzy
 msgid "GNOME Font Viewer"
-msgstr "গনোম নিয়ন্ত্রণ কেন্দ্র"
-
-#: vfs-methods/themus/apply-font.glade.h:1
-msgid " "
-msgstr " "
+msgstr "গনোম ফন্ট প্রদর্শক"
 
 #: vfs-methods/themus/apply-font.glade.h:2
 msgid "<span weight=\"bold\" size=\"larger\">Apply new font?</span>"
@@ -3621,7 +3359,7 @@ msgid ""
 "The theme you have selected suggests a new font. A preview of the font is "
 "shown below."
 msgstr ""
-"আপনি যে থিম-টি পছন্দ করেছেন সেটি একটি নতুন ফন্টকে ব্যবহার করতে চায়। সেই ফন্টটির "
+"আপনি যে থিম-টি পছন্দ করেছেন সেটি একটি নতুন ফন্টকে ব্যবহার করতে চায়।  সেই ফন্টটির "
 "একটি প্রাকদর্শন নিচে দেখানো হচ্ছে।"
 
 #: vfs-methods/themus/apply-font.glade.h:5
@@ -3631,6 +3369,10 @@ msgstr "ফন্ট সক্রিয় করো (_স)"
 #: vfs-methods/themus/theme-method.c:520
 msgid "Themes"
 msgstr "থিম"
+
+#: vfs-methods/themus/themus-properties-view.c:126
+msgid "Description"
+msgstr "বর্ণনা"
 
 #: vfs-methods/themus/themus-properties-view.c:133
 msgid "Control theme"
@@ -3650,15 +3392,12 @@ msgid "ABCDEFG"
 msgstr "কখগঘঙচছজ"
 
 #: vfs-methods/themus/themus-theme-applier.desktop.in.in.h:1
-#, fuzzy
 msgid "Apply theme"
-msgstr "ফন্ট সক্রিয় করো (_স)"
+msgstr "থিম সক্রিয় করো"
 
-# FIXME
 #: vfs-methods/themus/themus-theme-applier.desktop.in.in.h:2
-#, fuzzy
 msgid "Sets the default theme"
-msgstr "ডিফল্ট-এ রিসেট করো"
+msgstr "ডিফল্ট থিম নির্ধারণ করে"
 
 #: vfs-methods/themus/themus.schemas.in.h:1
 msgid "If set to true, then installed themes will be thumbnailed."
@@ -3671,11 +3410,11 @@ msgstr "সত্য (true) হলে থিম-কে থাম্বনেই�
 #: vfs-methods/themus/themus.schemas.in.h:3
 msgid ""
 "Set this key to the command used to create thumbnails for installed themes."
-msgstr "ইনস্টলকৃত থিম-এর থাম্বনেইল তৈরির কমান্ড চালানোর জন্য এই কী-কে নির্ধারন করুন।"
+msgstr "ইনস্টলকৃত থিম-এর থাম্বনেইল তৈরির কমান্ড চালানোর জন্য এই কী-কে নির্ধারণ করুন।"
 
 #: vfs-methods/themus/themus.schemas.in.h:4
 msgid "Set this key to the command used to create thumbnails for themes."
-msgstr "থিম-এর থাম্বনেইল তৈরির কমান্ড চালানোর জন্য এই কী-কে নির্ধারন করুন।"
+msgstr "থিম-এর থাম্বনেইল তৈরির কমান্ড চালানোর জন্য এই কী-কে নির্ধারণ করুন।"
 
 #: vfs-methods/themus/themus.schemas.in.h:5
 msgid "Thumbnail command for installed themes"
@@ -3692,135 +3431,3 @@ msgstr "ইনস্টল করা থিম থাম্বনেইল ক�
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "থিম থাম্বনেইল করা হবে কিনা"
-
-#~ msgid "Keyboard layout preview"
-#~ msgstr "কীবোর্ড বিন্যাসের (Layout) প্রাকদর্শন"
-
-#~ msgid "FTP proxy port"
-#~ msgstr "এফ.টি.পি. প্রক্সি পোর্ট"
-
-#~ msgid "HTTP proxy port"
-#~ msgstr "এইচ.টি.টি.পি. প্রক্সি পোর্ট"
-
-#~ msgid "Secure HTTP proxy port"
-#~ msgstr "নিরাপদ এইচ.টি.টি.পি. প্রক্সি পোর্ট"
-
-#~ msgid "Socks host port"
-#~ msgstr "Socks হোস্ট পোর্ট"
-
-#~ msgid "Mozilla/Netscape 6"
-#~ msgstr "মোজিলা/নেটস্কেপ ৬"
-
-#~ msgid "Gnome Terminal"
-#~ msgstr "গনোম টার্মিনাল"
-
-#~ msgid "C_ustom Editor"
-#~ msgstr "স্বনির্বাচিত এডিটর (_ন)"
-
-#~ msgid "C_ustom Mail Reader:"
-#~ msgstr "স্বনির্বাচিত  মেইল পাঠক (_ন):"
-
-#~ msgid "C_ustom Terminal:"
-#~ msgstr "স্বনির্বাচিত টার্মিনাল (_ন):"
-
-#~ msgid "C_ustom Web Browser:"
-#~ msgstr "স্বনির্বাচিত ওয়েব ব্রাউজার (_ন):"
-
-#~ msgid "Start in T_erminal"
-#~ msgstr "টার্মিনালে চালাও (_ট)"
-
-#~ msgid "This application can open _URIs"
-#~ msgstr "এই অ্যাপলিকেশনটি ইউআরআই ব্যবহার করতে পারে (_ই)"
-
-#~ msgid "This application needs to be run in a _shell"
-#~ msgstr "এই অ্যাপলিকেশনটি শেল থেকে চালাতে হয় (_শ)"
-
-#~ msgid "_Select a Mail Reader:"
-#~ msgstr "একটি মেইল পাঠক বেছে নিন (_ব):"
-
-#~ msgid "_Select a Terminal:"
-#~ msgstr "একটি টার্মিনাল বেছে নিন (_ছ):"
-
-#~ msgid "_Select a Web Browser:"
-#~ msgstr "একটি ওয়েব  ব্রাউজার বেছে নিন (_চ):"
-
-#~ msgid "_Select an Editor:"
-#~ msgstr "একটি এডিটর বেছে নিন (_ত):"
-
-#~ msgid "Accessibility"
-#~ msgstr "সহায়ক প্রযুক্তি"
-
-#~ msgid "Accessibility Settings"
-#~ msgstr "সহায়ক প্রযুক্তির বৈশিষ্ট্যসমূহ"
-
-#~ msgid "Advanced"
-#~ msgstr "অগ্রসর"
-
-#~ msgid "Advanced Settings"
-#~ msgstr "অগ্রসর বৈশিষ্ট্যাবলী"
-
-#~ msgid "GNOME Control Center: %s"
-#~ msgstr "গনোম নিয়ন্ত্রণ কেন্দ্র: %s"
-
-#~ msgid "Layout to use for this view of the capplets"
-#~ msgstr "সিঅ্যাপলেটকে এভাবে দেখানোর জন্য যে বিন্যাস ব্যবহার করা হবে"
-
-#~ msgid "Capplet directory object"
-#~ msgstr "সিঅ্যাপলেট ডিরেক্টরি অবজেক্ট"
-
-#~ msgid "Capplet directory that this view is viewing"
-#~ msgstr "সিঅ্যাপলেট ডিরেক্টরির যে দৃশ্য এখন দেখা যাচ্ছে"
-
-#~ msgid "translator_credits"
-#~ msgstr "অঙ্কুর প্রকল্পের পক্ষে, প্রজ্ঞা [abulfazl@juniv.edu]"
-
-#~ msgid "Desktop properties manager."
-#~ msgstr "ডেস্কটপের বৈশিষ্ট্য নির্ধারণী ম্যানেজার।"
-
-#~ msgid "Gnome Control Center : %s"
-#~ msgstr "গনোম নিয়ন্ত্রণ কেন্দ্র: %s"
-
-#~ msgid "Gnome Control Center"
-#~ msgstr "গনোম নিয়ন্ত্রণ কেন্দ্র"
-
-#~ msgid "Use nautilus if it is running."
-#~ msgstr "এটি চলতে থাকলে নটিলাস ব্যবহার করো।"
-
-#~ msgid "About this application"
-#~ msgstr "অ্যাপলিকেশন পরিচিতি"
-
-#~ msgid "Overview of the control center"
-#~ msgstr "নিয়ন্ত্রণ কেন্দ্রের সংক্ষিপ্ত বিবরণ"
-
-#~ msgid "_Help"
-#~ msgstr "সহায়িকা (_স)"
-
-#~ msgid "Use shell even if nautilus is running."
-#~ msgstr "যদি নটিল্যাস চলতেও থাকে তবুও শেল ব্যবহার করো।"
-
-#~ msgid "XKB options"
-#~ msgstr "XKB অপশন"
-
-#~ msgid "Font context menu items"
-#~ msgstr "ফন্ট-কনটেক্সট-মেনুর জিনিষ"
-
-#~ msgid "Factory for the fontilus context menu"
-#~ msgstr "ফন্টিলস কনটেক্সট মেনুর ফ্যাক্টরি"
-
-#~ msgid "Fontilus context menu"
-#~ msgstr "ফন্টিলস কনটেক্সট মেনু"
-
-#~ msgid "Fontilus context menu factory"
-#~ msgstr "ফন্টিলস কনটেক্সট মেনু ফ্যাক্টরি"
-
-#~ msgid "Nautilus context menu entries for fonts"
-#~ msgstr "ফন্টের জন্য নটিলাস কনটেক্সট মেনু এনট্রি"
-
-#~ msgid "Theme Properties content view component"
-#~ msgstr "Theme Properties content view-এর কম্পোনেন্ট"
-
-#~ msgid "Themus Theme Properties view"
-#~ msgstr "থিমাস Theme Properties view"
-
-#~ msgid "URI currently displayed"
-#~ msgstr "বর্তমানে প্রদর্শিত ইউআরআই"
