@@ -708,7 +708,7 @@ populate_tree_model(GtkTreeModelSort* model, GtkTreeSelection* selection) {
 			
 			for (i = 0; sizes[i] != 0; i++) {
 				cursor = XcursorLibraryLoadImage("left_ptr", name, sizes[i]);
-				if (cursor->size != sizes[i]) {
+				if (cursor && cursor->size != sizes[i]) {
 					XcursorImageDestroy (cursor);
 					cursor = NULL;
 				}
