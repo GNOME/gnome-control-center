@@ -40,6 +40,7 @@ load_xcursor_theme (GConfClient *client)
 
   gnome_settings_daemon_spawn_with_input (add, add_string->str);
 
+  g_free (cursor_theme);
   g_string_free (add_string, TRUE);
 }
 
