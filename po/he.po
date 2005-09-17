@@ -14,14 +14,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-30 22:14+0000\n"
+"POT-Creation-Date: 2005-09-17 22:10+0200\n"
 "PO-Revision-Date: 2005-07-31 16:09+0300\n"
 "Last-Translator: Yuval Tanny <>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../capplets/about-me/eel-alert-dialog.c:114
 msgid "Image/label border"
@@ -68,22 +68,28 @@ msgstr "בחר תמונה"
 msgid "No Image"
 msgstr "בלי תמונה"
 
-#: ../capplets/about-me/gnome-about-me.c:721
+#: ../capplets/about-me/gnome-about-me.c:706
+msgid ""
+"There was an error while trying to get the addressbook information\n"
+"Evolution Data Server can't handle the protocol"
+msgstr ""
+
+#: ../capplets/about-me/gnome-about-me.c:727
 msgid "Unable to open address book"
 msgstr "לא ניתן לפתוח פנקס כתובות"
 
-#: ../capplets/about-me/gnome-about-me.c:733
+#: ../capplets/about-me/gnome-about-me.c:739
 msgid "Unknown login ID, the user database might be corrupted"
 msgstr ""
 
-#: ../capplets/about-me/gnome-about-me.c:764
-#: ../capplets/about-me/gnome-about-me.c:766
+#: ../capplets/about-me/gnome-about-me.c:770
+#: ../capplets/about-me/gnome-about-me.c:772
 #, c-format
 msgid "About %s"
 msgstr "אודות %s"
 
 #: ../capplets/about-me/gnome-about-me-password.c:101
-#: ../capplets/about-me/gnome-about-me-password.c:380
+#: ../capplets/about-me/gnome-about-me-password.c:479
 msgid "Old password is incorrect, please retype it"
 msgstr "סיסמה ישנה לא נכונה, אנא הקלד שנית"
 
@@ -104,16 +110,33 @@ msgstr ""
 msgid "Unexpected error has occurred"
 msgstr ""
 
-#: ../capplets/about-me/gnome-about-me-password.c:434
+#: ../capplets/about-me/gnome-about-me-password.c:315
+msgid "Password is too short"
+msgstr ""
+
+#: ../capplets/about-me/gnome-about-me-password.c:318
+#: ../capplets/about-me/gnome-about-me-password.c:321
+msgid "Password is too simple"
+msgstr ""
+
+#: ../capplets/about-me/gnome-about-me-password.c:324
+msgid "Old and new passwords are too similar"
+msgstr ""
+
+#: ../capplets/about-me/gnome-about-me-password.c:328
+msgid "Old and new password are the same"
+msgstr ""
+
+#: ../capplets/about-me/gnome-about-me-password.c:406
 msgid "Please type the passwords."
 msgstr "אנא הקלד את הסיסמאות."
 
-#: ../capplets/about-me/gnome-about-me-password.c:442
+#: ../capplets/about-me/gnome-about-me-password.c:414
 msgid "Please type the password again, it is wrong."
 msgstr "הסיסמה לא נכונה, אנא הקלד את הסיסמה שנית."
 
-#: ../capplets/about-me/gnome-about-me-password.c:445
-msgid "Click the Change Password button to change the password."
+#: ../capplets/about-me/gnome-about-me-password.c:417
+msgid "Click on Change Password to change the password."
 msgstr ""
 
 #: ../capplets/about-me/gnome-about-me.glade.h:1
@@ -268,8 +291,7 @@ msgstr "_פקס בעבודה:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:38
 msgid "Zip/_Postal code:"
-msgstr ""
-"‏מי_קוד:"
+msgstr "‏מי_קוד:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:39
 msgid "_Address:"
@@ -333,8 +355,7 @@ msgstr "_Yahoo:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:54
 msgid "_Zip/Postal code:"
-msgstr ""
-"מיקוד:"
+msgstr "מיקוד:"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:1
 msgid "<b>Applications</b>"
@@ -541,7 +562,8 @@ msgstr "ה_תעלם מלחיצות מקש כפולות תוך:"
 msgid ""
 "Ignore all subsequent presses of the SAME key if they happen within a user "
 "selectable period of time."
-msgstr "התעלם מכל הלחיצות הרצופות על אותו המקש, אם הן מתרחשות בפרק הזמן שבחר המשתמש."
+msgstr ""
+"התעלם מכל הלחיצות הרצופות על אותו המקש, אם הן מתרחשות בפרק הזמן שבחר המשתמש."
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:23
 msgid "Keyboard Accessibility Preferences (AccessX)"
@@ -631,9 +653,9 @@ msgstr "פיקסלים/שניה"
 
 #. set the timeout value  label with correct value of timeout
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
-#: ../capplets/mouse/gnome-mouse-properties.c:131
-#: ../capplets/mouse/gnome-mouse-properties.c:860
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:28
+#: ../capplets/mouse/gnome-mouse-properties.c:138
+#: ../capplets/mouse/gnome-mouse-properties.c:885
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
 #: ../capplets/windows/gnome-window-properties.glade.h:10
 msgid "seconds"
 msgstr "שניות"
@@ -670,50 +692,50 @@ msgstr "_הוסף טפט"
 msgid "_Style:"
 msgstr "_סגנון:"
 
-#: ../capplets/background/gnome-wp-capplet.c:72
+#: ../capplets/background/gnome-wp-capplet.c:74
 #: ../capplets/common/capplet-util.c:340
 #: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:333
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "ארעה שגיאה בהצגת העזרה: %s"
 
-#: ../capplets/background/gnome-wp-capplet.c:1037
-#: ../capplets/background/gnome-wp-capplet.c:1055
+#: ../capplets/background/gnome-wp-capplet.c:1042
+#: ../capplets/background/gnome-wp-capplet.c:1060
 msgid "Centered"
 msgstr "ממורכז"
 
-#: ../capplets/background/gnome-wp-capplet.c:1063
-#: ../capplets/background/gnome-wp-capplet.c:1080
+#: ../capplets/background/gnome-wp-capplet.c:1068
+#: ../capplets/background/gnome-wp-capplet.c:1085
 msgid "Fill Screen"
 msgstr "מלא מסך"
 
-#: ../capplets/background/gnome-wp-capplet.c:1088
-#: ../capplets/background/gnome-wp-capplet.c:1105
+#: ../capplets/background/gnome-wp-capplet.c:1093
+#: ../capplets/background/gnome-wp-capplet.c:1110
 msgid "Scaled"
 msgstr "פרוס"
 
-#: ../capplets/background/gnome-wp-capplet.c:1113
-#: ../capplets/background/gnome-wp-capplet.c:1130
+#: ../capplets/background/gnome-wp-capplet.c:1118
+#: ../capplets/background/gnome-wp-capplet.c:1135
 msgid "Tiled"
 msgstr "רצף"
 
-#: ../capplets/background/gnome-wp-capplet.c:1154
-#: ../capplets/background/gnome-wp-capplet.c:1163
+#: ../capplets/background/gnome-wp-capplet.c:1159
+#: ../capplets/background/gnome-wp-capplet.c:1168
 msgid "Solid Color"
 msgstr "צבע קבוע"
 
-#: ../capplets/background/gnome-wp-capplet.c:1171
-#: ../capplets/background/gnome-wp-capplet.c:1180
+#: ../capplets/background/gnome-wp-capplet.c:1176
+#: ../capplets/background/gnome-wp-capplet.c:1185
 msgid "Horizontal Gradient"
 msgstr "מדורג אופקית"
 
-#: ../capplets/background/gnome-wp-capplet.c:1188
-#: ../capplets/background/gnome-wp-capplet.c:1197
+#: ../capplets/background/gnome-wp-capplet.c:1193
+#: ../capplets/background/gnome-wp-capplet.c:1202
 msgid "Vertical Gradient"
 msgstr "מדורג אנכית"
 
 #. Create the file chooser dialog stuff here
-#: ../capplets/background/gnome-wp-capplet.c:1244
+#: ../capplets/background/gnome-wp-capplet.c:1251
 msgid "Add Wallpaper"
 msgstr "הוסף טפט"
 
@@ -724,7 +746,9 @@ msgstr "בלי טפט"
 #: ../capplets/background/gnome-wp-item.c:292
 #: ../capplets/background/gnome-wp-item.c:294
 msgid "pixel"
-msgstr ""
+msgid_plural "pixels"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../capplets/common/activate-settings-daemon.c:18
 msgid ""
@@ -751,7 +775,7 @@ msgstr "רק החל הגדרות וצא"
 #: ../capplets/common/capplet-util.c:243
 #: ../capplets/default-applications/gnome-default-applications-properties.c:765
 #: ../capplets/keyboard/gnome-keyboard-properties.c:225
-#: ../capplets/mouse/gnome-mouse-properties.c:996
+#: ../capplets/mouse/gnome-mouse-properties.c:1021
 #: ../capplets/sound/sound-properties-capplet.c:244
 msgid "Retrieve and store legacy settings"
 msgstr "קבל ושמור הגדרות מהזיכרון"
@@ -844,7 +868,8 @@ msgid "Change set"
 msgstr "שנה ערכה"
 
 #: ../capplets/common/gconf-property-editor.c:184
-msgid "GConf change set containing data to be forwarded to the gconf client on apply"
+msgid ""
+"GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr "מערך השינויים של GConf מכיל מידע שיועבר ללקוח gconf באישור"
 
 #: ../capplets/common/gconf-property-editor.c:189
@@ -852,7 +877,8 @@ msgid "Conversion to widget callback"
 msgstr "החזרת הקריאה של המרה לפריט"
 
 #: ../capplets/common/gconf-property-editor.c:190
-msgid "Callback to be issued when data are to be converted from GConf to the widget"
+msgid ""
+"Callback to be issued when data are to be converted from GConf to the widget"
 msgstr "החזרת הקריאה שתתבצע כאשר מידע מומר מ GConf לפריט"
 
 #: ../capplets/common/gconf-property-editor.c:195
@@ -860,7 +886,8 @@ msgid "Conversion from widget callback"
 msgstr "החזרת הקריאה של המרה מפריט"
 
 #: ../capplets/common/gconf-property-editor.c:196
-msgid "Callback to be issued when data are to be converted to GConf from the widget"
+msgid ""
+"Callback to be issued when data are to be converted to GConf from the widget"
 msgstr "החזרת הקריאה שתתבצע כאשר מידע מומר ל GConf מהפריט"
 
 #: ../capplets/common/gconf-property-editor.c:201
@@ -1213,9 +1240,13 @@ msgstr "אפשרויות"
 msgid ""
 "Testing the new settings. If you don't respond in %d second the previous "
 "settings will be restored."
+msgid_plural ""
 "Testing the new settings. If you don't respond in %d seconds the previous "
 "settings will be restored."
-msgstr "בודק את ההגדרות החדשות. אם אינך תגיב תוך %d שניות ההגדרות הקודמות יוחזרו."
+msgstr[0] ""
+"בודק את ההגדרות החדשות. אם אינך תגיב תוך %d שניות ההגדרות הקודמות יוחזרו."
+msgstr[1] ""
+"בודק את ההגדרות החדשות. אם אינך תגיב תוך %d שניות ההגדרות הקודמות יוחזרו."
 
 #: ../capplets/display/main.c:638
 #, fuzzy
@@ -1390,10 +1421,12 @@ msgid ""
 "The font selected is %d point large, and may make it difficult to "
 "effectively use the computer.  It is recommended that you select a size "
 "smaller than %d."
+msgid_plural ""
 "The font selected is %d points large, and may make it difficult to "
 "effectively use the computer. It is recommended that you select a size "
 "smaller than %d."
-msgstr ""
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../capplets/font/main.c:505
 #, c-format
@@ -1401,10 +1434,12 @@ msgid ""
 "The font selected is %d point large, and may make it difficult to "
 "effectively use the computer.  It is recommended that you select a smaller "
 "sized font."
+msgid_plural ""
 "The font selected is %d points large, and may make it difficult to "
 "effectively use the computer. It is recommended that you select a smaller "
 "sized font."
-msgstr ""
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:21
 #, fuzzy
@@ -1536,7 +1571,8 @@ msgstr "_נגישות"
 #: ../capplets/keyboard/gnome-keyboard-properties.c:223
 #: ../capplets/sound/sound-properties-capplet.c:240
 #: ../capplets/sound/sound-properties-capplet.c:242
-msgid "Just apply settings and quit (compatibility only; now handled by daemon)"
+msgid ""
+"Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr "רק החל הגדרות וצא (תאימות בלבד; עכשיו מנוהל על-ידי תהליך שירות)"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:227
@@ -1702,59 +1738,59 @@ msgstr "דקות"
 msgid "Set your keyboard preferences"
 msgstr "קבע את העדפות המקלדת שלך"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:549
+#: ../capplets/mouse/gnome-mouse-properties.c:559
 msgid "Unknown Cursor"
 msgstr "סמן לא ידוע"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:736
+#: ../capplets/mouse/gnome-mouse-properties.c:761
 msgid "Default Cursor"
 msgstr "סמן ברירת מחדל"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:737
+#: ../capplets/mouse/gnome-mouse-properties.c:762
 msgid "Default Cursor - Current"
 msgstr "סמן ברירת מחדל - נוכחי"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:738
+#: ../capplets/mouse/gnome-mouse-properties.c:763
 msgid "The default cursor that ships with X"
 msgstr "סמן ברירת המחדל המגיע עם X"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:742
+#: ../capplets/mouse/gnome-mouse-properties.c:767
 msgid "White Cursor"
 msgstr "סמן לבן"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:743
+#: ../capplets/mouse/gnome-mouse-properties.c:768
 msgid "White Cursor - Current"
 msgstr "סמן לבן - נוכחי"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:744
+#: ../capplets/mouse/gnome-mouse-properties.c:769
 msgid "The default cursor inverted"
 msgstr "סמן ברירת המחדל הפוך"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:748
+#: ../capplets/mouse/gnome-mouse-properties.c:773
 msgid "Large Cursor"
 msgstr "סמן גדול"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:749
+#: ../capplets/mouse/gnome-mouse-properties.c:774
 msgid "Large Cursor - Current"
 msgstr "סמן גדול - נוכחי"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:750
+#: ../capplets/mouse/gnome-mouse-properties.c:775
 msgid "Large version of normal cursor"
 msgstr "גירסה גדולה של הסמן הרגיל"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:754
+#: ../capplets/mouse/gnome-mouse-properties.c:779
 msgid "Large White Cursor - Current"
 msgstr "סמן גדול לבן - נוכחי"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:755
+#: ../capplets/mouse/gnome-mouse-properties.c:780
 msgid "Large White Cursor"
 msgstr "סמן גדול לבן"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:756
+#: ../capplets/mouse/gnome-mouse-properties.c:781
 msgid "Large version of white cursor"
 msgstr "גירסה גדולה של הסמן הלבן"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:950
+#: ../capplets/mouse/gnome-mouse-properties.c:975
 msgid "Cursor Theme"
 msgstr "ערכות נושא הסמן"
 
@@ -1779,91 +1815,82 @@ msgid "<b>Speed</b>"
 msgstr "<b>מהירות</b>"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:7
-#, fuzzy
-msgid ""
-"<i><small><b>Note:</b> Changes to this setting will not take effect until "
-"next time you log in.</small></i>"
-msgstr ""
-"<i><small><b>הערה:</b> השינויים לקביעות הללו לא יחולו עד לפעם הבאה שתתחבר.</"
-"small></i>"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid "<i>Fast</i>"
 msgstr "<i>מהיר</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:9
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid "<i>High</i>"
 msgstr "<i>גבוה</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:10
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:9
 msgid "<i>Large</i>"
 msgstr "<i>גדול</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:11
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:10
 msgid "<i>Low</i>"
 msgstr "<i>נמוך</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:12
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:11
 msgid "<i>Slow</i>"
 msgstr "<i>איטי</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:13
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:12
 msgid "<i>Small</i>"
 msgstr "<i>קטן</i>"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:14
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:13
 msgid "Buttons"
 msgstr "כפתורים"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:15
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:14
 msgid "Cursor Size:"
 msgstr "גודל הסמן:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:16
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:15
 msgid "Cursors"
 msgstr "סמנים"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:16
 msgid "Highlight the _pointer when you press Ctrl"
 msgstr "הדגש את ה_סמן כאשר תלחץ על Ctrl"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
 msgid "Large"
 msgstr "גדול"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
 msgid "Medium"
 msgstr "בינונית"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:20
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
 msgid "Motion"
 msgstr "תנועה"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:21
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:20
 msgid "Mouse Preferences"
 msgstr "העדפות עכבר"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:22
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:21
 msgid "Small"
 msgstr "קטן"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:23
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:22
 msgid "_Acceleration:"
 msgstr "_קיצור:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:24
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:23
 msgid "_Left-handed mouse"
 msgstr "עכבר ליד _שמאל"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:25
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:24
 msgid "_Sensitivity:"
 msgstr "_רגישות:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:26
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:25
 msgid "_Threshold:"
 msgstr "_סף:"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:26
 msgid "_Timeout:"
 msgstr "_פרק זמן:"
 
@@ -2118,7 +2145,8 @@ msgstr "ערכת נושא מותאמת אישית"
 
 #: ../capplets/theme-switcher/gnome-theme-manager.c:680
 msgid "You can save this theme by pressing the Save Theme button."
-msgstr "אתה יכול לשמור את ערכת הנושא הזו על-ידי לחיצה על הכפותר שמור ערכת נושא."
+msgstr ""
+"אתה יכול לשמור את ערכת הנושא הזו על-ידי לחיצה על הכפותר שמור ערכת נושא."
 
 #: ../capplets/theme-switcher/gnome-theme-manager.c:1476
 msgid ""
@@ -2511,7 +2539,7 @@ msgstr "האם ברצונך להשאיר רזולוצייה זו?"
 msgid "Do you want to deactivate Sticky Keys?"
 msgstr "האם ברצונך להשאיר רזולוצייה זו?"
 
-#: ../gnome-settings-daemon/gnome-settings-font.c:106
+#: ../gnome-settings-daemon/gnome-settings-font.c:107
 #, c-format
 msgid ""
 "Cannot create the directory \"%s\".\n"
@@ -2795,7 +2823,8 @@ msgid "Roll up"
 msgstr "גלול מעלה"
 
 #: ../schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:1
-msgid "If true, the mime handlers for text/plain and text/* will be kept in sync"
+msgid ""
+"If true, the mime handlers for text/plain and text/* will be kept in sync"
 msgstr "אם אמת, הליכי הטיפול של mime בעבור טקסט/פשוט וטקסט/* ישמרו בסנכרון"
 
 #: ../schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:2
@@ -3154,37 +3183,37 @@ msgstr ""
 msgid "The quick brown fox jumps over the lazy dog. 0123456789"
 msgstr "לך אל הנמלה עצל ראה דרכיה וחכם. 0123456789"
 
-#: ../vfs-methods/fontilus/font-view.c:275
+#: ../vfs-methods/fontilus/font-view.c:276
 msgid "Name:"
 msgstr "שם:"
 
-#: ../vfs-methods/fontilus/font-view.c:278
+#: ../vfs-methods/fontilus/font-view.c:279
 msgid "Style:"
 msgstr "סגנון:"
 
-#: ../vfs-methods/fontilus/font-view.c:287
+#: ../vfs-methods/fontilus/font-view.c:289
 msgid "Type:"
 msgstr "סוג:"
 
-#: ../vfs-methods/fontilus/font-view.c:294
+#: ../vfs-methods/fontilus/font-view.c:295
 msgid "Size:"
 msgstr "גודל:"
 
-#: ../vfs-methods/fontilus/font-view.c:338
-#: ../vfs-methods/fontilus/font-view.c:351
+#: ../vfs-methods/fontilus/font-view.c:339
+#: ../vfs-methods/fontilus/font-view.c:352
 msgid "Version:"
 msgstr "גירסה:"
 
-#: ../vfs-methods/fontilus/font-view.c:342
-#: ../vfs-methods/fontilus/font-view.c:353
+#: ../vfs-methods/fontilus/font-view.c:343
+#: ../vfs-methods/fontilus/font-view.c:354
 msgid "Copyright:"
 msgstr "זכויות יוצרים:"
 
-#: ../vfs-methods/fontilus/font-view.c:346
+#: ../vfs-methods/fontilus/font-view.c:347
 msgid "Description:"
 msgstr "תיאור:"
 
-#: ../vfs-methods/fontilus/font-view.c:407
+#: ../vfs-methods/fontilus/font-view.c:408
 #, c-format
 msgid "usage: %s fontfile\n"
 msgstr ""
@@ -3214,7 +3243,8 @@ msgid "If set to true, then Type1 fonts will be thumbnailed."
 msgstr "אם נקבע כאמת, אזי לגופני Type1 תיווצר תמונה ממוזערת."
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:5
-msgid "Set this key to the command used to create thumbnails for OpenType fonts."
+msgid ""
+"Set this key to the command used to create thumbnails for OpenType fonts."
 msgstr "קבע מפתח זה לפקודה המשמשת ליצירת תמונות ממוזערות לגופני OpenType."
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:6
@@ -3222,7 +3252,8 @@ msgid "Set this key to the command used to create thumbnails for PCF fonts."
 msgstr "קבע מפתח זה לפקודה המשמשת ליצירת תמונות ממוזערות לגופני PCF."
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:7
-msgid "Set this key to the command used to create thumbnails for TrueType fonts."
+msgid ""
+"Set this key to the command used to create thumbnails for TrueType fonts."
 msgstr "קבע מפתח זה לפקודה המשמשת ליצירת תמונות ממוזערות לגופני TrueType."
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:8
@@ -3326,7 +3357,8 @@ msgid "If set to true, then themes will be thumbnailed."
 msgstr "אם נקבע כאמת, אזי לערכות הנושא ייווצרו דוגמיות."
 
 #: ../vfs-methods/themus/themus.schemas.in.h:3
-msgid "Set this key to the command used to create thumbnails for installed themes."
+msgid ""
+"Set this key to the command used to create thumbnails for installed themes."
 msgstr "קבע מפתח זה לפקודה המשמשת ליצירת דוגמיות לערכות נושא מותקנות."
 
 #: ../vfs-methods/themus/themus.schemas.in.h:4
@@ -3348,4 +3380,3 @@ msgstr "האם ליצור דוגמיות לערכות נושא מותקנות"
 #: ../vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "האם ליצור דוגמיות לערכות נושא"
-
