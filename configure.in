@@ -159,7 +159,8 @@ PKG_CHECK_MODULES(XCURSOR, [
 	xcursor
 	],
 	have_xcursor=yes
-	AC_DEFINE(HAVE_XCURSOR, 1, Have the Xcursor extension))
+	AC_DEFINE(HAVE_XCURSOR, 1, Have the Xcursor extension),
+	have_xcursor=no)
 AM_CONDITIONAL(HAVE_XCURSOR, [test $have_xcursor=yes])
 
 CAPPLET_LIBS="$CAPPLET_LIBS $XCURSOR_LIBS"
