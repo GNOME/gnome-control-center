@@ -122,7 +122,16 @@ static void gnome_wp_xml_load_xml (GnomeWPCapplet * capplet,
       for (wpa = list->children; wpa != NULL; wpa = wpa->next) {
 	if (!strcmp (wpa->name, "filename")) {
 	  if (wpa->last != NULL && wpa->last->content != NULL) {
-	    wp->filename = g_strdup (g_strstrip (wpa->last->content));
+	    const char * none = "(none)";
+	    gchar *content = g_strstrip (wpa->last->content);
+
+	    if (!strncmp (content, none, strlen (none)))
+	      wp->filename = g_strdup (content);
+	    else if (g_utf8_validate (content, -1, NULL) &&
+		     g_file_test (content, G_FILE_TEST_EXISTS))
+	      wp->filename = g_strdup (content);
+	    else
+	      wp->filename = g_filename_from_utf8 (content, -1, NULL, NULL, NULL);
 	  } else {
 	    break;
 	  }
@@ -361,15 +370,25 @@ void gnome_wp_xml_save_list (GnomeWPCapplet * capplet) {
 
   for (wp = list; wp != NULL; wp = wp->next) {
     GnomeWPItem * wpitem = wp->data;
+    const char * none = "(none)";
+    gchar * filename;
+
+    if (!strncmp (wpitem->filename, none, strlen (none)) ||
+	(g_utf8_validate (wpitem->filename, -1, NULL) &&
+	 g_file_test (wpitem->filename, G_FILE_TEST_EXISTS)))
+      filename = g_strdup (wpitem->filename);
+    else
+      filename = g_filename_to_utf8 (wpitem->filename, -1, NULL, NULL, NULL);
 
     wallpaper = xmlNewChild (root, NULL, "wallpaper", NULL);
     gnome_wp_xml_set_bool (wallpaper, "deleted", wpitem->deleted);
     item = xmlNewTextChild (wallpaper, NULL, "name", wpitem->name);
-    item = xmlNewTextChild (wallpaper, NULL, "filename", wpitem->filename);
+    item = xmlNewTextChild (wallpaper, NULL, "filename", filename);
     item = xmlNewTextChild (wallpaper, NULL, "options", wpitem->options);
     item = xmlNewTextChild (wallpaper, NULL, "shade_type", wpitem->shade_type);
     item = xmlNewTextChild (wallpaper, NULL, "pcolor", wpitem->pri_color);
     item = xmlNewTextChild (wallpaper, NULL, "scolor", wpitem->sec_color);
+    g_free (filename);
   }
   xmlSaveFormatFile (wpfile, wplist, 1);
   xmlFreeDoc (wplist);

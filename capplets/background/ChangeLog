@@ -1,3 +1,25 @@
+2005-10-01  Rodney Dawes  <dobey@novell.com>
+
+	* gnome-wp-capplet.c (gnome_wp_add_image): Remove utf8 validate check
+	(gnome_wp_props_wp_set): If the filename we have for the image is not
+	valid utf8, convert it to utf8 before setting the key in gconf
+	(gnome_wp_load_stuffs, gnome_wp_file_changed): Make sure that the
+	filename is valid utf8 and the file exists with utf8 encoding, or fall
+	back to filename encoding as specified by the user with glib's
+	environment variables
+
+	* gnome-wpitem.c (gnome_wp_item_new): Make sure that the name field
+	is always utf8 for displaying to the user with the tree view
+
+	* gnome-wp-xml.c (gnome_wp_xml_load_xml): Make sure that the
+	filename is valid utf8 and the file exists with utf8 encoding, or fall
+	back to filename encoding as specified by the user with glib's
+	environment variables
+	(gnome_wp_xml_save_list): If the filename is not valid utf8, then
+	convert to utf8 for storing in the XML file
+
+	Fixes #168604
+
 2005-09-06  Rodney Dawes  <dobey@novell.com>
 
 	* gnome-wp-capplet.c (wallpaper_properties_init): Set the style

@@ -56,7 +56,11 @@ GnomeWPItem * gnome_wp_item_new (const gchar * filename,
   if (item->fileinfo != NULL &&
       !strncmp (item->fileinfo->mime_type, "image/", strlen ("image/"))) {
     if (item->name == NULL) {
-      item->name = g_strdup (item->fileinfo->name);
+      if (g_utf8_validate (item->fileinfo->name, -1, NULL))
+	item->name = g_strdup (item->fileinfo->name);
+      else
+	item->name = g_filename_to_utf8 (item->fileinfo->name, -1, NULL,
+					 NULL, NULL);
     }
     item->options = gconf_client_get_string (client, WP_OPTIONS_KEY, NULL);
 

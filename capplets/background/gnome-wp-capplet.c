@@ -95,9 +95,6 @@ static GnomeWPItem * gnome_wp_add_image (GnomeWPCapplet * capplet,
 					 const gchar * filename) {
   GnomeWPItem * item;
 
-  if (!g_utf8_validate (filename, -1, NULL))
-    return NULL;
-
   item = g_hash_table_lookup (capplet->wphash, filename);
   if (item != NULL) {
     if (item->deleted) {
@@ -291,7 +288,15 @@ static gboolean gnome_wp_props_wp_set (GnomeWPCapplet * capplet) {
     if (!strcmp (item->filename, "(none)")) {
       gconf_change_set_set_string (cs, WP_OPTIONS_KEY, "none");
     } else {
-      gconf_change_set_set_string (cs, WP_FILE_KEY, item->filename);
+      gchar * uri;
+
+      if (g_utf8_validate (item->filename, -1, NULL))
+	uri = g_strdup (item->filename);
+      else
+	uri = g_filename_to_utf8 (item->filename, -1, NULL, NULL, NULL);
+      gconf_change_set_set_string (cs, WP_FILE_KEY, uri);
+      g_free (uri);
+
       gconf_change_set_set_string (cs, WP_OPTIONS_KEY, item->options);
       gnome_wp_option_menu_set (capplet, item->options, FALSE);
     }
@@ -582,7 +587,7 @@ static void gnome_wp_remove_wallpaper (GtkWidget * widget,
 
 static gboolean gnome_wp_load_stuffs (void * data) {
   GnomeWPCapplet * capplet = (GnomeWPCapplet *) data;
-  gchar * imagepath, * style;
+  gchar * imagepath, * style, * uri;
   GnomeWPItem * item;
 
   style = gconf_client_get_string (capplet->client,
@@ -595,9 +600,15 @@ static gboolean gnome_wp_load_stuffs (void * data) {
 
   gdk_window_set_cursor (capplet->window->window, NULL);
   
-  imagepath = gconf_client_get_string (capplet->client,
-				       WP_FILE_KEY,
-				       NULL);
+  uri = gconf_client_get_string (capplet->client,
+				 WP_FILE_KEY,
+				 NULL);
+
+  if (g_utf8_validate (uri, -1, NULL) && g_file_test (uri, G_FILE_TEST_EXISTS))
+    imagepath = g_strdup (uri);
+  else
+    imagepath = g_filename_from_utf8 (uri, -1, NULL, NULL, NULL);
+  g_free (uri);
 
   item = g_hash_table_lookup (capplet->wphash, imagepath);
   if (item != NULL && strcmp (style, "none") != 0) {
@@ -680,8 +691,14 @@ static void gnome_wp_file_changed (GConfClient * client, guint id,
   GtkTreeIter iter;
   GnomeWPItem * item;
   gchar * wpfile, * selected;
+  const gchar * uri;
 
-  wpfile = g_strdup (gconf_value_get_string (entry->value));
+  uri = gconf_value_get_string (entry->value);
+  if (g_utf8_validate (uri, -1, NULL) && g_file_test (uri, G_FILE_TEST_EXISTS))
+    wpfile = g_strdup (uri);
+  else
+    wpfile = g_filename_from_utf8 (uri, -1, NULL, NULL, NULL);
+
   item = g_hash_table_lookup (capplet->wphash, wpfile);
 
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (capplet->treeview));
