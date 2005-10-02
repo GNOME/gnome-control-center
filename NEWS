@@ -1,3 +1,44 @@
+gnome-control-center 2.12.1
+
+background:
+- Make sure that the filename is valid utf8 and the file exists with utf8 
+  encoding, or fall back to filename encoding as specified by the user 
+  with glib's environment variables (Rodney Dawes) (168604)
+- Set the style property "action-area-border (Rodney Dawes) (313680)
+
+default-applications:
+- List evolution-2.4 binary (Jan de Groot) (#315871)
+
+gnome-settings-daemon:
+- Don't leak the cursor theme name (Kjartan Maraas) (#314692)
+
+mouse:
+- fix a crasher when the cursor theme has no icon (Sebastien Bacher) (#317749)
+- guard against invalid values from the GtkHScale widget (Rodrigo Moya)
+
+themus:
+- fix a typo with the StartupNotify option (Vincent Fretin) (#316159)
+
+other:
+- if the xcursor extension can't be found just build without xcursor support
+  (Brian Cameron) (#316875)
+  
+
+translations:
+Rostislav \"zbrox\" Raykov (bg)
+Progga (bn)
+Miloslav Trmac (cs)
+Francisco Javier F. Serrador (es)
+Ivar Smolin (et)
+Iñaki Larrañaga Murgoitio (eu)
+Christophe Merlet (RedFox) (fr)
+Ignacio Casal Quinteiro (gl)
+Erdal Ronahi (ku)
+Christian Rose (sv)
+Clytie Siddall (vi)
+Funda Wang (zh_CN)
+
+------------------------------------------------------------------------------
 gnome-control-center 2.12.0
 
 translations:
