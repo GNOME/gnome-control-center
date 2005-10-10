@@ -38,9 +38,11 @@
 #endif
 #ifdef HAVE_X11_EXTENSIONS_XKB_H
 #include <X11/XKBlib.h>
+#include <X11/keysym.h>
 #endif
 
 #include <string.h>
+#include <unistd.h>
 
 #ifdef HAVE_X11_EXTENSIONS_XF86MISC_H
 static gboolean
@@ -78,6 +80,164 @@ xkb_set_keyboard_autorepeat_rate (int delay, int rate)
 }
 #endif
 
+#define GSD_KEYBOARD_KEY "/desktop/gnome/peripherals/keyboard"
+
+static char *
+gsd_keyboard_get_hostname_key (const char *subkey)
+{
+#ifdef HOST_NAME_MAX
+	char hostname[HOST_NAME_MAX + 1];
+#else
+	char hostname[256];
+#endif
+  
+	if (gethostname (hostname, sizeof (hostname)) == 0 &&
+	    strcmp (hostname, "localhost") != 0 &&
+	    strcmp (hostname, "localhost.localdomain") != 0)
+	{
+		char *key = g_strconcat (GSD_KEYBOARD_KEY
+		                         "/host-",
+		                         hostname,
+		                         "/0/",
+		                         subkey,
+		                         (char *)NULL);
+		return key;
+	}
+	else
+		return NULL;
+}
+
+#ifdef HAVE_X11_EXTENSIONS_XKB_H
+
+enum {
+	NUMLOCK_STATE_OFF = 0,
+	NUMLOCK_STATE_ON = 1,
+	NUMLOCK_STATE_UNKNOWN = 2
+};
+
+/* something fatal has happened so that it makes no
+ * sense to try to remember anything.
+ * that means: no calls to the set_state functions!
+ */
+static gboolean
+numlock_setup_error = FALSE;
+
+/* we didn't apply GConf settings yet
+ * don't overwrite them with the initial state from
+ * the newly started session!
+ */
+static gboolean
+numlock_starting_up = TRUE;
+
+
+static unsigned
+numlock_NumLock_modifier_mask ()
+{
+	Display *dpy = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
+	return XkbKeysymToModifiers (dpy, XK_Num_Lock);
+}
+
+static void
+numlock_set_xkb_state (gboolean new_state)
+{
+	Display *dpy = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
+	if (new_state != NUMLOCK_STATE_ON && new_state != NUMLOCK_STATE_OFF)
+		return;
+	unsigned num_mask = numlock_NumLock_modifier_mask ();
+	XkbLockModifiers (dpy, XkbUseCoreKbd, num_mask, new_state ? num_mask : 0);
+}
+
+static char *
+numlock_gconf_state_key ()
+{
+	char *key = gsd_keyboard_get_hostname_key ("numlock_on");
+	if (!key)
+	{
+		numlock_setup_error = TRUE;
+		g_warning ("numlock: Numlock remembering disabled because your hostname is set to \"localhost\".");
+	}
+	return key;
+}
+
+static int
+numlock_get_gconf_state ()
+{
+	GConfClient *gcc;
+	GError *err = NULL;
+	char *key = numlock_gconf_state_key ();
+	if (!key) return NUMLOCK_STATE_UNKNOWN;
+	gcc = gconf_client_get_default ();
+	int curr_state = gconf_client_get_bool (gcc, key, &err);
+	if (err) curr_state = NUMLOCK_STATE_UNKNOWN;
+	g_clear_error (&err);
+	g_free (key);
+	g_object_unref (gcc);
+	return curr_state;
+}
+
+static void
+numlock_set_gconf_state (gboolean new_state)
+{
+	char *key;
+	GConfClient *gcc;
+	if (new_state != NUMLOCK_STATE_ON && new_state != NUMLOCK_STATE_OFF)
+		return;
+	key = numlock_gconf_state_key ();
+	if (!key) return;
+	gcc = gconf_client_get_default ();
+	gconf_client_set_bool (gcc, key, new_state, NULL);
+	g_free (key);
+	g_object_unref (gcc);
+}
+
+static GdkFilterReturn
+numlock_xkb_callback (GdkXEvent *xev_, GdkEvent *gdkev_, gpointer xkb_event_code)
+{
+	XEvent *xev = (XEvent *)xev_;
+	if (xev->type == GPOINTER_TO_INT (xkb_event_code)) {
+		XkbEvent *xkbev = (XkbEvent *)xev;
+		if (xkbev->any.xkb_type == XkbStateNotify)
+		if (xkbev->state.changed & XkbModifierLockMask) {
+			unsigned num_mask = numlock_NumLock_modifier_mask ();
+			unsigned locked_mods = xkbev->state.locked_mods;
+			int numlock_state = !! (num_mask & locked_mods);
+
+			if (!numlock_starting_up && !numlock_setup_error)
+				numlock_set_gconf_state (numlock_state);
+		}
+	}
+	return GDK_FILTER_CONTINUE;
+}
+
+static void
+numlock_install_xkb_callback ()
+{
+	Display *dpy = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
+	int op_code = 0, xkb_event_code = 0;
+	int error_code = 0, major = XkbMajorVersion, minor = XkbMinorVersion;
+	int have_xkb = XkbQueryExtension (dpy,
+	                                  &op_code, &xkb_event_code,
+	                                  &error_code, &major, &minor);
+	if (have_xkb != True)
+	{
+		numlock_setup_error = TRUE;
+		g_warning ("numlock: XkbQueryExtension returned an error");
+		return;
+	}
+
+	XkbSelectEventDetails (dpy,
+	                       XkbUseCoreKbd,
+	                       XkbStateNotifyMask,
+	                       XkbModifierLockMask,
+	                       XkbModifierLockMask);
+
+	gdk_window_add_filter (NULL,
+	                       numlock_xkb_callback,
+	                       GINT_TO_POINTER (xkb_event_code));
+}
+
+#endif /* HAVE_X11_EXTENSIONS_XKB_H */
+
 static void
 apply_settings (void)
 {
@@ -87,6 +247,9 @@ apply_settings (void)
 	int rate, delay;
 	int click_volume, bell_volume, bell_pitch, bell_duration;
 	char *volume_string;
+#ifdef HAVE_X11_EXTENSIONS_XKB_H
+	gboolean rnumlock;
+#endif /* HAVE_X11_EXTENSIONS_XKB_H */
 
 	XKeyboardControl kbdcontrol;
 
@@ -106,6 +269,10 @@ apply_settings (void)
 	volume_string = gconf_client_get_string (client, "/desktop/gnome/peripherals/keyboard/bell_mode", NULL);
 	bell_volume   = (volume_string && !strcmp (volume_string, "on")) ? 50 : 0;
 	g_free (volume_string);
+#ifdef HAVE_X11_EXTENSIONS_XKB_H
+	rnumlock      = gconf_client_get_bool  (client, GSD_KEYBOARD_KEY "/remember_numlock_state", NULL);
+#endif /* HAVE_X11_EXTENSIONS_XKB_H */
+
 	g_object_unref (client);
 
 	gdk_error_trap_push ();
@@ -140,6 +307,13 @@ apply_settings (void)
 				KBKeyClickPercent | KBBellPercent | KBBellPitch | KBBellDuration,				
 				&kbdcontrol);
 
+	
+#ifdef HAVE_X11_EXTENSIONS_XKB_H
+	if (!numlock_setup_error && rnumlock)
+		numlock_set_xkb_state (numlock_get_gconf_state ());
+	numlock_starting_up = FALSE;
+#endif /* HAVE_X11_EXTENSIONS_XKB_H */
+
 	XSync (GDK_DISPLAY (), FALSE);
 	gdk_error_trap_pop ();
 }
@@ -148,7 +322,10 @@ apply_settings (void)
 void
 gnome_settings_keyboard_init (GConfClient *client)
 {
-	gnome_settings_daemon_register_callback ("/desktop/gnome/peripherals/keyboard", (KeyCallbackFunc) apply_settings);
+	gnome_settings_daemon_register_callback (GSD_KEYBOARD_KEY, (KeyCallbackFunc) apply_settings);
+#ifdef HAVE_X11_EXTENSIONS_XKB_H
+	numlock_install_xkb_callback ();
+#endif /* HAVE_X11_EXTENSIONS_XKB_H */
 }
 
 void
