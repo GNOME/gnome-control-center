@@ -1130,6 +1130,9 @@ apply_font_clicked (GtkWidget *button,
       g_free (meta_theme_name);
 
       gconf_client_set_string (client, FONT_KEY, meta_theme_info->application_font, NULL);
+      gconf_client_set_string (client, DESKTOP_FONT_KEY, meta_theme_info->desktop_font, NULL);
+      gconf_client_set_string (client, MONOSPACE_FONT_KEY, meta_theme_info->monospace_font, NULL);
+
     }  
   g_object_unref (client);
 }

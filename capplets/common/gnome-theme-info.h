@@ -87,6 +87,8 @@ struct _GnomeThemeMetaInfo
   gchar *sound_theme_name;
 
   gchar *application_font;
+  gchar *desktop_font;
+  gchar *monospace_font;
   gchar *background_image;
 };
 
