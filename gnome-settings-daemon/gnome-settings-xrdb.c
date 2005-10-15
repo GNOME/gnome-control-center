@@ -321,8 +321,9 @@ apply_settings (GtkStyle *style)
 	return;
 }
 
-static void
-style_set_cb (GtkWidget *widget, GtkStyle *s, gpointer data)
+static void theme_changed (GtkSettings  *settings,
+                           GParamSpec   *pspec,
+			   GtkWidget    *widget)
 {
 	apply_settings (gtk_widget_get_style (widget));
 }
@@ -330,13 +331,25 @@ style_set_cb (GtkWidget *widget, GtkStyle *s, gpointer data)
 void
 gnome_settings_xrdb_init (GConfClient *client)
 {
-	widget = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-	g_signal_connect (widget, "style-set", (GCallback)style_set_cb, NULL);
-	gtk_widget_ensure_style (widget);
 }
 
 void
 gnome_settings_xrdb_load (GConfClient *client)
 {
-	style_set_cb (widget, NULL, NULL);
+	static gboolean initialized = FALSE;
+
+	if (!initialized) 
+	  { /* the initialization is done here otherwise 
+	       gnome_settings_xsettings_load would generate 
+	       false hit as gtk-theme-name is set to Default in 
+	       gnome_settings_xsettings_init */
+	    GtkSettings *settings = gtk_settings_get_default ();
+	    widget = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+	    g_signal_connect (settings,
+			      "notify::gtk-theme-name",
+			      G_CALLBACK (theme_changed),
+			      widget);
+	    gtk_widget_ensure_style (widget); 
+	    initialized = TRUE;
+	  }
 }

@@ -70,25 +70,21 @@ key_toggled_cb (GtkWidget *toggle, gpointer data)
 	g_object_unref (client);
 }
 
-void
-gnome_settings_screensaver_load (GConfClient *client)
+static gboolean
+really_start_screensaver (gpointer user_data)
 {
 	GError *gerr = NULL;
-	gboolean start_screensaver, use_gscreensaver = FALSE;
+	gboolean use_gscreensaver = FALSE;
 	gboolean show_error;
 	GtkWidget *dialog, *toggle;
 	gchar *ss_command;
- 
-	start_screensaver = gconf_client_get_bool (client, START_SCREENSAVER_KEY, NULL);
-
-	if (!start_screensaver)
-		return;
+	GConfClient *client;
 
 	if ((ss_command = g_find_program_in_path ("gnome-screensaver")))
 		use_gscreensaver = TRUE;
 	else {
 		if (!(ss_command = g_find_program_in_path ("xscreensaver")))
-			return;
+			return FALSE;
 	}
 
 	g_free (ss_command);
@@ -98,12 +94,14 @@ gnome_settings_screensaver_load (GConfClient *client)
 		ss_command = XSCREENSAVER_COMMAND;
 
 	if (g_spawn_command_line_async (ss_command, &gerr))
-		return;
+		return FALSE;
 	
+	client = gconf_client_get_default ();
 	show_error = gconf_client_get_bool (client, SHOW_STARTUP_ERRORS_KEY, NULL);
+	g_object_unref (client);
 	if (!show_error) {
 		g_error_free (gerr);
-		return;
+		return FALSE;
 	}
 
 	dialog = gtk_message_dialog_new (NULL,
@@ -137,5 +135,20 @@ gnome_settings_screensaver_load (GConfClient *client)
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);		
 
 	gtk_widget_show (dialog);
+
+	return FALSE;
+}
+
+void
+gnome_settings_screensaver_load (GConfClient *client)
+{
+	gboolean start_screensaver;
+ 
+	start_screensaver = gconf_client_get_bool (client, START_SCREENSAVER_KEY, NULL);
+
+	if (!start_screensaver)
+		return;
+
+	g_timeout_add (25000, (GSourceFunc) really_start_screensaver, NULL);
 }
 

@@ -1,3 +1,27 @@
+2005-10-14  Rodrigo Moya <rodrigo@novell.com>
+
+	* gnome-settings-daemon.c (child_watch_cb): added this function to
+	watch for children...
+	(gnome_settings_daemon_spawn_with_input): ...started here, instead
+	of just blocking.
+
+	* gnome-settings-screensaver.c (gnome_settings_screensaver_load): do
+	lazy loading of the screensaver.
+	(really_start_screensaver): start on a 25 seconds timeout.
+
+	* gnome-settings-typing-break.c (gnome_settings_typing_break_load): do
+	lazy loading og the typing break applet.
+	(really_setup_typing_break): start on a 30 seconds timeout.
+
+2005-10-14  Erwann Chenede <erwann.chenede@sun.com>
+
+	Fixes #314774
+
+	* gnome-settings-xrdb.c (gnome_settings_xrdb_load): connect to
+	"notify:gtk-theme-name" signal, to run xrdb only when the whole theme
+	has been changed.
+	(theme_changed): callback for "notify:gtk-theme-name".
+
 2005-10-10  Jürg Billeter  <j@bitron.ch>
 
 	reviewed by: Sergey V. Udaltsov  <svu@gnome.org>
