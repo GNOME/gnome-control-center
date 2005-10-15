@@ -32,6 +32,7 @@
 #include <string.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
+#include <libgnome/gnome-desktop-item.h>
 
 #define GMENU_I_KNOW_THIS_IS_UNSTABLE
 #include <gmenu-tree.h>
@@ -90,7 +91,33 @@ control_center_entry_new (ControlCenterCategory *category,
 			  GMenuTreeEntry        *menu_entry)
 {
 	ControlCenterEntry *retval;
+	const char *desktop_entry;
 
+	/* only add entries that exist */
+	desktop_entry = gmenu_tree_entry_get_desktop_file_path (menu_entry);
+	if (desktop_entry) {
+		GnomeDesktopItem *item;
+		const char *exec;
+		char *path;
+
+		item = gnome_desktop_item_new_from_file (desktop_entry,
+							 GNOME_DESKTOP_ITEM_LOAD_ONLY_IF_EXISTS,
+							 NULL);
+		if (!item)
+			return NULL;
+
+		/* discard xscreensaver if gnome-screensaver is installed */
+		exec = gnome_desktop_item_get_string (item, GNOME_DESKTOP_ITEM_EXEC);
+		if ((exec && !strcmp (exec, "xscreensaver-demo")) && (path = g_find_program_in_path ("gnome-screensaver-preferences"))) {
+			gnome_desktop_item_unref (item);
+			g_free (path);
+			return NULL;
+		}
+
+		gnome_desktop_item_unref (item);
+	}
+
+	/* create the new entry */
 	retval = g_new0 (ControlCenterEntry, 1);
 
 	retval->category      = category;
@@ -137,10 +164,13 @@ populate_category (ControlCenterCategory *category,
 	for (l = items; l; l = l->next) {
 		GMenuTreeItem *item = l->data;
 
-		if (gmenu_tree_item_get_type (item) == GMENU_TREE_ITEM_ENTRY)
-			entries = g_slist_append (entries,
-						  control_center_entry_new (category,
-									    GMENU_TREE_ENTRY (item)));
+		if (gmenu_tree_item_get_type (item) == GMENU_TREE_ITEM_ENTRY) {
+			ControlCenterEntry *entry;
+
+			entry = control_center_entry_new (category, GMENU_TREE_ENTRY (item));
+			if (entry)
+				entries = g_slist_append (entries, entry);
+		}
 
 		gmenu_tree_item_unref (item);
 	}

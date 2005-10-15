@@ -1,3 +1,11 @@
+2005-10-15  Rodrigo Moya <rodrigo@novell.com>
+
+	Fixes #315505
+
+	* control-center-categories.c (control_center_entry_new): don't show
+	xscreensaver capplet icon if gnome-screensaver is installed.
+	(populate_category): don't add NULL entries to the list.
+
 2005-06-06  Carlos Garnacho Parro  <carlosg@gnome.org>
 
 	* gnomecc-canvas.c: added a11y support
