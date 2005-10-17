@@ -178,7 +178,7 @@ bindings_get_entry (char *subdir)
   char *gconf_key;
   char *action = NULL;
   char *key = NULL;
-  GConfClient *client = gconf_client_get_default();
+  GConfClient *client = gnome_settings_daemon_get_conf_client ();
   
   g_return_val_if_fail (subdir != NULL, FALSE);
   
@@ -190,7 +190,6 @@ bindings_get_entry (char *subdir)
 
   /* Get entries for this binding */
   list = gconf_client_all_entries (client, subdir, NULL);
-  g_object_unref (client);
 
   for (li = list; li != NULL; li = li->next)
     {

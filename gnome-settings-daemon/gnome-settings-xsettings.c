@@ -255,10 +255,9 @@ xft_callback (GConfEntry *entry)
   GConfClient *client;
   int i;
 
-  client = gconf_client_get_default ();
+  client = gnome_settings_daemon_get_conf_client ();
 
   gnome_settings_update_xft (client);
-  g_object_unref (client);
 
   for (i = 0; managers [i]; i++)  
     xsettings_manager_notify (managers [i]);

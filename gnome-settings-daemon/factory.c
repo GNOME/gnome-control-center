@@ -13,6 +13,7 @@
 #include <libgnomeui/gnome-client.h>
 
 static BonoboObject *services_server = NULL;
+GConfClient *conf_client = NULL;
 
 int main (int argc, char *argv [])
 {
@@ -56,6 +57,10 @@ int main (int argc, char *argv [])
 		    G_CALLBACK (gtk_main_quit), NULL);
 
   gtk_main();
+
+  /* cleanup */
+  if (conf_client)
+	  g_object_unref (conf_client);
 
   return -1;
 }

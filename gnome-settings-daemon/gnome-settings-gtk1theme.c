@@ -146,7 +146,7 @@ check_filename (char       *base_dir,
 static void
 apply_settings (void)
 {
-	GConfClient *client = gconf_client_get_default ();
+	GConfClient *client = gnome_settings_daemon_get_conf_client ();
 	gchar *current_theme;
 	gchar *theme_filename;
 	gchar *rc_filename;
@@ -202,8 +202,7 @@ apply_settings (void)
 		if (write_contents (rc_filename, new_contents))
 			send_change_message ();
 	}
-		
-	g_object_unref (client);
+
 	g_free (new_contents);
 	g_free (current_contents);
 	g_free (rc_filename);

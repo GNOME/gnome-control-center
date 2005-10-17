@@ -24,6 +24,7 @@
 
 #include <config.h>
 
+#include "gnome-settings-daemon.h"
 #include "gnome-settings-screensaver.h"
 
 #include <glib/gi18n.h>
@@ -61,13 +62,12 @@ key_toggled_cb (GtkWidget *toggle, gpointer data)
 {
 	GConfClient *client;
 
-	client = gconf_client_get_default ();
+	client = gnome_settings_daemon_get_conf_client ();
 	gconf_client_set_bool (client, 
 			       SHOW_STARTUP_ERRORS_KEY,
 			       gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (toggle))
 			       ? 0 : 1,
 			       NULL);
-	g_object_unref (client);
 }
 
 static gboolean
@@ -96,9 +96,8 @@ really_start_screensaver (gpointer user_data)
 	if (g_spawn_command_line_async (ss_command, &gerr))
 		return FALSE;
 	
-	client = gconf_client_get_default ();
+	client = gnome_settings_daemon_get_conf_client ();
 	show_error = gconf_client_get_bool (client, SHOW_STARTUP_ERRORS_KEY, NULL);
-	g_object_unref (client);
 	if (!show_error) {
 		g_error_free (gerr);
 		return FALSE;

@@ -334,7 +334,7 @@ gnome_settings_daemon_new (void)
   /* We use GConfClient not GConfClient because a cache isn't useful
    * for us
    */
-  client = gconf_client_get_default ();
+  client = gnome_settings_daemon_get_conf_client ();
 
 /*  gnome_settings_disk_init (client);*/
   gnome_settings_font_init (client);
@@ -409,8 +409,6 @@ gnome_settings_daemon_new (void)
   gnome_settings_gtk1_theme_load (client);
   gnome_settings_xrdb_load (client);
   gnome_settings_typing_break_load (client);
-
-  g_object_unref (client);
 
   return G_OBJECT (daemon);
 }
@@ -535,4 +533,15 @@ gnome_settings_daemon_spawn_with_input (char       **argv,
     }
   
   g_child_watch_add (child_pid, (GChildWatchFunc) child_watch_cb, command);
+}
+
+extern GConfClient *conf_client;
+
+GConfClient *
+gnome_settings_daemon_get_conf_client (void)
+{
+	if (!conf_client)
+		conf_client = gconf_client_get_default ();
+
+	return conf_client;
 }

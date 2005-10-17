@@ -1,6 +1,6 @@
 /* gnome-settings-xmodmap.c
  *
- * Copyright Â© 2005 Novell Inc.
+ * Copyright ÃÂ© 2005 Novell Inc.
  *
  * Written by Shakti Sen <shprasad@novell.com>
  *
@@ -22,6 +22,7 @@
 
 #include <config.h>
 
+#include "gnome-settings-daemon.h"
 #include "gnome-settings-xmodmap.h"
 
 #include <string.h>
@@ -43,7 +44,8 @@ static void
 check_button_callback (GtkWidget *chk_button,
 		       gpointer data)
 {
-	GConfClient *confClient = gconf_client_get_default ();
+	GConfClient *confClient = gnome_settings_daemon_get_conf_client ();
+
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (chk_button))) {
 		gconf_client_set_bool (confClient, DISABLE_XMM_WARNING_KEY, TRUE,
 				       NULL);
@@ -52,13 +54,12 @@ check_button_callback (GtkWidget *chk_button,
 		gconf_client_set_bool (confClient, DISABLE_XMM_WARNING_KEY, FALSE,
 				       NULL);
 	}
-	g_object_unref (confClient);
 }
 
 void
 gnome_settings_load_modmap_files ()
 {
-	GConfClient *confClient = gconf_client_get_default ();
+	GConfClient *confClient = gnome_settings_daemon_get_conf_client ();
 	GSList *tmp = NULL;
 	GSList *loaded_file_list = gconf_client_get_list (confClient, LOADED_FILES_KEY, GCONF_VALUE_STRING, NULL);
 	tmp = loaded_file_list;
@@ -69,7 +70,6 @@ gnome_settings_load_modmap_files ()
 		tmp = tmp->next;
 		g_free (command);
 	}
-	g_object_unref (confClient);
 }
 
 static void
@@ -129,7 +129,7 @@ remove_string_from_list (GSList     *list,
 
 static void
 remove_button_clicked_callback (GtkWidget *button,
-                             void      *data)
+				void      *data)
 {
 	GladeXML *xml;
 	GtkWidget *dialog;
@@ -155,7 +155,7 @@ remove_button_clicked_callback (GtkWidget *button,
                 return;
 
 	/* Remove the selected file */
-	confClient = gconf_client_get_default ();
+	confClient = gnome_settings_daemon_get_conf_client ();
 	loaded_files = gconf_client_get_list (confClient, LOADED_FILES_KEY, GCONF_VALUE_STRING, NULL);
 	loaded_files = remove_string_from_list (loaded_files, (char *)filenames->data);
 
@@ -177,8 +177,6 @@ remove_button_clicked_callback (GtkWidget *button,
 
 	g_slist_foreach (loaded_files, (GFunc) g_free, NULL);
         g_slist_free (loaded_files);
-
-        g_object_unref (G_OBJECT (confClient));
 }
 
 static void
@@ -208,7 +206,7 @@ load_button_clicked_callback (GtkWidget *button,
 
 	/* Add the files to left-tree-view */
 
-	confClient = gconf_client_get_default ();
+	confClient = gnome_settings_daemon_get_conf_client ();
 	loaded_files = gconf_client_get_list (confClient, LOADED_FILES_KEY, GCONF_VALUE_STRING, NULL);
 	tmp = loaded_files;
 	while (tmp != NULL) {
@@ -238,8 +236,6 @@ load_button_clicked_callback (GtkWidget *button,
  	}
 	g_slist_foreach (loaded_files, (GFunc) g_free, NULL);
         g_slist_free (loaded_files);
-
-        g_object_unref (G_OBJECT (confClient));
 }
  
 void
@@ -263,7 +259,7 @@ gnome_settings_modmap_dialog_call (void)
 	GDir *homeDir;
 	GSList *loaded_files = NULL;
 	G_CONST_RETURN gchar *fname;
-	GConfClient *confClient = gconf_client_get_default ();
+	GConfClient *confClient = gnome_settings_daemon_get_conf_client ();
 	homeDir = g_dir_open (g_get_home_dir (), 0, NULL);
 	if (homeDir == NULL)
 		return;
@@ -341,7 +337,6 @@ gnome_settings_modmap_dialog_call (void)
 	gtk_tree_view_column_set_sort_column_id (column, 0);
 
 	loaded_files = gconf_client_get_list (confClient, LOADED_FILES_KEY, GCONF_VALUE_STRING, NULL);
-	g_object_unref (confClient);
 
 	/* Add the data */
 	tmp = loaded_files;

@@ -166,12 +166,11 @@ numlock_get_gconf_state ()
 	GError *err = NULL;
 	char *key = numlock_gconf_state_key ();
 	if (!key) return NUMLOCK_STATE_UNKNOWN;
-	gcc = gconf_client_get_default ();
+	gcc = gnome_settings_daemon_get_conf_client ();
 	int curr_state = gconf_client_get_bool (gcc, key, &err);
 	if (err) curr_state = NUMLOCK_STATE_UNKNOWN;
 	g_clear_error (&err);
 	g_free (key);
-	g_object_unref (gcc);
 	return curr_state;
 }
 
@@ -184,10 +183,9 @@ numlock_set_gconf_state (gboolean new_state)
 		return;
 	key = numlock_gconf_state_key ();
 	if (!key) return;
-	gcc = gconf_client_get_default ();
+	gcc = gnome_settings_daemon_get_conf_client ();
 	gconf_client_set_bool (gcc, key, new_state, NULL);
 	g_free (key);
-	g_object_unref (gcc);
 }
 
 static GdkFilterReturn
@@ -253,7 +251,7 @@ apply_settings (void)
 
 	XKeyboardControl kbdcontrol;
 
-	client = gconf_client_get_default ();
+	client = gnome_settings_daemon_get_conf_client ();
 
 	repeat        = gconf_client_get_bool  (client, "/desktop/gnome/peripherals/keyboard/repeat",        NULL);
 	click         = gconf_client_get_bool  (client, "/desktop/gnome/peripherals/keyboard/click",         NULL);
@@ -272,8 +270,6 @@ apply_settings (void)
 #ifdef HAVE_X11_EXTENSIONS_XKB_H
 	rnumlock      = gconf_client_get_bool  (client, GSD_KEYBOARD_KEY "/remember_numlock_state", NULL);
 #endif /* HAVE_X11_EXTENSIONS_XKB_H */
-
-	g_object_unref (client);
 
 	gdk_error_trap_push ();
         if (repeat) {

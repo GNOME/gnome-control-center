@@ -1,3 +1,34 @@
+2005-10-16  Rodrigo Moya <rodrigo@novell.com>
+
+	* factory.c: declare a global GConfClient.
+	(main): unref the global GConfClient.
+
+	* gnome-settings-daemon.[ch] (gnome_settings_daemon_get_conf_client):
+	new function to use the same GConfClient everywhere.
+	(gnome_settings_daemon_new): use the global GConfClient.
+
+	* gnome-settings-accessibility-keyboard.c (set_server_from_gconf,
+	ax_response_callback, set_gconf_from_server):
+	* gnome-settings-gtk1theme.c (apply_settings):
+	* gnome-settings-keybindings.c (bindings_get_entry):
+	* gnome-settings-keyboard.c (numlock_get_gconf_state,
+	numlock_set_gconf_state, apply_settings):
+	* gnome-settings-keyboard-xkb.c (apply_xkb_settings,
+	gnome_settings_keyboard_xkb_sysconfig_changed_response,
+	gnome_settings_keyboard_xkb_analyze_sysconfig,
+	gnome_settings_chk_file_list):
+	* gnome-settings-screensaver.c (key_toggled_cb,
+	really_start_screensaver):
+	* gnome-settings-sound.c (apply_settings):
+	* gnome-settings-xmodmap.c (check_button_callback,
+	gnome_settings_load_modmap_files, remove_button_clicked_callback,
+	load_button_clicked_callback, gnome_settings_modmap_dialog_call):
+	* gnome-settings-xsettings.c (xft_callback):
+	use the global GConfClient.
+
+	* gnome-settings-keyboard-xkb.c (gnome_settings_keyboard_xkb_load):
+	don't get another GConfClient when we're getting one passed!
+
 2005-10-14  Rodrigo Moya <rodrigo@novell.com>
 
 	* gnome-settings-daemon.c (child_watch_cb): added this function to
