@@ -50,13 +50,18 @@ create_window (void)
 	g_signal_connect (G_OBJECT (canvas), "selection-changed",
 			  G_CALLBACK (change_status), appbar);
 
-	sw = gtk_scrolled_window_new (NULL, NULL);
+	sw = gtk_scrolled_window_new (GTK_ADJUSTMENT (gtk_adjustment_new (0, 0, 100, 10, 100, 100)),
+				      GTK_ADJUSTMENT (gtk_adjustment_new (0, 0, 100, 10, 100, 100)));
+
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 	gtk_container_add (GTK_CONTAINER (sw), canvas);
 
 	gnome_app_set_contents (GNOME_APP (window), sw);
 
 	gtk_widget_show_all (window);
+
+	gtk_scrolled_window_set_vadjustment (GTK_SCROLLED_WINDOW (sw),
+					     GTK_ADJUSTMENT (gtk_adjustment_new (0, 0, 100, 10, 100, 100)));
 
 	g_object_weak_ref (G_OBJECT (window), (GWeakNotify) gnome_cc_die, NULL);
 
