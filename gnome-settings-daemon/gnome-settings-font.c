@@ -20,7 +20,7 @@ load_xcursor_theme (GConfClient *client)
 {
   gchar *cursor_theme;
   gint size;
-  char *add[] = { "xrdb", "-merge", NULL };
+  char *add[] = { "xrdb", "-nocpp", "-merge", NULL };
   GString *add_string = g_string_new (NULL);
 
   cursor_theme = gconf_client_get_string (client,

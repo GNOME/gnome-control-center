@@ -1,3 +1,9 @@
+2005-10-18  Rodrigo Moya <rodrigo@novell.com><>
+
+	* gnome-settings-font.c (load_xcursor_theme):
+	* gnome-settings-xsettings.c (gnome_xft_settings_set_xsettings):
+	run xrdb with -nocpp, since it's not needed here.
+
 2005-10-16  Rodrigo Moya <rodrigo@novell.com>
 
 	* factory.c: declare a global GConfClient.

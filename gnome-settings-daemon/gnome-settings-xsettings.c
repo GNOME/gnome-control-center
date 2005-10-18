@@ -382,7 +382,7 @@ gnome_xft_settings_set_xsettings (GnomeXftSettings *settings)
 static void
 gnome_xft_settings_set_xresources (GnomeXftSettings *settings)
 {
-  char *add[] = { "xrdb", "-merge", NULL };
+  char *add[] = { "xrdb", "-nocpp", "-merge", NULL };
   GString *add_string = g_string_new (NULL);
   char *old_locale = g_strdup (setlocale (LC_NUMERIC, NULL));
 
