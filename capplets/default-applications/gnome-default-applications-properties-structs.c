@@ -46,7 +46,7 @@ MailerDescription possible_mailers[] = {
 	{ N_("Thunderbird"), 			"mozilla-thunderbird",	"mozilla-thunderbird -mail %s", FALSE, FALSE},
 	{ N_("Mozilla Mail"), 			"mozilla",		"mozilla -mail %s",	FALSE, FALSE},
         { N_("Mutt") , 	  			"mutt",			"mutt %s",		TRUE,  FALSE },
-
+	{ N_("Sylpheed-Claws") ,                "sylpheed-claws",       "sylpheed-claws --compose %s",  FALSE,  FALSE }
 };
 
 struct _TerminalDesciption {
