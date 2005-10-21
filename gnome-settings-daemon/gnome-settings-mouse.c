@@ -1,3 +1,5 @@
+#include <config.h>
+
 #include <string.h>
 #include <math.h>
 
@@ -6,43 +8,167 @@
 #include <gdk/gdkkeysyms.h>
 #include <X11/keysym.h>
 
+#ifdef HAVE_XINPUT
+#include <X11/extensions/XInput.h>
+#endif
+
 #include <gconf/gconf.h>
 
 #include "gnome-settings-locate-pointer.h"
 #include "gnome-settings-daemon.h"
 
-#define DEFAULT_PTR_MAP_SIZE 128
+#ifdef HAVE_XINPUT
+static gboolean
+supports_xinput_devices (void)
+{
+  gint op_code, event, error;
+
+  return XQueryExtension (GDK_DISPLAY (), "XInputExtension",
+                          &op_code, &event, &error);
+}
+#endif
+
+static void
+configure_button_layout (guchar   *buttons,
+                         gint      n_buttons,
+                         gboolean  left_handed)
+{
+  const gint left_button = 0;
+  gint right_button;
+
+  /* if the button is higher than 2 (3rd button) then it's
+   * probably one direction of a scroll wheel or something else
+   * uninteresting
+   */
+  right_button = MIN (n_buttons - 1, 2);
+
+  if (left_handed)
+    {
+      buttons[left_button] = right_button + 1;
+      buttons[right_button] = left_button + 1;
+    }
+  else
+    {
+      buttons[left_button] = left_button + 1;
+      buttons[right_button] = right_button + 1;
+  }
+}
+
+#ifdef HAVE_XINPUT
+static gboolean
+xinput_device_has_buttons (XDeviceInfo *device_info)
+{
+  int i;
+  XAnyClassInfo *class_info;
+
+  class_info = device_info->inputclassinfo;
+  for (i = 0; i < device_info->num_classes; i++)
+    {
+      if (class_info->class == ButtonClass)
+        {
+          XButtonInfo *button_info;
+
+          button_info = (XButtonInfo *) class_info;
+          if (button_info->num_buttons > 0)
+            return TRUE;
+        }
+
+      class_info = (XAnyClassInfo *) (((guchar *) class_info) + 
+                                      class_info->length);
+    }
+  return FALSE;
+}
+
+static void
+set_xinput_devices_left_handed (gboolean left_handed)
+{
+  XDeviceInfo *device_info;
+  gint n_devices;
+  guchar *buttons;
+  gsize buttons_capacity = 16;
+  gint n_buttons;
+  gint i;
+
+  device_info = XListInputDevices (GDK_DISPLAY (), &n_devices);
+
+  if (n_devices > 0)
+    buttons = g_new (guchar, buttons_capacity);
+  else
+    buttons = NULL;
+   
+  for (i = 0; i < n_devices; i++)
+    {
+      XDevice *device = NULL;
+
+      if ((device_info[i].use != IsXExtensionDevice) ||
+          (!xinput_device_has_buttons (&device_info[i])))
+        continue;
+
+      gdk_error_trap_push ();
+
+      device = XOpenDevice (GDK_DISPLAY (), device_info[i].id);
+
+      if ((gdk_error_trap_pop () != 0) ||
+          (device == NULL))
+        continue;
+
+      n_buttons = XGetDeviceButtonMapping (GDK_DISPLAY (), device,
+                                           buttons, 
+                                           buttons_capacity);
+
+      while (n_buttons > buttons_capacity)
+        {
+          buttons_capacity = n_buttons;
+          buttons = (guchar *) g_realloc (buttons, 
+                                          buttons_capacity * sizeof (guchar));
+
+          n_buttons = XGetDeviceButtonMapping (GDK_DISPLAY (), device,
+                                               buttons, 
+                                               buttons_capacity);
+        }
+
+      configure_button_layout (buttons, n_buttons, left_handed);
+      
+      XSetDeviceButtonMapping (GDK_DISPLAY (), device, buttons, n_buttons);
+      XCloseDevice (GDK_DISPLAY (), device);
+    }
+  g_free (buttons);
+
+  if (device_info != NULL)
+    XFreeDeviceList (device_info);
+}
+#endif
 
 static void
 set_left_handed (gboolean left_handed)
 {
-  unsigned char *buttons;
-  gint n_buttons, i;
-  gint idx_1 = 0, idx_3 = 1;
+  guchar *buttons ;
+  gsize buttons_capacity = 16;
+  gint n_buttons;
 
-  buttons = g_alloca (DEFAULT_PTR_MAP_SIZE);
-  n_buttons = XGetPointerMapping (GDK_DISPLAY (), buttons, DEFAULT_PTR_MAP_SIZE);
-  if (n_buttons > DEFAULT_PTR_MAP_SIZE) {
-    buttons = g_alloca (n_buttons);
-    n_buttons = XGetPointerMapping (GDK_DISPLAY (), buttons, n_buttons);
-  }
+#ifdef HAVE_XINPUT
+  if (supports_xinput_devices ())
+    set_xinput_devices_left_handed (left_handed);
+#endif
 
-  for (i = 0; i < n_buttons; i++)
+  buttons = g_new (guchar, buttons_capacity);
+  n_buttons = XGetPointerMapping (GDK_DISPLAY (), buttons, 
+                                  (gint) buttons_capacity);
+  while (n_buttons > buttons_capacity)
     {
-      if (buttons[i] == 1)
-	idx_1 = i;
-      else if (buttons[i] == ((n_buttons < 3) ? 2 : 3))
-	idx_3 = i;
+      buttons_capacity = n_buttons;
+      buttons = (guchar *) g_realloc (buttons, 
+                                      buttons_capacity * sizeof (guchar));
+
+      n_buttons = XGetPointerMapping (GDK_DISPLAY (), buttons, 
+                                      (gint) buttons_capacity);
     }
 
-  if ((left_handed && idx_1 < idx_3) ||
-      (!left_handed && idx_1 > idx_3))
-    {
-      buttons[idx_1] = ((n_buttons < 3) ? 2 : 3);
-      buttons[idx_3] = 1;
-    }
+  configure_button_layout (buttons, n_buttons, left_handed);
 
   XSetPointerMapping (GDK_DISPLAY (), buttons, n_buttons);
+
+  g_free (buttons);
 }
 
 static void

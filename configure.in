@@ -85,7 +85,6 @@ AC_SUBST(XF86MISC_LIBS)
 AC_CHECK_HEADERS(X11/extensions/XKB.h)
 CPPFLAGS=$savecppflags
 
-
 dnl ==============================================
 dnl Check that we meet the  dependencies
 dnl ==============================================
@@ -121,6 +120,21 @@ if $PKG_CONFIG --exists xft ; then
   xft_modules="xft"
   AC_DEFINE(HAVE_XFT2,,[Build Xft functionality to the font capplet])
 fi
+
+dnl
+dnl Check for XInput, needed for gnome-settings-daemon mouse settings
+dnl		
+	
+have_xinput=no
+AC_CHECK_LIB(Xi, XListInputDevices,
+  [AC_CHECK_HEADER(X11/extensions/XInput.h,
+     have_xinput=yes
+     XINPUT_LIBS="-lXi"
+     AC_DEFINE(HAVE_XINPUT, 1, Have the XInput extension library),
+	  :, [#include <X11/Xlib.h>])], : ,
+       -lXi $x_libs)
+AM_CONDITIONAL(HAVE_XINPUT, [test $have_xinput = yes])
+GNOME_SETTINGS_DAEMON_LIBS="$GNOME_SETTINGS_DAEMON_LIBS $XINPUT_LIBS"
 
 PKG_CHECK_MODULES(FONT_CAPPLET, $COMMON_MODULES $xft_modules)
 
