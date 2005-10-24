@@ -37,7 +37,7 @@
 #define UNDER_TITLE_SPACING 0 /* manually insert 1 blank line of text */
 #define LINE_HEIGHT 1
 #define BORDERS 7
-#define MAX_ITEM_WIDTH	120
+#define PREFERRED_ITEM_WIDTH 120
 #define ITEMS_SEPARATION 12
 
 typedef struct _GnomeccCanvasPrivate GnomeccCanvasPrivate;
@@ -118,9 +118,6 @@ static void gnomecc_canvas_get_property (GObject      *object,
 					 GValue       *value,
 					 GParamSpec   *pspec);
 
-static void gnomecc_canvas_draw_background (GnomeCanvas *canvas, GdkDrawable *drawable,
-					    int x, int y, int width, int height);
-
 static void gnomecc_canvas_size_allocate   (GtkWidget     *canvas,
 					    GtkAllocation *allocation);
 static void gnomecc_canvas_style_set       (GtkWidget     *canvas,
@@ -137,13 +134,11 @@ static void
 gnomecc_canvas_class_init (GnomeccCanvasClass *class)
 {
 	GObjectClass     *object_class = G_OBJECT_CLASS (class);
-	GnomeCanvasClass *canvas_class = GNOME_CANVAS_CLASS (class);
 	GtkWidgetClass   *widget_class = GTK_WIDGET_CLASS (class);
 
 	object_class->set_property = gnomecc_canvas_set_property;
 	object_class->get_property = gnomecc_canvas_get_property;
 	object_class->finalize = gnomecc_canvas_finalize;
-	canvas_class->draw_background = gnomecc_canvas_draw_background;
 
 	widget_class->style_set = gnomecc_canvas_style_set;
 	widget_class->size_allocate = gnomecc_canvas_size_allocate;
@@ -176,9 +171,11 @@ static void
 gnomecc_canvas_init (GnomeccCanvas *canvas)
 {
 	GnomeccCanvasPrivate *priv;
+	GtkWidget *widget;
 	
 	g_return_if_fail (GNOMECC_IS_CANVAS (canvas));
 
+	widget = GTK_WIDGET (canvas);
 	priv = GNOMECC_CANVAS_GET_PRIVATE (canvas);
 
 	priv->max_width = 300;
@@ -193,7 +190,10 @@ gnomecc_canvas_init (GnomeccCanvas *canvas)
 
 	priv->accessible_children = g_hash_table_new (g_int_hash, g_int_equal);
 
-	gtk_widget_show_all (GTK_WIDGET (canvas));
+	gtk_widget_modify_bg (GTK_WIDGET (canvas), GTK_STATE_NORMAL,
+			      &widget->style->base[GTK_STATE_NORMAL]);
+
+	gtk_widget_show_all (widget);
 }
 
 static gboolean
@@ -477,15 +477,14 @@ calculate_item_width (GnomeccCanvas *canvas, EntryInfo *ei)
 	priv   = GNOMECC_CANVAS_GET_PRIVATE (canvas);
 	layout = GNOME_CANVAS_TEXT (ei->text)->layout;
 
-	pango_layout_set_wrap (layout, PANGO_WRAP_WORD_CHAR);
+	pango_layout_set_wrap (layout, PANGO_WRAP_WORD);
 	pango_layout_set_width (layout, -1);
 	pango_layout_get_pixel_extents (layout, NULL, &rectangle);
 
 	/* If its too big wrap at the max and regen to find the layout */
-	if (rectangle.width > MAX_ITEM_WIDTH) {
-		pango_layout_set_width (layout, MAX_ITEM_WIDTH * PANGO_SCALE);
+	if (rectangle.width > PREFERRED_ITEM_WIDTH) {
+		pango_layout_set_width (layout, PREFERRED_ITEM_WIDTH * PANGO_SCALE);
 		pango_layout_get_pixel_extents (layout, NULL, &rectangle);
-		rectangle.width = MAX_ITEM_WIDTH;
 	}
 
 	ei->text_height = rectangle.height;
@@ -767,20 +766,6 @@ gnomecc_canvas_finalize (GObject *object)
 {
 	if (G_OBJECT_CLASS (gnomecc_canvas_parent_class)->finalize)
 		(* G_OBJECT_CLASS (gnomecc_canvas_parent_class)->finalize) (object);
-}
-
-static void
-gnomecc_canvas_draw_background (GnomeCanvas *canvas, GdkDrawable *drawable,
-				int x, int y, int width, int height)
-{
-	/* By default, we use the style base color. */
-	gdk_gc_set_foreground (canvas->pixmap_gc,
-			       &GTK_WIDGET (canvas)->style->base[GTK_STATE_NORMAL]);
-	gdk_draw_rectangle (drawable,
-			    canvas->pixmap_gc,
-			    TRUE,
-			    0, 0,
-			    width, height);
 }
 
 /* A category canvas item contains all the elements
