@@ -441,7 +441,7 @@ install_dialog_response (GtkWidget *widget, int response_id, gpointer data)
 {
 	GladeXML *dialog = data;
 	GtkWidget *dlg;
-	gchar *filename, *path, *base;
+	gchar *filename, *path, *base, *scheme;
 	GList *src, *target;
 	GnomeVFSURI *src_uri;
 	const gchar *raw;
@@ -471,10 +471,12 @@ install_dialog_response (GtkWidget *widget, int response_id, gpointer data)
 			return;
 		}
 
-		if (strncmp (raw, "http://", 7) && strncmp (raw, "ftp://", 6) && *raw != '/')
+		if ((scheme = gnome_vfs_get_uri_scheme (raw)) == NULL && *raw != '/')
 			filename = gnome_file_entry_get_full_path (GNOME_FILE_ENTRY (WID ("install_theme_picker")), TRUE);
 		else
 			filename = g_strdup (raw);
+		g_free (scheme);
+		
 		if (filename == NULL)	{
 			GtkWidget *dialog;
 
