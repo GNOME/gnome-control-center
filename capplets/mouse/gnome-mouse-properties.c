@@ -662,6 +662,7 @@ populate_tree_model(GtkTreeModelSort* model, GtkTreeSelection* selection) {
 		"/usr/X11R6/lib/X11/icons/",
 		NULL
 	};
+	const gchar *xpaths = g_getenv ("XCURSOR_PATH");
 
 	gchar **iterator = NULL;
 	gchar **paths = NULL;
@@ -672,8 +673,6 @@ populate_tree_model(GtkTreeModelSort* model, GtkTreeSelection* selection) {
 	gint current_size = gconf_client_get_int(client, CURSOR_SIZE_KEY, NULL);
 	g_object_unref(client);
 	client = NULL;
-
-	const gchar *xpaths = g_getenv ("XCURSOR_PATH");
 
 	if (xpaths != NULL) {
 		paths = g_strsplit (xpaths, ":", 0);
