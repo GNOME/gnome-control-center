@@ -237,13 +237,21 @@ bg_preferences_load (BGPreferences *prefs)
 	GConfClient *client;
 	GError      *error = NULL;
 	char *tmp;
+
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_BG_PREFERENCES (prefs));
 
 	client = gconf_client_get_default ();
 
 	prefs->enabled = gconf_client_get_bool (client, BG_PREFERENCES_DRAW_BACKGROUND, &error);
-	prefs->wallpaper_filename = gconf_client_get_string (client, BG_PREFERENCES_PICTURE_FILENAME, &error);
+	tmp = gconf_client_get_string (client, BG_PREFERENCES_PICTURE_FILENAME, &error);
+	if (g_utf8_validate (tmp, -1, NULL) &&
+	    g_file_test (tmp, G_FILE_TEST_EXISTS))
+	  prefs->wallpaper_filename = g_strdup (tmp);
+	else
+	  prefs->wallpaper_filename = g_filename_from_utf8 (tmp, -1, NULL,
+							    NULL, NULL);
+	g_free (tmp);
 
 	if (prefs->color1 != NULL)
 		gdk_color_free (prefs->color1);
@@ -303,7 +311,17 @@ bg_preferences_merge_entry (BGPreferences    *prefs,
 		}
 	}
 	else if (!strcmp (entry->key, BG_PREFERENCES_PICTURE_FILENAME)) {
-		prefs->wallpaper_filename = g_strdup (gconf_value_get_string (value));
+	        const char *tmp;
+
+		tmp = gconf_value_get_string (value);
+		if (g_utf8_validate (tmp, -1, NULL) &&
+		    g_file_test (tmp, G_FILE_TEST_EXISTS))
+		  prefs->wallpaper_filename = g_strdup (tmp);
+		else
+		  prefs->wallpaper_filename = g_filename_from_utf8 (tmp, -1,
+								    NULL,
+								    NULL,
+								    NULL);
 
 		if (prefs->wallpaper_filename != NULL &&
 		    strcmp (prefs->wallpaper_filename, "") != 0 &&

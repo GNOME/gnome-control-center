@@ -1,3 +1,13 @@
+2005-10-01  Rodney Dawes  <dobey@novell.com>
+
+	* preferences.c (bg_preferences_load, bg_preferences_merge_entry):
+	Make sure that the UTF8 filename is valid and exists before trying
+	to use it, otherwise fall back to using the filename encoding specified
+	by the user with the environment variables used by glib to determine
+	the locale encoding of filenames
+
+	Fixes #168604
+
 2005-06-10  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* applier.c: (render_wallpaper), (is_nautilus_running): GCC4
