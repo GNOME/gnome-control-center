@@ -44,6 +44,7 @@ struct ControlCenterEntry {
 	char *comment;
 	char *desktop_entry;
 
+	char *icon;
 	GdkPixbuf *icon_pixbuf;
 
 	gpointer user_data;
@@ -67,6 +68,7 @@ struct ControlCenterInformation {
 
 ControlCenterInformation *control_center_get_information  (void);
 void                      control_center_information_free (ControlCenterInformation *information);
+void                      control_center_reload_icons     (ControlCenterInformation *information);
 
 G_END_DECLS
 

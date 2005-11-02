@@ -1,3 +1,10 @@
+2005-10-25  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* control-center-categories.[ch] (control_center_reload_icons): added
+	to reload icons if gtk theme changes
+	* gnomecc-canvas.c: switch correctly both shell background and icons
+	in case of theme change. Plugged a memleak on finalize
+
 2005-10-24  Carlos Garnacho Parro  <carlosg@gnome.org>
 
 	* gnomecc-canvas.c: calculate item widths instead of forcing them to

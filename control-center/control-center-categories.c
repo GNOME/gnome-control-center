@@ -124,7 +124,8 @@ control_center_entry_new (ControlCenterCategory *category,
 	retval->title         = g_strdup (gmenu_tree_entry_get_name (menu_entry));
 	retval->comment       = g_strdup (gmenu_tree_entry_get_comment (menu_entry));
 	retval->desktop_entry = g_strdup (gmenu_tree_entry_get_desktop_file_path (menu_entry));
-	retval->icon_pixbuf   = load_icon (gmenu_tree_entry_get_icon (menu_entry));
+	retval->icon          = g_strdup (gmenu_tree_entry_get_icon (menu_entry));
+	retval->icon_pixbuf   = load_icon (retval->icon);
 
 	return retval;
 }
@@ -331,4 +332,25 @@ control_center_information_free (ControlCenterInformation *information)
 	information->categories = NULL;
 
 	g_free (information);
+}
+
+void
+control_center_reload_icons (ControlCenterInformation *information)
+{
+	int i, j;
+	int n_cat, n_entries;
+	ControlCenterEntry *entry;
+
+	n_cat = information->n_categories;
+
+	for (i = 0; i < n_cat; i++) {
+		n_entries = information->categories[i]->n_entries;
+
+		for (j = 0; j < n_entries; j++) {
+			entry = information->categories[i]->entries[j];
+
+			gdk_pixbuf_unref (entry->icon_pixbuf);
+			entry->icon_pixbuf = load_icon (entry->icon);
+		}
+	}
 }
