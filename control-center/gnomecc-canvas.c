@@ -171,11 +171,9 @@ static void
 gnomecc_canvas_init (GnomeccCanvas *canvas)
 {
 	GnomeccCanvasPrivate *priv;
-	GtkWidget *widget;
 	
 	g_return_if_fail (GNOMECC_IS_CANVAS (canvas));
 
-	widget = GTK_WIDGET (canvas);
 	priv = GNOMECC_CANVAS_GET_PRIVATE (canvas);
 
 	priv->max_width = 300;
@@ -190,10 +188,7 @@ gnomecc_canvas_init (GnomeccCanvas *canvas)
 
 	priv->accessible_children = g_hash_table_new (g_int_hash, g_int_equal);
 
-	gtk_widget_modify_bg (GTK_WIDGET (canvas), GTK_STATE_NORMAL,
-			      &widget->style->base[GTK_STATE_NORMAL]);
-
-	gtk_widget_show_all (widget);
+	gtk_widget_show_all (GTK_WIDGET (canvas));
 }
 
 static gboolean
@@ -695,12 +690,11 @@ build_canvas (GnomeccCanvas *canvas)
 					gnome_canvas_pixbuf_get_type (),
 					"pixbuf", pixbuf,
 					NULL);
-				g_object_unref (pixbuf);
+
 				ei->highlight_pixbuf = gnome_canvas_item_new (ei->group,
 					gnome_canvas_pixbuf_get_type (),
 					"pixbuf", highlight_pixbuf,
 					NULL);
-				g_object_unref (highlight_pixbuf);
 			} else {
 				ei->pixbuf = NULL;
 				ei->highlight_pixbuf = NULL;
@@ -764,6 +758,12 @@ gnomecc_canvas_get_property (GObject      *object,
 static void
 gnomecc_canvas_finalize (GObject *object)
 {
+	GnomeccCanvasPrivate *priv;
+
+	priv = GNOMECC_CANVAS_GET_PRIVATE (object);
+
+	g_hash_table_destroy (priv->accessible_children);
+
 	if (G_OBJECT_CLASS (gnomecc_canvas_parent_class)->finalize)
 		(* G_OBJECT_CLASS (gnomecc_canvas_parent_class)->finalize) (object);
 }
@@ -958,6 +958,9 @@ set_style (GnomeccCanvas *canvas, gboolean font_changed)
 
 	priv = GNOMECC_CANVAS_GET_PRIVATE (canvas);
 
+	widget->style->bg[GTK_STATE_NORMAL] = widget->style->base[GTK_STATE_NORMAL];
+	control_center_reload_icons (priv->info);
+
 	for (i = 0; i < priv->info->n_categories; i++) {
 		CategoryInfo *catinfo = priv->info->categories[i]->user_data;
 
@@ -980,6 +983,15 @@ set_style (GnomeccCanvas *canvas, gboolean font_changed)
 		for (j = 0; j < priv->info->categories[i]->n_entries; j++) {
 			ControlCenterEntry *entry = priv->info->categories[i]->entries[j];
 			EntryInfo *entryinfo = entry->user_data;
+
+			g_object_set (entryinfo->pixbuf,
+				      "pixbuf", entry->icon_pixbuf,
+				      NULL);
+
+			g_object_set (entryinfo->highlight_pixbuf,
+				      "pixbuf", create_spotlight_pixbuf (entry->icon_pixbuf),
+				      NULL);
+
 			if (font_changed && entryinfo->text)
 				g_object_set (entryinfo->text,
 					      "font", NULL,
