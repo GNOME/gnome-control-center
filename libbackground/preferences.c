@@ -245,12 +245,14 @@ bg_preferences_load (BGPreferences *prefs)
 
 	prefs->enabled = gconf_client_get_bool (client, BG_PREFERENCES_DRAW_BACKGROUND, &error);
 	tmp = gconf_client_get_string (client, BG_PREFERENCES_PICTURE_FILENAME, &error);
-	if (g_utf8_validate (tmp, -1, NULL) &&
-	    g_file_test (tmp, G_FILE_TEST_EXISTS))
-	  prefs->wallpaper_filename = g_strdup (tmp);
-	else
-	  prefs->wallpaper_filename = g_filename_from_utf8 (tmp, -1, NULL,
-							    NULL, NULL);
+	if (tmp) {
+		if (g_utf8_validate (tmp, -1, NULL) &&
+		    g_file_test (tmp, G_FILE_TEST_EXISTS))
+			prefs->wallpaper_filename = g_strdup (tmp);
+		else
+			prefs->wallpaper_filename = g_filename_from_utf8 (tmp, -1, NULL,
+									  NULL, NULL);
+	}
 	g_free (tmp);
 
 	if (prefs->color1 != NULL)
