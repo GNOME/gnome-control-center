@@ -158,9 +158,9 @@ set_ctrl_from_gconf (XkbDescRec *desc, GConfClient *client,
 static void
 set_server_from_gconf (GConfEntry *ignored)
 {
-	GConfClient	*client = gconf_client_get_default ();
 	XkbDescRec	*desc;
 	gboolean	 enable_accessX;
+	GConfClient     *client = gnome_settings_daemon_get_conf_client ();
 
 	desc = get_xkb_desc_rec ();
 	if (!desc) {
@@ -283,8 +283,6 @@ set_server_from_gconf (GConfEntry *ignored)
 
 	XSync (GDK_DISPLAY (), FALSE);
 	gdk_error_trap_pop ();
-
-	g_object_unref (client);
 }
 
 static gboolean
@@ -299,7 +297,7 @@ ax_response_callback (gint response_id, guint revert_controls_mask, gboolean ena
 	    case GTK_RESPONSE_REJECT:
 	    case GTK_RESPONSE_CANCEL:
 		{
-		    GConfClient *client = gconf_client_get_default ();
+		    GConfClient *client = gnome_settings_daemon_get_conf_client ();
 
 		    /* we're reverting, so we invert sense of 'enabled' flag */
 		    d ("cancelling AccessX request");
@@ -420,7 +418,7 @@ static void
 set_gconf_from_server (GConfEntry *ignored)
 {
 	gboolean	in_gconf;
-	GConfClient	*client = gconf_client_get_default ();
+	GConfClient	*client = gnome_settings_daemon_get_conf_client ();
 	GConfChangeSet *cs = gconf_change_set_new ();
 	XkbDescRec	*desc = get_xkb_desc_rec ();
 	gboolean changed = FALSE, slowkeys_changed, stickykeys_changed;
@@ -520,7 +518,6 @@ set_gconf_from_server (GConfEntry *ignored)
 		gconf_client_suggest_sync (client, NULL);
 	}
 	gconf_change_set_unref (cs);
-	g_object_unref (client);
 }
 
 static GdkFilterReturn 

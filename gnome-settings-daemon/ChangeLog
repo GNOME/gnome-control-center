@@ -1,3 +1,93 @@
+2005-10-21  Ray Strode  <rstrode@redhat.com>
+
+	Remap buttons on auxillary mice for left-handed 
+	mode (bug 314409).
+
+	* gnome-settings-mouse.c  (supports_xinput_devices): new
+	function to detect XInput Extension
+	(configure_button_layout): new function to set up
+	logical mouse button layout for left or right handed
+	mode
+	(xinput_device_has_buttons): new function to detect if
+	an xinput device has buttons to reconfigure
+	(set_xinput_devices_left_handed): new function to set
+	auxillary mice into left-handed mode
+	(set_left_handed): call set_xinput_devices_left_handed
+	if available
+
+2005-10-18  Rodrigo Moya <rodrigo@novell.com><>
+
+	* gnome-settings-font.c (load_xcursor_theme):
+	* gnome-settings-xsettings.c (gnome_xft_settings_set_xsettings):
+	run xrdb with -nocpp, since it's not needed here.
+
+2005-10-16  Rodrigo Moya <rodrigo@novell.com>
+
+	* factory.c: declare a global GConfClient.
+	(main): unref the global GConfClient.
+
+	* gnome-settings-daemon.[ch] (gnome_settings_daemon_get_conf_client):
+	new function to use the same GConfClient everywhere.
+	(gnome_settings_daemon_new): use the global GConfClient.
+
+	* gnome-settings-accessibility-keyboard.c (set_server_from_gconf,
+	ax_response_callback, set_gconf_from_server):
+	* gnome-settings-gtk1theme.c (apply_settings):
+	* gnome-settings-keybindings.c (bindings_get_entry):
+	* gnome-settings-keyboard.c (numlock_get_gconf_state,
+	numlock_set_gconf_state, apply_settings):
+	* gnome-settings-keyboard-xkb.c (apply_xkb_settings,
+	gnome_settings_keyboard_xkb_sysconfig_changed_response,
+	gnome_settings_keyboard_xkb_analyze_sysconfig,
+	gnome_settings_chk_file_list):
+	* gnome-settings-screensaver.c (key_toggled_cb,
+	really_start_screensaver):
+	* gnome-settings-sound.c (apply_settings):
+	* gnome-settings-xmodmap.c (check_button_callback,
+	gnome_settings_load_modmap_files, remove_button_clicked_callback,
+	load_button_clicked_callback, gnome_settings_modmap_dialog_call):
+	* gnome-settings-xsettings.c (xft_callback):
+	use the global GConfClient.
+
+	* gnome-settings-keyboard-xkb.c (gnome_settings_keyboard_xkb_load):
+	don't get another GConfClient when we're getting one passed!
+
+2005-10-14  Rodrigo Moya <rodrigo@novell.com>
+
+	* gnome-settings-daemon.c (child_watch_cb): added this function to
+	watch for children...
+	(gnome_settings_daemon_spawn_with_input): ...started here, instead
+	of just blocking.
+
+	* gnome-settings-screensaver.c (gnome_settings_screensaver_load): do
+	lazy loading of the screensaver.
+	(really_start_screensaver): start on a 25 seconds timeout.
+
+	* gnome-settings-typing-break.c (gnome_settings_typing_break_load): do
+	lazy loading og the typing break applet.
+	(really_setup_typing_break): start on a 30 seconds timeout.
+
+2005-10-14  Erwann Chenede <erwann.chenede@sun.com>
+
+	Fixes #314774
+
+	* gnome-settings-xrdb.c (gnome_settings_xrdb_load): connect to
+	"notify:gtk-theme-name" signal, to run xrdb only when the whole theme
+	has been changed.
+	(theme_changed): callback for "notify:gtk-theme-name".
+
+2005-10-10  Jürg Billeter  <j@bitron.ch>
+
+	reviewed by: Sergey V. Udaltsov  <svu@gnome.org>
+
+	* gnome-settings-keyboard.c: (gsd_keyboard_get_hostname_key),
+	(numlock_NumLock_modifier_mask), (numlock_set_xkb_state),
+	(numlock_gconf_state_key), (numlock_get_gconf_state),
+	(numlock_set_gconf_state), (numlock_xkb_callback),
+	(numlock_install_xkb_callback), (apply_settings),
+	(gnome_settings_keyboard_init): Remember NumLock state between sessions.
+	Fixes bug #74215. Patch by Sebastian Kapfer  <sebastian_kapfer@web.de>
+
 2005-09-16  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* gnome-settings-font.c: (load_xcursor_theme): Don't leak

@@ -69,6 +69,8 @@ GObject *gnome_settings_daemon_new              (void);
 void     gnome_settings_daemon_spawn_with_input (char       **argv,
 						 const char  *input);
 
+GConfClient *gnome_settings_daemon_get_conf_client (void);
+
 G_END_DECLS
 
 #endif /* __GNOME_SETTINGS_DAEMON_H */

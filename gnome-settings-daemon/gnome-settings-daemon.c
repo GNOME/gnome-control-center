@@ -334,7 +334,7 @@ gnome_settings_daemon_new (void)
   /* We use GConfClient not GConfClient because a cache isn't useful
    * for us
    */
-  client = gconf_client_get_default ();
+  client = gnome_settings_daemon_get_conf_client ();
 
 /*  gnome_settings_disk_init (client);*/
   gnome_settings_font_init (client);
@@ -410,8 +410,6 @@ gnome_settings_daemon_new (void)
   gnome_settings_xrdb_load (client);
   gnome_settings_typing_break_load (client);
 
-  g_object_unref (client);
-
   return G_OBJECT (daemon);
 }
 
@@ -446,6 +444,19 @@ wait_for_child (int  pid,
   return TRUE;
 }
 
+static void
+child_watch_cb (GPid pid, gint status, gpointer user_data)
+{
+  gchar *command = user_data;
+
+  if (!WIFEXITED (status) || WEXITSTATUS (status))
+    {
+      g_warning ("Command %s failed", command);
+    }
+
+  g_free (command);
+
+}
 
 /*
  * Helper function for spawn_with_input() - write an entire
@@ -493,6 +504,7 @@ gnome_settings_daemon_spawn_with_input (char       **argv,
   int child_pid;
   int inpipe;
   GError *err = NULL;
+  gchar *command;
   
   if (!g_spawn_async_with_pipes (NULL /* working directory */, argv, NULL /* envp */,
 				 G_SPAWN_SEARCH_PATH | G_SPAWN_DO_NOT_REAP_CHILD,
@@ -509,25 +521,27 @@ gnome_settings_daemon_spawn_with_input (char       **argv,
       return;
     }
 
+  command = g_strjoinv (" ", argv);
   if (input)
     {
       if (!write_all (inpipe, input, strlen (input)))
 	{
-	  gchar *command = g_strjoinv (" ", argv);
 	  g_warning ("Could not write input to %s", command);
-	  g_free (command);
 	}
 
       close (inpipe);
     }
-      
-  wait_for_child (child_pid, &exit_status);
+  
+  g_child_watch_add (child_pid, (GChildWatchFunc) child_watch_cb, command);
+}
 
-  if (!WIFEXITED (exit_status) || WEXITSTATUS (exit_status))
-    {
-      gchar *command = g_strjoinv (" ", argv);
-      g_warning ("Command %s failed", command);
-      g_free (command);
-    }
+extern GConfClient *conf_client;
 
+GConfClient *
+gnome_settings_daemon_get_conf_client (void)
+{
+	if (!conf_client)
+		conf_client = gconf_client_get_default ();
+
+	return conf_client;
 }

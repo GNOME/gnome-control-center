@@ -88,10 +88,16 @@ gnome_settings_typing_break_init (GConfClient *client)
   gnome_settings_daemon_register_callback ("/desktop/gnome/typing_break", typing_break_callback);
 }
 
+static gboolean
+really_setup_typing_break (gpointer user_data)
+{
+  setup_typing_break (TRUE);
+  return FALSE;
+}
 
 void
 gnome_settings_typing_break_load (GConfClient *client)
 {
   if (gconf_client_get_bool (client, "/desktop/gnome/typing_break/enabled", NULL))
-    setup_typing_break (TRUE);
+    g_timeout_add (30000, (GSourceFunc) really_setup_typing_break, NULL);
 }

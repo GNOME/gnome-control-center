@@ -255,10 +255,9 @@ xft_callback (GConfEntry *entry)
   GConfClient *client;
   int i;
 
-  client = gconf_client_get_default ();
+  client = gnome_settings_daemon_get_conf_client ();
 
   gnome_settings_update_xft (client);
-  g_object_unref (client);
 
   for (i = 0; managers [i]; i++)  
     xsettings_manager_notify (managers [i]);
@@ -383,7 +382,7 @@ gnome_xft_settings_set_xsettings (GnomeXftSettings *settings)
 static void
 gnome_xft_settings_set_xresources (GnomeXftSettings *settings)
 {
-  char *add[] = { "xrdb", "-merge", NULL };
+  char *add[] = { "xrdb", "-nocpp", "-merge", NULL };
   GString *add_string = g_string_new (NULL);
   char *old_locale = g_strdup (setlocale (LC_NUMERIC, NULL));
 

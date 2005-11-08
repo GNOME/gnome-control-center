@@ -146,9 +146,8 @@ apply_xkb_settings (void)
 	if (!initedOk)
 		return;
 
-	confClient = gconf_client_get_default ();
+	confClient = gnome_settings_daemon_get_conf_client ();
 	GSwitchItKbdConfigInit (&currentSysKbdConfig, confClient);
-	g_object_unref (confClient);
 
 	GSwitchItKbdConfigLoadFromGConf (&currentKbdConfig, &initialSysKbdConfig);
 
@@ -180,7 +179,7 @@ gnome_settings_keyboard_xkb_sysconfig_changed_response (GtkDialog * dialog,
 	gboolean dontShowAgain = gtk_toggle_button_get_active (
 		GTK_TOGGLE_BUTTON (g_object_get_data (G_OBJECT (dialog), "chkDontShowAgain")));
 
-	confClient = gconf_client_get_default ();
+	confClient = gnome_settings_daemon_get_conf_client ();
 
 	switch (what2do) {
 	case RESPONSE_USE_X:
@@ -196,8 +195,6 @@ gnome_settings_keyboard_xkb_sysconfig_changed_response (GtkDialog * dialog,
 		gconf_client_set_bool (confClient, DISABLE_SYSCONF_CHANGED_WARNING_KEY, TRUE, NULL);
 
 	gtk_widget_destroy (GTK_WIDGET (dialog));
-
-	g_object_unref (confClient);
 }
 
 static void
@@ -209,11 +206,10 @@ gnome_settings_keyboard_xkb_analyze_sysconfig (void)
 
 	if (!initedOk)
 		return;
-	confClient = gconf_client_get_default ();
+	confClient = gnome_settings_daemon_get_conf_client ();
 	GSwitchItKbdConfigInit (&backupGConfKbdConfig, confClient);
 	GSwitchItKbdConfigInit (&initialSysKbdConfig, confClient);
 	dontShow = gconf_client_get_bool (confClient, DISABLE_SYSCONF_CHANGED_WARNING_KEY, NULL);
-	g_object_unref (confClient);
 	GSwitchItKbdConfigLoadFromGConfBackup (&backupGConfKbdConfig);
 	GSwitchItKbdConfigLoadFromXInitial (&initialSysKbdConfig);
 
@@ -275,7 +271,7 @@ gnome_settings_chk_file_list (void)
 	GSList *tmp = NULL;
 	GSList *tmp_l = NULL;
 	gboolean new_file_exist = FALSE;
-	GConfClient *confClient = gconf_client_get_default ();
+	GConfClient *confClient = gnome_settings_daemon_get_conf_client ();
 
 	homeDir = g_dir_open (g_get_home_dir (), 0, NULL);
 	while ((fname = g_dir_read_name (homeDir)) != NULL) {
@@ -315,8 +311,6 @@ gnome_settings_chk_file_list (void)
 
 	g_slist_foreach (last_login_file_list, (GFunc) g_free, NULL);
 	g_slist_free (last_login_file_list);
-
-	g_object_unref (G_OBJECT (confClient));
 
 	return new_file_exist;
 
@@ -385,14 +379,9 @@ gnome_settings_keyboard_xkb_init (GConfClient * client)
 void
 gnome_settings_keyboard_xkb_load (GConfClient * client)
 {
-	GConfClient *confClient;
-	confClient = gconf_client_get_default ();
-
-	GSwitchItConfigInit (&currentConfig, confClient);
+	GSwitchItConfigInit (&currentConfig, client);
 	apply_settings ();
 
-	GSwitchItKbdConfigInit (&currentKbdConfig, confClient);
+	GSwitchItKbdConfigInit (&currentKbdConfig, client);
 	apply_xkb_settings ();
-
-	g_object_unref (confClient);
 }

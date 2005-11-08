@@ -144,7 +144,7 @@ apply_settings (void)
 	gboolean enable_esd;
 	gboolean event_sounds;
 
-	client = gconf_client_get_default ();
+	client = gnome_settings_daemon_get_conf_client ();
 
 	enable_esd        = gconf_client_get_bool (client, "/desktop/gnome/sound/enable_esd", NULL);
 	event_sounds      = gconf_client_get_bool (client, "/desktop/gnome/sound/event_sounds", NULL);
@@ -175,8 +175,6 @@ apply_settings (void)
 		sound_properties_foreach (props, reload_foreach_cb, NULL);
 		gtk_object_destroy (GTK_OBJECT (props));
 	}
-
-	g_object_unref (client);
 }
 
 void
