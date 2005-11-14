@@ -138,6 +138,10 @@ static TranslationEntry translations [] = {
       GCONF_VALUE_STRING,	translate_string_string },
   { "/desktop/gnome/peripherals/mouse/cursor_size",	"Gtk/CursorThemeSize",
       GCONF_VALUE_INT,		translate_int_int },
+  { "/desktop/gnome/interface/show_input_method_menu",  "Gtk/ShowInputMethodMenu",
+      GCONF_VALUE_BOOL,		translate_bool_int },
+  { "/desktop/gnome/interface/show_unicode_menu",  "Gtk/ShowUnicodeMenu",
+      GCONF_VALUE_BOOL,		translate_bool_int },
 };
 
 static TranslationEntry*
