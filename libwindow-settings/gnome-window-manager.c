@@ -181,10 +181,8 @@ static void
 gnome_window_manager_class_init (GnomeWindowManagerClass *class) 
 {
 	GObjectClass *object_class;
-	GnomeWindowManagerClass *wm_class;
 
 	object_class = G_OBJECT_CLASS (class);
-	wm_class = GNOME_WINDOW_MANAGER_CLASS (class);
 
 	object_class->finalize = gnome_window_manager_finalize;
         

@@ -232,9 +232,9 @@ setup_font_sample (GtkWidget   *darea,
 	FcPatternDestroy (pattern);
 
 	if (font1)
-		XftTextExtentsUtf8 (xdisplay, font1, (char *)string1, strlen (string1), &extents1);
+		XftTextExtentsUtf8 (xdisplay, font1, (unsigned char *)string1, strlen (string1), &extents1);
 	if (font2)
-		XftTextExtentsUtf8 (xdisplay, font2, (char *)string2, strlen (string2), &extents2);
+		XftTextExtentsUtf8 (xdisplay, font2, (unsigned char *)string2, strlen (string2), &extents2);
 
 	ascent = 0;
 	if (font1)
@@ -271,11 +271,11 @@ setup_font_sample (GtkWidget   *darea,
 	if (font1)
 		XftDrawStringUtf8 (draw, &black, font1,
 				   2, 2 + ascent,
-				   (char *)string1, strlen (string1));
+				   (unsigned char *)string1, strlen (string1));
 	if (font2)
 		XftDrawStringUtf8 (draw, &black, font2,
 				   2 + extents1.xOff, 2 + ascent,
-				   (char *)string2, strlen (string2));
+				   (unsigned char *)string2, strlen (string2));
 
 	XftDrawDestroy (draw);
 

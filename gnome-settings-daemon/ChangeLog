@@ -1,3 +1,20 @@
+2005-11-14  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* actions/acme-volume-dummy.c: (acme_volume_dummy_finalize):
+	* actions/acme-volume.c: (acme_volume_class_init),
+	(acme_volume_new):
+	* clipboard-manager.c: (clipboard_bytes_per_item),
+	(clipboard_manager_process_event):
+	* gnome-settings-daemon.c:
+	(gnome_settings_daemon_spawn_with_input):
+	* gnome-settings-default-editor.c: (vfs_change_cb):
+	* gnome-settings-keybindings.c: (grab_key):
+	* gnome-settings-typing-break.c:
+	* gnome-settings-xrdb.c: (scan_ad_directory):
+	* gnome-settings-xsettings.c: (type_to_string):
+	* xsettings-manager.c: Remove unused code and functions. Mark
+	some functions static and fix other compiler warnings.
+
 2005-10-21  Ray Strode  <rstrode@redhat.com>
 
 	Remap buttons on auxillary mice for left-handed 

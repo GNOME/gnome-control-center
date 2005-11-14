@@ -179,7 +179,6 @@ populate_category (ControlCenterCategory *category,
 	g_slist_free (items);
 
 	if (entries != NULL) {
-		GSList *l;
 		int     i;
 
 		category->n_entries = g_slist_length (entries);

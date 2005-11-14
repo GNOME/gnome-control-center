@@ -100,7 +100,7 @@ get_pango_name(FcPattern *pat)
      * if not, remove the comma. */
     if (str->str[str->len-1] == ',') {
 	const gchar *lastword;
-	gint wordlen, i;
+	gint wordlen;
 	gboolean word_matches;
 	const char *modifier_words[] = {
 	    "Oblique", "Italic", "Small-Caps", "Ultra-Light", "Light",
@@ -414,8 +414,6 @@ do_open(GnomeVFSMethod *method,
 
     /* handle the .directory file */
     if (!strcmp(path, "/.directory")) {
-	GnomeVFSURI *uri;
-
 	uri = gnome_vfs_uri_new(FONT_METHOD_DIRECTORY);
 	result = gnome_vfs_open_uri_cancellable(
 		(GnomeVFSHandle **)method_handle, uri, mode, context);

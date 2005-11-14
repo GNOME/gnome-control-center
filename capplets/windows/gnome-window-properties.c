@@ -49,7 +49,6 @@ static GtkWidget *autoraise_checkbutton;
 static GtkWidget *autoraise_delay_slider;
 static GtkWidget *autoraise_delay_hbox;
 static GtkWidget *double_click_titlebar_optionmenu;
-static GtkWidget *double_click_titlebar_hbox;
 static GtkWidget *alt_click_hbox;
 
 static GnomeWMSettings *settings;
@@ -453,7 +452,6 @@ main (int argc, char **argv)
         autoraise_delay_slider = WID ("autoraise-delay-slider");
         autoraise_delay_hbox = WID ("autoraise-delay-hbox");
         double_click_titlebar_optionmenu = WID ("double-click-titlebar-optionmenu");
-        double_click_titlebar_hbox = WID ("double-click-titlebar-hbox");
         alt_click_hbox = WID ("alt-click-box");
 
         gtk_range_set_range (GTK_RANGE (autoraise_delay_slider),

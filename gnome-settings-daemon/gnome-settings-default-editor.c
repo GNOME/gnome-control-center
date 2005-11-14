@@ -32,7 +32,7 @@
 
 static gboolean sync_changes;
 
-#if DE_DEBUG
+#ifdef DE_DEBUG
 static void
 print_mime_app (const char *mime_type)
 {
@@ -106,7 +106,7 @@ vfs_change_cb (GnomeVFSMIMEMonitor *monitor, GConfClient *client)
 		return;
 	}
 
-#if DE_DEBUG
+#ifdef DE_DEBUG
 	g_message ("Synching text/plain to text/*...");
 #endif
 

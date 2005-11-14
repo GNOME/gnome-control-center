@@ -235,8 +235,6 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 	
 	
 	if ((gnome_vfs_make_directory(theme_props->target_tmp_dir,0700)) != GNOME_VFS_OK) {
-		GtkWidget *dialog;
-				
 		dialog = gtk_message_dialog_new (NULL,
 						GTK_DIALOG_MODAL,
 						GTK_MESSAGE_ERROR,
@@ -255,8 +253,6 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 	
 	if (theme_props->filetype == TARBZ ) {
 		if (!g_file_test ("/usr/bin/bzip2", G_FILE_TEST_EXISTS)) {
-			GtkWidget *dialog;
-				
 			dialog = gtk_message_dialog_new (NULL,
 						GTK_DIALOG_MODAL,
 						GTK_MESSAGE_ERROR,
@@ -273,8 +269,6 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 		}
 		
 		if (!transfer_done_tarbz2_idle_cb(theme_props)) {
-			GtkWidget *dialog;
-				
 			dialog = gtk_message_dialog_new (NULL,
 							GTK_DIALOG_MODAL,
 							GTK_MESSAGE_ERROR,
@@ -293,8 +287,6 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 	
 	if (theme_props->filetype == TARGZ ) {
 		if (!g_file_test ("/bin/gzip", G_FILE_TEST_EXISTS)) {
-			GtkWidget *dialog;
-
 			dialog = gtk_message_dialog_new (NULL,
 						GTK_DIALOG_MODAL,
 						GTK_MESSAGE_ERROR,
@@ -310,8 +302,6 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 			return;	
 		}
 		if (!transfer_done_targz_idle_cb(theme_props)) {
-			GtkWidget *dialog;
-				
 			dialog = gtk_message_dialog_new (NULL,
 							GTK_DIALOG_MODAL,
 							GTK_MESSAGE_ERROR,
@@ -348,8 +338,6 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 			theme_props->target_dir = g_strdup_printf("%s/.themes/%s",g_get_home_dir(),dir[0]);
 			theme_props->user_message=g_strdup_printf(_("Controls Theme %s correctly installed.\nYou can select it in the theme details."),dir[0]);
 		} else if (theme_type == THEME_ENGINE) {
-			GtkWidget *dialog;
-
 			dialog = gtk_message_dialog_new (NULL,
 			  	       GTK_DIALOG_MODAL,
 				       GTK_MESSAGE_ERROR,
@@ -365,8 +353,6 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 			g_free (command);
 			return;	
 		} else {
-			GtkWidget *dialog;
-				
 			dialog = gtk_message_dialog_new (NULL,
 			  	       GTK_DIALOG_MODAL,
 				       GTK_MESSAGE_ERROR,
@@ -390,8 +376,6 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 								GNOME_VFS_XFER_ERROR_MODE_ABORT,
 								GNOME_VFS_XFER_OVERWRITE_MODE_REPLACE,
 								NULL,NULL) != GNOME_VFS_OK) {
-			GtkWidget *dialog;
-				
 			dialog = gtk_message_dialog_new (NULL,
 						GTK_DIALOG_MODAL,
 						GTK_MESSAGE_ERROR,
@@ -409,8 +393,6 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 			g_free (command);
 			return;	
 		} else {
-			GtkWidget *dialog;
-						
 			dialog = gtk_message_dialog_new (NULL,
 			  	       GTK_DIALOG_MODAL,
 				       GTK_MESSAGE_INFO,
@@ -600,15 +582,15 @@ gnome_theme_installer_run (GtkWidget *parent, gchar *filename)
 	running_theme_install = TRUE;
 
 	if (!g_file_test ("/bin/tar", G_FILE_TEST_EXISTS)) {
-		GtkWidget *dialog;
+		GtkWidget *error_dialog;
 
-		dialog = gtk_message_dialog_new (NULL,
+		error_dialog = gtk_message_dialog_new (NULL,
 						GTK_DIALOG_MODAL,
 						GTK_MESSAGE_ERROR,
 						GTK_BUTTONS_OK,
 						_("Cannot install theme.\nThe tar program is not installed on your system."));
-		gtk_dialog_run (GTK_DIALOG (dialog));
-		gtk_widget_destroy (dialog);
+		gtk_dialog_run (GTK_DIALOG (error_dialog));
+		gtk_widget_destroy (error_dialog);
 		return;
 	}
 

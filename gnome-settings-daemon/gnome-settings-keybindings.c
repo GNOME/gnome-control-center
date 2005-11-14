@@ -104,7 +104,7 @@ screen_exec_display_string (GdkScreen *screen)
  * mainly ripped from egg_screen_exec_display_string in
  * gnome-panel/egg-screen-exec.c
  **/
-char **
+static char **
 get_exec_environment (XEvent *xevent)
 {
   char **retval = NULL;
@@ -169,7 +169,7 @@ parse_binding (Binding *binding)
   return TRUE;
 }
 
-gboolean 
+static gboolean 
 bindings_get_entry (char *subdir)
 {
   GConfValue *value;
@@ -289,7 +289,7 @@ grab_key (GdkWindow *root, Key *key, int result, gboolean grab)
   gdk_flush ();
   if (gdk_error_trap_pop ()) {
     g_warning (_("It seems that another application already has"
-                 " access to key '%d'."), key->keycode);
+                 " access to key '%u'."), key->keycode);
   }
 }
 
@@ -330,7 +330,7 @@ do_grab (gboolean grab,
 	}
 }
 
-void
+static void
 binding_register_keys (void)
 {
   GSList *li;
@@ -380,7 +380,7 @@ bindings_callback (GConfEntry *entry)
   binding_register_keys ();
 }
 
-GdkFilterReturn
+static GdkFilterReturn
 keybindings_filter (GdkXEvent *gdk_xevent,
 		    GdkEvent *event,
 		    gpointer data)

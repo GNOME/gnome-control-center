@@ -108,7 +108,7 @@ enum
 /* State in testing the double-click speed. Global for a great deal of
  * convenience
  */
-gint double_click_state = DOUBLE_CLICK_TEST_OFF;
+static gint double_click_state = DOUBLE_CLICK_TEST_OFF;
 
 /* normalilzation routines */
 /* All of our scales but double_click are on the range 1->10 as a result, we
@@ -847,16 +847,11 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 	GtkCellRenderer   *renderer;
 	GtkTreeViewColumn *column;
 	GConfValue        *value;
-	GnomeProgram      *program;
 	gchar             *cursor_font;
-	gboolean           found_default;
 	gchar             *message;
 
 	GConfClient       *client = gconf_client_get_default ();
 
-	program = gnome_program_get ();
-	found_default = FALSE;
-	
 	/* Buttons page */
 	/* Left-handed toggle */
 	peditor = gconf_peditor_new_boolean
@@ -888,7 +883,7 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 	/* Cursors page */
 	tree_view = WID ("cursor_tree");
 	cursor_font = read_cursor_font ();
-	
+
 	model = (GtkTreeModel *) gtk_list_store_new (N_COLUMNS, GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_INT);
 	model = (GtkTreeModel *) gtk_tree_model_sort_new_with_model (model);
 	gtk_tree_view_set_model (GTK_TREE_VIEW (tree_view),

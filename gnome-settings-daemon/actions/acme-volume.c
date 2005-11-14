@@ -41,7 +41,7 @@ static void
 acme_volume_class_init (AcmeVolumeClass *klass)
 {
 	parent_class = g_type_class_peek_parent (klass);
-};
+}
 
 static void
 acme_volume_init (AcmeVolume *vol)
@@ -115,6 +115,5 @@ AcmeVolume *acme_volume_new (void)
 	vol = ACME_VOLUME  (g_object_new (acme_volume_oss_get_type (), NULL));
 	return vol;
 #endif
-	return ACME_VOLUME  (g_object_new (acme_volume_dummy_get_type (), NULL));
 }
 

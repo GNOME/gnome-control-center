@@ -80,10 +80,8 @@ capplet_register_stock_icons (GtkIconFactory *factory)
 {
 	gint i;
 	GtkIconSource *source;
-	GnomeProgram *program;
 
 	source =  gtk_icon_source_new ();
-	program = gnome_program_get ();
 
 	for (i = 0; i <  G_N_ELEMENTS (items); ++i) {
 		GtkIconSet *icon_set; 

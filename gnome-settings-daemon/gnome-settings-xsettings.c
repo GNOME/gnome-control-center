@@ -164,32 +164,23 @@ type_to_string (GConfValueType type)
     {
     case GCONF_VALUE_INT:
       return "int";
-      break;
     case GCONF_VALUE_STRING:
       return "string";
-      break;
     case GCONF_VALUE_FLOAT:
       return "float";
-      break;
     case GCONF_VALUE_BOOL:
       return "bool";
-      break;
     case GCONF_VALUE_SCHEMA:
       return "schema";
-      break;
     case GCONF_VALUE_LIST:
       return "list";
-      break;
     case GCONF_VALUE_PAIR:
       return "pair";
-      break;
     case GCONF_VALUE_INVALID:
       return "*invalid*";
-      break;
     default:
       g_assert_not_reached();
       return NULL; /* for warnings */
-      break;
     }
 }
 

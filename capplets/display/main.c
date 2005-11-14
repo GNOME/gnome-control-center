@@ -44,7 +44,7 @@ struct DisplayInfo {
 static void generate_rate_menu (struct ScreenInfo *screen_info);
 static void generate_resolution_menu(struct ScreenInfo* screen_info);
 
-struct DisplayInfo *
+static struct DisplayInfo *
 read_display_info (GdkDisplay *display)
 {
   struct DisplayInfo *info;
@@ -77,7 +77,7 @@ read_display_info (GdkDisplay *display)
   return info;
 }
 
-void
+static void
 update_display_info (struct DisplayInfo *info, GdkDisplay *display)
 {
   struct ScreenInfo *screen_info;
@@ -586,13 +586,13 @@ struct TimeoutData {
   gboolean timed_out;
 };
 
-char *
+static char *
 timeout_string (int time)
 {
   return g_strdup_printf (ngettext ("Testing the new settings. If you don't respond in %d second the previous settings will be restored.", "Testing the new settings. If you don't respond in %d seconds the previous settings will be restored.", time), time);
 }
 
-gboolean
+static gboolean
 save_timeout_callback (gpointer _data)
 {
   struct TimeoutData *data = _data;
