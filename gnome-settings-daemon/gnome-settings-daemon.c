@@ -214,7 +214,7 @@ manager_event_filter (GdkXEvent *xevent,
     return GDK_FILTER_CONTINUE;
 }
 
-CORBA_boolean
+static CORBA_boolean
 awake_impl (PortableServer_Servant servant,
 	    const CORBA_char      *service,
 	    CORBA_Environment     *ev)
@@ -416,34 +416,6 @@ gnome_settings_daemon_new (void)
 
 /* Helper functions */
 
-/*
- * Helper function for spawn_with_input() - wait for a child
- * to exit.
- */
-gboolean
-wait_for_child (int  pid,
-		int *status)
-{
-  gint ret;
-
- again:
-  ret = waitpid (pid, status, 0);
-
-  if (ret < 0)
-    {
-      if (errno == EINTR)
-        goto again;
-      else
-        {
-	  g_warning ("Unexpected error in waitpid() (%s)",
-		     g_strerror (errno));
-	  return FALSE;
-        }
-    }
-
-  return TRUE;
-}
-
 static void
 child_watch_cb (GPid pid, gint status, gpointer user_data)
 {
@@ -500,7 +472,6 @@ void
 gnome_settings_daemon_spawn_with_input (char       **argv,
 					const char  *input)
 {
-  int exit_status;
   int child_pid;
   int inpipe;
   GError *err = NULL;
@@ -513,7 +484,7 @@ gnome_settings_daemon_spawn_with_input (char       **argv,
 				 &inpipe, NULL, NULL, /* stdin, stdout, stderr */
 				 &err))
     {
-      gchar *command = g_strjoinv (" ", argv);
+      command = g_strjoinv (" ", argv);
       g_warning ("Could not execute %s: %s", command, err->message);
       g_error_free (err);
       g_free (command);

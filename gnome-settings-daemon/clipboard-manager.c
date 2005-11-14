@@ -165,13 +165,10 @@ clipboard_bytes_per_item (int format)
     {
     case 8:
       return sizeof (char);
-      break;
     case 16:
       return sizeof (short);
-      break;
     case 32:
       return sizeof (long);
-      break;
     default: ;
     }
   return 0;
@@ -703,7 +700,6 @@ clipboard_manager_process_event (ClipboardManager *manager,
  	return receive_incrementally (manager, xev);
       else 
 	return send_incrementally (manager, xev);
-      break;
       
     case SelectionClear:
       if (xev->xany.window != manager->window)

@@ -745,7 +745,7 @@ remove_custom_row_from_meta_theme (void)
   custom_meta_theme_info.name = NULL;
 }
 
-gboolean
+static gboolean
 themes_equal (GnomeThemeMetaInfo *a, GnomeThemeMetaInfo *b)
 {
   if (!a->gtk_theme_name ||

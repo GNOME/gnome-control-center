@@ -26,7 +26,7 @@ at_startup_get_list (GConfClient *client)
 	return at_list;
 }
 
-gint
+static gint
 at_startup_string_compare (gconstpointer s1, gconstpointer s2)
 {
 	if (s1 && s2) {

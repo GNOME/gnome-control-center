@@ -127,11 +127,8 @@ setup_dialog (GladeXML       *dialog,
 	      GConfChangeSet *changeset)
 {
 	GObject *peditor;
-	GnomeProgram *program;
 
 	/* load all the images */
-	program = gnome_program_get ();
-
 	capplet_init_stock_icons ();
 	
 	peditor = gconf_peditor_new_boolean

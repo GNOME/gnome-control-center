@@ -964,7 +964,6 @@ top_theme_dir_changed (GnomeVFSMonitorHandle *handle,
   else if (event_type == GNOME_VFS_MONITOR_EVENT_DELETED)
     {
       gchar *name;
-      CommonThemeDirMonitorData *monitor_data;
 
       name = gnome_vfs_uri_extract_short_name (common_theme_dir_uri);
       monitor_data = g_hash_table_lookup (handle_hash, name);
@@ -1016,7 +1015,6 @@ top_icon_theme_dir_changed (GnomeVFSMonitorHandle    *handle,
   else if (event_type == GNOME_VFS_MONITOR_EVENT_DELETED)
     {
       gchar *name;
-      CommonIconThemeDirMonitorData *monitor_data;
 
       name = gnome_vfs_uri_extract_short_name (common_icon_theme_dir_uri);
       monitor_data = g_hash_table_lookup (handle_hash, name);

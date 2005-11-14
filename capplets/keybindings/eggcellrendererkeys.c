@@ -628,7 +628,6 @@ egg_cell_renderer_keys_set_accelerator (EggCellRendererKeys *keys,
 {
   char *text;
   gboolean changed;
-  GtkCellRendererText *celltext;
 
   g_return_if_fail (EGG_IS_CELL_RENDERER_KEYS (keys));
 
@@ -663,12 +662,10 @@ egg_cell_renderer_keys_set_accelerator (EggCellRendererKeys *keys,
   if (changed)
     {
       /* sync string to the key values */
-      celltext = GTK_CELL_RENDERER_TEXT (keys);
       text = convert_keysym_state_to_string (keys->accel_key, keys->keycode, keys->accel_mask);
       g_object_set (keys, "text", text, NULL);
       g_free (text);
     }
-  
 }
 
 void

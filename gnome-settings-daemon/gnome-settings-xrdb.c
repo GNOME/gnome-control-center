@@ -40,7 +40,7 @@
 
 #define GTK_THEME_KEY "/desktop/gnome/interface/gtk_theme"
 
-GtkWidget *widget;
+static GtkWidget *widget;
 
 /*
  * Theme colour functions
@@ -171,8 +171,6 @@ scan_ad_directory (const char *path, GError **error)
 		return NULL;
 	}
 	while ((entry = g_dir_read_name (dir)) != NULL) {
-		int len;
-		len = strlen (entry);
 		if (g_str_has_suffix (entry, ".ad")) {
 			list = g_slist_prepend (list, g_strdup_printf ("%s/%s", path, entry));
 		}

@@ -6,8 +6,8 @@
 #include "reaper.h"
 #include <string.h>
 
-pid_t typing_monitor_pid = 0;
-guint typing_monitor_idle_id = 0;
+static pid_t typing_monitor_pid = 0;
+static guint typing_monitor_idle_id = 0;
 
 static gboolean
 typing_break_timeout (gpointer data)

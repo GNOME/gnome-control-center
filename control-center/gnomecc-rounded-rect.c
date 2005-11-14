@@ -33,7 +33,7 @@ typedef GnomeCanvasRectClass GnomeccRoundedRectClass;
 #define GNOMECC_ROUNDED_RECT_CLASS(k)	 (G_TYPE_CHECK_CLASS_CAST ((k), GNOMECC_TYPE_ROUNDED_RECT, GnomeccRoundedRectClass))
 #define GNOMECC_IS_ROUNDED_RECT_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), GNOMECC_TYPE_ROUNDED_RECT))
 
-G_DEFINE_TYPE (GnomeccRoundedRect, gnomecc_rounded_rect, GNOME_TYPE_CANVAS_RECT);
+G_DEFINE_TYPE (GnomeccRoundedRect, gnomecc_rounded_rect, GNOME_TYPE_CANVAS_RECT)
 
 /*************************************************************************
  * Adapted from nautilus/libnautilus-private/nautilus-icon-canvas-item.c

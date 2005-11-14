@@ -29,7 +29,7 @@
 #include <libgnomevfs/gnome-vfs.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
-const gchar *
+static const gchar *
 get_ft_error(FT_Error error)
 {
 #undef __FTERRORS_H__

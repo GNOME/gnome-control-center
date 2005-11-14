@@ -25,6 +25,7 @@
 #  include <config.h>
 #endif
 
+#include "accessibility-keyboard.h"
 #include <gnome.h>
 #include <gconf/gconf-client.h>
 #include <glade/glade.h>

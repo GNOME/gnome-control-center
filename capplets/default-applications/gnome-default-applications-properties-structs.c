@@ -5,7 +5,7 @@ struct _BrowserDescription {
         gboolean needs_term;
 	gboolean in_path;
 };
-BrowserDescription possible_browsers[] = {
+static BrowserDescription possible_browsers[] = {
 	{ N_("Debian Sensible Browser"),	"sensible-browser",	"sensible-browser %s", FALSE, FALSE },
         { N_("Epiphany"), 		"epiphany",	"epiphany %s",		FALSE, FALSE },
         { N_("Galeon"), 		"galeon",	"galeon %s",		FALSE, FALSE },
@@ -28,7 +28,7 @@ struct _MailerDescription {
         gboolean needs_term;
 	gboolean in_path;
 };
-MailerDescription possible_mailers[] = {
+static MailerDescription possible_mailers[] = {
 	/* The code in gnome-default-applications-properties.c makes sure
 	 * there is only one (the first entry in this list) Evolution entry 
 	 * in the list shown to the user
@@ -55,7 +55,7 @@ struct _TerminalDesciption {
         gchar const *exec_arg;
 	gboolean in_path;
 };
-TerminalDescription possible_terminals[] = { 
+static TerminalDescription possible_terminals[] = { 
         { N_("Debian Terminal Emulator"),	"x-terminal-emulator",	"-e", FALSE },
         { N_("GNOME Terminal"),		"gnome-terminal",	"-x", FALSE },
         { N_("Standard XTerminal"),	"xterm",		"-e", FALSE },

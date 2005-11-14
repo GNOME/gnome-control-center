@@ -45,7 +45,7 @@ struct _XSettingsManager
   unsigned long serial;
 };
 
-XSettingsList *settings;
+static XSettingsList *settings;
 
 typedef struct 
 {
@@ -295,7 +295,7 @@ xsettings_manager_set_color (XSettingsManager *manager,
   return xsettings_manager_set_setting (manager, &setting);
 }
 
-size_t
+static size_t
 setting_length (XSettingsSetting *setting)
 {
   size_t length = 8;	/* type + pad + name-len + last-change-serial */
@@ -317,7 +317,7 @@ setting_length (XSettingsSetting *setting)
   return length;
 }
 
-void
+static void
 setting_store (XSettingsSetting *setting,
 	       XSettingsBuffer *buffer)
 {

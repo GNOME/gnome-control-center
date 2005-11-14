@@ -223,7 +223,6 @@ gnome_canvas_item_show_hide (GnomeCanvasItem *item, gboolean show)
 static void
 setup_entry (GnomeccCanvas *canvas, ControlCenterEntry *entry)
 {
-	GnomeccCanvasPrivate *priv;
 	EntryInfo *ei;
 	GtkWidget *widget;
 	GtkStateType state;
@@ -231,7 +230,6 @@ setup_entry (GnomeccCanvas *canvas, ControlCenterEntry *entry)
 	if (!entry)
 		return;
 
-	priv = GNOMECC_CANVAS_GET_PRIVATE (canvas);
 	widget = GTK_WIDGET (canvas);
 	ei = entry->user_data;
 
@@ -360,7 +358,6 @@ cb_canvas_event (GnomeCanvasItem *item, GdkEvent *event, GnomeccCanvas *canvas)
 	GnomeccCanvasPrivate *priv;
 	EntryInfo *ei = NULL;
 	gint n_category, n_entry;
-	gint n_categories, n_entries;
 
 	priv = GNOMECC_CANVAS_GET_PRIVATE (canvas);
 	
@@ -377,8 +374,6 @@ cb_canvas_event (GnomeCanvasItem *item, GdkEvent *event, GnomeccCanvas *canvas)
 
 	n_entry = 0;
 	n_category = 0;
-	n_categories = priv->info->n_categories;
-	n_entries = priv->info->categories[ei->n_category]->n_entries;
 
 	switch (event->key.keyval) {
 	case GDK_KP_Right:
@@ -441,7 +436,6 @@ cb_canvas_event (GnomeCanvasItem *item, GdkEvent *event, GnomeccCanvas *canvas)
 			activate_entry (priv->selected);
 
 		return TRUE;
-		break;
 	case GDK_Escape:
 		gtk_main_quit ();
 		return TRUE;
@@ -1237,11 +1231,7 @@ gnomecc_canvas_item_accessible_ref_state_set (AtkObject *object)
 static void
 gnomecc_canvas_item_accessible_class_init (AtkObjectClass *class)
 {
-	GObjectClass *object_class;
-
 	accessible_item_parent_class = g_type_class_peek_parent (class);
-
-	object_class = (GObjectClass *)class;
 
 	class->get_index_in_parent = gnomecc_canvas_item_accessible_get_index_in_parent; 
 	class->get_name = gnomecc_canvas_item_accessible_get_name;
@@ -1399,13 +1389,7 @@ gnomecc_canvas_accessible_initialize (AtkObject *accessible, gpointer data)
 static void
 gnomecc_canvas_accessible_class_init (AtkObjectClass *class)
 {
-	GObjectClass *object_class;
-	GtkAccessibleClass *accessible_class;
-
 	accessible_parent_class = g_type_class_peek_parent (class);
-
-	object_class = (GObjectClass *)class;
-	accessible_class = (GtkAccessibleClass *)class;
 
 	class->get_n_children = gnomecc_canvas_accessible_get_n_children;
 	class->ref_child = gnomecc_canvas_accessible_ref_child;
@@ -1415,7 +1399,6 @@ gnomecc_canvas_accessible_class_init (AtkObjectClass *class)
 static gboolean
 gnomecc_canvas_accessible_add_selection (AtkSelection *selection, gint i)
 {
-	GnomeccCanvasPrivate *priv;
 	GnomeccCanvas *canvas;
 	GtkWidget *widget;
 	ControlCenterEntry *entry;
@@ -1426,7 +1409,6 @@ gnomecc_canvas_accessible_add_selection (AtkSelection *selection, gint i)
 		return FALSE;
 
 	canvas = GNOMECC_CANVAS (widget);
-	priv   = GNOMECC_CANVAS_GET_PRIVATE (canvas);
 
 	entry = gnomecc_canvas_accessible_get_entry (canvas, i);
 	select_entry (canvas, entry);

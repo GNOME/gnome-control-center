@@ -31,12 +31,8 @@ static void acme_volume_dummy_set_volume (AcmeVolume *self, int val);
 static void
 acme_volume_dummy_finalize (GObject *object)
 {
-	AcmeVolumeDummy *self;
-
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (ACME_IS_VOLUME_DUMMY (object));
-
-	self = ACME_VOLUME_DUMMY (object);
 
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 }

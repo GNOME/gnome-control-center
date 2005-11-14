@@ -270,7 +270,6 @@ void
 gnome_theme_details_init (void)
 {
   GtkWidget *parent, *widget;
-  GnomeWindowManager *window_manager;
   GladeXML *dialog;
 
   if (theme_details_initted)
@@ -278,7 +277,6 @@ gnome_theme_details_init (void)
   theme_details_initted = TRUE;
 
   dialog = gnome_theme_manager_get_theme_dialog ();
-  window_manager = gnome_wm_manager_get_current (gdk_display_get_default_screen (gdk_display_get_default ()));
   parent = WID ("theme_details_dialog");
 
   setup_tree_view (GTK_TREE_VIEW (WID ("control_theme_treeview")),
@@ -359,7 +357,6 @@ gnome_theme_details_reread_themes_from_disk (void)
   GList *string_list;
   GList *list;
   GnomeWindowManager *window_manager;
-  GtkWidget *notebook;
 
   gboolean have_gtk_theme;
   gboolean have_window_theme;
@@ -370,7 +367,6 @@ gnome_theme_details_reread_themes_from_disk (void)
 
   dialog = gnome_theme_manager_get_theme_dialog ();
   window_manager = gnome_wm_manager_get_current (gdk_display_get_default_screen (gdk_display_get_default ()));
-  notebook = WID ("theme_notebook");
 
   /* First, we update the GTK+ themes page */
   theme_list = gnome_theme_info_find_by_type (GNOME_THEME_GTK_2);

@@ -337,8 +337,6 @@ do_open(GnomeVFSMethod *method,
 
 	/* handle the .directory file */
 	if (!strcmp(path, "/.directory")) {
-		GnomeVFSURI *uri;
-
 		uri = gnome_vfs_uri_new(THEME_METHOD_DIRECTORY);
 		result = gnome_vfs_open_uri_cancellable(
 			(GnomeVFSHandle **)method_handle, uri, mode, context);

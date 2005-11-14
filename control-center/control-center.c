@@ -71,13 +71,11 @@ create_window (void)
 int
 main (int argc, char *argv[])
 {
-	GnomeProgram *ccprogram;
-
         bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
         textdomain (GETTEXT_PACKAGE);
 
-	ccprogram = gnome_program_init ("gnome-control-center",
+	gnome_program_init ("gnome-control-center",
 			    VERSION, LIBGNOMEUI_MODULE,
 			    argc, argv,
 			    GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,

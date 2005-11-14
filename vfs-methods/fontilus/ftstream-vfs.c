@@ -26,7 +26,7 @@
 #include FT_FREETYPE_H
 #include <libgnomevfs/gnome-vfs.h>
 
-static unsigned long
+static guint64 
 vfs_stream_read(FT_Stream stream,
 		unsigned long offset,
 		unsigned char *buffer,

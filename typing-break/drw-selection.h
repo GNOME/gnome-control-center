@@ -26,7 +26,7 @@
 
 typedef struct _DrwSelection  DrwSelection;
 
-DrwSelection * drw_selection_start     ();
+DrwSelection * drw_selection_start     (void);
 void           drw_selection_stop      (DrwSelection *drw_selection);
 gboolean       drw_selection_is_master (DrwSelection *drw_selection);
 

@@ -1447,7 +1447,7 @@ gconf_peditor_new_enum_toggle  (GConfChangeSet 	 *changeset,
 	return G_OBJECT (peditor);
 }
 
-gboolean
+static gboolean
 peditor_image_set_filename (GConfPropertyEditor *peditor, const gchar *filename)
 {
 	GdkPixbuf *pixbuf = NULL;
@@ -1523,7 +1523,7 @@ peditor_image_set_filename (GConfPropertyEditor *peditor, const gchar *filename)
 	return TRUE;
 }
 
-void
+static void
 peditor_image_chooser_response_cb (GtkWidget *chooser,
 				   gint response,
 				   GConfPropertyEditor *peditor)
@@ -1561,7 +1561,7 @@ peditor_image_chooser_response_cb (GtkWidget *chooser,
 	gtk_widget_destroy (chooser);
 }
 
-void
+static void
 peditor_image_chooser_update_preview_cb (GtkFileChooser *chooser,
 					 GtkImage *preview)
 {
@@ -1582,7 +1582,7 @@ peditor_image_chooser_update_preview_cb (GtkFileChooser *chooser,
 		gdk_pixbuf_unref (pixbuf);
 }
 
-void
+static void
 peditor_image_clicked_cb (GConfPropertyEditor *peditor, GtkButton *button)
 {
 	GConfValue *value = NULL, *value_wid;

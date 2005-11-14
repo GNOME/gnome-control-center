@@ -38,7 +38,7 @@ typedef struct
   gint data;
 } KeyListEntry;
 
-const KeyListEntry desktop_key_list[] =
+static const KeyListEntry desktop_key_list[] =
 {
   { "/apps/gnome_settings_daemon/keybindings/help", ALWAYS_VISIBLE, 0 },
   { "/apps/gnome_settings_daemon/keybindings/power", ALWAYS_VISIBLE, 0 },
@@ -59,7 +59,7 @@ const KeyListEntry desktop_key_list[] =
 #endif
   { NULL }
 };
-const KeyListEntry sounds_key_list[] =
+static const KeyListEntry sounds_key_list[] =
 {
   { "/apps/gnome_settings_daemon/keybindings/volume_mute", ALWAYS_VISIBLE, 0 },
   { "/apps/gnome_settings_daemon/keybindings/volume_down", ALWAYS_VISIBLE, 0 },
@@ -74,7 +74,7 @@ const KeyListEntry sounds_key_list[] =
   { NULL }
 };
 
-const KeyListEntry metacity_key_list[] =
+static const KeyListEntry metacity_key_list[] =
 {
   { "/apps/metacity/window_keybindings/activate_window_menu",      ALWAYS_VISIBLE,  0 },
   { "/apps/metacity/window_keybindings/toggle_fullscreen",         ALWAYS_VISIBLE,  0 },
@@ -442,7 +442,6 @@ should_show_key (const KeyListEntry *entry)
       return TRUE;
     else
       return FALSE;
-    break;
   }
 
   return FALSE;
