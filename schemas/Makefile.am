@@ -3,7 +3,6 @@ schema_in_files= \
 	apps_gnome_settings_daemon_screensaver.schemas.in	\
 	apps_gnome_settings_daemon_default_editor.schemas.in	\
 	desktop_gnome_font_rendering.schemas.in			\
-	desktop_gnome_peripherals_keyboard_numlock.schemas.in	\
 	desktop_gnome_peripherals_keyboard_xkb.schemas.in	\
 	apps_gnome_settings_daemon_keybindings.schemas.in
 
