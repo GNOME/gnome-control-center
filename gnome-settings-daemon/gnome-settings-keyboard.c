@@ -140,10 +140,11 @@ numlock_NumLock_modifier_mask ()
 static void
 numlock_set_xkb_state (gboolean new_state)
 {
+	unsigned int num_mask;
 	Display *dpy = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
 	if (new_state != NUMLOCK_STATE_ON && new_state != NUMLOCK_STATE_OFF)
 		return;
-	unsigned num_mask = numlock_NumLock_modifier_mask ();
+	num_mask = numlock_NumLock_modifier_mask ();
 	XkbLockModifiers (dpy, XkbUseCoreKbd, num_mask, new_state ? num_mask : 0);
 }
 
@@ -162,12 +163,13 @@ numlock_gconf_state_key ()
 static int
 numlock_get_gconf_state ()
 {
+	int curr_state;
 	GConfClient *gcc;
 	GError *err = NULL;
 	char *key = numlock_gconf_state_key ();
 	if (!key) return NUMLOCK_STATE_UNKNOWN;
 	gcc = gnome_settings_daemon_get_conf_client ();
-	int curr_state = gconf_client_get_bool (gcc, key, &err);
+	curr_state = gconf_client_get_bool (gcc, key, &err);
 	if (err) curr_state = NUMLOCK_STATE_UNKNOWN;
 	g_clear_error (&err);
 	g_free (key);
