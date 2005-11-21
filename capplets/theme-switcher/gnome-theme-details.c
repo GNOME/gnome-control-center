@@ -21,6 +21,13 @@
 static gboolean theme_details_initted = FALSE;
 static gboolean setting_model = FALSE;
 
+enum {
+	THEME_GTK,
+	THEME_WINDOW,
+	THEME_ICON
+};
+	
+
 /* Function Prototypes */
 static void cb_dialog_response              (GtkDialog        *dialog,
 					     gint              response_id);
@@ -118,12 +125,82 @@ setup_tree_view (GtkTreeView *tree_view,
  					       NULL);
 }
 
+static void
+gtk_theme_update_remove_button (GtkTreeSelection *selection, 
+				GtkWidget *remove_button,
+				gint theme_type)
+{
+  gchar *theme_selected;
+  GtkTreeModel *model;
+  GtkTreeIter iter;
+  GList *theme_list=NULL, *string_list, *list;
+  gchar *theme_dir = NULL;
+  GnomeVFSResult vfs_result;
+  GnomeVFSFileInfo *vfs_info;
+
+  if (gtk_tree_selection_get_selected (selection, &model, &iter))
+     gtk_tree_model_get (model, &iter,
+			  THEME_NAME_COLUMN, &theme_selected,
+			  -1);
+  else
+    theme_selected = NULL;
+
+  if (theme_selected != NULL) 
+  {
+     switch (theme_type) {
+		case THEME_GTK: theme_dir = g_strdup("/gtk-2.0/");
+				theme_list = gnome_theme_info_find_by_type (GNOME_THEME_GTK_2);
+				break;
+		case THEME_ICON: theme_list = gnome_theme_icon_info_find_all();
+				 break;
+		case THEME_WINDOW: theme_dir = g_strdup("/metacity-1/");
+				    theme_list = gnome_theme_info_find_by_type (GNOME_THEME_METACITY);
+				    break;
+		default: theme_list = NULL;
+			 break;
+    }
+  }
+		
+  string_list = NULL;
+
+  for (list = theme_list; list; list = list->next)
+  {
+    GnomeThemeInfo *info = list->data;
+    if (!strcmp(info->name, theme_selected))
+    {
+	if (theme_type == THEME_ICON) 
+		theme_dir = g_strdup(info->path);
+	else 
+		theme_dir = g_strdup_printf("%s/%s", info->path, theme_dir);
+			
+	vfs_info = gnome_vfs_file_info_new ();
+	vfs_result = gnome_vfs_get_file_info (theme_dir,
+					      vfs_info,
+				              GNOME_VFS_FILE_INFO_GET_ACCESS_RIGHTS);
+        if (vfs_result == GNOME_VFS_OK) 
+	{
+		if ((vfs_info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_ACCESS) &&
+		    !(vfs_info->permissions & GNOME_VFS_PERM_ACCESS_WRITABLE)) 
+			gtk_widget_set_sensitive(remove_button, FALSE); 
+		else 
+			gtk_widget_set_sensitive(remove_button, TRUE); 
+	} else {
+		gtk_widget_set_sensitive(remove_button, FALSE);
+	}
+      }
+    }
+}
 
 static void
 gtk_theme_selection_changed (GtkTreeSelection *selection,
 			     gpointer          data)
 {
+  GladeXML *dialog;
+		
+  dialog = gnome_theme_manager_get_theme_dialog ();
+  
   update_gconf_key_from_selection (selection, GTK_THEME_KEY);
+  gtk_theme_update_remove_button(selection, WID("control_remove_button"), THEME_GTK);
 }
 
 static void
@@ -163,7 +240,11 @@ static void
 icon_theme_selection_changed (GtkTreeSelection *selection,
 			     gpointer          data)
 {
+  GladeXML *dialog;
+		
+  dialog = gnome_theme_manager_get_theme_dialog ();
   update_gconf_key_from_selection (selection, ICON_THEME_KEY);
+  gtk_theme_update_remove_button(selection, WID("icon_remove_button"), THEME_ICON);
 }
 
 static void
@@ -266,6 +347,109 @@ update_gconf_key_from_selection (GtkTreeSelection *selection,
   g_object_unref (client);
 }
 
+static void
+remove_theme(GtkWidget *button, gpointer data)
+{
+  GladeXML *dialog;
+  GtkWidget *confirm_dialog, *info_dialog;
+  GList *theme_list, *string_list, *list;
+  GtkTreeSelection *selection;
+  GtkTreeModel *model;
+  GtkTreeIter iter;
+  gchar *theme_dir, *theme_selected, *treeview;
+  gint response, theme_type;
+  GList *uri_list;
+  GnomeVFSResult result;
+  
+  confirm_dialog = gtk_message_dialog_new (NULL,
+		          		   GTK_DIALOG_MODAL,
+					   GTK_MESSAGE_QUESTION,
+					   GTK_BUTTONS_OK_CANCEL,
+					   _("Would you like to remove this theme?"));
+  response = gtk_dialog_run (GTK_DIALOG (confirm_dialog));
+  gtk_widget_destroy(confirm_dialog);
+  if (response == GTK_RESPONSE_CANCEL)
+	return;
+
+  theme_type = (gint)data;
+  switch (theme_type) {
+	case THEME_GTK: theme_dir = g_strdup("/gtk-2.0/");
+               		theme_list = gnome_theme_info_find_by_type (GNOME_THEME_GTK_2);
+			treeview=g_strdup("control_theme_treeview");
+                        break;
+	case THEME_ICON: theme_list = gnome_theme_icon_info_find_all();
+			 treeview=g_strdup("icon_theme_treeview");
+		 	 theme_dir = NULL;
+			 break;
+	case THEME_WINDOW: theme_dir = g_strdup("/metacity-1/");
+ 			   theme_list = gnome_theme_info_find_by_type (GNOME_THEME_METACITY);
+			   treeview=g_strdup("window_theme_treeview");
+			   break;
+	default: theme_list = NULL;
+		 theme_dir = NULL;
+		 treeview = NULL;
+		 break;
+  }
+
+
+  if (treeview != NULL) {
+	  dialog = gnome_theme_manager_get_theme_dialog ();
+	  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW(WID(treeview)));
+	  if (gtk_tree_selection_get_selected (selection, &model, &iter))
+  	  {
+	  	gtk_tree_model_get (model, &iter,
+				      THEME_NAME_COLUMN, &theme_selected,
+				      -1);
+	  } else {
+		theme_selected = NULL;
+  	  }
+
+  	if (theme_selected!=NULL)
+  	{
+		string_list = NULL;
+
+		for (list = theme_list; list; list = list->next)
+		{
+			GnomeThemeInfo *info = list->data;
+			if (!strcmp(info->name, theme_selected))
+			{
+
+				if (theme_type == THEME_ICON)
+					theme_dir = g_strdup(g_path_get_dirname(info->path));
+				else
+					theme_dir = g_strdup_printf("%s/%s", info->path, theme_dir);
+	
+				uri_list = g_list_prepend(NULL, gnome_vfs_uri_new (theme_dir));
+
+				result = gnome_vfs_xfer_delete_list (uri_list, GNOME_VFS_XFER_RECURSIVE,
+								     GNOME_VFS_XFER_ERROR_MODE_ABORT,
+								     NULL, NULL);
+				if (result == GNOME_VFS_OK) 
+				{
+					info_dialog = gtk_message_dialog_new (NULL,
+					                        GTK_DIALOG_MODAL,
+								GTK_MESSAGE_INFO,
+								GTK_BUTTONS_OK_CANCEL,
+								_("Theme deleted succesfully. Please select another theme."));
+					gtk_list_store_remove (GTK_LIST_STORE(model), &iter);
+					gtk_dialog_run (info_dialog);
+
+				} else {
+					info_dialog = gtk_message_dialog_new (NULL,
+								GTK_DIALOG_MODAL,
+								GTK_MESSAGE_ERROR,
+								GTK_BUTTONS_OK,
+								_("Theme can not be deleted"));
+					gtk_dialog_run (info_dialog);
+				}
+				gtk_widget_destroy (info_dialog);
+				gnome_vfs_uri_list_free (uri_list);
+			}
+		}
+  	}
+  }
+}
+
 void
 gnome_theme_details_init (void)
 {
@@ -290,16 +474,16 @@ gnome_theme_details_init (void)
 		   dialog);
 
   /* gtk themes */
-  widget = WID ("control_manage_button");
-  g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_theme_manager_show_manage_themes), dialog);
+  widget = WID ("control_remove_button");
+  g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (remove_theme), THEME_GTK);
 
   /* window manager themes */
-  widget = WID ("window_manage_button");
-  g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_theme_manager_window_show_manage_themes), dialog);
+  widget = WID ("window_remove_button");
+  g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (remove_theme), (gint*)THEME_WINDOW);
 
   /* icon themes */
-  widget = WID ("icon_manage_button");
-  g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_theme_manager_icon_show_manage_themes), dialog);
+  widget = WID ("icon_remove_button");
+  g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (remove_theme), (gint*)THEME_ICON);
 
 
   g_signal_connect (G_OBJECT (parent), "response", G_CALLBACK (cb_dialog_response), NULL);
