@@ -932,6 +932,7 @@ static void wallpaper_properties_init (poptContext ctx) {
   GdkCursor * cursor;
   const gchar ** args;
   GtkIconInfo * icon_info = NULL;
+  GtkFileFilter *filter;
 
   gtk_rc_parse_string ("style \"wp-tree-defaults\" {\n"
 		       "  GtkTreeView::horizontal-separator = 6\n"
@@ -1279,6 +1280,16 @@ static void wallpaper_properties_init (poptContext ctx) {
 
   gtk_file_chooser_set_use_preview_label (GTK_FILE_CHOOSER (capplet->filesel),
 					  FALSE);
+
+  filter = gtk_file_filter_new ();
+  gtk_file_filter_add_pixbuf_formats (filter);
+  gtk_file_filter_set_name (filter, _("Images"));
+  gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (capplet->filesel), filter);
+
+  filter = gtk_file_filter_new ();
+  gtk_file_filter_set_name (filter, _("All Files"));
+  gtk_file_filter_add_pattern (filter, "*");
+  gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (capplet->filesel), filter);
 
   capplet->image = gtk_image_new ();
   gtk_file_chooser_set_preview_widget (GTK_FILE_CHOOSER (capplet->filesel),
