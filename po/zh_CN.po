@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-17 22:10+0200\n"
-"PO-Revision-Date: 2005-08-11 12:47+0800\n"
+"POT-Creation-Date: 2005-11-22 06:28+0100\n"
+"PO-Revision-Date: 2005-11-22 17:14+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
 "MIME-Version: 1.0\n"
@@ -56,15 +56,15 @@ msgstr "关于我"
 msgid "Set your personal information"
 msgstr "设定您的个人信息"
 
-#: ../capplets/about-me/gnome-about-me.c:554
+#: ../capplets/about-me/gnome-about-me.c:596
 msgid "Select Image"
 msgstr "选择图像"
 
-#: ../capplets/about-me/gnome-about-me.c:556
+#: ../capplets/about-me/gnome-about-me.c:598
 msgid "No Image"
 msgstr "无图像"
 
-#: ../capplets/about-me/gnome-about-me.c:706
+#: ../capplets/about-me/gnome-about-me.c:761
 msgid ""
 "There was an error while trying to get the addressbook information\n"
 "Evolution Data Server can't handle the protocol"
@@ -72,16 +72,16 @@ msgstr ""
 "试图获取地址簿信息时出错\n"
 "Evolution 数据服务器无法处理协议"
 
-#: ../capplets/about-me/gnome-about-me.c:727
+#: ../capplets/about-me/gnome-about-me.c:782
 msgid "Unable to open address book"
 msgstr "无法打开地址簿"
 
-#: ../capplets/about-me/gnome-about-me.c:739
+#: ../capplets/about-me/gnome-about-me.c:794
 msgid "Unknown login ID, the user database might be corrupted"
 msgstr "未知的登录 ID，用户数据库可能已经损坏"
 
-#: ../capplets/about-me/gnome-about-me.c:770
-#: ../capplets/about-me/gnome-about-me.c:772
+#: ../capplets/about-me/gnome-about-me.c:825
+#: ../capplets/about-me/gnome-about-me.c:827
 #, c-format
 msgid "About %s"
 msgstr "关于 %s"
@@ -433,27 +433,27 @@ msgstr ""
 "您系统上并没有安装可用的全部辅助技术。必须安装“gnopernicus”软件包才能使用屏幕"
 "阅读和放大功能。"
 
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:241
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:242
 #, c-format
 msgid "There was an error launching the mouse preferences dialog: %s"
 msgstr "调用鼠标首选项对话框出错：%s"
 
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:337
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:398
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:338
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:399
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "无法从文件“%s”中导入 AccessX 设置 "
 
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:435
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:436
 msgid "Import Feature Settings File"
 msgstr "导入特性设置文件"
 
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:439
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:440
 msgid "_Import"
 msgstr "导入(_I)"
 
 #: ../capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.in.h:1
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:20
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:21
 #: ../capplets/keyboard/keyboard.desktop.in.in.h:1
 msgid "Keyboard"
 msgstr "键盘"
@@ -472,7 +472,6 @@ msgstr "此系统好像没有 XKB 扩展。键盘辅助功能必须依赖该扩�
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:1
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:2
 #: ../capplets/theme-switcher/theme-install.glade.h:1
-#: ../capplets/theme-switcher/theme-properties.glade.h:1
 msgid "*"
 msgstr "*"
 
@@ -588,7 +587,7 @@ msgid ""
 msgstr "顺序按下修饰键，可以产生同时按多个键的操作。"
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:29
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:31
 msgid "S_peed:"
 msgstr "速度(_P)："
 
@@ -617,7 +616,7 @@ msgid "_Only accept keys held for:"
 msgstr "接受按键，仅当按键时间超过(_O)："
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:39
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:41
 msgid "_Type to test settings:"
 msgstr "输入字符来测试设置(_T)："
 
@@ -648,7 +647,7 @@ msgstr "像素/秒"
 #. set the timeout value  label with correct value of timeout
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
 #: ../capplets/mouse/gnome-mouse-properties.c:138
-#: ../capplets/mouse/gnome-mouse-properties.c:885
+#: ../capplets/mouse/gnome-mouse-properties.c:879
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:27
 #: ../capplets/windows/gnome-window-properties.glade.h:10
 msgid "seconds"
@@ -688,57 +687,65 @@ msgstr "样式(_S)："
 
 #: ../capplets/background/gnome-wp-capplet.c:74
 #: ../capplets/common/capplet-util.c:340
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:333
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:331
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "显示帮助时出错：%s"
 
-#: ../capplets/background/gnome-wp-capplet.c:1042
 #: ../capplets/background/gnome-wp-capplet.c:1060
+#: ../capplets/background/gnome-wp-capplet.c:1078
 msgid "Centered"
 msgstr "居中"
 
-#: ../capplets/background/gnome-wp-capplet.c:1068
-#: ../capplets/background/gnome-wp-capplet.c:1085
+#: ../capplets/background/gnome-wp-capplet.c:1086
+#: ../capplets/background/gnome-wp-capplet.c:1103
 msgid "Fill Screen"
 msgstr "填充屏幕"
 
-#: ../capplets/background/gnome-wp-capplet.c:1093
-#: ../capplets/background/gnome-wp-capplet.c:1110
+#: ../capplets/background/gnome-wp-capplet.c:1111
+#: ../capplets/background/gnome-wp-capplet.c:1128
 msgid "Scaled"
 msgstr "缩放"
 
-#: ../capplets/background/gnome-wp-capplet.c:1118
-#: ../capplets/background/gnome-wp-capplet.c:1135
+#: ../capplets/background/gnome-wp-capplet.c:1136
+#: ../capplets/background/gnome-wp-capplet.c:1153
 msgid "Tiled"
 msgstr "平铺"
 
-#: ../capplets/background/gnome-wp-capplet.c:1159
-#: ../capplets/background/gnome-wp-capplet.c:1168
+#: ../capplets/background/gnome-wp-capplet.c:1177
+#: ../capplets/background/gnome-wp-capplet.c:1186
 msgid "Solid Color"
 msgstr "纯色"
 
-#: ../capplets/background/gnome-wp-capplet.c:1176
-#: ../capplets/background/gnome-wp-capplet.c:1185
+#: ../capplets/background/gnome-wp-capplet.c:1194
+#: ../capplets/background/gnome-wp-capplet.c:1203
 msgid "Horizontal Gradient"
 msgstr "水平渐变"
 
-#: ../capplets/background/gnome-wp-capplet.c:1193
-#: ../capplets/background/gnome-wp-capplet.c:1202
+#: ../capplets/background/gnome-wp-capplet.c:1211
+#: ../capplets/background/gnome-wp-capplet.c:1220
 msgid "Vertical Gradient"
 msgstr "垂直渐变"
 
 #. Create the file chooser dialog stuff here
-#: ../capplets/background/gnome-wp-capplet.c:1251
+#: ../capplets/background/gnome-wp-capplet.c:1269
 msgid "Add Wallpaper"
 msgstr "添加壁纸"
+
+#: ../capplets/background/gnome-wp-capplet.c:1286
+msgid "Images"
+msgstr "图像"
+
+#: ../capplets/background/gnome-wp-capplet.c:1290
+msgid "All Files"
+msgstr "全部文件"
 
 #: ../capplets/background/gnome-wp-info.c:57
 msgid "No Wallpaper"
 msgstr "无壁纸"
 
-#: ../capplets/background/gnome-wp-item.c:292
-#: ../capplets/background/gnome-wp-item.c:294
+#: ../capplets/background/gnome-wp-item.c:296
+#: ../capplets/background/gnome-wp-item.c:298
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "像素"
@@ -756,7 +763,7 @@ msgstr ""
 "或者非 GNOME（如 KDE）设置管理器可能已经处于活动状态，它与 GNOME 设置管理器发"
 "生冲突。"
 
-#: ../capplets/common/capplet-stock-icons.c:94
+#: ../capplets/common/capplet-stock-icons.c:92
 #, c-format
 msgid "Unable to load capplet stock icon '%s'\n"
 msgstr "无法装入 capplet 把手图标“%s”\n"
@@ -767,16 +774,16 @@ msgstr "应用设置并退出"
 
 #: ../capplets/common/capplet-util.c:243
 #: ../capplets/default-applications/gnome-default-applications-properties.c:765
-#: ../capplets/keyboard/gnome-keyboard-properties.c:225
-#: ../capplets/mouse/gnome-mouse-properties.c:1021
+#: ../capplets/keyboard/gnome-keyboard-properties.c:222
+#: ../capplets/mouse/gnome-mouse-properties.c:1015
 #: ../capplets/sound/sound-properties-capplet.c:244
 msgid "Retrieve and store legacy settings"
 msgstr "取得并保存原有的设置"
 
 #: ../capplets/common/file-transfer-dialog.c:94
 #, c-format
-msgid "Copying file: %i of %i"
-msgstr "正在复制文件：第%i个，共%i个"
+msgid "Copying file: %u of %u"
+msgstr "正在复制文件：第%u个，共%u个"
 
 #: ../capplets/common/file-transfer-dialog.c:122
 #, c-format
@@ -1008,55 +1015,60 @@ msgstr "Links 文字浏览器"
 #: ../capplets/default-applications/gnome-default-applications-properties-structs.c:39
 #: ../capplets/default-applications/gnome-default-applications-properties-structs.c:40
 #: ../capplets/default-applications/gnome-default-applications-properties-structs.c:41
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:42
 msgid "Evolution Mail Reader"
 msgstr "Evolution 邮件阅读程序"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:42
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:43
 msgid "Balsa"
 msgstr "Balsa"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:43
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:44
 msgid "KMail"
 msgstr "KMail"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:44
 #: ../capplets/default-applications/gnome-default-applications-properties-structs.c:45
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:46
 msgid "Thunderbird"
 msgstr "Thunderbird"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:46
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:47
 msgid "Mozilla Mail"
 msgstr "Mozilla Mail"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:47
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:48
 msgid "Mutt"
 msgstr "Mutt"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:58
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:49
+msgid "Sylpheed-Claws"
+msgstr "Sylpheed-Claws"
+
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:59
 msgid "Debian Terminal Emulator"
 msgstr "Debian 终端模拟器"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:59
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:60
 msgid "GNOME Terminal"
 msgstr "GNOME 终端"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:60
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:61
 msgid "Standard XTerminal"
 msgstr "标准 X 终端"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:61
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:62
 msgid "NXterm"
 msgstr "NXterm"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:62
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:63
 msgid "RXVT"
 msgstr "RXVT"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:63
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:64
 msgid "aterm"
 msgstr "aterm"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:64
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:65
 msgid "ETerm"
 msgstr "ETerm"
 
@@ -1451,24 +1463,24 @@ msgstr "加速键类型。"
 msgid "Disabled"
 msgstr "禁用"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:545
+#: ../capplets/keybindings/gnome-keybinding-properties.c:544
 msgid "<Unknown Action>"
 msgstr "<未知操作>"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:566
+#: ../capplets/keybindings/gnome-keybinding-properties.c:565
 msgid "Desktop"
 msgstr "桌面"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:567
+#: ../capplets/keybindings/gnome-keybinding-properties.c:566
 #: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
 msgid "Sound"
 msgstr "音效"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:571
+#: ../capplets/keybindings/gnome-keybinding-properties.c:570
 msgid "Window Management"
 msgstr "窗口管理器"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:668
+#: ../capplets/keybindings/gnome-keybinding-properties.c:667
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1477,21 +1489,21 @@ msgstr ""
 "快捷键“%s”已经用于：\n"
 "“%s”\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:700
+#: ../capplets/keybindings/gnome-keybinding-properties.c:699
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "在配置数据库中设置新加速键时出错：%s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:750
+#: ../capplets/keybindings/gnome-keybinding-properties.c:749
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "在配置数据库中取消设置新加速键时出错：%s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:857
+#: ../capplets/keybindings/gnome-keybinding-properties.c:856
 msgid "Action"
 msgstr "动作"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:881
+#: ../capplets/keybindings/gnome-keybinding-properties.c:880
 msgid "Shortcut"
 msgstr "快捷键"
 
@@ -1536,19 +1548,19 @@ msgstr "型号"
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "调用键盘 capplet 出错：%s"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:202
+#: ../capplets/keyboard/gnome-keyboard-properties.c:199
 msgid "_Accessibility"
 msgstr "辅助功能(_A)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:221
-#: ../capplets/keyboard/gnome-keyboard-properties.c:223
+#: ../capplets/keyboard/gnome-keyboard-properties.c:218
+#: ../capplets/keyboard/gnome-keyboard-properties.c:220
 #: ../capplets/sound/sound-properties-capplet.c:240
 #: ../capplets/sound/sound-properties-capplet.c:242
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr "应用设置并退出(仅为兼容，现在已由守护进程处理)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:227
+#: ../capplets/keyboard/gnome-keyboard-properties.c:224
 msgid "Start the page with the typing break settings showing"
 msgstr "以显示的打字间隔设置启动页面"
 
@@ -1609,92 +1621,100 @@ msgid "Cursor _blinks in text boxes and fields"
 msgstr "文本框和文本域中的光标会闪烁(_B)"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:17
+msgid "Cursor blinks speed"
+msgstr "光标闪烁速度"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:18
 msgid "Duration of the break when typing is disallowed"
 msgstr "不允许打字时间断持续时间"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:18
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:19
 msgid "Duration of work before forcing a break"
 msgstr "强制间断前的工作持续时间"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:19
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:20
 msgid "Key presses _repeat when key is held down"
 msgstr "按住某一键时重复该键(_R)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:22
 msgid "Keyboard Preferences"
 msgstr "键盘首选项"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "Keyboard _model:"
 msgstr "键盘型号(_M)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:23
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:24
 msgid "Layout Options"
 msgstr "布局选项"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:24
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "Layouts"
 msgstr "布局"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:25
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:26
 msgid ""
 "Lock screen after a certain duration to help prevent repetitive keyboard use "
 "injuries"
 msgstr "每隔一段时间锁定屏幕，以便重复性的键盘工作使手臂过度劳累"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:26
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:27
 msgid "Microsoft Natural Keyboard"
 msgstr "Microsoft 自然键盘"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:27
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:28
 msgid "Preview:"
 msgstr "预览："
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:28
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:29
+msgid "Repeat keys speed"
+msgstr "重复键速度"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:30
 msgid "Reset To De_faults"
 msgstr "重置为默认值(_F)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:30
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:32
 msgid "Separate _group for each window"
 msgstr "每个窗口区分组(_G)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:31
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:33
 msgid "Typing Break"
 msgstr "打字间断"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:32
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:34
 msgid "_Accessibility..."
 msgstr "辅助功能(_A)..."
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:33
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:35
 msgid "_Add..."
 msgstr "添加(_A)..."
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:34
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:36
 msgid "_Break interval lasts:"
 msgstr "间断间隔持续(_B)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:35
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:37
 msgid "_Delay:"
 msgstr "延时(_D)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:36
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:38
 msgid "_Models:"
 msgstr "型号(_M)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:37
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:39
 msgid "_Selected layouts:"
 msgstr "选择布局(_S)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:38
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:40
 msgid "_Speed:"
 msgstr "速度(_S)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:40
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:42
 msgid "_Work interval lasts:"
 msgstr "工作间隔持续(_W)："
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:41
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:43
 msgid "minutes"
 msgstr "分钟"
 
@@ -1706,55 +1726,55 @@ msgstr "设置键盘首选项"
 msgid "Unknown Cursor"
 msgstr "未知光标"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:761
+#: ../capplets/mouse/gnome-mouse-properties.c:760
 msgid "Default Cursor"
 msgstr "默认光标"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:762
+#: ../capplets/mouse/gnome-mouse-properties.c:761
 msgid "Default Cursor - Current"
 msgstr "默认光标 - 当前"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:763
+#: ../capplets/mouse/gnome-mouse-properties.c:762
 msgid "The default cursor that ships with X"
 msgstr "X 自带的默认光标"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:767
+#: ../capplets/mouse/gnome-mouse-properties.c:766
 msgid "White Cursor"
 msgstr "白光标"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:768
+#: ../capplets/mouse/gnome-mouse-properties.c:767
 msgid "White Cursor - Current"
 msgstr "白光标 - 当前"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:769
+#: ../capplets/mouse/gnome-mouse-properties.c:768
 msgid "The default cursor inverted"
 msgstr "默认反转光标"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:773
+#: ../capplets/mouse/gnome-mouse-properties.c:772
 msgid "Large Cursor"
 msgstr "大光标"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:774
+#: ../capplets/mouse/gnome-mouse-properties.c:773
 msgid "Large Cursor - Current"
 msgstr "大光标 - 当前"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:775
+#: ../capplets/mouse/gnome-mouse-properties.c:774
 msgid "Large version of normal cursor"
 msgstr "大号的普通光标"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:779
+#: ../capplets/mouse/gnome-mouse-properties.c:778
 msgid "Large White Cursor - Current"
 msgstr "大号的白色光标 - 当前"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:780
+#: ../capplets/mouse/gnome-mouse-properties.c:779
 msgid "Large White Cursor"
 msgstr "大号的白色光标"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:781
+#: ../capplets/mouse/gnome-mouse-properties.c:780
 msgid "Large version of white cursor"
 msgstr "大号的白色光标"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:975
+#: ../capplets/mouse/gnome-mouse-properties.c:969
 msgid "Cursor Theme"
 msgstr "光标主题"
 
@@ -1995,7 +2015,19 @@ msgstr "事件产生音效(_S)"
 msgid "_Visual feedback:"
 msgstr "视觉反馈(_V)："
 
-#: ../capplets/theme-switcher/gnome-theme-details.c:347
+#: ../capplets/theme-switcher/gnome-theme-details.c:368
+msgid "Would you like to remove this theme?"
+msgstr "您是否想要删除此主题？"
+
+#: ../capplets/theme-switcher/gnome-theme-details.c:433
+msgid "Theme deleted succesfully. Please select another theme."
+msgstr "主题已经成功删除。请另外选择一个主题。"
+
+#: ../capplets/theme-switcher/gnome-theme-details.c:442
+msgid "Theme can not be deleted"
+msgstr "主题无法删除"
+
+#: ../capplets/theme-switcher/gnome-theme-details.c:529
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -2008,11 +2040,11 @@ msgstr ""
 msgid "This theme is not in a supported format."
 msgstr "主题的格式不被支持。"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:244
+#: ../capplets/theme-switcher/gnome-theme-installer.c:242
 msgid "Failed to create temporary directory"
 msgstr "创建临时目录失败"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:264
+#: ../capplets/theme-switcher/gnome-theme-installer.c:260
 msgid ""
 "Can not install theme. \n"
 "The bzip2 utility is not installed."
@@ -2020,13 +2052,13 @@ msgstr ""
 "无法安装主题。\n"
 "系统中没有安装 bzip2 工具。"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:282
-#: ../capplets/theme-switcher/gnome-theme-installer.c:319
-#: ../capplets/theme-switcher/gnome-theme-installer.c:399
+#: ../capplets/theme-switcher/gnome-theme-installer.c:276
+#: ../capplets/theme-switcher/gnome-theme-installer.c:309
+#: ../capplets/theme-switcher/gnome-theme-installer.c:383
 msgid "Installation Failed"
 msgstr "主题失败"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:302
+#: ../capplets/theme-switcher/gnome-theme-installer.c:294
 msgid ""
 "Can not install themes. \n"
 "The gzip utility is not installed."
@@ -2034,7 +2066,7 @@ msgstr ""
 "无法安装主题。\n"
 "系统中没有安装 gzip 工具。"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:340
+#: ../capplets/theme-switcher/gnome-theme-installer.c:330
 #, c-format
 msgid ""
 "Icon Theme %s correctly installed.\n"
@@ -2043,12 +2075,12 @@ msgstr ""
 "图标主题 %s 已正确安装。\n"
 "您可以在主题细节中选择该主题。"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:343
+#: ../capplets/theme-switcher/gnome-theme-installer.c:333
 #, c-format
 msgid "Gnome Theme %s correctly installed"
 msgstr "Gnmoe 主题 %s 已正确安装"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:346
+#: ../capplets/theme-switcher/gnome-theme-installer.c:336
 #, c-format
 msgid ""
 "Windows Border Theme %s correctly installed.\n"
@@ -2057,7 +2089,7 @@ msgstr ""
 "窗口边框主题 %s 已正确安装。\n"
 "您可以在主题细节中选择该主题。"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:349
+#: ../capplets/theme-switcher/gnome-theme-installer.c:339
 #, c-format
 msgid ""
 "Controls Theme %s correctly installed.\n"
@@ -2066,23 +2098,23 @@ msgstr ""
 "控件主题 %s 已正确安装。\n"
 "您可以在主题细节中选择该主题。"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:357
+#: ../capplets/theme-switcher/gnome-theme-installer.c:345
 msgid "The theme is an engine. You need to compile the theme."
 msgstr "主题是一个引擎。您需要编译主题。"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:374
+#: ../capplets/theme-switcher/gnome-theme-installer.c:360
 msgid "The file format is invalid"
 msgstr "文件格式无效"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:468
+#: ../capplets/theme-switcher/gnome-theme-installer.c:450
 msgid "No theme file location specified to install"
 msgstr "没有指定要安装的主题的文件位置"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:485
+#: ../capplets/theme-switcher/gnome-theme-installer.c:469
 msgid "The theme file location specified to install is invalid"
 msgstr "所指定要安装的主题文件的位置无效"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:505
+#: ../capplets/theme-switcher/gnome-theme-installer.c:489
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -2091,18 +2123,18 @@ msgstr ""
 "没有足够的权限将主题安装到：\n"
 "%s"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:526
+#: ../capplets/theme-switcher/gnome-theme-installer.c:510
 msgid "The file format is invalid."
 msgstr "文件格式无效。"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:553
+#: ../capplets/theme-switcher/gnome-theme-installer.c:537
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
 "selected as the source location"
 msgstr "%s 将要作为主题文件安装的目的路径。所以，您不能将其选为源位置"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:607
+#: ../capplets/theme-switcher/gnome-theme-installer.c:591
 msgid ""
 "Cannot install theme.\n"
 "The tar program is not installed on your system."
@@ -2118,7 +2150,7 @@ msgstr "自定义主题"
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "按保存主题按钮可以保存此主题。"
 
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1476
+#: ../capplets/theme-switcher/gnome-theme-manager.c:1479
 msgid ""
 "The default theme schemas could not be found on your system.  This means "
 "that you probably don't have metacity installed, or that your gconf is "
@@ -2160,95 +2192,96 @@ msgstr "安装(_I)"
 msgid "_Location:"
 msgstr "位置(_L)："
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:2
+#: ../capplets/theme-switcher/theme-properties.glade.h:1
 msgid "<span size=\"larger\" weight=\"bold\">Save Theme to Disk</span>"
 msgstr "<span size=\"larger\" weight=\"bold\">将主题保存到磁盘</span>"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:3
+#: ../capplets/theme-switcher/theme-properties.glade.h:2
 msgid "Apply _Background"
 msgstr "应用背景(_B)"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:4
+#: ../capplets/theme-switcher/theme-properties.glade.h:3
 msgid "Apply _Font"
 msgstr "应用字体(_F)"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:5
+#: ../capplets/theme-switcher/theme-properties.glade.h:4
 msgid "Controls"
 msgstr "控件"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:6
+#: ../capplets/theme-switcher/theme-properties.glade.h:5
 msgid "Icons"
 msgstr "图标"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:7
+#: ../capplets/theme-switcher/theme-properties.glade.h:6
 msgid "New themes can also be installed by dragging them into the window."
 msgstr "也可以通过拖动主题文件到本窗口中的方法来安装新主题。"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:8
+#: ../capplets/theme-switcher/theme-properties.glade.h:7
 msgid "Save Theme"
 msgstr "保存主题"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:9
+#: ../capplets/theme-switcher/theme-properties.glade.h:8
 msgid "Select theme for the desktop"
 msgstr "为桌面选择主题"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:10
+#: ../capplets/theme-switcher/theme-properties.glade.h:9
 msgid "Short _description:"
 msgstr "简要描述(_D)："
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:11
+#: ../capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Theme Details"
 msgstr "主题细节"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:12
+#: ../capplets/theme-switcher/theme-properties.glade.h:11
 msgid "Theme Preferences"
 msgstr "主题首选项"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:13
+#: ../capplets/theme-switcher/theme-properties.glade.h:12
 msgid "Theme _Details"
 msgstr "主题细节(_D)"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:14
+#: ../capplets/theme-switcher/theme-properties.glade.h:13
 msgid "This theme does not suggest any particular font or background."
 msgstr "该主题未建议任何特定的字体或背景。"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:15
+#: ../capplets/theme-switcher/theme-properties.glade.h:14
 msgid "This theme suggests a background:"
 msgstr "该主题建议使用背景："
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:16
+#: ../capplets/theme-switcher/theme-properties.glade.h:15
 msgid "This theme suggests a font and a background:"
 msgstr "该主题建议使用的字体和背景："
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:17
+#: ../capplets/theme-switcher/theme-properties.glade.h:16
 msgid "This theme suggests a font:"
 msgstr "该主题建议使用字体："
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:18
+#: ../capplets/theme-switcher/theme-properties.glade.h:17
 msgid "Window Border"
 msgstr "窗口边框"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:19
-msgid "_Go To Theme Folder"
-msgstr "转到主题文件夹(_G)"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:20
+#: ../capplets/theme-switcher/theme-properties.glade.h:18
 msgid "_Install Theme..."
 msgstr "安装主题(_I)..."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:21
+#: ../capplets/theme-switcher/theme-properties.glade.h:19
+#: ../libsounds/sound-view.c:366
+msgid "_Remove"
+msgstr "删除(_R)"
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:20
 msgid "_Revert"
 msgstr "复原(_R)"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:22
+#: ../capplets/theme-switcher/theme-properties.glade.h:21
 msgid "_Save Theme..."
 msgstr "保存主题(_S)..."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:23
+#: ../capplets/theme-switcher/theme-properties.glade.h:22
 msgid "_Theme name:"
 msgstr "主题名称(_T)："
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:24
+#: ../capplets/theme-switcher/theme-properties.glade.h:23
 msgid "theme selection tree"
 msgstr "主题选择树"
 
@@ -2356,7 +2389,7 @@ msgstr "退出(_Q)"
 msgid "_Save"
 msgstr "保存(_S)"
 
-#: ../capplets/windows/gnome-window-properties.c:386
+#: ../capplets/windows/gnome-window-properties.c:385
 #, c-format
 msgid ""
 "<b>Cannot start the preferences application for your window manager</b>\n"
@@ -2367,23 +2400,23 @@ msgstr ""
 "\n"
 "%s"
 
-#: ../capplets/windows/gnome-window-properties.c:644
+#: ../capplets/windows/gnome-window-properties.c:642
 msgid "Control"
 msgstr "Ctrl"
 
-#: ../capplets/windows/gnome-window-properties.c:649
+#: ../capplets/windows/gnome-window-properties.c:647
 msgid "Alt"
 msgstr "Alt"
 
-#: ../capplets/windows/gnome-window-properties.c:655
+#: ../capplets/windows/gnome-window-properties.c:653
 msgid "Hyper"
 msgstr "Hyper"
 
-#: ../capplets/windows/gnome-window-properties.c:662
+#: ../capplets/windows/gnome-window-properties.c:660
 msgid "Super (or \"Windows logo\")"
 msgstr "Super (或“Windows 标志”)"
 
-#: ../capplets/windows/gnome-window-properties.c:669
+#: ../capplets/windows/gnome-window-properties.c:667
 msgid "Meta"
 msgstr "Meta"
 
@@ -2431,7 +2464,7 @@ msgstr "设定您的窗口属性"
 msgid "Windows"
 msgstr "窗口"
 
-#: ../control-center/control-center-categories.c:257
+#: ../control-center/control-center-categories.c:287
 msgid "Others"
 msgstr "其它"
 
@@ -2452,15 +2485,15 @@ msgstr "GNOME 配置工具"
 msgid "Volume"
 msgstr "音量"
 
-#: ../gnome-settings-daemon/factory.c:36
+#: ../gnome-settings-daemon/factory.c:37
 msgid "Could not initialize Bonobo"
 msgstr "无法能初始化 Bonobo"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:397
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:395
 msgid "Slow Keys Alert"
 msgstr "筛选键提醒"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:398
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:396
 msgid ""
 "You just held down the Shift key for 8 seconds.  This is the shortcut for "
 "the Slow Keys feature, which affects the way your keyboard works."
@@ -2468,19 +2501,19 @@ msgstr ""
 "您已经按下了 Shift 键 8 秒。这是筛选键特性的快捷键，这将影响您键盘工作的方"
 "式。"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:400
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:398
 msgid "Do you want to activate Slow Keys?"
 msgstr "您想要激活筛选键吗？"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:401
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:399
 msgid "Do you want to deactivate Slow Keys?"
 msgstr "您想要禁用筛选键吗？"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:410
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:408
 msgid "Sticky Keys Alert"
 msgstr "粘滞键提醒"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:409
 msgid ""
 "You just pressed the Shift key 5 times in a row.  This is the shortcut for "
 "the Sticky Keys feature, which affects the way your keyboard works."
@@ -2488,7 +2521,7 @@ msgstr ""
 "您刚刚连续按了五次 Shift 键。这是粘滞键特性的快捷键，这将影响您键盘的工作方"
 "式。"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
 msgid ""
 "You just pressed two keys at once, or pressed the Shift key 5 times in a "
 "row.  This turns off the Sticky Keys feature, which affects the way your "
@@ -2497,11 +2530,11 @@ msgstr ""
 "您刚刚同时按下了两个键，或连续按了五次 Shift 键。这是取消粘滞键特性的快捷键，"
 "这将影响您键盘的工作方式。"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:415
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
 msgid "Do you want to activate Sticky Keys?"
 msgstr "您想要激活粘滞键吗？"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:416
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:414
 msgid "Do you want to deactivate Sticky Keys?"
 msgstr "您想要禁用粘滞键吗？"
 
@@ -2514,37 +2547,37 @@ msgstr ""
 "无法创建目录“%s”。\n"
 "允许改变光标需要此操作。"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:209
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:208
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr "键盘关联(%s)的按键定义了多次\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:222
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:221
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr "键盘关联(%s)的关联操作定义了多次\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:228
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:227
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr "键盘关联(%s)不完整\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:256
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:255
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr "键盘关联(%s)无效\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:292
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:291
 #, c-format
-msgid "It seems that another application already has access to key '%d'."
-msgstr "似乎其它应用程序已经被指定了访问键“%d”。"
+msgid "It seems that another application already has access to key '%u'."
+msgstr "似乎其它应用程序已经被指定了访问键“%u”。"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:361
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:360
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr "键盘关联(%s)已被使用\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:436
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:435
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -2595,21 +2628,21 @@ msgstr ""
 "复杂的 XKB 配置有一些已知的问题。\n"
 "请试着使用较简单的配置，或者获得更新版本的 XFree 软件。"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:227
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:223
 msgid "Do _not show this warning again"
 msgstr "不再显示此警告(_N)"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:238
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:234
 msgid ""
 "The X system keyboard settings differ from your current GNOME keyboard "
 "settings.  Which set would you like to use?"
 msgstr "X 系统键盘设置与您当前的 GNOME 键盘设置不同。您想要使用哪一个设置？"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:251
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:247
 msgid "Use X settings"
 msgstr "使用 X 设置"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:253
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:249
 msgid "Use GNOME settings"
 msgstr "使用 GNOME 设置"
 
@@ -2643,7 +2676,7 @@ msgstr ""
 "无法装入 Glade 文件。\n"
 "请确定此守护程序已经正确安装了。"
 
-#: ../gnome-settings-daemon/gnome-settings-screensaver.c:113
+#: ../gnome-settings-daemon/gnome-settings-screensaver.c:110
 #, c-format
 msgid ""
 "There was an error starting up the screensaver:\n"
@@ -2658,7 +2691,7 @@ msgstr ""
 "\n"
 "此对话中将无法使用屏幕保护功能。"
 
-#: ../gnome-settings-daemon/gnome-settings-screensaver.c:123
+#: ../gnome-settings-daemon/gnome-settings-screensaver.c:120
 msgid "_Do not show this message again"
 msgstr "不再显示此信息(_D)"
 
@@ -2667,12 +2700,12 @@ msgstr "不再显示此信息(_D)"
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "无法载入声音文件 %s 作为示例 %s"
 
-#: ../gnome-settings-daemon/gnome-settings-xrdb.c:214
-#: ../gnome-settings-daemon/gnome-settings-xrdb.c:262
+#: ../gnome-settings-daemon/gnome-settings-xrdb.c:212
+#: ../gnome-settings-daemon/gnome-settings-xrdb.c:260
 msgid "Cannot determine user's home directory"
 msgstr "无法确定用户的主目录"
 
-#: ../gnome-settings-daemon/gnome-settings-xsettings.c:215
+#: ../gnome-settings-daemon/gnome-settings-xsettings.c:210
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "GConf 键 %s 被设为 %s 类型，但是期望的类型是 %s\n"
@@ -2787,10 +2820,6 @@ msgstr "选择声音文件"
 #: ../libsounds/sound-view.c:356
 msgid "_Play"
 msgstr "播放(_P)"
-
-#: ../libsounds/sound-view.c:366
-msgid "_Remove"
-msgstr "删除(_R)"
 
 #: ../libwindow-settings/gnome-wm-manager.c:320
 #, c-format
@@ -3127,6 +3156,14 @@ msgstr "Anders Carlsson 添加了视觉效果"
 msgid "Break reminder"
 msgstr "间隔提醒程序"
 
+#: ../typing-break/eggtrayicon.c:127
+msgid "Orientation"
+msgstr "方向"
+
+#: ../typing-break/eggtrayicon.c:128
+msgid "The orientation of the tray."
+msgstr "托盘的方向。"
+
 #: ../typing-break/main.c:93
 msgid "The typing monitor is already running."
 msgstr "已经运行了打字提醒程序。"
@@ -3276,7 +3313,7 @@ msgstr "您选中的主题建议使用新字体，该字体的预览显示在下
 msgid "_Apply font"
 msgstr "应用字体(_A)"
 
-#: ../vfs-methods/themus/theme-method.c:520
+#: ../vfs-methods/themus/theme-method.c:518
 msgid "Themes"
 msgstr "主题"
 
@@ -3341,3 +3378,4 @@ msgstr "是否将已安装的主题显示为缩略图"
 #: ../vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "是否将主题显示为缩略图"
+
