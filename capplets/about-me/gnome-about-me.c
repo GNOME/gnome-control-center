@@ -25,6 +25,10 @@
 
 #include <gnome.h>
 #include <pwd.h>
+#include <libgnomevfs/gnome-vfs.h>
+#include <libgnomevfs/gnome-vfs-mime-handlers.h>
+#include <libgnomevfs/gnome-vfs-mime-utils.h>
+#include <libgnomeui/gnome-thumbnail.h>
 #include <gconf/gconf-client.h>
 #include <glade/glade.h>
 #include <pwd.h>
@@ -47,6 +51,7 @@ typedef struct {
 
 	GdkScreen    	*screen;
 	GtkIconTheme 	*theme;
+	GnomeThumbnailFactory *thumbs;
 
 	EContactAddress *addr1;
 	EContactAddress *addr2;
@@ -540,6 +545,42 @@ eab_create_image_chooser_widget (gchar *name,
 	return w;
 }
 
+static void 
+about_me_update_preview (GtkFileChooser *chooser,
+			 GnomeAboutMe   *me) 
+{
+	gchar *uri;
+
+	uri = gtk_file_chooser_get_preview_uri (chooser);
+	
+	if (uri) {
+		GtkWidget *image;
+		GdkPixbuf *pixbuf;
+		gchar *mime_type;
+
+		if (!me->thumbs)
+			me->thumbs = gnome_thumbnail_factory_new (GNOME_THUMBNAIL_SIZE_NORMAL);
+
+		
+		mime_type = gnome_vfs_get_mime_type (uri);
+		pixbuf = gnome_thumbnail_factory_generate_thumbnail (me->thumbs,
+								     uri,
+								     mime_type);
+		image = gtk_file_chooser_get_preview_widget (chooser);
+		
+		if(pixbuf != NULL) {
+			gtk_image_set_from_pixbuf (GTK_IMAGE (image), pixbuf);
+			g_object_unref (pixbuf);
+		} else {
+			gtk_image_set_from_stock (GTK_IMAGE (image),
+						  "gtk-dialog-question",
+						  GTK_ICON_SIZE_DIALOG);
+		}
+		g_free (mime_type);
+	}
+	gtk_file_chooser_set_preview_widget_active (chooser, TRUE);
+}
+
 static void
 about_me_image_clicked_cb (GtkWidget *button, GnomeAboutMe *me)
 {
@@ -547,6 +588,7 @@ about_me_image_clicked_cb (GtkWidget *button, GnomeAboutMe *me)
 	gint response;
 	GtkWidget *image_chooser;
 	GladeXML  *dialog;
+	GtkWidget *image;
 	
 	dialog = me->dialog;
 	image_chooser = WID ("image-chooser");
@@ -560,6 +602,19 @@ about_me_image_clicked_cb (GtkWidget *button, GnomeAboutMe *me)
 	gtk_window_set_modal (GTK_WINDOW (chooser_dialog), TRUE);
 	gtk_dialog_set_default_response (GTK_DIALOG (chooser_dialog), GTK_RESPONSE_ACCEPT);
 	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (chooser_dialog), g_get_home_dir ());
+
+	gtk_file_chooser_set_use_preview_label (GTK_FILE_CHOOSER (chooser_dialog),
+						FALSE);
+	
+	image = gtk_image_new ();
+	gtk_file_chooser_set_preview_widget (GTK_FILE_CHOOSER (chooser_dialog),
+					     image);
+	gtk_widget_set_size_request (image, 128, -1);
+	
+	gtk_widget_show (image);
+
+	g_signal_connect (chooser_dialog, "update-preview",
+			  G_CALLBACK (about_me_update_preview), me);
 
 	response=gtk_dialog_run (GTK_DIALOG (chooser_dialog));
 
