@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-16 06:34+0100\n"
-"PO-Revision-Date: 2005-11-16 06:36+0100\n"
+"POT-Creation-Date: 2005-11-22 22:19+0100\n"
+"PO-Revision-Date: 2005-11-22 22:21+0100\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
@@ -62,15 +62,15 @@ msgstr "O mne"
 msgid "Set your personal information"
 msgstr "Nastaviť vaše osobné informácie"
 
-#: ../capplets/about-me/gnome-about-me.c:554
+#: ../capplets/about-me/gnome-about-me.c:596
 msgid "Select Image"
 msgstr "Vybrať obrázok"
 
-#: ../capplets/about-me/gnome-about-me.c:556
+#: ../capplets/about-me/gnome-about-me.c:598
 msgid "No Image"
 msgstr "Bez obrázka"
 
-#: ../capplets/about-me/gnome-about-me.c:706
+#: ../capplets/about-me/gnome-about-me.c:761
 msgid ""
 "There was an error while trying to get the addressbook information\n"
 "Evolution Data Server can't handle the protocol"
@@ -78,16 +78,16 @@ msgstr ""
 "Vyskytla sa chyba pri pokuse o získanie informácií adresára\n"
 "Evolution Data Server nemôže obslúžiť tento protokol"
 
-#: ../capplets/about-me/gnome-about-me.c:727
+#: ../capplets/about-me/gnome-about-me.c:782
 msgid "Unable to open address book"
 msgstr "Nepodarilo sa otvoriť adresár"
 
-#: ../capplets/about-me/gnome-about-me.c:739
+#: ../capplets/about-me/gnome-about-me.c:794
 msgid "Unknown login ID, the user database might be corrupted"
 msgstr "Neznáme prihlasovacie ID, databáza používateľov je možno poškodená"
 
-#: ../capplets/about-me/gnome-about-me.c:770
-#: ../capplets/about-me/gnome-about-me.c:772
+#: ../capplets/about-me/gnome-about-me.c:825
+#: ../capplets/about-me/gnome-about-me.c:827
 #, c-format
 msgid "About %s"
 msgstr "O %s"
@@ -482,7 +482,6 @@ msgstr ""
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:1
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:2
 #: ../capplets/theme-switcher/theme-install.glade.h:1
-#: ../capplets/theme-switcher/theme-properties.glade.h:1
 msgid "*"
 msgstr "*"
 
@@ -706,45 +705,53 @@ msgstr "Š_týl:"
 msgid "There was an error displaying help: %s"
 msgstr "Pri pokuse o zobrazenie Pomocníka nastala chyba: %s"
 
-#: ../capplets/background/gnome-wp-capplet.c:1059
-#: ../capplets/background/gnome-wp-capplet.c:1077
+#: ../capplets/background/gnome-wp-capplet.c:1060
+#: ../capplets/background/gnome-wp-capplet.c:1078
 msgid "Centered"
 msgstr "V strede"
 
-#: ../capplets/background/gnome-wp-capplet.c:1085
-#: ../capplets/background/gnome-wp-capplet.c:1102
+#: ../capplets/background/gnome-wp-capplet.c:1086
+#: ../capplets/background/gnome-wp-capplet.c:1103
 msgid "Fill Screen"
 msgstr "Na celú obrazovku"
 
-#: ../capplets/background/gnome-wp-capplet.c:1110
-#: ../capplets/background/gnome-wp-capplet.c:1127
+#: ../capplets/background/gnome-wp-capplet.c:1111
+#: ../capplets/background/gnome-wp-capplet.c:1128
 msgid "Scaled"
 msgstr "Škálované"
 
-#: ../capplets/background/gnome-wp-capplet.c:1135
-#: ../capplets/background/gnome-wp-capplet.c:1152
+#: ../capplets/background/gnome-wp-capplet.c:1136
+#: ../capplets/background/gnome-wp-capplet.c:1153
 msgid "Tiled"
 msgstr "Dlaždice"
 
-#: ../capplets/background/gnome-wp-capplet.c:1176
-#: ../capplets/background/gnome-wp-capplet.c:1185
+#: ../capplets/background/gnome-wp-capplet.c:1177
+#: ../capplets/background/gnome-wp-capplet.c:1186
 msgid "Solid Color"
 msgstr "Plná farba"
 
-#: ../capplets/background/gnome-wp-capplet.c:1193
-#: ../capplets/background/gnome-wp-capplet.c:1202
+#: ../capplets/background/gnome-wp-capplet.c:1194
+#: ../capplets/background/gnome-wp-capplet.c:1203
 msgid "Horizontal Gradient"
 msgstr "Horizontálny prechod"
 
-#: ../capplets/background/gnome-wp-capplet.c:1210
-#: ../capplets/background/gnome-wp-capplet.c:1219
+#: ../capplets/background/gnome-wp-capplet.c:1211
+#: ../capplets/background/gnome-wp-capplet.c:1220
 msgid "Vertical Gradient"
 msgstr "Vertikálny prechod"
 
 #. Create the file chooser dialog stuff here
-#: ../capplets/background/gnome-wp-capplet.c:1268
+#: ../capplets/background/gnome-wp-capplet.c:1269
 msgid "Add Wallpaper"
 msgstr "Pridať tapetu"
+
+#: ../capplets/background/gnome-wp-capplet.c:1286
+msgid "Images"
+msgstr "Obrázky"
+
+#: ../capplets/background/gnome-wp-capplet.c:1290
+msgid "All Files"
+msgstr "Všetky súbory"
 
 #: ../capplets/background/gnome-wp-info.c:57
 msgid "No Wallpaper"
@@ -2061,7 +2068,19 @@ msgstr "_Zvuky pre udalosti"
 msgid "_Visual feedback:"
 msgstr "_Viditeľná reakcia:"
 
-#: ../capplets/theme-switcher/gnome-theme-details.c:345
+#: ../capplets/theme-switcher/gnome-theme-details.c:368
+msgid "Would you like to remove this theme?"
+msgstr "Chceli by ste odstrániť túto tému?"
+
+#: ../capplets/theme-switcher/gnome-theme-details.c:433
+msgid "Theme deleted succesfully. Please select another theme."
+msgstr "Téma bola odstránená úspešne. Prosím, vyberte inú tému."
+
+#: ../capplets/theme-switcher/gnome-theme-details.c:442
+msgid "Theme can not be deleted"
+msgstr "Tému nie je možné odstrániť"
+
+#: ../capplets/theme-switcher/gnome-theme-details.c:529
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -2229,95 +2248,96 @@ msgstr "_Inštalovať"
 msgid "_Location:"
 msgstr "U_miestnenie:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:2
+#: ../capplets/theme-switcher/theme-properties.glade.h:1
 msgid "<span size=\"larger\" weight=\"bold\">Save Theme to Disk</span>"
 msgstr "<span size=\"larger\" weight=\"bold\">Uložiť tému na disk</span>"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:3
+#: ../capplets/theme-switcher/theme-properties.glade.h:2
 msgid "Apply _Background"
 msgstr "Použiť _pozadie"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:4
+#: ../capplets/theme-switcher/theme-properties.glade.h:3
 msgid "Apply _Font"
 msgstr "Použiť pí_smo"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:5
+#: ../capplets/theme-switcher/theme-properties.glade.h:4
 msgid "Controls"
 msgstr "Ovládacie prvky"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:6
+#: ../capplets/theme-switcher/theme-properties.glade.h:5
 msgid "Icons"
 msgstr "Ikony"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:7
+#: ../capplets/theme-switcher/theme-properties.glade.h:6
 msgid "New themes can also be installed by dragging them into the window."
 msgstr "Nové témy je možné nainštalovať aj ťahaním myšou do tohto okna."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:8
+#: ../capplets/theme-switcher/theme-properties.glade.h:7
 msgid "Save Theme"
 msgstr "Uložiť tému"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:9
+#: ../capplets/theme-switcher/theme-properties.glade.h:8
 msgid "Select theme for the desktop"
 msgstr "Vyberte tému pre prostredie"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:10
+#: ../capplets/theme-switcher/theme-properties.glade.h:9
 msgid "Short _description:"
 msgstr "_Krátky popis:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:11
+#: ../capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Theme Details"
 msgstr "Detaily témy"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:12
+#: ../capplets/theme-switcher/theme-properties.glade.h:11
 msgid "Theme Preferences"
 msgstr "Nastavenie témy"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:13
+#: ../capplets/theme-switcher/theme-properties.glade.h:12
 msgid "Theme _Details"
 msgstr "_Detaily témy"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:14
+#: ../capplets/theme-switcher/theme-properties.glade.h:13
 msgid "This theme does not suggest any particular font or background."
 msgstr "Táto téma nenavrhuje žiadne písmo ani pozadie."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:15
+#: ../capplets/theme-switcher/theme-properties.glade.h:14
 msgid "This theme suggests a background:"
 msgstr "Táto téma navrhuje pozadie:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:16
+#: ../capplets/theme-switcher/theme-properties.glade.h:15
 msgid "This theme suggests a font and a background:"
 msgstr "Táto téma navrhuje písmo a pozadie:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:17
+#: ../capplets/theme-switcher/theme-properties.glade.h:16
 msgid "This theme suggests a font:"
 msgstr "Táto téma navrhuje písmo:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:18
+#: ../capplets/theme-switcher/theme-properties.glade.h:17
 msgid "Window Border"
 msgstr "Okraj okien"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:19
-msgid "_Go To Theme Folder"
-msgstr "_Prejsť do priečinku témy"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:20
+#: ../capplets/theme-switcher/theme-properties.glade.h:18
 msgid "_Install Theme..."
 msgstr "_Inštalovať tému..."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:21
+#: ../capplets/theme-switcher/theme-properties.glade.h:19
+#: ../libsounds/sound-view.c:366
+msgid "_Remove"
+msgstr "_Odstrániť"
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:20
 msgid "_Revert"
 msgstr "_Obnoviť"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:22
+#: ../capplets/theme-switcher/theme-properties.glade.h:21
 msgid "_Save Theme..."
 msgstr "_Uložiť tému..."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:23
+#: ../capplets/theme-switcher/theme-properties.glade.h:22
 msgid "_Theme name:"
 msgstr "Meno _témy:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:24
+#: ../capplets/theme-switcher/theme-properties.glade.h:23
 msgid "theme selection tree"
 msgstr "strom výberu témy"
 
@@ -2860,10 +2880,6 @@ msgstr "Vybrať súbor so zvukom"
 #: ../libsounds/sound-view.c:356
 msgid "_Play"
 msgstr "_Zahrať"
-
-#: ../libsounds/sound-view.c:366
-msgid "_Remove"
-msgstr "_Odstrániť"
 
 #: ../libwindow-settings/gnome-wm-manager.c:320
 #, c-format
