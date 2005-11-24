@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-17 22:10+0200\n"
-"PO-Revision-Date: 2005-10-21 23:38-0200\n"
+"POT-Creation-Date: 2005-11-24 14:11-0200\n"
+"PO-Revision-Date: 2005-11-24 14:17-0200\n"
 "Last-Translator: Guilherme de S. Pastore <gpastore@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-l10n-br@listas.cipsga.org.br>\n"
 "MIME-Version: 1.0\n"
@@ -62,15 +62,15 @@ msgstr "Sobre Mim"
 msgid "Set your personal information"
 msgstr "Definir suas informações pessoais"
 
-#: ../capplets/about-me/gnome-about-me.c:554
+#: ../capplets/about-me/gnome-about-me.c:596
 msgid "Select Image"
 msgstr "Selecionar Imagem"
 
-#: ../capplets/about-me/gnome-about-me.c:556
+#: ../capplets/about-me/gnome-about-me.c:598
 msgid "No Image"
 msgstr "Sem Imagem"
 
-#: ../capplets/about-me/gnome-about-me.c:706
+#: ../capplets/about-me/gnome-about-me.c:761
 msgid ""
 "There was an error while trying to get the addressbook information\n"
 "Evolution Data Server can't handle the protocol"
@@ -78,17 +78,17 @@ msgstr ""
 "Ocorreu um erro ao tentar obter informações no catálogo de endereços\n"
 "O Servidor de Dados do Evolution não lida com o protocolo"
 
-#: ../capplets/about-me/gnome-about-me.c:727
+#: ../capplets/about-me/gnome-about-me.c:782
 msgid "Unable to open address book"
 msgstr "Não foi possível abrir o catálogo de endereços"
 
-#: ../capplets/about-me/gnome-about-me.c:739
+#: ../capplets/about-me/gnome-about-me.c:794
 msgid "Unknown login ID, the user database might be corrupted"
 msgstr ""
 "ID de login desconhecido, o banco de dados do usuário pode estar corrompido"
 
-#: ../capplets/about-me/gnome-about-me.c:770
-#: ../capplets/about-me/gnome-about-me.c:772
+#: ../capplets/about-me/gnome-about-me.c:825
+#: ../capplets/about-me/gnome-about-me.c:827
 #, c-format
 msgid "About %s"
 msgstr "Sobre %s"
@@ -445,27 +445,27 @@ msgstr ""
 "pacote 'gnopernicus' precisa estar instalado para as funções de leitura de "
 "tela e ampliação."
 
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:241
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:242
 #, c-format
 msgid "There was an error launching the mouse preferences dialog: %s"
 msgstr "Houve um erro ao lançar o diálogo de preferências do mouse: %s"
 
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:337
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:398
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:338
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:399
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "Não é possível importar as configurações do AccessX do arquivo '%s'"
 
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:435
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:436
 msgid "Import Feature Settings File"
 msgstr "Importar Arquivo de Configurações das Funções"
 
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:439
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:440
 msgid "_Import"
 msgstr "_Importar"
 
 #: ../capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.in.h:1
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:20
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:21
 #: ../capplets/keyboard/keyboard.desktop.in.in.h:1
 msgid "Keyboard"
 msgstr "Teclado"
@@ -486,7 +486,6 @@ msgstr ""
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:1
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:2
 #: ../capplets/theme-switcher/theme-install.glade.h:1
-#: ../capplets/theme-switcher/theme-properties.glade.h:1
 msgid "*"
 msgstr "*"
 
@@ -607,7 +606,7 @@ msgstr ""
 "pressionando as teclas modificadoras em seqüência."
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:29
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:31
 msgid "S_peed:"
 msgstr "_Velocidade:"
 
@@ -636,7 +635,7 @@ msgid "_Only accept keys held for:"
 msgstr "S_omente aceitar teclas pressionadas por:"
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:39
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:41
 msgid "_Type to test settings:"
 msgstr "Digite para _testar as configurações:"
 
@@ -667,7 +666,7 @@ msgstr "pixels/segundo"
 #. set the timeout value  label with correct value of timeout
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
 #: ../capplets/mouse/gnome-mouse-properties.c:138
-#: ../capplets/mouse/gnome-mouse-properties.c:885
+#: ../capplets/mouse/gnome-mouse-properties.c:879
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:27
 #: ../capplets/windows/gnome-window-properties.glade.h:10
 msgid "seconds"
@@ -707,57 +706,65 @@ msgstr "E_stilo:"
 
 #: ../capplets/background/gnome-wp-capplet.c:74
 #: ../capplets/common/capplet-util.c:340
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:333
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:331
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "Houve um erro ao mostrar a ajuda: %s"
 
-#: ../capplets/background/gnome-wp-capplet.c:1042
 #: ../capplets/background/gnome-wp-capplet.c:1060
+#: ../capplets/background/gnome-wp-capplet.c:1078
 msgid "Centered"
 msgstr "Centralizado"
 
-#: ../capplets/background/gnome-wp-capplet.c:1068
-#: ../capplets/background/gnome-wp-capplet.c:1085
+#: ../capplets/background/gnome-wp-capplet.c:1086
+#: ../capplets/background/gnome-wp-capplet.c:1103
 msgid "Fill Screen"
 msgstr "Toda a tela"
 
-#: ../capplets/background/gnome-wp-capplet.c:1093
-#: ../capplets/background/gnome-wp-capplet.c:1110
+#: ../capplets/background/gnome-wp-capplet.c:1111
+#: ../capplets/background/gnome-wp-capplet.c:1128
 msgid "Scaled"
 msgstr "Dimensionado"
 
-#: ../capplets/background/gnome-wp-capplet.c:1118
-#: ../capplets/background/gnome-wp-capplet.c:1135
+#: ../capplets/background/gnome-wp-capplet.c:1136
+#: ../capplets/background/gnome-wp-capplet.c:1153
 msgid "Tiled"
 msgstr "Lado a lado"
 
-#: ../capplets/background/gnome-wp-capplet.c:1159
-#: ../capplets/background/gnome-wp-capplet.c:1168
+#: ../capplets/background/gnome-wp-capplet.c:1177
+#: ../capplets/background/gnome-wp-capplet.c:1186
 msgid "Solid Color"
 msgstr "Cor sólida"
 
-#: ../capplets/background/gnome-wp-capplet.c:1176
-#: ../capplets/background/gnome-wp-capplet.c:1185
+#: ../capplets/background/gnome-wp-capplet.c:1194
+#: ../capplets/background/gnome-wp-capplet.c:1203
 msgid "Horizontal Gradient"
 msgstr "Gradiente horizontal"
 
-#: ../capplets/background/gnome-wp-capplet.c:1193
-#: ../capplets/background/gnome-wp-capplet.c:1202
+#: ../capplets/background/gnome-wp-capplet.c:1211
+#: ../capplets/background/gnome-wp-capplet.c:1220
 msgid "Vertical Gradient"
 msgstr "Gradiente vertical"
 
 #. Create the file chooser dialog stuff here
-#: ../capplets/background/gnome-wp-capplet.c:1251
+#: ../capplets/background/gnome-wp-capplet.c:1269
 msgid "Add Wallpaper"
 msgstr "Adicionar papel de parede"
+
+#: ../capplets/background/gnome-wp-capplet.c:1286
+msgid "Images"
+msgstr "Imagens"
+
+#: ../capplets/background/gnome-wp-capplet.c:1290
+msgid "All Files"
+msgstr "Todos os Arquivos"
 
 #: ../capplets/background/gnome-wp-info.c:57
 msgid "No Wallpaper"
 msgstr "Sem papel de parede"
 
-#: ../capplets/background/gnome-wp-item.c:292
-#: ../capplets/background/gnome-wp-item.c:294
+#: ../capplets/background/gnome-wp-item.c:296
+#: ../capplets/background/gnome-wp-item.c:298
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "pixel"
@@ -779,7 +786,7 @@ msgstr ""
 "(por exemplo, KDE) já esteja ativo e em conflito com o gerenciador de "
 "configurações do GNOME."
 
-#: ../capplets/common/capplet-stock-icons.c:94
+#: ../capplets/common/capplet-stock-icons.c:92
 #, c-format
 msgid "Unable to load capplet stock icon '%s'\n"
 msgstr "Não foi possível carregar o icon stock de capplet '%s'\n"
@@ -790,16 +797,16 @@ msgstr "Aplicar as configurações e encerrar"
 
 #: ../capplets/common/capplet-util.c:243
 #: ../capplets/default-applications/gnome-default-applications-properties.c:765
-#: ../capplets/keyboard/gnome-keyboard-properties.c:225
-#: ../capplets/mouse/gnome-mouse-properties.c:1021
+#: ../capplets/keyboard/gnome-keyboard-properties.c:222
+#: ../capplets/mouse/gnome-mouse-properties.c:1015
 #: ../capplets/sound/sound-properties-capplet.c:244
 msgid "Retrieve and store legacy settings"
 msgstr "Recuperar e armazenar as configurações legadas"
 
 #: ../capplets/common/file-transfer-dialog.c:94
 #, c-format
-msgid "Copying file: %i of %i"
-msgstr "Copiando arquivo: %i de %i"
+msgid "Copying file: %u of %u"
+msgstr "Copiando arquivo %u de %u"
 
 #: ../capplets/common/file-transfer-dialog.c:122
 #, c-format
@@ -1041,55 +1048,60 @@ msgstr "Navegador Texto Links"
 #: ../capplets/default-applications/gnome-default-applications-properties-structs.c:39
 #: ../capplets/default-applications/gnome-default-applications-properties-structs.c:40
 #: ../capplets/default-applications/gnome-default-applications-properties-structs.c:41
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:42
 msgid "Evolution Mail Reader"
 msgstr "Leitor de E-mail Evolution"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:42
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:43
 msgid "Balsa"
 msgstr "Balsa"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:43
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:44
 msgid "KMail"
 msgstr "KMail"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:44
 #: ../capplets/default-applications/gnome-default-applications-properties-structs.c:45
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:46
 msgid "Thunderbird"
 msgstr "Thunderbird"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:46
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:47
 msgid "Mozilla Mail"
 msgstr "Mozilla Mail"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:47
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:48
 msgid "Mutt"
 msgstr "Mutt"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:58
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:49
+msgid "Sylpheed-Claws"
+msgstr "Sylpheed-Claws"
+
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:59
 msgid "Debian Terminal Emulator"
 msgstr "Emulador de Terminal do Debian"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:59
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:60
 msgid "GNOME Terminal"
 msgstr "GNOME Terminal"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:60
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:61
 msgid "Standard XTerminal"
 msgstr "XTerminal Padrão"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:61
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:62
 msgid "NXterm"
 msgstr "NXterm"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:62
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:63
 msgid "RXVT"
 msgstr "RXVT"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:63
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:64
 msgid "aterm"
 msgstr "aterm"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:64
+#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:65
 msgid "ETerm"
 msgstr "ETerm"
 
@@ -1507,24 +1519,24 @@ msgstr "O tipo de atalho."
 msgid "Disabled"
 msgstr "Desativado"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:545
+#: ../capplets/keybindings/gnome-keybinding-properties.c:544
 msgid "<Unknown Action>"
 msgstr "<Ação Desconhecida>"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:566
+#: ../capplets/keybindings/gnome-keybinding-properties.c:565
 msgid "Desktop"
 msgstr "Desktop"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:567
+#: ../capplets/keybindings/gnome-keybinding-properties.c:566
 #: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
 msgid "Sound"
 msgstr "Som"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:571
+#: ../capplets/keybindings/gnome-keybinding-properties.c:570
 msgid "Window Management"
 msgstr "Gerenciamento de Janelas"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:668
+#: ../capplets/keybindings/gnome-keybinding-properties.c:667
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1533,21 +1545,21 @@ msgstr ""
 "O atalho \"%s\" já está sendo usando por:\n"
 "\"%s\"\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:700
+#: ../capplets/keybindings/gnome-keybinding-properties.c:699
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Erro definindo novo atalho na base de dados de configuração: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:750
+#: ../capplets/keybindings/gnome-keybinding-properties.c:749
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "Erro definindo novo atalho na base de dados de configuração: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:857
+#: ../capplets/keybindings/gnome-keybinding-properties.c:856
 msgid "Action"
 msgstr "Ação"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:881
+#: ../capplets/keybindings/gnome-keybinding-properties.c:880
 msgid "Shortcut"
 msgstr "Atalho"
 
@@ -1594,12 +1606,12 @@ msgstr "Modelos"
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "Houve um erro ao lançar o capplet de teclado: %s"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:202
+#: ../capplets/keyboard/gnome-keyboard-properties.c:199
 msgid "_Accessibility"
 msgstr "_Acessibilidade"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:221
-#: ../capplets/keyboard/gnome-keyboard-properties.c:223
+#: ../capplets/keyboard/gnome-keyboard-properties.c:218
+#: ../capplets/keyboard/gnome-keyboard-properties.c:220
 #: ../capplets/sound/sound-properties-capplet.c:240
 #: ../capplets/sound/sound-properties-capplet.c:242
 msgid ""
@@ -1608,7 +1620,7 @@ msgstr ""
 "Aplicar as configurações e encerrar (somente compatibilidade; agora tratado "
 "pelo daemon)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:227
+#: ../capplets/keyboard/gnome-keyboard-properties.c:224
 msgid "Start the page with the typing break settings showing"
 msgstr "Iniciar a página com as configurações de intervalo mostrando"
 
@@ -1669,34 +1681,38 @@ msgid "Cursor _blinks in text boxes and fields"
 msgstr "_Cursor intermitente nos campos e caixas de texto"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:17
+msgid "Cursor blinks speed"
+msgstr "Velocidade do piscar do cursor"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:18
 msgid "Duration of the break when typing is disallowed"
 msgstr "Duração do intervalo quando digitar estiver desabilitado"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:18
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:19
 msgid "Duration of work before forcing a break"
 msgstr "Duração do uso antes de forçar o intervalo"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:19
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:20
 msgid "Key presses _repeat when key is held down"
 msgstr "A tecla é _repetida quando mantida pressionada"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:22
 msgid "Keyboard Preferences"
 msgstr "Preferências do Teclado"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "Keyboard _model:"
 msgstr "Modelo de _teclado:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:23
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:24
 msgid "Layout Options"
 msgstr "Opções de Layout"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:24
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "Layouts"
 msgstr "Layouts"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:25
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:26
 msgid ""
 "Lock screen after a certain duration to help prevent repetitive keyboard use "
 "injuries"
@@ -1704,59 +1720,63 @@ msgstr ""
 "Travar a tela após um certo tempo para ajudar a previnir doenças pelo uso "
 "repetitivo do teclado"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:26
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:27
 msgid "Microsoft Natural Keyboard"
 msgstr "Teclado Microsoft Natural Keyboard"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:27
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:28
 msgid "Preview:"
 msgstr "Prever:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:28
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:29
+msgid "Repeat keys speed"
+msgstr "Velocidade de repetição das teclas"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:30
 msgid "Reset To De_faults"
 msgstr "Restaurar Configurações"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:30
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:32
 msgid "Separate _group for each window"
 msgstr "_Grupo separado para cada janela"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:31
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:33
 msgid "Typing Break"
 msgstr "Intervalo de Digitação"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:32
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:34
 msgid "_Accessibility..."
 msgstr "_Acessibilidade..."
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:33
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:35
 msgid "_Add..."
 msgstr "_Adicionar..."
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:34
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:36
 msgid "_Break interval lasts:"
 msgstr "_Intervalo de descanso dura:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:35
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:37
 msgid "_Delay:"
 msgstr "Interv_alo:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:36
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:38
 msgid "_Models:"
 msgstr "_Modelos:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:37
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:39
 msgid "_Selected layouts:"
 msgstr "Layouts selecionados:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:38
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:40
 msgid "_Speed:"
 msgstr "_Velocidade:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:40
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:42
 msgid "_Work interval lasts:"
 msgstr "Intervalo de _trabalho dura:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:41
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:43
 msgid "minutes"
 msgstr "minutos"
 
@@ -1768,55 +1788,55 @@ msgstr "Definir suas preferências de teclado"
 msgid "Unknown Cursor"
 msgstr "Cursor desconhecido"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:761
+#: ../capplets/mouse/gnome-mouse-properties.c:760
 msgid "Default Cursor"
 msgstr "Cursor Padrão"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:762
+#: ../capplets/mouse/gnome-mouse-properties.c:761
 msgid "Default Cursor - Current"
 msgstr "Cursor Padrão - Atual"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:763
+#: ../capplets/mouse/gnome-mouse-properties.c:762
 msgid "The default cursor that ships with X"
 msgstr "O cursor padrão fornecido com X"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:767
+#: ../capplets/mouse/gnome-mouse-properties.c:766
 msgid "White Cursor"
 msgstr "Cursor Branco"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:768
+#: ../capplets/mouse/gnome-mouse-properties.c:767
 msgid "White Cursor - Current"
 msgstr "Cursor Branco - Atual"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:769
+#: ../capplets/mouse/gnome-mouse-properties.c:768
 msgid "The default cursor inverted"
 msgstr "O cursor padrão invertido"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:773
+#: ../capplets/mouse/gnome-mouse-properties.c:772
 msgid "Large Cursor"
 msgstr "Cursor Grande"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:774
+#: ../capplets/mouse/gnome-mouse-properties.c:773
 msgid "Large Cursor - Current"
 msgstr "Cursor Grande - Atual"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:775
+#: ../capplets/mouse/gnome-mouse-properties.c:774
 msgid "Large version of normal cursor"
 msgstr "Versão grande do cursor normal"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:779
+#: ../capplets/mouse/gnome-mouse-properties.c:778
 msgid "Large White Cursor - Current"
 msgstr "Cursor Branco Grande - Atual"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:780
+#: ../capplets/mouse/gnome-mouse-properties.c:779
 msgid "Large White Cursor"
 msgstr "Cursor Branco Grande"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:781
+#: ../capplets/mouse/gnome-mouse-properties.c:780
 msgid "Large version of white cursor"
 msgstr "Versão grande do cursor branco"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:975
+#: ../capplets/mouse/gnome-mouse-properties.c:969
 msgid "Cursor Theme"
 msgstr "Tema do Cursor"
 
@@ -2058,7 +2078,19 @@ msgstr "_Som para eventos"
 msgid "_Visual feedback:"
 msgstr "Resposta _visual:"
 
-#: ../capplets/theme-switcher/gnome-theme-details.c:347
+#: ../capplets/theme-switcher/gnome-theme-details.c:368
+msgid "Would you like to remove this theme?"
+msgstr "Você gostaria de remover este tema?"
+
+#: ../capplets/theme-switcher/gnome-theme-details.c:433
+msgid "Theme deleted succesfully. Please select another theme."
+msgstr "Tema excluído com sucesso. Por favor, escolha outro tema."
+
+#: ../capplets/theme-switcher/gnome-theme-details.c:442
+msgid "Theme can not be deleted"
+msgstr "O tema não pode ser excluído"
+
+#: ../capplets/theme-switcher/gnome-theme-details.c:529
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -2072,11 +2104,11 @@ msgstr ""
 msgid "This theme is not in a supported format."
 msgstr "Esse tema não está num formato suportado."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:244
+#: ../capplets/theme-switcher/gnome-theme-installer.c:242
 msgid "Failed to create temporary directory"
 msgstr "Falha ao criar o diretório temporário"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:264
+#: ../capplets/theme-switcher/gnome-theme-installer.c:260
 msgid ""
 "Can not install theme. \n"
 "The bzip2 utility is not installed."
@@ -2084,13 +2116,13 @@ msgstr ""
 "Não é possível instalar o tema.\n"
 "O utilitário bzip2 não está instalado."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:282
-#: ../capplets/theme-switcher/gnome-theme-installer.c:319
-#: ../capplets/theme-switcher/gnome-theme-installer.c:399
+#: ../capplets/theme-switcher/gnome-theme-installer.c:276
+#: ../capplets/theme-switcher/gnome-theme-installer.c:309
+#: ../capplets/theme-switcher/gnome-theme-installer.c:383
 msgid "Installation Failed"
 msgstr "Falha na Instalação"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:302
+#: ../capplets/theme-switcher/gnome-theme-installer.c:294
 msgid ""
 "Can not install themes. \n"
 "The gzip utility is not installed."
@@ -2098,7 +2130,7 @@ msgstr ""
 "Não é possível instalar os temas.\n"
 "O utilitário gzip não está instalado."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:340
+#: ../capplets/theme-switcher/gnome-theme-installer.c:330
 #, c-format
 msgid ""
 "Icon Theme %s correctly installed.\n"
@@ -2107,12 +2139,12 @@ msgstr ""
 "O Tema de Ícones %s foi instalado corretamente.\n"
 "Você pode selecioná-lo nos detalhes do tema."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:343
+#: ../capplets/theme-switcher/gnome-theme-installer.c:333
 #, c-format
 msgid "Gnome Theme %s correctly installed"
 msgstr "O Tema do GNOME %s foi instalado corretamente"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:346
+#: ../capplets/theme-switcher/gnome-theme-installer.c:336
 #, c-format
 msgid ""
 "Windows Border Theme %s correctly installed.\n"
@@ -2121,7 +2153,7 @@ msgstr ""
 "O Tema de Bordas das Janelas %s foi instalado corretamente.\n"
 "Você pode selecioná-lo nos detalhes do tema."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:349
+#: ../capplets/theme-switcher/gnome-theme-installer.c:339
 #, c-format
 msgid ""
 "Controls Theme %s correctly installed.\n"
@@ -2130,23 +2162,23 @@ msgstr ""
 "O Tema de Controles %s foi instalado corretamente.\n"
 "Você pode selecioná-lo nos detalhes do tema."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:357
+#: ../capplets/theme-switcher/gnome-theme-installer.c:345
 msgid "The theme is an engine. You need to compile the theme."
 msgstr "O tema é um motor. Você precisa compilá-lo."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:374
+#: ../capplets/theme-switcher/gnome-theme-installer.c:360
 msgid "The file format is invalid"
 msgstr "O formato de arquivo é inválido"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:468
+#: ../capplets/theme-switcher/gnome-theme-installer.c:450
 msgid "No theme file location specified to install"
 msgstr "Nenhuma localização de temas foi especificada para a instalação"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:485
+#: ../capplets/theme-switcher/gnome-theme-installer.c:469
 msgid "The theme file location specified to install is invalid"
 msgstr "A localização de temas especificada é inválida"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:505
+#: ../capplets/theme-switcher/gnome-theme-installer.c:489
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -2155,11 +2187,11 @@ msgstr ""
 "Permissões insuficientes para instalar o tema em:\n"
 "%s"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:526
+#: ../capplets/theme-switcher/gnome-theme-installer.c:510
 msgid "The file format is invalid."
 msgstr "O formato de arquivo é inválido."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:553
+#: ../capplets/theme-switcher/gnome-theme-installer.c:537
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
@@ -2168,7 +2200,7 @@ msgstr ""
 "%s é o caminho onde os temas serão instalados. Ele não pode ser utilizado "
 "como caminho fonte."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:607
+#: ../capplets/theme-switcher/gnome-theme-installer.c:591
 msgid ""
 "Cannot install theme.\n"
 "The tar program is not installed on your system."
@@ -2184,7 +2216,7 @@ msgstr "Tema personalizado"
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "Clique no botão \"Salvar Tema\" para salvar este tema."
 
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1476
+#: ../capplets/theme-switcher/gnome-theme-manager.c:1479
 msgid ""
 "The default theme schemas could not be found on your system.  This means "
 "that you probably don't have metacity installed, or that your gconf is "
@@ -2227,96 +2259,97 @@ msgstr "_Instalar"
 msgid "_Location:"
 msgstr "_Localização:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:2
+#: ../capplets/theme-switcher/theme-properties.glade.h:1
 msgid "<span size=\"larger\" weight=\"bold\">Save Theme to Disk</span>"
 msgstr "<span size=\"larger\" weight=\"bold\">Salvar Tema no Disco</span>"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:3
+#: ../capplets/theme-switcher/theme-properties.glade.h:2
 msgid "Apply _Background"
 msgstr "Aplicar plano de _fundo"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:4
+#: ../capplets/theme-switcher/theme-properties.glade.h:3
 msgid "Apply _Font"
 msgstr "Aplicar _fonte"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:5
+#: ../capplets/theme-switcher/theme-properties.glade.h:4
 msgid "Controls"
 msgstr "Controles"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:6
+#: ../capplets/theme-switcher/theme-properties.glade.h:5
 msgid "Icons"
 msgstr "Ícones"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:7
+#: ../capplets/theme-switcher/theme-properties.glade.h:6
 msgid "New themes can also be installed by dragging them into the window."
 msgstr ""
 "Novos temas podem também ser instalados arrastando-os para esta janela."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:8
+#: ../capplets/theme-switcher/theme-properties.glade.h:7
 msgid "Save Theme"
 msgstr "Salvar Tema"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:9
+#: ../capplets/theme-switcher/theme-properties.glade.h:8
 msgid "Select theme for the desktop"
 msgstr "Selecionar tema para a área de trabalho"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:10
+#: ../capplets/theme-switcher/theme-properties.glade.h:9
 msgid "Short _description:"
 msgstr "_Descrição curta:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:11
+#: ../capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Theme Details"
 msgstr "Detalhes do Tema"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:12
+#: ../capplets/theme-switcher/theme-properties.glade.h:11
 msgid "Theme Preferences"
 msgstr "Preferências do Tema"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:13
+#: ../capplets/theme-switcher/theme-properties.glade.h:12
 msgid "Theme _Details"
 msgstr "_Detalhes do Tema"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:14
+#: ../capplets/theme-switcher/theme-properties.glade.h:13
 msgid "This theme does not suggest any particular font or background."
 msgstr "Este tema não sugere uma fonte ou um plano de fundo."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:15
+#: ../capplets/theme-switcher/theme-properties.glade.h:14
 msgid "This theme suggests a background:"
 msgstr "Este tema sugere um plano de fundo:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:16
+#: ../capplets/theme-switcher/theme-properties.glade.h:15
 msgid "This theme suggests a font and a background:"
 msgstr "Este tema sugere uma fonte e um plano de fundo:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:17
+#: ../capplets/theme-switcher/theme-properties.glade.h:16
 msgid "This theme suggests a font:"
 msgstr "Este tema sugere uma fonte:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:18
+#: ../capplets/theme-switcher/theme-properties.glade.h:17
 msgid "Window Border"
 msgstr "Borda da Janela"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:19
-msgid "_Go To Theme Folder"
-msgstr "_Ir para a Pasta de Temas"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:20
+#: ../capplets/theme-switcher/theme-properties.glade.h:18
 msgid "_Install Theme..."
 msgstr "_Instalar Tema..."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:21
+#: ../capplets/theme-switcher/theme-properties.glade.h:19
+#: ../libsounds/sound-view.c:366
+msgid "_Remove"
+msgstr "_Remover"
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:20
 msgid "_Revert"
 msgstr "_Reverter"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:22
+#: ../capplets/theme-switcher/theme-properties.glade.h:21
 msgid "_Save Theme..."
 msgstr "_Salvar Tema..."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:23
+#: ../capplets/theme-switcher/theme-properties.glade.h:22
 msgid "_Theme name:"
 msgstr "Nome do _tema:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:24
+#: ../capplets/theme-switcher/theme-properties.glade.h:23
 msgid "theme selection tree"
 msgstr "Árvore de seleção de temas"
 
@@ -2425,7 +2458,7 @@ msgstr "Sai_r"
 msgid "_Save"
 msgstr "_Salvar"
 
-#: ../capplets/windows/gnome-window-properties.c:386
+#: ../capplets/windows/gnome-window-properties.c:385
 #, c-format
 msgid ""
 "<b>Cannot start the preferences application for your window manager</b>\n"
@@ -2437,23 +2470,23 @@ msgstr ""
 "\n"
 "%s"
 
-#: ../capplets/windows/gnome-window-properties.c:644
+#: ../capplets/windows/gnome-window-properties.c:642
 msgid "Control"
 msgstr "Controle"
 
-#: ../capplets/windows/gnome-window-properties.c:649
+#: ../capplets/windows/gnome-window-properties.c:647
 msgid "Alt"
 msgstr "Alt"
 
-#: ../capplets/windows/gnome-window-properties.c:655
+#: ../capplets/windows/gnome-window-properties.c:653
 msgid "Hyper"
 msgstr "Hyper"
 
-#: ../capplets/windows/gnome-window-properties.c:662
+#: ../capplets/windows/gnome-window-properties.c:660
 msgid "Super (or \"Windows logo\")"
 msgstr "Super (ou \"logotipo do Windows\")"
 
-#: ../capplets/windows/gnome-window-properties.c:669
+#: ../capplets/windows/gnome-window-properties.c:667
 msgid "Meta"
 msgstr "Meta"
 
@@ -2503,7 +2536,7 @@ msgstr "Defina suas propriedades de janela"
 msgid "Windows"
 msgstr "Janelas"
 
-#: ../control-center/control-center-categories.c:257
+#: ../control-center/control-center-categories.c:287
 msgid "Others"
 msgstr "Outros"
 
@@ -2524,15 +2557,15 @@ msgstr "Ferramenta de configuração do GNOME"
 msgid "Volume"
 msgstr "Volume"
 
-#: ../gnome-settings-daemon/factory.c:36
+#: ../gnome-settings-daemon/factory.c:37
 msgid "Could not initialize Bonobo"
 msgstr "Não foi possível inicializar o Bonobo"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:397
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:395
 msgid "Slow Keys Alert"
 msgstr "Alerta de Teclas Lentas"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:398
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:396
 msgid ""
 "You just held down the Shift key for 8 seconds.  This is the shortcut for "
 "the Slow Keys feature, which affects the way your keyboard works."
@@ -2541,19 +2574,19 @@ msgstr ""
 "Lentas, que\n"
 "afetam o modo de funcionamento do seu teclado."
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:400
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:398
 msgid "Do you want to activate Slow Keys?"
 msgstr "Você deseja ativar Teclas Lentas?"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:401
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:399
 msgid "Do you want to deactivate Slow Keys?"
 msgstr "Você deseja desativar Teclas Lentas?"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:410
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:408
 msgid "Sticky Keys Alert"
 msgstr "Alerta de Teclas de Aderência"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:409
 msgid ""
 "You just pressed the Shift key 5 times in a row.  This is the shortcut for "
 "the Sticky Keys feature, which affects the way your keyboard works."
@@ -2562,7 +2595,7 @@ msgstr ""
 "atalho de teclado para a função de Teclas de Aderência, que afeta a forma "
 "como seu teclado funciona."
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
 msgid ""
 "You just pressed two keys at once, or pressed the Shift key 5 times in a "
 "row.  This turns off the Sticky Keys feature, which affects the way your "
@@ -2572,11 +2605,11 @@ msgstr ""
 "consecutivas. Isso desliga a função de Teclas de Aderência, que afeta a "
 "forma como seu teclado funciona."
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:415
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
 msgid "Do you want to activate Sticky Keys?"
 msgstr "Você quer ativar as Teclas de Aderência?"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:416
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:414
 msgid "Do you want to deactivate Sticky Keys?"
 msgstr "Você quer desativar as Teclas de Aderência?"
 
@@ -2589,37 +2622,37 @@ msgstr ""
 "Não é possível criar o diretório \"%s\".\n"
 "Ele é necessário para a mudança de cursores."
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:209
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:208
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr "Tecla de Atalho (%s) tem múltiplas ações definidas\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:222
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:221
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr "Tecla de Atalho (%s) tem múltiplos atalhos definidos\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:228
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:227
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr "Tecla de Atalho (%s) está incompleta\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:256
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:255
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr "Tecla de Atalho (%s) é inválida\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:292
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:291
 #, c-format
-msgid "It seems that another application already has access to key '%d'."
-msgstr "Parece que outra aplicação já tem acesso à chave '%d'."
+msgid "It seems that another application already has access to key '%u'."
+msgstr "Parece que outra aplicação já tem acesso à chave '%u'."
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:361
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:360
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr "Tecla de Atalho (%s) já está em uso\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:436
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:435
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -2671,11 +2704,11 @@ msgstr ""
 "Tente usar uma configuração mais simples ou pegue uma versão mais nova do "
 "XFree."
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:227
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:223
 msgid "Do _not show this warning again"
 msgstr "_Não mostrar este aviso novamente"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:238
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:234
 msgid ""
 "The X system keyboard settings differ from your current GNOME keyboard "
 "settings.  Which set would you like to use?"
@@ -2683,11 +2716,11 @@ msgstr ""
 "As configurações de teclado do X diferem das suas configurações de teclado "
 "atuais no GNOME. Quais você gostaria de usar?"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:251
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:247
 msgid "Use X settings"
 msgstr "Usar configurações do X"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:253
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:249
 msgid "Use GNOME settings"
 msgstr "Usar as configurações do GNOME"
 
@@ -2721,7 +2754,7 @@ msgstr ""
 "Impossível carregar arquivo Glade.\n"
 "Certifique-se de que o daemon esteja instalado corretamente."
 
-#: ../gnome-settings-daemon/gnome-settings-screensaver.c:113
+#: ../gnome-settings-daemon/gnome-settings-screensaver.c:110
 #, c-format
 msgid ""
 "There was an error starting up the screensaver:\n"
@@ -2736,7 +2769,7 @@ msgstr ""
 "\n"
 "A proteção de tela não funcionará nesta sessão."
 
-#: ../gnome-settings-daemon/gnome-settings-screensaver.c:123
+#: ../gnome-settings-daemon/gnome-settings-screensaver.c:120
 msgid "_Do not show this message again"
 msgstr "_Não mostrar esta mensagem novamente"
 
@@ -2745,12 +2778,12 @@ msgstr "_Não mostrar esta mensagem novamente"
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Não foi possível carregar o arquivo de som %s como exemplo %s"
 
-#: ../gnome-settings-daemon/gnome-settings-xrdb.c:214
-#: ../gnome-settings-daemon/gnome-settings-xrdb.c:262
+#: ../gnome-settings-daemon/gnome-settings-xrdb.c:212
+#: ../gnome-settings-daemon/gnome-settings-xrdb.c:260
 msgid "Cannot determine user's home directory"
 msgstr "Não foi possível determinar o diretório pessoal do usuário"
 
-#: ../gnome-settings-daemon/gnome-settings-xsettings.c:215
+#: ../gnome-settings-daemon/gnome-settings-xsettings.c:210
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "Chave GConf %s definida para o tipo %s mas o tipo esperado era %s\n"
@@ -2866,10 +2899,6 @@ msgstr "Selecionar Arquivo de Som"
 #: ../libsounds/sound-view.c:356
 msgid "_Play"
 msgstr "_Reproduzir"
-
-#: ../libsounds/sound-view.c:366
-msgid "_Remove"
-msgstr "_Remover"
 
 #: ../libwindow-settings/gnome-wm-manager.c:320
 #, c-format
@@ -3219,7 +3248,15 @@ msgstr "Efeitos visuais adicionados por Anders Carlsson"
 
 #: ../typing-break/drwright.c:837
 msgid "Break reminder"
-msgstr "Lembrete de Intervalo"
+msgstr "Lembrete de intervalo"
+
+#: ../typing-break/eggtrayicon.c:127
+msgid "Orientation"
+msgstr "Orientação"
+
+#: ../typing-break/eggtrayicon.c:128
+msgid "The orientation of the tray."
+msgstr ""
 
 #: ../typing-break/main.c:93
 msgid "The typing monitor is already running."
@@ -3381,7 +3418,7 @@ msgstr ""
 msgid "_Apply font"
 msgstr "_Aplicar fonte"
 
-#: ../vfs-methods/themus/theme-method.c:520
+#: ../vfs-methods/themus/theme-method.c:518
 msgid "Themes"
 msgstr "Temas"
 
@@ -3450,3 +3487,6 @@ msgstr "Se os temas instalados devem ser miniaturizados"
 #: ../vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Se os temas devem ser miniaturizados"
+
+#~ msgid "_Go To Theme Folder"
+#~ msgstr "_Ir para a Pasta de Temas"
