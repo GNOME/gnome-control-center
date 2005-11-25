@@ -267,8 +267,13 @@ get_user_login (void)
 	struct passwd pwd, *err;
 
 	int i;
-	i = getpwuid_r(getuid(), &pwd, buf, sizeof(buf), &err);
-	return ((i == 0) && (err == &pwd)) ? g_strdup(pwd.pw_name) : NULL;
+#if __sun
+	i = getpwuid_r (getuid (), &pwd, buf, sizeof (buf));
+	return (i != 0) ? g_strdup (pwd.pw_name) : NULL;
+#else
+	i = getpwuid_r (getuid (), &pwd, buf, sizeof (buf), &err);
+	return ((i == 0) && (err == &pwd)) ? g_strdup (pwd.pw_name) : NULL;
+#endif
 }
 
 /*

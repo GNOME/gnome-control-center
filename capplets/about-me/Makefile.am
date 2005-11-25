@@ -5,7 +5,7 @@ pixmap_DATA = 				\
 	gnome-about-me-bulb-on.png	\
 	gnome-about-me-bulb-off.png
 
-gnome_about_me_LDADD = $(GNOMECC_CAPPLETS_LIBS) $(LIBEBOOK_LIBS) -lutil
+gnome_about_me_LDADD = $(GNOMECC_CAPPLETS_LIBS) $(LIBEBOOK_LIBS) $(ABOUTME_LIBS)
 gnome_about_me_LDFLAGS = -export-dynamic
 gnome_about_me_SOURCES = 		\
 	eel-alert-dialog.c		\

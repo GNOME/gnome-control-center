@@ -25,6 +25,7 @@
 #  include <config.h>
 #endif
 
+#include <stropts.h>
 #include <gnome.h>
 #include <pwd.h>
 #include <stdlib.h>
@@ -35,10 +36,24 @@
 #include <sys/wait.h>
 #include <sys/poll.h>
 #include <termios.h>
+#if HAVE_PTY_H
 #include <pty.h>
+#endif
+#if HAVE_STROPTS_H
+#include <stropts.h>
+#endif
+
+#if __sun
+#include <sys/types.h>
+#include <signal.h>
+#endif
 
 #include "capplet-util.h"
 #include "eel-alert-dialog.h"
+
+#ifndef HAVE_FORKPTY
+pid_t forkpty(int *, char *, struct termios *, struct winsize *);
+#endif
 
 typedef struct {
 	GladeXML  *xml;
@@ -293,8 +308,9 @@ update_password (PasswordDialog *pdialog, gchar **msg)
 	write_to_backend (pdialog, old_password);
 
 	/* New password */
-	s = read_from_backend (pdialog, "assword: ", "failure", NULL);
-	if (g_strrstr (s, "failure") != NULL) {
+	s = read_from_backend (pdialog, "assword: ", "failure", "wrong", NULL);
+	if (g_strrstr (s, "failure") != NULL ||
+	    g_strrstr (s, "wrong") != NULL) {
 		g_free (s);
 		return -1;
 	}
@@ -308,7 +324,7 @@ update_password (PasswordDialog *pdialog, gchar **msg)
 		
 	write_to_backend (pdialog, retyped_password);
 	
-	s = read_from_backend (pdialog, "successfully", "short", "panlindrome", "simple", "similar", "wrapped", "recovered",  "unchanged", NULL);
+	s = read_from_backend (pdialog, "successfully", "short", "panlindrome", "simple", "similar", "wrapped", "recovered", "unchanged", "match", "1 numeric or special", NULL);
 	if (g_strrstr (s, "recovered") != NULL) {
 		retcode = -2;
 	} else if (g_strrstr (s, "short") != NULL) {
@@ -323,16 +339,228 @@ update_password (PasswordDialog *pdialog, gchar **msg)
 	} else if ((g_strrstr (s, "similar") != NULL) || (g_strrstr (s, "wrapped") != NULL)) {
 		*msg = g_strdup (_("Old and new passwords are too similar"));
 		retcode = -3;
-	} else if (g_strrstr (s, "unchanged") != NULL) {
+	} else if (g_strrstr (s, "1 numeric or special") != NULL) {
+		*msg = g_strdup (_("Must contain numeric or special character(s)"));
+		retcode = -3;
+	} else if ((g_strrstr (s, "unchanged") != NULL) ||
+		   (g_strrstr (s, "match") != NULL)) {
 		kill (pdialog->backend_pid, SIGKILL);
 		*msg = g_strdup (_("Old and new password are the same"));
 		retcode = -3;
-	}
+        }
 
 	g_free (s);
 	
 	return retcode;
 }
+
+#ifndef HAVE_FORKPTY
+/* 
+//  Emulation of the BSD function forkpty.
+//  Copied from rootsh (http://sourceforge.net/projects/rootsh) also
+//  under GPL license.  Slightly modified to not copy terminal modes
+//  or window size from the parent to the child if NULL is passed in
+//  for termp or winp.  The logic still sets the termp or winp values
+//  if passed in.  When launching from the gnome-panel, there are no
+//  such values for the parent and attempting to copy them was causing
+//  a lengthy delay.
+*/
+#ifndef MASTERPTYDEV
+#  error you need to specify a master pty device
+#endif
+pid_t forkpty(int *amaster, char *name, struct termios *termp, struct winsize *winp) {
+  /*
+  //  amaster		A pointer to the master pty's file descriptor which
+  //			will be set here.
+  //  
+  //  name		If name is NULL, the name of the slave pty will be
+  //			returned in name.
+  //  
+  //  termp		If termp is not NULL, the terminal parameters
+  //			of the slave will be set to the values in termp.
+  //  
+  //  winsize		If winp is not NULL, the window size of the slave
+  //			will be set to the values in winp.
+  //  
+  //  pid		The process id of the forked child process.
+  //  
+  //  master		The file descriptor of the master pty.
+  //  
+  //  slave		The file descriptor of the slave pty.
+  //  
+  //  slavename		The file name of the slave pty.
+  //  
+  */
+  pid_t pid;
+  int master, slave;
+  char *slavename;
+
+  /*
+  //  Get a master pseudo-tty.
+  */
+  if ((master = open (MASTERPTYDEV, O_RDWR)) < 0) {
+    perror (MASTERPTYDEV);
+    return (-1);
+  }
+
+  /*
+  //  Set the permissions on the slave pty.
+  */
+  if (grantpt (master) < 0) {
+    perror ("grantpt");
+    close (master);
+    return (-1);
+  }
+
+  /*
+  //  Unlock the slave pty.
+  */
+  if (unlockpt(master) < 0) {
+    perror ("unlockpt");
+    close (master);
+    return (-1);
+  }
+
+  /*
+  //  Start a child process.
+  */
+  if ((pid = fork ()) < 0) {
+    perror ("fork in forkpty");
+    close (master);
+    return (-1);
+  }
+
+  /*
+  //  The child process will open the slave, which will become
+  //  its controlling terminal.
+  */
+  if (pid == 0) {
+    /*
+    //  Get rid of our current controlling terminal.
+    */
+    setsid ();
+
+    /*
+    //  Get the name of the slave pseudo tty.
+    */
+    if ((slavename = ptsname (master)) == NULL) {
+      perror ("ptsname");
+      close (master);
+      return (-1);
+    }
+
+    /* 
+    //  Open the slave pseudo tty.
+    */
+    if ((slave = open(slavename, O_RDWR)) < 0) {
+      perror (slavename);
+      close (master);
+      return (-1);
+    }
+
+#ifndef AIX_COMPAT
+    /*
+    //  Push the pseudo-terminal emulation module.
+    */
+    if (ioctl (slave, I_PUSH, "ptem") < 0) {
+      perror ("ioctl: ptem");
+      close (master);
+      close (slave);
+      return (-1);
+    }
+
+    /*
+    //  Push the terminal line discipline module.
+    */
+    if (ioctl (slave, I_PUSH, "ldterm") < 0) {
+      perror ("ioctl: ldterm");
+      close (master);
+      close (slave);
+      return (-1);
+    }
+
+#ifdef HAVE_TTCOMPAT
+    /*
+    //  Push the compatibility for older ioctl calls module (solaris).
+    */
+    if (ioctl (slave, I_PUSH, "ttcompat") < 0) {
+      perror ("ioctl: ttcompat");
+      close (master);
+      close (slave);
+      return (-1);
+    }
+#endif
+#endif
+
+    /*
+    //  Copy the caller's terminal modes to the slave pty.
+    */
+    if (termp != NULL) {
+       if (tcsetattr (slave, TCSANOW, termp) < 0) {
+          perror ("tcsetattr: slave pty");
+          close (master);
+          close (slave);
+          return (-1);
+       }
+    }
+
+    /*
+    //  Set the slave pty window size to the caller's size.
+    */
+    if (winp != NULL) {
+       if (ioctl (slave, TIOCSWINSZ, winp) < 0) {
+         perror ("ioctl: slave winsz");
+         close (master);
+         close (slave);
+         return (-1);
+       }
+    }
+
+    /*
+    //  Close the master pty.
+    //  No need for this in the slave process.
+    */
+    close (master);
+
+    /*
+    //  Set the slave to be our standard input, output and error output.
+    //  Then get rid of the original file descriptor.
+    */
+    dup2 (slave, 0);
+    dup2 (slave, 1);
+    dup2 (slave, 2);
+    close (slave);
+
+    /*
+    //  If the caller wants it, give him back the slave pty's name.
+    */
+    if (name != NULL)
+       strcpy (name, slavename);
+
+    return(0); 
+
+  } else {
+    /*
+    //  Return the slave pty device name if caller wishes so.
+    */
+    if (name != NULL) {          
+      if ((slavename = ptsname (master)) == NULL) {
+        perror ("ptsname");
+        close (master);
+        return (-1);
+      }
+      strcpy (name, slavename);
+    }
+
+    /*
+    //  Return the file descriptor for communicating with the process
+    //  to the caller.
+    */
+    *amaster = master; 
+    return (pid);      
+  }
+}
+#endif
 
 static gint
 spawn_passwd (PasswordDialog *pdialog)
