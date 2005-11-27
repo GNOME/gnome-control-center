@@ -21,10 +21,11 @@
 
 #include <config.h>
 #include <string.h>
+#include <glib/gi18n.h>
 #include <gdk/gdkx.h>
 #include <gtk/gtk.h>
 #include <libgnomeui/libgnomeui.h>
-#include <libgnome/gnome-i18n.h>
+
 #include "drw-selection.h"
 #include "drwright.h"
 
@@ -85,30 +86,23 @@ main (int argc, char *argv[])
 
 	selection = drw_selection_start ();
 	if (!drw_selection_is_master (selection)) {
-		GtkWidget *dialog;
-
-		dialog = gtk_message_dialog_new (NULL, 0,
-						 GTK_MESSAGE_INFO,
-						 GTK_BUTTONS_CLOSE,
-						 _("The typing monitor is already running."));
-
-		gtk_dialog_run (GTK_DIALOG (dialog));
-
+		g_message ("The typing monitor is already running, exiting.");
 		return 0;
 	}
 
 	if (!no_check && !have_tray ()) {
 		GtkWidget *dialog;
 
-		dialog = gtk_message_dialog_new (NULL, 0,
-						 GTK_MESSAGE_INFO,
-						 GTK_BUTTONS_CLOSE,
-						 _("The typing monitor uses the notification area to display "
-						   "information. You don't seem to have a notification area "
-						   "on your panel. You can add it by right-clicking on your "
-						   "panel and choosing 'Add to panel', selecting 'Notification "
-						   "area' and clicking 'Add'."));
-
+		dialog = gtk_message_dialog_new (
+			NULL, 0,
+			GTK_MESSAGE_INFO,
+			GTK_BUTTONS_CLOSE,
+			_("The typing monitor uses the notification area to display "
+			  "information. You don't seem to have a notification area "
+			  "on your panel. You can add it by right-clicking on your "
+			  "panel and choosing 'Add to panel', selecting 'Notification "
+			  "area' and clicking 'Add'."));
+		
 		gtk_dialog_run (GTK_DIALOG (dialog));
 
 		gtk_widget_destroy (dialog);

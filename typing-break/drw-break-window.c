@@ -27,6 +27,7 @@
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 #include <gconf/gconf-client.h>
+
 #include "drwright.h"
 #include "drw-utils.h"
 #include "drw-break-window.h"

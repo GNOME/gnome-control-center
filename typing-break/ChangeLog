@@ -1,3 +1,13 @@
+2005-11-27  Richard Hult  <richard@imendio.com>
+
+	* main.c: (main): Don't display a dialog when the monitor is
+	already running, that's an old remain from when drwright was a
+	standalone app. Fixes bug #307425.
+
+	* drw-break-window.c:
+	* drwright.c: (popup_break_cb): Use stock icon from GTK+ instead
+	of libgnomeui and use i18n includes from glib. Fixes bug #171664.
+
 2005-11-14  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* drw-selection.h: ANSIfy function declaration.

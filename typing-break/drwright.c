@@ -21,22 +21,16 @@
  */
 
 #include <config.h>
-
-#include "drwright.h"
-
 #include <time.h>
 #include <string.h>
 #include <math.h>
-
 #include <glib/gi18n.h>
 #include <gdk/gdk.h>
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtk.h>
-#include <libgnomeui/gnome-stock-icons.h>
-#include <libgnomeui/gnome-client.h>
-
 #include <gconf/gconf-client.h>
 
+#include "drwright.h"
 #include "drw-break-window.h"
 #include "drw-monitor.h"
 #include "drw-utils.h"
@@ -139,7 +133,7 @@ static GList *  create_secondary_break_windows (void);
 static GtkItemFactoryEntry popup_items[] = {
 /*	{ N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },*/
 	{ N_("/_Preferences"),  NULL, GIF_CB (popup_preferences_cb), 0,                  "<StockItem>",  GTK_STOCK_PREFERENCES },
-	{ N_("/_About"),        NULL, GIF_CB (popup_about_cb),       0,                  "<StockItem>",  GNOME_STOCK_ABOUT },
+	{ N_("/_About"),        NULL, GIF_CB (popup_about_cb),       0,                  "<StockItem>",  GTK_STOCK_ABOUT },
 	{ "/sep1",              NULL, NULL,                          0,                  "<Separator>",  NULL },
 	{ N_("/_Take a Break"), NULL, GIF_CB (popup_break_cb),       POPUP_ITEM_BREAK,   "<Item>",       NULL }
 };
@@ -560,7 +554,7 @@ popup_break_cb (gpointer   callback_data,
 		guint      action,
 		GtkWidget *widget)
 {
-	DrWright  *dr = callback_data;
+	DrWright *dr = callback_data;
 
 	if (dr->enabled) {
 		dr->state = STATE_BREAK_SETUP;
