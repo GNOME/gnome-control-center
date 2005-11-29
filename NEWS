@@ -1,3 +1,36 @@
+gnome-control-center 2.12.2
+
+- cleanup (Kjartan Maraas)
+
+default-applications:
+- Add Sylpheed-Claws to the list of possible mailers (Colin Leroy)
+
+mouse:
+- gcc 2.95 compilation fixes (Jens Granseuer) (318746)
+
+shell:
+- Only show one screensaver capplet when both xscreensaver and gnome-screensaver  
+  are installed (Rodrigo Moya) (315505)
+- Fix scrollbar arrows (Carlos Garnacho)
+- Calculate text widths instead of forcing them (Carlos Garnacho) (319492)
+- Force canvas background to base[GTK_STATE_NORMAL] and remove the need to
+  repaint the background, in white (Carlos Garnacho)
+
+themus:
+- Allow installation of themes with file:// URIs (Ed Catmur) (319358)
+
+other:
+- Add schema for remembering NumLock state between sessions (Jürg Billeter)
+  (74215)
+- Add check for xinput extension (Ray Strode) (314409)
+- Reduced amount of xrdb executions (Erwann Chenede) (314774)
+- Don't block settings daemon while executing children processes (Rodrigo Moya)
+- Lazy load the screensaver and the typing break monitor (Rodrigo Moya)
+- Share a single GConfClient in the settings daemon (Rodrigo Moya)
+- Execute xrdb with -nocpp switch when possible (Rodrigo Moya)
+- Swap buttons on auxiliary mice for left-handed mode (Ray Strode) (314409)
+
+------------------------------------------------------------------------------
 gnome-control-center 2.12.1
 
 background:
