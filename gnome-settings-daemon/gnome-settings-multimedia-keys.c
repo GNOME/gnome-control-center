@@ -333,7 +333,8 @@ update_kbd_cb (GConfClient *client, guint id, GConfEntry *entry, gpointer data)
 				break;
 
 			key = g_new0 (Key, 1);
-			if (egg_accelerator_parse_virtual (tmp, &key->keysym, &key->keycode, &key->state) == FALSE)
+			if (egg_accelerator_parse_virtual (tmp, &key->keysym, &key->keycode, &key->state) == FALSE
+			    || key->keycode == 0)
 			{
 				g_free (key);
 				break;
@@ -369,7 +370,8 @@ update_kbd_cb (GConfClient *client, guint id, GConfEntry *entry, gpointer data)
 				break;
 
 			key = g_new0 (Key, 1);
-			if (egg_accelerator_parse_virtual (tmp, &key->keysym, &key->keycode, &key->state) == FALSE)
+			if (egg_accelerator_parse_virtual (tmp, &key->keysym, &key->keycode, &key->state) == FALSE
+			    || key->keycode == 0)
 			{
 				g_free (key);
 				break;
@@ -446,7 +448,8 @@ init_kbd (Acme *acme)
 		}
 
 		key = g_new0 (Key, 1);
-		if (!egg_accelerator_parse_virtual (tmp, &key->keysym, &key->keycode, &key->state))
+		if (!egg_accelerator_parse_virtual (tmp, &key->keysym, &key->keycode, &key->state)
+		    || key->keycode == 0)
 		{
 		        g_free (tmp);
 			g_free (key);
@@ -476,7 +479,8 @@ init_kbd (Acme *acme)
 		}
 
 		key = g_new0 (Key, 1);
-		if (egg_accelerator_parse_virtual (tmp, &key->keysym, &key->keycode, &key->state) == FALSE)
+		if (egg_accelerator_parse_virtual (tmp, &key->keysym, &key->keycode, &key->state) == FALSE
+		    || key->keycode == 0)
 		{
 		        g_free (tmp);
 			g_free (key);

@@ -1,3 +1,10 @@
+2005-12-12  Philippe Troin <phil@fifi.org>
+
+	Fixes #323690
+
+	* gnome-settings-multimedia-keys.c (update_kbd_cb, init_kbd): don't
+	grab keyboard when invalid keys are present in the GConf database.
+	
 2005-11-21  Jens Granseuer <jensgr@gmx.net>
 
 	Fixes #321778
