@@ -9,58 +9,53 @@
 *Button.foreground: FOREGROUND
 *Button.highlightBackground: BACKGROUND
 *Button.highlightColor:	FOREGROUND
-*Button.activeBackground: BACKGROUND
+*Button.activeBackground: HIGHLIGHT
 *Button.activeForeground: FOREGROUND
 
 *Menubutton.background: BACKGROUND
 *Menubutton.foreground: FOREGROUND
 *Menubutton.highlightBackground: BACKGROUND
 *Menubutton.highlightColor: FOREGROUND
-*Menubutton.activeBackground: BACKGROUND
-*Menubutton.activeForeground: FOREGROUND
+*Menubutton.activeBackground: ACTIVE_BACKGROUND
+*Menubutton.activeForeground: ACTIVE_FOREGROUND
 
 *Checkbutton.background: BACKGROUND
 *Checkbutton.foreground: FOREGROUND
 *Checkbutton.highlightBackground: BACKGROUND
 *Checkbutton.highlightColor: FOREGROUND
-*Checkbutton.activeBackground: BACKGROUND
+*Checkbutton.activeBackground: HIGHLIGHT
 *Checkbutton.activeForeground: FOREGROUND
 
 *Radiobutton.background: BACKGROUND
 *Radiobutton.foreground: FOREGROUND
 *Radiobutton.highlightBackground: BACKGROUND
 *Radiobutton.highlightColor: FOREGROUND
-*Radiobutton.activeBackground: BACKGROUND
+*Radiobutton.activeBackground: HIGHLIGHT
 *Radiobutton.activeForeground: FOREGROUND
 
-!*Label.background:	BACKGROUND
-!*Label.foreground: FOREGROUND
+*Label.background: BACKGROUND
+*Label.foreground: FOREGROUND
 *Label.highlightBackground: BACKGROUND
 *Label.highlightColor: FOREGROUND
-*Label.activeBackground: BACKGROUND
-*Label.activeForeground: FOREGROUND
 
 *Menu.background: BACKGROUND
 *Menu.foreground: FOREGROUND
-*Menu.highlightBackground: BACKGROUND
-*Menu.highlightColor: FOREGROUND
-*Menu.activeBackground: BACKGROUND
-*Menu.activeForeground: FOREGROUND
+*Menu.activeBackground: ACTIVE_BACKGROUND
+*Menu.activeForeground: ACTIVE_FOREGROUND
 
 *Frame.background: BACKGROUND
 *Frame.foreground: FOREGROUND
-*Frame.highlightBackground:	BACKGROUND
-*Frame.highlightColor: FOREGROUND
-*Frame.activeBackground: BACKGROUND
-*Frame.activeForeground: FOREGROUND
 
-!*Scrollbar.background: BACKGROUND
-!*Scrollbar.foreground: FOREGROUND
+*Labelframe.background: BACKGROUND
+*Labelframe.foreground: FOREGROUND
+*Labelframe.highlightColor: FOREGROUND
+
+*Scrollbar.background: BACKGROUND
 *Scrollbar.highlightBackground: BACKGROUND
 *Scrollbar.highlightColor: FOREGROUND
-*Scrollbar.activeBackground: BACKGROUND
-*Scrollbar.activeForeground: FOREGROUND
-*Scrollbar.troughColor: BACKGROUND
+*Scrollbar.activeBackground: HIGHLIGHT
+!*Scrollbar.troughColor: LOWLIGHT
+!*Scrollbar.troughColor: BACKGROUND
 
 *Scale.background: BACKGROUND
 *Scale.foreground: FOREGROUND
@@ -68,7 +63,7 @@
 *Scale.highlightColor: FOREGROUND
 *Scale.activeBackground: BACKGROUND
 *Scale.activeForeground: FOREGROUND
-*Scale.troughColor: BACKGROUND
+!*Scale.troughColor: LOWLIGHT
 
 *Entry.background: WINDOW_BACKGROUND
 *Entry.foreground: WINDOW_FOREGROUND
@@ -79,8 +74,8 @@
 *Entry.selectBackground: SELECT_BACKGROUND
 *Entry.selectForeground: SELECT_FOREGROUND
 
-!*Text.background: WINDOW_BACKGROUND
-!*Text.foreground: WINDOW_FOREGROUND
+*Text.background: WINDOW_BACKGROUND
+*Text.foreground: WINDOW_FOREGROUND
 *Text.highlightBackground: WINDOW_BACKGROUND
 *Text.highlightColor: WINDOW_FOREGROUND
 *Text.activeBackground: WINDOW_BACKGROUND
