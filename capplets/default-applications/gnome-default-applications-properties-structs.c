@@ -16,6 +16,8 @@ static BrowserDescription possible_browsers[] = {
         { N_("Mozilla"), 	"mozilla",	"mozilla %s",		FALSE, FALSE },
         { N_("Netscape Communicator"), 	"netscape",	"netscape %s",		FALSE, FALSE },
         { N_("Konqueror"), 		"konqueror",	"konqueror %s",		FALSE, FALSE },
+	{ N_("Opera"), 		"opera",	"opera %s",		FALSE, FALSE },
+ 	{ N_("Opera (open in new tab)"), 		"opera",	"opera -newpage %s",		FALSE, FALSE },
         { N_("W3M Text Browser"),	"w3m",		"w3m %s",		TRUE,  FALSE },
         { N_("Lynx Text Browser"),	"lynx",		"lynx %s",		TRUE,  FALSE },
         { N_("Links Text Browser") , 	"links",	"links %s",		TRUE,  FALSE }
