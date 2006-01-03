@@ -10,6 +10,7 @@
 #define FONT_KEY	   "/desktop/gnome/interface/font_name"
 #define DESKTOP_FONT_KEY   "/apps/nautilus/preferences/desktop_font"
 #define MONOSPACE_FONT_KEY "/desktop/gnome/interface/monospace_font_name"
+#define BACKGROUND_KEY	   "/desktop/gnome/background/picture_filename"
 
 #define METACITY_THEME_DIR "/apps/metacity/general"
 #define METACITY_THEME_KEY METACITY_THEME_DIR "/theme"

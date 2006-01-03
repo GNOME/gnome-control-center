@@ -82,6 +82,8 @@ static void      meta_theme_setup_info           (GnomeThemeMetaInfo *meta_theme
 static void      meta_theme_selection_changed    (GtkTreeSelection   *selection,
 						  GladeXML           *dialog);
 static void      update_themes_from_disk         (GladeXML           *dialog);
+static void	 update_font_button_state	 (GladeXML           *dialog);
+static void	 update_background_button_state	 (GladeXML           *dialog);
 static void      update_settings_from_gconf      (void);
 static void      gtk_theme_key_changed           (GConfClient        *client,
 						  guint               cnxn_id,
@@ -94,6 +96,10 @@ static void      icon_key_changed                (GConfClient        *client,
 						  GConfEntry         *entry,
 						  gpointer            user_data);
 static void      font_key_changed                (GConfClient        *client,
+						  guint               cnxn_id,
+						  GConfEntry         *entry,
+						  gpointer            user_data);
+static void      background_key_changed          (GConfClient        *client,
 						  guint               cnxn_id,
 						  GConfEntry         *entry,
 						  gpointer            user_data);
@@ -895,6 +901,8 @@ update_settings_from_gconf_idle (gpointer data)
   g_free (current_window_theme);
   g_free (current_icon_theme);
   update_settings_from_gconf_idle_id = 0;
+  update_font_button_state (dialog);
+  update_background_button_state (dialog);
   return FALSE;
 }
 
@@ -988,6 +996,51 @@ update_font_button_state (GladeXML *dialog)
 }
 
 static void
+update_background_button_state (GladeXML *dialog)
+{
+  GConfClient *client = gconf_client_get_default ();
+  GtkTreeSelection *selection;
+  GtkTreeModel *model;
+  GtkTreeIter iter;
+  
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (WID ("meta_theme_treeview")));
+  
+  if (gtk_tree_selection_get_selected (selection, &model, &iter))
+    {
+      GnomeThemeMetaInfo *meta_theme_info;
+      char *meta_theme_name, *str;
+      
+      gtk_tree_model_get (model, &iter,
+			  META_THEME_ID_COLUMN, &meta_theme_name,
+			  -1);
+      if (!meta_theme_name)
+	return;
+      
+      meta_theme_info = gnome_theme_meta_info_find (meta_theme_name);
+
+      g_assert (meta_theme_info);
+      g_free (meta_theme_name);
+
+      str = gconf_client_get_string (client, BACKGROUND_KEY, NULL);
+      
+      if (meta_theme_info->background_image != NULL && str != NULL &&
+	  strcmp (meta_theme_info->background_image, str) == 0)
+	{
+	  gtk_widget_set_sensitive (WID ("meta_theme_background1_button"), FALSE);
+	  gtk_widget_set_sensitive (WID ("meta_theme_background2_button"), FALSE);
+	}
+      else
+	{
+	  gtk_widget_set_sensitive (WID ("meta_theme_background1_button"), TRUE);
+	  gtk_widget_set_sensitive (WID ("meta_theme_background2_button"), TRUE);
+	}
+
+      g_free (str);
+    }  
+  
+}
+
+static void
 font_key_changed (GConfClient        *client,
 		  guint               cnxn_id,
 		  GConfEntry         *entry,
@@ -996,6 +1049,17 @@ font_key_changed (GConfClient        *client,
   GladeXML *dialog = user_data;
 
   update_font_button_state (dialog);
+}
+
+static void
+background_key_changed (GConfClient        *client,
+		  guint               cnxn_id,
+		  GConfEntry         *entry,
+		  gpointer            user_data)
+{
+  GladeXML *dialog = user_data;
+
+  update_background_button_state (dialog);
 }
 
 static void
@@ -1138,6 +1202,36 @@ apply_font_clicked (GtkWidget *button,
 }
 
 static void
+apply_background_clicked (GtkWidget *button,
+		gpointer   data)
+{
+  GladeXML *dialog = data;
+  GConfClient *client;
+  GtkTreeSelection *selection;
+  GtkTreeModel *model;
+  GtkTreeIter iter;
+  
+  client = gconf_client_get_default ();
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (WID ("meta_theme_treeview")));
+  
+  if (gtk_tree_selection_get_selected (selection, &model, &iter))
+    {
+      GnomeThemeMetaInfo *meta_theme_info;
+      char *meta_theme_name;
+      
+      gtk_tree_model_get (model, &iter,
+			  META_THEME_ID_COLUMN, &meta_theme_name,
+			  -1);
+      meta_theme_info = gnome_theme_meta_info_find (meta_theme_name);
+
+      g_assert (meta_theme_info);
+      g_free (meta_theme_name);
+
+      gconf_client_set_string (client, BACKGROUND_KEY, meta_theme_info->background_image, NULL);
+    }  
+}
+
+static void
 revert_theme_clicked (GtkWidget *button,
 						gpointer data)
 {
@@ -1185,9 +1279,13 @@ setup_dialog (GladeXML *dialog)
   g_signal_connect (G_OBJECT (WID ("meta_theme_details_button")), "clicked", gnome_theme_details_show, NULL);
 
   g_signal_connect (G_OBJECT (WID ("meta_theme_font1_button")), "clicked", G_CALLBACK (apply_font_clicked), dialog);
+  g_signal_connect (G_OBJECT (WID ("meta_theme_font2_button")), "clicked", G_CALLBACK (apply_font_clicked), dialog);
 
   g_signal_connect (G_OBJECT (WID ("meta_theme_revert_button")), "clicked", G_CALLBACK (revert_theme_clicked),NULL);
 
+  g_signal_connect (G_OBJECT (WID ("meta_theme_background1_button")), "clicked", G_CALLBACK (apply_background_clicked), dialog);
+  g_signal_connect (G_OBJECT (WID ("meta_theme_background2_button")), "clicked", G_CALLBACK (apply_background_clicked), dialog);
+  
   setup_meta_tree_view (GTK_TREE_VIEW (WID ("meta_theme_treeview")),
 			(GCallback) meta_theme_selection_changed,
 			dialog);
@@ -1202,11 +1300,15 @@ setup_dialog (GladeXML *dialog)
 			   ICON_THEME_KEY,
 			   (GConfClientNotifyFunc) &icon_key_changed,
 			   dialog, NULL, NULL);
-
   gconf_client_notify_add (client,
 			   FONT_KEY,
 			   (GConfClientNotifyFunc) &font_key_changed,
 			   dialog, NULL, NULL);
+  gconf_client_notify_add (client,
+			   BACKGROUND_KEY,
+			   (GConfClientNotifyFunc) &background_key_changed,
+			   dialog, NULL, NULL);
+
   g_object_unref (client);
 
   if (window_manager)
@@ -1241,6 +1343,7 @@ setup_dialog (GladeXML *dialog)
   capplet_set_icon (parent, "gnome-settings-theme");
 
   update_font_button_state (dialog);
+  update_background_button_state (dialog);
   gtk_widget_show (parent);
 
 }

@@ -1,3 +1,12 @@
+2006-01-03  Guillaume Desmottes <cass@skynet.be>
+
+	Fixes bug #147665
+
+	* gnome-theme-manager.[ch] (update_font_button_state,
+	update_background_button_state): new functions.
+	(background_key_changed): call the 2 above functions to update
+	the background from metathemes that include a background.
+
 2005-11-14  David Sedeño <david@alderia.com>
 
 	* gnome-theme-details.c (gtk_theme_update_remove_button): Update the
