@@ -523,20 +523,6 @@ dnl ==============================================
 dnl End: Define the main variables
 dnl ==============================================
 
-GCONF_CONFIG_SOURCE=
-AC_ARG_ENABLE(gconf-source,
-  AC_HELP_STRING([--enable-gconf-source=sourceaddress],
-                 [Where to install schema files.]),
-  GCONF_CONFIG_SOURCE=$enable_gconf_source,)
-
-if test "x$GCONF_CONFIG_SOURCE" = "x"; then
-        GCONF_CONFIG_SOURCE="xml::\${DESTDIR}\${sysconfdir}/gconf/gconf.xml.defaults"
-fi
-
-AC_SUBST(GCONF_CONFIG_SOURCE)
-AC_SUBST(INSTALL_GCONF_CONFIG_SOURCE)
-
-
 ORBIT_IDL="`$PKG_CONFIG --variable=orbit_idl ORBit-2.0`"
 AC_SUBST(ORBIT_IDL)
 
