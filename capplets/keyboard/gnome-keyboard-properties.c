@@ -58,16 +58,19 @@ create_dialog (void)
 	gtk_size_group_add_widget (size_group, WID ("repeat_slow_label"));
 	gtk_size_group_add_widget (size_group, WID ("delay_short_label"));
 	gtk_size_group_add_widget (size_group, WID ("blink_slow_label"));
+	g_object_unref (G_OBJECT (size_group));
 
 	size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 	gtk_size_group_add_widget (size_group, WID ("repeat_fast_label"));
 	gtk_size_group_add_widget (size_group, WID ("delay_long_label"));
 	gtk_size_group_add_widget (size_group, WID ("blink_fast_label"));
+	g_object_unref (G_OBJECT (size_group));
 
 	size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 	gtk_size_group_add_widget (size_group, WID ("repeat_delay_scale"));
 	gtk_size_group_add_widget (size_group, WID ("repeat_speed_scale"));
 	gtk_size_group_add_widget (size_group, WID ("cursor_blink_time_scale"));
+	g_object_unref (G_OBJECT (size_group));
 
 	return dialog;
 }
