@@ -529,7 +529,7 @@ fill_radio (GtkRadioButton     *group,
             MouseClickModifier *modifier)
 {
         modifier->radio =
-                gtk_radio_button_new_with_label_from_widget (group,
+                gtk_radio_button_new_with_mnemonic_from_widget (group,
                                                              modifier->name);
         gtk_box_pack_start (GTK_BOX (alt_click_hbox),
                             modifier->radio, FALSE, FALSE, 0);
@@ -639,32 +639,32 @@ reload_mouse_modifiers (void)
         i = 0;
 
         mouse_modifiers[i].number = i;
-        mouse_modifiers[i].name = g_strdup (_("Control"));
+        mouse_modifiers[i].name = g_strdup (_("C_ontrol"));
         mouse_modifiers[i].value = "Control";
         ++i;
 
         mouse_modifiers[i].number = i;
-        mouse_modifiers[i].name = g_strdup (_("Alt"));
+        mouse_modifiers[i].name = g_strdup (_("_Alt"));
         mouse_modifiers[i].value = "Alt";
         ++i;
 
         if (have_hyper) {
                 mouse_modifiers[i].number = i;
-                mouse_modifiers[i].name = g_strdup (_("Hyper"));
+                mouse_modifiers[i].name = g_strdup (_("H_yper"));
                 mouse_modifiers[i].value = "Hyper";
                 ++i;
         }
 
         if (have_super) {
                 mouse_modifiers[i].number = i;
-                mouse_modifiers[i].name = g_strdup (_("Super (or \"Windows logo\")"));
+                mouse_modifiers[i].name = g_strdup (_("S_uper (or \"Windows logo\")"));
                 mouse_modifiers[i].value = "Super";
                 ++i;
         }
 
         if (have_meta) {
                 mouse_modifiers[i].number = i;
-                mouse_modifiers[i].name = g_strdup (_("Meta"));
+                mouse_modifiers[i].name = g_strdup (_("_Meta"));
                 mouse_modifiers[i].value = "Meta";
                 ++i;
         }
