@@ -1290,6 +1290,8 @@ setup_dialog (GladeXML *dialog)
 			(GCallback) meta_theme_selection_changed,
 			dialog);
 
+  gtk_tree_view_set_search_column (GTK_TREE_VIEW (WID ("meta_theme_treeview")), META_THEME_ID_COLUMN);
+
   gconf_client_add_dir (client, "/desktop/gnome/interface", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 
   gconf_client_notify_add (client,
