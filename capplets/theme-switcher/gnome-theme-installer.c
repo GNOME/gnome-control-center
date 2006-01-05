@@ -209,13 +209,13 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 	
 	if (path && len > 7 && ( (!strcmp (path + len - 7, ".tar.gz")) || (!strcmp (path + len - 4, ".tgz")) )) {
 		filename = g_shell_quote (path);
-		command = g_strdup_printf ("sh -c '/bin/gzip -d -c < \"%s\" | /bin/tar ft -  | head -1'",
+		command = g_strdup_printf ("sh -c '/bin/gzip -d -c < \"%s\" | /bin/tar ft -  | head -n 1'",
 					    filename);
 		theme_props->filetype=TARGZ;
 		g_free (filename);
 	} else if (path && len > 8 && !strcmp (path + len - 8, ".tar.bz2")) {
 		filename = g_shell_quote (path);
-		command = g_strdup_printf ("sh -c '/usr/bin/bzip2 -d -c < \"%s\" | /bin/tar ft - | head -1'",
+		command = g_strdup_printf ("sh -c '/usr/bin/bzip2 -d -c < \"%s\" | /bin/tar ft - | head -n 1'",
 					    filename);
 		theme_props->filetype=TARBZ;
 		g_free (filename);
