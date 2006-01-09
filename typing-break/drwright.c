@@ -27,6 +27,7 @@
 #include <glib/gi18n.h>
 #include <gdk/gdk.h>
 #include <gdk/gdkkeysyms.h>
+#include <gdk/gdkspawn.h>
 #include <gtk/gtk.h>
 #include <gconf/gconf-client.h>
 
@@ -35,7 +36,6 @@
 #include "drw-monitor.h"
 #include "drw-utils.h"
 #include "eggtrayicon.h"
-#include "egg-spawn.h"
 
 #define BLINK_TIMEOUT        200
 #define BLINK_TIMEOUT_MIN    120
@@ -572,7 +572,7 @@ popup_preferences_cb (gpointer   callback_data,
 
 	screen = gtk_widget_get_screen (widget);
 
-	if (!egg_spawn_command_line_async_on_screen ("gnome-keyboard-properties --typing-break", screen, &error)) {
+	if (!gdk_spawn_command_line_on_screen (screen, "gnome-keyboard-properties --typing-break", &error)) {
 		GtkWidget *error_dialog;
 
 		error_dialog = gtk_message_dialog_new (NULL, 0,

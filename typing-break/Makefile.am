@@ -18,9 +18,7 @@ gnome_typing_monitor_SOURCES =			\
 	drw-selection.c				\
 	drw-selection.h				\
 	eggtrayicon.c				\
-	eggtrayicon.h				\
-	egg-spawn.c				\
-	egg-spawn.h
+	eggtrayicon.h
 
 gnome_typing_monitor_LDADD = @GNOME_LIBS@ @SCREENSAVER_LIBS@
 gnome_typing_monitor_LDFLAGS = -export-dynamic
