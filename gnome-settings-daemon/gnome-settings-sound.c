@@ -57,21 +57,21 @@ start_esd (void)
         time_t starttime;
         GnomeClient *client = gnome_master_client ();
 
-        esdpid = gnome_execute_async (NULL, 2, (char **)esd_cmdline);
-        g_snprintf (argbuf, sizeof (argbuf), "%d", esdpid);
-        tmpargv[0] = "kill"; tmpargv[1] = argbuf; tmpargv[2] = NULL;
-        gnome_client_set_shutdown_command (client, 2, tmpargv);
-        starttime = time (NULL);
-        gnome_sound_init (NULL);
+	esdpid = gnome_execute_async (NULL, 2, (char **)esd_cmdline);
+	g_snprintf (argbuf, sizeof (argbuf), "%d", esdpid);
+	tmpargv[0] = "kill"; tmpargv[1] = argbuf; tmpargv[2] = NULL;
+	gnome_client_set_shutdown_command (client, 2, tmpargv);
+	starttime = time (NULL);
+	gnome_sound_init (NULL);
 
-        while (gnome_sound_connection_get () < 0
+	while (gnome_sound_connection_get () < 0
 	       && ((time(NULL) - starttime) < 4)) 
-        {
+	{
 #ifdef HAVE_USLEEP
-                usleep(1000);
+		usleep(1000);
 #endif
-                gnome_sound_init(NULL);
-        }
+		gnome_sound_init(NULL);
+	}
 }
 
 static gboolean set_standby = TRUE;
@@ -88,6 +88,10 @@ stop_esd (void)
 	set_standby = TRUE;
 }
 
+struct reload_foreach_closure {
+	gboolean enable_system_sounds;
+};
+
 /* reload_foreach_cb
  *
  * For a given SoundEvent, reload the sound file associate with the event. 
@@ -95,9 +99,13 @@ stop_esd (void)
 static void
 reload_foreach_cb (SoundEvent *event, gpointer data)
 {
+	struct reload_foreach_closure *closure;
 	gchar *file, *tmp, *key;
 	int sid;
-	
+	gboolean do_load;
+
+	closure = data;
+
 	key = sound_event_compose_key (event);
 	/* We need to free up the old sample, because
 	 * esd allows multiple samples with the same name,
@@ -106,8 +114,21 @@ reload_foreach_cb (SoundEvent *event, gpointer data)
 	if (sid >= 0)
 		esd_sample_free(gnome_sound_connection_get (), sid);
 
+	/* We only disable sounds for system events.  Other events, like sounds
+	 * in games, should be preserved.  The games should have their own
+	 * configuration for sound anyway.
+	 */
+	if ((strcmp (event->category, "gnome-2") == 0
+	     || strcmp (event->category, "gtk-events-2") == 0))
+		do_load = closure->enable_system_sounds;
+	else
+		do_load = TRUE;
+
+	if (!do_load)
+		goto out;
+
 	if (!event->file || !strcmp (event->file, ""))
-		return;
+		goto out;
 	
 	file = g_strdup (event->file);
 	if (file[0] != '/')
@@ -129,6 +150,7 @@ reload_foreach_cb (SoundEvent *event, gpointer data)
 		g_warning (_("Couldn't load sound file %s as sample %s"),
 			   file, key);
 
+ out:
 	g_free (key);
 }
 
@@ -144,11 +166,15 @@ apply_settings (void)
 	gboolean enable_esd;
 	gboolean event_sounds;
 
+	struct reload_foreach_closure closure;
+
 	client = gnome_settings_daemon_get_conf_client ();
 
 	enable_esd        = gconf_client_get_bool (client, "/desktop/gnome/sound/enable_esd", NULL);
 	event_sounds      = gconf_client_get_bool (client, "/desktop/gnome/sound/event_sounds", NULL);
 	event_changed_new = gconf_client_get_int  (client, "/desktop/gnome/sound/event_changed", NULL);
+
+	closure.enable_system_sounds = event_sounds;
 
 	if (enable_esd) {
 		if (gnome_sound_connection_get () < 0) 
@@ -162,17 +188,18 @@ apply_settings (void)
 	} else if (!enable_esd && !set_standby)
 		stop_esd ();
 
-	if ((enable_esd && event_sounds) &&
+	if (enable_esd &&
 	    (!inited || event_changed_old != event_changed_new))
 	{
 		SoundProperties *props;
 		
 		inited = TRUE;
 		event_changed_old = event_changed_new;
+
 		
 		props = sound_properties_new ();
 		sound_properties_add_defaults (props, NULL);
-		sound_properties_foreach (props, reload_foreach_cb, NULL);
+		sound_properties_foreach (props, reload_foreach_cb, &closure);
 		gtk_object_destroy (GTK_OBJECT (props));
 	}
 }
