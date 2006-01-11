@@ -10,6 +10,8 @@
 #include <libgnomeui/libgnomeui.h>
 #include "gnomecc-canvas.h"
 
+#define SINGLE_CLICK_POLICY_KEY "/apps/nautilus/preferences/click_policy"
+
 static void
 gnome_cc_die (void)
 {
@@ -26,6 +28,55 @@ change_status (GnomeccCanvas *canvas, const gchar *status, void *data)
 
 	gnome_appbar_set_status (bar, status);
 }
+
+static void
+on_click_policy_notified (GConfClient   *client,
+			  guint          conn_id,
+			  GConfEntry    *entry,
+			  GnomeccCanvas *canvas)
+{
+	GConfValue *value;
+	gboolean use_single_click = FALSE;
+	gchar *policy;
+
+	value = gconf_entry_get_value (entry);
+
+	if (value->type == GCONF_VALUE_STRING) {
+		policy = gconf_value_get_string (value);
+		use_single_click = (0 == g_ascii_strcasecmp (policy, "single"));
+
+		gnomecc_canvas_set_single_click_mode (canvas, use_single_click);
+	}
+}
+
+static void
+set_click_policy (GnomeccCanvas *canvas)
+{
+	GConfClient *client = gconf_client_get_default ();
+	gboolean use_single_click = FALSE;
+	gchar *policy;
+
+	gconf_client_add_dir (client,
+                              SINGLE_CLICK_POLICY_KEY,
+                              GCONF_CLIENT_PRELOAD_NONE,
+                              NULL);
+
+	gconf_client_notify_add (client, 
+				 SINGLE_CLICK_POLICY_KEY,
+				 on_click_policy_notified,
+				 canvas,
+				 NULL, NULL);
+
+	policy = gconf_client_get_string (client, SINGLE_CLICK_POLICY_KEY, NULL);
+
+	if (policy) {
+		use_single_click = (0 == g_ascii_strcasecmp (policy, "single"));
+		g_free (policy);
+	}
+
+	gnomecc_canvas_set_single_click_mode (canvas, use_single_click);
+}
+
 
 static GtkWindow *
 create_window (void)
@@ -49,6 +100,7 @@ create_window (void)
 	canvas = gnomecc_canvas_new (info);
 	g_signal_connect (G_OBJECT (canvas), "selection-changed",
 			  G_CALLBACK (change_status), appbar);
+	set_click_policy (GNOMECC_CANVAS (canvas));
 
 	sw = gtk_scrolled_window_new (GTK_ADJUSTMENT (gtk_adjustment_new (0, 0, 100, 10, 100, 100)),
 				      GTK_ADJUSTMENT (gtk_adjustment_new (0, 0, 100, 10, 100, 100)));

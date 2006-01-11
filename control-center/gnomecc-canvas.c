@@ -63,6 +63,8 @@ struct _GnomeccCanvasPrivate {
 
 	/* accessibility stuff */
 	GHashTable *accessible_children;
+
+	gboolean single_click;
 };
 
 typedef struct {
@@ -187,29 +189,20 @@ gnomecc_canvas_init (GnomeccCanvas *canvas)
 	priv->rtl = (gtk_widget_get_direction (GTK_WIDGET (canvas)) == GTK_TEXT_DIR_RTL);
 
 	priv->accessible_children = g_hash_table_new (g_int_hash, g_int_equal);
+	priv->single_click = FALSE;
 
 	gtk_widget_show_all (GTK_WIDGET (canvas));
 }
 
 static gboolean
-single_click_activates (void)
+single_click_activates (GnomeccCanvas *canvas)
 {
-	static gboolean needs_init = TRUE;
-	static gboolean use_single_click = FALSE;
-	if (needs_init)  {
-		GConfClient *client = gconf_client_get_default ();
-		char *policy = gconf_client_get_string (client, "/apps/nautilus/preferences/click_policy", NULL);
-		g_object_unref (G_OBJECT (client));
+	GnomeccCanvasPrivate *priv;
+	
+	priv = GNOMECC_CANVAS_GET_PRIVATE (canvas);
 
-		if (policy != NULL) {
-			use_single_click = (0 == g_ascii_strcasecmp (policy, "single"));
-			g_free (policy);
-		}
-		needs_init = FALSE;
-	}
-
-	return	use_single_click;
-}
+	return priv->single_click;
+}	
 
 static void
 gnome_canvas_item_show_hide (GnomeCanvasItem *item, gboolean show)
@@ -327,22 +320,31 @@ cover_event (GnomeCanvasItem *item, GdkEvent *event, ControlCenterEntry *entry)
 {
 	EntryInfo *ei = entry->user_data;
 	GnomeccCanvas *canvas = ei->canvas;
+	GdkCursor *cursor;
 
 	switch (event->type) {
 	case GDK_ENTER_NOTIFY:
 		ei->highlighted = TRUE;
 		setup_entry (canvas, entry); /* highlight even if it is already selected */
+
+		if (single_click_activates (canvas)) {
+			cursor = gdk_cursor_new (GDK_HAND1);
+			gdk_window_set_cursor (GTK_WIDGET (canvas)->window, cursor);
+			gdk_cursor_unref (cursor);
+		}
+			
 		return TRUE;
 	case GDK_LEAVE_NOTIFY:
 		ei->highlighted = FALSE;
 		setup_entry (canvas, entry);
+		gdk_window_set_cursor (GTK_WIDGET (canvas)->window, NULL);
 		return TRUE;
 	case GDK_BUTTON_PRESS:
-		if (single_click_activates ()) {
+		select_entry (canvas, entry);
+
+		if (single_click_activates (canvas))
 			activate_entry (entry);
-		} else {
-			select_entry (canvas, entry);
-		}
+
 		return TRUE;
 	case GDK_2BUTTON_PRESS:
 		activate_entry (entry);
@@ -1700,4 +1702,16 @@ gnomecc_canvas_get_accessible (GtkWidget *widget)
 	}
 
 	return (* GTK_WIDGET_CLASS (gnomecc_canvas_parent_class)->get_accessible) (widget);
+}
+
+void
+gnomecc_canvas_set_single_click_mode (GnomeccCanvas *canvas, gboolean single_click)
+{
+	GnomeccCanvasPrivate *priv;
+
+	g_return_if_fail (GNOMECC_IS_CANVAS (canvas));
+
+	priv = GNOMECC_CANVAS_GET_PRIVATE (canvas);
+
+	priv->single_click = (single_click == TRUE);
 }

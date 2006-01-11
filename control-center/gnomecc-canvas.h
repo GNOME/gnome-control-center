@@ -53,6 +53,8 @@ struct _GnomeccCanvasClass {
 GType gnomecc_canvas_get_type (void);
 
 GtkWidget* gnomecc_canvas_new (ControlCenterInformation *info);
+void       gnomecc_canvas_set_single_click_mode (GnomeccCanvas *canvas, gboolean single_click);
+
 
 
 G_END_DECLS
