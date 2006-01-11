@@ -150,7 +150,7 @@ create_dialog (void)
 	gtk_image_set_from_file (GTK_IMAGE (WID ("bell_image")),
 				 GNOMECC_DATA_DIR "/pixmaps/visual-bell.png");
 
-	gtk_widget_set_size_request (widget, -1, 250); /* Can this be right?  Seems broken for large fonts. */
+	gtk_widget_set_size_request (widget, 425, 500);
 
 	if (!CheckXKB()) {
 		GtkWidget *audible_bell_option = WID ("bell_audible_toggle");
