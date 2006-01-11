@@ -31,6 +31,7 @@
 #include <linux/fb.h>
 #include <linux/pmu.h>
 #include <errno.h>
+#include <libgnome/gnome-i18n.h>
 
 #ifndef FBIOBLANK
 #define FBIOBLANK      0x4611          /* 0 or vesa-level+1 */
@@ -84,6 +85,17 @@ acme_fblevel_init (AcmeFblevel *fblevel)
 	return;
 }
 
+GQuark
+acme_fblevel_error_quark (void)
+{
+	static GQuark quark = 0;
+
+	if (quark == 0)
+		quark = g_quark_from_string ("acme-fblevel-quark");
+
+	return quark;
+}
+
 int
 acme_fblevel_get_level (AcmeFblevel *self)
 {
@@ -126,16 +138,24 @@ acme_fblevel_set_dim (AcmeFblevel *self, gboolean val)
 }
 
 AcmeFblevel *
-acme_fblevel_new (void)
+acme_fblevel_new (GError **error)
 {
 	AcmeFblevel *self;
 	int fd, foo;
 
-	if (g_file_test ("/dev/pmu", G_FILE_TEST_EXISTS) == FALSE)
+	if (g_file_test ("/dev/pmu", G_FILE_TEST_EXISTS) == FALSE) {
+		*error = g_error_new_literal (ACME_FBLEVEL_ERROR,
+					      ACME_FBLEVEL_ERROR_NO_PMU_DEVICE,
+					      _("No '/dev/pmu' device found"));
 		return NULL;
+	}
 
-	if (acme_fblevel_is_powerbook () == FALSE)
+	if (acme_fblevel_is_powerbook () == FALSE) {
+		*error = g_error_new_literal (ACME_FBLEVEL_ERROR,
+					      ACME_FBLEVEL_ERROR_NO_POWERBOOK,
+					      _("Not a powerbook"));
 		return NULL;
+	}
 
 	self = ACME_FBLEVEL (g_object_new (ACME_TYPE_FBLEVEL, NULL));
 	/* This function switches the kernel backlight control off.
@@ -147,8 +167,12 @@ acme_fblevel_new (void)
 	 * Notice nicked from pbbuttons*/
 	fd  = open ("/dev/pmu", O_RDWR);
 	/* We can't emit the signal yet, the signal isn't connected! */
-	if (fd < 0)
+	if (fd < 0) {
+		*error = g_error_new_literal (ACME_FBLEVEL_ERROR,
+					      ACME_FBLEVEL_ERROR_WRONG_PERMS,
+					      _("Wrong permission for '/dev/pmu' device"));
 		return NULL;
+	}
 
 	foo = ioctl(fd, PMU_IOC_GRAB_BACKLIGHT, 0);
 	self->_priv->pmu_fd = fd;

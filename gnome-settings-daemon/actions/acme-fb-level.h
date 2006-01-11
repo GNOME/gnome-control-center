@@ -29,9 +29,12 @@
 #define ACME_IS_FBLEVEL(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), ACME_TYPE_FBLEVEL))
 #define ACME_FBLEVEL_GET_CLASS(obj)	(G_TYPE_INSTANCE_GET_CLASS ((obj), ACME_TYPE_FBLEVEL, AcmeFblevelClass))
 
+#define ACME_FBLEVEL_ERROR		(acme_fblevel_error_quark ())
+
 typedef struct AcmeFblevelPrivate AcmeFblevelPrivate;
 typedef struct AcmeFblevel AcmeFblevel;
 typedef struct AcmeFblevelClass AcmeFblevelClass;
+typedef enum   AcmeFblevelError	AcmeFblevelError;
 
 struct AcmeFblevel {
 	GObject parent;
@@ -44,12 +47,19 @@ struct AcmeFblevelClass {
 	GObjectClass parent;
 };
 
+enum AcmeFblevelError {
+	ACME_FBLEVEL_ERROR_NO_PMU_DEVICE,
+	ACME_FBLEVEL_ERROR_NO_POWERBOOK,
+	ACME_FBLEVEL_ERROR_WRONG_PERMS
+};
+
 GType acme_fblevel_get_type			(void);
+GQuark acme_fblevel_error_quark			(void);
 int acme_fblevel_get_level			(AcmeFblevel *self);
 void acme_fblevel_set_level			(AcmeFblevel *self, int val);
 gboolean acme_fblevel_get_dim			(AcmeFblevel *self);
 void acme_fblevel_set_dim			(AcmeFblevel *self,
 						 gboolean val);
-AcmeFblevel *acme_fblevel_new			(void);
+AcmeFblevel *acme_fblevel_new			(GError **error);
 gboolean acme_fblevel_is_powerbook		(void);
 

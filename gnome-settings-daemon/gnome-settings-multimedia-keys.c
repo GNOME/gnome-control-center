@@ -148,26 +148,6 @@ do_sleep_action (char *cmd1, char *cmd2)
 	}
 }
 
-#ifdef USE_FBLEVEL
-static char*
-permission_problem_string (const char *file)
-{
-	return g_strdup_printf (_("Permissions on the file %s are broken\n"), file);
-}
-
-static void
-fblevel_problem_cb (void)
-{
-	char *msg;
-
-	msg = permission_problem_string ("/dev/pmu");
-	acme_error (msg);
-	g_free (msg);
-
-	return;
-}
-#endif
-
 static char *images[] = {
 	PIXMAPSDIR "/gnome-speakernotes-muted.png",
 	PIXMAPSDIR "/gnome-speakernotes.png",
@@ -800,6 +780,7 @@ gnome_settings_multimedia_keys_load (GConfClient *client)
 {
 	GSList *l;
 	Acme   *acme;
+	GError *err = NULL;
 
 	acme = g_new0 (Acme, 1);
 	acme->xml = NULL;
@@ -819,11 +800,12 @@ gnome_settings_multimedia_keys_load (GConfClient *client)
 
 #ifdef USE_FBLEVEL
 	/* initialise Frame Buffer level handler */
-	if (acme_fblevel_is_powerbook () != FALSE)
-	{
-		acme->levobj = acme_fblevel_new();
-		if (acme->levobj == NULL)
-			fblevel_problem_cb ();
+	acme->levobj = acme_fblevel_new (&err);
+	if (acme->levobj == NULL && err != NULL) {
+		if (!g_error_matches (err, ACME_FBLEVEL_ERROR,
+				      ACME_FBLEVEL_ERROR_NO_POWERBOOK))
+			acme_error (err->message);
+		g_error_free (err);
 	}
 #endif
 
