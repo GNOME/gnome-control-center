@@ -259,37 +259,6 @@ grab_key (Acme *acme, Key *key, gboolean grab)
 	}
 }
 
-static void
-unhookup_keysym (int keycode)
-{
-	char *command;
-
-	if (keycode <= 0)
-		return;
-
-	command = g_strdup_printf ("xmodmap -e \"keycode %d = \"", keycode);
-
-	g_spawn_command_line_sync (command, NULL, NULL, NULL, NULL);
-	g_free (command);
-}
-
-static gboolean
-hookup_keysym (int keycode, const char *keysym)
-{
-	char *command;
-
-	if (keycode <= 0)
-		return TRUE;
-
-	command = g_strdup_printf ("xmodmap -e \"keycode %d = %s\"",
-			keycode, keysym);
-
-	g_spawn_command_line_sync (command, NULL, NULL, NULL, NULL);
-	g_free (command);
-
-	return FALSE;
-}
-
 static gboolean
 is_valid_shortcut (const char *string)
 {
@@ -311,7 +280,7 @@ update_kbd_cb (GConfClient *client, guint id, GConfEntry *entry, gpointer data)
 	g_return_if_fail (entry->key != NULL);
 
 	/* Find the key that was modified */
-	for (i = 0; i < PLAY_KEY; i++)
+	for (i = 0; i < HANDLED_KEYS; i++)
 	{
 		if (strcmp (entry->key, keys[i].gconf_key) == 0)
 		{
@@ -330,72 +299,20 @@ update_kbd_cb (GConfClient *client, guint id, GConfEntry *entry, gpointer data)
 					keys[i].gconf_key, NULL);
 
 			if (is_valid_shortcut (tmp) == FALSE)
-				break;
+				return;
 
 			key = g_new0 (Key, 1);
 			if (egg_accelerator_parse_virtual (tmp, &key->keysym, &key->keycode, &key->state) == FALSE
 			    || key->keycode == 0)
 			{
 				g_free (key);
-				break;
+				return;
 			}
 
 			grab_key (acme, key, TRUE);
 			keys[i].key = key;
 
-			break;
-		}
-	}
-
-	if (found != FALSE)
-		return;
-
-	for (i = PLAY_KEY; i < HANDLED_KEYS; i++)
-	{
-		if (strcmp (entry->key, keys[i].gconf_key) == 0)
-		{
-			const char *tmp;
-			Key *key;
-
-			if (keys[i].key != NULL)
-				unhookup_keysym (keys[i].key->keycode);
-
-			g_free (keys[i].key);
-			keys[i].key = NULL;
-
-			tmp = gconf_client_get_string (acme->conf_client,
-					keys[i].gconf_key, NULL);
-
-			if (is_valid_shortcut (tmp) == FALSE)
-				break;
-
-			key = g_new0 (Key, 1);
-			if (egg_accelerator_parse_virtual (tmp, &key->keysym, &key->keycode, &key->state) == FALSE
-			    || key->keycode == 0)
-			{
-				g_free (key);
-				break;
-			}
-
-			switch (keys[i].key_type) {
-			case PLAY_KEY:
-				hookup_keysym (key->keycode, "XF86AudioPlay");
-				break;
-			case PAUSE_KEY:
-				hookup_keysym (key->keycode, "XF86AudioPause");
-				break;
-			case STOP_KEY:
-				hookup_keysym (key->keycode, "XF86AudioStop");
-				break;
-			case PREVIOUS_KEY:
-				hookup_keysym (key->keycode, "XF86AudioPrev");
-				break;
-			case NEXT_KEY:
-				hookup_keysym (key->keycode, "XF86AudioNext");
-				break;
-			}
-
-			keys[i].key = key;
+			return;
 		}
 	}
 }
@@ -431,7 +348,7 @@ init_kbd (Acme *acme)
 {
 	int i;
 
-	for (i = 0; i < PLAY_KEY; i++)
+	for (i = 0; i < HANDLED_KEYS; i++)
 	{
 		char *tmp;
 		Key *key;
@@ -461,60 +378,6 @@ init_kbd (Acme *acme)
 
 		grab_key (acme, key, TRUE);
 	}
-
-	for (i = PLAY_KEY; i < HANDLED_KEYS; i++)
-	{
-		char *tmp;
-		Key *key;
-
-		gconf_client_notify_add (acme->conf_client,
-				keys[i].gconf_key, update_kbd_cb,
-				acme, NULL, NULL);
-
-		tmp = gconf_client_get_string (acme->conf_client,
-				keys[i].gconf_key, NULL);
-		if (!is_valid_shortcut (tmp)) {
-		        g_free (tmp);
-			continue;
-		}
-
-		key = g_new0 (Key, 1);
-		if (egg_accelerator_parse_virtual (tmp, &key->keysym, &key->keycode, &key->state) == FALSE
-		    || key->keycode == 0)
-		{
-		        g_free (tmp);
-			g_free (key);
-			continue;
-		}
-		g_free (tmp);
-
-		keys[i].key = key;
-
-		switch (keys[i].key_type) {
-		case PLAY_KEY:
-			hookup_keysym (keys[i].key->keycode,
-					"XF86AudioPlay");
-			break;
-		case PAUSE_KEY:
-			hookup_keysym (keys[i].key->keycode,
-					"XF86AudioPause");
-			break;
-		case STOP_KEY:
-			hookup_keysym (keys[i].key->keycode,
-					"XF86AudioStop");
-			break;
-		case PREVIOUS_KEY:
-			hookup_keysym (keys[i].key->keycode,
-					"XF86AudioPrev");
-			break;
-		case NEXT_KEY:
-			hookup_keysym (keys[i].key->keycode,
-					"XF86AudioNext");
-			break;
-		}
-	}
-
-	return;
 }
 
 static gboolean
@@ -893,7 +756,7 @@ acme_filter_events (GdkXEvent *xevent, GdkEvent *event, gpointer data)
 	keycode = xev->xkey.keycode;
 	state = xev->xkey.state;
 
-	for (i = 0; i < PLAY_KEY; i++)
+	for (i = 0; i < HANDLED_KEYS; i++)
 	{
 		if (keys[i].key == NULL)
 			continue;

@@ -64,12 +64,6 @@ static const KeyListEntry sounds_key_list[] =
   { "/apps/gnome_settings_daemon/keybindings/volume_mute", ALWAYS_VISIBLE, 0 },
   { "/apps/gnome_settings_daemon/keybindings/volume_down", ALWAYS_VISIBLE, 0 },
   { "/apps/gnome_settings_daemon/keybindings/volume_up", ALWAYS_VISIBLE, 0 },
-  /* Other ones that need keysyms bindings */
-  { "/apps/gnome_settings_daemon/keybindings/play", ALWAYS_VISIBLE, 0 },
-  { "/apps/gnome_settings_daemon/keybindings/pause", ALWAYS_VISIBLE, 0 },
-  { "/apps/gnome_settings_daemon/keybindings/stop", ALWAYS_VISIBLE, 0 },
-  { "/apps/gnome_settings_daemon/keybindings/previous", ALWAYS_VISIBLE, 0 },
-  { "/apps/gnome_settings_daemon/keybindings/next", ALWAYS_VISIBLE, 0 },
   { "/apps/gnome_settings_daemon/keybindings/eject", ALWAYS_VISIBLE, 0 },
   { NULL }
 };

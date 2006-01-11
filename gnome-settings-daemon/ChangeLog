@@ -1,3 +1,12 @@
+2006-01-11  Sebastien Bacher  <seb128@debian.org>
+
+	* actions/acme.h:
+	* gnome-settings-multimedia-keys.c: (update_kbd_cb), (init_kbd),
+	(acme_filter_events):
+	drop the keysym/keycode binding code, it's an hack and 
+	doesn't work fine, patch by Bastien Nocera <hadess@hadess.net>
+	(Closes: #133815)	
+
 2006-01-11  Scott Reeves <SReeves@novell.com>
 
 	* gnome-settings-sound.c (reload_foreach_cb): only disable sounds
