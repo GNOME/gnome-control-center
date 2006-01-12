@@ -1,3 +1,15 @@
+2006-01-11  Dennis Cranston  <dennis_cranston@yahoo.com>
+
+	* capplets/sound/sound-properties-capplet.c: (create_dialog):
+	Do not hardcode the height of the dialog.
+	* capplets/sound/sound-properties.glade:  Add an alignment to
+	set 18 pixels of space before starting the "System Sounds" 
+	category.
+	* libsounds/sound-view.c: (play_preview_cb), (add_sound_item),
+	(sound_view_init):  Indent the contents of the "System Sounds"
+	category.  Use left alignment for combobox labels.  Fix the
+	row and column spacing.
+        
 2006-01-11  Sebastien Bacher  <seb128@debian.org>
 
 	* schemas/apps_gnome_settings_daemon_keybindings.schemas.in:
