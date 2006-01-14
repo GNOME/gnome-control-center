@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-11 20:30+0700\n"
-"PO-Revision-Date: 2006-01-11 20:47+0700\n"
+"POT-Creation-Date: 2006-01-14 18:21+0700\n"
+"PO-Revision-Date: 2006-01-14 18:36+0700\n"
 "Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
 "Language-Team: Thai <L10n@opentle.org>\n"
 "MIME-Version: 1.0\n"
@@ -1487,31 +1487,31 @@ msgid "The type of accelerator."
 msgstr "แบบของตัวเร่ง"
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
-#: ../capplets/keybindings/gnome-keybinding-properties.c:197
+#: ../capplets/keybindings/gnome-keybinding-properties.c:191
 #: ../libbackground/applier.c:624 ../typing-break/drwright.c:471
 msgid "Disabled"
 msgstr "ไม่ใช้"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:544
+#: ../capplets/keybindings/gnome-keybinding-properties.c:538
 msgid "<Unknown Action>"
 msgstr "<ปฏิบัติการที่ไม่รู้จัก>"
 
 # This contains shortcuts for "volume up/down", e-mail, move windows, etc.,.
 # "misclenous" is more suitable than "desktop"
-#: ../capplets/keybindings/gnome-keybinding-properties.c:565
+#: ../capplets/keybindings/gnome-keybinding-properties.c:559
 msgid "Desktop"
 msgstr "เบ็ดเตล็ด"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:566
+#: ../capplets/keybindings/gnome-keybinding-properties.c:560
 #: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
 msgid "Sound"
 msgstr "เสียง"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:570
+#: ../capplets/keybindings/gnome-keybinding-properties.c:564
 msgid "Window Management"
 msgstr "จัดการหน้าต่าง"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:667
+#: ../capplets/keybindings/gnome-keybinding-properties.c:661
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1520,21 +1520,21 @@ msgstr ""
 "ปุ่มลัด \"%s\" ถูกใช้อยู่แล้วสำหรับ:\n"
 " \"%s\"\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:699
+#: ../capplets/keybindings/gnome-keybinding-properties.c:693
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "เกิดข้อผิดพลาดขณะจัดเก็บปุ่มลัดใหม่ลงในฐานข้อมูลค่าปรับแต่ง: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:749
+#: ../capplets/keybindings/gnome-keybinding-properties.c:743
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "เกิดข้อผิดพลาด ขณะลบปุ่มลัดออกจาก ฐานข้อมูลค่าปรับแต่ง: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:856
+#: ../capplets/keybindings/gnome-keybinding-properties.c:850
 msgid "Action"
 msgstr "ปฏิบัติการ"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:880
+#: ../capplets/keybindings/gnome-keybinding-properties.c:874
 msgid "Shortcut"
 msgstr "ปุ่มลัด"
 
@@ -2499,7 +2499,7 @@ msgstr "หน้าต่าง"
 msgid "Others"
 msgstr "อื่นๆ"
 
-#: ../control-center/control-center.c:42
+#: ../control-center/control-center.c:93
 msgid "Desktop Preferences"
 msgstr "ปรับแต่งพื้นโต๊ะ"
 
@@ -2692,12 +2692,7 @@ msgstr ""
 "สั่งให้เครืองหลับไม่สำเร็จ\n"
 "โปรดตรวจดูว่าติดตั้งและปรับแต่งเครื่องไว้ถูกต้อง"
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:155
-#, c-format
-msgid "Permissions on the file %s are broken\n"
-msgstr "สิทธิ์บนแฟ้ม %s เสียหาย\n"
-
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:200
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:180
 msgid ""
 "Couldn't load the Glade file.\n"
 "Make sure that this daemon is properly installed."
@@ -2815,7 +2810,7 @@ msgstr "ไม่ได้กำหนดเสียงสำหรับเห
 #: ../libsounds/sound-view.c:123
 msgid ""
 "The sound file for this event does not exist.\n"
-"You may want to install the gnome-audio packagefor a set of default sounds."
+"You may want to install the gnome-audio package for a set of default sounds."
 msgstr ""
 "หาแฟ้มเสียงสำหรับเหตุการณ์นี้ไม่พบ\n"
 "ถ้าคุณต้องการชุดเสียงปริยาย กรุณาติดตั้ง gnome-audio"
@@ -2927,92 +2922,51 @@ msgstr "ออกจากระบบ"
 msgid "Log out's shortcut."
 msgstr "ปุ่มลัดสำหรับออกจากระบบ"
 
-# sound better than ร่องเสียง
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
-msgid "Next track key's shortcut."
-msgstr "ปุ่มลัดสำหรับเล่นเพลงถัดไป"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
-msgid "Pause"
-msgstr "พัก"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
-msgid "Pause key's shortcut."
-msgstr "ปุ่มลัดสำหรับพักการเล่นเพลง"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
-msgid "Play (or play/pause)"
-msgstr "เล่น (หรือ เล่น/พัก)"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
-msgid "Play (or play/pause) key's shortcut."
-msgstr "ปุ่มลัดสำหรับเล่นเพลง (หรือ เล่น/พัก)"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
-msgid "Previous track key's shortcut."
-msgstr "ปุ่มลัดสำหรับเล่นเพลงถัดไป"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
 msgid "Search"
 msgstr "ค้นหา"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
 msgid "Search's shortcut."
 msgstr "ปุ่มลัดสำหรับค้นหา"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
-msgid "Skip to next track"
-msgstr "กระโดดไปเพลงถัดไป"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
-msgid "Skip to previous track"
-msgstr "กระโดดไปเพลงที่แล้ว"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
 msgid "Sleep"
 msgstr "หลับ"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
 msgid "Sleep's shortcut."
 msgstr "ปุ่มลัดสำหรับให้เครื่องหลับ"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
-msgid "Stop playback key"
-msgstr "ปุ่มหยุดเล่นเพลง"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
-msgid "Stop playback key's shortcut."
-msgstr "ปุ่มลัดสำหรับหยุดเล่นเพลง"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
 msgid "Volume down"
 msgstr "หรี่เสียง"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
 msgid "Volume down's shortcut."
 msgstr "ปุ่มลัดสำหรับหรี่เสียง"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
 msgid "Volume mute"
 msgstr "ปิดเสียง"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
 msgid "Volume mute's shortcut"
 msgstr "ปุ่มลัดสำหรับปิดเสียง"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:37
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
 msgid "Volume step"
 msgstr "ขั้นเสียง"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:38
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
 msgid "Volume step as percentage of volume."
 msgstr "ขั้นเสียงเป็นเปอร์เซ็นต์ของความดัง"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:39
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
 msgid "Volume up"
 msgstr "เพิ่มเสียง"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
 msgid "Volume up's shortcut."
 msgstr "ปุ่มลัดสำหรับเพิ่มเสียง"
 
@@ -3392,6 +3346,40 @@ msgstr "กำหนดว่าจะสร้างรูปย่อสำห
 #: ../vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "กำหนดว่าจะสร้างรูปย่อสำหรับชุดตกแต่งหรือไม่"
+
+#~ msgid "Permissions on the file %s are broken\n"
+#~ msgstr "สิทธิ์บนแฟ้ม %s เสียหาย\n"
+
+# sound better than ร่องเสียง
+#~ msgid "Next track key's shortcut."
+#~ msgstr "ปุ่มลัดสำหรับเล่นเพลงถัดไป"
+
+#~ msgid "Pause"
+#~ msgstr "พัก"
+
+#~ msgid "Pause key's shortcut."
+#~ msgstr "ปุ่มลัดสำหรับพักการเล่นเพลง"
+
+#~ msgid "Play (or play/pause)"
+#~ msgstr "เล่น (หรือ เล่น/พัก)"
+
+#~ msgid "Play (or play/pause) key's shortcut."
+#~ msgstr "ปุ่มลัดสำหรับเล่นเพลง (หรือ เล่น/พัก)"
+
+#~ msgid "Previous track key's shortcut."
+#~ msgstr "ปุ่มลัดสำหรับเล่นเพลงถัดไป"
+
+#~ msgid "Skip to next track"
+#~ msgstr "กระโดดไปเพลงถัดไป"
+
+#~ msgid "Skip to previous track"
+#~ msgstr "กระโดดไปเพลงที่แล้ว"
+
+#~ msgid "Stop playback key"
+#~ msgstr "ปุ่มหยุดเล่นเพลง"
+
+#~ msgid "Stop playback key's shortcut."
+#~ msgstr "ปุ่มลัดสำหรับหยุดเล่นเพลง"
 
 #~ msgid "E_nable sound server startup"
 #~ msgstr "เ_ปิดใช้ระบบเสียง"
