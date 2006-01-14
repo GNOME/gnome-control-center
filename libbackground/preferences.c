@@ -50,6 +50,7 @@ static GEnumValue _bg_wptype_values[] = {
 	{ WPTYPE_CENTERED, "WPTYPE_CENTERED", "centered"},
 	{ WPTYPE_SCALED, "WPTYPE_SCALED", "scaled"},
 	{ WPTYPE_STRETCHED, "WPTYPE_STRETCHED", "stretched"},
+	{ WPTYPE_ZOOM, "WPTYPE_ZOOM", "zoom"},
 	{ WPTYPE_NONE, "WPTYPE_NONE", "none"},
 	{ 0, NULL, NULL }
 };
@@ -383,6 +384,8 @@ read_wptype_from_string (gchar *string)
 			type =  WPTYPE_SCALED;
 		} else if (!strncmp (string, "stretched", sizeof ("stretched"))) {
 			type =  WPTYPE_STRETCHED;
+		} else if (!strncmp (string, "zoom", sizeof ("zoom"))) {
+			type =  WPTYPE_ZOOM;
 		}
 		g_free (string);
 	}
@@ -432,6 +435,8 @@ bg_preferences_get_wptype_as_string (wallpaper_type_t wp)
 			return "scaled";
 		case WPTYPE_STRETCHED:
 			return "stretched";
+		case WPTYPE_ZOOM:
+			return "zoom";
 		case WPTYPE_NONE:
 			return "none";
 	        case WPTYPE_UNSET:

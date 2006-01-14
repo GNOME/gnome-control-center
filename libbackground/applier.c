@@ -1091,6 +1091,27 @@ get_geometry (wallpaper_type_t  wallpaper_type,
 
 		break;
 
+	case WPTYPE_ZOOM:
+		asp = (gdouble) pwidth / (gdouble) virtual_geom->width;
+
+		if (asp > (gdouble) pheight / virtual_geom->height) {
+			src_geom->width = pwidth * virtual_geom->height / pheight;
+			src_geom->height = pheight;
+			src_geom->x = (pwidth - src_geom->width) / 2;
+			src_geom->y = 0;
+		} else {
+			src_geom->width = pwidth;
+			src_geom->height = pheight * virtual_geom->width / pwidth;
+			src_geom->x = 0;
+			src_geom->y = (pheight - src_geom->height) / 2;
+		}
+
+		dest_geom->x = dest_geom->y = 0;
+		dest_geom->width = field_geom->width;
+		dest_geom->height = field_geom->height;
+
+		break;
+
 	case WPTYPE_STRETCHED:
 		dest_geom->width = field_geom->width;
 		dest_geom->height = field_geom->height;

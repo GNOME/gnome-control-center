@@ -1,3 +1,17 @@
+2006-01-14  Alan Swanson <swanson@ukfsn.org>
+
+	* applier.c (get_geometry): Handle the new WPTYPE_ZOOM setting and
+	return proper geometry for it
+
+	* preferences.c (_bg_wptype_values[]): Add the alias for the zoom type
+	(read_wptype_from_string): Handle setting the type for zoom
+	(bg_preferences_get_wptype_as_string): Return the string for the new
+	zoom setting type
+
+	* preferences.h (_wallpaper_type_t): Add the new zoom type
+
+	Partial code for #105231
+	
 2005-11-07  Alexis Robert <alexis@linuxcode.eu.org>
 
 	Fixes #320647
