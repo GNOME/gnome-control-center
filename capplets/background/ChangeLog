@@ -1,6 +1,22 @@
+2006-01-14  Alan Swanson <swanson@ukfsn.org>
+
+	* gnome-wp-capplet.c (gnome_wp_option_menu_set): Check for the scale
+	type being zoom in the config, to set the option menu
+	(gnome_wp_scale_type_changed): Update the options for zoom type
+	(gnome_wp_icon_theme_changed): Update the zoom icon in the menu
+	(wallpaper_properties_init): Add an item for Zoom to the scaling menu
+
+	* gnome-wp-capplet.h (_GnomeWPCapplet): Add a widget for the zoom item
+	(GnomeWPScaleType): Add an enumeration for the zoom type
+
+	* gnome-wp-item.c (gnome_wp_item_get_thumbnail): Add the code to
+	generate a proper thumbnail for the new zoom option
+
+	Fixes #105231
+	
 2005-10-05  Dennis Cranston  <dennis_cranston@yahoo.com>
 
-	* gnome-wp-capplet.c: (wallpaper_properties_init):  Add an image
+	* gnome-wp-capplet.c (wallpaper_properties_init):  Add an image
 	filter to the file chooser.
 	
 2005-10-01  Rodney Dawes  <dobey@novell.com>

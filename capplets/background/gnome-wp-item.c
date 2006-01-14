@@ -274,6 +274,15 @@ GdkPixbuf * gnome_wp_item_get_thumbnail (GnomeWPItem * item,
 	tw = bw;
       }
       scaled = gnome_wp_pixbuf_center (pixbuf, bgpixbuf, tw, th);
+    } else if (!strcmp (item->options, "zoom")) {
+      if ((gdouble) ph * (gdouble) bw < (gdouble) pw * (gdouble) bh) {
+	tw = 0.5 + (gdouble) pw * (gdouble) bh / (gdouble) ph; 
+	th = bh;
+      } else {
+	th = 0.5 + (gdouble) ph * (gdouble) bw / (gdouble) pw;
+	tw = bw;
+      }
+      scaled = gnome_wp_pixbuf_center (pixbuf, bgpixbuf, tw, th);
     }
   }
 

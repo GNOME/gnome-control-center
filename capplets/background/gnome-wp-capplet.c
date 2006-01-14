@@ -259,6 +259,9 @@ static void gnome_wp_option_menu_set (GnomeWPCapplet * capplet,
     } else if (!strcmp (value, "scaled")) {
       gtk_option_menu_set_history (GTK_OPTION_MENU (capplet->wp_opts),
 				   GNOME_WP_SCALE_TYPE_SCALED);
+    } else if (!strcmp (value, "zoom")) {
+      gtk_option_menu_set_history (GTK_OPTION_MENU (capplet->wp_opts),
+				   GNOME_WP_SCALE_TYPE_ZOOM);
     } else if (strcmp (value, "none") != 0) {
       gtk_option_menu_set_history (GTK_OPTION_MENU (capplet->wp_opts),
 				   GNOME_WP_SCALE_TYPE_TILED);
@@ -422,6 +425,9 @@ static void gnome_wp_scale_type_changed (GtkOptionMenu * option_menu,
     break;
   case GNOME_WP_SCALE_TYPE_SCALED:
     item->options = g_strdup ("scaled");
+    break;
+  case GNOME_WP_SCALE_TYPE_ZOOM:
+    item->options = g_strdup ("zoom");
     break;
   case GNOME_WP_SCALE_TYPE_TILED:
     item->options = g_strdup ("wallpaper");
@@ -851,6 +857,16 @@ static void gnome_wp_icon_theme_changed (GtkIconTheme * theme,
   }
 
   icon_info = gtk_icon_theme_lookup_icon (capplet->theme,
+					  "stock_wallpaper-zoom",
+					  16, 0);
+  if (icon_info != NULL) {
+    pixbuf = gtk_icon_info_load_icon (icon_info, NULL);
+    gtk_icon_info_free (icon_info);
+    gtk_image_set_from_pixbuf (GTK_IMAGE (capplet->zitem), pixbuf);
+    g_object_unref (pixbuf);
+  }
+
+  icon_info = gtk_icon_theme_lookup_icon (capplet->theme,
 					  "stock_wallpaper-tile",
 					  16, 0);
   if (icon_info != NULL) {
@@ -1126,6 +1142,31 @@ static void wallpaper_properties_init (poptContext ctx) {
   }
 
   label = gtk_label_new (_("Scaled"));
+  gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+  gtk_box_pack_start (GTK_BOX (mbox), label, TRUE, TRUE, 0);
+  gtk_widget_show (label);
+  gtk_menu_append (GTK_MENU (menu), mitem);
+  gtk_widget_show (mitem);
+
+  mitem = gtk_menu_item_new ();
+  set_accessible_name (mitem, _("Zoom"));
+  icon_info = gtk_icon_theme_lookup_icon (capplet->theme,
+					  "stock_wallpaper-zoom",
+					  16, 0);
+  mbox = gtk_hbox_new (FALSE, 6);
+  gtk_container_add (GTK_CONTAINER (mitem), mbox);
+  gtk_widget_show (mbox);
+
+  if (icon_info != NULL) {
+    pixbuf = gtk_icon_info_load_icon (icon_info, NULL);
+    gtk_icon_info_free (icon_info);
+    capplet->zitem = gtk_image_new_from_pixbuf (pixbuf);
+    gtk_box_pack_start (GTK_BOX (mbox), capplet->zitem, FALSE, FALSE, 0);
+    gtk_widget_show (capplet->zitem);
+    g_object_unref (pixbuf);
+  }
+
+  label = gtk_label_new (_("Zoom"));
   gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
   gtk_box_pack_start (GTK_BOX (mbox), label, TRUE, TRUE, 0);
   gtk_widget_show (label);

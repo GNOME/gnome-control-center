@@ -53,10 +53,11 @@ struct _GnomeWPCapplet {
   GtkWidget * wp_opts;
   GtkWidget * rm_button;
 
-  /* Menu Items for Fill/Scale/Center/Tile Options */
+  /* Menu Items for Fill/Scale/Center/Zoom/Tile Options */
   GtkWidget * fitem;
   GtkWidget * sitem;
   GtkWidget * citem;
+  GtkWidget * zitem;
   GtkWidget * witem;
 
   /* Widgets for Color Options */
@@ -100,6 +101,7 @@ typedef enum {
   GNOME_WP_SCALE_TYPE_CENTERED,
   GNOME_WP_SCALE_TYPE_STRETCHED,
   GNOME_WP_SCALE_TYPE_SCALED,
+  GNOME_WP_SCALE_TYPE_ZOOM,
   GNOME_WP_SCALE_TYPE_TILED
 } GnomeWPScaleType;
 
