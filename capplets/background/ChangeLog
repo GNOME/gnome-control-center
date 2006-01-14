@@ -1,3 +1,46 @@
+2006-01-14  Rodney Dawes  <dobey@novell.com>
+
+	* *.[ch]: Update Copyright notice to include 2006 year
+
+	* gnome-background-properties.glade: Change the main dialog to use
+	explicit apply with OK and Cancel buttons
+	Remove the icons from the "Add Wallpaper" and "Remove" buttons
+
+	* gnome-wp-capplet.c (gnome_wp_props_wp_set): Add a new retval boolean
+	so that we can return whether or not we are trying to set the wallpaper
+	to the same image filename as before
+	Remove all the UI updating code from here
+	Fix a potential leak of the GConfChangeSet object
+	(gnome_wp_props_wp_selected): Update the UI whenever a different
+	wallpaper is selected in the list
+	Remove the timeout to update gconf, as we are using explicit apply now
+	(gnome_wp_main_quit): Free the old_filename variable
+	Update the indentation style to match the rest of the code
+	(wallpaper_properties_clicked): Handle setting the gconf keys when the
+	OK button is clicked, and fall through to the cancel/close code
+	(gnome_wp_scale_type_changed, gnome_wp_shade_type_changed):
+	Don't set the gconf strings from here, only update when OK is clicked
+	(gnome_wp_color_changed): Don't update gconf strings here
+	Don't generate miniature icon thumbnails for the drop-down menu
+	(gnome_wp_remove_wallpaper): Don't need to remove the idle id any more
+	(gnome_wp_load_stuffs): Set the old_filename variable to the current
+	setting that is stored in gconf for the wallpaper filename
+	(gnome_wp_delay_changed): Remove this unused method
+	(gnome_wp_icon_theme_changed): Don't need to update the icons in the
+	drop-down menu here, as they are being removed
+	(set_accessible_name): Don't need this any longer, as the drop-down
+	menu items are now standard label menu items, and don't have icons
+	(wallpaper_properties_init): No longer need the key repeat delay
+	Fix some style issues with the glade_xml_get_widget calls
+	Replace the menu items in the option menus with standard label items
+
+	* gnome-wp-capplet.h (_GnomeWPCapplet): Remove the no longer needed
+	Widget variables for updating the drop-down menu icons
+	Remove the no longer needed delay and idleid variables
+	Add an old_filename variable to compare against when OK is clicked
+
+	Also should fix #316697
+
 2006-01-14  Alan Swanson <swanson@ukfsn.org>
 
 	* gnome-wp-capplet.c (gnome_wp_option_menu_set): Check for the scale

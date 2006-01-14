@@ -1,7 +1,7 @@
 /*
  *  Authors: Rodney Dawes <dobey@ximian.com>
  *
- *  Copyright 2003-2005 Novell, Inc. (www.novell.com)
+ *  Copyright 2003-2006 Novell, Inc. (www.novell.com)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of version 2 of the GNU General Public License
@@ -276,7 +276,7 @@ static gboolean gnome_wp_props_wp_set (GnomeWPCapplet * capplet) {
   GnomeWPItem * item;
   GConfChangeSet * cs;
   gchar * wpfile;
-  GdkPixbuf * pixbuf;
+  gboolean retval = FALSE;
 
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (capplet->treeview));
   if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
@@ -284,69 +284,69 @@ static gboolean gnome_wp_props_wp_set (GnomeWPCapplet * capplet) {
 
     item = g_hash_table_lookup (capplet->wphash, wpfile);
 
-    cs = gconf_change_set_new ();
+    if (g_utf8_collate (capplet->old_filename, wpfile) != 0) {
+      cs = gconf_change_set_new ();
 
-    gnome_wp_set_sensitivities (capplet);
+      if (!strcmp (item->filename, "(none)")) {
+	gconf_change_set_set_string (cs, WP_OPTIONS_KEY, "none");
+      } else {
+	gchar * uri;
 
-    if (!strcmp (item->filename, "(none)")) {
-      gconf_change_set_set_string (cs, WP_OPTIONS_KEY, "none");
-    } else {
-      gchar * uri;
+	if (g_utf8_validate (item->filename, -1, NULL))
+	  uri = g_strdup (item->filename);
+	else
+	  uri = g_filename_to_utf8 (item->filename, -1, NULL, NULL, NULL);
 
-      if (g_utf8_validate (item->filename, -1, NULL))
-	uri = g_strdup (item->filename);
-      else
-	uri = g_filename_to_utf8 (item->filename, -1, NULL, NULL, NULL);
-      gconf_change_set_set_string (cs, WP_FILE_KEY, uri);
-      g_free (uri);
+	gconf_change_set_set_string (cs, WP_FILE_KEY, uri);
+	g_free (uri);
 
-      gconf_change_set_set_string (cs, WP_OPTIONS_KEY, item->options);
-      gnome_wp_option_menu_set (capplet, item->options, FALSE);
+	gconf_change_set_set_string (cs, WP_OPTIONS_KEY, item->options);
+      }
+
+      gconf_change_set_set_string (cs, WP_SHADING_KEY, item->shade_type);
+
+      gconf_change_set_set_string (cs, WP_PCOLOR_KEY, item->pri_color);
+      gconf_change_set_set_string (cs, WP_SCOLOR_KEY, item->sec_color);
+
+      gconf_client_commit_change_set (capplet->client, cs, TRUE, NULL);
+
+      gconf_change_set_unref (cs);
+
+      retval = TRUE;
     }
-
-    gconf_change_set_set_string (cs, WP_SHADING_KEY, item->shade_type);
-    gnome_wp_option_menu_set (capplet, item->shade_type, TRUE);
-
-    gconf_change_set_set_string (cs, WP_PCOLOR_KEY, item->pri_color);
-    gconf_change_set_set_string (cs, WP_SCOLOR_KEY, item->sec_color);
-
-    gconf_client_commit_change_set (capplet->client, cs, TRUE, NULL);
-
-    gconf_change_set_unref (cs);
-
-    gtk_color_button_set_color (GTK_COLOR_BUTTON (capplet->pc_picker), item->pcolor);
-    gtk_color_button_set_color (GTK_COLOR_BUTTON (capplet->sc_picker), item->scolor);
-
     g_free (wpfile);
-
-    pixbuf = gnome_wp_pixbuf_new_solid (item->pcolor, 14, 12);
-    gtk_image_set_from_pixbuf (GTK_IMAGE (capplet->smenuitem), pixbuf);
-    g_object_unref (pixbuf);
-
-    pixbuf = gnome_wp_pixbuf_new_gradient (GTK_ORIENTATION_HORIZONTAL,
-					   item->pcolor, item->scolor, 14, 12);
-    gtk_image_set_from_pixbuf (GTK_IMAGE (capplet->hmenuitem), pixbuf);
-    g_object_unref (pixbuf);
-    
-    pixbuf = gnome_wp_pixbuf_new_gradient (GTK_ORIENTATION_VERTICAL,
-					   item->pcolor, item->scolor, 14, 12);
-    gtk_image_set_from_pixbuf (GTK_IMAGE (capplet->vmenuitem), pixbuf);
-    g_object_unref (pixbuf);
-  } else {
-    gtk_widget_set_sensitive (capplet->rm_button, FALSE);
   }
-
-  return FALSE;
+  return retval;
 }
 
 static void gnome_wp_props_wp_selected (GtkTreeSelection * selection,
 					GnomeWPCapplet * capplet) {
-  if (capplet->idleid > 0) {
-    g_source_remove (capplet->idleid);
+  GtkTreeIter iter;
+  GtkTreeModel * model;
+  GnomeWPItem * item;
+  gchar * wpfile;
+
+  if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
+    gtk_tree_model_get (model, &iter, 2, &wpfile, -1);
+
+    item = g_hash_table_lookup (capplet->wphash, wpfile);
+
+    gnome_wp_set_sensitivities (capplet);
+
+    if (strcmp (item->filename, "(none)") != 0) {
+      gnome_wp_option_menu_set (capplet, item->options, FALSE);
+    }
+    gnome_wp_option_menu_set (capplet, item->shade_type, TRUE);
+
+    gtk_color_button_set_color (GTK_COLOR_BUTTON (capplet->pc_picker),
+				item->pcolor);
+    gtk_color_button_set_color (GTK_COLOR_BUTTON (capplet->sc_picker),
+				item->scolor);
+
+    g_free (wpfile);
+  } else {
+    gtk_widget_set_sensitive (capplet->rm_button, FALSE);
   }
-  capplet->idleid = g_timeout_add (capplet->delay + 100,
-				   (GSourceFunc) gnome_wp_props_wp_set,
-				   capplet);
 }
 
 static void gnome_wp_remove_wp (gchar * key, GnomeWPItem * item,
@@ -366,16 +366,17 @@ static void gnome_wp_remove_wp (gchar * key, GnomeWPItem * item,
 }
 
 void gnome_wp_main_quit (GnomeWPCapplet * capplet) {
-    g_hash_table_foreach (capplet->wphash, (GHFunc) gnome_wp_remove_wp,
-			  capplet);
+  g_free (capplet->old_filename);
+  g_hash_table_foreach (capplet->wphash, (GHFunc) gnome_wp_remove_wp,
+			capplet);
 
-    gnome_wp_xml_save_list (capplet);
+  gnome_wp_xml_save_list (capplet);
 
-    g_object_unref (capplet->thumbs);
+  g_object_unref (capplet->thumbs);
 
-    g_hash_table_destroy (capplet->wphash);
+  g_hash_table_destroy (capplet->wphash);
 
-    gtk_main_quit ();
+  gtk_main_quit ();
 }
 
 static void wallpaper_properties_clicked (GtkWidget * dialog,
@@ -386,8 +387,17 @@ static void wallpaper_properties_clicked (GtkWidget * dialog,
     wp_properties_help (GTK_WINDOW (dialog),
 			"user-guide.xml", "goscustdesk-7");
     break;
+  case GTK_RESPONSE_OK:
+    if (gnome_wp_props_wp_set (capplet)) {
+      /*
+	 This is here because applying the background is about 1.4 seconds
+	 slow, with nautilus managing the desktop on my Radeon 7500
+	 Without nautilus, this is about 600000 usecs
+      */
+      usleep (1400000);
+    }
   case GTK_RESPONSE_DELETE_EVENT:
-  case GTK_RESPONSE_CLOSE: {
+  case GTK_RESPONSE_CANCEL: {
     gtk_widget_destroy (dialog);
     gnome_wp_main_quit (capplet);
     break;
@@ -440,8 +450,6 @@ static void gnome_wp_scale_type_changed (GtkOptionMenu * option_menu,
 		      0, pixbuf,
 		      -1);
   g_object_unref (pixbuf);
-  gconf_client_set_string (capplet->client, WP_OPTIONS_KEY,
-			   item->options, NULL);
 }
 
 static void gnome_wp_shade_type_changed (GtkOptionMenu * option_menu,
@@ -487,8 +495,6 @@ static void gnome_wp_shade_type_changed (GtkOptionMenu * option_menu,
 		      0, pixbuf,
 		      -1);
   g_object_unref (pixbuf);
-  gconf_client_set_string (capplet->client, WP_SHADING_KEY,
-			   item->shade_type, NULL);
 }
 
 static void gnome_wp_color_changed (GnomeWPCapplet * capplet,
@@ -498,7 +504,6 @@ static void gnome_wp_color_changed (GnomeWPCapplet * capplet,
   GtkTreeModel * model;
   GtkTreeSelection * selection;
   gchar * wpfile;
-  GdkPixbuf * pixbuf;
 
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (capplet->treeview));
   if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
@@ -531,28 +536,7 @@ static void gnome_wp_color_changed (GnomeWPCapplet * capplet,
 				     item->scolor->green >> 8,
 				     item->scolor->blue >> 8);
 
-  if (update) {
-    gconf_client_set_string (capplet->client, WP_PCOLOR_KEY,
-			     item->pri_color, NULL);
-    gconf_client_set_string (capplet->client, WP_SCOLOR_KEY,
-			     item->sec_color, NULL);
-  }
-
   gnome_wp_shade_type_changed (NULL, capplet);
-
-  pixbuf = gnome_wp_pixbuf_new_solid (item->pcolor, 14, 12);
-  gtk_image_set_from_pixbuf (GTK_IMAGE (capplet->smenuitem), pixbuf);
-  g_object_unref (pixbuf);
-
-  pixbuf = gnome_wp_pixbuf_new_gradient (GTK_ORIENTATION_HORIZONTAL,
-					 item->pcolor, item->scolor, 14, 12);
-  gtk_image_set_from_pixbuf (GTK_IMAGE (capplet->hmenuitem), pixbuf);
-  g_object_unref (pixbuf);
-
-  pixbuf = gnome_wp_pixbuf_new_gradient (GTK_ORIENTATION_VERTICAL,
-					 item->pcolor, item->scolor, 14, 12);
-  gtk_image_set_from_pixbuf (GTK_IMAGE (capplet->vmenuitem), pixbuf);
-  g_object_unref (pixbuf);
 }
 
 static void gnome_wp_scolor_changed (GtkWidget * widget,
@@ -567,10 +551,6 @@ static void gnome_wp_remove_wallpaper (GtkWidget * widget,
   GtkTreePath * first;
   GtkTreeSelection * selection;
   gchar * wpfile;
-
-  if (capplet->idleid > 0) {
-    g_source_remove (capplet->idleid);
-  }
 
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (capplet->treeview));
   if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
@@ -614,6 +594,8 @@ static gboolean gnome_wp_load_stuffs (void * data) {
     imagepath = g_strdup (uri);
   else
     imagepath = g_filename_from_utf8 (uri, -1, NULL, NULL, NULL);
+
+  capplet->old_filename = g_strdup (uri);
   g_free (uri);
 
   item = g_hash_table_lookup (capplet->wphash, imagepath);
@@ -804,12 +786,6 @@ static void gnome_wp_color2_changed (GConfClient * client, guint id,
   gnome_wp_color_changed (capplet, FALSE);
 }
 
-static void gnome_wp_delay_changed (GConfClient * client, guint id,
-				       GConfEntry * entry,
-				       GnomeWPCapplet * capplet) {
-  capplet->delay = gconf_value_get_int (entry->value);
-}
-
 static void gnome_wp_icon_theme_changed (GtkIconTheme * theme,
 					 GnomeWPCapplet * capplet) {
   GdkPixbuf * pixbuf;
@@ -823,56 +799,6 @@ static void gnome_wp_icon_theme_changed (GtkIconTheme * theme,
     gtk_icon_info_free (icon_info);
     gtk_window_set_icon (GTK_WINDOW (capplet->window), NULL);
     gtk_window_set_default_icon (pixbuf);
-    g_object_unref (pixbuf);
-  }
-
-  icon_info = gtk_icon_theme_lookup_icon (capplet->theme,
-					  "stock_wallpaper-center",
-					  16, 0);
-  if (icon_info != NULL) {
-    pixbuf = gtk_icon_info_load_icon (icon_info, NULL);
-    gtk_icon_info_free (icon_info);
-    gtk_image_set_from_pixbuf (GTK_IMAGE (capplet->citem), pixbuf);
-    g_object_unref (pixbuf);
-  }
-
-  icon_info = gtk_icon_theme_lookup_icon (capplet->theme,
-					  "stock_wallpaper-fill",
-					  16, 0);
-  if (icon_info != NULL) {
-    pixbuf = gtk_icon_info_load_icon (icon_info, NULL);
-    gtk_icon_info_free (icon_info);
-    gtk_image_set_from_pixbuf (GTK_IMAGE (capplet->fitem), pixbuf);
-    g_object_unref (pixbuf);
-  }
-
-  icon_info = gtk_icon_theme_lookup_icon (capplet->theme,
-					  "stock_wallpaper-scale",
-					  16, 0);
-  if (icon_info != NULL) {
-    pixbuf = gtk_icon_info_load_icon (icon_info, NULL);
-    gtk_icon_info_free (icon_info);
-    gtk_image_set_from_pixbuf (GTK_IMAGE (capplet->sitem), pixbuf);
-    g_object_unref (pixbuf);
-  }
-
-  icon_info = gtk_icon_theme_lookup_icon (capplet->theme,
-					  "stock_wallpaper-zoom",
-					  16, 0);
-  if (icon_info != NULL) {
-    pixbuf = gtk_icon_info_load_icon (icon_info, NULL);
-    gtk_icon_info_free (icon_info);
-    gtk_image_set_from_pixbuf (GTK_IMAGE (capplet->zitem), pixbuf);
-    g_object_unref (pixbuf);
-  }
-
-  icon_info = gtk_icon_theme_lookup_icon (capplet->theme,
-					  "stock_wallpaper-tile",
-					  16, 0);
-  if (icon_info != NULL) {
-    pixbuf = gtk_icon_info_load_icon (icon_info, NULL);
-    gtk_icon_info_free (icon_info);
-    gtk_image_set_from_pixbuf (GTK_IMAGE (capplet->witem), pixbuf);
     g_object_unref (pixbuf);
   }
 }
@@ -896,16 +822,6 @@ static GladeXML * gnome_wp_create_dialog (void) {
 
   return new;
 }
-
-static void set_accessible_name (GtkWidget *widget, const gchar *name) {
-  AtkObject *obj;
- 
-  obj = gtk_widget_get_accessible (widget);
-  if (!GTK_IS_ACCESSIBLE (obj))
-    return;
-  if (name)
-    atk_object_set_name (obj, name);
-} 
 
 static void gnome_wp_update_preview (GtkFileChooser *chooser,
 				     GnomeWPCapplet *capplet) {
@@ -938,8 +854,8 @@ static void gnome_wp_update_preview (GtkFileChooser *chooser,
 static void wallpaper_properties_init (poptContext ctx) {
   GnomeWPCapplet * capplet;
   GladeXML * dialog;
-  GtkWidget * menu, * label;
-  GtkWidget * mbox, * mitem;
+  GtkWidget * menu;
+  GtkWidget * mitem;
   GtkWidget * add_button;
   GtkCellRenderer * renderer;
   GtkTreeViewColumn * column;
@@ -965,18 +881,11 @@ static void wallpaper_properties_init (poptContext ctx) {
     capplet->client = gconf_client_get_default ();
   }
 
-  capplet->delay = gconf_client_get_int (capplet->client,
-					 WP_DELAY_KEY,
-					 NULL);
   gconf_client_add_dir (capplet->client, WP_KEYBOARD_PATH,
 			GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
   gconf_client_add_dir (capplet->client, WP_PATH_KEY,
 			GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 
-  gconf_client_notify_add (capplet->client,
-			   WP_DELAY_KEY,
-			   (GConfClientNotifyFunc) gnome_wp_delay_changed,
-			   capplet, NULL, NULL);
   gconf_client_notify_add (capplet->client,
 			   WP_FILE_KEY,
 			   (GConfClientNotifyFunc) gnome_wp_file_changed,
@@ -1010,7 +919,7 @@ static void wallpaper_properties_init (poptContext ctx) {
 		    G_CALLBACK (gnome_wp_icon_theme_changed), capplet);
 
   dialog = gnome_wp_create_dialog ();
-  capplet->window = glade_xml_get_widget (dialog,"gnome_wp_properties");
+  capplet->window = glade_xml_get_widget (dialog, "gnome_wp_properties");
 
   icon_info = gtk_icon_theme_lookup_icon (capplet->theme,
 					  "gnome-settings-background",
@@ -1037,7 +946,7 @@ static void wallpaper_properties_init (poptContext ctx) {
   g_signal_connect (G_OBJECT (capplet->window), "drag_data_received",
 		    G_CALLBACK (bg_properties_dragged_image), capplet);
 
-  capplet->treeview = glade_xml_get_widget (dialog,"wp_tree");
+  capplet->treeview = glade_xml_get_widget (dialog, "wp_tree");
 
   capplet->model = GTK_TREE_MODEL (gtk_list_store_new (3, GDK_TYPE_PIXBUF,
 						       G_TYPE_STRING,
@@ -1068,133 +977,27 @@ static void wallpaper_properties_init (poptContext ctx) {
   gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (capplet->model),
 					2, GTK_SORT_ASCENDING);
 
-  capplet->wp_opts = glade_xml_get_widget (dialog,"style_menu");
+  capplet->wp_opts = glade_xml_get_widget (dialog, "style_menu");
 
   menu = gtk_menu_new ();
 
-  mitem = gtk_menu_item_new ();
-  set_accessible_name (mitem, _("Centered")); 
-  icon_info = gtk_icon_theme_lookup_icon (capplet->theme,
-					  "stock_wallpaper-center",
-					  16, 0);
-
-  mbox = gtk_hbox_new (FALSE, 6);
-  gtk_container_add (GTK_CONTAINER (mitem), mbox);
-  gtk_widget_show (mbox);
-
-  if (icon_info != NULL) {
-    pixbuf = gtk_icon_info_load_icon (icon_info, NULL);
-    gtk_icon_info_free (icon_info);
-    capplet->citem = gtk_image_new_from_pixbuf (pixbuf);
-    gtk_box_pack_start (GTK_BOX (mbox), capplet->citem, FALSE, FALSE, 0);
-    gtk_widget_show (capplet->citem);
-    g_object_unref (pixbuf);
-  }
-    
-  label = gtk_label_new (_("Centered"));
-  gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
-  gtk_box_pack_start (GTK_BOX (mbox), label, TRUE, TRUE, 0);
-  gtk_widget_show (label);
+  mitem = gtk_menu_item_new_with_label (_("Centered"));
   gtk_menu_append (GTK_MENU (menu), mitem);
   gtk_widget_show (mitem);
 
-  mitem = gtk_menu_item_new ();
-  set_accessible_name (mitem, _("Fill Screen"));
-  icon_info = gtk_icon_theme_lookup_icon (capplet->theme,
-					  "stock_wallpaper-fill",
-					  16, 0);
-  mbox = gtk_hbox_new (FALSE, 6);
-  gtk_container_add (GTK_CONTAINER (mitem), mbox);
-  gtk_widget_show (mbox);
-
-  if (icon_info != NULL) {
-    pixbuf = gtk_icon_info_load_icon (icon_info, NULL);
-    gtk_icon_info_free (icon_info);
-    capplet->fitem = gtk_image_new_from_pixbuf (pixbuf);
-    gtk_box_pack_start (GTK_BOX (mbox), capplet->fitem, FALSE, FALSE, 0);
-    gtk_widget_show (capplet->fitem);
-    g_object_unref (pixbuf);
-  }
-
-  label = gtk_label_new (_("Fill Screen"));
-  gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
-  gtk_box_pack_start (GTK_BOX (mbox), label, TRUE, TRUE, 0);
-  gtk_widget_show (label);
+  mitem = gtk_menu_item_new_with_label (_("Fill Screen"));
   gtk_menu_append (GTK_MENU (menu), mitem);
   gtk_widget_show (mitem);
 
-  mitem = gtk_menu_item_new ();
-  set_accessible_name (mitem, _("Scaled"));
-  icon_info = gtk_icon_theme_lookup_icon (capplet->theme,
-					  "stock_wallpaper-scale",
-					  16, 0);
-  mbox = gtk_hbox_new (FALSE, 6);
-  gtk_container_add (GTK_CONTAINER (mitem), mbox);
-  gtk_widget_show (mbox);
-
-  if (icon_info != NULL) {
-    pixbuf = gtk_icon_info_load_icon (icon_info, NULL);
-    gtk_icon_info_free (icon_info);
-    capplet->sitem = gtk_image_new_from_pixbuf (pixbuf);
-    gtk_box_pack_start (GTK_BOX (mbox), capplet->sitem, FALSE, FALSE, 0);
-    gtk_widget_show (capplet->sitem);
-    g_object_unref (pixbuf);
-  }
-
-  label = gtk_label_new (_("Scaled"));
-  gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
-  gtk_box_pack_start (GTK_BOX (mbox), label, TRUE, TRUE, 0);
-  gtk_widget_show (label);
+  mitem = gtk_menu_item_new_with_label (_("Scaled"));
   gtk_menu_append (GTK_MENU (menu), mitem);
   gtk_widget_show (mitem);
 
-  mitem = gtk_menu_item_new ();
-  set_accessible_name (mitem, _("Zoom"));
-  icon_info = gtk_icon_theme_lookup_icon (capplet->theme,
-					  "stock_wallpaper-zoom",
-					  16, 0);
-  mbox = gtk_hbox_new (FALSE, 6);
-  gtk_container_add (GTK_CONTAINER (mitem), mbox);
-  gtk_widget_show (mbox);
-
-  if (icon_info != NULL) {
-    pixbuf = gtk_icon_info_load_icon (icon_info, NULL);
-    gtk_icon_info_free (icon_info);
-    capplet->zitem = gtk_image_new_from_pixbuf (pixbuf);
-    gtk_box_pack_start (GTK_BOX (mbox), capplet->zitem, FALSE, FALSE, 0);
-    gtk_widget_show (capplet->zitem);
-    g_object_unref (pixbuf);
-  }
-
-  label = gtk_label_new (_("Zoom"));
-  gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
-  gtk_box_pack_start (GTK_BOX (mbox), label, TRUE, TRUE, 0);
-  gtk_widget_show (label);
+  mitem = gtk_menu_item_new_with_label (_("Zoom"));
   gtk_menu_append (GTK_MENU (menu), mitem);
   gtk_widget_show (mitem);
 
-  mitem = gtk_menu_item_new ();
-  set_accessible_name (mitem, _("Tiled"));
-  icon_info = gtk_icon_theme_lookup_icon (capplet->theme,
-					  "stock_wallpaper-tile",
-					  16, 0);
-  mbox = gtk_hbox_new (FALSE, 6);
-  gtk_container_add (GTK_CONTAINER (mitem), mbox);
-  gtk_widget_show (mbox);
-
-  if (icon_info != NULL) {
-    pixbuf = gtk_icon_info_load_icon (icon_info, NULL);
-    gtk_icon_info_free (icon_info);
-    capplet->witem = gtk_image_new_from_pixbuf (pixbuf);
-    gtk_box_pack_start (GTK_BOX (mbox), capplet->witem, FALSE, FALSE, 0);
-    gtk_widget_show (capplet->witem);
-    g_object_unref (pixbuf);
-  }
-
-  label = gtk_label_new (_("Tiled"));
-  gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
-  gtk_box_pack_start (GTK_BOX (mbox), label, TRUE, TRUE, 0);
-  gtk_widget_show (label);
+  mitem = gtk_menu_item_new_with_label (_("Tiled"));
   gtk_menu_append (GTK_MENU (menu), mitem);
   gtk_widget_show (mitem);
 
@@ -1203,77 +1006,39 @@ static void wallpaper_properties_init (poptContext ctx) {
   g_signal_connect (G_OBJECT (capplet->wp_opts), "changed",
 		    G_CALLBACK (gnome_wp_scale_type_changed), capplet);
 
-  add_button = glade_xml_get_widget (dialog,"add_button");
-  capplet->rm_button = glade_xml_get_widget (dialog,"rem_button");
+  add_button = glade_xml_get_widget (dialog, "add_button");
+  capplet->rm_button = glade_xml_get_widget (dialog, "rem_button");
 
   g_signal_connect (G_OBJECT (add_button), "clicked",
 		    G_CALLBACK (gnome_wp_file_open_dialog), capplet);
   g_signal_connect (G_OBJECT (capplet->rm_button), "clicked",
 		    G_CALLBACK (gnome_wp_remove_wallpaper), capplet);
 
-  capplet->color_opt = glade_xml_get_widget (dialog,"color_menu");
+  capplet->color_opt = glade_xml_get_widget (dialog, "color_menu");
 
   menu = gtk_menu_new ();
-  mitem = gtk_menu_item_new ();
-  set_accessible_name (mitem, _("Solid Color"));
-  mbox = gtk_hbox_new (FALSE, 6);
-  gtk_container_add (GTK_CONTAINER (mitem), mbox);
-  gtk_widget_show (mbox);
 
-  capplet->smenuitem = gtk_image_new ();
-  gtk_box_pack_start (GTK_BOX (mbox), capplet->smenuitem, FALSE, FALSE, 0);
-  gtk_widget_show (capplet->smenuitem);
-
-  label = gtk_label_new (_("Solid Color"));
-  gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
-  gtk_box_pack_start (GTK_BOX (mbox), label, TRUE, TRUE, 0);
-  gtk_widget_show (label);
-  gtk_widget_show (mitem);
+  mitem = gtk_menu_item_new_with_label (_("Solid Color"));
   gtk_menu_append (GTK_MENU (menu), mitem);
-
-  mitem = gtk_menu_item_new ();
-  set_accessible_name (mitem, _("Horizontal Gradient"));
-  mbox = gtk_hbox_new (FALSE, 6);
-  gtk_container_add (GTK_CONTAINER (mitem), mbox);
-  gtk_widget_show (mbox);
-
-  capplet->hmenuitem = gtk_image_new ();
-  gtk_box_pack_start (GTK_BOX (mbox), capplet->hmenuitem, FALSE, FALSE, 0);
-  gtk_widget_show (capplet->hmenuitem);
-
-  label = gtk_label_new (_("Horizontal Gradient"));
-  gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
-  gtk_box_pack_start (GTK_BOX (mbox), label, TRUE, TRUE, 0);
-  gtk_widget_show (label);
   gtk_widget_show (mitem);
+
+  mitem = gtk_menu_item_new_with_label (_("Horizontal Gradient"));
   gtk_menu_append (GTK_MENU (menu), mitem);
-
-  mitem = gtk_menu_item_new ();
-  set_accessible_name (mitem, _("Vertical Gradient"));
-  mbox = gtk_hbox_new (FALSE, 6);
-  gtk_container_add (GTK_CONTAINER (mitem), mbox);
-  gtk_widget_show (mbox);
-
-  capplet->vmenuitem = gtk_image_new ();
-  gtk_box_pack_start (GTK_BOX (mbox), capplet->vmenuitem, FALSE, FALSE, 0);
-  gtk_widget_show (capplet->vmenuitem);
-
-  label = gtk_label_new (_("Vertical Gradient"));
-  gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
-  gtk_box_pack_start (GTK_BOX (mbox), label, TRUE, TRUE, 0);
-  gtk_widget_show (label);
   gtk_widget_show (mitem);
+
+  mitem = gtk_menu_item_new_with_label (_("Vertical Gradient"));
   gtk_menu_append (GTK_MENU (menu), mitem);
+  gtk_widget_show (mitem);
 
   gtk_option_menu_set_menu (GTK_OPTION_MENU (capplet->color_opt), menu);
   g_signal_connect (G_OBJECT (capplet->color_opt), "changed",
 		    G_CALLBACK (gnome_wp_shade_type_changed), capplet);
 
-  capplet->pc_picker = glade_xml_get_widget (dialog,"pcpicker");
+  capplet->pc_picker = glade_xml_get_widget (dialog, "pcpicker");
   g_signal_connect (G_OBJECT (capplet->pc_picker), "color-set",
 		    G_CALLBACK (gnome_wp_scolor_changed), capplet);
 
-  capplet->sc_picker = glade_xml_get_widget (dialog,"scpicker");
+  capplet->sc_picker = glade_xml_get_widget (dialog, "scpicker");
   g_signal_connect (G_OBJECT (capplet->sc_picker), "color-set",
 		    G_CALLBACK (gnome_wp_scolor_changed), capplet);
   

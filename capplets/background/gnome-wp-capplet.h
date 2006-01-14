@@ -1,7 +1,7 @@
 /*
  *  Authors: Rodney Dawes <dobey@ximian.com>
  *
- *  Copyright 2003-2005 Novell, Inc. (www.novell.com)
+ *  Copyright 2003-2006 Novell, Inc. (www.novell.com)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of version 2 of the GNU General Public License
@@ -53,22 +53,10 @@ struct _GnomeWPCapplet {
   GtkWidget * wp_opts;
   GtkWidget * rm_button;
 
-  /* Menu Items for Fill/Scale/Center/Zoom/Tile Options */
-  GtkWidget * fitem;
-  GtkWidget * sitem;
-  GtkWidget * citem;
-  GtkWidget * zitem;
-  GtkWidget * witem;
-
   /* Widgets for Color Options */
   GtkWidget * color_opt;
   GtkWidget * pc_picker;
   GtkWidget * sc_picker;
-
-  /* Menu Items for Color Style Options */
-  GtkWidget * smenuitem;
-  GtkWidget * hmenuitem;
-  GtkWidget * vmenuitem;
 
   /* GConf Client */
   GConfClient * client;
@@ -80,15 +68,16 @@ struct _GnomeWPCapplet {
   /* Hash Table of Wallpapers */
   GHashTable * wphash;
 
-  /* Keyboard Delay */
-  gint delay;
-
-  /* The Timeout ID for Setting the Wallpaper */
-  gint idleid;
-
   /* File Chooser Dialog */
   GtkWidget * filesel;
   GtkWidget * image;
+
+  /*
+     This is here to compare against when OK is pressed so that we can avoid
+     the 1.4 second timeout for Nautilus to actually give visual feedback,
+     when the filename didn't change
+  */
+  gchar * old_filename;
 };
 
 typedef enum {
