@@ -229,6 +229,10 @@ xsettings_callback (GConfEntry *entry)
 
   process_value (trans, entry->value);
   
+  for (i = 0; managers [i]; i++)
+    xsettings_manager_set_string (managers [i], "Net/FallbackIconTheme",
+				  "gnome");
+
   for (i = 0; managers [i]; i++)  
     xsettings_manager_notify (managers [i]);
 }
@@ -451,6 +455,10 @@ gnome_settings_xsettings_load (GConfClient *client)
 #ifdef HAVE_XFT2  
   gnome_settings_update_xft (client);
 #endif /* HAVE_XFT */
+
+  for (i = 0; managers [i]; i++)
+    xsettings_manager_set_string (managers [i], "Net/FallbackIconTheme",
+				  "gnome");
 
   for (i = 0; managers [i]; i++)  
     xsettings_manager_notify (managers [i]);
