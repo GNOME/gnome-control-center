@@ -9,6 +9,9 @@ libacme_la_SOURCES = \
 libacme_la_LIBADD = 
 
 if HAVE_GSTREAMER
+if HAVE_GST10
+INCLUDES += -DHAVE_GST10
+endif
 INCLUDES += -DHAVE_GSTREAMER
 libacme_la_SOURCES += acme-volume-gstreamer.c acme-volume-gstreamer.h
 libacme_la_LIBADD += $(GST_LIBS)

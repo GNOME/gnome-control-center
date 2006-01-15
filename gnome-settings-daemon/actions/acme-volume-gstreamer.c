@@ -27,9 +27,15 @@
 #include "config.h"
 #include "acme-volume-gstreamer.h"
 
+#ifdef HAVE_GST10
+#include <gst/gst.h>
+#include <gst/interfaces/mixer.h>
+#include <gst/interfaces/propertyprobe.h>
+#else
 #include <gst/gst.h>
 #include <gst/mixer/mixer.h>
 #include <gst/propertyprobe/propertyprobe.h>
+#endif
 
 #include <string.h>
 
@@ -214,6 +220,43 @@ acme_volume_gstreamer_close_real (AcmeVolumeGStreamer *self)
 	return FALSE;
 }
 
+#ifdef HAVE_GST10
+/*
+ * _acme_set_mixer
+ * Arguments: mixer - pointer to mixer element
+ *            data - pointer to user data (AcmeVolumeGStreamer to be modified)
+ * Returns: gboolean indicating success
+ */
+static gboolean
+_acme_set_mixer(GstMixer *mixer, gpointer user_data)
+{
+   const GList *tracks;
+
+   tracks = gst_mixer_list_tracks (mixer);
+
+   while (tracks != NULL) {
+      GstMixerTrack *track = GST_MIXER_TRACK (tracks->data);
+
+      if (GST_MIXER_TRACK_HAS_FLAG (track, GST_MIXER_TRACK_MASTER)) {
+         AcmeVolumeGStreamer *self;
+
+         self = ACME_VOLUME_GSTREAMER (user_data);
+
+         self->_priv->mixer = mixer;
+         self->_priv->track = track;
+
+         /* no need to ref the mixer element */
+         g_object_ref (self->_priv->track);
+         return TRUE;
+      }
+
+      tracks = tracks->next;
+   }
+
+   return FALSE;
+}
+#endif
+
 /* This is a modified version of code from gnome-media's gst-mixer */
 static gboolean
 acme_volume_gstreamer_open (AcmeVolumeGStreamer *vol)
@@ -237,9 +280,24 @@ acme_volume_gstreamer_open (AcmeVolumeGStreamer *vol)
 	 * for first one named "volume".
 	 * 
 	 * We should probably do something intelligent if we don't find an
-	 * appropriate mixer/track.  But now we do something stupid... everything
-	 * just becomes a no-op.
+	 * appropriate mixer/track.  But now we do something stupid...
+	 * everything just becomes a no-op.
 	 */
+#ifdef HAVE_GST10
+   GList *mixer_list;
+
+   mixer_list = gst_audio_default_registry_mixer_filter (_acme_set_mixer,
+                                                          TRUE,
+                                                          self);
+
+   if (mixer_list == NULL)
+      return FALSE;
+
+   /* do not unref the mixer as we keep the ref for self->priv->mixer */
+   g_list_free (mixer_list);
+
+   return TRUE;
+#else
 	elements = gst_registry_pool_feature_list (GST_TYPE_ELEMENT_FACTORY);
 	for ( ; elements != NULL && self->_priv->mixer == NULL; elements = elements->next) {
 		GstElementFactory *factory = GST_ELEMENT_FACTORY (elements->data);
@@ -321,6 +379,7 @@ acme_volume_gstreamer_open (AcmeVolumeGStreamer *vol)
 		g_free (title);
 	}
 	return FALSE;
+#endif
 }
 
 static void
