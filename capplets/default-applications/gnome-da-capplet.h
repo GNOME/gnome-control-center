@@ -1,0 +1,90 @@
+/*
+ *  Authors: Luca Cavalli <loopback@slackit.org>
+ *
+ *  Copyright 2005-2006 Luca Cavalli
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of version 2 of the GNU General Public License
+ *  as published by the Free Software Foundation
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 59 Temple Street #330, Boston, MA 02111-1307, USA.
+ *
+ */
+
+#ifndef _GNOME_DA_CAPPLET_H_
+#define _GNOME_DA_CAPPLET_H_
+
+#include <gtk/gtk.h>
+#include <glade/glade.h>
+#include <gconf/gconf-client.h>
+
+// Set http, https, about, and unknown keys to the chosen web browser.
+#define DEFAULT_APPS_KEY_HTTP_PATH       "/desktop/gnome/url-handlers/http"
+#define DEFAULT_APPS_KEY_HTTP_NEEDS_TERM DEFAULT_APPS_KEY_HTTP_PATH"/needs_terminal"
+#define DEFAULT_APPS_KEY_HTTP_EXEC       DEFAULT_APPS_KEY_HTTP_PATH"/command"
+
+#define DEFAULT_APPS_KEY_HTTPS_PATH       "/desktop/gnome/url-handlers/https"
+#define DEFAULT_APPS_KEY_HTTPS_NEEDS_TERM DEFAULT_APPS_KEY_HTTPS_PATH"/needs_terminal"
+#define DEFAULT_APPS_KEY_HTTPS_EXEC       DEFAULT_APPS_KEY_HTTPS_PATH"/command"
+
+// While gnome-vfs2 does not use the "unknown" key, several widespread apps like htmlview
+// have read it for the past few years.  Setting it should not hurt.
+#define DEFAULT_APPS_KEY_UNKNOWN_PATH       "/desktop/gnome/url-handlers/unknown"
+#define DEFAULT_APPS_KEY_UNKNOWN_NEEDS_TERM DEFAULT_APPS_KEY_UNKNOWN_PATH"/needs_terminal"
+#define DEFAULT_APPS_KEY_UNKNOWN_EXEC       DEFAULT_APPS_KEY_UNKNOWN_PATH"/command"
+
+// about:blank and other about: URI's are commonly used by browsers too
+#define DEFAULT_APPS_KEY_ABOUT_PATH       "/desktop/gnome/url-handlers/about"
+#define DEFAULT_APPS_KEY_ABOUT_NEEDS_TERM DEFAULT_APPS_KEY_ABOUT_PATH"/needs_terminal"
+#define DEFAULT_APPS_KEY_ABOUT_EXEC       DEFAULT_APPS_KEY_ABOUT_PATH"/command"
+
+#define DEFAULT_APPS_KEY_MAILER_PATH       "/desktop/gnome/url-handlers/mailto"
+#define DEFAULT_APPS_KEY_MAILER_NEEDS_TERM DEFAULT_APPS_KEY_MAILER_PATH"/needs_terminal"
+#define DEFAULT_APPS_KEY_MAILER_EXEC       DEFAULT_APPS_KEY_MAILER_PATH"/command"
+
+#define DEFAULT_APPS_KEY_TERMINAL_PATH     "/desktop/gnome/applications/terminal"
+#define DEFAULT_APPS_KEY_TERMINAL_EXEC_ARG DEFAULT_APPS_KEY_TERMINAL_PATH"/exec_arg"
+#define DEFAULT_APPS_KEY_TERMINAL_EXEC     DEFAULT_APPS_KEY_TERMINAL_PATH"/exec"
+
+typedef struct _GnomeDACapplet GnomeDACapplet;
+
+struct _GnomeDACapplet {
+    GladeXML *xml;
+
+    GtkWidget *window;
+
+    GtkWidget *web_combo_box;
+    GtkWidget *mail_combo_box;
+    GtkWidget *term_combo_box;
+
+    GtkWidget *web_browser_command_entry;
+    GtkWidget *web_browser_command_label;
+    GtkWidget *web_browser_terminal_checkbutton;
+    GtkWidget *default_radiobutton;
+    GtkWidget *new_win_radiobutton;
+    GtkWidget *new_tab_radiobutton;
+
+    GtkWidget *mail_reader_command_entry;
+    GtkWidget *mail_reader_command_label;
+    GtkWidget *mail_reader_terminal_checkbutton;
+
+    GtkWidget *terminal_command_entry;
+    GtkWidget *terminal_command_label;
+    GtkWidget *terminal_exec_flag_entry;
+    GtkWidget *terminal_exec_flag_label;
+
+    GConfClient *gconf;
+
+    GList *web_browsers;
+    GList *mail_readers;
+    GList *terminals;
+};
+
+#endif
