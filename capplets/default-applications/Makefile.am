@@ -23,4 +23,4 @@ xmldata_DATA = $(xmldata_in_files:.xml.in=.xml)
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS) $(DEFAULT_APPLICATIONS_CAPPLET_CFLAGS) -DGLADEDIR=\""$(gladedir)"\"
 noinst_DATA = gnome-default-applications.xml.in
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA) $(xmldata_DATA)
-EXTRA_DIST = $(Glade_DATA) gnome-default-applications.xml.in
+EXTRA_DIST = $(glade_DATA) gnome-default-applications.xml.in
