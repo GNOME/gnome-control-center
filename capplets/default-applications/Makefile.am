@@ -8,8 +8,8 @@ gnome_default_applications_properties_SOURCES = \
 
 @INTLTOOL_DESKTOP_RULE@
 
-Gladedir   = $(GNOMECC_GLADE_DIR)
-Glade_DATA = gnome-default-applications-properties.glade
+gladedir   = $(GNOMECC_GLADE_DIR)
+glade_DATA = gnome-default-applications-properties.glade
 
 desktopdir = $(datadir)/applications
 Desktop_in_files = default-applications.desktop.in
