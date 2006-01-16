@@ -182,26 +182,17 @@ gnome_da_xml_load_xml (GnomeDACapplet *capplet, const gchar * filename)
 void
 gnome_da_xml_load_list (GnomeDACapplet *capplet)
 {
-    const char * const *xdg_dirs;
-    gint i;
+    gchar *filename;
 
-    xdg_dirs = g_get_system_data_dirs ();
-    if (xdg_dirs == NULL)
-	return;
+    filename = g_build_filename (DATADIR,
+				 "gnome-default-applications",
+				 "gnome-default-applications.xml",
+				 NULL);
 
-    for (i = 0; i < G_N_ELEMENTS (xdg_dirs); i++) {
-	gchar *filename;
+    if (g_file_test (filename, G_FILE_TEST_EXISTS))
+        gnome_da_xml_load_xml (capplet, filename);
 
-	filename = g_build_filename (xdg_dirs[i],
-				     "gnome-default-applications",
-				     "gnome-default-applications.xml",
-				     NULL);
-
-	if (g_file_test (filename, G_FILE_TEST_EXISTS))
-	    gnome_da_xml_load_xml (capplet, filename);
-
-	g_free (filename);
-    }
+    g_free (filename);
 
     if (capplet->web_browsers == NULL)
 	gnome_da_xml_load_xml (capplet, "./gnome-default-applications.xml");
