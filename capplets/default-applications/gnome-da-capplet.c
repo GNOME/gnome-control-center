@@ -688,7 +688,7 @@ show_dialog (GnomeDACapplet *capplet)
     GtkIconTheme *theme;
     gint i;
 
-    if (g_file_test (GLADEDIR "gnome-default-applications.glade", G_FILE_TEST_EXISTS) != FALSE) {
+    if (g_file_test (GLADEDIR "gnome-default-applications-properties.glade", G_FILE_TEST_EXISTS) != FALSE) {
 	capplet->xml = glade_xml_new (GLADEDIR "gnome-default-applications-properties.glade", NULL, PACKAGE);
     }
     else {
