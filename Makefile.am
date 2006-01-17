@@ -1,5 +1,7 @@
 SUBDIRS = po libsounds libbackground libwindow-settings libgswitchit libkbdraw gnome-settings-daemon capplets control-center help vfs-methods idl schemas $(TYPING_BREAK)
 
+ACLOCAL_AMFLAGS = -I m4
+
 #I removed the root-manager for now
 #
 # it generated this error :
@@ -7,9 +9,6 @@ SUBDIRS = po libsounds libbackground libwindow-settings libgswitchit libkbdraw g
 # while compiling. I guess we need to check for pam or something
 # in the configure.in file. Since we are not using it now, i will
 # remove it from the default build. Chema
-
-dist-hook: control-center.spec
-	cp control-center.spec $(distdir)
 
 DISTCLEANFILES = \
   intltool-extract \
@@ -19,6 +18,7 @@ DISTCLEANFILES = \
 
 EXTRA_DIST = \
 	control-center.spec.in	\
+	control-center.spec \
 	intltool-extract.in \
 	intltool-merge.in \
 	intltool-update.in \
