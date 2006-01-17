@@ -60,58 +60,48 @@ load_cursor (GConfClient *client)
   gchar *mkfontdir_cmd;
 
   /* setting up the dir */
-  font_dir_name = g_build_path (G_DIR_SEPARATOR_S, g_get_home_dir (), ".gnome2", NULL);
-  if (! g_file_test (font_dir_name, G_FILE_TEST_EXISTS))
-    mkdir (font_dir_name, 0755);
-  g_free (font_dir_name);
-  
-  font_dir_name = g_build_path (G_DIR_SEPARATOR_S, g_get_home_dir (), ".gnome2/share", NULL);
-  if (! g_file_test (font_dir_name, G_FILE_TEST_EXISTS))
-    mkdir (font_dir_name, 0755);
-  g_free (font_dir_name);
-
   font_dir_name = g_build_path (G_DIR_SEPARATOR_S, g_get_home_dir (), ".gnome2/share/fonts", NULL);
   if (! g_file_test (font_dir_name, G_FILE_TEST_EXISTS))
-    mkdir (font_dir_name, 0755);
-
-  if (! g_file_test (font_dir_name, G_FILE_TEST_IS_DIR))
     {
-      GtkWidget *dialog;
+      if (g_mkdir_with_parents (font_dir_name, 0755) != 0)
+        {
+          GtkWidget *dialog;
 
-      dialog = gtk_message_dialog_new (NULL,
-				       0,
-				       GTK_MESSAGE_ERROR,
-				       GTK_BUTTONS_CLOSE,
-				       "Cannot create the directory \"%s\".\n"\
-				       "This is needed to allow changing cursors.",
-				       font_dir_name);
-      gtk_dialog_run (GTK_DIALOG (dialog));
-      gtk_widget_destroy (dialog);
-      g_free (font_dir_name);
+	  dialog = gtk_message_dialog_new (NULL,
+					   0,
+					   GTK_MESSAGE_ERROR,
+					   GTK_BUTTONS_CLOSE,
+					   _("Cannot create the directory \"%s\".\n"\
+					     "This is needed to allow changing cursors."),
+					   font_dir_name);
+	  gtk_dialog_run (GTK_DIALOG (dialog));
+	  gtk_widget_destroy (dialog);
+	  g_free (font_dir_name);
 
-      return;
+	  return;
+	}
     }
 
   dir_name = g_build_path (G_DIR_SEPARATOR_S, g_get_home_dir (), ".gnome2/share/cursor-fonts", NULL);
   if (! g_file_test (dir_name, G_FILE_TEST_EXISTS))
-    mkdir (dir_name, 0755);
-
-  if (! g_file_test (dir_name, G_FILE_TEST_IS_DIR))
     {
-      GtkWidget *dialog;
+      if (g_mkdir_with_parents (dir_name, 0755) != 0)
+        {
+	  GtkWidget *dialog;
 
-      dialog = gtk_message_dialog_new (NULL,
-				       0,
-				       GTK_MESSAGE_ERROR,
-				       GTK_BUTTONS_CLOSE,
-				       (_("Cannot create the directory \"%s\".\n"\
-				       "This is needed to allow changing cursors.")),
-				       dir_name);
-      gtk_dialog_run (GTK_DIALOG (dialog));
-      gtk_widget_destroy (dialog);
-      g_free (dir_name);
+	  dialog = gtk_message_dialog_new (NULL,
+					   0,
+					   GTK_MESSAGE_ERROR,
+					   GTK_BUTTONS_CLOSE,
+					   (_("Cannot create the directory \"%s\".\n"\
+					      "This is needed to allow changing cursors.")),
+					   dir_name);
+	  gtk_dialog_run (GTK_DIALOG (dialog));
+	  gtk_widget_destroy (dialog);
+	  g_free (dir_name);
 
-      return;
+	  return;
+	}
     }
 
   dir = opendir (dir_name);
