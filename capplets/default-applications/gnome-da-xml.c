@@ -18,6 +18,8 @@
  *
  */
 
+#include <glib.h>
+#include <glib/gi18n.h>
 #include <libxml/parser.h>
 
 #include "gnome-da-capplet.h"
@@ -60,21 +62,45 @@ gnome_da_xml_get_bool (const xmlNode *parent, const gchar *val_name)
 static gchar*
 gnome_da_xml_get_string (const xmlNode *parent, const gchar *val_name)
 {
+    const gchar * const *sys_langs;
+    xmlChar *node_lang;
     xmlNode *element;
     gchar *ret_val = NULL;
     xmlChar *xml_val_name;
     gint len;
+    gint i;
 
     g_return_val_if_fail (parent != NULL, ret_val);
     g_return_val_if_fail (parent->children != NULL, ret_val);
     g_return_val_if_fail (val_name != NULL, ret_val);
 
+#if GLIB_CHECK_VERSION (2, 6, 0)
+    sys_langs = g_get_language_names ();
+#endif
+
     xml_val_name = xmlCharStrdup (val_name);
     len = xmlStrlen (xml_val_name);
 
     for (element = parent->children; element != NULL; element = element->next) {
-	if (!xmlStrncmp (element->name, xml_val_name, len))
-	    ret_val = (gchar *) xmlNodeGetContent (element);
+	if (!xmlStrncmp (element->name, xml_val_name, len)) {
+	    node_lang = xmlNodeGetLang (element);
+
+	    if (node_lang == NULL) {
+		ret_val = (gchar *) xmlNodeGetContent (element);
+	    }
+	    else {
+		for (i = 0; sys_langs[i] != NULL; i++) {
+		    if (!strcmp (sys_langs[i], node_lang)) {
+			ret_val = (gchar *) xmlNodeGetContent (element);
+			/* since sys_langs is sorted from most desirable to
+			 * least desirable, exit at first match
+			 */
+			break;
+		    }
+		}
+	    }
+	    xmlFree (node_lang);
+	}
     }
 
     xmlFree (xml_val_name);
