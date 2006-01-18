@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-10 23:02+0100\n"
-"PO-Revision-Date: 2006-01-12 08:50+0100\n"
+"POT-Creation-Date: 2006-01-18 01:35+0100\n"
+"PO-Revision-Date: 2006-01-18 02:10+0100\n"
 "Last-Translator: Слободан Д. Средојевић <slobo@akrep.be>\n"
 "Language-Team: Serbian (sr) <gnom@prevod.org>\n"
 "MIME-Version: 1.0\n"
@@ -481,7 +481,6 @@ msgstr ""
 "тастатуре неће радити."
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:1
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:2
 #: ../capplets/theme-switcher/theme-install.glade.h:1
 msgid "*"
@@ -700,6 +699,11 @@ msgid "_Add Wallpaper"
 msgstr "_Додај"
 
 #: ../capplets/background/gnome-background-properties.glade.h:6
+#: ../capplets/theme-switcher/theme-properties.glade.h:19
+msgid "_Remove"
+msgstr "Уклони"
+
+#: ../capplets/background/gnome-background-properties.glade.h:7
 msgid "_Style:"
 msgstr "_Стил:"
 
@@ -710,51 +714,48 @@ msgstr "_Стил:"
 msgid "There was an error displaying help: %s"
 msgstr "Дошло је до грешке приликом приказивања помоћи: %s"
 
-#: ../capplets/background/gnome-wp-capplet.c:1060
-#: ../capplets/background/gnome-wp-capplet.c:1078
+#: ../capplets/background/gnome-wp-capplet.c:984
 msgid "Centered"
 msgstr "Центрирано"
 
-#: ../capplets/background/gnome-wp-capplet.c:1086
-#: ../capplets/background/gnome-wp-capplet.c:1103
+#: ../capplets/background/gnome-wp-capplet.c:988
 msgid "Fill Screen"
 msgstr "Испуни екран"
 
-#: ../capplets/background/gnome-wp-capplet.c:1111
-#: ../capplets/background/gnome-wp-capplet.c:1128
+#: ../capplets/background/gnome-wp-capplet.c:992
 msgid "Scaled"
 msgstr "Сразмерно"
 
-#: ../capplets/background/gnome-wp-capplet.c:1136
-#: ../capplets/background/gnome-wp-capplet.c:1153
+#: ../capplets/background/gnome-wp-capplet.c:996
+msgid "Zoom"
+msgstr "Увећај"
+
+#: ../capplets/background/gnome-wp-capplet.c:1000
 msgid "Tiled"
 msgstr "Поплочано"
 
-#: ../capplets/background/gnome-wp-capplet.c:1177
-#: ../capplets/background/gnome-wp-capplet.c:1186
+#: ../capplets/background/gnome-wp-capplet.c:1021
 msgid "Solid Color"
 msgstr "Пуна боја"
 
-#: ../capplets/background/gnome-wp-capplet.c:1194
-#: ../capplets/background/gnome-wp-capplet.c:1203
+#: ../capplets/background/gnome-wp-capplet.c:1025
 msgid "Horizontal Gradient"
 msgstr "Водоравно нијансирано"
 
-#: ../capplets/background/gnome-wp-capplet.c:1211
-#: ../capplets/background/gnome-wp-capplet.c:1220
+#: ../capplets/background/gnome-wp-capplet.c:1029
 msgid "Vertical Gradient"
 msgstr "Усправно нијансирано"
 
 #. Create the file chooser dialog stuff here
-#: ../capplets/background/gnome-wp-capplet.c:1269
+#: ../capplets/background/gnome-wp-capplet.c:1075
 msgid "Add Wallpaper"
 msgstr "Додај позадину"
 
-#: ../capplets/background/gnome-wp-capplet.c:1286
+#: ../capplets/background/gnome-wp-capplet.c:1092
 msgid "Images"
 msgstr "Слике"
 
-#: ../capplets/background/gnome-wp-capplet.c:1290
+#: ../capplets/background/gnome-wp-capplet.c:1096
 msgid "All Files"
 msgstr "Све датотеке"
 
@@ -762,8 +763,8 @@ msgstr "Све датотеке"
 msgid "No Wallpaper"
 msgstr "Без позадине"
 
-#: ../capplets/background/gnome-wp-item.c:296
-#: ../capplets/background/gnome-wp-item.c:298
+#: ../capplets/background/gnome-wp-item.c:305
+#: ../capplets/background/gnome-wp-item.c:307
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "тачка"
@@ -794,7 +795,6 @@ msgid "Just apply settings and quit"
 msgstr "Само примени поставке и изађи"
 
 #: ../capplets/common/capplet-util.c:243
-#: ../capplets/default-applications/gnome-default-applications-properties.c:765
 #: ../capplets/keyboard/gnome-keyboard-properties.c:225
 #: ../capplets/mouse/gnome-mouse-properties.c:1015
 #: ../capplets/sound/sound-properties-capplet.c:244
@@ -802,6 +802,7 @@ msgid "Retrieve and store legacy settings"
 msgstr "Поврати и ускладишти почетна подешавања"
 
 #: ../capplets/common/file-transfer-dialog.c:94
+#, c-format
 msgid "Copying file: %u of %u"
 msgstr "Умножавам датотеку: %u од %u"
 
@@ -986,254 +987,246 @@ msgstr "Омиљени програми"
 msgid "Select your default applications"
 msgstr "Одаберите ваше основне програме"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:9
-msgid "Debian Sensible Browser"
-msgstr "Разумни читач Дебијана"
+#: ../capplets/default-applications/gnome-da-capplet.c:56
+msgid "Could not display help"
+msgstr "Не могу да прикажем помоћ"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:10
-msgid "Epiphany"
-msgstr "Спознаја"
+#: ../capplets/default-applications/gnome-da-capplet.c:58
+#: ../capplets/default-applications/gnome-da-capplet.c:704
+msgid "Please make sure that the applet is properly installed"
+msgstr "Молим проверите да ли је програмче исправно постављено"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:11
-msgid "Galeon"
-msgstr "Галија"
+#: ../capplets/default-applications/gnome-da-capplet.c:93
+#: ../capplets/default-applications/gnome-da-capplet.c:126
+#: ../capplets/default-applications/gnome-da-capplet.c:185
+#: ../capplets/default-applications/gnome-da-capplet.c:230
+#: ../capplets/default-applications/gnome-da-capplet.c:287
+#: ../capplets/default-applications/gnome-da-capplet.c:339
+#: ../capplets/default-applications/gnome-da-capplet.c:534
+#: ../capplets/default-applications/gnome-da-capplet.c:557
+msgid "Error saving configuration: %s"
+msgstr "Грешка при чувању подешавања: %s"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:12
-msgid "Encompass"
-msgstr "Encompass"
+#: ../capplets/default-applications/gnome-da-capplet.c:680
+msgid "Custom"
+msgstr "Прилагођено"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:13
-msgid "Firebird"
-msgstr "Firebird"
+#: ../capplets/default-applications/gnome-da-capplet.c:702
+msgid "Could not load the main interface"
+msgstr "Не могу да учитам главно сучеље"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:14
-msgid "Firefox"
-msgstr "Ватрена лисица"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:15
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:16
-msgid "Mozilla"
-msgstr "Мозила"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:17
-msgid "Netscape Communicator"
-msgstr "Нетскејп Комуникатор"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:18
-msgid "Konqueror"
-msgstr "Конкверор"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:19
-msgid "Opera"
-msgstr "Опера"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:20
-msgid "Opera (open in new tab)"
-msgstr "Опера (отвори у новом листу)"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:21
-msgid "W3M Text Browser"
-msgstr "W3M текстуални читач веба"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:22
-msgid "Lynx Text Browser"
-msgstr "Lynx текстуални читач веба"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:23
-msgid "Links Text Browser"
-msgstr "Линкс текстуални читач веба"
-
-#. The code in gnome-default-applications-properties.c makes sure
-#. * there is only one (the first entry in this list) Evolution entry
-#. * in the list shown to the user
-#.
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:38
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:39
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:40
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:41
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:42
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:43
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:44
-msgid "Evolution Mail Reader"
-msgstr "Програм за пошту Еволуција"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:45
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:1
 msgid "Balsa"
 msgstr "Балса"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:46
-msgid "KMail"
-msgstr "КМејл"
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:2
+msgid "Debian Sensible Browser"
+msgstr "Разумни читач Дебијана"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:47
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:48
-msgid "Thunderbird"
-msgstr "Thunderbird"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:49
-msgid "Mozilla Mail"
-msgstr "Мозила Пошта"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:50
-msgid "Mutt"
-msgstr "Mutt"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:51
-msgid "Sylpheed-Claws"
-msgstr "Sylpheed-Claws"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:61
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:3
 msgid "Debian Terminal Emulator"
 msgstr "Емулатор терминала из Дебијана"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:62
-msgid "GNOME Terminal"
-msgstr "Гном терминал"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:63
-msgid "Standard XTerminal"
-msgstr "Стандардни X терминал"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:64
-msgid "NXterm"
-msgstr "NXterm"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:65
-msgid "RXVT"
-msgstr "RXVT"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:66
-msgid "aterm"
-msgstr "aterm"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:67
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:4
 msgid "ETerm"
 msgstr "ETerm"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.c:123
-msgid "Please specify a name and a command for this editor."
-msgstr "Наведите име и наредбу за овај уређивач."
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:5
+msgid "Encompass"
+msgstr "Encompass"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:6
+msgid "Epiphany"
+msgstr "Спознаја"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:7
+msgid "Evolution Mail Reader"
+msgstr "Програм за пошту Еволуција"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:8
+msgid "Evolution Mail Reader 1.4"
+msgstr "Програм за пошту Еволуција верзије 1.4"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:9
+msgid "Evolution Mail Reader 1.5"
+msgstr "Програм за пошту Еволуција верзије 1.5"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:10
+msgid "Evolution Mail Reader 1.6"
+msgstr "Програм за пошту Еволуција верзије 1.6"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:11
+msgid "Evolution Mail Reader 2.0"
+msgstr "Програм за пошту Еволуција верзије 2.0"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:12
+msgid "Evolution Mail Reader 2.2"
+msgstr "Програм за пошту Еволуција верзије 2.2"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:13
+msgid "Evolution Mail Reader 2.4"
+msgstr "Програм за пошту Еволуција верзије 2.4"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:14
+msgid "Firebird"
+msgstr "Firebird"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:15
+msgid "Firefox"
+msgstr "Ватрена лисица"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:16
+msgid "GNOME Terminal"
+msgstr "Гном терминал"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:17
+msgid "Galeon"
+msgstr "Галија"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:18
+msgid "KMail"
+msgstr "КМејл"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:19
+msgid "Konqueror"
+msgstr "Конкверор"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:20
+msgid "Links Text Browser"
+msgstr "Линкс текстуални читач веба"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:21
+msgid "Lynx Text Browser"
+msgstr "Lynx текстуални читач веба"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:22
+msgid "Mozilla"
+msgstr "Мозила"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:23
+msgid "Mozilla 1.6"
+msgstr "Мозила 1.6"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:24
+msgid "Mozilla Mail"
+msgstr "Мозила Пошта"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:25
+msgid "Mozilla Thunderbird"
+msgstr "Мозила Thunderbird"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:26
+msgid "Mutt"
+msgstr "Mutt"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:27
+msgid "NXterm"
+msgstr "NXterm"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:28
+msgid "Netscape Communicator"
+msgstr "Нетскејп Комуникатор"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:29
+msgid "Opera"
+msgstr "Опера"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:30
+msgid "RXVT"
+msgstr "RXVT"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:31
+msgid "Standard XTerminal"
+msgstr "Стандардни X терминал"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:32
+msgid "Sylpheed-Claws"
+msgstr "Sylpheed-Claws"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:33
+msgid "Thunderbird"
+msgstr "Thunderbird"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:34
+msgid "W3M Text Browser"
+msgstr "W3M текстуални читач веба"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:35
+msgid "aterm"
+msgstr "aterm"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:1
+msgid "<b>Audio Player</b>"
+msgstr "<b>Пуштач носача звука</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:2
-msgid "Add..."
-msgstr "Додај..."
+msgid "<b>Image Viewer</b>"
+msgstr "<b>Прегледник слика</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:3
-msgid "C_ustom"
-msgstr "При_лагођено"
+msgid "<b>Instant Messenger</b>"
+msgstr "<b>Програм за брзе поруке</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:4
-msgid "C_ustom:"
-msgstr "При_лагођено:"
+msgid "<b>Mail Reader</b>"
+msgstr "<b>Читач електронске поште</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:5
-msgid "Can open _URIs"
-msgstr "Не могу да отворим _адресе"
+msgid "<b>Terminal Emulator</b>"
+msgstr "<b>Замена за терминал</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:6
-msgid "Can open multiple _files"
-msgstr "Може да отвара више _датотека"
+msgid "<b>Text Editor</b>"
+msgstr "<b>Уређивач текста</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:7
+msgid "<b>Video Player</b>"
+msgstr "<b>Пуштач видеа</b>"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:8
+msgid "<b>Web Browser</b>"
+msgstr "<b>Веб прегледник</b>"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:10
+#, no-c-format
+msgid "All %s occurrences will be replaced with actual link"
+msgstr "Све %s појаве биће замењене са стварном везом"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:11
 msgid "Co_mmand:"
 msgstr "_Наредба:"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:8
-msgid "Custom Editor Properties"
-msgstr "Особине прилагођеног уређивача"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:9
-msgid "Default Mail Reader"
-msgstr "Основни читач поште"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:10
-msgid "Default Terminal"
-msgstr "Основни терминал"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:11
-msgid "Default Text Editor"
-msgstr "Основни уређивач текста"
-
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:12
-msgid "Default Web Browser"
-msgstr "Основни веб читач"
+msgid "E_xecute flag:"
+msgstr "Извршна за_ставица:"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:13
-msgid "Default Window Manager"
-msgstr "Основни управник прозора"
+msgid "Internet"
+msgstr "Интернет"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:14
-msgid "Delete"
-msgstr "Избриши"
+msgid "Multimedia"
+msgstr "Мултимедија"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:15
-msgid "E_xec Flag:"
-msgstr "Извршна заставица:"
+msgid "Open link in new _tab"
+msgstr "Отвори везу у новом _листу"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:16
-msgid "Edit..."
-msgstr "Уреди..."
+msgid "Open link in new _window"
+msgstr "Отвори везу у новом _прозору"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:17
-msgid "Mail Reader"
-msgstr "Читач поште"
+msgid "Open link with web browser _default"
+msgstr "Отвори везу са подразумеваним прегледником"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:19
-msgid "Run in a _terminal"
-msgstr "Покрени у _терминалу"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:20
-msgid "Run in a t_erminal"
+msgid "Run in t_erminal"
 msgstr "Покрени у т_ерминалу"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:21
-msgid ""
-"Select the window manager you want.  You will need to hit apply, wave the "
-"magic wand, and do a magic dance for it to work."
-msgstr ""
-"Одаберите управника прозора који желите. Мораћете да кликнете „примени“, "
-"махнете чаробним штапићем, и изведете чаробни плес да би прорадило."
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:22
-msgid "Terminal"
-msgstr "Терминал"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:23
-msgid "Text Editor"
-msgstr "Уређивач текста"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:24
-msgid "Understands _Netscape Remote Control"
-msgstr "Разуме Netscape-ове даљинске контроле"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:25
-msgid "Use this _editor to open text files in the file manager"
-msgstr ""
-"Користи овај уређивач текста за отварање текст датотека у управнику датотека"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:26
-msgid "Web Browser"
-msgstr "Веб читач"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:27
-msgid "Window Manager"
-msgstr "Управник прозора"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:28
-msgid "_Command:"
-msgstr "_Наредба:"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:29
-msgid "_Name:"
-msgstr "_Име:"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:30
-msgid "_Properties..."
-msgstr "Осо_бине..."
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:31
-msgid "_Select:"
-msgstr "_Изабери:"
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:20
+msgid "System"
+msgstr "Систем"
 
 #: ../capplets/display/display-properties.desktop.in.in.h:1
 msgid "Change screen resolution"
@@ -1525,29 +1518,29 @@ msgid "The type of accelerator."
 msgstr "Врста пречице."
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
-#: ../capplets/keybindings/gnome-keybinding-properties.c:197
+#: ../capplets/keybindings/gnome-keybinding-properties.c:191
 #: ../libbackground/applier.c:624 ../typing-break/drwright.c:471
 msgid "Disabled"
 msgstr "Онемогућено"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:544
+#: ../capplets/keybindings/gnome-keybinding-properties.c:538
 msgid "<Unknown Action>"
 msgstr "<Непозната радња>"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:565
+#: ../capplets/keybindings/gnome-keybinding-properties.c:559
 msgid "Desktop"
 msgstr "Радна површина"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:566
+#: ../capplets/keybindings/gnome-keybinding-properties.c:560
 #: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
 msgid "Sound"
 msgstr "Звук"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:570
+#: ../capplets/keybindings/gnome-keybinding-properties.c:564
 msgid "Window Management"
 msgstr "Управљање прозорима"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:667
+#: ../capplets/keybindings/gnome-keybinding-properties.c:661
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1556,21 +1549,21 @@ msgstr ""
 "Пречица „%s“ се већ користи за:\n"
 " „%s“\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:699
+#: ../capplets/keybindings/gnome-keybinding-properties.c:693
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Грешка при смештању нове пречице у базу подешавања: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:749
+#: ../capplets/keybindings/gnome-keybinding-properties.c:743
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "Грешка при искључивању нове пречице из базе подешавања: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:856
+#: ../capplets/keybindings/gnome-keybinding-properties.c:850
 msgid "Action"
 msgstr "Акција"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:880
+#: ../capplets/keybindings/gnome-keybinding-properties.c:874
 msgid "Shortcut"
 msgstr "Пречица"
 
@@ -2047,13 +2040,13 @@ msgid "Enable sound and associate sounds with events"
 msgstr "Омогући звук и повежи звуке са догађајима"
 
 #: ../capplets/sound/sound-properties-capplet.c:271
-#: ../capplets/sound/sound-properties.glade.h:6
+#: ../capplets/sound/sound-properties.glade.h:4
 msgid "Sound Preferences"
 msgstr "Поставке звука"
 
 #: ../capplets/sound/sound-properties.glade.h:1
-msgid "E_nable sound server startup"
-msgstr "О_могући сервер звука на почетку"
+msgid "E_nable software sound mixing (ESD)"
+msgstr "Омог_ући софтверско мешање звука (ESD)"
 
 #: ../capplets/sound/sound-properties.glade.h:2
 msgid "Flash _entire screen"
@@ -2063,29 +2056,25 @@ msgstr "Бљесак _читавог екрана"
 msgid "Flash _window titlebar"
 msgstr "Бљесак насловне линије _прозора"
 
-#: ../capplets/sound/sound-properties.glade.h:4
-msgid "General"
-msgstr "Опште"
-
 #: ../capplets/sound/sound-properties.glade.h:5
-msgid "Sound Events"
-msgstr "Звучни сигнали"
+msgid "Sounds"
+msgstr "Звуци"
 
-#: ../capplets/sound/sound-properties.glade.h:7
-msgid "System Bell"
+#: ../capplets/sound/sound-properties.glade.h:6
+msgid "System Beep"
 msgstr "Системско звонце"
 
+#: ../capplets/sound/sound-properties.glade.h:7
+msgid "_Enable system beep"
+msgstr "_Укључи системско звонце"
+
 #: ../capplets/sound/sound-properties.glade.h:8
-msgid "_Sound an audible bell"
-msgstr "_Звук и разговетно звонце"
+msgid "_Play system sounds"
+msgstr "Пушт_ај системске звуке"
 
 #: ../capplets/sound/sound-properties.glade.h:9
-msgid "_Sounds for events"
-msgstr "_Звуци за догађаје"
-
-#: ../capplets/sound/sound-properties.glade.h:10
-msgid "_Visual feedback:"
-msgstr "_Визуелно звонце:"
+msgid "_Visual system beep"
+msgstr "_Визуално системско звонце"
 
 #: ../capplets/theme-switcher/gnome-theme-details.c:368
 msgid "Would you like to remove this theme?"
@@ -2339,11 +2328,6 @@ msgstr "Оквир прозора"
 msgid "_Install Theme..."
 msgstr "Инсталирај тему..."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:19
-#: ../libsounds/sound-view.c:366
-msgid "_Remove"
-msgstr "Уклони"
-
 #: ../capplets/theme-switcher/theme-properties.glade.h:20
 msgid "_Revert"
 msgstr "_Врати"
@@ -2544,7 +2528,7 @@ msgstr "Прозори"
 msgid "Others"
 msgstr "Остали"
 
-#: ../control-center/control-center.c:42
+#: ../control-center/control-center.c:93
 msgid "Desktop Preferences"
 msgstr "Поставке радне површи"
 
@@ -2556,6 +2540,18 @@ msgstr "Гномов управљачки центар"
 #: ../vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:2
 msgid "The GNOME configuration tool"
 msgstr "Гномов алат за подешавање"
+
+#: ../gnome-settings-daemon/actions/acme-fb-level.c:149
+msgid "No '/dev/pmu' device found"
+msgstr "Ниједан „/dev/pmu“ уређај није пронађен"
+
+#: ../gnome-settings-daemon/actions/acme-fb-level.c:156
+msgid "Not a powerbook"
+msgstr "Није моћна машина"
+
+#: ../gnome-settings-daemon/actions/acme-fb-level.c:173
+msgid "Wrong permission for '/dev/pmu' device"
+msgstr "Погрешне дозволе за уређај „/dev/pmu“"
 
 #: ../gnome-settings-daemon/actions/acme.glade.h:1
 msgid "Volume"
@@ -2615,7 +2611,8 @@ msgstr "Желите ли да укључите лепљиве тастере?"
 msgid "Do you want to deactivate Sticky Keys?"
 msgstr "Желите ли да искључите споре лепљиве тастере?"
 
-#: ../gnome-settings-daemon/gnome-settings-font.c:107
+#: ../gnome-settings-daemon/gnome-settings-font.c:74
+#: ../gnome-settings-daemon/gnome-settings-font.c:96
 #, c-format
 msgid ""
 "Cannot create the directory \"%s\".\n"
@@ -2645,6 +2642,7 @@ msgid "Key Binding (%s) is invalid\n"
 msgstr "Повезаност тастера (%s)није исправна\n"
 
 #: ../gnome-settings-daemon/gnome-settings-keybindings.c:291
+#, c-format
 msgid "It seems that another application already has access to key '%u'."
 msgstr "Чини се да неки други програм већ има приступ кључу „%u“."
 
@@ -2743,12 +2741,7 @@ msgstr ""
 "Не могу да успавам рачунар.\n"
 "Проверите да ли је рачунар исправно подешен."
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:155
-#, c-format
-msgid "Permissions on the file %s are broken\n"
-msgstr "Дозволе датотеке %s су неисправне\n"
-
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:200
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:180
 msgid ""
 "Couldn't load the Glade file.\n"
 "Make sure that this daemon is properly installed."
@@ -2775,7 +2768,7 @@ msgstr ""
 msgid "_Do not show this message again"
 msgstr "_Немој више да приказујеш ову поруку"
 
-#: ../gnome-settings-daemon/gnome-settings-sound.c:129
+#: ../gnome-settings-daemon/gnome-settings-sound.c:150
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Не могу да учитам датотеку %s као пробни %s"
@@ -2859,48 +2852,30 @@ msgstr "Екран на којем ће примењивач позадине ц
 msgid "There was an error loading an image: %s"
 msgstr "Догодила се грешка приликом учитавања слике: %s"
 
-#: ../libsounds/sound-view.c:122 ../libsounds/sound-view.c:147
+#: ../libsounds/sound-view.c:115
+msgid "Sound not set for this event."
+msgstr "Звук за _овај догађај није постављен."
+
+#: ../libsounds/sound-view.c:123
+msgid ""
+"The sound file for this event does not exist.\n"
+"You may want to install the gnome-audio package for a set of default sounds."
+msgstr ""
+"Звучна датотека за овај догађај не постоји.\n"
+"Можда би требали инсталирати gnome-audio пакет да бисте имали основне звукове."
+
+#: ../libsounds/sound-view.c:132
 msgid "The sound file for this event does not exist."
 msgstr "Звучна датотека за овај догађај не постоји."
 
-#: ../libsounds/sound-view.c:149
-msgid ""
-"The sound file for this event does not exist.\n"
-"You may want to install the gnome-audio package\n"
-"for a set of default sounds."
-msgstr ""
-"Звучна датотека за овај догађај не постоји.\n"
-"Можда би требали инсталирати гномов пакет са звуковима\n"
-"да бисте имали основне звукове."
-
-#: ../libsounds/sound-view.c:224
-#, c-format
-msgid "The file %s is not a valid wav file"
-msgstr "Датотека %s не представља исправну WAV датотеку"
-
-#: ../libsounds/sound-view.c:289
-msgid "Event"
-msgstr "Догађај"
-
-#: ../libsounds/sound-view.c:298
-msgid "Sound File"
-msgstr "Датотека са звуком"
-
-#: ../libsounds/sound-view.c:314
-msgid "_Sounds:"
-msgstr "_Звуци:"
-
-#: ../libsounds/sound-view.c:328
-msgid "Sound _file:"
-msgstr "_Датотека са звуком:"
-
-#: ../libsounds/sound-view.c:332
+#: ../libsounds/sound-view.c:160
 msgid "Select Sound File"
 msgstr "Одаберите датотеку са звуком"
 
-#: ../libsounds/sound-view.c:356
-msgid "_Play"
-msgstr "_Покрени"
+#: ../libsounds/sound-view.c:178
+#, c-format
+msgid "The file %s is not a valid wav file"
+msgstr "Датотека %s не представља исправну WAV датотеку"
 
 #: ../libwindow-settings/gnome-wm-manager.c:320
 #, c-format
@@ -2998,90 +2973,50 @@ msgid "Log out's shortcut."
 msgstr "Пречица за одјављивање."
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
-msgid "Next track key's shortcut."
-msgstr "Пречица за наредну песму."
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
-msgid "Pause"
-msgstr "Пауза"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
-msgid "Pause key's shortcut."
-msgstr "Пречица за паузу."
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
-msgid "Play (or play/pause)"
-msgstr "Пусти (или пусти/паузирај)"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
-msgid "Play (or play/pause) key's shortcut."
-msgstr "Пречица за пуштање (или пуштање/паузу)."
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
-msgid "Previous track key's shortcut."
-msgstr "Пречица за претходну песму."
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
 msgid "Search"
 msgstr "Претрага"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
 msgid "Search's shortcut."
 msgstr "Пречица за претрагу."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
-msgid "Skip to next track"
-msgstr "Пређи на наредну песму"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
-msgid "Skip to previous track"
-msgstr "Пређи на претходну песму"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
 msgid "Sleep"
 msgstr "Успавај"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
 msgid "Sleep's shortcut."
 msgstr "Пречица за успављивање."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
-msgid "Stop playback key"
-msgstr "Заустави пуштање"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
-msgid "Stop playback key's shortcut."
-msgstr "Пречица за заустављање пуштања."
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
 msgid "Volume down"
 msgstr "Утишај"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
 msgid "Volume down's shortcut."
 msgstr "Пречица за утишавање."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
 msgid "Volume mute"
 msgstr "Искључи звук"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
 msgid "Volume mute's shortcut"
 msgstr "Пречица за искључивање звука"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:37
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
 msgid "Volume step"
 msgstr "Корак јачине звука"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:38
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
 msgid "Volume step as percentage of volume."
 msgstr "Корак јачине звука као постотак јачине."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:39
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
 msgid "Volume up"
 msgstr "Појачај"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
 msgid "Volume up's shortcut."
 msgstr "Пречица за појачавање звука."
 
@@ -3491,6 +3426,144 @@ msgstr "Да ли да користим умањени приказ инстал
 #: ../vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Да ли да користим умањени приказ тема"
+
+#~ msgid "Please specify a name and a command for this editor."
+#~ msgstr "Наведите име и наредбу за овај уређивач."
+
+#~ msgid "Add..."
+#~ msgstr "Додај..."
+
+#~ msgid "C_ustom:"
+#~ msgstr "При_лагођено:"
+
+#~ msgid "Can open _URIs"
+#~ msgstr "Не могу да отворим _адресе"
+
+#~ msgid "Can open multiple _files"
+#~ msgstr "Може да отвара више _датотека"
+
+#~ msgid "Custom Editor Properties"
+#~ msgstr "Особине прилагођеног уређивача"
+
+#~ msgid "Default Mail Reader"
+#~ msgstr "Основни читач поште"
+
+#~ msgid "Default Terminal"
+#~ msgstr "Основни терминал"
+
+#~ msgid "Default Text Editor"
+#~ msgstr "Основни уређивач текста"
+
+#~ msgid "Default Web Browser"
+#~ msgstr "Основни веб читач"
+
+#~ msgid "Default Window Manager"
+#~ msgstr "Основни управник прозора"
+
+#~ msgid "Delete"
+#~ msgstr "Избриши"
+
+#~ msgid "Edit..."
+#~ msgstr "Уреди..."
+
+#~ msgid "Run in a _terminal"
+#~ msgstr "Покрени у _терминалу"
+
+#~ msgid ""
+#~ "Select the window manager you want.  You will need to hit apply, wave the "
+#~ "magic wand, and do a magic dance for it to work."
+#~ msgstr ""
+#~ "Одаберите управника прозора који желите. Мораћете да кликнете „примени“, "
+#~ "махнете чаробним штапићем, и изведете чаробни плес да би прорадило."
+
+#~ msgid "Terminal"
+#~ msgstr "Терминал"
+
+#~ msgid "Understands _Netscape Remote Control"
+#~ msgstr "Разуме Netscape-ове даљинске контроле"
+
+#~ msgid "Use this _editor to open text files in the file manager"
+#~ msgstr ""
+#~ "Користи овај уређивач текста за отварање текст датотека у управнику "
+#~ "датотека"
+
+#~ msgid "Window Manager"
+#~ msgstr "Управник прозора"
+
+#~ msgid "_Command:"
+#~ msgstr "_Наредба:"
+
+#~ msgid "_Name:"
+#~ msgstr "_Име:"
+
+#~ msgid "_Properties..."
+#~ msgstr "Осо_бине..."
+
+#~ msgid "_Select:"
+#~ msgstr "_Изабери:"
+
+#~ msgid "E_nable sound server startup"
+#~ msgstr "О_могући сервер звука на почетку"
+
+#~ msgid "General"
+#~ msgstr "Опште"
+
+#~ msgid "Sound Events"
+#~ msgstr "Звучни сигнали"
+
+#~ msgid "_Sound an audible bell"
+#~ msgstr "_Звук и разговетно звонце"
+
+#~ msgid "_Visual feedback:"
+#~ msgstr "_Визуелно звонце:"
+
+#~ msgid "Permissions on the file %s are broken\n"
+#~ msgstr "Дозволе датотеке %s су неисправне\n"
+
+#~ msgid "Event"
+#~ msgstr "Догађај"
+
+#~ msgid "Sound File"
+#~ msgstr "Датотека са звуком"
+
+#~ msgid "_Sounds:"
+#~ msgstr "_Звуци:"
+
+#~ msgid "Sound _file:"
+#~ msgstr "_Датотека са звуком:"
+
+#~ msgid "_Play"
+#~ msgstr "_Покрени"
+
+#~ msgid "Next track key's shortcut."
+#~ msgstr "Пречица за наредну песму."
+
+#~ msgid "Pause"
+#~ msgstr "Пауза"
+
+#~ msgid "Pause key's shortcut."
+#~ msgstr "Пречица за паузу."
+
+#~ msgid "Play (or play/pause)"
+#~ msgstr "Пусти (или пусти/паузирај)"
+
+#~ msgid "Play (or play/pause) key's shortcut."
+#~ msgstr "Пречица за пуштање (или пуштање/паузу)."
+
+#~ msgid "Previous track key's shortcut."
+#~ msgstr "Пречица за претходну песму."
+
+#~ msgid "Skip to next track"
+#~ msgstr "Пређи на наредну песму"
+
+#~ msgid "Skip to previous track"
+#~ msgstr "Пређи на претходну песму"
+
+#~ msgid "Stop playback key"
+#~ msgstr "Заустави пуштање"
+
+#~ msgid "Stop playback key's shortcut."
+#~ msgstr "Пречица за заустављање пуштања."
 
 #~ msgid "_Go To Theme Folder"
 #~ msgstr "Иди до директоријума са темама"
