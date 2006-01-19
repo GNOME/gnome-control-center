@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: control-center HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-04 16:32+0900\n"
-"PO-Revision-Date: 2006-01-04 16:32+0900\n"
+"POT-Creation-Date: 2006-01-19 22:31+0900\n"
+"PO-Revision-Date: 2006-01-19 22:29+0900\n"
 "Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -481,7 +481,6 @@ msgstr ""
 "作性を変更する場合に必要になります。"
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:1
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:2
 #: ../capplets/theme-switcher/theme-install.glade.h:1
 msgid "*"
@@ -698,6 +697,11 @@ msgid "_Add Wallpaper"
 msgstr "壁紙の追加(_A)"
 
 #: ../capplets/background/gnome-background-properties.glade.h:6
+#: ../capplets/theme-switcher/theme-properties.glade.h:19
+msgid "_Remove"
+msgstr "削除(_R)"
+
+#: ../capplets/background/gnome-background-properties.glade.h:7
 msgid "_Style:"
 msgstr "スタイル(_S):"
 
@@ -708,51 +712,48 @@ msgstr "スタイル(_S):"
 msgid "There was an error displaying help: %s"
 msgstr "次のヘルプを表示する際にエラーが発生しました: %s"
 
-#: ../capplets/background/gnome-wp-capplet.c:1060
-#: ../capplets/background/gnome-wp-capplet.c:1078
+#: ../capplets/background/gnome-wp-capplet.c:984
 msgid "Centered"
 msgstr "中央"
 
-#: ../capplets/background/gnome-wp-capplet.c:1086
-#: ../capplets/background/gnome-wp-capplet.c:1103
+#: ../capplets/background/gnome-wp-capplet.c:988
 msgid "Fill Screen"
 msgstr "フルスクリーン"
 
-#: ../capplets/background/gnome-wp-capplet.c:1111
-#: ../capplets/background/gnome-wp-capplet.c:1128
+#: ../capplets/background/gnome-wp-capplet.c:992
 msgid "Scaled"
 msgstr "サイズ変更"
 
-#: ../capplets/background/gnome-wp-capplet.c:1136
-#: ../capplets/background/gnome-wp-capplet.c:1153
+#: ../capplets/background/gnome-wp-capplet.c:996
+msgid "Zoom"
+msgstr "ズーム"
+
+#: ../capplets/background/gnome-wp-capplet.c:1000
 msgid "Tiled"
 msgstr "サイズ均等"
 
-#: ../capplets/background/gnome-wp-capplet.c:1177
-#: ../capplets/background/gnome-wp-capplet.c:1186
+#: ../capplets/background/gnome-wp-capplet.c:1021
 msgid "Solid Color"
 msgstr "単色"
 
-#: ../capplets/background/gnome-wp-capplet.c:1194
-#: ../capplets/background/gnome-wp-capplet.c:1203
+#: ../capplets/background/gnome-wp-capplet.c:1025
 msgid "Horizontal Gradient"
 msgstr "水平方向にグラデーション"
 
-#: ../capplets/background/gnome-wp-capplet.c:1211
-#: ../capplets/background/gnome-wp-capplet.c:1220
+#: ../capplets/background/gnome-wp-capplet.c:1029
 msgid "Vertical Gradient"
 msgstr "垂直方向にグラデーション"
 
 #. Create the file chooser dialog stuff here
-#: ../capplets/background/gnome-wp-capplet.c:1269
+#: ../capplets/background/gnome-wp-capplet.c:1075
 msgid "Add Wallpaper"
 msgstr "壁紙の追加"
 
-#: ../capplets/background/gnome-wp-capplet.c:1286
+#: ../capplets/background/gnome-wp-capplet.c:1092
 msgid "Images"
 msgstr "画像"
 
-#: ../capplets/background/gnome-wp-capplet.c:1290
+#: ../capplets/background/gnome-wp-capplet.c:1096
 msgid "All Files"
 msgstr "全てのファイル"
 
@@ -760,8 +761,8 @@ msgstr "全てのファイル"
 msgid "No Wallpaper"
 msgstr "壁紙なし"
 
-#: ../capplets/background/gnome-wp-item.c:296
-#: ../capplets/background/gnome-wp-item.c:298
+#: ../capplets/background/gnome-wp-item.c:305
+#: ../capplets/background/gnome-wp-item.c:307
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "ピクセル"
@@ -790,7 +791,6 @@ msgid "Just apply settings and quit"
 msgstr "設定を適用して終了する"
 
 #: ../capplets/common/capplet-util.c:243
-#: ../capplets/default-applications/gnome-default-applications-properties.c:765
 #: ../capplets/keyboard/gnome-keyboard-properties.c:225
 #: ../capplets/mouse/gnome-mouse-properties.c:1015
 #: ../capplets/sound/sound-properties-capplet.c:244
@@ -977,254 +977,247 @@ msgstr "お気に入りのアプリ"
 msgid "Select your default applications"
 msgstr "デフォルトで使用するアプリを設定します"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:9
-msgid "Debian Sensible Browser"
-msgstr "Debian Sensible ブラウザ"
+#: ../capplets/default-applications/gnome-da-capplet.c:56
+msgid "Could not display help"
+msgstr "ヘルプを表示できませんでした"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:10
-msgid "Epiphany"
-msgstr "Epiphany"
+#: ../capplets/default-applications/gnome-da-capplet.c:58
+#: ../capplets/default-applications/gnome-da-capplet.c:704
+msgid "Please make sure that the applet is properly installed"
+msgstr "そのアプレットが適切にインストールされているか確認して下さい"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:11
-msgid "Galeon"
-msgstr "Galeon"
+#: ../capplets/default-applications/gnome-da-capplet.c:93
+#: ../capplets/default-applications/gnome-da-capplet.c:126
+#: ../capplets/default-applications/gnome-da-capplet.c:185
+#: ../capplets/default-applications/gnome-da-capplet.c:230
+#: ../capplets/default-applications/gnome-da-capplet.c:287
+#: ../capplets/default-applications/gnome-da-capplet.c:339
+#: ../capplets/default-applications/gnome-da-capplet.c:534
+#: ../capplets/default-applications/gnome-da-capplet.c:557
+#, c-format
+msgid "Error saving configuration: %s"
+msgstr "設定情報を保存する際にエラーが発生しました: %s"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:12
-msgid "Encompass"
-msgstr "Encompass"
+#: ../capplets/default-applications/gnome-da-capplet.c:680
+msgid "Custom"
+msgstr "その他"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:13
-msgid "Firebird"
-msgstr "Firebird"
+#: ../capplets/default-applications/gnome-da-capplet.c:702
+msgid "Could not load the main interface"
+msgstr "メインのインタフェースを読み込めませんでした"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:14
-msgid "Firefox"
-msgstr "Firefox"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:15
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:16
-msgid "Mozilla"
-msgstr "Mozilla"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:17
-msgid "Netscape Communicator"
-msgstr "Netscape Communicator"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:18
-msgid "Konqueror"
-msgstr "Konqueror"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:19
-msgid "Opera"
-msgstr "Opera"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:20
-msgid "Opera (open in new tab)"
-msgstr "Opera (新しいタブの中で開く)"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:21
-msgid "W3M Text Browser"
-msgstr "W3M テキスト・ブラウザ"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:22
-msgid "Lynx Text Browser"
-msgstr "Lynx テキスト・ブラウザ"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:23
-msgid "Links Text Browser"
-msgstr "Links テキスト・ブラウザ"
-
-#. The code in gnome-default-applications-properties.c makes sure
-#. * there is only one (the first entry in this list) Evolution entry
-#. * in the list shown to the user
-#.
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:38
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:39
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:40
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:41
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:42
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:43
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:44
-msgid "Evolution Mail Reader"
-msgstr "Evolution メール・リーダ"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:45
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:1
 msgid "Balsa"
 msgstr "Balsa"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:46
-msgid "KMail"
-msgstr "KMail"
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:2
+msgid "Debian Sensible Browser"
+msgstr "Debian Sensible ブラウザ"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:47
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:48
-msgid "Thunderbird"
-msgstr "Thunderbird"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:49
-msgid "Mozilla Mail"
-msgstr "Mozilla メール"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:50
-msgid "Mutt"
-msgstr "Mutt"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:51
-msgid "Sylpheed-Claws"
-msgstr "Sylpheed-Claws"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:61
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:3
 msgid "Debian Terminal Emulator"
 msgstr "Debian 端末エミュレータ"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:62
-msgid "GNOME Terminal"
-msgstr "GNOME 端末"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:63
-msgid "Standard XTerminal"
-msgstr "標準 X 端末"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:64
-msgid "NXterm"
-msgstr "NXterm"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:65
-msgid "RXVT"
-msgstr "RXVT"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:66
-msgid "aterm"
-msgstr "ATerm"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:67
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:4
 msgid "ETerm"
 msgstr "ETerm"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.c:123
-msgid "Please specify a name and a command for this editor."
-msgstr "このエディタの名前とコマンドを指定して下さい。"
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:5
+msgid "Encompass"
+msgstr "Encompass"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:6
+msgid "Epiphany"
+msgstr "Epiphany"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:7
+msgid "Evolution Mail Reader"
+msgstr "Evolution メール・クライアント"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:8
+msgid "Evolution Mail Reader 1.4"
+msgstr "Evolution メール・クライアント 1.4"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:9
+msgid "Evolution Mail Reader 1.5"
+msgstr "Evolution メール・クライアント 1.5"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:10
+msgid "Evolution Mail Reader 1.6"
+msgstr "Evolution メール・クライアント 1.6"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:11
+msgid "Evolution Mail Reader 2.0"
+msgstr "Evolution メール・クライアント 2.0"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:12
+msgid "Evolution Mail Reader 2.2"
+msgstr "Evolution メール・クライアント 2.2"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:13
+msgid "Evolution Mail Reader 2.4"
+msgstr "Evolution メール・クライアント 2.4"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:14
+msgid "Firebird"
+msgstr "Firebird"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:15
+msgid "Firefox"
+msgstr "Firefox"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:16
+msgid "GNOME Terminal"
+msgstr "GNOME 端末"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:17
+msgid "Galeon"
+msgstr "Galeon"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:18
+msgid "KMail"
+msgstr "KMail"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:19
+msgid "Konqueror"
+msgstr "Konqueror"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:20
+msgid "Links Text Browser"
+msgstr "Links テキスト・ブラウザ"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:21
+msgid "Lynx Text Browser"
+msgstr "Lynx テキスト・ブラウザ"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:22
+msgid "Mozilla"
+msgstr "Mozilla"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:23
+msgid "Mozilla 1.6"
+msgstr "Mozilla 1.6"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:24
+msgid "Mozilla Mail"
+msgstr "Mozilla メール"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:25
+msgid "Mozilla Thunderbird"
+msgstr "Mozilla Thunderbird"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:26
+msgid "Mutt"
+msgstr "Mutt"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:27
+msgid "NXterm"
+msgstr "NXterm"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:28
+msgid "Netscape Communicator"
+msgstr "Netscape Communicator"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:29
+msgid "Opera"
+msgstr "Opera"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:30
+msgid "RXVT"
+msgstr "RXVT"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:31
+msgid "Standard XTerminal"
+msgstr "標準 X 端末"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:32
+msgid "Sylpheed-Claws"
+msgstr "Sylpheed-Claws"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:33
+msgid "Thunderbird"
+msgstr "Thunderbird"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:34
+msgid "W3M Text Browser"
+msgstr "W3M テキスト・ブラウザ"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:35
+msgid "aterm"
+msgstr "ATerm"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:1
+msgid "<b>Audio Player</b>"
+msgstr "<b>楽曲プレイヤー</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:2
-msgid "Add..."
-msgstr "追加..."
+msgid "<b>Image Viewer</b>"
+msgstr "<b>画像ビューア</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:3
-msgid "C_ustom"
-msgstr "その他(_U)"
+msgid "<b>Instant Messenger</b>"
+msgstr "<b>インスタント・メッセンジャー</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:4
-msgid "C_ustom:"
-msgstr "その他(_U):"
+msgid "<b>Mail Reader</b>"
+msgstr "<b>メール・クライアント</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:5
-msgid "Can open _URIs"
-msgstr "URI を開けるようにする(_U)"
+msgid "<b>Terminal Emulator</b>"
+msgstr "<b>端末エミュレータ</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:6
-msgid "Can open multiple _files"
-msgstr "複数のファイルを開けるようにする(_F)"
+msgid "<b>Text Editor</b>"
+msgstr "<b>テキスト・エディタ</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:7
+msgid "<b>Video Player</b>"
+msgstr "<b>ビデオ・プレイヤー</b>"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:8
+msgid "<b>Web Browser</b>"
+msgstr "<b>ウェブ・ブラウザ</b>"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:10
+#, no-c-format
+msgid "All %s occurrences will be replaced with actual link"
+msgstr "%s は全て実際のリンクに置き換えられます"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:11
 msgid "Co_mmand:"
 msgstr "コマンド(_M):"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:8
-msgid "Custom Editor Properties"
-msgstr "エディタ設定のカスタマイズ"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:9
-msgid "Default Mail Reader"
-msgstr "デフォルトのメール・クライアント"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:10
-msgid "Default Terminal"
-msgstr "デフォルトの端末"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:11
-msgid "Default Text Editor"
-msgstr "デフォルトのテキスト・エディタ"
-
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:12
-msgid "Default Web Browser"
-msgstr "デフォルトのウェブ・ブラウザ"
+msgid "E_xecute flag:"
+msgstr "起動オプション(_X):"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:13
-msgid "Default Window Manager"
-msgstr "デフォルトのウィンドウ・マネージャ"
+msgid "Internet"
+msgstr "インターネット"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:14
-msgid "Delete"
-msgstr "削除"
+msgid "Multimedia"
+msgstr "マルチメディア"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:15
-msgid "E_xec Flag:"
-msgstr "オプション(_X):"
+msgid "Open link in new _tab"
+msgstr "リンク先を新しいタブで開く(_T)"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:16
-msgid "Edit..."
-msgstr "編集..."
+msgid "Open link in new _window"
+msgstr "リンク先を新しいウィンドウで開く(_W)"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:17
-msgid "Mail Reader"
-msgstr "メール・クライアント"
+msgid "Open link with web browser _default"
+msgstr "リンク先をウェブ・ブラウザのデフォルト操作で開く(_D)"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:19
-msgid "Run in a _terminal"
-msgstr "端末から起動する(_T)"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:20
-msgid "Run in a t_erminal"
+msgid "Run in t_erminal"
 msgstr "端末から起動する(_E)"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:21
-msgid ""
-"Select the window manager you want.  You will need to hit apply, wave the "
-"magic wand, and do a magic dance for it to work."
-msgstr ""
-"使用するウィンドウ・マネージャを選択して下さい。ウィンドウ・マネージャを動作"
-"させるには、魔法の杖を振って魔法のダンスを踊るように適用ボタンをクリックして"
-"下さい。"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:22
-msgid "Terminal"
-msgstr "端末"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:23
-msgid "Text Editor"
-msgstr "テキスト・エディタ"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:24
-msgid "Understands _Netscape Remote Control"
-msgstr "Netscape のリモート制御を有効にする(_N)"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:25
-msgid "Use this _editor to open text files in the file manager"
-msgstr "このエディタをファイル・マネージャで使用する(_E)"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:26
-msgid "Web Browser"
-msgstr "ウェブ・ブラウザ"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:27
-msgid "Window Manager"
-msgstr "ウィンドウ・マネージャ"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:28
-msgid "_Command:"
-msgstr "コマンド(_C):"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:29
-msgid "_Name:"
-msgstr "名前(_N):"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:30
-msgid "_Properties..."
-msgstr "プロパティ(_P)..."
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:31
-msgid "_Select:"
-msgstr "選択(_S):"
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:20
+msgid "System"
+msgstr "システム"
 
 #: ../capplets/display/display-properties.desktop.in.in.h:1
 msgid "Change screen resolution"
@@ -1497,29 +1490,29 @@ msgid "The type of accelerator."
 msgstr "アクセラレータの種類です"
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
-#: ../capplets/keybindings/gnome-keybinding-properties.c:197
+#: ../capplets/keybindings/gnome-keybinding-properties.c:191
 #: ../libbackground/applier.c:624 ../typing-break/drwright.c:471
 msgid "Disabled"
 msgstr "無効"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:544
+#: ../capplets/keybindings/gnome-keybinding-properties.c:538
 msgid "<Unknown Action>"
 msgstr "<不明な操作>"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:565
+#: ../capplets/keybindings/gnome-keybinding-properties.c:559
 msgid "Desktop"
 msgstr "デスクトップ"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:566
+#: ../capplets/keybindings/gnome-keybinding-properties.c:560
 #: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
 msgid "Sound"
 msgstr "サウンド"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:570
+#: ../capplets/keybindings/gnome-keybinding-properties.c:564
 msgid "Window Management"
 msgstr "ウィンドウ管理"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:667
+#: ../capplets/keybindings/gnome-keybinding-properties.c:661
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1528,21 +1521,21 @@ msgstr ""
 "このショートカット \"%s\" は既に登録されています:\n"
 " \"%s\"\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:699
+#: ../capplets/keybindings/gnome-keybinding-properties.c:693
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "新しいアクセラレータを設定データベース書き込む際にエラー: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:749
+#: ../capplets/keybindings/gnome-keybinding-properties.c:743
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "設定データベースのアクセラレータの設定を解除する際にエラー: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:856
+#: ../capplets/keybindings/gnome-keybinding-properties.c:850
 msgid "Action"
 msgstr "操作"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:880
+#: ../capplets/keybindings/gnome-keybinding-properties.c:874
 msgid "Shortcut"
 msgstr "ショートカット"
 
@@ -1650,11 +1643,11 @@ msgid "Check if breaks are allowed to be postponed"
 msgstr "一休みの延長を可能にする場合は有効にして下さい"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
-msgid "Choose A Keyboard Model"
+msgid "Choose a Keyboard Model"
 msgstr "キーボード・モデルの選択"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:15
-msgid "Choose A Layout"
+msgid "Choose a Layout"
 msgstr "レイアウトの選択"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:16
@@ -2016,13 +2009,13 @@ msgid "Enable sound and associate sounds with events"
 msgstr "効果音とイベントに対応する効果音を有効にします"
 
 #: ../capplets/sound/sound-properties-capplet.c:271
-#: ../capplets/sound/sound-properties.glade.h:6
+#: ../capplets/sound/sound-properties.glade.h:4
 msgid "Sound Preferences"
 msgstr "効果音の設定"
 
 #: ../capplets/sound/sound-properties.glade.h:1
-msgid "E_nable sound server startup"
-msgstr "起動時にサウンド・サーバを有効にする(_N)"
+msgid "E_nable software sound mixing (ESD)"
+msgstr "ソフトウェアによるサウンド・ミキシングを有効にする (ESD)(_N)"
 
 #: ../capplets/sound/sound-properties.glade.h:2
 msgid "Flash _entire screen"
@@ -2032,29 +2025,25 @@ msgstr "画面全体を点滅させる(_E)"
 msgid "Flash _window titlebar"
 msgstr "ウィンドウのタイトルバーを点滅させる(_W)"
 
-#: ../capplets/sound/sound-properties.glade.h:4
-msgid "General"
-msgstr "全般"
-
 #: ../capplets/sound/sound-properties.glade.h:5
-msgid "Sound Events"
-msgstr "イベントの効果音"
+msgid "Sounds"
+msgstr "サウンド"
+
+#: ../capplets/sound/sound-properties.glade.h:6
+msgid "System Beep"
+msgstr "ビープ音"
 
 #: ../capplets/sound/sound-properties.glade.h:7
-msgid "System Bell"
-msgstr "システム・ベル"
+msgid "_Enable system beep"
+msgstr "システムのビープ音を有効にする(_E)"
 
 #: ../capplets/sound/sound-properties.glade.h:8
-msgid "_Sound an audible bell"
-msgstr "聞き取れる効果音を鳴らす(_S)"
+msgid "_Play system sounds"
+msgstr "効果音を演奏する(_P)"
 
 #: ../capplets/sound/sound-properties.glade.h:9
-msgid "_Sounds for events"
-msgstr "イベントに対して効果音を鳴らす"
-
-#: ../capplets/sound/sound-properties.glade.h:10
-msgid "_Visual feedback:"
-msgstr "視覚的なフィードバックを有効にする(_V):"
+msgid "_Visual system beep"
+msgstr "視覚的なビープ音を有効にする(_V)"
 
 #: ../capplets/theme-switcher/gnome-theme-details.c:368
 msgid "Would you like to remove this theme?"
@@ -2315,11 +2304,6 @@ msgstr "ウィンドウの境界"
 msgid "_Install Theme..."
 msgstr "テーマのインストール(_I)..."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:19
-#: ../libsounds/sound-view.c:366
-msgid "_Remove"
-msgstr "削除(_R)"
-
 #: ../capplets/theme-switcher/theme-properties.glade.h:20
 msgid "_Revert"
 msgstr "戻す(_R)"
@@ -2519,7 +2503,7 @@ msgstr "ウィンドウ"
 msgid "Others"
 msgstr "その他"
 
-#: ../control-center/control-center.c:42
+#: ../control-center/control-center.c:93
 msgid "Desktop Preferences"
 msgstr "デスクトップの設定"
 
@@ -2531,6 +2515,18 @@ msgstr "GNOME コントロール・センター"
 #: ../vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:2
 msgid "The GNOME configuration tool"
 msgstr "GNOME デスクトップの設定ツールです"
+
+#: ../gnome-settings-daemon/actions/acme-fb-level.c:149
+msgid "No '/dev/pmu' device found"
+msgstr "デバイス '/dev/pmu' が見つかりませんでした"
+
+#: ../gnome-settings-daemon/actions/acme-fb-level.c:156
+msgid "Not a powerbook"
+msgstr "Powerbook ではありません"
+
+#: ../gnome-settings-daemon/actions/acme-fb-level.c:173
+msgid "Wrong permission for '/dev/pmu' device"
+msgstr "デバイス '/dev/pmu' のパーミッションが間違っています"
 
 #: ../gnome-settings-daemon/actions/acme.glade.h:1
 msgid "Volume"
@@ -2590,7 +2586,8 @@ msgstr "スティッキー・キーを有効にしますか？"
 msgid "Do you want to deactivate Sticky Keys?"
 msgstr "スロー・キーを無効にしますか？"
 
-#: ../gnome-settings-daemon/gnome-settings-font.c:107
+#: ../gnome-settings-daemon/gnome-settings-font.c:74
+#: ../gnome-settings-daemon/gnome-settings-font.c:96
 #, c-format
 msgid ""
 "Cannot create the directory \"%s\".\n"
@@ -2718,12 +2715,7 @@ msgstr ""
 "お使いのシステムをスリープできませんでした。\n"
 "お使いのシステムが正しく設定されているか確認して下さい。"
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:155
-#, c-format
-msgid "Permissions on the file %s are broken\n"
-msgstr "ファイル %s の権限が壊れています。\n"
-
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:200
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:180
 msgid ""
 "Couldn't load the Glade file.\n"
 "Make sure that this daemon is properly installed."
@@ -2750,7 +2742,7 @@ msgstr ""
 msgid "_Do not show this message again"
 msgstr "次回からこのメッセージを表示しない(_D)"
 
-#: ../gnome-settings-daemon/gnome-settings-sound.c:129
+#: ../gnome-settings-daemon/gnome-settings-sound.c:150
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "効果音ファイル %s をサンプル %s で読み込めませんでした"
@@ -2835,48 +2827,31 @@ msgstr "BGApplier が描画するスクリーンです"
 msgid "There was an error loading an image: %s"
 msgstr "画像を読み込む際にエラーが発生しました: %s"
 
-#: ../libsounds/sound-view.c:122 ../libsounds/sound-view.c:147
+#: ../libsounds/sound-view.c:115
+msgid "Sound not set for this event."
+msgstr "このイベントには効果音が設定されていません"
+
+#: ../libsounds/sound-view.c:124
+msgid ""
+"The sound file for this event does not exist.\n"
+"You may want to install the gnome-audio package for a set of default sounds."
+msgstr ""
+"このイベントに対応した効果音ファイルが存在しません。\n"
+"デフォルトの効果音を有効にするには gnome-audio パッケージを\n"
+"インストールする必要があるかもしれません。"
+
+#: ../libsounds/sound-view.c:135
 msgid "The sound file for this event does not exist."
 msgstr "このイベントに対する効果音ファイルが存在しません。"
 
-#: ../libsounds/sound-view.c:149
-msgid ""
-"The sound file for this event does not exist.\n"
-"You may want to install the gnome-audio package\n"
-"for a set of default sounds."
-msgstr ""
-"このイベントに対する効果音ファイルが存在しません。\n"
-"デフォルトの効果音を利用するために gnome-audio パッケージを\n"
-"インストールする必要があるかもしれません。"
-
-#: ../libsounds/sound-view.c:224
-#, c-format
-msgid "The file %s is not a valid wav file"
-msgstr "ファイル %s は正しい WAV ファイルではありません"
-
-#: ../libsounds/sound-view.c:289
-msgid "Event"
-msgstr "イベント"
-
-#: ../libsounds/sound-view.c:298
-msgid "Sound File"
-msgstr "ファイル"
-
-#: ../libsounds/sound-view.c:314
-msgid "_Sounds:"
-msgstr "効果音(_S)"
-
-#: ../libsounds/sound-view.c:328
-msgid "Sound _file:"
-msgstr "効果音のファイル(_F):"
-
-#: ../libsounds/sound-view.c:332
+#: ../libsounds/sound-view.c:164
 msgid "Select Sound File"
 msgstr "効果音のファイルの選択"
 
-#: ../libsounds/sound-view.c:356
-msgid "_Play"
-msgstr "演奏(_P)"
+#: ../libsounds/sound-view.c:182
+#, c-format
+msgid "The file %s is not a valid wav file"
+msgstr "ファイル %s は正しい WAV ファイルではありません"
 
 #: ../libwindow-settings/gnome-wm-manager.c:320
 #, c-format
@@ -2974,90 +2949,50 @@ msgid "Log out's shortcut."
 msgstr "ログアウトする機能のショートカットです。"
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
-msgid "Next track key's shortcut."
-msgstr "次のトラックを演奏する機能のショートカットです。"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
-msgid "Pause"
-msgstr "一時停止"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
-msgid "Pause key's shortcut."
-msgstr "一時停止する機能のショートカットです。"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
-msgid "Play (or play/pause)"
-msgstr "演奏 (または演奏/一時停止)"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
-msgid "Play (or play/pause) key's shortcut."
-msgstr "演奏 (または演奏/一時停止のトグル) 機能のショートカットです。"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
-msgid "Previous track key's shortcut."
-msgstr "前のトラックを演奏する機能のショートカットです。"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
 msgid "Search"
 msgstr "検索"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
 msgid "Search's shortcut."
 msgstr "検索機能を呼び出すショートカットです。"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
-msgid "Skip to next track"
-msgstr "次のトラックへスキップ"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
-msgid "Skip to previous track"
-msgstr "前のトラックへスキップ"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
 msgid "Sleep"
 msgstr "スリープ"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
 msgid "Sleep's shortcut."
 msgstr "お使いのシステムをスリープにするショートカットです。"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
-msgid "Stop playback key"
-msgstr "録音再生の停止"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
-msgid "Stop playback key's shortcut."
-msgstr "録音再生を停止するショートカットです。"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
 msgid "Volume down"
 msgstr "音量を下げる"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
 msgid "Volume down's shortcut."
 msgstr "音量を下げる機能のショートカットです。"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
 msgid "Volume mute"
 msgstr "消音"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
 msgid "Volume mute's shortcut"
 msgstr "音量をミュート (消音) する機能のショートカットです。"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:37
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
 msgid "Volume step"
 msgstr "音量ステップ"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:38
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
 msgid "Volume step as percentage of volume."
 msgstr "音量ステップ (音量の割合) を設定する機能のショートカットです。"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:39
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
 msgid "Volume up"
 msgstr "音量を上げる"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
 msgid "Volume up's shortcut."
 msgstr "音量を上げる機能のショートカットです。"
 
