@@ -7,15 +7,15 @@ msgid ""
 ""
 msgstr "Project-Id-Version: gnome-control-center for Gnome HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-14 23:02+0100\n"
-"PO-Revision-Date: 2006-01-15 18:07+1030\n"
+"POT-Creation-Date: 2006-01-19 06:49+0100\n"
+"PO-Revision-Date: 2006-01-19 22:05+1030\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <gnomevi-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
-"X-Generator: LocFactoryEditor 1.6b23\n"
+"X-Generator: LocFactoryEditor 1.6b30\n"
 
 #:../capplets/about-me/eel-alert-dialog.c:114
 msgid "Image/label border"
@@ -470,7 +470,6 @@ msgstr "Có vẻ như hệ thống không có phần mở rộng XKB. Tính năn
 "bàn phím sẽ không hoạt động nếu thiếu nó."
 
 #:../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
-#:../capplets/default-applications/gnome-default-applications-properties.glade.h:1
 #:../capplets/keyboard/gnome-keyboard-properties.glade.h:2
 #:../capplets/theme-switcher/theme-install.glade.h:1
 msgid "*"
@@ -777,7 +776,6 @@ msgid "Just apply settings and quit"
 msgstr "Chỉ áp dụng các thiết lập rồi thoát"
 
 #:../capplets/common/capplet-util.c:243
-#:../capplets/default-applications/gnome-default-applications-properties.c:765
 #:../capplets/keyboard/gnome-keyboard-properties.c:225
 #:../capplets/mouse/gnome-mouse-properties.c:1015
 #:../capplets/sound/sound-properties-capplet.c:244
@@ -959,270 +957,267 @@ msgstr "Ứng dụng ưa thích"
 msgid "Select your default applications"
 msgstr "Chọn các ứng dụng mặc định của bạn"
 
-#:../capplets/default-applications/gnome-default-applications-properties-structs.c:9
+#:../capplets/default-applications/gnome-da-capplet.c:56
+msgid "Could not display help"
+msgstr "Không thể hiển thị trợ giúp"
+
+#:../capplets/default-applications/gnome-da-capplet.c:58
+#:../capplets/default-applications/gnome-da-capplet.c:704
+msgid "Please make sure that the applet is properly installed"
+msgstr "Hãy kiểm tra xem tiểu dụng này đã được cài đặt đúng"
+
+#:../capplets/default-applications/gnome-da-capplet.c:93
+#:../capplets/default-applications/gnome-da-capplet.c:126
+#:../capplets/default-applications/gnome-da-capplet.c:185
+#:../capplets/default-applications/gnome-da-capplet.c:230
+#:../capplets/default-applications/gnome-da-capplet.c:287
+#:../capplets/default-applications/gnome-da-capplet.c:339
+#:../capplets/default-applications/gnome-da-capplet.c:534
+#:../capplets/default-applications/gnome-da-capplet.c:557
+#,c-format
+msgid "Error saving configuration: %s"
+msgstr "Gặp lỗi khi lưu cấu hình: %s"
+
+#:../capplets/default-applications/gnome-da-capplet.c:680
+msgid "Custom"
+msgstr "Tự chọn"
+
+#:../capplets/default-applications/gnome-da-capplet.c:702
+msgid "Could not load the main interface"
+msgstr "Không thể tài giao diện chính"
+
+# Name: don't translate / Tên: đừng dịch
+#:../capplets/default-applications/gnome-default-applications.xml.in.h:1
+msgid "Balsa"
+msgstr "Balsa"
+
+#:../capplets/default-applications/gnome-default-applications.xml.in.h:2
 msgid "Debian Sensible Browser"
 msgstr "Trình duyệt tương thích với Debian"
 
-# Name: don't translate / Tên: đừng dịch
-#:../capplets/default-applications/gnome-default-applications-properties-structs.c:10
-msgid "Epiphany"
-msgstr "Epiphany"
+#:../capplets/default-applications/gnome-default-applications.xml.in.h:3
+msgid "Debian Terminal Emulator"
+msgstr "Trình mô phỏng thiết bị cuối Debian"
 
 # Name: don't translate / Tên: đừng dịch
-#:../capplets/default-applications/gnome-default-applications-properties-structs.c:11
-msgid "Galeon"
-msgstr "Galeon"
+#:../capplets/default-applications/gnome-default-applications.xml.in.h:4
+msgid "ETerm"
+msgstr "ETerm"
 
 # Name: don't translate / Tên: đừng dịch
-#:../capplets/default-applications/gnome-default-applications-properties-structs.c:12
+#:../capplets/default-applications/gnome-default-applications.xml.in.h:5
 msgid "Encompass"
 msgstr "Encompass"
 
 # Name: don't translate / Tên: đừng dịch
-#:../capplets/default-applications/gnome-default-applications-properties-structs.c:13
+#:../capplets/default-applications/gnome-default-applications.xml.in.h:6
+msgid "Epiphany"
+msgstr "Epiphany"
+
+#:../capplets/default-applications/gnome-default-applications.xml.in.h:7
+msgid "Evolution Mail Reader"
+msgstr "Trình đọc thư Evolution"
+
+#:../capplets/default-applications/gnome-default-applications.xml.in.h:8
+msgid "Evolution Mail Reader 1.4"
+msgstr "Trình đọc thư Evolution 1.4"
+
+#:../capplets/default-applications/gnome-default-applications.xml.in.h:9
+msgid "Evolution Mail Reader 1.5"
+msgstr "Trình đọc thư Evolution 1.5"
+
+#:../capplets/default-applications/gnome-default-applications.xml.in.h:10
+msgid "Evolution Mail Reader 1.6"
+msgstr "Trình đọc thư Evolution 1.6"
+
+#:../capplets/default-applications/gnome-default-applications.xml.in.h:11
+msgid "Evolution Mail Reader 2.0"
+msgstr "Trình đọc thư Evolution 2.0"
+
+#:../capplets/default-applications/gnome-default-applications.xml.in.h:12
+msgid "Evolution Mail Reader 2.2"
+msgstr "Trình đọc thư Evolution 2.2"
+
+#:../capplets/default-applications/gnome-default-applications.xml.in.h:13
+msgid "Evolution Mail Reader 2.4"
+msgstr "Trình đọc thư Evolution 2.4"
+
+# Name: don't translate / Tên: đừng dịch
+#:../capplets/default-applications/gnome-default-applications.xml.in.h:14
 msgid "Firebird"
 msgstr "Firebird"
 
 # Name: don't translate / Tên: đừng dịch
-#:../capplets/default-applications/gnome-default-applications-properties-structs.c:14
+#:../capplets/default-applications/gnome-default-applications.xml.in.h:15
 msgid "Firefox"
 msgstr "Firefox"
 
-# Name: don't translate / Tên: đừng dịch
-#:../capplets/default-applications/gnome-default-applications-properties-structs.c:15
-#:../capplets/default-applications/gnome-default-applications-properties-structs.c:16
-msgid "Mozilla"
-msgstr "Mozilla"
+#:../capplets/default-applications/gnome-default-applications.xml.in.h:16
+msgid "GNOME Terminal"
+msgstr "Thiết bị cuối GNOME"
 
 # Name: don't translate / Tên: đừng dịch
-#:../capplets/default-applications/gnome-default-applications-properties-structs.c:17
-msgid "Netscape Communicator"
-msgstr "Netscape Communicator"
+#:../capplets/default-applications/gnome-default-applications.xml.in.h:17
+msgid "Galeon"
+msgstr "Galeon"
 
 # Name: don't translate / Tên: đừng dịch
-#:../capplets/default-applications/gnome-default-applications-properties-structs.c:18
-msgid "Konqueror"
-msgstr "Konqueror"
-
-# Name: don't translate / Tên: đừng dịch
-#:../capplets/default-applications/gnome-default-applications-properties-structs.c:19
-msgid "Opera"
-msgstr "Opera"
-
-#:../capplets/default-applications/gnome-default-applications-properties-structs.c:20
-msgid "Opera (open in new tab)"
-msgstr "Opera (mở trong thanh mới)"
-
-#:../capplets/default-applications/gnome-default-applications-properties-structs.c:21
-msgid "W3M Text Browser"
-msgstr "Trình duyệt Mạng văn bản W3M"
-
-#:../capplets/default-applications/gnome-default-applications-properties-structs.c:22
-msgid "Lynx Text Browser"
-msgstr "Trình duyệt Mạng văn bản Lynx"
-
-#:../capplets/default-applications/gnome-default-applications-properties-structs.c:23
-msgid "Links Text Browser"
-msgstr "Trình duyệt Mạng văn bản Links"
-
-#.The code in gnome-default-applications-properties.c makes sure
-#.* there is only one (the first entry in this list) Evolution entry
-#.* in the list shown to the user
-#.
-#:../capplets/default-applications/gnome-default-applications-properties-structs.c:38
-#:../capplets/default-applications/gnome-default-applications-properties-structs.c:39
-#:../capplets/default-applications/gnome-default-applications-properties-structs.c:40
-#:../capplets/default-applications/gnome-default-applications-properties-structs.c:41
-#:../capplets/default-applications/gnome-default-applications-properties-structs.c:42
-#:../capplets/default-applications/gnome-default-applications-properties-structs.c:43
-#:../capplets/default-applications/gnome-default-applications-properties-structs.c:44
-msgid "Evolution Mail Reader"
-msgstr "Trình đọc thư Evolution"
-
-# Name: don't translate / Tên: đừng dịch
-#:../capplets/default-applications/gnome-default-applications-properties-structs.c:45
-msgid "Balsa"
-msgstr "Balsa"
-
-# Name: don't translate / Tên: đừng dịch
-#:../capplets/default-applications/gnome-default-applications-properties-structs.c:46
+#:../capplets/default-applications/gnome-default-applications.xml.in.h:18
 msgid "KMail"
 msgstr "KMail"
 
 # Name: don't translate / Tên: đừng dịch
-#:../capplets/default-applications/gnome-default-applications-properties-structs.c:47
-#:../capplets/default-applications/gnome-default-applications-properties-structs.c:48
-msgid "Thunderbird"
-msgstr "Thunderbird"
+#:../capplets/default-applications/gnome-default-applications.xml.in.h:19
+msgid "Konqueror"
+msgstr "Konqueror"
+
+#:../capplets/default-applications/gnome-default-applications.xml.in.h:20
+msgid "Links Text Browser"
+msgstr "Trình duyệt Mạng văn bản Links"
+
+#:../capplets/default-applications/gnome-default-applications.xml.in.h:21
+msgid "Lynx Text Browser"
+msgstr "Trình duyệt Mạng văn bản Lynx"
 
 # Name: don't translate / Tên: đừng dịch
-#:../capplets/default-applications/gnome-default-applications-properties-structs.c:49
+#:../capplets/default-applications/gnome-default-applications.xml.in.h:22
+msgid "Mozilla"
+msgstr "Mozilla"
+
+# Name: don't translate / Tên: đừng dịch
+#:../capplets/default-applications/gnome-default-applications.xml.in.h:23
+msgid "Mozilla 1.6"
+msgstr "Mozilla 1.6"
+
+# Name: don't translate / Tên: đừng dịch
+#:../capplets/default-applications/gnome-default-applications.xml.in.h:24
 msgid "Mozilla Mail"
 msgstr "Mozilla Mail"
 
 # Name: don't translate / Tên: đừng dịch
-#:../capplets/default-applications/gnome-default-applications-properties-structs.c:50
+#:../capplets/default-applications/gnome-default-applications.xml.in.h:25
+msgid "Mozilla Thunderbird"
+msgstr "Mozilla Thunderbird"
+
+# Name: don't translate / Tên: đừng dịch
+#:../capplets/default-applications/gnome-default-applications.xml.in.h:26
 msgid "Mutt"
 msgstr "Mutt"
 
-#:../capplets/default-applications/gnome-default-applications-properties-structs.c:51
-msgid "Sylpheed-Claws"
-msgstr "Sylpheed-Claws"
-
-#:../capplets/default-applications/gnome-default-applications-properties-structs.c:61
-msgid "Debian Terminal Emulator"
-msgstr "Trình mô phỏng thiết bị cuối Debian"
-
-#:../capplets/default-applications/gnome-default-applications-properties-structs.c:62
-msgid "GNOME Terminal"
-msgstr "Thiết bị cuối GNOME"
-
-#:../capplets/default-applications/gnome-default-applications-properties-structs.c:63
-msgid "Standard XTerminal"
-msgstr "XTerminal chuẩn"
-
 # Name: don't translate / Tên: đừng dịch
-#:../capplets/default-applications/gnome-default-applications-properties-structs.c:64
+#:../capplets/default-applications/gnome-default-applications.xml.in.h:27
 msgid "NXterm"
 msgstr "NXterm"
 
 # Name: don't translate / Tên: đừng dịch
-#:../capplets/default-applications/gnome-default-applications-properties-structs.c:65
+#:../capplets/default-applications/gnome-default-applications.xml.in.h:28
+msgid "Netscape Communicator"
+msgstr "Netscape Communicator"
+
+# Name: don't translate / Tên: đừng dịch
+#:../capplets/default-applications/gnome-default-applications.xml.in.h:29
+msgid "Opera"
+msgstr "Opera"
+
+# Name: don't translate / Tên: đừng dịch
+#:../capplets/default-applications/gnome-default-applications.xml.in.h:30
 msgid "RXVT"
 msgstr "RXVT"
 
+#:../capplets/default-applications/gnome-default-applications.xml.in.h:31
+msgid "Standard XTerminal"
+msgstr "XTerminal chuẩn"
+
+#:../capplets/default-applications/gnome-default-applications.xml.in.h:32
+msgid "Sylpheed-Claws"
+msgstr "Sylpheed-Claws"
+
 # Name: don't translate / Tên: đừng dịch
-#:../capplets/default-applications/gnome-default-applications-properties-structs.c:66
+#:../capplets/default-applications/gnome-default-applications.xml.in.h:33
+msgid "Thunderbird"
+msgstr "Thunderbird"
+
+#:../capplets/default-applications/gnome-default-applications.xml.in.h:34
+msgid "W3M Text Browser"
+msgstr "Trình duyệt Mạng văn bản W3M"
+
+# Name: don't translate / Tên: đừng dịch
+#:../capplets/default-applications/gnome-default-applications.xml.in.h:35
 msgid "aterm"
 msgstr "aterm"
 
-# Name: don't translate / Tên: đừng dịch
-#:../capplets/default-applications/gnome-default-applications-properties-structs.c:67
-msgid "ETerm"
-msgstr "ETerm"
-
-#:../capplets/default-applications/gnome-default-applications-properties.c:123
-msgid "Please specify a name and a command for this editor."
-msgstr "Hãy đặt tên và ghi lệnh cho bộ soạn thảo này."
+#:../capplets/default-applications/gnome-default-applications-properties.glade.h:1
+msgid "<b>Audio Player</b>"
+msgstr "<b>Bộ Phát Nhạc</b>"
 
 #:../capplets/default-applications/gnome-default-applications-properties.glade.h:2
-msgid "Add..."
-msgstr "Thêm..."
+msgid "<b>Image Viewer</b>"
+msgstr "<b>Bộ Xem Ảnh</b>"
 
 #:../capplets/default-applications/gnome-default-applications-properties.glade.h:3
-msgid "C_ustom"
-msgstr "_Tự chọn"
+msgid "<b>Instant Messenger</b>"
+msgstr "<b>Bộ Tin nhắn</b>"
 
 #:../capplets/default-applications/gnome-default-applications-properties.glade.h:4
-msgid "C_ustom:"
-msgstr "_Tự chọn:"
+msgid "<b>Mail Reader</b>"
+msgstr "<b>Bộ đọc thư</b>"
 
 #:../capplets/default-applications/gnome-default-applications-properties.glade.h:5
-msgid "Can open _URIs"
-msgstr "Có thể mở địa chỉ _Mạng"
+msgid "<b>Terminal Emulator</b>"
+msgstr "<b>Bộ mô phỏng thiết bị cuối</b>"
 
 #:../capplets/default-applications/gnome-default-applications-properties.glade.h:6
-msgid "Can open multiple _files"
-msgstr "Có thể mở _nhiều tập tin"
+msgid "<b>Text Editor</b>"
+msgstr "<b>Bộ soạn thảo văn bản</b>"
 
 #:../capplets/default-applications/gnome-default-applications-properties.glade.h:7
+msgid "<b>Video Player</b>"
+msgstr "<b>Bộ Phát Ảnh Động</b>"
+
+#:../capplets/default-applications/gnome-default-applications-properties.glade.h:8
+msgid "<b>Web Browser</b>"
+msgstr "<b>Bộ duyệt Mạng</b>"
+
+#:../capplets/default-applications/gnome-default-applications-properties.glade.h:10
+#,no-c-format
+msgid "All %s occurrences will be replaced with actual link"
+msgstr "Mọi lần gặp %s sẽ được thay thế bằng liên kết thật"
+
+#:../capplets/default-applications/gnome-default-applications-properties.glade.h:11
 msgid "Co_mmand:"
 msgstr "_Lệnh:"
 
-#:../capplets/default-applications/gnome-default-applications-properties.glade.h:8
-msgid "Custom Editor Properties"
-msgstr "Thuộc tính bộ soạn thảo riêng"
-
-#:../capplets/default-applications/gnome-default-applications-properties.glade.h:9
-msgid "Default Mail Reader"
-msgstr "Trình đọc thư mặc định"
-
-#:../capplets/default-applications/gnome-default-applications-properties.glade.h:10
-msgid "Default Terminal"
-msgstr "Thiết bị cuối mặc định"
-
-#:../capplets/default-applications/gnome-default-applications-properties.glade.h:11
-msgid "Default Text Editor"
-msgstr "Bộ soạn thảo văn bản mặc định"
-
 #:../capplets/default-applications/gnome-default-applications-properties.glade.h:12
-msgid "Default Web Browser"
-msgstr "Trình duyệt Mạng mặc định"
-
-#:../capplets/default-applications/gnome-default-applications-properties.glade.h:13
-msgid "Default Window Manager"
-msgstr "Trình quản lý cửa sổ mặc định"
-
-#:../capplets/default-applications/gnome-default-applications-properties.glade.h:14
-msgid "Delete"
-msgstr "Xoá bỏ"
-
-#:../capplets/default-applications/gnome-default-applications-properties.glade.h:15
-msgid "E_xec Flag:"
+msgid "E_xecute flag:"
 msgstr "Cờ _thực thi:"
 
+#:../capplets/default-applications/gnome-default-applications-properties.glade.h:13
+msgid "Internet"
+msgstr "Mạng"
+
+#:../capplets/default-applications/gnome-default-applications-properties.glade.h:14
+msgid "Multimedia"
+msgstr "Đa phương tiện"
+
+#:../capplets/default-applications/gnome-default-applications-properties.glade.h:15
+msgid "Open link in new _tab"
+msgstr "Mở liên kết trong _thanh mới"
+
 #:../capplets/default-applications/gnome-default-applications-properties.glade.h:16
-msgid "Edit..."
-msgstr "Sửa đổi..."
+msgid "Open link in new _window"
+msgstr "Mở liên kết trong cửa sổ _mới"
 
 #:../capplets/default-applications/gnome-default-applications-properties.glade.h:17
-msgid "Mail Reader"
-msgstr "Trình đọc thư"
+msgid "Open link with web browser _default"
+msgstr "Mở liên kết bằng trình duyệt Mạng _mặc định"
 
 #:../capplets/default-applications/gnome-default-applications-properties.glade.h:19
-msgid "Run in a _terminal"
-msgstr "Chạy trong _thiết bị cuối"
-
-#:../capplets/default-applications/gnome-default-applications-properties.glade.h:20
-msgid "Run in a t_erminal"
+msgid "Run in t_erminal"
 msgstr "Chạy trong thiết bị _cuối"
 
-#:../capplets/default-applications/gnome-default-applications-properties.glade.h:21
-msgid ""
-"Select the window manager you want.  You will need to hit apply, wave the "
-"magic wand, and do a magic dance for it to work."
-msgstr "Chọn trình quản lý cửa sổ bạn muốn. Bạn cần nhấn nút «Áp dụng», vung đũa "
-"thần, và ếm bùa để nó hoạt động. :)"
-
-#:../capplets/default-applications/gnome-default-applications-properties.glade.h:22
-msgid "Terminal"
-msgstr "Thiết bị cuối"
-
-#:../capplets/default-applications/gnome-default-applications-properties.glade.h:23
-msgid "Text Editor"
-msgstr "Bộ soạn thảo văn bản"
-
-#:../capplets/default-applications/gnome-default-applications-properties.glade.h:24
-msgid "Understands _Netscape Remote Control"
-msgstr "Hiểu cách điều khiển từ xa _Netscape"
-
-#:../capplets/default-applications/gnome-default-applications-properties.glade.h:25
-msgid "Use this _editor to open text files in the file manager"
-msgstr "Dùng _bộ soạn thảo này để mở tập tin văn bản trong bộ quản lý tập tin"
-
-#:../capplets/default-applications/gnome-default-applications-properties.glade.h:26
-msgid "Web Browser"
-msgstr "Trình duyệt Mạng"
-
-#:../capplets/default-applications/gnome-default-applications-properties.glade.h:27
-msgid "Window Manager"
-msgstr "Bộ quản lý cửa sổ"
-
-#:../capplets/default-applications/gnome-default-applications-properties.glade.h:28
-msgid "_Command:"
-msgstr "_Lệnh:"
-
-#:../capplets/default-applications/gnome-default-applications-properties.glade.h:29
-msgid "_Name:"
-msgstr "_Tên:"
-
-#:../capplets/default-applications/gnome-default-applications-properties.glade.h:30
-msgid "_Properties..."
-msgstr "_Thuộc tính..."
-
-#:../capplets/default-applications/gnome-default-applications-properties.glade.h:31
-msgid "_Select:"
-msgstr "_Chọn:"
+#:../capplets/default-applications/gnome-default-applications-properties.glade.h:20
+msgid "System"
+msgstr "Hệ thống"
 
 #:../capplets/display/display-properties.desktop.in.in.h:1
 msgid "Change screen resolution"
@@ -2499,6 +2494,18 @@ msgstr "Trung tâm điều khiển GNOME"
 msgid "The GNOME configuration tool"
 msgstr "Công cụ cấu hình GNOME"
 
+#:../gnome-settings-daemon/actions/acme-fb-level.c:149
+msgid "No '/dev/pmu' device found"
+msgstr "Không tìm thấy thiết bị </dev/pmu>"
+
+#:../gnome-settings-daemon/actions/acme-fb-level.c:156
+msgid "Not a powerbook"
+msgstr "Không phải là một PowerBook"
+
+#:../gnome-settings-daemon/actions/acme-fb-level.c:173
+msgid "Wrong permission for '/dev/pmu' device"
+msgstr "Không có quyền đúng cho thiết bị </dev/pmu>"
+
 #:../gnome-settings-daemon/actions/acme.glade.h:1
 msgid "Volume"
 msgstr "Âm lượng"
@@ -2554,7 +2561,8 @@ msgstr "Bạn có muốn kích hoạt Phím dính không?"
 msgid "Do you want to deactivate Sticky Keys?"
 msgstr "Bạn có muốn bỏ kích hoạt Phím dính không?"
 
-#:../gnome-settings-daemon/gnome-settings-font.c:107
+#:../gnome-settings-daemon/gnome-settings-font.c:74
+#:../gnome-settings-daemon/gnome-settings-font.c:96
 #,c-format
 msgid ""
 "Cannot create the directory \"%s\".\n"
@@ -2787,7 +2795,7 @@ msgstr "Gặp lỗi khi tải ảnh: %s"
 msgid "Sound not set for this event."
 msgstr "Chưa lập âm thanh cho dữ kiện này."
 
-#:../libsounds/sound-view.c:123
+#:../libsounds/sound-view.c:124
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package for a set of default sounds."
@@ -2795,15 +2803,15 @@ msgstr "Không có tập tin âm thanh cho dữ kiện này.\n"
 "Bạn có thể muốn cài đặt gói phần mềm « gnome-audio »\n"
 "chứa các tập hợp âm thanh mặc định."
 
-#:../libsounds/sound-view.c:132
+#:../libsounds/sound-view.c:135
 msgid "The sound file for this event does not exist."
 msgstr "Tập tin âm thanh cho sự kiện này không tồn tại."
 
-#:../libsounds/sound-view.c:160
+#:../libsounds/sound-view.c:164
 msgid "Select Sound File"
 msgstr "_Chọn tập tin âm thanh"
 
-#:../libsounds/sound-view.c:178
+#:../libsounds/sound-view.c:182
 #,c-format
 msgid "The file %s is not a valid wav file"
 msgstr "Tập tin « %s » không phải là tập tin «.wav» hợp lệ."
