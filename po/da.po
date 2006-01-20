@@ -24,7 +24,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-17 12:17+0100\n"
+"POT-Creation-Date: 2006-01-20 21:13+0100\n"
 "PO-Revision-Date: 2006-01-17 12:30+0100\n"
 "Last-Translator: Lasse Bang Mikkelsen <lbm@fatalerror.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
@@ -39,27 +39,27 @@ msgstr "Billed/etiket-kant"
 
 #: ../capplets/about-me/eel-alert-dialog.c:115
 msgid "Width of border around the label and image in the alert dialog"
-msgstr "Bredde på kant omkring etiketten og billedet i alarm-vinduet"
+msgstr "Bredde på kant omkring etiketten og billedet i påmindelses-vinduet"
 
 #: ../capplets/about-me/eel-alert-dialog.c:124
 msgid "Alert Type"
-msgstr "Alarmtype"
+msgstr "Påmindelsestype"
 
 #: ../capplets/about-me/eel-alert-dialog.c:125
 msgid "The type of alert"
-msgstr "Alarmtypen"
+msgstr "Påmindelsestypen"
 
 #: ../capplets/about-me/eel-alert-dialog.c:133
 msgid "Alert Buttons"
-msgstr "Alarm-knapper"
+msgstr "Påmindelses-knapper"
 
 #: ../capplets/about-me/eel-alert-dialog.c:134
 msgid "The buttons shown in the alert dialog"
-msgstr "De viste knapper i alarm-vinduet"
+msgstr "De viste knapper i påmindelses-vinduet"
 
 #: ../capplets/about-me/eel-alert-dialog.c:198
 msgid "Show more _details"
-msgstr "Vis flere _deltajer"
+msgstr "Vis flere _detaljer"
 
 #: ../capplets/about-me/gnome-about-me.desktop.in.in.h:1
 #: ../capplets/about-me/gnome-about-me.glade.h:14
@@ -175,7 +175,7 @@ msgstr "<b>E-post</b>"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:4
 msgid "<b>Home</b>"
-msgstr "<b>Hjemme</b>"
+msgstr "<b>Hjem</b>"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:5
 msgid "<b>Instant Messaging</b>"
@@ -183,7 +183,7 @@ msgstr "<b>Kvikbesked</b>"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:6
 msgid "<b>Job</b>"
-msgstr "<b>Job</b>"
+msgstr "<b>Arbejde</b>"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:7
 msgid "<b>Please type the passwords.</b>"
@@ -303,7 +303,7 @@ msgstr "Arbej_de:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:37
 msgid "Work _fax:"
-msgstr "Arbejde _fax:"
+msgstr "Arb. _fax:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:38
 msgid "Zip/_Postal code:"
@@ -327,7 +327,7 @@ msgstr "_Hjemmeside:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:43
 msgid "_Home:"
-msgstr "_Hjemme:"
+msgstr "_Hjem:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:44
 msgid "_Jabber:"
@@ -2614,7 +2614,8 @@ msgstr "Vil du aktivere blivende taster?"
 msgid "Do you want to deactivate Sticky Keys?"
 msgstr "Vil du deaktivere blivende taster?"
 
-#: ../gnome-settings-daemon/gnome-settings-font.c:107
+#: ../gnome-settings-daemon/gnome-settings-font.c:74
+#: ../gnome-settings-daemon/gnome-settings-font.c:96
 #, c-format
 msgid ""
 "Cannot create the directory \"%s\".\n"
@@ -2847,6 +2848,36 @@ msgstr "Skærm"
 #: ../libbackground/applier.c:280
 msgid "Screen on which BGApplier is to draw"
 msgstr "Skærm som anvenderen skal tegne på"
+
+#: ../libgswitchit/gswitchit_config.c:1035
+#, c-format
+msgid "There was an error loading an image: %s"
+msgstr "Der opstod en fejl ved indlæsningen af et billede: %s"
+
+#: ../libsounds/sound-view.c:115
+msgid "Sound not set for this event."
+msgstr "Lyd ikke angivet for denne hændelse."
+
+#: ../libsounds/sound-view.c:124
+msgid ""
+"The sound file for this event does not exist.\n"
+"You may want to install the gnome-audio package for a set of default sounds."
+msgstr ""
+"Lydfilen for denne hændelse eksisterer ikke.\n"
+"Du kan installere programpakken gnome-audio for et sæt standardlyde."
+
+#: ../libsounds/sound-view.c:135
+msgid "The sound file for this event does not exist."
+msgstr "Lydfilen for denne hændelse eksisterer ikke."
+
+#: ../libsounds/sound-view.c:164
+msgid "Select Sound File"
+msgstr "Vælg en lydfil"
+
+#: ../libsounds/sound-view.c:182
+#, c-format
+msgid "The file %s is not a valid wav file"
+msgstr "Filen %s er ikke en gyldig wav-fil"
 
 #: ../libwindow-settings/gnome-wm-manager.c:320
 #, c-format
@@ -3472,26 +3503,3 @@ msgstr "Generér miniaturer for temaer"
 
 #~ msgid "_Select:"
 #~ msgstr "_Vælg:"
-
-#~ msgid "There was an error loading an image: %s"
-#~ msgstr "Der opstod en fejl ved indlæsningen af et billede: %s"
-
-#~ msgid "Sound not set for this event."
-#~ msgstr "Lyd ikke angivet for denne hændelse."
-
-#~ msgid ""
-#~ "The sound file for this event does not exist.\n"
-#~ "You may want to install the gnome-audio package for a set of default "
-#~ "sounds."
-#~ msgstr ""
-#~ "Lydfilen for denne hændelse eksisterer ikke.\n"
-#~ "Du kan installere programpakken gnome-audio for et sæt standardlyde."
-
-#~ msgid "The sound file for this event does not exist."
-#~ msgstr "Lydfilen for denne hændelse eksisterer ikke."
-
-#~ msgid "Select Sound File"
-#~ msgstr "Vælg en lydfil"
-
-#~ msgid "The file %s is not a valid wav file"
-#~ msgstr "Filen %s er ikke en gyldig wav-fil"
