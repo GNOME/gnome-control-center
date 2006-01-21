@@ -213,6 +213,9 @@ about_me_focus_out (GtkWidget *widget, GdkEventFocus *event, GnomeAboutMe *me)
 	gint i;
 	
 	wid = glade_get_widget_name (widget);
+
+	if (wid == NULL)
+		return FALSE;
 	
 	for (i = 0; ids[i].wid != NULL; i++)
 		if (g_ascii_strcasecmp (ids[i].wid, wid) == 0)
