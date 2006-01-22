@@ -106,7 +106,7 @@ accessibility_button_clicked (GtkWidget *widget,
 	GError *err = NULL;
 	if (!g_spawn_command_line_async ("gnome-accessibility-keyboard-properties", &err))
 		capplet_error_dialog (GTK_WINDOW (gtk_widget_get_toplevel (widget)), 
-			_("There was an error launching the keyboard capplet : %s"),
+			_("There was an error launching the keyboard tool : %s"),
 			err);
 }
 
