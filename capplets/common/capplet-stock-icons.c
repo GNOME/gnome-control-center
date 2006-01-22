@@ -89,7 +89,7 @@ capplet_register_stock_icons (GtkIconFactory *factory)
 		filename = gnome_program_locate_file (NULL, GNOME_FILE_DOMAIN_APP_PIXMAP, items[i].name, TRUE, NULL);
 
 		if (!filename) {
-			g_warning (_("Unable to load capplet stock icon '%s'\n"), items[i].name);
+			g_warning (_("Unable to load stock icon '%s'\n"), items[i].name);
 			icon_set = gtk_icon_factory_lookup_default (GTK_STOCK_MISSING_IMAGE);
 			gtk_icon_factory_add (factory, items[i].stock_id, icon_set);
 			continue;
