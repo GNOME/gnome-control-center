@@ -645,6 +645,44 @@ accel_edited_callback (GtkCellRendererText   *cell,
       (GtkTreeModelForeachFunc) cb_check_for_uniqueness,
       &tmp_key);
 
+  /* Check for unmodified keys */
+  if (tmp_key.mask == 0 && tmp_key.keycode != 0)
+    {
+      if ((tmp_key.keyval >= GDK_a && tmp_key.keyval <= GDK_z)
+	   || (tmp_key.keyval >= GDK_A && tmp_key.keyval <= GDK_Z)
+	   || (tmp_key.keyval >= GDK_kana_fullstop && tmp_key.keyval <= GDK_kana_switch)
+	   || (tmp_key.keyval >= GDK_Arabic_comma && tmp_key.keyval <= GDK_Arabic_switch)
+	   || (tmp_key.keyval >= GDK_Serbian_dje && tmp_key.keyval <= GDK_Cyrillic_HARDSIGN)
+	   || (tmp_key.keyval >= GDK_Greek_ALPHAaccent && tmp_key.keyval <= GDK_Greek_switch)
+	   || (tmp_key.keyval >= GDK_hebrew_doublelowline && tmp_key.keyval <= GDK_Hebrew_switch)
+	   || (tmp_key.keyval >= GDK_Thai_kokai && tmp_key.keyval <= GDK_Thai_lekkao)
+	   || (tmp_key.keyval >= GDK_Hangul && tmp_key.keyval <= GDK_Hangul_J_YeorinHieuh)) {
+        GtkWidget *dialog;
+	char *name;
+
+	name = egg_virtual_accelerator_name (keyval, keycode, mask);
+
+	dialog =
+	  gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (view))),
+			  	  GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL,
+				  GTK_MESSAGE_WARNING,
+				  GTK_BUTTONS_CANCEL,
+				  _("The shortcut \"%s\" cannot be used because it will become unusable to type using this key.\n"
+				  "Please try with a key such as Control, Alt or Shift at the same time.\n"),
+				  name);
+
+	g_free (name);
+	gtk_dialog_run (GTK_DIALOG (dialog));
+	gtk_widget_destroy (dialog);
+
+	/* set it back to its previous value. */
+	egg_cell_renderer_keys_set_accelerator
+	  (EGG_CELL_RENDERER_KEYS (cell),
+	   key_entry->keyval, key_entry->keycode, key_entry->mask);
+	return;
+      }
+    }
+
   /* flag to see if the new accelerator was in use by something */
   if (!tmp_key.editable)
     {
