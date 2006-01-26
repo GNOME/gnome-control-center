@@ -24,8 +24,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-20 21:13+0100\n"
-"PO-Revision-Date: 2006-01-17 12:30+0100\n"
+"POT-Creation-Date: 2006-01-26 15:05+0100\n"
+"PO-Revision-Date: 2006-01-26 15:05+0100\n"
 "Last-Translator: Lasse Bang Mikkelsen <lbm@fatalerror.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -70,15 +70,15 @@ msgstr "Om mig"
 msgid "Set your personal information"
 msgstr "Angiv dine personlige informationer"
 
-#: ../capplets/about-me/gnome-about-me.c:601
+#: ../capplets/about-me/gnome-about-me.c:604
 msgid "Select Image"
 msgstr "Vælg billede"
 
-#: ../capplets/about-me/gnome-about-me.c:603
+#: ../capplets/about-me/gnome-about-me.c:606
 msgid "No Image"
 msgstr "Intet billede"
 
-#: ../capplets/about-me/gnome-about-me.c:766
+#: ../capplets/about-me/gnome-about-me.c:769
 msgid ""
 "There was an error while trying to get the addressbook information\n"
 "Evolution Data Server can't handle the protocol"
@@ -86,16 +86,16 @@ msgstr ""
 "Der opstod en fejl i forsøget på at hente informationer fra adressebogen\n"
 "Evolution Data Server kan ikke håndtere protokollen"
 
-#: ../capplets/about-me/gnome-about-me.c:787
+#: ../capplets/about-me/gnome-about-me.c:790
 msgid "Unable to open address book"
 msgstr "Kunne ikke åbne adressebogen"
 
-#: ../capplets/about-me/gnome-about-me.c:799
+#: ../capplets/about-me/gnome-about-me.c:802
 msgid "Unknown login ID, the user database might be corrupted"
 msgstr "Ukendt logind-id, bruger-databasen kan være ødelagt"
 
-#: ../capplets/about-me/gnome-about-me.c:830
-#: ../capplets/about-me/gnome-about-me.c:832
+#: ../capplets/about-me/gnome-about-me.c:833
+#: ../capplets/about-me/gnome-about-me.c:835
 #, c-format
 msgid "About %s"
 msgstr "Om %s"
@@ -162,7 +162,6 @@ msgstr " "
 
 #: ../capplets/about-me/gnome-about-me.glade.h:2
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
-#: ../capplets/font/font-properties.glade.h:1
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:1
 #: ../capplets/ui-properties/gnome-ui-properties.glade.h:1
@@ -795,7 +794,7 @@ msgstr ""
 
 #: ../capplets/common/capplet-stock-icons.c:92
 #, c-format
-msgid "Unable to load capplet stock icon '%s'\n"
+msgid "Unable to load stock icon '%s'\n"
 msgstr "Kunne ikke indlæse lagerikon '%s'\n"
 
 #: ../capplets/common/capplet-util.c:239 ../capplets/common/capplet-util.c:241
@@ -1337,34 +1336,38 @@ msgstr "Skrifttype"
 msgid "Select fonts for the desktop"
 msgstr "Vælg skrifttyper for skrivebordet"
 
-#: ../capplets/font/font-properties.glade.h:2
+#: ../capplets/font/font-properties.glade.h:1
 msgid "<b>Font Rendering</b>"
 msgstr "<b>Skriftvisning</b>"
 
 # hinting er svært at oversætte, dette dækker vist
-#: ../capplets/font/font-properties.glade.h:3
+#: ../capplets/font/font-properties.glade.h:2
 msgid "<b>Hinting</b>:"
 msgstr "<b>Justering</b>:"
 
-#: ../capplets/font/font-properties.glade.h:4
+#: ../capplets/font/font-properties.glade.h:3
 msgid "<b>Smoothing</b>:"
 msgstr "<b>Udjævning</b>:"
 
-#: ../capplets/font/font-properties.glade.h:5
+#: ../capplets/font/font-properties.glade.h:4
 msgid "<b>Subpixel order</b>:"
 msgstr "<b>Delpunktsorden</b>:"
 
-#: ../capplets/font/font-properties.glade.h:6
+#: ../capplets/font/font-properties.glade.h:5
 msgid "Best _shapes"
 msgstr "Bedste _former"
 
-#: ../capplets/font/font-properties.glade.h:7
+#: ../capplets/font/font-properties.glade.h:6
 msgid "Best co_ntrast"
 msgstr "Bedste _kontrast"
 
-#: ../capplets/font/font-properties.glade.h:8
+#: ../capplets/font/font-properties.glade.h:7
 msgid "D_etails..."
 msgstr "D_etaljer..."
+
+#: ../capplets/font/font-properties.glade.h:8
+msgid "Des_ktop font:"
+msgstr "Skrifttype for _skrivebordet:"
 
 #: ../capplets/font/font-properties.glade.h:9
 msgid "Font Preferences"
@@ -1383,64 +1386,64 @@ msgid "Gra_yscale"
 msgstr "_Gråtone"
 
 #: ../capplets/font/font-properties.glade.h:13
+msgid "M_onochrome"
+msgstr "M_onokrom"
+
+#: ../capplets/font/font-properties.glade.h:14
 msgid "N_one"
 msgstr "_Ingen"
 
-#: ../capplets/font/font-properties.glade.h:14
+#: ../capplets/font/font-properties.glade.h:15
 msgid "R_esolution:"
 msgstr "_Opløsning:"
 
-#: ../capplets/font/font-properties.glade.h:15
+#: ../capplets/font/font-properties.glade.h:16
 msgid "Sub_pixel (LCDs)"
 msgstr "Del_punkt (LCD-skærme)"
 
-#: ../capplets/font/font-properties.glade.h:16
+#: ../capplets/font/font-properties.glade.h:17
 msgid "Sub_pixel smoothing (LCDs)"
 msgstr "Del_punktsudjævning (LCD-skærme)"
 
-#: ../capplets/font/font-properties.glade.h:17
+#: ../capplets/font/font-properties.glade.h:18
 msgid "VB_GR"
 msgstr "VB_GR"
 
-#: ../capplets/font/font-properties.glade.h:18
+#: ../capplets/font/font-properties.glade.h:19
 msgid "_Application font:"
 msgstr "Skrifttype for _programmer:"
 
-#: ../capplets/font/font-properties.glade.h:19
+#: ../capplets/font/font-properties.glade.h:20
 msgid "_BGR"
 msgstr "_BGR"
 
-#: ../capplets/font/font-properties.glade.h:20
-msgid "_Desktop font:"
-msgstr "Skrifttype for _skrivebordet:"
-
 #: ../capplets/font/font-properties.glade.h:21
+msgid "_Document font:"
+msgstr "Skrifttype for _dokumenter:"
+
+#: ../capplets/font/font-properties.glade.h:22
 msgid "_Full"
 msgstr "_Fuld"
 
-#: ../capplets/font/font-properties.glade.h:22
+#: ../capplets/font/font-properties.glade.h:23
 msgid "_Medium"
 msgstr "_Mellem"
 
-#: ../capplets/font/font-properties.glade.h:23
-msgid "_Monochrome"
-msgstr "_Monokrom"
-
 #: ../capplets/font/font-properties.glade.h:24
+msgid "_Monospace font:"
+msgstr "_Monospace-skrifttype:"
+
+#: ../capplets/font/font-properties.glade.h:25
 msgid "_None"
 msgstr "_Ingen"
 
-#: ../capplets/font/font-properties.glade.h:25
+#: ../capplets/font/font-properties.glade.h:26
 msgid "_RGB"
 msgstr "_RGB"
 
-#: ../capplets/font/font-properties.glade.h:26
+#: ../capplets/font/font-properties.glade.h:27
 msgid "_Slight"
 msgstr "_Let"
-
-#: ../capplets/font/font-properties.glade.h:27
-msgid "_Terminal font:"
-msgstr "Skrifttype for _terminaler:"
 
 #: ../capplets/font/font-properties.glade.h:28
 msgid "_VRGB"
@@ -1454,11 +1457,11 @@ msgstr "Skrifttype for _vinduestitler:"
 msgid "dots per inch"
 msgstr "punkter pr. tomme"
 
-#: ../capplets/font/main.c:488
+#: ../capplets/font/main.c:489
 msgid "Font may be too large"
 msgstr "Skrifttype er muligvis for stor"
 
-#: ../capplets/font/main.c:492
+#: ../capplets/font/main.c:493
 #, c-format
 msgid ""
 "The font selected is %d point large, and may make it difficult to "
@@ -1475,7 +1478,7 @@ msgstr[1] ""
 "Den valgte skrifttype er %d punkter stor og kan gøre det svært at benytte "
 "systemet. Det anbefales at du vælger en størrelse der er mindre end %d."
 
-#: ../capplets/font/main.c:505
+#: ../capplets/font/main.c:506
 #, c-format
 msgid ""
 "The font selected is %d point large, and may make it difficult to "
@@ -1542,7 +1545,18 @@ msgstr "Lyd"
 msgid "Window Management"
 msgstr "Vindueshåndtering"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:661
+#: ../capplets/keybindings/gnome-keybinding-properties.c:670
+#, c-format
+msgid ""
+"The shortcut \"%s\" cannot be used because it will become unusable to type "
+"using this key.\n"
+"Please try with a key such as Control, Alt or Shift at the same time.\n"
+msgstr ""
+"Genvejstasten \"%s\" kan ikke bruges da den derved ikke ville kunne bruges "
+"til at skrive med.\n"
+"Prøv venligst med f.eks. Ctrl-, Alt- eller Skift-tasten på samme tid.\n"
+
+#: ../capplets/keybindings/gnome-keybinding-properties.c:699
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1551,21 +1565,21 @@ msgstr ""
 "Genvejstasten \"%s\" bliver allerede benyttet til:\n"
 " \"%s\"\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:693
+#: ../capplets/keybindings/gnome-keybinding-properties.c:731
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Fejl ved anbringelse af ny genvej i konfigurationsdatabasen: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:743
+#: ../capplets/keybindings/gnome-keybinding-properties.c:781
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "Fejl ved fjernelse af genvej i konfigurationsdatabasen: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:850
+#: ../capplets/keybindings/gnome-keybinding-properties.c:888
 msgid "Action"
 msgstr "Handling"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:874
+#: ../capplets/keybindings/gnome-keybinding-properties.c:912
 msgid "Shortcut"
 msgstr "Genvej"
 
@@ -1609,8 +1623,8 @@ msgstr "Modeller"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:109
 #, c-format
-msgid "There was an error launching the keyboard capplet : %s"
-msgstr "Der opstod en fejl ved kørsel af tastaturindstillingsvinduet: %s"
+msgid "There was an error launching the keyboard tool : %s"
+msgstr "Der opstod en fejl ved kørsel af tastaturindstillingsværktøjet: %s"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:202
 msgid "_Accessibility"
@@ -2870,11 +2884,11 @@ msgstr ""
 msgid "The sound file for this event does not exist."
 msgstr "Lydfilen for denne hændelse eksisterer ikke."
 
-#: ../libsounds/sound-view.c:164
+#: ../libsounds/sound-view.c:166
 msgid "Select Sound File"
 msgstr "Vælg en lydfil"
 
-#: ../libsounds/sound-view.c:182
+#: ../libsounds/sound-view.c:186
 #, c-format
 msgid "The file %s is not a valid wav file"
 msgstr "Filen %s er ikke en gyldig wav-fil"
@@ -3428,6 +3442,9 @@ msgstr "Generér miniaturer for installerede temaer"
 #: ../vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Generér miniaturer for temaer"
+
+#~ msgid "_Terminal font:"
+#~ msgstr "Skrifttype for _terminaler:"
 
 #~ msgid "Please specify a name and a command for this editor."
 #~ msgstr "Angiv et navn og en kommando til dette redigeringsprogram"
