@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-20 14:48+0100\n"
-"PO-Revision-Date: 2006-01-21 00:07+0800\n"
+"POT-Creation-Date: 2006-01-26 07:43+0100\n"
+"PO-Revision-Date: 2006-01-26 16:25+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
 "MIME-Version: 1.0\n"
@@ -45,7 +45,7 @@ msgstr "提醒对话框中显示的按钮"
 
 #: ../capplets/about-me/eel-alert-dialog.c:198
 msgid "Show more _details"
-msgstr "主题更多细节(_D)"
+msgstr "显示更多细节(_D)"
 
 #: ../capplets/about-me/gnome-about-me.desktop.in.in.h:1
 #: ../capplets/about-me/gnome-about-me.glade.h:14
@@ -56,15 +56,15 @@ msgstr "关于我"
 msgid "Set your personal information"
 msgstr "设定您的个人信息"
 
-#: ../capplets/about-me/gnome-about-me.c:601
+#: ../capplets/about-me/gnome-about-me.c:604
 msgid "Select Image"
 msgstr "选择图像"
 
-#: ../capplets/about-me/gnome-about-me.c:603
+#: ../capplets/about-me/gnome-about-me.c:606
 msgid "No Image"
 msgstr "无图像"
 
-#: ../capplets/about-me/gnome-about-me.c:766
+#: ../capplets/about-me/gnome-about-me.c:769
 msgid ""
 "There was an error while trying to get the addressbook information\n"
 "Evolution Data Server can't handle the protocol"
@@ -72,16 +72,16 @@ msgstr ""
 "试图获取地址簿信息时出错\n"
 "Evolution 数据服务器无法处理协议"
 
-#: ../capplets/about-me/gnome-about-me.c:787
+#: ../capplets/about-me/gnome-about-me.c:790
 msgid "Unable to open address book"
 msgstr "无法打开地址簿"
 
-#: ../capplets/about-me/gnome-about-me.c:799
+#: ../capplets/about-me/gnome-about-me.c:802
 msgid "Unknown login ID, the user database might be corrupted"
 msgstr "未知的登录 ID，用户数据库可能已经损坏"
 
-#: ../capplets/about-me/gnome-about-me.c:830
-#: ../capplets/about-me/gnome-about-me.c:832
+#: ../capplets/about-me/gnome-about-me.c:833
+#: ../capplets/about-me/gnome-about-me.c:835
 #, c-format
 msgid "About %s"
 msgstr "关于 %s"
@@ -770,8 +770,8 @@ msgstr ""
 
 #: ../capplets/common/capplet-stock-icons.c:92
 #, c-format
-msgid "Unable to load capplet stock icon '%s'\n"
-msgstr "无法装入 capplet 把手图标“%s”\n"
+msgid "Unable to load stock icon '%s'\n"
+msgstr "无法装入图标“%s”\n"
 
 #: ../capplets/common/capplet-util.c:239 ../capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
@@ -967,8 +967,7 @@ msgstr "无法显示帮助"
 #: ../capplets/default-applications/gnome-da-capplet.c:58
 #: ../capplets/default-applications/gnome-da-capplet.c:704
 msgid "Please make sure that the applet is properly installed"
-msgstr ""
-"请确定小程序已经正确安装了。"
+msgstr "请确定小程序已经正确安装了。"
 
 #: ../capplets/default-applications/gnome-da-capplet.c:93
 #: ../capplets/default-applications/gnome-da-capplet.c:126
@@ -1487,7 +1486,15 @@ msgstr "音效"
 msgid "Window Management"
 msgstr "窗口管理器"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:661
+#: ../capplets/keybindings/gnome-keybinding-properties.c:670
+#, c-format
+msgid ""
+"The shortcut \"%s\" cannot be used because it will become unusable to type "
+"using this key.\n"
+"Please try with a key such as Control, Alt or Shift at the same time.\n"
+msgstr "无法使用快捷键“%s”，原因是使用此键将无法输入。\n请同时使用 Ctrl、Alt 或 Shift 再试一次。\n"
+
+#: ../capplets/keybindings/gnome-keybinding-properties.c:699
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1496,21 +1503,21 @@ msgstr ""
 "快捷键“%s”已经用于：\n"
 "“%s”\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:693
+#: ../capplets/keybindings/gnome-keybinding-properties.c:731
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "在配置数据库中设置新加速键时出错：%s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:743
+#: ../capplets/keybindings/gnome-keybinding-properties.c:781
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "在配置数据库中取消设置新加速键时出错：%s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:850
+#: ../capplets/keybindings/gnome-keybinding-properties.c:888
 msgid "Action"
 msgstr "动作"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:874
+#: ../capplets/keybindings/gnome-keybinding-properties.c:912
 msgid "Shortcut"
 msgstr "快捷键"
 
@@ -1552,8 +1559,8 @@ msgstr "型号"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:109
 #, c-format
-msgid "There was an error launching the keyboard capplet : %s"
-msgstr "调用键盘 capplet 出错：%s"
+msgid "There was an error launching the keyboard tool : %s"
+msgstr "调用键盘工具出错：%s"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:202
 msgid "_Accessibility"
@@ -2794,18 +2801,17 @@ msgid ""
 "You may want to install the gnome-audio package for a set of default sounds."
 msgstr ""
 "此事件的声音文件不存在。\n"
-"您需要安装 gnome-audio 软件包"
-"以获得一组默认声音。"
+"您需要安装 gnome-audio 软件包以获得一组默认声音。"
 
 #: ../libsounds/sound-view.c:135
 msgid "The sound file for this event does not exist."
 msgstr "此事件的声音文件不存在。"
 
-#: ../libsounds/sound-view.c:164
+#: ../libsounds/sound-view.c:166
 msgid "Select Sound File"
 msgstr "选择声音文件"
 
-#: ../libsounds/sound-view.c:182
+#: ../libsounds/sound-view.c:186
 #, c-format
 msgid "The file %s is not a valid wav file"
 msgstr "文件 %s 不是有效的 wav 文件"
@@ -3323,4 +3329,3 @@ msgstr "是否将已安装的主题显示为缩略图"
 #: ../vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "是否将主题显示为缩略图"
-
