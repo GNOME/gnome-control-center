@@ -32,6 +32,7 @@ static void cb_show_details (GtkWidget *button,
 #define WINDOW_TITLE_FONT_KEY METACITY_DIR "/titlebar_font"
 #define WINDOW_TITLE_USES_SYSTEM_KEY METACITY_DIR "/titlebar_uses_system_font"
 #define MONOSPACE_FONT_KEY "/desktop/gnome/interface/monospace_font_name"
+#define DOCUMENT_FONT_KEY "/desktop/gnome/interface/document_font_name"
 
 #ifdef HAVE_XFT2
 #define FONT_RENDER_DIR "/desktop/gnome/font_rendering"
@@ -580,6 +581,10 @@ setup_dialog (void)
 	g_signal_connect_swapped (peditor, "value-changed",
 				  G_CALLBACK (application_font_changed), WID ("application_font"));
 	application_font_changed (WID ("application_font"));
+
+	peditor = gconf_peditor_new_font (NULL, DOCUMENT_FONT_KEY,
+					  WID ("document_font"),
+					  NULL);
 
 	peditor = gconf_peditor_new_font (NULL, DESKTOP_FONT_KEY,
 					  WID ("desktop_font"),
