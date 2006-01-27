@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-26 07:43+0100\n"
-"PO-Revision-Date: 2006-01-26 05:52-0300\n"
+"POT-Creation-Date: 2006-01-27 03:23-0200\n"
+"PO-Revision-Date: 2006-01-27 03:30-0300\n"
 "Last-Translator: Evandro Fernandes Giovanini <evandrofg@ig.com.br>\n"
 "Language-Team: Brazilian Portuguese <gnome-l10n-br@listas.cipsga.org.br>\n"
 "MIME-Version: 1.0\n"
@@ -155,7 +155,6 @@ msgstr " "
 
 #: ../capplets/about-me/gnome-about-me.glade.h:2
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
-#: ../capplets/font/font-properties.glade.h:1
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:1
 #: ../capplets/ui-properties/gnome-ui-properties.glade.h:1
@@ -719,48 +718,48 @@ msgstr "E_stilo:"
 msgid "There was an error displaying help: %s"
 msgstr "Houve um erro ao mostrar a ajuda: %s"
 
-#: ../capplets/background/gnome-wp-capplet.c:984
+#: ../capplets/background/gnome-wp-capplet.c:1046
 msgid "Centered"
 msgstr "Centralizado"
 
-#: ../capplets/background/gnome-wp-capplet.c:988
+#: ../capplets/background/gnome-wp-capplet.c:1050
 msgid "Fill Screen"
 msgstr "Toda a tela"
 
-#: ../capplets/background/gnome-wp-capplet.c:992
+#: ../capplets/background/gnome-wp-capplet.c:1054
 msgid "Scaled"
 msgstr "Dimensionado"
 
-#: ../capplets/background/gnome-wp-capplet.c:996
+#: ../capplets/background/gnome-wp-capplet.c:1058
 msgid "Zoom"
 msgstr "Ampliar"
 
-#: ../capplets/background/gnome-wp-capplet.c:1000
+#: ../capplets/background/gnome-wp-capplet.c:1062
 msgid "Tiled"
 msgstr "Lado a lado"
 
-#: ../capplets/background/gnome-wp-capplet.c:1021
+#: ../capplets/background/gnome-wp-capplet.c:1083
 msgid "Solid Color"
 msgstr "Cor sólida"
 
-#: ../capplets/background/gnome-wp-capplet.c:1025
+#: ../capplets/background/gnome-wp-capplet.c:1087
 msgid "Horizontal Gradient"
 msgstr "Gradiente horizontal"
 
-#: ../capplets/background/gnome-wp-capplet.c:1029
+#: ../capplets/background/gnome-wp-capplet.c:1091
 msgid "Vertical Gradient"
 msgstr "Gradiente vertical"
 
 #. Create the file chooser dialog stuff here
-#: ../capplets/background/gnome-wp-capplet.c:1075
+#: ../capplets/background/gnome-wp-capplet.c:1137
 msgid "Add Wallpaper"
 msgstr "Adicionar papel de parede"
 
-#: ../capplets/background/gnome-wp-capplet.c:1092
+#: ../capplets/background/gnome-wp-capplet.c:1154
 msgid "Images"
 msgstr "Imagens"
 
-#: ../capplets/background/gnome-wp-capplet.c:1096
+#: ../capplets/background/gnome-wp-capplet.c:1158
 msgid "All Files"
 msgstr "Todos os Arquivos"
 
@@ -768,8 +767,8 @@ msgstr "Todos os Arquivos"
 msgid "No Wallpaper"
 msgstr "Sem papel de parede"
 
-#: ../capplets/background/gnome-wp-item.c:305
-#: ../capplets/background/gnome-wp-item.c:307
+#: ../capplets/background/gnome-wp-item.c:343
+#: ../capplets/background/gnome-wp-item.c:345
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "pixel"
@@ -1333,33 +1332,37 @@ msgstr "Fonte"
 msgid "Select fonts for the desktop"
 msgstr "Selecionar fontes para o desktop"
 
-#: ../capplets/font/font-properties.glade.h:2
+#: ../capplets/font/font-properties.glade.h:1
 msgid "<b>Font Rendering</b>"
 msgstr "<b>Exibição de fontes</b>"
 
-#: ../capplets/font/font-properties.glade.h:3
+#: ../capplets/font/font-properties.glade.h:2
 msgid "<b>Hinting</b>:"
 msgstr "<b>Dicas</b>:"
 
-#: ../capplets/font/font-properties.glade.h:4
+#: ../capplets/font/font-properties.glade.h:3
 msgid "<b>Smoothing</b>:"
 msgstr "<b>Suavização</b>:"
 
-#: ../capplets/font/font-properties.glade.h:5
+#: ../capplets/font/font-properties.glade.h:4
 msgid "<b>Subpixel order</b>:"
 msgstr "<b>Ordem de Subpixel</b>:"
 
-#: ../capplets/font/font-properties.glade.h:6
+#: ../capplets/font/font-properties.glade.h:5
 msgid "Best _shapes"
-msgstr "Melhores _formas"
+msgstr "Mel_hores formas"
 
-#: ../capplets/font/font-properties.glade.h:7
+#: ../capplets/font/font-properties.glade.h:6
 msgid "Best co_ntrast"
 msgstr "Melhor co_ntraste"
 
-#: ../capplets/font/font-properties.glade.h:8
+#: ../capplets/font/font-properties.glade.h:7
 msgid "D_etails..."
 msgstr "D_etalhes..."
+
+#: ../capplets/font/font-properties.glade.h:8
+msgid "Des_ktop font:"
+msgstr "Fonte da Área de _Trabalho:"
 
 #: ../capplets/font/font-properties.glade.h:9
 msgid "Font Preferences"
@@ -1399,43 +1402,43 @@ msgstr "VB_GR"
 
 #: ../capplets/font/font-properties.glade.h:18
 msgid "_Application font:"
-msgstr "Fonte das _Aplicações:"
+msgstr "Fonte de _Aplicações:"
 
 #: ../capplets/font/font-properties.glade.h:19
 msgid "_BGR"
 msgstr "_BGR"
 
 #: ../capplets/font/font-properties.glade.h:20
-msgid "_Desktop font:"
-msgstr "Fonte do _Desktop:"
+msgid "_Document font:"
+msgstr "Fonte de _Documentos:"
 
 #: ../capplets/font/font-properties.glade.h:21
+msgid "_Fixed width font:"
+msgstr "Fonte de _Largura Fixa:"
+
+#: ../capplets/font/font-properties.glade.h:22
 msgid "_Full"
 msgstr "_Completa"
 
-#: ../capplets/font/font-properties.glade.h:22
+#: ../capplets/font/font-properties.glade.h:23
 msgid "_Medium"
 msgstr "_Médio"
 
-#: ../capplets/font/font-properties.glade.h:23
+#: ../capplets/font/font-properties.glade.h:24
 msgid "_Monochrome"
 msgstr "_Monocromático"
 
-#: ../capplets/font/font-properties.glade.h:24
+#: ../capplets/font/font-properties.glade.h:25
 msgid "_None"
 msgstr "_Nenhum"
 
-#: ../capplets/font/font-properties.glade.h:25
+#: ../capplets/font/font-properties.glade.h:26
 msgid "_RGB"
 msgstr "_RGB"
 
-#: ../capplets/font/font-properties.glade.h:26
+#: ../capplets/font/font-properties.glade.h:27
 msgid "_Slight"
 msgstr "_Discreto"
-
-#: ../capplets/font/font-properties.glade.h:27
-msgid "_Terminal font:"
-msgstr "Fonte do _terminal:"
 
 #: ../capplets/font/font-properties.glade.h:28
 msgid "_VRGB"
@@ -1443,17 +1446,17 @@ msgstr "_VRGB"
 
 #: ../capplets/font/font-properties.glade.h:29
 msgid "_Window title font:"
-msgstr "Fonte do título da _janela:"
+msgstr "Fonte do Título de _Janelas:"
 
 #: ../capplets/font/font-properties.glade.h:30
 msgid "dots per inch"
 msgstr "pontos por polegada"
 
-#: ../capplets/font/main.c:488
+#: ../capplets/font/main.c:489
 msgid "Font may be too large"
 msgstr "Fonte pode ser muito grande"
 
-#: ../capplets/font/main.c:492
+#: ../capplets/font/main.c:493
 #, c-format
 msgid ""
 "The font selected is %d point large, and may make it difficult to "
@@ -1472,7 +1475,7 @@ msgstr[1] ""
 "dificultar o uso do computador. É recomendado que você selecione um tamanho "
 "menor que %d."
 
-#: ../capplets/font/main.c:505
+#: ../capplets/font/main.c:506
 #, c-format
 msgid ""
 "The font selected is %d point large, and may make it difficult to "
@@ -1619,7 +1622,7 @@ msgstr "Modelos"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:109
 #, c-format
-msgid "There was an error launching the keyboard tool : %s"
+msgid "There was an error launching the keyboard tool: %s"
 msgstr "Ocorreu um erro ao lançar a configuração do teclado: %s"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:202
@@ -3441,6 +3444,9 @@ msgstr "Se os temas instalados devem ser miniaturizados"
 #: ../vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Se os temas devem ser miniaturizados"
+
+#~ msgid "_Terminal font:"
+#~ msgstr "Fonte do _terminal:"
 
 #~ msgid "Please specify a name and a command for this editor."
 #~ msgstr "Por favor, digite um nome e um comando para este editor."
