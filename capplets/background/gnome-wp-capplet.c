@@ -81,7 +81,9 @@ static void gnome_wp_capplet_scroll_to_item (GnomeWPCapplet * capplet,
   GtkTreePath * path;
 
   g_return_if_fail (capplet != NULL);
-  g_return_if_fail (item != NULL);
+
+  if (item == NULL)
+    return;
 
   path = gtk_tree_row_reference_get_path (item->rowref);
   gtk_tree_view_set_cursor (GTK_TREE_VIEW (capplet->treeview), path,
@@ -698,6 +700,9 @@ static gboolean gnome_wp_load_stuffs (void * data) {
     gnome_wp_add_images (capplet, capplet->uri_list);
     g_slist_free (capplet->uri_list);
   }
+
+  if (capplet->old_item == NULL && item != NULL)
+    capplet->old_item = gnome_wp_item_dup (item);
 
   return FALSE;
 }

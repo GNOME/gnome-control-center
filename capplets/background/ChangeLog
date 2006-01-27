@@ -1,5 +1,15 @@
 2006-01-26  Rodney Dawes  <dobey@novell.com>
 
+	* gnome-wp-capplet.c (gnome_wp_capplet_scroll_to_item): If we are
+	passed in a NULL just return rather than using g_return_if_fail to
+	do it, so that we can avoid the glib CRITICAL warning (#327327)
+	(gnome_wp_load_stuffs): If the settings are mangled some how, and
+	a valid item was not duplicated, duplicated the "No Wallpaper" item
+
+	Fixes #327327
+
+2006-01-26  Rodney Dawes  <dobey@novell.com>
+
 	* gnome-background-properties.glade: Add an Apply button
 
 	* gnome-wp-capplet.[ch]: Replace old_filename with an old_item struct
