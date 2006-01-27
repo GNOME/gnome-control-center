@@ -96,6 +96,10 @@ GnomeWPInfo * gnome_wp_info_new (const gchar * uri,
 GnomeWPInfo * gnome_wp_info_dup (const GnomeWPInfo * info) {
   GnomeWPInfo * new;
 
+  if (info == NULL) {
+    return NULL;
+  }
+
   new = g_new0 (GnomeWPInfo, 1);
 
   new->uri = g_strdup (info->uri);

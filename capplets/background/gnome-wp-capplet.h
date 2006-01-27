@@ -73,11 +73,10 @@ struct _GnomeWPCapplet {
   GtkWidget * image;
 
   /*
-     This is here to compare against when OK is pressed so that we can avoid
-     the 1.4 second timeout for Nautilus to actually give visual feedback,
-     when the filename didn't change
+     The GnomeWPItem of the wallpaper we were
+     already set to on startup
   */
-  gchar * old_filename;
+  GnomeWPItem * old_item;
 };
 
 typedef enum {

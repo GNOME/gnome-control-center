@@ -62,6 +62,7 @@ GnomeWPItem * gnome_wp_item_new (const gchar * filename,
 				 GHashTable * wallpapers,
 				 GnomeThumbnailFactory * thumbnails);
 void gnome_wp_item_free (GnomeWPItem * item);
+GnomeWPItem * gnome_wp_item_dup (GnomeWPItem * item);
 GdkPixbuf * gnome_wp_item_get_thumbnail (GnomeWPItem * item,
 					 GnomeThumbnailFactory * thumbs);
 void gnome_wp_item_update_description (GnomeWPItem * item);

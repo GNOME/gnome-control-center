@@ -284,11 +284,12 @@ static gboolean gnome_wp_props_wp_set (GnomeWPCapplet * capplet) {
 
     item = g_hash_table_lookup (capplet->wphash, wpfile);
 
-    if (g_utf8_collate (capplet->old_filename, wpfile) != 0) {
+    if (g_utf8_collate (capplet->old_item->filename, wpfile) != 0) {
       cs = gconf_change_set_new ();
 
       if (!strcmp (item->filename, "(none)")) {
 	gconf_change_set_set_string (cs, WP_OPTIONS_KEY, "none");
+	gconf_change_set_set_string (cs, WP_FILE_KEY, "");
       } else {
 	gchar * uri;
 
@@ -316,6 +317,45 @@ static gboolean gnome_wp_props_wp_set (GnomeWPCapplet * capplet) {
     }
     g_free (wpfile);
   }
+  return retval;
+}
+
+static gboolean gnome_wp_props_revert (GnomeWPCapplet * capplet) {
+  GnomeWPItem * item;
+  GConfChangeSet * cs;
+  gboolean retval = FALSE;
+
+  item = capplet->old_item;
+
+  cs = gconf_change_set_new ();
+
+  if (!strcmp (item->filename, "(none)")) {
+    gconf_change_set_set_string (cs, WP_OPTIONS_KEY, "none");
+  } else {
+    gchar * uri;
+
+    if (g_utf8_validate (item->filename, -1, NULL))
+      uri = g_strdup (item->filename);
+    else
+      uri = g_filename_to_utf8 (item->filename, -1, NULL, NULL, NULL);
+
+    gconf_change_set_set_string (cs, WP_FILE_KEY, uri);
+    g_free (uri);
+
+    gconf_change_set_set_string (cs, WP_OPTIONS_KEY, item->options);
+  }
+
+  gconf_change_set_set_string (cs, WP_SHADING_KEY, item->shade_type);
+
+  gconf_change_set_set_string (cs, WP_PCOLOR_KEY, item->pri_color);
+  gconf_change_set_set_string (cs, WP_SCOLOR_KEY, item->sec_color);
+
+  gconf_client_commit_change_set (capplet->client, cs, TRUE, NULL);
+
+  gconf_change_set_unref (cs);
+
+  retval = TRUE;
+
   return retval;
 }
 
@@ -366,7 +406,7 @@ static void gnome_wp_remove_wp (gchar * key, GnomeWPItem * item,
 }
 
 void gnome_wp_main_quit (GnomeWPCapplet * capplet) {
-  g_free (capplet->old_filename);
+  gnome_wp_item_free (capplet->old_item);
   g_hash_table_foreach (capplet->wphash, (GHFunc) gnome_wp_remove_wp,
 			capplet);
 
@@ -387,6 +427,9 @@ static void wallpaper_properties_clicked (GtkWidget * dialog,
     wp_properties_help (GTK_WINDOW (dialog),
 			"user-guide.xml", "goscustdesk-7");
     break;
+  case GTK_RESPONSE_APPLY:
+    gnome_wp_props_wp_set (capplet);
+    break;
   case GTK_RESPONSE_OK:
     if (gnome_wp_props_wp_set (capplet)) {
       /*
@@ -396,8 +439,18 @@ static void wallpaper_properties_clicked (GtkWidget * dialog,
       */
       usleep (1400000);
     }
+    gtk_widget_destroy (dialog);
+    gnome_wp_main_quit (capplet);
+    break;
   case GTK_RESPONSE_DELETE_EVENT:
   case GTK_RESPONSE_CANCEL: {
+    if (gnome_wp_props_revert (capplet)) {
+      /*
+	  Reverting the preferences will also have the same slowness as
+	  applying them and quitting, so we need a timeout here as well
+       */
+      usleep (1400000);
+    }
     gtk_widget_destroy (dialog);
     gnome_wp_main_quit (capplet);
     break;
@@ -595,11 +648,11 @@ static gboolean gnome_wp_load_stuffs (void * data) {
   else
     imagepath = g_filename_from_utf8 (uri, -1, NULL, NULL, NULL);
 
-  capplet->old_filename = g_strdup (uri);
   g_free (uri);
 
   item = g_hash_table_lookup (capplet->wphash, imagepath);
   if (item != NULL && strcmp (style, "none") != 0) {
+    capplet->old_item = gnome_wp_item_dup (item);
     if (item->deleted == TRUE) {
       item->deleted = FALSE;
       wp_props_load_wallpaper (item->filename, item, capplet);
@@ -632,6 +685,10 @@ static gboolean gnome_wp_load_stuffs (void * data) {
 
     if (!strcmp (style, "none")) {
       gnome_wp_capplet_scroll_to_item (capplet, item);
+      if (capplet->old_item)
+	gnome_wp_item_free (capplet->old_item);
+
+      capplet->old_item = gnome_wp_item_dup (item);
     }
   }
   g_free (imagepath);

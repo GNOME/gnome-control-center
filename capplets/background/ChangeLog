@@ -1,3 +1,27 @@
+2006-01-26  Rodney Dawes  <dobey@novell.com>
+
+	* gnome-background-properties.glade: Add an Apply button
+
+	* gnome-wp-capplet.[ch]: Replace old_filename with an old_item struct
+	(gnome_wp_props_wp_set): Set the filename key to empty string when
+	setting the background to "No Wallpaper"
+	(gnome_wp_props_revert): New method to revert changes in the dialog
+	when the Cancel button is clicked
+	(gnome_wp_main_quit): Free the old_item structure
+	(wallpaper_properties_clicked): Handle the Apply button
+	Handle closing the dialog for OK separately from Cancel/delete_event
+	Revert the settings when Cancel or wm "x" or ESC are clicked
+	(gnome_wp_load_stuffs): Set the old_item to the currently selected
+	background setting, whether it be an image or "No Wallpaper"
+
+	* gnome-wp-info.c (gnome_wp_info_dup): If info is NULL, just return
+	NULL rather than trying to access members of an empty struct
+
+	* gnome-wp-item.[ch] (gnome_wp_item_dup): New method to create a
+	duplicate and newly allocated GnomeWPItem structure
+
+	Fixes #327335
+	
 2006-01-14  Rodney Dawes  <dobey@novell.com>
 
 	* gnome-background-properties.glade: Set the visibility of the second

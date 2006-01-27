@@ -109,6 +109,44 @@ void gnome_wp_item_free (GnomeWPItem * item) {
   item = NULL;
 }
 
+GnomeWPItem * gnome_wp_item_dup (GnomeWPItem * item) {
+  GnomeWPItem * new_item;
+  GdkColor color1, color2;
+
+  if (item == NULL) {
+    return NULL;
+  }
+
+  new_item = g_new0 (GnomeWPItem, 1);
+
+  new_item->name = g_strdup (item->name);
+  new_item->filename = g_strdup (item->filename);
+  new_item->description = g_strdup (item->description);
+  new_item->imguri = g_strdup (item->imguri);
+  new_item->options = g_strdup (item->options);
+  new_item->shade_type = g_strdup (item->shade_type);
+
+  new_item->pri_color = g_strdup (item->pri_color);
+  new_item->sec_color = g_strdup (item->sec_color);
+
+  gdk_color_parse (item->pri_color, &color1);
+  gdk_color_parse (item->sec_color, &color2);
+
+  item->pcolor = gdk_color_copy (&color1);
+  item->scolor = gdk_color_copy (&color2);
+
+  new_item->fileinfo = gnome_wp_info_dup (item->fileinfo);
+  new_item->uriinfo = gnome_wp_info_dup (item->uriinfo);
+
+  new_item->rowref = gtk_tree_row_reference_copy (item->rowref);
+
+  new_item->deleted = item->deleted;
+  new_item->width = item->width;
+  new_item->height = item->height;
+
+  return new_item;
+}
+
 static void collect_save_options (GdkPixbuf * pixbuf,
 				  gchar *** keys,
 				  gchar *** vals,
