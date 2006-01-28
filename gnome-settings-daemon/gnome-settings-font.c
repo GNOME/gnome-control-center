@@ -72,7 +72,7 @@ load_cursor (GConfClient *client)
 					   GTK_MESSAGE_ERROR,
 					   GTK_BUTTONS_CLOSE,
 					   _("Cannot create the directory \"%s\".\n"\
-					     "This is needed to allow changing cursors."),
+					     "This is needed to allow changing the mouse pointer theme."),
 					   font_dir_name);
 	  gtk_dialog_run (GTK_DIALOG (dialog));
 	  gtk_widget_destroy (dialog);
