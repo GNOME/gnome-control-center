@@ -233,19 +233,16 @@ web_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
 	}
 
 	gconf_change_set_unref (cs);
-
-	gtk_entry_set_text (GTK_ENTRY (capplet->web_browser_command_entry), "");
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (capplet->web_browser_terminal_checkbutton), FALSE);
     }
     else {
 	has_net_remote = FALSE;
 	is_custom_active = TRUE;
-
-	gtk_entry_set_text (GTK_ENTRY (capplet->web_browser_command_entry),
-			    gconf_client_get_string (capplet->gconf, DEFAULT_APPS_KEY_HTTP_EXEC, NULL));
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (capplet->web_browser_terminal_checkbutton),
-				      gconf_client_get_bool (capplet->gconf, DEFAULT_APPS_KEY_HTTP_NEEDS_TERM, NULL));
     }
+
+    gtk_entry_set_text (GTK_ENTRY (capplet->web_browser_command_entry),
+			gconf_client_get_string (capplet->gconf, DEFAULT_APPS_KEY_HTTP_EXEC, NULL));
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (capplet->web_browser_terminal_checkbutton),
+				  gconf_client_get_bool (capplet->gconf, DEFAULT_APPS_KEY_HTTP_NEEDS_TERM, NULL));
 
     gtk_widget_set_sensitive (capplet->default_radiobutton, has_net_remote);
     gtk_widget_set_sensitive (capplet->new_win_radiobutton, has_net_remote);
@@ -290,18 +287,15 @@ mail_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
 	}
 
 	gconf_change_set_unref (cs);
-
-	gtk_entry_set_text (GTK_ENTRY (capplet->mail_reader_command_entry), "");
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (capplet->mail_reader_terminal_checkbutton), FALSE);
     }
     else {
 	is_custom_active = TRUE;
-
-	gtk_entry_set_text (GTK_ENTRY (capplet->mail_reader_command_entry),
-			    gconf_client_get_string (capplet->gconf, DEFAULT_APPS_KEY_MAILER_EXEC, NULL));
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (capplet->mail_reader_terminal_checkbutton),
-				      gconf_client_get_bool (capplet->gconf, DEFAULT_APPS_KEY_MAILER_NEEDS_TERM, NULL));
     }
+
+    gtk_entry_set_text (GTK_ENTRY (capplet->mail_reader_command_entry),
+			gconf_client_get_string (capplet->gconf, DEFAULT_APPS_KEY_MAILER_EXEC, NULL));
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (capplet->mail_reader_terminal_checkbutton),
+				  gconf_client_get_bool (capplet->gconf, DEFAULT_APPS_KEY_MAILER_NEEDS_TERM, NULL));
 
     gtk_widget_set_sensitive (capplet->mail_reader_command_entry, is_custom_active);
     gtk_widget_set_sensitive (capplet->mail_reader_command_label, is_custom_active);
@@ -342,18 +336,15 @@ terminal_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
 	}
 
 	gconf_change_set_unref (cs);
-
-	gtk_entry_set_text (GTK_ENTRY (capplet->terminal_command_entry), "");
-	gtk_entry_set_text (GTK_ENTRY (capplet->terminal_exec_flag_entry), "");
     }
     else {
 	is_custom_active = TRUE;
-
-	gtk_entry_set_text (GTK_ENTRY (capplet->terminal_command_entry),
-			    gconf_client_get_string (capplet->gconf, DEFAULT_APPS_KEY_TERMINAL_EXEC, NULL));
-	gtk_entry_set_text (GTK_ENTRY (capplet->terminal_exec_flag_entry),
-			    gconf_client_get_string (capplet->gconf, DEFAULT_APPS_KEY_TERMINAL_EXEC_ARG, NULL));
     }
+
+    gtk_entry_set_text (GTK_ENTRY (capplet->terminal_command_entry),
+			gconf_client_get_string (capplet->gconf, DEFAULT_APPS_KEY_TERMINAL_EXEC, NULL));
+    gtk_entry_set_text (GTK_ENTRY (capplet->terminal_exec_flag_entry),
+			gconf_client_get_string (capplet->gconf, DEFAULT_APPS_KEY_TERMINAL_EXEC_ARG, NULL));
 
     gtk_widget_set_sensitive (capplet->terminal_command_entry, is_custom_active);
     gtk_widget_set_sensitive (capplet->terminal_command_label, is_custom_active);
@@ -432,10 +423,9 @@ web_browser_update_combo_box (GnomeDACapplet *capplet, const gchar *command)
 	index = g_list_length (capplet->web_browsers) + 1;
 	has_net_remote = FALSE;
 	is_custom_active = TRUE;
-
-	/* TODO: Remove when GConfPropertyEditor will be used */
-	gtk_entry_set_text (GTK_ENTRY (capplet->web_browser_command_entry), command);
     }
+
+    gtk_entry_set_text (GTK_ENTRY (capplet->web_browser_command_entry), command);
 
     gtk_widget_set_sensitive (capplet->default_radiobutton, has_net_remote);
     gtk_widget_set_sensitive (capplet->new_win_radiobutton, has_net_remote);
@@ -465,9 +455,9 @@ mail_reader_update_combo_box (GnomeDACapplet *capplet, const gchar *command)
 	/* index of 'Custom' combo box entry */
 	index = g_list_length (capplet->mail_readers) + 1;
 	is_custom_active = TRUE;
-
-	gtk_entry_set_text (GTK_ENTRY (capplet->mail_reader_command_entry), command);
     }
+
+    gtk_entry_set_text (GTK_ENTRY (capplet->mail_reader_command_entry), command);
 
     gtk_widget_set_sensitive (capplet->mail_reader_command_entry, is_custom_active);
     gtk_widget_set_sensitive (capplet->mail_reader_command_label, is_custom_active);
@@ -494,9 +484,9 @@ terminal_update_combo_box (GnomeDACapplet *capplet, const gchar *command)
 	/* index of 'Custom' combo box entry */
 	index = g_list_length (capplet->terminals) + 1;
 	is_custom_active = TRUE;
-
-	gtk_entry_set_text (GTK_ENTRY (capplet->terminal_command_entry), command);
     }
+
+    gtk_entry_set_text (GTK_ENTRY (capplet->terminal_command_entry), command);
 
     gtk_widget_set_sensitive (capplet->terminal_command_entry, is_custom_active);
     gtk_widget_set_sensitive (capplet->terminal_command_label, is_custom_active);
@@ -540,10 +530,8 @@ web_gconf_changed_cb (GConfClient *client, guint id, GConfEntry *entry, GnomeDAC
     }
     /* TODO: Remove when GConfPropertyEditor will be used */
     else if (strcmp (entry->key, DEFAULT_APPS_KEY_HTTP_NEEDS_TERM) == 0) {
-	if (GTK_WIDGET_SENSITIVE (capplet->web_browser_terminal_checkbutton)) {
-	    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (capplet->web_browser_terminal_checkbutton),
-					  gconf_value_get_bool (value));
-	}
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (capplet->web_browser_terminal_checkbutton),
+				      gconf_value_get_bool (value));
 
 	cs = gconf_change_set_new ();
 
@@ -580,10 +568,8 @@ mail_gconf_changed_cb (GConfClient *client, guint id, GConfEntry *entry, GnomeDA
     }
     /* TODO: Remove when GConfPropertyEditor will be used */
     else if (strcmp (entry->key, DEFAULT_APPS_KEY_MAILER_NEEDS_TERM) == 0) {
-	if (GTK_WIDGET_SENSITIVE (capplet->mail_reader_terminal_checkbutton)) {
-	    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (capplet->mail_reader_terminal_checkbutton),
-					  gconf_value_get_bool (value));
-	}
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (capplet->mail_reader_terminal_checkbutton),
+				      gconf_value_get_bool (value));
     }
 }
 
@@ -604,9 +590,8 @@ term_gconf_changed_cb (GConfClient *client, guint id, GConfEntry *entry, GnomeDA
     }
     /* TODO: Remove when GConfPropertyEditor will be used */
     else if (strcmp (entry->key, DEFAULT_APPS_KEY_TERMINAL_EXEC_ARG) == 0) {
-	if (GTK_WIDGET_SENSITIVE (capplet->terminal_exec_flag_entry)) {
-	    gtk_entry_set_text (GTK_ENTRY (capplet->terminal_exec_flag_entry), gconf_value_get_string (value));
-	}
+	gtk_entry_set_text (GTK_ENTRY (capplet->terminal_exec_flag_entry),
+			    gconf_value_get_string (value));
     }
 }
 
@@ -745,27 +730,22 @@ show_dialog (GnomeDACapplet *capplet)
     web_browser_update_combo_box (capplet, gconf_value_get_string (value));
 
     value = gconf_client_get (capplet->gconf, DEFAULT_APPS_KEY_HTTP_NEEDS_TERM, NULL);
-    if (GTK_WIDGET_SENSITIVE (capplet->web_browser_terminal_checkbutton)) {
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (capplet->web_browser_terminal_checkbutton),
-				      gconf_value_get_bool (value));
-    }
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (capplet->web_browser_terminal_checkbutton),
+				  gconf_value_get_bool (value));
 
     value = gconf_client_get (capplet->gconf, DEFAULT_APPS_KEY_MAILER_EXEC, NULL);
     mail_reader_update_combo_box (capplet, gconf_value_get_string (value));
 
     value = gconf_client_get (capplet->gconf, DEFAULT_APPS_KEY_MAILER_NEEDS_TERM, NULL);
-    if (GTK_WIDGET_SENSITIVE (capplet->mail_reader_terminal_checkbutton)) {
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (capplet->mail_reader_terminal_checkbutton),
-				      gconf_value_get_bool (value));
-    }
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (capplet->mail_reader_terminal_checkbutton),
+				  gconf_value_get_bool (value));
 
     value = gconf_client_get (capplet->gconf, DEFAULT_APPS_KEY_TERMINAL_EXEC, NULL);
     terminal_update_combo_box (capplet, gconf_value_get_string (value));
 
     value = gconf_client_get (capplet->gconf, DEFAULT_APPS_KEY_TERMINAL_EXEC_ARG, NULL);
-    if (GTK_WIDGET_SENSITIVE (capplet->terminal_exec_flag_entry)) {
-	gtk_entry_set_text (GTK_ENTRY (capplet->terminal_exec_flag_entry), gconf_value_get_string (value));
-    }
+    gtk_entry_set_text (GTK_ENTRY (capplet->terminal_exec_flag_entry),
+			gconf_value_get_string (value));
 
     g_signal_connect (capplet->web_combo_box, "changed", G_CALLBACK (web_combo_changed_cb), capplet);
     g_signal_connect (capplet->mail_combo_box, "changed", G_CALLBACK (mail_combo_changed_cb), capplet);
