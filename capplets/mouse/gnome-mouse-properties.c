@@ -556,7 +556,8 @@ cursor_font_changed (GConfClient *client,
 
 	/* we didn't find it; we add it to the end. */
 	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-	cursor_text = g_strdup_printf ("<b>%s</b>\n%s", _("Unknown Cursor"), cursor_font);
+	cursor_text = g_strdup_printf ("<b>%s</b>\n%s",
+			_("Unknown Pointer"), cursor_font);
 	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
 			    COLUMN_TEXT, cursor_text,
 			    COLUMN_FONT_PATH, cursor_font,
@@ -757,27 +758,27 @@ populate_tree_model(GtkTreeModelSort* model, GtkTreeSelection* selection) {
 	static const gchar* builtins[][5] = {
 		{
 			"gnome/cursor-fonts/cursor-normal.pcf",
-		       	N_("Default Cursor"),
-		       	N_("Default Cursor - Current"),
-		       	N_("The default cursor that ships with X"),
+		       	N_("Default Pointer"),
+		       	N_("Default Pointer - Current"),
+		       	N_("The default pointer that ships with X"),
 			"mouse-cursor-normal.png"
 		}, {
 			"gnome/cursor-fonts/cursor-white.pcf",
-		      	N_("White Cursor"),
-		     	N_("White Cursor - Current"),
-		     	N_("The default cursor inverted"),
+		      	N_("White Pointer"),
+		     	N_("White Pointer - Current"),
+		     	N_("The default pointer inverted"),
 			"mouse-cursor-white.png"
 		}, {
 			"gnome/cursor-fonts/cursor-large.pcf",
-		      	N_("Large Cursor"),
-		     	N_("Large Cursor - Current"),
-		     	N_("Large version of normal cursor"),
+		      	N_("Large Pointer"),
+		     	N_("Large Pointer - Current"),
+		     	N_("Large version of normal pointer"),
 			"mouse-cursor-normal-large.png"
 		}, {
 			"gnome/cursor-fonts/cursor-large-white.pcf",
-			N_("Large White Cursor - Current"),
-			N_("Large White Cursor"),
-			N_("Large version of white cursor"),
+			N_("Large White Pointer - Current"),
+			N_("Large White Pointer"),
+			N_("Large version of white pointer"),
 			"mouse-cursor-white-large.png"
 		}
 	};
@@ -966,7 +967,7 @@ create_dialog (void)
 
 	dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/gnome-mouse-properties.glade", "mouse_properties_dialog", NULL);
 
-	text = g_strdup_printf ("<b>%s</b>", _("Cursor Theme"));
+	text = g_strdup_printf ("<b>%s</b>", _("Pointer Theme"));
 	gtk_label_set_markup (GTK_LABEL (WID ("cursor_category_label")), text);
 	g_free (text);
 
