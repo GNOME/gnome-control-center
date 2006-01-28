@@ -1,7 +1,7 @@
 /* vim: set sw=8: -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /* gnome-settings-keyboard.c
  *
- * Copyright © 2001 Ximian, Inc.
+ * Copyright Â© 2001 Ximian, Inc.
  *
  * Written by Jody Goldberg <jody@gnome.org>
  *
@@ -50,6 +50,8 @@
 static int xkbEventBase;
 static gboolean  stickykeys_shortcut_val;
 static gboolean  slowkeys_shortcut_val;
+static GtkWidget *stickykeys_alert;
+static GtkWidget *slowkeys_alert;
 
 static gboolean
 xkb_enabled (void)
@@ -362,48 +364,59 @@ ax_slowkeys_response (GtkDialog *dialog, gint response_id, gpointer data)
 		gtk_widget_destroy (GTK_WIDGET (dialog));
 }
 
-static GtkWidget*
-warning_dialog_post (GCallback response, gboolean *enabled,
-		     gchar *title, gchar *user_action_string, gchar *query)
+static void
+warning_dialog_post (GtkWidget **alert, GCallback response, gboolean *enabled,
+		     gchar *title, gchar *user_action_string, gchar *query,
+		     gchar *accept_action, gchar *reject_action)
 {
 	GtkWidget *dialog;
 
+	if (*alert != NULL) {
+		gtk_widget_show (*alert);
+		return;
+	}
+
 	dialog = gtk_message_dialog_new (NULL, 0,
 					 GTK_MESSAGE_WARNING,
-					 GTK_BUTTONS_OK_CANCEL,
+					 GTK_BUTTONS_NONE,
 					 query);
 	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), user_action_string);
 	gtk_dialog_add_button (GTK_DIALOG (dialog), GTK_STOCK_HELP, GTK_RESPONSE_HELP);
+	gtk_dialog_add_button (GTK_DIALOG (dialog),reject_action, GTK_RESPONSE_REJECT);
+	gtk_dialog_add_button (GTK_DIALOG (dialog), accept_action, GTK_RESPONSE_ACCEPT);
 	gtk_window_set_title (GTK_WINDOW (dialog), title);
 	gtk_window_set_icon_name (GTK_WINDOW (dialog), "gnome-dev-keyboard");
 
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
 
-	g_signal_connect (G_OBJECT (dialog), "response",
+	g_signal_connect (dialog, "response",
 			  G_CALLBACK (response), enabled);
-	gtk_widget_show_all (dialog);
+	gtk_widget_show (dialog);
 
-	return dialog;
+	g_object_add_weak_pointer (G_OBJECT (dialog), (gpointer*) alert);
+	*alert = dialog;
 }
 
 static void
 ax_slowkeys_warning_dialog_post (gboolean enabled)
 {
 	slowkeys_shortcut_val = enabled;
-	warning_dialog_post ((GCallback) ax_slowkeys_response,
+	warning_dialog_post (&slowkeys_alert, (GCallback) ax_slowkeys_response,
 			     &slowkeys_shortcut_val,
 			     _("Slow Keys Alert"),
 			     _("You just held down the Shift key for 8 seconds.  This is the shortcut "
 			       "for the Slow Keys feature, which affects the way your keyboard works."),
 			     enabled ? _("Do you want to activate Slow Keys?") : 
-			     _("Do you want to deactivate Slow Keys?"));
+			     _("Do you want to deactivate Slow Keys?"),
+			     enabled ? _("_Activate") : _("_Deactivate"),
+			     enabled ? _("Do_n't activate") : _("Do_n't deactivate"));
 }
 
 static void
 ax_stickykeys_warning_dialog_post (gboolean enabled)
 {
 	stickykeys_shortcut_val = enabled;
-	warning_dialog_post ((GCallback) ax_stickykeys_response,
+	warning_dialog_post (&stickykeys_alert, (GCallback) ax_stickykeys_response,
 			     &stickykeys_shortcut_val,
 			     _("Sticky Keys Alert"),
 			     enabled ? _("You just pressed the Shift key 5 times in a row.  This is the shortcut "
@@ -411,7 +424,9 @@ ax_stickykeys_warning_dialog_post (gboolean enabled)
 			     _("You just pressed two keys at once, or pressed the Shift key 5 times in a row.  "
 			       "This turns off the Sticky Keys feature, which affects the way your keyboard works."),
 			     enabled ? _("Do you want to activate Sticky Keys?") : 
-			     _("Do you want to deactivate Sticky Keys?"));
+			     _("Do you want to deactivate Sticky Keys?"),
+			     enabled ? _("_Activate") : _("_Deactivate"),
+			     enabled ? _("Do_n't activate") : _("Do_n't deactivate"));
 }
 
 static void

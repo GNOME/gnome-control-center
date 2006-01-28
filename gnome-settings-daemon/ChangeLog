@@ -1,3 +1,13 @@
+2006-01-28  chpe <chpe@gnome.org>
+
+	Fixes #325686
+
+	* gnome-settings-accessibility-keyboard.c (warning_dialog_post):
+	added "accept_action" and "reject_action" arguments to show that in
+	the buttons, rather than OK/CANCEL.
+	(ax_slowkeys_warning_keys, ax_stickykeys_warning_dialog_post): use
+	verbs in the buttons.
+
 2006-01-28  Scott Bronson <bronson@rinspin.com>
 
 	Fixes #318056
