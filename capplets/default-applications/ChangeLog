@@ -1,3 +1,13 @@
+2006-01-28  Rodrigo Moya <rodrigo@novell.com>
+
+	Fixes part of #327749
+
+	* gnome-default-applications-properties.glade:
+	* gnome-da-capplet.c (web_combo_changed_cb, mail_combo_changed_cb,
+	terminal_combo_changed_cb, web_browser_update_combo_box,
+	mail_reader_update_combo_box, terminal_update_combo_box): don't set
+	entries' sensitivity, just disable input on them.
+
 2006-01-28  Luca Cavalli <loopback@slackit.org>
 
 	* gnome-da-capplet.c: (web_combo_changed_cb),
