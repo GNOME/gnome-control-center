@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-27 03:23-0200\n"
-"PO-Revision-Date: 2006-01-27 03:30-0300\n"
+"POT-Creation-Date: 2006-01-29 06:55+0100\n"
+"PO-Revision-Date: 2006-01-29 06:48-0300\n"
 "Last-Translator: Evandro Fernandes Giovanini <evandrofg@ig.com.br>\n"
 "Language-Team: Brazilian Portuguese <gnome-l10n-br@listas.cipsga.org.br>\n"
 "MIME-Version: 1.0\n"
@@ -665,11 +665,7 @@ msgstr "milisegundos"
 msgid "pixels/second"
 msgstr "pixels/segundo"
 
-#. set the timeout value  label with correct value of timeout
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
-#: ../capplets/mouse/gnome-mouse-properties.c:138
-#: ../capplets/mouse/gnome-mouse-properties.c:879
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
 #: ../capplets/windows/gnome-window-properties.glade.h:10
 msgid "seconds"
 msgstr "segundos"
@@ -713,7 +709,7 @@ msgstr "E_stilo:"
 
 #: ../capplets/background/gnome-wp-capplet.c:74
 #: ../capplets/common/capplet-util.c:340
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:331
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:333
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "Houve um erro ao mostrar a ajuda: %s"
@@ -801,7 +797,7 @@ msgstr "Aplicar as configurações e encerrar"
 
 #: ../capplets/common/capplet-util.c:243
 #: ../capplets/keyboard/gnome-keyboard-properties.c:225
-#: ../capplets/mouse/gnome-mouse-properties.c:1015
+#: ../capplets/mouse/gnome-mouse-properties.c:1016
 #: ../capplets/sound/sound-properties-capplet.c:244
 msgid "Retrieve and store legacy settings"
 msgstr "Recuperar e armazenar as configurações legadas"
@@ -997,7 +993,7 @@ msgid "Could not display help"
 msgstr "Não foi possível mostrar ajuda"
 
 #: ../capplets/default-applications/gnome-da-capplet.c:58
-#: ../capplets/default-applications/gnome-da-capplet.c:704
+#: ../capplets/default-applications/gnome-da-capplet.c:689
 msgid "Please make sure that the applet is properly installed"
 msgstr "Verifique que o mini aplicativo esteja instalado corretamente."
 
@@ -1005,19 +1001,19 @@ msgstr "Verifique que o mini aplicativo esteja instalado corretamente."
 #: ../capplets/default-applications/gnome-da-capplet.c:126
 #: ../capplets/default-applications/gnome-da-capplet.c:185
 #: ../capplets/default-applications/gnome-da-capplet.c:230
-#: ../capplets/default-applications/gnome-da-capplet.c:287
-#: ../capplets/default-applications/gnome-da-capplet.c:339
-#: ../capplets/default-applications/gnome-da-capplet.c:534
-#: ../capplets/default-applications/gnome-da-capplet.c:557
+#: ../capplets/default-applications/gnome-da-capplet.c:284
+#: ../capplets/default-applications/gnome-da-capplet.c:333
+#: ../capplets/default-applications/gnome-da-capplet.c:524
+#: ../capplets/default-applications/gnome-da-capplet.c:545
 #, c-format
 msgid "Error saving configuration: %s"
 msgstr "Erro ao salvar configuração: %s"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:680
+#: ../capplets/default-applications/gnome-da-capplet.c:665
 msgid "Custom"
 msgstr "Personalizado"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:702
+#: ../capplets/default-applications/gnome-da-capplet.c:687
 msgid "Could not load the main interface"
 msgstr "Não foi possível carregar a interface principal"
 
@@ -1042,8 +1038,8 @@ msgid "Encompass"
 msgstr "Encompass"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:6
-msgid "Epiphany"
-msgstr "Epiphany"
+msgid "Epiphany Web Browser"
+msgstr "Navegador Web Epiphany"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:7
 msgid "Evolution Mail Reader"
@@ -1803,60 +1799,67 @@ msgstr "minutos"
 msgid "Set your keyboard preferences"
 msgstr "Definir suas preferências de teclado"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:559
-msgid "Unknown Cursor"
-msgstr "Cursor desconhecido"
+#. set the timeout value  label with correct value of timeout
+#: ../capplets/mouse/gnome-mouse-properties.c:138
+#: ../capplets/mouse/gnome-mouse-properties.c:880
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
+msgid "microseconds"
+msgstr "microsegundos"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:760
-msgid "Default Cursor"
-msgstr "Cursor Padrão"
+#: ../capplets/mouse/gnome-mouse-properties.c:560
+msgid "Unknown Pointer"
+msgstr "Cursor Desconhecido"
 
 #: ../capplets/mouse/gnome-mouse-properties.c:761
-msgid "Default Cursor - Current"
-msgstr "Cursor Padrão - Atual"
+msgid "Default Pointer"
+msgstr "Cursor Padrão"
 
 #: ../capplets/mouse/gnome-mouse-properties.c:762
-msgid "The default cursor that ships with X"
+msgid "Default Pointer - Current"
+msgstr "Cursor Padrão - Atual"
+
+#: ../capplets/mouse/gnome-mouse-properties.c:763
+msgid "The default pointer that ships with X"
 msgstr "O cursor padrão fornecido com X"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:766
-msgid "White Cursor"
+#: ../capplets/mouse/gnome-mouse-properties.c:767
+msgid "White Pointer"
 msgstr "Cursor Branco"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:767
-msgid "White Cursor - Current"
+#: ../capplets/mouse/gnome-mouse-properties.c:768
+msgid "White Pointer - Current"
 msgstr "Cursor Branco - Atual"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:768
-msgid "The default cursor inverted"
+#: ../capplets/mouse/gnome-mouse-properties.c:769
+msgid "The default pointer inverted"
 msgstr "O cursor padrão invertido"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:772
-msgid "Large Cursor"
+#: ../capplets/mouse/gnome-mouse-properties.c:773
+msgid "Large Pointer"
 msgstr "Cursor Grande"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:773
-msgid "Large Cursor - Current"
+#: ../capplets/mouse/gnome-mouse-properties.c:774
+msgid "Large Pointer - Current"
 msgstr "Cursor Grande - Atual"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:774
-msgid "Large version of normal cursor"
+#: ../capplets/mouse/gnome-mouse-properties.c:775
+msgid "Large version of normal pointer"
 msgstr "Versão grande do cursor normal"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:778
-msgid "Large White Cursor - Current"
+#: ../capplets/mouse/gnome-mouse-properties.c:779
+msgid "Large White Pointer - Current"
 msgstr "Cursor Branco Grande - Atual"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:779
-msgid "Large White Cursor"
+#: ../capplets/mouse/gnome-mouse-properties.c:780
+msgid "Large White Pointer"
 msgstr "Cursor Branco Grande"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:780
-msgid "Large version of white cursor"
+#: ../capplets/mouse/gnome-mouse-properties.c:781
+msgid "Large version of white pointer"
 msgstr "Versão grande do cursor branco"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:969
-msgid "Cursor Theme"
+#: ../capplets/mouse/gnome-mouse-properties.c:970
+msgid "Pointer Theme"
 msgstr "Tema do Cursor"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:2
@@ -1908,33 +1911,33 @@ msgid "Buttons"
 msgstr "Botões"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:14
-msgid "Cursor Size:"
-msgstr "Tamanho do Cursor:"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:15
-msgid "Cursors"
-msgstr "Cursores"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:16
 msgid "Highlight the _pointer when you press Ctrl"
 msgstr "Realçar o _ponteiro quando você pressiona Ctrl"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:15
 msgid "Large"
 msgstr "Grande"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:16
 msgid "Medium"
 msgstr "Médio"
 
 #
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
 msgid "Motion"
 msgstr "Movimento"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:20
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
 msgid "Mouse Preferences"
 msgstr "Preferências do Mouse"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
+msgid "Pointer Size:"
+msgstr "Tamanho do Cursor:"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:20
+msgid "Pointers"
+msgstr "Cursores"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:21
 msgid "Small"
@@ -1981,8 +1984,8 @@ msgid "      "
 msgstr "      "
 
 #: ../capplets/network/gnome-network-preferences.glade.h:2
-msgid "<b>D_irect internet connection</b>"
-msgstr "<b>Conexão d_ireta à Internet</b>"
+msgid "<b>Di_rect internet connection</b>"
+msgstr "<b>Conexão di_reta à Internet</b>"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:3
 msgid "<b>Ignore Host List</b>"
@@ -2583,11 +2586,11 @@ msgstr "Volume"
 msgid "Could not initialize Bonobo"
 msgstr "Não foi possível inicializar o Bonobo"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:395
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:406
 msgid "Slow Keys Alert"
 msgstr "Alerta de Teclas Lentas"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:396
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:407
 msgid ""
 "You just held down the Shift key for 8 seconds.  This is the shortcut for "
 "the Slow Keys feature, which affects the way your keyboard works."
@@ -2596,19 +2599,39 @@ msgstr ""
 "Lentas, que\n"
 "afetam o modo de funcionamento do seu teclado."
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:398
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:409
 msgid "Do you want to activate Slow Keys?"
 msgstr "Você deseja ativar Teclas Lentas?"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:399
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:410
 msgid "Do you want to deactivate Slow Keys?"
 msgstr "Você deseja desativar Teclas Lentas?"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:408
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
+msgid "_Activate"
+msgstr "_Ativar"
+
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
+msgid "_Deactivate"
+msgstr "_Desativar"
+
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:429
+msgid "Do_n't activate"
+msgstr "_Não ativar"
+
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:429
+msgid "Do_n't deactivate"
+msgstr "_Não desativar"
+
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:421
 msgid "Sticky Keys Alert"
 msgstr "Alerta de Teclas de Aderência"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:409
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:422
 msgid ""
 "You just pressed the Shift key 5 times in a row.  This is the shortcut for "
 "the Sticky Keys feature, which affects the way your keyboard works."
@@ -2617,7 +2640,7 @@ msgstr ""
 "atalho de teclado para a função de Teclas de Aderência, que afeta a forma "
 "como seu teclado funciona."
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:424
 msgid ""
 "You just pressed two keys at once, or pressed the Shift key 5 times in a "
 "row.  This turns off the Sticky Keys feature, which affects the way your "
@@ -2627,15 +2650,23 @@ msgstr ""
 "consecutivas. Isso desliga a função de Teclas de Aderência, que afeta a "
 "forma como seu teclado funciona."
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
 msgid "Do you want to activate Sticky Keys?"
 msgstr "Você deseja ativar as Teclas de Aderência?"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:414
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
 msgid "Do you want to deactivate Sticky Keys?"
 msgstr "Você deseja desativar as Teclas de Aderência?"
 
 #: ../gnome-settings-daemon/gnome-settings-font.c:74
+#, c-format
+msgid ""
+"Cannot create the directory \"%s\".\n"
+"This is needed to allow changing the mouse pointer theme."
+msgstr ""
+"Não foi possível criar o diretório \"%s\".\n"
+"Ele é necessário para mudar o tema do cursor."
+
 #: ../gnome-settings-daemon/gnome-settings-font.c:96
 #, c-format
 msgid ""
@@ -3445,6 +3476,18 @@ msgstr "Se os temas instalados devem ser miniaturizados"
 msgid "Whether to thumbnail themes"
 msgstr "Se os temas devem ser miniaturizados"
 
+#~ msgid "Epiphany"
+#~ msgstr "Epiphany"
+
+#~ msgid "Large Cursor"
+#~ msgstr "Cursor Grande"
+
+#~ msgid "Cursor Theme"
+#~ msgstr "Tema do Cursor"
+
+#~ msgid "Cursors"
+#~ msgstr "Cursores"
+
 #~ msgid "_Terminal font:"
 #~ msgstr "Fonte do _terminal:"
 
@@ -3474,9 +3517,6 @@ msgstr "Se os temas devem ser miniaturizados"
 
 #~ msgid "Default Text Editor"
 #~ msgstr "Editor de Textos Padrão"
-
-#~ msgid "Default Web Browser"
-#~ msgstr "Navegador Web Padrão"
 
 #~ msgid "Default Window Manager"
 #~ msgstr "Gerenciador de Janelas Padrão"
