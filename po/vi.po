@@ -7,8 +7,8 @@ msgid ""
 ""
 msgstr "Project-Id-Version: gnome-control-center for Gnome HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-27 23:07+0100\n"
-"PO-Revision-Date: 2006-01-28 14:01+1030\n"
+"POT-Creation-Date: 2006-01-28 23:03+0100\n"
+"PO-Revision-Date: 2006-01-29 16:04+1030\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <gnomevi-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -645,11 +645,7 @@ msgstr "mili giây"
 msgid "pixels/second"
 msgstr "điểm ảnh/giây"
 
-#.set the timeout value  label with correct value of timeout
 #:../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
-#:../capplets/mouse/gnome-mouse-properties.c:138
-#:../capplets/mouse/gnome-mouse-properties.c:879
-#:../capplets/mouse/gnome-mouse-properties.glade.h:27
 #:../capplets/windows/gnome-window-properties.glade.h:10
 msgid "seconds"
 msgstr "giây"
@@ -693,7 +689,7 @@ msgstr "_Kiểu dạng:"
 
 #:../capplets/background/gnome-wp-capplet.c:74
 #:../capplets/common/capplet-util.c:340
-#:../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:331
+#:../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:333
 #,c-format
 msgid "There was an error displaying help: %s"
 msgstr "Gặp lỗi khi hiển thị trợ giúp: %s"
@@ -776,7 +772,7 @@ msgstr "Chỉ áp dụng các thiết lập rồi thoát"
 
 #:../capplets/common/capplet-util.c:243
 #:../capplets/keyboard/gnome-keyboard-properties.c:225
-#:../capplets/mouse/gnome-mouse-properties.c:1015
+#:../capplets/mouse/gnome-mouse-properties.c:1016
 #:../capplets/sound/sound-properties-capplet.c:244
 msgid "Retrieve and store legacy settings"
 msgstr "Nhận và lưu thiết lập cũ"
@@ -961,7 +957,7 @@ msgid "Could not display help"
 msgstr "Không thể hiển thị trợ giúp"
 
 #:../capplets/default-applications/gnome-da-capplet.c:58
-#:../capplets/default-applications/gnome-da-capplet.c:704
+#:../capplets/default-applications/gnome-da-capplet.c:689
 msgid "Please make sure that the applet is properly installed"
 msgstr "Hãy kiểm tra xem tiểu dụng này đã được cài đặt đúng"
 
@@ -969,19 +965,19 @@ msgstr "Hãy kiểm tra xem tiểu dụng này đã được cài đặt đúng"
 #:../capplets/default-applications/gnome-da-capplet.c:126
 #:../capplets/default-applications/gnome-da-capplet.c:185
 #:../capplets/default-applications/gnome-da-capplet.c:230
-#:../capplets/default-applications/gnome-da-capplet.c:287
-#:../capplets/default-applications/gnome-da-capplet.c:339
-#:../capplets/default-applications/gnome-da-capplet.c:534
-#:../capplets/default-applications/gnome-da-capplet.c:557
+#:../capplets/default-applications/gnome-da-capplet.c:284
+#:../capplets/default-applications/gnome-da-capplet.c:333
+#:../capplets/default-applications/gnome-da-capplet.c:524
+#:../capplets/default-applications/gnome-da-capplet.c:545
 #,c-format
 msgid "Error saving configuration: %s"
 msgstr "Gặp lỗi khi lưu cấu hình: %s"
 
-#:../capplets/default-applications/gnome-da-capplet.c:680
+#:../capplets/default-applications/gnome-da-capplet.c:665
 msgid "Custom"
 msgstr "Tự chọn"
 
-#:../capplets/default-applications/gnome-da-capplet.c:702
+#:../capplets/default-applications/gnome-da-capplet.c:687
 msgid "Could not load the main interface"
 msgstr "Không thể tài giao diện chính"
 
@@ -1008,10 +1004,9 @@ msgstr "ETerm"
 msgid "Encompass"
 msgstr "Encompass"
 
-# Name: don't translate / Tên: đừng dịch
 #:../capplets/default-applications/gnome-default-applications.xml.in.h:6
-msgid "Epiphany"
-msgstr "Epiphany"
+msgid "Epiphany Web Browser"
+msgstr "Bộ duyệt Mạng Epiphany"
 
 #:../capplets/default-applications/gnome-default-applications.xml.in.h:7
 msgid "Evolution Mail Reader"
@@ -1760,60 +1755,67 @@ msgstr "phút"
 msgid "Set your keyboard preferences"
 msgstr "Lập các tùy thích cho bàn phím của bạn"
 
-#:../capplets/mouse/gnome-mouse-properties.c:559
-msgid "Unknown Cursor"
+#.set the timeout value  label with correct value of timeout
+#:../capplets/mouse/gnome-mouse-properties.c:138
+#:../capplets/mouse/gnome-mouse-properties.c:880
+#:../capplets/mouse/gnome-mouse-properties.glade.h:27
+msgid "microseconds"
+msgstr "micrô giây"
+
+#:../capplets/mouse/gnome-mouse-properties.c:560
+msgid "Unknown Pointer"
 msgstr "Con trỏ lạ"
 
-#:../capplets/mouse/gnome-mouse-properties.c:760
-msgid "Default Cursor"
+#:../capplets/mouse/gnome-mouse-properties.c:761
+msgid "Default Pointer"
 msgstr "Con trỏ mặc định"
 
-#:../capplets/mouse/gnome-mouse-properties.c:761
-msgid "Default Cursor - Current"
+#:../capplets/mouse/gnome-mouse-properties.c:762
+msgid "Default Pointer - Current"
 msgstr "Con trỏ mặc định — hiện thời"
 
-#:../capplets/mouse/gnome-mouse-properties.c:762
-msgid "The default cursor that ships with X"
+#:../capplets/mouse/gnome-mouse-properties.c:763
+msgid "The default pointer that ships with X"
 msgstr "Con trỏ mặc định đi kèm với X"
 
-#:../capplets/mouse/gnome-mouse-properties.c:766
-msgid "White Cursor"
+#:../capplets/mouse/gnome-mouse-properties.c:767
+msgid "White Pointer"
 msgstr "Con trỏ trắng"
 
-#:../capplets/mouse/gnome-mouse-properties.c:767
-msgid "White Cursor - Current"
+#:../capplets/mouse/gnome-mouse-properties.c:768
+msgid "White Pointer - Current"
 msgstr "Con trỏ trắng — hiện thời"
 
-#:../capplets/mouse/gnome-mouse-properties.c:768
-msgid "The default cursor inverted"
+#:../capplets/mouse/gnome-mouse-properties.c:769
+msgid "The default pointer inverted"
 msgstr "Con trỏ mặc định đảo màu"
 
-#:../capplets/mouse/gnome-mouse-properties.c:772
-msgid "Large Cursor"
+#:../capplets/mouse/gnome-mouse-properties.c:773
+msgid "Large Pointer"
 msgstr "Con trỏ lớn"
 
-#:../capplets/mouse/gnome-mouse-properties.c:773
-msgid "Large Cursor - Current"
+#:../capplets/mouse/gnome-mouse-properties.c:774
+msgid "Large Pointer - Current"
 msgstr "Con trỏ lớn — hiện thời"
 
-#:../capplets/mouse/gnome-mouse-properties.c:774
-msgid "Large version of normal cursor"
-msgstr "Phiên bản lớn của con trỏ thường"
-
-#:../capplets/mouse/gnome-mouse-properties.c:778
-msgid "Large White Cursor - Current"
-msgstr "Con trỏ trắng lớn — hiện thời"
+#:../capplets/mouse/gnome-mouse-properties.c:775
+msgid "Large version of normal pointer"
+msgstr "Phiên bản lớn của con trỏ chuẩn"
 
 #:../capplets/mouse/gnome-mouse-properties.c:779
-msgid "Large White Cursor"
-msgstr "Con trỏ trắng lớn"
+msgid "Large White Pointer - Current"
+msgstr "Con trỏ trắng lớn — hiện thời"
 
 #:../capplets/mouse/gnome-mouse-properties.c:780
-msgid "Large version of white cursor"
+msgid "Large White Pointer"
+msgstr "Con trỏ trắng lớn"
+
+#:../capplets/mouse/gnome-mouse-properties.c:781
+msgid "Large version of white pointer"
 msgstr "Phiên bản lớn của con trỏ trắng"
 
-#:../capplets/mouse/gnome-mouse-properties.c:969
-msgid "Cursor Theme"
+#:../capplets/mouse/gnome-mouse-properties.c:970
+msgid "Pointer Theme"
 msgstr "Sắc thái con trỏ"
 
 #:../capplets/mouse/gnome-mouse-properties.glade.h:2
@@ -1865,32 +1867,32 @@ msgid "Buttons"
 msgstr "Nút"
 
 #:../capplets/mouse/gnome-mouse-properties.glade.h:14
-msgid "Cursor Size:"
-msgstr "Cỡ con trỏ"
-
-#:../capplets/mouse/gnome-mouse-properties.glade.h:15
-msgid "Cursors"
-msgstr "Con trỏ"
-
-#:../capplets/mouse/gnome-mouse-properties.glade.h:16
 msgid "Highlight the _pointer when you press Ctrl"
 msgstr "_Tô sáng con trỏ khi nhấn phím Ctrl"
 
-#:../capplets/mouse/gnome-mouse-properties.glade.h:17
+#:../capplets/mouse/gnome-mouse-properties.glade.h:15
 msgid "Large"
 msgstr "_Lớn"
 
-#:../capplets/mouse/gnome-mouse-properties.glade.h:18
+#:../capplets/mouse/gnome-mouse-properties.glade.h:16
 msgid "Medium"
 msgstr "Trung _bình"
 
-#:../capplets/mouse/gnome-mouse-properties.glade.h:19
+#:../capplets/mouse/gnome-mouse-properties.glade.h:17
 msgid "Motion"
 msgstr "Chuyển động"
 
-#:../capplets/mouse/gnome-mouse-properties.glade.h:20
+#:../capplets/mouse/gnome-mouse-properties.glade.h:18
 msgid "Mouse Preferences"
 msgstr "Tùy thích con chuột"
+
+#:../capplets/mouse/gnome-mouse-properties.glade.h:19
+msgid "Pointer Size:"
+msgstr "Cỡ con trỏ :"
+
+#:../capplets/mouse/gnome-mouse-properties.glade.h:20
+msgid "Pointers"
+msgstr "Con trỏ"
 
 #:../capplets/mouse/gnome-mouse-properties.glade.h:21
 msgid "Small"
@@ -2526,37 +2528,57 @@ msgstr "Âm lượng"
 msgid "Could not initialize Bonobo"
 msgstr "Không thể khởi động Bonobo"
 
-#:../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:395
+#:../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:406
 msgid "Slow Keys Alert"
 msgstr "Báo động phím chậm"
 
-#:../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:396
+#:../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:407
 msgid ""
 "You just held down the Shift key for 8 seconds.  This is the shortcut for "
 "the Slow Keys feature, which affects the way your keyboard works."
 msgstr "Bạn vừa ấn giữ phím Shift trong 8 giây. Đây là phím tắt của tính năng Phím "
 "chậm, có thể tác động đến cách hoạt động của bàn phím."
 
-#:../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:398
+#:../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:409
 msgid "Do you want to activate Slow Keys?"
 msgstr "Bạn có muốn kích hoạt Phím chậm không?"
 
-#:../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:399
+#:../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:410
 msgid "Do you want to deactivate Slow Keys?"
 msgstr "Bạn có muốn bỏ kích hoạt Phím chậm không?"
 
-#:../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:408
+#:../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
+#:../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
+msgid "_Activate"
+msgstr "_Kích hoạt"
+
+#:../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
+#:../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
+msgid "_Deactivate"
+msgstr "_Bất hoạt"
+
+#:../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
+#:../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:429
+msgid "Do_n't activate"
+msgstr "_Đừng kích hoạt"
+
+#:../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
+#:../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:429
+msgid "Do_n't deactivate"
+msgstr "_Đừng bất hoạt"
+
+#:../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:421
 msgid "Sticky Keys Alert"
 msgstr "Báo động Phím dính"
 
-#:../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:409
+#:../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:422
 msgid ""
 "You just pressed the Shift key 5 times in a row.  This is the shortcut for "
 "the Sticky Keys feature, which affects the way your keyboard works."
 msgstr "Bạn vừa ấn phím Shift 5 lần trong một dòng. Đây là phím tắt của tính năng "
 "phím dính, có thể tác động đến cách hoạt động của bàn phím."
 
-#:../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
+#:../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:424
 msgid ""
 "You just pressed two keys at once, or pressed the Shift key 5 times in a "
 "row.  This turns off the Sticky Keys feature, which affects the way your "
@@ -2565,15 +2587,22 @@ msgstr "Bạn vừa ấn hai phím cùng lúc, hoặc ấn phím Shift 5 lần t
 "tắt này tắt tính năng phím Dính, mà có thể tác động đến cách hoạt động của "
 "bàn phím."
 
-#:../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
+#:../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
 msgid "Do you want to activate Sticky Keys?"
 msgstr "Bạn có muốn kích hoạt Phím dính không?"
 
-#:../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:414
+#:../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
 msgid "Do you want to deactivate Sticky Keys?"
 msgstr "Bạn có muốn bỏ kích hoạt Phím dính không?"
 
 #:../gnome-settings-daemon/gnome-settings-font.c:74
+#,c-format
+msgid ""
+"Cannot create the directory \"%s\".\n"
+"This is needed to allow changing the mouse pointer theme."
+msgstr "Không thể tạo thư mục « %s ».\n"
+"Việc này cần thiết để thay đổi sắc thái con trỏ chuột."
+
 #:../gnome-settings-daemon/gnome-settings-font.c:96
 #,c-format
 msgid ""
