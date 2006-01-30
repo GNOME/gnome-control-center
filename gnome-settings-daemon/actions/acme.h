@@ -42,6 +42,11 @@ enum {
 	BRIGHT_DOWN_KEY,
 	BRIGHT_UP_KEY,
 #endif
+	PLAY_KEY,
+	PAUSE_KEY,
+	STOP_KEY,
+	PREVIOUS_KEY,
+	NEXT_KEY,
 	HANDLED_KEYS
 };
 
@@ -72,6 +77,11 @@ static struct {
 	{ BRIGHT_DOWN_KEY, GCONF_BINDING_DIR "/brightness_down", NULL },
 	{ BRIGHT_UP_KEY, GCONF_BINDING_DIR "/brightness_up", NULL },
 #endif
+	{ PLAY_KEY, GCONF_BINDING_DIR "/play", NULL },
+	{ PAUSE_KEY, GCONF_BINDING_DIR "/pause", NULL },
+	{ STOP_KEY, GCONF_BINDING_DIR "/stop", NULL },
+	{ PREVIOUS_KEY, GCONF_BINDING_DIR "/previous", NULL },
+	{ NEXT_KEY, GCONF_BINDING_DIR "/next", NULL },
 };
 
 #endif /* __ACME_H__ */
