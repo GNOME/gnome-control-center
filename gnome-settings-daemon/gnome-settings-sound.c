@@ -55,22 +55,27 @@ start_esd (void)
         char *tmpargv[3];
         char argbuf[32];
         time_t starttime;
-        GnomeClient *client = gnome_master_client ();
 
-	esdpid = gnome_execute_async (NULL, 2, (char **)esd_cmdline);
-	g_snprintf (argbuf, sizeof (argbuf), "%d", esdpid);
-	tmpargv[0] = "kill"; tmpargv[1] = argbuf; tmpargv[2] = NULL;
-	gnome_client_set_shutdown_command (client, 2, tmpargv);
-	starttime = time (NULL);
 	gnome_sound_init (NULL);
-
-	while (gnome_sound_connection_get () < 0
-	       && ((time(NULL) - starttime) < 4)) 
+	if (gnome_sound_connection_get () < 0)
 	{
+		GnomeClient *client = gnome_master_client ();
+
+		esdpid = gnome_execute_async (NULL, 2, (char **)esd_cmdline);
+		g_snprintf (argbuf, sizeof (argbuf), "%d", esdpid);
+		tmpargv[0] = "kill"; tmpargv[1] = argbuf; tmpargv[2] = NULL;
+		gnome_client_set_shutdown_command (client, 2, tmpargv);
+		starttime = time (NULL);
+		gnome_sound_init (NULL);
+
+		while (gnome_sound_connection_get () < 0
+		       && ((time(NULL) - starttime) < 4)) 
+		{
 #ifdef HAVE_USLEEP
-		usleep(1000);
+			usleep(1000);
 #endif
-		gnome_sound_init(NULL);
+			gnome_sound_init(NULL);
+		}
 	}
 }
 
