@@ -22,7 +22,7 @@
 #include "config.h"
 #endif
 
-#include <stdio.h>
+#include <string.h>
 #include <gnome.h>
 #include <glib/gi18n.h>
 
@@ -169,14 +169,14 @@ web_radiobutton_toggled_cb (GtkToggleButton *togglebutton, GnomeDACapplet *cappl
 
     item = (GnomeDAWebItem*) g_list_nth_data (capplet->web_browsers, index);
 
-    if (GTK_WIDGET (togglebutton) == capplet->default_radiobutton) {
-	command = item->generic.command;
-    }
-    else if (GTK_WIDGET (togglebutton) == capplet->new_win_radiobutton) {
+    if (GTK_WIDGET (togglebutton) == capplet->new_win_radiobutton) {
 	command = item->win_command;
     }
     else if (GTK_WIDGET (togglebutton) == capplet->new_tab_radiobutton) {
 	command = item->tab_command;
+    }
+    else {
+	command = item->generic.command;
     }
 
     gconf_client_set_string (capplet->gconf, DEFAULT_APPS_KEY_HTTP_EXEC, command, &error);
@@ -373,7 +373,6 @@ generic_item_comp (gconstpointer list_item, gconstpointer command)
 static gint
 web_item_comp (gconstpointer item, gconstpointer command)
 {
-    gint res;
     GnomeDAWebItem *web_list_item;
 
     web_list_item = (GnomeDAWebItem *) item;
@@ -555,8 +554,6 @@ static void
 mail_gconf_changed_cb (GConfClient *client, guint id, GConfEntry *entry, GnomeDACapplet *capplet)
 {
     GConfValue *value;
-    GList *mail_entry;
-    gint index;
 
     g_return_if_fail (gconf_entry_get_key (entry) != NULL);
 
@@ -577,8 +574,6 @@ static void
 term_gconf_changed_cb (GConfClient *client, guint id, GConfEntry *entry, GnomeDACapplet *capplet)
 {
     GConfValue *value;
-    GList *terminal_entry;
-    gint index;
 
     g_return_if_fail (gconf_entry_get_key (entry) != NULL);
 
@@ -671,7 +666,6 @@ show_dialog (GnomeDACapplet *capplet)
 {
     GConfValue *value;
     GtkIconTheme *theme;
-    gint i;
 
     if (g_file_test (GLADEDIR "/gnome-default-applications-properties.glade", G_FILE_TEST_EXISTS) != FALSE) {
 	capplet->xml = glade_xml_new (GLADEDIR "/gnome-default-applications-properties.glade", NULL, PACKAGE);

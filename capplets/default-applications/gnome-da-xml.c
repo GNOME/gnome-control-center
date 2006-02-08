@@ -18,6 +18,7 @@
  *
  */
 
+#include <string.h>
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <libxml/parser.h>
@@ -126,12 +127,10 @@ static void
 gnome_da_xml_load_xml (GnomeDACapplet *capplet, const gchar * filename)
 {
     xmlDoc *xml_doc;
-    xmlNode *root, *section, *element, *value;
+    xmlNode *root, *section, *element;
     GnomeDAWebItem *web_item;
     GnomeDAMailItem *mail_item;
     GnomeDATermItem *term_item;
-
-    gint i;
 
     xml_doc = xmlParseFile (filename);
 
