@@ -1,3 +1,24 @@
+2006-02-09  Rodney Dawes  <dobey@novell.com>
+
+	* gnome-background-properties.glade: Replace the Apply/Cancel/OK
+	buttons with a Finish button, using the stock apply icon
+
+	* gnome-wp-capplet.c (gnome_wp_props_wp_set): Don't need to check if
+	we are the same image as we were before now
+	(gnome_wp_props_revert): Remove this as it is no longer needed
+	(gnome_wp_props_wp_selected): Call the set function here
+	(gnome_wp_main_quit): Remove the freeing of capplet->old_item
+	(wallpaper_properties_clicked): Only handle GTK_RESPONSE_OK as an
+	action to close the dialog now, as we are instant apply again
+	(gnome_wp_scale_type_changed, gnome_wp_shade_type_changed):
+	(gnome_wp_color_changed): Set the appropriate gconf keys here
+	(gnome_wp_load_stuffs): Remove references to capplet->old_item
+
+	* gnome-wp-capplet.h (struct _GnomeWPCapplet): Remove old_item object
+
+	Fixes #327335, #330587 and #329818
+	Partially fixes #330168
+
 2006-01-26  Rodney Dawes  <dobey@novell.com>
 
 	* gnome-wp-capplet.c (gnome_wp_capplet_scroll_to_item): If we are

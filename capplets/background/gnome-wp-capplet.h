@@ -71,12 +71,6 @@ struct _GnomeWPCapplet {
   /* File Chooser Dialog */
   GtkWidget * filesel;
   GtkWidget * image;
-
-  /*
-     The GnomeWPItem of the wallpaper we were
-     already set to on startup
-  */
-  GnomeWPItem * old_item;
 };
 
 typedef enum {
