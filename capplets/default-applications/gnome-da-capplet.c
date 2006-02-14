@@ -397,6 +397,34 @@ web_browser_update_combo_box (GnomeDACapplet *capplet, const gchar *command)
     GList *entry;
     gint index;
     gboolean is_custom_active;
+
+    entry = g_list_find_custom (capplet->web_browsers, command, (GCompareFunc) web_item_comp);
+
+    if (entry) {
+	index = g_list_position (capplet->web_browsers, entry);
+	is_custom_active = FALSE;
+    }
+    else {
+	/* index of 'Custom' combo box entry */
+	index = g_list_length (capplet->web_browsers) + 1;
+	is_custom_active = TRUE;
+    }
+
+    /* TODO: Remove when GConfPropertyEditor will be used */
+    gtk_entry_set_text (GTK_ENTRY (capplet->web_browser_command_entry), command);
+
+    gtk_entry_set_editable (GTK_ENTRY (capplet->web_browser_command_entry), is_custom_active);
+    gtk_widget_set_sensitive (capplet->web_browser_command_label, is_custom_active);
+    gtk_widget_set_sensitive (capplet->web_browser_terminal_checkbutton, is_custom_active);
+
+    if (gtk_combo_box_get_active (GTK_COMBO_BOX (capplet->web_combo_box)) != index)
+	gtk_combo_box_set_active (GTK_COMBO_BOX (capplet->web_combo_box), index);
+}
+
+static void
+web_browser_update_radio_buttons (GnomeDACapplet *capplet, const gchar *command)
+{
+    GList *entry;
     gboolean has_net_remote;
 
     entry = g_list_find_custom (capplet->web_browsers, command, (GCompareFunc) web_item_comp);
@@ -404,37 +432,39 @@ web_browser_update_combo_box (GnomeDACapplet *capplet, const gchar *command)
     if (entry) {
 	GnomeDAWebItem *item = (GnomeDAWebItem *) entry->data;
 
-	index = g_list_position (capplet->web_browsers, entry);
 	has_net_remote = item->netscape_remote;
-	is_custom_active = FALSE;
 
 	if (has_net_remote) {
+	    /* disable "toggle" signal emitting, thus preventing calling this function twice */
+	    g_signal_handlers_block_matched (capplet->default_radiobutton, G_SIGNAL_MATCH_FUNC, 0,
+					     0, NULL, G_CALLBACK (web_radiobutton_toggled_cb), NULL);
+	    g_signal_handlers_block_matched (capplet->new_tab_radiobutton, G_SIGNAL_MATCH_FUNC, 0,
+					     0, NULL, G_CALLBACK (web_radiobutton_toggled_cb), NULL);
+	    g_signal_handlers_block_matched (capplet->new_win_radiobutton,G_SIGNAL_MATCH_FUNC, 0,
+					     0, NULL, G_CALLBACK (web_radiobutton_toggled_cb), NULL);
+
 	    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (capplet->default_radiobutton),
 					  strcmp (item->generic.command, command) == 0);
 	    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (capplet->new_tab_radiobutton),
 					  strcmp (item->tab_command, command) == 0);
 	    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (capplet->new_win_radiobutton),
 					  strcmp (item->win_command, command) == 0);
+
+	    g_signal_handlers_unblock_matched (capplet->default_radiobutton, G_SIGNAL_MATCH_FUNC, 0,
+					       0, NULL, G_CALLBACK (web_radiobutton_toggled_cb), NULL);
+	    g_signal_handlers_unblock_matched (capplet->new_tab_radiobutton, G_SIGNAL_MATCH_FUNC, 0,
+					       0, NULL, G_CALLBACK (web_radiobutton_toggled_cb), NULL);
+	    g_signal_handlers_unblock_matched (capplet->new_win_radiobutton, G_SIGNAL_MATCH_FUNC, 0,
+					       0, NULL, G_CALLBACK (web_radiobutton_toggled_cb), NULL);
 	}
     }
     else {
-	/* index of 'Custom' combo box entry */
-	index = g_list_length (capplet->web_browsers) + 1;
 	has_net_remote = FALSE;
-	is_custom_active = TRUE;
     }
-
-    gtk_entry_set_text (GTK_ENTRY (capplet->web_browser_command_entry), command);
 
     gtk_widget_set_sensitive (capplet->default_radiobutton, has_net_remote);
     gtk_widget_set_sensitive (capplet->new_win_radiobutton, has_net_remote);
     gtk_widget_set_sensitive (capplet->new_tab_radiobutton, has_net_remote);
-    gtk_entry_set_editable (GTK_ENTRY (capplet->web_browser_command_entry), is_custom_active);
-    gtk_widget_set_sensitive (capplet->web_browser_command_label, is_custom_active);
-    gtk_widget_set_sensitive (capplet->web_browser_terminal_checkbutton, is_custom_active);
-
-    if (gtk_combo_box_get_active (GTK_COMBO_BOX (capplet->web_combo_box)) != index)
-	gtk_combo_box_set_active (GTK_COMBO_BOX (capplet->web_combo_box), index);
 }
 
 static void
@@ -510,6 +540,7 @@ web_gconf_changed_cb (GConfClient *client, guint id, GConfEntry *entry, GnomeDAC
 
     if (strcmp (entry->key, DEFAULT_APPS_KEY_HTTP_EXEC) == 0) {
 	web_browser_update_combo_box (capplet, gconf_value_get_string (value));
+	web_browser_update_radio_buttons (capplet, gconf_value_get_string (value));
 
 	cs = gconf_change_set_new ();
 
@@ -722,6 +753,7 @@ show_dialog (GnomeDACapplet *capplet)
     /* update ui to gconf content */
     value = gconf_client_get (capplet->gconf, DEFAULT_APPS_KEY_HTTP_EXEC, NULL);
     web_browser_update_combo_box (capplet, gconf_value_get_string (value));
+    web_browser_update_radio_buttons (capplet, gconf_value_get_string (value));
 
     value = gconf_client_get (capplet->gconf, DEFAULT_APPS_KEY_HTTP_NEEDS_TERM, NULL);
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (capplet->web_browser_terminal_checkbutton),

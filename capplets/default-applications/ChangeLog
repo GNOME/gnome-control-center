@@ -1,3 +1,10 @@
+2006-02-14  Luca Cavalli <loopback@slackit.org>
+
+	* gnome-da-capplet.c: (web_browser_update_combo_box),
+	(web_browser_update_radio_buttons), (web_gconf_changed_cb),
+	(show_dialog): disable "toggle" signal emission during UI update,
+	thus preventing calling twice the same code. Closes bug #328094.
+
 2006-02-08  Luca Cavalli <loopback@slackit.org>
 
 	* gnome-da-capplet.c: (web_radiobutton_toggled_cb),
