@@ -262,9 +262,13 @@ static gboolean
 acme_volume_gstreamer_open (AcmeVolumeGStreamer *vol)
 {
   	AcmeVolumeGStreamer *self = (AcmeVolumeGStreamer *) vol;
+#ifdef HAVE_GST10
+	GList *mixer_list;
+#else
   	const GList *elements;
   	gint num = 0;
-  
+#endif
+
 	if (self->_priv == NULL)
 		return FALSE;
 	
@@ -284,8 +288,6 @@ acme_volume_gstreamer_open (AcmeVolumeGStreamer *vol)
 	 * everything just becomes a no-op.
 	 */
 #ifdef HAVE_GST10
-   GList *mixer_list;
-
    mixer_list = gst_audio_default_registry_mixer_filter (_acme_set_mixer,
                                                           TRUE,
                                                           self);
