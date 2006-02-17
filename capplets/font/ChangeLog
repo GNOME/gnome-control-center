@@ -1,3 +1,10 @@
+2006-02-17  Rodrigo Moya <rodrigo@novell.com>
+
+	Fixes #327021
+
+	* main.c (setup_dialog): don't unref the GladeXML structure, it's
+	needed in the callbacks.
+
 2005-11-14  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* main.c: (setup_font_sample): Fix compiler warnings.

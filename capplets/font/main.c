@@ -630,7 +630,6 @@ setup_dialog (void)
 
 	gtk_widget_show (widget);
 
-	g_object_unref (dialog);
 	g_object_unref (client);
 }
 
