@@ -135,7 +135,7 @@ delay_value_changed_cb (GtkWidget *range, GtkScrollType scroll, gdouble value,
 	else if (value > 1000)
 		value = 1000;
 
-	message = g_strdup_printf ("%d %s", CLAMP ((int) floor ((value+50)/100.0) * 100, 100, 1000), _("microseconds"));
+	message = g_strdup_printf (ngettext ("%d milliseconds","%d milliseconds", CLAMP ((int) floor ((value+50)/100.0) * 100, 100, 1000)), CLAMP ((int) floor ((value+50)/100.0) * 100, 100, 1000));
 	gtk_label_set_label ((GtkLabel*) WID ("delay_label"), message);
 	g_free (message);
 
@@ -877,7 +877,7 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 			  G_CALLBACK (event_box_button_press_event), changeset);
 	
 	/* set the timeout value  label with correct value of timeout */
-	message = g_strdup_printf ("%d %s", (int) gtk_range_get_value (GTK_RANGE (WID ("delay_scale"))), _("microseconds"));
+	message = g_strdup_printf (ngettext ("%d milliseconds", "%d milliseconds", (int) gtk_range_get_value (GTK_RANGE (WID ("delay_scale")))), (int) gtk_range_get_value (GTK_RANGE (WID ("delay_scale"))));
 	gtk_label_set_label ((GtkLabel*) WID ("delay_label"), message);
 	g_free (message); 
 	
