@@ -6,14 +6,15 @@
 # Akira TAGOH <tagoh@gnome.gr.jp>, 2001.
 # Takeshi AIHANA <aihana@gnome.gr.jp>, 2003-2006.
 # KAMAGASAKO Masatoshi <emerald@gnome.gr.jp>, 2003.
+# Satoru SATOH <ss@gnome.gr.jp>, 2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-19 22:31+0900\n"
-"PO-Revision-Date: 2006-01-19 22:29+0900\n"
-"Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
+"POT-Creation-Date: 2006-02-17 14:07+0900\n"
+"PO-Revision-Date: 2006-02-17 14:19+0900\n"
+"Last-Translator: Satoru SATOH <ss@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -57,15 +58,15 @@ msgstr "個人情報"
 msgid "Set your personal information"
 msgstr "自分の情報を管理します"
 
-#: ../capplets/about-me/gnome-about-me.c:601
+#: ../capplets/about-me/gnome-about-me.c:604
 msgid "Select Image"
 msgstr "画像の選択"
 
-#: ../capplets/about-me/gnome-about-me.c:603
+#: ../capplets/about-me/gnome-about-me.c:606
 msgid "No Image"
 msgstr "画像なし"
 
-#: ../capplets/about-me/gnome-about-me.c:766
+#: ../capplets/about-me/gnome-about-me.c:769
 msgid ""
 "There was an error while trying to get the addressbook information\n"
 "Evolution Data Server can't handle the protocol"
@@ -73,16 +74,16 @@ msgstr ""
 "アドレス帳の情報を取得する際にエラーが発生しました。\n"
 "Evolution データ・サーバでは扱えないプロトコルです。"
 
-#: ../capplets/about-me/gnome-about-me.c:787
+#: ../capplets/about-me/gnome-about-me.c:790
 msgid "Unable to open address book"
 msgstr "アドレス帳を開けません"
 
-#: ../capplets/about-me/gnome-about-me.c:799
+#: ../capplets/about-me/gnome-about-me.c:802
 msgid "Unknown login ID, the user database might be corrupted"
 msgstr "ログイン ID が不明です (ユーザ管理のデータベースが壊れているかも)"
 
-#: ../capplets/about-me/gnome-about-me.c:830
-#: ../capplets/about-me/gnome-about-me.c:832
+#: ../capplets/about-me/gnome-about-me.c:833
+#: ../capplets/about-me/gnome-about-me.c:835
 #, c-format
 msgid "About %s"
 msgstr "\"%s\" さんの情報"
@@ -149,7 +150,6 @@ msgstr " "
 
 #: ../capplets/about-me/gnome-about-me.glade.h:2
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
-#: ../capplets/font/font-properties.glade.h:1
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:1
 #: ../capplets/ui-properties/gnome-ui-properties.glade.h:1
@@ -659,11 +659,7 @@ msgstr "ミリ秒"
 msgid "pixels/second"
 msgstr "ピクセル数/秒"
 
-#. set the timeout value  label with correct value of timeout
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
-#: ../capplets/mouse/gnome-mouse-properties.c:138
-#: ../capplets/mouse/gnome-mouse-properties.c:879
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
 #: ../capplets/windows/gnome-window-properties.glade.h:10
 msgid "seconds"
 msgstr "秒"
@@ -697,17 +693,21 @@ msgid "_Add Wallpaper"
 msgstr "壁紙の追加(_A)"
 
 #: ../capplets/background/gnome-background-properties.glade.h:6
+msgid "_Finish"
+msgstr "終了(_F)"
+
+#: ../capplets/background/gnome-background-properties.glade.h:7
 #: ../capplets/theme-switcher/theme-properties.glade.h:19
 msgid "_Remove"
 msgstr "削除(_R)"
 
-#: ../capplets/background/gnome-background-properties.glade.h:7
+#: ../capplets/background/gnome-background-properties.glade.h:8
 msgid "_Style:"
 msgstr "スタイル(_S):"
 
 #: ../capplets/background/gnome-wp-capplet.c:74
 #: ../capplets/common/capplet-util.c:340
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:331
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:333
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "次のヘルプを表示する際にエラーが発生しました: %s"
@@ -761,8 +761,8 @@ msgstr "全てのファイル"
 msgid "No Wallpaper"
 msgstr "壁紙なし"
 
-#: ../capplets/background/gnome-wp-item.c:305
-#: ../capplets/background/gnome-wp-item.c:307
+#: ../capplets/background/gnome-wp-item.c:343
+#: ../capplets/background/gnome-wp-item.c:345
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "ピクセル"
@@ -783,8 +783,8 @@ msgstr ""
 
 #: ../capplets/common/capplet-stock-icons.c:92
 #, c-format
-msgid "Unable to load capplet stock icon '%s'\n"
-msgstr "Capplet のストック・アイコン '%s' を読み込めません\n"
+msgid "Unable to load stock icon '%s'\n"
+msgstr "ストック・アイコン '%s' を読み込めません\n"
 
 #: ../capplets/common/capplet-util.c:239 ../capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
@@ -792,7 +792,7 @@ msgstr "設定を適用して終了する"
 
 #: ../capplets/common/capplet-util.c:243
 #: ../capplets/keyboard/gnome-keyboard-properties.c:225
-#: ../capplets/mouse/gnome-mouse-properties.c:1015
+#: ../capplets/mouse/gnome-mouse-properties.c:1016
 #: ../capplets/sound/sound-properties-capplet.c:244
 msgid "Retrieve and store legacy settings"
 msgstr "旧バージョンの設定を取得して格納する"
@@ -982,7 +982,7 @@ msgid "Could not display help"
 msgstr "ヘルプを表示できませんでした"
 
 #: ../capplets/default-applications/gnome-da-capplet.c:58
-#: ../capplets/default-applications/gnome-da-capplet.c:704
+#: ../capplets/default-applications/gnome-da-capplet.c:714
 msgid "Please make sure that the applet is properly installed"
 msgstr "そのアプレットが適切にインストールされているか確認して下さい"
 
@@ -990,19 +990,19 @@ msgstr "そのアプレットが適切にインストールされているか確
 #: ../capplets/default-applications/gnome-da-capplet.c:126
 #: ../capplets/default-applications/gnome-da-capplet.c:185
 #: ../capplets/default-applications/gnome-da-capplet.c:230
-#: ../capplets/default-applications/gnome-da-capplet.c:287
-#: ../capplets/default-applications/gnome-da-capplet.c:339
-#: ../capplets/default-applications/gnome-da-capplet.c:534
-#: ../capplets/default-applications/gnome-da-capplet.c:557
+#: ../capplets/default-applications/gnome-da-capplet.c:284
+#: ../capplets/default-applications/gnome-da-capplet.c:333
+#: ../capplets/default-applications/gnome-da-capplet.c:554
+#: ../capplets/default-applications/gnome-da-capplet.c:575
 #, c-format
 msgid "Error saving configuration: %s"
 msgstr "設定情報を保存する際にエラーが発生しました: %s"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:680
+#: ../capplets/default-applications/gnome-da-capplet.c:691
 msgid "Custom"
 msgstr "その他"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:702
+#: ../capplets/default-applications/gnome-da-capplet.c:712
 msgid "Could not load the main interface"
 msgstr "メインのインタフェースを読み込めませんでした"
 
@@ -1027,8 +1027,8 @@ msgid "Encompass"
 msgstr "Encompass"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:6
-msgid "Epiphany"
-msgstr "Epiphany"
+msgid "Epiphany Web Browser"
+msgstr "Epiphany ウェブ・ブラウザ"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:7
 msgid "Evolution Mail Reader"
@@ -1314,33 +1314,37 @@ msgstr "フォント"
 msgid "Select fonts for the desktop"
 msgstr "デスクトップで使用するフォントを選択します"
 
-#: ../capplets/font/font-properties.glade.h:2
+#: ../capplets/font/font-properties.glade.h:1
 msgid "<b>Font Rendering</b>"
 msgstr "<b>フォントのレンダリング</b>"
 
-#: ../capplets/font/font-properties.glade.h:3
+#: ../capplets/font/font-properties.glade.h:2
 msgid "<b>Hinting</b>:"
 msgstr "<b>画面ピクセルの設定 (Hinting)</b>:"
 
-#: ../capplets/font/font-properties.glade.h:4
+#: ../capplets/font/font-properties.glade.h:3
 msgid "<b>Smoothing</b>:"
 msgstr "<b>スムージング (Smoothing)</b>:"
 
-#: ../capplets/font/font-properties.glade.h:5
+#: ../capplets/font/font-properties.glade.h:4
 msgid "<b>Subpixel order</b>:"
 msgstr "<b>サブピクセルの順番</b>:"
 
-#: ../capplets/font/font-properties.glade.h:6
+#: ../capplets/font/font-properties.glade.h:5
 msgid "Best _shapes"
 msgstr "最適なシェープ(_S)"
 
-#: ../capplets/font/font-properties.glade.h:7
+#: ../capplets/font/font-properties.glade.h:6
 msgid "Best co_ntrast"
 msgstr "最適なコントラスト(_N)"
 
-#: ../capplets/font/font-properties.glade.h:8
+#: ../capplets/font/font-properties.glade.h:7
 msgid "D_etails..."
 msgstr "詳細(_E)..."
+
+#: ../capplets/font/font-properties.glade.h:8
+msgid "Des_ktop font:"
+msgstr "デスクトップのフォント(_K):"
 
 #: ../capplets/font/font-properties.glade.h:9
 msgid "Font Preferences"
@@ -1387,36 +1391,36 @@ msgid "_BGR"
 msgstr "BGR(_B)"
 
 #: ../capplets/font/font-properties.glade.h:20
-msgid "_Desktop font:"
-msgstr "デスクトップのフォント(_D):"
+msgid "_Document font:"
+msgstr "ドキュメントのフォント(_D):"
 
 #: ../capplets/font/font-properties.glade.h:21
+msgid "_Fixed width font:"
+msgstr "固定幅のフォント(_F):"
+
+#: ../capplets/font/font-properties.glade.h:22
 msgid "_Full"
 msgstr "全て(_F)"
 
-#: ../capplets/font/font-properties.glade.h:22
+#: ../capplets/font/font-properties.glade.h:23
 msgid "_Medium"
 msgstr "中間(_M)"
 
-#: ../capplets/font/font-properties.glade.h:23
+#: ../capplets/font/font-properties.glade.h:24
 msgid "_Monochrome"
 msgstr "モノクロ(_M)"
 
-#: ../capplets/font/font-properties.glade.h:24
+#: ../capplets/font/font-properties.glade.h:25
 msgid "_None"
 msgstr "なし(_N)"
 
-#: ../capplets/font/font-properties.glade.h:25
+#: ../capplets/font/font-properties.glade.h:26
 msgid "_RGB"
 msgstr "RGB(_R)"
 
-#: ../capplets/font/font-properties.glade.h:26
+#: ../capplets/font/font-properties.glade.h:27
 msgid "_Slight"
 msgstr "細身(_S)"
-
-#: ../capplets/font/font-properties.glade.h:27
-msgid "_Terminal font:"
-msgstr "端末のフォント(_T):"
 
 #: ../capplets/font/font-properties.glade.h:28
 msgid "_VRGB"
@@ -1430,11 +1434,11 @@ msgstr "キャプションのフォント(_W):"
 msgid "dots per inch"
 msgstr "解像度 (ドット/インチ)"
 
-#: ../capplets/font/main.c:488
+#: ../capplets/font/main.c:489
 msgid "Font may be too large"
 msgstr "フォントが大きすぎるようです"
 
-#: ../capplets/font/main.c:492
+#: ../capplets/font/main.c:493
 #, c-format
 msgid ""
 "The font selected is %d point large, and may make it difficult to "
@@ -1448,7 +1452,7 @@ msgstr[0] ""
 "選択したフォントの大きさは %d ポイントですが、コンピュータで効果的に使用する"
 "のは困難です。%d より小さいフォントを選択することをお薦めします。"
 
-#: ../capplets/font/main.c:505
+#: ../capplets/font/main.c:506
 #, c-format
 msgid ""
 "The font selected is %d point large, and may make it difficult to "
@@ -1490,52 +1494,60 @@ msgid "The type of accelerator."
 msgstr "アクセラレータの種類です"
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
-#: ../capplets/keybindings/gnome-keybinding-properties.c:191
+#: ../capplets/keybindings/gnome-keybinding-properties.c:197
 #: ../libbackground/applier.c:624 ../typing-break/drwright.c:471
 msgid "Disabled"
 msgstr "無効"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:538
+#: ../capplets/keybindings/gnome-keybinding-properties.c:544
 msgid "<Unknown Action>"
 msgstr "<不明な操作>"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:559
+#: ../capplets/keybindings/gnome-keybinding-properties.c:565
 msgid "Desktop"
 msgstr "デスクトップ"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:560
+#: ../capplets/keybindings/gnome-keybinding-properties.c:566
 #: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
 msgid "Sound"
 msgstr "サウンド"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:564
+#: ../capplets/keybindings/gnome-keybinding-properties.c:570
 msgid "Window Management"
 msgstr "ウィンドウ管理"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:661
+#: ../capplets/keybindings/gnome-keybinding-properties.c:676
+#, c-format
+msgid ""
+"The shortcut \"%s\" cannot be used because it will become unusable to type "
+"using this key.\n"
+"Please try with a key such as Control, Alt or Shift at the same time.\n"
+msgstr "ショートカット \"%s\" はこのキーでは入力できないので使用できません\n"
+"Control や Alt、Shift といったキーを同時に使用するようにして下さい\n"
+
+#: ../capplets/keybindings/gnome-keybinding-properties.c:705
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
 " \"%s\"\n"
-msgstr ""
-"このショートカット \"%s\" は既に登録されています:\n"
+msgstr "このショートカット \"%s\" は既に登録されています:\n"
 " \"%s\"\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:693
+#: ../capplets/keybindings/gnome-keybinding-properties.c:737
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "新しいアクセラレータを設定データベース書き込む際にエラー: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:743
+#: ../capplets/keybindings/gnome-keybinding-properties.c:787
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "設定データベースのアクセラレータの設定を解除する際にエラー: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:850
+#: ../capplets/keybindings/gnome-keybinding-properties.c:894
 msgid "Action"
 msgstr "操作"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:874
+#: ../capplets/keybindings/gnome-keybinding-properties.c:918
 msgid "Shortcut"
 msgstr "ショートカット"
 
@@ -1548,8 +1560,7 @@ msgstr "キーボード・ショートカット"
 msgid ""
 "To edit a shortcut key, click on the corresponding row and type a new "
 "accelerator, or press backspace to clear."
-msgstr ""
-"キーボード・ショートカットを編集する場合は、対応する行をクリックして新しいア"
+msgstr "キーボード・ショートカットを編集する場合は、対応する行をクリックして新しいア"
 "クセラレータ・キーを押下して下さい ([BS] キー: 取り消す)"
 
 #: ../capplets/keybindings/keybinding.desktop.in.in.h:1
@@ -1579,8 +1590,8 @@ msgstr "モデル"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:109
 #, c-format
-msgid "There was an error launching the keyboard capplet : %s"
-msgstr "キーボード Capplet の起動の際にエラーが発生しました: %s"
+msgid "There was an error launching the keyboard tool: %s"
+msgstr "キーボードツール起動の際にエラーが発生しました: %s"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:202
 msgid "_Accessibility"
@@ -1756,60 +1767,67 @@ msgstr "分"
 msgid "Set your keyboard preferences"
 msgstr "キーボードの設定を行います"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:559
-msgid "Unknown Cursor"
+#. set the timeout value  label with correct value of timeout
+#: ../capplets/mouse/gnome-mouse-properties.c:138
+#: ../capplets/mouse/gnome-mouse-properties.c:880
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
+msgid "microseconds"
+msgstr "マイクロ秒"
+
+#: ../capplets/mouse/gnome-mouse-properties.c:560
+msgid "Unknown Pointer"
 msgstr "不明なカーソル"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:760
-msgid "Default Cursor"
+#: ../capplets/mouse/gnome-mouse-properties.c:761
+msgid "Default Pointer"
 msgstr "デフォルトのカーソル"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:761
-msgid "Default Cursor - Current"
+#: ../capplets/mouse/gnome-mouse-properties.c:762
+msgid "Default Pointer - Current"
 msgstr "デフォルトのカーソル - 使用中"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:762
-msgid "The default cursor that ships with X"
-msgstr "X Window で採用しているデフォルトのカーソル"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:766
-msgid "White Cursor"
-msgstr "白色のカーソル"
+#: ../capplets/mouse/gnome-mouse-properties.c:763
+msgid "The default pointer that ships with X"
+msgstr "X で採用しているデフォルトのカーソル"
 
 #: ../capplets/mouse/gnome-mouse-properties.c:767
-msgid "White Cursor - Current"
-msgstr "白色のカーソル - 使用中"
+msgid "White Pointer"
+msgstr "白色のカーソル"
 
 #: ../capplets/mouse/gnome-mouse-properties.c:768
-msgid "The default cursor inverted"
+msgid "White Pointer - Current"
+msgstr "白色のカーソル - 使用中"
+
+#: ../capplets/mouse/gnome-mouse-properties.c:769
+msgid "The default pointer inverted"
 msgstr "標準のカーソルを反転したもの"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:772
-msgid "Large Cursor"
+#: ../capplets/mouse/gnome-mouse-properties.c:773
+msgid "Large Pointer"
 msgstr "大きいカーソル"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:773
-msgid "Large Cursor - Current"
+#: ../capplets/mouse/gnome-mouse-properties.c:774
+msgid "Large Pointer - Current"
 msgstr "大きいカーソル - 使用中"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:774
-msgid "Large version of normal cursor"
+#: ../capplets/mouse/gnome-mouse-properties.c:775
+msgid "Large version of normal pointer"
 msgstr "標準のカーソルを大きくしたもの"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:778
-msgid "Large White Cursor - Current"
+#: ../capplets/mouse/gnome-mouse-properties.c:779
+msgid "Large White Pointer - Current"
 msgstr "白色の大きいカーソル - 使用中"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:779
-msgid "Large White Cursor"
+#: ../capplets/mouse/gnome-mouse-properties.c:780
+msgid "Large White Pointer"
 msgstr "白色の大きいカーソル"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:780
-msgid "Large version of white cursor"
+#: ../capplets/mouse/gnome-mouse-properties.c:781
+msgid "Large version of white pointer"
 msgstr "白色のカーソルを大きくしたもの"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:969
-msgid "Cursor Theme"
+#: ../capplets/mouse/gnome-mouse-properties.c:970
+msgid "Pointer Theme"
 msgstr "カーソルのテーマ"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:2
@@ -1861,32 +1879,32 @@ msgid "Buttons"
 msgstr "ボタン"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:14
-msgid "Cursor Size:"
-msgstr "カーソルのサイズ:"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:15
-msgid "Cursors"
-msgstr "カーソル"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:16
 msgid "Highlight the _pointer when you press Ctrl"
 msgstr "[CTRL] キーが押されたらカーソルを強調表示させる(_P)"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:15
 msgid "Large"
 msgstr "大きい"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:16
 msgid "Medium"
 msgstr "中ぐらい"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
 msgid "Motion"
 msgstr "動き"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:20
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
 msgid "Mouse Preferences"
 msgstr "マウスの設定"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
+msgid "Pointer Size:"
+msgstr "カーソルのサイズ:"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:20
+msgid "Pointers"
+msgstr "カーソル"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:21
 msgid "Small"
@@ -1933,8 +1951,8 @@ msgid "      "
 msgstr "      "
 
 #: ../capplets/network/gnome-network-preferences.glade.h:2
-msgid "<b>D_irect internet connection</b>"
-msgstr "<b>インターネットに直接接続する(_I)</b>"
+msgid "<b>Di_rect internet connection</b>"
+msgstr "<b>インターネットに直接接続する(_R)</b>"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:3
 msgid "<b>Ignore Host List</b>"
@@ -2062,8 +2080,7 @@ msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
 "installed the \"gnome-themes\" package."
-msgstr ""
-"お使いのシステムからテーマが見つかりませんでした。これは \"テーマ設定\" ダイ"
+msgstr "お使いのシステムからテーマが見つかりませんでした。これは \"テーマ設定\" ダイ"
 "アログを正しくインストールしていないか、あるいは \"gnome-themes\" パッケージ"
 "をインストールしていないことが原因かもしれません。"
 
@@ -2079,8 +2096,7 @@ msgstr "作業フォルダの生成に失敗しました"
 msgid ""
 "Can not install theme. \n"
 "The bzip2 utility is not installed."
-msgstr ""
-"テーマをインストールできません。\n"
+msgstr "テーマをインストールできません。\n"
 "ユーティリティ `bzip2` がインストールされていません。"
 
 #: ../capplets/theme-switcher/gnome-theme-installer.c:276
@@ -2093,8 +2109,7 @@ msgstr "インストールに失敗しました"
 msgid ""
 "Can not install themes. \n"
 "The gzip utility is not installed."
-msgstr ""
-"テーマをインストールできません。\n"
+msgstr "テーマをインストールできません。\n"
 "ユーティリティ `gzip` がインストールされていません。"
 
 #: ../capplets/theme-switcher/gnome-theme-installer.c:330
@@ -2102,8 +2117,7 @@ msgstr ""
 msgid ""
 "Icon Theme %s correctly installed.\n"
 "You can select it in the theme details."
-msgstr ""
-"アイコンのテーマ \"%s\" のインストールが完了しました。\n"
+msgstr "アイコンのテーマ \"%s\" のインストールが完了しました。\n"
 "テーマの詳細から選択することが可能になりました。"
 
 #: ../capplets/theme-switcher/gnome-theme-installer.c:333
@@ -2116,8 +2130,7 @@ msgstr "GNOME のテーマ \"%s\" のインストールが完了しました"
 msgid ""
 "Windows Border Theme %s correctly installed.\n"
 "You can select it in the theme details."
-msgstr ""
-"ウィンドウの境界のテーマ \"%s\" のインストールが完了しました。\n"
+msgstr "ウィンドウの境界のテーマ \"%s\" のインストールが完了しました。\n"
 "テーマの詳細から選択することが可能になりました。"
 
 #: ../capplets/theme-switcher/gnome-theme-installer.c:339
@@ -2125,8 +2138,7 @@ msgstr ""
 msgid ""
 "Controls Theme %s correctly installed.\n"
 "You can select it in the theme details."
-msgstr ""
-"コントロールのテーマ \"%s\" のインストールが完了しました。\n"
+msgstr "コントロールのテーマ \"%s\" のインストールが完了しました。\n"
 "テーマの詳細から選択することが可能になりました。"
 
 #: ../capplets/theme-switcher/gnome-theme-installer.c:345
@@ -2150,9 +2162,7 @@ msgstr "インストールするテーマ・ファイルのパス名が不正で
 msgid ""
 "Insufficient permissions to install the theme in:\n"
 "%s"
-msgstr ""
-"テーマをインストールするために必要な権限が適当ではありません:\n"
-"%s"
+msgstr "テーマをインストールするために必要な権限が適当ではありません:\n%s"
 
 #: ../capplets/theme-switcher/gnome-theme-installer.c:510
 msgid "The file format is invalid."
@@ -2163,16 +2173,14 @@ msgstr "ファイルの書式が間違っています。"
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
 "selected as the source location"
-msgstr ""
-"%s はテーマ・ファイルをインストールするパス名です。これはソースを格納するもの"
+msgstr "%s はテーマ・ファイルをインストールするパス名です。これはソースを格納するもの"
 "として選択することはできません。"
 
 #: ../capplets/theme-switcher/gnome-theme-installer.c:591
 msgid ""
 "Cannot install theme.\n"
 "The tar program is not installed on your system."
-msgstr ""
-"テーマをインストールできません。\n"
+msgstr "テーマをインストールできません。\n"
 "ユーティリティ `tar` がインストールされていません。"
 
 #: ../capplets/theme-switcher/gnome-theme-manager.c:686
@@ -2181,8 +2189,7 @@ msgstr "\"新しいテーマ\""
 
 #: ../capplets/theme-switcher/gnome-theme-manager.c:686
 msgid "You can save this theme by pressing the Save Theme button."
-msgstr ""
-"[テーマの保存] をクリックすると\n"
+msgstr "[テーマの保存] をクリックすると\n"
 "このテーマを保存できます。"
 
 #: ../capplets/theme-switcher/gnome-theme-manager.c:1584
@@ -2190,8 +2197,7 @@ msgid ""
 "The default theme schemas could not be found on your system.  This means "
 "that you probably don't have metacity installed, or that your gconf is "
 "configured incorrectly."
-msgstr ""
-"お使いのシステムの中にデフォルト・テーマのスキーマが見つかりませんでした。お"
+msgstr "お使いのシステムの中にデフォルト・テーマのスキーマが見つかりませんでした。お"
 "そらく 'metacity' がインストールされていないか、あるいは GConf が正しく設定さ"
 "れていないと思われます。"
 
@@ -2214,8 +2220,7 @@ msgstr "テーマ"
 
 #: ../capplets/theme-switcher/theme-install.glade.h:2
 msgid "<span size=\"larger\" weight=\"bold\">Install a Theme</span>"
-msgstr ""
-"<span size=\"larger\" weight=\"bold\">テーマをインストールします</span>"
+msgstr "<span size=\"larger\" weight=\"bold\">テーマをインストールします</span>"
 
 #: ../capplets/theme-switcher/theme-install.glade.h:3
 msgid "Theme Installation"
@@ -2231,8 +2236,7 @@ msgstr "格納場所(_L):"
 
 #: ../capplets/theme-switcher/theme-properties.glade.h:1
 msgid "<span size=\"larger\" weight=\"bold\">Save Theme to Disk</span>"
-msgstr ""
-"<span size=\"larger\" weight=\"bold\">テーマをディスクに保存します</span>"
+msgstr "<span size=\"larger\" weight=\"bold\">テーマをディスクに保存します</span>"
 
 #: ../capplets/theme-switcher/theme-properties.glade.h:2
 msgid "Apply _Background"
@@ -2252,9 +2256,7 @@ msgstr "アイコン"
 
 #: ../capplets/theme-switcher/theme-properties.glade.h:6
 msgid "New themes can also be installed by dragging them into the window."
-msgstr ""
-"このウインドウの中に新しいテーマをドラッグしてインストールすることが可能で"
-"す。"
+msgstr "このウインドウの中に新しいテーマをドラッグしてインストールすることが可能です。"
 
 #: ../capplets/theme-switcher/theme-properties.glade.h:7
 msgid "Save Theme"
@@ -2430,8 +2432,7 @@ msgid ""
 "<b>Cannot start the preferences application for your window manager</b>\n"
 "\n"
 "%s"
-msgstr ""
-"<b>お使いのウィンドウ・マネージャの設定ツールを起動できません。</b>\n"
+msgstr "<b>お使いのウィンドウ・マネージャの設定ツールを起動できません。</b>\n"
 "\n"
 "%s"
 
@@ -2536,64 +2537,86 @@ msgstr "音量"
 msgid "Could not initialize Bonobo"
 msgstr "Bonobo を初期化することができませんでした"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:395
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:406
 msgid "Slow Keys Alert"
 msgstr "スロー・キーの警告"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:396
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:407
 msgid ""
 "You just held down the Shift key for 8 seconds.  This is the shortcut for "
 "the Slow Keys feature, which affects the way your keyboard works."
-msgstr ""
-"[SHIFT] キーを 8秒間押下しました。これはスロー・キー機能のショートカットとし"
+msgstr "[SHIFT] キーを 8秒間押下しました。これはスロー・キー機能のショートカットとし"
 "て、キーボード操作に影響を与えるものです。"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:398
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:409
 msgid "Do you want to activate Slow Keys?"
 msgstr "スロー・キーを有効にしますか？"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:399
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:410
 msgid "Do you want to deactivate Slow Keys?"
 msgstr "スロー・キーを無効にしますか？"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:408
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
+msgid "_Activate"
+msgstr "有効にする(_A)"
+
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
+msgid "_Deactivate"
+msgstr "無効にする(_D)"
+
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:429
+msgid "Do_n't activate"
+msgstr "有効にしない(_N)"
+
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:429
+msgid "Do_n't deactivate"
+msgstr "無効にしない(_N)"
+
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:421
 msgid "Sticky Keys Alert"
 msgstr "スティッキー・キーの警告"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:409
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:422
 msgid ""
 "You just pressed the Shift key 5 times in a row.  This is the shortcut for "
 "the Sticky Keys feature, which affects the way your keyboard works."
-msgstr ""
-"[SHIFT] キーを連続して 5回押下しました。これはスティッキー・キー機能のショー"
+msgstr "[SHIFT] キーを連続して 5回押下しました。これはスティッキー・キー機能のショー"
 "トカットとして、キーボード操作に影響を与えるものです。"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:424
 msgid ""
 "You just pressed two keys at once, or pressed the Shift key 5 times in a "
 "row.  This turns off the Sticky Keys feature, which affects the way your "
 "keyboard works."
-msgstr ""
-"キーを一度に 2回押下したか、あるいは [SHIFT] キーを連続して 5回押下しました。"
-"これはスティッキー・キー機能を無効にし、キーボード操作に影響を与えるもので"
-"す。"
+msgstr "キーが一度に二回、または [SHIFT] キーが連続して五回押されました。これによって"
+"スティッキー・キー機能は無効になり、キーボード操作に影響します。"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
 msgid "Do you want to activate Sticky Keys?"
 msgstr "スティッキー・キーを有効にしますか？"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:414
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
 msgid "Do you want to deactivate Sticky Keys?"
 msgstr "スロー・キーを無効にしますか？"
 
 #: ../gnome-settings-daemon/gnome-settings-font.c:74
+#, c-format
+msgid ""
+"Cannot create the directory \"%s\".\n"
+"This is needed to allow changing the mouse pointer theme."
+msgstr "フォルダ \"%s\" を生成できませんでした。\n"
+"カーソルを変更するのに必要です。"
+
 #: ../gnome-settings-daemon/gnome-settings-font.c:96
 #, c-format
 msgid ""
 "Cannot create the directory \"%s\".\n"
 "This is needed to allow changing cursors."
-msgstr ""
-"フォルダ \"%s\" を生成できませんでした。\n"
+msgstr "フォルダ \"%s\" を生成できませんでした。\n"
 "カーソルを変更するのに必要です。"
 
 #: ../gnome-settings-daemon/gnome-settings-keybindings.c:208
@@ -2631,8 +2654,7 @@ msgstr "キー割り当て (%s) は既に定義されています\n"
 msgid ""
 "Error while trying to run (%s)\n"
 "which is linked to the key (%s)"
-msgstr ""
-"(%s) を実行する際にエラーが発生しました。\n"
+msgstr "(%s) を実行する際にエラーが発生しました。\n"
 "これはキー (%s) にリンクしています。"
 
 #: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:103
@@ -2651,8 +2673,7 @@ msgid ""
 "If you report this situation as a bug, please include:\n"
 "- The result of <b>%s</b>\n"
 "- The result of <b>%s</b>"
-msgstr ""
-"XKB の設定を有効にする際にエラーが発生しました。\n"
+msgstr "XKB の設定を有効にする際にエラーが発生しました。\n"
 "この問題は、いろいろな状況に依存して発生します:\n"
 "- ライブラリ libxklavier のバグ\n"
 "- X サーバのバグ (xkbcomp、xmodmap コマンド)\n"
@@ -2672,8 +2693,7 @@ msgid ""
 "There are known problems with complex XKB configurations.\n"
 "Try using a simpler configuration or taking a fresher version of XFree "
 "software."
-msgstr ""
-"現在 XFree 4.3.0 をお使いのようです。\n"
+msgstr "現在 XFree 4.3.0 をお使いのようです。\n"
 "このバージョンが提供する XKB の設定には問題があります。\n"
 "簡単な設定を使用するか、または最新版の XFree ソフトウェアを使用してみて下さ"
 "い。"
@@ -2686,8 +2706,7 @@ msgstr "次回からこの警告を表示しない(_N)"
 msgid ""
 "The X system keyboard settings differ from your current GNOME keyboard "
 "settings.  Which set would you like to use?"
-msgstr ""
-"X-Window システムのキーボード設定が、現在お使いの GNOME キーボード設定と異な"
+msgstr "X Window システムのキーボード設定が、現在お使いの GNOME キーボード設定と異な"
 "ります。どちらの設定を利用しますか？"
 
 #: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:247
@@ -2703,24 +2722,21 @@ msgstr "GNOME の設定を使う"
 msgid ""
 "Couldn't execute command: %s\n"
 "Verify that this command exists."
-msgstr ""
-"コマンドを実行できませんでした: %s\n"
+msgstr "コマンドを実行できませんでした: %s\n"
 "このコマンドがインストールされているか確認して下さい。"
 
 #: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:145
 msgid ""
 "Couldn't put the machine to sleep.\n"
 "Verify that the machine is correctly configured."
-msgstr ""
-"お使いのシステムをスリープできませんでした。\n"
+msgstr "お使いのシステムをスリープできませんでした。\n"
 "お使いのシステムが正しく設定されているか確認して下さい。"
 
 #: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:180
 msgid ""
 "Couldn't load the Glade file.\n"
 "Make sure that this daemon is properly installed."
-msgstr ""
-"Glade インタフェース定義ファイルを読み込めませんでした。\n"
+msgstr "Glade インタフェース定義ファイルを読み込めませんでした。\n"
 "このデーモンが適切にインストールされているか確認して下さい。"
 
 #: ../gnome-settings-daemon/gnome-settings-screensaver.c:110
@@ -2731,8 +2747,7 @@ msgid ""
 "%s\n"
 "\n"
 "Screensaver functionality will not work in this session."
-msgstr ""
-"スクリーンセーバーを起動する際にエラーが発生しました:\n"
+msgstr "スクリーンセーバーを起動する際にエラーが発生しました:\n"
 "\n"
 "%s\n"
 "\n"
@@ -2742,7 +2757,7 @@ msgstr ""
 msgid "_Do not show this message again"
 msgstr "次回からこのメッセージを表示しない(_D)"
 
-#: ../gnome-settings-daemon/gnome-settings-sound.c:150
+#: ../gnome-settings-daemon/gnome-settings-sound.c:155
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "効果音ファイル %s をサンプル %s で読み込めませんでした"
@@ -2755,8 +2770,7 @@ msgstr "ユーザのホームディレクトリを確定できません"
 #: ../gnome-settings-daemon/gnome-settings-xsettings.c:212
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
-msgstr ""
-"GConf キー %s が型 %s にセットされていますが、%s の型と受け取りました\n"
+msgstr "GConf キー %s が型 %s にセットされていますが、%s の型と受け取りました\n"
 
 #: ../gnome-settings-daemon/modmap-dialog.glade.h:1
 msgid "A_vailable files:"
@@ -2794,8 +2808,7 @@ msgstr "型"
 msgid ""
 "Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
 "for preview"
-msgstr ""
-"bg_applier の型: root ウィンドウの BG_APPLIER_ROOT またはプレビューの "
+msgstr "bg_applier の型: root ウィンドウの BG_APPLIER_ROOT またはプレビューの "
 "BG_APPLIER_PREVIEW"
 
 #: ../libbackground/applier.c:263
@@ -2822,7 +2835,7 @@ msgstr "画面"
 msgid "Screen on which BGApplier is to draw"
 msgstr "BGApplier が描画するスクリーンです"
 
-#: ../libgswitchit/gswitchit_config.c:1035
+#: ../libgswitchit/gswitchit_config.c:1036
 #, c-format
 msgid "There was an error loading an image: %s"
 msgstr "画像を読み込む際にエラーが発生しました: %s"
@@ -2835,8 +2848,7 @@ msgstr "このイベントには効果音が設定されていません"
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package for a set of default sounds."
-msgstr ""
-"このイベントに対応した効果音ファイルが存在しません。\n"
+msgstr "このイベントに対応した効果音ファイルが存在しません。\n"
 "デフォルトの効果音を有効にするには gnome-audio パッケージを\n"
 "インストールする必要があるかもしれません。"
 
@@ -2844,11 +2856,11 @@ msgstr ""
 msgid "The sound file for this event does not exist."
 msgstr "このイベントに対する効果音ファイルが存在しません。"
 
-#: ../libsounds/sound-view.c:164
+#: ../libsounds/sound-view.c:166
 msgid "Select Sound File"
 msgstr "効果音のファイルの選択"
 
-#: ../libsounds/sound-view.c:182
+#: ../libsounds/sound-view.c:186
 #, c-format
 msgid "The file %s is not a valid wav file"
 msgstr "ファイル %s は正しい WAV ファイルではありません"
@@ -2856,8 +2868,7 @@ msgstr "ファイル %s は正しい WAV ファイルではありません"
 #: ../libwindow-settings/gnome-wm-manager.c:320
 #, c-format
 msgid "Window manager \"%s\" has not registered a configuration tool\n"
-msgstr ""
-"お使いのウィンドウ・マネージャ \"%s\" には設定ツールが登録されていません。\n"
+msgstr "ご利用のウィンドウマネージャ \"%s\" には設定ツールが登録されていません。\n"
 
 #: ../libwindow-settings/metacity-window-manager.c:378
 msgid "Maximize"
@@ -2949,57 +2960,96 @@ msgid "Log out's shortcut."
 msgstr "ログアウトする機能のショートカットです。"
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
+msgid "Next track key's shortcut."
+msgstr "次のトラックのショートカットです。"
+
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
+msgid "Pause"
+msgstr "一時停止"
+
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
+msgid "Pause key's shortcut."
+msgstr "一時停止のショートカットです。"
+
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
+msgid "Play (or play/pause)"
+msgstr "再生 (または再生/一時停止)"
+
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
+msgid "Play (or play/pause) key's shortcut."
+msgstr "再生 (または再生/一時停止)のショートカットです。"
+
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
+msgid "Previous track key's shortcut."
+msgstr "前のトラックのショートカットです。"
+
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
 msgid "Search"
 msgstr "検索"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
 msgid "Search's shortcut."
 msgstr "検索機能を呼び出すショートカットです。"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
+msgid "Skip to next track"
+msgstr "次のトラックへスキップ"
+
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
+msgid "Skip to previous track"
+msgstr "前のトラックへスキップ"
+
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
 msgid "Sleep"
 msgstr "スリープ"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
 msgid "Sleep's shortcut."
 msgstr "お使いのシステムをスリープにするショートカットです。"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
+msgid "Stop playback key"
+msgstr "再生停止"
+
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
+msgid "Stop playback key's shortcut."
+msgstr "再生を停止するショートカットです。"
+
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
 msgid "Volume down"
 msgstr "音量を下げる"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
 msgid "Volume down's shortcut."
 msgstr "音量を下げる機能のショートカットです。"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
 msgid "Volume mute"
 msgstr "消音"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
 msgid "Volume mute's shortcut"
 msgstr "音量をミュート (消音) する機能のショートカットです。"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:37
 msgid "Volume step"
 msgstr "音量ステップ"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:38
 msgid "Volume step as percentage of volume."
 msgstr "音量ステップ (音量の割合) を設定する機能のショートカットです。"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:39
 msgid "Volume up"
 msgstr "音量を上げる"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
 msgid "Volume up's shortcut."
 msgstr "音量を上げる機能のショートカットです。"
 
 #: ../schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:1
 msgid "Display a dialog when there are errors running the screensaver"
-msgstr ""
-"スクリーンセーバーを起動する際にエラーが発生したらダイアログを表示します。"
+msgstr "スクリーンセーバーを起動する際にエラーが発生したらダイアログを表示します。"
 
 #: ../schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:2
 msgid "Run screensaver at login"
@@ -3017,9 +3067,8 @@ msgstr "スクリーンセーバーの起動"
 msgid ""
 "A collection of scripts to run whenever the keyboard state is reloaded. "
 "Useful for re-applying xmodmap based adjustments"
-msgstr ""
-"キーボードの状態が再び読み込まれたら実行するスクリプト集です。`xmodmap` の調"
-"整を再び反映する際に便利な機能です。"
+msgstr "キーボードの状態が再び読み込まれたら実行するスクリプト集です。"
+"`xmodmap` の調整を再び反映する際に便利な機能です。"
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
 msgid "A list of modmap files available in the $HOME directory."
@@ -3067,9 +3116,8 @@ msgstr "グループ名ではなくレイアウト名を表示する"
 msgid ""
 "Show layout names instead of group names (only for versions of XFree "
 "supporting multiple layouts)"
-msgstr ""
-"グループ名の代わりにレイアウト名を表示します (X で複数のレイアウトをサポート"
-"している場合のみ)"
+msgstr "グループ名の代わりにレイアウト名を表示します (X で複数のレイアウトを"
+"サポートしている場合のみ)"
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:13
 msgid "Suppress the \"X sysconfig changed\" warning message"
@@ -3080,8 +3128,7 @@ msgid ""
 "Very soon, keyboard settings in gconf will be overridden (from the system "
 "configuration) This key has been deprecated since GNOME 2.12, please unset "
 "the model, layouts and options keys to get the default system configuration."
-msgstr ""
-"近いうちに GConf データベースの中にある \"キーボード設定\" は \"システム設定"
+msgstr "近いうちに GConf データベースの中にある \"キーボード設定\" は \"システム設定"
 "\" に置き換えられます。そのため、この設定に該当するキーは GNOME 2.12 から廃止"
 "になります。キーボードのモデル、レイアウト、追加のキーはデフォルトのシステム"
 "設定から取得することになるので値をセットしないで下さい。"
@@ -3135,8 +3182,7 @@ msgstr "次の一休みまで 1 分を切りました"
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
 "error: %s"
-msgstr ""
-"次のエラーにより \"キー入力の一休み設定ダイアログ\" を開けませんでした: %s"
+msgstr "次のエラーにより \"キー入力の一休み設定ダイアログ\" を開けませんでした: %s"
 
 #: ../typing-break/drwright.c:629
 msgid "About GNOME Typing Monitor"
@@ -3172,8 +3218,7 @@ msgid ""
 "don't seem to have a notification area on your panel. You can add it by "
 "right-clicking on your panel and choosing 'Add to panel', selecting "
 "'Notification area' and clicking 'Add'."
-msgstr ""
-"GNOME 一休み催促ツールは情報を表示するために通知スペースを利用しますが、お使"
+msgstr "GNOME 一休み催促ツールは情報を表示するために通知スペースを利用しますが、お使"
 "いのパネルには通知スペースが無いようです。通知スペースはパネルの上で右クリッ"
 "クして \"パネルへ追加\" を選択して、ダイアログから [通知スペース] のエントリ"
 "を選択して \"追加\" ボタンをクリックして下さい。"
@@ -3244,26 +3289,22 @@ msgstr "TRUE にすると、Type1 フォントがサムネイル表示されま�
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:5
 msgid ""
 "Set this key to the command used to create thumbnails for OpenType fonts."
-msgstr ""
-"このキーを OpenType フォントのサムネイル表示で使用するコマンドにセットして下"
+msgstr "このキーを OpenType フォントのサムネイル表示で使用するコマンドにセットして下"
 "さい。"
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:6
 msgid "Set this key to the command used to create thumbnails for PCF fonts."
-msgstr ""
-"このキーを PCF フォントのサムネイル表示で使用するコマンドにセットして下さい。"
+msgstr "このキーを PCF フォントのサムネイル表示で使用するコマンドにセットして下さい。"
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:7
 msgid ""
 "Set this key to the command used to create thumbnails for TrueType fonts."
-msgstr ""
-"このキーを TrueType フォントのサムネイル表示で使用するコマンドにセットして下"
+msgstr "このキーを TrueType フォントのサムネイル表示で使用するコマンドにセットして下"
 "さい。"
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:8
 msgid "Set this key to the command used to create thumbnails for Type1 fonts."
-msgstr ""
-"このキーを Type1 フォントのサムネイル表示で使用するコマンドにセットして下さ"
+msgstr "このキーを Type1 フォントのサムネイル表示で使用するコマンドにセットして下さ"
 "い。"
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:9
@@ -3304,8 +3345,7 @@ msgstr "GNOME フォント・ビューア"
 
 #: ../vfs-methods/themus/apply-font.glade.h:2
 msgid "<span weight=\"bold\" size=\"larger\">Apply new font?</span>"
-msgstr ""
-"<span weight=\"bold\" size=\"larger\">新しいフォントを適用しますか？</span>"
+msgstr "<span weight=\"bold\" size=\"larger\">新しいフォントを適用しますか？</span>"
 
 #: ../vfs-methods/themus/apply-font.glade.h:3
 msgid "Do _not apply font"
@@ -3315,8 +3355,7 @@ msgstr "適用しない(_N)"
 msgid ""
 "The theme you have selected suggests a new font. A preview of the font is "
 "shown below."
-msgstr ""
-"指定したテーマは新しいフォントの設定を推奨しています。フォントのプレビューが"
+msgstr "指定したテーマは新しいフォントの設定を推奨しています。フォントのプレビューが"
 "下に表示されます。"
 
 #: ../vfs-methods/themus/apply-font.glade.h:5
@@ -3358,8 +3397,7 @@ msgstr "デフォルトのテーマを設定します"
 
 #: ../vfs-methods/themus/themus.schemas.in.h:1
 msgid "If set to true, then installed themes will be thumbnailed."
-msgstr ""
-"TRUE に設定すると、インストールされてたテーマがサムネイル表示されます。"
+msgstr "TRUE に設定すると、インストールされてたテーマがサムネイル表示されます。"
 
 #: ../vfs-methods/themus/themus.schemas.in.h:2
 msgid "If set to true, then themes will be thumbnailed."
@@ -3368,8 +3406,7 @@ msgstr "TRUE に設定すると、テーマがサムネイル表示されます�
 #: ../vfs-methods/themus/themus.schemas.in.h:3
 msgid ""
 "Set this key to the command used to create thumbnails for installed themes."
-msgstr ""
-"インストールされたテーマのサムネイルを作成するためのコマンドを設定して下さ"
+msgstr "インストールされたテーマのサムネイルを作成するためのコマンドを設定して下さ"
 "い。"
 
 #: ../vfs-methods/themus/themus.schemas.in.h:4
@@ -3391,3 +3428,18 @@ msgstr "インストールされたテーマをサムネイル表示するか否
 #: ../vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "テーマをサムネイル表示するか否か"
+
+#~ msgid "Epiphany"
+#~ msgstr "Epiphany"
+
+#~ msgid "_Terminal font:"
+#~ msgstr "端末のフォント(_T):"
+
+#~ msgid "Large Cursor"
+#~ msgstr "大きいカーソル"
+
+#~ msgid "Cursor Theme"
+#~ msgstr "カーソルのテーマ"
+
+#~ msgid "Cursors"
+#~ msgstr "カーソル"
