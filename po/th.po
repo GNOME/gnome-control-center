@@ -1,19 +1,19 @@
 # Thai gnome-control-center translation.
-# Copyright (C) 2003 Free Software Foundation, Inc.
+# Copyright (C) 2003-2006 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gnome-control-center package.
 # Paisa Seeluangsawat <paisa@users.sf.net>, 2003, 2004.
 # Supakorn Siddhichai <supakorn.siddhichai@nectec.or.th>, 2004.
 # Supranee Thirawatthanasuk <supranee@opentle.org>, 2004.
 # Surichat Sumrit <nook@opentle.org>, 2004.
 # Chanchai Junlouchai <taz@opentle.org>, 2004.
-# Theppitak Karoonboonyanan <thep@linux.thai.net>, 2004, 2005.
+# Theppitak Karoonboonyanan <thep@linux.thai.net>, 2004-2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-11 14:18+0700\n"
-"PO-Revision-Date: 2006-02-11 14:20+0700\n"
+"POT-Creation-Date: 2006-02-18 10:25+0700\n"
+"PO-Revision-Date: 2006-02-18 10:27+0700\n"
 "Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
 "Language-Team: Thai <L10n@opentle.org>\n"
 "MIME-Version: 1.0\n"
@@ -641,6 +641,7 @@ msgid "characters/second"
 msgstr "ตัวอักษร/วินาที"
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:41
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
 msgid "milliseconds"
 msgstr "มิลลิวินาที"
 
@@ -968,7 +969,7 @@ msgid "Could not display help"
 msgstr "แสดงวิธีใช้ไม่สำเร็จ"
 
 #: ../capplets/default-applications/gnome-da-capplet.c:58
-#: ../capplets/default-applications/gnome-da-capplet.c:683
+#: ../capplets/default-applications/gnome-da-capplet.c:714
 msgid "Please make sure that the applet is properly installed"
 msgstr "กรุณาตรวจสอบการติดตั้งแอพเพล็ตว่าเรียบร้อยดีหรือไม่"
 
@@ -978,17 +979,17 @@ msgstr "กรุณาตรวจสอบการติดตั้งแอ
 #: ../capplets/default-applications/gnome-da-capplet.c:230
 #: ../capplets/default-applications/gnome-da-capplet.c:284
 #: ../capplets/default-applications/gnome-da-capplet.c:333
-#: ../capplets/default-applications/gnome-da-capplet.c:523
-#: ../capplets/default-applications/gnome-da-capplet.c:544
+#: ../capplets/default-applications/gnome-da-capplet.c:554
+#: ../capplets/default-applications/gnome-da-capplet.c:575
 #, c-format
 msgid "Error saving configuration: %s"
 msgstr "เกิดข้อผิดพลาดขณะบันทึกค่าตั้ง: %s"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:660
+#: ../capplets/default-applications/gnome-da-capplet.c:691
 msgid "Custom"
 msgstr "กำหนดเอง"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:681
+#: ../capplets/default-applications/gnome-da-capplet.c:712
 msgid "Could not load the main interface"
 msgstr "อ่านส่วนติดต่อผู้ใช้หลักไม่สำเร็จ"
 
@@ -1768,9 +1769,11 @@ msgstr "ตั้งค่าสำหรับแป้นพิมพ์"
 #. set the timeout value  label with correct value of timeout
 #: ../capplets/mouse/gnome-mouse-properties.c:138
 #: ../capplets/mouse/gnome-mouse-properties.c:880
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
-msgid "microseconds"
-msgstr "ไมโครวินาที"
+#, c-format
+msgid "%d milliseconds"
+msgid_plural "%d milliseconds"
+msgstr[0] "%d มิลลิวินาที"
+msgstr[1] "%d มิลลิวินาที"
 
 #: ../capplets/mouse/gnome-mouse-properties.c:560
 msgid "Unknown Pointer"
@@ -3438,6 +3441,9 @@ msgstr "กำหนดว่าจะสร้างรูปย่อสำห
 #: ../vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "กำหนดว่าจะสร้างรูปย่อสำหรับชุดตกแต่งหรือไม่"
+
+#~ msgid "microseconds"
+#~ msgstr "ไมโครวินาที"
 
 #~ msgid "Epiphany"
 #~ msgstr "Epiphany"
