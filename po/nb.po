@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.13.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-14 15:09+0100\n"
-"PO-Revision-Date: 2006-02-14 15:10+0100\n"
+"POT-Creation-Date: 2006-02-19 22:52+0100\n"
+"PO-Revision-Date: 2006-02-19 22:54+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmal <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -644,6 +644,7 @@ msgid "characters/second"
 msgstr "tegn per sekund"
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:41
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
 msgid "milliseconds"
 msgstr "millisekunder"
 
@@ -981,7 +982,7 @@ msgid "Could not display help"
 msgstr "Kunne ikke vise hjelp"
 
 #: ../capplets/default-applications/gnome-da-capplet.c:58
-#: ../capplets/default-applications/gnome-da-capplet.c:683
+#: ../capplets/default-applications/gnome-da-capplet.c:714
 msgid "Please make sure that the applet is properly installed"
 msgstr "Sjekk at programmet er korrekt installert"
 
@@ -991,17 +992,17 @@ msgstr "Sjekk at programmet er korrekt installert"
 #: ../capplets/default-applications/gnome-da-capplet.c:230
 #: ../capplets/default-applications/gnome-da-capplet.c:284
 #: ../capplets/default-applications/gnome-da-capplet.c:333
-#: ../capplets/default-applications/gnome-da-capplet.c:523
-#: ../capplets/default-applications/gnome-da-capplet.c:544
+#: ../capplets/default-applications/gnome-da-capplet.c:554
+#: ../capplets/default-applications/gnome-da-capplet.c:575
 #, c-format
 msgid "Error saving configuration: %s"
 msgstr "Feil ved lagring av konfigurasjonsdatabase: %s"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:660
+#: ../capplets/default-applications/gnome-da-capplet.c:691
 msgid "Custom"
 msgstr "Egendefinert"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:681
+#: ../capplets/default-applications/gnome-da-capplet.c:712
 msgid "Could not load the main interface"
 msgstr "Kunne ikke laste brukergrensesnittet"
 
@@ -1787,9 +1788,11 @@ msgstr "Sett dine brukervalg for tastatur"
 #. set the timeout value  label with correct value of timeout
 #: ../capplets/mouse/gnome-mouse-properties.c:138
 #: ../capplets/mouse/gnome-mouse-properties.c:880
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
-msgid "microseconds"
-msgstr "mikrosekunder"
+#, c-format
+msgid "%d milliseconds"
+msgid_plural "%d milliseconds"
+msgstr[0] "%d millisekunder"
+msgstr[1] "%d millisekunder"
 
 #: ../capplets/mouse/gnome-mouse-properties.c:560
 msgid "Unknown Pointer"
@@ -2621,7 +2624,10 @@ msgid ""
 "You just pressed two keys at once, or pressed the Shift key 5 times in a "
 "row.  This turns off the Sticky Keys feature, which affects the way your "
 "keyboard works."
-msgstr "Du trykket nettopp ned to taster på en gang, eller Shift-tasten 5 ganger på rad. Dette skrur av funksjonen «klebrige taster» som påvirker tasteturets virkemåte."
+msgstr ""
+"Du trykket nettopp ned to taster på en gang, eller Shift-tasten 5 ganger på "
+"rad. Dette skrur av funksjonen «klebrige taster» som påvirker tasteturets "
+"virkemåte."
 
 #: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
 msgid "Do you want to activate Sticky Keys?"
