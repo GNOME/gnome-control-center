@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-12 10:42+0100\n"
-"PO-Revision-Date: 2006-02-12 10:43+0100\n"
+"POT-Creation-Date: 2006-02-20 01:48+0100\n"
+"PO-Revision-Date: 2006-02-20 01:48+0100\n"
 "Last-Translator: Ignacio Casal Quinteiro <nacho.resa@gmail.com>\n"
 "Language-Team: Galego <trasno@ceu.fi.udc.es>\n"
 "MIME-Version: 1.0\n"
@@ -651,6 +651,7 @@ msgid "characters/second"
 msgstr "caracteres/segundo"
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:41
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
 msgid "milliseconds"
 msgstr "milisegundos"
 
@@ -980,7 +981,7 @@ msgid "Could not display help"
 msgstr "Non se puido amosar a axuda"
 
 #: ../capplets/default-applications/gnome-da-capplet.c:58
-#: ../capplets/default-applications/gnome-da-capplet.c:683
+#: ../capplets/default-applications/gnome-da-capplet.c:714
 msgid "Please make sure that the applet is properly installed"
 msgstr "Asegúrese de que o applet está instalado correctamente"
 
@@ -990,17 +991,17 @@ msgstr "Asegúrese de que o applet está instalado correctamente"
 #: ../capplets/default-applications/gnome-da-capplet.c:230
 #: ../capplets/default-applications/gnome-da-capplet.c:284
 #: ../capplets/default-applications/gnome-da-capplet.c:333
-#: ../capplets/default-applications/gnome-da-capplet.c:523
-#: ../capplets/default-applications/gnome-da-capplet.c:544
+#: ../capplets/default-applications/gnome-da-capplet.c:554
+#: ../capplets/default-applications/gnome-da-capplet.c:575
 #, c-format
 msgid "Error saving configuration: %s"
 msgstr "Erro ao gardar a configuración: %s"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:660
+#: ../capplets/default-applications/gnome-da-capplet.c:691
 msgid "Custom"
 msgstr "Personalizado"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:681
+#: ../capplets/default-applications/gnome-da-capplet.c:712
 msgid "Could not load the main interface"
 msgstr "Non se puido cargar a interface principal"
 
@@ -1784,9 +1785,11 @@ msgstr "Establece as súas preferencias do teclado"
 #. set the timeout value  label with correct value of timeout
 #: ../capplets/mouse/gnome-mouse-properties.c:138
 #: ../capplets/mouse/gnome-mouse-properties.c:880
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
-msgid "microseconds"
-msgstr "microsegundos"
+#, c-format
+msgid "%d milliseconds"
+msgid_plural "%d milliseconds"
+msgstr[0] "%d milisegundo"
+msgstr[1] "%d milisegundos"
 
 #: ../capplets/mouse/gnome-mouse-properties.c:560
 msgid "Unknown Pointer"
