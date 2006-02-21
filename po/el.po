@@ -6,6 +6,13 @@
 # For screensaver, picked: profilaji o8onis -simos.
 #
 # spyros: initial translation, around 300 messages.
+# Nikos:   one more review 6Sep2003
+# kostas: 15 feb 2004, update
+# Nikos: 30May2004, some fixes.
+# Nikos: 31Jul2004, some fixes.
+# Nikos 17Sep2004, some fixes.
+#
+#
 # simos: 277 messages, 19Aug2000, (24 fuzzy, 40 untranslated).
 # simos: 358 messages, 05Dec2000, updated translation.
 #      :  64 messages, 01Aug2002, due to enhancements in application.
@@ -13,20 +20,15 @@
 # t_p_r: 266 messages, 05Aug2002, reviewed translation.
 # simos: 329 messages, 06Aug2002, updated translation.
 # kostas: 461 messages, 18Oct2002, updated and completed translation.
-# kostas: 535 messages, 10Dec2002, reviewed and updated translation for Gnome 2.1x
+# kostas: 535 messages, 10Dec2002, reviewed and updated translation for Gnome 2.1x.
 # kostas: 533 messages, 06Jan2003, one more update.
 # kostas: 537 messages, 26Jan2003, one more update.
 # kostas:  650 messages, 22Jul2003, one more update.
 # kostas:  655 messages, 27Jul2003, one more update.
 # kostas:  674 messages, 10Aug2003, one more update.
-# Nikos:   review, 29Aug03
-# Nikos:   one more review 6Sep2003
-# kostas: 678 messagew,12Nov2003, updates and fixes
-# kostas: 786 messagew,22Jan2004, updates and fixes
-# kostas: 15 feb 2004, update
-# Nikos: 30May2004, some fixes.
-# Nikos: 31Jul2004, some fixes.
-# Nikos 17Sep2004, some fixes.
+# Nikos:   review, 29Aug03.
+# kostas: 678 messagew,12Nov2003, updates and fixes.
+# kostas: 786 messagew,22Jan2004, updates and fixes.
 # Simos: 723 messages, 20Dec2004, fixes/updates.
 # Spiros Papadimitriou <spapadim+@cs.cmu.edu>, 2000.
 # Simos Xenitellis <simos@hellug.gr>, 2000, 2001, 2002.
@@ -34,21 +36,19 @@
 # Τα πάντα ρει <ta_panta_rei@flashmail.com>, 2002.
 # Kostas Papadimas <pkst@gnome.org>, 2002,2003, 2004, 2005, 2006.
 # Simos Xenitellis <simos74@gmx.net>, 2004.
-#
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: el\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-17 12:07+0200\n"
-"PO-Revision-Date: 2006-02-17 12:16+0200\n"
+"POT-Creation-Date: 2006-02-21 18:28+0200\n"
+"PO-Revision-Date: 2006-02-21 18:29+0200\n"
 "Last-Translator: Kostas Papadimas <pkst@gnome.org>\n"
 "Language-Team: Greek <team@gnome.gr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
-"X-Generator: KBabel 1.10.2\n"
+"X-Generator: KBabel 1.11.1\n"
 
 #: ../capplets/about-me/eel-alert-dialog.c:114
 msgid "Image/label border"
@@ -686,6 +686,7 @@ msgid "characters/second"
 msgstr "χαρακτήρες/δευτερόλεπτο"
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:41
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
 msgid "milliseconds"
 msgstr "χιλιοστά δευτερολέπτου"
 
@@ -1836,9 +1837,11 @@ msgstr "Καθορισμός των προτιμήσεων πληκτρολογ�
 #. set the timeout value  label with correct value of timeout
 #: ../capplets/mouse/gnome-mouse-properties.c:138
 #: ../capplets/mouse/gnome-mouse-properties.c:880
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
-msgid "microseconds"
-msgstr "χιλιοστά δευτερολέπτου"
+#, c-format
+msgid "%d milliseconds"
+msgid_plural "%d milliseconds"
+msgstr[0] "%d χιλιοστά δευτερολέπτου"
+msgstr[1] "%d χιλιοστά δευτερολέπτου"
 
 #: ../capplets/mouse/gnome-mouse-properties.c:560
 msgid "Unknown Pointer"
