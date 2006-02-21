@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-30 16:33+0100\n"
-"PO-Revision-Date: 2006-01-30 16:50+0100\n"
+"POT-Creation-Date: 2006-02-20 23:33+0100\n"
+"PO-Revision-Date: 2006-02-20 23:35+0100\n"
 "Last-Translator: Слободан Д. Средојевић <slobo@akrep.be>\n"
 "Language-Team: Serbian (sr) <gnom@prevod.org>\n"
 "MIME-Version: 1.0\n"
@@ -652,6 +652,7 @@ msgid "characters/second"
 msgstr "знакова у секунди"
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:41
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
 msgid "milliseconds"
 msgstr "милисекунди"
 
@@ -694,11 +695,15 @@ msgid "_Add Wallpaper"
 msgstr "_Додај"
 
 #: ../capplets/background/gnome-background-properties.glade.h:6
+msgid "_Finish"
+msgstr "Зав_рши"
+
+#: ../capplets/background/gnome-background-properties.glade.h:7
 #: ../capplets/theme-switcher/theme-properties.glade.h:19
 msgid "_Remove"
 msgstr "Уклони"
 
-#: ../capplets/background/gnome-background-properties.glade.h:7
+#: ../capplets/background/gnome-background-properties.glade.h:8
 msgid "_Style:"
 msgstr "_Стил:"
 
@@ -709,48 +714,48 @@ msgstr "_Стил:"
 msgid "There was an error displaying help: %s"
 msgstr "Дошло је до грешке приликом приказивања помоћи: %s"
 
-#: ../capplets/background/gnome-wp-capplet.c:1046
+#: ../capplets/background/gnome-wp-capplet.c:984
 msgid "Centered"
 msgstr "Центрирано"
 
-#: ../capplets/background/gnome-wp-capplet.c:1050
+#: ../capplets/background/gnome-wp-capplet.c:988
 msgid "Fill Screen"
 msgstr "Испуни екран"
 
-#: ../capplets/background/gnome-wp-capplet.c:1054
+#: ../capplets/background/gnome-wp-capplet.c:992
 msgid "Scaled"
 msgstr "Сразмерно"
 
-#: ../capplets/background/gnome-wp-capplet.c:1058
+#: ../capplets/background/gnome-wp-capplet.c:996
 msgid "Zoom"
 msgstr "Увећај"
 
-#: ../capplets/background/gnome-wp-capplet.c:1062
+#: ../capplets/background/gnome-wp-capplet.c:1000
 msgid "Tiled"
 msgstr "Поплочано"
 
-#: ../capplets/background/gnome-wp-capplet.c:1083
+#: ../capplets/background/gnome-wp-capplet.c:1021
 msgid "Solid Color"
 msgstr "Пуна боја"
 
-#: ../capplets/background/gnome-wp-capplet.c:1087
+#: ../capplets/background/gnome-wp-capplet.c:1025
 msgid "Horizontal Gradient"
 msgstr "Водоравно нијансирано"
 
-#: ../capplets/background/gnome-wp-capplet.c:1091
+#: ../capplets/background/gnome-wp-capplet.c:1029
 msgid "Vertical Gradient"
 msgstr "Усправно нијансирано"
 
 #. Create the file chooser dialog stuff here
-#: ../capplets/background/gnome-wp-capplet.c:1137
+#: ../capplets/background/gnome-wp-capplet.c:1075
 msgid "Add Wallpaper"
 msgstr "Додај позадину"
 
-#: ../capplets/background/gnome-wp-capplet.c:1154
+#: ../capplets/background/gnome-wp-capplet.c:1092
 msgid "Images"
 msgstr "Слике"
 
-#: ../capplets/background/gnome-wp-capplet.c:1158
+#: ../capplets/background/gnome-wp-capplet.c:1096
 msgid "All Files"
 msgstr "Све датотеке"
 
@@ -781,6 +786,7 @@ msgstr ""
 "руководиоца поставки."
 
 #: ../capplets/common/capplet-stock-icons.c:92
+#, c-format
 msgid "Unable to load stock icon '%s'\n"
 msgstr "Не могу да учитам основну,уграђену икону „%s“\n"
 
@@ -986,7 +992,7 @@ msgid "Could not display help"
 msgstr "Не могу да прикажем помоћ"
 
 #: ../capplets/default-applications/gnome-da-capplet.c:58
-#: ../capplets/default-applications/gnome-da-capplet.c:689
+#: ../capplets/default-applications/gnome-da-capplet.c:714
 msgid "Please make sure that the applet is properly installed"
 msgstr "Молим проверите да ли је програмче исправно постављено"
 
@@ -996,17 +1002,17 @@ msgstr "Молим проверите да ли је програмче испр
 #: ../capplets/default-applications/gnome-da-capplet.c:230
 #: ../capplets/default-applications/gnome-da-capplet.c:284
 #: ../capplets/default-applications/gnome-da-capplet.c:333
-#: ../capplets/default-applications/gnome-da-capplet.c:524
-#: ../capplets/default-applications/gnome-da-capplet.c:545
+#: ../capplets/default-applications/gnome-da-capplet.c:554
+#: ../capplets/default-applications/gnome-da-capplet.c:575
 #, c-format
 msgid "Error saving configuration: %s"
 msgstr "Грешка при чувању подешавања: %s"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:665
+#: ../capplets/default-applications/gnome-da-capplet.c:691
 msgid "Custom"
 msgstr "Прилагођено"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:687
+#: ../capplets/default-applications/gnome-da-capplet.c:712
 msgid "Could not load the main interface"
 msgstr "Не могу да учитам главно сучеље"
 
@@ -1615,6 +1621,7 @@ msgid "Models"
 msgstr "Модели"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:109
+#, c-format
 msgid "There was an error launching the keyboard tool: %s"
 msgstr "Грешка при покретању програмчета за тастатуру: %s"
 
@@ -1798,9 +1805,11 @@ msgstr "Подесите вашу тастатуру"
 #. set the timeout value  label with correct value of timeout
 #: ../capplets/mouse/gnome-mouse-properties.c:138
 #: ../capplets/mouse/gnome-mouse-properties.c:880
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
-msgid "microseconds"
-msgstr "микросекунди"
+msgid "%d milliseconds"
+msgid_plural "%d milliseconds"
+msgstr[0] "%d милисекунда"
+msgstr[1] "%d милисекунде"
+msgstr[2] "%d милисекунди"
 
 #: ../capplets/mouse/gnome-mouse-properties.c:560
 msgid "Unknown Pointer"
@@ -2648,6 +2657,7 @@ msgid "Do you want to deactivate Sticky Keys?"
 msgstr "Желите ли да искључите споре лепљиве тастере?"
 
 #: ../gnome-settings-daemon/gnome-settings-font.c:74
+#, c-format
 msgid ""
 "Cannot create the directory \"%s\".\n"
 "This is needed to allow changing the mouse pointer theme."
@@ -2811,7 +2821,7 @@ msgstr ""
 msgid "_Do not show this message again"
 msgstr "_Немој више да приказујеш ову поруку"
 
-#: ../gnome-settings-daemon/gnome-settings-sound.c:150
+#: ../gnome-settings-daemon/gnome-settings-sound.c:155
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Не могу да учитам датотеку %s као пробни %s"
@@ -3510,6 +3520,9 @@ msgstr "Да ли да користим умањени приказ инстал
 #: ../vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Да ли да користим умањени приказ тема"
+
+#~ msgid "microseconds"
+#~ msgstr "микросекунди"
 
 #~ msgid "Epiphany"
 #~ msgstr "Спознаја"
