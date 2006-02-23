@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-13 08:06+0100\n"
-"PO-Revision-Date: 2006-02-15 10:58+0100\n"
+"POT-Creation-Date: 2006-02-23 13:50+0100\n"
+"PO-Revision-Date: 2006-02-23 13:50+0100\n"
 "Last-Translator: Jakub Friedl <jfriedl@suse.cz>\n"
 "Language-Team:  <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -653,6 +653,7 @@ msgid "characters/second"
 msgstr "znaků/sekundu"
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:41
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
 msgid "milliseconds"
 msgstr "milisekund"
 
@@ -888,7 +889,8 @@ msgid "Change set"
 msgstr "Sada změn"
 
 #: ../capplets/common/gconf-property-editor.c:184
-msgid "GConf change set containing data to be forwarded to the gconf client on apply"
+msgid ""
+"GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr ""
 "Sada změn GConf obsahující data, která budou předána klientu GConf při "
 "použití"
@@ -898,7 +900,8 @@ msgid "Conversion to widget callback"
 msgstr "Zpětné volání konverze na prvek"
 
 #: ../capplets/common/gconf-property-editor.c:190
-msgid "Callback to be issued when data are to be converted from GConf to the widget"
+msgid ""
+"Callback to be issued when data are to be converted from GConf to the widget"
 msgstr ""
 "Zpětné volání, které se provede, když má dojít ke konverzi dat systému GConf "
 "na prvek"
@@ -908,7 +911,8 @@ msgid "Conversion from widget callback"
 msgstr "Zpětné volání konverze z prvku"
 
 #: ../capplets/common/gconf-property-editor.c:196
-msgid "Callback to be issued when data are to be converted to GConf from the widget"
+msgid ""
+"Callback to be issued when data are to be converted to GConf from the widget"
 msgstr ""
 "Zpětné volání, které se provede, když má dojít ke konverzi z prvku na data "
 "systému GConf"
@@ -987,7 +991,7 @@ msgid "Could not display help"
 msgstr "Nemohu zobrazit nápovědu"
 
 #: ../capplets/default-applications/gnome-da-capplet.c:58
-#: ../capplets/default-applications/gnome-da-capplet.c:683
+#: ../capplets/default-applications/gnome-da-capplet.c:714
 msgid "Please make sure that the applet is properly installed"
 msgstr "Zkontrolujte prosím, že je aplet správně nainstalován"
 
@@ -997,17 +1001,17 @@ msgstr "Zkontrolujte prosím, že je aplet správně nainstalován"
 #: ../capplets/default-applications/gnome-da-capplet.c:230
 #: ../capplets/default-applications/gnome-da-capplet.c:284
 #: ../capplets/default-applications/gnome-da-capplet.c:333
-#: ../capplets/default-applications/gnome-da-capplet.c:523
-#: ../capplets/default-applications/gnome-da-capplet.c:544
+#: ../capplets/default-applications/gnome-da-capplet.c:554
+#: ../capplets/default-applications/gnome-da-capplet.c:575
 #, c-format
 msgid "Error saving configuration: %s"
 msgstr "Chyba při ukládání nastavení: %s"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:660
+#: ../capplets/default-applications/gnome-da-capplet.c:691
 msgid "Custom"
 msgstr "Vlastní"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:681
+#: ../capplets/default-applications/gnome-da-capplet.c:712
 msgid "Could not load the main interface"
 msgstr "Nemohu načíst hlavní rozhraní"
 
@@ -1546,7 +1550,8 @@ msgid ""
 "using this key.\n"
 "Please try with a key such as Control, Alt or Shift at the same time.\n"
 msgstr ""
-"Klávesovou zkratku \"%s\" nelze použít, protože ji nebude možné používat k psaní.\n"
+"Klávesovou zkratku \"%s\" nelze použít, protože ji nebude možné používat k "
+"psaní.\n"
 "Zkuste to prosím zároveň s klávesou například Control, Alt nebo Shift.\n"
 
 #: ../capplets/keybindings/gnome-keybinding-properties.c:705
@@ -1627,7 +1632,8 @@ msgstr "Zpříst_upnění"
 #: ../capplets/keyboard/gnome-keyboard-properties.c:223
 #: ../capplets/sound/sound-properties-capplet.c:240
 #: ../capplets/sound/sound-properties-capplet.c:242
-msgid "Just apply settings and quit (compatibility only; now handled by daemon)"
+msgid ""
+"Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
 "Pouze aplikovat nastavení a skončit (pouze pro kompatibilitu; nyní "
 "zpracovává démon)"
@@ -1800,9 +1806,12 @@ msgstr "Nastavte vlastnosti vaší klávesnice"
 #. set the timeout value  label with correct value of timeout
 #: ../capplets/mouse/gnome-mouse-properties.c:138
 #: ../capplets/mouse/gnome-mouse-properties.c:880
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
-msgid "microseconds"
-msgstr "mikrosekund"
+#, c-format
+msgid "%d milliseconds"
+msgid_plural "%d milliseconds"
+msgstr[0] "%d milisekunda"
+msgstr[1] "%d  milisekundy"
+msgstr[2] "%d  milisekund"
 
 #: ../capplets/mouse/gnome-mouse-properties.c:560
 msgid "Unknown Pointer"
@@ -2905,7 +2914,8 @@ msgid ""
 "You may want to install the gnome-audio package for a set of default sounds."
 msgstr ""
 "Pro tuto událost neexistuje soubor se zvukem.\n"
-"Možná budete chtít nainstalovat balíček gnome-audio, který obsahuje sadu standardních zvuků."
+"Možná budete chtít nainstalovat balíček gnome-audio, který obsahuje sadu "
+"standardních zvuků."
 
 #: ../libsounds/sound-view.c:135
 msgid "The sound file for this event does not exist."
@@ -2934,7 +2944,8 @@ msgid "Roll up"
 msgstr "Zarolovat"
 
 #: ../schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:1
-msgid "If true, the mime handlers for text/plain and text/* will be kept in sync"
+msgid ""
+"If true, the mime handlers for text/plain and text/* will be kept in sync"
 msgstr ""
 "Je-li true, jsou obsluhy mime pro text/plain a text/* udržovány "
 "synchronizované"
@@ -3351,17 +3362,20 @@ msgid "If set to true, then Type1 fonts will be thumbnailed."
 msgstr "Je-li nastaveno na true, budou tvořeny náhledy písem Type1."
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:5
-msgid "Set this key to the command used to create thumbnails for OpenType fonts."
+msgid ""
+"Set this key to the command used to create thumbnails for OpenType fonts."
 msgstr ""
 "Nastavte tento klíč na příkaz používaný pro vytváření náhledů pro písma "
 "OpenType."
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:6
 msgid "Set this key to the command used to create thumbnails for PCF fonts."
-msgstr "Nastavte tento klíč na příkaz používaný pro vytváření náhledů pro písma PCF."
+msgstr ""
+"Nastavte tento klíč na příkaz používaný pro vytváření náhledů pro písma PCF."
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:7
-msgid "Set this key to the command used to create thumbnails for TrueType fonts."
+msgid ""
+"Set this key to the command used to create thumbnails for TrueType fonts."
 msgstr ""
 "Nastavte tento klíč na příkaz používaný pro vytváření náhledů pro písma "
 "TrueType."
@@ -3463,14 +3477,16 @@ msgstr "Nastaví implicitní téma"
 
 #: ../vfs-methods/themus/themus.schemas.in.h:1
 msgid "If set to true, then installed themes will be thumbnailed."
-msgstr "Je-li nastaveno na true, budou zobrazovány náhledy nainstalovaných témat."
+msgstr ""
+"Je-li nastaveno na true, budou zobrazovány náhledy nainstalovaných témat."
 
 #: ../vfs-methods/themus/themus.schemas.in.h:2
 msgid "If set to true, then themes will be thumbnailed."
 msgstr "Je-li nastaveno na true, budou zobrazovány náhledy témat."
 
 #: ../vfs-methods/themus/themus.schemas.in.h:3
-msgid "Set this key to the command used to create thumbnails for installed themes."
+msgid ""
+"Set this key to the command used to create thumbnails for installed themes."
 msgstr ""
 "Nastavte tento klíč na příkaz používaný pro vytváření náhledů "
 "nainstalovaných témat."
@@ -3494,4 +3510,3 @@ msgstr "Jestli zobrazovat náhledy nainstalovaných témat"
 #: ../vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Jestli zobrazovat náhledy témat"
-
