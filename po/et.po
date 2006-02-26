@@ -1,4 +1,4 @@
-# GNOME juhtpaneeli eesti keele tõlge.
+# GNOME juhtimiskeskuse eesti keele tõlge.
 # Estonian translation of GNOME Control Center.
 #
 # Copyright (C) 1999, 2002, 2003, 2005, 2006 Free Software Foundation, Inc.
@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GNOME control center HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-27 16:33+0100\n"
-"PO-Revision-Date: 2006-01-27 19:23+0200\n"
+"POT-Creation-Date: 2006-02-25 08:11+0100\n"
+"PO-Revision-Date: 2006-02-26 10:50+0200\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -652,6 +652,7 @@ msgid "characters/second"
 msgstr "märki/sekundis"
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:41
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
 msgid "milliseconds"
 msgstr "millisekundit"
 
@@ -659,11 +660,7 @@ msgstr "millisekundit"
 msgid "pixels/second"
 msgstr "pikslit/sek"
 
-#. set the timeout value  label with correct value of timeout
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
-#: ../capplets/mouse/gnome-mouse-properties.c:138
-#: ../capplets/mouse/gnome-mouse-properties.c:879
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
 #: ../capplets/windows/gnome-window-properties.glade.h:10
 msgid "seconds"
 msgstr "sekundit"
@@ -697,63 +694,67 @@ msgid "_Add Wallpaper"
 msgstr "_Lisa tapeet"
 
 #: ../capplets/background/gnome-background-properties.glade.h:6
+msgid "_Finish"
+msgstr ""
+
+#: ../capplets/background/gnome-background-properties.glade.h:7
 #: ../capplets/theme-switcher/theme-properties.glade.h:19
 msgid "_Remove"
 msgstr "_Eemalda"
 
-#: ../capplets/background/gnome-background-properties.glade.h:7
+#: ../capplets/background/gnome-background-properties.glade.h:8
 msgid "_Style:"
 msgstr "_Laad:"
 
 #: ../capplets/background/gnome-wp-capplet.c:74
 #: ../capplets/common/capplet-util.c:340
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:331
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:333
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "Abiteabe kuvamisel tekkis viga: %s"
 
-#: ../capplets/background/gnome-wp-capplet.c:1046
+#: ../capplets/background/gnome-wp-capplet.c:984
 msgid "Centered"
 msgstr "Keskel"
 
-#: ../capplets/background/gnome-wp-capplet.c:1050
+#: ../capplets/background/gnome-wp-capplet.c:988
 msgid "Fill Screen"
 msgstr "Üle ekraani"
 
-#: ../capplets/background/gnome-wp-capplet.c:1054
+#: ../capplets/background/gnome-wp-capplet.c:992
 msgid "Scaled"
 msgstr "Skaleeritud"
 
-#: ../capplets/background/gnome-wp-capplet.c:1058
+#: ../capplets/background/gnome-wp-capplet.c:996
 msgid "Zoom"
 msgstr ""
 
-#: ../capplets/background/gnome-wp-capplet.c:1062
+#: ../capplets/background/gnome-wp-capplet.c:1000
 msgid "Tiled"
 msgstr "Paanidena"
 
-#: ../capplets/background/gnome-wp-capplet.c:1083
+#: ../capplets/background/gnome-wp-capplet.c:1021
 msgid "Solid Color"
 msgstr "Ühtlane värv"
 
-#: ../capplets/background/gnome-wp-capplet.c:1087
+#: ../capplets/background/gnome-wp-capplet.c:1025
 msgid "Horizontal Gradient"
 msgstr "Horisontaalse üleminekuga"
 
-#: ../capplets/background/gnome-wp-capplet.c:1091
+#: ../capplets/background/gnome-wp-capplet.c:1029
 msgid "Vertical Gradient"
 msgstr "Vertikaalse üleminekuga"
 
 #. Create the file chooser dialog stuff here
-#: ../capplets/background/gnome-wp-capplet.c:1137
+#: ../capplets/background/gnome-wp-capplet.c:1075
 msgid "Add Wallpaper"
 msgstr "Tapeedi lisamine"
 
-#: ../capplets/background/gnome-wp-capplet.c:1154
+#: ../capplets/background/gnome-wp-capplet.c:1092
 msgid "Images"
 msgstr "Pildid"
 
-#: ../capplets/background/gnome-wp-capplet.c:1158
+#: ../capplets/background/gnome-wp-capplet.c:1096
 msgid "All Files"
 msgstr "Kõik failid"
 
@@ -788,7 +789,7 @@ msgstr "Rakenda sätted ja lõpeta"
 
 #: ../capplets/common/capplet-util.c:243
 #: ../capplets/keyboard/gnome-keyboard-properties.c:225
-#: ../capplets/mouse/gnome-mouse-properties.c:1015
+#: ../capplets/mouse/gnome-mouse-properties.c:1016
 #: ../capplets/sound/sound-properties-capplet.c:244
 msgid "Retrieve and store legacy settings"
 msgstr ""
@@ -975,7 +976,7 @@ msgid "Could not display help"
 msgstr ""
 
 #: ../capplets/default-applications/gnome-da-capplet.c:58
-#: ../capplets/default-applications/gnome-da-capplet.c:704
+#: ../capplets/default-applications/gnome-da-capplet.c:714
 msgid "Please make sure that the applet is properly installed"
 msgstr "Veendu, et rakend on õigesti paigaldatud"
 
@@ -983,19 +984,19 @@ msgstr "Veendu, et rakend on õigesti paigaldatud"
 #: ../capplets/default-applications/gnome-da-capplet.c:126
 #: ../capplets/default-applications/gnome-da-capplet.c:185
 #: ../capplets/default-applications/gnome-da-capplet.c:230
-#: ../capplets/default-applications/gnome-da-capplet.c:287
-#: ../capplets/default-applications/gnome-da-capplet.c:339
-#: ../capplets/default-applications/gnome-da-capplet.c:534
-#: ../capplets/default-applications/gnome-da-capplet.c:557
+#: ../capplets/default-applications/gnome-da-capplet.c:284
+#: ../capplets/default-applications/gnome-da-capplet.c:333
+#: ../capplets/default-applications/gnome-da-capplet.c:554
+#: ../capplets/default-applications/gnome-da-capplet.c:575
 #, c-format
 msgid "Error saving configuration: %s"
 msgstr "Viga sätete salvestamisel: %s"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:680
+#: ../capplets/default-applications/gnome-da-capplet.c:691
 msgid "Custom"
 msgstr "Kohandatud"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:702
+#: ../capplets/default-applications/gnome-da-capplet.c:712
 msgid "Could not load the main interface"
 msgstr ""
 
@@ -1020,8 +1021,8 @@ msgid "Encompass"
 msgstr "Encompass"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:6
-msgid "Epiphany"
-msgstr "Epiphany"
+msgid "Epiphany Web Browser"
+msgstr "Epiphany veebisirvija"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:7
 msgid "Evolution Mail Reader"
@@ -1181,9 +1182,8 @@ msgid "Co_mmand:"
 msgstr "_Käsk:"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:12
-#, fuzzy
 msgid "E_xecute flag:"
-msgstr "_Parameetrid:"
+msgstr "_Käivitamislipp:"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:13
 msgid "Internet"
@@ -1195,11 +1195,11 @@ msgstr "Multimeedia"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:15
 msgid "Open link in new _tab"
-msgstr ""
+msgstr "Viida avamine uues sa_kis"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:16
 msgid "Open link in new _window"
-msgstr ""
+msgstr "Viida avamine uues ak_nas"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:17
 msgid "Open link with web browser _default"
@@ -1459,7 +1459,7 @@ msgstr[1] ""
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:21
 msgid "New accelerator..."
-msgstr ""
+msgstr "Uud kiirklahv..."
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:163
 #: ../capplets/keybindings/eggcellrendererkeys.c:164
@@ -1482,32 +1482,32 @@ msgstr ""
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:194
 msgid "The type of accelerator."
-msgstr ""
+msgstr "Kiirklahvi liik."
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
-#: ../capplets/keybindings/gnome-keybinding-properties.c:191
+#: ../capplets/keybindings/gnome-keybinding-properties.c:197
 #: ../libbackground/applier.c:624 ../typing-break/drwright.c:471
 msgid "Disabled"
 msgstr "Välja lülitatud"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:538
+#: ../capplets/keybindings/gnome-keybinding-properties.c:544
 msgid "<Unknown Action>"
 msgstr "<tundmatu tegevus>"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:559
+#: ../capplets/keybindings/gnome-keybinding-properties.c:565
 msgid "Desktop"
 msgstr "Töölaud"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:560
+#: ../capplets/keybindings/gnome-keybinding-properties.c:566
 #: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
 msgid "Sound"
 msgstr "Heli"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:564
+#: ../capplets/keybindings/gnome-keybinding-properties.c:570
 msgid "Window Management"
 msgstr "Akende haldus"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:670
+#: ../capplets/keybindings/gnome-keybinding-properties.c:676
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become unusable to type "
@@ -1515,28 +1515,28 @@ msgid ""
 "Please try with a key such as Control, Alt or Shift at the same time.\n"
 msgstr ""
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:699
+#: ../capplets/keybindings/gnome-keybinding-properties.c:705
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
 " \"%s\"\n"
 msgstr ""
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:731
+#: ../capplets/keybindings/gnome-keybinding-properties.c:737
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr ""
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:781
+#: ../capplets/keybindings/gnome-keybinding-properties.c:787
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr ""
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:888
+#: ../capplets/keybindings/gnome-keybinding-properties.c:894
 msgid "Action"
 msgstr "Tegevus"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:912
+#: ../capplets/keybindings/gnome-keybinding-properties.c:918
 msgid "Shortcut"
 msgstr "Kiirklahv"
 
@@ -1579,9 +1579,9 @@ msgid "Models"
 msgstr "Mudelid"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:109
-#, fuzzy, c-format
+#, c-format
 msgid "There was an error launching the keyboard tool: %s"
-msgstr "Klaviatuuri juhtrakenduse käivitamisel tekkis viga : %s"
+msgstr "Klaviatuuri tööriista käivitamisel tekkis viga: %s"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:202
 msgid "_Accessibility"
@@ -1757,60 +1757,69 @@ msgstr "minutit"
 msgid "Set your keyboard preferences"
 msgstr "Klaviatuuri eelistuste seadmine"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:559
-msgid "Unknown Cursor"
+#. set the timeout value  label with correct value of timeout
+#: ../capplets/mouse/gnome-mouse-properties.c:138
+#: ../capplets/mouse/gnome-mouse-properties.c:880
+#, c-format
+msgid "%d milliseconds"
+msgid_plural "%d milliseconds"
+msgstr[0] "%d millisekund"
+msgstr[1] "%d millisekundit"
+
+#: ../capplets/mouse/gnome-mouse-properties.c:560
+msgid "Unknown Pointer"
 msgstr "Tundmatu kursor"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:760
-msgid "Default Cursor"
+#: ../capplets/mouse/gnome-mouse-properties.c:761
+msgid "Default Pointer"
 msgstr "Vaikimisi kursor"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:761
-msgid "Default Cursor - Current"
+#: ../capplets/mouse/gnome-mouse-properties.c:762
+msgid "Default Pointer - Current"
 msgstr "Vaikimisi kursor - käesolev"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:762
-msgid "The default cursor that ships with X"
-msgstr "X-i vaikimisi kursor"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:766
-msgid "White Cursor"
-msgstr "Valge kursor"
+#: ../capplets/mouse/gnome-mouse-properties.c:763
+msgid "The default pointer that ships with X"
+msgstr "X-iga kaasatulev vaikimisi kursor"
 
 #: ../capplets/mouse/gnome-mouse-properties.c:767
-msgid "White Cursor - Current"
-msgstr "Valge kursor - käesolev"
+msgid "White Pointer"
+msgstr "Valge kursor"
 
 #: ../capplets/mouse/gnome-mouse-properties.c:768
-msgid "The default cursor inverted"
+msgid "White Pointer - Current"
+msgstr "Valge kursor - käesolev"
+
+#: ../capplets/mouse/gnome-mouse-properties.c:769
+msgid "The default pointer inverted"
 msgstr "Vaikimisi kursor negatiivis"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:772
-msgid "Large Cursor"
+#: ../capplets/mouse/gnome-mouse-properties.c:773
+msgid "Large Pointer"
 msgstr "Suur kursor"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:773
-msgid "Large Cursor - Current"
+#: ../capplets/mouse/gnome-mouse-properties.c:774
+msgid "Large Pointer - Current"
 msgstr "Suur kursor - käesolev"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:774
-msgid "Large version of normal cursor"
-msgstr "Tavalise kursori suurem versioon"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:778
-msgid "Large White Cursor - Current"
-msgstr "Suur·valge·kursor·-·praegune"
+#: ../capplets/mouse/gnome-mouse-properties.c:775
+msgid "Large version of normal pointer"
+msgstr "Tavalise kursori suur versioon"
 
 #: ../capplets/mouse/gnome-mouse-properties.c:779
-msgid "Large White Cursor"
-msgstr "Suur valge kursor"
+msgid "Large White Pointer - Current"
+msgstr "Suur valge kursor - käesolev"
 
 #: ../capplets/mouse/gnome-mouse-properties.c:780
-msgid "Large version of white cursor"
-msgstr "Valge kursori suurem versioon"
+msgid "Large White Pointer"
+msgstr "Suur valge kursor"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:969
-msgid "Cursor Theme"
+#: ../capplets/mouse/gnome-mouse-properties.c:781
+msgid "Large version of white pointer"
+msgstr "Valge kursori suur versioon"
+
+#: ../capplets/mouse/gnome-mouse-properties.c:970
+msgid "Pointer Theme"
 msgstr "Kursori teema"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:2
@@ -1862,32 +1871,32 @@ msgid "Buttons"
 msgstr "Nupud"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:14
-msgid "Cursor Size:"
-msgstr "Kursori suurus:"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:15
-msgid "Cursors"
-msgstr "Kursorid"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:16
 msgid "Highlight the _pointer when you press Ctrl"
 msgstr "Kursori _rõhutamine Ctrl klahvi vajutamise peale"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:15
 msgid "Large"
 msgstr "Suur"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:16
 msgid "Medium"
 msgstr "Keskmine"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
 msgid "Motion"
 msgstr "Liikumine"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:20
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
 msgid "Mouse Preferences"
 msgstr "Hiire eelistused"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
+msgid "Pointer Size:"
+msgstr "Kursori suurus:"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:20
+msgid "Pointers"
+msgstr "Kursorid"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:21
 msgid "Small"
@@ -1934,7 +1943,7 @@ msgid "      "
 msgstr "      "
 
 #: ../capplets/network/gnome-network-preferences.glade.h:2
-msgid "<b>D_irect internet connection</b>"
+msgid "<b>Di_rect internet connection</b>"
 msgstr "<b>_Otseühendus Internetiga</b>"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:3
@@ -2093,7 +2102,7 @@ msgid ""
 "The gzip utility is not installed."
 msgstr ""
 "Teemat pole võimalik paigaldada. \n"
-"utiliiti gzip pole paigaldatud."
+"Utiliiti gzip pole paigaldatud."
 
 #: ../capplets/theme-switcher/gnome-theme-installer.c:330
 #, c-format
@@ -2416,29 +2425,24 @@ msgstr ""
 "%s"
 
 #: ../capplets/windows/gnome-window-properties.c:642
-#, fuzzy
 msgid "C_ontrol"
-msgstr "Control"
+msgstr "C_ontrol"
 
 #: ../capplets/windows/gnome-window-properties.c:647
-#, fuzzy
 msgid "_Alt"
-msgstr "Alt"
+msgstr "_Alt"
 
 #: ../capplets/windows/gnome-window-properties.c:653
-#, fuzzy
 msgid "H_yper"
-msgstr "Tüüp"
+msgstr ""
 
 #: ../capplets/windows/gnome-window-properties.c:660
-#, fuzzy
 msgid "S_uper (or \"Windows logo\")"
-msgstr "Super (ehk \"Windowsi logo\")"
+msgstr "S_uper (ehk \"Windowsi logo\")"
 
 #: ../capplets/windows/gnome-window-properties.c:667
-#, fuzzy
 msgid "_Meta"
-msgstr "Meta"
+msgstr "_Meta"
 
 #: ../capplets/windows/gnome-window-properties.glade.h:1
 msgid "<b>Movement Key</b>"
@@ -2453,10 +2457,9 @@ msgid "<b>Window Selection</b>"
 msgstr "<b>Akna valimine</b>"
 
 #: ../capplets/windows/gnome-window-properties.glade.h:4
-#, fuzzy
 msgid "To move a window, press-and-hold this key then grab the window:"
 msgstr ""
-"Akna _liigutamiseks vajuta ning hoia all seda klahvi, seejärel haara aknast:"
+"Akna liigutamiseks vajuta ning hoia all seda klahvi, seejärel haara aknast:"
 
 #: ../capplets/windows/gnome-window-properties.glade.h:5
 msgid "Window Preferences"
@@ -2523,50 +2526,78 @@ msgstr "Helitugevus"
 msgid "Could not initialize Bonobo"
 msgstr "Bonobo'd pole võimalik lähtestada"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:395
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:406
 msgid "Slow Keys Alert"
 msgstr ""
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:396
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:407
 msgid ""
 "You just held down the Shift key for 8 seconds.  This is the shortcut for "
 "the Slow Keys feature, which affects the way your keyboard works."
 msgstr ""
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:398
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:409
 msgid "Do you want to activate Slow Keys?"
 msgstr ""
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:399
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:410
 msgid "Do you want to deactivate Slow Keys?"
 msgstr ""
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:408
-msgid "Sticky Keys Alert"
-msgstr ""
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
+msgid "_Activate"
+msgstr "_Aktiveeri"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:409
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
+msgid "_Deactivate"
+msgstr "_Deaktiveeri"
+
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:429
+msgid "Do_n't activate"
+msgstr "Ä_ra aktiveeri"
+
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:429
+msgid "Do_n't deactivate"
+msgstr "Ä_ra deaktiveeri"
+
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:421
+msgid "Sticky Keys Alert"
+msgstr "Kleepuvate klahvide hoiatus"
+
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:422
 msgid ""
 "You just pressed the Shift key 5 times in a row.  This is the shortcut for "
 "the Sticky Keys feature, which affects the way your keyboard works."
 msgstr ""
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:424
 msgid ""
 "You just pressed two keys at once, or pressed the Shift key 5 times in a "
 "row.  This turns off the Sticky Keys feature, which affects the way your "
 "keyboard works."
 msgstr ""
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
 msgid "Do you want to activate Sticky Keys?"
-msgstr ""
+msgstr "Kas soovid kleepuvaid klahve aktiveerida?"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:414
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
 msgid "Do you want to deactivate Sticky Keys?"
-msgstr ""
+msgstr "Kas soovid kleepuvaid klahve deaktiveerida?"
 
 #: ../gnome-settings-daemon/gnome-settings-font.c:74
+#, c-format
+msgid ""
+"Cannot create the directory \"%s\".\n"
+"This is needed to allow changing the mouse pointer theme."
+msgstr ""
+"Kataloogi \"%s\" pole võimalik luua.\n"
+"See on kursoriteema vahetamiseks vajalik."
+
 #: ../gnome-settings-daemon/gnome-settings-font.c:96
 #, c-format
 msgid ""
@@ -2701,7 +2732,7 @@ msgstr ""
 msgid "_Do not show this message again"
 msgstr "_Ära näita seda teadet uuesti"
 
-#: ../gnome-settings-daemon/gnome-settings-sound.c:150
+#: ../gnome-settings-daemon/gnome-settings-sound.c:155
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Helifaili %s pole võimalik sämplina %s laadida"
@@ -2778,7 +2809,7 @@ msgstr "Ekraan"
 msgid "Screen on which BGApplier is to draw"
 msgstr ""
 
-#: ../libgswitchit/gswitchit_config.c:1035
+#: ../libgswitchit/gswitchit_config.c:1036
 #, c-format
 msgid "There was an error loading an image: %s"
 msgstr "Pildi laadimisel tekkis viga: %s"
@@ -2788,14 +2819,13 @@ msgid "Sound not set for this event."
 msgstr "Selle sündmuse jaoks pole heli määratud"
 
 #: ../libsounds/sound-view.c:124
-#, fuzzy
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package for a set of default sounds."
 msgstr ""
-"Selle sündmuse jaoks pole helifaili. Võib-olla\n"
-"on sul vaja vaikimisi määratud helide jaoks\n"
-"tarvis paigaldada gnome-audio pakk."
+"Selle sündmuse jaoks pole helifaili.\n"
+"Võib-olla on sul vaja vaikimisi määratud helide jaoks tarvis paigaldada "
+"gnome-audio pakk."
 
 #: ../libsounds/sound-view.c:135
 msgid "The sound file for this event does not exist."
@@ -2905,56 +2935,96 @@ msgid "Log out's shortcut."
 msgstr "Väljalogimise kiirklahv"
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
+msgid "Next track key's shortcut."
+msgstr "Järgmise loo kiirklahv."
+
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
+msgid "Pause"
+msgstr "Paus"
+
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
+msgid "Pause key's shortcut."
+msgstr "Pausi kiirklahv."
+
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
+msgid "Play (or play/pause)"
+msgstr "Mängi (või mängi/paus)"
+
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
+msgid "Play (or play/pause) key's shortcut."
+msgstr "Mängimise (või mängimise/pausi) kiirklahv"
+
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
+msgid "Previous track key's shortcut."
+msgstr "Eelmise loo kiirklahv."
+
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
 msgid "Search"
 msgstr "Otsing"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
 msgid "Search's shortcut."
 msgstr "Otsingu kiirklahv."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
+msgid "Skip to next track"
+msgstr "Hüppa järgmise loo peale"
+
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
+msgid "Skip to previous track"
+msgstr "Hüppa eelmise loo peale"
+
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
 msgid "Sleep"
 msgstr ""
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
 msgid "Sleep's shortcut."
 msgstr ""
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
+msgid "Stop playback key"
+msgstr "Lõpeta mängimine"
+
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
+msgid "Stop playback key's shortcut."
+msgstr "Mängimise lõpetamise kiirklahv."
+
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
 msgid "Volume down"
 msgstr "Heli vaiksemaks"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
 msgid "Volume down's shortcut."
 msgstr "Heli vaiksemakskeeramise kiirklahv."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
 msgid "Volume mute"
 msgstr "Heli vaigistamine"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
 msgid "Volume mute's shortcut"
 msgstr "Heli vaigistamise kiirklahv"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:37
 msgid "Volume step"
-msgstr ""
+msgstr "Helitugevuse samm"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:38
 msgid "Volume step as percentage of volume."
-msgstr ""
+msgstr "Helitugevuse reguleerimise samm protsentides."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:39
 msgid "Volume up"
 msgstr "Heli valjemaks"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
 msgid "Volume up's shortcut."
 msgstr "Heli valjemakskeeramise kiirklahv."
 
 #: ../schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:1
 msgid "Display a dialog when there are errors running the screensaver"
-msgstr ""
+msgstr "Dialoogi kuvamine, kui ekraanisäästja käivitamisel esineb vigu"
 
 #: ../schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:2
 msgid "Run screensaver at login"
@@ -3323,6 +3393,15 @@ msgstr "Kas teha paigaldatud teemadest pisipilte"
 msgid "Whether to thumbnail themes"
 msgstr "Kas teha teemadest pisipilte"
 
+#~ msgid "Epiphany"
+#~ msgstr "Epiphany"
+
+#~ msgid "Large Cursor"
+#~ msgstr "Suur kursor"
+
+#~ msgid "Cursors"
+#~ msgstr "Kursorid"
+
 #~ msgid "Please specify a name and a command for this editor."
 #~ msgstr "Palun määra selle redaktori nimi ja käsk."
 
@@ -3349,9 +3428,6 @@ msgstr "Kas teha teemadest pisipilte"
 
 #~ msgid "Default Text Editor"
 #~ msgstr "Vaikimisi tekstiredaktor"
-
-#~ msgid "Default Web Browser"
-#~ msgstr "Vaikimisi veebisirvija"
 
 #~ msgid "Default Window Manager"
 #~ msgstr "Vaikimisi aknahaldur"
@@ -3431,36 +3507,6 @@ msgstr "Kas teha teemadest pisipilte"
 
 #~ msgid "_Play"
 #~ msgstr "_Esita"
-
-#~ msgid "Next track key's shortcut."
-#~ msgstr "Järgmise loo kiirklahv."
-
-#~ msgid "Pause"
-#~ msgstr "Paus"
-
-#~ msgid "Pause key's shortcut."
-#~ msgstr "Pausi kiirklahv."
-
-#~ msgid "Play (or play/pause)"
-#~ msgstr "Mängi (või mängi/paus)"
-
-#~ msgid "Play (or play/pause) key's shortcut."
-#~ msgstr "Mängimise (või mängimise/pausi) kiirklahv"
-
-#~ msgid "Previous track key's shortcut."
-#~ msgstr "Eelmise loo kiirklahv."
-
-#~ msgid "Skip to next track"
-#~ msgstr "Hüppa järgmise loo peale"
-
-#~ msgid "Skip to previous track"
-#~ msgstr "Hüppa eelmise loo peale"
-
-#~ msgid "Stop playback key"
-#~ msgstr "Lõpeta mängimine"
-
-#~ msgid "Stop playback key's shortcut."
-#~ msgstr "Mängimise lõpetamise kiirklahv."
 
 #~ msgid "_Go To Theme Folder"
 #~ msgstr "_Ava teemade kataloog"
