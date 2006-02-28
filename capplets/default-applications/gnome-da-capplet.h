@@ -58,6 +58,8 @@ typedef struct _GnomeDACapplet GnomeDACapplet;
 struct _GnomeDACapplet {
     GladeXML *xml;
 
+    GtkIconTheme *icon_theme;
+
     GtkWidget *window;
 
     GtkWidget *web_combo_box;

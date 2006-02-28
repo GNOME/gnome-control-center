@@ -30,7 +30,6 @@
 #include "gnome-da-xml.h"
 #include "gnome-da-item.h"
 
-/* TODO: add support for themeable icons also for combo boxes */
 /* TODO: it doesn't use GConfPropertyEditor, use it when/if moved to control-center */
 
 enum
@@ -139,20 +138,6 @@ set_icon (GtkImage *image, GtkIconTheme *theme, const char *name)
 	g_object_unref (pixbuf);
     }
 }
-
-static struct {
-    const gchar *name;
-    const gchar *icon;
-} icons[] = {
-    { "web_browser_image", "web-browser"      },
-    { "mail_reader_image", "stock_mail-open"  },
-/*    { "messenger_image",   "im"               },
- *    { "image_image",       "image-viewer"     },
- *    { "sound_image",       "gnome-audio"      },
- *    { "video_image",       "gnome-multimedia" },
- *    { "text_image",        "text-editor"      }, */
-    { "terminal_image",    "gnome-terminal"   }
-};
 
 static void
 web_radiobutton_toggled_cb (GtkToggleButton *togglebutton, GnomeDACapplet *capplet)
@@ -353,15 +338,77 @@ terminal_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
 }
 
 static void
-theme_changed_cb (GtkIconTheme *theme, GladeXML *xml)
+refresh_combo_box_icons (GtkIconTheme *theme, GtkComboBox *combo_box, GList *app_list)
+{
+    GList *entry;
+    GnomeDAItem *item;
+    GtkTreeModel *model;
+    GtkTreeIter iter;
+    GdkPixbuf *pixbuf;
+
+    for (entry = app_list; entry != NULL; entry = g_list_next (entry)) {
+	item = (GnomeDAItem *) entry->data;
+
+	model = gtk_combo_box_get_model (combo_box);
+
+	if (item->icon_path && gtk_tree_model_get_iter_from_string (model, &iter, item->icon_path)) {
+	    pixbuf = gtk_icon_theme_load_icon (theme, item->icon_name, 22, 0, NULL);
+
+	    gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+				PIXBUF_COL, pixbuf,
+				-1);
+
+	    if (pixbuf)
+		g_object_unref (pixbuf);
+	}
+    }
+}
+
+static struct {
+    const gchar *name;
+    const gchar *icon;
+} icons[] = {
+    { "web_browser_image", "web-browser"      },
+    { "mail_reader_image", "stock_mail-open"  },
+/*    { "messenger_image",   "im"               },
+ *    { "image_image",       "image-viewer"     },
+ *    { "sound_image",       "gnome-audio"      },
+ *    { "video_image",       "gnome-multimedia" },
+ *    { "text_image",        "text-editor"      }, */
+    { "terminal_image",    "gnome-terminal"   }
+};
+
+static void
+theme_changed_cb (GtkIconTheme *theme, GnomeDACapplet *capplet)
 {
     GtkWidget *icon;
     gint i;
 
     for (i = 0; i < G_N_ELEMENTS (icons); i++) {
-	icon = glade_xml_get_widget (xml, icons[i].name);
+	icon = glade_xml_get_widget (capplet->xml, icons[i].name);
 	set_icon (GTK_IMAGE (icon), theme, icons[i].icon);
     }
+
+    refresh_combo_box_icons (theme, GTK_COMBO_BOX (capplet->web_combo_box), capplet->web_browsers);
+    refresh_combo_box_icons (theme, GTK_COMBO_BOX (capplet->mail_combo_box), capplet->mail_readers);
+    refresh_combo_box_icons (theme, GTK_COMBO_BOX (capplet->term_combo_box), capplet->terminals);
+}
+
+static void
+screen_changed_cb (GtkWidget *widget, GdkScreen *screen, GnomeDACapplet *capplet)
+{
+    GtkIconTheme *theme;
+    gulong sig_handler;
+
+    theme = gtk_icon_theme_get_for_screen (screen);
+
+    if (capplet->icon_theme != NULL) {
+	g_signal_handlers_disconnect_by_func (capplet->icon_theme, theme_changed_cb, capplet);
+    }
+    g_signal_connect (theme, "changed", G_CALLBACK (theme_changed_cb), capplet);
+    theme_changed_cb (theme, capplet);
+
+    capplet->icon_theme = theme;
 }
 
 static gint
@@ -644,6 +691,10 @@ fill_combo_box (GtkIconTheme *theme, GtkComboBox *combo_box, GList *app_list)
     GdkPixbuf *pixbuf;
     gchar *label;
 
+    if (theme == NULL) {
+	theme = gtk_icon_theme_get_default ();
+    }
+
     gtk_combo_box_set_row_separator_func (combo_box, is_separator,
 					  GINT_TO_POINTER (g_list_length (app_list)), NULL);
 
@@ -677,6 +728,8 @@ fill_combo_box (GtkIconTheme *theme, GtkComboBox *combo_box, GList *app_list)
 			    PIXBUF_COL, pixbuf,
 			    TEXT_COL, label,
 			    -1);
+
+	item->icon_path = gtk_tree_model_get_string_from_iter (model, &iter);
 
 	if (pixbuf)
 	    g_object_unref (pixbuf);
@@ -722,10 +775,6 @@ show_dialog (GnomeDACapplet *capplet)
     capplet->window = glade_xml_get_widget (capplet->xml, "preferred_apps_dialog");
     g_signal_connect (capplet->window, "response", G_CALLBACK (close_cb), NULL);
 
-    theme = gtk_icon_theme_get_default ();
-    g_signal_connect (theme, "changed", G_CALLBACK (theme_changed_cb), capplet->xml);
-    theme_changed_cb (theme, capplet->xml);
-
     capplet->web_browser_command_entry = glade_xml_get_widget (capplet->xml, "web_browser_command_entry");
     capplet->web_browser_command_label = glade_xml_get_widget (capplet->xml, "web_browser_command_label");
     capplet->web_browser_terminal_checkbutton = glade_xml_get_widget (capplet->xml, "web_browser_terminal_checkbutton");
@@ -746,9 +795,12 @@ show_dialog (GnomeDACapplet *capplet)
     capplet->mail_combo_box = glade_xml_get_widget (capplet->xml, "mail_reader_combobox");
     capplet->term_combo_box = glade_xml_get_widget (capplet->xml, "terminal_combobox");
 
-    fill_combo_box (theme, GTK_COMBO_BOX (capplet->web_combo_box), capplet->web_browsers);
-    fill_combo_box (theme, GTK_COMBO_BOX (capplet->mail_combo_box), capplet->mail_readers);
-    fill_combo_box (theme, GTK_COMBO_BOX (capplet->term_combo_box), capplet->terminals);
+    g_signal_connect (capplet->window, "screen-changed", G_CALLBACK (screen_changed_cb), capplet);
+    screen_changed_cb (capplet->window, gdk_screen_get_default (), capplet);
+
+    fill_combo_box (capplet->icon_theme, GTK_COMBO_BOX (capplet->web_combo_box), capplet->web_browsers);
+    fill_combo_box (capplet->icon_theme, GTK_COMBO_BOX (capplet->mail_combo_box), capplet->mail_readers);
+    fill_combo_box (capplet->icon_theme, GTK_COMBO_BOX (capplet->term_combo_box), capplet->terminals);
 
     /* update ui to gconf content */
     value = gconf_client_get (capplet->gconf, DEFAULT_APPS_KEY_HTTP_EXEC, NULL);

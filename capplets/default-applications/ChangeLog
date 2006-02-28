@@ -1,3 +1,15 @@
+2006-02-28  Luca Cavalli  <loopback@slackit.org>
+
+	* gnome-da-capplet.c: (refresh_combo_box_icons),
+	(theme_changed_cb), (screen_changed_cb), (fill_combo_box),
+	(show_dialog):
+	* gnome-da-capplet.h:
+	* gnome-da-item.c: (gnome_da_web_item_free),
+	(gnome_da_mail_item_free), (gnome_da_term_item_free):
+	* gnome-da-item.h: look at the correct icon theme after screen changes
+	and update also combo boxes icons when icon theme changes. Closes
+	bug #330154.
+
 2006-02-28  Takeshi Aihana  <aihana@jcom.home.ne.jp>
 
 	* gnome-da-capplet.c: (show_dialog), (main): use correct text domain

@@ -34,6 +34,7 @@ struct _GnomeDAItem {
     gchar *executable;
     gchar *command;
     gchar *icon_name;
+    gchar *icon_path;
 };
 
 struct _GnomeDAWebItem {

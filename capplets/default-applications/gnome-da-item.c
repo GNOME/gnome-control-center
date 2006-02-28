@@ -60,6 +60,7 @@ gnome_da_web_item_free (GnomeDAWebItem *item)
     g_free (item->generic.executable);
     g_free (item->generic.command);
     g_free (item->generic.icon_name);
+    g_free (item->generic.icon_path);
 
     g_free (item->tab_command);
     g_free (item->win_command);
@@ -76,6 +77,7 @@ gnome_da_mail_item_free (GnomeDAMailItem *item)
     g_free (item->generic.executable);
     g_free (item->generic.command);
     g_free (item->generic.icon_name);
+    g_free (item->generic.icon_path);
 
     g_free (item);
 }
@@ -89,6 +91,7 @@ gnome_da_term_item_free (GnomeDATermItem *item)
     g_free (item->generic.executable);
     g_free (item->generic.command);
     g_free (item->generic.icon_name);
+    g_free (item->generic.icon_path);
 
     g_free (item->exec_flag);
 
