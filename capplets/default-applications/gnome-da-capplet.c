@@ -19,7 +19,7 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include "config.h"
+#include <config.h>
 #endif
 
 #include <string.h>
@@ -699,10 +699,10 @@ show_dialog (GnomeDACapplet *capplet)
     GtkIconTheme *theme;
 
     if (g_file_test (GLADEDIR "/gnome-default-applications-properties.glade", G_FILE_TEST_EXISTS) != FALSE) {
-	capplet->xml = glade_xml_new (GLADEDIR "/gnome-default-applications-properties.glade", NULL, PACKAGE);
+	capplet->xml = glade_xml_new (GLADEDIR "/gnome-default-applications-properties.glade", NULL, NULL);
     }
     else {
-	capplet->xml = glade_xml_new ("./gnome-default-applications-properties.glade", NULL, PACKAGE);
+	capplet->xml = glade_xml_new ("./gnome-default-applications-properties.glade", NULL, NULL);
     }
 
     if (capplet->xml == NULL) {
@@ -807,14 +807,16 @@ main (int argc, char **argv)
 
     capplet = g_new0 (GnomeDACapplet, 1);
 
+#ifdef ENABLE_NLS
+    bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
+    bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+    textdomain (GETTEXT_PACKAGE);
+#endif
+
     gnome_program_init (PACKAGE, VERSION, LIBGNOMEUI_MODULE, argc, argv,
 			GNOME_PARAM_NONE);
 
     glade_init ();
-
-    bindtextdomain (PACKAGE, GNOMELOCALEDIR);
-    bind_textdomain_codeset (PACKAGE, "UTF-8");
-    textdomain (PACKAGE);
 
     capplet->gconf = gconf_client_get_default ();
 
