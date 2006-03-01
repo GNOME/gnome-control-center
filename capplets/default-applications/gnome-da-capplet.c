@@ -398,7 +398,6 @@ static void
 screen_changed_cb (GtkWidget *widget, GdkScreen *screen, GnomeDACapplet *capplet)
 {
     GtkIconTheme *theme;
-    gulong sig_handler;
 
     theme = gtk_icon_theme_get_for_screen (screen);
 
@@ -749,7 +748,6 @@ static void
 show_dialog (GnomeDACapplet *capplet)
 {
     GConfValue *value;
-    GtkIconTheme *theme;
 
     if (g_file_test (GLADEDIR "/gnome-default-applications-properties.glade", G_FILE_TEST_EXISTS) != FALSE) {
 	capplet->xml = glade_xml_new (GLADEDIR "/gnome-default-applications-properties.glade", NULL, NULL);
