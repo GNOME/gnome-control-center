@@ -73,7 +73,7 @@ gnome_settings_daemon_LDADD = \
 	$(top_builddir)/libwindow-settings/libgnome-window-settings.la 	\
 	$(top_builddir)/gnome-settings-daemon/actions/libacme.la	\
 	$(GNOME_SETTINGS_DAEMON_LIBS)					\
-	$(XF86MISC_LIBS)
+	$(XF86MISC_LIBS) $(GST_LIBS)
 
 #AccessX_files = \
 #	AccessXcomm.c		\

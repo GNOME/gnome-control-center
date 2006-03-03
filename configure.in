@@ -500,6 +500,10 @@ if test "x$ENABLE_GSTREAMER" = "xyes"; then
    if test x$GST_MAJORMINOR = x0.10 ; then
       GST_LIBS="$GST_LIBS -lgstinterfaces-0.10 -lgstaudio-0.10"
    fi
+
+   if test x$GST_MAJORMINOR = x0.8 ; then
+     GST_LIBS="$GST_LIBS -lgstinterfaces-0.8"
+   fi
 else
    have_gstreamer=disabled
    AC_MSG_RESULT(*** GStreamer has been explicitly disabled ***)
