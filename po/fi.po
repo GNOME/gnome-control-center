@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-18 10:31+0200\n"
-"PO-Revision-Date: 2006-02-18 10:32+0200\n"
+"POT-Creation-Date: 2006-03-04 13:06+0200\n"
+"PO-Revision-Date: 2006-03-04 13:10+0200\n"
 "Last-Translator: Ilkka Tuohela <hile@iki.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -984,32 +984,32 @@ msgstr "Oletussovellukset"
 msgid "Select your default applications"
 msgstr "Valitse oletusohjelmasi"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:56
+#: ../capplets/default-applications/gnome-da-capplet.c:55
 msgid "Could not display help"
 msgstr "Ohjetta ei voi näyttää"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:58
-#: ../capplets/default-applications/gnome-da-capplet.c:714
+#: ../capplets/default-applications/gnome-da-capplet.c:57
+#: ../capplets/default-applications/gnome-da-capplet.c:765
 msgid "Please make sure that the applet is properly installed"
 msgstr "Varmista että sovelma on oikein asennettu"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:93
-#: ../capplets/default-applications/gnome-da-capplet.c:126
-#: ../capplets/default-applications/gnome-da-capplet.c:185
-#: ../capplets/default-applications/gnome-da-capplet.c:230
-#: ../capplets/default-applications/gnome-da-capplet.c:284
-#: ../capplets/default-applications/gnome-da-capplet.c:333
-#: ../capplets/default-applications/gnome-da-capplet.c:554
-#: ../capplets/default-applications/gnome-da-capplet.c:575
+#: ../capplets/default-applications/gnome-da-capplet.c:92
+#: ../capplets/default-applications/gnome-da-capplet.c:125
+#: ../capplets/default-applications/gnome-da-capplet.c:170
+#: ../capplets/default-applications/gnome-da-capplet.c:215
+#: ../capplets/default-applications/gnome-da-capplet.c:269
+#: ../capplets/default-applications/gnome-da-capplet.c:318
+#: ../capplets/default-applications/gnome-da-capplet.c:600
+#: ../capplets/default-applications/gnome-da-capplet.c:621
 #, c-format
 msgid "Error saving configuration: %s"
 msgstr "Virhe tallennettaessa asetuksia: %s"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:691
+#: ../capplets/default-applications/gnome-da-capplet.c:743
 msgid "Custom"
 msgstr "Oma"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:712
+#: ../capplets/default-applications/gnome-da-capplet.c:763
 msgid "Could not load the main interface"
 msgstr "Käyttöliittymän pääikkunaa ei voi ladata"
 
@@ -2809,7 +2809,7 @@ msgstr ""
 msgid "_Do not show this message again"
 msgstr "_Älä näytä tätä viestiä uudestaan"
 
-#: ../gnome-settings-daemon/gnome-settings-sound.c:155
+#: ../gnome-settings-daemon/gnome-settings-sound.c:131
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Äänitiedoston %s latautuminen ääneksi %s epäonnistui"
@@ -2893,11 +2893,39 @@ msgstr "Näyttö, jolle BGApplier piirtää"
 msgid "There was an error loading an image: %s"
 msgstr "Virhe ladattaessa kuvaa: %s"
 
-#: ../libsounds/sound-view.c:115
+#: ../libsounds/sound-view.c:43
+msgid "Login"
+msgstr "Kirjaudu sisään"
+
+#: ../libsounds/sound-view.c:44
+msgid "Logout"
+msgstr "Kirjaudu ulos"
+
+#: ../libsounds/sound-view.c:45
+msgid "Boing"
+msgstr "Kumahdus"
+
+#: ../libsounds/sound-view.c:46
+msgid "Siren"
+msgstr "Sireeni"
+
+#: ../libsounds/sound-view.c:47
+msgid "Clink"
+msgstr "Helähdys"
+
+#: ../libsounds/sound-view.c:48
+msgid "Beep"
+msgstr "Piippaus"
+
+#: ../libsounds/sound-view.c:49
+msgid "No sound"
+msgstr "Ei ääntä"
+
+#: ../libsounds/sound-view.c:131
 msgid "Sound not set for this event."
 msgstr "Tälle tapahtumalle ei olem määritelty ääntä"
 
-#: ../libsounds/sound-view.c:124
+#: ../libsounds/sound-view.c:140
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package for a set of default sounds."
@@ -2905,18 +2933,22 @@ msgstr ""
 "Tapahtumaan liittyvää äänitiedostoa ei ole olemassa.\n"
 "Voi olla että haluat asetnaa paketin gnome-audio, jossa oletusäänet ovat."
 
-#: ../libsounds/sound-view.c:135
+#: ../libsounds/sound-view.c:151
 msgid "The sound file for this event does not exist."
 msgstr "Tämän tapahtuman äänitiedostoa ei ole."
 
-#: ../libsounds/sound-view.c:166
+#: ../libsounds/sound-view.c:182
 msgid "Select Sound File"
 msgstr "Valitse äänitiedosto"
 
-#: ../libsounds/sound-view.c:186
+#: ../libsounds/sound-view.c:202
 #, c-format
 msgid "The file %s is not a valid wav file"
 msgstr "Tiedosto %s ei ole kelvollinen WAV-tiedosto"
+
+#: ../libsounds/sound-view.c:359
+msgid "System Sounds"
+msgstr "Järjestelmän äänet"
 
 #: ../libwindow-settings/gnome-wm-manager.c:320
 #, c-format
