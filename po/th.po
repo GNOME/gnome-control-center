@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-18 10:25+0700\n"
-"PO-Revision-Date: 2006-02-18 10:27+0700\n"
+"POT-Creation-Date: 2006-03-04 14:52+0700\n"
+"PO-Revision-Date: 2006-03-04 15:01+0700\n"
 "Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
 "Language-Team: Thai <L10n@opentle.org>\n"
 "MIME-Version: 1.0\n"
@@ -964,32 +964,32 @@ msgstr "โปรแกรมที่ชอบ"
 msgid "Select your default applications"
 msgstr "เลือกโปรแกรมที่จะถูกใช้โดยปรกติ"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:56
+#: ../capplets/default-applications/gnome-da-capplet.c:55
 msgid "Could not display help"
 msgstr "แสดงวิธีใช้ไม่สำเร็จ"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:58
-#: ../capplets/default-applications/gnome-da-capplet.c:714
+#: ../capplets/default-applications/gnome-da-capplet.c:57
+#: ../capplets/default-applications/gnome-da-capplet.c:765
 msgid "Please make sure that the applet is properly installed"
 msgstr "กรุณาตรวจสอบการติดตั้งแอพเพล็ตว่าเรียบร้อยดีหรือไม่"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:93
-#: ../capplets/default-applications/gnome-da-capplet.c:126
-#: ../capplets/default-applications/gnome-da-capplet.c:185
-#: ../capplets/default-applications/gnome-da-capplet.c:230
-#: ../capplets/default-applications/gnome-da-capplet.c:284
-#: ../capplets/default-applications/gnome-da-capplet.c:333
-#: ../capplets/default-applications/gnome-da-capplet.c:554
-#: ../capplets/default-applications/gnome-da-capplet.c:575
+#: ../capplets/default-applications/gnome-da-capplet.c:92
+#: ../capplets/default-applications/gnome-da-capplet.c:125
+#: ../capplets/default-applications/gnome-da-capplet.c:170
+#: ../capplets/default-applications/gnome-da-capplet.c:215
+#: ../capplets/default-applications/gnome-da-capplet.c:269
+#: ../capplets/default-applications/gnome-da-capplet.c:318
+#: ../capplets/default-applications/gnome-da-capplet.c:600
+#: ../capplets/default-applications/gnome-da-capplet.c:621
 #, c-format
 msgid "Error saving configuration: %s"
 msgstr "เกิดข้อผิดพลาดขณะบันทึกค่าตั้ง: %s"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:691
+#: ../capplets/default-applications/gnome-da-capplet.c:743
 msgid "Custom"
 msgstr "กำหนดเอง"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:712
+#: ../capplets/default-applications/gnome-da-capplet.c:763
 msgid "Could not load the main interface"
 msgstr "อ่านส่วนติดต่อผู้ใช้หลักไม่สำเร็จ"
 
@@ -2773,7 +2773,7 @@ msgstr ""
 msgid "_Do not show this message again"
 msgstr "ไ_ม่ต้องแสดงข้อความนี้อีก"
 
-#: ../gnome-settings-daemon/gnome-settings-sound.c:155
+#: ../gnome-settings-daemon/gnome-settings-sound.c:131
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "ไม่สามารถเรียกแฟ้มเสียง %s เป็นตัวอย่างเสียง %s"
@@ -2857,11 +2857,39 @@ msgstr "จอที่จะให้ BGApplier เขียน"
 msgid "There was an error loading an image: %s"
 msgstr "เกิดข้อผิดพลาดขณะโหลดรูปภาพ: %s"
 
-#: ../libsounds/sound-view.c:115
+#: ../libsounds/sound-view.c:43
+msgid "Login"
+msgstr "เข้าระบบ"
+
+#: ../libsounds/sound-view.c:44
+msgid "Logout"
+msgstr "ออกจากระบบ"
+
+#: ../libsounds/sound-view.c:45
+msgid "Boing"
+msgstr "แจ้งเพื่อทราบ"
+
+#: ../libsounds/sound-view.c:46
+msgid "Siren"
+msgstr "ผิดพลาด"
+
+#: ../libsounds/sound-view.c:47
+msgid "Clink"
+msgstr "คลิก"
+
+#: ../libsounds/sound-view.c:48
+msgid "Beep"
+msgstr "โผล่"
+
+#: ../libsounds/sound-view.c:49
+msgid "No sound"
+msgstr "ไม่ใช้เสียง"
+
+#: ../libsounds/sound-view.c:131
 msgid "Sound not set for this event."
 msgstr "ไม่ได้กำหนดเสียงสำหรับเหตุการณ์นี้ไว้"
 
-#: ../libsounds/sound-view.c:124
+#: ../libsounds/sound-view.c:140
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package for a set of default sounds."
@@ -2869,18 +2897,22 @@ msgstr ""
 "หาแฟ้มเสียงสำหรับเหตุการณ์นี้ไม่พบ\n"
 "ถ้าคุณต้องการชุดเสียงปริยาย กรุณาติดตั้ง gnome-audio"
 
-#: ../libsounds/sound-view.c:135
+#: ../libsounds/sound-view.c:151
 msgid "The sound file for this event does not exist."
 msgstr "หาแฟ้มเสียงสำหรับเหตุการณ์นี้ไม่พบ"
 
-#: ../libsounds/sound-view.c:166
+#: ../libsounds/sound-view.c:182
 msgid "Select Sound File"
 msgstr "เลือกแฟ้มเสียง"
 
-#: ../libsounds/sound-view.c:186
+#: ../libsounds/sound-view.c:202
 #, c-format
 msgid "The file %s is not a valid wav file"
 msgstr "แฟ้ม %s ไม่ใช่แฟ้ม wav ที่ใช้ได้"
+
+#: ../libsounds/sound-view.c:359
+msgid "System Sounds"
+msgstr "เสียงของระบบ"
 
 #: ../libwindow-settings/gnome-wm-manager.c:320
 #, c-format
