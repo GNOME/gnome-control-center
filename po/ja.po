@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: control-center HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-19 15:58+0900\n"
-"PO-Revision-Date: 2006-02-19 15:54+0900\n"
-"Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
+"POT-Creation-Date: 2006-03-05 10:15+0900\n"
+"PO-Revision-Date: 2006-03-05 10:32+0900\n"
+"Last-Translator: Satoru SATOH <ss@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -978,32 +978,32 @@ msgstr "お気に入りのアプリ"
 msgid "Select your default applications"
 msgstr "デフォルトで使用するアプリケーションを設定します"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:56
+#: ../capplets/default-applications/gnome-da-capplet.c:55
 msgid "Could not display help"
 msgstr "ヘルプを表示できませんでした"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:58
-#: ../capplets/default-applications/gnome-da-capplet.c:714
+#: ../capplets/default-applications/gnome-da-capplet.c:57
+#: ../capplets/default-applications/gnome-da-capplet.c:765
 msgid "Please make sure that the applet is properly installed"
 msgstr "そのアプレットが適切にインストールされているか確認して下さい"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:93
-#: ../capplets/default-applications/gnome-da-capplet.c:126
-#: ../capplets/default-applications/gnome-da-capplet.c:185
-#: ../capplets/default-applications/gnome-da-capplet.c:230
-#: ../capplets/default-applications/gnome-da-capplet.c:284
-#: ../capplets/default-applications/gnome-da-capplet.c:333
-#: ../capplets/default-applications/gnome-da-capplet.c:554
-#: ../capplets/default-applications/gnome-da-capplet.c:575
+#: ../capplets/default-applications/gnome-da-capplet.c:92
+#: ../capplets/default-applications/gnome-da-capplet.c:125
+#: ../capplets/default-applications/gnome-da-capplet.c:170
+#: ../capplets/default-applications/gnome-da-capplet.c:215
+#: ../capplets/default-applications/gnome-da-capplet.c:269
+#: ../capplets/default-applications/gnome-da-capplet.c:318
+#: ../capplets/default-applications/gnome-da-capplet.c:600
+#: ../capplets/default-applications/gnome-da-capplet.c:621
 #, c-format
 msgid "Error saving configuration: %s"
 msgstr "設定情報を保存する際にエラーが発生しました: %s"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:691
+#: ../capplets/default-applications/gnome-da-capplet.c:743
 msgid "Custom"
 msgstr "その他"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:712
+#: ../capplets/default-applications/gnome-da-capplet.c:763
 msgid "Could not load the main interface"
 msgstr "メインのインタフェースを読み込めませんでした"
 
@@ -2031,12 +2031,12 @@ msgstr "SSL プロキシ(_S):"
 
 #: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:1
 msgid "Enable sound and associate sounds with events"
-msgstr "効果音とイベントに対応する効果音を有効にします"
+msgstr "サウンドとイベントに対応するサウンドを有効にします"
 
 #: ../capplets/sound/sound-properties-capplet.c:271
 #: ../capplets/sound/sound-properties.glade.h:4
 msgid "Sound Preferences"
-msgstr "効果音の設定"
+msgstr "サウンドの設定"
 
 #: ../capplets/sound/sound-properties.glade.h:1
 msgid "E_nable software sound mixing (ESD)"
@@ -2064,7 +2064,7 @@ msgstr "システムのビープ音を有効にする(_E)"
 
 #: ../capplets/sound/sound-properties.glade.h:8
 msgid "_Play system sounds"
-msgstr "効果音を演奏する(_P)"
+msgstr "システムサウンドを演奏する(_P)"
 
 #: ../capplets/sound/sound-properties.glade.h:9
 msgid "_Visual system beep"
@@ -2795,10 +2795,10 @@ msgstr ""
 msgid "_Do not show this message again"
 msgstr "次回からこのメッセージを表示しない(_D)"
 
-#: ../gnome-settings-daemon/gnome-settings-sound.c:155
+#: ../gnome-settings-daemon/gnome-settings-sound.c:131
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
-msgstr "効果音ファイル %s をサンプル %s で読み込めませんでした"
+msgstr "サウンドファイル %s をサンプル %s で読み込めませんでした"
 
 #: ../gnome-settings-daemon/gnome-settings-xrdb.c:212
 #: ../gnome-settings-daemon/gnome-settings-xrdb.c:260
@@ -2880,31 +2880,63 @@ msgstr "BGApplier が描画するスクリーンです"
 msgid "There was an error loading an image: %s"
 msgstr "画像を読み込む際にエラーが発生しました: %s"
 
-#: ../libsounds/sound-view.c:115
-msgid "Sound not set for this event."
-msgstr "このイベントには効果音が設定されていません"
+#: ../libsounds/sound-view.c:43
+msgid "Login"
+msgstr "ログイン"
 
-#: ../libsounds/sound-view.c:124
+#: ../libsounds/sound-view.c:44
+msgid "Logout"
+msgstr "ログアウト"
+
+#: ../libsounds/sound-view.c:45
+msgid "Boing"
+msgstr "ビョーン"
+
+#: ../libsounds/sound-view.c:46
+msgid "Siren"
+msgstr "サイレン"
+
+#: ../libsounds/sound-view.c:47
+msgid "Clink"
+msgstr "クリック"
+
+#: ../libsounds/sound-view.c:48
+msgid "Beep"
+msgstr "ビープ"
+
+#: ../libsounds/sound-view.c:49
+msgid "No sound"
+msgstr "サウンドなし"
+
+#: ../libsounds/sound-view.c:131
+msgid "Sound not set for this event."
+msgstr "このイベントにはサウンドが設定されていません"
+
+#: ../libsounds/sound-view.c:140
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package for a set of default sounds."
 msgstr ""
-"このイベントに対応した効果音ファイルが存在しません。\n"
-"デフォルトの効果音を有効にするには gnome-audio パッケージを\n"
+"このイベントに対応したサウンドファイルが存在しません。\n"
+"デフォルトのサウンドを有効にするには gnome-audio パッケージを\n"
 "インストールする必要があるかもしれません。"
 
-#: ../libsounds/sound-view.c:135
+#: ../libsounds/sound-view.c:151
 msgid "The sound file for this event does not exist."
-msgstr "このイベントに対する効果音ファイルが存在しません。"
+msgstr "このイベントに対するサウンドファイルが存在しません。"
 
-#: ../libsounds/sound-view.c:166
+#: ../libsounds/sound-view.c:182
 msgid "Select Sound File"
-msgstr "効果音のファイルの選択"
+msgstr "サウンドファイルの選択"
 
-#: ../libsounds/sound-view.c:186
+#: ../libsounds/sound-view.c:202
 #, c-format
 msgid "The file %s is not a valid wav file"
 msgstr "ファイル %s は正しい WAV ファイルではありません"
+
+#: ../libsounds/sound-view.c:359
+msgid "System Sounds"
+msgstr "システムサウンド"
 
 #: ../libwindow-settings/gnome-wm-manager.c:320
 #, c-format
