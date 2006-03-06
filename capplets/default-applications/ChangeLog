@@ -1,3 +1,12 @@
+2006-03-06  Luca Cavalli  <loopback@slackit.org>
+
+	* gnome-da-capplet.c: (web_combo_changed_cb),
+	(mail_combo_changed_cb), (terminal_combo_changed_cb),
+	(web_browser_update_combo_box), (mail_reader_update_combo_box),
+	(terminal_update_combo_box): replace gtk_entry_set_editable,
+	which is deprecated in newly-written code, with
+	gtk_editable_set_editable. Closes bug #329193.
+
 2006-03-01  Luca Cavalli  <loopback@slackit.org>
 
 	* gnome-da-capplet.c: (screen_changed_cb), (show_dialog): remove two

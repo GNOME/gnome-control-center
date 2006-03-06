@@ -233,7 +233,7 @@ web_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
     gtk_widget_set_sensitive (capplet->new_win_radiobutton, has_net_remote);
     gtk_widget_set_sensitive (capplet->new_tab_radiobutton, has_net_remote);
 
-    gtk_entry_set_editable (GTK_ENTRY (capplet->web_browser_command_entry), is_custom_active);
+    gtk_editable_set_editable (GTK_EDITABLE (capplet->web_browser_command_entry), is_custom_active);
     gtk_widget_set_sensitive (capplet->web_browser_command_label, is_custom_active);
     gtk_widget_set_sensitive (capplet->web_browser_terminal_checkbutton, is_custom_active);
 }
@@ -282,7 +282,7 @@ mail_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (capplet->mail_reader_terminal_checkbutton),
 				  gconf_client_get_bool (capplet->gconf, DEFAULT_APPS_KEY_MAILER_NEEDS_TERM, NULL));
 
-    gtk_entry_set_editable (GTK_ENTRY (capplet->mail_reader_command_entry), is_custom_active);
+    gtk_editable_set_editable (GTK_EDITABLE (capplet->mail_reader_command_entry), is_custom_active);
     gtk_widget_set_sensitive (capplet->mail_reader_command_label, is_custom_active);
     gtk_widget_set_sensitive (capplet->mail_reader_terminal_checkbutton, is_custom_active);
 }
@@ -331,9 +331,9 @@ terminal_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
     gtk_entry_set_text (GTK_ENTRY (capplet->terminal_exec_flag_entry),
 			gconf_client_get_string (capplet->gconf, DEFAULT_APPS_KEY_TERMINAL_EXEC_ARG, NULL));
 
-    gtk_entry_set_editable (GTK_ENTRY (capplet->terminal_command_entry), is_custom_active);
+    gtk_editable_set_editable (GTK_EDITABLE (capplet->terminal_command_entry), is_custom_active);
     gtk_widget_set_sensitive (capplet->terminal_command_label, is_custom_active);
-    gtk_entry_set_editable (GTK_ENTRY (capplet->terminal_exec_flag_entry), is_custom_active);
+    gtk_editable_set_editable (GTK_EDITABLE (capplet->terminal_exec_flag_entry), is_custom_active);
     gtk_widget_set_sensitive (capplet->terminal_exec_flag_label, is_custom_active);
 }
 
@@ -459,7 +459,7 @@ web_browser_update_combo_box (GnomeDACapplet *capplet, const gchar *command)
     /* TODO: Remove when GConfPropertyEditor will be used */
     gtk_entry_set_text (GTK_ENTRY (capplet->web_browser_command_entry), command);
 
-    gtk_entry_set_editable (GTK_ENTRY (capplet->web_browser_command_entry), is_custom_active);
+    gtk_editable_set_editable (GTK_EDITABLE (capplet->web_browser_command_entry), is_custom_active);
     gtk_widget_set_sensitive (capplet->web_browser_command_label, is_custom_active);
     gtk_widget_set_sensitive (capplet->web_browser_terminal_checkbutton, is_custom_active);
 
@@ -534,7 +534,7 @@ mail_reader_update_combo_box (GnomeDACapplet *capplet, const gchar *command)
 
     gtk_entry_set_text (GTK_ENTRY (capplet->mail_reader_command_entry), command);
 
-    gtk_entry_set_editable (GTK_ENTRY (capplet->mail_reader_command_entry), is_custom_active);
+    gtk_editable_set_editable (GTK_EDITABLE (capplet->mail_reader_command_entry), is_custom_active);
     gtk_widget_set_sensitive (capplet->mail_reader_command_label, is_custom_active);
     gtk_widget_set_sensitive (capplet->mail_reader_terminal_checkbutton, is_custom_active);
 
@@ -563,9 +563,9 @@ terminal_update_combo_box (GnomeDACapplet *capplet, const gchar *command)
 
     gtk_entry_set_text (GTK_ENTRY (capplet->terminal_command_entry), command);
 
-    gtk_entry_set_editable (GTK_ENTRY (capplet->terminal_command_entry), is_custom_active);
+    gtk_editable_set_editable (GTK_EDITABLE (capplet->terminal_command_entry), is_custom_active);
     gtk_widget_set_sensitive (capplet->terminal_command_label, is_custom_active);
-    gtk_entry_set_editable (GTK_ENTRY (capplet->terminal_exec_flag_entry), is_custom_active);
+    gtk_editable_set_editable (GTK_EDITABLE (capplet->terminal_exec_flag_entry), is_custom_active);
     gtk_widget_set_sensitive (capplet->terminal_exec_flag_label, is_custom_active);
 
     if (gtk_combo_box_get_active (GTK_COMBO_BOX (capplet->term_combo_box)) != index)
