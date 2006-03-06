@@ -1,3 +1,11 @@
+2006-03-06  Michael Witrant <mike@lepton.fr>
+
+	Fixes #94049
+
+	* factory.c (register_server): new function, does the registration
+	per DISPLAY.
+	(main): call register_server.
+
 2006-03-02  Rodrigo Moya <rodrigo@novell.com>
 
 	* gnome-settings-sound.c (start_esd): don't spawn esd, already done

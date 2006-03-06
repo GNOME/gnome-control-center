@@ -2,6 +2,7 @@
 
 #include "gnome-settings-daemon.h"
 
+#include <string.h>
 #include <bonobo.h>
 #include <bonobo/bonobo-object.h>
 #include <bonobo/bonobo-generic-factory.h>
@@ -15,10 +16,38 @@
 static BonoboObject *services_server = NULL;
 GConfClient *conf_client = NULL;
 
+static void
+register_server (BonoboObject *server)
+{
+  Bonobo_RegistrationResult ret;
+  GSList *reg_env;
+  char *display;
+  char *p;
+
+  display = g_strdup (gdk_display_get_name (gdk_display_get_default ()));
+  if ((p = strrchr (display, ':'))) {
+    p = strchr (p, '.');
+    if (p)
+      p [0] = '\0';
+  }
+
+  reg_env = bonobo_activation_registration_env_set (NULL, "DISPLAY", display);
+
+  ret = bonobo_activation_register_active_server ("OAFIID:GNOME_SettingsDaemon",
+						  BONOBO_OBJREF (server),
+						  reg_env);
+  if (ret != Bonobo_ACTIVATION_REG_SUCCESS) {
+    g_warning ("Encountered problems registering the settings daemon with bonobo-activation. "
+	       "Clients may not detect that the settings daemon is already running.");
+  }
+
+  bonobo_activation_registration_env_free (reg_env);
+  g_free (display);
+}
+
 int main (int argc, char *argv [])
 {
   GnomeClient *session;
-  Bonobo_RegistrationResult ret;
   gchar *restart_argv[] = { "gnome-settings-daemon", NULL, NULL };
 
   restart_argv[1] = *argv;
@@ -42,12 +71,7 @@ int main (int argc, char *argv [])
   /* start the settings daemon */
   services_server = BONOBO_OBJECT (gnome_settings_daemon_new ());
 
-  ret = bonobo_activation_active_server_register ("OAFIID:GNOME_SettingsDaemon",
-						  BONOBO_OBJREF (services_server));
-  if (ret != Bonobo_ACTIVATION_REG_SUCCESS) {
-    g_warning ("Encountered problems registering the settings daemon with bonobo-activation. "
-	       "Clients may not detect that the settings daemon is already running.");
-  }
+  register_server (services_server);
 
   session = gnome_master_client ();
   gnome_client_set_restart_command (session, 2, restart_argv);
