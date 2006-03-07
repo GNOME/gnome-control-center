@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GNOME control center HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-25 08:11+0100\n"
-"PO-Revision-Date: 2006-02-26 10:50+0200\n"
+"POT-Creation-Date: 2006-03-05 06:54+0100\n"
+"PO-Revision-Date: 2006-03-05 13:15+0200\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -971,32 +971,32 @@ msgstr "Eelistatud rakendused"
 msgid "Select your default applications"
 msgstr "Vaikimisi kasutatavate rakenduste valimine"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:56
+#: ../capplets/default-applications/gnome-da-capplet.c:55
 msgid "Could not display help"
 msgstr ""
 
-#: ../capplets/default-applications/gnome-da-capplet.c:58
-#: ../capplets/default-applications/gnome-da-capplet.c:714
+#: ../capplets/default-applications/gnome-da-capplet.c:57
+#: ../capplets/default-applications/gnome-da-capplet.c:765
 msgid "Please make sure that the applet is properly installed"
 msgstr "Veendu, et rakend on õigesti paigaldatud"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:93
-#: ../capplets/default-applications/gnome-da-capplet.c:126
-#: ../capplets/default-applications/gnome-da-capplet.c:185
-#: ../capplets/default-applications/gnome-da-capplet.c:230
-#: ../capplets/default-applications/gnome-da-capplet.c:284
-#: ../capplets/default-applications/gnome-da-capplet.c:333
-#: ../capplets/default-applications/gnome-da-capplet.c:554
-#: ../capplets/default-applications/gnome-da-capplet.c:575
+#: ../capplets/default-applications/gnome-da-capplet.c:92
+#: ../capplets/default-applications/gnome-da-capplet.c:125
+#: ../capplets/default-applications/gnome-da-capplet.c:170
+#: ../capplets/default-applications/gnome-da-capplet.c:215
+#: ../capplets/default-applications/gnome-da-capplet.c:269
+#: ../capplets/default-applications/gnome-da-capplet.c:318
+#: ../capplets/default-applications/gnome-da-capplet.c:600
+#: ../capplets/default-applications/gnome-da-capplet.c:621
 #, c-format
 msgid "Error saving configuration: %s"
 msgstr "Viga sätete salvestamisel: %s"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:691
+#: ../capplets/default-applications/gnome-da-capplet.c:743
 msgid "Custom"
 msgstr "Kohandatud"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:712
+#: ../capplets/default-applications/gnome-da-capplet.c:763
 msgid "Could not load the main interface"
 msgstr ""
 
@@ -1203,7 +1203,7 @@ msgstr "Viida avamine uues ak_nas"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:17
 msgid "Open link with web browser _default"
-msgstr ""
+msgstr "Avamine vastavalt sirvija _vaikesätetele"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:19
 msgid "Run in t_erminal"
@@ -1211,7 +1211,7 @@ msgstr "Käivitada t_erminalis"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:20
 msgid "System"
-msgstr ""
+msgstr "Süsteem"
 
 #: ../capplets/display/display-properties.desktop.in.in.h:1
 msgid "Change screen resolution"
@@ -2025,7 +2025,7 @@ msgstr "Heli eelistused"
 
 #: ../capplets/sound/sound-properties.glade.h:1
 msgid "E_nable software sound mixing (ESD)"
-msgstr ""
+msgstr "_Tarkvaraline helimiksimine lubatud (ESD)"
 
 #: ../capplets/sound/sound-properties.glade.h:2
 msgid "Flash _entire screen"
@@ -2053,7 +2053,7 @@ msgstr ""
 
 #: ../capplets/sound/sound-properties.glade.h:9
 msgid "_Visual system beep"
-msgstr ""
+msgstr "Süsteemne piiks on _visuaalne"
 
 #: ../capplets/theme-switcher/gnome-theme-details.c:368
 msgid "Would you like to remove this theme?"
@@ -2732,7 +2732,7 @@ msgstr ""
 msgid "_Do not show this message again"
 msgstr "_Ära näita seda teadet uuesti"
 
-#: ../gnome-settings-daemon/gnome-settings-sound.c:155
+#: ../gnome-settings-daemon/gnome-settings-sound.c:131
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Helifaili %s pole võimalik sämplina %s laadida"
@@ -2814,11 +2814,39 @@ msgstr ""
 msgid "There was an error loading an image: %s"
 msgstr "Pildi laadimisel tekkis viga: %s"
 
-#: ../libsounds/sound-view.c:115
+#: ../libsounds/sound-view.c:43
+msgid "Login"
+msgstr "Sisselogimine"
+
+#: ../libsounds/sound-view.c:44
+msgid "Logout"
+msgstr "Väljalogimine"
+
+#: ../libsounds/sound-view.c:45
+msgid "Boing"
+msgstr ""
+
+#: ../libsounds/sound-view.c:46
+msgid "Siren"
+msgstr "Sireen"
+
+#: ../libsounds/sound-view.c:47
+msgid "Clink"
+msgstr ""
+
+#: ../libsounds/sound-view.c:48
+msgid "Beep"
+msgstr "Piiks"
+
+#: ../libsounds/sound-view.c:49
+msgid "No sound"
+msgstr "Heli puudub"
+
+#: ../libsounds/sound-view.c:131
 msgid "Sound not set for this event."
 msgstr "Selle sündmuse jaoks pole heli määratud"
 
-#: ../libsounds/sound-view.c:124
+#: ../libsounds/sound-view.c:140
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package for a set of default sounds."
@@ -2827,18 +2855,22 @@ msgstr ""
 "Võib-olla on sul vaja vaikimisi määratud helide jaoks tarvis paigaldada "
 "gnome-audio pakk."
 
-#: ../libsounds/sound-view.c:135
+#: ../libsounds/sound-view.c:151
 msgid "The sound file for this event does not exist."
 msgstr "Selle sündmuse jaoks pole helifaili olemas."
 
-#: ../libsounds/sound-view.c:166
+#: ../libsounds/sound-view.c:182
 msgid "Select Sound File"
 msgstr "Helifaili valimine"
 
-#: ../libsounds/sound-view.c:186
+#: ../libsounds/sound-view.c:202
 #, c-format
 msgid "The file %s is not a valid wav file"
 msgstr "Fail %s pole korrektne wav fail"
+
+#: ../libsounds/sound-view.c:359
+msgid "System Sounds"
+msgstr "Süsteemsed helid"
 
 #: ../libwindow-settings/gnome-wm-manager.c:320
 #, c-format
@@ -3337,7 +3369,7 @@ msgstr "Kirjeldus"
 
 #: ../vfs-methods/themus/themus-properties-view.c:133
 msgid "Control theme"
-msgstr ""
+msgstr "Juhtteema"
 
 #: ../vfs-methods/themus/themus-properties-view.c:139
 msgid "Window border theme"
