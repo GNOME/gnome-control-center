@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-13 08:06+0100\n"
-"PO-Revision-Date: 2006-02-14 01:54+0800\n"
+"POT-Creation-Date: 2006-03-06 22:58+0100\n"
+"PO-Revision-Date: 2006-03-07 12:52+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
 "MIME-Version: 1.0\n"
@@ -639,6 +639,7 @@ msgid "characters/second"
 msgstr "字符/秒"
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:41
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
 msgid "milliseconds"
 msgstr "毫秒"
 
@@ -959,32 +960,32 @@ msgstr "首选应用程序"
 msgid "Select your default applications"
 msgstr "选择默认的应用程序"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:56
+#: ../capplets/default-applications/gnome-da-capplet.c:55
 msgid "Could not display help"
 msgstr "无法显示帮助"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:58
-#: ../capplets/default-applications/gnome-da-capplet.c:683
+#: ../capplets/default-applications/gnome-da-capplet.c:57
+#: ../capplets/default-applications/gnome-da-capplet.c:765
 msgid "Please make sure that the applet is properly installed"
 msgstr "请确定小程序已经正确安装了。"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:93
-#: ../capplets/default-applications/gnome-da-capplet.c:126
-#: ../capplets/default-applications/gnome-da-capplet.c:185
-#: ../capplets/default-applications/gnome-da-capplet.c:230
-#: ../capplets/default-applications/gnome-da-capplet.c:284
-#: ../capplets/default-applications/gnome-da-capplet.c:333
-#: ../capplets/default-applications/gnome-da-capplet.c:523
-#: ../capplets/default-applications/gnome-da-capplet.c:544
+#: ../capplets/default-applications/gnome-da-capplet.c:92
+#: ../capplets/default-applications/gnome-da-capplet.c:125
+#: ../capplets/default-applications/gnome-da-capplet.c:170
+#: ../capplets/default-applications/gnome-da-capplet.c:215
+#: ../capplets/default-applications/gnome-da-capplet.c:269
+#: ../capplets/default-applications/gnome-da-capplet.c:318
+#: ../capplets/default-applications/gnome-da-capplet.c:600
+#: ../capplets/default-applications/gnome-da-capplet.c:621
 #, c-format
 msgid "Error saving configuration: %s"
 msgstr "保存配置出错：%s"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:660
+#: ../capplets/default-applications/gnome-da-capplet.c:743
 msgid "Custom"
 msgstr "自定义"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:681
+#: ../capplets/default-applications/gnome-da-capplet.c:763
 msgid "Could not load the main interface"
 msgstr "无法装入主界面"
 
@@ -1744,9 +1745,10 @@ msgstr "设置键盘首选项"
 #. set the timeout value  label with correct value of timeout
 #: ../capplets/mouse/gnome-mouse-properties.c:138
 #: ../capplets/mouse/gnome-mouse-properties.c:880
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
-msgid "microseconds"
-msgstr "毫秒"
+#, c-format
+msgid "%d milliseconds"
+msgid_plural "%d milliseconds"
+msgstr[0] "%d 毫秒"
 
 #: ../capplets/mouse/gnome-mouse-properties.c:560
 msgid "Unknown Pointer"
@@ -2748,7 +2750,7 @@ msgstr ""
 msgid "_Do not show this message again"
 msgstr "不再显示此信息(_D)"
 
-#: ../gnome-settings-daemon/gnome-settings-sound.c:155
+#: ../gnome-settings-daemon/gnome-settings-sound.c:131
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "无法载入声音文件 %s 作为示例 %s"
@@ -2831,11 +2833,39 @@ msgstr "BGApplier 绘图的屏幕"
 msgid "There was an error loading an image: %s"
 msgstr "装入图像时出错：%s"
 
-#: ../libsounds/sound-view.c:115
+#: ../libsounds/sound-view.c:43
+msgid "Login"
+msgstr "登录"
+
+#: ../libsounds/sound-view.c:44
+msgid "Logout"
+msgstr "注销"
+
+#: ../libsounds/sound-view.c:45
+msgid "Boing"
+msgstr "啵嘤"
+
+#: ../libsounds/sound-view.c:46
+msgid "Siren"
+msgstr "鸣笛"
+
+#: ../libsounds/sound-view.c:47
+msgid "Clink"
+msgstr "丁当"
+
+#: ../libsounds/sound-view.c:48
+msgid "Beep"
+msgstr "响铃"
+
+#: ../libsounds/sound-view.c:49
+msgid "No sound"
+msgstr "无声音"
+
+#: ../libsounds/sound-view.c:131
 msgid "Sound not set for this event."
 msgstr "此事件未设定音效。"
 
-#: ../libsounds/sound-view.c:124
+#: ../libsounds/sound-view.c:140
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package for a set of default sounds."
@@ -2843,18 +2873,22 @@ msgstr ""
 "此事件的声音文件不存在。\n"
 "您需要安装 gnome-audio 软件包以获得一组默认声音。"
 
-#: ../libsounds/sound-view.c:135
+#: ../libsounds/sound-view.c:151
 msgid "The sound file for this event does not exist."
 msgstr "此事件的声音文件不存在。"
 
-#: ../libsounds/sound-view.c:166
+#: ../libsounds/sound-view.c:182
 msgid "Select Sound File"
 msgstr "选择声音文件"
 
-#: ../libsounds/sound-view.c:186
+#: ../libsounds/sound-view.c:202
 #, c-format
 msgid "The file %s is not a valid wav file"
 msgstr "文件 %s 不是有效的 wav 文件"
+
+#: ../libsounds/sound-view.c:359
+msgid "System Sounds"
+msgstr "系统声音"
 
 #: ../libwindow-settings/gnome-wm-manager.c:320
 #, c-format
@@ -3409,3 +3443,4 @@ msgstr "是否将已安装的主题显示为缩略图"
 #: ../vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "是否将主题显示为缩略图"
+
