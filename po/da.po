@@ -24,8 +24,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-12 12:58+0100\n"
-"PO-Revision-Date: 2006-02-12 23:19+0100\n"
+"POT-Creation-Date: 2006-03-08 23:23+0100\n"
+"PO-Revision-Date: 2006-03-08 23:22+0100\n"
 "Last-Translator: Ole Laursen <olau@hardworking.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -662,6 +662,7 @@ msgid "characters/second"
 msgstr "tegn/sek"
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:41
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
 msgid "milliseconds"
 msgstr "millisekunder"
 
@@ -995,32 +996,32 @@ msgstr "Foretrukne programmer"
 msgid "Select your default applications"
 msgstr "Vælg hvilke programmer der foreslås som standard"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:56
+#: ../capplets/default-applications/gnome-da-capplet.c:55
 msgid "Could not display help"
 msgstr "Kunne ikke vise hjælp"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:58
-#: ../capplets/default-applications/gnome-da-capplet.c:683
+#: ../capplets/default-applications/gnome-da-capplet.c:57
+#: ../capplets/default-applications/gnome-da-capplet.c:765
 msgid "Please make sure that the applet is properly installed"
 msgstr "Kontrollér venligst at panelprogrammet er installeret korrekt"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:93
-#: ../capplets/default-applications/gnome-da-capplet.c:126
-#: ../capplets/default-applications/gnome-da-capplet.c:185
-#: ../capplets/default-applications/gnome-da-capplet.c:230
-#: ../capplets/default-applications/gnome-da-capplet.c:284
-#: ../capplets/default-applications/gnome-da-capplet.c:333
-#: ../capplets/default-applications/gnome-da-capplet.c:523
-#: ../capplets/default-applications/gnome-da-capplet.c:544
+#: ../capplets/default-applications/gnome-da-capplet.c:92
+#: ../capplets/default-applications/gnome-da-capplet.c:125
+#: ../capplets/default-applications/gnome-da-capplet.c:170
+#: ../capplets/default-applications/gnome-da-capplet.c:215
+#: ../capplets/default-applications/gnome-da-capplet.c:269
+#: ../capplets/default-applications/gnome-da-capplet.c:318
+#: ../capplets/default-applications/gnome-da-capplet.c:600
+#: ../capplets/default-applications/gnome-da-capplet.c:621
 #, c-format
 msgid "Error saving configuration: %s"
 msgstr "Fejl ved gemning af konfiguration: %s"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:660
+#: ../capplets/default-applications/gnome-da-capplet.c:743
 msgid "Custom"
 msgstr "Tilpasset"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:681
+#: ../capplets/default-applications/gnome-da-capplet.c:763
 msgid "Could not load the main interface"
 msgstr "Kunne ikke indlæse hovedgrænseflade"
 
@@ -1807,9 +1808,11 @@ msgstr "Vælg indstillinger for tastaturet"
 #. set the timeout value  label with correct value of timeout
 #: ../capplets/mouse/gnome-mouse-properties.c:138
 #: ../capplets/mouse/gnome-mouse-properties.c:880
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
-msgid "microseconds"
-msgstr "mikrosekunder"
+#, c-format
+msgid "%d milliseconds"
+msgid_plural "%d milliseconds"
+msgstr[0] "%d millisekund"
+msgstr[1] "%d millisekunder"
 
 #: ../capplets/mouse/gnome-mouse-properties.c:560
 msgid "Unknown Pointer"
@@ -2583,7 +2586,7 @@ msgstr "Forkert rettighed på '/dev/pmu'-enhed"
 msgid "Volume"
 msgstr "Lydstyrke"
 
-#: ../gnome-settings-daemon/factory.c:37
+#: ../gnome-settings-daemon/factory.c:66
 msgid "Could not initialize Bonobo"
 msgstr "Kunne ikke klargøre Bonobo"
 
@@ -2821,7 +2824,7 @@ msgstr ""
 msgid "_Do not show this message again"
 msgstr "_Vis ikke denne besked igen"
 
-#: ../gnome-settings-daemon/gnome-settings-sound.c:155
+#: ../gnome-settings-daemon/gnome-settings-sound.c:131
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Kunne ikke indlæse lydfilen %s som lydklip %s"
@@ -2905,11 +2908,39 @@ msgstr "Skærm som anvenderen skal tegne på"
 msgid "There was an error loading an image: %s"
 msgstr "Der opstod en fejl ved indlæsningen af et billede: %s"
 
-#: ../libsounds/sound-view.c:115
+#: ../libsounds/sound-view.c:43
+msgid "Login"
+msgstr "Logind"
+
+#: ../libsounds/sound-view.c:44
+msgid "Logout"
+msgstr "Logud"
+
+#: ../libsounds/sound-view.c:45
+msgid "Boing"
+msgstr "Boing"
+
+#: ../libsounds/sound-view.c:46
+msgid "Siren"
+msgstr "Sirene"
+
+#: ../libsounds/sound-view.c:47
+msgid "Clink"
+msgstr "Klink"
+
+#: ../libsounds/sound-view.c:48
+msgid "Beep"
+msgstr "Bip"
+
+#: ../libsounds/sound-view.c:49
+msgid "No sound"
+msgstr "Ingen lyd"
+
+#: ../libsounds/sound-view.c:131
 msgid "Sound not set for this event."
 msgstr "Lyd ikke angivet for denne hændelse."
 
-#: ../libsounds/sound-view.c:124
+#: ../libsounds/sound-view.c:140
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package for a set of default sounds."
@@ -2917,18 +2948,22 @@ msgstr ""
 "Lydfilen for denne hændelse eksisterer ikke.\n"
 "Du kan installere programpakken gnome-audio for et sæt standardlyde."
 
-#: ../libsounds/sound-view.c:135
+#: ../libsounds/sound-view.c:151
 msgid "The sound file for this event does not exist."
 msgstr "Lydfilen for denne hændelse eksisterer ikke."
 
-#: ../libsounds/sound-view.c:166
+#: ../libsounds/sound-view.c:182
 msgid "Select Sound File"
 msgstr "Vælg en lydfil"
 
-#: ../libsounds/sound-view.c:186
+#: ../libsounds/sound-view.c:202
 #, c-format
 msgid "The file %s is not a valid wav file"
 msgstr "Filen %s er ikke en gyldig wav-fil"
+
+#: ../libsounds/sound-view.c:359
+msgid "System Sounds"
+msgstr "Systemlyde"
 
 #: ../libwindow-settings/gnome-wm-manager.c:320
 #, c-format
@@ -3519,6 +3554,9 @@ msgstr "Generér miniaturer for installerede temaer"
 #: ../vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Generér miniaturer for temaer"
+
+#~ msgid "microseconds"
+#~ msgstr "mikrosekunder"
 
 #~ msgid "Epiphany"
 #~ msgstr "Epiphany"
