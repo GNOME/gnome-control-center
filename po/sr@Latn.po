@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-20 23:33+0100\n"
-"PO-Revision-Date: 2006-02-20 23:35+0100\n"
+"POT-Creation-Date: 2006-03-11 17:13+0100\n"
+"PO-Revision-Date: 2006-03-11 17:14+0100\n"
 "Last-Translator: Slobodan D. Sredojević <slobo@akrep.be>\n"
 "Language-Team: Serbian (sr) <gnom@prevod.org>\n"
 "MIME-Version: 1.0\n"
@@ -987,32 +987,32 @@ msgstr "Omiljeni programi"
 msgid "Select your default applications"
 msgstr "Odaberite vaše osnovne programe"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:56
+#: ../capplets/default-applications/gnome-da-capplet.c:55
 msgid "Could not display help"
 msgstr "Ne mogu da prikažem pomoć"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:58
-#: ../capplets/default-applications/gnome-da-capplet.c:714
+#: ../capplets/default-applications/gnome-da-capplet.c:57
+#: ../capplets/default-applications/gnome-da-capplet.c:765
 msgid "Please make sure that the applet is properly installed"
 msgstr "Molim proverite da li je programče ispravno postavljeno"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:93
-#: ../capplets/default-applications/gnome-da-capplet.c:126
-#: ../capplets/default-applications/gnome-da-capplet.c:185
-#: ../capplets/default-applications/gnome-da-capplet.c:230
-#: ../capplets/default-applications/gnome-da-capplet.c:284
-#: ../capplets/default-applications/gnome-da-capplet.c:333
-#: ../capplets/default-applications/gnome-da-capplet.c:554
-#: ../capplets/default-applications/gnome-da-capplet.c:575
+#: ../capplets/default-applications/gnome-da-capplet.c:92
+#: ../capplets/default-applications/gnome-da-capplet.c:125
+#: ../capplets/default-applications/gnome-da-capplet.c:170
+#: ../capplets/default-applications/gnome-da-capplet.c:215
+#: ../capplets/default-applications/gnome-da-capplet.c:269
+#: ../capplets/default-applications/gnome-da-capplet.c:318
+#: ../capplets/default-applications/gnome-da-capplet.c:600
+#: ../capplets/default-applications/gnome-da-capplet.c:621
 #, c-format
 msgid "Error saving configuration: %s"
 msgstr "Greška pri čuvanju podešavanja: %s"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:691
+#: ../capplets/default-applications/gnome-da-capplet.c:743
 msgid "Custom"
 msgstr "Prilagođeno"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:712
+#: ../capplets/default-applications/gnome-da-capplet.c:763
 msgid "Could not load the main interface"
 msgstr "Ne mogu da učitam glavno sučelje"
 
@@ -1805,6 +1805,7 @@ msgstr "Podesite vašu tastaturu"
 #. set the timeout value  label with correct value of timeout
 #: ../capplets/mouse/gnome-mouse-properties.c:138
 #: ../capplets/mouse/gnome-mouse-properties.c:880
+#, c-format
 msgid "%d milliseconds"
 msgid_plural "%d milliseconds"
 msgstr[0] "%d milisekunda"
@@ -2582,7 +2583,7 @@ msgstr "Pogrešne dozvole za uređaj „/dev/pmu“"
 msgid "Volume"
 msgstr "Jačina"
 
-#: ../gnome-settings-daemon/factory.c:37
+#: ../gnome-settings-daemon/factory.c:66
 msgid "Could not initialize Bonobo"
 msgstr "Nisam mogao da pokrenem bonobo"
 
@@ -2821,7 +2822,7 @@ msgstr ""
 msgid "_Do not show this message again"
 msgstr "_Nemoj više da prikazuješ ovu poruku"
 
-#: ../gnome-settings-daemon/gnome-settings-sound.c:155
+#: ../gnome-settings-daemon/gnome-settings-sound.c:131
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Ne mogu da učitam datoteku %s kao probni %s"
@@ -2905,11 +2906,39 @@ msgstr "Ekran na kojem će primenjivač pozadine crtati"
 msgid "There was an error loading an image: %s"
 msgstr "Dogodila se greška prilikom učitavanja slike: %s"
 
-#: ../libsounds/sound-view.c:115
+#: ../libsounds/sound-view.c:43
+msgid "Login"
+msgstr "Prijava"
+
+#: ../libsounds/sound-view.c:44
+msgid "Logout"
+msgstr "Odjava"
+
+#: ../libsounds/sound-view.c:45
+msgid "Boing"
+msgstr "Boing"
+
+#: ../libsounds/sound-view.c:46
+msgid "Siren"
+msgstr "Sirena"
+
+#: ../libsounds/sound-view.c:47
+msgid "Clink"
+msgstr "Klink"
+
+#: ../libsounds/sound-view.c:48
+msgid "Beep"
+msgstr "Bip"
+
+#: ../libsounds/sound-view.c:49
+msgid "No sound"
+msgstr "Bez zvuka"
+
+#: ../libsounds/sound-view.c:131
 msgid "Sound not set for this event."
 msgstr "Zvuk za _ovaj događaj nije postavljen."
 
-#: ../libsounds/sound-view.c:124
+#: ../libsounds/sound-view.c:140
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package for a set of default sounds."
@@ -2918,18 +2947,22 @@ msgstr ""
 "Možda bi trebali instalirati gnome-audio paket da biste imali osnovne "
 "zvukove."
 
-#: ../libsounds/sound-view.c:135
+#: ../libsounds/sound-view.c:151
 msgid "The sound file for this event does not exist."
 msgstr "Zvučna datoteka za ovaj događaj ne postoji."
 
-#: ../libsounds/sound-view.c:166
+#: ../libsounds/sound-view.c:182
 msgid "Select Sound File"
 msgstr "Odaberite datoteku sa zvukom"
 
-#: ../libsounds/sound-view.c:186
+#: ../libsounds/sound-view.c:202
 #, c-format
 msgid "The file %s is not a valid wav file"
 msgstr "Datoteka %s ne predstavlja ispravnu WAV datoteku"
+
+#: ../libsounds/sound-view.c:359
+msgid "System Sounds"
+msgstr "Sistemski zvuci"
 
 #: ../libwindow-settings/gnome-wm-manager.c:320
 #, c-format
