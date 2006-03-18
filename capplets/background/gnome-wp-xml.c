@@ -286,7 +286,7 @@ void gnome_wp_xml_load_list (GnomeWPCapplet * capplet) {
 
     datadir = g_build_filename (xdgdirs[i], "gnome-background-properties",
 				NULL);
-    if (g_file_test (datadir, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_DIR)) {
+    if (g_file_test (datadir, G_FILE_TEST_IS_DIR)) {
       gnome_vfs_directory_list_load (&list, datadir,
 				     GNOME_VFS_FILE_INFO_DEFAULT |
 				     GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
@@ -313,7 +313,7 @@ void gnome_wp_xml_load_list (GnomeWPCapplet * capplet) {
   g_strfreev (xdgdirs);
   g_free (xdgdirslist);
 
-  if (g_file_test (WALLPAPER_DATADIR, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_DIR)) {
+  if (g_file_test (WALLPAPER_DATADIR, G_FILE_TEST_IS_DIR)) {
     gnome_vfs_directory_list_load (&list, WALLPAPER_DATADIR,
 				   GNOME_VFS_FILE_INFO_DEFAULT |
 				   GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
