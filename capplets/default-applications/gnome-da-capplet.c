@@ -101,21 +101,12 @@ static void
 terminal_checkbutton_toggled_cb (GtkToggleButton *togglebutton, GnomeDACapplet *capplet)
 {
     gboolean is_active;
-    GConfChangeSet *cs;
     GError *error = NULL;
 
     is_active = gtk_toggle_button_get_active (togglebutton);
 
     if (GTK_WIDGET (togglebutton) == capplet->web_browser_terminal_checkbutton) {
-	cs = gconf_change_set_new ();
-
-	gconf_change_set_set_bool (cs, DEFAULT_APPS_KEY_HTTP_NEEDS_TERM, is_active);
-	gconf_change_set_set_bool (cs, DEFAULT_APPS_KEY_HTTPS_NEEDS_TERM, is_active);
-	gconf_change_set_set_bool (cs, DEFAULT_APPS_KEY_UNKNOWN_NEEDS_TERM, is_active);
-	gconf_change_set_set_bool (cs, DEFAULT_APPS_KEY_ABOUT_NEEDS_TERM, is_active);
-
-	gconf_client_commit_change_set (capplet->gconf, cs, TRUE, &error);
-	gconf_change_set_unref (cs);
+	gconf_client_set_bool (capplet->gconf, DEFAULT_APPS_KEY_HTTP_NEEDS_TERM, is_active, &error);
     }
     else if (GTK_WIDGET (togglebutton) == capplet->mail_reader_terminal_checkbutton) {
 	gconf_client_set_bool (capplet->gconf, DEFAULT_APPS_KEY_MAILER_NEEDS_TERM, is_active, &error);
