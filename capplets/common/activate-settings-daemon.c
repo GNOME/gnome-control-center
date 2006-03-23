@@ -20,7 +20,7 @@ static void popup_error_message (void)
 				   "indicate a problem with Bonobo, or a non-GNOME (e.g. KDE) settings manager may already "
 				   "be active and conflicting with the GNOME settings manager."));
 
-  gtk_widget_show (dialog);
+  gtk_dialog_run (GTK_DIALOG (dialog));
   gtk_widget_destroy (dialog);
 }
 
