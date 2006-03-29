@@ -1,3 +1,10 @@
+2006-03-29  Arjan Timmerman <arjani@soulfly.nl>
+
+	Fixes #334153
+
+	* activate-settings-daemon.c (activate_settings_daemon): fixed leaked
+	CORBA_environment and removed extra if statement.
+
 2006-93-23  Rodrigo Moya <rodrigo@novell.com>
 
 	* activate-settings-daemon.c (popup_error_message): use gtk_dialog_run,

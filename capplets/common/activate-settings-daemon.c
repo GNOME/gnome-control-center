@@ -40,19 +40,15 @@ activate_settings_daemon (void)
   object = bonobo_activation_activate_from_id  ("OAFIID:GNOME_SettingsDaemon",
 						0, NULL, &ev);
   
-  if (ev._major != CORBA_NO_EXCEPTION) {
+  if (BONOBO_EX(&ev) || object == CORBA_OBJECT_NIL ) {
     popup_error_message ();
-    return FALSE;
-  }
-  
-  if (object == CORBA_OBJECT_NIL) {
-    popup_error_message ();
+    CORBA_exception_free(&ev);
     return FALSE;
   }
 
   /*bool = GNOME_SettingsDaemon_awake (corba_foo, "MyService", &ev);
     printf ("bool is %d\n", bool);*/
 
-
+  CORBA_exception_free(&ev);
   return TRUE;
 }
