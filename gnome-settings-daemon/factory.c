@@ -24,12 +24,7 @@ register_server (BonoboObject *server)
   char *display;
   char *p;
 
-  display = g_strdup (gdk_display_get_name (gdk_display_get_default ()));
-  if ((p = strrchr (display, ':'))) {
-    p = strchr (p, '.');
-    if (p)
-      p [0] = '\0';
-  }
+  display = gdk_display_get_name (gdk_display_get_default ());
 
   reg_env = bonobo_activation_registration_env_set (NULL, "DISPLAY", display);
 
@@ -42,7 +37,6 @@ register_server (BonoboObject *server)
   }
 
   bonobo_activation_registration_env_free (reg_env);
-  g_free (display);
 }
 
 int main (int argc, char *argv [])
