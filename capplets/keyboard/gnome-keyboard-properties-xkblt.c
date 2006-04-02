@@ -53,6 +53,8 @@ static int defaultGroup = -1;
 static GtkCellRenderer *textRenderer;
 static GtkCellRenderer *toggleRenderer;
 
+static gboolean disableButtonsSensibilityUpdate = FALSE;
+
 void
 clear_xkb_elements_list (GSList * list)
 {
@@ -214,6 +216,9 @@ xkb_layouts_enable_disable_buttons (GladeXML * dialog)
     gtk_tree_model_iter_n_children (selectedLayoutsModel,
 				    NULL);
 
+  if (disableButtonsSensibilityUpdate)
+    return;
+
   gtk_widget_set_sensitive (addLayoutBtn,
 			    (nSelectedLayouts < maxSelectedLayouts ||
 				maxSelectedLayouts == 0));
@@ -232,6 +237,7 @@ xkb_layouts_enable_disable_buttons (GladeXML * dialog)
 	  gtk_tree_path_free (path);
 	}
     }
+
   gtk_widget_set_sensitive (upLayoutBtn, canMoveUp);
   gtk_widget_set_sensitive (dnLayoutBtn, canMoveDn);
 }
@@ -322,6 +328,10 @@ xkb_layouts_fill_selected_tree (GladeXML * dialog)
   GtkListStore *listStore =
     GTK_LIST_STORE (gtk_tree_view_get_model
 		    (GTK_TREE_VIEW (WID ("xkb_layouts_selected"))));
+
+  /* temporarily disable the buttons' status update */
+  disableButtonsSensibilityUpdate = TRUE;
+
   gtk_list_store_clear (listStore);
 
   for (curLayout = layouts; curLayout != NULL; curLayout = curLayout->next)
@@ -344,7 +354,10 @@ xkb_layouts_fill_selected_tree (GladeXML * dialog)
     }
 
   clear_xkb_elements_list (layouts);
-  xkb_layouts_enable_disable_buttons (dialog);
+  
+  /* enable the buttons' status update */
+  disableButtonsSensibilityUpdate = FALSE;
+
   if (idx2Select != -1)
     {
       GtkTreeSelection *selection =
@@ -354,6 +367,12 @@ xkb_layouts_fill_selected_tree (GladeXML * dialog)
       gtk_tree_selection_select_path (selection, path);
       gtk_tree_path_free (path);
       idx2Select = -1;
+    }
+  else
+    {
+      /* if there is nothing to select - just enable/disable the buttons,
+         otherwise it would be done by the selection change */
+      xkb_layouts_enable_disable_buttons (dialog);
     }
 
   gce = gconf_client_get_entry (xkbGConfClient, 
