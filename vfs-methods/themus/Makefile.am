@@ -4,7 +4,7 @@ INCLUDES = $(THEME_METHOD_CFLAGS) \
   $(THEMUS_APPLIER_CFLAGS) \
   -I$(top_srcdir)/capplets/common \
   -DGNOMECC_GLADE_DIR=\"$(GNOMECC_GLADE_DIR)\" \
-  -DDIRECTORY_DIR=\"$(vfsdirectorydir)\" \
+  -DDIRECTORY_DIR=\"$(directorydir)\" \
   -DDATA_DIR=\"$(datadir)/themus\"
 
 bin_PROGRAMS = gnome-theme-thumbnailer themus-theme-applier
@@ -48,8 +48,8 @@ Glade_DATA = apply-font.glade
 vfsmoduleconfdir = $(sysconfdir)/gnome-vfs-2.0/modules
 vfsmoduleconf_DATA = theme-method.conf
 
-vfsdirectorydir = $(datadir)/gnome/vfolders
-vfsdirectory_DATA = theme-method.directory
+directorydir = $(datadir)/desktop-directories
+directory_DATA = theme-method.directory
 
 schemasdir       = $(GCONF_SCHEMA_FILE_DIR)
 schemas_in_files = themus.schemas.in

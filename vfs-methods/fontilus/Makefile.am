@@ -1,6 +1,6 @@
 
 INCLUDES = $(FONT_METHOD_CFLAGS) $(FONT_THUMBNAILER_CFLAGS) $(FONT_VIEW_CFLAGS) \
-  $(FONT_CONTEXT_MENU_CFLAGS) -DDIRECTORY_DIR=\"$(vfsdirectorydir)\" 
+  $(FONT_CONTEXT_MENU_CFLAGS) -DDIRECTORY_DIR=\"$(directorydir)\" 
 
 vfsmoduledir = $(libdir)/gnome-vfs-2.0/modules
 vfsmodule_LTLIBRARIES = libfont-method.la
@@ -28,8 +28,8 @@ libnautilus_fontilus_la_SOURCES = fontilus-context-menu.c
 vfsmoduleconfdir = $(sysconfdir)/gnome-vfs-2.0/modules
 vfsmoduleconf_DATA = font-method.conf
 
-vfsdirectorydir = $(datadir)/gnome/vfolders
-vfsdirectory_DATA = font-method.directory
+directorydir = $(datadir)/desktop-directories
+directory_DATA = font-method.directory
 
 schemasdir = $(GCONF_SCHEMA_FILE_DIR)
 schemas_DATA = fontilus.schemas
@@ -60,7 +60,7 @@ uninstall-local:
 @INTLTOOL_SCHEMAS_RULE@
 
 CLEANFILES = $(desktop_in_files) $(desktop_DATA) \
-  $(schemas_DATA) $(vfsdirectory_DATA)
+  $(schemas_DATA) $(directory_DATA)
 
 EXTRA_DIST = \
   font-method.conf \
