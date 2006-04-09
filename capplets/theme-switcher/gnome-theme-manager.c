@@ -1130,6 +1130,9 @@ setup_meta_tree_view (GtkTreeView *tree_view,
  					       "pixbuf", META_THEME_PIXBUF_COLUMN,
  					       NULL);
   renderer = gtk_cell_renderer_text_new ();
+
+  g_object_set (renderer, "ellipsize", PANGO_ELLIPSIZE_END, NULL);
+  
   gtk_tree_view_insert_column_with_attributes (tree_view,
  					       -1, NULL,
  					       renderer,
