@@ -70,7 +70,9 @@ configure_button_layout (guchar   *buttons,
       }
       /* swap the buttons */
       buttons[left_button - 1] = right_button;
-      buttons[i] = left_button;
+
+      if (i != n_buttons)
+          buttons[i] = left_button;
     }
   /* check if we are not left_handed but are swapped */
   else if (!left_handed && buttons[left_button - 1] == right_button)
@@ -82,7 +84,9 @@ configure_button_layout (guchar   *buttons,
               break;
       }
       /* swap the buttons */
-      buttons[i] = right_button;
+      if (i != n_buttons)
+          buttons[i] = right_button;
+
       buttons[left_button - 1] = left_button;
   }
 }
