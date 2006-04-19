@@ -154,7 +154,8 @@ def_group_in_gconf_changed (GConfClient * client,
 }
 
 static void
-add_variant_to_available_layouts_tree (const XklConfigItemPtr configItem, 
+add_variant_to_available_layouts_tree (XklConfigRegistry * configRegistry,
+                                       const XklConfigItem * configItem, 
                                        GladeXML * chooserDialog)
 {
   GtkWidget *layoutsTree = CWID ("xkb_layouts_available");
@@ -173,7 +174,8 @@ add_variant_to_available_layouts_tree (const XklConfigItemPtr configItem,
 }
 
 static void
-add_layout_to_available_layouts_tree (const XklConfigItemPtr configItem, 
+add_layout_to_available_layouts_tree (XklConfigRegistry * configRegistry,
+                                      const XklConfigItem * configItem, 
                                       GladeXML * chooserDialog)
 {
   GtkWidget *layoutsTree = CWID ("xkb_layouts_available");
@@ -189,7 +191,7 @@ add_layout_to_available_layouts_tree (const XklConfigItemPtr configItem,
 
   current1stLevelId = configItem->name;
 
-  XklConfigEnumLayoutVariants (configItem->name,
+  xkl_config_registry_foreach_layout_variant (configRegistry, configItem->name,
 			       (ConfigItemProcessFunc)add_variant_to_available_layouts_tree, 
                                chooserDialog);
 }
@@ -300,7 +302,7 @@ xkb_layouts_prepare_selected_tree (GladeXML * dialog, GConfChangeSet * changeset
   g_signal_connect_swapped (G_OBJECT (selection), "changed",
 			    G_CALLBACK
 			    (xkb_layouts_enable_disable_buttons), dialog);
-  maxSelectedLayouts = XklGetMaxNumGroups();
+  maxSelectedLayouts = xkl_engine_get_max_num_groups (engine);
 
   gconf_client_notify_add (xkbGConfClient,
                            GSWITCHIT_CONFIG_KEY_DEFAULT_GROUP,
@@ -341,7 +343,7 @@ xkb_layouts_fill_selected_tree (GladeXML * dialog)
       char *v1, *utfVisible;
       const char *visible = (char *) curLayout->data;
       gtk_list_store_append (listStore, &iter);
-      if (GSwitchItKbdConfigGetDescriptions (visible, &sl, &l, &sv, &v))
+      if (GSwitchItKbdConfigGetDescriptions (configRegistry, visible, &sl, &l, &sv, &v))
 	visible = GSwitchItKbdConfigFormatFullLayout (l, v);
       v1 = g_strdup (visible);
       utfVisible = g_locale_to_utf8 (g_strstrip (v1), -1, NULL, NULL, NULL);
@@ -417,7 +419,7 @@ xkb_layouts_fill_available_tree (GladeXML * chooserDialog)
 			   GTK_TREE_MODEL (treeStore));
   gtk_tree_view_append_column (GTK_TREE_VIEW (treeView), column);
 
-  XklConfigEnumLayouts ((ConfigItemProcessFunc)
+  xkl_config_registry_foreach_layout (configRegistry, (ConfigItemProcessFunc)
 			add_layout_to_available_layouts_tree, chooserDialog);
 
   sort_tree_content (treeView);
@@ -556,9 +558,10 @@ xkb_layout_chooser_response(GtkDialog *dialog,
               if (!anySwitcher)
                 {
                   XklConfigItem ci;
-                  g_snprintf( ci.name, XKL_MAX_CI_NAME_LENGTH, DEFAULT_GROUP_SWITCH );           
-                  if (XklConfigFindOption( GROUP_SWITCHERS_GROUP,
-                                           &ci ))
+                  g_snprintf(ci.name, XKL_MAX_CI_NAME_LENGTH, DEFAULT_GROUP_SWITCH );           
+                  if (xkl_config_registry_find_option (configRegistry,
+                                                       GROUP_SWITCHERS_GROUP,
+                                                       &ci))
                     {
                       const gchar* id = GSwitchItKbdConfigMergeItems (GROUP_SWITCHERS_GROUP, DEFAULT_GROUP_SWITCH);
                       optionsList = g_slist_append (optionsList, g_strdup (id));
@@ -602,7 +605,7 @@ xkb_layout_choose (GladeXML * dialog)
   xkb_layout_chooser_selection_changed (chooserDialog);
   
 #ifdef HAVE_X11_EXTENSIONS_XKB_H
-  if (!strcmp (XklGetBackendName(), "XKB"))
+  if (!strcmp (xkl_engine_get_backend_name (engine), "XKB"))
   {
     kbdraw = xkb_layout_preview_create_widget (chooserDialog);
     g_object_set_data (G_OBJECT (chooser), "kbdraw", kbdraw);

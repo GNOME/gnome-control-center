@@ -205,8 +205,9 @@ option_update_cb (GConfClient * client,
    This function makes particular use of the current... variables at
    the top of this file. */
 static void
-xkb_options_add_option (const XklConfigItemPtr
-                                          configItem, GladeXML * dialog)
+xkb_options_add_option (XklConfigRegistry * configRegistry,
+                        const XklConfigItem * configItem,
+                        GladeXML * dialog)
 {
   GtkWidget *option_check;
   gchar *utfOptionName = xci_desc_to_utf8 (configItem);
@@ -259,12 +260,13 @@ xkb_options_add_option (const XklConfigItemPtr
 /* Add a group of options: create title and layout widgets and then
    add widgets for all the options in the group. */
 static void
-xkb_options_add_group (const XklConfigItemPtr
-                                         configItem,
-                                         Bool allowMultipleSelection,
-                                         GladeXML * dialog)
+xkb_options_add_group (XklConfigRegistry * configRegistry,
+                       const XklConfigItem * configItem,
+                       GladeXML * dialog)
 {
   GtkWidget *expander, *align, *vbox;
+  gboolean allowMultipleSelection = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (configItem),
+                                                                        XCI_PROP_ALLOW_MULTIPLE_SELECTION));
 
   GSList * expanders_list = g_object_get_data (G_OBJECT (dialog), EXPANDERS_PROP);
 
@@ -287,8 +289,9 @@ xkb_options_add_group (const XklConfigItemPtr
   currentRadioGroup = NULL;
 
   current1stLevelId = configItem->name;
-  XklConfigEnumOptions (configItem->name, (ConfigItemProcessFunc)
-                        xkb_options_add_option, dialog);
+  xkl_config_registry_foreach_option (configRegistry, configItem->name,
+                                      (ConfigItemProcessFunc)xkb_options_add_option, 
+				      dialog);
 
   xkb_options_expander_highlight (expander);
 
@@ -313,8 +316,9 @@ xkb_options_load_options (GladeXML * dialog)
   GtkWidget * expander;
 
   /* fill the list */
-  XklConfigEnumOptionGroups ((GroupProcessFunc)
-			     xkb_options_add_group, dialog);
+  xkl_config_registry_foreach_option_group (configRegistry,
+                                            (ConfigItemProcessFunc)xkb_options_add_group,
+                                            dialog);
   /* sort it */
   expanders_list = g_object_get_data (G_OBJECT (dialog), EXPANDERS_PROP);
   expanders_list = g_slist_sort (expanders_list, (GCompareFunc)xkb_options_expanders_compare);

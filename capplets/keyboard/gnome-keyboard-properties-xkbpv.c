@@ -41,8 +41,13 @@
  * BAD STYLE: Taken from xklavier_private_xkb.h
  * Any ideas on architectural improvements are WELCOME
  */
-extern Bool _XklXkbConfigPrepareNative( const XklConfigRecPtr data, XkbComponentNamesPtr componentNamesPtr );
-extern void _XklXkbConfigCleanupNative( XkbComponentNamesPtr componentNamesPtr );
+extern gboolean xkl_xkb_config_native_prepare (XklEngine * engine,
+                                               const XklConfigRec * data,
+                                               XkbComponentNamesPtr component_names);
+
+extern void xkl_xkb_config_native_cleanup (XklEngine * engine,
+                                           XkbComponentNamesPtr component_names);
+
 /* */
 #endif
 
@@ -74,45 +79,42 @@ xkb_layout_preview_update (GladeXML * chooserDialog)
       gtk_tree_selection_get_selected (selection, &model, &selectedIter))
     {
       gchar *id;
-      XklConfigRec data;
+      XklConfigRec *data;
       char **p, *layout, *variant;
-      int i;
       XkbComponentNamesRec componentNames;
 
       gtk_tree_model_get (model, &selectedIter, AVAIL_LAYOUT_TREE_COL_ID, &id, -1);
-      XklConfigRecInit (&data);
-      if (XklConfigGetFromServer (&data))
+      data = xkl_config_rec_new ();
+      if (xkl_config_rec_get_from_server (data, engine))
         {
-          if( ( p = data.layouts ) != NULL )
-            for( i = data.numLayouts; --i >= 0; )
-              free( *p++ );
+          if( ( p = data->layouts ) != NULL )
+            g_strfreev(data->layouts);
 
-          if( ( p = data.variants ) != NULL )
-            for( i = data.numVariants; --i >= 0; )
-              free( *p++ );
+          if( ( p = data->variants ) != NULL )
+            g_strfreev(data->variants);
           
-          data.numLayouts =
-          data.numVariants = 1;
-          data.layouts = realloc (data.layouts, sizeof (char*));
-          data.variants = realloc (data.variants, sizeof (char*));
+          data->layouts = g_realloc (data->layouts, sizeof (char*) * 2);
+          data->variants = g_realloc (data->variants, sizeof (char*) * 2);
           if (GSwitchItKbdConfigSplitItems (id, &layout, &variant)
               && variant != NULL)
             {
-              data.layouts[0] = (layout == NULL) ? NULL : strdup (layout);
-              data.variants[0] = (variant == NULL) ? NULL : strdup (variant);
+              data->layouts[0] = (layout == NULL) ? NULL : g_strdup (layout);
+              data->variants[0] = (variant == NULL) ? NULL : g_strdup (variant);
             } else
             {
-              data.layouts[0] = (id == NULL) ? NULL : strdup (id);
-              data.variants[0] = NULL;
+              data->layouts[0] = (id == NULL) ? NULL : g_strdup (id);
+              data->variants[0] = NULL;
             }
-          if (_XklXkbConfigPrepareNative (&data, &componentNames))
+          data->layouts[1] = data->variants[1] = NULL;
+
+          if (xkl_xkb_config_native_prepare (engine, data, &componentNames))
             {
               keyboard_drawing_set_keyboard (KEYBOARD_DRAWING (kbdraw), &componentNames);
 
-              _XklXkbConfigCleanupNative( &componentNames );
+              xkl_xkb_config_native_cleanup (engine, &componentNames);
             }
         }
-      XklConfigRecDestroy (&data);
+      g_object_unref (G_OBJECT (data));
     }
 #endif
 }

@@ -40,12 +40,15 @@
 
 #include "gnome-keyboard-properties-xkb.h"
 
+XklEngine *engine;
+XklConfigRegistry *configRegistry;
+
 GSwitchItKbdConfig initialConfig;
 
 GConfClient *xkbGConfClient;
 
 char *
-xci_desc_to_utf8 (XklConfigItem * ci)
+xci_desc_to_utf8 (const XklConfigItem * ci)
 {
   char *sd = g_strstrip (ci->description);
   return sd[0] == 0 ? g_strdup (ci->name) :
@@ -71,7 +74,7 @@ set_model_text (GtkWidget  * entry,
 
   g_snprintf (ci.name, sizeof (ci.name), "%s", model);
 
-  if (XklConfigFindModel (&ci))
+  if (xkl_config_registry_find_model (configRegistry, &ci))
     {
       char * d;
 
@@ -119,10 +122,11 @@ static void
 cleanup_xkb_tabs (GladeXML * dialog)
 {
   GSwitchItKbdConfigTerm (&initialConfig);
-  XklConfigFreeRegistry ();
-  XklConfigTerm ();
-  XklTerm ();
-  g_object_unref (xkbGConfClient);
+  g_object_unref (G_OBJECT (configRegistry));
+  configRegistry = NULL;
+  g_object_unref (G_OBJECT (engine));
+  engine = NULL;
+  g_object_unref (G_OBJECT (xkbGConfClient));
   xkbGConfClient = NULL;
 }
 
@@ -131,7 +135,7 @@ reset_to_defaults (GtkWidget * button, GladeXML * dialog)
 {
   GSwitchItKbdConfig emptyKbdConfig;
 
-  GSwitchItKbdConfigInit (&emptyKbdConfig, xkbGConfClient);
+  GSwitchItKbdConfigInit (&emptyKbdConfig, xkbGConfClient, engine);
   GSwitchItKbdConfigSaveToGConfBackup (&emptyKbdConfig);
   GSwitchItKbdConfigSaveToGConf (&emptyKbdConfig);
   GSwitchItKbdConfigTerm (&emptyKbdConfig);
@@ -154,11 +158,11 @@ setup_xkb_tabs (GladeXML * dialog, GConfChangeSet * changeset)
   GObject * peditor;
   xkbGConfClient = gconf_client_get_default ();
 
-  XklInit (GDK_DISPLAY ());
-  XklConfigInit ();
-  XklConfigLoadRegistry ();
+  engine = xkl_engine_get_instance (GDK_DISPLAY ());
+  configRegistry = xkl_config_registry_get_instance (engine);
+  xkl_config_registry_load (configRegistry);
 
-  GSwitchItKbdConfigInit (&initialConfig, xkbGConfClient);
+  GSwitchItKbdConfigInit (&initialConfig, xkbGConfClient, engine);
   GSwitchItKbdConfigLoadFromXInitial (&initialConfig);
 
   setup_model_entry (dialog);
@@ -203,7 +207,7 @@ enable_disable_restoring (GladeXML * dialog)
   GSwitchItKbdConfig gswic;
   gboolean enable;
 
-  GSwitchItKbdConfigInit (&gswic, xkbGConfClient);
+  GSwitchItKbdConfigInit (&gswic, xkbGConfClient, engine);
   GSwitchItKbdConfigLoadFromGConf (&gswic, NULL);
 
   enable = !GSwitchItKbdConfigEquals (&gswic, &initialConfig);

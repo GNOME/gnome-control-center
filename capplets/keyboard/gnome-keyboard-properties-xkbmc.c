@@ -43,7 +43,9 @@
 static gchar* currentModelName = NULL;
 
 static void
-add_model_to_list (const XklConfigItemPtr configItem, GtkTreeView * modelsList)
+add_model_to_list (XklConfigRegistry * configRegistry,
+                   const XklConfigItem * configItem,
+                   GtkTreeView * modelsList)
 {
   GtkTreeIter iter;
   GtkListStore * listStore = GTK_LIST_STORE (gtk_tree_view_get_model (modelsList));
@@ -87,8 +89,9 @@ fill_models_list (GladeXML * chooserDialog)
   gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (listStore),
                                         0, GTK_SORT_ASCENDING);
 
-  XklConfigEnumModels ((ConfigItemProcessFunc)
-		       add_model_to_list, modelsList);
+  xkl_config_registry_foreach_model (configRegistry,
+                                     (ConfigItemProcessFunc) add_model_to_list,
+                                     modelsList);
 
   if (currentModelName != NULL)
   {

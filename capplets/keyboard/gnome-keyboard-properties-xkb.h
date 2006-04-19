@@ -24,7 +24,7 @@
 #ifndef __GNOME_KEYBOARD_PROPERTY_XKB_H
 #define __GNOME_KEYBOARD_PROPERTY_XKB_H
 
-#include <libxklavier/xklavier_config.h>
+#include <libxklavier/xklavier.h>
 #include <gconf/gconf-client.h>
 
 #include "libgswitchit/gswitchit_config.h"
@@ -40,6 +40,8 @@ G_BEGIN_DECLS
 
 #define CWID(s) glade_xml_get_widget (chooserDialog, s)
 
+extern XklEngine *engine;
+extern XklConfigRegistry *configRegistry;
 extern GConfClient *xkbGConfClient;
 extern GSwitchItKbdConfig initialConfig;
 
@@ -71,7 +73,7 @@ extern void xkb_options_load_options (GladeXML * dialog);
 
 extern void clear_xkb_elements_list (GSList * list);
 
-extern char *xci_desc_to_utf8 (XklConfigItem * ci);
+extern char *xci_desc_to_utf8 (const XklConfigItem * ci);
 
 extern void sort_tree_content (GtkWidget * treeView);
 
