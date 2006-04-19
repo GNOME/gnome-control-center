@@ -25,5 +25,6 @@
 #include <gtk/gtk.h>
 
 void gnome_theme_installer_run (GtkWidget *parent, gchar *filename);
+void gnome_theme_installer_run_cb (GtkWidget *button, GtkWidget *parent_window);
 
 #endif /* GNOME_THEME_INSTALLER_H */

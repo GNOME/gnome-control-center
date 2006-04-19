@@ -1152,14 +1152,6 @@ setup_meta_tree_view (GtkTreeView *tree_view,
 
 
 static void
-gnome_meta_theme_installer_run_cb (GtkWidget *button,
-				   GtkWidget *parent_window)
-{
-  gnome_theme_installer_run (parent_window, NULL);
-}
-
-
-static void
 gnome_theme_save_clicked (GtkWidget *button,
 			  gpointer   data)
 {
@@ -1277,7 +1269,7 @@ setup_dialog (GladeXML *dialog)
 
   gtk_widget_set_sensitive(WID("meta_theme_revert_button"),FALSE);
 
-  g_signal_connect (G_OBJECT (WID ("meta_theme_install_button")), "clicked", G_CALLBACK (gnome_meta_theme_installer_run_cb), parent);
+  g_signal_connect (G_OBJECT (WID ("meta_theme_install_button")), "clicked", G_CALLBACK (gnome_theme_installer_run_cb), parent);
 
   g_signal_connect (G_OBJECT (WID ("meta_theme_details_button")), "clicked", gnome_theme_details_show, NULL);
 

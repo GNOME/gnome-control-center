@@ -629,6 +629,14 @@ install_dialog_response (GtkWidget *widget, int response_id, gpointer data)
 }
 
 void
+gnome_theme_installer_run_cb (GtkWidget *button,
+				   GtkWidget *parent_window)
+{
+  gnome_theme_installer_run (parent_window, NULL);
+}
+
+
+void
 gnome_theme_installer_run (GtkWidget *parent, gchar *filename)
 {
 	static gboolean running_theme_install = FALSE;

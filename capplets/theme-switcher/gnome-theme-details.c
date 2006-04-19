@@ -476,14 +476,20 @@ gnome_theme_details_init (void)
   /* gtk themes */
   widget = WID ("control_remove_button");
   g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (remove_theme), THEME_GTK);
+  widget = WID ("control_install_button");
+  g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_theme_installer_run_cb), parent);
 
   /* window manager themes */
   widget = WID ("window_remove_button");
   g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (remove_theme), (gint*)THEME_WINDOW);
+  widget = WID ("window_install_button");
+  g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_theme_installer_run_cb), parent);
 
   /* icon themes */
   widget = WID ("icon_remove_button");
   g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (remove_theme), (gint*)THEME_ICON);
+  widget = WID ("icon_install_button");
+  g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_theme_installer_run_cb), parent);
 
 
   g_signal_connect (G_OBJECT (parent), "response", G_CALLBACK (cb_dialog_response), NULL);
@@ -566,12 +572,12 @@ gnome_theme_details_reread_themes_from_disk (void)
   if (string_list == NULL)
     {
       have_gtk_theme = FALSE;
-      gtk_widget_hide (WID ("control_theme_vbox"));
+      gtk_widget_hide (WID ("control_theme_hbox"));
     }
   else
     {
       have_gtk_theme = TRUE;
-      gtk_widget_show (WID ("control_theme_vbox"));
+      gtk_widget_show (WID ("control_theme_hbox"));
       load_theme_names (GTK_TREE_VIEW (WID ("control_theme_treeview")), string_list, gtk_theme_default_name);
       g_list_free (string_list);
     }
@@ -589,12 +595,12 @@ gnome_theme_details_reread_themes_from_disk (void)
   if (string_list == NULL)
     {
       have_window_theme = FALSE;
-      gtk_widget_hide (WID ("window_theme_vbox"));
+      gtk_widget_hide (WID ("window_theme_hbox"));
     }
   else
     {
       have_window_theme = TRUE;
-      gtk_widget_show (WID ("window_theme_vbox"));
+      gtk_widget_show (WID ("window_theme_hbox"));
       load_theme_names (GTK_TREE_VIEW (WID ("window_theme_treeview")), string_list, window_theme_default_name);
       g_list_free (string_list);
     }
@@ -614,12 +620,12 @@ gnome_theme_details_reread_themes_from_disk (void)
   if (string_list == NULL)
     {
       have_icon_theme = FALSE;
-      gtk_widget_hide (WID ("icon_theme_vbox"));
+      gtk_widget_hide (WID ("icon_theme_hbox"));
     }
   else
     {
       have_icon_theme = TRUE;
-      gtk_widget_show (WID ("icon_theme_vbox"));
+      gtk_widget_show (WID ("icon_theme_hbox"));
       load_theme_names (GTK_TREE_VIEW (WID ("icon_theme_treeview")), string_list, icon_theme_default_name);
       g_list_free (string_list);
     }
