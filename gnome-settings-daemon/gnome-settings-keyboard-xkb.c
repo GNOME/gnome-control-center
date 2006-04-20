@@ -232,6 +232,7 @@ gnome_settings_keyboard_xkb_analyze_sysconfig (void)
 	isConfigChanged = g_slist_length (backupGConfKbdConfig.layouts) &&
 	    !GSwitchItKbdConfigEquals (&initialSysKbdConfig,
 				       &backupGConfKbdConfig);
+
 	/* config was changed!!! */
 	if (isConfigChanged) {
 		if (dontShow) {
@@ -241,20 +242,21 @@ gnome_settings_keyboard_xkb_analyze_sysconfig (void)
 			GtkWidget *chkDontShowAgain =
 			    gtk_check_button_new_with_mnemonic (_
 								("Do _not show this warning again"));
-			GtkWidget *alignDontShowAgain =
-			    gtk_alignment_new (0.5,
-					       0.5,
-					       0,
-					       0);
-			GtkWidget *msg =
-			    gtk_message_dialog_new_with_markup (NULL,
-								0,
-								GTK_MESSAGE_INFO,
-								GTK_BUTTONS_NONE,
-/* !! temporary one */
-								_
-								("The X system keyboard settings differ from your current GNOME "
-								 "keyboard settings.  Which set would you like to use?"));
+			GtkWidget *alignDontShowAgain = gtk_alignment_new (0.5, 0.5, 0, 0);
+			GtkWidget *msg;
+			
+			char *gnome_settings = GSwitchItKbdConfigToString(&backupGConfKbdConfig);
+			char *system_settings = GSwitchItKbdConfigToString(&initialSysKbdConfig);
+
+			msg = gtk_message_dialog_new_with_markup (
+				NULL, 0, GTK_MESSAGE_INFO, GTK_BUTTONS_NONE, /* !! temporary one */
+				_("<b>The X system keyboard settings differ from your current GNOME keyboard settings.</b>\n\n"
+				"Expected was %s, but the the following settings were found: %s.\n\n"
+				"Which set would you like to use?"),
+				gnome_settings, system_settings);
+
+			g_free(gnome_settings);
+			g_free(system_settings);
 
 			gtk_window_set_icon_name (GTK_WINDOW (msg),
 						  "gnome-dev-keyboard");
@@ -272,7 +274,7 @@ gnome_settings_keyboard_xkb_analyze_sysconfig (void)
 			gtk_dialog_add_buttons (GTK_DIALOG (msg),
 						_("Use X settings"),
 						RESPONSE_USE_X,
-						_("Use GNOME settings"),
+						_("Keep GNOME settings"),
 						RESPONSE_USE_GNOME, NULL);
 			gtk_dialog_set_default_response (GTK_DIALOG (msg),
 							 RESPONSE_USE_GNOME);
@@ -383,7 +385,7 @@ gnome_settings_keyboard_xkb_init (GConfClient * client)
 #endif
 
 	engine = xkl_engine_get_instance (GDK_DISPLAY ());
-	if (!engine) {
+	if (engine) {
 		initedOk = TRUE;
 		xkl_engine_backup_names_prop (engine);
 		gnome_settings_keyboard_xkb_analyze_sysconfig ();
