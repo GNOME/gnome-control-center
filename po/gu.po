@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.gu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-20 06:22+0200\n"
-"PO-Revision-Date: 2006-04-20 12:55+0530\n"
+"POT-Creation-Date: 2006-04-21 06:24+0200\n"
+"PO-Revision-Date: 2006-04-21 10:44+0530\n"
 "Last-Translator: Ankit Patel <ankit644@yahoo.com>\n"
 "Language-Team: Gujarati <indianoss-gujarati@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -13,6 +13,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9.1\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n\n"
+"\n"
 "\n"
 "\n"
 "\n"
@@ -2773,25 +2774,34 @@ msgstr ""
 "સરળ રુપરેખાઓ વાપરવાનું પસંદ કરો અથવા XFree સોફ્ટવેરની એકદમ નવી આવૃત્તિ વાપરવાનું ચાલુ "
 "કરો."
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:243
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:244
 msgid "Do _not show this warning again"
 msgstr "આ ચેતવણી ફરીથી બતાવશો નહિં (_n)"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:256
+#. !! temporary one
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:253
+#, c-format
 msgid ""
-"The X system keyboard settings differ from your current GNOME keyboard "
-"settings.  Which set would you like to use?"
+"<b>The X system keyboard settings differ from your current GNOME keyboard "
+"settings.</b>\n"
+"\n"
+"Expected was %s, but the the following settings were found: %s.\n"
+"\n"
+"Which set would you like to use?"
 msgstr ""
-"X સિસ્ટમ કીબોર્ડ સુયોજનો તમારા વર્તમાન GNOME કીબોર્ડ સુયોજનોથી અલગ પડે છે. તમે કયું "
-"વાપરવા માંગો છો?"
+"<b>X સિસ્ટમ કીબોર્ડ સુયોજનો તમારા વર્તમાન જીનોમ કીબોર્ડ સુયોજનોથી અલગ પડે છે.</b>\n"
+"\n"
+"%s ઈચ્છિત હતું, પરંતુ નીચેના સુયોજનો મળ્યા હતા: %s.\n"
+"\n"
+"તમે કયું સુયોજન વાપરવા માંગો છો?"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:273
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:275
 msgid "Use X settings"
 msgstr "X સુયોજનો વાપરો"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:275
-msgid "Use GNOME settings"
-msgstr "GNOME સુયોજનો વાપરો"
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:277
+msgid "Keep GNOME settings"
+msgstr "જીનોમ સુયોજનો જાળવો"
 
 #: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:129
 #, c-format
@@ -2918,10 +2928,37 @@ msgstr "સ્ક્રીન"
 msgid "Screen on which BGApplier is to draw"
 msgstr "સ્ક્રીન કે જેના ઉપર BGApplier લઈ જવાનું છે"
 
-#: ../libgswitchit/gswitchit_config.c:1055
+#: ../libgswitchit/gswitchit_config.c:1057
 #, c-format
 msgid "There was an error loading an image: %s"
 msgstr "ઈમેજ લાવવામાં ભૂલ હતી: %s"
+
+#: ../libgswitchit/gswitchit_config.c:1381
+#, c-format
+msgid "layout \"%s\""
+msgid_plural "layouts \"%s\""
+msgstr[0] "દેખાવ \"%s\""
+msgstr[1] "દેખાવો \"%s\""
+
+#: ../libgswitchit/gswitchit_config.c:1398
+#, c-format
+msgid "option \"%s\""
+msgid_plural "options \"%s\""
+msgstr[0] "વિકલ્પ \"%s\""
+msgstr[1] "વિકલ્પો \"%s\""
+
+#: ../libgswitchit/gswitchit_config.c:1406
+#, c-format
+msgid "model \"%s\", %s and %s"
+msgstr "મોડેલ \"%s\", %s અને %s"
+
+#: ../libgswitchit/gswitchit_config.c:1407
+msgid "no layout"
+msgstr "કોઈ લેઆઉટ નથી"
+
+#: ../libgswitchit/gswitchit_config.c:1408
+msgid "no options"
+msgstr "કોઈ વિકલ્પો નથી"
 
 #: ../libsounds/sound-view.c:43
 msgid "Login"
