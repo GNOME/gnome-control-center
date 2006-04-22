@@ -521,6 +521,8 @@ xkb_layout_chooser_response(GtkDialog *dialog,
                             gint response,
                             GladeXML *chooserDialog)
 {
+  GdkRectangle rect;
+
   if (response == GTK_RESPONSE_OK)
     {
       GtkTreeSelection *selection =
@@ -573,6 +575,10 @@ xkb_layout_chooser_response(GtkDialog *dialog,
           clear_xkb_elements_list (layoutsList);
         }
     }
+
+  gtk_window_get_position (GTK_WINDOW (dialog), &rect.x, &rect.y);
+  gtk_window_get_size (GTK_WINDOW (dialog), &rect.width, &rect.height);
+  GSwitchItPreviewSave (&rect);
 }
 
 static void
@@ -598,6 +604,7 @@ xkb_layout_choose (GladeXML * dialog)
   GladeXML* chooserDialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/gnome-keyboard-properties.glade", "xkb_layout_chooser", NULL);
   GtkWidget* chooser = CWID ( "xkb_layout_chooser");
   GtkWidget* kbdraw = NULL;
+  GtkWidget* toplevel = NULL;
 
   gtk_window_set_transient_for (GTK_WINDOW (chooser), GTK_WINDOW (WID ("keyboard_dialog")));
 
@@ -619,6 +626,18 @@ xkb_layout_choose (GladeXML * dialog)
 
   g_signal_connect (G_OBJECT (chooser),
 		    "response", G_CALLBACK (xkb_layout_chooser_response), chooserDialog);
+
+  toplevel = gtk_widget_get_toplevel (chooser);
+  if (GTK_WIDGET_TOPLEVEL (toplevel))
+  {
+    GdkRectangle *rect = GSwitchItPreviewLoad ();
+    if (rect != NULL)
+    {
+      gtk_window_move (GTK_WINDOW (toplevel), rect->x, rect->y);
+      gtk_window_resize (GTK_WINDOW (toplevel), rect->width, rect->height);
+      g_free (rect);
+    }
+  }
 
   gtk_dialog_run (GTK_DIALOG (chooser));
   gtk_widget_destroy (chooser);
