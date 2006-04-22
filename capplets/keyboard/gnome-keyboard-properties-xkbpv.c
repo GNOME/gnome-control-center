@@ -93,8 +93,8 @@ xkb_layout_preview_update (GladeXML * chooserDialog)
           if( ( p = data->variants ) != NULL )
             g_strfreev(data->variants);
           
-          data->layouts = g_realloc (data->layouts, sizeof (char*) * 2);
-          data->variants = g_realloc (data->variants, sizeof (char*) * 2);
+          data->layouts = g_new0 (char*, 2);
+          data->variants = g_new0 (char*, 2);
           if (GSwitchItKbdConfigSplitItems (id, &layout, &variant)
               && variant != NULL)
             {
@@ -105,7 +105,6 @@ xkb_layout_preview_update (GladeXML * chooserDialog)
               data->layouts[0] = (id == NULL) ? NULL : g_strdup (id);
               data->variants[0] = NULL;
             }
-          data->layouts[1] = data->variants[1] = NULL;
 
           if (xkl_xkb_config_native_prepare (engine, data, &componentNames))
             {
