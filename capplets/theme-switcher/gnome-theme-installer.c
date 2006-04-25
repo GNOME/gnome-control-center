@@ -10,6 +10,7 @@
 #include <libgnomevfs/gnome-vfs-async-ops.h>
 #include <libgnomevfs/gnome-vfs-ops.h>
 #include <libgnomevfs/gnome-vfs-utils.h>
+#include <glib.h>
 
 #include "gnome-theme-info.h"
 #include "capplet-util.h"
@@ -477,29 +478,18 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 	g_free(tar);
 }
 
-static void
-install_dialog_response (GtkWidget *widget, int response_id, gpointer data)
+void
+gnome_theme_install_from_uri (gchar * theme_filename)
 {
-	GladeXML *dialog = data;
 	GtkWidget *dlg;
-	gchar *filename, *path, *base, *scheme;
+	gchar *filename, *path, *base;
 	GList *src, *target;
 	GnomeVFSURI *src_uri;
-	const gchar *raw;
-	gboolean icon_theme;
+	gboolean icon_theme = FALSE;
 	gchar *temppath;
 
-	if (response_id == GTK_RESPONSE_HELP) {
-		capplet_help (GTK_WINDOW (widget),
-			"user-guide.xml",
-			"goscustdesk-12");
-		return;
-	}
 
-	if (response_id == 0) {
-		icon_theme = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (widget), "icon_theme"));
-		raw = gtk_entry_get_text (GTK_ENTRY (gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (WID ("install_theme_picker")))));
-		if (raw == NULL || strlen (raw) <= 0)	{
+		if (theme_filename == NULL || strlen (theme_filename) <= 0)	{
 			GtkWidget *dialog;
 
 			dialog = gtk_message_dialog_new (NULL,
@@ -512,11 +502,7 @@ install_dialog_response (GtkWidget *widget, int response_id, gpointer data)
 			return;
 		}
 
-		if ((scheme = gnome_vfs_get_uri_scheme (raw)) == NULL && *raw != '/')
-			filename = gnome_file_entry_get_full_path (GNOME_FILE_ENTRY (WID ("install_theme_picker")), TRUE);
-		else
-			filename = g_strdup (raw);
-		g_free (scheme);
+		filename = g_strdup (theme_filename);
 		
 		if (filename == NULL)	{
 			GtkWidget *dialog;
@@ -625,23 +611,26 @@ install_dialog_response (GtkWidget *widget, int response_id, gpointer data)
 		g_signal_connect (G_OBJECT (dlg), "done",
 				  G_CALLBACK (transfer_done_cb), path);
 		gtk_widget_show (dlg);
-	}
 }
 
 void
 gnome_theme_installer_run_cb (GtkWidget *button,
-				   GtkWidget *parent_window)
+				   GtkWindow *parent_window)
 {
   gnome_theme_installer_run (parent_window, NULL);
 }
 
 
 void
-gnome_theme_installer_run (GtkWidget *parent, gchar *filename)
+gnome_theme_installer_run (GtkWindow *parent, gchar *filename)
 {
 	static gboolean running_theme_install = FALSE;
-	GladeXML *dialog;
-	GtkWidget *widget;
+	GtkWidget *dialog;
+	static char old_folder[1024] = "";
+	gchar *filename_selected, *folder;
+
+	if (filename == NULL)
+		filename = old_folder;
 
 	if (running_theme_install)
 		return;
@@ -661,22 +650,26 @@ gnome_theme_installer_run (GtkWidget *parent, gchar *filename)
 		return;
 	}
 
-	dialog = glade_xml_new (GLADEDIR "/theme-install.glade", NULL, NULL);
-	widget = WID ("install_dialog");
+	dialog = gtk_file_chooser_dialog_new ("Select Theme", parent, GTK_FILE_CHOOSER_ACTION_OPEN, GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT, GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT, NULL);
 
-	g_signal_connect (G_OBJECT (widget), "response", G_CALLBACK (install_dialog_response), dialog);
-	gtk_window_set_transient_for (GTK_WINDOW (widget), GTK_WINDOW (parent));
-	gtk_window_set_position (GTK_WINDOW (widget), GTK_WIN_POS_CENTER_ON_PARENT);
-	if (filename)
-		gnome_file_entry_set_filename (GNOME_FILE_ENTRY (WID ("install_theme_picker")), filename);
+	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dialog), old_folder);
 
-	while (gtk_dialog_run (GTK_DIALOG (widget)) == GTK_RESPONSE_HELP)
-		;
+	if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT)
+	{
+		filename_selected = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
+		gnome_theme_install_from_uri (filename_selected);
+		g_free (filename_selected);
+	}
+
+
+	folder = gtk_file_chooser_get_current_folder (GTK_FILE_CHOOSER (dialog));
+	g_strlcpy (old_folder, folder, 255);
+	g_free (folder);
 
 	gnome_theme_details_reread_themes_from_disk();
 
-	gtk_widget_destroy (widget);
-	g_object_unref (G_OBJECT (dialog));
+
+	gtk_widget_destroy (dialog);
 
 	running_theme_install = FALSE;
 }

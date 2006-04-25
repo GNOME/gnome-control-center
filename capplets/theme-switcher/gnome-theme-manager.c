@@ -1512,7 +1512,7 @@ gnome_theme_manager_drag_data_received_cb (GtkWidget *widget, GdkDragContext *co
 		gnome_vfs_uri_list_unref (uris);
 	}
 
-	gnome_theme_installer_run (widget, filename);
+	gnome_theme_install_from_uri (filename);
 	g_free (filename);
 }
 

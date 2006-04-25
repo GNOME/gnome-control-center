@@ -1,3 +1,17 @@
+2006-04-25  Thomas Wood  <thos@gnome.org>
+
+	* Makefile.am:
+	* gnome-theme-installer.c: (gnome_theme_install_from_uri),
+	(gnome_theme_installer_run_cb), (gnome_theme_installer_run):
+	* gnome-theme-installer.h:
+	* gnome-theme-manager.c:
+	(gnome_theme_manager_drag_data_received_cb):
+	* theme-install.glade:
+
+	- Remove redundant theme-install dialog
+	- Fix bug 138795 (file dialog forgets last browsed to or installed from
+	  location)
+
 2006-04-19  Thomas Wood  <thos@gnome.org>
 
 	* gnome-theme-details.c: (gnome_theme_details_init),
