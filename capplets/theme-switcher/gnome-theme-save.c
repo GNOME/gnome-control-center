@@ -75,12 +75,47 @@ check_theme_name (const gchar  *theme_name,
   return TRUE;
 }
 
+static gchar*
+str_remove_slash (const gchar *src)
+{
+        const gchar *i;
+        gchar *rtn;
+        gint len = 0;
+        i = src;
+
+        while (*i)
+        {
+                if (*i != '/')
+                        len++;
+                i++;
+        }
+
+        rtn = (gchar *) g_malloc (len + 1);
+        while (*src)
+        {
+                if (*src != '/')
+                {
+                        *rtn = *src;
+                        rtn++;
+                }
+                src++;
+        }
+        rtn++;
+        *rtn = '\0';
+        return rtn - len - 1;
+}
+
+
+
+
 static gboolean
 setup_directory_structure (const gchar  *theme_name,
 			   GError      **error)
 {
-  gchar *dir;
+  gchar *dir, *theme_name_dir;
   GnomeVFSURI *uri;
+
+  theme_name_dir = str_remove_slash (theme_name);
 
   dir = g_build_filename (g_get_home_dir (), ".themes", NULL);
   uri = gnome_vfs_uri_new (dir);
@@ -89,7 +124,7 @@ setup_directory_structure (const gchar  *theme_name,
   gnome_vfs_uri_unref (uri);
   g_free (dir);
   
-  dir = g_build_filename (g_get_home_dir (), ".themes", theme_name, NULL);
+  dir = g_build_filename (g_get_home_dir (), ".themes", theme_name_dir, NULL);
   uri = gnome_vfs_uri_new (dir);
   if (!gnome_vfs_uri_exists (uri))
     gnome_vfs_make_directory_for_uri (uri, 0775);
@@ -110,6 +145,7 @@ setup_directory_structure (const gchar  *theme_name,
 	  
   gnome_vfs_uri_unref (uri);
   g_free (dir);
+  g_free (theme_name_dir);
 
   return TRUE;
 }
@@ -120,14 +156,17 @@ write_theme_to_disk (GnomeThemeMetaInfo  *meta_theme_info,
 		     const gchar         *theme_description,
 		     GError             **error)
 {
-  gchar *dir;
+  gchar *dir, *theme_name_dir;
   GnomeVFSURI *uri;
   GnomeVFSURI *target_uri;
   GnomeVFSHandle *handle = NULL;
   GnomeVFSFileSize bytes_written;
   gchar *str;
 
-  dir = g_build_filename (g_get_home_dir (), ".themes", theme_name, "index.theme~", NULL);
+  theme_name_dir = str_remove_slash (theme_name);
+  dir = g_build_filename (g_get_home_dir (), ".themes", theme_name_dir, "index.theme~", NULL);
+  g_free (theme_name_dir);
+
   uri = gnome_vfs_uri_new (dir);
   dir [strlen (dir) - 1] = '\000';
   target_uri = gnome_vfs_uri_new (dir);
@@ -226,35 +265,6 @@ save_dialog_response (GtkWidget *save_dialog,
   g_free (theme_description);
 }
 
-static inline gboolean
-is_valid_theme_char (char c)
-{
-  static const gchar *invalid_chars = "/?'\"\\|*.";
-  const char *p;
-
-  for (p = invalid_chars; *p != '\000'; p++)
-    if (c == *p) return FALSE;
-  return TRUE;
-}
-
-static void
-entry_text_filter (GtkEditable *editable,
-		   const gchar *text,
-		   gint         length,
-		   gint        *position,
-		   gpointer     data)
-{
-  gint i;
-
-  for (i = 0; i < length; i ++)
-    {
-      if (! is_valid_theme_char (text[i]))
-	{
-	  g_signal_stop_emission_by_name (editable, "insert_text");
-	  return;
-	}
-    }
-}
 
 static void
 entry_text_changed (GtkEditable *editable,
@@ -292,7 +302,6 @@ gnome_theme_save_show_dialog (GtkWidget          *parent,
 
       g_signal_connect (G_OBJECT (save_dialog), "response", G_CALLBACK (save_dialog_response), NULL);
       g_signal_connect (G_OBJECT (save_dialog), "delete-event", G_CALLBACK (gtk_true), NULL);
-      g_signal_connect (G_OBJECT (entry), "insert_text", G_CALLBACK (entry_text_filter), NULL);
       g_signal_connect (G_OBJECT (entry), "changed", G_CALLBACK (entry_text_changed), dialog);
 
       error_quark = g_quark_from_string ("gnome-theme-save");
