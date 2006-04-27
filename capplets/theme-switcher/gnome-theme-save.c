@@ -100,12 +100,9 @@ str_remove_slash (const gchar *src)
                 }
                 src++;
         }
-        rtn++;
         *rtn = '\0';
-        return rtn - len - 1;
+        return rtn - len;
 }
-
-
 
 
 static gboolean
@@ -128,7 +125,14 @@ setup_directory_structure (const gchar  *theme_name,
   uri = gnome_vfs_uri_new (dir);
   if (!gnome_vfs_uri_exists (uri))
     gnome_vfs_make_directory_for_uri (uri, 0775);
-  else {
+  gnome_vfs_uri_unref (uri);
+  g_free (dir);
+
+  dir = g_build_filename (g_get_home_dir (), ".themes", theme_name_dir, "index.theme", NULL);
+  uri = gnome_vfs_uri_new (dir);
+
+  if (gnome_vfs_uri_exists (uri))
+  {
 	GtkWidget *dialog;
 	gint response;
 	  
@@ -139,8 +143,13 @@ setup_directory_structure (const gchar  *theme_name,
 	  		 _("The theme already exists. Would you like to replace it?"));
 	response = gtk_dialog_run(GTK_DIALOG(dialog));
 	gtk_widget_destroy(dialog);
-	if (response == GTK_RESPONSE_CANCEL) 
+	if (response == GTK_RESPONSE_CANCEL)
+	{
+		gnome_vfs_uri_unref (uri);
+		g_free (dir);
+		g_free (theme_name_dir);
 		return FALSE;
+	}
   }
 	  
   gnome_vfs_uri_unref (uri);
