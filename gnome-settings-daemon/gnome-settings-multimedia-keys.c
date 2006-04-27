@@ -35,13 +35,6 @@
 
 #include "eggaccelerators.h"
 
-#if defined(__powerpc__) && defined (__linux__)
-#define USE_FBLEVEL
-#include "actions/acme-fb-level.h"
-#else
-#undef USE_FBLEVEL
-#endif
-
 #include "actions/acme.h"
 #include "actions/acme-volume.h"
 
@@ -59,9 +52,6 @@
 
 typedef struct {
 	AcmeVolume *volobj;
-#ifdef USE_FBLEVEL
-	AcmeFblevel *levobj;
-#endif
 	GladeXML *xml;
 	GtkWidget *dialog;
 	GConfClient *conf_client;
@@ -75,7 +65,6 @@ typedef struct {
 enum {
 	ICON_MUTED,
 	ICON_LOUD,
-	ICON_BRIGHT,
 	ICON_EJECT,
 };
 
@@ -151,7 +140,6 @@ do_sleep_action (char *cmd1, char *cmd2)
 static char *images[] = {
 	PIXMAPSDIR "/gnome-speakernotes-muted.png",
 	PIXMAPSDIR "/gnome-speakernotes.png",
-	PIXMAPSDIR "/acme-brightness.png",
 	PIXMAPSDIR "/acme-eject.png",
 };
 
@@ -674,46 +662,6 @@ do_eject_action (Acme *acme)
 	gtk_widget_set_sensitive (progress, TRUE);
 }
 
-#ifdef USE_FBLEVEL
-static void
-do_brightness_action (Acme *acme, int type)
-{
-	GtkWidget *progress;
-	int level;
-
-	if (acme->levobj == NULL)
-		return;
-
-	if (acme->dialog_timeout != 0)
-	{
-		gtk_timeout_remove (acme->dialog_timeout);
-		acme->dialog_timeout = 0;
-	}
-
-	level = acme_fblevel_get_level (acme->levobj);
-
-	dialog_init (acme);
-	acme_image_set (acme, ICON_BRIGHT);
-
-	switch (type) {
-	case BRIGHT_DOWN_KEY:
-		acme_fblevel_set_level (acme->levobj, level - 1);
-		break;
-	case BRIGHT_UP_KEY:
-		acme_fblevel_set_level (acme->levobj, level + 1);
-		break;
-	}
-
-	level = acme_fblevel_get_level (acme->levobj);
-
-	progress = glade_xml_get_widget (acme->xml, "progressbar");
-	gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (progress),
-			(double) level / 15);
-
-	dialog_show (acme);
-}
-#endif
-
 static void
 do_sound_action (Acme *acme, int type)
 {
@@ -818,12 +766,6 @@ do_action (Acme *acme, int type)
 	case WWW_KEY:
 		do_www_action (acme, NULL);
 		break;
-#ifdef USE_FBLEVEL
-	case BRIGHT_DOWN_KEY:
-	case BRIGHT_UP_KEY:
-		do_brightness_action (acme, type);
-		break;
-#endif
 	default:
 		g_assert_not_reached ();
 	}
@@ -874,10 +816,6 @@ acme_filter_events (GdkXEvent *xevent, GdkEvent *event, gpointer data)
 			switch (keys[i].key_type) {
 			case VOLUME_DOWN_KEY:
 			case VOLUME_UP_KEY:
-#ifdef USE_FBLEVEL
-			case BRIGHT_DOWN_KEY:
-			case BRIGHT_UP_KEY:
-#endif
 				/* auto-repeatable keys */
 				if (xev->type != KeyPress)
 					return GDK_FILTER_CONTINUE;
@@ -924,17 +862,6 @@ gnome_settings_multimedia_keys_load (GConfClient *client)
 
 	/* initialise Volume handler */
 	acme->volobj = acme_volume_new();
-
-#ifdef USE_FBLEVEL
-	/* initialise Frame Buffer level handler */
-	acme->levobj = acme_fblevel_new (&err);
-	if (acme->levobj == NULL && err != NULL) {
-		if (!g_error_matches (err, ACME_FBLEVEL_ERROR,
-				      ACME_FBLEVEL_ERROR_NO_POWERBOOK))
-			acme_error (err->message);
-		g_error_free (err);
-	}
-#endif
 
 	/* Start filtering the events */
 	for (l = acme->screens; l != NULL; l = l->next)

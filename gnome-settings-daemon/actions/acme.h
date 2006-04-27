@@ -38,10 +38,6 @@ enum {
 	SCREENSAVER_KEY,
 	HELP_KEY,
 	WWW_KEY,
-#ifdef USE_FBLEVEL
-	BRIGHT_DOWN_KEY,
-	BRIGHT_UP_KEY,
-#endif
 	PLAY_KEY,
 	PAUSE_KEY,
 	STOP_KEY,
@@ -73,10 +69,6 @@ static struct {
 	{ SCREENSAVER_KEY, GCONF_BINDING_DIR "/screensaver", NULL },
 	{ HELP_KEY, GCONF_BINDING_DIR "/help", NULL },
 	{ WWW_KEY, GCONF_BINDING_DIR "/www", NULL },
-#ifdef USE_FBLEVEL
-	{ BRIGHT_DOWN_KEY, GCONF_BINDING_DIR "/brightness_down", NULL },
-	{ BRIGHT_UP_KEY, GCONF_BINDING_DIR "/brightness_up", NULL },
-#endif
 	{ PLAY_KEY, GCONF_BINDING_DIR "/play", NULL },
 	{ PAUSE_KEY, GCONF_BINDING_DIR "/pause", NULL },
 	{ STOP_KEY, GCONF_BINDING_DIR "/stop", NULL },

@@ -514,22 +514,6 @@ AC_SUBST(GST_LIBS)
 AC_SUBST(GST_CFLAGS)
 
 dnl ==============================================
-dnl FB Level section
-dnl ==============================================
-have_fb=no
-AC_TRY_COMPILE([
-	#include <linux/fb.h>
-	#include <linux/pmu.h>
-	],[
-	int arg = 0;
-	],[
-	have_fb=yes
-])
-AC_MSG_CHECKING(for Brightness control support)
-AC_MSG_RESULT($have_fb)
-AM_CONDITIONAL(HAVE_FB, test x"$have_fb" = "xyes")
-
-dnl ==============================================
 dnl Define the main variables
 dnl ==============================================
 COMMON_CFLAGS="-I\$(top_srcdir)/capplets/common"

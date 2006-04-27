@@ -1,3 +1,16 @@
+2006-04-27  Bastien Nocera  <hadess@hadess.net>
+
+	* actions/Makefile.am:
+	* actions/acme-brightness.png:
+	* actions/acme-fb-level.c:
+	* actions/acme-fb-level.h:
+	* actions/acme.h:
+	* gnome-settings-multimedia-keys.c: (do_action),
+	(acme_filter_events), (gnome_settings_multimedia_keys_load):
+	Remove references to the brightness controls, we have moved the
+	functionality (and enhanced it!) to gnome-power-manager
+	(Closes: #339857)
+
 2006-04-20  Sergey Udaltsov <svu@gnome.org>
 
 	* gnome-settings-keyboard-xkb.c: fixed the libxklavier engine

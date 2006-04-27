@@ -28,22 +28,16 @@ endif # HAVE_OSS
 endif # HAVE_ALSA
 endif # HAVE_GSTREAMER
 
-if HAVE_FB
-INCLUDES += -DHAVE_FB
-libacme_la_SOURCES += acme-fb-level.c acme-fb-level.h
-endif
-
 Datadir = $(datadir)/control-center-2.0/interfaces/
 Data_DATA = acme.glade
 
 pixmapsdir = $(GNOMECC_PIXMAPS_DIR)
-pixmaps_DATA = acme-brightness.png acme-eject.png gnome-speakernotes-muted.png gnome-speakernotes.png
+pixmaps_DATA = acme-eject.png gnome-speakernotes-muted.png gnome-speakernotes.png
 
 EXTRA_DIST =					\
 	acme-volume-alsa.c acme-volume-alsa.h	\
 	acme-volume-gstreamer.c acme-volume-gstreamer.h	\
 	acme-volume-oss.c acme-volume-oss.h	\
-	acme-fb-level.c acme-fb-level.h		\
 	acme.h					\
 	acme.glade				\
 	$(pixmaps_DATA)
