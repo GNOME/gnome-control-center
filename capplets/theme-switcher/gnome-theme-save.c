@@ -3,6 +3,7 @@
 #include "gnome-theme-manager.h"
 #include "capplet-util.h"
 #include <libgnomevfs/gnome-vfs-ops.h>
+#include <gconf/gconf-client.h>
 
 #include "gnome-theme-save-data.c"
 
@@ -163,6 +164,7 @@ static gboolean
 write_theme_to_disk (GnomeThemeMetaInfo  *meta_theme_info,
 		     const gchar         *theme_name,
 		     const gchar         *theme_description,
+		     gboolean		  save_background,
 		     GError             **error)
 {
   gchar *dir, *theme_name_dir;
@@ -170,7 +172,8 @@ write_theme_to_disk (GnomeThemeMetaInfo  *meta_theme_info,
   GnomeVFSURI *target_uri;
   GnomeVFSHandle *handle = NULL;
   GnomeVFSFileSize bytes_written;
-  gchar *str;
+  gchar *str, *current_background;
+  GConfClient *client;
 
   theme_name_dir = str_remove_slash (theme_name);
   dir = g_build_filename (g_get_home_dir (), ".themes", theme_name_dir, "index.theme~", NULL);
@@ -201,6 +204,19 @@ write_theme_to_disk (GnomeThemeMetaInfo  *meta_theme_info,
   gnome_vfs_write (handle, str, strlen (str), &bytes_written);
   g_free (str);
 
+  if (save_background)
+  {
+	client = gconf_client_get_default ();
+	current_background = gconf_client_get_string (client, BACKGROUND_KEY, NULL);
+	str = g_strdup_printf ("BackgroundImage=%s\n", current_background);
+
+	gnome_vfs_write (handle, str, strlen (str), &bytes_written);
+
+	g_object_unref (client);
+	g_free (current_background);
+	g_free (str);
+  }
+
   gnome_vfs_close (handle);
 
   
@@ -215,6 +231,7 @@ static gboolean
 save_theme_to_disk (GnomeThemeMetaInfo  *meta_theme_info,
 		    const gchar         *theme_name,
 		    const gchar         *theme_description,
+		    gboolean		 save_background,
 		    GError             **error)
 {
   if (! check_theme_name (theme_name, error))
@@ -223,7 +240,7 @@ save_theme_to_disk (GnomeThemeMetaInfo  *meta_theme_info,
   if (! setup_directory_structure (theme_name, error))
     return FALSE;
 
-  if (! write_theme_to_disk (meta_theme_info, theme_name, theme_description, error))
+  if (! write_theme_to_disk (meta_theme_info, theme_name, theme_description, save_background, error))
     return FALSE;
   
   return TRUE;
@@ -248,6 +265,7 @@ save_dialog_response (GtkWidget *save_dialog,
       GtkTextIter start_iter;
       GtkTextIter end_iter;
       gchar *buffer_text;
+      gboolean save_background;
       
       dialog = gnome_theme_manager_get_theme_dialog ();
       entry = WID ("save_dialog_entry");
@@ -261,7 +279,8 @@ save_dialog_response (GtkWidget *save_dialog,
       theme_description = escape_string_and_dup (buffer_text);
       g_free (buffer_text);
       meta_theme_info = (GnomeThemeMetaInfo *) g_object_get_data (G_OBJECT (save_dialog), "meta-theme-info");
-      if (! save_theme_to_disk (meta_theme_info, theme_name, theme_description, &error))
+      save_background = gtk_toggle_button_get_active (/*GTK_TOGGLE_BUTTON*/ (WID ("save_background_checkbutton")));
+      if (! save_theme_to_disk (meta_theme_info, theme_name, theme_description, save_background, &error))
 	{
 	  goto out;
 	}

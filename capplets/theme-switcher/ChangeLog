@@ -1,3 +1,14 @@
+2006-04-28  Thomas Wood  <thos@gnome.org>
+
+	* gnome-theme-save.c: (write_theme_to_disk), (save_theme_to_disk),
+	(save_dialog_response):
+	* theme-properties.glade:
+
+	- Added option to save current background when saving a custom theme.
+	Fixes bug 330302 - Saved themes should remember wallpaper.
+	- Also implements some of the UI changes for the save dialog, suggested
+	in bug 100622
+
 2006-04-27  Thomas Wood  <thos@gnome.org>
 
 	* gnome-theme-save.c: (str_remove_slash),
