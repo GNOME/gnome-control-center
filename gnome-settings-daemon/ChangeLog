@@ -1,3 +1,10 @@
+2006-04-28  Joe Marcus Clarke <marcusi@freebsd.org>
+
+	Fixes #338849
+
+	* actions/acme-volume-gstreamer.c: added missing header to avoid
+	64bit crash on missing prototype.
+
 2006-04-27  Bastien Nocera  <hadess@hadess.net>
 
 	* actions/Makefile.am:
