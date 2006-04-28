@@ -29,6 +29,7 @@
 
 #ifdef HAVE_GST10
 #include <gst/gst.h>
+#include <gst/audio/mixerutils.h>
 #include <gst/interfaces/mixer.h>
 #include <gst/interfaces/propertyprobe.h>
 #else
