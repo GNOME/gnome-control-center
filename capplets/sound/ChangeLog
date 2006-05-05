@@ -1,3 +1,21 @@
+2006-05-05  Jürg Billeter  <j@bitron.ch>
+
+	* Makefile.am:
+	* pipeline-tests.c: (user_test_pipeline_response),
+	(user_test_pipeline_timeout), (build_test_pipeline),
+	(pipeline_error_dlg), (user_test_pipeline):
+	* pipeline-tests.h:
+	* sound-properties-capplet.c: (element_available), (add_device),
+	(remove_device), (device_added_callback),
+	(device_removed_callback), (setup_hal_devices),
+	(device_test_button_clicked), (get_gconf_key_for_profile),
+	(device_changed), (get_gconf_description_for_profile),
+	(gconf_key_changed), (setup_device_chooser), (add_selected_device),
+	(setup_devices), (setup_dialog), (main):
+	* sound-properties.glade:
+
+	Add sound device selection using HAL and GStreamer (Closes: #329112).
+
 2006-01-11  Scott Reeves <SReeves@novell.com>
 
 	* sound-properties.glade: new GUI.
