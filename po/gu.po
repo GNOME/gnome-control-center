@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.gu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-24 06:21+0200\n"
-"PO-Revision-Date: 2006-04-24 10:28+0530\n"
+"POT-Creation-Date: 2006-05-08 06:43+0200\n"
+"PO-Revision-Date: 2006-05-08 11:24+0530\n"
 "Last-Translator: Ankit Patel <ankit644@yahoo.com>\n"
 "Language-Team: Gujarati <indianoss-gujarati@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -13,6 +13,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9.1\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n\n"
+"\n"
 "\n"
 "\n"
 "\n"
@@ -161,6 +162,7 @@ msgstr " "
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:1
+#: ../capplets/sound/sound-properties.glade.h:1
 #: ../capplets/ui-properties/gnome-ui-properties.glade.h:1
 msgid "    "
 msgstr "    "
@@ -490,7 +492,6 @@ msgstr ""
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:2
-#: ../capplets/theme-switcher/theme-install.glade.h:1
 msgid "*"
 msgstr "*"
 
@@ -705,7 +706,7 @@ msgid "_Finish"
 msgstr "સમાપ્ત (_F)"
 
 #: ../capplets/background/gnome-background-properties.glade.h:7
-#: ../capplets/theme-switcher/theme-properties.glade.h:19
+#: ../capplets/theme-switcher/theme-properties.glade.h:20
 msgid "_Remove"
 msgstr "દૂર કરો (_R)"
 
@@ -801,7 +802,7 @@ msgstr "સુયોજનાને અમલમાં મૂકો અને �
 #: ../capplets/common/capplet-util.c:243
 #: ../capplets/keyboard/gnome-keyboard-properties.c:225
 #: ../capplets/mouse/gnome-mouse-properties.c:1016
-#: ../capplets/sound/sound-properties-capplet.c:244
+#: ../capplets/sound/sound-properties-capplet.c:760
 msgid "Retrieve and store legacy settings"
 msgstr "લેગસી સુયોજનાઓ ફરીથી મેળવો અને સંગ્રહિત કરો"
 
@@ -1004,6 +1005,7 @@ msgstr "રૂપરેખાંકન સંગ્રહવામાં ભૂ�
 # #-#-#-#-#  libgnomeprint.gnome-2-2.hi.po (libgnomeprint VERSION)  #-#-#-#-#
 # libgnomeprint/gpa/gpa-media.c:241
 #: ../capplets/default-applications/gnome-da-capplet.c:734
+#: ../capplets/sound/sound-properties-capplet.c:318
 msgid "Custom"
 msgstr "વૈવિધ્યપૂર્ણ"
 
@@ -1518,34 +1520,34 @@ msgstr "પ્રવેગનો પ્રકાર."
 # #-#-#-#-#  gnome-applets.gnome-2-2.hi.po (gnome-applets 2.x)  #-#-#-#-#
 # gtk/gtkinputdialog.c:238
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
-#: ../capplets/keybindings/gnome-keybinding-properties.c:197
+#: ../capplets/keybindings/gnome-keybinding-properties.c:187
 #: ../libbackground/applier.c:624 ../typing-break/drwright.c:471
 msgid "Disabled"
 msgstr "નિષ્ક્રિય"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:544
+#: ../capplets/keybindings/gnome-keybinding-properties.c:534
 msgid "<Unknown Action>"
 msgstr "&lt;Unknown Action&gt;"
 
 # #-#-#-#-#  gnome-panel.gnome-2-2.hi.po (gnome-panel 2.2)  #-#-#-#-#
 # gnome-session/splash.c:72
-#: ../capplets/keybindings/gnome-keybinding-properties.c:565
+#: ../capplets/keybindings/gnome-keybinding-properties.c:555
 msgid "Desktop"
 msgstr "ડેસ્કટોપ"
 
 # #-#-#-#-#  gnome-icon-theme.gnome-2-2.hi.po (gnome-icon theme 2.2)  #-#-#-#-#
 # 48x48/emblems/emblem-sound.icon.in.h:1
 # 48x48/emblems/emblem-sound.icon.in.h:1
-#: ../capplets/keybindings/gnome-keybinding-properties.c:566
+#: ../capplets/keybindings/gnome-keybinding-properties.c:556
 #: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
 msgid "Sound"
 msgstr "ધ્વનિ"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:570
+#: ../capplets/keybindings/gnome-keybinding-properties.c:560
 msgid "Window Management"
 msgstr "વિન્ડોની વ્યવસ્થા"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:676
+#: ../capplets/keybindings/gnome-keybinding-properties.c:666
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become unusable to type "
@@ -1555,7 +1557,7 @@ msgstr ""
 "ટુંકાણ \"%s\" વાપરી શકાતું નથી કારણ કે તે આ કી વડે લખવા માટે બિનઉપયોગી થઈ જશે.\n"
 "મહેરબાની કરીને એક જ સમયે Control, Alt અથવા Shift જેવી કી સાથે પ્રયાસ કરો.\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:705
+#: ../capplets/keybindings/gnome-keybinding-properties.c:695
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1564,23 +1566,23 @@ msgstr ""
 "આ ટુંકાણ \"%s\" પહેલેથી જ:\n"
 " \"%s\" માટે વપરાયેલ છે\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:737
+#: ../capplets/keybindings/gnome-keybinding-properties.c:727
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "રુપરેખાંકન ડેટાબેઝમાં નવી પ્રવેગક સુયોજીત કરવામાં ભૂલ :%s \n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:787
+#: ../capplets/keybindings/gnome-keybinding-properties.c:777
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "રુપરેખાંકન ડેટાબેઝમાં નવી પ્રવેગક સુયોજીત કરવામાં ભૂલ :%s \n"
 
 # #-#-#-#-#  gnome-session.gnome-2-2.hi.po (gnome-session VERSION)  #-#-#-#-#
 # gnome-session/logout.c:266
-#: ../capplets/keybindings/gnome-keybinding-properties.c:894
+#: ../capplets/keybindings/gnome-keybinding-properties.c:884
 msgid "Action"
 msgstr "ક્રિયા"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:918
+#: ../capplets/keybindings/gnome-keybinding-properties.c:908
 msgid "Shortcut"
 msgstr "ટુંકાણ"
 
@@ -1635,8 +1637,8 @@ msgstr "સુલભતા (_A)"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:221
 #: ../capplets/keyboard/gnome-keyboard-properties.c:223
-#: ../capplets/sound/sound-properties-capplet.c:240
-#: ../capplets/sound/sound-properties-capplet.c:242
+#: ../capplets/sound/sound-properties-capplet.c:756
+#: ../capplets/sound/sound-properties-capplet.c:758
 msgid "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr "સુયોજનાઓ અમલમાં મૂકો અને બહાર નીકળો (સુગમતા ખાતર; હમણા ડીમન દ્વારા નિયંત્રિત થાય છે)"
 
@@ -2067,43 +2069,91 @@ msgstr "સુરક્ષિત HTTP પ્રોક્સી (_S):"
 msgid "Enable sound and associate sounds with events"
 msgstr "અવાજને સક્રિય કરો અને અવાજ સાથે ઘટનાઓ સંકળો"
 
-#: ../capplets/sound/sound-properties-capplet.c:271
-#: ../capplets/sound/sound-properties.glade.h:4
+#: ../capplets/sound/sound-properties-capplet.c:316
+#: ../capplets/sound/sound-properties-capplet.c:368
+msgid "Not connected"
+msgstr "જોડાયેલ નથી"
+
+#: ../capplets/sound/sound-properties-capplet.c:790
 msgid "Sound Preferences"
 msgstr "અવાજની પસંદગીઓ"
 
-#: ../capplets/sound/sound-properties.glade.h:1
+#: ../capplets/sound/sound-properties.glade.h:2
+msgid "<b>Audio Conferencing</b>"
+msgstr "<b>ઓડિયો કોન્ફરન્સીંગ</b>"
+
+#: ../capplets/sound/sound-properties.glade.h:3
+msgid "<b>Music and Movies</b>"
+msgstr "<b>સંગીત અને ચિત્રપટો</b>"
+
+#: ../capplets/sound/sound-properties.glade.h:4
+msgid "<b>Sound Events</b>"
+msgstr "<b>ધ્વનિ ઘટનાઓ</b>"
+
+#: ../capplets/sound/sound-properties.glade.h:5
+msgid "<span weight=\"bold\" size=\"x-large\">Testing...</span>"
+msgstr "<span weight=\"bold\" size=\"x-large\">ચકાસી રહ્યા છીએ...</span>"
+
+#: ../capplets/sound/sound-properties.glade.h:6
+msgid "Click Ok to finish."
+msgstr "સમાપ્ત કરવા માટે બરાબર ક્લિક કરો."
+
+#: ../capplets/sound/sound-properties.glade.h:7
+msgid "Devices"
+msgstr "ઉપકરણો"
+
+#: ../capplets/sound/sound-properties.glade.h:8
 msgid "E_nable software sound mixing (ESD)"
 msgstr "સોફ્ટવેર સાઉન્ડ મિક્સિંગ સક્રિય કરો (ESD) (_n)"
 
-#: ../capplets/sound/sound-properties.glade.h:2
+#: ../capplets/sound/sound-properties.glade.h:9
 msgid "Flash _entire screen"
 msgstr "આખી સ્ક્રીનને ઝબકાવો (_e)"
 
-#: ../capplets/sound/sound-properties.glade.h:3
+#: ../capplets/sound/sound-properties.glade.h:10
 msgid "Flash _window titlebar"
 msgstr "વિન્ડો શીર્ષકપટ્ટી ઝબકાવો (_w)"
+
+#: ../capplets/sound/sound-properties.glade.h:11
+msgid "Sound & Video Preferences"
+msgstr "સાઉન્ડ અને વીડિયો પસંદગીઓ"
+
+#: ../capplets/sound/sound-properties.glade.h:12
+msgid "Sound Capture:"
+msgstr "સાઉન્ડ કેપ્ચર:"
+
+#: ../capplets/sound/sound-properties.glade.h:13
+msgid "Sound Playback:"
+msgstr "સાઉન્ડ પ્લેબેક:"
 
 # #-#-#-#-#  gnome-icon-theme.gnome-2-2.hi.po (gnome-icon theme 2.2)  #-#-#-#-#
 # 48x48/emblems/emblem-sound.icon.in.h:1
 # 48x48/emblems/emblem-sound.icon.in.h:1
-#: ../capplets/sound/sound-properties.glade.h:5
+#: ../capplets/sound/sound-properties.glade.h:14
 msgid "Sounds"
 msgstr "સાઉન્ડ"
 
-#: ../capplets/sound/sound-properties.glade.h:6
+#: ../capplets/sound/sound-properties.glade.h:15
 msgid "System Beep"
 msgstr "સિસ્ટમ ઘંટડી"
 
-#: ../capplets/sound/sound-properties.glade.h:7
+#: ../capplets/sound/sound-properties.glade.h:16
+msgid "Test"
+msgstr "ચકાસણી"
+
+#: ../capplets/sound/sound-properties.glade.h:17
+msgid "Testing Pipeline"
+msgstr "પાઈપલાઈન ચકાસી રહ્યા છીએ"
+
+#: ../capplets/sound/sound-properties.glade.h:18
 msgid "_Enable system beep"
 msgstr "સિસ્ટમ ઘંટડી સક્રિય કરો (_E)"
 
-#: ../capplets/sound/sound-properties.glade.h:8
+#: ../capplets/sound/sound-properties.glade.h:19
 msgid "_Play system sounds"
 msgstr "સિસ્ટમ સાઉન્ડ વગાડો (_P)"
 
-#: ../capplets/sound/sound-properties.glade.h:9
+#: ../capplets/sound/sound-properties.glade.h:20
 msgid "_Visual system beep"
 msgstr "દૃશ્યમાન સિસ્ટમ ઘંટડી (_V)"
 
@@ -2128,15 +2178,15 @@ msgstr ""
 "તમારી સિસ્ટમમાં કોઈ થીમ મળી નહિં. કદાચ એનો અર્થ એ હોઈ શકે કે \"થીમની પસંદગીઓ\" સંવાદ "
 "અયોગ્ય રીતે સ્થાપિત થયો હશે, અથવા તમે \"જીનોમ થીમ\" પેકેજ સ્થાપિત કર્યો નથી."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:253
+#: ../capplets/theme-switcher/gnome-theme-installer.c:254
 msgid "This theme is not in a supported format."
 msgstr "આ થીમ એ આધારભૂત બંધારણ નથી."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:271
+#: ../capplets/theme-switcher/gnome-theme-installer.c:272
 msgid "Failed to create temporary directory"
 msgstr "કામચલાઉ ડિરેક્ટરી બનાવવામાં નિષ્ફળ"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:292
+#: ../capplets/theme-switcher/gnome-theme-installer.c:293
 msgid ""
 "Can not install theme. \n"
 "The bzip2 utility is not installed."
@@ -2144,13 +2194,13 @@ msgstr ""
 "થીમ સ્થાપિત કરી શકતા નથી. \n"
 "bzip2 ઉપયોગિતા સ્થાપિત નથી."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:311
-#: ../capplets/theme-switcher/gnome-theme-installer.c:350
-#: ../capplets/theme-switcher/gnome-theme-installer.c:433
+#: ../capplets/theme-switcher/gnome-theme-installer.c:312
+#: ../capplets/theme-switcher/gnome-theme-installer.c:351
+#: ../capplets/theme-switcher/gnome-theme-installer.c:434
 msgid "Installation Failed"
 msgstr "સ્થાપનમાં નિષ્ફળતા"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:332
+#: ../capplets/theme-switcher/gnome-theme-installer.c:333
 msgid ""
 "Can not install themes. \n"
 "The gzip utility is not installed."
@@ -2158,7 +2208,7 @@ msgstr ""
 "થીમો સ્થાપિત કરી શકતા નથી. \n"
 "gzip ઉપયોગિતા સ્થાપિત નથી."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:374
+#: ../capplets/theme-switcher/gnome-theme-installer.c:375
 #, c-format
 msgid ""
 "Icon Theme %s correctly installed.\n"
@@ -2167,12 +2217,12 @@ msgstr ""
 "ચિહ્ન થીમ %s યોગ્ય રીતે સ્થાપિત છે.\n"
 "તમે એને થીમ વિગતોમાં પસંદ કરી શકો છો."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:377
+#: ../capplets/theme-switcher/gnome-theme-installer.c:378
 #, c-format
 msgid "Gnome Theme %s correctly installed"
 msgstr "જીનોમ થીમ %s યોગ્ય રીતે સ્થાપિત છે"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:380
+#: ../capplets/theme-switcher/gnome-theme-installer.c:381
 #, c-format
 msgid ""
 "Windows Border Theme %s correctly installed.\n"
@@ -2181,7 +2231,7 @@ msgstr ""
 "વિન્ડો કિનારી થીમ %s યોગ્ય રીતે સ્થાપિત છે.\n"
 "તમે તેને થીમ વિગતોમાં પસંદ કરી શકો છો."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:383
+#: ../capplets/theme-switcher/gnome-theme-installer.c:384
 #, c-format
 msgid ""
 "Controls Theme %s correctly installed.\n"
@@ -2190,23 +2240,23 @@ msgstr ""
 "નિયંત્રણો થીમ %s યોગ્ય રીતે સ્થાપિત છે.\n"
 "તમે એને થીમ વિગતોમાં પસંદ કરી શકો છો."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:389
+#: ../capplets/theme-switcher/gnome-theme-installer.c:390
 msgid "The theme is an engine. You need to compile the theme."
 msgstr "થીમ એ યંત્ર છે. તમારે થીમને કમ્પાઈલ કરવાની જરૂર છે."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:407
+#: ../capplets/theme-switcher/gnome-theme-installer.c:408
 msgid "The file format is invalid"
 msgstr "ફાઈલ બંધારણ અયોગ્ય છે"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:509
+#: ../capplets/theme-switcher/gnome-theme-installer.c:499
 msgid "No theme file location specified to install"
 msgstr "સ્થાપન કરવા માટે કોઈ થીમ ફાઈલની જગ્યા સ્પષ્ટ થઈ નથી"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:528
+#: ../capplets/theme-switcher/gnome-theme-installer.c:514
 msgid "The theme file location specified to install is invalid"
 msgstr "સ્થાપન કરવા માટે કોઈ થીમ ફાઈલની જગ્યા માન્ય નથી"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:548
+#: ../capplets/theme-switcher/gnome-theme-installer.c:534
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -2215,18 +2265,18 @@ msgstr ""
 "આમાં થીમ સ્થાપિત કરવા માટે અપૂરતી પરવાનગીઓ છે:\n"
 "%s"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:569
+#: ../capplets/theme-switcher/gnome-theme-installer.c:555
 msgid "The file format is invalid."
 msgstr "ફાઈલ બંધારણ અયોગ્ય છે."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:596
+#: ../capplets/theme-switcher/gnome-theme-installer.c:582
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
 "selected as the source location"
 msgstr "%s એ પથ છે કે જ્યાં થીમ ફાઈલોનું સ્થાપન થાય છે. આ સ્રોત જગ્યા તરીકે પસંદિત થઈ શકે નહિ"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:658
+#: ../capplets/theme-switcher/gnome-theme-installer.c:647
 msgid ""
 "Cannot install theme.\n"
 "The tar program is not installed on your system."
@@ -2251,11 +2301,11 @@ msgstr ""
 "તમારી સિસ્ટમમાં મૂળભુત થીમની યોજનાઓ મળી શકી નહિં. એનો અર્થ એ થાય કે તમે કદાચ મેટાસીટી "
 "સ્થાપિત કર્યું નથી, અથવા તમારુ જીકોન્ફનું રુપરેખાંકન યોગ્ય રીતે થયું નહિં હોય."
 
-#: ../capplets/theme-switcher/gnome-theme-save.c:72
+#: ../capplets/theme-switcher/gnome-theme-save.c:73
 msgid "Theme name must be present"
 msgstr "થીમનું નામ હોવું જ જોઈએ"
 
-#: ../capplets/theme-switcher/gnome-theme-save.c:104
+#: ../capplets/theme-switcher/gnome-theme-save.c:144
 msgid "The theme already exists. Would you like to replace it?"
 msgstr "થીમ પહેલાથી જ હાજર છે. શું તમે એને બદલવા માંગો છો?"
 
@@ -2268,85 +2318,69 @@ msgstr "ડેસ્કટોપનાં ભિન્ન ભાગો માટ
 msgid "Theme"
 msgstr "થીમ"
 
-#: ../capplets/theme-switcher/theme-install.glade.h:2
-msgid "<span size=\"larger\" weight=\"bold\">Install a Theme</span>"
-msgstr "<span size=\"larger\" weight=\"bold\">થીમ સ્થાપિત કરો</span>"
-
-#: ../capplets/theme-switcher/theme-install.glade.h:3
-msgid "Theme Installation"
-msgstr "થીમની સ્થાપના"
-
-#: ../capplets/theme-switcher/theme-install.glade.h:4
-msgid "_Install"
-msgstr "સ્થાપન કરો (_I)"
-
-#: ../capplets/theme-switcher/theme-install.glade.h:5
-msgid "_Location:"
-msgstr "જગ્યા (_L):"
-
 #: ../capplets/theme-switcher/theme-properties.glade.h:1
-msgid "<span size=\"larger\" weight=\"bold\">Save Theme to Disk</span>"
-msgstr "<span size=\"larger\" weight=\"bold\">થીમ ડિસ્કમાં સંગ્રહિત કરો</span>"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:2
 msgid "Apply _Background"
 msgstr "પાશ્વ ભાગના ચિત્રને અમલમાં મૂકો (_B)"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:3
+#: ../capplets/theme-switcher/theme-properties.glade.h:2
 msgid "Apply _Font"
 msgstr "ફોન્ટ અમલમાં મૂકો (_F)"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:4
+#: ../capplets/theme-switcher/theme-properties.glade.h:3
 msgid "Controls"
 msgstr "નિયંત્રણો"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:5
+#: ../capplets/theme-switcher/theme-properties.glade.h:4
 msgid "Icons"
 msgstr "ચિહ્નો"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:6
+#: ../capplets/theme-switcher/theme-properties.glade.h:5
 msgid "Save Theme"
 msgstr "થીમ સંગ્રહિત કરો"
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:6
+msgid "Save _Background Image"
+msgstr "પાશ્વ ભાગ ચિત્ર સંગ્રહો (_B)"
 
 #: ../capplets/theme-switcher/theme-properties.glade.h:7
 msgid "Select theme for the desktop"
 msgstr "ડેસ્કટોપ માટે થીમ પસંદ કરો"
 
 #: ../capplets/theme-switcher/theme-properties.glade.h:8
-msgid "Short _description:"
-msgstr "સંક્ષિપ્ત વર્ણન (_D):"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:9
 msgid "Theme Details"
 msgstr "થીમની વિગતો"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:10
+#: ../capplets/theme-switcher/theme-properties.glade.h:9
 msgid "Theme Preferences"
 msgstr "થીમની પસંદગીઓ"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:11
+#: ../capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Theme _Details"
 msgstr "થીમની પસંદગીઓ (_D)"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:12
+#: ../capplets/theme-switcher/theme-properties.glade.h:11
 msgid "This theme does not suggest any particular font or background."
 msgstr "આ થીમ કોઈ ખાસ ફાેન્ટ અથવા પાશ્વભાગનુું સૂચન કરતી નથી."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:13
+#: ../capplets/theme-switcher/theme-properties.glade.h:12
 msgid "This theme suggests a background:"
 msgstr "આ થીમ પાશ્વભાગનું સૂચન કરે છે:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:14
+#: ../capplets/theme-switcher/theme-properties.glade.h:13
 msgid "This theme suggests a font and a background:"
 msgstr "આ થીમ ફોન્ટ અને પાશ્વભાગનું સૂચન કરે છે:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:15
+#: ../capplets/theme-switcher/theme-properties.glade.h:14
 msgid "This theme suggests a font:"
 msgstr "આ થીમ ફોન્ટનું સૂચન કરે છે:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:16
+#: ../capplets/theme-switcher/theme-properties.glade.h:15
 msgid "Window Border"
 msgstr "વિન્ડોની કિનારી"
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:16
+msgid "_Description:"
+msgstr "વર્ણન (_D):"
 
 #: ../capplets/theme-switcher/theme-properties.glade.h:17
 msgid "_Install Theme..."
@@ -2356,17 +2390,17 @@ msgstr "થીમનું સ્થાપન કરો (_I)..."
 msgid "_Install..."
 msgstr "સ્થાપન કરો (_I)..."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:20
+#: ../capplets/theme-switcher/theme-properties.glade.h:19
+msgid "_Name:"
+msgstr "નામ (_N):"
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:21
 msgid "_Revert"
 msgstr "ઉલટું કરો (_R)"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:21
+#: ../capplets/theme-switcher/theme-properties.glade.h:22
 msgid "_Save Theme..."
 msgstr "થીમને સંગ્રહિત કરો (_S)..."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:22
-msgid "_Theme name:"
-msgstr "થીમનું નામ (_T):"
 
 #: ../capplets/theme-switcher/theme-properties.glade.h:23
 msgid "theme selection tree"
@@ -2586,18 +2620,6 @@ msgstr "જીનોમ નિયંત્રણ કેન્દ્ર"
 msgid "The GNOME configuration tool"
 msgstr "જીનોમ રુપરેખાનું સાધન"
 
-#: ../gnome-settings-daemon/actions/acme-fb-level.c:149
-msgid "No '/dev/pmu' device found"
-msgstr "કોઈ '/dev/pmu' ઉપકરણ મળ્યું નહિં"
-
-#: ../gnome-settings-daemon/actions/acme-fb-level.c:156
-msgid "Not a powerbook"
-msgstr "પાવરબુક નથી"
-
-#: ../gnome-settings-daemon/actions/acme-fb-level.c:173
-msgid "Wrong permission for '/dev/pmu' device"
-msgstr "'/dev/pmu' ઉપકરણ માટે ખોટી પરવાનગી"
-
 #: ../gnome-settings-daemon/actions/acme.glade.h:1
 msgid "Volume"
 msgstr "અવાજનું પ્રમાણ"
@@ -2804,7 +2826,7 @@ msgstr "X સુયોજનો વાપરો"
 msgid "Keep GNOME settings"
 msgstr "જીનોમ સુયોજનો જાળવો"
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:129
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:118
 #, c-format
 msgid ""
 "Couldn't execute command: %s\n"
@@ -2813,7 +2835,7 @@ msgstr ""
 "આદેશ ચલાવી શકાયો નહિ: %s\n"
 "ચકાસો કે આ આદેશ અસ્તિત્વમાં છે કે નથી."
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:145
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:134
 msgid ""
 "Couldn't put the machine to sleep.\n"
 "Verify that the machine is correctly configured."
@@ -2821,7 +2843,7 @@ msgstr ""
 "મશીનને બંધ થવા દેવાયુ નહિ.\n"
 "ચકાસો કે મશીન યોગ્ય રીતે રુપરેખાંકિત થયુ છે."
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:180
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:168
 msgid ""
 "Couldn't load the Glade file.\n"
 "Make sure that this daemon is properly installed."
@@ -3043,164 +3065,148 @@ msgid "Sync text/plain and text/* handlers"
 msgstr "સિંક લખાણ/સાદું અને લખાણ/* માટેનાં હેન્ડલરો"
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:1
-msgid "Brightness down"
-msgstr "તેજસ્વીપણુ ઓછુ"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:2
-msgid "Brightness down's shortcut."
-msgstr "તેજસ્વીપણુ ઓછુ કરવાનું ટુંકાણ."
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:3
-msgid "Brightness up"
-msgstr "તેજસ્વીપણુ વધુ"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:4
-msgid "Brightness up's shortcut."
-msgstr "તેજસ્વીપણુ વધારવાનુ ટુંકાણ."
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:5
 msgid "E-mail"
 msgstr "ઈ-મેઈલ"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:6
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:2
 msgid "E-mail's shortcut."
 msgstr "ઈ-મેઈલનું ટુંકાણ."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:7
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:3
 msgid "Eject"
 msgstr "બહાર કાઢો"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:8
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:4
 msgid "Eject's shortcut."
 msgstr "બહાર કાઢવાના ટુંકાણો."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:9
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:5
 msgid "Home folder"
 msgstr "ઘર ફોલ્ડર"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:10
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:6
 msgid "Home folder's shortcut."
 msgstr "ઘર ફોલ્ડરનું ટુંકાણ."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:7
 msgid "Launch help browser"
 msgstr "મદદ બ્રાઉઝર લાવો"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:12
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:8
 msgid "Launch help browser's shortcut."
 msgstr "મદદ બ્રાઉઝરના ટુંકાણો લાવો."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:13
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:9
 msgid "Launch web browser"
 msgstr "વેબ બ્રાઉઝર લાવો"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:14
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:10
 msgid "Launch web browser's shortcut."
 msgstr "વેબ બ્રાઉઝરના ટુંકાણો લાવો."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
 msgid "Lock screen"
 msgstr "સ્ક્રીનને તાળુ મારો"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:12
 msgid "Lock screen's shortcut."
 msgstr "સ્ક્રીનને તાળુ મારવાનું ટુંકાણ."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:13
 msgid "Log out"
 msgstr "બહાર નીકળો"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:14
 msgid "Log out's shortcut."
 msgstr "બહાર નીકળવાનું ટુંકાણ."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
 msgid "Next track key's shortcut."
 msgstr "આગળનો ટ્રેક કીનું ટૂંકાણ."
 
 # #-#-#-#-#  libgnomeui.gnome-2-2.hi.po (libgnomeui HEAD)  #-#-#-#-#
 # libgnomeui/gnome-app-helper.c:166
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
 msgid "Pause"
 msgstr "અટકાવો"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
 msgid "Pause key's shortcut."
 msgstr "અટકાવો કીનું ટૂંકાણ."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
 msgid "Play (or play/pause)"
 msgstr "વગાડો (અથવા વગાડો/અટકાવો)"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
 msgid "Play (or play/pause) key's shortcut."
 msgstr "વગાડો (અથવા વગાડો/અટકાવો) કીનું ટૂંકાણ."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
 msgid "Previous track key's shortcut."
 msgstr "પહેલાંનો ટ્રેક કીનું ટૂંકાણ."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
 msgid "Search"
 msgstr "શોધો"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
 msgid "Search's shortcut."
 msgstr "શોધનું ટુંકાણ."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
 msgid "Skip to next track"
 msgstr "આગળના ટ્રેક સુધી રદ કરો"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
 msgid "Skip to previous track"
 msgstr "પહેલાંના ટ્રેક સુધી રદ કરો"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
 msgid "Sleep"
 msgstr "બંધ"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
 msgid "Sleep's shortcut."
 msgstr "બંધનું ટુંકાણ."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
 msgid "Stop playback key"
 msgstr "વગાડવાનું અટકાવો કી"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
 msgid "Stop playback key's shortcut."
 msgstr "વગાડવાનું અટકાવો કીનું ટૂંકાણ."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
 msgid "Volume down"
 msgstr "અવાજનું પ્રમાણ નીચુ"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
 msgid "Volume down's shortcut."
 msgstr "અવાજનું પ્રમાણ નીચુ કરવાનું ટુંકાણ."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
 msgid "Volume mute"
 msgstr "અવાજ બંધ કરો"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
 msgid "Volume mute's shortcut"
 msgstr "અવાજ બંધ કરવાનું ટુંકાણ"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:37
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
 msgid "Volume step"
 msgstr "અવાજનું પ્રમાણનુ સ્ટેપ"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:38
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
 msgid "Volume step as percentage of volume."
 msgstr "અવાજના ટકાની જેમ અવાજનું પ્રમાણનુ સ્ટેપ."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:39
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
 msgid "Volume up"
 msgstr "અવાજ વધારો"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
 msgid "Volume up's shortcut."
 msgstr "અવાજ વધારવાનું ટુંકાણ."
 
