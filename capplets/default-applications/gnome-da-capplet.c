@@ -29,6 +29,7 @@
 #include "gnome-da-capplet.h"
 #include "gnome-da-xml.h"
 #include "gnome-da-item.h"
+#include "capplet-util.h"
 
 /* TODO: it doesn't use GConfPropertyEditor, use it when/if moved to control-center */
 
@@ -43,23 +44,7 @@ static void
 close_cb (GtkWidget *window, gint response, gpointer user_data)
 {
     if (response == GTK_RESPONSE_HELP) {
-	GError *error = NULL;
-
-	/* capplet_help (GTK_WINDOW (dialog), "user-guide.xml", "goscustdoc-2"); */
-	gnome_help_display_desktop (NULL, "user-guide", "user-guide.xml",
-				    "goscustdoc-2", &error);
-	if (error != NULL) {
-	    GtkWidget *dialog;
-
-	    dialog = gtk_message_dialog_new (NULL, 0, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK,
-					     _("Could not display help"));
-	    gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-						      _("Please make sure that the applet "
-							"is properly installed"));
-	    gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
-	    gtk_dialog_run (GTK_DIALOG (dialog));
-	    gtk_widget_destroy (dialog);
-	}
+	capplet_help (GTK_WINDOW (window), "user-guide.xml", "prefs-preferredapps");
     }
     else {
 	gtk_widget_destroy (window);
