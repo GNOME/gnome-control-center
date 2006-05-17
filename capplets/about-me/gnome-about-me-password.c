@@ -1,7 +1,9 @@
 /* gnome-about-me.c
- * Copyright (C) 2002 Diego Gonzalez 
+ * Copyright (C) 2002 Diego Gonzalez
+ * Copyright (C) 2006 Johannes H. Jensen
  *
  * Written by: Diego Gonzalez <diego@pemas.net>
+ * Modified by: Johannes H. Jensen <joh@deworks.net>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,12 +27,15 @@
 #  include <config.h>
 #endif
 
+/* Are all of these needed? */
 #include <stropts.h>
 #include <gnome.h>
 #include <pwd.h>
 #include <stdlib.h>
 #include <glade/glade.h>
 #include <unistd.h>
+#include <errno.h>
+#include <string.h>
 #include <fcntl.h>
 #include <sys/ioctl.h>
 #include <sys/wait.h>
@@ -51,207 +56,579 @@
 #include "capplet-util.h"
 #include "eel-alert-dialog.h"
 
-#ifndef HAVE_FORKPTY
-pid_t forkpty(int *, char *, struct termios *, struct winsize *);
-#endif
+/* Passwd states */
+typedef enum {
+	PASSWD_STATE_NONE,		/* Passwd is not asking for anything */
+	PASSWD_STATE_AUTH,		/* Passwd is asking for our current password */
+	PASSWD_STATE_NEW,		/* Passwd is asking for our new password */
+	PASSWD_STATE_RETYPE,	/* Passwd is asking for our retyped new password */
+	PASSWD_STATE_ERR		/* Passwd reported an error but has not yet exited */
+} PasswdState;
 
 typedef struct {
 	GladeXML  *xml;
 
-	GtkWidget *old_password;
-	GtkWidget *new_password;
-	GtkWidget *retyped_password;
-
-        guint timeout_id;
-        guint check_password_timeout_id;
-
-        gboolean good_password;
-
+	/* Commonly used widgets */
+	GtkEntry *current_password;
+	GtkEntry *new_password;
+	GtkEntry *retyped_password;
+	GtkImage *dialog_image;
+	GtkLabel *status_label;
+	
+	/* Wether we have authenticated */
+	gboolean authenticated;
+	
 	/* Communication with the passwd program */
-        int   backend_pid;
-
-        int   write_fd;
-        int   read_fd;
-        
-	FILE *write_stream;
-	FILE *read_stream;
+	GPid backend_pid;
+	
+	GIOChannel *backend_stdin;
+	GIOChannel *backend_stdout;
+	
+	GQueue *backend_stdin_queue;		/* Write queue to backend_stdin */
+	
+	/* GMainLoop IDs */
+	guint backend_child_watch_id;		/* g_child_watch_add (PID) */
+	guint backend_stdout_watch_id;		/* g_io_add_watch (stdout) */
+	
+	/* State of the passwd program */
+	PasswdState backend_state;
            
 } PasswordDialog;
 
-enum
+/* Buffer size for backend output */
+#define BUFSIZE 64
+
+/*
+ * Error handling {{
+ */
+#define PASSDLG_ERROR (gnome_about_me_password_error_quark())
+
+GQuark gnome_about_me_password_error_quark(void)
 {
-	RESPONSE_APPLY = 1,
-	RESPONSE_CLOSE
+	static GQuark q = 0;
+	
+	if (q == 0) {
+		q = g_quark_from_static_string("gnome_about_me_password_error");
+	}
+
+	return q;
+}
+
+/* error codes */
+enum {
+	PASSDLG_ERROR_NONE,
+	PASSDLG_ERROR_NEW_PASSWORD_EMPTY,
+	PASSDLG_ERROR_RETYPED_PASSWORD_EMPTY,
+	PASSDLG_ERROR_PASSWORDS_NOT_EQUAL,
+	PASSDLG_ERROR_BACKEND,	/* Backend error */
+	PASSDLG_ERROR_USER,		/* Generic user error */
+	PASSDLG_ERROR_FAILED	/* Fatal failure, error->message should explain */
 };
 
-static void passdlg_set_busy (PasswordDialog *dlg, gboolean busy);
+/*
+ * }} Error handling
+ */
 
-#define REDRAW_NCHARS 1
+/*
+ * Prototypes {{
+ */
+static void
+stop_passwd (PasswordDialog *pdialog);
+
+static void
+free_passwd_resources (PasswordDialog *pdialog);
 
 static gboolean
-wait_child (PasswordDialog *pdialog)
+io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswordDialog *pdialog);
+
+static void
+passdlg_set_auth_state (PasswordDialog *pdialog, gboolean state);
+
+static void
+passdlg_set_status (PasswordDialog *pdialog, gchar *msg);
+
+static void
+passdlg_set_busy (PasswordDialog *pdialog, gboolean busy);
+
+static void
+passdlg_clear (PasswordDialog *pdialog);
+
+static guint
+passdlg_refresh_password_state (PasswordDialog *pdialog);
+
+/*
+ * }} Prototypes
+ */
+
+/*
+ * Spawning and closing of backend {{
+ */
+
+/* Child watcher */
+static void
+child_watch_cb (GPid pid, gint status, PasswordDialog *pdialog)
 {
-	gint status, pid;
-	gchar *msg, *details, *title;
-	GladeXML *dialog;
-	GtkWidget *wmessage, *wbulb;
-	GtkWidget *wedialog;
-
-	dialog = pdialog->xml;
-
-	wmessage = WID ("message");
-	wbulb = WID ("bulb");
-	
-	pid = waitpid (pdialog->backend_pid, &status, WNOHANG);
-	passdlg_set_busy (pdialog, FALSE);
-
-	if (pid > 0) {
-
-		if (WIFEXITED (status) && (WEXITSTATUS(status) == 0)) {
-			/* I need to quit here */
-
-			return FALSE;
-		} else if ((WIFEXITED (status)) && (WEXITSTATUS (status)) && (WEXITSTATUS(status) < 255)) {
-
-			msg = g_strdup_printf ("<b>%s</b>", _("Old password is incorrect, please retype it"));
-
-			gtk_label_set_markup (GTK_LABEL (wmessage), msg);
-			g_free (msg);
-
-			gtk_image_set_from_file (GTK_IMAGE (wbulb),
-						 GNOMECC_DATA_DIR "/pixmaps/gnome-about-me-bulb-off.png");
-
-
-			return FALSE;
-		} else if ((WIFEXITED (status)) && (WEXITSTATUS (status)) && (WEXITSTATUS (status) == 255)) {
-			msg = g_strdup (_("System error has occurred"));
-			details = g_strdup (_("Could not run /usr/bin/passwd"));
-			title = g_strdup (_("Unable to launch backend"));
-		} else {
-			msg = g_strdup (_("Unexpected error has occurred"));
-			title = g_strdup (_("Unexpected error has occurred"));
-			details = NULL;
+	if (WIFEXITED (status)) {
+		if (WEXITSTATUS (status) >= 255) {
+			g_warning (_("Child exited unexpectedly"));
 		}
+	}
+	
+	free_passwd_resources (pdialog);
+}
+
+/* Spawn passwd backend
+ * Returns: TRUE on success, FALSE otherwise and sets error appropriately */
+static gboolean
+spawn_passwd (PasswordDialog *pdialog, GError **error)
+{
+	gchar	*argv[2];
+	gchar	*envp[1];
+	gint	stdin, stdout, stderr;
+	
+	argv[0] = "/usr/bin/passwd";	/* Is it safe to rely on a hard-coded path? */
+	argv[1] = NULL;
+	
+	envp[0] = NULL;					/* If we pass an empty array as the environment,
+									 * will the childs environment be empty, and the
+									 * locales set to the C default? From the manual:
+									 * "If envp is NULL, the child inherits its
+									 * parent'senvironment."
+									 * If I'm wrong here, we somehow have to set 
+									 * the locales here.
+									 */
+	
+	if (!g_spawn_async_with_pipes (NULL,						/* Working directory */
+								   argv,						/* Argument vector */
+								   envp,						/* Environment */
+								   G_SPAWN_DO_NOT_REAP_CHILD,	/* Flags */
+								   NULL,						/* Child setup */
+								   NULL,						/* Data to child setup */
+								   &pdialog->backend_pid,		/* PID */
+								   &stdin,						/* Stdin */
+								   &stdout,						/* Stdout */
+								   &stderr,						/* Stderr */
+								   error)) {					/* GError */
 		
-		wedialog = eel_alert_dialog_new (NULL, 0, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, 
-						 msg, NULL, title);
-
-		if (details != NULL)
-			eel_alert_dialog_set_details_label (EEL_ALERT_DIALOG (wedialog), details);
-
-			g_signal_connect (G_OBJECT (wedialog), "response",
-					  G_CALLBACK (gtk_widget_destroy), NULL);
-
-		gtk_window_set_resizable (GTK_WINDOW (wedialog), FALSE);
-		gtk_widget_show (wedialog);
-
-		g_free (msg);
-		g_free (title);
-		g_free (details);
-
+		/* An error occured */
+		free_passwd_resources (pdialog);
+		
 		return FALSE;
 	}
-
+	
+	/* 2>&1 */
+	if (dup2 (stderr, stdout) == -1) {
+		/* Failed! */
+		g_set_error (error,
+					 PASSDLG_ERROR, 
+					 PASSDLG_ERROR_BACKEND,
+					 strerror (errno));
+		
+		/* Clean up */
+		stop_passwd (pdialog);
+		
+		return FALSE;
+	}
+	
+	/* Open IO Channels */
+	pdialog->backend_stdin = g_io_channel_unix_new (stdin);
+	pdialog->backend_stdout = g_io_channel_unix_new (stdout);
+	
+	/* Set raw encoding */
+	/* Set nonblocking mode */
+	if (g_io_channel_set_encoding (pdialog->backend_stdin, NULL, error) != G_IO_STATUS_NORMAL ||
+		g_io_channel_set_encoding (pdialog->backend_stdout, NULL, error) != G_IO_STATUS_NORMAL ||
+		g_io_channel_set_flags (pdialog->backend_stdin, G_IO_FLAG_NONBLOCK, error) != G_IO_STATUS_NORMAL ||
+		g_io_channel_set_flags (pdialog->backend_stdout, G_IO_FLAG_NONBLOCK, error) != G_IO_STATUS_NORMAL ) {
+			
+		/* Clean up */
+		stop_passwd (pdialog);
+		return FALSE;
+	}
+	
+	/* Turn off buffering */
+	g_io_channel_set_buffered (pdialog->backend_stdin, FALSE);
+	g_io_channel_set_buffered (pdialog->backend_stdout, FALSE);
+	
+	/* Add IO Channel watcher */
+	pdialog->backend_stdout_watch_id = g_io_add_watch (pdialog->backend_stdout,
+													   G_IO_IN | G_IO_PRI,
+													   (GIOFunc) io_watch_stdout, pdialog);
+	
+	/* Add child watcher */
+	pdialog->backend_child_watch_id = g_child_watch_add (pdialog->backend_pid, (GChildWatchFunc) child_watch_cb, pdialog);
+	
+	/* Success! */
+	
 	return TRUE;
 }
-  
-static gboolean
-is_string_complete (gchar *str, GSList *list)
+
+/* Stop passwd backend */
+static void
+stop_passwd (PasswordDialog *pdialog)
 {
-	GSList *elem;
-  
-	if (strlen (str) == 0)
+	/* This is the standard way of returning from the dialog with passwd. 
+	 * If we return this way we can safely kill passwd as it has completed
+	 * its task.
+	 * 
+	 * Maybe we should run free_passwd_resources here first, and not let
+	 * our child watcher do it?
+	 */
+	
+	if (pdialog->backend_pid != -1) {
+		kill (pdialog->backend_pid, 9);
+	}
+	
+	/* Our child_watch_cb should now handle our kill signal,
+	 * run waitpid and call free_passwd_resources appropriately. */
+}
+
+/* Clean up passwd resources */
+static void
+free_passwd_resources (PasswordDialog *pdialog)
+{
+	GError	*error = NULL;
+	
+	/* Close IO channels (internal file descriptors are automatically closed) */
+	if (pdialog->backend_stdin != NULL) {
+		
+		if (g_io_channel_shutdown (pdialog->backend_stdin, TRUE, &error) != G_IO_STATUS_NORMAL) {
+			g_warning (_("Could not shutdown backend_stdin IO channel: %s"), error->message);
+			g_error_free (error);
+			error = NULL;
+		}
+		
+		g_io_channel_unref (pdialog->backend_stdin);
+		
+		pdialog->backend_stdin = NULL;
+	}
+	
+	if (pdialog->backend_stdout != NULL) {
+		
+		if (g_io_channel_shutdown (pdialog->backend_stdout, TRUE, &error) != G_IO_STATUS_NORMAL) {
+			g_warning (_("Could not shutdown backend_stdout IO channel: %s"), error->message);
+			g_error_free (error);
+			error = NULL;
+		}
+		
+		g_io_channel_unref (pdialog->backend_stdout);
+		
+		pdialog->backend_stdout = NULL;
+	}
+	
+	/* Remove IO watcher */
+	if (pdialog->backend_stdout_watch_id != 0) {
+		
+		g_source_remove (pdialog->backend_stdout_watch_id);
+		
+		pdialog->backend_stdout_watch_id = 0;
+	}
+	
+	/* Close PID */
+	if (pdialog->backend_pid != -1) {
+		
+		g_spawn_close_pid (pdialog->backend_pid);
+		
+		pdialog->backend_pid = -1;
+	}
+	
+	/* Clear backend state */
+	pdialog->backend_state = PASSWD_STATE_NONE;
+}
+
+/*
+ * }} Spawning and closing of backend
+ */
+
+/*
+ * Backend communication code {{
+ */
+
+/* Write the first element of queue through channel */
+static void
+io_queue_pop (GQueue *queue, GIOChannel *channel)
+{
+	gchar	*buf;
+	gsize	bytes_written;
+	GError	*error = NULL;
+	
+	buf = g_queue_pop_head (queue);
+	
+	if (buf != NULL) {
+		
+		if (g_io_channel_write_chars (channel, buf, -1, &bytes_written, &error) != G_IO_STATUS_NORMAL) {
+			g_warning ("Could not write queue element \"%s\" to channel: %s", buf, error->message);
+			g_error_free (error);
+		}
+		
+		g_free (buf);
+	}
+}
+
+/* Goes through the argument list, checking if one of them occurs in str
+ * Returns: TRUE as soon as an element is found to match, FALSE otherwise */
+static gboolean
+is_string_complete (gchar *str, ...)
+{
+	va_list	ap;
+	gchar	*arg;
+	
+	if (strlen (str) == 0) {
 		return FALSE;
-  
-	for (elem = list; elem; elem = g_slist_next (elem))
-		if (g_strrstr (str, elem->data) != NULL) {
+	}
+	
+	va_start (ap, str);
+	
+	while ((arg = va_arg (ap, char *)) != NULL) {
+		if (g_strrstr (str, arg) != NULL) {
+			va_end (ap);
 			return TRUE;
 		}
-  
+	}
+	
+	va_end (ap);
+	
 	return FALSE;
 }
- 
-static gchar*
-read_everything (PasswordDialog *pdialog, gchar *needle, va_list ap)
-{
-	GString *str  = g_string_new ("");
-	GSList  *list = NULL;
-	gchar*arg, *ptr;
-	int c;
 
-	list = g_slist_prepend (list, needle);
-  
-	while ((arg = va_arg (ap, char*)) != NULL)
-		list = g_slist_prepend (list, arg);
-  
-	va_end (ap);
- 
-	while (!is_string_complete (str->str, list)) {
-		c = fgetc (pdialog->read_stream);
- 
-		if (c != EOF)
-			g_string_append_c (str, c);
+/* 
+ * IO watcher for stdout, called whenever there is data to read from the backend.
+ * This is where most of the actual IO handling happens.
+ */
+static gboolean
+io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswordDialog *pdialog)
+{
+	static GString *str = NULL;	/* Persistent buffer */
+	
+	gchar		buf[BUFSIZE];		/* Temporary buffer */
+	gsize		bytes_read;
+	GError		*error = NULL;
+	
+	gchar		*msg = NULL;		/* Status error message */
+	GladeXML	*dialog;
+	
+	gboolean	reinit = FALSE;
+	
+	/* Initialize buffer */
+	if (str == NULL) {
+		str = g_string_new ("");
 	}
- 
-        ptr = str->str;
-        g_string_free (str, FALSE);
-  
-	return ptr;
-}
- 
-static void
-poll_backend (PasswordDialog *pdialog)
-{
-	struct pollfd fd;
-
-	fd.fd = pdialog->read_fd;
-	fd.events = POLLIN || POLLPRI;
-
-	while (poll (&fd, 1, 100) <= 0) {
-		while (gtk_events_pending ())
-			gtk_main_iteration ();
+	
+	dialog = pdialog->xml;
+	
+	if (g_io_channel_read_chars (source, buf, BUFSIZE, &bytes_read, &error) != G_IO_STATUS_NORMAL) {
+		g_warning ("IO Channel read error: %s", error->message);
+		g_error_free (error);
+		
+		return TRUE;
 	}
+	
+	str = g_string_append_len (str, buf, bytes_read);
+	
+	/* In which state is the backend? */
+	switch (pdialog->backend_state) {
+		case PASSWD_STATE_AUTH:
+			/* Passwd is asking for our current password */
+			
+			if (is_string_complete (str->str, "assword: ", "failure", "wrong", NULL)) {
+				/* Which response did we get? */
+				passdlg_set_busy (pdialog, FALSE);
+				
+				if (g_strrstr (str->str, "assword: ") != NULL) {
+					/* Authentication successfull */
+					
+					pdialog->backend_state = PASSWD_STATE_NEW;
+					
+					if (pdialog->authenticated) {
+						/* This is a re-authentication
+						 * It succeeded, so pop our new password from the queue */
+						io_queue_pop (pdialog->backend_stdin_queue, pdialog->backend_stdin);
+					}
+					
+					/* Update UI state */
+					passdlg_set_auth_state (pdialog, TRUE);
+					passdlg_set_status (pdialog, _("Authenticated!"));
+					
+					/* Check to see if the passwords are valid
+					 * (They might be non-empty if the user had to re-authenticate,
+					 *  and thus we need to enable the change-password-button) */
+					passdlg_refresh_password_state (pdialog);
+					
+				} else {
+					/* Authentication failed */
+					
+					if (pdialog->authenticated) {
+						/* This is a re-auth, and it failed.
+						 * The password must have been changed in the meantime!
+						 * Ask the user to re-authenticate
+						 */
+						
+						/* Update status message and auth state */
+						passdlg_set_status (pdialog, _("Your password has been changed since you initially authenticated! Please re-authenticate."));
+					} else {
+						passdlg_set_status (pdialog, _("That password was incorrect."));
+					}
+					
+					/* Focus current password */
+					gtk_widget_grab_focus (GTK_WIDGET (pdialog->current_password));
+				}
+				
+				reinit = TRUE;
+			}
+			break;
+		case PASSWD_STATE_NEW:
+			/* Passwd is asking for our new password */
+			
+			if (is_string_complete (str->str, "assword: ", NULL)) {
+				/* Advance to next state */
+				pdialog->backend_state = PASSWD_STATE_RETYPE;
+				
+				/* Pop retyped password from queue and into IO channel */
+				io_queue_pop (pdialog->backend_stdin_queue, pdialog->backend_stdin);
+				
+				reinit = TRUE;
+			}
+			break;
+		case PASSWD_STATE_RETYPE:
+			/* Passwd is asking for our retyped new password */
+			
+			if (is_string_complete (str->str, "successfully",
+											  "short",
+											  "panlindrome",
+											  "simple",
+											  "similar",
+											  "wrapped",
+											  "recovered",
+											  "unchanged",
+											  "match",
+											  "1 numeric or special",
+											  "failure",
+											  NULL)) {
+				
+				/* What response did we get? */
+				passdlg_set_busy (pdialog, FALSE);
+				
+				if (g_strrstr (str->str, "successfully") != NULL) {
+					/* Hooray! */
+					
+					passdlg_clear (pdialog);
+					passdlg_set_status (pdialog, _("Your password has been changed."));
+				} else {
+					/* Ohnoes! */
+					
+					/* Focus new password */
+					gtk_widget_grab_focus (GTK_WIDGET (pdialog->new_password));
+					
+					if (g_strrstr (str->str, "recovered") != NULL) {
+						/* What does this indicate?
+						 * "Authentication information cannot be recovered?" from libpam? */
+						msg = g_strdup_printf (_("System error: %s."), str->str);
+					} else if (g_strrstr (str->str, "short") != NULL) {
+						msg = g_strdup (_("The password is too short."));
+					} else if (g_strrstr (str->str, "panlindrome") != NULL) {
+						msg = g_strdup (_("The password is too simple."));
+					} else if (g_strrstr (str->str, "simple") != NULL) {
+						msg = g_strdup (_("The password is too simple."));
+					} else if ((g_strrstr (str->str, "similar") != NULL) || (g_strrstr (str->str, "wrapped") != NULL)) {
+						msg = g_strdup (_("The old and new passwords are too similar."));
+					} else if (g_strrstr (str->str, "1 numeric or special") != NULL) {
+						msg = g_strdup (_("The new password must contain numeric or special character(s)."));
+					} else if ((g_strrstr (str->str, "unchanged") != NULL) || (g_strrstr (str->str, "match") != NULL)) {
+						msg = g_strdup (_("The old and new passwords are the same."));
+					} else if (g_strrstr (str->str, "failure") != NULL) {
+						/* Authentication failure */
+						msg = g_strdup (_("Your password has been changed since you initially authenticated! Please re-authenticate."));
+						
+						passdlg_set_auth_state (pdialog, FALSE);
+					}
+				}
+				
+				reinit = TRUE;
+				
+				if (msg != NULL) {
+					/* An error occured! */
+					passdlg_set_status (pdialog, msg);
+					g_free (msg);
+					
+					/* At this point, passwd might have exited, in which case
+					 * child_watch_cb should clean up for us and remove this watcher.
+					 * On some error conditions though, passwd just re-prompts us
+					 * for our new password. */
+					
+					pdialog->backend_state = PASSWD_STATE_ERR;
+				}
+				
+				/* child_watch_cb should clean up for us now */
+			}
+			break;
+		case PASSWD_STATE_NONE:
+			/* Passwd is not asking for anything yet */
+			if (is_string_complete (str->str, "assword: ", NULL)) {
+				
+				pdialog->backend_state = PASSWD_STATE_AUTH;
+				
+				/* Pop the IO queue, i.e. send current password */
+				io_queue_pop (pdialog->backend_stdin_queue, pdialog->backend_stdin);
+				
+				reinit = TRUE;
+			}
+			break;
+		default:
+			/* Passwd has returned an error */
+			reinit = TRUE;
+			break;
+	}
+	
+	if (reinit) {
+		g_string_free (str, TRUE);
+		str = NULL;
+	}
+	
+	/* Continue calling us */
+	return TRUE;
 }
 
-static char *
-read_from_backend_va (PasswordDialog *pdialog, gchar *needle, va_list ap)
-{
-	poll_backend (pdialog);
-	return read_everything (pdialog, needle, ap);
-}
+/*
+ * }} Backend communication code
+ */
 
-static gchar*
-read_from_backend (PasswordDialog *pdialog, gchar *needle, ...)
-{
-	va_list ap;
-  
-	va_start (ap, needle);
-	return read_from_backend_va (pdialog, needle, ap);
-}
-
+/* Adds the current password to the IO queue */
 static void
-write_to_backend (PasswordDialog *pdialog, char *str)
+authenticate (PasswordDialog *pdialog)
 {
-	gint nread = 0;
-	int ret;
-
-	do {
-		ret = fputc (str [nread], pdialog->write_stream);
- 
-		usleep (1000);
- 
-		if (ret != EOF)
-			nread++;
-  
-		/* ugly hack for redrawing UI */
-		if (nread % REDRAW_NCHARS == 0)
-			while (gtk_events_pending ())
-		gtk_main_iteration ();
-	} while (nread < strlen (str));
-  
-	while (fflush (pdialog->write_stream) != 0);
+	gchar	*s;
+	
+	s = g_strdup_printf ("%s\n", gtk_entry_get_text (pdialog->current_password));
+	
+	g_queue_push_tail (pdialog->backend_stdin_queue, s);
 }
 
+/* Adds the new password twice to the IO queue */
+static void
+update_password (PasswordDialog *pdialog)
+{
+	gchar	*s;
+	
+	s = g_strdup_printf ("%s\n", gtk_entry_get_text (pdialog->new_password));
+	
+	g_queue_push_tail (pdialog->backend_stdin_queue, s);
+	/* We need to allocate new space because io_queue_pop() g_free()s
+	 * every element of the queue after it's done */
+	g_queue_push_tail (pdialog->backend_stdin_queue, g_strdup (s));
+}
+
+/* Sets dialog busy state according to busy
+ * 
+ * When busy:
+ *	Sets the cursor to busy
+ *  Disables the interface to prevent that the user interferes
+ * Reverts all this when non-busy
+ * 
+ * Note that this function takes into account the 
+ * authentication state of the dialog. So setting the
+ * dialog to busy and then back to normal should leave
+ * the dialog unchanged.
+ */
 static void
 passdlg_set_busy (PasswordDialog *pdialog, gboolean busy)
 {
@@ -261,526 +638,461 @@ passdlg_set_busy (PasswordDialog *pdialog, gboolean busy)
 	GdkDisplay *display;
 
 	dialog = pdialog->xml;
+	
+	/* Set cursor */
 	toplevel = WID ("change-password");
-
 	display = gtk_widget_get_display (toplevel);
-	if (busy)
+	if (busy) {
 		cursor = gdk_cursor_new_for_display (display, GDK_WATCH);
+	}
 	
 	gdk_window_set_cursor (toplevel->window, cursor);
 	gdk_display_flush (display);
 
-	if (busy)
+	if (busy) {
 		gdk_cursor_unref (cursor);
-}
-
-
-static gint
-update_password (PasswordDialog *pdialog, gchar **msg)
-{
-	GtkWidget *wopasswd, *wnpasswd, *wrnpasswd;
-	char *new_password;
-	char *retyped_password;
-	char *old_password;
-	gchar *s;
-	GladeXML *dialog;
-	gint retcode;
-	
-	dialog = pdialog->xml;
-	
-	wopasswd = WID ("old-password");
-	wnpasswd = WID ("new-password");
-	wrnpasswd = WID ("retyped-password");
-
-	retcode = 0;
-
-	/* */
-	old_password = g_strdup_printf ("%s\n", gtk_entry_get_text (GTK_ENTRY (wopasswd)));
-	new_password = g_strdup_printf ("%s\n", gtk_entry_get_text (GTK_ENTRY (wnpasswd)));
-	retyped_password = g_strdup_printf ("%s\n", gtk_entry_get_text (GTK_ENTRY (wrnpasswd)));
-
-	/* Set the busy cursor as this can be a long process */
-	passdlg_set_busy (pdialog, TRUE);
-
-	s = read_from_backend (pdialog, "assword: ", NULL);
-	g_free (s);
-
-	write_to_backend (pdialog, old_password);
-
-	/* New password */
-	s = read_from_backend (pdialog, "assword: ", "failure", "wrong", NULL);
-	if (g_strrstr (s, "failure") != NULL ||
-	    g_strrstr (s, "wrong") != NULL) {
-		g_free (s);
-		return -1;
 	}
-	g_free (s);
-
-	write_to_backend (pdialog, new_password);
-
-	/* Retype password */		
-	s = read_from_backend (pdialog, "assword: ", NULL);
-	g_free (s);
+	
+	/* Disable/Enable UI */
+	if (pdialog->authenticated) {
+		/* Authenticated state */
 		
-	write_to_backend (pdialog, retyped_password);
-	
-	s = read_from_backend (pdialog, "successfully", "short", "panlindrome", "simple", "similar", "wrapped", "recovered", "unchanged", "match", "1 numeric or special", NULL);
-	if (g_strrstr (s, "recovered") != NULL) {
-		retcode = -2;
-	} else if (g_strrstr (s, "short") != NULL) {
-		*msg = g_strdup (_("Password is too short"));
-		retcode = -3;
-	} else if (g_strrstr (s, "panlindrome") != NULL) {
-		*msg = g_strdup (_("Password is too simple"));
-		retcode = -3;
-	} else if (g_strrstr (s, "simple") != NULL) {
-		*msg = g_strdup (_("Password is too simple"));
-		retcode = -3;
-	} else if ((g_strrstr (s, "similar") != NULL) || (g_strrstr (s, "wrapped") != NULL)) {
-		*msg = g_strdup (_("Old and new passwords are too similar"));
-		retcode = -3;
-	} else if (g_strrstr (s, "1 numeric or special") != NULL) {
-		*msg = g_strdup (_("Must contain numeric or special character(s)"));
-		retcode = -3;
-	} else if ((g_strrstr (s, "unchanged") != NULL) ||
-		   (g_strrstr (s, "match") != NULL)) {
-		kill (pdialog->backend_pid, SIGKILL);
-		*msg = g_strdup (_("Old and new password are the same"));
-		retcode = -3;
-        }
-
-	g_free (s);
-	
-	return retcode;
-}
-
-#ifndef HAVE_FORKPTY
-/* 
-//  Emulation of the BSD function forkpty.
-//  Copied from rootsh (http://sourceforge.net/projects/rootsh) also
-//  under GPL license.  Slightly modified to not copy terminal modes
-//  or window size from the parent to the child if NULL is passed in
-//  for termp or winp.  The logic still sets the termp or winp values
-//  if passed in.  When launching from the gnome-panel, there are no
-//  such values for the parent and attempting to copy them was causing
-//  a lengthy delay.
-*/
-#ifndef MASTERPTYDEV
-#  error you need to specify a master pty device
-#endif
-pid_t forkpty(int *amaster, char *name, struct termios *termp, struct winsize *winp) {
-  /*
-  //  amaster		A pointer to the master pty's file descriptor which
-  //			will be set here.
-  //  
-  //  name		If name is NULL, the name of the slave pty will be
-  //			returned in name.
-  //  
-  //  termp		If termp is not NULL, the terminal parameters
-  //			of the slave will be set to the values in termp.
-  //  
-  //  winsize		If winp is not NULL, the window size of the slave
-  //			will be set to the values in winp.
-  //  
-  //  pid		The process id of the forked child process.
-  //  
-  //  master		The file descriptor of the master pty.
-  //  
-  //  slave		The file descriptor of the slave pty.
-  //  
-  //  slavename		The file name of the slave pty.
-  //  
-  */
-  pid_t pid;
-  int master, slave;
-  char *slavename;
-
-  /*
-  //  Get a master pseudo-tty.
-  */
-  if ((master = open (MASTERPTYDEV, O_RDWR)) < 0) {
-    perror (MASTERPTYDEV);
-    return (-1);
-  }
-
-  /*
-  //  Set the permissions on the slave pty.
-  */
-  if (grantpt (master) < 0) {
-    perror ("grantpt");
-    close (master);
-    return (-1);
-  }
-
-  /*
-  //  Unlock the slave pty.
-  */
-  if (unlockpt(master) < 0) {
-    perror ("unlockpt");
-    close (master);
-    return (-1);
-  }
-
-  /*
-  //  Start a child process.
-  */
-  if ((pid = fork ()) < 0) {
-    perror ("fork in forkpty");
-    close (master);
-    return (-1);
-  }
-
-  /*
-  //  The child process will open the slave, which will become
-  //  its controlling terminal.
-  */
-  if (pid == 0) {
-    /*
-    //  Get rid of our current controlling terminal.
-    */
-    setsid ();
-
-    /*
-    //  Get the name of the slave pseudo tty.
-    */
-    if ((slavename = ptsname (master)) == NULL) {
-      perror ("ptsname");
-      close (master);
-      return (-1);
-    }
-
-    /* 
-    //  Open the slave pseudo tty.
-    */
-    if ((slave = open(slavename, O_RDWR)) < 0) {
-      perror (slavename);
-      close (master);
-      return (-1);
-    }
-
-#ifndef AIX_COMPAT
-    /*
-    //  Push the pseudo-terminal emulation module.
-    */
-    if (ioctl (slave, I_PUSH, "ptem") < 0) {
-      perror ("ioctl: ptem");
-      close (master);
-      close (slave);
-      return (-1);
-    }
-
-    /*
-    //  Push the terminal line discipline module.
-    */
-    if (ioctl (slave, I_PUSH, "ldterm") < 0) {
-      perror ("ioctl: ldterm");
-      close (master);
-      close (slave);
-      return (-1);
-    }
-
-#ifdef HAVE_TTCOMPAT
-    /*
-    //  Push the compatibility for older ioctl calls module (solaris).
-    */
-    if (ioctl (slave, I_PUSH, "ttcompat") < 0) {
-      perror ("ioctl: ttcompat");
-      close (master);
-      close (slave);
-      return (-1);
-    }
-#endif
-#endif
-
-    /*
-    //  Copy the caller's terminal modes to the slave pty.
-    */
-    if (termp != NULL) {
-       if (tcsetattr (slave, TCSANOW, termp) < 0) {
-          perror ("tcsetattr: slave pty");
-          close (master);
-          close (slave);
-          return (-1);
-       }
-    }
-
-    /*
-    //  Set the slave pty window size to the caller's size.
-    */
-    if (winp != NULL) {
-       if (ioctl (slave, TIOCSWINSZ, winp) < 0) {
-         perror ("ioctl: slave winsz");
-         close (master);
-         close (slave);
-         return (-1);
-       }
-    }
-
-    /*
-    //  Close the master pty.
-    //  No need for this in the slave process.
-    */
-    close (master);
-
-    /*
-    //  Set the slave to be our standard input, output and error output.
-    //  Then get rid of the original file descriptor.
-    */
-    dup2 (slave, 0);
-    dup2 (slave, 1);
-    dup2 (slave, 2);
-    close (slave);
-
-    /*
-    //  If the caller wants it, give him back the slave pty's name.
-    */
-    if (name != NULL)
-       strcpy (name, slavename);
-
-    return(0); 
-
-  } else {
-    /*
-    //  Return the slave pty device name if caller wishes so.
-    */
-    if (name != NULL) {          
-      if ((slavename = ptsname (master)) == NULL) {
-        perror ("ptsname");
-        close (master);
-        return (-1);
-      }
-      strcpy (name, slavename);
-    }
-
-    /*
-    //  Return the file descriptor for communicating with the process
-    //  to the caller.
-    */
-    *amaster = master; 
-    return (pid);      
-  }
-}
-#endif
-
-static gint
-spawn_passwd (PasswordDialog *pdialog)
-{
-	char *args[2];
-	int p[2];
-
-	/* Prepare the execution environment of passwd */
-	args[0] = "/usr/bin/passwd";
-	args[1] = NULL;
-
-	pipe (p);
-	pdialog->backend_pid = forkpty (&pdialog->write_fd, NULL, NULL, NULL);
-	if (pdialog->backend_pid < 0) {
-		g_warning ("could not fork to backend");
-		return -1;
-	} else if (pdialog->backend_pid == 0) {
-		dup2 (p[1], 1);
-		dup2 (p[1], 2);
-		close (p[0]);
-
-		unsetenv("LC_ALL");
-		unsetenv("LC_MESSAGES");
-		unsetenv("LANG");
-		unsetenv("LANGUAGE");
-
-		execv (args[0], args);
-		exit (255);
+		/* Enable/disable new password section */
+		g_object_set (pdialog->new_password, "sensitive", !busy, NULL);
+		g_object_set (pdialog->retyped_password, "sensitive", !busy, NULL);
+		g_object_set (WID ("new-password-label"), "sensitive", !busy, NULL);
+		g_object_set (WID ("retyped-password-label"), "sensitive", !busy, NULL);
+		
+		/* Enable/disable change password button */
+		g_object_set (WID ("change-password-button"), "sensitive", !busy, NULL);
+		
 	} else {
-		close (p[1]);
-		pdialog->read_fd = p[0];
-		pdialog->timeout_id = g_timeout_add (4000, (GSourceFunc) wait_child, pdialog);
-
-		pdialog->read_stream = fdopen (pdialog->read_fd, "r");;
-		pdialog->write_stream = fdopen (pdialog->write_fd, "w");
-
-		setvbuf (pdialog->read_stream, NULL, _IONBF, 0);
-		fcntl (pdialog->read_fd, F_SETFL, 0);
+		/* Not-authenticated state */
+		
+		/* Enable/disable auth section state */
+		g_object_set (pdialog->current_password, "sensitive", !busy, NULL);
+		g_object_set (WID ("authenticate-button"), "sensitive", !busy, NULL);
+		g_object_set (WID ("current-password-label"), "sensitive", !busy, NULL);
 	}
-
-	return 1;
 }
 
-
-static gboolean
-passdlg_check_password_timeout_cb (PasswordDialog *pdialog)
+/* Launch an error dialog */
+static void
+passdlg_error_dialog (const gchar *title, const gchar *msg, const gchar *details)
 {
-	const gchar *password;
-	const gchar *retyped_password;
-	char *msg;
-	gboolean good_password;
+	GtkWidget	*dialog;
+	
+	dialog = eel_alert_dialog_new (NULL, 0,
+								   GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, 
+								   msg, NULL, title);
+	
+	if (details != NULL) {
+		eel_alert_dialog_set_details_label (EEL_ALERT_DIALOG (dialog), details);
+	}
+	
+	g_signal_connect (G_OBJECT (dialog), "response",
+					  G_CALLBACK (gtk_widget_destroy), NULL);
+	
+	gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+	gtk_widget_show (dialog);
+}
 
-	GtkWidget *wbulb, *wok, *wmessage;
-	GtkWidget *wnpassword, *wrnpassword;
-	GladeXML *dialog;
-
+/* Set authenticated state of dialog according to state
+ * 
+ * When in authenticated state:
+ * 	Disables authentication-part of interface
+ *  Enables new-password-part of interface
+ * When in not-authenticated state:
+ * 	Enables authentication-part of interface
+ *  Disables new-password-part of interface
+ * 	Disables the change-password-button
+ */
+static void
+passdlg_set_auth_state (PasswordDialog *pdialog, gboolean state)
+{
+	GladeXML	*dialog;
+	
 	dialog = pdialog->xml;
+	
+	/* Widgets which require a not-authenticated state to be accessible */
+	g_object_set (pdialog->current_password, "sensitive", !state, NULL);
+	g_object_set (WID ("current-password-label"), "sensitive", !state, NULL);
+	g_object_set (WID ("authenticate-button"), "sensitive", !state, NULL);
+	
+	/* Widgets which require authentication to be accessible */
+	g_object_set (pdialog->new_password, "sensitive", state, NULL);
+	g_object_set (pdialog->retyped_password, "sensitive", state, NULL);
+	g_object_set (WID ("new-password-label"), "sensitive", state, NULL);
+	g_object_set (WID ("retyped-password-label"), "sensitive", state, NULL);
+	
+	if (!state) {
+		/* Disable change-password-button when in not-authenticated state */
+		g_object_set (WID ("change-password-button"), "sensitive", FALSE, NULL);
+	}
+	
+	pdialog->authenticated = state;
+	
+	if (state) {
+		/* Authenticated state */
+		
+		/* Focus new password */
+		gtk_widget_grab_focus (GTK_WIDGET (pdialog->new_password));
+		
+		/* Set open lock image */
+		gtk_image_set_from_file (GTK_IMAGE (pdialog->dialog_image), GNOMECC_DATA_DIR "/pixmaps/gnome-about-me-lock-open.png");
+	} else {
+		/* Not authenticated state */
+		
+		/* Focus current password */
+		gtk_widget_grab_focus (GTK_WIDGET (pdialog->current_password));
+		
+		/* Set closed lock image */
+		gtk_image_set_from_file (GTK_IMAGE (pdialog->dialog_image), GNOMECC_DATA_DIR "/pixmaps/gnome-about-me-lock.png");
+	}
+}
 
-	wnpassword  = WID ("new-password");
-	wrnpassword = WID ("retyped-password");
-	wmessage = WID ("message");
-	wbulb = WID ("bulb");
-	wok   = WID ("ok");
+/* Set status field message */
+static void
+passdlg_set_status (PasswordDialog *pdialog, gchar *msg)
+{
+	g_object_set (pdialog->status_label, "label", msg, NULL);
+}
 
-	password = gtk_entry_get_text (GTK_ENTRY (wnpassword));
-	retyped_password = gtk_entry_get_text (GTK_ENTRY (wrnpassword));
+/* Clear dialog (except the status message) */
+static void
+passdlg_clear (PasswordDialog *pdialog)
+{
+	/* Set non-authenticated state */
+	passdlg_set_auth_state (pdialog, FALSE);
+	
+	/* Clear password entries */
+	gtk_entry_set_text (pdialog->current_password, "");
+	gtk_entry_set_text (pdialog->new_password, "");
+	gtk_entry_set_text (pdialog->retyped_password, "");
+}
 
-	if (strlen (password) == 0 || strlen (retyped_password) == 0) {
-		gtk_image_set_from_file (GTK_IMAGE (wbulb),
-					 GNOMECC_DATA_DIR "/pixmaps/gnome-about-me-bulb-off.png");
-		msg = g_strconcat ("<b>", _("Please type the passwords."), "</b>", NULL);
-		gtk_label_set_markup (GTK_LABEL (wmessage), msg);
-		g_free (msg);
-
+/* Start backend and handle errors
+ * If backend is already running, stop it
+ * If an error occurs, show error dialog */
+static gboolean
+passdlg_spawn_passwd (PasswordDialog *pdialog)
+{
+	GError	*error = NULL;
+	gchar	*details;
+	
+	/* If backend is running, stop it */
+	stop_passwd (pdialog);
+	
+	/* Spawn backend */
+	if (!spawn_passwd (pdialog, &error)) {
+		details = g_strdup_printf (_("Unable to launch /usr/bin/passwd: %s"), error->message);
+		
+		passdlg_error_dialog (_("Unable to launch backend"),
+							  _("A system error has occured"),
+							  details);
+		
+		g_free (details);
+		g_error_free (error);
+		
 		return FALSE;
 	}
-
-	if (strcmp (password, retyped_password) != 0) {
-		msg = g_strconcat ("<b>", _("Please type the password again, it is wrong."), "</b>", NULL);
-		good_password = FALSE;
-	} else {
-		msg = g_strconcat ("<b>", _("Click on Change Password to change the password."), "</b>", NULL);
-		good_password = TRUE;
-	}
-
-	if (good_password && pdialog->good_password == FALSE) {
-		gtk_image_set_from_file (GTK_IMAGE (wbulb), 
-		 			 GNOMECC_DATA_DIR "/pixmaps/gnome-about-me-bulb-on.png");
-		gtk_widget_set_sensitive (wok, TRUE);
-	} else if (good_password == FALSE && pdialog->good_password == TRUE) {
-		gtk_image_set_from_file (GTK_IMAGE (wbulb), 
-		 			 GNOMECC_DATA_DIR "/pixmaps/gnome-about-me-bulb-off.png");
-		gtk_widget_set_sensitive (wok, FALSE);
-	}
-
-	pdialog->good_password = good_password;
-
-	gtk_label_set_markup (GTK_LABEL (wmessage), msg);
-	g_free (msg);
-
-	return FALSE;
+	
+	return TRUE;
 }
 
+/* Called when the "Authenticate" button is clicked */
+static void
+passdlg_authenticate (GtkButton *button, PasswordDialog *pdialog)
+{
+	/* Set busy as this can be a long process */
+	passdlg_set_busy (pdialog, TRUE);
+	
+	/* Update status message */
+	passdlg_set_status (pdialog, _("Checking password..."));
+	
+	/* Spawn backend */
+	if (!passdlg_spawn_passwd (pdialog)) {
+		return;
+	}
+	
+	authenticate (pdialog);
+	
+	/* Our IO watcher should now handle the rest */
+}
 
+/* Validate passwords
+ * Returns: 
+ * PASSDLG_ERROR_NONE (0) if passwords are valid
+ * PASSDLG_ERROR_NEW_PASSWORD_EMPTY
+ * PASSDLG_ERROR_RETYPED_PASSWORD_EMPTY
+ * PASSDLG_ERROR_PASSWORDS_NOT_EQUAL
+ */
+static guint
+passdlg_validate_passwords (PasswordDialog *pdialog)
+{
+	GladeXML		*dialog;
+	const gchar	*new_password, *retyped_password;
+	glong			nlen, rlen;
+	gboolean 		valid = FALSE;
+	
+	dialog = pdialog->xml;
+	
+	new_password = gtk_entry_get_text (pdialog->new_password);
+	retyped_password = gtk_entry_get_text (pdialog->retyped_password);
+	
+	nlen = g_utf8_strlen (new_password, -1);
+	rlen = g_utf8_strlen (retyped_password, -1);
+	
+	if (nlen == 0) {
+		/* New password empty */
+		return PASSDLG_ERROR_NEW_PASSWORD_EMPTY;
+	}
+	
+	if (rlen == 0) {
+		/* Retyped password empty */
+		return PASSDLG_ERROR_RETYPED_PASSWORD_EMPTY;
+	}
+	
+	if (nlen != rlen || strncmp (new_password, retyped_password, nlen) != 0) {
+		/* Passwords not equal */
+		return PASSDLG_ERROR_PASSWORDS_NOT_EQUAL;
+	}
+	
+	/* Success */
+	return PASSDLG_ERROR_NONE;
+}
+
+/* Refresh the valid password UI state, i.e. re-validate
+ * and enable/disable the Change Password button.
+ * Returns: Return value of passdlg_validate_passwords */
+static guint
+passdlg_refresh_password_state (PasswordDialog *pdialog)
+{
+	GladeXML	*dialog;
+	guint		ret;
+	gboolean	valid = FALSE;
+	
+	dialog = pdialog->xml;
+	
+	ret = passdlg_validate_passwords (pdialog);
+	
+	if (ret == PASSDLG_ERROR_NONE) {
+		valid = TRUE;
+	}
+	
+	g_object_set (WID ("change-password-button"), "sensitive", valid, NULL);
+	
+	return ret;
+}
+
+/* Called whenever any of the new password fields have changed */
 static void 
 passdlg_check_password (GtkEntry *entry, PasswordDialog *pdialog)
 {
-	if (pdialog->check_password_timeout_id) {
-		g_source_remove (pdialog->check_password_timeout_id);
-	}
-
-	pdialog->check_password_timeout_id =
-		g_timeout_add (500, (GSourceFunc) passdlg_check_password_timeout_cb, pdialog);
+	guint	ret;
 	
+	ret = passdlg_refresh_password_state (pdialog);
+	
+	switch (ret) {
+		case PASSDLG_ERROR_NONE:
+			passdlg_set_status (pdialog, _("Click <b>Change password</b> to change your password."));
+			break;
+		case PASSDLG_ERROR_NEW_PASSWORD_EMPTY:
+			passdlg_set_status (pdialog, _("Please type your password in the <b>New password</b> field."));
+			break;
+		case PASSDLG_ERROR_RETYPED_PASSWORD_EMPTY:
+			passdlg_set_status (pdialog, _("Please type your password again in the <b>Retype new password</b> field."));
+			break;
+		case PASSDLG_ERROR_PASSWORDS_NOT_EQUAL:
+			passdlg_set_status (pdialog, _("The two passwords are not equal."));
+			break;
+		default:
+			g_warning ("Unknown passdlg_check_password error: %d", ret);
+			break;
+	}
 }
 
-static gint
+/* Called when the "Change password" dialog-button is clicked
+ * Returns: TRUE if we want to keep the dialog running, FALSE otherwise */
+static gboolean
 passdlg_process_response (PasswordDialog *pdialog, gint response_id) 
 {
-	GladeXML *dialog;
-	GtkWidget *wmessage, *wbulb;
-	gchar *msg, *msgerr;
-	gint ret;
-
-	dialog = pdialog->xml;
-
-	wmessage = WID ("message");
-	wbulb = WID ("bulb");
-
-	msgerr = NULL;
-
+	
 	if (response_id == GTK_RESPONSE_OK) {
-		ret = spawn_passwd (pdialog);
-		if (ret < 0)
-			return 1;
-
-		ret = update_password (pdialog, &msgerr);
-		passdlg_set_busy (pdialog, FALSE);
-
-		/* No longer need the wait_child fallback, remove the timeout */
-		g_source_remove (pdialog->timeout_id);
-
-		if (ret == -1) {
-			msg = g_strdup_printf ("<b>%s</b>", _("Old password is incorrect, please retype it"));
-			gtk_label_set_markup (GTK_LABEL (wmessage), msg);
-			g_free (msg);
-
-			gtk_image_set_from_file (GTK_IMAGE (wbulb),
-						 GNOMECC_DATA_DIR "/pixmaps/gnome-about-me-bulb-off.png");
-
-			return -1;
-		} else if (ret == -3) {
-			msg = g_strdup_printf ("<b>%s</b>", msgerr);
-			gtk_label_set_markup (GTK_LABEL (wmessage), msg);
-			g_free (msg);
-			
-			gtk_image_set_from_file (GTK_IMAGE (wbulb),
-						 GNOMECC_DATA_DIR "/pixmaps/gnome-about-me-bulb-off.png");
-						 
-			g_free (msgerr);
-			
-			return -1;
-		}
-
-		/* This is the standard way of returning from the dialog with passwd 
-		 * If we return this way we can safely kill passwd as it has completed
-		 * its task. In case of problems we still have the wait_child fallback
-		 */
-		fclose (pdialog->write_stream);
-		fclose (pdialog->read_stream);
+		/* Set busy as this can be a long process */
+		passdlg_set_busy (pdialog, TRUE);
 		
-		close (pdialog->read_fd);
-		close (pdialog->write_fd);
+		/* Stop passwd if an error occured and it is still running */
+		if (pdialog->backend_state == PASSWD_STATE_ERR) {
+			
+			/* Stop child watcher */
+			g_source_remove (pdialog->backend_child_watch_id);
+			pdialog->backend_child_watch_id = 0;
+			
+			/* Stop passwd, free resources */
+			stop_passwd (pdialog);
+			free_passwd_resources (pdialog);
+		}
+		
+		/* Check that the backend is still running, or that an error
+		 * hass occured but it has not yet exited */
+		if (pdialog->backend_pid == -1) {
+			/* If it is not, re-run authentication */
+			
+			/* Spawn backend */
+			if (!passdlg_spawn_passwd (pdialog)) {
+				return TRUE;
+			}
+			
+			/* Add current and new passwords to queue */
+			authenticate (pdialog);
+			update_password (pdialog);
+		} else {
+			/* Only add new passwords to queue */
+			update_password (pdialog);
+			
+			/* Pop new password through the backend */
+			io_queue_pop (pdialog->backend_stdin_queue, pdialog->backend_stdin);
+		}
+		
+		/* Our IO watcher should now handle the rest */
+		
+		/* Keep the dialog running */
+		return TRUE;
+	}
+	
+	return FALSE;
+}
 
-		kill (pdialog->backend_pid, 9);
-
-		if (ret == 0)
-			return 1;
+/* Activates (moves focus or activates) widget w */
+static void
+passdlg_activate (GtkEntry *entry, GtkWidget *w)
+{
+	if (GTK_IS_BUTTON (w)) {
+		gtk_widget_activate (w);
 	} else {
-		return 1;
+		gtk_widget_grab_focus (w);
 	}
 }
 
+/* Initialize password dialog */
+static void
+passdlg_init (PasswordDialog *pdialog, GtkWindow *parent)
+{
+	GladeXML		*dialog;
+	GtkWidget		*wpassdlg;
+	GtkAccelGroup	*group;
+	
+	/* Initialize dialog */
+	dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/gnome-about-me.glade", "change-password", NULL);
+	pdialog->xml = dialog;
+	
+	wpassdlg = WID ("change-password");
+	capplet_set_icon (wpassdlg, "user-info");
+	
+	group = gtk_accel_group_new ();
+	
+	/*
+	 * Initialize backend
+	 */
+	
+	/* Initialize backend_pid. -1 means the backend is not running */
+	pdialog->backend_pid = -1;
+	
+	/* Initialize IO Channels */
+	pdialog->backend_stdin = NULL;
+	pdialog->backend_stdout = NULL;
+	
+	/* Initialize write queue */
+	pdialog->backend_stdin_queue = g_queue_new ();
+	
+	/* Initialize watchers */
+	pdialog->backend_child_watch_id = 0;
+	pdialog->backend_stdout_watch_id = 0;
+	
+	/* Initialize backend state */
+	pdialog->backend_state = PASSWD_STATE_NONE;
+	
+	/*
+	 * Initialize UI
+	 */
+	
+	/* Initialize pdialog widgets */
+	pdialog->current_password	= GTK_ENTRY (WID ("current-password"));
+	pdialog->new_password		= GTK_ENTRY (WID ("new-password"));
+	pdialog->retyped_password	= GTK_ENTRY (WID ("retyped-password"));
+	pdialog->dialog_image		= GTK_IMAGE (WID ("dialog-image"));
+	pdialog->status_label		= GTK_LABEL (WID ("status-label"));
+	
+	/* Initialize accelerators */
+	gtk_widget_add_accelerator (GTK_WIDGET (pdialog->current_password),
+								"activate", group,
+								GDK_Return, 0,
+								0);
+	
+	gtk_widget_add_accelerator (GTK_WIDGET (pdialog->new_password),
+								"activate", group,
+								GDK_Return, 0,
+								0);
+	
+	/* Activate authenticate-button when enter is pressed in current-password */
+	g_signal_connect (G_OBJECT (pdialog->current_password), "activate",
+					  G_CALLBACK (passdlg_activate), WID ("authenticate-button"));
+	
+	/* Activate retyped-password when enter is pressed in new-password */
+	g_signal_connect (G_OBJECT (pdialog->new_password), "activate",
+					  G_CALLBACK (passdlg_activate), pdialog->retyped_password);
+	
+	/* Clear status message */
+	passdlg_set_status (pdialog, "");
+	
+	/* Set non-authenticated state */
+	passdlg_set_auth_state (pdialog, FALSE);
+	
+	/* Connect signal handlers */
+	g_signal_connect (G_OBJECT (WID ("authenticate-button")), "clicked",
+					  G_CALLBACK (passdlg_authenticate), pdialog);
+	
+	/* Verify new passwords on-the-fly */
+	g_signal_connect (G_OBJECT (WID ("new-password")), "changed", 
+					  G_CALLBACK (passdlg_check_password), pdialog);
+	g_signal_connect (G_OBJECT (WID ("retyped-password")), "changed", 
+					  G_CALLBACK (passdlg_check_password), pdialog);
+	
+	/* Set misc dialog properties */
+	gtk_window_set_resizable (GTK_WINDOW (wpassdlg), FALSE);
+	gtk_window_set_transient_for (GTK_WINDOW (wpassdlg), GTK_WINDOW (parent));
+}
+
+/* Main */
 void
 gnome_about_me_password (GtkWindow *parent)
 {
-	PasswordDialog *pdialog;
-	GtkWidget *wpassdlg;
-	GladeXML *dialog;
-	gint result;
+	PasswordDialog	*pdialog;
+	GladeXML		*dialog;
+	GtkWidget		*wpassdlg;
 	
+	gint			result;
+	gboolean		response;
+	
+	/* Initialize dialog */
 	pdialog = g_new0 (PasswordDialog, 1);
-
-	dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/gnome-about-me.glade", "change-password", NULL);
-
-	pdialog->xml = dialog;
-
-	wpassdlg = WID ("change-password");
-	capplet_set_icon (wpassdlg, "user-info");
-
-	pdialog->good_password = FALSE;
-
-	g_signal_connect (G_OBJECT (WID ("new-password")), "changed", 
-			  G_CALLBACK (passdlg_check_password), pdialog);
-	g_signal_connect (G_OBJECT (WID ("retyped-password")), "changed", 
-			  G_CALLBACK (passdlg_check_password), pdialog);
-
-	gtk_image_set_from_file (GTK_IMAGE (WID ("bulb")), GNOMECC_DATA_DIR "/pixmaps/gnome-about-me-bulb-off.png");
-	gtk_widget_set_sensitive (WID ("ok"), FALSE);
+	passdlg_init (pdialog, parent);
 	
-	gtk_window_set_resizable (GTK_WINDOW (wpassdlg), FALSE);
-	gtk_window_set_transient_for (GTK_WINDOW (wpassdlg), GTK_WINDOW (parent));
+	dialog = pdialog->xml;
+	wpassdlg = WID ("change-password");
+	
+	/* Go! */
 	gtk_widget_show_all (wpassdlg);
-
-
+	
 	do {
 		result = gtk_dialog_run (GTK_DIALOG (wpassdlg));
-		result = passdlg_process_response (pdialog, result);
-	} while (result <= 0);
-
+		response = passdlg_process_response (pdialog, result);
+	} while (response);
+	
+	/* Clean up */
+	stop_passwd (pdialog);
 	gtk_widget_destroy (wpassdlg);
+	g_queue_free (pdialog->backend_stdin_queue);
 	g_free (pdialog);
 }

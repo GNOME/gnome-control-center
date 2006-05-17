@@ -2,8 +2,8 @@ bin_PROGRAMS = gnome-about-me
 
 pixmapdir = $(GNOMECC_PIXMAPS_DIR)
 pixmap_DATA = 				\
-	gnome-about-me-bulb-on.png	\
-	gnome-about-me-bulb-off.png
+	gnome-about-me-lock.png		\
+	gnome-about-me-lock-open.png
 
 gnome_about_me_LDADD = $(GNOMECC_CAPPLETS_LIBS) $(LIBEBOOK_LIBS) $(ABOUTME_LIBS)
 gnome_about_me_LDFLAGS = -export-dynamic
