@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-05-17 10:59+0200\n"
-"PO-Revision-Date: 2006-05-17 11:06+0200\n"
+"POT-Creation-Date: 2006-05-20 11:49+0200\n"
+"PO-Revision-Date: 2006-05-20 11:53+0200\n"
 "Last-Translator: Ignacio Casal Quinteiro <nacho.resa@gmail.com>\n"
 "Language-Team: Galego <trasno@ceu.fi.udc.es>\n"
 "MIME-Version: 1.0\n"
@@ -87,60 +87,107 @@ msgstr "ID de inicio descoñecido, a base de datos de usuarios quizais esté cor
 msgid "About %s"
 msgstr "Acerca de %s"
 
-#: ../capplets/about-me/gnome-about-me-password.c:116
-#: ../capplets/about-me/gnome-about-me-password.c:707
-msgid "Old password is incorrect, please retype it"
-msgstr "O contrasinal antigo é incorrecto, por favor, volva a escribilo"
+#: ../capplets/about-me/gnome-about-me-password.c:173
+msgid "Child exited unexpectedly"
+msgstr "O descendente saíu inesperadamente"
 
-#: ../capplets/about-me/gnome-about-me-password.c:127
-msgid "System error has occurred"
-msgstr "Ocorreu un erro do sistema"
+#: ../capplets/about-me/gnome-about-me-password.c:296
+#, c-format
+msgid "Could not shutdown backend_stdin IO channel: %s"
+msgstr "Non se puido apagar a canle de E/S backend_stdin: %s"
 
-#: ../capplets/about-me/gnome-about-me-password.c:128
-msgid "Could not run /usr/bin/passwd"
-msgstr "Non se puido executar /usr/bin/passwd"
+#: ../capplets/about-me/gnome-about-me-password.c:309
+#, c-format
+msgid "Could not shutdown backend_stdout IO channel: %s"
+msgstr "Non se puido apagar a canle de E/S backend_stdout: %s"
 
-#: ../capplets/about-me/gnome-about-me-password.c:129
+#: ../capplets/about-me/gnome-about-me-password.c:450
+msgid "Authenticated!"
+msgstr "Autenticado!"
+
+#. This is a re-auth, and it failed.
+#. * The password must have been changed in the meantime!
+#. * Ask the user to re-authenticate
+#.
+#. Update status message and auth state
+#. Authentication failure
+#: ../capplets/about-me/gnome-about-me-password.c:467
+#: ../capplets/about-me/gnome-about-me-password.c:540
+msgid ""
+"Your password has been changed since you initially authenticated! Please re-"
+"authenticate."
+msgstr "O seu contrasinal foi cambiado desde que se autenticou por primeira vez! Volva a autenticarse."
+
+#: ../capplets/about-me/gnome-about-me-password.c:469
+msgid "That password was incorrect."
+msgstr "Ese contrasinal é incorrecto."
+
+#: ../capplets/about-me/gnome-about-me-password.c:515
+msgid "Your password has been changed."
+msgstr "Cambiou o seu contrasinal."
+
+#. What does this indicate?
+#. * "Authentication information cannot be recovered?" from libpam?
+#: ../capplets/about-me/gnome-about-me-password.c:525
+#, c-format
+msgid "System error: %s."
+msgstr "Erro de sistema: %s."
+
+#: ../capplets/about-me/gnome-about-me-password.c:527
+msgid "The password is too short."
+msgstr "O contrasinal é demasiado corto."
+
+#: ../capplets/about-me/gnome-about-me-password.c:529
+#: ../capplets/about-me/gnome-about-me-password.c:531
+msgid "The password is too simple."
+msgstr "O contrasinal é demasiado sinxelo."
+
+#: ../capplets/about-me/gnome-about-me-password.c:533
+msgid "The old and new passwords are too similar."
+msgstr "O contrasinal antigo e o novo son demasiado similares."
+
+#: ../capplets/about-me/gnome-about-me-password.c:535
+msgid "The new password must contain numeric or special character(s)."
+msgstr "O novo contrasinal debe conter carácter(es) numéricos ou especiais."
+
+#: ../capplets/about-me/gnome-about-me-password.c:537
+msgid "The old and new passwords are the same."
+msgstr "O contrasinal antigo e o novo son o mesmo."
+
+#: ../capplets/about-me/gnome-about-me-password.c:788
+#, c-format
+msgid "Unable to launch /usr/bin/passwd: %s"
+msgstr "Non se puido executar /usr/bin/passwd: %s"
+
+#: ../capplets/about-me/gnome-about-me-password.c:790
 msgid "Unable to launch backend"
 msgstr "Imposible lanzar o backend"
 
-#: ../capplets/about-me/gnome-about-me-password.c:131
-#: ../capplets/about-me/gnome-about-me-password.c:132
-msgid "Unexpected error has occurred"
-msgstr "Ocorreu un erro inesperado"
+#: ../capplets/about-me/gnome-about-me-password.c:791
+msgid "A system error has occured"
+msgstr "Ocorreu un erro do sistema"
 
-#: ../capplets/about-me/gnome-about-me-password.c:331
-msgid "Password is too short"
-msgstr "O contrasinal é demasiado corto"
+#. Update status message
+#: ../capplets/about-me/gnome-about-me-password.c:811
+msgid "Checking password..."
+msgstr "Comprobando contrasinal..."
 
-#: ../capplets/about-me/gnome-about-me-password.c:334
-#: ../capplets/about-me/gnome-about-me-password.c:337
-msgid "Password is too simple"
-msgstr "O contrasinal é demasiado sinxelo"
+#: ../capplets/about-me/gnome-about-me-password.c:898
+msgid "Click <b>Change password</b> to change your password."
+msgstr "Prema en <b>Cambiar contrasinal</b> para cambiar o contrasinal."
 
-#: ../capplets/about-me/gnome-about-me-password.c:340
-msgid "Old and new passwords are too similar"
-msgstr "O contrasinal antigo e o novo son demasiado similares"
+#: ../capplets/about-me/gnome-about-me-password.c:901
+msgid "Please type your password in the <b>New password</b> field."
+msgstr "Por favor, teclee os contrasinais no campo <b>Novo contrasinal</b>."
 
-#: ../capplets/about-me/gnome-about-me-password.c:343
-msgid "Must contain numeric or special character(s)"
-msgstr "Debe conter carácter(es) numéricos ou especiais"
+#: ../capplets/about-me/gnome-about-me-password.c:904
+#: ../capplets/about-me/gnome-about-me.glade.h:34
+msgid "Please type your password again in the <b>Retype new password</b> field."
+msgstr "Por favor teclee o contrasinal de novo no campo <b>Teclee o contrasinal novo outra vez</b>."
 
-#: ../capplets/about-me/gnome-about-me-password.c:348
-msgid "Old and new password are the same"
-msgstr "O contrasinal antigo e o novo son o mesmo"
-
-#: ../capplets/about-me/gnome-about-me-password.c:634
-msgid "Please type the passwords."
-msgstr "Por favor teclee os contrasinais."
-
-#: ../capplets/about-me/gnome-about-me-password.c:642
-msgid "Please type the password again, it is wrong."
-msgstr "Por favor teclee o contrasinal de novo, está mal."
-
-#: ../capplets/about-me/gnome-about-me-password.c:645
-msgid "Click on Change Password to change the password."
-msgstr "Prema en Cambiar contrasinal para cambiar o contrasinal."
+#: ../capplets/about-me/gnome-about-me-password.c:907
+msgid "The two passwords are not equal."
+msgstr "Os dous contrasinais non son iguais."
 
 #: ../capplets/about-me/gnome-about-me.glade.h:1
 #: ../vfs-methods/themus/apply-font.glade.h:1
@@ -173,20 +220,20 @@ msgid "<b>Job</b>"
 msgstr "<b>Cargo</b>"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:7
-msgid "<b>Please type the passwords.</b>"
-msgstr "<b>Por favor, teclee os contrasinais.</b>"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:8
 msgid "<b>Telephone</b>"
 msgstr "<b>Teléfono</b>"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:9
+#: ../capplets/about-me/gnome-about-me.glade.h:8
 msgid "<b>Web</b>"
 msgstr "<b>Web</b>"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:10
+#: ../capplets/about-me/gnome-about-me.glade.h:9
 msgid "<b>Work</b>"
 msgstr "<b>Traballo</b>"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:10
+msgid "<span size=\"larger\" weight=\"bold\">Change your password</span>"
+msgstr "<span size=\"larger\" weight=\"bold\">Cambiar o seu contrasinal</span>"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:11
 msgid "A_IM/iChat:"
@@ -221,142 +268,160 @@ msgid "Change Passwo_rd..."
 msgstr "Cambiar _contrasinal..."
 
 #: ../capplets/about-me/gnome-about-me.glade.h:20
-msgid "Change Password"
-msgstr "Cambiar contrasinal"
+msgid "Change pa_ssword"
+msgstr "Cambiar _contrasinal"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:21
+msgid "Change password"
+msgstr "Cambiar contrasinal"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:22
 msgid "Ci_ty:"
 msgstr "Ci_dade:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:22
+#: ../capplets/about-me/gnome-about-me.glade.h:23
 msgid "Co_untry:"
 msgstr "P_aís:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:23
+#: ../capplets/about-me/gnome-about-me.glade.h:24
 msgid "Contact"
 msgstr "Contacto"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:24
+#: ../capplets/about-me/gnome-about-me.glade.h:25
 msgid "Cou_ntry:"
 msgstr "_País:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:25
+#: ../capplets/about-me/gnome-about-me.glade.h:26
+msgid "Current _password:"
+msgstr "C_ontrasinal actual:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:27
 msgid "Full Name"
 msgstr "Nome completo"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:26
+#: ../capplets/about-me/gnome-about-me.glade.h:28
 msgid "Hom_e:"
 msgstr "_Domicilio:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:27
+#: ../capplets/about-me/gnome-about-me.glade.h:29
 msgid "IC_Q:"
 msgstr "IC_Q:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:28
+#: ../capplets/about-me/gnome-about-me.glade.h:30
 msgid "M_SN:"
 msgstr "M_SN:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:29
-msgid "Old pa_ssword:"
-msgstr "_Contrasinal antigo:"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:30
+#: ../capplets/about-me/gnome-about-me.glade.h:31
 msgid "P.O. _box:"
 msgstr "A_pdo de correos:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:31
+#: ../capplets/about-me/gnome-about-me.glade.h:32
 msgid "P._O. box:"
 msgstr "Apd_o de correos:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:32
+#: ../capplets/about-me/gnome-about-me.glade.h:33
 msgid "Personal Info"
 msgstr "Información persoal"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:33
+#: ../capplets/about-me/gnome-about-me.glade.h:35
 msgid "State/Pro_vince:"
 msgstr "Estado/Pro_vincia:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:34
+#: ../capplets/about-me/gnome-about-me.glade.h:36
+msgid ""
+"To change your password, enter your current password in the field below and "
+"click <b>Authenticate</b>.\n"
+"After you have authenticated, enter your new password, retype it for "
+"verification and click <b>Change password</b>."
+msgstr ""
+"Para cambiar o seu contrasinal, introduza o seu contrasinal actual no campo de abaixo e prema <b>Autenticar</b>.\n"
+"Despois de autenticarse, introduza o seu contrasinal novo, reescríbao para comprobación e prema <b>Cambiar contrasinal</b>."
+
+#: ../capplets/about-me/gnome-about-me.glade.h:38
 msgid "User name:"
 msgstr "Nome de usuario:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:35
+#: ../capplets/about-me/gnome-about-me.glade.h:39
 msgid "Web _log:"
 msgstr "_Rexistro web:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:36
+#: ../capplets/about-me/gnome-about-me.glade.h:40
 msgid "Wor_k:"
 msgstr "_Traballo:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:37
+#: ../capplets/about-me/gnome-about-me.glade.h:41
 msgid "Work _fax:"
 msgstr "_Fax de traballo:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:38
+#: ../capplets/about-me/gnome-about-me.glade.h:42
 msgid "Zip/_Postal code:"
 msgstr "Zip/_Código postal:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:39
+#: ../capplets/about-me/gnome-about-me.glade.h:43
 msgid "_Address:"
 msgstr "_Enderezo:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:40
+#: ../capplets/about-me/gnome-about-me.glade.h:44
+msgid "_Authenticate"
+msgstr "_Autenticar"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:45
 msgid "_Department:"
 msgstr "_Departamento:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:41
+#: ../capplets/about-me/gnome-about-me.glade.h:46
 msgid "_Groupwise:"
 msgstr "_Groupwise:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:42
+#: ../capplets/about-me/gnome-about-me.glade.h:47
 msgid "_Home page:"
 msgstr "Páxina _persoal:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:43
+#: ../capplets/about-me/gnome-about-me.glade.h:48
 msgid "_Home:"
 msgstr "_Domicilio:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:44
+#: ../capplets/about-me/gnome-about-me.glade.h:49
 msgid "_Jabber:"
 msgstr "_Jabber:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:45
+#: ../capplets/about-me/gnome-about-me.glade.h:50
 msgid "_Manager:"
 msgstr "_Xefe:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:46
+#: ../capplets/about-me/gnome-about-me.glade.h:51
 msgid "_Mobile:"
 msgstr "_Móbil:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:47
+#: ../capplets/about-me/gnome-about-me.glade.h:52
 msgid "_New password:"
 msgstr "_Novo contrasinal:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:48
+#: ../capplets/about-me/gnome-about-me.glade.h:53
 msgid "_Profession:"
 msgstr "_Profesión:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:49
+#: ../capplets/about-me/gnome-about-me.glade.h:54
 msgid "_Retype new password:"
 msgstr "_Volva a teclear o contrasinal novo:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:50
+#: ../capplets/about-me/gnome-about-me.glade.h:55
 msgid "_State/Province:"
 msgstr "_Estado/Provincia:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:51
+#: ../capplets/about-me/gnome-about-me.glade.h:56
 msgid "_Title:"
 msgstr "_Título:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:52
+#: ../capplets/about-me/gnome-about-me.glade.h:57
 msgid "_Work:"
 msgstr "_Traballo"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:53
+#: ../capplets/about-me/gnome-about-me.glade.h:58
 msgid "_Yahoo:"
 msgstr "_Yahoo:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:54
+#: ../capplets/about-me/gnome-about-me.glade.h:59
 msgid "_Zip/Postal code:"
 msgstr "_Zip/Código postal:"
 
