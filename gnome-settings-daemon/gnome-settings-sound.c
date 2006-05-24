@@ -81,7 +81,7 @@ static void
 reload_foreach_cb (SoundEvent *event, gpointer data)
 {
 	struct reload_foreach_closure *closure;
-	gchar *file, *tmp, *key;
+	gchar *key, *file;
 	int sid;
 	gboolean do_load;
 
@@ -110,31 +110,28 @@ reload_foreach_cb (SoundEvent *event, gpointer data)
 
 	if (!event->file || !strcmp (event->file, ""))
 		goto out;
-	
-	file = g_strdup (event->file);
-	if (file[0] != '/')
-	{
-		tmp = gnome_program_locate_file (NULL, GNOME_FILE_DOMAIN_SOUND, file, TRUE, NULL);
-		g_free (file);
-		file = tmp;
-	}
-	
+
+	if (event->file[0] == '/')
+		file = g_strdup (event->file);
+	else
+		file = gnome_program_locate_file (NULL,
+						  GNOME_FILE_DOMAIN_SOUND,
+						  event->file, TRUE, NULL);
+
 	if (!file)
-	{
-		g_free (key);
-		return;
-	}
+		goto out;
 
 	sid = gnome_sound_sample_load (key, file);
-	
+
 	if (sid < 0)
 		g_warning (_("Couldn't load sound file %s as sample %s"),
 			   file, key);
 
+	g_free (file);
+
  out:
 	g_free (key);
 }
-
 
 static void
 apply_settings (void)
