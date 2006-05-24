@@ -281,7 +281,7 @@ update_kbd_cb (GConfClient *client, guint id, GConfEntry *entry, gpointer data)
 	{
 		if (strcmp (entry->key, keys[i].gconf_key) == 0)
 		{
-			const char *tmp;
+			char *tmp;
 			Key *key;
 
 			found = TRUE;
@@ -296,18 +296,24 @@ update_kbd_cb (GConfClient *client, guint id, GConfEntry *entry, gpointer data)
 					keys[i].gconf_key, NULL);
 
 			if (is_valid_shortcut (tmp) == FALSE)
+			{
+				g_free (tmp);
 				break;
+			}
 
 			key = g_new0 (Key, 1);
 			if (egg_accelerator_parse_virtual (tmp, &key->keysym, &key->keycode, &key->state) == FALSE
 			    || key->keycode == 0)
 			{
+				g_free (tmp);
 				g_free (key);
 				break;
 			}
 
 			grab_key (acme, key, TRUE);
 			keys[i].key = key;
+
+			g_free (tmp);
 
 			break;
 		}
@@ -320,7 +326,7 @@ update_kbd_cb (GConfClient *client, guint id, GConfEntry *entry, gpointer data)
 	{
 		if (strcmp (entry->key, keys[i].gconf_key) == 0)
 		{
-			const char *tmp;
+			char *tmp;
 			Key *key;
 
 			if (keys[i].key != NULL)
@@ -333,12 +339,16 @@ update_kbd_cb (GConfClient *client, guint id, GConfEntry *entry, gpointer data)
 						       keys[i].gconf_key, NULL);
 
 			if (is_valid_shortcut (tmp) == FALSE)
+			{
+				g_free (tmp);
 				break;
+			}
 
 			key = g_new0 (Key, 1);
 			if (egg_accelerator_parse_virtual (tmp, &key->keysym, &key->keycode, &key->state) == FALSE
 			    || key->keycode == 0)
 			{
+				g_free (tmp);
 				g_free (key);
 				break;
 			}
@@ -362,6 +372,8 @@ update_kbd_cb (GConfClient *client, guint id, GConfEntry *entry, gpointer data)
 			}
 
 			keys[i].key = key;
+
+			g_free (tmp);
 		}
 	}
 }
@@ -658,6 +670,8 @@ do_eject_action (Acme *acme)
 		execute (command, TRUE);
 	else
 		execute ("eject", TRUE);
+
+	g_free (command);
 
 	gtk_widget_set_sensitive (progress, TRUE);
 }
