@@ -109,7 +109,7 @@ PKG_CHECK_MODULES(DEFAULT_APPLICATIONS_CAPPLET, libxml-2.0)
 PKG_CHECK_MODULES(SOUND_CAPPLET, esound gstreamer-0.10)
 PKG_CHECK_MODULES(METACITY, libmetacity-private)
 PKG_CHECK_MODULES(LIBXKLAVIER, libxklavier >= 2.91,,
-    AC_MSG_ERROR([gnome-control-center depends on libxklavier.
+    AC_MSG_ERROR([gnome-control-center depends on libxklavier >= 2.91.
 The latest release is available from http://prdownloads.sourceforge.net/gswitchit], 1))
 
 dnl
