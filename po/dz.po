@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.dz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-04 22:18+0200\n"
-"PO-Revision-Date: 2006-04-12 14:33+0530\n"
+"POT-Creation-Date: 2006-05-24 06:56+0200\n"
+"PO-Revision-Date: 2006-05-25 10:25+0530\n"
 "Last-Translator: Mindu Dorji\n"
 "Language-Team: DZONGKHA <pgeyleg@dit.gov.bt>\n"
 "MIME-Version: 1.0\n"
@@ -83,60 +83,105 @@ msgstr "མ་ཤེསས་པའི་ ནང་བསྐྱོད་ཨའ�
 msgid "About %s"
 msgstr "%sསྐོར་ལས།"
 
-#: ../capplets/about-me/gnome-about-me-password.c:116
-#: ../capplets/about-me/gnome-about-me-password.c:707
-msgid "Old password is incorrect, please retype it"
-msgstr "ཆོག་ཡིག་རྙིངམ་དེ་ བདེན་པ་མེན་པས། ལོག་ཡིག་དཔར་རྐྱབས།"
+#: ../capplets/about-me/gnome-about-me-password.c:173
+msgid "Child exited unexpectedly"
+msgstr "ཆ་ལག་རེ་བ་མེད་པར་ཕྱིར་ཐོན་སོང་ནུག"
 
-#: ../capplets/about-me/gnome-about-me-password.c:127
-msgid "System error has occurred"
-msgstr "རིམ་ལུགས་འཛོལ་བ་བྱུང་ནུག"
+#: ../capplets/about-me/gnome-about-me-password.c:296
+#, c-format
+msgid "Could not shutdown backend_stdin IO channel: %s"
+msgstr "རྒྱབ་མཐའི་ ཨེསི་ཊི་ཌི་ཨིན་ ཨའི་ཨོ་རྒྱུ་ལམ་:%sསྒོ་བསྡམ་མ་ཚུགས།"
 
-#: ../capplets/about-me/gnome-about-me-password.c:128
-msgid "Could not run /usr/bin/passwd"
-msgstr " /usr/bin/passwd ལག་ལེན་འཐབ་མ་ཚུགས།"
+#: ../capplets/about-me/gnome-about-me-password.c:309
+#, c-format
+msgid "Could not shutdown backend_stdout IO channel: %s"
+msgstr "རྒྱབ་མཐའི་ ཨེསི་ཊི་ཌི་ཨའུཊི་ཨའི་ཨོ་རྒྱུ་ལམ་:%sསྒོ་བསྡམ་མ་ཚུགས།"
 
-#: ../capplets/about-me/gnome-about-me-password.c:129
+#: ../capplets/about-me/gnome-about-me-password.c:450
+msgid "Authenticated!"
+msgstr "བདེན་བཤད་འབད་ཡོད།"
+
+#. This is a re-auth, and it failed.
+#. * The password must have been changed in the meantime!
+#. * Ask the user to re-authenticate
+#.
+#. Update status message and auth state
+#. Authentication failure
+#: ../capplets/about-me/gnome-about-me-password.c:467
+#: ../capplets/about-me/gnome-about-me-password.c:540
+msgid "Your password has been changed since you initially authenticated! Please re-authenticate."
+msgstr "ཁྱོད་ཀྱིས་འགོ་ཐོག་ལུ་ བདེན་བཤད་འབད་ཞིནམ་ལས་ ཁྱོད་ཀྱི་ཆོག་ཡིག་སོར་ནུག སླར་བདེན་བཤད་འབད་གནང་།"
+
+#: ../capplets/about-me/gnome-about-me-password.c:469
+msgid "That password was incorrect."
+msgstr "ཆོག་ཡིག་དེ་བདེན་མེད་ཨིན་པས།"
+
+#: ../capplets/about-me/gnome-about-me-password.c:515
+msgid "Your password has been changed."
+msgstr "ཁྱོད་ཀྱིས་ཆོག་ཡིག་དེ་སོར་ནུག"
+
+#. What does this indicate?
+#. * "Authentication information cannot be recovered?" from libpam?
+#: ../capplets/about-me/gnome-about-me-password.c:525
+#, c-format
+msgid "System error: %s."
+msgstr "རིམ་ལུགས་འཛོལ་བ་:%s།"
+
+#: ../capplets/about-me/gnome-about-me-password.c:527
+msgid "The password is too short."
+msgstr "ཆོག་ཡིག་དེ་ཐུང་དྲགས་པས།"
+
+#: ../capplets/about-me/gnome-about-me-password.c:529
+#: ../capplets/about-me/gnome-about-me-password.c:531
+msgid "The password is too simple."
+msgstr "ཆོག་ཡིག་དེ་འཇམ་དྲགས་པས།"
+
+#: ../capplets/about-me/gnome-about-me-password.c:533
+msgid "The old and new passwords are too similar."
+msgstr "ཆོག་ཡིག་རྙིངམ་དང་གསརཔ་འདྲ་བས།"
+
+#: ../capplets/about-me/gnome-about-me-password.c:535
+msgid "The new password must contain numeric or special character(s)."
+msgstr "ཆོག་ཡིག་གསར་པའི་ནང་ཨང་གྲངས་ ཡང་ན་ དམིགས་བསལ་ཡིག་འབྲུ་(ཚུ) ཡོད་དགོ།"
+
+#: ../capplets/about-me/gnome-about-me-password.c:537
+msgid "The old and new passwords are the same."
+msgstr "ཆོག་ཡིག་རྙིངམ་དང་གསརཔ་ཅོག་གཅིག་པས།"
+
+#: ../capplets/about-me/gnome-about-me-password.c:788
+#, c-format
+msgid "Unable to launch /usr/bin/passwd: %s"
+msgstr " /usr/bin/passwd གསར་བཙུགས་འབད་མ་ཚུགས།%s"
+
+#: ../capplets/about-me/gnome-about-me-password.c:790
 msgid "Unable to launch backend"
 msgstr "རྒྱབ་མཐའ་གསར་བཚུགས་འབད་མི་བཙུགས་པས།"
 
-#: ../capplets/about-me/gnome-about-me-password.c:131
-#: ../capplets/about-me/gnome-about-me-password.c:132
-msgid "Unexpected error has occurred"
-msgstr "རེ་བ་མེད་པའི་འཚོལ་བ་བྱུང་ནུག"
+#: ../capplets/about-me/gnome-about-me-password.c:791
+msgid "A system error has occured"
+msgstr "རིམ་ལུགས་ཀྱི་འཛོལ་བ་ཅིག་བྱུང་ནུག"
 
-#: ../capplets/about-me/gnome-about-me-password.c:331
-msgid "Password is too short"
-msgstr "ཆོག་ཡིག་ཐུང་དྲགས་པས།"
+#. Update status message
+#: ../capplets/about-me/gnome-about-me-password.c:811
+msgid "Checking password..."
+msgstr "ཆོག་ཡིག་ཞིབ་དཔྱད་འབད་དོ།"
 
-#: ../capplets/about-me/gnome-about-me-password.c:334
-#: ../capplets/about-me/gnome-about-me-password.c:337
-msgid "Password is too simple"
-msgstr "ཆོག་ཡིག་འཇམ་དྲགས་པས"
+#: ../capplets/about-me/gnome-about-me-password.c:898
+msgid "Click <b>Change password</b> to change your password."
+msgstr "ཁྱོད་རའི་ཆོག་ཡིག་སོར་ནིའི་དོན་ལུ་<b>ཆོག་ཡིག་སོར་</b> གུ་ཨེབ་གཏང་འབད།"
 
-#: ../capplets/about-me/gnome-about-me-password.c:340
-msgid "Old and new passwords are too similar"
-msgstr "ཆོག་ཡིག་རྙིངམ་དང་གསརཔ་ ཧ་ལམ་ཅོག་གཅིག་པས།"
+#: ../capplets/about-me/gnome-about-me-password.c:901
+msgid "Please type your password in the <b>New password</b> field."
+msgstr " <b>ཆོག་ཡིག་གསར་པའི་</b> ས་སྒོ་ནང་ ཁྱོད་རའི་ཆོག་ཡིག་ ཡིག་དཔར་རྐྱབས།"
 
-#: ../capplets/about-me/gnome-about-me-password.c:343
-msgid "Must contain numeric or special character(s)"
-msgstr "ནང་ན་ཨང་གྲངས་ ཡང་ན་ དམིགས་བསལ་ཡིག་འབྲུ་(ཚུ) ཡོད་དགོ།"
+#: ../capplets/about-me/gnome-about-me-password.c:904
+#: ../capplets/about-me/gnome-about-me.glade.h:34
+msgid "Please type your password again in the <b>Retype new password</b> field."
+msgstr "<b>ཆོག་ཡིག་གསརཔ་ལོག་ཡིག་དཔར་རྐྱབས་</b> ཟེར་མི་ས་སྒོ་ནང་ ཁྱོད་རའི་ཆོག་ཡིག་ ལོག་སྟེ་རང་ཡིག་དཔར་རྐྱབས།"
 
-#: ../capplets/about-me/gnome-about-me-password.c:348
-msgid "Old and new password are the same"
-msgstr "ཆོག་ཡིག་རྙིངམ་དང་གསརཔ་ ཅོག་གཅིག་པས།"
-
-#: ../capplets/about-me/gnome-about-me-password.c:634
-msgid "Please type the passwords."
-msgstr "ཆོག་ཡིག་ཚུ་ ཡིག་དཔར་རྐྱབས།"
-
-#: ../capplets/about-me/gnome-about-me-password.c:642
-msgid "Please type the password again, it is wrong."
-msgstr "ཆོག་ཡིག་ལོག་སྟེ་ ཡིག་དཔར་རྐྱབས། འདི་ཕྱི་འགྱུར་ཨིན་པས།"
-
-#: ../capplets/about-me/gnome-about-me-password.c:645
-msgid "Click on Change Password to change the password."
-msgstr "ཆོག་ཡིག་སོར་ནིའི་དོན་ལུ་ ཆོག་ཡིག་སོར་ལུ་ ཨེབ་གཏང་འབད།"
+#: ../capplets/about-me/gnome-about-me-password.c:907
+msgid "The two passwords are not equal."
+msgstr "ཆོག་ཡིག་གཉིསཔོ་དེ་འདྲ་མཉམ་མེན་པས།"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:1
 #: ../vfs-methods/themus/apply-font.glade.h:1
@@ -147,6 +192,7 @@ msgstr " "
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:1
+#: ../capplets/sound/sound-properties.glade.h:1
 #: ../capplets/ui-properties/gnome-ui-properties.glade.h:1
 msgid "    "
 msgstr "    "
@@ -168,20 +214,20 @@ msgid "<b>Job</b>"
 msgstr "<b>ལས་གཡོག</b>"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:7
-msgid "<b>Please type the passwords.</b>"
-msgstr "<b>ཆོག་ཡིག་ཚུ་ ཡིག་དཔར་རྐྱབས།<b>"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:8
 msgid "<b>Telephone</b>"
 msgstr "<b>བརྒྱུད་འཕྲིན་</b>"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:9
+#: ../capplets/about-me/gnome-about-me.glade.h:8
 msgid "<b>Web</b>"
 msgstr "<b>ཝེབ་</b>"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:10
+#: ../capplets/about-me/gnome-about-me.glade.h:9
 msgid "<b>Work</b>"
 msgstr "<b>ལཱ་གཡོག་</b>"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:10
+msgid "<span size=\"larger\" weight=\"bold\">Change your password</span>"
+msgstr "<span size=\"larger\" ལྗིད་ཚད་=\"bold\">ཁྱོད་རའི་ཆོག་ཡིག་སོར་</span>"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:11
 msgid "A_IM/iChat:"
@@ -216,142 +262,156 @@ msgid "Change Passwo_rd..."
 msgstr "ཆོག་ཡིག་སོར་...(_r)"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:20
-msgid "Change Password"
-msgstr "་ཆོག་ཡིག་སོར།"
+msgid "Change pa_ssword"
+msgstr "ཆོག་ཡིག་སོར།(_s)"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:21
+msgid "Change password"
+msgstr "ཆོག་ཡིག་སོར།"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:22
 msgid "Ci_ty:"
 msgstr "གྲོང་སྡེ་:(_t)"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:22
+#: ../capplets/about-me/gnome-about-me.glade.h:23
 msgid "Co_untry:"
 msgstr "རྒྱལ་ཁབ་:(_u)"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:23
+#: ../capplets/about-me/gnome-about-me.glade.h:24
 msgid "Contact"
 msgstr "འབྲེལ་ས"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:24
+#: ../capplets/about-me/gnome-about-me.glade.h:25
 msgid "Cou_ntry:"
 msgstr "རྒྱལ་ཁབ་:(_n)"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:25
+#: ../capplets/about-me/gnome-about-me.glade.h:26
+msgid "Current _password:"
+msgstr "ད་ལྟོའི་ཆོག་ཡིག་:(_p)"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:27
 msgid "Full Name"
 msgstr "མིང་ཆ་ཚང་།"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:26
+#: ../capplets/about-me/gnome-about-me.glade.h:28
 msgid "Hom_e:"
 msgstr "ཁྱིམ། (_e)"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:27
+#: ../capplets/about-me/gnome-about-me.glade.h:29
 msgid "IC_Q:"
 msgstr "ཨའི་སི་ཀིའུ་:(_Q)"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:28
+#: ../capplets/about-me/gnome-about-me.glade.h:30
 msgid "M_SN:"
 msgstr "ཨེམ་ཨེསི་ཨེན་:(_S)"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:29
-msgid "Old pa_ssword:"
-msgstr "ཆོག་ཡིག་རྙིངམ་:(_s)"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:30
+#: ../capplets/about-me/gnome-about-me.glade.h:31
 msgid "P.O. _box:"
 msgstr "འགྲེམ་ཁང་ཡིག་སྒྲོམ་:(_b)"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:31
+#: ../capplets/about-me/gnome-about-me.glade.h:32
 msgid "P._O. box:"
 msgstr "འགྲེམ་ཁང་ཡིག་སྒྲོམ་:(_O)"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:32
+#: ../capplets/about-me/gnome-about-me.glade.h:33
 msgid "Personal Info"
 msgstr "རང་དོན་བརྡ་དོན།"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:33
+#: ../capplets/about-me/gnome-about-me.glade.h:35
 msgid "State/Pro_vince:"
 msgstr "མངའ་སྡེ་.མངའ་རིས་:(_v)"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:34
+#: ../capplets/about-me/gnome-about-me.glade.h:36
+msgid ""
+"To change your password, enter your current password in the field below and click <b>Authenticate</b>.\n"
+"After you have authenticated, enter your new password, retype it for verification and click <b>Change password</b>."
+msgstr "ཁྱོད་རའི་ཆོག་ཡིག་སོར་ནི་ལུ་ འོག་གི་སྒོ་ནང་ད་ལྟོའི་ཆོག་ཡིག་ཞིནམ་ལས་ <b>བདེན་བཤད་</b> ལུ་ཨེབ་གཏང་འབད། བདེན་བཤད་འབད་ཞིནམ་ལས་ ཁྱོད་རའི་ཆོག་ཡིག་གསརཔ་བཙུགས། བདེན་སྦྱོར་གྱི་དོན་ལུ་ ཆོག་ཡིག་དེ་ལོག་སྟེ་རང་ཚར་ཅིག་ཡིག་དཔར་བརྐྱབས་ཞིནམ་ལས་ <b>ཆོག་ཡིག་སོར་</b> ལུ་ཨེབ་གཏང་འབད།"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:38
 msgid "User name:"
 msgstr "ལག་ལེན་པའི་མིང་:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:35
+#: ../capplets/about-me/gnome-about-me.glade.h:39
 msgid "Web _log:"
 msgstr "ཝེབ་དྲན་དེབ་:(_l)"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:36
+#: ../capplets/about-me/gnome-about-me.glade.h:40
 msgid "Wor_k:"
 msgstr "ལཱ་གཡོག་:(_k)"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:37
+#: ../capplets/about-me/gnome-about-me.glade.h:41
 msgid "Work _fax:"
 msgstr "ལཱ་གི་དཔར་འཕྲིན་:(_f)"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:38
+#: ../capplets/about-me/gnome-about-me.glade.h:42
 msgid "Zip/_Postal code:"
 msgstr "གནས་ཨང་/འགྲེམ་ཨང་:(_p)"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:39
+#: ../capplets/about-me/gnome-about-me.glade.h:43
 msgid "_Address:"
 msgstr "ཁ་བྱང་:(_A)"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:40
+#: ../capplets/about-me/gnome-about-me.glade.h:44
+msgid "_Authenticate"
+msgstr "བདེན་བཤད་འབད།(_A)"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:45
 msgid "_Department:"
 msgstr "ལས་ཁུངས་:(_D)"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:41
+#: ../capplets/about-me/gnome-about-me.glade.h:46
 msgid "_Groupwise:"
 msgstr "སྡེ་རིམ་:(_G)"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:42
+#: ../capplets/about-me/gnome-about-me.glade.h:47
 msgid "_Home page:"
 msgstr "ཁྱིམ་གྱི་ཤོག་ལེབ་:(_H)"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:43
+#: ../capplets/about-me/gnome-about-me.glade.h:48
 msgid "_Home:"
 msgstr "ཁྱིམ་:(_H)"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:44
+#: ../capplets/about-me/gnome-about-me.glade.h:49
 msgid "_Jabber:"
 msgstr "ཇེབ་བར་:(_J)"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:45
+#: ../capplets/about-me/gnome-about-me.glade.h:50
 msgid "_Manager:"
 msgstr "འཛིན་སྐྱོང་པ་:(_M)"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:46
+#: ../capplets/about-me/gnome-about-me.glade.h:51
 msgid "_Mobile:"
 msgstr "འགྲུལ་འཕྲིན་:(_M)"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:47
+#: ../capplets/about-me/gnome-about-me.glade.h:52
 msgid "_New password:"
 msgstr "ཆོག་ཡིག་གསརཔ་:(_N)"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:48
+#: ../capplets/about-me/gnome-about-me.glade.h:53
 msgid "_Profession:"
 msgstr "ཁྱད་ལས་:(_P)"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:49
+#: ../capplets/about-me/gnome-about-me.glade.h:54
 msgid "_Retype new password:"
 msgstr "ཆོག་ཡིག་གསརཔ་ལོག་སྟེ་རྐྱབས་:(_R)"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:50
+#: ../capplets/about-me/gnome-about-me.glade.h:55
 msgid "_State/Province:"
 msgstr "མངའ་སྡེ་/མངའ་རིས།"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:51
+#: ../capplets/about-me/gnome-about-me.glade.h:56
 msgid "_Title:"
 msgstr "གོ་གནས་:(_T)"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:52
+#: ../capplets/about-me/gnome-about-me.glade.h:57
 msgid "_Work:"
 msgstr "ལཱ་གཡོག་:(_W)"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:53
+#: ../capplets/about-me/gnome-about-me.glade.h:58
 msgid "_Yahoo:"
 msgstr "ཡ་ཧུ་:(_Y)"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:54
+#: ../capplets/about-me/gnome-about-me.glade.h:59
 msgid "_Zip/Postal code:"
 msgstr "གནས་ཨང་/འགྲེམ་ཨང་:(_Z)"
 
@@ -450,7 +510,6 @@ msgstr "རིམ་ལུགས་འདི་ལུ་ ཨེགསི་ཀ�
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:2
-#: ../capplets/theme-switcher/theme-install.glade.h:1
 msgid "*"
 msgstr "*"
 
@@ -655,7 +714,7 @@ msgid "_Finish"
 msgstr "རྫོགས།(_F)"
 
 #: ../capplets/background/gnome-background-properties.glade.h:7
-#: ../capplets/theme-switcher/theme-properties.glade.h:19
+#: ../capplets/theme-switcher/theme-properties.glade.h:20
 msgid "_Remove"
 msgstr "རྩ་བསྐྲད་གཏང་།(_R)"
 
@@ -747,7 +806,7 @@ msgstr "གཞི་སྒྲིག་ཚུ་ འཇུག་སྤྱོད�
 #: ../capplets/common/capplet-util.c:243
 #: ../capplets/keyboard/gnome-keyboard-properties.c:225
 #: ../capplets/mouse/gnome-mouse-properties.c:1016
-#: ../capplets/sound/sound-properties-capplet.c:244
+#: ../capplets/sound/sound-properties-capplet.c:760
 msgid "Retrieve and store legacy settings"
 msgstr "སྔོན་བཤུལ་གྱི་གཞི་སྒྲིག་ཚུ་ སླར་འདྲེན་འབད་དེ་ གསོག་འཇོག་འབད།"
 
@@ -923,34 +982,30 @@ msgstr "དགའ་གདམ་ཅན་གྱི་གློག་རིམ།
 msgid "Select your default applications"
 msgstr "ཁྱོད་རའི་སྔོན་སྒྲིག་གློག་རིམ་ སེལ་འཐུ་འབད།"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:55
-msgid "Could not display help"
-msgstr "གྲོགས་གྲམ་བཀྲམ་སྟོན་འབད་མ་ཚུགས།"
-
-#: ../capplets/default-applications/gnome-da-capplet.c:57
-#: ../capplets/default-applications/gnome-da-capplet.c:756
-msgid "Please make sure that the applet is properly installed"
-msgstr "ཨེཔ་ལེཊི་དེ་ ངེས་བདེན་སྦེ་ གཞི་བཙུགས་འབད་ཡོདཔ་ ངེས་གཏན་བཟོ།"
-
-#: ../capplets/default-applications/gnome-da-capplet.c:92
-#: ../capplets/default-applications/gnome-da-capplet.c:116
-#: ../capplets/default-applications/gnome-da-capplet.c:161
-#: ../capplets/default-applications/gnome-da-capplet.c:206
-#: ../capplets/default-applications/gnome-da-capplet.c:260
-#: ../capplets/default-applications/gnome-da-capplet.c:309
-#: ../capplets/default-applications/gnome-da-capplet.c:591
-#: ../capplets/default-applications/gnome-da-capplet.c:612
+#: ../capplets/default-applications/gnome-da-capplet.c:77
+#: ../capplets/default-applications/gnome-da-capplet.c:101
+#: ../capplets/default-applications/gnome-da-capplet.c:146
+#: ../capplets/default-applications/gnome-da-capplet.c:191
+#: ../capplets/default-applications/gnome-da-capplet.c:245
+#: ../capplets/default-applications/gnome-da-capplet.c:294
+#: ../capplets/default-applications/gnome-da-capplet.c:576
+#: ../capplets/default-applications/gnome-da-capplet.c:597
 #, c-format
 msgid "Error saving configuration: %s"
 msgstr "རིམ་སྒྲིག་%sབསྲུང་ནི་ལུ་འཛོལ་བ། "
 
-#: ../capplets/default-applications/gnome-da-capplet.c:734
+#: ../capplets/default-applications/gnome-da-capplet.c:719
+#: ../capplets/sound/sound-properties-capplet.c:318
 msgid "Custom"
 msgstr "སྲོལ་སྒྲིག"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:754
+#: ../capplets/default-applications/gnome-da-capplet.c:739
 msgid "Could not load the main interface"
 msgstr "ངོས་འདྲ་བ་ངོ་མ་ མངོན་གསལ་འབད་མ་ཚུགས།"
+
+#: ../capplets/default-applications/gnome-da-capplet.c:741
+msgid "Please make sure that the applet is properly installed"
+msgstr "ཨེཔ་ལེཊི་དེ་ ངེས་བདེན་སྦེ་ གཞི་བཙུགས་འབད་ཡོདཔ་ ངེས་གཏན་བཟོ།"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:1
 msgid "Balsa"
@@ -1077,18 +1132,22 @@ msgid "Standard XTerminal"
 msgstr "ཚད་ལྡན་གྱི་ ཨེགསི་ཊར་མི་ནཱལ།"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:32
+msgid "Sylpheed"
+msgstr "སིལ་ཕིཊི།"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:33
 msgid "Sylpheed-Claws"
 msgstr "སིལ་ཕིཊི་-ཀྭ་ལཱསི།"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:33
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:34
 msgid "Thunderbird"
 msgstr "ཐཱན་ཌར་བཌི།"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:34
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:35
 msgid "W3M Text Browser"
 msgstr "ཌབ་ལུ་༣ཨེམ་ཚིག་ཡིག་གི་ བརའུ་ཟར།"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:35
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:36
 msgid "aterm"
 msgstr "ཨེ་ཊམ།"
 
@@ -1413,30 +1472,30 @@ msgid "The type of accelerator."
 msgstr "མགྱོགས་འཕྲུལ་གྱི་དབྱེ་བ།"
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
-#: ../capplets/keybindings/gnome-keybinding-properties.c:197
+#: ../capplets/keybindings/gnome-keybinding-properties.c:187
 #: ../libbackground/applier.c:624
 #: ../typing-break/drwright.c:471
 msgid "Disabled"
 msgstr "ལྕོགས་མིན།"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:544
+#: ../capplets/keybindings/gnome-keybinding-properties.c:534
 msgid "<Unknown Action>"
 msgstr "<མ་ཤེས་པའི་བྱ་བ་>"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:565
+#: ../capplets/keybindings/gnome-keybinding-properties.c:555
 msgid "Desktop"
 msgstr "ཌེཀསི་ཊོཔ།"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:566
+#: ../capplets/keybindings/gnome-keybinding-properties.c:556
 #: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
 msgid "Sound"
 msgstr "སྒྲ་སྐད།"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:570
+#: ../capplets/keybindings/gnome-keybinding-properties.c:560
 msgid "Window Management"
 msgstr "སྒོ་སྒྲིག་འཛིན་སྐྱོང་།"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:676
+#: ../capplets/keybindings/gnome-keybinding-properties.c:666
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become unusable to type using this key.\n"
@@ -1445,7 +1504,7 @@ msgstr ""
 "མགྱོགས་ཐབས་\"%s\"དེ་ ལག་ལེན་འཐབ་མི་བཏུབ། ག་ཅི་སྦེ་ཟེར་བ་ཅིན་ ལྡེ་མིག་འདི་ལག་ལེན་འཐབ་དང་ ཡིག་དཔར་བརྐྱབ་མི་འགྱུརཝ་ཨིན།\n"
 "ཚད་འཛིན་དང་ གདམ་ལྡེ་ སོར་ལྡེ་ཚུ་ དུས་མཉམ་ལུ་ཨེབ་སྟེ་ འབད་རྩོལ་བསྐྱེད་གནང་།\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:705
+#: ../capplets/keybindings/gnome-keybinding-properties.c:695
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1454,21 +1513,21 @@ msgstr ""
 "མགྱོགས་ཐབས་\"%s\" དེ་ ཧེ་མ་ལས་རང་ ལག་ལེན་འཐབ་ནུག\n"
 " \"%s\"\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:737
+#: ../capplets/keybindings/gnome-keybinding-properties.c:727
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "རིམ་སྒྲིག་གནད་སྡུད་གཞི་རྟེན་ %sནང་ མགྱོགས་འཕྲུལ་གསརཔ་ གཞི་སྒྲིག་འབད་ནི་ལུ་འཛོལ་བ།\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:787
+#: ../capplets/keybindings/gnome-keybinding-properties.c:777
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "རིམ་སྒྲིག་གནད་སྡུད་གཞི་རྟེན་ %sནང་ མགྱོགས་འཕྲུལ་གསརཔ་ སྒྲིག་བཤོལ་འབད་ནི་ལུ་འཛོལ་བ། \n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:894
+#: ../capplets/keybindings/gnome-keybinding-properties.c:884
 msgid "Action"
 msgstr "བྱ་བ།"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:918
+#: ../capplets/keybindings/gnome-keybinding-properties.c:908
 msgid "Shortcut"
 msgstr "མགྱོགས་ཐབས།"
 
@@ -1485,11 +1544,11 @@ msgstr "མགྱོགས་ཐབས་ཅིག་ ཞུན་དག་བ�
 msgid "Assign shortcut keys to commands"
 msgstr "བརྡ་བཀོད་ཚུ་ལུ་ མགྱོགས་ཐབས་ལྡེ་མིག་ འགན་སྤྲོད་འབད།"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkb.c:84
+#: ../capplets/keyboard/gnome-keyboard-properties-xkb.c:87
 msgid "Unknown"
 msgstr "མ་ཤེསཔ།"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:279
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:281
 msgid "Layout"
 msgstr "སྒྲིག་བཀོད།"
 
@@ -1497,12 +1556,12 @@ msgstr "སྒྲིག་བཀོད།"
 #. the below options are to be included in the selected list.
 #. This is a HIG-compliant alternative to allowing no
 #. selection in the group.
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:283
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:228
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:285
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:229
 msgid "Default"
 msgstr "སྔོན་སྒྲིག"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:75
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:77
 msgid "Models"
 msgstr "དཔེ།"
 
@@ -1517,8 +1576,8 @@ msgstr "འཛུལ་སྤྱོད།(_A)"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:221
 #: ../capplets/keyboard/gnome-keyboard-properties.c:223
-#: ../capplets/sound/sound-properties-capplet.c:240
-#: ../capplets/sound/sound-properties-capplet.c:242
+#: ../capplets/sound/sound-properties-capplet.c:756
+#: ../capplets/sound/sound-properties-capplet.c:758
 msgid "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr "གཞི་སྒྲིག་ཙམ་འཇུག་སྤྱོད་འབད་དེ་སྤངས། (མཐུན་འགྱུར་རྐྱངམ་གཅིག་ ད་ལྟོ་ཌེ་མཱོན་གྱིས་ ལེགས་སྐྱོང་འཐབ་ནུག)"
 
@@ -1943,40 +2002,88 @@ msgstr "ཨེཆ་ཊི་ཊི་པི་ པོརོག་སི་མ�
 msgid "Enable sound and associate sounds with events"
 msgstr "སྒྲ་སྐད་ལྕོགས་ཅན་བཟོ་སྟེ་ བྱུང་ལས་དང་མཉམ་སྦྲགས་འབད།"
 
-#: ../capplets/sound/sound-properties-capplet.c:271
-#: ../capplets/sound/sound-properties.glade.h:4
+#: ../capplets/sound/sound-properties-capplet.c:316
+#: ../capplets/sound/sound-properties-capplet.c:368
+msgid "Not connected"
+msgstr "མ་མཐུད་པས།"
+
+#: ../capplets/sound/sound-properties-capplet.c:790
 msgid "Sound Preferences"
 msgstr "སྒྲ་སྐད་ཀྱི་དགའ་གདམ་ཚུ།"
 
-#: ../capplets/sound/sound-properties.glade.h:1
+#: ../capplets/sound/sound-properties.glade.h:2
+msgid "<b>Audio Conferencing</b>"
+msgstr "<b>རྣར་ཉན་ཞལ་འཛོམས་</b>"
+
+#: ../capplets/sound/sound-properties.glade.h:3
+msgid "<b>Music and Movies</b>"
+msgstr "<b>སྙན་ཆ་དང་གློག་བརྙན་</b>"
+
+#: ../capplets/sound/sound-properties.glade.h:4
+msgid "<b>Sound Events</b>"
+msgstr "<b>སྒྲ་སྐད་བྱུང་ལས་</b>"
+
+#: ../capplets/sound/sound-properties.glade.h:5
+msgid "<span weight=\"bold\" size=\"x-large\">Testing...</span>"
+msgstr "<span weight=\"bold\" ཚད་=\"larger\">བརྟག་ཞིབ་འབད་དོ་</span>"
+
+#: ../capplets/sound/sound-properties.glade.h:6
+msgid "Click Ok to finish."
+msgstr "རྫོགས་ནིའི་དོན་ལུ་ བཏུབ་གུ་ཨེབ་གཏང་འབད།"
+
+#: ../capplets/sound/sound-properties.glade.h:7
+msgid "Devices"
+msgstr "ཐབས་འཕྲུལ།"
+
+#: ../capplets/sound/sound-properties.glade.h:8
 msgid "E_nable software sound mixing (ESD)"
 msgstr "མཉེན་ཆས་སྒྲ་སྐད་བསྲེ་སྦྱོར་གྱི་ལྕོགས་ཅན་བཟོ།(ཨི་ཨེསི་ཌི)"
 
-#: ../capplets/sound/sound-properties.glade.h:2
+#: ../capplets/sound/sound-properties.glade.h:9
 msgid "Flash _entire screen"
 msgstr "གསལ་གཞི་ཧྲིལ་བུ་ རིབ་སྟོན་འབད།(_e)"
 
-#: ../capplets/sound/sound-properties.glade.h:3
+#: ../capplets/sound/sound-properties.glade.h:10
 msgid "Flash _window titlebar"
 msgstr "སྒོ་སྒྲིག་གི་མགོ་མིང་ཕྲ་རིང་ རིབ་སྟོན་འབད།(_w)"
 
-#: ../capplets/sound/sound-properties.glade.h:5
+#: ../capplets/sound/sound-properties.glade.h:11
+msgid "Sound & Video Preferences"
+msgstr "སྒྲ་སྐད་དང་ཝི་ཌིའོ་དགའ་གདམ་ཚུ།"
+
+#: ../capplets/sound/sound-properties.glade.h:12
+msgid "Sound Capture:"
+msgstr "སྒྲ་སྐད་འཛིན་བཟུང་:"
+
+#: ../capplets/sound/sound-properties.glade.h:13
+msgid "Sound Playback:"
+msgstr "སྒྲ་སྐད་གཏང་ནི་:"
+
+#: ../capplets/sound/sound-properties.glade.h:14
 msgid "Sounds"
 msgstr "སྒྲ་སྐད།"
 
-#: ../capplets/sound/sound-properties.glade.h:6
+#: ../capplets/sound/sound-properties.glade.h:15
 msgid "System Beep"
 msgstr "རིམ་ལུགས་བརྡ་སྐད།"
 
-#: ../capplets/sound/sound-properties.glade.h:7
+#: ../capplets/sound/sound-properties.glade.h:16
+msgid "Test"
+msgstr "བརྟག་ཞིབ།"
+
+#: ../capplets/sound/sound-properties.glade.h:17
+msgid "Testing Pipeline"
+msgstr "རྒྱུད་དུང་འབྲེལ་ལམ་བརྟག་ཞིབ་འབད་དོ།"
+
+#: ../capplets/sound/sound-properties.glade.h:18
 msgid "_Enable system beep"
 msgstr "རིམ་ལུགས་བརྡ་སྐད་ལྕོགས་ཅན་བཟོ།(_E)"
 
-#: ../capplets/sound/sound-properties.glade.h:8
+#: ../capplets/sound/sound-properties.glade.h:19
 msgid "_Play system sounds"
 msgstr "རིམ་ལུགས་སྒྲ་སྐད་གཏང་།(_P)"
 
-#: ../capplets/sound/sound-properties.glade.h:9
+#: ../capplets/sound/sound-properties.glade.h:20
 msgid "_Visual system beep"
 msgstr "མཐོང་བའི་རིམ་ལུགས་བརྡ་སྐད།(_V)"
 
@@ -1992,19 +2099,19 @@ msgstr "བརྗོད་དོན་མཐར་འཁྱོལ་སྦེ་
 msgid "Theme can not be deleted"
 msgstr "བརྗོད་དོན་བཏོན་གཏང་མི་ཚུགས།"
 
-#: ../capplets/theme-switcher/gnome-theme-details.c:529
+#: ../capplets/theme-switcher/gnome-theme-details.c:535
 msgid "No themes could be found on your system.  This probably means that your \"Theme Preferences\" dialog was improperly installed, or you haven't installed the \"gnome-themes\" package."
 msgstr "ཁྱོད་ཀྱི་རིམ་ལུགས་ལུ་ བརྗོད་དོན་ག་ནི་ཡང་འཚོལ་མ་ཐོབ། འདི་གི་རྒྱུ་མཚན་ཡང་ ཁྱོད་ཀྱི་\"Theme Preferences\" ཌའི་ལོག་དེ་ ཚུལ་མིན་འབད་ གཞི་བཙུགས་འབད་ཡོདཔ་འོང་ནི་མས། ཡང་ཅིན་ ཁྱོད་ཀྱིས་ \"gnome-themes\" ཐུམ་སྒྲིལ་དེ་ གཞི་བཙུགས་མ་འབདཝ་འོང་ནི་མས།"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:227
+#: ../capplets/theme-switcher/gnome-theme-installer.c:254
 msgid "This theme is not in a supported format."
 msgstr "བརྗོད་དོན་འདི་ རྒྱབ་སྐྱོར་ལྡན་པའི་ རྩ་སྒྲིག་ཅིག་མེན་པས།"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:242
+#: ../capplets/theme-switcher/gnome-theme-installer.c:272
 msgid "Failed to create temporary directory"
 msgstr "གནས་སྐབས་ཅིག་གི་སྣོད་ཐོ་ གསར་བསྐྲུན་འབད་མ་ཚུགས།"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:260
+#: ../capplets/theme-switcher/gnome-theme-installer.c:293
 msgid ""
 "Can not install theme. \n"
 "The bzip2 utility is not installed."
@@ -2012,13 +2119,13 @@ msgstr ""
 "བརྗོད་དོན་གཞི་བཙུགས་འབད་མ་ཚུགས།\n"
 "བི་ཛིཔ་༢ ཀྱི་སྤྱོད་ཆས་དེ་ གཞི་བཙུགས་མ་འབད་བས།"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:276
-#: ../capplets/theme-switcher/gnome-theme-installer.c:309
-#: ../capplets/theme-switcher/gnome-theme-installer.c:383
+#: ../capplets/theme-switcher/gnome-theme-installer.c:312
+#: ../capplets/theme-switcher/gnome-theme-installer.c:351
+#: ../capplets/theme-switcher/gnome-theme-installer.c:434
 msgid "Installation Failed"
 msgstr "གཞི་བཙུགས་འབད་མ་ཚུགས།"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:294
+#: ../capplets/theme-switcher/gnome-theme-installer.c:333
 msgid ""
 "Can not install themes. \n"
 "The gzip utility is not installed."
@@ -2026,7 +2133,7 @@ msgstr ""
 "བརྗོད་དོན་ཚུ་ གཞི་བཙུགས་འབད་མ་ཚུགས།\n"
 "ཇི་ཛིཔ་གི་སྤྱོད་ཆས་དེ་ གཞི་བཙུགས་མ་འབད་བས།"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:330
+#: ../capplets/theme-switcher/gnome-theme-installer.c:375
 #, c-format
 msgid ""
 "Icon Theme %s correctly installed.\n"
@@ -2035,12 +2142,12 @@ msgstr ""
 "ངོས་དཔར་བརྗོད་དོན་  %s ངེས་བདེན་སྦེ་ གཞི་བཙུགས་འབད་ནུག\n"
 "དེ་ཁྱོད་ཀྱིས་བརྗོད་དོན་རྒྱས་བཤད་ནང་ལས་ སེལ་འཐུ་འབད་ཚུགས།"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:333
+#: ../capplets/theme-switcher/gnome-theme-installer.c:378
 #, c-format
 msgid "Gnome Theme %s correctly installed"
 msgstr "ཇི་ནོམ་བརྗོད་དོན་%s ངེས་བདེན་སྦེ་ གཞི་བཙུགས་འབད་ནུག"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:336
+#: ../capplets/theme-switcher/gnome-theme-installer.c:381
 #, c-format
 msgid ""
 "Windows Border Theme %s correctly installed.\n"
@@ -2049,7 +2156,7 @@ msgstr ""
 "སྒོ་སྒྲིག་གི་མཐའ་མཚམས་བརྗོད་དོན་ %s ངེས་བདེན་སྦེ་ གཞི་བཙུགས་འབད་ནུག\n"
 "དེ་ཁྱོད་ཀྱིས་བརྗོད་དོན་རྒྱས་བཤད་ནང་ལས་ སེལ་འཐུ་འབད་ཚུགས།"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:339
+#: ../capplets/theme-switcher/gnome-theme-installer.c:384
 #, c-format
 msgid ""
 "Controls Theme %s correctly installed.\n"
@@ -2058,23 +2165,23 @@ msgstr ""
 "ཚད་འཛིན་གྱི་བརྗོད་དོན་ %s ངེས་བདེན་སྦེ་ གཞི་བཙུགས་འབད་ནུག\n"
 "དེ་ཁྱོད་ཀྱིས་བརྗོད་དོན་རྒྱས་བཤད་ནང་ལས་ སེལ་འཐུ་འབད་ཚུགས།"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:345
+#: ../capplets/theme-switcher/gnome-theme-installer.c:390
 msgid "The theme is an engine. You need to compile the theme."
 msgstr "བརྗོད་དོན་དེ་ མ་འཕྲུལ་ཅིག་ཨིན་པས། ཁྱོད་ཀྱིས་བརྗོད་དོན་དེ་ ཕྱོགས་སྒྲིག་འབད་དགོ"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:360
+#: ../capplets/theme-switcher/gnome-theme-installer.c:408
 msgid "The file format is invalid"
 msgstr "ཡིག་སྣོད་ཀྱི་རྩ་སྒྲིག་དེ་ ནུས་མེད་ཨིན་པས།"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:450
+#: ../capplets/theme-switcher/gnome-theme-installer.c:499
 msgid "No theme file location specified to install"
 msgstr "གཞི་བཙུགས་འབད་ནིའི་དོན་ལུ་ ཡིག་སྣོད་ཀྱི་གནས་ཁོངས་ ངོས་འཛིན་མ་འབད་བས།"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:469
+#: ../capplets/theme-switcher/gnome-theme-installer.c:514
 msgid "The theme file location specified to install is invalid"
 msgstr "གཞི་བཙུགས་འབད་ནིའི་དོན་ལུ་ ཡིག་སྣོད་ཀྱི་གནས་ཁོངས་ ངོས་འཛིན་འབད་མི་དེ་ ནུས་མེད་ཨིན་པས།"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:489
+#: ../capplets/theme-switcher/gnome-theme-installer.c:534
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -2083,16 +2190,16 @@ msgstr ""
 "བརྗོད་དོན་གཞི་བཙུགས་འབད་ནིའི་དོན་ལུ་ གནང་བ་ལངམ་མིན་འདུག\n"
 "%s"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:510
+#: ../capplets/theme-switcher/gnome-theme-installer.c:555
 msgid "The file format is invalid."
 msgstr "ཡིག་སྣོད་ཀྱི་རྩ་སྒྲིག་དེ་ ནུས་མེད་ཨིན་པས།"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:537
+#: ../capplets/theme-switcher/gnome-theme-installer.c:582
 #, c-format
 msgid "%s is the path where the theme files will be installed. This can not be selected as the source location"
 msgstr "%sའདི་ བརྗོད་དོན་གྱི་ཡིག་སྣོད་ཚུ་ གཞི་བཙུགས་འབད་སའི་འགྲུལ་ལམ་ཨིན། འདི་འབྱུང་ཁུངས་ཀྱི་ གནས་ཁོངས་འབད་ སེལ་འཐུ་འབད་མི་ཚུགས།"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:591
+#: ../capplets/theme-switcher/gnome-theme-installer.c:647
 msgid ""
 "Cannot install theme.\n"
 "The tar program is not installed on your system."
@@ -2108,15 +2215,15 @@ msgstr "སྲོལ་སྒྲིག་བརྗོད་དོན།"
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "ཁྱོད་ཀྱིས་བརྗོད་དོན་འདི་ བརྗོད་དོན་བསྲུང་ནིའི་ཨེབ་རྟ་གུ་ ཨེབ་པའི་ཐོག་ལས་བསྲུང་ཚུགས།"
 
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1584
+#: ../capplets/theme-switcher/gnome-theme-manager.c:1579
 msgid "The default theme schemas could not be found on your system.  This means that you probably don't have metacity installed, or that your gconf is configured incorrectly."
 msgstr "སྔོན་སྒྲིག་བརྗོད་དོན་ལས་འཆར་དེ་ ཁྱོད་ཀྱི་རིམ་ལུགས་ནང་ འཚོལ་མ་ཐོབ། དེ་གི་རྒྱུ་མཚན་ཡང་ ཁྱོད་ཀྱིས་མེ་ཊ་སི་ཊི་ གཞི་བཙུགས་མ་འབདཝ་འོང་ནི་དང་ ཡང་ཅིན་ ཁྱོད་ཀྱི་ཇི་ཀཱོནཕ་དེ་ བདེན་མེད་སྦེ་ གཞི་བཙུགས་འབད་འབདཝ་འོང་ནི་མས།"
 
-#: ../capplets/theme-switcher/gnome-theme-save.c:72
+#: ../capplets/theme-switcher/gnome-theme-save.c:73
 msgid "Theme name must be present"
 msgstr "བརྗོད་དོན་གྱི་མིང་ ངེས་པར་ཡོད་དགོ"
 
-#: ../capplets/theme-switcher/gnome-theme-save.c:104
+#: ../capplets/theme-switcher/gnome-theme-save.c:144
 msgid "The theme already exists. Would you like to replace it?"
 msgstr "བརྗོད་དོན་དེ་ ཧེ་མ་ལས་རང་འདུག ཁྱོད་ཀྱིས་དེ་གི་ཚབ་མ་ བཙུགས་ནི་ཨིན་ན།"
 
@@ -2129,105 +2236,89 @@ msgstr "ཌེཀསི་ཊོཔ་གི་ ཡན་ལག་སོ་ས�
 msgid "Theme"
 msgstr "བརྗོད་དོན་ཚུ།"
 
-#: ../capplets/theme-switcher/theme-install.glade.h:2
-msgid "<span size=\"larger\" weight=\"bold\">Install a Theme</span>"
-msgstr "<span size=\"larger\" weight=\"bold\">བརྗོད་དོན་ཅིག་གཞི་བཙུགས་འབད་</span>"
-
-#: ../capplets/theme-switcher/theme-install.glade.h:3
-msgid "Theme Installation"
-msgstr "བརྗོད་དོན་གཞི་བཙུགས"
-
-#: ../capplets/theme-switcher/theme-install.glade.h:4
-msgid "_Install"
-msgstr "གཞི་བཙུགས་འབད།(_I)"
-
-#: ../capplets/theme-switcher/theme-install.glade.h:5
-msgid "_Location:"
-msgstr "གནས་ཁོངས་:(_L)"
-
 #: ../capplets/theme-switcher/theme-properties.glade.h:1
-msgid "<span size=\"larger\" weight=\"bold\">Save Theme to Disk</span>"
-msgstr "<span size=\"larger\" weight=\"bold\">བརྗོད་དོན་ཌིཀསི་ སྲུང་བཞག་འབད་</span>"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:2
 msgid "Apply _Background"
 msgstr "རྒྱབ་གཞི་འཇུག་སྤྱོད་འབད།(_B)"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:3
+#: ../capplets/theme-switcher/theme-properties.glade.h:2
 msgid "Apply _Font"
 msgstr "ཡིག་གཟུགས་ འཇུག་སྤྱོད་འབད།(_F)"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:4
+#: ../capplets/theme-switcher/theme-properties.glade.h:3
 msgid "Controls"
 msgstr "ཚད་འཛིན་ཚུ།"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:5
+#: ../capplets/theme-switcher/theme-properties.glade.h:4
 msgid "Icons"
 msgstr "ངོས་དཔར་ཚུ།"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:6
-msgid "New themes can also be installed by dragging them into the window."
-msgstr "བརྗོད་དོན་གསརཔ་ཚུ་ སྒོ་སྒྲིག་ནང་འདྲུད་པའི་ཐོག་ལས་ གཞི་བཙུགས་འབད་ཚུགས།"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:7
+#: ../capplets/theme-switcher/theme-properties.glade.h:5
 msgid "Save Theme"
 msgstr "བརྗོད་དོན་སྲུངས།"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:8
+#: ../capplets/theme-switcher/theme-properties.glade.h:6
+msgid "Save _Background Image"
+msgstr "རྒྱབ་གཞི་གཟུགས་བརྙན་སྲུངས།(_B)"
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:7
 msgid "Select theme for the desktop"
 msgstr "ཌེཀསི་ཊོཔ་གི་དོན་ལུ་ བརྗོད་དོན་སེལ་འཐུ་འབད།"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:9
-msgid "Short _description:"
-msgstr "འགྲེལ་བཤད་ཐུང་ཀུ:(_d)"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:10
+#: ../capplets/theme-switcher/theme-properties.glade.h:8
 msgid "Theme Details"
 msgstr "བརྗོད་དོན་གྱི་རྒྱས་བཤད།"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:11
+#: ../capplets/theme-switcher/theme-properties.glade.h:9
 msgid "Theme Preferences"
 msgstr "བརྗོད་དོན་གྱི་དགའ་གདམ་ཚུ།"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:12
+#: ../capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Theme _Details"
 msgstr "བརྗོད་དོན་གྱི་རྒྱས་བཤད་ཚུ།(_D)"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:13
+#: ../capplets/theme-switcher/theme-properties.glade.h:11
 msgid "This theme does not suggest any particular font or background."
 msgstr "བརྗོད་དོན་འདི་གིས་ དམིགས་བསལ་གྱི་ཡིག་གཟུགས་དང་རྒྱབ་གཞིའི་ བསམ་འཆར་ག་ནི་ཡང་ མི་བཀོད་པས།"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:14
+#: ../capplets/theme-switcher/theme-properties.glade.h:12
 msgid "This theme suggests a background:"
 msgstr "བརྗོད་དོན་འདི་གིས་ རྒྱབ་གཞི་ཅིག་གི་ བསམ་འཆར་་བཀོདཔ་མས།"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:15
+#: ../capplets/theme-switcher/theme-properties.glade.h:13
 msgid "This theme suggests a font and a background:"
 msgstr "བརྗོད་དོན་འདི་གིས་ ཡིག་གཟུགས་ཅིག་དང་ རྒྱབ་གཞི་ཅིག་གི་ བསམ་འཆར་བཀོདཔ་མས།"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:16
+#: ../capplets/theme-switcher/theme-properties.glade.h:14
 msgid "This theme suggests a font:"
 msgstr "བརྗོད་དོན་འདི་གིས་ ཡིག་གཟུགས་ཅིག་གི་ བསམ་འཆར་བཀོདཔ་མས།"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:17
+#: ../capplets/theme-switcher/theme-properties.glade.h:15
 msgid "Window Border"
 msgstr "སྒོ་སྒྲིག་གི་མཐའ་མཚམས།"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:18
+#: ../capplets/theme-switcher/theme-properties.glade.h:16
+msgid "_Description:"
+msgstr "འགྲེལ་བཤད་:(_D)"
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:17
 msgid "_Install Theme..."
 msgstr "བརྗོད་དོན་གཞི་བཙུགས་འབད་...(_I)"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:20
+#: ../capplets/theme-switcher/theme-properties.glade.h:18
+msgid "_Install..."
+msgstr "གཞི་བཙུགས་འབད་...(_I)"
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:19
+msgid "_Name:"
+msgstr "མིང་:(_N)"
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:21
 msgid "_Revert"
 msgstr "རྒྱབ་ལོག་འབད།(_R)"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:21
+#: ../capplets/theme-switcher/theme-properties.glade.h:22
 msgid "_Save Theme..."
 msgstr "བརྗོད་དོན་སྲུངས་...(_S)"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:22
-msgid "_Theme name:"
-msgstr "བརྗོད་དོན་གྱི་མིང་:(_T)"
 
 #: ../capplets/theme-switcher/theme-properties.glade.h:23
 msgid "theme selection tree"
@@ -2429,18 +2520,6 @@ msgstr "ཇི་ནོམ་ཚད་འཛིན་ལྟེ་བ།"
 msgid "The GNOME configuration tool"
 msgstr "ཇི་ནོམ་རིམ་སྒྲིག་ལག་ཆས།"
 
-#: ../gnome-settings-daemon/actions/acme-fb-level.c:149
-msgid "No '/dev/pmu' device found"
-msgstr "'/dev/pmu' ཐབས་འཕྲུལ་མིན་འདུག"
-
-#: ../gnome-settings-daemon/actions/acme-fb-level.c:156
-msgid "Not a powerbook"
-msgstr "པ་ཝར་བུཀ་ཅིག་མེན་པས།"
-
-#: ../gnome-settings-daemon/actions/acme-fb-level.c:173
-msgid "Wrong permission for '/dev/pmu' device"
-msgstr "'/dev/pmu' ཐབས་འཕྲུལ་གྱི་གི་དོན་ལུ་ གནང་བ་ཕྱི་འགྱུར།"
-
 #: ../gnome-settings-daemon/actions/acme.glade.h:1
 msgid "Volume"
 msgstr "སྐད་ཤུགས"
@@ -2562,7 +2641,7 @@ msgstr ""
 "ལྡེ་མིག་(%s)ལུ་འབྲེལ་མཐུད་ཡོད་མི་\n"
 "(%s)གཡོག་བཀོལ་ནིའི་ འབད་རྩོལ་བསྐྱེདཔ་ད་ འཛོལ་བ་ཅིག་བྱུང་ནུག"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:103
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:105
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2593,7 +2672,7 @@ msgstr ""
 "-<b>%s</b>གི་གྲུབ་འབྲས།\n"
 "-<b>%s</b>གི་གྲུབ་འབྲས།"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:117
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:119
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2603,23 +2682,35 @@ msgstr ""
 "མགུ་ཐོམས་པའི་ ཨེགསི་ཀེ་བི་ རིམ་སྒྲིག་དང་གཅིག་ཁར་ ཡོངས་གྲགས་ཡོད་པའི་དཀའ་ངལ་ཚུ་ཡོད།\n"
 "རིམ་སྒྲིག་འཇམ་སམ་ཅིག་ ལག་ལེན་འཐབ་ ཡང་ཅིན་ ཨེགསི་ཕིརི་མཉེན་ཆས་ཀྱི་ ཐོན་རིམ་གསརཔ་ཅིག་ ལེན་ཐབས་འབད་།"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:223
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:244
 msgid "Do _not show this warning again"
 msgstr "ཉེན་བརྡ་འདི་ལོག་སྟེ་མ་སྟོན།(_n)"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:234
-msgid "The X system keyboard settings differ from your current GNOME keyboard settings.  Which set would you like to use?"
-msgstr "ཨེགསི་རིམ་ལུགས་ཀྱི་ ལྡེ་སྒྲོམ་གཞི་སྒྲིག་ཚུ་ ད་ལྟོ་ཁྱོད་ཀྱི་ ཇི་ནོམ་ལྡེ་སྒྲོམ་གྱི་ གཞི་སྒྲིག་ཚུ་དང་མི་འདྲ་བས། གཞི་སྒྲིག་ག་དེ་ ལག་ལེན་འཐབ་ནི་ཨིན་ན?"
+#. !! temporary one
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:253
+#, c-format
+msgid ""
+"<b>The X system keyboard settings differ from your current GNOME keyboard settings.</b>\n"
+"\n"
+"Expected was %s, but the the following settings were found: %s.\n"
+"\n"
+"Which set would you like to use?"
+msgstr ""
+"<b>ཨེགསི་རིམ་ལུགས་ཀྱི་ ལྡེ་སྒྲོམ་སྒྲིག་སྟངས་ཚུ་ ད་ལྟོ་ཁྱོད་ཀྱི་ ཇི་ནོམ་ལྡེ་སྒྲོམ་གྱི་ སྒྲིག་སྟངས་ཚུ་དང་མི་འདྲ་བས། </b>\n"
+"\n"
+"རེ་བ་བསྐྱེད་མི་དེ་%sཨིན་རུང་ འོག་གི་སྒྲིག་སྟངས་%sཚུ་འདུག\n"
+"\n"
+"ཆ་ཚན་ག་དེ་ ལག་ལེན་འཐབ་ནི་སྨོ?"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:247
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:275
 msgid "Use X settings"
 msgstr "ཨེགསི་གཞི་སྒྲིག་ཚུ་ ལག་ལེན་འཐབ།"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:249
-msgid "Use GNOME settings"
-msgstr "ཇི་ནོམ་གཞི་སྒྲིག་ཚུ་ ལག་ལེན་འཐབ།"
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:277
+msgid "Keep GNOME settings"
+msgstr "ཇི་ནོམ་སྒྲིག་སྟངས་ཚུ་བཞག"
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:129
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:118
 #, c-format
 msgid ""
 "Couldn't execute command: %s\n"
@@ -2628,7 +2719,7 @@ msgstr ""
 "བརྡ་བཀོད་ %s ལག་ལེན་འཐབ་མ་ཚུགས། \n"
 " "
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:145
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:134
 msgid ""
 "Couldn't put the machine to sleep.\n"
 "Verify that the machine is correctly configured."
@@ -2636,7 +2727,7 @@ msgstr ""
 "གློག་འཕྲུལ་དེ་ གཉིད་ནང་བཙུགས་མ་ཚུགས།\n"
 "གློག་འཕྲུལ་དེ་ངེས་བདེན་སྦེ་ རིམ་སྒྲིག་འབད་མ་འབད་ བདེན་སྦྱོར་འབད།"
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:180
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:168
 msgid ""
 "Couldn't load the Glade file.\n"
 "Make sure that this daemon is properly installed."
@@ -2738,10 +2829,37 @@ msgstr "གསལ་གཞི།"
 msgid "Screen on which BGApplier is to draw"
 msgstr "བི་ཇི་འཇུག་སྤྱོད་པ་ འབྲི་སའི་གསལ་གཞི།"
 
-#: ../libgswitchit/gswitchit_config.c:1036
+#: ../libgswitchit/gswitchit_config.c:1074
 #, c-format
 msgid "There was an error loading an image: %s"
 msgstr "གཟུགས་བརྙན་་%sམངོན་གསལ་འབད་ནི་ལུ་ འཛོལ་བ་ཅིག་བྱུང་ནུག"
+
+#: ../libgswitchit/gswitchit_config.c:1399
+#, c-format
+msgid "layout \"%s\""
+msgid_plural "layouts \"%s\""
+msgstr[0] "སྒྲིག་བཀོད་ \"%s\"།"
+msgstr[1] "སྒྲིག་བཀོད་ \"%s\"།"
+
+#: ../libgswitchit/gswitchit_config.c:1416
+#, c-format
+msgid "option \"%s\""
+msgid_plural "options \"%s\""
+msgstr[0] "གདམ་ཁ་\"%s\"།"
+msgstr[1] "གདམ་ཁ་\"%s\"།"
+
+#: ../libgswitchit/gswitchit_config.c:1424
+#, c-format
+msgid "model \"%s\", %s and %s"
+msgstr "དཔེ་ \"%s\"དང་ %s ། %s།"
+
+#: ../libgswitchit/gswitchit_config.c:1425
+msgid "no layout"
+msgstr "སྒྲིག་བཀོད་མིན་འདུག"
+
+#: ../libgswitchit/gswitchit_config.c:1426
+msgid "no options"
+msgstr "གདམ་ཁ་མིན་འདུག"
 
 #: ../libsounds/sound-view.c:43
 msgid "Login"
@@ -2822,162 +2940,146 @@ msgid "Sync text/plain and text/* handlers"
 msgstr "ཚིག་ཡིག་/ཡིག་རྐྱང་དང་ ཚིག་ཡིག་/* ལེགས་སྐྱོང་འཐབ་མི་ཚུ་ མིང་དཔྱད་འབད།"
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:1
-msgid "Brightness down"
-msgstr "དཀར་མདངས་མར་ཕབ།"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:2
-msgid "Brightness down's shortcut."
-msgstr "དཀར་མདངས་མར་ཕབ་ཀྱི་མགྱོགས་ཐབས།"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:3
-msgid "Brightness up"
-msgstr "དཀར་མདངས་ཡར་སེང་།"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:4
-msgid "Brightness up's shortcut."
-msgstr "དཀར་མདངས་ཡར་སེང་གི་མགྱོགས་ཐབས།"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:5
 msgid "E-mail"
 msgstr "གློག་འཕྲིན།"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:6
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:2
 msgid "E-mail's shortcut."
 msgstr "གློག་འཕྲིན་གྱི་མགྱོགས་ཐབས།"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:7
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:3
 msgid "Eject"
 msgstr "ཕྱིར་བཏོན།"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:8
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:4
 msgid "Eject's shortcut."
 msgstr "ཕྱིར་བཏོན་གྱི་མགྱོགས་ཐབས།"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:9
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:5
 msgid "Home folder"
 msgstr "ཁྱིམ་གྱི་ལེ་སྣོད།"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:10
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:6
 msgid "Home folder's shortcut."
 msgstr "ཁྱིམ་གྱི་ལེ་སྣོད་ཀྱི་མགྱོགས་ཐབས།"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:7
 msgid "Launch help browser"
 msgstr "བརའུ་ཟར་གྲོགས་རམ་ གསར་བཙུགས་འབད།"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:12
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:8
 msgid "Launch help browser's shortcut."
 msgstr "བརའུ་ཟར་གྲོགས་རམ་ གསར་བཙུགས་ཀྱི་ མགྱོགས་ཐབས།"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:13
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:9
 msgid "Launch web browser"
 msgstr "ཝེབ་བརའུ་ཟར་གྲོགས་རམ་ གསར་བཙུགས་འབད"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:14
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:10
 msgid "Launch web browser's shortcut."
 msgstr "ཝེབ་བརའུ་ཟར་གྲོགས་རམ་ གསར་བཙུགས་ཀྱི་ མགྱོགས་ཐབས།"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
 msgid "Lock screen"
 msgstr "གསལ་གཞི་ལྡེ་མིག་རྐྱབས།"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:12
 msgid "Lock screen's shortcut."
 msgstr "གསལ་གཞི་ལྡེ་མིག་བརྐྱབ་ནིའི་མགྱོགས་ཐབས།"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:13
 msgid "Log out"
 msgstr "ཕྱིར་བསྐྱོད་འབད།"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:14
 msgid "Log out's shortcut."
 msgstr "ཕྱིར་བསྐྱོད་མགྱོགས་ཐབས།"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
 msgid "Next track key's shortcut."
 msgstr "ཤུལ་མའི་གླུ་གཞས་ལྡེ་མིག་གི་མགྱོགས་ཐབས།"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
 msgid "Pause"
 msgstr "ཐེམ།"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
 msgid "Pause key's shortcut."
 msgstr "ཐེམ་ནིའི་ལྡེ་མིག་གི་མགྱོགས་ཐབས།"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
 msgid "Play (or play/pause)"
 msgstr "གཏང་། (ཡང་ན་ གཏང་/ཐེམ)"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
 msgid "Play (or play/pause) key's shortcut."
 msgstr "གཏང་། (ཡང་ན་ ་གཏང་/ཐེམ) ལྡེ་མིག་གི་མགྱོགས་ཐབས།"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
 msgid "Previous track key's shortcut."
 msgstr "ཧེ་མའི་གླུ་གཞས་ལྡེ་མིག་གི་མགྱོགས་ཐབས།"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
 msgid "Search"
 msgstr "འཚོལ་ཞིབ།"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
 msgid "Search's shortcut."
 msgstr "འཚོལ་ཞིབ་ཀྱི་མགྱོགས་ཐབས།"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
 msgid "Skip to next track"
 msgstr "གླུ་རིམ་གཞན་མི་ལུ་གོམ་འགྱོ།"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
 msgid "Skip to previous track"
 msgstr "ཧེ་མའི་གླུ་རིམ་ལུ་གོམ་འགྱོ།"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
 msgid "Sleep"
 msgstr "ཉལ།"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
 msgid "Sleep's shortcut."
 msgstr "ཉལ་ནིའི་མགྱོགས་ཐབས།"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
 msgid "Stop playback key"
 msgstr "ལོག་གཏང་ནི་ མཚམས་འཇོག་གི་ལྡེ་མི"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
 msgid "Stop playback key's shortcut."
 msgstr "ལོག་གཏང་ནི་མཚམས་འཇོག་གི་ ལྡེ་མིག་གི་མགྱོགས་ཐབས།"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
 msgid "Volume down"
 msgstr "སྐད་ཤུགས་མར་ཕབ།"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
 msgid "Volume down's shortcut."
 msgstr "སྐད་ཤུགས་མར་ཕབ་ཀྱི་མགྱོགས་ཐབས།"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
 msgid "Volume mute"
 msgstr "སྐད་མེད།"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
 msgid "Volume mute's shortcut"
 msgstr "སྐད་མེད་ཀྱི་མགྱོགས་ཐབས།"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:37
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
 msgid "Volume step"
 msgstr "སྐད་ཤུགས་ཀྱི་རིམ་པ།"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:38
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
 msgid "Volume step as percentage of volume."
 msgstr "སྐད་ཤུགས་རིམ་པ་ སྐད་ཤུགས་བརྒྱ་ཆའི་ནང་།"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:39
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
 msgid "Volume up"
 msgstr "སྐད་ཤུགས་ཡར་སེང་།"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
 msgid "Volume up's shortcut."
 msgstr "སྐད་ཤུགས་ཡར་སེང་གི་མགྱོགས་ཐབས།"
 
@@ -3050,18 +3152,34 @@ msgid "Suppress the \"X sysconfig changed\" warning message"
 msgstr "\"X sysconfig changed\" གི་ ཉེན་བརྡའི་འཕྲིན་དོན་དེ་ མར་མནོན་འབད།"
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:14
+msgid "The Keyboard Preview, X offset"
+msgstr "ལྡེ་སྒྲོམ་སྔོན་ལྟ། ཨེགསི་པར་ལེན།"
+
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:15
+msgid "The Keyboard Preview, Y offset"
+msgstr "ལྡེ་སྒྲོམ་སྔོན་ལྟ། ཝའི་པར་ལེན།"
+
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:16
+msgid "The Keyboard Preview, height"
+msgstr "ལྡེ་སྒྲོམ་སྔོན་ལྟ། མཐོ་ཚད།"
+
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:17
+msgid "The Keyboard Preview, width"
+msgstr "ལྡེ་སྒྲོམ་སྔོན་ལྟ། རྒྱ་ཚད།"
+
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:18
 msgid "Very soon, keyboard settings in gconf will be overridden (from the system configuration) This key has been deprecated since GNOME 2.12, please unset the model, layouts and options keys to get the default system configuration."
 msgstr "མགྱོགས་པ་རང་ ཇི་ཀཱོནཕི་ནང་གི་ ལྡེ་སྒྲོམ་གཞི་སྒྲིག་དེ་ (རིམ་ལུགས་རིམ་སྒྲིག་ནང་ལས་) ཟུར་བཞག་འབད་ནི་ཨིན། ཇི་ནོམ་༢.༡༢ ལས་ཚུར་ ལྡེ་མིག་འདི་ ནུས་མེད་བཟོ་ཡོཔ་ལས་ སྔོན་སྒྲིག་རིམ་ལུགས་རིམ་སྒྲིག་ལེན་ནིའི་དོན་ལུ་ ཐབས་ལམ་དང་ སྒྲིག་བཀོད་ གདམ་ཁའི་ལྡེ་མིག་ཚུ་ སྒྲིག་བཤོལ་འབད་གནང་།"
 
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:15
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:19
 msgid "keyboard layout"
 msgstr "ལྡེ་སྒྲོམ་སྒྲིག་བཀོད།"
 
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:16
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:20
 msgid "keyboard model"
 msgstr "ལྡེ་སྒྲོམ་གྱི་དཔེ།"
 
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:17
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:21
 msgid "modmap file list"
 msgstr "མོཌི་མེཔ་ ཡིག་སྣོད་ཐོ་ཡིག"
 
@@ -3330,6 +3448,42 @@ msgstr "གཞི་བཙུགས་འབད་དེ་ཡོད་པའི
 msgid "Whether to thumbnail themes"
 msgstr "བརྗོད་དོན་ཚུ་ལུ་ མཐེབ་གཟེར་བརྡབ་ནི་ཨིན་ན་མེན།"
 
+#~ msgid "Old password is incorrect, please retype it"
+#~ msgstr "ཆོག་ཡིག་རྙིངམ་དེ་ བདེན་པ་མེན་པས། ལོག་ཡིག་དཔར་རྐྱབས།"
+#~ msgid "Unexpected error has occurred"
+#~ msgstr "རེ་བ་མེད་པའི་འཚོལ་བ་བྱུང་ནུག"
+#~ msgid "Please type the passwords."
+#~ msgstr "ཆོག་ཡིག་ཚུ་ ཡིག་དཔར་རྐྱབས།"
+#~ msgid "Old pa_ssword:"
+#~ msgstr "ཆོག་ཡིག་རྙིངམ་:(_s)"
+#~ msgid "Could not display help"
+#~ msgstr "གྲོགས་གྲམ་བཀྲམ་སྟོན་འབད་མ་ཚུགས།"
+#~ msgid "<span size=\"larger\" weight=\"bold\">Install a Theme</span>"
+#~ msgstr "<span size=\"larger\" weight=\"bold\">བརྗོད་དོན་ཅིག་གཞི་བཙུགས་འབད་</span>"
+#~ msgid "Theme Installation"
+#~ msgstr "བརྗོད་དོན་གཞི་བཙུགས"
+#~ msgid "_Location:"
+#~ msgstr "གནས་ཁོངས་:(_L)"
+#~ msgid "New themes can also be installed by dragging them into the window."
+#~ msgstr "བརྗོད་དོན་གསརཔ་ཚུ་ སྒོ་སྒྲིག་ནང་འདྲུད་པའི་ཐོག་ལས་ གཞི་བཙུགས་འབད་ཚུགས།"
+#~ msgid "Short _description:"
+#~ msgstr "འགྲེལ་བཤད་ཐུང་ཀུ:(_d)"
+#~ msgid "_Theme name:"
+#~ msgstr "བརྗོད་དོན་གྱི་མིང་:(_T)"
+#~ msgid "No '/dev/pmu' device found"
+#~ msgstr "'/dev/pmu' ཐབས་འཕྲུལ་མིན་འདུག"
+#~ msgid "Not a powerbook"
+#~ msgstr "པ་ཝར་བུཀ་ཅིག་མེན་པས།"
+#~ msgid "Wrong permission for '/dev/pmu' device"
+#~ msgstr "'/dev/pmu' ཐབས་འཕྲུལ་གྱི་གི་དོན་ལུ་ གནང་བ་ཕྱི་འགྱུར།"
+#~ msgid "Brightness down"
+#~ msgstr "དཀར་མདངས་མར་ཕབ།"
+#~ msgid "Brightness down's shortcut."
+#~ msgstr "དཀར་མདངས་མར་ཕབ་ཀྱི་མགྱོགས་ཐབས།"
+#~ msgid "Brightness up"
+#~ msgstr "དཀར་མདངས་ཡར་སེང་།"
+#~ msgid "Brightness up's shortcut."
+#~ msgstr "དཀར་མདངས་ཡར་སེང་གི་མགྱོགས་ཐབས།"
 #~ msgid "Epiphany"
 #~ msgstr "ཨི་པི་ཕ་ནི།"
 #~ msgid "Please specify a name and a command for this editor."
@@ -3378,8 +3532,6 @@ msgstr "བརྗོད་དོན་ཚུ་ལུ་ མཐེབ་གཟ�
 #~ msgstr "སྒོ་སྒྲིག་འཛིན་སྐྱོང་པ།"
 #~ msgid "_Command:"
 #~ msgstr "བརྡ་བཀོད་:(_C)"
-#~ msgid "_Name:"
-#~ msgstr "མིང་:(_N)"
 #~ msgid "_Properties..."
 #~ msgstr "རྒྱུ་དངོས་...(_P)"
 #~ msgid "_Select:"
@@ -3396,8 +3548,6 @@ msgstr "བརྗོད་དོན་ཚུ་ལུ་ མཐེབ་གཟ�
 #~ msgstr "སྒྲ་སྐད་སར་བར་འགོ་བཙུགས་ ལྕོགས་ཅན་བཟོ།(_n)"
 #~ msgid "General"
 #~ msgstr "ཡོངས་ཁྱབ་།"
-#~ msgid "Sound Events"
-#~ msgstr "སྒྲ་སྐད་ཀྱི་བྱུང་ལས།"
 #~ msgid "_Sound an audible bell"
 #~ msgstr "རྣར་ཉན་བཏུབ་པའི་ དྲིལ་སྐད་ཅིག་སྟོན།(_S)"
 #~ msgid "_Visual feedback:"
@@ -3412,8 +3562,6 @@ msgstr "བརྗོད་དོན་ཚུ་ལུ་ མཐེབ་གཟ�
 #~ msgstr "སྒྲ་སྐད་ཡིག་སྣོད།"
 #~ msgid "_Sounds:"
 #~ msgstr "སྒྲ་སྐད་ཚུ་:(_S)"
-#~ msgid "Sound _file:"
-#~ msgstr "སྒྲ་སྐད་ཡིག་སྣོད་:(_f)"
 #~ msgid "_Play"
 #~ msgstr "གཏང་།(_P)"
 #~ msgid "The typing monitor is already running."
