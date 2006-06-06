@@ -1,3 +1,4 @@
+# translation of cs.po to
 # Czech translation of gnome-control-center.
 # Copyright (C) 1999,2003, 2006 Free Software Foundation, Inc.
 # Copyright (C) 2003, 2004, 2005, 2006 Miloslav Trmac <mitr@volny.cz>
@@ -9,19 +10,20 @@
 # Jakub Friedl <jfriedl@suse.cz>, 2006.
 # Petr Tomeš <ptomes@gmail.com>, 2006.
 # Lukas Novotny <lukasnov@cvs.gnome.org>, 2006.
-# 
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-control-center VERSION\n"
+"Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-14 13:19+0200\n"
-"PO-Revision-Date: 2006-04-23 22:25+0200\n"
-"Last-Translator: Lukas Novotny <lukasnov@cvs.gnome.org>\n"
-"Language-Team: Czech <cs@li.org>\n"
+"POT-Creation-Date: 2006-06-06 13:32+0200\n"
+"PO-Revision-Date: 2006-06-06 13:56+0200\n"
+"Last-Translator: Jakub Friedl <jfriedl@suse.cz>\n"
+"Language-Team:  <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms:  nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;"
+"Plural-Forms:  nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: KBabel 1.10.2\n"
 
 #: ../capplets/about-me/eel-alert-dialog.c:114
 msgid "Image/label border"
@@ -90,60 +92,109 @@ msgstr "Neznámé přihlašovací ID, databáze uživatelů je možná poškozen
 msgid "About %s"
 msgstr "O %s"
 
-#: ../capplets/about-me/gnome-about-me-password.c:116
-#: ../capplets/about-me/gnome-about-me-password.c:707
-msgid "Old password is incorrect, please retype it"
-msgstr "Staré heslo není správné, napište je prosím znovu"
+#: ../capplets/about-me/gnome-about-me-password.c:173
+msgid "Child exited unexpectedly"
+msgstr "Dítě neočekávaně ukončeno"
 
-#: ../capplets/about-me/gnome-about-me-password.c:127
-msgid "System error has occurred"
-msgstr "Došlo k chybě systému"
+#: ../capplets/about-me/gnome-about-me-password.c:296
+#, c-format
+msgid "Could not shutdown backend_stdin IO channel: %s"
+msgstr "Nelze ukončit IO kanál backend_stdin: %s"
 
-#: ../capplets/about-me/gnome-about-me-password.c:128
-msgid "Could not run /usr/bin/passwd"
-msgstr "Nemohu spustit /usr/bin/passwd"
+#: ../capplets/about-me/gnome-about-me-password.c:309
+#, c-format
+msgid "Could not shutdown backend_stdout IO channel: %s"
+msgstr "Nelze ukončit IO kanál backend_stdout: %s"
 
-#: ../capplets/about-me/gnome-about-me-password.c:129
+#: ../capplets/about-me/gnome-about-me-password.c:450
+msgid "Authenticated!"
+msgstr "Autentizováno!"
+
+#. This is a re-auth, and it failed.
+#. * The password must have been changed in the meantime!
+#. * Ask the user to re-authenticate
+#.
+#. Update status message and auth state
+#. Authentication failure
+#: ../capplets/about-me/gnome-about-me-password.c:467
+#: ../capplets/about-me/gnome-about-me-password.c:540
+msgid ""
+"Your password has been changed since you initially authenticated! Please re-"
+"authenticate."
+msgstr ""
+"Vaše heslo se od vaší autentizace změnilo! Prosím, autentizujte "
+"se znovu."
+
+#: ../capplets/about-me/gnome-about-me-password.c:469
+msgid "That password was incorrect."
+msgstr "Heslo bylo nesprávné."
+
+#: ../capplets/about-me/gnome-about-me-password.c:515
+msgid "Your password has been changed."
+msgstr "Vaše heslo bylo změněno."
+
+#. What does this indicate?
+#. * "Authentication information cannot be recovered?" from libpam?
+#: ../capplets/about-me/gnome-about-me-password.c:525
+#, c-format
+msgid "System error: %s."
+msgstr "Systémová chyba: %s."
+
+#: ../capplets/about-me/gnome-about-me-password.c:527
+msgid "The password is too short."
+msgstr "Heslo je příliš krátké."
+
+#: ../capplets/about-me/gnome-about-me-password.c:529
+#: ../capplets/about-me/gnome-about-me-password.c:531
+msgid "The password is too simple."
+msgstr "Heslo je příliš jednoduché."
+
+#: ../capplets/about-me/gnome-about-me-password.c:533
+msgid "The old and new passwords are too similar."
+msgstr "Staré a nové heslo jsou si příliš podobné."
+
+#: ../capplets/about-me/gnome-about-me-password.c:535
+msgid "The new password must contain numeric or special character(s)."
+msgstr "Nové heslo musí obsahovat číslice nebo speciální znak(y)."
+
+#: ../capplets/about-me/gnome-about-me-password.c:537
+msgid "The old and new passwords are the same."
+msgstr "Staré a nové heslo je stejné."
+
+#: ../capplets/about-me/gnome-about-me-password.c:788
+#, c-format
+msgid "Unable to launch /usr/bin/passwd: %s"
+msgstr "Nelze spustit /usr/bin/passwd: %s"
+
+#: ../capplets/about-me/gnome-about-me-password.c:790
 msgid "Unable to launch backend"
 msgstr "Nemohu spustit backend"
 
-#: ../capplets/about-me/gnome-about-me-password.c:131
-#: ../capplets/about-me/gnome-about-me-password.c:132
-msgid "Unexpected error has occurred"
-msgstr "Došlo k neočekávané chybě"
+#: ../capplets/about-me/gnome-about-me-password.c:791
+msgid "A system error has occurred"
+msgstr "Došlo k systémové chybě"
 
-#: ../capplets/about-me/gnome-about-me-password.c:331
-msgid "Password is too short"
-msgstr "Heslo je příliš krátké"
+#. Update status message
+#: ../capplets/about-me/gnome-about-me-password.c:811
+msgid "Checking password..."
+msgstr "Kontrola hesla..."
 
-#: ../capplets/about-me/gnome-about-me-password.c:334
-#: ../capplets/about-me/gnome-about-me-password.c:337
-msgid "Password is too simple"
-msgstr "Heslo je příliš jednoduché"
+#: ../capplets/about-me/gnome-about-me-password.c:898
+msgid "Click <b>Change password</b> to change your password."
+msgstr "Pro změnu hesla klikněte na <b>Změnit heslo</b>."
 
-#: ../capplets/about-me/gnome-about-me-password.c:340
-msgid "Old and new passwords are too similar"
-msgstr "Staré a nové heslo jsou si příliš podobné"
+#: ../capplets/about-me/gnome-about-me-password.c:901
+msgid "Please type your password in the <b>New password</b> field."
+msgstr "Zadejte prosím heslo do pole <b>Nové heslo</b>."
 
-#: ../capplets/about-me/gnome-about-me-password.c:343
-msgid "Must contain numeric or special character(s)"
-msgstr "Musí obsahovat číslice nebo speciální znaky"
+#: ../capplets/about-me/gnome-about-me-password.c:904
+#: ../capplets/about-me/gnome-about-me.glade.h:34
+msgid "Please type your password again in the <b>Retype new password</b> field."
+msgstr "Prosím, napište své heslo znovu do pole <b>Napište nové heslo znovu</b>."
 
-#: ../capplets/about-me/gnome-about-me-password.c:348
-msgid "Old and new password are the same"
-msgstr "Staré a nové heslo je stejné"
-
-#: ../capplets/about-me/gnome-about-me-password.c:634
-msgid "Please type the passwords."
-msgstr "Zadejte prosím hesla."
-
-#: ../capplets/about-me/gnome-about-me-password.c:642
-msgid "Please type the password again, it is wrong."
-msgstr "Zadejte prosím heslo znovu, bylo špatně."
-
-#: ../capplets/about-me/gnome-about-me-password.c:645
-msgid "Click on Change Password to change the password."
-msgstr "Změňte heslo kliknutím na Změnit heslo."
+#: ../capplets/about-me/gnome-about-me-password.c:907
+msgid "The two passwords are not equal."
+msgstr "Hesla nejsou shodná."
 
 #: ../capplets/about-me/gnome-about-me.glade.h:1
 #: ../vfs-methods/themus/apply-font.glade.h:1
@@ -154,6 +205,7 @@ msgstr " "
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:1
+#: ../capplets/sound/sound-properties.glade.h:1
 #: ../capplets/ui-properties/gnome-ui-properties.glade.h:1
 msgid "    "
 msgstr "    "
@@ -175,20 +227,20 @@ msgid "<b>Job</b>"
 msgstr "<b>Zaměstnání</b>"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:7
-msgid "<b>Please type the passwords.</b>"
-msgstr "<b>Zadejte prosím hesla.</b>"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:8
 msgid "<b>Telephone</b>"
 msgstr "<b>Telefon</b>"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:9
+#: ../capplets/about-me/gnome-about-me.glade.h:8
 msgid "<b>Web</b>"
 msgstr "<b>WWW</b>"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:10
+#: ../capplets/about-me/gnome-about-me.glade.h:9
 msgid "<b>Work</b>"
 msgstr "<b>Práce</b>"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:10
+msgid "<span size=\"larger\" weight=\"bold\">Change your password</span>"
+msgstr "<span size=\"larger\" weight=\"bold\">Změňte své heslo</span>"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:11
 msgid "A_IM/iChat:"
@@ -223,142 +275,162 @@ msgid "Change Passwo_rd..."
 msgstr "Změnit _heslo..."
 
 #: ../capplets/about-me/gnome-about-me.glade.h:20
-msgid "Change Password"
-msgstr "Změnit heslo"
+msgid "Change pa_ssword"
+msgstr "Změnit he_slo"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:21
+msgid "Change password"
+msgstr "Změnit heslo"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:22
 msgid "Ci_ty:"
 msgstr "Měs_to:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:22
+#: ../capplets/about-me/gnome-about-me.glade.h:23
 msgid "Co_untry:"
 msgstr "_Země:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:23
+#: ../capplets/about-me/gnome-about-me.glade.h:24
 msgid "Contact"
 msgstr "Kontakt"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:24
+#: ../capplets/about-me/gnome-about-me.glade.h:25
 msgid "Cou_ntry:"
 msgstr "Z_emě:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:25
+#: ../capplets/about-me/gnome-about-me.glade.h:26
+msgid "Current _password:"
+msgstr "Aktuální _heslo:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:27
 msgid "Full Name"
 msgstr "Celé jméno"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:26
+#: ../capplets/about-me/gnome-about-me.glade.h:28
 msgid "Hom_e:"
 msgstr "_Doma:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:27
+#: ../capplets/about-me/gnome-about-me.glade.h:29
 msgid "IC_Q:"
 msgstr "IC_Q:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:28
+#: ../capplets/about-me/gnome-about-me.glade.h:30
 msgid "M_SN:"
 msgstr "M_SN:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:29
-msgid "Old pa_ssword:"
-msgstr "_Staré heslo:"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:30
+#: ../capplets/about-me/gnome-about-me.glade.h:31
 msgid "P.O. _box:"
 msgstr "P.O. _box:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:31
+#: ../capplets/about-me/gnome-about-me.glade.h:32
 msgid "P._O. box:"
 msgstr "P._O. box:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:32
+#: ../capplets/about-me/gnome-about-me.glade.h:33
 msgid "Personal Info"
 msgstr "Osobní informace"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:33
+#: ../capplets/about-me/gnome-about-me.glade.h:35
 msgid "State/Pro_vince:"
 msgstr "_Stát/provincie:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:34
+#: ../capplets/about-me/gnome-about-me.glade.h:36
+msgid ""
+"To change your password, enter your current password in the field below and "
+"click <b>Authenticate</b>.\n"
+"After you have authenticated, enter your new password, retype it for "
+"verification and click <b>Change password</b>."
+msgstr ""
+"Pro změnu hesla, zadejte své aktuální heslo do pole níže a klikněte "
+"na <b>Autentizovat</b>.\n"
+"Po autentizaci zadejte nové heslo, napište jej znovu pro ověření "
+"a klikněte na <b>Změnit heslo</b>."
+
+#: ../capplets/about-me/gnome-about-me.glade.h:38
 msgid "User name:"
 msgstr "Jméno uživatele:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:35
+#: ../capplets/about-me/gnome-about-me.glade.h:39
 msgid "Web _log:"
 msgstr "_Blog:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:36
+#: ../capplets/about-me/gnome-about-me.glade.h:40
 msgid "Wor_k:"
 msgstr "_Práce:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:37
+#: ../capplets/about-me/gnome-about-me.glade.h:41
 msgid "Work _fax:"
 msgstr "_Fax v práci:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:38
+#: ../capplets/about-me/gnome-about-me.glade.h:42
 msgid "Zip/_Postal code:"
 msgstr "_PSČ:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:39
+#: ../capplets/about-me/gnome-about-me.glade.h:43
 msgid "_Address:"
 msgstr "_Adresa:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:40
+#: ../capplets/about-me/gnome-about-me.glade.h:44
+msgid "_Authenticate"
+msgstr "_Autentizovat"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:45
 msgid "_Department:"
 msgstr "_Oddělení:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:41
+#: ../capplets/about-me/gnome-about-me.glade.h:46
 msgid "_Groupwise:"
 msgstr "_Groupwise:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:42
+#: ../capplets/about-me/gnome-about-me.glade.h:47
 msgid "_Home page:"
 msgstr "_Domovská stránka:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:43
+#: ../capplets/about-me/gnome-about-me.glade.h:48
 msgid "_Home:"
 msgstr "_Doma:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:44
+#: ../capplets/about-me/gnome-about-me.glade.h:49
 msgid "_Jabber:"
 msgstr "_Jabber:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:45
+#: ../capplets/about-me/gnome-about-me.glade.h:50
 msgid "_Manager:"
 msgstr "_Vedoucí:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:46
+#: ../capplets/about-me/gnome-about-me.glade.h:51
 msgid "_Mobile:"
 msgstr "_Mobilní:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:47
+#: ../capplets/about-me/gnome-about-me.glade.h:52
 msgid "_New password:"
 msgstr "_Nové heslo:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:48
+#: ../capplets/about-me/gnome-about-me.glade.h:53
 msgid "_Profession:"
 msgstr "_Zaměstnání:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:49
+#: ../capplets/about-me/gnome-about-me.glade.h:54
 msgid "_Retype new password:"
 msgstr "_Napište nové heslo znovu:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:50
+#: ../capplets/about-me/gnome-about-me.glade.h:55
 msgid "_State/Province:"
 msgstr "_Stát/provincie:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:51
+#: ../capplets/about-me/gnome-about-me.glade.h:56
 msgid "_Title:"
 msgstr "_Titul:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:52
+#: ../capplets/about-me/gnome-about-me.glade.h:57
 msgid "_Work:"
 msgstr "_Práce:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:53
+#: ../capplets/about-me/gnome-about-me.glade.h:58
 msgid "_Yahoo:"
 msgstr "_Yahoo:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:54
+#: ../capplets/about-me/gnome-about-me.glade.h:59
 msgid "_Zip/Postal code:"
 msgstr "_PSČ:"
 
@@ -483,7 +555,6 @@ msgstr ""
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:2
-#: ../capplets/theme-switcher/theme-install.glade.h:1
 msgid "*"
 msgstr "*"
 
@@ -700,7 +771,7 @@ msgid "_Finish"
 msgstr "_Dokončit"
 
 #: ../capplets/background/gnome-background-properties.glade.h:7
-#: ../capplets/theme-switcher/theme-properties.glade.h:19
+#: ../capplets/theme-switcher/theme-properties.glade.h:20
 msgid "_Remove"
 msgstr "_Odstranit"
 
@@ -798,7 +869,7 @@ msgstr "Pouze aplikovat nastavení a skončit"
 #: ../capplets/common/capplet-util.c:243
 #: ../capplets/keyboard/gnome-keyboard-properties.c:225
 #: ../capplets/mouse/gnome-mouse-properties.c:1016
-#: ../capplets/sound/sound-properties-capplet.c:244
+#: ../capplets/sound/sound-properties-capplet.c:760
 msgid "Retrieve and store legacy settings"
 msgstr "Načíst a uložit zděděná nastavení"
 
@@ -890,8 +961,7 @@ msgid "Change set"
 msgstr "Sada změn"
 
 #: ../capplets/common/gconf-property-editor.c:184
-msgid ""
-"GConf change set containing data to be forwarded to the gconf client on apply"
+msgid "GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr ""
 "Sada změn GConf obsahující data, která budou předána klientu GConf při "
 "použití"
@@ -901,8 +971,7 @@ msgid "Conversion to widget callback"
 msgstr "Zpětné volání konverze na prvek"
 
 #: ../capplets/common/gconf-property-editor.c:190
-msgid ""
-"Callback to be issued when data are to be converted from GConf to the widget"
+msgid "Callback to be issued when data are to be converted from GConf to the widget"
 msgstr ""
 "Zpětné volání, které se provede, když má dojít ke konverzi dat systému GConf "
 "na prvek"
@@ -912,8 +981,7 @@ msgid "Conversion from widget callback"
 msgstr "Zpětné volání konverze z prvku"
 
 #: ../capplets/common/gconf-property-editor.c:196
-msgid ""
-"Callback to be issued when data are to be converted to GConf from the widget"
+msgid "Callback to be issued when data are to be converted to GConf from the widget"
 msgstr ""
 "Zpětné volání, které se provede, když má dojít ke konverzi z prvku na data "
 "systému GConf"
@@ -987,34 +1055,30 @@ msgstr "Preferované aplikace"
 msgid "Select your default applications"
 msgstr "Vyberte své implicitní aplikace"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:55
-msgid "Could not display help"
-msgstr "Nemohu zobrazit nápovědu"
-
-#: ../capplets/default-applications/gnome-da-capplet.c:57
-#: ../capplets/default-applications/gnome-da-capplet.c:756
-msgid "Please make sure that the applet is properly installed"
-msgstr "Zkontrolujte prosím, že je aplet správně nainstalován"
-
-#: ../capplets/default-applications/gnome-da-capplet.c:92
-#: ../capplets/default-applications/gnome-da-capplet.c:116
-#: ../capplets/default-applications/gnome-da-capplet.c:161
-#: ../capplets/default-applications/gnome-da-capplet.c:206
-#: ../capplets/default-applications/gnome-da-capplet.c:260
-#: ../capplets/default-applications/gnome-da-capplet.c:309
-#: ../capplets/default-applications/gnome-da-capplet.c:591
-#: ../capplets/default-applications/gnome-da-capplet.c:612
+#: ../capplets/default-applications/gnome-da-capplet.c:77
+#: ../capplets/default-applications/gnome-da-capplet.c:101
+#: ../capplets/default-applications/gnome-da-capplet.c:146
+#: ../capplets/default-applications/gnome-da-capplet.c:191
+#: ../capplets/default-applications/gnome-da-capplet.c:245
+#: ../capplets/default-applications/gnome-da-capplet.c:294
+#: ../capplets/default-applications/gnome-da-capplet.c:576
+#: ../capplets/default-applications/gnome-da-capplet.c:597
 #, c-format
 msgid "Error saving configuration: %s"
 msgstr "Chyba při ukládání nastavení: %s"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:734
+#: ../capplets/default-applications/gnome-da-capplet.c:719
+#: ../capplets/sound/sound-properties-capplet.c:318
 msgid "Custom"
 msgstr "Vlastní"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:754
+#: ../capplets/default-applications/gnome-da-capplet.c:739
 msgid "Could not load the main interface"
 msgstr "Nemohu načíst hlavní rozhraní"
+
+#: ../capplets/default-applications/gnome-da-capplet.c:741
+msgid "Please make sure that the applet is properly installed"
+msgstr "Zkontrolujte prosím, že je aplet správně nainstalován"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:1
 msgid "Balsa"
@@ -1281,14 +1345,17 @@ msgstr "Možnosti"
 msgid ""
 "Testing the new settings. If you don't respond in %d second the previous "
 "settings will be restored."
-msgid_plural "Testing the new settings. If you don't respond in %d seconds the previous "
+msgid_plural ""
+"Testing the new settings. If you don't respond in %d seconds the previous "
 "settings will be restored."
 msgstr[0] ""
 "Testuji nové nastavení. Pokud nezareagujete do %d sekundy, bude předchozí "
 "nastavení obnoveno."
-msgstr[1] "Testuji nové nastavení. Pokud nezareagujete do %d sekund, bude předchozí "
+msgstr[1] ""
+"Testuji nové nastavení. Pokud nezareagujete do %d sekund, bude předchozí "
 "nastavení obnoveno."
-msgstr[2] "Testuji nové nastavení. Pokud nezareagujete do %d sekund, bude předchozí "
+msgstr[2] ""
+"Testuji nové nastavení. Pokud nezareagujete do %d sekund, bude předchozí "
 "nastavení obnoveno."
 
 #: ../capplets/display/main.c:638
@@ -1461,15 +1528,18 @@ msgid ""
 "The font selected is %d point large, and may make it difficult to "
 "effectively use the computer.  It is recommended that you select a size "
 "smaller than %d."
-msgid_plural "The font selected is %d points large, and may make it difficult to "
+msgid_plural ""
+"The font selected is %d points large, and may make it difficult to "
 "effectively use the computer. It is recommended that you select a size "
 "smaller than %d."
 msgstr[0] ""
 "Vybrané písmo je velké %d bod, což může působit problémy při efektivní práci "
 "s počítačem. Doporučuje se vybrat velikost menší než %d."
-msgstr[1] "Vybrané písmo je velké %d body, což může působit problémy při efektivní "
+msgstr[1] ""
+"Vybrané písmo je velké %d body, což může působit problémy při efektivní "
 "práci s počítačem. Doporučuje se vybrat velikost menší než %d."
-msgstr[2] "Vybrané písmo je velké %d bodů, což může působit problémy při efektivní "
+msgstr[2] ""
+"Vybrané písmo je velké %d bodů, což může působit problémy při efektivní "
 "práci s počítačem. Doporučuje se vybrat velikost menší než %d."
 
 #: ../capplets/font/main.c:506
@@ -1478,15 +1548,18 @@ msgid ""
 "The font selected is %d point large, and may make it difficult to "
 "effectively use the computer.  It is recommended that you select a smaller "
 "sized font."
-msgid_plural "The font selected is %d points large, and may make it difficult to "
+msgid_plural ""
+"The font selected is %d points large, and may make it difficult to "
 "effectively use the computer. It is recommended that you select a smaller "
 "sized font."
 msgstr[0] ""
 "Vybrané písmo je velké %d bod, což může působit problémy při efektivní práci "
 "s počítačem. Doporučuje se vybrat písmo menší velikosti."
-msgstr[1] "Vybrané písmo je velké %d body, což může působit problémy při efektivní "
+msgstr[1] ""
+"Vybrané písmo je velké %d body, což může působit problémy při efektivní "
 "práci s počítačem. Doporučuje se vybrat písmo menší velikosti."
-msgstr[2] "Vybrané písmo je velké %d bodů, což může působit problémy při efektivní "
+msgstr[2] ""
+"Vybrané písmo je velké %d bodů, což může působit problémy při efektivní "
 "práci s počítačem. Doporučuje se vybrat písmo menší velikosti."
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:21
@@ -1517,29 +1590,29 @@ msgid "The type of accelerator."
 msgstr "Typ klávesové zkratky."
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
-#: ../capplets/keybindings/gnome-keybinding-properties.c:197
+#: ../capplets/keybindings/gnome-keybinding-properties.c:187
 #: ../libbackground/applier.c:624 ../typing-break/drwright.c:471
 msgid "Disabled"
 msgstr "Vypnuto"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:544
+#: ../capplets/keybindings/gnome-keybinding-properties.c:534
 msgid "<Unknown Action>"
 msgstr "<Neznámá akce>"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:565
+#: ../capplets/keybindings/gnome-keybinding-properties.c:555
 msgid "Desktop"
 msgstr "Plocha"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:566
+#: ../capplets/keybindings/gnome-keybinding-properties.c:556
 #: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
 msgid "Sound"
 msgstr "Zvuk"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:570
+#: ../capplets/keybindings/gnome-keybinding-properties.c:560
 msgid "Window Management"
 msgstr "Správa oken"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:676
+#: ../capplets/keybindings/gnome-keybinding-properties.c:666
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become unusable to type "
@@ -1550,7 +1623,7 @@ msgstr ""
 "psaní.\n"
 "Zkuste to prosím zároveň s klávesou například Control, Alt nebo Shift.\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:705
+#: ../capplets/keybindings/gnome-keybinding-properties.c:695
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1559,21 +1632,21 @@ msgstr ""
 "Zkratka \"%s\" se již používá pro:\n"
 " \"%s\"\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:737
+#: ../capplets/keybindings/gnome-keybinding-properties.c:727
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Chyba při nastavení nové zkratky v databázi s nastavením: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:787
+#: ../capplets/keybindings/gnome-keybinding-properties.c:777
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "Chyba při rušení zkratky v databázi s nastavením: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:894
+#: ../capplets/keybindings/gnome-keybinding-properties.c:884
 msgid "Action"
 msgstr "Akce"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:918
+#: ../capplets/keybindings/gnome-keybinding-properties.c:908
 msgid "Shortcut"
 msgstr "Zkratka"
 
@@ -1594,11 +1667,11 @@ msgstr ""
 msgid "Assign shortcut keys to commands"
 msgstr "Přiřaďte klávesové zkratky k příkazům"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkb.c:84
+#: ../capplets/keyboard/gnome-keyboard-properties-xkb.c:87
 msgid "Unknown"
 msgstr "Neznámé"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:279
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:281
 msgid "Layout"
 msgstr "Rozložení"
 
@@ -1606,12 +1679,12 @@ msgstr "Rozložení"
 #. the below options are to be included in the selected list.
 #. This is a HIG-compliant alternative to allowing no
 #. selection in the group.
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:283
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:228
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:285
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:229
 msgid "Default"
 msgstr "Implicitní"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:75
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:77
 msgid "Models"
 msgstr "Modely"
 
@@ -1626,10 +1699,9 @@ msgstr "Zpříst_upnění"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:221
 #: ../capplets/keyboard/gnome-keyboard-properties.c:223
-#: ../capplets/sound/sound-properties-capplet.c:240
-#: ../capplets/sound/sound-properties-capplet.c:242
-msgid ""
-"Just apply settings and quit (compatibility only; now handled by daemon)"
+#: ../capplets/sound/sound-properties-capplet.c:756
+#: ../capplets/sound/sound-properties-capplet.c:758
+msgid "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
 "Pouze aplikovat nastavení a skončit (pouze pro kompatibilitu; nyní "
 "zpracovává démon)"
@@ -2061,40 +2133,88 @@ msgstr "Proxy za_bezpečeného HTTP:"
 msgid "Enable sound and associate sounds with events"
 msgstr "Zapnutí zvuku a přiřazení zvuků událostem"
 
-#: ../capplets/sound/sound-properties-capplet.c:271
-#: ../capplets/sound/sound-properties.glade.h:4
+#: ../capplets/sound/sound-properties-capplet.c:316
+#: ../capplets/sound/sound-properties-capplet.c:368
+msgid "Not connected"
+msgstr "Nepřipojeno"
+
+#: ../capplets/sound/sound-properties-capplet.c:790
 msgid "Sound Preferences"
 msgstr "Nastavení zvuku"
 
-#: ../capplets/sound/sound-properties.glade.h:1
+#: ../capplets/sound/sound-properties.glade.h:2
+msgid "<b>Audio Conferencing</b>"
+msgstr "<b>Audiokonference</b>"
+
+#: ../capplets/sound/sound-properties.glade.h:3
+msgid "<b>Music and Movies</b>"
+msgstr "<b>Hudba a filmy</b>"
+
+#: ../capplets/sound/sound-properties.glade.h:4
+msgid "<b>Sound Events</b>"
+msgstr "<b>Zvukové události</b>"
+
+#: ../capplets/sound/sound-properties.glade.h:5
+msgid "<span weight=\"bold\" size=\"x-large\">Testing...</span>"
+msgstr "<span weight=\"bold\" size=\"x-large\">Testuje se...</span>"
+
+#: ../capplets/sound/sound-properties.glade.h:6
+msgid "Click OK to finish."
+msgstr "Klikněte na OK pro dokončení."
+
+#: ../capplets/sound/sound-properties.glade.h:7
+msgid "Devices"
+msgstr "Zařízení"
+
+#: ../capplets/sound/sound-properties.glade.h:8
 msgid "E_nable software sound mixing (ESD)"
 msgstr "Povolit softwarové _mixování zvuku (ESD)"
 
-#: ../capplets/sound/sound-properties.glade.h:2
+#: ../capplets/sound/sound-properties.glade.h:9
 msgid "Flash _entire screen"
 msgstr "Bliknout celou _obrazovkou"
 
-#: ../capplets/sound/sound-properties.glade.h:3
+#: ../capplets/sound/sound-properties.glade.h:10
 msgid "Flash _window titlebar"
 msgstr "Bliknout _titulkem okna"
 
-#: ../capplets/sound/sound-properties.glade.h:5
+#: ../capplets/sound/sound-properties.glade.h:11
+msgid "Sound & Video Preferences"
+msgstr "Předvolby zvuku a videa"
+
+#: ../capplets/sound/sound-properties.glade.h:12
+msgid "Sound Capture:"
+msgstr "Záznam zvuku"
+
+#: ../capplets/sound/sound-properties.glade.h:13
+msgid "Sound Playback:"
+msgstr "Přehrávání zvuku"
+
+#: ../capplets/sound/sound-properties.glade.h:14
 msgid "Sounds"
 msgstr "Zvuky"
 
-#: ../capplets/sound/sound-properties.glade.h:6
+#: ../capplets/sound/sound-properties.glade.h:15
 msgid "System Beep"
 msgstr "Systémové pípnutí"
 
-#: ../capplets/sound/sound-properties.glade.h:7
+#: ../capplets/sound/sound-properties.glade.h:16
+msgid "Test"
+msgstr "Test"
+
+#: ../capplets/sound/sound-properties.glade.h:17
+msgid "Testing Pipeline"
+msgstr "Testování roury"
+
+#: ../capplets/sound/sound-properties.glade.h:18
 msgid "_Enable system beep"
 msgstr "_Povolit systémové pípnutí"
 
-#: ../capplets/sound/sound-properties.glade.h:8
+#: ../capplets/sound/sound-properties.glade.h:19
 msgid "_Play system sounds"
 msgstr "_Přehrávat systémové zvuky"
 
-#: ../capplets/sound/sound-properties.glade.h:9
+#: ../capplets/sound/sound-properties.glade.h:20
 msgid "_Visual system beep"
 msgstr "_Vizuální systémové pípnutí"
 
@@ -2110,7 +2230,7 @@ msgstr "Motiv byl úspěšně odstraněn. Zvolte prosím jiný motiv."
 msgid "Theme can not be deleted"
 msgstr "Motiv nelze odstranit"
 
-#: ../capplets/theme-switcher/gnome-theme-details.c:529
+#: ../capplets/theme-switcher/gnome-theme-details.c:535
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -2120,15 +2240,15 @@ msgstr ""
 "váš dialog \"Nastavení motivů\" byl nesprávně nainstalován nebo jste "
 "nenainstalovali balíček \"gnome-themes\"."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:253
+#: ../capplets/theme-switcher/gnome-theme-installer.c:254
 msgid "This theme is not in a supported format."
 msgstr "Tento motiv není v podporovaném formátu."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:271
+#: ../capplets/theme-switcher/gnome-theme-installer.c:272
 msgid "Failed to create temporary directory"
 msgstr "Nemohu vytvořit dočasný adresář"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:292
+#: ../capplets/theme-switcher/gnome-theme-installer.c:293
 msgid ""
 "Can not install theme. \n"
 "The bzip2 utility is not installed."
@@ -2136,13 +2256,13 @@ msgstr ""
 "Nemohu nainstalovat motiv. \n"
 "Nástroj bzip2 není nainstalován."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:311
-#: ../capplets/theme-switcher/gnome-theme-installer.c:350
-#: ../capplets/theme-switcher/gnome-theme-installer.c:433
+#: ../capplets/theme-switcher/gnome-theme-installer.c:312
+#: ../capplets/theme-switcher/gnome-theme-installer.c:351
+#: ../capplets/theme-switcher/gnome-theme-installer.c:434
 msgid "Installation Failed"
 msgstr "Instalace selhala"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:332
+#: ../capplets/theme-switcher/gnome-theme-installer.c:333
 msgid ""
 "Can not install themes. \n"
 "The gzip utility is not installed."
@@ -2150,7 +2270,7 @@ msgstr ""
 "Nemohu nainstalovat motiv. \n"
 "Nástroj gzip není nainstalován."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:374
+#: ../capplets/theme-switcher/gnome-theme-installer.c:375
 #, c-format
 msgid ""
 "Icon Theme %s correctly installed.\n"
@@ -2159,12 +2279,12 @@ msgstr ""
 "Motiv ikon %s byl správně nainstalován.\n"
 "Můžete jej zvolit v podrobnostech motivu."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:377
+#: ../capplets/theme-switcher/gnome-theme-installer.c:378
 #, c-format
 msgid "Gnome Theme %s correctly installed"
 msgstr "Motiv Gnome %s byl správně nainstalován"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:380
+#: ../capplets/theme-switcher/gnome-theme-installer.c:381
 #, c-format
 msgid ""
 "Windows Border Theme %s correctly installed.\n"
@@ -2173,7 +2293,7 @@ msgstr ""
 "Motiv okrajů oken %s byl správně nainstalován.\n"
 "Můžete jej zvolit v podrobnostech motivu."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:383
+#: ../capplets/theme-switcher/gnome-theme-installer.c:384
 #, c-format
 msgid ""
 "Controls Theme %s correctly installed.\n"
@@ -2182,23 +2302,23 @@ msgstr ""
 "Motiv ovládacích prvků %s byl správně nainstalován.\n"
 "Můžete jej zvolit v podrobnostech motivu."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:389
+#: ../capplets/theme-switcher/gnome-theme-installer.c:390
 msgid "The theme is an engine. You need to compile the theme."
 msgstr "Tento motiv je engine. Musíte je zkompilovat."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:407
+#: ../capplets/theme-switcher/gnome-theme-installer.c:408
 msgid "The file format is invalid"
 msgstr "Formát souboru není platný"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:509
+#: ../capplets/theme-switcher/gnome-theme-installer.c:499
 msgid "No theme file location specified to install"
 msgstr "Neurčeno umístění souboru motivu pro instalaci"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:528
+#: ../capplets/theme-switcher/gnome-theme-installer.c:514
 msgid "The theme file location specified to install is invalid"
 msgstr "Určení umístění pro instalaci souboru motivu není platné"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:548
+#: ../capplets/theme-switcher/gnome-theme-installer.c:534
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -2207,11 +2327,11 @@ msgstr ""
 "Nedostatečná oprávnění pro instalaci motivu do:\n"
 "%s"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:569
+#: ../capplets/theme-switcher/gnome-theme-installer.c:555
 msgid "The file format is invalid."
 msgstr "Formát souboru není platný."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:596
+#: ../capplets/theme-switcher/gnome-theme-installer.c:582
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
@@ -2220,7 +2340,7 @@ msgstr ""
 "%s je cesta, kam budou nainstalovány soubory motivu. Nemůže být zvolena jako "
 "zdrojové umístění"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:650
+#: ../capplets/theme-switcher/gnome-theme-installer.c:647
 msgid ""
 "Cannot install theme.\n"
 "The tar program is not installed on your system."
@@ -2236,7 +2356,7 @@ msgstr "Vlastní motiv"
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "Tento můžete uložit stisknutím tlačítka Uložit motiv."
 
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1587
+#: ../capplets/theme-switcher/gnome-theme-manager.c:1579
 msgid ""
 "The default theme schemas could not be found on your system.  This means "
 "that you probably don't have metacity installed, or that your gconf is "
@@ -2246,11 +2366,11 @@ msgstr ""
 "že pravděpodobně nemáte nainstalováno metacity nebo je nesprávně nastaven "
 "váš gconf."
 
-#: ../capplets/theme-switcher/gnome-theme-save.c:72
+#: ../capplets/theme-switcher/gnome-theme-save.c:73
 msgid "Theme name must be present"
 msgstr "Musí být vyplněn název motivu"
 
-#: ../capplets/theme-switcher/gnome-theme-save.c:104
+#: ../capplets/theme-switcher/gnome-theme-save.c:144
 msgid "The theme already exists. Would you like to replace it?"
 msgstr "Tento motiv již existuje. Chcete jej nahradit?"
 
@@ -2263,105 +2383,89 @@ msgstr "Vybrat motiv pro různé části pracovní plochy"
 msgid "Theme"
 msgstr "Motiv"
 
-#: ../capplets/theme-switcher/theme-install.glade.h:2
-msgid "<span size=\"larger\" weight=\"bold\">Install a Theme</span>"
-msgstr "<span size=\"larger\" weight=\"bold\">Instalovat motiv</span>"
-
-#: ../capplets/theme-switcher/theme-install.glade.h:3
-msgid "Theme Installation"
-msgstr "Instalace motivu"
-
-#: ../capplets/theme-switcher/theme-install.glade.h:4
-msgid "_Install"
-msgstr "Na_instalovat"
-
-#: ../capplets/theme-switcher/theme-install.glade.h:5
-msgid "_Location:"
-msgstr "_Umístění:"
-
 #: ../capplets/theme-switcher/theme-properties.glade.h:1
-msgid "<span size=\"larger\" weight=\"bold\">Save Theme to Disk</span>"
-msgstr "<span size=\"larger\" weight=\"bold\">Uložit motiv na disk</span>"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:2
 msgid "Apply _Background"
 msgstr "Použít po_zadí"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:3
+#: ../capplets/theme-switcher/theme-properties.glade.h:2
 msgid "Apply _Font"
 msgstr "Použít _písmo"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:4
+#: ../capplets/theme-switcher/theme-properties.glade.h:3
 msgid "Controls"
 msgstr "Ovládací prvky"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:5
+#: ../capplets/theme-switcher/theme-properties.glade.h:4
 msgid "Icons"
 msgstr "Ikony"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:6
-msgid "New themes can also be installed by dragging them into the window."
-msgstr "Nové motivy ta lze také nainstalovat jejich přetažením do okna."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:7
+#: ../capplets/theme-switcher/theme-properties.glade.h:5
 msgid "Save Theme"
 msgstr "Uložit motiv"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:8
+#: ../capplets/theme-switcher/theme-properties.glade.h:6
+msgid "Save _Background Image"
+msgstr "Uložit _obrázek na pozadí"
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:7
 msgid "Select theme for the desktop"
 msgstr "Vyberte motiv prostředí pracovní plochy"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:9
-msgid "Short _description:"
-msgstr "Krátký _popis:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:10
+#: ../capplets/theme-switcher/theme-properties.glade.h:8
 msgid "Theme Details"
 msgstr "Podrobnosti o motivu"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:11
+#: ../capplets/theme-switcher/theme-properties.glade.h:9
 msgid "Theme Preferences"
 msgstr "Nastavení motivu"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:12
+#: ../capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Theme _Details"
 msgstr "_Podrobnosti o motivu"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:13
+#: ../capplets/theme-switcher/theme-properties.glade.h:11
 msgid "This theme does not suggest any particular font or background."
 msgstr "Tento motiv nenavrhuje žádné konkrétní písmo nebo pozadí."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:14
+#: ../capplets/theme-switcher/theme-properties.glade.h:12
 msgid "This theme suggests a background:"
 msgstr "Tento motiv navrhuje pozadí:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:15
+#: ../capplets/theme-switcher/theme-properties.glade.h:13
 msgid "This theme suggests a font and a background:"
 msgstr "Tento motiv navrhuje písmo a pozadí:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:16
+#: ../capplets/theme-switcher/theme-properties.glade.h:14
 msgid "This theme suggests a font:"
 msgstr "Tento motiv navrhuje písmo:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:17
+#: ../capplets/theme-switcher/theme-properties.glade.h:15
 msgid "Window Border"
 msgstr "Okraj okna"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:18
+#: ../capplets/theme-switcher/theme-properties.glade.h:16
+msgid "_Description:"
+msgstr "_Popis:"
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:17
 msgid "_Install Theme..."
 msgstr "Na_instalovat motiv..."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:20
+#: ../capplets/theme-switcher/theme-properties.glade.h:18
+msgid "_Install..."
+msgstr "_Instalovat..."
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:19
+msgid "_Name:"
+msgstr "_Jméno:"
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:21
 msgid "_Revert"
 msgstr "_Vrátit"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:21
+#: ../capplets/theme-switcher/theme-properties.glade.h:22
 msgid "_Save Theme..."
 msgstr "_Uložit motiv..."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:22
-msgid "_Theme name:"
-msgstr "_Jméno motivu:"
 
 #: ../capplets/theme-switcher/theme-properties.glade.h:23
 msgid "theme selection tree"
@@ -2563,18 +2667,6 @@ msgstr "Ovládací centrum GNOME"
 msgid "The GNOME configuration tool"
 msgstr "Nástroj pro nastavení prostředí GNOME"
 
-#: ../gnome-settings-daemon/actions/acme-fb-level.c:149
-msgid "No '/dev/pmu' device found"
-msgstr "Nenalezeno zařízení '/dev/pmu'"
-
-#: ../gnome-settings-daemon/actions/acme-fb-level.c:156
-msgid "Not a powerbook"
-msgstr "Nejde o powerbook"
-
-#: ../gnome-settings-daemon/actions/acme-fb-level.c:173
-msgid "Wrong permission for '/dev/pmu' device"
-msgstr "Špatné oprávnění zařízení '/dev/pmu'"
-
 #: ../gnome-settings-daemon/actions/acme.glade.h:1
 msgid "Volume"
 msgstr "Hlasitost"
@@ -2710,7 +2802,7 @@ msgstr ""
 "Chyba při pokusu o spuštění (%s),\n"
 "což je svázáno s klávesou (%s)"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:103
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:105
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2741,7 +2833,7 @@ msgstr ""
 "- Výsledek <b>%s</b>\n"
 "- Výsledek <b>%s</b>"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:117
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:119
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2752,27 +2844,37 @@ msgstr ""
 "Jsou známy problémy se složitými nastaveními XKB.\n"
 "Zkuste použít jednodušší nastavení nebo novější verzi software XFree."
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:223
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:244
 msgid "Do _not show this warning again"
 msgstr "Příště už toto varování _nezobrazovat"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:234
+#. !! temporary one
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:253
+#, c-format
 msgid ""
-"The X system keyboard settings differ from your current GNOME keyboard "
-"settings.  Which set would you like to use?"
+"<b>The X system keyboard settings differ from your current GNOME keyboard "
+"settings.</b>\n"
+"\n"
+"Expected was %s, but the the following settings were found: %s.\n"
+"\n"
+"Which set would you like to use?"
 msgstr ""
-"Systémové nastavení klávesnice v X se liší od vašeho momentálního nastavení "
-"klávesnice v GNOME. Které nastavení chcete používat?"
+"<b>Systémové nastavení klávesnice v X se liší od vašeho aktuálního nastavení "
+"klávesnice v GNOME.</b>\n"
+"\n"
+"Očekáváno bylo %s, nalezeno však bylo nastavení: %s.\n"
+"\n"
+"Které nastavení chcete používat?"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:247
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:275
 msgid "Use X settings"
 msgstr "Používat nastavení X"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:249
-msgid "Use GNOME settings"
-msgstr "Používat nastavení GNOME"
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:277
+msgid "Keep GNOME settings"
+msgstr "Zachovat nastavení GNOME"
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:129
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:118
 #, c-format
 msgid ""
 "Couldn't execute command: %s\n"
@@ -2781,7 +2883,7 @@ msgstr ""
 "Nemohu spustit příkaz: %s\n"
 "Ověřte, že tento příkaz existuje."
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:145
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:134
 msgid ""
 "Couldn't put the machine to sleep.\n"
 "Verify that the machine is correctly configured."
@@ -2789,7 +2891,7 @@ msgstr ""
 "Nemohu uspat počítač.\n"
 "Ověřte, že je počítač správně nastaven."
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:180
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:168
 msgid ""
 "Couldn't load the Glade file.\n"
 "Make sure that this daemon is properly installed."
@@ -2816,7 +2918,7 @@ msgstr ""
 msgid "_Do not show this message again"
 msgstr "Příště už tuto zprávu _neukazovat"
 
-#: ../gnome-settings-daemon/gnome-settings-sound.c:131
+#: ../gnome-settings-daemon/gnome-settings-sound.c:127
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Nemohu načíst soubor se zvukem %s jako vzorek %s"
@@ -2895,10 +2997,39 @@ msgstr "Obrazovka"
 msgid "Screen on which BGApplier is to draw"
 msgstr "Obrazovka, na kterou má kreslit BGApplier"
 
-#: ../libgswitchit/gswitchit_config.c:1036
+#: ../libgswitchit/gswitchit_config.c:1074
 #, c-format
 msgid "There was an error loading an image: %s"
 msgstr "Při načítání obrázku došlo k chybě: %s"
+
+#: ../libgswitchit/gswitchit_config.c:1398
+#, c-format
+msgid "layout \"%s\""
+msgid_plural "layouts \"%s\""
+msgstr[0] "rozložení \"%s\""
+msgstr[1] "rozložení \"%s\""
+msgstr[2] "rozložení \"%s\""
+
+#: ../libgswitchit/gswitchit_config.c:1415
+#, c-format
+msgid "option \"%s\""
+msgid_plural "options \"%s\""
+msgstr[0] "volba \"%s\""
+msgstr[1] "volby \"%s\""
+msgstr[2] "volby \"%s\""
+
+#: ../libgswitchit/gswitchit_config.c:1423
+#, c-format
+msgid "model \"%s\", %s and %s"
+msgstr "model \"%s\", %s a %s"
+
+#: ../libgswitchit/gswitchit_config.c:1424
+msgid "no layout"
+msgstr "žádné rozložení"
+
+#: ../libgswitchit/gswitchit_config.c:1425
+msgid "no options"
+msgstr "žádné volby"
 
 #: ../libsounds/sound-view.c:43
 msgid "Login"
@@ -2972,8 +3103,7 @@ msgid "Roll up"
 msgstr "Zarolovat"
 
 #: ../schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:1
-msgid ""
-"If true, the mime handlers for text/plain and text/* will be kept in sync"
+msgid "If true, the mime handlers for text/plain and text/* will be kept in sync"
 msgstr ""
 "Je-li true, jsou obsluhy mime pro text/plain a text/* udržovány "
 "synchronizované"
@@ -2983,162 +3113,146 @@ msgid "Sync text/plain and text/* handlers"
 msgstr "Synchronizovat obsluhy text/plain a text/*"
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:1
-msgid "Brightness down"
-msgstr "Snížit jas"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:2
-msgid "Brightness down's shortcut."
-msgstr "Zkratka snížení jasu."
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:3
-msgid "Brightness up"
-msgstr "Zvýšit jas"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:4
-msgid "Brightness up's shortcut."
-msgstr "Zkratka zvýšení jasu."
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:5
 msgid "E-mail"
 msgstr "E-mail"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:6
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:2
 msgid "E-mail's shortcut."
 msgstr "Zkratka e-mailu."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:7
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:3
 msgid "Eject"
 msgstr "Vysunout"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:8
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:4
 msgid "Eject's shortcut."
 msgstr "Zkratka vysunutí."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:9
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:5
 msgid "Home folder"
 msgstr "Domovská složka"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:10
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:6
 msgid "Home folder's shortcut."
 msgstr "Zkratka domovské složky."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:7
 msgid "Launch help browser"
 msgstr "Spustit prohlížeč nápovědy"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:12
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:8
 msgid "Launch help browser's shortcut."
 msgstr "Zkratka spuštění prohlížeče nápovědy."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:13
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:9
 msgid "Launch web browser"
 msgstr "Spustit prohlížeč WWW"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:14
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:10
 msgid "Launch web browser's shortcut."
 msgstr "Zkratka spuštění prohlížeče WWW."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
 msgid "Lock screen"
 msgstr "Zamknout obrazovku"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:12
 msgid "Lock screen's shortcut."
 msgstr "Zkratka zamčení obrazovky."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:13
 msgid "Log out"
 msgstr "Odhlásit se"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:14
 msgid "Log out's shortcut."
 msgstr "Zkratka odhlášení."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
 msgid "Next track key's shortcut."
 msgstr "Zkratka klávesy Další stopa."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
 msgid "Pause"
 msgstr "Pozastavit"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
 msgid "Pause key's shortcut."
 msgstr "Zkratka klávesy Pozastavit."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
 msgid "Play (or play/pause)"
 msgstr "Přehrávat (nebo přehrávat/pozastavit)"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
 msgid "Play (or play/pause) key's shortcut."
 msgstr "Zkratka klávesy Přehrávat (nebo přehrávat/pozastavit)."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
 msgid "Previous track key's shortcut."
 msgstr "Zkratka klávesy Předchozí stopa."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
 msgid "Search"
 msgstr "Hledat"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
 msgid "Search's shortcut."
 msgstr "Zkratka hledání."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
 msgid "Skip to next track"
 msgstr "Přeskočit na následující stopu"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
 msgid "Skip to previous track"
 msgstr "Přeskočit na předchozí stopu"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
 msgid "Sleep"
 msgstr "Uspat"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
 msgid "Sleep's shortcut."
 msgstr "Zkratka uspání."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
 msgid "Stop playback key"
 msgstr "Klávesa Zastavit přehrávání"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
 msgid "Stop playback key's shortcut."
 msgstr "Zkratka klávesy Zastavit přehrávání."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
 msgid "Volume down"
 msgstr "Snížit hlasitost"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
 msgid "Volume down's shortcut."
 msgstr "Zkratka snížení hlasitosti."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
 msgid "Volume mute"
 msgstr "Umlčet zvuk"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
 msgid "Volume mute's shortcut"
 msgstr "Zkratka umlčení zvuku"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:37
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
 msgid "Volume step"
 msgstr "Krok hlasitosti"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:38
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
 msgid "Volume step as percentage of volume."
 msgstr "Krok hlasitosti v procentech."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:39
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
 msgid "Volume up"
 msgstr "Zvýšit hlasitost"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
 msgid "Volume up's shortcut."
 msgstr "Zkratka zvýšení hlasitosti."
 
@@ -3223,6 +3337,22 @@ msgid "Suppress the \"X sysconfig changed\" warning message"
 msgstr "Potlačit varovnou zprávu \"nastavení X změněno\""
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:14
+msgid "The Keyboard Preview, X offset"
+msgstr "Náhled klávesnice, posun X"
+
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:15
+msgid "The Keyboard Preview, Y offset"
+msgstr "Náhled klávesnice, posun Y"
+
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:16
+msgid "The Keyboard Preview, height"
+msgstr "Náhled klávesnice, výška"
+
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:17
+msgid "The Keyboard Preview, width"
+msgstr "Náhled klávesnice, šířka"
+
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:18
 msgid ""
 "Very soon, keyboard settings in gconf will be overridden (from the system "
 "configuration) This key has been deprecated since GNOME 2.12, please unset "
@@ -3232,15 +3362,15 @@ msgstr ""
 "Tento klíč je zastarlý od GNOME 2.12, pro získání implicitního nastavení "
 "systému prosím zrušte nastavení klíčů model, layouts a options."
 
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:15
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:19
 msgid "keyboard layout"
 msgstr "rozložení klávesnice"
 
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:16
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:20
 msgid "keyboard model"
 msgstr "model klávesnice"
 
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:17
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:21
 msgid "modmap file list"
 msgstr "seznam souborů modmap"
 
@@ -3390,20 +3520,17 @@ msgid "If set to true, then Type1 fonts will be thumbnailed."
 msgstr "Je-li nastaveno na true, budou tvořeny náhledy písem Type1."
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:5
-msgid ""
-"Set this key to the command used to create thumbnails for OpenType fonts."
+msgid "Set this key to the command used to create thumbnails for OpenType fonts."
 msgstr ""
 "Nastavte tento klíč na příkaz používaný pro vytváření náhledů pro písma "
 "OpenType."
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:6
 msgid "Set this key to the command used to create thumbnails for PCF fonts."
-msgstr ""
-"Nastavte tento klíč na příkaz používaný pro vytváření náhledů pro písma PCF."
+msgstr "Nastavte tento klíč na příkaz používaný pro vytváření náhledů pro písma PCF."
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:7
-msgid ""
-"Set this key to the command used to create thumbnails for TrueType fonts."
+msgid "Set this key to the command used to create thumbnails for TrueType fonts."
 msgstr ""
 "Nastavte tento klíč na příkaz používaný pro vytváření náhledů pro písma "
 "TrueType."
@@ -3505,16 +3632,14 @@ msgstr "Nastaví implicitní motiv"
 
 #: ../vfs-methods/themus/themus.schemas.in.h:1
 msgid "If set to true, then installed themes will be thumbnailed."
-msgstr ""
-"Je-li nastaveno na true, budou zobrazovány náhledy nainstalovaných motivů."
+msgstr "Je-li nastaveno na true, budou zobrazovány náhledy nainstalovaných motivů."
 
 #: ../vfs-methods/themus/themus.schemas.in.h:2
 msgid "If set to true, then themes will be thumbnailed."
 msgstr "Je-li nastaveno na true, budou zobrazovány náhledy motivů."
 
 #: ../vfs-methods/themus/themus.schemas.in.h:3
-msgid ""
-"Set this key to the command used to create thumbnails for installed themes."
+msgid "Set this key to the command used to create thumbnails for installed themes."
 msgstr ""
 "Nastavte tento klíč na příkaz používaný pro vytváření náhledů "
 "nainstalovaných motivů."
