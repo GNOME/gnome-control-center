@@ -5,7 +5,7 @@ gnome_sound_properties_LDADD = \
 	$(GNOMECC_CAPPLETS_LIBS) \
 	$(SOUND_CAPPLET_LIBS) \
 	$(HAL_LIBS)
-gnome_sound_properties_SOURCES = sound-properties-capplet.c pipeline-tests.c
+gnome_sound_properties_SOURCES = sound-properties-capplet.c pipeline-tests.h pipeline-tests.c
 
 @INTLTOOL_DESKTOP_RULE@
 
