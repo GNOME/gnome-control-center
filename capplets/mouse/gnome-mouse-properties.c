@@ -535,7 +535,7 @@ cursor_font_changed (GConfClient *client,
 
 	/* If there's no value set, then don't select anything, and return */
 	if ( cursor_font == NULL ) {
-		gtk_tree_selection_unselect_all(selection);
+		gtk_tree_selection_unselect_all (selection);
 		return;
 	}
 
