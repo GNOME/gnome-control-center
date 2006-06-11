@@ -25,7 +25,6 @@
 #  include <config.h>
 #endif
 
-#include <stropts.h>
 #include <gnome.h>
 #include <pwd.h>
 #include <stdlib.h>
