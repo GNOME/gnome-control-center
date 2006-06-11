@@ -28,7 +28,6 @@
 #endif
 
 /* Are all of these needed? */
-#include <stropts.h>
 #include <gnome.h>
 #include <pwd.h>
 #include <stdlib.h>
