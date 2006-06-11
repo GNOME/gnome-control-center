@@ -532,6 +532,13 @@ cursor_font_changed (GConfClient *client,
 	model = gtk_tree_model_sort_get_model (GTK_TREE_MODEL_SORT(smodel));
 
 	cursor_font = gconf_client_get_string (client, CURSOR_FONT_KEY, NULL);
+
+	/* If there's no value set, then don't select anything, and return */
+	if ( cursor_font == NULL ) {
+		gtk_tree_selection_unselect_all(selection);
+		return;
+	}
+
 	gtk_tree_model_get_iter_root (model, &iter);
 
 	do {
