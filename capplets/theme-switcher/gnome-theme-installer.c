@@ -18,6 +18,7 @@
 #include "gconf-property-editor.h"
 #include "file-transfer-dialog.h"
 #include "gnome-theme-installer.h"
+#include "gnome-theme-manager.h"
 
 enum {
 	THEME_INVALID,
@@ -214,13 +215,13 @@ transfer_done_tarbz2_idle_cb (gpointer data)
 static void
 transfer_done_cb (GtkWidget *dlg, gchar *path)
 {
-	GtkWidget *dialog;
+	GtkWidget *dialog, *apply_button;
 	int len = strlen (path);
 	gchar *command,**dir, *first_line, *filename, *gzip, *bzip2, *tar;
 	int status,theme_type;
 	theme_properties *theme_props;
 	GnomeVFSURI *theme_source_dir, *theme_dest_dir;
-	
+
 	gtk_widget_destroy (dlg);
 	
 	theme_props = g_new(theme_properties,1);
@@ -372,16 +373,13 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 		gnome_vfs_unlink (theme_props->filename); 
 		if (theme_type == THEME_ICON) {
 			theme_props->target_dir=g_strdup_printf("%s/.icons/%s",g_get_home_dir(),dir[0]);	
-			theme_props->user_message=g_strdup_printf(_("Icon Theme %s correctly installed.\nYou can select it in the theme details."),dir[0]);
 		} else if (theme_type == THEME_GNOME) {
 			theme_props->target_dir = g_strdup_printf("%s/.themes/%s",g_get_home_dir(),dir[0]);
-			theme_props->user_message=g_strdup_printf(_("Gnome Theme %s correctly installed"),dir[0]);
+			theme_props->user_message=g_strdup_printf(_("GNOME Theme %s correctly installed"),dir[0]);
 		} else if (theme_type == THEME_METACITY) {
 			theme_props->target_dir = g_strdup_printf("%s/.themes/%s",g_get_home_dir(),dir[0]);
-			theme_props->user_message=g_strdup_printf(_("Windows Border Theme %s correctly installed.\nYou can select it in the theme details."),dir[0]);
 		} else if (theme_type == THEME_GTK) {
 			theme_props->target_dir = g_strdup_printf("%s/.themes/%s",g_get_home_dir(),dir[0]);
-			theme_props->user_message=g_strdup_printf(_("Controls Theme %s correctly installed.\nYou can select it in the theme details."),dir[0]);
 		} else if (theme_type == THEME_ENGINE) {
 			dialog = gtk_message_dialog_new (NULL,
 			  	       GTK_DIALOG_MODAL,
@@ -447,12 +445,46 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 			g_free(tar);
 			return;	
 		} else {
-			dialog = gtk_message_dialog_new (NULL,
+			/* Ask to apply theme (if we can) */
+			if (theme_type == THEME_GTK || theme_type == THEME_METACITY || theme_type == THEME_ICON)
+			{
+				/* TODO: currently cannot apply "gnome themes" */
+				theme_props->user_message=g_strdup_printf(_("The theme \"%s\" has been installed.\nWould you like to apply it now, or keep your current theme?"),dir[0]);
+				dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_INFO, GTK_BUTTONS_NONE, theme_props->user_message );
+
+				gtk_dialog_add_button (GTK_DIALOG (dialog), _("Keep Current Theme"), GTK_RESPONSE_CLOSE);
+
+				apply_button = gtk_button_new_with_label (_("Apply New Theme"));
+				gtk_button_set_image (GTK_BUTTON (apply_button), gtk_image_new_from_stock (GTK_STOCK_APPLY, GTK_ICON_SIZE_BUTTON));
+				gtk_dialog_add_action_widget (GTK_DIALOG (dialog), apply_button, GTK_RESPONSE_APPLY);
+				GTK_WIDGET_SET_FLAGS (apply_button, GTK_CAN_DEFAULT);
+				gtk_widget_show (apply_button);
+
+				gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_APPLY);
+
+				if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_APPLY)
+				{
+					/* apply theme here! */
+					GConfClient * gconf_client;
+					gconf_client = gconf_client_get_default ();
+					switch (theme_type)
+					{
+						case THEME_GTK: gconf_client_set_string (gconf_client, GTK_THEME_KEY, dir[0], NULL); break;
+						case THEME_METACITY: gconf_client_set_string (gconf_client, METACITY_THEME_KEY, dir[0], NULL); break;
+						case THEME_ICON: gconf_client_set_string (gconf_client, ICON_THEME_KEY, dir[0], NULL); break;
+					}
+
+					g_object_unref (gconf_client);
+				}
+			} else
+			{
+				dialog = gtk_message_dialog_new (NULL,
 			  	       GTK_DIALOG_MODAL,
 				       GTK_MESSAGE_INFO,
 				       GTK_BUTTONS_OK,
 				       theme_props->user_message );
-			gtk_dialog_run (GTK_DIALOG (dialog));
+				gtk_dialog_run (GTK_DIALOG (dialog));
+			}
 			gtk_widget_destroy (dialog);
 			cleanup_tmp_dir (theme_props);			
                         g_free (theme_props->target_tmp_dir);
