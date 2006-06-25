@@ -41,14 +41,14 @@
 #include "gnome-keyboard-properties-xkb.h"
 
 XklEngine *engine;
-XklConfigRegistry *configRegistry;
+XklConfigRegistry *config_registry;
 
-GSwitchItKbdConfig initialConfig;
+GSwitchItKbdConfig initial_config;
 
-GConfClient *xkbGConfClient;
+GConfClient *xkb_gconf_client;
 
 char *
-xci_desc_to_utf8 (const XklConfigItem * ci)
+xci_desc_to_utf8 (XklConfigItem * ci)
 {
   char *sd = g_strstrip (ci->description);
   return sd[0] == 0 ? g_strdup (ci->name) :
@@ -70,11 +70,11 @@ set_model_text (GtkWidget  * entry,
     }
 
   if (model == NULL)
-    model = initialConfig.model;
+    model = initial_config.model;
 
   g_snprintf (ci.name, sizeof (ci.name), "%s", model);
 
-  if (xkl_config_registry_find_model (configRegistry, &ci))
+  if (xkl_config_registry_find_model (config_registry, &ci))
     {
       char * d;
 
@@ -105,14 +105,14 @@ setup_model_entry (GladeXML * dialog)
 {
   GConfValue * value;
 
-  value = gconf_client_get (xkbGConfClient,
+  value = gconf_client_get (xkb_gconf_client,
 			    GSWITCHIT_KBD_CONFIG_KEY_MODEL,
 			    NULL);
   set_model_text (WID ("xkb_model"), value);
   if (value != NULL)
     gconf_value_free (value);
 
-  gconf_client_notify_add (xkbGConfClient,
+  gconf_client_notify_add (xkb_gconf_client,
 			   GSWITCHIT_KBD_CONFIG_KEY_MODEL,
 			   (GConfClientNotifyFunc) model_key_changed,
 			   dialog, NULL, NULL);
@@ -121,24 +121,24 @@ setup_model_entry (GladeXML * dialog)
 static void
 cleanup_xkb_tabs (GladeXML * dialog)
 {
-  GSwitchItKbdConfigTerm (&initialConfig);
-  g_object_unref (G_OBJECT (configRegistry));
-  configRegistry = NULL;
+  gswitchit_kbd_config_term (&initial_config);
+  g_object_unref (G_OBJECT (config_registry));
+  config_registry = NULL;
   g_object_unref (G_OBJECT (engine));
   engine = NULL;
-  g_object_unref (G_OBJECT (xkbGConfClient));
-  xkbGConfClient = NULL;
+  g_object_unref (G_OBJECT (xkb_gconf_client));
+  xkb_gconf_client = NULL;
 }
 
 static void
 reset_to_defaults (GtkWidget * button, GladeXML * dialog)
 {
-  GSwitchItKbdConfig emptyKbdConfig;
+  GSwitchItKbdConfig empty_kbd_config;
 
-  GSwitchItKbdConfigInit (&emptyKbdConfig, xkbGConfClient, engine);
-  GSwitchItKbdConfigSaveToGConfBackup (&emptyKbdConfig);
-  GSwitchItKbdConfigSaveToGConf (&emptyKbdConfig);
-  GSwitchItKbdConfigTerm (&emptyKbdConfig);
+  gswitchit_kbd_config_init (&empty_kbd_config, xkb_gconf_client, engine);
+  gswitchit_kbd_config_save_to_gconf_backup (&empty_kbd_config);
+  gswitchit_kbd_config_save_to_gconf (&empty_kbd_config);
+  gswitchit_kbd_config_term (&empty_kbd_config);
 
   /* all the rest is g-s-d's business */
 }
@@ -156,14 +156,14 @@ void
 setup_xkb_tabs (GladeXML * dialog, GConfChangeSet * changeset)
 {
   GObject * peditor;
-  xkbGConfClient = gconf_client_get_default ();
+  xkb_gconf_client = gconf_client_get_default ();
 
   engine = xkl_engine_get_instance (GDK_DISPLAY ());
-  configRegistry = xkl_config_registry_get_instance (engine);
-  xkl_config_registry_load (configRegistry);
+  config_registry = xkl_config_registry_get_instance (engine);
+  xkl_config_registry_load (config_registry);
 
-  GSwitchItKbdConfigInit (&initialConfig, xkbGConfClient, engine);
-  GSwitchItKbdConfigLoadFromXInitial (&initialConfig);
+  gswitchit_kbd_config_init (&initial_config, xkb_gconf_client, engine);
+  gswitchit_kbd_config_load_from_x_initial (&initial_config);
 
   setup_model_entry (dialog);
 
@@ -196,7 +196,7 @@ setup_xkb_tabs (GladeXML * dialog, GConfChangeSet * changeset)
 
   enable_disable_restoring (dialog);
   xkb_layouts_enable_disable_default (dialog, 
-                                      gconf_client_get_bool (xkbGConfClient, 
+                                      gconf_client_get_bool (xkb_gconf_client, 
                                                              GSWITCHIT_CONFIG_KEY_GROUP_PER_WINDOW, 
                                                              NULL));
 }
@@ -207,11 +207,11 @@ enable_disable_restoring (GladeXML * dialog)
   GSwitchItKbdConfig gswic;
   gboolean enable;
 
-  GSwitchItKbdConfigInit (&gswic, xkbGConfClient, engine);
-  GSwitchItKbdConfigLoadFromGConf (&gswic, NULL);
+  gswitchit_kbd_config_init (&gswic, xkb_gconf_client, engine);
+  gswitchit_kbd_config_load_from_gconf (&gswic, NULL);
 
-  enable = !GSwitchItKbdConfigEquals (&gswic, &initialConfig);
+  enable = !gswitchit_kbd_config_equals (&gswic, &initial_config);
 
-  GSwitchItKbdConfigTerm (&gswic);
+  gswitchit_kbd_config_term (&gswic);
   gtk_widget_set_sensitive (WID ("xkb_reset_to_defaults"), enable);
 }

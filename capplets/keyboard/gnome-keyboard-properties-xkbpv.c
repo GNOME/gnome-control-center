@@ -65,25 +65,25 @@ xkb_layout_preview_create_widget (GladeXML * chooserDialog)
 }
 
 void
-xkb_layout_preview_update (GladeXML * chooserDialog)
+xkb_layout_preview_update (GladeXML * chooser_dialog)
 {
 #ifdef HAVE_X11_EXTENSIONS_XKB_H
   GtkWidget *chooser = CWID ( "xkb_layout_chooser");
-  GtkWidget *availableLayoutsTree = CWID ("xkb_layouts_available");
+  GtkWidget *available_layouts_tree = CWID ("xkb_layouts_available");
   GtkTreeSelection *selection =
-    gtk_tree_view_get_selection (GTK_TREE_VIEW (availableLayoutsTree));
-  GtkTreeIter selectedIter;
+    gtk_tree_view_get_selection (GTK_TREE_VIEW (available_layouts_tree));
+  GtkTreeIter selected_iter;
   GtkTreeModel *model;
   GtkWidget *kbdraw = GTK_WIDGET (g_object_get_data (G_OBJECT (chooser), "kbdraw"));
   if (kbdraw != NULL &&
-      gtk_tree_selection_get_selected (selection, &model, &selectedIter))
+      gtk_tree_selection_get_selected (selection, &model, &selected_iter))
     {
       gchar *id;
       XklConfigRec *data;
       char **p, *layout, *variant;
-      XkbComponentNamesRec componentNames;
+      XkbComponentNamesRec component_names;
 
-      gtk_tree_model_get (model, &selectedIter, AVAIL_LAYOUT_TREE_COL_ID, &id, -1);
+      gtk_tree_model_get (model, &selected_iter, AVAIL_LAYOUT_TREE_COL_ID, &id, -1);
       data = xkl_config_rec_new ();
       if (xkl_config_rec_get_from_server (data, engine))
         {
@@ -95,7 +95,7 @@ xkb_layout_preview_update (GladeXML * chooserDialog)
           
           data->layouts = g_new0 (char*, 2);
           data->variants = g_new0 (char*, 2);
-          if (GSwitchItKbdConfigSplitItems (id, &layout, &variant)
+          if (gswitchit_kbd_config_split_items (id, &layout, &variant)
               && variant != NULL)
             {
               data->layouts[0] = (layout == NULL) ? NULL : g_strdup (layout);
@@ -106,11 +106,11 @@ xkb_layout_preview_update (GladeXML * chooserDialog)
               data->variants[0] = NULL;
             }
 
-          if (xkl_xkb_config_native_prepare (engine, data, &componentNames))
+          if (xkl_xkb_config_native_prepare (engine, data, &component_names))
             {
-              keyboard_drawing_set_keyboard (KEYBOARD_DRAWING (kbdraw), &componentNames);
+              keyboard_drawing_set_keyboard (KEYBOARD_DRAWING (kbdraw), &component_names);
 
-              xkl_xkb_config_native_cleanup (engine, &componentNames);
+              xkl_xkb_config_native_cleanup (engine, &component_names);
             }
         }
       g_object_unref (G_OBJECT (data));

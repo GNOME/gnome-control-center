@@ -38,12 +38,12 @@ G_BEGIN_DECLS
 #define AVAIL_LAYOUT_TREE_COL_DESCRIPTION 0
 #define AVAIL_LAYOUT_TREE_COL_ID 1
 
-#define CWID(s) glade_xml_get_widget (chooserDialog, s)
+#define CWID(s) glade_xml_get_widget (chooser_dialog, s)
 
 extern XklEngine *engine;
-extern XklConfigRegistry *configRegistry;
-extern GConfClient *xkbGConfClient;
-extern GSwitchItKbdConfig initialConfig;
+extern XklConfigRegistry *config_registry;
+extern GConfClient *xkb_gconf_client;
+extern GSwitchItKbdConfig initial_config;
 
 extern void setup_xkb_tabs (GladeXML * dialog, 
                             GConfChangeSet * changeset);
@@ -73,9 +73,9 @@ extern void xkb_options_load_options (GladeXML * dialog);
 
 extern void clear_xkb_elements_list (GSList * list);
 
-extern char *xci_desc_to_utf8 (const XklConfigItem * ci);
+extern char *xci_desc_to_utf8 (XklConfigItem * ci);
 
-extern void sort_tree_content (GtkWidget * treeView);
+extern void sort_tree_content (GtkWidget * tree_view);
 
 extern void enable_disable_restoring (GladeXML * dialog);
 
@@ -101,9 +101,9 @@ extern GSList *xkb_options_get_selected_list (void);
                                GSWITCHIT_KBD_CONFIG_KEY_OPTIONS, \
                                GCONF_VALUE_STRING, (list), NULL)
 
-extern GtkWidget * xkb_layout_preview_create_widget (GladeXML * chooserDialog);
+extern GtkWidget * xkb_layout_preview_create_widget (GladeXML * chooser_dialog);
 
-extern void xkb_layout_preview_update (GladeXML * chooserDialog);
+extern void xkb_layout_preview_update (GladeXML * chooser_dialog);
 
 G_END_DECLS
 #endif				/* __GNOME_KEYBOARD_PROPERTY_XKB_H */

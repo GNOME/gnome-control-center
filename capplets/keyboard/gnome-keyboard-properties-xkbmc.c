@@ -40,27 +40,27 @@
 
 #include "gnome-keyboard-properties-xkb.h"
 
-static gchar* currentModelName = NULL;
+static gchar* current_model_name = NULL;
 
 static void
-add_model_to_list (XklConfigRegistry * configRegistry,
-                   const XklConfigItem * configItem,
-                   GtkTreeView * modelsList)
+add_model_to_list (XklConfigRegistry * config_registry,
+                   XklConfigItem * config_item,
+                   GtkTreeView * models_list)
 {
   GtkTreeIter iter;
-  GtkListStore * listStore = GTK_LIST_STORE (gtk_tree_view_get_model (modelsList));
-  char *utfModelName = xci_desc_to_utf8 (configItem);
-  gtk_list_store_append( listStore, &iter );
-  gtk_list_store_set( listStore, &iter, 
-                      0, utfModelName,
-                      1, configItem->name, -1 );
+  GtkListStore * list_store = GTK_LIST_STORE (gtk_tree_view_get_model (models_list));
+  char *utf_model_name = xci_desc_to_utf8 (config_item);
+  gtk_list_store_append( list_store, &iter );
+  gtk_list_store_set( list_store, &iter, 
+                      0, utf_model_name,
+                      1, config_item->name, -1 );
 
-  g_free (utfModelName);
+  g_free (utf_model_name);
 }
 
 static void
 xkb_model_chooser_change_sel (GtkTreeSelection* selection, 
-                              GladeXML* chooserDialog)
+                              GladeXML* chooser_dialog)
 {
    gboolean anysel = gtk_tree_selection_get_selected (selection, NULL, NULL);
    gtk_dialog_set_response_sensitive (GTK_DIALOG (CWID ("xkb_model_chooser")),
@@ -68,79 +68,79 @@ xkb_model_chooser_change_sel (GtkTreeSelection* selection,
 }
 
 static void
-fill_models_list (GladeXML * chooserDialog)
+fill_models_list (GladeXML * chooser_dialog)
 {
-  GtkWidget* modelsList = CWID( "models_list" );
+  GtkWidget* models_list = CWID( "models_list" );
   GtkTreeIter iter;
   GtkTreePath *path;
   GtkCellRenderer* renderer = gtk_cell_renderer_text_new ();
-  GtkTreeViewColumn* descriptionCol = gtk_tree_view_column_new_with_attributes (  _("Models"),
+  GtkTreeViewColumn* description_col = gtk_tree_view_column_new_with_attributes (  _("Models"),
                                                                                   renderer,
                                                                                   "text", 0,
                                                                                   NULL);
-  GtkListStore *listStore = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_STRING);
-  char *modelName;
+  GtkListStore *list_store = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_STRING);
+  char *model_name;
 
-  gtk_tree_view_column_set_visible (descriptionCol, TRUE);
-  gtk_tree_view_append_column (GTK_TREE_VIEW (modelsList), descriptionCol);
+  gtk_tree_view_column_set_visible (description_col, TRUE);
+  gtk_tree_view_append_column (GTK_TREE_VIEW (models_list), description_col);
 
-  gtk_tree_view_set_model (GTK_TREE_VIEW (modelsList), GTK_TREE_MODEL (listStore) );
+  gtk_tree_view_set_model (GTK_TREE_VIEW (models_list), GTK_TREE_MODEL (list_store) );
 
-  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (listStore),
+  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (list_store),
                                         0, GTK_SORT_ASCENDING);
 
-  xkl_config_registry_foreach_model (configRegistry,
+  xkl_config_registry_foreach_model (config_registry,
                                      (ConfigItemProcessFunc) add_model_to_list,
-                                     modelsList);
+                                     models_list);
 
-  if (currentModelName != NULL)
+  if (current_model_name != NULL)
   {
-    if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (listStore), &iter))
+    if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (list_store), &iter))
     {
       do
       {
-        gtk_tree_model_get (GTK_TREE_MODEL (listStore), &iter, 
-                            1, &modelName, -1);
-        if (!g_ascii_strcasecmp(modelName, currentModelName))
+        gtk_tree_model_get (GTK_TREE_MODEL (list_store), &iter, 
+                            1, &model_name, -1);
+        if (!g_ascii_strcasecmp(model_name, current_model_name))
         {
-          gtk_tree_selection_select_iter (gtk_tree_view_get_selection (GTK_TREE_VIEW (modelsList)), &iter);
-          path = gtk_tree_model_get_path (GTK_TREE_MODEL (listStore), &iter);
-          gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (modelsList),
+          gtk_tree_selection_select_iter (gtk_tree_view_get_selection (GTK_TREE_VIEW (models_list)), &iter);
+          path = gtk_tree_model_get_path (GTK_TREE_MODEL (list_store), &iter);
+          gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (models_list),
                                         path, NULL, TRUE, 0.5, 0);
           gtk_tree_path_free (path);
         }
-        g_free (modelName);
-      } while (gtk_tree_model_iter_next (GTK_TREE_MODEL (listStore), &iter));
+        g_free (model_name);
+      } while (gtk_tree_model_iter_next (GTK_TREE_MODEL (list_store), &iter));
     }
   }
 
-  g_signal_connect (G_OBJECT (gtk_tree_view_get_selection (GTK_TREE_VIEW (modelsList))), 
+  g_signal_connect (G_OBJECT (gtk_tree_view_get_selection (GTK_TREE_VIEW (models_list))), 
                     "changed",
                     G_CALLBACK (xkb_model_chooser_change_sel),
-                    chooserDialog);
+                    chooser_dialog);
 }
 
 static void
 xkb_model_chooser_response (GtkDialog *dialog,
                             gint response,
-                            GladeXML *chooserDialog)
+                            GladeXML *chooser_dialog)
 {
   if (response == GTK_RESPONSE_OK)
     {
-      GtkWidget* modelsList = CWID( "models_list" );
-      GtkTreeSelection* selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (modelsList));
+      GtkWidget* models_list = CWID( "models_list" );
+      GtkTreeSelection* selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (models_list));
       GtkTreeIter iter;
-      GtkTreeModel* listStore = NULL;
-      if (gtk_tree_selection_get_selected (selection, &listStore, &iter))
+      GtkTreeModel* list_store = NULL;
+      if (gtk_tree_selection_get_selected (selection, &list_store, &iter))
         {
-          gchar* modelName = NULL;
-          gtk_tree_model_get (listStore, &iter, 
-                              1, &modelName, -1);
+          gchar* model_name = NULL;
+          gtk_tree_model_get (list_store, &iter, 
+                              1, &model_name, -1);
 
-          gconf_client_set_string (xkbGConfClient,
+          gconf_client_set_string (xkb_gconf_client,
 			           GSWITCHIT_KBD_CONFIG_KEY_MODEL,
-			           modelName, NULL);
-          g_free(modelName);
+			           model_name, NULL);
+          g_free(model_name);
         }
     }
 }
@@ -148,15 +148,15 @@ xkb_model_chooser_response (GtkDialog *dialog,
 void
 choose_model(GladeXML * dialog)
 {
-  GladeXML* chooserDialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/gnome-keyboard-properties.glade", "xkb_model_chooser", NULL);
+  GladeXML* chooser_dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/gnome-keyboard-properties.glade", "xkb_model_chooser", NULL);
   GtkWidget* chooser = CWID ( "xkb_model_chooser");
   gtk_window_set_transient_for (GTK_WINDOW (chooser), GTK_WINDOW (WID ("keyboard_dialog")));
-  currentModelName = gconf_client_get_string (xkbGConfClient,
+  current_model_name = gconf_client_get_string (xkb_gconf_client,
 			           GSWITCHIT_KBD_CONFIG_KEY_MODEL, NULL);
-  fill_models_list (chooserDialog);
+  fill_models_list (chooser_dialog);
   g_signal_connect (G_OBJECT (chooser),
-		    "response", G_CALLBACK (xkb_model_chooser_response), chooserDialog);
+		    "response", G_CALLBACK (xkb_model_chooser_response), chooser_dialog);
   gtk_dialog_run (GTK_DIALOG (chooser));
   gtk_widget_destroy (chooser);
-  g_free (currentModelName);
+  g_free (current_model_name);
 }

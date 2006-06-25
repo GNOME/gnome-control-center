@@ -40,11 +40,11 @@
 
 #include "gnome-keyboard-properties-xkb.h"
 
-static const char *current1stLevelId = NULL;
-static GtkWidget *currentVbox = NULL;
-static GtkWidget *currentNoneRadio = NULL;
-static gboolean currentMultiSelect = FALSE;
-static GSList *currentRadioGroup = NULL;
+static const char *current1st_level_id = NULL;
+static GtkWidget *current_vbox = NULL;
+static GtkWidget *current_none_radio = NULL;
+static gboolean current_multi_select = FALSE;
+static GSList *current_radio_group = NULL;
 
 #define OPTION_ID_PROP "optionID"
 #define SELCOUNTER_PROP "selectionCounter"
@@ -56,16 +56,16 @@ xkb_options_get_selected_list (void)
 {
   GSList *retval;
 
-  retval = gconf_client_get_list (xkbGConfClient,
+  retval = gconf_client_get_list (xkb_gconf_client,
                                   GSWITCHIT_KBD_CONFIG_KEY_OPTIONS,
                                   GCONF_VALUE_STRING,
                                   NULL);
   if (retval == NULL)
     {
-      GSList *curOption;
+      GSList *cur_option;
 
-      for (curOption = initialConfig.options; curOption != NULL; curOption = curOption->next)
-        retval = g_slist_prepend (retval, g_strdup (curOption->data));
+      for (cur_option = initial_config.options; cur_option != NULL; cur_option = cur_option->next)
+        retval = g_slist_prepend (retval, g_strdup (cur_option->data));
 
       retval = g_slist_reverse (retval);
     }
@@ -97,12 +97,14 @@ xkb_options_expander_selcounter_add (GtkWidget * expander, int value)
 static void
 xkb_options_expander_highlight (GtkWidget * expander)
 {
-  char * utfGroupName = g_object_get_data (G_OBJECT (expander), "utfGroupName");
+  char * utf_group_name = g_object_get_data (G_OBJECT (expander), "utfGroupName");
   int counter = xkb_options_expander_selcounter_get (expander);
-  gchar *titlemarkup = g_strconcat (counter > 0 ? "<span weight=\"bold\">" : "<span>", 
-                                    utfGroupName, "</span>", NULL);
-  gtk_expander_set_label (GTK_EXPANDER (expander), titlemarkup);
-  g_free (titlemarkup);
+  if (utf_group_name != NULL) {
+    gchar *titlemarkup = g_strconcat (counter > 0 ? "<span weight=\"bold\">" : "<span>", 
+                                      utf_group_name, "</span>", NULL);
+    gtk_expander_set_label (GTK_EXPANDER (expander), titlemarkup);
+    g_free (titlemarkup);
+  }
 }
 
 /* Add optionname from the backend's selection list if it's not
@@ -111,26 +113,26 @@ static void
 xkb_options_select (gchar *optionname)
 {
   gboolean already_selected = FALSE;
-  GSList *optionsList = xkb_options_get_selected_list ();
+  GSList *options_list = xkb_options_get_selected_list ();
   GSList *option;
-  for (option = optionsList ; option != NULL ; option = option->next)
+  for (option = options_list ; option != NULL ; option = option->next)
     if (!strcmp ((gchar*)option->data, optionname))
       already_selected = TRUE;
 
   if (!already_selected)
-    optionsList = g_slist_append (optionsList, g_strdup (optionname));
-  xkb_options_set_selected_list (optionsList);
+    options_list = g_slist_append (options_list, g_strdup (optionname));
+  xkb_options_set_selected_list (options_list);
 
-  clear_xkb_elements_list (optionsList);
+  clear_xkb_elements_list (options_list);
 }
 
 /* Remove all occurences of optionname from the backend's selection list */
 static void
 xkb_options_deselect (gchar *optionname)
 {
-  GSList *optionsList = xkb_options_get_selected_list ();
+  GSList *options_list = xkb_options_get_selected_list ();
   GSList *nodetmp;
-  GSList *option = optionsList;
+  GSList *option = options_list;
   while (option != NULL)
     {
       gchar *id = (char *) option->data;
@@ -138,15 +140,15 @@ xkb_options_deselect (gchar *optionname)
         {
           nodetmp = option->next;
           g_free (id);
-          optionsList = g_slist_remove_link (optionsList, option);
+          options_list = g_slist_remove_link (options_list, option);
           g_slist_free_1 (option);
           option=nodetmp;
         }
       else
         option = option->next;
     }
-  xkb_options_set_selected_list (optionsList);
-  clear_xkb_elements_list (optionsList);
+  xkb_options_set_selected_list (options_list);
+  clear_xkb_elements_list (options_list);
 }
 
 /* Return true if optionname describes a string already in the backend's
@@ -155,14 +157,14 @@ static gboolean
 xkb_options_is_selected (gchar *optionname)
 {
   gboolean retval = FALSE;
-  GSList *optionsList = xkb_options_get_selected_list ();
+  GSList *options_list = xkb_options_get_selected_list ();
   GSList *option;
-  for (option = optionsList ; option != NULL ; option = option->next)
+  for (option = options_list ; option != NULL ; option = option->next)
     {
       if (!strcmp ((gchar*)option->data, optionname))
         retval = TRUE;
     }
-  clear_xkb_elements_list (optionsList);
+  clear_xkb_elements_list (options_list);
   return retval;
 }
 
@@ -205,53 +207,53 @@ option_update_cb (GConfClient * client,
    This function makes particular use of the current... variables at
    the top of this file. */
 static void
-xkb_options_add_option (XklConfigRegistry * configRegistry,
-                        const XklConfigItem * configItem,
+xkb_options_add_option (XklConfigRegistry * config_registry,
+                        XklConfigItem * config_item,
                         GladeXML * dialog)
 {
   GtkWidget *option_check;
-  gchar *utfOptionName = xci_desc_to_utf8 (configItem);
+  gchar *utf_option_name = xci_desc_to_utf8 (config_item);
   /* Copy this out because we'll load it into the widget with set_data */
-  gchar *fullOptionName = g_strdup(
-    GSwitchItKbdConfigMergeItems (current1stLevelId, configItem->name));
+  gchar *full_option_name = g_strdup(
+    gswitchit_kbd_config_merge_items (current1st_level_id, config_item->name));
   gboolean initial_state;
 
-  if (currentMultiSelect)
-    option_check = gtk_check_button_new_with_label (utfOptionName);
+  if (current_multi_select)
+    option_check = gtk_check_button_new_with_label (utf_option_name);
   else
     {
-      if (currentRadioGroup == NULL)
+      if (current_radio_group == NULL)
         {
           /* The first radio in a group is to be "Default", meaning none of
              the below options are to be included in the selected list.
              This is a HIG-compliant alternative to allowing no
              selection in the group. */
-          option_check = gtk_radio_button_new_with_label (currentRadioGroup, _("Default"));
+          option_check = gtk_radio_button_new_with_label (current_radio_group, _("Default"));
           gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (option_check), TRUE);
-          gtk_box_pack_start_defaults (GTK_BOX (currentVbox), option_check);
-          currentRadioGroup = gtk_radio_button_get_group (GTK_RADIO_BUTTON (option_check));
-          currentNoneRadio = option_check;
+          gtk_box_pack_start_defaults (GTK_BOX (current_vbox), option_check);
+          current_radio_group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (option_check));
+          current_none_radio = option_check;
         }
-      option_check = gtk_radio_button_new_with_label (currentRadioGroup, utfOptionName);
-      currentRadioGroup = gtk_radio_button_get_group (GTK_RADIO_BUTTON (option_check));
-      g_object_set_data (G_OBJECT (option_check), "NoneRadio", currentNoneRadio);
+      option_check = gtk_radio_button_new_with_label (current_radio_group, utf_option_name);
+      current_radio_group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (option_check));
+      g_object_set_data (G_OBJECT (option_check), "NoneRadio", current_none_radio);
     }
-  g_free (utfOptionName);
+  g_free (utf_option_name);
 
-  initial_state = xkb_options_is_selected (fullOptionName);
+  initial_state = xkb_options_is_selected (full_option_name);
 
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (option_check), initial_state);
 
-  g_object_set_data_full (G_OBJECT (option_check), OPTION_ID_PROP, fullOptionName, g_free);
+  g_object_set_data_full (G_OBJECT (option_check), OPTION_ID_PROP, full_option_name, g_free);
 
   g_signal_connect (G_OBJECT (option_check), "toggled", G_CALLBACK (option_toggled_cb), NULL);
 
-  gconf_client_notify_add (xkbGConfClient,
+  gconf_client_notify_add (xkb_gconf_client,
 			   GSWITCHIT_KBD_CONFIG_KEY_OPTIONS,
 			   (GConfClientNotifyFunc)
 			   option_update_cb, option_check, NULL, NULL);
 
-  gtk_box_pack_start_defaults (GTK_BOX (currentVbox), option_check);
+  gtk_box_pack_start_defaults (GTK_BOX (current_vbox), option_check);
 
   xkb_options_expander_selcounter_add (xkb_options_get_expander (option_check), initial_state);
   g_object_set_data (G_OBJECT (option_check), GCONFSTATE_PROP, GINT_TO_POINTER (initial_state));
@@ -260,36 +262,36 @@ xkb_options_add_option (XklConfigRegistry * configRegistry,
 /* Add a group of options: create title and layout widgets and then
    add widgets for all the options in the group. */
 static void
-xkb_options_add_group (XklConfigRegistry * configRegistry,
-                       const XklConfigItem * configItem,
+xkb_options_add_group (XklConfigRegistry * config_registry,
+                       XklConfigItem * config_item,
                        GladeXML * dialog)
 {
   GtkWidget *expander, *align, *vbox;
-  gboolean allowMultipleSelection = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (configItem),
+  gboolean allow_multiple_selection = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (config_item),
                                                                         XCI_PROP_ALLOW_MULTIPLE_SELECTION));
 
   GSList * expanders_list = g_object_get_data (G_OBJECT (dialog), EXPANDERS_PROP);
 
-  gchar *utfGroupName = xci_desc_to_utf8 (configItem);
-  gchar *titlemarkup = g_strconcat ("<span>", utfGroupName, "</span>", NULL);
+  gchar *utf_group_name = xci_desc_to_utf8 (config_item);
+  gchar *titlemarkup = g_strconcat ("<span>", utf_group_name, "</span>", NULL);
 
   expander = gtk_expander_new (titlemarkup);
-  g_object_set_data_full (G_OBJECT (expander), "utfGroupName", utfGroupName, g_free);
+  gtk_expander_set_use_markup (GTK_EXPANDER (expander), TRUE);
+  g_object_set_data_full (G_OBJECT (expander), "utfGroupName", utf_group_name, g_free);
 
   g_free (titlemarkup);
-  gtk_expander_set_use_markup (GTK_EXPANDER (expander), TRUE);
   align = gtk_alignment_new (0, 0, 1, 1);
   gtk_alignment_set_padding (GTK_ALIGNMENT (align), 6, 12, 12, 0);
   vbox = gtk_vbox_new (TRUE, 6);
   gtk_container_add (GTK_CONTAINER (align), vbox);
   gtk_container_add (GTK_CONTAINER (expander), align);
-  currentVbox = vbox;
+  current_vbox = vbox;
 
-  currentMultiSelect = (gboolean) allowMultipleSelection;
-  currentRadioGroup = NULL;
+  current_multi_select = (gboolean) allow_multiple_selection;
+  current_radio_group = NULL;
 
-  current1stLevelId = configItem->name;
-  xkl_config_registry_foreach_option (configRegistry, configItem->name,
+  current1st_level_id = config_item->name;
+  xkl_config_registry_foreach_option (config_registry, config_item->name,
                                       (ConfigItemProcessFunc)xkb_options_add_option, 
 				      dialog);
 
@@ -316,7 +318,7 @@ xkb_options_load_options (GladeXML * dialog)
   GtkWidget * expander;
 
   /* fill the list */
-  xkl_config_registry_foreach_option_group (configRegistry,
+  xkl_config_registry_foreach_option_group (config_registry,
                                             (ConfigItemProcessFunc)xkb_options_add_group,
                                             dialog);
   /* sort it */
@@ -351,7 +353,7 @@ xkb_options_update (GConfClient * client,
 void
 xkb_options_register_gconf_listener (GladeXML * dialog)
 {
-  gconf_client_notify_add (xkbGConfClient,
+  gconf_client_notify_add (xkb_gconf_client,
 			   GSWITCHIT_KBD_CONFIG_KEY_OPTIONS,
 			   (GConfClientNotifyFunc)
 			   xkb_options_update, dialog, NULL, NULL);
