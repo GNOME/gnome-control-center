@@ -103,6 +103,7 @@ PKG_CHECK_MODULES(GNOME_SETTINGS_DAEMON,
 PKG_CHECK_MODULES(OLD_CAPPLET, libgnomeui-2.0 libglade-2.0)
 PKG_CHECK_MODULES(GNOME, libgnomeui-2.0)
 PKG_CHECK_MODULES(GTK, gtk+-2.0)
+PKG_CHECK_MODULES(DBUS, dbus-1 dbus-glib-1)
 PKG_CHECK_MODULES(VFS_CAPPLET, $COMMON_MODULES gnome-vfs-module-2.0 gnome-vfs-2.0)
 PKG_CHECK_MODULES(GNOME_DESKTOP, gnome-desktop-2.0)
 PKG_CHECK_MODULES(DEFAULT_APPLICATIONS_CAPPLET, libxml-2.0)
@@ -382,6 +383,11 @@ AC_SUBST(LIBBONOBO_IDL_DIR)
 BONOBO_ACTIVATION_IDL_DIR="`$PKG_CONFIG --variable=idldir bonobo-activation-2.0`"
 AC_SUBST(BONOBO_ACTIVATION_IDL_DIR)
 
+# dbus directory
+DBUS_SERVICES_DIR='$(datadir)'"/dbus-1/services"
+AC_SUBST(DBUS_SERVICES_DIR)
+AC_DEFINE_UNQUOTED(DBUS_SERVICES_DIR, "$DBUS_SERVICES_DIR", [Where services dir for DBUS is])
+
 # esd
 ESDSERVERDIR=`$PKG_CONFIG --variable=esd_serverdir esound`
 if test x"$ESDSERVERDIR" = x; then
@@ -532,8 +538,8 @@ COMMON_LIBS="\$(top_builddir)/capplets/common/libcommon.la"
 
 EXTRA_CFLAGS="-I\$(top_srcdir)/ -DG_LOG_DOMAIN=\"\\\"\$(cappletname)-properties\\\"\""
 
-GNOMECC_CAPPLETS_CFLAGS="${COMMON_CFLAGS} ${CAPPLET_CFLAGS} ${EXTRA_CFLAGS}"
-GNOMECC_CAPPLETS_LIBS="${COMMON_LIBS} ${CAPPLET_LIBS}"
+GNOMECC_CAPPLETS_CFLAGS="${COMMON_CFLAGS} ${CAPPLET_CFLAGS} ${EXTRA_CFLAGS} ${DBUS_CFLAGS}"
+GNOMECC_CAPPLETS_LIBS="${COMMON_LIBS} ${CAPPLET_LIBS} ${DBUS_LIBS}"
 
 GNOMECC_CAPPLETS_CLEANFILES="\$(desktop) \$(desktop).in"
 GNOMECC_CAPPLETS_EXTRA_DIST="ChangeLog \$(desktop).in.in \$(cappletname)-capplet.png \$(cappletname)-properties.glade \$(pixmaps_DATA)"
@@ -599,6 +605,7 @@ idl/Makefile
 gnome-settings-daemon/Makefile
 gnome-settings-daemon/xrdb/Makefile
 gnome-settings-daemon/actions/Makefile
+gnome-settings-daemon/gnome-settings-daemon.pc
 control-center/Makefile
 libbackground/Makefile
 libwindow-settings/Makefile
