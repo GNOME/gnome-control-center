@@ -5,8 +5,10 @@ INCLUDES = \
 	-DGNOME_ICONDIR=\""${prefix}/share/pixmaps"\"			\
 	-DG_LOG_DOMAIN=\"capplet-common\"				\
 	-DINSTALL_PREFIX=\"$(prefix)\"					\
+	-I$(top_srcdir)							\
 	-I$(top_srcdir)/libbackground					\
 	-I$(top_srcdir)/libwindow-settings				\
+	@DBUS_CFLAGS@							\
 	@VFS_CAPPLET_CFLAGS@						\
 	@GNOME_DESKTOP_CFLAGS@						\
 	@METACITY_CFLAGS@

@@ -2,13 +2,11 @@
 #include <config.h>
 #endif
 
-#include <libbonobo.h>
+#include <gnome-settings-daemon/gnome-settings-client.h>
 #include <gtk/gtk.h>
+#include <glib/gi18n.h>
 
 #include "activate-settings-daemon.h"
-
-
-/*#include "GNOME_SettingsDaemon.h"*/
 
 static void popup_error_message (void)
 {
@@ -28,27 +26,35 @@ static void popup_error_message (void)
 gboolean 
 activate_settings_daemon (void)
 {
-  CORBA_Environment ev;
-  CORBA_Object object;
+  DBusGConnection *connection = NULL;
+  DBusGProxy *proxy = NULL;
+  GError *error = NULL;
 
-  /*GNOME_SettingsDaemon corba_foo;*/
-  
-  bonobo_init (NULL, NULL);
-  
-  CORBA_exception_init (&ev);
+  connection = dbus_g_bus_get (DBUS_BUS_SESSION, &error);
+  if (connection == NULL)
+    {
+      popup_error_message ();
+      g_error_free (error);
+      return FALSE;
+    }
+    
+  proxy = dbus_g_proxy_new_for_name (connection,
+                                     "org.gnome.SettingsDaemon",
+                                     "/org/gnome/SettingsDaemon",
+                                     "org.gnome.SettingsDaemon");
 
-  object = bonobo_activation_activate_from_id  ("OAFIID:GNOME_SettingsDaemon",
-						0, NULL, &ev);
-  
-  if (BONOBO_EX(&ev) || object == CORBA_OBJECT_NIL ) {
-    popup_error_message ();
-    CORBA_exception_free(&ev);
-    return FALSE;
-  }
+  if (proxy == NULL)
+    {
+      popup_error_message ();
+      return FALSE;
+    }
 
-  /*bool = GNOME_SettingsDaemon_awake (corba_foo, "MyService", &ev);
-    printf ("bool is %d\n", bool);*/
+  if (!org_gnome_SettingsDaemon_awake(proxy, &error))
+    {
+      popup_error_message ();
+      g_error_free (error);
+      return FALSE;
+    }
 
-  CORBA_exception_free(&ev);
   return TRUE;
 }
