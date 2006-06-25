@@ -1,6 +1,6 @@
 SUBDIRS = xrdb actions
 
-INCLUDES=$(LIBXKLAVIER_CFLAGS) $(GNOME_SETTINGS_DAEMON_CFLAGS) -I$(top_srcdir)/libbackground -I$(top_srcdir) \
+INCLUDES=$(DBUS_CFLAGS) $(LIBXKLAVIER_CFLAGS) $(GNOME_SETTINGS_DAEMON_CFLAGS) -I$(top_srcdir)/libbackground -I$(top_srcdir) \
   -DGNOMELOCALEDIR="\"$(datadir)/locale\"" 	\
   -DESD_SERVER="\"$(ESD_SERVER)\""		\
   -DDATADIR="\"$(datadir)\""			\
@@ -41,6 +41,8 @@ gnome_settings_daemon_SOURCES =	\
 	gnome-settings-default-editor.h	\
 	gnome-settings-gtk1theme.c      \
 	gnome-settings-gtk1theme.h	\
+	gnome-settings-server.h		\
+	gnome-settings-dbus.c		\
 	gnome-settings-xrdb.c		\
 	gnome-settings-xrdb.h		\
 	xsettings-common.c		\
@@ -66,6 +68,7 @@ gnome_settings_daemon_SOURCES =	\
 #	$(AccessX_files)		
 
 gnome_settings_daemon_LDADD = \
+	$(DBUS_LIBS)						\
 	$(LIBXKLAVIER_LIBS)						\
 	$(top_builddir)/libbackground/libbackground.la			\
 	$(top_builddir)/libsounds/libsounds.a				\
@@ -81,36 +84,35 @@ gnome_settings_daemon_LDADD = \
 #	AccessXproto.h		\
 #	AccessXlibint.h
 
-CORBA_GENERATED_HEADER_FILES = GNOME_SettingsDaemon.h
-
-CORBA_GENERATED = \
-        $(CORBA_GENERATED_HEADER_FILES) \
-        GNOME_SettingsDaemon-common.c \
-        GNOME_SettingsDaemon-stubs.c \
-        GNOME_SettingsDaemon-skels.c
-
 BUILT_SOURCES=$(CORBA_GENERATED)
-
-idl_dir = $(top_srcdir)/idl
-
-IDL_FLAGS = -D__GNOME_SettingsDaemon_COMPILATION -I $(idl_dir) -I $(datadir)/idl \
-        -I $(LIBBONOBO_IDL_DIR)                                 \
-        -I $(BONOBO_ACTIVATION_IDL_DIR)
-
-$(CORBA_GENERATED): $(idl_dir)/GNOME_SettingsDaemon.idl $(ORBIT_IDL)
-	$(ORBIT_IDL) $(IDL_FLAGS) $(idl_dir)/GNOME_SettingsDaemon.idl
 
 Gladedir   = $(GNOMECC_GLADE_DIR)
 Glade_DATA = modmap-dialog.glade
 
-serverfile = GNOME_SettingsDaemon.server.in
-serverdir = $(libdir)/bonobo/servers
-install-data-hook :
-	$(mkinstalldirs) $(DESTDIR)$(serverdir)
-	sed -e "s|\@LIBEXECDIR\@|$(libexecdir)|" $(srcdir)/$(serverfile) > $(DESTDIR)$(serverdir)/$(serverfile:.in=)
+Dbusapidir   = $(includedir)/gnome-settings-daemon-2.0/gnome-settings-daemon
+Dbusapi_DATA = gnome-settings-client.h
 
-EXTRA_DIST = $(serverfile) $(Glade_DATA)
+#Rule to generate the binding headers
+gnome-settings-server.h:  gsd-infos.xml
+	dbus-binding-tool --prefix=settings_daemon --mode=glib-server $< > $@
+
+gnome-settings-client.h:  gsd-infos.xml
+	dbus-binding-tool --prefix=settings_daemon --mode=glib-client $< > $@
+
+# DBUS stuff
+servicedir = $(DBUS_SERVICES_DIR)
+service_in_files = org.gnome.SettingsDaemon.service.in
+service_DATA = $(service_in_files:.service.in=.service)
+
+org.gnome.SettingsDaemon.service: org.gnome.SettingsDaemon.service.in Makefile
+	@sed -e "s|\@libexecdir\@|$(libexecdir)|" $< > $@
+
+EXTRA_DIST = $(serverfile) $(Glade_DATA) $(Dbusapi_DATA) \
+             gnome-settings-daemon.pc.in gsd-infos.xml org.gnome.SettingsDaemon.service.in
 CLEANFILES = $(BUILT_SOURCES)
+
+pkgconfigdir = $(libdir)/pkgconfig
+pkgconfig_DATA = gnome-settings-daemon.pc
 
 uninstall-local:
 	rm -f $(DESTDIR)$(serverdir)/$(serverfile:.in=)

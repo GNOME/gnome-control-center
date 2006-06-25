@@ -35,24 +35,23 @@
 #include <string.h>
 #include <time.h>
 
-#include <libxklavier/xklavier.h>
 #include <libgswitchit/gswitchit_config.h>
 
 #include "gnome-settings-keyboard-xkb.h"
 #include "gnome-settings-daemon.h"
 
-static XklEngine *engine;
+XklEngine *xkl_engine;
 
-static GSwitchItConfig currentConfig;
-static GSwitchItKbdConfig currentKbdConfig;
+static GSwitchItConfig current_config;
+static GSwitchItKbdConfig current_kbd_config;
 
 /* never terminated */
-static GSwitchItKbdConfig initialSysKbdConfig;
+static GSwitchItKbdConfig initial_sys_kbd_config;
 
-static gboolean initedOk;
+static gboolean inited_ok;
 
-static PostActivationCallback paCallback = NULL;
-static void *paCallbackUserData = NULL;
+static PostActivationCallback pa_callback = NULL;
+static void *pa_callback_user_data = NULL;
 
 static const char KNOWN_FILES_KEY[] =
     "/desktop/gnome/peripherals/keyboard/general/known_file_list";
@@ -130,39 +129,40 @@ activation_error (void)
 static void
 apply_settings (void)
 {
-	if (!initedOk)
+	if (!inited_ok)
 		return;
 
-	GSwitchItConfigLoadFromGConf (&currentConfig);
+	gswitchit_config_load_from_gconf (&current_config);
 	/* again, probably it would be nice to compare things 
 	   before activating them */
-	GSwitchItConfigActivate (&currentConfig);
+	gswitchit_config_activate (&current_config);
 }
 
 static void
 apply_xkb_settings (void)
 {
-	GConfClient *confClient;
-	GSwitchItKbdConfig currentSysKbdConfig;
+	GConfClient *conf_client;
+	GSwitchItKbdConfig current_sys_kbd_config;
 
-	if (!initedOk)
+	if (!inited_ok)
 		return;
 
-	confClient = gnome_settings_daemon_get_conf_client ();
-	GSwitchItKbdConfigInit (&currentSysKbdConfig, confClient, engine);
+	conf_client = gnome_settings_daemon_get_conf_client ();
+	gswitchit_kbd_config_init (&current_sys_kbd_config, conf_client,
+				   xkl_engine);
 
-	GSwitchItKbdConfigLoadFromGConf (&currentKbdConfig,
-					 &initialSysKbdConfig);
+	gswitchit_kbd_config_load_from_gconf (&current_kbd_config,
+					      &initial_sys_kbd_config);
 
-	GSwitchItKbdConfigLoadFromXCurrent (&currentSysKbdConfig);
+	gswitchit_kbd_config_load_from_x_current (&current_sys_kbd_config);
 	/* Activate - only if different! */
-	if (!GSwitchItKbdConfigEquals
-	    (&currentKbdConfig, &currentSysKbdConfig)) {
-		if (GSwitchItKbdConfigActivate (&currentKbdConfig)) {
-			GSwitchItKbdConfigSaveToGConfBackup
-			    (&initialSysKbdConfig);
-			if (paCallback != NULL) {
-				(*paCallback) (paCallbackUserData);
+	if (!gswitchit_kbd_config_equals
+	    (&current_kbd_config, &current_sys_kbd_config)) {
+		if (gswitchit_kbd_config_activate (&current_kbd_config)) {
+			gswitchit_kbd_config_save_to_gconf_backup
+			    (&initial_sys_kbd_config);
+			if (pa_callback != NULL) {
+				(*pa_callback) (pa_callback_user_data);
 			}
 		} else {
 			g_warning
@@ -173,7 +173,7 @@ apply_xkb_settings (void)
 		xkl_debug (100,
 			   "Actual KBD configuration was not changed: redundant notification\n");
 
-	GSwitchItKbdConfigTerm (&currentSysKbdConfig);
+	gswitchit_kbd_config_term (&current_sys_kbd_config);
 }
 
 static void
@@ -181,29 +181,29 @@ gnome_settings_keyboard_xkb_sysconfig_changed_response (GtkDialog * dialog,
 							SysConfigChangedMsgResponse
 							what2do)
 {
-	GConfClient *confClient;
-	GSwitchItKbdConfig emptyKbdConfig;
-	gboolean dontShowAgain =
+	GConfClient *conf_client;
+	GSwitchItKbdConfig empty_kbd_config;
+	gboolean dont_show_again =
 	    gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON
 					  (g_object_get_data
 					   (G_OBJECT (dialog),
 					    "chkDontShowAgain")));
 
-	confClient = gnome_settings_daemon_get_conf_client ();
+	conf_client = gnome_settings_daemon_get_conf_client ();
 
 	switch (what2do) {
 	case RESPONSE_USE_X:
-		GSwitchItKbdConfigInit (&emptyKbdConfig, confClient,
-					engine);
-		GSwitchItKbdConfigSaveToGConf (&emptyKbdConfig);
+		gswitchit_kbd_config_init (&empty_kbd_config, conf_client,
+					   xkl_engine);
+		gswitchit_kbd_config_save_to_gconf (&empty_kbd_config);
 		break;
 	case RESPONSE_USE_GNOME:
 		/* Do absolutely nothing - just keep things the way they are */
 		break;
 	}
 
-	if (dontShowAgain)
-		gconf_client_set_bool (confClient,
+	if (dont_show_again)
+		gconf_client_set_bool (conf_client,
 				       DISABLE_SYSCONF_CHANGED_WARNING_KEY,
 				       TRUE, NULL);
 
@@ -213,63 +213,73 @@ gnome_settings_keyboard_xkb_sysconfig_changed_response (GtkDialog * dialog,
 static void
 gnome_settings_keyboard_xkb_analyze_sysconfig (void)
 {
-	GConfClient *confClient;
-	GSwitchItKbdConfig backupGConfKbdConfig;
-	gboolean isConfigChanged, dontShow;
+	GConfClient *conf_client;
+	GSwitchItKbdConfig backup_gconf_kbd_config;
+	gboolean is_config_changed, dont_show;
 
-	if (!initedOk)
+	if (!inited_ok)
 		return;
-	confClient = gnome_settings_daemon_get_conf_client ();
-	GSwitchItKbdConfigInit (&backupGConfKbdConfig, confClient, engine);
-	GSwitchItKbdConfigInit (&initialSysKbdConfig, confClient, engine);
-	dontShow =
-	    gconf_client_get_bool (confClient,
+	conf_client = gnome_settings_daemon_get_conf_client ();
+	gswitchit_kbd_config_init (&backup_gconf_kbd_config, conf_client,
+				   xkl_engine);
+	gswitchit_kbd_config_init (&initial_sys_kbd_config, conf_client,
+				   xkl_engine);
+	dont_show =
+	    gconf_client_get_bool (conf_client,
 				   DISABLE_SYSCONF_CHANGED_WARNING_KEY,
 				   NULL);
-	GSwitchItKbdConfigLoadFromGConfBackup (&backupGConfKbdConfig);
-	GSwitchItKbdConfigLoadFromXInitial (&initialSysKbdConfig);
+	gswitchit_kbd_config_load_from_gconf_backup
+	    (&backup_gconf_kbd_config);
+	gswitchit_kbd_config_load_from_x_initial (&initial_sys_kbd_config);
 
-	isConfigChanged = g_slist_length (backupGConfKbdConfig.layouts) &&
-	    !GSwitchItKbdConfigEquals (&initialSysKbdConfig,
-				       &backupGConfKbdConfig);
+	is_config_changed =
+	    g_slist_length (backup_gconf_kbd_config.layouts)
+	    && !gswitchit_kbd_config_equals (&initial_sys_kbd_config,
+					     &backup_gconf_kbd_config);
 
 	/* config was changed!!! */
-	if (isConfigChanged) {
-		if (dontShow) {
+	if (is_config_changed) {
+		if (dont_show) {
 			g_warning
 			    ("The system configuration changed - but we remain silent\n");
 		} else {
-			GtkWidget *chkDontShowAgain =
+			GtkWidget *chk_dont_show_again =
 			    gtk_check_button_new_with_mnemonic (_
 								("Do _not show this warning again"));
-			GtkWidget *alignDontShowAgain = gtk_alignment_new (0.5, 0.5, 0, 0);
+			GtkWidget *align_dont_show_again =
+			    gtk_alignment_new (0.5, 0.5, 0, 0);
 			GtkWidget *msg;
-			
-			char *gnome_settings = GSwitchItKbdConfigToString(&backupGConfKbdConfig);
-			char *system_settings = GSwitchItKbdConfigToString(&initialSysKbdConfig);
 
-			msg = gtk_message_dialog_new_with_markup (
-				NULL, 0, GTK_MESSAGE_INFO, GTK_BUTTONS_NONE, /* !! temporary one */
-				_("<b>The X system keyboard settings differ from your current GNOME keyboard settings.</b>\n\n"
-				"Expected was %s, but the the following settings were found: %s.\n\n"
-				"Which set would you like to use?"),
-				gnome_settings, system_settings);
+			char *gnome_settings =
+			    gswitchit_kbd_config_to_string
+			    (&backup_gconf_kbd_config);
+			char *system_settings =
+			    gswitchit_kbd_config_to_string
+			    (&initial_sys_kbd_config);
 
-			g_free(gnome_settings);
-			g_free(system_settings);
+			msg = gtk_message_dialog_new_with_markup (NULL, 0, GTK_MESSAGE_INFO, GTK_BUTTONS_NONE,	/* !! temporary one */
+								  _
+								  ("<b>The X system keyboard settings differ from your current GNOME keyboard settings.</b>\n\n"
+								   "Expected was %s, but the the following settings were found: %s.\n\n"
+								   "Which set would you like to use?"),
+								  gnome_settings,
+								  system_settings);
+
+			g_free (gnome_settings);
+			g_free (system_settings);
 
 			gtk_window_set_icon_name (GTK_WINDOW (msg),
 						  "gnome-dev-keyboard");
 
 			gtk_container_set_border_width (GTK_CONTAINER
-							(alignDontShowAgain),
+							(align_dont_show_again),
 							12);
 			gtk_container_add (GTK_CONTAINER
-					   (alignDontShowAgain),
-					   chkDontShowAgain);
+					   (align_dont_show_again),
+					   chk_dont_show_again);
 			gtk_container_add (GTK_CONTAINER
 					   ((GTK_DIALOG (msg))->vbox),
-					   alignDontShowAgain);
+					   align_dont_show_again);
 
 			gtk_dialog_add_buttons (GTK_DIALOG (msg),
 						_("Use X settings"),
@@ -280,7 +290,7 @@ gnome_settings_keyboard_xkb_analyze_sysconfig (void)
 							 RESPONSE_USE_GNOME);
 			g_object_set_data (G_OBJECT (msg),
 					   "chkDontShowAgain",
-					   chkDontShowAgain);
+					   chk_dont_show_again);
 			g_signal_connect (msg, "response",
 					  G_CALLBACK
 					  (gnome_settings_keyboard_xkb_sysconfig_changed_response),
@@ -288,32 +298,33 @@ gnome_settings_keyboard_xkb_analyze_sysconfig (void)
 			gtk_widget_show_all (msg);
 		}
 	}
-	GSwitchItKbdConfigTerm (&backupGConfKbdConfig);
+	gswitchit_kbd_config_term (&backup_gconf_kbd_config);
 }
 
 static gboolean
 gnome_settings_chk_file_list (void)
 {
-	GDir *homeDir;
+	GDir *home_dir;
 	G_CONST_RETURN gchar *fname;
 	GSList *file_list = NULL;
 	GSList *last_login_file_list = NULL;
 	GSList *tmp = NULL;
 	GSList *tmp_l = NULL;
 	gboolean new_file_exist = FALSE;
-	GConfClient *confClient = gnome_settings_daemon_get_conf_client ();
+	GConfClient *conf_client =
+	    gnome_settings_daemon_get_conf_client ();
 
-	homeDir = g_dir_open (g_get_home_dir (), 0, NULL);
-	while ((fname = g_dir_read_name (homeDir)) != NULL) {
+	home_dir = g_dir_open (g_get_home_dir (), 0, NULL);
+	while ((fname = g_dir_read_name (home_dir)) != NULL) {
 		if (g_strrstr (fname, "modmap")) {
 			file_list =
 			    g_slist_append (file_list, g_strdup (fname));
 		}
 	}
-	g_dir_close (homeDir);
+	g_dir_close (home_dir);
 
 	last_login_file_list =
-	    gconf_client_get_list (confClient, KNOWN_FILES_KEY,
+	    gconf_client_get_list (conf_client, KNOWN_FILES_KEY,
 				   GCONF_VALUE_STRING, NULL);
 
 	/* Compare between the two file list, currently available modmap files
@@ -336,7 +347,7 @@ gnome_settings_chk_file_list (void)
 	}
 
 	if (new_file_exist)
-		gconf_client_set_list (confClient, KNOWN_FILES_KEY,
+		gconf_client_set_list (conf_client, KNOWN_FILES_KEY,
 				       GCONF_VALUE_STRING, file_list,
 				       NULL);
 
@@ -362,32 +373,33 @@ gnome_settings_keyboard_xkb_chk_lcl_xmm (void)
 
 void
  gnome_settings_keyboard_xkb_set_post_activation_callback
-    (PostActivationCallback fun, void *userData) {
-	paCallback = fun;
-	paCallbackUserData = userData;
+    (PostActivationCallback fun, void *user_data) {
+	pa_callback = fun;
+	pa_callback_user_data = user_data;
 }
 
 static GdkFilterReturn
 gnome_settings_keyboard_xkb_evt_filter (GdkXEvent * xev, GdkEvent * event)
 {
 	XEvent *xevent = (XEvent *) xev;
-	xkl_engine_filter_events (engine, xevent);
+	xkl_engine_filter_events (xkl_engine, xevent);
 	return GDK_FILTER_CONTINUE;
 }
 
 void
 gnome_settings_keyboard_xkb_init (GConfClient * client)
 {
+	GObject *reg = NULL;
 #ifdef GSDKX
-	XklSetDebugLevel (200);
+	xkl_set_debug_level (200);
 	logfile = fopen ("/tmp/gsdkx.log", "a");
-	XklSetLogAppender (gnome_settings_keyboard_log_appender);
+	xkl_set_log_appender (gnome_settings_keyboard_log_appender);
 #endif
 
-	engine = xkl_engine_get_instance (GDK_DISPLAY ());
-	if (engine) {
-		initedOk = TRUE;
-		xkl_engine_backup_names_prop (engine);
+	xkl_engine = xkl_engine_get_instance (GDK_DISPLAY ());
+	if (xkl_engine) {
+		inited_ok = TRUE;
+		xkl_engine_backup_names_prop (xkl_engine);
 		gnome_settings_keyboard_xkb_analyze_sysconfig ();
 		gnome_settings_keyboard_xkb_chk_lcl_xmm ();
 
@@ -406,18 +418,23 @@ gnome_settings_keyboard_xkb_init (GConfClient * client)
 				       (GdkFilterFunc)
 				       gnome_settings_keyboard_xkb_evt_filter,
 				       NULL);
-		xkl_engine_start_listen (engine,
+		xkl_engine_start_listen (xkl_engine,
 					 XKLL_MANAGE_LAYOUTS |
 					 XKLL_MANAGE_WINDOW_STATES);
+
+		reg =
+		    g_object_new (keyboard_config_registry_get_type (),
+				  NULL);
 	}
 }
 
 void
 gnome_settings_keyboard_xkb_load (GConfClient * client)
 {
-	GSwitchItConfigInit (&currentConfig, client, engine);
+	gswitchit_config_init (&current_config, client, xkl_engine);
 	apply_settings ();
 
-	GSwitchItKbdConfigInit (&currentKbdConfig, client, engine);
+	gswitchit_kbd_config_init (&current_kbd_config, client,
+				   xkl_engine);
 	apply_xkb_settings ();
 }

@@ -59,8 +59,6 @@
 #include "gnome-settings-xrdb.h"
 #include "gnome-settings-typing-break.h"
 
-#include "GNOME_SettingsDaemon.h"
-
 #include "clipboard-manager.h"
 
 static GObjectClass *parent_class = NULL;
@@ -214,18 +212,6 @@ manager_event_filter (GdkXEvent *xevent,
     return GDK_FILTER_CONTINUE;
 }
 
-static CORBA_boolean
-awake_impl (PortableServer_Servant servant,
-	    const CORBA_char      *service,
-	    CORBA_Environment     *ev)
-{
-#if 0
-  printf ("I received an activate request for %s\n", service);
-#endif
-  return TRUE;
-}
-
-
 static void
 finalize (GObject *object)
 {
@@ -257,8 +243,6 @@ gnome_settings_daemon_class_init (GnomeSettingsDaemonClass *klass)
 
   object_class->finalize = finalize;
 
-  klass->epv.awake = awake_impl;
-
   parent_class = g_type_class_peek_parent (klass);
 }
 
@@ -268,8 +252,8 @@ gnome_settings_daemon_init (GnomeSettingsDaemon *settings)
   settings->private = g_new (GnomeSettingsDaemonPrivate, 1);
 }
 
-BONOBO_TYPE_FUNC_FULL(GnomeSettingsDaemon, GNOME_SettingsDaemon,
-		      BONOBO_TYPE_OBJECT, gnome_settings_daemon)
+G_DEFINE_TYPE (GnomeSettingsDaemon, gnome_settings_daemon,
+               G_TYPE_OBJECT)
 
 GObject *
 gnome_settings_daemon_new (void)

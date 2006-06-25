@@ -28,6 +28,8 @@
 #include <gconf/gconf.h>
 #include <gconf/gconf-client.h>
 
+#include <libxklavier/xklavier.h>
+
 void gnome_settings_keyboard_xkb_init (GConfClient * client);
 void gnome_settings_keyboard_xkb_load (GConfClient * client);
 
@@ -36,5 +38,9 @@ typedef void ( *PostActivationCallback ) ( void *userData );
 void gnome_settings_keyboard_xkb_set_post_activation_callback( 
                                         PostActivationCallback fun,
                                         void *userData );
+
+GType keyboard_config_registry_get_type (void);
+
+extern XklEngine * xkl_engine;
 
 #endif

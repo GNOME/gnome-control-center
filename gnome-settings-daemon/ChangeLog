@@ -1,3 +1,14 @@
+2006-06-23  Sergey Udaltsov <svu@gnome.org>
+
+	* factory.c, gnome-settings-daemon.c,
+	gnome-settings-daemon.h,gnome-settings-daemon.pc.in,
+	gnome-settings-dbus.c, gnome-settings-keyboard-xkb.c,
+	gnome-settings-keyboard-xkb.h, gsd-infos.xml,
+	org.gnome.SettingsDaemon.service.in: g-s-d is now DBUS-enabled,
+	implements 2 interfaces - one for gnome-session, another for keyboard
+	indication (see gsd-infos.xml)
+	Also, major libgswitchit API change.
+
 2006-05-24  Paolo Borelli <pborelli@katamail.com>
 
 	Fixes #342570

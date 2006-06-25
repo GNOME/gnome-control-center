@@ -30,8 +30,6 @@
 
 #include <bonobo/bonobo-object.h>
 
-#include "GNOME_SettingsDaemon.h"
-
 typedef void (* KeyCallbackFunc) (GConfEntry *entry);
 
 void       gnome_settings_daemon_register_callback (const char      *dir,
@@ -54,14 +52,13 @@ typedef struct _GnomeSettingsDaemonPrivate GnomeSettingsDaemonPrivate;
 
 struct _GnomeSettingsDaemon
 {
-  BonoboObject parent_instance;
+  GObject parent_instance;
   GnomeSettingsDaemonPrivate *private;
 };
 
 struct _GnomeSettingsDaemonClass
 {
-  BonoboObjectClass parent_class;
-  POA_GNOME_SettingsDaemon__epv epv;
+  GObjectClass parent_class;
 };
 
 GType    gnome_settings_daemon_get_type         (void);
