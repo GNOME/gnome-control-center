@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.13.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-06-12 11:47+0200\n"
-"PO-Revision-Date: 2006-06-12 11:58+0200\n"
+"POT-Creation-Date: 2006-06-26 22:04+0200\n"
+"PO-Revision-Date: 2006-06-26 22:07+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmal <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -112,7 +112,9 @@ msgstr "Autentisert!"
 msgid ""
 "Your password has been changed since you initially authenticated! Please re-"
 "authenticate."
-msgstr "Passordet ditt er endret siden første autentisering! Vennligst autentiser på nytt."
+msgstr ""
+"Passordet ditt er endret siden første autentisering! Vennligst autentiser på "
+"nytt."
 
 #: ../capplets/about-me/gnome-about-me-password.c:468
 msgid "That password was incorrect."
@@ -178,10 +180,9 @@ msgstr "Vennligst skriv inn passordet i feltet <b>Nytt passord</b>."
 
 #: ../capplets/about-me/gnome-about-me-password.c:903
 #: ../capplets/about-me/gnome-about-me.glade.h:34
-#, fuzzy
 msgid ""
 "Please type your password again in the <b>Retype new password</b> field."
-msgstr "Vennligst oppgi passordet på nytt. Det var feil."
+msgstr "Vennligst oppgi passordet på nytt i feltet <b>Oppgi nytt passord igjen</b>."
 
 #: ../capplets/about-me/gnome-about-me-password.c:906
 msgid "The two passwords are not equal."
@@ -332,6 +333,8 @@ msgid ""
 "After you have authenticated, enter your new password, retype it for "
 "verification and click <b>Change password</b>."
 msgstr ""
+"For å endre passord må du oppgi ditt nåværende passord i feltet under og klikke på <b>Autentiser</b>.\n"
+"Etter at du er autentisert kan du skrive det nye passordet, gjenta det for verifisering og klikke <b>Endre passord</b>."
 
 #: ../capplets/about-me/gnome-about-me.glade.h:38
 msgid "User name:"
@@ -826,7 +829,7 @@ msgid_plural "pixels"
 msgstr[0] "piksel"
 msgstr[1] "piksler"
 
-#: ../capplets/common/activate-settings-daemon.c:18
+#: ../capplets/common/activate-settings-daemon.c:16
 msgid ""
 "Unable to start the settings manager 'gnome-settings-daemon'.\n"
 "Without the GNOME settings manager running, some preferences may not take "
@@ -1659,7 +1662,7 @@ msgstr "Utseende"
 #. This is a HIG-compliant alternative to allowing no
 #. selection in the group.
 #: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:285
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:229
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:231
 msgid "Default"
 msgstr "Forvalg"
 
@@ -2218,15 +2221,15 @@ msgstr ""
 "«Brukervalg for tema» ikke er korrekt installert, eller at du ikke har "
 "installert pakken «gnome-themes»."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:254
+#: ../capplets/theme-switcher/gnome-theme-installer.c:255
 msgid "This theme is not in a supported format."
 msgstr "Dette temaet er ikke i et støttet format."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:272
+#: ../capplets/theme-switcher/gnome-theme-installer.c:273
 msgid "Failed to create temporary directory"
 msgstr "Kunne ikke opprette midlertidig katalog"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:293
+#: ../capplets/theme-switcher/gnome-theme-installer.c:294
 msgid ""
 "Can not install theme. \n"
 "The bzip2 utility is not installed."
@@ -2234,13 +2237,13 @@ msgstr ""
 "Kan ikke installere tema.\n"
 "Programmet bzip2 er ikke installert."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:312
-#: ../capplets/theme-switcher/gnome-theme-installer.c:351
-#: ../capplets/theme-switcher/gnome-theme-installer.c:434
+#: ../capplets/theme-switcher/gnome-theme-installer.c:313
+#: ../capplets/theme-switcher/gnome-theme-installer.c:352
+#: ../capplets/theme-switcher/gnome-theme-installer.c:432
 msgid "Installation Failed"
 msgstr "Installasjonen feilet"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:333
+#: ../capplets/theme-switcher/gnome-theme-installer.c:334
 msgid ""
 "Can not install themes. \n"
 "The gzip utility is not installed."
@@ -2248,55 +2251,46 @@ msgstr ""
 "Kan ikke installere tema.\n"
 "Programmet gzip er ikke installert."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:375
-#, c-format
-msgid ""
-"Icon Theme %s correctly installed.\n"
-"You can select it in the theme details."
-msgstr ""
-"Ikontema %s er installert.\n"
-"Du kan velge dette under detaljer for tema."
-
 #: ../capplets/theme-switcher/gnome-theme-installer.c:378
 #, c-format
-msgid "Gnome Theme %s correctly installed"
-msgstr "GNOME tema %s er installert"
+msgid "GNOME Theme %s correctly installed"
+msgstr "GNOME tema %s ble korrekt installert"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:381
-#, c-format
-msgid ""
-"Windows Border Theme %s correctly installed.\n"
-"You can select it in the theme details."
-msgstr ""
-"Tema %s for vinduskant er installert.\n"
-"Du kan velge det under detaljer for tema."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:384
-#, c-format
-msgid ""
-"Controls Theme %s correctly installed.\n"
-"You can select it in the theme details."
-msgstr ""
-"Tema %s for kontroller er installert.\n"
-"Du kan velge det under detaljer for tema."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:390
+#: ../capplets/theme-switcher/gnome-theme-installer.c:388
 msgid "The theme is an engine. You need to compile the theme."
 msgstr "Dette er en temamotor. Du må kompilere temaet."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:408
+#: ../capplets/theme-switcher/gnome-theme-installer.c:406
 msgid "The file format is invalid"
 msgstr "Filformatet er ugyldig"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:499
+#. TODO: currently cannot apply "gnome themes"
+#: ../capplets/theme-switcher/gnome-theme-installer.c:452
+#, c-format
+msgid ""
+"The theme \"%s\" has been installed.\n"
+"Would you like to apply it now, or keep your current theme?"
+msgstr ""
+"Tema «%s» ble installert.\n"
+"Vil du bruke det nå, eller beholde ditt nåværende tema?"
+
+#: ../capplets/theme-switcher/gnome-theme-installer.c:455
+msgid "Keep Current Theme"
+msgstr "Behold nåværende tema"
+
+#: ../capplets/theme-switcher/gnome-theme-installer.c:457
+msgid "Apply New Theme"
+msgstr "Bruk nytt tema"
+
+#: ../capplets/theme-switcher/gnome-theme-installer.c:531
 msgid "No theme file location specified to install"
 msgstr "Ingen lokasjon oppgitt for installasjon av temafil"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:514
+#: ../capplets/theme-switcher/gnome-theme-installer.c:546
 msgid "The theme file location specified to install is invalid"
 msgstr "Ugyldig lokasjon for installasjon av temafil"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:534
+#: ../capplets/theme-switcher/gnome-theme-installer.c:566
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -2305,11 +2299,11 @@ msgstr ""
 "Ikke nok rettigheter til å installere tema i:\n"
 "%s"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:555
+#: ../capplets/theme-switcher/gnome-theme-installer.c:587
 msgid "The file format is invalid."
 msgstr "Filformatet er ugyldig."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:582
+#: ../capplets/theme-switcher/gnome-theme-installer.c:614
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
@@ -2318,7 +2312,7 @@ msgstr ""
 "%s er stien hvor temafilene vil bli installert. Denne kan ikke velges som "
 "kildelokasjon"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:647
+#: ../capplets/theme-switcher/gnome-theme-installer.c:679
 msgid ""
 "Cannot install theme.\n"
 "The tar program is not installed on your system."
@@ -2648,10 +2642,6 @@ msgstr "Konfigurasjonsverktøy for GNOME"
 msgid "Volume"
 msgstr "Volum"
 
-#: ../gnome-settings-daemon/factory.c:59
-msgid "Could not initialize Bonobo"
-msgstr "Kunne ikke initiere Bonobo"
-
 #: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:406
 msgid "Slow Keys Alert"
 msgstr "Advarsel for trege taster"
@@ -2780,7 +2770,7 @@ msgstr ""
 "Feil under forsøk på å kjøre (%s)\n"
 "som er bundet til tast (%s)"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:105
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:104
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2811,7 +2801,7 @@ msgstr ""
 "- Resultatet av <b>%s</b>\n"
 "- Resultatet av <b>%s</b>"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:119
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:118
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2823,12 +2813,11 @@ msgstr ""
 "Prøv å bruke enklere konfigurasjoner eller en nyere versjon av XFree-"
 "programvaren."
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:244
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:248
 msgid "Do _not show this warning again"
 msgstr "Ikke vis denne meldinge_n igjen"
 
-#. !! temporary one
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:253
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:262
 #, c-format
 msgid ""
 "<b>The X system keyboard settings differ from your current GNOME keyboard "
@@ -2844,11 +2833,11 @@ msgstr ""
 "\n"
 "Hvilket sett vil du bruke?"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:275
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:285
 msgid "Use X settings"
 msgstr "Bruk innstillinger fra X"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:277
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:287
 msgid "Keep GNOME settings"
 msgstr "Behold innstillinger fra GNOME"
 
@@ -2975,35 +2964,35 @@ msgstr "Skjerm"
 msgid "Screen on which BGApplier is to draw"
 msgstr "Skjerm hvor BGApplier skal tegne"
 
-#: ../libgswitchit/gswitchit_config.c:1074
+#: ../libgswitchit/gswitchit_config.c:1093
 #, c-format
 msgid "There was an error loading an image: %s"
 msgstr "Det oppsto en feil under lasting av bilde: %s"
 
-#: ../libgswitchit/gswitchit_config.c:1398
+#: ../libgswitchit/gswitchit_config.c:1420
 #, c-format
 msgid "layout \"%s\""
 msgid_plural "layouts \"%s\""
 msgstr[0] "utforming «%s»"
 msgstr[1] "utforminger «%s»"
 
-#: ../libgswitchit/gswitchit_config.c:1415
+#: ../libgswitchit/gswitchit_config.c:1437
 #, c-format
 msgid "option \"%s\""
 msgid_plural "options \"%s\""
 msgstr[0] "alternativ «%s»"
 msgstr[1] "alternativer «%s»"
 
-#: ../libgswitchit/gswitchit_config.c:1423
+#: ../libgswitchit/gswitchit_config.c:1445
 #, c-format
 msgid "model \"%s\", %s and %s"
 msgstr "modell «%s», %s og %s"
 
-#: ../libgswitchit/gswitchit_config.c:1424
+#: ../libgswitchit/gswitchit_config.c:1446
 msgid "no layout"
 msgstr "ingen utforming"
 
-#: ../libgswitchit/gswitchit_config.c:1425
+#: ../libgswitchit/gswitchit_config.c:1447
 msgid "no options"
 msgstr "ingen alternativer"
 
