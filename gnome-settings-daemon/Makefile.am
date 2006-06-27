@@ -84,7 +84,9 @@ gnome_settings_daemon_LDADD = \
 #	AccessXproto.h		\
 #	AccessXlibint.h
 
-BUILT_SOURCES=$(CORBA_GENERATED)
+BUILT_SOURCES=$(CORBA_GENERATED) 	\
+	gnome-settings-server.h		\
+	gnome-settings-client.h
 
 Gladedir   = $(GNOMECC_GLADE_DIR)
 Glade_DATA = modmap-dialog.glade
