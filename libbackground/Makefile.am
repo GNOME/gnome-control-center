@@ -1,7 +1,6 @@
 EXTRA_DIST = ChangeLog
 
 INCLUDES = \
-        -DGNOMELOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\" 		\
 	-DG_LOG_DOMAIN=\"capplet-common\"				\
 	-I$(top_srcdir)/						\
 	@CAPPLET_CFLAGS@
