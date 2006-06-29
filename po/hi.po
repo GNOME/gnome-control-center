@@ -2,21 +2,21 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
 # Ravishankar Shrivastava <raviratlami@yahoo.com>, 2003, 2004.
-# Rajesh Ranjan <rranjan@redhat.com>, 2005.
+# Rajesh Ranjan <rranjan@redhat.com>, 2005, 2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.hi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-17 22:10+0200\n"
-"PO-Revision-Date: 2005-09-01 18:03+0530\n"
+"POT-Creation-Date: 2006-06-29 07:20+0200\n"
+"PO-Revision-Date: 2006-06-29 12:07+0530\n"
 "Last-Translator: Rajesh Ranjan <rranjan@redhat.com>\n"
 "Language-Team: Hindi <fedora-trans-hi@redhat.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9.1\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n\n"
 "\n"
 "\n"
 "\n"
@@ -58,15 +58,15 @@ msgstr "के बारे में"
 msgid "Set your personal information"
 msgstr "निजी सूचना सेट करें"
 
-#: ../capplets/about-me/gnome-about-me.c:554
+#: ../capplets/about-me/gnome-about-me.c:604
 msgid "Select Image"
 msgstr "छवि चुनें"
 
-#: ../capplets/about-me/gnome-about-me.c:556
+#: ../capplets/about-me/gnome-about-me.c:606
 msgid "No Image"
 msgstr "कोई छवि नहीं"
 
-#: ../capplets/about-me/gnome-about-me.c:706
+#: ../capplets/about-me/gnome-about-me.c:769
 msgid ""
 "There was an error while trying to get the addressbook information\n"
 "Evolution Data Server can't handle the protocol"
@@ -74,70 +74,130 @@ msgstr ""
 "एक गलती हुई पता पुस्तिका सूचना को पाने की कोशिश में\n"
 "Evolution डाटा सर्वर प्रोटोकॉल नियंत्रित नहीं कर सकता"
 
-#: ../capplets/about-me/gnome-about-me.c:727
+#: ../capplets/about-me/gnome-about-me.c:790
 msgid "Unable to open address book"
 msgstr "पता पुस्तिका खोलने में विफल"
 
-#: ../capplets/about-me/gnome-about-me.c:739
+#: ../capplets/about-me/gnome-about-me.c:802
 msgid "Unknown login ID, the user database might be corrupted"
 msgstr "अनजान लॉगिन ID, उपयोक्ता डाटाबेस खराब हो सकती है"
 
-#: ../capplets/about-me/gnome-about-me.c:770
-#: ../capplets/about-me/gnome-about-me.c:772
+#: ../capplets/about-me/gnome-about-me.c:833
+#: ../capplets/about-me/gnome-about-me.c:835
 #, c-format
 msgid "About %s"
 msgstr "के बारे में %s"
 
-#: ../capplets/about-me/gnome-about-me-password.c:101
-#: ../capplets/about-me/gnome-about-me-password.c:479
-msgid "Old password is incorrect, please retype it"
-msgstr "पुराना शब्दकूट गलत है, कृपया फिर टाइप करें"
+#: ../capplets/about-me/gnome-about-me-password.c:172
+msgid "Child exited unexpectedly"
+msgstr ""
 
-#: ../capplets/about-me/gnome-about-me-password.c:112
-msgid "System error has occurred"
+#: ../capplets/about-me/gnome-about-me-password.c:295
+#, c-format
+msgid "Could not shutdown backend_stdin IO channel: %s"
+msgstr ""
+
+#: ../capplets/about-me/gnome-about-me-password.c:308
+#, c-format
+msgid "Could not shutdown backend_stdout IO channel: %s"
+msgstr ""
+
+#: ../capplets/about-me/gnome-about-me-password.c:449
+msgid "Authenticated!"
+msgstr ""
+
+#. This is a re-auth, and it failed.
+#. * The password must have been changed in the meantime!
+#. * Ask the user to re-authenticate
+#.
+#. Update status message and auth state
+#. Authentication failure
+#: ../capplets/about-me/gnome-about-me-password.c:466
+#: ../capplets/about-me/gnome-about-me-password.c:539
+msgid ""
+"Your password has been changed since you initially authenticated! Please re-"
+"authenticate."
+msgstr ""
+
+#: ../capplets/about-me/gnome-about-me-password.c:468
+msgid "That password was incorrect."
+msgstr ""
+
+#: ../capplets/about-me/gnome-about-me-password.c:514
+msgid "Your password has been changed."
+msgstr ""
+
+#. What does this indicate?
+#. * "Authentication information cannot be recovered?" from libpam?
+#: ../capplets/about-me/gnome-about-me-password.c:524
+#, fuzzy, c-format
+msgid "System error: %s."
 msgstr "सिस्टम त्रुटि पैदा हुआ"
 
-#: ../capplets/about-me/gnome-about-me-password.c:113
-msgid "Could not run /usr/bin/passwd"
+#: ../capplets/about-me/gnome-about-me-password.c:526
+#, fuzzy
+msgid "The password is too short."
+msgstr "शब्दकूट काफी छोटा है"
+
+#: ../capplets/about-me/gnome-about-me-password.c:528
+#: ../capplets/about-me/gnome-about-me-password.c:530
+#, fuzzy
+msgid "The password is too simple."
+msgstr "शब्दकूट काफी आसान है"
+
+#: ../capplets/about-me/gnome-about-me-password.c:532
+#, fuzzy
+msgid "The old and new passwords are too similar."
+msgstr "पुराना व नया शब्दकूट काफी समान है"
+
+#: ../capplets/about-me/gnome-about-me-password.c:534
+msgid "The new password must contain numeric or special character(s)."
+msgstr ""
+
+#: ../capplets/about-me/gnome-about-me-password.c:536
+#, fuzzy
+msgid "The old and new passwords are the same."
+msgstr "पुराना व नया शब्दकूट समान है"
+
+#: ../capplets/about-me/gnome-about-me-password.c:787
+#, fuzzy, c-format
+msgid "Unable to launch /usr/bin/passwd: %s"
 msgstr "/usr/bin/passwd नहीं चला सका"
 
-#: ../capplets/about-me/gnome-about-me-password.c:114
+#: ../capplets/about-me/gnome-about-me-password.c:789
 msgid "Unable to launch backend"
 msgstr "बैकेंड शुरू करने में विफल"
 
-#: ../capplets/about-me/gnome-about-me-password.c:116
-#: ../capplets/about-me/gnome-about-me-password.c:117
-msgid "Unexpected error has occurred"
-msgstr "अप्रत्याशित त्रुटि पैदा हुई"
+#: ../capplets/about-me/gnome-about-me-password.c:790
+#, fuzzy
+msgid "A system error has occurred"
+msgstr "सिस्टम त्रुटि पैदा हुआ"
 
-#: ../capplets/about-me/gnome-about-me-password.c:315
-msgid "Password is too short"
-msgstr "शब्दकूट काफी छोटा है"
+#. Update status message
+#: ../capplets/about-me/gnome-about-me-password.c:810
+#, fuzzy
+msgid "Checking password..."
+msgstr "शब्दकूट बदलें (_r)..."
 
-#: ../capplets/about-me/gnome-about-me-password.c:318
-#: ../capplets/about-me/gnome-about-me-password.c:321
-msgid "Password is too simple"
-msgstr "शब्दकूट काफी आसान है"
+#: ../capplets/about-me/gnome-about-me-password.c:897
+#, fuzzy
+msgid "Click <b>Change password</b> to change your password."
+msgstr "शब्दकूट बदलने के लिये शब्दकूट बदलें पर क्लिक करें."
 
-#: ../capplets/about-me/gnome-about-me-password.c:324
-msgid "Old and new passwords are too similar"
-msgstr "पुराना व नया शब्दकूट काफी समान है"
+#: ../capplets/about-me/gnome-about-me-password.c:900
+#, fuzzy
+msgid "Please type your password in the <b>New password</b> field."
+msgstr "<b>शब्दकूट टंकित करें.</b>"
 
-#: ../capplets/about-me/gnome-about-me-password.c:328
-msgid "Old and new password are the same"
-msgstr "पुराना व नया शब्दकूट समान है"
-
-#: ../capplets/about-me/gnome-about-me-password.c:406
-msgid "Please type the passwords."
-msgstr "पासवर्ड टाइप करें:"
-
-#: ../capplets/about-me/gnome-about-me-password.c:414
-msgid "Please type the password again, it is wrong."
+#: ../capplets/about-me/gnome-about-me-password.c:903
+#: ../capplets/about-me/gnome-about-me.glade.h:34
+#, fuzzy
+msgid "Please type your password again in the <b>Retype new password</b> field."
 msgstr "कृपया शब्दकूट फिर टंकित करें, यह गलत है."
 
-#: ../capplets/about-me/gnome-about-me-password.c:417
-msgid "Click on Change Password to change the password."
-msgstr "शब्दकूट बदलने के लिये शब्दकूट बदलें पर क्लिक करें."
+#: ../capplets/about-me/gnome-about-me-password.c:906
+msgid "The two passwords are not equal."
+msgstr ""
 
 #: ../capplets/about-me/gnome-about-me.glade.h:1
 #: ../vfs-methods/themus/apply-font.glade.h:1
@@ -146,9 +206,9 @@ msgstr " "
 
 #: ../capplets/about-me/gnome-about-me.glade.h:2
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
-#: ../capplets/font/font-properties.glade.h:1
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:1
+#: ../capplets/sound/sound-properties.glade.h:1
 #: ../capplets/ui-properties/gnome-ui-properties.glade.h:1
 msgid "    "
 msgstr "     "
@@ -170,20 +230,21 @@ msgid "<b>Job</b>"
 msgstr "<b>कार्य</b>"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:7
-msgid "<b>Please type the passwords.</b>"
-msgstr "<b>शब्दकूट टंकित करें.</b>"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:8
 msgid "<b>Telephone</b>"
 msgstr "<b>टेलिफोन</b>"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:9
+#: ../capplets/about-me/gnome-about-me.glade.h:8
 msgid "<b>Web</b>"
 msgstr "<b>वेब</b>"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:10
+#: ../capplets/about-me/gnome-about-me.glade.h:9
 msgid "<b>Work</b>"
 msgstr "<b>कार्य</b>"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:10
+#, fuzzy
+msgid "<span size=\"larger\" weight=\"bold\">Change your password</span>"
+msgstr "<span size=\"larger\" weight=\"bold\">प्रसंग डिस्क में सहेजें</span>"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:11
 msgid "A_IM/iChat:"
@@ -218,145 +279,164 @@ msgid "Change Passwo_rd..."
 msgstr "शब्दकूट बदलें (_r)..."
 
 #: ../capplets/about-me/gnome-about-me.glade.h:20
-msgid "Change Password"
+#, fuzzy
+msgid "Change pa_ssword"
 msgstr "कूटशब्द बदलो"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:21
+#, fuzzy
+msgid "Change password"
+msgstr "कूटशब्द बदलो"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:22
 msgid "Ci_ty:"
 msgstr "शहर (_t):"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:22
+#: ../capplets/about-me/gnome-about-me.glade.h:23
 msgid "Co_untry:"
 msgstr "देश (_u):"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:23
+#: ../capplets/about-me/gnome-about-me.glade.h:24
 msgid "Contact"
 msgstr "संपर्क"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:24
+#: ../capplets/about-me/gnome-about-me.glade.h:25
 msgid "Cou_ntry:"
 msgstr "देश (_n):"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:25
+#: ../capplets/about-me/gnome-about-me.glade.h:26
+#, fuzzy
+msgid "Current _password:"
+msgstr "नया पासवर्ड (_N):"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:27
 msgid "Full Name"
 msgstr "पूरा नाम"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:26
+#: ../capplets/about-me/gnome-about-me.glade.h:28
 msgid "Hom_e:"
 msgstr "घर (_e):"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:27
+#: ../capplets/about-me/gnome-about-me.glade.h:29
 msgid "IC_Q:"
 msgstr "IC_Q:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:28
+#: ../capplets/about-me/gnome-about-me.glade.h:30
 msgid "M_SN:"
 msgstr "M_SN:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:29
-msgid "Old pa_ssword:"
-msgstr "पुराना पासवर्ड (_s):"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:30
+#: ../capplets/about-me/gnome-about-me.glade.h:31
 msgid "P.O. _box:"
 msgstr "P.O. _box:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:31
+#: ../capplets/about-me/gnome-about-me.glade.h:32
 msgid "P._O. box:"
 msgstr "P._O. box:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:32
+#: ../capplets/about-me/gnome-about-me.glade.h:33
 msgid "Personal Info"
 msgstr "निजी सूचना"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:33
+#: ../capplets/about-me/gnome-about-me.glade.h:35
 msgid "State/Pro_vince:"
 msgstr "राज्य/क्षेत्र (_v):"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:34
+#: ../capplets/about-me/gnome-about-me.glade.h:36
+msgid ""
+"To change your password, enter your current password in the field below and "
+"click <b>Authenticate</b>.\n"
+"After you have authenticated, enter your new password, retype it for "
+"verification and click <b>Change password</b>."
+msgstr ""
+
+#: ../capplets/about-me/gnome-about-me.glade.h:38
 msgid "User name:"
 msgstr "उपयोक्ता नामः"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:35
+#: ../capplets/about-me/gnome-about-me.glade.h:39
 msgid "Web _log:"
 msgstr "वेब लॉग (_l):"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:36
+#: ../capplets/about-me/gnome-about-me.glade.h:40
 msgid "Wor_k:"
 msgstr "कार्य (_k):"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:37
+#: ../capplets/about-me/gnome-about-me.glade.h:41
 msgid "Work _fax:"
 msgstr "कार्य फैक्स (_f):"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:38
+#: ../capplets/about-me/gnome-about-me.glade.h:42
 msgid "Zip/_Postal code:"
 msgstr "जिप/डाक कूट (_P):"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:39
+#: ../capplets/about-me/gnome-about-me.glade.h:43
 msgid "_Address:"
 msgstr "पता (_A):"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:40
+#: ../capplets/about-me/gnome-about-me.glade.h:44
+msgid "_Authenticate"
+msgstr ""
+
+#: ../capplets/about-me/gnome-about-me.glade.h:45
 msgid "_Department:"
 msgstr "विभाग (_D):"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:41
+#: ../capplets/about-me/gnome-about-me.glade.h:46
 msgid "_Groupwise:"
 msgstr "समूह रूप में (_G):"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:42
+#: ../capplets/about-me/gnome-about-me.glade.h:47
 msgid "_Home page:"
 msgstr "पहला पन्ना (_H):"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:43
+#: ../capplets/about-me/gnome-about-me.glade.h:48
 msgid "_Home:"
 msgstr "घर (_H):"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:44
+#: ../capplets/about-me/gnome-about-me.glade.h:49
 msgid "_Jabber:"
 msgstr "जैबर (_J):"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:45
+#: ../capplets/about-me/gnome-about-me.glade.h:50
 msgid "_Manager:"
 msgstr "प्रबंधक (_M):"
 
 # #-#-#-#-#  libgnomeui.gnome-2-2.hi.po (libgnomeui HEAD)  #-#-#-#-#
 # libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:513
 # test-gnome/testgnome.xml.h:5
-#: ../capplets/about-me/gnome-about-me.glade.h:46
+#: ../capplets/about-me/gnome-about-me.glade.h:51
 msgid "_Mobile:"
 msgstr "मोबाइल (_M):"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:47
+#: ../capplets/about-me/gnome-about-me.glade.h:52
 msgid "_New password:"
 msgstr "नया पासवर्ड (_N):"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:48
+#: ../capplets/about-me/gnome-about-me.glade.h:53
 msgid "_Profession:"
 msgstr "व्यवसाय (_P): "
 
-#: ../capplets/about-me/gnome-about-me.glade.h:49
+#: ../capplets/about-me/gnome-about-me.glade.h:54
 msgid "_Retype new password:"
 msgstr "नया पासवर्ड फिर टाइप करें (_R):"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:50
+#: ../capplets/about-me/gnome-about-me.glade.h:55
 msgid "_State/Province:"
 msgstr "राज्य (_S):"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:51
+#: ../capplets/about-me/gnome-about-me.glade.h:56
 msgid "_Title:"
 msgstr "शीर्षक (_T):"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:52
+#: ../capplets/about-me/gnome-about-me.glade.h:57
 msgid "_Work:"
 msgstr "कार्य (_W):"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:53
+#: ../capplets/about-me/gnome-about-me.glade.h:58
 msgid "_Yahoo:"
 msgstr "_Yahoo:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:54
+#: ../capplets/about-me/gnome-about-me.glade.h:59
 msgid "_Zip/Postal code:"
 msgstr "जिप/डाक कूट (_Z):"
 
@@ -440,27 +520,27 @@ msgstr ""
 "सभी उपलब्ध सहायक तकनीक आपके सिस्टम पर अधिष्ठापित नहीं है.  'gnopernicus' संकुल "
 "अधिष्ठापित रहनी चाहिये स्क्रीन पठन व प्रवर्द्धन क्षमता के लिये."
 
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:241
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:242
 #, c-format
 msgid "There was an error launching the mouse preferences dialog: %s"
 msgstr "माउस वरीयताएँ संवाद प्रारंभ करने में एक त्रुटि हुईः %s"
 
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:337
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:398
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:338
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:399
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "फ़ाइल '%s' से एक्सेस-एक्स विन्यास आयात करने में अक्षम"
 
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:435
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:436
 msgid "Import Feature Settings File"
 msgstr "विशेषता विन्यास फ़ाइल आयात करें"
 
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:439
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:440
 msgid "_Import"
 msgstr "आयात करें (_I)"
 
 #: ../capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.in.h:1
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:20
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:21
 #: ../capplets/keyboard/keyboard.desktop.in.in.h:1
 msgid "Keyboard"
 msgstr "कुंजीपटल"
@@ -478,10 +558,7 @@ msgstr ""
 "इसके बिना नहीं चलेंगीं."
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:1
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:2
-#: ../capplets/theme-switcher/theme-install.glade.h:1
-#: ../capplets/theme-switcher/theme-properties.glade.h:1
 msgid "*"
 msgstr "*"
 
@@ -533,8 +610,7 @@ msgstr "जब परिवर्धक को दबाएँ तो बीप 
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
 msgid "Beep when an LED is turned on and two beeps when one is turned off."
-msgstr ""
-"जब एलईडी चालू किया जाए तो बीप बजाएँ और जब बन्द किया जाए तो दो बार बीप बजाएँ."
+msgstr "जब एलईडी चालू किया जाए तो बीप बजाएँ और जब बन्द किया जाए तो दो बार बीप बजाएँ."
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
 msgid "Beep when key is:"
@@ -592,18 +668,16 @@ msgstr "माउस वरीयताएँ... (_P)"
 msgid ""
 "Only accept keys after they have been pressed and held for a user adjustable "
 "amount of time."
-msgstr ""
-"सिर्फ उन्हीं कुंजियों को स्वीकार करें जो उपयोक्ता समायोजन योग्य समय तक दबाकर रखे गए हों."
+msgstr "सिर्फ उन्हीं कुंजियों को स्वीकार करें जो उपयोक्ता समायोजन योग्य समय तक दबाकर रखे गए हों."
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:28
 msgid ""
 "Perform multiple simultaneous key press operations by pressing modifier keys "
 "in sequence."
-msgstr ""
-"मॉडीफ़ायर कुंजी को क्रम से दबाने पर एक ही समय में बहुसंख्य कुंजी दबाने की क्रिया संपादित करें"
+msgstr "मॉडीफ़ायर कुंजी को क्रम से दबाने पर एक ही समय में बहुसंख्य कुंजी दबाने की क्रिया संपादित करें"
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:29
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:31
 msgid "S_peed:"
 msgstr "गति (_p):"
 
@@ -632,7 +706,7 @@ msgid "_Only accept keys held for:"
 msgstr "सिर्फ उन्हीं कुंजियों को स्वीकारें जो दबाकर रखे जाते हैं इतनी देरः  (_O)"
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:39
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:41
 msgid "_Type to test settings:"
 msgstr "विन्यास जांचने हेतु टाइप करें: (_T)"
 
@@ -653,6 +727,7 @@ msgid "characters/second"
 msgstr "अक्षर/सेकण्ड"
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:41
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
 msgid "milliseconds"
 msgstr "मिली सेकण्ड्स"
 
@@ -661,11 +736,7 @@ msgid "pixels/second"
 msgstr "पिक्सल्स/सेकण्ड"
 
 #  set the timeout value  label with correct value of timeout
-#. set the timeout value  label with correct value of timeout
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
-#: ../capplets/mouse/gnome-mouse-properties.c:138
-#: ../capplets/mouse/gnome-mouse-properties.c:885
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
 #: ../capplets/windows/gnome-window-properties.glade.h:10
 msgid "seconds"
 msgstr "सेकण्ड्स"
@@ -699,6 +770,15 @@ msgid "_Add Wallpaper"
 msgstr "वालपेपर जोड़ें"
 
 #: ../capplets/background/gnome-background-properties.glade.h:6
+msgid "_Finish"
+msgstr "समाप्त (_F)"
+
+#: ../capplets/background/gnome-background-properties.glade.h:7
+#: ../capplets/theme-switcher/theme-properties.glade.h:20
+msgid "_Remove"
+msgstr "मिटाएँ (_R)"
+
+#: ../capplets/background/gnome-background-properties.glade.h:8
 msgid "_Style:"
 msgstr "शैली: (_S)"
 
@@ -709,59 +789,66 @@ msgstr "शैली: (_S)"
 msgid "There was an error displaying help: %s"
 msgstr "मदद दिखाने में कोई त्रुटि है: %s"
 
-#: ../capplets/background/gnome-wp-capplet.c:1042
-#: ../capplets/background/gnome-wp-capplet.c:1060
+#: ../capplets/background/gnome-wp-capplet.c:984
 msgid "Centered"
 msgstr "केंद्रित"
 
-#: ../capplets/background/gnome-wp-capplet.c:1068
-#: ../capplets/background/gnome-wp-capplet.c:1085
+#: ../capplets/background/gnome-wp-capplet.c:988
 msgid "Fill Screen"
 msgstr "स्क्रीन भरें"
 
-#: ../capplets/background/gnome-wp-capplet.c:1093
-#: ../capplets/background/gnome-wp-capplet.c:1110
+#: ../capplets/background/gnome-wp-capplet.c:992
 msgid "Scaled"
 msgstr "स्केल्ड"
 
-#: ../capplets/background/gnome-wp-capplet.c:1118
-#: ../capplets/background/gnome-wp-capplet.c:1135
+#: ../capplets/background/gnome-wp-capplet.c:996
+msgid "Zoom"
+msgstr "ज़ूम"
+
+#: ../capplets/background/gnome-wp-capplet.c:1000
 msgid "Tiled"
 msgstr "टाइल्ड"
 
-#: ../capplets/background/gnome-wp-capplet.c:1159
-#: ../capplets/background/gnome-wp-capplet.c:1168
+#: ../capplets/background/gnome-wp-capplet.c:1021
 msgid "Solid Color"
 msgstr "ठोस रंग"
 
-#: ../capplets/background/gnome-wp-capplet.c:1176
-#: ../capplets/background/gnome-wp-capplet.c:1185
+#: ../capplets/background/gnome-wp-capplet.c:1025
 msgid "Horizontal Gradient"
 msgstr "क्षैतिज अनुपात"
 
-#: ../capplets/background/gnome-wp-capplet.c:1193
-#: ../capplets/background/gnome-wp-capplet.c:1202
+#: ../capplets/background/gnome-wp-capplet.c:1029
 msgid "Vertical Gradient"
 msgstr "ऊर्ध्वाधर अनुपात"
 
 #  Create the file chooser dialog stuff here
 #. Create the file chooser dialog stuff here
-#: ../capplets/background/gnome-wp-capplet.c:1251
+#: ../capplets/background/gnome-wp-capplet.c:1075
 msgid "Add Wallpaper"
 msgstr "वालपेपर जोड़ें"
+
+#: ../capplets/background/gnome-wp-capplet.c:1092
+#, fuzzy
+msgid "Images"
+msgstr "छवियाँ"
+
+#: ../capplets/background/gnome-wp-capplet.c:1096
+#, fuzzy
+msgid "All Files"
+msgstr "सभी फ़ाइलें"
 
 #: ../capplets/background/gnome-wp-info.c:57
 msgid "No Wallpaper"
 msgstr "वालपेपर नहीं"
 
-#: ../capplets/background/gnome-wp-item.c:292
-#: ../capplets/background/gnome-wp-item.c:294
+#: ../capplets/background/gnome-wp-item.c:343
+#: ../capplets/background/gnome-wp-item.c:345
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "पिक्सेल"
 msgstr[1] "पिक्सेल"
 
-#: ../capplets/common/activate-settings-daemon.c:18
+#: ../capplets/common/activate-settings-daemon.c:16
 msgid ""
 "Unable to start the settings manager 'gnome-settings-daemon'.\n"
 "Without the GNOME settings manager running, some preferences may not take "
@@ -774,9 +861,9 @@ msgstr ""
 "समस्या के कारण भी हो सकता है या गैर गनोम (जैसे केडीई) विन्यास प्रबंधक पहले से ही प्रारंभ "
 "हो और गनोम विन्यास प्रबंधक परस्पर विरोध कर रहा होगा."
 
-#: ../capplets/common/capplet-stock-icons.c:94
-#, c-format
-msgid "Unable to load capplet stock icon '%s'\n"
+#: ../capplets/common/capplet-stock-icons.c:92
+#, fuzzy, c-format
+msgid "Unable to load stock icon '%s'\n"
 msgstr "कैप्लेट स्टॉक चिह्न '%s' लोड करने में अक्षम\n"
 
 #: ../capplets/common/capplet-util.c:239 ../capplets/common/capplet-util.c:241
@@ -784,17 +871,16 @@ msgid "Just apply settings and quit"
 msgstr "विन्यास लागू करें और बाहर हों"
 
 #: ../capplets/common/capplet-util.c:243
-#: ../capplets/default-applications/gnome-default-applications-properties.c:765
 #: ../capplets/keyboard/gnome-keyboard-properties.c:225
-#: ../capplets/mouse/gnome-mouse-properties.c:1021
-#: ../capplets/sound/sound-properties-capplet.c:244
+#: ../capplets/mouse/gnome-mouse-properties.c:1023
+#: ../capplets/sound/sound-properties-capplet.c:760
 msgid "Retrieve and store legacy settings"
 msgstr "लीजेसी विन्यास प्राप्त कर भण्डारित करें"
 
 #: ../capplets/common/file-transfer-dialog.c:94
-#, c-format
-msgid "Copying file: %i of %i"
-msgstr "फाइल कॉपी कर रहा है: %i का %i"
+#, fuzzy, c-format
+msgid "Copying file: %u of %u"
+msgstr "फाइल कॉपी कर रहा है: %u %u का"
 
 #: ../capplets/common/file-transfer-dialog.c:122
 #, c-format
@@ -879,8 +965,7 @@ msgid "Change set"
 msgstr "चेंज सेट"
 
 #: ../capplets/common/gconf-property-editor.c:184
-msgid ""
-"GConf change set containing data to be forwarded to the gconf client on apply"
+msgid "GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr "लागू करने पर जी-कान्फ़ चेंज सेट जिसमें डेटा मिला हुआ है, जी-कान्फ़ क्लाइन्ट को भेजें."
 
 #: ../capplets/common/gconf-property-editor.c:189
@@ -888,8 +973,7 @@ msgid "Conversion to widget callback"
 msgstr "विज़ेट कालबैक में परिवर्तन"
 
 #: ../capplets/common/gconf-property-editor.c:190
-msgid ""
-"Callback to be issued when data are to be converted from GConf to the widget"
+msgid "Callback to be issued when data are to be converted from GConf to the widget"
 msgstr "जब डेटा जी-कान्फ़ से विज़ेट में बदला जाना हो तो कालबैक जारी करें"
 
 #: ../capplets/common/gconf-property-editor.c:195
@@ -897,8 +981,7 @@ msgid "Conversion from widget callback"
 msgstr "विज़ेट कालबैक से परिवर्तन"
 
 #: ../capplets/common/gconf-property-editor.c:196
-msgid ""
-"Callback to be issued when data are to be converted to GConf from the widget"
+msgid "Callback to be issued when data are to be converted to GConf from the widget"
 msgstr "जब डेटा विज़ेट से जी-कान्फ़ में बदला जाना हो तो कालबैक जारी करें"
 
 #: ../capplets/common/gconf-property-editor.c:201
@@ -967,252 +1050,304 @@ msgstr "पसन्दीदा अनुप्रयोग"
 msgid "Select your default applications"
 msgstr "अपने डिफ़ॉल्ट अनुप्रयोग चुनें"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:9
+#: ../capplets/default-applications/gnome-da-capplet.c:77
+#: ../capplets/default-applications/gnome-da-capplet.c:101
+#: ../capplets/default-applications/gnome-da-capplet.c:146
+#: ../capplets/default-applications/gnome-da-capplet.c:191
+#: ../capplets/default-applications/gnome-da-capplet.c:245
+#: ../capplets/default-applications/gnome-da-capplet.c:294
+#: ../capplets/default-applications/gnome-da-capplet.c:576
+#: ../capplets/default-applications/gnome-da-capplet.c:597
+#, fuzzy, c-format
+msgid "Error saving configuration: %s"
+msgstr "कानफिगुरेशन डेटाबेस में नया त्वरक अविन्यासित करने में त्रुटि:  %s  हुई.\n"
+
+# #-#-#-#-#  gnome-applets.gnome-2-2.hi.po (gnome-applets 2.x)  #-#-#-#-#
+# libgnomeprint/gpa/gpa-media.c:241
+# #-#-#-#-#  libgnomeprint.gnome-2-2.hi.po (libgnomeprint VERSION)  #-#-#-#-#
+# libgnomeprint/gpa/gpa-media.c:241
+#: ../capplets/default-applications/gnome-da-capplet.c:719
+#: ../capplets/sound/sound-properties-capplet.c:318
+#, fuzzy
+msgid "Custom"
+msgstr "अनुकूलित"
+
+#: ../capplets/default-applications/gnome-da-capplet.c:739
+msgid "Could not load the main interface"
+msgstr "मुख्य अंतरफलक लोड न कर सका"
+
+#: ../capplets/default-applications/gnome-da-capplet.c:741
+#, fuzzy
+msgid "Please make sure that the applet is properly installed"
+msgstr ""
+"ग्लेड फाइल नही लोड कर पाए.\n"
+"सुनिश्चित करें कि यह डिमोन ठीक से स्थापित है"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:1
+msgid "Balsa"
+msgstr "बाल्सा"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:2
 msgid "Debian Sensible Browser"
 msgstr "डेबियन संवेदनशील ब्राउज़र"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:10
-msgid "Epiphany"
-msgstr "एपीफेनी"
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:3
+msgid "Debian Terminal Emulator"
+msgstr "डेबियन टर्मिनल एमुलेटर"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:11
-msgid "Galeon"
-msgstr "गेलियन"
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:4
+msgid "ETerm"
+msgstr "ई-टर्म"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:12
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:5
 msgid "Encompass"
 msgstr "एनकम्पास"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:13
-msgid "Firebird"
-msgstr "फ़ायरबर्ड"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:14
-msgid "Firefox"
-msgstr "फ़ायरफ़ॉक्स"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:15
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:16
-msgid "Mozilla"
-msgstr "मोज़िला"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:17
-msgid "Netscape Communicator"
-msgstr "नेटस्केप कम्यूनिकेटर"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:18
-msgid "Konqueror"
-msgstr "कॉन्क्वेरर"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:19
-msgid "W3M Text Browser"
-msgstr "डबल्यू3एम पाठ ब्राउज़र"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:20
-msgid "Lynx Text Browser"
-msgstr "लायंक्स पाठ ब्राउज़र"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:21
-msgid "Links Text Browser"
-msgstr "लिंक्स पाठ ब्राउज़र"
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:6
+#, fuzzy
+msgid "Epiphany Web Browser"
+msgstr "एपीफेनी वेब ब्राउसर"
 
 #  The code in gnome-default-applications-properties.c makes sure
 #  * there is only one (the first entry in this list) Evolution entry
 #  * in the list shown to the user
-#. The code in gnome-default-applications-properties.c makes sure
-#. * there is only one (the first entry in this list) Evolution entry
-#. * in the list shown to the user
-#.
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:36
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:37
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:38
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:39
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:40
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:41
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:7
 msgid "Evolution Mail Reader"
 msgstr "एवॉल्यूशन डाक पाठक"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:42
-msgid "Balsa"
-msgstr "बाल्सा"
+#  The code in gnome-default-applications-properties.c makes sure
+#  * there is only one (the first entry in this list) Evolution entry
+#  * in the list shown to the user
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:8
+#, fuzzy
+msgid "Evolution Mail Reader 1.4"
+msgstr "एवॉल्यूशन डाक पाठक"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:43
-msgid "KMail"
-msgstr "के-मेल"
+#  The code in gnome-default-applications-properties.c makes sure
+#  * there is only one (the first entry in this list) Evolution entry
+#  * in the list shown to the user
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:9
+#, fuzzy
+msgid "Evolution Mail Reader 1.5"
+msgstr "एवॉल्यूशन डाक पाठक"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:44
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:45
-msgid "Thunderbird"
-msgstr "थंडरबर्ड"
+#  The code in gnome-default-applications-properties.c makes sure
+#  * there is only one (the first entry in this list) Evolution entry
+#  * in the list shown to the user
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:10
+#, fuzzy
+msgid "Evolution Mail Reader 1.6"
+msgstr "एवॉल्यूशन डाक पाठक"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:46
-msgid "Mozilla Mail"
-msgstr "मोज़िला मेल"
+#  The code in gnome-default-applications-properties.c makes sure
+#  * there is only one (the first entry in this list) Evolution entry
+#  * in the list shown to the user
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:11
+#, fuzzy
+msgid "Evolution Mail Reader 2.0"
+msgstr "एवॉल्यूशन डाक पाठक"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:47
-msgid "Mutt"
-msgstr "मट"
+#  The code in gnome-default-applications-properties.c makes sure
+#  * there is only one (the first entry in this list) Evolution entry
+#  * in the list shown to the user
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:12
+#, fuzzy
+msgid "Evolution Mail Reader 2.2"
+msgstr "एवॉल्यूशन डाक पाठक"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:58
-msgid "Debian Terminal Emulator"
-msgstr "डेबियन टर्मिनल एमुलेटर"
+#  The code in gnome-default-applications-properties.c makes sure
+#  * there is only one (the first entry in this list) Evolution entry
+#  * in the list shown to the user
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:13
+#, fuzzy
+msgid "Evolution Mail Reader 2.4"
+msgstr "एवॉल्यूशन डाक पाठक"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:59
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:14
+msgid "Firebird"
+msgstr "फ़ायरबर्ड"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:15
+msgid "Firefox"
+msgstr "फ़ायरफ़ॉक्स"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:16
 msgid "GNOME Terminal"
 msgstr "गनोम टर्मिनल"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:60
-msgid "Standard XTerminal"
-msgstr "मानक एक्स-टर्मिनल"
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:17
+msgid "Galeon"
+msgstr "गेलियन"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:61
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:18
+msgid "KMail"
+msgstr "के-मेल"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:19
+msgid "Konqueror"
+msgstr "कॉन्क्वेरर"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:20
+msgid "Links Text Browser"
+msgstr "लिंक्स पाठ ब्राउज़र"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:21
+msgid "Lynx Text Browser"
+msgstr "लायंक्स पाठ ब्राउज़र"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:22
+msgid "Mozilla"
+msgstr "मोज़िला"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:23
+#, fuzzy
+msgid "Mozilla 1.6"
+msgstr "मोज़िला"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:24
+msgid "Mozilla Mail"
+msgstr "मोज़िला मेल"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:25
+#, fuzzy
+msgid "Mozilla Thunderbird"
+msgstr "थंडरबर्ड"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:26
+msgid "Mutt"
+msgstr "मट"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:27
 msgid "NXterm"
 msgstr "एनएक्स-टर्म"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:62
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:28
+msgid "Netscape Communicator"
+msgstr "नेटस्केप कम्यूनिकेटर"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:29
+#, fuzzy
+msgid "Opera"
+msgstr "ऑपेरा"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:30
 msgid "RXVT"
 msgstr "आरएक्सवीटी"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:63
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:31
+msgid "Standard XTerminal"
+msgstr "मानक एक्स-टर्मिनल"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:32
+#, fuzzy
+msgid "Sylpheed"
+msgstr "गतिः (_S)"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:33
+msgid "Sylpheed-Claws"
+msgstr ""
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:34
+msgid "Thunderbird"
+msgstr "थंडरबर्ड"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:35
+msgid "W3M Text Browser"
+msgstr "डबल्यू3एम पाठ ब्राउज़र"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:36
 msgid "aterm"
 msgstr "एटर्म"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:64
-msgid "ETerm"
-msgstr "ई-टर्म"
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:1
+#, fuzzy
+msgid "<b>Audio Player</b>"
+msgstr "<b>समर्थन</b>"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.c:123
-msgid "Please specify a name and a command for this editor."
-msgstr "कृपया इस संपादक हेतु नाम और कमांड निश्चित करें"
-
+# #-#-#-#-#  libgnomeprintui.gnome-2-2.hi.po (libgnomeprintui )  #-#-#-#-#
+# libgnomeprintui/gnome-print-dialog.c:301
+# libgnomeprintui/gnome-print-paper-selector.c:1407
+# #-#-#-#-#  libgnomeui.gnome-2-2.hi.po (libgnomeui HEAD)  #-#-#-#-#
+# libgnomeui/gnome-icon-entry.c:517 libgnomeui/gnome-pixmap-entry.c:393
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:2
-msgid "Add..."
-msgstr "जोड़ें...."
+#, fuzzy
+msgid "<b>Image Viewer</b>"
+msgstr "<b>पूर्वावलोकन</b>"
 
-# #-#-#-#-#  gnome-applets.gnome-2-2.hi.po (gnome-applets 2.x)  #-#-#-#-#
-# libgnomeprint/gpa/gpa-media.c:241
-# #-#-#-#-#  libgnomeprint.gnome-2-2.hi.po (libgnomeprint VERSION)  #-#-#-#-#
-# libgnomeprint/gpa/gpa-media.c:241
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:3
-msgid "C_ustom"
-msgstr "पसंदीदा (_u)"
+#, fuzzy
+msgid "<b>Instant Messenger</b>"
+msgstr "<b>तत्काल संदेशा</b>"
 
-# #-#-#-#-#  gnome-applets.gnome-2-2.hi.po (gnome-applets 2.x)  #-#-#-#-#
-# libgnomeprint/gpa/gpa-media.c:241
-# #-#-#-#-#  libgnomeprint.gnome-2-2.hi.po (libgnomeprint VERSION)  #-#-#-#-#
-# libgnomeprint/gpa/gpa-media.c:241
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:4
-msgid "C_ustom:"
-msgstr "पसंदीदा (_u):"
+#, fuzzy
+msgid "<b>Mail Reader</b>"
+msgstr "डाक पाठक"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:5
-msgid "Can open _URIs"
-msgstr "_URIs खोल सकता"
+#, fuzzy
+msgid "<b>Terminal Emulator</b>"
+msgstr "डेबियन टर्मिनल एमुलेटर"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:6
-msgid "Can open multiple _files"
-msgstr "बहुसंख्य फ़ाइलें खोल सकता है (_f)"
+#, fuzzy
+msgid "<b>Text Editor</b>"
+msgstr "पाठ संपादक"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:7
+#, fuzzy
+msgid "<b>Video Player</b>"
+msgstr "<b>डेस्कटॉप वालपेपर (_W)</b>"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:8
+#, fuzzy
+msgid "<b>Web Browser</b>"
+msgstr "वेब ब्राउज़र"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:10
+#, no-c-format
+msgid "All %s occurrences will be replaced with actual link"
+msgstr ""
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:11
 msgid "Co_mmand:"
 msgstr "कमांड: (_m)"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:8
-msgid "Custom Editor Properties"
-msgstr "अनुकूलित संपादक गुण"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:9
-msgid "Default Mail Reader"
-msgstr "डिफ़ॉल्ट डाक पाठक"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:10
-msgid "Default Terminal"
-msgstr "डिफ़ॉल्ट टर्मिनल"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:11
-msgid "Default Text Editor"
-msgstr "डिफ़ॉल्ट पाठ संपादक"
-
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:12
-msgid "Default Web Browser"
-msgstr "डिफ़ॉल्ट वेब ब्राउज़र"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:13
-msgid "Default Window Manager"
-msgstr "डिफ़ॉल्ट विंडो प्रबंधक"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:14
-msgid "Delete"
-msgstr "मिटाएँ"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:15
-msgid "E_xec Flag:"
+#, fuzzy
+msgid "E_xecute flag:"
 msgstr "ई-एक्सईसी ध्वज: (_x)"
 
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:13
+#, fuzzy
+msgid "Internet"
+msgstr "इंटरनेट"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:14
+msgid "Multimedia"
+msgstr "मल्टीमीडिया"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:15
+msgid "Open link in new _tab"
+msgstr ""
+
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:16
-msgid "Edit..."
-msgstr "संपादन..."
+msgid "Open link in new _window"
+msgstr ""
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:17
-msgid "Mail Reader"
-msgstr "डाक पाठक"
+msgid "Open link with web browser _default"
+msgstr ""
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:19
-msgid "Run in a _terminal"
-msgstr "टर्मिनल में चलाएँ (_t)"
+#, fuzzy
+msgid "Run in t_erminal"
+msgstr "टर्मिनल में चलाएं (_e)"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:20
-msgid "Run in a t_erminal"
-msgstr "टर्मिनल में चलाएँ (_e)"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:21
-msgid ""
-"Select the window manager you want.  You will need to hit apply, wave the "
-"magic wand, and do a magic dance for it to work."
-msgstr ""
-"जो विंडो प्रबंधक आप चाहते हैं, वह चुनें. आपको इसे लागू करें बटन दबाना होगा, जादू की छड़ी "
-"घुमानी होगी और जादुई नृत्य करना होगा ताकि यह कार्य करे."
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:22
-msgid "Terminal"
-msgstr "टर्मिनल "
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:23
-msgid "Text Editor"
-msgstr "पाठ संपादक"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:24
-msgid "Understands _Netscape Remote Control"
-msgstr "नेटस्केप दूर नियंत्रण को समझता है (_N)"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:25
-msgid "Use this _editor to open text files in the file manager"
-msgstr "फ़ाइल प्रबंधक में पाठ फ़ाइलें खोलने हेतु इस संपादक का उपयोग करें (_e)"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:26
-msgid "Web Browser"
-msgstr "वेब ब्राउज़र"
-
-# gnome-session/splash.c:71
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:27
-msgid "Window Manager"
-msgstr "विंडो प्रबंधक"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:28
-msgid "_Command:"
-msgstr "कमांड: (_C)"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:29
-msgid "_Name:"
-msgstr "नाम: (_N)"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:30
-msgid "_Properties..."
-msgstr "गुण... (_P)"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:31
-msgid "_Select:"
-msgstr "चुनें (_S)"
+#, fuzzy
+msgid "System"
+msgstr "सिस्टम घंटी"
 
 #: ../capplets/display/display-properties.desktop.in.in.h:1
 msgid "Change screen resolution"
@@ -1316,33 +1451,38 @@ msgstr "फ़ॉन्ट"
 msgid "Select fonts for the desktop"
 msgstr "डेस्कटॉप हेतु फ़ॉन्ट चुनें"
 
-#: ../capplets/font/font-properties.glade.h:2
+#: ../capplets/font/font-properties.glade.h:1
 msgid "<b>Font Rendering</b>"
 msgstr "<b>फ़ॉन्ट रेंडरिंग</b>"
 
-#: ../capplets/font/font-properties.glade.h:3
+#: ../capplets/font/font-properties.glade.h:2
 msgid "<b>Hinting</b>:"
 msgstr "<b>संकेत</b>:"
 
-#: ../capplets/font/font-properties.glade.h:4
+#: ../capplets/font/font-properties.glade.h:3
 msgid "<b>Smoothing</b>:"
 msgstr "<b>चिकनापन</b>:"
 
-#: ../capplets/font/font-properties.glade.h:5
+#: ../capplets/font/font-properties.glade.h:4
 msgid "<b>Subpixel order</b>:"
 msgstr "<b>सब-पिक्सल अनुक्रम</b>:"
 
-#: ../capplets/font/font-properties.glade.h:6
+#: ../capplets/font/font-properties.glade.h:5
 msgid "Best _shapes"
 msgstr "अच्छे आकार (_s)"
 
-#: ../capplets/font/font-properties.glade.h:7
+#: ../capplets/font/font-properties.glade.h:6
 msgid "Best co_ntrast"
 msgstr "अच्छा कंट्रास्ट (_n)"
 
-#: ../capplets/font/font-properties.glade.h:8
+#: ../capplets/font/font-properties.glade.h:7
 msgid "D_etails..."
 msgstr "विवरण... (_t)"
+
+#: ../capplets/font/font-properties.glade.h:8
+#, fuzzy
+msgid "Des_ktop font:"
+msgstr "डेस्कटॉप फ़ॉन्ट: (_D)"
 
 #: ../capplets/font/font-properties.glade.h:9
 msgid "Font Preferences"
@@ -1389,36 +1529,38 @@ msgid "_BGR"
 msgstr "बीजीआर (_B)"
 
 #: ../capplets/font/font-properties.glade.h:20
-msgid "_Desktop font:"
+#, fuzzy
+msgid "_Document font:"
 msgstr "डेस्कटॉप फ़ॉन्ट: (_D)"
 
 #: ../capplets/font/font-properties.glade.h:21
+#, fuzzy
+msgid "_Fixed width font:"
+msgstr "विंडो शीर्षक फ़ॉन्ट  (_W)"
+
+#: ../capplets/font/font-properties.glade.h:22
 msgid "_Full"
 msgstr "पूरा (_F)"
 
-#: ../capplets/font/font-properties.glade.h:22
+#: ../capplets/font/font-properties.glade.h:23
 msgid "_Medium"
 msgstr "मध्यम (_M)"
 
-#: ../capplets/font/font-properties.glade.h:23
+#: ../capplets/font/font-properties.glade.h:24
 msgid "_Monochrome"
 msgstr "एकरंग (_M)"
 
-#: ../capplets/font/font-properties.glade.h:24
+#: ../capplets/font/font-properties.glade.h:25
 msgid "_None"
 msgstr "कुछ नहीं (_N)"
 
-#: ../capplets/font/font-properties.glade.h:25
+#: ../capplets/font/font-properties.glade.h:26
 msgid "_RGB"
 msgstr "आरजीबी  (_R)"
 
-#: ../capplets/font/font-properties.glade.h:26
+#: ../capplets/font/font-properties.glade.h:27
 msgid "_Slight"
 msgstr "अल्प (_S)"
-
-#: ../capplets/font/font-properties.glade.h:27
-msgid "_Terminal font:"
-msgstr "टरमिनल फ़ॉन्ट (_T)"
 
 #: ../capplets/font/font-properties.glade.h:28
 msgid "_VRGB"
@@ -1432,11 +1574,11 @@ msgstr "विंडो शीर्षक फ़ॉन्ट  (_W)"
 msgid "dots per inch"
 msgstr "बिन्दु प्रति इंच"
 
-#: ../capplets/font/main.c:488
+#: ../capplets/font/main.c:489
 msgid "Font may be too large"
 msgstr "फ़ॉन्ट शायद बहुत बड़ा है"
 
-#: ../capplets/font/main.c:492
+#: ../capplets/font/main.c:493
 #, c-format
 msgid ""
 "The font selected is %d point large, and may make it difficult to "
@@ -1453,7 +1595,7 @@ msgstr[1] ""
 "चयनित फंट %d प्वाइंट बड़ा है, और प्रभावी रूप से कंप्यूटर के प्रयोग को प्रभावित कर सकता है.  "
 "यह अनुशंसित है कि आप %d से छोटी आकार चुनें."
 
-#: ../capplets/font/main.c:505
+#: ../capplets/font/main.c:506
 #, c-format
 msgid ""
 "The font selected is %d point large, and may make it difficult to "
@@ -1500,34 +1642,42 @@ msgstr "त्वरक प्रकार"
 # #-#-#-#-#  gnome-applets.gnome-2-2.hi.po (gnome-applets 2.x)  #-#-#-#-#
 # gtk/gtkinputdialog.c:238
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
-#: ../capplets/keybindings/gnome-keybinding-properties.c:197
-#: ../libbackground/applier.c:624 ../typing-break/drwright.c:477
+#: ../capplets/keybindings/gnome-keybinding-properties.c:187
+#: ../libbackground/applier.c:624 ../typing-break/drwright.c:471
 msgid "Disabled"
 msgstr "अक्षम"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:545
+#: ../capplets/keybindings/gnome-keybinding-properties.c:534
 msgid "<Unknown Action>"
 msgstr "<अज्ञात क्रिया>"
 
 # #-#-#-#-#  gnome-panel.gnome-2-2.hi.po (gnome-panel 2.2)  #-#-#-#-#
 # gnome-session/splash.c:72
-#: ../capplets/keybindings/gnome-keybinding-properties.c:566
+#: ../capplets/keybindings/gnome-keybinding-properties.c:555
 msgid "Desktop"
 msgstr "डेस्कटॉप"
 
 # #-#-#-#-#  gnome-icon-theme.gnome-2-2.hi.po (gnome-icon theme 2.2)  #-#-#-#-#
 # 48x48/emblems/emblem-sound.icon.in.h:1
 # 48x48/emblems/emblem-sound.icon.in.h:1
-#: ../capplets/keybindings/gnome-keybinding-properties.c:567
+#: ../capplets/keybindings/gnome-keybinding-properties.c:556
 #: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
 msgid "Sound"
 msgstr "ध्वनि"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:571
+#: ../capplets/keybindings/gnome-keybinding-properties.c:560
 msgid "Window Management"
 msgstr "विंडो प्रबंधन"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:668
+#: ../capplets/keybindings/gnome-keybinding-properties.c:666
+#, c-format
+msgid ""
+"The shortcut \"%s\" cannot be used because it will become unusable to type "
+"using this key.\n"
+"Please try with a key such as Control, Alt or Shift at the same time.\n"
+msgstr ""
+
+#: ../capplets/keybindings/gnome-keybinding-properties.c:695
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1536,23 +1686,23 @@ msgstr ""
 "यह शार्टकट \"%s\" पहले से ही:\n"
 " \"%s\" हेतु प्रयुक्त है\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:700
+#: ../capplets/keybindings/gnome-keybinding-properties.c:727
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "कॉन्फ़िगरेशन डेटाबेस में नया त्वरक तय करने में त्रुटि %s  हुई.\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:750
+#: ../capplets/keybindings/gnome-keybinding-properties.c:777
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "कानफिगुरेशन डेटाबेस में नया त्वरक अविन्यासित करने में त्रुटि:  %s  हुई.\n"
 
 # #-#-#-#-#  gnome-session.gnome-2-2.hi.po (gnome-session VERSION)  #-#-#-#-#
 # gnome-session/logout.c:266
-#: ../capplets/keybindings/gnome-keybinding-properties.c:857
+#: ../capplets/keybindings/gnome-keybinding-properties.c:884
 msgid "Action"
 msgstr "कार्य"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:881
+#: ../capplets/keybindings/gnome-keybinding-properties.c:908
 msgid "Shortcut"
 msgstr "शार्टकट"
 
@@ -1573,11 +1723,11 @@ msgstr ""
 msgid "Assign shortcut keys to commands"
 msgstr "कमांड हेतु शार्टकट कुंजियाँ नियत करें"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkb.c:84
+#: ../capplets/keyboard/gnome-keyboard-properties-xkb.c:87
 msgid "Unknown"
 msgstr "अज्ञात"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:273
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:281
 msgid "Layout"
 msgstr "अभिन्यास"
 
@@ -1585,20 +1735,20 @@ msgstr "अभिन्यास"
 #. the below options are to be included in the selected list.
 #. This is a HIG-compliant alternative to allowing no
 #. selection in the group.
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:277
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:228
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:285
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:231
 msgid "Default"
 msgstr "मूलभूत"
 
 # libgnomeprintui/gpaui/add-printer-dialog.c:83
 # libgnomeprintui/gpaui/config-dialog.c:83
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:75
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:77
 msgid "Models"
 msgstr "मॉडल"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:106
-#, c-format
-msgid "There was an error launching the keyboard capplet : %s"
+#: ../capplets/keyboard/gnome-keyboard-properties.c:109
+#, fuzzy, c-format
+msgid "There was an error launching the keyboard tool: %s"
 msgstr "कुंजीपटल केप्लेट प्रारंभ करने में त्रुटि हुई: %s"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:202
@@ -1607,10 +1757,9 @@ msgstr "एक्सेसिबिलिटी (_A)"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:221
 #: ../capplets/keyboard/gnome-keyboard-properties.c:223
-#: ../capplets/sound/sound-properties-capplet.c:240
-#: ../capplets/sound/sound-properties-capplet.c:242
-msgid ""
-"Just apply settings and quit (compatibility only; now handled by daemon)"
+#: ../capplets/sound/sound-properties-capplet.c:756
+#: ../capplets/sound/sound-properties-capplet.c:758
+msgid "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr "विन्यास लागू करें और बाहर हों (सिर्फ उपयुक्तता, अब डेमन द्वारा संभाला जाएगा)"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:227
@@ -1662,11 +1811,13 @@ msgid "Check if breaks are allowed to be postponed"
 msgstr "जाँचें कि क्या ब्रेक स्थगित करने हेतु स्वीकार्य हैं"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
-msgid "Choose A Keyboard Model"
+#, fuzzy
+msgid "Choose a Keyboard Model"
 msgstr "कुंजीपटल मॉडल चुनें"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:15
-msgid "Choose A Layout"
+#, fuzzy
+msgid "Choose a Layout"
 msgstr "एक लेआउट चुनें"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:16
@@ -1674,95 +1825,102 @@ msgid "Cursor _blinks in text boxes and fields"
 msgstr "पाठ बक्सा और फील्ड में टिमटिमाएँ (_b)"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:17
+msgid "Cursor blinks speed"
+msgstr ""
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:18
 msgid "Duration of the break when typing is disallowed"
 msgstr "जब टाइपिंग स्वीकार्य नहीं है तो ब्रेक की अवधि"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:18
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:19
 msgid "Duration of work before forcing a break"
 msgstr "ब्रेक बाध्य करने से पहले कार्यावधि"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:19
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:20
 msgid "Key presses _repeat when key is held down"
 msgstr "जब कुंजी दबा कर रखा जाए तो कुंजी दोहराना (_r)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:22
 msgid "Keyboard Preferences"
 msgstr "कुंजी पटल वरीयताएँ"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "Keyboard _model:"
 msgstr "कुंजीपटल मॉडलः (_m)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:23
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:24
 msgid "Layout Options"
 msgstr "अभिन्यास विकल्प"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:24
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "Layouts"
 msgstr "अभिन्यास"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:25
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:26
 msgid ""
 "Lock screen after a certain duration to help prevent repetitive keyboard use "
 "injuries"
-msgstr ""
-"बारंबार कुंजीपटल उपयोग चोट से बचने हेति स्क्रीन को एक निश्चित अवधि के पश्चात् तालाबन्द करें"
+msgstr "बारंबार कुंजीपटल उपयोग चोट से बचने हेति स्क्रीन को एक निश्चित अवधि के पश्चात् तालाबन्द करें"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:26
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:27
 msgid "Microsoft Natural Keyboard"
 msgstr "Microsoft प्राकृतिक कुंजीपटल"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:27
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:28
 msgid "Preview:"
 msgstr "पूर्वावलोकनः"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:28
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:29
+msgid "Repeat keys speed"
+msgstr ""
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:30
 msgid "Reset To De_faults"
 msgstr "डिफ़ॉल्ट में रीसेट करें (_f)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:30
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:32
 msgid "Separate _group for each window"
 msgstr "प्रत्येक विंडो हेतु पृथक समूह (_g)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:31
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:33
 msgid "Typing Break"
 msgstr "ब्रेक टाइप कर रहे"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:32
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:34
 msgid "_Accessibility..."
 msgstr "एक्सेसिबिलिटी... (_A)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:33
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:35
 msgid "_Add..."
 msgstr "जोड़ें (_A)..."
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:34
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:36
 msgid "_Break interval lasts:"
 msgstr "ब्रेक अंतराल टिकता है: (_B)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:35
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:37
 msgid "_Delay:"
 msgstr "देरीः (_D)"
 
 # libgnomeprintui/gpaui/add-printer-dialog.c:83
 # libgnomeprintui/gpaui/config-dialog.c:83
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:36
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:38
 msgid "_Models:"
 msgstr "मॉडल (_M):"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:37
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:39
 msgid "_Selected layouts:"
 msgstr "चयनित अभिन्यासः (_S)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:38
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:40
 msgid "_Speed:"
 msgstr "गतिः (_S)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:40
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:42
 msgid "_Work interval lasts:"
 msgstr "कार्य अंतराल टिकता है:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:41
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:43
 msgid "minutes"
 msgstr "मिनट्स"
 
@@ -1770,61 +1928,84 @@ msgstr "मिनट्स"
 msgid "Set your keyboard preferences"
 msgstr "कुंजी पटल की वरीयताएँ नियत करें"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:559
-msgid "Unknown Cursor"
+#. set the timeout value  label with correct value of timeout
+#: ../capplets/mouse/gnome-mouse-properties.c:138
+#: ../capplets/mouse/gnome-mouse-properties.c:887
+#, fuzzy, c-format
+msgid "%d milliseconds"
+msgid_plural "%d milliseconds"
+msgstr[0] "मिली सेकण्ड्स"
+msgstr[1] "मिली सेकण्ड्स"
+
+#: ../capplets/mouse/gnome-mouse-properties.c:567
+#, fuzzy
+msgid "Unknown Pointer"
 msgstr "अज्ञात संकेतक"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:761
-msgid "Default Cursor"
+#: ../capplets/mouse/gnome-mouse-properties.c:768
+#, fuzzy
+msgid "Default Pointer"
 msgstr "डिफ़ॉल्ट संकेतक"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:762
-msgid "Default Cursor - Current"
+#: ../capplets/mouse/gnome-mouse-properties.c:769
+#, fuzzy
+msgid "Default Pointer - Current"
 msgstr "डिफ़ॉल्ट संकेतक - वर्तमान"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:763
-msgid "The default cursor that ships with X"
+#: ../capplets/mouse/gnome-mouse-properties.c:770
+#, fuzzy
+msgid "The default pointer that ships with X"
 msgstr "डिफ़ॉल्ट संकेतक जो एक्स के साथ आता है"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:767
-msgid "White Cursor"
+#: ../capplets/mouse/gnome-mouse-properties.c:774
+#, fuzzy
+msgid "White Pointer"
 msgstr "सफेद संकेतक"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:768
-msgid "White Cursor - Current"
+#: ../capplets/mouse/gnome-mouse-properties.c:775
+#, fuzzy
+msgid "White Pointer - Current"
 msgstr "सफेद संकेतक - वर्तमान"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:769
-msgid "The default cursor inverted"
+#: ../capplets/mouse/gnome-mouse-properties.c:776
+#, fuzzy
+msgid "The default pointer inverted"
 msgstr "डिफ़ॉल्ट संकेतक का उल्टा"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:773
-msgid "Large Cursor"
-msgstr "बडा संकेतक"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:774
-msgid "Large Cursor - Current"
-msgstr "बडा संकेतक - वर्तमान"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:775
-msgid "Large version of normal cursor"
-msgstr "सामान्य संकेतक का बड़ा रूप"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:779
-msgid "Large White Cursor - Current"
-msgstr "बड़ा सफेद संकेतक -वर्तमान"
-
 #: ../capplets/mouse/gnome-mouse-properties.c:780
-msgid "Large White Cursor"
-msgstr "बड़ा सफेद संकेतक"
+#, fuzzy
+msgid "Large Pointer"
+msgstr "<b>प्वाइंटर स्थिति दर्शाएँ</b>"
 
 #: ../capplets/mouse/gnome-mouse-properties.c:781
-msgid "Large version of white cursor"
+#, fuzzy
+msgid "Large Pointer - Current"
+msgstr "बडा संकेतक - वर्तमान"
+
+#: ../capplets/mouse/gnome-mouse-properties.c:782
+#, fuzzy
+msgid "Large version of normal pointer"
+msgstr "सामान्य संकेतक का बड़ा रूप"
+
+#: ../capplets/mouse/gnome-mouse-properties.c:786
+#, fuzzy
+msgid "Large White Pointer - Current"
+msgstr "बड़ा सफेद संकेतक -वर्तमान"
+
+#: ../capplets/mouse/gnome-mouse-properties.c:787
+#, fuzzy
+msgid "Large White Pointer"
+msgstr "बड़ा सफेद संकेतक"
+
+#: ../capplets/mouse/gnome-mouse-properties.c:788
+#, fuzzy
+msgid "Large version of white pointer"
 msgstr "सफेद संकेतक का बड़ा रूप"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:975
-msgid "Cursor Theme"
-msgstr "संकेतक प्रसंग"
+#: ../capplets/mouse/gnome-mouse-properties.c:977
+#, fuzzy
+msgid "Pointer Theme"
+msgstr "नियंत्रण प्रसंग"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:2
 msgid "<b>Double-Click Timeout </b>"
@@ -1875,32 +2056,34 @@ msgid "Buttons"
 msgstr "बटन्स"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:14
-msgid "Cursor Size:"
-msgstr "कर्सर आकार:"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:15
-msgid "Cursors"
-msgstr "संकेतक"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:16
 msgid "Highlight the _pointer when you press Ctrl"
 msgstr "पाइंटर हाइलाइट करें जब आप कंट्रोल दबाते हैं"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:15
 msgid "Large"
 msgstr "बड़ा"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:16
 msgid "Medium"
 msgstr "मध्यम"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
 msgid "Motion"
 msgstr "चाल"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:20
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
 msgid "Mouse Preferences"
 msgstr "माउस वरीयताएँ"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
+#, fuzzy
+msgid "Pointer Size:"
+msgstr "कर्सर आकार:"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:20
+#, fuzzy
+msgid "Pointers"
+msgstr "मिनट्स"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:21
 msgid "Small"
@@ -1947,7 +2130,8 @@ msgid "      "
 msgstr " "
 
 #: ../capplets/network/gnome-network-preferences.glade.h:2
-msgid "<b>D_irect internet connection</b>"
+#, fuzzy
+msgid "<b>Di_rect internet connection</b>"
 msgstr "<b>सीधा इंटरनेट कनेक्शन (_i)</b>"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:3
@@ -2024,48 +2208,120 @@ msgstr "सुरक्षित एचटीटीपी प्रॉक्स�
 msgid "Enable sound and associate sounds with events"
 msgstr "ध्वनि एवम् धटनाओं के साथ सम्बद्ध ध्वनियाँ सक्षम करें"
 
-#: ../capplets/sound/sound-properties-capplet.c:271
-#: ../capplets/sound/sound-properties.glade.h:6
+#: ../capplets/sound/sound-properties-capplet.c:316
+#: ../capplets/sound/sound-properties-capplet.c:368
+msgid "Not connected"
+msgstr "कनेक्टेड नहीं है"
+
+#: ../capplets/sound/sound-properties-capplet.c:790
 msgid "Sound Preferences"
 msgstr "ध्वनि वरीयताएँ"
 
-#: ../capplets/sound/sound-properties.glade.h:1
-msgid "E_nable sound server startup"
-msgstr "ध्वनि सर्वर स्टार्टअप सक्षम करें (_n)"
-
 #: ../capplets/sound/sound-properties.glade.h:2
+#, fuzzy
+msgid "<b>Audio Conferencing</b>"
+msgstr "<b>फ़ॉन्ट रेंडरिंग</b>"
+
+#: ../capplets/sound/sound-properties.glade.h:3
+#, fuzzy
+msgid "<b>Music and Movies</b>"
+msgstr "<b>खींचें और छोड़ें</b>"
+
+#: ../capplets/sound/sound-properties.glade.h:4
+#, fuzzy
+msgid "<b>Sound Events</b>"
+msgstr "ध्वनि घटनाएँ"
+
+#: ../capplets/sound/sound-properties.glade.h:5
+#, fuzzy
+msgid "<span weight=\"bold\" size=\"x-large\">Testing...</span>"
+msgstr "<span-weight=\"bold\" size=\"x-large\">परीक्षण कर रहे...</span>"
+
+#: ../capplets/sound/sound-properties.glade.h:6
+msgid "Click OK to finish."
+msgstr ""
+
+#: ../capplets/sound/sound-properties.glade.h:7
+msgid "Devices"
+msgstr "उपकरण"
+
+#: ../capplets/sound/sound-properties.glade.h:8
+msgid "E_nable software sound mixing (ESD)"
+msgstr ""
+
+#: ../capplets/sound/sound-properties.glade.h:9
 msgid "Flash _entire screen"
 msgstr "पूरा स्क्रीन चमकाएँ (_e)"
 
-#: ../capplets/sound/sound-properties.glade.h:3
+#: ../capplets/sound/sound-properties.glade.h:10
 msgid "Flash _window titlebar"
 msgstr "विंडो शीर्षक-पट्टी को चमकाएँ (_w)"
 
-#: ../capplets/sound/sound-properties.glade.h:4
-msgid "General"
-msgstr "सामान्य"
+#: ../capplets/sound/sound-properties.glade.h:11
+#, fuzzy
+msgid "Sound & Video Preferences"
+msgstr "ध्वनि वरीयताएँ"
 
-#: ../capplets/sound/sound-properties.glade.h:5
-msgid "Sound Events"
-msgstr "ध्वनि घटनाएँ"
+#: ../capplets/sound/sound-properties.glade.h:12
+#, fuzzy
+msgid "Sound Capture:"
+msgstr "ध्वनि फ़ाइल:"
 
-#: ../capplets/sound/sound-properties.glade.h:7
-msgid "System Bell"
+#: ../capplets/sound/sound-properties.glade.h:13
+#, fuzzy
+msgid "Sound Playback:"
+msgstr "बजाना रोकें कुंजी"
+
+# #-#-#-#-#  gnome-icon-theme.gnome-2-2.hi.po (gnome-icon theme 2.2)  #-#-#-#-#
+# 48x48/emblems/emblem-sound.icon.in.h:1
+# 48x48/emblems/emblem-sound.icon.in.h:1
+#: ../capplets/sound/sound-properties.glade.h:14
+#, fuzzy
+msgid "Sounds"
+msgstr "ध्वनि"
+
+#: ../capplets/sound/sound-properties.glade.h:15
+#, fuzzy
+msgid "System Beep"
 msgstr "सिस्टम घंटी"
 
-#: ../capplets/sound/sound-properties.glade.h:8
-msgid "_Sound an audible bell"
-msgstr "श्रव्य घंटी बजाएँ (_S)"
+#: ../capplets/sound/sound-properties.glade.h:16
+#, fuzzy
+msgid "Test"
+msgstr "जाँच"
 
-#: ../capplets/sound/sound-properties.glade.h:9
-msgid "_Sounds for events"
-msgstr "घटनाओं हेतु ध्वनियाँ (_S)"
+#: ../capplets/sound/sound-properties.glade.h:17
+msgid "Testing Pipeline"
+msgstr "पाइप-लाइन परीक्षण कर रहे"
 
-#: ../capplets/sound/sound-properties.glade.h:10
-msgid "_Visual feedback:"
-msgstr "दृष्टिगत जानकारी (_V):"
+#: ../capplets/sound/sound-properties.glade.h:18
+#, fuzzy
+msgid "_Enable system beep"
+msgstr "सहायक तकनालॉज़ी सक्षम करें (_E)"
 
-#: ../capplets/theme-switcher/gnome-theme-details.c:347
+#: ../capplets/sound/sound-properties.glade.h:19
+msgid "_Play system sounds"
+msgstr ""
+
+#: ../capplets/sound/sound-properties.glade.h:20
+msgid "_Visual system beep"
+msgstr ""
+
+#: ../capplets/theme-switcher/gnome-theme-details.c:368
+#, fuzzy
+msgid "Would you like to remove this theme?"
+msgstr "क्या आप modmap फाइल लोड करना चाहते हैं?"
+
+#: ../capplets/theme-switcher/gnome-theme-details.c:433
+msgid "Theme deleted succesfully. Please select another theme."
+msgstr ""
+
+#: ../capplets/theme-switcher/gnome-theme-details.c:442
+#, fuzzy
+msgid "Theme can not be deleted"
+msgstr "प्रसंग नाम मौज़ूद होना ही चाहिए"
+
+#: ../capplets/theme-switcher/gnome-theme-details.c:535
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -2074,15 +2330,15 @@ msgstr ""
 "आपके तंत्र में कोई प्रसंग नहीं मिला. शायद इसका मतलब है कि \"प्रसंग वरीयताएँ \" वार्ता गलत "
 "संस्थापित हैं, या आपने \" गनोम प्रसंग\" पैकेज संस्थापित नहीं किया है."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:227
+#: ../capplets/theme-switcher/gnome-theme-installer.c:255
 msgid "This theme is not in a supported format."
 msgstr "प्रारूप में यह थीम समर्थित नहीं है."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:244
+#: ../capplets/theme-switcher/gnome-theme-installer.c:273
 msgid "Failed to create temporary directory"
 msgstr "अस्थायी निर्देशिका बनाने में विफल"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:264
+#: ../capplets/theme-switcher/gnome-theme-installer.c:294
 msgid ""
 "Can not install theme. \n"
 "The bzip2 utility is not installed."
@@ -2090,13 +2346,13 @@ msgstr ""
 "थीम अधिष्ठापित नहीं कर सकता. \n"
 "bzip2 उपयोगिता अधिष्ठापित नहीं है."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:282
-#: ../capplets/theme-switcher/gnome-theme-installer.c:319
-#: ../capplets/theme-switcher/gnome-theme-installer.c:399
+#: ../capplets/theme-switcher/gnome-theme-installer.c:313
+#: ../capplets/theme-switcher/gnome-theme-installer.c:352
+#: ../capplets/theme-switcher/gnome-theme-installer.c:432
 msgid "Installation Failed"
 msgstr "अधिष्ठापन विफल"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:302
+#: ../capplets/theme-switcher/gnome-theme-installer.c:334
 msgid ""
 "Can not install themes. \n"
 "The gzip utility is not installed."
@@ -2104,55 +2360,46 @@ msgstr ""
 "थीम अधिष्ठापित नहीं कर सका. \n"
 "gzip उपयोगिता अधिष्ठापित नहीं है."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:340
-#, c-format
-msgid ""
-"Icon Theme %s correctly installed.\n"
-"You can select it in the theme details."
-msgstr ""
-"आइकन थीम %s ठीक से अधिष्ठापित है.\n"
-"आप इसे थीम विवरण में इसे चयन कर सकते हैं."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:343
-#, c-format
-msgid "Gnome Theme %s correctly installed"
+#: ../capplets/theme-switcher/gnome-theme-installer.c:378
+#, fuzzy, c-format
+msgid "GNOME Theme %s correctly installed"
 msgstr "Gnome थीम %s ठीक से अधिष्ठापित है"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:346
-#, c-format
-msgid ""
-"Windows Border Theme %s correctly installed.\n"
-"You can select it in the theme details."
-msgstr ""
-"Windows किनारा थीम %s ठीक से अधिष्ठापित है.\n"
-"थीम विवरण में आप इसे चयन कर सकते हैं."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:349
-#, c-format
-msgid ""
-"Controls Theme %s correctly installed.\n"
-"You can select it in the theme details."
-msgstr ""
-"Controls Theme %s ठीक से अधिष्ठापित है.\n"
-"थीम विवरण में आप इसे चुन सकते हैं."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:357
+#: ../capplets/theme-switcher/gnome-theme-installer.c:388
 msgid "The theme is an engine. You need to compile the theme."
 msgstr "थीम एक इंजन है. आपको थीम को इकट्ठा करने की जरूरत है."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:374
+#: ../capplets/theme-switcher/gnome-theme-installer.c:406
 msgid "The file format is invalid"
 msgstr "फाइल प्रारूप मान्य नहीं है"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:468
+#. TODO: currently cannot apply "gnome themes"
+#: ../capplets/theme-switcher/gnome-theme-installer.c:452
+#, c-format
+msgid ""
+"The theme \"%s\" has been installed.\n"
+"Would you like to apply it now, or keep your current theme?"
+msgstr ""
+
+#: ../capplets/theme-switcher/gnome-theme-installer.c:455
+#, fuzzy
+msgid "Keep Current Theme"
+msgstr "संकेतक प्रसंग"
+
+#: ../capplets/theme-switcher/gnome-theme-installer.c:457
+#, fuzzy
+msgid "Apply New Theme"
+msgstr "थीम लागू करें"
+
+#: ../capplets/theme-switcher/gnome-theme-installer.c:531
 msgid "No theme file location specified to install"
 msgstr "संस्थापित करने हेतु कोई प्रसंग फ़ाइल स्थान निर्दिष्ट नहीं किया है"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:485
+#: ../capplets/theme-switcher/gnome-theme-installer.c:546
 msgid "The theme file location specified to install is invalid"
 msgstr "संस्थापित करने हेतु प्रसंग फ़ाइल निर्दिष्ट किया है वह अवैध है"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:505
+#: ../capplets/theme-switcher/gnome-theme-installer.c:566
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -2161,18 +2408,18 @@ msgstr ""
 "इसमें थीम देने में अपर्याप्त अनुमति:\n"
 "%s"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:526
+#: ../capplets/theme-switcher/gnome-theme-installer.c:587
 msgid "The file format is invalid."
 msgstr "फाइल प्रारूप मान्य नहीं है"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:553
+#: ../capplets/theme-switcher/gnome-theme-installer.c:614
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
 "selected as the source location"
 msgstr "%s पथ है जहां थीम फाइल अधिष्ठापित होगा. यह श्रोत स्थान के रूप में चुना नहीं जायेगा"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:607
+#: ../capplets/theme-switcher/gnome-theme-installer.c:679
 msgid ""
 "Cannot install theme.\n"
 "The tar program is not installed on your system."
@@ -2180,15 +2427,15 @@ msgstr ""
 "थीम अधिष्ठापित नहीं कर सकता.\n"
 "आपके सिस्टम पर टार प्रोग्राम अधिष्ठापित नहीं है."
 
-#: ../capplets/theme-switcher/gnome-theme-manager.c:680
+#: ../capplets/theme-switcher/gnome-theme-manager.c:686
 msgid "Custom theme"
 msgstr "अनुकूलित प्रसंग"
 
-#: ../capplets/theme-switcher/gnome-theme-manager.c:680
+#: ../capplets/theme-switcher/gnome-theme-manager.c:686
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "इस प्रसंग को आप प्रसंग सहेजें बटन दबाकर सहेज सकते हैं."
 
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1476
+#: ../capplets/theme-switcher/gnome-theme-manager.c:1579
 msgid ""
 "The default theme schemas could not be found on your system.  This means "
 "that you probably don't have metacity installed, or that your gconf is "
@@ -2197,11 +2444,11 @@ msgstr ""
 "मूलभूत थीम योजना आपके सिस्टम पर पायी नहीं जा सकी.  इसका मतलब है कि आपके पास मेटासिटी "
 "अधिष्ठापित नहीं है, या कि gconf गलत तरीके से विन्यस्त है."
 
-#: ../capplets/theme-switcher/gnome-theme-save.c:72
+#: ../capplets/theme-switcher/gnome-theme-save.c:73
 msgid "Theme name must be present"
 msgstr "प्रसंग नाम मौज़ूद होना ही चाहिए"
 
-#: ../capplets/theme-switcher/gnome-theme-save.c:104
+#: ../capplets/theme-switcher/gnome-theme-save.c:144
 msgid "The theme already exists. Would you like to replace it?"
 msgstr "थीम पहले से मौजूद है. क्या आप इसे स्थानांतरित करना चाहते हैं?"
 
@@ -2214,97 +2461,84 @@ msgstr "डेस्कटॉप के विभिन्न भाग हे�
 msgid "Theme"
 msgstr "प्रसंग"
 
-#: ../capplets/theme-switcher/theme-install.glade.h:2
-msgid "<span size=\"larger\" weight=\"bold\">Install a Theme</span>"
-msgstr "<span size=\"larger\" weight=\"bold\">प्रसंग स्थापित करें</span>"
-
-#: ../capplets/theme-switcher/theme-install.glade.h:3
-msgid "Theme Installation"
-msgstr "प्रसंग स्थापना"
-
-#: ../capplets/theme-switcher/theme-install.glade.h:4
-msgid "_Install"
-msgstr "संस्थापित करें (_I)"
-
-#: ../capplets/theme-switcher/theme-install.glade.h:5
-msgid "_Location:"
-msgstr "स्थान (_L):"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:2
-msgid "<span size=\"larger\" weight=\"bold\">Save Theme to Disk</span>"
-msgstr "<span size=\"larger\" weight=\"bold\">प्रसंग डिस्क में सहेजें</span>"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:3
+#: ../capplets/theme-switcher/theme-properties.glade.h:1
 msgid "Apply _Background"
 msgstr "पृष्ठभूमि लागू करें  (_B)"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:4
+#: ../capplets/theme-switcher/theme-properties.glade.h:2
 msgid "Apply _Font"
 msgstr "फ़ॉन्ट्स लागू करें  (_F)"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:5
+#: ../capplets/theme-switcher/theme-properties.glade.h:3
 msgid "Controls"
 msgstr "नियंत्रक"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:6
+#: ../capplets/theme-switcher/theme-properties.glade.h:4
 msgid "Icons"
 msgstr "चिह्न"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:7
-msgid "New themes can also be installed by dragging them into the window."
-msgstr "विंडो में प्रसंग खींचकर डालने से भी नए प्रसंग संस्थापित किये जा सकते हैं."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:8
+#: ../capplets/theme-switcher/theme-properties.glade.h:5
 msgid "Save Theme"
 msgstr "प्रसंग सहेजें"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:9
+#: ../capplets/theme-switcher/theme-properties.glade.h:6
+#, fuzzy
+msgid "Save _Background Image"
+msgstr "पृष्ठभूमि लागू करें  (_B)"
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:7
 msgid "Select theme for the desktop"
 msgstr "डेस्कटॉप हेतु प्रसंग चुनें"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:10
-msgid "Short _description:"
-msgstr "संक्षिप्त विवरण (_D):"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:11
+#: ../capplets/theme-switcher/theme-properties.glade.h:8
 msgid "Theme Details"
 msgstr "प्रसंग विवरण"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:12
+#: ../capplets/theme-switcher/theme-properties.glade.h:9
 msgid "Theme Preferences"
 msgstr "प्रसंग वरीयताएँ"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:13
+#: ../capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Theme _Details"
 msgstr "प्रसंग विवरण (_D)"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:14
+#: ../capplets/theme-switcher/theme-properties.glade.h:11
 msgid "This theme does not suggest any particular font or background."
 msgstr "यह प्रसंग कोई विशेष फ़ॉन्ट एवं पृष्ठ भूमि हेतु राय नहीं देता है."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:15
+#: ../capplets/theme-switcher/theme-properties.glade.h:12
 msgid "This theme suggests a background:"
 msgstr "यह प्रसंग एक पृष्ठभूमि हेतु राय देता है:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:16
+#: ../capplets/theme-switcher/theme-properties.glade.h:13
 msgid "This theme suggests a font and a background:"
 msgstr "यह प्रसंग एक फ़ॉन्ट एवं पृष्ठभूमि हेतु राय देता है:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:17
+#: ../capplets/theme-switcher/theme-properties.glade.h:14
 msgid "This theme suggests a font:"
 msgstr "यह प्रसंग एक फ़ॉन्ट हेतु राय देता है:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:18
+#: ../capplets/theme-switcher/theme-properties.glade.h:15
 msgid "Window Border"
 msgstr "विंडो किनारा"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:19
-msgid "_Go To Theme Folder"
-msgstr "प्रसंग फ़ोल्डर में जाएँ (_G)"
+#: ../capplets/theme-switcher/theme-properties.glade.h:16
+#, fuzzy
+msgid "_Description:"
+msgstr "वर्णन (_D):"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:20
+#: ../capplets/theme-switcher/theme-properties.glade.h:17
 msgid "_Install Theme..."
 msgstr "प्रसंग स्थापित करें  (_I)..."
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:18
+#, fuzzy
+msgid "_Install..."
+msgstr "संस्थापित करें (_I)"
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:19
+msgid "_Name:"
+msgstr "नाम: (_N)"
 
 #: ../capplets/theme-switcher/theme-properties.glade.h:21
 msgid "_Revert"
@@ -2315,10 +2549,6 @@ msgid "_Save Theme..."
 msgstr "प्रसंग सहेजें... (_S)"
 
 #: ../capplets/theme-switcher/theme-properties.glade.h:23
-msgid "_Theme name:"
-msgstr "प्रसंग नामः (_T)"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:24
 msgid "theme selection tree"
 msgstr "प्रसंग चयन ट्री"
 
@@ -2449,7 +2679,7 @@ msgstr "बाहर (_Q)"
 msgid "_Save"
 msgstr "सहेजें (_S)"
 
-#: ../capplets/windows/gnome-window-properties.c:386
+#: ../capplets/windows/gnome-window-properties.c:385
 #, c-format
 msgid ""
 "<b>Cannot start the preferences application for your window manager</b>\n"
@@ -2460,24 +2690,29 @@ msgstr ""
 "\n"
 "%s"
 
-#: ../capplets/windows/gnome-window-properties.c:644
-msgid "Control"
+#: ../capplets/windows/gnome-window-properties.c:642
+#, fuzzy
+msgid "C_ontrol"
 msgstr "कंट्रोल"
 
-#: ../capplets/windows/gnome-window-properties.c:649
-msgid "Alt"
-msgstr "आल्ट"
+#: ../capplets/windows/gnome-window-properties.c:647
+#, fuzzy
+msgid "_Alt"
+msgstr "ऑल्ट (_A)"
 
-#: ../capplets/windows/gnome-window-properties.c:655
-msgid "Hyper"
+#: ../capplets/windows/gnome-window-properties.c:653
+#, fuzzy
+msgid "H_yper"
 msgstr "हाइपर"
 
-#: ../capplets/windows/gnome-window-properties.c:662
-msgid "Super (or \"Windows logo\")"
+#: ../capplets/windows/gnome-window-properties.c:660
+#, fuzzy
+msgid "S_uper (or \"Windows logo\")"
 msgstr "सुपर (या \"विंडोज़ लोगो\")"
 
-#: ../capplets/windows/gnome-window-properties.c:669
-msgid "Meta"
+#: ../capplets/windows/gnome-window-properties.c:667
+#, fuzzy
+msgid "_Meta"
 msgstr "मेटा"
 
 #: ../capplets/windows/gnome-window-properties.glade.h:1
@@ -2493,7 +2728,8 @@ msgid "<b>Window Selection</b>"
 msgstr "<b>विन्डो चयन</b>"
 
 #: ../capplets/windows/gnome-window-properties.glade.h:4
-msgid "To _move a window, press-and-hold this key then grab the window:"
+#, fuzzy
+msgid "To move a window, press-and-hold this key then grab the window:"
 msgstr "किसी विंडो को खिसकाने हेतु इस कुंजी को दबाए रखें फिर विंडो पकड़ें (_m)"
 
 #: ../capplets/windows/gnome-window-properties.glade.h:5
@@ -2524,11 +2760,11 @@ msgstr "अपना विंडो गुण सेट करें"
 msgid "Windows"
 msgstr "विंडोज़"
 
-#: ../control-center/control-center-categories.c:257
+#: ../control-center/control-center-categories.c:287
 msgid "Others"
 msgstr "अन्य"
 
-#: ../control-center/control-center.c:42
+#: ../control-center/control-center.c:93
 msgid "Desktop Preferences"
 msgstr "डेस्कटॉप वरीयताएँ"
 
@@ -2545,15 +2781,11 @@ msgstr "गनोम कॉन्फ़िगरेशन उपकरण"
 msgid "Volume"
 msgstr "आवाज निर्धारक"
 
-#: ../gnome-settings-daemon/factory.c:36
-msgid "Could not initialize Bonobo"
-msgstr "बोनोबो प्रारंभ नहीं कर सकते"
-
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:397
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:406
 msgid "Slow Keys Alert"
 msgstr "धीमी कुंजियाँ चेतावनी"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:398
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:407
 msgid ""
 "You just held down the Shift key for 8 seconds.  This is the shortcut for "
 "the Slow Keys feature, which affects the way your keyboard works."
@@ -2561,19 +2793,39 @@ msgstr ""
 "आपने शिफ्ट कुंजी 8 सेकंड के लिये दबायी है.  यह धीमे कुंजी फीचर का शॉर्टकट है जो आपके कुंजीपटल "
 "के काम करने को प्रभावित करता है."
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:400
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:409
 msgid "Do you want to activate Slow Keys?"
 msgstr "क्या आप धीमी कुंजियाँ सक्रिय करना चाहते हैं?"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:401
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:410
 msgid "Do you want to deactivate Slow Keys?"
 msgstr "क्या आप धीमी कुंजियाँ अक्रिय करना चाहते हैं?"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:410
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
+msgid "_Activate"
+msgstr "क्रियान्वित"
+
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
+msgid "_Deactivate"
+msgstr "अक्रियान्वित"
+
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:429
+msgid "Do_n't activate"
+msgstr ""
+
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:429
+msgid "Do_n't deactivate"
+msgstr ""
+
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:421
 msgid "Sticky Keys Alert"
 msgstr "स्टिकी कुंजियाँ चेतावनी"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:422
 msgid ""
 "You just pressed the Shift key 5 times in a row.  This is the shortcut for "
 "the Sticky Keys feature, which affects the way your keyboard works."
@@ -2581,7 +2833,7 @@ msgstr ""
 "आपने शिफ्ट कुंजी एकसाथ 5 बार दबायी है.  यह स्टिकी कुंजी फीचर का शॉर्टकट है जो आपके "
 "कुंजीपटल के काम करने को प्रभावित करता है."
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:424
 msgid ""
 "You just pressed two keys at once, or pressed the Shift key 5 times in a "
 "row.  This turns off the Sticky Keys feature, which affects the way your "
@@ -2591,15 +2843,24 @@ msgstr ""
 "कुंजी फीचर बंद करता है, यह उस तरीके को प्रभावित करता है जिसपर आपका कुंजीपटल काम करता "
 "है."
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:415
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
 msgid "Do you want to activate Sticky Keys?"
 msgstr "क्या आप स्टिकी कुंजियाँ सक्रिय करना चाहते हैं?"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:416
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
 msgid "Do you want to deactivate Sticky Keys?"
 msgstr "क्या आप स्टिकी कुंजियाँ अक्रिय करना चाहते हैं?"
 
-#: ../gnome-settings-daemon/gnome-settings-font.c:107
+#: ../gnome-settings-daemon/gnome-settings-font.c:74
+#, fuzzy, c-format
+msgid ""
+"Cannot create the directory \"%s\".\n"
+"This is needed to allow changing the mouse pointer theme."
+msgstr ""
+"डिरेक्ट्री \"%s\" बना नहीं सकते.\n"
+"यह संकेतक को बदलने की स्वीकृति हेतु आवश्यक है"
+
+#: ../gnome-settings-daemon/gnome-settings-font.c:96
 #, c-format
 msgid ""
 "Cannot create the directory \"%s\".\n"
@@ -2608,37 +2869,37 @@ msgstr ""
 "डिरेक्ट्री \"%s\" बना नहीं सकते.\n"
 "यह संकेतक को बदलने की स्वीकृति हेतु आवश्यक है"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:209
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:208
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr "कुंजी बाइंडिंग (%s) ने अपनी क्रिया को कई दफा पारिभाषित किया है\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:222
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:221
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr "कुंजी बाइंडिंग (%s) ने अपनी बाइंडिंग को कई दफा पारिभाषित किया है\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:228
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:227
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr "कुंजी बाइंडिंग (%s) अधूरा है\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:256
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:255
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr "कुंजी बाइंडिंग (%s) अवैध है\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:292
-#, c-format
-msgid "It seems that another application already has access to key '%d'."
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:291
+#, fuzzy, c-format
+msgid "It seems that another application already has access to key '%u'."
 msgstr "प्रतीत होता है कि किसी अन्य अनुप्रयोग के पास कुंजी '%d' पर पहुँच है."
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:361
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:360
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr "कुंजी बाइंडिंग (%s) पहले से ही उपयोग में है\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:436
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:435
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -2647,7 +2908,7 @@ msgstr ""
 "(%s) को चलाने की कोशिश में त्रुटि हुई\n"
 "जो कुंजी (%s) से लिंक्ड है"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:103
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:104
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2678,7 +2939,7 @@ msgstr ""
 "- The result of <b>%s</b>\n"
 "- The result of <b>%s</b>"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:117
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:118
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2689,27 +2950,33 @@ msgstr ""
 "जटिल XKB विन्यास के साथ कुछ जानी समझी समस्यायें हैं.\n"
 "एक साधारण विन्यास के प्रयोग की कोशिश करें या XFree सॉफ्टवेयर का नवीन संस्करण लें."
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:227
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:248
 msgid "Do _not show this warning again"
 msgstr "इस चेतावनी को फिर न दिखायें (_n)"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:238
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:262
+#, fuzzy, c-format
 msgid ""
-"The X system keyboard settings differ from your current GNOME keyboard "
-"settings.  Which set would you like to use?"
+"<b>The X system keyboard settings differ from your current GNOME keyboard "
+"settings.</b>\n"
+"\n"
+"Expected was %s, but the the following settings were found: %s.\n"
+"\n"
+"Which set would you like to use?"
 msgstr ""
 "X सिस्टम कुंजीपटल जमावट आपके मौजूदा GNOME कुंजीपटल जमावट से अलग रहता है.  किस सेट को "
 "आप प्रयोग करना चाहेंगे?"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:251
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:285
 msgid "Use X settings"
 msgstr "एक्स विन्यास उपयोग करें"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:253
-msgid "Use GNOME settings"
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:287
+#, fuzzy
+msgid "Keep GNOME settings"
 msgstr "गनोम विन्यास उपयोग करें"
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:129
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:118
 #, c-format
 msgid ""
 "Couldn't execute command: %s\n"
@@ -2718,7 +2985,7 @@ msgstr ""
 "कमांड नही चला सके %s\n"
 "जांच करे कि यह कमांड अस्तित्व में है"
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:145
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:134
 msgid ""
 "Couldn't put the machine to sleep.\n"
 "Verify that the machine is correctly configured."
@@ -2726,12 +2993,7 @@ msgstr ""
 "मशीन को सुप्त अवस्था में नहीं ला सकता.\n"
 "सत्यापित करें कि मशीन उचित प्रकार कॉन्फ़िगर्ड है."
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:155
-#, c-format
-msgid "Permissions on the file %s are broken\n"
-msgstr "फ़ाइल %s पर अनुमतियाँ टूटी हुई हैं\n"
-
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:200
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:168
 msgid ""
 "Couldn't load the Glade file.\n"
 "Make sure that this daemon is properly installed."
@@ -2739,7 +3001,7 @@ msgstr ""
 "ग्लेड फाइल नही लोड कर पाए.\n"
 "सुनिश्चित करें कि यह डिमोन ठीक से स्थापित है"
 
-#: ../gnome-settings-daemon/gnome-settings-screensaver.c:113
+#: ../gnome-settings-daemon/gnome-settings-screensaver.c:110
 #, c-format
 msgid ""
 "There was an error starting up the screensaver:\n"
@@ -2754,21 +3016,21 @@ msgstr ""
 "\n"
 "स्क्रीन सेवर फंक्शनलिटी इस सत्र में कार्य नहीं करेगा."
 
-#: ../gnome-settings-daemon/gnome-settings-screensaver.c:123
+#: ../gnome-settings-daemon/gnome-settings-screensaver.c:120
 msgid "_Do not show this message again"
 msgstr "इस संदेश को फिर कभी नहीं दिखाएँ  (_D)"
 
-#: ../gnome-settings-daemon/gnome-settings-sound.c:129
+#: ../gnome-settings-daemon/gnome-settings-sound.c:127
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "ध्वनि फ़ाइल %s को नमूना %s  की तरह लोड नहीं कर सका"
 
-#: ../gnome-settings-daemon/gnome-settings-xrdb.c:214
-#: ../gnome-settings-daemon/gnome-settings-xrdb.c:262
+#: ../gnome-settings-daemon/gnome-settings-xrdb.c:212
+#: ../gnome-settings-daemon/gnome-settings-xrdb.c:260
 msgid "Cannot determine user's home directory"
 msgstr "उपयोगकर्ता का घर डिरेक्ट्री निर्धारित नहीं कर सका"
 
-#: ../gnome-settings-daemon/gnome-settings-xsettings.c:215
+#: ../gnome-settings-daemon/gnome-settings-xsettings.c:212
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "जीकॉन्फ कुंजी %s पर तय  प्रकार %s है परंतु वांछित प्रकार थाः %s\n"
@@ -2839,57 +3101,108 @@ msgstr "स्क्रीन"
 msgid "Screen on which BGApplier is to draw"
 msgstr "वह स्क्रीन जहाँ बीजी-एप्लायर जहां आरेखित करेगा"
 
-#: ../libgswitchit/gswitchit_config.c:1035
+#: ../libgswitchit/gswitchit_config.c:1093
 #, c-format
 msgid "There was an error loading an image: %s"
 msgstr "विंब को लोड करने में त्रुटि था: %s"
 
-#: ../libsounds/sound-view.c:122 ../libsounds/sound-view.c:147
-msgid "The sound file for this event does not exist."
-msgstr "इस घटना हेतु ध्वनि फ़ाइल मौज़ूद नहीं है"
+#: ../libgswitchit/gswitchit_config.c:1420
+#, fuzzy, c-format
+msgid "layout \"%s\""
+msgid_plural "layouts \"%s\""
+msgstr[0] "अभिन्यास"
+msgstr[1] "अभिन्यास"
 
-#: ../libsounds/sound-view.c:149
+#: ../libgswitchit/gswitchit_config.c:1437
+#, fuzzy, c-format
+msgid "option \"%s\""
+msgid_plural "options \"%s\""
+msgstr[0] "विकल्प"
+msgstr[1] "विकल्प"
+
+#: ../libgswitchit/gswitchit_config.c:1445
+#, c-format
+msgid "model \"%s\", %s and %s"
+msgstr ""
+
+#: ../libgswitchit/gswitchit_config.c:1446
+#, fuzzy
+msgid "no layout"
+msgstr "कुंजीपटल अभिन्यास"
+
+#: ../libgswitchit/gswitchit_config.c:1447
+#, fuzzy
+msgid "no options"
+msgstr "विकल्प"
+
+#: ../libsounds/sound-view.c:43
+msgid "Login"
+msgstr "लागिन"
+
+#: ../libsounds/sound-view.c:44
+#, fuzzy
+msgid "Logout"
+msgstr "लॉग आउट"
+
+#: ../libsounds/sound-view.c:45
+msgid "Boing"
+msgstr ""
+
+#: ../libsounds/sound-view.c:46
+#, fuzzy
+msgid "Siren"
+msgstr "सायरन"
+
+#: ../libsounds/sound-view.c:47
+msgid "Clink"
+msgstr ""
+
+#: ../libsounds/sound-view.c:48
+#, fuzzy
+msgid "Beep"
+msgstr "बीप"
+
+# #-#-#-#-#  gnome-icon-theme.gnome-2-2.hi.po (gnome-icon theme 2.2)  #-#-#-#-#
+# 48x48/emblems/emblem-sound.icon.in.h:1
+# 48x48/emblems/emblem-sound.icon.in.h:1
+#: ../libsounds/sound-view.c:49
+#, fuzzy
+msgid "No sound"
+msgstr "ध्वनि"
+
+#: ../libsounds/sound-view.c:131
+#, fuzzy
+msgid "Sound not set for this event."
+msgstr "घटनाओं हेतु ध्वनियाँ (_S)"
+
+#: ../libsounds/sound-view.c:140
+#, fuzzy
 msgid ""
 "The sound file for this event does not exist.\n"
-"You may want to install the gnome-audio package\n"
-"for a set of default sounds."
+"You may want to install the gnome-audio package for a set of default sounds."
 msgstr ""
 "इस घटना हेतु ध्वनि फ़ाइल मौज़ूद नहीं है \n"
 "डिफ़ॉल्ट ध्वनि समूह हेतु \n"
 "आप गनोम ऑडियो पैकेज संस्थापित करना चाहेंगे."
 
-#: ../libsounds/sound-view.c:224
+#: ../libsounds/sound-view.c:151
+msgid "The sound file for this event does not exist."
+msgstr "इस घटना हेतु ध्वनि फ़ाइल मौज़ूद नहीं है"
+
+#: ../libsounds/sound-view.c:182
+msgid "Select Sound File"
+msgstr "ध्वनि फ़ाइल चुनें"
+
+#: ../libsounds/sound-view.c:202
 #, c-format
 msgid "The file %s is not a valid wav file"
 msgstr "फ़ाइल %s कोई वैध वेव फ़ाइल नहीं है"
 
-#: ../libsounds/sound-view.c:289
-msgid "Event"
-msgstr "घटना:"
-
-#: ../libsounds/sound-view.c:298
-msgid "Sound File"
-msgstr "ध्वनि फ़ाइल"
-
-#: ../libsounds/sound-view.c:314
-msgid "_Sounds:"
-msgstr "ध्वनियाँ (_S):"
-
-#: ../libsounds/sound-view.c:328
-msgid "Sound _file:"
-msgstr "ध्वनि फ़ाइल:"
-
-#: ../libsounds/sound-view.c:332
-msgid "Select Sound File"
-msgstr "ध्वनि फ़ाइल चुनें"
-
-#: ../libsounds/sound-view.c:356
-msgid "_Play"
-msgstr "बजाएँ (_P)"
-
-#: ../libsounds/sound-view.c:366
-msgid "_Remove"
-msgstr "मिटाएँ (_R)"
+#  set the timeout value  label with correct value of timeout
+#: ../libsounds/sound-view.c:359
+#, fuzzy
+msgid "System Sounds"
+msgstr "सेकण्ड्स"
 
 #: ../libwindow-settings/gnome-wm-manager.c:320
 #, c-format
@@ -2905,8 +3218,7 @@ msgid "Roll up"
 msgstr "रोल अप"
 
 #: ../schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:1
-msgid ""
-"If true, the mime handlers for text/plain and text/* will be kept in sync"
+msgid "If true, the mime handlers for text/plain and text/* will be kept in sync"
 msgstr "यदि सही है तो पाठ/सादा और पाठ/* हेतु माइम हैंडलर सिंक में रखे जाएंगे"
 
 #: ../schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:2
@@ -2914,164 +3226,148 @@ msgid "Sync text/plain and text/* handlers"
 msgstr "पाठ/सादा तथा पाठ/* हैंडलर सिंक करें"
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:1
-msgid "Brightness down"
-msgstr "चमकीलापन कम"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:2
-msgid "Brightness down's shortcut."
-msgstr "चमकीलापन कम शॉर्टकट कुंजी."
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:3
-msgid "Brightness up"
-msgstr "चमकीलापन ज्यादा"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:4
-msgid "Brightness up's shortcut."
-msgstr "चमकीलापन बढ़ाने का शॉर्टकट."
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:5
 msgid "E-mail"
 msgstr "ई-मेल"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:6
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:2
 msgid "E-mail's shortcut."
 msgstr "ई-मेल का शॉर्टकट."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:7
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:3
 msgid "Eject"
 msgstr "ट्रे बाहर करें"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:8
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:4
 msgid "Eject's shortcut."
 msgstr "ट्रे बाहर करने का शॉर्टकट."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:9
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:5
 msgid "Home folder"
 msgstr "घर फ़ोल्डर"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:10
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:6
 msgid "Home folder's shortcut."
 msgstr "घर फ़ोल्डर का शॉर्टकट."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:7
 msgid "Launch help browser"
 msgstr "मदद ब्राउज़र चलाएँ"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:12
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:8
 msgid "Launch help browser's shortcut."
 msgstr "वेब ब्राउज़र मदद का शॉर्टकट चलाएँ"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:13
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:9
 msgid "Launch web browser"
 msgstr "वेब ब्राउज़र चलाएँ"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:14
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:10
 msgid "Launch web browser's shortcut."
 msgstr "वेब ब्राउज़र का शॉर्टकट चलाएँ."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
 msgid "Lock screen"
 msgstr "स्क्रीन पर ताला"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:12
 msgid "Lock screen's shortcut."
 msgstr "स्क्रीन को ताला लगाने का शॉर्टकट."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:13
 msgid "Log out"
 msgstr "लॉग आउट"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:14
 msgid "Log out's shortcut."
 msgstr "लॉगआउट का शॉर्टकट."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
 msgid "Next track key's shortcut."
 msgstr "अगले ट्रैक पर जाने हेतु शॉर्टकट."
 
 # #-#-#-#-#  libgnomeui.gnome-2-2.hi.po (libgnomeui HEAD)  #-#-#-#-#
 # libgnomeui/gnome-app-helper.c:166
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
 msgid "Pause"
 msgstr "ठहरें"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
 msgid "Pause key's shortcut."
 msgstr "ठहरें कुंजी का शॉर्टकट "
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
 msgid "Play (or play/pause)"
 msgstr "बजाएँ (या बजाएँ/ठहरें)"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
 msgid "Play (or play/pause) key's shortcut."
 msgstr "बजाएँ (या बजाएँ/ठहरें) कुंजी का शॉर्टकट."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
 msgid "Previous track key's shortcut."
 msgstr "पिछले ट्रैक पर जाने हेतु शॉर्टकट."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
 msgid "Search"
 msgstr "ढूंढें"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
 msgid "Search's shortcut."
 msgstr "ढूंढने हेतु शॉर्टकट."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
 msgid "Skip to next track"
 msgstr "अगले ट्रैक पर जाएँ"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
 msgid "Skip to previous track"
 msgstr "पिछले ट्रैक पर जाएँ"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
 msgid "Sleep"
 msgstr "सुप्त"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
 msgid "Sleep's shortcut."
 msgstr "सुप्त हेतु शॉर्टकट."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
 msgid "Stop playback key"
 msgstr "बजाना रोकें कुंजी"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
 msgid "Stop playback key's shortcut."
 msgstr "बजाना बन्द करने हेतु शॉर्टकट."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
 msgid "Volume down"
 msgstr "आवाज कम करें"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
 msgid "Volume down's shortcut."
 msgstr "आवाज नीचे शॉर्टकट कुंजी."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
 msgid "Volume mute"
 msgstr "आवाज मौन"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
 msgid "Volume mute's shortcut"
 msgstr "आवाज मौन करने हेतु शॉर्टकट"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:37
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
 msgid "Volume step"
 msgstr "आवाज निर्धारक चरण"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:38
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
 msgid "Volume step as percentage of volume."
 msgstr "आवाज निर्धारक चरण आवाज निर्धारक के प्रतिशत में."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:39
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
 msgid "Volume up"
 msgstr "आवाज बढ़ाएँ"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
 msgid "Volume up's shortcut."
 msgstr "आवाज़ बढ़ाने का शॉर्टकट."
 
@@ -3143,14 +3439,31 @@ msgstr "समूह नाम के बजाय लेआउट नाम द
 msgid ""
 "Show layout names instead of group names (only for versions of XFree "
 "supporting multiple layouts)"
-msgstr ""
-"समूह नाम के बजाय लेआउट नाम दिखायें (सिर्फ XFree समर्थित बहुल लेआउट के संस्करण के लिये)"
+msgstr "समूह नाम के बजाय लेआउट नाम दिखायें (सिर्फ XFree समर्थित बहुल लेआउट के संस्करण के लिये)"
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:13
 msgid "Suppress the \"X sysconfig changed\" warning message"
 msgstr "\"X sysconfig changed\" चेतावनी संदेश दबायें"
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:14
+msgid "The Keyboard Preview, X offset"
+msgstr ""
+
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:15
+msgid "The Keyboard Preview, Y offset"
+msgstr ""
+
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:16
+#, fuzzy
+msgid "The Keyboard Preview, height"
+msgstr "पूर्वावलोकन ऊँचाई"
+
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:17
+#, fuzzy
+msgid "The Keyboard Preview, width"
+msgstr "पूर्वावलोकन चौड़ाई"
+
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:18
 msgid ""
 "Very soon, keyboard settings in gconf will be overridden (from the system "
 "configuration) This key has been deprecated since GNOME 2.12, please unset "
@@ -3160,83 +3473,88 @@ msgstr ""
 "पदावनत किया जा रहा है GNOME 2.12 से, कृपया मॉडल, लेआउट, और विकल्प कुंजी सिस्टम "
 "विन्यास पाने के लिये अनसेट करें."
 
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:15
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:19
 msgid "keyboard layout"
 msgstr "कुंजीपटल अभिन्यास"
 
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:16
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:20
 msgid "keyboard model"
 msgstr "कुंजीपटल मॉडल"
 
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:17
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:21
 msgid "modmap file list"
 msgstr "modmap फाइल सूची"
 
-#: ../typing-break/drw-break-window.c:212
+#: ../typing-break/drw-break-window.c:213
 msgid "_Postpone break"
 msgstr "ब्रेक स्थगित करें (_P)"
 
-#: ../typing-break/drw-break-window.c:259
+#: ../typing-break/drw-break-window.c:260
 msgid "Take a break!"
 msgstr "एक ब्रेक लें!"
 
 #  { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
 #. { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
-#: ../typing-break/drwright.c:141
+#: ../typing-break/drwright.c:135
 msgid "/_Preferences"
 msgstr "/वरीयताएँ (_P)"
 
-#: ../typing-break/drwright.c:142
+#: ../typing-break/drwright.c:136
 msgid "/_About"
 msgstr "/के बारे में (_A)"
 
-#: ../typing-break/drwright.c:144
+#: ../typing-break/drwright.c:138
 msgid "/_Take a Break"
 msgstr "/एक ब्रेक लें (_T)"
 
-#: ../typing-break/drwright.c:495
+#: ../typing-break/drwright.c:489
 #, c-format
 msgid "%d minute until the next break"
 msgid_plural "%d minutes until the next break"
 msgstr[0] "अगले ब्रेक तक %d मिनट"
 msgstr[1] "अगले ब्रेक तक %d मिनट"
 
-#: ../typing-break/drwright.c:499
+#: ../typing-break/drwright.c:493
 msgid "Less than one minute until the next break"
 msgstr "अगले ब्रेक के लिए एक मिनट से भी कम समय"
 
-#: ../typing-break/drwright.c:587
+#: ../typing-break/drwright.c:581
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
 "error: %s"
 msgstr "टाइपिंग ब्रेक गुण संवाद लाने में निम्न त्रुटि के साथ असफल: %s"
 
-#: ../typing-break/drwright.c:635
+#: ../typing-break/drwright.c:629
 msgid "About GNOME Typing Monitor"
 msgstr "गनोम टाइपिंग मॉनीटर के बारे में"
 
-#: ../typing-break/drwright.c:659
+#: ../typing-break/drwright.c:653
 msgid "A computer break reminder."
 msgstr "कम्प्यूटर ब्रेक स्मरण."
 
-#: ../typing-break/drwright.c:660
+#: ../typing-break/drwright.c:654
 msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
 msgstr "रिचर्ड हुल्ट द्वारा लिखित &lt;richard@imendio.com&gt;"
 
-#: ../typing-break/drwright.c:661
+#: ../typing-break/drwright.c:655
 msgid "Eye candy added by Anders Carlsson"
 msgstr "आई कैण्डी जोड़ा गया है ऑन्देर्स कार्लसन द्वारा"
 
-#: ../typing-break/drwright.c:837
+#: ../typing-break/drwright.c:831
 msgid "Break reminder"
 msgstr "ब्रेक स्मरण"
 
-#: ../typing-break/main.c:93
-msgid "The typing monitor is already running."
-msgstr "टाइपिंग मॉनीटर पहले से चल रहा है."
+#: ../typing-break/eggtrayicon.c:127
+#, fuzzy
+msgid "Orientation"
+msgstr "दिशा"
 
-#: ../typing-break/main.c:106
+#: ../typing-break/eggtrayicon.c:128
+msgid "The orientation of the tray."
+msgstr "ट्रै का अभिमुखन"
+
+#: ../typing-break/main.c:100
 msgid ""
 "The typing monitor uses the notification area to display information. You "
 "don't seem to have a notification area on your panel. You can add it by "
@@ -3311,8 +3629,7 @@ msgid "If set to true, then Type1 fonts will be thumbnailed."
 msgstr "यदि सही पर नियत किया जाता है, टाइप1 फ़ॉन्ट्स की लघु छवियाँ बनाई जाएंगी."
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:5
-msgid ""
-"Set this key to the command used to create thumbnails for OpenType fonts."
+msgid "Set this key to the command used to create thumbnails for OpenType fonts."
 msgstr "इस कुंजी को ओपन टाइप फ़ॉन्ट्स के लघु छवि बनाने के कमांड हेतु नियत करें."
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:6
@@ -3320,8 +3637,7 @@ msgid "Set this key to the command used to create thumbnails for PCF fonts."
 msgstr "इस कुंजी को पीसीएफ़ फ़ॉन्ट्स के लघु छवि बनाने के कमांड हेतु नियत करें."
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:7
-msgid ""
-"Set this key to the command used to create thumbnails for TrueType fonts."
+msgid "Set this key to the command used to create thumbnails for TrueType fonts."
 msgstr "इस कुंजी को ट्रू टाइप फ़ॉन्ट्स के लघु छवि बनाने के कमांड हेतु नियत करें."
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:8
@@ -3376,14 +3692,13 @@ msgstr "फ़ॉन्ट लागू नहीं करें"
 msgid ""
 "The theme you have selected suggests a new font. A preview of the font is "
 "shown below."
-msgstr ""
-"आपने जो थीम चुना है एक नए फ़ॉन्ट हेतु सुझाव देता है. फ़ॉन्ट का पूर्वावलोकन नीचे दिया गया है."
+msgstr "आपने जो थीम चुना है एक नए फ़ॉन्ट हेतु सुझाव देता है. फ़ॉन्ट का पूर्वावलोकन नीचे दिया गया है."
 
 #: ../vfs-methods/themus/apply-font.glade.h:5
 msgid "_Apply font"
 msgstr "फ़ॉन्ट लागू करें (_A)"
 
-#: ../vfs-methods/themus/theme-method.c:520
+#: ../vfs-methods/themus/theme-method.c:518
 msgid "Themes"
 msgstr "प्रसंग"
 
@@ -3426,10 +3741,8 @@ msgid "If set to true, then themes will be thumbnailed."
 msgstr "यदि सत्य पर नियत किया जाता है, तो प्रसंगों की लघु छवि बनाई जाएगी."
 
 #: ../vfs-methods/themus/themus.schemas.in.h:3
-msgid ""
-"Set this key to the command used to create thumbnails for installed themes."
-msgstr ""
-"संस्थापित प्रसंगों हेतु लघु छवि सृजित करने में उपयोग हेतु कमांड के लिए इस कुंजी को नियत करें."
+msgid "Set this key to the command used to create thumbnails for installed themes."
+msgstr "संस्थापित प्रसंगों हेतु लघु छवि सृजित करने में उपयोग हेतु कमांड के लिए इस कुंजी को नियत करें."
 
 #: ../vfs-methods/themus/themus.schemas.in.h:4
 msgid "Set this key to the command used to create thumbnails for themes."
@@ -3450,3 +3763,4 @@ msgstr "क्या संस्थापित प्रसंगों की
 #: ../vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "क्या प्रसंग की लघु छवि बनाएँ"
+
