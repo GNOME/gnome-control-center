@@ -31,6 +31,7 @@ libcommon_la_SOURCES = \
 libcommon_la_LIBADD = $(top_builddir)/libbackground/libbackground.la	\
 	$(top_builddir)/libwindow-settings/libgnome-window-settings.la  \
 	@METACITY_LIBS@							\
+	@DBUS_LIBS@							\
 	@GNOME_DESKTOP_LIBS@
 
 gnome_theme_test_SOURCES = \
