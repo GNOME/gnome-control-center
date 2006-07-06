@@ -10,6 +10,12 @@
 
 #include "capplet-util.h"
 
+enum {
+	COL_NAME,
+	COL_ID,
+	N_COLUMNS
+};
+
 #define REVERT_COUNT 20
 
 struct ScreenInfo
@@ -114,39 +120,34 @@ update_display_info (struct DisplayInfo *info, GdkDisplay *display)
 static int
 get_current_resolution (struct ScreenInfo *screen_info)
 {
-  GtkWidget *menu;
-  GList *children;
-  GList *child;
-  int i;
+  GtkComboBox* combo = GTK_COMBO_BOX (screen_info->resolution_widget);
+  GtkTreeIter iter;
+  int i = 0;
 
-  i = gtk_option_menu_get_history (GTK_OPTION_MENU (screen_info->resolution_widget));
-  menu = gtk_option_menu_get_menu (GTK_OPTION_MENU (screen_info->resolution_widget));
-  children = gtk_container_get_children (GTK_CONTAINER (menu));
-  child = g_list_nth (children, i);
-
-  if (child != NULL)
-    return GPOINTER_TO_INT (g_object_get_data (child->data, "screen_nr"));
-  else
-    return 0;
+  gtk_combo_box_get_active_iter (combo, &iter);
+  gtk_tree_model_get (gtk_combo_box_get_model (combo), &iter,
+		      COL_ID, &i,
+		      -1);
+  return i;
 }
 
 static int
 get_current_rate (struct ScreenInfo *screen_info)
 {
-  GtkWidget *menu;
-  GList *children;
-  GList *child;
-  int i;
+  GtkComboBox* combo;
+  GtkTreeIter  iter;
+  int i = 0;
 
-  i = gtk_option_menu_get_history (GTK_OPTION_MENU (screen_info->rate_widget));
-  menu = gtk_option_menu_get_menu (GTK_OPTION_MENU (screen_info->rate_widget));
-  children = gtk_container_get_children (GTK_CONTAINER (menu));
-  child = g_list_nth (children, i);
+  combo = GTK_COMBO_BOX (screen_info->rate_widget);
 
-  if (child != NULL)
-    return GPOINTER_TO_INT (g_object_get_data (child->data, "rate"));
-  else
-    return 0;
+  if (gtk_combo_box_get_active_iter (combo, &iter))
+  {
+    gtk_tree_model_get (gtk_combo_box_get_model (combo), &iter,
+  		        COL_ID, &i,
+  		        -1);
+  }
+
+  return i;
 }
 
 static gboolean
@@ -324,17 +325,16 @@ resolution_changed_callback (GtkWidget *optionmenu, struct ScreenInfo *screen_in
 static void
 generate_rate_menu (struct ScreenInfo *screen_info)
 {
-  GtkWidget *menu;
-  GtkWidget *menuitem;
+  GtkListStore *store;
+  GtkTreeIter  iter;
   short *rates;
   int nrates, i;
   int size_nr;
   char *str;
   int closest_rate_nr;
   
-  gtk_option_menu_remove_menu (GTK_OPTION_MENU (screen_info->rate_widget));
-
-  menu = gtk_menu_new ();
+  store = gtk_list_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_INT);
+  gtk_combo_box_set_model (GTK_COMBO_BOX (screen_info->rate_widget), GTK_TREE_MODEL (store));
 
   size_nr = get_current_resolution (screen_info);
   
@@ -344,40 +344,45 @@ generate_rate_menu (struct ScreenInfo *screen_info)
     {
       str = g_strdup_printf (_("%d Hz"), rates[i]);
 
+      gtk_list_store_append (store, &iter);
+      gtk_list_store_set (store, &iter,
+		          COL_NAME, str,
+			  COL_ID, (int)rates[i],
+			  -1);
+
       if ((closest_rate_nr < 0) ||
 	  (ABS (rates[i] - screen_info->current_rate) <
 	   ABS (rates[closest_rate_nr] - screen_info->current_rate)))
+      {
+	gtk_combo_box_set_active_iter (GTK_COMBO_BOX (screen_info->rate_widget), &iter);
 	closest_rate_nr = i;
-      
-      menuitem = gtk_menu_item_new_with_label (str);
+      }
 
-      g_object_set_data (G_OBJECT (menuitem), "rate", GINT_TO_POINTER ((int)rates[i]));
-	  
       g_free (str);
-      gtk_widget_show (menuitem);
-      gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
     }
 
-  gtk_option_menu_set_menu (GTK_OPTION_MENU (screen_info->rate_widget), menu);
-  gtk_option_menu_set_history (GTK_OPTION_MENU (screen_info->rate_widget),
-			       closest_rate_nr);
+  g_object_unref (store);
 }
 
 static void
 generate_resolution_menu(struct ScreenInfo* screen_info)
 {
-  GtkWidget *menu;
-  GtkWidget *menuitem;
+  GtkComboBox *combo;
+  GtkListStore* store;
+  GtkTreeIter iter;
   int i, item, current_item;
   XRRScreenSize *sizes;
   char *str;
   SizeID current_size;
   Rotation rot;
 
-  gtk_option_menu_remove_menu(GTK_OPTION_MENU(screen_info->resolution_widget));
-  menu = gtk_menu_new ();
+  combo = GTK_COMBO_BOX (screen_info->resolution_widget);
+  store = gtk_list_store_new(N_COLUMNS, G_TYPE_STRING, G_TYPE_INT);
+
   current_size = XRRConfigCurrentConfiguration (screen_info->config, &rot);
-  
+
+  gtk_combo_box_set_model (combo, GTK_TREE_MODEL (store));
+
   current_item = 0;
   item = 0;
   sizes = screen_info->sizes;
@@ -386,49 +391,56 @@ generate_resolution_menu(struct ScreenInfo* screen_info)
       if (i == current_size || show_resolution (sizes[i].width, sizes[i].height))
 	{
 	  str = g_strdup_printf ("%dx%d", sizes[i].width, sizes[i].height);
-	  
+
 	  if (i == current_size)
 	    current_item = item;
-	  
-	  menuitem = gtk_menu_item_new_with_label (str);
 
-	  g_object_set_data (G_OBJECT (menuitem), "screen_nr", GINT_TO_POINTER (i));
-	  
+	  gtk_list_store_append(store, &iter);
+	  gtk_list_store_set(store, &iter,
+			     COL_NAME, str,
+			     COL_ID, i,
+			     -1);
+
 	  g_free (str);
-	  gtk_widget_show (menuitem);
-	  gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
 	  item++;
 	}
     }
   
-	gtk_option_menu_set_menu (GTK_OPTION_MENU (screen_info->resolution_widget), menu);
-	gtk_option_menu_set_history (GTK_OPTION_MENU (screen_info->resolution_widget), current_item);
+  gtk_combo_box_set_active (combo, current_item);
 
 	g_signal_connect (screen_info->resolution_widget, "changed", G_CALLBACK (resolution_changed_callback), screen_info);
   
 	gtk_widget_show (screen_info->resolution_widget);
+  g_object_unref (store);
+}
+
+static void
+initialize_combo_layout (GtkCellLayout *layout) {
+  GtkCellRenderer *cell = gtk_cell_renderer_text_new();
+  gtk_cell_layout_pack_start (layout, cell, TRUE);
+  gtk_cell_layout_add_attribute (layout, cell, "text", COL_NAME);
 }
 
 static GtkWidget *
-create_resolution_menu (struct ScreenInfo *screen_info) 
+create_resolution_menu (struct ScreenInfo *screen_info)
 {
-  screen_info->resolution_widget = gtk_option_menu_new ();
+  screen_info->resolution_widget = gtk_combo_box_new ();
   generate_resolution_menu (screen_info);
 
+  initialize_combo_layout (GTK_CELL_LAYOUT (screen_info->resolution_widget));
   return screen_info->resolution_widget;
 }
 
 static GtkWidget *
 create_rate_menu (struct ScreenInfo *screen_info)
 {
-  GtkWidget *optionmenu;
-
-  screen_info->rate_widget = optionmenu = gtk_option_menu_new ();
+  screen_info->rate_widget = gtk_combo_box_new ();
 
   generate_rate_menu (screen_info);
-  
-  gtk_widget_show (optionmenu);
-  return optionmenu;
+
+  initialize_combo_layout (GTK_CELL_LAYOUT (screen_info->rate_widget));
+  gtk_widget_show (screen_info->rate_widget);
+  return screen_info->rate_widget;
 }
 
 static GtkWidget *
@@ -806,7 +818,6 @@ main (int argc, char *argv[])
 		      LIBGNOMEUI_MODULE, argc, argv,
 		      GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
 		      NULL);
-
 
   display = gdk_display_get_default ();
   xdisplay = gdk_x11_display_get_xdisplay (display);
