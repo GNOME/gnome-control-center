@@ -263,6 +263,7 @@ gnome_settings_daemon_new (void)
   GSList *list;
   GnomeSettingsDaemon *daemon;
   GdkDisplay *display;
+  GObject *dbusServer;
   int i;
   int n_screens;
 
@@ -393,6 +394,8 @@ gnome_settings_daemon_new (void)
   gnome_settings_gtk1_theme_load (client);
   gnome_settings_xrdb_load (client);
   gnome_settings_typing_break_load (client);
+
+  dbusServer = g_object_new (gnome_settings_server_get_type (), NULL);
 
   return G_OBJECT (daemon);
 }

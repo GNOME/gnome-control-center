@@ -5,14 +5,4 @@
 		<annotation name="org.freedesktop.DBus.GLib.CSymbol" value="settings_daemon"/>
 		<method name="Awake"/>
 	</interface>
-	<interface name="org.gnome.KeyboardConfigRegistry">
-		<annotation name="org.freedesktop.DBus.GLib.CSymbol" value="keyboard_config_registry"/>
-		<method name="GetCurrentDescriptionsAsUtf8">
-			<arg type="as" name="shortLayoutDescriptions"  direction="out" />
-			<arg type="as" name="longLayoutDescriptions"   direction="out" />
-			<arg type="as" name="shortVariantDescriptions" direction="out" />
-			<arg type="as" name="longVariantDescriptions"  direction="out" />
-		</method>
-		<!-- Add more methods/signals if you want -->
-	</interface>
 </node>

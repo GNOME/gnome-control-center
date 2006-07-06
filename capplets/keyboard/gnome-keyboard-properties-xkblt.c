@@ -29,7 +29,7 @@
 #include <gconf/gconf-client.h>
 #include <glade/glade.h>
 
-#include "libgswitchit/gswitchit_config.h"
+#include "libgswitchit/gswitchit-config.h"
 
 #include "capplet-util.h"
 #include "gconf-property-editor.h"

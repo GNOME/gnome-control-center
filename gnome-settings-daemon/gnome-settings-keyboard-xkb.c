@@ -35,7 +35,8 @@
 #include <string.h>
 #include <time.h>
 
-#include <libgswitchit/gswitchit_config.h>
+#include <libgswitchit/gswitchit-config.h>
+#include <libgswitchit/keyboard-config-registry.h>
 
 #include "gnome-settings-keyboard-xkb.h"
 #include "gnome-settings-daemon.h"

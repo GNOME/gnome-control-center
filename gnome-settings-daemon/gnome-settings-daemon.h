@@ -68,6 +68,11 @@ void     gnome_settings_daemon_spawn_with_input (char       **argv,
 
 GConfClient *gnome_settings_daemon_get_conf_client (void);
 
+/**
+ * DBUS server
+ */
+GType gnome_settings_server_get_type (void);
+
 G_END_DECLS
 
 #endif /* __GNOME_SETTINGS_DAEMON_H */
