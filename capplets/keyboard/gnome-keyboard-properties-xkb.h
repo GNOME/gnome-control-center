@@ -27,7 +27,7 @@
 #include <libxklavier/xklavier.h>
 #include <gconf/gconf-client.h>
 
-#include "libgswitchit/gswitchit_config.h"
+#include "libgswitchit/gswitchit-config.h"
 
 G_BEGIN_DECLS
 
