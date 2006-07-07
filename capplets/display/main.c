@@ -18,17 +18,45 @@ enum {
 
 #define REVERT_COUNT 20
 
+struct {
+	Rotation  rotation;
+	gchar const    * name;
+} const rotations[] = {
+	{RR_Rotate_0,   N_("normal")},
+	{RR_Rotate_90,  N_("left")},
+	{RR_Rotate_180, N_("inverted")},
+	{RR_Rotate_270, N_("right")}
+};
+
+static Rotation
+display_rotation_from_text(gchar const* text) {
+	int i = 0;
+	g_return_val_if_fail(text, RR_Rotate_0);
+
+	for(; i < G_N_ELEMENTS(rotations); i++) {
+		if(!strcmp(text, _(rotations[i].name))) {
+			break;
+		}
+	}
+
+	g_return_val_if_fail(i < G_N_ELEMENTS(rotations), RR_Rotate_0);
+
+	return rotations[i].rotation;
+}
+
 struct ScreenInfo
 {
   int current_width;
   int current_height;
   SizeID current_size;
   short current_rate;
+  
   Rotation current_rotation;
+  Rotation old_rotation;
+  Rotation rotations;
 
   SizeID old_size;
   short old_rate;
-  Rotation old_rotation;
   
   XRRScreenConfiguration *config;
   XRRScreenSize *sizes;
@@ -36,6 +64,7 @@ struct ScreenInfo
   
   GtkWidget *resolution_widget;
   GtkWidget *rate_widget;
+  GtkWidget *rotate_widget;
 };
 
 struct DisplayInfo {
@@ -77,7 +106,8 @@ read_display_info (GdkDisplay *display)
       
       screen_info->current_rate = XRRConfigCurrentRate (screen_info->config);
       screen_info->current_size = XRRConfigCurrentConfiguration (screen_info->config, &screen_info->current_rotation);
-      screen_info->sizes = XRRConfigSizes (screen_info->config, &screen_info->n_sizes);
+      screen_info->sizes        = XRRConfigSizes (screen_info->config, &screen_info->n_sizes);
+      screen_info->rotations    = XRRConfigRotations (screen_info->config, &screen_info->current_rotation);
     }
 
   return info;
@@ -113,7 +143,8 @@ update_display_info (struct DisplayInfo *info, GdkDisplay *display)
 
       screen_info->current_rate = XRRConfigCurrentRate (screen_info->config);
       screen_info->current_size = XRRConfigCurrentConfiguration (screen_info->config, &screen_info->current_rotation);
-      screen_info->sizes = XRRConfigSizes (screen_info->config, &screen_info->n_sizes);
+      screen_info->sizes        = XRRConfigSizes (screen_info->config, &screen_info->n_sizes);
+      screen_info->rotations    = XRRConfigRotations (screen_info->config, &screen_info->current_rotation);
     }
 }
 
@@ -150,6 +181,16 @@ get_current_rate (struct ScreenInfo *screen_info)
   return i;
 }
 
+static Rotation
+get_current_rotation(struct ScreenInfo* screen_info) {
+	gchar* text;
+	Rotation rot;
+	text = gtk_combo_box_get_active_text (GTK_COMBO_BOX (screen_info->rotate_widget));
+	rot = display_rotation_from_text (text);
+	g_free (text);
+	return rot;
+}
+
 static gboolean
 apply_config (struct DisplayInfo *info)
 {
@@ -169,22 +210,25 @@ apply_config (struct DisplayInfo *info)
       Status status;
       GdkWindow *root_window;
       int new_res, new_rate;
+      Rotation new_rot;
 
       screen = gdk_display_get_screen (display, i);
       root_window = gdk_screen_get_root_window (screen);
 
-      new_res = get_current_resolution (screen_info);
+      new_res  = get_current_resolution (screen_info);
       new_rate = get_current_rate (screen_info);
+      new_rot  = get_current_rotation (screen_info);
       
-      if (new_res != screen_info->current_size ||
-	  new_rate != screen_info->current_rate)
+      if (new_res  != screen_info->current_size ||
+	  new_rate != screen_info->current_rate ||
+	  new_rot  != screen_info->current_rotation)
 	{
 	  changed = TRUE; 
 	  status = XRRSetScreenConfigAndRate (xdisplay, 
 					      screen_info->config,
 					      gdk_x11_drawable_get_xid (GDK_DRAWABLE (root_window)),
 					      new_res,
-					      screen_info->current_rotation,
+					      new_rot,
 					      new_rate,
 					      GDK_CURRENT_TIME);
 	}
@@ -444,6 +488,37 @@ create_rate_menu (struct ScreenInfo *screen_info)
 }
 
 static GtkWidget *
+create_rotate_menu (struct ScreenInfo *screen_info)
+{
+  GtkComboBox* combo = NULL;
+  screen_info->rotate_widget = gtk_combo_box_new_text ();
+  combo = GTK_COMBO_BOX(screen_info->rotate_widget);
+
+  int i, item = 0, current_item = -1;
+
+  for (i = 0; i < G_N_ELEMENTS (rotations); i++)
+  {
+    if ((screen_info->rotations & rotations[i].rotation) != 0)
+    {
+      gtk_combo_box_append_text (combo, _(rotations[i].name));
+      if (screen_info->current_rotation == rotations[i].rotation) {
+	current_item = item;
+      }
+      item++;
+    }
+  }
+
+  /* it makes no sense to support only one selection element */
+  gtk_widget_set_sensitive (screen_info->rotate_widget,
+		  gtk_tree_model_iter_n_children (gtk_combo_box_get_model (combo), NULL) > 1);
+
+  gtk_combo_box_set_active (combo, current_item);
+
+  gtk_widget_show (screen_info->rotate_widget);
+  return screen_info->rotate_widget;
+}
+
+static GtkWidget *
 create_screen_widgets (struct ScreenInfo *screen_info, int nr, gboolean no_header)
 {
   GtkWidget *table;
@@ -493,6 +568,25 @@ create_screen_widgets (struct ScreenInfo *screen_info, int nr, gboolean no_heade
 		    option_menu,
 		    1, 2,
 		    1, 2,
+		    GTK_FILL | GTK_EXPAND, 0,
+		    0, 0);
+  
+  label = gtk_label_new_with_mnemonic (_("R_otation:"));
+  gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
+  gtk_widget_show (label);
+  gtk_table_attach (GTK_TABLE (table),
+		    label,
+		    0, 1,
+		    2, 3,
+		    GTK_FILL, 0,
+		    0, 0);
+  
+  option_menu = create_rotate_menu (screen_info);
+  gtk_label_set_mnemonic_widget (GTK_LABEL (label), option_menu);
+  gtk_table_attach (GTK_TABLE (table),
+		    option_menu,
+		    1, 2,
+		    2, 3,
 		    GTK_FILL | GTK_EXPAND, 0,
 		    0, 0);
   
