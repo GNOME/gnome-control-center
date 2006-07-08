@@ -30,6 +30,7 @@
 #include <glade/glade.h>
 
 #include "libgswitchit/gswitchit-config.h"
+#include "libgswitchit/gswitchit-util.h"
 
 #include "capplet-util.h"
 #include "gconf-property-editor.h"
@@ -578,7 +579,7 @@ xkb_layout_chooser_response(GtkDialog *dialog,
 
   gtk_window_get_position (GTK_WINDOW (dialog), &rect.x, &rect.y);
   gtk_window_get_size (GTK_WINDOW (dialog), &rect.width, &rect.height);
-  gswitchit_preview_save (&rect);
+  gswitchit_preview_save_position (&rect);
 }
 
 static void
@@ -630,7 +631,7 @@ xkb_layout_choose (GladeXML * dialog)
   toplevel = gtk_widget_get_toplevel (chooser);
   if (GTK_WIDGET_TOPLEVEL (toplevel))
   {
-    GdkRectangle *rect = gswitchit_preview_load ();
+    GdkRectangle *rect = gswitchit_preview_load_position ();
     if (rect != NULL)
     {
       gtk_window_move (GTK_WINDOW (toplevel), rect->x, rect->y);
