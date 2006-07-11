@@ -109,7 +109,7 @@ org.gnome.SettingsDaemon.service: org.gnome.SettingsDaemon.service.in Makefile
 
 EXTRA_DIST = $(Glade_DATA) $(Dbusapi_DATA) \
              gnome-settings-daemon.pc.in gsd-infos.xml org.gnome.SettingsDaemon.service.in
-CLEANFILES = $(BUILT_SOURCES)
+CLEANFILES = $(BUILT_SOURCES) $(service_DATA)
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gnome-settings-daemon.pc

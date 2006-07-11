@@ -80,7 +80,7 @@ distclean-local:
 @INTLTOOL_SCHEMAS_RULE@
 
 CLEANFILES = $(desktop_in_files) $(desktop_DATA) \
-  $(schemas_DATA) $(vfsdirectory_DATA)
+  $(schemas_DATA) $(vfsdirectory_DATA) $(directory_DATA)
 
 EXTRA_DIST = \
   $(Glade_DATA) \
