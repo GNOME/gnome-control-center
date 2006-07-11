@@ -62,8 +62,7 @@ gnome_settings_daemon_SOURCES =	\
 	xutils.c			\
 	xutils.h			\
 	clipboard-manager.c		\
-	clipboard-manager.h		\
-	$(CORBA_GENERATED)
+	clipboard-manager.h		
 
 #	$(AccessX_files)		
 
@@ -84,8 +83,7 @@ gnome_settings_daemon_LDADD = \
 #	AccessXproto.h		\
 #	AccessXlibint.h
 
-BUILT_SOURCES=$(CORBA_GENERATED) 	\
-	gnome-settings-server.h		\
+BUILT_SOURCES=gnome-settings-server.h		\
 	gnome-settings-client.h
 
 Gladedir   = $(GNOMECC_GLADE_DIR)
@@ -109,12 +107,9 @@ service_DATA = $(service_in_files:.service.in=.service)
 org.gnome.SettingsDaemon.service: org.gnome.SettingsDaemon.service.in Makefile
 	@sed -e "s|\@libexecdir\@|$(libexecdir)|" $< > $@
 
-EXTRA_DIST = $(serverfile) $(Glade_DATA) $(Dbusapi_DATA) \
+EXTRA_DIST = $(Glade_DATA) $(Dbusapi_DATA) \
              gnome-settings-daemon.pc.in gsd-infos.xml org.gnome.SettingsDaemon.service.in
 CLEANFILES = $(BUILT_SOURCES)
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gnome-settings-daemon.pc
-
-uninstall-local:
-	rm -f $(DESTDIR)$(serverdir)/$(serverfile:.in=)
