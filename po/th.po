@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-06-16 20:52+0700\n"
-"PO-Revision-Date: 2006-06-16 21:04+0700\n"
+"POT-Creation-Date: 2006-07-12 16:24+0700\n"
+"PO-Revision-Date: 2006-07-12 17:36+0700\n"
 "Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
 "Language-Team: Thai <L10n@opentle.org>\n"
 "MIME-Version: 1.0\n"
@@ -826,7 +826,7 @@ msgid_plural "pixels"
 msgstr[0] "พิกเซล"
 msgstr[1] "พิกเซล"
 
-#: ../capplets/common/activate-settings-daemon.c:18
+#: ../capplets/common/activate-settings-daemon.c:16
 msgid ""
 "Unable to start the settings manager 'gnome-settings-daemon'.\n"
 "Without the GNOME settings manager running, some preferences may not take "
@@ -1282,42 +1282,62 @@ msgstr "เปลี่ยนความละเอียดของจอ"
 msgid "Screen Resolution"
 msgstr "ความละเอียดของจอ"
 
-#: ../capplets/display/main.c:345
+#: ../capplets/display/main.c:25
+msgid "normal"
+msgstr "ปกติ"
+
+#: ../capplets/display/main.c:26
+msgid "left"
+msgstr "ซ้าย"
+
+#: ../capplets/display/main.c:27
+msgid "inverted"
+msgstr "กลับหัว"
+
+#: ../capplets/display/main.c:28
+msgid "right"
+msgstr "ขวา"
+
+#: ../capplets/display/main.c:389
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../capplets/display/main.c:448
+#: ../capplets/display/main.c:535
 msgid "_Resolution:"
 msgstr "ความ_ละเอียด:"
 
-#: ../capplets/display/main.c:467
+#: ../capplets/display/main.c:554
 msgid "Re_fresh rate:"
 msgstr "ความ_ถี่:"
 
-#: ../capplets/display/main.c:488
+#: ../capplets/display/main.c:574
+msgid "R_otation:"
+msgstr "การ_หมุน:"
+
+#: ../capplets/display/main.c:594
 msgid "Default Settings"
 msgstr "ค่าตั้งปริยาย"
 
-#: ../capplets/display/main.c:490
+#: ../capplets/display/main.c:596
 #, c-format
 msgid "Screen %d Settings\n"
 msgstr "ค่าตั้งของจอ %d\n"
 
-#: ../capplets/display/main.c:516
+#: ../capplets/display/main.c:622
 msgid "Screen Resolution Preferences"
 msgstr "ค่าตั้งความละเอียดของจอ"
 
-#: ../capplets/display/main.c:553
+#: ../capplets/display/main.c:659
 #, c-format
 msgid "_Make default for this computer (%s) only"
 msgstr "_ตั้งให้เป็นค่าปริยายสำหรับเครื่องนี้ (%s) เท่านั้น"
 
-#: ../capplets/display/main.c:571
+#: ../capplets/display/main.c:677
 msgid "Options"
 msgstr "ตัวเลือก"
 
-#: ../capplets/display/main.c:592
+#: ../capplets/display/main.c:698
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d second the previous "
@@ -1328,30 +1348,30 @@ msgid_plural ""
 msgstr[0] "กำลังทดลองใช้ค่าตั้งใหม่  ถ้าคุณไม่ตอบรับภายใน %d วินาที จะกลับไปใช้ค่าเดิม"
 msgstr[1] "กำลังทดลองใช้ค่าตั้งใหม่  ถ้าคุณไม่ตอบรับภายใน %d วินาที จะกลับไปใช้ค่าเดิม"
 
-#: ../capplets/display/main.c:638
+#: ../capplets/display/main.c:744
 msgid "Keep Resolution"
 msgstr "ใช้ความละเอียดนี้"
 
-#: ../capplets/display/main.c:642
+#: ../capplets/display/main.c:748
 msgid "Do you want to keep this resolution?"
 msgstr "จะตกลงใช้ความละเอียดนี้หรือไม่?"
 
-#: ../capplets/display/main.c:667
+#: ../capplets/display/main.c:773
 msgid "Use _previous resolution"
 msgstr "ใช้ความละเอียดเ_ดิม"
 
-#: ../capplets/display/main.c:667
+#: ../capplets/display/main.c:773
 msgid "_Keep resolution"
 msgstr "ใช้ความละเอียด_นี้"
 
-#: ../capplets/display/main.c:818
+#: ../capplets/display/main.c:923
 msgid ""
 "The X Server does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
 msgstr ""
 "X server ไม่สนับสนุนส่วนขยาย XRandR จึงไม่สามารถเปลี่ยนความละเอียดของจอขณะทำงานได้"
 
-#: ../capplets/display/main.c:826
+#: ../capplets/display/main.c:931
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
@@ -1635,7 +1655,7 @@ msgstr "ตั้งปุ่มลัดสำหรับเรียกใช
 msgid "Unknown"
 msgstr "ไม่รู้จัก"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:281
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:282
 msgid "Layout"
 msgstr "ผังแป้นพิมพ์"
 
@@ -1643,8 +1663,8 @@ msgstr "ผังแป้นพิมพ์"
 #. the below options are to be included in the selected list.
 #. This is a HIG-compliant alternative to allowing no
 #. selection in the group.
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:285
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:229
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:286
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:231
 msgid "Default"
 msgstr "ค่าปริยาย"
 
@@ -1675,56 +1695,56 @@ msgid "Start the page with the typing break settings showing"
 msgstr "เริ่มต้นหน้ากระดาษโดยแสดงการตั้งค่าการหยุดพักการพิมพ์"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:3
-msgid "..."
-msgstr "..."
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "<b>Cursor Blinking</b>"
 msgstr "<b>การกะพริบของตัวชี้</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "<b>Repeat Keys</b>"
 msgstr "<b>การซ้ำตัวอักษร</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:5
 msgid "<b>_Lock screen to enforce typing break</b>"
 msgstr "<b>_ล็อคหน้าจอเพื่อบังคับให้พักหยุดพิมพ์</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>ถี่</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>นาน</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>นิดเดียว</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>ช้า</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
 msgid "A_vailable layouts:"
 msgstr "_ผังแป้นพิมพ์ที่มี:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "All_ow postponing of breaks"
 msgstr "_ยอมให้ผัดเวลาพักพิมพ์ไปชั่วครู่"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Check if breaks are allowed to be postponed"
 msgstr "เลือกถ้าจะยอมให้ผัดเวลาของการพักพิมพ์ออกไปชั่วคราว"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Choose a Keyboard Model"
 msgstr "เลือกรุ่นแป้นพิมพ์"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Choose a Layout"
 msgstr "เลือกผังแป้นพิมพ์"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:15
+msgid "Choose..."
+msgstr "เลือก..."
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:16
 msgid "Cursor _blinks in text boxes and fields"
@@ -2620,10 +2640,6 @@ msgstr "เครื่องมือปรับแต่งระบบขอ
 msgid "Volume"
 msgstr "ระดับเสียง"
 
-#: ../gnome-settings-daemon/factory.c:60
-msgid "Could not initialize Bonobo"
-msgstr "เริ่มใช้ Bonobo ไม่สำเร็จ"
-
 #: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:406
 msgid "Slow Keys Alert"
 msgstr "เริ่มใช้แป้นเฉื่อย"
@@ -2790,12 +2806,11 @@ msgstr ""
 "มีปัญหาที่เป็นที่ทราบกันเกี่ยวกับการตั้งค่า XKB ที่ซับซ้อนในรุ่นนี้\n"
 "กรุณาลองตั้งค่าที่ง่ายลง หรืออัปเกรด XFree เป็นรุ่นที่ใหม่กว่านี้"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:244
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:249
 msgid "Do _not show this warning again"
 msgstr "ไ_ม่ต้องแสดงคำเตือนนี้อีก"
 
-#. !! temporary one
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:253
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:263
 #, c-format
 msgid ""
 "<b>The X system keyboard settings differ from your current GNOME keyboard "
@@ -2811,11 +2826,11 @@ msgstr ""
 "\n"
 "คุณต้องการใช้อันไหน?"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:275
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:286
 msgid "Use X settings"
 msgstr "ใช้ค่าตั้งของ X"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:277
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:288
 msgid "Keep GNOME settings"
 msgstr "คงค่าตั้งของ GNOME"
 
@@ -2941,38 +2956,6 @@ msgstr "จอ"
 #: ../libbackground/applier.c:280
 msgid "Screen on which BGApplier is to draw"
 msgstr "จอที่จะให้ BGApplier เขียน"
-
-#: ../libgswitchit/gswitchit_config.c:1074
-#, c-format
-msgid "There was an error loading an image: %s"
-msgstr "เกิดข้อผิดพลาดขณะโหลดรูปภาพ: %s"
-
-#: ../libgswitchit/gswitchit_config.c:1398
-#, c-format
-msgid "layout \"%s\""
-msgid_plural "layouts \"%s\""
-msgstr[0] "ผังแป้นพิมพ์ \"%s\""
-msgstr[1] "ผังแป้นพิมพ์ \"%s\""
-
-#: ../libgswitchit/gswitchit_config.c:1415
-#, c-format
-msgid "option \"%s\""
-msgid_plural "options \"%s\""
-msgstr[0] "ตัวเลือก \"%s\""
-msgstr[1] "ตัวเลือก \"%s\""
-
-#: ../libgswitchit/gswitchit_config.c:1423
-#, c-format
-msgid "model \"%s\", %s and %s"
-msgstr "รุ่น \"%s\", %s และ %s"
-
-#: ../libgswitchit/gswitchit_config.c:1424
-msgid "no layout"
-msgstr "ไม่ระบุผังแป้นพิมพ์"
-
-#: ../libgswitchit/gswitchit_config.c:1425
-msgid "no options"
-msgstr "ไม่ระบุตัวเลือก"
 
 #: ../libsounds/sound-view.c:43
 msgid "Login"
@@ -3591,6 +3574,34 @@ msgstr "กำหนดว่าจะสร้างรูปย่อสำห
 msgid "Whether to thumbnail themes"
 msgstr "กำหนดว่าจะสร้างรูปย่อสำหรับชุดตกแต่งหรือไม่"
 
+#~ msgid "..."
+#~ msgstr "..."
+
+#~ msgid "Could not initialize Bonobo"
+#~ msgstr "เริ่มใช้ Bonobo ไม่สำเร็จ"
+
+#~ msgid "There was an error loading an image: %s"
+#~ msgstr "เกิดข้อผิดพลาดขณะโหลดรูปภาพ: %s"
+
+#~ msgid "layout \"%s\""
+#~ msgid_plural "layouts \"%s\""
+#~ msgstr[0] "ผังแป้นพิมพ์ \"%s\""
+#~ msgstr[1] "ผังแป้นพิมพ์ \"%s\""
+
+#~ msgid "option \"%s\""
+#~ msgid_plural "options \"%s\""
+#~ msgstr[0] "ตัวเลือก \"%s\""
+#~ msgstr[1] "ตัวเลือก \"%s\""
+
+#~ msgid "model \"%s\", %s and %s"
+#~ msgstr "รุ่น \"%s\", %s และ %s"
+
+#~ msgid "no layout"
+#~ msgstr "ไม่ระบุผังแป้นพิมพ์"
+
+#~ msgid "no options"
+#~ msgstr "ไม่ระบุตัวเลือก"
+
 #~ msgid ""
 #~ "Icon Theme %s correctly installed.\n"
 #~ "You can select it in the theme details."
@@ -3632,9 +3643,6 @@ msgstr "กำหนดว่าจะสร้างรูปย่อสำห
 
 #~ msgid "Theme Installation"
 #~ msgstr "การติดตั้งชุดตกแต่ง"
-
-#~ msgid "_Location:"
-#~ msgstr "ตำ_แหน่ง:"
 
 #~ msgid "New themes can also be installed by dragging them into the window."
 #~ msgstr "คุณสามารถติดตั้งชุดตกแต่งใหม่ได้โดยลากมาปล่อยที่หน้าต่างนี้"
@@ -3705,9 +3713,6 @@ msgstr "กำหนดว่าจะสร้างรูปย่อสำห
 #~ msgid "Default Window Manager"
 #~ msgstr "โปรแกรมจัดการหน้าต่างปริยาย"
 
-#~ msgid "Delete"
-#~ msgstr "ลบ"
-
 #~ msgid "Edit..."
 #~ msgstr "แก้ไข..."
 
@@ -3756,9 +3761,6 @@ msgstr "กำหนดว่าจะสร้างรูปย่อสำห
 
 #~ msgid "E_nable sound server startup"
 #~ msgstr "เ_ปิดใช้ระบบเสียง"
-
-#~ msgid "General"
-#~ msgstr "ทั่วไป"
 
 #~ msgid "_Sound an audible bell"
 #~ msgstr "_ออกเสียงบี๊บ"
