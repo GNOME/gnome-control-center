@@ -1,20 +1,22 @@
 # Terjemahan Bahasa Indonesia 
 # Copyright (C) 2003 
 # This file is distributed under the same license as the fontilus package.
+# Ahmad Riza H Nst  <rizahnst@gnome.org> 2006
 # Mohammad DAMT <mdamt@bisnisweb.com> 2003 
-#
+# 
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-17 22:10+0200\n"
-"PO-Revision-Date: 2005-08-11 00:15+0300\n"
+"POT-Creation-Date: 2006-07-13 10:49+0700\n"
+"PO-Revision-Date: 2006-07-13 17:09+0700\n"
 "Last-Translator: Mohammad DAMT <mdamt@bisnisweb.com>\n"
-"Language-Team: Indonesia <l10n@gnome.linux.or.id>\n"
+"Language-Team: Indonesia <kontak@id.gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=1; plural=0;"
 
 #: ../capplets/about-me/eel-alert-dialog.c:114
 msgid "Image/label border"
@@ -53,15 +55,15 @@ msgstr "Informasi Pribadi"
 msgid "Set your personal information"
 msgstr "Masukkan informasi pribadi Anda"
 
-#: ../capplets/about-me/gnome-about-me.c:554
+#: ../capplets/about-me/gnome-about-me.c:604
 msgid "Select Image"
 msgstr "Pilih Foto"
 
-#: ../capplets/about-me/gnome-about-me.c:556
+#: ../capplets/about-me/gnome-about-me.c:606
 msgid "No Image"
 msgstr "Tidak Ada Foto"
 
-#: ../capplets/about-me/gnome-about-me.c:706
+#: ../capplets/about-me/gnome-about-me.c:769
 msgid ""
 "There was an error while trying to get the addressbook information\n"
 "Evolution Data Server can't handle the protocol"
@@ -69,81 +71,136 @@ msgstr ""
 "Ada kesalahan saat mencoba untuk mengambil informasi alamat\n"
 "ada masalah pada protokol Server Data Evolution"
 
-#: ../capplets/about-me/gnome-about-me.c:727
+#: ../capplets/about-me/gnome-about-me.c:790
 msgid "Unable to open address book"
 msgstr "Buku alamat tak dapat dibuka"
 
-#: ../capplets/about-me/gnome-about-me.c:739
+#: ../capplets/about-me/gnome-about-me.c:802
 msgid "Unknown login ID, the user database might be corrupted"
 msgstr "Nama login tidak dikenal, basis data pengguna mungkin sedang rusak"
 
-#: ../capplets/about-me/gnome-about-me.c:770
-#: ../capplets/about-me/gnome-about-me.c:772
+#: ../capplets/about-me/gnome-about-me.c:833
+#: ../capplets/about-me/gnome-about-me.c:835
 #, c-format
 msgid "About %s"
 msgstr "Tentang %s"
 
-#: ../capplets/about-me/gnome-about-me-password.c:101
-#: ../capplets/about-me/gnome-about-me-password.c:479
-msgid "Old password is incorrect, please retype it"
-msgstr "Sandi lama salah, silakan ketik ulang"
+#: ../capplets/about-me/gnome-about-me-password.c:172
+msgid "Child exited unexpectedly"
+msgstr "Anak keluar tak terduga"
 
-#: ../capplets/about-me/gnome-about-me-password.c:112
-msgid "System error has occurred"
-msgstr "Ada kesalahan pada sistem"
+#: ../capplets/about-me/gnome-about-me-password.c:295
+#, c-format
+msgid "Could not shutdown backend_stdin IO channel: %s"
+msgstr "Tidak bisa mematikan backend_stdin IO channel: %s"
 
-#: ../capplets/about-me/gnome-about-me-password.c:113
-msgid "Could not run /usr/bin/passwd"
-msgstr "Program /usr/bin/passwd gagal untuk dijalankan"
+#: ../capplets/about-me/gnome-about-me-password.c:308
+#, c-format
+msgid "Could not shutdown backend_stdout IO channel: %s"
+msgstr "Tidak bisa mematikan backend_stdout IO channel: %s"
 
-#: ../capplets/about-me/gnome-about-me-password.c:114
+#: ../capplets/about-me/gnome-about-me-password.c:449
+msgid "Authenticated!"
+msgstr "Telah otentik!"
+
+#. This is a re-auth, and it failed.
+#. * The password must have been changed in the meantime!
+#. * Ask the user to re-authenticate
+#.
+#. Update status message and auth state
+#. Authentication failure
+#: ../capplets/about-me/gnome-about-me-password.c:466
+#: ../capplets/about-me/gnome-about-me-password.c:539
+msgid ""
+"Your password has been changed since you initially authenticated! Please re-"
+"authenticate."
+msgstr ""
+"Kata sandi anda telah diganti karena anda telah terotentikasi! Silahkan otentikasi "
+"ulang."
+
+#: ../capplets/about-me/gnome-about-me-password.c:468
+msgid "That password was incorrect."
+msgstr "Kata sandinya salah."
+
+#: ../capplets/about-me/gnome-about-me-password.c:514
+msgid "Your password has been changed."
+msgstr "Kata sandi anda telah diganti."
+
+#. What does this indicate?
+#. * "Authentication information cannot be recovered?" from libpam?
+#: ../capplets/about-me/gnome-about-me-password.c:524
+#, c-format
+msgid "System error: %s."
+msgstr "Ada kesalahan pada sistem: %s."
+
+#: ../capplets/about-me/gnome-about-me-password.c:526
+msgid "The password is too short."
+msgstr "Sandinya terlalu singkat."
+
+#: ../capplets/about-me/gnome-about-me-password.c:528
+#: ../capplets/about-me/gnome-about-me-password.c:530
+msgid "The password is too simple."
+msgstr "Sandinya terlalu sederhana."
+
+#: ../capplets/about-me/gnome-about-me-password.c:532
+msgid "The old and new passwords are too similar."
+msgstr "Sandi lama dan barunya terlalu mirip."
+
+#: ../capplets/about-me/gnome-about-me-password.c:534
+msgid "The new password must contain numeric or special character(s)."
+msgstr "Harus berisi karakter angka atau karakter istimewa."
+
+#: ../capplets/about-me/gnome-about-me-password.c:536
+msgid "The old and new passwords are the same."
+msgstr "Sandi lama dan barunya sama persis."
+
+#: ../capplets/about-me/gnome-about-me-password.c:787
+#, c-format
+msgid "Unable to launch /usr/bin/passwd: %s"
+msgstr "Program /usr/bin/passwd: %s gagal untuk dijalankan"
+
+#: ../capplets/about-me/gnome-about-me-password.c:789
 msgid "Unable to launch backend"
 msgstr "Mesin program tidak dapat dijalankan"
 
-#: ../capplets/about-me/gnome-about-me-password.c:116
-#: ../capplets/about-me/gnome-about-me-password.c:117
-msgid "Unexpected error has occurred"
-msgstr "Ada kesalahan tak terduga"
+#: ../capplets/about-me/gnome-about-me-password.c:790
+msgid "A system error has occurred"
+msgstr "Ada kesalahan pada sistem"
 
-#: ../capplets/about-me/gnome-about-me-password.c:315
-msgid "Password is too short"
-msgstr "Sandinya terlalu singkat"
+#. Update status message
+#: ../capplets/about-me/gnome-about-me-password.c:810
+msgid "Checking password..."
+msgstr "Memeriksa Sandi..."
 
-#: ../capplets/about-me/gnome-about-me-password.c:318
-#: ../capplets/about-me/gnome-about-me-password.c:321
-msgid "Password is too simple"
-msgstr "Sandinya terlalu sederhana"
+#: ../capplets/about-me/gnome-about-me-password.c:897
+msgid "Click <b>Change password</b> to change your password."
+msgstr "Klik <b>Ganti Sandi</b> untuk mengganti kata sandi."
 
-#: ../capplets/about-me/gnome-about-me-password.c:324
-msgid "Old and new passwords are too similar"
-msgstr "Sandi lama dan barunya terlalu mirip"
+#: ../capplets/about-me/gnome-about-me-password.c:900
+msgid "Please type your password in the <b>New password</b> field."
+msgstr "Silakan ketik sandinya pada isian <b>Kata sandi baru</b>."
 
-#: ../capplets/about-me/gnome-about-me-password.c:328
-msgid "Old and new password are the same"
-msgstr "Sandi lama dan barunya sama persis"
+#: ../capplets/about-me/gnome-about-me-password.c:903
+#: ../capplets/about-me/gnome-about-me.glade.h:34
+msgid ""
+"Please type your password again in the <b>Retype new password</b> field."
+msgstr ""
+"Silakan ketik lagi kata sandinya pada isian <b>Ketik ulang kata sandi</b>."
 
-#: ../capplets/about-me/gnome-about-me-password.c:406
-msgid "Please type the passwords."
-msgstr "Silakan ketikkan kata sandi."
-
-#: ../capplets/about-me/gnome-about-me-password.c:414
-msgid "Please type the password again, it is wrong."
-msgstr "Silakan ketik lagi kata sandinya, yang barusan salah."
-
-#: ../capplets/about-me/gnome-about-me-password.c:417
-msgid "Click on Change Password to change the password."
-msgstr "Klik pada tombol Ganti Sandi untuk mengganti kata sandi."
+#: ../capplets/about-me/gnome-about-me-password.c:906
+msgid "The two passwords are not equal."
+msgstr "Kedua kata sandi tidak sama."
 
 #: ../capplets/about-me/gnome-about-me.glade.h:1
 #: ../vfs-methods/themus/apply-font.glade.h:1
 msgid " "
-msgstr " "
+msgstr "."
 
 #: ../capplets/about-me/gnome-about-me.glade.h:2
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
-#: ../capplets/font/font-properties.glade.h:1
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:1
+#: ../capplets/sound/sound-properties.glade.h:1
 #: ../capplets/ui-properties/gnome-ui-properties.glade.h:1
 msgid "    "
 msgstr "    "
@@ -165,20 +222,20 @@ msgid "<b>Job</b>"
 msgstr "<b>Pekerjaan</b>"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:7
-msgid "<b>Please type the passwords.</b>"
-msgstr "<b>Silakan ketik sandinya.</b>"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:8
 msgid "<b>Telephone</b>"
 msgstr "<b>Telepon</b>"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:9
+#: ../capplets/about-me/gnome-about-me.glade.h:8
 msgid "<b>Web</b>"
 msgstr "<b>Web</b>"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:10
+#: ../capplets/about-me/gnome-about-me.glade.h:9
 msgid "<b>Work</b>"
 msgstr "<b>Tempat Bekerja</b>"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:10
+msgid "<span size=\"larger\" weight=\"bold\">Change your password</span>"
+msgstr "<span size=\"larger\" weight=\"bold\">Ganti kata sandi anda</span>"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:11
 msgid "A_IM/iChat:"
@@ -213,142 +270,162 @@ msgid "Change Passwo_rd..."
 msgstr "Ganti Sandi..."
 
 #: ../capplets/about-me/gnome-about-me.glade.h:20
-msgid "Change Password"
-msgstr "Ganti Sandi"
+msgid "Change pa_ssword"
+msgstr "Ganti _sandi"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:21
+msgid "Change password"
+msgstr "Ganti sandi"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:22
 msgid "Ci_ty:"
 msgstr "_Kota:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:22
+#: ../capplets/about-me/gnome-about-me.glade.h:23
 msgid "Co_untry:"
 msgstr "_Negara:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:23
+#: ../capplets/about-me/gnome-about-me.glade.h:24
 msgid "Contact"
 msgstr "Informasi Kontak"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:24
+#: ../capplets/about-me/gnome-about-me.glade.h:25
 msgid "Cou_ntry:"
 msgstr "_Negara:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:25
+#: ../capplets/about-me/gnome-about-me.glade.h:26
+msgid "Current _password:"
+msgstr "Sa_ndi sekarang:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:27
 msgid "Full Name"
 msgstr "Nama Lengkap"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:26
+#: ../capplets/about-me/gnome-about-me.glade.h:28
 msgid "Hom_e:"
 msgstr "_Rumah:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:27
+#: ../capplets/about-me/gnome-about-me.glade.h:29
 msgid "IC_Q:"
 msgstr "IC_Q:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:28
+#: ../capplets/about-me/gnome-about-me.glade.h:30
 msgid "M_SN:"
 msgstr "M_SN:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:29
-msgid "Old pa_ssword:"
-msgstr "_Sandi lama:"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:30
+#: ../capplets/about-me/gnome-about-me.glade.h:31
 msgid "P.O. _box:"
 msgstr "P.O. _box:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:31
+#: ../capplets/about-me/gnome-about-me.glade.h:32
 msgid "P._O. box:"
 msgstr "P._O. box:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:32
+#: ../capplets/about-me/gnome-about-me.glade.h:33
 msgid "Personal Info"
 msgstr "Informasi Pribadi"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:33
+#: ../capplets/about-me/gnome-about-me.glade.h:35
 msgid "State/Pro_vince:"
 msgstr "Negara Bagian/Pro_vinsi:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:34
+#: ../capplets/about-me/gnome-about-me.glade.h:36
+msgid ""
+"To change your password, enter your current password in the field below and "
+"click <b>Authenticate</b>.\n"
+"After you have authenticated, enter your new password, retype it for "
+"verification and click <b>Change password</b>."
+msgstr ""
+"Untuk mengganti kata sandi anda, masukkan kata sandi sekarang di bawah dan "
+"klik <b>Otentikasi<b>.\n"
+"Setelah anda terotentikasi, masukkan kata sandi baru, ketik lagi untuk memastikan "
+"dan klik <b>Ganti kata sandi</b>."
+
+#: ../capplets/about-me/gnome-about-me.glade.h:38
 msgid "User name:"
 msgstr "Nama pengguna:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:35
+#: ../capplets/about-me/gnome-about-me.glade.h:39
 msgid "Web _log:"
 msgstr "Web _log:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:36
+#: ../capplets/about-me/gnome-about-me.glade.h:40
 msgid "Wor_k:"
 msgstr "_Kantor:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:37
+#: ../capplets/about-me/gnome-about-me.glade.h:41
 msgid "Work _fax:"
 msgstr "_Fax kantor:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:38
+#: ../capplets/about-me/gnome-about-me.glade.h:42
 msgid "Zip/_Postal code:"
 msgstr "Kode _pos:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:39
+#: ../capplets/about-me/gnome-about-me.glade.h:43
 msgid "_Address:"
 msgstr "_Alamat:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:40
+#: ../capplets/about-me/gnome-about-me.glade.h:44
+msgid "_Authenticate"
+msgstr "_Otentikasi"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:45
 msgid "_Department:"
 msgstr "_Bagian:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:41
+#: ../capplets/about-me/gnome-about-me.glade.h:46
 msgid "_Groupwise:"
 msgstr "_Groupwise:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:42
+#: ../capplets/about-me/gnome-about-me.glade.h:47
 msgid "_Home page:"
 msgstr "_Laman web:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:43
+#: ../capplets/about-me/gnome-about-me.glade.h:48
 msgid "_Home:"
 msgstr "Ruma_h:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:44
+#: ../capplets/about-me/gnome-about-me.glade.h:49
 msgid "_Jabber:"
 msgstr "_Jabber:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:45
+#: ../capplets/about-me/gnome-about-me.glade.h:50
 msgid "_Manager:"
 msgstr "_Manajer:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:46
+#: ../capplets/about-me/gnome-about-me.glade.h:51
 msgid "_Mobile:"
 msgstr "_Ponsel:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:47
+#: ../capplets/about-me/gnome-about-me.glade.h:52
 msgid "_New password:"
 msgstr "Sa_ndi baru:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:48
+#: ../capplets/about-me/gnome-about-me.glade.h:53
 msgid "_Profession:"
 msgstr "_Profesi:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:49
+#: ../capplets/about-me/gnome-about-me.glade.h:54
 msgid "_Retype new password:"
 msgstr "Silakan _ketik ulang sandinya:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:50
+#: ../capplets/about-me/gnome-about-me.glade.h:55
 msgid "_State/Province:"
 msgstr "N_egara Bagian/Provinsi:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:51
+#: ../capplets/about-me/gnome-about-me.glade.h:56
 msgid "_Title:"
 msgstr "_Gelar:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:52
+#: ../capplets/about-me/gnome-about-me.glade.h:57
 msgid "_Work:"
 msgstr "_Kantor:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:53
+#: ../capplets/about-me/gnome-about-me.glade.h:58
 msgid "_Yahoo:"
 msgstr "_Yahoo:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:54
+#: ../capplets/about-me/gnome-about-me.glade.h:59
 msgid "_Zip/Postal code:"
 msgstr "K_ode pos:"
 
@@ -435,27 +512,27 @@ msgstr ""
 "memasang program 'gnopernicus' yang menyediakan fasilitas pembacaan layar "
 "dan fasilitas perbesaran tampilan layar."
 
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:241
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:242
 #, c-format
 msgid "There was an error launching the mouse preferences dialog: %s"
 msgstr "Gagal membuka dialog pengaturan mouse: %s"
 
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:337
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:398
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:338
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:399
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "Gagal membaca pengaturan AccessX dari berkas '%s'"
 
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:435
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:436
 msgid "Import Feature Settings File"
 msgstr "Berkasi Impor Konfigurasi Fitur"
 
-#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:439
+#: ../capplets/accessibility/keyboard/accessibility-keyboard.c:440
 msgid "_Import"
 msgstr "_Impor"
 
 #: ../capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.in.h:1
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:20
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:21
 #: ../capplets/keyboard/keyboard.desktop.in.in.h:1
 msgid "Keyboard"
 msgstr "Papan Ketik"
@@ -473,10 +550,7 @@ msgstr ""
 "pada papan ketik tidak dapat digunakan."
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:1
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:2
-#: ../capplets/theme-switcher/theme-install.glade.h:1
-#: ../capplets/theme-switcher/theme-properties.glade.h:1
 msgid "*"
 msgstr "*"
 
@@ -595,7 +669,7 @@ msgstr ""
 "dalam urutan tertentu."
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:29
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:31
 msgid "S_peed:"
 msgstr "Kece_patan:"
 
@@ -624,7 +698,7 @@ msgid "_Only accept keys held for:"
 msgstr "Hanya _terima tombol bila ditekan selama:"
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:39
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:41
 msgid "_Type to test settings:"
 msgstr "Ke_tikkan sesuatu untuk mencoba:"
 
@@ -645,6 +719,7 @@ msgid "characters/second"
 msgstr "karakter/detik"
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:41
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
 msgid "milliseconds"
 msgstr "milidetik"
 
@@ -652,11 +727,7 @@ msgstr "milidetik"
 msgid "pixels/second"
 msgstr "piksel/detik"
 
-#. set the timeout value  label with correct value of timeout
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
-#: ../capplets/mouse/gnome-mouse-properties.c:138
-#: ../capplets/mouse/gnome-mouse-properties.c:885
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:27
 #: ../capplets/windows/gnome-window-properties.glade.h:10
 msgid "seconds"
 msgstr "detik"
@@ -690,6 +761,15 @@ msgid "_Add Wallpaper"
 msgstr "M_asukkan Gambar"
 
 #: ../capplets/background/gnome-background-properties.glade.h:6
+msgid "_Finish"
+msgstr "_Selesai"
+
+#: ../capplets/background/gnome-background-properties.glade.h:7
+#: ../capplets/theme-switcher/theme-properties.glade.h:20
+msgid "_Remove"
+msgstr "_Hapus"
+
+#: ../capplets/background/gnome-background-properties.glade.h:8
 msgid "_Style:"
 msgstr "_Model:"
 
@@ -700,58 +780,62 @@ msgstr "_Model:"
 msgid "There was an error displaying help: %s"
 msgstr "Ada error saat menampilkan layar bantuan: %s"
 
-#: ../capplets/background/gnome-wp-capplet.c:1042
-#: ../capplets/background/gnome-wp-capplet.c:1060
+#: ../capplets/background/gnome-wp-capplet.c:984
 msgid "Centered"
 msgstr "Tengah"
 
-#: ../capplets/background/gnome-wp-capplet.c:1068
-#: ../capplets/background/gnome-wp-capplet.c:1085
+#: ../capplets/background/gnome-wp-capplet.c:988
 msgid "Fill Screen"
 msgstr "Penuhi Layar"
 
-#: ../capplets/background/gnome-wp-capplet.c:1093
-#: ../capplets/background/gnome-wp-capplet.c:1110
+#: ../capplets/background/gnome-wp-capplet.c:992
 msgid "Scaled"
 msgstr "Skala"
 
-#: ../capplets/background/gnome-wp-capplet.c:1118
-#: ../capplets/background/gnome-wp-capplet.c:1135
+#: ../capplets/background/gnome-wp-capplet.c:996
+msgid "Zoom"
+msgstr "Perbesar"
+
+#: ../capplets/background/gnome-wp-capplet.c:1000
 msgid "Tiled"
 msgstr "Pasang Ubin"
 
-#: ../capplets/background/gnome-wp-capplet.c:1159
-#: ../capplets/background/gnome-wp-capplet.c:1168
+#: ../capplets/background/gnome-wp-capplet.c:1021
 msgid "Solid Color"
 msgstr "Warna Padat"
 
-#: ../capplets/background/gnome-wp-capplet.c:1176
-#: ../capplets/background/gnome-wp-capplet.c:1185
+#: ../capplets/background/gnome-wp-capplet.c:1025
 msgid "Horizontal Gradient"
 msgstr "Gradien Horisontal"
 
-#: ../capplets/background/gnome-wp-capplet.c:1193
-#: ../capplets/background/gnome-wp-capplet.c:1202
+#: ../capplets/background/gnome-wp-capplet.c:1029
 msgid "Vertical Gradient"
 msgstr "Gradien Vertikal"
 
 #. Create the file chooser dialog stuff here
-#: ../capplets/background/gnome-wp-capplet.c:1251
+#: ../capplets/background/gnome-wp-capplet.c:1075
 msgid "Add Wallpaper"
 msgstr "Masukkan Gambar"
+
+#: ../capplets/background/gnome-wp-capplet.c:1092
+msgid "Images"
+msgstr "Foto"
+
+#: ../capplets/background/gnome-wp-capplet.c:1096
+msgid "All Files"
+msgstr "Seluruh Berkas"
 
 #: ../capplets/background/gnome-wp-info.c:57
 msgid "No Wallpaper"
 msgstr "Tidak Ada Gambar"
 
-#: ../capplets/background/gnome-wp-item.c:292
-#: ../capplets/background/gnome-wp-item.c:294
+#: ../capplets/background/gnome-wp-item.c:343
+#: ../capplets/background/gnome-wp-item.c:345
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "piksel"
-msgstr[1] ""
 
-#: ../capplets/common/activate-settings-daemon.c:18
+#: ../capplets/common/activate-settings-daemon.c:16
 msgid ""
 "Unable to start the settings manager 'gnome-settings-daemon'.\n"
 "Without the GNOME settings manager running, some preferences may not take "
@@ -765,27 +849,26 @@ msgstr ""
 "sejenis bawaan non-GNOME (misalnya dari KDE) yang sedang jalan di memori dan "
 "menjadi konflik dengan program bawaan GNOME."
 
-#: ../capplets/common/capplet-stock-icons.c:94
+#: ../capplets/common/capplet-stock-icons.c:92
 #, c-format
-msgid "Unable to load capplet stock icon '%s'\n"
-msgstr "Ikon stok kaplet '%s' tidak dapat dibuka\n"
+msgid "Unable to load stock icon '%s'\n"
+msgstr "Tidak dapat membaca ikon saham '%s'\n"
 
 #: ../capplets/common/capplet-util.c:239 ../capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr "Aktifkan dan keluar"
 
 #: ../capplets/common/capplet-util.c:243
-#: ../capplets/default-applications/gnome-default-applications-properties.c:765
 #: ../capplets/keyboard/gnome-keyboard-properties.c:225
-#: ../capplets/mouse/gnome-mouse-properties.c:1021
-#: ../capplets/sound/sound-properties-capplet.c:244
+#: ../capplets/mouse/gnome-mouse-properties.c:1023
+#: ../capplets/sound/sound-properties-capplet.c:760
 msgid "Retrieve and store legacy settings"
 msgstr "Ambil dan simpan pengaturan asal"
 
 #: ../capplets/common/file-transfer-dialog.c:94
 #, c-format
-msgid "Copying file: %i of %i"
-msgstr "Menyalin berkas: %i dari %i"
+msgid "Copying file: %u of %u"
+msgstr "Menyalin berkas: %u dari %u"
 
 #: ../capplets/common/file-transfer-dialog.c:122
 #, c-format
@@ -962,241 +1045,247 @@ msgstr "Aplikasi Pilihan"
 msgid "Select your default applications"
 msgstr "Silakan pilih aplikasi utama"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:9
-msgid "Debian Sensible Browser"
-msgstr "Perambah Sensible Debian"
+#: ../capplets/default-applications/gnome-da-capplet.c:77
+#: ../capplets/default-applications/gnome-da-capplet.c:101
+#: ../capplets/default-applications/gnome-da-capplet.c:146
+#: ../capplets/default-applications/gnome-da-capplet.c:191
+#: ../capplets/default-applications/gnome-da-capplet.c:245
+#: ../capplets/default-applications/gnome-da-capplet.c:294
+#: ../capplets/default-applications/gnome-da-capplet.c:576
+#: ../capplets/default-applications/gnome-da-capplet.c:597
+#, c-format
+msgid "Error saving configuration: %s"
+msgstr "Kesalahan ketika menyimpan konfigurasi: %s"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:10
-msgid "Epiphany"
-msgstr "Epiphany"
+#: ../capplets/default-applications/gnome-da-capplet.c:719
+#: ../capplets/sound/sound-properties-capplet.c:318
+msgid "Custom"
+msgstr "Sesuaikan"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:11
-msgid "Galeon"
-msgstr "Galeon"
+#: ../capplets/default-applications/gnome-da-capplet.c:739
+msgid "Could not load the main interface"
+msgstr "Tidak dapat membaca antar muka utam"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:12
-msgid "Encompass"
-msgstr "Encompass"
+#: ../capplets/default-applications/gnome-da-capplet.c:741
+msgid "Please make sure that the applet is properly installed"
+msgstr "Periksa dulu apakah appletnya terpasang dengan benar"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:13
-msgid "Firebird"
-msgstr "Firebird"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:14
-msgid "Firefox"
-msgstr "Firefox"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:15
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:16
-msgid "Mozilla"
-msgstr "Mozilla"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:17
-msgid "Netscape Communicator"
-msgstr "Netscape Communicator"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:18
-msgid "Konqueror"
-msgstr "Konqueror"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:19
-msgid "W3M Text Browser"
-msgstr "Perambah Teks W3M"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:20
-msgid "Lynx Text Browser"
-msgstr "Perambah Teks Lynx"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:21
-msgid "Links Text Browser"
-msgstr "Perambah Teks Links"
-
-#. The code in gnome-default-applications-properties.c makes sure
-#. * there is only one (the first entry in this list) Evolution entry
-#. * in the list shown to the user
-#.
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:36
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:37
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:38
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:39
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:40
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:41
-msgid "Evolution Mail Reader"
-msgstr "Program Email Evolution"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:42
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:1
 msgid "Balsa"
 msgstr "Balsa"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:43
-msgid "KMail"
-msgstr "KMail"
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:2
+msgid "Debian Sensible Browser"
+msgstr "Perambah Sensible Debian"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:44
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:45
-msgid "Thunderbird"
-msgstr "Thunderbird"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:46
-msgid "Mozilla Mail"
-msgstr "Mozilla Mail"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:47
-msgid "Mutt"
-msgstr "Mutt"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:58
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:3
 msgid "Debian Terminal Emulator"
 msgstr "Terminal Emulator Debian"
 
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:59
-msgid "GNOME Terminal"
-msgstr "Terminal GNOME"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:60
-msgid "Standard XTerminal"
-msgstr "XTerminal Standar"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:61
-msgid "NXterm"
-msgstr "NXterm"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:62
-msgid "RXVT"
-msgstr "RXVT"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:63
-msgid "aterm"
-msgstr "aterm"
-
-#: ../capplets/default-applications/gnome-default-applications-properties-structs.c:64
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:4
 msgid "ETerm"
 msgstr "ETerm"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.c:123
-msgid "Please specify a name and a command for this editor."
-msgstr "Silakan masukkan nama dan perintah penyunting ini."
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:5
+msgid "Encompass"
+msgstr "Encompass"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:6
+msgid "Epiphany Web Browser"
+msgstr "Perambah Web Epiphany"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:7
+msgid "Evolution Mail Reader"
+msgstr "Program Email Evolution"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:8
+msgid "Evolution Mail Reader 1.4"
+msgstr "Pembaca Surat Evolution 1.4"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:9
+msgid "Evolution Mail Reader 1.5"
+msgstr "Pembaca Surat Evolution 1.5"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:10
+msgid "Evolution Mail Reader 1.6"
+msgstr "Pembaca Surat Evolution 1.6"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:11
+msgid "Evolution Mail Reader 2.0"
+msgstr "Pembaca Surat Evolution 2.0"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:12
+msgid "Evolution Mail Reader 2.2"
+msgstr "Pembaca Surat Evolution 2.2"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:13
+msgid "Evolution Mail Reader 2.4"
+msgstr "Pembaca Surat Evolution 2.4"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:14
+msgid "Firebird"
+msgstr "Firebird"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:15
+msgid "Firefox"
+msgstr "Firefox"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:16
+msgid "GNOME Terminal"
+msgstr "Terminal GNOME"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:17
+msgid "Galeon"
+msgstr "Galeon"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:18
+msgid "KMail"
+msgstr "KMail"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:19
+msgid "Konqueror"
+msgstr "Konqueror"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:20
+msgid "Links Text Browser"
+msgstr "Perambah Teks Links"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:21
+msgid "Lynx Text Browser"
+msgstr "Perambah Teks Lynx"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:22
+msgid "Mozilla"
+msgstr "Mozilla"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:23
+msgid "Mozilla 1.6"
+msgstr "Mozilla 1.6"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:24
+msgid "Mozilla Mail"
+msgstr "Mozilla Mail"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:25
+msgid "Mozilla Thunderbird"
+msgstr "Mozilla Thunderbird"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:26
+msgid "Mutt"
+msgstr "Mutt"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:27
+msgid "NXterm"
+msgstr "NXterm"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:28
+msgid "Netscape Communicator"
+msgstr "Netscape Communicator"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:29
+msgid "Opera"
+msgstr "Opera"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:30
+msgid "RXVT"
+msgstr "RXVT"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:31
+msgid "Standard XTerminal"
+msgstr "XTerminal Standar"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:32
+msgid "Sylpheed"
+msgstr ""
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:33
+msgid "Sylpheed-Claws"
+msgstr ""
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:34
+msgid "Thunderbird"
+msgstr "Thunderbird"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:35
+msgid "W3M Text Browser"
+msgstr "Perambah Teks W3M"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:36
+msgid "aterm"
+msgstr "aterm"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:1
+msgid "<b>Audio Player</b>"
+msgstr "<b>Pemutar Suara</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:2
-msgid "Add..."
-msgstr "Tambah..."
+msgid "<b>Image Viewer</b>"
+msgstr "<b>Penampil Gambar</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:3
-msgid "C_ustom"
-msgstr "L_ainnya"
+msgid "<b>Instant Messenger</b>"
+msgstr "<b>Pembawa Pesan</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:4
-msgid "C_ustom:"
-msgstr "L_ainnya:"
+msgid "<b>Mail Reader</b>"
+msgstr "<b>Pembaca Email</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:5
-msgid "Can open _URIs"
-msgstr "_URI tidak dapat dibuka"
+msgid "<b>Terminal Emulator</b>"
+msgstr "<b>Terminal Emulator</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:6
-msgid "Can open multiple _files"
-msgstr "Aplikasi ini dapat _membuka banyak berkas"
+msgid "<b>Text Editor</b>"
+msgstr "<b>Penyunting Teks</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:7
+msgid "<b>Video Player</b>"
+msgstr "<b>Pemutar Video</b>"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:8
+msgid "<b>Web Browser</b>"
+msgstr "<b>Perambah Web</b>"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:10
+#, no-c-format
+msgid "All %s occurrences will be replaced with actual link"
+msgstr "Seluruh %s akan digantikan dengan tautan aktual"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:11
 msgid "Co_mmand:"
 msgstr "Peri_ntah:"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:8
-msgid "Custom Editor Properties"
-msgstr "Properti Penyunting Lainnya"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:9
-msgid "Default Mail Reader"
-msgstr "Pembaca Email Utama"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:10
-msgid "Default Terminal"
-msgstr "Terminal Utama"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:11
-msgid "Default Text Editor"
-msgstr "Penyunting Teks Utama"
-
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:12
-msgid "Default Web Browser"
-msgstr "Perambah Web Utama"
+msgid "E_xecute flag:"
+msgstr "Tanda e_ksekusi:"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:13
-msgid "Default Window Manager"
-msgstr "Pengatur Jendela Utama"
+msgid "Internet"
+msgstr "Internet"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:14
-msgid "Delete"
-msgstr "Hapus"
+msgid "Multimedia"
+msgstr "Multimedia"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:15
-msgid "E_xec Flag:"
-msgstr "Tanda E_ksekusi:"
+msgid "Open link in new _tab"
+msgstr "Buka tautan di _tab baru"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:16
-msgid "Edit..."
-msgstr "Ubah..."
+msgid "Open link in new _window"
+msgstr "Buka tautan di _jendela baru"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:17
-msgid "Mail Reader"
-msgstr "Pembaca Email"
+msgid "Open link with web browser _default"
+msgstr "Buka tautan dengan perambah web _default"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:19
-msgid "Run in a _terminal"
-msgstr "Jalankan dalam _terminal"
+msgid "Run in t_erminal"
+msgstr "Jalankan pada t_erminal"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:20
-msgid "Run in a t_erminal"
-msgstr "Jalankan dalam t_erminal"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:21
-msgid ""
-"Select the window manager you want.  You will need to hit apply, wave the "
-"magic wand, and do a magic dance for it to work."
-msgstr ""
-"Pilih pengatur jendela yang Anda ingin gunakan. Silakan klik tombol Terapkan "
-"untuk mengaktifkannya."
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:22
-msgid "Terminal"
-msgstr "Terminal"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:23
-msgid "Text Editor"
-msgstr "Penyunting Teks"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:24
-msgid "Understands _Netscape Remote Control"
-msgstr "Paham protokol _Netscape Remote Control"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:25
-msgid "Use this _editor to open text files in the file manager"
-msgstr ""
-"Gunakan program ini untuk m_enyunting berkas teks dalam pengatur berkas"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:26
-msgid "Web Browser"
-msgstr "Perambah Web"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:27
-msgid "Window Manager"
-msgstr "Pengatur Jendela"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:28
-msgid "_Command:"
-msgstr "Peri_ntah:"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:29
-msgid "_Name:"
-msgstr "_Nama:"
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:30
-msgid "_Properties..."
-msgstr "_Properti..."
-
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:31
-msgid "_Select:"
-msgstr "_Pilih:"
+msgid "System"
+msgstr "Sistem"
 
 #: ../capplets/display/display-properties.desktop.in.in.h:1
 msgid "Change screen resolution"
@@ -1206,71 +1295,91 @@ msgstr "Ubah resolusi layar"
 msgid "Screen Resolution"
 msgstr "Resolusi Layar"
 
-#: ../capplets/display/main.c:345
+#: ../capplets/display/main.c:25
+msgid "normal"
+msgstr "normal"
+
+#: ../capplets/display/main.c:26
+msgid "left"
+msgstr "kiri"
+
+#: ../capplets/display/main.c:27
+msgid "inverted"
+msgstr "terbalik"
+
+#: ../capplets/display/main.c:28
+msgid "right"
+msgstr "kanan"
+
+#: ../capplets/display/main.c:389
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../capplets/display/main.c:448
+#: ../capplets/display/main.c:535
 msgid "_Resolution:"
 msgstr "_Resolusi:"
 
-#: ../capplets/display/main.c:467
+#: ../capplets/display/main.c:554
 msgid "Re_fresh rate:"
 msgstr "Laju re_fresh:"
 
-#: ../capplets/display/main.c:488
+#: ../capplets/display/main.c:574
+msgid "R_otation:"
+msgstr "P_erputaran:"
+
+#: ../capplets/display/main.c:594
 msgid "Default Settings"
 msgstr "Pengaturan Bawaan"
 
-#: ../capplets/display/main.c:490
+#: ../capplets/display/main.c:596
 #, c-format
 msgid "Screen %d Settings\n"
 msgstr "Pengaturan Layar %d\n"
 
-#: ../capplets/display/main.c:516
+#: ../capplets/display/main.c:622
 msgid "Screen Resolution Preferences"
 msgstr "Pengaturan Resolusi Layar"
 
-#: ../capplets/display/main.c:553
+#: ../capplets/display/main.c:659
 #, c-format
 msgid "_Make default for this computer (%s) only"
 msgstr "Jadikan konfigurasi uta_ma bagi komputer ini (%s) saja"
 
-#: ../capplets/display/main.c:571
+#: ../capplets/display/main.c:677
 msgid "Options"
 msgstr "Pilihan"
 
-#: ../capplets/display/main.c:592
-#, fuzzy, c-format
+#: ../capplets/display/main.c:698
+#, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d second the previous "
 "settings will be restored."
-msgid_plural ""
 "Testing the new settings. If you don't respond in %d seconds the previous "
 "settings will be restored."
-msgstr[0] ""
-"Tes konfigurasi. Konfigurasi lama akan diaktifkan kembali bila Anda tidak "
-"merespon dalam %d detik.Tes konfigurasi. Konfigurasi lama akan diaktifkan "
-"kembali bila Anda tidak merespon dalam %d detik."
+msgstr ""
+"Coba setingan baru. Jika anda tidak menjawab dalam %d detik, setingan "
+"sebelumnya akan dikembalikan."
+"Coba setingan baru. Jika anda tidak menjawab dalam %d detik, setingan "
+"sebelumnya akan dikembalikan."
 
-#: ../capplets/display/main.c:638
+#: ../capplets/display/main.c:744
 msgid "Keep Resolution"
 msgstr "Ganti Resolusi"
 
-#: ../capplets/display/main.c:642
+#: ../capplets/display/main.c:748
 msgid "Do you want to keep this resolution?"
 msgstr "Ingin gunakan resolusi ini?"
 
-#: ../capplets/display/main.c:667
+#: ../capplets/display/main.c:773
 msgid "Use _previous resolution"
 msgstr "Gunakan resolusi _sebelumnya"
 
-#: ../capplets/display/main.c:667
+#: ../capplets/display/main.c:773
 msgid "_Keep resolution"
 msgstr "_Ganti resolusi"
 
-#: ../capplets/display/main.c:818
+#: ../capplets/display/main.c:923
 msgid ""
 "The X Server does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
@@ -1278,7 +1387,7 @@ msgstr ""
 "Server X tidak dapat menggunakan fasilitas XRandR. Perubahan resolusi "
 "langsung tidak dapat dilakukan."
 
-#: ../capplets/display/main.c:826
+#: ../capplets/display/main.c:931
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
@@ -1294,33 +1403,37 @@ msgstr "Fonta"
 msgid "Select fonts for the desktop"
 msgstr "Pilih fonta yang dipakai pada desktop"
 
-#: ../capplets/font/font-properties.glade.h:2
+#: ../capplets/font/font-properties.glade.h:1
 msgid "<b>Font Rendering</b>"
 msgstr "<b>Penggambaran Fonta</b>"
 
-#: ../capplets/font/font-properties.glade.h:3
+#: ../capplets/font/font-properties.glade.h:2
 msgid "<b>Hinting</b>:"
 msgstr "<b>Hinting</b>:"
 
-#: ../capplets/font/font-properties.glade.h:4
+#: ../capplets/font/font-properties.glade.h:3
 msgid "<b>Smoothing</b>:"
 msgstr "<b>Penghalusan</b>:"
 
-#: ../capplets/font/font-properties.glade.h:5
+#: ../capplets/font/font-properties.glade.h:4
 msgid "<b>Subpixel order</b>:"
 msgstr "<b>Urutan Subpixel</b>:"
 
-#: ../capplets/font/font-properties.glade.h:6
+#: ../capplets/font/font-properties.glade.h:5
 msgid "Best _shapes"
 msgstr "Ben_tuk terbaik"
 
-#: ../capplets/font/font-properties.glade.h:7
+#: ../capplets/font/font-properties.glade.h:6
 msgid "Best co_ntrast"
 msgstr "Ko_ntras terbaik"
 
-#: ../capplets/font/font-properties.glade.h:8
+#: ../capplets/font/font-properties.glade.h:7
 msgid "D_etails..."
 msgstr "D_etil..."
+
+#: ../capplets/font/font-properties.glade.h:8
+msgid "Des_ktop font:"
+msgstr "Font des_ktop:"
 
 #: ../capplets/font/font-properties.glade.h:9
 msgid "Font Preferences"
@@ -1360,43 +1473,43 @@ msgstr "VB_GR"
 
 #: ../capplets/font/font-properties.glade.h:18
 msgid "_Application font:"
-msgstr "Fonta aplikasi:"
+msgstr "Huruf _Aplikasi:"
 
 #: ../capplets/font/font-properties.glade.h:19
 msgid "_BGR"
 msgstr "_BGR"
 
 #: ../capplets/font/font-properties.glade.h:20
-msgid "_Desktop font:"
-msgstr "Fonta _desktop:"
+msgid "_Document font:"
+msgstr "Huruf _desktop:"
 
 #: ../capplets/font/font-properties.glade.h:21
+msgid "_Fixed width font:"
+msgstr "Huruf lebar tetap:"
+
+#: ../capplets/font/font-properties.glade.h:22
 msgid "_Full"
 msgstr "_Penuh"
 
-#: ../capplets/font/font-properties.glade.h:22
+#: ../capplets/font/font-properties.glade.h:23
 msgid "_Medium"
 msgstr "_Sedang"
 
-#: ../capplets/font/font-properties.glade.h:23
+#: ../capplets/font/font-properties.glade.h:24
 msgid "_Monochrome"
 msgstr "_Monokrom"
 
-#: ../capplets/font/font-properties.glade.h:24
+#: ../capplets/font/font-properties.glade.h:25
 msgid "_None"
 msgstr "_Tidak pakai"
 
-#: ../capplets/font/font-properties.glade.h:25
+#: ../capplets/font/font-properties.glade.h:26
 msgid "_RGB"
 msgstr "_RGB"
 
-#: ../capplets/font/font-properties.glade.h:26
+#: ../capplets/font/font-properties.glade.h:27
 msgid "_Slight"
 msgstr "_Sedikit"
-
-#: ../capplets/font/font-properties.glade.h:27
-msgid "_Terminal font:"
-msgstr "Fonta _terminal:"
 
 #: ../capplets/font/font-properties.glade.h:28
 msgid "_VRGB"
@@ -1410,41 +1523,41 @@ msgstr "Fonta pada judul _jendela:"
 msgid "dots per inch"
 msgstr "titik per inci (dpi)"
 
-#: ../capplets/font/main.c:488
+#: ../capplets/font/main.c:489
 msgid "Font may be too large"
 msgstr "Fonta mungkin terlalu besar"
 
-#: ../capplets/font/main.c:492
-#, fuzzy, c-format
+#: ../capplets/font/main.c:493
+#, c-format
 msgid ""
 "The font selected is %d point large, and may make it difficult to "
 "effectively use the computer.  It is recommended that you select a size "
 "smaller than %d."
-msgid_plural ""
 "The font selected is %d points large, and may make it difficult to "
 "effectively use the computer. It is recommended that you select a size "
 "smaller than %d."
-msgstr[0] ""
-"Fonta yang dipilih besarnya %d poin dan akan sulit digunakan pada komputer "
-"secara efektif. Silakan pilih ukuran yang lebih kecil dari %d poin.Fonta "
-"yang dipilih besarnya %d poin dan akan sulit digunakan pada komputer secara "
-"efektif. Silakan pilih ukuran yang lebih kecil dari %d poin."
+msgstr ""
+"Huruf yang dipilih besarnya %d poin, dan kemungkinan sulit untuk "
+"dipergunakan secara efektif oleh komputer.  Disarankan agar anda memilih "
+"ukuran yang lebih kecil dari %d."
+"Huruf yang dipilih besarnya %d poin, dan "
+"kemungkinan sulit untuk dipergunakan secara efektif oleh komputer.  "
+"Disarankan agar anda memilih ukuran yang lebih kecil dari %d."
 
-#: ../capplets/font/main.c:505
-#, fuzzy, c-format
+#: ../capplets/font/main.c:506
+#, c-format
 msgid ""
 "The font selected is %d point large, and may make it difficult to "
 "effectively use the computer.  It is recommended that you select a smaller "
 "sized font."
-msgid_plural ""
 "The font selected is %d points large, and may make it difficult to "
 "effectively use the computer. It is recommended that you select a smaller "
 "sized font."
-msgstr[0] ""
-"Fonta yang dipilih besarnya %d poin dan akan sulit digunakan pada komputer "
-"secara efektif. Silakan pilih ukuran yang lebih kecil lagi.Fonta yang "
-"dipilih besarnya %d poin dan akan sulit digunakan pada komputer secara "
-"efektif. Silakan pilih ukuran yang lebih kecil lagi."
+msgstr ""
+"Huruf yang dipilih adalah besarnya %d point, dan akan sulit untuk dipergunakan secara "
+"efektif di komputer. Disarankan agar anda memilih huruf yang lebih kecil."
+"Huruf yang dipilih adalah besarnya %d point, dan akan sulit untuk dipergunakan secara "
+"efektif di komputer. Disarankan agar anda memilih huruf yang lebih kecil."
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:21
 msgid "New accelerator..."
@@ -1474,29 +1587,41 @@ msgid "The type of accelerator."
 msgstr "Jenis akselerator."
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
-#: ../capplets/keybindings/gnome-keybinding-properties.c:197
-#: ../libbackground/applier.c:624 ../typing-break/drwright.c:477
+#: ../capplets/keybindings/gnome-keybinding-properties.c:187
+#: ../libbackground/applier.c:624 ../typing-break/drwright.c:471
 msgid "Disabled"
 msgstr "Tidak aktif"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:545
+#: ../capplets/keybindings/gnome-keybinding-properties.c:534
 msgid "<Unknown Action>"
 msgstr "<Tindakan Tidak Diketahui>"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:566
+#: ../capplets/keybindings/gnome-keybinding-properties.c:555
 msgid "Desktop"
 msgstr "Desktop"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:567
+#: ../capplets/keybindings/gnome-keybinding-properties.c:556
 #: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
 msgid "Sound"
 msgstr "Suara"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:571
+#: ../capplets/keybindings/gnome-keybinding-properties.c:560
 msgid "Window Management"
 msgstr "Pengaturan Jendela"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:668
+#: ../capplets/keybindings/gnome-keybinding-properties.c:666
+#, c-format
+msgid ""
+"The shortcut \"%s\" cannot be used because it will become unusable to type "
+"using this key.\n"
+"Please try with a key such as Control, Alt or Shift at the same time.\n"
+msgstr ""
+"Shortcut \"%s\" tidak dapat dipergunakan karena akan menjadi tidak berguna "
+"untuk mengetik menggunakan kunci ini.\n"
+"Silahkan coba dengan sebuah kunci seperti Control, Alt atau Shift secara "
+"bersamaan.\n"
+
+#: ../capplets/keybindings/gnome-keybinding-properties.c:695
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1505,23 +1630,23 @@ msgstr ""
 "Tombol singkat \"%s\" sudah digunakan untuk:\n"
 "\"%s\"\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:700
+#: ../capplets/keybindings/gnome-keybinding-properties.c:727
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr ""
 "Akselerator baru tidak dapat diaktifkan pada basis data konfigurasi: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:750
+#: ../capplets/keybindings/gnome-keybinding-properties.c:777
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr ""
 "Akselerator baru tidak dapat dimatikan pada basis data konfigurasi: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:857
+#: ../capplets/keybindings/gnome-keybinding-properties.c:884
 msgid "Action"
 msgstr "Tindakan"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:881
+#: ../capplets/keybindings/gnome-keybinding-properties.c:908
 msgid "Shortcut"
 msgstr "Tombol Singkat"
 
@@ -1543,11 +1668,11 @@ msgstr ""
 msgid "Assign shortcut keys to commands"
 msgstr "Pasang tombol singkat untuk perintah tertentu"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkb.c:84
+#: ../capplets/keyboard/gnome-keyboard-properties-xkb.c:87
 msgid "Unknown"
 msgstr "Tidak diketahui"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:273
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:282
 msgid "Layout"
 msgstr "Tata letak"
 
@@ -1555,19 +1680,19 @@ msgstr "Tata letak"
 #. the below options are to be included in the selected list.
 #. This is a HIG-compliant alternative to allowing no
 #. selection in the group.
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:277
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:228
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:286
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:231
 msgid "Default"
 msgstr "Standar"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:75
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:77
 msgid "Models"
 msgstr "Model"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:106
+#: ../capplets/keyboard/gnome-keyboard-properties.c:109
 #, c-format
-msgid "There was an error launching the keyboard capplet : %s"
-msgstr "Ada error saat membuka kaplet papan ketik: %s"
+msgid "There was an error launching the keyboard tool: %s"
+msgstr "Ada error saat membuka alat papan ketik: %s"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:202
 msgid "_Accessibility"
@@ -1575,8 +1700,8 @@ msgstr "Kemud_ahan Akses"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:221
 #: ../capplets/keyboard/gnome-keyboard-properties.c:223
-#: ../capplets/sound/sound-properties-capplet.c:240
-#: ../capplets/sound/sound-properties-capplet.c:242
+#: ../capplets/sound/sound-properties-capplet.c:756
+#: ../capplets/sound/sound-properties-capplet.c:758
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
@@ -1588,90 +1713,94 @@ msgid "Start the page with the typing break settings showing"
 msgstr "Langsung tampilkan pengaturan istirahat mengetik"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:3
-msgid "..."
-msgstr "..."
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "<b>Cursor Blinking</b>"
 msgstr "<b>Kedipan Kursor</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "<b>Repeat Keys</b>"
 msgstr "<b>Pengulangan Tombol</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:5
 msgid "<b>_Lock screen to enforce typing break</b>"
 msgstr "<b>Kunci _layar untuk istirahat mengetik</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>Cepat</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>Panjang</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>Pendek</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Pelan</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
 msgid "A_vailable layouts:"
 msgstr "Susunan yang _tersedia:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "All_ow postponing of breaks"
 msgstr "B_olehkan penundaan istirahat"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Check if breaks are allowed to be postponed"
 msgstr "Beri tanda centang bila ingin memperbolehkan penundaan istirahat"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
-msgid "Choose A Keyboard Model"
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
+msgid "Choose a Keyboard Model"
 msgstr "Pilih Model Papan Ketik"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:15
-msgid "Choose A Layout"
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
+msgid "Choose a Layout"
 msgstr "Pilih Susunan"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:15
+msgid "Choose..."
+msgstr "Pilih..."
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:16
 msgid "Cursor _blinks in text boxes and fields"
 msgstr "_Kedipan kursor pada kotak teks dan isian"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:17
+msgid "Cursor blinks speed"
+msgstr "Kecepatan kedip kursor"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:18
 msgid "Duration of the break when typing is disallowed"
 msgstr "Lama istirahat saat papan ketik dimatikan"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:18
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:19
 msgid "Duration of work before forcing a break"
 msgstr "Lama bekerja sebelum istirahat dilakukan"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:19
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:20
 msgid "Key presses _repeat when key is held down"
 msgstr "Tombol akan diulangi saat tombol te_rsebut ditekan dalam beberapa saat"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:22
 msgid "Keyboard Preferences"
 msgstr "Pengaturan Papan Ketik"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "Keyboard _model:"
 msgstr "_Model papan ketik:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:23
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:24
 msgid "Layout Options"
 msgstr "Pilihan Susunan"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:24
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "Layouts"
 msgstr "Susunan"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:25
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:26
 msgid ""
 "Lock screen after a certain duration to help prevent repetitive keyboard use "
 "injuries"
@@ -1679,59 +1808,63 @@ msgstr ""
 "Kunci layar setelah durasi tertentu untuk mencegah cedera lengan akibat "
 "terlalu banyak mengetik"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:26
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:27
 msgid "Microsoft Natural Keyboard"
 msgstr "Papan Ketik Natural Microsoft"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:27
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:28
 msgid "Preview:"
 msgstr "Contohnya:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:28
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:29
+msgid "Repeat keys speed"
+msgstr "Kecepatan pengulangan kunci"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:30
 msgid "Reset To De_faults"
 msgstr "_Kembalikan ke Awal"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:30
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:32
 msgid "Separate _group for each window"
 msgstr "Pisahkan _kelompok untuk masing-masing jendela"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:31
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:33
 msgid "Typing Break"
 msgstr "Istirahat Mengetik"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:32
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:34
 msgid "_Accessibility..."
 msgstr "Kemud_ahan Akses..."
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:33
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:35
 msgid "_Add..."
 msgstr "T_ambah..."
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:34
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:36
 msgid "_Break interval lasts:"
 msgstr "Je_da istirahat:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:35
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:37
 msgid "_Delay:"
 msgstr "Je_da:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:36
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:38
 msgid "_Models:"
 msgstr "_Model:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:37
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:39
 msgid "_Selected layouts:"
 msgstr "Susunan _terpilih:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:38
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:40
 msgid "_Speed:"
 msgstr "_Kecepatan:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:40
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:42
 msgid "_Work interval lasts:"
 msgstr "Lama _waktu kerja:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:41
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:43
 msgid "minutes"
 msgstr "menit"
 
@@ -1739,61 +1872,69 @@ msgstr "menit"
 msgid "Set your keyboard preferences"
 msgstr "Atur papan ketik Anda"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:559
-msgid "Unknown Cursor"
-msgstr "Kursor Tidak Diketahui"
+#. set the timeout value  label with correct value of timeout
+#: ../capplets/mouse/gnome-mouse-properties.c:138
+#: ../capplets/mouse/gnome-mouse-properties.c:887
+#, c-format
+msgid "%d milliseconds"
+msgid_plural "%d milliseconds"
+msgstr[0] "%d milidetik"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:761
-msgid "Default Cursor"
-msgstr "Kursor Bawaan"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:762
-msgid "Default Cursor - Current"
-msgstr "Kursor Bawaan - Aktif"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:763
-msgid "The default cursor that ships with X"
-msgstr "Kursor bawaan X"
-
-#: ../capplets/mouse/gnome-mouse-properties.c:767
-msgid "White Cursor"
-msgstr "Kursor Putih"
+#: ../capplets/mouse/gnome-mouse-properties.c:567
+msgid "Unknown Pointer"
+msgstr "Penunjuk Tak Dikenal"
 
 #: ../capplets/mouse/gnome-mouse-properties.c:768
-msgid "White Cursor - Current"
-msgstr "Kursor Putih - Aktif"
+msgid "Default Pointer"
+msgstr "Penunjuk Default"
 
 #: ../capplets/mouse/gnome-mouse-properties.c:769
-msgid "The default cursor inverted"
-msgstr "Kursor bawaan negatif"
+msgid "Default Pointer - Current"
+msgstr "Penunjuk Default - Aktif"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:773
-msgid "Large Cursor"
-msgstr "Kursor Besar"
+#: ../capplets/mouse/gnome-mouse-properties.c:770
+msgid "The default pointer that ships with X"
+msgstr "Penunjuk default dari X"
 
 #: ../capplets/mouse/gnome-mouse-properties.c:774
-msgid "Large Cursor - Current"
-msgstr "Kursor Besar - Aktif"
+msgid "White Pointer"
+msgstr "Penunjuk Putih"
 
 #: ../capplets/mouse/gnome-mouse-properties.c:775
-msgid "Large version of normal cursor"
-msgstr "Versi besar dari kursor biasa"
+msgid "White Pointer - Current"
+msgstr "Penunjuk Putih - Aktif"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:779
-msgid "Large White Cursor - Current"
-msgstr "Kursor Besar Putih - Aktif"
+#: ../capplets/mouse/gnome-mouse-properties.c:776
+msgid "The default pointer inverted"
+msgstr "Kebalikan dari penunjuk default"
 
 #: ../capplets/mouse/gnome-mouse-properties.c:780
-msgid "Large White Cursor"
-msgstr "Kursor Putih Besar"
+msgid "Large Pointer"
+msgstr "Penunjuk Besar"
 
 #: ../capplets/mouse/gnome-mouse-properties.c:781
-msgid "Large version of white cursor"
-msgstr "Kursor putih ukuran besar"
+msgid "Large Pointer - Current"
+msgstr "Penunjuk Besar - Aktif"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:975
-msgid "Cursor Theme"
-msgstr "Tema Kursor"
+#: ../capplets/mouse/gnome-mouse-properties.c:782
+msgid "Large version of normal pointer"
+msgstr "Versi besar dari penunjuk biasa"
+
+#: ../capplets/mouse/gnome-mouse-properties.c:786
+msgid "Large White Pointer - Current"
+msgstr "Penunjuk Putih Besar - Aktif"
+
+#: ../capplets/mouse/gnome-mouse-properties.c:787
+msgid "Large White Pointer"
+msgstr "Penunjuk Putih Besar"
+
+#: ../capplets/mouse/gnome-mouse-properties.c:788
+msgid "Large version of white pointer"
+msgstr "Penunjuk putih versi besar"
+
+#: ../capplets/mouse/gnome-mouse-properties.c:977
+msgid "Pointer Theme"
+msgstr "Penunjuk Tema"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:2
 msgid "<b>Double-Click Timeout </b>"
@@ -1801,7 +1942,7 @@ msgstr "<b>Timeout Klik Ganda</b>"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:3
 msgid "<b>Drag and Drop</b>"
-msgstr "<b>Drag and Drop</b>"
+msgstr "<b>Seret dan Letakkan</b>"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:4
 msgid "<b>Locate Pointer</b>"
@@ -1844,32 +1985,32 @@ msgid "Buttons"
 msgstr "Tombol"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:14
-msgid "Cursor Size:"
-msgstr "Ukuran Kursor:"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:15
-msgid "Cursors"
-msgstr "Kursor"
-
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:16
 msgid "Highlight the _pointer when you press Ctrl"
 msgstr "Tampilkan _kursor dengan tombol Ctrl"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:15
 msgid "Large"
 msgstr "Besar"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:16
 msgid "Medium"
 msgstr "Sedang"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:17
 msgid "Motion"
 msgstr "Gerakan"
 
-#: ../capplets/mouse/gnome-mouse-properties.glade.h:20
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:18
 msgid "Mouse Preferences"
 msgstr "Pengaturan Mouse"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:19
+msgid "Pointer Size:"
+msgstr "Ukuran Penunjuk:"
+
+#: ../capplets/mouse/gnome-mouse-properties.glade.h:20
+msgid "Pointers"
+msgstr "Penunjuk"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:21
 msgid "Small"
@@ -1916,8 +2057,8 @@ msgid "      "
 msgstr "      "
 
 #: ../capplets/network/gnome-network-preferences.glade.h:2
-msgid "<b>D_irect internet connection</b>"
-msgstr "<b>Koneksi _internet langsung</b>"
+msgid "<b>Di_rect internet connection</b>"
+msgstr "<b>Koneksi inte_rnet langsung</b>"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:3
 msgid "<b>Ignore Host List</b>"
@@ -1991,48 +2132,104 @@ msgstr "Proksi HTTP _secure:"
 msgid "Enable sound and associate sounds with events"
 msgstr "Bunyikan suara dan asosiasikan dengan kejadian tertentu"
 
-#: ../capplets/sound/sound-properties-capplet.c:271
-#: ../capplets/sound/sound-properties.glade.h:6
+#: ../capplets/sound/sound-properties-capplet.c:316
+#: ../capplets/sound/sound-properties-capplet.c:368
+msgid "Not connected"
+msgstr "Tidak tersambung"
+
+#: ../capplets/sound/sound-properties-capplet.c:790
 msgid "Sound Preferences"
 msgstr "Pengaturan Suara"
 
-#: ../capplets/sound/sound-properties.glade.h:1
-msgid "E_nable sound server startup"
-msgstr "Aktifka_n server suara"
-
 #: ../capplets/sound/sound-properties.glade.h:2
+msgid "<b>Audio Conferencing</b>"
+msgstr "<b>Pertemuan Suara</b>"
+
+#: ../capplets/sound/sound-properties.glade.h:3
+msgid "<b>Music and Movies</b>"
+msgstr "<b>Musik dan Filem</b>"
+
+#: ../capplets/sound/sound-properties.glade.h:4
+msgid "<b>Sound Events</b>"
+msgstr "<b>Suara Kejadian</b>"
+
+#: ../capplets/sound/sound-properties.glade.h:5
+msgid "<span weight=\"bold\" size=\"x-large\">Testing...</span>"
+msgstr "<span weight=\"bold\" size=\"larger\">Mencoba...</span>"
+
+#: ../capplets/sound/sound-properties.glade.h:6
+msgid "Click OK to finish."
+msgstr "Klik OK untuk selesai"
+
+#: ../capplets/sound/sound-properties.glade.h:7
+msgid "Devices"
+msgstr "Perangkat"
+
+#: ../capplets/sound/sound-properties.glade.h:8
+msgid "E_nable software sound mixing (ESD)"
+msgstr "Aktifkan perangkat lunak pengolah suara (ESD)"
+
+#: ../capplets/sound/sound-properties.glade.h:9
 msgid "Flash _entire screen"
 msgstr "Kedipkan s_eluruh layar"
 
-#: ../capplets/sound/sound-properties.glade.h:3
+#: ../capplets/sound/sound-properties.glade.h:10
 msgid "Flash _window titlebar"
 msgstr "Kedipkan judul _jendela saja"
 
-#: ../capplets/sound/sound-properties.glade.h:4
-msgid "General"
-msgstr "Umum"
+#: ../capplets/sound/sound-properties.glade.h:11
+msgid "Sound & Video Preferences"
+msgstr "Pengaturan Suara & Video"
 
-#: ../capplets/sound/sound-properties.glade.h:5
-msgid "Sound Events"
-msgstr "Daftar Suara"
+#: ../capplets/sound/sound-properties.glade.h:12
+msgid "Sound Capture:"
+msgstr "Penangkap Suara:"
 
-#: ../capplets/sound/sound-properties.glade.h:7
-msgid "System Bell"
+#: ../capplets/sound/sound-properties.glade.h:13
+msgid "Sound Playback:"
+msgstr "Pemutar Suara:"
+
+#: ../capplets/sound/sound-properties.glade.h:14
+msgid "Sounds"
+msgstr "Suara"
+
+#: ../capplets/sound/sound-properties.glade.h:15
+msgid "System Beep"
 msgstr "Bel Sistem"
 
-#: ../capplets/sound/sound-properties.glade.h:8
-msgid "_Sound an audible bell"
-msgstr "Bunyikan _bel"
+#: ../capplets/sound/sound-properties.glade.h:16
+msgid "Test"
+msgstr "Coba"
 
-#: ../capplets/sound/sound-properties.glade.h:9
-msgid "_Sounds for events"
-msgstr "Bunyikan _suara pada kejadian tertentu"
+#: ../capplets/sound/sound-properties.glade.h:17
+msgid "Testing Pipeline"
+msgstr "Mencoba Pemipaan"
 
-#: ../capplets/sound/sound-properties.glade.h:10
-msgid "_Visual feedback:"
-msgstr "Reaksi _visual:"
+#: ../capplets/sound/sound-properties.glade.h:18
+msgid "_Enable system beep"
+msgstr "Aktifkan bel syst_em"
 
-#: ../capplets/theme-switcher/gnome-theme-details.c:347
+#: ../capplets/sound/sound-properties.glade.h:19
+msgid "_Play system sounds"
+msgstr "_Mainkan suara system"
+
+#: ../capplets/sound/sound-properties.glade.h:20
+msgid "_Visual system beep"
+msgstr "Bunyi sistem _Tampilan"
+
+#: ../capplets/theme-switcher/gnome-theme-details.c:368
+msgid "Would you like to remove this theme?"
+msgstr "Anda ingin membuang tema ini?"
+
+#: ../capplets/theme-switcher/gnome-theme-details.c:433
+msgid "Theme deleted succesfully. Please select another theme."
+msgstr "Tema telah dihapus dengan sukses. Silahkan pilih tema yang lain."
+
+#: ../capplets/theme-switcher/gnome-theme-details.c:442
+msgid "Theme can not be deleted"
+msgstr "Tema tidak dapat dihapus"
+
+#: ../capplets/theme-switcher/gnome-theme-details.c:535
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -2042,15 +2239,15 @@ msgstr ""
 "dialog \"Pengaturan Tema\" tidak dipasang dengan benar atau Anda belum "
 "memasang paket \"gnome-themes\" pada komputer ini."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:227
+#: ../capplets/theme-switcher/gnome-theme-installer.c:255
 msgid "This theme is not in a supported format."
 msgstr "Tema dibuat dalam bentuk yang tidak dapat dibaca"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:244
+#: ../capplets/theme-switcher/gnome-theme-installer.c:273
 msgid "Failed to create temporary directory"
 msgstr "Gagal membuat direktori sementara"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:264
+#: ../capplets/theme-switcher/gnome-theme-installer.c:294
 msgid ""
 "Can not install theme. \n"
 "The bzip2 utility is not installed."
@@ -2058,13 +2255,13 @@ msgstr ""
 "Tema tidak dapat diinstal karena\n"
 "program bzip2 tidak terinstal."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:282
-#: ../capplets/theme-switcher/gnome-theme-installer.c:319
-#: ../capplets/theme-switcher/gnome-theme-installer.c:399
+#: ../capplets/theme-switcher/gnome-theme-installer.c:313
+#: ../capplets/theme-switcher/gnome-theme-installer.c:352
+#: ../capplets/theme-switcher/gnome-theme-installer.c:432
 msgid "Installation Failed"
 msgstr "Instalasi Gagal"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:302
+#: ../capplets/theme-switcher/gnome-theme-installer.c:334
 msgid ""
 "Can not install themes. \n"
 "The gzip utility is not installed."
@@ -2072,56 +2269,47 @@ msgstr ""
 "Tema tidak dapat diinstal\n"
 "karena program gzip tidak tersedia."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:340
+#: ../capplets/theme-switcher/gnome-theme-installer.c:378
 #, c-format
-msgid ""
-"Icon Theme %s correctly installed.\n"
-"You can select it in the theme details."
-msgstr ""
-"Tema Ikon %s terinstal sempurna.\n"
-"Anda boleh pilih ikon ini dalam detil tema."
+msgid "GNOME Theme %s correctly installed"
+msgstr "Tema GNOME %s telah terpasang"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:343
-#, c-format
-msgid "Gnome Theme %s correctly installed"
-msgstr "Tema GNOME %s terinstal sempurna"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:346
-#, c-format
-msgid ""
-"Windows Border Theme %s correctly installed.\n"
-"You can select it in the theme details."
-msgstr ""
-"Tema Bingkai Jendela %s terinstal sempurna.\n"
-"Anda boleh mencobanya pada detil tema."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:349
-#, c-format
-msgid ""
-"Controls Theme %s correctly installed.\n"
-"You can select it in the theme details."
-msgstr ""
-"Tema Komponen %s terinstal sempurna.\n"
-"Anda dapat mencobanya dalam detil tema."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:357
+#: ../capplets/theme-switcher/gnome-theme-installer.c:388
 msgid "The theme is an engine. You need to compile the theme."
 msgstr ""
 "Tema ini adalah mesin tema. Anda harus melakukan kompilasi terlebih dahulu."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:374
+#: ../capplets/theme-switcher/gnome-theme-installer.c:406
 msgid "The file format is invalid"
 msgstr "Bentuk berkas tidak benar"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:468
+#. TODO: currently cannot apply "gnome themes"
+#: ../capplets/theme-switcher/gnome-theme-installer.c:452
+#, c-format
+msgid ""
+"The theme \"%s\" has been installed.\n"
+"Would you like to apply it now, or keep your current theme?"
+msgstr ""
+"Tema \"%s\" telah dipasang.\n"
+"Anda ingin menerapkannya sekarang, atau tetap dengan tema saat ini?"
+
+#: ../capplets/theme-switcher/gnome-theme-installer.c:455
+msgid "Keep Current Theme"
+msgstr "Tetap Tema Sekarang"
+
+#: ../capplets/theme-switcher/gnome-theme-installer.c:457
+msgid "Apply New Theme"
+msgstr "Terapkan Tema Baru"
+
+#: ../capplets/theme-switcher/gnome-theme-installer.c:531
 msgid "No theme file location specified to install"
 msgstr "Anda belum menentukan lokasi berkas tema yang hendak diinstal"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:485
+#: ../capplets/theme-switcher/gnome-theme-installer.c:546
 msgid "The theme file location specified to install is invalid"
 msgstr "Lokasi berkas tema yang dipilih tidak benar"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:505
+#: ../capplets/theme-switcher/gnome-theme-installer.c:566
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -2130,11 +2318,11 @@ msgstr ""
 "Hak akses tidak tersedia untuk menginstal tema pada:\n"
 "%s"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:526
+#: ../capplets/theme-switcher/gnome-theme-installer.c:587
 msgid "The file format is invalid."
 msgstr "Berkas tema tidak benar"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:553
+#: ../capplets/theme-switcher/gnome-theme-installer.c:614
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
@@ -2143,7 +2331,7 @@ msgstr ""
 "%s adalah path tempat berkas tema akan dipasang. Path ini tidak boleh "
 "digunakan sebagai lokasi asal"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:607
+#: ../capplets/theme-switcher/gnome-theme-installer.c:679
 msgid ""
 "Cannot install theme.\n"
 "The tar program is not installed on your system."
@@ -2151,15 +2339,15 @@ msgstr ""
 "Tema tidak dapat diinstal\n"
 "karena program tar tidak tersedia."
 
-#: ../capplets/theme-switcher/gnome-theme-manager.c:680
+#: ../capplets/theme-switcher/gnome-theme-manager.c:686
 msgid "Custom theme"
 msgstr "Tema Bebas"
 
-#: ../capplets/theme-switcher/gnome-theme-manager.c:680
+#: ../capplets/theme-switcher/gnome-theme-manager.c:686
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "Anda dapat menyimpan tema ini dengan menekan tombol \"Simpan Tema\""
 
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1476
+#: ../capplets/theme-switcher/gnome-theme-manager.c:1579
 msgid ""
 "The default theme schemas could not be found on your system.  This means "
 "that you probably don't have metacity installed, or that your gconf is "
@@ -2169,11 +2357,11 @@ msgstr ""
 "disebabkan karena Anda belum memasang program metacity atau program gconf "
 "Anda tidak dipasang dengan benar."
 
-#: ../capplets/theme-switcher/gnome-theme-save.c:72
+#: ../capplets/theme-switcher/gnome-theme-save.c:73
 msgid "Theme name must be present"
 msgstr "Nama tema harus ada"
 
-#: ../capplets/theme-switcher/gnome-theme-save.c:104
+#: ../capplets/theme-switcher/gnome-theme-save.c:144
 msgid "The theme already exists. Would you like to replace it?"
 msgstr "Tema sudah ada sebelumnya. Ganti?"
 
@@ -2186,97 +2374,81 @@ msgstr "Pilih tema untuk berbagai komponen desktop"
 msgid "Theme"
 msgstr "Tema"
 
-#: ../capplets/theme-switcher/theme-install.glade.h:2
-msgid "<span size=\"larger\" weight=\"bold\">Install a Theme</span>"
-msgstr "<span size=\"larger\" weight=\"bold\">Instal Tema</span>"
-
-#: ../capplets/theme-switcher/theme-install.glade.h:3
-msgid "Theme Installation"
-msgstr "Instalasi Tema"
-
-#: ../capplets/theme-switcher/theme-install.glade.h:4
-msgid "_Install"
-msgstr "_Instal"
-
-#: ../capplets/theme-switcher/theme-install.glade.h:5
-msgid "_Location:"
-msgstr "_Lokasi:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:2
-msgid "<span size=\"larger\" weight=\"bold\">Save Theme to Disk</span>"
-msgstr "<span size=\"larger\" weight=\"bold\">Simpan Tema ke dalam Disk</span>"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:3
+#: ../capplets/theme-switcher/theme-properties.glade.h:1
 msgid "Apply _Background"
 msgstr "Aktifkan Gam_bar Latar"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:4
+#: ../capplets/theme-switcher/theme-properties.glade.h:2
 msgid "Apply _Font"
 msgstr "Aktifkan _Fonta"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:5
+#: ../capplets/theme-switcher/theme-properties.glade.h:3
 msgid "Controls"
 msgstr "Komponen"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:6
+#: ../capplets/theme-switcher/theme-properties.glade.h:4
 msgid "Icons"
 msgstr "Ikon"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:7
-msgid "New themes can also be installed by dragging them into the window."
-msgstr "Anda juga bisa menyeret tema baru ke dalam jendela ini."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:8
+#: ../capplets/theme-switcher/theme-properties.glade.h:5
 msgid "Save Theme"
 msgstr "Simpan Tema"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:9
+#: ../capplets/theme-switcher/theme-properties.glade.h:6
+msgid "Save _Background Image"
+msgstr "Simpan Gam_bar Latar"
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:7
 msgid "Select theme for the desktop"
 msgstr "Pilih tema untuk desktop"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:10
-msgid "Short _description:"
-msgstr "Keterangan _singkat:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:11
+#: ../capplets/theme-switcher/theme-properties.glade.h:8
 msgid "Theme Details"
 msgstr "Detil Tema"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:12
+#: ../capplets/theme-switcher/theme-properties.glade.h:9
 msgid "Theme Preferences"
 msgstr "Pengaturan Tema"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:13
+#: ../capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Theme _Details"
 msgstr "_Detil Tema"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:14
+#: ../capplets/theme-switcher/theme-properties.glade.h:11
 msgid "This theme does not suggest any particular font or background."
 msgstr "Tema ini tidak mengandung fonta dan gambar latar."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:15
+#: ../capplets/theme-switcher/theme-properties.glade.h:12
 msgid "This theme suggests a background:"
 msgstr "Tema ini mengandung gambar latar yang disarankan:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:16
+#: ../capplets/theme-switcher/theme-properties.glade.h:13
 msgid "This theme suggests a font and a background:"
 msgstr "Tema ini mengandung fonta dan gambar latar yang disarankan:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:17
+#: ../capplets/theme-switcher/theme-properties.glade.h:14
 msgid "This theme suggests a font:"
 msgstr "Tema ini mengandung huruf yang disarankan:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:18
+#: ../capplets/theme-switcher/theme-properties.glade.h:15
 msgid "Window Border"
 msgstr "Bingkai Jendela"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:19
-msgid "_Go To Theme Folder"
-msgstr "_Buka Folder Tema"
+#: ../capplets/theme-switcher/theme-properties.glade.h:16
+msgid "_Description:"
+msgstr "_Keterangan:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:20
+#: ../capplets/theme-switcher/theme-properties.glade.h:17
 msgid "_Install Theme..."
 msgstr "_Instal Tema..."
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:18
+msgid "_Install..."
+msgstr "_Pasang..."
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:19
+msgid "_Name:"
+msgstr "_Nama:"
 
 #: ../capplets/theme-switcher/theme-properties.glade.h:21
 msgid "_Revert"
@@ -2287,10 +2459,6 @@ msgid "_Save Theme..."
 msgstr "_Simpan Tema..."
 
 #: ../capplets/theme-switcher/theme-properties.glade.h:23
-msgid "_Theme name:"
-msgstr "Nama _tema:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:24
 msgid "theme selection tree"
 msgstr "pohon pilihan tema"
 
@@ -2398,7 +2566,7 @@ msgstr "_Keluar"
 msgid "_Save"
 msgstr "_Simpan"
 
-#: ../capplets/windows/gnome-window-properties.c:386
+#: ../capplets/windows/gnome-window-properties.c:385
 #, c-format
 msgid ""
 "<b>Cannot start the preferences application for your window manager</b>\n"
@@ -2409,25 +2577,25 @@ msgstr ""
 "\n"
 "%s"
 
-#: ../capplets/windows/gnome-window-properties.c:644
-msgid "Control"
-msgstr "Komponen"
+#: ../capplets/windows/gnome-window-properties.c:642
+msgid "C_ontrol"
+msgstr "C_ontrol"
 
-#: ../capplets/windows/gnome-window-properties.c:649
-msgid "Alt"
-msgstr "Alt"
+#: ../capplets/windows/gnome-window-properties.c:647
+msgid "_Alt"
+msgstr "_Alt"
 
-#: ../capplets/windows/gnome-window-properties.c:655
-msgid "Hyper"
-msgstr "Hyper"
+#: ../capplets/windows/gnome-window-properties.c:653
+msgid "H_yper"
+msgstr "H_yper"
 
-#: ../capplets/windows/gnome-window-properties.c:662
-msgid "Super (or \"Windows logo\")"
-msgstr "Super (Tombol \"Logo Windows\")"
+#: ../capplets/windows/gnome-window-properties.c:660
+msgid "S_uper (or \"Windows logo\")"
+msgstr "S_uper (Tombol \"Logo Windows\")"
 
-#: ../capplets/windows/gnome-window-properties.c:669
-msgid "Meta"
-msgstr "Meta"
+#: ../capplets/windows/gnome-window-properties.c:667
+msgid "_Meta"
+msgstr "_Meta"
 
 #: ../capplets/windows/gnome-window-properties.glade.h:1
 msgid "<b>Movement Key</b>"
@@ -2442,9 +2610,9 @@ msgid "<b>Window Selection</b>"
 msgstr "<b>Pemilihan Jendela</b>"
 
 #: ../capplets/windows/gnome-window-properties.glade.h:4
-msgid "To _move a window, press-and-hold this key then grab the window:"
+msgid "To move a window, press-and-hold this key then grab the window:"
 msgstr ""
-"Untuk _memindahkan jendela, tekan dan tahan tombol ini, kemudian gerakkan "
+"Untuk memindahkan jendela, tekan dan tahan tombol ini, kemudian gerakkan "
 "jendelanya:"
 
 #: ../capplets/windows/gnome-window-properties.glade.h:5
@@ -2475,11 +2643,11 @@ msgstr "Atur properti jendela"
 msgid "Windows"
 msgstr "Jendela"
 
-#: ../control-center/control-center-categories.c:257
+#: ../control-center/control-center-categories.c:287
 msgid "Others"
 msgstr "Lainnya"
 
-#: ../control-center/control-center.c:42
+#: ../control-center/control-center.c:93
 msgid "Desktop Preferences"
 msgstr "Pengaturan Desktop"
 
@@ -2496,15 +2664,11 @@ msgstr "Program pengatur sistem GNOME"
 msgid "Volume"
 msgstr "Volume"
 
-#: ../gnome-settings-daemon/factory.c:36
-msgid "Could not initialize Bonobo"
-msgstr "Bonobo tidak dapat diinisialisasi"
-
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:397
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:406
 msgid "Slow Keys Alert"
 msgstr "Peringatan Tombol Lambat"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:398
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:407
 msgid ""
 "You just held down the Shift key for 8 seconds.  This is the shortcut for "
 "the Slow Keys feature, which affects the way your keyboard works."
@@ -2513,19 +2677,39 @@ msgstr ""
 "singkat untuk mengaktifkan fasilitas Tombol Lambat. Fasilitas ini akan "
 "merubah cara kerja papan ketik Anda."
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:400
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:409
 msgid "Do you want to activate Slow Keys?"
 msgstr "Aktifkan fasilitas Tombol Lambat?"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:401
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:410
 msgid "Do you want to deactivate Slow Keys?"
 msgstr "Matikan fasilitas Tombol Lambat?"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:410
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
+msgid "_Activate"
+msgstr "_Aktifkan"
+
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
+msgid "_Deactivate"
+msgstr "_Matikan"
+
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:429
+msgid "Do_n't activate"
+msgstr "Janga_n aktifkan"
+
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:429
+msgid "Do_n't deactivate"
+msgstr "Janga_n dimatikan"
+
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:421
 msgid "Sticky Keys Alert"
 msgstr "Peringatan Tombol Berurut"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:422
 msgid ""
 "You just pressed the Shift key 5 times in a row.  This is the shortcut for "
 "the Sticky Keys feature, which affects the way your keyboard works."
@@ -2534,7 +2718,7 @@ msgstr ""
 "tombol singkat untuk mengaktifkan fasilitas Tombol Berurut. Fasilitas ini "
 "akan merubah cara kerja papan ketik Anda."
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:424
 msgid ""
 "You just pressed two keys at once, or pressed the Shift key 5 times in a "
 "row.  This turns off the Sticky Keys feature, which affects the way your "
@@ -2544,15 +2728,24 @@ msgstr ""
 "berturut-turut. Ini adalah tombol singkat untuk mengaktifkan fasilitas "
 "Tombol Lambat. Fasilitas ini akan merubah cara kerja papan ketik Anda."
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:415
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
 msgid "Do you want to activate Sticky Keys?"
 msgstr "Aktifkan fasilitas Tombol Berurut?"
 
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:416
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
 msgid "Do you want to deactivate Sticky Keys?"
 msgstr "Matikan fasilitas Tombol Berurut?"
 
-#: ../gnome-settings-daemon/gnome-settings-font.c:107
+#: ../gnome-settings-daemon/gnome-settings-font.c:74
+#, c-format
+msgid ""
+"Cannot create the directory \"%s\".\n"
+"This is needed to allow changing the mouse pointer theme."
+msgstr ""
+"Direktori \"%s\" tidak dapat dibuat.\n"
+"Hal ini dibutuhkan untuk dapat merubah tema penunjuk mouse."
+
+#: ../gnome-settings-daemon/gnome-settings-font.c:96
 #, c-format
 msgid ""
 "Cannot create the directory \"%s\".\n"
@@ -2561,37 +2754,37 @@ msgstr ""
 "Direktori \"%s\" tidak dapat dibuat.\n"
 "Perubahan kursor membutuhkan adanya direktori ini."
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:209
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:208
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr "Terdapat lebih dari satu tindakan pada Pemasangan Tombol (%s)\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:222
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:221
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr "Terdapat lebih dari satu pemasangan pada Pemasangan Tombol (%s)\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:228
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:227
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr "Pemasangan Tombol (%s) tidak lengkap\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:256
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:255
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr "Pemasangan Tombol (%s) salah\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:292
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:291
 #, c-format
-msgid "It seems that another application already has access to key '%d'."
-msgstr "Sepertinya ada aplikasi lain yang memiliki akses ke tombol '%d'."
+msgid "It seems that another application already has access to key '%u'."
+msgstr "Sepertinya ada aplikasi lain yang telah memiliki akses ke tombol '%u'."
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:361
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:360
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr "Pemasangan Tombol (%s) sudah terpakai\n"
 
-#: ../gnome-settings-daemon/gnome-settings-keybindings.c:436
+#: ../gnome-settings-daemon/gnome-settings-keybindings.c:435
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -2600,7 +2793,7 @@ msgstr ""
 "Error saat menjalankan (%s)\n"
 "kebetulan ini terhubung ke tombol (%s)"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:103
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:105
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2631,7 +2824,7 @@ msgstr ""
 "- Hasil keluaran perintah <b>%s</b>\n"
 "- Hasil keluaran perintah <b>%s</b>"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:117
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:119
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2643,27 +2836,36 @@ msgstr ""
 "Cobalah gunakan konfigurasi yang lebih ringkas atau gunakan versi XFree yang "
 "lebih baru."
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:227
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:249
 msgid "Do _not show this warning again"
 msgstr "_Jangan tampilkan peringatan ini lagi"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:238
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:263
+#, c-format
 msgid ""
-"The X system keyboard settings differ from your current GNOME keyboard "
-"settings.  Which set would you like to use?"
+"<b>The X system keyboard settings differ from your current GNOME keyboard "
+"settings.</b>\n"
+"\n"
+"Expected was %s, but the the following settings were found: %s.\n"
+"\n"
+"Which set would you like to use?"
 msgstr ""
-"Pengaturan papan ketik sistem X berbeda dengan pengaturan papan ketik GNOME "
-"yang sedang aktif. Konfigurasi apa yang ingin Anda gunakan?"
+"<b>Pengaturan papan ketik sistem X berbeda dengan pengaturan papan ketik GNOME "
+"anda</b>\n"
+"\n"
+"Menginginkan %s, tapi yang ditemukan: %s.\n"
+"\n"
+"Konfigurasi apa yang ingin Anda gunakan?"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:251
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:286
 msgid "Use X settings"
 msgstr "Gunakan pengaturan X"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:253
-msgid "Use GNOME settings"
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:288
+msgid "Keep GNOME settings"
 msgstr "Gunakan pengaturan GNOME"
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:129
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:118
 #, c-format
 msgid ""
 "Couldn't execute command: %s\n"
@@ -2672,7 +2874,7 @@ msgstr ""
 "Perintah tidak dapat dijalankan: %s\n"
 "Periksa dulu apakah perintah tersebut tersedia atau tidak."
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:145
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:134
 msgid ""
 "Couldn't put the machine to sleep.\n"
 "Verify that the machine is correctly configured."
@@ -2680,12 +2882,7 @@ msgstr ""
 "Komputer ini tidak dapat ditidurkan.\n"
 "Periksa dulu apakah konfigurasinya sudah benar atau belum."
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:155
-#, c-format
-msgid "Permissions on the file %s are broken\n"
-msgstr "Hak akses berkas %s rusak\n"
-
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:200
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:168
 msgid ""
 "Couldn't load the Glade file.\n"
 "Make sure that this daemon is properly installed."
@@ -2693,7 +2890,7 @@ msgstr ""
 "Berkas Glade tidak dapat dibuka.\n"
 "Periksa dulu apakah daemonnya terpasang dengan benar."
 
-#: ../gnome-settings-daemon/gnome-settings-screensaver.c:113
+#: ../gnome-settings-daemon/gnome-settings-screensaver.c:110
 #, c-format
 msgid ""
 "There was an error starting up the screensaver:\n"
@@ -2708,21 +2905,21 @@ msgstr ""
 "\n"
 "Kegunaan screensaver tidak dapat diaktifkan."
 
-#: ../gnome-settings-daemon/gnome-settings-screensaver.c:123
+#: ../gnome-settings-daemon/gnome-settings-screensaver.c:120
 msgid "_Do not show this message again"
 msgstr "_Jangan tampilkan pesan ini lagi"
 
-#: ../gnome-settings-daemon/gnome-settings-sound.c:129
+#: ../gnome-settings-daemon/gnome-settings-sound.c:127
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Berkas suara %s untuk sampel %s tidak dapat dibuka"
 
-#: ../gnome-settings-daemon/gnome-settings-xrdb.c:214
-#: ../gnome-settings-daemon/gnome-settings-xrdb.c:262
+#: ../gnome-settings-daemon/gnome-settings-xrdb.c:212
+#: ../gnome-settings-daemon/gnome-settings-xrdb.c:260
 msgid "Cannot determine user's home directory"
 msgstr "Direktori rumah pemilik tidak dapat ditentukan"
 
-#: ../gnome-settings-daemon/gnome-settings-xsettings.c:215
+#: ../gnome-settings-daemon/gnome-settings-xsettings.c:212
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr ""
@@ -2792,57 +2989,62 @@ msgstr "Layar"
 msgid "Screen on which BGApplier is to draw"
 msgstr "Layar tempat BGApplier digambar"
 
-#: ../libgswitchit/gswitchit_config.c:1035
-#, c-format
-msgid "There was an error loading an image: %s"
-msgstr "Ada error saat menampilkan gambar: %s"
+#: ../libsounds/sound-view.c:43
+msgid "Login"
+msgstr "Login"
 
-#: ../libsounds/sound-view.c:122 ../libsounds/sound-view.c:147
+#: ../libsounds/sound-view.c:44
+msgid "Logout"
+msgstr "Keluar"
+
+#: ../libsounds/sound-view.c:45
+msgid "Boing"
+msgstr "Boing"
+
+#: ../libsounds/sound-view.c:46
+msgid "Siren"
+msgstr "Sirine"
+
+#: ../libsounds/sound-view.c:47
+msgid "Clink"
+msgstr "Clink"
+
+#: ../libsounds/sound-view.c:48
+msgid "Beep"
+msgstr "Bip"
+
+#: ../libsounds/sound-view.c:49
+msgid "No sound"
+msgstr "Tanpa Suara"
+
+#: ../libsounds/sound-view.c:131
+msgid "Sound not set for this event."
+msgstr "Tidak ada suara untuk kejadian ini."
+
+#: ../libsounds/sound-view.c:140
+msgid ""
+"The sound file for this event does not exist.\n"
+"You may want to install the gnome-audio package for a set of default sounds."
+msgstr ""
+"Berkas suara untuk kejadian ini tidak ada.\n"
+"Anda mungkin perlu memasang gnome-audio-package untuk satu set suara."
+
+#: ../libsounds/sound-view.c:151
 msgid "The sound file for this event does not exist."
 msgstr "Berkas suara yang dipasangkan pada kejadian ini tidak tersedia."
 
-#: ../libsounds/sound-view.c:149
-msgid ""
-"The sound file for this event does not exist.\n"
-"You may want to install the gnome-audio package\n"
-"for a set of default sounds."
-msgstr ""
-"Berkas yang dipasangkan untuk kejadian ini tidak tersedia.\n"
-"Silakan pasang dulu paket gnome-audio untuk memperoleh\n"
-"berkas-berkas suara bawaan."
+#: ../libsounds/sound-view.c:182
+msgid "Select Sound File"
+msgstr "Pilih Berkas Suara"
 
-#: ../libsounds/sound-view.c:224
+#: ../libsounds/sound-view.c:202
 #, c-format
 msgid "The file %s is not a valid wav file"
 msgstr "Berkas %s bukanlah berkas wav yang benar"
 
-#: ../libsounds/sound-view.c:289
-msgid "Event"
-msgstr "Kejadian"
-
-#: ../libsounds/sound-view.c:298
-msgid "Sound File"
-msgstr "Berkas Suara"
-
-#: ../libsounds/sound-view.c:314
-msgid "_Sounds:"
-msgstr "_Suara:"
-
-#: ../libsounds/sound-view.c:328
-msgid "Sound _file:"
-msgstr "_Berkas suara:"
-
-#: ../libsounds/sound-view.c:332
-msgid "Select Sound File"
-msgstr "Pilih Berkas Suara"
-
-#: ../libsounds/sound-view.c:356
-msgid "_Play"
-msgstr "_Putar"
-
-#: ../libsounds/sound-view.c:366
-msgid "_Remove"
-msgstr "_Hapus"
+#: ../libsounds/sound-view.c:359
+msgid "System Sounds"
+msgstr "Suara System"
 
 #: ../libwindow-settings/gnome-wm-manager.c:320
 #, c-format
@@ -2869,162 +3071,146 @@ msgid "Sync text/plain and text/* handlers"
 msgstr "Sinkronisasikan pengelola text/plain dan text/*"
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:1
-msgid "Brightness down"
-msgstr "Turunkan kecerahan"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:2
-msgid "Brightness down's shortcut."
-msgstr "Tombol untuk menurunkan kecerahan layar"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:3
-msgid "Brightness up"
-msgstr "Naikkan kecerahan"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:4
-msgid "Brightness up's shortcut."
-msgstr "Tombol untuk menaikkan kecerahan layar"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:5
 msgid "E-mail"
 msgstr "E-mail"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:6
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:2
 msgid "E-mail's shortcut."
 msgstr "Tombol singkat untuk email"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:7
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:3
 msgid "Eject"
 msgstr "Keluarkan Media"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:8
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:4
 msgid "Eject's shortcut."
 msgstr "Tombol untuk mengeluarkan media"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:9
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:5
 msgid "Home folder"
 msgstr "Folder rumah"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:10
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:6
 msgid "Home folder's shortcut."
 msgstr "Tombol untuk membuka folder rumah"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:7
 msgid "Launch help browser"
 msgstr "Tampilkan layar bantuan"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:12
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:8
 msgid "Launch help browser's shortcut."
 msgstr "Tombol untuk menampilkan layar bantuan"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:13
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:9
 msgid "Launch web browser"
 msgstr "Tampilkan perambah web"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:14
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:10
 msgid "Launch web browser's shortcut."
 msgstr "Tombol untuk menampilkan perambah web."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
 msgid "Lock screen"
 msgstr "Kunci layar"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:12
 msgid "Lock screen's shortcut."
 msgstr "Tombol untuk mengunci layar."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:13
 msgid "Log out"
 msgstr "Keluar"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:14
 msgid "Log out's shortcut."
 msgstr "Tombol untuk keluar dari sistem."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
 msgid "Next track key's shortcut."
 msgstr "Tombol untuk memutar trek berikutnya."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
 msgid "Pause"
 msgstr "Istirahat"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
 msgid "Pause key's shortcut."
 msgstr "Tombol untuk menghentikan lagu sementara."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
 msgid "Play (or play/pause)"
 msgstr "Putar (atau putar/istirahat)"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
 msgid "Play (or play/pause) key's shortcut."
 msgstr "Tombol untuk memutar lagu atau istirahatkan lagu."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
 msgid "Previous track key's shortcut."
 msgstr "Tombol untuk memutar trek sebelumnya."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
 msgid "Search"
 msgstr "Cari"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
 msgid "Search's shortcut."
 msgstr "Tombol untuk mencari."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
 msgid "Skip to next track"
 msgstr "Lewatkan ke trek berikut"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
 msgid "Skip to previous track"
 msgstr "Lewatkan ke trek sebelumnya"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
 msgid "Sleep"
 msgstr "Tidur"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
 msgid "Sleep's shortcut."
 msgstr "Tombol untuk menidurkan komputer."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
 msgid "Stop playback key"
 msgstr "Tombol stop"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
 msgid "Stop playback key's shortcut."
 msgstr "Tombol untuk menghentikan pemutaran lagu."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
 msgid "Volume down"
 msgstr "Kecilkan suara"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
 msgid "Volume down's shortcut."
 msgstr "Tombol untuk mengecilkan volume suara."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
 msgid "Volume mute"
 msgstr "Volume bisu"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
 msgid "Volume mute's shortcut"
 msgstr "Tombol untuk membisukan suara komputer."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:37
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
 msgid "Volume step"
 msgstr "Tingkatan volume"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:38
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
 msgid "Volume step as percentage of volume."
 msgstr "Tingkatan volume suara dalam persentase."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:39
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
 msgid "Volume up"
 msgstr "Besarkan suara"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
 msgid "Volume up's shortcut."
 msgstr "Tombol untuk memperbesar volume suara."
 
@@ -3107,6 +3293,22 @@ msgid "Suppress the \"X sysconfig changed\" warning message"
 msgstr "Hilangkan pesan perintan \"X sysconfig changed\""
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:14
+msgid "The Keyboard Preview, X offset"
+msgstr "Preview Keyboard, offset X"
+
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:15
+msgid "The Keyboard Preview, Y offset"
+msgstr "Preview·Keyboard,·offset·Y"
+
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:16
+msgid "The Keyboard Preview, height"
+msgstr "Preview Keyboard, tinggi"
+
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:17
+msgid "The Keyboard Preview, width"
+msgstr "Preview Keyboard, lebar"
+
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:18
 msgid ""
 "Very soon, keyboard settings in gconf will be overridden (from the system "
 "configuration) This key has been deprecated since GNOME 2.12, please unset "
@@ -3117,50 +3319,50 @@ msgstr ""
 "hapus model, susunan dan kunci pilihan untuk mendapatkan konfigurasi sistem "
 "yang standar."
 
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:15
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:19
 msgid "keyboard layout"
 msgstr "susunan papan ketik"
 
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:16
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:20
 msgid "keyboard model"
 msgstr "model papan ketik"
 
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:17
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:21
 msgid "modmap file list"
 msgstr "daftar berkas modmap"
 
-#: ../typing-break/drw-break-window.c:212
+#: ../typing-break/drw-break-window.c:213
 msgid "_Postpone break"
 msgstr "Nanti _saja"
 
-#: ../typing-break/drw-break-window.c:259
+#: ../typing-break/drw-break-window.c:260
 msgid "Take a break!"
 msgstr "Istirahat Dulu!"
 
 #. { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
-#: ../typing-break/drwright.c:141
+#: ../typing-break/drwright.c:135
 msgid "/_Preferences"
 msgstr "/_Pengaturan"
 
-#: ../typing-break/drwright.c:142
+#: ../typing-break/drwright.c:136
 msgid "/_About"
 msgstr "/Keterangan Progr_am"
 
-#: ../typing-break/drwright.c:144
+#: ../typing-break/drwright.c:138
 msgid "/_Take a Break"
 msgstr "/Is_tirahat"
 
-#: ../typing-break/drwright.c:495
+#: ../typing-break/drwright.c:489
 #, c-format
 msgid "%d minute until the next break"
 msgid_plural "%d minutes until the next break"
 msgstr[0] "%d menit lagi kita akan istirahat"
 
-#: ../typing-break/drwright.c:499
+#: ../typing-break/drwright.c:493
 msgid "Less than one minute until the next break"
 msgstr "Kurang dari satu menit lagi kita akan istirahat"
 
-#: ../typing-break/drwright.c:587
+#: ../typing-break/drwright.c:581
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
@@ -3169,31 +3371,35 @@ msgstr ""
 "Dialog pengaturan istirahat pengetikan tidak dapat ditampilkan. Pesan error: "
 "%s"
 
-#: ../typing-break/drwright.c:635
+#: ../typing-break/drwright.c:629
 msgid "About GNOME Typing Monitor"
 msgstr "Informasi Mengenai Pemantau Pengetikan GNOME"
 
-#: ../typing-break/drwright.c:659
+#: ../typing-break/drwright.c:653
 msgid "A computer break reminder."
 msgstr "Program pengingat istirahat."
 
-#: ../typing-break/drwright.c:660
+#: ../typing-break/drwright.c:654
 msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
 msgstr "Karya Richard Hult &lt;richard@imendio.com&gt;"
 
-#: ../typing-break/drwright.c:661
+#: ../typing-break/drwright.c:655
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Pernak-pernik dibuat oleh Anders Carlsson"
 
-#: ../typing-break/drwright.c:837
+#: ../typing-break/drwright.c:831
 msgid "Break reminder"
 msgstr "Pengingat waktu istirahat"
 
-#: ../typing-break/main.c:93
-msgid "The typing monitor is already running."
-msgstr "Pemantau ketik sudah dijalankan."
+#: ../typing-break/eggtrayicon.c:127
+msgid "Orientation"
+msgstr "<b>Orientasi</b>"
 
-#: ../typing-break/main.c:106
+#: ../typing-break/eggtrayicon.c:128
+msgid "The orientation of the tray."
+msgstr "Arah dari tray."
+
+#: ../typing-break/main.c:100
 msgid ""
 "The typing monitor uses the notification area to display information. You "
 "don't seem to have a notification area on your panel. You can add it by "
@@ -3353,7 +3559,7 @@ msgstr ""
 msgid "_Apply font"
 msgstr "_Aktifkan fonta"
 
-#: ../vfs-methods/themus/theme-method.c:520
+#: ../vfs-methods/themus/theme-method.c:518
 msgid "Themes"
 msgstr "Tema"
 
@@ -3425,3 +3631,194 @@ msgstr "Menentukan apakah ingin  membuat contoh tampilan tema terpasang."
 #: ../vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Menentukan apakah ingin  membuat contoh tampilan tema."
+
+#~ msgid "Old password is incorrect, please retype it"
+#~ msgstr "Sandi lama salah, silakan ketik ulang"
+
+#~ msgid "Unexpected error has occurred"
+#~ msgstr "Ada kesalahan tak terduga"
+
+#~ msgid "Please type the passwords."
+#~ msgstr "Silakan ketikkan kata sandi."
+
+#~ msgid "Old pa_ssword:"
+#~ msgstr "_Sandi lama:"
+
+#~ msgid "..."
+#~ msgstr "..."
+
+#~ msgid ""
+#~ "Icon Theme %s correctly installed.\n"
+#~ "You can select it in the theme details."
+#~ msgstr ""
+#~ "Tema Ikon %s terinstal sempurna.\n"
+#~ "Anda boleh pilih ikon ini dalam detil tema."
+
+#~ msgid ""
+#~ "Windows Border Theme %s correctly installed.\n"
+#~ "You can select it in the theme details."
+#~ msgstr ""
+#~ "Tema Bingkai Jendela %s terinstal sempurna.\n"
+#~ "Anda boleh mencobanya pada detil tema."
+
+#~ msgid ""
+#~ "Controls Theme %s correctly installed.\n"
+#~ "You can select it in the theme details."
+#~ msgstr ""
+#~ "Tema Komponen %s terinstal sempurna.\n"
+#~ "Anda dapat mencobanya dalam detil tema."
+
+#~ msgid "<span size=\"larger\" weight=\"bold\">Install a Theme</span>"
+#~ msgstr "<span size=\"larger\" weight=\"bold\">Instal Tema</span>"
+
+#~ msgid "Theme Installation"
+#~ msgstr "Instalasi Tema"
+
+#~ msgid "New themes can also be installed by dragging them into the window."
+#~ msgstr "Anda juga bisa menyeret tema baru ke dalam jendela ini."
+
+#~ msgid "Short _description:"
+#~ msgstr "Keterangan _singkat:"
+
+#~ msgid "_Theme name:"
+#~ msgstr "Nama _tema:"
+
+#~ msgid "No '/dev/pmu' device found"
+#~ msgstr "Tidak menemukan perangkat '/dev/pmu'"
+
+#~ msgid "Not a powerbook"
+#~ msgstr "Bukan powerbook"
+
+#~ msgid "Wrong permission for '/dev/pmu' device"
+#~ msgstr "Permisi salah untuk perangkat '/dev/pmu'"
+
+#~ msgid "Could not initialize Bonobo"
+#~ msgstr "Bonobo tidak dapat diinisialisasi"
+
+#~ msgid "There was an error loading an image: %s"
+#~ msgstr "Ada error saat menampilkan gambar: %s"
+
+#~ msgid "Brightness down"
+#~ msgstr "Turunkan kecerahan"
+
+#~ msgid "Brightness down's shortcut."
+#~ msgstr "Tombol untuk menurunkan kecerahan layar"
+
+#~ msgid "Brightness up"
+#~ msgstr "Naikkan kecerahan"
+
+#~ msgid "Brightness up's shortcut."
+#~ msgstr "Tombol untuk menaikkan kecerahan layar"
+
+#~ msgid "Could not display help"
+#~ msgstr "Tidak dapat menampilkan bantuan"
+
+#~ msgid "Epiphany"
+#~ msgstr "Epiphany"
+
+#~ msgid "Please specify a name and a command for this editor."
+#~ msgstr "Silakan masukkan nama dan perintah penyunting ini."
+
+#~ msgid "Add..."
+#~ msgstr "Tambah..."
+
+#~ msgid "C_ustom:"
+#~ msgstr "L_ainnya:"
+
+#~ msgid "Can open _URIs"
+#~ msgstr "_URI tidak dapat dibuka"
+
+#~ msgid "Can open multiple _files"
+#~ msgstr "Aplikasi ini dapat _membuka banyak berkas"
+
+#~ msgid "Custom Editor Properties"
+#~ msgstr "Properti Penyunting Lainnya"
+
+#~ msgid "Default Mail Reader"
+#~ msgstr "Pembaca Email Utama"
+
+#~ msgid "Default Terminal"
+#~ msgstr "Terminal Utama"
+
+#~ msgid "Default Text Editor"
+#~ msgstr "Penyunting Teks Utama"
+
+#~ msgid "Default Web Browser"
+#~ msgstr "Perambah Web Utama"
+
+#~ msgid "Default Window Manager"
+#~ msgstr "Pengatur Jendela Utama"
+
+#~ msgid "Edit..."
+#~ msgstr "Ubah..."
+
+#~ msgid "Run in a _terminal"
+#~ msgstr "Jalankan dalam _terminal"
+
+#~ msgid ""
+#~ "Select the window manager you want.  You will need to hit apply, wave the "
+#~ "magic wand, and do a magic dance for it to work."
+#~ msgstr ""
+#~ "Pilih pengatur jendela yang Anda ingin gunakan. Silakan klik tombol "
+#~ "Terapkan untuk mengaktifkannya."
+
+#~ msgid "Terminal"
+#~ msgstr "Terminal"
+
+#~ msgid "Understands _Netscape Remote Control"
+#~ msgstr "Paham protokol _Netscape Remote Control"
+
+#~ msgid "Use this _editor to open text files in the file manager"
+#~ msgstr ""
+#~ "Gunakan program ini untuk m_enyunting berkas teks dalam pengatur berkas"
+
+#~ msgid "Window Manager"
+#~ msgstr "Pengatur Jendela"
+
+#~ msgid "_Command:"
+#~ msgstr "Peri_ntah:"
+
+#~ msgid "_Properties..."
+#~ msgstr "_Properti..."
+
+#~ msgid "_Select:"
+#~ msgstr "_Pilih:"
+
+#~ msgid "_Terminal font:"
+#~ msgstr "Fonta _terminal:"
+
+#~ msgid "Large Cursor"
+#~ msgstr "Kursor Besar"
+
+#~ msgid "Cursors"
+#~ msgstr "Kursor"
+
+#~ msgid "E_nable sound server startup"
+#~ msgstr "Aktifka_n server suara"
+
+#~ msgid "_Sound an audible bell"
+#~ msgstr "Bunyikan _bel"
+
+#~ msgid "_Visual feedback:"
+#~ msgstr "Reaksi _visual:"
+
+#~ msgid "_Go To Theme Folder"
+#~ msgstr "_Buka Folder Tema"
+
+#~ msgid "Permissions on the file %s are broken\n"
+#~ msgstr "Hak akses berkas %s rusak\n"
+
+#~ msgid "Event"
+#~ msgstr "Kejadian"
+
+#~ msgid "Sound File"
+#~ msgstr "Berkas Suara"
+
+#~ msgid "_Sounds:"
+#~ msgstr "_Suara:"
+
+#~ msgid "_Play"
+#~ msgstr "_Putar"
+
+#~ msgid "The typing monitor is already running."
+#~ msgstr "Pemantau ketik sudah dijalankan."
