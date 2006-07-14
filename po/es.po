@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-06-14 15:32+0200\n"
-"PO-Revision-Date: 2006-06-14 15:33+0200\n"
+"POT-Creation-Date: 2006-07-14 12:34+0200\n"
+"PO-Revision-Date: 2006-07-14 12:35+0200\n"
 "Last-Translator: Francisco Javier F. Serrador <serrador@cvs.gnome.org>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -852,7 +852,7 @@ msgid_plural "pixels"
 msgstr[0] "píxel"
 msgstr[1] "píxeles"
 
-#: ../capplets/common/activate-settings-daemon.c:18
+#: ../capplets/common/activate-settings-daemon.c:16
 msgid ""
 "Unable to start the settings manager 'gnome-settings-daemon'.\n"
 "Without the GNOME settings manager running, some preferences may not take "
@@ -1320,42 +1320,62 @@ msgstr "Cambiar la resolución de la pantalla"
 msgid "Screen Resolution"
 msgstr "Resolución de la pantalla"
 
-#: ../capplets/display/main.c:345
+#: ../capplets/display/main.c:25
+msgid "normal"
+msgstr "normal"
+
+#: ../capplets/display/main.c:26
+msgid "left"
+msgstr "izquierdo"
+
+#: ../capplets/display/main.c:27
+msgid "inverted"
+msgstr "invertido"
+
+#: ../capplets/display/main.c:28
+msgid "right"
+msgstr "derecho"
+
+#: ../capplets/display/main.c:389
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../capplets/display/main.c:448
+#: ../capplets/display/main.c:535
 msgid "_Resolution:"
 msgstr "_Resolución:"
 
-#: ../capplets/display/main.c:467
+#: ../capplets/display/main.c:554
 msgid "Re_fresh rate:"
 msgstr "Tasa de re_fresco:"
 
-#: ../capplets/display/main.c:488
+#: ../capplets/display/main.c:574
+msgid "R_otation:"
+msgstr "R_otación:"
+
+#: ../capplets/display/main.c:594
 msgid "Default Settings"
 msgstr "Configuración predeterminada"
 
-#: ../capplets/display/main.c:490
+#: ../capplets/display/main.c:596
 #, c-format
 msgid "Screen %d Settings\n"
 msgstr "Configuración de la pantalla %d\n"
 
-#: ../capplets/display/main.c:516
+#: ../capplets/display/main.c:622
 msgid "Screen Resolution Preferences"
 msgstr "Preferencias de la resolución de la pantalla"
 
-#: ../capplets/display/main.c:553
+#: ../capplets/display/main.c:659
 #, c-format
 msgid "_Make default for this computer (%s) only"
 msgstr "Utilizar como predeterminado sólo para este _equipo (%s)"
 
-#: ../capplets/display/main.c:571
+#: ../capplets/display/main.c:677
 msgid "Options"
 msgstr "Opciones"
 
-#: ../capplets/display/main.c:592
+#: ../capplets/display/main.c:698
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d second the previous "
@@ -1370,23 +1390,23 @@ msgstr[1] ""
 "Probando la configuración nueva. Si no responde en %d segundos se recuperará "
 "la configuración anterior."
 
-#: ../capplets/display/main.c:638
+#: ../capplets/display/main.c:744
 msgid "Keep Resolution"
 msgstr "Conservar resolución"
 
-#: ../capplets/display/main.c:642
+#: ../capplets/display/main.c:748
 msgid "Do you want to keep this resolution?"
 msgstr "¿Desea conservar esta resolución?"
 
-#: ../capplets/display/main.c:667
+#: ../capplets/display/main.c:773
 msgid "Use _previous resolution"
 msgstr "Usar la resolución _anterior"
 
-#: ../capplets/display/main.c:667
+#: ../capplets/display/main.c:773
 msgid "_Keep resolution"
 msgstr "C_onservar esta resolución"
 
-#: ../capplets/display/main.c:818
+#: ../capplets/display/main.c:923
 msgid ""
 "The X Server does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
@@ -1394,7 +1414,7 @@ msgstr ""
 "El servidor X no soporta la extensión XRandR. Los cambios de resolución de "
 "la pantalla durante la sesión no están disponibles."
 
-#: ../capplets/display/main.c:826
+#: ../capplets/display/main.c:931
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
@@ -1681,7 +1701,7 @@ msgstr "Asigna una combinación de teclas a comandos"
 msgid "Unknown"
 msgstr "Desconocido"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:281
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:282
 msgid "Layout"
 msgstr "Distribución"
 
@@ -1689,8 +1709,8 @@ msgstr "Distribución"
 #. the below options are to be included in the selected list.
 #. This is a HIG-compliant alternative to allowing no
 #. selection in the group.
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:285
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:229
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:286
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:231
 msgid "Default"
 msgstr "Predeterminado"
 
@@ -1722,56 +1742,56 @@ msgid "Start the page with the typing break settings showing"
 msgstr "Iniciar la página mostrando la configuración del descanso de escritura"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:3
-msgid "..."
-msgstr "…"
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "<b>Cursor Blinking</b>"
 msgstr "<b>Parpadeo del cursor</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "<b>Repeat Keys</b>"
 msgstr "<b>Repetición de teclas</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:5
 msgid "<b>_Lock screen to enforce typing break</b>"
 msgstr "<b>B_loquear la pantalla para forzar un descanso de escritura</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>Rápida</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>Largo</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>Corto</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Lenta</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
 msgid "A_vailable layouts:"
 msgstr "Distribuciones _disponibles:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "All_ow postponing of breaks"
 msgstr "Permitir p_osponer los descansos"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Check if breaks are allowed to be postponed"
 msgstr "Comprobar si se permite posponer los descansos"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Choose a Keyboard Model"
 msgstr "Elija un modelo de teclado"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Choose a Layout"
 msgstr "Elija una distribución"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:15
+msgid "Choose..."
+msgstr "Elija..."
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:16
 msgid "Cursor _blinks in text boxes and fields"
@@ -2680,10 +2700,6 @@ msgstr "La herramienta de configuración de Gnome"
 msgid "Volume"
 msgstr "Volumen"
 
-#: ../gnome-settings-daemon/factory.c:60
-msgid "Could not initialize Bonobo"
-msgstr "No se ha podido inicializar Bonobo"
-
 #: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:406
 msgid "Slow Keys Alert"
 msgstr "Alerta de teclas lentas"
@@ -2858,12 +2874,11 @@ msgstr ""
 "Intente usar una configuración más simple o usar una versión más reciente de "
 "XFree."
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:244
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:249
 msgid "Do _not show this warning again"
 msgstr "_No mostrar esta advertencia otra vez"
 
-#. !! temporary one
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:253
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:263
 #, c-format
 msgid ""
 "<b>The X system keyboard settings differ from your current GNOME keyboard "
@@ -2880,11 +2895,11 @@ msgstr ""
 "\n"
 "¿Cuál quiere usar?"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:275
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:286
 msgid "Use X settings"
 msgstr "Usar la configuración de X"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:277
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:288
 msgid "Keep GNOME settings"
 msgstr "Conservar la configuración de Gnome"
 
@@ -3015,38 +3030,6 @@ msgstr "Pantalla"
 #: ../libbackground/applier.c:280
 msgid "Screen on which BGApplier is to draw"
 msgstr "Pantalla en la cual BGApplier va a dibujar"
-
-#: ../libgswitchit/gswitchit_config.c:1074
-#, c-format
-msgid "There was an error loading an image: %s"
-msgstr "Ha ocurrido un error al cargar la imagen: %s"
-
-#: ../libgswitchit/gswitchit_config.c:1398
-#, c-format
-msgid "layout \"%s\""
-msgid_plural "layouts \"%s\""
-msgstr[0] "distribución «%s»"
-msgstr[1] "distribuciones «%s»"
-
-#: ../libgswitchit/gswitchit_config.c:1415
-#, c-format
-msgid "option \"%s\""
-msgid_plural "options \"%s\""
-msgstr[0] "opción «%s»"
-msgstr[1] "opciones «%s»"
-
-#: ../libgswitchit/gswitchit_config.c:1423
-#, c-format
-msgid "model \"%s\", %s and %s"
-msgstr "modelo «%s», %s y %s"
-
-#: ../libgswitchit/gswitchit_config.c:1424
-msgid "no layout"
-msgstr "sin distribución"
-
-#: ../libgswitchit/gswitchit_config.c:1425
-msgid "no options"
-msgstr "sin opciones"
 
 #: ../libsounds/sound-view.c:43
 msgid "Login"
@@ -3704,6 +3687,34 @@ msgstr "Indica si se deben miniaturizar los temas instalados"
 #: ../vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Indica si hay que miniaturizar los temas"
+
+#~ msgid "..."
+#~ msgstr "…"
+
+#~ msgid "Could not initialize Bonobo"
+#~ msgstr "No se ha podido inicializar Bonobo"
+
+#~ msgid "There was an error loading an image: %s"
+#~ msgstr "Ha ocurrido un error al cargar la imagen: %s"
+
+#~ msgid "layout \"%s\""
+#~ msgid_plural "layouts \"%s\""
+#~ msgstr[0] "distribución «%s»"
+#~ msgstr[1] "distribuciones «%s»"
+
+#~ msgid "option \"%s\""
+#~ msgid_plural "options \"%s\""
+#~ msgstr[0] "opción «%s»"
+#~ msgstr[1] "opciones «%s»"
+
+#~ msgid "model \"%s\", %s and %s"
+#~ msgstr "modelo «%s», %s y %s"
+
+#~ msgid "no layout"
+#~ msgstr "sin distribución"
+
+#~ msgid "no options"
+#~ msgstr "sin opciones"
 
 #~ msgid ""
 #~ "Icon Theme %s correctly installed.\n"
