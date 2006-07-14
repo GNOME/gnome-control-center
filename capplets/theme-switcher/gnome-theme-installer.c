@@ -237,13 +237,13 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
   	
  	if (tar && gzip && path && len > 7 && ( (!strcmp (path + len - 7, ".tar.gz")) || (!strcmp (path + len - 4, ".tgz")) )) {
   		filename = g_shell_quote (path);
- 		command = g_strdup_printf ("sh -c '%s -d -c < \"%s\" | %s ft -  | head -1'",
+ 		command = g_strdup_printf ("sh -c '%s -d -c < \"%s\" | %s ft -  | head -n 1'",
  					    gzip, filename, tar);
   		theme_props->filetype=TARGZ;
   		g_free (filename);
  	} else if (tar && bzip2 && path && len > 8 && !strcmp (path + len - 8, ".tar.bz2")) {
   		filename = g_shell_quote (path);
- 		command = g_strdup_printf ("sh -c '%s -d -c < \"%s\" | %s ft - | head -1'",
+ 		command = g_strdup_printf ("sh -c '%s -d -c < \"%s\" | %s ft - | head -n 1'",
  					    bzip2, filename, tar);
 		theme_props->filetype=TARBZ;
 		g_free (filename);
@@ -449,8 +449,8 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 			if (theme_type == THEME_GTK || theme_type == THEME_METACITY || theme_type == THEME_ICON)
 			{
 				/* TODO: currently cannot apply "gnome themes" */
-				theme_props->user_message=g_strdup_printf(_("The theme \"%s\" has been installed.\nWould you like to apply it now, or keep your current theme?"),dir[0]);
-				dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_INFO, GTK_BUTTONS_NONE, theme_props->user_message );
+				theme_props->user_message=g_strdup_printf(_("<span weight=\"bold\" size=\"larger\">The theme \"%s\" has been installed.</span>\n\nWould you like to apply it now, or keep your current theme?"),dir[0]);
+				dialog = gtk_message_dialog_new_with_markup (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_INFO, GTK_BUTTONS_NONE, theme_props->user_message );
 
 				gtk_dialog_add_button (GTK_DIALOG (dialog), _("Keep Current Theme"), GTK_RESPONSE_CLOSE);
 
@@ -668,19 +668,6 @@ gnome_theme_installer_run (GtkWindow *parent, gchar *filename)
 		return;
 
 	running_theme_install = TRUE;
-
-	if (!g_file_test ("/bin/tar", G_FILE_TEST_EXISTS)) {
-		GtkWidget *error_dialog;
-
-		error_dialog = gtk_message_dialog_new (NULL,
-						GTK_DIALOG_MODAL,
-						GTK_MESSAGE_ERROR,
-						GTK_BUTTONS_OK,
-						_("Cannot install theme.\nThe tar program is not installed on your system."));
-		gtk_dialog_run (GTK_DIALOG (error_dialog));
-		gtk_widget_destroy (error_dialog);
-		return;
-	}
 
 	dialog = gtk_file_chooser_dialog_new ("Select Theme", parent, GTK_FILE_CHOOSER_ACTION_OPEN, GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT, GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT, NULL);
 

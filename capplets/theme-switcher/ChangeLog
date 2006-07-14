@@ -1,3 +1,12 @@
+2006-07-14  Thomas Wood  <thos@gnome.org>
+
+	* gnome-theme-installer.c:
+	(transfer_done_cb): Made the installation message dialog more HIG
+	compliant, as per comments from bug 167045. Also reinstated the fix
+	for bug 316800.
+	(gnome_theme_installer_run): Remove invalid, and also duplicate, check
+	for the tar utility.
+
 2006-06-13  Thomas Wood  <thos@gnome.org>
 
 	* gnome-theme-installer.c: (transfer_done_cb): Fix Bug 167045 -
