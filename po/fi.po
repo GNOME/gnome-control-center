@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-06-30 15:37+0200\n"
-"PO-Revision-Date: 2006-06-30 15:51+0200\n"
+"POT-Creation-Date: 2006-07-14 07:58+0300\n"
+"PO-Revision-Date: 2006-07-14 07:59+0300\n"
 "Last-Translator: Ilkka Tuohela <hile@iki.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -135,7 +135,7 @@ msgstr "Salasanasi on vaihdettu."
 #. What does this indicate?
 #. * "Authentication information cannot be recovered?" from libpam?
 #: ../capplets/about-me/gnome-about-me-password.c:524
-#,  c-format
+#, c-format
 msgid "System error: %s."
 msgstr "Järjestelmävirhe: %s."
 
@@ -341,8 +341,8 @@ msgid ""
 "After you have authenticated, enter your new password, retype it for "
 "verification and click <b>Change password</b>."
 msgstr ""
-"Voit vaihtaa salasanasi syöttämällä nykyisen salasanasi allaolevaan "
-"kenttään ja napsauttamalla painiketta <b>Tunnistaudu</b>.\n"
+"Voit vaihtaa salasanasi syöttämällä nykyisen salasanasi allaolevaan kenttään "
+"ja napsauttamalla painiketta <b>Tunnistaudu</b>.\n"
 "Kun olet tunnistautunut, voit vaihtaa salasanan antamalla uuden salasanan "
 "kahdesti ja napsauttamalla painiketta <b>Vaihda salasana</b>."
 
@@ -1304,42 +1304,62 @@ msgstr "Muuta näytön tarkkuutta"
 msgid "Screen Resolution"
 msgstr "Näytön tarkkuus"
 
-#: ../capplets/display/main.c:345
+#: ../capplets/display/main.c:25
+msgid "normal"
+msgstr "tavallinen"
+
+#: ../capplets/display/main.c:26
+msgid "left"
+msgstr "vasen"
+
+#: ../capplets/display/main.c:27
+msgid "inverted"
+msgstr "käännetty"
+
+#: ../capplets/display/main.c:28
+msgid "right"
+msgstr "oikea"
+
+#: ../capplets/display/main.c:389
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../capplets/display/main.c:448
+#: ../capplets/display/main.c:535
 msgid "_Resolution:"
 msgstr "_Tarkkuus:"
 
-#: ../capplets/display/main.c:467
+#: ../capplets/display/main.c:554
 msgid "Re_fresh rate:"
 msgstr "_Virkistystaajuus:"
 
-#: ../capplets/display/main.c:488
+#: ../capplets/display/main.c:574
+msgid "R_otation:"
+msgstr "_Kierto:"
+
+#: ../capplets/display/main.c:594
 msgid "Default Settings"
 msgstr "Oletusasetukset"
 
-#: ../capplets/display/main.c:490
+#: ../capplets/display/main.c:596
 #, c-format
 msgid "Screen %d Settings\n"
 msgstr "Näytön %d asetukset\n"
 
-#: ../capplets/display/main.c:516
+#: ../capplets/display/main.c:622
 msgid "Screen Resolution Preferences"
 msgstr "Näytön tarkkuuden asetukset"
 
-#: ../capplets/display/main.c:553
+#: ../capplets/display/main.c:659
 #, c-format
 msgid "_Make default for this computer (%s) only"
 msgstr "Aseta vain tämän _koneen (%s) oletusarvoksi"
 
-#: ../capplets/display/main.c:571
+#: ../capplets/display/main.c:677
 msgid "Options"
 msgstr "Asetukset"
 
-#: ../capplets/display/main.c:592
+#: ../capplets/display/main.c:698
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d second the previous "
@@ -1354,23 +1374,23 @@ msgstr[1] ""
 "Uusien asetusten kokeilu. Jos et vastaa %d sekunnin kuluessa, edelliset "
 "asetukset palautuvat."
 
-#: ../capplets/display/main.c:638
+#: ../capplets/display/main.c:744
 msgid "Keep Resolution"
 msgstr "Säilytä tarkkuus"
 
-#: ../capplets/display/main.c:642
+#: ../capplets/display/main.c:748
 msgid "Do you want to keep this resolution?"
 msgstr "Haluatko käyttää tätä tarkkuutta?"
 
-#: ../capplets/display/main.c:667
+#: ../capplets/display/main.c:773
 msgid "Use _previous resolution"
 msgstr "Käytä _edellistä tarkkuutta"
 
-#: ../capplets/display/main.c:667
+#: ../capplets/display/main.c:773
 msgid "_Keep resolution"
 msgstr "_Pidä tarkkuus"
 
-#: ../capplets/display/main.c:818
+#: ../capplets/display/main.c:923
 msgid ""
 "The X Server does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
@@ -1378,7 +1398,7 @@ msgstr ""
 "X-palvelin ei tue XRandR-laajennosta, joten näytön tarkkuutta ei voi vaihtaa "
 "sen ollessa käynnissä."
 
-#: ../capplets/display/main.c:826
+#: ../capplets/display/main.c:931
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
@@ -1661,7 +1681,7 @@ msgstr "Liitä pikanäppäimiä komentoihin"
 msgid "Unknown"
 msgstr "Tuntematon"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:281
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:282
 msgid "Layout"
 msgstr "Asettelu"
 
@@ -1669,7 +1689,7 @@ msgstr "Asettelu"
 #. the below options are to be included in the selected list.
 #. This is a HIG-compliant alternative to allowing no
 #. selection in the group.
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:285
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:286
 #: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:231
 msgid "Default"
 msgstr "Oletus"
@@ -1702,56 +1722,56 @@ msgid "Start the page with the typing break settings showing"
 msgstr "Käynnisty kirjoitustaukoasetusten säätövälilehti näkyvänä."
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:3
-msgid "..."
-msgstr "..."
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "<b>Cursor Blinking</b>"
 msgstr "<b>Kohdistimen vilkunta</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "<b>Repeat Keys</b>"
 msgstr "<b>Toistonäppäimet</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:5
 msgid "<b>_Lock screen to enforce typing break</b>"
 msgstr "<b>_Lukitse näyttö, jotta tauko on pakko pitää</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>Nopea</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>Pitkä</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>Lyhyt</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Hidas</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
 msgid "A_vailable layouts:"
 msgstr "_Mahdolliset asettelut:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "All_ow postponing of breaks"
 msgstr "S_alli taukojen lykkäys"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Check if breaks are allowed to be postponed"
 msgstr "Tarkista, voiko taukoja lykätä"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Choose a Keyboard Model"
 msgstr "Valitse näppäimistön malli"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Choose a Layout"
 msgstr "Valitse näppäimistön asettelu"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:15
+msgid "Choose..."
+msgstr "Valitse..."
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:16
 msgid "Cursor _blinks in text boxes and fields"
@@ -2145,7 +2165,7 @@ msgstr "<b>Äänitapahtumat</b>"
 
 #: ../capplets/sound/sound-properties.glade.h:5
 msgid "<span weight=\"bold\" size=\"x-large\">Testing...</span>"
-msgstr "" "<span weight=\"bold\" size=\"larger\">Testataan...</span>"
+msgstr "<span weight=\"bold\" size=\"larger\">Testataan...</span>"
 
 #: ../capplets/sound/sound-properties.glade.h:6
 msgid "Click OK to finish."
@@ -2779,7 +2799,7 @@ msgstr ""
 "Näppäimeen (%2$s) kytketyn toiminnon\n"
 "(%1$s) suorittaminen epäonnistui."
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:104
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:105
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2810,7 +2830,7 @@ msgstr ""
 "- Komennon <b>%s</b> tuloste\n"
 "- Komennon <b>%s</b> tuloste"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:118
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:119
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2822,11 +2842,11 @@ msgstr ""
 "Yritä yksinkertaisempien asetusten käyttämistä tai uudemman XFree-version "
 "hankkimista."
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:248
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:249
 msgid "Do _not show this warning again"
 msgstr "_Älä näytä tätä varoitusta uudestaan"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:262
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:263
 #, c-format
 msgid ""
 "<b>The X system keyboard settings differ from your current GNOME keyboard "
@@ -2836,18 +2856,18 @@ msgid ""
 "\n"
 "Which set would you like to use?"
 msgstr ""
-"<B>X-järjestelmän näppäimistöasetukset eroavat nykyisistä Gnomen "
-"asetuksista.</b>\n"
+"<B>X-järjestelmän näppäimistöasetukset eroavat nykyisistä Gnomen asetuksista."
+"</b>\n"
 "\n"
 "Oletettiin asetuksia %s, mutta seuraavat asetukset löytyivät: %s\n"
 "\n"
 "Kumpia asetuksia haluat käyttää?"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:285
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:286
 msgid "Use X settings"
 msgstr "Käytä X:n asetuksia"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:287
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:288
 msgid "Keep GNOME settings"
 msgstr "Käytä Gnomen asetuksia"
 
@@ -2973,38 +2993,6 @@ msgstr "Näyttö"
 #: ../libbackground/applier.c:280
 msgid "Screen on which BGApplier is to draw"
 msgstr "Näyttö, jolle BGApplier piirtää"
-
-#: ../libgswitchit/gswitchit_config.c:1093
-#, c-format
-msgid "There was an error loading an image: %s"
-msgstr "Virhe ladattaessa kuvaa: %s"
-
-#: ../libgswitchit/gswitchit_config.c:1420
-#, c-format
-msgid "layout \"%s\""
-msgid_plural "layouts \"%s\""
-msgstr[0] "asettelu \"%s\""
-msgstr[1] "asettelut \"%s\""
-
-#: ../libgswitchit/gswitchit_config.c:1437
-#, c-format
-msgid "option \"%s\""
-msgid_plural "options \"%s\""
-msgstr[0] "valitsin \"%s\""
-msgstr[1] "valitsimet \"%s\""
-
-#: ../libgswitchit/gswitchit_config.c:1445
-#, c-format
-msgid "model \"%s\", %s and %s"
-msgstr "malli \"%s\", %s ja %s"
-
-#: ../libgswitchit/gswitchit_config.c:1446
-msgid "no layout"
-msgstr "ei asettelua"
-
-#: ../libgswitchit/gswitchit_config.c:1447
-msgid "no options"
-msgstr "ei valitsimia"
 
 #: ../libsounds/sound-view.c:43
 msgid "Login"
@@ -3638,6 +3626,31 @@ msgstr "Luodaanko asennetuille teemoille pienoiskuvat"
 msgid "Whether to thumbnail themes"
 msgstr "Luodaanko teemoille pienoiskuvat"
 
+#~ msgid "..."
+#~ msgstr "..."
+
+#~ msgid "There was an error loading an image: %s"
+#~ msgstr "Virhe ladattaessa kuvaa: %s"
+
+#~ msgid "layout \"%s\""
+#~ msgid_plural "layouts \"%s\""
+#~ msgstr[0] "asettelu \"%s\""
+#~ msgstr[1] "asettelut \"%s\""
+
+#~ msgid "option \"%s\""
+#~ msgid_plural "options \"%s\""
+#~ msgstr[0] "valitsin \"%s\""
+#~ msgstr[1] "valitsimet \"%s\""
+
+#~ msgid "model \"%s\", %s and %s"
+#~ msgstr "malli \"%s\", %s ja %s"
+
+#~ msgid "no layout"
+#~ msgstr "ei asettelua"
+
+#~ msgid "no options"
+#~ msgstr "ei valitsimia"
+
 #~ msgid "Old password is incorrect, please retype it"
 #~ msgstr "Vanha salasana on väärin, kirjoita se uudestaan"
 
@@ -3679,9 +3692,6 @@ msgstr "Luodaanko teemoille pienoiskuvat"
 
 #~ msgid "Theme Installation"
 #~ msgstr "Teeman asennus"
-
-#~ msgid "_Location:"
-#~ msgstr "Si_jainti:"
 
 #~ msgid "New themes can also be installed by dragging them into the window."
 #~ msgstr "Uusia teemoja voi asentaa myös pudottamalla ne tähän ikkunaan."
@@ -3761,9 +3771,6 @@ msgstr "Luodaanko teemoille pienoiskuvat"
 #~ msgid "Default Window Manager"
 #~ msgstr "Oletusarvoinen ikkunointiohjelma"
 
-#~ msgid "Delete"
-#~ msgstr "Poista"
-
 #~ msgid "Edit..."
 #~ msgstr "Muokkaa..."
 
@@ -3801,9 +3808,6 @@ msgstr "Luodaanko teemoille pienoiskuvat"
 
 #~ msgid "E_nable sound server startup"
 #~ msgstr "_Ota äänipalvelin käyttöön käynnistyessä"
-
-#~ msgid "General"
-#~ msgstr "Yleistä"
 
 #~ msgid "_Sound an audible bell"
 #~ msgstr "_Kuuluva äänimerkki"
