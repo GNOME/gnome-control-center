@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-06-15 06:51+0200\n"
-"PO-Revision-Date: 2006-06-15 16:09+0100\n"
+"POT-Creation-Date: 2006-07-16 07:58+0200\n"
+"PO-Revision-Date: 2006-07-16 16:42+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -796,7 +796,7 @@ msgid_plural "pixels"
 msgstr[0] "bildpunkt"
 msgstr[1] "bildpunkter"
 
-#: ../capplets/common/activate-settings-daemon.c:18
+#: ../capplets/common/activate-settings-daemon.c:16
 msgid ""
 "Unable to start the settings manager 'gnome-settings-daemon'.\n"
 "Without the GNOME settings manager running, some preferences may not take effect. This could indicate a problem with Bonobo, or a non-GNOME (e.g. KDE) settings manager may already be active and conflicting with the GNOME settings manager."
@@ -1243,69 +1243,89 @@ msgstr "Ändra skärmupplösning"
 msgid "Screen Resolution"
 msgstr "Skärmupplösning"
 
-#: ../capplets/display/main.c:345
+#: ../capplets/display/main.c:25
+msgid "normal"
+msgstr "normal"
+
+#: ../capplets/display/main.c:26
+msgid "left"
+msgstr "vänster"
+
+#: ../capplets/display/main.c:27
+msgid "inverted"
+msgstr "inverterad"
+
+#: ../capplets/display/main.c:28
+msgid "right"
+msgstr "höger"
+
+#: ../capplets/display/main.c:389
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../capplets/display/main.c:448
+#: ../capplets/display/main.c:535
 msgid "_Resolution:"
 msgstr "_Upplösning:"
 
-#: ../capplets/display/main.c:467
+#: ../capplets/display/main.c:554
 msgid "Re_fresh rate:"
 msgstr "Upp_dateringsfrekvens:"
 
-#: ../capplets/display/main.c:488
+#: ../capplets/display/main.c:574
+msgid "R_otation:"
+msgstr "R_otering:"
+
+#: ../capplets/display/main.c:594
 msgid "Default Settings"
 msgstr "Standardinställningar"
 
-#: ../capplets/display/main.c:490
+#: ../capplets/display/main.c:596
 #, c-format
 msgid "Screen %d Settings\n"
 msgstr "Inställningar för skärm %d\n"
 
-#: ../capplets/display/main.c:516
+#: ../capplets/display/main.c:622
 msgid "Screen Resolution Preferences"
 msgstr "Inställningar för skärmupplösning"
 
-#: ../capplets/display/main.c:553
+#: ../capplets/display/main.c:659
 #, c-format
 msgid "_Make default for this computer (%s) only"
 msgstr "_Gör till standard endast för denna dator (%s)"
 
-#: ../capplets/display/main.c:571
+#: ../capplets/display/main.c:677
 msgid "Options"
 msgstr "Alternativ"
 
-#: ../capplets/display/main.c:592
+#: ../capplets/display/main.c:698
 #, c-format
 msgid "Testing the new settings. If you don't respond in %d second the previous settings will be restored."
 msgid_plural "Testing the new settings. If you don't respond in %d seconds the previous settings will be restored."
 msgstr[0] "Testar de nya inställningarna. Om du inte svarar inom %d sekund kommer de föregående inställningarna att återställas."
 msgstr[1] "Testar de nya inställningarna. Om du inte svarar inom %d sekunder kommer de föregående inställningarna att återställas."
 
-#: ../capplets/display/main.c:638
+#: ../capplets/display/main.c:744
 msgid "Keep Resolution"
 msgstr "Behåll upplösning"
 
-#: ../capplets/display/main.c:642
+#: ../capplets/display/main.c:748
 msgid "Do you want to keep this resolution?"
 msgstr "Vill du behålla denna upplösning?"
 
-#: ../capplets/display/main.c:667
+#: ../capplets/display/main.c:773
 msgid "Use _previous resolution"
 msgstr "Använd _föregående upplösning"
 
-#: ../capplets/display/main.c:667
+#: ../capplets/display/main.c:773
 msgid "_Keep resolution"
 msgstr "_Behåll upplösning"
 
-#: ../capplets/display/main.c:818
+#: ../capplets/display/main.c:923
 msgid "The X Server does not support the XRandR extension.  Runtime resolution changes to the display size are not available."
 msgstr "X-servern stöder inte XRandR-tillägget. Ändringar av displaystorleken under körning är inte möjligt."
 
-#: ../capplets/display/main.c:826
+#: ../capplets/display/main.c:931
 msgid "The version of the XRandR extension is incompatible with this program. Runtime changes to the display size are not available."
 msgstr "Versionen av XRandR-tillägget är inkompatibelt med detta program. Ändringar av displaystorleken under körning är inte möjligt."
 
@@ -1560,7 +1580,7 @@ msgstr "Associera snabbtangenter med kommandon"
 msgid "Unknown"
 msgstr "Okänd"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:281
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:282
 msgid "Layout"
 msgstr "Layout"
 
@@ -1568,8 +1588,8 @@ msgstr "Layout"
 #. the below options are to be included in the selected list.
 #. This is a HIG-compliant alternative to allowing no
 #. selection in the group.
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:285
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:229
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:286
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:231
 msgid "Default"
 msgstr "Standard"
 
@@ -1598,56 +1618,56 @@ msgid "Start the page with the typing break settings showing"
 msgstr "Starta sidan utan att inställningarna för skrivandepaus visas"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:3
-msgid "..."
-msgstr "..."
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "<b>Cursor Blinking</b>"
 msgstr "<b>Markörblinkning</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "<b>Repeat Keys</b>"
 msgstr "<b>Repeteringstangenter</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:5
 msgid "<b>_Lock screen to enforce typing break</b>"
 msgstr "<b>_Lås skärmen för att tvinga fram paus i skrivandet</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>Snabb</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>Lång</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>Kort</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Långsam</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
 msgid "A_vailable layouts:"
 msgstr "_Tillgängliga layouter:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "All_ow postponing of breaks"
 msgstr "Till_åt uppskjutning av pauser"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Check if breaks are allowed to be postponed"
 msgstr "Kryssa i om pauser ska tillåtas att avbrytas"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Choose a Keyboard Model"
 msgstr "Välj en tangentbordsmodell"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Choose a Layout"
 msgstr "Välj en layout"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:15
+msgid "Choose..."
+msgstr "Välj..."
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:16
 msgid "Cursor _blinks in text boxes and fields"
@@ -2163,10 +2183,12 @@ msgstr "Filformatet är ogiltigt"
 #: ../capplets/theme-switcher/gnome-theme-installer.c:452
 #, c-format
 msgid ""
-"The theme \"%s\" has been installed.\n"
+"<span weight=\"bold\" size=\"larger\">The theme \"%s\" has been installed.</span>\n"
+"\n"
 "Would you like to apply it now, or keep your current theme?"
 msgstr ""
-"Temat \"%s\" har installerats.\n"
+"<span weight=\"bold\" size=\"larger\">Temat \"%s\" har installerats.</span>\n"
+"\n"
 "Vill du använda det nu eller behålla ditt aktuella tema?"
 
 #: ../capplets/theme-switcher/gnome-theme-installer.c:455
@@ -2202,14 +2224,6 @@ msgstr "Filformatet är ogiltigt"
 #, c-format
 msgid "%s is the path where the theme files will be installed. This can not be selected as the source location"
 msgstr "%s är sökvägen där temafilerna kommer att installeras. Detta kan inte väljas som källplatsen"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:679
-msgid ""
-"Cannot install theme.\n"
-"The tar program is not installed on your system."
-msgstr ""
-"Kan inte installera tema.\n"
-"Programmet tar är inte installerat på ditt system."
 
 #: ../capplets/theme-switcher/gnome-theme-manager.c:686
 msgid "Custom theme"
@@ -2528,10 +2542,6 @@ msgstr "Konfigurationsverktyget för GNOME"
 msgid "Volume"
 msgstr "Volym"
 
-#: ../gnome-settings-daemon/factory.c:60
-msgid "Could not initialize Bonobo"
-msgstr "Kunde inte initiera Bonobo"
-
 #: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:406
 msgid "Slow Keys Alert"
 msgstr "Varning för långsamma tangenter"
@@ -2689,12 +2699,11 @@ msgstr ""
 "Det finns kända problem med komplexa XKB-konfigurationer.\n"
 "Försök att använda en enklare konfiguration eller använd en färskare version av XFree-programvara."
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:244
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:249
 msgid "Do _not show this warning again"
 msgstr "Visa i_nte denna varning igen"
 
-#. !! temporary one
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:253
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:263
 #, c-format
 msgid ""
 "<b>The X system keyboard settings differ from your current GNOME keyboard settings.</b>\n"
@@ -2709,11 +2718,11 @@ msgstr ""
 "\n"
 "Vilka inställningar vill du använda?"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:275
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:286
 msgid "Use X settings"
 msgstr "Använd X-inställningar"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:277
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:288
 msgid "Keep GNOME settings"
 msgstr "Behåll GNOME-inställningar"
 
@@ -2835,38 +2844,6 @@ msgstr "Skärm"
 #: ../libbackground/applier.c:280
 msgid "Screen on which BGApplier is to draw"
 msgstr "Skärm som BGApplier ska rita på"
-
-#: ../libgswitchit/gswitchit_config.c:1074
-#, c-format
-msgid "There was an error loading an image: %s"
-msgstr "Ett fel inträffade vid inläsning av en bild: %s"
-
-#: ../libgswitchit/gswitchit_config.c:1398
-#, c-format
-msgid "layout \"%s\""
-msgid_plural "layouts \"%s\""
-msgstr[0] "layout \"%s\""
-msgstr[1] "layouter \"%s\""
-
-#: ../libgswitchit/gswitchit_config.c:1415
-#, c-format
-msgid "option \"%s\""
-msgid_plural "options \"%s\""
-msgstr[0] "alternativ \"%s\""
-msgstr[1] "alternativ \"%s\""
-
-#: ../libgswitchit/gswitchit_config.c:1423
-#, c-format
-msgid "model \"%s\", %s and %s"
-msgstr "modell \"%s\", %s och %s"
-
-#: ../libgswitchit/gswitchit_config.c:1424
-msgid "no layout"
-msgstr "ingen layout"
-
-#: ../libgswitchit/gswitchit_config.c:1425
-msgid "no options"
-msgstr "inga alternativ"
 
 #: ../libsounds/sound-view.c:43
 msgid "Login"
@@ -3457,6 +3434,32 @@ msgstr "Huruvida det ska skapas miniatyrbilder för installerade teman"
 msgid "Whether to thumbnail themes"
 msgstr "Huruvida det ska skapas miniatyrbilder för teman"
 
+#~ msgid "..."
+#~ msgstr "..."
+#~ msgid ""
+#~ "Cannot install theme.\n"
+#~ "The tar program is not installed on your system."
+#~ msgstr ""
+#~ "Kan inte installera tema.\n"
+#~ "Programmet tar är inte installerat på ditt system."
+#~ msgid "Could not initialize Bonobo"
+#~ msgstr "Kunde inte initiera Bonobo"
+#~ msgid "There was an error loading an image: %s"
+#~ msgstr "Ett fel inträffade vid inläsning av en bild: %s"
+#~ msgid "layout \"%s\""
+#~ msgid_plural "layouts \"%s\""
+#~ msgstr[0] "layout \"%s\""
+#~ msgstr[1] "layouter \"%s\""
+#~ msgid "option \"%s\""
+#~ msgid_plural "options \"%s\""
+#~ msgstr[0] "alternativ \"%s\""
+#~ msgstr[1] "alternativ \"%s\""
+#~ msgid "model \"%s\", %s and %s"
+#~ msgstr "modell \"%s\", %s och %s"
+#~ msgid "no layout"
+#~ msgstr "ingen layout"
+#~ msgid "no options"
+#~ msgstr "inga alternativ"
 #~ msgid "Old password is incorrect, please retype it"
 #~ msgstr "Gamla lösenordet är felaktigt, skriv in det på nytt"
 #~ msgid "Unexpected error has occurred"
@@ -3489,8 +3492,6 @@ msgstr "Huruvida det ska skapas miniatyrbilder för teman"
 #~ msgstr "<span size=\"larger\" weight=\"bold\">Installera ett tema</span>"
 #~ msgid "Theme Installation"
 #~ msgstr "Installation av tema"
-#~ msgid "_Location:"
-#~ msgstr "_Plats:"
 #~ msgid "New themes can also be installed by dragging them into the window."
 #~ msgstr "Nya teman kan också installeras genom att de dras till fönstret."
 #~ msgid "Short _description:"
@@ -3539,8 +3540,6 @@ msgstr "Huruvida det ska skapas miniatyrbilder för teman"
 #~ msgstr "Standardwebbläsare"
 #~ msgid "Default Window Manager"
 #~ msgstr "Standardfönsterhanterare"
-#~ msgid "Delete"
-#~ msgstr "Ta bort"
 #~ msgid "Edit..."
 #~ msgstr "Redigera...."
 #~ msgid "Run in a _terminal"
@@ -3583,8 +3582,6 @@ msgstr "Huruvida det ska skapas miniatyrbilder för teman"
 #~ msgstr "<b>_Direkt Internetanslutning</b>"
 #~ msgid "E_nable sound server startup"
 #~ msgstr "A_ktivera uppstart av ljudserver"
-#~ msgid "General"
-#~ msgstr "Allmänt"
 #~ msgid "_Sound an audible bell"
 #~ msgstr "_Låt en ljudsignal låta"
 #~ msgid "_Visual feedback:"
