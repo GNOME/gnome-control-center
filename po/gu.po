@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.gu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-06-14 06:52+0200\n"
-"PO-Revision-Date: 2006-06-14 12:26+0530\n"
+"POT-Creation-Date: 2006-07-16 23:31+0200\n"
+"PO-Revision-Date: 2006-07-17 09:37+0530\n"
 "Last-Translator: Ankit Patel <ankit644@yahoo.com>\n"
 "Language-Team: Gujarati <indianoss-gujarati@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -13,6 +13,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9.1\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n\n"
+"\n"
 "\n"
 "\n"
 "\n"
@@ -849,7 +850,7 @@ msgid_plural "pixels"
 msgstr[0] "પિક્સેલ"
 msgstr[1] "પિક્સેલો"
 
-#: ../capplets/common/activate-settings-daemon.c:18
+#: ../capplets/common/activate-settings-daemon.c:16
 msgid ""
 "Unable to start the settings manager 'gnome-settings-daemon'.\n"
 "Without the GNOME settings manager running, some preferences may not take "
@@ -1305,42 +1306,62 @@ msgstr "સ્ક્રીન રીઝોલ્યુશન બદલો"
 msgid "Screen Resolution"
 msgstr "સ્ક્રીન રીઝોલ્યુશન"
 
-#: ../capplets/display/main.c:345
+#: ../capplets/display/main.c:25
+msgid "normal"
+msgstr "સામાન્ય"
+
+#: ../capplets/display/main.c:26
+msgid "left"
+msgstr "ડાબું"
+
+#: ../capplets/display/main.c:27
+msgid "inverted"
+msgstr "ઉલટાવેલ"
+
+#: ../capplets/display/main.c:28
+msgid "right"
+msgstr "જમણું"
+
+#: ../capplets/display/main.c:389
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../capplets/display/main.c:448
+#: ../capplets/display/main.c:535
 msgid "_Resolution:"
 msgstr "રીઝોલ્યુશન (_R):"
 
-#: ../capplets/display/main.c:467
+#: ../capplets/display/main.c:554
 msgid "Re_fresh rate:"
 msgstr "તાજુ કરવાનો દર (_f):"
 
-#: ../capplets/display/main.c:488
+#: ../capplets/display/main.c:574
+msgid "R_otation:"
+msgstr "ફેરવવાનું (_o):"
+
+#: ../capplets/display/main.c:594
 msgid "Default Settings"
 msgstr "મૂળભુત સુયોજનાઓ"
 
-#: ../capplets/display/main.c:490
+#: ../capplets/display/main.c:596
 #, c-format
 msgid "Screen %d Settings\n"
 msgstr "સ્ક્રીન %d સુયોજનાઓ\n"
 
-#: ../capplets/display/main.c:516
+#: ../capplets/display/main.c:622
 msgid "Screen Resolution Preferences"
 msgstr "સ્ક્રીન રીઝોલ્યુશન પસંદગીઓ"
 
-#: ../capplets/display/main.c:553
+#: ../capplets/display/main.c:659
 #, c-format
 msgid "_Make default for this computer (%s) only"
 msgstr "ફક્ત આ કમ્પ્યુટર (%s) માટે મૂળભુત બનાવો (_c)"
 
-#: ../capplets/display/main.c:571
+#: ../capplets/display/main.c:677
 msgid "Options"
 msgstr "વિકલ્પો"
 
-#: ../capplets/display/main.c:592
+#: ../capplets/display/main.c:698
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d second the previous "
@@ -1355,23 +1376,23 @@ msgstr[1] ""
 "નવી સુયોજનાઓ ચકાસો. જો તમે %d સેકન્ડોમાં પ્રતિસાદ નહિં આપો તો તે પહેલાની સુયોજનાઓમાં "
 "ફરીથી ફેરવાઈ જશે."
 
-#: ../capplets/display/main.c:638
+#: ../capplets/display/main.c:744
 msgid "Keep Resolution"
 msgstr "રીઝોલ્યુશન સાચવો"
 
-#: ../capplets/display/main.c:642
+#: ../capplets/display/main.c:748
 msgid "Do you want to keep this resolution?"
 msgstr "શું તમે આ રીઝોલ્યુશન રાખવા માંગો છો?"
 
-#: ../capplets/display/main.c:667
+#: ../capplets/display/main.c:773
 msgid "Use _previous resolution"
 msgstr "પહેલાનું રીઝોલ્યુશન વાપરો (_p)"
 
-#: ../capplets/display/main.c:667
+#: ../capplets/display/main.c:773
 msgid "_Keep resolution"
 msgstr "રીઝોલ્યુશન સાચવો (_K)"
 
-#: ../capplets/display/main.c:818
+#: ../capplets/display/main.c:923
 msgid ""
 "The X Server does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
@@ -1379,7 +1400,7 @@ msgstr ""
 "X સર્વર XRandR એક્સટેન્સનને આધાર આપતું નથી.  રનટાઈમ રીઝોલ્યુશન ડિસ્પ્લેના માપમાં ફેરવાઈ "
 "જાય છે કે જે ઉપ્લબ્ધ નથી."
 
-#: ../capplets/display/main.c:826
+#: ../capplets/display/main.c:931
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
@@ -1674,7 +1695,7 @@ msgstr "આદેશો માટે ટુંકાણ કી સુયોજ�
 msgid "Unknown"
 msgstr "અજ્ઞાત"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:281
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:282
 msgid "Layout"
 msgstr "દેખાવ"
 
@@ -1682,8 +1703,8 @@ msgstr "દેખાવ"
 #. the below options are to be included in the selected list.
 #. This is a HIG-compliant alternative to allowing no
 #. selection in the group.
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:285
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:229
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:286
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:231
 msgid "Default"
 msgstr "મૂળભુત"
 
@@ -1714,56 +1735,56 @@ msgid "Start the page with the typing break settings showing"
 msgstr "લખવાની બ્રેક સુયોજના બતાવતા પાના સાથે શરુ કરો"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:3
-msgid "..."
-msgstr "..."
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "<b>Cursor Blinking</b>"
 msgstr "<b>કર્સર ઝબૂકે છે</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "<b>Repeat Keys</b>"
 msgstr "<b>પુનરાવર્તિત કીઓ</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:5
 msgid "<b>_Lock screen to enforce typing break</b>"
 msgstr "<b>લખાણ બ્રેક માટે સ્ક્રીનને તાળુ લગાવો</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>ઝડપી</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>લાંબુ</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>ટુકું</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>ધીમુ</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
 msgid "A_vailable layouts:"
 msgstr "પ્રાપ્ય દેખાવો (_v):"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "All_ow postponing of breaks"
 msgstr "અટકણોને મુલતવી રાખવાની પરવાનગી આપો (_o)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Check if breaks are allowed to be postponed"
 msgstr "તપાસો કે બ્રેકોને મુલતવી રહેવાની પરવાનગી છે કે નહિં"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Choose a Keyboard Model"
 msgstr "કીબોર્ડ મોડેલ પસંદ કરો"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Choose a Layout"
 msgstr "લેઆઉટ પસંદ કરો"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:15
+msgid "Choose..."
+msgstr "પસંદ કરો..."
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:16
 msgid "Cursor _blinks in text boxes and fields"
@@ -2292,11 +2313,14 @@ msgstr "ફાઈલ બંધારણ અયોગ્ય છે"
 #: ../capplets/theme-switcher/gnome-theme-installer.c:452
 #, c-format
 msgid ""
-"The theme \"%s\" has been installed.\n"
+"<span weight=\"bold\" size=\"larger\">The theme \"%s\" has been installed.</"
+"span>\n"
+"\n"
 "Would you like to apply it now, or keep your current theme?"
 msgstr ""
-"થીમ \"%s\" સ્થાપિત થઈ ગયેલ છે.\n"
-"શું તમે તેને હમણાં લાગુ પાડવા માંગો છો, અથવા તમારી વર્તમાન થીમ સાચવી રાખવા માંગો છો?"
+"<span weight=\"bold\" size=\"larger\">થીમ \"%s\" સ્થાપિત થઈ ગયેલ છે.</span>\n"
+"\n"
+"શું તમે તેને હમણઆં લાગુ પાડવા માંગો છો, અથવા વર્તમાન થીમ સાચવવા માંગો છો?"
 
 #: ../capplets/theme-switcher/gnome-theme-installer.c:455
 msgid "Keep Current Theme"
@@ -2333,14 +2357,6 @@ msgid ""
 "%s is the path where the theme files will be installed. This can not be "
 "selected as the source location"
 msgstr "%s એ પથ છે કે જ્યાં થીમ ફાઈલોનું સ્થાપન થાય છે. આ સ્રોત જગ્યા તરીકે પસંદિત થઈ શકે નહિ"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:679
-msgid ""
-"Cannot install theme.\n"
-"The tar program is not installed on your system."
-msgstr ""
-"થીમ સ્થાપિત કરી શકતા નથી.\n"
-"tar કાર્યક્રમ તમારી સિસ્ટમ પર સ્થાપિત નથી."
 
 #: ../capplets/theme-switcher/gnome-theme-manager.c:686
 msgid "Custom theme"
@@ -2682,10 +2698,6 @@ msgstr "જીનોમ રુપરેખાનું સાધન"
 msgid "Volume"
 msgstr "અવાજનું પ્રમાણ"
 
-#: ../gnome-settings-daemon/factory.c:60
-msgid "Could not initialize Bonobo"
-msgstr "બોનોબો શરુ કરી શકાતું નથી"
-
 #: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:406
 msgid "Slow Keys Alert"
 msgstr "કીની ચેતવણી બતાવો"
@@ -2855,12 +2867,11 @@ msgstr ""
 "સરળ રુપરેખાઓ વાપરવાનું પસંદ કરો અથવા XFree સોફ્ટવેરની એકદમ નવી આવૃત્તિ વાપરવાનું ચાલુ "
 "કરો."
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:244
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:249
 msgid "Do _not show this warning again"
 msgstr "આ ચેતવણી ફરીથી બતાવશો નહિં (_n)"
 
-#. !! temporary one
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:253
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:263
 #, c-format
 msgid ""
 "<b>The X system keyboard settings differ from your current GNOME keyboard "
@@ -2876,11 +2887,11 @@ msgstr ""
 "\n"
 "તમે કયું સુયોજન વાપરવા માંગો છો?"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:275
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:286
 msgid "Use X settings"
 msgstr "X સુયોજનો વાપરો"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:277
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:288
 msgid "Keep GNOME settings"
 msgstr "જીનોમ સુયોજનો જાળવો"
 
@@ -3008,38 +3019,6 @@ msgstr "સ્ક્રીન"
 #: ../libbackground/applier.c:280
 msgid "Screen on which BGApplier is to draw"
 msgstr "સ્ક્રીન કે જેના ઉપર BGApplier લઈ જવાનું છે"
-
-#: ../libgswitchit/gswitchit_config.c:1074
-#, c-format
-msgid "There was an error loading an image: %s"
-msgstr "ઈમેજ લાવવામાં ભૂલ હતી: %s"
-
-#: ../libgswitchit/gswitchit_config.c:1398
-#, c-format
-msgid "layout \"%s\""
-msgid_plural "layouts \"%s\""
-msgstr[0] "દેખાવ \"%s\""
-msgstr[1] "દેખાવો \"%s\""
-
-#: ../libgswitchit/gswitchit_config.c:1415
-#, c-format
-msgid "option \"%s\""
-msgid_plural "options \"%s\""
-msgstr[0] "વિકલ્પ \"%s\""
-msgstr[1] "વિકલ્પો \"%s\""
-
-#: ../libgswitchit/gswitchit_config.c:1423
-#, c-format
-msgid "model \"%s\", %s and %s"
-msgstr "મોડેલ \"%s\", %s અને %s"
-
-#: ../libgswitchit/gswitchit_config.c:1424
-msgid "no layout"
-msgstr "કોઈ લેઆઉટ નથી"
-
-#: ../libgswitchit/gswitchit_config.c:1425
-msgid "no options"
-msgstr "કોઈ વિકલ્પો નથી"
 
 #: ../libsounds/sound-view.c:43
 msgid "Login"
