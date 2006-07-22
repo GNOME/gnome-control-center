@@ -1,13 +1,13 @@
 # Young-Ho Cha <ganadist@chollian.net>, 2002, 2006
-# Changwoo Ryu <cwryu@debian.org>, 2002-2005
+# Changwoo Ryu <cwryu@debian.org>, 2002-2006
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.9.92\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-26 12:37+0900\n"
-"PO-Revision-Date: 2006-02-26 13:33+0900\n"
-"Last-Translator: Young-Ho Cha <ganadist@gmail.com>\n"
+"POT-Creation-Date: 2006-07-22 23:27+0900\n"
+"PO-Revision-Date: 2006-07-22 23:44+0900\n"
+"Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: GNOME Korea <gnome-kr-hackers@lists.kldp.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -81,60 +81,108 @@ msgstr "알 수 없는 로그인 ID, 사용자 데이터베이스가 손상되�
 msgid "About %s"
 msgstr "%s의 정보"
 
-#: ../capplets/about-me/gnome-about-me-password.c:116
-#: ../capplets/about-me/gnome-about-me-password.c:707
-msgid "Old password is incorrect, please retype it"
-msgstr "이전 열쇠글이 올바르지 않습니다, 다시 입력하십시오"
+#: ../capplets/about-me/gnome-about-me-password.c:172
+msgid "Child exited unexpectedly"
+msgstr "하위 프로세스가 갑자기 끝났습니다"
 
-#: ../capplets/about-me/gnome-about-me-password.c:127
-msgid "System error has occurred"
-msgstr "시스템 오류가 발생했습니다"
+#: ../capplets/about-me/gnome-about-me-password.c:295
+#, c-format
+msgid "Could not shutdown backend_stdin IO channel: %s"
+msgstr "backend_stdin IO 채널을 끝내지 못했습니다: %s"
 
-#: ../capplets/about-me/gnome-about-me-password.c:128
-msgid "Could not run /usr/bin/passwd"
-msgstr "/usr/bin/passwd를 실행할 수 없습니다"
+#: ../capplets/about-me/gnome-about-me-password.c:308
+#, c-format
+msgid "Could not shutdown backend_stdout IO channel: %s"
+msgstr "backend_stdout IO 채널을 끝내지 못했습니다: %s"
 
-#: ../capplets/about-me/gnome-about-me-password.c:129
+#: ../capplets/about-me/gnome-about-me-password.c:449
+msgid "Authenticated!"
+msgstr "인증했습니다!"
+
+#. This is a re-auth, and it failed.
+#. * The password must have been changed in the meantime!
+#. * Ask the user to re-authenticate
+#.
+#. Update status message and auth state
+#. Authentication failure
+#: ../capplets/about-me/gnome-about-me-password.c:466
+#: ../capplets/about-me/gnome-about-me-password.c:539
+msgid ""
+"Your password has been changed since you initially authenticated! Please re-"
+"authenticate."
+msgstr "최초에 인증한 뒤에 열쇠글을 바꿨습니다. 다시 인증하십시오."
+
+#: ../capplets/about-me/gnome-about-me-password.c:468
+msgid "That password was incorrect."
+msgstr "열쇠글이 올바르지 않습니다."
+
+#: ../capplets/about-me/gnome-about-me-password.c:514
+msgid "Your password has been changed."
+msgstr "열쇠글을 바꿨습니다."
+
+#. What does this indicate?
+#. * "Authentication information cannot be recovered?" from libpam?
+#: ../capplets/about-me/gnome-about-me-password.c:524
+#, c-format
+msgid "System error: %s."
+msgstr "시스템 오류: %s."
+
+#: ../capplets/about-me/gnome-about-me-password.c:526
+msgid "The password is too short."
+msgstr "열쇠글이 너무 짧습니다."
+
+#: ../capplets/about-me/gnome-about-me-password.c:528
+#: ../capplets/about-me/gnome-about-me-password.c:530
+msgid "The password is too simple."
+msgstr "열쇠글이 너무 간단합니다."
+
+#: ../capplets/about-me/gnome-about-me-password.c:532
+msgid "The old and new passwords are too similar."
+msgstr "예전 열쇠글과 새 열쇠글이 너무 비슷합니다."
+
+#: ../capplets/about-me/gnome-about-me-password.c:534
+msgid "The new password must contain numeric or special character(s)."
+msgstr "숫자나 특수 문자가 들어있어야 합니다."
+
+#: ../capplets/about-me/gnome-about-me-password.c:536
+msgid "The old and new passwords are the same."
+msgstr "예전 열쇠글과 새 열쇠글이 같습니다."
+
+#: ../capplets/about-me/gnome-about-me-password.c:787
+#, c-format
+msgid "Unable to launch /usr/bin/passwd: %s"
+msgstr "/usr/bin/passwd를 실행할 수 없습니다: %s"
+
+#: ../capplets/about-me/gnome-about-me-password.c:789
 msgid "Unable to launch backend"
 msgstr "백엔드를 실행할 수 없습니다"
 
-#: ../capplets/about-me/gnome-about-me-password.c:131
-#: ../capplets/about-me/gnome-about-me-password.c:132
-msgid "Unexpected error has occurred"
-msgstr "예상치 못한 오류가 발생했습니다"
+#: ../capplets/about-me/gnome-about-me-password.c:790
+msgid "A system error has occurred"
+msgstr "시스템 오류가 발생했습니다"
 
-#: ../capplets/about-me/gnome-about-me-password.c:331
-msgid "Password is too short"
-msgstr "열쇠글이 너무 짧습니다"
+#. Update status message
+#: ../capplets/about-me/gnome-about-me-password.c:810
+msgid "Checking password..."
+msgstr "열쇠글을 검사하는 중입니다..."
 
-#: ../capplets/about-me/gnome-about-me-password.c:334
-#: ../capplets/about-me/gnome-about-me-password.c:337
-msgid "Password is too simple"
-msgstr "열쇠글이 너무 간단합니다"
+#: ../capplets/about-me/gnome-about-me-password.c:897
+msgid "Click <b>Change password</b> to change your password."
+msgstr "열쇠글을 바꾸려면 <b>열쇠글 바꾸기</b>를 누르십시오."
 
-#: ../capplets/about-me/gnome-about-me-password.c:340
-msgid "Old and new passwords are too similar"
-msgstr "예전 열쇠글과 새 열쇠글이 너무 비슷합니다"
+#: ../capplets/about-me/gnome-about-me-password.c:900
+msgid "Please type your password in the <b>New password</b> field."
+msgstr "<b>새 열쇠글</b>에서 열쇠글을 입력하십시오."
 
-#: ../capplets/about-me/gnome-about-me-password.c:343
-msgid "Must contain numeric or special character(s)"
-msgstr "숫자나 특수 문자가 들어있어야 합니다"
+#: ../capplets/about-me/gnome-about-me-password.c:903
+#: ../capplets/about-me/gnome-about-me.glade.h:34
+msgid ""
+"Please type your password again in the <b>Retype new password</b> field."
+msgstr "<b>열쇠글 다시 입력</b>에서 열쇠글을 다시 입력하십시오."
 
-#: ../capplets/about-me/gnome-about-me-password.c:348
-msgid "Old and new password are the same"
-msgstr "예전 열쇠글과 새 열쇠글이 같습니다"
-
-#: ../capplets/about-me/gnome-about-me-password.c:634
-msgid "Please type the passwords."
-msgstr "열쇠글을 입력하십시오."
-
-#: ../capplets/about-me/gnome-about-me-password.c:642
-msgid "Please type the password again, it is wrong."
-msgstr "열쇠글이 틀렸습니다, 다시 입력하십시오."
-
-#: ../capplets/about-me/gnome-about-me-password.c:645
-msgid "Click on Change Password to change the password."
-msgstr "열쇠글을 바꾸려면 열쇠글 바꾸기를 누르십시오."
+#: ../capplets/about-me/gnome-about-me-password.c:906
+msgid "The two passwords are not equal."
+msgstr "두 열쇠글이 같지 않습니다."
 
 #: ../capplets/about-me/gnome-about-me.glade.h:1
 #: ../vfs-methods/themus/apply-font.glade.h:1
@@ -145,6 +193,7 @@ msgstr " "
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:1
+#: ../capplets/sound/sound-properties.glade.h:1
 #: ../capplets/ui-properties/gnome-ui-properties.glade.h:1
 msgid "    "
 msgstr "    "
@@ -166,20 +215,20 @@ msgid "<b>Job</b>"
 msgstr "<b>직장</b>"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:7
-msgid "<b>Please type the passwords.</b>"
-msgstr "<b>열쇠글을 입력하십시오.</b>"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:8
 msgid "<b>Telephone</b>"
 msgstr "<b>전화</b>"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:9
+#: ../capplets/about-me/gnome-about-me.glade.h:8
 msgid "<b>Web</b>"
 msgstr "<b>웹</b>"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:10
+#: ../capplets/about-me/gnome-about-me.glade.h:9
 msgid "<b>Work</b>"
 msgstr "<b>직장</b>"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:10
+msgid "<span size=\"larger\" weight=\"bold\">Change your password</span>"
+msgstr "<span size=\"larger\" weight=\"bold\">열쇠글 바꾸기</span>"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:11
 msgid "A_IM/iChat:"
@@ -214,142 +263,160 @@ msgid "Change Passwo_rd..."
 msgstr "열쇠글 바꾸기(_R)..."
 
 #: ../capplets/about-me/gnome-about-me.glade.h:20
-msgid "Change Password"
-msgstr "열쇠글 바꾸기"
+msgid "Change pa_ssword"
+msgstr "열쇠글 바꾸기(_S)"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:21
+msgid "Change password"
+msgstr "열쇠글 바꾸기"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:22
 msgid "Ci_ty:"
 msgstr "도시(_T):"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:22
+#: ../capplets/about-me/gnome-about-me.glade.h:23
 msgid "Co_untry:"
 msgstr "국가(_U):"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:23
+#: ../capplets/about-me/gnome-about-me.glade.h:24
 msgid "Contact"
 msgstr "연락처"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:24
+#: ../capplets/about-me/gnome-about-me.glade.h:25
 msgid "Cou_ntry:"
 msgstr "국가(_N):"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:25
+#: ../capplets/about-me/gnome-about-me.glade.h:26
+msgid "Current _password:"
+msgstr "현재 열쇠글(_P):"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:27
 msgid "Full Name"
 msgstr "전체 이름"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:26
+#: ../capplets/about-me/gnome-about-me.glade.h:28
 msgid "Hom_e:"
 msgstr "집(_E):"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:27
+#: ../capplets/about-me/gnome-about-me.glade.h:29
 msgid "IC_Q:"
 msgstr "IC_Q:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:28
+#: ../capplets/about-me/gnome-about-me.glade.h:30
 msgid "M_SN:"
 msgstr "M_SN:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:29
-msgid "Old pa_ssword:"
-msgstr "이전 열쇠글(_S):"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:30
+#: ../capplets/about-me/gnome-about-me.glade.h:31
 msgid "P.O. _box:"
 msgstr "사서함(_B):"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:31
+#: ../capplets/about-me/gnome-about-me.glade.h:32
 msgid "P._O. box:"
 msgstr "사서함(_O):"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:32
+#: ../capplets/about-me/gnome-about-me.glade.h:33
 msgid "Personal Info"
 msgstr "개인 정보"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:33
+#: ../capplets/about-me/gnome-about-me.glade.h:35
 msgid "State/Pro_vince:"
 msgstr "시/도(_V):"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:34
+#: ../capplets/about-me/gnome-about-me.glade.h:36
+msgid ""
+"To change your password, enter your current password in the field below and "
+"click <b>Authenticate</b>.\n"
+"After you have authenticated, enter your new password, retype it for "
+"verification and click <b>Change password</b>."
+msgstr ""
+"열쇠글을 바꾸려면, 현재 열쇠글을 아래 칸에 입력하고 <b>인증</b>을 누르십시오.\n"
+"인증한 후에, 새 열쇠글을 입력하시고 확인을 위해 다시 입력한 다음 <b>열쇠글 바꾸기</b>를 누르십시오."
+
+#: ../capplets/about-me/gnome-about-me.glade.h:38
 msgid "User name:"
 msgstr "사용자 이름:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:35
+#: ../capplets/about-me/gnome-about-me.glade.h:39
 msgid "Web _log:"
 msgstr "웹로그(_L):"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:36
+#: ../capplets/about-me/gnome-about-me.glade.h:40
 msgid "Wor_k:"
 msgstr "직장(_K):"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:37
+#: ../capplets/about-me/gnome-about-me.glade.h:41
 msgid "Work _fax:"
 msgstr "직장 팩스(_F):"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:38
+#: ../capplets/about-me/gnome-about-me.glade.h:42
 msgid "Zip/_Postal code:"
 msgstr "우편번호(_P):"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:39
+#: ../capplets/about-me/gnome-about-me.glade.h:43
 msgid "_Address:"
 msgstr "주소(_A):"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:40
+#: ../capplets/about-me/gnome-about-me.glade.h:44
+msgid "_Authenticate"
+msgstr "인증(_A)"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:45
 msgid "_Department:"
 msgstr "부서(_D):"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:41
+#: ../capplets/about-me/gnome-about-me.glade.h:46
 msgid "_Groupwise:"
 msgstr "_Groupwise:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:42
+#: ../capplets/about-me/gnome-about-me.glade.h:47
 msgid "_Home page:"
 msgstr "홈페이지(_H):"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:43
+#: ../capplets/about-me/gnome-about-me.glade.h:48
 msgid "_Home:"
 msgstr "집(_H):"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:44
+#: ../capplets/about-me/gnome-about-me.glade.h:49
 msgid "_Jabber:"
 msgstr "_Jabber:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:45
+#: ../capplets/about-me/gnome-about-me.glade.h:50
 msgid "_Manager:"
 msgstr "관리자(_M):"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:46
+#: ../capplets/about-me/gnome-about-me.glade.h:51
 msgid "_Mobile:"
 msgstr "휴대 전화(_M):"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:47
+#: ../capplets/about-me/gnome-about-me.glade.h:52
 msgid "_New password:"
 msgstr "새 열쇠글(_N):"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:48
+#: ../capplets/about-me/gnome-about-me.glade.h:53
 msgid "_Profession:"
 msgstr "업무(_P):"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:49
+#: ../capplets/about-me/gnome-about-me.glade.h:54
 msgid "_Retype new password:"
 msgstr "열쇠글 다시 입력(_R):"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:50
+#: ../capplets/about-me/gnome-about-me.glade.h:55
 msgid "_State/Province:"
 msgstr "시/도(_S):"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:51
+#: ../capplets/about-me/gnome-about-me.glade.h:56
 msgid "_Title:"
 msgstr "직위(_T):"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:52
+#: ../capplets/about-me/gnome-about-me.glade.h:57
 msgid "_Work:"
 msgstr "직장(_W):"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:53
+#: ../capplets/about-me/gnome-about-me.glade.h:58
 msgid "_Yahoo:"
 msgstr "_Yahoo:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:54
+#: ../capplets/about-me/gnome-about-me.glade.h:59
 msgid "_Zip/Postal code:"
 msgstr "우편번호(_Z):"
 
@@ -472,7 +539,6 @@ msgstr ""
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:2
-#: ../capplets/theme-switcher/theme-install.glade.h:1
 msgid "*"
 msgstr "*"
 
@@ -685,7 +751,7 @@ msgid "_Finish"
 msgstr "끝내기(_F)"
 
 #: ../capplets/background/gnome-background-properties.glade.h:7
-#: ../capplets/theme-switcher/theme-properties.glade.h:19
+#: ../capplets/theme-switcher/theme-properties.glade.h:20
 msgid "_Remove"
 msgstr "지우기(_R)"
 
@@ -755,7 +821,7 @@ msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "픽셀"
 
-#: ../capplets/common/activate-settings-daemon.c:18
+#: ../capplets/common/activate-settings-daemon.c:16
 msgid ""
 "Unable to start the settings manager 'gnome-settings-daemon'.\n"
 "Without the GNOME settings manager running, some preferences may not take "
@@ -779,8 +845,8 @@ msgstr "설정을 적용하고 마칩니다"
 
 #: ../capplets/common/capplet-util.c:243
 #: ../capplets/keyboard/gnome-keyboard-properties.c:225
-#: ../capplets/mouse/gnome-mouse-properties.c:1016
-#: ../capplets/sound/sound-properties-capplet.c:244
+#: ../capplets/mouse/gnome-mouse-properties.c:1023
+#: ../capplets/sound/sound-properties-capplet.c:760
 msgid "Retrieve and store legacy settings"
 msgstr "물려받은 설정을 되찾아서 저장합니다"
 
@@ -961,38 +1027,34 @@ msgstr "기본 프로그램"
 msgid "Select your default applications"
 msgstr "기본 프로그램을 선택하십시오"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:56
-msgid "Could not display help"
-msgstr "도움말을 보여줄 수 없습니다"
-
-#: ../capplets/default-applications/gnome-da-capplet.c:58
-#: ../capplets/default-applications/gnome-da-capplet.c:714
-msgid "Please make sure that the applet is properly installed"
-msgstr "애플릿이 제대로 설치되어 있는지 확인하십시오."
-
-#: ../capplets/default-applications/gnome-da-capplet.c:93
-#: ../capplets/default-applications/gnome-da-capplet.c:126
-#: ../capplets/default-applications/gnome-da-capplet.c:185
-#: ../capplets/default-applications/gnome-da-capplet.c:230
-#: ../capplets/default-applications/gnome-da-capplet.c:284
-#: ../capplets/default-applications/gnome-da-capplet.c:333
-#: ../capplets/default-applications/gnome-da-capplet.c:554
-#: ../capplets/default-applications/gnome-da-capplet.c:575
+#: ../capplets/default-applications/gnome-da-capplet.c:77
+#: ../capplets/default-applications/gnome-da-capplet.c:101
+#: ../capplets/default-applications/gnome-da-capplet.c:146
+#: ../capplets/default-applications/gnome-da-capplet.c:191
+#: ../capplets/default-applications/gnome-da-capplet.c:245
+#: ../capplets/default-applications/gnome-da-capplet.c:294
+#: ../capplets/default-applications/gnome-da-capplet.c:576
+#: ../capplets/default-applications/gnome-da-capplet.c:597
 #, c-format
 msgid "Error saving configuration: %s"
 msgstr "설정 저장하는데 오류: %s"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:691
+#: ../capplets/default-applications/gnome-da-capplet.c:719
+#: ../capplets/sound/sound-properties-capplet.c:318
 msgid "Custom"
 msgstr "사용자 설정"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:712
+#: ../capplets/default-applications/gnome-da-capplet.c:739
 msgid "Could not load the main interface"
 msgstr "메인 인테페이스를 읽을 수 없습니다"
 
+#: ../capplets/default-applications/gnome-da-capplet.c:741
+msgid "Please make sure that the applet is properly installed"
+msgstr "애플릿이 제대로 설치되어 있는지 확인하십시오."
+
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:1
 msgid "Balsa"
-msgstr "Balsa"
+msgstr "발사"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:2
 msgid "Debian Sensible Browser"
@@ -1012,43 +1074,43 @@ msgstr "Encompass"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:6
 msgid "Epiphany Web Browser"
-msgstr "Epiphany 웹 브라우저"
+msgstr "에피파니 웹 브라우저"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:7
 msgid "Evolution Mail Reader"
-msgstr "Evolution 메일 읽기 프로그램"
+msgstr "에볼루션 메일 읽기 프로그램"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:8
 msgid "Evolution Mail Reader 1.4"
-msgstr "Evolution 메일 읽기 1.4"
+msgstr "에볼루션 메일 읽기 1.4"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:9
 msgid "Evolution Mail Reader 1.5"
-msgstr "Evolution 메일 읽기 1.5"
+msgstr "에볼루션 메일 읽기 1.5"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:10
 msgid "Evolution Mail Reader 1.6"
-msgstr "Evolution 메일 읽기 1.6"
+msgstr "에볼루션 메일 읽기 1.6"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:11
 msgid "Evolution Mail Reader 2.0"
-msgstr "Evolution 메일 읽기 2.0"
+msgstr "에볼루션 메일 읽기 2.0"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:12
 msgid "Evolution Mail Reader 2.2"
-msgstr "Evolution 메일 읽기 2.2"
+msgstr "에볼루션 메일 읽기 2.2"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:13
 msgid "Evolution Mail Reader 2.4"
-msgstr "Evolution 메일 읽기 2.4"
+msgstr "에볼루션 메일 읽기 2.4"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:14
 msgid "Firebird"
-msgstr "Firebird"
+msgstr "파이어버드"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:15
 msgid "Firefox"
-msgstr "Firefox"
+msgstr "파이어폭스"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:16
 msgid "GNOME Terminal"
@@ -1056,7 +1118,7 @@ msgstr "그놈 터미널"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:17
 msgid "Galeon"
-msgstr "Galeon"
+msgstr "갈레온"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:18
 msgid "KMail"
@@ -1064,7 +1126,7 @@ msgstr "KMail"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:19
 msgid "Konqueror"
-msgstr "Konqueror"
+msgstr "컹커러"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:20
 msgid "Links Text Browser"
@@ -1088,7 +1150,7 @@ msgstr "모질라 메일"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:25
 msgid "Mozilla Thunderbird"
-msgstr "모질라 Thunderbird"
+msgstr "모질라 썬더버드"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:26
 msgid "Mutt"
@@ -1100,11 +1162,11 @@ msgstr "NXterm"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:28
 msgid "Netscape Communicator"
-msgstr "Netscape Communicator"
+msgstr "넷스케이프 커뮤니케이터"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:29
 msgid "Opera"
-msgstr "Opera"
+msgstr "오페라"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:30
 msgid "RXVT"
@@ -1115,18 +1177,22 @@ msgid "Standard XTerminal"
 msgstr "표준 X터미널"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:32
-msgid "Sylpheed-Claws"
-msgstr "Sylpheed-Claws"
+msgid "Sylpheed"
+msgstr "실피드"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:33
-msgid "Thunderbird"
-msgstr "Thunderbird"
+msgid "Sylpheed-Claws"
+msgstr "실피드 클로즈"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:34
+msgid "Thunderbird"
+msgstr "썬더버드"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:35
 msgid "W3M Text Browser"
 msgstr "W3M 텍스트 브라우저"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:35
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:36
 msgid "aterm"
 msgstr "aterm"
 
@@ -1156,7 +1222,7 @@ msgstr "<b>텍스트 편집기</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:7
 msgid "<b>Video Player</b>"
-msgstr "<b>동영상 연주기</b>"
+msgstr "<b>동영상 연주</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:8
 msgid "<b>Web Browser</b>"
@@ -1211,42 +1277,62 @@ msgstr "화면 해상도 바꾸기"
 msgid "Screen Resolution"
 msgstr "화면 해상도"
 
-#: ../capplets/display/main.c:345
+#: ../capplets/display/main.c:25
+msgid "normal"
+msgstr "보통"
+
+#: ../capplets/display/main.c:26
+msgid "left"
+msgstr "왼쪽"
+
+#: ../capplets/display/main.c:27
+msgid "inverted"
+msgstr "반전"
+
+#: ../capplets/display/main.c:28
+msgid "right"
+msgstr "오른쪽"
+
+#: ../capplets/display/main.c:389
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../capplets/display/main.c:448
+#: ../capplets/display/main.c:535
 msgid "_Resolution:"
 msgstr "해상도(_R):"
 
-#: ../capplets/display/main.c:467
+#: ../capplets/display/main.c:554
 msgid "Re_fresh rate:"
 msgstr "화면 주사율(_F):"
 
-#: ../capplets/display/main.c:488
+#: ../capplets/display/main.c:574
+msgid "R_otation:"
+msgstr "회전(_O):"
+
+#: ../capplets/display/main.c:594
 msgid "Default Settings"
 msgstr "기본 설정"
 
-#: ../capplets/display/main.c:490
+#: ../capplets/display/main.c:596
 #, c-format
 msgid "Screen %d Settings\n"
 msgstr "화면 %d 설정\n"
 
-#: ../capplets/display/main.c:516
+#: ../capplets/display/main.c:622
 msgid "Screen Resolution Preferences"
 msgstr "화면 해상도 설정"
 
-#: ../capplets/display/main.c:553
+#: ../capplets/display/main.c:659
 #, c-format
 msgid "_Make default for this computer (%s) only"
 msgstr "이 컴퓨터(%s)의 경우에만 기본값으로 만들기(_M)"
 
-#: ../capplets/display/main.c:571
+#: ../capplets/display/main.c:677
 msgid "Options"
 msgstr "옵션"
 
-#: ../capplets/display/main.c:592
+#: ../capplets/display/main.c:698
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d second the previous "
@@ -1258,23 +1344,23 @@ msgstr[0] ""
 "새로운 설정을 테스트합니다. %d초 이내에 응답하지 않으면 이전 설정으로 다시 돌"
 "아갑니다."
 
-#: ../capplets/display/main.c:638
+#: ../capplets/display/main.c:744
 msgid "Keep Resolution"
 msgstr "이 해상도 계속 사용"
 
-#: ../capplets/display/main.c:642
+#: ../capplets/display/main.c:748
 msgid "Do you want to keep this resolution?"
 msgstr "이 해상도를 계속 사용하시겠습니까?"
 
-#: ../capplets/display/main.c:667
+#: ../capplets/display/main.c:773
 msgid "Use _previous resolution"
 msgstr "이전 해상도 사용(_P)"
 
-#: ../capplets/display/main.c:667
+#: ../capplets/display/main.c:773
 msgid "_Keep resolution"
 msgstr "이 해상도 계속 사용(_K)"
 
-#: ../capplets/display/main.c:818
+#: ../capplets/display/main.c:923
 msgid ""
 "The X Server does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
@@ -1282,7 +1368,7 @@ msgstr ""
 "X서버가 XRandR 확장 기능을 지원하지 않습니다.  실행 중에 해상도를 바꿀 수 없"
 "습니다."
 
-#: ../capplets/display/main.c:826
+#: ../capplets/display/main.c:931
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
@@ -1478,29 +1564,29 @@ msgid "The type of accelerator."
 msgstr "바로 가기 키의 형식."
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
-#: ../capplets/keybindings/gnome-keybinding-properties.c:197
+#: ../capplets/keybindings/gnome-keybinding-properties.c:187
 #: ../libbackground/applier.c:624 ../typing-break/drwright.c:471
 msgid "Disabled"
 msgstr "사용 않음"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:544
+#: ../capplets/keybindings/gnome-keybinding-properties.c:534
 msgid "<Unknown Action>"
 msgstr "<알 수 없는 동작>"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:565
+#: ../capplets/keybindings/gnome-keybinding-properties.c:555
 msgid "Desktop"
 msgstr "바탕 화면"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:566
+#: ../capplets/keybindings/gnome-keybinding-properties.c:556
 #: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
 msgid "Sound"
 msgstr "소리"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:570
+#: ../capplets/keybindings/gnome-keybinding-properties.c:560
 msgid "Window Management"
 msgstr "창 관리"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:676
+#: ../capplets/keybindings/gnome-keybinding-properties.c:666
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become unusable to type "
@@ -1510,7 +1596,7 @@ msgstr ""
 "바로가기 키 \"%s\"(은)는 혼자 사용될 수 없습니다.\n"
 "Control이나 Alt, Shift키와 같이 사용하도록 하십시오.\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:705
+#: ../capplets/keybindings/gnome-keybinding-properties.c:695
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1519,21 +1605,21 @@ msgstr ""
 "바로 가기 키 \"%s\"(은)는 \"%s\"에서\n"
 "쓰고 있습니다\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:737
+#: ../capplets/keybindings/gnome-keybinding-properties.c:727
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "설정 데이터 베이스에서 새로운 단축키 설정 오류: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:787
+#: ../capplets/keybindings/gnome-keybinding-properties.c:777
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "설정 데이터 베이스에서 단축키 설정 해제하는 데 오류: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:894
+#: ../capplets/keybindings/gnome-keybinding-properties.c:884
 msgid "Action"
 msgstr "동작"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:918
+#: ../capplets/keybindings/gnome-keybinding-properties.c:908
 msgid "Shortcut"
 msgstr "바로 가기"
 
@@ -1554,11 +1640,11 @@ msgstr ""
 msgid "Assign shortcut keys to commands"
 msgstr "명령어에 단축 키를 지정합니다"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkb.c:84
+#: ../capplets/keyboard/gnome-keyboard-properties-xkb.c:87
 msgid "Unknown"
 msgstr "알 수 없음"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:273
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:282
 msgid "Layout"
 msgstr "키 배치"
 
@@ -1566,12 +1652,12 @@ msgstr "키 배치"
 #. the below options are to be included in the selected list.
 #. This is a HIG-compliant alternative to allowing no
 #. selection in the group.
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:277
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:228
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:286
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:231
 msgid "Default"
 msgstr "기본값"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:75
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:77
 msgid "Models"
 msgstr "모델"
 
@@ -1586,8 +1672,8 @@ msgstr "접근성 기능(_A)"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:221
 #: ../capplets/keyboard/gnome-keyboard-properties.c:223
-#: ../capplets/sound/sound-properties-capplet.c:240
-#: ../capplets/sound/sound-properties-capplet.c:242
+#: ../capplets/sound/sound-properties-capplet.c:756
+#: ../capplets/sound/sound-properties-capplet.c:758
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr "설정을 적용하고 마칩니다 (호환성; 이제 데몬이 처리합니다)"
@@ -1597,56 +1683,56 @@ msgid "Start the page with the typing break settings showing"
 msgstr "타이핑 휴식 설정을 보여주는 페이지로 시작합니다"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:3
-msgid "..."
-msgstr "..."
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "<b>Cursor Blinking</b>"
 msgstr "<b>커서 깜빡이기</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "<b>Repeat Keys</b>"
 msgstr "<b>반복 키</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:5
 msgid "<b>_Lock screen to enforce typing break</b>"
 msgstr "<b>화면을 잠궈 강제로 휴식 시간을 갖습니다(_L)</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>빠르게</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>길게</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>짧게</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>느리게</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
 msgid "A_vailable layouts:"
 msgstr "사용 가능한 키 배치(_V):"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "All_ow postponing of breaks"
 msgstr "휴식 시간 미루기 가능(_O)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Check if breaks are allowed to be postponed"
 msgstr "휴식 시간을 뒤로 미룰 수 있게 하려면 선택하십시오"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Choose a Keyboard Model"
 msgstr "키보드 모델 선택"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Choose a Layout"
 msgstr "키보드 배치 선택"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:15
+msgid "Choose..."
+msgstr "고르기..."
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:16
 msgid "Cursor _blinks in text boxes and fields"
@@ -1757,65 +1843,65 @@ msgstr "키보드 등록 정보를 설정합니다"
 
 #. set the timeout value  label with correct value of timeout
 #: ../capplets/mouse/gnome-mouse-properties.c:138
-#: ../capplets/mouse/gnome-mouse-properties.c:880
+#: ../capplets/mouse/gnome-mouse-properties.c:887
 #, c-format
 msgid "%d milliseconds"
 msgid_plural "%d milliseconds"
 msgstr[0] "%d 밀리초"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:560
+#: ../capplets/mouse/gnome-mouse-properties.c:567
 msgid "Unknown Pointer"
 msgstr "알 수 없는 포인터"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:761
+#: ../capplets/mouse/gnome-mouse-properties.c:768
 msgid "Default Pointer"
 msgstr "기본 포인터"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:762
+#: ../capplets/mouse/gnome-mouse-properties.c:769
 msgid "Default Pointer - Current"
 msgstr "기본 포인터 - 현재"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:763
+#: ../capplets/mouse/gnome-mouse-properties.c:770
 msgid "The default pointer that ships with X"
 msgstr "X에 포함되어 있는 기본 포인터"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:767
+#: ../capplets/mouse/gnome-mouse-properties.c:774
 msgid "White Pointer"
 msgstr "흰색 포인터"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:768
+#: ../capplets/mouse/gnome-mouse-properties.c:775
 msgid "White Pointer - Current"
 msgstr "흰색 포인터 - 현재"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:769
+#: ../capplets/mouse/gnome-mouse-properties.c:776
 msgid "The default pointer inverted"
 msgstr "기본 포인터의 반전"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:773
+#: ../capplets/mouse/gnome-mouse-properties.c:780
 msgid "Large Pointer"
 msgstr "큰 포인터"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:774
+#: ../capplets/mouse/gnome-mouse-properties.c:781
 msgid "Large Pointer - Current"
 msgstr "큰 포인터 - 현재"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:775
+#: ../capplets/mouse/gnome-mouse-properties.c:782
 msgid "Large version of normal pointer"
 msgstr "기본 포인터의 큰 버전"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:779
+#: ../capplets/mouse/gnome-mouse-properties.c:786
 msgid "Large White Pointer - Current"
 msgstr "큰 흰 색 포인터 - 현재"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:780
+#: ../capplets/mouse/gnome-mouse-properties.c:787
 msgid "Large White Pointer"
 msgstr "큰 흰 색 포인터"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:781
+#: ../capplets/mouse/gnome-mouse-properties.c:788
 msgid "Large version of white pointer"
 msgstr "흰 색 포인터의 큰 버전"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:970
+#: ../capplets/mouse/gnome-mouse-properties.c:977
 msgid "Pointer Theme"
 msgstr "마우스 테마"
 
@@ -2015,40 +2101,88 @@ msgstr "보안 HTTP 프록시(_S):"
 msgid "Enable sound and associate sounds with events"
 msgstr "사운드를 사용하고 사운드를 이벤트와 연결합니다"
 
-#: ../capplets/sound/sound-properties-capplet.c:271
-#: ../capplets/sound/sound-properties.glade.h:4
+#: ../capplets/sound/sound-properties-capplet.c:316
+#: ../capplets/sound/sound-properties-capplet.c:368
+msgid "Not connected"
+msgstr "연결되지 않음"
+
+#: ../capplets/sound/sound-properties-capplet.c:790
 msgid "Sound Preferences"
 msgstr "사운드 기본 설정"
 
-#: ../capplets/sound/sound-properties.glade.h:1
+#: ../capplets/sound/sound-properties.glade.h:2
+msgid "<b>Audio Conferencing</b>"
+msgstr "<b>음성 회의</b>"
+
+#: ../capplets/sound/sound-properties.glade.h:3
+msgid "<b>Music and Movies</b>"
+msgstr "<b>음악 및 동영상</b>"
+
+#: ../capplets/sound/sound-properties.glade.h:4
+msgid "<b>Sound Events</b>"
+msgstr "<b>사운드 이벤트</b>"
+
+#: ../capplets/sound/sound-properties.glade.h:5
+msgid "<span weight=\"bold\" size=\"x-large\">Testing...</span>"
+msgstr "<span weight=\"bold\" size=\"x-large\">테스트하는 중...</span>"
+
+#: ../capplets/sound/sound-properties.glade.h:6
+msgid "Click OK to finish."
+msgstr "마치려면 확인을 누르십시오."
+
+#: ../capplets/sound/sound-properties.glade.h:7
+msgid "Devices"
+msgstr "장치"
+
+#: ../capplets/sound/sound-properties.glade.h:8
 msgid "E_nable software sound mixing (ESD)"
 msgstr "소프트웨어 사운드 믹서(ESD) 사용(_N)"
 
-#: ../capplets/sound/sound-properties.glade.h:2
+#: ../capplets/sound/sound-properties.glade.h:9
 msgid "Flash _entire screen"
 msgstr "전체 화면 번쩍이기(_E)"
 
-#: ../capplets/sound/sound-properties.glade.h:3
+#: ../capplets/sound/sound-properties.glade.h:10
 msgid "Flash _window titlebar"
 msgstr "창 제목 표시줄 번쩍이기(_W)"
 
-#: ../capplets/sound/sound-properties.glade.h:5
+#: ../capplets/sound/sound-properties.glade.h:11
+msgid "Sound & Video Preferences"
+msgstr "소리 & 동영상 기본 설정"
+
+#: ../capplets/sound/sound-properties.glade.h:12
+msgid "Sound Capture:"
+msgstr "소리 캡쳐:"
+
+#: ../capplets/sound/sound-properties.glade.h:13
+msgid "Sound Playback:"
+msgstr "소리 재생:"
+
+#: ../capplets/sound/sound-properties.glade.h:14
 msgid "Sounds"
 msgstr "소리"
 
-#: ../capplets/sound/sound-properties.glade.h:6
+#: ../capplets/sound/sound-properties.glade.h:15
 msgid "System Beep"
 msgstr "시스템 벨소리"
 
-#: ../capplets/sound/sound-properties.glade.h:7
+#: ../capplets/sound/sound-properties.glade.h:16
+msgid "Test"
+msgstr "테스트"
+
+#: ../capplets/sound/sound-properties.glade.h:17
+msgid "Testing Pipeline"
+msgstr "파이프라인 테스트"
+
+#: ../capplets/sound/sound-properties.glade.h:18
 msgid "_Enable system beep"
 msgstr "벨소리 쓰기(_E)"
 
-#: ../capplets/sound/sound-properties.glade.h:8
+#: ../capplets/sound/sound-properties.glade.h:19
 msgid "_Play system sounds"
 msgstr "시스템 소리 연주(_P)"
 
-#: ../capplets/sound/sound-properties.glade.h:9
+#: ../capplets/sound/sound-properties.glade.h:20
 msgid "_Visual system beep"
 msgstr "눈에 보이는 피드백(_V)"
 
@@ -2064,7 +2198,7 @@ msgstr "테마가 성공적으로 지워졌습니다. 다른 테마를 선택하
 msgid "Theme can not be deleted"
 msgstr "테마를 지울 수 없습니다"
 
-#: ../capplets/theme-switcher/gnome-theme-details.c:529
+#: ../capplets/theme-switcher/gnome-theme-details.c:535
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -2073,15 +2207,15 @@ msgstr ""
 "시스템에서 테마를 찾을 수 없습니다. \"테마 기본 설정\" 대화상자가 잘못 설치되"
 "었거나 \"gnome-themes\"꾸러미가 설치 되지 않았을 것입니다."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:227
+#: ../capplets/theme-switcher/gnome-theme-installer.c:255
 msgid "This theme is not in a supported format."
 msgstr "이 테마는 지원하는 형식이 아닙니다."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:242
+#: ../capplets/theme-switcher/gnome-theme-installer.c:273
 msgid "Failed to create temporary directory"
 msgstr "임시 디렉토리를 만드는 데 실패했습니다"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:260
+#: ../capplets/theme-switcher/gnome-theme-installer.c:294
 msgid ""
 "Can not install theme. \n"
 "The bzip2 utility is not installed."
@@ -2089,13 +2223,13 @@ msgstr ""
 "테마를 설치할 수 없습니다.\n"
 "bzip2 유틸리티를 설치하지 않았습니다."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:276
-#: ../capplets/theme-switcher/gnome-theme-installer.c:309
-#: ../capplets/theme-switcher/gnome-theme-installer.c:383
+#: ../capplets/theme-switcher/gnome-theme-installer.c:313
+#: ../capplets/theme-switcher/gnome-theme-installer.c:352
+#: ../capplets/theme-switcher/gnome-theme-installer.c:432
 msgid "Installation Failed"
 msgstr "설치 실패"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:294
+#: ../capplets/theme-switcher/gnome-theme-installer.c:334
 msgid ""
 "Can not install themes. \n"
 "The gzip utility is not installed."
@@ -2103,55 +2237,49 @@ msgstr ""
 "테마를 설치할 수 없습니다.\n"
 "gzip 유틸리티를 설치하지 않았습니다."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:330
+#: ../capplets/theme-switcher/gnome-theme-installer.c:378
 #, c-format
-msgid ""
-"Icon Theme %s correctly installed.\n"
-"You can select it in the theme details."
-msgstr ""
-"현재 %s 아이콘 테마가 설치되어 있습니다.\n"
-"테마 손질하기에서 선택할 수 있습니다."
+msgid "GNOME Theme %s correctly installed"
+msgstr "%s 그놈 테마를 올바르게 설치했습니다"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:333
-#, c-format
-msgid "Gnome Theme %s correctly installed"
-msgstr "현재 %s 그놈 테마가 설치되어 있습니다"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:336
-#, c-format
-msgid ""
-"Windows Border Theme %s correctly installed.\n"
-"You can select it in the theme details."
-msgstr ""
-"현재 %s 창 테두리 테마가 설치되어 있습니다.\n"
-"테마 손질하기에서 선택할 수 있습니다."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:339
-#, c-format
-msgid ""
-"Controls Theme %s correctly installed.\n"
-"You can select it in the theme details."
-msgstr ""
-"현재 %s 컨트롤 테마가 설치되어 있습니다.\n"
-"테마 손질하기에서 선택할 수 있습니다."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:345
+#: ../capplets/theme-switcher/gnome-theme-installer.c:388
 msgid "The theme is an engine. You need to compile the theme."
 msgstr "이 테마는 엔진입니다. 컴파일해야 합니다."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:360
+#: ../capplets/theme-switcher/gnome-theme-installer.c:406
 msgid "The file format is invalid"
 msgstr "파일 포맷이 올바르지 않습니다"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:450
+#. TODO: currently cannot apply "gnome themes"
+#: ../capplets/theme-switcher/gnome-theme-installer.c:452
+#, c-format
+msgid ""
+"<span weight=\"bold\" size=\"larger\">The theme \"%s\" has been installed.</"
+"span>\n"
+"\n"
+"Would you like to apply it now, or keep your current theme?"
+msgstr ""
+"<span weight=\"bold\" size=\"larger\">\"%s\" 테마를 설치했습니다.</span>\n"
+"\n"
+"지금 적용하시겠습니까, 아니면 현재 테마를 유지하시겠습니까?"
+
+#: ../capplets/theme-switcher/gnome-theme-installer.c:455
+msgid "Keep Current Theme"
+msgstr "현재 테마 유지"
+
+#: ../capplets/theme-switcher/gnome-theme-installer.c:457
+msgid "Apply New Theme"
+msgstr "새 테마 적용"
+
+#: ../capplets/theme-switcher/gnome-theme-installer.c:531
 msgid "No theme file location specified to install"
 msgstr "테마를 파일을 설치할 위치를 지정하지 않았습니다"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:469
+#: ../capplets/theme-switcher/gnome-theme-installer.c:546
 msgid "The theme file location specified to install is invalid"
 msgstr "테마를 파일을 설치하라고 지정한 위치가 올바르지 않습니다"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:489
+#: ../capplets/theme-switcher/gnome-theme-installer.c:566
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -2160,11 +2288,11 @@ msgstr ""
 "다음에 테마를 설치하는 데 필요한 권한이 없습니다:\n"
 "%s"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:510
+#: ../capplets/theme-switcher/gnome-theme-installer.c:587
 msgid "The file format is invalid."
 msgstr "파일 포맷이 올바르지 않습니다."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:537
+#: ../capplets/theme-switcher/gnome-theme-installer.c:614
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
@@ -2172,14 +2300,6 @@ msgid ""
 msgstr ""
 "%s은(는) 테마 파일이 설치될 경로입니다. 이 경로는 소스 위치로 선택할 수 없습"
 "니다"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:591
-msgid ""
-"Cannot install theme.\n"
-"The tar program is not installed on your system."
-msgstr ""
-"테마를 설치할 수 없습니다.\n"
-"시스템에 tar 프로그램을 설치하지 않았습니다."
 
 #: ../capplets/theme-switcher/gnome-theme-manager.c:686
 msgid "Custom theme"
@@ -2189,7 +2309,7 @@ msgstr "사용자 테마"
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "테마 저장 단추를 누르면 이 테마를 저장할 수 있습니다."
 
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1584
+#: ../capplets/theme-switcher/gnome-theme-manager.c:1579
 msgid ""
 "The default theme schemas could not be found on your system.  This means "
 "that you probably don't have metacity installed, or that your gconf is "
@@ -2198,11 +2318,11 @@ msgstr ""
 "이 시스템에서 기본 테마 스킴을 찾을 수 없습니다. metacity를 설치하지 않았거"
 "나, gconf가 제대로 설정되어 있지 않았을 것입니다."
 
-#: ../capplets/theme-switcher/gnome-theme-save.c:72
+#: ../capplets/theme-switcher/gnome-theme-save.c:73
 msgid "Theme name must be present"
 msgstr "테마 이름이 없습니다"
 
-#: ../capplets/theme-switcher/gnome-theme-save.c:104
+#: ../capplets/theme-switcher/gnome-theme-save.c:144
 msgid "The theme already exists. Would you like to replace it?"
 msgstr "테마가 벌써 있습니다. 바꾸시겠습니까?"
 
@@ -2215,105 +2335,89 @@ msgstr "바탕 화면의 여러 곳에 쓰일 테마를 선택합니다"
 msgid "Theme"
 msgstr "테마"
 
-#: ../capplets/theme-switcher/theme-install.glade.h:2
-msgid "<span size=\"larger\" weight=\"bold\">Install a Theme</span>"
-msgstr "<span size=\"larger\" weight=\"bold\">테마 설치</span>"
-
-#: ../capplets/theme-switcher/theme-install.glade.h:3
-msgid "Theme Installation"
-msgstr "테마 설치"
-
-#: ../capplets/theme-switcher/theme-install.glade.h:4
-msgid "_Install"
-msgstr "설치(_I)"
-
-#: ../capplets/theme-switcher/theme-install.glade.h:5
-msgid "_Location:"
-msgstr "위치(_L):"
-
 #: ../capplets/theme-switcher/theme-properties.glade.h:1
-msgid "<span size=\"larger\" weight=\"bold\">Save Theme to Disk</span>"
-msgstr "<span size=\"larger\" weight=\"bold\">테마를 디스크에 저장</span>"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:2
 msgid "Apply _Background"
 msgstr "바탕그림 적용(_B)"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:3
+#: ../capplets/theme-switcher/theme-properties.glade.h:2
 msgid "Apply _Font"
 msgstr "글꼴 적용(_F)"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:4
+#: ../capplets/theme-switcher/theme-properties.glade.h:3
 msgid "Controls"
 msgstr "컨트롤"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:5
+#: ../capplets/theme-switcher/theme-properties.glade.h:4
 msgid "Icons"
 msgstr "아이콘"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:6
-msgid "New themes can also be installed by dragging them into the window."
-msgstr "테마를 창에 끌어오는 방법으로도 새 테마를 설치할 수 있습니다."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:7
+#: ../capplets/theme-switcher/theme-properties.glade.h:5
 msgid "Save Theme"
 msgstr "테마 저장"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:8
+#: ../capplets/theme-switcher/theme-properties.glade.h:6
+msgid "Save _Background Image"
+msgstr "바탕그림 저장(_B)"
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:7
 msgid "Select theme for the desktop"
 msgstr "데스크탑의 테마를 설정합니다"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:9
-msgid "Short _description:"
-msgstr "짧은 설명(_D):"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:10
+#: ../capplets/theme-switcher/theme-properties.glade.h:8
 msgid "Theme Details"
 msgstr "테마 손질하기"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:11
+#: ../capplets/theme-switcher/theme-properties.glade.h:9
 msgid "Theme Preferences"
 msgstr "테마 기본 설정"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:12
+#: ../capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Theme _Details"
 msgstr "테마 손질하기(_D)"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:13
+#: ../capplets/theme-switcher/theme-properties.glade.h:11
 msgid "This theme does not suggest any particular font or background."
 msgstr "이 테마는 글꼴이나 바탕그림이 아무 것도 없습니다."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:14
+#: ../capplets/theme-switcher/theme-properties.glade.h:12
 msgid "This theme suggests a background:"
 msgstr "이 테마는 바탕그림이 있습니다:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:15
+#: ../capplets/theme-switcher/theme-properties.glade.h:13
 msgid "This theme suggests a font and a background:"
 msgstr "이 테마는 글꼴과 바탕그림이 있습니다:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:16
+#: ../capplets/theme-switcher/theme-properties.glade.h:14
 msgid "This theme suggests a font:"
 msgstr "이 테마는 글꼴이 있습니다:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:17
+#: ../capplets/theme-switcher/theme-properties.glade.h:15
 msgid "Window Border"
 msgstr "창 가장자리"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:18
+#: ../capplets/theme-switcher/theme-properties.glade.h:16
+msgid "_Description:"
+msgstr "설명(_D):"
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:17
 msgid "_Install Theme..."
 msgstr "테마 설치(_I)..."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:20
+#: ../capplets/theme-switcher/theme-properties.glade.h:18
+msgid "_Install..."
+msgstr "설치(_I)..."
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:19
+msgid "_Name:"
+msgstr "이름(_N):"
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:21
 msgid "_Revert"
 msgstr "되돌리기(_R)"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:21
+#: ../capplets/theme-switcher/theme-properties.glade.h:22
 msgid "_Save Theme..."
 msgstr "테마 저장(_S)..."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:22
-msgid "_Theme name:"
-msgstr "테마 이름(_T):"
 
 #: ../capplets/theme-switcher/theme-properties.glade.h:23
 msgid "theme selection tree"
@@ -2515,25 +2619,9 @@ msgstr "그놈 제어판"
 msgid "The GNOME configuration tool"
 msgstr "그놈 설정 도구"
 
-#: ../gnome-settings-daemon/actions/acme-fb-level.c:149
-msgid "No '/dev/pmu' device found"
-msgstr "'/dev/pmu' 장치를 찾을 수 없습니다"
-
-#: ../gnome-settings-daemon/actions/acme-fb-level.c:156
-msgid "Not a powerbook"
-msgstr "파워북이 아닙니다"
-
-#: ../gnome-settings-daemon/actions/acme-fb-level.c:173
-msgid "Wrong permission for '/dev/pmu' device"
-msgstr "'/dev/pmu' 장치의 허가권이 잘못되어 있습니다"
-
 #: ../gnome-settings-daemon/actions/acme.glade.h:1
 msgid "Volume"
 msgstr "볼륨"
-
-#: ../gnome-settings-daemon/factory.c:37
-msgid "Could not initialize Bonobo"
-msgstr "보노보를 초기화할 수 없습니다"
 
 #: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:406
 msgid "Slow Keys Alert"
@@ -2662,7 +2750,7 @@ msgstr ""
 "실행하는 데 (%s) 오류가 발생했습니다\n"
 "(%s) 키와 연결되어 있습니다"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:103
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:105
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2693,7 +2781,7 @@ msgstr ""
 "- <b>%s</b> 명령의 결과\n"
 "- <b>%s</b> 명령의 결과"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:117
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:119
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2705,27 +2793,35 @@ msgstr ""
 "좀 더 간단한 설정을 사용하거나 더 최신 버전의 XFree 소프트웨어를 사용하십시"
 "오."
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:223
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:249
 msgid "Do _not show this warning again"
 msgstr "이 경고를 다시 표시하지 않기(_N)"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:234
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:263
+#, c-format
 msgid ""
-"The X system keyboard settings differ from your current GNOME keyboard "
-"settings.  Which set would you like to use?"
+"<b>The X system keyboard settings differ from your current GNOME keyboard "
+"settings.</b>\n"
+"\n"
+"Expected was %s, but the the following settings were found: %s.\n"
+"\n"
+"Which set would you like to use?"
 msgstr ""
-"X 시스템 키보드 설정이 현재 그놈 키보드 설정과 다릅니다.  어느 설정을 사용하"
-"시겠습니까?"
+"<b>X 시스템 키보드 설정이 현재 그놈 키보드 설정과 다릅니다.</b>\n"
+"\n"
+"%s 설정이 있어야 하지만, 다음 설정이 있습니다: %s\n"
+"\n"
+"어느 설정을 사용하시겠습니까?"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:247
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:286
 msgid "Use X settings"
 msgstr "X 설정 사용"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:249
-msgid "Use GNOME settings"
-msgstr "그놈 설정 사용"
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:288
+msgid "Keep GNOME settings"
+msgstr "그놈 설정 유지"
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:129
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:118
 #, c-format
 msgid ""
 "Couldn't execute command: %s\n"
@@ -2734,7 +2830,7 @@ msgstr ""
 "명령을 실행할 수 없습니다: %s\n"
 "명령이 있는지 확인해보십시오."
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:145
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:134
 msgid ""
 "Couldn't put the machine to sleep.\n"
 "Verify that the machine is correctly configured."
@@ -2742,7 +2838,7 @@ msgstr ""
 "컴퓨터를 절전 모드로 바꿀 수 없습니다.\n"
 "컴퓨터가 올바르게 설정되어 있는 지 확인하십시오."
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:180
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:168
 msgid ""
 "Couldn't load the Glade file.\n"
 "Make sure that this daemon is properly installed."
@@ -2769,7 +2865,7 @@ msgstr ""
 msgid "_Do not show this message again"
 msgstr "이 메세지를 다시 표시하지 않기(_D)"
 
-#: ../gnome-settings-daemon/gnome-settings-sound.c:155
+#: ../gnome-settings-daemon/gnome-settings-sound.c:127
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "사운드 파일 %s을(를) 샘플 %s(으)로 읽어들일 수 없습니다"
@@ -2848,16 +2944,39 @@ msgstr "화면"
 msgid "Screen on which BGApplier is to draw"
 msgstr "BGApplier가 그려지는 화면"
 
-#: ../libgswitchit/gswitchit_config.c:1036
-#, c-format
-msgid "There was an error loading an image: %s"
-msgstr "그림을 보여주는데 오류가 발생했습니다: %s"
+#: ../libsounds/sound-view.c:43
+msgid "Login"
+msgstr "로그인"
 
-#: ../libsounds/sound-view.c:115
+#: ../libsounds/sound-view.c:44
+msgid "Logout"
+msgstr "로그아웃"
+
+#: ../libsounds/sound-view.c:45
+msgid "Boing"
+msgstr "깜짝"
+
+#: ../libsounds/sound-view.c:46
+msgid "Siren"
+msgstr "사이렌"
+
+#: ../libsounds/sound-view.c:47
+msgid "Clink"
+msgstr "짤랑짤랑"
+
+#: ../libsounds/sound-view.c:48
+msgid "Beep"
+msgstr "삑"
+
+#: ../libsounds/sound-view.c:49
+msgid "No sound"
+msgstr "소리 없음"
+
+#: ../libsounds/sound-view.c:131
 msgid "Sound not set for this event."
 msgstr "상황에 따른 소리."
 
-#: ../libsounds/sound-view.c:124
+#: ../libsounds/sound-view.c:140
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package for a set of default sounds."
@@ -2866,18 +2985,22 @@ msgstr ""
 "기본 사운드 파일은 gnome-audio 패키지에\n"
 "있습니다."
 
-#: ../libsounds/sound-view.c:135
+#: ../libsounds/sound-view.c:151
 msgid "The sound file for this event does not exist."
 msgstr "이 상황에 대한 사운드 파일이 존재하지 않습니다."
 
-#: ../libsounds/sound-view.c:166
+#: ../libsounds/sound-view.c:182
 msgid "Select Sound File"
 msgstr "소리 파일 선택"
 
-#: ../libsounds/sound-view.c:186
+#: ../libsounds/sound-view.c:202
 #, c-format
 msgid "The file %s is not a valid wav file"
 msgstr "%s 파일은 올바른 WAV 파일이 아닙니다"
+
+#: ../libsounds/sound-view.c:359
+msgid "System Sounds"
+msgstr "시스템 소리"
 
 #: ../libwindow-settings/gnome-wm-manager.c:320
 #, c-format
@@ -2902,162 +3025,146 @@ msgid "Sync text/plain and text/* handlers"
 msgstr "text/plain과 text/* 처리기 동기화"
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:1
-msgid "Brightness down"
-msgstr "밝기 낮춤"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:2
-msgid "Brightness down's shortcut."
-msgstr "밝기 낮춤 바로 가기."
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:3
-msgid "Brightness up"
-msgstr "밝기 높임"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:4
-msgid "Brightness up's shortcut."
-msgstr "밝기 높임 바로 가기."
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:5
 msgid "E-mail"
 msgstr "전자 메일"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:6
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:2
 msgid "E-mail's shortcut."
 msgstr "전자 메일 바로 가기."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:7
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:3
 msgid "Eject"
 msgstr "꺼내기"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:8
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:4
 msgid "Eject's shortcut."
 msgstr "꺼내기 바로 가기."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:9
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:5
 msgid "Home folder"
 msgstr "홈 폴더"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:10
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:6
 msgid "Home folder's shortcut."
 msgstr "홈 폴더 바로 가기."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:7
 msgid "Launch help browser"
 msgstr "도움말 브라우저 실행"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:12
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:8
 msgid "Launch help browser's shortcut."
 msgstr "도움말 브라우저 실행 바로 가기."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:13
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:9
 msgid "Launch web browser"
 msgstr "웹 브라우저 실행"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:14
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:10
 msgid "Launch web browser's shortcut."
 msgstr "웹 브라우저 실행 바로 가기."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
 msgid "Lock screen"
 msgstr "화면 잠그기"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:12
 msgid "Lock screen's shortcut."
 msgstr "화면 잠그기 바로 가기."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:13
 msgid "Log out"
 msgstr "로그아웃"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:14
 msgid "Log out's shortcut."
 msgstr "로그아웃 바로 가기."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
 msgid "Next track key's shortcut."
 msgstr "다음 트랙 바로 가기."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
 msgid "Pause"
 msgstr "잠시 멈춤"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
 msgid "Pause key's shortcut."
 msgstr "잠시 멈춤 바로 가기."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
 msgid "Play (or play/pause)"
 msgstr "연주 (또는 잠시 멈춤)"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
 msgid "Play (or play/pause) key's shortcut."
 msgstr "연주 (또는 잠시 멈춤) 바로가기."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
 msgid "Previous track key's shortcut."
 msgstr "이전 트랙 바로 가기."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
 msgid "Search"
 msgstr "찾기"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
 msgid "Search's shortcut."
 msgstr "찾기 바로 가기."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
 msgid "Skip to next track"
 msgstr "다음 트랙 넘어가기"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
 msgid "Skip to previous track"
 msgstr "이전 트랙 넘어가기"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
 msgid "Sleep"
 msgstr "절전 모드"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
 msgid "Sleep's shortcut."
 msgstr "절전 모드 바로 가기."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
 msgid "Stop playback key"
 msgstr "연주 멈춤"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
 msgid "Stop playback key's shortcut."
 msgstr "연주 멈춤 바로 가기."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
 msgid "Volume down"
 msgstr "소리 낮춤"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
 msgid "Volume down's shortcut."
 msgstr "소리 낮춤 바로 가기."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
 msgid "Volume mute"
 msgstr "소리 끔"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
 msgid "Volume mute's shortcut"
 msgstr "소리 끔 바로 가기"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:37
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
 msgid "Volume step"
 msgstr "소리 단위"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:38
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
 msgid "Volume step as percentage of volume."
 msgstr "소리 단위, 소리 높이의 퍼센트 비율."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:39
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
 msgid "Volume up"
 msgstr "소리 높임"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
 msgid "Volume up's shortcut."
 msgstr "소리 높임 바로 가기."
 
@@ -3067,7 +3174,7 @@ msgstr "화면 보호기 실행 중에 오류가 생길 때 대화상자 보임"
 
 #: ../schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:2
 msgid "Run screensaver at login"
-msgstr "로그인할 때 화면보호기 실행"
+msgstr "로그인할 때 화면 보호기 실행"
 
 #: ../schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:3
 msgid "Show Startup Errors"
@@ -3141,6 +3248,22 @@ msgid "Suppress the \"X sysconfig changed\" warning message"
 msgstr "\"X 시스템설정 바뀜\" 경고 메세지를 보지 않기"
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:14
+msgid "The Keyboard Preview, X offset"
+msgstr "키보드 미리 보기, 가로 위치"
+
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:15
+msgid "The Keyboard Preview, Y offset"
+msgstr "키보드 미리 보기, 세로 위치"
+
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:16
+msgid "The Keyboard Preview, height"
+msgstr "키보드 미리 보기, 높이"
+
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:17
+msgid "The Keyboard Preview, width"
+msgstr "키보드 미리 보기, 너비"
+
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:18
 msgid ""
 "Very soon, keyboard settings in gconf will be overridden (from the system "
 "configuration) This key has been deprecated since GNOME 2.12, please unset "
@@ -3150,15 +3273,15 @@ msgstr ""
 "은 GNOME 2.12부터 낡은 설정이 됩니다, 시스템 기본 설정을 얻으려면, 키보드 모"
 "델과 배치, 옵션키의 설정을 지우십시오."
 
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:15
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:19
 msgid "keyboard layout"
 msgstr "키보드 배치"
 
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:16
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:20
 msgid "keyboard model"
 msgstr "키보드 모델"
 
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:17
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:21
 msgid "modmap file list"
 msgstr "modmap 파일 목록"
 
@@ -3442,6 +3565,94 @@ msgstr "설치된 테마를 미리보기"
 #: ../vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "테마를 미리보기"
+
+#~ msgid "Old password is incorrect, please retype it"
+#~ msgstr "이전 열쇠글이 올바르지 않습니다, 다시 입력하십시오"
+
+#~ msgid "Unexpected error has occurred"
+#~ msgstr "예상치 못한 오류가 발생했습니다"
+
+#~ msgid "Please type the passwords."
+#~ msgstr "열쇠글을 입력하십시오."
+
+#~ msgid "Old pa_ssword:"
+#~ msgstr "이전 열쇠글(_S):"
+
+#~ msgid "Could not display help"
+#~ msgstr "도움말을 보여줄 수 없습니다"
+
+#~ msgid "..."
+#~ msgstr "..."
+
+#~ msgid ""
+#~ "Icon Theme %s correctly installed.\n"
+#~ "You can select it in the theme details."
+#~ msgstr ""
+#~ "현재 %s 아이콘 테마가 설치되어 있습니다.\n"
+#~ "테마 손질하기에서 선택할 수 있습니다."
+
+#~ msgid ""
+#~ "Windows Border Theme %s correctly installed.\n"
+#~ "You can select it in the theme details."
+#~ msgstr ""
+#~ "현재 %s 창 테두리 테마가 설치되어 있습니다.\n"
+#~ "테마 손질하기에서 선택할 수 있습니다."
+
+#~ msgid ""
+#~ "Controls Theme %s correctly installed.\n"
+#~ "You can select it in the theme details."
+#~ msgstr ""
+#~ "현재 %s 컨트롤 테마가 설치되어 있습니다.\n"
+#~ "테마 손질하기에서 선택할 수 있습니다."
+
+#~ msgid ""
+#~ "Cannot install theme.\n"
+#~ "The tar program is not installed on your system."
+#~ msgstr ""
+#~ "테마를 설치할 수 없습니다.\n"
+#~ "시스템에 tar 프로그램을 설치하지 않았습니다."
+
+#~ msgid "<span size=\"larger\" weight=\"bold\">Install a Theme</span>"
+#~ msgstr "<span size=\"larger\" weight=\"bold\">테마 설치</span>"
+
+#~ msgid "Theme Installation"
+#~ msgstr "테마 설치"
+
+#~ msgid "New themes can also be installed by dragging them into the window."
+#~ msgstr "테마를 창에 끌어오는 방법으로도 새 테마를 설치할 수 있습니다."
+
+#~ msgid "Short _description:"
+#~ msgstr "짧은 설명(_D):"
+
+#~ msgid "_Theme name:"
+#~ msgstr "테마 이름(_T):"
+
+#~ msgid "No '/dev/pmu' device found"
+#~ msgstr "'/dev/pmu' 장치를 찾을 수 없습니다"
+
+#~ msgid "Not a powerbook"
+#~ msgstr "파워북이 아닙니다"
+
+#~ msgid "Wrong permission for '/dev/pmu' device"
+#~ msgstr "'/dev/pmu' 장치의 허가권이 잘못되어 있습니다"
+
+#~ msgid "Could not initialize Bonobo"
+#~ msgstr "보노보를 초기화할 수 없습니다"
+
+#~ msgid "There was an error loading an image: %s"
+#~ msgstr "그림을 보여주는데 오류가 발생했습니다: %s"
+
+#~ msgid "Brightness down"
+#~ msgstr "밝기 낮춤"
+
+#~ msgid "Brightness down's shortcut."
+#~ msgstr "밝기 낮춤 바로 가기."
+
+#~ msgid "Brightness up"
+#~ msgstr "밝기 높임"
+
+#~ msgid "Brightness up's shortcut."
+#~ msgstr "밝기 높임 바로 가기."
 
 #~ msgid "microseconds"
 #~ msgstr "천분의 일초"
