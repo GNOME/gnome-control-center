@@ -720,26 +720,26 @@ peditor_color_value_changed (GConfClient         *client,
 	if (value != NULL) {
 		value_wid = peditor->p->conv_to_widget_cb (peditor, value);
 		gdk_color_parse (gconf_value_get_string (value_wid), &color);
-		gnome_color_picker_set_i16 (GNOME_COLOR_PICKER (peditor->p->ui_control), color.red, color.green, color.blue, 65535);
+		gtk_color_button_set_color (
+		    GTK_COLOR_BUTTON (peditor->p->ui_control), &color);
 		gconf_value_free (value_wid);
 	}
 }
 
 static void
 peditor_color_widget_changed (GConfPropertyEditor *peditor,
-			      guint                r,
-			      guint                g,
-			      guint                b,
-			      guint                a,
-			      GnomeColorPicker    *cp)
+			      GtkColorButton      *cb)
 {
 	gchar *str;
 	GConfValue *value, *value_wid;
+	GdkColor color;
 
 	if (!peditor->p->inited) return;
 
 	value_wid = gconf_value_new (GCONF_VALUE_STRING);
-	str = g_strdup_printf ("#%02x%02x%02x", r >> 8, g >> 8, b >> 8);
+	gtk_color_button_get_color (cb, &color);
+	str = g_strdup_printf ("#%02x%02x%02x", color.red >> 8,
+			       color.green >> 8, color.blue >> 8);
 	gconf_value_set_string (value_wid, str);
 	g_free (str);
 
@@ -755,7 +755,7 @@ peditor_color_widget_changed (GConfPropertyEditor *peditor,
 GObject *
 gconf_peditor_new_color (GConfChangeSet *changeset,
 			 gchar          *key,
-			 GtkWidget      *cp,
+			 GtkWidget      *cb,
 			 gchar          *first_property_name,
 			 ...)
 {
@@ -763,8 +763,8 @@ gconf_peditor_new_color (GConfChangeSet *changeset,
 	va_list var_args;
 
 	g_return_val_if_fail (key != NULL, NULL);
-	g_return_val_if_fail (cp != NULL, NULL);
-	g_return_val_if_fail (GNOME_IS_COLOR_PICKER (cp), NULL);
+	g_return_val_if_fail (cb != NULL, NULL);
+	g_return_val_if_fail (GTK_IS_COLOR_BUTTON (cb), NULL);
 
 	va_start (var_args, first_property_name);
 
@@ -772,13 +772,13 @@ gconf_peditor_new_color (GConfChangeSet *changeset,
 		(key,
 		 (GConfClientNotifyFunc) peditor_color_value_changed,
 		 changeset,
-		 G_OBJECT (cp),
+		 G_OBJECT (cb),
 		 first_property_name,
 		 var_args, NULL);
 
 	va_end (var_args);
 
-	g_signal_connect_swapped (G_OBJECT (cp), "color_set",
+	g_signal_connect_swapped (G_OBJECT (cb), "color_set",
 				  (GCallback) peditor_color_widget_changed, peditor);
 
 	return peditor;
