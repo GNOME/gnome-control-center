@@ -135,7 +135,7 @@ delay_value_changed_cb (GtkWidget *range, GtkScrollType scroll, gdouble value,
 	else if (value > 1000)
 		value = 1000;
 
-	message = g_strdup_printf (ngettext ("%d milliseconds","%d milliseconds", CLAMP ((int) floor ((value+50)/100.0) * 100, 100, 1000)), CLAMP ((int) floor ((value+50)/100.0) * 100, 100, 1000));
+	message = g_strdup_printf (ngettext ("%d millisecond","%d milliseconds", CLAMP ((int) floor ((value+50)/100.0) * 100, 100, 1000)), CLAMP ((int) floor ((value+50)/100.0) * 100, 100, 1000));
 	gtk_label_set_label ((GtkLabel*) WID ("delay_label"), message);
 	g_free (message);
 
@@ -148,7 +148,7 @@ get_default_mouse_info (int *default_numerator, int *default_denominator, int *d
 	int numerator, denominator;
 	int threshold;
 	int tmp_num, tmp_den, tmp_threshold;
-	
+
 	/* Query X for the default value */
 	XGetPointerControl (GDK_DISPLAY (), &numerator, &denominator,
 			    &threshold);
@@ -886,12 +886,12 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 	g_object_set_data (G_OBJECT (WID ("double_click_eventbox")), "image", WID ("double_click_image"));
 	g_signal_connect (WID ("double_click_eventbox"), "button_press_event",
 			  G_CALLBACK (event_box_button_press_event), changeset);
-	
+
 	/* set the timeout value  label with correct value of timeout */
-	message = g_strdup_printf (ngettext ("%d milliseconds", "%d milliseconds", (int) gtk_range_get_value (GTK_RANGE (WID ("delay_scale")))), (int) gtk_range_get_value (GTK_RANGE (WID ("delay_scale"))));
+	message = g_strdup_printf (ngettext ("%d millisecond", "%d milliseconds", (int) gtk_range_get_value (GTK_RANGE (WID ("delay_scale")))), (int) gtk_range_get_value (GTK_RANGE (WID ("delay_scale"))));
 	gtk_label_set_label ((GtkLabel*) WID ("delay_label"), message);
-	g_free (message); 
-	
+	g_free (message);
+
 	/* Cursors page */
 	tree_view = WID ("cursor_tree");
 	cursor_font = read_cursor_font ();
