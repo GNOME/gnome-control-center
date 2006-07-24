@@ -549,7 +549,7 @@ cursor_font_changed (GConfClient *client,
 				    -1);
 		gtk_tree_model_sort_convert_child_iter_to_iter
 			(GTK_TREE_MODEL_SORT(smodel), &sort_iter, &iter);
-		if ((temp_cursor_font == NULL && cursor_font == NULL) ||
+		if ((cursor_font == NULL) || 
 		    ((temp_cursor_font != NULL && cursor_font != NULL) &&
 		     (!strcmp (cursor_font, temp_cursor_font)))) {
 			if (!gtk_tree_selection_iter_is_selected (selection, &sort_iter))
@@ -793,6 +793,10 @@ populate_tree_model(GtkTreeModelSort* model, GtkTreeSelection* selection) {
 	guint i;
 	// add the default x font cursors
 	cursor_font = read_cursor_font();
+
+	if(!cursor_font) {
+		cursor_font = g_strdup (builtins[0][0]);
+	}
 
 	for(i = 0; i < G_N_ELEMENTS(builtins); i++) {
 		GtkTreeIter iter;
