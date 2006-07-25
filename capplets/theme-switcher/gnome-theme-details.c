@@ -207,7 +207,7 @@ static void
 window_theme_selection_changed (GtkTreeSelection *selection,
 				gpointer          data)
 {
-  GnomeWindowManager *window_manager;
+  GnomeWindowManager *window_manager = NULL;
   GnomeWMSettings wm_settings;
   GtkTreeIter iter;
   gchar *window_theme_name;
@@ -228,7 +228,7 @@ window_theme_selection_changed (GtkTreeSelection *selection,
     }
 
   window_manager = gnome_wm_manager_get_current (gdk_display_get_default_screen (gdk_display_get_default ()));
-  if (window_manager != NULL) {
+  if (window_manager != NULL && strcmp (gnome_window_manager_get_name (window_manager), "No name")) {
     wm_settings.flags = GNOME_WM_SETTING_THEME;
     wm_settings.theme = window_theme_name;
     gnome_window_manager_change_settings (window_manager, &wm_settings);
@@ -723,7 +723,7 @@ gnome_theme_details_update_from_gconf (void)
   GladeXML *dialog;
   GtkWidget *tree_view;
   gchar *theme;
-  GnomeWindowManager *window_manager;
+  GnomeWindowManager *window_manager = NULL;
   GnomeWMSettings wm_settings;
 
   gnome_theme_details_init ();
@@ -741,7 +741,7 @@ gnome_theme_details_update_from_gconf (void)
 
   tree_view = WID ("window_theme_treeview");
   wm_settings.flags = GNOME_WM_SETTING_THEME;
-  if (window_manager) {
+  if (window_manager != NULL && strcmp (gnome_window_manager_get_name (window_manager), "No name")) {
     gnome_window_manager_get_settings (window_manager, &wm_settings);
     update_list_something (tree_view, wm_settings.theme);
   }

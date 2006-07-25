@@ -1,3 +1,10 @@
+2006-07-25  Thomas Wood  <thos@gnome.org>
+
+	* gnome-theme-details.c: (window_theme_selection_changed),
+	(gnome_theme_details_update_from_gconf): Don't attempt to load window
+	manager theme name from an unknown window manager (fixes bug 333276 -
+	gnome-theme-manager crashes with xgl/compiz)
+
 2006-07-23  Sebastien Bacher  <seb128@debian.org>
 
 	* gtk-theme-selector.desktop.in.in: don't list the Application 
