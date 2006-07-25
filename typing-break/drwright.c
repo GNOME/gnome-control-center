@@ -589,77 +589,52 @@ popup_preferences_cb (gpointer   callback_data,
 }
 
 static void
-about_response_cb (GtkWidget *dialog,
-		   gint       response,
-		   gpointer   user_data)
-{
-	gtk_widget_destroy (dialog);
-}
-	
-static void
 popup_about_cb (gpointer   callback_data,
 		guint      action,
 		GtkWidget *widget)
 {
 	static GtkWidget *about_window;
-	GtkWidget        *vbox;
-	GtkWidget        *label;
 	GdkPixbuf        *icon;
-	gchar            *markup;
+	char             *authors [] = {
+		N_("Written by Richard Hult <richard@imendio.com>"),
+		N_("Eye candy added by Anders Carlsson"),
+		NULL
+	};
+	int i;
 
 	if (about_window) {
 		gtk_window_present (GTK_WINDOW (about_window));
 		return;
 	}
 	
-	about_window = gtk_dialog_new ();
+	for (i = 0; authors [i]; i++)
+		authors [i] = _(authors [i]);
+
+	about_window = gtk_about_dialog_new ();
 
 	g_signal_connect (about_window,
 			  "destroy",
                           G_CALLBACK (gtk_widget_destroyed),
 			  &about_window);
 	
-	gtk_dialog_add_button (GTK_DIALOG (about_window),
-			       GTK_STOCK_OK, GTK_RESPONSE_OK);
-	gtk_dialog_set_default_response (GTK_DIALOG (about_window),
-					 GTK_RESPONSE_OK);
-	
-	gtk_window_set_title (GTK_WINDOW (about_window), _("About GNOME Typing Monitor"));
 	icon = NULL; /*gdk_pixbuf_new_from_file (IMAGEDIR "/bar.png", NULL);*/
-	if (icon != NULL) {
-		gtk_window_set_icon (GTK_WINDOW (about_window), icon);
+	
+	g_object_set (about_window,
+		      "name", _("Typing Monitor"),
+		      "version", VERSION,
+		      "comments", _("A computer break reminder."),
+		      "authors", authors,
+		      "logo", icon,
+		      NULL);
+
+	if (icon != NULL)
 		g_object_unref (icon);
-	}
-	
-	gtk_window_set_resizable (GTK_WINDOW (about_window), FALSE);
-	gtk_window_set_position (GTK_WINDOW (about_window), 
-				 GTK_WIN_POS_CENTER_ON_PARENT);
-	gtk_window_set_type_hint (GTK_WINDOW (about_window), 
-				  GDK_WINDOW_TYPE_HINT_DIALOG);
-
-	vbox = gtk_vbox_new (FALSE, 0);
-	gtk_container_set_border_width (GTK_CONTAINER (vbox), 6);
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (about_window)->vbox), vbox, FALSE, FALSE, 0);
-
-	label = gtk_label_new (NULL);
-	gtk_misc_set_alignment (GTK_MISC (label), 0.5, 0.5);
-	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_CENTER);
-	markup = g_strdup_printf ("<span size=\"xx-large\" weight=\"bold\">Typing Monitor " VERSION "</span>\n\n"
-				  "%s\n\n"
-				  "<span size=\"small\">%s</span>\n"
-				  "<span size=\"small\">%s</span>\n",
-				  _("A computer break reminder."),
-				  _("Written by Richard Hult &lt;richard@imendio.com&gt;"),
-				  _("Eye candy added by Anders Carlsson"));
-	gtk_label_set_markup (GTK_LABEL (label), markup);
-	g_free (markup);
-	gtk_box_pack_start (GTK_BOX (vbox), label, TRUE, TRUE, 0);
-	
-	gtk_widget_show_all (about_window);
 
 	g_signal_connect (about_window,
-			  "response", G_CALLBACK (about_response_cb),
+			  "response", G_CALLBACK (gtk_widget_destroy),
 			  NULL);
+
+	gtk_widget_show (about_window);
 }
 
 static void
