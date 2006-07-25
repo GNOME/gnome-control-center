@@ -35,7 +35,6 @@
 #include "drw-break-window.h"
 #include "drw-monitor.h"
 #include "drw-utils.h"
-#include "eggtrayicon.h"
 
 #define BLINK_TIMEOUT        200
 #define BLINK_TIMEOUT_MIN    120
@@ -85,10 +84,7 @@ struct _DrWright {
 
 	gboolean        blink_on;
 
-	EggTrayIcon    *icon;
-	GtkWidget      *icon_image;
-	GtkWidget      *icon_event_box;
-	GtkTooltips    *tooltips;
+	GtkStatusIcon  *icon;
 
 	GdkPixbuf      *neutral_bar;
 	GdkPixbuf      *red_bar;
@@ -103,9 +99,6 @@ static void     activity_detected_cb           (DrwMonitor     *monitor,
 						DrWright       *drwright);
 static gboolean maybe_change_state             (DrWright       *drwright);
 static gboolean update_tooltip                 (DrWright       *drwright);
-static gboolean icon_button_press_cb           (GtkWidget      *widget,
-						GdkEventButton *event,
-						DrWright       *drwright);
 static void     break_window_done_cb           (GtkWidget      *window,
 						DrWright       *dr);
 static void     break_window_postpone_cb       (GtkWidget      *window,
@@ -159,7 +152,8 @@ update_icon (DrWright *dr)
 	gboolean   set_pixbuf;
 
 	if (!dr->enabled) {
-		gtk_image_set_from_pixbuf (GTK_IMAGE (dr->icon_image), dr->disabled_bar);
+		gtk_status_icon_set_from_pixbuf (dr->icon,
+						 dr->disabled_bar);
 		return;
 	}
 	
@@ -225,7 +219,8 @@ update_icon (DrWright *dr)
 			      255);
 	
 	if (set_pixbuf) {
-		gtk_image_set_from_pixbuf (GTK_IMAGE (dr->icon_image), tmp_pixbuf);
+		gtk_status_icon_set_from_pixbuf (dr->icon,
+						 tmp_pixbuf);
 	}
 	
 	if (dr->composite_bar) {
@@ -249,9 +244,11 @@ blink_timeout_cb (DrWright *dr)
 	}
 	
 	if (dr->blink_on || timeout == 0) {
-		gtk_image_set_from_pixbuf (GTK_IMAGE (dr->icon_image), dr->composite_bar);
+		gtk_status_icon_set_from_pixbuf (dr->icon,
+						 dr->composite_bar);
 	} else {
-		gtk_image_set_from_pixbuf (GTK_IMAGE (dr->icon_image), dr->neutral_bar);
+		gtk_status_icon_set_from_pixbuf (dr->icon,
+						 dr->neutral_bar);
 	}
 	
 	dr->blink_on = !dr->blink_on;
@@ -331,7 +328,8 @@ maybe_change_state (DrWright *dr)
 			dr->break_window = NULL;
 		}
 
-		gtk_image_set_from_pixbuf (GTK_IMAGE (dr->icon_image), dr->neutral_bar);
+		gtk_status_icon_set_from_pixbuf (dr->icon,
+						 dr->neutral_bar);
 
 		g_timer_start (dr->timer);
 		g_timer_start (dr->idle_timer);
@@ -397,7 +395,8 @@ maybe_change_state (DrWright *dr)
 		}
 		
 		stop_blinking (dr);
-		gtk_image_set_from_pixbuf (GTK_IMAGE (dr->icon_image), dr->red_bar);
+		gtk_status_icon_set_from_pixbuf (dr->icon,
+						 dr->red_bar);
 
 		g_timer_start (dr->timer);
 
@@ -435,7 +434,8 @@ maybe_change_state (DrWright *dr)
 
 	case STATE_BREAK_DONE_SETUP:
 		stop_blinking (dr);
-		gtk_image_set_from_pixbuf (GTK_IMAGE (dr->icon_image), dr->green_bar);
+		gtk_status_icon_set_from_pixbuf (dr->icon,
+						 dr->green_bar);
 
 		dr->state = STATE_BREAK_DONE;
 		break;
@@ -466,9 +466,8 @@ update_tooltip (DrWright *dr)
 	gchar *str;
 
 	if (!dr->enabled) {
-		gtk_tooltips_set_tip (GTK_TOOLTIPS (dr->tooltips),
-				      dr->icon_event_box,
-				      _("Disabled"), _("Disabled"));
+		gtk_status_icon_set_tooltip (dr->icon,
+					     _("Disabled"));
 		return TRUE;
 	}
 	
@@ -493,9 +492,8 @@ update_tooltip (DrWright *dr)
 		str = g_strdup_printf (_("Less than one minute until the next break"));
 	}
 	
-	gtk_tooltips_set_tip (GTK_TOOLTIPS (dr->tooltips),
-			      dr->icon_event_box,
-			      str, str);
+	gtk_status_icon_set_tooltip (dr->icon,
+				     str);
 
 	g_free (str);
 
@@ -665,67 +663,9 @@ popup_about_cb (gpointer   callback_data,
 }
 
 static void
-popup_menu_position_cb (GtkMenu  *menu,
-			gint     *x,
-			gint     *y,
-			gboolean *push_in,
-			gpointer  data)
-{
-	GtkWidget      *w = data;
-	GtkRequisition  requisition;
-	gint            wx, wy;
-
-	g_return_if_fail (w != NULL);
-
-	gtk_widget_size_request (GTK_WIDGET (menu), &requisition);
-
-	gdk_window_get_origin (w->window, &wx, &wy);
-
-	if (*x < wx)
-		*x = wx;
-	else if (*x > wx + w->allocation.width)
-		*x = wx + w->allocation.width;
-
-	if (*x + requisition.width > gdk_screen_width())
-		*x = gdk_screen_width() - requisition.width;
-
-	if (*y < wy)
-		*y = wy;
-	 else if (*y > wy + w->allocation.height)
-		*y = wy + w->allocation.height;
-
-	if (*y + requisition.height > gdk_screen_height())
-		*y = gdk_screen_height() - requisition.height;
-
-	*push_in = TRUE;
-}
-
-static gboolean
-icon_button_press_cb (GtkWidget      *widget,
-		      GdkEventButton *event,
-		      DrWright       *dr)
-{
-	GtkWidget *menu;
-
-	if (event->button == 3) {
-		menu = gtk_item_factory_get_widget (dr->popup_factory, "");
-
-		gtk_menu_popup (GTK_MENU (menu),
-				NULL,
-				NULL,
-				popup_menu_position_cb,
-				dr->icon,
-				event->button,
-				event->time);
-
-		return TRUE;
-	}
-	
-	return FALSE;
-}
-
-static void
 popup_menu_cb (GtkWidget *widget,
+	       guint      button,
+	       guint      activate_time,
 	       DrWright  *dr)
 {
 	GtkWidget *menu;
@@ -735,7 +675,7 @@ popup_menu_cb (GtkWidget *widget,
 	gtk_menu_popup (GTK_MENU (menu),
 			NULL,
 			NULL,
-			popup_menu_position_cb,
+			gtk_status_icon_position_menu,
 			dr->icon,
 			0,
 			gtk_get_current_event_time());
@@ -791,77 +731,17 @@ item_factory_trans_cb (const gchar *path,
 }
 
 static void
-icon_event_box_destroy_cb (GtkWidget *widget,
-			   DrWright  *dr)
-{
-	gtk_widget_destroy (GTK_WIDGET (dr->icon));
-	init_tray_icon (dr);
-}
-
-static gboolean
-icon_event_box_expose_event_cb (GtkWidget      *widget,
-				GdkEventExpose *event,
-				DrWright       *dr)
-{
-	if (GTK_WIDGET_HAS_FOCUS (widget)) {
-		gint focus_width, focus_pad;
-		gint x, y, width, height;
-		
-		gtk_widget_style_get (widget,
-				      "focus-line-width", &focus_width,
-				      "focus-padding", &focus_pad,
-				      NULL);
-		x = widget->allocation.x + focus_pad;
-		y = widget->allocation.y + focus_pad;
-		width = widget->allocation.width - 2 * focus_pad;
-		height = widget->allocation.height - 2 * focus_pad;
-
-		gtk_paint_focus (widget->style, widget->window,
-				 GTK_WIDGET_STATE (widget),
-				 &event->area, widget, "button",
-				 x, y, width, height);
-	}
-
-	return FALSE;
-}
-
-static void
 init_tray_icon (DrWright *dr)
 {
-	dr->icon = egg_tray_icon_new (_("Break reminder"));
+	dr->icon = gtk_status_icon_new_from_pixbuf (dr->neutral_bar);
 
-	dr->icon_event_box = gtk_event_box_new ();
-	dr->icon_image = gtk_image_new_from_pixbuf (dr->neutral_bar);
-	gtk_container_add (GTK_CONTAINER (dr->icon_event_box), dr->icon_image);
-		
-	gtk_widget_add_events (GTK_WIDGET (dr->icon), GDK_BUTTON_PRESS_MASK | GDK_FOCUS_CHANGE_MASK);
-	gtk_container_add (GTK_CONTAINER (dr->icon), dr->icon_event_box);
-	gtk_widget_show_all (GTK_WIDGET (dr->icon));
-
-	GTK_WIDGET_SET_FLAGS (dr->icon_event_box, GTK_CAN_FOCUS);
-	
 	update_tooltip (dr);
 	update_icon (dr);
-
-	g_signal_connect (dr->icon,
-			  "button_press_event",
-			  G_CALLBACK (icon_button_press_cb),
-			  dr);
-
-	g_signal_connect (dr->icon,
-			  "destroy",
-			  G_CALLBACK (icon_event_box_destroy_cb),
-			  dr);
 
 	g_signal_connect (dr->icon,
 			  "popup_menu",
 			  G_CALLBACK (popup_menu_cb),
 			  dr);
-	
-	g_signal_connect_after (dr->icon_event_box,
-				"expose_event",
-				G_CALLBACK (icon_event_box_expose_event_cb),
-				dr);
 }
 
 static GList *
@@ -980,8 +860,6 @@ drwright_new (void)
 	dr->red_bar = gdk_pixbuf_new_from_file (IMAGEDIR "/bar-red.png", NULL);
 	dr->green_bar = gdk_pixbuf_new_from_file (IMAGEDIR "/bar-green.png", NULL);
 	dr->disabled_bar = gdk_pixbuf_new_from_file (IMAGEDIR "/bar-disabled.png", NULL);
-
-	dr->tooltips = gtk_tooltips_new ();
 
 	init_tray_icon (dr);
 	
