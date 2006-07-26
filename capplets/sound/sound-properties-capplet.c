@@ -41,7 +41,9 @@
 #include <glade/glade.h>
 
 #include <dbus/dbus-glib-lowlevel.h>
+#if USE_HAL
 #include <libhal.h>
+#endif
 #include <gst/gst.h>
 
 /* Needed only for the sound capplet */
