@@ -1238,7 +1238,22 @@ revert_theme_clicked (GtkWidget *button,
   gtk_widget_set_sensitive(WID("meta_theme_revert_button"), FALSE);  
   reverted = TRUE;
 }
-	
+
+
+/* Find out if the lockdown key has been set. Currently returns false on error... */
+static gboolean
+get_lockdown_status ()
+{
+  GConfClient *client;
+  gboolean result;
+
+  client = gconf_client_get_default ();
+  result = gconf_client_get_bool (client, LOCKDOWN_KEY, NULL);
+  g_object_unref (client);
+
+  return result;
+}
+
 static void
 setup_dialog (GladeXML *dialog)
 {
@@ -1341,6 +1356,16 @@ setup_dialog (GladeXML *dialog)
 
   update_font_button_state (dialog);
   update_background_button_state (dialog);
+
+  if (get_lockdown_status ())
+  {
+	/* theme changing has been disabled by the system administrator */
+	gtk_widget_set_sensitive (WID ("meta_theme_hbox"),FALSE);
+	gtk_widget_set_sensitive (WID ("meta_theme_notebook"),FALSE);
+	gtk_widget_show (WID ("lockdown_hbox"));
+  }
+
+
   gtk_widget_show (parent);
 
 }
