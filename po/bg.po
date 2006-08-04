@@ -1,7 +1,7 @@
 # Bulgarian translation for the GNOME 2 control-center.
-# Copyright (C) 2002 Free Software Foundation, Inc.
+# Copyright (C) 2002, 2004, 2005, 2006 Free Software Foundation, Inc.
 # Borislav Aleksandrov <B.Aleksandrov@cnsys.bg>, 2002.
-# small updates, Yanko Kaneti <yaneti@declera.com>, 2002.
+# Yanko Kaneti <yaneti@declera.com>, 2002.
 # Rostislav Raykov <zbrox@i-space.org>, 2004, 2005.
 # Vladimir Petkov <vpetkov@i-space.org>, 2004, 2005.
 # Alexander Shopov <ash@contact.bg>, 2006.
@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-29 17:53+0300\n"
-"PO-Revision-Date: 2006-03-05 14:28+0200\n"
+"POT-Creation-Date: 2006-08-04 08:04+0300\n"
+"PO-Revision-Date: 2006-08-04 08:02+0300\n"
 "Last-Translator: Rostislav \"zbrox\" Raykov <zbrox@i-space.org>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
 "MIME-Version: 1.0\n"
@@ -89,60 +89,110 @@ msgstr ""
 msgid "About %s"
 msgstr "Относно %s"
 
-#: ../capplets/about-me/gnome-about-me-password.c:116
-#: ../capplets/about-me/gnome-about-me-password.c:707
-msgid "Old password is incorrect, please retype it"
-msgstr "Старата парола е неправилна. Въведете я отново."
+#: ../capplets/about-me/gnome-about-me-password.c:172
+msgid "Child exited unexpectedly"
+msgstr "Дъщерният процес спря неочаквано"
 
-#: ../capplets/about-me/gnome-about-me-password.c:127
-msgid "System error has occurred"
-msgstr "Системна грешка"
+#: ../capplets/about-me/gnome-about-me-password.c:295
+#, c-format
+msgid "Could not shutdown backend_stdin IO channel: %s"
+msgstr "В/И канал за стандартен вход на ядрото не може да бъде затворен: %s"
 
-#: ../capplets/about-me/gnome-about-me-password.c:128
-msgid "Could not run /usr/bin/passwd"
-msgstr "Не може да се стартира /usr/bin/passwd"
+#: ../capplets/about-me/gnome-about-me-password.c:308
+#, c-format
+msgid "Could not shutdown backend_stdout IO channel: %s"
+msgstr "В/И канал за стандартен изход на ядрото не може да бъде затворен: %s<"
 
-#: ../capplets/about-me/gnome-about-me-password.c:129
+#: ../capplets/about-me/gnome-about-me-password.c:449
+msgid "Authenticated!"
+msgstr "Влязохте в системата!"
+
+#. This is a re-auth, and it failed.
+#. * The password must have been changed in the meantime!
+#. * Ask the user to re-authenticate
+#.
+#. Update status message and auth state
+#. Authentication failure
+#: ../capplets/about-me/gnome-about-me-password.c:466
+#: ../capplets/about-me/gnome-about-me-password.c:539
+msgid ""
+"Your password has been changed since you initially authenticated! Please re-"
+"authenticate."
+msgstr ""
+"Паролата Ви е променена откакто се идентифицирахте. Идентифицирайте се "
+"наново."
+
+#: ../capplets/about-me/gnome-about-me-password.c:468
+msgid "That password was incorrect."
+msgstr "Паролата не е вярна"
+
+#: ../capplets/about-me/gnome-about-me-password.c:514
+msgid "Your password has been changed."
+msgstr "Паролата беше променена."
+
+#. What does this indicate?
+#. * "Authentication information cannot be recovered?" from libpam?
+#: ../capplets/about-me/gnome-about-me-password.c:524
+#, c-format
+msgid "System error: %s."
+msgstr "Грешка в системата: %s."
+
+#: ../capplets/about-me/gnome-about-me-password.c:526
+msgid "The password is too short."
+msgstr "Паролата е твърде кратка."
+
+#: ../capplets/about-me/gnome-about-me-password.c:528
+#: ../capplets/about-me/gnome-about-me-password.c:530
+msgid "The password is too simple."
+msgstr "Паролата е твърде проста."
+
+#: ../capplets/about-me/gnome-about-me-password.c:532
+msgid "The old and new passwords are too similar."
+msgstr "Старата и новата парола си приличат твърде много."
+
+#: ../capplets/about-me/gnome-about-me-password.c:534
+msgid "The new password must contain numeric or special character(s)."
+msgstr "Новата парола трябва да съдържа цифри или специални знаци."
+
+#: ../capplets/about-me/gnome-about-me-password.c:536
+msgid "The old and new passwords are the same."
+msgstr "Старата и новата парола са еднакви."
+
+#: ../capplets/about-me/gnome-about-me-password.c:787
+#, c-format
+msgid "Unable to launch /usr/bin/passwd: %s"
+msgstr "Неуспех при стартирането на /usr/bin/passwd: %s"
+
+#: ../capplets/about-me/gnome-about-me-password.c:789
 msgid "Unable to launch backend"
 msgstr "Не може да се пусне основната програма"
 
-#: ../capplets/about-me/gnome-about-me-password.c:131
-#: ../capplets/about-me/gnome-about-me-password.c:132
-msgid "Unexpected error has occurred"
-msgstr "Непозната грешка"
+#: ../capplets/about-me/gnome-about-me-password.c:790
+msgid "A system error has occurred"
+msgstr "Получи се грешка в системата"
 
-#: ../capplets/about-me/gnome-about-me-password.c:331
-msgid "Password is too short"
-msgstr "Паролата е прекалено кратка"
+#. Update status message
+#: ../capplets/about-me/gnome-about-me-password.c:810
+msgid "Checking password..."
+msgstr "Проверяване на паролата..."
 
-#: ../capplets/about-me/gnome-about-me-password.c:334
-#: ../capplets/about-me/gnome-about-me-password.c:337
-msgid "Password is too simple"
-msgstr "Паролата е прекалено проста"
+#: ../capplets/about-me/gnome-about-me-password.c:897
+msgid "Click <b>Change password</b> to change your password."
+msgstr "Натиснете бутона <b>Смяна на парола</b>, за да смените паролата си."
 
-#: ../capplets/about-me/gnome-about-me-password.c:340
-msgid "Old and new passwords are too similar"
-msgstr "Старата и новата парола прекалено много си приличат"
+#: ../capplets/about-me/gnome-about-me-password.c:900
+msgid "Please type your password in the <b>New password</b> field."
+msgstr "Въведете Вашата парола в полето <b>Нова парола</b>."
 
-#: ../capplets/about-me/gnome-about-me-password.c:343
-msgid "Must contain numeric or special character(s)"
-msgstr "Трябва да съдържа чифри или специални знаци"
+#: ../capplets/about-me/gnome-about-me-password.c:903
+#: ../capplets/about-me/gnome-about-me.glade.h:34
+msgid ""
+"Please type your password again in the <b>Retype new password</b> field."
+msgstr "Въведете отново Вашата парола в полето <b>Въведете новата парола</b>."
 
-#: ../capplets/about-me/gnome-about-me-password.c:348
-msgid "Old and new password are the same"
-msgstr "Старата и новата парола са еднакви"
-
-#: ../capplets/about-me/gnome-about-me-password.c:634
-msgid "Please type the passwords."
-msgstr "Въведете паролите."
-
-#: ../capplets/about-me/gnome-about-me-password.c:642
-msgid "Please type the password again, it is wrong."
-msgstr "Въведете паролата отново, тази е грешна."
-
-#: ../capplets/about-me/gnome-about-me-password.c:645
-msgid "Click on Change Password to change the password."
-msgstr "Натиснете бутона „Смяна на парола“, за да смените паролата си."
+#: ../capplets/about-me/gnome-about-me-password.c:906
+msgid "The two passwords are not equal."
+msgstr "Двете пароли не са еднакви."
 
 #: ../capplets/about-me/gnome-about-me.glade.h:1
 #: ../vfs-methods/themus/apply-font.glade.h:1
@@ -153,6 +203,7 @@ msgstr " "
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:1
+#: ../capplets/sound/sound-properties.glade.h:1
 #: ../capplets/ui-properties/gnome-ui-properties.glade.h:1
 msgid "    "
 msgstr "    "
@@ -174,20 +225,20 @@ msgid "<b>Job</b>"
 msgstr "<b>Работа</b>"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:7
-msgid "<b>Please type the passwords.</b>"
-msgstr "<b>Въведете паролите.</b>"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:8
 msgid "<b>Telephone</b>"
 msgstr "<b>Телефон</b>"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:9
+#: ../capplets/about-me/gnome-about-me.glade.h:8
 msgid "<b>Web</b>"
 msgstr "<b>Интернет</b>"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:10
+#: ../capplets/about-me/gnome-about-me.glade.h:9
 msgid "<b>Work</b>"
 msgstr "<b>Служебен</b>"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:10
+msgid "<span size=\"larger\" weight=\"bold\">Change your password</span>"
+msgstr "<span size=\"larger\" weight=\"bold\">Промяна на парола</span>"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:11
 msgid "A_IM/iChat:"
@@ -222,142 +273,162 @@ msgid "Change Passwo_rd..."
 msgstr "Смяна на па_ролата..."
 
 #: ../capplets/about-me/gnome-about-me.glade.h:20
-msgid "Change Password"
-msgstr "Смяна на паролата"
+msgid "Change pa_ssword"
+msgstr "Промяна на _паролата"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:21
+msgid "Change password"
+msgstr "Промяна на паролата"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:22
 msgid "Ci_ty:"
 msgstr "Гра_д:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:22
+#: ../capplets/about-me/gnome-about-me.glade.h:23
 msgid "Co_untry:"
 msgstr "_Страна:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:23
+#: ../capplets/about-me/gnome-about-me.glade.h:24
 msgid "Contact"
 msgstr "Контакт"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:24
+#: ../capplets/about-me/gnome-about-me.glade.h:25
 msgid "Cou_ntry:"
 msgstr "С_трана:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:25
+#: ../capplets/about-me/gnome-about-me.glade.h:26
+msgid "Current _password:"
+msgstr "_Текуща парола:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:27
 msgid "Full Name"
 msgstr "Пълно име"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:26
+#: ../capplets/about-me/gnome-about-me.glade.h:28
 msgid "Hom_e:"
 msgstr "Д_омашен:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:27
+#: ../capplets/about-me/gnome-about-me.glade.h:29
 msgid "IC_Q:"
 msgstr "IC_Q:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:28
+#: ../capplets/about-me/gnome-about-me.glade.h:30
 msgid "M_SN:"
 msgstr "_MSN:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:29
-msgid "Old pa_ssword:"
-msgstr "Стара _парола:"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:30
+#: ../capplets/about-me/gnome-about-me.glade.h:31
 msgid "P.O. _box:"
 msgstr "По_щ. К.:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:31
+#: ../capplets/about-me/gnome-about-me.glade.h:32
 msgid "P._O. box:"
 msgstr "П_ощ. К:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:32
+#: ../capplets/about-me/gnome-about-me.glade.h:33
 msgid "Personal Info"
 msgstr "Лична информация"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:33
+#: ../capplets/about-me/gnome-about-me.glade.h:35
 msgid "State/Pro_vince:"
 msgstr "Щат/провин_ция:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:34
+#: ../capplets/about-me/gnome-about-me.glade.h:36
+msgid ""
+"To change your password, enter your current password in the field below and "
+"click <b>Authenticate</b>.\n"
+"After you have authenticated, enter your new password, retype it for "
+"verification and click <b>Change password</b>."
+msgstr ""
+"За да смените паролата си, въведете текущата си парола в полето отдолу и "
+"натиснете <b>Идентификация</b>.\n"
+"След това въведете новата си парола, напишете я пак за потвърждение и "
+"натиснете <b>Смяна на паролата</b>."
+
+#: ../capplets/about-me/gnome-about-me.glade.h:38
 msgid "User name:"
 msgstr "Потребителско име:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:35
+#: ../capplets/about-me/gnome-about-me.glade.h:39
 msgid "Web _log:"
 msgstr "_Блог:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:36
+#: ../capplets/about-me/gnome-about-me.glade.h:40
 msgid "Wor_k:"
 msgstr "С_лужебен:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:37
+#: ../capplets/about-me/gnome-about-me.glade.h:41
 msgid "Work _fax:"
 msgstr "Служебен _факс:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:38
+#: ../capplets/about-me/gnome-about-me.glade.h:42
 msgid "Zip/_Postal code:"
 msgstr "Пощенски _код:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:39
+#: ../capplets/about-me/gnome-about-me.glade.h:43
 msgid "_Address:"
 msgstr "_Адрес:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:40
+#: ../capplets/about-me/gnome-about-me.glade.h:44
+msgid "_Authenticate"
+msgstr "_Идентификация"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:45
 msgid "_Department:"
 msgstr "_Отдел:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:41
+#: ../capplets/about-me/gnome-about-me.glade.h:46
 msgid "_Groupwise:"
 msgstr "_Groupwise:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:42
+#: ../capplets/about-me/gnome-about-me.glade.h:47
 msgid "_Home page:"
 msgstr "_Лична страница:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:43
+#: ../capplets/about-me/gnome-about-me.glade.h:48
 msgid "_Home:"
 msgstr "_Домашна:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:44
+#: ../capplets/about-me/gnome-about-me.glade.h:49
 msgid "_Jabber:"
 msgstr "_Jabber:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:45
+#: ../capplets/about-me/gnome-about-me.glade.h:50
 msgid "_Manager:"
 msgstr "Р_ъководител:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:46
+#: ../capplets/about-me/gnome-about-me.glade.h:51
 msgid "_Mobile:"
 msgstr "_Мобилен телефон:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:47
+#: ../capplets/about-me/gnome-about-me.glade.h:52
 msgid "_New password:"
 msgstr "_Нова парола:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:48
+#: ../capplets/about-me/gnome-about-me.glade.h:53
 msgid "_Profession:"
 msgstr "Проф_есия:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:49
+#: ../capplets/about-me/gnome-about-me.glade.h:54
 msgid "_Retype new password:"
 msgstr "Напишете _отново новата парола:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:50
+#: ../capplets/about-me/gnome-about-me.glade.h:55
 msgid "_State/Province:"
 msgstr "Щат/прови_нция:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:51
+#: ../capplets/about-me/gnome-about-me.glade.h:56
 msgid "_Title:"
 msgstr "_Титла:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:52
+#: ../capplets/about-me/gnome-about-me.glade.h:57
 msgid "_Work:"
 msgstr "_Служебна:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:53
+#: ../capplets/about-me/gnome-about-me.glade.h:58
 msgid "_Yahoo:"
 msgstr "_Yahoo:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:54
+#: ../capplets/about-me/gnome-about-me.glade.h:59
 msgid "_Zip/Postal code:"
 msgstr "Пощенски к_од:"
 
@@ -659,7 +730,7 @@ msgstr "милисекунди"
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:42
 msgid "pixels/second"
-msgstr "пиксела/сек"
+msgstr "пиксела/сек."
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
 #: ../capplets/windows/gnome-window-properties.glade.h:10
@@ -699,7 +770,7 @@ msgid "_Finish"
 msgstr "_Прилагане"
 
 #: ../capplets/background/gnome-background-properties.glade.h:7
-#: ../capplets/theme-switcher/theme-properties.glade.h:20
+#: ../capplets/theme-switcher/theme-properties.glade.h:21
 msgid "_Remove"
 msgstr "_Премахване"
 
@@ -770,7 +841,7 @@ msgid_plural "pixels"
 msgstr[0] "пиксел"
 msgstr[1] "пиксела"
 
-#: ../capplets/common/activate-settings-daemon.c:18
+#: ../capplets/common/activate-settings-daemon.c:16
 msgid ""
 "Unable to start the settings manager 'gnome-settings-daemon'.\n"
 "Without the GNOME settings manager running, some preferences may not take "
@@ -794,8 +865,8 @@ msgstr "Прилагане на настройките и излизане"
 
 #: ../capplets/common/capplet-util.c:243
 #: ../capplets/keyboard/gnome-keyboard-properties.c:225
-#: ../capplets/mouse/gnome-mouse-properties.c:1016
-#: ../capplets/sound/sound-properties-capplet.c:244
+#: ../capplets/mouse/gnome-mouse-properties.c:1027
+#: ../capplets/sound/sound-properties-capplet.c:761
 msgid "Retrieve and store legacy settings"
 msgstr "Получаване и запазване стари настройки"
 
@@ -986,34 +1057,30 @@ msgstr "Предпочитани програми"
 msgid "Select your default applications"
 msgstr "Избиране на програмите по подразбиране"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:55
-msgid "Could not display help"
-msgstr "Помощта не може да бъде показана"
-
-#: ../capplets/default-applications/gnome-da-capplet.c:57
-#: ../capplets/default-applications/gnome-da-capplet.c:756
-msgid "Please make sure that the applet is properly installed"
-msgstr "Проверете дали аплетът е инсталиран правилно"
-
-#: ../capplets/default-applications/gnome-da-capplet.c:92
-#: ../capplets/default-applications/gnome-da-capplet.c:116
-#: ../capplets/default-applications/gnome-da-capplet.c:161
-#: ../capplets/default-applications/gnome-da-capplet.c:206
-#: ../capplets/default-applications/gnome-da-capplet.c:260
-#: ../capplets/default-applications/gnome-da-capplet.c:309
-#: ../capplets/default-applications/gnome-da-capplet.c:591
-#: ../capplets/default-applications/gnome-da-capplet.c:612
+#: ../capplets/default-applications/gnome-da-capplet.c:77
+#: ../capplets/default-applications/gnome-da-capplet.c:101
+#: ../capplets/default-applications/gnome-da-capplet.c:146
+#: ../capplets/default-applications/gnome-da-capplet.c:191
+#: ../capplets/default-applications/gnome-da-capplet.c:245
+#: ../capplets/default-applications/gnome-da-capplet.c:294
+#: ../capplets/default-applications/gnome-da-capplet.c:576
+#: ../capplets/default-applications/gnome-da-capplet.c:597
 #, c-format
 msgid "Error saving configuration: %s"
 msgstr "Грешка при запазването на конфигурацията: %s"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:734
+#: ../capplets/default-applications/gnome-da-capplet.c:719
+#: ../capplets/sound/sound-properties-capplet.c:319
 msgid "Custom"
 msgstr "Потребителски"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:754
+#: ../capplets/default-applications/gnome-da-capplet.c:739
 msgid "Could not load the main interface"
 msgstr "Неуспех при зареждането на основния интерфейс"
+
+#: ../capplets/default-applications/gnome-da-capplet.c:741
+msgid "Please make sure that the applet is properly installed"
+msgstr "Проверете дали аплетът е инсталиран правилно"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:1
 msgid "Balsa"
@@ -1140,9 +1207,8 @@ msgid "Standard XTerminal"
 msgstr "Стандартен XTerminal"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:32
-#, fuzzy
 msgid "Sylpheed"
-msgstr "Sylpheed-Claws"
+msgstr "Sylpheed"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:33
 msgid "Sylpheed-Claws"
@@ -1241,42 +1307,62 @@ msgstr "Промяна на разделителната способност н
 msgid "Screen Resolution"
 msgstr "Разделителна способност"
 
-#: ../capplets/display/main.c:345
+#: ../capplets/display/main.c:25
+msgid "normal"
+msgstr "нормално (0°)"
+
+#: ../capplets/display/main.c:26
+msgid "left"
+msgstr "наляво (-90°)"
+
+#: ../capplets/display/main.c:27
+msgid "inverted"
+msgstr "обърнато (180°)"
+
+#: ../capplets/display/main.c:28
+msgid "right"
+msgstr "надясно (90°)"
+
+#: ../capplets/display/main.c:389
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../capplets/display/main.c:448
+#: ../capplets/display/main.c:535
 msgid "_Resolution:"
 msgstr "_Разделителна способност:"
 
-#: ../capplets/display/main.c:467
+#: ../capplets/display/main.c:554
 msgid "Re_fresh rate:"
 msgstr "Опресняване:"
 
-#: ../capplets/display/main.c:488
+#: ../capplets/display/main.c:574
+msgid "R_otation:"
+msgstr "_Завъртане:"
+
+#: ../capplets/display/main.c:594
 msgid "Default Settings"
 msgstr "Настройки по подразбиране"
 
-#: ../capplets/display/main.c:490
+#: ../capplets/display/main.c:596
 #, c-format
 msgid "Screen %d Settings\n"
 msgstr "Настройки за екрана %d\n"
 
-#: ../capplets/display/main.c:516
+#: ../capplets/display/main.c:622
 msgid "Screen Resolution Preferences"
 msgstr "Задаване на разделителната способност на екрана"
 
-#: ../capplets/display/main.c:553
+#: ../capplets/display/main.c:659
 #, c-format
 msgid "_Make default for this computer (%s) only"
 msgstr "Това да е така само за _този компютър (%s)"
 
-#: ../capplets/display/main.c:571
+#: ../capplets/display/main.c:677
 msgid "Options"
 msgstr "Опции"
 
-#: ../capplets/display/main.c:592
+#: ../capplets/display/main.c:698
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d second the previous "
@@ -1291,23 +1377,23 @@ msgstr[1] ""
 "Тестват се новите настройки. Ако не реагирате до %d секунди, старите "
 "настройки ще бъдат възстановени."
 
-#: ../capplets/display/main.c:638
+#: ../capplets/display/main.c:744
 msgid "Keep Resolution"
 msgstr "Запазване на разделителната способност"
 
-#: ../capplets/display/main.c:642
+#: ../capplets/display/main.c:748
 msgid "Do you want to keep this resolution?"
 msgstr "Искате ли да запазите тази разделителна способност?"
 
-#: ../capplets/display/main.c:667
+#: ../capplets/display/main.c:773
 msgid "Use _previous resolution"
 msgstr "Използване на предишната разделителна способност"
 
-#: ../capplets/display/main.c:667
+#: ../capplets/display/main.c:773
 msgid "_Keep resolution"
 msgstr "_Запазване на разделителната способност"
 
-#: ../capplets/display/main.c:818
+#: ../capplets/display/main.c:923
 msgid ""
 "The X Server does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
@@ -1315,7 +1401,7 @@ msgstr ""
 "X сървърът не поддържа XRandR.  По време на работа няма да може да се правят "
 "промени на разделителната способност."
 
-#: ../capplets/display/main.c:826
+#: ../capplets/display/main.c:931
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
@@ -1518,7 +1604,7 @@ msgstr "Вид на ускорителя."
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
 #: ../capplets/keybindings/gnome-keybinding-properties.c:187
-#: ../libbackground/applier.c:624 ../typing-break/drwright.c:471
+#: ../libbackground/applier.c:624 ../typing-break/drwright.c:470
 msgid "Disabled"
 msgstr "Без"
 
@@ -1539,7 +1625,7 @@ msgstr "Звук"
 msgid "Window Management"
 msgstr "Мениджър на прозорци"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:666
+#: ../capplets/keybindings/gnome-keybinding-properties.c:668
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become unusable to type "
@@ -1550,7 +1636,7 @@ msgstr ""
 "на текст.\n"
 "Комбинирайте го с някой от клавишите „Control“, „Alt“ или „Shift“.\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:695
+#: ../capplets/keybindings/gnome-keybinding-properties.c:697
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1559,22 +1645,22 @@ msgstr ""
 "Бързият клавиш „%s“ вече се използва за:\n"
 "„%s“\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:727
+#: ../capplets/keybindings/gnome-keybinding-properties.c:729
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr ""
 "Грешка при задаване на нов ускорител в конфигурационната база данни: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:777
+#: ../capplets/keybindings/gnome-keybinding-properties.c:779
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "Грешка при изтриване на ускорител в конфигурационната база данни: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:884
+#: ../capplets/keybindings/gnome-keybinding-properties.c:886
 msgid "Action"
 msgstr "Действие"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:908
+#: ../capplets/keybindings/gnome-keybinding-properties.c:910
 msgid "Shortcut"
 msgstr "Бърз клавиш"
 
@@ -1599,7 +1685,7 @@ msgstr "Поставяне на бързи клавиши за команди"
 msgid "Unknown"
 msgstr "Неизвестен"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:281
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:282
 msgid "Layout"
 msgstr "Подредба"
 
@@ -1607,8 +1693,8 @@ msgstr "Подредба"
 #. the below options are to be included in the selected list.
 #. This is a HIG-compliant alternative to allowing no
 #. selection in the group.
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:285
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:229
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:286
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:231
 msgid "Default"
 msgstr "Стандартен"
 
@@ -1627,8 +1713,8 @@ msgstr "_Достъпност"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:221
 #: ../capplets/keyboard/gnome-keyboard-properties.c:223
-#: ../capplets/sound/sound-properties-capplet.c:240
-#: ../capplets/sound/sound-properties-capplet.c:242
+#: ../capplets/sound/sound-properties-capplet.c:757
+#: ../capplets/sound/sound-properties-capplet.c:759
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr "Използване само на настройките и излизане"
@@ -1638,56 +1724,56 @@ msgid "Start the page with the typing break settings showing"
 msgstr "Започване на страницата с показани настройки за почивките при писане"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:3
-msgid "..."
-msgstr "..."
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "<b>Cursor Blinking</b>"
 msgstr "<b>Мигащ показалец</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "<b>Repeat Keys</b>"
 msgstr "<b>Повторни клавиши</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:5
 msgid "<b>_Lock screen to enforce typing break</b>"
 msgstr "<b>Заключване на екрана, за да се подсигури почивка при писане</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>Бърза</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>Дълго</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>Късо</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Бавна</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
 msgid "A_vailable layouts:"
 msgstr "Налични подредби:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "All_ow postponing of breaks"
 msgstr "Разрешаване отлагането на почивките"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Check if breaks are allowed to be postponed"
 msgstr "Проверяване дали е разрешено да се отлагат почивките"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Choose a Keyboard Model"
 msgstr "Избиране на модел клавиатура"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Choose a Layout"
 msgstr "Избиране на клавиатурна подредба"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:15
+msgid "Choose..."
+msgstr "Избор..."
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:16
 msgid "Cursor _blinks in text boxes and fields"
@@ -1799,66 +1885,66 @@ msgstr "Конфигуриране на клавиатурните настро�
 
 #. set the timeout value  label with correct value of timeout
 #: ../capplets/mouse/gnome-mouse-properties.c:138
-#: ../capplets/mouse/gnome-mouse-properties.c:880
+#: ../capplets/mouse/gnome-mouse-properties.c:891
 #, c-format
-msgid "%d milliseconds"
+msgid "%d millisecond"
 msgid_plural "%d milliseconds"
 msgstr[0] "%d милисекунда"
 msgstr[1] "%d милисекунди"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:560
+#: ../capplets/mouse/gnome-mouse-properties.c:567
 msgid "Unknown Pointer"
 msgstr "Неизвестен показалец"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:761
+#: ../capplets/mouse/gnome-mouse-properties.c:768
 msgid "Default Pointer"
 msgstr "Стандартен показалец"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:762
+#: ../capplets/mouse/gnome-mouse-properties.c:769
 msgid "Default Pointer - Current"
 msgstr "Стандартен показалец - текущ"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:763
+#: ../capplets/mouse/gnome-mouse-properties.c:770
 msgid "The default pointer that ships with X"
 msgstr "Стандартният показалец предлаган с X"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:767
+#: ../capplets/mouse/gnome-mouse-properties.c:774
 msgid "White Pointer"
 msgstr "Бял показалец"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:768
+#: ../capplets/mouse/gnome-mouse-properties.c:775
 msgid "White Pointer - Current"
 msgstr "Бял показалец - текущ"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:769
+#: ../capplets/mouse/gnome-mouse-properties.c:776
 msgid "The default pointer inverted"
 msgstr "Стандартният показалец с обърнати цветове"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:773
+#: ../capplets/mouse/gnome-mouse-properties.c:780
 msgid "Large Pointer"
 msgstr "Голям показалец"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:774
+#: ../capplets/mouse/gnome-mouse-properties.c:781
 msgid "Large Pointer - Current"
 msgstr "Голям показалец - текущ"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:775
+#: ../capplets/mouse/gnome-mouse-properties.c:782
 msgid "Large version of normal pointer"
 msgstr "Голяма версия на нормалния показалец"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:779
+#: ../capplets/mouse/gnome-mouse-properties.c:786
 msgid "Large White Pointer - Current"
 msgstr "Голям бял показалец - текущ"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:780
+#: ../capplets/mouse/gnome-mouse-properties.c:787
 msgid "Large White Pointer"
 msgstr "Голям бял показалец"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:781
+#: ../capplets/mouse/gnome-mouse-properties.c:788
 msgid "Large version of white pointer"
 msgstr "Голяма версия на белия показалец"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:970
+#: ../capplets/mouse/gnome-mouse-properties.c:981
 msgid "Pointer Theme"
 msgstr "Тема на показалеца"
 
@@ -2058,40 +2144,88 @@ msgstr "HTTPS сървър посредник:"
 msgid "Enable sound and associate sounds with events"
 msgstr "Включване на звука и свързване на звуци със събития"
 
-#: ../capplets/sound/sound-properties-capplet.c:271
-#: ../capplets/sound/sound-properties.glade.h:4
+#: ../capplets/sound/sound-properties-capplet.c:317
+#: ../capplets/sound/sound-properties-capplet.c:369
+msgid "Not connected"
+msgstr "Не е свързано"
+
+#: ../capplets/sound/sound-properties-capplet.c:791
 msgid "Sound Preferences"
 msgstr "Настройка за звук"
 
-#: ../capplets/sound/sound-properties.glade.h:1
+#: ../capplets/sound/sound-properties.glade.h:2
+msgid "<b>Audio Conferencing</b>"
+msgstr "<b>Аудио конференция</b>"
+
+#: ../capplets/sound/sound-properties.glade.h:3
+msgid "<b>Music and Movies</b>"
+msgstr "<b>Музика и филми</b>"
+
+#: ../capplets/sound/sound-properties.glade.h:4
+msgid "<b>Sound Events</b>"
+msgstr "<b>Звукови събития</b>"
+
+#: ../capplets/sound/sound-properties.glade.h:5
+msgid "<span weight=\"bold\" size=\"x-large\">Testing...</span>"
+msgstr "<span weight=\"bold\" size=\"larger\">Тестване...</span>"
+
+#: ../capplets/sound/sound-properties.glade.h:6
+msgid "Click OK to finish."
+msgstr "Натиснете ОК, за да завършите настройките."
+
+#: ../capplets/sound/sound-properties.glade.h:7
+msgid "Devices"
+msgstr "Устройства"
+
+#: ../capplets/sound/sound-properties.glade.h:8
 msgid "E_nable software sound mixing (ESD)"
 msgstr "Включване на _софтуерно смесване на звука (ESD)"
 
-#: ../capplets/sound/sound-properties.glade.h:2
+#: ../capplets/sound/sound-properties.glade.h:9
 msgid "Flash _entire screen"
 msgstr "Проблясване на целия екран"
 
-#: ../capplets/sound/sound-properties.glade.h:3
+#: ../capplets/sound/sound-properties.glade.h:10
 msgid "Flash _window titlebar"
 msgstr "Проблясване на заглавната лента на прозореца"
 
-#: ../capplets/sound/sound-properties.glade.h:5
+#: ../capplets/sound/sound-properties.glade.h:11
+msgid "Sound & Video Preferences"
+msgstr "Настройки на звук и видео"
+
+#: ../capplets/sound/sound-properties.glade.h:12
+msgid "Sound Capture:"
+msgstr "Запис на звук:"
+
+#: ../capplets/sound/sound-properties.glade.h:13
+msgid "Sound Playback:"
+msgstr "Изпълнение на звук:"
+
+#: ../capplets/sound/sound-properties.glade.h:14
 msgid "Sounds"
 msgstr "Звуци"
 
-#: ../capplets/sound/sound-properties.glade.h:6
+#: ../capplets/sound/sound-properties.glade.h:15
 msgid "System Beep"
 msgstr "Системен звънец"
 
-#: ../capplets/sound/sound-properties.glade.h:7
+#: ../capplets/sound/sound-properties.glade.h:16
+msgid "Test"
+msgstr "Тест"
+
+#: ../capplets/sound/sound-properties.glade.h:17
+msgid "Testing Pipeline"
+msgstr "Тестване на конвейера"
+
+#: ../capplets/sound/sound-properties.glade.h:18
 msgid "_Enable system beep"
 msgstr "_Активиране на системния звънец"
 
-#: ../capplets/sound/sound-properties.glade.h:8
+#: ../capplets/sound/sound-properties.glade.h:19
 msgid "_Play system sounds"
 msgstr "Из_пълнение на системните звуци"
 
-#: ../capplets/sound/sound-properties.glade.h:9
+#: ../capplets/sound/sound-properties.glade.h:20
 msgid "_Visual system beep"
 msgstr "_Визуализиране на системния звънец"
 
@@ -2117,15 +2251,15 @@ msgstr ""
 "за „Настройки на темите“ е инсталиран неправилно или нямате пакета „gnome-"
 "themes“."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:254
+#: ../capplets/theme-switcher/gnome-theme-installer.c:255
 msgid "This theme is not in a supported format."
 msgstr "Темата е в неподдържан формат."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:272
+#: ../capplets/theme-switcher/gnome-theme-installer.c:273
 msgid "Failed to create temporary directory"
 msgstr "Неуспех при създаването на временна папка"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:293
+#: ../capplets/theme-switcher/gnome-theme-installer.c:294
 msgid ""
 "Can not install theme. \n"
 "The bzip2 utility is not installed."
@@ -2133,13 +2267,13 @@ msgstr ""
 "Неуспех при инсталирането на тема. \n"
 "Няма инсталиран bzip2."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:312
-#: ../capplets/theme-switcher/gnome-theme-installer.c:351
-#: ../capplets/theme-switcher/gnome-theme-installer.c:434
+#: ../capplets/theme-switcher/gnome-theme-installer.c:313
+#: ../capplets/theme-switcher/gnome-theme-installer.c:352
+#: ../capplets/theme-switcher/gnome-theme-installer.c:432
 msgid "Installation Failed"
 msgstr "Инсталацията е неуспешна"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:333
+#: ../capplets/theme-switcher/gnome-theme-installer.c:334
 msgid ""
 "Can not install themes. \n"
 "The gzip utility is not installed."
@@ -2147,55 +2281,49 @@ msgstr ""
 "Неуспех при инсталирането на теми. \n"
 "Няма инсталиран gzip."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:375
-#, c-format
-msgid ""
-"Icon Theme %s correctly installed.\n"
-"You can select it in the theme details."
-msgstr ""
-"Темата за икони %s е инсталирана правилно.\n"
-"Можете да я изберете от списъка с теми за икони."
-
 #: ../capplets/theme-switcher/gnome-theme-installer.c:378
 #, c-format
-msgid "Gnome Theme %s correctly installed"
+msgid "GNOME Theme %s correctly installed"
 msgstr "Темата за GNOME %s е инсталирана правилно"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:381
-#, c-format
-msgid ""
-"Windows Border Theme %s correctly installed.\n"
-"You can select it in the theme details."
-msgstr ""
-"Темата за рамките на прозорците %s е инсталирана правилно.\n"
-"Можете да я изберете от списъка с теми за рамки на прозорците."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:384
-#, c-format
-msgid ""
-"Controls Theme %s correctly installed.\n"
-"You can select it in the theme details."
-msgstr ""
-"Темата за декорациите %s е инсталирана правилно.\n"
-"Можете да я изберете от списъка с декорации."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:390
+#: ../capplets/theme-switcher/gnome-theme-installer.c:388
 msgid "The theme is an engine. You need to compile the theme."
 msgstr "Темата е с графично ядро. Трябва да я компилирате."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:408
+#: ../capplets/theme-switcher/gnome-theme-installer.c:406
 msgid "The file format is invalid"
 msgstr "Файловият формат е невалиден"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:499
+#. TODO: currently cannot apply "gnome themes"
+#: ../capplets/theme-switcher/gnome-theme-installer.c:452
+#, c-format
+msgid ""
+"<span weight=\"bold\" size=\"larger\">The theme \"%s\" has been installed.</"
+"span>\n"
+"\n"
+"Would you like to apply it now, or keep your current theme?"
+msgstr ""
+"<span weight=\"bold\" size=\"larger\">Темата „%s“ е инсталирана.</span>\n"
+"\n"
+"Искате ли да я приложите или искате да запазите сегашната тема?"
+
+#: ../capplets/theme-switcher/gnome-theme-installer.c:455
+msgid "Keep Current Theme"
+msgstr "Запазване на текущата тема"
+
+#: ../capplets/theme-switcher/gnome-theme-installer.c:457
+msgid "Apply New Theme"
+msgstr "Прилагане на нова тема"
+
+#: ../capplets/theme-switcher/gnome-theme-installer.c:531
 msgid "No theme file location specified to install"
 msgstr "Не е избран файл с тема, който да се инсталира"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:514
+#: ../capplets/theme-switcher/gnome-theme-installer.c:546
 msgid "The theme file location specified to install is invalid"
 msgstr "Темата посочена за инсталиране е невалидна"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:534
+#: ../capplets/theme-switcher/gnome-theme-installer.c:566
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -2204,26 +2332,18 @@ msgstr ""
 "Няма права за достъп, за да се инсталира темата в:\n"
 "%s"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:555
+#: ../capplets/theme-switcher/gnome-theme-installer.c:587
 msgid "The file format is invalid."
 msgstr "Файловият формат е невалиден."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:582
+#: ../capplets/theme-switcher/gnome-theme-installer.c:614
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
 "selected as the source location"
 msgstr ""
-"%s е пътя до мястото, където ще бъдат инсталирани файловете на темите. Той "
+"%s е пътят до мястото, където ще бъдат инсталирани файловете на темите. Той "
 "не може да бъде избран като папка източник."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:647
-msgid ""
-"Cannot install theme.\n"
-"The tar program is not installed on your system."
-msgstr ""
-"Темата не може да бъде инсталирана.\n"
-"Програмата tar не е инсталирана."
 
 #: ../capplets/theme-switcher/gnome-theme-manager.c:686
 msgid "Custom theme"
@@ -2233,7 +2353,7 @@ msgstr "Лична тема"
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "Може да запазите тази тема като натиснете бутона „Запазване на тема“"
 
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1579
+#: ../capplets/theme-switcher/gnome-theme-manager.c:1604
 msgid ""
 "The default theme schemas could not be found on your system.  This means "
 "that you probably don't have metacity installed, or that your gconf is "
@@ -2261,94 +2381,94 @@ msgid "Theme"
 msgstr "Тема"
 
 #: ../capplets/theme-switcher/theme-properties.glade.h:1
+msgid "<b>You do not have permission to change theme settings</b>"
+msgstr "<b>Нямате право да променяте настройките на текущата тема</b>"
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:2
 msgid "Apply _Background"
 msgstr "Прилагане на _фон"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:2
+#: ../capplets/theme-switcher/theme-properties.glade.h:3
 msgid "Apply _Font"
 msgstr "Прилагане на _шрифт"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:3
+#: ../capplets/theme-switcher/theme-properties.glade.h:4
 msgid "Controls"
 msgstr "Бутони и декорации"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:4
+#: ../capplets/theme-switcher/theme-properties.glade.h:5
 msgid "Icons"
 msgstr "Икони"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:5
+#: ../capplets/theme-switcher/theme-properties.glade.h:6
 msgid "Save Theme"
 msgstr "Запазване на тема"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:6
-#, fuzzy
-msgid "Save _Background Image"
-msgstr "Прилагане на _фон"
-
 #: ../capplets/theme-switcher/theme-properties.glade.h:7
+msgid "Save _Background Image"
+msgstr "Запазване на _фоновото изображение"
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:8
 msgid "Select theme for the desktop"
 msgstr "Избор на тема за работния плот"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:8
+#: ../capplets/theme-switcher/theme-properties.glade.h:9
 msgid "Theme Details"
 msgstr "Елементи на темата"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:9
+#: ../capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Theme Preferences"
 msgstr "Настройки на темата"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:10
+#: ../capplets/theme-switcher/theme-properties.glade.h:11
 msgid "Theme _Details"
 msgstr "_Елементи на темата"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:11
+#: ../capplets/theme-switcher/theme-properties.glade.h:12
 msgid "This theme does not suggest any particular font or background."
 msgstr "Тази тема не предлага свои шрифт и фон."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:12
+#: ../capplets/theme-switcher/theme-properties.glade.h:13
 msgid "This theme suggests a background:"
 msgstr "Тази тема предлага свой фон:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:13
+#: ../capplets/theme-switcher/theme-properties.glade.h:14
 msgid "This theme suggests a font and a background:"
 msgstr "Тази тема предлага свои шрифт и фон:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:14
+#: ../capplets/theme-switcher/theme-properties.glade.h:15
 msgid "This theme suggests a font:"
 msgstr "Тази тема предлага свой шрифт:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:15
+#: ../capplets/theme-switcher/theme-properties.glade.h:16
 msgid "Window Border"
 msgstr "Рамки на прозорците"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:16
-#, fuzzy
-msgid "_Description:"
-msgstr "Описание:"
-
 #: ../capplets/theme-switcher/theme-properties.glade.h:17
+msgid "_Description:"
+msgstr "_Описание:"
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:18
 msgid "_Install Theme..."
 msgstr "_Инсталиране на тема..."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:18
-#, fuzzy
-msgid "_Install..."
-msgstr "_Инсталиране"
-
 #: ../capplets/theme-switcher/theme-properties.glade.h:19
-#, fuzzy
-msgid "_Name:"
-msgstr "Име:"
+msgid "_Install..."
+msgstr "_Инсталиране..."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:21
+#: ../capplets/theme-switcher/theme-properties.glade.h:20
+msgid "_Name:"
+msgstr "_Име:"
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:22
 msgid "_Revert"
 msgstr "_Възстановяване"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:22
+#: ../capplets/theme-switcher/theme-properties.glade.h:23
 msgid "_Save Theme..."
 msgstr "_Запазване на тема..."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:23
+#: ../capplets/theme-switcher/theme-properties.glade.h:24
 msgid "theme selection tree"
 msgstr "дърво за подборка на теми"
 
@@ -2419,7 +2539,7 @@ msgstr "_Копиране"
 
 #: ../capplets/ui-properties/gnome-ui-properties.glade.h:16
 msgid "_Detachable toolbars"
-msgstr "_Отделяеми ленти с инструменти"
+msgstr "_Отделими ленти с инструменти"
 
 #: ../capplets/ui-properties/gnome-ui-properties.glade.h:17
 msgid "_Edit"
@@ -2557,10 +2677,6 @@ msgstr "Инструмент за настройки на GNOME"
 #: ../gnome-settings-daemon/actions/acme.glade.h:1
 msgid "Volume"
 msgstr "Сила на звука"
-
-#: ../gnome-settings-daemon/factory.c:60
-msgid "Could not initialize Bonobo"
-msgstr "Bonobo не може да бъде инициализиран"
 
 #: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:406
 msgid "Slow Keys Alert"
@@ -2732,13 +2848,12 @@ msgstr ""
 "Опитайте се да използвате по-проста конфигурация или инсталирайте нова "
 "версия на XFree."
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:244
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:249
 msgid "Do _not show this warning again"
 msgstr "_Да не се показва това предупреждение отново"
 
-#. !! temporary one
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:253
-#, fuzzy, c-format
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:263
+#, c-format
 msgid ""
 "<b>The X system keyboard settings differ from your current GNOME keyboard "
 "settings.</b>\n"
@@ -2747,17 +2862,20 @@ msgid ""
 "\n"
 "Which set would you like to use?"
 msgstr ""
-"Настройките на клавиатурата от Х системата се различават от тези в GNOME. "
+"<b>Настройките на клавиатурата от Х системата се различават от тези в GNOME."
+"</b>\n"
+"\n"
+"Очакваше се %s, но се получиха следните настройки: %s.\n"
+"\n"
 "Кои настройки искате да използвате?"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:275
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:286
 msgid "Use X settings"
 msgstr "Използване на настройките на X"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:277
-#, fuzzy
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:288
 msgid "Keep GNOME settings"
-msgstr "Използване на настройките на GNOME"
+msgstr "Запазване на настройките на GNOME"
 
 #: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:118
 #, c-format
@@ -2803,7 +2921,7 @@ msgstr ""
 msgid "_Do not show this message again"
 msgstr "_Да не се показва това съобщение отново"
 
-#: ../gnome-settings-daemon/gnome-settings-sound.c:131
+#: ../gnome-settings-daemon/gnome-settings-sound.c:127
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Не може да се зареди звуковия файл %s като %s"
@@ -2881,40 +2999,6 @@ msgstr "Екран"
 #: ../libbackground/applier.c:280
 msgid "Screen on which BGApplier is to draw"
 msgstr "Екран, на който BGApplier ще рисува"
-
-#: ../libgswitchit/gswitchit_config.c:1074
-#, c-format
-msgid "There was an error loading an image: %s"
-msgstr "Има грешка при зареждането на изображението: %s"
-
-#: ../libgswitchit/gswitchit_config.c:1399
-#, fuzzy, c-format
-msgid "layout \"%s\""
-msgid_plural "layouts \"%s\""
-msgstr[0] "Подредби"
-msgstr[1] "Подредби"
-
-#: ../libgswitchit/gswitchit_config.c:1416
-#, fuzzy, c-format
-msgid "option \"%s\""
-msgid_plural "options \"%s\""
-msgstr[0] "Опции"
-msgstr[1] "Опции"
-
-#: ../libgswitchit/gswitchit_config.c:1424
-#, c-format
-msgid "model \"%s\", %s and %s"
-msgstr ""
-
-#: ../libgswitchit/gswitchit_config.c:1425
-#, fuzzy
-msgid "no layout"
-msgstr "клавиатурна подредба"
-
-#: ../libgswitchit/gswitchit_config.c:1426
-#, fuzzy
-msgid "no options"
-msgstr "Опции"
 
 #: ../libsounds/sound-view.c:43
 msgid "Login"
@@ -3225,21 +3309,19 @@ msgstr ""
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:14
 msgid "The Keyboard Preview, X offset"
-msgstr ""
+msgstr "Преглед на клавиатурата, отместване по X"
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:15
 msgid "The Keyboard Preview, Y offset"
-msgstr ""
+msgstr "Преглед на клавиатурата, отместване по Y"
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:16
-#, fuzzy
 msgid "The Keyboard Preview, height"
-msgstr "Преглед на височина"
+msgstr "Преглед на клавиатурата, височина"
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:17
-#, fuzzy
 msgid "The Keyboard Preview, width"
-msgstr "Преглед на ширина"
+msgstr "Преглед на височина, широчина"
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:18
 msgid ""
@@ -3273,30 +3355,30 @@ msgid "Take a break!"
 msgstr "Време е за почивка"
 
 #. { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
-#: ../typing-break/drwright.c:135
+#: ../typing-break/drwright.c:128
 msgid "/_Preferences"
 msgstr "/_Настройки"
 
-#: ../typing-break/drwright.c:136
+#: ../typing-break/drwright.c:129
 msgid "/_About"
 msgstr "/_Относно"
 
-#: ../typing-break/drwright.c:138
+#: ../typing-break/drwright.c:131
 msgid "/_Take a Break"
 msgstr "/_Взимане на почивка"
 
-#: ../typing-break/drwright.c:489
+#: ../typing-break/drwright.c:488
 #, c-format
 msgid "%d minute until the next break"
 msgid_plural "%d minutes until the next break"
 msgstr[0] "%d минута до следващата почивка"
 msgstr[1] "%d минути до следващата почивка"
 
-#: ../typing-break/drwright.c:493
+#: ../typing-break/drwright.c:492
 msgid "Less than one minute until the next break"
 msgstr "По-малко от една минута до следващата почивка"
 
-#: ../typing-break/drwright.c:581
+#: ../typing-break/drwright.c:579
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
@@ -3305,33 +3387,21 @@ msgstr ""
 "Не можа да покаже прозореца с настройките за почивките при писане със "
 "следната грешка: %s"
 
-#: ../typing-break/drwright.c:629
-msgid "About GNOME Typing Monitor"
-msgstr "Относно наблюдение при писането"
+#: ../typing-break/drwright.c:599
+msgid "Written by Richard Hult <richard@imendio.com>"
+msgstr "Написано от Richard Hult <richard@imendio.com>"
 
-#: ../typing-break/drwright.c:653
-msgid "A computer break reminder."
-msgstr "Напомняне за почивки."
-
-#: ../typing-break/drwright.c:654
-msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
-msgstr "Написан от Richard Hult &lt;richard@imendio.com&gt;"
-
-#: ../typing-break/drwright.c:655
+#: ../typing-break/drwright.c:600
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Шаренийките са добавени от Anders Carlsson"
 
-#: ../typing-break/drwright.c:831
-msgid "Break reminder"
-msgstr "Напомняне за почивка"
+#: ../typing-break/drwright.c:623
+msgid "Typing Monitor"
+msgstr "Наблюдение на писането"
 
-#: ../typing-break/eggtrayicon.c:127
-msgid "Orientation"
-msgstr "Ориентация"
-
-#: ../typing-break/eggtrayicon.c:128
-msgid "The orientation of the tray."
-msgstr "Ориентацията на тавата"
+#: ../typing-break/drwright.c:625
+msgid "A computer break reminder."
+msgstr "Напомняне за почивки."
 
 #: ../typing-break/main.c:100
 msgid ""
@@ -3559,46 +3629,3 @@ msgstr "Дали да прави малки изображения за инст
 #: ../vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Дали да прави малки изображения за темите"
-
-#~ msgid "<span size=\"larger\" weight=\"bold\">Install a Theme</span>"
-#~ msgstr "<span size=\"larger\" weight=\"bold\">Инсталиране на тема</span>"
-
-#~ msgid "Theme Installation"
-#~ msgstr "Инсталиране на теми"
-
-#~ msgid "_Location:"
-#~ msgstr "_Местоположение:"
-
-#~ msgid "<span size=\"larger\" weight=\"bold\">Save Theme to Disk</span>"
-#~ msgstr "<span size=\"larger\" weight=\"bold\">Запазване на тема</span>"
-
-#~ msgid "New themes can also be installed by dragging them into the window."
-#~ msgstr ""
-#~ "Нови теми могат да бъдат инсталирани и чрез изтегляне в този прозорец"
-
-#~ msgid "Short _description:"
-#~ msgstr "Кратко _описание:"
-
-#~ msgid "_Theme name:"
-#~ msgstr "Име на темата:"
-
-#~ msgid "No '/dev/pmu' device found"
-#~ msgstr "Устройството „dev/pmu“ не е намерено"
-
-#~ msgid "Not a powerbook"
-#~ msgstr "Не е PowerBook"
-
-#~ msgid "Wrong permission for '/dev/pmu' device"
-#~ msgstr "Грешки права за устройството „/dev/pmu“"
-
-#~ msgid "Brightness down"
-#~ msgstr "Намаляване на яркостта"
-
-#~ msgid "Brightness down's shortcut."
-#~ msgstr "Бърз клавиш за намаляване на яркостта"
-
-#~ msgid "Brightness up"
-#~ msgstr "Увеличаване на яркостта"
-
-#~ msgid "Brightness up's shortcut."
-#~ msgstr "Бърз клавиш за увеличаване на яркостта"
