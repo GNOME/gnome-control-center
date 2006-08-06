@@ -491,10 +491,10 @@ static GtkWidget *
 create_rotate_menu (struct ScreenInfo *screen_info)
 {
   GtkComboBox* combo = NULL;
+  int i, item = 0, current_item = -1;
+
   screen_info->rotate_widget = gtk_combo_box_new_text ();
   combo = GTK_COMBO_BOX(screen_info->rotate_widget);
-
-  int i, item = 0, current_item = -1;
 
   for (i = 0; i < G_N_ELEMENTS (rotations); i++)
   {
