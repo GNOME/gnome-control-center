@@ -18,6 +18,7 @@
   <property name="type_hint">GDK_WINDOW_TYPE_HINT_DIALOG</property>
   <property name="gravity">GDK_GRAVITY_NORTH_WEST</property>
   <property name="focus_on_map">True</property>
+  <property name="urgency_hint">False</property>
   <property name="has_separator">False</property>
 
   <child internal-child="vbox">
@@ -392,6 +393,9 @@
 				  <property name="width_chars">-1</property>
 				  <property name="single_line_mode">False</property>
 				  <property name="angle">0</property>
+				  <accessibility>
+				    <atkrelation target="http_port_spinbutton" type="label-for"/>
+				  </accessibility>
 				</widget>
 				<packing>
 				  <property name="left_attach">2</property>
@@ -420,6 +424,9 @@
 				  <property name="width_chars">-1</property>
 				  <property name="single_line_mode">False</property>
 				  <property name="angle">0</property>
+				  <accessibility>
+				    <atkrelation target="secure_port_spinbutton" type="label-for"/>
+				  </accessibility>
 				</widget>
 				<packing>
 				  <property name="left_attach">2</property>
@@ -448,6 +455,9 @@
 				  <property name="width_chars">-1</property>
 				  <property name="single_line_mode">False</property>
 				  <property name="angle">0</property>
+				  <accessibility>
+				    <atkrelation target="ftp_port_spinbutton" type="label-for"/>
+				  </accessibility>
 				</widget>
 				<packing>
 				  <property name="left_attach">2</property>
@@ -476,6 +486,9 @@
 				  <property name="width_chars">-1</property>
 				  <property name="single_line_mode">False</property>
 				  <property name="angle">0</property>
+				  <accessibility>
+				    <atkrelation target="socks_port_spinbutton" type="label-for"/>
+				  </accessibility>
 				</widget>
 				<packing>
 				  <property name="left_attach">2</property>
@@ -498,6 +511,9 @@
 				  <property name="snap_to_ticks">False</property>
 				  <property name="wrap">False</property>
 				  <property name="adjustment">0 0 65535 1 10 10</property>
+				  <accessibility>
+				    <atkrelation target="label10" type="labelled-by"/>
+				  </accessibility>
 				</widget>
 				<packing>
 				  <property name="left_attach">3</property>
@@ -519,6 +535,9 @@
 				  <property name="snap_to_ticks">False</property>
 				  <property name="wrap">False</property>
 				  <property name="adjustment">0 0 65535 1 10 10</property>
+				  <accessibility>
+				    <atkrelation target="label11" type="labelled-by"/>
+				  </accessibility>
 				</widget>
 				<packing>
 				  <property name="left_attach">3</property>
@@ -540,6 +559,9 @@
 				  <property name="snap_to_ticks">False</property>
 				  <property name="wrap">False</property>
 				  <property name="adjustment">0 0 65535 1 10 10</property>
+				  <accessibility>
+				    <atkrelation target="label12" type="labelled-by"/>
+				  </accessibility>
 				</widget>
 				<packing>
 				  <property name="left_attach">3</property>
@@ -561,6 +583,9 @@
 				  <property name="snap_to_ticks">False</property>
 				  <property name="wrap">False</property>
 				  <property name="adjustment">0 0 65535 1 10 10</property>
+				  <accessibility>
+				    <atkrelation target="label13" type="labelled-by"/>
+				  </accessibility>
 				</widget>
 				<packing>
 				  <property name="left_attach">3</property>
@@ -1034,6 +1059,7 @@
   <property name="type_hint">GDK_WINDOW_TYPE_HINT_DIALOG</property>
   <property name="gravity">GDK_GRAVITY_NORTH_WEST</property>
   <property name="focus_on_map">True</property>
+  <property name="urgency_hint">False</property>
   <property name="has_separator">False</property>
 
   <child internal-child="vbox">
