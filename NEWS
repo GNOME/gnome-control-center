@@ -1,5 +1,37 @@
 gnome-control-center 2.15.91
 
+misc:
+- require libebook-1.2 1.7.90 for the new API (Sebastien Bacher)
+
+about-me:
+- fixed build with the new libebook API (Sebastien Bacher) (#348821)
+
+display:
+- fix build with gcc-2.95 (Jens Granseuer) (#347611)
+
+keybindings:
+- don't assume defines are contiguous (Gary Coady) (#333576)
+
+libgswitchit:
+- using Unicode subscript for repeating descriptions (Sergey Udaltsov)
+
+network:
+- set "label for" and "labelled by" properties for the capplet (Willie Walker)
+  (#342121)
+
+sound:
+- removed unneeded header file (Klaus Pedersen) (#349254)
+- only include libhal if HAL is enabled (Ali Akcaagac) (#348755)
+
+theme-switcher:
+- added support for locking down theme (Rob Bradford) (#346041)
+- don't attempt to load window manager theme name from an unknown window 
+  manager (Thomas Wood) (#333276)
+
+typing-break:
+- use GtkAboutDialog, not GtkDialog (Vincent Untz) (#348640)
+- use GtkStatusIcon instead of libegg (Vincent Untz) (#348639)
+
 ------------------------------------------------------------------------------
 gnome-control-center 2.15.90
 
