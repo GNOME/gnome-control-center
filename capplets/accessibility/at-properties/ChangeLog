@@ -1,3 +1,14 @@
+2006-08-07  Willie Walker <william.walker@sun.com>
+
+	Fixes #348630
+
+	* at-startup-session.c (at_startup_state_init, at_startup_state_update):
+	look for orca binary in path.
+
+	* at-startup-session.h: added new fields to enabled union.
+
+	* main.c (init_startup_state): added information about orca.
+	
 2006-08-07  Rodrigo Moya <rodrigo@novell.com>
 
 	Fixes #348832

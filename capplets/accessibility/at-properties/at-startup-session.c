@@ -68,7 +68,8 @@ at_startup_state_init (AtStartupState *startup_state)
 
 	for (l = at_list; l; l = l->next) {
 		gchar *exec_name = (char *) l->data;
-		if (exec_name && !strcmp (exec_name, "gnopernicus")) {
+		if ((exec_name && !strcmp (exec_name, "gnopernicus")) ||
+		    (exec_name && !strcmp (exec_name, "orca"))) {
 			braille_active = gconf_client_get_bool (client, 
 								GNOPERNICUS_BRAILLE_KEY, 
 								NULL);
@@ -102,13 +103,26 @@ at_startup_state_init (AtStartupState *startup_state)
 
 	prog = g_find_program_in_path ("gnopernicus");
 	if (prog != NULL) {
-		startup_state->enabled.magnifier_installed = TRUE;
-		startup_state->enabled.screenreader_installed = TRUE;
+		startup_state->enabled.gnopernicus_installed = TRUE;
 		g_free (prog);
 	} else {
-		startup_state->enabled.magnifier_installed = FALSE;
-		startup_state->enabled.screenreader_installed = FALSE;
+		startup_state->enabled.gnopernicus_installed = FALSE;
 	}
+	prog = g_find_program_in_path ("orca");
+	if (prog != NULL) {
+		startup_state->enabled.orca_installed = TRUE;
+		g_free (prog);
+	} else {
+		startup_state->enabled.orca_installed = FALSE;
+	}
+
+	startup_state->enabled.magnifier_installed = 
+	        startup_state->enabled.orca_installed ||
+  	        startup_state->enabled.gnopernicus_installed;
+
+	startup_state->enabled.screenreader_installed = 
+	        startup_state->enabled.orca_installed ||
+  	        startup_state->enabled.gnopernicus_installed;
 }
 
 void
@@ -132,14 +146,24 @@ at_startup_state_update (AtStartupState *startup_state)
 
 	if (startup_state->enabled.screenreader || startup_state->enabled.magnifier) {
 		if (!(at_startup_state_recent.enabled.screenreader || 
-		      at_startup_state_recent.enabled.magnifier))
-			/* new state includes SR or magnifier, initial one did not */
-			at_list = at_startup_list_add (at_list, "gnopernicus");
+		      at_startup_state_recent.enabled.magnifier)) {
+		        /* new state includes SR or magnifier, initial one did not */
+		        if (startup_state->enabled.orca_installed) {
+			        at_list = at_startup_list_remove (at_list, "gnopernicus");
+				at_list = at_startup_list_add (at_list, "orca");
+			} 
+			else if (startup_state->enabled.gnopernicus_installed) {
+			        at_list = at_startup_list_remove (at_list, "orca");
+				at_list = at_startup_list_add (at_list, "gnopernicus");
+			}
+		}
 	}
 	else {
 		if (at_startup_state_recent.enabled.screenreader || 
-		    at_startup_state_recent.enabled.magnifier)
+		    at_startup_state_recent.enabled.magnifier) {
 			at_list = at_startup_list_remove (at_list, "gnopernicus");
+			at_list = at_startup_list_remove (at_list, "orca");
+		}
 	}
 	if (startup_state->enabled.osk) {
 		if (!at_startup_state_recent.enabled.osk)

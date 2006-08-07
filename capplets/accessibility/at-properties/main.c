@@ -57,11 +57,11 @@ init_startup_state (GladeXML *dialog)
 		if (!at_startup_state.enabled.osk_installed &&
 		    !(at_startup_state.enabled.screenreader_installed ||
 		      at_startup_state.enabled.magnifier_installed)) {
-			warning_label = g_strdup_printf ("<i>%s</i>", _("No Assistive Technology is available on your system.  The 'gok' package must be installed in order to get on-screen keyboard support, and the 'gnopernicus' package must be installed for screenreading and magnifying capabilities."));
+			warning_label = g_strdup_printf ("<i>%s</i>", _("No Assistive Technology is available on your system.  The 'gok' package must be installed in order to get on-screen keyboard support, and the 'orca' package must be installed for screenreading and magnifying capabilities."));
 		} else if (!at_startup_state.enabled.osk_installed) {
 			warning_label = g_strdup_printf ("<i>%s</i>", _("Not all available assistive technologies are installed on your system.  The 'gok' package must be installed in order to get on-screen keyboard support."));
 		} else {
-			warning_label = g_strdup_printf ("<i>%s</i>", _("Not all available assistive technologies are installed on your system.  The 'gnopernicus' package must be installed for screenreading and magnifying capabilities."));
+			warning_label = g_strdup_printf ("<i>%s</i>", _("Not all available assistive technologies are installed on your system.  The 'orca' package must be installed for screenreading and magnifying capabilities."));
 		}
 		gtk_label_set_markup (GTK_LABEL (WID ("at_applications_warning_label")), warning_label);
 		g_free (warning_label);

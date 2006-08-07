@@ -10,6 +10,8 @@ typedef union {
 		guint osk_installed:1;
 		guint magnifier_installed:1;
 		guint screenreader_installed:1;
+		guint gnopernicus_installed:1;
+		guint orca_installed:1;
 	} enabled;
 } AtStartupState;
 
