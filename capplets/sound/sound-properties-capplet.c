@@ -623,6 +623,7 @@ add_selected_device (const gchar *profile, int type)
 	
 	add_device (type, pipeline, description, profile);
 	
+	g_free (description);
 	g_free (pipeline);
 }
 
