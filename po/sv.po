@@ -1,8 +1,8 @@
 # Swedish messages for gnome-control-center.
 # Copyright (C) 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006 Free Software Foundation, Inc.
+# Daniel Nylander <po@danielnylander.se>, 2006.
 # Martin Wahlen <mva@sbbs.se>, 1998, 1999.
 # Christian Rose <menthos@menthos.com>, 2000, 2001, 2002, 2003, 2004, 2005.
-# Daniel Nylander <po@danielnylander.se>, 2006.
 #
 # $Id$
 #
@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-16 07:58+0200\n"
-"PO-Revision-Date: 2006-07-16 16:42+0100\n"
+"POT-Creation-Date: 2006-08-15 16:38+0200\n"
+"PO-Revision-Date: 2006-08-15 19:58+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -59,15 +59,15 @@ msgstr "Om mig"
 msgid "Set your personal information"
 msgstr "Ställ in din personliga information"
 
-#: ../capplets/about-me/gnome-about-me.c:604
+#: ../capplets/about-me/gnome-about-me.c:605
 msgid "Select Image"
 msgstr "Välj bild"
 
-#: ../capplets/about-me/gnome-about-me.c:606
+#: ../capplets/about-me/gnome-about-me.c:607
 msgid "No Image"
 msgstr "Ingen bild"
 
-#: ../capplets/about-me/gnome-about-me.c:769
+#: ../capplets/about-me/gnome-about-me.c:770
 msgid ""
 "There was an error while trying to get the addressbook information\n"
 "Evolution Data Server can't handle the protocol"
@@ -75,16 +75,16 @@ msgstr ""
 "Det inträffade ett fel vid försöket att hämta adressboksinformationen\n"
 "Evolution Data Server kan inte hantera protokollet"
 
-#: ../capplets/about-me/gnome-about-me.c:790
+#: ../capplets/about-me/gnome-about-me.c:791
 msgid "Unable to open address book"
 msgstr "Kan inte öppna adressboken"
 
-#: ../capplets/about-me/gnome-about-me.c:802
+#: ../capplets/about-me/gnome-about-me.c:803
 msgid "Unknown login ID, the user database might be corrupted"
 msgstr "Okänt inloggningsid, användardatabasen kan vara trasig"
 
-#: ../capplets/about-me/gnome-about-me.c:833
-#: ../capplets/about-me/gnome-about-me.c:835
+#: ../capplets/about-me/gnome-about-me.c:834
+#: ../capplets/about-me/gnome-about-me.c:836
 #, c-format
 msgid "About %s"
 msgstr "Om %s"
@@ -437,6 +437,7 @@ msgid "<small><i><b>Note:</b> Changes to this setting will not take effect until
 msgstr "<small><i><b>Observera:</b> Ändringar av denna inställning kommer att börja gälla först nästa gång du loggar in.</i></small>"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:4
+#: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:1
 msgid "Assistive Technology Preferences"
 msgstr "Inställningar för hjälpmedelsfunktioner"
 
@@ -464,25 +465,21 @@ msgstr "Skärm_tangentbord"
 msgid "_Screenreader"
 msgstr "_Skärmläsare"
 
-#: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:1
-msgid "Assistive Technology Support"
-msgstr "Stöd för hjälpmedelsfunktioner"
-
 #: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:2
 msgid "Enable support for GNOME assistive technologies at login"
 msgstr "Aktivera stöd för GNOME-hjälpmedelsfunktioner vid inloggning"
 
 #: ../capplets/accessibility/at-properties/main.c:60
-msgid "No Assistive Technology is available on your system.  The 'gok' package must be installed in order to get on-screen keyboard support, and the 'gnopernicus' package must be installed for screenreading and magnifying capabilities."
-msgstr "Ingen hjälpmedelsteknik är tillgänglig på ditt system. Paketet \"gok\" måste vara installerat för att kunna få stöd för skärmtangentbord, och paketet \"gnopernicus\" måste vara installerat för funktioner för skärmläsning och skärmförstoring."
+msgid "No Assistive Technology is available on your system.  The 'gok' package must be installed in order to get on-screen keyboard support, and the 'orca' package must be installed for screenreading and magnifying capabilities."
+msgstr "Ingen hjälpmedelsteknik finns tillgängligt på ditt system. Paketet \"gok\" måste vara installerat för att kunna få stöd för skärmtangentbord, och paketet \"orca\" måste vara installerat för funktioner för skärmläsning och skärmförstoring."
 
 #: ../capplets/accessibility/at-properties/main.c:62
 msgid "Not all available assistive technologies are installed on your system.  The 'gok' package must be installed in order to get on-screen keyboard support."
 msgstr "Alla hjälpmedelstekniker är inte tillgängliga på ditt system. Paketet \"gok\" måste vara installerat för att kunna få stöd för skärmtangentbord."
 
 #: ../capplets/accessibility/at-properties/main.c:64
-msgid "Not all available assistive technologies are installed on your system.  The 'gnopernicus' package must be installed for screenreading and magnifying capabilities."
-msgstr "Alla hjälpmedelstekniker är inte tillgängliga på ditt system. Paketet \"gnopernicus\" måste vara installerat för funktioner för skärmläsning och skärmförstoring."
+msgid "Not all available assistive technologies are installed on your system.  The 'orca' package must be installed for screenreading and magnifying capabilities."
+msgstr "Alla hjälpmedelstekniker är inte tillgängliga på ditt system. Paketet \"orca\" måste vara installerat för funktioner för skärmläsning och skärmförstoring."
 
 #: ../capplets/accessibility/keyboard/accessibility-keyboard.c:242
 #, c-format
@@ -725,7 +722,7 @@ msgid "_Finish"
 msgstr "_Färdig"
 
 #: ../capplets/background/gnome-background-properties.glade.h:7
-#: ../capplets/theme-switcher/theme-properties.glade.h:20
+#: ../capplets/theme-switcher/theme-properties.glade.h:21
 msgid "_Remove"
 msgstr "_Ta bort"
 
@@ -816,8 +813,8 @@ msgstr "Verkställ ändringarna och avsluta"
 
 #: ../capplets/common/capplet-util.c:243
 #: ../capplets/keyboard/gnome-keyboard-properties.c:225
-#: ../capplets/mouse/gnome-mouse-properties.c:1023
-#: ../capplets/sound/sound-properties-capplet.c:760
+#: ../capplets/mouse/gnome-mouse-properties.c:1027
+#: ../capplets/sound/sound-properties-capplet.c:762
 msgid "Retrieve and store legacy settings"
 msgstr "Hämta och lagra föråldrade inställningar"
 
@@ -1006,7 +1003,7 @@ msgid "Error saving configuration: %s"
 msgstr "Fel vid sparandet av konfiguration: %s"
 
 #: ../capplets/default-applications/gnome-da-capplet.c:719
-#: ../capplets/sound/sound-properties-capplet.c:318
+#: ../capplets/sound/sound-properties-capplet.c:319
 msgid "Custom"
 msgstr "Anpassad"
 
@@ -1506,7 +1503,7 @@ msgstr "Typen av snabbtangent."
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
 #: ../capplets/keybindings/gnome-keybinding-properties.c:187
 #: ../libbackground/applier.c:624
-#: ../typing-break/drwright.c:471
+#: ../typing-break/drwright.c:470
 msgid "Disabled"
 msgstr "Inaktiverad"
 
@@ -1527,7 +1524,7 @@ msgstr "Ljud"
 msgid "Window Management"
 msgstr "Fönsterhantering"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:666
+#: ../capplets/keybindings/gnome-keybinding-properties.c:668
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become unusable to type using this key.\n"
@@ -1536,7 +1533,7 @@ msgstr ""
 "Genvägen \"%s\" kan inte användas på grund av att den kommer att bli oanvändbar med den här tangenten.\n"
 "Försök med en tangent såsom Control, Alt eller Shift på samma gång.\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:695
+#: ../capplets/keybindings/gnome-keybinding-properties.c:697
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1545,21 +1542,21 @@ msgstr ""
 "Genvägen \"%s\" används redan för:\n"
 " \"%s\"\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:727
+#: ../capplets/keybindings/gnome-keybinding-properties.c:729
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Fel vid inställning av ny snabbtangent i konfigurationsdatabasen: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:777
+#: ../capplets/keybindings/gnome-keybinding-properties.c:779
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "Fel vid borttagning av snabbtangent i konfigurationsdatabasen: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:884
+#: ../capplets/keybindings/gnome-keybinding-properties.c:886
 msgid "Action"
 msgstr "Åtgärd"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:908
+#: ../capplets/keybindings/gnome-keybinding-properties.c:910
 msgid "Shortcut"
 msgstr "Genväg"
 
@@ -1608,8 +1605,8 @@ msgstr "_Tillgänglighet"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:221
 #: ../capplets/keyboard/gnome-keyboard-properties.c:223
-#: ../capplets/sound/sound-properties-capplet.c:756
 #: ../capplets/sound/sound-properties-capplet.c:758
+#: ../capplets/sound/sound-properties-capplet.c:760
 msgid "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr "Verkställ bara ändringar och avsluta (endast för kompatibilitet; hanteras nu av demon)"
 
@@ -1776,9 +1773,9 @@ msgstr "Ställ in dina tangentbordsinställningar"
 
 #. set the timeout value  label with correct value of timeout
 #: ../capplets/mouse/gnome-mouse-properties.c:138
-#: ../capplets/mouse/gnome-mouse-properties.c:887
+#: ../capplets/mouse/gnome-mouse-properties.c:891
 #, c-format
-msgid "%d milliseconds"
+msgid "%d millisecond"
 msgid_plural "%d milliseconds"
 msgstr[0] "%d millisekund"
 msgstr[1] "%d millisekunder"
@@ -1835,7 +1832,7 @@ msgstr "Stor vit muspekare"
 msgid "Large version of white pointer"
 msgstr "Stor version av den vita muspekaren"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:977
+#: ../capplets/mouse/gnome-mouse-properties.c:981
 msgid "Pointer Theme"
 msgstr "Muspekartema"
 
@@ -2035,12 +2032,12 @@ msgstr "_Proxyserver för säker HTTP:"
 msgid "Enable sound and associate sounds with events"
 msgstr "Aktivera ljud och associera ljud med händelser"
 
-#: ../capplets/sound/sound-properties-capplet.c:316
-#: ../capplets/sound/sound-properties-capplet.c:368
+#: ../capplets/sound/sound-properties-capplet.c:317
+#: ../capplets/sound/sound-properties-capplet.c:369
 msgid "Not connected"
 msgstr "Inte ansluten"
 
-#: ../capplets/sound/sound-properties-capplet.c:790
+#: ../capplets/sound/sound-properties-capplet.c:792
 msgid "Sound Preferences"
 msgstr "Ljudinställningar"
 
@@ -2233,7 +2230,7 @@ msgstr "Anpassat tema"
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "Du kan spara detta tema genom att trycka på knappen Spara tema."
 
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1579
+#: ../capplets/theme-switcher/gnome-theme-manager.c:1604
 msgid "The default theme schemas could not be found on your system.  This means that you probably don't have metacity installed, or that your gconf is configured incorrectly."
 msgstr "Scheman för standardtemat kunde inte hittas på ditt system. Detta betyder att du troligtvis inte har metacity installerat, eller att ditt gconf är felaktigt konfigurerat."
 
@@ -2255,90 +2252,94 @@ msgid "Theme"
 msgstr "Tema"
 
 #: ../capplets/theme-switcher/theme-properties.glade.h:1
+msgid "<b>You do not have permission to change theme settings</b>"
+msgstr "<b>Du har inte rättighet att ändra temainställningarna</b>"
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:2
 msgid "Apply _Background"
 msgstr "Använd _bakgrund"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:2
+#: ../capplets/theme-switcher/theme-properties.glade.h:3
 msgid "Apply _Font"
 msgstr "Använd _typsnitt"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:3
+#: ../capplets/theme-switcher/theme-properties.glade.h:4
 msgid "Controls"
 msgstr "Kontroller"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:4
+#: ../capplets/theme-switcher/theme-properties.glade.h:5
 msgid "Icons"
 msgstr "Ikoner"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:5
+#: ../capplets/theme-switcher/theme-properties.glade.h:6
 msgid "Save Theme"
 msgstr "Spara tema"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:6
+#: ../capplets/theme-switcher/theme-properties.glade.h:7
 msgid "Save _Background Image"
 msgstr "Spara _bakgrundsbild"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:7
+#: ../capplets/theme-switcher/theme-properties.glade.h:8
 msgid "Select theme for the desktop"
 msgstr "Välj tema för skrivbordet"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:8
+#: ../capplets/theme-switcher/theme-properties.glade.h:9
 msgid "Theme Details"
 msgstr "Temadetaljer"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:9
+#: ../capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Theme Preferences"
 msgstr "Temainställningar"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:10
+#: ../capplets/theme-switcher/theme-properties.glade.h:11
 msgid "Theme _Details"
 msgstr "Tema_detaljer"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:11
+#: ../capplets/theme-switcher/theme-properties.glade.h:12
 msgid "This theme does not suggest any particular font or background."
 msgstr "Detta tema föreslår inget särskilt typsnitt eller bakgrund."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:12
+#: ../capplets/theme-switcher/theme-properties.glade.h:13
 msgid "This theme suggests a background:"
 msgstr "Detta tema föreslår en bakgrund:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:13
+#: ../capplets/theme-switcher/theme-properties.glade.h:14
 msgid "This theme suggests a font and a background:"
 msgstr "Detta tema föreslår ett typsnitt och en bakgrund:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:14
+#: ../capplets/theme-switcher/theme-properties.glade.h:15
 msgid "This theme suggests a font:"
 msgstr "Detta tema föreslår ett typsnitt:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:15
+#: ../capplets/theme-switcher/theme-properties.glade.h:16
 msgid "Window Border"
 msgstr "Fönsterram"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:16
+#: ../capplets/theme-switcher/theme-properties.glade.h:17
 msgid "_Description:"
 msgstr "_Beskrivning:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:17
+#: ../capplets/theme-switcher/theme-properties.glade.h:18
 msgid "_Install Theme..."
 msgstr "_Installera tema..."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:18
+#: ../capplets/theme-switcher/theme-properties.glade.h:19
 msgid "_Install..."
 msgstr "_Installera..."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:19
+#: ../capplets/theme-switcher/theme-properties.glade.h:20
 msgid "_Name:"
 msgstr "_Namn:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:21
+#: ../capplets/theme-switcher/theme-properties.glade.h:22
 msgid "_Revert"
 msgstr "_Återgå"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:22
+#: ../capplets/theme-switcher/theme-properties.glade.h:23
 msgid "_Save Theme..."
 msgstr "_Spara tema..."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:23
+#: ../capplets/theme-switcher/theme-properties.glade.h:24
 msgid "theme selection tree"
 msgstr "temaväljarträd"
 
@@ -3176,62 +3177,50 @@ msgid "Take a break!"
 msgstr "Ta en paus!"
 
 #. { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
-#: ../typing-break/drwright.c:135
+#: ../typing-break/drwright.c:128
 msgid "/_Preferences"
 msgstr "/_Inställningar"
 
-#: ../typing-break/drwright.c:136
+#: ../typing-break/drwright.c:129
 msgid "/_About"
 msgstr "/_Om"
 
-#: ../typing-break/drwright.c:138
+#: ../typing-break/drwright.c:131
 msgid "/_Take a Break"
 msgstr "/_Ta en paus"
 
-#: ../typing-break/drwright.c:489
+#: ../typing-break/drwright.c:488
 #, c-format
 msgid "%d minute until the next break"
 msgid_plural "%d minutes until the next break"
 msgstr[0] "%d minut till nästa paus"
 msgstr[1] "%d minuter till nästa paus"
 
-#: ../typing-break/drwright.c:493
+#: ../typing-break/drwright.c:492
 msgid "Less than one minute until the next break"
 msgstr "Mindre än en minut till nästa paus"
 
-#: ../typing-break/drwright.c:581
+#: ../typing-break/drwright.c:579
 #, c-format
 msgid "Unable to bring up the typing break properties dialog with the following error: %s"
 msgstr "Kan inte visa dialogfönstret för skrivandepausegenskaper med följande fel: %s"
 
-# Osäker
-#: ../typing-break/drwright.c:629
-msgid "About GNOME Typing Monitor"
-msgstr "Om GNOME-skrivandeövervakaren"
+#: ../typing-break/drwright.c:599
+msgid "Written by Richard Hult <richard@imendio.com>"
+msgstr "Skrivet av Richard Hult <richard@imendio.com>"
 
-#: ../typing-break/drwright.c:653
-msgid "A computer break reminder."
-msgstr "En datorpauspåminnare."
-
-#: ../typing-break/drwright.c:654
-msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
-msgstr "Skrivet av Richard Hult &lt;rhult@imendio.com&gt;"
-
-#: ../typing-break/drwright.c:655
+#: ../typing-break/drwright.c:600
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Ögongodis tillagt av Anders Carlsson"
 
-#: ../typing-break/drwright.c:831
-msgid "Break reminder"
-msgstr "Pauspåminnare"
+# Osäker
+#: ../typing-break/drwright.c:623
+msgid "Typing Monitor"
+msgstr "Skrivandeövervakare"
 
-#: ../typing-break/eggtrayicon.c:127
-msgid "Orientation"
-msgstr "Orientering"
-
-#: ../typing-break/eggtrayicon.c:128
-msgid "The orientation of the tray."
-msgstr "Orientering för lådan."
+#: ../typing-break/drwright.c:625
+msgid "A computer break reminder."
+msgstr "En datorpauspåminnare."
 
 # Osäker
 #: ../typing-break/main.c:100
@@ -3434,6 +3423,14 @@ msgstr "Huruvida det ska skapas miniatyrbilder för installerade teman"
 msgid "Whether to thumbnail themes"
 msgstr "Huruvida det ska skapas miniatyrbilder för teman"
 
+#~ msgid "Assistive Technology Support"
+#~ msgstr "Stöd för hjälpmedelsfunktioner"
+#~ msgid "Break reminder"
+#~ msgstr "Pauspåminnare"
+#~ msgid "Orientation"
+#~ msgstr "Orientering"
+#~ msgid "The orientation of the tray."
+#~ msgstr "Orientering för lådan."
 #~ msgid "..."
 #~ msgstr "..."
 #~ msgid ""
