@@ -674,6 +674,8 @@ populate_tree_model(GtkTreeModelSort* model, GtkTreeSelection* selection) {
 
 	gchar **iterator = NULL;
 	gchar **paths = NULL;
+	gboolean has_default = FALSE;
+	GtkTreeIter iter;
 
 	GConfClient* client = gconf_client_get_default();
 	GtkListStore* store = GTK_LIST_STORE(gtk_tree_model_sort_get_model(model));
@@ -692,7 +694,7 @@ populate_tree_model(GtkTreeModelSort* model, GtkTreeSelection* selection) {
 		gchar*       fname = NULL;
 		GDir*        folder = NULL;
 		const gchar* name;
-		
+
 		if(strchr(*iterator, '%')) {
 			fname = g_strdup_printf(*iterator, g_getenv("HOME"));
 		} else {
@@ -700,26 +702,25 @@ populate_tree_model(GtkTreeModelSort* model, GtkTreeSelection* selection) {
 		}
 
 		folder = g_dir_open(fname, 0, NULL);
-		
+
 		while(folder && (name = g_dir_read_name(folder))) {
 			gchar* cursor_dir = g_strdup_printf("%s/%s/cursors/", fname, name);
 			XcursorImage* cursor;
 			gint sizes[] = { 12, 16, 24, 32, 36, 48, 0 };
 			gint i;
-			GtkTreeIter iter;
-			
+
 			if(!g_file_test(cursor_dir, G_FILE_TEST_EXISTS)) {
 				g_free(cursor_dir);
 				continue;
 			}
-			
+
 			for (i = 0; sizes[i] != 0; i++) {
 				cursor = XcursorLibraryLoadImage("left_ptr", name, sizes[i]);
 				if (cursor && cursor->size != sizes[i]) {
 					XcursorImageDestroy (cursor);
 					cursor = NULL;
 				}
-				
+
 				if(cursor) {
 					GdkPixbuf* pixbuf = gdk_pixbuf_from_xcursor_image(cursor);
 
@@ -732,7 +733,7 @@ populate_tree_model(GtkTreeModelSort* model, GtkTreeSelection* selection) {
 								   COLUMN_SIZE, sizes[i],
 								   -1);
 						g_object_unref(pixbuf);
-						
+
 						if(current_theme != NULL && !strcmp(current_theme, name) &&
 							current_size == sizes[i]) {
 							GtkTreeIter sort_iter;
@@ -742,10 +743,14 @@ populate_tree_model(GtkTreeModelSort* model, GtkTreeSelection* selection) {
 							gtk_tree_selection_select_iter(selection,
 										       &sort_iter);
 						}
+
+						if(G_LIKELY(!has_default) && !strcmp(name, "default")) {
+							has_default = TRUE;
+						}
 					}
 				}
 			}
-			
+
 			g_free(cursor_dir);
 		}
 
@@ -754,7 +759,17 @@ populate_tree_model(GtkTreeModelSort* model, GtkTreeSelection* selection) {
 		}
 		g_free(fname);
 	}
-	
+
+	if(G_LIKELY(!has_default)) {
+		gtk_list_store_append(store, &iter);
+		gtk_list_store_set(store, &iter,
+				   COLUMN_PIXBUF, NULL,
+				   COLUMN_TEXT, _("Default Pointer"),
+				   COLUMN_FONT_PATH, "default",
+				   COLUMN_SIZE, 18,
+				   -1);
+	}
+
 	g_free(current_theme);
 
 	if (xpaths != NULL) {
@@ -765,21 +780,21 @@ populate_tree_model(GtkTreeModelSort* model, GtkTreeSelection* selection) {
 	static const gchar* builtins[][5] = {
 		{
 			"gnome/cursor-fonts/cursor-normal.pcf",
-		       	N_("Default Pointer"),
-		       	N_("Default Pointer - Current"),
-		       	N_("The default pointer that ships with X"),
+			N_("Default Pointer"),
+			N_("Default Pointer - Current"),
+			N_("The default pointer that ships with X"),
 			"mouse-cursor-normal.png"
 		}, {
 			"gnome/cursor-fonts/cursor-white.pcf",
-		      	N_("White Pointer"),
-		     	N_("White Pointer - Current"),
-		     	N_("The default pointer inverted"),
+			N_("White Pointer"),
+			N_("White Pointer - Current"),
+			N_("The default pointer inverted"),
 			"mouse-cursor-white.png"
 		}, {
 			"gnome/cursor-fonts/cursor-large.pcf",
-		      	N_("Large Pointer"),
-		     	N_("Large Pointer - Current"),
-		     	N_("Large version of normal pointer"),
+			N_("Large Pointer"),
+			N_("Large Pointer - Current"),
+			N_("Large version of normal pointer"),
 			"mouse-cursor-normal-large.png"
 		}, {
 			"gnome/cursor-fonts/cursor-large-white.pcf",
@@ -856,8 +871,6 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 	GtkWidget         *tree_view;
 	GtkTreeSelection  *selection;
 	GtkTreeModel      *model;
-	GtkCellRenderer   *renderer;
-	GtkTreeViewColumn *column;
 	GConfValue        *value;
 	gchar             *cursor_font;
 	gchar             *message;
@@ -902,23 +915,19 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 				 model);
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tree_view));
 	gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
-	column = gtk_tree_view_column_new ();
-	renderer = gtk_cell_renderer_pixbuf_new ();
-	gtk_tree_view_column_pack_start (column, renderer, FALSE);
-	gtk_tree_view_column_set_attributes (column, renderer,
-					     "pixbuf", COLUMN_PIXBUF,
-					     NULL);
-	renderer = gtk_cell_renderer_text_new ();
-	gtk_tree_view_column_pack_start (column, renderer, TRUE);
-	gtk_tree_view_column_set_attributes (column, renderer,
-					     "markup", COLUMN_TEXT,
-					     NULL);
+	gtk_tree_view_insert_column_with_attributes (GTK_TREE_VIEW (tree_view), -1,
+						     "Preview", gtk_cell_renderer_pixbuf_new (),
+						     "pixbuf", COLUMN_PIXBUF,
+						     NULL);
+	gtk_tree_view_insert_column_with_attributes (GTK_TREE_VIEW (tree_view), -1,
+						     "Name", gtk_cell_renderer_text_new (),
+						     "markup", COLUMN_TEXT,
+						     NULL);
 
 	/* Add the cursors */
 	populate_tree_model(GTK_TREE_MODEL_SORT(model), selection);
 	g_signal_connect (G_OBJECT (selection), "changed", G_CALLBACK (cursor_changed), NULL);
-	gtk_tree_view_append_column (GTK_TREE_VIEW (tree_view), column);
-	
+
 	gconf_peditor_new_boolean
 		(changeset, "/desktop/gnome/peripherals/mouse/locate_pointer", WID ("locate_pointer_toggle"), NULL);
 
