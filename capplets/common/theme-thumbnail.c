@@ -71,7 +71,8 @@ int pipe_from_factory_fd[2];
 
 static void
 fake_expose_widget (GtkWidget *widget,
-		    GdkPixmap *pixmap)
+		    GdkPixmap *pixmap,
+		    GdkRectangle *area)
 {
   GdkWindow *tmp_window;
   GdkEventExpose event;
@@ -79,7 +80,7 @@ fake_expose_widget (GtkWidget *widget,
   event.type = GDK_EXPOSE;
   event.window = pixmap;
   event.send_event = FALSE;
-  event.area = widget->allocation;
+  event.area = area ? *area : widget->allocation;
   event.region = NULL;
   event.count = 0;
 
@@ -98,7 +99,7 @@ hbox_foreach (GtkWidget *widget,
   gtk_widget_realize (widget);
   gtk_widget_map (widget);
   gtk_widget_ensure_style (widget);
-  fake_expose_widget (widget, (GdkPixmap *) data);
+  fake_expose_widget (widget, (GdkPixmap *) data, NULL);
 }
 
 static void
@@ -118,10 +119,12 @@ create_image (ThemeThumbnailData *theme_thumbnail_data,
   MetaTheme *theme = NULL;
   GtkSettings *settings;
   GtkIconTheme *icon_theme;
-  GdkPixbuf *folder_icon;
+  GdkPixbuf *folder_icon = NULL;
   GtkIconInfo *folder_icon_info;
   const gchar *filename;
   gchar *example_icon_name;
+  int width, height;
+  double scale;
 
   settings = gtk_settings_get_default ();
   g_object_set (G_OBJECT (settings),
@@ -183,13 +186,16 @@ create_image (ThemeThumbnailData *theme_thumbnail_data,
   g_assert (window->style);
   g_assert (window->style->font_desc);
 
-  fake_expose_widget (window, pixmap);
-  fake_expose_widget (preview, pixmap);
-  fake_expose_widget (stock_button, pixmap);
+  fake_expose_widget (window, pixmap, NULL);
+  fake_expose_widget (preview, pixmap, NULL);
+  /* we call this again here because the preview sometimes draws into the area
+   * of the contents, see http://bugzilla.gnome.org/show_bug.cgi?id=351389 */
+  fake_expose_widget (window, pixmap, &align->allocation);
+  fake_expose_widget (stock_button, pixmap, NULL);
   gtk_container_foreach (GTK_CONTAINER (GTK_BIN (GTK_BIN (stock_button)->child)->child),
 			 hbox_foreach,
 			 pixmap);
-  fake_expose_widget (GTK_BIN (stock_button)->child, pixmap);
+  fake_expose_widget (GTK_BIN (stock_button)->child, pixmap, NULL);
 
 
   gdk_pixbuf_get_from_drawable (pixbuf, pixmap, NULL, 0, 0, 0, 0, ICON_SIZE_WIDTH, ICON_SIZE_HEIGHT);
@@ -216,33 +222,46 @@ create_image (ThemeThumbnailData *theme_thumbnail_data,
  
   g_object_unref (icon_theme);
 
-  filename = gtk_icon_info_get_filename (folder_icon_info);
- 
-  if (filename != NULL)
+  if (folder_icon_info != NULL) 
     {
-      folder_icon = gdk_pixbuf_new_from_file (filename, NULL);
-    }
-  else
-    {
-      folder_icon = NULL;
-    }
+      filename = gtk_icon_info_get_filename (folder_icon_info);
+     
+      if (filename != NULL)
+	{
+	  folder_icon = gdk_pixbuf_new_from_file (filename, NULL);
+	}
 
-  gtk_icon_info_free (folder_icon_info);
+      gtk_icon_info_free (folder_icon_info);
+    }
 
   /* render the icon to the thumbnail */
-  if (folder_icon)
-    {
-      gdk_pixbuf_composite (folder_icon,
-			    pixbuf,
-			    align->allocation.x + align->allocation.width - gdk_pixbuf_get_width (folder_icon) - 5,
-			    align->allocation.y + align->allocation.height - gdk_pixbuf_get_height (folder_icon) - 5,
-			    gdk_pixbuf_get_width (folder_icon),
-			    gdk_pixbuf_get_height (folder_icon),
-			    align->allocation.x + align->allocation.width - gdk_pixbuf_get_width (folder_icon) - 5,
-			    align->allocation.y + align->allocation.height - gdk_pixbuf_get_height (folder_icon) - 5,
-			    1.0, 1.0, GDK_INTERP_BILINEAR, 255);
-      g_object_unref (folder_icon);
-    }
+  if (folder_icon == NULL)
+    folder_icon = gtk_widget_render_icon (window, 
+					  GTK_STOCK_MISSING_IMAGE, 
+					  GTK_ICON_SIZE_DIALOG,
+					  NULL);
+
+  /* Some icons don't come back at the requested dimensions, so we need to scale
+   * them. The width is usually the largest dimension for icons that come at
+   * irregular sizes, so use this to calculate the scale factor
+   */
+  scale = 48.0 / gdk_pixbuf_get_width (folder_icon);
+  width = 48;
+  height = scale * gdk_pixbuf_get_height (folder_icon);
+
+  gdk_pixbuf_composite (folder_icon,
+			pixbuf,
+			align->allocation.x + align->allocation.width - width - 5,
+			align->allocation.y + align->allocation.height - height - 5,
+			width,
+			height,
+			align->allocation.x + align->allocation.width - width - 5,
+			align->allocation.y + align->allocation.height - height - 5,
+			scale,
+			scale,
+			GDK_INTERP_BILINEAR, 255);
+  g_object_unref (folder_icon);
+  gtk_widget_destroy (window);
 }
 
 static void
