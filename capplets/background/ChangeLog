@@ -1,5 +1,18 @@
 2006-08-18  Rodney Dawes  <dobey@novell.com>
 
+	* background.desktop.in.in: Use preferences-desktop-wallpaper as the
+	icon name per the Icon Naming Specification
+	* gnome-background-properties.glade: Set the icon name for the window
+	to be preferences-desktop-wallpaper as per the naming spec
+	* gnome-wp-capplet.[ch]: Remove GtkIconTheme instance from structure
+	(gnome_wp_icon_theme_changed): Don't need this method any longer
+	(wallpaper_properties_init): Remove unused variables
+	Don't need to get the icon_info to load a pixbuf and set an icon, from
+	the theme any longer, as we can just specify the icon with one call
+	Don't need the extra _ensure_style call here
+
+2006-08-18  Rodney Dawes  <dobey@novell.com>
+
 	* gnome-wp-capplet.c (wallpaper_properties_init): Set the content area
 	border to 0 in the parsed rc string
 	Remove the set_border_width calls for the dialog's vbox and action area

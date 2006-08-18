@@ -786,23 +786,6 @@ static void gnome_wp_color2_changed (GConfClient * client, guint id,
   gnome_wp_color_changed (capplet, FALSE);
 }
 
-static void gnome_wp_icon_theme_changed (GtkIconTheme * theme,
-					 GnomeWPCapplet * capplet) {
-  GdkPixbuf * pixbuf;
-  GtkIconInfo * icon_info = NULL;
-
-  icon_info = gtk_icon_theme_lookup_icon (capplet->theme,
-					  "gnome-settings-background",
-					  48, 0);
-  if (icon_info != NULL) {
-    pixbuf = gtk_icon_info_load_icon (icon_info, NULL);
-    gtk_icon_info_free (icon_info);
-    gtk_window_set_icon (GTK_WINDOW (capplet->window), NULL);
-    gtk_window_set_default_icon (pixbuf);
-    g_object_unref (pixbuf);
-  }
-}
-
 static GladeXML * gnome_wp_create_dialog (void) {
   GladeXML * new;
   gchar * gladefile;
@@ -860,10 +843,8 @@ static void wallpaper_properties_init (poptContext ctx) {
   GtkCellRenderer * renderer;
   GtkTreeViewColumn * column;
   GtkTreeSelection * selection;
-  GdkPixbuf * pixbuf;
   GdkCursor * cursor;
   const gchar ** args;
-  GtkIconInfo * icon_info = NULL;
   GtkFileFilter *filter;
 
   gtk_rc_parse_string ("style \"wp-tree-defaults\" {\n"
@@ -914,28 +895,13 @@ static void wallpaper_properties_init (poptContext ctx) {
 					   gnome_wp_item_free);
 
   capplet->thumbs = gnome_thumbnail_factory_new (GNOME_THUMBNAIL_SIZE_NORMAL);
-  capplet->theme = gtk_icon_theme_get_default ();
-
-  g_signal_connect (G_OBJECT (capplet->theme), "changed",
-		    G_CALLBACK (gnome_wp_icon_theme_changed), capplet);
 
   dialog = gnome_wp_create_dialog ();
   capplet->window = glade_xml_get_widget (dialog, "gnome_wp_properties");
 
-  icon_info = gtk_icon_theme_lookup_icon (capplet->theme,
-					  "gnome-settings-background",
-					  48, 0);
-  if (icon_info != NULL) {
-    pixbuf = gtk_icon_info_load_icon (icon_info, NULL);
-    gtk_icon_info_free (icon_info);
-    gtk_window_set_default_icon (pixbuf);
-    gtk_window_set_icon (GTK_WINDOW (capplet->window), pixbuf);
-    g_object_unref (pixbuf);
-  }
+  gtk_window_set_default_icon_name ("preferences-desktop-wallpaper");
 
   gtk_widget_realize (capplet->window);
-
-  gtk_widget_ensure_style (capplet->window);
 
   /* Drag and Drop Support */
   gtk_drag_dest_unset (capplet->window);
