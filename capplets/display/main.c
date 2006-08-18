@@ -664,7 +664,6 @@ create_dialog (struct DisplayInfo *info)
       client = gconf_client_get_default ();
       key = g_strconcat ("/desktop/gnome/screen/", hostname,  "/0/resolution",NULL);
       resolution = gconf_client_get_string (client, key, NULL);
-      g_free (resolution);
       g_free (key);
       g_object_unref (client);
       
@@ -678,6 +677,8 @@ create_dialog (struct DisplayInfo *info)
       gtk_box_pack_start (GTK_BOX (vbox),
 			  wrapped, FALSE, FALSE, 0);
       gtk_widget_show (wrapped);
+
+      g_free (resolution);
     }
 
   info->per_computer_check = per_computer_check;
