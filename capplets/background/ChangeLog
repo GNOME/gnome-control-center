@@ -1,3 +1,11 @@
+2006-08-18  Rodney Dawes  <dobey@novell.com>
+
+	* gnome-wp-capplet.c (wallpaper_properties_init): Set the content area
+	border to 0 in the parsed rc string
+	Remove the set_border_width calls for the dialog's vbox and action area
+
+	Fixes #332830
+
 2006-03-18  Rodney Dawes  <dobey@novell.com>
 
 	* gnome-wp-xml.c (gnome_wp_xml_load_list): Only pass G_FILE_TEST_IS_DIR

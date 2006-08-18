@@ -871,6 +871,7 @@ static void wallpaper_properties_init (poptContext ctx) {
 		       "} widget_class \"*TreeView*\""
 		       " style \"wp-tree-defaults\"\n"
 		       "style \"wp-dialog-defaults\" {\n"
+		       "  GtkDialog::content-area-border = 0\n"
 		       "  GtkDialog::action-area-border = 12\n"
 		       "} widget_class \"*Dialog*\""
 		       " style \"wp-dialog-defaults\"\n");
@@ -935,8 +936,6 @@ static void wallpaper_properties_init (poptContext ctx) {
   gtk_widget_realize (capplet->window);
 
   gtk_widget_ensure_style (capplet->window);
-  gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (capplet->window)->vbox), 0);
-  gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (capplet->window)->action_area), 12);
 
   /* Drag and Drop Support */
   gtk_drag_dest_unset (capplet->window);
