@@ -25,8 +25,6 @@
 #include <gnome-theme-apply.h>
 
 
-#define MAX_ELEMENTS_BEFORE_SCROLLING 3
-
 /* Events: There are two types of change events we worry about.  The first is
  * when the theme settings change.  In this case, we can quickly update the UI
  * to reflect.  The other is when the themes themselves change.
@@ -164,6 +162,52 @@ pixbuf_async_data_free (gpointer data)
   g_free (pixbuf_async_data);
 }
 
+/* Checks if the preview pixbuf for iter needs to be generated and if so, it
+ * queues the generation.
+ * Returns: TRUE if the generation was queued, FALSE otherwise.
+ */
+static gboolean
+queue_pixbuf_generation (GtkTreeModel *model, GtkTreeIter *iter)
+{
+  GdkPixbuf *pixbuf = NULL;
+  gchar *theme_id = NULL;
+  PixbufAsyncData *pixbuf_async_data;
+  GnomeThemeMetaInfo *meta_theme_info;
+
+  gtk_tree_model_get (model, iter,
+		      META_THEME_PIXBUF_COLUMN, &pixbuf,
+		      -1);
+  if (pixbuf != default_image)
+    return FALSE;
+
+  gtk_tree_model_get (model, iter,
+		      META_THEME_ID_COLUMN, &theme_id,
+		      -1);
+  if (theme_id == NULL)
+    {
+      meta_theme_info = &custom_meta_theme_info;
+    }
+  else
+    {
+      meta_theme_info = gnome_theme_meta_info_find (theme_id);
+    }
+
+  /* We should always have a metatheme file */
+  g_assert (meta_theme_info);
+
+  pixbuf_async_data = g_new (PixbufAsyncData, 1);
+  pixbuf_async_data->theme_id = theme_id;
+  pixbuf_async_data->model = model;
+  pixbuf_async_data->cancelled = FALSE;
+  g_object_ref (model);
+  generate_theme_thumbnail_async (meta_theme_info,
+				  pixbuf_async_func,
+				  pixbuf_async_data,
+				  pixbuf_async_data_free);
+
+  return TRUE;
+}
+
 static gboolean
 pixbuf_idle_func (gpointer data)
 {
@@ -171,6 +215,7 @@ pixbuf_idle_func (gpointer data)
   GtkWidget *tree_view;
   GtkTreeModel *model;
   GtkTreeIter iter;
+  GtkTreePath *path, *end;
   gboolean valid;
 
   pixbuf_idle_id = 0;
@@ -190,48 +235,31 @@ pixbuf_idle_func (gpointer data)
   tree_view = WID ("meta_theme_treeview");
   model = gtk_tree_view_get_model (GTK_TREE_VIEW (tree_view));
 
+  /* first, try to load previews for themes that are currently visible */
+  if (gtk_tree_view_get_visible_range (GTK_TREE_VIEW (tree_view), &path, &end)) 
+    {
+      for (; gtk_tree_path_compare (path, end) <= 0; gtk_tree_path_next (path))
+	{
+	  if (!gtk_tree_model_get_iter (model, &iter, path))
+	    break;
+	  if (queue_pixbuf_generation (model, &iter)) 
+	    {
+	      gtk_tree_path_free (path);
+	      gtk_tree_path_free (end);
+	      return FALSE;
+	    }
+	}
+      gtk_tree_path_free (path);
+      gtk_tree_path_free (end);
+    }
+
+  /* if all visible previews have been loaded, try to load the rest */
   for (valid = gtk_tree_model_get_iter_first (model, &iter);
        valid;
        valid = gtk_tree_model_iter_next (model, &iter))
     {
-      GdkPixbuf *pixbuf = NULL;
-      gchar *theme_id = NULL;
-
-      gtk_tree_model_get (model, &iter,
-			  META_THEME_PIXBUF_COLUMN, &pixbuf,
-			  -1);
-      if (pixbuf == default_image)
-	{
-	  PixbufAsyncData *pixbuf_async_data;
-	  GnomeThemeMetaInfo *meta_theme_info;
-
-	  gtk_tree_model_get (model, &iter,
-			      META_THEME_ID_COLUMN, &theme_id,
-			      -1);
-	  if (theme_id == NULL)
-	    {
-	      meta_theme_info = &custom_meta_theme_info;
-	    }
-	  else
-	    {
-	      meta_theme_info = gnome_theme_meta_info_find (theme_id);
-	    }
-
-	  /* We should always have a metatheme file */
-	  g_assert (meta_theme_info);
-
-	  pixbuf_async_data = g_new (PixbufAsyncData, 1);
-	  pixbuf_async_data->theme_id = theme_id;
-	  pixbuf_async_data->model = model;
-	  pixbuf_async_data->cancelled = FALSE;
-	  g_object_ref (model);
-	  generate_theme_thumbnail_async (meta_theme_info,
-					  pixbuf_async_func,
-					  pixbuf_async_data,
-					  pixbuf_async_data_free);
-
-	  return FALSE;
-	}
+      if (queue_pixbuf_generation (model, &iter))
+	return FALSE;
     }
 
   /* If we're done loading all the main themes, lets initialize the details
@@ -359,7 +387,7 @@ load_meta_themes (GtkTreeView *tree_view,
 	}
     }
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (swindow),
-				  GTK_POLICY_NEVER, GTK_POLICY_NEVER);
+				  GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
   gtk_widget_set_usize (swindow, -1, -1);
 
   /* Sort meta_theme_list to be in the same order of the current data.  This way
@@ -469,16 +497,8 @@ load_meta_themes (GtkTreeView *tree_view,
 	  blurb = g_markup_printf_escaped ("<span size=\"larger\" weight=\"bold\">%s</span>\n%s",
 					   list_meta_theme_info->readable_name, list_meta_theme_info->comment);
 
-	  if (i <= MAX_ELEMENTS_BEFORE_SCROLLING) {
-	    pixbuf = generate_theme_thumbnail (list_meta_theme_info, FALSE);
-	    if (pixbuf == NULL)
-	      pixbuf = broken_image;
-	  } else {
-	    pixbuf = default_image;
-	  }
-
 	  gtk_list_store_set (GTK_LIST_STORE (model), &iter_to_set,
-			      META_THEME_PIXBUF_COLUMN, pixbuf,
+			      META_THEME_PIXBUF_COLUMN, default_image,
 			      META_THEME_NAME_COLUMN, blurb,
 			      META_THEME_ID_COLUMN, list_meta_theme_info->name,
 			      META_THEME_FLAG_COLUMN, list_is_default ? THEME_FLAG_DEFAULT : 0,
@@ -487,11 +507,6 @@ load_meta_themes (GtkTreeView *tree_view,
 
 	  list = list->next;
 	  i++;
-	}
-      if (i == MAX_ELEMENTS_BEFORE_SCROLLING)
-	{
-	  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (swindow),
-					  GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
 	}
     }
 
