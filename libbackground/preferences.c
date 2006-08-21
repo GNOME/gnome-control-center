@@ -237,7 +237,7 @@ bg_preferences_load (BGPreferences *prefs)
 {
 	GConfClient *client;
 	GError      *error = NULL;
-	char *tmp;
+	char *tmp, *shading_type, *picture_options;
 
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_BG_PREFERENCES (prefs));
@@ -272,14 +272,17 @@ bg_preferences_load (BGPreferences *prefs)
 	if (prefs->opacity >= 100 || prefs->opacity < 0)
 		prefs->adjust_opacity = FALSE;
 
-	prefs->orientation = read_orientation_from_string (gconf_client_get_string (client, BG_PREFERENCES_COLOR_SHADING_TYPE, &error));
+	shading_type = gconf_client_get_string (client, BG_PREFERENCES_COLOR_SHADING_TYPE, &error);
+	prefs->orientation = read_orientation_from_string (shading_type);
+	g_free (shading_type);
 	if (prefs->orientation == ORIENTATION_SOLID)
 		prefs->gradient_enabled = FALSE;
 	else
 		prefs->gradient_enabled = TRUE;
 
-	prefs->wallpaper_type = read_wptype_from_string (gconf_client_get_string (client, BG_PREFERENCES_PICTURE_OPTIONS, &error));
-
+	picture_options = gconf_client_get_string (client, BG_PREFERENCES_PICTURE_OPTIONS, &error);
+	prefs->wallpaper_type = read_wptype_from_string (picture_options);
+	g_free (picture_options);	
 	if (prefs->wallpaper_type == WPTYPE_UNSET) {
 	  prefs->wallpaper_enabled = FALSE;
 	  prefs->wallpaper_type = WPTYPE_CENTERED;
