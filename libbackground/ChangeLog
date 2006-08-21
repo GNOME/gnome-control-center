@@ -1,3 +1,10 @@
+2006-08-21  Rodney Dawes  <dobey@novell.com>
+
+	* preferences.c (bg_preferences_load): Revert previous leak fix from
+	Kjartan Maraas as it seems to cause crashes in nautilus
+
+	see bug #352279
+
 2006-08-21  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* preferences.c: (bg_preferences_load): Don't leak gconf strings.
