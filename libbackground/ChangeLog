@@ -1,3 +1,12 @@
+2006-08-23  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* preferences.c: (bg_preferences_load),
+	(bg_preferences_merge_entry), (read_wptype_from_string),
+	(read_orientation_from_string): Make read_orientation_from_string()
+	and read_wptype_from_string() behave like read_color_from_string()
+	and adjust all callers. Avoids some excess strduping too I guess.
+	Closes bug #352252.
+
 2006-08-21  Rodney Dawes  <dobey@novell.com>
 
 	* preferences.c (bg_preferences_load): Revert previous leak fix from

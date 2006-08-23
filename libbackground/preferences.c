@@ -42,8 +42,8 @@ static void      bg_preferences_class_init (BGPreferencesClass *class);
 static void      bg_preferences_finalize   (GObject            *object);
 
 static GdkColor *read_color_from_string    (const gchar        *string);
-static orientation_t read_orientation_from_string  (gchar *string);
-static wallpaper_type_t read_wptype_from_string (gchar *string);
+static orientation_t read_orientation_from_string  (const gchar *string);
+static wallpaper_type_t read_wptype_from_string (const gchar *string);
 
 static GEnumValue _bg_wptype_values[] = {
 	{ WPTYPE_TILED, "WPTYPE_TILED", "wallpaper"},
@@ -272,13 +272,18 @@ bg_preferences_load (BGPreferences *prefs)
 	if (prefs->opacity >= 100 || prefs->opacity < 0)
 		prefs->adjust_opacity = FALSE;
 
-	prefs->orientation = read_orientation_from_string (gconf_client_get_string (client, BG_PREFERENCES_COLOR_SHADING_TYPE, &error));
+	tmp = gconf_client_get_string (client, BG_PREFERENCES_COLOR_SHADING_TYPE, &error);
+	prefs->orientation = read_orientation_from_string (tmp);
+	g_free (tmp);
+
 	if (prefs->orientation == ORIENTATION_SOLID)
 		prefs->gradient_enabled = FALSE;
 	else
 		prefs->gradient_enabled = TRUE;
 
-	prefs->wallpaper_type = read_wptype_from_string (gconf_client_get_string (client, BG_PREFERENCES_PICTURE_OPTIONS, &error));
+	tmp = gconf_client_get_string (client, BG_PREFERENCES_PICTURE_OPTIONS, &error);
+	prefs->wallpaper_type = read_wptype_from_string (tmp);
+	g_free (tmp);
 
 	if (prefs->wallpaper_type == WPTYPE_UNSET) {
 	  prefs->wallpaper_enabled = FALSE;
@@ -305,7 +310,7 @@ bg_preferences_merge_entry (BGPreferences    *prefs,
 	g_return_if_fail (IS_BG_PREFERENCES (prefs));
 
 	if (!strcmp (entry->key, BG_PREFERENCES_PICTURE_OPTIONS)) {
-  	        wallpaper_type_t wallpaper_type = read_wptype_from_string (g_strdup (gconf_value_get_string (value)));
+  	        wallpaper_type_t wallpaper_type = read_wptype_from_string (gconf_value_get_string (value));
 		if (wallpaper_type == WPTYPE_UNSET) {
 		  prefs->wallpaper_enabled = FALSE;
 		} else {
@@ -350,7 +355,7 @@ bg_preferences_merge_entry (BGPreferences    *prefs,
 			prefs->adjust_opacity = FALSE;
 	}
 	else if (!strcmp (entry->key, BG_PREFERENCES_COLOR_SHADING_TYPE)) {
-		prefs->orientation = read_orientation_from_string (g_strdup (gconf_value_get_string (value)));
+		prefs->orientation = read_orientation_from_string (gconf_value_get_string (value));
 
 		if (prefs->orientation == ORIENTATION_SOLID)
 			prefs->gradient_enabled = FALSE;
@@ -371,7 +376,7 @@ bg_preferences_merge_entry (BGPreferences    *prefs,
 }
 
 static wallpaper_type_t
-read_wptype_from_string (gchar *string)
+read_wptype_from_string (const gchar *string)
 {
         wallpaper_type_t type = WPTYPE_UNSET;
       
@@ -387,14 +392,13 @@ read_wptype_from_string (gchar *string)
 		} else if (!strncmp (string, "zoom", sizeof ("zoom"))) {
 			type =  WPTYPE_ZOOM;
 		}
-		g_free (string);
 	}
 
 	return type;
 }
 
 static orientation_t
-read_orientation_from_string (gchar *string)
+read_orientation_from_string (const gchar *string)
 {
         orientation_t type = ORIENTATION_SOLID;
 
@@ -404,7 +408,6 @@ read_orientation_from_string (gchar *string)
 		} else if (!strncmp (string, "horizontal-gradient", sizeof ("horizontal-gradient"))) {
 			type = ORIENTATION_HORIZ;
 		}
-		g_free (string);
 	}
 	   
 	return type;
