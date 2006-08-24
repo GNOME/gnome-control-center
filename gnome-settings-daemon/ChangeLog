@@ -1,3 +1,10 @@
+2006-08-24  Andre Klapper <a9016009@gmx.de>
+
+	Fixes #170318
+
+	* gnome-settings-multimedia-keys.c (init_kbd): avoid grabbing all
+	the keyboard when the key code cannot be retrieved.
+
 2006-07-11  Sebastien Bacher  <seb128@debian.org>
 
 	* Makefile.am: fix distclean build target

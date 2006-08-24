@@ -433,6 +433,15 @@ init_kbd (Acme *acme)
 			g_free (key);
 			continue;
 		}
+	/*avoid grabbing all the keyboard when KeyCode cannot be retrieved */
+		if (key->keycode == AnyKey)
+		  {
+		    g_warning ("The shortcut key \"%s\" cannot be found on the current system, ignoring the binding", tmp);
+		    g_free (tmp);
+		    g_free (key);
+		    continue;
+		  }
+
 		g_free (tmp);
 
 		keys[i].key = key;
