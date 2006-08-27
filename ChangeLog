@@ -1,3 +1,10 @@
+2006-08-27  Matthias Clasen <mclasen@redhat.com>
+
+	Fixes #352776
+
+	* libkbdraw/keyboard-drawing.c (key_event): return TRUE when we
+	handle the key event, to avoid GTK+ to handle it also.
+
 2006-08-22  Sebastien Bacher <seb128@debian.org>
 
 	* configure.in: updated to 2.16.0
