@@ -1,3 +1,9 @@
+2006-08-28  Thomas Wood  <thos@gnome.org>
+
+	* theme-properties.glade: Fixes bug 331835 (Missing maximize button)
+	by making the main window Normal rather than Dialog.
+	* ChangeLog: Converted to utf-8!
+
 2006-08-21  Thomas Wood  <thos@gnome.org>
 
 	* gnome-theme-manager.c: (queue_pixbuf_generation),
@@ -102,7 +108,7 @@
 	Safonov <spoof@spoofa.info> to fix bug 314658 - Theme chooser main
 	window too wide for 800x600
 
-2006-01-03  David Seseño <david@alderia.com>
+2006-01-03  David SeseÃ±o <david@alderia.com>
 
 	* gnome-theme-manager.c (setup_dialog): Set the search column of the
 	treeview. Fixes #321379.
@@ -116,7 +122,7 @@
 	(background_key_changed): call the 2 above functions to update
 	the background from metathemes that include a background.
 
-2005-11-14  David Sedeño <david@alderia.com>
+2005-11-14  David SedeÃ±o <david@alderia.com>
 
 	* gnome-theme-details.c (gtk_theme_update_remove_button): Update the
 	sensivility of the button if the user can remove the theme.
@@ -168,7 +174,7 @@
 	the window manager theme last selected and just exit if we are
 	already using the one we want
 
-2005-02-01  David Sedeño <david@alderia.com>
+2005-02-01  David SedeÃ±o <david@alderia.com>
 
 	New install procedure: See bug #102216.
 	* gnome-theme-details.c: Remove gnome_theme_installer_run_cb,
@@ -237,7 +243,7 @@ Tue Nov  2 16:03:41 2004  Jonathan Blandford  <jrb@redhat.com>
 2004-10-27  Sebastien Bacher  <seb128@debian.org>
 
 	* gnome-theme-save.c: (setup_directory_structure):
-	patch by David Sedeño Fernández <david@alderia.com> to fix a 
+	patch by David SedeÃ±o FernÃ¡ndez <david@alderia.com> to fix a 
 	warning during the compilation (Closes: #148345).
 
 2004-10-14  Jody Goldberg <jody@gnome.org>
@@ -256,13 +262,13 @@ Tue Nov  2 16:03:41 2004  Jonathan Blandford  <jrb@redhat.com>
 	* gnome-theme-save.c: (setup_directory_structure): Remove
 	extra space in a string before question mark.
 
-2004-07-09  David Sedeño <david@alderia.com>
+2004-07-09  David SedeÃ±o <david@alderia.com>
 
 	(http://bugzilla.gnome.org/show_bug.cgi?id=122970)
 	* gnome-theme-save.c (setup_directory_structure): 
 	If theme exists, show confirmation dialog to user.
 
-2004-06-20  David Sedeño <david@alderia.com>
+2004-06-20  David SedeÃ±o <david@alderia.com>
 
 	(http://bugzilla.gnome.org/show_bug.cgi?id=143958)
 	* gnome-theme-manager.c, theme-properties.glade: Revert option added.
