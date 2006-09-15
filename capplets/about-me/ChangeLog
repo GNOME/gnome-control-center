@@ -1,3 +1,11 @@
+2006-09-15  Matt Keenan <matt.keenan@sun.com>
+
+	Fixes #349079
+
+	* gnome-about-me-password.c (spawn_passwd): don't use stdin, stdout
+	and stderr as variable names. Fixes compilation issue on Sun Studio
+	compiler.
+
 2006-08-07  Sebastien Bacher  <seb128@debian.org>
 
 	* gnome-about-me.c: (about_me_load_photo), (about_me_update_photo):
