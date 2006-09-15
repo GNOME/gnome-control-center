@@ -229,7 +229,7 @@ apply_config (struct DisplayInfo *info)
 					      gdk_x11_drawable_get_xid (GDK_DRAWABLE (root_window)),
 					      new_res,
 					      new_rot,
-					      new_rate,
+					      new_rate > 0 ? new_rate : 0,
 					      GDK_CURRENT_TIME);
 	}
     }
@@ -277,7 +277,7 @@ revert_config (struct DisplayInfo *info)
 					  gdk_x11_drawable_get_xid (GDK_DRAWABLE (root_window)),
 					  screen_info->old_size,
 					  screen_info->old_rotation,
-					  screen_info->old_rate,
+					  screen_info->old_rate > 0 ? screen_info->old_rate : 0,
 					  GDK_CURRENT_TIME);
       
     }
