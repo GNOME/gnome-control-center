@@ -183,7 +183,7 @@ spawn_passwd (PasswordDialog *pdialog, GError **error)
 {
 	gchar	*argv[2];
 	gchar	*envp[1];
-	gint	stdin, stdout, stderr;
+	gint	my_stdin, my_stdout, my_stderr;
 	
 	argv[0] = "/usr/bin/passwd";	/* Is it safe to rely on a hard-coded path? */
 	argv[1] = NULL;
@@ -204,9 +204,9 @@ spawn_passwd (PasswordDialog *pdialog, GError **error)
 								   NULL,						/* Child setup */
 								   NULL,						/* Data to child setup */
 								   &pdialog->backend_pid,		/* PID */
-								   &stdin,						/* Stdin */
-								   &stdout,						/* Stdout */
-								   &stderr,						/* Stderr */
+								   &my_stdin,						/* Stdin */
+								   &my_stdout,						/* Stdout */
+								   &my_stderr,						/* Stderr */
 								   error)) {					/* GError */
 		
 		/* An error occured */
@@ -216,7 +216,7 @@ spawn_passwd (PasswordDialog *pdialog, GError **error)
 	}
 	
 	/* 2>&1 */
-	if (dup2 (stderr, stdout) == -1) {
+	if (dup2 (my_stderr, my_stdout) == -1) {
 		/* Failed! */
 		g_set_error (error,
 					 PASSDLG_ERROR, 
@@ -230,8 +230,8 @@ spawn_passwd (PasswordDialog *pdialog, GError **error)
 	}
 	
 	/* Open IO Channels */
-	pdialog->backend_stdin = g_io_channel_unix_new (stdin);
-	pdialog->backend_stdout = g_io_channel_unix_new (stdout);
+	pdialog->backend_stdin = g_io_channel_unix_new (my_stdin);
+	pdialog->backend_stdout = g_io_channel_unix_new (my_stdout);
 	
 	/* Set raw encoding */
 	/* Set nonblocking mode */
