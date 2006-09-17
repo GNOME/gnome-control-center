@@ -1,30 +1,30 @@
 # translation of nn.po to Norwegian Nynorsk
 # Norwegian (nynorsk) translation of gnome-control-center.
 # Copyright (C) Roy-Magne Mo <rmo@sunnmore.net>, 2001.
-# Roy-Magne Mo <rmo@sunnmore.net>, 2001.
-# Åsmund Skjæveland <aasmunds@fys.uio.no>, 2003, 2004.
 #
+# Roy-Magne Mo <rmo@sunnmore.net>, 2001.
+# Åsmund Skjæveland <aasmunds@fys.uio.no>, 2003, 2004, 2006.
 msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-08 14:37+0100\n"
-"PO-Revision-Date: 2006-03-08 14:49+0100\n"
+"POT-Creation-Date: 2006-09-17 23:49+0200\n"
+"PO-Revision-Date: 2006-09-17 23:50+0200\n"
 "Last-Translator: Åsmund Skjæveland <aasmunds@fys.uio.no>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.3.1\n"
+"X-Generator: KBabel 1.11.2\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #: ../capplets/about-me/eel-alert-dialog.c:114
 msgid "Image/label border"
-msgstr ""
+msgstr "Bilete/merkelapp-bord"
 
 #: ../capplets/about-me/eel-alert-dialog.c:115
 msgid "Width of border around the label and image in the alert dialog"
-msgstr ""
+msgstr "Breidde på borden rundt merkelappen og biletet i varslingsdialogen"
 
 #: ../capplets/about-me/eel-alert-dialog.c:124
 msgid "Alert Type"
@@ -55,88 +55,139 @@ msgstr "Om meg"
 msgid "Set your personal information"
 msgstr "Set inn personleg informasjon"
 
-#: ../capplets/about-me/gnome-about-me.c:604
+#: ../capplets/about-me/gnome-about-me.c:605
 msgid "Select Image"
 msgstr "Vel bilete"
 
-#: ../capplets/about-me/gnome-about-me.c:606
+#: ../capplets/about-me/gnome-about-me.c:607
 msgid "No Image"
 msgstr "Ingen bilete"
 
-#: ../capplets/about-me/gnome-about-me.c:769
+#: ../capplets/about-me/gnome-about-me.c:770
 msgid ""
 "There was an error while trying to get the addressbook information\n"
 "Evolution Data Server can't handle the protocol"
 msgstr ""
+"Ein feil oppsod under freistnaden på å henta adressebokinformasjon\n"
+"Evolution Data Server kan ikkje handsama protokollen"
 
-#: ../capplets/about-me/gnome-about-me.c:790
+#: ../capplets/about-me/gnome-about-me.c:791
 msgid "Unable to open address book"
 msgstr "Kan ikkje opne adressebok"
 
-#: ../capplets/about-me/gnome-about-me.c:802
+#: ../capplets/about-me/gnome-about-me.c:803
 msgid "Unknown login ID, the user database might be corrupted"
-msgstr ""
+msgstr "Ukjend innloggings-ID, brukadatabasen kan vera defekt"
 
-#: ../capplets/about-me/gnome-about-me.c:833
-#: ../capplets/about-me/gnome-about-me.c:835
+#: ../capplets/about-me/gnome-about-me.c:834
+#: ../capplets/about-me/gnome-about-me.c:836
 #, c-format
 msgid "About %s"
 msgstr "Om %s"
 
-#: ../capplets/about-me/gnome-about-me-password.c:116
-#: ../capplets/about-me/gnome-about-me-password.c:707
-msgid "Old password is incorrect, please retype it"
+#: ../capplets/about-me/gnome-about-me-password.c:172
+msgid "Child exited unexpectedly"
+msgstr "Barnet avslutta uventa"
+
+#: ../capplets/about-me/gnome-about-me-password.c:295
+#, c-format
+msgid "Could not shutdown backend_stdin IO channel: %s"
+msgstr "Klarte ikkje å stoppa backend_stdin-IO-kanalen: %s"
+
+#: ../capplets/about-me/gnome-about-me-password.c:308
+#, c-format
+msgid "Could not shutdown backend_stdout IO channel: %s"
+msgstr "Klarte ikkje å stoppa backend_stdout-IO-kanalen: %s"
+
+#: ../capplets/about-me/gnome-about-me-password.c:449
+msgid "Authenticated!"
+msgstr "Autentisert."
+
+#. This is a re-auth, and it failed.
+#. * The password must have been changed in the meantime!
+#. * Ask the user to re-authenticate
+#.
+#. Update status message and auth state
+#. Authentication failure
+#: ../capplets/about-me/gnome-about-me-password.c:466
+#: ../capplets/about-me/gnome-about-me-password.c:539
+msgid ""
+"Your password has been changed since you initially authenticated! Please re-"
+"authenticate."
 msgstr ""
+"Passordet ditt har vorte endra sidan du autentiserte fyrste gong. Du må "
+"autentisera deg på nytt."
 
-#: ../capplets/about-me/gnome-about-me-password.c:127
-msgid "System error has occurred"
-msgstr ""
+#: ../capplets/about-me/gnome-about-me-password.c:468
+msgid "That password was incorrect."
+msgstr "Passordet var feil."
 
-#: ../capplets/about-me/gnome-about-me-password.c:128
-msgid "Could not run /usr/bin/passwd"
-msgstr "Kunne ikkje køyra /usr/bin/passwd"
+#: ../capplets/about-me/gnome-about-me-password.c:514
+msgid "Your password has been changed."
+msgstr "Passordet er endra."
 
-#: ../capplets/about-me/gnome-about-me-password.c:129
+#. What does this indicate?
+#. * "Authentication information cannot be recovered?" from libpam?
+#: ../capplets/about-me/gnome-about-me-password.c:524
+#, c-format
+msgid "System error: %s."
+msgstr "Systemfeil: %s"
+
+#: ../capplets/about-me/gnome-about-me-password.c:526
+msgid "The password is too short."
+msgstr "Passordet er for kort."
+
+#: ../capplets/about-me/gnome-about-me-password.c:528
+#: ../capplets/about-me/gnome-about-me-password.c:530
+msgid "The password is too simple."
+msgstr "Passordet er for enkelt."
+
+#: ../capplets/about-me/gnome-about-me-password.c:532
+msgid "The old and new passwords are too similar."
+msgstr "Gamalt og nytt passord er for like."
+
+#: ../capplets/about-me/gnome-about-me-password.c:534
+msgid "The new password must contain numeric or special character(s)."
+msgstr "Det nye passordet må innehalda tal eller spesialteikn."
+
+#: ../capplets/about-me/gnome-about-me-password.c:536
+msgid "The old and new passwords are the same."
+msgstr "Gamalt og nytt passord er det same."
+
+#: ../capplets/about-me/gnome-about-me-password.c:787
+#, c-format
+msgid "Unable to launch /usr/bin/passwd: %s"
+msgstr "Klarte ikkje køyra /usr/bin/passwd: %s"
+
+#: ../capplets/about-me/gnome-about-me-password.c:789
 msgid "Unable to launch backend"
-msgstr ""
+msgstr "Klarte ikkje starta motor"
 
-#: ../capplets/about-me/gnome-about-me-password.c:131
-#: ../capplets/about-me/gnome-about-me-password.c:132
-msgid "Unexpected error has occurred"
-msgstr ""
+#: ../capplets/about-me/gnome-about-me-password.c:790
+msgid "A system error has occurred"
+msgstr "Ein systemfeil har oppstått"
 
-#: ../capplets/about-me/gnome-about-me-password.c:331
-msgid "Password is too short"
-msgstr "Passordet er for kort"
+#. Update status message
+#: ../capplets/about-me/gnome-about-me-password.c:810
+msgid "Checking password..."
+msgstr "Kontrollerer passordet ..."
 
-#: ../capplets/about-me/gnome-about-me-password.c:334
-#: ../capplets/about-me/gnome-about-me-password.c:337
-msgid "Password is too simple"
-msgstr "Passordet er for enkelt"
+#: ../capplets/about-me/gnome-about-me-password.c:897
+msgid "Click <b>Change password</b> to change your password."
+msgstr "Klikk <b>Byt passord</b> for å endra passordet ditt."
 
-#: ../capplets/about-me/gnome-about-me-password.c:340
-msgid "Old and new passwords are too similar"
-msgstr ""
+#: ../capplets/about-me/gnome-about-me-password.c:900
+msgid "Please type your password in the <b>New password</b> field."
+msgstr "Skriv passordet ditt i feltet <b>Nytt passord</b>."
 
-#: ../capplets/about-me/gnome-about-me-password.c:343
-msgid "Must contain numeric or special character(s)"
-msgstr ""
+#: ../capplets/about-me/gnome-about-me-password.c:903
+#: ../capplets/about-me/gnome-about-me.glade.h:34
+msgid "Please type your password again in the <b>Retype new password</b> field."
+msgstr "Skriv passordet ditt om igjen i feltet <b>Gjenta nytt passord</b>."
 
-#: ../capplets/about-me/gnome-about-me-password.c:348
-msgid "Old and new password are the same"
-msgstr "Gamalt og nytt passord er det same"
-
-#: ../capplets/about-me/gnome-about-me-password.c:634
-msgid "Please type the passwords."
-msgstr "Skriv passorda."
-
-#: ../capplets/about-me/gnome-about-me-password.c:642
-msgid "Please type the password again, it is wrong."
-msgstr ""
-
-#: ../capplets/about-me/gnome-about-me-password.c:645
-msgid "Click on Change Password to change the password."
-msgstr ""
+#: ../capplets/about-me/gnome-about-me-password.c:906
+msgid "The two passwords are not equal."
+msgstr "Dei to passorda er ikkje like."
 
 #: ../capplets/about-me/gnome-about-me.glade.h:1
 #: ../vfs-methods/themus/apply-font.glade.h:1
@@ -147,6 +198,7 @@ msgstr " "
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:1
+#: ../capplets/sound/sound-properties.glade.h:1
 #: ../capplets/ui-properties/gnome-ui-properties.glade.h:1
 msgid "    "
 msgstr "    "
@@ -168,20 +220,20 @@ msgid "<b>Job</b>"
 msgstr "<b>Arbeid</b>"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:7
-msgid "<b>Please type the passwords.</b>"
-msgstr ""
-
-#: ../capplets/about-me/gnome-about-me.glade.h:8
 msgid "<b>Telephone</b>"
 msgstr "<b>Telefon</b>"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:9
+#: ../capplets/about-me/gnome-about-me.glade.h:8
 msgid "<b>Web</b>"
 msgstr "<b>Nettside</b>"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:10
+#: ../capplets/about-me/gnome-about-me.glade.h:9
 msgid "<b>Work</b>"
 msgstr "<b>Jobb</b>"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:10
+msgid "<span size=\"larger\" weight=\"bold\">Change your password</span>"
+msgstr "<span size=\"larger\" weight=\"bold\">Byt passord</span>"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:11
 msgid "A_IM/iChat:"
@@ -216,142 +268,162 @@ msgid "Change Passwo_rd..."
 msgstr "Byt Passo_rd..."
 
 #: ../capplets/about-me/gnome-about-me.glade.h:20
-msgid "Change Password"
-msgstr "Byte av passord"
+msgid "Change pa_ssword"
+msgstr "Byt pa_ssord"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:21
+msgid "Change password"
+msgstr "Byt passord"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:22
 msgid "Ci_ty:"
 msgstr "_By:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:22
+#: ../capplets/about-me/gnome-about-me.glade.h:23
 msgid "Co_untry:"
 msgstr "La_nd:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:23
+#: ../capplets/about-me/gnome-about-me.glade.h:24
 msgid "Contact"
 msgstr "Kontakt"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:24
+#: ../capplets/about-me/gnome-about-me.glade.h:25
 msgid "Cou_ntry:"
 msgstr "La_nd:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:25
+#: ../capplets/about-me/gnome-about-me.glade.h:26
+msgid "Current _password:"
+msgstr "Gamalt _passord:"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:27
 msgid "Full Name"
 msgstr "Fullt namn"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:26
+#: ../capplets/about-me/gnome-about-me.glade.h:28
 msgid "Hom_e:"
 msgstr "He_im:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:27
+#: ../capplets/about-me/gnome-about-me.glade.h:29
 msgid "IC_Q:"
 msgstr "IC_Q:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:28
+#: ../capplets/about-me/gnome-about-me.glade.h:30
 msgid "M_SN:"
 msgstr "M_SN:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:29
-msgid "Old pa_ssword:"
-msgstr "Gamalt pa_ssord:"
-
-#: ../capplets/about-me/gnome-about-me.glade.h:30
+#: ../capplets/about-me/gnome-about-me.glade.h:31
 msgid "P.O. _box:"
 msgstr "Post_boks:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:31
+#: ../capplets/about-me/gnome-about-me.glade.h:32
 msgid "P._O. box:"
 msgstr "P_ostboks:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:32
+#: ../capplets/about-me/gnome-about-me.glade.h:33
 msgid "Personal Info"
 msgstr "Personleg informasjon"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:33
+#: ../capplets/about-me/gnome-about-me.glade.h:35
 msgid "State/Pro_vince:"
 msgstr "Stat/pro_vins:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:34
+#: ../capplets/about-me/gnome-about-me.glade.h:36
+msgid ""
+"To change your password, enter your current password in the field below and "
+"click <b>Authenticate</b>.\n"
+"After you have authenticated, enter your new password, retype it for "
+"verification and click <b>Change password</b>."
+msgstr ""
+"For å endra passordet ditt må du skriva passordet du har no i feltet under, "
+"og klikka <b>Autentiser</b>.\n"
+"Etter at du har autentisert deg, skriv du det nye passordet to gongar og "
+"klikkar <b>Byt passord</b>."
+
+#: ../capplets/about-me/gnome-about-me.glade.h:38
 msgid "User name:"
 msgstr "Brukarnamn:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:35
+#: ../capplets/about-me/gnome-about-me.glade.h:39
 msgid "Web _log:"
 msgstr "Nett_logg:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:36
+#: ../capplets/about-me/gnome-about-me.glade.h:40
 msgid "Wor_k:"
 msgstr "_Arbeid"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:37
+#: ../capplets/about-me/gnome-about-me.glade.h:41
 msgid "Work _fax:"
 msgstr "_Faks på arbeid:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:38
+#: ../capplets/about-me/gnome-about-me.glade.h:42
 msgid "Zip/_Postal code:"
 msgstr "_Postnummer:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:39
+#: ../capplets/about-me/gnome-about-me.glade.h:43
 msgid "_Address:"
 msgstr "_Adresse:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:40
+#: ../capplets/about-me/gnome-about-me.glade.h:44
+msgid "_Authenticate"
+msgstr "_Autentiser"
+
+#: ../capplets/about-me/gnome-about-me.glade.h:45
 msgid "_Department:"
 msgstr "Av_deling:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:41
+#: ../capplets/about-me/gnome-about-me.glade.h:46
 msgid "_Groupwise:"
 msgstr "_Groupwise"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:42
+#: ../capplets/about-me/gnome-about-me.glade.h:47
 msgid "_Home page:"
 msgstr "_Heimeside:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:43
+#: ../capplets/about-me/gnome-about-me.glade.h:48
 msgid "_Home:"
 msgstr "_Heim:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:44
+#: ../capplets/about-me/gnome-about-me.glade.h:49
 msgid "_Jabber:"
 msgstr "_Jabber:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:45
+#: ../capplets/about-me/gnome-about-me.glade.h:50
 msgid "_Manager:"
 msgstr "_Sjef:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:46
+#: ../capplets/about-me/gnome-about-me.glade.h:51
 msgid "_Mobile:"
 msgstr "_Mobil:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:47
+#: ../capplets/about-me/gnome-about-me.glade.h:52
 msgid "_New password:"
 msgstr "_Nytt passord:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:48
+#: ../capplets/about-me/gnome-about-me.glade.h:53
 msgid "_Profession:"
 msgstr "_Yrke:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:49
+#: ../capplets/about-me/gnome-about-me.glade.h:54
 msgid "_Retype new password:"
 msgstr "Sk_riv nytt passord ein gong til:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:50
+#: ../capplets/about-me/gnome-about-me.glade.h:55
 msgid "_State/Province:"
 msgstr "_Stat/provins:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:51
+#: ../capplets/about-me/gnome-about-me.glade.h:56
 msgid "_Title:"
 msgstr "_Tittel:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:52
+#: ../capplets/about-me/gnome-about-me.glade.h:57
 msgid "_Work:"
 msgstr "_Arbeid"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:53
+#: ../capplets/about-me/gnome-about-me.glade.h:58
 msgid "_Yahoo:"
 msgstr "_Yahoo:"
 
-#: ../capplets/about-me/gnome-about-me.glade.h:54
+#: ../capplets/about-me/gnome-about-me.glade.h:59
 msgid "_Zip/Postal code:"
 msgstr "_Postnummer:"
 
@@ -372,6 +444,7 @@ msgstr ""
 "gong du loggar inn."
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:4
+#: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:1
 msgid "Assistive Technology Preferences"
 msgstr "Brukarval for hjelpeteknologi"
 
@@ -399,10 +472,6 @@ msgstr "_Tastatur på skjermen"
 msgid "_Screenreader"
 msgstr "_Skjermlesar"
 
-#: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:1
-msgid "Assistive Technology Support"
-msgstr "Støtte for hjelpefunksjonar"
-
 #: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:2
 msgid "Enable support for GNOME assistive technologies at login"
 msgstr ""
@@ -412,14 +481,13 @@ msgstr ""
 #: ../capplets/accessibility/at-properties/main.c:60
 msgid ""
 "No Assistive Technology is available on your system.  The 'gok' package must "
-"be installed in order to get on-screen keyboard support, and the "
-"'gnopernicus' package must be installed for screenreading and magnifying "
-"capabilities."
+"be installed in order to get on-screen keyboard support, and the 'orca' "
+"package must be installed for screenreading and magnifying capabilities."
 msgstr ""
 "Hjelpefunksjonane er ikkje tilgjengelege på systemet ditt. Pakken «gok» må "
-"vera installert for at du skal ha tastatur på skjermen, og pakken "
-"«gnopernicus» må vera installert dersom du vil ha skjermlesing og høve til å "
-"forstørra skjermen."
+"vera installert for at du skal ha tastatur på skjermen, og pakken «orca» må "
+"vera installert dersom du vil ha skjermlesing og høve til å forstørra "
+"skjermen."
 
 #: ../capplets/accessibility/at-properties/main.c:62
 msgid ""
@@ -432,11 +500,11 @@ msgstr ""
 #: ../capplets/accessibility/at-properties/main.c:64
 msgid ""
 "Not all available assistive technologies are installed on your system.  The "
-"'gnopernicus' package must be installed for screenreading and magnifying "
+"'orca' package must be installed for screenreading and magnifying "
 "capabilities."
 msgstr ""
-"Du manglar nokon hjelpefunksjonar. Pakken «gnopernicus» må vera installert "
-"dersom du vil ha skjermlesing og forstørring av skjermen."
+"Du manglar nokon hjelpefunksjonar. Pakken «orca» må vera installert dersom "
+"du vil ha skjermlesing og forstørring av skjermen."
 
 #: ../capplets/accessibility/keyboard/accessibility-keyboard.c:242
 #, c-format
@@ -477,7 +545,6 @@ msgstr ""
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:2
-#: ../capplets/theme-switcher/theme-install.glade.h:1
 msgid "*"
 msgstr "*"
 
@@ -528,8 +595,7 @@ msgstr "Pip når _endringstast vert trykt ned"
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
 msgid "Beep when an LED is turned on and two beeps when one is turned off."
-msgstr ""
-"Pip ein gong når ein LED vert slått på, og to gongar når ein vert slått av."
+msgstr "Pip ein gong når ein LED vert slått på, og to gongar når ein vert slått av."
 
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
 msgid "Beep when key is:"
@@ -697,7 +763,7 @@ msgid "_Finish"
 msgstr "_Fullfør"
 
 #: ../capplets/background/gnome-background-properties.glade.h:7
-#: ../capplets/theme-switcher/theme-properties.glade.h:19
+#: ../capplets/theme-switcher/theme-properties.glade.h:21
 msgid "_Remove"
 msgstr "Fje_rn"
 
@@ -712,48 +778,48 @@ msgstr "_Stil:"
 msgid "There was an error displaying help: %s"
 msgstr "Ein feil oppstod når hjelpeteksten skulle visast: %s"
 
-#: ../capplets/background/gnome-wp-capplet.c:984
+#: ../capplets/background/gnome-wp-capplet.c:949
 msgid "Centered"
 msgstr "Midtstilt"
 
-#: ../capplets/background/gnome-wp-capplet.c:988
+#: ../capplets/background/gnome-wp-capplet.c:953
 msgid "Fill Screen"
 msgstr "Fyll skjermen"
 
-#: ../capplets/background/gnome-wp-capplet.c:992
+#: ../capplets/background/gnome-wp-capplet.c:957
 msgid "Scaled"
 msgstr "Skalert"
 
-#: ../capplets/background/gnome-wp-capplet.c:996
+#: ../capplets/background/gnome-wp-capplet.c:961
 msgid "Zoom"
 msgstr "Zoom"
 
-#: ../capplets/background/gnome-wp-capplet.c:1000
+#: ../capplets/background/gnome-wp-capplet.c:965
 msgid "Tiled"
 msgstr "Flislagt"
 
-#: ../capplets/background/gnome-wp-capplet.c:1021
+#: ../capplets/background/gnome-wp-capplet.c:986
 msgid "Solid Color"
 msgstr "Heilfylt farge"
 
-#: ../capplets/background/gnome-wp-capplet.c:1025
+#: ../capplets/background/gnome-wp-capplet.c:990
 msgid "Horizontal Gradient"
 msgstr "Vassrett fargeovergang"
 
-#: ../capplets/background/gnome-wp-capplet.c:1029
+#: ../capplets/background/gnome-wp-capplet.c:994
 msgid "Vertical Gradient"
 msgstr "Loddrett fargeovergang"
 
 #. Create the file chooser dialog stuff here
-#: ../capplets/background/gnome-wp-capplet.c:1075
+#: ../capplets/background/gnome-wp-capplet.c:1040
 msgid "Add Wallpaper"
 msgstr "Legg til bakgrunn"
 
-#: ../capplets/background/gnome-wp-capplet.c:1092
+#: ../capplets/background/gnome-wp-capplet.c:1057
 msgid "Images"
 msgstr "Bilete"
 
-#: ../capplets/background/gnome-wp-capplet.c:1096
+#: ../capplets/background/gnome-wp-capplet.c:1061
 msgid "All Files"
 msgstr "Alle filer"
 
@@ -765,10 +831,10 @@ msgstr "Ikkje noko bakgrunn"
 #: ../capplets/background/gnome-wp-item.c:345
 msgid "pixel"
 msgid_plural "pixels"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "piksel"
+msgstr[1] "pikslar"
 
-#: ../capplets/common/activate-settings-daemon.c:18
+#: ../capplets/common/activate-settings-daemon.c:16
 msgid ""
 "Unable to start the settings manager 'gnome-settings-daemon'.\n"
 "Without the GNOME settings manager running, some preferences may not take "
@@ -783,9 +849,9 @@ msgstr ""
 "køyrer, og skapar problem for GNOME sin innstillingshandsamar."
 
 #: ../capplets/common/capplet-stock-icons.c:92
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to load stock icon '%s'\n"
-msgstr "Kan ikkje lasta capplet sitt standardikon «%s»\n"
+msgstr "Klarte ikkje lasta standardikonet «%s»\n"
 
 #: ../capplets/common/capplet-util.c:239 ../capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
@@ -793,8 +859,8 @@ msgstr "Ta i bruk innstillingar og avslutt"
 
 #: ../capplets/common/capplet-util.c:243
 #: ../capplets/keyboard/gnome-keyboard-properties.c:225
-#: ../capplets/mouse/gnome-mouse-properties.c:1016
-#: ../capplets/sound/sound-properties-capplet.c:244
+#: ../capplets/mouse/gnome-mouse-properties.c:1036
+#: ../capplets/sound/sound-properties-capplet.c:762
 msgid "Retrieve and store legacy settings"
 msgstr "Hent og lagra gamle innstillingar"
 
@@ -887,8 +953,7 @@ msgid "Change set"
 msgstr "Sett av endringar"
 
 #: ../capplets/common/gconf-property-editor.c:184
-msgid ""
-"GConf change set containing data to be forwarded to the gconf client on apply"
+msgid "GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr ""
 "Endringssettet til GConf inneheld data som skal sendast vidare til gconf-"
 "klienten når endringane vert gjort verksame"
@@ -898,8 +963,7 @@ msgid "Conversion to widget callback"
 msgstr "Konvertering til skjermelement-tilbakekall"
 
 #: ../capplets/common/gconf-property-editor.c:190
-msgid ""
-"Callback to be issued when data are to be converted from GConf to the widget"
+msgid "Callback to be issued when data are to be converted from GConf to the widget"
 msgstr ""
 "Tilbakekall som skal sendast når data skal konverterast frå GConf til "
 "skjermelementet"
@@ -909,8 +973,7 @@ msgid "Conversion from widget callback"
 msgstr "Konvertering frå skjermelement-tilbakekall"
 
 #: ../capplets/common/gconf-property-editor.c:196
-msgid ""
-"Callback to be issued when data are to be converted to GConf from the widget"
+msgid "Callback to be issued when data are to be converted to GConf from the widget"
 msgstr ""
 "Tilbakekall som skal sendast når data skal konverterast til GConf frå "
 "skjermelementet"
@@ -983,34 +1046,30 @@ msgstr "Foretrukne program"
 msgid "Select your default applications"
 msgstr "Vel standardprogramma dine"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:55
-msgid "Could not display help"
-msgstr "Kunne ikkje visa hjelp"
-
-#: ../capplets/default-applications/gnome-da-capplet.c:57
-#: ../capplets/default-applications/gnome-da-capplet.c:765
-msgid "Please make sure that the applet is properly installed"
-msgstr "Kontroller at programmet er rett installert."
-
-#: ../capplets/default-applications/gnome-da-capplet.c:92
-#: ../capplets/default-applications/gnome-da-capplet.c:125
-#: ../capplets/default-applications/gnome-da-capplet.c:170
-#: ../capplets/default-applications/gnome-da-capplet.c:215
-#: ../capplets/default-applications/gnome-da-capplet.c:269
-#: ../capplets/default-applications/gnome-da-capplet.c:318
-#: ../capplets/default-applications/gnome-da-capplet.c:600
-#: ../capplets/default-applications/gnome-da-capplet.c:621
+#: ../capplets/default-applications/gnome-da-capplet.c:77
+#: ../capplets/default-applications/gnome-da-capplet.c:101
+#: ../capplets/default-applications/gnome-da-capplet.c:146
+#: ../capplets/default-applications/gnome-da-capplet.c:191
+#: ../capplets/default-applications/gnome-da-capplet.c:245
+#: ../capplets/default-applications/gnome-da-capplet.c:294
+#: ../capplets/default-applications/gnome-da-capplet.c:576
+#: ../capplets/default-applications/gnome-da-capplet.c:597
 #, c-format
 msgid "Error saving configuration: %s"
 msgstr "Feil ved lagring av konfigurasjon: %s"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:743
+#: ../capplets/default-applications/gnome-da-capplet.c:719
+#: ../capplets/sound/sound-properties-capplet.c:319
 msgid "Custom"
 msgstr "Eigendefinert"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:763
+#: ../capplets/default-applications/gnome-da-capplet.c:739
 msgid "Could not load the main interface"
 msgstr "Kunne ikkje lasta brukergrensesnittet"
+
+#: ../capplets/default-applications/gnome-da-capplet.c:741
+msgid "Please make sure that the applet is properly installed"
+msgstr "Kontroller at programmet er rett installert."
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:1
 msgid "Balsa"
@@ -1138,18 +1197,22 @@ msgid "Standard XTerminal"
 msgstr "Standard X-terminal"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:32
+msgid "Sylpheed"
+msgstr "Sylpheed"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:33
 msgid "Sylpheed-Claws"
 msgstr "Sylpheed-Claws"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:33
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:34
 msgid "Thunderbird"
 msgstr "Thunderbird"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:34
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:35
 msgid "W3M Text Browser"
 msgstr "W3M tekst-nettlesar"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:35
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:36
 msgid "aterm"
 msgstr "aterm"
 
@@ -1188,7 +1251,7 @@ msgstr "<b>Nettlesar<b/>"
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:10
 #, no-c-format
 msgid "All %s occurrences will be replaced with actual link"
-msgstr ""
+msgstr "Alle tilfella av «%s» vil bytast ut med ei lenkje"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:11
 msgid "Co_mmand:"
@@ -1208,15 +1271,15 @@ msgstr "Multimedia"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:15
 msgid "Open link in new _tab"
-msgstr ""
+msgstr "Opna lenkje i ny _fane"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:16
 msgid "Open link in new _window"
-msgstr ""
+msgstr "Opna lenkje i nytt _vindauge"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:17
 msgid "Open link with web browser _default"
-msgstr ""
+msgstr "Opna lenkje etter innstillingane i _nettlesaren"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:19
 msgid "Run in t_erminal"
@@ -1234,42 +1297,62 @@ msgstr "Endra skjermoppløysing"
 msgid "Screen Resolution"
 msgstr "Skjermoppløysing"
 
-#: ../capplets/display/main.c:345
+#: ../capplets/display/main.c:25
+msgid "normal"
+msgstr "vanleg"
+
+#: ../capplets/display/main.c:26
+msgid "left"
+msgstr "venstre"
+
+#: ../capplets/display/main.c:27
+msgid "inverted"
+msgstr "omvendt"
+
+#: ../capplets/display/main.c:28
+msgid "right"
+msgstr "høgre"
+
+#: ../capplets/display/main.c:389
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../capplets/display/main.c:448
+#: ../capplets/display/main.c:535
 msgid "_Resolution:"
 msgstr "_Oppløysing:"
 
-#: ../capplets/display/main.c:467
+#: ../capplets/display/main.c:554
 msgid "Re_fresh rate:"
 msgstr "Opp_friskingsrate:"
 
-#: ../capplets/display/main.c:488
+#: ../capplets/display/main.c:574
+msgid "R_otation:"
+msgstr "R_otering:"
+
+#: ../capplets/display/main.c:594
 msgid "Default Settings"
 msgstr "Standardinnstillingar"
 
-#: ../capplets/display/main.c:490
+#: ../capplets/display/main.c:596
 #, c-format
 msgid "Screen %d Settings\n"
 msgstr "Innstillingar for skjerm %d\n"
 
-#: ../capplets/display/main.c:516
+#: ../capplets/display/main.c:622
 msgid "Screen Resolution Preferences"
 msgstr "Set opp skjermoppløysingar"
 
-#: ../capplets/display/main.c:553
+#: ../capplets/display/main.c:659
 #, c-format
 msgid "_Make default for this computer (%s) only"
 msgstr "Gjer dette til standard berre for denne _datamaskinen (%s)"
 
-#: ../capplets/display/main.c:571
+#: ../capplets/display/main.c:676
 msgid "Options"
 msgstr "Val"
 
-#: ../capplets/display/main.c:592
+#: ../capplets/display/main.c:699
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d second the previous "
@@ -1284,23 +1367,23 @@ msgstr[1] ""
 "Prøver dei nye innstillingane. Dersom du ikkje reagerer i løpet av %d "
 "sekund, vil dei gamle innstillingane verta gjenoppretta."
 
-#: ../capplets/display/main.c:638
+#: ../capplets/display/main.c:745
 msgid "Keep Resolution"
 msgstr "Hald på oppløysinga"
 
-#: ../capplets/display/main.c:642
+#: ../capplets/display/main.c:749
 msgid "Do you want to keep this resolution?"
 msgstr "Vil du ha denne oppløysinga?"
 
-#: ../capplets/display/main.c:667
+#: ../capplets/display/main.c:774
 msgid "Use _previous resolution"
 msgstr "Bruk _førre oppløysing"
 
-#: ../capplets/display/main.c:667
+#: ../capplets/display/main.c:774
 msgid "_Keep resolution"
 msgstr "_Bruk oppløysinga"
 
-#: ../capplets/display/main.c:818
+#: ../capplets/display/main.c:924
 msgid ""
 "The X Server does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
@@ -1308,7 +1391,7 @@ msgstr ""
 "X-tenaren støttar ikkje XRandR-utvidinga. Du kan ikkje endra oppløysinga "
 "medan X-tenaren køyrer."
 
-#: ../capplets/display/main.c:826
+#: ../capplets/display/main.c:932
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
@@ -1510,37 +1593,40 @@ msgid "The type of accelerator."
 msgstr "Typen snøggtast."
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:242
-#: ../capplets/keybindings/gnome-keybinding-properties.c:197
-#: ../libbackground/applier.c:624 ../typing-break/drwright.c:471
+#: ../capplets/keybindings/gnome-keybinding-properties.c:187
+#: ../libbackground/applier.c:624 ../typing-break/drwright.c:470
 msgid "Disabled"
 msgstr "Av"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:544
+#: ../capplets/keybindings/gnome-keybinding-properties.c:534
 msgid "<Unknown Action>"
 msgstr "<Ukjent handling>"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:565
+#: ../capplets/keybindings/gnome-keybinding-properties.c:555
 msgid "Desktop"
 msgstr "Skrivebord"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:566
+#: ../capplets/keybindings/gnome-keybinding-properties.c:556
 #: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
 msgid "Sound"
 msgstr "Lyd"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:570
+#: ../capplets/keybindings/gnome-keybinding-properties.c:560
 msgid "Window Management"
 msgstr "Handsaming av vindauge"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:676
+#: ../capplets/keybindings/gnome-keybinding-properties.c:668
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become unusable to type "
 "using this key.\n"
 "Please try with a key such as Control, Alt or Shift at the same time.\n"
 msgstr ""
+"Snarvegen «%s» kan ikkje brukast avdi det då ikkje vil vera mogleg å skriva "
+"med denne tasten.\n"
+"Prøv med ein knapp som Control, Alt eller Shift samtidig.\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:705
+#: ../capplets/keybindings/gnome-keybinding-properties.c:697
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1549,21 +1635,21 @@ msgstr ""
 "Snøggtasten «%s» er allereie brukt til:\n"
 " «%s»\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:737
+#: ../capplets/keybindings/gnome-keybinding-properties.c:729
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Feil ved lagring av ny snøggtast i oppsettdatabasen: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:787
+#: ../capplets/keybindings/gnome-keybinding-properties.c:779
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "Feil ved fjerning av snøggtast frå oppsettdatabasen: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:894
+#: ../capplets/keybindings/gnome-keybinding-properties.c:886
 msgid "Action"
 msgstr "Handling"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:918
+#: ../capplets/keybindings/gnome-keybinding-properties.c:910
 msgid "Shortcut"
 msgstr "Snarveg"
 
@@ -1585,11 +1671,11 @@ msgstr ""
 msgid "Assign shortcut keys to commands"
 msgstr "Tileigna snøggtastar til kommandoar"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkb.c:84
+#: ../capplets/keyboard/gnome-keyboard-properties-xkb.c:91
 msgid "Unknown"
 msgstr "Ukjend"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:273
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:282
 msgid "Layout"
 msgstr "Formgjeving"
 
@@ -1597,19 +1683,19 @@ msgstr "Formgjeving"
 #. the below options are to be included in the selected list.
 #. This is a HIG-compliant alternative to allowing no
 #. selection in the group.
-#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:277
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:228
+#: ../capplets/keyboard/gnome-keyboard-properties-xkblt.c:286
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbot.c:231
 msgid "Default"
 msgstr "Forvald"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:75
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:77
 msgid "Models"
 msgstr "Modellar"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:109
-#, fuzzy, c-format
+#, c-format
 msgid "There was an error launching the keyboard tool: %s"
-msgstr "Ein feil oppstod då tastaturdialogen starta: %s"
+msgstr "Ein feil oppstod under start av tastaturverktøyet: %s"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:202
 msgid "_Accessibility"
@@ -1617,10 +1703,9 @@ msgstr "_Tilgjenge"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:221
 #: ../capplets/keyboard/gnome-keyboard-properties.c:223
-#: ../capplets/sound/sound-properties-capplet.c:240
-#: ../capplets/sound/sound-properties-capplet.c:242
-msgid ""
-"Just apply settings and quit (compatibility only; now handled by daemon)"
+#: ../capplets/sound/sound-properties-capplet.c:758
+#: ../capplets/sound/sound-properties-capplet.c:760
+msgid "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
 "Berre gjer endringane aktive og avslutt (berre for kompatibilitet; vert no "
 "handsama av nissen)"
@@ -1630,56 +1715,56 @@ msgid "Start the page with the typing break settings showing"
 msgstr "Start sida med innstillingane for skrivepausar framme"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:3
-msgid "..."
-msgstr "..."
-
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "<b>Cursor Blinking</b>"
 msgstr "<b>Blinkande markør</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "<b>Repeat Keys</b>"
 msgstr "<b>Repeter tastar</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:5
 msgid "<b>_Lock screen to enforce typing break</b>"
 msgstr "<b>_Lås skjermen for å tvinga ein skrivepause.</b>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>Snøgg</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>Lang</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>Stutt</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Treg</i></small>"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:10
 msgid "A_vailable layouts:"
 msgstr "_Tilgjengelege utformingar:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "All_ow postponing of breaks"
 msgstr "Till_at utsetjing av pausar"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Check if breaks are allowed to be postponed"
 msgstr "Kontroller om pausar kan utsetjast"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Choose a Keyboard Model"
 msgstr "Vel ein tastaturmodell"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Choose a Layout"
 msgstr "Vel ei utforming"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:15
+msgid "Choose..."
+msgstr "Vel ..."
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:16
 msgid "Cursor _blinks in text boxes and fields"
@@ -1687,7 +1772,7 @@ msgstr "Markøren _blinkar i tekstboksar og tekstfelt"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:17
 msgid "Cursor blinks speed"
-msgstr ""
+msgstr "Blinkerate på markøren"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:18
 msgid "Duration of the break when typing is disallowed"
@@ -1735,7 +1820,7 @@ msgstr "Førehandsvis:"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:29
 msgid "Repeat keys speed"
-msgstr ""
+msgstr "Tasterepetisjonsrate"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:30
 msgid "Reset To De_faults"
@@ -1791,69 +1876,70 @@ msgstr "Still inn brukarvala dine for tastaturet"
 
 #. set the timeout value  label with correct value of timeout
 #: ../capplets/mouse/gnome-mouse-properties.c:138
-#: ../capplets/mouse/gnome-mouse-properties.c:880
+#: ../capplets/mouse/gnome-mouse-properties.c:904
 #, c-format
-msgid "%d milliseconds"
+msgid "%d millisecond"
 msgid_plural "%d milliseconds"
 msgstr[0] "%d millisekund"
 msgstr[1] "%d millisekund"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:560
+#: ../capplets/mouse/gnome-mouse-properties.c:567
 msgid "Unknown Pointer"
 msgstr "Ukjend peikar"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:761
+#: ../capplets/mouse/gnome-mouse-properties.c:767
+#: ../capplets/mouse/gnome-mouse-properties.c:783
 msgid "Default Pointer"
 msgstr "Forvald peikar"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:762
+#: ../capplets/mouse/gnome-mouse-properties.c:784
 msgid "Default Pointer - Current"
 msgstr "Forvald peikar – noverande"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:763
+#: ../capplets/mouse/gnome-mouse-properties.c:785
 msgid "The default pointer that ships with X"
 msgstr "Standardpeikaren som følgjer med X"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:767
+#: ../capplets/mouse/gnome-mouse-properties.c:789
 msgid "White Pointer"
 msgstr "Kvit peikar"
 
 # TRN: Tankestrek
-#: ../capplets/mouse/gnome-mouse-properties.c:768
+#: ../capplets/mouse/gnome-mouse-properties.c:790
 msgid "White Pointer - Current"
 msgstr "Kvit peikar – noverande"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:769
+#: ../capplets/mouse/gnome-mouse-properties.c:791
 msgid "The default pointer inverted"
 msgstr "Standard peikar, omvendte fargar"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:773
+#: ../capplets/mouse/gnome-mouse-properties.c:795
 msgid "Large Pointer"
 msgstr "Stor peikar"
 
 # TRN: Tankestrek.
-#: ../capplets/mouse/gnome-mouse-properties.c:774
+#: ../capplets/mouse/gnome-mouse-properties.c:796
 msgid "Large Pointer - Current"
 msgstr "Stor peikar – noverande"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:775
+#: ../capplets/mouse/gnome-mouse-properties.c:797
 msgid "Large version of normal pointer"
 msgstr "Stor variant av den vanlege peikaren"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:779
+#: ../capplets/mouse/gnome-mouse-properties.c:801
 msgid "Large White Pointer - Current"
 msgstr "Stor kvit peikar – noverande"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:780
+#: ../capplets/mouse/gnome-mouse-properties.c:802
 msgid "Large White Pointer"
 msgstr "Stor kvit peikar"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:781
+#: ../capplets/mouse/gnome-mouse-properties.c:803
 msgid "Large version of white pointer"
 msgstr "Stor variant av den kvite peikaren"
 
 # TRN: Dette er drakta i arbeidsflata, altså GTK-delen av programmet.
-#: ../capplets/mouse/gnome-mouse-properties.c:970
+#: ../capplets/mouse/gnome-mouse-properties.c:990
 msgid "Pointer Theme"
 msgstr "Drakta for peikaren"
 
@@ -1979,13 +2065,12 @@ msgid "      "
 msgstr "      "
 
 #: ../capplets/network/gnome-network-preferences.glade.h:2
-#, fuzzy
 msgid "<b>Di_rect internet connection</b>"
 msgstr "<b>_Direkte tilkopling til Internettet</b>"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:3
 msgid "<b>Ignore Host List</b>"
-msgstr ""
+msgstr "<b>Vertar å ignorera</b>"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:4
 msgid "<b>_Automatic proxy configuration</b>"
@@ -2055,56 +2140,104 @@ msgstr "_Trygg HTTP-mellomtenar:"
 msgid "Enable sound and associate sounds with events"
 msgstr "Slå på lydar og kopla lydar til hendingar"
 
-#: ../capplets/sound/sound-properties-capplet.c:271
-#: ../capplets/sound/sound-properties.glade.h:4
+#: ../capplets/sound/sound-properties-capplet.c:317
+#: ../capplets/sound/sound-properties-capplet.c:369
+msgid "Not connected"
+msgstr "Ikkje tilkopla"
+
+#: ../capplets/sound/sound-properties-capplet.c:792
 msgid "Sound Preferences"
 msgstr "Eigenskapar for lyd"
 
-#: ../capplets/sound/sound-properties.glade.h:1
-msgid "E_nable software sound mixing (ESD)"
-msgstr ""
-
 #: ../capplets/sound/sound-properties.glade.h:2
+msgid "<b>Audio Conferencing</b>"
+msgstr "<b>Lydkonferanse</b>"
+
+#: ../capplets/sound/sound-properties.glade.h:3
+msgid "<b>Music and Movies</b>"
+msgstr "<b>Musikk og filmar</b>"
+
+#: ../capplets/sound/sound-properties.glade.h:4
+msgid "<b>Sound Events</b>"
+msgstr "<b>Lydhendingar</b>"
+
+#: ../capplets/sound/sound-properties.glade.h:5
+msgid "<span weight=\"bold\" size=\"x-large\">Testing...</span>"
+msgstr "<span weight=\"bold\" size=\"x-large\">Testar ...</span>"
+
+#: ../capplets/sound/sound-properties.glade.h:6
+msgid "Click OK to finish."
+msgstr "Klikk OK for å avslutta."
+
+#: ../capplets/sound/sound-properties.glade.h:7
+msgid "Devices"
+msgstr "Einingar"
+
+#: ../capplets/sound/sound-properties.glade.h:8
+msgid "E_nable software sound mixing (ESD)"
+msgstr "B_ruk programvare-lydmiksing (ESD)"
+
+#: ../capplets/sound/sound-properties.glade.h:9
 msgid "Flash _entire screen"
 msgstr "Blink med h_eile skjermen"
 
-#: ../capplets/sound/sound-properties.glade.h:3
+#: ../capplets/sound/sound-properties.glade.h:10
 msgid "Flash _window titlebar"
 msgstr "Blink med tittellinja på _vindauget"
 
-#: ../capplets/sound/sound-properties.glade.h:5
+#: ../capplets/sound/sound-properties.glade.h:11
+msgid "Sound & Video Preferences"
+msgstr "Eigenskapar for lyd og video"
+
+#: ../capplets/sound/sound-properties.glade.h:12
+msgid "Sound Capture:"
+msgstr "Lydopptak:"
+
+#: ../capplets/sound/sound-properties.glade.h:13
+msgid "Sound Playback:"
+msgstr "Lydavspeling:"
+
+#: ../capplets/sound/sound-properties.glade.h:14
 msgid "Sounds"
 msgstr "Lydar"
 
-#: ../capplets/sound/sound-properties.glade.h:6
+#: ../capplets/sound/sound-properties.glade.h:15
 msgid "System Beep"
 msgstr "Systempip"
 
-#: ../capplets/sound/sound-properties.glade.h:7
+#: ../capplets/sound/sound-properties.glade.h:16
+msgid "Test"
+msgstr "Test"
+
+#: ../capplets/sound/sound-properties.glade.h:17
+msgid "Testing Pipeline"
+msgstr "Testar røyr"
+
+#: ../capplets/sound/sound-properties.glade.h:18
 msgid "_Enable system beep"
 msgstr "_Slå på systempip"
 
-#: ../capplets/sound/sound-properties.glade.h:8
+#: ../capplets/sound/sound-properties.glade.h:19
 msgid "_Play system sounds"
-msgstr ""
+msgstr "_Spel systemlydar"
 
-#: ../capplets/sound/sound-properties.glade.h:9
+#: ../capplets/sound/sound-properties.glade.h:20
 msgid "_Visual system beep"
-msgstr ""
+msgstr "_Visuelt systempip"
 
 #: ../capplets/theme-switcher/gnome-theme-details.c:368
 msgid "Would you like to remove this theme?"
-msgstr ""
+msgstr "Vil du sletta denne drakta?"
 
 #: ../capplets/theme-switcher/gnome-theme-details.c:433
 msgid "Theme deleted succesfully. Please select another theme."
-msgstr ""
+msgstr "Drakta sletta. Vel ei anna drakt."
 
 #: ../capplets/theme-switcher/gnome-theme-details.c:442
 msgid "Theme can not be deleted"
 msgstr "Drakta kan ikkje slettast"
 
-#: ../capplets/theme-switcher/gnome-theme-details.c:529
+#: ../capplets/theme-switcher/gnome-theme-details.c:535
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -2114,86 +2247,92 @@ msgstr ""
 "ikkje var ordentleg installert, eller at du ikkje har installert «gnome-"
 "themes»-pakken."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:227
+#: ../capplets/theme-switcher/gnome-theme-installer.c:255
 msgid "This theme is not in a supported format."
-msgstr ""
+msgstr "Denne drakta er ikkje i eit støtta format."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:242
+#: ../capplets/theme-switcher/gnome-theme-installer.c:273
 msgid "Failed to create temporary directory"
-msgstr ""
+msgstr "Klarte ikkje å laga mellombels katalog"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:260
+#: ../capplets/theme-switcher/gnome-theme-installer.c:294
 msgid ""
 "Can not install theme. \n"
 "The bzip2 utility is not installed."
 msgstr ""
+"Kklarte ikkje å installera drakta.\n"
+"Verktøyet bzip2 er ikkje installert."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:276
-#: ../capplets/theme-switcher/gnome-theme-installer.c:309
-#: ../capplets/theme-switcher/gnome-theme-installer.c:383
+#: ../capplets/theme-switcher/gnome-theme-installer.c:313
+#: ../capplets/theme-switcher/gnome-theme-installer.c:352
+#: ../capplets/theme-switcher/gnome-theme-installer.c:432
 msgid "Installation Failed"
 msgstr "Installasjonen feila"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:294
+#: ../capplets/theme-switcher/gnome-theme-installer.c:334
 msgid ""
 "Can not install themes. \n"
 "The gzip utility is not installed."
 msgstr ""
+"Kklarte ikkje å installera drakta.\n"
+"Verktøyet gzip er ikkje installert."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:330
+#: ../capplets/theme-switcher/gnome-theme-installer.c:378
 #, c-format
-msgid ""
-"Icon Theme %s correctly installed.\n"
-"You can select it in the theme details."
-msgstr ""
+msgid "GNOME Theme %s correctly installed"
+msgstr "GNOME-drakta %s installert"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:333
-#, c-format
-msgid "Gnome Theme %s correctly installed"
-msgstr ""
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:336
-#, c-format
-msgid ""
-"Windows Border Theme %s correctly installed.\n"
-"You can select it in the theme details."
-msgstr ""
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:339
-#, c-format
-msgid ""
-"Controls Theme %s correctly installed.\n"
-"You can select it in the theme details."
-msgstr ""
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:345
+#: ../capplets/theme-switcher/gnome-theme-installer.c:388
 msgid "The theme is an engine. You need to compile the theme."
-msgstr ""
+msgstr "Drakta er ein motor. Du må kompilera drakta."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:360
+#: ../capplets/theme-switcher/gnome-theme-installer.c:406
 msgid "The file format is invalid"
 msgstr "Filformatet er ugyldig"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:450
+#. TODO: currently cannot apply "gnome themes"
+#: ../capplets/theme-switcher/gnome-theme-installer.c:452
+#, c-format
+msgid ""
+"<span weight=\"bold\" size=\"larger\">The theme \"%s\" has been installed.</"
+"span>\n"
+"\n"
+"Would you like to apply it now, or keep your current theme?"
+msgstr ""
+"<span weight=\"bold\" size=\"larger\">Drakta «%s» er installert.</span>\n"
+"\n"
+"Vil du bruka henne, eller halda på drakta du har no?"
+
+#: ../capplets/theme-switcher/gnome-theme-installer.c:455
+msgid "Keep Current Theme"
+msgstr "Bruk gamal drakt"
+
+#: ../capplets/theme-switcher/gnome-theme-installer.c:457
+msgid "Apply New Theme"
+msgstr "Bruk ny drakt"
+
+#: ../capplets/theme-switcher/gnome-theme-installer.c:531
 msgid "No theme file location specified to install"
 msgstr "Ikkje oppgjeve nokon adresser til draktfiler som skal installerast"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:469
+#: ../capplets/theme-switcher/gnome-theme-installer.c:546
 msgid "The theme file location specified to install is invalid"
 msgstr "Adressa til draktfila som skal installerast er ugyldig"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:489
+#: ../capplets/theme-switcher/gnome-theme-installer.c:566
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
 "%s"
 msgstr ""
+"Har ikkje dei naudsynte løyva til å installera drakta i:\n"
+"%s"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:510
+#: ../capplets/theme-switcher/gnome-theme-installer.c:587
 msgid "The file format is invalid."
 msgstr "Filformatet er ugyldig."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:537
+#: ../capplets/theme-switcher/gnome-theme-installer.c:614
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
@@ -2202,21 +2341,15 @@ msgstr ""
 "%s er stien kor draktfilene vert installerte. Han kan ikkje brukast som "
 "kjeldeadresse"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:591
-msgid ""
-"Cannot install theme.\n"
-"The tar program is not installed on your system."
-msgstr ""
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:686
+#: ../capplets/theme-switcher/gnome-theme-manager.c:701
 msgid "Custom theme"
 msgstr "Sjølvlaga drakt"
 
-#: ../capplets/theme-switcher/gnome-theme-manager.c:686
+#: ../capplets/theme-switcher/gnome-theme-manager.c:701
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "Du kan lagra denne drakta ved å klikka på «Lagra drakt»-knappen."
 
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1584
+#: ../capplets/theme-switcher/gnome-theme-manager.c:1619
 msgid ""
 "The default theme schemas could not be found on your system.  This means "
 "that you probably don't have metacity installed, or that your gconf is "
@@ -2225,11 +2358,11 @@ msgstr ""
 "Skjemaet til standarddrakta vart ikkje funne. Dette tyder på at Metacity "
 "ikkje er installert, eller at GConf er satt opp feil."
 
-#: ../capplets/theme-switcher/gnome-theme-save.c:72
+#: ../capplets/theme-switcher/gnome-theme-save.c:73
 msgid "Theme name must be present"
 msgstr "Drakta må ha eit namn"
 
-#: ../capplets/theme-switcher/gnome-theme-save.c:104
+#: ../capplets/theme-switcher/gnome-theme-save.c:144
 msgid "The theme already exists. Would you like to replace it?"
 msgstr "Drakta finst frå før. Vil du erstatta henne?"
 
@@ -2242,25 +2375,9 @@ msgstr "Vel drakter for ymse deler av skrivebordet"
 msgid "Theme"
 msgstr "Drakt"
 
-#: ../capplets/theme-switcher/theme-install.glade.h:2
-msgid "<span size=\"larger\" weight=\"bold\">Install a Theme</span>"
-msgstr "<span size=\"larger\" weight=\"bold\">Installer ei drakt</span>"
-
-#: ../capplets/theme-switcher/theme-install.glade.h:3
-msgid "Theme Installation"
-msgstr "Installasjon av drakt"
-
-#: ../capplets/theme-switcher/theme-install.glade.h:4
-msgid "_Install"
-msgstr "_Installer"
-
-#: ../capplets/theme-switcher/theme-install.glade.h:5
-msgid "_Location:"
-msgstr "P_lassering:"
-
 #: ../capplets/theme-switcher/theme-properties.glade.h:1
-msgid "<span size=\"larger\" weight=\"bold\">Save Theme to Disk</span>"
-msgstr "<span size=\"larger\" weight=\"bold\">Lagra drakta til disk</span>"
+msgid "<b>You do not have permission to change theme settings</b>"
+msgstr "<b>Du har ikkje løyve til å endra draktinnstillingane</b>"
 
 #: ../capplets/theme-switcher/theme-properties.glade.h:2
 msgid "Apply _Background"
@@ -2280,70 +2397,74 @@ msgid "Icons"
 msgstr "Ikon"
 
 #: ../capplets/theme-switcher/theme-properties.glade.h:6
-msgid "New themes can also be installed by dragging them into the window."
-msgstr "Nye drakter kan også installerast ved å dra dei inn i vindauget."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:7
 msgid "Save Theme"
 msgstr "Lagra drakt"
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:7
+msgid "Save _Background Image"
+msgstr "Lagra_bakgrunnsbilete"
 
 #: ../capplets/theme-switcher/theme-properties.glade.h:8
 msgid "Select theme for the desktop"
 msgstr "Vel drakta som skal brukast på skrivebordet"
 
 #: ../capplets/theme-switcher/theme-properties.glade.h:9
-msgid "Short _description:"
-msgstr "Kort skil_dring:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Theme Details"
 msgstr "Detaljar om drakta:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:11
+#: ../capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Theme Preferences"
 msgstr "Vel drakt"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:12
+#: ../capplets/theme-switcher/theme-properties.glade.h:11
 msgid "Theme _Details"
 msgstr "_Detaljar om drakta"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:13
+#: ../capplets/theme-switcher/theme-properties.glade.h:12
 msgid "This theme does not suggest any particular font or background."
 msgstr "Denne drakta foreslår ingen særskilte skrifttypar eller bakgrunnar."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:14
+#: ../capplets/theme-switcher/theme-properties.glade.h:13
 msgid "This theme suggests a background:"
 msgstr "Denne drakta foreslår ein bestemt bakgrunn."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:15
+#: ../capplets/theme-switcher/theme-properties.glade.h:14
 msgid "This theme suggests a font and a background:"
 msgstr "Denne drakta foreslår ei bestemt skrift og ein bestemt bakgrunn."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:16
+#: ../capplets/theme-switcher/theme-properties.glade.h:15
 msgid "This theme suggests a font:"
 msgstr "Denne drakta foreslår ei bestemt skrift."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:17
+#: ../capplets/theme-switcher/theme-properties.glade.h:16
 msgid "Window Border"
 msgstr "Vindaugsramme"
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:17
+msgid "_Description:"
+msgstr "Skil_dring:"
 
 #: ../capplets/theme-switcher/theme-properties.glade.h:18
 msgid "_Install Theme..."
 msgstr "_Installer drakt ..."
 
+#: ../capplets/theme-switcher/theme-properties.glade.h:19
+msgid "_Install..."
+msgstr "_Installer ..."
+
 #: ../capplets/theme-switcher/theme-properties.glade.h:20
+msgid "_Name:"
+msgstr "_Namn:"
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:22
 msgid "_Revert"
 msgstr "Gå tilbake til lag_ra"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:21
+#: ../capplets/theme-switcher/theme-properties.glade.h:23
 msgid "_Save Theme..."
 msgstr "_Lagra drakt ..."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:22
-msgid "_Theme name:"
-msgstr "Namn på drak_ta:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:23
+#: ../capplets/theme-switcher/theme-properties.glade.h:24
 msgid "theme selection tree"
 msgstr "Draktveljartre"
 
@@ -2404,9 +2525,8 @@ msgid "Text only"
 msgstr "Berre tekst"
 
 #: ../capplets/ui-properties/gnome-ui-properties.glade.h:14
-#, fuzzy
 msgid "Toolbar _button labels:"
-msgstr "_Merkelappar på knappar i verktøylinjene:"
+msgstr "Merkelappar på verktøylinje_knappar:"
 
 #: ../capplets/ui-properties/gnome-ui-properties.glade.h:15
 msgid "_Copy"
@@ -2496,7 +2616,6 @@ msgid "<b>Window Selection</b>"
 msgstr "<b>Vel vindauge</b>"
 
 #: ../capplets/windows/gnome-window-properties.glade.h:4
-#, fuzzy
 msgid "To move a window, press-and-hold this key then grab the window:"
 msgstr ""
 "Trykk og hald nede denne tasten, og grip så tak i vindauget, for å _flytta "
@@ -2547,25 +2666,9 @@ msgstr "GNOME Kontrollsenter"
 msgid "The GNOME configuration tool"
 msgstr "Oppsettsverktøy for GNOME"
 
-#: ../gnome-settings-daemon/actions/acme-fb-level.c:149
-msgid "No '/dev/pmu' device found"
-msgstr ""
-
-#: ../gnome-settings-daemon/actions/acme-fb-level.c:156
-msgid "Not a powerbook"
-msgstr "Ikkje ein powerbook"
-
-#: ../gnome-settings-daemon/actions/acme-fb-level.c:173
-msgid "Wrong permission for '/dev/pmu' device"
-msgstr ""
-
 #: ../gnome-settings-daemon/actions/acme.glade.h:1
 msgid "Volume"
 msgstr "Lydstyrke"
-
-#: ../gnome-settings-daemon/factory.c:66
-msgid "Could not initialize Bonobo"
-msgstr "Kunne ikkje starta Bonobo"
 
 #: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:406
 msgid "Slow Keys Alert"
@@ -2637,13 +2740,13 @@ msgid "Do you want to deactivate Sticky Keys?"
 msgstr "Vil du slå av limtastar?"
 
 #: ../gnome-settings-daemon/gnome-settings-font.c:74
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create the directory \"%s\".\n"
 "This is needed to allow changing the mouse pointer theme."
 msgstr ""
 "Kan ikkje laga katalogen «%s».\n"
-"Denne katalogen er naudsynt for å kunna endra markøren."
+"Denne katalogen er naudsynt for å kunna endra musepeikardrakta."
 
 #: ../gnome-settings-daemon/gnome-settings-font.c:96
 #, c-format
@@ -2675,10 +2778,9 @@ msgid "Key Binding (%s) is invalid\n"
 msgstr "Snøggtasten «%s» er ikkje gyldig\n"
 
 #: ../gnome-settings-daemon/gnome-settings-keybindings.c:291
-#, fuzzy, c-format
+#, c-format
 msgid "It seems that another application already has access to key '%u'."
-msgstr ""
-"Det ser ut til at eit anna programm allereie har tilgang til tasten «%d»."
+msgstr "Det ser ut til at eit anna program allereie har tilgang til tasten «%u»."
 
 #: ../gnome-settings-daemon/gnome-settings-keybindings.c:360
 #, c-format
@@ -2694,8 +2796,8 @@ msgstr ""
 "Feil i freistnad på å køyra «%s»\n"
 "som er bunde til tasten «%s»"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:103
-#, fuzzy, c-format
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:105
+#, c-format
 msgid ""
 "Error activating XKB configuration.\n"
 "It can happen under various circumstances:\n"
@@ -2712,18 +2814,20 @@ msgid ""
 "- The result of <b>%s</b>"
 msgstr ""
 "Feil under aktivering av XKB-oppsettet.\n"
-"Truleg eit eintern X-tenar-problem.\n"
+"Dette kan skje i visse situasjonar:\n"
+"- ein feil i libxklavier-biblioteket\n"
+"- ein feil i X-tenaren (xkbcomp, xmodmap-verktøy)\n"
+"- X-tenar med inkompatibel libxkbfile-implementasjon\n"
 "\n"
 "Versjonsinformasjon for X-tenaren:\n"
 "%s\n"
 "%d\n"
 "%s\n"
 "Dersom du sender inn ein feilrapport om dette, ta med:\n"
-"- Resultatet av <b>xprop -root | grep XKB</b>\n"
-"- Resultatet av <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/xkb</b>"
+"- Resultatet av <b>%s</b>\n"
+"- Resultatet av <b>%s</b>"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:117
-#, fuzzy
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:119
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2734,28 +2838,36 @@ msgstr ""
 "Det er kjente problem med innfløkte XKB-oppsett.\n"
 "Prøv å bruka eit enklare oppsett eller ein nyare versjon av XFree."
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:223
-#, fuzzy
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:249
 msgid "Do _not show this warning again"
 msgstr "_Ikkje vis denne meldinga igjen."
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:234
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:263
+#, c-format
 msgid ""
-"The X system keyboard settings differ from your current GNOME keyboard "
-"settings.  Which set would you like to use?"
+"<b>The X system keyboard settings differ from your current GNOME keyboard "
+"settings.</b>\n"
+"\n"
+"Expected was %s, but the the following settings were found: %s.\n"
+"\n"
+"Which set would you like to use?"
 msgstr ""
-"Tastaturinnstillingane i X er ikkje like tastaturinnstillingane i GNOME. Kva "
-"for ei innstilling vil du bruka?"
+"<b>Tastaturinnstillingane i X er ikkje like tastaturinnstillingane i GNOME.</"
+"b>\n"
+"\n"
+"Venta %s, men fann: %s\n"
+"\n"
+"Kva for eit sett innstillingar vil du bruka?"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:247
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:286
 msgid "Use X settings"
 msgstr "Bruk X-innstillingar"
 
-#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:249
-msgid "Use GNOME settings"
-msgstr "Bruk GNOME-innstillingar"
+#: ../gnome-settings-daemon/gnome-settings-keyboard-xkb.c:288
+msgid "Keep GNOME settings"
+msgstr "Bruk GNOME-innstillingane"
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:129
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:118
 #, c-format
 msgid ""
 "Couldn't execute command: %s\n"
@@ -2764,7 +2876,7 @@ msgstr ""
 "Klarte ikkje køyra kommando: %s\n"
 "Kontroller at denne kommandoen finst."
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:145
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:134
 msgid ""
 "Couldn't put the machine to sleep.\n"
 "Verify that the machine is correctly configured."
@@ -2772,7 +2884,7 @@ msgstr ""
 "Klarte ikkje setja maskinen i kvilemodus.\n"
 "Kontroller at maskinen er sett opp rett."
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:180
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:168
 msgid ""
 "Couldn't load the Glade file.\n"
 "Make sure that this daemon is properly installed."
@@ -2799,7 +2911,7 @@ msgstr ""
 msgid "_Do not show this message again"
 msgstr "_Ikkje vis denne meldinga igjen."
 
-#: ../gnome-settings-daemon/gnome-settings-sound.c:131
+#: ../gnome-settings-daemon/gnome-settings-sound.c:127
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Klarte ikkje å lasta lydfila «%s» som sample «%s»"
@@ -2812,25 +2924,23 @@ msgstr "Kan ikkje avgjera heimekatalogen til brukaren"
 #: ../gnome-settings-daemon/gnome-settings-xsettings.c:212
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
-msgstr ""
-"GConf-nøkkelen «%s» er sett til type «%s», men den venta typen er «%s»\n"
+msgstr "GConf-nøkkelen «%s» er sett til type «%s», men den venta typen er «%s»\n"
 
 #: ../gnome-settings-daemon/modmap-dialog.glade.h:1
 msgid "A_vailable files:"
 msgstr "_Tilgjengelege filer:"
 
 #: ../gnome-settings-daemon/modmap-dialog.glade.h:2
-#, fuzzy
 msgid "Do _not show this warning again."
 msgstr "_Ikkje vis denne meldinga igjen."
 
 #: ../gnome-settings-daemon/modmap-dialog.glade.h:3
 msgid "Load modmap files"
-msgstr ""
+msgstr "Last modmap-filer"
 
 #: ../gnome-settings-daemon/modmap-dialog.glade.h:4
 msgid "Would you like to load the modmap file(s)?"
-msgstr ""
+msgstr "Vil du lasta modmap-filene?"
 
 #: ../gnome-settings-daemon/modmap-dialog.glade.h:5
 msgid "_Load"
@@ -2880,11 +2990,6 @@ msgstr "Skjerm"
 msgid "Screen on which BGApplier is to draw"
 msgstr "Skjermen BGApplier skal teikna på"
 
-#: ../libgswitchit/gswitchit_config.c:1036
-#, fuzzy, c-format
-msgid "There was an error loading an image: %s"
-msgstr "Ein feil oppstod når hjelpeteksten skulle visast: %s"
-
 #: ../libsounds/sound-view.c:43
 msgid "Login"
 msgstr "Logg inn"
@@ -2914,17 +3019,15 @@ msgid "No sound"
 msgstr "Ingen lyd"
 
 #: ../libsounds/sound-view.c:131
-#, fuzzy
 msgid "Sound not set for this event."
-msgstr "_Lydar for hendingar"
+msgstr "Ingen lyd vald for denne hendinga."
 
 #: ../libsounds/sound-view.c:140
-#, fuzzy
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package for a set of default sounds."
 msgstr ""
-"Lydfila for denne handlinga finst ikkje.\n"
+"Lydfila for denne hendinga finst ikkje.\n"
 "Legg inn pakka «gnome-audio» dersom du vil\n"
 "ha eit sett med standardlydar."
 
@@ -2959,8 +3062,7 @@ msgid "Roll up"
 msgstr "Rull opp"
 
 #: ../schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:1
-msgid ""
-"If true, the mime handlers for text/plain and text/* will be kept in sync"
+msgid "If true, the mime handlers for text/plain and text/* will be kept in sync"
 msgstr ""
 "Dersom denne er sett til sann, vil MIME-handsamarane for text/plain og text/"
 "* haldast synkroniserte"
@@ -2970,174 +3072,156 @@ msgid "Sync text/plain and text/* handlers"
 msgstr "Synkroniser handsamarane for text/plain og text/*"
 
 #: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:1
-msgid "Brightness down"
-msgstr "Mindre lys"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:2
-msgid "Brightness down's shortcut."
-msgstr "Snøggtast som dempar lyset."
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:3
-msgid "Brightness up"
-msgstr "Meir lys"
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:4
-msgid "Brightness up's shortcut."
-msgstr "Snøggtast som aukar lyset."
-
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:5
 msgid "E-mail"
 msgstr "E-post"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:6
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:2
 msgid "E-mail's shortcut."
 msgstr "Snøggtast som startar e-post."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:7
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:3
 msgid "Eject"
 msgstr "Løys ut"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:8
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:4
 msgid "Eject's shortcut."
 msgstr "Snøggtast som opnar skuffa."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:9
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:5
 msgid "Home folder"
 msgstr "Heimemappe"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:10
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:6
 msgid "Home folder's shortcut."
 msgstr "Snøggtast som opnar heimemappa."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:7
 msgid "Launch help browser"
 msgstr "Start hjelplesar"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:12
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:8
 msgid "Launch help browser's shortcut."
 msgstr "Snøggtast som startar hjelplesar."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:13
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:9
 msgid "Launch web browser"
 msgstr "Start nettlesar"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:14
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:10
 msgid "Launch web browser's shortcut."
 msgstr "Snøggtast som startar nettlesar."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
 msgid "Lock screen"
 msgstr "Lås skjermen"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:12
 msgid "Lock screen's shortcut."
 msgstr "Snøggtast som låser skjermen."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:13
 msgid "Log out"
 msgstr "Logg ut"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:14
 msgid "Log out's shortcut."
 msgstr "Snøggtast som loggar ut."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
 msgid "Next track key's shortcut."
 msgstr "Snøggtast som går til neste spor."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
 msgid "Pause"
 msgstr "Pause"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
 msgid "Pause key's shortcut."
 msgstr "Snøggtast som pausar avspeling."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
 msgid "Play (or play/pause)"
 msgstr "Spel (eller spel/pause)"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
 msgid "Play (or play/pause) key's shortcut."
 msgstr "Snøggtast som startar eller startar/pausar avspeling."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
 msgid "Previous track key's shortcut."
 msgstr "Snøggtast som går til førre spor."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
 msgid "Search"
 msgstr "Søk"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
 msgid "Search's shortcut."
 msgstr "Snøggtast som startar søk."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
 msgid "Skip to next track"
 msgstr "Gå til neste spor"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
 msgid "Skip to previous track"
 msgstr "Gå til førre spor"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
 msgid "Sleep"
 msgstr "Kvilemodus"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
 msgid "Sleep's shortcut."
 msgstr "Snøggtast som går til kvilemodus."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
 msgid "Stop playback key"
 msgstr "Stopp avspeling-knapp"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
 msgid "Stop playback key's shortcut."
 msgstr "Snøggtast som stoppar avspeling."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
 msgid "Volume down"
 msgstr "Lågare lyd"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
 msgid "Volume down's shortcut."
 msgstr "Snøggtast som dempar lyden."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
 msgid "Volume mute"
 msgstr "Lyd av"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
 msgid "Volume mute's shortcut"
 msgstr "Snøggtast som slår av lyden."
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:37
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
 msgid "Volume step"
 msgstr "Lydstyrkesteg"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:38
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
 msgid "Volume step as percentage of volume."
 msgstr "Lydstyrkesteg som ein prosentdel av lydstyrka"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:39
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
 msgid "Volume up"
 msgstr "Høgare lyd"
 
-#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
+#: ../schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
 msgid "Volume up's shortcut."
 msgstr "Snøggtast som aukar lyden."
 
 #: ../schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:1
-#, fuzzy
 msgid "Display a dialog when there are errors running the screensaver"
-msgstr "Vis ein dialog når det skjer feil under køyring av XScreenSaver"
+msgstr "Vis ein dialog når det skjer feil under køyring av skjermspararen"
 
 #: ../schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:2
-#, fuzzy
 msgid "Run screensaver at login"
-msgstr "Køyr XScreenSaver ved pålogging"
+msgstr "Køyr skjermspararen ved pålogging"
 
 #: ../schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:3
 msgid "Show Startup Errors"
@@ -3152,23 +3236,24 @@ msgid ""
 "A collection of scripts to run whenever the keyboard state is reloaded. "
 "Useful for re-applying xmodmap based adjustments"
 msgstr ""
+"Ei samling skript å køyra kvar gong tastaturinnstillingane vert lasta på "
+"nytt. Nyttig for å ta i bruk justeringar laga med xmodmap"
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
 msgid "A list of modmap files available in the $HOME directory."
-msgstr ""
+msgstr "Ei liste over modmap-filer i $HOME-katalogen."
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
 msgid "Default group, assigned on window creation"
-msgstr ""
+msgstr "Standardgruppa, tileigna når vindauget vert laga"
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
 msgid "Keep and manage separate group per window"
-msgstr ""
+msgstr "Lag og handsama særskilde grupper for kvart vindauge"
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
-#, fuzzy
 msgid "Keyboard Update Handlers"
-msgstr "Tastatur_modell:"
+msgstr "Handsamarar for tastaturoppdatering"
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:6
 msgid "Keyboard layout"
@@ -3180,51 +3265,73 @@ msgstr "Tastaturmodell"
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:8
 msgid "Keyboard options"
-msgstr ""
+msgstr "Tastaturval"
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:9
-#, fuzzy
 msgid ""
 "Keyboard settings in gconf will be overridden from the system ASAP "
 "(deprecated)"
-msgstr " Tastaturinnstillingar i GConf vil verta overstyrte frå systemet ASAP"
+msgstr ""
+" Tastaturinnstillingar i GConf vil verta overstyrte frå systemet ASAP "
+"(forelda)"
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:10
 msgid "Save/restore indicators together with layout groups"
-msgstr ""
+msgstr "Lagra/gjenoppratta indikatorar i lag med utformingsgrupper"
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:11
 msgid "Show layout names instead of group names"
-msgstr ""
+msgstr "Vis utformingsnamn i staden for gruppenamn"
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:12
 msgid ""
 "Show layout names instead of group names (only for versions of XFree "
 "supporting multiple layouts)"
 msgstr ""
+"Vis utformingsnamn i staden for gruppenamn (berre for variantar av XFree som "
+"støttar fleire utformingar)"
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:13
 msgid "Suppress the \"X sysconfig changed\" warning message"
-msgstr ""
+msgstr "Gøym «X sysconfig changed»-åtvaringa"
 
 #: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:14
+msgid "The Keyboard Preview, X offset"
+msgstr "Tastatur-førehandsvisinga, X-forskyving"
+
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:15
+msgid "The Keyboard Preview, Y offset"
+msgstr "Tastatur-førehandsvisinga, Y-forskyving"
+
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:16
+msgid "The Keyboard Preview, height"
+msgstr "Tastatur-førehandsvisinga, høgde"
+
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:17
+msgid "The Keyboard Preview, width"
+msgstr "Tastatur-førehandsvisinga, breidde"
+
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:18
 msgid ""
 "Very soon, keyboard settings in gconf will be overridden (from the system "
 "configuration) This key has been deprecated since GNOME 2.12, please unset "
 "the model, layouts and options keys to get the default system configuration."
 msgstr ""
+"Tastaturinnstillingane i GConf vil straks verta overstyrte av "
+"systeminnstillingane. Denne tasten har vore forelda sidan GNOME 2.12. "
+"Nullstill modell, utforming og val-tastar for å få standard systemoppsett."
 
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:15
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:19
 msgid "keyboard layout"
 msgstr "tastaturutforming"
 
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:16
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:20
 msgid "keyboard model"
 msgstr "tastaturmodell"
 
-#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:17
+#: ../schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:21
 msgid "modmap file list"
-msgstr ""
+msgstr "modmap-filliste"
 
 #: ../typing-break/drw-break-window.c:213
 msgid "_Postpone break"
@@ -3235,30 +3342,30 @@ msgid "Take a break!"
 msgstr "Ta ein pause!"
 
 #. { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
-#: ../typing-break/drwright.c:135
+#: ../typing-break/drwright.c:128
 msgid "/_Preferences"
 msgstr "/_Brukarval"
 
-#: ../typing-break/drwright.c:136
+#: ../typing-break/drwright.c:129
 msgid "/_About"
 msgstr "/_Om"
 
-#: ../typing-break/drwright.c:138
+#: ../typing-break/drwright.c:131
 msgid "/_Take a Break"
 msgstr "/_Ta ein pause"
 
-#: ../typing-break/drwright.c:489
+#: ../typing-break/drwright.c:488
 #, c-format
 msgid "%d minute until the next break"
 msgid_plural "%d minutes until the next break"
 msgstr[0] "%d minutt til neste pause"
 msgstr[1] "%d minutt til neste pause"
 
-#: ../typing-break/drwright.c:493
+#: ../typing-break/drwright.c:492
 msgid "Less than one minute until the next break"
 msgstr "Mindre enn eitt minutt til neste pause"
 
-#: ../typing-break/drwright.c:581
+#: ../typing-break/drwright.c:579
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
@@ -3267,36 +3374,23 @@ msgstr ""
 "Kan ikkje få fram dialogen med skrivepauseeigenskapane på grunn av denne "
 "feilen: %s"
 
-#: ../typing-break/drwright.c:629
-msgid "About GNOME Typing Monitor"
-msgstr "Om GNOME skriveovervakar"
+#: ../typing-break/drwright.c:599
+msgid "Written by Richard Hult <richard@imendio.com>"
+msgstr "Skriven av Richard Hult <richard@imendio.com>"
 
-#: ../typing-break/drwright.c:653
-msgid "A computer break reminder."
-msgstr "Ei påminning om å ta ein pause frå datamaskina."
-
-#: ../typing-break/drwright.c:654
-msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
-msgstr "Skriven av Richard Hult &lt;richard@imendio.com&gt;"
-
-#: ../typing-break/drwright.c:655
+#: ../typing-break/drwright.c:600
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Pynt lagt til av Anders Carlsson"
 
-#: ../typing-break/drwright.c:831
-msgid "Break reminder"
-msgstr "Pausepåminning"
+#: ../typing-break/drwright.c:623
+msgid "Typing Monitor"
+msgstr "Skriveovervakar"
 
-#: ../typing-break/eggtrayicon.c:127
-msgid "Orientation"
-msgstr "Orientering"
-
-#: ../typing-break/eggtrayicon.c:128
-msgid "The orientation of the tray."
-msgstr ""
+#: ../typing-break/drwright.c:625
+msgid "A computer break reminder."
+msgstr "Ei påminning om å ta ein pause frå datamaskina."
 
 #: ../typing-break/main.c:100
-#, fuzzy
 msgid ""
 "The typing monitor uses the notification area to display information. You "
 "don't seem to have a notification area on your panel. You can add it by "
@@ -3305,8 +3399,8 @@ msgid ""
 msgstr ""
 "Skriveovervakaren brukar varslingsområdet til å visa informasjon. Det ser "
 "ikkje ut til at du har eit varslingsområde på panelet ditt. Du kan leggja "
-"til eit ved å høgreklikka på panelet og velja «Legg til på panelet -> "
-"Verktøy -> Varslingsområde»."
+"til eit ved å høgreklikka på panelet og velja «Legg til på panelet» og "
+"deretter «Varslingsområde», og så klikka «Legg til»."
 
 #: ../vfs-methods/fontilus/font-view.c:115
 msgid "The quick brown fox jumps over the lazy dog. 0123456789"
@@ -3372,28 +3466,24 @@ msgid "If set to true, then Type1 fonts will be thumbnailed."
 msgstr "Dersom sann, vert det laga miniatyrar av Type1-skrifttypar."
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:5
-msgid ""
-"Set this key to the command used to create thumbnails for OpenType fonts."
+msgid "Set this key to the command used to create thumbnails for OpenType fonts."
 msgstr ""
 "Sett denne nøkkelen til kommandoen som lagar miniatyrar av OpenType-"
 "skrifttypar."
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:6
 msgid "Set this key to the command used to create thumbnails for PCF fonts."
-msgstr ""
-"Sett denne nøkkelen til kommandoen som lagar miniatyrar av PCF-skrifttypar."
+msgstr "Sett denne nøkkelen til kommandoen som lagar miniatyrar av PCF-skrifttypar."
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:7
-msgid ""
-"Set this key to the command used to create thumbnails for TrueType fonts."
+msgid "Set this key to the command used to create thumbnails for TrueType fonts."
 msgstr ""
 "Sett denne nøkkelen til kommandoen som lagar miniatyrar av TrueType-"
 "skrifttypar."
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:8
 msgid "Set this key to the command used to create thumbnails for Type1 fonts."
-msgstr ""
-"Sett denne nøkkelen til kommandoen som lagar miniatyrar av Type1-skrifttypar."
+msgstr "Sett denne nøkkelen til kommandoen som lagar miniatyrar av Type1-skrifttypar."
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:9
 msgid "Thumbnail command for OpenType fonts"
@@ -3494,8 +3584,7 @@ msgid "If set to true, then themes will be thumbnailed."
 msgstr "Dersom sann, vert det laga miniatyrar av drakter."
 
 #: ../vfs-methods/themus/themus.schemas.in.h:3
-msgid ""
-"Set this key to the command used to create thumbnails for installed themes."
+msgid "Set this key to the command used to create thumbnails for installed themes."
 msgstr ""
 "Sett denne nøkkelen til kommandoen som vert brukt til å laga miniatyrar av "
 "installerte drakter."
@@ -3521,3 +3610,4 @@ msgstr "Om det skal lagast miniatyrar av installerte drakter"
 #: ../vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Om det skal lagast miniatyrar av drakter"
+
