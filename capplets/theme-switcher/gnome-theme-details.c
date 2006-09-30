@@ -123,6 +123,7 @@ setup_tree_view (GtkTreeView *tree_view,
  					       renderer,
  					       "text", THEME_NAME_COLUMN,
  					       NULL);
+  g_object_set (renderer, "ellipsize", PANGO_ELLIPSIZE_END, NULL);
 }
 
 static void
