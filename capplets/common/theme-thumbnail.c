@@ -130,6 +130,7 @@ create_image (ThemeThumbnailData *theme_thumbnail_data,
   g_object_set (G_OBJECT (settings),
 		"gtk-theme-name", (char *) theme_thumbnail_data->control_theme_name->data,
 		"gtk-font-name", (char *) theme_thumbnail_data->application_font->data,
+		"gtk-icon-theme-name", (char *) theme_thumbnail_data->icon_theme_name->data,
 		NULL);
   theme = meta_theme_load ((char *) theme_thumbnail_data->wm_theme_name->data, NULL);
 
