@@ -402,7 +402,6 @@ load_meta_themes (GtkTreeView *tree_view,
       GnomeThemeMetaInfo *model_meta_theme_info = NULL;
       gchar *blurb;
       gboolean list_is_default = FALSE;
-      GdkPixbuf *pixbuf = NULL;
       gboolean delete_it = FALSE;
       gboolean set_it = FALSE;
       GtkTreeIter iter_to_set;
@@ -1589,6 +1588,20 @@ int
 main (int argc, char *argv[])
 {
   GladeXML *dialog;
+  gchar *install_filename = NULL;
+
+  GOptionEntry option_entries[] = {
+	  { "install-theme",
+	    'i',
+	    G_OPTION_FLAG_IN_MAIN,
+	    G_OPTION_ARG_FILENAME,
+	    &install_filename,
+	    N_("Specify the filename of a theme to install"),
+	    N_("filename")
+	  },
+	  { NULL }
+  };
+  GOptionContext *option_context;
 
   /* We need to do this before we initialize anything else */
   theme_thumbnail_factory_init (argc, argv);
@@ -1597,10 +1610,18 @@ main (int argc, char *argv[])
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
   textdomain (GETTEXT_PACKAGE);
 
+  option_context = g_option_context_new ("gnome-theme-manager");
+  g_option_context_add_main_entries (option_context, option_entries, GETTEXT_PACKAGE);
+
   gnome_program_init ("gnome-theme-manager", VERSION,
 		      LIBGNOMEUI_MODULE, argc, argv,
 		      GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
+		      GNOME_PARAM_GOPTION_CONTEXT, option_context,
 		      NULL);
+
+  if (install_filename != NULL)
+     gnome_theme_install_from_uri (install_filename);
+  g_free (install_filename);
 
   gtk_theme_default_name = get_default_string_from_key (GTK_THEME_KEY);
   window_theme_default_name = get_default_string_from_key (METACITY_THEME_KEY);
