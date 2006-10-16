@@ -554,6 +554,7 @@ web_gconf_changed_cb (GConfClient *client, guint id, GConfEntry *entry, GnomeDAC
     GConfValue *value;
     GConfChangeSet *cs;
     GError *error = NULL;
+    GList *list_entry;
 
     g_return_if_fail (gconf_entry_get_key (entry) != NULL);
 
@@ -561,6 +562,7 @@ web_gconf_changed_cb (GConfClient *client, guint id, GConfEntry *entry, GnomeDAC
 	return;
 
     if (strcmp (entry->key, DEFAULT_APPS_KEY_HTTP_EXEC) == 0) {
+	gchar* short_browser;
 	web_browser_update_combo_box (capplet, gconf_value_get_string (value));
 	web_browser_update_radio_buttons (capplet, gconf_value_get_string (value));
 
@@ -569,6 +571,21 @@ web_gconf_changed_cb (GConfClient *client, guint id, GConfEntry *entry, GnomeDAC
 	gconf_change_set_set (cs, DEFAULT_APPS_KEY_HTTPS_EXEC, value);
 	gconf_change_set_set (cs, DEFAULT_APPS_KEY_UNKNOWN_EXEC, value);
 	gconf_change_set_set (cs, DEFAULT_APPS_KEY_ABOUT_EXEC, value);
+	short_browser = g_strndup(gconf_value_get_string(value),
+				  strstr(gconf_value_get_string(value), " ") -
+				  gconf_value_get_string(value));
+	gconf_change_set_set_string (cs, DEFAULT_APPS_KEY_BROWSER_EXEC, short_browser);
+	g_free(short_browser);
+
+	list_entry = g_list_find_custom (capplet->web_browsers,
+					 gconf_value_get_string (value),
+					 (GCompareFunc) web_item_comp);
+
+	if (list_entry) {
+	    GnomeDAWebItem *item = (GnomeDAWebItem *) list_entry->data;
+
+	    gconf_change_set_set_bool (cs, DEFAULT_APPS_KEY_BROWSER_NREMOTE, item->netscape_remote);
+	}
 
 	gconf_client_commit_change_set (capplet->gconf, cs, TRUE, &error);
 
@@ -590,6 +607,7 @@ web_gconf_changed_cb (GConfClient *client, guint id, GConfEntry *entry, GnomeDAC
 	gconf_change_set_set (cs, DEFAULT_APPS_KEY_HTTPS_NEEDS_TERM, value);
 	gconf_change_set_set (cs, DEFAULT_APPS_KEY_UNKNOWN_NEEDS_TERM, value);
 	gconf_change_set_set (cs, DEFAULT_APPS_KEY_ABOUT_NEEDS_TERM, value);
+	gconf_change_set_set (cs, DEFAULT_APPS_KEY_BROWSER_NEEDS_TERM, value);
 
 	gconf_client_commit_change_set (capplet->gconf, cs, TRUE, &error);
 
