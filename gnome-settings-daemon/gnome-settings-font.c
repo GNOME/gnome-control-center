@@ -74,8 +74,9 @@ load_cursor (GConfClient *client)
 					   _("Cannot create the directory \"%s\".\n"\
 					     "This is needed to allow changing the mouse pointer theme."),
 					   font_dir_name);
-	  gtk_dialog_run (GTK_DIALOG (dialog));
-	  gtk_widget_destroy (dialog);
+	  g_signal_connect (dialog, "response",
+			    G_CALLBACK (gtk_widget_destroy), NULL);
+	  gnome_settings_delayed_show_dialog (dialog);
 	  g_free (font_dir_name);
 
 	  return;
@@ -96,8 +97,9 @@ load_cursor (GConfClient *client)
 					   (_("Cannot create the directory \"%s\".\n"\
 					      "This is needed to allow changing cursors.")),
 					   dir_name);
-	  gtk_dialog_run (GTK_DIALOG (dialog));
-	  gtk_widget_destroy (dialog);
+	  g_signal_connect (dialog, "response",
+			    G_CALLBACK (gtk_widget_destroy), NULL);
+	  gnome_settings_delayed_show_dialog (dialog);
 	  g_free (dir_name);
 
 	  return;

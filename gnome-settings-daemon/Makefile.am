@@ -62,7 +62,8 @@ gnome_settings_daemon_SOURCES =	\
 	xutils.c			\
 	xutils.h			\
 	clipboard-manager.c		\
-	clipboard-manager.h		
+	clipboard-manager.h		\
+	delayed-dialog.c
 
 #	$(AccessX_files)		
 

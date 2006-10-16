@@ -36,6 +36,7 @@ void       gnome_settings_daemon_register_callback (const char      *dir,
 						    KeyCallbackFunc  func);
 GtkWidget *gnome_settings_daemon_get_invisible     (void);
 
+void       gnome_settings_delayed_show_dialog      (GtkWidget       *dialog);
 
 G_BEGIN_DECLS
 

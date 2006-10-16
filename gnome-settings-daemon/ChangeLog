@@ -1,3 +1,12 @@
+2006-10-12  Dan Winship  <danw@novell.com>
+
+	* delayed-dialog.c (gnome_settings_delayed_show_dialog): new
+	method to delay showing a dialog until after the window manager is
+	running.
+
+	* gnome-settings-font.c (load_cursor): 
+	* gnome-settings-keyboard-xkb.c (activation_error): Use it.
+
 2006-08-24  Andre Klapper <a9016009@gmx.de>
 
 	Fixes #170318

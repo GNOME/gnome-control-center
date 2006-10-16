@@ -124,7 +124,7 @@ activation_error (void)
 						     "gconftool-2 -R /desktop/gnome/peripherals/keyboard/kbd");
 	g_signal_connect (dialog, "response",
 			  G_CALLBACK (gtk_widget_destroy), NULL);
-	gtk_widget_show (dialog);
+	gnome_settings_delayed_show_dialog (dialog);
 }
 
 static void
