@@ -33,14 +33,14 @@
 void gnome_settings_keyboard_xkb_init (GConfClient * client);
 void gnome_settings_keyboard_xkb_load (GConfClient * client);
 
-typedef void ( *PostActivationCallback ) ( void *userData );
+typedef void (*PostActivationCallback) (void *userData);
 
-void gnome_settings_keyboard_xkb_set_post_activation_callback( 
-                                        PostActivationCallback fun,
-                                        void *userData );
+void
+gnome_settings_keyboard_xkb_set_post_activation_callback
+(PostActivationCallback fun, void *userData);
 
 GType keyboard_config_registry_get_type (void);
 
-extern XklEngine * xkl_engine;
+extern XklEngine *xkl_engine;
 
 #endif

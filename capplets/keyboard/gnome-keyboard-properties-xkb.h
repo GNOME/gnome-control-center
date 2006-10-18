@@ -24,29 +24,23 @@
 #ifndef __GNOME_KEYBOARD_PROPERTY_XKB_H
 #define __GNOME_KEYBOARD_PROPERTY_XKB_H
 
-#include <libxklavier/xklavier.h>
 #include <gconf/gconf-client.h>
 
-#include "libgswitchit/gswitchit-config.h"
+#include "libgnomekbd/gkbd-keyboard-config.h"
 
 G_BEGIN_DECLS
-
 #define SEL_LAYOUT_TREE_COL_DESCRIPTION 0
 #define SEL_LAYOUT_TREE_COL_DEFAULT 1
 #define SEL_LAYOUT_TREE_COL_ID 2
-
 #define AVAIL_LAYOUT_TREE_COL_DESCRIPTION 0
 #define AVAIL_LAYOUT_TREE_COL_ID 1
-
 #define CWID(s) glade_xml_get_widget (chooser_dialog, s)
-
 extern XklEngine *engine;
 extern XklConfigRegistry *config_registry;
 extern GConfClient *xkb_gconf_client;
-extern GSwitchItKbdConfig initial_config;
+extern GkbdKeyboardConfig initial_config;
 
-extern void setup_xkb_tabs (GladeXML * dialog, 
-                            GConfChangeSet * changeset);
+extern void setup_xkb_tabs (GladeXML * dialog, GConfChangeSet * changeset);
 
 extern void xkb_layouts_fill_available_tree (GladeXML * dialog);
 
@@ -64,8 +58,8 @@ extern void xkb_layouts_register_gconf_listener (GladeXML * dialog);
 
 extern void xkb_options_register_gconf_listener (GladeXML * dialog);
 
-extern void xkb_layouts_prepare_selected_tree (GladeXML * dialog, 
-                                               GConfChangeSet * changeset);
+extern void xkb_layouts_prepare_selected_tree (GladeXML * dialog,
+					       GConfChangeSet * changeset);
 
 extern void xkb_options_prepare_selected_tree (GladeXML * dialog);
 
@@ -85,23 +79,24 @@ extern void choose_model (GladeXML * dialog);
 
 extern void xkb_layout_choose (GladeXML * dialog);
 
-extern void xkb_layouts_enable_disable_default (GladeXML * dialog, 
-                                                gboolean enable);
+extern void xkb_layouts_enable_disable_default (GladeXML * dialog,
+						gboolean enable);
 
 extern GSList *xkb_layouts_get_selected_list (void);
 extern GSList *xkb_options_get_selected_list (void);
 
 #define xkb_layouts_set_selected_list(list) \
         gconf_client_set_list (gconf_client_get_default (), \
-                               GSWITCHIT_KBD_CONFIG_KEY_LAYOUTS, \
+                               GKBD_KEYBOARD_CONFIG_KEY_LAYOUTS, \
                                GCONF_VALUE_STRING, (list), NULL)
 
 #define xkb_options_set_selected_list(list) \
         gconf_client_set_list (gconf_client_get_default (), \
-                               GSWITCHIT_KBD_CONFIG_KEY_OPTIONS, \
+                               GKBD_KEYBOARD_CONFIG_KEY_OPTIONS, \
                                GCONF_VALUE_STRING, (list), NULL)
 
-extern GtkWidget * xkb_layout_preview_create_widget (GladeXML * chooser_dialog);
+extern GtkWidget *xkb_layout_preview_create_widget (GladeXML *
+						    chooser_dialog);
 
 extern void xkb_layout_preview_update (GladeXML * chooser_dialog);
 

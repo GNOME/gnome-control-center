@@ -1,7 +1,6 @@
 SUBDIRS = xrdb actions
 
-INCLUDES=$(DBUS_CFLAGS) $(LIBXKLAVIER_CFLAGS) $(GNOME_SETTINGS_DAEMON_CFLAGS) -I$(top_srcdir)/libbackground -I$(top_srcdir) \
-  -DGNOMELOCALEDIR="\"$(datadir)/locale\"" 	\
+INCLUDES=$(DBUS_CFLAGS) $(LIBGNOMEKBD_CFLAGS) $(GNOME_SETTINGS_DAEMON_CFLAGS) -I$(top_srcdir)/libbackground -I$(top_srcdir) \
   -DESD_SERVER="\"$(ESD_SERVER)\""		\
   -DDATADIR="\"$(datadir)\""			\
   -DPIXMAPSDIR="\"$(GNOMECC_PIXMAPS_DIR)\""	\
@@ -69,10 +68,9 @@ gnome_settings_daemon_SOURCES =	\
 
 gnome_settings_daemon_LDADD = \
 	$(DBUS_LIBS)						\
-	$(LIBXKLAVIER_LIBS)						\
+	$(LIBGNOMEKBD_LIBS)						\
 	$(top_builddir)/libbackground/libbackground.la			\
 	$(top_builddir)/libsounds/libsounds.a				\
-	$(top_builddir)/libgswitchit/libgswitchit.a			\
 	$(top_builddir)/libwindow-settings/libgnome-window-settings.la 	\
 	$(top_builddir)/gnome-settings-daemon/actions/libacme.la	\
 	$(GNOME_SETTINGS_DAEMON_LIBS)					\

@@ -35,19 +35,20 @@
 #include <string.h>
 #include <time.h>
 
-#include <libgswitchit/gswitchit-config.h>
-#include <libgswitchit/keyboard-config-registry.h>
+#include <libgnomekbd/gkbd-config-registry.h>
+#include <libgnomekbd/gkbd-desktop-config.h>
+#include <libgnomekbd/gkbd-keyboard-config.h>
 
 #include "gnome-settings-keyboard-xkb.h"
 #include "gnome-settings-daemon.h"
 
 XklEngine *xkl_engine;
 
-static GSwitchItConfig current_config;
-static GSwitchItKbdConfig current_kbd_config;
+static GkbdDesktopConfig current_config;
+static GkbdKeyboardConfig current_kbd_config;
 
 /* never terminated */
-static GSwitchItKbdConfig initial_sys_kbd_config;
+static GkbdKeyboardConfig initial_sys_kbd_config;
 
 static gboolean inited_ok;
 
@@ -133,34 +134,34 @@ apply_settings (void)
 	if (!inited_ok)
 		return;
 
-	gswitchit_config_load_from_gconf (&current_config);
+	gkbd_desktop_config_load_from_gconf (&current_config);
 	/* again, probably it would be nice to compare things 
 	   before activating them */
-	gswitchit_config_activate (&current_config);
+	gkbd_desktop_config_activate (&current_config);
 }
 
 static void
 apply_xkb_settings (void)
 {
 	GConfClient *conf_client;
-	GSwitchItKbdConfig current_sys_kbd_config;
+	GkbdKeyboardConfig current_sys_kbd_config;
 
 	if (!inited_ok)
 		return;
 
 	conf_client = gnome_settings_daemon_get_conf_client ();
-	gswitchit_kbd_config_init (&current_sys_kbd_config, conf_client,
+	gkbd_keyboard_config_init (&current_sys_kbd_config, conf_client,
 				   xkl_engine);
 
-	gswitchit_kbd_config_load_from_gconf (&current_kbd_config,
+	gkbd_keyboard_config_load_from_gconf (&current_kbd_config,
 					      &initial_sys_kbd_config);
 
-	gswitchit_kbd_config_load_from_x_current (&current_sys_kbd_config);
+	gkbd_keyboard_config_load_from_x_current (&current_sys_kbd_config, NULL);
 	/* Activate - only if different! */
-	if (!gswitchit_kbd_config_equals
+	if (!gkbd_keyboard_config_equals
 	    (&current_kbd_config, &current_sys_kbd_config)) {
-		if (gswitchit_kbd_config_activate (&current_kbd_config)) {
-			gswitchit_kbd_config_save_to_gconf_backup
+		if (gkbd_keyboard_config_activate (&current_kbd_config)) {
+			gkbd_keyboard_config_save_to_gconf_backup
 			    (&initial_sys_kbd_config);
 			if (pa_callback != NULL) {
 				(*pa_callback) (pa_callback_user_data);
@@ -174,7 +175,7 @@ apply_xkb_settings (void)
 		xkl_debug (100,
 			   "Actual KBD configuration was not changed: redundant notification\n");
 
-	gswitchit_kbd_config_term (&current_sys_kbd_config);
+	gkbd_keyboard_config_term (&current_sys_kbd_config);
 }
 
 static void
@@ -183,7 +184,7 @@ gnome_settings_keyboard_xkb_sysconfig_changed_response (GtkDialog * dialog,
 							what2do)
 {
 	GConfClient *conf_client;
-	GSwitchItKbdConfig empty_kbd_config;
+	GkbdKeyboardConfig empty_kbd_config;
 	gboolean dont_show_again =
 	    gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON
 					  (g_object_get_data
@@ -194,9 +195,9 @@ gnome_settings_keyboard_xkb_sysconfig_changed_response (GtkDialog * dialog,
 
 	switch (what2do) {
 	case RESPONSE_USE_X:
-		gswitchit_kbd_config_init (&empty_kbd_config, conf_client,
+		gkbd_keyboard_config_init (&empty_kbd_config, conf_client,
 					   xkl_engine);
-		gswitchit_kbd_config_save_to_gconf (&empty_kbd_config);
+		gkbd_keyboard_config_save_to_gconf (&empty_kbd_config);
 		break;
 	case RESPONSE_USE_GNOME:
 		/* Do absolutely nothing - just keep things the way they are */
@@ -215,27 +216,27 @@ static void
 gnome_settings_keyboard_xkb_analyze_sysconfig (void)
 {
 	GConfClient *conf_client;
-	GSwitchItKbdConfig backup_gconf_kbd_config;
+	GkbdKeyboardConfig backup_gconf_kbd_config;
 	gboolean is_config_changed, dont_show;
 
 	if (!inited_ok)
 		return;
 	conf_client = gnome_settings_daemon_get_conf_client ();
-	gswitchit_kbd_config_init (&backup_gconf_kbd_config, conf_client,
+	gkbd_keyboard_config_init (&backup_gconf_kbd_config, conf_client,
 				   xkl_engine);
-	gswitchit_kbd_config_init (&initial_sys_kbd_config, conf_client,
+	gkbd_keyboard_config_init (&initial_sys_kbd_config, conf_client,
 				   xkl_engine);
 	dont_show =
 	    gconf_client_get_bool (conf_client,
 				   DISABLE_SYSCONF_CHANGED_WARNING_KEY,
 				   NULL);
-	gswitchit_kbd_config_load_from_gconf_backup
+	gkbd_keyboard_config_load_from_gconf_backup
 	    (&backup_gconf_kbd_config);
-	gswitchit_kbd_config_load_from_x_initial (&initial_sys_kbd_config);
+	gkbd_keyboard_config_load_from_x_initial (&initial_sys_kbd_config, NULL);
 
 	is_config_changed =
-	    g_slist_length (backup_gconf_kbd_config.layouts)
-	    && !gswitchit_kbd_config_equals (&initial_sys_kbd_config,
+	    g_slist_length (backup_gconf_kbd_config.layouts_variants)
+	    && !gkbd_keyboard_config_equals (&initial_sys_kbd_config,
 					     &backup_gconf_kbd_config);
 
 	/* config was changed!!! */
@@ -252,10 +253,10 @@ gnome_settings_keyboard_xkb_analyze_sysconfig (void)
 			GtkWidget *msg;
 
 			char *gnome_settings =
-			    gswitchit_kbd_config_to_string
+			    gkbd_keyboard_config_to_string
 			    (&backup_gconf_kbd_config);
 			char *system_settings =
-			    gswitchit_kbd_config_to_string
+			    gkbd_keyboard_config_to_string
 			    (&initial_sys_kbd_config);
 
 			msg = gtk_message_dialog_new_with_markup (NULL, 0, GTK_MESSAGE_INFO, GTK_BUTTONS_NONE,	/* !! temporary one */
@@ -299,7 +300,7 @@ gnome_settings_keyboard_xkb_analyze_sysconfig (void)
 			gtk_widget_show_all (msg);
 		}
 	}
-	gswitchit_kbd_config_term (&backup_gconf_kbd_config);
+	gkbd_keyboard_config_term (&backup_gconf_kbd_config);
 }
 
 static gboolean
@@ -405,11 +406,11 @@ gnome_settings_keyboard_xkb_init (GConfClient * client)
 		gnome_settings_keyboard_xkb_chk_lcl_xmm ();
 
 		gnome_settings_daemon_register_callback
-		    (GSWITCHIT_CONFIG_DIR,
+		    (GKBD_DESKTOP_CONFIG_DIR,
 		     (KeyCallbackFunc) apply_settings);
 
 		gnome_settings_daemon_register_callback
-		    (GSWITCHIT_KBD_CONFIG_DIR,
+		    (GKBD_KEYBOARD_CONFIG_DIR,
 		     (KeyCallbackFunc) apply_xkb_settings);
 
 		gdk_window_add_filter (NULL, (GdkFilterFunc)
@@ -424,18 +425,17 @@ gnome_settings_keyboard_xkb_init (GConfClient * client)
 					 XKLL_MANAGE_WINDOW_STATES);
 
 		reg =
-		    g_object_new (keyboard_config_registry_get_type (),
-				  NULL);
+		    g_object_new (gkbd_config_registry_get_type (), NULL);
 	}
 }
 
 void
 gnome_settings_keyboard_xkb_load (GConfClient * client)
 {
-	gswitchit_config_init (&current_config, client, xkl_engine);
+	gkbd_desktop_config_init (&current_config, client, xkl_engine);
 	apply_settings ();
 
-	gswitchit_kbd_config_init (&current_kbd_config, client,
+	gkbd_keyboard_config_init (&current_kbd_config, client,
 				   xkl_engine);
 	apply_xkb_settings ();
 }

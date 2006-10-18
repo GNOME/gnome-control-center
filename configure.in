@@ -109,9 +109,6 @@ PKG_CHECK_MODULES(GNOME_DESKTOP, gnome-desktop-2.0)
 PKG_CHECK_MODULES(DEFAULT_APPLICATIONS_CAPPLET, libxml-2.0)
 PKG_CHECK_MODULES(SOUND_CAPPLET, esound gstreamer-0.10)
 PKG_CHECK_MODULES(METACITY, libmetacity-private)
-PKG_CHECK_MODULES(LIBXKLAVIER, libxklavier >= 2.91,,
-    AC_MSG_ERROR([gnome-control-center depends on libxklavier >= 2.91.
-The latest release is available from http://prdownloads.sourceforge.net/gswitchit], 1))
 
 dnl
 dnl Check for Xft version 2; we build in extra functionality to the font capplet
@@ -195,18 +192,13 @@ fi
 dnl ==============
 dnl gswitchit
 dnl ==============
-dnl Make sure the new cvs virtual include has been checked out
-AC_MSG_CHECKING([for inclusion of libgswitchit])
-if test ! -d "$srcdir/libgswitchit"; then 
-    AC_MSG_RESULT(no)
-    AC_MSG_ERROR([Your checkout of gnome-control-center is out of date.
-    The 'libgswitchit' module has been virtually included into 
-    gnome-control-center by CVS as a subdirectory.  Please check
-    out again (this can be done on top of your existing checkout)])
-else
-   AC_MSG_RESULT(yes)
-fi
-AM_CONDITIONAL(INCLUDE_GSWITCHIT_DEVEL, false)	dnl pull devel from applet
+PKG_CHECK_MODULES(LIBGNOMEKBD, [libgnomekbd >= 0.1])
+AC_SUBST(LIBGNOMEKBD_CFLAGS)
+AC_SUBST(LIBGNOMEKBD_LIBS)
+
+PKG_CHECK_MODULES(LIBGNOMEKBDUI, [libgnomekbdui >= 0.1])
+AC_SUBST(LIBGNOMEKBDUI_CFLAGS)
+AC_SUBST(LIBGNOMEKBDUI_LIBS)
 
 dnl ==============================================
 dnl themus and fontilust dependencies
@@ -610,8 +602,6 @@ control-center/Makefile
 libbackground/Makefile
 libwindow-settings/Makefile
 libwindow-settings/gnome-window-settings-2.0.pc
-libgswitchit/Makefile
-libkbdraw/Makefile
 capplets/Makefile
 capplets/common/Makefile
 capplets/default-applications/Makefile

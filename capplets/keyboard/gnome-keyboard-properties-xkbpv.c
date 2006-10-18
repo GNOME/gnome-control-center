@@ -28,12 +28,12 @@
 #include <gnome.h>
 #include <glade/glade.h>
 
-#include "libgswitchit/gswitchit-config.h"
+#include <libgnomekbd/gkbd-keyboard-config.h>
 
 #include "capplet-util.h"
 
 #include "gnome-keyboard-properties-xkb.h"
-#include "libkbdraw/keyboard-drawing.h"
+#include <libgnomekbd/gkbd-keyboard-drawing.h>
 
 #ifdef HAVE_X11_EXTENSIONS_XKB_H
 #include "X11/XKBlib.h"
@@ -42,78 +42,92 @@
  * Any ideas on architectural improvements are WELCOME
  */
 extern gboolean xkl_xkb_config_native_prepare (XklEngine * engine,
-                                               const XklConfigRec * data,
-                                               XkbComponentNamesPtr component_names);
+					       const XklConfigRec * data,
+					       XkbComponentNamesPtr
+					       component_names);
 
 extern void xkl_xkb_config_native_cleanup (XklEngine * engine,
-                                           XkbComponentNamesPtr component_names);
+					   XkbComponentNamesPtr
+					   component_names);
 
 /* */
 #endif
 
-static KeyboardDrawingGroupLevel groupsLevels[] = {{0,1},{0,3},{0,0},{0,2}};
-static KeyboardDrawingGroupLevel * pGroupsLevels[] = {
-groupsLevels, groupsLevels+1, groupsLevels+2, groupsLevels+3 };
+static GkbdKeyboardDrawingGroupLevel groupsLevels[] =
+    { {0, 1}, {0, 3}, {0, 0}, {0, 2} };
+static GkbdKeyboardDrawingGroupLevel *pGroupsLevels[] = {
+	groupsLevels, groupsLevels + 1, groupsLevels + 2, groupsLevels + 3
+};
 
-GtkWidget*
+GtkWidget *
 xkb_layout_preview_create_widget (GladeXML * chooserDialog)
 {
-  GtkWidget *kbdraw = keyboard_drawing_new ();
-  
-  keyboard_drawing_set_groups_levels (KEYBOARD_DRAWING (kbdraw), pGroupsLevels);
-  return kbdraw;
+	GtkWidget *kbdraw = gkbd_keyboard_drawing_new ();
+
+	gkbd_keyboard_drawing_set_groups_levels (GKBD_KEYBOARD_DRAWING
+						 (kbdraw), pGroupsLevels);
+	return kbdraw;
 }
 
 void
 xkb_layout_preview_update (GladeXML * chooser_dialog)
 {
 #ifdef HAVE_X11_EXTENSIONS_XKB_H
-  GtkWidget *chooser = CWID ( "xkb_layout_chooser");
-  GtkWidget *available_layouts_tree = CWID ("xkb_layouts_available");
-  GtkTreeSelection *selection =
-    gtk_tree_view_get_selection (GTK_TREE_VIEW (available_layouts_tree));
-  GtkTreeIter selected_iter;
-  GtkTreeModel *model;
-  GtkWidget *kbdraw = GTK_WIDGET (g_object_get_data (G_OBJECT (chooser), "kbdraw"));
-  if (kbdraw != NULL &&
-      gtk_tree_selection_get_selected (selection, &model, &selected_iter))
-    {
-      gchar *id;
-      XklConfigRec *data;
-      char **p, *layout, *variant;
-      XkbComponentNamesRec component_names;
+	GtkWidget *chooser = CWID ("xkb_layout_chooser");
+	GtkWidget *available_layouts_tree = CWID ("xkb_layouts_available");
+	GtkTreeSelection *selection =
+	    gtk_tree_view_get_selection (GTK_TREE_VIEW
+					 (available_layouts_tree));
+	GtkTreeIter selected_iter;
+	GtkTreeModel *model;
+	GtkWidget *kbdraw =
+	    GTK_WIDGET (g_object_get_data (G_OBJECT (chooser), "kbdraw"));
+	if (kbdraw != NULL
+	    && gtk_tree_selection_get_selected (selection, &model,
+						&selected_iter)) {
+		gchar *id;
+		XklConfigRec *data;
+		char **p, *layout, *variant;
+		XkbComponentNamesRec component_names;
 
-      gtk_tree_model_get (model, &selected_iter, AVAIL_LAYOUT_TREE_COL_ID, &id, -1);
-      data = xkl_config_rec_new ();
-      if (xkl_config_rec_get_from_server (data, engine))
-        {
-          if( ( p = data->layouts ) != NULL )
-            g_strfreev(data->layouts);
+		gtk_tree_model_get (model, &selected_iter,
+				    AVAIL_LAYOUT_TREE_COL_ID, &id, -1);
+		data = xkl_config_rec_new ();
+		if (xkl_config_rec_get_from_server (data, engine)) {
+			if ((p = data->layouts) != NULL)
+				g_strfreev (data->layouts);
 
-          if( ( p = data->variants ) != NULL )
-            g_strfreev(data->variants);
-          
-          data->layouts = g_new0 (char*, 2);
-          data->variants = g_new0 (char*, 2);
-          if (gswitchit_kbd_config_split_items (id, &layout, &variant)
-              && variant != NULL)
-            {
-              data->layouts[0] = (layout == NULL) ? NULL : g_strdup (layout);
-              data->variants[0] = (variant == NULL) ? NULL : g_strdup (variant);
-            } else
-            {
-              data->layouts[0] = (id == NULL) ? NULL : g_strdup (id);
-              data->variants[0] = NULL;
-            }
+			if ((p = data->variants) != NULL)
+				g_strfreev (data->variants);
 
-          if (xkl_xkb_config_native_prepare (engine, data, &component_names))
-            {
-              keyboard_drawing_set_keyboard (KEYBOARD_DRAWING (kbdraw), &component_names);
+			data->layouts = g_new0 (char *, 2);
+			data->variants = g_new0 (char *, 2);
+			if (gkbd_keyboard_config_split_items
+			    (id, &layout, &variant)
+			    && variant != NULL) {
+				data->layouts[0] =
+				    (layout ==
+				     NULL) ? NULL : g_strdup (layout);
+				data->variants[0] =
+				    (variant ==
+				     NULL) ? NULL : g_strdup (variant);
+			} else {
+				data->layouts[0] =
+				    (id == NULL) ? NULL : g_strdup (id);
+				data->variants[0] = NULL;
+			}
 
-              xkl_xkb_config_native_cleanup (engine, &component_names);
-            }
-        }
-      g_object_unref (G_OBJECT (data));
-    }
+			if (xkl_xkb_config_native_prepare
+			    (engine, data, &component_names)) {
+				gkbd_keyboard_drawing_set_keyboard
+				    (GKBD_KEYBOARD_DRAWING (kbdraw),
+				     &component_names);
+
+				xkl_xkb_config_native_cleanup (engine,
+							       &component_names);
+			}
+		}
+		g_object_unref (G_OBJECT (data));
+	}
 #endif
 }

@@ -9,9 +9,7 @@ gnome_keyboard_properties_SOURCES = gnome-keyboard-properties.c \
                                     gnome-keyboard-properties-xkb.h
 gnome_keyboard_properties_LDADD =				\
 	../accessibility/keyboard/libaccessibility-keyboard.a 	\
-	$(GNOMECC_CAPPLETS_LIBS) $(LIBXKLAVIER_LIBS) \
-	../../libgswitchit/libgswitchit.a \
-	../../libkbdraw/libkbdraw.a
+	$(GNOMECC_CAPPLETS_LIBS) $(LIBGNOMEKBDUI_LIBS)
 
 @INTLTOOL_DESKTOP_RULE@
 
@@ -29,6 +27,6 @@ desktopdir = $(datadir)/applications
 Desktop_in_files = keyboard.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
-INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS) $(LIBXKLAVIER_CFLAGS)
+INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS) $(LIBGNOMEKBDUI_CFLAGS)
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA)
 EXTRA_DIST = $(Glade_DATA) $(pixmaps_DATA)
