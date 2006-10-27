@@ -224,7 +224,7 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 
 	gtk_widget_destroy (dlg);
 	
-	theme_props = g_new(theme_properties,1);
+	theme_props = g_new0 (theme_properties,1);
 	
 	theme_props->target_tmp_dir = g_strdup_printf ("%s/.themes/.theme-%u", 
 				 			g_get_home_dir(), 
