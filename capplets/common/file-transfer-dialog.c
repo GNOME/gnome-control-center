@@ -41,7 +41,8 @@ enum
 	PROP_TO_URI,
 	PROP_FRACTION_COMPLETE,
 	PROP_NTH_URI,
-	PROP_TOTAL_URIS
+	PROP_TOTAL_URIS,
+	PROP_PARENT
 };
 
 enum
@@ -57,9 +58,6 @@ struct _FileTransferDialogPrivate
 {
 	GtkWidget *progress; 
 	GtkWidget *status;
-	GtkWidget *current;
-	GtkWidget *from;
-	GtkWidget *to;
 	guint nth;
 	guint total;
 	GnomeVFSAsyncHandle *handle;
@@ -91,7 +89,9 @@ file_transfer_dialog_finalize (GObject *obj)
 static void
 file_transfer_dialog_update_num_files (FileTransferDialog *dlg)
 {
-	gchar *str = g_strdup_printf (_("Copying file: %u of %u"),
+	gchar *str = NULL;
+	if (dlg->priv->total > 1)
+		g_strdup_printf (_("Copying file: %u of %u"),
 				      dlg->priv->nth, dlg->priv->total);
 	gtk_progress_bar_set_text (GTK_PROGRESS_BAR (dlg->priv->progress), str);
 	g_free (str);
@@ -112,6 +112,7 @@ file_transfer_dialog_set_prop (GObject *object, guint prop_id, const GValue *val
 	gchar *str2;
 	gchar *base;
 	gchar *escaped;
+	GtkWindow *parent;
 
 	switch (prop_id)
 	{
@@ -120,30 +121,15 @@ file_transfer_dialog_set_prop (GObject *object, guint prop_id, const GValue *val
 		escaped = gnome_vfs_unescape_string_for_display (base);
 
 		str = g_strdup_printf (_("Copying '%s'"), escaped);
-		str2 = g_strdup_printf ("<i>%s</i>", str);
-		gtk_label_set_markup (GTK_LABEL (dlg->priv->current),
+		str2 = g_strdup_printf ("<big><b>%s</b></big>", str);
+		gtk_label_set_markup (GTK_LABEL (dlg->priv->status),
 				      str2);
 		g_free (base);
 		g_free (escaped);
 		g_free (str);
 		g_free (str2);
-
-		base = g_path_get_dirname (g_value_get_string (value));
-		escaped = gnome_vfs_format_uri_for_display (base);
-
-		gtk_label_set_text (GTK_LABEL (dlg->priv->from),
-				    escaped);
-		g_free (base);
-		g_free (escaped);
 		break;
 	case PROP_TO_URI:
-		base = g_path_get_dirname (g_value_get_string (value));
-		escaped = gnome_vfs_format_uri_for_display (base);
-
-		gtk_label_set_text (GTK_LABEL (dlg->priv->to),
-				    escaped);
-		g_free (base);
-		g_free (escaped);
 		break;
 	case PROP_FRACTION_COMPLETE:
 		gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (dlg->priv->progress), g_value_get_double (value));
@@ -156,9 +142,20 @@ file_transfer_dialog_set_prop (GObject *object, guint prop_id, const GValue *val
 		dlg->priv->total = g_value_get_uint (value);
 		file_transfer_dialog_update_num_files (dlg);
 		break;
+	case PROP_PARENT:
+		parent = g_value_get_pointer (value);
+		if (parent)
+		{
+			gtk_window_set_title (GTK_WINDOW (dlg), gtk_window_get_title (parent));
+			gtk_window_set_transient_for (GTK_WINDOW (dlg), parent);
+		}
+		else
+			gtk_window_set_title (GTK_WINDOW (dlg),
+					      _("Copying files"));
+		break;
 	}
 }
-	
+
 static void
 file_transfer_dialog_get_prop (GObject *object, guint prop_id, GValue *value, GParamSpec *pspec)
 {
@@ -186,6 +183,13 @@ file_transfer_dialog_class_init (FileTransferDialogClass *klass)
 	object_class->set_property = file_transfer_dialog_set_prop;
 
 	GTK_DIALOG_CLASS (klass)->response = file_transfer_dialog_response;
+
+	g_object_class_install_property
+		(object_class, PROP_PARENT,
+		 g_param_spec_pointer ("parent",
+				      _("Parent Window"),
+				      _("Parent window of the dialog"),
+				      G_PARAM_READWRITE));
 
 	g_object_class_install_property
 		(object_class, PROP_FROM_URI,
@@ -249,60 +253,6 @@ file_transfer_dialog_class_init (FileTransferDialogClass *klass)
 		G_OBJECT_CLASS (g_type_class_ref (GTK_TYPE_DIALOG));
 }
 
-/**
- * eel_gtk_label_make_bold.
- *
- * Switches the font of label to a bold equivalent.
- * @label: The label.
- **/
-static void
-eel_gtk_label_make_bold (GtkLabel *label)
-{
-	PangoFontDescription *font_desc;
-
-	font_desc = pango_font_description_new ();
-
-	pango_font_description_set_weight (font_desc,
-					   PANGO_WEIGHT_BOLD);
-
-	/* This will only affect the weight of the font, the rest is
-	 * from the current state of the widget, which comes from the
-	 * theme or user prefs, since the font desc only has the
-	 * weight flag turned on.
-	 */
-	gtk_widget_modify_font (GTK_WIDGET (label), font_desc);
-
-	pango_font_description_free (font_desc);
-}
-
-/* from nautilus */
-static void
-create_titled_label (GtkTable   *table,
-		     int         row,
-		     GtkWidget **title_widget,
-		     GtkWidget **label_text_widget)
-{
-	*title_widget = gtk_label_new ("");
-	eel_gtk_label_make_bold (GTK_LABEL (*title_widget));
-	gtk_misc_set_alignment (GTK_MISC (*title_widget), 1, 0);
-	gtk_table_attach (table, *title_widget,
-			  0, 1,
-			  row, row + 1,
-			  GTK_FILL, 0,
-			  0, 0);
-	gtk_widget_show (*title_widget);
-
-	*label_text_widget = gtk_label_new ("");
-	gtk_label_set_ellipsize (GTK_LABEL (*label_text_widget), PANGO_ELLIPSIZE_END);
-	gtk_table_attach (table, *label_text_widget,
-			  1, 2,
-			  row, row + 1,
-			  GTK_FILL | GTK_EXPAND, 0,
-			  0, 0);
-	gtk_widget_show (*label_text_widget);
-	gtk_misc_set_alignment (GTK_MISC (*label_text_widget), 0, 0);
-}
-
 static void
 file_transfer_dialog_init (FileTransferDialog *dlg)
 {
@@ -310,14 +260,15 @@ file_transfer_dialog_init (FileTransferDialog *dlg)
 	GtkWidget *hbox;
 	GtkWidget *progress_vbox;
 	GtkWidget *table;
-	GtkWidget *label;
 	char      *markup;
 
 	dlg->priv = g_new0 (FileTransferDialogPrivate, 1);
-	
+
 	gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (dlg)->vbox),
 					4);
 	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->vbox), 4);
+
+	gtk_widget_set_size_request (GTK_WIDGET (dlg), 350, -1);
 
 	vbox = gtk_vbox_new (FALSE, 6);
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), 6);
@@ -339,15 +290,6 @@ file_transfer_dialog_init (FileTransferDialog *dlg)
 	gtk_table_set_row_spacings (GTK_TABLE (table), 4);
 	gtk_table_set_col_spacings (GTK_TABLE (table), 4);
 
-	create_titled_label (GTK_TABLE (table), 0,
-			     &label, 
-			     &dlg->priv->from);
-	gtk_label_set_text (GTK_LABEL (label), _("From:"));
-	create_titled_label (GTK_TABLE (table), 1,
-			     &label, 
-			     &dlg->priv->to);
-	gtk_label_set_text (GTK_LABEL (label), _("To:"));
-
 	gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET (table), FALSE, FALSE, 0);
 
 	progress_vbox = gtk_vbox_new (TRUE, 0);
@@ -357,22 +299,15 @@ file_transfer_dialog_init (FileTransferDialog *dlg)
 	gtk_box_pack_start (GTK_BOX (progress_vbox),
 			    dlg->priv->progress, FALSE, FALSE, 0);
 
-	dlg->priv->current = gtk_label_new ("");
-	gtk_box_pack_start (GTK_BOX (progress_vbox),
-			    dlg->priv->current, FALSE, FALSE, 0);
-	gtk_misc_set_alignment (GTK_MISC (dlg->priv->current), 0.0, 0.5);
-
 	gtk_dialog_add_button (GTK_DIALOG (dlg),
 			       GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
 
-	gtk_window_set_title (GTK_WINDOW (dlg),
-			      _("Copying files"));
 	gtk_dialog_set_has_separator (GTK_DIALOG (dlg), FALSE);
 	gtk_container_set_border_width (GTK_CONTAINER (dlg), 6);
 
 	gtk_widget_show_all (GTK_DIALOG (dlg)->vbox);
 }
-	
+
 GType
 file_transfer_dialog_get_type (void)
 {
@@ -411,6 +346,14 @@ file_transfer_dialog_new (void)
 					 NULL));
 }
 
+GtkWidget*
+file_transfer_dialog_new_with_parent (GtkWindow *parent)
+{
+	return GTK_WIDGET (g_object_new (file_transfer_dialog_get_type (),
+					 "parent", parent, NULL));
+}
+
+
 static int
 file_transfer_dialog_update_cb (GnomeVFSAsyncHandle *handle,
 				GnomeVFSXferProgressInfo *info,
@@ -445,8 +388,8 @@ file_transfer_dialog_update_cb (GnomeVFSAsyncHandle *handle,
 	{
 	case GNOME_VFS_XFER_PHASE_INITIAL:
 		{
-			char *str = g_strdup_printf ("<i>%s</i>", _("Connecting..."));
-			gtk_label_set_markup (GTK_LABEL (dlg->priv->current),
+			char *str = g_strdup_printf ("<big><b>%s</b></big>", _("Connecting..."));
+			gtk_label_set_markup (GTK_LABEL (dlg->priv->status),
 					      str);
 			g_free (str);
 		}

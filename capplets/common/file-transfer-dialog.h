@@ -54,6 +54,7 @@ struct _FileTransferDialogClass
 
 GType	       file_transfer_dialog_get_type (void);
 GtkWidget*     file_transfer_dialog_new (void);
+GtkWidget*     file_transfer_dialog_new_with_parent (GtkWindow *parent);
 
 GnomeVFSResult file_transfer_dialog_wrap_async_xfer (FileTransferDialog *dlg,
 						     GList *source_uri_list,
