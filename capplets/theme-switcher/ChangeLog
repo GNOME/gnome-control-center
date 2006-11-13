@@ -1,3 +1,22 @@
+2006-11-13  Thomas Wood  <thos@gnome.org>
+
+	(gnome_theme_installer_run): Open transfer dialog with transient
+	parent set
+	
+	* gnome-theme-details.c: (remove_theme), (color_select),
+	(toggle_color_scheme_key), (gnome_theme_details_init),
+	(update_color_buttons_from_string),
+	(gnome_theme_details_update_from_gconf):
+	* gnome-theme-installer.c: (gnome_theme_install_from_uri),
+	* gnome-theme-installer.h:
+	* gnome-theme-manager.c: (free_all),
+	(gnome_theme_manager_drag_data_received_cb), (main):
+	* gnome-theme-manager.h:
+	* gnome-theme-save.c: (save_dialog_response):
+	* theme-properties.glade:
+
+	- Add a colours tab to change gtk-color-scheme setting
+
 2006-10-27  Thomas Wood  <thos@gnome.org>
 
 	* gnome-theme-installer.c: (transfer_done_cb): Hopefully fix bug

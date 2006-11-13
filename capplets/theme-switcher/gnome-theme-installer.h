@@ -24,7 +24,7 @@
 
 #include <gtk/gtk.h>
 
-void gnome_theme_install_from_uri (gchar * filename);
+void gnome_theme_install_from_uri (gchar * filename, GtkWindow *parent);
 
 void gnome_theme_installer_run (GtkWindow *parent, gchar *filename);
 void gnome_theme_installer_run_cb (GtkWidget *button, GtkWindow *parent_window);

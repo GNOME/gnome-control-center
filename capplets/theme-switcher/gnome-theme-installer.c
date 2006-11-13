@@ -511,7 +511,7 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 }
 
 void
-gnome_theme_install_from_uri (gchar * theme_filename)
+gnome_theme_install_from_uri (gchar * theme_filename, GtkWindow *parent)
 {
 	GtkWidget *dlg;
 	gchar *filename, *path, *base;
@@ -627,7 +627,7 @@ gnome_theme_install_from_uri (gchar * theme_filename)
 
 		target = g_list_append (NULL, gnome_vfs_uri_new (path));
 
-		dlg = file_transfer_dialog_new ();
+		dlg = file_transfer_dialog_new_with_parent (parent);
 		file_transfer_dialog_wrap_async_xfer (FILE_TRANSFER_DIALOG (dlg),
 						      src, target,
 						      GNOME_VFS_XFER_RECURSIVE,
@@ -676,7 +676,7 @@ gnome_theme_installer_run (GtkWindow *parent, gchar *filename)
 	if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT)
 	{
 		filename_selected = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
-		gnome_theme_install_from_uri (filename_selected);
+		gnome_theme_install_from_uri (filename_selected, parent);
 		g_free (filename_selected);
 	}
 

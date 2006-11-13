@@ -12,6 +12,7 @@
 #define MONOSPACE_FONT_KEY "/desktop/gnome/interface/monospace_font_name"
 #define BACKGROUND_KEY     "/desktop/gnome/background/picture_filename"
 #define LOCKDOWN_KEY       "/desktop/gnome/lockdown/disable_theme_settings"
+#define COLOR_SCHEME_KEY   "/desktop/gnome/interface/gtk_color_scheme"
 
 #define METACITY_THEME_DIR "/apps/metacity/general"
 #define METACITY_THEME_KEY METACITY_THEME_DIR "/theme"
@@ -80,6 +81,6 @@ void      gnome_theme_manager_drag_data_received_cb     (GtkWidget        *widge
 							 gpointer          data);
 
 
-
+void free_all (gpointer, ...);
 
 #endif /* __GNOME_THEME_MANAGER_H__ */

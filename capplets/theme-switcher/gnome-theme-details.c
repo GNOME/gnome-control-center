@@ -46,6 +46,7 @@ static void load_theme_names                (GtkTreeView        *tree_view,
 					     GList              *theme_list,
 					     const gchar        *default_theme);
 static char *path_to_theme_id               (const char *path);
+static void update_color_buttons_from_string (gchar *color_scheme);
 
 
 static char *
@@ -433,7 +434,7 @@ remove_theme(GtkWidget *button, gpointer data)
 								GTK_BUTTONS_OK_CANCEL,
 								_("Theme deleted succesfully. Please select another theme."));
 					gtk_list_store_remove (GTK_LIST_STORE(model), &iter);
-					gtk_dialog_run (info_dialog);
+					gtk_dialog_run (GTK_DIALOG (info_dialog));
 
 				} else {
 					info_dialog = gtk_message_dialog_new (NULL,
@@ -441,13 +442,87 @@ remove_theme(GtkWidget *button, gpointer data)
 								GTK_MESSAGE_ERROR,
 								GTK_BUTTONS_OK,
 								_("Theme can not be deleted"));
-					gtk_dialog_run (info_dialog);
+					gtk_dialog_run (GTK_DIALOG (info_dialog));
 				}
 				gtk_widget_destroy (info_dialog);
 				gnome_vfs_uri_list_free (uri_list);
 			}
 		}
   	}
+  }
+}
+
+void
+color_select (GtkWidget *colorbutton, gpointer dialog)
+{
+  GConfClient *client = NULL;
+  gchar *new_scheme;
+  GdkColor colors[6];
+  gchar *bg, *fg, *text, *base, *selected_fg, *selected_bg;
+  GtkWidget *widget;
+
+  widget = WID ("fg_colorbutton");
+  gtk_color_button_get_color (GTK_COLOR_BUTTON (widget), &colors[0]);
+  widget = WID ("bg_colorbutton");
+  gtk_color_button_get_color (GTK_COLOR_BUTTON (widget), &colors[1]);
+  widget = WID ("text_colorbutton");
+  gtk_color_button_get_color (GTK_COLOR_BUTTON (widget), &colors[2]);
+  widget = WID ("base_colorbutton");
+  gtk_color_button_get_color (GTK_COLOR_BUTTON (widget), &colors[3]);
+  widget = WID ("selected_fg_colorbutton");
+  gtk_color_button_get_color (GTK_COLOR_BUTTON (widget), &colors[4]);
+  widget = WID ("selected_bg_colorbutton");
+  gtk_color_button_get_color (GTK_COLOR_BUTTON (widget), &colors[5]);
+
+
+  fg = g_strdup_printf ("fg_color:#%.4x%.4x%.4x\n", colors[0].red, colors[0].green, colors[0].blue);
+  bg = g_strdup_printf ("bg_color:#%.4x%.4x%.4x\n", colors[1].red, colors[1].green, colors[1].blue);
+  text = g_strdup_printf ("text_color:#%.4x%.4x%.4x\n", colors[2].red, colors[2].green, colors[2].blue);
+  base = g_strdup_printf ("base_color:#%.4x%.4x%.4x\n", colors[3].red, colors[3].green, colors[3].blue);
+  selected_fg = g_strdup_printf ("selected_fg_color:#%.4x%.4x%.4x\n", colors[4].red, colors[4].green, colors[4].blue);
+  selected_bg = g_strdup_printf ("selected_bg_color:#%.4x%.4x%.4x", colors[5].red, colors[5].green, colors[5].blue);
+
+  new_scheme = g_strconcat (fg, bg, text, base, selected_fg, selected_bg, NULL);
+
+  client = gconf_client_get_default ();
+
+  /* Currently we assume this has only been called when one of the colours has
+   * actually changed, so we don't check the original key first
+   */
+  gconf_client_set_string (client, COLOR_SCHEME_KEY, new_scheme, NULL);
+
+  g_object_unref (G_OBJECT (client));
+  free_all (fg, bg, text, base, selected_fg, selected_bg, new_scheme, NULL);
+}
+
+void
+toggle_color_scheme_key (GtkWidget *checkbutton, gpointer *data)
+{
+  GConfClient *client = NULL;
+  gboolean use_theme_colors;
+  GladeXML *dialog;
+  GtkWidget *widget;
+  GtkSettings *settings;
+  gchar *color_scheme = NULL;
+
+  dialog = gnome_theme_manager_get_theme_dialog ();
+  use_theme_colors = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (checkbutton));
+
+  widget = WID ("color_scheme_table");
+  gtk_widget_set_sensitive (widget, !use_theme_colors);
+
+  if (use_theme_colors)
+  {
+    client = gconf_client_get_default ();
+    gconf_client_set_string (client, COLOR_SCHEME_KEY, "", NULL);
+    g_object_unref (G_OBJECT (client));
+  }
+  else
+  {
+    settings = gtk_settings_get_default ();
+    g_object_get (G_OBJECT (settings), "gtk-color-scheme", &color_scheme, NULL);
+    update_color_buttons_from_string (color_scheme);
+    g_free (color_scheme);
   }
 }
 
@@ -491,6 +566,27 @@ gnome_theme_details_init (void)
   g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (remove_theme), (gint*)THEME_ICON);
   widget = WID ("icon_install_button");
   g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_theme_installer_run_cb), parent);
+
+  /* color preferences */
+  widget = WID ("fg_colorbutton");
+  g_signal_connect (G_OBJECT (widget), "color_set", G_CALLBACK (color_select), dialog);
+  widget = WID ("bg_colorbutton");
+  g_signal_connect (G_OBJECT (widget), "color_set", G_CALLBACK (color_select), dialog);
+  widget = WID ("text_colorbutton");
+  g_signal_connect (G_OBJECT (widget), "color_set", G_CALLBACK (color_select), dialog);
+  widget = WID ("base_colorbutton");
+  g_signal_connect (G_OBJECT (widget), "color_set", G_CALLBACK (color_select), dialog);
+  widget = WID ("selected_fg_colorbutton");
+  g_signal_connect (G_OBJECT (widget), "color_set", G_CALLBACK (color_select), dialog);
+  widget = WID ("selected_bg_colorbutton");
+  g_signal_connect (G_OBJECT (widget), "color_set", G_CALLBACK (color_select), dialog);
+
+  widget = WID ("use_theme_colors_checkbutton");
+  g_signal_connect (G_OBJECT (widget), "toggled", G_CALLBACK (toggle_color_scheme_key), parent);
+
+  gchar *color_scheme;
+  g_object_get (G_OBJECT (gtk_settings_get_default()), "gtk-color-scheme", &color_scheme, NULL);
+  update_color_buttons_from_string (color_scheme);
 
 
   g_signal_connect (G_OBJECT (parent), "response", G_CALLBACK (cb_dialog_response), NULL);
@@ -718,14 +814,85 @@ update_list_something (GtkWidget *tree_view, const gchar *theme)
 }
 
 void
+update_color_buttons_from_string (gchar *color_scheme)
+{
+  GdkColor color_scheme_colors[6];
+  gchar **color_scheme_strings, **color_scheme_pair, *current_string;
+  gint i;
+  GtkWidget *widget;
+  GladeXML *dialog;
+
+  if (!color_scheme) return;
+  if (!strcmp (color_scheme, "")) return;
+
+  dialog = gnome_theme_manager_get_theme_dialog ();
+
+  /* The color scheme string consists of name:color pairs, seperated by
+   * newlines, so first we split the string up by new line */
+
+  color_scheme_strings = g_strsplit (color_scheme, "\n", 0);
+
+  /* loop through the name:color pairs, and save the colour if we recognise the name */
+  i = 0;
+  while ((current_string = color_scheme_strings[i++]))
+  {
+    color_scheme_pair = g_strsplit (current_string, ":", 0);
+
+    if (color_scheme_pair[0] == NULL)
+      continue;
+
+    g_strstrip (color_scheme_pair[0]);
+    g_strstrip (color_scheme_pair[1]);
+
+
+    if (!strcmp ("fg_color", color_scheme_pair[0]))
+      gdk_color_parse (color_scheme_pair[1], &color_scheme_colors[0]);
+    else if (!strcmp ("bg_color", color_scheme_pair[0]))
+      gdk_color_parse (color_scheme_pair[1], &color_scheme_colors[1]);
+    else if (!strcmp ("text_color", color_scheme_pair[0]))
+      gdk_color_parse (color_scheme_pair[1], &color_scheme_colors[2]);
+    else if (!strcmp ("base_color", color_scheme_pair[0]))
+      gdk_color_parse (color_scheme_pair[1], &color_scheme_colors[3]);
+    else if (!strcmp ("selected_fg_color", color_scheme_pair[0]))
+      gdk_color_parse (color_scheme_pair[1], &color_scheme_colors[4]);
+    else if (!strcmp ("selected_bg_color", color_scheme_pair[0]))
+      gdk_color_parse (color_scheme_pair[1], &color_scheme_colors[5]);
+
+    g_strfreev (color_scheme_pair);
+  }
+
+  g_strfreev (color_scheme_strings);
+
+  /* not sure whether we need to do this, but it can't hurt */
+  for (i = 0; i < 6; i++)
+    gdk_colormap_alloc_color (gdk_colormap_get_system (), &color_scheme_colors[i], FALSE, TRUE);
+
+  /* now set all the buttons to the correct settings */
+  widget = WID ("fg_colorbutton");
+  gtk_color_button_set_color (GTK_COLOR_BUTTON (widget), &color_scheme_colors[0]);
+  widget = WID ("bg_colorbutton");
+  gtk_color_button_set_color (GTK_COLOR_BUTTON (widget), &color_scheme_colors[1]);
+  widget = WID ("text_colorbutton");
+  gtk_color_button_set_color (GTK_COLOR_BUTTON (widget), &color_scheme_colors[2]);
+  widget = WID ("base_colorbutton");
+  gtk_color_button_set_color (GTK_COLOR_BUTTON (widget), &color_scheme_colors[3]);
+  widget = WID ("selected_fg_colorbutton");
+  gtk_color_button_set_color (GTK_COLOR_BUTTON (widget), &color_scheme_colors[4]);
+  widget = WID ("selected_bg_colorbutton");
+  gtk_color_button_set_color (GTK_COLOR_BUTTON (widget), &color_scheme_colors[5]);
+
+}
+
+void
 gnome_theme_details_update_from_gconf (void)
 {
   GConfClient *client;
   GladeXML *dialog;
-  GtkWidget *tree_view;
-  gchar *theme;
+  GtkWidget *tree_view, *widget;
+  gchar *theme = NULL;
   GnomeWindowManager *window_manager = NULL;
   GnomeWMSettings wm_settings;
+  gboolean use_theme_colors = TRUE;
 
   gnome_theme_details_init ();
 
@@ -750,6 +917,25 @@ gnome_theme_details_update_from_gconf (void)
   tree_view = WID ("icon_theme_treeview");
   theme = gconf_client_get_string (client, ICON_THEME_KEY, NULL);
   update_list_something (tree_view, theme);
-  g_object_unref (client);
   g_free (theme);
+
+
+  /* color preferences */
+
+  theme = gconf_client_get_string (client, COLOR_SCHEME_KEY, NULL);
+  if (theme)
+  {
+    use_theme_colors = !strcmp ("", theme);
+    update_color_buttons_from_string (theme);
+    g_free (theme);
+  }
+
+  widget = WID ("use_theme_colors_checkbutton");
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), use_theme_colors);
+
+  widget = WID ("color_scheme_table");
+  gtk_widget_set_sensitive (widget, !use_theme_colors);
+
+
+  g_object_unref (client);
 }

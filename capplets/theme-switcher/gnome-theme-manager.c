@@ -117,6 +117,17 @@ typedef struct {
   gboolean cancelled;
 } PixbufAsyncData;
 
+void free_all (gpointer a, ...)
+{
+  va_list list;
+  gpointer tmp;
+  va_start (list, a);
+  while ((tmp = va_arg (list, gpointer)))
+	  g_free(tmp);
+  va_end (list);
+}
+
+
 static void
 pixbuf_async_func (GdkPixbuf *pixbuf,
 		   gpointer   data)
@@ -1531,6 +1542,7 @@ gnome_theme_manager_drag_data_received_cb (GtkWidget *widget, GdkDragContext *co
 {
 	GList *uris;
 	gchar *filename = NULL;
+	GtkWidget *toplevel;
 
 	if (!(info == TARGET_URI_LIST || info == TARGET_NS_URL))
 		return;
@@ -1550,8 +1562,10 @@ gnome_theme_manager_drag_data_received_cb (GtkWidget *widget, GdkDragContext *co
 
 		gnome_vfs_uri_list_unref (uris);
 	}
-
-	gnome_theme_install_from_uri (filename);
+	toplevel = gtk_widget_get_toplevel (widget);
+	if (!GTK_WIDGET_TOPLEVEL (toplevel))
+		toplevel = NULL;
+	gnome_theme_install_from_uri (filename, GTK_WINDOW (toplevel));
 	g_free (filename);
 }
 
@@ -1620,7 +1634,7 @@ main (int argc, char *argv[])
 		      NULL);
 
   if (install_filename != NULL)
-     gnome_theme_install_from_uri (install_filename);
+     gnome_theme_install_from_uri (install_filename, NULL);
   g_free (install_filename);
 
   gtk_theme_default_name = get_default_string_from_key (GTK_THEME_KEY);

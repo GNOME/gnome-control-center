@@ -279,7 +279,7 @@ save_dialog_response (GtkWidget *save_dialog,
       theme_description = escape_string_and_dup (buffer_text);
       g_free (buffer_text);
       meta_theme_info = (GnomeThemeMetaInfo *) g_object_get_data (G_OBJECT (save_dialog), "meta-theme-info");
-      save_background = gtk_toggle_button_get_active (/*GTK_TOGGLE_BUTTON*/ (WID ("save_background_checkbutton")));
+      save_background = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (WID ("save_background_checkbutton")));
       if (! save_theme_to_disk (meta_theme_info, theme_name, theme_description, save_background, &error))
 	{
 	  goto out;
