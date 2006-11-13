@@ -1,4 +1,4 @@
-SUBDIRS = po libsounds libbackground libwindow-settings gnome-settings-daemon capplets control-center help vfs-methods idl schemas $(TYPING_BREAK)
+SUBDIRS = po libsounds libbackground libwindow-settings libslab gnome-settings-daemon capplets shell help vfs-methods idl schemas $(TYPING_BREAK)
 
 ACLOCAL_AMFLAGS = -I m4
 

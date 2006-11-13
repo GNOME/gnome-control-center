@@ -96,8 +96,9 @@ COMMON_MODULES="gtk+-2.0 >= 2.3.0 dnl
  libbonobo-2.0 dnl
  libbonoboui-2.0 dnl
  gnome-desktop-2.0 >= 2.2.0"
+PKG_CHECK_MODULES(LIBSLAB, $COMMON_MODULES gnome-desktop-2.0 librsvg-2.0 libgnome-menu pango)
 PKG_CHECK_MODULES(CAPPLET, $COMMON_MODULES)
-PKG_CHECK_MODULES(GNOMECC, $COMMON_MODULES libgnome-menu >= 2.10.1)
+PKG_CHECK_MODULES(GNOMECC, $COMMON_MODULES libgnome-menu >= 2.10.1 libpanelapplet-2.0)
 PKG_CHECK_MODULES(GNOME_SETTINGS_DAEMON,
   [gtk+-2.0 gconf-2.0 libgnomeui-2.0 esound gnome-desktop-2.0 libglade-2.0])
 PKG_CHECK_MODULES(OLD_CAPPLET, libgnomeui-2.0 libglade-2.0)
@@ -594,11 +595,12 @@ AC_CONFIG_FILES([
 Makefile
 po/Makefile.in
 idl/Makefile
+libslab/Makefile
 gnome-settings-daemon/Makefile
 gnome-settings-daemon/xrdb/Makefile
 gnome-settings-daemon/actions/Makefile
 gnome-settings-daemon/gnome-settings-daemon.pc
-control-center/Makefile
+shell/Makefile
 libbackground/Makefile
 libwindow-settings/Makefile
 libwindow-settings/gnome-window-settings-2.0.pc
