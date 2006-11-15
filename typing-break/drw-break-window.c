@@ -422,7 +422,7 @@ postpone_entry_activate_cb (GtkWidget      *entry,
 			  DrwBreakWindow *window)
 {
 	const gchar *str;
-	const gchar *phrase;
+	gchar *phrase;
 	GConfClient *client = gconf_client_get_default();
 
 	str = gtk_entry_get_text (GTK_ENTRY (entry));
@@ -434,9 +434,11 @@ postpone_entry_activate_cb (GtkWidget      *entry,
 	
 	if (!strcmp (str, phrase)) {
 		g_signal_emit (window, signals[POSTPONE], 0, NULL);
+		g_free (phrase);
 		return;
 	}
 
+	g_free (phrase);
 	gtk_entry_set_text (GTK_ENTRY (entry), "");
 }
 

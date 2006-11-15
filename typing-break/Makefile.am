@@ -1,6 +1,5 @@
 INCLUDES =						\
 	@GNOME_CFLAGS@					\
-	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
 	-DIMAGEDIR=\"$(GNOMECC_PIXMAPS_DIR)\"
 
 bin_PROGRAMS = gnome-typing-monitor

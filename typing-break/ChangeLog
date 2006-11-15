@@ -1,3 +1,9 @@
+2006-11-15  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* Makefile.am: Don't redefine GNOMELOCALEDIR.
+	* drw-break-window.c: (postpone_entry_activate_cb):
+	Don't use a const char * to allocate and free strings.
+
 2006-07-25  Vincent Untz <vuntz@gnome.org>
 
 	* eggtrayicon.[ch]: kill
