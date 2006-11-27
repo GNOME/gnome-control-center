@@ -63,7 +63,7 @@ file_theme_type(gchar *dir)
 {
 	gchar *file_contents;
 	gchar *filename = NULL;
-	gint file_size;
+	gint file_size, theme_type;
 	GPatternSpec *pattern;
 	char *uri;
 	GnomeVFSURI *src_uri;
@@ -98,6 +98,7 @@ file_theme_type(gchar *dir)
 		gnome_vfs_uri_unref (src_uri);
 		return THEME_GTK;
 	}
+        gnome_vfs_uri_unref (src_uri);
 	
 	filename = g_strdup_printf ("%s/metacity-1/metacity-theme-1.xml",dir);
 	src_uri = gnome_vfs_uri_new (filename);
@@ -106,6 +107,7 @@ file_theme_type(gchar *dir)
 		gnome_vfs_uri_unref (src_uri);
 		return THEME_METACITY;
 	}
+        gnome_vfs_uri_unref (src_uri);
 	
 	
 	filename = g_strdup_printf ("%s/configure.in",dir);
@@ -115,6 +117,7 @@ file_theme_type(gchar *dir)
 		gnome_vfs_uri_unref (src_uri);
 		return THEME_ENGINE;
 	}
+        gnome_vfs_uri_unref (src_uri);
 	
 	return THEME_INVALID;
 }
