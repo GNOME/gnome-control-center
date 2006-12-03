@@ -1,3 +1,16 @@
+2006-12-03  Thomas Wood  <thos@gnome.org>
+
+	* gnome-theme-installer.c: (theme_properties_free),
+	(file_theme_type), (missing_utility_message_dialog),
+	(extract_files_error_dialog), (transfer_done_targz_idle_cb),
+	(transfer_done_tarbz2_idle_cb), (transfer_done_cb),
+	(gnome_theme_install_from_uri), (gnome_theme_installer_run):
+
+	- Cleanup some of the install code
+	- Implement bug 325300 - Theme manager should be able to handle archives
+	  with icon, gtk+ and metacity themes
+	- Implement bug 326103 - Allow installing a theme from a directory
+
 2006-11-27  Thomas Wood  <thos@gnome.org>
 
 	* gnome-theme-installer.c: (file_theme_type): Applied patch from
