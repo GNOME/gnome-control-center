@@ -20,3 +20,5 @@ sys_DATA = $(sys_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
 EXTRA_DIST = gnomecc.desktop.in
+
+DISTCLEANFILES = gnomecc.desktop

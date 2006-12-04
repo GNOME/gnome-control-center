@@ -8,7 +8,7 @@ PKG_NAME="control-center"
 
 (test -f $srcdir/configure.in \
   && test -f $srcdir/autogen.sh \
-  && test -d $srcdir/control-center) || {
+  && test -d $srcdir/shell) || {
     echo -n "**Error**: Directory "\`$srcdir\'" does not look like the"
     echo " top-level $PKG_NAME directory"
     exit 1
