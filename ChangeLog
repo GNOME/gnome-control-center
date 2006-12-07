@@ -1,3 +1,32 @@
+2006-12-07  William Jon McCann  <mccann@jhu.edu>
+
+	* gnome-settings-daemon/Makefile.am:
+	* gnome-settings-daemon/actions/Makefile.am:
+	* gnome-settings-daemon/actions/acme.glade:
+	* gnome-settings-daemon/actions/gnome-speakernotes-muted.png:
+	* gnome-settings-daemon/actions/gnome-speakernotes.png:
+	* gnome-settings-daemon/gnome-settings-multimedia-keys.c:
+	(execute), (dialog_init), (unhookup_keysym), (update_kbd_cb),
+	(init_kbd), (dialog_show), (do_eject_action), (do_sound_action),
+	(gnome_settings_multimedia_keys_load):
+	* gnome-settings-daemon/gsd-media-keys-window.c: (hide_timeout),
+	(remove_hide_timeout), (add_hide_timeout), (update_window),
+	(volume_controls_set_visible), (window_set_icon_name),
+	(window_set_icon_file), (action_changed), (volume_level_changed),
+	(volume_muted_changed), (gsd_media_keys_window_set_action),
+	(gsd_media_keys_window_set_volume_muted),
+	(gsd_media_keys_window_set_volume_level), (curved_rectangle),
+	(draw_action_eject), (draw_waves), (draw_speaker),
+	(draw_volume_boxes), (draw_action_volume), (draw_action),
+	(on_expose_event), (gsd_media_keys_window_real_show),
+	(gsd_media_keys_window_real_hide),
+	(gsd_media_keys_window_class_init), (initialize_alpha_mode),
+	(gsd_media_keys_window_init), (gsd_media_keys_window_finalize),
+	(gsd_media_keys_window_new):
+	* gnome-settings-daemon/gsd-media-keys-window.h:
+	Add a new media keys window that takes advantage of
+	compositing when available.  Fixes #383066
+
 2006-12-04  Rodrigo Moya <rodrigo@novell.com>
 
 	* configure.in:

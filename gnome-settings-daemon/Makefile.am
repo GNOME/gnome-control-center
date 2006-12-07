@@ -44,6 +44,8 @@ gnome_settings_daemon_SOURCES =	\
 	gnome-settings-dbus.c		\
 	gnome-settings-xrdb.c		\
 	gnome-settings-xrdb.h		\
+	gsd-media-keys-window.c		\
+	gsd-media-keys-window.h		\
 	xsettings-common.c		\
 	xsettings-manager.c		\
 	xsettings-common.h		\

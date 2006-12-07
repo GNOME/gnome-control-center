@@ -1,5 +1,7 @@
-/* 
- * Copyright (C) 2001,2002,2003 Bastien Nocera <hadess@hadess.net>
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*-
+ *
+ * Copyright (C) 2001-2003 Bastien Nocera <hadess@hadess.net>
+ * Copyright (C) 2006      William Jon McCann <mccann@jhu.edu>
  *
  * gnome-settings-multimedia-keys.c
  *
@@ -30,17 +32,16 @@
 #include <gdk/gdkx.h>
 #include <gtk/gtk.h>
 
-#include <glade/glade.h>
 #include <gconf/gconf-client.h>
 
 #include "eggaccelerators.h"
 
 #include "actions/acme.h"
 #include "actions/acme-volume.h"
+#include "gsd-media-keys-window.h"
 
-#define DIALOG_TIMEOUT 1000     /* dialog timeout in ms */
 #define VOLUME_STEP 6           /* percents for one volume button press */
-                                                                                
+
 /* we exclude shift, GDK_CONTROL_MASK and GDK_MOD1_MASK since we know what
    these modifiers mean
    these are the mods whose combinations are bound by the keygrabbing code */
@@ -52,21 +53,13 @@
 
 typedef struct {
 	AcmeVolume *volobj;
-	GladeXML *xml;
 	GtkWidget *dialog;
 	GConfClient *conf_client;
-	guint dialog_timeout;
 
 	/* Multihead stuff */
 	GdkScreen *current_screen;
 	GSList *screens;
 } Acme;
-
-enum {
-	ICON_MUTED,
-	ICON_LOUD,
-	ICON_EJECT,
-};
 
 static void
 acme_error (char * msg)
@@ -93,17 +86,17 @@ execute (char *cmd, gboolean sync)
 	gboolean retval;
 	gchar **argv;
 	gint argc;
-	
+
 	retval = FALSE;
 
 	if (g_shell_parse_argv (cmd, &argc, &argv, NULL)) {
 		if (sync != FALSE) {
-			retval = g_spawn_sync (g_get_home_dir (), 
+			retval = g_spawn_sync (g_get_home_dir (),
 			                       argv, NULL, G_SPAWN_SEARCH_PATH,
 			                       NULL, NULL, NULL, NULL, NULL, NULL);
 		}
 		else {
-			retval = g_spawn_async (g_get_home_dir (), 
+			retval = g_spawn_async (g_get_home_dir (),
 			                        argv, NULL, G_SPAWN_SEARCH_PATH,
 			                        NULL, NULL, NULL, NULL);
 		}
@@ -137,40 +130,11 @@ do_sleep_action (char *cmd1, char *cmd2)
 	}
 }
 
-static char *images[] = {
-	PIXMAPSDIR "/gnome-speakernotes-muted.png",
-	PIXMAPSDIR "/gnome-speakernotes.png",
-	PIXMAPSDIR "/acme-eject.png",
-};
-
-static void
-acme_image_set (Acme *acme, int icon)
-{
-	GtkWidget *image;
-
-	image = glade_xml_get_widget (acme->xml, "image1");
-	g_return_if_fail (image != NULL);
-
-	if (icon > ICON_EJECT)
-		g_assert_not_reached ();
-
-	gtk_image_set_from_file (GTK_IMAGE(image), images[icon]);
-}
-
 static void
 dialog_init (Acme *acme)
 {
-	if (acme->xml == NULL) {
-		glade_gnome_init ();
-		acme->xml = glade_xml_new (DATADIR "/control-center-2.0/interfaces/acme.glade", NULL, NULL);
-
-		if (acme->xml == NULL) {
-			acme_error (_("Couldn't load the Glade file.\n"
-				      "Make sure that this daemon is properly installed."));
-			return;
-		}
-		acme->dialog = glade_xml_get_widget (acme->xml, "dialog");
-		acme_image_set (acme, ICON_LOUD);
+	if (acme->dialog == NULL) {
+		acme->dialog = gsd_media_keys_window_new ();
 	}
 }
 
@@ -227,7 +191,7 @@ grab_key (Acme *acme, Key *key, gboolean grab)
 	}
 }
 
-static void                                                                     
+static void
 unhookup_keysym (int keycode)
 {
 	char *command;
@@ -238,7 +202,7 @@ unhookup_keysym (int keycode)
 	command = g_strdup_printf ("xmodmap -e \"keycode %d = \"", keycode);
 	g_spawn_command_line_sync (command, NULL, NULL, NULL, NULL);
 	g_free (command);
-}                                                                               
+}
 
 static gboolean
 hookup_keysym (int keycode, const char *keysym)
@@ -359,14 +323,14 @@ update_kbd_cb (GConfClient *client, guint id, GConfEntry *entry, gpointer data)
 				break;
 			case PAUSE_KEY:
 				hookup_keysym (key->keycode, "XF86AudioPause");
-				break; 
+				break;
 			case STOP_KEY:
 				hookup_keysym (key->keycode, "XF86AudioStop");
 				break;
 			case PREVIOUS_KEY:
 				hookup_keysym (key->keycode, "XF86AudioPrev");
 				break;
-			case NEXT_KEY:                                                
+			case NEXT_KEY:
 				hookup_keysym (key->keycode, "XF86AudioNext");
 				break;
 			}
@@ -462,17 +426,17 @@ init_kbd (Acme *acme)
 					       keys[i].gconf_key, NULL);
 		if (!is_valid_shortcut (tmp)) {
 			g_free (tmp);
-			continue;                                           
-		}                                               
+			continue;
+		}
 
 		key = g_new0 (Key, 1);
 		if (egg_accelerator_parse_virtual (tmp, &key->keysym, &key->keycode, &key->state) == FALSE
 		    || key->keycode == 0)
-		{                                       
+		{
 			g_free (tmp);
 			g_free (key);
 			continue;
-		}                                               
+		}
 		g_free (tmp);
 
 		keys[i].key = key;
@@ -494,14 +458,6 @@ init_kbd (Acme *acme)
 			break;
 		}
 	}
-}
-
-static gboolean
-dialog_hide (Acme *acme)
-{
-	gtk_widget_hide (acme->dialog);
-	acme->dialog_timeout = 0;
-	return FALSE;
 }
 
 static void
@@ -535,7 +491,7 @@ dialog_show (Acme *acme)
 		monitor = gdk_screen_get_monitor_at_point (acme->current_screen,
 							   pointer_x, pointer_y);
 	}
-		
+
 	gdk_screen_get_monitor_geometry (acme->current_screen, monitor,
 					 &geometry);
 
@@ -550,9 +506,6 @@ dialog_show (Acme *acme)
 	gtk_widget_show (acme->dialog);
 
 	gdk_display_sync (gdk_screen_get_display (acme->current_screen));
-
-	acme->dialog_timeout = gtk_timeout_add (DIALOG_TIMEOUT,
-			(GtkFunction) dialog_hide, acme);
 }
 
 static void
@@ -655,40 +608,26 @@ do_exit_action (Acme *acme)
 static void
 do_eject_action (Acme *acme)
 {
-	GtkWidget *progress;
 	char *command;
 
-	if (acme->dialog_timeout != 0)
-	{
-		gtk_timeout_remove (acme->dialog_timeout);
-		acme->dialog_timeout = 0;
-	}
-
 	dialog_init (acme);
-	progress = glade_xml_get_widget (acme->xml, "progressbar");
-	gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (progress),
-			(double) 0);
-	gtk_widget_set_sensitive (progress, FALSE);
-
-	acme_image_set (acme, ICON_EJECT);
+	gsd_media_keys_window_set_action (GSD_MEDIA_KEYS_WINDOW (acme->dialog),
+					  GSD_MEDIA_KEYS_WINDOW_ACTION_EJECT);
 	dialog_show (acme);
 
 	command = gconf_client_get_string (acme->conf_client,
-			GCONF_MISC_DIR "/eject_command", NULL);
+					   GCONF_MISC_DIR "/eject_command", NULL);
 	if ((command != NULL) && (strcmp (command, "") != 0))
-		execute (command, TRUE);
+		execute (command, FALSE);
 	else
-		execute ("eject", TRUE);
+		execute ("eject", FALSE);
 
 	g_free (command);
-
-	gtk_widget_set_sensitive (progress, TRUE);
 }
 
 static void
 do_sound_action (Acme *acme, int type)
 {
-	GtkWidget *progress;
 	gboolean muted;
 	int vol;
 	int vol_step;
@@ -697,23 +636,18 @@ do_sound_action (Acme *acme, int type)
 		return;
 
 	vol_step = gconf_client_get_int (acme->conf_client,
-			GCONF_MISC_DIR "/volume_step", NULL);
+					 GCONF_MISC_DIR "/volume_step", NULL);
 
 	if (vol_step == 0)
 		vol_step = VOLUME_STEP;
 
-	if (acme->dialog_timeout != 0)
-	{
-		gtk_timeout_remove (acme->dialog_timeout);
-		acme->dialog_timeout = 0;
-	}
-
+	/* FIXME: this is racy */
 	vol = acme_volume_get_volume (acme->volobj);
 	muted = acme_volume_get_mute (acme->volobj);
 
 	switch (type) {
 	case MUTE_KEY:
-		acme_volume_mute_toggle(acme->volobj);
+		acme_volume_mute_toggle (acme->volobj);
 		break;
 	case VOLUME_DOWN_KEY:
 		if (muted)
@@ -733,16 +667,18 @@ do_sound_action (Acme *acme, int type)
 		break;
 	}
 
-	muted = acme_volume_get_mute(acme->volobj);
-	dialog_init (acme);
-	acme_image_set (acme, muted ? ICON_MUTED : ICON_LOUD);
-
+	muted = acme_volume_get_mute (acme->volobj);
 	vol = acme_volume_get_volume (acme->volobj);
 
-	progress = glade_xml_get_widget (acme->xml, "progressbar");
-	gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (progress),
-			(double) vol / 100);
-
+	/* FIXME: AcmeVolume should probably emit signals
+	   instead of doing it like this */
+	dialog_init (acme);
+	gsd_media_keys_window_set_volume_muted (GSD_MEDIA_KEYS_WINDOW (acme->dialog),
+						muted);
+	gsd_media_keys_window_set_volume_level (GSD_MEDIA_KEYS_WINDOW (acme->dialog),
+						vol);
+	gsd_media_keys_window_set_action (GSD_MEDIA_KEYS_WINDOW (acme->dialog),
+					  GSD_MEDIA_KEYS_WINDOW_ACTION_VOLUME);
 	dialog_show (acme);
 }
 
@@ -863,25 +799,23 @@ void
 gnome_settings_multimedia_keys_init (GConfClient *client)
 {
 }
+
 void
 gnome_settings_multimedia_keys_load (GConfClient *client)
 {
 	GSList *l;
 	Acme   *acme;
-	GError *err = NULL;
 
 	acme = g_new0 (Acme, 1);
-	acme->xml = NULL;
 
 	acme->conf_client = client;
 	gconf_client_add_dir (acme->conf_client,
-		GCONF_BINDING_DIR,
-		GCONF_CLIENT_PRELOAD_ONELEVEL,
-		NULL);
+			      GCONF_BINDING_DIR,
+			      GCONF_CLIENT_PRELOAD_ONELEVEL,
+			      NULL);
 
 	init_screens (acme);
 	init_kbd (acme);
-	acme->dialog_timeout = 0;
 
 	/* initialise Volume handler */
 	acme->volobj = acme_volume_new();

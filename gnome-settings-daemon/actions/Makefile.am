@@ -32,7 +32,7 @@ Datadir = $(datadir)/control-center-2.0/interfaces/
 Data_DATA = acme.glade
 
 pixmapsdir = $(GNOMECC_PIXMAPS_DIR)
-pixmaps_DATA = acme-eject.png gnome-speakernotes-muted.png gnome-speakernotes.png
+pixmaps_DATA = acme-eject.png
 
 EXTRA_DIST =					\
 	acme-volume-alsa.c acme-volume-alsa.h	\
