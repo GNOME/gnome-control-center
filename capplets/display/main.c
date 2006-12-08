@@ -314,7 +314,7 @@ wrap_in_label (GtkWidget *child, char *text)
   vbox = gtk_vbox_new (FALSE, 6);
   label = NULL;
 
-  label = gtk_label_new ("");
+  label = gtk_label_new (NULL);
 
   str = g_strdup_printf ("<b>%s</b>", text);
   gtk_label_set_markup (GTK_LABEL (label), str);
@@ -670,6 +670,7 @@ create_dialog (struct DisplayInfo *info)
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (per_computer_check),
 				    resolution != NULL);
       info->was_per_computer = resolution != NULL;
+      g_free (resolution);
       
       gtk_widget_show (per_computer_check);
       

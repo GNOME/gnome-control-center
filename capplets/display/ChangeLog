@@ -1,3 +1,9 @@
+2006-12-08  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* main.c: (wrap_in_label), (create_dialog):
+	Don't leak the resolution. Pass NULL to gtk_label_new
+	to do less work. Bug #376949.
+
 2006-09-15  Brian Cameron <brian.cameron@sun.com>
 
 	Fixes #356075
