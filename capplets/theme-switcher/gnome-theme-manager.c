@@ -621,9 +621,9 @@ meta_theme_selection_changed (GtkTreeSelection *selection,
       current_window_theme = g_strdup ("");
 
 	initial_meta_theme_info.name = g_strdup ("__Initial Theme__");
-	initial_meta_theme_info.gtk_theme_name = g_strdup (current_gtk_theme);
-	initial_meta_theme_info.metacity_theme_name = g_strdup (current_window_theme);
- 	initial_meta_theme_info.icon_theme_name = g_strdup (current_icon_theme);
+	initial_meta_theme_info.gtk_theme_name = current_gtk_theme;
+	initial_meta_theme_info.metacity_theme_name = current_window_theme;
+ 	initial_meta_theme_info.icon_theme_name = current_icon_theme;
 	themes_loaded = TRUE;
   } else {
 	  if (!reverted) {
