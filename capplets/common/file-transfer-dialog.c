@@ -274,7 +274,7 @@ file_transfer_dialog_init (FileTransferDialog *dlg)
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), 6);
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox), vbox, TRUE, TRUE, 0);
 
-	dlg->priv->status = gtk_label_new ("");
+	dlg->priv->status = gtk_label_new (NULL);
 	markup = g_strdup_printf ("<big><b>%s</b></big>", _("Copying files"));
 	gtk_label_set_markup (GTK_LABEL (dlg->priv->status), markup);
 	g_free (markup);
