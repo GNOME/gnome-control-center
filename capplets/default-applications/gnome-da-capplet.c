@@ -160,7 +160,8 @@ web_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
     GnomeDAWebItem *item;
     GConfChangeSet *cs;
     GError *error = NULL;
-
+    char *http_cmd;
+    
     gtk_combo_box_get_active_iter (combo, &iter);
     path = gtk_tree_model_get_path (gtk_combo_box_get_model (combo), &iter);
     current_index = gtk_tree_path_get_indices (path)[0];
@@ -200,8 +201,9 @@ web_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
 	is_custom_active = TRUE;
     }
 
-    gtk_entry_set_text (GTK_ENTRY (capplet->web_browser_command_entry),
-			gconf_client_get_string (capplet->gconf, DEFAULT_APPS_KEY_HTTP_EXEC, NULL));
+    http_cmd = gconf_client_get_string (capplet->gconf, DEFAULT_APPS_KEY_HTTP_EXEC, NULL);
+    gtk_entry_set_text (GTK_ENTRY (capplet->web_browser_command_entry), http_cmd);
+    g_free (http_cmd);
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (capplet->web_browser_terminal_checkbutton),
 				  gconf_client_get_bool (capplet->gconf, DEFAULT_APPS_KEY_HTTP_NEEDS_TERM, NULL));
 
@@ -224,7 +226,8 @@ mail_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
     GnomeDAMailItem *item;
     GConfChangeSet *cs;
     GError *error = NULL;
-
+    char *mailer_cmd;
+    
     gtk_combo_box_get_active_iter (combo, &iter);
     path = gtk_tree_model_get_path (gtk_combo_box_get_model (combo), &iter);
     current_index = gtk_tree_path_get_indices (path)[0];
@@ -253,8 +256,9 @@ mail_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
 	is_custom_active = TRUE;
     }
 
-    gtk_entry_set_text (GTK_ENTRY (capplet->mail_reader_command_entry),
-			gconf_client_get_string (capplet->gconf, DEFAULT_APPS_KEY_MAILER_EXEC, NULL));
+    mailer_cmd = gconf_client_get_string (capplet->gconf, DEFAULT_APPS_KEY_MAILER_EXEC, NULL);
+    gtk_entry_set_text (GTK_ENTRY (capplet->mail_reader_command_entry), mailer_cmd);
+    g_free (mailer_cmd);
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (capplet->mail_reader_terminal_checkbutton),
 				  gconf_client_get_bool (capplet->gconf, DEFAULT_APPS_KEY_MAILER_NEEDS_TERM, NULL));
 
@@ -273,6 +277,7 @@ terminal_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
     GnomeDATermItem *item;
     GConfChangeSet *cs;
     GError *error = NULL;
+    char *terminal_cmd, *terminal_cmd_arg;
 
     gtk_combo_box_get_active_iter (combo, &iter);
     path = gtk_tree_model_get_path (gtk_combo_box_get_model (combo), &iter);
@@ -301,11 +306,12 @@ terminal_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
     else {
 	is_custom_active = TRUE;
     }
-
-    gtk_entry_set_text (GTK_ENTRY (capplet->terminal_command_entry),
-			gconf_client_get_string (capplet->gconf, DEFAULT_APPS_KEY_TERMINAL_EXEC, NULL));
-    gtk_entry_set_text (GTK_ENTRY (capplet->terminal_exec_flag_entry),
-			gconf_client_get_string (capplet->gconf, DEFAULT_APPS_KEY_TERMINAL_EXEC_ARG, NULL));
+    terminal_cmd = gconf_client_get_string (capplet->gconf, DEFAULT_APPS_KEY_TERMINAL_EXEC, NULL);
+    terminal_cmd_arg = gconf_client_get_string (capplet->gconf, DEFAULT_APPS_KEY_TERMINAL_EXEC_ARG, NULL);
+    gtk_entry_set_text (GTK_ENTRY (capplet->terminal_command_entry), terminal_cmd);
+    gtk_entry_set_text (GTK_ENTRY (capplet->terminal_exec_flag_entry), terminal_cmd_arg);
+    g_free (terminal_cmd);
+    g_free (terminal_cmd_arg);
 
     gtk_editable_set_editable (GTK_EDITABLE (capplet->terminal_command_entry), is_custom_active);
     gtk_widget_set_sensitive (capplet->terminal_command_label, is_custom_active);

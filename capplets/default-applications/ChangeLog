@@ -1,3 +1,10 @@
+2006-12-08  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* gnome-da-capplet.c: (web_combo_changed_cb),
+	(mail_combo_changed_cb), (terminal_combo_changed_cb):
+	Fix a bunch of leaks from gconf_client_get_string()
+	Bug #376949.	
+
 2006-10-09  Luca Cavalli  <lcavalli@cvs.gnome.org>
 
 	* gnome-da-capplet.c: (web_gconf_changed_cb):
