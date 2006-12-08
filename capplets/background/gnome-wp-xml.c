@@ -266,6 +266,7 @@ void gnome_wp_xml_load_list (GnomeWPCapplet * capplet) {
   if (g_file_test (wpdbfile, G_FILE_TEST_EXISTS)) {
     gnome_wp_xml_load_xml (capplet, wpdbfile);
   } else {
+    g_free (wpdbfile);
     wpdbfile = g_build_filename (g_get_home_dir (),
 				 ".gnome2",
 				 "wp-list.xml",
