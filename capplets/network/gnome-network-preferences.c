@@ -120,7 +120,7 @@ cb_add_url (GtkButton *button, gpointer data)
 	new_url = g_strdup(gtk_entry_get_text(GTK_ENTRY(WID("entry_url"))));
 	if (strlen (new_url) == 0)
 		return;
-	g_slist_append(ignore_hosts, new_url);
+	ignore_hosts = g_slist_append(ignore_hosts, new_url);
 	populate_listmodel(GTK_LIST_STORE(model), ignore_hosts);
 	gtk_entry_set_text(GTK_ENTRY(WID("entry_url")), "");
 		
