@@ -399,6 +399,7 @@ languages_changed_cb (GConfClient *client, guint cnxn_id,
 	
 	update_warning_box (dialog);
 	update_info_box (dialog, langs->data, region);
+	g_free (region);
 	
 	fill_region_option_menu (dialog);
 }
@@ -445,6 +446,7 @@ languages_sorted_cb (GtkWidget *widget,
 
 			update_warning_box (dialog);
 			update_info_box (dialog, new_langs->data, region);
+			g_free (region);
 		}
 	}
 }
@@ -962,6 +964,7 @@ fill_region_option_menu (GladeXML *dialog)
 	gtk_widget_show_all (menu);
 
 	update_region_examples (dialog, selected_region);
+	g_free (selected_region);
 }
 
 static void
@@ -1067,7 +1070,8 @@ setup_dialog (GladeXML       *dialog,
 			GCONF_LOCALIZATION_ROOT_KEY "/region", NULL);
 
 	update_info_box (dialog, langs->data, region);
-
+	g_free (region);
+	
 	/* Dialog action buttons */
 	g_signal_connect (G_OBJECT (WID ("localization_dialog")), "response",
 			G_CALLBACK (dialog_response), changeset);
