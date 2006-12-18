@@ -499,19 +499,19 @@ void
 toggle_color_scheme_key (GtkWidget *checkbutton, gpointer *data)
 {
   GConfClient *client = NULL;
-  gboolean use_theme_colors;
+  gboolean use_custom_colors;
   GladeXML *dialog;
   GtkWidget *widget;
   GtkSettings *settings;
   gchar *color_scheme = NULL;
 
   dialog = gnome_theme_manager_get_theme_dialog ();
-  use_theme_colors = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (checkbutton));
+  use_custom_colors = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (checkbutton));
 
   widget = WID ("color_scheme_table");
-  gtk_widget_set_sensitive (widget, !use_theme_colors);
+  gtk_widget_set_sensitive (widget, use_custom_colors);
 
-  if (use_theme_colors)
+  if (!use_custom_colors)
   {
     client = gconf_client_get_default ();
     gconf_client_set_string (client, COLOR_SCHEME_KEY, "", NULL);
@@ -581,7 +581,7 @@ gnome_theme_details_init (void)
   widget = WID ("selected_bg_colorbutton");
   g_signal_connect (G_OBJECT (widget), "color_set", G_CALLBACK (color_select), dialog);
 
-  widget = WID ("use_theme_colors_checkbutton");
+  widget = WID ("enable_custom_colors_checkbutton");
   g_signal_connect (G_OBJECT (widget), "toggled", G_CALLBACK (toggle_color_scheme_key), parent);
 
   gchar *color_scheme;
@@ -892,7 +892,7 @@ gnome_theme_details_update_from_gconf (void)
   gchar *theme = NULL;
   GnomeWindowManager *window_manager = NULL;
   GnomeWMSettings wm_settings;
-  gboolean use_theme_colors = TRUE;
+  gboolean use_custom_colors = FALSE;
 
   gnome_theme_details_init ();
 
@@ -925,16 +925,16 @@ gnome_theme_details_update_from_gconf (void)
   theme = gconf_client_get_string (client, COLOR_SCHEME_KEY, NULL);
   if (theme)
   {
-    use_theme_colors = !strcmp ("", theme);
+    use_custom_colors = strcmp ("", theme);
     update_color_buttons_from_string (theme);
     g_free (theme);
   }
 
-  widget = WID ("use_theme_colors_checkbutton");
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), use_theme_colors);
+  widget = WID ("enable_custom_colors_checkbutton");
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), use_custom_colors);
 
   widget = WID ("color_scheme_table");
-  gtk_widget_set_sensitive (widget, !use_theme_colors);
+  gtk_widget_set_sensitive (widget, use_custom_colors);
 
 
   g_object_unref (client);
