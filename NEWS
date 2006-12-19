@@ -1,3 +1,53 @@
+gnome-control-center 2.17.4
+
+background:
+- Plug a leak (Kjartan Maraas) (#376949)
+
+common:
+- Pass NULL to gtk_label_new() to do a bit less work (Kjartan Maraas) (#376949)
+
+default-application:
+- Fix a bunch of leaks from gconf_client_get_string() (Kjartan Maraas)
+  (#376949)
+- add support for Iceweasel and Icedove (Loïc Minier) (#379085)
+- Fix Thunderbird command line parameter (Luca Cavalli) (#326808)
+- add support for Claws Mail (aka Sylpheed-Claws) (Colin Leroy) (#386771)
+
+display:
+- Don't leak the resolution. Pass NULL to gtk_label_new to do less work
+  (Kjartan Maraas) (#376949)
+
+localization:
+- Plug some leaks. (Kjartan Maraas) (#376949)
+
+network:
+- Fix a warning about unused result from g_slist_append(). (Kjartan Maraas)
+
+theme-switcher:
+- Plug a few leaks. (Kjartan Maraas) (#376949)
+- HIG fixes to the color scheme tab, from suggestions in Bug 382517
+  (Thomas Wood)
+- Rename "Theme Details" button to "Customize (Thomas Wood)
+
+gnome-settings-daemon
+- add a new media keys window that takes advantage of 
+  compositing when available (William Jon McCann) (#383066)
+
+Translators:
+Djihed Afifi (ar)
+Francisco Javier F. Serrador (es)
+Ivar Smolin (et)
+Ilkka Tuohela (fi)
+Ankit Patel (gu)
+Raivis Dejus (lv)
+Jovan Naumovski (mk)
+Kjartan Maraas (nb)
+Tino Meinen (nl)
+Matic ´gur (sl)
+Daniel Nylander (sv)
+Theppitak Karoonboonyanan (th)
+
+------------------------------------------------------------------------------
 gnome-control-center 2.17.3
 
 common:
