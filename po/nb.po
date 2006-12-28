@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.15.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-12-18 09:44+0100\n"
-"PO-Revision-Date: 2006-12-18 09:53+0100\n"
+"POT-Creation-Date: 2006-12-28 12:00+0100\n"
+"PO-Revision-Date: 2006-12-28 12:01+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmal <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -757,7 +757,7 @@ msgid "_Finish"
 msgstr "_Fullfør"
 
 #: ../capplets/background/gnome-background-properties.glade.h:7
-#: ../capplets/theme-switcher/theme-properties.glade.h:28
+#: ../capplets/theme-switcher/theme-properties.glade.h:26
 msgid "_Remove"
 msgstr "Fje_rn"
 
@@ -2227,6 +2227,11 @@ msgstr "S_pill av systemlyder"
 msgid "_Visual system beep"
 msgstr "_Synlig systempip"
 
+#: ../capplets/sound/pipeline-tests.c:84
+#, c-format
+msgid "Failed to construct test pipeline for '%s'"
+msgstr "Kunne ikke lage testrør for «%s»"
+
 #: ../capplets/theme-switcher/gnome-theme-details.c:370
 msgid "Would you like to remove this theme?"
 msgstr "Vil du fjerne dette temaet?"
@@ -2401,7 +2406,7 @@ msgid "Background"
 msgstr "Bakgrunn"
 
 #: ../capplets/theme-switcher/theme-properties.glade.h:5
-msgid "Colours"
+msgid "Colors"
 msgstr "Farger"
 
 #: ../capplets/theme-switcher/theme-properties.glade.h:6
@@ -2413,92 +2418,92 @@ msgid "Icons"
 msgstr "Ikoner"
 
 #: ../capplets/theme-switcher/theme-properties.glade.h:8
-msgid "Input"
-msgstr "Inndata"
+msgid "Save Theme As..."
+msgstr "Lagre tema som..."
 
 #: ../capplets/theme-switcher/theme-properties.glade.h:9
-msgid "Normal"
-msgstr "Normal"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:10
-msgid "Save Theme"
-msgstr "Lagre tema"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:11
 msgid "Save _Background Image"
 msgstr "Lagre _bakgrunnsbilde"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:12
+#: ../capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Select theme for the desktop"
 msgstr "Velg tema for skrivebordet"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:13
-msgid "Selection"
-msgstr "Valg"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:14
+#: ../capplets/theme-switcher/theme-properties.glade.h:11
 msgid "Text"
 msgstr "Tekst"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:15
+#: ../capplets/theme-switcher/theme-properties.glade.h:12
 msgid "Theme Details"
 msgstr "Detaljer for tema"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:16
+#: ../capplets/theme-switcher/theme-properties.glade.h:13
 msgid "Theme Preferences"
 msgstr "Brukervalg for tema"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:17
-msgid "Theme _Details"
-msgstr "_Detaljer for tema"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:18
+#: ../capplets/theme-switcher/theme-properties.glade.h:14
 msgid "This theme does not suggest any particular font or background."
 msgstr "Dette temaet foreslår ikke en skrift eller en bakgrunn."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:19
+#: ../capplets/theme-switcher/theme-properties.glade.h:15
 msgid "This theme suggests a background:"
 msgstr "Dette temaet foreslår en bakgrunn:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:20
+#: ../capplets/theme-switcher/theme-properties.glade.h:16
 msgid "This theme suggests a font and a background:"
 msgstr "Dette temaet foreslår en skrift og en bakgrunn:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:21
+#: ../capplets/theme-switcher/theme-properties.glade.h:17
 msgid "This theme suggests a font:"
 msgstr "Dette temaet foreslår en skrift:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:22
-msgid "Use colors from the current theme"
-msgstr "Bruk farger fra aktivt tema"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:23
+#: ../capplets/theme-switcher/theme-properties.glade.h:18
 msgid "Window Border"
 msgstr "Vinduskant"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:24
+#: ../capplets/theme-switcher/theme-properties.glade.h:19
+msgid "_Customize..."
+msgstr "E_gendefinert..."
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:20
 msgid "_Description:"
 msgstr "_Beskrivelse:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:25
+#: ../capplets/theme-switcher/theme-properties.glade.h:21
+msgid "_Enable Custom Colors"
+msgstr "_Aktiver egendefinerte farger"
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:22
+msgid "_Input Boxes:"
+msgstr "_Inndatabokser:"
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:23
 msgid "_Install Theme..."
 msgstr "_Installer tema..."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:26
+#: ../capplets/theme-switcher/theme-properties.glade.h:24
 msgid "_Install..."
 msgstr "_Installer..."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:27
+#: ../capplets/theme-switcher/theme-properties.glade.h:25
 msgid "_Name:"
 msgstr "_Navn:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:29
+#: ../capplets/theme-switcher/theme-properties.glade.h:27
 msgid "_Revert"
 msgstr "Fje_rn"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:30
+#: ../capplets/theme-switcher/theme-properties.glade.h:28
 msgid "_Save Theme..."
 msgstr "_Lagre tema..."
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:29
+msgid "_Selected Items:"
+msgstr "_Valgte oppføringer:"
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:30
+msgid "_Windows:"
+msgstr "_Vinduer:"
 
 #: ../capplets/theme-switcher/theme-properties.glade.h:31
 msgid "theme selection tree"
@@ -2682,6 +2687,104 @@ msgstr "Egenskaper for vinduer"
 #: ../capplets/windows/window-properties.desktop.in.in.h:2
 msgid "Windows"
 msgstr "Vinduer"
+
+#: ../libgswitchit/gnome-kbd-indicator-test.c:63
+#, c-format
+msgid "Keyboard Indicator Test (%s)"
+msgstr "Test for tastaturindikator (%s)"
+
+#: ../libgswitchit/gnome-kbd-indicator-test.c:73
+msgid "Indicator:"
+msgstr "Indikator:"
+
+#: ../libgswitchit/gswitchit-config.c:1155
+#, c-format
+msgid "layout \"%s\""
+msgid_plural "layouts \"%s\""
+msgstr[0] "utforming «%s»"
+msgstr[1] "utforminger «%s»"
+
+#: ../libgswitchit/gswitchit-config.c:1174
+#, c-format
+msgid "option \"%s\""
+msgid_plural "options \"%s\""
+msgstr[0] "alternativ «%s»"
+msgstr[1] "alternativer «%s»"
+
+#: ../libgswitchit/gswitchit-config.c:1182
+#, c-format
+msgid "model \"%s\", %s and %s"
+msgstr "modell «%s», %s og %s"
+
+#: ../libgswitchit/gswitchit-config.c:1183
+msgid "no layout"
+msgstr "ingen utforming"
+
+#: ../libgswitchit/gswitchit-config.c:1184
+msgid "no options"
+msgstr "ingen alternativer"
+
+#: ../libgswitchit/gswitchit-plugins-add.c:104
+#: ../libgswitchit/gswitchit-plugins-app.c:118
+msgid "No description."
+msgstr "Ingen beskrivelse"
+
+#: ../libgswitchit/gswitchit-plugins-app.c:336
+#, c-format
+msgid "Failed to init GConf: %s\n"
+msgstr "Klarte ikke å initiere GConf: %s\n"
+
+#: ../libgswitchit/gswitchit-plugins.desktop.in.in.h:1
+msgid "Enable/disable installed plugins"
+msgstr "Aktiver/deaktiver installerte tillegg"
+
+#: ../libgswitchit/gswitchit-plugins.desktop.in.in.h:2
+msgid "Keyboard Indicator plugins"
+msgstr "Tillegg for tastaturindikator"
+
+#: ../libgswitchit/gswitchit-plugins.glade.h:1
+msgid "Activate more plugins"
+msgstr "Aktiver flere tillegg"
+
+#: ../libgswitchit/gswitchit-plugins.glade.h:2
+msgid "Active _plugins:"
+msgstr "Aktive _tillegg:"
+
+#: ../libgswitchit/gswitchit-plugins.glade.h:3
+msgid "Add Plugin"
+msgstr "Legg til tillegg"
+
+#: ../libgswitchit/gswitchit-plugins.glade.h:4
+msgid "Close the dialog"
+msgstr "Lukk dialogen"
+
+#: ../libgswitchit/gswitchit-plugins.glade.h:5
+msgid "Configure the selected plugin"
+msgstr "Konfigurer valgt tillegg"
+
+#: ../libgswitchit/gswitchit-plugins.glade.h:6
+msgid "Deactivate selected plugin"
+msgstr "Deaktiver valgt tillegg"
+
+#: ../libgswitchit/gswitchit-plugins.glade.h:7
+msgid "Decrease the plugin priority"
+msgstr "Sett lavere prioritet for tillegget"
+
+#: ../libgswitchit/gswitchit-plugins.glade.h:8
+msgid "Increase the plugin priority"
+msgstr "Sett høyere prioritet for tillegget"
+
+#: ../libgswitchit/gswitchit-plugins.glade.h:9
+msgid "Keyboard Indicator Plugins"
+msgstr "Tillegg for tastaturindikator"
+
+#: ../libgswitchit/gswitchit-plugins.glade.h:10
+msgid "The list of active plugins"
+msgstr "Liste med aktive tillegg"
+
+#: ../libgswitchit/gswitchit-plugins.glade.h:11
+msgid "_Available plugins:"
+msgstr "Til_gjengelige tillegg:"
 
 #: ../gnome-settings-daemon/actions/acme.glade.h:1
 msgid "Volume"
@@ -3001,105 +3104,7 @@ msgstr "Skjerm"
 msgid "Screen on which BGApplier is to draw"
 msgstr "Skjerm hvor BGApplier skal tegne"
 
-#: ../libgswitchit/gnome-kbd-indicator-test.c:63
-#, c-format
-msgid "Keyboard Indicator Test (%s)"
-msgstr "Test av astaturindikator (%s)"
-
-#: ../libgswitchit/gnome-kbd-indicator-test.c:73
-msgid "Indicator:"
-msgstr "Indikator:"
-
-#: ../libgswitchit/gswitchit-config.c:1155
-#, c-format
-msgid "layout \"%s\""
-msgid_plural "layouts \"%s\""
-msgstr[0] "utforming «%s»"
-msgstr[1] "utforminger «%s»"
-
-#: ../libgswitchit/gswitchit-config.c:1174
-#, c-format
-msgid "option \"%s\""
-msgid_plural "options \"%s\""
-msgstr[0] "alternativ «%s»"
-msgstr[1] "alternativer «%s»"
-
-#: ../libgswitchit/gswitchit-config.c:1182
-#, c-format
-msgid "model \"%s\", %s and %s"
-msgstr "modell «%s», %s og %s"
-
-#: ../libgswitchit/gswitchit-config.c:1183
-msgid "no layout"
-msgstr "ingen utforming"
-
-#: ../libgswitchit/gswitchit-config.c:1184
-msgid "no options"
-msgstr "ingen alternativer"
-
-#: ../libgswitchit/gswitchit-plugins-add.c:104
-#: ../libgswitchit/gswitchit-plugins-app.c:118
-msgid "No description."
-msgstr "Ingen beskrivelse"
-
-#: ../libgswitchit/gswitchit-plugins-app.c:336
-#, c-format
-msgid "Failed to init GConf: %s\n"
-msgstr "Klarte ikke å initiere GConf: %s\n"
-
-#: ../libgswitchit/gswitchit-plugins.desktop.in.in.h:1
-msgid "Enable/disable installed plugins"
-msgstr "Aktiver/deaktiver installerte tillegg"
-
-#: ../libgswitchit/gswitchit-plugins.desktop.in.in.h:2
-msgid "Keyboard Indicator plugins"
-msgstr "Tillegg for tastaturindikator"
-
-#: ../libgswitchit/gswitchit-plugins.glade.h:1
-msgid "Activate more plugins"
-msgstr "Aktiver flere tillegg"
-
-#: ../libgswitchit/gswitchit-plugins.glade.h:2
-msgid "Active _plugins:"
-msgstr "Aktive _tillegg:"
-
-#: ../libgswitchit/gswitchit-plugins.glade.h:3
-msgid "Add Plugin"
-msgstr "Legg til tillegg"
-
-#: ../libgswitchit/gswitchit-plugins.glade.h:4
-msgid "Close the dialog"
-msgstr "Lukk dialogen"
-
-#: ../libgswitchit/gswitchit-plugins.glade.h:5
-msgid "Configure the selected plugin"
-msgstr "Konfigurer valgt tillegg"
-
-#: ../libgswitchit/gswitchit-plugins.glade.h:6
-msgid "Deactivate selected plugin"
-msgstr "Deaktiver valgt tillegg"
-
-#: ../libgswitchit/gswitchit-plugins.glade.h:7
-msgid "Decrease the plugin priority"
-msgstr "Sett lavere prioritet for tillegget"
-
-#: ../libgswitchit/gswitchit-plugins.glade.h:8
-msgid "Increase the plugin priority"
-msgstr "Sett høyere prioritet for tillegget"
-
-#: ../libgswitchit/gswitchit-plugins.glade.h:9
-msgid "Keyboard Indicator Plugins"
-msgstr "Tillegg for tastaturindikator"
-
-#: ../libgswitchit/gswitchit-plugins.glade.h:10
-msgid "The list of active plugins"
-msgstr "Liste med aktive tillegg"
-
-#: ../libgswitchit/gswitchit-plugins.glade.h:11
-msgid "_Available plugins:"
-msgstr "Til_gjengelige tillegg:"
-
-#: ../libslab/app-shell.c:734
+#: ../libslab/app-shell.c:735
 #, c-format
 msgid ""
 "<span size=\"large\"><b>No matches found.</b> </span><span>\n"
