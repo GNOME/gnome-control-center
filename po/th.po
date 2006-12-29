@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-12-20 21:51+0700\n"
-"PO-Revision-Date: 2006-12-20 22:17+0700\n"
+"POT-Creation-Date: 2006-12-29 14:20+0700\n"
+"PO-Revision-Date: 2006-12-29 14:55+0700\n"
 "Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
 "Language-Team: Thai <L10n@opentle.org>\n"
 "MIME-Version: 1.0\n"
@@ -2196,6 +2196,11 @@ msgstr "เ_ล่นเสียงของระบบ"
 msgid "_Visual system beep"
 msgstr "บี๊ประบบแบบ_ภาพ"
 
+#: ../capplets/sound/pipeline-tests.c:84
+#, c-format
+msgid "Failed to construct test pipeline for '%s'"
+msgstr "สร้างไปป์ไลน์ทดสอบสำหรับ '%s' ไม่สำเร็จ"
+
 #: ../capplets/theme-switcher/gnome-theme-details.c:370
 msgid "Would you like to remove this theme?"
 msgstr "คุณต้องการลบชุดตกแต่งนี้หรือไม่?"
@@ -2648,6 +2653,102 @@ msgstr "ตั้งค่าระบบหน้าต่างของคุ
 #: ../capplets/windows/window-properties.desktop.in.in.h:2
 msgid "Windows"
 msgstr "หน้าต่าง"
+
+#: ../libgswitchit/gnome-kbd-indicator-test.c:63
+#, c-format
+msgid "Keyboard Indicator Test (%s)"
+msgstr "การทดสอบแอพเพล็ตบอกสถานะแป้นพิมพ์ (%s)"
+
+#: ../libgswitchit/gnome-kbd-indicator-test.c:73
+msgid "Indicator:"
+msgstr "แอพเพล็ตบอกสถานะ:"
+
+#: ../libgswitchit/gswitchit-config.c:1155
+#, c-format
+msgid "layout \"%s\""
+msgid_plural "layouts \"%s\""
+msgstr[0] "ผังแป้นพิมพ์ \"%s\""
+
+#: ../libgswitchit/gswitchit-config.c:1174
+#, c-format
+msgid "option \"%s\""
+msgid_plural "options \"%s\""
+msgstr[0] "ตัวเลือก \"%s\""
+
+#: ../libgswitchit/gswitchit-config.c:1182
+#, c-format
+msgid "model \"%s\", %s and %s"
+msgstr "รุ่น \"%s\", %s และ %s"
+
+#: ../libgswitchit/gswitchit-config.c:1183
+msgid "no layout"
+msgstr "ไม่ระบุผังแป้นพิมพ์"
+
+#: ../libgswitchit/gswitchit-config.c:1184
+msgid "no options"
+msgstr "ไม่ระบุตัวเลือก"
+
+#: ../libgswitchit/gswitchit-plugins-add.c:104
+#: ../libgswitchit/gswitchit-plugins-app.c:118
+msgid "No description."
+msgstr "ไม่มีคำอธิบาย"
+
+#: ../libgswitchit/gswitchit-plugins-app.c:336
+#, c-format
+msgid "Failed to init GConf: %s\n"
+msgstr "ตั้งต้น GConf ไม่สำเร็จ: %s\n"
+
+#: ../libgswitchit/gswitchit-plugins.desktop.in.in.h:1
+msgid "Enable/disable installed plugins"
+msgstr "เปิด/ปิดการใช้งานปลั๊กอินที่ติดตั้งไว้"
+
+#: ../libgswitchit/gswitchit-plugins.desktop.in.in.h:2
+msgid "Keyboard Indicator plugins"
+msgstr "ปลั๊กอินแอพเพล็ตบอกสถานะแป้นพิมพ์"
+
+#: ../libgswitchit/gswitchit-plugins.glade.h:1
+msgid "Activate more plugins"
+msgstr "เปิดใช้ปลั๊กอินเพิ่มเติม"
+
+#: ../libgswitchit/gswitchit-plugins.glade.h:2
+msgid "Active _plugins:"
+msgstr "_ปลั๊กอินที่เปิดใช้:"
+
+#: ../libgswitchit/gswitchit-plugins.glade.h:3
+msgid "Add Plugin"
+msgstr "เพิ่มปลั๊กอิน"
+
+#: ../libgswitchit/gswitchit-plugins.glade.h:4
+msgid "Close the dialog"
+msgstr "ปิดกล่องโต้ตอบ"
+
+#: ../libgswitchit/gswitchit-plugins.glade.h:5
+msgid "Configure the selected plugin"
+msgstr "ตั้งค่าปลั๊กอินที่เลือก"
+
+#: ../libgswitchit/gswitchit-plugins.glade.h:6
+msgid "Deactivate selected plugin"
+msgstr "ปิดใช้งานปลั๊กอินที่เลือก"
+
+#: ../libgswitchit/gswitchit-plugins.glade.h:7
+msgid "Decrease the plugin priority"
+msgstr "ลดระดับความสำคัญของปลั๊กอิน"
+
+#: ../libgswitchit/gswitchit-plugins.glade.h:8
+msgid "Increase the plugin priority"
+msgstr "เพิ่มระดับความสำคัญของปลั๊กอิน"
+
+#: ../libgswitchit/gswitchit-plugins.glade.h:9
+msgid "Keyboard Indicator Plugins"
+msgstr "ปลั๊กอินแอพเพล็ตบอกสถานะแป้นพิมพ์"
+
+#: ../libgswitchit/gswitchit-plugins.glade.h:10
+msgid "The list of active plugins"
+msgstr "รายการปลั๊กอินที่เปิดใช้อยู่"
+
+#: ../libgswitchit/gswitchit-plugins.glade.h:11
+msgid "_Available plugins:"
+msgstr "_ปลั๊กอินที่มี:"
 
 #: ../gnome-settings-daemon/actions/acme.glade.h:1
 msgid "Volume"
@@ -3655,9 +3756,6 @@ msgstr "กำหนดว่าจะสร้างรูปย่อสำห
 #~ msgid "Keyboard model"
 #~ msgstr "รุ่นแป้นพิมพ์"
 
-#~ msgid "Keyboard options"
-#~ msgstr "ตัวเลือกของแป้นพิมพ์"
-
 #~ msgid ""
 #~ "Keyboard settings in gconf will be overridden from the system ASAP "
 #~ "(deprecated)"
@@ -3729,23 +3827,6 @@ msgstr "กำหนดว่าจะสร้างรูปย่อสำห
 
 #~ msgid "There was an error loading an image: %s"
 #~ msgstr "เกิดข้อผิดพลาดขณะโหลดรูปภาพ: %s"
-
-#~ msgid "layout \"%s\""
-#~ msgid_plural "layouts \"%s\""
-#~ msgstr[0] "ผังแป้นพิมพ์ \"%s\""
-
-#~ msgid "option \"%s\""
-#~ msgid_plural "options \"%s\""
-#~ msgstr[0] "ตัวเลือก \"%s\""
-
-#~ msgid "model \"%s\", %s and %s"
-#~ msgstr "รุ่น \"%s\", %s และ %s"
-
-#~ msgid "no layout"
-#~ msgstr "ไม่ระบุผังแป้นพิมพ์"
-
-#~ msgid "no options"
-#~ msgstr "ไม่ระบุตัวเลือก"
 
 #~ msgid ""
 #~ "Icon Theme %s correctly installed.\n"
