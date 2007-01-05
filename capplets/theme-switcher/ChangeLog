@@ -1,3 +1,12 @@
+2007-01-05  Christian Persch <chpe@gnome.org>
+
+	Fixes #393117
+
+	* gnome-theme-manager.c (main): get a reference to the GnomeProgram
+	and free it when appropriate. Fixes leak.
+
+	* gnome-theme-details.c (gtk_theme_update_remove_button): fixed leaks.
+
 2007-01-03  Thomas Wood  <thos@gnome.org>
 
 	* theme-properties.glade: Fix some HIG issues with strings

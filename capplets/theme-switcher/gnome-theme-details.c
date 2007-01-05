@@ -189,6 +189,9 @@ gtk_theme_update_remove_button (GtkTreeSelection *selection,
 	} else {
 		gtk_widget_set_sensitive(remove_button, FALSE);
 	}
+
+	g_free (theme_dir);
+	gnome_vfs_file_info_unref (vfs_info);
       }
     }
 }

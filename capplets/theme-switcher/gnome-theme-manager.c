@@ -1603,6 +1603,7 @@ main (int argc, char *argv[])
 {
   GladeXML *dialog;
   gchar *install_filename = NULL;
+  GnomeProgram *program;
 
   GOptionEntry option_entries[] = {
 	  { "install-theme",
@@ -1624,14 +1625,14 @@ main (int argc, char *argv[])
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
   textdomain (GETTEXT_PACKAGE);
 
-  option_context = g_option_context_new ("gnome-theme-manager");
+  option_context = g_option_context_new (NULL);
   g_option_context_add_main_entries (option_context, option_entries, GETTEXT_PACKAGE);
 
-  gnome_program_init ("gnome-theme-manager", VERSION,
-		      LIBGNOMEUI_MODULE, argc, argv,
-		      GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
-		      GNOME_PARAM_GOPTION_CONTEXT, option_context,
-		      NULL);
+  program = gnome_program_init ("gnome-theme-manager", VERSION,
+				LIBGNOMEUI_MODULE, argc, argv,
+				GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
+				GNOME_PARAM_GOPTION_CONTEXT, option_context,
+				NULL);
 
   if (install_filename != NULL)
      gnome_theme_install_from_uri (install_filename, NULL);
@@ -1654,6 +1655,7 @@ main (int argc, char *argv[])
 				       _("The default theme schemas could not be found on your system.  This means that you probably don't have metacity installed, or that your gconf is configured incorrectly."));
       gtk_dialog_run (GTK_DIALOG (msg_dialog));
       gtk_widget_destroy (msg_dialog);
+      g_object_unref (program);
       exit (0);
     }
 
@@ -1667,6 +1669,8 @@ main (int argc, char *argv[])
   setup_dialog (dialog);
 
   gtk_main ();
+
+  g_object_unref (program);
 
   return 0;
 }
