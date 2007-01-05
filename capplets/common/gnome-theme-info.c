@@ -425,6 +425,7 @@ read_icon_theme (GnomeVFSURI *icon_theme_uri)
   else 
     {
       gnome_desktop_item_unref (icon_theme_ditem);
+      g_free (icon_theme_file);
       return NULL;
     }
 
