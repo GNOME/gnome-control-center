@@ -65,9 +65,10 @@ get_actions_list ()
 	for (; key_list; key_list = key_list->next)
 	{
 		gchar *entry = (gchar *) key_list->data;
+		gchar **temp;
 
 		action = g_new (AppAction, 1);
-		gchar **temp = g_strsplit (entry, CONTROL_CENTER_ACTIONS_SEPARATOR, 2);
+		temp = g_strsplit (entry, CONTROL_CENTER_ACTIONS_SEPARATOR, 2);
 		action->name = g_strdup (temp[0]);
 		if ((action->item = load_desktop_item_from_unknown (temp[1])) == NULL)
 		{
@@ -107,6 +108,8 @@ main (int argc, char *argv[])
 	BonoboApplication *bonobo_app = NULL;
 	gboolean hidden = FALSE;
 	gchar * startup_id;
+	AppShellData *app_data;
+	GSList *actions;
 
 #ifdef ENABLE_NLS
 	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
@@ -138,11 +141,11 @@ main (int argc, char *argv[])
 		exit (1);
 	}
 
-	AppShellData *app_data = appshelldata_new (
+	app_data = appshelldata_new (
 		"preferences.menu", NULL, CONTROL_CENTER_PREFIX, GTK_ICON_SIZE_DIALOG);
 	generate_categories (app_data);
 
-	GSList *actions = get_actions_list ();
+	actions = get_actions_list ();
 	layout_shell (app_data, _("Filter"), _("Groups"), _("Common Tasks"), actions,
 		handle_static_action_clicked);
 
