@@ -454,12 +454,19 @@ setup_hal_devices ()
 	DBusError error;
 	LibHalContext *ctx;
 	char **devices;
-	int i, num;
-	
+	int i, num = 0;
+
 	dbus_error_init (&error);
 	
 	connection = dbus_bus_get (DBUS_BUS_SYSTEM, &error);
-	g_return_if_fail (connection != NULL);
+	if (connection == NULL) {
+		/* cannot get a dbus connection */
+		if (dbus_error_is_set (&error)) {
+			g_warning ("Getting a system dbus connection an error occured: %s", error.message);
+			dbus_error_free (&error);
+		}
+		return;
+	}
 	
 	dbus_connection_setup_with_g_main (connection, g_main_context_default ());
 	
@@ -470,17 +477,30 @@ setup_hal_devices ()
 	libhal_ctx_set_device_removed (ctx, device_removed_callback);
 	libhal_ctx_set_dbus_connection (ctx, connection);
 
-	libhal_ctx_init (ctx, &error);
-	
+	if (!libhal_ctx_init (ctx, &error)) {
+		/* cannot connect to hald */
+		if (dbus_error_is_set (&error)) {
+			g_warning ("Connecting to hald an error occured: %s", error.message);
+			dbus_error_free (&error);
+		}
+		return;
+	}
+
 	devices = libhal_find_device_by_capability (ctx, "alsa", &num, &error);
-	
+	if (devices == NULL) {
+		/* error in the libhal_find_device_by_capability function */
+		if (dbus_error_is_set (&error)) {
+			g_warning ("Calling a hal function an error occured: %s", error.message);
+			dbus_error_free (&error);
+		}
+		return;
+	}
+
 	for (i = 0; i < num; i++) {
 		device_added_callback (ctx, devices[i]);
 	}
 	
 	dbus_free_string_array (devices);
-	
-	dbus_error_free (&error);
 }
 #endif
 
