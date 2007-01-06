@@ -381,15 +381,6 @@ DBUS_SERVICES_DIR='$(datadir)'"/dbus-1/services"
 AC_SUBST(DBUS_SERVICES_DIR)
 AC_DEFINE_UNQUOTED(DBUS_SERVICES_DIR, "$DBUS_SERVICES_DIR", [Where services dir for DBUS is])
 
-# esd
-ESDSERVERDIR=`$PKG_CONFIG --variable=esd_serverdir esound`
-if test x"$ESDSERVERDIR" = x; then
-   ESD_SERVER="esd"
-else
-   ESD_SERVER="$ESDSERVERDIR/esd"
-fi
-AC_SUBST(ESD_SERVER)
-
 AC_PATH_PROG(GDK_PIXBUF_CSOURCE, gdk-pixbuf-csource, no)
 
 if test x"$GDK_PIXBUF_CSOURCE" = xno; then
@@ -454,7 +445,7 @@ AC_ARG_ENABLE(alsa,
        [case "${enableval}" in
                yes) WANT_ALSA=yes ;;
                no)  WANT_ALSA=no ;;
-               *) AC_MSG_ERROR(bad value ${enableval} for --enable-alsa) ;;
+               *) AC_MSG_ERROR(bad value ${enableval} for --disable-alsa) ;;
        esac],
        [WANT_ALSA=yes]) dnl Default value
 
@@ -469,6 +460,33 @@ fi
 AM_CONDITIONAL(HAVE_ALSA, test x"$have_alsa" = "xyes")
 AC_SUBST(ALSA_LIBS)
 AC_SUBST(ALSA_CFLAGS)
+
+dnl ==============================================
+dnl Esd section
+dnl ==============================================
+have_esd=no
+AC_ARG_ENABLE(esd,
+  AC_HELP_STRING([--disable-esd],
+                 [Turn off support for ESD]),
+       [case "${enableval}" in
+               yes) WANT_ESD=yes ;;
+               no)  WANT_ESD=no ;;
+               *) AC_MSG_ERROR(bad value ${enableval} for --disable-esd) ;;
+       esac],
+       [WANT_ESD=yes]) dnl Default value
+
+if test x$WANT_ESD = xyes ; then
+       PKG_CHECK_MODULES(ESD, esound >= 0.2.28,
+               have_esd=yes
+	       AC_DEFINE(HAVE_ESD, 1, Have ESD Sound Server),
+               AC_MSG_RESULT(*** All of ESD dependent parts will be disabled ***))
+else
+       have_esd=no
+fi
+
+AM_CONDITIONAL(HAVE_ESD, test x"$have_esd" = "xyes")
+AC_SUBST(ESD_CFLAGS)
+AC_SUBST(ESD_LIBS)
 
 dnl ==============================================
 dnl GStreamer section
