@@ -47,6 +47,7 @@ static GEnumValue proxytype_values[] = {
 };
 
 #define USE_PROXY_KEY   "/system/http_proxy/use_http_proxy"
+#define USE_SAME_PROXY_KEY   "/system/http_proxy/use_same_proxy"
 #define HTTP_PROXY_HOST_KEY  "/system/http_proxy/host"
 #define HTTP_PROXY_PORT_KEY  "/system/http_proxy/port"
 #define HTTP_USE_AUTH_KEY    "/system/http_proxy/use_authentication"
@@ -55,11 +56,17 @@ static GEnumValue proxytype_values[] = {
 #define IGNORE_HOSTS_KEY	 "/system/http_proxy/ignore_hosts"
 #define PROXY_MODE_KEY "/system/proxy/mode"
 #define SECURE_PROXY_HOST_KEY  "/system/proxy/secure_host"
+#define OLD_SECURE_PROXY_HOST_KEY  "/system/proxy/old_secure_host"
 #define SECURE_PROXY_PORT_KEY  "/system/proxy/secure_port"
+#define OLD_SECURE_PROXY_PORT_KEY  "/system/proxy/old_secure_port"
 #define FTP_PROXY_HOST_KEY  "/system/proxy/ftp_host"
+#define OLD_FTP_PROXY_HOST_KEY  "/system/proxy/old_ftp_host"
 #define FTP_PROXY_PORT_KEY  "/system/proxy/ftp_port"
+#define OLD_FTP_PROXY_PORT_KEY  "/system/proxy/old_ftp_port"
 #define SOCKS_PROXY_HOST_KEY  "/system/proxy/socks_host"
+#define OLD_SOCKS_PROXY_HOST_KEY  "/system/proxy/old_socks_host"
 #define SOCKS_PROXY_PORT_KEY  "/system/proxy/socks_port"
+#define OLD_SOCKS_PROXY_PORT_KEY  "/system/proxy/old_socks_port"
 #define PROXY_AUTOCONFIG_URL_KEY  "/system/proxy/autoconfig_url"
 
 static GtkWidget *details_dialog = NULL;
@@ -247,6 +254,79 @@ cb_http_details_button_clicked (GtkWidget *button,
 	gtk_widget_show_all (widget);
 }
 
+static void
+cb_use_same_proxy_checkbutton_clicked (GtkWidget *checkbutton,
+					GladeXML *dialog)
+{
+	GConfClient *client;
+	gboolean same_proxy;
+	gchar *http_proxy;
+	gint http_port;
+	
+	client = gconf_client_get_default ();
+	same_proxy = gconf_client_get_bool (client, USE_SAME_PROXY_KEY, NULL);
+	
+	http_proxy = gconf_client_get_string (client, HTTP_PROXY_HOST_KEY, NULL);
+	http_port = gconf_client_get_int (client, HTTP_PROXY_PORT_KEY, NULL);
+	
+	if (same_proxy) 
+	{
+		/* Save the old values */
+		gconf_client_set_string (client, OLD_SECURE_PROXY_HOST_KEY, 
+			gconf_client_get_string (client, SECURE_PROXY_HOST_KEY, NULL), NULL);
+		gconf_client_set_int (client, OLD_SECURE_PROXY_PORT_KEY, 
+			gconf_client_get_int (client, SECURE_PROXY_PORT_KEY, NULL), NULL);
+			
+		gconf_client_set_string (client, OLD_FTP_PROXY_HOST_KEY, 
+			gconf_client_get_string (client, FTP_PROXY_HOST_KEY, NULL), NULL);
+		gconf_client_set_int (client, OLD_FTP_PROXY_PORT_KEY, 
+			gconf_client_get_int (client, FTP_PROXY_PORT_KEY, NULL), NULL);
+
+		gconf_client_set_string (client, OLD_SOCKS_PROXY_HOST_KEY, 
+			gconf_client_get_string (client, SOCKS_PROXY_HOST_KEY, NULL), NULL);
+		gconf_client_set_int (client, OLD_SOCKS_PROXY_PORT_KEY, 
+			gconf_client_get_int (client, SOCKS_PROXY_PORT_KEY, NULL), NULL);
+
+		/* Set the new values */
+		gconf_client_set_string (client, SECURE_PROXY_HOST_KEY, http_proxy, NULL);
+		gconf_client_set_int (client, SECURE_PROXY_PORT_KEY, http_port, NULL);
+		
+		gconf_client_set_string (client, FTP_PROXY_HOST_KEY, http_proxy, NULL);
+		gconf_client_set_int (client, FTP_PROXY_PORT_KEY, http_port, NULL);
+		
+		gconf_client_set_string (client, SOCKS_PROXY_HOST_KEY, http_proxy, NULL);
+		gconf_client_set_int (client, SOCKS_PROXY_PORT_KEY, http_port, NULL);
+	}
+	else
+	{
+
+		gconf_client_set_string (client, SECURE_PROXY_HOST_KEY, 
+			gconf_client_get_string (client, OLD_SECURE_PROXY_HOST_KEY, NULL), NULL);
+		gconf_client_set_int (client, SECURE_PROXY_PORT_KEY, 
+			gconf_client_get_int (client, OLD_SECURE_PROXY_PORT_KEY, NULL), NULL);
+			
+		gconf_client_set_string (client, FTP_PROXY_HOST_KEY, 
+			gconf_client_get_string (client, OLD_FTP_PROXY_HOST_KEY, NULL), NULL);
+		gconf_client_set_int (client, FTP_PROXY_PORT_KEY, 
+			gconf_client_get_int (client, OLD_FTP_PROXY_PORT_KEY, NULL), NULL);
+
+		gconf_client_set_string (client, SOCKS_PROXY_HOST_KEY, 
+			gconf_client_get_string (client, OLD_SOCKS_PROXY_HOST_KEY, NULL), NULL);
+		gconf_client_set_int (client, SOCKS_PROXY_PORT_KEY, 
+			gconf_client_get_int (client, OLD_SOCKS_PROXY_PORT_KEY, NULL), NULL);
+	}
+	
+	/* Set the proxy entries insensitive if we are using the same proxy for all */
+	gtk_widget_set_sensitive (WID ("secure_host_entry"), !same_proxy);
+	gtk_widget_set_sensitive (WID ("secure_port_spinbutton"), !same_proxy);
+	gtk_widget_set_sensitive (WID ("ftp_host_entry"), !same_proxy);
+	gtk_widget_set_sensitive (WID ("ftp_port_spinbutton"), !same_proxy);
+	gtk_widget_set_sensitive (WID ("socks_host_entry"), !same_proxy);
+	gtk_widget_set_sensitive (WID ("socks_port_spinbutton"), !same_proxy);
+
+	g_object_unref (client);
+}
+
 static GConfValue *
 extract_proxy_host (GConfPropertyEditor *peditor, const GConfValue *orig)
 {
@@ -288,6 +368,8 @@ proxy_mode_radiobutton_clicked_cb (GtkWidget *widget,
 	g_slist_free (mode_group);
 	
 	gtk_widget_set_sensitive (WID ("manual_box"), 
+				  mode == PROXYMODE_MANUAL);
+	gtk_widget_set_sensitive (WID ("same_proxy_checkbutton"), 
 				  mode == PROXYMODE_MANUAL);
 	gtk_widget_set_sensitive (WID ("auto_box"),
 				  mode == PROXYMODE_AUTO);
@@ -337,6 +419,15 @@ setup_dialog (GladeXML *dialog)
 			PROXY_MODE_KEY, mode_group, mode_type, 
 			TRUE, NULL));
 	
+	/* Use same proxy for all protocols */
+	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_boolean (NULL, 
+			USE_SAME_PROXY_KEY, WID ("same_proxy_checkbutton"), NULL));
+			
+	g_signal_connect (G_OBJECT (WID ("same_proxy_checkbutton")),
+			"toggled",
+			G_CALLBACK (cb_use_same_proxy_checkbutton_clicked),
+			dialog);
+	
 	/* Http */
 	port_value = gconf_client_get_int (client, HTTP_PROXY_PORT_KEY, NULL);
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (WID ("http_port_spinbutton")), (gdouble) port_value);
@@ -384,6 +475,17 @@ setup_dialog (GladeXML *dialog)
 	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_integer (
 			NULL, SOCKS_PROXY_PORT_KEY, WID ("socks_port_spinbutton"), 
 			NULL));
+
+	/* Set the proxy entries insensitive if we are using the same proxy for all */
+	if (gconf_client_get_bool (client, USE_SAME_PROXY_KEY, NULL))
+	{
+		gtk_widget_set_sensitive (WID ("secure_host_entry"), FALSE);
+		gtk_widget_set_sensitive (WID ("secure_port_spinbutton"), FALSE);
+		gtk_widget_set_sensitive (WID ("ftp_host_entry"), FALSE);
+		gtk_widget_set_sensitive (WID ("ftp_port_spinbutton"), FALSE);
+		gtk_widget_set_sensitive (WID ("socks_host_entry"), FALSE);
+		gtk_widget_set_sensitive (WID ("socks_port_spinbutton"), FALSE);
+	}
 
 	/* Autoconfiguration */
 	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_string (
