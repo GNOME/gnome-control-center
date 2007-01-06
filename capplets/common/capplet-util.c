@@ -231,25 +231,29 @@ capplet_init (int                      argc,
 {
 	gchar                         *factory_iid;
 	BonoboGenericFactory          *factory;
+	GOptionContext                *context;
 
 	static gboolean apply_only;
 	static gboolean get_legacy;
-	static struct poptOption cap_options[] = {
-		{ "apply", '\0', POPT_ARG_NONE, &apply_only, 0,
+	static GOptionEntry cap_options[] = {
+		{ "apply", 0, 0, G_OPTION_ARG_NONE, &apply_only,
 		  N_("Just apply settings and quit"), NULL },
-		{ "init-session-settings", '\0', POPT_ARG_NONE, &apply_only, 0,
+		{ "init-session-settings", 0, 0, G_OPTION_ARG_NONE, &apply_only,
 		  N_("Just apply settings and quit"), NULL },
-		{ "get-legacy", '\0', POPT_ARG_NONE, &get_legacy, 0,
+		{ "get-legacy", 0, 0, G_OPTION_ARG_NONE, &get_legacy,
 		  N_("Retrieve and store legacy settings"), NULL },
-		{ NULL, '\0', 0, NULL, 0, NULL, NULL }
+		{ NULL }
 	};
 
 	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 
+	context = g_option_context_new (NULL);
+	g_option_context_add_main_entries (context, cap_options, GETTEXT_PACKAGE);
+
 	gnome_program_init (argv[0], VERSION, LIBGNOMEUI_MODULE, argc, argv,
-			    GNOME_PARAM_POPT_TABLE, cap_options,
+			    GNOME_PARAM_GOPTION_CONTEXT, context,
 			    NULL);
 
 	if (!bonobo_init (&argc, argv))
