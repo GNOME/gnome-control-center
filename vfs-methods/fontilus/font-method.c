@@ -171,8 +171,8 @@ ensure_font_list(void)
 	goto end;
     }
 
-    /* set up name list and hash */
-    font_names = g_new(gchar *, font_list->nfont);
+    /* set up name list and hash (name list array must be NULL terminated) */
+    font_names = g_new0(gchar *, font_list->nfont + 1);
     font_hash = g_hash_table_new(g_str_hash, g_str_equal);
     for (i = 0; i < font_list->nfont; i++) {
 	font_names[i] = get_pango_name(font_list->fonts[i]);
