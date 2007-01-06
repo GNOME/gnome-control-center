@@ -211,29 +211,33 @@ main (int argc, char **argv)
 	GConfClient    *client;
 	GConfChangeSet *changeset;
 	GladeXML       *dialog;
+	GOptionContext *context;
 
 	static gboolean apply_only = FALSE;
 	static gboolean get_legacy = FALSE;
 	static gboolean switch_to_typing_break_page = FALSE;
 
-	static struct poptOption cap_options[] = {
-		{ "apply", '\0', POPT_ARG_NONE, &apply_only, 0,
+	static GOptionEntry cap_options[] = {
+		{ "apply", 0, 0, G_OPTION_ARG_NONE, &apply_only,
 		  N_("Just apply settings and quit (compatibility only; now handled by daemon)"), NULL },
-		{ "init-session-settings", '\0', POPT_ARG_NONE, &apply_only, 0,
+		{ "init-session-settings", 0, 0, G_OPTION_ARG_NONE, &apply_only,
 		  N_("Just apply settings and quit (compatibility only; now handled by daemon)"), NULL },
-		{ "get-legacy", '\0', POPT_ARG_NONE, &get_legacy, 0,
+		{ "get-legacy", 0, 0, G_OPTION_ARG_NONE, &get_legacy,
 		  N_("Retrieve and store legacy settings"), NULL },
-		{ "typing-break", '\0', POPT_ARG_NONE, &switch_to_typing_break_page, 0,
+		{ "typing-break", 0, 0, G_OPTION_ARG_NONE, &switch_to_typing_break_page,
 		  N_("Start the page with the typing break settings showing"), NULL },
-		{ NULL, '\0', 0, NULL, 0, NULL, NULL }
+		{ NULL }
 	};
 
 	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 
+	context = g_option_context_new (_("- GNOME Keyboard Preferencies"));
+	g_option_context_add_main_entries (context, cap_options, GETTEXT_PACKAGE);
+
 	gnome_program_init ("gnome-keyboard-properties", VERSION, LIBGNOMEUI_MODULE, argc, argv,
-			    GNOME_PARAM_POPT_TABLE, cap_options,
+			    GNOME_PARAM_GOPTION_CONTEXT, context,
 			    GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
 			    NULL);
 
