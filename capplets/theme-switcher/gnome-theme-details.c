@@ -534,6 +534,7 @@ gnome_theme_details_init (void)
 {
   GtkWidget *parent, *widget;
   GladeXML *dialog;
+  gchar *color_scheme;
 
   if (theme_details_initted)
     return;
@@ -587,7 +588,6 @@ gnome_theme_details_init (void)
   widget = WID ("enable_custom_colors_checkbutton");
   g_signal_connect (G_OBJECT (widget), "toggled", G_CALLBACK (toggle_color_scheme_key), parent);
 
-  gchar *color_scheme;
   g_object_get (G_OBJECT (gtk_settings_get_default()), "gtk-color-scheme", &color_scheme, NULL);
   update_color_buttons_from_string (color_scheme);
 
