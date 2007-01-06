@@ -31,6 +31,13 @@
 
 #define FONT_KEY           "/desktop/gnome/interface/font_name"
 
+static gchar **arguments = NULL;
+
+static const GOptionEntry options[] = {
+	{ G_OPTION_REMAINING, 0, 0, G_OPTION_ARG_STRING_ARRAY, &arguments, NULL, N_("[FILE...]") },
+	{NULL}
+};
+
 int main (int argc, char **argv)
 {
 	GnomeVFSURI *uri;
@@ -40,12 +47,18 @@ int main (int argc, char **argv)
 	GtkWidget *font_dialog;
 	GtkWidget *font_sample;
 	gboolean apply_font = FALSE;
-	poptContext ctx;
-	gchar **args;
+	GOptionContext *context;
+
+	context = g_option_context_new(_("- GNOME Theme Applier"));
+	g_option_context_add_main_entries(context, options, NULL);
 
 	gtk_init (&argc, &argv);
-	program = gnome_program_init ("ThemeApplier", "0.3.0", LIBGNOME_MODULE,
-				      argc, argv, GNOME_PARAM_NONE);
+	program = gnome_program_init ("themus-theme-applier", "0.3.0", LIBGNOME_MODULE,
+				      argc, argv,
+				      GNOME_PARAM_GOPTION_CONTEXT, context,
+				      GNOME_PARAM_NONE);
+
+	if (!arguments) return 1;
 	
 	g_object_get (program, GNOME_PARAM_POPT_CONTEXT, &ctx, NULL);
 	args = (char**) poptGetArgs(ctx);
