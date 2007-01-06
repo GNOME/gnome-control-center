@@ -35,6 +35,13 @@ static GtkTargetEntry drop_types[] = {
   /*  { "x-special/gnome-reset-background", 0, TARGET_BACKGROUND_RESET }*/
 };
 
+static gchar **command_line_files = NULL;
+
+static const GOptionEntry options[] = {
+  { G_OPTION_REMAINING, 0, 0, G_OPTION_ARG_FILENAME_ARRAY, &command_line_files, NULL,  N_("[FILE...]") },
+  { NULL }
+};
+
 static void wp_props_load_wallpaper (gchar * key,
 				     GnomeWPItem * item,
 				     GnomeWPCapplet * capplet);
@@ -834,7 +841,7 @@ static void gnome_wp_update_preview (GtkFileChooser *chooser,
   gtk_file_chooser_set_preview_widget_active (chooser, TRUE);
 }
   
-static void wallpaper_properties_init (poptContext ctx) {
+static void wallpaper_properties_init () {
   GnomeWPCapplet * capplet;
   GladeXML * dialog;
   GtkWidget * menu;
@@ -844,7 +851,6 @@ static void wallpaper_properties_init (poptContext ctx) {
   GtkTreeViewColumn * column;
   GtkTreeSelection * selection;
   GdkCursor * cursor;
-  const gchar ** args;
   GtkFileFilter *filter;
 
   gtk_rc_parse_string ("style \"wp-tree-defaults\" {\n"
@@ -1017,16 +1023,13 @@ static void wallpaper_properties_init (poptContext ctx) {
   gdk_window_set_cursor (capplet->window->window, cursor);
   gdk_cursor_unref (cursor);
 
-  args = poptGetArgs (ctx);
-  if (args != NULL) {
+  if (command_line_files != NULL) {
     const gchar ** p;
 
-    for (p = args; *p != NULL; p++) {
+    for (p = (const gchar **) command_line_files; *p != NULL; p++) {
       capplet->uri_list = g_slist_append (capplet->uri_list, (gchar *) *p);
     }
   }
-
-  poptFreeContext (ctx);
 
   g_idle_add (gnome_wp_load_stuffs, capplet);
 
@@ -1119,24 +1122,25 @@ static void gnome_wp_set_sensitivities (GnomeWPCapplet* capplet) {
 
 gint main (gint argc, gchar *argv[]) {
   GnomeProgram * program;
-  GValue context = { 0 };
-  poptContext ctx;
+  GOptionContext *ctx;
+
+  ctx = g_option_context_new (_("- Desktop Background Preferences"));
 
 #ifdef ENABLE_NLS
   bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
   textdomain (GETTEXT_PACKAGE);
+  g_option_context_add_main_entries (ctx, options, GETTEXT_PACKAGE);
+#else
+  g_option_context_add_main_entries (ctx, options, NULL);
 #endif
 
-  program = gnome_program_init (PACKAGE, VERSION, LIBGNOMEUI_MODULE,
-				argc, argv, GNOME_PARAM_POPT_TABLE,
-				NULL, NULL);
+  program = gnome_program_init ("gnome-background-properties", VERSION, 
+		  		LIBGNOMEUI_MODULE, argc, argv,
+				GNOME_PARAM_GOPTION_CONTEXT, ctx,
+				GNOME_PARAM_NONE);
 
-  g_object_get_property (G_OBJECT (program), GNOME_PARAM_POPT_CONTEXT,
-			 g_value_init (&context, G_TYPE_POINTER));
-  ctx = g_value_get_pointer (&context);
-
-  wallpaper_properties_init (ctx);
+  wallpaper_properties_init ();
 
   gtk_main ();
   

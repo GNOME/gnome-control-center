@@ -1,3 +1,11 @@
+2007-01-06  Lucas Rocha <lucasr.at.mundo@gmail.com>
+
+	Fixes #336286
+
+	* gnome-wp-capplet.c: switched from popt to GOptionContext.
+	(wallpaper_properties_init): just iterate over "command_line_files".
+	(main): call gnome_program_init with the correct arguments.
+
 2007-01-06  Gabor Kelemen  <kelemeng@gnome.hu>
 
 	* gnome-wp-item.c: Mark message showing background image size and type for translation
