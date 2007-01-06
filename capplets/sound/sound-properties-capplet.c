@@ -630,22 +630,22 @@ add_selected_device (const gchar *profile, int type)
 static void
 setup_devices ()
 {
-	add_device (AUDIO_PLAYBACK, "autoaudiosink", "Autodetect", NULL);
+	add_device (AUDIO_PLAYBACK, "autoaudiosink", _("Autodetect"), NULL);
 
 #if USE_HAL
 	setup_hal_devices ();
 #endif
-	add_device (AUDIO_PLAYBACK, "alsasink", "ALSA - Advanced Linux Sound Architecture", NULL);
-	add_device (AUDIO_CAPTURE, "alsasrc", "ALSA - Advanced Linux Sound Architecture", NULL);
-	add_device (AUDIO_PLAYBACK, "artsdsink", "Artsd - ART Sound Daemon", NULL);
-	add_device (AUDIO_PLAYBACK, "esdsink", "ESD - Enlightenment Sound Daemon", NULL);
-	add_device (AUDIO_CAPTURE, "esdmon", "ESD - Enlightenment Sound Daemon", NULL);
-	add_device (AUDIO_PLAYBACK, "osssink", "OSS - Open Sound System", NULL);
-	add_device (AUDIO_CAPTURE, "osssrc", "OSS - Open Sound System", NULL);
-	add_device (AUDIO_PLAYBACK, "polypsink", "Polypaudio Sound Server", NULL);
-	add_device (AUDIO_CAPTURE, "polypsrc", "Polypaudio Sound Server", NULL);
-	add_device (AUDIO_CAPTURE, "audiotestsrc wave=triangle is-live=true", "Test Sound", NULL);
-	add_device (AUDIO_CAPTURE, "audiotestsrc wave=silence is-live=true", "Silence", NULL);
+	add_device (AUDIO_PLAYBACK, "alsasink", _("ALSA - Advanced Linux Sound Architecture"), NULL);
+	add_device (AUDIO_CAPTURE, "alsasrc", _("ALSA - Advanced Linux Sound Architecture"), NULL);
+	add_device (AUDIO_PLAYBACK, "artsdsink", _("Artsd - ART Sound Daemon"), NULL);
+	add_device (AUDIO_PLAYBACK, "esdsink", _("ESD - Enlightenment Sound Daemon"), NULL);
+	add_device (AUDIO_CAPTURE, "esdmon", _("ESD - Enlightenment Sound Daemon"), NULL);
+	add_device (AUDIO_PLAYBACK, "osssink", _("OSS - Open Sound System"), NULL);
+	add_device (AUDIO_CAPTURE, "osssrc", _("OSS - Open Sound System"), NULL);
+	add_device (AUDIO_PLAYBACK, "polypsink", _("Polypaudio Sound Server"), NULL);
+	add_device (AUDIO_CAPTURE, "polypsrc", _("Polypaudio Sound Server"), NULL);
+	add_device (AUDIO_CAPTURE, "audiotestsrc wave=triangle is-live=true", _("Test Sound"), NULL);
+	add_device (AUDIO_CAPTURE, "audiotestsrc wave=silence is-live=true", _("Silence"), NULL);
 	
 	add_selected_device ("", AUDIO_PLAYBACK);
 	add_selected_device ("music", AUDIO_PLAYBACK);
