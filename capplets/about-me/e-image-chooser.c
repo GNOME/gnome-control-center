@@ -209,11 +209,11 @@ set_image_from_data (EImageChooser *chooser,
 	GdkPixbuf *pixbuf;
 
 	gdk_pixbuf_loader_write (loader, data, length, NULL);
+	gdk_pixbuf_loader_close (loader, NULL);
 
 	pixbuf = gdk_pixbuf_loader_get_pixbuf (loader);
 	if (pixbuf)
-		gdk_pixbuf_ref (pixbuf);
-	gdk_pixbuf_loader_close (loader, NULL);
+		g_object_ref (pixbuf);
 	g_object_unref (loader);
 
 	if (pixbuf) {

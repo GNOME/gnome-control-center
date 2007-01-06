@@ -455,14 +455,13 @@ about_me_update_photo (GnomeAboutMe *me)
 		   so that the user doesn't get an application that does not respond
 		   or that takes 100% CPU */
 		gdk_pixbuf_loader_write (loader, (guchar *)data, length, NULL);
+		gdk_pixbuf_loader_close (loader, NULL);
 		
 		pixbuf = gdk_pixbuf_loader_get_pixbuf (loader);
 		
 		if (pixbuf)
-			gdk_pixbuf_ref (pixbuf);
+			g_object_ref (pixbuf);
 			
-		gdk_pixbuf_loader_close (loader, NULL);
-
 		g_object_unref (loader);
 		
 		height = gdk_pixbuf_get_height (pixbuf);

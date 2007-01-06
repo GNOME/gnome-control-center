@@ -1,3 +1,12 @@
+2007-01-06  Hiroyuki Ikezoe <poincare@ikezoe.net>
+
+	Fixes #343584 (patch from Evolution)
+
+	* e-image-chooser.c (set_image_from_data): ref the pixbuf we get to
+	not lose it when we close the loader.
+
+	* gnome-about-me.c (about_me_update_photo): ditto.
+	
 2006-09-15  Matt Keenan <matt.keenan@sun.com>
 
 	Fixes #349079
