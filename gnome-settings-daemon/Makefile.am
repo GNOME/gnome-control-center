@@ -1,7 +1,6 @@
 SUBDIRS = xrdb actions
 
 INCLUDES=$(DBUS_CFLAGS) $(LIBGNOMEKBD_CFLAGS) $(GNOME_SETTINGS_DAEMON_CFLAGS) -I$(top_srcdir)/libbackground -I$(top_srcdir) \
-  -DESD_SERVER="\"$(ESD_SERVER)\""		\
   -DDATADIR="\"$(datadir)\""			\
   -DPIXMAPSDIR="\"$(GNOMECC_PIXMAPS_DIR)\""	\
   $(FB_CFLAGS)

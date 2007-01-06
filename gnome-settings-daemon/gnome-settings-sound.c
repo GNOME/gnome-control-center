@@ -33,7 +33,9 @@
 
 #include <glib/gi18n.h>
 
-#include <esd.h>
+#ifdef HAVE_ESD
+# include <esd.h>
+#endif
 
 #include <gconf/gconf-client.h>
 #include <libgnome/gnome-sound.h>
@@ -43,30 +45,36 @@
 #include "gnome-settings-sound.h"
 #include "gnome-settings-daemon.h"
 
-/* start_esd
+/* start_gnome_sound
  *
- * Start the Enlightenment Sound Daemon. 
+ * Start GNOME sound. 
  */
 static void
-start_esd (void) 
+start_gnome_sound (void) 
 {
 	gnome_sound_init (NULL);
 	if (gnome_sound_connection_get () < 0)
-		g_warning ("Could not connect to the ESD daemon\n");
+		g_warning ("Could not start GNOME sound.\n");
 }
 
-static gboolean set_standby = TRUE;
+#ifdef HAVE_ESD
+static gboolean set_esd_standby = TRUE;
+#endif
 
-/* stop_esd
+/* stop_gnome_sound
  *
- * Stop the Enlightenment Sound Daemon. 
+ * Stop GNOME sound. 
  */
 static void
-stop_esd (void) 
+stop_gnome_sound (void) 
 {
+#ifdef HAVE_ESD
 	/* Can't think of a way to do this reliably, so we fake it for now */
 	esd_standby (gnome_sound_connection_get ());
-	set_standby = TRUE;
+	set_esd_standby = TRUE;
+#else
+	gnome_sound_shutdown ();
+#endif
 }
 
 struct reload_foreach_closure {
@@ -88,13 +96,15 @@ reload_foreach_cb (SoundEvent *event, gpointer data)
 	closure = data;
 
 	key = sound_event_compose_key (event);
+
+#ifdef HAVE_ESD
 	/* We need to free up the old sample, because
 	 * esd allows multiple samples with the same name,
 	 * putting memory to waste. */
 	sid = esd_sample_getid(gnome_sound_connection_get (), key);
 	if (sid >= 0)
 		esd_sample_free(gnome_sound_connection_get (), sid);
-
+#endif
 	/* We only disable sounds for system events.  Other events, like sounds
 	 * in games, should be preserved.  The games should have their own
 	 * configuration for sound anyway.
@@ -141,32 +151,40 @@ apply_settings (void)
 	static int event_changed_old = 0;
 	int event_changed_new;
 
-	gboolean enable_esd;
+	gboolean enable_sound;
 	gboolean event_sounds;
 
 	struct reload_foreach_closure closure;
 
 	client = gnome_settings_daemon_get_conf_client ();
 
-	enable_esd        = gconf_client_get_bool (client, "/desktop/gnome/sound/enable_esd", NULL);
+#ifdef HAVE_ESD
+	enable_sound        = gconf_client_get_bool (client, "/desktop/gnome/sound/enable_esd", NULL);
+#else
+	enable_sound        = TRUE;
+#endif
 	event_sounds      = gconf_client_get_bool (client, "/desktop/gnome/sound/event_sounds", NULL);
 	event_changed_new = gconf_client_get_int  (client, "/desktop/gnome/sound/event_changed", NULL);
 
 	closure.enable_system_sounds = event_sounds;
 
-	if (enable_esd) {
+	if (enable_sound) {
 		if (gnome_sound_connection_get () < 0) 
-			start_esd ();
-
-		else if (set_standby) {
+			start_gnome_sound ();
+#ifdef HAVE_ESD
+		else if (set_esd_standby) {
 			esd_resume (gnome_sound_connection_get ());
-			set_standby = FALSE;
+			set_esd_standby = FALSE;
 		}
+#endif
+	} else {
+#ifdef HAVE_ESD
+	  if (!set_esd_standby)
+#endif
+		stop_gnome_sound ();
+	}
 
-	} else if (!enable_esd && !set_standby)
-		stop_esd ();
-
-	if (enable_esd &&
+	if (enable_sound &&
 	    (!inited || event_changed_old != event_changed_new))
 	{
 		SoundProperties *props;
