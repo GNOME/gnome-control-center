@@ -20,6 +20,7 @@
 
 #include <config.h>
 
+#include <glib/gi18n.h>
 #include <gconf/gconf-client.h>
 #include <gnome.h>
 #include <string.h>
@@ -337,7 +338,17 @@ void gnome_wp_item_update_description (GnomeWPItem * item) {
   } else {
     gchar * info;
 
-    info = g_strdup_printf ("%s, %d %s x %d %s",
+    /*
+       Translators: This message is used to render the type and size of the
+       background images in gnome-background-properites. The first "%s" will
+       be replaced by the image type, and the two "%d %s"s will be replaced
+       with the images' dimensions. For example, in US English, this may be
+       displayed as "JPEG Image, 1600 pixels x 1200 pixels".
+
+       Do not translate the "background size|" type. Remove it from the
+       translation.
+    */
+    info = g_strdup_printf (Q_("background size|%s, %d %s x %d %s"),
 			    gnome_vfs_mime_get_description (item->fileinfo->mime_type),
 			    item->width,
 			    ngettext ("pixel", "pixels", item->width),
