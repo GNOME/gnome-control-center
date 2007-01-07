@@ -820,13 +820,15 @@ static void gnome_wp_update_preview (GtkFileChooser *chooser,
   uri = gtk_file_chooser_get_preview_uri (chooser);
 
   if (uri) {
-    GdkPixbuf *pixbuf;
+    GdkPixbuf *pixbuf = NULL;
     gchar *mime_type;
 
     mime_type = gnome_vfs_get_mime_type (uri);
-    pixbuf = gnome_thumbnail_factory_generate_thumbnail (capplet->thumbs,
+    if (mime_type) {
+      pixbuf = gnome_thumbnail_factory_generate_thumbnail (capplet->thumbs,
 							 uri,
 							 mime_type);
+    }
 
     if(pixbuf != NULL) {
       gtk_image_set_from_pixbuf (GTK_IMAGE (capplet->image), pixbuf);
