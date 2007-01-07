@@ -135,8 +135,8 @@ gtk_theme_update_remove_button (GtkTreeSelection *selection,
   gchar *theme_selected;
   GtkTreeModel *model;
   GtkTreeIter iter;
-  GList *theme_list=NULL, *string_list, *list;
-  gchar *theme_dir = NULL;
+  GList *theme_list=NULL, *list;
+  gchar *theme_base=NULL;
   GnomeVFSResult vfs_result;
   GnomeVFSFileInfo *vfs_info;
 
@@ -150,12 +150,12 @@ gtk_theme_update_remove_button (GtkTreeSelection *selection,
   if (theme_selected != NULL) 
   {
      switch (theme_type) {
-		case THEME_GTK: theme_dir = g_strdup("/gtk-2.0/");
+		case THEME_GTK: theme_base = g_strdup("/gtk-2.0/");
 				theme_list = gnome_theme_info_find_by_type (GNOME_THEME_GTK_2);
 				break;
 		case THEME_ICON: theme_list = gnome_theme_icon_info_find_all();
 				 break;
-		case THEME_WINDOW: theme_dir = g_strdup("/metacity-1/");
+		case THEME_WINDOW: theme_base = g_strdup("/metacity-1/");
 				    theme_list = gnome_theme_info_find_by_type (GNOME_THEME_METACITY);
 				    break;
 		default: theme_list = NULL;
@@ -163,22 +163,25 @@ gtk_theme_update_remove_button (GtkTreeSelection *selection,
     }
   }
 		
-  string_list = NULL;
+  vfs_info = gnome_vfs_file_info_new ();
 
   for (list = theme_list; list; list = list->next)
   {
     GnomeThemeInfo *info = list->data;
+	gchar *theme_dir = NULL;
+
     if (!strcmp(info->name, theme_selected))
     {
 	if (theme_type == THEME_ICON) 
 		theme_dir = g_strdup(info->path);
 	else 
-		theme_dir = g_strdup_printf("%s/%s", info->path, theme_dir);
+		theme_dir = g_strdup_printf("%s/%s", info->path, theme_base);
 			
-	vfs_info = gnome_vfs_file_info_new ();
 	vfs_result = gnome_vfs_get_file_info (theme_dir,
 					      vfs_info,
 				              GNOME_VFS_FILE_INFO_GET_ACCESS_RIGHTS);
+	g_free (theme_dir);
+
         if (vfs_result == GNOME_VFS_OK) 
 	{
 		if ((vfs_info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_ACCESS) &&
@@ -194,6 +197,9 @@ gtk_theme_update_remove_button (GtkTreeSelection *selection,
 	gnome_vfs_file_info_unref (vfs_info);
       }
     }
+    gnome_vfs_file_info_unref(vfs_info);
+    g_free (theme_base);
+    g_free (theme_selected);
 }
 
 static void
