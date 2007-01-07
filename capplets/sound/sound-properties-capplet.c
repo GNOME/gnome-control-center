@@ -658,8 +658,8 @@ setup_devices ()
 	add_device (AUDIO_PLAYBACK, "alsasink", _("ALSA - Advanced Linux Sound Architecture"), NULL);
 	add_device (AUDIO_CAPTURE, "alsasrc", _("ALSA - Advanced Linux Sound Architecture"), NULL);
 	add_device (AUDIO_PLAYBACK, "artsdsink", _("Artsd - ART Sound Daemon"), NULL);
-	add_device (AUDIO_PLAYBACK, "esdsink", _("ESD - Enlightenment Sound Daemon"), NULL);
-	add_device (AUDIO_CAPTURE, "esdmon", _("ESD - Enlightenment Sound Daemon"), NULL);
+	add_device (AUDIO_PLAYBACK, "esdsink", _("ESD - Enlightened Sound Daemon"), NULL);
+	add_device (AUDIO_CAPTURE, "esdmon", _("ESD - Enlightened Sound Daemon"), NULL);
 	add_device (AUDIO_PLAYBACK, "osssink", _("OSS - Open Sound System"), NULL);
 	add_device (AUDIO_CAPTURE, "osssrc", _("OSS - Open Sound System"), NULL);
 	add_device (AUDIO_PLAYBACK, "polypsink", _("Polypaudio Sound Server"), NULL);
