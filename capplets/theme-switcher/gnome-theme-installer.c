@@ -458,8 +458,15 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 		if (theme_type == THEME_GTK || theme_type == THEME_METACITY || theme_type == THEME_ICON)
 		{
 			/* TODO: currently cannot apply "gnome themes" */
-			theme_props->user_message=g_strdup_printf(_("<span weight=\"bold\" size=\"larger\">The theme \"%s\" has been installed.</span>\n\nWould you like to apply it now, or keep your current theme?"), theme_props->theme_name);
+			gchar* str;
+
+			str = g_strdup_printf(_("The theme \"%s\" has been installed."), theme_props->theme_name);
+			theme_props->user_message=g_strdup_printf("<span weight=\"bold\" size=\"larger\">%s</span>", str);
+			g_free(str);
+
 			dialog = gtk_message_dialog_new_with_markup (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_INFO, GTK_BUTTONS_NONE, theme_props->user_message );
+
+			gtk_message_dialog_format_secondary_text(dialog, _("Would you like to apply it now, or keep your current theme?"));
 
 			gtk_dialog_add_button (GTK_DIALOG (dialog), _("Keep Current Theme"), GTK_RESPONSE_CLOSE);
 
