@@ -382,7 +382,8 @@ try_spawn_config_tool (GdkScreen *screen)
 
                 escaped = g_markup_escape_text (error->message, -1);
                 
-                str = g_strdup_printf (_("<b>Cannot start the preferences application for your window manager</b>\n\n%s"),
+                str = g_strdup_printf ("<b>%s</b>\n\n%s",
+                                       _("Cannot start the preferences application for your window manager"),
                                        escaped);
                 g_free (escaped);
                                        
