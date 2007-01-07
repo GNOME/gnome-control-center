@@ -22,6 +22,7 @@
 #endif
 
 #include <stdio.h>
+#include <locale.h>
 
 #include <ft2build.h>
 #include FT_FREETYPE_H
@@ -225,10 +226,42 @@ main(int argc, char **argv)
     GdkPixbuf *pixbuf;
     guchar *buffer;
     gint i, len, pen_x, pen_y;
+    gunichar *thumbstr = NULL;
+    gint thumbstr_len = 2;
+    gint font_size = FONT_SIZE;
 
-    if (argc != 3) {
-	g_printerr("usage: thumbnailer fontfile output-image\n");
+    if (argc < 3) {
+	g_printerr("usage: thumbnailer fontfile output-image [text [font-size]]\n");
 	return 1;
+    }
+
+    if (argc >= 4) {
+	/* build ucs4 version of string to thumbnail */
+	gchar *tmpstr = NULL;
+	const char *charset = NULL;
+	GError *err = NULL;
+	gboolean is_utf8;
+
+	setlocale (LC_ALL, "");
+	is_utf8 = g_get_charset (&charset);
+	if (is_utf8) {
+		tmpstr = g_strdup (argv[3]);
+	}
+	else {
+	    tmpstr = g_locale_to_utf8 (argv[3], -1, NULL, NULL, &err);
+	    if (err) {
+		g_error (err->message);
+	    }
+	}
+	thumbstr_len = g_utf8_strlen (tmpstr, -1);
+	thumbstr = g_utf8_to_ucs4_fast (tmpstr, -1, NULL);
+	g_free (tmpstr);
+	tmpstr = NULL;
+    }
+
+    if (argc == 5) {
+	/* font size given */
+	font_size = atoi (argv[4]);
     }
 
     if (!gnome_vfs_init()) {
@@ -251,7 +284,7 @@ main(int argc, char **argv)
     }
     g_free (uri);
 
-    error = FT_Set_Pixel_Sizes(face, 0, FONT_SIZE);
+    error = FT_Set_Pixel_Sizes(face, 0, font_size);
     if (error) {
 	g_printerr("could not set pixel size: %s\n", get_ft_error(error));
 	/* return 1; */
@@ -271,7 +304,7 @@ main(int argc, char **argv)
     }
 
     pixbuf = gdk_pixbuf_new(GDK_COLORSPACE_RGB, FALSE, 8,
-			    FONT_SIZE*3, FONT_SIZE*1.5);
+			    font_size*3*thumbstr_len/2, font_size*1.5);
     if (!pixbuf) {
 	g_printerr("could not create pixbuf\n");
 	return 1;
@@ -281,20 +314,34 @@ main(int argc, char **argv)
     for (i = 0; i < len; i++)
 	buffer[i] = 255;
 
-    pen_x = FONT_SIZE/2;
-    pen_y = FONT_SIZE;
+    pen_x = font_size/2;
+    pen_y = font_size;
 
-    glyph_index1 = FT_Get_Char_Index (face, 'A');
-    glyph_index2 = FT_Get_Char_Index (face, 'a');
+    if (argc == 3) {
+	glyph_index1 = FT_Get_Char_Index (face, 'A');
+	glyph_index2 = FT_Get_Char_Index (face, 'a');
 
-    /* if the glyphs for those letters don't exist, pick some other
-     * glyphs. */
-    if (glyph_index1 == 0) glyph_index1 = MIN (65, face->num_glyphs-1);
-    if (glyph_index2 == 0) glyph_index2 = MIN (97, face->num_glyphs-1);
+	/* if the glyphs for those letters don't exist, pick some other
+	* glyphs. */
+	if (glyph_index1 == 0) glyph_index1 = MIN (65, face->num_glyphs-1);
+	if (glyph_index2 == 0) glyph_index2 = MIN (97, face->num_glyphs-1);
 
-    draw_char(pixbuf, face, glyph_index1, &pen_x, &pen_y);
-    draw_char(pixbuf, face, glyph_index2, &pen_x, &pen_y);
-
+	draw_char(pixbuf, face, glyph_index1, &pen_x, &pen_y);
+	draw_char(pixbuf, face, glyph_index2, &pen_x, &pen_y);
+    }
+    else if (argc >= 4) {
+	gunichar *p = thumbstr;
+	FT_Select_Charmap (face, FT_ENCODING_UNICODE);
+	i = 0;
+	while (i < thumbstr_len) {
+	    glyph_index1 = FT_Get_Char_Index (face, *p);
+	    draw_char(pixbuf, face, glyph_index1, &pen_x, &pen_y);
+	    i++;
+	    p++;
+	}
+	g_free (thumbstr);
+	thumbstr = NULL;
+    }
     save_pixbuf(pixbuf, argv[2]);
     gdk_pixbuf_unref(pixbuf);
 
