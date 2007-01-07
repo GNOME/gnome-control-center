@@ -332,6 +332,7 @@ GdkPixbuf * gnome_wp_item_get_thumbnail (GnomeWPItem * item,
 }
 
 void gnome_wp_item_update_description (GnomeWPItem * item) {
+  g_free (item->description);
 
   if (!strcmp (item->filename, "(none)")) {
     item->description = g_strdup_printf ("<b>%s</b>", item->name);

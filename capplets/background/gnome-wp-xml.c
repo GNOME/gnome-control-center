@@ -303,7 +303,7 @@ void gnome_wp_xml_load_list (GnomeWPCapplet * capplet) {
 	  g_free (filename);
 	}
       }
-      g_list_free (list);
+      gnome_vfs_file_info_list_free (list);
 
       gnome_vfs_monitor_add (&handle, datadir, GNOME_VFS_MONITOR_DIRECTORY,
 			     (GnomeVFSMonitorCallback) gnome_wp_file_changed,
@@ -330,7 +330,7 @@ void gnome_wp_xml_load_list (GnomeWPCapplet * capplet) {
 	g_free (filename);
       }
     }
-    g_list_free (list);
+    gnome_vfs_file_info_list_free (list);
 
     gnome_vfs_monitor_add (&handle, WALLPAPER_DATADIR, GNOME_VFS_MONITOR_DIRECTORY,
 			   (GnomeVFSMonitorCallback) gnome_wp_file_changed,
