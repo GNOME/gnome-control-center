@@ -35,7 +35,7 @@ int main (int argc, char **argv)
 {
 	GnomeVFSURI *uri;
 	GnomeThemeMetaInfo *theme;
-	GnomeProgram *program;
+	GnomeProgram *program = NULL;
 	GladeXML *font_xml;
 	GtkWidget *font_dialog;
 	GtkWidget *font_sample;
@@ -56,12 +56,21 @@ int main (int argc, char **argv)
 	gnome_theme_init (NULL);
 		
 	uri = gnome_vfs_uri_new (args[0]);
-	g_assert (uri != NULL);
-		
+
+	if (!uri)
+	{
+		g_object_unref (program);
+		return 1;
+	}
+
 	theme = gnome_theme_read_meta_theme (uri);
 	gnome_vfs_uri_unref (uri);
-		
-	g_assert (theme != NULL);
+
+	if (!theme)
+	{
+		g_object_unref (program);
+		return 1;
+	}
 
 	if (theme->application_font) {
 		glade_init ();
@@ -94,6 +103,7 @@ int main (int argc, char **argv)
 		gconf_client_set_string (client, FONT_KEY, theme->application_font, NULL);
 		g_object_unref (client);
 	}
-		
+
+	g_free (program);
 	return 0;
 }
