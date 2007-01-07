@@ -233,7 +233,7 @@ main (int argc, char **argv)
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 
-	context = g_option_context_new (_("- GNOME Keyboard Preferencies"));
+	context = g_option_context_new (_("- GNOME Keyboard Preferences"));
 	g_option_context_add_main_entries (context, cap_options, GETTEXT_PACKAGE);
 
 	gnome_program_init ("gnome-keyboard-properties", VERSION, LIBGNOMEUI_MODULE, argc, argv,
