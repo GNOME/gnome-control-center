@@ -104,6 +104,6 @@ int main (int argc, char **argv)
 		g_object_unref (client);
 	}
 
-	g_free (program);
+	g_object_unref (program);
 	return 0;
 }
