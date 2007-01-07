@@ -482,7 +482,7 @@ application_font_to_gconf (GConfPropertyEditor *peditor,
 
 	danger_level = new_font_dangerous (new_font);
 	if (danger_level) {
-		GtkWidget *warning_dialog;
+		GtkWidget *warning_dialog, *apply_button;
 		gchar *warning_label;
 		gchar *warning_label2;
 
@@ -518,15 +518,27 @@ application_font_to_gconf (GConfPropertyEditor *peditor,
 		warning_dialog = gtk_message_dialog_new (NULL,
 							 GTK_DIALOG_MODAL,
 							 GTK_MESSAGE_WARNING,
-							 GTK_BUTTONS_OK_CANCEL,
+							 GTK_BUTTONS_NONE,
 							 warning_label);
 
 		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (warning_dialog),
 							  warning_label2);
+
+		gtk_dialog_add_button (GTK_DIALOG (warning_dialog), _("Use previous font"), GTK_RESPONSE_CLOSE);
+
+		apply_button = gtk_button_new_with_label (_("Use selected font"));
+
+		gtk_button_set_image (GTK_BUTTON (apply_button), gtk_image_new_from_stock (GTK_STOCK_APPLY, GTK_ICON_SIZE_BUTTON));
+		gtk_dialog_add_action_widget (GTK_DIALOG (warning_dialog), apply_button, GTK_RESPONSE_APPLY);
+		GTK_WIDGET_SET_FLAGS (apply_button, GTK_CAN_DEFAULT);
+		gtk_widget_show (apply_button);
+
+		gtk_dialog_set_default_response (GTK_DIALOG (warning_dialog), GTK_RESPONSE_CLOSE);
+
 		g_free (warning_label);
 		g_free (warning_label2);
 
-		if (gtk_dialog_run (GTK_DIALOG (warning_dialog)) == GTK_RESPONSE_OK) {
+		if (gtk_dialog_run (GTK_DIALOG (warning_dialog)) == GTK_RESPONSE_APPLY) {
 			gconf_value_set_string (new_value, new_font);
 		} else {
 			gconf_value_set_string (new_value, old_font);
