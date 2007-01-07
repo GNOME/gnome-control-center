@@ -15,6 +15,7 @@
 #include "gnome-theme-details.h"
 #include "gnome-theme-installer.h"
 #include "gnome-theme-info.h"
+#include "gtkrc-utils.h"
 
 #define MAX_ELEMENTS_BEFORE_SCROLLING 12
 
@@ -201,13 +202,49 @@ gtk_theme_update_remove_button (GtkTreeSelection *selection,
 }
 
 static void
+update_color_scheme_tab ()
+{
+	GSList *symbolic_colors = NULL;
+	GSList *engines = NULL;
+	gboolean fg, bg, base, text, fg_s, bg_s, enable_colors;
+	gchar *filename, *theme_name;
+	GtkSettings *settings;
+	GladeXML *dialog;
+
+	dialog = gnome_theme_manager_get_theme_dialog ();
+
+	settings = gtk_settings_get_default ();
+	g_object_get (G_OBJECT (settings), "gtk-theme-name", &theme_name, NULL);
+	filename = gtkrc_find_named (theme_name);
+
+	gtkrc_get_details (filename, &engines, &symbolic_colors);
+	fg = (g_slist_find_custom (symbolic_colors, "fg_color", g_str_equal) != NULL);
+	bg = (g_slist_find_custom (symbolic_colors, "bg_color", g_str_equal) != NULL);
+	base = (g_slist_find_custom (symbolic_colors, "base_color", g_str_equal) != NULL);
+	text = (g_slist_find_custom (symbolic_colors, "text_color", g_str_equal) != NULL);
+	fg_s = (g_slist_find_custom (symbolic_colors, "selected_fg_color", g_str_equal) != NULL);
+	bg_s = (g_slist_find_custom (symbolic_colors, "selected_bg_color", g_str_equal) != NULL);
+
+	enable_colors = (fg && bg && base && text && fg_s && bg_s);
+	gtk_widget_set_sensitive (WID ("enable_custom_colors_checkbutton"), enable_colors);
+	gtk_widget_set_sensitive (WID ("color_scheme_table"), enable_colors);
+	if (enable_colors)
+		gtk_widget_hide (WID ("color_scheme_message_hbox"));
+	else
+		gtk_widget_show (WID ("color_scheme_message_hbox"));
+
+	g_free (filename);
+	g_free (theme_name);
+}
+
+static void
 gtk_theme_selection_changed (GtkTreeSelection *selection,
 			     gpointer          data)
 {
   GladeXML *dialog;
-		
+
   dialog = gnome_theme_manager_get_theme_dialog ();
-  
+
   update_gconf_key_from_selection (selection, GTK_THEME_KEY);
   gtk_theme_update_remove_button(selection, WID("control_remove_button"), THEME_GTK);
 }
@@ -460,7 +497,7 @@ remove_theme(GtkWidget *button, gpointer data)
 }
 
 void
-color_select (GtkWidget *colorbutton, gpointer dialog)
+color_select (GtkWidget *colorbutton, GladeXML *dialog)
 {
   GConfClient *client = NULL;
   gchar *new_scheme;
@@ -534,6 +571,12 @@ toggle_color_scheme_key (GtkWidget *checkbutton, gpointer *data)
 }
 
 void
+theme_notebook_changed_page (GtkWidget *widget, GladeXML *dialog)
+{
+	update_color_scheme_tab ();
+}
+
+void
 gnome_theme_details_init (void)
 {
   GtkWidget *parent, *widget;
@@ -592,10 +635,12 @@ gnome_theme_details_init (void)
   widget = WID ("enable_custom_colors_checkbutton");
   g_signal_connect (G_OBJECT (widget), "toggled", G_CALLBACK (toggle_color_scheme_key), parent);
 
+  g_signal_connect (G_OBJECT (WID ("theme_notebook")), "switch-page", G_CALLBACK (theme_notebook_changed_page), dialog);
+
   g_object_get (G_OBJECT (gtk_settings_get_default()), "gtk-color-scheme", &color_scheme, NULL);
   update_color_buttons_from_string (color_scheme);
 
-
+  /* general signals */
   g_signal_connect (G_OBJECT (parent), "response", G_CALLBACK (cb_dialog_response), NULL);
   g_signal_connect (G_OBJECT (parent), "delete-event", G_CALLBACK (gtk_true), NULL);
 

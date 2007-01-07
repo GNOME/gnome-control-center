@@ -1618,6 +1618,9 @@ main (int argc, char *argv[])
   };
   GOptionContext *option_context;
 
+  if (!g_thread_supported ())
+    g_thread_init (NULL);
+
   /* We need to do this before we initialize anything else */
   theme_thumbnail_factory_init (argc, argv);
 
