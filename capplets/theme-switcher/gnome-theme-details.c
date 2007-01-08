@@ -515,6 +515,8 @@ color_select (GtkWidget *colorbutton, GladeXML *dialog)
   GdkColor colors[6];
   gchar *bg, *fg, *text, *base, *selected_fg, *selected_bg;
   GtkWidget *widget;
+  GtkTreeModel *model;
+  GtkTreeIter tmp, iter;
 
   widget = WID ("fg_colorbutton");
   gtk_color_button_get_color (GTK_COLOR_BUTTON (widget), &colors[0]);
@@ -549,10 +551,7 @@ color_select (GtkWidget *colorbutton, GladeXML *dialog)
   g_object_unref (G_OBJECT (client));
   free_all (fg, bg, text, base, selected_fg, selected_bg, new_scheme, NULL);
 
-  GtkTreeModel *model;
-  GtkTreeIter tmp, iter;
   model = gtk_combo_box_get_model (GTK_COMBO_BOX (WID ("color_scheme_combobox")));
-
   for (gtk_tree_model_get_iter_first(GTK_TREE_MODEL (model), &tmp);gtk_tree_model_iter_next(model, &tmp);)
   {
     iter = tmp;
@@ -595,6 +594,69 @@ void
 theme_notebook_changed_page (GtkWidget *widget, GladeXML *dialog)
 {
 	update_color_scheme_tab ();
+}
+
+void
+save_color_scheme (GtkWidget *widget, GtkWidget *parent)
+{
+	GtkWidget *dialog, *hbox, *label, *entry;
+	dialog = gtk_dialog_new_with_buttons (_("Save Color Scheme"),
+						GTK_WINDOW (parent),
+						GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_NO_SEPARATOR,
+						GTK_STOCK_CANCEL,
+						GTK_RESPONSE_CANCEL,
+						GTK_STOCK_SAVE,
+						GTK_RESPONSE_ACCEPT, NULL);
+
+	hbox = gtk_hbox_new (FALSE, 6);
+	label = gtk_label_new (_("Save color scheme as:"));
+	entry = gtk_entry_new ();
+
+	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, TRUE, 6);
+	gtk_box_pack_start (GTK_BOX (hbox), entry, FALSE, TRUE, 6);
+
+	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), hbox, TRUE, TRUE, 12);
+	gtk_widget_show_all (hbox);
+
+	gtk_dialog_run (GTK_DIALOG (dialog));
+	gtk_widget_hide (dialog);
+}
+
+void
+delete_color_scheme (GtkWidget *widget, GtkWidget *parent)
+{
+	GladeXML *dialog;
+	gchar *color_scheme_name;
+	GtkWidget *query;
+	dialog = gnome_theme_manager_get_theme_dialog ();
+
+	color_scheme_name = gtk_combo_box_get_active_text (GTK_COMBO_BOX (WID ("color_scheme_combobox")));
+	query = gtk_message_dialog_new (GTK_WINDOW (parent),
+				GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+				GTK_MESSAGE_QUESTION,
+				GTK_BUTTONS_NONE,
+				_("Are you sure you want to delete the \"%s\" color scheme?"),
+				color_scheme_name);
+	gtk_dialog_add_buttons (GTK_DIALOG (query), GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+					GTK_STOCK_DELETE, GTK_RESPONSE_OK, NULL);
+	gtk_dialog_run (GTK_DIALOG (query));
+	gtk_widget_hide (query);
+}
+
+void
+color_scheme_combobox_changed (GtkWidget *widget, GtkWidget *parent)
+{
+	GladeXML *dialog;
+	dialog = gnome_theme_manager_get_theme_dialog ();
+	gchar *color_scheme_name;
+	gboolean custom;
+
+	color_scheme_name = gtk_combo_box_get_active_text (GTK_COMBO_BOX (WID ("color_scheme_combobox")));
+
+	custom = (color_scheme_name != NULL && strcmp (color_scheme_name, _("Custom")) == 0);
+	gtk_widget_set_sensitive (WID ("save_color_scheme_button"), custom);
+	gtk_widget_set_sensitive (WID ("delete_color_scheme_button"), !custom);
+
 }
 
 void
@@ -655,6 +717,15 @@ gnome_theme_details_init (void)
 
   widget = WID ("enable_custom_colors_checkbutton");
   g_signal_connect (G_OBJECT (widget), "toggled", G_CALLBACK (toggle_color_scheme_key), parent);
+
+  widget = WID ("save_color_scheme_button");
+  g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (save_color_scheme), parent);
+
+  widget = WID ("color_scheme_combobox");
+  g_signal_connect (G_OBJECT (widget), "changed", G_CALLBACK (color_scheme_combobox_changed), parent);
+
+  widget = WID ("delete_color_scheme_button");
+  g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (delete_color_scheme), parent);
 
   g_signal_connect (G_OBJECT (WID ("theme_notebook")), "switch-page", G_CALLBACK (theme_notebook_changed_page), dialog);
 
@@ -1005,6 +1076,9 @@ gnome_theme_details_update_from_gconf (void)
 
   widget = WID ("enable_custom_colors_checkbutton");
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), use_custom_colors);
+
+  widget = WID ("saved_color_schemes_hbox");
+  gtk_widget_set_sensitive (widget, use_custom_colors);
 
   widget = WID ("color_scheme_table");
   gtk_widget_set_sensitive (widget, use_custom_colors);
