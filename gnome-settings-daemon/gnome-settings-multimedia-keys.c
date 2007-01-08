@@ -39,6 +39,7 @@
 #include "actions/acme.h"
 #include "actions/acme-volume.h"
 #include "gsd-media-keys-window.h"
+#include "gnome-settings-dbus.h"
 
 #define VOLUME_STEP 6           /* percents for one volume button press */
 
@@ -51,7 +52,9 @@
  * for these set */
 #define USED_MODS (GDK_SHIFT_MASK | GDK_CONTROL_MASK | GDK_MOD1_MASK)
 
-typedef struct {
+typedef struct Acme Acme;
+
+struct Acme {
 	AcmeVolume *volobj;
 	GtkWidget *dialog;
 	GConfClient *conf_client;
@@ -59,7 +62,10 @@ typedef struct {
 	/* Multihead stuff */
 	GdkScreen *current_screen;
 	GSList *screens;
-} Acme;
+
+	/* GnomeSettingsServer */
+	GObject *server;
+};
 
 static void
 acme_error (char * msg)
@@ -191,35 +197,6 @@ grab_key (Acme *acme, Key *key, gboolean grab)
 	}
 }
 
-static void
-unhookup_keysym (int keycode)
-{
-	char *command;
-
-	if (keycode <= 0)
-		return;
-
-	command = g_strdup_printf ("xmodmap -e \"keycode %d = \"", keycode);
-	g_spawn_command_line_sync (command, NULL, NULL, NULL, NULL);
-	g_free (command);
-}
-
-static gboolean
-hookup_keysym (int keycode, const char *keysym)
-{
-	char *command;
-
-	if (keycode <= 0)
-		return TRUE;
-
-	command = g_strdup_printf ("xmodmap -e \"keycode %d = %s\"",
-				   keycode, keysym);
-	g_spawn_command_line_sync (command, NULL, NULL, NULL, NULL);
-	g_free (command);
-
-	return FALSE;
-}
-
 static gboolean
 is_valid_shortcut (const char *string)
 {
@@ -241,7 +218,7 @@ update_kbd_cb (GConfClient *client, guint id, GConfEntry *entry, gpointer data)
 	g_return_if_fail (entry->key != NULL);
 
 	/* Find the key that was modified */
-	for (i = 0; i < PLAY_KEY; i++)
+	for (i = 0; i < HANDLED_KEYS; i++)
 	{
 		if (strcmp (entry->key, keys[i].gconf_key) == 0)
 		{
@@ -285,61 +262,6 @@ update_kbd_cb (GConfClient *client, guint id, GConfEntry *entry, gpointer data)
 
 	if (found != FALSE)
 		return;
-
-	for (i = PLAY_KEY; i < HANDLED_KEYS; i++)
-	{
-		if (strcmp (entry->key, keys[i].gconf_key) == 0)
-		{
-			char *tmp;
-			Key *key;
-
-			if (keys[i].key != NULL)
-				unhookup_keysym (keys[i].key->keycode);
-
-			g_free (keys[i].key);
-			keys[i].key = NULL;
-
-			tmp = gconf_client_get_string (acme->conf_client,
-						       keys[i].gconf_key, NULL);
-
-			if (is_valid_shortcut (tmp) == FALSE)
-			{
-				g_free (tmp);
-				break;
-			}
-
-			key = g_new0 (Key, 1);
-			if (egg_accelerator_parse_virtual (tmp, &key->keysym, &key->keycode, &key->state) == FALSE
-			    || key->keycode == 0)
-			{
-				g_free (tmp);
-				g_free (key);
-				break;
-			}
-
-			switch (keys[i].key_type) {
-			case PLAY_KEY:
-				hookup_keysym (key->keycode, "XF86AudioPlay");
-				break;
-			case PAUSE_KEY:
-				hookup_keysym (key->keycode, "XF86AudioPause");
-				break;
-			case STOP_KEY:
-				hookup_keysym (key->keycode, "XF86AudioStop");
-				break;
-			case PREVIOUS_KEY:
-				hookup_keysym (key->keycode, "XF86AudioPrev");
-				break;
-			case NEXT_KEY:
-				hookup_keysym (key->keycode, "XF86AudioNext");
-				break;
-			}
-
-			keys[i].key = key;
-
-			g_free (tmp);
-		}
-	}
 }
 
 static void
@@ -373,7 +295,7 @@ init_kbd (Acme *acme)
 {
 	int i;
 
-	for (i = 0; i < PLAY_KEY; i++)
+	for (i = 0; i < HANDLED_KEYS; i++)
 	{
 		char *tmp;
 		Key *key;
@@ -411,52 +333,6 @@ init_kbd (Acme *acme)
 		keys[i].key = key;
 
 		grab_key (acme, key, TRUE);
-	}
-
-	for (i = PLAY_KEY; i < HANDLED_KEYS; i++)
-	{
-		char *tmp;
-		Key *key;
-
-		gconf_client_notify_add (acme->conf_client,
-					 keys[i].gconf_key, update_kbd_cb,
-					 acme, NULL, NULL);
-
-		tmp = gconf_client_get_string (acme->conf_client,
-					       keys[i].gconf_key, NULL);
-		if (!is_valid_shortcut (tmp)) {
-			g_free (tmp);
-			continue;
-		}
-
-		key = g_new0 (Key, 1);
-		if (egg_accelerator_parse_virtual (tmp, &key->keysym, &key->keycode, &key->state) == FALSE
-		    || key->keycode == 0)
-		{
-			g_free (tmp);
-			g_free (key);
-			continue;
-		}
-		g_free (tmp);
-
-		keys[i].key = key;
-		switch (keys[i].key_type) {
-		case PLAY_KEY:
-			hookup_keysym (keys[i].key->keycode, "XF86AudioPlay");
-			break;
-		case PAUSE_KEY:
-			hookup_keysym (keys[i].key->keycode, "XF86AudioPause");
-			break;
-		case STOP_KEY:
-			hookup_keysym (keys[i].key->keycode, "XF86AudioStop");
-			break;
-		case PREVIOUS_KEY:
-			hookup_keysym (keys[i].key->keycode, "XF86AudioPrev");
-			break;
-		case NEXT_KEY:
-			hookup_keysym (keys[i].key->keycode, "XF86AudioNext");
-			break;
-		}
 	}
 }
 
@@ -683,6 +559,12 @@ do_sound_action (Acme *acme, int type)
 }
 
 static void
+do_multimedia_player_action (Acme *acme, const gchar *key)
+{
+	gnome_settings_server_media_player_key_pressed (acme->server, key);
+}
+
+static void
 do_action (Acme *acme, int type)
 {
 	gchar *cmd;
@@ -725,6 +607,21 @@ do_action (Acme *acme, int type)
 	case WWW_KEY:
 		do_www_action (acme, NULL);
 		break;
+	case PLAY_KEY:
+		do_multimedia_player_action (acme, "Play");
+		break;
+	case PAUSE_KEY:
+		do_multimedia_player_action (acme, "Pause");
+		break;
+	case STOP_KEY:
+		do_multimedia_player_action (acme, "Stop");
+		break;
+	case PREVIOUS_KEY:
+		do_multimedia_player_action (acme, "Previous");
+		break;
+	case NEXT_KEY:
+		do_multimedia_player_action (acme, "Next");
+		break;
 	default:
 		g_assert_not_reached ();
 	}
@@ -764,7 +661,7 @@ acme_filter_events (GdkXEvent *xevent, GdkEvent *event, gpointer data)
 	keycode = xev->xkey.keycode;
 	state = xev->xkey.state;
 
-	for (i = 0; i < PLAY_KEY; i++)
+	for (i = 0; i < HANDLED_KEYS; i++)
 	{
 		if (keys[i].key == NULL)
 			continue;
@@ -816,6 +713,8 @@ gnome_settings_multimedia_keys_load (GConfClient *client)
 
 	init_screens (acme);
 	init_kbd (acme);
+
+	acme->server = gnome_settings_server_get ();
 
 	/* initialise Volume handler */
 	acme->volobj = acme_volume_new();

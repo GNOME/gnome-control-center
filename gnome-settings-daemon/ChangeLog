@@ -1,3 +1,36 @@
+2007-01-08  Jan Arne Petersen <jap@gnome.org>
+
+	Fixes #133815
+
+	* gnome-settings-multimedia-keys.c: added support for storing the DBus
+	server.
+	(unhookup_keysim, hookup_keysim): removed.
+	(update_kbd_cb, init_kbd, acme_filter_events): iterate over all handled
+	keys, not just until the PLAY_KEY.
+	(do_multimedia_player_action): emit the "media_player_key_pressed" event.
+	(do_action): call do_multimedia_player_action for all media player events.
+	(gnome_settings_multimedia_keys_load): start a DBus server.
+
+	* gnome-settings-dbus.c: added "media_player_key_pressed" signal.
+	(find_by_application, find_by_time): new functions to search in the list
+	of media players.
+	(settings_daemon_grab_media_player_keys,
+	settings_daemon_release_media_player_keys): new functions to grab/release
+	the media players.
+	(gnome_settings_server_get): new function to create GnomeSettingsServer
+	objects.
+	(gnome_settings_server_media_player_key_pressed,
+	gnome_settings_server_constructor): new functions.
+	(gnome_settings_server_class_init): add new signal and constructor.
+
+	* gnome-settings-dbus.h: new file.
+
+	* gsd-infos.xml: added GrabMediaPlayerKeys and ReleaseMediaPlayerKeys
+	methods to the DBus interface.
+
+	* gnome-settings-marshal.list, Makefile.am: generate marshalling
+	functions.
+	
 2007-01-06  Marc-Andre Lureau  <marcandre.lureau@gmail.com>
 
 	Fixes #392276

@@ -41,6 +41,7 @@ gnome_settings_daemon_SOURCES =	\
 	gnome-settings-gtk1theme.h	\
 	gnome-settings-server.h		\
 	gnome-settings-dbus.c		\
+	gnome-settings-dbus.h		\
 	gnome-settings-xrdb.c		\
 	gnome-settings-xrdb.h		\
 	gsd-media-keys-window.c		\
@@ -84,13 +85,24 @@ gnome_settings_daemon_LDADD = \
 #	AccessXlibint.h
 
 BUILT_SOURCES=gnome-settings-server.h		\
-	gnome-settings-client.h
+	gnome-settings-client.h			\
+	gnome-settings-marshal.h		\
+	gnome-settings-marshal.c
+
+gnome_settings_daemon_SOURCES+=$(BUILT_SOURCES)
 
 Gladedir   = $(GNOMECC_GLADE_DIR)
 Glade_DATA = modmap-dialog.glade
 
 Dbusapidir   = $(includedir)/gnome-settings-daemon-2.0/gnome-settings-daemon
 Dbusapi_DATA = gnome-settings-client.h
+
+#Rule to generate the marshal files
+gnome-settings-marshal.c: gnome-settings-marshal.list
+	@GLIB_GENMARSHAL@ --prefix=gnome_settings_marshal $< --header --body > $@
+
+gnome-settings-marshal.h: gnome-settings-marshal.list
+	@GLIB_GENMARSHAL@ --prefix=gnome_settings_marshal $< --header > $@
 
 #Rule to generate the binding headers
 gnome-settings-server.h:  gsd-infos.xml
@@ -108,7 +120,8 @@ org.gnome.SettingsDaemon.service: org.gnome.SettingsDaemon.service.in Makefile
 	@sed -e "s|\@libexecdir\@|$(libexecdir)|" $< > $@
 
 EXTRA_DIST = $(Glade_DATA) $(Dbusapi_DATA) \
-             gnome-settings-daemon.pc.in gsd-infos.xml org.gnome.SettingsDaemon.service.in
+	gnome-settings-daemon.pc.in gsd-infos.xml \
+	org.gnome.SettingsDaemon.service.in gnome-settings-marshal.list
 CLEANFILES = $(BUILT_SOURCES) $(service_DATA)
 
 pkgconfigdir = $(libdir)/pkgconfig

@@ -4,5 +4,13 @@
 	<interface name="org.gnome.SettingsDaemon">
 		<annotation name="org.freedesktop.DBus.GLib.CSymbol" value="settings_daemon"/>
 		<method name="Awake"/>
+		<method name="GrabMediaPlayerKeys">
+			<arg type="s" name="application" direction="in"/>
+			<arg type="u" name="time" direction="in"/>
+		</method>
+		<method name="ReleaseMediaPlayerKeys">
+			<arg type="s" name="application" direction="in"/>
+		</method>
+		<signal name="MediaPlayerKeyPressed"/>
 	</interface>
 </node>
