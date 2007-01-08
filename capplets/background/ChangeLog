@@ -1,3 +1,14 @@
+2007-01-08  Ray Strode <rstrode@redhat.com>
+
+	Fixes #351991
+
+	* gnome-wp-info.c (gnome_wp_info_new): don't try to pull from
+	~/.thumbnails directly without checking mtime.
+
+	* gnome-wp-item.c (collect_save_options, gnome_wp_item_get_thumbnail):
+	only 	generate thumbnails when a lookup shows there isn't already
+	one. Never load a background just to find out its size.
+
 2007-01-07  Thomas Wood  <thos@gnome.org>
 
 	Patch by: Jens Granseuer  <jensgr@gmx.net>

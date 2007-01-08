@@ -38,24 +38,11 @@ GnomeWPInfo * gnome_wp_info_new (const gchar * uri,
 				    GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
   if (info == NULL || info->mime_type == NULL || result != GNOME_VFS_OK) {
     if (!strcmp (uri, "(none)")) {
-      gchar * md5sum;
-
       new = g_new0 (GnomeWPInfo, 1);
 
       new->mime_type = g_strdup ("image/x-no-data");
       new->uri = g_strdup (uri);
-
-      md5sum = gnome_thumbnail_md5 (escaped_path);
-
-      new->thumburi = g_strconcat (g_get_home_dir (),
-				   "/.thumbnails/normal/",
-				   md5sum,
-				   ".png",
-				   NULL);
-      g_free (md5sum);
-
       new->name = g_strdup (_("No Wallpaper"));
-
       new->size = 0;
     } else {
       new = NULL;
@@ -68,19 +55,6 @@ GnomeWPInfo * gnome_wp_info_new (const gchar * uri,
     new->thumburi = gnome_thumbnail_factory_lookup (thumbs,
 						    escaped_path,
 						    info->mtime);
-    if (new->thumburi == NULL) {
-      gchar * md5sum;
-
-      md5sum = gnome_thumbnail_md5 (escaped_path);
-
-      new->thumburi = g_strconcat (g_get_home_dir (),
-				   "/.thumbnails/normal/",
-				   md5sum,
-				   ".png",
-				   NULL);
-
-      g_free (md5sum);
-    }
     new->name = g_strdup (info->name);
     new->mime_type = g_strdup (info->mime_type);
 

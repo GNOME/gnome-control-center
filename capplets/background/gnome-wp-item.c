@@ -202,7 +202,6 @@ static void collect_save_options (GdkPixbuf * pixbuf,
 GdkPixbuf * gnome_wp_item_get_thumbnail (GnomeWPItem * item,
 					 GnomeThumbnailFactory * thumbs) {
   GdkPixbuf * pixbuf, * bgpixbuf;
-  GdkPixbuf * tmpbuf;
   GdkPixbuf * scaled = NULL;
   gint sw, sh, bw, bh, pw, ph, tw, th;
   gdouble ratio;
@@ -242,22 +241,42 @@ GdkPixbuf * gnome_wp_item_get_thumbnail (GnomeWPItem * item,
      If we are creating the thumbnail for "No Wallpaper", then we just copy
      the background colors pixbuf we created above, here
   */
-  if (item->fileinfo->thumburi != NULL &&
-      g_file_test (item->fileinfo->thumburi, G_FILE_TEST_EXISTS)) {
-    pixbuf = gdk_pixbuf_new_from_file (item->fileinfo->thumburi, NULL);
-  } else if (!strcmp (item->filename, "(none)")) {
+  pixbuf = NULL;
+  if (!strcmp (item->filename, "(none)")) {
     return bgpixbuf;
   } else {
-    gchar * escaped_path;
+    gchar * escaped_path, * thumbnail_filename;
 
     escaped_path = gnome_vfs_escape_path_string (item->filename);
+    thumbnail_filename = gnome_thumbnail_factory_lookup (thumbs,
+                                                         escaped_path,
+                                                         item->fileinfo->mtime);
 
+    if (thumbnail_filename == NULL) {
     pixbuf = gnome_thumbnail_factory_generate_thumbnail (thumbs,
 							 escaped_path,
 							 item->fileinfo->mime_type);
     gnome_thumbnail_factory_save_thumbnail (thumbs, pixbuf,
 					    escaped_path,
 					    item->fileinfo->mtime);
+       g_object_unref (pixbuf);
+       pixbuf = NULL;
+
+       thumbnail_filename = gnome_thumbnail_factory_lookup (thumbs,
+                                                            escaped_path,
+                                                            item->fileinfo->mtime);
+    }
+
+    if (thumbnail_filename != NULL) {
+ 
+      pixbuf = gdk_pixbuf_new_from_file (thumbnail_filename, NULL);
+
+      if (pixbuf != NULL) {
+        item->fileinfo->thumburi = thumbnail_filename;
+        thumbnail_filename = NULL;
+      }
+    }
+
     g_free (escaped_path);
   }
 
@@ -274,16 +293,12 @@ GdkPixbuf * gnome_wp_item_get_thumbnail (GnomeWPItem * item,
 	gchar ** keys = NULL;
 	gchar ** vals = NULL;
 
-	tmpbuf = gdk_pixbuf_new_from_file (item->filename, NULL);
-
-	item->width = gdk_pixbuf_get_width (tmpbuf);
-	item->height = gdk_pixbuf_get_height (tmpbuf);
-
+        gdk_pixbuf_get_file_info (item->filename, 
+                                  &item->width, &item->height); 
 	collect_save_options (pixbuf, &keys, &vals, item->width, item->height);
 	gdk_pixbuf_savev (pixbuf, item->fileinfo->thumburi, "png",
 			  keys, vals, NULL);
 
-	g_object_unref (tmpbuf);
 	g_strfreev (keys);
 	g_strfreev (vals);
       }
@@ -323,9 +338,10 @@ GdkPixbuf * gnome_wp_item_get_thumbnail (GnomeWPItem * item,
       }
       scaled = gnome_wp_pixbuf_center (pixbuf, bgpixbuf, tw, th);
     }
+
+    g_object_unref (pixbuf);
   }
 
-  g_object_unref (pixbuf);
   g_object_unref (bgpixbuf);
 
   return scaled;
