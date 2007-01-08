@@ -1,3 +1,93 @@
+gnome-control-center 2.17.5
+
+about-me:
+- Fix displaying of image selected by the user (Hiroyuki Ikezoe) (#343584)
+
+background:
+- Mark message showing background image size and type for translation (Roozbeh
+  Pournander) (#341899)
+- Switched from popt to GOptionContext (Lucas Rocha) (#336286)
+- Fix memory leaks (Jens Granseuer) (#335220)
+- Fix crash when changing image name (Jens Granseuer) (#388616)
+- Fix ability to change settings after manual change (Jean-Christophe Jaskula)
+  (#339404)
+- Improve management of background thumbnails (Ray Strode) (#351991)
+- Fix compilation on Solaris (Brian Cameron) (#356076)
+
+common:
+- Fix leaks (Christian Persch) (#393117)
+- Add support for disabling esound (Marc-Andre Lureau) (#392276)
+
+fonts:
+- Make 'Font may be too large' dialog cleare (Gabor Kelemen) (#335963)
+
+keybindings:
+- Reuse the existing tree model instead of discarding and rebuilding it
+  (Jens Granseuer) (#128158)
+- Fix leaks (Jens Granseuer)
+
+keyboard:
+- Switch from popt to GOptionContext (Lucas Rocha) (#336286)
+- Fix typo (Kjartan Maraas)
+
+mouse:
+- Switch from popt to GOptionContext (Lucas Rocha) (#336286)
+
+network:
+- Add option to use the same proxy for all protocols (Diego Escalante) (#317097)
+- Add missing mnemonic (Rodrigo Moya)
+
+sound:
+- Mark sound system names translatable (Gabor Kelemen) (#393472)
+- Do proper dbus/libhal error handling (Jan Arne Petersen) (#363005)
+- Switch from popt to GOptionContext (Lucas Rocha) (#336286)
+- Make ESD optional (Marc-Andre Lureau) (#392276)
+- Add accelerators to the device tab (Gabor Kelemen) (#350572)
+- Spelling fixes (Kjartan Maraas)
+- Use GtkAlignment for padding, not GtkHBox+GtkFrame (Thomas Wood) (#143215)
+
+theme-switcher:
+- Fix crash on manually changing the icon theme name (Priit Laes) (#349471)
+- Fix some HIG issues with strings (Thomas Wood)
+- Fix leaks (Christian Persch, Thomas Wood) (#393117, #326337)
+- Set minimun size request on the treeview rather than the entire window
+  (Thomas Wood) (#393236)
+- Fix build with c89 compilers (Thomas Wood) (#382730)
+- Avoid markup in translatable messages (Gabor Kelemen) (#360449)
+- Enable a message when the current theme does not support colour schemes
+  (Thomas Wood)
+- Add custom colour scheme saving UI (Thomas Wood)
+- Add MIME type for theme packages and support in the GUI (Alberto Ruiz) (#393697)
+
+windows:
+- Avoid markup in translatable messages (Elijah Newren) (#360449)
+
+shell:
+- Fix build with c89 compilers (Thomas Wood) (#382730)
+- Use categories for control center applets (Denis Washington) (#393617)
+
+settings daemon:
+- Add DBus methods for media players to grab/release the keys (Jan Arne Petersen)
+  (#133815)
+
+fontilus:
+- Add support for specifying string and font-size to use in the thumbnailer (Rob Staudinger)
+  (#333557)
+
+themus:
+- Fix crash when running from command prompt (Thomas Wood) (#167063)
+
+translations:
+- ar (Djihed Afifi)
+- bg (Alexander Shopov)
+- cs (Jakub Friedl)
+- en_GB (David Lodge)
+- mk (Jovan Naumovski)
+- nb (Kjartan Maraas)
+- sl (Matic Zgur)
+- sv (Daniel Nylander)
+- th (Theppitak Karoonboonyanan)
+------------------------------------------------------------------------------
 gnome-control-center 2.17.4
 
 background:
