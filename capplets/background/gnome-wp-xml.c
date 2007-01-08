@@ -22,15 +22,15 @@
 
 static gboolean gnome_wp_xml_get_bool (const xmlNode * parent,
 				       const gchar * prop_name) {
-  gchar * prop;
+  xmlChar * prop;
   gboolean ret_val = FALSE;
 
   g_return_val_if_fail (parent != NULL, FALSE);
   g_return_val_if_fail (prop_name != NULL, FALSE);
 
-  prop = xmlGetProp ((xmlNode *) parent, prop_name);
+  prop = xmlGetProp ((xmlNode *) parent, (xmlChar*)prop_name);
   if (prop != NULL) {
-    if (!g_strcasecmp (prop, "true") || !g_strcasecmp (prop, "1")) {
+    if (!g_strcasecmp ((gchar *)prop, "true") || !g_strcasecmp ((gchar *)prop, "1")) {
       ret_val = TRUE;
     } else {
       ret_val = FALSE;
@@ -42,14 +42,14 @@ static gboolean gnome_wp_xml_get_bool (const xmlNode * parent,
 }
 
 static void gnome_wp_xml_set_bool (const xmlNode * parent,
-				   const gchar * prop_name, gboolean value) {
+				   const xmlChar * prop_name, gboolean value) {
   g_return_if_fail (parent != NULL);
   g_return_if_fail (prop_name != NULL);
 
   if (value) {
-    xmlSetProp ((xmlNode *) parent, prop_name, "true");
+    xmlSetProp ((xmlNode *) parent, prop_name, (xmlChar *)"true");
   } else {
-    xmlSetProp ((xmlNode *) parent, prop_name, "false");
+    xmlSetProp ((xmlNode *) parent, prop_name, (xmlChar *)"false");
   }
 }
 
@@ -94,7 +94,7 @@ static void gnome_wp_xml_load_xml (GnomeWPCapplet * capplet,
 				   const gchar * filename) {
   xmlDoc * wplist;
   xmlNode * root, * list, * wpa;
-  gchar * nodelang;
+  xmlChar * nodelang;
   const gchar * const * syslangs;
   GdkColor color1, color2;
   GnomeWPItem * item;
@@ -112,7 +112,7 @@ static void gnome_wp_xml_load_xml (GnomeWPCapplet * capplet,
   root = xmlDocGetRootElement (wplist);
 
   for (list = root->children; list != NULL; list = list->next) {
-    if (!strcmp (list->name, "wallpaper")) {
+    if (!strcmp ((gchar *)list->name, "wallpaper")) {
       GnomeWPItem * wp;
 
       wp = g_new0 (GnomeWPItem, 1);
@@ -120,10 +120,10 @@ static void gnome_wp_xml_load_xml (GnomeWPCapplet * capplet,
       wp->deleted = gnome_wp_xml_get_bool (list, "deleted");
 
       for (wpa = list->children; wpa != NULL; wpa = wpa->next) {
-	if (!strcmp (wpa->name, "filename")) {
+	if (!strcmp ((gchar *)wpa->name, "filename")) {
 	  if (wpa->last != NULL && wpa->last->content != NULL) {
 	    const char * none = "(none)";
-	    gchar *content = g_strstrip (wpa->last->content);
+	    gchar *content = g_strstrip ((gchar *)wpa->last->content);
 
 	    if (!strncmp (content, none, strlen (none)))
 	      wp->filename = g_strdup (content);
@@ -135,16 +135,16 @@ static void gnome_wp_xml_load_xml (GnomeWPCapplet * capplet,
 	  } else {
 	    break;
 	  }
-	} else if (!strcmp (wpa->name, "name")) {
+	} else if (!strcmp ((gchar *)wpa->name, "name")) {
 	  if (wpa->last != NULL && wpa->last->content != NULL) {
 	    nodelang = xmlNodeGetLang (wpa->last);
 
 	    if (wp->name == NULL && nodelang == NULL) {
-	       wp->name = g_strdup (g_strstrip (wpa->last->content));
+	       wp->name = g_strdup (g_strstrip ((gchar *)wpa->last->content));
             } else {
 	       for (i = 0; syslangs[i] != NULL; i++) {
-	         if (!strcmp (syslangs[i], nodelang)) {
-	           wp->name = g_strdup (g_strstrip (wpa->last->content));
+	         if (!strcmp (syslangs[i], (gchar *)nodelang)) {
+	           wp->name = g_strdup (g_strstrip ((gchar *)wpa->last->content));
 	         }
 	       }
 	    }
@@ -153,30 +153,30 @@ static void gnome_wp_xml_load_xml (GnomeWPCapplet * capplet,
 	  } else {
 	    break;
 	  }
-	} else if (!strcmp (wpa->name, "imguri")) {
+	} else if (!strcmp ((gchar *)wpa->name, "imguri")) {
 	  if (wpa->last != NULL) {
-	    wp->imguri = g_strdup (g_strstrip (wpa->last->content));
+	    wp->imguri = g_strdup (g_strstrip ((gchar *)wpa->last->content));
 	  }
-	} else if (!strcmp (wpa->name, "options")) {
+	} else if (!strcmp ((gchar *)wpa->name, "options")) {
 	  if (wpa->last != NULL) {
-	    wp->options = g_strdup (g_strstrip (wpa->last->content));
+	    wp->options = g_strdup (g_strstrip ((gchar *)wpa->last->content));
 	  } else {
 	    wp->options = gconf_client_get_string (capplet->client,
 						   WP_OPTIONS_KEY, NULL);
 	  }
-	} else if (!strcmp (wpa->name, "shade_type")) {
+	} else if (!strcmp ((gchar *)wpa->name, "shade_type")) {
 	  if (wpa->last != NULL) {
-	    wp->shade_type = g_strdup (g_strstrip (wpa->last->content));
+	    wp->shade_type = g_strdup (g_strstrip ((gchar *)wpa->last->content));
 	  }
-	} else if (!strcmp (wpa->name, "pcolor")) {
+	} else if (!strcmp ((gchar *)wpa->name, "pcolor")) {
 	  if (wpa->last != NULL) {
-	    wp->pri_color = g_strdup (g_strstrip (wpa->last->content));
+	    wp->pri_color = g_strdup (g_strstrip ((gchar *)wpa->last->content));
 	  }
-	} else if (!strcmp (wpa->name, "scolor")) {
+	} else if (!strcmp ((gchar *)wpa->name, "scolor")) {
 	  if (wpa->last != NULL) {
-	    wp->sec_color = g_strdup (g_strstrip (wpa->last->content));
+	    wp->sec_color = g_strdup (g_strstrip ((gchar *)wpa->last->content));
 	  }
-	} else if (!strcmp (wpa->name, "text")) {
+	} else if (!strcmp ((gchar *)wpa->name, "text")) {
 	  /* Do nothing here, libxml2 is being weird */
 	} else {
 	  g_warning ("Unknown Tag: %s\n", wpa->name);
@@ -364,9 +364,9 @@ void gnome_wp_xml_save_list (GnomeWPCapplet * capplet) {
 
   xmlKeepBlanksDefault (0);
 
-  wplist = xmlNewDoc ("1.0");
-  xmlCreateIntSubset (wplist, "wallpapers", NULL, "gnome-wp-list.dtd");
-  root = xmlNewNode (NULL, "wallpapers");
+  wplist = xmlNewDoc ((xmlChar *)"1.0");
+  xmlCreateIntSubset (wplist, (xmlChar *)"wallpapers", NULL, (xmlChar *)"gnome-wp-list.dtd");
+  root = xmlNewNode (NULL, (xmlChar *)"wallpapers");
   xmlDocSetRootElement (wplist, root);
 
   for (wp = list; wp != NULL; wp = wp->next) {
@@ -381,14 +381,14 @@ void gnome_wp_xml_save_list (GnomeWPCapplet * capplet) {
     else
       filename = g_filename_to_utf8 (wpitem->filename, -1, NULL, NULL, NULL);
 
-    wallpaper = xmlNewChild (root, NULL, "wallpaper", NULL);
-    gnome_wp_xml_set_bool (wallpaper, "deleted", wpitem->deleted);
-    item = xmlNewTextChild (wallpaper, NULL, "name", wpitem->name);
-    item = xmlNewTextChild (wallpaper, NULL, "filename", filename);
-    item = xmlNewTextChild (wallpaper, NULL, "options", wpitem->options);
-    item = xmlNewTextChild (wallpaper, NULL, "shade_type", wpitem->shade_type);
-    item = xmlNewTextChild (wallpaper, NULL, "pcolor", wpitem->pri_color);
-    item = xmlNewTextChild (wallpaper, NULL, "scolor", wpitem->sec_color);
+    wallpaper = xmlNewChild (root, NULL, (xmlChar *)"wallpaper", NULL);
+    gnome_wp_xml_set_bool (wallpaper, (xmlChar *)"deleted", wpitem->deleted);
+    item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"name", (xmlChar *)wpitem->name);
+    item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"filename", (xmlChar *)filename);
+    item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"options", (xmlChar *)wpitem->options);
+    item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"shade_type", (xmlChar *)wpitem->shade_type);
+    item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"pcolor", (xmlChar *)wpitem->pri_color);
+    item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"scolor", (xmlChar *)wpitem->sec_color);
     g_free (filename);
   }
   xmlSaveFormatFile (wpfile, wplist, 1);
