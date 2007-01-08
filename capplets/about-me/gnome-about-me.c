@@ -435,7 +435,7 @@ about_me_update_photo (GnomeAboutMe *me)
 	gchar         *file;
 	FILE	      *fp;
 
-	gchar 	      *data;
+	guchar 	      *data;
 	gsize 	       length;
 
 	dialog = me->dialog;
@@ -449,12 +449,12 @@ about_me_update_photo (GnomeAboutMe *me)
 		float scale;
 		
 		widget = WID ("image-chooser");
-		e_image_chooser_get_image_data (E_IMAGE_CHOOSER (widget), &data, &length);
+		e_image_chooser_get_image_data (E_IMAGE_CHOOSER (widget), (char **) &data, &length);
 
 		/* Before updating the image in EDS scale it to a reasonable size
 		   so that the user doesn't get an application that does not respond
 		   or that takes 100% CPU */
-		gdk_pixbuf_loader_write (loader, (guchar *)data, length, NULL);
+		gdk_pixbuf_loader_write (loader, data, length, NULL);
 		gdk_pixbuf_loader_close (loader, NULL);
 		
 		pixbuf = gdk_pixbuf_loader_get_pixbuf (loader);
