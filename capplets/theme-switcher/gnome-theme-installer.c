@@ -579,7 +579,7 @@ gnome_theme_install_from_uri (gchar * theme_filename, GtkWindow *parent)
 			GtkWidget *dialog;
 		  	int len = strlen (base);
 		  
-		  	if (base && len > 7 && ( (!strcmp (base + len - 7, ".tar.gz")) || (!strcmp (base + len - 4, ".tgz")) ))
+		  	if (base && len > 7 && ( (!strcmp (base + len - 7, ".tar.gz")) || (!strcmp (base + len - 4, ".tgz")) || (!strcmp (base + len - 4, ".gtp"))))
 		    		file_tmp = g_strdup_printf("gnome-theme-%d.tar.gz", rand ());
 		  	else if (base && len > 8 && !strcmp (base + len - 8, ".tar.bz2"))
 		    		file_tmp = g_strdup_printf("gnome-theme-%d.tar.bz2", rand ());
