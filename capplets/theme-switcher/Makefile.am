@@ -52,7 +52,7 @@ INCLUDES   = 				\
 	-DGLADEDIR=\""$(gladedir)"\"
 
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA) $(xml_files)
-EXTRA_DIST = $(glade_DATA) gnome-theme-save-data.c $(pixmap_DATA)
+EXTRA_DIST = $(glade_DATA) gnome-theme-save-data.c $(pixmap_DATA) $(xml_in_files)
 
 install-data-hook:
 if ENABLE_UPDATE_MIMEDB
