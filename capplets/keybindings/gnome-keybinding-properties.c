@@ -172,10 +172,6 @@ create_dialog (void)
 
   dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/gnome-keybinding-properties.glade", "gnome-keybinding-dialog", NULL);
 
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (WID ("actions_swindow")),
-				  GTK_POLICY_NEVER, GTK_POLICY_NEVER);
-  gtk_widget_set_usize (WID ("actions_swindow"), -1, -1);
-
   return dialog;
 }
 
@@ -409,6 +405,10 @@ clear_old_model (GladeXML  *dialog,
    	  g_object_unref (model);
       g_object_unref (client);
     }
+
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (WID ("actions_swindow")),
+				  GTK_POLICY_NEVER, GTK_POLICY_NEVER);
+  gtk_widget_set_usize (WID ("actions_swindow"), -1, -1);
 }
 
 static gboolean
