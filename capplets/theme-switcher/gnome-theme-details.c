@@ -49,6 +49,7 @@ static void load_theme_names                (GtkTreeView        *tree_view,
 static char *path_to_theme_id               (const char *path);
 static void update_color_buttons_from_string (gchar *color_scheme);
 
+void toggle_color_scheme_key (GtkWidget *checkbutton, gpointer *data);
 
 static char *
 path_to_theme_id (const char *path)
@@ -227,11 +228,21 @@ update_color_scheme_tab ()
 
 	enable_colors = (fg && bg && base && text && fg_s && bg_s);
 	gtk_widget_set_sensitive (WID ("enable_custom_colors_checkbutton"), enable_colors);
-	gtk_widget_set_sensitive (WID ("color_scheme_table"), enable_colors);
+
 	if (enable_colors)
+	{
+		gboolean enable_color_schemes;
+		enable_color_schemes = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (WID ("enable_custom_colors_checkbutton")));
+		gtk_widget_set_sensitive (WID ("color_scheme_table"), enable_color_schemes);
+		gtk_widget_set_sensitive (WID ("saved_color_schemes_hbox"), enable_color_schemes);
 		gtk_widget_hide (WID ("color_scheme_message_hbox"));
+	}
 	else
+	{
 		gtk_widget_show (WID ("color_scheme_message_hbox"));
+		gtk_widget_set_sensitive (WID ("color_scheme_table"), FALSE);
+		gtk_widget_set_sensitive (WID ("saved_color_schemes_hbox"), FALSE);
+	}
 
 	g_free (filename);
 	g_free (theme_name);
@@ -537,6 +548,17 @@ color_select (GtkWidget *colorbutton, GladeXML *dialog)
 
   g_object_unref (G_OBJECT (client));
   free_all (fg, bg, text, base, selected_fg, selected_bg, new_scheme, NULL);
+
+  GtkTreeModel *model;
+  GtkTreeIter tmp, iter;
+  model = gtk_combo_box_get_model (GTK_COMBO_BOX (WID ("color_scheme_combobox")));
+
+  for (gtk_tree_model_get_iter_first(GTK_TREE_MODEL (model), &tmp);gtk_tree_model_iter_next(model, &tmp);)
+  {
+    iter = tmp;
+  }
+  gtk_combo_box_set_active_iter (GTK_COMBO_BOX (WID ("color_scheme_combobox")), &iter);
+
 }
 
 void
@@ -545,15 +567,14 @@ toggle_color_scheme_key (GtkWidget *checkbutton, gpointer *data)
   GConfClient *client = NULL;
   gboolean use_custom_colors;
   GladeXML *dialog;
-  GtkWidget *widget;
   GtkSettings *settings;
   gchar *color_scheme = NULL;
 
   dialog = gnome_theme_manager_get_theme_dialog ();
   use_custom_colors = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (checkbutton));
 
-  widget = WID ("color_scheme_table");
-  gtk_widget_set_sensitive (widget, use_custom_colors);
+  gtk_widget_set_sensitive (WID ("color_scheme_table"), use_custom_colors);
+  gtk_widget_set_sensitive (WID ("saved_color_schemes_hbox"), use_custom_colors);
 
   if (!use_custom_colors)
   {
