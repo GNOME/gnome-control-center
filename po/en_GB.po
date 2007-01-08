@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: control-centre CVS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-12-29 18:13+0000\n"
-"PO-Revision-Date: 2006-12-29 18:19-0000\n"
+"POT-Creation-Date: 2007-01-08 07:20+0000\n"
+"PO-Revision-Date: 2007-01-08 07:21-0000\n"
 "Last-Translator: David Lodge <dave@cirt.net>\n"
 "Language-Team: English/GB <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -54,15 +54,15 @@ msgstr "About Me"
 msgid "Set your personal information"
 msgstr "Set your personal information"
 
-#: ../capplets/about-me/gnome-about-me.c:605
+#: ../capplets/about-me/gnome-about-me.c:604
 msgid "Select Image"
 msgstr "Select Image"
 
-#: ../capplets/about-me/gnome-about-me.c:607
+#: ../capplets/about-me/gnome-about-me.c:606
 msgid "No Image"
 msgstr "No Image"
 
-#: ../capplets/about-me/gnome-about-me.c:770
+#: ../capplets/about-me/gnome-about-me.c:769
 msgid ""
 "There was an error while trying to get the addressbook information\n"
 "Evolution Data Server can't handle the protocol"
@@ -70,16 +70,16 @@ msgstr ""
 "There was an error while trying to get the addressbook information\n"
 "Evolution Data Server can't handle the protocol"
 
-#: ../capplets/about-me/gnome-about-me.c:791
+#: ../capplets/about-me/gnome-about-me.c:790
 msgid "Unable to open address book"
 msgstr "Unable to open address book"
 
-#: ../capplets/about-me/gnome-about-me.c:803
+#: ../capplets/about-me/gnome-about-me.c:802
 msgid "Unknown login ID, the user database might be corrupted"
 msgstr "Unknown login ID, the user database might be corrupted"
 
-#: ../capplets/about-me/gnome-about-me.c:834
-#: ../capplets/about-me/gnome-about-me.c:836
+#: ../capplets/about-me/gnome-about-me.c:833
+#: ../capplets/about-me/gnome-about-me.c:835
 #, c-format
 msgid "About %s"
 msgstr "About %s"
@@ -714,7 +714,7 @@ msgid "_Finish"
 msgstr "_Finish"
 
 #: ../capplets/background/gnome-background-properties.glade.h:7
-#: ../capplets/theme-switcher/theme-properties.glade.h:26
+#: ../capplets/theme-switcher/theme-properties.glade.h:27
 msgid "_Remove"
 msgstr "_Remove"
 
@@ -722,64 +722,87 @@ msgstr "_Remove"
 msgid "_Style:"
 msgstr "_Style:"
 
-#: ../capplets/background/gnome-wp-capplet.c:74
-#: ../capplets/common/capplet-util.c:340
+#: ../capplets/background/gnome-wp-capplet.c:41
+msgid "[FILE...]"
+msgstr "[FILE...]"
+
+#: ../capplets/background/gnome-wp-capplet.c:81
+#: ../capplets/common/capplet-util.c:344
 #: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:333
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "There was an error displaying help: %s"
 
-#: ../capplets/background/gnome-wp-capplet.c:949
+#: ../capplets/background/gnome-wp-capplet.c:957
 msgid "Centered"
 msgstr "Centred"
 
-#: ../capplets/background/gnome-wp-capplet.c:953
+#: ../capplets/background/gnome-wp-capplet.c:961
 msgid "Fill Screen"
 msgstr "Fill Screen"
 
-#: ../capplets/background/gnome-wp-capplet.c:957
+#: ../capplets/background/gnome-wp-capplet.c:965
 msgid "Scaled"
 msgstr "Scaled"
 
-#: ../capplets/background/gnome-wp-capplet.c:961
+#: ../capplets/background/gnome-wp-capplet.c:969
 msgid "Zoom"
 msgstr "Zoom"
 
-#: ../capplets/background/gnome-wp-capplet.c:965
+#: ../capplets/background/gnome-wp-capplet.c:973
 msgid "Tiled"
 msgstr "Tiled"
 
-#: ../capplets/background/gnome-wp-capplet.c:986
+#: ../capplets/background/gnome-wp-capplet.c:994
 msgid "Solid Color"
 msgstr "Solid Colour"
 
-#: ../capplets/background/gnome-wp-capplet.c:990
+#: ../capplets/background/gnome-wp-capplet.c:998
 msgid "Horizontal Gradient"
 msgstr "Horizontal Gradient"
 
-#: ../capplets/background/gnome-wp-capplet.c:994
+#: ../capplets/background/gnome-wp-capplet.c:1002
 msgid "Vertical Gradient"
 msgstr "Vertical Gradient"
 
 #. Create the file chooser dialog stuff here
-#: ../capplets/background/gnome-wp-capplet.c:1040
+#: ../capplets/background/gnome-wp-capplet.c:1045
 msgid "Add Wallpaper"
 msgstr "Add Wallpaper"
 
-#: ../capplets/background/gnome-wp-capplet.c:1057
+#: ../capplets/background/gnome-wp-capplet.c:1062
 msgid "Images"
 msgstr "Images"
 
-#: ../capplets/background/gnome-wp-capplet.c:1061
+#: ../capplets/background/gnome-wp-capplet.c:1066
 msgid "All Files"
 msgstr "All Files"
+
+#: ../capplets/background/gnome-wp-capplet.c:1129
+msgid "- Desktop Background Preferences"
+msgstr "- Desktop Background Preferences"
 
 #: ../capplets/background/gnome-wp-info.c:57
 msgid "No Wallpaper"
 msgstr "No Wallpaper"
 
-#: ../capplets/background/gnome-wp-item.c:343
-#: ../capplets/background/gnome-wp-item.c:345
+#.
+#. Translators: This message is used to render the type and size of the
+#. background images in gnome-background-properites. The first "%s" will
+#. be replaced by the image type, and the two "%d %s"s will be replaced
+#. with the images' dimensions. For example, in US English, this may be
+#. displayed as "JPEG Image, 1600 pixels x 1200 pixels".
+#.
+#. Do not translate the "background size|" type. Remove it from the
+#. translation.
+#.
+#: ../capplets/background/gnome-wp-item.c:352
+#, c-format
+msgid "background size|%s, %d %s x %d %s"
+msgstr "%s, %d %s x %d %s"
+
+#: ../capplets/background/gnome-wp-item.c:355
+#: ../capplets/background/gnome-wp-item.c:357
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "pixel"
@@ -798,15 +821,15 @@ msgstr ""
 msgid "Unable to load stock icon '%s'\n"
 msgstr "Unable to load stock icon '%s'\n"
 
-#: ../capplets/common/capplet-util.c:239
-#: ../capplets/common/capplet-util.c:241
+#: ../capplets/common/capplet-util.c:240
+#: ../capplets/common/capplet-util.c:242
 msgid "Just apply settings and quit"
 msgstr "Just apply settings and quit"
 
-#: ../capplets/common/capplet-util.c:243
-#: ../capplets/keyboard/gnome-keyboard-properties.c:225
-#: ../capplets/mouse/gnome-mouse-properties.c:1036
-#: ../capplets/sound/sound-properties-capplet.c:762
+#: ../capplets/common/capplet-util.c:244
+#: ../capplets/keyboard/gnome-keyboard-properties.c:226
+#: ../capplets/mouse/gnome-mouse-properties.c:1037
+#: ../capplets/sound/sound-properties-capplet.c:786
 msgid "Retrieve and store legacy settings"
 msgstr "Retrieve and store legacy settings"
 
@@ -1476,6 +1499,14 @@ msgid_plural "The font selected is %d points large, and may make it difficult to
 msgstr[0] "The font selected is %d point large, and may make it difficult to effectively use the computer.  It is recommended that you select a smaller sized font."
 msgstr[1] "The font selected is %d points large, and may make it difficult to effectively use the computer.  It is recommended that you select a smaller sized font."
 
+#: ../capplets/font/main.c:527
+msgid "Use previous font"
+msgstr "Use previous font"
+
+#: ../capplets/font/main.c:529
+msgid "Use selected font"
+msgstr "Use selected font"
+
 #: ../capplets/keybindings/eggcellrendererkeys.c:21
 msgid "New accelerator..."
 msgstr "New accelerator..."
@@ -1602,16 +1633,20 @@ msgstr "There was an error launching the keyboard tool: %s"
 msgid "_Accessibility"
 msgstr "_Accessibility"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:221
-#: ../capplets/keyboard/gnome-keyboard-properties.c:223
-#: ../capplets/sound/sound-properties-capplet.c:758
-#: ../capplets/sound/sound-properties-capplet.c:760
+#: ../capplets/keyboard/gnome-keyboard-properties.c:222
+#: ../capplets/keyboard/gnome-keyboard-properties.c:224
+#: ../capplets/sound/sound-properties-capplet.c:782
+#: ../capplets/sound/sound-properties-capplet.c:784
 msgid "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr "Just apply settings and quit (compatibility only; now handled by daemon)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:227
+#: ../capplets/keyboard/gnome-keyboard-properties.c:228
 msgid "Start the page with the typing break settings showing"
 msgstr "Start the page with the typing break settings showing"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.c:236
+msgid "- GNOME Keyboard Preferences"
+msgstr "- GNOME Keyboard Preferences"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:3
 msgid "<b>Cursor Blinking</b>"
@@ -1835,6 +1870,10 @@ msgstr "Large version of white pointer"
 msgid "Pointer Theme"
 msgstr "Pointer Theme"
 
+#: ../capplets/mouse/gnome-mouse-properties.c:1045
+msgid "- GNOME Mouse Preferences"
+msgstr "- GNOME Mouse Preferences"
+
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:2
 msgid "<b>Double-Click Timeout </b>"
 msgstr "<b>Double-Click Timeout </b>"
@@ -2027,6 +2066,10 @@ msgstr "_Password:"
 msgid "_Secure HTTP proxy:"
 msgstr "_Secure HTTP proxy:"
 
+#: ../capplets/network/gnome-network-preferences.glade.h:20
+msgid "_Use the same proxy for all protocols"
+msgstr "_Use the same proxy for all protocols"
+
 #: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:1
 msgid "Enable sound and associate sounds with events"
 msgstr "Enable sound and associate sounds with events"
@@ -2036,7 +2079,47 @@ msgstr "Enable sound and associate sounds with events"
 msgid "Not connected"
 msgstr "Not connected"
 
-#: ../capplets/sound/sound-properties-capplet.c:792
+#: ../capplets/sound/sound-properties-capplet.c:653
+msgid "Autodetect"
+msgstr "Autodetect"
+
+#: ../capplets/sound/sound-properties-capplet.c:658
+#: ../capplets/sound/sound-properties-capplet.c:659
+msgid "ALSA - Advanced Linux Sound Architecture"
+msgstr "ALSA - Advanced Linux Sound Architecture"
+
+#: ../capplets/sound/sound-properties-capplet.c:660
+msgid "Artsd - ART Sound Daemon"
+msgstr "Artsd - ART Sound Daemon"
+
+#: ../capplets/sound/sound-properties-capplet.c:661
+#: ../capplets/sound/sound-properties-capplet.c:662
+msgid "ESD - Enlightened Sound Daemon"
+msgstr "ESD - Enlightened Sound Daemon"
+
+#: ../capplets/sound/sound-properties-capplet.c:663
+#: ../capplets/sound/sound-properties-capplet.c:664
+msgid "OSS - Open Sound System"
+msgstr "OSS - Open Sound System"
+
+#: ../capplets/sound/sound-properties-capplet.c:665
+#: ../capplets/sound/sound-properties-capplet.c:666
+msgid "Polypaudio Sound Server"
+msgstr "Polypaudio Sound Server"
+
+#: ../capplets/sound/sound-properties-capplet.c:667
+msgid "Test Sound"
+msgstr "Test Sound"
+
+#: ../capplets/sound/sound-properties-capplet.c:668
+msgid "Silence"
+msgstr "Silence"
+
+#: ../capplets/sound/sound-properties-capplet.c:794
+msgid "- GNOME Sound Preferences"
+msgstr "- GNOME Sound Preferences"
+
+#: ../capplets/sound/sound-properties-capplet.c:819
 msgid "Sound Preferences"
 msgstr "Sound Preferences"
 
@@ -2077,42 +2160,50 @@ msgid "Flash _window titlebar"
 msgstr "Flash _window titlebar"
 
 #: ../capplets/sound/sound-properties.glade.h:11
+msgid "S_ound Playback:"
+msgstr "S_ound Playback:"
+
+#: ../capplets/sound/sound-properties.glade.h:12
+msgid "So_und Playback:"
+msgstr "So_und Playback:"
+
+#: ../capplets/sound/sound-properties.glade.h:13
 msgid "Sound & Video Preferences"
 msgstr "Sound & Video Preferences"
 
-#: ../capplets/sound/sound-properties.glade.h:12
-msgid "Sound Capture:"
-msgstr "Sound Capture:"
-
-#: ../capplets/sound/sound-properties.glade.h:13
-msgid "Sound Playback:"
-msgstr "Sound Playback:"
-
 #: ../capplets/sound/sound-properties.glade.h:14
+msgid "Sound _Capture:"
+msgstr "Sound _Capture:"
+
+#: ../capplets/sound/sound-properties.glade.h:15
 msgid "Sounds"
 msgstr "Sounds"
 
-#: ../capplets/sound/sound-properties.glade.h:15
+#: ../capplets/sound/sound-properties.glade.h:16
 msgid "System Beep"
 msgstr "System Beep"
 
-#: ../capplets/sound/sound-properties.glade.h:16
+#: ../capplets/sound/sound-properties.glade.h:17
 msgid "Test"
 msgstr "Test"
 
-#: ../capplets/sound/sound-properties.glade.h:17
+#: ../capplets/sound/sound-properties.glade.h:18
 msgid "Testing Pipeline"
 msgstr "Testing Pipeline"
 
-#: ../capplets/sound/sound-properties.glade.h:18
+#: ../capplets/sound/sound-properties.glade.h:19
 msgid "_Enable system beep"
 msgstr "_Enable system beep"
 
-#: ../capplets/sound/sound-properties.glade.h:19
+#: ../capplets/sound/sound-properties.glade.h:20
 msgid "_Play system sounds"
 msgstr "_Play system sounds"
 
-#: ../capplets/sound/sound-properties.glade.h:20
+#: ../capplets/sound/sound-properties.glade.h:21
+msgid "_Sound Playback:"
+msgstr "_Sound Playback:"
+
+#: ../capplets/sound/sound-properties.glade.h:22
 msgid "_Visual system beep"
 msgstr "_Visual system beep"
 
@@ -2121,19 +2212,19 @@ msgstr "_Visual system beep"
 msgid "Failed to construct test pipeline for '%s'"
 msgstr "Failed to construct test pipeline for '%s'"
 
-#: ../capplets/theme-switcher/gnome-theme-details.c:370
+#: ../capplets/theme-switcher/gnome-theme-details.c:414
 msgid "Would you like to remove this theme?"
 msgstr "Would you like to remove this theme?"
 
-#: ../capplets/theme-switcher/gnome-theme-details.c:435
+#: ../capplets/theme-switcher/gnome-theme-details.c:479
 msgid "Theme deleted succesfully. Please select another theme."
 msgstr "Theme deleted succesfully. Please select another theme."
 
-#: ../capplets/theme-switcher/gnome-theme-details.c:444
+#: ../capplets/theme-switcher/gnome-theme-details.c:488
 msgid "Theme can not be deleted"
 msgstr "Theme can not be deleted"
 
-#: ../capplets/theme-switcher/gnome-theme-details.c:632
+#: ../capplets/theme-switcher/gnome-theme-details.c:684
 msgid "No themes could be found on your system.  This probably means that your \"Theme Preferences\" dialog was improperly installed, or you haven't installed the \"gnome-themes\" package."
 msgstr "No themes could be found on your system.  This probably means that your \"Theme Preferences\" dialogue was improperly installed, or you haven't installed the \"gnome-themes\" package."
 
@@ -2179,35 +2270,32 @@ msgstr "The file format is invalid"
 msgid "Installation Failed"
 msgstr "Installation Failed"
 
-#. TODO: currently cannot apply "gnome themes"
-#: ../capplets/theme-switcher/gnome-theme-installer.c:461
+#: ../capplets/theme-switcher/gnome-theme-installer.c:463
 #, c-format
-msgid ""
-"<span weight=\"bold\" size=\"larger\">The theme \"%s\" has been installed.</span>\n"
-"\n"
-"Would you like to apply it now, or keep your current theme?"
-msgstr ""
-"<span weight=\"bold\" size=\"larger\">The theme \"%s\" has been installed.</span>\n"
-"\n"
-"Would you like to apply it now, or keep your current theme?"
+msgid "The theme \"%s\" has been installed."
+msgstr "The theme \"%s\" has been installed."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:464
+#: ../capplets/theme-switcher/gnome-theme-installer.c:469
+msgid "Would you like to apply it now, or keep your current theme?"
+msgstr "Would you like to apply it now, or keep your current theme?"
+
+#: ../capplets/theme-switcher/gnome-theme-installer.c:471
 msgid "Keep Current Theme"
 msgstr "Keep Current Theme"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:466
+#: ../capplets/theme-switcher/gnome-theme-installer.c:473
 msgid "Apply New Theme"
 msgstr "Apply New Theme"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:522
+#: ../capplets/theme-switcher/gnome-theme-installer.c:529
 msgid "No theme file location specified to install"
 msgstr "No theme file location specified to install"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:537
+#: ../capplets/theme-switcher/gnome-theme-installer.c:544
 msgid "The theme file location specified to install is invalid"
 msgstr "The theme file location specified to install is invalid"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:563
+#: ../capplets/theme-switcher/gnome-theme-installer.c:570
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -2216,11 +2304,11 @@ msgstr ""
 "Insufficient permissions to install the theme in:\n"
 "%s"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:584
+#: ../capplets/theme-switcher/gnome-theme-installer.c:591
 msgid "The file format is invalid."
 msgstr "The file format is invalid."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:611
+#: ../capplets/theme-switcher/gnome-theme-installer.c:618
 #, c-format
 msgid "%s is the path where the theme files will be installed. This can not be selected as the source location"
 msgstr "%s is the path where the theme files will be installed. This can not be selected as the source location"
@@ -2233,15 +2321,15 @@ msgstr "Custom theme"
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "You can save this theme by pressing the Save Theme button."
 
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1613
+#: ../capplets/theme-switcher/gnome-theme-manager.c:1614
 msgid "Specify the filename of a theme to install"
 msgstr "Specify the filename of a theme to install"
 
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1614
+#: ../capplets/theme-switcher/gnome-theme-manager.c:1615
 msgid "filename"
 msgstr "filename"
 
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1654
+#: ../capplets/theme-switcher/gnome-theme-manager.c:1658
 msgid "The default theme schemas could not be found on your system.  This means that you probably don't have metacity installed, or that your gconf is configured incorrectly."
 msgstr "The default theme schemas could not be found on your system.  This means that you probably don't have metacity installed, or that your gconf is configured incorrectly."
 
@@ -2279,106 +2367,110 @@ msgid "Background"
 msgstr "Background"
 
 #: ../capplets/theme-switcher/theme-properties.glade.h:5
+msgid "C_ustomize..."
+msgstr "C_ustomise..."
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:6
 msgid "Colors"
 msgstr "Colours"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:6
+#: ../capplets/theme-switcher/theme-properties.glade.h:7
 msgid "Controls"
 msgstr "Controls"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:7
+#: ../capplets/theme-switcher/theme-properties.glade.h:8
 msgid "Icons"
 msgstr "Icons"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:8
+#: ../capplets/theme-switcher/theme-properties.glade.h:9
 msgid "Save Theme As..."
 msgstr "Save Theme As..."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:9
+#: ../capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Save _Background Image"
 msgstr "Save _Background Image"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:10
+#: ../capplets/theme-switcher/theme-properties.glade.h:11
 msgid "Select theme for the desktop"
 msgstr "Select theme for the desktop"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:11
+#: ../capplets/theme-switcher/theme-properties.glade.h:12
 msgid "Text"
 msgstr "Text"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:12
+#: ../capplets/theme-switcher/theme-properties.glade.h:13
+msgid "The current controls theme does not support color schemes"
+msgstr "The current controls theme does not support colour schemes"
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:14
 msgid "Theme Details"
 msgstr "Theme Details"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:13
+#: ../capplets/theme-switcher/theme-properties.glade.h:15
 msgid "Theme Preferences"
 msgstr "Theme Preferences"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:14
+#: ../capplets/theme-switcher/theme-properties.glade.h:16
 msgid "This theme does not suggest any particular font or background."
 msgstr "This theme does not suggest any particular font or background."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:15
+#: ../capplets/theme-switcher/theme-properties.glade.h:17
 msgid "This theme suggests a background:"
 msgstr "This theme suggests a background:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:16
+#: ../capplets/theme-switcher/theme-properties.glade.h:18
 msgid "This theme suggests a font and a background:"
 msgstr "This theme suggests a font and a background:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:17
+#: ../capplets/theme-switcher/theme-properties.glade.h:19
 msgid "This theme suggests a font:"
 msgstr "This theme suggests a font:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:18
+#: ../capplets/theme-switcher/theme-properties.glade.h:20
 msgid "Window Border"
 msgstr "Window Border"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:19
-msgid "_Customize..."
-msgstr "_Customise..."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:20
+#: ../capplets/theme-switcher/theme-properties.glade.h:21
 msgid "_Description:"
 msgstr "_Description:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:21
-msgid "_Enable Custom Colors"
-msgstr "_Enable Custom Colours"
-
 #: ../capplets/theme-switcher/theme-properties.glade.h:22
-msgid "_Input Boxes:"
-msgstr "_Input Boxes:"
+msgid "_Enable custom colors"
+msgstr "_Enable custom colours"
 
 #: ../capplets/theme-switcher/theme-properties.glade.h:23
+msgid "_Input boxes:"
+msgstr "_Input boxes:"
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:24
 msgid "_Install Theme..."
 msgstr "_Install Theme..."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:24
+#: ../capplets/theme-switcher/theme-properties.glade.h:25
 msgid "_Install..."
 msgstr "_Install..."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:25
+#: ../capplets/theme-switcher/theme-properties.glade.h:26
 msgid "_Name:"
 msgstr "_Name:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:27
+#: ../capplets/theme-switcher/theme-properties.glade.h:28
 msgid "_Revert"
 msgstr "_Revert"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:28
+#: ../capplets/theme-switcher/theme-properties.glade.h:29
 msgid "_Save Theme..."
 msgstr "_Save Theme..."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:29
-msgid "_Selected Items:"
-msgstr "_Selected Items:"
-
 #: ../capplets/theme-switcher/theme-properties.glade.h:30
+msgid "_Selected items:"
+msgstr "_Selected items:"
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:31
 msgid "_Windows:"
 msgstr "_Windows:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:31
+#: ../capplets/theme-switcher/theme-properties.glade.h:32
 msgid "theme selection tree"
 msgstr "theme selection tree"
 
@@ -2486,34 +2578,27 @@ msgstr "_Quit"
 msgid "_Save"
 msgstr "_Save"
 
-#: ../capplets/windows/gnome-window-properties.c:385
-#, c-format
-msgid ""
-"<b>Cannot start the preferences application for your window manager</b>\n"
-"\n"
-"%s"
-msgstr ""
-"<b>Cannot start the preferences application for your window manager</b>\n"
-"\n"
-"%s"
+#: ../capplets/windows/gnome-window-properties.c:386
+msgid "Cannot start the preferences application for your window manager"
+msgstr "Cannot start the preferences application for your window manager"
 
-#: ../capplets/windows/gnome-window-properties.c:642
+#: ../capplets/windows/gnome-window-properties.c:643
 msgid "C_ontrol"
 msgstr "C_ontrol"
 
-#: ../capplets/windows/gnome-window-properties.c:647
+#: ../capplets/windows/gnome-window-properties.c:648
 msgid "_Alt"
 msgstr "_Alt"
 
-#: ../capplets/windows/gnome-window-properties.c:653
+#: ../capplets/windows/gnome-window-properties.c:654
 msgid "H_yper"
 msgstr "H_yper"
 
-#: ../capplets/windows/gnome-window-properties.c:660
+#: ../capplets/windows/gnome-window-properties.c:661
 msgid "S_uper (or \"Windows logo\")"
 msgstr "S_uper (or \"Windows logo\")"
 
-#: ../capplets/windows/gnome-window-properties.c:667
+#: ../capplets/windows/gnome-window-properties.c:668
 msgid "_Meta"
 msgstr "_Meta"
 
@@ -2560,104 +2645,6 @@ msgstr "Set your window properties"
 #: ../capplets/windows/window-properties.desktop.in.in.h:2
 msgid "Windows"
 msgstr "Windows"
-
-#: ../libgswitchit/gnome-kbd-indicator-test.c:63
-#, c-format
-msgid "Keyboard Indicator Test (%s)"
-msgstr "Keyboard Indicator Test (%s)"
-
-#: ../libgswitchit/gnome-kbd-indicator-test.c:73
-msgid "Indicator:"
-msgstr "Indicator:"
-
-#: ../libgswitchit/gswitchit-config.c:1155
-#, c-format
-msgid "layout \"%s\""
-msgid_plural "layouts \"%s\""
-msgstr[0] "layout \"%s\""
-msgstr[1] "layouts \"%s\""
-
-#: ../libgswitchit/gswitchit-config.c:1174
-#, c-format
-msgid "option \"%s\""
-msgid_plural "options \"%s\""
-msgstr[0] "option \"%s\""
-msgstr[1] "options \"%s\""
-
-#: ../libgswitchit/gswitchit-config.c:1182
-#, c-format
-msgid "model \"%s\", %s and %s"
-msgstr "model \"%s\", %s and %s"
-
-#: ../libgswitchit/gswitchit-config.c:1183
-msgid "no layout"
-msgstr "no layout"
-
-#: ../libgswitchit/gswitchit-config.c:1184
-msgid "no options"
-msgstr "no options"
-
-#: ../libgswitchit/gswitchit-plugins-add.c:104
-#: ../libgswitchit/gswitchit-plugins-app.c:118
-msgid "No description."
-msgstr "No description."
-
-#: ../libgswitchit/gswitchit-plugins-app.c:336
-#, c-format
-msgid "Failed to init GConf: %s\n"
-msgstr "Failed to init GConf: %s\n"
-
-#: ../libgswitchit/gswitchit-plugins.desktop.in.in.h:1
-msgid "Enable/disable installed plugins"
-msgstr "Enable/disable installed plugins"
-
-#: ../libgswitchit/gswitchit-plugins.desktop.in.in.h:2
-msgid "Keyboard Indicator plugins"
-msgstr "Keyboard Indicator plugins"
-
-#: ../libgswitchit/gswitchit-plugins.glade.h:1
-msgid "Activate more plugins"
-msgstr "Activate more plugins"
-
-#: ../libgswitchit/gswitchit-plugins.glade.h:2
-msgid "Active _plugins:"
-msgstr "Active _plugins:"
-
-#: ../libgswitchit/gswitchit-plugins.glade.h:3
-msgid "Add Plugin"
-msgstr "Add Plugin"
-
-#: ../libgswitchit/gswitchit-plugins.glade.h:4
-msgid "Close the dialog"
-msgstr "Close the dialogue"
-
-#: ../libgswitchit/gswitchit-plugins.glade.h:5
-msgid "Configure the selected plugin"
-msgstr "Configure the selected plugin"
-
-#: ../libgswitchit/gswitchit-plugins.glade.h:6
-msgid "Deactivate selected plugin"
-msgstr "Deactivate selected plugin"
-
-#: ../libgswitchit/gswitchit-plugins.glade.h:7
-msgid "Decrease the plugin priority"
-msgstr "Decrease the plugin priority"
-
-#: ../libgswitchit/gswitchit-plugins.glade.h:8
-msgid "Increase the plugin priority"
-msgstr "Increase the plugin priority"
-
-#: ../libgswitchit/gswitchit-plugins.glade.h:9
-msgid "Keyboard Indicator Plugins"
-msgstr "Keyboard Indicator Plugins"
-
-#: ../libgswitchit/gswitchit-plugins.glade.h:10
-msgid "The list of active plugins"
-msgstr "The list of active plugins"
-
-#: ../libgswitchit/gswitchit-plugins.glade.h:11
-msgid "_Available plugins:"
-msgstr "_Available plugins:"
 
 #: ../gnome-settings-daemon/actions/acme.glade.h:1
 msgid "Volume"
@@ -2880,7 +2867,7 @@ msgstr ""
 msgid "_Do not show this message again"
 msgstr "_Do not show this message again"
 
-#: ../gnome-settings-daemon/gnome-settings-sound.c:127
+#: ../gnome-settings-daemon/gnome-settings-sound.c:137
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Couldn't load sound file %s as sample %s"
@@ -3098,6 +3085,10 @@ msgstr "Select Sound File"
 msgid "The file %s is not a valid wav file"
 msgstr "The file %s is not a valid wav file"
 
+#: ../libsounds/sound-view.c:261
+msgid "Select sound file..."
+msgstr "Select sound file..."
+
 #: ../libsounds/sound-view.c:359
 msgid "System Sounds"
 msgstr "System Sounds"
@@ -3288,19 +3279,19 @@ msgstr "Start screensaver"
 msgid "key not found [%s]\n"
 msgstr "key not found [%s]\n"
 
-#: ../shell/control-center.c:146
+#: ../shell/control-center.c:149
 msgid "Filter"
 msgstr "Filter"
 
-#: ../shell/control-center.c:146
+#: ../shell/control-center.c:149
 msgid "Groups"
 msgstr "Groups"
 
-#: ../shell/control-center.c:146
+#: ../shell/control-center.c:149
 msgid "Common Tasks"
 msgstr "Common Tasks"
 
-#: ../shell/control-center.c:150
+#: ../shell/control-center.c:153
 msgid "Control Center"
 msgstr "Control Centre"
 
@@ -3522,7 +3513,7 @@ msgid "Icon theme"
 msgstr "Icon theme"
 
 #. translators: you may want to include non-western chars here
-#: ../vfs-methods/themus/themus-theme-applier.c:78
+#: ../vfs-methods/themus/themus-theme-applier.c:87
 msgid "ABCDEFG"
 msgstr "ABCDEFG"
 
@@ -3565,6 +3556,65 @@ msgstr "Whether to thumbnail installed themes"
 #: ../vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Whether to thumbnail themes"
+
+#~ msgid ""
+#~ "<span weight=\"bold\" size=\"larger\">The theme \"%s\" has been installed."
+#~ "</span>\n"
+#~ "\n"
+#~ "Would you like to apply it now, or keep your current theme?"
+#~ msgstr ""
+#~ "<span weight=\"bold\" size=\"larger\">The theme \"%s\" has been installed."
+#~ "</span>\n"
+#~ "\n"
+#~ "Would you like to apply it now, or keep your current theme?"
+#~ msgid "Keyboard Indicator Test (%s)"
+#~ msgstr "Keyboard Indicator Test (%s)"
+#~ msgid "Indicator:"
+#~ msgstr "Indicator:"
+#~ msgid "layout \"%s\""
+#~ msgid_plural "layouts \"%s\""
+#~ msgstr[0] "layout \"%s\""
+#~ msgstr[1] "layouts \"%s\""
+#~ msgid "option \"%s\""
+#~ msgid_plural "options \"%s\""
+#~ msgstr[0] "option \"%s\""
+#~ msgstr[1] "options \"%s\""
+#~ msgid "model \"%s\", %s and %s"
+#~ msgstr "model \"%s\", %s and %s"
+#~ msgid "no layout"
+#~ msgstr "no layout"
+#~ msgid "no options"
+#~ msgstr "no options"
+#~ msgid "No description."
+#~ msgstr "No description."
+#~ msgid "Failed to init GConf: %s\n"
+#~ msgstr "Failed to init GConf: %s\n"
+#~ msgid "Enable/disable installed plugins"
+#~ msgstr "Enable/disable installed plugins"
+#~ msgid "Keyboard Indicator plugins"
+#~ msgstr "Keyboard Indicator plugins"
+#~ msgid "Activate more plugins"
+#~ msgstr "Activate more plugins"
+#~ msgid "Active _plugins:"
+#~ msgstr "Active _plugins:"
+#~ msgid "Add Plugin"
+#~ msgstr "Add Plugin"
+#~ msgid "Close the dialog"
+#~ msgstr "Close the dialogue"
+#~ msgid "Configure the selected plugin"
+#~ msgstr "Configure the selected plugin"
+#~ msgid "Deactivate selected plugin"
+#~ msgstr "Deactivate selected plugin"
+#~ msgid "Decrease the plugin priority"
+#~ msgstr "Decrease the plugin priority"
+#~ msgid "Increase the plugin priority"
+#~ msgstr "Increase the plugin priority"
+#~ msgid "Keyboard Indicator Plugins"
+#~ msgstr "Keyboard Indicator Plugins"
+#~ msgid "The list of active plugins"
+#~ msgstr "The list of active plugins"
+#~ msgid "_Available plugins:"
+#~ msgstr "_Available plugins:"
 
 #, fuzzy
 #~ msgid "Old pa_ssword:"
