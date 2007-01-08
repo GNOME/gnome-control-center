@@ -1,3 +1,18 @@
+2007-01-08  Jan Arne Petersen  <jpetersen@jpetersen.org>
+
+	Fixes #173035
+
+	* actions/Makefile.am:
+	* actions/acme-volume-gstreamer.c:
+	(acme_volume_gstreamer_finalize), (acme_volume_gstreamer_set_mute),
+	(update_state), (acme_volume_gstreamer_get_mute),
+	(acme_volume_gstreamer_get_volume),
+	(acme_volume_gstreamer_set_volume),
+	(acme_volume_gstreamer_close_real), (_acme_set_mixer),
+	(acme_volume_gstreamer_open), (acme_volume_gstreamer_init): added
+	support for multiple mixer tracks. Added support for gconf device and
+	track selection.
+
 2007-01-08  Jan Arne Petersen <jap@gnome.org>
 
 	* ./: updated svn:ignore property.

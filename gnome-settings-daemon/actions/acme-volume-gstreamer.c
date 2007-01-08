@@ -27,27 +27,28 @@
 #include "config.h"
 #include "acme-volume-gstreamer.h"
 
-#ifdef HAVE_GST10
 #include <gst/gst.h>
 #include <gst/audio/mixerutils.h>
 #include <gst/interfaces/mixer.h>
 #include <gst/interfaces/propertyprobe.h>
-#else
-#include <gst/gst.h>
-#include <gst/mixer/mixer.h>
-#include <gst/propertyprobe/propertyprobe.h>
-#endif
+
+#include <gconf/gconf-client.h>
 
 #include <string.h>
 
 #define TIMEOUT	4000
+
+#define DEFAULT_MIXER_DEVICE_KEY   "/desktop/gnome/sound/default_mixer_device"
+#define DEFAULT_MIXER_TRACKS_KEY   "/desktop/gnome/sound/default_mixer_tracks"
  
 struct AcmeVolumeGStreamerPrivate
 {
   	GstMixer      *mixer;
-  	GstMixerTrack *track;
+	GList         *mixer_tracks;
  	guint timer_id;
-	gint state;
+	gdouble      volume;
+	gboolean     mute;
+	GConfClient *gconf_client;
 };
 
 static GObjectClass *parent_class = NULL;
@@ -78,7 +79,12 @@ acme_volume_gstreamer_finalize (GObject *object)
 		self->_priv->timer_id = 0;
 	}
 	acme_volume_gstreamer_close_real (self);
-				
+
+	if (self->_priv->gconf_client != NULL) {
+		g_object_unref (G_OBJECT (self->_priv->gconf_client));
+		self->_priv->gconf_client = NULL;
+	}
+
 	g_free (self->_priv);
 
 	G_OBJECT_CLASS (parent_class)->finalize (object);
@@ -88,27 +94,36 @@ static void
 acme_volume_gstreamer_set_mute (AcmeVolume *vol, gboolean val)
 {
 	AcmeVolumeGStreamer *self = (AcmeVolumeGStreamer *) vol;
+	GList *t;
 	
 	if (acme_volume_gstreamer_open (self) == FALSE)
 		return;
-		
-	gst_mixer_set_mute (self->_priv->mixer,
-			    self->_priv->track,
-			    val);
+
+	for (t = self->_priv->mixer_tracks; t != NULL; t = t->next)
+	{
+		GstMixerTrack *track = GST_MIXER_TRACK (t->data);
+		gst_mixer_set_mute (self->_priv->mixer, track, val);
+	}
 
 	if (val)
-		self->_priv->state |= 1;
-	else {
-		GstMixerTrack *track = self->_priv->track;
-		gint *volumes, n;
+	{
+		self->_priv->mute = TRUE;
+	} else {
+		self->_priv->mute = FALSE;
 
-		self->_priv->state &= ~1;
-		volumes = g_new0 (gint, track->num_channels);
-		for (n = 0; n < track->num_channels; n++)
-			volumes[n] = (self->_priv->state >> 1) /
-				track->num_channels;
-		gst_mixer_set_volume (self->_priv->mixer, track, volumes);
-		g_free (volumes);
+		for (t = self->_priv->mixer_tracks; t != NULL; t = t->next)
+		{
+			GstMixerTrack *track = GST_MIXER_TRACK (t->data);
+			gint *volumes, n;
+			gdouble scale = (track->max_volume - track->min_volume) / 100.0;
+			gint vol = (gint) self->_priv->volume * scale + track->min_volume;
+
+			volumes = g_new0 (gint, track->num_channels);
+			for (n = 0; n < track->num_channels; n++)
+				volumes[n] = vol;
+			gst_mixer_set_volume (self->_priv->mixer, track, volumes);
+			g_free (volumes);
+		}
 	}
 
 	acme_volume_gstreamer_close (self);
@@ -117,8 +132,9 @@ acme_volume_gstreamer_set_mute (AcmeVolume *vol, gboolean val)
 static void
 update_state (AcmeVolumeGStreamer * self)
 {
-	gint *volumes, vol = 0, n;
-	GstMixerTrack *track = self->_priv->track;
+	gint *volumes, n;
+	gdouble vol;
+	GstMixerTrack *track = GST_MIXER_TRACK(self->_priv->mixer_tracks->data);
 
 	/* update mixer by getting volume */
 	volumes = g_new0 (gint, track->num_channels);
@@ -126,13 +142,15 @@ update_state (AcmeVolumeGStreamer * self)
 	for (n = 0; n < track->num_channels; n++)
 		vol += volumes[n];
 	g_free (volumes);
+	vol /= track->num_channels;
+	vol = 100 * vol / (track->max_volume - track->min_volume);
 
 	/* update mute flag, and volume if not muted */
 	if (GST_MIXER_TRACK_HAS_FLAG (track, GST_MIXER_TRACK_MUTE) ||
-	    (vol == 0 && (self->_priv->state >> 1) != 0))
-		self->_priv->state |= 1;
+	    (vol == 0 && self->_priv->volume != 0))
+		self->_priv->mute = TRUE;
 	else
-		self->_priv->state = vol << 1;
+		self->_priv->volume = vol;
 }
 
 static gboolean
@@ -146,58 +164,51 @@ acme_volume_gstreamer_get_mute (AcmeVolume *vol)
 	update_state (self);
 	acme_volume_gstreamer_close (self);
 
-	return (self->_priv->state & 1);
+	return self->_priv->mute;
 }
 
 static int
 acme_volume_gstreamer_get_volume (AcmeVolume *vol)
 {
-	double volume;
 	AcmeVolumeGStreamer *self = (AcmeVolumeGStreamer *) vol;
-	GstMixerTrack *track;
 	
 	if (acme_volume_gstreamer_open (self) == FALSE)
 		return 0;
-	track = self->_priv->track;
 
 	update_state (self);
 
-	/* normalize to [0,100] scale that acme wants */
-	volume = (self->_priv->state >> 1) / (double) track->num_channels;
-	volume = 100 * (volume - track->min_volume) /
-		(track->max_volume - track->min_volume);
-
 	acme_volume_gstreamer_close (self);
 
-	return (gint) volume;
+	return (gint) self->_priv->volume;
 }
 
 static void
 acme_volume_gstreamer_set_volume (AcmeVolume *vol, int val)
 {
-	gint i, *volumes, volume;
 	AcmeVolumeGStreamer *self = (AcmeVolumeGStreamer *) vol;
-	GstMixerTrack *track;
+	GList *t;
 
 	if (acme_volume_gstreamer_open (self) == FALSE)
 		return;
 
-	track = self->_priv->track;
 	val = CLAMP (val, 0, 100);
 
-	/* Rescale the volume from [0, 100] to [track min, track max]. */
-	volume = (val / 100.0) * (track->max_volume - track->min_volume) +
-		track->min_volume;
+	for (t = self->_priv->mixer_tracks; t != NULL; t = t->next)
+	{
+		GstMixerTrack *track = GST_MIXER_TRACK (t->data);
+		gint *volumes, n;
+		gdouble scale = (track->max_volume - track->min_volume) / 100.0;
+		gint vol = (gint) val * scale + track->min_volume;
 
-	volumes = g_new (gint, track->num_channels);
-	for (i = 0; i < track->num_channels; ++i)
-		volumes[i] = (gint) volume;
-	gst_mixer_set_volume (self->_priv->mixer, track, volumes);
-	g_free (volumes);
+		volumes = g_new0 (gint, track->num_channels);
+		for (n = 0; n < track->num_channels; n++)
+			volumes[n] = vol;
+		gst_mixer_set_volume (self->_priv->mixer, track, volumes);
+		g_free (volumes);
+	}
  	
 	/* update state */
-	self->_priv->state = (self->_priv->state & 1) |
-		((volume * track->num_channels) << 1);
+	self->_priv->volume = val;
 
  	acme_volume_gstreamer_close (self);
 }
@@ -211,17 +222,17 @@ acme_volume_gstreamer_close_real (AcmeVolumeGStreamer *self)
 	if (self->_priv->mixer != NULL)
 	{
 		gst_element_set_state (GST_ELEMENT(self->_priv->mixer), GST_STATE_NULL);
-		gst_object_unref (GST_OBJECT (self->_priv->mixer));	    
-		g_object_unref (G_OBJECT (self->_priv->track));
+		gst_object_unref (GST_OBJECT (self->_priv->mixer));
+		g_list_foreach (self->_priv->mixer_tracks, (GFunc)g_object_unref, NULL);
+		g_list_free (self->_priv->mixer_tracks);
 		self->_priv->mixer=NULL;
-		self->_priv->track=NULL;
+		self->_priv->mixer_tracks=NULL;
 	}
 	
 	self->_priv->timer_id = 0;
 	return FALSE;
 }
 
-#ifdef HAVE_GST10
 /*
  * _acme_set_mixer
  * Arguments: mixer - pointer to mixer element
@@ -244,10 +255,7 @@ _acme_set_mixer(GstMixer *mixer, gpointer user_data)
          self = ACME_VOLUME_GSTREAMER (user_data);
 
          self->_priv->mixer = mixer;
-         self->_priv->track = track;
-
-         /* no need to ref the mixer element */
-         g_object_ref (self->_priv->track);
+         self->_priv->mixer_tracks = g_list_append (self->_priv->mixer_tracks, g_object_ref (track));
          return TRUE;
       }
 
@@ -256,19 +264,14 @@ _acme_set_mixer(GstMixer *mixer, gpointer user_data)
 
    return FALSE;
 }
-#endif
 
 /* This is a modified version of code from gnome-media's gst-mixer */
 static gboolean
 acme_volume_gstreamer_open (AcmeVolumeGStreamer *vol)
 {
   	AcmeVolumeGStreamer *self = (AcmeVolumeGStreamer *) vol;
-#ifdef HAVE_GST10
+	gchar *mixer_device, **factory_and_device;
 	GList *mixer_list;
-#else
-  	const GList *elements;
-  	gint num = 0;
-#endif
 
 	if (self->_priv == NULL)
 		return FALSE;
@@ -279,7 +282,89 @@ acme_volume_gstreamer_open (AcmeVolumeGStreamer *vol)
 		self->_priv->timer_id = 0;
 		return TRUE;
 	}
-		
+
+	mixer_device = gconf_client_get_string (self->_priv->gconf_client, DEFAULT_MIXER_DEVICE_KEY, NULL);
+	factory_and_device = g_strsplit (mixer_device, ":", 2);
+
+	if (factory_and_device != NULL && factory_and_device[0] != NULL)
+	{
+		GstElement *element;
+
+		element = gst_element_factory_make (factory_and_device[0], NULL);
+
+		if (element != NULL) {
+			gst_element_set_state (element, GST_STATE_READY);
+
+			if (!GST_IS_MIXER (element))
+			{
+				gst_element_set_state (element, GST_STATE_NULL);
+				gst_object_unref (element);
+			} else {
+				self->_priv->mixer = GST_MIXER (element);
+			
+				if (factory_and_device[1] != NULL && 
+						g_object_class_find_property (G_OBJECT_GET_CLASS (self->_priv->mixer), "device"))
+				{
+					g_object_set (G_OBJECT (self->_priv->mixer), "device", &factory_and_device[1], NULL);
+				}
+			}
+		}
+	}
+
+	g_free (mixer_device);
+	g_strfreev (factory_and_device);
+
+	if (self->_priv->mixer != NULL)
+	{
+		const GList *m;
+		GSList *tracks, *t;
+
+		/* Try to use tracks saved in GConf */
+		tracks = gconf_client_get_list (self->_priv->gconf_client, DEFAULT_MIXER_TRACKS_KEY, GCONF_VALUE_STRING, NULL);
+
+		for (m = gst_mixer_list_tracks (self->_priv->mixer); m != NULL; m = m->next)
+		{
+			GstMixerTrack *track = GST_MIXER_TRACK (m->data);
+
+			for (t = tracks; t != NULL; t = t->next)
+			{
+				if (!strcmp (t->data, track->label))
+				{
+					self->_priv->mixer_tracks = g_list_append (self->_priv->mixer_tracks, g_object_ref (track));
+				}
+			}
+			
+		}
+
+		g_slist_foreach (tracks, (GFunc)g_free, NULL);
+		g_slist_free (tracks);
+
+		/* If no track stored in GConf is avaiable try to use master track */
+		if (self->_priv->mixer_tracks == NULL)
+		{
+			for (m = gst_mixer_list_tracks (self->_priv->mixer); m != NULL; m = m->next)
+			{
+				GstMixerTrack *track = GST_MIXER_TRACK (m->data);
+
+				if (GST_MIXER_TRACK_HAS_FLAG (track, GST_MIXER_TRACK_MASTER)) {
+					self->_priv->mixer_tracks = g_list_append (self->_priv->mixer_tracks, track);
+					break;
+				}
+			}
+		}
+	}
+
+	if (self->_priv->mixer != NULL)
+	{
+		if (self->_priv->mixer_tracks != NULL)
+		{
+			return TRUE;
+		} else {
+			gst_element_set_state (GST_ELEMENT (self->_priv->mixer), GST_STATE_NULL);
+			gst_object_unref (self->_priv->mixer);
+		}
+	}
+
 	/* Go through all elements of a certain class and check whether
 	 * they implement a mixer. If so, walk through the tracks and look
 	 * for first one named "volume".
@@ -288,101 +373,17 @@ acme_volume_gstreamer_open (AcmeVolumeGStreamer *vol)
 	 * appropriate mixer/track.  But now we do something stupid...
 	 * everything just becomes a no-op.
 	 */
-#ifdef HAVE_GST10
-   mixer_list = gst_audio_default_registry_mixer_filter (_acme_set_mixer,
-                                                          TRUE,
-                                                          self);
+	mixer_list = gst_audio_default_registry_mixer_filter (_acme_set_mixer,
+			TRUE,
+			self);
 
-   if (mixer_list == NULL)
-      return FALSE;
+	if (mixer_list == NULL)
+		return FALSE;
 
-   /* do not unref the mixer as we keep the ref for self->priv->mixer */
-   g_list_free (mixer_list);
+	/* do not unref the mixer as we keep the ref for self->priv->mixer */
+	g_list_free (mixer_list);
 
-   return TRUE;
-#else
-	elements = gst_registry_pool_feature_list (GST_TYPE_ELEMENT_FACTORY);
-	for ( ; elements != NULL && self->_priv->mixer == NULL; elements = elements->next) {
-		GstElementFactory *factory = GST_ELEMENT_FACTORY (elements->data);
-		gchar *title = NULL;
-		const gchar *klass;
-		GstElement *element = NULL;
-		const GParamSpec *devspec;
-		GstPropertyProbe *probe;
-		GValueArray *array = NULL;
-		gint n;
-		const GList *tracks;
-		
-		/* check category */
-		klass = gst_element_factory_get_klass (factory);
-		if (strcmp (klass, "Generic/Audio"))
-			goto next;
-		
-		/* create element */
-		title = g_strdup_printf ("gst-mixer-%d", num);
-		element = gst_element_factory_create (factory, title);
-		if (!element)
-			goto next;
-		
-		if (!GST_IS_PROPERTY_PROBE (element))
-			goto next;
-		
-		probe = GST_PROPERTY_PROBE (element);
-		devspec = gst_property_probe_get_property (probe, "device");
-		if (devspec == NULL)
-			goto next;
-		array = gst_property_probe_probe_and_get_values (probe, devspec);
-		if (array == NULL)
-			goto next;
-
-		/* set all devices and test for mixer */
-		for (n = 0; n < array->n_values; n++) {
-			GValue *device = g_value_array_get_nth (array, n);
-			
-			/* set this device */
-			g_object_set_property (G_OBJECT (element), "device", device);
-			if (gst_element_set_state (element,
-						   GST_STATE_READY) == GST_STATE_FAILURE)
-				continue;
-			
-			/* Is this device a mixer?  If so, add it to the list. */
-			if (!GST_IS_MIXER (element)) {
-				gst_element_set_state (element, GST_STATE_NULL);
-				continue;
-			}
-			
-			tracks = gst_mixer_list_tracks (GST_MIXER (element));
-			for (; tracks != NULL; tracks = tracks->next) {
-				GstMixerTrack *track = tracks->data;
-				
-				if (GST_MIXER_TRACK_HAS_FLAG (track, GST_MIXER_TRACK_MASTER)) {
-					self->_priv->mixer = GST_MIXER (element);
-					self->_priv->track = track;
-
-					g_object_ref (self->_priv->mixer);
-					g_object_ref (self->_priv->track);
-					if (array)
-						g_value_array_free (array);
-					return TRUE;
-				}
-			}
-			
-			num++;
-			
-			/* and recreate this object, since we give it to the mixer */
-			title = g_strdup_printf ("gst-mixer-%d", num);
-			element = gst_element_factory_create (factory, title);
-		}
-		
-	next:
-		if (element)
-			gst_object_unref (GST_OBJECT (element));
-		if (array)
-			g_value_array_free (array);
-		g_free (title);
-	}
-	return FALSE;
-#endif
+	return TRUE;
 }
 
 static void
@@ -397,7 +398,9 @@ acme_volume_gstreamer_init (AcmeVolumeGStreamer *self)
 {
 	
 	self->_priv = g_new0 (AcmeVolumeGStreamerPrivate, 1);
-	
+
+	self->_priv->gconf_client = gconf_client_get_default ();
+
 	if (acme_volume_gstreamer_open (self) == FALSE)
 	{
 		g_free (self->_priv);

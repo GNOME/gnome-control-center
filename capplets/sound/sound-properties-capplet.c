@@ -53,6 +53,8 @@
 #include "activate-settings-daemon.h"
 #include "pipeline-tests.h"
 
+#include "mixer-support.h"
+
 typedef enum {
 	AUDIO_PLAYBACK,
 	AUDIO_CAPTURE,
@@ -71,6 +73,8 @@ typedef struct _DeviceChooser
 
 #define ENABLE_ESD_KEY             "/desktop/gnome/sound/enable_esd"
 #define EVENT_SOUNDS_KEY           "/desktop/gnome/sound/event_sounds"
+#define DEFAULT_MIXER_DEVICE_KEY   "/desktop/gnome/sound/default_mixer_device"
+#define DEFAULT_MIXER_TRACKS_KEY   "/desktop/gnome/sound/default_mixer_tracks"
 #define VISUAL_BELL_KEY            "/apps/metacity/general/visual_bell"
 #define AUDIO_BELL_KEY             "/apps/metacity/general/audible_bell"
 #define VISUAL_BELL_TYPE_KEY       "/apps/metacity/general/visual_bell_type"
@@ -673,6 +677,231 @@ setup_devices ()
 	add_selected_device ("", AUDIO_CAPTURE);
 }
 
+static void
+mixer_device_combobox_changed (GtkComboBox *widget, gpointer user_data)
+{
+	GtkTreeIter iter;
+
+	if (gtk_combo_box_get_active_iter (widget, &iter)) {
+		GtkTreeModel *model;
+		gchar *device = NULL;
+
+		model = gtk_combo_box_get_model (widget);
+		gtk_tree_model_get (model, &iter, 
+				MIXER_DEVICE_MODEL_DEVICE_COLUMN, &device, -1);
+
+		gconf_client_set_string (gconf_client, DEFAULT_MIXER_DEVICE_KEY, device, NULL);
+		g_free (device);
+	}
+}
+
+static void
+add_track_label_to_list (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, GSList **list)
+{
+	gchar *label;
+
+	gtk_tree_model_get (model, iter,
+			MIXER_TRACKS_MODEL_LABEL_COLUMN, &label,
+			-1);
+
+	*list = g_slist_prepend (*list, label);
+}
+
+static void
+mixer_tracks_selection_changed (GtkTreeSelection *selection, gpointer user_data)
+{
+	GSList *label_list = NULL;
+
+	gtk_tree_selection_selected_foreach (selection, 
+			(GtkTreeSelectionForeachFunc)add_track_label_to_list,
+			&label_list);
+
+	label_list = g_slist_reverse (label_list);
+	gconf_client_set_list (gconf_client, DEFAULT_MIXER_TRACKS_KEY, GCONF_VALUE_STRING, label_list, NULL);
+
+	g_slist_foreach (label_list, (GFunc)g_free, NULL);
+	g_slist_free (label_list);
+}
+
+static void
+update_mixer_tracks_selection (GSList *tracks, GladeXML *dialog)
+{
+	GtkWidget *tracks_widget;
+	GtkTreeModel *model;
+	GtkTreeSelection *selection;
+	GtkTreeIter iter;
+
+	tracks_widget = WID ("mixer_tracks");
+
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (tracks_widget));
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tracks_widget));
+
+	g_signal_handlers_block_by_func (G_OBJECT (selection), G_CALLBACK (mixer_tracks_selection_changed), NULL);
+
+	gtk_tree_selection_unselect_all (selection);
+
+	if (gtk_tree_model_get_iter_first (model, &iter)) {
+		do {
+			gchar *label;
+			GSList *t;
+
+			gtk_tree_model_get (model, &iter, MIXER_TRACKS_MODEL_LABEL_COLUMN, &label, -1);
+
+			for (t = tracks; t != NULL; t = t->next) {
+				if (!strcmp (label, t->data)) {
+					gtk_tree_selection_select_iter (selection, &iter);
+					break;
+				}
+			}
+			g_free (label);
+		} while (gtk_tree_model_iter_next (model, &iter));		
+	}
+		
+	g_signal_handlers_unblock_by_func (G_OBJECT (selection), G_CALLBACK (mixer_tracks_selection_changed), NULL);
+
+	/* FIXME: if none selected, select master track */
+}
+
+static void
+default_mixer_tracks_notify (GConfClient *client, guint cnxn_id, GConfEntry *entry, GladeXML *dialog)
+{
+	GSList *tracks;
+
+	tracks = gconf_client_get_list (gconf_client, DEFAULT_MIXER_TRACKS_KEY, GCONF_VALUE_STRING, NULL);
+	
+	update_mixer_tracks_selection (tracks, dialog);
+
+	g_slist_foreach (tracks, (GFunc) g_free, NULL);
+	g_slist_free (tracks);
+}
+
+static void
+update_mixer_device_combobox (const gchar *mixer_device, GladeXML *dialog)
+{
+	GtkWidget *device_widget;
+	GtkTreeModel *model;
+	GtkTreeIter iter;
+
+	device_widget = WID ("mixer_device");
+	model = gtk_combo_box_get_model (GTK_COMBO_BOX (device_widget));
+
+	/* try to find stored factory and device in the mixer device list */
+	if (gtk_tree_model_get_iter_first (model, &iter)) {
+		do {
+			gchar *device = NULL;
+
+			gtk_tree_model_get (model, &iter,
+					MIXER_DEVICE_MODEL_DEVICE_COLUMN, &device,
+					-1);
+
+			if (!strcmp (device, mixer_device)) {
+				gtk_combo_box_set_active_iter (GTK_COMBO_BOX (device_widget), &iter);
+
+				g_free (device);
+				break;
+			}
+
+			g_free (device);
+		} while (gtk_tree_model_iter_next (model, &iter));
+	}
+
+	/* try to select first mixer entry */
+	if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (device_widget), &iter)) {
+		if (gtk_tree_model_get_iter_first (model, &iter)) {
+			gtk_combo_box_set_active_iter (GTK_COMBO_BOX (device_widget), &iter);
+		}
+	}
+
+	/* fill track list */
+	if (gtk_combo_box_get_active_iter (GTK_COMBO_BOX (device_widget), &iter)) {
+		GtkWidget *tracks_widget;
+		GstElement *mixer;
+		GtkTreeSelection *selection;
+		GtkTreeModel *tracks_model;
+		GSList *tracks;
+
+		tracks_widget = WID ("mixer_tracks");
+
+		gtk_tree_model_get (model, &iter,
+				MIXER_DEVICE_MODEL_MIXER_COLUMN, &mixer,
+				-1);
+
+		gst_element_set_state (mixer, GST_STATE_READY);
+
+		selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tracks_widget));
+		g_signal_handlers_block_by_func (G_OBJECT (selection), G_CALLBACK (mixer_tracks_selection_changed), NULL);
+
+		tracks_model = create_mixer_tracks_tree_model_for_mixer (GST_MIXER (mixer));
+		gtk_tree_view_set_model (GTK_TREE_VIEW (tracks_widget), tracks_model);
+		g_object_unref (tracks_model);
+
+		gst_element_set_state (mixer, GST_STATE_NULL);
+		gst_object_unref (GST_OBJECT (mixer));
+
+		/* updated mixer tracks selection */
+		tracks = gconf_client_get_list (gconf_client, DEFAULT_MIXER_TRACKS_KEY, GCONF_VALUE_STRING, NULL);
+		update_mixer_tracks_selection (tracks, dialog);
+		g_slist_foreach (tracks, (GFunc) g_free, NULL);
+		g_slist_free (tracks);
+
+		g_signal_handlers_unblock_by_func (G_OBJECT (selection), G_CALLBACK (mixer_tracks_selection_changed), NULL);
+	}
+}
+
+static void
+default_mixer_device_notify (GConfClient *client, guint cnxn_id, GConfEntry *entry, GladeXML *dialog)
+{
+	const gchar *mixer_device;
+
+	mixer_device = gconf_value_get_string (gconf_entry_get_value (entry));
+
+	update_mixer_device_combobox (mixer_device, dialog);
+}
+
+static void
+setup_default_mixer (GladeXML *dialog)
+{
+	GtkWidget *device_widget, *tracks_widget;
+	GtkTreeModel *model;
+	GtkCellRenderer *renderer;
+	GtkTreeSelection *selection;
+	gchar *mixer_device;
+
+	device_widget = WID ("mixer_device");
+	tracks_widget = WID ("mixer_tracks");
+
+	model = create_mixer_device_tree_model ();
+	gtk_combo_box_set_model (GTK_COMBO_BOX (device_widget), model);
+	g_object_unref (G_OBJECT (model)); 
+
+	renderer = gtk_cell_renderer_text_new ();
+	gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (device_widget), renderer, TRUE);
+	gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (device_widget), renderer,
+			"text", MIXER_DEVICE_MODEL_NAME_COLUMN);
+
+	g_signal_connect (G_OBJECT (device_widget), "changed",
+			G_CALLBACK (mixer_device_combobox_changed), NULL);
+
+	renderer = gtk_cell_renderer_text_new ();
+	gtk_tree_view_insert_column_with_attributes (GTK_TREE_VIEW (tracks_widget),
+			-1, NULL, renderer,
+			"text", MIXER_TRACKS_MODEL_LABEL_COLUMN, NULL);
+
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tracks_widget));
+	gtk_tree_selection_set_mode (selection, GTK_SELECTION_MULTIPLE);
+	g_signal_connect (G_OBJECT (selection), "changed",
+			G_CALLBACK (mixer_tracks_selection_changed), NULL);
+
+	gconf_client_notify_add (gconf_client, DEFAULT_MIXER_DEVICE_KEY,
+			(GConfClientNotifyFunc) default_mixer_device_notify, dialog, NULL, NULL);
+	gconf_client_notify_add (gconf_client, DEFAULT_MIXER_TRACKS_KEY,
+			(GConfClientNotifyFunc) default_mixer_tracks_notify, dialog, NULL, NULL);
+
+	mixer_device = gconf_client_get_string (gconf_client, DEFAULT_MIXER_DEVICE_KEY, NULL);
+	update_mixer_device_combobox (mixer_device, dialog);
+	g_free (mixer_device);
+}
+
 /* setup_dialog
  *
  * Set up the property editors for our dialog
@@ -695,6 +924,7 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 	gtk_size_group_add_widget (label_size_group, WID ("music_playback_label"));
 	gtk_size_group_add_widget (label_size_group, WID ("chat_audio_playback_label"));
 	gtk_size_group_add_widget (label_size_group, WID ("chat_audio_capture_label"));
+	gtk_size_group_add_widget (label_size_group, WID ("mixer_device_label"));
 	gtk_size_group_add_widget (combobox_size_group, WID ("sounds_playback_device"));
 	gtk_size_group_add_widget (combobox_size_group, WID ("music_playback_device"));
 	gtk_size_group_add_widget (combobox_size_group, WID ("chat_audio_playback_device"));
@@ -734,6 +964,8 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 					"conv-to-widget-cb", bell_flash_to_widget,
 					"conv-from-widget-cb", bell_flash_from_widget,
 					NULL);
+
+	setup_default_mixer (dialog);
 }
 
 /* get_legacy_settings

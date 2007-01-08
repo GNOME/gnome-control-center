@@ -1,3 +1,16 @@
+2007-01-08  Jan Arne Petersen  <jpetersen@jpetersen.org>
+
+	Fixes #173035
+
+	* Makefile.am, mixer-support.c, mixer-support.h: Add new files.
+	* sound-properties-capplet.c: (mixer_device_combobox_changed),
+	(add_track_label_to_list), (mixer_tracks_selection_changed),
+	(update_mixer_tracks_selection), (default_mixer_tracks_notify),
+	(update_mixer_device_combobox), (default_mixer_device_notify),
+	(setup_default_mixer), (setup_dialog):
+	* sound-properties.glade: added support for selecting mixer device and
+	tracks in the capplet.
+
 2007-01-07  Thomas Wood  <thos@gnome.org>
 
 	* sound-properties.glade: Use GtkAlignment for padding, rather than a
