@@ -367,7 +367,7 @@ bg_preferences_merge_entry (BGPreferences    *prefs,
 				(prefs->wallpaper_filename != NULL) &&
 		    strcmp (prefs->wallpaper_filename, "") != 0 &&
 		    strcmp (prefs->wallpaper_filename, "(none)") != 0)
-			prefs->wallpaper_enabled = TRUE;
+			prefs->enabled = TRUE;
 		else
 			prefs->enabled = FALSE;
 	} else {
