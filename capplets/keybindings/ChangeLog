@@ -1,3 +1,15 @@
+2007-01-08  Rodrigo Moya <rodrigo@novell.com>
+
+	Fixes #128158
+	
+	Patch by Jens Granseuer <jensgr@gmx.net>
+
+	* gnome-keybinding-properties.c (create_dialog): set scrolled window
+	policy to _NEVER.
+	(clear_old_model): euse the existing model instead of discarding and
+	rebuilding it.
+	(main): don't leak the GnomeProgram.
+	
 2006-07-27  Gary Coady <gary@lyranthe.org>
 
 	Fixes #333576

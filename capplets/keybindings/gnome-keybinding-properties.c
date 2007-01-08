@@ -172,6 +172,10 @@ create_dialog (void)
 
   dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/gnome-keybinding-properties.glade", "gnome-keybinding-dialog", NULL);
 
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (WID ("actions_swindow")),
+				  GTK_POLICY_NEVER, GTK_POLICY_NEVER);
+  gtk_widget_set_usize (WID ("actions_swindow"), -1, -1);
+
   return dialog;
 }
 
@@ -347,60 +351,64 @@ keyentry_sort_func (GtkTreeModel *model,
 
 static void
 clear_old_model (GladeXML  *dialog,
-		 GtkWidget *tree_view)
+                 GtkWidget *tree_view)
 {
   GtkTreeModel *model;
-  GtkTreeModel *sort_model;
-  GtkTreeIter iter;
-  KeyEntry *key_entry;
-  gboolean valid;
-  GConfClient *client;
 
-  client = gconf_client_get_default ();
   model = get_real_model (GTK_TREE_VIEW (tree_view));
 
-  if (model != NULL)
+  if (model == NULL)
     {
+      /* create a new model */
+      GtkTreeModel *sort_model;
+
+      model = (GtkTreeModel *) gtk_tree_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER);
+  
+      sort_model = gtk_tree_model_sort_new_with_model (model);
+
+      /* N_COLUMNS is just a place to stick the extra sort function */
+      gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (sort_model),
+                                   	   N_COLUMNS,
+                                       keyentry_sort_func,
+                                       NULL, NULL);
+  
+      gtk_tree_view_set_model (GTK_TREE_VIEW (tree_view), sort_model);
+
+      g_object_unref (model);
+      g_object_unref (sort_model);
+    }
+  else
+    {
+      /* clear the existing model */
+      GConfClient *client;
+      gboolean valid;
+      GtkTreeIter iter;
+      KeyEntry *key_entry;
+
+      client = gconf_client_get_default ();
       g_object_ref (model);
 
       for (valid = gtk_tree_model_get_iter_first (model, &iter);
-	   valid;
-	   valid = gtk_tree_model_iter_next (model, &iter))
-	{
-	  gtk_tree_model_get (model, &iter,
-			      KEYENTRY_COLUMN, &key_entry,
-			      -1);
-	  if (key_entry != NULL)
-	    {
-	      gconf_client_notify_remove (client, key_entry->gconf_cnxn);
-	      g_free (key_entry->gconf_key);
+           valid;
+           valid = gtk_tree_model_iter_next (model, &iter))
+        {
+          gtk_tree_model_get (model, &iter,
+                              KEYENTRY_COLUMN, &key_entry,
+                              -1);
+
+          if (key_entry != NULL)
+            {
+              gconf_client_notify_remove (client, key_entry->gconf_cnxn);
+              g_free (key_entry->gconf_key);
               g_free (key_entry->description);
-	      g_free (key_entry);
+              g_free (key_entry);
             }
-	}
-      g_object_unref (model);
+        }
+
+      gtk_tree_store_clear(GTK_TREE_STORE(model));
+   	  g_object_unref (model);
+      g_object_unref (client);
     }
-
-  g_object_unref (client);
-
-  model = (GtkTreeModel *) gtk_tree_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER);
-  
-  sort_model = gtk_tree_model_sort_new_with_model (model);
-
-  /* N_COLUMNS is just a place to stick the extra sort function */
-  gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (sort_model),
-                                   N_COLUMNS,
-                                   keyentry_sort_func,
-                                   NULL, NULL);
-  
-  gtk_tree_view_set_model (GTK_TREE_VIEW (tree_view), sort_model);
-
-  g_object_unref (G_OBJECT (model));
-  g_object_unref (G_OBJECT (sort_model));
-  
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (WID ("actions_swindow")),
-				  GTK_POLICY_NEVER, GTK_POLICY_NEVER);
-  gtk_widget_set_usize (WID ("actions_swindow"), -1, -1);
 }
 
 static gboolean
@@ -937,6 +945,7 @@ setup_dialog (GladeXML *dialog)
 int
 main (int argc, char *argv[])
 {
+  GnomeProgram *program;
   GladeXML *dialog;
 
   gtk_init (&argc, &argv);
@@ -945,7 +954,8 @@ main (int argc, char *argv[])
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
   textdomain (GETTEXT_PACKAGE);
 
-  gnome_program_init ("gnome-keybinding-properties", VERSION, LIBGNOMEUI_MODULE, argc, argv,
+  program = gnome_program_init ("gnome-keybinding-properties", VERSION,
+		      LIBGNOMEUI_MODULE, argc, argv,
 		      GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
 		      NULL);
 
@@ -959,5 +969,6 @@ main (int argc, char *argv[])
   
   gtk_main ();
 
+  g_object_unref(program);
   return 0;
 }
