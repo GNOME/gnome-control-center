@@ -51,7 +51,7 @@ INCLUDES   = 				\
 	$(GNOMECC_CAPPLETS_CFLAGS)	\
 	-DGLADEDIR=\""$(gladedir)"\"
 
-CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA)
+CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA) $(xml_files)
 EXTRA_DIST = $(glade_DATA) gnome-theme-save-data.c $(pixmap_DATA)
 
 install-data-hook:
