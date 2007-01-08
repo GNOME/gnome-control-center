@@ -1,5 +1,7 @@
 bin_PROGRAMS = gnome-theme-manager
 
+
+
 pixmapdir = $(GNOMECC_PIXMAPS_DIR)
 pixmap_DATA = \
 	theme-thumbnailing.png
@@ -27,8 +29,17 @@ gnome_theme_manager_LDFLAGS = -export-dynamic
 
 @INTLTOOL_DESKTOP_RULE@
 
+xml_in_files = gnome-theme-package.xml.in
+xml_files = $(xml_in_files:.xml.in=.xml)
+
+@INTLTOOL_XML_RULE@
+
+mimedir = $(datadir)/mime/packages
+mime_DATA = $(xml_files)
+
 desktopdir = $(datadir)/applications
-Desktop_in_files = gtk-theme-selector.desktop.in
+Desktop_in_files = gtk-theme-selector.desktop.in \
+									 gnome-theme-installer.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
 gladedir = $(GNOMECC_GLADE_DIR)
@@ -42,3 +53,13 @@ INCLUDES   = 				\
 
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA)
 EXTRA_DIST = $(glade_DATA) gnome-theme-save-data.c $(pixmap_DATA)
+
+install-data-hook:
+if ENABLE_UPDATE_MIMEDB
+	$(UPDATE_MIME_DATABASE) "$(DESTDIR)$(datadir)/mime"
+endif
+
+uninstall-hook:
+if ENABLE_UPDATE_MIMEDB
+	$(UPDATE_MIME_DATABASE) "$(DESTDIR)$(datadir)/mime"
+endif
