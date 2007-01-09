@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-01-08 13:25+0000\n"
-"PO-Revision-Date: 2007-01-08 18:15+0100\n"
+"PO-Revision-Date: 2007-01-09 08:54+0100\n"
 "Last-Translator: Matic Žgur <mr.zgur@gmail.com>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -785,7 +785,7 @@ msgstr "Vse datoteke"
 msgid "- Desktop Background Preferences"
 msgstr "- Nastavitve ozadja namizja"
 
-#: ../capplets/background/gnome-wp-info.c:57
+#: ../capplets/background/gnome-wp-info.c:45
 msgid "No Wallpaper"
 msgstr "Brez ozadja"
 
@@ -799,13 +799,13 @@ msgstr "Brez ozadja"
 #. Do not translate the "background size|" type. Remove it from the
 #. translation.
 #.
-#: ../capplets/background/gnome-wp-item.c:352
+#: ../capplets/background/gnome-wp-item.c:368
 #, c-format
 msgid "background size|%s, %d %s x %d %s"
 msgstr "%s, %d %s x %d %s"
 
-#: ../capplets/background/gnome-wp-item.c:355
-#: ../capplets/background/gnome-wp-item.c:357
+#: ../capplets/background/gnome-wp-item.c:371
+#: ../capplets/background/gnome-wp-item.c:373
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "pika"
@@ -834,7 +834,7 @@ msgstr "Le uveljavi nastavitve in končaj"
 #: ../capplets/common/capplet-util.c:244
 #: ../capplets/keyboard/gnome-keyboard-properties.c:226
 #: ../capplets/mouse/gnome-mouse-properties.c:1037
-#: ../capplets/sound/sound-properties-capplet.c:786
+#: ../capplets/sound/sound-properties-capplet.c:1018
 msgid "Retrieve and store legacy settings"
 msgstr "Prenesi in shrani zapuščene nastavitve"
 
@@ -1023,7 +1023,8 @@ msgid "Error saving configuration: %s"
 msgstr "Napaka pri shranjevanju nastavitev: %s"
 
 #: ../capplets/default-applications/gnome-da-capplet.c:743
-#: ../capplets/sound/sound-properties-capplet.c:319
+#: ../capplets/sound/sound-properties-capplet.c:323
+#: ../capplets/theme-switcher/gnome-theme-details.c:656
 msgid "Custom"
 msgstr "Prikrojeno"
 
@@ -1552,24 +1553,24 @@ msgstr "Vrsta bližnjice."
 msgid "Disabled"
 msgstr "Izključeno"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:534
+#: ../capplets/keybindings/gnome-keybinding-properties.c:542
 msgid "<Unknown Action>"
 msgstr "<Neznano dejanje>"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:555
+#: ../capplets/keybindings/gnome-keybinding-properties.c:563
 msgid "Desktop"
 msgstr "Namizje"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:556
+#: ../capplets/keybindings/gnome-keybinding-properties.c:564
 #: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
 msgid "Sound"
 msgstr "Zvok"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:560
+#: ../capplets/keybindings/gnome-keybinding-properties.c:568
 msgid "Window Management"
 msgstr "Upravljanje oken"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:668
+#: ../capplets/keybindings/gnome-keybinding-properties.c:676
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become unusable to type using this key.\n"
@@ -1578,7 +1579,7 @@ msgstr ""
 "Bližnjice \"%s\" ni moč uporabiti, ker bo pisanje s to tipko postalo neuporabno.\n"
 "Poskusite s hkrati pritisnjenimi tipkami Control, Alt ali Shift.\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:697
+#: ../capplets/keybindings/gnome-keybinding-properties.c:705
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1587,21 +1588,21 @@ msgstr ""
 "Bližnjica \"%s\" je že v uporabi za:\n"
 " \"%s\"\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:729
+#: ../capplets/keybindings/gnome-keybinding-properties.c:737
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Napaka ob nastavljanju nove bližnjice v nastavitveni zbirki podatkov: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:779
+#: ../capplets/keybindings/gnome-keybinding-properties.c:787
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "Napaka pri odstranjevanju bližnjice v nastavitveni zbirki: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:886
+#: ../capplets/keybindings/gnome-keybinding-properties.c:894
 msgid "Action"
 msgstr "Dejanje"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:910
+#: ../capplets/keybindings/gnome-keybinding-properties.c:918
 msgid "Shortcut"
 msgstr "Bližnjica"
 
@@ -1646,8 +1647,8 @@ msgstr "_Dostopnost"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:222
 #: ../capplets/keyboard/gnome-keyboard-properties.c:224
-#: ../capplets/sound/sound-properties-capplet.c:782
-#: ../capplets/sound/sound-properties-capplet.c:784
+#: ../capplets/sound/sound-properties-capplet.c:1014
+#: ../capplets/sound/sound-properties-capplet.c:1016
 msgid "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr "Le uveljavi nastavitve in končaj (le za kompatibilnost; sedaj stvar obravnava daemon)"
 
@@ -2087,52 +2088,52 @@ msgstr "_Uporabi istega posrednika (proxy) za vse protokole"
 msgid "Enable sound and associate sounds with events"
 msgstr "Vklopi zvoke in poveži zvoke z dogodki"
 
-#: ../capplets/sound/sound-properties-capplet.c:317
-#: ../capplets/sound/sound-properties-capplet.c:369
+#: ../capplets/sound/sound-properties-capplet.c:321
+#: ../capplets/sound/sound-properties-capplet.c:373
 msgid "Not connected"
 msgstr "Ni povezan"
 
-#: ../capplets/sound/sound-properties-capplet.c:653
+#: ../capplets/sound/sound-properties-capplet.c:657
 msgid "Autodetect"
 msgstr "Samodejno zaznaj"
 
-#: ../capplets/sound/sound-properties-capplet.c:658
-#: ../capplets/sound/sound-properties-capplet.c:659
+#: ../capplets/sound/sound-properties-capplet.c:662
+#: ../capplets/sound/sound-properties-capplet.c:663
 msgid "ALSA - Advanced Linux Sound Architecture"
 msgstr "ALSA - Advanced Linux Sound Architecture"
 
-#: ../capplets/sound/sound-properties-capplet.c:660
+#: ../capplets/sound/sound-properties-capplet.c:664
 msgid "Artsd - ART Sound Daemon"
 msgstr "Artsd - ART Sound Daemon"
 
-#: ../capplets/sound/sound-properties-capplet.c:661
-#: ../capplets/sound/sound-properties-capplet.c:662
+#: ../capplets/sound/sound-properties-capplet.c:665
+#: ../capplets/sound/sound-properties-capplet.c:666
 msgid "ESD - Enlightened Sound Daemon"
 msgstr "ESD - Enlightened Sound Daemon"
 
-#: ../capplets/sound/sound-properties-capplet.c:663
-#: ../capplets/sound/sound-properties-capplet.c:664
+#: ../capplets/sound/sound-properties-capplet.c:667
+#: ../capplets/sound/sound-properties-capplet.c:668
 msgid "OSS - Open Sound System"
 msgstr "OSS - Open Sound System"
 
-#: ../capplets/sound/sound-properties-capplet.c:665
-#: ../capplets/sound/sound-properties-capplet.c:666
+#: ../capplets/sound/sound-properties-capplet.c:669
+#: ../capplets/sound/sound-properties-capplet.c:670
 msgid "Polypaudio Sound Server"
 msgstr "Polypaudio Sound Server"
 
-#: ../capplets/sound/sound-properties-capplet.c:667
+#: ../capplets/sound/sound-properties-capplet.c:671
 msgid "Test Sound"
 msgstr "Preizkus zvoka"
 
-#: ../capplets/sound/sound-properties-capplet.c:668
+#: ../capplets/sound/sound-properties-capplet.c:672
 msgid "Silence"
 msgstr "Tišina"
 
-#: ../capplets/sound/sound-properties-capplet.c:794
+#: ../capplets/sound/sound-properties-capplet.c:1026
 msgid "- GNOME Sound Preferences"
 msgstr "- Nastavitve zvoka za GNOME"
 
-#: ../capplets/sound/sound-properties-capplet.c:819
+#: ../capplets/sound/sound-properties-capplet.c:1051
 msgid "Sound Preferences"
 msgstr "Nastavitve zvoka"
 
@@ -2141,82 +2142,94 @@ msgid "<b>Audio Conferencing</b>"
 msgstr "<b>Zvočna konferenca</b>"
 
 #: ../capplets/sound/sound-properties.glade.h:3
+msgid "<b>Default Mixer Tracks</b>"
+msgstr "<b>Prevzete mikser sledi</b>"
+
+#: ../capplets/sound/sound-properties.glade.h:4
 msgid "<b>Music and Movies</b>"
 msgstr "<b>Glasba in filmi</b>"
 
-#: ../capplets/sound/sound-properties.glade.h:4
+#: ../capplets/sound/sound-properties.glade.h:5
 msgid "<b>Sound Events</b>"
 msgstr "<b>Zvočni dogodki</b>"
 
-#: ../capplets/sound/sound-properties.glade.h:5
+#: ../capplets/sound/sound-properties.glade.h:6
 msgid "<span weight=\"bold\" size=\"x-large\">Testing...</span>"
 msgstr "<span weight=\"bold\" size=\"larger\">Preizkušanje ...</span>"
 
-#: ../capplets/sound/sound-properties.glade.h:6
+#: ../capplets/sound/sound-properties.glade.h:7
 msgid "Click OK to finish."
 msgstr "Kliknite v redu za končanje."
 
-#: ../capplets/sound/sound-properties.glade.h:7
+#: ../capplets/sound/sound-properties.glade.h:8
+msgid "Device:"
+msgstr "Naprava:"
+
+#: ../capplets/sound/sound-properties.glade.h:9
 msgid "Devices"
 msgstr "Naprave"
 
-#: ../capplets/sound/sound-properties.glade.h:8
+#: ../capplets/sound/sound-properties.glade.h:10
 msgid "E_nable software sound mixing (ESD)"
 msgstr "Omogoči programsko mešanje zvoka (ESD)"
 
-#: ../capplets/sound/sound-properties.glade.h:9
+#: ../capplets/sound/sound-properties.glade.h:11
 msgid "Flash _entire screen"
 msgstr "Zabliskaj _celoten zaslon"
 
-#: ../capplets/sound/sound-properties.glade.h:10
+#: ../capplets/sound/sound-properties.glade.h:12
 msgid "Flash _window titlebar"
 msgstr "Zabliskaj _nazivno vrstico okna"
 
-#: ../capplets/sound/sound-properties.glade.h:11
+#: ../capplets/sound/sound-properties.glade.h:13
 msgid "S_ound Playback:"
 msgstr "Pr_edvajanje zvoka:"
 
-#: ../capplets/sound/sound-properties.glade.h:12
+#: ../capplets/sound/sound-properties.glade.h:14
+msgid "Select the device and tracks to control with the keyboard. Use the Shift and Control keys to select multiple tracks if required."
+msgstr "Izberite napravo in sledi za nadzor s tipkovnico. Uporabite tipki Shift in Control za izbiro več sledi, če je potrebno."
+
+#: ../capplets/sound/sound-properties.glade.h:15
 msgid "So_und Playback:"
 msgstr "_Predvajanje zvoka:"
 
-#: ../capplets/sound/sound-properties.glade.h:13
+#: ../capplets/sound/sound-properties.glade.h:16
 msgid "Sound & Video Preferences"
 msgstr "Nastavitve zvoka in filmov"
 
-#: ../capplets/sound/sound-properties.glade.h:14
+#: ../capplets/sound/sound-properties.glade.h:17
 msgid "Sound _Capture:"
 msgstr "_Zajem zvoka:"
 
-#: ../capplets/sound/sound-properties.glade.h:15
+#: ../capplets/sound/sound-properties.glade.h:18
 msgid "Sounds"
 msgstr "Zvoki"
 
-#: ../capplets/sound/sound-properties.glade.h:16
+#: ../capplets/sound/sound-properties.glade.h:19
 msgid "System Beep"
 msgstr "Sistemski zvonec"
 
-#: ../capplets/sound/sound-properties.glade.h:17
+#: ../capplets/sound/sound-properties.glade.h:20
 msgid "Test"
 msgstr "Preskus"
 
-#: ../capplets/sound/sound-properties.glade.h:18
+#: ../capplets/sound/sound-properties.glade.h:21
 msgid "Testing Pipeline"
 msgstr "Preskušanje cevovoda"
 
-#: ../capplets/sound/sound-properties.glade.h:19
+#: ../capplets/sound/sound-properties.glade.h:22
 msgid "_Enable system beep"
 msgstr "_Omogoči sistemski zvonec"
 
-#: ../capplets/sound/sound-properties.glade.h:20
+#: ../capplets/sound/sound-properties.glade.h:23
 msgid "_Play system sounds"
 msgstr "_Predvajaj sistemske zvoke"
 
-#: ../capplets/sound/sound-properties.glade.h:21
+#: ../capplets/sound/sound-properties.glade.h:24
 msgid "_Sound Playback:"
 msgstr "Predvajanje _zvoka:"
 
-#: ../capplets/sound/sound-properties.glade.h:22
+#: ../capplets/sound/sound-properties.glade.h:25
 msgid "_Visual system beep"
 msgstr "Na_videzni sistemski pisk"
 
@@ -2237,7 +2250,20 @@ msgstr "Tema uspešno zbrisana. Izberite drugo temo."
 msgid "Theme can not be deleted"
 msgstr "Teme ni moč zbrisati"
 
-#: ../capplets/theme-switcher/gnome-theme-details.c:705
+#: ../capplets/theme-switcher/gnome-theme-details.c:603
+msgid "Save Color Scheme"
+msgstr "Shrani barvno shemo"
+
+#: ../capplets/theme-switcher/gnome-theme-details.c:612
+msgid "Save color scheme as:"
+msgstr "Shrani barvno shemo kot:"
+
+#: ../capplets/theme-switcher/gnome-theme-details.c:638
+#, c-format
+msgid "Are you sure you want to delete the \"%s\" color scheme?"
+msgstr "Ali ste prepričani, da želite izbrisati barvno shemo \"%s\"?"
+
+#: ../capplets/theme-switcher/gnome-theme-details.c:776
 msgid "No themes could be found on your system.  This probably means that your \"Theme Preferences\" dialog was improperly installed, or you haven't installed the \"gnome-themes\" package."
 msgstr "Na vašem sistemu ni bila najdena nobena tema.  To verjetno pomeni, da je bil vaš dialog \"Nastavitve teme\" nepravilno nameščen ali pa niste namestili paketa \"gnome-themes\"."
 
@@ -2376,40 +2402,40 @@ msgid "Gnome Theme Package"
 msgstr "Paket teme za GNOME"
 
 #: ../capplets/theme-switcher/theme-properties.glade.h:1
+msgid ""
+" \n"
+"Custom"
+msgstr ""
+" \n"
+"Prikrojeno"
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:3
 msgid "<b>You do not have permission to change theme settings</b>"
 msgstr "<b>Nimate dovoljenj za spreminjanje nastavitev teme</b>"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:2
+#: ../capplets/theme-switcher/theme-properties.glade.h:4
 msgid "Apply _Background"
 msgstr "Uveljavi _ozadje"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:3
+#: ../capplets/theme-switcher/theme-properties.glade.h:5
 msgid "Apply _Font"
 msgstr "Uveljavi pisavo"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:4
+#: ../capplets/theme-switcher/theme-properties.glade.h:6
 msgid "Background"
 msgstr "Ozadje"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:5
+#: ../capplets/theme-switcher/theme-properties.glade.h:7
 msgid "C_ustomize..."
 msgstr "Pr_ikroji ..."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:6
+#: ../capplets/theme-switcher/theme-properties.glade.h:8
 msgid "Colors"
 msgstr "Barve"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:7
+#: ../capplets/theme-switcher/theme-properties.glade.h:9
 msgid "Controls"
 msgstr "Kontrole"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:8
-msgid ""
-"Foo\n"
-"Custom"
-msgstr ""
-"Foo\n"
-"Prikrojeno"
 
 #: ../capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Icons"
