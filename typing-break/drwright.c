@@ -593,48 +593,23 @@ popup_about_cb (gpointer   callback_data,
 		guint      action,
 		GtkWidget *widget)
 {
-	static GtkWidget *about_window;
-	GdkPixbuf        *icon;
-	char             *authors [] = {
+	gint   i;
+	gchar *authors[] = {
 		N_("Written by Richard Hult <richard@imendio.com>"),
 		N_("Eye candy added by Anders Carlsson"),
 		NULL
 	};
-	int i;
 
-	if (about_window) {
-		gtk_window_present (GTK_WINDOW (about_window));
-		return;
-	}
-	
 	for (i = 0; authors [i]; i++)
 		authors [i] = _(authors [i]);
 
-	about_window = gtk_about_dialog_new ();
-
-	g_signal_connect (about_window,
-			  "destroy",
-                          G_CALLBACK (gtk_widget_destroyed),
-			  &about_window);
-	
-	icon = NULL; /*gdk_pixbuf_new_from_file (IMAGEDIR "/bar.png", NULL);*/
-	
-	g_object_set (about_window,
-		      "name", _("Typing Monitor"),
-		      "version", VERSION,
-		      "comments", _("A computer break reminder."),
-		      "authors", authors,
-		      "logo", icon,
-		      NULL);
-
-	if (icon != NULL)
-		g_object_unref (icon);
-
-	g_signal_connect (about_window,
-			  "response", G_CALLBACK (gtk_widget_destroy),
-			  NULL);
-
-	gtk_widget_show (about_window);
+	gtk_show_about_dialog (NULL,
+			       "authors", authors,
+			       "comments",  _("A computer break reminder."),
+			       "logo-icon-name", "typing-monitor",
+			       "translator-credits", _("translator-credits"),
+			       "version", VERSION,
+			       NULL);
 }
 
 static void

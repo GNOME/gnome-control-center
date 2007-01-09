@@ -23,4 +23,21 @@ gnome_typing_monitor_LDFLAGS = -export-dynamic
 imagedir = $(GNOMECC_PIXMAPS_DIR)
 image_DATA = stop.png bar.png bar-red.png bar-green.png bar-disabled.png ocean-stripes.png
 
-EXTRA_DIST = $(image_DATA)
+# Themeable application icon
+icondir = $(datadir)/icons/hicolor/48x48/apps
+icon_DATA = typing-monitor.png
+svgicondir = $(datadir)/icons/hicolor/scalable/apps
+svgicon_DATA = typing-monitor.svg
+gtk_update_icon_cache = gtk-update-icon-cache -f -t $(datadir)/icons/hicolor
+install-data-hook:
+	@-if test -z "$(DESTDIR)"; then \
+		echo "Updating Gtk icon cache."; \
+		$(gtk_update_icon_cache); \
+	else \
+		echo "*** Icon cache not updated.  After install, run this:"; \
+		echo "***   $(gtk_update_icon_cache)"; \
+	fi
+
+EXTRA_DIST = $(image_DATA)   \
+             $(icon_DATA)    \
+             $(svgicon_DATA)
