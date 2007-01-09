@@ -740,21 +740,23 @@ update_mixer_tracks_selection (GSList *tracks, GladeXML *dialog)
 
 	gtk_tree_selection_unselect_all (selection);
 
-	if (gtk_tree_model_get_iter_first (model, &iter)) {
-		do {
-			gchar *label;
-			GSList *t;
+	if (tracks != NULL) {
+		if (gtk_tree_model_get_iter_first (model, &iter)) {
+			do {
+				gchar *label;
+				GSList *t;
 
-			gtk_tree_model_get (model, &iter, MIXER_TRACKS_MODEL_LABEL_COLUMN, &label, -1);
+				gtk_tree_model_get (model, &iter, MIXER_TRACKS_MODEL_LABEL_COLUMN, &label, -1);
 
-			for (t = tracks; t != NULL; t = t->next) {
-				if (!strcmp (label, t->data)) {
-					gtk_tree_selection_select_iter (selection, &iter);
-					break;
+				for (t = tracks; t != NULL; t = t->next) {
+					if (!strcmp (label, t->data)) {
+						gtk_tree_selection_select_iter (selection, &iter);
+						break;
+					}
 				}
-			}
-			g_free (label);
-		} while (gtk_tree_model_iter_next (model, &iter));		
+				g_free (label);
+			} while (gtk_tree_model_iter_next (model, &iter));		
+		}
 	}
 		
 	g_signal_handlers_unblock_by_func (G_OBJECT (selection), G_CALLBACK (mixer_tracks_selection_changed), NULL);
@@ -786,26 +788,29 @@ update_mixer_device_combobox (const gchar *mixer_device, GladeXML *dialog)
 	model = gtk_combo_box_get_model (GTK_COMBO_BOX (device_widget));
 
 	/* try to find stored factory and device in the mixer device list */
-	if (gtk_tree_model_get_iter_first (model, &iter)) {
-		do {
-			gchar *device = NULL;
+	if (mixer_device != NULL && *mixer_device != '\0') {
+		if (gtk_tree_model_get_iter_first (model, &iter)) {
+			do {
+				gchar *device = NULL;
 
-			gtk_tree_model_get (model, &iter,
-					MIXER_DEVICE_MODEL_DEVICE_COLUMN, &device,
-					-1);
+				gtk_tree_model_get (model, &iter,
+						MIXER_DEVICE_MODEL_DEVICE_COLUMN, &device,
+						-1);
 
-			if (!strcmp (device, mixer_device)) {
-				gtk_combo_box_set_active_iter (GTK_COMBO_BOX (device_widget), &iter);
+				if (!strcmp (device, mixer_device)) {
+					gtk_combo_box_set_active_iter (GTK_COMBO_BOX (device_widget), &iter);
+
+					g_free (device);
+					break;
+				}
 
 				g_free (device);
-				break;
-			}
-
-			g_free (device);
-		} while (gtk_tree_model_iter_next (model, &iter));
+			} while (gtk_tree_model_iter_next (model, &iter));
+		}
 	}
 
 	/* try to select first mixer entry */
+	/* FIXME use the first with a master track */
 	if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (device_widget), &iter)) {
 		if (gtk_tree_model_get_iter_first (model, &iter)) {
 			gtk_combo_box_set_active_iter (GTK_COMBO_BOX (device_widget), &iter);
