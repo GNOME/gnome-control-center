@@ -270,7 +270,7 @@ static gboolean
 acme_volume_gstreamer_open (AcmeVolumeGStreamer *vol)
 {
   	AcmeVolumeGStreamer *self = (AcmeVolumeGStreamer *) vol;
-	gchar *mixer_device, **factory_and_device;
+	gchar *mixer_device, **factory_and_device = NULL;
 	GList *mixer_list;
 
 	if (self->_priv == NULL)
@@ -284,7 +284,10 @@ acme_volume_gstreamer_open (AcmeVolumeGStreamer *vol)
 	}
 
 	mixer_device = gconf_client_get_string (self->_priv->gconf_client, DEFAULT_MIXER_DEVICE_KEY, NULL);
-	factory_and_device = g_strsplit (mixer_device, ":", 2);
+	if (mixer_device != NULL)
+	{
+		factory_and_device = g_strsplit (mixer_device, ":", 2);
+	}
 
 	if (factory_and_device != NULL && factory_and_device[0] != NULL)
 	{
