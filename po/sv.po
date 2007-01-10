@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-01-09 03:19+0000\n"
-"PO-Revision-Date: 2007-01-09 15:43+0100\n"
+"POT-Creation-Date: 2007-01-10 03:19+0000\n"
+"PO-Revision-Date: 2007-01-10 20:45+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -501,10 +501,8 @@ msgid "_Import"
 msgstr "_Importera"
 
 #: ../capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.in.h:1
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:21
-#: ../capplets/keyboard/keyboard.desktop.in.in.h:1
-msgid "Keyboard"
-msgstr "Tangentbord"
+msgid "Keyboard Accessibility"
+msgstr "Tangentbordstillgänglighet"
 
 #: ../capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.in.h:2
 msgid "Set your keyboard accessibility preferences"
@@ -837,7 +835,7 @@ msgstr "Verkställ ändringarna och avsluta"
 #: ../capplets/common/capplet-util.c:244
 #: ../capplets/keyboard/gnome-keyboard-properties.c:226
 #: ../capplets/mouse/gnome-mouse-properties.c:1037
-#: ../capplets/sound/sound-properties-capplet.c:1018
+#: ../capplets/sound/sound-properties-capplet.c:1023
 msgid "Retrieve and store legacy settings"
 msgstr "Hämta och lagra föråldrade inställningar"
 
@@ -1645,8 +1643,8 @@ msgstr "_Tillgänglighet"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:222
 #: ../capplets/keyboard/gnome-keyboard-properties.c:224
-#: ../capplets/sound/sound-properties-capplet.c:1014
-#: ../capplets/sound/sound-properties-capplet.c:1016
+#: ../capplets/sound/sound-properties-capplet.c:1019
+#: ../capplets/sound/sound-properties-capplet.c:1021
 msgid "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr "Verkställ bara ändringar och avsluta (endast för kompatibilitet; hanteras nu av demon)"
 
@@ -1729,6 +1727,11 @@ msgstr "Längd på arbete innan paus"
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:20
 msgid "Key presses _repeat when key is held down"
 msgstr "Tangenttryckningar _upprepar då tangent hålls ned"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: ../capplets/keyboard/keyboard.desktop.in.in.h:1
+msgid "Keyboard"
+msgstr "Tangentbord"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:22
 msgid "Keyboard Preferences"
@@ -2085,6 +2088,11 @@ msgstr "_Använd samma proxyserver för alla protokoll"
 msgid "Enable sound and associate sounds with events"
 msgstr "Aktivera ljud och associera ljud med händelser"
 
+#: ../capplets/sound/mixer-support.c:79
+#, c-format
+msgid "Unknown Volume Control %d"
+msgstr "Okänd volymkontroll %d"
+
 #: ../capplets/sound/sound-properties-capplet.c:321
 #: ../capplets/sound/sound-properties-capplet.c:373
 msgid "Not connected"
@@ -2126,11 +2134,11 @@ msgstr "Ljudtest"
 msgid "Silence"
 msgstr "Tystnad"
 
-#: ../capplets/sound/sound-properties-capplet.c:1026
+#: ../capplets/sound/sound-properties-capplet.c:1031
 msgid "- GNOME Sound Preferences"
 msgstr "- Ljudinställningar för GNOME"
 
-#: ../capplets/sound/sound-properties-capplet.c:1051
+#: ../capplets/sound/sound-properties-capplet.c:1056
 msgid "Sound Preferences"
 msgstr "Ljudinställningar"
 
@@ -3405,25 +3413,35 @@ msgstr "Mindre än en minut till nästa paus"
 msgid "Unable to bring up the typing break properties dialog with the following error: %s"
 msgstr "Kan inte visa dialogfönstret för skrivandepausegenskaper med följande fel: %s"
 
-#: ../typing-break/drwright.c:599
+#: ../typing-break/drwright.c:598
 msgid "Written by Richard Hult <richard@imendio.com>"
 msgstr "Skrivet av Richard Hult <richard@imendio.com>"
 
-#: ../typing-break/drwright.c:600
+#: ../typing-break/drwright.c:599
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Ögongodis tillagt av Anders Carlsson"
 
-# Osäker
-#: ../typing-break/drwright.c:623
-msgid "Typing Monitor"
-msgstr "Skrivandeövervakare"
-
-#: ../typing-break/drwright.c:625
+#: ../typing-break/drwright.c:608
 msgid "A computer break reminder."
 msgstr "En datorpauspåminnare."
 
+#: ../typing-break/drwright.c:610
+msgid "translator-credits"
+msgstr ""
+"Daniel Nylander\n"
+"Christian Rose\n"
+"Martin Wahlen\n"
+"\n"
+"Skicka synpunkter på översättningen till\n"
+"tp-sv@listor.tp-sv.se"
+
 # Osäker
-#: ../typing-break/main.c:100
+#: ../typing-break/main.c:84
+msgid "Typing Monitor"
+msgstr "Skrivandeövervakare"
+
+# Osäker
+#: ../typing-break/main.c:103
 msgid "The typing monitor uses the notification area to display information. You don't seem to have a notification area on your panel. You can add it by right-clicking on your panel and choosing 'Add to panel', selecting 'Notification area' and clicking 'Add'."
 msgstr "Skrivandeövervakaren använder notifieringsytan för att visa information. Du verkar inte ha en sådan i din panel. Du kan lägga till den genom att högerklicka på panelen och välja \"Lägg till i panelen\", välja \"Notifieringsyta\" och klicka på \"Lägg till\"."
 
