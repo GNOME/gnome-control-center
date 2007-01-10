@@ -575,7 +575,9 @@ key_entry_controlling_key_changed (GConfClient *client,
 				   GConfEntry  *entry,
 				   gpointer     user_data)
 {
-  reload_key_entries (wm_common_get_current_window_manager(), user_data);
+  gchar *wm_name = wm_common_get_current_window_manager();
+  reload_key_entries (wm_name, user_data);
+  g_free (wm_name);
 }
 
 static gboolean
@@ -881,6 +883,7 @@ setup_dialog (GladeXML *dialog)
   GtkCellRenderer *renderer;
   GtkTreeViewColumn *column;
   GtkWidget *widget;
+  gchar *wm_name;
 
   client = gconf_client_get_default ();
 
@@ -932,7 +935,9 @@ setup_dialog (GladeXML *dialog)
   g_object_unref (client);
 
   /* set up the dialog */
-  reload_key_entries (wm_common_get_current_window_manager(), dialog);
+  wm_name = wm_common_get_current_window_manager();
+  reload_key_entries (wm_name, dialog);
+  g_free (wm_name);
 
   widget = WID ("gnome-keybinding-dialog");
   capplet_set_icon (widget, "gnome-settings-keybindings");
@@ -969,6 +974,8 @@ main (int argc, char *argv[])
   
   gtk_main ();
 
-  g_object_unref(program);
+  clear_old_model (dialog, WID ("shortcut_treeview"));
+  g_object_unref (dialog);
+  g_object_unref (program);
   return 0;
 }
