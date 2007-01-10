@@ -65,7 +65,7 @@ get_actions_list ()
 
 	for (l = key_list; l != NULL; l = l->next)
 	{
-		gchar *entry = (gchar *) key_list->data;
+		gchar *entry = (gchar *) l->data;
 		gchar **temp;
 
 		action = g_new (AppAction, 1);
