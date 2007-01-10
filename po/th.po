@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-12-29 14:20+0700\n"
-"PO-Revision-Date: 2006-12-29 14:55+0700\n"
+"POT-Creation-Date: 2007-01-10 13:10+0700\n"
+"PO-Revision-Date: 2007-01-10 15:22+0700\n"
 "Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
 "Language-Team: Thai <L10n@opentle.org>\n"
 "MIME-Version: 1.0\n"
@@ -58,15 +58,15 @@ msgstr "เกี่ยวกับฉัน"
 msgid "Set your personal information"
 msgstr "ตั้งค่าข้อมูลเกี่ยวกับตัวคุณ"
 
-#: ../capplets/about-me/gnome-about-me.c:605
+#: ../capplets/about-me/gnome-about-me.c:604
 msgid "Select Image"
 msgstr "กำหนดรูป"
 
-#: ../capplets/about-me/gnome-about-me.c:607
+#: ../capplets/about-me/gnome-about-me.c:606
 msgid "No Image"
 msgstr "ไม่มีรูป"
 
-#: ../capplets/about-me/gnome-about-me.c:770
+#: ../capplets/about-me/gnome-about-me.c:769
 msgid ""
 "There was an error while trying to get the addressbook information\n"
 "Evolution Data Server can't handle the protocol"
@@ -74,16 +74,16 @@ msgstr ""
 "เกิดข้อผิดพลาดขณะพยายามอ่านข้อมูลสมุดที่อยู่\n"
 "Evolution Data Server ไม่สามารถจัดการกับโพรโทคอลได้"
 
-#: ../capplets/about-me/gnome-about-me.c:791
+#: ../capplets/about-me/gnome-about-me.c:790
 msgid "Unable to open address book"
 msgstr "เปิดสมุดที่อยู่ไม่สำเร็จ"
 
-#: ../capplets/about-me/gnome-about-me.c:803
+#: ../capplets/about-me/gnome-about-me.c:802
 msgid "Unknown login ID, the user database might be corrupted"
 msgstr "ไม่รู้จักชื่อผู้ใช้ที่ระบุ ฐานข้อมูลผู้ใช้อาจจะเสียก็ได้"
 
-#: ../capplets/about-me/gnome-about-me.c:834
-#: ../capplets/about-me/gnome-about-me.c:836
+#: ../capplets/about-me/gnome-about-me.c:833
+#: ../capplets/about-me/gnome-about-me.c:835
 #, c-format
 msgid "About %s"
 msgstr "เกี่ยวกับ %s"
@@ -522,10 +522,8 @@ msgid "_Import"
 msgstr "_นำเข้า"
 
 #: ../capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.in.h:1
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:21
-#: ../capplets/keyboard/keyboard.desktop.in.in.h:1
-msgid "Keyboard"
-msgstr "แป้นพิมพ์"
+msgid "Keyboard Accessibility"
+msgstr "สิ่งอำนวยความสะดวกสำหรับแป้นพิมพ์"
 
 #: ../capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.in.h:2
 msgid "Set your keyboard accessibility preferences"
@@ -751,7 +749,7 @@ msgid "_Finish"
 msgstr "เ_สร็จสิ้น"
 
 #: ../capplets/background/gnome-background-properties.glade.h:7
-#: ../capplets/theme-switcher/theme-properties.glade.h:26
+#: ../capplets/theme-switcher/theme-properties.glade.h:30
 msgid "_Remove"
 msgstr "เ_อาออก"
 
@@ -759,64 +757,87 @@ msgstr "เ_อาออก"
 msgid "_Style:"
 msgstr "_ลักษณะ:"
 
-#: ../capplets/background/gnome-wp-capplet.c:74
-#: ../capplets/common/capplet-util.c:340
+#: ../capplets/background/gnome-wp-capplet.c:41
+msgid "[FILE...]"
+msgstr "[FILE...]"
+
+#: ../capplets/background/gnome-wp-capplet.c:81
+#: ../capplets/common/capplet-util.c:344
 #: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:333
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "เกิดข้อผิดพลาดขณะแสดงวิธีใช้: %s"
 
-#: ../capplets/background/gnome-wp-capplet.c:949
+#: ../capplets/background/gnome-wp-capplet.c:957
 msgid "Centered"
 msgstr "วางตรงกลาง"
 
-#: ../capplets/background/gnome-wp-capplet.c:953
+#: ../capplets/background/gnome-wp-capplet.c:961
 msgid "Fill Screen"
 msgstr "ยืดเต็มหน้าจอ"
 
-#: ../capplets/background/gnome-wp-capplet.c:957
+#: ../capplets/background/gnome-wp-capplet.c:965
 msgid "Scaled"
 msgstr "ขยายพอดีหน้าจอ"
 
-#: ../capplets/background/gnome-wp-capplet.c:961
+#: ../capplets/background/gnome-wp-capplet.c:969
 msgid "Zoom"
 msgstr "ซูมเต็มหน้าจอ"
 
-#: ../capplets/background/gnome-wp-capplet.c:965
+#: ../capplets/background/gnome-wp-capplet.c:973
 msgid "Tiled"
 msgstr "เรียงกระเบื้อง"
 
-#: ../capplets/background/gnome-wp-capplet.c:986
+#: ../capplets/background/gnome-wp-capplet.c:994
 msgid "Solid Color"
 msgstr "สีเดียว"
 
-#: ../capplets/background/gnome-wp-capplet.c:990
+#: ../capplets/background/gnome-wp-capplet.c:998
 msgid "Horizontal Gradient"
 msgstr "ไล่สีตามแนวตั้ง"
 
-#: ../capplets/background/gnome-wp-capplet.c:994
+#: ../capplets/background/gnome-wp-capplet.c:1002
 msgid "Vertical Gradient"
 msgstr "ไล่สีตามแนวนอน"
 
 #. Create the file chooser dialog stuff here
-#: ../capplets/background/gnome-wp-capplet.c:1040
+#: ../capplets/background/gnome-wp-capplet.c:1045
 msgid "Add Wallpaper"
 msgstr "เพิ่มวอลล์เปเปอร์"
 
-#: ../capplets/background/gnome-wp-capplet.c:1057
+#: ../capplets/background/gnome-wp-capplet.c:1062
 msgid "Images"
 msgstr "รูปภาพ"
 
-#: ../capplets/background/gnome-wp-capplet.c:1061
+#: ../capplets/background/gnome-wp-capplet.c:1066
 msgid "All Files"
 msgstr "ทุกแฟ้ม"
 
-#: ../capplets/background/gnome-wp-info.c:57
+#: ../capplets/background/gnome-wp-capplet.c:1129
+msgid "- Desktop Background Preferences"
+msgstr "- ปรับแต่งพื้นหลังของพื้นโต๊ะ"
+
+#: ../capplets/background/gnome-wp-info.c:45
 msgid "No Wallpaper"
 msgstr "ไม่ใช้วอลล์เปเปอร์"
 
-#: ../capplets/background/gnome-wp-item.c:343
-#: ../capplets/background/gnome-wp-item.c:345
+#.
+#. Translators: This message is used to render the type and size of the
+#. background images in gnome-background-properites. The first "%s" will
+#. be replaced by the image type, and the two "%d %s"s will be replaced
+#. with the images' dimensions. For example, in US English, this may be
+#. displayed as "JPEG Image, 1600 pixels x 1200 pixels".
+#.
+#. Do not translate the "background size|" type. Remove it from the
+#. translation.
+#.
+#: ../capplets/background/gnome-wp-item.c:368
+#, c-format
+msgid "background size|%s, %d %s x %d %s"
+msgstr "%s, %d %s x %d %s"
+
+#: ../capplets/background/gnome-wp-item.c:371
+#: ../capplets/background/gnome-wp-item.c:373
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "พิกเซล"
@@ -839,14 +860,14 @@ msgstr ""
 msgid "Unable to load stock icon '%s'\n"
 msgstr "อ่านไอคอนสำเร็จรูป '%s' ไม่สำเร็จ\n"
 
-#: ../capplets/common/capplet-util.c:239 ../capplets/common/capplet-util.c:241
+#: ../capplets/common/capplet-util.c:240 ../capplets/common/capplet-util.c:242
 msgid "Just apply settings and quit"
 msgstr "ใช้ค่าที่ตั้งและปิดหน้าต่าง"
 
-#: ../capplets/common/capplet-util.c:243
-#: ../capplets/keyboard/gnome-keyboard-properties.c:225
-#: ../capplets/mouse/gnome-mouse-properties.c:1036
-#: ../capplets/sound/sound-properties-capplet.c:762
+#: ../capplets/common/capplet-util.c:244
+#: ../capplets/keyboard/gnome-keyboard-properties.c:226
+#: ../capplets/mouse/gnome-mouse-properties.c:1037
+#: ../capplets/sound/sound-properties-capplet.c:1023
 msgid "Retrieve and store legacy settings"
 msgstr "อ่านค่าที่ตั้งไว้ในรุ่นก่อน"
 
@@ -1040,7 +1061,8 @@ msgid "Error saving configuration: %s"
 msgstr "เกิดข้อผิดพลาดขณะบันทึกค่าตั้ง: %s"
 
 #: ../capplets/default-applications/gnome-da-capplet.c:743
-#: ../capplets/sound/sound-properties-capplet.c:319
+#: ../capplets/sound/sound-properties-capplet.c:323
+#: ../capplets/theme-switcher/gnome-theme-details.c:656
 msgid "Custom"
 msgstr "กำหนดเอง"
 
@@ -1545,6 +1567,14 @@ msgstr[0] ""
 "คุณเลือกแบบอักษรขนาด %d พอยนต์ ซึ่งอาจใหญ่เทอะทะเกินกว่าที่จะใช้งานได้สะดวก "
 "ขอแนะนำให้เลือกขนาดที่เล็กกว่านี้"
 
+#: ../capplets/font/main.c:527
+msgid "Use previous font"
+msgstr "ใช้แบบอักษรเดิม"
+
+#: ../capplets/font/main.c:529
+msgid "Use selected font"
+msgstr "ใช้แบบอักษรที่เลือก"
+
 #: ../capplets/keybindings/eggcellrendererkeys.c:21
 msgid "New accelerator..."
 msgstr "ปุ่มลัดใหม่..."
@@ -1578,26 +1608,26 @@ msgstr "แบบของตัวเร่ง"
 msgid "Disabled"
 msgstr "ไม่ใช้"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:534
+#: ../capplets/keybindings/gnome-keybinding-properties.c:542
 msgid "<Unknown Action>"
 msgstr "<ปฏิบัติการที่ไม่รู้จัก>"
 
 # This contains shortcuts for "volume up/down", e-mail, move windows, etc.,.
 # "misclenous" is more suitable than "desktop"
-#: ../capplets/keybindings/gnome-keybinding-properties.c:555
+#: ../capplets/keybindings/gnome-keybinding-properties.c:563
 msgid "Desktop"
 msgstr "เบ็ดเตล็ด"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:556
+#: ../capplets/keybindings/gnome-keybinding-properties.c:564
 #: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
 msgid "Sound"
 msgstr "เสียง"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:560
+#: ../capplets/keybindings/gnome-keybinding-properties.c:568
 msgid "Window Management"
 msgstr "จัดการหน้าต่าง"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:668
+#: ../capplets/keybindings/gnome-keybinding-properties.c:676
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become unusable to type "
@@ -1607,7 +1637,7 @@ msgstr ""
 "ไม่สามารถใช้ปุ่มลัด \"%s\" ได้ เพราะจะทำให้ใช้ปุ่มนี้ป้อนข้อความไม่ได้\n"
 "กรุณาใช้คีย์อย่าง Control, Alt หรือ Shift ประกอบด้วย\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:697
+#: ../capplets/keybindings/gnome-keybinding-properties.c:705
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1616,21 +1646,21 @@ msgstr ""
 "ปุ่มลัด \"%s\" ถูกใช้อยู่แล้วสำหรับ:\n"
 " \"%s\"\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:729
+#: ../capplets/keybindings/gnome-keybinding-properties.c:737
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "เกิดข้อผิดพลาดขณะจัดเก็บปุ่มลัดใหม่ลงในฐานข้อมูลค่าปรับแต่ง: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:779
+#: ../capplets/keybindings/gnome-keybinding-properties.c:787
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "เกิดข้อผิดพลาด ขณะลบปุ่มลัดออกจาก ฐานข้อมูลค่าปรับแต่ง: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:886
+#: ../capplets/keybindings/gnome-keybinding-properties.c:894
 msgid "Action"
 msgstr "ปฏิบัติการ"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:910
+#: ../capplets/keybindings/gnome-keybinding-properties.c:918
 msgid "Shortcut"
 msgstr "ปุ่มลัด"
 
@@ -1677,18 +1707,22 @@ msgstr "เกิดข้อผิดพลาดขณะเรียกใช
 msgid "_Accessibility"
 msgstr "_สิ่งอำนวยความสะดวก"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:221
-#: ../capplets/keyboard/gnome-keyboard-properties.c:223
-#: ../capplets/sound/sound-properties-capplet.c:758
-#: ../capplets/sound/sound-properties-capplet.c:760
+#: ../capplets/keyboard/gnome-keyboard-properties.c:222
+#: ../capplets/keyboard/gnome-keyboard-properties.c:224
+#: ../capplets/sound/sound-properties-capplet.c:1019
+#: ../capplets/sound/sound-properties-capplet.c:1021
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
 "เริ่มใช้ค่าที่กำหนดแล้วออกจากโปรแกรม (ใช้เพื่อความเข้ากันได้เท่านั้น; ปัจจุบันถูกจัดการโดยดีมอน)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:227
+#: ../capplets/keyboard/gnome-keyboard-properties.c:228
 msgid "Start the page with the typing break settings showing"
 msgstr "เริ่มต้นหน้ากระดาษโดยแสดงการตั้งค่าการหยุดพักการพิมพ์"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.c:236
+msgid "- GNOME Keyboard Preferences"
+msgstr "- ปรับแต่งแป้นพิมพ์สำหรับ GNOME"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:3
 msgid "<b>Cursor Blinking</b>"
@@ -1761,6 +1795,11 @@ msgstr "ระยะเวลาทำงานก่อนที่จะบั
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:20
 msgid "Key presses _repeat when key is held down"
 msgstr "ซ้ำปุ่_มเมื่อกดปุ่มค้างไว้"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: ../capplets/keyboard/keyboard.desktop.in.in.h:1
+msgid "Keyboard"
+msgstr "แป้นพิมพ์"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:22
 msgid "Keyboard Preferences"
@@ -1914,6 +1953,10 @@ msgstr "ตัวชี้ขาวขยายใหญ่"
 #: ../capplets/mouse/gnome-mouse-properties.c:990
 msgid "Pointer Theme"
 msgstr "ชุดรูปแบบตัวชี้"
+
+#: ../capplets/mouse/gnome-mouse-properties.c:1045
+msgid "- GNOME Mouse Preferences"
+msgstr "- ปรับแต่งเมาส์สำหรับ GNOME"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:2
 msgid "<b>Double-Click Timeout </b>"
@@ -2107,16 +2150,65 @@ msgstr "_รหัสผ่าน:"
 msgid "_Secure HTTP proxy:"
 msgstr "พร็อกซี _Secure HTTP:"
 
+#: ../capplets/network/gnome-network-preferences.glade.h:20
+msgid "_Use the same proxy for all protocols"
+msgstr "ใ_ช้พร็อกซีเดียวกันสำหรับทุกโพรโทคอล"
+
 #: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:1
 msgid "Enable sound and associate sounds with events"
-msgstr "ใช้เสียงสำหรับเหตุการณ์ต่าง ๆ"
+msgstr "ใช้เสียงสำหรับเหตุการณ์ต่างๆ"
 
-#: ../capplets/sound/sound-properties-capplet.c:317
-#: ../capplets/sound/sound-properties-capplet.c:369
+#: ../capplets/sound/mixer-support.c:79
+#, c-format
+msgid "Unknown Volume Control %d"
+msgstr "ไม่รู้จักอุปกรณ์ควบคุมระดับเสียง %d"
+
+#: ../capplets/sound/sound-properties-capplet.c:321
+#: ../capplets/sound/sound-properties-capplet.c:373
 msgid "Not connected"
 msgstr "ยังไม่เชื่อมต่อ"
 
-#: ../capplets/sound/sound-properties-capplet.c:792
+#: ../capplets/sound/sound-properties-capplet.c:657
+msgid "Autodetect"
+msgstr "ตรวจสอบอัตโนมัติ"
+
+#: ../capplets/sound/sound-properties-capplet.c:662
+#: ../capplets/sound/sound-properties-capplet.c:663
+msgid "ALSA - Advanced Linux Sound Architecture"
+msgstr "ALSA - Advanced Linux Sound Architecture"
+
+#: ../capplets/sound/sound-properties-capplet.c:664
+msgid "Artsd - ART Sound Daemon"
+msgstr "Artsd - ART Sound Daemon"
+
+#: ../capplets/sound/sound-properties-capplet.c:665
+#: ../capplets/sound/sound-properties-capplet.c:666
+msgid "ESD - Enlightened Sound Daemon"
+msgstr "ESD - Enlightened Sound Daemon"
+
+#: ../capplets/sound/sound-properties-capplet.c:667
+#: ../capplets/sound/sound-properties-capplet.c:668
+msgid "OSS - Open Sound System"
+msgstr "OSS - Open Sound System"
+
+#: ../capplets/sound/sound-properties-capplet.c:669
+#: ../capplets/sound/sound-properties-capplet.c:670
+msgid "Polypaudio Sound Server"
+msgstr "เซิร์ฟเวอร์เสียง Polypaudio"
+
+#: ../capplets/sound/sound-properties-capplet.c:671
+msgid "Test Sound"
+msgstr "เสียงทดสอบ"
+
+#: ../capplets/sound/sound-properties-capplet.c:672
+msgid "Silence"
+msgstr "เงียบ"
+
+#: ../capplets/sound/sound-properties-capplet.c:1031
+msgid "- GNOME Sound Preferences"
+msgstr "- ค่าตั้งของเสียงสำหรับ GNOME"
+
+#: ../capplets/sound/sound-properties-capplet.c:1056
 msgid "Sound Preferences"
 msgstr "ค่าตั้งของเสียง"
 
@@ -2125,74 +2217,98 @@ msgid "<b>Audio Conferencing</b>"
 msgstr "<b>การประชุมทางเสียง</b>"
 
 #: ../capplets/sound/sound-properties.glade.h:3
+msgid "<b>Default Mixer Tracks</b>"
+msgstr "<b>แทร็กปริยายของอุปกรณ์ควบคุมเสียง</b>"
+
+#: ../capplets/sound/sound-properties.glade.h:4
 msgid "<b>Music and Movies</b>"
 msgstr "<b>ดูหนังฟังเพลง</b>"
 
-#: ../capplets/sound/sound-properties.glade.h:4
+#: ../capplets/sound/sound-properties.glade.h:5
 msgid "<b>Sound Events</b>"
 msgstr "<b>เหตุการณ์เสียง</b>"
 
-#: ../capplets/sound/sound-properties.glade.h:5
+#: ../capplets/sound/sound-properties.glade.h:6
 msgid "<span weight=\"bold\" size=\"x-large\">Testing...</span>"
 msgstr "<span weight=\"bold\" size=\"larger\">กำลังทดสอบ...</span>"
 
-#: ../capplets/sound/sound-properties.glade.h:6
+#: ../capplets/sound/sound-properties.glade.h:7
 msgid "Click OK to finish."
 msgstr "คลิก \"ตกลง\" เพื่อสิ้นสุด"
 
-#: ../capplets/sound/sound-properties.glade.h:7
+#: ../capplets/sound/sound-properties.glade.h:8
+msgid "Device:"
+msgstr "อุปกรณ์:"
+
+#: ../capplets/sound/sound-properties.glade.h:9
 msgid "Devices"
 msgstr "อุปกรณ์"
 
-#: ../capplets/sound/sound-properties.glade.h:8
+#: ../capplets/sound/sound-properties.glade.h:10
 msgid "E_nable software sound mixing (ESD)"
 msgstr "เ_ปิดใช้การปรับเสียงด้วยซอฟต์แวร์ (ESD)"
 
-#: ../capplets/sound/sound-properties.glade.h:9
+#: ../capplets/sound/sound-properties.glade.h:11
 msgid "Flash _entire screen"
 msgstr "กะพริบหน้า_จอทั้งจอ"
 
-#: ../capplets/sound/sound-properties.glade.h:10
+#: ../capplets/sound/sound-properties.glade.h:12
 msgid "Flash _window titlebar"
 msgstr "กะพริบหัว_หน้าต่าง"
 
-#: ../capplets/sound/sound-properties.glade.h:11
+#: ../capplets/sound/sound-properties.glade.h:13
+msgid "S_ound Playback:"
+msgstr "อุป_กรณ์เล่นเสียง:"
+
+#: ../capplets/sound/sound-properties.glade.h:14
+msgid ""
+"Select the device and tracks to control with the keyboard. Use the Shift and "
+"Control keys to select multiple tracks if required."
+msgstr ""
+"เลือกอุปกรณ์และแทร็กที่จะควบคุมด้วยแป้นพิมพ์ ใช้ปุ่ม Shift และ Control "
+"เลือกหลายแทร็กได้ถ้าต้องการ"
+
+#: ../capplets/sound/sound-properties.glade.h:15
+msgid "So_und Playback:"
+msgstr "อุปกรณ์เ_ล่นเสียง:"
+
+#: ../capplets/sound/sound-properties.glade.h:16
 msgid "Sound & Video Preferences"
 msgstr "ค่าตั้งของเสียงและวีดิทัศน์"
 
-#: ../capplets/sound/sound-properties.glade.h:12
-msgid "Sound Capture:"
-msgstr "อุปกรณ์รับเสียง:"
+#: ../capplets/sound/sound-properties.glade.h:17
+msgid "Sound _Capture:"
+msgstr "อุปกรณ์_รับเสียง:"
 
-#: ../capplets/sound/sound-properties.glade.h:13
-msgid "Sound Playback:"
-msgstr "อุปกรณ์เล่นเสียง:"
-
-#: ../capplets/sound/sound-properties.glade.h:14
+#: ../capplets/sound/sound-properties.glade.h:18
 msgid "Sounds"
 msgstr "เสียง"
 
-#: ../capplets/sound/sound-properties.glade.h:15
+#: ../capplets/sound/sound-properties.glade.h:19
 msgid "System Beep"
 msgstr "บี๊ประบบ"
 
-#: ../capplets/sound/sound-properties.glade.h:16
+#: ../capplets/sound/sound-properties.glade.h:20
 msgid "Test"
 msgstr "ทดสอบ"
 
-#: ../capplets/sound/sound-properties.glade.h:17
+#: ../capplets/sound/sound-properties.glade.h:21
 msgid "Testing Pipeline"
 msgstr "กำลังทดสอบไปป์ไลน์"
 
-#: ../capplets/sound/sound-properties.glade.h:18
+#: ../capplets/sound/sound-properties.glade.h:22
 msgid "_Enable system beep"
 msgstr "เ_ปิดใช้บี๊ประบบ"
 
-#: ../capplets/sound/sound-properties.glade.h:19
+#: ../capplets/sound/sound-properties.glade.h:23
 msgid "_Play system sounds"
 msgstr "เ_ล่นเสียงของระบบ"
 
-#: ../capplets/sound/sound-properties.glade.h:20
+#: ../capplets/sound/sound-properties.glade.h:24
+msgid "_Sound Playback:"
+msgstr "อุ_ปกรณ์เล่นเสียง:"
+
+#: ../capplets/sound/sound-properties.glade.h:25
 msgid "_Visual system beep"
 msgstr "บี๊ประบบแบบ_ภาพ"
 
@@ -2201,19 +2317,32 @@ msgstr "บี๊ประบบแบบ_ภาพ"
 msgid "Failed to construct test pipeline for '%s'"
 msgstr "สร้างไปป์ไลน์ทดสอบสำหรับ '%s' ไม่สำเร็จ"
 
-#: ../capplets/theme-switcher/gnome-theme-details.c:370
+#: ../capplets/theme-switcher/gnome-theme-details.c:425
 msgid "Would you like to remove this theme?"
 msgstr "คุณต้องการลบชุดตกแต่งนี้หรือไม่?"
 
-#: ../capplets/theme-switcher/gnome-theme-details.c:435
+#: ../capplets/theme-switcher/gnome-theme-details.c:490
 msgid "Theme deleted succesfully. Please select another theme."
 msgstr "ลบชุดตกแต่งสำเร็จแล้ว กรุณาเลือกชุดตกแต่งอื่น"
 
-#: ../capplets/theme-switcher/gnome-theme-details.c:444
+#: ../capplets/theme-switcher/gnome-theme-details.c:499
 msgid "Theme can not be deleted"
 msgstr "ไม่สามารถลบชุดตกแต่งได้"
 
-#: ../capplets/theme-switcher/gnome-theme-details.c:632
+#: ../capplets/theme-switcher/gnome-theme-details.c:603
+msgid "Save Color Scheme"
+msgstr "บันทึกแนวการใช้สี"
+
+#: ../capplets/theme-switcher/gnome-theme-details.c:612
+msgid "Save color scheme as:"
+msgstr "บันทึกแนวการใช้สีเป็น:"
+
+#: ../capplets/theme-switcher/gnome-theme-details.c:638
+#, c-format
+msgid "Are you sure you want to delete the \"%s\" color scheme?"
+msgstr "ยืนยันที่จะลบแนวการใช้สี \"%s\" หรือไม่?"
+
+#: ../capplets/theme-switcher/gnome-theme-details.c:776
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -2264,36 +2393,32 @@ msgstr "รูปแบบข้อมูลไม่ถูกต้อง"
 msgid "Installation Failed"
 msgstr "ติดตั้งชุดตกแต่งไม่สำเร็จ"
 
-#. TODO: currently cannot apply "gnome themes"
-#: ../capplets/theme-switcher/gnome-theme-installer.c:461
+#: ../capplets/theme-switcher/gnome-theme-installer.c:463
 #, c-format
-msgid ""
-"<span weight=\"bold\" size=\"larger\">The theme \"%s\" has been installed.</"
-"span>\n"
-"\n"
-"Would you like to apply it now, or keep your current theme?"
-msgstr ""
-"<span weight=\"bold\" size=\"larger\">ชุดตกแต่ง \"%s\" ติดตั้งเรียบร้อยแล้ว</span>\n"
-"\n"
-"คุณต้องการใช้ชุดตกแต่งนี้เลยหรือไม่ หรือจะใช้ชุดตกแต่งเดิมต่อไป?"
+msgid "The theme \"%s\" has been installed."
+msgstr "ชุดตกแต่ง \"%s\" ติดตั้งเรียบร้อยแล้ว"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:464
+#: ../capplets/theme-switcher/gnome-theme-installer.c:469
+msgid "Would you like to apply it now, or keep your current theme?"
+msgstr "คุณต้องการใช้ชุดตกแต่งนี้เลยหรือไม่ หรือจะใช้ชุดตกแต่งเดิมต่อไป?"
+
+#: ../capplets/theme-switcher/gnome-theme-installer.c:471
 msgid "Keep Current Theme"
 msgstr "ใช้ชุดตกแต่งเดิม"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:466
+#: ../capplets/theme-switcher/gnome-theme-installer.c:473
 msgid "Apply New Theme"
 msgstr "ใช้ชุดตกแต่งใหม่"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:522
+#: ../capplets/theme-switcher/gnome-theme-installer.c:529
 msgid "No theme file location specified to install"
 msgstr "ไม่ได้กำหนดตำแหน่งของแฟ้มชุดตกแต่งที่จะติดตั้ง"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:537
+#: ../capplets/theme-switcher/gnome-theme-installer.c:544
 msgid "The theme file location specified to install is invalid"
 msgstr "ตำแหน่งแฟ้มชุดตกแต่งที่ให้ใช้ไม่ได้"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:563
+#: ../capplets/theme-switcher/gnome-theme-installer.c:570
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -2302,11 +2427,11 @@ msgstr ""
 "คุณไม่มีสิทธิเพียงพอที่จะติดตั้งชุดตกแต่งใน:\n"
 "%s"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:584
+#: ../capplets/theme-switcher/gnome-theme-installer.c:591
 msgid "The file format is invalid."
 msgstr "รูปแบบข้อมูลไม่ถูกต้อง"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:611
+#: ../capplets/theme-switcher/gnome-theme-installer.c:618
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
@@ -2321,15 +2446,15 @@ msgstr "ชุดตกแต่งกำหนดเอง"
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "คุณสามารถบันทึกชุดตกแต่งนี้ได้ด้วยปุ่ม \"บันทึกชุดตกแต่ง\""
 
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1613
+#: ../capplets/theme-switcher/gnome-theme-manager.c:1614
 msgid "Specify the filename of a theme to install"
 msgstr "ระบุชื่อแฟ้มของชุดตกแต่งที่จะติดตั้ง"
 
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1614
+#: ../capplets/theme-switcher/gnome-theme-manager.c:1615
 msgid "filename"
 msgstr "ชื่อแฟ้ม"
 
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1654
+#: ../capplets/theme-switcher/gnome-theme-manager.c:1658
 msgid ""
 "The default theme schemas could not be found on your system.  This means "
 "that you probably don't have metacity installed, or that your gconf is "
@@ -2348,130 +2473,158 @@ msgstr "มีชุดตกแต่งนี้อยู่แล้ว จ�
 
 #: ../capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:1
 msgid "Select themes for various parts of the desktop"
-msgstr "เลือกชุดตกแต่งสำหรับส่วนต่าง ๆ ของพื้นที่ทำงาน"
+msgstr "เลือกชุดตกแต่งสำหรับส่วนต่างๆ ของพื้นที่ทำงาน"
 
 #: ../capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:2
 #: ../vfs-methods/themus/themus-properties-main.c:92
 msgid "Theme"
 msgstr "ชุดตกแต่ง"
 
+#: ../capplets/theme-switcher/gnome-theme-installer.desktop.in.in.h:1
+msgid "Installs themes packages for various parts of the desktop"
+msgstr "ติดตั้งแพกเกจชุดตกแต่งสำหรับส่วนต่างๆ ของพื้นที่ทำงาน"
+
+#: ../capplets/theme-switcher/gnome-theme-installer.desktop.in.in.h:2
+msgid "Theme Installer"
+msgstr "เครื่องมือติดตั้งชุดตกแต่ง"
+
+#: ../capplets/theme-switcher/gnome-theme-package.xml.in.h:1
+msgid "Gnome Theme Package"
+msgstr "แพกเกจชุดตกแต่ง GNOME"
+
 #: ../capplets/theme-switcher/theme-properties.glade.h:1
+msgid ""
+" \n"
+"Custom"
+msgstr ""
+" \n"
+"กำหนดเอง"
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:3
 msgid "<b>You do not have permission to change theme settings</b>"
 msgstr "<b>คุณไม่ได้รับอนุญาตให้เปลี่ยนชุดตกแต่ง</b>"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:2
+#: ../capplets/theme-switcher/theme-properties.glade.h:4
 msgid "Apply _Background"
 msgstr "ตกลงใช้_พื้นหลัง"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:3
+#: ../capplets/theme-switcher/theme-properties.glade.h:5
 msgid "Apply _Font"
 msgstr "ตกลงใช้แ_บบอักษร"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:4
+#: ../capplets/theme-switcher/theme-properties.glade.h:6
 msgid "Background"
 msgstr "พื้นหลัง"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:5
+#: ../capplets/theme-switcher/theme-properties.glade.h:7
+msgid "C_ustomize..."
+msgstr "_ปรับเลือก..."
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:8
 msgid "Colors"
 msgstr "สี"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:6
+#: ../capplets/theme-switcher/theme-properties.glade.h:9
 msgid "Controls"
 msgstr "ปุ่มควบคุมต่างๆ"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:7
+#: ../capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Icons"
 msgstr "ไอคอน"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:8
+#: ../capplets/theme-switcher/theme-properties.glade.h:11
+msgid "S_aved schemes:"
+msgstr "ชุด_ตกแต่งที่บันทึกไว้:"
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:12
 msgid "Save Theme As..."
 msgstr "บันทึกชุดตกแต่งเป็น..."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:9
+#: ../capplets/theme-switcher/theme-properties.glade.h:13
 msgid "Save _Background Image"
 msgstr "บันทึกภาพ_พื้นหลัง"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:10
+#: ../capplets/theme-switcher/theme-properties.glade.h:14
 msgid "Select theme for the desktop"
 msgstr "เลือกชุดตกแต่งสำหรับพื้นโต๊ะ"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:11
+#: ../capplets/theme-switcher/theme-properties.glade.h:15
 msgid "Text"
 msgstr "ข้อความ"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:12
+#: ../capplets/theme-switcher/theme-properties.glade.h:16
+msgid "The current controls theme does not support color schemes"
+msgstr "ชุดตกแต่งปุ่มควบคุมที่ใช้อยู่ ไม่สนับสนุนแนวการใช้สี"
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:17
 msgid "Theme Details"
 msgstr "รายละเอียดของชุดตกแต่ง"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:13
+#: ../capplets/theme-switcher/theme-properties.glade.h:18
 msgid "Theme Preferences"
 msgstr "ปรับแต่งชุดตกแต่ง"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:14
+#: ../capplets/theme-switcher/theme-properties.glade.h:19
 msgid "This theme does not suggest any particular font or background."
 msgstr "ชุดตกแต่งนี้ไม่ได้แนะนำแบบอักษรหรือพื้นหลัง"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:15
+#: ../capplets/theme-switcher/theme-properties.glade.h:20
 msgid "This theme suggests a background:"
 msgstr "ชุดตกแต่งนี้แนะนำ พื้นหลัง:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:16
+#: ../capplets/theme-switcher/theme-properties.glade.h:21
 msgid "This theme suggests a font and a background:"
 msgstr "ชุดตกแต่งนี้แนะนำ แบบอักษร และ พื้นหลัง:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:17
+#: ../capplets/theme-switcher/theme-properties.glade.h:22
 msgid "This theme suggests a font:"
 msgstr "ชุดตกแต่งนี้แนะนำ แบบอักษร:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:18
+#: ../capplets/theme-switcher/theme-properties.glade.h:23
 msgid "Window Border"
 msgstr "กรอบหน้าต่าง"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:19
-msgid "_Customize..."
-msgstr "_กำหนดเอง..."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:20
+#: ../capplets/theme-switcher/theme-properties.glade.h:24
 msgid "_Description:"
 msgstr "_คำบรรยาย:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:21
-msgid "_Enable Custom Colors"
+#: ../capplets/theme-switcher/theme-properties.glade.h:25
+msgid "_Enable custom colors"
 msgstr "ใ_ช้สีกำหนดเอง"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:22
-msgid "_Input Boxes:"
+#: ../capplets/theme-switcher/theme-properties.glade.h:26
+msgid "_Input boxes:"
 msgstr "กล่อง_ป้อนข้อความ:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:23
+#: ../capplets/theme-switcher/theme-properties.glade.h:27
 msgid "_Install Theme..."
 msgstr "_ติดตั้งชุดตกแต่ง..."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:24
+#: ../capplets/theme-switcher/theme-properties.glade.h:28
 msgid "_Install..."
 msgstr "_ติดตั้ง..."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:25
+#: ../capplets/theme-switcher/theme-properties.glade.h:29
 msgid "_Name:"
 msgstr "_ชื่อ:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:27
+#: ../capplets/theme-switcher/theme-properties.glade.h:31
 msgid "_Revert"
 msgstr "คืน_กลับ"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:28
+#: ../capplets/theme-switcher/theme-properties.glade.h:32
 msgid "_Save Theme..."
 msgstr "_บันทึกชุดตกแต่ง..."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:29
-msgid "_Selected Items:"
+#: ../capplets/theme-switcher/theme-properties.glade.h:33
+msgid "_Selected items:"
 msgstr "สิ่งที่เ_ลือก:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:30
+#: ../capplets/theme-switcher/theme-properties.glade.h:34
 msgid "_Windows:"
 msgstr "ห_น้าต่าง:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:31
+#: ../capplets/theme-switcher/theme-properties.glade.h:35
 msgid "theme selection tree"
 msgstr "ช่องเลือกชุดตกแต่ง"
 
@@ -2579,34 +2732,27 @@ msgstr "_ออก"
 msgid "_Save"
 msgstr "_บันทึก"
 
-#: ../capplets/windows/gnome-window-properties.c:385
-#, c-format
-msgid ""
-"<b>Cannot start the preferences application for your window manager</b>\n"
-"\n"
-"%s"
-msgstr ""
-"<b>ไม่สามารถเรียกเครื่องมือปรับแต่งสำหรับโปรแกรมจัดการหน้าต่างที่คุณใช้</b>\n"
-"\n"
-"%s"
+#: ../capplets/windows/gnome-window-properties.c:386
+msgid "Cannot start the preferences application for your window manager"
+msgstr "ไม่สามารถเรียกเครื่องมือปรับแต่งสำหรับโปรแกรมจัดการหน้าต่างที่คุณใช้"
 
-#: ../capplets/windows/gnome-window-properties.c:642
+#: ../capplets/windows/gnome-window-properties.c:643
 msgid "C_ontrol"
 msgstr "C_ontrol"
 
-#: ../capplets/windows/gnome-window-properties.c:647
+#: ../capplets/windows/gnome-window-properties.c:648
 msgid "_Alt"
 msgstr "_Alt"
 
-#: ../capplets/windows/gnome-window-properties.c:653
+#: ../capplets/windows/gnome-window-properties.c:654
 msgid "H_yper"
 msgstr "H_yper"
 
-#: ../capplets/windows/gnome-window-properties.c:660
+#: ../capplets/windows/gnome-window-properties.c:661
 msgid "S_uper (or \"Windows logo\")"
 msgstr "S_uper (หรือ ปุ่มโลโก้วินโดวส์)"
 
-#: ../capplets/windows/gnome-window-properties.c:667
+#: ../capplets/windows/gnome-window-properties.c:668
 msgid "_Meta"
 msgstr "_Meta"
 
@@ -2653,102 +2799,6 @@ msgstr "ตั้งค่าระบบหน้าต่างของคุ
 #: ../capplets/windows/window-properties.desktop.in.in.h:2
 msgid "Windows"
 msgstr "หน้าต่าง"
-
-#: ../libgswitchit/gnome-kbd-indicator-test.c:63
-#, c-format
-msgid "Keyboard Indicator Test (%s)"
-msgstr "การทดสอบแอพเพล็ตบอกสถานะแป้นพิมพ์ (%s)"
-
-#: ../libgswitchit/gnome-kbd-indicator-test.c:73
-msgid "Indicator:"
-msgstr "แอพเพล็ตบอกสถานะ:"
-
-#: ../libgswitchit/gswitchit-config.c:1155
-#, c-format
-msgid "layout \"%s\""
-msgid_plural "layouts \"%s\""
-msgstr[0] "ผังแป้นพิมพ์ \"%s\""
-
-#: ../libgswitchit/gswitchit-config.c:1174
-#, c-format
-msgid "option \"%s\""
-msgid_plural "options \"%s\""
-msgstr[0] "ตัวเลือก \"%s\""
-
-#: ../libgswitchit/gswitchit-config.c:1182
-#, c-format
-msgid "model \"%s\", %s and %s"
-msgstr "รุ่น \"%s\", %s และ %s"
-
-#: ../libgswitchit/gswitchit-config.c:1183
-msgid "no layout"
-msgstr "ไม่ระบุผังแป้นพิมพ์"
-
-#: ../libgswitchit/gswitchit-config.c:1184
-msgid "no options"
-msgstr "ไม่ระบุตัวเลือก"
-
-#: ../libgswitchit/gswitchit-plugins-add.c:104
-#: ../libgswitchit/gswitchit-plugins-app.c:118
-msgid "No description."
-msgstr "ไม่มีคำอธิบาย"
-
-#: ../libgswitchit/gswitchit-plugins-app.c:336
-#, c-format
-msgid "Failed to init GConf: %s\n"
-msgstr "ตั้งต้น GConf ไม่สำเร็จ: %s\n"
-
-#: ../libgswitchit/gswitchit-plugins.desktop.in.in.h:1
-msgid "Enable/disable installed plugins"
-msgstr "เปิด/ปิดการใช้งานปลั๊กอินที่ติดตั้งไว้"
-
-#: ../libgswitchit/gswitchit-plugins.desktop.in.in.h:2
-msgid "Keyboard Indicator plugins"
-msgstr "ปลั๊กอินแอพเพล็ตบอกสถานะแป้นพิมพ์"
-
-#: ../libgswitchit/gswitchit-plugins.glade.h:1
-msgid "Activate more plugins"
-msgstr "เปิดใช้ปลั๊กอินเพิ่มเติม"
-
-#: ../libgswitchit/gswitchit-plugins.glade.h:2
-msgid "Active _plugins:"
-msgstr "_ปลั๊กอินที่เปิดใช้:"
-
-#: ../libgswitchit/gswitchit-plugins.glade.h:3
-msgid "Add Plugin"
-msgstr "เพิ่มปลั๊กอิน"
-
-#: ../libgswitchit/gswitchit-plugins.glade.h:4
-msgid "Close the dialog"
-msgstr "ปิดกล่องโต้ตอบ"
-
-#: ../libgswitchit/gswitchit-plugins.glade.h:5
-msgid "Configure the selected plugin"
-msgstr "ตั้งค่าปลั๊กอินที่เลือก"
-
-#: ../libgswitchit/gswitchit-plugins.glade.h:6
-msgid "Deactivate selected plugin"
-msgstr "ปิดใช้งานปลั๊กอินที่เลือก"
-
-#: ../libgswitchit/gswitchit-plugins.glade.h:7
-msgid "Decrease the plugin priority"
-msgstr "ลดระดับความสำคัญของปลั๊กอิน"
-
-#: ../libgswitchit/gswitchit-plugins.glade.h:8
-msgid "Increase the plugin priority"
-msgstr "เพิ่มระดับความสำคัญของปลั๊กอิน"
-
-#: ../libgswitchit/gswitchit-plugins.glade.h:9
-msgid "Keyboard Indicator Plugins"
-msgstr "ปลั๊กอินแอพเพล็ตบอกสถานะแป้นพิมพ์"
-
-#: ../libgswitchit/gswitchit-plugins.glade.h:10
-msgid "The list of active plugins"
-msgstr "รายการปลั๊กอินที่เปิดใช้อยู่"
-
-#: ../libgswitchit/gswitchit-plugins.glade.h:11
-msgid "_Available plugins:"
-msgstr "_ปลั๊กอินที่มี:"
 
 #: ../gnome-settings-daemon/actions/acme.glade.h:1
 msgid "Volume"
@@ -2948,7 +2998,7 @@ msgstr "ใช้ค่าตั้งของ X"
 msgid "Keep GNOME settings"
 msgstr "คงค่าตั้งของ GNOME"
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:111
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:117
 #, c-format
 msgid ""
 "Couldn't execute command: %s\n"
@@ -2957,7 +3007,7 @@ msgstr ""
 "ไม่สามารถเรียกใช้คำสั่ง: %s\n"
 "โปรดตรวจดูว่าคำสั่งถูกติดตั้งอยู่จริง"
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:127
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:133
 msgid ""
 "Couldn't put the machine to sleep.\n"
 "Verify that the machine is correctly configured."
@@ -2984,7 +3034,7 @@ msgstr ""
 msgid "_Do not show this message again"
 msgstr "ไ_ม่ต้องแสดงข้อความนี้อีก"
 
-#: ../gnome-settings-daemon/gnome-settings-sound.c:127
+#: ../gnome-settings-daemon/gnome-settings-sound.c:137
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "ไม่สามารถเรียกแฟ้มเสียง %s เป็นตัวอย่างเสียง %s"
@@ -3063,7 +3113,7 @@ msgstr "จอ"
 msgid "Screen on which BGApplier is to draw"
 msgstr "จอที่จะให้ BGApplier เขียน"
 
-#: ../libslab/app-shell.c:707
+#: ../libslab/app-shell.c:708
 #, c-format
 msgid ""
 "<span size=\"large\"><b>No matches found.</b> </span><span>\n"
@@ -3075,75 +3125,75 @@ msgstr ""
 " ตัวกรอง \"<b>%s</b>\" ของคุณ ไม่ตรงกับรายการใดเลย</span>"
 
 #. make start action
-#: ../libslab/application-tile.c:307
+#: ../libslab/application-tile.c:310
 #, c-format
 msgid "<b>Start %s</b>"
 msgstr "<b>เริ่ม %s</b>"
 
-#: ../libslab/application-tile.c:326
+#: ../libslab/application-tile.c:329
 msgid "Help"
 msgstr "วิธีใช้"
 
-#: ../libslab/application-tile.c:333
+#: ../libslab/application-tile.c:336
 msgid "Help Unavailable"
 msgstr "ไม่มีคู่มือวิธีใช้"
 
-#: ../libslab/application-tile.c:372
+#: ../libslab/application-tile.c:375
 msgid "Upgrade"
 msgstr "ปรับรุ่น"
 
-#: ../libslab/application-tile.c:381
+#: ../libslab/application-tile.c:384
 msgid "Uninstall"
 msgstr "ถอดถอน"
 
-#: ../libslab/application-tile.c:778
+#: ../libslab/application-tile.c:781
 msgid "Remove from Favorites"
 msgstr "ลบออกจากรายการโปรด"
 
-#: ../libslab/application-tile.c:780
+#: ../libslab/application-tile.c:783
 msgid "Add to Favorites"
 msgstr "เพิ่มในรายการโปรด"
 
-#: ../libslab/application-tile.c:835
+#: ../libslab/application-tile.c:838
 msgid "Remove from Startup Programs"
 msgstr "ลบออกจากรายการโปรแกรมขณะเริ่ม"
 
-#: ../libslab/application-tile.c:837
+#: ../libslab/application-tile.c:840
 msgid "Add to Startup Programs"
 msgstr "เพิ่มในรายการโปรแกรมขณะเริ่ม"
 
-#: ../libslab/document-tile.c:142
+#: ../libslab/document-tile.c:145
 msgid "Edited %m/%d/%Y"
 msgstr "แก้ไขเมื่อ %d/%m/%Ey"
 
-#: ../libslab/document-tile.c:171
+#: ../libslab/document-tile.c:183
 #, c-format
 msgid "<b>Open with \"%s\"</b>"
 msgstr "<b>เปิดด้วย \"%s\"</b>"
 
-#: ../libslab/document-tile.c:183
+#: ../libslab/document-tile.c:195
 msgid "Open with Default Application"
 msgstr "เปิดด้วยโปรแกรมปริยาย"
 
-#: ../libslab/document-tile.c:199
+#: ../libslab/document-tile.c:211
 msgid "Open in File Manager"
 msgstr "เปิดในโปรแกรมจัดการแฟ้ม"
 
 #. make rename action
-#: ../libslab/document-tile.c:215
+#: ../libslab/document-tile.c:227
 msgid "Rename..."
 msgstr "เปลี่ยนชื่อ..."
 
 #. make move to trash action
-#: ../libslab/document-tile.c:228
+#: ../libslab/document-tile.c:240
 msgid "Move to Trash"
 msgstr "ทิ้งลงถังขยะ"
 
-#: ../libslab/document-tile.c:238 ../libslab/document-tile.c:568
+#: ../libslab/document-tile.c:250 ../libslab/document-tile.c:580
 msgid "Delete"
 msgstr "ลบ"
 
-#: ../libslab/document-tile.c:258 ../libslab/document-tile.c:267
+#: ../libslab/document-tile.c:270 ../libslab/document-tile.c:279
 msgid "Send To..."
 msgstr "ส่งไปยัง..."
 
@@ -3203,6 +3253,10 @@ msgstr "เลือกแฟ้มเสียง"
 #, c-format
 msgid "The file %s is not a valid wav file"
 msgstr "แฟ้ม %s ไม่ใช่แฟ้ม wav ที่ใช้ได้"
+
+#: ../libsounds/sound-view.c:261
+msgid "Select sound file..."
+msgstr "เลือกแฟ้มเสียง..."
 
 #: ../libsounds/sound-view.c:359
 msgid "System Sounds"
@@ -3396,19 +3450,19 @@ msgstr "เริ่มใช้โปรแกรมรักษาหน้า
 msgid "key not found [%s]\n"
 msgstr "ไม่พบคีย์ [%s]\n"
 
-#: ../shell/control-center.c:146
+#: ../shell/control-center.c:149
 msgid "Filter"
 msgstr "ตัวกรอง"
 
-#: ../shell/control-center.c:146
+#: ../shell/control-center.c:149
 msgid "Groups"
 msgstr "กลุ่ม"
 
-#: ../shell/control-center.c:146
+#: ../shell/control-center.c:149
 msgid "Common Tasks"
 msgstr "งานปกติ"
 
-#: ../shell/control-center.c:150
+#: ../shell/control-center.c:153
 msgid "Control Center"
 msgstr "ศูนย์ควบคุม"
 
@@ -3459,23 +3513,33 @@ msgid ""
 "error: %s"
 msgstr "แสดงหน้าต่างปรับแต่งการพักพิมพ์ไม่สำเร็จ  เกิดข้อผิดพลาดดังนี้: %s"
 
-#: ../typing-break/drwright.c:599
+#: ../typing-break/drwright.c:598
 msgid "Written by Richard Hult <richard@imendio.com>"
 msgstr "เขียนโดย Richard Hult <richard@imendio.com>"
 
-#: ../typing-break/drwright.c:600
+#: ../typing-break/drwright.c:599
 msgid "Eye candy added by Anders Carlsson"
 msgstr "ตกแต่งโดย by Anders Carlsson"
 
-#: ../typing-break/drwright.c:623
-msgid "Typing Monitor"
-msgstr "โปรแกรมแจ้งเตือนพักพิมพ์"
-
-#: ../typing-break/drwright.c:625
+#: ../typing-break/drwright.c:608
 msgid "A computer break reminder."
 msgstr "โปรแกรมเตือนเวลาพักพิมพ์"
 
-#: ../typing-break/main.c:100
+#: ../typing-break/drwright.c:610
+msgid "translator-credits"
+msgstr ""
+"Paisa Seeluangsawat <paisa@users.sf.net>\n"
+"Supakorn Siddhichai <supakorn.siddhichai@nectec.or.th>\n"
+"Supranee Thirawatthanasuk <supranee@opentle.org>\n"
+"Surichat Sumrit <nook@opentle.org>\n"
+"Chanchai Junlouchai <taz@opentle.org>\n"
+"Theppitak Karoonboonyanan <thep@linux.thai.net>"
+
+#: ../typing-break/main.c:84
+msgid "Typing Monitor"
+msgstr "โปรแกรมแจ้งเตือนพักพิมพ์"
+
+#: ../typing-break/main.c:103
 msgid ""
 "The typing monitor uses the notification area to display information. You "
 "don't seem to have a notification area on your panel. You can add it by "
@@ -3642,7 +3706,7 @@ msgid "Icon theme"
 msgstr "ชุดรูปแบบไอคอน"
 
 #. translators: you may want to include non-western chars here
-#: ../vfs-methods/themus/themus-theme-applier.c:78
+#: ../vfs-methods/themus/themus-theme-applier.c:87
 msgid "ABCDEFG"
 msgstr "ABCDEFG วิญญูมุ่งรู้พิฆาตปื้นขี้ฝุ่นเลษฏุ ๑๒๓"
 
@@ -3687,14 +3751,90 @@ msgstr "กำหนดว่าจะสร้างรูปย่อสำห
 msgid "Whether to thumbnail themes"
 msgstr "กำหนดว่าจะสร้างรูปย่อสำหรับชุดตกแต่งหรือไม่"
 
+#~ msgid ""
+#~ "<span weight=\"bold\" size=\"larger\">The theme \"%s\" has been installed."
+#~ "</span>\n"
+#~ "\n"
+#~ "Would you like to apply it now, or keep your current theme?"
+#~ msgstr ""
+#~ "<span weight=\"bold\" size=\"larger\">ชุดตกแต่ง \"%s\" ติดตั้งเรียบร้อยแล้ว</"
+#~ "span>\n"
+#~ "\n"
+#~ "คุณต้องการใช้ชุดตกแต่งนี้เลยหรือไม่ หรือจะใช้ชุดตกแต่งเดิมต่อไป?"
+
+#~ msgid "Keyboard Indicator Test (%s)"
+#~ msgstr "การทดสอบแอพเพล็ตบอกสถานะแป้นพิมพ์ (%s)"
+
+#~ msgid "Indicator:"
+#~ msgstr "แอพเพล็ตบอกสถานะ:"
+
+#~ msgid "layout \"%s\""
+#~ msgid_plural "layouts \"%s\""
+#~ msgstr[0] "ผังแป้นพิมพ์ \"%s\""
+
+#~ msgid "option \"%s\""
+#~ msgid_plural "options \"%s\""
+#~ msgstr[0] "ตัวเลือก \"%s\""
+
+#~ msgid "model \"%s\", %s and %s"
+#~ msgstr "รุ่น \"%s\", %s และ %s"
+
+#~ msgid "no layout"
+#~ msgstr "ไม่ระบุผังแป้นพิมพ์"
+
+#~ msgid "no options"
+#~ msgstr "ไม่ระบุตัวเลือก"
+
+#~ msgid "No description."
+#~ msgstr "ไม่มีคำอธิบาย"
+
+#~ msgid "Failed to init GConf: %s\n"
+#~ msgstr "ตั้งต้น GConf ไม่สำเร็จ: %s\n"
+
+#~ msgid "Enable/disable installed plugins"
+#~ msgstr "เปิด/ปิดการใช้งานปลั๊กอินที่ติดตั้งไว้"
+
+#~ msgid "Keyboard Indicator plugins"
+#~ msgstr "ปลั๊กอินแอพเพล็ตบอกสถานะแป้นพิมพ์"
+
+#~ msgid "Activate more plugins"
+#~ msgstr "เปิดใช้ปลั๊กอินเพิ่มเติม"
+
+#~ msgid "Active _plugins:"
+#~ msgstr "_ปลั๊กอินที่เปิดใช้:"
+
+#~ msgid "Add Plugin"
+#~ msgstr "เพิ่มปลั๊กอิน"
+
+#~ msgid "Close the dialog"
+#~ msgstr "ปิดกล่องโต้ตอบ"
+
+#~ msgid "Configure the selected plugin"
+#~ msgstr "ตั้งค่าปลั๊กอินที่เลือก"
+
+#~ msgid "Deactivate selected plugin"
+#~ msgstr "ปิดใช้งานปลั๊กอินที่เลือก"
+
+#~ msgid "Decrease the plugin priority"
+#~ msgstr "ลดระดับความสำคัญของปลั๊กอิน"
+
+#~ msgid "Increase the plugin priority"
+#~ msgstr "เพิ่มระดับความสำคัญของปลั๊กอิน"
+
+#~ msgid "Keyboard Indicator Plugins"
+#~ msgstr "ปลั๊กอินแอพเพล็ตบอกสถานะแป้นพิมพ์"
+
+#~ msgid "The list of active plugins"
+#~ msgstr "รายการปลั๊กอินที่เปิดใช้อยู่"
+
+#~ msgid "_Available plugins:"
+#~ msgstr "_ปลั๊กอินที่มี:"
+
 #~ msgid "Input"
 #~ msgstr "ข้อมูลป้อน"
 
 #~ msgid "Normal"
 #~ msgstr "ปกติ"
-
-#~ msgid "Save Theme"
-#~ msgstr "บันทึกชุดตกแต่ง"
 
 #~ msgid "Selection"
 #~ msgstr "การเลือก"
@@ -3866,9 +4006,6 @@ msgstr "กำหนดว่าจะสร้างรูปย่อสำห
 
 #~ msgid "<span size=\"larger\" weight=\"bold\">Install a Theme</span>"
 #~ msgstr "<span size=\"larger\" weight=\"bold\">ติดตั้งชุดตกแต่ง</span>"
-
-#~ msgid "Theme Installation"
-#~ msgstr "การติดตั้งชุดตกแต่ง"
 
 #~ msgid "New themes can also be installed by dragging them into the window."
 #~ msgstr "คุณสามารถติดตั้งชุดตกแต่งใหม่ได้โดยลากมาปล่อยที่หน้าต่างนี้"
