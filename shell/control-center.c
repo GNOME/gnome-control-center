@@ -51,6 +51,7 @@ static GSList *get_actions_list ();
 static GSList *
 get_actions_list ()
 {
+	GSList *l;
 	GSList *key_list;
 	GSList *actions_list = NULL;
 	AppAction *action;
@@ -62,7 +63,7 @@ get_actions_list ()
 		return NULL;
 	}
 
-	for (; key_list; key_list = key_list->next)
+	for (l = key_list; l != NULL; l = l->next)
 	{
 		gchar *entry = (gchar *) key_list->data;
 		gchar **temp;
@@ -76,14 +77,15 @@ get_actions_list ()
 		}
 		else
 		{
-			actions_list = g_slist_append (actions_list, action);
+			actions_list = g_slist_prepend (actions_list, action);
 		}
 		g_strfreev (temp);
 		g_free (entry);
 	}
 
 	g_slist_free (key_list);
-	return actions_list;
+
+	return g_slist_reverse (actions_list);
 }
 
 void
