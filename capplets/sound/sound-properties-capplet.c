@@ -156,20 +156,14 @@ bell_flash_to_widget (GConfPropertyEditor *peditor, const GConfValue *value)
 	return new_value;
 }
 
-/* create_dialog
- *
- * Create the dialog box and return it as a GtkWidget
- */
-
 static GladeXML *
 create_dialog (void) 
 {
 	GladeXML *dialog;
 	GtkWidget *widget, *box;
 
-	dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/sound-properties.glade", "prefs_widget", NULL);
-	widget = glade_xml_get_widget (dialog, "prefs_widget");
-	g_object_set_data (G_OBJECT (widget), "glade-data", dialog);
+	dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/sound-properties.glade", "sound_prefs_dialog", NULL);
+	widget = glade_xml_get_widget (dialog, "sound_prefs_dialog");
 
 	props = sound_properties_new ();
 	sound_properties_add_defaults (props, NULL);
@@ -185,14 +179,8 @@ create_dialog (void)
 	gtk_image_set_from_file (GTK_IMAGE (WID ("bell_image")),
 				 GNOMECC_DATA_DIR "/pixmaps/visual-bell.png");
 
-	gtk_widget_set_size_request (widget, 475, -1);
-
 	if (!CheckXKB()) {
-		GtkWidget *audible_bell_option = WID ("bell_audible_toggle");
-		GtkWidget *visual_bell_option = WID ("bell_visual_toggle");
-
-		gtk_widget_set_sensitive (audible_bell_option, FALSE);
-		gtk_widget_set_sensitive (visual_bell_option, FALSE);
+		gtk_widget_set_sensitive (WID ("bell_flash_alignment"), FALSE);
 	}
 		
 	return dialog;
@@ -995,14 +983,16 @@ get_legacy_settings (void)
 }
 
 static void
-dialog_button_clicked_cb (GtkDialog *dialog, gint response_id, GConfChangeSet *changeset) 
+dialog_response_cb (GtkWidget *dialog, gint response_id, GConfChangeSet *changeset) 
 {
-	if (response_id == GTK_RESPONSE_HELP)
+	if (response_id == GTK_RESPONSE_HELP) {
 		capplet_help (GTK_WINDOW (dialog),
 			"user-guide.xml",
 			"goscustmulti-2");
-	else
-		gtk_main_quit ();
+		return;
+	}
+	
+	gtk_widget_destroy (dialog);
 }
 
 int
@@ -1010,11 +1000,11 @@ main (int argc, char **argv)
 {
 	GConfChangeSet *changeset;
 	GladeXML       *dialog = NULL;
+	GnomeProgram   *program;
  	GOptionContext *context;
-
-	static gboolean apply_only;
-	static gboolean get_legacy;
- 	static GOptionEntry cap_options[] = {
+	gboolean apply_only = FALSE;
+	gboolean get_legacy = FALSE;
+ 	GOptionEntry cap_options[] = {
  		{ "apply", 0, 0, G_OPTION_ARG_NONE, &apply_only,
 		  N_("Just apply settings and quit (compatibility only; now handled by daemon)"), NULL },
 		{ "init-session-settings", 0, 0, G_OPTION_ARG_NONE, &apply_only,
@@ -1030,13 +1020,12 @@ main (int argc, char **argv)
 
  	context = g_option_context_new (_("- GNOME Sound Preferences"));
  	g_option_context_add_main_entries (context, cap_options, GETTEXT_PACKAGE);
+	g_option_context_add_group (context, gst_init_get_option_group ());
 
-	gnome_program_init ("gnome-sound-properties", VERSION,
-			    LIBGNOMEUI_MODULE, argc, argv,
- 			    GNOME_PARAM_GOPTION_CONTEXT, context,
-			    NULL);
-
-	gst_init (&argc, &argv);
+	program = gnome_program_init ("gnome-sound-properties", VERSION,
+				      LIBGNOMEUI_MODULE, argc, argv,
+ 			    	      GNOME_PARAM_GOPTION_CONTEXT, context,
+				      NULL);
 
 	activate_settings_daemon ();
 	
@@ -1052,25 +1041,19 @@ main (int argc, char **argv)
 		setup_dialog (dialog, changeset);
 		setup_devices ();
 
-		dialog_win = gtk_dialog_new_with_buttons
-			(_("Sound Preferences"), NULL, GTK_DIALOG_NO_SEPARATOR,
-			 GTK_STOCK_HELP, GTK_RESPONSE_HELP,
-			 GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
-			 NULL);
-
-		gtk_container_set_border_width (GTK_CONTAINER (dialog_win), 5);
-		gtk_box_set_spacing (GTK_BOX (GTK_DIALOG(dialog_win)->vbox), 2);
-		gtk_dialog_set_default_response (GTK_DIALOG (dialog_win), GTK_RESPONSE_CLOSE);
-		g_signal_connect (G_OBJECT (dialog_win), "response", (GCallback) dialog_button_clicked_cb, changeset);
-		gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog_win)->vbox), WID ("prefs_widget"), TRUE, TRUE, 0);
+		dialog_win = WID ("sound_prefs_dialog");
+		g_signal_connect (dialog_win, "response", G_CALLBACK (dialog_response_cb), changeset);
+		g_signal_connect (dialog_win, "destroy", G_CALLBACK (gtk_main_quit), NULL);
 		capplet_set_icon (dialog_win, "gnome-settings-sound");
-		gtk_widget_show_all (dialog_win);
+		gtk_widget_show (dialog_win);
 
 		gtk_main ();
 		gconf_change_set_unref (changeset);
+		g_object_unref (dialog);
 	}
 	
 	g_object_unref (gconf_client);
-	g_object_unref (dialog);
+	g_object_unref (program);
+
 	return 0;
 }
