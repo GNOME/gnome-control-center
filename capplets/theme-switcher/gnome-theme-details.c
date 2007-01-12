@@ -647,16 +647,16 @@ void
 color_scheme_combobox_changed (GtkWidget *widget, GtkWidget *parent)
 {
 	GladeXML *dialog;
-	dialog = gnome_theme_manager_get_theme_dialog ();
 	gchar *color_scheme_name;
 	gboolean custom;
+
+	dialog = gnome_theme_manager_get_theme_dialog ();
 
 	color_scheme_name = gtk_combo_box_get_active_text (GTK_COMBO_BOX (WID ("color_scheme_combobox")));
 
 	custom = (color_scheme_name != NULL && strcmp (color_scheme_name, _("Custom")) == 0);
 	gtk_widget_set_sensitive (WID ("save_color_scheme_button"), custom);
 	gtk_widget_set_sensitive (WID ("delete_color_scheme_button"), !custom);
-
 }
 
 void
