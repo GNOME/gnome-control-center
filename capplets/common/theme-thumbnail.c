@@ -491,7 +491,8 @@ generate_theme_thumbnail (GnomeThemeMetaInfo *meta_theme_info,
   gint i, rowstride;
   char *pixels;
 
-  g_return_val_if_fail (async_data.set == FALSE, NULL);
+  if (async_data.set == TRUE)
+	  return NULL;
 
   pixbuf = g_hash_table_lookup (theme_hash, meta_theme_info->name);
   if (pixbuf != NULL)
