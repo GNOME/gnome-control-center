@@ -564,7 +564,6 @@ cb_xkb_event_filter (GdkXEvent *xevent, GdkEvent *ignored1, gpointer ignored2)
 void
 gnome_settings_accessibility_keyboard_load (GConfClient *client)
 {
-	static gboolean has_filter = FALSE;
 	guint event_mask = XkbControlsNotifyMask;
 #ifdef DEBUG_ACCESSIBILITY	
 	event_mask = XkbControlsNotifyMask | XkbAccessXNotifyMask); /* make default when AXN_AXKWarning works */
@@ -574,10 +573,6 @@ gnome_settings_accessibility_keyboard_load (GConfClient *client)
 
 	/* be sure to init before starting to monitor the server */
 	set_server_from_gconf (NULL);
-
-	/* be careful not to install multipled filters */
-	if (has_filter)
-		return;
 
 	gdk_error_trap_push ();
 	XkbSelectEvents (GDK_DISPLAY (),
