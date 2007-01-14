@@ -160,7 +160,7 @@ static GladeXML *
 create_dialog (void) 
 {
 	GladeXML *dialog;
-	GtkWidget *widget, *box;
+	GtkWidget *widget, *box, *view;
 
 	dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/sound-properties.glade", "sound_prefs_dialog", NULL);
 	widget = glade_xml_get_widget (dialog, "sound_prefs_dialog");
@@ -168,10 +168,11 @@ create_dialog (void)
 	props = sound_properties_new ();
 	sound_properties_add_defaults (props, NULL);
 	g_signal_connect (G_OBJECT (props), "event_changed",
-			  (GCallback) props_changed_cb, NULL);  
+			  (GCallback) props_changed_cb, NULL);
+	view = sound_view_new (props);
 	box = glade_xml_get_widget (dialog, "events_vbox");
-	gtk_box_pack_start (GTK_BOX (box), sound_view_new (props),
-			    TRUE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (box), view, TRUE, TRUE, 0);
+	gtk_widget_show_all (view);
 
 	g_signal_connect_swapped (G_OBJECT (widget), "destroy",
 				  (GCallback) gtk_object_destroy, props);
