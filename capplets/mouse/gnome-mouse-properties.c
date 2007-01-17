@@ -110,7 +110,7 @@ enum
  */
 static gint double_click_state = DOUBLE_CLICK_TEST_OFF;
 
-/* normalilzation routines */
+/* normalization routines */
 /* All of our scales but double_click are on the range 1->10 as a result, we
  * have a few routines to convert from whatever the gconf key is to our range.
  */
@@ -421,51 +421,6 @@ left_handed_toggle_cb (GConfPropertyEditor *peditor, const gchar *key, const GCo
 	}
 }
 
-static gchar *
-read_cursor_font (void)
-{
-	DIR *dir;
-	gchar *dir_name;
-	struct dirent *file_dirent;
-
-	dir_name = g_build_path (G_DIR_SEPARATOR_S, g_get_home_dir (), ".gnome2/share/cursor-fonts", NULL);
-	if (! g_file_test (dir_name, G_FILE_TEST_EXISTS))
-		return NULL;
-
-	dir = opendir (dir_name);
-  
-	while ((file_dirent = readdir (dir)) != NULL) {
-		struct stat st;
-		gchar *link_name;
-
-		link_name = g_build_filename (dir_name, file_dirent->d_name, NULL);
-		if (lstat (link_name, &st)) {
-			g_free (link_name);
-			continue;
-		}
-	  
-		if (S_ISLNK (st.st_mode)) {
-			gint length;
-			gchar target[256];
-
-			length = readlink (link_name, target, 255);
-			if (length > 0) {
-				gchar *retval;
-				target[length] = '\0';
-				retval = g_strdup (target);
-				g_free (link_name);
-				closedir (dir);
-				return retval;
-			}
-			
-		}
-		g_free (link_name);
-	}
-	g_free (dir_name);
-	closedir (dir);
-	return NULL;
-}
-
 #ifdef HAVE_XCURSOR
 static void
 cursor_theme_changed (GConfClient *client,
@@ -573,6 +528,53 @@ cursor_font_changed (GConfClient *client,
 
 	g_free (cursor_font);
 	g_free (cursor_text);
+}
+
+static gchar *
+read_cursor_font (void)
+{
+	DIR *dir;
+	gchar *dir_name;
+	struct dirent *file_dirent;
+
+	dir_name = g_build_path (G_DIR_SEPARATOR_S, g_get_home_dir (), ".gnome2/share/cursor-fonts", NULL);
+	if (! g_file_test (dir_name, G_FILE_TEST_EXISTS)) {
+		g_free (dir_name);
+		return NULL;
+	}
+
+	dir = opendir (dir_name);
+  
+	while ((file_dirent = readdir (dir)) != NULL) {
+		struct stat st;
+		gchar *link_name;
+
+		link_name = g_build_filename (dir_name, file_dirent->d_name, NULL);
+		if (lstat (link_name, &st)) {
+			g_free (link_name);
+			continue;
+		}
+	  
+		if (S_ISLNK (st.st_mode)) {
+			gint length;
+			gchar target[256];
+
+			length = readlink (link_name, target, 255);
+			if (length > 0) {
+				gchar *retval;
+				target[length] = '\0';
+				retval = g_strdup (target);
+				g_free (link_name);
+				closedir (dir);
+				return retval;
+			}
+			
+		}
+		g_free (link_name);
+	}
+	g_free (dir_name);
+	closedir (dir);
+	return NULL;
 }
 #endif /* !HAVE_XCURSOR */
 
@@ -759,6 +761,7 @@ populate_tree_model(GtkTreeModelSort* model, GtkTreeSelection* selection) {
 		}
 		g_free(fname);
 	}
+	g_strfreev (paths);
 
 	if(G_LIKELY(!has_default)) {
 		gtk_list_store_append(store, &iter);
@@ -772,9 +775,6 @@ populate_tree_model(GtkTreeModelSort* model, GtkTreeSelection* selection) {
 
 	g_free(current_theme);
 
-	if (xpaths != NULL) {
-		g_strfreev (paths);
-	}
 #else /* !HAVE_XCURSOR */
 	gchar* cursor_font;
 	static const gchar* builtins[][5] = {
@@ -872,7 +872,6 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 	GtkTreeSelection  *selection;
 	GtkTreeModel      *model;
 	GConfValue        *value;
-	gchar             *cursor_font;
 	gchar             *message;
 
 	GConfClient       *client = gconf_client_get_default ();
@@ -907,8 +906,6 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 
 	/* Cursors page */
 	tree_view = WID ("cursor_tree");
-	cursor_font = read_cursor_font ();
-
 	model = (GtkTreeModel *) gtk_list_store_new (N_COLUMNS, GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_INT);
 	model = (GtkTreeModel *) gtk_tree_model_sort_new_with_model (model);
 	gtk_tree_view_set_model (GTK_TREE_VIEW (tree_view),
@@ -1025,6 +1022,7 @@ dialog_response_cb (GtkDialog *dialog, gint response_id, GConfChangeSet *changes
 int
 main (int argc, char **argv)
 {
+	GnomeProgram   *program;
 	GConfClient    *client;
 	GConfChangeSet *changeset;
 	GladeXML       *dialog;
@@ -1045,11 +1043,11 @@ main (int argc, char **argv)
 	context = g_option_context_new (_("- GNOME Mouse Preferences"));
 	g_option_context_add_main_entries (context, cap_options, GETTEXT_PACKAGE);
 
-	gnome_program_init ("gnome-mouse-properties", VERSION,
-			    LIBGNOMEUI_MODULE, argc, argv,
-			    GNOME_PARAM_GOPTION_CONTEXT, context,
-			    GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
-			    NULL);
+	program = gnome_program_init ("gnome-mouse-properties", VERSION,
+				      LIBGNOMEUI_MODULE, argc, argv,
+				      GNOME_PARAM_GOPTION_CONTEXT, context,
+				      GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
+				      NULL);
 
 	capplet_init_stock_icons ();
 
@@ -1074,7 +1072,11 @@ main (int argc, char **argv)
 		gtk_widget_show (dialog_win);
 
 		gtk_main ();
+
+		g_object_unref (dialog);
 	}
+
+	g_object_unref (program);
 
 	return 0;
 }
