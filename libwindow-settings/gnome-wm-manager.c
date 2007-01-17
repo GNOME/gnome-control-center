@@ -122,9 +122,7 @@ wm_load (const char *desktop_file,
                 
         wm = g_new0 (AvailableWindowManager, 1);
         
-        wm->ditem = gnome_desktop_item_new_from_file (desktop_file,
-                                                      GNOME_DESKTOP_ITEM_TYPE_APPLICATION,
-                                                      NULL);
+        wm->ditem = gnome_desktop_item_new_from_file (desktop_file, 0, NULL);
 
         if (wm->ditem == NULL) {
                 g_free (wm);
