@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-01-10 03:19+0000\n"
-"PO-Revision-Date: 2007-01-10 20:45+0100\n"
+"POT-Creation-Date: 2007-01-12 03:18+0000\n"
+"PO-Revision-Date: 2007-01-17 17:39+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -198,7 +198,6 @@ msgstr " "
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:1
-#: ../capplets/sound/sound-properties.glade.h:1
 #: ../capplets/ui-properties/gnome-ui-properties.glade.h:1
 msgid "    "
 msgstr "    "
@@ -835,7 +834,7 @@ msgstr "Verkställ ändringarna och avsluta"
 #: ../capplets/common/capplet-util.c:244
 #: ../capplets/keyboard/gnome-keyboard-properties.c:226
 #: ../capplets/mouse/gnome-mouse-properties.c:1037
-#: ../capplets/sound/sound-properties-capplet.c:1023
+#: ../capplets/sound/sound-properties-capplet.c:1013
 msgid "Retrieve and store legacy settings"
 msgstr "Hämta och lagra föråldrade inställningar"
 
@@ -1024,7 +1023,7 @@ msgid "Error saving configuration: %s"
 msgstr "Fel vid sparandet av konfiguration: %s"
 
 #: ../capplets/default-applications/gnome-da-capplet.c:743
-#: ../capplets/sound/sound-properties-capplet.c:323
+#: ../capplets/sound/sound-properties-capplet.c:311
 #: ../capplets/theme-switcher/gnome-theme-details.c:656
 msgid "Custom"
 msgstr "Anpassad"
@@ -1566,7 +1565,7 @@ msgstr "Ljud"
 msgid "Window Management"
 msgstr "Fönsterhantering"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:676
+#: ../capplets/keybindings/gnome-keybinding-properties.c:678
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become unusable to type using this key.\n"
@@ -1575,7 +1574,7 @@ msgstr ""
 "Genvägen \"%s\" kan inte användas på grund av att den kommer att bli oanvändbar med den här tangenten.\n"
 "Försök med en tangent såsom Control, Alt eller Shift på samma gång.\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:705
+#: ../capplets/keybindings/gnome-keybinding-properties.c:707
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1584,21 +1583,21 @@ msgstr ""
 "Genvägen \"%s\" används redan för:\n"
 " \"%s\"\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:737
+#: ../capplets/keybindings/gnome-keybinding-properties.c:739
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Fel vid inställning av ny snabbtangent i konfigurationsdatabasen: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:787
+#: ../capplets/keybindings/gnome-keybinding-properties.c:789
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "Fel vid borttagning av snabbtangent i konfigurationsdatabasen: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:894
+#: ../capplets/keybindings/gnome-keybinding-properties.c:897
 msgid "Action"
 msgstr "Åtgärd"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:918
+#: ../capplets/keybindings/gnome-keybinding-properties.c:921
 msgid "Shortcut"
 msgstr "Genväg"
 
@@ -1643,8 +1642,8 @@ msgstr "_Tillgänglighet"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:222
 #: ../capplets/keyboard/gnome-keyboard-properties.c:224
-#: ../capplets/sound/sound-properties-capplet.c:1019
-#: ../capplets/sound/sound-properties-capplet.c:1021
+#: ../capplets/sound/sound-properties-capplet.c:1009
+#: ../capplets/sound/sound-properties-capplet.c:1011
 msgid "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr "Verkställ bara ändringar och avsluta (endast för kompatibilitet; hanteras nu av demon)"
 
@@ -2093,148 +2092,144 @@ msgstr "Aktivera ljud och associera ljud med händelser"
 msgid "Unknown Volume Control %d"
 msgstr "Okänd volymkontroll %d"
 
-#: ../capplets/sound/sound-properties-capplet.c:321
-#: ../capplets/sound/sound-properties-capplet.c:373
+#: ../capplets/sound/sound-properties-capplet.c:309
+#: ../capplets/sound/sound-properties-capplet.c:361
 msgid "Not connected"
 msgstr "Inte ansluten"
 
-#: ../capplets/sound/sound-properties-capplet.c:657
+#: ../capplets/sound/sound-properties-capplet.c:645
 msgid "Autodetect"
 msgstr "Detektera automatiskt"
 
-#: ../capplets/sound/sound-properties-capplet.c:662
-#: ../capplets/sound/sound-properties-capplet.c:663
+#: ../capplets/sound/sound-properties-capplet.c:650
+#: ../capplets/sound/sound-properties-capplet.c:651
 msgid "ALSA - Advanced Linux Sound Architecture"
 msgstr "ALSA - Advanced Linux Sound Architecture"
 
-#: ../capplets/sound/sound-properties-capplet.c:664
+#: ../capplets/sound/sound-properties-capplet.c:652
 msgid "Artsd - ART Sound Daemon"
 msgstr "Artsd - ART Sound Daemon"
 
-#: ../capplets/sound/sound-properties-capplet.c:665
-#: ../capplets/sound/sound-properties-capplet.c:666
+#: ../capplets/sound/sound-properties-capplet.c:653
+#: ../capplets/sound/sound-properties-capplet.c:654
 msgid "ESD - Enlightened Sound Daemon"
 msgstr "ESD - Enlightened Sound Daemon"
 
-#: ../capplets/sound/sound-properties-capplet.c:667
-#: ../capplets/sound/sound-properties-capplet.c:668
+#: ../capplets/sound/sound-properties-capplet.c:655
+#: ../capplets/sound/sound-properties-capplet.c:656
 msgid "OSS - Open Sound System"
 msgstr "OSS - Open Sound System"
 
-#: ../capplets/sound/sound-properties-capplet.c:669
-#: ../capplets/sound/sound-properties-capplet.c:670
+#: ../capplets/sound/sound-properties-capplet.c:657
+#: ../capplets/sound/sound-properties-capplet.c:658
 msgid "Polypaudio Sound Server"
 msgstr "Polypaudio Sound Server"
 
-#: ../capplets/sound/sound-properties-capplet.c:671
+#: ../capplets/sound/sound-properties-capplet.c:659
 msgid "Test Sound"
 msgstr "Ljudtest"
 
-#: ../capplets/sound/sound-properties-capplet.c:672
+#: ../capplets/sound/sound-properties-capplet.c:660
 msgid "Silence"
 msgstr "Tystnad"
 
-#: ../capplets/sound/sound-properties-capplet.c:1031
+#: ../capplets/sound/sound-properties-capplet.c:1021
 msgid "- GNOME Sound Preferences"
 msgstr "- Ljudinställningar för GNOME"
 
-#: ../capplets/sound/sound-properties-capplet.c:1056
-msgid "Sound Preferences"
-msgstr "Ljudinställningar"
-
-#: ../capplets/sound/sound-properties.glade.h:2
+#: ../capplets/sound/sound-properties.glade.h:1
 msgid "<b>Audio Conferencing</b>"
 msgstr "<b>Ljudkonferens</b>"
 
-#: ../capplets/sound/sound-properties.glade.h:3
+#: ../capplets/sound/sound-properties.glade.h:2
 msgid "<b>Default Mixer Tracks</b>"
 msgstr "<b>Standardmixerspår</b>"
 
-#: ../capplets/sound/sound-properties.glade.h:4
+#: ../capplets/sound/sound-properties.glade.h:3
 msgid "<b>Music and Movies</b>"
 msgstr "<b>Musik och filmer</b>"
 
-#: ../capplets/sound/sound-properties.glade.h:5
+#: ../capplets/sound/sound-properties.glade.h:4
 msgid "<b>Sound Events</b>"
 msgstr "<b>Ljudhändelser</b>"
 
-#: ../capplets/sound/sound-properties.glade.h:6
+#: ../capplets/sound/sound-properties.glade.h:5
 msgid "<span weight=\"bold\" size=\"x-large\">Testing...</span>"
 msgstr "<span weight=\"bold\" size=\"x-large\">Testar...</span>"
 
-#: ../capplets/sound/sound-properties.glade.h:7
+#: ../capplets/sound/sound-properties.glade.h:6
 msgid "Click OK to finish."
 msgstr "Klicka OK för att färdigställa."
 
-#: ../capplets/sound/sound-properties.glade.h:8
-msgid "Device:"
-msgstr "Enhet:"
-
-#: ../capplets/sound/sound-properties.glade.h:9
+#: ../capplets/sound/sound-properties.glade.h:7
 msgid "Devices"
 msgstr "Enheter"
 
-#: ../capplets/sound/sound-properties.glade.h:10
+#: ../capplets/sound/sound-properties.glade.h:8
 msgid "E_nable software sound mixing (ESD)"
 msgstr "A_ktivera programvaruljudmixning (ESD)"
 
-#: ../capplets/sound/sound-properties.glade.h:11
+#: ../capplets/sound/sound-properties.glade.h:9
 msgid "Flash _entire screen"
 msgstr "Blinka _hela skärmen"
 
-#: ../capplets/sound/sound-properties.glade.h:12
+#: ../capplets/sound/sound-properties.glade.h:10
 msgid "Flash _window titlebar"
 msgstr "Blinka _fönstertitelrad"
 
-#: ../capplets/sound/sound-properties.glade.h:13
-msgid "S_ound Playback:"
-msgstr "Ljudu_ppspelning:"
+#: ../capplets/sound/sound-properties.glade.h:11
+msgid "S_ound playback:"
+msgstr "Ljud_uppspelning:"
 
-#: ../capplets/sound/sound-properties.glade.h:14
+#: ../capplets/sound/sound-properties.glade.h:12
 msgid "Select the device and tracks to control with the keyboard. Use the Shift and Control keys to select multiple tracks if required."
 msgstr "Välj enheten och spåren att kontrollera med tangentbordet. Använd tangenterna Skift och Control för att välja flera spår om det behövs."
 
+#: ../capplets/sound/sound-properties.glade.h:13
+msgid "So_und playback:"
+msgstr "Ljudupps_pelning:"
+
+#: ../capplets/sound/sound-properties.glade.h:14
+msgid "Sou_nd capture:"
+msgstr "Ljudfå_ngst:"
+
 #: ../capplets/sound/sound-properties.glade.h:15
-msgid "So_und Playback:"
-msgstr "Ljuduppsp_elning:"
+msgid "Sound Preferences"
+msgstr "Ljudinställningar"
 
 #: ../capplets/sound/sound-properties.glade.h:16
-msgid "Sound & Video Preferences"
-msgstr "Inställningar för ljud och video"
-
-#: ../capplets/sound/sound-properties.glade.h:17
-msgid "Sound _Capture:"
-msgstr "Ljud_fångst:"
-
-#: ../capplets/sound/sound-properties.glade.h:18
 msgid "Sounds"
 msgstr "Ljud"
 
-#: ../capplets/sound/sound-properties.glade.h:19
+#: ../capplets/sound/sound-properties.glade.h:17
 msgid "System Beep"
 msgstr "Systemsignal"
 
-#: ../capplets/sound/sound-properties.glade.h:20
+#: ../capplets/sound/sound-properties.glade.h:18
 msgid "Test"
 msgstr "Testa"
 
-#: ../capplets/sound/sound-properties.glade.h:21
+#: ../capplets/sound/sound-properties.glade.h:19
 msgid "Testing Pipeline"
 msgstr "Testar rör"
 
-#: ../capplets/sound/sound-properties.glade.h:22
+#: ../capplets/sound/sound-properties.glade.h:20
+msgid "_Device:"
+msgstr "_Enhet:"
+
+#: ../capplets/sound/sound-properties.glade.h:21
 msgid "_Enable system beep"
 msgstr "_Aktivera systemsignal"
 
-#: ../capplets/sound/sound-properties.glade.h:23
+#: ../capplets/sound/sound-properties.glade.h:22
 msgid "_Play system sounds"
 msgstr "_Spela upp systemljud"
 
-#: ../capplets/sound/sound-properties.glade.h:24
-msgid "_Sound Playback:"
+#: ../capplets/sound/sound-properties.glade.h:23
+msgid "_Sound playback:"
 msgstr "_Ljuduppspelning:"
 
-#: ../capplets/sound/sound-properties.glade.h:25
+#: ../capplets/sound/sound-properties.glade.h:24
 msgid "_Visual system beep"
 msgstr "_Visuell systemsignal"
 
@@ -3013,7 +3008,7 @@ msgstr "Skärm"
 msgid "Screen on which BGApplier is to draw"
 msgstr "Skärm som BGApplier ska rita på"
 
-#: ../libslab/app-shell.c:708
+#: ../libslab/app-shell.c:709
 #, c-format
 msgid ""
 "<span size=\"large\"><b>No matches found.</b> </span><span>\n"
@@ -3023,6 +3018,10 @@ msgstr ""
 "<span size=\"large\"><b>Inga sökträffar hittades.</b> </span><span>\n"
 "\n"
 " Ditt filter \"<b>%s</b>\" matchar inga objekt.</span>"
+
+#: ../libslab/app-shell.c:843
+msgid "Other"
+msgstr "Andra"
 
 #. make start action
 #: ../libslab/application-tile.c:310
@@ -3346,24 +3345,24 @@ msgid "Start screensaver"
 msgstr "Starta skärmsläckaren"
 
 # Osäker på tangent eller nyckel.
-#: ../shell/control-center.c:61
+#: ../shell/control-center.c:62
 #, c-format
 msgid "key not found [%s]\n"
 msgstr "nyckeln hittades inte [%s]\n"
 
-#: ../shell/control-center.c:149
+#: ../shell/control-center.c:151
 msgid "Filter"
 msgstr "Filter"
 
-#: ../shell/control-center.c:149
+#: ../shell/control-center.c:151
 msgid "Groups"
 msgstr "Grupper"
 
-#: ../shell/control-center.c:149
+#: ../shell/control-center.c:151
 msgid "Common Tasks"
 msgstr "Vanliga uppgifter"
 
-#: ../shell/control-center.c:153
+#: ../shell/control-center.c:155
 msgid "Control Center"
 msgstr "Kontrollpanel"
 
@@ -3641,6 +3640,8 @@ msgstr "Huruvida det ska skapas miniatyrbilder för installerade teman"
 msgid "Whether to thumbnail themes"
 msgstr "Huruvida det ska skapas miniatyrbilder för teman"
 
+#~ msgid "Sound & Video Preferences"
+#~ msgstr "Inställningar för ljud och video"
 #~ msgid ""
 #~ "<span weight=\"bold\" size=\"larger\">The theme \"%s\" has been installed."
 #~ "</span>\n"
@@ -3671,8 +3672,6 @@ msgstr "Huruvida det ska skapas miniatyrbilder för teman"
 #~ msgstr ""
 #~ "Kan inte installera teman.\n"
 #~ "Verktyget gzip är inte installerat."
-#~ msgid "Others"
-#~ msgstr "Andra"
 #~ msgid "Desktop Preferences"
 #~ msgstr "Skrivbordsinställningar"
 #~ msgid ""
