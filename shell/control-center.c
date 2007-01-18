@@ -112,6 +112,7 @@ main (int argc, char *argv[])
 	gchar * startup_id;
 	AppShellData *app_data;
 	GSList *actions;
+	GnomeProgram *program;
 
 #ifdef ENABLE_NLS
 	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
@@ -132,8 +133,8 @@ main (int argc, char *argv[])
 	}
 
 	startup_id = g_strdup (g_getenv (DESKTOP_STARTUP_ID));
-	gnome_program_init ("Gnome Control Center", "0.1", LIBGNOMEUI_MODULE,
-		argc, argv, NULL, NULL);
+	program = gnome_program_init ("GNOME Control Center", "0.1", LIBGNOMEUI_MODULE,
+				      argc, argv, NULL, NULL);
 
 	if (apss_already_running (argc, argv, &bonobo_app, "GNOME-NLD-ControlCenter", startup_id))
 	{
@@ -144,7 +145,7 @@ main (int argc, char *argv[])
 	}
 
 	app_data = appshelldata_new (
-		"preferences.menu", NULL, CONTROL_CENTER_PREFIX, GTK_ICON_SIZE_DIALOG);
+		"preferences.menu", NULL, CONTROL_CENTER_PREFIX, GTK_ICON_SIZE_DIALOG, TRUE);
 	generate_categories (app_data);
 
 	actions = get_actions_list ();
