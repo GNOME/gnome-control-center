@@ -196,6 +196,19 @@ write_theme_to_disk (GnomeThemeMetaInfo  *meta_theme_info,
   gnome_vfs_write (handle, str, strlen (str), &bytes_written);
   g_free (str);
 
+  if (meta_theme_info->gtk_color_scheme)
+  {
+    gchar *a, *tmp;
+    tmp = g_strdup (meta_theme_info->gtk_color_scheme);
+    for (a = tmp; *a != '\0'; a++)
+      if (*a == '\n')
+        *a = ',';
+    str = g_strdup_printf ("GtkColorScheme=%s\n", tmp);
+    gnome_vfs_write (handle, str, strlen (str), &bytes_written);
+    g_free (str);
+    g_free (tmp);
+  }
+
   str = g_strdup_printf ("MetacityTheme=%s\n", meta_theme_info->metacity_theme_name);
   gnome_vfs_write (handle, str, strlen (str), &bytes_written);
   g_free (str);

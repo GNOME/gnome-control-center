@@ -10,6 +10,7 @@
 #define THEME_NAME "X-GNOME-Metatheme/Name"
 #define THEME_COMMENT "X-GNOME-Metatheme/Comment"
 #define GTK_THEME_KEY "X-GNOME-Metatheme/GtkTheme"
+#define GTK_COLOR_SCHEME_KEY "X-GNOME-Metatheme/GtkColorScheme"
 #define METACITY_THEME_KEY "X-GNOME-Metatheme/MetacityTheme"
 #define SAWFISH_THEME_KEY "X-GNOME-Metatheme/SawfishTheme"
 #define ICON_THEME_KEY "X-GNOME-Metatheme/IconTheme"
@@ -351,6 +352,16 @@ gnome_theme_read_meta_theme (GnomeVFSURI *meta_theme_uri)
       return NULL;
     }
   meta_theme_info->gtk_theme_name = g_strdup (str);
+
+  str = gnome_desktop_item_get_string (meta_theme_ditem, GTK_COLOR_SCHEME_KEY);
+  if (str != NULL)
+  {
+    gchar *a;
+    meta_theme_info->gtk_color_scheme = g_strdup (str);
+    for (a = meta_theme_info->gtk_color_scheme; *a != '\0'; a++)
+      if (*a == ',')
+        *a = '\n';
+  }
 
   str = gnome_desktop_item_get_string (meta_theme_ditem, METACITY_THEME_KEY);
   if (str == NULL)
@@ -1479,6 +1490,7 @@ gnome_theme_meta_info_free (GnomeThemeMetaInfo *meta_theme_info)
   g_free (meta_theme_info->monospace_font);
   g_free (meta_theme_info->background_image);
   g_free (meta_theme_info->gtk_theme_name);
+  g_free (meta_theme_info->gtk_color_scheme);
   g_free (meta_theme_info->icon_theme_name);
   g_free (meta_theme_info->metacity_theme_name);
   
@@ -1494,6 +1506,7 @@ gnome_theme_meta_info_print (GnomeThemeMetaInfo *meta_theme_info)
   g_print ("comment: %s\n", meta_theme_info->comment);
   g_print ("icon_file: %s\n", meta_theme_info->icon_file);
   g_print ("gtk_theme_name: %s\n", meta_theme_info->gtk_theme_name);
+  g_print ("gtk_color_scheme: %s\n", meta_theme_info->gtk_color_scheme);
   g_print ("metacity_theme_name: %s\n", meta_theme_info->metacity_theme_name);
   g_print ("icon_theme_name: %s\n", meta_theme_info->icon_theme_name);
   g_print ("sawfish_theme_name: %s\n", meta_theme_info->sawfish_theme_name);
@@ -1567,6 +1580,9 @@ gnome_theme_meta_info_compare (GnomeThemeMetaInfo *a,
   if (cmp != 0) return cmp;
 
   cmp = safe_strcmp (a->gtk_theme_name, b->gtk_theme_name);
+  if (cmp != 0) return cmp;
+
+  cmp = safe_strcmp (a->gtk_color_scheme, b->gtk_color_scheme);
   if (cmp != 0) return cmp;
 
   cmp = safe_strcmp (a->metacity_theme_name, b->metacity_theme_name);

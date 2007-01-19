@@ -23,6 +23,7 @@
 #include "gnome-theme-apply.h"
 
 #define GTK_THEME_KEY      "/desktop/gnome/interface/gtk_theme"
+#define COLOR_SCHEME_KEY   "/desktop/gnome/interface/gtk_color_scheme"
 #define ICON_THEME_KEY     "/desktop/gnome/interface/icon_theme"
 #define FONT_KEY	   "/desktop/gnome/interface/font_name"
 
@@ -45,6 +46,14 @@ gnome_meta_theme_set (GnomeThemeMetaInfo *meta_theme_info)
   if (old_key && strcmp (old_key, meta_theme_info->gtk_theme_name))
     {
       gconf_client_set_string (client, GTK_THEME_KEY, meta_theme_info->gtk_theme_name, NULL);
+    }
+  g_free (old_key);
+
+  /* Set the gtk+ key */
+  old_key = gconf_client_get_string (client, COLOR_SCHEME_KEY, NULL);
+  if (old_key && meta_theme_info->gtk_color_scheme && strcmp (old_key, meta_theme_info->gtk_color_scheme))
+    {
+      gconf_client_set_string (client, COLOR_SCHEME_KEY, meta_theme_info->gtk_color_scheme, NULL);
     }
   g_free (old_key);
 

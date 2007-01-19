@@ -24,7 +24,6 @@
 #include <theme-thumbnail.h>
 #include <gnome-theme-apply.h>
 
-
 /* Events: There are two types of change events we worry about.  The first is
  * when the theme settings change.  In this case, we can quickly update the UI
  * to reflect.  The other is when the themes themselves change.
@@ -117,6 +116,7 @@ typedef struct {
   gboolean cancelled;
 } PixbufAsyncData;
 
+/* helper functions */
 void free_all (gpointer a, ...)
 {
   va_list list;
@@ -126,6 +126,20 @@ void free_all (gpointer a, ...)
 	  g_free(tmp);
   va_end (list);
 }
+
+static gint
+safe_strcmp (gchar *a_str,
+	     gchar *b_str)
+{
+  if (a_str == NULL && b_str != NULL)
+    return -1;
+  if (a_str != NULL && b_str == NULL)
+    return 1;
+  if (a_str == NULL && b_str == NULL)
+    return 0;
+  return strcmp (a_str, b_str);
+}
+
 
 
 static void
@@ -346,6 +360,7 @@ load_meta_themes (GtkTreeView *tree_view,
   gint i = 0;
   GConfClient *client;
   gchar *current_gtk_theme;
+  gchar *current_color_scheme;
   gchar *current_window_theme;
   gchar *current_icon_theme;
   GnomeWindowManager *window_manager;
@@ -361,6 +376,7 @@ load_meta_themes (GtkTreeView *tree_view,
   client = gconf_client_get_default ();
 
   current_gtk_theme = gconf_client_get_string (client, GTK_THEME_KEY, NULL);
+  current_color_scheme = gconf_client_get_string (client, COLOR_SCHEME_KEY, NULL);
   current_icon_theme = gconf_client_get_string (client, ICON_THEME_KEY, NULL);
   g_object_unref (client);
 
@@ -523,6 +539,7 @@ load_meta_themes (GtkTreeView *tree_view,
   add_pixbuf_idle ();
 
   g_free (current_gtk_theme);
+  g_free (current_color_scheme);
   g_free (current_icon_theme);
   g_free (current_window_theme);
   first_time = FALSE;
@@ -569,6 +586,7 @@ meta_theme_selection_changed (GtkTreeSelection *selection,
   gchar *meta_theme_name;
   GtkTreeModel *model;
   gchar *current_gtk_theme;
+  gchar *current_color_scheme;
   gchar *current_window_theme;
   gchar *current_icon_theme;
   GConfClient *client;
@@ -609,6 +627,7 @@ meta_theme_selection_changed (GtkTreeSelection *selection,
 
     /* Get the settings */
     current_gtk_theme = gconf_client_get_string (client, GTK_THEME_KEY, NULL);
+    current_color_scheme = gconf_client_get_string (client, COLOR_SCHEME_KEY, NULL);
     current_icon_theme = gconf_client_get_string (client, ICON_THEME_KEY, NULL);
     g_object_unref (client);
 
@@ -622,6 +641,7 @@ meta_theme_selection_changed (GtkTreeSelection *selection,
 
 	initial_meta_theme_info.name = g_strdup ("__Initial Theme__");
 	initial_meta_theme_info.gtk_theme_name = current_gtk_theme;
+	initial_meta_theme_info.gtk_color_scheme = current_color_scheme;
 	initial_meta_theme_info.metacity_theme_name = current_window_theme;
  	initial_meta_theme_info.icon_theme_name = current_icon_theme;
 	themes_loaded = TRUE;
@@ -660,6 +680,7 @@ update_themes_from_disk (GladeXML *dialog)
 
 static void
 add_custom_row_to_meta_theme (const gchar  *current_gtk_theme,
+			      const gchar  *current_color_scheme,
 			      const gchar  *current_window_theme,
 			      const gchar  *current_icon_theme,
 			      gboolean      select)
@@ -679,6 +700,8 @@ add_custom_row_to_meta_theme (const gchar  *current_gtk_theme,
 
   g_free (custom_meta_theme_info.gtk_theme_name);
   custom_meta_theme_info.gtk_theme_name = g_strdup (current_gtk_theme);
+  g_free (custom_meta_theme_info.gtk_color_scheme);
+  custom_meta_theme_info.gtk_color_scheme = g_strdup (current_color_scheme);
   g_free (custom_meta_theme_info.metacity_theme_name);
   custom_meta_theme_info.metacity_theme_name = g_strdup (current_window_theme);
   g_free (custom_meta_theme_info.icon_theme_name);
@@ -804,6 +827,7 @@ update_settings_from_gconf_idle (gpointer data)
   gchar *current_gtk_theme;
   gchar *current_window_theme;
   gchar *current_icon_theme;
+  gchar *current_color_scheme;
   GnomeWindowManager *window_manager;
   GnomeWMSettings wm_settings;
   GtkWidget *tree_view;
@@ -820,6 +844,7 @@ update_settings_from_gconf_idle (gpointer data)
   /* Get the settings */
   current_gtk_theme = gconf_client_get_string (client, GTK_THEME_KEY, NULL);
   current_icon_theme = gconf_client_get_string (client, ICON_THEME_KEY, NULL);
+  current_color_scheme = gconf_client_get_string (client, COLOR_SCHEME_KEY, NULL);
   g_object_unref (client);
 
   window_manager = gnome_wm_manager_get_current (gdk_display_get_default_screen (gdk_display_get_default ()));
@@ -867,9 +892,12 @@ update_settings_from_gconf_idle (gpointer data)
       if (initial_meta_theme_set && themes_equal (&initial_meta_theme_info, meta_theme_info))
 	initial_theme_saved = TRUE;
       if (! strcmp (current_gtk_theme, meta_theme_info->gtk_theme_name) &&
+	  ! strcmp (current_icon_theme, meta_theme_info->icon_theme_name) &&
+	  (current_color_scheme == NULL ||
+	   ! strcmp (current_color_scheme, "") ||
+	   ! safe_strcmp (current_color_scheme, meta_theme_info->gtk_color_scheme)) &&
 	  (window_manager == NULL ||
-	   ! strcmp (current_window_theme, meta_theme_info->metacity_theme_name)) &&
-	  ! strcmp (current_icon_theme, meta_theme_info->icon_theme_name))
+	   ! strcmp (current_window_theme, meta_theme_info->metacity_theme_name)))
 	{
 	  GtkTreePath *path;
 	  GtkTreePath *cursor_path;
@@ -898,6 +926,7 @@ update_settings_from_gconf_idle (gpointer data)
       initial_meta_theme_set = TRUE;
       initial_meta_theme_info.name = g_strdup ("__Initial Theme__");
       initial_meta_theme_info.gtk_theme_name = g_strdup (current_gtk_theme);
+      initial_meta_theme_info.gtk_color_scheme = g_strdup (current_color_scheme);
       initial_meta_theme_info.metacity_theme_name = g_strdup (current_window_theme);
       initial_meta_theme_info.icon_theme_name = g_strdup (current_icon_theme);
     }
@@ -907,6 +936,7 @@ update_settings_from_gconf_idle (gpointer data)
   if (!current_theme_saved)
     {
       add_custom_row_to_meta_theme (current_gtk_theme,
+				    current_color_scheme,
 				    current_window_theme,
 				    current_icon_theme,
 				    TRUE);
@@ -914,6 +944,7 @@ update_settings_from_gconf_idle (gpointer data)
   else if (initial_meta_theme_set && !initial_theme_saved)
     {
       add_custom_row_to_meta_theme (initial_meta_theme_info.gtk_theme_name,
+				    initial_meta_theme_info.gtk_color_scheme,
 				    initial_meta_theme_info.metacity_theme_name,
 				    initial_meta_theme_info.icon_theme_name,
 				    FALSE);
@@ -923,6 +954,7 @@ update_settings_from_gconf_idle (gpointer data)
       remove_custom_row_from_meta_theme ();
     }
   g_free (current_gtk_theme);
+  g_free (current_color_scheme);
   g_free (current_window_theme);
   g_free (current_icon_theme);
   update_settings_from_gconf_idle_id = 0;
@@ -947,8 +979,8 @@ gtk_theme_key_changed (GConfClient *client,
 		       GConfEntry  *entry,
 		       gpointer     user_data)
 {
-  if (strcmp (entry->key, GTK_THEME_KEY))
-    return;
+//  if (strcmp (entry->key, GTK_THEME_KEY))
+  //  return;
 
   update_settings_from_gconf ();
   gnome_theme_details_update_from_gconf ();
@@ -1331,6 +1363,10 @@ setup_dialog (GladeXML *dialog)
 
   gconf_client_notify_add (client,
 			   GTK_THEME_KEY,
+			   (GConfClientNotifyFunc) &gtk_theme_key_changed,
+			   dialog, NULL, NULL);
+  gconf_client_notify_add (client,
+			   COLOR_SCHEME_KEY,
 			   (GConfClientNotifyFunc) &gtk_theme_key_changed,
 			   dialog, NULL, NULL);
   gconf_client_notify_add (client,

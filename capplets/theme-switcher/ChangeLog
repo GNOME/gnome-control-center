@@ -1,3 +1,19 @@
+2007-01-19  Thomas Wood  <thos@gnome.org>
+
+	* gnome-theme-details.c: (update_color_scheme_tab), (color_select),
+	(toggle_color_scheme_key):
+	* gnome-theme-manager.c: (free_all), (load_meta_themes),
+	(meta_theme_setup_info), (meta_theme_selection_changed),
+	(update_themes_from_disk), (add_custom_row_to_meta_theme),
+	(themes_equal), (update_settings_from_gconf_idle),
+	(update_settings_from_gconf), (gtk_theme_key_changed),
+	(setup_dialog):
+	* gnome-theme-save.c: (write_theme_to_disk):
+	* theme-properties.glade:
+
+	- Remove seperate color scheme saving UI
+	- Add support for gtk-color-scheme key in metatheme info
+
 2007-01-12  Thomas Wood  <thos@gnome.org>
 
 	Patch by:  Jens Granseuer  <jensgr@gmx.net>

@@ -81,6 +81,7 @@ struct _GnomeThemeMetaInfo
   gchar *icon_file;
 
   gchar *gtk_theme_name;
+  gchar *gtk_color_scheme;
   gchar *metacity_theme_name;
   gchar *icon_theme_name;
   gchar *sawfish_theme_name;
