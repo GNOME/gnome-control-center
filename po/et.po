@@ -2,20 +2,21 @@
 # Estonian translation of GNOME Control Center.
 #
 # Copyright (C) 1999, 2002, 2003, 2005, 2006 Free Software Foundation, Inc.
+# Copyright (C) 2007 The Gnome Project.
 # This file is distributed under the same license as the gnome-control-center
 # package.
 #
 # Lauris Kaplinski <lauris@ariman.ee>, 1999.
 # Tõivo Leedjärv <toivo@linux.ee>, 2002, 2003.
-# Ivar Smolin <okul@linux.ee>, 2005, 2006.
+# Ivar Smolin <okul@linux.ee>, 2005-2007.
 # Priit Laes <amd@store20.com>, 2005, 2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: GNOME control center HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-12-14 07:03+0100\n"
-"PO-Revision-Date: 2006-12-14 12:22+0200\n"
+"POT-Creation-Date: 2007-01-09 16:06+0000\n"
+"PO-Revision-Date: 2007-01-18 23:45+0200\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -25,11 +26,11 @@ msgstr ""
 
 #: ../capplets/about-me/eel-alert-dialog.c:114
 msgid "Image/label border"
-msgstr "Pildi/sildi raam"
+msgstr "Pildi/sildi ääris"
 
 #: ../capplets/about-me/eel-alert-dialog.c:115
 msgid "Width of border around the label and image in the alert dialog"
-msgstr "Hoiatusdialoogi pildi või sildi ümber oleva raami laius"
+msgstr "Hoiatusdialoogi pildi või sildi ümber oleva äärise laius"
 
 #: ../capplets/about-me/eel-alert-dialog.c:124
 msgid "Alert Type"
@@ -60,15 +61,15 @@ msgstr "Minust"
 msgid "Set your personal information"
 msgstr "Enda andmete määramine"
 
-#: ../capplets/about-me/gnome-about-me.c:605
+#: ../capplets/about-me/gnome-about-me.c:604
 msgid "Select Image"
 msgstr "Vali pilt"
 
-#: ../capplets/about-me/gnome-about-me.c:607
+#: ../capplets/about-me/gnome-about-me.c:606
 msgid "No Image"
 msgstr "Pilt puudub"
 
-#: ../capplets/about-me/gnome-about-me.c:770
+#: ../capplets/about-me/gnome-about-me.c:769
 msgid ""
 "There was an error while trying to get the addressbook information\n"
 "Evolution Data Server can't handle the protocol"
@@ -76,19 +77,19 @@ msgstr ""
 "Aadressiraamatu andmete hankimise katsel tekkis viga. Evolution'i "
 "andmeserver ei suuda protokolli käsitleda"
 
-#: ../capplets/about-me/gnome-about-me.c:791
+#: ../capplets/about-me/gnome-about-me.c:790
 msgid "Unable to open address book"
 msgstr "Aadressiraamatut pole võimalik avada"
 
-#: ../capplets/about-me/gnome-about-me.c:803
+#: ../capplets/about-me/gnome-about-me.c:802
 msgid "Unknown login ID, the user database might be corrupted"
 msgstr "Tundmatu sisselogimise ID, kasutajate andmebaas võib olla rikutud"
 
-#: ../capplets/about-me/gnome-about-me.c:834
-#: ../capplets/about-me/gnome-about-me.c:836
+#: ../capplets/about-me/gnome-about-me.c:833
+#: ../capplets/about-me/gnome-about-me.c:835
 #, c-format
 msgid "About %s"
-msgstr "Teave %s kohta"
+msgstr "Kasutaja %s andmed"
 
 #: ../capplets/about-me/gnome-about-me-password.c:172
 msgid "Child exited unexpectedly"
@@ -306,7 +307,7 @@ msgstr "Täisnimi"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:28
 msgid "Hom_e:"
-msgstr "Ko_du:"
+msgstr "Ko_dus:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:29
 msgid "IC_Q:"
@@ -386,7 +387,7 @@ msgstr "_Koduleht:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:48
 msgid "_Home:"
-msgstr "_Kodu:"
+msgstr "_Kodus:"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:49
 msgid "_Jabber:"
@@ -528,10 +529,9 @@ msgid "_Import"
 msgstr "_Impordi"
 
 #: ../capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.in.h:1
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:21
-#: ../capplets/keyboard/keyboard.desktop.in.in.h:1
-msgid "Keyboard"
-msgstr "Klaviatuur"
+#, fuzzy
+msgid "Keyboard Accessibility"
+msgstr "_Hõlbustused"
 
 #: ../capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.in.h:2
 msgid "Set your keyboard accessibility preferences"
@@ -763,7 +763,7 @@ msgid "_Finish"
 msgstr "Lõ_peta"
 
 #: ../capplets/background/gnome-background-properties.glade.h:7
-#: ../capplets/theme-switcher/theme-properties.glade.h:28
+#: ../capplets/theme-switcher/theme-properties.glade.h:30
 msgid "_Remove"
 msgstr "_Eemalda"
 
@@ -771,64 +771,87 @@ msgstr "_Eemalda"
 msgid "_Style:"
 msgstr "_Laad:"
 
-#: ../capplets/background/gnome-wp-capplet.c:74
-#: ../capplets/common/capplet-util.c:340
+#: ../capplets/background/gnome-wp-capplet.c:41
+msgid "[FILE...]"
+msgstr ""
+
+#: ../capplets/background/gnome-wp-capplet.c:81
+#: ../capplets/common/capplet-util.c:344
 #: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:333
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "Abiteabe kuvamisel tekkis viga: %s"
 
-#: ../capplets/background/gnome-wp-capplet.c:949
+#: ../capplets/background/gnome-wp-capplet.c:957
 msgid "Centered"
 msgstr "Keskel"
 
-#: ../capplets/background/gnome-wp-capplet.c:953
+#: ../capplets/background/gnome-wp-capplet.c:961
 msgid "Fill Screen"
 msgstr "Üle ekraani"
 
-#: ../capplets/background/gnome-wp-capplet.c:957
+#: ../capplets/background/gnome-wp-capplet.c:965
 msgid "Scaled"
 msgstr "Skaleeritud"
 
-#: ../capplets/background/gnome-wp-capplet.c:961
+#: ../capplets/background/gnome-wp-capplet.c:969
 msgid "Zoom"
 msgstr "Suurendus"
 
-#: ../capplets/background/gnome-wp-capplet.c:965
+#: ../capplets/background/gnome-wp-capplet.c:973
 msgid "Tiled"
 msgstr "Paanidena"
 
-#: ../capplets/background/gnome-wp-capplet.c:986
+#: ../capplets/background/gnome-wp-capplet.c:994
 msgid "Solid Color"
 msgstr "Ühtlane värv"
 
-#: ../capplets/background/gnome-wp-capplet.c:990
+#: ../capplets/background/gnome-wp-capplet.c:998
 msgid "Horizontal Gradient"
 msgstr "Horisontaalse üleminekuga"
 
-#: ../capplets/background/gnome-wp-capplet.c:994
+#: ../capplets/background/gnome-wp-capplet.c:1002
 msgid "Vertical Gradient"
 msgstr "Vertikaalse üleminekuga"
 
 #. Create the file chooser dialog stuff here
-#: ../capplets/background/gnome-wp-capplet.c:1040
+#: ../capplets/background/gnome-wp-capplet.c:1045
 msgid "Add Wallpaper"
 msgstr "Tapeedi lisamine"
 
-#: ../capplets/background/gnome-wp-capplet.c:1057
+#: ../capplets/background/gnome-wp-capplet.c:1062
 msgid "Images"
 msgstr "Pildid"
 
-#: ../capplets/background/gnome-wp-capplet.c:1061
+#: ../capplets/background/gnome-wp-capplet.c:1066
 msgid "All Files"
 msgstr "Kõik failid"
 
-#: ../capplets/background/gnome-wp-info.c:57
+#: ../capplets/background/gnome-wp-capplet.c:1129
+msgid "- Desktop Background Preferences"
+msgstr "- Töölaua tausta eelistused"
+
+#: ../capplets/background/gnome-wp-info.c:45
 msgid "No Wallpaper"
 msgstr "Tapeet puudub"
 
-#: ../capplets/background/gnome-wp-item.c:343
-#: ../capplets/background/gnome-wp-item.c:345
+#.
+#. Translators: This message is used to render the type and size of the
+#. background images in gnome-background-properites. The first "%s" will
+#. be replaced by the image type, and the two "%d %s"s will be replaced
+#. with the images' dimensions. For example, in US English, this may be
+#. displayed as "JPEG Image, 1600 pixels x 1200 pixels".
+#.
+#. Do not translate the "background size|" type. Remove it from the
+#. translation.
+#.
+#: ../capplets/background/gnome-wp-item.c:368
+#, c-format
+msgid "background size|%s, %d %s x %d %s"
+msgstr ""
+
+#: ../capplets/background/gnome-wp-item.c:371
+#: ../capplets/background/gnome-wp-item.c:373
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] ""
@@ -853,14 +876,14 @@ msgstr ""
 msgid "Unable to load stock icon '%s'\n"
 msgstr ""
 
-#: ../capplets/common/capplet-util.c:239 ../capplets/common/capplet-util.c:241
+#: ../capplets/common/capplet-util.c:240 ../capplets/common/capplet-util.c:242
 msgid "Just apply settings and quit"
 msgstr "Rakenda sätted ja lõpeta"
 
-#: ../capplets/common/capplet-util.c:243
-#: ../capplets/keyboard/gnome-keyboard-properties.c:225
-#: ../capplets/mouse/gnome-mouse-properties.c:1036
-#: ../capplets/sound/sound-properties-capplet.c:762
+#: ../capplets/common/capplet-util.c:244
+#: ../capplets/keyboard/gnome-keyboard-properties.c:226
+#: ../capplets/mouse/gnome-mouse-properties.c:1037
+#: ../capplets/sound/sound-properties-capplet.c:1018
 msgid "Retrieve and store legacy settings"
 msgstr ""
 
@@ -1054,7 +1077,8 @@ msgid "Error saving configuration: %s"
 msgstr "Viga sätete salvestamisel: %s"
 
 #: ../capplets/default-applications/gnome-da-capplet.c:743
-#: ../capplets/sound/sound-properties-capplet.c:319
+#: ../capplets/sound/sound-properties-capplet.c:323
+#: ../capplets/theme-switcher/gnome-theme-details.c:656
 msgid "Custom"
 msgstr "Kohandatud"
 
@@ -1071,142 +1095,155 @@ msgid "Balsa"
 msgstr "Balsa"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:2
+#, fuzzy
+msgid "Claws Mail"
+msgstr "Mozilla Mail"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:3
 msgid "Debian Sensible Browser"
 msgstr "Debian'i mõistlik sirvija"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:3
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:4
 msgid "Debian Terminal Emulator"
 msgstr "Debian'i terminaliemulaator"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:4
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:5
 msgid "ETerm"
 msgstr "ETerm"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:5
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:6
 msgid "Encompass"
 msgstr "Encompass"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:6
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:7
 msgid "Epiphany Web Browser"
 msgstr "Epiphany veebisirvija"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:7
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:8
 msgid "Evolution Mail Reader"
 msgstr "Postilugeja Evolution"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:8
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:9
 msgid "Evolution Mail Reader 1.4"
 msgstr "Postilugeja Evolution 1.4"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:9
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:10
 msgid "Evolution Mail Reader 1.5"
 msgstr "Postilugeja Evolution 1.5"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:10
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:11
 msgid "Evolution Mail Reader 1.6"
 msgstr "Postilugeja Evolution 1.6"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:11
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:12
 msgid "Evolution Mail Reader 2.0"
 msgstr "Postilugeja Evolution 2.0"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:12
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:13
 msgid "Evolution Mail Reader 2.2"
 msgstr "Postilugeja Evolution 2.2"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:13
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:14
 msgid "Evolution Mail Reader 2.4"
 msgstr "Postilugeja Evolution 2.4"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:14
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:15
 msgid "Firebird"
 msgstr "Firebird"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:15
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:16
 msgid "Firefox"
 msgstr "Firefox"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:16
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:17
 msgid "GNOME Terminal"
 msgstr "GNOME terminal"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:17
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:18
 msgid "Galeon"
 msgstr "Galeon"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:18
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:19
+msgid "Icedove"
+msgstr ""
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:20
+msgid "Iceweasel"
+msgstr ""
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:21
 msgid "KMail"
 msgstr "KMail"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:19
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:22
 msgid "Konqueror"
 msgstr "Konqueror"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:20
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:23
 msgid "Links Text Browser"
 msgstr "Veebisirvija Links"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:21
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:24
 msgid "Lynx Text Browser"
 msgstr "Veebisirvija Lynx"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:22
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:25
 msgid "Mozilla"
 msgstr "Mozilla"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:23
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:26
 msgid "Mozilla 1.6"
 msgstr "Mozilla 1.6"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:24
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:27
 msgid "Mozilla Mail"
 msgstr "Mozilla Mail"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:25
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:28
 msgid "Mozilla Thunderbird"
 msgstr "Mozilla Thunderbird"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:26
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:29
 msgid "Mutt"
 msgstr "Mutt"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:27
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:30
 msgid "NXterm"
 msgstr "NXterm"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:28
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:31
 msgid "Netscape Communicator"
 msgstr "Netscape Communicator"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:29
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:32
 msgid "Opera"
 msgstr "Opera"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:30
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:33
 msgid "RXVT"
 msgstr "RXVT"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:31
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:34
 msgid "Standard XTerminal"
 msgstr "Tavaline XTerminal"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:32
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:35
 msgid "Sylpheed"
 msgstr "Sylpheed"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:33
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:36
 msgid "Sylpheed-Claws"
 msgstr "Sylpheed-Claws"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:34
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:37
 msgid "Thunderbird"
 msgstr "Thunderbird"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:35
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:38
 msgid "W3M Text Browser"
 msgstr "Veebisirvija W3M"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:36
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:39
 msgid "aterm"
 msgstr "aterm"
 
@@ -1551,6 +1588,15 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
+#: ../capplets/font/main.c:527
+#, fuzzy
+msgid "Use previous font"
+msgstr "Kasuta _eelmist eraldusvõimet"
+
+#: ../capplets/font/main.c:529
+msgid "Use selected font"
+msgstr ""
+
 #: ../capplets/keybindings/eggcellrendererkeys.c:21
 msgid "New accelerator..."
 msgstr "Uus kiirklahv..."
@@ -1584,24 +1630,24 @@ msgstr "Kiirklahvi liik."
 msgid "Disabled"
 msgstr "Välja lülitatud"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:534
+#: ../capplets/keybindings/gnome-keybinding-properties.c:542
 msgid "<Unknown Action>"
 msgstr "<tundmatu tegevus>"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:555
+#: ../capplets/keybindings/gnome-keybinding-properties.c:563
 msgid "Desktop"
 msgstr "Töölaud"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:556
+#: ../capplets/keybindings/gnome-keybinding-properties.c:564
 #: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
 msgid "Sound"
 msgstr "Heli"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:560
+#: ../capplets/keybindings/gnome-keybinding-properties.c:568
 msgid "Window Management"
 msgstr "Akende haldus"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:668
+#: ../capplets/keybindings/gnome-keybinding-properties.c:676
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become unusable to type "
@@ -1609,7 +1655,7 @@ msgid ""
 "Please try with a key such as Control, Alt or Shift at the same time.\n"
 msgstr ""
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:697
+#: ../capplets/keybindings/gnome-keybinding-properties.c:705
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1618,21 +1664,21 @@ msgstr ""
 "Kiirkorraldus \"%s\" on juba kasutusel:\n"
 " \"%s\"\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:729
+#: ../capplets/keybindings/gnome-keybinding-properties.c:737
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Viga uue kiirklahvi seadmisel sätete andmebaasis: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:779
+#: ../capplets/keybindings/gnome-keybinding-properties.c:787
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "Viga kiirklahvi eemaldamisel sätete andmebaasist: %s\n"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:886
+#: ../capplets/keybindings/gnome-keybinding-properties.c:894
 msgid "Action"
 msgstr "Tegevus"
 
-#: ../capplets/keybindings/gnome-keybinding-properties.c:910
+#: ../capplets/keybindings/gnome-keybinding-properties.c:918
 msgid "Shortcut"
 msgstr "Kiirklahv"
 
@@ -1679,19 +1725,23 @@ msgstr "Klaviatuuri tööriista käivitamisel tekkis viga: %s"
 msgid "_Accessibility"
 msgstr "_Hõlbustused"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:221
-#: ../capplets/keyboard/gnome-keyboard-properties.c:223
-#: ../capplets/sound/sound-properties-capplet.c:758
-#: ../capplets/sound/sound-properties-capplet.c:760
+#: ../capplets/keyboard/gnome-keyboard-properties.c:222
+#: ../capplets/keyboard/gnome-keyboard-properties.c:224
+#: ../capplets/sound/sound-properties-capplet.c:1014
+#: ../capplets/sound/sound-properties-capplet.c:1016
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
 "Sätete rakendamine ja programmi töö lõpetamine (ühilduvuse eesmärkidel, seda "
 "hallatakse nüüd deemoni poolt)"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.c:227
+#: ../capplets/keyboard/gnome-keyboard-properties.c:228
 msgid "Start the page with the typing break settings showing"
 msgstr ""
+
+#: ../capplets/keyboard/gnome-keyboard-properties.c:236
+msgid "- GNOME Keyboard Preferences"
+msgstr "- GNOME Klaviatuurieelistused"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:3
 msgid "<b>Cursor Blinking</b>"
@@ -1764,6 +1814,11 @@ msgstr "Töö kestus enne puhkepausi kehtestamist"
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:20
 msgid "Key presses _repeat when key is held down"
 msgstr "Klaviatuur k_ordab kui klahvi hoitakse all"
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: ../capplets/keyboard/keyboard.desktop.in.in.h:1
+msgid "Keyboard"
+msgstr "Klaviatuur"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:22
 msgid "Keyboard Preferences"
@@ -1918,6 +1973,10 @@ msgstr "Valge kursori suur versioon"
 #: ../capplets/mouse/gnome-mouse-properties.c:990
 msgid "Pointer Theme"
 msgstr "Kursori teema"
+
+#: ../capplets/mouse/gnome-mouse-properties.c:1045
+msgid "- GNOME Mouse Preferences"
+msgstr "- GNOME Hiire-eelistused"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:2
 msgid "<b>Double-Click Timeout </b>"
@@ -2111,16 +2170,62 @@ msgstr "_Parool:"
 msgid "_Secure HTTP proxy:"
 msgstr "Tu_rvalise HTTP proksi:"
 
+#: ../capplets/network/gnome-network-preferences.glade.h:20
+msgid "_Use the same proxy for all protocols"
+msgstr ""
+
 #: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:1
 msgid "Enable sound and associate sounds with events"
 msgstr "Helide lubamine ja seostamine sündmustega"
 
-#: ../capplets/sound/sound-properties-capplet.c:317
-#: ../capplets/sound/sound-properties-capplet.c:369
+#: ../capplets/sound/sound-properties-capplet.c:321
+#: ../capplets/sound/sound-properties-capplet.c:373
 msgid "Not connected"
 msgstr "Ühendamata"
 
-#: ../capplets/sound/sound-properties-capplet.c:792
+#: ../capplets/sound/sound-properties-capplet.c:657
+#, fuzzy
+msgid "Autodetect"
+msgstr "_Autendi"
+
+#: ../capplets/sound/sound-properties-capplet.c:662
+#: ../capplets/sound/sound-properties-capplet.c:663
+msgid "ALSA - Advanced Linux Sound Architecture"
+msgstr ""
+
+#: ../capplets/sound/sound-properties-capplet.c:664
+msgid "Artsd - ART Sound Daemon"
+msgstr ""
+
+#: ../capplets/sound/sound-properties-capplet.c:665
+#: ../capplets/sound/sound-properties-capplet.c:666
+msgid "ESD - Enlightened Sound Daemon"
+msgstr ""
+
+#: ../capplets/sound/sound-properties-capplet.c:667
+#: ../capplets/sound/sound-properties-capplet.c:668
+msgid "OSS - Open Sound System"
+msgstr ""
+
+#: ../capplets/sound/sound-properties-capplet.c:669
+#: ../capplets/sound/sound-properties-capplet.c:670
+msgid "Polypaudio Sound Server"
+msgstr ""
+
+#: ../capplets/sound/sound-properties-capplet.c:671
+#, fuzzy
+msgid "Test Sound"
+msgstr "Süsteemsed helid"
+
+#: ../capplets/sound/sound-properties-capplet.c:672
+msgid "Silence"
+msgstr "Vaikus"
+
+#: ../capplets/sound/sound-properties-capplet.c:1026
+msgid "- GNOME Sound Preferences"
+msgstr "- GNOME Helieelistused"
+
+#: ../capplets/sound/sound-properties-capplet.c:1051
 msgid "Sound Preferences"
 msgstr "Helieelistused"
 
@@ -2129,90 +2234,135 @@ msgid "<b>Audio Conferencing</b>"
 msgstr "<b>Audiokonverentsid</b>"
 
 #: ../capplets/sound/sound-properties.glade.h:3
+msgid "<b>Default Mixer Tracks</b>"
+msgstr ""
+
+#: ../capplets/sound/sound-properties.glade.h:4
 msgid "<b>Music and Movies</b>"
 msgstr "<b>Muusika ja filmid</b>"
 
-#: ../capplets/sound/sound-properties.glade.h:4
+#: ../capplets/sound/sound-properties.glade.h:5
 msgid "<b>Sound Events</b>"
 msgstr "<b>Helisündmused</b>"
 
-#: ../capplets/sound/sound-properties.glade.h:5
+#: ../capplets/sound/sound-properties.glade.h:6
 msgid "<span weight=\"bold\" size=\"x-large\">Testing...</span>"
 msgstr "<span weight=\"bold\" size=\"x-large\">Testimine...</span>"
 
-#: ../capplets/sound/sound-properties.glade.h:6
+#: ../capplets/sound/sound-properties.glade.h:7
 msgid "Click OK to finish."
 msgstr "Lõpetamiseks vajuta Olgu"
 
-#: ../capplets/sound/sound-properties.glade.h:7
+#: ../capplets/sound/sound-properties.glade.h:8
+msgid "Device:"
+msgstr "Seade:"
+
+#: ../capplets/sound/sound-properties.glade.h:9
 msgid "Devices"
 msgstr "Seadmed"
 
-#: ../capplets/sound/sound-properties.glade.h:8
+#: ../capplets/sound/sound-properties.glade.h:10
 msgid "E_nable software sound mixing (ESD)"
 msgstr "_Tarkvaraline helimiksimine lubatud (ESD)"
 
-#: ../capplets/sound/sound-properties.glade.h:9
+#: ../capplets/sound/sound-properties.glade.h:11
 msgid "Flash _entire screen"
 msgstr "Sähvatus kogu _ekraanil"
 
-#: ../capplets/sound/sound-properties.glade.h:10
+#: ../capplets/sound/sound-properties.glade.h:12
 msgid "Flash _window titlebar"
 msgstr "Sähvatus akna _tiitliribal"
 
-#: ../capplets/sound/sound-properties.glade.h:11
-msgid "Sound & Video Preferences"
-msgstr "Heli- ja videoeelistused"
-
-#: ../capplets/sound/sound-properties.glade.h:12
-msgid "Sound Capture:"
-msgstr "Helide salvestamine:"
-
 #: ../capplets/sound/sound-properties.glade.h:13
-msgid "Sound Playback:"
+#, fuzzy
+msgid "S_ound Playback:"
 msgstr "Helide esitamine:"
 
 #: ../capplets/sound/sound-properties.glade.h:14
+msgid ""
+"Select the device and tracks to control with the keyboard. Use the Shift and "
+"Control keys to select multiple tracks if required."
+msgstr ""
+
+#: ../capplets/sound/sound-properties.glade.h:15
+#, fuzzy
+msgid "So_und Playback:"
+msgstr "Helide esitamine:"
+
+#: ../capplets/sound/sound-properties.glade.h:16
+msgid "Sound & Video Preferences"
+msgstr "Heli- ja videoeelistused"
+
+#: ../capplets/sound/sound-properties.glade.h:17
+#, fuzzy
+msgid "Sound _Capture:"
+msgstr "Helide salvestamine:"
+
+#: ../capplets/sound/sound-properties.glade.h:18
 msgid "Sounds"
 msgstr "Helid"
 
-#: ../capplets/sound/sound-properties.glade.h:15
+#: ../capplets/sound/sound-properties.glade.h:19
 msgid "System Beep"
 msgstr "Süsteemne piiks"
 
-#: ../capplets/sound/sound-properties.glade.h:16
+#: ../capplets/sound/sound-properties.glade.h:20
 msgid "Test"
 msgstr "Testi"
 
-#: ../capplets/sound/sound-properties.glade.h:17
+#: ../capplets/sound/sound-properties.glade.h:21
 msgid "Testing Pipeline"
 msgstr "Testimiskonveier"
 
-#: ../capplets/sound/sound-properties.glade.h:18
+#: ../capplets/sound/sound-properties.glade.h:22
 msgid "_Enable system beep"
 msgstr "Süsteemne _piiks on lubatud"
 
-#: ../capplets/sound/sound-properties.glade.h:19
+#: ../capplets/sound/sound-properties.glade.h:23
 msgid "_Play system sounds"
 msgstr "_Esitatakse süsteemseid helisid"
 
-#: ../capplets/sound/sound-properties.glade.h:20
+#: ../capplets/sound/sound-properties.glade.h:24
+#, fuzzy
+msgid "_Sound Playback:"
+msgstr "Helide esitamine:"
+
+#: ../capplets/sound/sound-properties.glade.h:25
 msgid "_Visual system beep"
 msgstr "Süsteemne piiks on _visuaalne"
 
-#: ../capplets/theme-switcher/gnome-theme-details.c:370
+#: ../capplets/sound/pipeline-tests.c:84
+#, c-format
+msgid "Failed to construct test pipeline for '%s'"
+msgstr ""
+
+#: ../capplets/theme-switcher/gnome-theme-details.c:425
 msgid "Would you like to remove this theme?"
 msgstr "Kas soovid seda teemat eemaldada?"
 
-#: ../capplets/theme-switcher/gnome-theme-details.c:435
+#: ../capplets/theme-switcher/gnome-theme-details.c:490
 msgid "Theme deleted succesfully. Please select another theme."
 msgstr "Teema on edukalt kustutatud. Palun vali mõni muu teema."
 
-#: ../capplets/theme-switcher/gnome-theme-details.c:444
+#: ../capplets/theme-switcher/gnome-theme-details.c:499
 msgid "Theme can not be deleted"
 msgstr "Teemat pole võimalik kustutada"
 
-#: ../capplets/theme-switcher/gnome-theme-details.c:632
+#: ../capplets/theme-switcher/gnome-theme-details.c:603
+#, fuzzy
+msgid "Save Color Scheme"
+msgstr "Teema salvestamine"
+
+#: ../capplets/theme-switcher/gnome-theme-details.c:612
+msgid "Save color scheme as:"
+msgstr ""
+
+#: ../capplets/theme-switcher/gnome-theme-details.c:638
+#, c-format
+msgid "Are you sure you want to delete the \"%s\" color scheme?"
+msgstr ""
+
+#: ../capplets/theme-switcher/gnome-theme-details.c:776
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -2264,36 +2414,33 @@ msgstr "Failivorming on vigane"
 msgid "Installation Failed"
 msgstr "Tõrge paigaldamisel"
 
-#. TODO: currently cannot apply "gnome themes"
-#: ../capplets/theme-switcher/gnome-theme-installer.c:461
+#: ../capplets/theme-switcher/gnome-theme-installer.c:463
 #, c-format
-msgid ""
-"<span weight=\"bold\" size=\"larger\">The theme \"%s\" has been installed.</"
-"span>\n"
-"\n"
-"Would you like to apply it now, or keep your current theme?"
+msgid "The theme \"%s\" has been installed."
 msgstr ""
-"<span weight=\"bold\" size=\"larger\">Teema \"%s\" on paigaldatud.</span>\n"
-"\n"
-"Kas soovid seda kohe rakendada või jätta praegune teema aktiivseks?"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:464
+#: ../capplets/theme-switcher/gnome-theme-installer.c:469
+#, fuzzy
+msgid "Would you like to apply it now, or keep your current theme?"
+msgstr "Kas soovid seda teemat eemaldada?"
+
+#: ../capplets/theme-switcher/gnome-theme-installer.c:471
 msgid "Keep Current Theme"
 msgstr "Praeguse teema säilitamine"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:466
+#: ../capplets/theme-switcher/gnome-theme-installer.c:473
 msgid "Apply New Theme"
 msgstr "Uue teema rakendamine"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:522
+#: ../capplets/theme-switcher/gnome-theme-installer.c:529
 msgid "No theme file location specified to install"
 msgstr "Paigaldamisel pole teemafaili asukohta määratud"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:537
+#: ../capplets/theme-switcher/gnome-theme-installer.c:544
 msgid "The theme file location specified to install is invalid"
 msgstr "Paigaldamisel määratud teemafaili asukoht on vigane"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:563
+#: ../capplets/theme-switcher/gnome-theme-installer.c:570
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -2302,11 +2449,11 @@ msgstr ""
 "Pole piisavalt õiguseid teema paigaldamiseks asukohale:\n"
 "%s"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:584
+#: ../capplets/theme-switcher/gnome-theme-installer.c:591
 msgid "The file format is invalid."
 msgstr "Failivorming on vigane."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:611
+#: ../capplets/theme-switcher/gnome-theme-installer.c:618
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
@@ -2323,15 +2470,15 @@ msgstr "Oma teema"
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "Sul on võimalik seda teemat \"Salvesta teema\" nupu abil salvestada."
 
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1613
+#: ../capplets/theme-switcher/gnome-theme-manager.c:1614
 msgid "Specify the filename of a theme to install"
 msgstr "Paigaldatava teemafaili nime määramine"
 
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1614
+#: ../capplets/theme-switcher/gnome-theme-manager.c:1615
 msgid "filename"
 msgstr ""
 
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1654
+#: ../capplets/theme-switcher/gnome-theme-manager.c:1658
 msgid ""
 "The default theme schemas could not be found on your system.  This means "
 "that you probably don't have metacity installed, or that your gconf is "
@@ -2357,93 +2504,106 @@ msgstr "Töölaua erinevate osade teemade valimine"
 msgid "Theme"
 msgstr "Teema"
 
+#: ../capplets/theme-switcher/gnome-theme-installer.desktop.in.in.h:1
+#, fuzzy
+msgid "Installs themes packages for various parts of the desktop"
+msgstr "Töölaua erinevate osade teemade valimine"
+
+#: ../capplets/theme-switcher/gnome-theme-installer.desktop.in.in.h:2
+msgid "Theme Installer"
+msgstr "Teemapaigaldaja"
+
+#: ../capplets/theme-switcher/gnome-theme-package.xml.in.h:1
+msgid "Gnome Theme Package"
+msgstr "Gnome Teemapakk"
+
 #: ../capplets/theme-switcher/theme-properties.glade.h:1
+msgid ""
+" \n"
+"Custom"
+msgstr ""
+" \n"
+"Kohandatud"
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:3
 msgid "<b>You do not have permission to change theme settings</b>"
 msgstr "<b>Sul pole teema sätete muutmiseks õiguseid</b>"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:2
+#: ../capplets/theme-switcher/theme-properties.glade.h:4
 msgid "Apply _Background"
 msgstr "Rakenda _taust"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:3
+#: ../capplets/theme-switcher/theme-properties.glade.h:5
 msgid "Apply _Font"
 msgstr "Rakenda _kirjatüüp"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:4
+#: ../capplets/theme-switcher/theme-properties.glade.h:6
 msgid "Background"
 msgstr "Taust"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:5
-msgid "Colours"
+#: ../capplets/theme-switcher/theme-properties.glade.h:7
+msgid "C_ustomize..."
+msgstr "_Kohanda..."
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:8
+msgid "Colors"
 msgstr "Värvid"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:6
+#: ../capplets/theme-switcher/theme-properties.glade.h:9
 msgid "Controls"
 msgstr "Vidinad"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:7
+#: ../capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Icons"
 msgstr "Ikoonid"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:8
-msgid "Input"
-msgstr "Sisend"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:9
-msgid "Normal"
-msgstr "Tavaline"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:10
-msgid "Save Theme"
-msgstr "Teema salvestamine"
-
 #: ../capplets/theme-switcher/theme-properties.glade.h:11
+msgid "S_aved schemes:"
+msgstr ""
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:12
+msgid "Save Theme As..."
+msgstr "Salvesta teema _kui..."
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:13
 msgid "Save _Background Image"
 msgstr "Salvestatakse koos _taustapildiga"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:12
+#: ../capplets/theme-switcher/theme-properties.glade.h:14
 msgid "Select theme for the desktop"
 msgstr "Töölaua teema valimine"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:13
-msgid "Selection"
-msgstr "Valik"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:14
+#: ../capplets/theme-switcher/theme-properties.glade.h:15
 msgid "Text"
 msgstr "Tekst"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:15
+#: ../capplets/theme-switcher/theme-properties.glade.h:16
+msgid "The current controls theme does not support color schemes"
+msgstr ""
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:17
 msgid "Theme Details"
 msgstr "Teema üksikasjad"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:16
+#: ../capplets/theme-switcher/theme-properties.glade.h:18
 msgid "Theme Preferences"
 msgstr "Teemaeelistused"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:17
-msgid "Theme _Details"
-msgstr "Teema _omadused"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:18
+#: ../capplets/theme-switcher/theme-properties.glade.h:19
 msgid "This theme does not suggest any particular font or background."
 msgstr "See teema ei täpsusta kirjatüüpi ega tausta."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:19
+#: ../capplets/theme-switcher/theme-properties.glade.h:20
 msgid "This theme suggests a background:"
 msgstr "See teema soovitab tausta:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:20
+#: ../capplets/theme-switcher/theme-properties.glade.h:21
 msgid "This theme suggests a font and a background:"
 msgstr "See teema soovitab kirjatüüpi ja tausta:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:21
+#: ../capplets/theme-switcher/theme-properties.glade.h:22
 msgid "This theme suggests a font:"
 msgstr "See teema soovitab kirjatüüpi:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:22
-msgid "Use colors from the current theme"
-msgstr ""
 
 #: ../capplets/theme-switcher/theme-properties.glade.h:23
 msgid "Window Border"
@@ -2454,26 +2614,44 @@ msgid "_Description:"
 msgstr "_Kirjeldus:"
 
 #: ../capplets/theme-switcher/theme-properties.glade.h:25
+#, fuzzy
+msgid "_Enable custom colors"
+msgstr "_Abistav tehnika on lubatud"
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:26
+msgid "_Input boxes:"
+msgstr ""
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:27
 msgid "_Install Theme..."
 msgstr "_Paigalda teema..."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:26
+#: ../capplets/theme-switcher/theme-properties.glade.h:28
 msgid "_Install..."
 msgstr "_Paigalda..."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:27
+#: ../capplets/theme-switcher/theme-properties.glade.h:29
 msgid "_Name:"
 msgstr "_Nimi:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:29
+#: ../capplets/theme-switcher/theme-properties.glade.h:31
 msgid "_Revert"
 msgstr "_Taasta"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:30
+#: ../capplets/theme-switcher/theme-properties.glade.h:32
 msgid "_Save Theme..."
-msgstr "_Salvesta teema..."
+msgstr "Sa_lvesta teema..."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:31
+#: ../capplets/theme-switcher/theme-properties.glade.h:33
+#, fuzzy
+msgid "_Selected items:"
+msgstr "_Valitud paigutused:"
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:34
+msgid "_Windows:"
+msgstr "_Aknad:"
+
+#: ../capplets/theme-switcher/theme-properties.glade.h:35
 msgid "theme selection tree"
 msgstr "teemavaliku puu"
 
@@ -2581,34 +2759,31 @@ msgstr "_Lõpeta"
 msgid "_Save"
 msgstr "_Salvesta"
 
-#: ../capplets/windows/gnome-window-properties.c:385
-#, c-format
-msgid ""
-"<b>Cannot start the preferences application for your window manager</b>\n"
-"\n"
-"%s"
+#: ../capplets/windows/gnome-window-properties.c:386
+#, fuzzy
+msgid "Cannot start the preferences application for your window manager"
 msgstr ""
 "<b>Eelistuste rakendust sinu aknahaldurile ei saa käivitada</b>\n"
 "\n"
 "%s"
 
-#: ../capplets/windows/gnome-window-properties.c:642
+#: ../capplets/windows/gnome-window-properties.c:643
 msgid "C_ontrol"
 msgstr "C_ontrol"
 
-#: ../capplets/windows/gnome-window-properties.c:647
+#: ../capplets/windows/gnome-window-properties.c:648
 msgid "_Alt"
 msgstr "_Alt"
 
-#: ../capplets/windows/gnome-window-properties.c:653
+#: ../capplets/windows/gnome-window-properties.c:654
 msgid "H_yper"
 msgstr "_Hüper"
 
-#: ../capplets/windows/gnome-window-properties.c:660
+#: ../capplets/windows/gnome-window-properties.c:661
 msgid "S_uper (or \"Windows logo\")"
 msgstr "S_uper (ehk \"Windowsi logo\")"
 
-#: ../capplets/windows/gnome-window-properties.c:667
+#: ../capplets/windows/gnome-window-properties.c:668
 msgid "_Meta"
 msgstr "_Meta"
 
@@ -2861,7 +3036,7 @@ msgstr "X'i seadistuste kasutamine"
 msgid "Keep GNOME settings"
 msgstr "GNOME sätete säilitamine"
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:111
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:117
 #, c-format
 msgid ""
 "Couldn't execute command: %s\n"
@@ -2870,7 +3045,7 @@ msgstr ""
 "Käsku pole võimalik käivitada:%s\n"
 "Veendu, et selline käsk on olemas."
 
-#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:127
+#: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:133
 msgid ""
 "Couldn't put the machine to sleep.\n"
 "Verify that the machine is correctly configured."
@@ -2895,7 +3070,7 @@ msgstr ""
 msgid "_Do not show this message again"
 msgstr "_Ära näita seda teadet uuesti"
 
-#: ../gnome-settings-daemon/gnome-settings-sound.c:127
+#: ../gnome-settings-daemon/gnome-settings-sound.c:137
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Helifaili %s pole võimalik sämplina %s laadida"
@@ -2972,6 +3147,96 @@ msgstr "Ekraan"
 msgid "Screen on which BGApplier is to draw"
 msgstr "Ekraan, millele BGApplier joonistab"
 
+#: ../libslab/app-shell.c:708
+#, c-format
+msgid ""
+"<span size=\"large\"><b>No matches found.</b> </span><span>\n"
+"\n"
+" Your filter \"<b>%s</b>\" does not match any items.</span>"
+msgstr ""
+
+#. make start action
+#: ../libslab/application-tile.c:310
+#, fuzzy, c-format
+msgid "<b>Start %s</b>"
+msgstr "<b>Toetus</b>"
+
+#: ../libslab/application-tile.c:329
+msgid "Help"
+msgstr "Abi"
+
+#: ../libslab/application-tile.c:336
+msgid "Help Unavailable"
+msgstr ""
+
+#: ../libslab/application-tile.c:375
+msgid "Upgrade"
+msgstr ""
+
+#: ../libslab/application-tile.c:384
+msgid "Uninstall"
+msgstr ""
+
+#: ../libslab/application-tile.c:781
+msgid "Remove from Favorites"
+msgstr "Eemalda lemmikute hulgast"
+
+#: ../libslab/application-tile.c:783
+msgid "Add to Favorites"
+msgstr "Lisa lemmikute hulka"
+
+#: ../libslab/application-tile.c:838
+msgid "Remove from Startup Programs"
+msgstr ""
+
+#: ../libslab/application-tile.c:840
+#, fuzzy
+msgid "Add to Startup Programs"
+msgstr "Käivitusvigade näitamine"
+
+#: ../libslab/document-tile.c:145
+msgid "Edited %m/%d/%Y"
+msgstr ""
+
+#: ../libslab/document-tile.c:183
+#, fuzzy, c-format
+msgid "<b>Open with \"%s\"</b>"
+msgstr "<b>Klahvide kordamine</b>"
+
+#: ../libslab/document-tile.c:195
+#, fuzzy
+msgid "Open with Default Application"
+msgstr "Rakenduste vaikimisi kirjatüübi seadmine"
+
+#: ../libslab/document-tile.c:211
+#, fuzzy
+msgid "Open in File Manager"
+msgstr "Faili avamine"
+
+#. make rename action
+#: ../libslab/document-tile.c:227
+msgid "Rename..."
+msgstr ""
+
+#. make move to trash action
+#: ../libslab/document-tile.c:240
+msgid "Move to Trash"
+msgstr ""
+
+#: ../libslab/document-tile.c:250 ../libslab/document-tile.c:580
+#, fuzzy
+msgid "Delete"
+msgstr "_Vali"
+
+#: ../libslab/document-tile.c:270 ../libslab/document-tile.c:279
+msgid "Send To..."
+msgstr ""
+
+#: ../libslab/search-bar.c:255
+#, fuzzy
+msgid "Find Now"
+msgstr "Aknad"
+
 #: ../libsounds/sound-view.c:43
 msgid "Login"
 msgstr "Sisselogimine"
@@ -3025,6 +3290,11 @@ msgstr "Helifaili valimine"
 #, c-format
 msgid "The file %s is not a valid wav file"
 msgstr "Fail %s pole korrektne wav fail"
+
+#: ../libsounds/sound-view.c:261
+#, fuzzy
+msgid "Select sound file..."
+msgstr "Helifaili valimine"
 
 #: ../libsounds/sound-view.c:359
 msgid "System Sounds"
@@ -3212,6 +3482,36 @@ msgstr "Käivitusvigade näitamine"
 #: ../schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:4
 msgid "Start screensaver"
 msgstr "Ekraanisäästja käivitamine"
+
+#: ../shell/control-center.c:61
+#, c-format
+msgid "key not found [%s]\n"
+msgstr ""
+
+#: ../shell/control-center.c:149
+msgid "Filter"
+msgstr "Filter"
+
+#: ../shell/control-center.c:149
+msgid "Groups"
+msgstr "Grupid"
+
+#: ../shell/control-center.c:149
+msgid "Common Tasks"
+msgstr ""
+
+#: ../shell/control-center.c:153
+msgid "Control Center"
+msgstr "Juhtimiskeskus"
+
+#: ../shell/gnomecc.desktop.in.in.h:1
+msgid "GNOME Control Center"
+msgstr "GNOME juhtimiskeskus"
+
+#: ../shell/gnomecc.desktop.in.in.h:2
+#: ../vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:2
+msgid "The GNOME configuration tool"
+msgstr "GNOME seadistusprogramm"
 
 #: ../typing-break/drw-break-window.c:213
 msgid "_Postpone break"
@@ -3401,10 +3701,6 @@ msgstr "Kas Type1 kirjatüüpidest tehakse pisipilte"
 msgid "GNOME Font Viewer"
 msgstr "GNOME kirjatüübivaatur"
 
-#: ../vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:2
-msgid "The GNOME configuration tool"
-msgstr "GNOME seadistusprogramm"
-
 #: ../vfs-methods/themus/apply-font.glade.h:2
 msgid "<span weight=\"bold\" size=\"larger\">Apply new font?</span>"
 msgstr "<span weight=\"bold\" size=\"larger\">Rakendada uus kirjatüüp?</span>"
@@ -3446,7 +3742,7 @@ msgid "Icon theme"
 msgstr "Ikoonide teema"
 
 #. translators: you may want to include non-western chars here
-#: ../vfs-methods/themus/themus-theme-applier.c:78
+#: ../vfs-methods/themus/themus-theme-applier.c:87
 msgid "ABCDEFG"
 msgstr "ABCDEFG"
 
@@ -3491,3 +3787,26 @@ msgstr "Kas teha paigaldatud teemadest pisipilte"
 #: ../vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Kas teha teemadest pisipilte"
+
+#~ msgid ""
+#~ "<span weight=\"bold\" size=\"larger\">The theme \"%s\" has been installed."
+#~ "</span>\n"
+#~ "\n"
+#~ "Would you like to apply it now, or keep your current theme?"
+#~ msgstr ""
+#~ "<span weight=\"bold\" size=\"larger\">Teema \"%s\" on paigaldatud.</"
+#~ "span>\n"
+#~ "\n"
+#~ "Kas soovid seda kohe rakendada või jätta praegune teema aktiivseks?"
+
+#~ msgid "Input"
+#~ msgstr "Sisend"
+
+#~ msgid "Normal"
+#~ msgstr "Tavaline"
+
+#~ msgid "Selection"
+#~ msgstr "Valik"
+
+#~ msgid "Theme _Details"
+#~ msgstr "Teema _omadused"
