@@ -49,7 +49,7 @@ static void load_theme_names                (GtkTreeView        *tree_view,
 static char *path_to_theme_id               (const char *path);
 static void update_color_buttons_from_string (gchar *color_scheme);
 
-void toggle_color_scheme_key (GtkWidget *checkbutton, gpointer *data);
+void revert_color_scheme_key (GtkWidget *checkbutton, gpointer *data);
 
 static char *
 path_to_theme_id (const char *path)
@@ -227,20 +227,14 @@ update_color_scheme_tab ()
 	bg_s = (g_slist_find_custom (symbolic_colors, "selected_bg_color", g_str_equal) != NULL);
 
 	enable_colors = (fg && bg && base && text && fg_s && bg_s);
-	gtk_widget_set_sensitive (WID ("enable_custom_colors_checkbutton"), enable_colors);
+
+	gtk_widget_set_sensitive (WID ("color_scheme_table"), enable_colors);
+	gtk_widget_set_sensitive (WID ("color_scheme_revert_button"), enable_colors);
 
 	if (enable_colors)
-	{
-		gboolean enable_color_schemes;
-		enable_color_schemes = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (WID ("enable_custom_colors_checkbutton")));
-		gtk_widget_set_sensitive (WID ("color_scheme_table"), enable_color_schemes);
 		gtk_widget_hide (WID ("color_scheme_message_hbox"));
-	}
 	else
-	{
 		gtk_widget_show (WID ("color_scheme_message_hbox"));
-		gtk_widget_set_sensitive (WID ("color_scheme_table"), FALSE);
-	}
 
 	g_free (filename);
 	g_free (theme_name);
@@ -256,6 +250,8 @@ gtk_theme_selection_changed (GtkTreeSelection *selection,
 
   update_gconf_key_from_selection (selection, GTK_THEME_KEY);
   gtk_theme_update_remove_button(selection, WID("control_remove_button"), THEME_GTK);
+
+  update_color_scheme_tab ();
 }
 
 static void
@@ -549,38 +545,18 @@ color_select (GtkWidget *colorbutton, GladeXML *dialog)
 }
 
 void
-toggle_color_scheme_key (GtkWidget *checkbutton, gpointer *data)
+revert_color_scheme_key (GtkWidget *checkbutton, gpointer *data)
 {
   GConfClient *client = NULL;
-  gboolean use_custom_colors;
   GladeXML *dialog;
-  GtkSettings *settings;
-  gchar *color_scheme = NULL;
 
   dialog = gnome_theme_manager_get_theme_dialog ();
-  use_custom_colors = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (checkbutton));
 
-  gtk_widget_set_sensitive (WID ("color_scheme_table"), use_custom_colors);
+  client = gconf_client_get_default ();
+  gconf_client_set_string (client, COLOR_SCHEME_KEY, "", NULL);
+  g_object_unref (G_OBJECT (client));
 
-  if (!use_custom_colors)
-  {
-    client = gconf_client_get_default ();
-    gconf_client_set_string (client, COLOR_SCHEME_KEY, "", NULL);
-    g_object_unref (G_OBJECT (client));
-  }
-  else
-  {
-    settings = gtk_settings_get_default ();
-    g_object_get (G_OBJECT (settings), "gtk-color-scheme", &color_scheme, NULL);
-    update_color_buttons_from_string (color_scheme);
-    g_free (color_scheme);
-  }
-}
-
-void
-theme_notebook_changed_page (GtkWidget *widget, GladeXML *dialog)
-{
-	update_color_scheme_tab ();
+  gnome_theme_details_update_from_gconf ();
 }
 
 void
@@ -588,7 +564,7 @@ gnome_theme_details_init (void)
 {
   GtkWidget *parent, *widget;
   GladeXML *dialog;
-  gchar *color_scheme;
+  gchar *theme;
 
   if (theme_details_initted)
     return;
@@ -639,13 +615,11 @@ gnome_theme_details_init (void)
   widget = WID ("selected_bg_colorbutton");
   g_signal_connect (G_OBJECT (widget), "color_set", G_CALLBACK (color_select), dialog);
 
-  widget = WID ("enable_custom_colors_checkbutton");
-  g_signal_connect (G_OBJECT (widget), "toggled", G_CALLBACK (toggle_color_scheme_key), parent);
+  widget = WID ("color_scheme_revert_button");
+  g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (revert_color_scheme_key), parent);
 
-  g_signal_connect (G_OBJECT (WID ("theme_notebook")), "switch-page", G_CALLBACK (theme_notebook_changed_page), dialog);
-
-  g_object_get (G_OBJECT (gtk_settings_get_default()), "gtk-color-scheme", &color_scheme, NULL);
-  update_color_buttons_from_string (color_scheme);
+  g_object_get (G_OBJECT (gtk_settings_get_default()), "gtk-color-scheme", &theme, NULL);
+  update_color_buttons_from_string (theme);
 
   /* general signals */
   g_signal_connect (G_OBJECT (parent), "response", G_CALLBACK (cb_dialog_response), NULL);
@@ -940,6 +914,7 @@ update_color_buttons_from_string (gchar *color_scheme)
   widget = WID ("selected_bg_colorbutton");
   gtk_color_button_set_color (GTK_COLOR_BUTTON (widget), &color_scheme_colors[5]);
 
+
 }
 
 void
@@ -947,11 +922,10 @@ gnome_theme_details_update_from_gconf (void)
 {
   GConfClient *client;
   GladeXML *dialog;
-  GtkWidget *tree_view, *widget;
+  GtkWidget *tree_view;
   gchar *theme = NULL;
   GnomeWindowManager *window_manager = NULL;
   GnomeWMSettings wm_settings;
-  gboolean use_custom_colors = FALSE;
 
   gnome_theme_details_init ();
 
@@ -978,23 +952,15 @@ gnome_theme_details_update_from_gconf (void)
   update_list_something (tree_view, theme);
   g_free (theme);
 
-
-  /* color preferences */
-
+  /* update colour scheme tab */
   theme = gconf_client_get_string (client, COLOR_SCHEME_KEY, NULL);
-  if (theme)
-  {
-    use_custom_colors = strcmp ("", theme);
-    update_color_buttons_from_string (theme);
-    g_free (theme);
-  }
+  /* if gconf string is not present, we need to look in gtk settings for a value */
+  if (theme == NULL || strcmp (theme, ""))
+    g_object_get (G_OBJECT (gtk_settings_get_default()), "gtk-color-scheme", &theme, NULL);
+  update_color_buttons_from_string (theme);
+  g_free (theme);
 
-  widget = WID ("enable_custom_colors_checkbutton");
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), use_custom_colors);
-
-  widget = WID ("color_scheme_table");
-  gtk_widget_set_sensitive (widget, use_custom_colors);
-
+  update_color_scheme_tab ();
 
   g_object_unref (client);
 }

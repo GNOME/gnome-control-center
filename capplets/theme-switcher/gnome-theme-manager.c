@@ -979,9 +979,7 @@ gtk_theme_key_changed (GConfClient *client,
 		       GConfEntry  *entry,
 		       gpointer     user_data)
 {
-//  if (strcmp (entry->key, GTK_THEME_KEY))
-  //  return;
-
+  /* this is called when the gtk theme name or gtk color scheme changes */
   update_settings_from_gconf ();
   gnome_theme_details_update_from_gconf ();
 }
