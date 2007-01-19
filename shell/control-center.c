@@ -124,7 +124,7 @@ main (int argc, char *argv[])
 	{
 		if (argc != 2 || strcmp ("-h", argv[1]))
 		{
-			printf ("Usage - control-center [-h]\n");
+			printf ("Usage - gnome-control-center [-h]\n");
 			printf ("Options: -h : hide on start\n");
 			printf ("\tUseful if you want to autostart the control-center singleton so it can get all it's slow loading done\n");
 			exit (1);
