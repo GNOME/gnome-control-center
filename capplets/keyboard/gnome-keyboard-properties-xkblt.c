@@ -351,6 +351,7 @@ void
 xkb_layouts_fill_selected_tree (GladeXML * dialog)
 {
 	GConfEntry *gce;
+	GError *err = NULL;
 	GSList *layouts = xkb_layouts_get_selected_list ();
 	GSList *cur_layout;
 	GtkListStore *list_store =
@@ -411,8 +412,13 @@ xkb_layouts_fill_selected_tree (GladeXML * dialog)
 
 	gce = gconf_client_get_entry (xkb_gconf_client,
 				      GKBD_DESKTOP_CONFIG_KEY_DEFAULT_GROUP,
-				      NULL, TRUE, NULL);
-	def_group_in_gconf_changed (xkb_gconf_client, -1, gce, dialog);
+				      NULL, TRUE, &err);
+	if (err == NULL) {
+		def_group_in_gconf_changed (xkb_gconf_client, -1, gce,
+					    dialog);
+	} else {
+		g_error_free (err);
+	}
 }
 
 void
