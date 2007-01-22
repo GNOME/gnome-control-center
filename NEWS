@@ -1,3 +1,77 @@
+gnome-control-center 2.17.90
+
+common:
+- Removed non-critical g_return_if_fail (Thomas Wood) (#353620)
+- Added support for saving and applying the gtk-color-scheme key (Thomas Wood)
+- Replaced non-standard categories with X-GNOME... (Denis Washington)
+- Check for xf86misc lib in addition to header files (Jens Granseuer) (#397905)
+
+about-me:
+- Fixed compilation on Solaris (Brian Cameron) (#356076)
+- Made translatable strings more generic (Francisco Javier F. Serrador) (#376079)
+
+a11y:
+- Renamed to "Keyboard Accesiblity" in .desktop file (Thomas Wood) (#330697)
+
+background:
+- Fixed several compile warnings (David Seseño) (#326022)
+
+default applications:
+- Moved capplet from System to Personal category (Thomas Wood)
+
+keyboard:
+- Don't crash if default group is not set in GConf (Sergey Udaltsov) (#398631)
+
+keybindings:
+- Moved scrolled window calls to their correct place (Rodrigo Moya)
+- Fixed leaks (Jens Granseuer) (#394824)
+- Corrected .desktop category entry (Thomas Wood)
+
+mouse:
+- Fixed memory leaks (Jens Granseuer) (#395539)
+
+sound:
+- Added NULL-check (Jan Arne Petersen) (#394736)
+- Fixed spacing and build the whole dialog from Glade (Christian Persch) (#394068)
+- Show the sound properties view after adding it to the dialog (Christian Persch)
+- Fixed label alignments bug caused by Glade-3 #396433 (Christian Persch)
+- Set play button insensitive when no sound is selected ((Sylvain Defresne, Thomas
+  Wood) (#353828)
+
+theme switcher:
+- Fixed build with gcc 2 (Jens Granseuer) (#394707)
+- Removed separate color scheme saving UI (Thomas Wood)
+- Added support for gtk-color-scheme key in metatheme info (Thomas Wood)
+- Added a revert button to the color schemes tab (Thomas Wood)
+
+typing break:
+- Set default icon and application name (Andreas Nilsson) (#348641)
+
+windows:
+- Fixed leak (Kjartan Maraas) (#382039)
+
+shell:
+
+settings daemon:
+- Added missing NULL-check (Jan Arne Petersen) (#395083)
+- Removed variable that was never initialized (Jens Granseuer) (#382502)
+- Quit application when window is closed (Rodrigo Moya) (#394303)
+- Set program name to gnome-control-center (Rodrigo Moya)
+
+updated translations:
+- ar (Djihed Afifi)
+- ca (Josep Puigdemont i Casamajó)
+- cs (Jakub Friedl)
+- en_GB (David Lodge)
+- et (Priit Laes)
+- fi(Ilkka Tuohela)
+- hu (Gabor Kelemen)
+- lt (Zygimantas Beruèka)
+- nb (Kjartan Maraas)
+- sl (Matic Zgur)
+- sv (Daniel Nylander)
+- th (Theppitak Karoonboonyanan)
+------------------------------------------------------------------------------
 gnome-control-center 2.17.5
 
 about-me:
