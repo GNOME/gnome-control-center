@@ -466,7 +466,7 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 
 			dialog = gtk_message_dialog_new_with_markup (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_INFO, GTK_BUTTONS_NONE, theme_props->user_message );
 
-			gtk_message_dialog_format_secondary_text(dialog, _("Would you like to apply it now, or keep your current theme?"));
+			gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG (dialog), _("Would you like to apply it now, or keep your current theme?"));
 
 			gtk_dialog_add_button (GTK_DIALOG (dialog), _("Keep Current Theme"), GTK_RESPONSE_CLOSE);
 
