@@ -1,19 +1,20 @@
 # Bulgarian translation for the GNOME 2 control-center.
-# Copyright (C) 2002, 2004, 2005, 2006 Free Software Foundation, Inc.
+# Copyright (C) 2002, 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
 # Borislav Aleksandrov <B.Aleksandrov@cnsys.bg>, 2002.
 # Yanko Kaneti <yaneti@declera.com>, 2002.
 # Rostislav Raykov <zbrox@i-space.org>, 2004, 2005.
 # Vladimir Petkov <vpetkov@i-space.org>, 2004, 2005.
 # Alexander Shopov <ash@contact.bg>, 2006.
+# Yavor Doganov <yavor@doganov.org>, 2007. (tiny changes)
 #
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-09-06 00:46+0300\n"
-"PO-Revision-Date: 2006-09-03 23:40+0300\n"
-"Last-Translator: Rostislav \"zbrox\" Raykov <zbrox@i-space.org>\n"
+"POT-Creation-Date: 2007-01-26 00:41+0200\n"
+"PO-Revision-Date: 2007-01-23 16:51+0200\n"
+"Last-Translator: Yavor Doganov <yavor@doganov.org>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -861,7 +862,7 @@ msgstr "Прилагане на настройките и излизане"
 #: ../capplets/common/capplet-util.c:243
 #: ../capplets/keyboard/gnome-keyboard-properties.c:225
 #: ../capplets/mouse/gnome-mouse-properties.c:1036
-#: ../capplets/sound/sound-properties-capplet.c:762
+#: ../capplets/sound/sound-properties-capplet.c:782
 msgid "Retrieve and store legacy settings"
 msgstr "Получаване и запазване стари настройки"
 
@@ -1676,7 +1677,7 @@ msgstr ""
 msgid "Assign shortcut keys to commands"
 msgstr "Поставяне на бързи клавиши за команди"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkb.c:87
+#: ../capplets/keyboard/gnome-keyboard-properties-xkb.c:91
 msgid "Unknown"
 msgstr "Неизвестен"
 
@@ -1708,8 +1709,8 @@ msgstr "_Достъпност"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:221
 #: ../capplets/keyboard/gnome-keyboard-properties.c:223
-#: ../capplets/sound/sound-properties-capplet.c:758
-#: ../capplets/sound/sound-properties-capplet.c:760
+#: ../capplets/sound/sound-properties-capplet.c:778
+#: ../capplets/sound/sound-properties-capplet.c:780
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr "Използване само на настройките и излизане"
@@ -2145,7 +2146,43 @@ msgstr "Включване на звука и свързване на звуци
 msgid "Not connected"
 msgstr "Не е свързано"
 
-#: ../capplets/sound/sound-properties-capplet.c:792
+#: ../capplets/sound/sound-properties-capplet.c:653
+msgid "Autodetect"
+msgstr "Автоматично засичане"
+
+#: ../capplets/sound/sound-properties-capplet.c:658
+#: ../capplets/sound/sound-properties-capplet.c:659
+msgid "ALSA - Advanced Linux Sound Architecture"
+msgstr "ALSA - Съвременна архитектура за звук на Линукс"
+
+#: ../capplets/sound/sound-properties-capplet.c:660
+msgid "Artsd - ART Sound Daemon"
+msgstr "Artsd - Звуков сървър „ART“"
+
+#: ../capplets/sound/sound-properties-capplet.c:661
+#: ../capplets/sound/sound-properties-capplet.c:662
+msgid "ESD - Enlightenment Sound Daemon"
+msgstr "ESD - Звуков сървър „Enlightened“"
+
+#: ../capplets/sound/sound-properties-capplet.c:663
+#: ../capplets/sound/sound-properties-capplet.c:664
+msgid "OSS - Open Sound System"
+msgstr "OSS - Отворена система за звук"
+
+#: ../capplets/sound/sound-properties-capplet.c:665
+#: ../capplets/sound/sound-properties-capplet.c:666
+msgid "Polypaudio Sound Server"
+msgstr "Звуков сървър „Polypaudio“"
+
+#: ../capplets/sound/sound-properties-capplet.c:667
+msgid "Test Sound"
+msgstr "Пробен звук"
+
+#: ../capplets/sound/sound-properties-capplet.c:668
+msgid "Silence"
+msgstr "Тишина"
+
+#: ../capplets/sound/sound-properties-capplet.c:812
 msgid "Sound Preferences"
 msgstr "Настройка за звук"
 
@@ -2225,19 +2262,19 @@ msgstr "Из_пълнение на системните звуци"
 msgid "_Visual system beep"
 msgstr "_Визуализиране на системния звънец"
 
-#: ../capplets/theme-switcher/gnome-theme-details.c:368
+#: ../capplets/theme-switcher/gnome-theme-details.c:369
 msgid "Would you like to remove this theme?"
 msgstr "Искате ли да изтриете тази тема?"
 
-#: ../capplets/theme-switcher/gnome-theme-details.c:433
+#: ../capplets/theme-switcher/gnome-theme-details.c:434
 msgid "Theme deleted succesfully. Please select another theme."
 msgstr "Темата бе успешно изтрита. Изберете друга."
 
-#: ../capplets/theme-switcher/gnome-theme-details.c:442
+#: ../capplets/theme-switcher/gnome-theme-details.c:443
 msgid "Theme can not be deleted"
 msgstr "Темата не може да бъде изтрита."
 
-#: ../capplets/theme-switcher/gnome-theme-details.c:535
+#: ../capplets/theme-switcher/gnome-theme-details.c:536
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -2247,15 +2284,15 @@ msgstr ""
 "за „Настройки на темите“ е инсталиран неправилно или нямате пакета „gnome-"
 "themes“."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:255
+#: ../capplets/theme-switcher/gnome-theme-installer.c:258
 msgid "This theme is not in a supported format."
 msgstr "Темата е в неподдържан формат."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:273
+#: ../capplets/theme-switcher/gnome-theme-installer.c:276
 msgid "Failed to create temporary directory"
 msgstr "Неуспех при създаването на временна папка"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:294
+#: ../capplets/theme-switcher/gnome-theme-installer.c:297
 msgid ""
 "Can not install theme. \n"
 "The bzip2 utility is not installed."
@@ -2263,13 +2300,13 @@ msgstr ""
 "Неуспех при инсталирането на тема. \n"
 "Няма инсталиран bzip2."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:313
-#: ../capplets/theme-switcher/gnome-theme-installer.c:352
-#: ../capplets/theme-switcher/gnome-theme-installer.c:432
+#: ../capplets/theme-switcher/gnome-theme-installer.c:316
+#: ../capplets/theme-switcher/gnome-theme-installer.c:355
+#: ../capplets/theme-switcher/gnome-theme-installer.c:435
 msgid "Installation Failed"
 msgstr "Инсталацията е неуспешна"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:334
+#: ../capplets/theme-switcher/gnome-theme-installer.c:337
 msgid ""
 "Can not install themes. \n"
 "The gzip utility is not installed."
@@ -2277,21 +2314,21 @@ msgstr ""
 "Неуспех при инсталирането на теми. \n"
 "Няма инсталиран gzip."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:378
+#: ../capplets/theme-switcher/gnome-theme-installer.c:381
 #, c-format
 msgid "GNOME Theme %s correctly installed"
 msgstr "Темата за GNOME %s е инсталирана правилно"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:388
+#: ../capplets/theme-switcher/gnome-theme-installer.c:391
 msgid "The theme is an engine. You need to compile the theme."
 msgstr "Темата е с графично ядро. Трябва да я компилирате."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:406
+#: ../capplets/theme-switcher/gnome-theme-installer.c:409
 msgid "The file format is invalid"
 msgstr "Файловият формат е невалиден"
 
 #. TODO: currently cannot apply "gnome themes"
-#: ../capplets/theme-switcher/gnome-theme-installer.c:452
+#: ../capplets/theme-switcher/gnome-theme-installer.c:455
 #, c-format
 msgid ""
 "<span weight=\"bold\" size=\"larger\">The theme \"%s\" has been installed.</"
@@ -2303,23 +2340,23 @@ msgstr ""
 "\n"
 "Искате ли да я приложите или искате да запазите сегашната тема?"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:455
+#: ../capplets/theme-switcher/gnome-theme-installer.c:458
 msgid "Keep Current Theme"
 msgstr "Запазване на текущата тема"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:457
+#: ../capplets/theme-switcher/gnome-theme-installer.c:460
 msgid "Apply New Theme"
 msgstr "Прилагане на нова тема"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:531
+#: ../capplets/theme-switcher/gnome-theme-installer.c:534
 msgid "No theme file location specified to install"
 msgstr "Не е избран файл с тема, който да се инсталира"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:546
+#: ../capplets/theme-switcher/gnome-theme-installer.c:549
 msgid "The theme file location specified to install is invalid"
 msgstr "Темата посочена за инсталиране е невалидна"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:566
+#: ../capplets/theme-switcher/gnome-theme-installer.c:569
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -2328,11 +2365,11 @@ msgstr ""
 "Няма права за достъп, за да се инсталира темата в:\n"
 "%s"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:587
+#: ../capplets/theme-switcher/gnome-theme-installer.c:590
 msgid "The file format is invalid."
 msgstr "Файловият формат е невалиден."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:614
+#: ../capplets/theme-switcher/gnome-theme-installer.c:617
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
@@ -2997,39 +3034,39 @@ msgstr "Екран"
 msgid "Screen on which BGApplier is to draw"
 msgstr "Екран, на който BGApplier ще рисува"
 
-#: ../libsounds/sound-view.c:43
+#: ../libsounds/sound-view.c:44
 msgid "Login"
 msgstr "Влизане в системата"
 
-#: ../libsounds/sound-view.c:44
+#: ../libsounds/sound-view.c:45
 msgid "Logout"
 msgstr "Излизане от системата"
 
-#: ../libsounds/sound-view.c:45
+#: ../libsounds/sound-view.c:46
 msgid "Boing"
 msgstr "Дрънчене"
 
-#: ../libsounds/sound-view.c:46
+#: ../libsounds/sound-view.c:47
 msgid "Siren"
 msgstr "Сирена"
 
-#: ../libsounds/sound-view.c:47
+#: ../libsounds/sound-view.c:48
 msgid "Clink"
 msgstr "Звънене"
 
-#: ../libsounds/sound-view.c:48
+#: ../libsounds/sound-view.c:49
 msgid "Beep"
 msgstr "Бипкане"
 
-#: ../libsounds/sound-view.c:49
+#: ../libsounds/sound-view.c:50
 msgid "No sound"
 msgstr "Без звук"
 
-#: ../libsounds/sound-view.c:131
+#: ../libsounds/sound-view.c:132
 msgid "Sound not set for this event."
 msgstr "За това събитие няма зададен звук."
 
-#: ../libsounds/sound-view.c:140
+#: ../libsounds/sound-view.c:141
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package for a set of default sounds."
@@ -3037,20 +3074,24 @@ msgstr ""
 "Звуковият файл за това събитие не съществува.\n"
 "Инсталирайте пакета gnome-audio за набора от подразбиращи се звуци."
 
-#: ../libsounds/sound-view.c:151
+#: ../libsounds/sound-view.c:152
 msgid "The sound file for this event does not exist."
 msgstr "Звуковият файл за това събитие не съществува"
 
-#: ../libsounds/sound-view.c:182
+#: ../libsounds/sound-view.c:183
 msgid "Select Sound File"
 msgstr "Избор на звуков файл"
 
-#: ../libsounds/sound-view.c:202
+#: ../libsounds/sound-view.c:203
 #, c-format
 msgid "The file %s is not a valid wav file"
 msgstr "Файлът %s не е валиден wave файл"
 
-#: ../libsounds/sound-view.c:359
+#: ../libsounds/sound-view.c:264
+msgid "Select sound file..."
+msgstr "Избор на звуков файл..."
+
+#: ../libsounds/sound-view.c:366
 msgid "System Sounds"
 msgstr "Системните звуци"
 
