@@ -292,7 +292,6 @@ static void
 transfer_done_cb (GtkWidget *dlg, gchar *path)
 {
 	GtkWidget *dialog, *apply_button;
-	int len = strlen (path);
 	gchar **dir;
 	int theme_type, xfer_options;
 	theme_properties *theme_props;
@@ -310,9 +309,9 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 							g_random_int());
 
 
-	if (path && len > 7 && ( (!strcmp (path + len - 7, ".tar.gz")) || (!strcmp (path + len - 4, ".tgz")) ))
+	if (g_str_has_suffix (path, ".tar.gz") || g_str_has_suffix (path, ".tgz") || g_str_has_suffix(path, ".gtp"))
 		theme_props->filetype=TARGZ;
-	else if (path && len > 8 && !strcmp (path + len - 8, ".tar.bz2"))
+	else if (g_str_has_suffix (path, ".tar.bz2"))
 		theme_props->filetype=TARBZ;
 	else if (g_file_test (path, G_FILE_TEST_IS_DIR))
 		theme_props->filetype=DIRECTORY;
@@ -577,11 +576,10 @@ gnome_theme_install_from_uri (gchar * theme_filename, GtkWindow *parent)
 		while(TRUE) {
 		  	gchar *file_tmp;
 			GtkWidget *dialog;
-		  	int len = strlen (base);
 		  
-		  	if (base && len > 7 && ( (!strcmp (base + len - 7, ".tar.gz")) || (!strcmp (base + len - 4, ".tgz")) || (!strcmp (base + len - 4, ".gtp"))))
-		    		file_tmp = g_strdup_printf("gnome-theme-%d.tar.gz", rand ());
-		  	else if (base && len > 8 && !strcmp (base + len - 8, ".tar.bz2"))
+			if (g_str_has_suffix (base, ".tar.gz") || g_str_has_suffix (base, ".tgz") || g_str_has_suffix(base, ".gtp"))
+		    		file_tmp = g_strdup_printf("gnome-theme-%d.gtp", rand ());
+		  	else if (g_str_has_suffix (base, ".tar.bz2"))
 		    		file_tmp = g_strdup_printf("gnome-theme-%d.tar.bz2", rand ());
 		  	else {
 				dialog = gtk_message_dialog_new (NULL,
