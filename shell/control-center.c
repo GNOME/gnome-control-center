@@ -102,7 +102,12 @@ handle_static_action_clicked (Tile * tile, TileEvent * event, gpointer data)
 
 	temp = g_strdup_printf("%s%s", app_data->gconf_prefix, EXIT_SHELL_ON_STATIC_ACTION);
 	if (get_slab_gconf_bool(temp))
-		gtk_main_quit ();
+	{
+		if (app_data->exit_on_close)
+			gtk_main_quit ();
+		else
+			hide_shell (app_data);
+	}
 	g_free (temp);
 }
 
@@ -136,7 +141,7 @@ main (int argc, char *argv[])
 
 	startup_id = g_strdup (g_getenv (DESKTOP_STARTUP_ID));
 	program = gnome_program_init ("GNOME Control Center", "0.1", LIBGNOMEUI_MODULE,
-				      argc, argv, NULL, NULL);
+		argc, argv, NULL, NULL);
 
 	if (apss_already_running (argc, argv, &bonobo_app, "GNOME-NLD-ControlCenter", startup_id))
 	{
