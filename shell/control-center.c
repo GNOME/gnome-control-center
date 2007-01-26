@@ -43,7 +43,7 @@
 void handle_static_action_clicked (Tile * tile, TileEvent * event, gpointer data);
 static GSList *get_actions_list ();
 
-#define CONTROL_CENTER_PREFIX             "/desktop/gnome/applications/main-menu/cc_"
+#define CONTROL_CENTER_PREFIX             "/apps/control-center/cc_"
 #define CONTROL_CENTER_ACTIONS_LIST_KEY   (CONTROL_CENTER_PREFIX  "actions_list")
 #define CONTROL_CENTER_ACTIONS_SEPARATOR  ";"
 #define EXIT_SHELL_ON_STATIC_ACTION       "exit_shell_on_static_action"
@@ -92,10 +92,12 @@ void
 handle_static_action_clicked (Tile * tile, TileEvent * event, gpointer data)
 {
 	gchar *temp;
-
 	AppShellData *app_data = (AppShellData *) data;
 	GnomeDesktopItem *item =
 		(GnomeDesktopItem *) g_object_get_data (G_OBJECT (tile), APP_ACTION_KEY);
+
+	if (event->type == TILE_EVENT_ACTIVATED_DOUBLE_CLICK)
+		return;
 	open_desktop_item_exec (item);
 
 	temp = g_strdup_printf("%s%s", app_data->gconf_prefix, EXIT_SHELL_ON_STATIC_ACTION);
