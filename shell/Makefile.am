@@ -12,7 +12,7 @@ gnome_control_center_LDADD =						\
 	$(top_builddir)/libslab/libslab.la
 
 AM_CPPFLAGS =							\
-	-DGNOMELOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"
+	-DGNOMELOCALEDIR="\"$(datadir)/locale\""
 
 sysdir = $(datadir)/applications
 sys_in_files = gnomecc.desktop.in
@@ -23,12 +23,14 @@ schemasdir   = @GCONF_SCHEMA_FILE_DIR@
 schemas_DATA = control-center.schemas
 @INTLTOOL_SCHEMAS_RULE@
 
-install-data-local:
+install-data-local: $(schema_DATA)
+if GCONF_SCHEMAS_INSTALL
 	if test -z "$(DESTDIR)" ; then \
-		for p in $(schemas_DATA) ; do \
-			GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $$p; \
+		for p in $^ ; do \
+			GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $$p 2>&1 > /dev/null; \
 		done \
 	fi
+endif
 
 EXTRA_DIST = gnomecc.desktop.in.in $(schemas_DATA).in
 
