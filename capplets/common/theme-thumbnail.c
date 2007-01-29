@@ -34,8 +34,8 @@ typedef struct
 } ThemeThumbnailAsyncData;
 
 
-GHashTable *theme_hash = NULL;
-ThemeThumbnailAsyncData async_data;
+static GHashTable *theme_hash = NULL;
+static ThemeThumbnailAsyncData async_data;
 
 
 /* Protocol */
@@ -66,8 +66,8 @@ typedef struct
   GByteArray *application_font;
 } ThemeThumbnailData;
 
-int pipe_to_factory_fd[2];
-int pipe_from_factory_fd[2];
+static int pipe_to_factory_fd[2];
+static int pipe_from_factory_fd[2];
 
 static void
 fake_expose_widget (GtkWidget *widget,
