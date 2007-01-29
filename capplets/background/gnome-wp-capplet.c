@@ -843,7 +843,7 @@ static void gnome_wp_update_preview (GtkFileChooser *chooser,
   gtk_file_chooser_set_preview_widget_active (chooser, TRUE);
 }
   
-static void wallpaper_properties_init () {
+static void wallpaper_properties_init (void) {
   GnomeWPCapplet * capplet;
   GladeXML * dialog;
   GtkWidget * menu;
