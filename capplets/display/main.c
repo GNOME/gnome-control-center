@@ -18,7 +18,7 @@ enum {
 
 #define REVERT_COUNT 20
 
-struct {
+static struct {
 	Rotation  rotation;
 	gchar const    * name;
 } const rotations[] = {
