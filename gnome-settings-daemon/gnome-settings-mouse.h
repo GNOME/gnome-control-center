@@ -17,7 +17,7 @@
 #ifndef MOUSE_SETTINGS_H
 #define MOUSE_SETTINGS_H
 
-#include <gconf/gconf.h>
+#include <gconf/gconf-client.h>
 
 void gnome_settings_mouse_init (GConfClient *client);
 void gnome_settings_mouse_load (GConfClient *client);

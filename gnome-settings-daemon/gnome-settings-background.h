@@ -25,7 +25,7 @@
 #ifndef __GNOME_SETTINGS_BACKGROUND_H
 #define __GNOME_SETTINGS_BACKGROUND_H
 
-#include <gconf/gconf.h>
+#include <gconf/gconf-client.h>
 
 void gnome_settings_background_init (GConfClient *client);
 void gnome_settings_background_load (GConfClient *client);

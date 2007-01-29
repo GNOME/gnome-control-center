@@ -14,6 +14,7 @@
 
 #include <gconf/gconf.h>
 
+#include "gnome-settings-mouse.h"
 #include "gnome-settings-locate-pointer.h"
 #include "gnome-settings-daemon.h"
 

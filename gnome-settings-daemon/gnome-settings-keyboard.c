@@ -131,7 +131,7 @@ numlock_starting_up = TRUE;
 
 
 static unsigned
-numlock_NumLock_modifier_mask ()
+numlock_NumLock_modifier_mask (void)
 {
 	Display *dpy = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
 	return XkbKeysymToModifiers (dpy, XK_Num_Lock);
@@ -149,7 +149,7 @@ numlock_set_xkb_state (gboolean new_state)
 }
 
 static char *
-numlock_gconf_state_key ()
+numlock_gconf_state_key (void)
 {
 	char *key = gsd_keyboard_get_hostname_key ("numlock_on");
 	if (!key)
@@ -161,7 +161,7 @@ numlock_gconf_state_key ()
 }
 
 static int
-numlock_get_gconf_state ()
+numlock_get_gconf_state (void)
 {
 	int curr_state;
 	GConfClient *gcc;
@@ -210,7 +210,7 @@ numlock_xkb_callback (GdkXEvent *xev_, GdkEvent *gdkev_, gpointer xkb_event_code
 }
 
 static void
-numlock_install_xkb_callback ()
+numlock_install_xkb_callback (void)
 {
 	Display *dpy = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
 	int op_code = 0, xkb_event_code = 0;

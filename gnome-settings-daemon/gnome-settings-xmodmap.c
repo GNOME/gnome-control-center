@@ -57,7 +57,7 @@ check_button_callback (GtkWidget *chk_button,
 }
 
 void
-gnome_settings_load_modmap_files ()
+gnome_settings_load_modmap_files (void)
 {
 	GConfClient *confClient = gnome_settings_daemon_get_conf_client ();
 	GSList *tmp = NULL;

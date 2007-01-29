@@ -76,7 +76,7 @@ find_by_time (gconstpointer a, gconstpointer b)
 	return ((MediaPlayer *)a)->time != 0 && ((MediaPlayer *)a)->time < ((MediaPlayer *)b)->time;
 }
 
-gboolean
+static gboolean
 settings_daemon_grab_media_player_keys (GnomeSettingsServer *server, const gchar *application, guint32 time, GError **error)
 {
 	GList *iter;
@@ -103,7 +103,7 @@ settings_daemon_grab_media_player_keys (GnomeSettingsServer *server, const gchar
 	return TRUE;
 }
 
-gboolean
+static gboolean
 settings_daemon_release_media_player_keys (GnomeSettingsServer *server, const gchar *application, GError **error)
 {
 	GList *iter;
@@ -119,7 +119,7 @@ settings_daemon_release_media_player_keys (GnomeSettingsServer *server, const gc
 	return TRUE;
 }
 
-gboolean
+static gboolean
 settings_daemon_awake (GObject * object, GError ** error)
 {
 	return TRUE;

@@ -31,6 +31,7 @@
 #include <gdk/gdkx.h>
 #include <gconf/gconf.h>
 
+#include "gnome-settings-background.h"
 #include "gnome-settings-keyboard.h"
 #include "gnome-settings-daemon.h"
 

@@ -1,3 +1,21 @@
+2007-01-29  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* gnome-settings-background.c:
+	* gnome-settings-background.h:
+	* gnome-settings-dbus.c:
+	* gnome-settings-font.c:
+	* gnome-settings-font.h:
+	* gnome-settings-keyboard.c: (numlock_NumLock_modifier_mask),
+	(numlock_gconf_state_key), (numlock_get_gconf_state),
+	(numlock_install_xkb_callback):
+	* gnome-settings-mouse.c:
+	* gnome-settings-mouse.h:
+	* gnome-settings-xmodmap.c: (gnome_settings_load_modmap_files):
+	Sparse warning fixes:
+	- Mark some stuff static
+	- ANSIfication of function declarations
+	- Some other bits.
+
 2007-01-14  Thomas Wood  <thos@gnome.org>
 
 	Patch by: Jens Granseuer  <jensgr@gmx.net>

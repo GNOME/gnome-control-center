@@ -17,7 +17,7 @@
 #ifndef FONT_SETTINGS_H
 #define FONT_SETTINGS_H
 
-#include <gconf/gconf.h>
+#include <gconf/gconf-client.h>
 
 void gnome_settings_font_init (GConfClient *client);
 void gnome_settings_font_load (GConfClient *client);

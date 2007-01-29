@@ -1,5 +1,6 @@
 #include <config.h>
 
+#include "gnome-settings-font.h"
 #include "gnome-settings-daemon.h"
 
 #include <dirent.h>
