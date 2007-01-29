@@ -441,7 +441,7 @@ device_removed_callback (LibHalContext *ctx, const char *udi)
 }
 
 static void
-setup_hal_devices ()
+setup_hal_devices (void)
 {
 	DBusConnection *connection;
 	DBusError error;
@@ -641,7 +641,7 @@ add_selected_device (const gchar *profile, int type)
 }
 
 static void
-setup_devices ()
+setup_devices (void)
 {
 	add_device (AUDIO_PLAYBACK, "autoaudiosink", _("Autodetect"), NULL);
 
