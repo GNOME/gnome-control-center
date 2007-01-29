@@ -74,7 +74,7 @@ static GSList *ignore_hosts = NULL;
 static GtkTreeModel *model = NULL;
 
 static GtkTreeModel *
-create_listmodel()
+create_listmodel(void)
 {
 	GtkListStore *store;
 
