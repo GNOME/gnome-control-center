@@ -49,7 +49,7 @@ static GSList *get_actions_list ();
 #define EXIT_SHELL_ON_STATIC_ACTION       "exit_shell_on_static_action"
 
 static GSList *
-get_actions_list ()
+get_actions_list (void)
 {
 	GSList *l;
 	GSList *key_list;
