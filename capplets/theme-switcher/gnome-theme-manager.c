@@ -963,7 +963,7 @@ update_settings_from_gconf_idle (gpointer data)
   return FALSE;
 }
 
-void
+static void
 update_settings_from_gconf (void)
 {
   if (update_settings_from_gconf_idle_id != 0)
@@ -1297,7 +1297,7 @@ revert_theme_clicked (GtkWidget *button,
 
 /* Find out if the lockdown key has been set. Currently returns false on error... */
 static gboolean
-get_lockdown_status ()
+get_lockdown_status (void)
 {
   GConfClient *client;
   gboolean result;

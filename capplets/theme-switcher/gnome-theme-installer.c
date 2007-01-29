@@ -156,7 +156,7 @@ missing_utility_message_dialog (gchar *utility)
 }
 
 static void
-extract_files_error_dialog ()
+extract_files_error_dialog (void)
 {
 	GtkWidget *dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK,
 				_("Can not install theme. \nThere was a problem while extracting the theme"));

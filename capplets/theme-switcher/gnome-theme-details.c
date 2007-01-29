@@ -203,7 +203,7 @@ gtk_theme_update_remove_button (GtkTreeSelection *selection,
 }
 
 static void
-update_color_scheme_tab ()
+update_color_scheme_tab (void)
 {
 	GSList *symbolic_colors = NULL;
 	GSList *engines = NULL;
@@ -472,8 +472,8 @@ remove_theme(GtkWidget *button, gpointer data)
 	
 				uri_list = g_list_prepend(NULL, gnome_vfs_uri_new (theme_dir));
 
-				result = gnome_vfs_xfer_delete_list (uri_list, GNOME_VFS_XFER_RECURSIVE,
-								     GNOME_VFS_XFER_ERROR_MODE_ABORT,
+				result = gnome_vfs_xfer_delete_list (uri_list, GNOME_VFS_XFER_ERROR_MODE_ABORT,
+								     GNOME_VFS_XFER_RECURSIVE,
 								     NULL, NULL);
 				if (result == GNOME_VFS_OK) 
 				{
@@ -501,7 +501,7 @@ remove_theme(GtkWidget *button, gpointer data)
   }
 }
 
-void
+static void
 color_select (GtkWidget *colorbutton, GladeXML *dialog)
 {
   GConfClient *client = NULL;
@@ -585,7 +585,7 @@ gnome_theme_details_init (void)
 
   /* gtk themes */
   widget = WID ("control_remove_button");
-  g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (remove_theme), THEME_GTK);
+  g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (remove_theme), (gint*)THEME_GTK);
   widget = WID ("control_install_button");
   g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_theme_installer_run_cb), parent);
 
@@ -846,7 +846,7 @@ update_list_something (GtkWidget *tree_view, const gchar *theme)
     }
 }
 
-void
+static void
 update_color_buttons_from_string (gchar *color_scheme)
 {
   GdkColor color_scheme_colors[6];
