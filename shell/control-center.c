@@ -133,7 +133,7 @@ main (int argc, char *argv[])
 		{
 			printf ("Usage - gnome-control-center [-h]\n");
 			printf ("Options: -h : hide on start\n");
-			printf ("\tUseful if you want to autostart the control-center singleton so it can get all it's slow loading done\n");
+			printf ("\tUseful if you want to autostart the control-center singleton so it can get all its slow loading done\n");
 			exit (1);
 		}
 		hidden = TRUE;
