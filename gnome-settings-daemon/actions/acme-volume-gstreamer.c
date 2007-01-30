@@ -133,7 +133,7 @@ static void
 update_state (AcmeVolumeGStreamer * self)
 {
 	gint *volumes, n;
-	gdouble vol;
+	gdouble vol = 0;
 	GstMixerTrack *track = GST_MIXER_TRACK(self->_priv->mixer_tracks->data);
 
 	/* update mixer by getting volume */

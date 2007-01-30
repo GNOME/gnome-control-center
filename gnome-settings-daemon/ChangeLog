@@ -1,3 +1,9 @@
+2007-01-30  Jens Granseuer  <jensgr@gmx.net>
+
+	* actions/acme-volume-gstreamer.c: (update_state): initialize 'vol'
+	variable to prevent crashes/assertion failures trying to set
+	ridiculously high/low volume (fixes bug #401376)
+
 2007-01-29  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* gnome-settings-background.c:
