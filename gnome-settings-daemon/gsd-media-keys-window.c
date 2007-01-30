@@ -649,7 +649,7 @@ gsd_media_keys_window_new (void)
 			       "type", GTK_WINDOW_POPUP,
 			       "skip-taskbar-hint", TRUE,
 			       "skip-pager-hint", TRUE,
-			       "set-focus-on-map", FALSE,
+			       "focus-on-map", FALSE,
 			       NULL);
 
         return GTK_WIDGET (object);
