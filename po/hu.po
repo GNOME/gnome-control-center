@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-01-12 03:18+0000\n"
-"PO-Revision-Date: 2007-01-16 13:41+0100\n"
+"POT-Creation-Date: 2007-01-27 20:18+0000\n"
+"PO-Revision-Date: 2007-01-31 00:10+0100\n"
 "Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
 "Language-Team: Hungarian <gnome@gnome.hu>\n"
 "MIME-Version: 1.0\n"
@@ -164,38 +164,38 @@ msgstr "A régi és új jelszavak megegyeznek."
 
 #: ../capplets/about-me/gnome-about-me-password.c:787
 #, c-format
-msgid "Unable to launch /usr/bin/passwd: %s"
-msgstr "A /usr/bin/passwd nem futtatható: %s"
+msgid "Unable to launch %s: %s"
+msgstr "A(z) %s nem futtatható: %s"
 
-#: ../capplets/about-me/gnome-about-me-password.c:789
+#: ../capplets/about-me/gnome-about-me-password.c:790
 msgid "Unable to launch backend"
 msgstr "A háttér nem indítható"
 
-#: ../capplets/about-me/gnome-about-me-password.c:790
+#: ../capplets/about-me/gnome-about-me-password.c:791
 msgid "A system error has occurred"
 msgstr "Rendszerhiba történt"
 
 #. Update status message
-#: ../capplets/about-me/gnome-about-me-password.c:810
+#: ../capplets/about-me/gnome-about-me-password.c:811
 msgid "Checking password..."
 msgstr "Jelszó ellenőrzése..."
 
-#: ../capplets/about-me/gnome-about-me-password.c:897
+#: ../capplets/about-me/gnome-about-me-password.c:898
 msgid "Click <b>Change password</b> to change your password."
 msgstr ""
 "Kattintson a <b>Jelszó megváltoztatása</b> gombra a jelszó "
 "megváltoztatásához."
 
-#: ../capplets/about-me/gnome-about-me-password.c:900
+#: ../capplets/about-me/gnome-about-me-password.c:901
 msgid "Please type your password in the <b>New password</b> field."
 msgstr "Írja be a jelszavát az <b>Új jelszó</b> mezőbe."
 
-#: ../capplets/about-me/gnome-about-me-password.c:903
+#: ../capplets/about-me/gnome-about-me-password.c:904
 #: ../capplets/about-me/gnome-about-me.glade.h:34
 msgid "Please type your password again in the <b>Retype new password</b> field."
 msgstr "Írja be újra a jelszót a <b>Írja be újra a jelszót</b> mezőbe."
 
-#: ../capplets/about-me/gnome-about-me-password.c:906
+#: ../capplets/about-me/gnome-about-me-password.c:907
 msgid "The two passwords are not equal."
 msgstr "A két jelszó nem egyezik."
 
@@ -766,7 +766,7 @@ msgid "_Finish"
 msgstr "_Befejezés"
 
 #: ../capplets/background/gnome-background-properties.glade.h:7
-#: ../capplets/theme-switcher/theme-properties.glade.h:30
+#: ../capplets/theme-switcher/theme-properties.glade.h:26
 msgid "_Remove"
 msgstr "_Eltávolítás"
 
@@ -884,8 +884,8 @@ msgstr "Beállítások alkalmazása és kilépés"
 
 #: ../capplets/common/capplet-util.c:244
 #: ../capplets/keyboard/gnome-keyboard-properties.c:226
-#: ../capplets/mouse/gnome-mouse-properties.c:1037
-#: ../capplets/sound/sound-properties-capplet.c:1013
+#: ../capplets/mouse/gnome-mouse-properties.c:1035
+#: ../capplets/sound/sound-properties-capplet.c:1014
 msgid "Retrieve and store legacy settings"
 msgstr "Az örökölt beállítások betöltése és tárolása"
 
@@ -914,19 +914,19 @@ msgstr "A párbeszédablak szülő ablaka"
 
 #: ../capplets/common/file-transfer-dialog.c:197
 msgid "From URI"
-msgstr "URI-ból"
+msgstr "Az URI címből"
 
 #: ../capplets/common/file-transfer-dialog.c:198
 msgid "URI currently transferring from"
-msgstr "Letöltés a következő URI-ból"
+msgstr "Letöltés a következő URI címből"
 
 #: ../capplets/common/file-transfer-dialog.c:205
 msgid "To URI"
-msgstr "URI-ba"
+msgstr "Az URI címbe"
 
 #: ../capplets/common/file-transfer-dialog.c:206
 msgid "URI currently transferring to"
-msgstr "Feltöltés a következő URI-ba"
+msgstr "Feltöltés a következő URI címre"
 
 #: ../capplets/common/file-transfer-dialog.c:213
 msgid "Fraction completed"
@@ -938,19 +938,19 @@ msgstr "Az átvitel kész része"
 
 #: ../capplets/common/file-transfer-dialog.c:221
 msgid "Current URI index"
-msgstr "Jelenlegi URI-mutató"
+msgstr "Jelenlegi URI index"
 
 #: ../capplets/common/file-transfer-dialog.c:222
 msgid "Current URI index - starts from 1"
-msgstr "Jelenlegi URI-mutató - 1-től indulva"
+msgstr "Jelenlegi URI index - 1-től indulva"
 
 #: ../capplets/common/file-transfer-dialog.c:229
 msgid "Total URIs"
-msgstr "Összes URI"
+msgstr "URI címek összesen"
 
 #: ../capplets/common/file-transfer-dialog.c:230
 msgid "Total number of URIs"
-msgstr "Összes URI száma"
+msgstr "URI címek teljes száma"
 
 #: ../capplets/common/file-transfer-dialog.c:391
 msgid "Connecting..."
@@ -1077,8 +1077,7 @@ msgid "Error saving configuration: %s"
 msgstr "Hiba történt a beállítások mentése közben: %s"
 
 #: ../capplets/default-applications/gnome-da-capplet.c:743
-#: ../capplets/sound/sound-properties-capplet.c:311
-#: ../capplets/theme-switcher/gnome-theme-details.c:656
+#: ../capplets/sound/sound-properties-capplet.c:312
 msgid "Custom"
 msgstr "Egyéni"
 
@@ -1740,8 +1739,8 @@ msgstr "_Akadálymentesítés"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.c:222
 #: ../capplets/keyboard/gnome-keyboard-properties.c:224
-#: ../capplets/sound/sound-properties-capplet.c:1009
-#: ../capplets/sound/sound-properties-capplet.c:1011
+#: ../capplets/sound/sound-properties-capplet.c:1010
+#: ../capplets/sound/sound-properties-capplet.c:1012
 msgid "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
 "Csak alkalmazza a beállításokat, és lépjen ki (csak kompatibilitás; most már "
@@ -1924,18 +1923,18 @@ msgstr "Billentyűzet beállításai"
 
 #. set the timeout value  label with correct value of timeout
 #: ../capplets/mouse/gnome-mouse-properties.c:138
-#: ../capplets/mouse/gnome-mouse-properties.c:904
+#: ../capplets/mouse/gnome-mouse-properties.c:903
 #, c-format
 msgid "%d millisecond"
 msgid_plural "%d milliseconds"
 msgstr[0] "%d ezredmásodperc"
 msgstr[1] "%d ezredmásodperc"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:567
+#: ../capplets/mouse/gnome-mouse-properties.c:522
 msgid "Unknown Pointer"
 msgstr "Ismeretlen egérmutató"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:767
+#: ../capplets/mouse/gnome-mouse-properties.c:770
 #: ../capplets/mouse/gnome-mouse-properties.c:783
 msgid "Default Pointer"
 msgstr "Alapértelmezett egérmutató"
@@ -1984,11 +1983,11 @@ msgstr "Nagy fehér egérmutató"
 msgid "Large version of white pointer"
 msgstr "A fehér egérmutató nagyobb verziója"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:990
+#: ../capplets/mouse/gnome-mouse-properties.c:987
 msgid "Pointer Theme"
 msgstr "Egérmutató-téma"
 
-#: ../capplets/mouse/gnome-mouse-properties.c:1045
+#: ../capplets/mouse/gnome-mouse-properties.c:1043
 msgid "- GNOME Mouse Preferences"
 msgstr "- GNOME egérbeállítások"
 
@@ -2197,48 +2196,48 @@ msgstr "Hangok engedélyezése és eseményekhez rendelése"
 msgid "Unknown Volume Control %d"
 msgstr "%d. ismeretlen hangvezérlő"
 
-#: ../capplets/sound/sound-properties-capplet.c:309
-#: ../capplets/sound/sound-properties-capplet.c:361
+#: ../capplets/sound/sound-properties-capplet.c:310
+#: ../capplets/sound/sound-properties-capplet.c:362
 msgid "Not connected"
 msgstr "Nincs kapcsolat"
 
-#: ../capplets/sound/sound-properties-capplet.c:645
+#: ../capplets/sound/sound-properties-capplet.c:646
 msgid "Autodetect"
 msgstr "Automatikus"
 
-#: ../capplets/sound/sound-properties-capplet.c:650
 #: ../capplets/sound/sound-properties-capplet.c:651
+#: ../capplets/sound/sound-properties-capplet.c:652
 msgid "ALSA - Advanced Linux Sound Architecture"
 msgstr "ALSA - Advanced Linux Sound Architecture"
 
-#: ../capplets/sound/sound-properties-capplet.c:652
+#: ../capplets/sound/sound-properties-capplet.c:653
 msgid "Artsd - ART Sound Daemon"
 msgstr "Artsd - ART hangdémon"
 
-#: ../capplets/sound/sound-properties-capplet.c:653
 #: ../capplets/sound/sound-properties-capplet.c:654
+#: ../capplets/sound/sound-properties-capplet.c:655
 msgid "ESD - Enlightened Sound Daemon"
 msgstr "ESD - Enlightened hangdémon"
 
-#: ../capplets/sound/sound-properties-capplet.c:655
 #: ../capplets/sound/sound-properties-capplet.c:656
+#: ../capplets/sound/sound-properties-capplet.c:657
 msgid "OSS - Open Sound System"
 msgstr "OSS - Nyílt hangrendszer"
 
-#: ../capplets/sound/sound-properties-capplet.c:657
 #: ../capplets/sound/sound-properties-capplet.c:658
+#: ../capplets/sound/sound-properties-capplet.c:659
 msgid "Polypaudio Sound Server"
 msgstr "Polypaudio hangkiszolgáló"
 
-#: ../capplets/sound/sound-properties-capplet.c:659
+#: ../capplets/sound/sound-properties-capplet.c:660
 msgid "Test Sound"
 msgstr "Teszthang"
 
-#: ../capplets/sound/sound-properties-capplet.c:660
+#: ../capplets/sound/sound-properties-capplet.c:661
 msgid "Silence"
 msgstr "Csend"
 
-#: ../capplets/sound/sound-properties-capplet.c:1021
+#: ../capplets/sound/sound-properties-capplet.c:1022
 msgid "- GNOME Sound Preferences"
 msgstr "- GNOME hangbeállítások"
 
@@ -2280,7 +2279,7 @@ msgstr "A t_eljes képernyő villanása"
 
 #: ../capplets/sound/sound-properties.glade.h:10
 msgid "Flash _window titlebar"
-msgstr "Az _ablak címsorának villogása"
+msgstr "Az _ablak címsorának villanása"
 
 #: ../capplets/sound/sound-properties.glade.h:11
 msgid "S_ound playback:"
@@ -2290,7 +2289,9 @@ msgstr "H_anglejátszás:"
 msgid ""
 "Select the device and tracks to control with the keyboard. Use the Shift and "
 "Control keys to select multiple tracks if required."
-msgstr "Válassza ki a billentyűzettel vezérlendő eszközt és sávokat. A Shift és Control billentyűk segítségével több sávot is kijelölhet, ha szükséges."
+msgstr ""
+"Válassza ki a billentyűzettel vezérlendő eszközt és sávokat. A Shift és "
+"Control billentyűk segítségével több sávot is kijelölhet, ha szükséges."
 
 #: ../capplets/sound/sound-properties.glade.h:13
 msgid "So_und playback:"
@@ -2345,32 +2346,19 @@ msgstr "_Látható rendszercsengő"
 msgid "Failed to construct test pipeline for '%s'"
 msgstr "Nem sikerült létrehozni a teszt csővezetéket a(z) \"%s\" számára"
 
-#: ../capplets/theme-switcher/gnome-theme-details.c:425
+#: ../capplets/theme-switcher/gnome-theme-details.c:419
 msgid "Would you like to remove this theme?"
 msgstr "Törölni szeretné ezt a témát?"
 
-#: ../capplets/theme-switcher/gnome-theme-details.c:490
+#: ../capplets/theme-switcher/gnome-theme-details.c:484
 msgid "Theme deleted succesfully. Please select another theme."
 msgstr "A téma sikeresen törölve. Válasszon másik témát."
 
-#: ../capplets/theme-switcher/gnome-theme-details.c:499
+#: ../capplets/theme-switcher/gnome-theme-details.c:493
 msgid "Theme can not be deleted"
 msgstr "A téma nem törölhető"
 
-#: ../capplets/theme-switcher/gnome-theme-details.c:603
-msgid "Save Color Scheme"
-msgstr "Színséma mentése"
-
-#: ../capplets/theme-switcher/gnome-theme-details.c:612
-msgid "Save color scheme as:"
-msgstr "Színséma mentése mint:"
-
-#: ../capplets/theme-switcher/gnome-theme-details.c:638
-#, c-format
-msgid "Are you sure you want to delete the \"%s\" color scheme?"
-msgstr "Valóban törölni kívánja a(z) \"%s\" színsémát?"
-
-#: ../capplets/theme-switcher/gnome-theme-details.c:776
+#: ../capplets/theme-switcher/gnome-theme-details.c:665
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -2387,7 +2375,7 @@ msgid ""
 "The %s utility is not installed."
 msgstr ""
 "A téma nem telepíthető.\n"
-"A(z) %s segédogram nincs telepítve."
+"A(z) %s segédprogram nincs telepítve."
 
 #: ../capplets/theme-switcher/gnome-theme-installer.c:162
 msgid ""
@@ -2397,57 +2385,57 @@ msgstr ""
 "A téma nem telepíthető.\n"
 "A probléma történt a téma kibontásakor"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:324
+#: ../capplets/theme-switcher/gnome-theme-installer.c:323
 msgid "This theme is not in a supported format."
 msgstr "Ezen téma formátuma nem támogatott."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:335
+#: ../capplets/theme-switcher/gnome-theme-installer.c:334
 msgid "Failed to create temporary directory"
 msgstr "Nem sikerült átmeneti könyvtárat létrehozni"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:390
+#: ../capplets/theme-switcher/gnome-theme-installer.c:389
 #, c-format
 msgid "GNOME Theme %s correctly installed"
 msgstr "A(z) %s GNOME téma telepítése sikeresen befejeződött"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:400
+#: ../capplets/theme-switcher/gnome-theme-installer.c:399
 msgid "The theme is an engine. You need to compile the theme."
 msgstr "A téma egy motor. Le kell fordítania a témát."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:411
+#: ../capplets/theme-switcher/gnome-theme-installer.c:410
 msgid "The file format is invalid"
 msgstr "A fájl formátuma érvénytelen"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:450
+#: ../capplets/theme-switcher/gnome-theme-installer.c:449
 msgid "Installation Failed"
 msgstr "A telepítés sikertelen"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:463
+#: ../capplets/theme-switcher/gnome-theme-installer.c:462
 #, c-format
 msgid "The theme \"%s\" has been installed."
 msgstr "A(z) \"%s\" téma telepítve."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:469
+#: ../capplets/theme-switcher/gnome-theme-installer.c:468
 msgid "Would you like to apply it now, or keep your current theme?"
 msgstr "Szeretné alkalmazni most, vagy megtartja a jelenlegi témát?"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:471
+#: ../capplets/theme-switcher/gnome-theme-installer.c:470
 msgid "Keep Current Theme"
 msgstr "Jelenlegi téma megtartása"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:473
+#: ../capplets/theme-switcher/gnome-theme-installer.c:472
 msgid "Apply New Theme"
 msgstr "Új téma alkalmazása"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:529
+#: ../capplets/theme-switcher/gnome-theme-installer.c:528
 msgid "No theme file location specified to install"
 msgstr "Nincs megadva a témafájl elérési útvonala a telepítéshez"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:544
+#: ../capplets/theme-switcher/gnome-theme-installer.c:543
 msgid "The theme file location specified to install is invalid"
 msgstr "A telepítendő témafájl megadott helye érvénytelen"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:570
+#: ../capplets/theme-switcher/gnome-theme-installer.c:569
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -2456,34 +2444,34 @@ msgstr ""
 "Nincs megfelelő jogosultsága téma telepítéséhez a következő helyre:\n"
 "%s"
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:591
+#: ../capplets/theme-switcher/gnome-theme-installer.c:589
 msgid "The file format is invalid."
 msgstr "A fájl formátuma érvénytelen."
 
-#: ../capplets/theme-switcher/gnome-theme-installer.c:618
+#: ../capplets/theme-switcher/gnome-theme-installer.c:616
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
 "selected as the source location"
 msgstr "%s a témafájlok telepítési útvonala. Ez nem választható ki a forrás helyéül."
 
-#: ../capplets/theme-switcher/gnome-theme-manager.c:711
+#: ../capplets/theme-switcher/gnome-theme-manager.c:734
 msgid "Custom theme"
 msgstr "Egyéni téma"
 
-#: ../capplets/theme-switcher/gnome-theme-manager.c:711
+#: ../capplets/theme-switcher/gnome-theme-manager.c:734
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "A témát mentheti a Téma mentése gomb segítségével."
 
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1614
+#: ../capplets/theme-switcher/gnome-theme-manager.c:1648
 msgid "Specify the filename of a theme to install"
 msgstr "Adja meg a telepítendő téma fájlnevét"
 
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1615
+#: ../capplets/theme-switcher/gnome-theme-manager.c:1649
 msgid "filename"
 msgstr "fájlnév"
 
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1658
+#: ../capplets/theme-switcher/gnome-theme-manager.c:1692
 msgid ""
 "The default theme schemas could not be found on your system.  This means "
 "that you probably don't have metacity installed, or that your gconf is "
@@ -2523,140 +2511,124 @@ msgid "Gnome Theme Package"
 msgstr "Gnome témacsomag"
 
 #: ../capplets/theme-switcher/theme-properties.glade.h:1
-msgid ""
-" \n"
-"Custom"
-msgstr ""
-" \n"
-"Egyéni"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:3
 msgid "<b>You do not have permission to change theme settings</b>"
 msgstr "<b>Nincs jogosultsága a témabeállításokat módosítani</b>"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:4
+#: ../capplets/theme-switcher/theme-properties.glade.h:2
 msgid "Apply _Background"
 msgstr "_Háttér alkalmazása"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:5
+#: ../capplets/theme-switcher/theme-properties.glade.h:3
 msgid "Apply _Font"
 msgstr "_Betűkészlet alkalmazása"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:6
+#: ../capplets/theme-switcher/theme-properties.glade.h:4
 msgid "Background"
 msgstr "Háttér"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:7
+#: ../capplets/theme-switcher/theme-properties.glade.h:5
 msgid "C_ustomize..."
 msgstr "_Testreszabás..."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:8
+#: ../capplets/theme-switcher/theme-properties.glade.h:6
 msgid "Colors"
 msgstr "Színek"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:9
+#: ../capplets/theme-switcher/theme-properties.glade.h:7
 msgid "Controls"
 msgstr "Felhasználói felület elemei"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:10
+#: ../capplets/theme-switcher/theme-properties.glade.h:8
 msgid "Icons"
 msgstr "Ikonok"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:11
-msgid "S_aved schemes:"
-msgstr "Mentett _sémák:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:12
+#: ../capplets/theme-switcher/theme-properties.glade.h:9
 msgid "Save Theme As..."
 msgstr "Téma mentése másként..."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:13
+#: ../capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Save _Background Image"
 msgstr "_Háttérkép mentése"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:14
+#: ../capplets/theme-switcher/theme-properties.glade.h:11
 msgid "Select theme for the desktop"
 msgstr "Téma kiválasztása az asztalhoz"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:15
+#: ../capplets/theme-switcher/theme-properties.glade.h:12
 msgid "Text"
 msgstr "Szöveg"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:16
+#: ../capplets/theme-switcher/theme-properties.glade.h:13
 msgid "The current controls theme does not support color schemes"
 msgstr "A felhasználói felület elemeinek jelenlegi témája nem támogatja a színsémákat"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:17
+#: ../capplets/theme-switcher/theme-properties.glade.h:14
 msgid "Theme Details"
 msgstr "Téma részletei"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:18
+#: ../capplets/theme-switcher/theme-properties.glade.h:15
 msgid "Theme Preferences"
 msgstr "Téma beállításai"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:19
+#: ../capplets/theme-switcher/theme-properties.glade.h:16
 msgid "This theme does not suggest any particular font or background."
 msgstr "Ez a téma nem javasol betűkészletet vagy hátteret."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:20
+#: ../capplets/theme-switcher/theme-properties.glade.h:17
 msgid "This theme suggests a background:"
 msgstr "Ez a téma javasol hátteret:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:21
+#: ../capplets/theme-switcher/theme-properties.glade.h:18
 msgid "This theme suggests a font and a background:"
 msgstr "Ez a téma javasol betűkészletet és hátteret:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:22
+#: ../capplets/theme-switcher/theme-properties.glade.h:19
 msgid "This theme suggests a font:"
 msgstr "Ez a téma javasol betűkészletet:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:23
+#: ../capplets/theme-switcher/theme-properties.glade.h:20
 msgid "Window Border"
 msgstr "Ablakkeret"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:24
+#: ../capplets/theme-switcher/theme-properties.glade.h:21
 msgid "_Description:"
 msgstr "_Leírás:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:25
-msgid "_Enable custom colors"
-msgstr "_Egyéni színek engedélyezése"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:26
+#: ../capplets/theme-switcher/theme-properties.glade.h:22
 msgid "_Input boxes:"
 msgstr "Be_meneti mezők:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:27
+#: ../capplets/theme-switcher/theme-properties.glade.h:23
 msgid "_Install Theme..."
 msgstr "Téma _telepítése..."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:28
+#: ../capplets/theme-switcher/theme-properties.glade.h:24
 msgid "_Install..."
 msgstr "_Telepítés..."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:29
+#: ../capplets/theme-switcher/theme-properties.glade.h:25
 msgid "_Name:"
 msgstr "_Név:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:31
+#: ../capplets/theme-switcher/theme-properties.glade.h:27
 msgid "_Revert"
 msgstr "_Visszaállítás"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:32
+#: ../capplets/theme-switcher/theme-properties.glade.h:28
 msgid "_Save Theme..."
 msgstr "Téma _mentése..."
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:33
+#: ../capplets/theme-switcher/theme-properties.glade.h:29
 msgid "_Selected items:"
 msgstr "Ki_választott elemek:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:34
+#: ../capplets/theme-switcher/theme-properties.glade.h:30
 msgid "_Windows:"
 msgstr "_Ablakok:"
 
-#: ../capplets/theme-switcher/theme-properties.glade.h:35
+#: ../capplets/theme-switcher/theme-properties.glade.h:31
 msgid "theme selection tree"
-msgstr "Témakiválasztó fa"
+msgstr "témakiválasztó fa"
 
 #: ../capplets/ui-properties/gnome-ui-properties.desktop.in.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
@@ -2788,7 +2760,7 @@ msgstr "_Meta"
 
 #: ../capplets/windows/gnome-window-properties.glade.h:1
 msgid "<b>Movement Key</b>"
-msgstr "<b>Mozgásbillentyűk</b>"
+msgstr "<b>Mozgásbillentyű</b>"
 
 #: ../capplets/windows/gnome-window-properties.glade.h:2
 msgid "<b>Titlebar Action</b>"
@@ -3102,7 +3074,7 @@ msgstr "Modmap fájlok betöltése"
 
 #: ../gnome-settings-daemon/modmap-dialog.glade.h:4
 msgid "Would you like to load the modmap file(s)?"
-msgstr "Be szeretné tölteni a modmap fájl(oka)t?"
+msgstr "Be szeretné tölteni a modmap fájlokat?"
 
 #: ../gnome-settings-daemon/modmap-dialog.glade.h:5
 msgid "_Load"
@@ -3153,7 +3125,7 @@ msgstr "Képernyő"
 msgid "Screen on which BGApplier is to draw"
 msgstr "Az a képernyő, amelyre a BGApplier rajzolhat"
 
-#: ../libslab/app-shell.c:709
+#: ../libslab/app-shell.c:741
 #, c-format
 msgid ""
 "<span size=\"large\"><b>No matches found.</b> </span><span>\n"
@@ -3164,45 +3136,45 @@ msgstr ""
 "\n"
 " A megadott keresés: \"<b>%s</b>\", eredménytelen.</span>"
 
-#: ../libslab/app-shell.c:843
+#: ../libslab/app-shell.c:879
 msgid "Other"
 msgstr "Egyéb"
 
 #. make start action
-#: ../libslab/application-tile.c:310
+#: ../libslab/application-tile.c:313
 #, c-format
 msgid "<b>Start %s</b>"
 msgstr "<b>%s indítása</b>"
 
-#: ../libslab/application-tile.c:329
+#: ../libslab/application-tile.c:332
 msgid "Help"
 msgstr "Súgó"
 
-#: ../libslab/application-tile.c:336
+#: ../libslab/application-tile.c:339
 msgid "Help Unavailable"
 msgstr "Nincs súgó"
 
-#: ../libslab/application-tile.c:375
+#: ../libslab/application-tile.c:378
 msgid "Upgrade"
 msgstr "Frissítés"
 
-#: ../libslab/application-tile.c:384
+#: ../libslab/application-tile.c:387
 msgid "Uninstall"
 msgstr "Eltávolítás"
 
-#: ../libslab/application-tile.c:781
+#: ../libslab/application-tile.c:784
 msgid "Remove from Favorites"
 msgstr "Eltávolítás a Kedvencek közül"
 
-#: ../libslab/application-tile.c:783
+#: ../libslab/application-tile.c:786
 msgid "Add to Favorites"
 msgstr "Hozzáadás a Kedvencekhez"
 
-#: ../libslab/application-tile.c:838
+#: ../libslab/application-tile.c:841
 msgid "Remove from Startup Programs"
 msgstr "Eltávolítás az Indítópultból"
 
-#: ../libslab/application-tile.c:840
+#: ../libslab/application-tile.c:843
 msgid "Add to Startup Programs"
 msgstr "Hozzáadás az Indítópulthoz"
 
@@ -3245,39 +3217,39 @@ msgstr "Küldés..."
 msgid "Find Now"
 msgstr "Keresés most"
 
-#: ../libsounds/sound-view.c:43
+#: ../libsounds/sound-view.c:44
 msgid "Login"
 msgstr "Bejelentkezés"
 
-#: ../libsounds/sound-view.c:44
+#: ../libsounds/sound-view.c:45
 msgid "Logout"
 msgstr "Kijelentkezés"
 
-#: ../libsounds/sound-view.c:45
+#: ../libsounds/sound-view.c:46
 msgid "Boing"
 msgstr "Kattanás"
 
-#: ../libsounds/sound-view.c:46
+#: ../libsounds/sound-view.c:47
 msgid "Siren"
 msgstr "Duda"
 
-#: ../libsounds/sound-view.c:47
+#: ../libsounds/sound-view.c:48
 msgid "Clink"
 msgstr "Patt"
 
-#: ../libsounds/sound-view.c:48
+#: ../libsounds/sound-view.c:49
 msgid "Beep"
 msgstr "Csipogás"
 
-#: ../libsounds/sound-view.c:49
+#: ../libsounds/sound-view.c:50
 msgid "No sound"
 msgstr "Nincs hang"
 
-#: ../libsounds/sound-view.c:131
+#: ../libsounds/sound-view.c:132
 msgid "Sound not set for this event."
 msgstr "Nincs hang beállítva ehhez az eseményhez."
 
-#: ../libsounds/sound-view.c:140
+#: ../libsounds/sound-view.c:141
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package for a set of default sounds."
@@ -3285,28 +3257,28 @@ msgstr ""
 "A hangfájl nem létezik ehhez az eseményhez.\n"
 "Telepítse a gnome-audio csomagot az alapértelmezett hangkészlet eléréséhez."
 
-#: ../libsounds/sound-view.c:151
+#: ../libsounds/sound-view.c:152
 msgid "The sound file for this event does not exist."
 msgstr "A hangfájl ehhez az eseményhez nem létezik."
 
-#: ../libsounds/sound-view.c:182
+#: ../libsounds/sound-view.c:183
 msgid "Select Sound File"
 msgstr "Hangfájl kiválasztása"
 
-#: ../libsounds/sound-view.c:202
+#: ../libsounds/sound-view.c:203
 #, c-format
 msgid "The file %s is not a valid wav file"
 msgstr "A(z) %s fájl nem egy érvényes wav fájl"
 
-#: ../libsounds/sound-view.c:261
+#: ../libsounds/sound-view.c:264
 msgid "Select sound file..."
 msgstr "Válasszon hangfájlt..."
 
-#: ../libsounds/sound-view.c:359
+#: ../libsounds/sound-view.c:366
 msgid "System Sounds"
 msgstr "Rendszerhangok"
 
-#: ../libwindow-settings/gnome-wm-manager.c:320
+#: ../libwindow-settings/gnome-wm-manager.c:318
 #, c-format
 msgid "Window manager \"%s\" has not registered a configuration tool\n"
 msgstr "A(z) \"%s\" ablakkezelő nem regisztrálta a beállítóeszközét.\n"
@@ -3494,25 +3466,96 @@ msgstr "Képernyővédő indítása"
 msgid "key not found [%s]\n"
 msgstr "a kulcs nem található: [%s]\n"
 
-#: ../shell/control-center.c:151
+#: ../shell/control-center.c:159
 msgid "Filter"
 msgstr "Szűrő"
 
-#: ../shell/control-center.c:151
+#: ../shell/control-center.c:159
 msgid "Groups"
 msgstr "Csoportok"
 
-#: ../shell/control-center.c:151
+#: ../shell/control-center.c:159
 msgid "Common Tasks"
 msgstr "Általános feladatok"
 
-#: ../shell/control-center.c:155
+#: ../shell/control-center.c:163 ../shell/gnomecc.desktop.in.in.h:1
 msgid "Control Center"
 msgstr "Vezérlőközpont"
 
-#: ../shell/gnomecc.desktop.in.in.h:1
-msgid "GNOME Control Center"
-msgstr "GNOME Vezérlőpult"
+#: ../shell/control-center.schemas.in.h:1
+msgid "Close the control-center when a task is activated"
+msgstr "Vezérlőközpont bezárása egy feladat aktiválásakor"
+
+#: ../shell/control-center.schemas.in.h:2
+msgid "Exit shell on add or remove action performed"
+msgstr "Hozzáadás vagy eltávolítás művelet után kilépés a parancsértelmezőbe"
+
+#: ../shell/control-center.schemas.in.h:3
+msgid "Exit shell on help action performed"
+msgstr "Súgó művelet után kilépés a parancsértelmezőbe"
+
+#: ../shell/control-center.schemas.in.h:4
+msgid "Exit shell on start action performed"
+msgstr "Indítás művelet után kilépés a parancsértelmezőbe"
+
+#: ../shell/control-center.schemas.in.h:5
+msgid "Exit shell on upgrade or uninstall action performed"
+msgstr "Frissítés vagy eltávolítás művelet után kilépés a parancsértelmezőbe"
+
+#: ../shell/control-center.schemas.in.h:6
+msgid "Indicates whether to close the shell when a help action is performed"
+msgstr ""
+"Azt jelzi, hogy be kell-e zárni a parancsértelmezőt egy súgóművelet "
+"elvégzése után"
+
+#: ../shell/control-center.schemas.in.h:7
+msgid "Indicates whether to close the shell when a start action is performed"
+msgstr ""
+"Azt jelzi, hogy be kell-e zárni a parancsértelmezőt egy indítási művelet "
+"elvégzése után"
+
+#: ../shell/control-center.schemas.in.h:8
+msgid ""
+"Indicates whether to close the shell when an add or remove action is "
+"performed"
+msgstr ""
+"Azt jelzi, hogy be kell-e zárni a parancsértelmezőt egy hozzáadás vagy "
+"eltávolítás művelet elvégzése után"
+
+#: ../shell/control-center.schemas.in.h:9
+msgid ""
+"Indicates whether to close the shell when an upgrade or uninstall action is "
+"performed"
+msgstr ""
+"Azt jelzi, hogy be kell-e zárni a parancsértelmezőt egy frissítés vagy "
+"eltávolítás művelet elvégzése után"
+
+#: ../shell/control-center.schemas.in.h:10
+msgid "Task names and associated .desktop files"
+msgstr "Feladatnevek és hozzájuk tartozó .desktop fájlok"
+
+#: ../shell/control-center.schemas.in.h:11
+msgid ""
+"The task name to be displayed in the control-center (thus needing to be "
+"translated) followed by a \";\" separator then the filename of an "
+"associated .desktop file to launch for that task."
+msgstr ""
+"A vezérlőközpontban megjelenő (ezért lefordítandó) feladatnév, amelyet egy "
+"\";\" elválasztó követ, majd a feladathoz elindítandó .desktop fájl fájlneve."
+
+#. Translators: The format of this string is the task name to be displayed (translate that part) followed by a ";" separator then the filename (DONT translate the file name) of a .desktop file to launch. Multiple entries are separated by a ","
+#: ../shell/control-center.schemas.in.h:13
+msgid ""
+"[Change Desktop Background;background.desktop,Change Theme;gtk-theme-"
+"selector.desktop,Set Preferred Applications;default-applications.desktop,Add "
+"Printer;gnome-cups-manager.desktop]"
+msgstr "[Munkaasztal hátterének módosítása;background.desktop,Téma módosítása;gtk-theme-selector.desktop,Előnyben részesített alkalmazások beállítása;default-applications.desktop,Nyomtató hozzáadása;gnome-cups-manager.desktop]"
+
+#: ../shell/control-center.schemas.in.h:14
+msgid "if true, the control-center will close when a \"Common Task\" is activated"
+msgstr ""
+"ha igaz, a vezérlőközpont automatikusan bezárul egy \"Gyakori feladat\" "
+"aktiválásakor"
 
 #: ../shell/gnomecc.desktop.in.in.h:2
 #: ../vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:2
@@ -3591,10 +3634,9 @@ msgid ""
 "right-clicking on your panel and choosing 'Add to panel', selecting "
 "'Notification area' and clicking 'Add'."
 msgstr ""
-"A gépelésfigyelő a figyelmeztető területet használja információk "
-"megjelenítésére. Úgy tűnik, az ön panelén nincs figyelmeztető terület. A "
-"panel helyi menüjének \"Hozzáadás\" pontjának \"Figyelmeztetési terület\" "
-"elemét kiválasztva hozzáadhatja a panelhez."
+"A gépelésfigyelő az értesítési területet használja információk megjelenítésére. Úgy tűnik, az Ön paneljén nincs értesítési terület. A "
+"panel helyi menüjében a \"Hozzáadás\" pont alatt az \"Értesítési terület\" "
+"elemet kiválasztva hozzáadhatja a panelhez."
 
 #: ../vfs-methods/fontilus/font-view.c:115
 msgid "The quick brown fox jumps over the lazy dog. 0123456789"
@@ -3721,7 +3763,7 @@ msgstr "GNOME betűkészlet-megjelenítő"
 
 #: ../vfs-methods/themus/apply-font.glade.h:2
 msgid "<span weight=\"bold\" size=\"larger\">Apply new font?</span>"
-msgstr "<span weight=\"bold\" size=\"larger\">Új betűkészlet alkalmazása?</span>"
+msgstr "<span weight=\"bold\" size=\"larger\">Alkalmazza az új betűkészletet?</span>"
 
 #: ../vfs-methods/themus/apply-font.glade.h:3
 msgid "Do _not apply font"
@@ -3732,7 +3774,7 @@ msgid ""
 "The theme you have selected suggests a new font. A preview of the font is "
 "shown below."
 msgstr ""
-"Az ön által kiválasztott téma új betűkészletet javasol. Ennek előnézete "
+"Az Ön által kiválasztott téma új betűkészletet javasol. Ennek előnézete "
 "lejjebb látható."
 
 #: ../vfs-methods/themus/apply-font.glade.h:5
