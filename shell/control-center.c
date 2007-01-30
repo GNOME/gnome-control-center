@@ -151,8 +151,8 @@ main (int argc, char *argv[])
 		exit (1);
 	}
 
-	app_data = appshelldata_new (
-		"preferences.menu", NULL, CONTROL_CENTER_PREFIX, GTK_ICON_SIZE_DIALOG, TRUE);
+	app_data = appshelldata_new ("preferences.menu", NULL, CONTROL_CENTER_PREFIX,
+		GTK_ICON_SIZE_DIALOG, FALSE, TRUE);
 	generate_categories (app_data);
 
 	actions = get_actions_list ();
