@@ -416,10 +416,6 @@ gnome_settings_keyboard_xkb_init (GConfClient * client)
 		gdk_window_add_filter (NULL, (GdkFilterFunc)
 				       gnome_settings_keyboard_xkb_evt_filter,
 				       NULL);
-		gdk_window_add_filter (gdk_get_default_root_window (),
-				       (GdkFilterFunc)
-				       gnome_settings_keyboard_xkb_evt_filter,
-				       NULL);
 		xkl_engine_start_listen (xkl_engine,
 					 XKLL_MANAGE_LAYOUTS |
 					 XKLL_MANAGE_WINDOW_STATES);

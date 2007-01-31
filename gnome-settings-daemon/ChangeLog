@@ -1,3 +1,10 @@
+2007-01-31  Jens Granseuer  <jensgr@gmx.net>
+
+	* gnome-settings-keyboard-xkb.c:
+	(gnome_settings_keyboard_xkb_init): don't install the same filter
+	twice; we already install it for all windows, so we don't need
+	another one for the root window (fixes bug #382504)
+
 2007-01-30  Jens Granseuer  <jensgr@gmx.net>
 
 	* gsd-media-keys-window.c: (gsd_media_keys_window_new): property
