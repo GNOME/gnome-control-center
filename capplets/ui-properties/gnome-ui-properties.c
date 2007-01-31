@@ -286,6 +286,7 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 int
 main (int argc, char **argv)
 {
+  GnomeProgram   *program;
   GConfClient    *client;
   GConfChangeSet *changeset = NULL;
   GladeXML       *dialog;
@@ -294,10 +295,10 @@ main (int argc, char **argv)
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
   textdomain (GETTEXT_PACKAGE);
 
-  gnome_program_init ("gnome-ui-properties", VERSION,
-		      LIBGNOMEUI_MODULE, argc, argv,
-		      GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
-		      NULL);
+  program = gnome_program_init ("gnome-ui-properties", VERSION,
+				LIBGNOMEUI_MODULE, argc, argv,
+				GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
+				NULL);
 
   client = gconf_client_get_default ();
   gconf_client_add_dir (client, "/desktop/gnome/interface", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
@@ -306,5 +307,7 @@ main (int argc, char **argv)
   setup_dialog (dialog, changeset);
   gtk_main ();
 
+  g_object_unref (dialog);
+  g_object_unref (program);
   return 0;
 }
