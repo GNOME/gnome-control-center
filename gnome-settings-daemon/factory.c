@@ -15,6 +15,7 @@ GConfClient *conf_client = NULL;
 
 int main (int argc, char *argv [])
 {
+  GnomeProgram *program;
   GnomeClient *session;
   gchar *restart_argv[] = { "gnome-settings-daemon", NULL, NULL };
 
@@ -24,11 +25,11 @@ int main (int argc, char *argv [])
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
   textdomain (GETTEXT_PACKAGE);
 
-  gnome_program_init ("gnome-settings-daemon", VERSION,
-		      LIBGNOMEUI_MODULE,
-		      argc, argv,
-		      GNOME_CLIENT_PARAM_SM_CONNECT, FALSE,
-		      NULL);
+  program = gnome_program_init ("gnome-settings-daemon", VERSION,
+				LIBGNOMEUI_MODULE,
+				argc, argv,
+				GNOME_CLIENT_PARAM_SM_CONNECT, FALSE,
+				NULL);
   
   gconf_init (argc, argv, NULL); /* exits w/ message on failure */ 
 
@@ -46,6 +47,8 @@ int main (int argc, char *argv [])
   /* cleanup */
   if (conf_client)
 	  g_object_unref (conf_client);
+
+  g_object_unref (program);
 
   return -1;
 }
