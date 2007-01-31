@@ -20,6 +20,7 @@ desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 INCLUDES   = $(DISPLAY_CAPPLET_CFLAGS)     \
              $(GNOMECC_CAPPLETS_CFLAGS) \
 	     -DGLADEDIR=\""$(gladedir)"\" \
+	     -DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
 	     -DPIXMAPDIR=\""$(pixmapdir)"\"
 
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA)

@@ -31,6 +31,6 @@ desktopdir = $(datadir)/applications
 Desktop_in_files = gnome-settings-mouse.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
-INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)
+INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)	-DGNOMELOCALEDIR="\"$(datadir)/locale\""
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA)
 EXTRA_DIST = $(Glade_DATA) $(pixmap_DATA) $(cursorfont_DATA)

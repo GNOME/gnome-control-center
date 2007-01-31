@@ -1,6 +1,7 @@
 
 INCLUDES = $(FONT_METHOD_CFLAGS) $(FONT_THUMBNAILER_CFLAGS) $(FONT_VIEW_CFLAGS) \
-  $(FONT_CONTEXT_MENU_CFLAGS) -DDIRECTORY_DIR=\"$(directorydir)\" 
+  $(FONT_CONTEXT_MENU_CFLAGS) -DDIRECTORY_DIR=\"$(directorydir)\" \
+  -DGNOMELOCALEDIR=\"$(datadir)/locale\"
 
 vfsmoduledir = $(libdir)/gnome-vfs-2.0/modules
 vfsmodule_LTLIBRARIES = libfont-method.la

@@ -2,6 +2,7 @@ WALLPAPER_DATADIR = $(datadir)/gnome-background-properties
 
 INCLUDES = \
 	$(GNOMECC_CAPPLETS_CFLAGS) \
+	-DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
 	-DWALLPAPER_DATADIR=\""$(WALLPAPER_DATADIR)"\"
 
 bin_PROGRAMS = gnome-background-properties

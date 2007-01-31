@@ -28,6 +28,7 @@ glade_DATA = font-properties.glade
 INCLUDES   = $(FONT_CAPPLET_CFLAGS)     \
              $(GNOMECC_CAPPLETS_CFLAGS) \
 	     -DGLADEDIR=\""$(gladedir)"\" \
+	     -DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
 	     -DPIXMAPDIR=\""$(pixmapdir)"\"
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA)
 EXTRA_DIST = $(glade_DATA) $(pixmap_DATA)

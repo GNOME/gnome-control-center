@@ -1,8 +1,8 @@
 WM_MODULE_DIR=$(libdir)/window-manager-settings
 
 INCLUDES = 								\
-        -DGNOMELOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\" 		\
-	-DGNOME_ICONDIR=\""${prefix}/share/pixmaps"\"			\
+	-DGNOMELOCALEDIR="\"$(datadir)/locale\""			\
+	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\"			\
 	-DG_LOG_DOMAIN=\"capplet-common\"				\
 	-DGNOME_WINDOW_MANAGER_MODULE_PATH=\""$(WM_MODULE_DIR)"\" \
 	-I$(top_srcdir)/						\

@@ -1,7 +1,3 @@
-INCLUDES =						\
-	@GNOME_CFLAGS@					\
-	-DIMAGEDIR=\"$(GNOMECC_PIXMAPS_DIR)\"
-
 bin_PROGRAMS = gnome-typing-monitor
 
 gnome_typing_monitor_SOURCES =			\
@@ -16,6 +12,14 @@ gnome_typing_monitor_SOURCES =			\
 	drw-utils.h				\
 	drw-selection.c				\
 	drw-selection.h
+
+gnome_typing_monitor_CPPFLAGS = \
+	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
+	-DIMAGEDIR=\"$(GNOMECC_PIXMAPS_DIR)\"		\
+	$(AM_CPPFLAGS)
+gnome_typing_monitor_CFLAGS = \
+	@GNOME_CFLAGS@	\
+	$(AM_CFLAGS)
 
 gnome_typing_monitor_LDADD = @GNOME_LIBS@ @SCREENSAVER_LIBS@
 gnome_typing_monitor_LDFLAGS = -export-dynamic

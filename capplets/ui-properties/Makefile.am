@@ -13,6 +13,6 @@ desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 Gladedir   = $(GNOMECC_GLADE_DIR)
 Glade_DATA = gnome-ui-properties.glade
 
-INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)
+INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)	-DGNOMELOCALEDIR="\"$(datadir)/locale\""
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA)
 EXTRA_DIST = $(Glade_DATA)

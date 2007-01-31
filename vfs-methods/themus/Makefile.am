@@ -5,7 +5,8 @@ INCLUDES = $(THEME_METHOD_CFLAGS) \
   -I$(top_srcdir)/capplets/common \
   -DGNOMECC_GLADE_DIR=\"$(GNOMECC_GLADE_DIR)\" \
   -DDIRECTORY_DIR=\"$(directorydir)\" \
-  -DDATA_DIR=\"$(datadir)/themus\"
+  -DDATA_DIR=\"$(datadir)/themus\" \
+  -DGNOMELOCALEDIR=\"$(datadir)/locale\"
 
 bin_PROGRAMS = gnome-theme-thumbnailer themus-theme-applier
 

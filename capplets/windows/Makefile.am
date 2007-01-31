@@ -19,6 +19,7 @@ INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)					\
 	     -I$(top_srcdir)/libwindow-settings \
 	     -DGNOME_WINDOW_MANAGER_MODULE_PATH=\""$(libdir)/window-manager-settings"\" \
 	     -DGLADEDIR=\""$(gladedir)"\"  	\
+	     -DGNOMELOCALEDIR="\"$(datadir)/locale\""			\
 	     -DPIXMAPDIR=\""$(pixmapdir)"\"
 
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA)

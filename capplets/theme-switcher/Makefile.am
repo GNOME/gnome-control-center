@@ -1,7 +1,5 @@
 bin_PROGRAMS = gnome-theme-manager
 
-
-
 pixmapdir = $(GNOMECC_PIXMAPS_DIR)
 pixmap_DATA = \
 	theme-thumbnailing.png
@@ -49,7 +47,8 @@ INCLUDES   = 				\
 	-I$(top_srcdir)			\
 	$(METACITY_CFLAGS)		\
 	$(GNOMECC_CAPPLETS_CFLAGS)	\
-	-DGLADEDIR=\""$(gladedir)"\"
+	-DGLADEDIR=\""$(gladedir)"\"	\
+	-DGNOMELOCALEDIR="\"$(datadir)/locale\""
 
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA) $(xml_files)
 EXTRA_DIST = $(glade_DATA) gnome-theme-save-data.c $(pixmap_DATA) $(xml_in_files)

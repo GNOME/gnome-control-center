@@ -24,6 +24,7 @@ glade_DATA = at-enable-dialog.glade
 INCLUDES   = $(AT_CAPPLET_CFLAGS)     \
              $(GNOMECC_CAPPLETS_CFLAGS) \
 	     -DGLADEDIR=\""$(gladedir)"\" \
-	     -DPIXMAPDIR=\""$(pixmapdir)"\"
+	     -DPIXMAPDIR=\""$(pixmapdir)"\" \
+	     -DGNOMELOCALEDIR="\"$(datadir)/locale\""
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA)
 EXTRA_DIST = $(glade_DATA) $(pixmap_DATA)

@@ -3,6 +3,7 @@ SUBDIRS = xrdb actions
 INCLUDES=$(DBUS_CFLAGS) $(LIBGNOMEKBD_CFLAGS) $(GNOME_SETTINGS_DAEMON_CFLAGS) -I$(top_srcdir)/libbackground -I$(top_srcdir) \
   -DDATADIR="\"$(datadir)\""			\
   -DPIXMAPSDIR="\"$(GNOMECC_PIXMAPS_DIR)\""	\
+  -DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
   $(FB_CFLAGS)
 
 libexec_PROGRAMS=gnome-settings-daemon

@@ -24,6 +24,7 @@ INCLUDES   = 					\
 	$(GNOMECC_CAPPLETS_CFLAGS)		\
 	$(DEFAULT_APPLICATIONS_CAPPLET_CFLAGS)	\
 	-DGLADEDIR=\""$(gladedir)"\"		\
+	-DGNOMELOCALEDIR="\"$(datadir)/locale\""\
 	-DDATADIR=\""$(datadir)"\"
 
 noinst_DATA = gnome-default-applications.xml.in
