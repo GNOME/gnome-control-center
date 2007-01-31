@@ -1,5 +1,10 @@
 2007-01-31  Jens Granseuer  <jensgr@gmx.net>
 
+	* gnome-settings-multimedia-keys.c: (acme_filter_events): make sure
+	we have a key event before treating it as such (fixes bug #382503)
+
+2007-01-31  Jens Granseuer  <jensgr@gmx.net>
+
 	* gnome-settings-keyboard-xkb.c:
 	(gnome_settings_keyboard_xkb_init): don't install the same filter
 	twice; we already install it for all windows, so we don't need

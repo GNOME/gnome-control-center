@@ -658,6 +658,11 @@ acme_filter_events (GdkXEvent *xevent, GdkEvent *event, gpointer data)
 	guint keycode, state;
 	int i;
 
+	/* verify we have a key event */
+	if (xev->xany.type != KeyPress &&
+			xev->xany.type != KeyRelease)
+		return GDK_FILTER_CONTINUE;
+
 	keycode = xev->xkey.keycode;
 	state = xev->xkey.state;
 
