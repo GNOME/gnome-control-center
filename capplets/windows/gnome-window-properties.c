@@ -416,6 +416,7 @@ try_spawn_config_tool (GdkScreen *screen)
 int
 main (int argc, char **argv)
 {
+	GnomeProgram *program;
         GdkScreen *screen;
 	GnomeWMSettings new_settings;
         int i;
@@ -424,9 +425,9 @@ main (int argc, char **argv)
 	bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
         textdomain (GETTEXT_PACKAGE);
 
-  	gnome_program_init ("gnome-window-properties", VERSION,
-			    LIBGNOMEUI_MODULE, argc, argv,
-			    NULL);
+  	program = gnome_program_init ("gnome-window-properties", VERSION,
+				      LIBGNOMEUI_MODULE, argc, argv,
+				      NULL);
 
         gnome_wm_manager_init ();
 
@@ -518,6 +519,8 @@ main (int argc, char **argv)
         
         gtk_main ();
 
+	g_object_unref (dialog);
+	g_object_unref (program);
         return 0;
 }
 
