@@ -113,7 +113,7 @@ gnome-settings-client.h:  gsd-infos.xml
 	dbus-binding-tool --prefix=settings_daemon --mode=glib-client $< > $@
 
 # DBUS stuff
-servicedir = $(DBUS_SERVICES_DIR)
+servicedir = $(datadir)/dbus-1/services
 service_in_files = org.gnome.SettingsDaemon.service.in
 service_DATA = $(service_in_files:.service.in=.service)
 
