@@ -11,7 +11,6 @@
 #include <glade/glade.h>
 #include <X11/Xatom.h>
 
-#include "gnome-theme-info.h"
 #include "wm-common.h"
 #include "capplet-util.h"
 #include "eggcellrendererkeys.h"
@@ -963,8 +962,6 @@ main (int argc, char *argv[])
 		      LIBGNOMEUI_MODULE, argc, argv,
 		      GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
 		      NULL);
-
-  gnome_theme_init (NULL);
 
   activate_settings_daemon ();
 
