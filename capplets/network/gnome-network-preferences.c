@@ -157,6 +157,7 @@ cb_remove_url (GtkButton *button, gpointer data)
 		{
 			if(strcmp(url, (char *) pointer->data) == 0)
 			{
+				g_free (pointer->data);
 				ignore_hosts = g_slist_delete_link(ignore_hosts, pointer);
 				break;
 			}
@@ -181,8 +182,10 @@ cb_dialog_response (GtkDialog *dialog, gint response_id)
 			"goscustdesk-50");
 	else
 	{
-		if(ignore_hosts)
-			g_slist_free(ignore_hosts);
+		if (ignore_hosts) {
+			g_slist_foreach (ignore_hosts, (GFunc) g_free, NULL);
+			g_slist_free (ignore_hosts);
+		}
 
 		gtk_main_quit ();
 	}
@@ -262,6 +265,7 @@ cb_use_same_proxy_checkbutton_clicked (GtkWidget *checkbutton,
 	gboolean same_proxy;
 	gchar *http_proxy;
 	gint http_port;
+	gchar *host;
 	
 	client = gconf_client_get_default ();
 	same_proxy = gconf_client_get_bool (client, USE_SAME_PROXY_KEY, NULL);
@@ -272,20 +276,23 @@ cb_use_same_proxy_checkbutton_clicked (GtkWidget *checkbutton,
 	if (same_proxy) 
 	{
 		/* Save the old values */
-		gconf_client_set_string (client, OLD_SECURE_PROXY_HOST_KEY, 
-			gconf_client_get_string (client, SECURE_PROXY_HOST_KEY, NULL), NULL);
+		host = gconf_client_get_string (client, SECURE_PROXY_HOST_KEY, NULL);
+		gconf_client_set_string (client, OLD_SECURE_PROXY_HOST_KEY, host, NULL);
 		gconf_client_set_int (client, OLD_SECURE_PROXY_PORT_KEY, 
 			gconf_client_get_int (client, SECURE_PROXY_PORT_KEY, NULL), NULL);
+		g_free (host);
 			
-		gconf_client_set_string (client, OLD_FTP_PROXY_HOST_KEY, 
-			gconf_client_get_string (client, FTP_PROXY_HOST_KEY, NULL), NULL);
+		host = gconf_client_get_string (client, FTP_PROXY_HOST_KEY, NULL);
+		gconf_client_set_string (client, OLD_FTP_PROXY_HOST_KEY, host, NULL);
 		gconf_client_set_int (client, OLD_FTP_PROXY_PORT_KEY, 
 			gconf_client_get_int (client, FTP_PROXY_PORT_KEY, NULL), NULL);
+		g_free (host);
 
-		gconf_client_set_string (client, OLD_SOCKS_PROXY_HOST_KEY, 
-			gconf_client_get_string (client, SOCKS_PROXY_HOST_KEY, NULL), NULL);
+		host = gconf_client_get_string (client, SOCKS_PROXY_HOST_KEY, NULL);
+		gconf_client_set_string (client, OLD_SOCKS_PROXY_HOST_KEY, host, NULL);
 		gconf_client_set_int (client, OLD_SOCKS_PROXY_PORT_KEY, 
 			gconf_client_get_int (client, SOCKS_PROXY_PORT_KEY, NULL), NULL);
+		g_free (host);
 
 		/* Set the new values */
 		gconf_client_set_string (client, SECURE_PROXY_HOST_KEY, http_proxy, NULL);
@@ -299,21 +306,23 @@ cb_use_same_proxy_checkbutton_clicked (GtkWidget *checkbutton,
 	}
 	else
 	{
-
-		gconf_client_set_string (client, SECURE_PROXY_HOST_KEY, 
-			gconf_client_get_string (client, OLD_SECURE_PROXY_HOST_KEY, NULL), NULL);
+		host = gconf_client_get_string (client, OLD_SECURE_PROXY_HOST_KEY, NULL);
+		gconf_client_set_string (client, SECURE_PROXY_HOST_KEY, host, NULL);
 		gconf_client_set_int (client, SECURE_PROXY_PORT_KEY, 
 			gconf_client_get_int (client, OLD_SECURE_PROXY_PORT_KEY, NULL), NULL);
+		g_free (host);
 			
-		gconf_client_set_string (client, FTP_PROXY_HOST_KEY, 
-			gconf_client_get_string (client, OLD_FTP_PROXY_HOST_KEY, NULL), NULL);
+		host = gconf_client_get_string (client, OLD_FTP_PROXY_HOST_KEY, NULL);
+		gconf_client_set_string (client, FTP_PROXY_HOST_KEY, host, NULL);
 		gconf_client_set_int (client, FTP_PROXY_PORT_KEY, 
 			gconf_client_get_int (client, OLD_FTP_PROXY_PORT_KEY, NULL), NULL);
+		g_free (host);
 
-		gconf_client_set_string (client, SOCKS_PROXY_HOST_KEY, 
-			gconf_client_get_string (client, OLD_SOCKS_PROXY_HOST_KEY, NULL), NULL);
+		host = gconf_client_get_string (client, OLD_SOCKS_PROXY_HOST_KEY, NULL);
+		gconf_client_set_string (client, SOCKS_PROXY_HOST_KEY, host, NULL);
 		gconf_client_set_int (client, SOCKS_PROXY_PORT_KEY, 
 			gconf_client_get_int (client, OLD_SOCKS_PROXY_PORT_KEY, NULL), NULL);
+		g_free (host);
 	}
 	
 	/* Set the proxy entries insensitive if we are using the same proxy for all */
@@ -515,6 +524,7 @@ setup_dialog (GladeXML *dialog)
 int
 main (int argc, char **argv) 
 {
+	GnomeProgram *program;
 	GladeXML    *dialog;
 	GConfClient *client;
 	GtkWidget   *widget;
@@ -523,9 +533,9 @@ main (int argc, char **argv)
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 
-	gnome_program_init ("gnome-network-preferences", VERSION,
-			    LIBGNOMEUI_MODULE,
-			    argc, argv, GNOME_PARAM_NONE);
+	program = gnome_program_init ("gnome-network-preferences",
+				      VERSION, LIBGNOMEUI_MODULE,
+				      argc, argv, GNOME_PARAM_NONE);
 
 	client = gconf_client_get_default ();
 	gconf_client_add_dir (client, "/system/gnome-vfs",
@@ -544,7 +554,9 @@ main (int argc, char **argv)
 	gtk_widget_show_all (widget);
 	gtk_main ();
 
+	g_object_unref (dialog);
 	g_object_unref (client);
+	g_object_unref (program);
 
 	return 0;
 }
