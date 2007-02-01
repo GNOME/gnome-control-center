@@ -1,3 +1,10 @@
+2007-02-02  Jens Granseuer  <jensgr@gmx.net>
+
+	* actions/acme-volume-gstreamer.c:
+	(acme_volume_gstreamer_set_mute): round volume instead of
+	truncating on unmute so a simple mute/unmute doesn't lower the
+	volume (fixes bug #400966)
+
 2007-01-31  Jens Granseuer  <jensgr@gmx.net>
 
 	* factory.c: (main): don't leak the GnomeProgram reference

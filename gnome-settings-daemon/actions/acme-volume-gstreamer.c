@@ -116,7 +116,7 @@ acme_volume_gstreamer_set_mute (AcmeVolume *vol, gboolean val)
 			GstMixerTrack *track = GST_MIXER_TRACK (t->data);
 			gint *volumes, n;
 			gdouble scale = (track->max_volume - track->min_volume) / 100.0;
-			gint vol = (gint) self->_priv->volume * scale + track->min_volume;
+			gint vol = (gint) self->_priv->volume * scale + track->min_volume + 0.5;
 
 			volumes = g_new0 (gint, track->num_channels);
 			for (n = 0; n < track->num_channels; n++)
