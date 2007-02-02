@@ -2,7 +2,7 @@
 
 /* gnome-settings-xrdb.c
  *
- * Copyright © 2003 Ross Burton
+ * Copyright Â© 2003 Ross Burton
  *
  * Written by Ross Burton <ross@burtonini.com>
  *
@@ -32,7 +32,7 @@
 #include "gnome-settings-daemon.h"
 #include "gnome-settings-xrdb.h"
 
-#define SYSTEM_AD_DIR DATADIR "/control-center-2.0/xrdb"
+#define SYSTEM_AD_DIR GNOMECC_DATA_DIR "/xrdb"
 #define GENERAL_AD SYSTEM_AD_DIR "/General.ad"
 #define USER_AD_DIR ".gnome2/xrdb"
 #define USER_X_RESOURCES ".Xresources"

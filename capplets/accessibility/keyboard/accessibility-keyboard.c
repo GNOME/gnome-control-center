@@ -456,8 +456,7 @@ setup_accessX_dialog (GConfChangeSet *changeset)
 {
 	GConfClient *client;
 	char const  *toplevel_name = "accessX_dialog";
-	GladeXML    *dialog = glade_xml_new (GNOMECC_DATA_DIR
-		"/interfaces/gnome-accessibility-keyboard-properties.glade",
+	GladeXML    *dialog = glade_xml_new (GNOMECC_GLADE_DIR "/gnome-accessibility-keyboard-properties.glade",
 		toplevel_name, NULL);
 	GtkWidget *toplevel = WID (toplevel_name);
 

@@ -162,7 +162,7 @@ create_dialog (void)
 	GladeXML *dialog;
 	GtkWidget *widget, *box, *view;
 
-	dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/sound-properties.glade", "sound_prefs_dialog", NULL);
+	dialog = glade_xml_new (GNOMECC_GLADE_DIR "/sound-properties.glade", "sound_prefs_dialog", NULL);
 	widget = glade_xml_get_widget (dialog, "sound_prefs_dialog");
 
 	props = sound_properties_new ();
@@ -502,7 +502,7 @@ device_test_button_clicked (GtkWidget *button, gpointer user_data)
 {
 	DeviceChooser *device_chooser = (DeviceChooser *) user_data;
 	
-	GladeXML *dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/sound-properties.glade", NULL, NULL);
+	GladeXML *dialog = glade_xml_new (GNOMECC_GLADE_DIR "/sound-properties.glade", NULL, NULL);
 
 	user_test_pipeline (dialog, GTK_WINDOW (dialog_win), device_chooser->test_pipeline);
 	

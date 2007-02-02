@@ -982,7 +982,7 @@ create_dialog (void)
 	/* register the custom type */
 	(void) mouse_capplet_check_button_get_type ();
 
-	dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/gnome-mouse-properties.glade", "mouse_properties_dialog", NULL);
+	dialog = glade_xml_new (GNOMECC_GLADE_DIR "/gnome-mouse-properties.glade", "mouse_properties_dialog", NULL);
 
 	text = g_strdup_printf ("<b>%s</b>", _("Pointer Theme"));
 	gtk_label_set_markup (GTK_LABEL (WID ("cursor_category_label")), text);

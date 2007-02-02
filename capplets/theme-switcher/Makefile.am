@@ -1,6 +1,6 @@
 bin_PROGRAMS = gnome-theme-manager
 
-pixmapdir = $(GNOMECC_PIXMAPS_DIR)
+pixmapdir = $(pkgdatadir)/pixmaps
 pixmap_DATA = \
 	theme-thumbnailing.png
 
@@ -40,7 +40,7 @@ Desktop_in_files = gtk-theme-selector.desktop.in \
 									 gnome-theme-installer.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
-gladedir = $(GNOMECC_GLADE_DIR)
+gladedir = $(pkgdatadir)/glade
 glade_DATA = theme-properties.glade
 
 INCLUDES   = 				\
@@ -48,7 +48,8 @@ INCLUDES   = 				\
 	$(METACITY_CFLAGS)		\
 	$(GNOMECC_CAPPLETS_CFLAGS)	\
 	-DGLADEDIR=\""$(gladedir)"\"	\
-	-DGNOMELOCALEDIR="\"$(datadir)/locale\""
+	-DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
+	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""
 
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA) $(xml_files)
 EXTRA_DIST = $(glade_DATA) gnome-theme-save-data.c $(pixmap_DATA) $(xml_in_files)

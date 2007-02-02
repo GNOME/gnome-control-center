@@ -657,8 +657,8 @@ void
 xkb_layout_choose (GladeXML * dialog)
 {
 	GladeXML *chooser_dialog =
-	    glade_xml_new (GNOMECC_DATA_DIR
-			   "/interfaces/gnome-keyboard-properties.glade",
+	    glade_xml_new (GNOMECC_GLADE_DIR
+			   "/gnome-keyboard-properties.glade",
 			   "xkb_layout_chooser", NULL);
 	GtkWidget *chooser = CWID ("xkb_layout_chooser");
 	GtkWidget *kbdraw = NULL;

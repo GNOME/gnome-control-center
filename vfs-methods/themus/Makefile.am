@@ -3,7 +3,7 @@ INCLUDES = $(THEME_METHOD_CFLAGS) \
   $(THEMUS_COMPONENT_CFLAGS) \
   $(THEMUS_APPLIER_CFLAGS) \
   -I$(top_srcdir)/capplets/common \
-  -DGNOMECC_GLADE_DIR=\"$(GNOMECC_GLADE_DIR)\" \
+  -DGNOMECC_GLADE_DIR=\"$(pkgdatadir)/glade\" \
   -DDIRECTORY_DIR=\"$(directorydir)\" \
   -DDATA_DIR=\"$(datadir)/themus\" \
   -DGNOMELOCALEDIR=\"$(datadir)/locale\"
@@ -41,7 +41,7 @@ libnautilus_themus_la_SOURCES = \
 	themus-properties-view.h \
 	themus-properties-main.c
 
-Gladedir   = $(GNOMECC_GLADE_DIR)
+Gladedir   = $(pkgdatadir)/glade
 Glade_DATA = apply-font.glade
 
 @INTLTOOL_DIRECTORY_RULE@

@@ -197,7 +197,7 @@ create_dialog (void)
 	GtkTreeViewColumn *column;
 	GtkTreeSelection  *selection;
 
-	dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/file-types-properties.glade", "main_dialog", NULL);
+	dialog = glade_xml_new (GNOMECC_GLADE_DIR "/file-types-properties.glade", "main_dialog", NULL);
 
 	model = GTK_TREE_MODEL (mime_types_model_new (FALSE));
 	treeview = WID ("mime_types_tree");

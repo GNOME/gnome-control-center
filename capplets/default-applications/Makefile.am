@@ -8,7 +8,7 @@ gnome_default_applications_properties_SOURCES = \
 
 @INTLTOOL_DESKTOP_RULE@
 
-gladedir   = $(GNOMECC_GLADE_DIR)
+gladedir   = $(pkgdatadir)/glade
 glade_DATA = gnome-default-applications-properties.glade
 
 desktopdir = $(datadir)/applications
@@ -16,7 +16,7 @@ Desktop_in_files = default-applications.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
 xmldata_in_files = gnome-default-applications.xml.in
-xmldatadir = $(datadir)/gnome-default-applications
+xmldatadir = $(pkgdatadir)/gnome-default-applications
 xmldata_DATA = $(xmldata_in_files:.xml.in=.xml)
 @INTLTOOL_XML_RULE@
 

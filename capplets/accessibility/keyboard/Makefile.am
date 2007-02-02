@@ -15,7 +15,7 @@ gnome_accessibility_keyboard_properties_LDADD = \
 
 @INTLTOOL_DESKTOP_RULE@
 
-pixmapdir  = $(GNOMECC_PIXMAPS_DIR)
+pixmapdir  = $(pkgdatadir)/pixmaps
 pixmap_DATA = \
 	accessibility-keyboard-togglekey.png \
 	accessibility-keyboard-mousekey.png \
@@ -23,14 +23,20 @@ pixmap_DATA = \
 	accessibility-keyboard-stickykey.png \
 	accessibility-keyboard-bouncekey.png
 
-Gladedir   = $(GNOMECC_GLADE_DIR)
+Gladedir   = $(pkgdatadir)/glade
 Glade_DATA = gnome-accessibility-keyboard-properties.glade
 
 desktopdir = $(datadir)/applications
 Desktop_in_files = accessibility-keyboard.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
-INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)	-DGNOMELOCALEDIR="\"$(datadir)/locale\""
+INCLUDES = \
+	$(GNOMECC_CAPPLETS_CFLAGS)			\
+	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
+	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
+	-DGNOMECC_GLADE_DIR="\"$(pkgdatadir)/glade\""	\
+	-DGNOMECC_PIXMAPS_DIR="\"$(pkgdatadir)/pixmaps\""
+
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA)
 EXTRA_DIST = $(Glade_DATA) $(pixmap_DATA)
 

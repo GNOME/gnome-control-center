@@ -730,7 +730,7 @@ about_me_setup_dialog (void)
 
 	me = g_new0 (GnomeAboutMe, 1);
 
-	dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/gnome-about-me.glade", 
+	dialog = glade_xml_new (GNOMECC_GLADE_DIR "/gnome-about-me.glade",
 				"about-me-dialog", NULL);
 
 	if (dialog == NULL) {

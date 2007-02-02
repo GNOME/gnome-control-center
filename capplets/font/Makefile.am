@@ -11,7 +11,7 @@ gnome_font_properties_LDFLAGS = -export-dynamic
 
 @INTLTOOL_DESKTOP_RULE@
 
-pixmapdir  = $(GNOMECC_PIXMAPS_DIR)
+pixmapdir  = $(pkgdatadir)/pixmaps
 pixmap_DATA =					\
 	subpixel-rgb.png			\
 	subpixel-bgr.png			\
@@ -22,13 +22,14 @@ desktopdir = $(datadir)/applications
 Desktop_in_files = font-properties.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
-gladedir = $(GNOMECC_GLADE_DIR)
+gladedir = $(pkgdatadir)/glade
 glade_DATA = font-properties.glade
 
 INCLUDES   = $(FONT_CAPPLET_CFLAGS)     \
              $(GNOMECC_CAPPLETS_CFLAGS) \
 	     -DGLADEDIR=\""$(gladedir)"\" \
 	     -DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
-	     -DPIXMAPDIR=\""$(pixmapdir)"\"
+	     -DPIXMAPDIR=\""$(pixmapdir)"\" \
+	     -DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA)
 EXTRA_DIST = $(glade_DATA) $(pixmap_DATA)

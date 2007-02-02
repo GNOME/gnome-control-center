@@ -89,7 +89,7 @@ create_dialog (void)
 {
   GladeXML *dialog;
 
-  dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/gnome-ui-properties.glade", "gnome_ui_properties_dialog", NULL);
+  dialog = glade_xml_new (GNOMECC_GLADE_DIR "/gnome-ui-properties.glade", "gnome_ui_properties_dialog", NULL);
   return dialog;
 }
 

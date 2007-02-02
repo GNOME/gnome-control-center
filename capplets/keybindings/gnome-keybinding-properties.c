@@ -169,7 +169,7 @@ create_dialog (void)
 {
   GladeXML *dialog;
 
-  dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/gnome-keybinding-properties.glade", "gnome-keybinding-dialog", NULL);
+  dialog = glade_xml_new (GNOMECC_GLADE_DIR "/gnome-keybinding-properties.glade", "gnome-keybinding-dialog", NULL);
 
   return dialog;
 }

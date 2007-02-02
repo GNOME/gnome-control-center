@@ -3,6 +3,7 @@ WALLPAPER_DATADIR = $(datadir)/gnome-background-properties
 INCLUDES = \
 	$(GNOMECC_CAPPLETS_CFLAGS) \
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
+	-DGNOMECC_GLADE_DIR="\"$(pkgdatadir)/glade\"" \
 	-DWALLPAPER_DATADIR=\""$(WALLPAPER_DATADIR)"\"
 
 bin_PROGRAMS = gnome-background-properties
@@ -31,7 +32,7 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
 @INTLTOOL_DESKTOP_RULE@
 
-gladedir = $(GNOMECC_GLADE_DIR)
+gladedir = $(pkgdatadir)/glade
 glade_DATA = gnome-background-properties.glade
 
 install-data-local:

@@ -9,10 +9,10 @@ gnome_localization_properties_LDADD =	\
 
 @INTLTOOL_DESKTOP_RULE@
 
-gladedir   = $(GNOMECC_GLADE_DIR)
+gladedir   = $(pkgdatadir)/glade
 glade_DATA = gnome-localization-properties.glade
 
-pixmapsdir   = $(GNOMECC_PIXMAPS_DIR)
+pixmapsdir   = $(pkgdatadir)/pixmaps
 pixmaps_DATA = \
 	localization-capplet.png
 

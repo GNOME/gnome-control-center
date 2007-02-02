@@ -16,7 +16,7 @@ gnome_file_types_properties_SOURCES =					\
 
 @INTLTOOL_DESKTOP_RULE@
 
-Gladedir   = $(GNOMECC_GLADE_DIR)
+Gladedir   = $(pkgdatadir)/glade
 Glade_DATA = file-types-properties.glade
 
 desktopdir = $(datadir)/applications

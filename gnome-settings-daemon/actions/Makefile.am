@@ -25,10 +25,10 @@ endif # HAVE_OSS
 endif # HAVE_ALSA
 endif # HAVE_GSTREAMER
 
-Datadir = $(datadir)/control-center-2.0/interfaces/
+Datadir = $(pkgdatadir)/glade
 Data_DATA = acme.glade
 
-pixmapsdir = $(GNOMECC_PIXMAPS_DIR)
+pixmapsdir = $(pkgdatadir)/pixmaps
 pixmaps_DATA = acme-eject.png
 
 EXTRA_DIST =					\

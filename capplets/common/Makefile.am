@@ -1,8 +1,10 @@
 EXTRA_DIST = ChangeLog wrapper-script.in Bonobo_Control_Capplet_generic.oaf.in
 
 INCLUDES = \
+	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""				\
+	-DGNOMECC_ICONS_DIR="\"$(pkgdatadir)/icons\""			\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""			\
-	-DGNOME_ICONDIR=\""${prefix}/share/pixmaps"\"			\
+	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\"			\
 	-DG_LOG_DOMAIN=\"capplet-common\"				\
 	-DINSTALL_PREFIX=\"$(prefix)\"					\
 	-I$(top_srcdir)							\

@@ -382,7 +382,7 @@ capplet_set_icon (GtkWidget *window, char const *icon_file_name)
 
 	if (icon_pixbuf == NULL) {
 		/* Then we fallback to the control center icon location */
-		path = g_strconcat (GNOMECC_DATA_DIR "/icons/", icon_file_name, NULL);
+		path = g_build_filename (GNOMECC_ICONS_DIR, icon_file_name, NULL);
 
 		icon_pixbuf = gdk_pixbuf_new_from_file (path, NULL);
 		g_free (path);

@@ -984,7 +984,7 @@ passdlg_init (PasswordDialog *pdialog, GtkWindow *parent)
 	GtkAccelGroup	*group;
 	
 	/* Initialize dialog */
-	dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/gnome-about-me.glade", "change-password", NULL);
+	dialog = glade_xml_new (GNOMECC_GLADE_DIR "/gnome-about-me.glade", "change-password", NULL);
 	pdialog->xml = dialog;
 	
 	wpassdlg = WID ("change-password");

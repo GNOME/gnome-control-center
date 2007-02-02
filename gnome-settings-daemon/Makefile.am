@@ -1,10 +1,17 @@
 SUBDIRS = xrdb actions
 
-INCLUDES=$(DBUS_CFLAGS) $(LIBGNOMEKBD_CFLAGS) $(GNOME_SETTINGS_DAEMON_CFLAGS) -I$(top_srcdir)/libbackground -I$(top_srcdir) \
-  -DDATADIR="\"$(datadir)\""			\
-  -DPIXMAPSDIR="\"$(GNOMECC_PIXMAPS_DIR)\""	\
-  -DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
-  $(FB_CFLAGS)
+INCLUDES= \
+	$(DBUS_CFLAGS)					\
+	$(LIBGNOMEKBD_CFLAGS)				\
+	$(GNOME_SETTINGS_DAEMON_CFLAGS)			\
+	$(FB_CFLAGS)					\
+	-I$(top_srcdir)/libbackground			\
+	-I$(top_srcdir)					\
+	-DDATADIR="\"$(datadir)\""			\
+	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
+	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
+	-DGNOMECC_GLADE_DIR="\"$(pkgdatadir)/glade\""	\
+	-DGNOMECC_PIXMAPS_DIR="\"$(pkgdatadir)/pixmaps\""
 
 libexec_PROGRAMS=gnome-settings-daemon
 
@@ -92,7 +99,7 @@ BUILT_SOURCES=gnome-settings-server.h		\
 
 gnome_settings_daemon_SOURCES+=$(BUILT_SOURCES)
 
-Gladedir   = $(GNOMECC_GLADE_DIR)
+Gladedir   = $(pkgdatadir)/glade
 Glade_DATA = modmap-dialog.glade
 
 Dbusapidir   = $(includedir)/gnome-settings-daemon-2.0/gnome-settings-daemon

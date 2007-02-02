@@ -263,7 +263,7 @@ gnome_settings_modmap_dialog_call (void)
 	homeDir = g_dir_open (g_get_home_dir (), 0, NULL);
 	if (homeDir == NULL)
 		return;
-	xml = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/modmap-dialog.glade", "dialog1", NULL);
+	xml = glade_xml_new (GNOMECC_GLADE_DIR "/modmap-dialog.glade", "dialog1", NULL);
 
 	if (! xml) {
 		g_warning ("Could not find  GLADE_FILE \n");

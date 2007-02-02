@@ -13,18 +13,19 @@ desktopdir = $(datadir)/applications
 Desktop_in_files = at-properties.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
-pixmapdir  = $(GNOMECC_PIXMAPS_DIR)
+pixmapdir  = $(pkgdatadir)/pixmaps
 pixmap_DATA =					\
 	at-startup.png				\
 	at-support.png
 
-gladedir = $(GNOMECC_GLADE_DIR)
+gladedir = $(pkgdatadir)/glade
 glade_DATA = at-enable-dialog.glade
 
 INCLUDES   = $(AT_CAPPLET_CFLAGS)     \
              $(GNOMECC_CAPPLETS_CFLAGS) \
 	     -DGLADEDIR=\""$(gladedir)"\" \
 	     -DPIXMAPDIR=\""$(pixmapdir)"\" \
+	     -DGNOMECC_DATA_DIR="\"$(pkgdatadir)\"" \
 	     -DGNOMELOCALEDIR="\"$(datadir)/locale\""
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA)
 EXTRA_DIST = $(glade_DATA) $(pixmap_DATA)

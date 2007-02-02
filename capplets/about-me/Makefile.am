@@ -1,6 +1,6 @@
 bin_PROGRAMS = gnome-about-me
 
-pixmapdir = $(GNOMECC_PIXMAPS_DIR)
+pixmapdir = $(pkgdatadir)/pixmaps
 pixmap_DATA = 				\
 	gnome-about-me-lock.png		\
 	gnome-about-me-lock-open.png
@@ -23,7 +23,7 @@ desktopdir = $(datadir)/applications
 Desktop_in_files = gnome-about-me.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
-Gladedir   = $(GNOMECC_GLADE_DIR)
+Gladedir   = $(pkgdatadir)/glade
 Glade_DATA = gnome-about-me.glade
 
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS) $(LIBEBOOK_CFLAGS)

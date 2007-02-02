@@ -797,8 +797,7 @@ static GladeXML * gnome_wp_create_dialog (void) {
   GladeXML * new;
   gchar * gladefile;
 
-  gladefile = g_build_filename (GNOMECC_DATA_DIR,
-				"interfaces",
+  gladefile = g_build_filename (GNOMECC_GLADE_DIR,
 				"gnome-background-properties.glade",
 				NULL);
 

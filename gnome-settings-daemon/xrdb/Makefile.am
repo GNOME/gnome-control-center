@@ -1,4 +1,4 @@
-xrdbdir = $(datadir)/control-center-2.0/xrdb
+xrdbdir = $(pkgdatadir)/xrdb
 xrdb_DATA = \
 	General.ad \
 	Editres.ad \

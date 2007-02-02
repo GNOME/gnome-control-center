@@ -9,16 +9,22 @@ gnome_sound_properties_SOURCES = sound-properties-capplet.c pipeline-tests.h pip
 
 @INTLTOOL_DESKTOP_RULE@
 
-Gladedir   = $(GNOMECC_GLADE_DIR)
+Gladedir   = $(pkgdatadir)/glade
 Glade_DATA = sound-properties.glade
 
-desktop_iconsdir = $(GNOMECC_PIXMAPS_DIR)
+desktop_iconsdir = $(pkgdatadir)/pixmaps
 desktop_icons_DATA = visual-bell.png
 
 desktopdir = $(datadir)/applications
 Desktop_in_files = gnome-settings-sound.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
-INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS) $(SOUND_CAPPLET_CFLAGS) $(HAL_CFLAGS) -DGNOMELOCALEDIR="\"$(datadir)/locale\""
+INCLUDES = \
+	$(GNOMECC_CAPPLETS_CFLAGS) \
+	$(SOUND_CAPPLET_CFLAGS) \
+	$(HAL_CFLAGS) \
+	-DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
+	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\"" \
+	-DGNOMECC_GLADE_DIR="\"$(pkgdatadir)/glade\""
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA)
 EXTRA_DIST = $(Glade_DATA) $(desktop_icons_DATA)

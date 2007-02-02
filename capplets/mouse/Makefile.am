@@ -5,7 +5,7 @@ gnome_mouse_properties_SOURCES = gnome-mouse-properties.c
 
 @INTLTOOL_DESKTOP_RULE@
 
-pixmapdir  = $(GNOMECC_PIXMAPS_DIR)
+pixmapdir  = $(pkgdatadir)/pixmaps
 pixmap_DATA = \
 	double-click-on.png		\
 	double-click-off.png		\
@@ -24,13 +24,17 @@ cursorfont_DATA = \
 	cursor-white.pcf		\
 	cursor-large-white.pcf
 
-Gladedir   = $(GNOMECC_GLADE_DIR)
+Gladedir   = $(pkgdatadir)/glade
 Glade_DATA = gnome-mouse-properties.glade
 
 desktopdir = $(datadir)/applications
 Desktop_in_files = gnome-settings-mouse.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
-INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)	-DGNOMELOCALEDIR="\"$(datadir)/locale\""
+INCLUDES = \
+	$(GNOMECC_CAPPLETS_CFLAGS) \
+	-DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
+	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\"" \
+	-DGNOMECC_GLADE_DIR="\"$(pkgdatadir)/glade\""
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA)
 EXTRA_DIST = $(Glade_DATA) $(pixmap_DATA) $(cursorfont_DATA)

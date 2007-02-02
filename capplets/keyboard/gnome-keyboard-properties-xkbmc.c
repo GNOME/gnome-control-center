@@ -161,8 +161,8 @@ void
 choose_model (GladeXML * dialog)
 {
 	GladeXML *chooser_dialog =
-	    glade_xml_new (GNOMECC_DATA_DIR
-			   "/interfaces/gnome-keyboard-properties.glade",
+	    glade_xml_new (GNOMECC_GLADE_DIR
+			   "/gnome-keyboard-properties.glade",
 			   "xkb_model_chooser", NULL);
 	GtkWidget *chooser = CWID ("xkb_model_chooser");
 	gtk_window_set_transient_for (GTK_WINDOW (chooser),

@@ -15,7 +15,7 @@ gnome_typing_monitor_SOURCES =			\
 
 gnome_typing_monitor_CPPFLAGS = \
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
-	-DIMAGEDIR=\"$(GNOMECC_PIXMAPS_DIR)\"		\
+	-DIMAGEDIR=\"$(pkgdatadir)/pixmaps\"		\
 	$(AM_CPPFLAGS)
 gnome_typing_monitor_CFLAGS = \
 	@GNOME_CFLAGS@	\
@@ -24,7 +24,7 @@ gnome_typing_monitor_CFLAGS = \
 gnome_typing_monitor_LDADD = @GNOME_LIBS@ @SCREENSAVER_LIBS@
 gnome_typing_monitor_LDFLAGS = -export-dynamic
 
-imagedir = $(GNOMECC_PIXMAPS_DIR)
+imagedir = $(pkgdatadir)/pixmaps
 image_DATA = stop.png bar.png bar-red.png bar-green.png bar-disabled.png ocean-stripes.png
 
 # Themeable application icon

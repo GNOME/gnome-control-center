@@ -123,7 +123,7 @@ mime_category_edit_dialog_init (MimeCategoryEditDialog *dialog, MimeCategoryEdit
 
 	dialog->p = g_new0 (MimeCategoryEditDialogPrivate, 1);
 	dialog->p->dialog_xml = glade_xml_new
-		(GNOMECC_DATA_DIR "/interfaces/file-types-properties.glade", "mime_category_edit_widget", NULL);
+		(GNOMECC_GLADE_DIR "/file-types-properties.glade", "mime_category_edit_widget", NULL);
 
 	dialog->p->model = NULL;
 	dialog->p->info = NULL;

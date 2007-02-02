@@ -1,3 +1,69 @@
+2007-02-02  Christian Persch  <chpe@svn.gnome.org>
+
+	* Makefile.am:
+	* capplets/about-me/Makefile.am:
+	* capplets/about-me/gnome-about-me-password.c: (passdlg_init):
+	* capplets/about-me/gnome-about-me.c: (about_me_setup_dialog):
+	* capplets/accessibility/at-properties/Makefile.am:
+	* capplets/accessibility/keyboard/Makefile.am:
+	* capplets/accessibility/keyboard/accessibility-keyboard.c:
+	(setup_accessX_dialog):
+	* capplets/background/Makefile.am:
+	* capplets/background/gnome-wp-capplet.c: (gnome_wp_create_dialog):
+	* capplets/common/Makefile.am:
+	* capplets/common/capplet-util.c: (capplet_set_icon):
+	* capplets/default-applications/Makefile.am:
+	* capplets/display/Makefile.am:
+	* capplets/file-types/Makefile.am:
+	* capplets/file-types/file-types-capplet.c: (create_dialog):
+	* capplets/file-types/mime-category-edit-dialog.c:
+	(mime_category_edit_dialog_init):
+	* capplets/file-types/mime-edit-dialog.c: (mime_edit_dialog_init):
+	* capplets/file-types/service-edit-dialog.c:
+	(service_edit_dialog_init):
+	* capplets/font/Makefile.am:
+	* capplets/keybindings/Makefile.am:
+	* capplets/keybindings/gnome-keybinding-properties.c:
+	(create_dialog):
+	* capplets/keyboard/Makefile.am:
+	* capplets/keyboard/gnome-keyboard-properties-xkblt.c:
+	(xkb_layout_choose):
+	* capplets/keyboard/gnome-keyboard-properties-xkbmc.c:
+	(choose_model):
+	* capplets/keyboard/gnome-keyboard-properties.c: (create_dialog):
+	* capplets/localization/Makefile.am:
+	* capplets/localization/gnome-localization-properties.c:
+	(create_dialog):
+	* capplets/mime-type/Makefile.am:
+	* capplets/mouse/Makefile.am:
+	* capplets/mouse/gnome-mouse-properties.c: (create_dialog):
+	* capplets/network/Makefile.am:
+	* capplets/network/gnome-network-preferences.c:
+	(cb_http_details_button_clicked), (main):
+	* capplets/rollback/Makefile.am:
+	* capplets/sound/Makefile.am:
+	* capplets/sound/sound-properties-capplet.c: (create_dialog),
+	(device_test_button_clicked):
+	* capplets/theme-switcher/Makefile.am:
+	* capplets/ui-properties/Makefile.am:
+	* capplets/ui-properties/gnome-ui-properties.c: (create_dialog):
+	* capplets/url-properties/Makefile.am:
+	* capplets/windows/Makefile.am:
+	* capplets/wm-properties/wm-desktops/Makefile.am:
+	* configure.in:
+	* gnome-settings-daemon/Makefile.am:
+	* gnome-settings-daemon/actions/Makefile.am:
+	* gnome-settings-daemon/gnome-settings-xmodmap.c:
+	(gnome_settings_modmap_dialog_call):
+	* gnome-settings-daemon/gnome-settings-xrdb.c:
+	* gnome-settings-daemon/gsd-media-keys-window.c: (action_changed),
+	(gsd_media_keys_window_init):
+	* gnome-settings-daemon/xrdb/Makefile.am:
+	* typing-break/Makefile.am:
+	* vfs-methods/themus/Makefile.am: Don't define directories in
+	configure. Remove some obsolete defines, and use the standard
+	installation paths. Bug #395383.
+
 2007-01-31  Christian Persch  <chpe@svn.gnome.org>
 
 	* configure.in:

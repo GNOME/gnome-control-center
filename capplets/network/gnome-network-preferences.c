@@ -225,7 +225,7 @@ cb_http_details_button_clicked (GtkWidget *button,
 		return;
 	}
 
-	dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/gnome-network-preferences.glade",
+	dialog = glade_xml_new (GNOMECC_GLADE_DIR "/gnome-network-preferences.glade",
 				"details_dialog", NULL);
 
 	details_dialog = widget = WID ("details_dialog");
@@ -545,7 +545,7 @@ main (int argc, char **argv)
 	gconf_client_add_dir (client, "/system/proxy",
 			      GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 
-	dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/gnome-network-preferences.glade",
+	dialog = glade_xml_new (GNOMECC_GLADE_DIR "/gnome-network-preferences.glade",
 				"network_dialog", NULL);
 
 	setup_dialog (dialog);

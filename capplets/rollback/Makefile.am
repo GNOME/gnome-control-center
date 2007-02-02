@@ -13,7 +13,7 @@ rollback_capplet_SOURCES = \
 
 ####@###GNOMECC_CAPPLETS_DESKTOP_IN_RULE@
 $(desktop).in: %.desktop.in: %.desktop.in.in
-	sed -e "s#@DESKTOP_EXEC_LINE@#$(DESKTOP_EXEC_LINE)#" -e "s#Icon=.*#Icon=$(GNOMECC_ICONS_DIR)/${cappletname}-capplet.png#" < $< > ${cappletname}.desktop.in
+	sed -e "s#@DESKTOP_EXEC_LINE@#$(DESKTOP_EXEC_LINE)#" -e "s#Icon=.*#Icon=$(pkgdatadir)/icons/${cappletname}-capplet.png#" < $< > ${cappletname}.desktop.in
 
 install-data-local:
 	$(mkinstalldirs) $(DESTDIR)$(datadir)/control-center/capplets/$(cappletgroup)
@@ -25,9 +25,9 @@ install-data-am: install-data-local
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
 EXTRA_DIST = $(GNOMECC_CAPPLETS_EXTRA_DIST)
-iconsdir   = $(GNOMECC_ICONS_DIR)
-Gladedir   = $(GNOMECC_GLADE_DIR)
-pixmapdir  = $(GNOMECC_PIXMAPS_DIR)
+iconsdir   = $(pkgdatadir)/icons
+Gladedir   = $(pkgdatadir)/glade
+pixmapdir  = $(pkgdatadir)/pixmaps
 Glade_DATA = $(cappletname).glade
 icons_DATA = $(cappletname)-capplet.png
 desktop    = $(cappletname).desktop

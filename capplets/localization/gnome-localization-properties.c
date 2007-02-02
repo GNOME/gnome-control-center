@@ -63,7 +63,7 @@ create_dialog (void)
 	GladeXML *dialog;
 
 	dialog = glade_xml_new
-		(GNOMECC_DATA_DIR "/interfaces/gnome-localization-properties.glade",
+		(GNOMECC_GLADE_DIR "/gnome-localization-properties.glade",
 		 NULL, NULL);
 
 	return dialog;

@@ -7,7 +7,7 @@ gnome_display_properties_LDFLAGS = -export-dynamic
 
 @INTLTOOL_DESKTOP_RULE@
 
-iconsdir   = $(GNOMECC_ICONS_DIR)
+iconsdir   = $(pkgdatadir)/icons
 icons_DATA = display-capplet.png
 
 desktop_iconsdir = $(datadir)/pixmaps
@@ -21,7 +21,7 @@ INCLUDES   = $(DISPLAY_CAPPLET_CFLAGS)     \
              $(GNOMECC_CAPPLETS_CFLAGS) \
 	     -DGLADEDIR=\""$(gladedir)"\" \
 	     -DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
-	     -DPIXMAPDIR=\""$(pixmapdir)"\"
+	     -DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""
 
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA)
 EXTRA_DIST = $(icons_DATA)

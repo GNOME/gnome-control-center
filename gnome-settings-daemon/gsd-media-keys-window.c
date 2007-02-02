@@ -164,7 +164,7 @@ action_changed (GsdMediaKeysWindow *window)
 			break;
 		case GSD_MEDIA_KEYS_WINDOW_ACTION_EJECT:
 			volume_controls_set_visible (window, FALSE);
-			window_set_icon_file (window, PIXMAPSDIR "/acme-eject.png");
+			window_set_icon_file (window, GNOMECC_PIXMAPS_DIR "/acme-eject.png");
 			break;
 		default:
 			break;
@@ -611,7 +611,7 @@ gsd_media_keys_window_init (GsdMediaKeysWindow *window)
 	} else {
 		GtkWidget *vbox;
 
-		window->priv->xml = glade_xml_new (DATADIR "/control-center-2.0/interfaces/acme.glade", "acme_vbox", NULL);
+		window->priv->xml = glade_xml_new (GNOMECC_GLADE_DIR "/acme.glade", "acme_vbox", NULL);
 
 		vbox = glade_xml_get_widget (window->priv->xml, "acme_vbox");
 		if (vbox != NULL) {

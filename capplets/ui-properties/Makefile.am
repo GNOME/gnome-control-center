@@ -10,9 +10,13 @@ desktopdir = $(datadir)/applications
 Desktop_in_files = gnome-ui-properties.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
-Gladedir   = $(GNOMECC_GLADE_DIR)
+Gladedir   = $(pkgdatadir)/glade
 Glade_DATA = gnome-ui-properties.glade
 
-INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)	-DGNOMELOCALEDIR="\"$(datadir)/locale\""
+INCLUDES = \
+	$(GNOMECC_CAPPLETS_CFLAGS) \
+	-DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
+	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\"" \
+	-DGNOMECC_GLADE_DIR="\"$(pkgdatadir)/glade\""
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA)
 EXTRA_DIST = $(Glade_DATA)

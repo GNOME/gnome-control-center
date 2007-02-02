@@ -125,7 +125,7 @@ service_edit_dialog_init (ServiceEditDialog *dialog, ServiceEditDialogClass *cla
 
 	dialog->p = g_new0 (ServiceEditDialogPrivate, 1);
 	dialog->p->dialog_xml = glade_xml_new
-		(GNOMECC_DATA_DIR "/interfaces/file-types-properties.glade", "service_edit_widget", NULL);
+		(GNOMECC_GLADE_DIR "/file-types-properties.glade", "service_edit_widget", NULL);
 
 	size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 	gtk_size_group_add_widget (size_group, WID ("description_label"));

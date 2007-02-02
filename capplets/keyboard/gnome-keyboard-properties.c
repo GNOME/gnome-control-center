@@ -52,7 +52,7 @@ create_dialog (void)
 	GladeXML *dialog;
 	GtkSizeGroup *size_group;
 
-	dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/gnome-keyboard-properties.glade", "keyboard_dialog", NULL);
+	dialog = glade_xml_new (GNOMECC_GLADE_DIR "/gnome-keyboard-properties.glade", "keyboard_dialog", NULL);
 
 	size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 	gtk_size_group_add_widget (size_group, WID ("repeat_slow_label"));
