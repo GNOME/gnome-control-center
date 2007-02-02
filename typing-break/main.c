@@ -84,7 +84,7 @@ main (int argc, char *argv[])
 	g_set_application_name (_("Typing Monitor"));
 	gtk_window_set_default_icon_name ("typing-monitor");
 
-	gnome_program_init (PACKAGE, VERSION, LIBGNOMEUI_MODULE, 
+	gnome_program_init ("typing-break", VERSION, LIBGNOMEUI_MODULE, 
 			    argc, argv, NULL);
 
 	selection = drw_selection_start ();
