@@ -1,3 +1,9 @@
+2007-02-03  Jens Granseuer  <jensgr@gmx.net>
+
+	* gnome-keybinding-properties.c: (accel_edited_callback): filter
+	out CapsLock modifiers since it's otherwise possible to set the
+	same accel for several actions (fixes #350424)
+
 2007-02-02  Jens Granseuer  <jensgr@gmx.net>
 
 	* gnome-keybinding-properties.c: (accel_edited_callback): blacklist

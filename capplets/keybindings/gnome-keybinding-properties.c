@@ -636,6 +636,9 @@ accel_edited_callback (GtkCellRendererText   *cell,
   if (key_entry == NULL)
     return;
 
+  /* CapsLock isn't supported as a keybinding modifier, so keep it from confusing us */
+  mask &= ~EGG_VIRTUAL_LOCK_MASK;
+
   model = get_real_model (view);
   tmp_key.model  = model;
   tmp_key.keyval = keyval;
