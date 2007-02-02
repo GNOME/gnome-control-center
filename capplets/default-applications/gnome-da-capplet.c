@@ -863,7 +863,7 @@ main (int argc, char **argv)
     textdomain (GETTEXT_PACKAGE);
 #endif
 
-    gnome_program_init (PACKAGE, VERSION, LIBGNOMEUI_MODULE, argc, argv,
+    gnome_program_init ("gnome-default-applications-properties", VERSION, LIBGNOMEUI_MODULE, argc, argv,
 			GNOME_PARAM_NONE);
 
     glade_init ();
