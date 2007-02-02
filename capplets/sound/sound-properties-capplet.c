@@ -655,8 +655,8 @@ setup_devices (void)
 	add_device (AUDIO_CAPTURE, "esdmon", _("ESD - Enlightened Sound Daemon"), NULL);
 	add_device (AUDIO_PLAYBACK, "osssink", _("OSS - Open Sound System"), NULL);
 	add_device (AUDIO_CAPTURE, "osssrc", _("OSS - Open Sound System"), NULL);
-	add_device (AUDIO_PLAYBACK, "polypsink", _("Polypaudio Sound Server"), NULL);
-	add_device (AUDIO_CAPTURE, "polypsrc", _("Polypaudio Sound Server"), NULL);
+	add_device (AUDIO_PLAYBACK, "pulsesink", _("PulseAudio Sound Server"), NULL);
+	add_device (AUDIO_CAPTURE, "pulsesrc", _("PulseAudio Sound Server"), NULL);
 	add_device (AUDIO_CAPTURE, "audiotestsrc wave=triangle is-live=true", _("Test Sound"), NULL);
 	add_device (AUDIO_CAPTURE, "audiotestsrc wave=silence is-live=true", _("Silence"), NULL);
 	
