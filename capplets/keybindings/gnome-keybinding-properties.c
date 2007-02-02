@@ -655,6 +655,7 @@ accel_edited_callback (GtkCellRendererText   *cell,
     {
       if ((tmp_key.keyval >= GDK_a && tmp_key.keyval <= GDK_z)
 	   || (tmp_key.keyval >= GDK_A && tmp_key.keyval <= GDK_Z)
+	   || (tmp_key.keyval >= GDK_0 && tmp_key.keyval <= GDK_9)
 	   || (tmp_key.keyval >= GDK_kana_fullstop && tmp_key.keyval <= GDK_semivoicedsound)
 	   || (tmp_key.keyval >= GDK_Arabic_comma && tmp_key.keyval <= GDK_Arabic_sukun)
 	   || (tmp_key.keyval >= GDK_Serbian_dje && tmp_key.keyval <= GDK_Cyrillic_HARDSIGN)
@@ -663,6 +664,7 @@ accel_edited_callback (GtkCellRendererText   *cell,
 	   || (tmp_key.keyval >= GDK_Thai_kokai && tmp_key.keyval <= GDK_Thai_lekkao)
 	   || (tmp_key.keyval >= GDK_Hangul && tmp_key.keyval <= GDK_Hangul_Special)
 	   || (tmp_key.keyval >= GDK_Hangul_Kiyeog && tmp_key.keyval <= GDK_Hangul_J_YeorinHieuh)
+	   || tmp_key.keyval == GDK_space || tmp_key.keyval == GDK_Return
 	   || tmp_key.keyval == GDK_Mode_switch) {
         GtkWidget *dialog;
 	char *name;
