@@ -25,7 +25,7 @@ INCLUDES   = 					\
 	$(DEFAULT_APPLICATIONS_CAPPLET_CFLAGS)	\
 	-DGLADEDIR=\""$(gladedir)"\"		\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""\
-	-DDATADIR=\""$(datadir)"\"
+	-DDATADIR=\""$(xmldatadir)"\"
 
 noinst_DATA = gnome-default-applications.xml.in
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA) $(xmldata_DATA)
