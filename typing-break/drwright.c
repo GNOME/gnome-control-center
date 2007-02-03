@@ -291,13 +291,23 @@ grab_keyboard_on_window (GdkWindow *window,
 			 guint32    activate_time)
 {
 	GdkGrabStatus status;
-	
+
 	status = gdk_keyboard_grab (window, TRUE, activate_time);
 	if (status == GDK_GRAB_SUCCESS) {
 		return TRUE;
 	}
 
 	return FALSE;
+}
+
+static gboolean
+break_window_map_event_cb (GtkWidget *widget,
+			   GdkEvent  *event,
+			   DrWright  *dr)
+{
+	grab_keyboard_on_window (dr->break_window->window, gtk_get_current_event_time ());
+
+        return FALSE;
 }
 
 static gboolean
@@ -393,7 +403,7 @@ maybe_change_state (DrWright *dr)
 			dr->state = STATE_BREAK;
 			break;
 		}
-		
+
 		stop_blinking (dr);
 		gtk_status_icon_set_from_pixbuf (dr->icon,
 						 dr->red_bar);
@@ -401,6 +411,10 @@ maybe_change_state (DrWright *dr)
 		g_timer_start (dr->timer);
 
 		dr->break_window = drw_break_window_new ();
+
+		g_signal_connect (dr->break_window, "map_event",
+				  G_CALLBACK (break_window_map_event_cb),
+				  dr);
 
 		g_signal_connect (dr->break_window,
 				  "done",
@@ -421,8 +435,6 @@ maybe_change_state (DrWright *dr)
 
 		gtk_widget_show (dr->break_window);
 
-		grab_keyboard_on_window (dr->break_window->window, gtk_get_current_event_time ());
-		
 		dr->state = STATE_BREAK;
 		break;
 	       
@@ -704,33 +716,31 @@ create_secondary_break_windows (void)
 	GList      *windows = NULL;
 
 	display = gdk_display_get_default ();
-	
+
 	for (i = 0; i < gdk_display_get_n_screens (display); i++) {
 		screen = gdk_display_get_screen (display, i);
-		
+
 		if (screen == gdk_screen_get_default ()) {
 			/* Handled by DrwBreakWindow. */
 			continue;
 		}
-		
+
 		window = gtk_window_new (GTK_WINDOW_POPUP);
-		
+
 		windows = g_list_prepend (windows, window);
-		
+
 		gtk_window_set_screen (GTK_WINDOW (window), screen);
-		
+
 		gtk_window_set_default_size (GTK_WINDOW (window),
 					     gdk_screen_get_width (screen),
 					     gdk_screen_get_height (screen));
-		
+
 		gtk_widget_set_app_paintable (GTK_WIDGET (window), TRUE);
-		gtk_widget_realize (GTK_WIDGET (window));
-		
 		drw_setup_background (GTK_WIDGET (window));
 		gtk_window_stick (GTK_WINDOW (window));
 		gtk_widget_show (window);
 	}
-	
+
 	return windows;
 }
 
@@ -744,7 +754,7 @@ drwright_new (void)
         dr = g_new0 (DrWright, 1);
 
 	client = gconf_client_get_default ();
-	
+
 	gconf_client_add_dir (client,
 			      GCONF_PATH,
 			      GCONF_CLIENT_PRELOAD_NONE,

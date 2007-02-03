@@ -1,3 +1,18 @@
+2007-02-02  William Jon McCann  <mccann@jhu.edu>
+
+	* drw-break-window.c: (drw_break_window_class_init),
+	(drw_break_window_init), (drw_break_window_finalize),
+	(drw_break_window_dispose), (drw_break_window_new),
+	(postpone_sensitize_cb), (clock_timeout_cb), (postpone_cancel_cb),
+	(postpone_entry_key_press_event_cb), (postpone_clicked_cb):
+	* drw-break-window.h:
+	* drw-utils.c: (window_expose_event), (set_pixmap_background),
+	(drw_setup_background):
+	* drwright.c: (break_window_map_event_cb), (maybe_change_state),
+	(create_secondary_break_windows):
+	Use compositing to display the typing break window when
+	available.  Fixes #363665.
+
 2007-02-02  Christian Persch  <chpe@svn.gnome.org>
 
 	* main.c: (main): Use specific string as app ID in

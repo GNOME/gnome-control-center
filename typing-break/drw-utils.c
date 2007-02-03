@@ -89,8 +89,60 @@ create_tile_pixbuf (GdkPixbuf    *dest_pixbuf,
 	return dest_pixbuf;
 }
 
-void
-drw_setup_background (GtkWidget *window)
+static gboolean
+window_expose_event (GtkWidget      *widget,
+		     GdkEventExpose *event,
+		     gpointer        data)
+{
+	cairo_t         *context;
+	cairo_t         *cr;
+	cairo_surface_t *surface;
+	int              width;
+	int              height;
+
+	context = gdk_cairo_create (widget->window);
+
+	cairo_set_operator (context, CAIRO_OPERATOR_SOURCE);
+	gtk_window_get_size (GTK_WINDOW (widget), &width, &height);
+
+	surface = cairo_surface_create_similar (cairo_get_target (context),
+						CAIRO_CONTENT_COLOR_ALPHA,
+						width,
+						height);
+
+	if (cairo_surface_status (surface) != CAIRO_STATUS_SUCCESS) {
+		goto done;
+	}
+
+	cr = cairo_create (surface);
+	if (cairo_status (cr) != CAIRO_STATUS_SUCCESS) {
+		goto done;
+	}
+	cairo_set_source_rgba (cr, 1.0, 1.0, 1.0, 0.0);
+	cairo_set_operator (cr, CAIRO_OPERATOR_OVER);
+	cairo_paint (cr);
+
+	/* draw a box */
+	cairo_rectangle (cr, 0, 0, width, height);
+	cairo_set_source_rgba (cr, 0.2, 0.2, 0.2, 0.5);
+	cairo_fill (cr);
+
+	cairo_destroy (cr);
+
+	cairo_set_source_surface (context, surface, 0, 0);
+	cairo_paint (context);
+
+ done:
+	if (surface != NULL) {
+		cairo_surface_destroy (surface);
+	}
+	cairo_destroy (context);
+
+	return FALSE;
+}
+
+static void
+set_pixmap_background (GtkWidget *window)
 {
 	GdkScreen    *screen;
 	GdkPixbuf    *tmp_pixbuf, *pixbuf, *tile_pixbuf;
@@ -99,11 +151,12 @@ drw_setup_background (GtkWidget *window)
 	GdkColor      color;
 	gint          width, height;
 
-	screen = gtk_widget_get_screen (window);
+	gtk_widget_realize (window);
 
+	screen = gtk_widget_get_screen (window);
 	width = gdk_screen_get_width (screen);
 	height = gdk_screen_get_height (screen);
-	
+
 	tmp_pixbuf = gdk_pixbuf_get_from_drawable (NULL,
 						   gdk_screen_get_root_window (screen),
 						   gdk_screen_get_system_colormap (screen),
@@ -112,18 +165,18 @@ drw_setup_background (GtkWidget *window)
 						   0,
 						   0,
 						   width, height);
-	
+
 	pixbuf = gdk_pixbuf_new_from_file (IMAGEDIR "/ocean-stripes.png", NULL);
 
 	rect.x = 0;
 	rect.y = 0;
 	rect.width = width;
 	rect.height = height;
-	
+
 	color.red = 0;
 	color.blue = 0;
 	color.green = 0;
-	
+
 	tile_pixbuf = create_tile_pixbuf (NULL,
 					  pixbuf,
 					  &rect,
@@ -169,5 +222,29 @@ drw_setup_background (GtkWidget *window)
 
 	gdk_window_set_back_pixmap (window->window, pixmap, FALSE);
 	g_object_unref (pixmap);
+}
+
+void
+drw_setup_background (GtkWidget *window)
+{
+	GdkScreen    *screen;
+	GdkColormap  *colormap;
+	gboolean      is_composited;
+
+	screen = gtk_widget_get_screen (window);
+	colormap = gdk_screen_get_rgba_colormap (screen);
+
+	if (colormap != NULL && gdk_screen_is_composited (screen)) {
+		gtk_widget_set_colormap (GTK_WIDGET (window), colormap);
+		is_composited = TRUE;
+	} else {
+		is_composited = FALSE;
+	}
+
+	if (is_composited) {
+		g_signal_connect (window, "expose-event", G_CALLBACK (window_expose_event), window);
+	} else {
+		set_pixmap_background (window);
+	}
 }
 
