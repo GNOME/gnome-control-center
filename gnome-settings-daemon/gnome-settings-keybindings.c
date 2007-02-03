@@ -42,20 +42,24 @@ static GSList *
 get_screens_list (void)
 {
   GdkDisplay *display = gdk_display_get_default();
+  int n_screens;
   GSList *list = NULL;
   int i;
 
-  if (gdk_display_get_n_screens (display) == 1) {
+  n_screens = gdk_display_get_n_screens (display);
+
+  if (n_screens == 1) {
     list = g_slist_append (list, gdk_screen_get_default ());
   } else {
-    for (i = 0; i < gdk_display_get_n_screens (display); i++) {
+    for (i = 0; i < n_screens; i++) {
       GdkScreen *screen;
 
       screen = gdk_display_get_screen (display, i);
       if (screen != NULL) {
-        list = g_slist_append (list, screen);
+        list = g_slist_prepend (list, screen);
       }
     }
+    list = g_slist_reverse (list);
   }
 
   return list;
@@ -68,7 +72,6 @@ screen_exec_display_string (GdkScreen *screen)
 {
   GString    *str;
   const char *old_display;
-  char       *retval;
   char       *p;
 
   g_return_val_if_fail (GDK_IS_SCREEN (screen), NULL);
@@ -84,11 +87,7 @@ screen_exec_display_string (GdkScreen *screen)
 
   g_string_append_printf (str, ".%d", gdk_screen_get_number (screen));
 
-  retval = str->str;
-
-  g_string_free (str, FALSE);
-
-  return retval;
+  return g_string_free (str, FALSE);
 }
 
 /**
@@ -140,7 +139,6 @@ get_exec_environment (XEvent *xevent)
   return retval;
 }
 
-
 static gint 
 compare_bindings (gconstpointer a, gconstpointer b)
 {
@@ -169,15 +167,26 @@ parse_binding (Binding *binding)
   return TRUE;
 }
 
-static gboolean 
-bindings_get_entry (char *subdir)
+static char *
+entry_get_string (GConfEntry *entry)
 {
-  GConfValue *value;
+  GConfValue *value = gconf_entry_get_value (entry);
+
+  if (value == NULL || value->type != GCONF_VALUE_STRING)
+    return NULL;
+
+  return g_strdup (gconf_value_get_string (value));
+}
+
+static gboolean 
+bindings_get_entry (const char *subdir)
+{
   Binding *new_binding;
-  GSList *tmp_elem = NULL, *list = NULL, *li;
+  GSList *tmp_elem, *list, *li;
   char *gconf_key;
   char *action = NULL;
   char *key = NULL;
+  gboolean ret = FALSE;
   GConfClient *client = gnome_settings_daemon_get_conf_client ();
   
   g_return_val_if_fail (subdir != NULL, FALSE);
@@ -195,37 +204,33 @@ bindings_get_entry (char *subdir)
     {
       GConfEntry *entry = li->data;
       char *key_name = g_path_get_basename (gconf_entry_get_key (entry));
-      if (strcmp (key_name, "action") == 0)
+
+      if (key_name == NULL)
+        goto out;
+      else if (strcmp (key_name, "action") == 0)
 	{
 	  if (!action)
-	    {
-	      value = gconf_entry_get_value (entry);
-	      if (value->type != GCONF_VALUE_STRING)
-		return FALSE;
-	      action = g_strdup (gconf_value_get_string (value));
-	    }
+            action = entry_get_string (entry);
 	  else
 	    g_warning (_("Key Binding (%s) has its action defined multiple times\n"),
 		       gconf_key);
 	}
-      if (strcmp (key_name, "binding") == 0)
+      else if (strcmp (key_name, "binding") == 0)
 	{
 	  if (!key)
-	    {
-	      value = gconf_entry_get_value (entry);
-	      if (value->type != GCONF_VALUE_STRING)
-		return FALSE;
-	      key = g_strdup (gconf_value_get_string (value));
-	    }
+            key = entry_get_string (entry);
 	  else
 	    g_warning (_("Key Binding (%s) has its binding defined multiple times\n"),
 		       gconf_key);
 	}
+
+      gconf_entry_free (entry);
     }
+
   if (!action || !key)
     { 
       g_warning (_("Key Binding (%s) is incomplete\n"), gconf_key);
-      return FALSE;
+      goto out;
     }
     
   tmp_elem = g_slist_find_custom (binding_list, gconf_key,
@@ -249,15 +254,20 @@ bindings_get_entry (char *subdir)
   new_binding->previous_key.keycode = new_binding->key.keycode;
 
   if (parse_binding (new_binding))
+    {
       binding_list = g_slist_append (binding_list, new_binding);
+      ret = TRUE;
+    }
   else
     {
       g_warning (_("Key Binding (%s) is invalid\n"), gconf_key);
       g_free (new_binding->binding_str);
       g_free (new_binding->action);
-      return FALSE;
     }
-  return TRUE;
+
+out:
+  g_slist_free (list);
+  return ret;
 }
 
 static gboolean 
@@ -478,10 +488,12 @@ gnome_settings_keybindings_load (GConfClient *client)
 
   for (li = list; li != NULL; li = li->next)
     {
-      char *subdir = li->data;
-      li->data = NULL;
-      bindings_get_entry (subdir);
+      bindings_get_entry (li->data);
+      g_free (li->data);
     }
+
+  g_slist_free (list);
+
   binding_register_keys ();
 }
 
