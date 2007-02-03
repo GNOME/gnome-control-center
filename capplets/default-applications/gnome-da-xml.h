@@ -22,5 +22,6 @@
 #define _GNOME_DA_XML_H_
 
 void gnome_da_xml_load_list (GnomeDACapplet *capplet);
+void gnome_da_xml_free (GnomeDACapplet *capplet);
 
 #endif

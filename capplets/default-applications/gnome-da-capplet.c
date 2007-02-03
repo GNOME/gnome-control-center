@@ -215,7 +215,7 @@ web_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
     gtk_widget_set_sensitive (capplet->web_browser_command_label, is_custom_active);
     gtk_widget_set_sensitive (capplet->web_browser_terminal_checkbutton, is_custom_active);
 }
-
+	
 static void
 mail_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
 {
@@ -688,7 +688,6 @@ fill_combo_box (GtkIconTheme *theme, GtkComboBox *combo_box, GList *app_list)
     GtkCellRenderer *renderer;
     GtkTreeIter iter;
     GdkPixbuf *pixbuf;
-    gchar *label;
 
     if (theme == NULL) {
 	theme = gtk_icon_theme_get_default ();
@@ -720,19 +719,17 @@ fill_combo_box (GtkIconTheme *theme, GtkComboBox *combo_box, GList *app_list)
 	item = (GnomeDAItem *) entry->data;
 
 	pixbuf = gtk_icon_theme_load_icon (theme, item->icon_name, 22, 0, NULL);
-	label = g_strdup (item->name);
 
 	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
 	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
 			    PIXBUF_COL, pixbuf,
-			    TEXT_COL, label,
+			    TEXT_COL, item->name,
 			    -1);
 
 	item->icon_path = gtk_tree_model_get_string_from_iter (model, &iter);
 
 	if (pixbuf)
 	    g_object_unref (pixbuf);
-	g_free (label);
     }
 
     gtk_list_store_append (GTK_LIST_STORE (model), &iter);
@@ -802,26 +799,50 @@ show_dialog (GnomeDACapplet *capplet)
 
     /* update ui to gconf content */
     value = gconf_client_get (capplet->gconf, DEFAULT_APPS_KEY_HTTP_EXEC, NULL);
-    web_browser_update_combo_box (capplet, gconf_value_get_string (value));
-    web_browser_update_radio_buttons (capplet, gconf_value_get_string (value));
+    if (value)
+    {
+	web_browser_update_combo_box (capplet, gconf_value_get_string (value));
+	web_browser_update_radio_buttons (capplet, gconf_value_get_string (value));
+	gconf_value_free (value);
+    }
 
     value = gconf_client_get (capplet->gconf, DEFAULT_APPS_KEY_HTTP_NEEDS_TERM, NULL);
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (capplet->web_browser_terminal_checkbutton),
-				  gconf_value_get_bool (value));
+    if (value)
+    {
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (capplet->web_browser_terminal_checkbutton),
+				      gconf_value_get_bool (value));
+	gconf_value_free (value);
+    }
 
     value = gconf_client_get (capplet->gconf, DEFAULT_APPS_KEY_MAILER_EXEC, NULL);
-    mail_reader_update_combo_box (capplet, gconf_value_get_string (value));
+    if (value)
+    {
+	mail_reader_update_combo_box (capplet, gconf_value_get_string (value));
+	gconf_value_free (value);
+    }
 
     value = gconf_client_get (capplet->gconf, DEFAULT_APPS_KEY_MAILER_NEEDS_TERM, NULL);
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (capplet->mail_reader_terminal_checkbutton),
-				  gconf_value_get_bool (value));
+    if (value)
+    {
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (capplet->mail_reader_terminal_checkbutton),
+				      gconf_value_get_bool (value));
+	gconf_value_free (value);
+    }
 
-    value = gconf_client_get (capplet->gconf, DEFAULT_APPS_KEY_TERMINAL_EXEC, NULL);
-    terminal_update_combo_box (capplet, gconf_value_get_string (value));
+    if (value)
+    {
+	value = gconf_client_get (capplet->gconf, DEFAULT_APPS_KEY_TERMINAL_EXEC, NULL);
+	terminal_update_combo_box (capplet, gconf_value_get_string (value));
+	gconf_value_free (value);
+    }
 
     value = gconf_client_get (capplet->gconf, DEFAULT_APPS_KEY_TERMINAL_EXEC_ARG, NULL);
-    gtk_entry_set_text (GTK_ENTRY (capplet->terminal_exec_flag_entry),
-			gconf_value_get_string (value));
+    if (value)
+    {
+	gtk_entry_set_text (GTK_ENTRY (capplet->terminal_exec_flag_entry),
+			    gconf_value_get_string (value));
+	gconf_value_free (value);
+    }
 
     g_signal_connect (capplet->web_combo_box, "changed", G_CALLBACK (web_combo_changed_cb), capplet);
     g_signal_connect (capplet->mail_combo_box, "changed", G_CALLBACK (mail_combo_changed_cb), capplet);
@@ -853,9 +874,8 @@ show_dialog (GnomeDACapplet *capplet)
 int
 main (int argc, char **argv)
 {
+    GnomeProgram *program;
     GnomeDACapplet *capplet;
-
-    capplet = g_new0 (GnomeDACapplet, 1);
 
 #ifdef ENABLE_NLS
     bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
@@ -863,11 +883,13 @@ main (int argc, char **argv)
     textdomain (GETTEXT_PACKAGE);
 #endif
 
-    gnome_program_init ("gnome-default-applications-properties", VERSION, LIBGNOMEUI_MODULE, argc, argv,
-			GNOME_PARAM_NONE);
+    program = gnome_program_init ("gnome-default-applications-properties",
+    				  VERSION, LIBGNOMEUI_MODULE, argc, argv,
+				  GNOME_PARAM_NONE);
 
     glade_init ();
 
+    capplet = g_new0 (GnomeDACapplet, 1);
     capplet->gconf = gconf_client_get_default ();
 
     gconf_client_add_dir (capplet->gconf, "/desktop/gnome/applications/browser", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
@@ -891,7 +913,9 @@ main (int argc, char **argv)
     gtk_main ();
 
     g_object_unref (capplet->gconf);
-    g_object_unref (capplet->xml);
+    
+    gnome_da_xml_free (capplet);
+    g_object_unref (program);
 
     return 0;
 }

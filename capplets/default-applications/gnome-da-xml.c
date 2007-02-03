@@ -128,6 +128,7 @@ gnome_da_xml_load_xml (GnomeDACapplet *capplet, const gchar * filename)
 {
     xmlDoc *xml_doc;
     xmlNode *root, *section, *element;
+    gchar *executable;
     GnomeDAWebItem *web_item;
     GnomeDAMailItem *mail_item;
     GnomeDATermItem *term_item;
@@ -143,11 +144,12 @@ gnome_da_xml_load_xml (GnomeDACapplet *capplet, const gchar * filename)
 	if (!xmlStrncmp (section->name, "web-browsers", 12)) {
 	    for (element = section->children; element != NULL; element = element->next) {
 		if (!xmlStrncmp (element->name, "web-browser", 11)) {
-		    if (is_executable_valid (gnome_da_xml_get_string (element, "executable"))) {
+		    executable = gnome_da_xml_get_string (element, "executable");
+		    if (is_executable_valid (executable)) {
 			web_item = gnome_da_web_item_new ();
 
 			web_item->generic.name = gnome_da_xml_get_string (element, "name");
-			web_item->generic.executable = gnome_da_xml_get_string (element, "executable");
+			web_item->generic.executable = executable;
 			web_item->generic.command = gnome_da_xml_get_string (element, "command");
 			web_item->generic.icon_name = gnome_da_xml_get_string (element, "icon-name");
 
@@ -160,17 +162,20 @@ gnome_da_xml_load_xml (GnomeDACapplet *capplet, const gchar * filename)
 
 			capplet->web_browsers = g_list_append (capplet->web_browsers, web_item);
 		    }
+		    else
+			g_free (executable);
 		}
 	    }
 	}
 	else if (!xmlStrncmp (section->name, "mail-readers", 12)) {
 	    for (element = section->children; element != NULL; element = element->next) {
 		if (!xmlStrncmp (element->name, "mail-reader", 11)) {
-		    if (is_executable_valid (gnome_da_xml_get_string (element, "executable"))) {
+		    executable = gnome_da_xml_get_string (element, "executable");
+		    if (is_executable_valid (executable)) {
 			mail_item = gnome_da_mail_item_new ();
 
 			mail_item->generic.name = gnome_da_xml_get_string (element, "name");
-			mail_item->generic.executable = gnome_da_xml_get_string (element, "executable");
+			mail_item->generic.executable = executable;
 			mail_item->generic.command = gnome_da_xml_get_string (element, "command");
 			mail_item->generic.icon_name = gnome_da_xml_get_string (element, "icon-name");
 
@@ -178,17 +183,20 @@ gnome_da_xml_load_xml (GnomeDACapplet *capplet, const gchar * filename)
 
 			capplet->mail_readers = g_list_append (capplet->mail_readers, mail_item);
 		    }
+		    else
+			g_free (executable);
 		}
 	    }
 	}
 	else if (!xmlStrncmp (section->name, "terminals", 9)) {
 	    for (element = section->children; element != NULL; element = element->next) {
 		if (!xmlStrncmp (element->name, "terminal", 8)) {
-		    if (is_executable_valid (gnome_da_xml_get_string (element, "executable"))) {
+		    executable = gnome_da_xml_get_string (element, "executable");
+		    if (is_executable_valid (executable)) {
 			term_item = gnome_da_term_item_new ();
 
 			term_item->generic.name = gnome_da_xml_get_string (element, "name");
-			term_item->generic.executable = gnome_da_xml_get_string (element, "executable");
+			term_item->generic.executable = executable;
 			term_item->generic.command = gnome_da_xml_get_string (element, "command");
 			term_item->generic.icon_name = gnome_da_xml_get_string (element, "icon-name");
 
@@ -196,6 +204,8 @@ gnome_da_xml_load_xml (GnomeDACapplet *capplet, const gchar * filename)
 
 			capplet->terminals = g_list_append (capplet->terminals, term_item);
 		    }
+		    else
+			g_free (executable);
 		}
 	    }
 	}
@@ -221,4 +231,18 @@ gnome_da_xml_load_list (GnomeDACapplet *capplet)
 
     if (capplet->web_browsers == NULL)
 	gnome_da_xml_load_xml (capplet, "./gnome-default-applications.xml");
+}
+
+void
+gnome_da_xml_free (GnomeDACapplet *capplet)
+{
+    g_list_foreach (capplet->web_browsers, (GFunc) gnome_da_web_item_free, NULL);
+    g_list_foreach (capplet->mail_readers, (GFunc) gnome_da_mail_item_free, NULL);
+    g_list_foreach (capplet->terminals, (GFunc) gnome_da_term_item_free, NULL);
+    g_list_free (capplet->web_browsers);
+    g_list_free (capplet->mail_readers);
+    g_list_free (capplet->terminals);
+
+    g_object_unref (capplet->xml);
+    g_free (capplet);
 }
