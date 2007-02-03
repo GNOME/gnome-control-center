@@ -1,3 +1,6 @@
+# This is used in GNOMECC_CAPPLETS_CFLAGS
+cappletname = background
+
 WALLPAPER_DATADIR = $(datadir)/gnome-background-properties
 
 INCLUDES = \

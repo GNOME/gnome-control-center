@@ -1,3 +1,6 @@
+# This is used in GNOMECC_CAPPLETS_CFLAGS
+cappletname = about-me
+
 bin_PROGRAMS = gnome-about-me
 
 pixmapdir = $(pkgdatadir)/pixmaps

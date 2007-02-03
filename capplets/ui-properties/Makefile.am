@@ -1,3 +1,6 @@
+# This is used in GNOMECC_CAPPLETS_CFLAGS
+cappletname = ui
+
 bin_PROGRAMS = gnome-ui-properties
 
 gnome_ui_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)

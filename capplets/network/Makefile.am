@@ -1,3 +1,6 @@
+# This is used in GNOMECC_CAPPLETS_CFLAGS
+cappletname = network
+
 bin_PROGRAMS = gnome-network-preferences
 
 gnome_network_preferences_SOURCES = gnome-network-preferences.c

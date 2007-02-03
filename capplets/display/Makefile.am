@@ -1,3 +1,6 @@
+# This is used in GNOMECC_CAPPLETS_CFLAGS
+cappletname = display
+
 bin_PROGRAMS = gnome-display-properties
 
 gnome_display_properties_LDADD = $(DISPLAY_CAPPLET_LIBS) $(top_builddir)/capplets/common/libcommon.la

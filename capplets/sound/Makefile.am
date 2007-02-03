@@ -1,3 +1,6 @@
+# This is used in GNOMECC_CAPPLETS_CFLAGS
+cappletname = sound
+
 bin_PROGRAMS = gnome-sound-properties
 
 gnome_sound_properties_LDADD = \

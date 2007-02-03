@@ -1,3 +1,6 @@
+# This is used in GNOMECC_CAPPLETS_CFLAGS
+cappletname = keyboard
+
 bin_PROGRAMS = gnome-keyboard-properties
 
 gnome_keyboard_properties_SOURCES = gnome-keyboard-properties.c \

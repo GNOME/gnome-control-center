@@ -1,3 +1,6 @@
+# This is used in GNOMECC_CAPPLETS_CFLAGS
+cappletname = window
+
 bin_PROGRAMS = gnome-window-properties
 
 gnome_window_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS) 	\

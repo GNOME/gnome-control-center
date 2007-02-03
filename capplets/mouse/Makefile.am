@@ -1,3 +1,6 @@
+# This is used in GNOMECC_CAPPLETS_CFLAGS
+cappletname = mouse
+
 bin_PROGRAMS = gnome-mouse-properties
 
 gnome_mouse_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)

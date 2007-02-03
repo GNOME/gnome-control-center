@@ -1,3 +1,6 @@
+# This is used in GNOMECC_CAPPLETS_CFLAGS
+cappletname = keybinding
+
 bin_PROGRAMS = gnome-keybinding-properties
 
 gnome_keybinding_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)

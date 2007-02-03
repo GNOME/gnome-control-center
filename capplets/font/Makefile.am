@@ -1,3 +1,6 @@
+# This is used in GNOMECC_CAPPLETS_CFLAGS
+cappletname = font
+
 bin_PROGRAMS = gnome-font-properties
 
 gnome_font_properties_LDADD = \

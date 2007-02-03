@@ -1,3 +1,6 @@
+# This is used in GNOMECC_CAPPLETS_CFLAGS
+cappletname = default-applications
+
 bin_PROGRAMS = gnome-default-applications-properties
 
 gnome_default_applications_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
