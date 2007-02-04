@@ -298,11 +298,7 @@ keyentry_sort_func (GtkTreeModel *model,
 {
   KeyEntry *key_entry_a;
   KeyEntry *key_entry_b;
-  char *name_a;
-  char *name_b;
   int retval;
-
-  /* mmmmm, super-slow. */
 
   key_entry_a = NULL;
   gtk_tree_model_get (model, a,
@@ -314,34 +310,41 @@ keyentry_sort_func (GtkTreeModel *model,
                       KEYENTRY_COLUMN, &key_entry_b,
                       -1);
 
-  
-  if (key_entry_a != NULL)
-    name_a = binding_name (key_entry_a->keyval,
-		    	   key_entry_a->keycode,
-                           key_entry_a->mask,
-                           TRUE);
-  else
-    name_a = NULL;
+  if (key_entry_a && key_entry_b)
+    {
+      if ((key_entry_a->keyval || key_entry_a->keycode) &&
+          (key_entry_b->keyval || key_entry_b->keycode))
+        {
+          gchar *name_a, *name_b;
 
-  if (key_entry_b != NULL)
-    name_b = binding_name (key_entry_b->keyval,
-		    	   key_entry_b->keycode,
-                           key_entry_b->mask,
-                           TRUE);
-  else
-    name_b = NULL;
+          name_a = binding_name (key_entry_a->keyval,
+                                 key_entry_a->keycode,
+                                 key_entry_a->mask,
+                                 TRUE);
 
-  if (name_a && name_b)
-    retval = g_utf8_collate (name_a, name_b);
-  else if (name_a)
-    retval = 1;
-  else if (name_b)
+          name_b = binding_name (key_entry_b->keyval,
+                                 key_entry_b->keycode,
+                                 key_entry_b->mask,
+                                 TRUE);
+
+          retval = g_utf8_collate (name_a, name_b);
+
+          g_free (name_a);
+          g_free (name_b);
+        }
+      else if (key_entry_a->keyval || key_entry_a->keycode)
+        retval = -1;
+      else if (key_entry_b->keyval || key_entry_b->keycode)
+        retval = 1;
+      else
+        retval = 0;
+    }
+  else if (key_entry_a)
     retval = -1;
+  else if (key_entry_b)
+    retval = 1;
   else
     retval = 0;
-
-  g_free (name_a);
-  g_free (name_b);
 
   return retval;
 }
@@ -363,9 +366,8 @@ clear_old_model (GladeXML  *dialog,
   
       sort_model = gtk_tree_model_sort_new_with_model (model);
 
-      /* N_COLUMNS is just a place to stick the extra sort function */
       gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (sort_model),
-                                   	   N_COLUMNS,
+                                       KEYENTRY_COLUMN,
                                        keyentry_sort_func,
                                        NULL, NULL);
   
@@ -929,8 +931,7 @@ setup_dialog (GladeXML *dialog)
   gtk_tree_view_column_set_resizable (column, FALSE);
 
   gtk_tree_view_append_column (GTK_TREE_VIEW (WID ("shortcut_treeview")), column);
-  /* N_COLUMNS is just a place to stick the extra sort function */
-  gtk_tree_view_column_set_sort_column_id (column, N_COLUMNS); 
+  gtk_tree_view_column_set_sort_column_id (column, KEYENTRY_COLUMN); 
   
   gconf_client_add_dir (client, "/apps/gnome_keybinding_properties", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
   gconf_client_add_dir (client, "/apps/metacity/general", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
