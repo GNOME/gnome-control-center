@@ -83,6 +83,10 @@ gchar* egg_virtual_accelerator_name (guint                  accelerator_key,
 				     guint		    keycode,
                                      EggVirtualModifierType accelerator_mods);
 
+gchar* egg_virtual_accelerator_label (guint                  accelerator_key,
+				      guint		     keycode,
+				      EggVirtualModifierType accelerator_mods);
+
 G_END_DECLS
 
 

@@ -181,7 +181,9 @@ binding_name (guint                   keyval,
               gboolean                translate)
 {
   if (keyval != 0 || keycode != 0)
-    return egg_virtual_accelerator_name (keyval, keycode, mask);
+    return translate ?
+	egg_virtual_accelerator_label (keyval, keycode, mask) :
+	egg_virtual_accelerator_name (keyval, keycode, mask);
   else
     return translate ? g_strdup (_("Disabled")) : g_strdup ("disabled");
 }
@@ -672,7 +674,7 @@ accel_edited_callback (GtkCellRendererText   *cell,
         GtkWidget *dialog;
 	char *name;
 
-	name = egg_virtual_accelerator_name (keyval, keycode, mask);
+	name = binding_name (keyval, keycode, mask, TRUE);
 
 	dialog =
 	  gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (view))),
@@ -701,7 +703,7 @@ accel_edited_callback (GtkCellRendererText   *cell,
       GtkWidget *dialog;
       char *name;
 
-      name = egg_virtual_accelerator_name (keyval, keycode, mask);
+      name = binding_name (keyval, keycode, mask, TRUE);
       
       dialog =
         gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (view))),

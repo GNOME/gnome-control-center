@@ -24,6 +24,7 @@
 #include <string.h>
 #include <gdk/gdkx.h>
 #include <gdk/gdkkeysyms.h>
+#include <gtk/gtkaccelgroup.h>
 
 enum
 {
@@ -367,7 +368,6 @@ egg_accelerator_parse_virtual (const gchar            *accelerator,
   return !bad_keyval;
 }
 
-
 /**
  * egg_virtual_accelerator_name:
  * @accelerator_key:  accelerator keyval
@@ -398,14 +398,15 @@ egg_virtual_accelerator_name (guint                  accelerator_key,
   static const gchar text_super[] = "<Super>";
   static const gchar text_hyper[] = "<Hyper>";
   guint l;
-  gchar *keyval_name;
+  gchar *keyval_name, *str = NULL;
   gchar *accelerator;
 
   accelerator_mods &= EGG_VIRTUAL_MODIFIER_MASK;
 
   if (!accelerator_key)
     {
-      keyval_name = g_strdup_printf ("0x%02x", keycode);
+      str = g_strdup_printf ("0x%02x", keycode);
+      keyval_name = str;
     }
   else
     {
@@ -500,8 +501,46 @@ egg_virtual_accelerator_name (guint                  accelerator_key,
     }
   
   strcpy (accelerator + l, keyval_name);
+  g_free (str);
 
   return accelerator;
+}
+
+/**
+ * egg_virtual_accelerator_label:
+ * @accelerator_key:  accelerator keyval
+ * @accelerator_mods: accelerator modifier mask
+ * @returns:          a newly-allocated accelerator label
+ * 
+ * Converts an accelerator keyval and modifier mask
+ * into a (possibly translated) string that can be displayed to
+ * a user.
+ * For example, if you pass in #GDK_q and #EGG_VIRTUAL_CONTROL_MASK,
+ * and you use a German locale, this function returns "Strg+Q".
+ *
+ * The caller of this function must free the returned string.
+ */
+gchar*
+egg_virtual_accelerator_label (guint                  accelerator_key,
+			       guint		      keycode,
+			       EggVirtualModifierType accelerator_mods)
+{
+  gchar *gtk_label;
+  GdkModifierType gdkmods;
+
+  egg_keymap_resolve_virtual_modifiers (gdk_keymap_get_default (),
+					accelerator_mods, &gdkmods);
+  gtk_label = gtk_accelerator_get_label (accelerator_key, gdkmods);
+
+  if (!accelerator_key)
+    {
+	gchar *label;
+	label = g_strdup_printf ("%s0x%02x", gtk_label, keycode);
+	g_free (gtk_label);
+	return label;
+    }
+
+  return gtk_label;
 }
 
 void

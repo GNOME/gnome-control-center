@@ -241,7 +241,7 @@ convert_keysym_state_to_string (guint                  keysym,
   if (keysym == 0 && keycode == 0)
     return g_strdup (_("Disabled"));
   else
-    return egg_virtual_accelerator_name (keysym, keycode, mask);
+    return egg_virtual_accelerator_label (keysym, keycode, mask);
 }
 
 static void
