@@ -33,6 +33,9 @@
 
 #define DIALOG_TIMEOUT 2000     /* dialog timeout in ms */
 
+#define BG_ALPHA 0.50
+#define FG_ALPHA 1.00
+
 static void     gsd_media_keys_window_class_init (GsdMediaKeysWindowClass *klass);
 static void     gsd_media_keys_window_init       (GsdMediaKeysWindow      *fade);
 static void     gsd_media_keys_window_finalize   (GObject                 *object);
@@ -358,7 +361,7 @@ render_eject (GsdMediaKeysWindow *window,
 	}
 
 	gdk_cairo_set_source_pixbuf (cr, pixbuf, x0, y0);
-	cairo_paint (cr);
+	cairo_paint_with_alpha (cr, FG_ALPHA);
 
 	g_object_unref (pixbuf);
 
@@ -387,10 +390,10 @@ draw_eject (cairo_t *cr,
 	cairo_rel_line_to (cr, -width / 2, -tri_height);
 	cairo_rel_line_to (cr, -width / 2, tri_height);
 	cairo_close_path (cr);
-	cairo_set_source_rgba (cr, 1.0, 1.0, 1.0, 1.0);
+	cairo_set_source_rgba (cr, 1.0, 1.0, 1.0, FG_ALPHA);
 	cairo_fill_preserve (cr);
 
-	cairo_set_source_rgba (cr, 0.6, 0.6, 0.6, 0.5);
+	cairo_set_source_rgba (cr, 0.6, 0.6, 0.6, FG_ALPHA / 2);
 	cairo_set_line_width (cr, 2);
 	cairo_stroke (cr);
 }
@@ -453,12 +456,12 @@ draw_waves (cairo_t *cr,
 
 		radius = (i + 1) * (max_radius / n_waves);
 		cairo_arc (cr, cx, cy, radius, angle1, angle2);
-		cairo_set_source_rgba (cr, 0.6, 0.6, 0.6, 0.5);
+		cairo_set_source_rgba (cr, 0.6, 0.6, 0.6, FG_ALPHA / 2);
 		cairo_set_line_width (cr, 14);
 		cairo_set_line_cap  (cr, CAIRO_LINE_CAP_ROUND);
 		cairo_stroke_preserve (cr);
 
-		cairo_set_source_rgba (cr, 1.0, 1.0, 1.0, 1.0);
+		cairo_set_source_rgba (cr, 1.0, 1.0, 1.0, FG_ALPHA);
 		cairo_set_line_width (cr, 10);
 		cairo_set_line_cap  (cr, CAIRO_LINE_CAP_ROUND);
 		cairo_stroke (cr);
@@ -493,10 +496,10 @@ draw_speaker (cairo_t *cr,
 	cairo_line_to (cr, x0, y0);
 	cairo_close_path (cr);
 
-	cairo_set_source_rgba (cr, 1.0, 1.0, 1.0, 1.0);
+	cairo_set_source_rgba (cr, 1.0, 1.0, 1.0, FG_ALPHA);
 	cairo_fill_preserve (cr);
 
-	cairo_set_source_rgba (cr, 0.6, 0.6, 0.6, 0.5);
+	cairo_set_source_rgba (cr, 0.6, 0.6, 0.6, FG_ALPHA / 2);
 	cairo_set_line_width (cr, 2);
 	cairo_stroke (cr);
 }
@@ -541,7 +544,7 @@ render_speaker (GsdMediaKeysWindow *window,
 	}
 
 	gdk_cairo_set_source_pixbuf (cr, pixbuf, x0, y0);
-	cairo_paint (cr);
+	cairo_paint_with_alpha (cr, FG_ALPHA);
 
 	g_object_unref (pixbuf);
 
@@ -569,7 +572,7 @@ draw_volume_boxes (GsdMediaKeysWindow *window,
 	g = (float)color.green / 65535.0;
 	b = (float)color.blue / 65535.0;
 	cairo_rectangle (cr, x0, y0, width, height);
-	cairo_set_source_rgba (cr, r, g, b, 1.0);
+	cairo_set_source_rgba (cr, r, g, b, FG_ALPHA);
 	cairo_fill (cr);
 
 	/* bar border */
@@ -578,7 +581,7 @@ draw_volume_boxes (GsdMediaKeysWindow *window,
 	g = (float)color.green / 65535.0;
 	b = (float)color.blue / 65535.0;
 	cairo_rectangle (cr, x0, y0, width, height);
-	cairo_set_source_rgba (cr, r, g, b, 1.0);
+	cairo_set_source_rgba (cr, r, g, b, FG_ALPHA);
 	cairo_set_line_width (cr, 1);
 	cairo_stroke (cr);
 
@@ -588,7 +591,7 @@ draw_volume_boxes (GsdMediaKeysWindow *window,
 	g = (float)color.green / 65535.0;
 	b = (float)color.blue / 65535.0;
 	cairo_rectangle (cr, x0, y0, x1, height);
-	cairo_set_source_rgba (cr, r, g, b, 1.0);
+	cairo_set_source_rgba (cr, r, g, b, FG_ALPHA);
 	cairo_fill (cr);
 }
 
@@ -738,14 +741,14 @@ on_expose_event (GtkWidget          *widget,
 	r = (float)color.red / 65535.0;
 	g = (float)color.green / 65535.0;
 	b = (float)color.blue / 65535.0;
-	cairo_set_source_rgba (cr, r, g, b, 0.5);
+	cairo_set_source_rgba (cr, r, g, b, BG_ALPHA);
 	cairo_fill_preserve (cr);
 
 	color = GTK_WIDGET (window)->style->fg [GTK_STATE_NORMAL];
 	r = (float)color.red / 65535.0;
 	g = (float)color.green / 65535.0;
 	b = (float)color.blue / 65535.0;
-	cairo_set_source_rgba (cr, r, g, b, 0.5);
+	cairo_set_source_rgba (cr, r, g, b, BG_ALPHA);
 	cairo_set_line_width (cr, 1);
 	cairo_stroke (cr);
 
