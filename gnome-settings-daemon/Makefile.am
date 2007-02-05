@@ -134,3 +134,15 @@ CLEANFILES = $(BUILT_SOURCES) $(service_DATA)
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gnome-settings-daemon.pc
+
+noinst_PROGRAMS =				\
+	test-media-window
+
+test_media_window_SOURCES =			\
+	gsd-media-keys-window.c			\
+	gsd-media-keys-window.h			\
+	test-media-window.c
+
+test_media_window_LDADD = \
+	$(GNOME_SETTINGS_DAEMON_LIBS)					\
+	$(XF86MISC_LIBS) $(GST_LIBS)

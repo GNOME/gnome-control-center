@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*-
  *
- * Copyright (C) 2006 William Jon McCann <mccann@jhu.edu>
+ * Copyright (C) 2006-2007 William Jon McCann <mccann@jhu.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -299,34 +299,88 @@ curved_rectangle (cairo_t *cr,
 	cairo_close_path (cr);
 }
 
-static void
-draw_action_eject (GsdMediaKeysWindow *window,
-		   cairo_t            *cr)
+static GdkPixbuf *
+load_pixbuf (GsdMediaKeysWindow *window,
+	     const char         *name,
+	     int                 icon_size)
 {
-	int window_width;
-	int window_height;
-	int width;
-	int height;
-	int x0;
-	int y0;
+	GtkIconTheme *theme;
+	GdkPixbuf    *pixbuf;
+
+	if (window != NULL && gtk_widget_has_screen (GTK_WIDGET (window))) {
+		theme = gtk_icon_theme_get_for_screen (gtk_widget_get_screen (GTK_WIDGET (window)));
+	} else {
+		theme = gtk_icon_theme_get_default ();
+	}
+
+	pixbuf = gtk_icon_theme_load_icon (theme,
+					   name,
+					   icon_size,
+					   GTK_ICON_LOOKUP_FORCE_SVG,
+					   NULL);
+
+	/* make sure the pixbuf is close to the requested size
+	 * this is necessary because GTK_ICON_LOOKUP_FORCE_SVG
+	 * seems to be broken */
+	if (pixbuf != NULL) {
+		int width;
+
+		width = gdk_pixbuf_get_width (pixbuf);
+		if (width < (float)icon_size * 0.75) {
+			g_object_unref (pixbuf);
+			pixbuf = NULL;
+		}
+	}
+
+	return pixbuf;
+}
+
+static gboolean
+render_eject (GsdMediaKeysWindow *window,
+	      cairo_t            *cr,
+	      double              x0,
+	      double              y0,
+	      double              width,
+	      double              height)
+{
+	GdkPixbuf  *pixbuf;
+	int         icon_size;
+	const char *icon_name;
+
+	icon_name = "media-eject";
+
+	icon_size = (int)width;
+
+	pixbuf = load_pixbuf (window, icon_name, icon_size);
+
+	if (pixbuf == NULL) {
+		return FALSE;
+	}
+
+	gdk_cairo_set_source_pixbuf (cr, pixbuf, x0, y0);
+	cairo_paint (cr);
+
+	g_object_unref (pixbuf);
+
+	return TRUE;
+}
+
+static void
+draw_eject (cairo_t *cr,
+	    double   x0,
+	    double   y0,
+	    double   width,
+	    double   height)
+{
 	int box_height;
 	int tri_height;
 	int separation;
 
-	gtk_window_get_size (GTK_WINDOW (window), &window_width, &window_height);
-
-	width = window_width * 0.5;
-	height = window_height * 0.5;
-	x0 = (window_width - width) / 2;
-	y0 = (window_height - height) / 2;
 	box_height = height * 0.2;
 	separation = box_height / 3;
 	tri_height = height - box_height - separation;
 
-	/* draw eject symbol */
 	cairo_rectangle (cr, x0, y0 + height - box_height, width, box_height);
-	cairo_set_source_rgba (cr, 1.0, 1.0, 1.0, 1.0);
-	cairo_fill (cr);
 
 	cairo_move_to (cr, x0, y0 + tri_height);
 	cairo_rel_line_to (cr, width, 0);
@@ -334,7 +388,48 @@ draw_action_eject (GsdMediaKeysWindow *window,
 	cairo_rel_line_to (cr, -width / 2, tri_height);
 	cairo_close_path (cr);
 	cairo_set_source_rgba (cr, 1.0, 1.0, 1.0, 1.0);
-	cairo_fill (cr);
+	cairo_fill_preserve (cr);
+
+	cairo_set_source_rgba (cr, 0.6, 0.6, 0.6, 0.5);
+	cairo_set_line_width (cr, 2);
+	cairo_stroke (cr);
+}
+
+static void
+draw_action_eject (GsdMediaKeysWindow *window,
+		   cairo_t            *cr)
+{
+	int      window_width;
+	int      window_height;
+	double   width;
+	double   height;
+	double   x0;
+	double   y0;
+	gboolean res;
+
+	gtk_window_get_size (GTK_WINDOW (window), &window_width, &window_height);
+
+	width = window_width * 0.65;
+	height = window_height * 0.65;
+	x0 = (window_width - width) / 2;
+	y0 = (window_height - height) / 2;
+
+#if 0
+	g_message ("eject box: w=%f h=%f x0=%f y0=%f",
+		   width,
+		   height,
+		   x0,
+		   y0);
+#endif
+
+	res = render_eject (window,
+			    cr,
+			    x0, y0,
+			    width, height);
+	if (! res) {
+		/* draw eject symbol */
+		draw_eject (cr, x0, y0, width, height);
+	}
 }
 
 static void
@@ -353,11 +448,16 @@ draw_waves (cairo_t *cr,
 		double angle2;
 		double radius;
 
-		angle1 = -M_PI / 3;
-		angle2 = M_PI / 3;
+		angle1 = -M_PI / 4;
+		angle2 = M_PI / 4;
 
 		radius = (i + 1) * (max_radius / n_waves);
 		cairo_arc (cr, cx, cy, radius, angle1, angle2);
+		cairo_set_source_rgba (cr, 0.6, 0.6, 0.6, 0.5);
+		cairo_set_line_width (cr, 14);
+		cairo_set_line_cap  (cr, CAIRO_LINE_CAP_ROUND);
+		cairo_stroke_preserve (cr);
+
 		cairo_set_source_rgba (cr, 1.0, 1.0, 1.0, 1.0);
 		cairo_set_line_width (cr, 10);
 		cairo_set_line_cap  (cr, CAIRO_LINE_CAP_ROUND);
@@ -374,41 +474,121 @@ draw_speaker (cairo_t *cr,
 {
 	double box_width;
 	double box_height;
+	double x0;
+	double y0;
 
 	box_width = width / 3;
 	box_height = height / 3;
 
-	cairo_rectangle (cr, cx - box_width / 2, cy - box_height / 2, box_width, box_height);
-	cairo_set_source_rgba (cr, 1.0, 1.0, 1.0, 1.0);
-	cairo_fill (cr);
+	x0 = cx - (width / 2) + box_width;
+	y0 = cy - box_height / 2;
 
-	cairo_move_to (cr, cx, cy);
-	cairo_rel_line_to (cr, width / 2, -height / 2);
-	cairo_rel_line_to (cr, 0, height);
-	cairo_rel_line_to (cr, -width / 2, -height / 2);
+	cairo_move_to (cr, x0, y0);
+	cairo_rel_line_to (cr, - box_width, 0);
+	cairo_rel_line_to (cr, 0, box_height);
+	cairo_rel_line_to (cr, box_width, 0);
+
+	cairo_line_to (cr, cx + box_width, cy + height / 2);
+	cairo_rel_line_to (cr, 0, -height);
+	cairo_line_to (cr, x0, y0);
 	cairo_close_path (cr);
+
 	cairo_set_source_rgba (cr, 1.0, 1.0, 1.0, 1.0);
-	cairo_fill (cr);
+	cairo_fill_preserve (cr);
+
+	cairo_set_source_rgba (cr, 0.6, 0.6, 0.6, 0.5);
+	cairo_set_line_width (cr, 2);
+	cairo_stroke (cr);
+}
+
+static gboolean
+render_speaker (GsdMediaKeysWindow *window,
+		cairo_t            *cr,
+		double              x0,
+		double              y0,
+		double              width,
+		double              height)
+{
+	GdkPixbuf         *pixbuf;
+	int                icon_size;
+	int                n;
+	static const char *icon_names[] = {
+		"audio-volume-muted",
+		"audio-volume-low",
+		"audio-volume-medium",
+		"audio-volume-high",
+		NULL
+	};
+
+	if (window->priv->volume_muted) {
+		n = 0;
+	} else {
+		/* select image */
+		n = 3 * window->priv->volume_level / 100 + 1;
+		if (n < 1) {
+			n = 1;
+		} else if (n > 3) {
+			n = 3;
+		}
+	}
+
+	icon_size = (int)width;
+
+	pixbuf = load_pixbuf (window, icon_names[n], icon_size);
+
+	if (pixbuf == NULL) {
+		return FALSE;
+	}
+
+	gdk_cairo_set_source_pixbuf (cr, pixbuf, x0, y0);
+	cairo_paint (cr);
+
+	g_object_unref (pixbuf);
+
+	return TRUE;
 }
 
 static void
-draw_volume_boxes (cairo_t *cr,
-		   double   percentage,
-		   double   x0,
-		   double   y0,
-		   double   width,
-		   double   height)
+draw_volume_boxes (GsdMediaKeysWindow *window,
+		   cairo_t            *cr,
+		   double              percentage,
+		   double              x0,
+		   double              y0,
+		   double              width,
+		   double              height)
 {
-	gdouble x1;
+	gdouble  x1;
+	GdkColor color;
+	double   r, g, b;
 
 	x1 = width * percentage;
 
+	/* bar background */
+	color = GTK_WIDGET (window)->style->dark [GTK_STATE_NORMAL];
+	r = (float)color.red / 65535.0;
+	g = (float)color.green / 65535.0;
+	b = (float)color.blue / 65535.0;
 	cairo_rectangle (cr, x0, y0, width, height);
-	cairo_set_source_rgba (cr, 0.5, 0.5, 0.5, 1.0);
+	cairo_set_source_rgba (cr, r, g, b, 1.0);
 	cairo_fill (cr);
 
+	/* bar border */
+	color = GTK_WIDGET (window)->style->dark [GTK_STATE_SELECTED];
+	r = (float)color.red / 65535.0;
+	g = (float)color.green / 65535.0;
+	b = (float)color.blue / 65535.0;
+	cairo_rectangle (cr, x0, y0, width, height);
+	cairo_set_source_rgba (cr, r, g, b, 1.0);
+	cairo_set_line_width (cr, 1);
+	cairo_stroke (cr);
+
+	/* bar progress */
+	color = GTK_WIDGET (window)->style->bg [GTK_STATE_SELECTED];
+	r = (float)color.red / 65535.0;
+	g = (float)color.green / 65535.0;
+	b = (float)color.blue / 65535.0;
 	cairo_rectangle (cr, x0, y0, x1, height);
-	cairo_set_source_rgba (cr, 1.0, 1.0, 1.0, 1.0);
+	cairo_set_source_rgba (cr, r, g, b, 1.0);
 	cairo_fill (cr);
 }
 
@@ -418,54 +598,87 @@ draw_action_volume (GsdMediaKeysWindow *window,
 {
 	int window_width;
 	int window_height;
-	int width;
-	int height;
-	double speaker_width;
-	double speaker_height;
-	double speaker_cx;
-	double speaker_cy;
-	double wave_x0;
-	double wave_y0;
-	double wave_radius;
-	double box_x0;
-	double box_y0;
-	double box_width;
-	double box_height;
+	double icon_box_width;
+	double icon_box_height;
+	double icon_box_x0;
+	double icon_box_y0;
+	double volume_box_x0;
+	double volume_box_y0;
+	double volume_box_width;
+	double volume_box_height;
+	gboolean res;
 
 	gtk_window_get_size (GTK_WINDOW (window), &window_width, &window_height);
 
-	width = window_width * 0.5;
-	height = window_height * 0.5;
+	icon_box_width = window_width * 0.65;
+	icon_box_height = window_height * 0.65;
+	volume_box_width = icon_box_width;
+	volume_box_height = window_height * 0.05;
 
-	speaker_width = width * 0.75;
-	speaker_height = height * 0.75;
-	speaker_cx = window_width / 4;
-	speaker_cy = window_height / 3;
+	icon_box_x0 = (window_width - icon_box_width) / 2;
+	icon_box_y0 = (window_height - icon_box_height - volume_box_height) / 2;
+	volume_box_x0 = icon_box_x0;
+	volume_box_y0 = icon_box_height + icon_box_y0;
 
-	wave_x0 = window_width / 2;
-	wave_y0 = speaker_cy;
-	wave_radius = width / 2;
+#if 0
+	g_message ("icon box: w=%f h=%f x0=%f y0=%f",
+		   icon_box_width,
+		   icon_box_height,
+		   icon_box_x0,
+		   icon_box_y0);
+	g_message ("volume box: w=%f h=%f x0=%f y0=%f",
+		   volume_box_width,
+		   volume_box_height,
+		   volume_box_x0,
+		   volume_box_y0);
+#endif
 
-	box_x0 = (window_width - width) / 2;
-	box_y0 = window_width - (window_width - width) / 2;
-	box_width = width;
-	box_height = height * 0.1;
+	res = render_speaker (window,
+			      cr,
+			      icon_box_x0, icon_box_y0,
+			      icon_box_width, icon_box_height);
+	if (! res) {
+		double speaker_width;
+		double speaker_height;
+		double speaker_cx;
+		double speaker_cy;
+		double wave_x0;
+		double wave_y0;
+		double wave_radius;
 
-	/* draw speaker symbol */
-	draw_speaker (cr, speaker_cx, speaker_cy, speaker_width, speaker_height);
+		speaker_width = icon_box_width * 0.5;
+		speaker_height = icon_box_height * 0.75;
+		speaker_cx = icon_box_x0 + speaker_width / 2;
+		speaker_cy = icon_box_y0 + speaker_height / 2;
 
-	/* draw sound waves */
-	if (! window->priv->volume_muted) {
-		draw_waves (cr, wave_x0, wave_y0, wave_radius);
+		wave_x0 = window_width / 2;
+		wave_y0 = speaker_cy;
+		wave_radius = icon_box_width / 2;
+
+#if 0
+		g_message ("speaker box: w=%f h=%f cx=%f cy=%f",
+			   speaker_width,
+			   speaker_height,
+			   speaker_cx,
+			   speaker_cy);
+#endif
+
+		/* draw speaker symbol */
+		draw_speaker (cr, speaker_cx, speaker_cy, speaker_width, speaker_height);
+		/* draw sound waves */
+		if (! window->priv->volume_muted) {
+			draw_waves (cr, wave_x0, wave_y0, wave_radius);
+		}
 	}
 
 	/* draw volume meter */
-	draw_volume_boxes (cr,
+	draw_volume_boxes (window,
+			   cr,
 			   (double)window->priv->volume_level / 100.0,
-			   box_x0,
-			   box_y0,
-			   box_width,
-			   box_height);
+			   volume_box_x0,
+			   volume_box_y0,
+			   volume_box_width,
+			   volume_box_height);
 }
 
 static void
@@ -494,6 +707,8 @@ on_expose_event (GtkWidget          *widget,
 	cairo_surface_t *surface;
 	int              width;
 	int              height;
+	GdkColor         color;
+	double           r, g, b;
 
 	context = gdk_cairo_create (GTK_WIDGET (window)->window);
 
@@ -518,9 +733,21 @@ on_expose_event (GtkWidget          *widget,
 	cairo_paint (cr);
 
 	/* draw a box */
-	curved_rectangle (cr, 0, 0, width, height, 50);
-	cairo_set_source_rgba (cr, 0.2, 0.2, 0.2, 0.5);
-	cairo_fill (cr);
+	curved_rectangle (cr, 0, 0, width, height, height / 10);
+	color = GTK_WIDGET (window)->style->bg [GTK_STATE_NORMAL];
+	r = (float)color.red / 65535.0;
+	g = (float)color.green / 65535.0;
+	b = (float)color.blue / 65535.0;
+	cairo_set_source_rgba (cr, r, g, b, 0.5);
+	cairo_fill_preserve (cr);
+
+	color = GTK_WIDGET (window)->style->fg [GTK_STATE_NORMAL];
+	r = (float)color.red / 65535.0;
+	g = (float)color.green / 65535.0;
+	b = (float)color.blue / 65535.0;
+	cairo_set_source_rgba (cr, r, g, b, 0.5);
+	cairo_set_line_width (cr, 1);
+	cairo_stroke (cr);
 
 	/* draw action */
 	draw_action (window, cr);
@@ -531,6 +758,9 @@ on_expose_event (GtkWidget          *widget,
 	cairo_paint (context);
 
  done:
+	if (surface != NULL) {
+		cairo_surface_destroy (surface);
+	}
 	cairo_destroy (context);
 
 	return FALSE;
