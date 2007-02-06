@@ -19,6 +19,11 @@ sys_in_files = gnomecc.desktop.in
 sys_DATA = $(sys_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
+directorydir = $(datadir)/desktop-directories
+directory_in_files = gnomecc.directory.in
+directory_DATA = $(directory_in_files:.directory.in=.directory)
+@INTLTOOL_DIRECTORY_RULE@
+
 schemasdir   = @GCONF_SCHEMA_FILE_DIR@
 schemas_DATA = control-center.schemas
 @INTLTOOL_SCHEMAS_RULE@
@@ -32,6 +37,9 @@ if GCONF_SCHEMAS_INSTALL
 	fi
 endif
 
-EXTRA_DIST = gnomecc.desktop.in.in $(schemas_DATA).in
+menudir = $(sysconfdir)/xdg/menus
+menu_DATA = gnomecc.menu
 
-DISTCLEANFILES = gnomecc.desktop gnomecc.desktop.in $(schemas_DATA)
+EXTRA_DIST = gnomecc.desktop.in.in gnomecc.directory.in gnomecc.menu $(schemas_DATA).in
+
+DISTCLEANFILES = gnomecc.desktop gnomecc.desktop.in gnomecc.directory $(schemas_DATA)
