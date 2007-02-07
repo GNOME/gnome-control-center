@@ -350,11 +350,12 @@ keyentry_sort_func (GtkTreeModel *model,
 }
 
 static void
-clear_old_model (GladeXML  *dialog,
-                 GtkWidget *tree_view)
+clear_old_model (GladeXML  *dialog)
 {
+  GtkWidget *tree_view;
   GtkTreeModel *model;
 
+  tree_view = WID ("shortcut_treeview");
   model = get_real_model (GTK_TREE_VIEW (tree_view));
 
   if (model == NULL)
@@ -561,7 +562,7 @@ append_keys_to_tree (GladeXML           *dialog,
 static void
 reload_key_entries (gpointer wm_name, GladeXML *dialog)
 {
-  clear_old_model (dialog, WID ("shortcut_treeview"));
+  clear_old_model (dialog);
   
   append_keys_to_tree (dialog, _("Desktop"), desktop_key_list);
   append_keys_to_tree (dialog, _("Sound"), sounds_key_list);
@@ -877,11 +878,18 @@ static void
 cb_dialog_response (GtkWidget *widget, gint response_id, gpointer data)
 {
 	if (response_id == GTK_RESPONSE_HELP)
-		capplet_help (GTK_WINDOW (widget),
-			      "user-guide.xml",
-			      "goscustdesk-39");
+          {
+            capplet_help (GTK_WINDOW (widget),
+                          "user-guide.xml",
+                          "goscustdesk-39");
+          }
 	else
-		gtk_main_quit ();
+          {
+            GladeXML *dialog = data;
+
+            clear_old_model (dialog);
+            gtk_main_quit ();
+          }
 }
 
 static void
@@ -950,8 +958,7 @@ setup_dialog (GladeXML *dialog)
   capplet_set_icon (widget, "gnome-settings-keybindings");
   gtk_widget_show (widget);
 
-  g_signal_connect (G_OBJECT (widget), "response", G_CALLBACK(cb_dialog_response), NULL);
-  g_signal_connect (G_OBJECT (widget), "close", gtk_main_quit, NULL);
+  g_signal_connect (G_OBJECT (widget), "response", G_CALLBACK(cb_dialog_response), dialog);
 }
 
 int
@@ -979,7 +986,6 @@ main (int argc, char *argv[])
   
   gtk_main ();
 
-  clear_old_model (dialog, WID ("shortcut_treeview"));
   g_object_unref (dialog);
   g_object_unref (program);
   return 0;
