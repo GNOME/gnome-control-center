@@ -369,7 +369,7 @@ about_me_load_string_field (GnomeAboutMe *me, const gchar *wid, guint cid, guint
 {
 	GtkWidget *widget;
 	GladeXML  *dialog;
-	gchar     *str;
+	const gchar *str;
 
 	dialog = me->dialog;
 
@@ -727,6 +727,7 @@ about_me_setup_dialog (void)
 	struct passwd *pwent;
 	char *user = NULL;
 	gchar *str;
+	gchar **tok;
 
 	me = g_new0 (GnomeAboutMe, 1);
 
@@ -802,7 +803,6 @@ about_me_setup_dialog (void)
 				_("Unknown login ID, the user database might be corrupted"));
 		return -1;
 	}
-	gchar **tok;
 	tok = g_strsplit (pwent->pw_gecos, ",", 0);
 
 	/************************************************/

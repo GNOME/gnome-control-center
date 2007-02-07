@@ -26,9 +26,16 @@ desktopdir = $(datadir)/applications
 Desktop_in_files = gnome-about-me.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
-Gladedir   = $(pkgdatadir)/glade
-Glade_DATA = gnome-about-me.glade
+gladedir   = $(pkgdatadir)/glade
+glade_DATA = gnome-about-me.glade
 
-INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS) $(LIBEBOOK_CFLAGS)
+INCLUDES = \
+	$(GNOMECC_CAPPLETS_CFLAGS) \
+	$(LIBEBOOK_CFLAGS) \
+	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\"" \
+	-DGNOMECC_GLADE_DIR="\"$(gladedir)\"" \
+	-DGNOMECC_PIXMAP_DIR="\"$(pixmapdir)\"" \
+	-DGNOMELOCALEDIR="\"$(datadir)/locale\""
+
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA)
-EXTRA_DIST = $(Glade_DATA) $(pixmap_DATA)
+EXTRA_DIST = $(glade_DATA) $(pixmap_DATA)

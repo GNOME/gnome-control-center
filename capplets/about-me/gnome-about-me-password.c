@@ -738,7 +738,7 @@ passdlg_set_auth_state (PasswordDialog *pdialog, gboolean state)
 		gtk_widget_grab_focus (GTK_WIDGET (pdialog->new_password));
 		
 		/* Set open lock image */
-		gtk_image_set_from_file (GTK_IMAGE (pdialog->dialog_image), GNOMECC_DATA_DIR "/pixmaps/gnome-about-me-lock-open.png");
+		gtk_image_set_from_file (GTK_IMAGE (pdialog->dialog_image), GNOMECC_PIXMAP_DIR "/gnome-about-me-lock-open.png");
 	} else {
 		/* Not authenticated state */
 		
@@ -746,7 +746,7 @@ passdlg_set_auth_state (PasswordDialog *pdialog, gboolean state)
 		gtk_widget_grab_focus (GTK_WIDGET (pdialog->current_password));
 		
 		/* Set closed lock image */
-		gtk_image_set_from_file (GTK_IMAGE (pdialog->dialog_image), GNOMECC_DATA_DIR "/pixmaps/gnome-about-me-lock.png");
+		gtk_image_set_from_file (GTK_IMAGE (pdialog->dialog_image), GNOMECC_PIXMAP_DIR "/gnome-about-me-lock.png");
 	}
 }
 
@@ -833,7 +833,6 @@ passdlg_validate_passwords (PasswordDialog *pdialog)
 	GladeXML		*dialog;
 	const gchar	*new_password, *retyped_password;
 	glong			nlen, rlen;
-	gboolean 		valid = FALSE;
 	
 	dialog = pdialog->xml;
 	
