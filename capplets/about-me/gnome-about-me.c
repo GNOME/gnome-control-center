@@ -67,7 +67,7 @@ typedef struct {
 	guint	      	 commit_timeout_id;
 } GnomeAboutMe;
 
-static GnomeAboutMe *me;
+static GnomeAboutMe *me = NULL;
 
 struct WidToCid{
 	gchar *wid;
@@ -151,6 +151,25 @@ about_me_error (GtkWindow *parent, gchar *str)
 
 
 /********************/
+static void
+about_me_destroy (GnomeAboutMe *me)
+{
+	e_contact_address_free (me->addr1);
+	e_contact_address_free (me->addr2);
+
+	if (me->contact)
+		g_object_unref (me->contact);
+	if (me->book)
+		g_object_unref (me->book);
+	if (me->dialog)
+		g_object_unref (me->dialog);
+
+	g_free (me->person);
+	g_free (me->login);
+	g_free (me->username);
+	g_free (me);
+}
+
 static void
 about_me_commit (GnomeAboutMe *me)
 {
@@ -692,16 +711,7 @@ about_me_button_clicked_cb (GtkDialog *dialog, gint response_id, GnomeAboutMe *m
 			about_me_commit (me);
 		}
 
-		e_contact_address_free (me->addr1);
-		e_contact_address_free (me->addr2);
-
-		g_object_unref (me->contact);
-		g_object_unref (me->book);
-		g_object_unref (me->dialog);
-
-		g_free (me->person);
-		g_free (me);
-
+		about_me_destroy (me);
 		gtk_main_quit ();
 	}
 }
@@ -725,7 +735,6 @@ about_me_setup_dialog (void)
 	GError 	     *error = NULL;
 
 	struct passwd *pwent;
-	char *user = NULL;
 	gchar *str;
 	gchar **tok;
 
@@ -735,8 +744,9 @@ about_me_setup_dialog (void)
 				"about-me-dialog", NULL);
 
 	if (dialog == NULL) {
-		g_error ("Unable to load glade file.");
-		exit (1);
+		g_warning ("Unable to load glade file.");
+		about_me_destroy (me);
+		return -1;
 	}
 
 	me->dialog = dialog;
@@ -769,6 +779,7 @@ about_me_setup_dialog (void)
 		if (error->code == E_BOOK_ERROR_PROTOCOL_NOT_SUPPORTED) {
 			about_me_error (NULL, _("There was an error while trying to get the addressbook information\n" \
 						"Evolution Data Server can't handle the protocol"));
+			about_me_destroy (me);
 			return -1;
 		}	
 
@@ -795,19 +806,19 @@ about_me_setup_dialog (void)
 	}
 
 	/************************************************/
-	user = get_user_login ();
+	me->login = get_user_login ();
 	setpwent ();
-	pwent = getpwnam (user);
+	pwent = getpwnam (me->login);
 	if (pwent == NULL) {
 		about_me_error (GTK_WINDOW (WID ("about-me-dialog")), 
 				_("Unknown login ID, the user database might be corrupted"));
+		about_me_destroy (me);
 		return -1;
 	}
 	tok = g_strsplit (pwent->pw_gecos, ",", 0);
 
 	/************************************************/
 
-	me->login = g_strdup (user);
 	if (tok[0] == NULL || strlen (tok[0]) == 0)
 		me->username = NULL;
 	else
@@ -818,7 +829,7 @@ about_me_setup_dialog (void)
 
 	widget = WID ("fullname"); 
 	if (tok[0] == NULL || strlen (tok[0]) == 0) {
-		str = g_strdup_printf ("<b><span size=\"xx-large\">%s</span></b>", user);
+		str = g_strdup_printf ("<b><span size=\"xx-large\">%s</span></b>", me->login);
 	} else {
 		str = g_strdup_printf ("<b><span size=\"xx-large\">%s</span></b>", tok[0]);
 	}
@@ -827,15 +838,16 @@ about_me_setup_dialog (void)
 	g_free (str);
 
 	widget = WID ("login");
-	gtk_label_set_text (GTK_LABEL (widget), user);
+	gtk_label_set_text (GTK_LABEL (widget), me->login);
 
 	if (tok[0] == NULL || strlen (tok[0]) == 0) {
-		str = g_strdup_printf (_("About %s"), user);
+		str = g_strdup_printf (_("About %s"), me->login);
 	} else {
 		str = g_strdup_printf (_("About %s"), tok[0]);
 	}
 	gtk_window_set_title (GTK_WINDOW (main_dialog), str);
 	g_free (str);
+	g_strfreev (tok);
 
 	widget = WID ("password");
 	g_signal_connect (G_OBJECT (widget), "clicked",
@@ -859,20 +871,25 @@ about_me_setup_dialog (void)
 int
 main (int argc, char **argv)
 {
+	GnomeProgram *program;
+	int rc = 0;
+
 	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 
-	gnome_program_init ("gnome-about-me", VERSION,
-		LIBGNOMEUI_MODULE, argc, argv,
-		GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
-		NULL);
+	program = gnome_program_init ("gnome-about-me", VERSION,
+			LIBGNOMEUI_MODULE, argc, argv,
+			GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
+			NULL);
 
-	if (about_me_setup_dialog () == -1) {
-		return -1;
-	} else {
+	rc = about_me_setup_dialog ();
+	
+	if (rc != -1) {
 		gtk_main ();
 	}
 
-	return 0;
+	g_object_unref (program);
+
+	return rc;
 }
