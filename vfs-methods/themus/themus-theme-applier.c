@@ -17,12 +17,15 @@
  * Boston, MA 02111-1307, USA.
  */
 
+#include "config.h"
+
 #include <stdlib.h>
 
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <glade/glade.h>
 #include <libgnome/libgnome.h>
+#include <libgnomeui/gnome-ui-init.h>
 #include <libgnomevfs/gnome-vfs.h>
 #include <gconf/gconf-client.h>
 
@@ -31,52 +34,20 @@
 
 #define FONT_KEY           "/desktop/gnome/interface/font_name"
 
-int main (int argc, char **argv)
+static gboolean
+run_apply_font_dialog (GnomeThemeMetaInfo *theme)
 {
-	GnomeVFSURI *uri;
-	GnomeThemeMetaInfo *theme;
-	GnomeProgram *program = NULL;
-	GladeXML *font_xml;
-	GtkWidget *font_dialog;
-	GtkWidget *font_sample;
 	gboolean apply_font = FALSE;
-	poptContext ctx;
-	gchar **args;
-
-	gtk_init (&argc, &argv);
-	program = gnome_program_init ("ThemeApplier", "0.3.0", LIBGNOME_MODULE,
-				      argc, argv, GNOME_PARAM_NONE);
-	
-	g_object_get (program, GNOME_PARAM_POPT_CONTEXT, &ctx, NULL);
-	args = (char**) poptGetArgs(ctx);
-
-	if (!args) return 1;
-
-	gnome_vfs_init ();
-	gnome_theme_init (NULL);
-		
-	uri = gnome_vfs_uri_new (args[0]);
-
-	if (!uri)
-	{
-		g_object_unref (program);
-		return 1;
-	}
-
-	theme = gnome_theme_read_meta_theme (uri);
-	gnome_vfs_uri_unref (uri);
-
-	if (!theme)
-	{
-		g_object_unref (program);
-		return 1;
-	}
 
 	if (theme->application_font) {
-		glade_init ();
+		GladeXML *font_xml;
+
 		font_xml = glade_xml_new (GNOMECC_GLADE_DIR "/apply-font.glade",
 					  NULL, NULL);
 		if (font_xml) {
+			GtkWidget *font_dialog;
+			GtkWidget *font_sample;
+
 			font_dialog = glade_xml_get_widget (font_xml, "ApplyFontAlert");
 			font_sample = glade_xml_get_widget (font_xml, "font_sample");
 			gtk_label_set_markup (GTK_LABEL (font_sample),
@@ -90,14 +61,70 @@ int main (int argc, char **argv)
 						
 			if (gtk_dialog_run (GTK_DIALOG(font_dialog)) == GTK_RESPONSE_OK)
 				apply_font = TRUE;
+
+			g_object_unref (font_xml);
 		} else {
 			/* if installation is borked, recover and apply the font */
 			apply_font = TRUE;
 		}
 	}
+	return apply_font;
+}
+
+int
+main (int argc, char **argv)
+{
+	GnomeVFSURI *uri;
+	GnomeThemeMetaInfo *theme;
+	GnomeProgram *program;
+	gboolean apply_font;
+	GOptionContext *context;
+	gchar **arguments = NULL;
+	const GOptionEntry options[] = {
+		{ G_OPTION_REMAINING, 0, 0, G_OPTION_ARG_STRING_ARRAY, &arguments, NULL, N_("[FILE]") },
+		{NULL}
+	};
+
+	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
+	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+	textdomain (GETTEXT_PACKAGE);
+
+	context = g_option_context_new ("- GNOME Theme Applier");
+#if GLIB_CHECK_VERSION (2, 12, 0)
+	g_option_context_set_translation_domain (context, GETTEXT_PACKAGE);
+#endif
+	g_option_context_add_main_entries (context, options, NULL);
+
+	program = gnome_program_init ("themus-theme-applier", VERSION,
+				      LIBGNOMEUI_MODULE,
+				      argc, argv,
+				      GNOME_PARAM_GOPTION_CONTEXT, context,
+				      GNOME_PARAM_NONE);
+
+	if (!arguments || g_strv_length (arguments) != 1) {
+		/* FIXME: print help once bug 336089 is fixed */
+		g_strfreev (arguments);
+		goto error;
+	}
+
+	uri = gnome_vfs_uri_new (arguments[0]);
+	g_strfreev (arguments);
+
+	if (!uri)
+		goto error;
+
+	gnome_theme_init (NULL);
+
+	theme = gnome_theme_read_meta_theme (uri);
+	gnome_vfs_uri_unref (uri);
+
+	if (!theme)
+		goto error;
+
+	apply_font = run_apply_font_dialog (theme);
 
 	gnome_meta_theme_set (theme);
-			
+
 	if (apply_font) {
 		GConfClient *client = gconf_client_get_default ();
 		gconf_client_set_string (client, FONT_KEY, theme->application_font, NULL);
@@ -106,4 +133,8 @@ int main (int argc, char **argv)
 
 	g_object_unref (program);
 	return 0;
+
+error:
+	g_object_unref (program);
+	return 1;
 }
