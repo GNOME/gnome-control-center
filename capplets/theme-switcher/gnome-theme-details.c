@@ -48,6 +48,9 @@ static void load_theme_names                (GtkTreeView        *tree_view,
 					     const gchar        *default_theme);
 static char *path_to_theme_id               (const char *path);
 static void update_color_buttons_from_string (gchar *color_scheme);
+static void color_scheme_changed            (GObject           *settings,
+                                             GParamSpec        *pspec,
+                                             gpointer           data);
 
 void revert_color_scheme_key (GtkWidget *checkbutton, gpointer *data);
 
@@ -203,16 +206,25 @@ gtk_theme_update_remove_button (GtkTreeSelection *selection,
 }
 
 static void
-update_color_scheme_tab (void)
+update_color_scheme_tab (const gchar *theme)
 {
 	GSList *symbolic_colors = NULL;
 	GSList *engines = NULL;
 	gboolean fg, bg, base, text, fg_s, bg_s, enable_colors;
-	gchar *filename, *theme_name;
+	gchar *filename;
+  gchar *theme_name = NULL;
 	GtkSettings *settings;
 	GladeXML *dialog;
 
 	dialog = gnome_theme_manager_get_theme_dialog ();
+
+	if (theme == NULL) {
+		settings = gtk_settings_get_default ();
+		g_object_get (G_OBJECT (settings), "gtk-theme-name", &theme_name, NULL);
+		theme = theme_name;
+	}
+	filename = gtkrc_find_named (theme);
+
 
 	settings = gtk_settings_get_default ();
 	g_object_get (G_OBJECT (settings), "gtk-theme-name", &theme_name, NULL);
@@ -245,13 +257,24 @@ gtk_theme_selection_changed (GtkTreeSelection *selection,
 			     gpointer          data)
 {
   GladeXML *dialog;
+  GtkTreeModel *model;
+  GtkTreeIter iter;
 
   dialog = gnome_theme_manager_get_theme_dialog ();
 
   update_gconf_key_from_selection (selection, GTK_THEME_KEY);
   gtk_theme_update_remove_button(selection, WID("control_remove_button"), THEME_GTK);
 
-  update_color_scheme_tab ();
+  if (gtk_tree_selection_get_selected (selection, &model, &iter))
+    {
+      gchar *theme;
+
+      gtk_tree_model_get (model, &iter,
+                          THEME_ID_COLUMN, &theme,
+                          -1);
+      update_color_scheme_tab (theme);
+      g_free (theme);
+    }
 }
 
 static void
@@ -555,8 +578,6 @@ revert_color_scheme_key (GtkWidget *checkbutton, gpointer *data)
   client = gconf_client_get_default ();
   gconf_client_set_string (client, COLOR_SCHEME_KEY, "", NULL);
   g_object_unref (G_OBJECT (client));
-
-  gnome_theme_details_update_from_gconf ();
 }
 
 void
@@ -620,6 +641,9 @@ gnome_theme_details_init (void)
 
   g_object_get (G_OBJECT (gtk_settings_get_default()), "gtk-color-scheme", &theme, NULL);
   update_color_buttons_from_string (theme);
+
+  g_signal_connect (gtk_settings_get_default(), "notify::gtk-color-scheme", 
+                    G_CALLBACK (color_scheme_changed),  NULL);
 
   /* general signals */
   g_signal_connect (G_OBJECT (parent), "response", G_CALLBACK (cb_dialog_response), NULL);
@@ -938,6 +962,7 @@ gnome_theme_details_update_from_gconf (void)
   tree_view = WID ("control_theme_treeview");
   theme = gconf_client_get_string (client, GTK_THEME_KEY, NULL);
   update_list_something (tree_view, theme);
+  update_color_scheme_tab (theme);
   g_free (theme);
 
   tree_view = WID ("window_theme_treeview");
@@ -954,13 +979,26 @@ gnome_theme_details_update_from_gconf (void)
 
   /* update colour scheme tab */
   theme = gconf_client_get_string (client, COLOR_SCHEME_KEY, NULL);
-  /* if gconf string is not present, we need to look in gtk settings for a value */
-  if (theme == NULL || strcmp (theme, ""))
-    g_object_get (G_OBJECT (gtk_settings_get_default()), "gtk-color-scheme", &theme, NULL);
   update_color_buttons_from_string (theme);
   g_free (theme);
 
-  update_color_scheme_tab ();
+  g_object_unref (client);
+}
 
+static void
+color_scheme_changed (GObject    *settings,
+                      GParamSpec *pspec,
+                      gpointer    data)
+{
+  GConfClient *client;
+  gchar *theme;
+
+  client = gconf_client_get_default ();
+  theme = gconf_client_get_string (client, COLOR_SCHEME_KEY, NULL);
+  if (theme == NULL || strcmp (theme, "") == 0)
+    g_object_get (settings, "gtk-color-scheme", &theme, NULL);
+
+  update_color_buttons_from_string (theme);
+  g_free (theme);
   g_object_unref (client);
 }

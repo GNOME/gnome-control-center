@@ -1,3 +1,14 @@
+2007-02-08  Thomas Wood  <thos@gnome.org>
+
+	Patch by: Matthias Clasen <mclasen@redhat.com>
+
+	* gnome-theme-details.c: (gtk_theme_update_remove_button),
+	(update_color_scheme_tab), (gtk_theme_selection_changed),
+	(color_select), (revert_color_scheme_key),
+	(gnome_theme_details_init), (update_color_buttons_from_string),
+	(gnome_theme_details_update_from_gconf): Listens for changes in the
+	gtk-color-scheme property of GtkSettings. Fixes bug 405210.
+
 2007-01-29  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* gnome-theme-details.c: (update_color_scheme_tab), (remove_theme),
