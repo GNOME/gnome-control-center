@@ -72,18 +72,20 @@ static GladeXML *
 create_dialog (void)
 {
 	GladeXML *dialog;
-	
+
 	dialog = glade_xml_new (GLADEDIR "/at-enable-dialog.glade", "at_properties_dialog", NULL);
-	
-	gtk_image_set_from_stock (GTK_IMAGE (WID ("at_close_and_logout_image")),
-				  GTK_STOCK_QUIT, GTK_ICON_SIZE_BUTTON);
-	
-	gtk_image_set_from_file (GTK_IMAGE (WID ("at_enable_image")),
-				 PIXMAPDIR "/at-support.png");
-	
-	gtk_image_set_from_file (GTK_IMAGE (WID ("at_applications_image")),
-				 PIXMAPDIR "/at-startup.png");
-	
+
+	if (dialog) {
+		gtk_image_set_from_stock (GTK_IMAGE (WID ("at_close_and_logout_image")),
+					  GTK_STOCK_QUIT, GTK_ICON_SIZE_BUTTON);
+
+		gtk_image_set_from_file (GTK_IMAGE (WID ("at_enable_image")),
+					 PIXMAPDIR "/at-support.png");
+
+		gtk_image_set_from_file (GTK_IMAGE (WID ("at_applications_image")),
+					 PIXMAPDIR "/at-startup.png");
+	}
+
 	return dialog;
 }
 
@@ -271,26 +273,33 @@ setup_dialog (GladeXML *dialog)
 int
 main (int argc, char *argv[])
 {
+	GnomeProgram *program;
 	GladeXML *dialog;
 	
 	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 	
-	gnome_program_init ("gnome-at-properties", VERSION,
-			    LIBGNOMEUI_MODULE, argc, argv,
-			    GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
-			    NULL);
+	program = gnome_program_init ("gnome-at-properties", VERSION,
+				      LIBGNOMEUI_MODULE, argc, argv,
+				      GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
+				      NULL);
 	
 	activate_settings_daemon ();
 	
 	dialog = create_dialog ();
-	
-	init_startup_state (dialog);
-	
-	setup_dialog (dialog);
 
-	gtk_main ();
-	
+	if (dialog) {
+		init_startup_state (dialog);
+
+		setup_dialog (dialog);
+
+		gtk_main ();
+
+		g_object_unref (dialog);
+	}
+
+	g_object_unref (program);
+
 	return 0;
 }
