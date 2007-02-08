@@ -101,6 +101,7 @@ static const KeyListEntry metacity_key_list[] =
   { "/apps/metacity/global_keybindings/switch_windows",            ALWAYS_VISIBLE,  0 },
   { "/apps/metacity/global_keybindings/switch_panels",             ALWAYS_VISIBLE,  0 },
   { "/apps/metacity/global_keybindings/cycle_windows",             ALWAYS_VISIBLE,  0 },
+  { "/apps/metacity/global_keybindings/cycle_group",               ALWAYS_VISIBLE,  0 },
   { "/apps/metacity/global_keybindings/cycle_panels",              ALWAYS_VISIBLE,  0 },
   { "/apps/metacity/global_keybindings/show_desktop",              ALWAYS_VISIBLE,  0 },
   { "/apps/metacity/global_keybindings/switch_to_workspace_1",     N_WORKSPACES_GT, 1 },
