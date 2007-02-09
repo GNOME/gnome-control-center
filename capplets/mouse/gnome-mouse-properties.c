@@ -302,13 +302,6 @@ cursor_size_from_widget (GConfPropertyEditor *peditor, const GConfValue *value)
 	return new_value;
 }
 
-/* Retrieve legacy settings */
-
-static void
-get_legacy_settings (void) 
-{
-}
-
 /* Double Click handling */
 
 struct test_data_t 
@@ -983,6 +976,8 @@ create_dialog (void)
 	(void) mouse_capplet_check_button_get_type ();
 
 	dialog = glade_xml_new (GNOMECC_GLADE_DIR "/gnome-mouse-properties.glade", "mouse_properties_dialog", NULL);
+	if (!dialog)
+		return NULL;
 
 	text = g_strdup_printf ("<b>%s</b>", _("Pointer Theme"));
 	gtk_label_set_markup (GTK_LABEL (WID ("cursor_category_label")), text);
@@ -1024,28 +1019,15 @@ main (int argc, char **argv)
 {
 	GnomeProgram   *program;
 	GConfClient    *client;
-	GConfChangeSet *changeset;
 	GladeXML       *dialog;
 	GtkWidget      *dialog_win;
-	GOptionContext *context;
-
-	static gboolean get_legacy;
-	static GOptionEntry cap_options[] = {
-		{ "get-legacy", 0, 0, G_OPTION_ARG_NONE, &get_legacy,
-		  N_("Retrieve and store legacy settings"), NULL },
-		{ NULL }
-	};
 
 	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 
-	context = g_option_context_new (_("- GNOME Mouse Preferences"));
-	g_option_context_add_main_entries (context, cap_options, GETTEXT_PACKAGE);
-
 	program = gnome_program_init ("gnome-mouse-properties", VERSION,
 				      LIBGNOMEUI_MODULE, argc, argv,
-				      GNOME_PARAM_GOPTION_CONTEXT, context,
 				      GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
 				      NULL);
 
@@ -1057,16 +1039,14 @@ main (int argc, char **argv)
 	gconf_client_add_dir (client, "/desktop/gnome/peripherals/mouse", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 	g_object_unref (client);
 
-	if (get_legacy) {
-		get_legacy_settings ();
-	} else {
-		changeset = NULL;
-		dialog = create_dialog ();
-		setup_dialog (dialog, changeset);
+	dialog = create_dialog ();
+
+	if (dialog) {
+		setup_dialog (dialog, NULL);
 
 		dialog_win = WID ("mouse_properties_dialog");
 		g_signal_connect (dialog_win, "response",
-				  G_CALLBACK (dialog_response_cb), changeset);
+				  G_CALLBACK (dialog_response_cb), NULL);
 
 		capplet_set_icon (dialog_win, "gnome-dev-mouse-optical");
 		gtk_widget_show (dialog_win);
