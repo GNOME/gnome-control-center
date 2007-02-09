@@ -27,7 +27,7 @@
 G_BEGIN_DECLS
 
 GObject *gnome_settings_server_get                      (void);
-void     gnome_settings_server_media_player_key_pressed (GObject *server, const gchar *key);
+gboolean gnome_settings_server_media_player_key_pressed (GObject *server, const gchar *key);
 
 G_END_DECLS
 

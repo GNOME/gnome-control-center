@@ -1,3 +1,14 @@
+2007-02-09  Jens Granseuer  <jensgr@gmx.net>
+
+	Based on a patch by: Bastien Nocera <hadess@hadess.net>
+
+	* gnome-settings-dbus.c:
+	(gnome_settings_server_media_player_key_pressed):
+	* gnome-settings-dbus.h:
+	* gnome-settings-multimedia-keys.c: (do_multimedia_player_action),
+	(do_action), (acme_filter_events): eat media player keys if someone is
+	listening on the dbus interface already (fixes bug #394313)
+
 2007-02-05  William Jon McCann  <mccann@jhu.edu>
 
 	* gsd-media-keys-window.c: (render_eject), (draw_eject),

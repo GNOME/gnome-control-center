@@ -558,13 +558,13 @@ do_sound_action (Acme *acme, int type)
 	dialog_show (acme);
 }
 
-static void
+static gboolean
 do_multimedia_player_action (Acme *acme, const gchar *key)
 {
-	gnome_settings_server_media_player_key_pressed (acme->server, key);
+	return gnome_settings_server_media_player_key_pressed (acme->server, key);
 }
 
-static void
+static gboolean
 do_action (Acme *acme, int type)
 {
 	gchar *cmd;
@@ -608,23 +608,25 @@ do_action (Acme *acme, int type)
 		do_www_action (acme, NULL);
 		break;
 	case PLAY_KEY:
-		do_multimedia_player_action (acme, "Play");
+		return do_multimedia_player_action (acme, "Play");
 		break;
 	case PAUSE_KEY:
-		do_multimedia_player_action (acme, "Pause");
+		return do_multimedia_player_action (acme, "Pause");
 		break;
 	case STOP_KEY:
-		do_multimedia_player_action (acme, "Stop");
+		return do_multimedia_player_action (acme, "Stop");
 		break;
 	case PREVIOUS_KEY:
-		do_multimedia_player_action (acme, "Previous");
+		return do_multimedia_player_action (acme, "Previous");
 		break;
 	case NEXT_KEY:
-		do_multimedia_player_action (acme, "Next");
+		return do_multimedia_player_action (acme, "Next");
 		break;
 	default:
 		g_assert_not_reached ();
 	}
+
+	return FALSE;
 }
 
 static GdkScreen *
@@ -689,8 +691,10 @@ acme_filter_events (GdkXEvent *xevent, GdkEvent *event, gpointer data)
 			acme->current_screen = acme_get_screen_from_event
 				(acme, xanyev);
 
-			do_action (acme, keys[i].key_type);
-			return GDK_FILTER_REMOVE;
+			if (do_action (acme, keys[i].key_type) == FALSE)
+				return GDK_FILTER_REMOVE;
+			else
+				return GDK_FILTER_CONTINUE;
 		}
 	}
 

@@ -134,16 +134,19 @@ gnome_settings_server_get (void)
 	return g_object_new (GNOME_SETTINGS_TYPE_SERVER, NULL);
 }
 
-void
+gboolean
 gnome_settings_server_media_player_key_pressed (GObject *server, const gchar *key)
 {
 	const gchar *application = NULL;
+	gboolean have_listeners = (GNOME_SETTINGS_SERVER (server)->media_players != NULL);
 
-	if (GNOME_SETTINGS_SERVER (server)->media_players != NULL) {
+	if (have_listeners) {
 		application = ((MediaPlayer *)GNOME_SETTINGS_SERVER (server)->media_players->data)->application;
 	}
 
 	g_signal_emit (server, signals[MEDIA_PLAYER_KEY_PRESSED], 0, application, key);
+
+	return !have_listeners;
 }
 
 static GObject*
