@@ -184,8 +184,11 @@ load_cursor (GConfClient *client)
   gdk_error_trap_push ();
   XSetFontPath (gdk_display, new_font_path, new_n_fonts);
   gdk_flush ();
-  gdk_error_trap_pop ();
- 
+
+  /* if there was an error setting the new path, revert */
+  if (gdk_error_trap_pop ())
+    XSetFontPath (gdk_display, font_path, n_fonts); 
+
   XFreeFontPath (font_path);
 
   g_free (new_font_path);
