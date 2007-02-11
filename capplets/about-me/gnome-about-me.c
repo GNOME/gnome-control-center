@@ -257,7 +257,7 @@ about_me_focus_out (GtkWidget *widget, GdkEventFocus *event, GnomeAboutMe *me)
 		gtk_text_iter_forward_to_end (&iter_end);
 		str = gtk_text_iter_get_text (&iter_start, &iter_end);
 	} else {
-		str = "";
+		str = g_strdup ("");
 	}
 
 	/* FIXME: i'm getting an empty address field in evolution */
