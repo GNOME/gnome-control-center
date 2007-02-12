@@ -30,6 +30,8 @@
 #include <libgnomevfs/gnome-vfs.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
+#include <glib/gi18n.h>
+
 static const gchar *
 get_ft_error(FT_Error error)
 {
@@ -227,67 +229,87 @@ main(int argc, char **argv)
     guchar *buffer;
     gint i, len, pen_x, pen_y;
     gunichar *thumbstr = NULL;
-    gint thumbstr_len = 2;
+    glong thumbstr_len = 2;
     gint font_size = FONT_SIZE;
+    gchar *thumbstr_utf8 = NULL;
+    gchar **arguments = NULL;
+    GOptionContext *context;
+    GError *gerror = NULL;
+    gboolean retval, default_thumbstr = TRUE;
+    gint rv = 1;
+    const GOptionEntry options[] = {
+	    { "text", 't', 0, G_OPTION_ARG_STRING, &thumbstr_utf8,
+	      N_("Text to thumbnail (default: Aa)"), N_("TEXT") },
+	    { "size", 's', 0, G_OPTION_ARG_INT, &font_size,
+	      N_("Font size (default: 64)"), N_("SIZE") },
+	    { G_OPTION_REMAINING, 0, 0, G_OPTION_ARG_FILENAME_ARRAY, &arguments,
+	      NULL, N_("FONT-FILE OUTPUT-FILE") },
+	    { NULL }
+    };
 
-    if (argc < 3) {
-	g_printerr("usage: thumbnailer fontfile output-image [text [font-size]]\n");
-	return 1;
+    bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
+    bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+    textdomain (GETTEXT_PACKAGE);
+
+    setlocale (LC_ALL, "");
+
+    context = g_option_context_new (NULL);
+    g_option_context_add_main_entries (context, options, GETTEXT_PACKAGE);
+
+    retval = g_option_context_parse (context, &argc, &argv, &gerror);
+    g_option_context_free (context);
+    if (!retval) {
+	g_printerr (_("Error parsing arguments: %s\n"), gerror->message);
+	g_error_free (gerror);
+        return 1;
     }
 
-    if (argc >= 4) {
+    if (!arguments || g_strv_length (arguments) != 2) {
+	/* FIXME: once glib bug 336089 is fixed, use print_help here instead! */
+	g_printerr("usage: %s [--text TEXT] [--size SIZE] FONT-FILE OUTPUT-FILE\n", argv[0]);
+	goto out;
+    }
+
+    if (thumbstr_utf8 != NULL) {
 	/* build ucs4 version of string to thumbnail */
-	gchar *tmpstr = NULL;
-	const char *charset = NULL;
-	GError *err = NULL;
-	gboolean is_utf8;
+	gerror = NULL;
+	thumbstr = g_utf8_to_ucs4 (thumbstr_utf8, strlen (thumbstr_utf8),
+				   NULL, &thumbstr_len, &gerror);
+	default_thumbstr = FALSE;
 
-	setlocale (LC_ALL, "");
-	is_utf8 = g_get_charset (&charset);
-	if (is_utf8) {
-		tmpstr = g_strdup (argv[3]);
+	/* Not sure this can really happen... */
+	if (gerror != NULL) {
+		g_printerr("Failed to convert: %s\n", gerror->message);
+		g_error_free (gerror);
+		goto out;
 	}
-	else {
-	    tmpstr = g_locale_to_utf8 (argv[3], -1, NULL, NULL, &err);
-	    if (err) {
-		g_error (err->message);
-	    }
-	}
-	thumbstr_len = g_utf8_strlen (tmpstr, -1);
-	thumbstr = g_utf8_to_ucs4_fast (tmpstr, -1, NULL);
-	g_free (tmpstr);
-	tmpstr = NULL;
-    }
-
-    if (argc == 5) {
-	/* font size given */
-	font_size = atoi (argv[4]);
     }
 
     if (!gnome_vfs_init()) {
 	g_printerr("could not initialise gnome-vfs\n");
-	return 1;
+	goto out;
     }
 
     error = FT_Init_FreeType(&library);
     if (error) {
 	g_printerr("could not initialise freetype: %s\n", get_ft_error(error));
-	return 1;
+	goto out;
     }
 
-    uri = gnome_vfs_make_uri_from_shell_arg (argv[1]);
+    uri = gnome_vfs_make_uri_from_shell_arg (arguments[0]);
     error = FT_New_Face_From_URI(library, uri, 0, &face);
     if (error) {
 	g_printerr("could not load face '%s': %s\n", uri,
 		   get_ft_error(error));
-	return 1;
+        g_free (uri);
+	goto out;
     }
     g_free (uri);
 
     error = FT_Set_Pixel_Sizes(face, 0, font_size);
     if (error) {
 	g_printerr("could not set pixel size: %s\n", get_ft_error(error));
-	/* return 1; */
+	/* goto out; */
     }
 
     for (i = 0; i < face->num_charmaps; i++) {
@@ -297,7 +319,7 @@ main(int argc, char **argv)
 	    error = FT_Set_Charmap(face, face->charmaps[i]);
 	    if (error) {
 		g_printerr("could not set charmap: %s\n", get_ft_error(error));
-		/* return 1; */
+		/* goto out; */
 	    }
 	    break;
 	}
@@ -307,7 +329,7 @@ main(int argc, char **argv)
 			    font_size*3*thumbstr_len/2, font_size*1.5);
     if (!pixbuf) {
 	g_printerr("could not create pixbuf\n");
-	return 1;
+	goto out;
     }
     buffer = gdk_pixbuf_get_pixels(pixbuf);
     len = gdk_pixbuf_get_rowstride(pixbuf) * gdk_pixbuf_get_height(pixbuf);
@@ -317,7 +339,7 @@ main(int argc, char **argv)
     pen_x = font_size/2;
     pen_y = font_size;
 
-    if (argc == 3) {
+    if (default_thumbstr) {
 	glyph_index1 = FT_Get_Char_Index (face, 'A');
 	glyph_index2 = FT_Get_Char_Index (face, 'a');
 
@@ -329,7 +351,7 @@ main(int argc, char **argv)
 	draw_char(pixbuf, face, glyph_index1, &pen_x, &pen_y);
 	draw_char(pixbuf, face, glyph_index2, &pen_x, &pen_y);
     }
-    else if (argc >= 4) {
+    else {
 	gunichar *p = thumbstr;
 	FT_Select_Charmap (face, FT_ENCODING_UNICODE);
 	i = 0;
@@ -339,24 +361,30 @@ main(int argc, char **argv)
 	    i++;
 	    p++;
 	}
-	g_free (thumbstr);
-	thumbstr = NULL;
     }
-    save_pixbuf(pixbuf, argv[2]);
-    gdk_pixbuf_unref(pixbuf);
+    save_pixbuf(pixbuf, arguments[1]);
+    g_object_unref(pixbuf);
 
     /* freeing the face causes a crash I haven't tracked down yet */
     error = FT_Done_Face(face);
     if (error) {
 	g_printerr("could not unload face: %s\n", get_ft_error(error));
-	return 1;
+	goto out;
     }
     error = FT_Done_FreeType(library);
     if (error) {
 	g_printerr("could not finalise freetype library: %s\n",
 		   get_ft_error(error));
-	return 1;
+	goto out;
     }
 
-    return 0;
+    rv = 0; /* success */
+
+  out:
+
+    g_strfreev (arguments);
+    g_free (thumbstr);
+    g_free (thumbstr_utf8);
+    
+    return rv;
 }
