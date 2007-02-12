@@ -1,3 +1,125 @@
+gnome-control-center 2.17.91
+
+common:
+- Compilation fixes (Kjartan Maraas)
+- Fixed localedir defines (Christian Persch) (#395383)
+- Use standard installation paths (Christian Persch) (#395383)
+- Use capplet name for G_LOG_DOMAIN (Jens Granseuer) (#380991)
+- Require GTK+ <= 2.10 (Jens Granseuer) (#358106)
+
+about me:
+- Fix build with gcc 2 (Jens Granseuer)
+- Fix memory leaks (Jens Granseuer)
+- Fix possible crash (Jens Granseuer)
+
+at-properties:
+- Fix reference leaks and dont segfault if glade file is not available (Jens Granseuer)
+
+default applications:
+- Use specific string as app ID in gnome_program_init (Christian Persch) (#403708)
+- Plug memory leaks (Jens Granseuer) (#395212)
+- Fix DATADIR define (Jens Granseuer)
+
+keybindings:
+- Issue a sensible error message when trying to use unmodified keybindings
+  (Jens Granseuer) (#328152)
+- Removed leftover call to gnome_theme_init (Jens Granseuer) (#157452)
+- Support localised key names (Jens Granseuer) (#145346)
+- Clean up sorting to not use an imaginary column (Jens Granseuer)
+- Avoid warnings when clearing at exit (Mariano Suárez-Alvarez) (#405175)
+- Added missing GConf key (Mariano Suárez-Alvarez)
+
+mouse:
+- Dont crash if the glade file is not available (Jens Granseuer)
+
+network:
+- Plug memory leaks (Jens Granseuer) (#395609)
+
+sound:
+- Polypaudio->PulseAudio renaming (Gabor Kelemen) (#394003)
+- Added a11y label relations for the devices tab (Patrick Wade) (#369302)
+
+theme switcher:
+- Fix compiler warnings (Thomas Wood)
+- Fixes on the suffix checks (Alberto Ruiz)
+- Pass correct order of arguments to gnome_vfs_xfer (Kjartan Maraas)
+- Listen for changes in the gtk-color-scheme property of GtkSettings (Thomas Wood)
+  (#405210)
+
+typing break:
+- Use specific string as app ID in gnome_program_init (Christian Persch) (#403708)
+- Use compositing to display the typing break window when available (Christian
+  Persch) (#363665)
+
+ui properties:
+- Plug memory leaks (Jens Granseuer)
+- Change "Editable menu accelerators" to "Editable menu shortcut keys" as per
+  the style guide (Jens Granseuer) (#337624)
+
+windows:
+- Plug memory leaks (Jens Granseuer)
+
+fontilus:
+- Use GOption argument parsing (Christian Persch) (#393994)
+- Fixed some leaks (Christian Persch)
+
+themus:
+- Port to GOption (Jens Granseuer) (#336286)
+
+settings daemon:
+- Prevent crashes/assertion failures trying to set ridiculously high/low
+  volumes (Jens Granseuer) (#401376)
+- Fixed property names (Jens Granseuer)
+- Dont install the same window filter twice (Jens Granseuer) (#382504)
+- Make sure we have a key event before treating it as such (Jens Granseuer)
+  (#382503)
+- Fixed leaks (Jens Granseuer, Paolo Borelli) (#342672)
+- Round volume instead of truncating on umute so a simple mute/unmute doesn't
+  lower the volume (Jens Granseuer) (#400966)
+- Make the new volume overlay window follow the icon and color themes
+  (William Jon McCann) (#403320)
+- Eat media player keys if someone is listening on the bus interface already
+  (Bastien Nocera) (#394313)
+- Revert to the old font path if the new one could not be set (Jens Granseuer)
+  (#397504)
+
+shell:
+- Prevent capplets from being launched twice (Rodrigo Moya)
+- Use correct GConf prefix (Rodrigo Moya)
+- Added default common tasks (Rodrigo Moya)
+- Respect the exit_on_close flag (Scott Reeves)
+- Added a flag controlling display of GenericName's (Scott Reeves)
+- Fix typo in usage string (Jens Granseuer) (#398361)
+- Respect the --disable-schemas-install configure flag (Christian Persch) (#401004)
+- Dump remnants of gstreamer-0.8 (Jens Granseuer)
+- Use custom gnomecc.menu instead of settings.menu (Denis Washington) (#402797)
+- Dont show Help menu if help is not available (Rodrigo Moya)
+- Disable package management/main-menu items in the context menu (Rodrigo Moya)
+- Use correct text color when highlighting (Rodney Dawes) (#398079)
+- Use smaller icons by default (Scott Reeves) (#405078)
+- Use G_GNUC_FUNCTION instead of non-portable __FUNCTION__ (Damien Carbery) (#383022)
+
+updated translations:
+- ar (Djihed Afifi)
+- be (Ihar Hrachyshka)
+- bg (Alexander Shopov)
+- ca (Jordi Mas and Josep Puigdemont i Casamajó)
+- cs (Jakub Friedl)
+- en_GB (David Lodge)
+- et (Priit Laes)
+- fr (Marc Lorber, Robert-André Mauchin and Stéphane Raimbault
+- he (Yair Hershkovitz)
+- hu (Gabor Kelemen)
+- ja (Takeshi AIHANA)
+- ko (Changwoo Ryu)
+- mk (Jovan Naumovski)
+- nb (Kjartan Maraas)
+- pl (Artur Flinta)
+- pt_BR (Luiz Fernando S. Armesto)
+- ru (Leonid Kanter)
+- sv (Daniel Nylander)
+- th (Theppitak Karoonboonyanan)
+------------------------------------------------------------------------------
 gnome-control-center 2.17.90
 
 common:
