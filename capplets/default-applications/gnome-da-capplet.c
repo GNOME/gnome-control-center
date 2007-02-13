@@ -568,23 +568,27 @@ web_gconf_changed_cb (GConfClient *client, guint id, GConfEntry *entry, GnomeDAC
 	return;
 
     if (strcmp (entry->key, DEFAULT_APPS_KEY_HTTP_EXEC) == 0) {
-	gchar* short_browser;
-	web_browser_update_combo_box (capplet, gconf_value_get_string (value));
-	web_browser_update_radio_buttons (capplet, gconf_value_get_string (value));
+	gchar *short_browser, *pos;
+	const gchar *value_str = gconf_value_get_string (value);
+
+	web_browser_update_combo_box (capplet, value_str);
+	web_browser_update_radio_buttons (capplet, value_str);
 
 	cs = gconf_change_set_new ();
 
 	gconf_change_set_set (cs, DEFAULT_APPS_KEY_HTTPS_EXEC, value);
 	gconf_change_set_set (cs, DEFAULT_APPS_KEY_UNKNOWN_EXEC, value);
 	gconf_change_set_set (cs, DEFAULT_APPS_KEY_ABOUT_EXEC, value);
-	short_browser = g_strndup(gconf_value_get_string(value),
-				  strstr(gconf_value_get_string(value), " ") -
-				  gconf_value_get_string(value));
+	pos = strstr (value_str, " ");
+	if (pos == NULL)
+	    short_browser = g_strdup (value_str);
+	else
+	    short_browser = g_strndup (value_str, pos - value_str);
 	gconf_change_set_set_string (cs, DEFAULT_APPS_KEY_BROWSER_EXEC, short_browser);
-	g_free(short_browser);
+	g_free (short_browser);
 
 	list_entry = g_list_find_custom (capplet->web_browsers,
-					 gconf_value_get_string (value),
+					 value_str,
 					 (GCompareFunc) web_item_comp);
 
 	if (list_entry) {

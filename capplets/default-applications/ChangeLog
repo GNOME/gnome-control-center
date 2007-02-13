@@ -1,5 +1,11 @@
 2007-02-13  Jens Granseuer  <jensgr@gmx.net>
 
+	* gnome-da-capplet.c: (web_gconf_changed_cb): don't try to read into
+	invalid territory when the user set a custom command without spaces.
+	Closes bug #407601.
+
+2007-02-13  Jens Granseuer  <jensgr@gmx.net>
+
 	* Makefile.am:
 	* gnome-da-capplet.c: (show_dialog):
 	* gnome-da-xml.c: (gnome_da_xml_load_list): really fix DATADIR and
