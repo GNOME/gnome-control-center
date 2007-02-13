@@ -746,8 +746,8 @@ show_dialog (GnomeDACapplet *capplet)
 {
     GConfValue *value;
 
-    if (g_file_test (GLADEDIR "/gnome-default-applications-properties.glade", G_FILE_TEST_EXISTS) != FALSE) {
-	capplet->xml = glade_xml_new (GLADEDIR "/gnome-default-applications-properties.glade", NULL, NULL);
+    if (g_file_test (GNOMECC_GLADE_DIR "/gnome-default-applications-properties.glade", G_FILE_TEST_EXISTS) != FALSE) {
+	capplet->xml = glade_xml_new (GNOMECC_GLADE_DIR "/gnome-default-applications-properties.glade", NULL, NULL);
     }
     else {
 	capplet->xml = glade_xml_new ("./gnome-default-applications-properties.glade", NULL, NULL);

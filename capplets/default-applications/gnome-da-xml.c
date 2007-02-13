@@ -219,8 +219,7 @@ gnome_da_xml_load_list (GnomeDACapplet *capplet)
 {
     gchar *filename;
 
-    filename = g_build_filename (DATADIR,
-				 "gnome-default-applications",
+    filename = g_build_filename (GNOMECC_DATA_DIR,
 				 "gnome-default-applications.xml",
 				 NULL);
 

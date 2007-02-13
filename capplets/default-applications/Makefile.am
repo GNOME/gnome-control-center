@@ -19,16 +19,16 @@ Desktop_in_files = default-applications.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
 xmldata_in_files = gnome-default-applications.xml.in
-xmldatadir = $(pkgdatadir)/gnome-default-applications
+xmldatadir = $(pkgdatadir)
 xmldata_DATA = $(xmldata_in_files:.xml.in=.xml)
 @INTLTOOL_XML_RULE@
 
 INCLUDES   = 					\
 	$(GNOMECC_CAPPLETS_CFLAGS)		\
 	$(DEFAULT_APPLICATIONS_CAPPLET_CFLAGS)	\
-	-DGLADEDIR=\""$(gladedir)"\"		\
-	-DGNOMELOCALEDIR="\"$(datadir)/locale\""\
-	-DDATADIR=\""$(xmldatadir)"\"
+	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"\
+	-DGNOMECC_GLADE_DIR=\""$(gladedir)"\"	\
+	-DGNOMECC_DATA_DIR=\""$(pkgdatadir)"\"
 
 noinst_DATA = gnome-default-applications.xml.in
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA) $(xmldata_DATA)
