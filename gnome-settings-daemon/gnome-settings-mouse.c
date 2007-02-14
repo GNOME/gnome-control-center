@@ -67,13 +67,13 @@ configure_button_layout (guchar   *buttons,
       for (i = 0; i < n_buttons; i++)
         {
           if (buttons[i] == right_button)
+            {
+              buttons[i] = left_button;
               break;
+            }
       }
       /* swap the buttons */
       buttons[left_button - 1] = right_button;
-
-      if (i != n_buttons)
-          buttons[i] = left_button;
     }
   /* check if we are not left_handed but are swapped */
   else if (!left_handed && buttons[left_button - 1] == right_button)
@@ -82,12 +82,12 @@ configure_button_layout (guchar   *buttons,
       for (i = 0; i < n_buttons; i++)
         {
           if (buttons[i] == left_button)
+            {
+              buttons[i] = right_button;
               break;
+            }
       }
       /* swap the buttons */
-      if (i != n_buttons)
-          buttons[i] = right_button;
-
       buttons[left_button - 1] = left_button;
   }
 }
@@ -182,7 +182,7 @@ set_left_handed (gboolean left_handed)
 {
   guchar *buttons ;
   gsize buttons_capacity = 16;
-  gint n_buttons;
+  gint n_buttons, i;
 
 #ifdef HAVE_XINPUT
   if (supports_xinput_devices ())
@@ -204,7 +204,15 @@ set_left_handed (gboolean left_handed)
 
   configure_button_layout (buttons, n_buttons, left_handed);
 
-  XSetPointerMapping (GDK_DISPLAY (), buttons, n_buttons);
+  /* X refuses to change the mapping while buttons are engaged,
+   * so if this is the case we'll retry a few times
+   */
+  for (i = 0; i < 20 &&
+       XSetPointerMapping (GDK_DISPLAY (), buttons, n_buttons) == MappingBusy;
+       ++i)
+    {
+      g_usleep (300);
+    }
 
   g_free (buttons);
 }

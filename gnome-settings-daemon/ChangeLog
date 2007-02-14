@@ -1,5 +1,12 @@
 2007-02-14  Jens Granseuer  <jensgr@gmx.net>
 
+	* gnome-settings-mouse.c: (configure_button_layout),
+	(set_left_handed): if X refuses to update the pointer mapping (busy)
+	don't just ignore the error but retry after a short delay (fixes bug
+	#349538)
+
+2007-02-14  Jens Granseuer  <jensgr@gmx.net>
+
 	* actions/acme-volume-gstreamer.c:
 	(acme_volume_gstreamer_set_mute),
 	(acme_volume_gstreamer_get_volume),
