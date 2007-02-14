@@ -159,59 +159,26 @@ fill_info_struct (GnomeVFSFileInfo *file_info, GnomeVFSFileInfoOptions options,
 GnomeThemeMetaInfo *theme)
 {
 	GnomeVFSURI *theme_uri;
-	GnomeVFSFileInfo *info;
 	GnomeVFSResult result;
 
 	theme_uri = gnome_vfs_uri_new (theme->path);
-	info = gnome_vfs_file_info_new ();
-	result = gnome_vfs_get_file_info_uri (theme_uri, info, options);
+	result = gnome_vfs_get_file_info_uri (theme_uri, file_info, options);
+	gnome_vfs_uri_unref (theme_uri);
+
 	if (result == GNOME_VFS_OK)
 	{
-		g_free(file_info->name);
+		g_free (file_info->name);
 		file_info->name = g_strdup (theme->readable_name);
-		
-		file_info->uid = info->uid;
-		file_info->gid = info->gid;
-		
+
+		file_info->valid_fields &= ~GNOME_VFS_FILE_INFO_FIELDS_SYMLINK_NAME;
+		g_free (file_info->symlink_name);
+		file_info->symlink_name = NULL;
+		GNOME_VFS_FILE_INFO_SET_SYMLINK (file_info, FALSE);
+		file_info->type = GNOME_VFS_FILE_TYPE_REGULAR;
+
 		g_free (file_info->mime_type);
 		file_info->mime_type = g_strdup ("application/x-gnome-theme-installed");
-		file_info->valid_fields |=
-					GNOME_VFS_FILE_INFO_FIELDS_MIME_TYPE;
-		
-		file_info->type = GNOME_VFS_FILE_TYPE_REGULAR;
-		file_info->valid_fields |= 
-					GNOME_VFS_FILE_INFO_FIELDS_TYPE;
-		
-		if (info->valid_fields || GNOME_VFS_FILE_INFO_FIELDS_PERMISSIONS)
-		{
-			file_info->permissions = info->permissions;
-			file_info->valid_fields |= 
-					GNOME_VFS_FILE_INFO_FIELDS_PERMISSIONS;
-		}
-
-		if (info->valid_fields || GNOME_VFS_FILE_INFO_FIELDS_ATIME)
-		{
-			file_info->atime = info->atime;
-			file_info->valid_fields |= 
-					GNOME_VFS_FILE_INFO_FIELDS_ATIME;
-		}
-
-		if (info->valid_fields || GNOME_VFS_FILE_INFO_FIELDS_CTIME)
-		{
-			file_info->ctime = info->ctime;
-			file_info->valid_fields |= 
-					GNOME_VFS_FILE_INFO_FIELDS_CTIME;
-		}
-
-		if (info->valid_fields || GNOME_VFS_FILE_INFO_FIELDS_SIZE)
-		{
-			file_info->size = info->size;
-			file_info->valid_fields |= 
-					GNOME_VFS_FILE_INFO_FIELDS_SIZE;
-		}
-
-		gnome_vfs_uri_unref (theme_uri);
-		gnome_vfs_file_info_unref (info);
+		file_info->valid_fields |= GNOME_VFS_FILE_INFO_FIELDS_MIME_TYPE;
 	}
 
 	return result;
@@ -276,10 +243,10 @@ do_read_directory(GnomeVFSMethod *method,
 		  GnomeVFSFileInfo *file_info,
 		  GnomeVFSContext *context)
 {
-	GList *theme;
-	theme = ((ThemeHandle*)(method_handle))->theme;
+	ThemeHandle *handle = (ThemeHandle *) method_handle;
+	GList *theme = handle->theme;
 	
-	if (!((ThemeHandle*)(method_handle))->seen_dotdirectory)
+	if (!handle->seen_dotdirectory)
 	{
 		g_free (file_info->name);
 		file_info->name = g_strdup (".directory");
@@ -291,7 +258,7 @@ do_read_directory(GnomeVFSMethod *method,
 					 GNOME_VFS_PERM_GROUP_READ |
 					 GNOME_VFS_PERM_OTHER_READ;
 		file_info->valid_fields |= GNOME_VFS_FILE_INFO_FIELDS_PERMISSIONS;
-		((ThemeHandle*)(method_handle))->seen_dotdirectory = TRUE;
+		handle->seen_dotdirectory = TRUE;
 		return GNOME_VFS_OK;
 	}
 
@@ -300,9 +267,10 @@ do_read_directory(GnomeVFSMethod *method,
 		return GNOME_VFS_ERROR_EOF;
 	}
 
-	fill_info_struct (file_info, 0, (GnomeThemeMetaInfo*)(theme->data));
-	
-	((ThemeHandle*)(method_handle))->theme = ((ThemeHandle*)(method_handle))->theme->next;
+	fill_info_struct (file_info, handle->options,
+			  (GnomeThemeMetaInfo *) theme->data);
+
+	handle->theme = handle->theme->next;
 	return GNOME_VFS_OK;
 }
 
