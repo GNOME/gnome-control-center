@@ -116,9 +116,9 @@ acme_volume_gstreamer_set_mute (AcmeVolume *vol, gboolean val)
 			GstMixerTrack *track = GST_MIXER_TRACK (t->data);
 			gint *volumes, n;
 			gdouble scale = (track->max_volume - track->min_volume) / 100.0;
-			gint vol = (gint) self->_priv->volume * scale + track->min_volume + 0.5;
+			gint vol = (gint) (self->_priv->volume * scale + track->min_volume + 0.5);
 
-			volumes = g_new0 (gint, track->num_channels);
+			volumes = g_new (gint, track->num_channels);
 			for (n = 0; n < track->num_channels; n++)
 				volumes[n] = vol;
 			gst_mixer_set_volume (self->_priv->mixer, track, volumes);
@@ -179,7 +179,7 @@ acme_volume_gstreamer_get_volume (AcmeVolume *vol)
 
 	acme_volume_gstreamer_close (self);
 
-	return (gint) self->_priv->volume;
+	return (gint) (self->_priv->volume + 0.5);
 }
 
 static void
@@ -198,9 +198,9 @@ acme_volume_gstreamer_set_volume (AcmeVolume *vol, int val)
 		GstMixerTrack *track = GST_MIXER_TRACK (t->data);
 		gint *volumes, n;
 		gdouble scale = (track->max_volume - track->min_volume) / 100.0;
-		gint vol = (gint) val * scale + track->min_volume;
+		gint vol = (gint) (val * scale + track->min_volume + 0.5);
 
-		volumes = g_new0 (gint, track->num_channels);
+		volumes = g_new (gint, track->num_channels);
 		for (n = 0; n < track->num_channels; n++)
 			volumes[n] = vol;
 		gst_mixer_set_volume (self->_priv->mixer, track, volumes);

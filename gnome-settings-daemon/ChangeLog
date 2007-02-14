@@ -1,3 +1,12 @@
+2007-02-14  Jens Granseuer  <jensgr@gmx.net>
+
+	* actions/acme-volume-gstreamer.c:
+	(acme_volume_gstreamer_set_mute),
+	(acme_volume_gstreamer_get_volume),
+	(acme_volume_gstreamer_set_volume): properly round volumess so that
+	volume-up and volume-down act symmetrically, ie. lowering and raising
+	volume will end up at the original level (fixes bug #389996)
+
 2007-02-10  Jens Granseuer  <jensgr@gmx.net>
 
 	* gnome-settings-font.c: (load_cursor): if the new font path could not
