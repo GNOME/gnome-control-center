@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.18\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-02-12 22:14+0000\n"
-"PO-Revision-Date: 2007-02-12 23:00+0000\n"
+"POT-Creation-Date: 2007-02-15 01:59+0000\n"
+"PO-Revision-Date: 2007-02-15 02:05+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -1070,22 +1070,22 @@ msgstr "Seleccione as suas aplicações por omissão"
 #: ../capplets/default-applications/gnome-da-capplet.c:192
 #: ../capplets/default-applications/gnome-da-capplet.c:248
 #: ../capplets/default-applications/gnome-da-capplet.c:299
-#: ../capplets/default-applications/gnome-da-capplet.c:599
-#: ../capplets/default-applications/gnome-da-capplet.c:621
+#: ../capplets/default-applications/gnome-da-capplet.c:603
+#: ../capplets/default-applications/gnome-da-capplet.c:625
 #, c-format
 msgid "Error saving configuration: %s"
 msgstr "Erro ao gravar a configuração: %s"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:740
+#: ../capplets/default-applications/gnome-da-capplet.c:744
 #: ../capplets/sound/sound-properties-capplet.c:312
 msgid "Custom"
 msgstr "Personalizado"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:760
+#: ../capplets/default-applications/gnome-da-capplet.c:764
 msgid "Could not load the main interface"
 msgstr "Incapaz de ler o interface principal"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:762
+#: ../capplets/default-applications/gnome-da-capplet.c:766
 msgid "Please make sure that the applet is properly installed"
 msgstr "Certifique-se de que a applet está correctamente instalada"
 
@@ -2285,8 +2285,8 @@ msgid ""
 "Select the device and tracks to control with the keyboard. Use the Shift and "
 "Control keys to select multiple tracks if required."
 msgstr ""
-"Seleccione o dispositivo e pistas a controlar com o teclado. Utilize as teclas "
-"Shift e Ctrl para seleccionar múltiplas pistas, se necessário."
+"Seleccione o dispositivo e pistas a controlar com o teclado. Utilize as "
+"teclas Shift e Ctrl para seleccionar múltiplas pistas, se necessário."
 
 #: ../capplets/sound/sound-properties.glade.h:13
 msgid "So_und playback:"
@@ -3501,11 +3501,13 @@ msgstr "Sair da consola ao realizar acção de actualização ou desinstalação
 
 #: ../shell/control-center.schemas.in.h:6
 msgid "Indicates whether to close the shell when a help action is performed"
-msgstr "Indica se fechar ou não a consola quando é realizada uma acção de ajuda"
+msgstr ""
+"Indica se fechar ou não a consola quando é realizada uma acção de ajuda"
 
 #: ../shell/control-center.schemas.in.h:7
 msgid "Indicates whether to close the shell when a start action is performed"
-msgstr "Indica se fechar ou não a consola quando é realizada uma acção de iniciar"
+msgstr ""
+"Indica se fechar ou não a consola quando é realizada uma acção de iniciar"
 
 #: ../shell/control-center.schemas.in.h:8
 msgid ""
@@ -3520,8 +3522,8 @@ msgid ""
 "Indicates whether to close the shell when an upgrade or uninstall action is "
 "performed"
 msgstr ""
-"Indica se fechar ou não a consola quando é realizada uma acção de actualização "
-"ou desinstalação"
+"Indica se fechar ou não a consola quando é realizada uma acção de "
+"actualização ou desinstalação"
 
 #: ../shell/control-center.schemas.in.h:10
 msgid "Task names and associated .desktop files"
@@ -3534,8 +3536,8 @@ msgid ""
 "associated .desktop file to launch for that task."
 msgstr ""
 "O nome da tarefa a ser apresentado no control-center (como tal que tem de "
-"ser traduzível) seguido de um separador \";\" e depois o nome do ficheiro "
-"de um ficheiro .desktop associado para iniciar essa tarefa."
+"ser traduzível) seguido de um separador \";\" e depois o nome do ficheiro de "
+"um ficheiro .desktop associado para iniciar essa tarefa."
 
 #. Translators: The format of this string is the task name to be displayed (translate that part) followed by a ";" separator then the filename (DONT translate the file name) of a .desktop file to launch. Multiple entries are separated by a ","
 #: ../shell/control-center.schemas.in.h:13
@@ -3757,6 +3759,31 @@ msgstr "Gerar ou não amostras de fontes Type1"
 msgid "GNOME Font Viewer"
 msgstr "Visualizador de Fontes GNOME"
 
+#: ../vfs-methods/fontilus/thumbnailer.c:242
+msgid "Text to thumbnail (default: Aa)"
+msgstr "Texto para amostras (omissão: Aa)"
+
+#: ../vfs-methods/fontilus/thumbnailer.c:242
+msgid "TEXT"
+msgstr "TEXTO"
+
+#: ../vfs-methods/fontilus/thumbnailer.c:244
+msgid "Font size (default: 64)"
+msgstr "Tamanho da fonte (omissão: 64)"
+
+#: ../vfs-methods/fontilus/thumbnailer.c:244
+msgid "SIZE"
+msgstr "TAMANHO"
+
+#: ../vfs-methods/fontilus/thumbnailer.c:246
+msgid "FONT-FILE OUTPUT-FILE"
+msgstr "FICHEIRO-FONTE FICHEIRO-RESULTADO"
+
+#: ../vfs-methods/fontilus/thumbnailer.c:262
+#, c-format
+msgid "Error parsing arguments: %s\n"
+msgstr "Erro ao parsear os argumentos: %s\n"
+
 #: ../vfs-methods/themus/apply-font.glade.h:2
 msgid "<span weight=\"bold\" size=\"larger\">Apply new font?</span>"
 msgstr "<span weight=\"bold\" size=\"larger\">Aplicar nova fonte?</span>"
@@ -3777,7 +3804,7 @@ msgstr ""
 msgid "_Apply font"
 msgstr "_Aplicar fonte"
 
-#: ../vfs-methods/themus/theme-method.c:518
+#: ../vfs-methods/themus/theme-method.c:486
 msgid "Themes"
 msgstr "Temas"
 
