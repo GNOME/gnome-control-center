@@ -467,9 +467,6 @@ gnome_settings_keybindings_init (GConfClient *client)
 
   gnome_settings_daemon_register_callback (GCONF_BINDING_DIR, bindings_callback);
   
-  gdk_window_add_filter (gdk_get_default_root_window (),
-			 keybindings_filter,
-			 NULL);
   for (i = 0; i < screen_num; i++)
     {
       screen = gdk_display_get_screen (dpy, i);
