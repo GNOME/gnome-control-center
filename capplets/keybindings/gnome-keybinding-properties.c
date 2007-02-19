@@ -387,6 +387,10 @@ clear_old_model (GladeXML  *dialog)
       KeyEntry *key_entry;
 
       client = gconf_client_get_default ();
+      /* we need the schema name below;
+       * cached values do not have that set, though */
+      gconf_client_clear_cache (client);
+
       g_object_ref (model);
 
       for (valid = gtk_tree_model_get_iter_first (model, &iter);

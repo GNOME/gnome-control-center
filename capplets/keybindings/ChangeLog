@@ -1,3 +1,9 @@
+2007-02-19  Jens Granseuer  <jensgr@gmx.net>
+
+	* gnome-keybinding-properties.c: (clear_old_model): clear GConf client
+	cache before reloading since cached values don't pass the schema name
+	along which can make entries vanish from the list (fixes bug 394776)
+
 2007-02-08  Mariano Suárez-Alvarez  <mariano@gnome.org>
 
 	* gnome-keybinding-properties.c (metacity_key_list): added 
