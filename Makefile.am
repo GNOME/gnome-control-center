@@ -22,6 +22,7 @@ EXTRA_DIST = \
 	intltool-extract.in \
 	intltool-merge.in \
 	intltool-update.in \
-	gnome-doc-utils.make
+	gnome-doc-utils.make \
+	MAINTAINERS
 
 DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper --disable-update-mimedb
