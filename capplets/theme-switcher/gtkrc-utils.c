@@ -14,7 +14,7 @@ str_nequal (gchar *a, gchar *b)
 }
 
 gchar *
-gtkrc_find_named (gchar *name)
+gtkrc_find_named (const gchar *name)
 {
 	/* find the gtkrc of the named theme
 	 * taken from gtkrc.c (gtk_rc_parse_named)
