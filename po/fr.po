@@ -25,7 +25,7 @@ msgstr ""
 "Project-Id-Version: gnome-control-center 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-02-13 22:33+0100\n"
-"PO-Revision-Date: 2007-02-13 22:34+0100\n"
+"PO-Revision-Date: 2007-02-22 21:31+0100\n"
 "Last-Translator: Stéphane Raimbault <stephane.raimbault@gmail.com>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -558,7 +558,7 @@ msgstr "_Importer"
 
 #: ../capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.in.h:1
 msgid "Keyboard Accessibility"
-msgstr "_Accessibilité du clavier"
+msgstr "Accessibilité du clavier"
 
 #: ../capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.in.h:2
 msgid "Set your keyboard accessibility preferences"
@@ -1364,21 +1364,22 @@ msgstr "Modifie la résolution de l'écran"
 msgid "Screen Resolution"
 msgstr "Résolution de l'écran"
 
+# Voir #410959
 #: ../capplets/display/main.c:25
 msgid "normal"
-msgstr "normal"
+msgstr "Normale"
 
 #: ../capplets/display/main.c:26
 msgid "left"
-msgstr "gauche"
+msgstr "À gauche"
 
 #: ../capplets/display/main.c:27
 msgid "inverted"
-msgstr "inversé"
+msgstr "À l'envers"
 
 #: ../capplets/display/main.c:28
 msgid "right"
-msgstr "droite"
+msgstr "À droite"
 
 #: ../capplets/display/main.c:389
 #, c-format
@@ -1395,7 +1396,7 @@ msgstr "_Fréquence de rafraîchissement :"
 
 #: ../capplets/display/main.c:574
 msgid "R_otation:"
-msgstr "_Rotation :"
+msgstr "R_otation :"
 
 #: ../capplets/display/main.c:594
 msgid "Default Settings"
@@ -1413,7 +1414,7 @@ msgstr "Préférences de la résolution de l'écran"
 #: ../capplets/display/main.c:659
 #, c-format
 msgid "_Make default for this computer (%s) only"
-msgstr "_Mettre par défaut pour cet ordinateur (%s) seulement"
+msgstr "A_ppliquer par défaut uniquement pour cet ordinateur (%s)"
 
 #: ../capplets/display/main.c:677
 msgid "Options"
@@ -1701,10 +1702,8 @@ msgid ""
 "using this key.\n"
 "Please try with a key such as Control, Alt or Shift at the same time.\n"
 msgstr ""
-"Le raccourci « %s » ne peut pas être utilisé parce qu'il sera impossible de "
-"taper en utilisant cette touche.\n"
-"Veuillez essayer avec une touche telle que Control, Alt ou Shift en même "
-"temps.\n"
+"Le raccourci « %s » ne peut pas être utilisé parce qu'il sera impossible de taper en utilisant cette touche.\n"
+"Veuillez essayer avec une touche telle que Ctrl, Alt ou Maj en même temps.\n"
 
 #: ../capplets/keybindings/gnome-keybinding-properties.c:717
 #, c-format
@@ -2059,7 +2058,7 @@ msgstr "<i>Haute</i>"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:9
 msgid "<i>Large</i>"
-msgstr "<i>Grande</i>"
+msgstr "<i>Élevé</i>"
 
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:10
 msgid "<i>Low</i>"
@@ -2155,7 +2154,7 @@ msgstr "<b>Connexion _directe à Internet</b>"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:3
 msgid "<b>Ignore Host List</b>"
-msgstr "<b>Liste d'hôtes à ignorer</b>"
+msgstr "<b>Liste des hôtes à ignorer</b>"
 
 #: ../capplets/network/gnome-network-preferences.glade.h:4
 msgid "<b>_Automatic proxy configuration</b>"
@@ -2232,7 +2231,7 @@ msgstr "Active le son et permet d'associer des sons à certains événements"
 #: ../capplets/sound/mixer-support.c:79
 #, c-format
 msgid "Unknown Volume Control %d"
-msgstr "Controle de volume %d inconnu"
+msgstr "Contrôle de volume %d inconnu"
 
 #: ../capplets/sound/sound-properties-capplet.c:310
 #: ../capplets/sound/sound-properties-capplet.c:362
@@ -2327,10 +2326,7 @@ msgstr "Lecture du s_on :"
 msgid ""
 "Select the device and tracks to control with the keyboard. Use the Shift and "
 "Control keys to select multiple tracks if required."
-msgstr ""
-"Sélectionnez le périphérique et les pistes à diriger avec le clavier. "
-"Utilisez les touches Maj et Ctrl pour sélectionner plusieurs pistes si "
-"nécessaire."
+msgstr "Sélectionnez le périphérique et les pistes à contrôler avec le clavier. Utilisez les touches Maj et Ctrl pour sélectionner plusieurs pistes si nécessaire."
 
 #: ../capplets/sound/sound-properties.glade.h:13
 msgid "So_und playback:"
@@ -2789,7 +2785,7 @@ msgstr ""
 
 #: ../capplets/windows/gnome-window-properties.c:646
 msgid "C_ontrol"
-msgstr "C_ontrol"
+msgstr "C_trl"
 
 #: ../capplets/windows/gnome-window-properties.c:651
 msgid "_Alt"
@@ -2822,8 +2818,8 @@ msgstr "<b>Sélection de la fenêtre</b>"
 #: ../capplets/windows/gnome-window-properties.glade.h:4
 msgid "To move a window, press-and-hold this key then grab the window:"
 msgstr ""
-"Pour déplacer une fenêtre, pressez et maintenez cette touche enfoncée puis "
-"sélectionnez la fenêtre :"
+"Pour déplacer une fenêtre, pressez et maintenez cette touche enfoncée\n"
+"avant de sélectionner la fenêtre :"
 
 #: ../capplets/windows/gnome-window-properties.glade.h:5
 msgid "Window Preferences"
@@ -2831,7 +2827,7 @@ msgstr "Paramètres des fenêtres"
 
 #: ../capplets/windows/gnome-window-properties.glade.h:6
 msgid "_Double-click titlebar to perform this action:"
-msgstr "_Double-cliquer la barre de titre effectue cette action :"
+msgstr "Un _double-clic sur la barre de titre effectue l'action :"
 
 #: ../capplets/windows/gnome-window-properties.glade.h:7
 msgid "_Interval before raising:"
