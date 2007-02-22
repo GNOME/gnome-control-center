@@ -551,7 +551,7 @@ color_select (GtkWidget *colorbutton, GladeXML *dialog)
   bg = g_strdup_printf ("bg_color:#%.2x%.2x%.2x\n", colors[1].red, colors[1].green, colors[1].blue);
   text = g_strdup_printf ("text_color:#%.2x%.2x%.2x\n", colors[2].red, colors[2].green, colors[2].blue);
   base = g_strdup_printf ("base_color:#%.2x%.2x%.2x\n", colors[3].red, colors[3].green, colors[3].blue);
-  selected_fg = g_strdup_printf ("selected_fg_color:#%.2x%.2x%.2x\n", colors[2].red, colors[2].green, colors[2].blue);
+  selected_fg = g_strdup_printf ("selected_fg_color:#%.2x%.2x%.2x\n", colors[4].red, colors[4].green, colors[4].blue);
   selected_bg = g_strdup_printf ("selected_bg_color:#%.2x%.2x%.2x", colors[5].red, colors[5].green, colors[5].blue);
 
   new_scheme = g_strconcat (fg, bg, text, base, selected_fg, selected_bg, NULL);
