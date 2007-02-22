@@ -546,13 +546,12 @@ color_select (GtkWidget *colorbutton, GladeXML *dialog)
   widget = WID ("selected_bg_colorbutton");
   gtk_color_button_get_color (GTK_COLOR_BUTTON (widget), &colors[5]);
 
-
-  fg = g_strdup_printf ("fg_color:#%.2x%.2x%.2x\n", colors[0].red, colors[0].green, colors[0].blue);
-  bg = g_strdup_printf ("bg_color:#%.2x%.2x%.2x\n", colors[1].red, colors[1].green, colors[1].blue);
-  text = g_strdup_printf ("text_color:#%.2x%.2x%.2x\n", colors[2].red, colors[2].green, colors[2].blue);
-  base = g_strdup_printf ("base_color:#%.2x%.2x%.2x\n", colors[3].red, colors[3].green, colors[3].blue);
-  selected_fg = g_strdup_printf ("selected_fg_color:#%.2x%.2x%.2x\n", colors[4].red, colors[4].green, colors[4].blue);
-  selected_bg = g_strdup_printf ("selected_bg_color:#%.2x%.2x%.2x", colors[5].red, colors[5].green, colors[5].blue);
+  fg = g_strdup_printf ("fg_color:#%04x%04x%04x\n", colors[0].red, colors[0].green, colors[0].blue);
+  bg = g_strdup_printf ("bg_color:#%04x%04x%04x\n", colors[1].red, colors[1].green, colors[1].blue);
+  text = g_strdup_printf ("text_color:#%04x%04x%04x\n", colors[2].red, colors[2].green, colors[2].blue);
+  base = g_strdup_printf ("base_color:#%04x%04x%04x\n", colors[3].red, colors[3].green, colors[3].blue);
+  selected_fg = g_strdup_printf ("selected_fg_color:#%04x%04x%04x\n", colors[4].red, colors[4].green, colors[4].blue);
+  selected_bg = g_strdup_printf ("selected_bg_color:#%04x%04x%04x", colors[5].red, colors[5].green, colors[5].blue);
 
   new_scheme = g_strconcat (fg, bg, text, base, selected_fg, selected_bg, NULL);
 

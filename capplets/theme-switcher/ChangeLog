@@ -1,5 +1,11 @@
 2007-02-22  Jens Granseuer  <jensgr@gmx.net>
 
+	* gnome-theme-details.c: (color_select): color components in
+	GdkColor are guint16 not guint8, so format accordingly. Fixes bug
+	398331.
+
+2007-02-22  Jens Granseuer  <jensgr@gmx.net>
+
 	* gtkrc-utils.c: (gtkrc_find_named):
 	* gtkrc-utils.h: constify arg to fix a compiler warning
 
