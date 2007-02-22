@@ -117,29 +117,6 @@ double_click_titlebar_changed_callback (GtkWidget *optionmenu,
                 gnome_window_manager_change_settings (current_wm, &new_settings);
 }
 
-#if 0
-/* This was for option menu */
-static void
-alt_click_modifier_changed_callback (GtkWidget *optionmenu,
-                                     void      *data)
-{
-        GnomeWMSettings new_settings;
-        int history;
-        
-        new_settings.flags = GNOME_WM_SETTING_MOUSE_MOVE_MODIFIER;
-        history = gtk_option_menu_get_history (GTK_OPTION_MENU (optionmenu));
-
-        if (history >= n_mouse_modifiers) /* paranoia */
-                return;
-
-        new_settings.mouse_move_modifier = mouse_modifiers[history].value;
-        
-        if (current_wm != NULL &&
-            strcmp (new_settings.mouse_move_modifier,
-                    settings.mouse_move_modifier) != 0)
-                gnome_window_manager_change_settings (current_wm, &new_settings);
-}
-#else
 static void
 alt_click_radio_toggled_callback (GtkWidget *radio,
                                   void      *data)
@@ -160,7 +137,6 @@ alt_click_radio_toggled_callback (GtkWidget *radio,
                         gnome_window_manager_change_settings (current_wm, &new_settings);
         }
 }
-#endif
 
 static void
 update_sensitivity (void)
@@ -419,6 +395,7 @@ main (int argc, char **argv)
 	GnomeProgram *program;
         GdkScreen *screen;
 	GnomeWMSettings new_settings;
+	int rc = 0;
         int i;
         
         bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
@@ -437,7 +414,7 @@ main (int argc, char **argv)
 
         if (current_wm == NULL) {
                 try_spawn_config_tool (screen);
-                return 0;
+                goto out;
         }
         
         dialog = glade_xml_new (GLADEDIR "/gnome-window-properties.glade",
@@ -445,7 +422,8 @@ main (int argc, char **argv)
 
         if (dialog == NULL) {
                 g_warning ("Missing glade file for gnome-window-properties");
-                exit (1);
+                rc = 1;
+                goto out;
         }
         
         dialog_win = WID ("main-dialog");
@@ -462,13 +440,6 @@ main (int argc, char **argv)
         gtk_range_set_increments (GTK_RANGE (autoraise_delay_slider),
                                   0.2, 1.0);
 
-#if 0
-        size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
-        gtk_size_group_add_widget (size_group, double_click_titlebar_optionmenu);
-        gtk_size_group_add_widget (size_group, alt_click_optionmenu);
-        g_object_unref (G_OBJECT (size_group));
-#endif
-        
         new_settings.flags = 0;
         init_settings_struct (&new_settings);
 	settings = gnome_wm_settings_copy (&new_settings);
@@ -520,8 +491,10 @@ main (int argc, char **argv)
         gtk_main ();
 
 	g_object_unref (dialog);
+
+out:
 	g_object_unref (program);
-        return 0;
+        return rc;
 }
 
 #include <X11/Xlib.h>
@@ -681,28 +654,4 @@ reload_mouse_modifiers (void)
                             &mouse_modifiers[i]);
                 ++i;
         }
-        
-#if 0
-        /* Build modifier option menu */
-        {
-                GtkWidget *menu;
-          
-                menu = gtk_menu_new ();
-                i = 0;
-                while (i < n_mouse_modifiers) {
-                        GtkWidget *mi;
-                  
-                        mi = gtk_menu_item_new_with_label (mouse_modifiers[i].name);
-                        gtk_menu_shell_append (GTK_MENU_SHELL (menu),
-                                               mi);
-                  
-                        gtk_widget_show (mi);
-                  
-                        ++i;
-                }
-          
-                gtk_option_menu_set_menu (GTK_OPTION_MENU (alt_click_optionmenu),
-                                          menu);
-        }
-#endif
 }
