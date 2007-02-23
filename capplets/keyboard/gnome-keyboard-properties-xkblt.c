@@ -124,6 +124,9 @@ def_group_in_gconf_changed (GConfClient * client,
 			    GConfEntry * entry, GladeXML * dialog)
 {
 	GConfValue *value = gconf_entry_get_value (entry);
+	
+	if (!value)
+		return;
 
 	if (value->type == GCONF_VALUE_INT) {
 		GtkWidget *tree_view = WID ("xkb_layouts_selected");
