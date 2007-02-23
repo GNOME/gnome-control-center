@@ -251,7 +251,7 @@ transfer_done_tarbz2_idle_cb (gpointer data)
 		return NULL;
 	}
 	if (!(tar = g_find_program_in_path("tar"))) {
-		missing_utility_message_dialog ("bzip2");
+		missing_utility_message_dialog ("tar");
 		g_free(bzip2);
 		return NULL;
 	}
