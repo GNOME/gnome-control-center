@@ -583,8 +583,7 @@ gnome_settings_accessibility_keyboard_load (GConfClient *client)
 	XSync (GDK_DISPLAY (), FALSE);
 	gdk_error_trap_pop ();
 
-	gdk_window_add_filter (NULL, 
-			       &cb_xkb_event_filter, NULL);
+	gdk_window_add_filter (NULL, cb_xkb_event_filter, NULL);
 }
 
 
