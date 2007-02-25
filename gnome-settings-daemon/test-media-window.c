@@ -90,7 +90,7 @@ test_window (void)
 
         gtk_widget_show (window);
 
-        g_timeout_add (3000, update_state, window);
+        g_timeout_add (3000, (GSourceFunc) update_state, window);
 }
 
 int
