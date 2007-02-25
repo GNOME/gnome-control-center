@@ -32,6 +32,7 @@ glade_DATA = gnome-about-me.glade
 INCLUDES = \
 	$(GNOMECC_CAPPLETS_CFLAGS) \
 	$(LIBEBOOK_CFLAGS) \
+	-DDATADIR="\"$(datadir)\"" \
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\"" \
 	-DGNOMECC_GLADE_DIR="\"$(gladedir)\"" \
 	-DGNOMECC_PIXMAP_DIR="\"$(pixmapdir)\"" \

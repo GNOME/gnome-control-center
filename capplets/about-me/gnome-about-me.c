@@ -616,7 +616,9 @@ about_me_image_clicked_cb (GtkWidget *button, GnomeAboutMe *me)
 	GtkWidget *image_chooser;
 	GladeXML  *dialog;
 	GtkWidget *image;
-	
+	const gchar *chooser_dir = DATADIR"/pixmaps/faces";
+	gchar *pics_dir;
+
 	dialog = me->dialog;
 	image_chooser = WID ("image-chooser");
 
@@ -628,8 +630,16 @@ about_me_image_clicked_cb (GtkWidget *button, GnomeAboutMe *me)
 							NULL);
 	gtk_window_set_modal (GTK_WINDOW (chooser_dialog), TRUE);
 	gtk_dialog_set_default_response (GTK_DIALOG (chooser_dialog), GTK_RESPONSE_ACCEPT);
-	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (chooser_dialog), g_get_home_dir ());
 
+	gtk_file_chooser_add_shortcut_folder (GTK_FILE_CHOOSER (chooser_dialog), chooser_dir, NULL);
+	pics_dir = g_build_filename (g_get_home_dir (), "Pictures");
+	gtk_file_chooser_add_shortcut_folder (GTK_FILE_CHOOSER (chooser_dialog), pics_dir, NULL);
+	g_free (pics_dir);
+
+	if (!g_file_test (chooser_dir, G_FILE_TEST_IS_DIR))
+		chooser_dir = g_get_home_dir ();
+
+	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (chooser_dialog), chooser_dir);
 	gtk_file_chooser_set_use_preview_label (GTK_FILE_CHOOSER (chooser_dialog),
 						FALSE);
 	
@@ -643,7 +653,7 @@ about_me_image_clicked_cb (GtkWidget *button, GnomeAboutMe *me)
 	g_signal_connect (chooser_dialog, "update-preview",
 			  G_CALLBACK (about_me_update_preview), me);
 
-	response=gtk_dialog_run (GTK_DIALOG (chooser_dialog));
+	response = gtk_dialog_run (GTK_DIALOG (chooser_dialog));
 
 	if (response == GTK_RESPONSE_ACCEPT) {
 		gchar* filename;
