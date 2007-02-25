@@ -218,7 +218,6 @@ set_image_from_data (EImageChooser *chooser,
 
 	if (pixbuf) {
 		GdkPixbuf *scaled;
-		GdkPixbuf *composite;
 
 		float scale;
 		int new_height, new_width;
@@ -262,19 +261,8 @@ set_image_from_data (EImageChooser *chooser,
 							  new_width, new_height,
 							  GDK_INTERP_BILINEAR);
 
-			composite = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, gdk_pixbuf_get_bits_per_sample (pixbuf),
-						    chooser->priv->image_width, chooser->priv->image_height);
-
-			gdk_pixbuf_fill (composite, 0x00000000);
-
-			gdk_pixbuf_copy_area (scaled, 0, 0, new_width, new_height,
-					      composite,
-					      chooser->priv->image_width / 2 - new_width / 2,
-					      chooser->priv->image_height / 2 - new_height / 2);
-
-			gtk_image_set_from_pixbuf (GTK_IMAGE (chooser->priv->image), composite);
+			gtk_image_set_from_pixbuf (GTK_IMAGE (chooser->priv->image), scaled);
 			g_object_unref (scaled);
-			g_object_unref (composite);
 		}
 
 		g_object_unref (pixbuf);

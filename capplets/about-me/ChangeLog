@@ -1,5 +1,12 @@
 2007-02-25  Jens Granseuer  <jensgr@gmx.net>
 
+	Patch by: Diego Escalante Urrelo <diego@aureal.com.pe>
+
+	* e-image-chooser.c: (set_image_from_data): don't use a composite
+	pixbuf, avoiding some unnecessary clipping (fixes bug #380315)
+
+2007-02-25  Jens Granseuer  <jensgr@gmx.net>
+
 	* Makefile.am:
 	* gnome-about-me.c: (about_me_image_clicked_cb): change default dir for
 	the image chooser to $datadir/pixmaps/faces (same as gdm) and add a
