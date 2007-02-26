@@ -1,3 +1,14 @@
+2007-02-26  Jens Granseuer  <jensgr@gmx.net>
+
+	* gnome-about-me-password.c: (stop_passwd), (child_watch_remove),
+	(free_passwd_resources): prevent the child watcher from accessing
+	already released memory after the dialog has been closed (should fix
+	bug #411697)
+
+	* gnome-about-me-password.c: (gnome_about_me_password): unref dialog
+	when we're done
+	* gnome-about-me.c: (about_me_setup_dialog): remove redundant warning
+
 2007-02-25  Jens Granseuer  <jensgr@gmx.net>
 
 	Patch by: Diego Escalante Urrelo <diego@aureal.com.pe>

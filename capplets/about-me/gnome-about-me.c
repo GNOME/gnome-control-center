@@ -754,7 +754,6 @@ about_me_setup_dialog (void)
 				"about-me-dialog", NULL);
 
 	if (dialog == NULL) {
-		g_warning ("Unable to load glade file.");
 		about_me_destroy (me);
 		return -1;
 	}
