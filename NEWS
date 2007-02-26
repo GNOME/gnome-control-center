@@ -1,3 +1,74 @@
+gnome-control-center 2.17.92
+
+about-me:
+- Change default dir for the image chooser (Jens Granseuer) (#408305)
+- Dont use composite pixbuf to avoid unnecessary clipping (Diego Escalante
+  Urrelo) (#380315)
+- Prevent child watcher from accessing already released memory (Jens
+  Granseuer) (#411697)
+
+default applications:
+- Really fix DATADIR (Jens Granseuer) (#407597)
+- Dont try reading into invalid territory when the user set a custom command
+  without spaces (Jens Granseuer) (#407601)
+
+fontilus:
+- Use GOption argument parsing (Christian Persch) (#393394)
+
+keybindings:
+- Clear GConf client cache before reloading (Jens Granseuer) (#394776)
+
+keyboard:
+- Avoid crashing on NULLs (Jens Granseuer) (#398631)
+
+settings daemon:
+- Properly round volumes so that volume-up and -down act symetrically
+  (Jens Granseuer) (#389996)
+- Dont ignore errors when X refuses to update the pointer mapping
+  (Jens Granseuer) (#349538)
+- Dont install the same filter twice for the default root window (Jens
+  Granseuer) (#408643)
+- Correctly pass the function address when setting up the event filter
+  (Jens Granseuer)
+- Fix warnings (Jens Granseuer)
+
+shell:
+- Revert to old menu for 2.18 (Denis Washington)
+
+theme switcher:
+- Update selected fg color from the correct slot (Jens Granseuer) (#410764)
+- Fix warnings (Jens Granseuer)
+- Format guint16 values accordingly (Jens Granseuer) (#398331)
+
+themus:
+- Populate the VFS file info fields properly so that Nautilus shows, e.g.,
+  read-only emblems in themes:// (Jens Granseuer) (#145175)
+
+windows:
+- Remove some long-dead code (Jens Granseuer)
+- Dont leak stuff on error (Jens Granseuer)
+
+updated translations:
+- ar (Djihed Afifi)
+- bg (Alexander Shopov)
+- ca (Josep Puigdemont i Casamajó)
+- cs (Jakub Friedl)
+- en_GB (David Lodge)
+- et (Priit Laes)
+- fi (Ilkka Tuohela)
+- fr (Stéphane Raimbault)
+- hu (Gabor Kelemen)
+- ja (Takeshi AIHANA)
+- ko (Changwoo Ryu)
+- nb (Kjartan Maraas)
+- pt (Duarte Loreto)
+- pt_BR (Leonardo Ferreira Fontenelle)
+- sv (Daniel Nylander)
+- th (Theppitak Karoonboonyanan)
+- uk (Maxim Dziumanenko)
+- vi (Nguyen Thai Ngoc Duy)
+- zh_CN (Abel Cheung)
+------------------------------------------------------------------------------
 gnome-control-center 2.17.91
 
 common:
