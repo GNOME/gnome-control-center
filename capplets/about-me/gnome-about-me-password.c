@@ -135,9 +135,6 @@ static void
 stop_passwd (PasswordDialog *pdialog);
 
 static void
-child_watch_remove (PasswordDialog *pdialog);
-
-static void
 free_passwd_resources (PasswordDialog *pdialog);
 
 static gboolean
@@ -272,33 +269,20 @@ stop_passwd (PasswordDialog *pdialog)
 	/* This is the standard way of returning from the dialog with passwd. 
 	 * If we return this way we can safely kill passwd as it has completed
 	 * its task.
-	 * 
-	 * We must run free_passwd_resources here and not let our child
-	 * watcher do it, since it will access invalid memory after the
-	 * dialog has been closed and cleaned up.
 	 */
 	
 	if (pdialog->backend_pid != -1) {
-		child_watch_remove (pdialog);
 		kill (pdialog->backend_pid, 9);
-		free_passwd_resources (pdialog);
 	}
 	
-	/* Our child_watch_cb should now handle our kill signal,
-	 * run waitpid and call free_passwd_resources appropriately. */
-}
-
-/* Remove the child watcher only */
-static void
-child_watch_remove (PasswordDialog *pdialog)
-{
-	/* Remove IO watcher */
-	if (pdialog->backend_stdout_watch_id != 0) {
-		
-		g_source_remove (pdialog->backend_stdout_watch_id);
-		
-		pdialog->backend_stdout_watch_id = 0;
-	}
+	/* We must run free_passwd_resources here and not let our child
+	 * watcher do it, since it will access invalid memory after the
+	 * dialog has been closed and cleaned up.
+	 * 
+	 * If we had more than a single thread we'd need to remove
+	 * the child watch before trying to kill the child.
+	 */
+	free_passwd_resources (pdialog);
 }
 
 /* Clean up passwd resources */
@@ -306,6 +290,15 @@ static void
 free_passwd_resources (PasswordDialog *pdialog)
 {
 	GError	*error = NULL;
+	
+	/* Remove the child watcher */
+	if (pdialog->backend_child_watch_id != 0) {
+		
+		g_source_remove (pdialog->backend_child_watch_id);
+
+		pdialog->backend_child_watch_id = 0;
+	}
+
 	
 	/* Close IO channels (internal file descriptors are automatically closed) */
 	if (pdialog->backend_stdin != NULL) {
@@ -334,7 +327,13 @@ free_passwd_resources (PasswordDialog *pdialog)
 		pdialog->backend_stdout = NULL;
 	}
 	
-	child_watch_remove (pdialog);
+	/* Remove IO watcher */
+	if (pdialog->backend_stdout_watch_id != 0) {
+		
+		g_source_remove (pdialog->backend_stdout_watch_id);
+		
+		pdialog->backend_stdout_watch_id = 0;
+	}
 	
 	/* Close PID */
 	if (pdialog->backend_pid != -1) {
@@ -937,13 +936,8 @@ passdlg_process_response (PasswordDialog *pdialog, gint response_id)
 		/* Stop passwd if an error occured and it is still running */
 		if (pdialog->backend_state == PASSWD_STATE_ERR) {
 			
-			/* Stop child watcher */
-			g_source_remove (pdialog->backend_child_watch_id);
-			pdialog->backend_child_watch_id = 0;
-			
 			/* Stop passwd, free resources */
 			stop_passwd (pdialog);
-			free_passwd_resources (pdialog);
 		}
 		
 		/* Check that the backend is still running, or that an error
