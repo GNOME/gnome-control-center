@@ -27,6 +27,8 @@
 #define ICON_THEME_KEY     "/desktop/gnome/interface/icon_theme"
 #define FONT_KEY	   "/desktop/gnome/interface/font_name"
 
+#define compare(x,y) (!x && y) || (x && !y) || (x && y && strcmp (x, y))
+
 void
 gnome_meta_theme_set (GnomeThemeMetaInfo *meta_theme_info)
 {
@@ -51,9 +53,10 @@ gnome_meta_theme_set (GnomeThemeMetaInfo *meta_theme_info)
 
   /* Set the gtk+ key */
   old_key = gconf_client_get_string (client, COLOR_SCHEME_KEY, NULL);
-  if (old_key && meta_theme_info->gtk_color_scheme && strcmp (old_key, meta_theme_info->gtk_color_scheme))
+  if (compare (old_key, meta_theme_info->gtk_color_scheme))
     {
-      gconf_client_set_string (client, COLOR_SCHEME_KEY, meta_theme_info->gtk_color_scheme, NULL);
+      gchar *new_value = (meta_theme_info->gtk_color_scheme) ? meta_theme_info->gtk_color_scheme : "";
+      gconf_client_set_string (client, COLOR_SCHEME_KEY, new_value, NULL);
     }
   g_free (old_key);
 

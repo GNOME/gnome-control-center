@@ -51,6 +51,7 @@ enum
 {
   READY_FOR_THEME,
   READING_CONTROL_THEME_NAME,
+  READING_GTK_COLOR_SCHEME,
   READING_WM_THEME_NAME,
   READING_ICON_THEME_NAME,
   READING_APPLICATION_FONT,
@@ -61,6 +62,7 @@ typedef struct
 {
   gint status;
   GByteArray *control_theme_name;
+  GByteArray *gtk_color_scheme;
   GByteArray *wm_theme_name;
   GByteArray *icon_theme_name;
   GByteArray *application_font;
@@ -131,6 +133,7 @@ create_image (ThemeThumbnailData *theme_thumbnail_data,
 		"gtk-theme-name", (char *) theme_thumbnail_data->control_theme_name->data,
 		"gtk-font-name", (char *) theme_thumbnail_data->application_font->data,
 		"gtk-icon-theme-name", (char *) theme_thumbnail_data->icon_theme_name->data,
+		"gtk-color-scheme", (char *) theme_thumbnail_data->gtk_color_scheme->data,
 		NULL);
   theme = meta_theme_load ((char *) theme_thumbnail_data->wm_theme_name->data, NULL);
 
@@ -290,6 +293,21 @@ handle_bytes (const gchar        *buffer,
 	  else
 	    {
 	      g_byte_array_append (theme_thumbnail_data->control_theme_name, ptr, nil - ptr + 1);
+	      bytes_read -= (nil - ptr + 1);
+	      ptr = nil + 1;
+	      theme_thumbnail_data->status = READING_GTK_COLOR_SCHEME;
+	    }
+	  break;
+	case READING_GTK_COLOR_SCHEME:
+	  nil = memchr (ptr, '\000', bytes_read);
+	  if (nil == NULL)
+	    {
+	      g_byte_array_append (theme_thumbnail_data->gtk_color_scheme, ptr, bytes_read);
+	      bytes_read = 0;
+	    }
+	  else
+	    {
+	      g_byte_array_append (theme_thumbnail_data->gtk_color_scheme, ptr, nil - ptr + 1);
 	      bytes_read -= (nil - ptr + 1);
 	      ptr = nil + 1;
 	      theme_thumbnail_data->status = READING_WM_THEME_NAME;
@@ -508,6 +526,10 @@ generate_theme_thumbnail (GnomeThemeMetaInfo *meta_theme_info,
 
   pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, ICON_SIZE_WIDTH, ICON_SIZE_HEIGHT);
   write (pipe_to_factory_fd[1], meta_theme_info->gtk_theme_name, strlen (meta_theme_info->gtk_theme_name) + 1);
+  if (meta_theme_info->gtk_color_scheme)
+    write (pipe_to_factory_fd[1], meta_theme_info->gtk_color_scheme, strlen (meta_theme_info->gtk_color_scheme) + 1);
+  else
+    write (pipe_to_factory_fd[1], "", strlen ("") + 1);
   write (pipe_to_factory_fd[1], meta_theme_info->metacity_theme_name, strlen (meta_theme_info->metacity_theme_name) + 1);
   write (pipe_to_factory_fd[1], meta_theme_info->icon_theme_name, strlen (meta_theme_info->icon_theme_name) + 1);
   if (meta_theme_info->application_font == NULL)
@@ -597,6 +619,10 @@ generate_theme_thumbnail_async (GnomeThemeMetaInfo *meta_theme_info,
   async_data.destroy = destroy;
 
   write (pipe_to_factory_fd[1], meta_theme_info->gtk_theme_name, strlen (meta_theme_info->gtk_theme_name) + 1);
+  if (meta_theme_info->gtk_color_scheme)
+    write (pipe_to_factory_fd[1], meta_theme_info->gtk_color_scheme, strlen (meta_theme_info->gtk_color_scheme) + 1);
+  else
+    write (pipe_to_factory_fd[1], "", strlen ("") + 1);
   write (pipe_to_factory_fd[1], meta_theme_info->metacity_theme_name, strlen (meta_theme_info->metacity_theme_name) + 1);
   write (pipe_to_factory_fd[1], meta_theme_info->icon_theme_name, strlen (meta_theme_info->icon_theme_name) + 1);
   if (meta_theme_info->application_font == NULL)
@@ -627,6 +653,7 @@ theme_thumbnail_factory_init (int argc, char *argv[])
 
       data.status = READY_FOR_THEME;
       data.control_theme_name = g_byte_array_new ();
+      data.gtk_color_scheme = g_byte_array_new ();
       data.wm_theme_name = g_byte_array_new ();
       data.icon_theme_name = g_byte_array_new ();
       data.application_font = g_byte_array_new ();

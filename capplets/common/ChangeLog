@@ -1,3 +1,12 @@
+2007-02-28  Thomas Wood  <thos@gnome.org>
+
+	* gnome-theme-apply.c: (gnome_meta_theme_set): Set the gtk-color-scheme even
+	if it is blank.
+	* theme-thumbnail.c: (create_image), (handle_bytes),
+	(generate_theme_thumbnail), (generate_theme_thumbnail_async),
+	(theme_thumbnail_factory_init): Set the gtk-color-scheme when creating the
+	thumbnail.
+
 2007-01-29  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* theme-thumbnail.c: Mark some stuff as static.
