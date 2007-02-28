@@ -350,7 +350,7 @@ acme_volume_gstreamer_open (AcmeVolumeGStreamer *vol)
 				GstMixerTrack *track = GST_MIXER_TRACK (m->data);
 
 				if (GST_MIXER_TRACK_HAS_FLAG (track, GST_MIXER_TRACK_MASTER)) {
-					self->_priv->mixer_tracks = g_list_append (self->_priv->mixer_tracks, track);
+					self->_priv->mixer_tracks = g_list_append (self->_priv->mixer_tracks, g_object_ref (track));
 					break;
 				}
 			}
