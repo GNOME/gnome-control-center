@@ -340,7 +340,7 @@ load_theme_names (GtkTreeView *tree_view,
 
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (swindow),
 				  GTK_POLICY_NEVER, GTK_POLICY_NEVER);
-  gtk_widget_set_usize (swindow, -1, -1);
+  gtk_widget_set_size_request (swindow, -1, -1);
 
   for (list = theme_list; list; list = list->next->next)
     {
@@ -366,7 +366,7 @@ load_theme_names (GtkTreeView *tree_view,
 	{
 	  GtkRequisition rectangle;
 	  gtk_widget_size_request (GTK_WIDGET (tree_view), &rectangle);
-	  gtk_widget_set_usize (swindow, -1, rectangle.height);
+	  gtk_widget_set_size_request (swindow, -1, rectangle.height);
 	  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (swindow),
 					  GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
 	}
@@ -525,7 +525,7 @@ remove_theme(GtkWidget *button, gpointer data)
 }
 
 static void
-color_select (GtkWidget *colorbutton, GladeXML *dialog)
+gtk_color_scheme_changed (GtkWidget *colorbutton, GladeXML *dialog)
 {
   GConfClient *client = NULL;
   gchar *new_scheme;
@@ -623,17 +623,17 @@ gnome_theme_details_init (void)
 
   /* color preferences */
   widget = WID ("fg_colorbutton");
-  g_signal_connect (G_OBJECT (widget), "color_set", G_CALLBACK (color_select), dialog);
+  g_signal_connect (G_OBJECT (widget), "color_set", G_CALLBACK (gtk_color_scheme_changed), dialog);
   widget = WID ("bg_colorbutton");
-  g_signal_connect (G_OBJECT (widget), "color_set", G_CALLBACK (color_select), dialog);
+  g_signal_connect (G_OBJECT (widget), "color_set", G_CALLBACK (gtk_color_scheme_changed), dialog);
   widget = WID ("text_colorbutton");
-  g_signal_connect (G_OBJECT (widget), "color_set", G_CALLBACK (color_select), dialog);
+  g_signal_connect (G_OBJECT (widget), "color_set", G_CALLBACK (gtk_color_scheme_changed), dialog);
   widget = WID ("base_colorbutton");
-  g_signal_connect (G_OBJECT (widget), "color_set", G_CALLBACK (color_select), dialog);
+  g_signal_connect (G_OBJECT (widget), "color_set", G_CALLBACK (gtk_color_scheme_changed), dialog);
   widget = WID ("selected_fg_colorbutton");
-  g_signal_connect (G_OBJECT (widget), "color_set", G_CALLBACK (color_select), dialog);
+  g_signal_connect (G_OBJECT (widget), "color_set", G_CALLBACK (gtk_color_scheme_changed), dialog);
   widget = WID ("selected_bg_colorbutton");
-  g_signal_connect (G_OBJECT (widget), "color_set", G_CALLBACK (color_select), dialog);
+  g_signal_connect (G_OBJECT (widget), "color_set", G_CALLBACK (gtk_color_scheme_changed), dialog);
 
   widget = WID ("color_scheme_revert_button");
   g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (revert_color_scheme_key), parent);
