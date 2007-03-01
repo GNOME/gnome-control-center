@@ -666,11 +666,12 @@ create_dialog (struct DisplayInfo *info)
       resolution = gconf_client_get_string (client, key, NULL);
       g_free (key);
       g_object_unref (client);
-      
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (per_computer_check),
-				    resolution != NULL);
+
       info->was_per_computer = resolution != NULL;
       g_free (resolution);
+      
+      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (per_computer_check),
+				    info->was_per_computer);
       
       gtk_widget_show (per_computer_check);
       
@@ -678,8 +679,6 @@ create_dialog (struct DisplayInfo *info)
       gtk_box_pack_start (GTK_BOX (vbox),
 			  wrapped, FALSE, FALSE, 0);
       gtk_widget_show (wrapped);
-
-      g_free (resolution);
     }
 
   info->per_computer_check = per_computer_check;
