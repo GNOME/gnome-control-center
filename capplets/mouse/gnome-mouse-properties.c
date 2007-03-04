@@ -672,6 +672,7 @@ populate_tree_model(GtkTreeModelSort* model, GtkTreeSelection* selection) {
 	gboolean has_default = FALSE;
 	GtkTreeIter iter;
 
+	gtk_tree_sortable_set_sort_column_id(GTK_TREE_SORTABLE (model), 1, GTK_SORT_ASCENDING);
 	GConfClient* client = gconf_client_get_default();
 	GtkListStore* store = GTK_LIST_STORE(gtk_tree_model_sort_get_model(model));
 	gchar* current_theme = gconf_client_get_string(client, CURSOR_THEME_KEY, NULL);
@@ -701,7 +702,7 @@ populate_tree_model(GtkTreeModelSort* model, GtkTreeSelection* selection) {
 		while(folder && (name = g_dir_read_name(folder))) {
 			gchar* cursor_dir = g_strdup_printf("%s/%s/cursors/", fname, name);
 			XcursorImage* cursor;
-			gint sizes[] = { 12, 16, 24, 32, 36, 48, 0 };
+			gint sizes[] = { 12, 16, 24, 32, 36, 40, 48, 64, 0 };
 			gint i;
 
 			if(!g_file_test(cursor_dir, G_FILE_TEST_EXISTS)) {
