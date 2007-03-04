@@ -21,9 +21,7 @@ gnome_theme_manager_SOURCES =	\
 	gnome-theme-details.c	\
 	gnome-theme-details.h	\
 	gnome-theme-installer.c	\
-	gnome-theme-installer.h \
-	gtkrc-utils.c		\
-	gtkrc-utils.h
+	gnome-theme-installer.h
 
 gnome_theme_manager_LDFLAGS = -export-dynamic
 

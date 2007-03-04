@@ -6,6 +6,7 @@
 #include <string.h>
 #include <libgnome/gnome-desktop-item.h>
 #include "gnome-theme-info.h"
+#include "gtkrc-utils.h"
 
 #define THEME_NAME "X-GNOME-Metatheme/Name"
 #define THEME_COMMENT "X-GNOME-Metatheme/Comment"
@@ -354,6 +355,13 @@ gnome_theme_read_meta_theme (GnomeVFSURI *meta_theme_uri)
   meta_theme_info->gtk_theme_name = g_strdup (str);
 
   str = gnome_desktop_item_get_string (meta_theme_ditem, GTK_COLOR_SCHEME_KEY);
+  if (str == NULL)
+  {
+    /* try to find the color scheme from the gtkrc */
+    gchar *gtkrc_file = gtkrc_find_named (meta_theme_info->gtk_theme_name);
+    str = gtkrc_get_color_scheme (gtkrc_file);
+    g_free (gtkrc_file);
+  }
   if (str != NULL)
   {
     gchar *a;

@@ -28,7 +28,8 @@ libcommon_la_SOURCES = \
 	wm-common.c			wm-common.h			\
 	capplet-stock-icons.c		capplet-stock-icons.h		\
 	theme-thumbnail.c		theme-thumbnail.h		\
-	gnome-theme-apply.c		gnome-theme-apply.h
+	gnome-theme-apply.c		gnome-theme-apply.h \
+	gtkrc-utils.c		gtkrc-utils.h
 
 libcommon_la_LIBADD = $(top_builddir)/libbackground/libbackground.la	\
 	$(top_builddir)/libwindow-settings/libgnome-window-settings.la  \

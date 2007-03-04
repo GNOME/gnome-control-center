@@ -1,3 +1,14 @@
+2007-03-04  Thomas Wood  <thos@gnome.org>
+
+	* Makefile.am:
+	* gtkrc-utils.c: (gtkrc_get_details):
+	* gtkrc-utils.h:
+	Move gtkrc-utils from theme-switcher to here.
+
+	* gnome-theme-info.c: (gnome_theme_read_meta_theme): Search the gtkrc for
+	the colour scheme if none was found in the metatheme file. Fixes a problem
+	when comparing two metathemes which only differ by the colour scheme setting.
+
 2007-02-28  Thomas Wood  <thos@gnome.org>
 
 	* gnome-theme-apply.c: (gnome_meta_theme_set): Set the gtk-color-scheme even

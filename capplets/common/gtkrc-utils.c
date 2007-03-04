@@ -5,7 +5,7 @@
 
 #define INCLUDE_SYMBOL ((gpointer) 1)
 #define ENGINE_SYMBOL ((gpointer) 2)
-#define SYMBOLIC_COLOR_SYMBOL ((gpointer) 3)
+#define COLOR_SCHEME_SYMBOL ((gpointer) 3)
 
 static gint
 str_nequal (gchar *a, gchar *b)
@@ -134,5 +134,63 @@ gtkrc_get_details (gchar *filename, GSList **engines, GSList **symbolic_colors)
 	}
 }
 
+
+gchar *
+gtkrc_get_color_scheme (gchar *filename)
+{
+	gint file = -1;
+	gchar *result = NULL;
+	GSList *files = NULL;
+	GSList *read_files = NULL;
+	GTokenType token;
+	GScanner *scanner = g_scanner_new (NULL);
+
+	g_scanner_scope_add_symbol (scanner, 0, "include", INCLUDE_SYMBOL);
+	g_scanner_scope_add_symbol (scanner, 0, "gtk_color_scheme", COLOR_SCHEME_SYMBOL);
+
+	files = g_slist_prepend (files, g_strdup (filename));
+	while (files != NULL)
+	{
+		filename = files->data;
+		files = g_slist_delete_link (files, files);
+
+		if (g_slist_find_custom (read_files, filename, (GCompareFunc) str_nequal))
+		{
+			g_warning ("Recursion in the gtkrc detected!");
+			continue; /* skip this file since we've done it before... */
+		}
+
+		read_files = g_slist_prepend (read_files, filename);
+
+		file = g_open (filename, O_RDONLY);
+		if (file == -1)
+		{
+			g_warning ("Could not open file \"%s\"", filename);
+		}
+		else
+		{
+			g_scanner_input_file (scanner, file);
+			while ((token = g_scanner_get_next_token (scanner)) != G_TOKEN_EOF)
+			{
+				GTokenType string_token;
+
+				if (token != G_TOKEN_SYMBOL)
+					continue;
+				if (scanner->value.v_symbol == COLOR_SCHEME_SYMBOL)
+				{
+					if (g_scanner_get_next_token (scanner) != '=')
+						continue;
+					string_token = g_scanner_get_next_token (scanner);
+					if (string_token != G_TOKEN_STRING)
+						continue;
+					if (result)
+						g_free (result);
+					result = g_strdup (scanner->value.v_string);
+				}
+			}
+		}
+	}
+	return result;
+}
 
 
