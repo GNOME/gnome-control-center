@@ -403,6 +403,7 @@ message_from_capplet (GIOChannel   *source,
 	  g_object_unref (pixbuf);
 	  theme_thumbnail_data->status = READY_FOR_THEME;
 	  g_byte_array_set_size (theme_thumbnail_data->control_theme_name, 0);
+	  g_byte_array_set_size (theme_thumbnail_data->gtk_color_scheme, 0);
 	  g_byte_array_set_size (theme_thumbnail_data->wm_theme_name, 0);
 	  g_byte_array_set_size (theme_thumbnail_data->icon_theme_name, 0);
 	  g_byte_array_set_size (theme_thumbnail_data->application_font, 0);

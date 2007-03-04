@@ -1,5 +1,12 @@
 2007-03-04  Thomas Wood  <thos@gnome.org>
 
+	* gnome-theme-info.c: (gnome_theme_read_meta_theme): Don't try and open null
+	filenames
+	* theme-thumbnail.c: (message_from_capplet): Reset the gtk_color_scheme after
+	a thumbnail has been generated.
+
+2007-03-04  Thomas Wood  <thos@gnome.org>
+
 	* Makefile.am:
 	* gtkrc-utils.c: (gtkrc_get_details):
 	* gtkrc-utils.h:

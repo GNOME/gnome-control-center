@@ -359,8 +359,11 @@ gnome_theme_read_meta_theme (GnomeVFSURI *meta_theme_uri)
   {
     /* try to find the color scheme from the gtkrc */
     gchar *gtkrc_file = gtkrc_find_named (meta_theme_info->gtk_theme_name);
-    str = gtkrc_get_color_scheme (gtkrc_file);
-    g_free (gtkrc_file);
+    if (gtkrc_file)
+    {
+      str = gtkrc_get_color_scheme (gtkrc_file);
+      g_free (gtkrc_file);
+    }
   }
   if (str != NULL)
   {
