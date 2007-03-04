@@ -1,3 +1,17 @@
+2007-03-04  Jens Granseuer  <jensgr@gmx.net>
+
+	* gnome-wp-capplet.c: (gnome_wp_add_images),
+	(gnome_wp_file_open_dialog), (bg_properties_dragged_image),
+	(gnome_wp_main_quit), (gnome_wp_scale_type_changed),
+	(gnome_wp_shade_type_changed), (gnome_wp_load_stuffs),
+	(gnome_wp_options_changed), (gnome_wp_shading_changed),
+	(wallpaper_properties_init), (main):
+	* gnome-wp-item.c: (gnome_wp_item_new),
+	(gnome_wp_item_get_thumbnail):
+	* gnome-wp-xml.c: (gnome_wp_load_legacy), (gnome_wp_xml_load_xml),
+	(gnome_wp_list_flatten), (gnome_wp_xml_save_list): plug leaks.
+	Fixes bug #396069.
+
 2007-01-29  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* gnome-wp-capplet.c: (wallpaper_properties_init):

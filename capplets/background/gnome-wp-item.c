@@ -70,7 +70,7 @@ GnomeWPItem * gnome_wp_item_new (const gchar * filename,
     }
     gnome_wp_item_update_description (item);
      
-    g_hash_table_insert (wallpapers, g_strdup (item->filename), item);
+    g_hash_table_insert (wallpapers, item->filename, item);
   } else {
     gnome_wp_item_free (item);
     item = NULL;
@@ -272,9 +272,12 @@ GdkPixbuf * gnome_wp_item_get_thumbnail (GnomeWPItem * item,
       pixbuf = gdk_pixbuf_new_from_file (thumbnail_filename, NULL);
 
       if (pixbuf != NULL) {
+      	g_free (item->fileinfo->thumburi);
         item->fileinfo->thumburi = thumbnail_filename;
         thumbnail_filename = NULL;
       }
+
+      g_free (thumbnail_filename);
     }
 
     g_free (escaped_path);

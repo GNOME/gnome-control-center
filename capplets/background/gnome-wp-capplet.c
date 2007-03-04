@@ -131,10 +131,12 @@ static void gnome_wp_add_images (GnomeWPCapplet * capplet,
   gdk_window_set_cursor (capplet->window->window, cursor);
   gdk_cursor_unref (cursor);
 
-  if (images != NULL) {
-    for (; images != NULL; images = images->next) {
-      item = gnome_wp_add_image (capplet, images->data);
-    }
+  while (images != NULL) {
+    gchar * uri = images->data;
+
+    item = gnome_wp_add_image (capplet, uri);
+    images = g_slist_remove (images, uri);
+    g_free (uri);
   }
 
   gdk_window_set_cursor (capplet->window->window, NULL);
@@ -152,7 +154,6 @@ static void gnome_wp_file_open_dialog (GtkWidget * widget,
   case GTK_RESPONSE_OK:
     files = gtk_file_chooser_get_filenames (GTK_FILE_CHOOSER (capplet->filesel));
     gnome_wp_add_images (capplet, files);
-    g_slist_free (files);
   case GTK_RESPONSE_CANCEL:
   default:
     gtk_widget_hide (capplet->filesel);
@@ -189,7 +190,6 @@ static void bg_properties_dragged_image (GtkWidget * widget,
       gdk_window_set_cursor (capplet->window->window, NULL);
     }
     gnome_vfs_uri_list_free (uris);
-    g_slist_free (realuris);
   }
 }
 
@@ -381,7 +381,8 @@ void gnome_wp_main_quit (GnomeWPCapplet * capplet) {
 
   g_object_unref (capplet->thumbs);
 
-  g_hash_table_destroy (capplet->wphash);
+  g_object_unref (capplet->client);
+  g_free (capplet);
 
   gtk_main_quit ();
 }
@@ -423,6 +424,9 @@ static void gnome_wp_scale_type_changed (GtkOptionMenu * option_menu,
   if (item == NULL) {
     return;
   }
+  
+  g_free (item->options);
+
   switch (gnome_wp_option_menu_get (GTK_OPTION_MENU (capplet->wp_opts))) {
   case GNOME_WP_SCALE_TYPE_CENTERED:
     item->options = g_strdup ("centered");
@@ -437,9 +441,8 @@ static void gnome_wp_scale_type_changed (GtkOptionMenu * option_menu,
     item->options = g_strdup ("zoom");
     break;
   case GNOME_WP_SCALE_TYPE_TILED:
-    item->options = g_strdup ("wallpaper");
-    break;
   default:
+    item->options = g_strdup ("wallpaper");
     break;
   }
   pixbuf = gnome_wp_item_get_thumbnail (item, capplet->thumbs);
@@ -473,6 +476,8 @@ static void gnome_wp_shade_type_changed (GtkOptionMenu * option_menu,
     return;
   }
 
+  g_free (item->shade_type);
+
   switch (gnome_wp_option_menu_get (GTK_OPTION_MENU (capplet->color_opt))) {
   case GNOME_WP_SHADE_TYPE_HORIZ:
     item->shade_type = g_strdup ("horizontal-gradient");
@@ -483,10 +488,9 @@ static void gnome_wp_shade_type_changed (GtkOptionMenu * option_menu,
     gtk_widget_show (capplet->sc_picker);
     break;
   case GNOME_WP_SHADE_TYPE_SOLID:
+  default:
     item->shade_type = g_strdup ("solid");
     gtk_widget_hide (capplet->sc_picker);
-    break;
-  default:
     break;
   }
   pixbuf = gnome_wp_item_get_thumbnail (item, capplet->thumbs);
@@ -646,7 +650,6 @@ static gboolean gnome_wp_load_stuffs (void * data) {
 
   if (capplet->uri_list) {
     gnome_wp_add_images (capplet, capplet->uri_list);
-    g_slist_free (capplet->uri_list);
   }
 
   return FALSE;
@@ -728,6 +731,7 @@ static void gnome_wp_options_changed (GConfClient * client, guint id,
     item = g_hash_table_lookup (capplet->wphash, wpfile);
 
     if (item != NULL) {
+      g_free (item->options);
       item->options = g_strdup (gconf_value_get_string (entry->value));
       gnome_wp_option_menu_set (capplet, item->options, FALSE);
     }
@@ -753,6 +757,7 @@ static void gnome_wp_shading_changed (GConfClient * client, guint id,
     item = g_hash_table_lookup (capplet->wphash, wpfile);
 
     if (item != NULL) {
+      g_free (item->shade_type);
       item->shade_type = g_strdup (gconf_value_get_string (entry->value));
       gnome_wp_option_menu_set (capplet, item->shade_type, TRUE);
     }
@@ -865,10 +870,7 @@ static void wallpaper_properties_init (void) {
 		       " style \"wp-dialog-defaults\"\n");
 
   capplet = g_new0 (GnomeWPCapplet, 1);
-
-  if (capplet->client == NULL) {
-    capplet->client = gconf_client_get_default ();
-  }
+  capplet->client = gconf_client_get_default ();
 
   gconf_client_add_dir (capplet->client, WP_KEYBOARD_PATH,
 			GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
@@ -896,10 +898,7 @@ static void wallpaper_properties_init (void) {
 			   (GConfClientNotifyFunc) gnome_wp_color2_changed,
 			   capplet, NULL, NULL);
 
-  capplet->wphash = g_hash_table_new_full (g_str_hash, g_str_equal,
-					   g_free,
-					   (GDestroyNotify)
-					   gnome_wp_item_free);
+  capplet->wphash = g_hash_table_new (g_str_hash, g_str_equal);
 
   capplet->thumbs = gnome_thumbnail_factory_new (GNOME_THUMBNAIL_SIZE_NORMAL);
 
@@ -1028,8 +1027,9 @@ static void wallpaper_properties_init (void) {
     const gchar ** p;
 
     for (p = (const gchar **) command_line_files; *p != NULL; p++) {
-      capplet->uri_list = g_slist_append (capplet->uri_list, (gchar *) *p);
+      capplet->uri_list = g_slist_append (capplet->uri_list, g_strdup (*p));
     }
+    g_strfreev (command_line_files);
   }
 
   g_idle_add (gnome_wp_load_stuffs, capplet);
@@ -1145,5 +1145,7 @@ gint main (gint argc, gchar *argv[]) {
 
   gtk_main ();
   
+  g_object_unref (program);
+
   return 0;
 }

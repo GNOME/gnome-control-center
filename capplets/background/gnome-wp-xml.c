@@ -88,6 +88,8 @@ static void gnome_wp_load_legacy (GnomeWPCapplet * capplet) {
       g_free (foo);
     }
   }
+  
+  g_free (filename);
 }
 
 static void gnome_wp_xml_load_xml (GnomeWPCapplet * capplet,
@@ -144,7 +146,9 @@ static void gnome_wp_xml_load_xml (GnomeWPCapplet * capplet,
             } else {
 	       for (i = 0; syslangs[i] != NULL; i++) {
 	         if (!strcmp (syslangs[i], (gchar *)nodelang)) {
+	           g_free (wp->name);
 	           wp->name = g_strdup (g_strstrip ((gchar *)wpa->last->content));
+	           break;
 	         }
 	       }
 	    }
@@ -192,6 +196,7 @@ static void gnome_wp_xml_load_xml (GnomeWPCapplet * capplet,
 	  continue;
 	}
       } else {
+	gnome_wp_item_free (wp);
 	continue;
       }
 
@@ -224,7 +229,7 @@ static void gnome_wp_xml_load_xml (GnomeWPCapplet * capplet,
 	}
 
 	gnome_wp_item_update_description (wp);
-	g_hash_table_insert (capplet->wphash, g_strdup (wp->filename), wp);
+	g_hash_table_insert (capplet->wphash, wp->filename, wp);
       } else {
 	gnome_wp_item_free (wp);
       }
@@ -341,21 +346,23 @@ void gnome_wp_xml_load_list (GnomeWPCapplet * capplet) {
 }
 
 static void gnome_wp_list_flatten (const gchar * key, GnomeWPItem * item,
-				   GList ** list) {
+				   GSList ** list) {
   g_return_if_fail (key != NULL);
   g_return_if_fail (item != NULL);
 
-  *list = g_list_append (*list, item);
+  *list = g_slist_prepend (*list, item);
 }
 
 void gnome_wp_xml_save_list (GnomeWPCapplet * capplet) {
   xmlDoc * wplist;
   xmlNode * root, * wallpaper, * item;
-  GList * list = NULL, * wp = NULL;
+  GSList * list = NULL;
   gchar * wpfile;
 
-  g_hash_table_foreach (capplet->wphash,
-			(GHFunc) gnome_wp_list_flatten, &list);
+  g_hash_table_foreach_remove (capplet->wphash,
+			       (GHRFunc) gnome_wp_list_flatten, &list);
+  g_hash_table_destroy (capplet->wphash);
+  list = g_slist_reverse (list);
 
   wpfile = g_build_filename (g_get_home_dir (),
 			     "/.gnome2",
@@ -369,8 +376,8 @@ void gnome_wp_xml_save_list (GnomeWPCapplet * capplet) {
   root = xmlNewNode (NULL, (xmlChar *)"wallpapers");
   xmlDocSetRootElement (wplist, root);
 
-  for (wp = list; wp != NULL; wp = wp->next) {
-    GnomeWPItem * wpitem = wp->data;
+  while (list != NULL) {
+    GnomeWPItem * wpitem = list->data;
     const char * none = "(none)";
     gchar * filename;
 
@@ -390,9 +397,11 @@ void gnome_wp_xml_save_list (GnomeWPCapplet * capplet) {
     item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"pcolor", (xmlChar *)wpitem->pri_color);
     item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"scolor", (xmlChar *)wpitem->sec_color);
     g_free (filename);
+
+    list = g_slist_remove (list, wpitem);
+    gnome_wp_item_free (wpitem);
   }
   xmlSaveFormatFile (wpfile, wplist, 1);
   xmlFreeDoc (wplist);
   g_free (wpfile);
 }
-
