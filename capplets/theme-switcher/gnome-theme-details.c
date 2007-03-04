@@ -212,7 +212,7 @@ update_color_scheme_tab (const gchar *theme)
 	GSList *engines = NULL;
 	gboolean fg, bg, base, text, fg_s, bg_s, enable_colors;
 	gchar *filename;
-  gchar *theme_name = NULL;
+	gchar *theme_name = NULL;
 	GtkSettings *settings;
 	GladeXML *dialog;
 
@@ -224,11 +224,6 @@ update_color_scheme_tab (const gchar *theme)
 		theme = theme_name;
 	}
 	filename = gtkrc_find_named (theme);
-
-
-	settings = gtk_settings_get_default ();
-	g_object_get (G_OBJECT (settings), "gtk-theme-name", &theme_name, NULL);
-	filename = gtkrc_find_named (theme_name);
 
 	gtkrc_get_details (filename, &engines, &symbolic_colors);
 	fg = (g_slist_find_custom (symbolic_colors, "fg_color", g_str_equal) != NULL);
@@ -248,6 +243,10 @@ update_color_scheme_tab (const gchar *theme)
 	else
 		gtk_widget_show (WID ("color_scheme_message_hbox"));
 
+	g_slist_foreach (engines, (GFunc) g_free, NULL);
+	g_slist_free (engines);
+	g_slist_foreach (symbolic_colors, (GFunc) g_free, NULL);
+	g_slist_free (symbolic_colors);
 	g_free (filename);
 	g_free (theme_name);
 }
