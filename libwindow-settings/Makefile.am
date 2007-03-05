@@ -47,4 +47,6 @@ libmetacity_la_SOURCES = 		\
 	metacity-window-manager.h
 
 libmetacity_la_LDFLAGS = $(wms_flags)
-#libmetacity_la_LIBADD = $(top_builddir)/libwindow-settings/libwindow-settings.la
+libmetacity_la_LIBADD = 		\
+	$(GNOMECC_LIBS)			\
+	libgnome-window-settings.la
