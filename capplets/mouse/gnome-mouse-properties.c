@@ -672,7 +672,6 @@ populate_tree_model(GtkTreeModelSort* model, GtkTreeSelection* selection) {
 	gboolean has_default = FALSE;
 	GtkTreeIter iter;
 
-	gtk_tree_sortable_set_sort_column_id(GTK_TREE_SORTABLE (model), 1, GTK_SORT_ASCENDING);
 	GConfClient* client = gconf_client_get_default();
 	GtkListStore* store = GTK_LIST_STORE(gtk_tree_model_sort_get_model(model));
 	gchar* current_theme = gconf_client_get_string(client, CURSOR_THEME_KEY, NULL);
@@ -914,6 +913,7 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 						     "Name", gtk_cell_renderer_text_new (),
 						     "markup", COLUMN_TEXT,
 						     NULL);
+	gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (model), 1, GTK_SORT_ASCENDING);
 
 	/* Add the cursors */
 	populate_tree_model(GTK_TREE_MODEL_SORT(model), selection);
