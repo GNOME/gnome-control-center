@@ -1,20 +1,11 @@
 GNOME Control Center  
 ====================
 
-Requirements -
+About -
 
-	intltool	>= 0.21
-	gtk+		>= 2.3.0
-	gconf		>= 2.0.0
-	libgnome	>= 2.0.0
-	libgnomeui	>= 2.0.0
-	libglade	>= 2.0.0
-	libbonobo	>= 2.0.0
-	libbonoboui	>= 2.0.0
-	libgnomevfs	>= 2.0.0
-	gnome-desktop	>= 2.0.0
-	gnome-icon-theme >= 1.1.3
-	
+The control center is GNOME's main interface for configuration of various
+aspects of your desktop.
+
 Installation -
 
 See the file 'INSTALL'
@@ -39,12 +30,12 @@ attach it to the bug report. The following steps are used to obtain a
 stack trace -
 	
 	Run the program in gdb [the GNU debugger] or any other debugger
-		ie. gdb gnome-calculator
+		ie. gdb gnome-keyboard-properties
 	Start the program
 		ie. (gdb) run
 	Reproduce the crash and the program will exit to the gdb prompt
 	Get the back trace
-		ie. (gdb) bt
+		ie. (gdb) bt full
 
 Once you have the backtrace, copy and paste this either into the 
 'Comments' field or attach a file with it included.
@@ -59,4 +50,4 @@ already a bug report that corresponds to your patch]. Bug reports
 containing patches should include the 'PATCH' keyword.
 
 Patches should be created using the unified diff form.
-	ie. cvs diff -up file-to-be-patched.c > patch.diff
+	ie. svn diff file-to-be-patched.c > patch.diff
