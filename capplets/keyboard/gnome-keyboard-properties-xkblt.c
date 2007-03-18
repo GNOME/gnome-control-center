@@ -297,6 +297,8 @@ xkb_layouts_prepare_selected_tree (GladeXML * dialog,
 	text_renderer = GTK_CELL_RENDERER (gtk_cell_renderer_text_new ());
 	toggle_renderer =
 	    GTK_CELL_RENDERER (gtk_cell_renderer_toggle_new ());
+	gtk_cell_renderer_toggle_set_radio (
+	    GTK_CELL_RENDERER_TOGGLE (toggle_renderer), TRUE);
 
 	desc_column =
 	    gtk_tree_view_column_new_with_attributes (_("Layout"),
