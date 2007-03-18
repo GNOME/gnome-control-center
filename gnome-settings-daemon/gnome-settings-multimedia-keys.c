@@ -339,20 +339,29 @@ init_kbd (Acme *acme)
 static void
 dialog_show (Acme *acme)
 {
-	int orig_x, orig_y, orig_w, orig_h, orig_d;
+	int orig_w, orig_h;
 	int screen_w, screen_h;
 	int x, y;
 	int pointer_x, pointer_y;
+	GtkRequisition win_req;
 	GdkScreen *pointer_screen;
 	GdkRectangle geometry;
 	int monitor;
 
 	gtk_window_set_screen (GTK_WINDOW (acme->dialog), acme->current_screen);
-	gtk_widget_realize (GTK_WIDGET (acme->dialog));
 
-	gdk_window_get_geometry (GTK_WIDGET (acme->dialog)->window,
-				 &orig_x, &orig_y,
-				 &orig_w, &orig_h, &orig_d);
+	/*
+	 * get the window size
+	 * if the window hasn't been mapped, it doesn't necessarily
+	 * know its true size, yet, so we need to jump through hoops
+	 */
+	gtk_window_get_default_size (GTK_WINDOW (acme->dialog), &orig_w, &orig_h);
+	gtk_widget_size_request (acme->dialog, &win_req);
+
+	if (win_req.width > orig_w)
+		orig_w = win_req.width;
+	if (win_req.height > orig_h)
+		orig_h = win_req.height;
 
 	pointer_screen = NULL;
 	gdk_display_get_pointer (gdk_screen_get_display (acme->current_screen),
