@@ -172,7 +172,7 @@ create_dialog (void)
 	view = sound_view_new (props);
 	box = glade_xml_get_widget (dialog, "events_vbox");
 	gtk_box_pack_start (GTK_BOX (box), view, TRUE, TRUE, 0);
-	gtk_widget_show_all (view);
+	gtk_widget_show (view);
 
 	g_signal_connect_swapped (G_OBJECT (widget), "destroy",
 				  (GCallback) gtk_object_destroy, props);
@@ -1019,7 +1019,15 @@ main (int argc, char **argv)
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 
- 	context = g_option_context_new (_("- GNOME Sound Preferences"));
+        /* Since gstreamer and gnome-vfs require threads, we
+         * have to initialise threads here as the first call to glib.
+         */
+        g_thread_init (NULL);
+
+ 	context = g_option_context_new (N_("- GNOME Sound Preferences"));
+#if GLIB_CHECK_VERSION (2, 12, 0)
+        g_option_context_set_translation_domain (context, GETTEXT_PACKAGE);
+#endif
  	g_option_context_add_main_entries (context, cap_options, GETTEXT_PACKAGE);
 	g_option_context_add_group (context, gst_init_get_option_group ());
 
