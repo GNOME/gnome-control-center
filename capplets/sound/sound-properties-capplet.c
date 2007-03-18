@@ -172,7 +172,7 @@ create_dialog (void)
 	view = sound_view_new (props);
 	box = glade_xml_get_widget (dialog, "events_vbox");
 	gtk_box_pack_start (GTK_BOX (box), view, TRUE, TRUE, 0);
-	gtk_widget_show (view);
+	gtk_widget_show_all (view);
 
 	g_signal_connect_swapped (G_OBJECT (widget), "destroy",
 				  (GCallback) gtk_object_destroy, props);
