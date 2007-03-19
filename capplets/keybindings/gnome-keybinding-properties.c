@@ -742,8 +742,7 @@ reload_key_entries (gpointer wm_name, GladeXML *dialog)
 
   clear_old_model (dialog);
 
-  //FIXME path
-  dir = g_dir_open ("./", 0, NULL);
+  dir = g_dir_open (GNOMECC_KEYBINDINGS_DIR, 0, NULL);
   if (!dir)
       return;
 

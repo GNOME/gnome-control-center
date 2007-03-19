@@ -1,15 +1,21 @@
+2007-03-19  Bastien Nocera  <hadess@hadess.net>
+
+	* Makefile.am:
+	* gnome-keybinding-properties.c: (reload_key_entries):
+	Fix the path from which we'd load the keybindings
+
 2007-02-19  Jens Granseuer  <jensgr@gmx.net>
 
 	* gnome-keybinding-properties.c: (clear_old_model): clear GConf client
 	cache before reloading since cached values don't pass the schema name
 	along which can make entries vanish from the list (fixes bug 394776)
 
-2007-02-08  Mariano Suárez-Alvarez  <mariano@gnome.org>
+2007-02-08  Mariano Su?rez-Alvarez  <mariano@gnome.org>
 
 	* gnome-keybinding-properties.c (metacity_key_list): added 
 	gconf:/apps/metacity/global_keybindings/cycle_group
 
-2007-02-07  Mariano Suárez-Alvarez  <mariano@gnome.org>
+2007-02-07  Mariano Su?rez-Alvarez  <mariano@gnome.org>
 
 	* gnome-keybinding-properties.c (clear_old_model, reload_key_entries,
 	cb_dialog_response, setup_dialog, main): organize the way things a cleared
@@ -172,7 +178,7 @@
 	* gnome-keybinding-properties.c: (setup_dialog):
 	Use themed icon for WM hint.
 
-2004-07-23 David Sedeño <david@alderia.com>
+2004-07-23 David Sede?o <david@alderia.com>
 
 	http://bugzilla.gnome.org/show_bug.cgi?id=148208
 	* gnome-keybinding-properties.glade: Expand to false to the hbox1
