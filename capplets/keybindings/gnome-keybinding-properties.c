@@ -19,109 +19,30 @@
 #define LABEL_DATA "gnome-keybinding-properties-label"
 #define MAX_ELEMENTS_BEFORE_SCROLLING 10
 
+typedef struct {
+  char *name;
+  /* The gettext package to use to translate the section title */
+  char *package;
+  /* Name of the window manager the keys would apply to */
+  char *wm_name;
+  /* an array of KeyListEntry */
+  GArray *entries;
+} KeyList;
+
 typedef enum {
-  ALWAYS_VISIBLE,
-  N_WORKSPACES_GT
-} KeyListEntryVisibility;
+  COMPARISON_NONE = 0,
+  COMPARISON_GT,
+  COMPARISON_LT,
+  COMPARISON_EQ
+} Comparison;
 
 typedef struct
 {
-  const char *name;
-  KeyListEntryVisibility visibility;
-  gint data;
+  char *name;
+  int value;
+  char *key;
+  Comparison comparison;
 } KeyListEntry;
-
-static const KeyListEntry desktop_key_list[] =
-{
-  { "/apps/gnome_settings_daemon/keybindings/help", ALWAYS_VISIBLE, 0 },
-  { "/apps/gnome_settings_daemon/keybindings/power", ALWAYS_VISIBLE, 0 },
-  { "/apps/gnome_settings_daemon/keybindings/sleep", ALWAYS_VISIBLE, 0 },
-  { "/apps/gnome_settings_daemon/keybindings/screensaver", ALWAYS_VISIBLE, 0 },
-  { "/apps/gnome_settings_daemon/keybindings/home", ALWAYS_VISIBLE, 0 },
-  { "/apps/gnome_settings_daemon/keybindings/search", ALWAYS_VISIBLE, 0 },
-  { "/apps/gnome_settings_daemon/keybindings/email", ALWAYS_VISIBLE, 0 },
-  { "/apps/gnome_settings_daemon/keybindings/www", ALWAYS_VISIBLE, 0 },
-  { "/apps/metacity/global_keybindings/panel_run_dialog", ALWAYS_VISIBLE, 0 },
-  { "/apps/metacity/global_keybindings/panel_main_menu", ALWAYS_VISIBLE, 0 },
-  { "/apps/metacity/global_keybindings/run_command_screenshot", ALWAYS_VISIBLE, 0 },
-  { "/apps/metacity/global_keybindings/run_command_window_screenshot", ALWAYS_VISIBLE, 0 },
-  { "/apps/metacity/global_keybindings/run_command_terminal", ALWAYS_VISIBLE, 0 },
-  { NULL }
-};
-static const KeyListEntry sounds_key_list[] =
-{
-  { "/apps/gnome_settings_daemon/keybindings/volume_mute", ALWAYS_VISIBLE, 0 },
-  { "/apps/gnome_settings_daemon/keybindings/volume_down", ALWAYS_VISIBLE, 0 },
-  { "/apps/gnome_settings_daemon/keybindings/volume_up", ALWAYS_VISIBLE, 0 },
-  /* Other ones that need keysyms bindings */
-  { "/apps/gnome_settings_daemon/keybindings/play", ALWAYS_VISIBLE, 0 },        
-  { "/apps/gnome_settings_daemon/keybindings/pause", ALWAYS_VISIBLE, 0 },       
-  { "/apps/gnome_settings_daemon/keybindings/stop", ALWAYS_VISIBLE, 0 },        
-  { "/apps/gnome_settings_daemon/keybindings/previous", ALWAYS_VISIBLE, 0 },    
-  { "/apps/gnome_settings_daemon/keybindings/next", ALWAYS_VISIBLE, 0 },        
-  { "/apps/gnome_settings_daemon/keybindings/eject", ALWAYS_VISIBLE, 0 },
-  { NULL }
-};
-
-static const KeyListEntry metacity_key_list[] =
-{
-  { "/apps/metacity/window_keybindings/activate_window_menu",      ALWAYS_VISIBLE,  0 },
-  { "/apps/metacity/window_keybindings/toggle_fullscreen",         ALWAYS_VISIBLE,  0 },
-  { "/apps/metacity/window_keybindings/toggle_maximized",          ALWAYS_VISIBLE,  0 },
-  { "/apps/metacity/window_keybindings/maximize",                  ALWAYS_VISIBLE,  0 },
-  { "/apps/metacity/window_keybindings/unmaximize",                ALWAYS_VISIBLE,  0 },
-  { "/apps/metacity/window_keybindings/toggle_shaded",             ALWAYS_VISIBLE,  0 },
-  { "/apps/metacity/window_keybindings/close",                     ALWAYS_VISIBLE,  0 },
-  { "/apps/metacity/window_keybindings/minimize",                  ALWAYS_VISIBLE,  0 },
-  { "/apps/metacity/window_keybindings/begin_move",                ALWAYS_VISIBLE,  0 },
-  { "/apps/metacity/window_keybindings/begin_resize",              ALWAYS_VISIBLE,  0 },
-  { "/apps/metacity/window_keybindings/toggle_on_all_workspaces",  N_WORKSPACES_GT, 1 },
-  /* These next three are out of order compared to the schemas file. */
-  { "/apps/metacity/window_keybindings/raise_or_lower",            ALWAYS_VISIBLE,  0 },
-  { "/apps/metacity/window_keybindings/raise",                     ALWAYS_VISIBLE,  0 },
-  { "/apps/metacity/window_keybindings/lower",                     ALWAYS_VISIBLE,  0 },
-  { "/apps/metacity/window_keybindings/maximize_vertically",       ALWAYS_VISIBLE,  0 },
-  { "/apps/metacity/window_keybindings/maximize_horizontally",     ALWAYS_VISIBLE,  0 },
-  { "/apps/metacity/window_keybindings/move_to_workspace_1",       N_WORKSPACES_GT, 1 },
-  { "/apps/metacity/window_keybindings/move_to_workspace_2",       N_WORKSPACES_GT, 1 },
-  { "/apps/metacity/window_keybindings/move_to_workspace_3",       N_WORKSPACES_GT, 2 },
-  { "/apps/metacity/window_keybindings/move_to_workspace_4",       N_WORKSPACES_GT, 3 },
-  { "/apps/metacity/window_keybindings/move_to_workspace_5",       N_WORKSPACES_GT, 4 },
-  { "/apps/metacity/window_keybindings/move_to_workspace_6",       N_WORKSPACES_GT, 5 },
-  { "/apps/metacity/window_keybindings/move_to_workspace_7",       N_WORKSPACES_GT, 6 },
-  { "/apps/metacity/window_keybindings/move_to_workspace_8",       N_WORKSPACES_GT, 7 },
-  { "/apps/metacity/window_keybindings/move_to_workspace_9",       N_WORKSPACES_GT, 8 },
-  { "/apps/metacity/window_keybindings/move_to_workspace_10",      N_WORKSPACES_GT, 9 },
-  { "/apps/metacity/window_keybindings/move_to_workspace_11",      N_WORKSPACES_GT, 10 },
-  { "/apps/metacity/window_keybindings/move_to_workspace_12",      N_WORKSPACES_GT, 11 },
-  { "/apps/metacity/window_keybindings/move_to_workspace_left",    N_WORKSPACES_GT, 1 },
-  { "/apps/metacity/window_keybindings/move_to_workspace_right",   N_WORKSPACES_GT, 1 },
-  { "/apps/metacity/window_keybindings/move_to_workspace_up",      N_WORKSPACES_GT, 1 },
-  { "/apps/metacity/window_keybindings/move_to_workspace_down",    N_WORKSPACES_GT, 1 },
-  { "/apps/metacity/global_keybindings/switch_windows",            ALWAYS_VISIBLE,  0 },
-  { "/apps/metacity/global_keybindings/switch_panels",             ALWAYS_VISIBLE,  0 },
-  { "/apps/metacity/global_keybindings/cycle_windows",             ALWAYS_VISIBLE,  0 },
-  { "/apps/metacity/global_keybindings/cycle_group",               ALWAYS_VISIBLE,  0 },
-  { "/apps/metacity/global_keybindings/cycle_panels",              ALWAYS_VISIBLE,  0 },
-  { "/apps/metacity/global_keybindings/show_desktop",              ALWAYS_VISIBLE,  0 },
-  { "/apps/metacity/global_keybindings/switch_to_workspace_1",     N_WORKSPACES_GT, 1 },
-  { "/apps/metacity/global_keybindings/switch_to_workspace_2",     N_WORKSPACES_GT, 1 },
-  { "/apps/metacity/global_keybindings/switch_to_workspace_3",     N_WORKSPACES_GT, 2 },
-  { "/apps/metacity/global_keybindings/switch_to_workspace_4",     N_WORKSPACES_GT, 3 },
-  { "/apps/metacity/global_keybindings/switch_to_workspace_5",     N_WORKSPACES_GT, 4 },
-  { "/apps/metacity/global_keybindings/switch_to_workspace_6",     N_WORKSPACES_GT, 5 },
-  { "/apps/metacity/global_keybindings/switch_to_workspace_7",     N_WORKSPACES_GT, 6 },
-  { "/apps/metacity/global_keybindings/switch_to_workspace_8",     N_WORKSPACES_GT, 7 },
-  { "/apps/metacity/global_keybindings/switch_to_workspace_9",     N_WORKSPACES_GT, 8 },
-  { "/apps/metacity/global_keybindings/switch_to_workspace_10",    N_WORKSPACES_GT, 9 },
-  { "/apps/metacity/global_keybindings/switch_to_workspace_11",    N_WORKSPACES_GT, 10 },
-  { "/apps/metacity/global_keybindings/switch_to_workspace_12",    N_WORKSPACES_GT, 11 },
-  { "/apps/metacity/global_keybindings/switch_to_workspace_left",  N_WORKSPACES_GT, 1 },
-  { "/apps/metacity/global_keybindings/switch_to_workspace_right", N_WORKSPACES_GT, 1 },
-  { "/apps/metacity/global_keybindings/switch_to_workspace_up",    N_WORKSPACES_GT, 1 },
-  { "/apps/metacity/global_keybindings/switch_to_workspace_down",  N_WORKSPACES_GT, 1 },
-  { NULL }
-};
 
 enum
 {
@@ -171,6 +92,8 @@ create_dialog (void)
   GladeXML *dialog;
 
   dialog = glade_xml_new (GNOMECC_GLADE_DIR "/gnome-keybinding-properties.glade", "gnome-keybinding-dialog", NULL);
+  if (!dialog)
+    dialog = glade_xml_new ("gnome-keybinding-properties.glade", "gnome-keybinding-dialog", NULL);
 
   return dialog;
 }
@@ -421,6 +344,43 @@ clear_old_model (GladeXML  *dialog)
 }
 
 static gboolean
+should_show_key (const KeyListEntry *entry)
+{
+  int value;
+  GConfClient *client;
+
+  if (entry->comparison == COMPARISON_NONE)
+    return TRUE;
+
+  g_return_val_if_fail (entry->key != NULL, FALSE);
+
+  client = gconf_client_get_default();
+  value = gconf_client_get_int (client, entry->key, NULL);
+  g_object_unref (client);
+
+  switch (entry->comparison) {
+  case COMPARISON_NONE:
+    /* For compiler warnings */
+    g_assert_not_reached ();
+    return FALSE;
+  case COMPARISON_GT:
+    if (value > entry->value)
+      return TRUE;
+    break;
+  case COMPARISON_LT:
+    if (value < entry->value)
+      return TRUE;
+    break;
+  case COMPARISON_EQ:
+    if (value == entry->value)
+      return TRUE;
+    break;
+  }
+
+  return FALSE;
+}
+
+static gboolean
 count_rows_foreach (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data)
 {
   gint *rows = data;
@@ -430,28 +390,18 @@ count_rows_foreach (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, g
   return FALSE;
 }
 
-static gboolean
-should_show_key (const KeyListEntry *entry)
+static void
+ensure_scrollbar (GladeXML *dialog, int i)
 {
-  gint workspaces;
-  GConfClient *client;
- 
-  switch (entry->visibility) {
-  case ALWAYS_VISIBLE:
-    return TRUE;
-  case N_WORKSPACES_GT:
-    client = gconf_client_get_default();
-    workspaces = gconf_client_get_int (client,
-				       "/apps/metacity/general/num_workspaces", NULL);
-    g_object_unref (client);
-
-    if (workspaces > entry->data)
-      return TRUE;
-    else
-      return FALSE;
-  }
-
-  return FALSE;
+  if (i == MAX_ELEMENTS_BEFORE_SCROLLING)
+    {
+      GtkRequisition rectangle;
+      gtk_widget_ensure_style (WID ("shortcut_treeview"));
+      gtk_widget_size_request (WID ("shortcut_treeview"), &rectangle);
+      gtk_widget_set_size_request (WID ("shortcut_treeview"), -1, rectangle.height);
+      gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (WID ("actions_swindow")),
+				      GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
+    }
 }
 
 static void
@@ -460,20 +410,50 @@ append_keys_to_tree (GladeXML           *dialog,
 		     const KeyListEntry *keys_list)
 {
   GConfClient *client;
-  GtkTreeIter parent_iter;
+  GtkTreeIter parent_iter, iter;
   GtkTreeModel *model;
+  gboolean found;
   gint i, j;
 
   client = gconf_client_get_default ();
   model = get_real_model (GTK_TREE_VIEW (WID ("shortcut_treeview")));
 
+  /* Try to find a section parent iter, if it already exists */
+  i = gtk_tree_model_iter_n_children (model, NULL);
+  found = FALSE;
+  gtk_tree_model_get_iter_first (model, &iter);
+  for (j = 0; j < i; j++)
+    {
+      char *description = NULL;
+
+      gtk_tree_model_iter_next (model, &iter);
+      gtk_tree_model_get (model, &iter,
+			  DESCRIPTION_COLUMN, &description,
+			  -1);
+      if (description != NULL && g_str_equal (description, title))
+        {
+	  found = TRUE;
+	  break;
+        }
+    }
+
+  if (found)
+    {
+      parent_iter = iter;
+    } else {
+      gtk_tree_store_append (GTK_TREE_STORE (model), &parent_iter, NULL);
+      gtk_tree_store_set (GTK_TREE_STORE (model), &parent_iter,
+			  DESCRIPTION_COLUMN, title,
+			  -1);
+    }
+
+
   i = 0;
   gtk_tree_model_foreach (model, count_rows_foreach, &i);
 
-  gtk_tree_store_append (GTK_TREE_STORE (model), &parent_iter, NULL);
-  gtk_tree_store_set (GTK_TREE_STORE (model), &parent_iter,
-  		      DESCRIPTION_COLUMN, title,
-  		      -1);
+  /* If the header we just added is the MAX_ELEMENTS_BEFORE_SCROLLING th,
+   * then we need to scroll now */
+  ensure_scrollbar (dialog, i - 1);
 
   for (j = 0; keys_list[j].name != NULL; j++)
     {
@@ -481,13 +461,12 @@ append_keys_to_tree (GladeXML           *dialog,
       GConfSchema *schema = NULL;
       KeyEntry *key_entry;
       GError *error = NULL;
-      GtkTreeIter iter;
       const gchar *key_string;
       gchar *key_value;
 
       if (!should_show_key (&keys_list[j]))
 	continue;
-      
+
       key_string = keys_list[j].name;
 
       entry = gconf_client_get_entry (client,
@@ -505,7 +484,7 @@ append_keys_to_tree (GladeXML           *dialog,
 
       if (gconf_entry_get_schema_name (entry))
 	schema = gconf_client_get_schema (client, gconf_entry_get_schema_name (entry), &error);
-      
+
       if (error || schema == NULL)
 	{
 	  /* We don't actually want to popup a dialog - just skip this one */
@@ -529,15 +508,8 @@ append_keys_to_tree (GladeXML           *dialog,
       g_free (key_value);
       key_entry->description = g_strdup (gconf_schema_get_short_desc (schema));
 
-      if (i == MAX_ELEMENTS_BEFORE_SCROLLING)
-	{
-	  GtkRequisition rectangle;
-	  gtk_widget_ensure_style (WID ("shortcut_treeview"));
-	  gtk_widget_size_request (WID ("shortcut_treeview"), &rectangle);
-	  gtk_widget_set_size_request (WID ("shortcut_treeview"), -1, rectangle.height);
-	  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (WID ("actions_swindow")),
-					  GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-	}
+      ensure_scrollbar (dialog, i);
+
       i++;
       gtk_tree_store_append (GTK_TREE_STORE (model), &iter, &parent_iter);
       if (gconf_schema_get_short_desc (schema))
@@ -565,17 +537,233 @@ append_keys_to_tree (GladeXML           *dialog,
 }
 
 static void
+parse_start_tag (GMarkupParseContext *ctx,
+		 const gchar         *element_name,
+		 const gchar        **attr_names,
+		 const gchar        **attr_values,
+		 gpointer             user_data,
+		 GError             **error)
+{
+  KeyList *keylist = (KeyList *) user_data;
+  KeyListEntry key;
+  const char *name, *gconf_key;
+  int value;
+  Comparison comparison;
+
+  name = NULL;
+
+  /* The top-level element, names the section in the tree */
+  if (g_str_equal (element_name, "KeyListEntries"))
+    {
+      const char *wm_name = NULL;
+      const char *package = NULL;
+
+      while (*attr_names && *attr_values)
+        {
+	  if (g_str_equal (*attr_names, "name"))
+	    {
+	      if (**attr_values)
+		name = *attr_values;
+	    } else if (g_str_equal (*attr_names, "wm_name")) {
+	      if (**attr_values)
+		wm_name = *attr_values;
+	    } else if (g_str_equal (*attr_names, "package")) {
+	      if (**attr_values)
+		package = *attr_values;
+	    }
+	  ++attr_names;
+	  ++attr_values;
+	}
+
+      if (name)
+        {
+	  if (keylist->name)
+	    g_warning ("Duplicate section name");
+	  g_free (keylist->name);
+	  keylist->name = g_strdup (name);
+	}
+      if (wm_name)
+        {
+	  if (keylist->wm_name)
+	    g_warning ("Duplicate window manager name");
+	  g_free (keylist->wm_name);
+	  keylist->wm_name = g_strdup (wm_name);
+	}
+      if (package)
+        {
+	  if (keylist->package)
+	    g_warning ("Duplicate gettext package name");
+	  g_free (keylist->package);
+	  keylist->package = g_strdup (package);
+	}
+      return;
+    }
+
+  if (!g_str_equal (element_name, "KeyListEntry")
+      || attr_names == NULL
+      || attr_values == NULL)
+    return;
+
+  value = 0;
+  comparison = COMPARISON_NONE;
+  gconf_key = NULL;
+
+  while (*attr_names && *attr_values)
+    {
+      if (g_str_equal (*attr_names, "name"))
+        {
+	  /* skip if empty */
+	  if (**attr_values)
+	    name = *attr_values;
+	} else if (g_str_equal (*attr_names, "value")) {
+	  if (**attr_values) {
+	    value = (int) g_ascii_strtoull (*attr_values, NULL, 0);
+	  }
+	} else if (g_str_equal (*attr_names, "key")) {
+	  if (**attr_values) {
+	    gconf_key = *attr_values;
+	  }
+	} else if (g_str_equal (*attr_names, "comparison")) {
+	  if (**attr_values) {
+	    if (g_str_equal (*attr_values, "gt")) {
+	      comparison = COMPARISON_GT;
+	    } else if (g_str_equal (*attr_values, "lt")) {
+	      comparison = COMPARISON_LT;
+	    } else if (g_str_equal (*attr_values, "eq")) {
+	      comparison = COMPARISON_EQ;
+	    }
+	  }
+	}
+
+      ++attr_names;
+      ++attr_values;
+    }
+
+  if (name == NULL)
+    return;
+
+  key.name = g_strdup (name);
+  key.value = value;
+  if (gconf_key)
+    key.key = g_strdup (gconf_key);
+  else
+    key.key = NULL;
+  key.comparison = comparison;
+  g_array_append_val (keylist->entries, key);
+}
+
+static void
+append_keys_to_tree_from_file (GladeXML   *dialog,
+			       const char *filename,
+			       const char *wm_name)
+{
+  GMarkupParseContext *ctx;
+  GMarkupParser parser = { parse_start_tag, NULL, NULL, NULL, NULL };
+  KeyList *keylist;
+  KeyListEntry key, *keys;
+  GError *err = NULL;
+  char *buf;
+  const char *title;
+  gsize buf_len;
+  guint i;
+
+  if (!g_file_get_contents (filename, &buf, &buf_len, &err))
+    return;
+
+  keylist = g_new0 (KeyList, 1);
+  keylist->entries = g_array_new (FALSE, TRUE, sizeof (KeyListEntry));
+  ctx = g_markup_parse_context_new (&parser, 0, keylist, NULL);
+
+  if (!g_markup_parse_context_parse (ctx, buf, buf_len, &err))
+    {
+      g_warning ("Failed to parse '%s': '%s'", filename, err->message);
+      g_error_free (err);
+      g_free (keylist->name);
+      g_free (keylist->package);
+      g_free (keylist->wm_name);
+      for (i = 0; i < keylist->entries->len; i++)
+	g_free (((KeyListEntry *) &(keylist->entries->data[i]))->name);
+      g_array_free (keylist->entries, TRUE);
+      g_free (keylist);
+      keylist = NULL;
+    }
+  g_markup_parse_context_free (ctx);
+  g_free (buf);
+
+  if (keylist == NULL)
+    return;
+
+  /* If there's no keys to add, or the settings apply to a window manager
+   * that's not the one we're running */
+  if (keylist->entries->len == 0
+      || (keylist->wm_name != NULL && !g_str_equal (wm_name, keylist->wm_name))
+      || keylist->name == NULL)
+    {
+      g_free (keylist->name);
+      g_free (keylist->package);
+      g_free (keylist->wm_name);
+      g_array_free (keylist->entries, TRUE);
+      g_free (keylist);
+      return;
+    }
+
+  /* Empty KeyListEntry to end the array */
+  key.name = NULL;
+  key.key = NULL;
+  key.value = 0;
+  key.comparison = COMPARISON_NONE;
+  g_array_append_val (keylist->entries, key);
+
+  keys = (KeyListEntry *) g_array_free (keylist->entries, FALSE);
+  if (keylist->package)
+    {
+      title = dgettext (keylist->package, keylist->name);
+    } else {
+      title = _(keylist->name);
+    }
+
+  g_message ("title: %s", title);
+
+  append_keys_to_tree (dialog, title, keys);
+
+  g_free (keylist->name);
+  g_free (keylist->package);
+  for (i = 0; keys[i].name != NULL; i++)
+    g_free (keys[i].name);
+  g_free (keylist);
+}
+
+static void
 reload_key_entries (gpointer wm_name, GladeXML *dialog)
 {
+  GDir *dir;
+  const char *name;
+  GList *list, *l;
+
   clear_old_model (dialog);
-  
-  append_keys_to_tree (dialog, _("Desktop"), desktop_key_list);
-  append_keys_to_tree (dialog, _("Sound"), sounds_key_list);
-  
-  if (strcmp((char *) wm_name, WM_COMMON_METACITY) == 0)
+
+  //FIXME path
+  dir = g_dir_open ("./", 0, NULL);
+  if (!dir)
+      return;
+
+  list = NULL;
+  for (name = g_dir_read_name (dir) ; name ; name = g_dir_read_name (dir))
     {
-      append_keys_to_tree (dialog, _("Window Management"), metacity_key_list);
+      if (g_str_has_suffix (name, ".xml"))
+        {
+	  list = g_list_insert_sorted (list, g_strdup (name),
+				       (GCompareFunc) g_ascii_strcasecmp);
+	}
     }
+  g_dir_close (dir);
+
+  for (l = list; l != NULL; l = l->next)
+    {
+        append_keys_to_tree_from_file (dialog, l->data, wm_name);
+	g_free (l->data);
+    }
+  g_list_free (list);
 }
 
 static void
@@ -910,10 +1098,10 @@ setup_dialog (GladeXML *dialog)
 
   g_signal_connect (GTK_TREE_VIEW (WID ("shortcut_treeview")),
 		    "button_press_event",
-		    G_CALLBACK (start_editing_cb), dialog),
-	g_signal_connect (GTK_TREE_VIEW (WID ("shortcut_treeview")),
-	      "row-activated",
-		    G_CALLBACK (start_editing_kb_cb), dialog),
+		    G_CALLBACK (start_editing_cb), dialog);
+  g_signal_connect (GTK_TREE_VIEW (WID ("shortcut_treeview")),
+		    "row-activated",
+		    G_CALLBACK (start_editing_kb_cb), dialog);
 		    
   column = gtk_tree_view_column_new_with_attributes (_("Action"),
 						     gtk_cell_renderer_text_new (),
@@ -945,7 +1133,7 @@ setup_dialog (GladeXML *dialog)
 
   gtk_tree_view_append_column (GTK_TREE_VIEW (WID ("shortcut_treeview")), column);
   gtk_tree_view_column_set_sort_column_id (column, KEYENTRY_COLUMN); 
-  
+
   gconf_client_add_dir (client, "/apps/gnome_keybinding_properties", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
   gconf_client_add_dir (client, "/apps/metacity/general", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
   gconf_client_notify_add (client,
@@ -995,3 +1183,7 @@ main (int argc, char *argv[])
   g_object_unref (program);
   return 0;
 }
+
+/*
+ * vim: sw=2 ts=8 cindent noai bs=2
+ */

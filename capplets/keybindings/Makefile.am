@@ -20,6 +20,12 @@ desktopdir = $(datadir)/applications
 Desktop_in_files = keybinding.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
+@INTLTOOL_XML_NOMERGE_RULE@
+
+xmldir       = $(pkgdatadir)/glade
+xml_in_files = 00-multimedia-key.xml.in 01-desktop-key.xml.in 50-metacity-desktop-key.xml.in 50-metacity-key.xml.in
+xml_DATA     = $(xml_in_files:.xml.in=.xml)
+
 INCLUDES = \
 	$(GNOMECC_CAPPLETS_CFLAGS) \
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\"" \

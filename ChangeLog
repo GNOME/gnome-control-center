@@ -1,3 +1,19 @@
+2007-03-19  Bastien Nocera  <hadess@hadess.net>
+
+	* capplets/keybindings/00-multimedia-key.xml.in:
+	* capplets/keybindings/01-desktop-key.xml.in:
+	* capplets/keybindings/50-metacity-desktop-key.xml.in:
+	* capplets/keybindings/50-metacity-key.xml.in:
+	* capplets/keybindings/Makefile.am:
+	* capplets/keybindings/gnome-keybinding-properties.c:
+	(create_dialog), (should_show_key), (count_rows_foreach),
+	(ensure_scrollbar), (append_keys_to_tree), (parse_start_tag),
+	(append_keys_to_tree_from_file), (reload_key_entries),
+	(setup_dialog):
+	* po/POTFILES.in: Make all the keybindings be external to the keybindings
+	capplet itself. This allows applications to add their own keybindings
+	without recompilation (Closes: #410758)
+
 2007-03-18  Jens Granseuer  <jensgr@gmx.net>
 
 	Patch by: Vitaliy Ischenko <betalb@gmail.com>
