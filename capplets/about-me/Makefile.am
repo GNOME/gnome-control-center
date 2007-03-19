@@ -1,16 +1,14 @@
 # This is used in GNOMECC_CAPPLETS_CFLAGS
 cappletname = about-me
 
-bin_PROGRAMS = gnome-about-me
+glade_files = gnome-about-me.glade
+Desktop_in_files = gnome-about-me.desktop.in
 
-pixmapdir = $(pkgdatadir)/pixmaps
-pixmap_DATA = 				\
+pixmap_files = 				\
 	gnome-about-me-lock.png		\
 	gnome-about-me-lock-open.png
 
-gnome_about_me_LDADD = $(GNOMECC_CAPPLETS_LIBS) $(LIBEBOOK_LIBS) $(ABOUTME_LIBS)
-gnome_about_me_LDFLAGS = -export-dynamic
-gnome_about_me_SOURCES = 		\
+gnome_about_me_SOURCES =	 	\
 	eel-alert-dialog.c		\
 	eel-alert-dialog.h		\
 	eel-gtk-macros.h		\
@@ -20,14 +18,22 @@ gnome_about_me_SOURCES = 		\
 	e-image-chooser.h		\
 	gnome-about-me.c
 
+if BUILD_ABOUTME
+bin_PROGRAMS = gnome-about-me
+
+pixmapdir = $(pkgdatadir)/pixmaps
+pixmap_DATA = $(pixmap_files)
+
+gnome_about_me_LDADD = $(GNOMECC_CAPPLETS_LIBS) $(LIBEBOOK_LIBS) $(ABOUTME_LIBS)
+gnome_about_me_LDFLAGS = -export-dynamic
+
 @INTLTOOL_DESKTOP_RULE@
 
 desktopdir = $(datadir)/applications
-Desktop_in_files = gnome-about-me.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
 gladedir   = $(pkgdatadir)/glade
-glade_DATA = gnome-about-me.glade
+glade_DATA = $(glade_files)
 
 INCLUDES = \
 	$(GNOMECC_CAPPLETS_CFLAGS) \
@@ -38,5 +44,7 @@ INCLUDES = \
 	-DGNOMECC_PIXMAP_DIR="\"$(pixmapdir)\"" \
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""
 
-CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA)
-EXTRA_DIST = $(glade_DATA) $(pixmap_DATA)
+endif # BUILD_ABOUTME
+
+CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(desktop_DATA)
+EXTRA_DIST = $(glade_files) $(pixmap_files) $(Desktop_in_files)
