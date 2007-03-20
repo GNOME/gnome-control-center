@@ -459,6 +459,17 @@ do_mail_action (Acme *acme)
 }
 
 static void
+do_media_action (Acme *acme)
+{
+	char *command;
+	command = gconf_client_get_string (acme->conf_client,
+					   GCONF_MISC_DIR "/eject_command", NULL);
+	if ((command != NULL) && (strcmp (command, "") != 0))
+		execute (command, FALSE);
+	g_free (command);
+}
+
+static void
 do_www_action (Acme *acme, const char *url)
 {
 	char *string, *command;
@@ -615,6 +626,9 @@ do_action (Acme *acme, int type)
 		break;
 	case WWW_KEY:
 		do_www_action (acme, NULL);
+		break;
+	case MEDIA_KEY:
+		do_media_action (acme);
 		break;
 	case PLAY_KEY:
 		return do_multimedia_player_action (acme, "Play");
