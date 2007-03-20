@@ -72,6 +72,9 @@ entry_focus_out_event_cb (GtkWidget *widget, GdkEventFocus *event, GnomeDACapple
     else if (widget == capplet->terminal_exec_flag_entry) {
 	gconf_client_set_string (capplet->gconf, DEFAULT_APPS_KEY_TERMINAL_EXEC_ARG, text, &error);
     }
+	else if (widget == capplet->media_player_command_entry) {
+	gconf_client_set_string (capplet->gconf, DEFAULT_APPS_KEY_MEDIA_EXEC, text, &error);
+	}
 
     if (error != NULL) {
 	g_warning (_("Error saving configuration: %s"), error->message);
@@ -96,6 +99,9 @@ terminal_checkbutton_toggled_cb (GtkToggleButton *togglebutton, GnomeDACapplet *
     else if (GTK_WIDGET (togglebutton) == capplet->mail_reader_terminal_checkbutton) {
 	gconf_client_set_bool (capplet->gconf, DEFAULT_APPS_KEY_MAILER_NEEDS_TERM, is_active, &error);
     }
+	else if (GTK_WIDGET (togglebutton) == capplet->media_player_terminal_checkbutton) {
+	gconf_client_set_bool (capplet->gconf, DEFAULT_APPS_KEY_MEDIA_NEEDS_TERM, is_active, &error);
+	}
 
     if (error != NULL) {
 	g_warning (_("Error saving configuration: %s"), error->message);
@@ -216,6 +222,7 @@ web_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
     gtk_widget_set_sensitive (capplet->web_browser_terminal_checkbutton, is_custom_active);
 }
 	
+/* FIXME: Refactor these two functions below into one... */
 static void
 mail_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
 {
@@ -223,7 +230,7 @@ mail_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
     GtkTreePath *path;
     guint current_index;
     gboolean is_custom_active;
-    GnomeDAMailItem *item;
+    GnomeDASimpleItem *item;
     GConfChangeSet *cs;
     GError *error = NULL;
     char *mailer_cmd;
@@ -234,7 +241,7 @@ mail_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
     gtk_tree_path_free (path);
 
     if (current_index < g_list_length (capplet->mail_readers)) {
-	item = (GnomeDAMailItem*) g_list_nth_data (capplet->mail_readers, current_index);
+	item = (GnomeDASimpleItem*) g_list_nth_data (capplet->mail_readers, current_index);
 	is_custom_active = FALSE;
 
 	cs = gconf_change_set_new ();
@@ -265,6 +272,57 @@ mail_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
     gtk_editable_set_editable (GTK_EDITABLE (capplet->mail_reader_command_entry), is_custom_active);
     gtk_widget_set_sensitive (capplet->mail_reader_command_label, is_custom_active);
     gtk_widget_set_sensitive (capplet->mail_reader_terminal_checkbutton, is_custom_active);
+}
+
+static void
+media_combo_changed_cb (GtkComboBox *combo, GnomeDACapplet *capplet)
+{
+    GtkTreeIter iter;
+    GtkTreePath *path;
+    guint current_index;
+    gboolean is_custom_active;
+    GnomeDASimpleItem *item;
+    GConfChangeSet *cs;
+    GError *error = NULL;
+    char *media_cmd;
+    
+    gtk_combo_box_get_active_iter (combo, &iter);
+    path = gtk_tree_model_get_path (gtk_combo_box_get_model (combo), &iter);
+    current_index = gtk_tree_path_get_indices (path)[0];
+    gtk_tree_path_free (path);
+
+    if (current_index < g_list_length (capplet->media_players)) {
+	item = (GnomeDASimpleItem*) g_list_nth_data (capplet->media_players, current_index);
+	is_custom_active = FALSE;
+
+	cs = gconf_change_set_new ();
+
+	gconf_change_set_set_string (cs, DEFAULT_APPS_KEY_MEDIA_EXEC, item->generic.command);
+	gconf_change_set_set_bool (cs, DEFAULT_APPS_KEY_MEDIA_NEEDS_TERM, item->run_in_terminal);
+
+	gconf_client_commit_change_set (capplet->gconf, cs, TRUE, &error);
+
+	if (error != NULL) {
+	    g_warning (_("Error saving configuration: %s"), error->message);
+	    g_error_free (error);
+	    error = NULL;
+	}
+
+	gconf_change_set_unref (cs);
+    }
+    else {
+	is_custom_active = TRUE;
+    }
+
+    media_cmd = gconf_client_get_string (capplet->gconf, DEFAULT_APPS_KEY_MEDIA_EXEC, NULL);
+    gtk_entry_set_text (GTK_ENTRY (capplet->media_player_command_entry), media_cmd);
+    g_free (media_cmd);
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (capplet->media_player_terminal_checkbutton),
+				  gconf_client_get_bool (capplet->gconf, DEFAULT_APPS_KEY_MEDIA_NEEDS_TERM, NULL));
+
+    gtk_editable_set_editable (GTK_EDITABLE (capplet->media_player_command_entry), is_custom_active);
+    gtk_widget_set_sensitive (capplet->media_player_command_label, is_custom_active);
+    gtk_widget_set_sensitive (capplet->media_player_terminal_checkbutton, is_custom_active);
 }
 
 static void
@@ -352,9 +410,9 @@ static struct {
 } icons[] = {
     { "web_browser_image", "web-browser"      },
     { "mail_reader_image", "stock_mail-open"  },
+    { "media_player_image", "gnome-audio"     },
 /*    { "messenger_image",   "im"               },
  *    { "image_image",       "image-viewer"     },
- *    { "sound_image",       "gnome-audio"      },
  *    { "video_image",       "gnome-multimedia" },
  *    { "text_image",        "text-editor"      }, */
     { "terminal_image",    "gnome-terminal"   }
@@ -373,6 +431,7 @@ theme_changed_cb (GtkIconTheme *theme, GnomeDACapplet *capplet)
 
     refresh_combo_box_icons (theme, GTK_COMBO_BOX (capplet->web_combo_box), capplet->web_browsers);
     refresh_combo_box_icons (theme, GTK_COMBO_BOX (capplet->mail_combo_box), capplet->mail_readers);
+    refresh_combo_box_icons (theme, GTK_COMBO_BOX (capplet->media_combo_box), capplet->media_players);
     refresh_combo_box_icons (theme, GTK_COMBO_BOX (capplet->term_combo_box), capplet->terminals);
 }
 
@@ -495,6 +554,7 @@ web_browser_update_radio_buttons (GnomeDACapplet *capplet, const gchar *command)
     gtk_widget_set_sensitive (capplet->new_tab_radiobutton, has_net_remote);
 }
 
+/* FIXME: Refactor these two functions below into single one... */
 static void
 mail_reader_update_combo_box (GnomeDACapplet *capplet, const gchar *command)
 {
@@ -522,6 +582,35 @@ mail_reader_update_combo_box (GnomeDACapplet *capplet, const gchar *command)
 
     if (gtk_combo_box_get_active (GTK_COMBO_BOX (capplet->mail_combo_box)) != index)
 	gtk_combo_box_set_active (GTK_COMBO_BOX (capplet->mail_combo_box), index);
+}
+
+static void
+media_player_update_combo_box (GnomeDACapplet *capplet, const gchar *command)
+{
+    GList *entry;
+    gint index;
+    gboolean is_custom_active;
+
+    entry = g_list_find_custom (capplet->media_players, command, (GCompareFunc) generic_item_comp);
+
+    if (entry) {
+	index = g_list_position (capplet->media_players, entry);
+	is_custom_active = FALSE;
+    }
+    else {
+	/* index of 'Custom' combo box entry */
+	index = g_list_length (capplet->media_players) + 1;
+	is_custom_active = TRUE;
+    }
+
+    gtk_entry_set_text (GTK_ENTRY (capplet->media_player_command_entry), command);
+
+    gtk_editable_set_editable (GTK_EDITABLE (capplet->media_player_command_entry), is_custom_active);
+    gtk_widget_set_sensitive (capplet->media_player_command_label, is_custom_active);
+    gtk_widget_set_sensitive (capplet->media_player_terminal_checkbutton, is_custom_active);
+
+    if (gtk_combo_box_get_active (GTK_COMBO_BOX (capplet->media_combo_box)) != index)
+	gtk_combo_box_set_active (GTK_COMBO_BOX (capplet->media_combo_box), index);
 }
 
 static void
@@ -631,6 +720,7 @@ web_gconf_changed_cb (GConfClient *client, guint id, GConfEntry *entry, GnomeDAC
     }
 }
 
+/* FIXME: Refactor these two functions below into single one... */
 static void
 mail_gconf_changed_cb (GConfClient *client, guint id, GConfEntry *entry, GnomeDACapplet *capplet)
 {
@@ -647,6 +737,26 @@ mail_gconf_changed_cb (GConfClient *client, guint id, GConfEntry *entry, GnomeDA
     /* TODO: Remove when GConfPropertyEditor will be used */
     else if (strcmp (entry->key, DEFAULT_APPS_KEY_MAILER_NEEDS_TERM) == 0) {
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (capplet->mail_reader_terminal_checkbutton),
+				      gconf_value_get_bool (value));
+    }
+}
+
+static void
+media_gconf_changed_cb (GConfClient *client, guint id, GConfEntry *entry, GnomeDACapplet *capplet)
+{
+    GConfValue *value;
+
+    g_return_if_fail (gconf_entry_get_key (entry) != NULL);
+
+    if (!(value = gconf_entry_get_value (entry)))
+	return;
+
+    if (strcmp (entry->key, DEFAULT_APPS_KEY_MEDIA_EXEC) == 0) {
+	media_player_update_combo_box (capplet, gconf_value_get_string (value));
+    }
+    /* TODO: Remove when GConfPropertyEditor will be used */
+    else if (strcmp (entry->key, DEFAULT_APPS_KEY_MEDIA_NEEDS_TERM) == 0) {
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (capplet->media_player_terminal_checkbutton),
 				      gconf_value_get_bool (value));
     }
 }
@@ -790,9 +900,14 @@ show_dialog (GnomeDACapplet *capplet)
     capplet->terminal_exec_flag_entry = glade_xml_get_widget (capplet->xml, "terminal_exec_flag_entry");
     capplet->terminal_exec_flag_label = glade_xml_get_widget (capplet->xml, "terminal_exec_flag_label");
 
+    capplet->media_player_command_entry = glade_xml_get_widget (capplet->xml, "media_player_command_entry");
+    capplet->media_player_command_label = glade_xml_get_widget (capplet->xml, "media_player_command_label");
+    capplet->media_player_terminal_checkbutton = glade_xml_get_widget (capplet->xml, "media_player_terminal_checkbutton");
+
     capplet->web_combo_box = glade_xml_get_widget (capplet->xml, "web_browser_combobox");
     capplet->mail_combo_box = glade_xml_get_widget (capplet->xml, "mail_reader_combobox");
     capplet->term_combo_box = glade_xml_get_widget (capplet->xml, "terminal_combobox");
+    capplet->media_combo_box = glade_xml_get_widget (capplet->xml, "media_player_combobox");
 
     g_signal_connect (capplet->window, "screen-changed", G_CALLBACK (screen_changed_cb), capplet);
     screen_changed_cb (capplet->window, gdk_screen_get_default (), capplet);
@@ -800,6 +915,7 @@ show_dialog (GnomeDACapplet *capplet)
     fill_combo_box (capplet->icon_theme, GTK_COMBO_BOX (capplet->web_combo_box), capplet->web_browsers);
     fill_combo_box (capplet->icon_theme, GTK_COMBO_BOX (capplet->mail_combo_box), capplet->mail_readers);
     fill_combo_box (capplet->icon_theme, GTK_COMBO_BOX (capplet->term_combo_box), capplet->terminals);
+    fill_combo_box (capplet->icon_theme, GTK_COMBO_BOX (capplet->media_combo_box), capplet->media_players);
 
     /* update ui to gconf content */
     value = gconf_client_get (capplet->gconf, DEFAULT_APPS_KEY_HTTP_EXEC, NULL);
@@ -833,9 +949,9 @@ show_dialog (GnomeDACapplet *capplet)
 	gconf_value_free (value);
     }
 
+    value = gconf_client_get (capplet->gconf, DEFAULT_APPS_KEY_TERMINAL_EXEC, NULL);
     if (value)
     {
-	value = gconf_client_get (capplet->gconf, DEFAULT_APPS_KEY_TERMINAL_EXEC, NULL);
 	terminal_update_combo_box (capplet, gconf_value_get_string (value));
 	gconf_value_free (value);
     }
@@ -848,14 +964,32 @@ show_dialog (GnomeDACapplet *capplet)
 	gconf_value_free (value);
     }
 
+	value = gconf_client_get (capplet->gconf, DEFAULT_APPS_KEY_MEDIA_EXEC, NULL);
+    if (value)
+    {
+	media_player_update_combo_box (capplet, gconf_value_get_string (value));
+	gconf_value_free (value);
+    }
+
+	value = gconf_client_get (capplet->gconf, DEFAULT_APPS_KEY_MEDIA_NEEDS_TERM, NULL);
+    if (value)
+    {
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (capplet->media_player_terminal_checkbutton),
+				      gconf_value_get_bool (value));
+	gconf_value_free (value);
+    }
+
     g_signal_connect (capplet->web_combo_box, "changed", G_CALLBACK (web_combo_changed_cb), capplet);
     g_signal_connect (capplet->mail_combo_box, "changed", G_CALLBACK (mail_combo_changed_cb), capplet);
     g_signal_connect (capplet->term_combo_box, "changed", G_CALLBACK (terminal_combo_changed_cb), capplet);
+    g_signal_connect (capplet->media_combo_box, "changed", G_CALLBACK (media_combo_changed_cb), capplet);
 
     /* TODO: Remove when GConfPropertyEditor will be used */
     g_signal_connect (capplet->web_browser_terminal_checkbutton, "toggled",
 		      G_CALLBACK (terminal_checkbutton_toggled_cb), capplet);
     g_signal_connect (capplet->mail_reader_terminal_checkbutton, "toggled",
+		      G_CALLBACK (terminal_checkbutton_toggled_cb), capplet);
+    g_signal_connect (capplet->media_player_terminal_checkbutton, "toggled",
 		      G_CALLBACK (terminal_checkbutton_toggled_cb), capplet);
 
     /* TODO: Remove when GConfPropertyEditor will be used */
@@ -863,6 +997,7 @@ show_dialog (GnomeDACapplet *capplet)
     g_signal_connect (capplet->mail_reader_command_entry, "focus-out-event", G_CALLBACK (entry_focus_out_event_cb), capplet);
     g_signal_connect (capplet->terminal_command_entry, "focus-out-event", G_CALLBACK (entry_focus_out_event_cb), capplet);
     g_signal_connect (capplet->terminal_exec_flag_entry, "focus-out-event", G_CALLBACK (entry_focus_out_event_cb), capplet);
+    g_signal_connect (capplet->media_player_command_entry, "focus-out-event", G_CALLBACK (entry_focus_out_event_cb), capplet);
 
     g_signal_connect (capplet->default_radiobutton, "toggled", G_CALLBACK (web_radiobutton_toggled_cb), capplet);
     g_signal_connect (capplet->new_win_radiobutton, "toggled", G_CALLBACK (web_radiobutton_toggled_cb), capplet);
@@ -898,6 +1033,7 @@ main (int argc, char **argv)
 
     gconf_client_add_dir (capplet->gconf, "/desktop/gnome/applications/browser", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
     gconf_client_add_dir (capplet->gconf, "/desktop/gnome/applications/terminal", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
+    gconf_client_add_dir (capplet->gconf, "/desktop/gnome/applications/media", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
     gconf_client_add_dir (capplet->gconf, "/desktop/gnome/url-handlers", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 
     gconf_client_notify_add (capplet->gconf, DEFAULT_APPS_KEY_HTTP_PATH,
@@ -908,6 +1044,9 @@ main (int argc, char **argv)
 			     capplet, NULL, NULL);
     gconf_client_notify_add (capplet->gconf, DEFAULT_APPS_KEY_TERMINAL_PATH,
 			     (GConfClientNotifyFunc) term_gconf_changed_cb,
+			     capplet, NULL, NULL);
+    gconf_client_notify_add (capplet->gconf, DEFAULT_APPS_KEY_MEDIA_PATH,
+			     (GConfClientNotifyFunc) media_gconf_changed_cb,
 			     capplet, NULL, NULL);
 
     gnome_da_xml_load_list (capplet);

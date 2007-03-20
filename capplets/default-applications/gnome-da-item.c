@@ -31,12 +31,12 @@ gnome_da_web_item_new (void)
     return item;
 }
 
-GnomeDAMailItem*
-gnome_da_mail_item_new (void)
+GnomeDASimpleItem*
+gnome_da_simple_item_new (void)
 {
-    GnomeDAMailItem *item = NULL;
+    GnomeDASimpleItem *item = NULL;
 
-    item = g_new0 (GnomeDAMailItem, 1);
+    item = g_new0 (GnomeDASimpleItem, 1);
 
     return item;
 }
@@ -69,7 +69,7 @@ gnome_da_web_item_free (GnomeDAWebItem *item)
 }
 
 void
-gnome_da_mail_item_free (GnomeDAMailItem *item)
+gnome_da_simple_item_free (GnomeDASimpleItem *item)
 {
     g_return_if_fail (item != NULL);
 

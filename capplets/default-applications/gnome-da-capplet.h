@@ -58,6 +58,10 @@
 #define DEFAULT_APPS_KEY_TERMINAL_EXEC_ARG DEFAULT_APPS_KEY_TERMINAL_PATH"/exec_arg"
 #define DEFAULT_APPS_KEY_TERMINAL_EXEC     DEFAULT_APPS_KEY_TERMINAL_PATH"/exec"
 
+#define DEFAULT_APPS_KEY_MEDIA_PATH        "/desktop/gnome/applications/media"
+#define DEFAULT_APPS_KEY_MEDIA_EXEC        DEFAULT_APPS_KEY_MEDIA_PATH"/exec"
+#define DEFAULT_APPS_KEY_MEDIA_NEEDS_TERM  DEFAULT_APPS_KEY_MEDIA_PATH"/needs_term"
+
 typedef struct _GnomeDACapplet GnomeDACapplet;
 
 struct _GnomeDACapplet {
@@ -70,6 +74,7 @@ struct _GnomeDACapplet {
     GtkWidget *web_combo_box;
     GtkWidget *mail_combo_box;
     GtkWidget *term_combo_box;
+    GtkWidget *media_combo_box;
 
     GtkWidget *web_browser_command_entry;
     GtkWidget *web_browser_command_label;
@@ -87,11 +92,16 @@ struct _GnomeDACapplet {
     GtkWidget *terminal_exec_flag_entry;
     GtkWidget *terminal_exec_flag_label;
 
+    GtkWidget *media_player_command_entry;
+    GtkWidget *media_player_command_label;
+    GtkWidget *media_player_terminal_checkbutton;
+
     GConfClient *gconf;
 
     GList *web_browsers;
     GList *mail_readers;
     GList *terminals;
+    GList *media_players;
 };
 
 #endif

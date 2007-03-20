@@ -293,7 +293,7 @@
 				  <property name="yalign">0.5</property>
 				  <property name="xpad">0</property>
 				  <property name="ypad">0</property>
-				  <property name="mnemonic_widget">mail_reader_command_entry</property>
+				  <property name="mnemonic_widget">web_browser_command_entry</property>
 				  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
 				  <property name="width_chars">-1</property>
 				  <property name="single_line_mode">False</property>
@@ -521,6 +521,8 @@
 
 	      <child>
 		<widget class="GtkVBox" id="messenger_vbox">
+ 		  <!-- Messenger has been disabled -->
+ 		  <property name="visible">False</property>
 		  <property name="homogeneous">False</property>
 		  <property name="spacing">6</property>
 
@@ -731,13 +733,15 @@
 
 	  <child>
 	    <widget class="GtkVBox" id="multimedia_vbox">
+	      <property name="visible">True</property>
 	      <property name="border_width">12</property>
 	      <property name="homogeneous">False</property>
 	      <property name="spacing">18</property>
 
 	      <child>
 		<widget class="GtkVBox" id="image_vbox">
-		  <property name="visible">True</property>
+		  <!-- Image viewer has been disabled -->
+		  <property name="visible">False</property>
 		  <property name="homogeneous">False</property>
 		  <property name="spacing">6</property>
 
@@ -918,15 +922,15 @@
 	      </child>
 
 	      <child>
-		<widget class="GtkVBox" id="sound_vbox">
+		<widget class="GtkVBox" id="media_player_vbox">
 		  <property name="visible">True</property>
 		  <property name="homogeneous">False</property>
 		  <property name="spacing">6</property>
 
 		  <child>
-		    <widget class="GtkLabel" id="sound_label">
+		    <widget class="GtkLabel" id="media_player_label">
 		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">&lt;b&gt;Audio Player&lt;/b&gt;</property>
+		      <property name="label" translatable="yes">&lt;b&gt;Multimedia Player&lt;/b&gt;</property>
 		      <property name="use_underline">False</property>
 		      <property name="use_markup">True</property>
 		      <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -949,13 +953,13 @@
 		  </child>
 
 		  <child>
-		    <widget class="GtkHBox" id="sound_hbox">
+		    <widget class="GtkHBox" id="media_player_hbox">
 		      <property name="visible">True</property>
 		      <property name="homogeneous">False</property>
 		      <property name="spacing">12</property>
 
 		      <child>
-			<widget class="GtkImage" id="sound_image">
+			<widget class="GtkImage" id="media_player_image">
 			  <property name="visible">True</property>
 			  <property name="xalign">0.5</property>
 			  <property name="yalign">0</property>
@@ -970,13 +974,13 @@
 		      </child>
 
 		      <child>
-			<widget class="GtkVBox" id="sound_options_vbox">
+			<widget class="GtkVBox" id="media_player_options_vbox">
 			  <property name="visible">True</property>
 			  <property name="homogeneous">False</property>
 			  <property name="spacing">6</property>
 
 			  <child>
-			    <widget class="GtkComboBox" id="sound_combobox">
+			    <widget class="GtkComboBox" id="media_player_combobox">
 			      <property name="visible">True</property>
 			      <property name="add_tearoffs">False</property>
 			      <property name="focus_on_click">True</property>
@@ -989,7 +993,7 @@
 			  </child>
 
 			  <child>
-			    <widget class="GtkTable" id="sound_options_table">
+			    <widget class="GtkTable" id="media_player_options_table">
 			      <property name="visible">True</property>
 			      <property name="n_rows">1</property>
 			      <property name="n_columns">3</property>
@@ -998,7 +1002,7 @@
 			      <property name="column_spacing">12</property>
 
 			      <child>
-				<widget class="GtkLabel" id="sound_command_label">
+				<widget class="GtkLabel" id="media_player_command_label">
 				  <property name="visible">True</property>
 				  <property name="sensitive">False</property>
 				  <property name="label" translatable="yes">Co_mmand:</property>
@@ -1011,7 +1015,7 @@
 				  <property name="yalign">0.5</property>
 				  <property name="xpad">0</property>
 				  <property name="ypad">0</property>
-				  <property name="mnemonic_widget">sound_command_entry</property>
+				  <property name="mnemonic_widget">media_player_command_entry</property>
 				  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
 				  <property name="width_chars">-1</property>
 				  <property name="single_line_mode">False</property>
@@ -1028,7 +1032,7 @@
 			      </child>
 
 			      <child>
-				<widget class="GtkEntry" id="sound_command_entry">
+				<widget class="GtkEntry" id="media_player_command_entry">
 				  <property name="visible">True</property>
 				  <property name="tooltip" translatable="yes">All %s occurrences will be replaced with actual link</property>
 				  <property name="can_focus">True</property>
@@ -1049,7 +1053,7 @@
 			      </child>
 
 			      <child>
-				<widget class="GtkCheckButton" id="sound_terminal_checkbox">
+				<widget class="GtkCheckButton" id="media_player_terminal_checkbutton">
 				  <property name="visible">True</property>
 				  <property name="sensitive">False</property>
 				  <property name="can_focus">True</property>
@@ -1101,7 +1105,8 @@
 
 	      <child>
 		<widget class="GtkVBox" id="video_vbox">
-		  <property name="visible">True</property>
+		  <!-- Video player has been disabled -->
+		  <property name="visible">False</property>
 		  <property name="homogeneous">False</property>
 		  <property name="spacing">6</property>
 

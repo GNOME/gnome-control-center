@@ -26,8 +26,8 @@
 typedef struct _GnomeDAItem GnomeDAItem;
 
 typedef struct _GnomeDAWebItem GnomeDAWebItem;
-typedef struct _GnomeDAMailItem GnomeDAMailItem;
 typedef struct _GnomeDATermItem GnomeDATermItem;
+typedef struct _GnomeDASimpleItem GnomeDASimpleItem;
 
 struct _GnomeDAItem {
     gchar *name;
@@ -45,7 +45,7 @@ struct _GnomeDAWebItem {
     gchar *win_command;
 };
 
-struct _GnomeDAMailItem {
+struct _GnomeDASimpleItem {
     GnomeDAItem generic;
     gboolean run_in_terminal;
 };
@@ -56,10 +56,10 @@ struct _GnomeDATermItem {
 };
 
 GnomeDAWebItem* gnome_da_web_item_new (void);
-GnomeDAMailItem* gnome_da_mail_item_new (void);
 GnomeDATermItem* gnome_da_term_item_new (void);
+GnomeDASimpleItem* gnome_da_simple_item_new (void);
 void gnome_da_web_item_free (GnomeDAWebItem *item);
-void gnome_da_mail_item_free (GnomeDAMailItem *item);
 void gnome_da_term_item_free (GnomeDATermItem *item);
+void gnome_da_simple_item_free (GnomeDASimpleItem *item);
 
 #endif

@@ -1,3 +1,18 @@
+2007-03-20  Priit Laes  <plaes@svn.gnome.org>
+
+	* gnome-da-capplet.c: Glue code to tie everything together.
+	* gnome-da-capplet.h: Added widgets and defines for default mediaplayer.
+	* gnome-da-xml.c: (gnome_da_xml_load_xml), (gnome_da_xml_free): Added
+	mediaplayer data parser.
+	* gnome-da-item.c: Changed occurrences of MailItem to SimpleItem, so we
+	can also use it for mediaplayers.
+	* gnome-da-item.h: Ditto.
+	* gnome-default-applications-properties.glade: Make Multimedia tab visible
+	and change the UI to include our favorite mediaplayer selector.
+	* gnome-default-applications.xml.in: Add some media players to the list.
+
+	Introduces preferred media application support. Bug #362578.
+
 2007-02-13  Jens Granseuer  <jensgr@gmx.net>
 
 	* gnome-da-capplet.c: (web_gconf_changed_cb): don't try to read into

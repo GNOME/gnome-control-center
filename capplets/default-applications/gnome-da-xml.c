@@ -130,7 +130,8 @@ gnome_da_xml_load_xml (GnomeDACapplet *capplet, const gchar * filename)
     xmlNode *root, *section, *element;
     gchar *executable;
     GnomeDAWebItem *web_item;
-    GnomeDAMailItem *mail_item;
+    GnomeDASimpleItem *mail_item;
+    GnomeDASimpleItem *media_item;
     GnomeDATermItem *term_item;
 
     xml_doc = xmlParseFile (filename);
@@ -172,7 +173,7 @@ gnome_da_xml_load_xml (GnomeDACapplet *capplet, const gchar * filename)
 		if (!xmlStrncmp (element->name, "mail-reader", 11)) {
 		    executable = gnome_da_xml_get_string (element, "executable");
 		    if (is_executable_valid (executable)) {
-			mail_item = gnome_da_mail_item_new ();
+			mail_item = gnome_da_simple_item_new ();
 
 			mail_item->generic.name = gnome_da_xml_get_string (element, "name");
 			mail_item->generic.executable = executable;
@@ -209,6 +210,27 @@ gnome_da_xml_load_xml (GnomeDACapplet *capplet, const gchar * filename)
 		}
 	    }
 	}
+	else if (!xmlStrncmp (section->name, "media-players", 13)) {
+	    for (element = section->children; element != NULL; element = element->next) {
+		if (!xmlStrncmp (element->name, "media-player", 12)) {
+		    executable = gnome_da_xml_get_string (element, "executable");
+		    if (is_executable_valid (executable)) {
+			media_item = gnome_da_simple_item_new ();
+
+			media_item->generic.name = gnome_da_xml_get_string (element, "name");
+			media_item->generic.executable = executable;
+			media_item->generic.command = gnome_da_xml_get_string (element, "command");
+			media_item->generic.icon_name = gnome_da_xml_get_string (element, "icon-name");
+
+			media_item->run_in_terminal = gnome_da_xml_get_bool (element, "run-in-terminal");
+
+			capplet->media_players = g_list_append (capplet->media_players, media_item);
+		    }
+		    else
+			g_free (executable);
+		}
+	    }
+	}
     }
 
     xmlFreeDoc (xml_doc);
@@ -236,11 +258,13 @@ void
 gnome_da_xml_free (GnomeDACapplet *capplet)
 {
     g_list_foreach (capplet->web_browsers, (GFunc) gnome_da_web_item_free, NULL);
-    g_list_foreach (capplet->mail_readers, (GFunc) gnome_da_mail_item_free, NULL);
+    g_list_foreach (capplet->mail_readers, (GFunc) gnome_da_simple_item_free, NULL);
     g_list_foreach (capplet->terminals, (GFunc) gnome_da_term_item_free, NULL);
+    g_list_foreach (capplet->media_players, (GFunc) gnome_da_simple_item_free, NULL);
     g_list_free (capplet->web_browsers);
     g_list_free (capplet->mail_readers);
     g_list_free (capplet->terminals);
+    g_list_free (capplet->media_players);
 
     g_object_unref (capplet->xml);
     g_free (capplet);
