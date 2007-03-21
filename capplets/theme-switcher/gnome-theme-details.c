@@ -210,11 +210,13 @@ update_color_scheme_tab (const gchar *theme)
 {
 	GSList *symbolic_colors = NULL;
 	GSList *engines = NULL;
-	gboolean fg, bg, base, text, fg_s, bg_s, enable_colors;
+	gboolean fg, bg, base, text, fg_s, bg_s, enable_colors, enable_revert;
 	gchar *filename;
 	gchar *theme_name = NULL;
+	gchar *color_scheme= NULL;
 	GtkSettings *settings;
 	GladeXML *dialog;
+	GConfClient *client;
 
 	dialog = gnome_theme_manager_get_theme_dialog ();
 
@@ -233,10 +235,17 @@ update_color_scheme_tab (const gchar *theme)
 	fg_s = (g_slist_find_custom (symbolic_colors, "selected_fg_color", g_str_equal) != NULL);
 	bg_s = (g_slist_find_custom (symbolic_colors, "selected_bg_color", g_str_equal) != NULL);
 
-	enable_colors = (fg && bg && base && text && fg_s && bg_s);
+	enable_colors = enable_revert = (fg && bg && base && text && fg_s && bg_s);
+
+	client = gconf_client_get_default ();
+  	color_scheme = gconf_client_get_string (client, COLOR_SCHEME_KEY, NULL);
+	if (color_scheme == NULL || strcmp (color_scheme, "") == 0)
+		enable_revert = FALSE;
+	g_free (color_scheme);
+	g_object_unref (client);
 
 	gtk_widget_set_sensitive (WID ("color_scheme_table"), enable_colors);
-	gtk_widget_set_sensitive (WID ("color_scheme_revert_button"), enable_colors);
+	gtk_widget_set_sensitive (WID ("color_scheme_revert_button"), enable_revert);
 
 	if (enable_colors)
 		gtk_widget_hide (WID ("color_scheme_message_hbox"));
