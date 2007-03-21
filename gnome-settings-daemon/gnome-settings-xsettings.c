@@ -33,6 +33,20 @@ struct _TranslationEntry
 };
 
 #ifdef HAVE_XFT2 
+/* X servers sometimes lie about the screen's physical dimensions, so we cannot
+ * compute an accurate DPI value.  When this happens, the user gets fonts that
+ * are too huge or too tiny.  So, we see what the server returns:  if it reports
+ * something outside of the range [DPI_LOW_REASONABLE_VALUE,
+ * DPI_HIGH_REASONABLE_VALUE], then we assume that it is lying and we use
+ * DPI_FALLBACK instead.
+ *
+ * See get_dpi_from_gconf_or_server() below, and also
+ * https://bugzilla.novell.com/show_bug.cgi?id=217790
+ */
+#define DPI_FALLBACK 96
+#define DPI_LOW_REASONABLE_VALUE 50
+#define DPI_HIGH_REASONABLE_VALUE 500
+
 static void gnome_settings_update_xft (GConfClient *client);
 static void xft_callback              (GConfEntry  *entry);
 #endif /* HAVE_XFT2 */
@@ -264,6 +278,74 @@ xft_callback (GConfEntry *entry)
     xsettings_manager_notify (managers [i]);
 }
 
+static double
+dpi_from_pixels_and_mm (int pixels, int mm)
+{
+	double dpi;
+
+	if (mm >= 1)
+		dpi = pixels / (mm / 25.4);
+	else
+		dpi = 0;
+
+	return dpi;
+}
+
+static double
+get_dpi_from_x_server (void)
+{
+  GdkScreen *screen;
+  double dpi;
+
+  screen = gdk_screen_get_default ();
+  if (screen)
+    {
+      double width_dpi, height_dpi;
+
+      width_dpi = dpi_from_pixels_and_mm (gdk_screen_get_width (screen), gdk_screen_get_width_mm (screen));
+      height_dpi = dpi_from_pixels_and_mm (gdk_screen_get_height (screen), gdk_screen_get_height_mm (screen));
+
+      if (width_dpi < DPI_LOW_REASONABLE_VALUE || width_dpi > DPI_HIGH_REASONABLE_VALUE
+	  || height_dpi < DPI_LOW_REASONABLE_VALUE || height_dpi > DPI_HIGH_REASONABLE_VALUE)
+	dpi = DPI_FALLBACK;
+      else
+	dpi = (width_dpi + height_dpi) / 2.0;
+    }
+  else
+    {
+      /* Huh!?  No screen? */
+
+      dpi = DPI_FALLBACK;
+    }
+
+  return dpi;
+}
+
+static double
+get_dpi_from_gconf_or_x_server (GConfClient *client)
+{
+  GConfValue *value;
+  double dpi;
+
+  value = gconf_client_get_without_default (client, FONT_DPI_KEY, NULL);
+
+  /* If the user has ever set the DPI preference in GConf, we use that.
+   * Otherwise, we see if the X server reports a reasonable DPI value:  some X
+   * servers report completely bogus values, and the user gets huge or tiny
+   * fonts which are unusable.
+   */
+
+  if (value)
+    {
+      dpi = gconf_value_get_float (value);
+      gconf_value_free (value);
+    }
+  else
+    dpi = get_dpi_from_x_server ();
+
+  return dpi;
+}
+
 typedef struct
 {
   gboolean antialias;
@@ -285,16 +367,13 @@ gnome_xft_settings_get (GConfClient      *client,
   char *antialiasing = gconf_client_get_string (client, FONT_ANTIALIASING_KEY, NULL);
   char *hinting = gconf_client_get_string (client, FONT_HINTING_KEY, NULL);
   char *rgba_order = gconf_client_get_string (client, FONT_RGBA_ORDER_KEY, NULL);
-  double dpi = gconf_client_get_float (client, FONT_DPI_KEY, NULL);
+  double dpi = get_dpi_from_gconf_or_x_server (client);
 
   settings->antialias = TRUE;
   settings->hinting = TRUE;
   settings->hintstyle = "hintfull";
-  settings->dpi = 96 * 1024;
+  settings->dpi = dpi * 1024; /* Xft wants 1/1024ths of an inch */
   settings->rgba = "rgb";
-
-  if ((int)(1024 * dpi + 0.5) > 0)
-    settings->dpi = (int)(1024 * dpi + 0.5);
 
   if (rgba_order)
     {

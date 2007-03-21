@@ -1,3 +1,28 @@
+2007-03-21  Federico Mena Quintero  <federico@novell.com>
+
+	Fix the gnome-settings-daemon part of
+	https://bugzilla.novell.com/show_bug.cgi?id=217790 and
+	http://bugzilla.gnome.org/show_bug.cgi?id=378338:  try to figure
+	out the DPI value from the X server or the user's GConf settings.
+
+	Should also fix https://bugzilla.novell.com/show_bug.cgi?id=240246.
+
+	* gnome-settings-daemon/gnome-settings-xsettings.c (gnome_xft_settings_get): Call
+	get_dpi_from_gconf_or_server() to figure out a reasonable DPI
+	value; don't unconditionally get it from GConf.
+	(get_dpi_from_gconf_or_server): New function.  If the user has
+	ever set the /desktop/gnome/font_rendering/dpi value in GConf, we
+	use its value.  Otherwise, we ask the X server.  We constrain the
+	X server's response to a range of reasonable DPI values, since
+	some servers lie about the screen's phisical dimensions --- the
+	user would get unusably huge or tiny fonts otherwise.
+
+	* capplets/font/main.c (dpi_load): First, see if the DPI value is actually set
+	in GConf.  If it is, it means that the user has changed it at
+	least once.  In that case, just use the value.  Otherwise, find
+	the value from the X server in a similar way to what we do in
+	gnome-settings-daemon.
+
 2007-03-21  Rodrigo Moya <rodrigo@gnome-db.org>
 
 	* configure.in: rename module to gnome-control-center.
