@@ -759,8 +759,12 @@ reload_key_entries (gpointer wm_name, GladeXML *dialog)
 
   for (l = list; l != NULL; l = l->next)
     {
-        append_keys_to_tree_from_file (dialog, l->data, wm_name);
+        gchar *path;
+
+	path = g_build_filename (GNOMECC_KEYBINDINGS_DIR, l->data, NULL);
+        append_keys_to_tree_from_file (dialog, path, wm_name);
 	g_free (l->data);
+	g_free (path);
     }
   g_list_free (list);
 }

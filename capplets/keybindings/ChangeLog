@@ -1,3 +1,10 @@
+2007-03-21  Bastien Nocera  <hadess@hadess.net>
+
+	* gnome-keybinding-properties.c: (reload_key_entries):
+	Prepend the directory name before loading the files, otherwise, we're
+	loading them from the current directory, spotted by Fernando Herrera
+	<fherrera@onirica.com> (Closes: #420796)
+
 2007-03-19  Bastien Nocera  <hadess@hadess.net>
 
 	* Makefile.am:
