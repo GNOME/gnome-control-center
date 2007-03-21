@@ -22,10 +22,10 @@ static struct {
 	Rotation  rotation;
 	gchar const    * name;
 } const rotations[] = {
-	{RR_Rotate_0,   N_("normal")},
-	{RR_Rotate_90,  N_("left")},
-	{RR_Rotate_180, N_("inverted")},
-	{RR_Rotate_270, N_("right")}
+	{RR_Rotate_0,   N_("Normal")},
+	{RR_Rotate_90,  N_("Left")},
+	{RR_Rotate_180, N_("Inverted")},
+	{RR_Rotate_270, N_("Right")}
 };
 
 static Rotation
