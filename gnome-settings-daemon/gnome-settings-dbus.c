@@ -207,6 +207,9 @@ gnome_settings_server_init (GnomeSettingsServer * server)
 	    GNOME_SETTINGS_SERVER_GET_CLASS (server);
 	unsigned request_ret;
 
+	if (klass->connection == NULL)
+		return;
+
 	/* Register DBUS path */
 	dbus_g_connection_register_g_object (klass->connection,
 					     "/org/gnome/SettingsDaemon",
