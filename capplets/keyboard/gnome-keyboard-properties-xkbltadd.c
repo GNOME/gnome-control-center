@@ -37,6 +37,9 @@
 #define GROUP_SWITCHERS_GROUP "grp"
 #define DEFAULT_GROUP_SWITCH "grp:alts_toggle"
 
+#define AVAIL_LAYOUT_TREE_COL_DESCRIPTION 0
+#define AVAIL_LAYOUT_TREE_COL_ID 1
+
 static GtkTreeIter current1st_level_iter;
 static const char *current1st_level_id;
 
@@ -93,18 +96,18 @@ add_layout_to_available_layouts_tree (XklConfigRegistry * config_registry,
 static void
 xkb_layout_chooser_enable_disable_buttons (GladeXML * chooser_dialog)
 {
-        GtkWidget *available_layouts_tree = CWID ("xkb_layouts_available");
-        GtkTreeSelection *selection =
-            gtk_tree_view_get_selection (GTK_TREE_VIEW
-                                         (available_layouts_tree));
-        const int n_selected_available_layouts =
-            gtk_tree_selection_count_selected_rows (selection);
+	GtkWidget *available_layouts_tree = CWID ("xkb_layouts_available");
+	GtkTreeSelection *selection =
+	    gtk_tree_view_get_selection (GTK_TREE_VIEW
+					 (available_layouts_tree));
+	const int n_selected_available_layouts =
+	    gtk_tree_selection_count_selected_rows (selection);
 
-        gtk_dialog_set_response_sensitive (GTK_DIALOG
-                                           (CWID ("xkb_layout_chooser")),
-                                           GTK_RESPONSE_OK,
-                                           n_selected_available_layouts >
-                                           0);
+	gtk_dialog_set_response_sensitive (GTK_DIALOG
+					   (CWID ("xkb_layout_chooser")),
+					   GTK_RESPONSE_OK,
+					   n_selected_available_layouts >
+					   0);
 }
 
 static void
@@ -288,4 +291,23 @@ xkb_layout_choose (GladeXML * dialog)
 
 	gtk_dialog_run (GTK_DIALOG (chooser));
 	gtk_widget_destroy (chooser);
+}
+
+gchar *
+xkb_layout_chooser_get_selected_id (GladeXML * chooser_dialog)
+{
+	GtkWidget *available_layouts_tree = CWID ("xkb_layouts_available");
+	GtkTreeSelection *selection =
+	    gtk_tree_view_get_selection (GTK_TREE_VIEW
+					 (available_layouts_tree));
+	GtkTreeIter selected_iter;
+	GtkTreeModel *model;
+	if (gtk_tree_selection_get_selected (selection, &model,
+					     &selected_iter)) {
+		gchar *id;
+		gtk_tree_model_get (model, &selected_iter,
+				    AVAIL_LAYOUT_TREE_COL_ID, &id, -1);
+		return id;
+	}
+	return NULL;
 }

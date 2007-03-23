@@ -72,24 +72,15 @@ xkb_layout_preview_update (GladeXML * chooser_dialog)
 {
 #ifdef HAVE_X11_EXTENSIONS_XKB_H
 	GtkWidget *chooser = CWID ("xkb_layout_chooser");
-	GtkWidget *available_layouts_tree = CWID ("xkb_layouts_available");
-	GtkTreeSelection *selection =
-	    gtk_tree_view_get_selection (GTK_TREE_VIEW
-					 (available_layouts_tree));
-	GtkTreeIter selected_iter;
-	GtkTreeModel *model;
 	GtkWidget *kbdraw =
 	    GTK_WIDGET (g_object_get_data (G_OBJECT (chooser), "kbdraw"));
-	if (kbdraw != NULL
-	    && gtk_tree_selection_get_selected (selection, &model,
-						&selected_iter)) {
-		gchar *id;
+	gchar *id = xkb_layout_chooser_get_selected_id (chooser_dialog);
+
+	if (kbdraw != NULL && id != NULL) {
 		XklConfigRec *data;
 		char **p, *layout, *variant;
 		XkbComponentNamesRec component_names;
 
-		gtk_tree_model_get (model, &selected_iter,
-				    AVAIL_LAYOUT_TREE_COL_ID, &id, -1);
 		data = xkl_config_rec_new ();
 		if (xkl_config_rec_get_from_server (data, engine)) {
 			if ((p = data->layouts) != NULL)

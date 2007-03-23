@@ -35,6 +35,10 @@
 
 #include "gnome-keyboard-properties-xkb.h"
 
+#define SEL_LAYOUT_TREE_COL_DESCRIPTION 0
+#define SEL_LAYOUT_TREE_COL_DEFAULT 1
+#define SEL_LAYOUT_TREE_COL_ID 2
+
 static int idx2select = -1;
 static int max_selected_layouts = -1;
 static int default_group = -1;
@@ -113,7 +117,7 @@ def_group_in_gconf_changed (GConfClient * client,
 			    GConfEntry * entry, GladeXML * dialog)
 {
 	GConfValue *value = gconf_entry_get_value (entry);
-	
+
 	if (!value)
 		return;
 
@@ -219,8 +223,8 @@ xkb_layouts_prepare_selected_tree (GladeXML * dialog,
 	text_renderer = GTK_CELL_RENDERER (gtk_cell_renderer_text_new ());
 	toggle_renderer =
 	    GTK_CELL_RENDERER (gtk_cell_renderer_toggle_new ());
-	gtk_cell_renderer_toggle_set_radio (
-	    GTK_CELL_RENDERER_TOGGLE (toggle_renderer), TRUE);
+	gtk_cell_renderer_toggle_set_radio (GTK_CELL_RENDERER_TOGGLE
+					    (toggle_renderer), TRUE);
 
 	desc_column =
 	    gtk_tree_view_column_new_with_attributes (_("Layout"),

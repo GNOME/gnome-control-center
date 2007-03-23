@@ -29,11 +29,6 @@
 #include "libgnomekbd/gkbd-keyboard-config.h"
 
 G_BEGIN_DECLS
-#define SEL_LAYOUT_TREE_COL_DESCRIPTION 0
-#define SEL_LAYOUT_TREE_COL_DEFAULT 1
-#define SEL_LAYOUT_TREE_COL_ID 2
-#define AVAIL_LAYOUT_TREE_COL_DESCRIPTION 0
-#define AVAIL_LAYOUT_TREE_COL_ID 1
 #define CWID(s) glade_xml_get_widget (chooser_dialog, s)
 extern XklEngine *engine;
 extern XklConfigRegistry *config_registry;
@@ -99,6 +94,9 @@ extern GtkWidget *xkb_layout_preview_create_widget (GladeXML *
 						    chooser_dialog);
 
 extern void xkb_layout_preview_update (GladeXML * chooser_dialog);
+
+extern gchar *xkb_layout_chooser_get_selected_id (GladeXML *
+						  chooser_dialog);
 
 G_END_DECLS
 #endif				/* __GNOME_KEYBOARD_PROPERTY_XKB_H */
