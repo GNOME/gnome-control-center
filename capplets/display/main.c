@@ -351,13 +351,9 @@ wrap_in_label (GtkWidget *child, char *text)
 static gboolean
 show_resolution (int width, int height)
 {
-  if (width >= 800 && height >= 600)
-    return TRUE;
-
-  if (width == 640 && height == 480)
-    return TRUE;
-
-  return FALSE;
+  return (width >= 800 && height >= 600) ||
+         (width == 640 && height == 480) ||
+         (width == 720 && height == 576);
 }
 
 static void
