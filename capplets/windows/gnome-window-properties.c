@@ -111,7 +111,7 @@ double_click_titlebar_changed_callback (GtkWidget *optionmenu,
         
         new_settings.flags = GNOME_WM_SETTING_DOUBLE_CLICK_ACTION;
         new_settings.double_click_action =
-                gtk_option_menu_get_history (GTK_OPTION_MENU (optionmenu));
+                gtk_combo_box_get_active (GTK_COMBO_BOX (optionmenu));
 
         if (current_wm != NULL && new_settings.double_click_action != settings->double_click_action)
                 gnome_window_manager_change_settings (current_wm, &new_settings);
@@ -206,30 +206,6 @@ set_alt_click_value (const GnomeWMSettings *settings)
 }
 
 static void
-rebuild_double_click_actions_menu (void)
-{
-        int i;
-        GtkWidget *menu;
-        
-        menu = gtk_menu_new ();
-        i = 0;
-        while (i < n_double_click_actions) {
-                GtkWidget *mi;
-                
-                mi = gtk_menu_item_new_with_label (double_click_actions[i].human_readable_name);
-                gtk_menu_shell_append (GTK_MENU_SHELL (menu),
-                                       mi);
-                
-                gtk_widget_show (mi);
-                
-                ++i;
-        }
-        
-        gtk_option_menu_set_menu (GTK_OPTION_MENU (double_click_titlebar_optionmenu),
-                                  menu);
-}
-
-static void
 reload_settings (void)
 {
         GnomeWMSettings new_settings;
@@ -265,7 +241,7 @@ reload_settings (void)
         
         if (n_double_click_actions > 0 &&
             new_settings.double_click_action != settings->double_click_action) {
-                gtk_option_menu_set_history (GTK_OPTION_MENU (double_click_titlebar_optionmenu),
+                gtk_combo_box_set_active (GTK_COMBO_BOX (double_click_titlebar_optionmenu),
                                              new_settings.double_click_action);
         }
         
@@ -293,6 +269,8 @@ static void
 update_wm (GdkScreen *screen,
            gboolean   load_settings)
 {
+        int i;
+
         g_assert (n_mouse_modifiers > 0);
         
         if (current_wm != NULL) {
@@ -316,7 +294,11 @@ update_wm (GdkScreen *screen,
                 
         }
 
-        rebuild_double_click_actions_menu ();
+        for (i = 0; i < n_double_click_actions; i++) {
+                gtk_combo_box_append_text (GTK_COMBO_BOX (double_click_titlebar_optionmenu),
+               		double_click_actions[i].human_readable_name);
+        }
+
         if (load_settings)
                 reload_settings ();
 }
@@ -450,7 +432,7 @@ main (int argc, char **argv)
         set_alt_click_value (&new_settings);
         gtk_range_set_value (GTK_RANGE (autoraise_delay_slider),
                              new_settings.autoraise_delay / 1000.0);
-        gtk_option_menu_set_history (GTK_OPTION_MENU (double_click_titlebar_optionmenu),
+        gtk_combo_box_set_active (GTK_COMBO_BOX (double_click_titlebar_optionmenu),
                                      new_settings.double_click_action);
 
         reload_settings (); /* must come before below signal connections */

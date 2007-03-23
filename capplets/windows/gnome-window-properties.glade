@@ -199,8 +199,8 @@
 					  <property name="inverted">False</property>
 					  <property name="adjustment">7.7 0 10 0.2 1 0</property>
 					  <accessibility>
-						<atkrelation target="autoraise-delay-label" type="labelled-by"/>
-						<atkrelation target="label1" type="labelled-by"/>
+					    <atkrelation target="label1" type="labelled-by"/>
+					    <atkrelation target="autoraise-delay-label" type="labelled-by"/>
 					  </accessibility>
 					</widget>
 					<packing>
@@ -224,7 +224,7 @@
 					  <property name="xpad">4</property>
 					  <property name="ypad">0</property>
 					  <accessibility>
-						<atkrelation target="autoraise-delay-slider" type="label-for"/>
+					    <atkrelation target="autoraise-delay-slider" type="label-for"/>
 					  </accessibility>
 					</widget>
 					<packing>
@@ -345,15 +345,11 @@
 		      </child>
 
 		      <child>
-			<widget class="GtkOptionMenu" id="double-click-titlebar-optionmenu">
+			<widget class="GtkComboBox" id="double-click-titlebar-optionmenu">
 			  <property name="visible">True</property>
-			  <property name="can_focus">True</property>
-			  <property name="history">-1</property>
-
-			  <child>
-			    <widget class="GtkMenu" id="menu1">
-			    </widget>
-			  </child>
+			  <property name="add_tearoffs">False</property>
+			  <property name="focus_on_click">True</property>
+			  <property name="items"></property>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
