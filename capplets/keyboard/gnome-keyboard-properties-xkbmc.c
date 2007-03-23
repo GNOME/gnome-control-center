@@ -1,9 +1,9 @@
 /* -*- mode: c; style: linux -*- */
 
-/* gnome-keyboard-properties-xkb.c
- * Copyright (C) 2003 Sergey V. Oudaltsov
+/* gnome-keyboard-properties-xkbmc.c
+ * Copyright (C) 2003-2007 Sergey V. Udaltsov
  *
- * Written by: Sergey V. Oudaltsov <svu@users.sourceforge.net>
+ * Written by: Sergey V. Udaltsov <svu@gnome.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,10 +31,6 @@
 #include <glade/glade.h>
 
 #include "capplet-util.h"
-#include "gconf-property-editor.h"
-#include "activate-settings-daemon.h"
-#include "capplet-stock-icons.h"
-#include <../accessibility/keyboard/accessibility-keyboard.h>
 
 #include "gnome-keyboard-properties-xkb.h"
 

@@ -26,16 +26,10 @@
 #endif
 
 #include <gnome.h>
-#include <gconf/gconf-client.h>
 #include <glade/glade.h>
 
 #include "capplet-util.h"
-#include "gconf-property-editor.h"
-#include "activate-settings-daemon.h"
-#include "capplet-stock-icons.h"
-#include <../accessibility/keyboard/accessibility-keyboard.h>
 
-#include <libgnomekbd/gkbd-desktop-config.h>
 #include <libgnomekbd/gkbd-util.h>
 
 #include "gnome-keyboard-properties-xkb.h"

@@ -1,9 +1,9 @@
 /* -*- mode: c; style: linux -*- */
 
 /* gnome-keyboard-properties-xkbot.c
- * Copyright (C) 2003 Sergey V. Oudaltsov
+ * Copyright (C) 2003-2007 Sergey V. Udaltsov
  *
- * Written by: Sergey V. Oudaltsov <svu@users.sourceforge.net>
+ * Written by: Sergey V. Udaltsov <svu@gnome.org>
  *             John Spray <spray_john@users.sourceforge.net>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -30,13 +30,7 @@
 #include <gconf/gconf-client.h>
 #include <glade/glade.h>
 
-#include "libgnomekbd/gkbd-keyboard-config.h"
-
 #include "capplet-util.h"
-#include "gconf-property-editor.h"
-#include "activate-settings-daemon.h"
-#include "capplet-stock-icons.h"
-#include <../accessibility/keyboard/accessibility-keyboard.h>
 
 #include "gnome-keyboard-properties-xkb.h"
 
