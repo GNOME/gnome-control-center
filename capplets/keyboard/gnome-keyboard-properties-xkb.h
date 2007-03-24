@@ -37,17 +37,9 @@ extern GkbdKeyboardConfig initial_config;
 
 extern void setup_xkb_tabs (GladeXML * dialog, GConfChangeSet * changeset);
 
-extern void xkb_layouts_fill_available_tree (GladeXML * dialog);
-
-extern void xkb_options_fill_available_tree (GladeXML * dialog);
-
 extern void xkb_layouts_fill_selected_tree (GladeXML * dialog);
 
-extern void xkb_options_fill_selected_tree (GladeXML * dialog);
-
 extern void xkb_layouts_register_buttons_handlers (GladeXML * dialog);
-
-extern void xkb_options_register_buttons_handlers (GladeXML * dialog);
 
 extern void xkb_layouts_register_gconf_listener (GladeXML * dialog);
 
@@ -56,15 +48,11 @@ extern void xkb_options_register_gconf_listener (GladeXML * dialog);
 extern void xkb_layouts_prepare_selected_tree (GladeXML * dialog,
 					       GConfChangeSet * changeset);
 
-extern void xkb_options_prepare_selected_tree (GladeXML * dialog);
-
 extern void xkb_options_load_options (GladeXML * dialog);
 
 extern void clear_xkb_elements_list (GSList * list);
 
 extern char *xci_desc_to_utf8 (XklConfigItem * ci);
-
-extern void sort_tree_content (GtkWidget * tree_view);
 
 extern void enable_disable_restoring (GladeXML * dialog);
 
@@ -78,6 +66,7 @@ extern void xkb_layouts_enable_disable_default (GladeXML * dialog,
 						gboolean enable);
 
 extern GSList *xkb_layouts_get_selected_list (void);
+
 extern GSList *xkb_options_get_selected_list (void);
 
 #define xkb_layouts_set_selected_list(list) \

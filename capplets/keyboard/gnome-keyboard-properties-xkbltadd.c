@@ -117,7 +117,7 @@ xkb_layout_chooser_selection_changed (GladeXML * chooser_dialog)
 	xkb_layout_chooser_enable_disable_buttons (chooser_dialog);
 }
 
-void
+static void
 sort_tree_content (GtkWidget * tree_view)
 {
 	GtkTreeModel *tree_model =
@@ -133,7 +133,7 @@ sort_tree_content (GtkWidget * tree_view)
 				 sorted_tree_model);
 }
 
-void
+static void
 xkb_layouts_fill_available_tree (GladeXML * chooser_dialog)
 {
 	GtkTreeStore *tree_store =
