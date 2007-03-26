@@ -812,15 +812,25 @@ gsd_media_keys_window_class_init (GsdMediaKeysWindowClass *klass)
 	g_type_class_add_private (klass, sizeof (GsdMediaKeysWindowPrivate));
 }
 
+gboolean
+gsd_media_keys_window_is_valid (GsdMediaKeysWindow *window)
+{
+	GdkScreen *screen = gtk_widget_get_screen (GTK_WIDGET (window));
+	return gdk_screen_is_composited (screen) == window->priv->is_composited;
+}
+
 static void
 initialize_alpha_mode (GsdMediaKeysWindow *window)
 {
 	GdkScreen   *screen;
-	GdkColormap *colormap;
+	GdkColormap *colormap = NULL;
 
 	screen = gtk_widget_get_screen (GTK_WIDGET (window));
-	colormap = gdk_screen_get_rgba_colormap (screen);
-	if (colormap != NULL && gdk_screen_is_composited (screen)) {
+	if (gdk_screen_is_composited (screen)) {
+	 	colormap = gdk_screen_get_rgba_colormap (screen);
+	}
+
+	if (colormap != NULL) {
 		gtk_widget_set_colormap (GTK_WIDGET (window), colormap);
 		window->priv->is_composited = TRUE;
 	} else {

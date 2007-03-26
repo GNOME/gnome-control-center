@@ -61,6 +61,7 @@ void                  gsd_media_keys_window_set_volume_muted  (GsdMediaKeysWindo
 							       gboolean                 muted);
 void                  gsd_media_keys_window_set_volume_level  (GsdMediaKeysWindow      *window,
 							       int                      level);
+gboolean              gsd_media_keys_window_is_valid          (GsdMediaKeysWindow      *window);
 
 G_END_DECLS
 

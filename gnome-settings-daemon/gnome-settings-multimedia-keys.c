@@ -139,6 +139,13 @@ do_sleep_action (char *cmd1, char *cmd2)
 static void
 dialog_init (Acme *acme)
 {
+	if (acme->dialog != NULL &&
+	    !gsd_media_keys_window_is_valid (GSD_MEDIA_KEYS_WINDOW (acme->dialog)))
+	{
+		g_object_unref (acme->dialog);
+		acme->dialog = NULL;
+	}
+
 	if (acme->dialog == NULL) {
 		acme->dialog = gsd_media_keys_window_new ();
 	}
