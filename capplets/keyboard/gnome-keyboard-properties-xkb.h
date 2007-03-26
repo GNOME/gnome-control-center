@@ -84,8 +84,8 @@ extern GtkWidget *xkb_layout_preview_create_widget (GladeXML *
 
 extern void xkb_layout_preview_update (GladeXML * chooser_dialog);
 
-extern gchar *xkb_layout_chooser_get_selected_id (GladeXML *
-						  chooser_dialog);
+extern const gchar *xkb_layout_chooser_get_selected_id (GladeXML *
+							chooser_dialog);
 
 G_END_DECLS
 #endif				/* __GNOME_KEYBOARD_PROPERTY_XKB_H */
