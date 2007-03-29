@@ -86,16 +86,55 @@ acme_error (char * msg)
 		G_CALLBACK (gtk_widget_destroy), NULL);
 }
 
+static char *
+get_term_command (Acme *acme) {
+	gchar *cmd_term;
+	gchar *cmd = NULL;
+
+	cmd_term = gconf_client_get_string (acme->conf_client,
+				   "/desktop/gnome/applications/terminal/exec", NULL);
+	if ((cmd_term != NULL) && (strcmp (cmd_term, "") != 0)) {
+		gchar *cmd_args;
+		cmd_args = gconf_client_get_string (acme->conf_client,
+					   "/desktop/gnome/applications/terminal/exec_arg", NULL);
+		if ((cmd_args != NULL) && (strcmp (cmd_term, "") != 0))
+			cmd = g_strdup_printf ("%s %s -e", cmd_term, cmd_args);
+		else
+			cmd = g_strdup_printf ("%s -e", cmd_term);
+		
+		g_free (cmd_args);
+	} 
+	g_free (cmd_term);
+	return cmd;
+}
+
 static void
-execute (char *cmd, gboolean sync)
+execute (Acme *acme, char *cmd, gboolean sync, gboolean need_term)
 {
 	gboolean retval;
 	gchar **argv;
 	gint argc;
+	char *exec;
+	char *term = NULL;
 
 	retval = FALSE;
 
-	if (g_shell_parse_argv (cmd, &argc, &argv, NULL)) {
+	if (need_term) {
+		term = get_term_command (acme);
+		if (term == NULL) {
+			acme_error (_("Could not get default terminal. Verify that your default "
+			              "terminal command is set and points to a valid application."));
+			return;
+		}
+	}
+	
+	if (term) {
+		exec = g_strdup_printf ("%s %s", term, cmd);
+		g_free (term);
+	} else
+		exec = g_strdup (cmd);
+
+	if (g_shell_parse_argv (exec, &argc, &argv, NULL)) {
 		if (sync != FALSE) {
 			retval = g_spawn_sync (g_get_home_dir (),
 			                       argv, NULL, G_SPAWN_SEARCH_PATH,
@@ -112,15 +151,15 @@ execute (char *cmd, gboolean sync)
 	if (retval == FALSE)
 	{
 		char *msg;
-
 		msg = g_strdup_printf
 			(_("Couldn't execute command: %s\n"
-			   "Verify that this command exists."),
-			 cmd);
+			   "Verify that this is a valid command."),
+			 exec);
 
 		acme_error (msg);
 		g_free (msg);
 	}
+	g_free (exec);
 }
 
 static void
@@ -403,7 +442,7 @@ dialog_show (Acme *acme)
 static void
 do_unknown_action (Acme *acme, const char *url)
 {
-	char *string, *command;
+	char *string;
 
 	g_return_if_fail (url != NULL);
 
@@ -411,57 +450,51 @@ do_unknown_action (Acme *acme, const char *url)
 			"/desktop/gnome/url-handlers/unknown/command",
 			NULL);
 
-	if (string == NULL || strcmp (string, "") == 0)
-		return;
-
-	command = g_strdup_printf (string, url);
-
-	execute (command, FALSE);
-
-	g_free (command);
+	if ((string != NULL) && (strcmp (string, "") != 0)) {
+		gchar *cmd;
+		cmd = g_strdup_printf (string, url);
+		execute (acme, cmd, FALSE, FALSE);
+		g_free (cmd);
+	}
 	g_free (string);
 }
 
 static void
 do_help_action (Acme *acme)
 {
-	char *string, *command;
+	char *string;
 
 	string = gconf_client_get_string (acme->conf_client,
 			"/desktop/gnome/url-handlers/ghelp/command",
 			NULL);
 
-	if (string == NULL && strcmp (string, "") == 0)
-	{
+	if ((string != NULL) && (strcmp (string, "") != 0)) {
+		gchar *cmd;
+		cmd = g_strdup_printf (string, "");
+		execute (acme, cmd, FALSE, FALSE);
+		g_free (cmd);
+	} else 
 		do_unknown_action (acme, "ghelp:");
-		return;
-	}
 
-	command = g_strdup_printf (string, "");
-
-	execute (command, FALSE);
-
-	g_free (command);
 	g_free (string);
 }
 
 static void
 do_mail_action (Acme *acme)
 {
-	char *string, *command;
+	char *string;
 
 	string = gconf_client_get_string (acme->conf_client,
 			"/desktop/gnome/url-handlers/mailto/command",
 			NULL);
 
-	if (string == NULL || strcmp (string, "") == 0)
-		return;
-
-	command = g_strdup_printf (string, "");
-
-	execute (command, FALSE);
-
-	g_free (command);
+	if ((string != NULL) && (strcmp (string, "") != 0)) {
+		gchar *cmd;
+		cmd = g_strdup_printf (string, "");
+		execute (acme, cmd, FALSE, gconf_client_get_bool (acme->conf_client,
+					   "/desktop/gnome/url-handlers/mailto/needs_terminal", NULL));
+		g_free (cmd);
+	}
 	g_free (string);
 }
 
@@ -469,43 +502,46 @@ static void
 do_media_action (Acme *acme)
 {
 	char *command;
+
 	command = gconf_client_get_string (acme->conf_client,
-					   GCONF_MISC_DIR "/eject_command", NULL);
-	if ((command != NULL) && (strcmp (command, "") != 0))
-		execute (command, FALSE);
+					   "/desktop/gnome/applications/media/exec", NULL);
+	if ((command != NULL) && (strcmp (command, "") != 0)) {
+		execute (acme, command, FALSE, gconf_client_get_bool (acme->conf_client,
+					   "/desktop/gnome/applications/media/needs_term", NULL));
+	}
 	g_free (command);
 }
 
 static void
 do_www_action (Acme *acme, const char *url)
 {
-	char *string, *command;
+	char *string;
 
 	string = gconf_client_get_string (acme->conf_client,
 		"/desktop/gnome/url-handlers/http/command",
 		 NULL);
 
-	if (string == NULL || strcmp (string, "") == 0)
-	{
+	if ((string != NULL) && (strcmp (string, "") != 0)) {
+		gchar *cmd;
+
+		if (url == NULL)
+			cmd = g_strdup_printf (string, "");
+		else
+			cmd = g_strdup_printf (string, url);
+
+		execute (acme, cmd, FALSE, gconf_client_get_bool (acme->conf_client,
+					   "/desktop/gnome/url-handlers/http/needs_terminal", NULL));
+		g_free (cmd);
+	} else {
 		do_unknown_action (acme, url ? url : "");
-		return;
 	}
-
-	if (url == NULL)
-		command = g_strdup_printf (string, "");
-	else
-		command = g_strdup_printf (string, url);
-
-	execute (command, FALSE);
-
-	g_free (command);
 	g_free (string);
 }
 
 static void
 do_exit_action (Acme *acme)
 {
-	execute ("gnome-session-save --kill", FALSE);
+	execute (acme, "gnome-session-save --kill", FALSE, FALSE);
 }
 
 static void
@@ -521,9 +557,9 @@ do_eject_action (Acme *acme)
 	command = gconf_client_get_string (acme->conf_client,
 					   GCONF_MISC_DIR "/eject_command", NULL);
 	if ((command != NULL) && (strcmp (command, "") != 0))
-		execute (command, FALSE);
+		execute (acme, command, FALSE, FALSE);
 	else
-		execute ("eject", FALSE);
+		execute (acme, "eject", FALSE, FALSE);
 
 	g_free (command);
 }
@@ -609,10 +645,10 @@ do_action (Acme *acme, int type)
 		do_eject_action (acme);
 		break;
 	case HOME_KEY:
-		execute ("nautilus", FALSE);
+		execute (acme, "nautilus", FALSE, FALSE);
 		break;
 	case SEARCH_KEY:
-		execute ("gnome-search-tool", FALSE);
+		execute (acme, "gnome-search-tool", FALSE, FALSE);
 		break;
 	case EMAIL_KEY:
 		do_mail_action (acme);
@@ -622,9 +658,9 @@ do_action (Acme *acme, int type)
 		break;
 	case SCREENSAVER_KEY:
 		if ((cmd = g_find_program_in_path ("gnome-screensaver-command")))
-			execute ("gnome-screensaver-command --lock", FALSE);
+			execute (acme, "gnome-screensaver-command --lock", FALSE, FALSE);
 		else
-			execute ("xscreensaver-command -lock", FALSE);
+			execute (acme, "xscreensaver-command -lock", FALSE, FALSE);
 
 		g_free (cmd);
 		break;
