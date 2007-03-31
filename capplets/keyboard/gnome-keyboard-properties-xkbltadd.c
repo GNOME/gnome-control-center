@@ -81,7 +81,7 @@ xkb_layout_chooser_add_variant_to_available_variants (XklConfigRegistry *
 	} else {
 		gtk_tree_store_set (tree_store, &iter,
 				    COMBO_BOX_MODEL_COL_DESCRIPTION,
-				    _("default"), COMBO_BOX_MODEL_COL_ID,
+				    _("Default"), COMBO_BOX_MODEL_COL_ID,
 				    DEFAULT_VARIANT_ID,
 				    COMBO_BOX_MODEL_COL_SORTING, "_", -1);
 		gtk_tree_store_append (tree_store, &iter, NULL);
