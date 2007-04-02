@@ -254,12 +254,12 @@ xsettings_callback (GConfEntry *entry)
 void
 gnome_settings_xsettings_init (GConfClient *client)
 {
-  gnome_settings_daemon_register_callback ("/desktop/gnome/peripherals/mouse", xsettings_callback);
-  gnome_settings_daemon_register_callback ("/desktop/gtk", xsettings_callback);
-  gnome_settings_daemon_register_callback ("/desktop/gnome/interface", xsettings_callback);
+  gnome_settings_register_config_callback ("/desktop/gnome/peripherals/mouse", xsettings_callback);
+  gnome_settings_register_config_callback ("/desktop/gtk", xsettings_callback);
+  gnome_settings_register_config_callback ("/desktop/gnome/interface", xsettings_callback);
 
 #ifdef HAVE_XFT2  
-  gnome_settings_daemon_register_callback (FONT_RENDER_DIR, xft_callback);
+  gnome_settings_register_config_callback (FONT_RENDER_DIR, xft_callback);
 #endif /* HAVE_XFT2 */  
 }
 
@@ -270,7 +270,7 @@ xft_callback (GConfEntry *entry)
   GConfClient *client;
   int i;
 
-  client = gnome_settings_daemon_get_conf_client ();
+  client = gnome_settings_get_config_client ();
 
   gnome_settings_update_xft (client);
 
@@ -478,7 +478,7 @@ gnome_xft_settings_set_xresources (GnomeXftSettings *settings)
   g_string_append_printf (add_string,
 			  "Xft.rgba: %s\n", settings->rgba);
 
-  gnome_settings_daemon_spawn_with_input (add, add_string->str);
+  gnome_settings_spawn_with_input (add, add_string->str);
 
   g_string_free (add_string, TRUE);
   setlocale (LC_NUMERIC, old_locale);

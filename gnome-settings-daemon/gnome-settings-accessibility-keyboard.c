@@ -162,7 +162,7 @@ set_server_from_gconf (GConfEntry *ignored)
 {
 	XkbDescRec	*desc;
 	gboolean	 enable_accessX;
-	GConfClient     *client = gnome_settings_daemon_get_conf_client ();
+	GConfClient     *client = gnome_settings_get_config_client ();
 
 	desc = get_xkb_desc_rec ();
 	if (!desc) {
@@ -299,7 +299,7 @@ ax_response_callback (gint response_id, guint revert_controls_mask, gboolean ena
 	    case GTK_RESPONSE_REJECT:
 	    case GTK_RESPONSE_CANCEL:
 		{
-		    GConfClient *client = gnome_settings_daemon_get_conf_client ();
+		    GConfClient *client = gnome_settings_get_config_client ();
 
 		    /* we're reverting, so we invert sense of 'enabled' flag */
 		    d ("cancelling AccessX request");
@@ -433,7 +433,7 @@ static void
 set_gconf_from_server (GConfEntry *ignored)
 {
 	gboolean	in_gconf;
-	GConfClient	*client = gnome_settings_daemon_get_conf_client ();
+	GConfClient	*client = gnome_settings_get_config_client ();
 	GConfChangeSet *cs = gconf_change_set_new ();
 	XkbDescRec	*desc = get_xkb_desc_rec ();
 	gboolean changed = FALSE, slowkeys_changed, stickykeys_changed;
@@ -590,7 +590,7 @@ gnome_settings_accessibility_keyboard_load (GConfClient *client)
 void
 gnome_settings_accessibility_keyboard_init (GConfClient *client)
 {
-	gnome_settings_daemon_register_callback (CONFIG_ROOT, &set_server_from_gconf);
+	gnome_settings_register_config_callback (CONFIG_ROOT, &set_server_from_gconf);
 }
 #else
 

@@ -314,7 +314,7 @@ apply_settings (GtkStyle *style)
 		error = NULL;
 	}
 
-	gnome_settings_daemon_spawn_with_input (xrdb, string->str);
+	gnome_settings_spawn_with_input (xrdb, string->str);
 	g_string_free (string, TRUE);
 	return;
 }

@@ -16,63 +16,65 @@ INCLUDES= \
 libexec_PROGRAMS=gnome-settings-daemon
 
 gnome_settings_daemon_SOURCES =	\
-	factory.c			\
+	clipboard-manager.c		\
+	clipboard-manager.h		\
+	delayed-dialog.c		\
 	eggaccelerators.h		\
 	eggaccelerators.c		\
+	factory.c			\
+	gnome-settings-accessibility-keyboard.h	\
+	gnome-settings-accessibility-keyboard.c	\
+	gnome-settings-background.h	\
+	gnome-settings-background.c	\
 	gnome-settings-daemon.h		\
 	gnome-settings-daemon.c		\
+	gnome-settings-dbus.c		\
+	gnome-settings-dbus.h		\
+	gnome-settings-default-editor.c	\
+	gnome-settings-default-editor.h	\
 	gnome-settings-font.h		\
 	gnome-settings-font.c		\
-	gnome-settings-mouse.h		\
-	gnome-settings-mouse.c		\
-	gnome-settings-multimedia-keys.h \
-	gnome-settings-multimedia-keys.c \
+	gnome-settings-gtk1theme.c      \
+	gnome-settings-gtk1theme.h	\
+	gnome-settings-keybindings.c    \
+	gnome-settings-keybindings.h    \
 	gnome-settings-keyboard-xkb.h	\
 	gnome-settings-keyboard-xkb.c	\
 	gnome-settings-keyboard.h	\
 	gnome-settings-keyboard.c	\
-	gnome-settings-background.h	\
-	gnome-settings-background.c	\
-	gnome-settings-xsettings.c	\
-	gnome-settings-xsettings.h	\
 	gnome-settings-locate-pointer.c	\
 	gnome-settings-locate-pointer.h	\
-	gnome-settings-sound.c		\
-	gnome-settings-sound.h		\
-	gnome-settings-accessibility-keyboard.h	\
-	gnome-settings-accessibility-keyboard.c	\
+	gnome-settings-mouse.h		\
+	gnome-settings-mouse.c		\
+	gnome-settings-multimedia-keys.h \
+	gnome-settings-multimedia-keys.c \
 	gnome-settings-screensaver.h	\
 	gnome-settings-screensaver.c	\
-	gnome-settings-default-editor.c	\
-	gnome-settings-default-editor.h	\
-	gnome-settings-gtk1theme.c      \
-	gnome-settings-gtk1theme.h	\
 	gnome-settings-server.h		\
-	gnome-settings-dbus.c		\
-	gnome-settings-dbus.h		\
-	gnome-settings-xrdb.c		\
-	gnome-settings-xrdb.h		\
-	gsd-media-keys-window.c		\
-	gsd-media-keys-window.h		\
-	xsettings-common.c		\
-	xsettings-manager.c		\
-	xsettings-common.h		\
-	xsettings-manager.h		\
-	gnome-settings-keybindings.c    \
-	gnome-settings-keybindings.h    \
+	gnome-settings-sound.c		\
+	gnome-settings-sound.h		\
 	gnome-settings-typing-break.c	\
 	gnome-settings-typing-break.h	\
-	reaper.c			\
-	reaper.h			\
 	gnome-settings-xmodmap.c	\
 	gnome-settings-xmodmap.h	\
+	gnome-settings-xrdb.c		\
+	gnome-settings-xrdb.h		\
+	gnome-settings-xsettings.c	\
+	gnome-settings-xsettings.h	\
+	gsd-media-keys-window.c		\
+	gsd-media-keys-window.h		\
 	list.c				\
 	list.h				\
+	reaper.c			\
+	reaper.h			\
+	utils.c				\
+	utils.h				\
+	xsettings-common.c		\
+	xsettings-common.h		\
+	xsettings-manager.c		\
+	xsettings-manager.h		\
 	xutils.c			\
-	xutils.h			\
-	clipboard-manager.c		\
-	clipboard-manager.h		\
-	delayed-dialog.c
+	xutils.h
 
 #	$(AccessX_files)		
 

@@ -62,7 +62,7 @@ key_toggled_cb (GtkWidget *toggle, gpointer data)
 {
 	GConfClient *client;
 
-	client = gnome_settings_daemon_get_conf_client ();
+	client = gnome_settings_get_config_client ();
 	gconf_client_set_bool (client, 
 			       SHOW_STARTUP_ERRORS_KEY,
 			       gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (toggle))
@@ -96,7 +96,7 @@ really_start_screensaver (gpointer user_data)
 	if (g_spawn_command_line_async (ss_command, &gerr))
 		return FALSE;
 	
-	client = gnome_settings_daemon_get_conf_client ();
+	client = gnome_settings_get_config_client ();
 	show_error = gconf_client_get_bool (client, SHOW_STARTUP_ERRORS_KEY, NULL);
 	if (!show_error) {
 		g_error_free (gerr);

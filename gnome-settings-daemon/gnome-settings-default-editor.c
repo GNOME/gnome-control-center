@@ -125,7 +125,7 @@ gnome_settings_default_editor_init (GConfClient *client)
 {
 	sync_changes = gconf_client_get_bool (client, SYNC_CHANGES_KEY, NULL);
 
-	gnome_settings_daemon_register_callback (SYNC_CHANGES_KEY, sync_changes_cb);
+	gnome_settings_register_config_callback (SYNC_CHANGES_KEY, sync_changes_cb);
 
 	g_signal_connect (gnome_vfs_mime_monitor_get (), "data_changed",
 			  G_CALLBACK (vfs_change_cb), client);			  

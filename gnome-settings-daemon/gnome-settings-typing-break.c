@@ -85,7 +85,7 @@ gnome_settings_typing_break_init (GConfClient *client)
 
   reaper = vte_reaper_get();
   g_signal_connect (reaper, "child_exited", G_CALLBACK (child_exited_callback), NULL);
-  gnome_settings_daemon_register_callback ("/desktop/gnome/typing_break", typing_break_callback);
+  gnome_settings_register_config_callback ("/desktop/gnome/typing_break", typing_break_callback);
 }
 
 static gboolean

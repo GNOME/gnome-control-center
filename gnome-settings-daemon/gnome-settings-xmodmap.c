@@ -39,12 +39,12 @@ static const char DISABLE_XMM_WARNING_KEY[] =
 static const char LOADED_FILES_KEY[] =
     "/desktop/gnome/peripherals/keyboard/general/update_handlers";
 
- 
+
 static void
 check_button_callback (GtkWidget *chk_button,
 		       gpointer data)
 {
-	GConfClient *confClient = gnome_settings_daemon_get_conf_client ();
+	GConfClient *confClient = gnome_settings_get_config_client ();
 
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (chk_button))) {
 		gconf_client_set_bool (confClient, DISABLE_XMM_WARNING_KEY, TRUE,
@@ -59,7 +59,7 @@ check_button_callback (GtkWidget *chk_button,
 void
 gnome_settings_load_modmap_files (void)
 {
-	GConfClient *confClient = gnome_settings_daemon_get_conf_client ();
+	GConfClient *confClient = gnome_settings_get_config_client ();
 	GSList *tmp = NULL;
 	GSList *loaded_file_list = gconf_client_get_list (confClient, LOADED_FILES_KEY, GCONF_VALUE_STRING, NULL);
 	tmp = loaded_file_list;
@@ -155,7 +155,7 @@ remove_button_clicked_callback (GtkWidget *button,
                 return;
 
 	/* Remove the selected file */
-	confClient = gnome_settings_daemon_get_conf_client ();
+	confClient = gnome_settings_get_config_client ();
 	loaded_files = gconf_client_get_list (confClient, LOADED_FILES_KEY, GCONF_VALUE_STRING, NULL);
 	loaded_files = remove_string_from_list (loaded_files, (char *)filenames->data);
 
@@ -206,7 +206,7 @@ load_button_clicked_callback (GtkWidget *button,
 
 	/* Add the files to left-tree-view */
 
-	confClient = gnome_settings_daemon_get_conf_client ();
+	confClient = gnome_settings_get_config_client ();
 	loaded_files = gconf_client_get_list (confClient, LOADED_FILES_KEY, GCONF_VALUE_STRING, NULL);
 	tmp = loaded_files;
 	while (tmp != NULL) {
@@ -259,7 +259,7 @@ gnome_settings_modmap_dialog_call (void)
 	GDir *homeDir;
 	GSList *loaded_files = NULL;
 	G_CONST_RETURN gchar *fname;
-	GConfClient *confClient = gnome_settings_daemon_get_conf_client ();
+	GConfClient *confClient = gnome_settings_get_config_client ();
 	homeDir = g_dir_open (g_get_home_dir (), 0, NULL);
 	if (homeDir == NULL)
 		return;

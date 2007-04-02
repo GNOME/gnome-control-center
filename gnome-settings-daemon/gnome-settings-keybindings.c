@@ -187,7 +187,7 @@ bindings_get_entry (const char *subdir)
   char *action = NULL;
   char *key = NULL;
   gboolean ret = FALSE;
-  GConfClient *client = gnome_settings_daemon_get_conf_client ();
+  GConfClient *client = gnome_settings_get_config_client ();
   
   g_return_val_if_fail (subdir != NULL, FALSE);
   
@@ -465,7 +465,7 @@ gnome_settings_keybindings_init (GConfClient *client)
   int screen_num = gdk_display_get_n_screens (dpy);
   int i;
 
-  gnome_settings_daemon_register_callback (GCONF_BINDING_DIR, bindings_callback);
+  gnome_settings_register_config_callback (GCONF_BINDING_DIR, bindings_callback);
   
   for (i = 0; i < screen_num; i++)
     {

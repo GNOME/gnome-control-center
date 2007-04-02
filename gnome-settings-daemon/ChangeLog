@@ -1,3 +1,28 @@
+2007-04-02  Rodrigo Moya <rodrigo@gnome-db.org>
+
+	* gnome-settings-daemon.c (gnome_settings_daemon_new): return NULL
+	when there is an error, not exit(), so that we do proper cleanup.
+	Remove code to register GConf callbacks, that is done in utils.c.
+	(gnome_settings_daemon_get_conf_client,
+	gnome_settings_daemon_register_callback,
+	 gnome_settings_daemon_spawn_with_input,
+	 gnome_settings_daemon_get_invisible,
+	 gnome_settings_daemon_delayed_show_dialog): removed from the
+	GnomeSettingsDaemon interface.
+
+	* utils.c (gnome_settings_get_config_client,
+	 gnome_settings_get_invisible,
+	 gnome_settings_register_config_callback,
+	 gnome_settings_spawn_with_input,
+	 gnome_settings_delayed_show_dialog): moved from GnomeSettingsDaemon
+	interface.
+
+	* factory.c (main): check return value from gnome_settings_daemon().
+
+	* *.c: adapted to changes in function names.
+
+	* Makefile.am: put source files in alphabetical order.
+
 2007-03-29  Priit Laes  <amd@store20.com>
 
 	* gnome-settings-multimedia-keys.c: (get_term_command), (execute),

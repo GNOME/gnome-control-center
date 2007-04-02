@@ -25,18 +25,8 @@
 #define __GNOME_SETTINGS_DAEMON_H
 
 #include <gtk/gtk.h>
-#include <gconf/gconf.h>
-#include <gconf/gconf-client.h>
 
-#include <bonobo/bonobo-object.h>
-
-typedef void (* KeyCallbackFunc) (GConfEntry *entry);
-
-void       gnome_settings_daemon_register_callback (const char      *dir,
-						    KeyCallbackFunc  func);
-GtkWidget *gnome_settings_daemon_get_invisible     (void);
-
-void       gnome_settings_delayed_show_dialog      (GtkWidget       *dialog);
+#include "utils.h"
 
 G_BEGIN_DECLS
 
@@ -51,23 +41,17 @@ typedef struct _GnomeSettingsDaemon GnomeSettingsDaemon;
 typedef struct _GnomeSettingsDaemonClass GnomeSettingsDaemonClass;
 typedef struct _GnomeSettingsDaemonPrivate GnomeSettingsDaemonPrivate;
 
-struct _GnomeSettingsDaemon
-{
-  GObject parent_instance;
-  GnomeSettingsDaemonPrivate *private;
+struct _GnomeSettingsDaemon {
+	GObject parent_instance;
+	GnomeSettingsDaemonPrivate *private;
 };
 
-struct _GnomeSettingsDaemonClass
-{
-  GObjectClass parent_class;
+struct _GnomeSettingsDaemonClass {
+	GObjectClass parent_class;
 };
 
 GType    gnome_settings_daemon_get_type         (void);
 GObject *gnome_settings_daemon_new              (void);
-void     gnome_settings_daemon_spawn_with_input (char       **argv,
-						 const char  *input);
-
-GConfClient *gnome_settings_daemon_get_conf_client (void);
 
 /**
  * DBUS server

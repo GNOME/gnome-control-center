@@ -146,7 +146,7 @@ check_filename (char       *base_dir,
 static void
 apply_settings (void)
 {
-	GConfClient *client = gnome_settings_daemon_get_conf_client ();
+	GConfClient *client = gnome_settings_get_config_client ();
 	gchar *current_theme;
 	gchar *theme_filename;
 	gchar *rc_filename;
@@ -211,7 +211,8 @@ apply_settings (void)
 void
 gnome_settings_gtk1_theme_init (GConfClient *client)
 {
-	gnome_settings_daemon_register_callback (GTK_THEME_KEY, (KeyCallbackFunc) apply_settings);
+	gnome_settings_register_config_callback (GTK_THEME_KEY,
+						 (GnomeSettingsConfigCallback) apply_settings);
 }
 
 void

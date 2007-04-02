@@ -149,7 +149,7 @@ apply_xkb_settings (void)
 	if (!inited_ok)
 		return;
 
-	conf_client = gnome_settings_daemon_get_conf_client ();
+	conf_client = gnome_settings_get_config_client ();
 	gkbd_keyboard_config_init (&current_sys_kbd_config, conf_client,
 				   xkl_engine);
 
@@ -191,7 +191,7 @@ gnome_settings_keyboard_xkb_sysconfig_changed_response (GtkDialog * dialog,
 					   (G_OBJECT (dialog),
 					    "chkDontShowAgain")));
 
-	conf_client = gnome_settings_daemon_get_conf_client ();
+	conf_client = gnome_settings_get_config_client ();
 
 	switch (what2do) {
 	case RESPONSE_USE_X:
@@ -221,7 +221,7 @@ gnome_settings_keyboard_xkb_analyze_sysconfig (void)
 
 	if (!inited_ok)
 		return;
-	conf_client = gnome_settings_daemon_get_conf_client ();
+	conf_client = gnome_settings_get_config_client ();
 	gkbd_keyboard_config_init (&backup_gconf_kbd_config, conf_client,
 				   xkl_engine);
 	gkbd_keyboard_config_init (&initial_sys_kbd_config, conf_client,
@@ -314,7 +314,7 @@ gnome_settings_chk_file_list (void)
 	GSList *tmp_l = NULL;
 	gboolean new_file_exist = FALSE;
 	GConfClient *conf_client =
-	    gnome_settings_daemon_get_conf_client ();
+	    gnome_settings_get_config_client ();
 
 	home_dir = g_dir_open (g_get_home_dir (), 0, NULL);
 	while ((fname = g_dir_read_name (home_dir)) != NULL) {
@@ -405,13 +405,13 @@ gnome_settings_keyboard_xkb_init (GConfClient * client)
 		gnome_settings_keyboard_xkb_analyze_sysconfig ();
 		gnome_settings_keyboard_xkb_chk_lcl_xmm ();
 
-		gnome_settings_daemon_register_callback
+		gnome_settings_register_config_callback
 		    (GKBD_DESKTOP_CONFIG_DIR,
-		     (KeyCallbackFunc) apply_settings);
+		     (GnomeSettingsConfigCallback) apply_settings);
 
-		gnome_settings_daemon_register_callback
+		gnome_settings_register_config_callback
 		    (GKBD_KEYBOARD_CONFIG_DIR,
-		     (KeyCallbackFunc) apply_xkb_settings);
+		     (GnomeSettingsConfigCallback) apply_xkb_settings);
 
 		gdk_window_add_filter (NULL, (GdkFilterFunc)
 				       gnome_settings_keyboard_xkb_evt_filter,

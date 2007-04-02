@@ -156,7 +156,7 @@ apply_settings (void)
 
 	struct reload_foreach_closure closure;
 
-	client = gnome_settings_daemon_get_conf_client ();
+	client = gnome_settings_get_config_client ();
 
 #ifdef HAVE_ESD
 	enable_sound        = gconf_client_get_bool (client, "/desktop/gnome/sound/enable_esd", NULL);
@@ -203,7 +203,8 @@ apply_settings (void)
 void
 gnome_settings_sound_init (GConfClient *client)
 {
-	gnome_settings_daemon_register_callback ("/desktop/gnome/sound", (KeyCallbackFunc) apply_settings);
+	gnome_settings_register_config_callback ("/desktop/gnome/sound",
+						 (GnomeSettingsConfigCallback) apply_settings);
 }
 
 void
