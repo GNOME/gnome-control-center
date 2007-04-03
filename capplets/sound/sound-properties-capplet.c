@@ -869,6 +869,7 @@ setup_default_mixer (GladeXML *dialog)
 	g_object_unref (G_OBJECT (model)); 
 
 	renderer = gtk_cell_renderer_text_new ();
+        g_object_set (renderer, "ellipsize", PANGO_ELLIPSIZE_END, NULL);
 	gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (device_widget), renderer, TRUE);
 	gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (device_widget), renderer,
 			"text", MIXER_DEVICE_MODEL_NAME_COLUMN);
