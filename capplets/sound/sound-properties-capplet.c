@@ -330,6 +330,7 @@ add_device (int type, const gchar *pipeline, const gchar *description, const gch
 	}
 }
 
+#if USE_HAL
 static void
 remove_device (int type, const gchar *pipeline)
 {
@@ -381,7 +382,6 @@ remove_device (int type, const gchar *pipeline)
 	}
 }
 
-#if USE_HAL
 static void
 device_added_callback (LibHalContext *ctx, const char *udi)
 {
