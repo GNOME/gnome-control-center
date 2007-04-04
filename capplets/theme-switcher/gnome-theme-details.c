@@ -902,25 +902,24 @@ update_color_buttons_from_string (gchar *color_scheme)
   {
     color_scheme_pair = g_strsplit (current_string, ":", 0);
 
-    if (color_scheme_pair[0] == NULL)
-      continue;
+    if (color_scheme_pair[0] != NULL && color_scheme_pair[1] != NULL)
+    {
+      g_strstrip (color_scheme_pair[0]);
+      g_strstrip (color_scheme_pair[1]);
 
-    g_strstrip (color_scheme_pair[0]);
-    g_strstrip (color_scheme_pair[1]);
-
-
-    if (!strcmp ("fg_color", color_scheme_pair[0]))
-      gdk_color_parse (color_scheme_pair[1], &color_scheme_colors[0]);
-    else if (!strcmp ("bg_color", color_scheme_pair[0]))
-      gdk_color_parse (color_scheme_pair[1], &color_scheme_colors[1]);
-    else if (!strcmp ("text_color", color_scheme_pair[0]))
-      gdk_color_parse (color_scheme_pair[1], &color_scheme_colors[2]);
-    else if (!strcmp ("base_color", color_scheme_pair[0]))
-      gdk_color_parse (color_scheme_pair[1], &color_scheme_colors[3]);
-    else if (!strcmp ("selected_fg_color", color_scheme_pair[0]))
-      gdk_color_parse (color_scheme_pair[1], &color_scheme_colors[4]);
-    else if (!strcmp ("selected_bg_color", color_scheme_pair[0]))
-      gdk_color_parse (color_scheme_pair[1], &color_scheme_colors[5]);
+      if (!strcmp ("fg_color", color_scheme_pair[0]))
+        gdk_color_parse (color_scheme_pair[1], &color_scheme_colors[0]);
+      else if (!strcmp ("bg_color", color_scheme_pair[0]))
+        gdk_color_parse (color_scheme_pair[1], &color_scheme_colors[1]);
+      else if (!strcmp ("text_color", color_scheme_pair[0]))
+        gdk_color_parse (color_scheme_pair[1], &color_scheme_colors[2]);
+      else if (!strcmp ("base_color", color_scheme_pair[0]))
+        gdk_color_parse (color_scheme_pair[1], &color_scheme_colors[3]);
+      else if (!strcmp ("selected_fg_color", color_scheme_pair[0]))
+        gdk_color_parse (color_scheme_pair[1], &color_scheme_colors[4]);
+      else if (!strcmp ("selected_bg_color", color_scheme_pair[0]))
+        gdk_color_parse (color_scheme_pair[1], &color_scheme_colors[5]);
+    }
 
     g_strfreev (color_scheme_pair);
   }
