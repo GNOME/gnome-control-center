@@ -662,6 +662,7 @@ gnome_theme_installer_run (GtkWindow *parent, gchar *filename)
 	GtkWidget *dialog;
 	static char old_folder[1024] = "";
 	gchar *filename_selected, *folder;
+	GtkFileFilter *filter;
 
 	if (filename == NULL)
 		filename = old_folder;
@@ -671,7 +672,21 @@ gnome_theme_installer_run (GtkWindow *parent, gchar *filename)
 
 	running_theme_install = TRUE;
 
-	dialog = gtk_file_chooser_dialog_new ("Select Theme", parent, GTK_FILE_CHOOSER_ACTION_OPEN, GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT, GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT, NULL);
+	dialog = gtk_file_chooser_dialog_new (_("Select Theme"), parent, GTK_FILE_CHOOSER_ACTION_OPEN, GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT, GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT, NULL);
+
+	filter = gtk_file_filter_new ();
+	gtk_file_filter_set_name (filter, _("Theme Packages"));
+	gtk_file_filter_add_mime_type (filter, "application/x-bzip-compressed-tar");
+	gtk_file_filter_add_mime_type (filter, "application/x-compressed-tar");
+	gtk_file_filter_add_mime_type (filter, "application/x-gnome-theme-package");
+	
+	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (dialog), filter);
+
+	filter = gtk_file_filter_new ();
+	gtk_file_filter_set_name (filter, _("All Files"));
+	gtk_file_filter_add_pattern(filter, "*");
+
+	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (dialog), filter);
 
 	if (strcmp (old_folder, ""))
 		gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dialog), old_folder);
