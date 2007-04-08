@@ -618,6 +618,7 @@ about_me_image_clicked_cb (GtkWidget *button, GnomeAboutMe *me)
 	GtkWidget *image;
 	const gchar *chooser_dir = DATADIR"/pixmaps/faces";
 	gchar *pics_dir;
+	GtkFileFilter *filter;
 
 	dialog = me->dialog;
 	image_chooser = WID ("image-chooser");
@@ -652,6 +653,16 @@ about_me_image_clicked_cb (GtkWidget *button, GnomeAboutMe *me)
 
 	g_signal_connect (chooser_dialog, "update-preview",
 			  G_CALLBACK (about_me_update_preview), me);
+
+	filter = gtk_file_filter_new ();
+	gtk_file_filter_set_name (filter, _("Images"));
+	gtk_file_filter_add_pixbuf_formats (filter);
+	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (chooser_dialog), filter);
+	filter = gtk_file_filter_new ();
+	gtk_file_filter_set_name (filter, _("All Files"));
+	gtk_file_filter_add_pattern(filter, "*");
+
+	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (chooser_dialog), filter);
 
 	response = gtk_dialog_run (GTK_DIALOG (chooser_dialog));
 
