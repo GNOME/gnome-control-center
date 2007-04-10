@@ -130,8 +130,24 @@ config_notify (GConfClient *client,
                gpointer     user_data)
 {
 	GSList *callbacks;
+	char *dir, *last_slash;
 
 	callbacks = g_hash_table_lookup (directories, entry->key);
+	if (callbacks) {
+		GSList *sl;
+		for (sl = callbacks; sl;  sl = sl->next)
+			((GnomeSettingsConfigCallback) sl->data) (entry);
+	}
+
+	/* Also check if the directory, not the specific key was registered */
+	
+	dir = g_strdup (entry->key);
+	last_slash = strrchr (dir, '/');
+	if (last_slash)
+	  *last_slash = 0;
+	
+	callbacks = g_hash_table_lookup (directories, dir);
+	g_free (dir);
 	if (callbacks) {
 		GSList *sl;
 		for (sl = callbacks; sl;  sl = sl->next)
