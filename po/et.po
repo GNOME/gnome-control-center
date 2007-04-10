@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: GNOME control center HEAD\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-02-13 19:29+0000\n"
-"PO-Revision-Date: 2007-02-25 12:31+0200\n"
+"PO-Revision-Date: 2007-04-09 20:07+0300\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -517,7 +517,7 @@ msgstr "Hiire-eelistuste käivitamisel tekkis viga: %s"
 #: ../capplets/accessibility/keyboard/accessibility-keyboard.c:399
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
-msgstr "Ei saa AccessX sätteid failist '%s' importida"
+msgstr "AccessX sätteid pole failist '%s' võimalik importida"
 
 #: ../capplets/accessibility/keyboard/accessibility-keyboard.c:436
 msgid "Import Feature Settings File"
@@ -969,12 +969,13 @@ msgstr ""
 
 #: ../capplets/common/gconf-property-editor.c:183
 msgid "Change set"
-msgstr ""
+msgstr "Muudatuste kogum"
 
 #: ../capplets/common/gconf-property-editor.c:184
 msgid ""
 "GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr ""
+"GConf'i klientprogrammile rakendamiseks edastatav GConf'i muudatuste kogum"
 
 #: ../capplets/common/gconf-property-editor.c:189
 msgid "Conversion to widget callback"
@@ -1026,7 +1027,7 @@ msgid ""
 "Please make sure it exists and try again, or choose a different background "
 "picture."
 msgstr ""
-"Ei leia faili '%s'.\n"
+"Faili '%s' pole võimalik leida.\n"
 "\n"
 "Palun kontrolli, kas fail on olemas ja proovi uuesti või vali teine "
 "taustapilt."
@@ -1092,7 +1093,7 @@ msgstr "Balsa"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:2
 msgid "Claws Mail"
-msgstr ""
+msgstr "Claws Mail"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:3
 msgid "Debian Sensible Browser"
@@ -2185,7 +2186,7 @@ msgstr "Automaattuvastus"
 #: ../capplets/sound/sound-properties-capplet.c:651
 #: ../capplets/sound/sound-properties-capplet.c:652
 msgid "ALSA - Advanced Linux Sound Architecture"
-msgstr ""
+msgstr "ALSA - Linux'i laiendatud heliarhitektuur"
 
 #: ../capplets/sound/sound-properties-capplet.c:653
 msgid "Artsd - ART Sound Daemon"
@@ -2194,7 +2195,7 @@ msgstr "Artsd - ART helideemon"
 #: ../capplets/sound/sound-properties-capplet.c:654
 #: ../capplets/sound/sound-properties-capplet.c:655
 msgid "ESD - Enlightened Sound Daemon"
-msgstr ""
+msgstr "ESD - Enlightened heliteemon"
 
 #: ../capplets/sound/sound-properties-capplet.c:656
 #: ../capplets/sound/sound-properties-capplet.c:657
@@ -2208,7 +2209,7 @@ msgstr "PulseAudio heliserver"
 
 #: ../capplets/sound/sound-properties-capplet.c:660
 msgid "Test Sound"
-msgstr ""
+msgstr "Testheli"
 
 #: ../capplets/sound/sound-properties-capplet.c:661
 msgid "Silence"
@@ -2248,7 +2249,7 @@ msgstr "Seadmed"
 
 #: ../capplets/sound/sound-properties.glade.h:8
 msgid "E_nable software sound mixing (ESD)"
-msgstr "_Tarkvaraline helimiksimine lubatud (ESD)"
+msgstr "_Tarkvaraline helimiksimine on lubatud (ESD)"
 
 #: ../capplets/sound/sound-properties.glade.h:9
 msgid "Flash _entire screen"
@@ -2522,7 +2523,7 @@ msgstr "Ikoonid"
 
 #: ../capplets/theme-switcher/theme-properties.glade.h:9
 msgid "Save Theme As..."
-msgstr "Salvesta teema _kui..."
+msgstr "Teema salvestamine kui..."
 
 #: ../capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Save _Background Image"
@@ -2872,7 +2873,7 @@ msgid ""
 "Cannot create the directory \"%s\".\n"
 "This is needed to allow changing cursors."
 msgstr ""
-"Ei saa luua kataloogi \"%s\".\n"
+"Kataloogi \"%s\" pole võimalik luua.\n"
 "See on kursorite vahetamiseks vajalik."
 
 #: ../gnome-settings-daemon/gnome-settings-keybindings.c:215
@@ -3493,7 +3494,7 @@ msgstr ""
 
 #: ../shell/control-center.schemas.in.h:10
 msgid "Task names and associated .desktop files"
-msgstr ""
+msgstr "Ülesannete nimed ja nendega seotud .desktop failid"
 
 #: ../shell/control-center.schemas.in.h:11
 msgid ""
@@ -3501,6 +3502,8 @@ msgid ""
 "translated) followed by a \";\" separator then the filename of an "
 "associated .desktop file to launch for that task."
 msgstr ""
+"Juhtimiskeskuses näidatav ülesande nimi, millele järgneb eraldaja \";\" ja "
+"sellele ülesande kävitamiseks vajalik .desktop fail."
 
 #. Translators: The format of this string is the task name to be displayed (translate that part) followed by a ";" separator then the filename (DONT translate the file name) of a .desktop file to launch. Multiple entries are separated by a ","
 #: ../shell/control-center.schemas.in.h:13
@@ -3509,11 +3512,16 @@ msgid ""
 "selector.desktop,Set Preferred Applications;default-applications.desktop,Add "
 "Printer;gnome-cups-manager.desktop]"
 msgstr ""
+"[Töölaua tausta muutmine;background.desktop,Teema muutmine;gtk-theme-"
+"selector.desktop,Eelistatud rakenduste määramine;default-applications."
+"desktop,Printeri lisamine;gnome-cups-manager.desktop]"
 
 #: ../shell/control-center.schemas.in.h:14
 msgid ""
 "if true, the control-center will close when a \"Common Task\" is activated"
 msgstr ""
+"Kui määratud, siis juhtimiskeskus suletakse \"Üldiste ülesannete\" "
+"aktiveerimisel"
 
 #: ../shell/gnomecc.desktop.in.in.h:2
 #: ../vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:2
