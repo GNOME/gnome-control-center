@@ -1012,15 +1012,8 @@ get_geometry (wallpaper_type_t  wallpaper_type,
 	gint pwidth, pheight;
 	gint st = 0;
 
-	if (field_geom->width != virtual_geom->width)
-		xfactor = (gdouble) field_geom->width / (gdouble) virtual_geom->width;
-	else
-		xfactor = 1.0;
-
-	if (field_geom->height != virtual_geom->height)
-		yfactor = (gdouble) field_geom->height / (gdouble) virtual_geom->height;
-	else
-		yfactor = 1.0;
+	xfactor = (gdouble) field_geom->width / (gdouble) virtual_geom->width;
+	yfactor = (gdouble) field_geom->height / (gdouble) virtual_geom->height;
 
 	pwidth = gdk_pixbuf_get_width (pixbuf);
 	pheight = gdk_pixbuf_get_height (pixbuf);
@@ -1095,13 +1088,13 @@ get_geometry (wallpaper_type_t  wallpaper_type,
 		asp = (gdouble) pwidth / (gdouble) virtual_geom->width;
 
 		if (asp > (gdouble) pheight / virtual_geom->height) {
-			src_geom->width = pwidth * virtual_geom->height / pheight;
+			src_geom->width = pheight * virtual_geom->width / virtual_geom->height;
 			src_geom->height = pheight;
 			src_geom->x = (pwidth - src_geom->width) / 2;
 			src_geom->y = 0;
 		} else {
 			src_geom->width = pwidth;
-			src_geom->height = pheight * virtual_geom->width / pwidth;
+			src_geom->height = pwidth * virtual_geom->height / virtual_geom->width;
 			src_geom->x = 0;
 			src_geom->y = (pheight - src_geom->height) / 2;
 		}
