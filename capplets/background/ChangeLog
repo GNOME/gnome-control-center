@@ -1,5 +1,15 @@
 2007-04-16  Jens Granseuer  <jensgr@gmx.net>
 
+	Patch by: Priit Laes <amd@store20.com>
+
+	* gnome-background-properties.glade:
+	* gnome-wp-capplet.c: (gnome_wp_option_menu_set),
+	(gnome_wp_scale_type_changed), (gnome_wp_shade_type_changed),
+	(wallpaper_properties_init): replace deprecated GtkOptionMenu with
+	GtkComboBox (closes bug #421199)
+
+2007-04-16  Jens Granseuer  <jensgr@gmx.net>
+
 	* gnome-wp-capplet.c: (gnome_wp_load_stuffs): don't crash if the
 	GConf schema is missing (bug #430253). Also fix initialization of
 	the secondary colour picker

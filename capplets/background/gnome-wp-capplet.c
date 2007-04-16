@@ -227,52 +227,38 @@ static void wp_props_load_wallpaper (gchar * key,
   gtk_tree_path_free (path);
 }
 
-static gint gnome_wp_option_menu_get (GtkOptionMenu * menu) {
-  GtkWidget * widget;
-
-  g_return_val_if_fail (GTK_IS_OPTION_MENU (menu), -1);
-
-  widget = gtk_menu_get_active (GTK_MENU (menu->menu));
-
-  if (widget != NULL) {
-    return g_list_index (GTK_MENU_SHELL (menu->menu)->children, widget);
-  }
-
-  return -1;
-}
-
 static void gnome_wp_option_menu_set (GnomeWPCapplet * capplet,
 				      const gchar * value,
 				      gboolean shade_type) {
   if (shade_type) {
     if (!strcmp (value, "horizontal-gradient")) {
-      gtk_option_menu_set_history (GTK_OPTION_MENU (capplet->color_opt),
+      gtk_combo_box_set_active (GTK_COMBO_BOX (capplet->color_opt),
 				   GNOME_WP_SHADE_TYPE_HORIZ);
       gtk_widget_show (capplet->sc_picker);
     } else if (!strcmp (value, "vertical-gradient")) {
-      gtk_option_menu_set_history (GTK_OPTION_MENU (capplet->color_opt),
+      gtk_combo_box_set_active (GTK_COMBO_BOX (capplet->color_opt),
 				   GNOME_WP_SHADE_TYPE_VERT);
       gtk_widget_show (capplet->sc_picker);
     } else {
-      gtk_option_menu_set_history (GTK_OPTION_MENU (capplet->color_opt),
+      gtk_combo_box_set_active (GTK_COMBO_BOX (capplet->color_opt),
 				   GNOME_WP_SHADE_TYPE_SOLID);
       gtk_widget_hide (capplet->sc_picker);
     }
   } else {
     if (!strcmp (value, "centered")) {
-      gtk_option_menu_set_history (GTK_OPTION_MENU (capplet->wp_opts),
+      gtk_combo_box_set_active (GTK_COMBO_BOX (capplet->wp_opts),
 				   GNOME_WP_SCALE_TYPE_CENTERED);
     } else if (!strcmp (value, "stretched")) {
-      gtk_option_menu_set_history (GTK_OPTION_MENU (capplet->wp_opts),
+      gtk_combo_box_set_active (GTK_COMBO_BOX (capplet->wp_opts),
 				   GNOME_WP_SCALE_TYPE_STRETCHED);
     } else if (!strcmp (value, "scaled")) {
-      gtk_option_menu_set_history (GTK_OPTION_MENU (capplet->wp_opts),
+      gtk_combo_box_set_active (GTK_COMBO_BOX (capplet->wp_opts),
 				   GNOME_WP_SCALE_TYPE_SCALED);
     } else if (!strcmp (value, "zoom")) {
-      gtk_option_menu_set_history (GTK_OPTION_MENU (capplet->wp_opts),
+      gtk_combo_box_set_active (GTK_COMBO_BOX (capplet->wp_opts),
 				   GNOME_WP_SCALE_TYPE_ZOOM);
     } else if (strcmp (value, "none") != 0) {
-      gtk_option_menu_set_history (GTK_OPTION_MENU (capplet->wp_opts),
+      gtk_combo_box_set_active (GTK_COMBO_BOX (capplet->wp_opts),
 				   GNOME_WP_SCALE_TYPE_TILED);
     }
   }
@@ -403,7 +389,7 @@ static void wallpaper_properties_clicked (GtkWidget * dialog,
   }
 }
 
-static void gnome_wp_scale_type_changed (GtkOptionMenu * option_menu,
+static void gnome_wp_scale_type_changed (GtkComboBox* combobox,
 					 GnomeWPCapplet * capplet) {
   GnomeWPItem * item = NULL;
   GdkPixbuf * pixbuf;
@@ -427,7 +413,7 @@ static void gnome_wp_scale_type_changed (GtkOptionMenu * option_menu,
   
   g_free (item->options);
 
-  switch (gnome_wp_option_menu_get (GTK_OPTION_MENU (capplet->wp_opts))) {
+  switch (gtk_combo_box_get_active (GTK_COMBO_BOX (capplet->wp_opts))) {
   case GNOME_WP_SCALE_TYPE_CENTERED:
     item->options = g_strdup ("centered");
     break;
@@ -454,7 +440,7 @@ static void gnome_wp_scale_type_changed (GtkOptionMenu * option_menu,
 			   item->options, NULL);
 }
 
-static void gnome_wp_shade_type_changed (GtkOptionMenu * option_menu,
+static void gnome_wp_shade_type_changed (GtkWidget* combobox,
 					 GnomeWPCapplet * capplet) {
   GnomeWPItem * item = NULL;
   GtkTreeIter iter;
@@ -478,7 +464,7 @@ static void gnome_wp_shade_type_changed (GtkOptionMenu * option_menu,
 
   g_free (item->shade_type);
 
-  switch (gnome_wp_option_menu_get (GTK_OPTION_MENU (capplet->color_opt))) {
+  switch (gtk_combo_box_get_active (GTK_COMBO_BOX (capplet->color_opt))) {
   case GNOME_WP_SHADE_TYPE_HORIZ:
     item->shade_type = g_strdup ("horizontal-gradient");
     gtk_widget_show (capplet->sc_picker);
@@ -854,8 +840,6 @@ static void gnome_wp_update_preview (GtkFileChooser *chooser,
 static void wallpaper_properties_init (void) {
   GnomeWPCapplet * capplet;
   GladeXML * dialog;
-  GtkWidget * menu;
-  GtkWidget * mitem;
   GtkWidget * add_button;
   GtkCellRenderer * renderer;
   GtkTreeViewColumn * column;
@@ -954,29 +938,11 @@ static void wallpaper_properties_init (void) {
 
   capplet->wp_opts = glade_xml_get_widget (dialog, "style_menu");
 
-  menu = gtk_menu_new ();
-
-  mitem = gtk_menu_item_new_with_label (_("Centered"));
-  gtk_menu_append (GTK_MENU (menu), mitem);
-  gtk_widget_show (mitem);
-
-  mitem = gtk_menu_item_new_with_label (_("Fill Screen"));
-  gtk_menu_append (GTK_MENU (menu), mitem);
-  gtk_widget_show (mitem);
-
-  mitem = gtk_menu_item_new_with_label (_("Scaled"));
-  gtk_menu_append (GTK_MENU (menu), mitem);
-  gtk_widget_show (mitem);
-
-  mitem = gtk_menu_item_new_with_label (_("Zoom"));
-  gtk_menu_append (GTK_MENU (menu), mitem);
-  gtk_widget_show (mitem);
-
-  mitem = gtk_menu_item_new_with_label (_("Tiled"));
-  gtk_menu_append (GTK_MENU (menu), mitem);
-  gtk_widget_show (mitem);
-
-  gtk_option_menu_set_menu (GTK_OPTION_MENU (capplet->wp_opts), menu);
+  gtk_combo_box_append_text (GTK_COMBO_BOX (capplet->wp_opts), _("Centered"));
+  gtk_combo_box_append_text (GTK_COMBO_BOX (capplet->wp_opts), _("Fill Screen"));
+  gtk_combo_box_append_text (GTK_COMBO_BOX (capplet->wp_opts), _("Scaled"));
+  gtk_combo_box_append_text (GTK_COMBO_BOX (capplet->wp_opts), _("Zoom"));
+  gtk_combo_box_append_text (GTK_COMBO_BOX (capplet->wp_opts), _("Tiled"));
 
   g_signal_connect (G_OBJECT (capplet->wp_opts), "changed",
 		    G_CALLBACK (gnome_wp_scale_type_changed), capplet);
@@ -991,21 +957,10 @@ static void wallpaper_properties_init (void) {
 
   capplet->color_opt = glade_xml_get_widget (dialog, "color_menu");
 
-  menu = gtk_menu_new ();
+  gtk_combo_box_append_text (GTK_COMBO_BOX (capplet->color_opt), _("Solid Color"));
+  gtk_combo_box_append_text (GTK_COMBO_BOX (capplet->color_opt), _("Horizontal Gradient"));
+  gtk_combo_box_append_text (GTK_COMBO_BOX (capplet->color_opt), _("Vertical Gradient"));
 
-  mitem = gtk_menu_item_new_with_label (_("Solid Color"));
-  gtk_menu_append (GTK_MENU (menu), mitem);
-  gtk_widget_show (mitem);
-
-  mitem = gtk_menu_item_new_with_label (_("Horizontal Gradient"));
-  gtk_menu_append (GTK_MENU (menu), mitem);
-  gtk_widget_show (mitem);
-
-  mitem = gtk_menu_item_new_with_label (_("Vertical Gradient"));
-  gtk_menu_append (GTK_MENU (menu), mitem);
-  gtk_widget_show (mitem);
-
-  gtk_option_menu_set_menu (GTK_OPTION_MENU (capplet->color_opt), menu);
   g_signal_connect (G_OBJECT (capplet->color_opt), "changed",
 		    G_CALLBACK (gnome_wp_shade_type_changed), capplet);
 

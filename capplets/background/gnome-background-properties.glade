@@ -286,7 +286,6 @@
 			  <property name="yalign">0.5</property>
 			  <property name="xpad">0</property>
 			  <property name="ypad">0</property>
-			  <property name="mnemonic_widget">style_menu</property>
 			  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
 			  <property name="width_chars">-1</property>
 			  <property name="single_line_mode">False</property>
@@ -300,10 +299,11 @@
 		      </child>
 
 		      <child>
-			<widget class="GtkOptionMenu" id="style_menu">
+			<widget class="GtkComboBox" id="style_menu">
 			  <property name="visible">True</property>
-			  <property name="can_focus">True</property>
-			  <property name="history">-1</property>
+			  <property name="items"></property>
+			  <property name="add_tearoffs">False</property>
+			  <property name="focus_on_click">True</property>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -475,10 +475,11 @@
 	      </child>
 
 	      <child>
-		<widget class="GtkOptionMenu" id="color_menu">
+		<widget class="GtkComboBox" id="color_menu">
 		  <property name="visible">True</property>
-		  <property name="can_focus">True</property>
-		  <property name="history">-1</property>
+		  <property name="items"></property>
+		  <property name="add_tearoffs">False</property>
+		  <property name="focus_on_click">True</property>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
