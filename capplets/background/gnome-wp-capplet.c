@@ -588,19 +588,23 @@ static gboolean gnome_wp_load_stuffs (void * data) {
   gchar * imagepath, * style, * uri;
   GnomeWPItem * item;
 
-  style = gconf_client_get_string (capplet->client,
-				   WP_OPTIONS_KEY,
-				   NULL);
-
   gnome_wp_xml_load_list (capplet);
   g_hash_table_foreach (capplet->wphash, (GHFunc) wp_props_load_wallpaper,
 			capplet);
 
   gdk_window_set_cursor (capplet->window->window, NULL);
   
+  style = gconf_client_get_string (capplet->client,
+				   WP_OPTIONS_KEY,
+				   NULL);
+  if (style == NULL)
+    style = g_strdup ("none");
+
   uri = gconf_client_get_string (capplet->client,
 				 WP_FILE_KEY,
 				 NULL);
+  if (uri == NULL)
+    uri = g_strdup ("(none)");
 
   if (g_utf8_validate (uri, -1, NULL) && g_file_test (uri, G_FILE_TEST_EXISTS))
     imagepath = g_strdup (uri);
@@ -622,7 +626,7 @@ static gboolean gnome_wp_load_stuffs (void * data) {
     gnome_wp_option_menu_set (capplet, item->shade_type, TRUE);
 
     gtk_color_button_set_color (GTK_COLOR_BUTTON (capplet->pc_picker), item->pcolor);
-    gtk_color_button_set_color (GTK_COLOR_BUTTON (capplet->sc_picker), item->pcolor);
+    gtk_color_button_set_color (GTK_COLOR_BUTTON (capplet->sc_picker), item->scolor);
 
   } else if (strcmp (style, "none") != 0) {
     item = gnome_wp_add_image (capplet, imagepath);
