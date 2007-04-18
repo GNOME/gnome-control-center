@@ -102,6 +102,16 @@
       <win-command>mozilla -remote "openurl(%s,new-window)"</win-command>
     </web-browser>
     <web-browser>
+      <_name>SeaMonkey</_name>
+      <executable>seamonkey</executable>
+      <command>seamonkey %s</command>
+      <icon-name>seamonkey</icon-name>
+      <run-in-terminal>false</run-in-terminal>
+      <netscape-remote>true</netscape-remote>
+      <tab-command>seamonkey -remote "openurl(%s,new-tab)"</tab-command>
+      <win-command>seamonkey -remote "openurl(%s,new-window)"</win-command>
+    </web-browser>
+    <web-browser>
       <_name>Netscape Communicator</_name>
       <executable>netscape</executable>
       <command>netscape %s</command>
@@ -235,6 +245,13 @@
       <executable>mozilla</executable>
       <command>mozilla -mail %s</command>
       <icon-name>mozilla-mail-icon</icon-name>
+      <run-in-terminal>false</run-in-terminal>
+    </mail-reader>
+    <mail-reader>
+      <_name>SeaMonkey Mail</_name>
+      <executable>seamonkey</executable>
+      <command>seamonkey -mail %s</command>
+      <icon-name>seamonkey</icon-name>
       <run-in-terminal>false</run-in-terminal>
     </mail-reader>
     <mail-reader>
