@@ -44,6 +44,8 @@ gnome_settings_daemon_SOURCES =	\
 	gnome-settings-keyboard.c	\
 	gnome-settings-locate-pointer.c	\
 	gnome-settings-locate-pointer.h	\
+	gnome-settings-module.c		\
+	gnome-settings-module.h		\
 	gnome-settings-mouse.h		\
 	gnome-settings-mouse.c		\
 	gnome-settings-multimedia-keys.h \
