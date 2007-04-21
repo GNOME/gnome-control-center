@@ -799,16 +799,15 @@ about_me_setup_dialog (void)
 		if (error->code == E_BOOK_ERROR_PROTOCOL_NOT_SUPPORTED) {
 			about_me_error (NULL, _("There was an error while trying to get the addressbook information\n" \
 						"Evolution Data Server can't handle the protocol"));
+			g_clear_error (&error);
 			about_me_destroy (me);
 			return -1;
 		}	
 
-		me->create_self = TRUE;
-		
-		me->contact = e_contact_new ();
-
-		g_warning ("%s\n", error->message);
 		g_clear_error (&error);
+
+		me->create_self = TRUE;
+		me->contact = e_contact_new ();
 
 		if (me->book == NULL) {
 			me->book = e_book_new_system_addressbook (&error);
