@@ -33,5 +33,5 @@ INCLUDES = \
 	-DGNOMECC_GLADE_DIR="\"$(pkgdatadir)/glade\"" \
 	-DGNOMECC_KEYBINDINGS_DIR="\"$(pkgdatadir)/keybindings\""
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA)
-EXTRA_DIST = $(Glade_DATA)
+EXTRA_DIST = $(Glade_DATA) $(xml_in_files)
 

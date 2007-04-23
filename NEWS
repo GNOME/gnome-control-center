@@ -1,3 +1,119 @@
+gnome-control-center 2.19.1
+
+about-me:
+- Build fixes (Bastien Nocera)
+- Add image filter to file chooser (Kristof Vansant) (#424958)
+- Plug memory leaks (Jens Granseuer)
+
+at-properties:
+- Don't require GNOME Glade library (Kristof Vansant)
+
+background:
+- Don't require GNOME Glade library (Kristof Vansant)
+- Don't crash if the GConf schema is missing (Jens Granseuer) (#430253)
+- Fix initialization of the secondary colour picker (Jens Granseuer)
+- Replace deprecated GtkOptionMenu with GtkComboBox (Priit Laes) (#421199)
+- Fix scaling for WPTYPE_ZOOM (Erich Schubert) (#342356)
+
+default applications:
+- Added widgets for default media player (Priit Laes) (#362578)
+- Don't require GNOME Glade library (Kristof Vansant)
+- Added Seamonkey as web browser and mail reader (Rodrigo Moya)
+- Added widgets for default accessibility applications (George Kraft IV) (#350263)
+
+display:
+- Uppercase the rotation options (Jens Granseuer) (#410959)
+- Added 720x576 (PAL) to the list of valid resolutions (Jens Granseuer) (#325548)
+
+fonts:
+- Don't require GNOME Glade library (Kristof Vansant)
+
+keybindings:
+- Fix the patch from which we'd load the keybindings (Bastien Nocera)
+- Prepend the directory name before loading the files (Bastien Nocera) (#420796)
+- Remove metacity keybindings definitions (Bastien Nocera)
+
+keyboard:
+- Use a radio button instead of a chackbox to indicate the default
+  layout (Jns Granseuer) (#389469)
+- Use automatic instead of always scrollbar policy (Andreas Koehler) (#345884)
+- New version of the layout chooser, comboboxentry-based (Sergey Udaltsov)
+
+mouse:
+- Use automatic instead of always scrollbar policy (Andreas Koehler) (#345884)
+
+theme switcher:
+- Add filters for theme packages to the file chooser and mark the file chooser
+  title for translation (Kristof Vansant) (#424960)
+- Use OnlyShowIn=; to hide the theme installer from menus and menu editors
+  (Matthias Clasen) (#420154)
+
+windows:
+- Use GtkComboBox instead of GtkOptionMenu (Priit Laes) (#421210)
+
+shell:
+- Build libslab statically, to avoid conflicts with gnome-main-menu (Rodrigo Moya)
+
+settings daemon:
+- Added handler for media keybinding (Priit Laes) (#362578)
+- Don't crash if DBus connection is not available (Jens Granseuer) (#411504)
+- Don't set Emacs.mode-line.attributeBackground to avoid problems with emacs
+  22 (Jens Granseuer) (#416823)
+- Rebuild the media window if the state of composite has changed (Jens Granseuer)
+  (#408035)
+- Fix launch-app-in-terminal support (Priit Laes) (#362578)
+- Started refactoring of modules (Rodrigo Moya)
+- Also check registered directories for notification (Alexander Larsson)
+- Removed all settings not related to colour (Ross Burton) (#428615)
+- Try to figure out the DPI value from the X server or the user's GConf
+  settings (Federico Mena Quintero) (#217790 and #378338)
+
+general:
+- Rename module name to gnome-control-center (Rodrigo Moya)
+
+updated translations:
+- ar (Djihed Afifi)
+- cs (Jakub Friedl)
+- en_GB (David Lodge)
+- et (Priit Laes)
+- pt_BR (Leonardo Ferreira Fontenelle and Washington Lins)
+- sv (Daniel Nylander)
+- zh_CN (Funda Wang)
+------------------------------------------------------------------------------
+gnome-control-center 2.18.1
+
+sound:
+- Initialize threads earlier (Christian Persch) (#416239)
+- Fix option context translation (Christian Persch)
+- Fix button label alignment (Christian Persch) (#416238)
+- Ellipsize the device combo box (Matthias Clasen) (#425650)
+
+theme switcher:
+- Disable revert button when using theme engine defaults colors
+  (Frederic Crozat) (#417423)
+- Don't crash if the color string is mangled (Jens Granseuer)
+- Close small memory leak (Jens Granseuer)
+
+shell:
+- Build libslab statically to avoid conflicts with gnome-main-menu
+  (Rodrigo Moya)
+
+settings daemon:
+- Fix multimedia window appearing in a different position when shown for the
+  first time (Jens Granseuer) (#400915)
+
+updated translations:
+- ca (Josep Puigdemont i Casamajó)
+- da (Peter Bach)
+- dz (Pema Geyleg)
+- es (Claudio Saavedra)
+- gl (Ignacio Casal Quinteiro)
+- it (Alessio Dessì)
+- mk (Jovan Naumovski)
+- nl (Vincent van Adrighem)
+- pt_BR (Leonardo Ferreira Fontenelle)
+- uk (Maxim Dziumanenko)
+------------------------------------------------------------------------------
 gnome-control-center 2.18.0
 
 about-me:
