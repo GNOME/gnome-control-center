@@ -99,6 +99,15 @@ gnome_settings_module_get_type (void)
 	return module_type;
 }
 
+GnomeSettingsModuleRunlevel
+gnome_settings_module_get_runlevel (GnomeSettingsModule *module)
+{
+	g_return_val_if_fail (GNOME_SETTINGS_IS_MODULE (module), GNOME_SETTINGS_MODULE_RUNLEVEL_NONE);
+	g_return_val_if_fail (CLASS (module)->get_runlevel != NULL, GNOME_SETTINGS_MODULE_RUNLEVEL_NONE);
+
+	return CLASS (module)->get_runlevel (module);
+}
+
 gboolean
 gnome_settings_module_initialize (GnomeSettingsModule *module, GConfClient *config_client)
 {

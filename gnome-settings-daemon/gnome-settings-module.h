@@ -45,6 +45,14 @@ typedef enum {
 	GNOME_SETTINGS_MODULE_STATUS_STOPPED
 } GnomeSettingsModuleStatus;
 
+typedef enum {
+	GNOME_SETTINGS_MODULE_RUNLEVEL_XSETTINGS,
+	GNOME_SETTINGS_MODULE_RUNLEVEL_GNOME_SETTINGS,
+	GNOME_SETTINGS_MODULE_RUNLEVEL_CORE_SERVICES,
+	GNOME_SETTINGS_MODULE_RUNLEVEL_SERVICES,
+	GNOME_SETTINGS_MODULE_RUNLEVEL_NONE
+} GnomeSettingsModuleRunlevel;
+
 struct _GnomeSettingsModule {
 	GObject parent;
 	GnomeSettingsModulePrivate *priv;
@@ -54,6 +62,7 @@ struct _GnomeSettingsModuleClass {
 	GObjectClass parent_class;
 
 	/* virtual methods */
+	GnomeSettingsModuleRunlevel (* get_runlevel) (GnomeSettingsModule *module);
 	gboolean (* initialize) (GnomeSettingsModule *module, GConfClient *config_client);
 	gboolean (* start) (GnomeSettingsModule *module);
 	gboolean (* stop) (GnomeSettingsModule *module);
