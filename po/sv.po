@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-04-21 13:42+0200\n"
-"PO-Revision-Date: 2007-04-21 13:41+0100\n"
+"POT-Creation-Date: 2007-04-23 23:49+0200\n"
+"PO-Revision-Date: 2007-04-23 23:48+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -77,16 +77,16 @@ msgstr ""
 "Det inträffade ett fel vid försöket att hämta adressboksinformationen\n"
 "Evolution Data Server kan inte hantera protokollet"
 
-#: ../capplets/about-me/gnome-about-me.c:822
+#: ../capplets/about-me/gnome-about-me.c:821
 msgid "Unable to open address book"
 msgstr "Kan inte öppna adressboken"
 
-#: ../capplets/about-me/gnome-about-me.c:834
+#: ../capplets/about-me/gnome-about-me.c:833
 msgid "Unknown login ID, the user database might be corrupted"
 msgstr "Okänt inloggningsid, användardatabasen kan vara trasig"
 
-#: ../capplets/about-me/gnome-about-me.c:864
-#: ../capplets/about-me/gnome-about-me.c:866
+#: ../capplets/about-me/gnome-about-me.c:863
+#: ../capplets/about-me/gnome-about-me.c:865
 #, c-format
 msgid "About %s"
 msgstr "Om %s"
@@ -490,6 +490,7 @@ msgid "_Screenreader"
 msgstr "_Skärmläsare"
 
 #: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:2
+#: ../capplets/default-applications/default-applications-accessibility.desktop.in.in.h:1
 msgid "Enable support for GNOME assistive technologies at login"
 msgstr "Aktivera stöd för GNOME-hjälpmedelsfunktioner vid inloggning"
 
@@ -1058,8 +1059,12 @@ msgstr "Välj en bild."
 msgid "_Select"
 msgstr "_Välj"
 
+#: ../capplets/default-applications/default-applications-accessibility.desktop.in.in.h:2
+msgid "Preferred Assistive Technology"
+msgstr "Föredragen hjälpmedelsteknik"
+
 #: ../capplets/default-applications/default-applications.desktop.in.in.h:1
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:18
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:21
 msgid "Preferred Applications"
 msgstr "Föredragna program"
 
@@ -1067,29 +1072,57 @@ msgstr "Föredragna program"
 msgid "Select your default applications"
 msgstr "Välj dina standardprogram"
 
+#: ../capplets/default-applications/gnome-at-mobility.desktop.in.in.h:1
+msgid "Mobility AT"
+msgstr "Rörlighetshjälpteknik"
+
+#: ../capplets/default-applications/gnome-at-mobility.desktop.in.in.h:2
+msgid "Run the the preferred GNOME Mobility Assitive Technology"
+msgstr "Kör den föredragna hjälpmedelstekniken för nedsatt rörlighet"
+
+#: ../capplets/default-applications/gnome-at-session.desktop.in.in.h:1
+msgid "Autostart the preferred AT"
+msgstr "Starta automatiskt den föredragna hjälptekniken"
+
+#: ../capplets/default-applications/gnome-at-session.desktop.in.in.h:2
+msgid "Visual"
+msgstr "Visuell"
+
+#: ../capplets/default-applications/gnome-at-visual.desktop.in.in.h:1
+msgid "Run the the preferred GNOME Visual Assistive Technology"
+msgstr "Kör den föredragna hjälpmedelstekniken för nedsatt syn"
+
+#: ../capplets/default-applications/gnome-at-visual.desktop.in.in.h:2
+msgid "Visual AT"
+msgstr "Visuell hjälpteknik"
+
 #: ../capplets/default-applications/gnome-da-capplet.c:80
-#: ../capplets/default-applications/gnome-da-capplet.c:107
-#: ../capplets/default-applications/gnome-da-capplet.c:152
-#: ../capplets/default-applications/gnome-da-capplet.c:198
-#: ../capplets/default-applications/gnome-da-capplet.c:255
-#: ../capplets/default-applications/gnome-da-capplet.c:306
-#: ../capplets/default-applications/gnome-da-capplet.c:357
-#: ../capplets/default-applications/gnome-da-capplet.c:692
-#: ../capplets/default-applications/gnome-da-capplet.c:714
+#: ../capplets/default-applications/gnome-da-capplet.c:113
+#: ../capplets/default-applications/gnome-da-capplet.c:132
+#: ../capplets/default-applications/gnome-da-capplet.c:151
+#: ../capplets/default-applications/gnome-da-capplet.c:197
+#: ../capplets/default-applications/gnome-da-capplet.c:243
+#: ../capplets/default-applications/gnome-da-capplet.c:300
+#: ../capplets/default-applications/gnome-da-capplet.c:351
+#: ../capplets/default-applications/gnome-da-capplet.c:402
+#: ../capplets/default-applications/gnome-da-capplet.c:453
+#: ../capplets/default-applications/gnome-da-capplet.c:502
+#: ../capplets/default-applications/gnome-da-capplet.c:895
+#: ../capplets/default-applications/gnome-da-capplet.c:917
 #, c-format
 msgid "Error saving configuration: %s"
 msgstr "Fel vid sparandet av konfiguration: %s"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:854
+#: ../capplets/default-applications/gnome-da-capplet.c:1098
 #: ../capplets/sound/sound-properties-capplet.c:312
 msgid "Custom"
 msgstr "Anpassad"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:874
+#: ../capplets/default-applications/gnome-da-capplet.c:1118
 msgid "Could not load the main interface"
 msgstr "Kunde inte läsa in huvudgränssnittet"
 
-#: ../capplets/default-applications/gnome-da-capplet.c:876
+#: ../capplets/default-applications/gnome-da-capplet.c:1120
 msgid "Please make sure that the applet is properly installed"
 msgstr "Se till att panelprogrammet är korrekt installerat"
 
@@ -1106,63 +1139,79 @@ msgid "<b>Mail Reader</b>"
 msgstr "<b>E-postläsare</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:4
+msgid "<b>Mobility</b>"
+msgstr "<b>Rörlighet</b>"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:5
 msgid "<b>Multimedia Player</b>"
 msgstr "<b>Multimediaspelare</b>"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:5
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:6
 msgid "<b>Terminal Emulator</b>"
 msgstr "<b>Terminalemulator</b>"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:6
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:7
 msgid "<b>Text Editor</b>"
 msgstr "<b>Textredigerare</b>"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:7
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:8
 msgid "<b>Video Player</b>"
 msgstr "<b>Videouppspelare</b>"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:8
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:9
+msgid "<b>Visual</b>"
+msgstr "<b>Visuell</b>"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:10
 msgid "<b>Web Browser</b>"
 msgstr "<b>Webbläsare</b>"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:10
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:11
+msgid "Accessibility"
+msgstr "Tillgänglighet"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:13
 #, no-c-format
 msgid "All %s occurrences will be replaced with actual link"
 msgstr "Alla %s träffar kommer att ersättas med den faktiska länken"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:11
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:14
 msgid "Co_mmand:"
 msgstr "Ko_mmando:"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:12
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:15
 msgid "E_xecute flag:"
 msgstr "E_xecute-flagga:"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:13
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:16
 msgid "Internet"
 msgstr "Internet"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:14
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:17
 msgid "Multimedia"
 msgstr "Multimedia"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:15
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:18
 msgid "Open link in new _tab"
 msgstr "Öppna länk i ny _flik"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:16
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:19
 msgid "Open link in new _window"
 msgstr "Öppna länk i _nytt fönster"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:17
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:20
 msgid "Open link with web browser _default"
 msgstr "Öppna länk med standard_webbläsaren"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:19
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:22
+msgid "Run at st_art"
+msgstr "Kör vid uppst_art"
+
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:23
 msgid "Run in t_erminal"
 msgstr "Kör i en t_erminal"
 
-#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:20
+#: ../capplets/default-applications/gnome-default-applications-properties.glade.h:24
 msgid "System"
 msgstr "System"
 
@@ -1179,170 +1228,214 @@ msgid "Claws Mail"
 msgstr "Claws Mail"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:4
+msgid "Dasher"
+msgstr "Dasher"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:5
 msgid "Debian Sensible Browser"
 msgstr "Vettig Debian-webbläsare"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:5
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:6
 msgid "Debian Terminal Emulator"
 msgstr "Debian-terminalemulator"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:6
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:7
 msgid "ETerm"
 msgstr "ETerm"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:7
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:8
 msgid "Encompass"
 msgstr "Encompass"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:8
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:9
 msgid "Epiphany Web Browser"
 msgstr "Webbläsaren Epiphany"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:9
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:10
 msgid "Evolution Mail Reader"
 msgstr "E-postläsaren Evolution"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:10
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:11
 msgid "Evolution Mail Reader 1.4"
 msgstr "E-postläsaren Evolution 1.4"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:11
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:12
 msgid "Evolution Mail Reader 1.5"
 msgstr "E-postläsaren Evolution 1.5"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:12
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:13
 msgid "Evolution Mail Reader 1.6"
 msgstr "E-postläsaren Evolution 1.6"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:13
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:14
 msgid "Evolution Mail Reader 2.0"
 msgstr "E-postläsaren Evolution 2.0"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:14
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:15
 msgid "Evolution Mail Reader 2.2"
 msgstr "E-postläsaren Evolution 2.2"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:15
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:16
 msgid "Evolution Mail Reader 2.4"
 msgstr "E-postläsaren Evolution 2.4"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:16
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:17
 msgid "Firebird"
 msgstr "Firebird"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:17
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:18
 msgid "Firefox"
 msgstr "Firefox"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:18
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:19
+msgid "GNOME Magnifier without Screen Reader"
+msgstr "GNOME-förstorare utan skärmläsare"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:20
+msgid "GNOME OnScreen Keyboard"
+msgstr "GNOME OnScreen Keyboard"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:21
 msgid "GNOME Terminal"
 msgstr "GNOME-terminal"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:19
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:22
 msgid "Galeon"
 msgstr "Galeon"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:20
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:23
+msgid "Gnopernicus"
+msgstr "Gnopernicus"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:24
+msgid "Gnopernicus with Magnifier"
+msgstr "Gnopernicus med skärmförstorare"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:25
 msgid "Icedove"
 msgstr "Icedove"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:21
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:26
 msgid "Iceweasel"
 msgstr "Iceweasel"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:22
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:27
+msgid "KDE Magnifier without Screen Reader"
+msgstr "KDE-förstorare utan skärmläsare"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:28
 msgid "KMail"
 msgstr "KMail"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:23
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:29
 msgid "Konqueror"
 msgstr "Konqueror"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:24
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:30
 msgid "Links Text Browser"
 msgstr "Textläsaren Links"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:25
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:31
+msgid "Linux Screen Reader"
+msgstr "Linux Screen Reader"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:32
+msgid "Linux Screen Reader with Magnifier"
+msgstr "Linux Screen Reader med skärmförstorare"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:33
 msgid "Lynx Text Browser"
 msgstr "Textläsaren Lynx"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:26
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:34
 msgid "Mozilla"
 msgstr "Mozilla"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:27
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:35
 msgid "Mozilla 1.6"
 msgstr "Mozilla 1.6"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:28
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:36
 msgid "Mozilla Mail"
 msgstr "Mozilla Mail"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:29
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:37
 msgid "Mozilla Thunderbird"
 msgstr "Mozilla Thunderbird"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:30
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:38
 msgid "Muine Music Player"
 msgstr "Musikspelaren Muine"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:31
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:39
 msgid "Mutt"
 msgstr "Mutt"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:32
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:40
 msgid "NXterm"
 msgstr "NXterm"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:33
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:41
 msgid "Netscape Communicator"
 msgstr "Netscape Communicator"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:34
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:42
 msgid "Opera"
 msgstr "Opera"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:35
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:43
+msgid "Orca"
+msgstr "Orca"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:44
+msgid "Orca with Magnifier"
+msgstr "Orca med skärmförstorare"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:45
 msgid "RXVT"
 msgstr "RXVT"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:36
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:46
 msgid "Rhythmbox Music Player"
 msgstr "Musikspelaren Rhythmbox"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:37
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:47
 msgid "SeaMonkey"
 msgstr "SeaMonkey"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:38
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:48
 msgid "SeaMonkey Mail"
 msgstr "E-postklienten SeaMonkey"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:39
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:49
+msgid "Simple OnScreen Keyboard"
+msgstr "Enkelt skärmtangentbord"
+
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:50
 msgid "Standard XTerminal"
 msgstr "X-standardterminal"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:40
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:51
 msgid "Sylpheed"
 msgstr "Sylpheed"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:41
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:52
 msgid "Sylpheed-Claws"
 msgstr "Sylpheed-Claws"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:42
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:53
 msgid "Thunderbird"
 msgstr "Thunderbird"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:43
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:54
 msgid "Totem Movie Player"
 msgstr "Filmspelaren Totem"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:44
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:55
 msgid "W3M Text Browser"
 msgstr "Textläsaren W3M"
 
-#: ../capplets/default-applications/gnome-default-applications.xml.in.h:45
+#: ../capplets/default-applications/gnome-default-applications.xml.in.h:56
 msgid "aterm"
 msgstr "aterm"
 
@@ -4241,9 +4334,6 @@ msgstr "Ställer in standardtemat"
 
 #~ msgid "modmap file list"
 #~ msgstr "modmap-fillista"
-
-#~ msgid "Assistive Technology Support"
-#~ msgstr "Stöd för hjälpmedelsfunktioner"
 
 #~ msgid "Break reminder"
 #~ msgstr "Pauspåminnare"
