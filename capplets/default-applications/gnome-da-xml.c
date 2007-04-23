@@ -133,6 +133,8 @@ gnome_da_xml_load_xml (GnomeDACapplet *capplet, const gchar * filename)
     GnomeDASimpleItem *mail_item;
     GnomeDASimpleItem *media_item;
     GnomeDATermItem *term_item;
+    GnomeDAVisualItem *visual_item;
+    GnomeDAMobilityItem *mobility_item;
 
     xml_doc = xmlParseFile (filename);
 
@@ -231,6 +233,48 @@ gnome_da_xml_load_xml (GnomeDACapplet *capplet, const gchar * filename)
 		}
 	    }
 	}
+	else if (!xmlStrncmp (section->name, "a11y-visual", 11)) {
+	    for (element = section->children; element != NULL; element = element->next) {
+		if (!xmlStrncmp (element->name, "visual", 6)) {
+		    executable = gnome_da_xml_get_string (element,"executable");
+		    if (is_executable_valid (executable)) {
+			visual_item = gnome_da_visual_item_new ();
+
+			visual_item->generic.name = gnome_da_xml_get_string (element, "name");
+			visual_item->generic.executable = executable;
+			visual_item->generic.command = gnome_da_xml_get_string (element, "command");
+			visual_item->generic.icon_name = gnome_da_xml_get_string (element, "icon-name");
+
+			visual_item->run_at_startup = gnome_da_xml_get_bool (element, "run-at-startup");
+
+			capplet->visual_ats = g_list_append (capplet->visual_ats, visual_item);
+		    } 
+                    else
+                        g_free (executable);
+		}
+	    }
+	}
+	else if (!xmlStrncmp (section->name, "a11y-mobility", 13)) {
+	    for (element = section->children; element != NULL; element = element->next) {
+		if (!xmlStrncmp (element->name, "mobility", 8)) {
+		    executable = gnome_da_xml_get_string (element,"executable");
+		    if (is_executable_valid (executable)) {
+			mobility_item = gnome_da_mobility_item_new ();
+
+			mobility_item->generic.name = gnome_da_xml_get_string (element, "name");
+			mobility_item->generic.executable = executable;
+			mobility_item->generic.command = gnome_da_xml_get_string (element, "command");
+			mobility_item->generic.icon_name = gnome_da_xml_get_string (element, "icon-name");
+
+			mobility_item->run_at_startup = gnome_da_xml_get_bool (element, "run-at-startup");
+
+			capplet->mobility_ats = g_list_append (capplet->mobility_ats, mobility_item);
+		    }
+                    else
+                        g_free (executable);
+		}
+	    }
+	}
     }
 
     xmlFreeDoc (xml_doc);
@@ -261,10 +305,15 @@ gnome_da_xml_free (GnomeDACapplet *capplet)
     g_list_foreach (capplet->mail_readers, (GFunc) gnome_da_simple_item_free, NULL);
     g_list_foreach (capplet->terminals, (GFunc) gnome_da_term_item_free, NULL);
     g_list_foreach (capplet->media_players, (GFunc) gnome_da_simple_item_free, NULL);
+    g_list_foreach (capplet->visual_ats, (GFunc) gnome_da_visual_item_free, NULL);
+    g_list_foreach (capplet->mobility_ats, (GFunc) gnome_da_mobility_item_free, NULL);
+
     g_list_free (capplet->web_browsers);
     g_list_free (capplet->mail_readers);
     g_list_free (capplet->terminals);
     g_list_free (capplet->media_players);
+    g_list_free (capplet->visual_ats);
+    g_list_free (capplet->mobility_ats);
 
     g_object_unref (capplet->xml);
     g_free (capplet);

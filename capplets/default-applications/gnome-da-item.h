@@ -28,6 +28,8 @@ typedef struct _GnomeDAItem GnomeDAItem;
 typedef struct _GnomeDAWebItem GnomeDAWebItem;
 typedef struct _GnomeDATermItem GnomeDATermItem;
 typedef struct _GnomeDASimpleItem GnomeDASimpleItem;
+typedef struct _GnomeDAVisualItem GnomeDAVisualItem;
+typedef struct _GnomeDAMobilityItem GnomeDAMobilityItem;
 
 struct _GnomeDAItem {
     gchar *name;
@@ -55,11 +57,25 @@ struct _GnomeDATermItem {
     gchar *exec_flag;
 };
 
+struct _GnomeDAVisualItem {
+    GnomeDAItem generic;
+    gboolean run_at_startup;
+};
+
+struct _GnomeDAMobilityItem {
+    GnomeDAItem generic;
+    gboolean run_at_startup;
+};
+
 GnomeDAWebItem* gnome_da_web_item_new (void);
 GnomeDATermItem* gnome_da_term_item_new (void);
 GnomeDASimpleItem* gnome_da_simple_item_new (void);
+GnomeDAVisualItem* gnome_da_visual_item_new (void);
+GnomeDAMobilityItem* gnome_da_mobility_item_new (void);
 void gnome_da_web_item_free (GnomeDAWebItem *item);
 void gnome_da_term_item_free (GnomeDATermItem *item);
 void gnome_da_simple_item_free (GnomeDASimpleItem *item);
+void gnome_da_visual_item_free (GnomeDAVisualItem *item);
+void gnome_da_mobility_item_free (GnomeDAMobilityItem *item);
 
 #endif

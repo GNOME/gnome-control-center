@@ -62,6 +62,14 @@
 #define DEFAULT_APPS_KEY_MEDIA_EXEC        DEFAULT_APPS_KEY_MEDIA_PATH"/exec"
 #define DEFAULT_APPS_KEY_MEDIA_NEEDS_TERM  DEFAULT_APPS_KEY_MEDIA_PATH"/needs_term"
 
+#define DEFAULT_APPS_KEY_VISUAL_PATH  "/desktop/gnome/applications/at/visual"
+#define DEFAULT_APPS_KEY_VISUAL_EXEC  DEFAULT_APPS_KEY_VISUAL_PATH"/exec"
+#define DEFAULT_APPS_KEY_VISUAL_STARTUP DEFAULT_APPS_KEY_VISUAL_PATH"/startup"
+
+#define DEFAULT_APPS_KEY_MOBILITY_PATH  "/desktop/gnome/applications/at/mobility"
+#define DEFAULT_APPS_KEY_MOBILITY_EXEC  DEFAULT_APPS_KEY_MOBILITY_PATH"/exec"
+#define DEFAULT_APPS_KEY_MOBILITY_STARTUP DEFAULT_APPS_KEY_MOBILITY_PATH"/startup"
+
 typedef struct _GnomeDACapplet GnomeDACapplet;
 
 struct _GnomeDACapplet {
@@ -75,6 +83,8 @@ struct _GnomeDACapplet {
     GtkWidget *mail_combo_box;
     GtkWidget *term_combo_box;
     GtkWidget *media_combo_box;
+    GtkWidget *visual_combo_box;
+    GtkWidget *mobility_combo_box;
 
     GtkWidget *web_browser_command_entry;
     GtkWidget *web_browser_command_label;
@@ -96,12 +106,22 @@ struct _GnomeDACapplet {
     GtkWidget *media_player_command_label;
     GtkWidget *media_player_terminal_checkbutton;
 
+    GtkWidget *visual_command_entry;
+    GtkWidget *visual_command_label;
+    GtkWidget *visual_startup_checkbutton;
+
+    GtkWidget *mobility_command_entry;
+    GtkWidget *mobility_command_label;
+    GtkWidget *mobility_startup_checkbutton;
+
     GConfClient *gconf;
 
     GList *web_browsers;
     GList *mail_readers;
     GList *terminals;
     GList *media_players;
+    GList *visual_ats;
+    GList *mobility_ats;
 };
 
 #endif

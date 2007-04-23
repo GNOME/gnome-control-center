@@ -51,6 +51,26 @@ gnome_da_term_item_new (void)
     return item;
 }
 
+GnomeDAVisualItem*
+gnome_da_visual_item_new (void)
+{
+    GnomeDAVisualItem *item = NULL;
+
+    item = g_new0 (GnomeDAVisualItem, 1);
+
+    return item;
+}
+
+GnomeDAMobilityItem*
+gnome_da_mobility_item_new (void)
+{
+    GnomeDAMobilityItem *item = NULL;
+
+    item = g_new0 (GnomeDAMobilityItem, 1);
+
+    return item;
+}
+
 void
 gnome_da_web_item_free (GnomeDAWebItem *item)
 {
@@ -97,3 +117,32 @@ gnome_da_term_item_free (GnomeDATermItem *item)
 
     g_free (item);
 }
+
+void
+gnome_da_visual_item_free (GnomeDAVisualItem *item)
+{
+    g_return_if_fail (item != NULL);
+
+    g_free (item->generic.name);
+    g_free (item->generic.executable);
+    g_free (item->generic.command);
+    g_free (item->generic.icon_name);
+    g_free (item->generic.icon_path);
+
+    g_free (item);
+}
+
+void
+gnome_da_mobility_item_free (GnomeDAMobilityItem *item)
+{
+    g_return_if_fail (item != NULL);
+
+    g_free (item->generic.name);
+    g_free (item->generic.executable);
+    g_free (item->generic.command);
+    g_free (item->generic.icon_name);
+    g_free (item->generic.icon_path);
+
+    g_free (item);
+}
+
