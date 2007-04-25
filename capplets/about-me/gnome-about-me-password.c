@@ -35,17 +35,7 @@
 #include <unistd.h>
 #include <errno.h>
 #include <string.h>
-#include <fcntl.h>
-#include <sys/ioctl.h>
 #include <sys/wait.h>
-#include <sys/poll.h>
-#include <termios.h>
-#if HAVE_PTY_H
-#include <pty.h>
-#endif
-#if HAVE_STROPTS_H
-#include <stropts.h>
-#endif
 
 #if __sun
 #include <sys/types.h>

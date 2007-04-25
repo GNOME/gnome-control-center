@@ -24,7 +24,7 @@ bin_PROGRAMS = gnome-about-me
 pixmapdir = $(pkgdatadir)/pixmaps
 pixmap_DATA = $(pixmap_files)
 
-gnome_about_me_LDADD = $(GNOMECC_CAPPLETS_LIBS) $(LIBEBOOK_LIBS) $(ABOUTME_LIBS)
+gnome_about_me_LDADD = $(GNOMECC_CAPPLETS_LIBS) $(LIBEBOOK_LIBS)
 gnome_about_me_LDFLAGS = -export-dynamic
 
 @INTLTOOL_DESKTOP_RULE@
