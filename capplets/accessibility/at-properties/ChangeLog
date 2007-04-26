@@ -1,3 +1,21 @@
+2007-04-26  George Kraft IV  <gk4@austin.ibm.com>
+
+	Fixes #386413
+
+	* main.c: (AT_STARTUP_DIR, AT_STARTUP_KEY, SR_PREFS_DIR),
+	(init_startup_state, at_startup_toggled, at_startup_update_ui,
+	(at_startup_changed): depricated the selection and startup
+	of hardcoded assistive technologies.
+
+	* main.c: (cb_at_preferences, cb_keyboard_preferences,
+	cb_login_preferences): added callbacks to launch preference dialogs.
+
+	* Makefile.am: depricated files at-startup-session.[ch]
+
+	* at-enable-dialog.glade: removed the checkbox selection of
+	assistive technologies and added a push button to launch
+	the Preferred Applications dialog to setup ATs.
+
 2007-04-08  Jens Granseuer  <jensgr@gmx.net>
 
 	Patch by: Kristof Vansant <de_lupus@pandora.be>

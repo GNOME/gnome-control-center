@@ -10,63 +10,8 @@
 
 #define ACCESSIBILITY_KEY       "/desktop/gnome/interface/accessibility"
 #define ACCESSIBILITY_KEY_DIR   "/desktop/gnome/interface"
-#define AT_STARTUP_DIR          "/desktop/gnome/accessibility/startup"
-#define AT_STARTUP_KEY          "/desktop/gnome/accessibility/startup/exec_ats"
-#define SR_PREFS_DIR            "/apps/gnopernicus/srcore"
 
 static AtStartupState at_startup_state, at_startup_state_initial;
-
-static void
-init_startup_state (GladeXML *dialog)
-{
-	GConfClient *client = gconf_client_get_default ();
-	
-	at_startup_state.flags = (gconf_client_get_bool (client, 
-							 ACCESSIBILITY_KEY, 
-							 NULL)) ? 1 : 0;
-
-	at_startup_state_init (&at_startup_state);
-
-	at_startup_state_initial.flags = at_startup_state.flags;
-	g_object_unref (client);
-
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("at_keyboard_toggle")),
-				      at_startup_state.enabled.osk);
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("at_screenreader_toggle")),
-				      at_startup_state.enabled.screenreader);
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("at_magnifier_toggle")),
-				      at_startup_state.enabled.magnifier);
-
-	gtk_widget_set_sensitive (WID ("at_keyboard_toggle"),
-				  at_startup_state.enabled.osk_installed);
-	gtk_widget_set_sensitive (WID ("at_screenreader_toggle"),
-				  at_startup_state.enabled.screenreader_installed);
-	gtk_widget_set_sensitive (WID ("at_magnifier_toggle"),
-				  at_startup_state.enabled.magnifier_installed);
-
-	if (at_startup_state.enabled.osk_installed &&
-	    at_startup_state.enabled.screenreader_installed &&
-	    at_startup_state.enabled.magnifier_installed) {
-		gtk_widget_hide (WID ("at_applications_warning_label"));
-		gtk_widget_hide (WID ("at_applications_hseparator"));
-	} else {
-		gchar *warning_label;
-
-		gtk_widget_show (WID ("at_applications_warning_label"));
-		gtk_widget_show (WID ("at_applications_hseparator"));
-		if (!at_startup_state.enabled.osk_installed &&
-		    !(at_startup_state.enabled.screenreader_installed ||
-		      at_startup_state.enabled.magnifier_installed)) {
-			warning_label = g_strdup_printf ("<i>%s</i>", _("No Assistive Technology is available on your system.  The 'gok' package must be installed in order to get on-screen keyboard support, and the 'orca' package must be installed for screenreading and magnifying capabilities."));
-		} else if (!at_startup_state.enabled.osk_installed) {
-			warning_label = g_strdup_printf ("<i>%s</i>", _("Not all available assistive technologies are installed on your system.  The 'gok' package must be installed in order to get on-screen keyboard support."));
-		} else {
-			warning_label = g_strdup_printf ("<i>%s</i>", _("Not all available assistive technologies are installed on your system.  The 'orca' package must be installed for screenreading and magnifying capabilities."));
-		}
-		gtk_label_set_markup (GTK_LABEL (WID ("at_applications_warning_label")), warning_label);
-		g_free (warning_label);
-	}
-}
 
 static GladeXML *
 create_dialog (void)
@@ -80,13 +25,31 @@ create_dialog (void)
 					  GTK_STOCK_QUIT, GTK_ICON_SIZE_BUTTON);
 
 		gtk_image_set_from_file (GTK_IMAGE (WID ("at_enable_image")),
-					 PIXMAPDIR "/at-support.png");
+					 PIXMAPDIR "/at-startup.png");
 
 		gtk_image_set_from_file (GTK_IMAGE (WID ("at_applications_image")),
-					 PIXMAPDIR "/at-startup.png");
+					 PIXMAPDIR "/at-support.png");
 	}
 
 	return dialog;
+}
+
+static void
+cb_at_preferences (GtkDialog *dialog, gint response_id)
+{
+	g_spawn_command_line_async("gnome-default-applications-properties", NULL);
+}
+
+static void
+cb_keyboard_preferences (GtkDialog *dialog, gint response_id)
+{
+	g_spawn_command_line_async("gnome-accessibility-keyboard-properties", NULL);
+}
+
+static void
+cb_login_preferences (GtkDialog *dialog, gint response_id)
+{
+	g_spawn_command_line_async("gdmsetup", NULL);
 }
 
 static void
@@ -114,30 +77,10 @@ static void
 close_logout_update (GladeXML *dialog)
 {
 	GConfClient *client = gconf_client_get_default ();
-	gboolean has_changed = 
-		(at_startup_state.flags != at_startup_state_initial.flags) && 
-		gconf_client_get_bool (client, ACCESSIBILITY_KEY, NULL);
+	gboolean has_changed = gconf_client_get_bool (client, ACCESSIBILITY_KEY, NULL);
 
 	gtk_widget_set_sensitive (WID ("at_close_logout_button"), has_changed);
 	g_object_unref (client);
-}
-
-static void
-at_startup_toggled (GtkToggleButton *toggle_button,
-		    GladeXML        *dialog)
-{
-	if (toggle_button == GTK_TOGGLE_BUTTON (WID ("at_keyboard_toggle"))) {
-		at_startup_state.enabled.osk = gtk_toggle_button_get_active (toggle_button);
-	}
-	else if (toggle_button == GTK_TOGGLE_BUTTON (WID ("at_magnifier_toggle"))) {
-		at_startup_state.enabled.magnifier = gtk_toggle_button_get_active (toggle_button);
-	}
-	else if (toggle_button == GTK_TOGGLE_BUTTON (WID ("at_screenreader_toggle"))) {
-		at_startup_state.enabled.screenreader = gtk_toggle_button_get_active (toggle_button);
-	}
-	
-	at_startup_state_update (&at_startup_state);
-	close_logout_update (dialog);
 }
 
 static void
@@ -155,20 +98,6 @@ at_enable_toggled (GtkToggleButton *toggle_button,
 }
 
 static void
-at_startup_update_ui (GConfClient *client,
-		      GladeXML    *dialog)
-{
-	at_startup_state_init (&at_startup_state);
-  
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("at_keyboard_toggle")),
-				      at_startup_state.enabled.osk);	
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("at_screenreader_toggle")),
-				      at_startup_state.enabled.screenreader);	
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("at_magnifier_toggle")),
-				      at_startup_state.enabled.magnifier);	
-}
-
-static void
 at_enable_update  (GConfClient *client,
 		   GladeXML    *dialog)
 {
@@ -177,18 +106,7 @@ at_enable_update  (GConfClient *client,
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("at_enable_toggle")),
 				      is_enabled);
 	
-	gtk_widget_set_sensitive (WID ("at_applications_frame"), is_enabled);
-}
-
-static void
-at_startup_changed (GConfClient *client,
-		    guint        cnxn_id,
-		    GConfEntry  *entry,
-		    gpointer     user_data)
-{
-	at_startup_state_init (&at_startup_state);
-	at_startup_update_ui (client, user_data);
-	close_logout_update (user_data); 
+	gtk_widget_set_sensitive (WID ("at_pref_button"), is_enabled);
 }
 
 static void
@@ -228,36 +146,18 @@ setup_dialog (GladeXML *dialog)
 				 at_enable_changed,
 				 dialog, NULL, NULL);
 	
-	gconf_client_add_dir (client, AT_STARTUP_DIR, 
-			      GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
+	g_signal_connect (G_OBJECT (WID("at_pref_button")),
+			  "clicked",
+			  G_CALLBACK (cb_at_preferences), NULL);
 
-	gconf_client_add_dir (client, SR_PREFS_DIR, 
-			      GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
+	g_signal_connect (G_OBJECT (WID("keyboard_button")),
+			  "clicked",
+			  G_CALLBACK (cb_keyboard_preferences), NULL);
 
-	gconf_client_notify_add (client, AT_STARTUP_DIR,
-				 at_startup_changed,
-				 dialog, NULL, NULL);
-	
-	gconf_client_notify_add (client, SR_PREFS_DIR,
-				 at_startup_changed,
-				 dialog, NULL, NULL);
-	
-	widget = WID ("at_keyboard_toggle");
+	g_signal_connect (G_OBJECT (WID("login_button")),
+			  "clicked",
+			  G_CALLBACK (cb_login_preferences), NULL);
 
-	g_signal_connect (widget, "toggled",
-			  G_CALLBACK (at_startup_toggled), 
-			  dialog);
-	
-	widget = WID ("at_magnifier_toggle");
-	g_signal_connect (widget, "toggled",
-			  G_CALLBACK (at_startup_toggled), 
-			  dialog);
-	
-	widget = WID ("at_screenreader_toggle");
-	g_signal_connect (widget, "toggled",
-			  G_CALLBACK (at_startup_toggled), 
-			  dialog);
-	
 	widget = WID ("at_properties_dialog");
 	capplet_set_icon (widget, "gnome-settings-accessibility-technologies");
 	
@@ -290,7 +190,6 @@ main (int argc, char *argv[])
 	dialog = create_dialog ();
 
 	if (dialog) {
-		init_startup_state (dialog);
 
 		setup_dialog (dialog);
 

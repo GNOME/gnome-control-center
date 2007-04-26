@@ -2,9 +2,7 @@ bin_PROGRAMS = gnome-at-properties
 
 gnome_at_properties_LDADD = $(AT_CAPPLET_LIBS) $(GNOMECC_CAPPLETS_LIBS) $(top_builddir)/capplets/common/libcommon.la
 gnome_at_properties_SOURCES = \
-	main.c		\
-	at-startup-session.h	\
-	at-startup-session.c
+	main.c
 gnome_at_properties_LDFLAGS = -export-dynamic
 
 @INTLTOOL_DESKTOP_RULE@
