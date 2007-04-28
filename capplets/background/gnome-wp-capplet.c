@@ -546,27 +546,29 @@ static void gnome_wp_remove_wallpaper (GtkWidget * widget,
 				       GnomeWPCapplet * capplet) {
   GtkTreeIter iter;
   GtkTreeModel * model;
-  GtkTreePath * first;
   GtkTreeSelection * selection;
-  gchar * wpfile;
 
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (capplet->treeview));
   if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
     GnomeWPItem * item;
+    gchar * wpfile;
+    GtkTreePath * path;
 
     gtk_tree_model_get (model, &iter, 2, &wpfile, -1);
 
     item = g_hash_table_lookup (capplet->wphash, wpfile);
     item->deleted = TRUE;
-
-    gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
-
     g_free (wpfile);
+
+    if (gtk_list_store_remove (GTK_LIST_STORE (model), &iter))
+      path = gtk_tree_model_get_path (model, &iter);
+    else
+      path = gtk_tree_path_new_first ();
+
+    gtk_tree_view_set_cursor (GTK_TREE_VIEW (capplet->treeview),
+                              path, NULL, FALSE);
+    gtk_tree_path_free (path);
   }
-  first = gtk_tree_path_new_first ();
-  gtk_tree_view_set_cursor (GTK_TREE_VIEW (capplet->treeview),
-			    first, NULL, FALSE);
-  gtk_tree_path_free (first);
 }
 
 static gboolean gnome_wp_load_stuffs (void * data) {
