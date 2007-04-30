@@ -21,6 +21,7 @@
 #include <gtk/gtk.h>
 #include <glade/glade.h>
 #include <libgnomevfs/gnome-vfs.h>
+#include <config.h>
 
 #define WID(x) (glade_xml_get_widget (data->xml, x))
 

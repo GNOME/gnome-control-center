@@ -28,10 +28,8 @@
 #include <libgnomeui/gnome-ui-init.h>
 /* ---------------------------------- */
 
-#define VERSION "0.0"
-
 static AppearanceData *
-init (int argc, char **argv)
+init_appearance_data (int argc, char **argv)
 {
   AppearanceData *data = NULL;
   gchar *gladefile;
@@ -66,7 +64,7 @@ main (int argc, char **argv)
   GnomeProgram *program;
 
   /* init */
-  data = init (argc, argv);
+  data = init_appearance_data (argc, argv);
   if (!data)
     return 1;
 
@@ -81,14 +79,19 @@ main (int argc, char **argv)
 
   /* init tabs */
   themes_init (data);
+  /*
+   * fonts_init (data);
+   * desktop_init (data);
+   * etc...
+   */
 
+  /* prepare the main window */
   w = WID ("appearance_window");
   gtk_widget_show_all (w);
   g_signal_connect (G_OBJECT (w), "delete-event", (GCallback) gtk_main_quit, NULL);
 
-
+  /* start the mainloop */
   gtk_main ();
-
 
   /* free stuff */
   g_object_unref (data->xml);
