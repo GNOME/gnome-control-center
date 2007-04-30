@@ -1,0 +1,112 @@
+#include "appearance.h"
+#include "gnome-theme-info.h"
+#include "theme-thumbnail.h"
+#include "gnome-theme-apply.h"
+#include <libwindow-settings/gnome-wm-manager.h>
+
+enum {
+  THEME_NAME_COLUMN,
+  THEME_PIXBUF_COLUMN,
+};
+
+/* Theme functions */
+void theme_changed_func (gpointer uri, AppearanceData *data);
+
+/* GUI Callbacks */
+void theme_save_cb (GtkWidget *button, AppearanceData *data);
+void theme_open_cb (GtkWidget *button, AppearanceData *data);
+void theme_delete_cb (GtkWidget *button, AppearanceData *data);
+void theme_activated_cb (GtkWidget *icon_view, GtkTreePath *path, AppearanceData *data);
+
+void
+themes_init (AppearanceData *data)
+{
+  GtkWidget *w;
+  GList *theme_list, *l;
+  GtkListStore *theme_store;
+
+  /* initialise some stuff */
+  gnome_theme_init (NULL);
+  gnome_wm_manager_init ();
+
+  /* connect button signals */
+  g_signal_connect (G_OBJECT (WID ("theme_save")), "clicked", (GCallback) theme_save_cb, data);
+  g_signal_connect (G_OBJECT (WID ("theme_open")), "clicked", (GCallback) theme_open_cb, data);
+  g_signal_connect (G_OBJECT (WID ("theme_delete")), "clicked", (GCallback) theme_delete_cb, data);
+
+  /* connect theme list signals */
+  g_signal_connect (G_OBJECT (WID ("theme_list")), "item-activated", (GCallback) theme_activated_cb, data);
+
+  /* set up theme list */
+  theme_store = gtk_list_store_new (2, G_TYPE_STRING, GDK_TYPE_PIXBUF);
+
+  /* Temporary measure to fill the themes list.
+   * This should be replace with asynchronous calls.
+   */
+  theme_list = gnome_theme_meta_info_find_all ();
+  gnome_theme_info_register_theme_change ((GFunc)theme_changed_func, data);
+  for (l = theme_list; l; l = g_list_next (l))
+  {
+    gchar *name = ((GnomeThemeMetaInfo *)l->data)->name;
+    if (name)
+    {
+      GdkPixbuf *pixbuf = generate_theme_thumbnail (l->data, TRUE);
+      gtk_list_store_insert_with_values (theme_store, NULL, 0,
+          THEME_NAME_COLUMN, name,
+          THEME_PIXBUF_COLUMN, pixbuf,
+          -1);
+    }
+  }
+
+  w = WID ("theme_list");
+  gtk_icon_view_set_model (GTK_ICON_VIEW (w), GTK_TREE_MODEL (theme_store));
+
+}
+
+/** Theme Callbacks **/
+
+void
+theme_changed_func (gpointer uri, AppearanceData *data)
+{
+  /* TODO: add/change/remove themes from the model as appropriate */
+}
+
+
+/** GUI Callbacks **/
+
+void
+theme_activated_cb (GtkWidget *icon_view, GtkTreePath *path, AppearanceData *data)
+{
+  GtkTreeModel *model;
+  GtkTreeIter iter;
+  GnomeThemeMetaInfo *theme = NULL;
+  gchar *name;
+
+  model = gtk_icon_view_get_model (GTK_ICON_VIEW (icon_view));
+  gtk_tree_model_get_iter (model, &iter, path);
+  gtk_tree_model_get (model, &iter, THEME_NAME_COLUMN, &name, -1);
+
+  theme = gnome_theme_meta_info_find (name);
+  if (theme)
+    gnome_meta_theme_set (theme);
+  g_free (theme);
+  g_free (name);
+}
+
+void
+theme_save_cb (GtkWidget *button, AppearanceData *data)
+{
+  /* TODO: Save the current settings as a new theme */
+}
+
+void
+theme_open_cb (GtkWidget *button, AppearanceData *data)
+{
+  /* TODO: Install a new theme */
+}
+
+void
+theme_delete_cb (GtkWidget *button, AppearanceData *data)
+{
+  /* TODO: Delete the selected theme */
+}
