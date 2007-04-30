@@ -26,6 +26,9 @@ xmldir       = $(pkgdatadir)/keybindings
 xml_in_files = 00-multimedia-key.xml.in 01-desktop-key.xml.in
 xml_DATA     = $(xml_in_files:.xml.in=.xml)
 
+pkgconfigdir = $(datadir)/pkgconfig
+pkgconfig_DATA = gnome-keybindings.pc
+
 INCLUDES = \
 	$(GNOMECC_CAPPLETS_CFLAGS) \
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
@@ -33,5 +36,5 @@ INCLUDES = \
 	-DGNOMECC_GLADE_DIR="\"$(pkgdatadir)/glade\"" \
 	-DGNOMECC_KEYBINDINGS_DIR="\"$(pkgdatadir)/keybindings\""
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA)
-EXTRA_DIST = $(Glade_DATA) $(xml_in_files)
+EXTRA_DIST = $(Glade_DATA) $(xml_in_files) gnome-keybindings.pc.in
 
