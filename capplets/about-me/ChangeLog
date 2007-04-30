@@ -1,3 +1,10 @@
+2007-04-30  Bastien Nocera  <hadess@hadess.net>
+
+	* gnome-about-me.c: (about_me_update_photo): Use g_file_set_contents
+	instead of a single fwrite to write the ~/.face image, also set the
+	default permission to be 0644, even if the umask is more permissive,
+	otherwise GDM won't show the icon in the chooser (Closes: #433898)
+
 2007-04-27  Rodrigo Moya <rodrigo@gnome-db.org>
 
 	* gnome-about-me.desktop.in.in: renamed Bugzilla product.

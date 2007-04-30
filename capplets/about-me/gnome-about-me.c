@@ -23,6 +23,7 @@
 #  include <config.h>
 #endif
 
+#include <glib/gstdio.h>
 #include <gnome.h>
 #include <pwd.h>
 #include <libgnomevfs/gnome-vfs.h>
@@ -452,7 +453,7 @@ about_me_update_photo (GnomeAboutMe *me)
 	GladeXML      *dialog;	
 	EContactPhoto *photo;
 	gchar         *file;
-	FILE	      *fp;
+	GError        *error;
 
 	guchar 	      *data;
 	gsize 	       length;
@@ -515,12 +516,19 @@ about_me_update_photo (GnomeAboutMe *me)
 
 		/* Save the image for GDM */
 		/* FIXME: I would have to read the default used by the gdmgreeter program */
-		file = g_strdup_printf ("%s/.face", g_get_home_dir ());
-		fp = fopen (file, "wb");
-		fwrite (photo->data.inlined.data, 1, photo->data.inlined.length, fp);
-		fclose (fp);
+		error = NULL;
+		file = g_build_filename (g_get_home_dir (), ".face", NULL);
+		if (g_file_set_contents (file,
+					 photo->data.inlined.data,
+					 photo->data.inlined.length,
+					 &error) != FALSE) {
+			g_chmod (file, 0644);
+		} else {
+			g_warning ("Could not create %s: %s", file, error->message);
+			g_error_free (error);
+		}
 
-		g_free (file);	
+		g_free (file);
 
 		e_contact_photo_free (photo);
 
