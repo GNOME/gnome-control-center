@@ -1,5 +1,5 @@
 always_built_SUBDIRS =					\
-	common accessibility				\
+	common accessibility appearance			\
 	default-applications font			\
 	background keyboard mouse sound			\
 	theme-switcher ui-properties			\
