@@ -30,6 +30,34 @@
 
 #define VERSION "0.0"
 
+static AppearanceData *
+init (int argc, char **argv)
+{
+  AppearanceData *data = NULL;
+  gchar *gladefile;
+  GladeXML *ui;
+
+  g_thread_init (NULL);
+  theme_thumbnail_factory_init (argc, argv);
+  gtk_init (&argc, &argv);
+  gnome_vfs_init ();
+  activate_settings_daemon ();
+
+  /* set up the data */
+  gladefile = g_build_filename (GNOMECC_GLADE_DIR, "appearance.glade", NULL);
+  ui = glade_xml_new (gladefile, NULL, NULL);
+  g_free (gladefile);
+
+  if (ui) {
+    data = g_new (AppearanceData, 1);
+    data->xml = ui;
+    data->argc = argc;
+    data->argv = argv;
+  }
+
+  return data;
+}
+
 int
 main (int argc, char **argv)
 {
@@ -38,16 +66,9 @@ main (int argc, char **argv)
   GnomeProgram *program;
 
   /* init */
-  theme_thumbnail_factory_init (argc, argv);
-  gtk_init (&argc, &argv);
-  gnome_vfs_init ();
-  activate_settings_daemon ();
-
-  /* set up the data */
-  data = g_new0 (AppearanceData, 1);
-  data->xml = glade_xml_new (GLADEDIR "appearance.glade", NULL, NULL);
-  data->argc = argc;
-  data->argv = argv;
+  data = init (argc, argv);
+  if (!data)
+    return 1;
 
   /* this appears to be required for gnome_wm_manager_init (), which is called
    * inside gnome_meta_theme_set ();
@@ -69,9 +90,10 @@ main (int argc, char **argv)
   gtk_main ();
 
 
-
   /* free stuff */
+  g_object_unref (data->xml);
   g_free (data);
+  g_object_unref (program);
 
   return 0;
 }

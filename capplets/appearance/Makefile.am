@@ -19,7 +19,7 @@ INCLUDES   = 				\
 	-I$(top_srcdir)			\
 	$(METACITY_CFLAGS)		\
 	$(GNOMECC_CAPPLETS_CFLAGS)	\
-	-DGLADEDIR=\""$(gladedir)"\"	\
+	-DGNOMECC_GLADE_DIR=\""$(gladedir)"\"	\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""
 
