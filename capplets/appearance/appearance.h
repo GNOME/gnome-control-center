@@ -32,7 +32,4 @@ typedef struct {
   int argc;
   char **argv;
   GladeXML *xml;
-
-  /* ui */
-  GSList *peditors;
 } AppearanceData;

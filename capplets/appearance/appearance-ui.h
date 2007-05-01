@@ -19,4 +19,3 @@
  */
 
 void ui_init (AppearanceData *data);
-void ui_shutdown (AppearanceData *data);

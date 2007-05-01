@@ -97,7 +97,6 @@ main (int argc, char **argv)
   gtk_main ();
 
   /* free stuff */
-  ui_shutdown (data);
   g_object_unref (data->client);
   g_object_unref (data->xml);
   g_free (data);

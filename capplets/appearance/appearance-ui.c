@@ -187,7 +187,6 @@ button_press_block_cb (GtkWidget *toolbar,
 void
 ui_init (AppearanceData *data)
 {
-  GSList *peds = NULL;
   GObject *peditor;
   char *toolbar_style;
 
@@ -197,14 +196,12 @@ ui_init (AppearanceData *data)
   peditor = gconf_peditor_new_boolean
     (NULL, "/desktop/gnome/interface/can_change_accels",
      WID ("menu_accel_toggle"), NULL);
-  g_slist_append (peds, peditor);
 
   peditor = gconf_peditor_new_boolean
     (NULL, "/desktop/gnome/interface/menus_have_icons",
      WID ("menu_icons_toggle"), NULL);
   g_signal_connect (peditor, "value_changed",
 		    G_CALLBACK (menus_have_icons_cb), data);
-  g_slist_append (peds, peditor);
   
   set_have_icons (data,
     gconf_client_get_bool (data->client,
@@ -219,7 +216,6 @@ ui_init (AppearanceData *data)
      NULL);
   g_signal_connect (peditor, "value_changed", 
 		    G_CALLBACK (toolbar_style_cb), data);
-  g_slist_append (peds, peditor);
 
   g_signal_connect (G_OBJECT (WID ("toolbar_handlebox")),
 		    "button_press_event",
@@ -240,13 +236,4 @@ ui_init (AppearanceData *data)
   /* no ui for detachable toolbars */
   g_signal_connect (G_OBJECT (data->client), "value_changed",
 		    G_CALLBACK (toolbar_detachable_cb), data);
-
-  data->peditors = peds;
-}
-
-void
-ui_shutdown (AppearanceData *data)
-{
-  g_slist_foreach (data->peditors, (GFunc) g_object_unref, NULL);
-  g_slist_free (data->peditors);
 }
