@@ -986,10 +986,10 @@
                           </packing>
                         </child>
                         <child>
-                          <widget class="GtkOptionMenu" id="style_menu2">
+                          <widget class="GtkComboBox" id="style_menu2">
                             <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="label" translatable="yes">Zoom        </property>
+                            <property name="focus_on_click">True</property>
+                            <property name="items" translatable="yes">Zoom</property>
                           </widget>
                           <packing>
                             <property name="expand">False</property>
@@ -1090,10 +1090,10 @@
                   </packing>
                 </child>
                 <child>
-                  <widget class="GtkOptionMenu" id="color_menu2">
+                  <widget class="GtkComboBox" id="color_menu2">
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="label" translatable="yes">Solid Color  </property>
+                    <property name="focus_on_click">True</property>
+                    <property name="label" translatable="yes">Solid Color</property>
                   </widget>
                   <packing>
                     <property name="expand">False</property>
@@ -1238,47 +1238,13 @@
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkOptionMenu" id="toolbar_style_omenu">
+                              <widget class="GtkComboBox" id="toolbar_style_select">
                                 <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-
-				<child internal-child="menu">
-				  <widget class="GtkMenu" id="toolbar_style_menu">
-				    <property name="visible">True</property>
-
-				    <child>
-				      <widget class="GtkMenuItem" id="tb_style_text_below_icons">
-					<property name="visible">True</property>
-					<property name="label" translatable="yes">Text below icons</property>
-					<property name="use_underline">True</property>
-				      </widget>
-				    </child>
-
-				    <child>
-				      <widget class="GtkMenuItem" id="tb_style_text_beside_icons">
-					<property name="visible">True</property>
-					<property name="label" translatable="yes">Text beside icons</property>
-					<property name="use_underline">True</property>
-				      </widget>
-				    </child>
-
-				    <child>
-				      <widget class="GtkMenuItem" id="tb_style_icons_only">
-					<property name="visible">True</property>
-					<property name="label" translatable="yes">Icons only</property>
-					<property name="use_underline">True</property>
-				      </widget>
-				    </child>
-
-				    <child>
-				      <widget class="GtkMenuItem" id="tb_style_text_only">
-					<property name="visible">True</property>
-					<property name="label" translatable="yes">Text only</property>
-					<property name="use_underline">True</property>
-				      </widget>
-				    </child>
-				  </widget>
-			        </child>
+                                <property name="focus_on_click">True</property>
+				<property name="items" translatable="yes">Text below items
+Text beside items
+Icons only
+Text only</property>
                               </widget>
                               <packing>
                                 <property name="expand">False</property>

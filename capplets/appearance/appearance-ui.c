@@ -208,9 +208,9 @@ ui_init (AppearanceData *data)
 			   "/desktop/gnome/interface/menus_have_icons",
 			   NULL));
 
-  peditor = gconf_peditor_new_select_menu
+  peditor = gconf_peditor_new_combo_box
     (NULL, "/desktop/gnome/interface/toolbar_style",
-     WID ("toolbar_style_omenu"),
+     WID ("toolbar_style_select"),
      "conv-to-widget-cb", toolbar_to_widget,
      "conv-from-widget-cb", toolbar_from_widget,
      NULL);
