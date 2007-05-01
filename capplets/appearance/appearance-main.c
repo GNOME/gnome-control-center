@@ -20,6 +20,7 @@
 
 #include "appearance.h"
 #include "appearance-themes.h"
+#include "appearance-ui.h"
 #include "theme-thumbnail.h"
 #include "activate-settings-daemon.h"
 
@@ -80,6 +81,7 @@ main (int argc, char **argv)
 
   /* init tabs */
   themes_init (data);
+  ui_init (data);
   /*
    * fonts_init (data);
    * desktop_init (data);
@@ -95,6 +97,7 @@ main (int argc, char **argv)
   gtk_main ();
 
   /* free stuff */
+  ui_shutdown (data);
   g_object_unref (data->client);
   g_object_unref (data->xml);
   g_free (data);

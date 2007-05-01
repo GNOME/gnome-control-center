@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2007 The GNOME Foundation
- * Written by Thomas Wood <thos@gnome.org>
+ * Written by Jens Granseuer <jensgr@gmx.net>
  * All Rights Reserved
  *
  * This program is free software; you can redistribute it and/or modify
@@ -18,21 +18,5 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#include "config.h"
-
-#include <gtk/gtk.h>
-#include <glade/glade.h>
-#include <libgnomevfs/gnome-vfs.h>
-#include <gconf/gconf-client.h>
-
-#define WID(x) (glade_xml_get_widget (data->xml, x))
-
-typedef struct {
-  GConfClient *client;
-  int argc;
-  char **argv;
-  GladeXML *xml;
-
-  /* ui */
-  GSList *peditors;
-} AppearanceData;
+void ui_init (AppearanceData *data);
+void ui_shutdown (AppearanceData *data);

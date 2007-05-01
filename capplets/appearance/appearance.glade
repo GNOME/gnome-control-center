@@ -1193,7 +1193,7 @@
                         <property name="visible">True</property>
                         <property name="spacing">6</property>
                         <child>
-                          <widget class="GtkCheckButton" id="menu_icons_toggle2">
+                          <widget class="GtkCheckButton" id="menu_icons_toggle">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="label" translatable="yes">Show _icons in menus</property>
@@ -1207,22 +1207,7 @@
                           </packing>
                         </child>
                         <child>
-                          <widget class="GtkCheckButton" id="detachable_toolbars_toggle2">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="label" translatable="yes">Show icons in buttons</property>
-                            <property name="use_underline">True</property>
-                            <property name="active">True</property>
-                            <property name="draw_indicator">True</property>
-                          </widget>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <widget class="GtkCheckButton" id="menu_accel_toggle2">
+                          <widget class="GtkCheckButton" id="menu_accel_toggle">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="label" translatable="yes">_Editable menu shortcut keys</property>
@@ -1233,42 +1218,6 @@
                             <property name="expand">False</property>
                             <property name="fill">False</property>
                             <property name="position">2</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <widget class="GtkHBox" id="hbox3">
-                            <property name="visible">True</property>
-                            <property name="spacing">12</property>
-                            <child>
-                              <widget class="GtkLabel" id="label28">
-                                <property name="width_request">150</property>
-                                <property name="visible">True</property>
-                                <property name="label" translatable="yes">Toolbar Icon Size:      </property>
-                                <property name="use_underline">True</property>
-                                <property name="justify">GTK_JUSTIFY_CENTER</property>
-                              </widget>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">False</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="GtkOptionMenu" id="toolbar_style_omenu3">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="label" translatable="yes">Small              </property>
-                              </widget>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">False</property>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
-                          </widget>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
-                            <property name="position">3</property>
                           </packing>
                         </child>
                         <child>
@@ -1289,10 +1238,47 @@
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkOptionMenu" id="toolbar_style_omenu2">
+                              <widget class="GtkOptionMenu" id="toolbar_style_omenu">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="label" translatable="yes">Icons and Text  </property>
+
+				<child internal-child="menu">
+				  <widget class="GtkMenu" id="toolbar_style_menu">
+				    <property name="visible">True</property>
+
+				    <child>
+				      <widget class="GtkMenuItem" id="tb_style_text_below_icons">
+					<property name="visible">True</property>
+					<property name="label" translatable="yes">Text below icons</property>
+					<property name="use_underline">True</property>
+				      </widget>
+				    </child>
+
+				    <child>
+				      <widget class="GtkMenuItem" id="tb_style_text_beside_icons">
+					<property name="visible">True</property>
+					<property name="label" translatable="yes">Text beside icons</property>
+					<property name="use_underline">True</property>
+				      </widget>
+				    </child>
+
+				    <child>
+				      <widget class="GtkMenuItem" id="tb_style_icons_only">
+					<property name="visible">True</property>
+					<property name="label" translatable="yes">Icons only</property>
+					<property name="use_underline">True</property>
+				      </widget>
+				    </child>
+
+				    <child>
+				      <widget class="GtkMenuItem" id="tb_style_text_only">
+					<property name="visible">True</property>
+					<property name="label" translatable="yes">Text only</property>
+					<property name="use_underline">True</property>
+				      </widget>
+				    </child>
+				  </widget>
+			        </child>
                               </widget>
                               <packing>
                                 <property name="expand">False</property>
@@ -1362,14 +1348,14 @@
                           <widget class="GtkMenuBar" id="menubar3">
                             <property name="visible">True</property>
                             <child>
-                              <widget class="GtkMenuItem" id="File Menu2">
+                              <widget class="GtkMenuItem" id="File Menu">
                                 <property name="visible">True</property>
                                 <property name="label" translatable="yes">_File</property>
                                 <property name="use_underline">True</property>
                                 <child>
-                                  <widget class="GtkMenu" id="File Menu_menu2">
+                                  <widget class="GtkMenu" id="File Menu_menu">
                                     <child>
-                                      <widget class="GtkImageMenuItem" id="menu_item_11">
+                                      <widget class="GtkImageMenuItem" id="menu_item_1">
                                         <property name="visible">True</property>
                                         <property name="label" translatable="yes">_New</property>
                                         <property name="use_underline">True</property>
@@ -1383,7 +1369,7 @@
                                       </widget>
                                     </child>
                                     <child>
-                                      <widget class="GtkImageMenuItem" id="menu_item_12">
+                                      <widget class="GtkImageMenuItem" id="menu_item_2">
                                         <property name="visible">True</property>
                                         <property name="label" translatable="yes">_Open</property>
                                         <property name="use_underline">True</property>
@@ -1397,7 +1383,7 @@
                                       </widget>
                                     </child>
                                     <child>
-                                      <widget class="GtkImageMenuItem" id="menu_item_13">
+                                      <widget class="GtkImageMenuItem" id="menu_item_3">
                                         <property name="visible">True</property>
                                         <property name="label" translatable="yes">_Save</property>
                                         <property name="use_underline">True</property>
@@ -1416,7 +1402,7 @@
                                       </widget>
                                     </child>
                                     <child>
-                                      <widget class="GtkImageMenuItem" id="menu_item_14">
+                                      <widget class="GtkImageMenuItem" id="menu_item_4">
                                         <property name="visible">True</property>
                                         <property name="label" translatable="yes">_Print</property>
                                         <property name="use_underline">True</property>
@@ -1435,7 +1421,7 @@
                                       </widget>
                                     </child>
                                     <child>
-                                      <widget class="GtkImageMenuItem" id="menu_item_15">
+                                      <widget class="GtkImageMenuItem" id="menu_item_5">
                                         <property name="visible">True</property>
                                         <property name="label" translatable="yes">_Quit</property>
                                         <property name="use_underline">True</property>
@@ -1460,7 +1446,7 @@
                                 <child>
                                   <widget class="GtkMenu" id="edit1_menu2">
                                     <child>
-                                      <widget class="GtkImageMenuItem" id="cut3">
+                                      <widget class="GtkImageMenuItem" id="cut">
                                         <property name="visible">True</property>
                                         <property name="label" translatable="yes">C_ut</property>
                                         <property name="use_underline">True</property>
@@ -1474,7 +1460,7 @@
                                       </widget>
                                     </child>
                                     <child>
-                                      <widget class="GtkImageMenuItem" id="copy3">
+                                      <widget class="GtkImageMenuItem" id="copy">
                                         <property name="visible">True</property>
                                         <property name="label" translatable="yes">_Copy</property>
                                         <property name="use_underline">True</property>
@@ -1488,7 +1474,7 @@
                                       </widget>
                                     </child>
                                     <child>
-                                      <widget class="GtkImageMenuItem" id="paste3">
+                                      <widget class="GtkImageMenuItem" id="paste">
                                         <property name="visible">True</property>
                                         <property name="label" translatable="yes">_Paste</property>
                                         <property name="use_underline">True</property>
@@ -1512,14 +1498,14 @@
                           </packing>
                         </child>
                         <child>
-                          <widget class="GtkAlignment" id="toolbar_align2">
+                          <widget class="GtkAlignment" id="toolbar_align">
                             <property name="visible">True</property>
                             <child>
-                              <widget class="GtkHandleBox" id="toolbar_handlebox2">
+                              <widget class="GtkHandleBox" id="toolbar_handlebox">
                                 <property name="visible">True</property>
                                 <property name="shadow_type">GTK_SHADOW_OUT</property>
                                 <child>
-                                  <widget class="GtkToolbar" id="toolbar_toolbar2">
+                                  <widget class="GtkToolbar" id="toolbar_toolbar">
                                     <property name="visible">True</property>
                                     <property name="toolbar_style">GTK_TOOLBAR_BOTH</property>
                                     <child>
@@ -1544,7 +1530,7 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <widget class="GtkToolButton" id="save_button2">
+                                      <widget class="GtkToolButton" id="save_button">
                                         <property name="visible">True</property>
                                         <property name="tooltip" translatable="yes">Save File</property>
                                         <property name="stock_id">gtk-save</property>
