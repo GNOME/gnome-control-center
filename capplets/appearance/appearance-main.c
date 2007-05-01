@@ -48,6 +48,7 @@ init_appearance_data (int argc, char **argv)
 
   if (ui) {
     data = g_new (AppearanceData, 1);
+    data->client = gconf_client_get_default ();
     data->xml = ui;
     data->argc = argc;
     data->argv = argv;
@@ -94,6 +95,7 @@ main (int argc, char **argv)
   gtk_main ();
 
   /* free stuff */
+  g_object_unref (data->client);
   g_object_unref (data->xml);
   g_free (data);
   g_object_unref (program);

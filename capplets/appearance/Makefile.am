@@ -4,7 +4,9 @@ gnome_appearance_properties_SOURCES= \
 	appearance.h \
 	appearance-main.c \
 	appearance-themes.c \
-	appearance-themes.h
+	appearance-themes.h \
+	appearance-ui.c \
+	appearance-ui.h
 
 gnome_appearance_properties_LDADD = \
 	$(GNOMECC_CAPPLETS_LIBS) 					\
