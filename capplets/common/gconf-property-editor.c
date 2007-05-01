@@ -990,6 +990,125 @@ gconf_peditor_new_select_menu_with_enum	(GConfChangeSet *changeset,
 }
 
 static void
+peditor_combo_box_value_changed (GConfClient         *client,
+				   guint                cnxn_id,
+				   GConfEntry          *entry,
+				   GConfPropertyEditor *peditor) 
+{
+	GConfValue *value, *value_wid;
+
+	if (peditor->p->changeset != NULL)
+		gconf_change_set_remove (peditor->p->changeset, peditor->p->key);
+
+	value = gconf_entry_get_value (entry);
+
+	if (value != NULL) {
+		value_wid = peditor->p->conv_to_widget_cb (peditor, value);
+		gtk_combo_box_set_active (GTK_COMBO_BOX (peditor->p->ui_control), gconf_value_get_int (value_wid));
+		gconf_value_free (value_wid);
+	}
+}
+
+static void
+peditor_combo_box_widget_changed (GConfPropertyEditor *peditor,
+				  GtkComboBox         *combo_box)
+{
+	GConfValue *value, *value_wid;
+
+	if (!peditor->p->inited) return;
+	value_wid = gconf_value_new (GCONF_VALUE_INT);
+	gconf_value_set_int (value_wid, gtk_combo_box_get_active (combo_box));
+	value = peditor->p->conv_from_widget_cb (peditor, value_wid);
+	peditor_set_gconf_value (peditor, peditor->p->key, value);
+	g_signal_emit (peditor, peditor_signals[VALUE_CHANGED], 0, peditor->p->key, value);
+	gconf_value_free (value_wid);
+	gconf_value_free (value);
+}
+
+GObject *
+gconf_peditor_new_combo_box (GConfChangeSet *changeset,
+			     gchar          *key,
+			     GtkWidget      *combo_box,
+			     gchar          *first_property_name,
+			     ...)
+{
+	GObject *peditor;
+	va_list var_args;
+
+	g_return_val_if_fail (key != NULL, NULL);
+	g_return_val_if_fail (combo_box != NULL, NULL);
+	g_return_val_if_fail (GTK_IS_COMBO_BOX (combo_box), NULL);
+
+	va_start (var_args, first_property_name);
+
+	peditor = gconf_peditor_new
+		(key,
+		 (GConfClientNotifyFunc) peditor_combo_box_value_changed,
+		 changeset,
+		 G_OBJECT (combo_box),
+		 first_property_name,
+		 var_args, NULL);
+
+	va_end (var_args);
+
+	g_signal_connect_swapped (G_OBJECT (combo_box), "changed",
+				  (GCallback) peditor_combo_box_widget_changed, peditor);
+
+	return peditor;
+}
+
+GObject *
+gconf_peditor_new_combo_box_with_enum	(GConfChangeSet *changeset,
+					 gchar 	        *key,
+					 GtkWidget      *combo_box,
+					 GType          enum_type,
+					 gboolean	use_nick,
+					 gchar          *first_property_name,
+					 ...)
+{
+	GConfPropertyEditor *peditor;
+	GConfPropertyEditorEnumData *data;
+	va_list var_args;
+
+	g_return_val_if_fail (key != NULL, NULL);
+	g_return_val_if_fail (combo_box != NULL, NULL);
+	g_return_val_if_fail (GTK_IS_COMBO_BOX (combo_box), NULL);
+	g_return_val_if_fail (enum_type != G_TYPE_NONE, NULL);
+
+	data = g_new0 (GConfPropertyEditorEnumData, 1);
+	data->enum_type = enum_type;
+	data->use_nick = use_nick;
+
+	va_start (var_args, first_property_name);
+
+	peditor = GCONF_PROPERTY_EDITOR (
+		gconf_peditor_new
+		(key,
+		 (GConfClientNotifyFunc) peditor_combo_box_value_changed,
+		 changeset,
+		 G_OBJECT (combo_box),
+		 first_property_name,
+		 var_args,
+		 "conv-to-widget-cb",
+		 peditor_enum_conv_to_widget,
+		 "conv-from-widget-cb",
+		 peditor_enum_conv_from_widget,
+		 "data",
+		 data,
+		 "data-free-cb",
+		 g_free,
+		 NULL
+		 ));
+
+	va_end (var_args);
+	
+	g_signal_connect_swapped (G_OBJECT (combo_box), "changed",
+				  (GCallback) peditor_combo_box_widget_changed, peditor);
+
+	return G_OBJECT (peditor);
+}
+
+static void
 peditor_select_radio_value_changed (GConfClient         *client,
 				    guint                cnxn_id,
 				    GConfEntry          *entry,

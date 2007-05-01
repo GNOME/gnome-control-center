@@ -113,6 +113,21 @@ GObject *gconf_peditor_new_select_menu_with_enum	(GConfChangeSet *changeset,
 							 gchar          *first_property_name,
 							 ...);
 
+GObject *gconf_peditor_new_combo_box	(GConfChangeSet *changeset,
+					 gchar 	        *key,
+					 GtkWidget      *combo_box,
+					 gchar          *first_property_name,
+					 ...);
+
+
+GObject *gconf_peditor_new_combo_box_with_enum	(GConfChangeSet *changeset,
+						 gchar 	        *key,
+						 GtkWidget      *combo_box,
+						 GType          enum_type,
+						 gboolean  	use_nick,
+						 gchar          *first_property_name,
+						 ...);
+
 GObject *gconf_peditor_new_select_radio (GConfChangeSet          *changeset,
 					 gchar                   *key,
 					 GSList                  *radio_group,
