@@ -1163,6 +1163,7 @@ main (int argc, char *argv[])
   GnomeProgram *program;
   GladeXML *dialog;
 
+  g_thread_init (NULL);
   gtk_init (&argc, &argv);
 
   bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
@@ -1177,7 +1178,7 @@ main (int argc, char *argv[])
   activate_settings_daemon ();
 
   dialog = create_dialog ();
-  wm_common_register_window_manager_change ((GFunc)(reload_key_entries), dialog);
+  wm_common_register_window_manager_change ((GFunc) reload_key_entries, dialog);
   setup_dialog (dialog);
   
   gtk_main ();
