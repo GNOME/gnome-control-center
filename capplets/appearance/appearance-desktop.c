@@ -43,6 +43,21 @@ typedef enum {
   GNOME_WP_SCALE_TYPE_TILED
 } GnomeWPScaleType;
 
+enum {
+  TARGET_URI_LIST,
+  TARGET_URL,
+  TARGET_COLOR,
+  TARGET_BGIMAGE,
+  TARGET_BACKGROUND_RESET
+};
+
+static GtkTargetEntry drop_types[] = {
+  {"text/uri-list", 0, TARGET_URI_LIST},
+  /*  { "application/x-color", 0, TARGET_COLOR }, */
+  { "property/bgimage", 0, TARGET_BGIMAGE },
+  /*  { "x-special/gnome-reset-background", 0, TARGET_BACKGROUND_RESET }*/
+};
+
 static void
 scroll_to_item (AppearanceData *data,
                 GnomeWPItem * item)
@@ -136,14 +151,17 @@ static void
 wp_add_images (AppearanceData *data,
                GSList *images)
 {
-  /*GdkCursor * cursor;*/
-  GnomeWPItem * item;
+  GdkWindow *window;
+  GdkCursor *cursor;
+  GnomeWPItem *item;
 
+  window = (WID ("appearance_window"))->window;
+  
   item = NULL;
-/*  cursor = gdk_cursor_new_for_display (gdk_display_get_default (),
+  cursor = gdk_cursor_new_for_display (gdk_display_get_default (),
                                        GDK_WATCH);
-  gdk_window_set_cursor (capplet->window->window, cursor);
-  gdk_cursor_unref (cursor);*/
+  gdk_window_set_cursor (window, cursor);
+  gdk_cursor_unref (cursor);
 
   while (images != NULL)
   {
@@ -154,7 +172,7 @@ wp_add_images (AppearanceData *data,
     g_free (uri);
   }
 
-  /*gdk_window_set_cursor (capplet->window->window, NULL);*/
+  gdk_window_set_cursor (window, NULL);
 
   if (item != NULL)
   {
@@ -729,6 +747,47 @@ wp_tree_delete_event (GtkWidget *widget,
   gnome_wp_xml_save_list (data);
 }
 
+static void
+wp_dragged_image (GtkWidget *widget,
+                  GdkDragContext *context,
+                  gint x, gint y,
+                  GtkSelectionData *selection_data,
+                  guint info, guint time,
+                  AppearanceData *data)
+{
+
+  if (info == TARGET_URI_LIST || info == TARGET_BGIMAGE)
+  {
+    GList * uris;
+    GSList * realuris = NULL;
+
+    uris = gnome_vfs_uri_list_parse ((gchar *) selection_data->data);
+
+    if (uris != NULL && uris->data != NULL)
+    {
+      GdkWindow *window;
+      GdkCursor *cursor;
+
+      window = (WID ("appearance_window"))->window;
+      
+      cursor = gdk_cursor_new_for_display (gdk_display_get_default (),
+             GDK_WATCH);
+      gdk_window_set_cursor (window, cursor);
+      gdk_cursor_unref (cursor);
+
+      for (; uris != NULL; uris = uris->next)
+      {
+        realuris = g_slist_append (realuris,
+            g_strdup (gnome_vfs_uri_get_path (uris->data)));
+      }
+      
+      wp_add_images (data, realuris);
+      gdk_window_set_cursor (window, NULL);
+    }
+    gnome_vfs_uri_list_free (uris);
+  }
+}
+
 static gint
 wp_list_sort (GtkTreeModel *model,
               GtkTreeIter *a, GtkTreeIter *b,
@@ -887,11 +946,6 @@ wp_load_stuffs (void *user_data)
   g_free (imagepath);
   g_free (style);
 
-  /*if (data->uri_list)
-  {
-    wp_add_images (data, data->uri_list);
-  }*/
-
   return FALSE;
 }
 
@@ -965,6 +1019,12 @@ desktop_init (AppearanceData *data)
 
   gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (data->wp_model),
                                         2, GTK_SORT_ASCENDING);
+
+  gtk_drag_dest_set (GTK_WIDGET (data->wp_tree), GTK_DEST_DEFAULT_ALL, drop_types,
+                     sizeof (drop_types) / sizeof (drop_types[0]),
+                      GDK_ACTION_COPY | GDK_ACTION_MOVE);
+  g_signal_connect (G_OBJECT (data->wp_tree), "drag_data_received",
+                    G_CALLBACK (wp_dragged_image), data);
 
   data->wp_style_menu = WID ("wp_style_menu");
 
