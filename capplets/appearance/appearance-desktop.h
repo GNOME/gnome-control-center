@@ -18,37 +18,6 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#include "config.h"
 
-#include <glib.h>
-#include <gtk/gtk.h>
-#include <glade/glade.h>
-#include <libgnomevfs/gnome-vfs.h>
-#include <gconf/gconf-client.h>
-#include <libgnomeui/gnome-thumbnail.h>
+void desktop_init (AppearanceData *data);
 
-#define WID(x) (glade_xml_get_widget (data->xml, x))
-
-typedef struct {
-  GConfClient *client;
-  int argc;
-  char **argv;
-  GladeXML *xml;
-
-  /* desktop */
-  GHashTable *wp_hash;
-  GnomeThumbnailFactory *wp_thumbs;
-  GSList *uri_list;
-  GtkTreeView *wp_tree;
-  GtkTreeModel *wp_model;
-  GtkWidget *wp_scpicker;
-  GtkWidget *wp_pcpicker;
-  GtkWidget *wp_style_menu;
-  GtkWidget *wp_color_menu;
-  GtkWidget *wp_rem_button;
-  GtkWidget *wp_filesel;
-  GtkWidget *wp_image;
-
-  /* ui */
-  GSList *peditors;
-} AppearanceData;
