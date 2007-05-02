@@ -39,6 +39,6 @@ INCLUDES   = 				\
 	-DGNOMECC_GLADE_DIR=\""$(gladedir)"\"	\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\"" \
-  -DWALLPAPER_DATADIR=\""$(WALLPAPER_DATADIR)"\"
+	-DWALLPAPER_DATADIR=\""$(WALLPAPER_DATADIR)"\"
 
 EXTRA_DIST = $(glade_DATA)
