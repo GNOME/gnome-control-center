@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2007 The GNOME Foundation
- * Written by Thomas Wood <thos@gnome.org>
+ * Written by Denis Washington <denisw@svn.gnome.org>
  * All Rights Reserved
  *
  * This program is free software; you can redistribute it and/or modify
