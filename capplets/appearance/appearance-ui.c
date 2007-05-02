@@ -162,14 +162,12 @@ menus_have_icons_cb (GConfPropertyEditor *peditor,
 }
 
 static void
-toolbar_detachable_cb (GConfClient *client,
-		       const gchar *key,
-		       GConfValue *value,
+toolbar_detachable_cb (GConfClient    *client,
+		       guint           id,
+		       GConfEntry     *entry,
 		       AppearanceData *data)
 {
-  if (key != NULL &&
-      strcmp (key, "/desktop/gnome/interface/toolbar_detachable") == 0)
-    show_handlebar (data, gconf_value_get_bool (value));
+  show_handlebar (data, gconf_value_get_bool (entry->value));
 }
 
 /** GUI Callbacks **/
@@ -234,6 +232,8 @@ ui_init (AppearanceData *data)
   g_free (toolbar_style);
 
   /* no ui for detachable toolbars */
-  g_signal_connect (G_OBJECT (data->client), "value_changed",
-		    G_CALLBACK (toolbar_detachable_cb), data);
+  gconf_client_notify_add (data->client,
+			   "/desktop/gnome/interface/toolbar_detachable",
+                           (GConfClientNotifyFunc) toolbar_detachable_cb,
+                           data, NULL, NULL);
 }

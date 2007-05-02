@@ -1,3 +1,9 @@
+2007-05-02  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-ui.c: (toolbar_detachable_cb), (ui_init): use proper
+	GConf notification instead of hand-picking the correct signal for
+	detachable toolbar
+
 2007-05-02  Denis Washington  <denisw@svn.gnome.org>
 
 	* Makefile.am: fizz says: don't indent with spaces in Makefile.am.
@@ -30,7 +36,7 @@
 2007-05-01  Jens Granseuer  <jensgr@gmx.net>
 
 	* appearance-ui.c: (ui_init):
-	* appearance.glade: convert all instances GtkOptionMenu to
+	* appearance.glade: convert all instances of GtkOptionMenu to
 	GtkComboBox
 
 2007-05-01  Jens Granseuer  <jensgr@gmx.net>
