@@ -765,6 +765,7 @@ wp_tree_delete_event (GtkWidget *widget,
                       AppearanceData *data)
 {
   gnome_wp_xml_save_list (data);
+  g_object_unref (data->wp_thumbs);
 }
 
 static void
