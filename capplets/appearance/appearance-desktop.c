@@ -156,7 +156,7 @@ wp_add_images (AppearanceData *data,
   GnomeWPItem *item;
 
   window = (WID ("appearance_window"))->window;
-  
+
   item = NULL;
   cursor = gdk_cursor_new_for_display (gdk_display_get_default (),
                                        GDK_WATCH);
@@ -487,16 +487,42 @@ wp_remove_wallpaper (GtkWidget *widget,
 }
 
 static void
+wp_uri_changed (const gchar *uri,
+                AppearanceData *data)
+{
+  GtkTreeSelection * selection;
+  GtkTreeModel * model;
+  GtkTreeIter iter;
+  GnomeWPItem * item;
+  gchar * selected;
+
+  item = g_hash_table_lookup (data->wp_hash, uri);
+
+  selection = gtk_tree_view_get_selection (data->wp_tree);
+
+  if (gtk_tree_selection_get_selected (selection, &model, &iter))
+  {
+    gtk_tree_model_get (model, &iter, 2, &selected, -1);
+
+    if (strcmp (selected, uri) != 0)
+    {
+      if (item == NULL)
+        item = wp_add_image (data, uri);
+
+      scroll_to_item (data, item);
+    }
+
+    g_free (selected);
+  }
+}
+
+static void
 wp_file_changed (GConfClient *client, guint id,
                  GConfEntry *entry,
                  AppearanceData *data)
 {
-  GtkTreeSelection *selection;
-  GtkTreeModel *model;
-  GtkTreeIter iter;
-  GnomeWPItem *item;
-  gchar *wpfile, *selected;
-  const gchar * uri;
+  const gchar *uri;
+  gchar *wpfile;
 
   uri = gconf_value_get_string (entry->value);
 
@@ -505,42 +531,35 @@ wp_file_changed (GConfClient *client, guint id,
   else
     wpfile = g_filename_from_utf8 (uri, -1, NULL, NULL, NULL);
 
-  item = g_hash_table_lookup (data->wp_hash, wpfile);
+  wp_uri_changed (wpfile, data);
 
-  selection = gtk_tree_view_get_selection (data->wp_tree);
-
-  if (gtk_tree_selection_get_selected (selection, &model, &iter))
-  {
-    gtk_tree_model_get (model, &iter, 2, &selected, -1);
-
-    if (strcmp (selected, wpfile) != 0)
-    {
-      if (item != NULL)
-      {
-        scroll_to_item (data, item);
-      }
-      else
-      {
-        item = wp_add_image (data, wpfile);
-        scroll_to_item (data, item);
-      }
-    }
-
-    g_free (wpfile);
-    g_free (selected);
-  }
+  g_free (wpfile);
 }
 
 static void
 wp_options_changed (GConfClient *client, guint id,
                     GConfEntry *entry,
-                   AppearanceData *data)
+                    AppearanceData *data)
 {
   GtkTreeSelection *selection;
   GtkTreeModel *model;
   GtkTreeIter iter;
   GnomeWPItem *item;
+  const gchar *option;
   gchar *wpfile;
+
+  option = gconf_value_get_string (entry->value);
+
+  /* "none" means we don't use a background image */
+  if (option == NULL || !strcmp (option, "none"))
+  {
+    /* temporarily disconnect so we don't override settings when
+     * updating the selection */
+    data->wp_update_gconf = FALSE;
+    wp_uri_changed ("(none)", data);
+    data->wp_update_gconf = TRUE;
+    return;
+  }
 
   selection = gtk_tree_view_get_selection (data->wp_tree);
 
@@ -553,7 +572,7 @@ wp_options_changed (GConfClient *client, guint id,
     if (item != NULL)
     {
       g_free (item->options);
-      item->options = g_strdup (gconf_value_get_string (entry->value));
+      item->options = g_strdup (option);
       wp_option_menu_set (data, item->options, FALSE);
     }
 
@@ -718,7 +737,8 @@ wp_props_wp_selected (GtkTreeSelection *selection,
     gtk_widget_set_sensitive (data->wp_rem_button, FALSE);
   }
 
-  wp_props_wp_set (data);
+  if (data->wp_update_gconf)
+    wp_props_wp_set (data);
 }
 
 static void
@@ -769,7 +789,7 @@ wp_dragged_image (GtkWidget *widget,
       GdkCursor *cursor;
 
       window = (WID ("appearance_window"))->window;
-      
+
       cursor = gdk_cursor_new_for_display (gdk_display_get_default (),
              GDK_WATCH);
       gdk_window_set_cursor (window, cursor);
@@ -780,7 +800,7 @@ wp_dragged_image (GtkWidget *widget,
         realuris = g_slist_append (realuris,
             g_strdup (gnome_vfs_uri_get_path (uris->data)));
       }
-      
+
       wp_add_images (data, realuris);
       gdk_window_set_cursor (window, NULL);
     }
