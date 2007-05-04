@@ -67,7 +67,7 @@ themes_init (AppearanceData *data)
   gnome_theme_info_register_theme_change ((GFunc)theme_changed_func, data);
   for (l = theme_list; l; l = g_list_next (l))
   {
-    gchar *name = ((GnomeThemeMetaInfo *)l->data)->name;
+    gchar *name = ((GnomeThemeMetaInfo *)l->data)->readable_name;
     if (name)
     {
       GdkPixbuf *pixbuf = generate_theme_thumbnail (l->data, TRUE);
