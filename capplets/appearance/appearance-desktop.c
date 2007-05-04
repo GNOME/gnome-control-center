@@ -1114,7 +1114,7 @@ desktop_init (AppearanceData *data)
   gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (data->wp_filesel), filter);
 
   filter = gtk_file_filter_new ();
-  gtk_file_filter_set_name (filter, _("All Files"));
+  gtk_file_filter_set_name (filter, _("All files"));
   gtk_file_filter_add_pattern (filter, "*");
   gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (data->wp_filesel), filter);
 
