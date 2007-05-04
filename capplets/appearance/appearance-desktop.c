@@ -1050,7 +1050,7 @@ desktop_init (AppearanceData *data)
   data->wp_style_menu = glade_xml_get_widget (data->xml, "wp_style_menu");
 
   gtk_combo_box_append_text (GTK_COMBO_BOX (data->wp_style_menu), _("Centered"));
-  gtk_combo_box_append_text (GTK_COMBO_BOX (data->wp_style_menu), _("Fill Screen"));
+  gtk_combo_box_append_text (GTK_COMBO_BOX (data->wp_style_menu), _("Fill screen"));
   gtk_combo_box_append_text (GTK_COMBO_BOX (data->wp_style_menu), _("Scaled"));
   gtk_combo_box_append_text (GTK_COMBO_BOX (data->wp_style_menu), _("Zoom"));
   gtk_combo_box_append_text (GTK_COMBO_BOX (data->wp_style_menu), _("Tiled"));
@@ -1060,9 +1060,9 @@ desktop_init (AppearanceData *data)
 
   data->wp_color_menu = glade_xml_get_widget (data->xml, "wp_color_menu");
 
-  gtk_combo_box_append_text (GTK_COMBO_BOX (data->wp_color_menu), _("Solid Color"));
-  gtk_combo_box_append_text (GTK_COMBO_BOX (data->wp_color_menu), _("Horizontal Gradient"));
-  gtk_combo_box_append_text (GTK_COMBO_BOX (data->wp_color_menu), _("Vertical Gradient"));
+  gtk_combo_box_append_text (GTK_COMBO_BOX (data->wp_color_menu), _("Solid color"));
+  gtk_combo_box_append_text (GTK_COMBO_BOX (data->wp_color_menu), _("Horizontal gradient"));
+  gtk_combo_box_append_text (GTK_COMBO_BOX (data->wp_color_menu), _("Vertical gradient"));
 
   g_signal_connect (G_OBJECT (data->wp_color_menu), "changed",
                     G_CALLBACK (wp_shade_type_changed), data);
