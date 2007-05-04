@@ -20,6 +20,7 @@
 
 #include "appearance.h"
 #include "appearance-desktop.h"
+#include "appearance-font.h"
 #include "appearance-themes.h"
 #include "appearance-ui.h"
 #include "theme-thumbnail.h"
@@ -45,7 +46,7 @@ init_appearance_data (int argc, char **argv)
 
   /* set up the data */
   gladefile = g_build_filename (GNOMECC_GLADE_DIR, "appearance.glade", NULL);
-  ui = glade_xml_new (gladefile, NULL, NULL);
+  ui = glade_xml_new (gladefile, "appearance_window", NULL);
   g_free (gladefile);
 
   if (ui) {
@@ -83,12 +84,8 @@ main (int argc, char **argv)
   /* init tabs */
   themes_init (data);
   desktop_init (data);
+  font_init (data);
   ui_init (data);
-  /*
-   * fonts_init (data);
-   * desktop_init (data);
-   * etc...
-   */
 
   /* prepare the main window */
   w = glade_xml_get_widget (data->xml, "appearance_window");

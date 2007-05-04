@@ -1,12 +1,16 @@
+# This is used in GNOMECC_CAPPLETS_CFLAGS
+cappletname = appearance
 
 WALLPAPER_DATADIR = $(datadir)/gnome-background-properties
 
-bin_PROGRAMS=gnome-appearance-properties
+bin_PROGRAMS = gnome-appearance-properties
 
-gnome_appearance_properties_SOURCES= \
+gnome_appearance_properties_SOURCES = \
 	appearance.h \
 	appearance-desktop.c \
-	appearanced-desktop.h \
+	appearance-desktop.h \
+	appearance-font.c \
+	appearance-font.h \
 	appearance-main.c \
 	appearance-themes.c \
 	appearance-themes.h \
@@ -21,24 +25,31 @@ gnome_appearance_properties_SOURCES= \
 	gnome-wp-xml.c \
 	gnome-wp-xml.h
 
-
-
 gnome_appearance_properties_LDADD = \
 	$(GNOMECC_CAPPLETS_LIBS) 					\
+	$(FONT_CAPPLET_LIBS) 						\
 	$(METACITY_LIBS)						\
 	$(top_builddir)/libwindow-settings/libgnome-window-settings.la  \
 	$(top_builddir)/capplets/common/libcommon.la
+gnome_appearance_properties_LDFLAGS = -export-dynamic
 
 gladedir = $(pkgdatadir)/glade
 glade_DATA = appearance.glade
 
-INCLUDES   = 				\
-	-I$(top_srcdir)			\
+pixmapdir = $(pkgdatadir)/pixmaps
+pixmap_DATA =                                   \
+        subpixel-rgb.png                        \
+        subpixel-bgr.png                        \
+        subpixel-vrgb.png                       \
+        subpixel-vbgr.png
+
+INCLUDES = 				\
 	$(METACITY_CFLAGS)		\
 	$(GNOMECC_CAPPLETS_CFLAGS)	\
 	-DGNOMECC_GLADE_DIR=\""$(gladedir)"\"	\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\"" \
+	-DGNOMECC_PIXMAP_DIR="\"$(pixmapdir)\"" \
 	-DWALLPAPER_DATADIR=\""$(WALLPAPER_DATADIR)"\"
 
-EXTRA_DIST = $(glade_DATA)
+EXTRA_DIST = $(glade_DATA) $(pixmap_DATA)
