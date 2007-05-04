@@ -1,5 +1,16 @@
 2007-05-04  Thomas Wood  <thos@gnome.org>
 
+	* appearance-desktop.c: (wp_add_images), (wp_dragged_image),
+	(desktop_init):
+	* appearance-main.c: (main):
+	* appearance-themes.c: (themes_init):
+	* appearance-ui.c: (set_toolbar_style), (set_have_icons),
+	(ui_init):
+	* appearance.h:
+	Remove WID() macro, which has an incompatible definition in capplet-utils.h
+
+2007-05-04  Thomas Wood  <thos@gnome.org>
+
 	* appearance-themes.c: (themes_init): Use readable name rather than file name
 	in themes list
 

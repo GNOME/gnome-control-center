@@ -27,8 +27,6 @@
 #include <gconf/gconf-client.h>
 #include <libgnomeui/gnome-thumbnail.h>
 
-#define WID(x) (glade_xml_get_widget (data->xml, x))
-
 typedef struct {
   GConfClient *client;
   int argc;

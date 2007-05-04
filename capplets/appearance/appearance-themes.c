@@ -50,12 +50,12 @@ themes_init (AppearanceData *data)
   gnome_wm_manager_init ();
 
   /* connect button signals */
-  g_signal_connect (G_OBJECT (WID ("theme_save")), "clicked", (GCallback) theme_save_cb, data);
-  g_signal_connect (G_OBJECT (WID ("theme_open")), "clicked", (GCallback) theme_open_cb, data);
-  g_signal_connect (G_OBJECT (WID ("theme_delete")), "clicked", (GCallback) theme_delete_cb, data);
+  g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "theme_save")), "clicked", (GCallback) theme_save_cb, data);
+  g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "theme_open")), "clicked", (GCallback) theme_open_cb, data);
+  g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "theme_delete")), "clicked", (GCallback) theme_delete_cb, data);
 
   /* connect theme list signals */
-  g_signal_connect (G_OBJECT (WID ("theme_list")), "item-activated", (GCallback) theme_activated_cb, data);
+  g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "theme_list")), "item-activated", (GCallback) theme_activated_cb, data);
 
   /* set up theme list */
   theme_store = gtk_list_store_new (2, G_TYPE_STRING, GDK_TYPE_PIXBUF);
@@ -78,7 +78,7 @@ themes_init (AppearanceData *data)
     }
   }
 
-  w = WID ("theme_list");
+  w = glade_xml_get_widget (data->xml, "theme_list");
   gtk_icon_view_set_model (GTK_ICON_VIEW (w), GTK_TREE_MODEL (theme_store));
 
 }

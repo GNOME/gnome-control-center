@@ -155,7 +155,7 @@ wp_add_images (AppearanceData *data,
   GdkCursor *cursor;
   GnomeWPItem *item;
 
-  window = (WID ("appearance_window"))->window;
+  window = (glade_xml_get_widget (data->xml, "appearance_window"))->window;
 
   item = NULL;
   cursor = gdk_cursor_new_for_display (gdk_display_get_default (),
@@ -789,7 +789,7 @@ wp_dragged_image (GtkWidget *widget,
       GdkWindow *window;
       GdkCursor *cursor;
 
-      window = (WID ("appearance_window"))->window;
+      window = (glade_xml_get_widget (data->xml, "appearance_window"))->window;
 
       cursor = gdk_cursor_new_for_display (gdk_display_get_default (),
              GDK_WATCH);
@@ -1012,10 +1012,10 @@ desktop_init (AppearanceData *data)
                                                  G_TYPE_STRING,
                                                  G_TYPE_STRING));
 
-  g_signal_connect_after (G_OBJECT (WID ("appearance_window")), "delete-event",
+  g_signal_connect_after (G_OBJECT (glade_xml_get_widget (data->xml, "appearance_window")), "delete-event",
                           G_CALLBACK (wp_tree_delete_event), data);
 
-  data->wp_tree = GTK_TREE_VIEW (WID ("wp_tree"));
+  data->wp_tree = GTK_TREE_VIEW (glade_xml_get_widget (data->xml, "wp_tree"));
   gtk_tree_view_set_model (data->wp_tree, data->wp_model);
 
   column = gtk_tree_view_column_new ();
@@ -1047,7 +1047,7 @@ desktop_init (AppearanceData *data)
   g_signal_connect (G_OBJECT (data->wp_tree), "drag_data_received",
                     G_CALLBACK (wp_dragged_image), data);
 
-  data->wp_style_menu = WID ("wp_style_menu");
+  data->wp_style_menu = glade_xml_get_widget (data->xml, "wp_style_menu");
 
   gtk_combo_box_append_text (GTK_COMBO_BOX (data->wp_style_menu), _("Centered"));
   gtk_combo_box_append_text (GTK_COMBO_BOX (data->wp_style_menu), _("Fill Screen"));
@@ -1058,7 +1058,7 @@ desktop_init (AppearanceData *data)
   g_signal_connect (G_OBJECT (data->wp_style_menu), "changed",
                     G_CALLBACK (wp_scale_type_changed), data);
 
-  data->wp_color_menu = WID ("wp_color_menu");
+  data->wp_color_menu = glade_xml_get_widget (data->xml, "wp_color_menu");
 
   gtk_combo_box_append_text (GTK_COMBO_BOX (data->wp_color_menu), _("Solid Color"));
   gtk_combo_box_append_text (GTK_COMBO_BOX (data->wp_color_menu), _("Horizontal Gradient"));
@@ -1067,22 +1067,22 @@ desktop_init (AppearanceData *data)
   g_signal_connect (G_OBJECT (data->wp_color_menu), "changed",
                     G_CALLBACK (wp_shade_type_changed), data);
 
-  data->wp_scpicker = WID ("wp_scpicker");
+  data->wp_scpicker = glade_xml_get_widget (data->xml, "wp_scpicker");
 
   g_signal_connect (G_OBJECT (data->wp_scpicker), "color-set",
                     G_CALLBACK (wp_scolor_changed), data);
 
-  data->wp_pcpicker = WID ("wp_pcpicker");
+  data->wp_pcpicker = glade_xml_get_widget (data->xml, "wp_pcpicker");
 
   g_signal_connect (G_OBJECT (data->wp_pcpicker), "color-set",
                     G_CALLBACK (wp_scolor_changed), data);
 
-  data->wp_rem_button = WID ("wp_rem_button");
+  data->wp_rem_button = glade_xml_get_widget (data->xml, "wp_rem_button");
 
   g_signal_connect (G_OBJECT (data->wp_rem_button), "clicked",
                     G_CALLBACK (wp_remove_wallpaper), data);
 
-  g_signal_connect (G_OBJECT (WID ("wp_add_button")), "clicked",
+  g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "wp_add_button")), "clicked",
                     G_CALLBACK (wp_file_open_dialog), data);
 
   g_idle_add (wp_load_stuffs, data);
@@ -1094,7 +1094,7 @@ desktop_init (AppearanceData *data)
   wp_set_sensitivities (data);
 
   data->wp_filesel = gtk_file_chooser_dialog_new_with_backend (_("Add Wallpaper"),
-                     GTK_WINDOW (WID ("appearance_window")),
+                     GTK_WINDOW (glade_xml_get_widget (data->xml, "appearance_window")),
                      GTK_FILE_CHOOSER_ACTION_OPEN,
                      "gtk+",
                      GTK_STOCK_CANCEL,

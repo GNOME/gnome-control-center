@@ -91,7 +91,7 @@ main (int argc, char **argv)
    */
 
   /* prepare the main window */
-  w = WID ("appearance_window");
+  w = glade_xml_get_widget (data->xml, "appearance_window");
   gtk_widget_show_all (w);
   g_signal_connect (G_OBJECT (w), "delete-event", (GCallback) gtk_main_quit, NULL);
 
