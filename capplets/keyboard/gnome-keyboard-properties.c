@@ -51,6 +51,7 @@ create_dialog (void)
 {
 	GladeXML *dialog;
 	GtkSizeGroup *size_group;
+	GtkWidget *image;
 
 	dialog = glade_xml_new (GNOMECC_GLADE_DIR "/gnome-keyboard-properties.glade", "keyboard_dialog", NULL);
 
@@ -71,6 +72,15 @@ create_dialog (void)
 	gtk_size_group_add_widget (size_group, WID ("repeat_speed_scale"));
 	gtk_size_group_add_widget (size_group, WID ("cursor_blink_time_scale"));
 	g_object_unref (G_OBJECT (size_group));
+
+	image = gtk_image_new_from_stock (GTK_STOCK_JUMP_TO, GTK_ICON_SIZE_BUTTON);
+	gtk_button_set_image (GTK_BUTTON (WID ("accessibility_button")), image);
+
+	image = gtk_image_new_from_stock (GTK_STOCK_ADD, GTK_ICON_SIZE_BUTTON);
+	gtk_button_set_image (GTK_BUTTON (WID ("xkb_layouts_add")), image);
+
+	image = gtk_image_new_from_stock (GTK_STOCK_REFRESH, GTK_ICON_SIZE_BUTTON);
+	gtk_button_set_image (GTK_BUTTON (WID ("xkb_reset_to_defaults")), image);
 
 	return dialog;
 }
@@ -105,7 +115,7 @@ accessibility_button_clicked (GtkWidget *widget,
 {
 	GError *err = NULL;
 	if (!g_spawn_command_line_async ("gnome-accessibility-keyboard-properties", &err))
-		capplet_error_dialog (GTK_WINDOW (gtk_widget_get_toplevel (widget)), 
+		capplet_error_dialog (GTK_WINDOW (gtk_widget_get_toplevel (widget)),
 			_("There was an error launching the keyboard tool: %s"),
 			err);
 }
@@ -133,7 +143,7 @@ setup_dialog (GladeXML       *dialog,
 
 	/* load all the images */
 	capplet_init_stock_icons ();
-	
+
 	peditor = gconf_peditor_new_boolean
 		(changeset, "/desktop/gnome/peripherals/keyboard/repeat", WID ("repeat_toggle"), NULL);
 	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor), WID ("repeat_table"));
@@ -166,9 +176,9 @@ setup_dialog (GladeXML       *dialog,
 	gconf_peditor_new_boolean
 		(changeset, "/desktop/gnome/typing_break/allow_postpone", WID ("break_postponement_toggle"), NULL);
 	g_signal_connect (G_OBJECT (WID ("keyboard_dialog")), "response", (GCallback) dialog_response, changeset);
-	
+
 	gtk_label_set_use_markup (GTK_LABEL (GTK_BIN (WID ("break_enabled_toggle"))->child), TRUE);
-	
+
         setup_xkb_tabs(dialog,changeset);
 }
 
@@ -206,7 +216,7 @@ setup_accessibility (GladeXML *dialog, GConfChangeSet *changeset)
 #endif
 
 int
-main (int argc, char **argv) 
+main (int argc, char **argv)
 {
 	GConfClient    *client;
 	GConfChangeSet *changeset;
@@ -242,7 +252,7 @@ main (int argc, char **argv)
 			    NULL);
 
 	activate_settings_daemon ();
-	
+
 	client = gconf_client_get_default ();
 	gconf_client_add_dir (client, "/desktop/gnome/peripherals/keyboard", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 	gconf_client_add_dir (client, "/desktop/gnome/interface", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
