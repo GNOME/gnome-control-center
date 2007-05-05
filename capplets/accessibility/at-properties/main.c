@@ -11,7 +11,7 @@
 #define ACCESSIBILITY_KEY       "/desktop/gnome/interface/accessibility"
 #define ACCESSIBILITY_KEY_DIR   "/desktop/gnome/interface"
 
-static AtStartupState at_startup_state, at_startup_state_initial;
+static AtStartupState at_startup_state;
 
 static GladeXML *
 create_dialog (void)
@@ -21,8 +21,19 @@ create_dialog (void)
 	dialog = glade_xml_new (GLADEDIR "/at-enable-dialog.glade", "at_properties_dialog", NULL);
 
 	if (dialog) {
-		gtk_image_set_from_stock (GTK_IMAGE (WID ("at_close_and_logout_image")),
-					  GTK_STOCK_QUIT, GTK_ICON_SIZE_BUTTON);
+		GtkWidget *image;
+
+		image = gtk_image_new_from_stock (GTK_STOCK_QUIT, GTK_ICON_SIZE_BUTTON);
+		gtk_button_set_image (GTK_BUTTON (WID ("at_close_logout_button")), image);
+
+		image = gtk_image_new_from_stock (GTK_STOCK_JUMP_TO, GTK_ICON_SIZE_BUTTON);
+		gtk_button_set_image (GTK_BUTTON (WID ("at_pref_button")), image);
+
+		image = gtk_image_new_from_stock (GTK_STOCK_JUMP_TO, GTK_ICON_SIZE_BUTTON);
+		gtk_button_set_image (GTK_BUTTON (WID ("keyboard_button")), image);
+
+		image = gtk_image_new_from_stock (GTK_STOCK_JUMP_TO, GTK_ICON_SIZE_BUTTON);
+		gtk_button_set_image (GTK_BUTTON (WID ("login_button")), image);
 
 		gtk_image_set_from_file (GTK_IMAGE (WID ("at_enable_image")),
 					 PIXMAPDIR "/at-startup.png");
@@ -65,10 +76,10 @@ cb_dialog_response (GtkDialog *dialog, gint response_id)
 	else {
 	        g_message ("CLOSE AND LOGOUT!");
 		if (!(client = gnome_master_client ())) {
-			
+
 			gtk_main_quit ();
 		}
-		gnome_client_request_save (client, GNOME_SAVE_GLOBAL, TRUE, 
+		gnome_client_request_save (client, GNOME_SAVE_GLOBAL, TRUE,
 					   GNOME_INTERACT_ANY, FALSE, TRUE);
 	}
 }
@@ -84,12 +95,12 @@ close_logout_update (GladeXML *dialog)
 }
 
 static void
-at_enable_toggled (GtkToggleButton *toggle_button, 
+at_enable_toggled (GtkToggleButton *toggle_button,
 		   GladeXML        *dialog)
 {
 	GConfClient *client = gconf_client_get_default ();
 	gboolean is_enabled = gtk_toggle_button_get_active (toggle_button);
-	
+
 	gconf_client_set_bool (client, ACCESSIBILITY_KEY,
 			       is_enabled,
 			       NULL);
@@ -102,10 +113,10 @@ at_enable_update  (GConfClient *client,
 		   GladeXML    *dialog)
 {
 	gboolean is_enabled = gconf_client_get_bool (client, ACCESSIBILITY_KEY, NULL);
-	
+
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("at_enable_toggle")),
 				      is_enabled);
-	
+
 	gtk_widget_set_sensitive (WID ("at_pref_button"), is_enabled);
 }
 
@@ -116,7 +127,7 @@ at_enable_changed (GConfClient *client,
 		   gpointer     user_data)
 {
 	at_enable_update (client, user_data);
-	close_logout_update (user_data); 
+	close_logout_update (user_data);
 }
 
 static void
@@ -125,27 +136,27 @@ setup_dialog (GladeXML *dialog)
 	GConfClient *client;
 	GtkWidget *widget;
 	GObject *peditor;
-	
+
 	client = gconf_client_get_default ();
-	
-	gconf_client_add_dir (client, ACCESSIBILITY_KEY_DIR, 
+
+	gconf_client_add_dir (client, ACCESSIBILITY_KEY_DIR,
 			      GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
-	
+
 	widget = WID ("at_enable_toggle");
 	g_signal_connect (widget, "toggled",
-			  G_CALLBACK (at_enable_toggled),   
+			  G_CALLBACK (at_enable_toggled),
 			  dialog);
-	
+
 	peditor = gconf_peditor_new_boolean (NULL, ACCESSIBILITY_KEY,
 					     widget,
 					     NULL);
-	
+
 	at_enable_update (client, dialog);
-	
+
 	gconf_client_notify_add (client, ACCESSIBILITY_KEY_DIR,
 				 at_enable_changed,
 				 dialog, NULL, NULL);
-	
+
 	g_signal_connect (G_OBJECT (WID("at_pref_button")),
 			  "clicked",
 			  G_CALLBACK (cb_at_preferences), NULL);
@@ -160,13 +171,13 @@ setup_dialog (GladeXML *dialog)
 
 	widget = WID ("at_properties_dialog");
 	capplet_set_icon (widget, "gnome-settings-accessibility-technologies");
-	
+
 	g_signal_connect (G_OBJECT (widget),
 			  "response",
 			  G_CALLBACK (cb_dialog_response), NULL);
-	
+
 	gtk_widget_show (widget);
-	
+
 	g_object_unref (client);
 }
 
@@ -175,18 +186,18 @@ main (int argc, char *argv[])
 {
 	GnomeProgram *program;
 	GladeXML *dialog;
-	
+
 	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
-	
+
 	program = gnome_program_init ("gnome-at-properties", VERSION,
 				      LIBGNOMEUI_MODULE, argc, argv,
 				      GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
 				      NULL);
-	
+
 	activate_settings_daemon ();
-	
+
 	dialog = create_dialog ();
 
 	if (dialog) {
