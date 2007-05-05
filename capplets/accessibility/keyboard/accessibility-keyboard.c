@@ -225,12 +225,20 @@ setup_ranges (GladeXML *dialog, GConfChangeSet *changeset)
 static void
 setup_images (GladeXML *dialog)
 {
+	GtkWidget *image;
 	int i = G_N_ELEMENTS (features);
+
 	while (i-- > 0)
-		if (features [i].image != NULL) 
-			gtk_image_set_from_stock (GTK_IMAGE (WID (features [i].image)),	
-						  features [i].image_file, 
+		if (features [i].image != NULL)
+			gtk_image_set_from_stock (GTK_IMAGE (WID (features [i].image)),
+						  features [i].image_file,
 						  keyboard_capplet_icon_get_size ());
+
+	image = gtk_image_new_from_stock (GTK_STOCK_REVERT_TO_SAVED, GTK_ICON_SIZE_BUTTON);
+	gtk_button_set_image (GTK_BUTTON (WID ("load_CDE_file")), image);
+
+	image = gtk_image_new_from_stock (GTK_STOCK_JUMP_TO, GTK_ICON_SIZE_BUTTON);
+	gtk_button_set_image (GTK_BUTTON (WID ("launch_mouse_capplet")), image);
 }
 
 static void
