@@ -1,8 +1,6 @@
 # This is used in GNOMECC_CAPPLETS_CFLAGS
 cappletname = appearance
 
-WALLPAPER_DATADIR = $(datadir)/gnome-background-properties
-
 bin_PROGRAMS = gnome-appearance-properties
 
 gnome_appearance_properties_SOURCES = \
@@ -33,23 +31,32 @@ gnome_appearance_properties_LDADD = \
 	$(top_builddir)/capplets/common/libcommon.la
 gnome_appearance_properties_LDFLAGS = -export-dynamic
 
+@INTLTOOL_DESKTOP_RULE@
+
 gladedir = $(pkgdatadir)/glade
 glade_DATA = appearance.glade
 
 pixmapdir = $(pkgdatadir)/pixmaps
-pixmap_DATA =                                   \
-        subpixel-rgb.png                        \
-        subpixel-bgr.png                        \
-        subpixel-vrgb.png                       \
-        subpixel-vbgr.png
+pixmap_DATA =             \
+        subpixel-bgr.png  \
+        subpixel-rgb.png  \
+        subpixel-vbgr.png \
+        subpixel-vrgb.png
 
-INCLUDES = 				\
-	$(METACITY_CFLAGS)		\
-	$(GNOMECC_CAPPLETS_CFLAGS)	\
-	-DGNOMECC_GLADE_DIR=\""$(gladedir)"\"	\
-	-DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
-	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\"" \
-	-DGNOMECC_PIXMAP_DIR="\"$(pixmapdir)\"" \
-	-DWALLPAPER_DATADIR=\""$(WALLPAPER_DATADIR)"\"
+wallpaperdir = $(datadir)/gnome-background-properties
 
+desktopdir = $(datadir)/applications
+desktop_in_files = gnome-appearance-properties.desktop.in
+desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
+
+INCLUDES = 						\
+	$(METACITY_CFLAGS)				\
+	$(GNOMECC_CAPPLETS_CFLAGS)			\
+	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
+	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
+	-DGNOMECC_GLADE_DIR="\"$(gladedir)\""		\
+	-DGNOMECC_PIXMAP_DIR="\"$(pixmapdir)\""		\
+	-DWALLPAPER_DATADIR="\"$(wallpaperdir)\""
+
+CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(desktop_in_files) $(desktop_DATA)
 EXTRA_DIST = $(glade_DATA) $(pixmap_DATA)
