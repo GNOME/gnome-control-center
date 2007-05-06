@@ -25,6 +25,7 @@
 #include "appearance-ui.h"
 #include "theme-thumbnail.h"
 #include "activate-settings-daemon.h"
+#include "capplet-util.h"
 
 /* required for gnome_program_init(): */
 #include <libgnome/libgnome.h>
@@ -89,6 +90,7 @@ main (int argc, char **argv)
 
   /* prepare the main window */
   w = glade_xml_get_widget (data->xml, "appearance_window");
+  capplet_set_icon (w, "gnome-settings-theme");
   gtk_widget_show_all (w);
   g_signal_connect (G_OBJECT (w), "delete-event", (GCallback) gtk_main_quit, NULL);
 
