@@ -160,7 +160,7 @@ static GladeXML *
 create_dialog (void) 
 {
 	GladeXML *dialog;
-	GtkWidget *widget, *box, *view;
+	GtkWidget *widget, *box, *view, *image;
 
 	dialog = glade_xml_new (GNOMECC_GLADE_DIR "/sound-properties.glade", "sound_prefs_dialog", NULL);
 	widget = glade_xml_get_widget (dialog, "sound_prefs_dialog");
@@ -179,6 +179,18 @@ create_dialog (void)
 
 	gtk_image_set_from_file (GTK_IMAGE (WID ("bell_image")),
 				 GNOMECC_DATA_DIR "/pixmaps/visual-bell.png");
+
+	image = gtk_image_new_from_stock (GTK_STOCK_APPLY, GTK_ICON_SIZE_BUTTON);
+	gtk_button_set_image (GTK_BUTTON (WID ("sounds_playback_test")), image);
+
+	image = gtk_image_new_from_stock (GTK_STOCK_APPLY, GTK_ICON_SIZE_BUTTON);
+	gtk_button_set_image (GTK_BUTTON (WID ("music_playback_test")), image);
+
+	image = gtk_image_new_from_stock (GTK_STOCK_APPLY, GTK_ICON_SIZE_BUTTON);
+	gtk_button_set_image (GTK_BUTTON (WID ("chat_audio_playback_test")), image);
+
+	image = gtk_image_new_from_stock (GTK_STOCK_APPLY, GTK_ICON_SIZE_BUTTON);
+	gtk_button_set_image (GTK_BUTTON (WID ("chat_audio_capture_test")), image);
 
 	if (!CheckXKB()) {
 		gtk_widget_set_sensitive (WID ("bell_flash_alignment"), FALSE);
