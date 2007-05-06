@@ -163,6 +163,9 @@ create_dialog (void)
 	GtkWidget *widget, *box, *view, *image;
 
 	dialog = glade_xml_new (GNOMECC_GLADE_DIR "/sound-properties.glade", "sound_prefs_dialog", NULL);
+	if (dialog == NULL)
+	  return NULL;
+
 	widget = glade_xml_get_widget (dialog, "sound_prefs_dialog");
 
 	props = sound_properties_new ();
@@ -1013,7 +1016,7 @@ int
 main (int argc, char **argv) 
 {
 	GConfChangeSet *changeset;
-	GladeXML       *dialog = NULL;
+	GladeXML       *dialog;
 	GnomeProgram   *program;
  	GOptionContext *context;
 	gboolean apply_only = FALSE;
@@ -1058,20 +1061,23 @@ main (int argc, char **argv)
 	if (get_legacy) {
 		get_legacy_settings ();
 	} else {
-		changeset = gconf_change_set_new ();
 		dialog = create_dialog ();
-		setup_dialog (dialog, changeset);
-		setup_devices ();
 
-		dialog_win = WID ("sound_prefs_dialog");
-		g_signal_connect (dialog_win, "response", G_CALLBACK (dialog_response_cb), changeset);
-		g_signal_connect (dialog_win, "destroy", G_CALLBACK (gtk_main_quit), NULL);
-		capplet_set_icon (dialog_win, "gnome-settings-sound");
-		gtk_widget_show (dialog_win);
+		if (dialog) {
+			changeset = gconf_change_set_new ();
+			setup_dialog (dialog, changeset);
+			setup_devices ();
 
-		gtk_main ();
-		gconf_change_set_unref (changeset);
-		g_object_unref (dialog);
+			dialog_win = WID ("sound_prefs_dialog");
+			g_signal_connect (dialog_win, "response", G_CALLBACK (dialog_response_cb), changeset);
+			g_signal_connect (dialog_win, "destroy", G_CALLBACK (gtk_main_quit), NULL);
+			capplet_set_icon (dialog_win, "gnome-settings-sound");
+			gtk_widget_show (dialog_win);
+
+			gtk_main ();
+			gconf_change_set_unref (changeset);
+			g_object_unref (dialog);
+		}
 	}
 	
 	g_object_unref (gconf_client);
