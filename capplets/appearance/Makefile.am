@@ -52,6 +52,7 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 INCLUDES = 						\
 	$(METACITY_CFLAGS)				\
 	$(GNOMECC_CAPPLETS_CFLAGS)			\
+	$(FONT_CAPPLET_CFLAGS) \
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
 	-DGNOMECC_GLADE_DIR="\"$(gladedir)\""		\
