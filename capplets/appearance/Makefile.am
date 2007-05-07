@@ -12,6 +12,8 @@ gnome_appearance_properties_SOURCES = \
 	appearance-main.c \
 	appearance-themes.c \
 	appearance-themes.h \
+	appearance-style.c \
+	appearance-style.h \
 	appearance-ui.c \
 	appearance-ui.h \
 	gnome-wp-info.c \

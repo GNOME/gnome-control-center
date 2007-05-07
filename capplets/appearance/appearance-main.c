@@ -22,6 +22,7 @@
 #include "appearance-desktop.h"
 #include "appearance-font.h"
 #include "appearance-themes.h"
+#include "appearance-style.h"
 #include "appearance-ui.h"
 #include "theme-thumbnail.h"
 #include "activate-settings-daemon.h"
@@ -84,6 +85,7 @@ main (int argc, char **argv)
 
   /* init tabs */
   themes_init (data);
+  style_init (data);
   desktop_init (data);
   font_init (data);
   ui_init (data);
