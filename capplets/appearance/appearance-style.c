@@ -112,6 +112,7 @@ prepare_combo (AppearanceData *data, GtkWidget *combo, enum ThemeType type)
 
     case ICON_THEMES:
       list = gnome_theme_icon_info_find_all ();
+      break;
 
     case CURSOR_THEMES:
       list = NULL; /* don't know what to do yet */
@@ -125,7 +126,7 @@ prepare_combo (AppearanceData *data, GtkWidget *combo, enum ThemeType type)
 
   for (l = list; l; l = g_list_next (l))
   {
-    gchar *name;
+    gchar *name = NULL;
     GtkTreeIter i;
 
     if (type < ICON_THEMES)
