@@ -64,6 +64,8 @@ conv_to_widget_cb (GConfPropertyEditor *peditor, GConfValue *value)
   }
   g_free (test);
 
+  /* FIXME: Add a temporary item if we can't find a match */
+
   new_value = gconf_value_new (GCONF_VALUE_INT);
   gconf_value_set_int (new_value, index);
 
@@ -98,8 +100,6 @@ prepare_combo (AppearanceData *data, GtkWidget *combo, enum ThemeType type)
   GList *l, *list = NULL;
   GtkCellRenderer *renderer;
   GnomeThemeElement element = 0;
-  gchar *value = NULL;
-  GtkTreeIter active_row;
 
   switch (type)
   {
@@ -122,7 +122,6 @@ prepare_combo (AppearanceData *data, GtkWidget *combo, enum ThemeType type)
 
   renderer = gtk_cell_renderer_text_new ();
   store = gtk_list_store_new (1, G_TYPE_STRING);
-  value = gconf_client_get_string (data->client, gconf_keys[type], NULL);
 
   for (l = list; l; l = g_list_next (l))
   {
@@ -139,14 +138,11 @@ prepare_combo (AppearanceData *data, GtkWidget *combo, enum ThemeType type)
 
     gtk_list_store_insert_with_values (store, &i, 0, 0, name, -1);
 
-    if (value && !strcmp (value, name))
-      active_row = i;
   }
 
   gtk_combo_box_set_model (GTK_COMBO_BOX (combo), GTK_TREE_MODEL (store));
   gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combo), renderer, TRUE);
   gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (combo), renderer, "text", 0);
-  gtk_combo_box_set_active_iter (GTK_COMBO_BOX (combo), &active_row);
 
   gconf_peditor_new_combo_box (NULL, gconf_keys[type], combo,
     "conv-to-widget-cb", conv_to_widget_cb,
