@@ -410,14 +410,23 @@ peditor_set_gconf_value (GConfPropertyEditor *peditor,
 			 const gchar         *key,
 			 GConfValue          *value) 
 {
-	GConfClient *client = gconf_client_get_default();
 
-	if (peditor->p->changeset != NULL)
-		gconf_change_set_set (peditor->p->changeset, peditor->p->key, value);
-	else
-		gconf_client_set (client, peditor->p->key, value, NULL);
+	if (peditor->p->changeset != NULL) {
+		if (value)
+			gconf_change_set_set (peditor->p->changeset, peditor->p->key, value);
+		else
+			gconf_change_set_unset (peditor->p->changeset, peditor->p->key);
+	} else {
+		GConfClient *client = gconf_client_get_default();
 
-	g_object_unref (client);
+		if (value)
+			gconf_client_set (client, peditor->p->key, value, NULL);
+		else
+			gconf_client_unset (client, peditor->p->key, NULL);
+
+		g_object_unref (client);
+	}
+
 }
 
 static void
@@ -1022,7 +1031,8 @@ peditor_combo_box_widget_changed (GConfPropertyEditor *peditor,
 	peditor_set_gconf_value (peditor, peditor->p->key, value);
 	g_signal_emit (peditor, peditor_signals[VALUE_CHANGED], 0, peditor->p->key, value);
 	gconf_value_free (value_wid);
-	gconf_value_free (value);
+	if (value)
+		gconf_value_free (value);
 }
 
 GObject *
