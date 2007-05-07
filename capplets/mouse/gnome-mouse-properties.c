@@ -279,25 +279,29 @@ cursor_size_from_widget (GConfPropertyEditor *peditor, const GConfValue *value)
 {
 	GConfValue *new_value;
 	gint radio_val;
+	gint size;
 
 	radio_val = gconf_value_get_int (value);
 
-	new_value = gconf_value_new (GCONF_VALUE_INT);
-
 	switch (radio_val) {
 	case 0:
-		gconf_value_set_int (new_value, 12);
+		size = 12;
 		break;
 	case 1:
-		gconf_value_set_int (new_value, 24);
+		size = 24;
 		break;
 	case 2:
-		gconf_value_set_int (new_value, 36);
+		size = 36;
 		break;
+	case -1:
+		return NULL;
 	default:
 		g_assert_not_reached ();
 		break;
 	}
+
+	new_value = gconf_value_new (GCONF_VALUE_INT);
+	gconf_value_set_int (new_value, size);
 
 	return new_value;
 }
@@ -922,7 +926,7 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 	gconf_peditor_new_boolean
 		(changeset, "/desktop/gnome/peripherals/mouse/locate_pointer", WID ("locate_pointer_toggle"), NULL);
 
-	peditor = gconf_peditor_new_select_menu
+	peditor = gconf_peditor_new_combo_box
 		(changeset, "/desktop/gnome/peripherals/mouse/cursor_size", WID ("cursor_size_omenu"),
 		 "conv-to-widget-cb", cursor_size_to_widget,
 		 "conv-from-widget-cb", cursor_size_from_widget,
