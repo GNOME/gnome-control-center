@@ -973,6 +973,7 @@ wp_load_stuffs (void *user_data)
 void
 desktop_init (AppearanceData *data)
 {
+  GtkWidget *add_button;
   GtkTreeViewColumn *column;
   GtkCellRenderer *renderer;
   GtkTreeSelection *selection;
@@ -1077,13 +1078,17 @@ desktop_init (AppearanceData *data)
   g_signal_connect (G_OBJECT (data->wp_pcpicker), "color-set",
                     G_CALLBACK (wp_scolor_changed), data);
 
+  add_button = glade_xml_get_widget (data->xml, "wp_add_button");
+  gtk_button_set_image (GTK_BUTTON (add_button),
+                        gtk_image_new_from_stock ("gtk-add", GTK_ICON_SIZE_BUTTON));
+
+  g_signal_connect (G_OBJECT (add_button), "clicked",
+                    G_CALLBACK (wp_file_open_dialog), data);
+
   data->wp_rem_button = glade_xml_get_widget (data->xml, "wp_rem_button");
 
   g_signal_connect (G_OBJECT (data->wp_rem_button), "clicked",
                     G_CALLBACK (wp_remove_wallpaper), data);
-
-  g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "wp_add_button")), "clicked",
-                    G_CALLBACK (wp_file_open_dialog), data);
 
   g_idle_add (wp_load_stuffs, data);
 
