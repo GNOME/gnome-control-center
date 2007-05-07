@@ -94,6 +94,9 @@ main (int argc, char **argv)
   gtk_widget_show_all (w);
   g_signal_connect (G_OBJECT (w), "delete-event", (GCallback) gtk_main_quit, NULL);
 
+  w = glade_xml_get_widget (data->xml, "close_button");
+  g_signal_connect (G_OBJECT (w), "clicked", (GCallback) gtk_main_quit, NULL);
+
   /* start the mainloop */
   gtk_main ();
 
