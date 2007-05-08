@@ -76,8 +76,9 @@ gboolean gnome_settings_module_start (GnomeSettingsModule *module);
 gboolean gnome_settings_module_stop (GnomeSettingsModule *module);
 gboolean gnome_settings_module_reload_settings (GnomeSettingsModule *module);
 
-GConfClient              *gnome_settings_module_get_config_client (GnomeSettingsModule *module);
-GnomeSettingsModuleStatus gnome_settings_module_get_status (GnomeSettingsModule *module);
+GnomeSettingsModuleRunlevel gnome_settings_module_get_runlevel (GnomeSettingsModule *module);
+GConfClient                *gnome_settings_module_get_config_client (GnomeSettingsModule *module);
+GnomeSettingsModuleStatus   gnome_settings_module_get_status (GnomeSettingsModule *module);
 
 G_END_DECLS
 

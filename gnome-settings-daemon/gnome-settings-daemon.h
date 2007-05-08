@@ -43,7 +43,7 @@ typedef struct _GnomeSettingsDaemonPrivate GnomeSettingsDaemonPrivate;
 
 struct _GnomeSettingsDaemon {
 	GObject parent_instance;
-	GnomeSettingsDaemonPrivate *private;
+	GnomeSettingsDaemonPrivate *priv;
 };
 
 struct _GnomeSettingsDaemonClass {

@@ -31,72 +31,160 @@
 #include <gdk/gdkx.h>
 #include <gconf/gconf.h>
 
-#include "gnome-settings-background.h"
 #include "gnome-settings-keyboard.h"
+#include "gnome-settings-module.h"
 #include "gnome-settings-daemon.h"
 
 #include "preferences.h"
 #include "applier.h"
 
-static BGApplier **bg_appliers;
-static BGPreferences *prefs;
+G_BEGIN_DECLS
 
-static guint applier_idle_id = 0;
+typedef struct _GnomeSettingsModuleBackground      GnomeSettingsModuleBackground;
+typedef struct _GnomeSettingsModuleBackgroundClass GnomeSettingsModuleBackgroundClass;
+
+struct _GnomeSettingsModuleBackground {
+	GnomeSettingsModule parent;
+	
+	BGApplier **bg_appliers;
+	BGPreferences *prefs;
+	guint applier_idle_id;
+};
+
+struct _GnomeSettingsModuleBackgroundClass {
+	GnomeSettingsModuleClass parent_class;
+};
+
+static void gnome_settings_module_background_class_init (GnomeSettingsModuleBackgroundClass *klass);
+static void gnome_settings_module_background_init (GnomeSettingsModuleBackground *module);
+static gboolean gnome_settings_module_background_initialize (GnomeSettingsModule *module, GConfClient *client);
+static gboolean gnome_settings_module_background_start (GnomeSettingsModule *module);
+static GnomeSettingsModuleRunlevel gnome_settings_module_background_get_runlevel (GnomeSettingsModule *module);
+G_END_DECLS
 
 static gboolean
 applier_idle (gpointer data)
 {
+	GnomeSettingsModuleBackground *module;
 	int i;
-	for (i = 0; bg_appliers [i]; i++)
-		bg_applier_apply_prefs (bg_appliers [i], prefs);
-	applier_idle_id = 0;
+	
+	module = (GnomeSettingsModuleBackground *) data;
+	
+	for (i = 0; module->bg_appliers [i]; i++)
+		bg_applier_apply_prefs (module->bg_appliers [i], module->prefs);
+	module->applier_idle_id = 0;
 	return FALSE;
 }
 
 static void
-background_callback (GConfEntry *entry) 
+background_callback (GConfClient *client,
+                     guint cnxn_id,
+                     GConfEntry *entry,
+                     gpointer user_data) 
 {
-	bg_preferences_merge_entry (prefs, entry);
+	GnomeSettingsModuleBackground *module_bg;
+	
+	module_bg = (GnomeSettingsModuleBackground *) user_data;
+	
+	bg_preferences_merge_entry (module_bg->prefs, entry);
 
-	if (applier_idle_id != 0) {
-		g_source_remove (applier_idle_id);
+	if (module_bg->applier_idle_id != 0) {
+		g_source_remove (module_bg->applier_idle_id);
 	}
 
-	applier_idle_id = g_timeout_add (100, applier_idle, NULL);
+	module_bg->applier_idle_id = g_timeout_add (100, applier_idle, NULL);
 }
 
-void
-gnome_settings_background_init (GConfClient *client)
+static void
+gnome_settings_module_background_class_init (GnomeSettingsModuleBackgroundClass *klass)
 {
+	GnomeSettingsModuleClass *module_class;
+	
+	module_class = (GnomeSettingsModuleClass *) klass;
+	module_class->initialize = gnome_settings_module_background_initialize;
+	module_class->start = gnome_settings_module_background_start;
+	module_class->get_runlevel = gnome_settings_module_background_get_runlevel;
+}
+
+static void
+gnome_settings_module_background_init (GnomeSettingsModuleBackground *module)
+{
+	module->applier_idle_id = 0;
+}
+
+GType
+gnome_settings_module_background_get_type (void)
+{
+	static GType module_type = 0;
+  
+	if (!module_type) {
+		static const GTypeInfo module_info = {
+			sizeof (GnomeSettingsModuleBackgroundClass),
+			NULL,		/* base_init */
+			NULL,		/* base_finalize */
+			(GClassInitFunc) gnome_settings_module_background_class_init,
+			NULL,		/* class_finalize */
+			NULL,		/* class_data */
+			sizeof (GnomeSettingsModuleBackground),
+			0,		/* n_preallocs */
+			(GInstanceInitFunc) gnome_settings_module_background_init,
+		};
+      
+		module_type = g_type_register_static (G_TYPE_OBJECT,
+						      "GnomeSettingsModuleBackground",
+						      &module_info, 0);
+	}
+  
+	return module_type;
+}
+
+static gboolean
+gnome_settings_module_background_initialize (GnomeSettingsModule *module,
+					     GConfClient *client)
+{
+	GnomeSettingsModuleBackground *module_bg;
 	GdkDisplay *display;
 	int         n_screens;
 	int         i;
 
+	module_bg = (GnomeSettingsModuleBackground *) module;
 	display = gdk_display_get_default ();
 	n_screens = gdk_display_get_n_screens (display);
 
-	bg_appliers = g_new (BGApplier *, n_screens + 1);
+	module_bg->bg_appliers = g_new (BGApplier *, n_screens + 1);
 
 	for (i = 0; i < n_screens; i++) {
 		GdkScreen *screen;
 
 		screen = gdk_display_get_screen (display, i);
 
-		bg_appliers [i] = BG_APPLIER (bg_applier_new_for_screen (BG_APPLIER_ROOT, screen));
+		module_bg->bg_appliers [i] = BG_APPLIER (bg_applier_new_for_screen (BG_APPLIER_ROOT, screen));
 	}
-	bg_appliers [i] = NULL;
+	module_bg->bg_appliers [i] = NULL;
 
-	prefs = BG_PREFERENCES (bg_preferences_new ());
-	bg_preferences_load (prefs);
+	module_bg->prefs = BG_PREFERENCES (bg_preferences_new ());
+	bg_preferences_load (module_bg->prefs);
 
-	gnome_settings_register_config_callback ("/desktop/gnome/background", background_callback);
+	gconf_client_notify_add (client,
+	                         "/desktop/gnome/background", 
+	                         background_callback,
+	                         module,
+	                         NULL,
+	                         NULL);
+	
+	return TRUE;
 }
 
-void
-gnome_settings_background_load (GConfClient *client)
+static gboolean
+gnome_settings_module_background_start (GnomeSettingsModule *module)
 {
+	GnomeSettingsModuleBackground *module_bg;
+	GConfClient *client;
 	int i;
 
+	module_bg = (GnomeSettingsModuleBackground *) module;
+	client = gnome_settings_module_get_config_client (module);
+	
 	/* If this is set, nautilus will draw the background and is
 	 * almost definitely in our session.  however, it may not be
 	 * running yet (so is_nautilus_running() will fail).  so, on
@@ -106,8 +194,16 @@ gnome_settings_background_load (GConfClient *client)
 	 */
 
 	if (gconf_client_get_bool (client, "/apps/nautilus/preferences/show_desktop", NULL))
-		return;
+		return FALSE;
 
-	for (i = 0; bg_appliers [i]; i++)
-		bg_applier_apply_prefs (bg_appliers [i], prefs);
+	for (i = 0; module_bg->bg_appliers [i]; i++)
+		bg_applier_apply_prefs (module_bg->bg_appliers [i], module_bg->prefs);
+	
+	return TRUE;
+}
+
+static GnomeSettingsModuleRunlevel
+gnome_settings_module_background_get_runlevel (GnomeSettingsModule *module)
+{
+	return GNOME_SETTINGS_MODULE_RUNLEVEL_GNOME_SETTINGS;
 }
