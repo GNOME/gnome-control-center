@@ -229,6 +229,7 @@ static void gnome_wp_xml_load_xml (AppearanceData *data,
 	wp->fileinfo = gnome_wp_info_new (wp->filename, data->wp_thumbs);
 
 	if (wp->name == NULL || !strcmp (wp->filename, "(none)")) {
+	  g_free (wp->name);
 	  wp->name = g_strdup (wp->fileinfo->name);
 	}
 

@@ -17,11 +17,11 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-#include <gtk/gtk.h>
+#include "appearance.h"
+
 #include <string.h>
 
 #include "gnome-theme-info.h"
-#include "appearance.h"
 #include "gconf-property-editor.h"
 
 enum ThemeType {
@@ -31,7 +31,7 @@ enum ThemeType {
   CURSOR_THEMES
 };
 
-static gchar *gconf_keys[] = {
+static const gchar *gconf_keys[] = {
   "/desktop/gnome/interface/gtk_theme",
   "/apps/metacity/general/theme",
   "/desktop/gnome/interface/icon_theme",
