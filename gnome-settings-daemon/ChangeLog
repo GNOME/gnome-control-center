@@ -1,5 +1,11 @@
 2007-05-09  Rodrigo Moya <rodrigo@gnome-db.org>
 
+	* gnome-settings-background.c (gnome_settings_module_background_init,
+	gnome_settings_module_background_start): no need to keep the GConfClient
+	around, it is already stored in the GnomeSettingsModule class.
+
+2007-05-09  Rodrigo Moya <rodrigo@gnome-db.org>
+
 	* gnome-settings-background.c: removed G_BEGIN|END_DECLS.
 	(gnome_settings_module_background_get_type): register with correct type.
 	(gnome_settings_module_background_initialize): store the GConfClient we get.

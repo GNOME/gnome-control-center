@@ -42,8 +42,7 @@ typedef struct _GnomeSettingsModuleBackgroundClass GnomeSettingsModuleBackground
 
 struct _GnomeSettingsModuleBackground {
 	GnomeSettingsModule parent;
-	
-	GConfClient *config_client;
+
 	BGApplier **bg_appliers;
 	BGPreferences *prefs;
 	guint applier_idle_id;
@@ -168,7 +167,6 @@ gnome_settings_module_background_initialize (GnomeSettingsModule *module,
 	module_bg->prefs = BG_PREFERENCES (bg_preferences_new ());
 	bg_preferences_load (module_bg->prefs);
 
-	module_bg->config_client = config_client;
 	gconf_client_notify_add (config_client,
 	                         "/desktop/gnome/background", 
 	                         background_callback,
@@ -195,7 +193,8 @@ gnome_settings_module_background_start (GnomeSettingsModule *module)
 	 * nautilus overwrite it.
 	 */
 
-	if (gconf_client_get_bool (module_bg->config_client, "/apps/nautilus/preferences/show_desktop", NULL))
+	if (gconf_client_get_bool (gnome_settings_module_get_config_client (module),
+				   "/apps/nautilus/preferences/show_desktop", NULL))
 		return FALSE;
 
 	for (i = 0; module_bg->bg_appliers [i]; i++)
