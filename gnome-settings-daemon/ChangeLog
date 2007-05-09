@@ -1,3 +1,20 @@
+2007-05-09  Rodrigo Moya <rodrigo@gnome-db.org>
+
+	* gnome-settings-background.c: removed G_BEGIN|END_DECLS.
+	(gnome_settings_module_background_get_type): register with correct type.
+	(gnome_settings_module_background_initialize): store the GConfClient we get.
+	(gnome_settings_module_background_start): use the stored GConfClient.
+
+	* gnome-settings-background.h: removed unneeded file.
+
+	* gnome-settins-clipboard.c: new file to implement the clipboard manager as
+	a loadable module. Replaces clipboard-manager.[ch].
+
+	* gnome-settings-daemon.c: removed old clipboard manager and use the new
+	module-based one.
+
+	* Makefile.am: added/removed sources.
+
 2007-05-08  Rodrigo Moya <rodrigo@gnome-db.org>
 
 	* gnome-settings-background.c: changed to use the new GnomeSettingsModule

@@ -41,7 +41,6 @@
 #include "gnome-settings-mouse.h"
 #include "gnome-settings-keyboard-xkb.h"
 #include "gnome-settings-keyboard.h"
-#include "gnome-settings-background.h"
 #include "gnome-settings-sound.h"
 #include "gnome-settings-accessibility-keyboard.h"
 #include "gnome-settings-screensaver.h"
@@ -52,8 +51,6 @@
 #include "gnome-settings-xrdb.h"
 #include "gnome-settings-typing-break.h"
 
-#include "clipboard-manager.h"
-
 static GObjectClass *parent_class = NULL;
 
 struct _GnomeSettingsDaemonPrivate {
@@ -61,52 +58,6 @@ struct _GnomeSettingsDaemonPrivate {
 };
 
 XSettingsManager **managers = NULL;
-static ClipboardManager *clipboard_manager;
-
-static void
-clipboard_manager_terminate_cb (void *data)
-{
-	/* Do nothing */
-}
-
-static GdkFilterReturn 
-clipboard_manager_event_filter (GdkXEvent *xevent,
-				GdkEvent  *event,
-				gpointer   data)
-{
-	if (clipboard_manager_process_event (clipboard_manager,
-					     (XEvent *)xevent))
-		return GDK_FILTER_REMOVE;
-	else
-		return GDK_FILTER_CONTINUE;
-}
-
-static void
-clipboard_manager_watch_cb (Window  window,
-			    Bool    is_start,
-			    long    mask,
-			    void   *cb_data)
-{
-	GdkWindow *gdkwin;
-	GdkDisplay *display;
-
-	display = gdk_display_get_default ();
-	gdkwin = gdk_window_lookup_for_display (display, window);
-
-	if (is_start) {
-		if (!gdkwin)
-			gdkwin = gdk_window_foreign_new_for_display (display, window);
-		else
-			g_object_ref (gdkwin);
-      
-		gdk_window_add_filter (gdkwin, clipboard_manager_event_filter, NULL);
-	} else {
-		if (!gdkwin)
-			return;
-		gdk_window_remove_filter (gdkwin, clipboard_manager_event_filter, NULL);
-		g_object_unref (gdkwin);
-	}
-}
 
 static void
 terminate_cb (void *data)
@@ -193,8 +144,6 @@ finalize (GObject *object)
 	for (i = 0; managers && managers [i]; i++)
 		xsettings_manager_destroy (managers [i]);
 
-	clipboard_manager_destroy (clipboard_manager);
-
 	if (daemon->priv->loaded_modules) {
 		/* call _stop method on modules, in runlevel-descending order */
 		stop_modules (daemon, GNOME_SETTINGS_MODULE_RUNLEVEL_SERVICES);
@@ -233,7 +182,8 @@ gnome_settings_daemon_init (GnomeSettingsDaemon *settings)
 	settings->priv = g_new (GnomeSettingsDaemonPrivate, 1);
 
 	/* register all internal modules types */
-	if (!gnome_settings_module_background_get_type ())
+	if (!gnome_settings_module_background_get_type ()
+	    || !gnome_settings_module_clipboard_get_type ())
 		return;
 
 	/* create hash table for loaded modules */
@@ -314,15 +264,6 @@ gnome_settings_daemon_new (void)
 		managers [i] = NULL;
 	}
 
-	if (!clipboard_manager_check_running (GDK_DISPLAY_XDISPLAY (display))) {
-		clipboard_manager = clipboard_manager_new (GDK_DISPLAY_XDISPLAY (display),
-							   gdk_error_trap_push,
-							   gdk_error_trap_pop,
-							   clipboard_manager_terminate_cb,
-							   clipboard_manager_watch_cb,
-							   NULL);
-	}
-
 	client = gnome_settings_get_config_client ();
 
         /*  gnome_settings_disk_init (client);*/
@@ -330,7 +271,7 @@ gnome_settings_daemon_new (void)
 	gnome_settings_xsettings_init (client);
 	gnome_settings_mouse_init (client);
 	/* Essential - xkb initialization should happen before */
-	gnome_settings_keyboard_xkb_set_post_activation_callback ((PostActivationCallback)gnome_settings_load_modmap_files, NULL);
+	gnome_settings_keyboard_xkb_set_post_activation_callback ((PostActivationCallback) gnome_settings_load_modmap_files, NULL);
 	gnome_settings_keyboard_xkb_init (client);
 	gnome_settings_keyboard_init (client);
 	gnome_settings_multimedia_keys_init (client);

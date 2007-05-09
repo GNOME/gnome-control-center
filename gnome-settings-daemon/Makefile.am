@@ -16,16 +16,14 @@ INCLUDES= \
 libexec_PROGRAMS=gnome-settings-daemon
 
 gnome_settings_daemon_SOURCES =	\
-	clipboard-manager.c		\
-	clipboard-manager.h		\
 	delayed-dialog.c		\
 	eggaccelerators.h		\
 	eggaccelerators.c		\
 	factory.c			\
 	gnome-settings-accessibility-keyboard.h	\
 	gnome-settings-accessibility-keyboard.c	\
-	gnome-settings-background.h	\
 	gnome-settings-background.c	\
+	gnome-settings-clipboard.c	\
 	gnome-settings-daemon.h		\
 	gnome-settings-daemon.c		\
 	gnome-settings-dbus.c		\

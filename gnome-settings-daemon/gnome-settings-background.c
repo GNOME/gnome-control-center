@@ -33,12 +33,9 @@
 
 #include "gnome-settings-keyboard.h"
 #include "gnome-settings-module.h"
-#include "gnome-settings-daemon.h"
 
 #include "preferences.h"
 #include "applier.h"
-
-G_BEGIN_DECLS
 
 typedef struct _GnomeSettingsModuleBackground      GnomeSettingsModuleBackground;
 typedef struct _GnomeSettingsModuleBackgroundClass GnomeSettingsModuleBackgroundClass;
@@ -46,6 +43,7 @@ typedef struct _GnomeSettingsModuleBackgroundClass GnomeSettingsModuleBackground
 struct _GnomeSettingsModuleBackground {
 	GnomeSettingsModule parent;
 	
+	GConfClient *config_client;
 	BGApplier **bg_appliers;
 	BGPreferences *prefs;
 	guint applier_idle_id;
@@ -57,10 +55,9 @@ struct _GnomeSettingsModuleBackgroundClass {
 
 static void gnome_settings_module_background_class_init (GnomeSettingsModuleBackgroundClass *klass);
 static void gnome_settings_module_background_init (GnomeSettingsModuleBackground *module);
-static gboolean gnome_settings_module_background_initialize (GnomeSettingsModule *module, GConfClient *client);
+static gboolean gnome_settings_module_background_initialize (GnomeSettingsModule *module, GConfClient *config_client);
 static gboolean gnome_settings_module_background_start (GnomeSettingsModule *module);
 static GnomeSettingsModuleRunlevel gnome_settings_module_background_get_runlevel (GnomeSettingsModule *module);
-G_END_DECLS
 
 static gboolean
 applier_idle (gpointer data)
@@ -130,7 +127,7 @@ gnome_settings_module_background_get_type (void)
 			(GInstanceInitFunc) gnome_settings_module_background_init,
 		};
       
-		module_type = g_type_register_static (G_TYPE_OBJECT,
+		module_type = g_type_register_static (GNOME_SETTINGS_TYPE_MODULE,
 						      "GnomeSettingsModuleBackground",
 						      &module_info, 0);
 	}
@@ -138,9 +135,15 @@ gnome_settings_module_background_get_type (void)
 	return module_type;
 }
 
+static GnomeSettingsModuleRunlevel
+gnome_settings_module_background_get_runlevel (GnomeSettingsModule *module)
+{
+	return GNOME_SETTINGS_MODULE_RUNLEVEL_GNOME_SETTINGS;
+}
+
 static gboolean
 gnome_settings_module_background_initialize (GnomeSettingsModule *module,
-					     GConfClient *client)
+					     GConfClient *config_client)
 {
 	GnomeSettingsModuleBackground *module_bg;
 	GdkDisplay *display;
@@ -165,7 +168,8 @@ gnome_settings_module_background_initialize (GnomeSettingsModule *module,
 	module_bg->prefs = BG_PREFERENCES (bg_preferences_new ());
 	bg_preferences_load (module_bg->prefs);
 
-	gconf_client_notify_add (client,
+	module_bg->config_client = config_client;
+	gconf_client_notify_add (config_client,
 	                         "/desktop/gnome/background", 
 	                         background_callback,
 	                         module,
@@ -179,11 +183,9 @@ static gboolean
 gnome_settings_module_background_start (GnomeSettingsModule *module)
 {
 	GnomeSettingsModuleBackground *module_bg;
-	GConfClient *client;
 	int i;
 
 	module_bg = (GnomeSettingsModuleBackground *) module;
-	client = gnome_settings_module_get_config_client (module);
 	
 	/* If this is set, nautilus will draw the background and is
 	 * almost definitely in our session.  however, it may not be
@@ -193,17 +195,11 @@ gnome_settings_module_background_start (GnomeSettingsModule *module)
 	 * nautilus overwrite it.
 	 */
 
-	if (gconf_client_get_bool (client, "/apps/nautilus/preferences/show_desktop", NULL))
+	if (gconf_client_get_bool (module_bg->config_client, "/apps/nautilus/preferences/show_desktop", NULL))
 		return FALSE;
 
 	for (i = 0; module_bg->bg_appliers [i]; i++)
 		bg_applier_apply_prefs (module_bg->bg_appliers [i], module_bg->prefs);
 	
 	return TRUE;
-}
-
-static GnomeSettingsModuleRunlevel
-gnome_settings_module_background_get_runlevel (GnomeSettingsModule *module)
-{
-	return GNOME_SETTINGS_MODULE_RUNLEVEL_GNOME_SETTINGS;
 }
