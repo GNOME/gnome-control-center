@@ -54,9 +54,10 @@ struct _GnomeSettingsModuleBackgroundClass {
 
 static void gnome_settings_module_background_class_init (GnomeSettingsModuleBackgroundClass *klass);
 static void gnome_settings_module_background_init (GnomeSettingsModuleBackground *module);
+
+static GnomeSettingsModuleRunlevel gnome_settings_module_background_get_runlevel (GnomeSettingsModule *module);
 static gboolean gnome_settings_module_background_initialize (GnomeSettingsModule *module, GConfClient *config_client);
 static gboolean gnome_settings_module_background_start (GnomeSettingsModule *module);
-static GnomeSettingsModuleRunlevel gnome_settings_module_background_get_runlevel (GnomeSettingsModule *module);
 
 static gboolean
 applier_idle (gpointer data)
@@ -97,9 +98,9 @@ gnome_settings_module_background_class_init (GnomeSettingsModuleBackgroundClass 
 	GnomeSettingsModuleClass *module_class;
 	
 	module_class = (GnomeSettingsModuleClass *) klass;
+	module_class->get_runlevel = gnome_settings_module_background_get_runlevel;
 	module_class->initialize = gnome_settings_module_background_initialize;
 	module_class->start = gnome_settings_module_background_start;
-	module_class->get_runlevel = gnome_settings_module_background_get_runlevel;
 }
 
 static void

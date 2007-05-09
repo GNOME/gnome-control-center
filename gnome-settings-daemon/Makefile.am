@@ -48,7 +48,6 @@ gnome_settings_daemon_SOURCES =	\
 	gnome-settings-mouse.c		\
 	gnome-settings-multimedia-keys.h \
 	gnome-settings-multimedia-keys.c \
-	gnome-settings-screensaver.h	\
 	gnome-settings-screensaver.c	\
 	gnome-settings-server.h		\
 	gnome-settings-sound.c		\

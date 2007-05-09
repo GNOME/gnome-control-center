@@ -43,7 +43,6 @@
 #include "gnome-settings-keyboard.h"
 #include "gnome-settings-sound.h"
 #include "gnome-settings-accessibility-keyboard.h"
-#include "gnome-settings-screensaver.h"
 #include "gnome-settings-default-editor.h"
 #include "gnome-settings-keybindings.h"
 #include "gnome-settings-multimedia-keys.h"
@@ -183,7 +182,8 @@ gnome_settings_daemon_init (GnomeSettingsDaemon *settings)
 
 	/* register all internal modules types */
 	if (!gnome_settings_module_background_get_type ()
-	    || !gnome_settings_module_clipboard_get_type ())
+	    || !gnome_settings_module_clipboard_get_type ()
+	    || !gnome_settings_module_screensaver_get_type ())
 		return;
 
 	/* create hash table for loaded modules */
@@ -278,7 +278,6 @@ gnome_settings_daemon_new (void)
         /* */
 	gnome_settings_sound_init (client);
 	gnome_settings_accessibility_keyboard_init (client);
-	gnome_settings_screensaver_init (client);
 	gnome_settings_default_editor_init (client);
 	gnome_settings_keybindings_init (client);
 	gnome_settings_gtk1_theme_init (client);
@@ -311,7 +310,6 @@ gnome_settings_daemon_new (void)
 	/* */
 	gnome_settings_sound_load (client);
 	gnome_settings_accessibility_keyboard_load (client);
-	gnome_settings_screensaver_load (client);
 	gnome_settings_default_editor_load (client);
 	gnome_settings_keybindings_load (client);
 	gnome_settings_gtk1_theme_load (client);

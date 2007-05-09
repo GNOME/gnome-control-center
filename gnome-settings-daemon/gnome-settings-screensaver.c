@@ -22,28 +22,95 @@
  * 02111-1307, USA.
  */
 
+#ifdef HAVE_CONFIG_H
 #include <config.h>
-
-#include "gnome-settings-daemon.h"
-#include "gnome-settings-screensaver.h"
-
+#endif
 #include <glib/gi18n.h>
-
 #include <gtk/gtkcheckbutton.h>
 #include <gtk/gtkbox.h>
 #include <gtk/gtkmessagedialog.h>
+#include "gnome-settings-module.h"
 
 #define START_SCREENSAVER_KEY   "/apps/gnome_settings_daemon/screensaver/start_screensaver"
 #define SHOW_STARTUP_ERRORS_KEY "/apps/gnome_settings_daemon/screensaver/show_startup_errors"
-#define XSCREENSAVER_COMMAND    "xscreensaver -nosplash"
-#define GSCREENSAVER_COMMAND    "gnome-screensaver"
 
-void
-gnome_settings_screensaver_init (GConfClient *client)
+typedef struct {
+	GnomeSettingsModule parent;
+
+	GPid screensaver_pid;
+	gboolean start_screensaver;
+	gboolean have_gscreensaver;
+	gboolean have_xscreensaver;
+} GnomeSettingsModuleScreensaver;
+
+typedef struct {
+	GnomeSettingsModule parent_class;
+} GnomeSettingsModuleScreensaverClass;
+
+static void gnome_settings_module_screensaver_class_init (GnomeSettingsModuleScreensaverClass *klass);
+static void gnome_settings_module_screensaver_init (GnomeSettingsModuleScreensaver *module);
+
+static GnomeSettingsModuleRunlevel gnome_settings_module_screensaver_get_runlevel (GnomeSettingsModule *module);
+static gboolean gnome_settings_module_screensaver_initialize (GnomeSettingsModule *module, GConfClient *config_client);
+static gboolean gnome_settings_module_screensaver_start (GnomeSettingsModule *module);
+static gboolean gnome_settings_module_screensaver_stop (GnomeSettingsModule *module);
+
+static void
+gnome_settings_module_screensaver_class_init (GnomeSettingsModuleScreensaverClass *klass)
 {
+	GnomeSettingsModuleClass *module_class;
+
+	module_class = (GnomeSettingsModuleClass *) klass;
+	module_class->get_runlevel = gnome_settings_module_screensaver_get_runlevel;
+	module_class->initialize = gnome_settings_module_screensaver_initialize;
+	module_class->start = gnome_settings_module_screensaver_start;
+	module_class->stop = gnome_settings_module_screensaver_stop;
+}
+
+static void
+gnome_settings_module_screensaver_init (GnomeSettingsModuleScreensaver *module)
+{
+}
+
+GType
+gnome_settings_module_screensaver_get_type (void)
+{
+	static GType module_type = 0;
+  
+	if (!module_type) {
+		static const GTypeInfo module_info = {
+			sizeof (GnomeSettingsModuleScreensaverClass),
+			NULL,		/* base_init */
+			NULL,		/* base_finalize */
+			(GClassInitFunc) gnome_settings_module_screensaver_class_init,
+			NULL,		/* class_finalize */
+			NULL,		/* class_data */
+			sizeof (GnomeSettingsModuleScreensaver),
+			0,		/* n_preallocs */
+			(GInstanceInitFunc) gnome_settings_module_screensaver_init,
+		};
+      
+		module_type = g_type_register_static (GNOME_SETTINGS_TYPE_MODULE,
+						      "GnomeSettingsModuleScreensaver",
+						      &module_info, 0);
+	}
+  
+	return module_type;
+}
+
+static GnomeSettingsModuleRunlevel
+gnome_settings_module_screensaver_get_runlevel (GnomeSettingsModule *module)
+{
+	return GNOME_SETTINGS_MODULE_RUNLEVEL_SERVICES;
+}
+
+static gboolean
+gnome_settings_module_screensaver_initialize (GnomeSettingsModule *module, GConfClient *config_client)
+{
+	gchar *ss_cmd;
+	GnomeSettingsModuleScreensaver *module_ss = (GnomeSettingsModuleScreensaver *) module;
+
 	/*
-	 * do nothing.
-	 *
 	 * with gnome-screensaver, all settings are loaded internally
 	 * from gconf at startup
 	 *
@@ -55,14 +122,31 @@ gnome_settings_screensaver_init (GConfClient *client)
 	 * and start / stop xscreensaver here
 	 *
 	 */
+
+	module_ss->start_screensaver = gconf_client_get_bool (config_client, START_SCREENSAVER_KEY, NULL);
+
+	if ((ss_cmd = g_find_program_in_path ("gnome-screensaver"))) {
+		module_ss->have_gscreensaver = TRUE;
+		g_free (ss_cmd);
+	} else
+		module_ss->have_gscreensaver = FALSE;
+
+	if ((ss_cmd = g_find_program_in_path ("xscreensaver"))) {
+		module_ss->have_xscreensaver = TRUE;
+		g_free (ss_cmd);
+	} else
+		module_ss->have_xscreensaver = FALSE;
+	
+	return TRUE;
 }
 
 static void
 key_toggled_cb (GtkWidget *toggle, gpointer data)
 {
 	GConfClient *client;
+	GnomeSettingsModuleScreensaver *module_ss = data;
 
-	client = gnome_settings_get_config_client ();
+	client = gnome_settings_module_get_config_client (module_ss);
 	gconf_client_set_bool (client, 
 			       SHOW_STARTUP_ERRORS_KEY,
 			       gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (toggle))
@@ -71,33 +155,32 @@ key_toggled_cb (GtkWidget *toggle, gpointer data)
 }
 
 static gboolean
-really_start_screensaver (gpointer user_data)
+gnome_settings_module_screensaver_start (GnomeSettingsModule *module)
 {
 	GError *gerr = NULL;
-	gboolean use_gscreensaver = FALSE;
 	gboolean show_error;
 	GtkWidget *dialog, *toggle;
-	gchar *ss_command;
-	GConfClient *client;
+	gchar *args[3];
+	GnomeSettingsModuleScreensaver *module_ss = (GnomeSettingsModuleScreensaver *) module;
 
-	if ((ss_command = g_find_program_in_path ("gnome-screensaver")))
-		use_gscreensaver = TRUE;
-	else {
-		if (!(ss_command = g_find_program_in_path ("xscreensaver")))
-			return FALSE;
-	}
+	if (!module_ss->start_screensaver)
+		return TRUE;
 
-	g_free (ss_command);
-	if (use_gscreensaver)
-		ss_command = GSCREENSAVER_COMMAND;
-	else
-		ss_command = XSCREENSAVER_COMMAND;
-
-	if (g_spawn_command_line_async (ss_command, &gerr))
+	if (module_ss->have_gscreensaver) {
+		args[0] = "gnome-screensaver";
+		args[1] = NULL;
+	} else if (module_ss->have_xscreensaver) {
+		args[0] = "xscreensaver";
+		args[1] = "-nosplash";
+	} else
 		return FALSE;
-	
-	client = gnome_settings_get_config_client ();
-	show_error = gconf_client_get_bool (client, SHOW_STARTUP_ERRORS_KEY, NULL);
+	args[2] = NULL;
+
+	if (g_spawn_async (g_get_home_dir (), args, NULL, 0, NULL, NULL, &module_ss->screensaver_pid, &gerr))
+		return TRUE;
+
+	show_error = gconf_client_get_bool (gnome_settings_module_get_config_client (module),
+					    SHOW_STARTUP_ERRORS_KEY, NULL);
 	if (!show_error) {
 		g_error_free (gerr);
 		return FALSE;
@@ -116,14 +199,14 @@ really_start_screensaver (gpointer user_data)
 			  G_CALLBACK (gtk_widget_destroy),
 			  NULL);
 
-	toggle = gtk_check_button_new_with_mnemonic (
-		_("_Do not show this message again"));
+	toggle = gtk_check_button_new_with_mnemonic (_("_Do not show this message again"));
 	gtk_widget_show (toggle);
 
-	if (gconf_client_key_is_writable (client, SHOW_STARTUP_ERRORS_KEY, NULL))
+	if (gconf_client_key_is_writable (gnome_settings_module_get_config_client (module),
+					  SHOW_STARTUP_ERRORS_KEY, NULL))
 		g_signal_connect (toggle, "toggled",
 				  G_CALLBACK (key_toggled_cb),
-				  NULL);
+				  module_ss);
 	else
 		gtk_widget_set_sensitive (toggle, FALSE);
 					  
@@ -138,16 +221,12 @@ really_start_screensaver (gpointer user_data)
 	return FALSE;
 }
 
-void
-gnome_settings_screensaver_load (GConfClient *client)
+static gboolean
+gnome_settings_module_screensaver_stop (GnomeSettingsModule *module)
 {
-	gboolean start_screensaver;
- 
-	start_screensaver = gconf_client_get_bool (client, START_SCREENSAVER_KEY, NULL);
+	GnomeSettingsModuleScreensaver *module_ss = (GnomeSettingsModuleScreensaver *) module;
 
-	if (!start_screensaver)
-		return;
+	g_spawn_close_pid (module_ss->screensaver_pid);
 
-	g_timeout_add (25000, (GSourceFunc) really_start_screensaver, NULL);
+	return TRUE;
 }
-
