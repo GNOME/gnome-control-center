@@ -81,6 +81,9 @@ themes_init (AppearanceData *data)
   w = glade_xml_get_widget (data->xml, "theme_list");
   gtk_icon_view_set_model (GTK_ICON_VIEW (w), GTK_TREE_MODEL (theme_store));
 
+  w = glade_xml_get_widget (data->xml, "theme_open");
+  gtk_button_set_image (GTK_BUTTON (w),
+                        gtk_image_new_from_stock ("gtk-open", GTK_ICON_SIZE_BUTTON));
 }
 
 /** Theme Callbacks **/
