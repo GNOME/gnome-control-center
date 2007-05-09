@@ -61,103 +61,101 @@ const gchar *gconf_property_editor_get_key        (GConfPropertyEditor  *peditor
 GObject     *gconf_property_editor_get_ui_control (GConfPropertyEditor  *peditor);
 
 GObject *gconf_peditor_new_boolean      (GConfChangeSet          *changeset,
-					 gchar                   *key,
+					 const gchar             *key,
 					 GtkWidget               *checkbox,
-					 gchar                   *first_property_name,
+					 const gchar             *first_property_name,
 					 ...);
 
 GObject *gconf_peditor_new_enum_toggle  (GConfChangeSet 	 *changeset,
-					 gchar			 *key,
+					 const gchar		 *key,
 					 GtkWidget		 *checkbox,
 					 GType			 enum_type,
 					 GConfPEditorGetValueFn  val_true_fn,
 					 guint			 val_false,
 					 gboolean	 	 use_nick,
 					 gpointer		 data,
-					 gchar 			 *first_property_name,
+					 const gchar 		 *first_property_name,
 					 ...);
 
 GObject *gconf_peditor_new_integer      (GConfChangeSet          *changeset,
-					 gchar                   *key,
+					 const gchar             *key,
 					 GtkWidget               *entry,
-					 gchar                   *first_property_name,
+					 const gchar             *first_property_name,
 					 ...);
 GObject *gconf_peditor_new_string       (GConfChangeSet          *changeset,
-					 gchar                   *key,
+					 const gchar             *key,
 					 GtkWidget               *entry,
-					 gchar                   *first_property_name,
+					 const gchar             *first_property_name,
 					 ...);
 GObject *gconf_peditor_new_filename     (GConfChangeSet          *changeset,
-					 gchar                   *key,
+					 const gchar             *key,
 					 GtkWidget               *file_entry,
-					 gchar                   *first_property_name,
+					 const gchar             *first_property_name,
 					 ...);
 GObject *gconf_peditor_new_color        (GConfChangeSet          *changeset,
-					 gchar                   *key,
+					 const gchar             *key,
 					 GtkWidget               *color_entry,
-					 gchar                   *first_property_name,
+					 const gchar             *first_property_name,
 					 ...);
 
 GObject *gconf_peditor_new_select_menu	(GConfChangeSet *changeset,
-					 gchar 	        *key,
+					 const gchar    *key,
 					 GtkWidget      *option_menu,
-					 gchar          *first_property_name,
+					 const gchar    *first_property_name,
 					 ...);
 
-
 GObject *gconf_peditor_new_select_menu_with_enum	(GConfChangeSet *changeset,
-							 gchar 	        *key,
+							 const gchar    *key,
 							 GtkWidget      *option_menu,
 							 GType          enum_type,
 							 gboolean  	use_nick,
-							 gchar          *first_property_name,
+							 const gchar    *first_property_name,
 							 ...);
 
 GObject *gconf_peditor_new_combo_box	(GConfChangeSet *changeset,
-					 gchar 	        *key,
+					 const gchar 	*key,
 					 GtkWidget      *combo_box,
-					 gchar          *first_property_name,
+					 const gchar    *first_property_name,
 					 ...);
 
-
 GObject *gconf_peditor_new_combo_box_with_enum	(GConfChangeSet *changeset,
-						 gchar 	        *key,
+						 const gchar 	*key,
 						 GtkWidget      *combo_box,
 						 GType          enum_type,
 						 gboolean  	use_nick,
-						 gchar          *first_property_name,
+						 const gchar    *first_property_name,
 						 ...);
 
 GObject *gconf_peditor_new_select_radio (GConfChangeSet          *changeset,
-					 gchar                   *key,
+					 const gchar             *key,
 					 GSList                  *radio_group,
-					 gchar                   *first_property_name,
+					 const gchar             *first_property_name,
 					 ...);
 
 GObject *gconf_peditor_new_select_radio_with_enum	 (GConfChangeSet *changeset,
-							  gchar		 *key,
+							  const gchar	 *key,
 							  GSList 	 *radio_group,
 							  GType 	 enum_type,
 							  gboolean	 use_nick,
-							  gchar          *first_property_name,
+							  const gchar    *first_property_name,
 							  ...);
 
 GObject *gconf_peditor_new_numeric_range (GConfChangeSet          *changeset,
-					  gchar                   *key,
+					  const gchar             *key,
 					  GtkWidget               *range,
-					  gchar                   *first_property_name,
+					  const gchar             *first_property_name,
 					  ...);
 
 GObject *gconf_peditor_new_font          (GConfChangeSet          *changeset,
-					  gchar                   *key,
+					  const gchar             *key,
 					  GtkWidget               *font_button,
-					  gchar                   *first_property_name,
+					  const gchar             *first_property_name,
 					  ...);
 
 GObject *gconf_peditor_new_image	 (GConfChangeSet	  *changeset,
-					  gchar			  *key,
+					  const gchar		  *key,
 					  GtkWidget		  *button,
-					  gchar			  *first_property,
+					  const gchar		  *first_property,
 					  ...);
 
 void gconf_peditor_widget_set_guard     (GConfPropertyEditor     *peditor,

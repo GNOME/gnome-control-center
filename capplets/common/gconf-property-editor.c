@@ -94,7 +94,7 @@ static void gconf_property_editor_get_prop    (GObject      *object,
 
 static void gconf_property_editor_finalize    (GObject      *object);
 
-static GObject *gconf_peditor_new             (gchar                 *key,
+static GObject *gconf_peditor_new             (const gchar           *key,
 					       GConfClientNotifyFunc  cb,
 					       GConfChangeSet        *changeset,
 					       GObject               *ui_control,
@@ -350,7 +350,7 @@ gconf_property_editor_finalize (GObject *object)
 }
 
 static GObject *
-gconf_peditor_new (gchar                 *key,
+gconf_peditor_new (const gchar           *key,
 		   GConfClientNotifyFunc  cb,
 		   GConfChangeSet        *changeset,
 		   GObject               *ui_control,
@@ -467,9 +467,9 @@ peditor_boolean_widget_changed (GConfPropertyEditor *peditor,
 
 GObject *
 gconf_peditor_new_boolean (GConfChangeSet *changeset,
-			   gchar          *key,
+			   const gchar    *key,
 			   GtkWidget      *checkbox,
-			   gchar          *first_property_name,
+			   const gchar    *first_property_name,
 			   ...)
 {
 	GObject *peditor;
@@ -548,9 +548,9 @@ peditor_integer_widget_changed (GConfPropertyEditor *peditor,
 
 static GObject *
 gconf_peditor_new_integer_valist (GConfChangeSet *changeset,
-				  gchar          *key,
+				  const gchar    *key,
 				  GtkWidget      *entry,
-				  gchar          *first_property_name,
+				  const gchar    *first_property_name,
 				  va_list         var_args)
 {
 	GObject *peditor;
@@ -571,9 +571,9 @@ gconf_peditor_new_integer_valist (GConfChangeSet *changeset,
 
 GObject *
 gconf_peditor_new_integer (GConfChangeSet *changeset,
-			   gchar          *key,
+			   const gchar    *key,
 			   GtkWidget      *entry,
-			   gchar          *first_property_name,
+			   const gchar    *first_property_name,
 			   ...)
 {
 	GObject *peditor;
@@ -622,7 +622,7 @@ static void
 peditor_string_widget_changed (GConfPropertyEditor *peditor,
 			       GtkEntry            *entry)
 {
-	  GConfValue *value, *value_wid;
+	GConfValue *value, *value_wid;
 	  
 	if (!peditor->p->inited) return;
 
@@ -640,9 +640,9 @@ peditor_string_widget_changed (GConfPropertyEditor *peditor,
 
 static GObject *
 gconf_peditor_new_string_valist (GConfChangeSet *changeset,
-				 gchar          *key,
+				 const gchar    *key,
 				 GtkWidget      *entry,
-				 gchar          *first_property_name,
+				 const gchar    *first_property_name,
 				 va_list         var_args)
 {
 	GObject *peditor;
@@ -663,9 +663,9 @@ gconf_peditor_new_string_valist (GConfChangeSet *changeset,
 
 GObject *
 gconf_peditor_new_string (GConfChangeSet *changeset,
-			  gchar          *key,
+			  const gchar    *key,
 			  GtkWidget      *entry,
-			  gchar          *first_property_name,
+			  const gchar    *first_property_name,
 			  ...)
 {
 	GObject *peditor;
@@ -688,9 +688,9 @@ gconf_peditor_new_string (GConfChangeSet *changeset,
 
 GObject *
 gconf_peditor_new_filename (GConfChangeSet *changeset,
-			    gchar          *key,
+			    const gchar    *key,
 			    GtkWidget      *file_entry,
-			    gchar          *first_property_name,
+			    const gchar    *first_property_name,
 			    ...)
 {
 	GObject *peditor;
@@ -763,9 +763,9 @@ peditor_color_widget_changed (GConfPropertyEditor *peditor,
 
 GObject *
 gconf_peditor_new_color (GConfChangeSet *changeset,
-			 gchar          *key,
+			 const gchar    *key,
 			 GtkWidget      *cb,
-			 gchar          *first_property_name,
+			 const gchar    *first_property_name,
 			 ...)
 {
 	GObject *peditor;
@@ -917,9 +917,9 @@ peditor_select_menu_widget_changed (GConfPropertyEditor *peditor,
 
 GObject *
 gconf_peditor_new_select_menu (GConfChangeSet *changeset,
-			       gchar          *key,
+			       const gchar    *key,
 			       GtkWidget      *option_menu,
-			       gchar          *first_property_name,
+			       const gchar    *first_property_name,
 			       ...)
 {
 	GObject *peditor;
@@ -949,14 +949,14 @@ gconf_peditor_new_select_menu (GConfChangeSet *changeset,
 
 GObject *
 gconf_peditor_new_select_menu_with_enum	(GConfChangeSet *changeset,
-					 gchar 	        *key,
+					 const gchar    *key,
 					 GtkWidget      *option_menu,
 					 GType          enum_type,
 					 gboolean	use_nick,
-					 gchar          *first_property_name,
+					 const gchar    *first_property_name,
 					 ...)
 {
-	GConfPropertyEditor *peditor;
+	GObject *peditor;
 	GConfPropertyEditorEnumData *data;
 	va_list var_args;
 
@@ -971,8 +971,7 @@ gconf_peditor_new_select_menu_with_enum	(GConfChangeSet *changeset,
 
 	va_start (var_args, first_property_name);
 
-	peditor = GCONF_PROPERTY_EDITOR (
-		gconf_peditor_new
+	peditor = gconf_peditor_new
 		(key,
 		 (GConfClientNotifyFunc) peditor_select_menu_value_changed,
 		 changeset,
@@ -988,21 +987,21 @@ gconf_peditor_new_select_menu_with_enum	(GConfChangeSet *changeset,
 		 "data-free-cb",
 		 g_free,
 		 NULL
-		 ));
+		 );
 
 	va_end (var_args);
 	
 	g_signal_connect_swapped (G_OBJECT (option_menu), "changed",
 				  (GCallback) peditor_select_menu_widget_changed, peditor);
 
-	return G_OBJECT (peditor);
+	return peditor;
 }
 
 static void
 peditor_combo_box_value_changed (GConfClient         *client,
-				   guint                cnxn_id,
-				   GConfEntry          *entry,
-				   GConfPropertyEditor *peditor) 
+				 guint                cnxn_id,
+				 GConfEntry          *entry,
+				 GConfPropertyEditor *peditor) 
 {
 	GConfValue *value, *value_wid;
 
@@ -1037,9 +1036,9 @@ peditor_combo_box_widget_changed (GConfPropertyEditor *peditor,
 
 GObject *
 gconf_peditor_new_combo_box (GConfChangeSet *changeset,
-			     gchar          *key,
+			     const gchar    *key,
 			     GtkWidget      *combo_box,
-			     gchar          *first_property_name,
+			     const gchar    *first_property_name,
 			     ...)
 {
 	GObject *peditor;
@@ -1069,14 +1068,14 @@ gconf_peditor_new_combo_box (GConfChangeSet *changeset,
 
 GObject *
 gconf_peditor_new_combo_box_with_enum	(GConfChangeSet *changeset,
-					 gchar 	        *key,
+					 const gchar 	*key,
 					 GtkWidget      *combo_box,
-					 GType          enum_type,
-					 gboolean	use_nick,
-					 gchar          *first_property_name,
+					 GType           enum_type,
+					 gboolean	 use_nick,
+					 const gchar    *first_property_name,
 					 ...)
 {
-	GConfPropertyEditor *peditor;
+	GObject *peditor;
 	GConfPropertyEditorEnumData *data;
 	va_list var_args;
 
@@ -1091,8 +1090,7 @@ gconf_peditor_new_combo_box_with_enum	(GConfChangeSet *changeset,
 
 	va_start (var_args, first_property_name);
 
-	peditor = GCONF_PROPERTY_EDITOR (
-		gconf_peditor_new
+	peditor = gconf_peditor_new
 		(key,
 		 (GConfClientNotifyFunc) peditor_combo_box_value_changed,
 		 changeset,
@@ -1108,14 +1106,14 @@ gconf_peditor_new_combo_box_with_enum	(GConfChangeSet *changeset,
 		 "data-free-cb",
 		 g_free,
 		 NULL
-		 ));
+		 );
 
 	va_end (var_args);
 	
 	g_signal_connect_swapped (G_OBJECT (combo_box), "changed",
 				  (GCallback) peditor_combo_box_widget_changed, peditor);
 
-	return G_OBJECT (peditor);
+	return peditor;
 }
 
 static void
@@ -1171,9 +1169,9 @@ peditor_select_radio_widget_changed (GConfPropertyEditor *peditor,
 
 GObject *
 gconf_peditor_new_select_radio (GConfChangeSet *changeset,
-				gchar          *key,
+				const gchar    *key,
 				GSList         *radio_group,
-				gchar          *first_property_name,
+				const gchar    *first_property_name,
 				...)
 {
 	GObject *peditor;
@@ -1290,9 +1288,9 @@ peditor_numeric_range_widget_changed (GConfPropertyEditor *peditor,
 
 GObject *
 gconf_peditor_new_numeric_range (GConfChangeSet *changeset,
-				 gchar          *key,
+				 const gchar    *key,
 				 GtkWidget      *range,
-				 gchar          *first_property_name,
+				 const gchar    *first_property_name,
 				 ...)
 {
 	GObject *peditor;
@@ -1446,9 +1444,9 @@ peditor_font_widget_changed (GConfPropertyEditor *peditor,
 
 GObject *
 gconf_peditor_new_font (GConfChangeSet *changeset,
-			gchar *key,
+			const gchar *key,
 			GtkWidget *font_button,
-			gchar *first_property_name,
+			const gchar *first_property_name,
 			...)
 {
 	GObject *peditor;
@@ -1522,18 +1520,18 @@ peditor_enum_toggle_conv_from_widget (GConfPropertyEditor *peditor,
 }
 
 GObject *
-gconf_peditor_new_enum_toggle  (GConfChangeSet 	 *changeset,
-				gchar			 *key,
-				GtkWidget		 *checkbox,
+gconf_peditor_new_enum_toggle  (GConfChangeSet		*changeset,
+				const gchar		*key,
+				GtkWidget		*checkbox,
 				GType			 enum_type,
-				GConfPEditorGetValueFn   val_true_fn,
+				GConfPEditorGetValueFn	 val_true_fn,
 				guint			 val_false,
 				gboolean		 use_nick,
 				gpointer		 data,
-				gchar 			 *first_property_name,
+				const gchar 		*first_property_name,
 				...)
 {
-	GConfPropertyEditor *peditor;
+	GObject *peditor;
 	GConfPropertyEditorEnumData *enum_data;
 	va_list var_args;
 
@@ -1550,8 +1548,7 @@ gconf_peditor_new_enum_toggle  (GConfChangeSet 	 *changeset,
 
 	va_start (var_args, first_property_name);
 
-	peditor = GCONF_PROPERTY_EDITOR (
-		gconf_peditor_new
+	peditor = gconf_peditor_new
 		(key,
 		 (GConfClientNotifyFunc) peditor_boolean_value_changed,
 		 changeset,
@@ -1566,14 +1563,14 @@ gconf_peditor_new_enum_toggle  (GConfChangeSet 	 *changeset,
 		 enum_data,
 		 "data-free-cb",
 		 g_free,
-		 NULL));
+		 NULL);
 
 	va_end (var_args);
 
 	g_signal_connect_swapped (G_OBJECT (checkbox), "toggled",
 				  (GCallback) peditor_boolean_widget_changed, peditor);
 
-	return G_OBJECT (peditor);
+	return peditor;
 }
 
 static gboolean
@@ -1806,9 +1803,9 @@ peditor_image_value_changed (GConfClient         *client,
 
 GObject *
 gconf_peditor_new_image (GConfChangeSet	  *changeset,
-			 gchar	          *key,
+			 const gchar	  *key,
 			 GtkWidget	  *button,
-			 gchar		  *first_property_name,
+			 const gchar	  *first_property_name,
 			 ...)
 {
 	GObject *peditor;
@@ -1838,14 +1835,14 @@ gconf_peditor_new_image (GConfChangeSet	  *changeset,
 
 GObject *
 gconf_peditor_new_select_radio_with_enum (GConfChangeSet *changeset,
-					  gchar		 *key,
+					  const gchar	 *key,
 					  GSList 	 *radio_group,
 					  GType 	 enum_type,
 					  gboolean	 use_nick,
-					  gchar          *first_property_name,
+					  const gchar    *first_property_name,
 					  ...)
 {
-	GConfPropertyEditor *peditor;
+	GObject *peditor;
 	GConfPropertyEditorEnumData *enum_data;
 	GtkRadioButton *first_button;
 	GSList *item;
@@ -1864,8 +1861,7 @@ gconf_peditor_new_select_radio_with_enum (GConfChangeSet *changeset,
 
 	va_start (var_args, first_property_name);
 
-	peditor = GCONF_PROPERTY_EDITOR (
-		gconf_peditor_new
+	peditor = gconf_peditor_new
 		(key,
 		 (GConfClientNotifyFunc) peditor_select_radio_value_changed,
 		 changeset,
@@ -1880,7 +1876,7 @@ gconf_peditor_new_select_radio_with_enum (GConfChangeSet *changeset,
 		 enum_data,
 		 "data-free-cb",
 		 g_free,
-		 NULL));
+		 NULL);
 
 	va_end (var_args);
 
@@ -1888,6 +1884,5 @@ gconf_peditor_new_select_radio_with_enum (GConfChangeSet *changeset,
 		g_signal_connect_swapped (G_OBJECT (item->data), "toggled",
 					  (GCallback) peditor_select_radio_widget_changed, peditor);
 
-	return G_OBJECT (peditor);
+	return peditor;
 }
-
