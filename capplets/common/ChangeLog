@@ -1,5 +1,13 @@
 2007-05-09  Jens Granseuer  <jensgr@gmx.net>
 
+	* gnome-theme-info.c: (gnome_theme_read_meta_theme):
+	* gtkrc-utils.c: (gtkrc_find_named), (gtkrc_get_color_scheme): fix
+	memory leaks
+
+	* gnome-theme-test.c: (main): init g_thread
+
+2007-05-09  Jens Granseuer  <jensgr@gmx.net>
+
 	* gconf-property-editor.c: (gconf_peditor_new),
 	(gconf_peditor_new_boolean), (gconf_peditor_new_integer_valist),
 	(gconf_peditor_new_integer), (gconf_peditor_new_string_valist),

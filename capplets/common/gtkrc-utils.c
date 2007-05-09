@@ -21,8 +21,7 @@ gtkrc_find_named (const gchar *name)
 	 */
 	gchar *path = NULL;
 	const gchar *home_dir;
-	gchar *subpath;
-	subpath = g_strdup ("gtk-2.0" G_DIR_SEPARATOR_S "gtkrc");
+	const gchar *subpath = "gtk-2.0" G_DIR_SEPARATOR_S "gtkrc";
 
 	/* First look in the users home directory
 	*/
@@ -190,6 +189,7 @@ gtkrc_get_color_scheme (gchar *filename)
 			}
 		}
 	}
+	g_scanner_destroy (scanner);
 	return result;
 }
 

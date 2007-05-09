@@ -308,6 +308,7 @@ gnome_theme_read_meta_theme (GnomeVFSURI *meta_theme_uri)
   GnomeDesktopItem *meta_theme_ditem;
   gchar *meta_theme_file;
   const gchar *str;
+  gchar *scheme;
 
   meta_theme_file = gnome_vfs_uri_to_string (meta_theme_uri, GNOME_VFS_URI_HIDE_NONE);
   meta_theme_ditem = gnome_desktop_item_new_from_uri (meta_theme_file, 0, NULL);
@@ -361,17 +362,21 @@ gnome_theme_read_meta_theme (GnomeVFSURI *meta_theme_uri)
     gchar *gtkrc_file = gtkrc_find_named (meta_theme_info->gtk_theme_name);
     if (gtkrc_file)
     {
-      str = gtkrc_get_color_scheme (gtkrc_file);
+      scheme = gtkrc_get_color_scheme (gtkrc_file);
       g_free (gtkrc_file);
     }
+    else
+      scheme = NULL;
   }
-  if (str != NULL)
+  else
+    scheme = g_strdup (str);
+
+  if (scheme != NULL)
   {
-    gchar *a;
-    meta_theme_info->gtk_color_scheme = g_strdup (str);
-    for (a = meta_theme_info->gtk_color_scheme; *a != '\0'; a++)
-      if (*a == ',')
-        *a = '\n';
+    meta_theme_info->gtk_color_scheme = scheme;
+    for (; *scheme != '\0'; scheme++)
+      if (*scheme == ',')
+        *scheme = '\n';
   }
 
   str = gnome_desktop_item_get_string (meta_theme_ditem, METACITY_THEME_KEY);
