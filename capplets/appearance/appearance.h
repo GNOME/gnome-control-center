@@ -37,8 +37,9 @@ typedef struct {
   GHashTable *wp_hash;
   GnomeThumbnailFactory *wp_thumbs;
   gboolean wp_update_gconf;
-  GtkTreeView *wp_tree;
+  GtkIconView *wp_view;
   GtkTreeModel *wp_model;
+  GtkCellRenderer *wp_cell;
   GtkWidget *wp_scpicker;
   GtkWidget *wp_pcpicker;
   GtkWidget *wp_style_menu;

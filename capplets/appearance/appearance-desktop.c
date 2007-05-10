@@ -24,6 +24,7 @@
 #include "gnome-wp-item.h"
 #include "gnome-wp-utils.h"
 #include "gnome-wp-xml.h"
+#include "wp-cellrenderer.h"
 #include <glib/gi18n.h>
 #include <string.h>
 #include <gconf/gconf-client.h>
@@ -57,7 +58,9 @@ static GtkTargetEntry drop_types[] = {
   { "property/bgimage", 0, TARGET_BGIMAGE },
   /*  { "x-special/gnome-reset-background", 0, TARGET_BACKGROUND_RESET }*/
 };
-
+static GnomeWPItem *
+get_selected_item (AppearanceData *data,
+                   GtkTreeIter *iter);
 static void
 scroll_to_item (AppearanceData *data,
                 GnomeWPItem * item)
@@ -71,9 +74,41 @@ scroll_to_item (AppearanceData *data,
 
   path = gtk_tree_row_reference_get_path (item->rowref);
 
-  gtk_tree_view_set_cursor (data->wp_tree, path, NULL, FALSE);
-  gtk_tree_view_scroll_to_cell (data->wp_tree, path, NULL, TRUE, 0.5, 0.0);
+  gtk_icon_view_select_path (data->wp_view, path);
+  gtk_icon_view_scroll_to_path (data->wp_view, path, TRUE, 0.5, 0.0);
   gtk_tree_path_free (path);
+}
+
+static GnomeWPItem *
+get_selected_item (AppearanceData *data,
+                   GtkTreeIter *iter)
+{
+  GnomeWPItem *item = NULL;
+  GList *selected;
+
+  selected = gtk_icon_view_get_selected_items (data->wp_view);
+
+  if (selected != NULL)
+  {
+    GtkTreeIter sel_iter;
+    gchar *wpfile;
+
+    gtk_tree_model_get_iter (data->wp_model, &sel_iter,
+                             selected->data);
+
+    if (iter)
+      *iter = sel_iter;
+
+    gtk_tree_model_get (data->wp_model, &sel_iter, 2, &wpfile, -1);
+
+    item = g_hash_table_lookup (data->wp_hash, wpfile);
+    g_free (wpfile);
+  }
+
+  g_list_foreach (selected, (GFunc) gtk_tree_path_free, NULL);
+  g_list_free (selected);
+
+  return item;
 }
 
 static void
@@ -81,7 +116,6 @@ wp_props_load_wallpaper (gchar *key,
                          GnomeWPItem *item,
                          AppearanceData *data)
 {
-  GtkTreeModel *model;
   GtkTreeIter iter;
   GtkTreePath *path;
   GdkPixbuf *pixbuf;
@@ -89,16 +123,14 @@ wp_props_load_wallpaper (gchar *key,
   if (item->deleted == TRUE)
     return;
 
-  model = gtk_tree_view_get_model (data->wp_tree);
-
-  gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+  gtk_list_store_append (GTK_LIST_STORE (data->wp_model), &iter);
 
   pixbuf = gnome_wp_item_get_thumbnail (item, data->wp_thumbs);
   gnome_wp_item_update_description (item);
 
   if (pixbuf != NULL)
   {
-    gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+    gtk_list_store_set (GTK_LIST_STORE (data->wp_model), &iter,
                         0, pixbuf,
                         1, item->description,
                         2, item->filename,
@@ -107,14 +139,14 @@ wp_props_load_wallpaper (gchar *key,
   }
   else
   {
-    gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+    gtk_list_store_set (GTK_LIST_STORE (data->wp_model), &iter,
                         1, item->description,
                         2, item->filename,
                         -1);
   }
 
-  path = gtk_tree_model_get_path (model, &iter);
-  item->rowref = gtk_tree_row_reference_new (model, path);
+  path = gtk_tree_model_get_path (data->wp_model, &iter);
+  item->rowref = gtk_tree_row_reference_new (data->wp_model, path);
   gtk_tree_path_free (path);
 }
 
@@ -239,23 +271,13 @@ wp_option_menu_set (AppearanceData *data,
 static void
 wp_set_sensitivities (AppearanceData *data)
 {
-  GtkTreeIter iter;
-  GtkTreeModel *model;
-  GtkTreeSelection *selection;
   GnomeWPItem *item;
-  gchar *wpfile;
   gchar *filename = NULL;
 
-  selection = gtk_tree_view_get_selection (data->wp_tree);
+  item = get_selected_item (data, NULL);
 
-  if (gtk_tree_selection_get_selected (selection, &model, &iter))
-  {
-    gtk_tree_model_get (model, &iter, 2, &wpfile, -1);
-
-    item = g_hash_table_lookup (data->wp_hash, wpfile);
+  if (item != NULL)
     filename = item->filename;
-    g_free (wpfile);
-  }
 
   if (!gconf_client_key_is_writable (data->client, WP_OPTIONS_KEY, NULL)
       || (filename && !strcmp (filename, "(none)")))
@@ -288,23 +310,11 @@ static void
 wp_scale_type_changed (GtkComboBox *combobox,
                        AppearanceData *data)
 {
-  GnomeWPItem *item = NULL;
-  GdkPixbuf *pixbuf;
+  GnomeWPItem *item;
   GtkTreeIter iter;
-  GtkTreeModel *model;
-  GtkTreeSelection *selection;
-  gchar *wpfile;
+  GdkPixbuf *pixbuf;
 
-  selection = gtk_tree_view_get_selection (data->wp_tree);
-
-  if (gtk_tree_selection_get_selected (selection, &model, &iter))
-  {
-    gtk_tree_model_get (model, &iter, 2, &wpfile, -1);
-
-    item = g_hash_table_lookup (data->wp_hash, wpfile);
-
-    g_free (wpfile);
-  }
+  item = get_selected_item (data, &iter);
 
   if (item == NULL)
     return;
@@ -332,7 +342,7 @@ wp_scale_type_changed (GtkComboBox *combobox,
   }
 
   pixbuf = gnome_wp_item_get_thumbnail (item, data->wp_thumbs);
-  gtk_list_store_set (GTK_LIST_STORE (gtk_tree_view_get_model (data->wp_tree)),
+  gtk_list_store_set (GTK_LIST_STORE (data->wp_model),
                       &iter,
                       0, pixbuf,
                       -1);
@@ -345,23 +355,11 @@ static void
 wp_shade_type_changed (GtkWidget *combobox,
                        AppearanceData *data)
 {
-  GnomeWPItem *item = NULL;
+  GnomeWPItem *item;
   GtkTreeIter iter;
-  GtkTreeModel *model;
-  GtkTreeSelection *selection;
-  gchar *wpfile;
   GdkPixbuf *pixbuf;
 
-  selection = gtk_tree_view_get_selection (data->wp_tree);
-
-  if (gtk_tree_selection_get_selected (selection, &model, &iter))
-  {
-    gtk_tree_model_get (model, &iter, 2, &wpfile, -1);
-
-    item = g_hash_table_lookup (data->wp_hash, wpfile);
-
-    g_free (wpfile);
-  }
+  item = get_selected_item (data, &iter);
 
   if (item == NULL)
     return;
@@ -386,7 +384,7 @@ wp_shade_type_changed (GtkWidget *combobox,
   }
 
   pixbuf = gnome_wp_item_get_thumbnail (item, data->wp_thumbs);
-  gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+  gtk_list_store_set (GTK_LIST_STORE (data->wp_model), &iter,
                       0, pixbuf,
                       -1);
   g_object_unref (pixbuf);
@@ -398,22 +396,9 @@ static void
 wp_color_changed (AppearanceData *data,
                   gboolean update)
 {
-  GnomeWPItem *item = NULL;
-  GtkTreeIter iter;
-  GtkTreeModel *model;
-  GtkTreeSelection *selection;
-  gchar *wpfile;
+  GnomeWPItem *item;
 
-  selection = gtk_tree_view_get_selection (data->wp_tree);
-
-  if (gtk_tree_selection_get_selected (selection, &model, &iter))
-  {
-    gtk_tree_model_get (model, &iter, 2, &wpfile, -1);
-
-    item = g_hash_table_lookup (data->wp_hash, wpfile);
-
-    g_free (wpfile);
-  }
+  item = get_selected_item (data, NULL);
 
   if (item == NULL)
     return;
@@ -458,30 +443,22 @@ static void
 wp_remove_wallpaper (GtkWidget *widget,
                      AppearanceData *data)
 {
+  GnomeWPItem *item;
   GtkTreeIter iter;
-  GtkTreeModel *model;
-  GtkTreeSelection *selection;
+  GtkTreePath *path;
 
-  selection = gtk_tree_view_get_selection (data->wp_tree);
+  item = get_selected_item (data, &iter);
 
-  if (gtk_tree_selection_get_selected (selection, &model, &iter))
+  if (item)
   {
-    GnomeWPItem *item;
-    gchar *wpfile;
-    GtkTreePath *path;
-
-    gtk_tree_model_get (model, &iter, 2, &wpfile, -1);
-
-    item = g_hash_table_lookup (data->wp_hash, wpfile);
     item->deleted = TRUE;
-    g_free (wpfile);
 
-    if (gtk_list_store_remove (GTK_LIST_STORE (model), &iter))
-      path = gtk_tree_model_get_path (model, &iter);
+    if (gtk_list_store_remove (GTK_LIST_STORE (data->wp_model), &iter))
+      path = gtk_tree_model_get_path (data->wp_model, &iter);
     else
       path = gtk_tree_path_new_first ();
 
-    gtk_tree_view_set_cursor (data->wp_tree, path, NULL, FALSE);
+    gtk_icon_view_set_cursor (data->wp_view, path, NULL, FALSE);
     gtk_tree_path_free (path);
   }
 }
@@ -490,29 +467,17 @@ static void
 wp_uri_changed (const gchar *uri,
                 AppearanceData *data)
 {
-  GtkTreeSelection * selection;
-  GtkTreeModel * model;
-  GtkTreeIter iter;
-  GnomeWPItem * item;
-  gchar * selected;
+  GnomeWPItem *item, *selected;
 
   item = g_hash_table_lookup (data->wp_hash, uri);
+  selected = get_selected_item (data, NULL);
 
-  selection = gtk_tree_view_get_selection (data->wp_tree);
-
-  if (gtk_tree_selection_get_selected (selection, &model, &iter))
+  if (selected != NULL && strcmp (selected->filename, uri) != 0)
   {
-    gtk_tree_model_get (model, &iter, 2, &selected, -1);
+    if (item == NULL)
+      item = wp_add_image (data, uri);
 
-    if (strcmp (selected, uri) != 0)
-    {
-      if (item == NULL)
-        item = wp_add_image (data, uri);
-
-      scroll_to_item (data, item);
-    }
-
-    g_free (selected);
+    scroll_to_item (data, item);
   }
 }
 
@@ -541,12 +506,8 @@ wp_options_changed (GConfClient *client, guint id,
                     GConfEntry *entry,
                     AppearanceData *data)
 {
-  GtkTreeSelection *selection;
-  GtkTreeModel *model;
-  GtkTreeIter iter;
   GnomeWPItem *item;
   const gchar *option;
-  gchar *wpfile;
 
   option = gconf_value_get_string (entry->value);
 
@@ -561,22 +522,13 @@ wp_options_changed (GConfClient *client, guint id,
     return;
   }
 
-  selection = gtk_tree_view_get_selection (data->wp_tree);
+  item = get_selected_item (data, NULL);
 
-  if (gtk_tree_selection_get_selected (selection, &model, &iter))
+  if (item != NULL)
   {
-    gtk_tree_model_get (model, &iter, 2, &wpfile, -1);
-
-    item = g_hash_table_lookup (data->wp_hash, wpfile);
-
-    if (item != NULL)
-    {
-      g_free (item->options);
-      item->options = g_strdup (option);
-      wp_option_menu_set (data, item->options, FALSE);
-    }
-
-    g_free (wpfile);
+    g_free (item->options);
+    item->options = g_strdup (option);
+    wp_option_menu_set (data, item->options, FALSE);
   }
 }
 
@@ -585,30 +537,17 @@ wp_shading_changed (GConfClient *client, guint id,
                     GConfEntry *entry,
                     AppearanceData *data)
 {
-  GtkTreeSelection *selection;
-  GtkTreeModel *model;
-  GtkTreeIter iter;
   GnomeWPItem *item;
-  gchar *wpfile;
 
   wp_set_sensitivities (data);
 
-  selection = gtk_tree_view_get_selection (data->wp_tree);
+  item = get_selected_item (data, NULL);
 
-  if (gtk_tree_selection_get_selected (selection, &model, &iter))
+  if (item != NULL)
   {
-    gtk_tree_model_get (model, &iter, 2, &wpfile, -1);
-
-    item = g_hash_table_lookup (data->wp_hash, wpfile);
-
-    if (item != NULL)
-    {
-      g_free (item->shade_type);
-      item->shade_type = g_strdup (gconf_value_get_string (entry->value));
-      wp_option_menu_set (data, item->shade_type, TRUE);
-    }
-
-    g_free (wpfile);
+    g_free (item->shade_type);
+    item->shade_type = g_strdup (gconf_value_get_string (entry->value));
+    wp_option_menu_set (data, item->shade_type, TRUE);
   }
 }
 
@@ -651,21 +590,13 @@ wp_color2_changed (GConfClient *client, guint id,
 static gboolean
 wp_props_wp_set (AppearanceData *data)
 {
-  GtkTreeIter iter;
-  GtkTreeModel *model;
-  GtkTreeSelection *selection;
   GnomeWPItem *item;
   GConfChangeSet *cs;
-  gchar *wpfile;
 
-  selection = gtk_tree_view_get_selection (data->wp_tree);
+  item = get_selected_item (data, NULL);
 
-  if (gtk_tree_selection_get_selected (selection, &model, &iter))
+  if (item != NULL)
   {
-    gtk_tree_model_get (model, &iter, 2, &wpfile, -1);
-
-    item = g_hash_table_lookup (data->wp_hash, wpfile);
-
     cs = gconf_change_set_new ();
 
     if (!strcmp (item->filename, "(none)"))
@@ -696,8 +627,6 @@ wp_props_wp_set (AppearanceData *data)
     gconf_client_commit_change_set (data->client, cs, TRUE, NULL);
 
     gconf_change_set_unref (cs);
-
-    g_free (wpfile);
   }
 
   return FALSE;
@@ -707,17 +636,12 @@ static void
 wp_props_wp_selected (GtkTreeSelection *selection,
                       AppearanceData *data)
 {
-  GtkTreeIter iter;
-  GtkTreeModel *model;
   GnomeWPItem *item;
-  gchar *wpfile;
 
-  if (gtk_tree_selection_get_selected (selection, &model, &iter))
+  item = get_selected_item (data, NULL);
+
+  if (item != NULL)
   {
-    gtk_tree_model_get (model, &iter, 2, &wpfile, -1);
-
-    item = g_hash_table_lookup (data->wp_hash, wpfile);
-
     wp_set_sensitivities (data);
 
     if (strcmp (item->filename, "(none)") != 0)
@@ -729,8 +653,6 @@ wp_props_wp_selected (GtkTreeSelection *selection,
                                 item->pcolor);
     gtk_color_button_set_color (GTK_COLOR_BUTTON (data->wp_scpicker),
                                 item->scolor);
-
-    g_free (wpfile);
   }
   else
   {
@@ -974,9 +896,7 @@ void
 desktop_init (AppearanceData *data)
 {
   GtkWidget *add_button;
-  GtkTreeViewColumn *column;
-  GtkCellRenderer *renderer;
-  GtkTreeSelection *selection;
+  GValue val = {0,};
   GtkFileFilter *filter;
 
   data->wp_hash = g_hash_table_new (g_str_hash, g_str_equal);
@@ -1016,24 +936,25 @@ desktop_init (AppearanceData *data)
   g_signal_connect_after (G_OBJECT (glade_xml_get_widget (data->xml, "appearance_window")), "delete-event",
                           G_CALLBACK (wp_tree_delete_event), data);
 
-  data->wp_tree = GTK_TREE_VIEW (glade_xml_get_widget (data->xml, "wp_tree"));
-  gtk_tree_view_set_model (data->wp_tree, data->wp_model);
+  data->wp_view = GTK_ICON_VIEW (glade_xml_get_widget (data->xml, "wp_view"));
+  gtk_icon_view_set_model (data->wp_view, GTK_TREE_MODEL (data->wp_model));
 
-  column = gtk_tree_view_column_new ();
-  renderer = gtk_cell_renderer_pixbuf_new ();
-  gtk_tree_view_column_pack_start (column, renderer, FALSE);
-  gtk_tree_view_column_set_attributes (column, renderer,
-                                       "pixbuf", 0,
-                                       NULL);
+  gtk_cell_layout_clear (GTK_CELL_LAYOUT (data->wp_view));
 
-  renderer = gtk_cell_renderer_text_new ();
-  gtk_tree_view_column_pack_start (column, renderer, FALSE);
-  gtk_tree_view_column_set_attributes (column, renderer,
-                                       "markup", 1,
-                                       NULL);
-  gtk_tree_view_column_set_spacing (column, 6);
+  data->wp_cell = cell_renderer_wallpaper_new ();
 
-  gtk_tree_view_append_column (data->wp_tree, column);
+  g_value_init (&val, G_TYPE_UINT);
+  g_value_set_uint (&val, 5);
+
+  g_object_set_property (G_OBJECT (data->wp_cell), "xpad", &val);
+  g_object_set_property (G_OBJECT (data->wp_cell), "ypad", &val);
+
+  gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (data->wp_view),
+                              data->wp_cell,
+                              TRUE);
+  gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (data->wp_view), data->wp_cell,
+                                  "pixbuf", 0,
+                                  NULL);
 
   gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (data->wp_model), 2,
                                    (GtkTreeIterCompareFunc) wp_list_sort,
@@ -1041,12 +962,12 @@ desktop_init (AppearanceData *data)
 
   gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (data->wp_model),
                                         2, GTK_SORT_ASCENDING);
-
+/*
   gtk_drag_dest_set (GTK_WIDGET (data->wp_tree), GTK_DEST_DEFAULT_ALL, drop_types,
                      sizeof (drop_types) / sizeof (drop_types[0]),
                       GDK_ACTION_COPY | GDK_ACTION_MOVE);
   g_signal_connect (G_OBJECT (data->wp_tree), "drag_data_received",
-                    G_CALLBACK (wp_dragged_image), data);
+                    G_CALLBACK (wp_dragged_image), data);*/
 
   data->wp_style_menu = glade_xml_get_widget (data->xml, "wp_style_menu");
 
@@ -1092,8 +1013,7 @@ desktop_init (AppearanceData *data)
 
   g_idle_add (wp_load_stuffs, data);
 
-  selection = gtk_tree_view_get_selection (data->wp_tree);
-  g_signal_connect (G_OBJECT (selection), "changed",
+  g_signal_connect (G_OBJECT (data->wp_view), "selection-changed",
                     G_CALLBACK (wp_props_wp_selected), data);
 
   wp_set_sensitivities (data);

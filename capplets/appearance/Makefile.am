@@ -23,7 +23,9 @@ gnome_appearance_properties_SOURCES = \
 	gnome-wp-utils.c \
 	gnome-wp-utils.h \
 	gnome-wp-xml.c \
-	gnome-wp-xml.h
+	gnome-wp-xml.h \
+	wp-cellrenderer.c \
+	wp-cellrenderer.h
 
 gnome_appearance_properties_LDADD = \
 	$(GNOMECC_CAPPLETS_LIBS) 					\

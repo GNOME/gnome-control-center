@@ -197,7 +197,7 @@ static void collect_save_options (GdkPixbuf * pixbuf,
   (*vals)[count] = NULL;
 }
 
-#define LIST_IMAGE_WIDTH 64
+#define LIST_IMAGE_WIDTH 128
 
 GdkPixbuf * gnome_wp_item_get_thumbnail (GnomeWPItem * item,
 					 GnomeThumbnailFactory * thumbs) {
