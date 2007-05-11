@@ -933,7 +933,7 @@ desktop_init (AppearanceData *data)
                                                  G_TYPE_STRING,
                                                  G_TYPE_STRING));
 
-  g_signal_connect_after (G_OBJECT (glade_xml_get_widget (data->xml, "appearance_window")), "delete-event",
+  g_signal_connect_after (G_OBJECT (glade_xml_get_widget (data->xml, "appearance_window")), "response",
                           G_CALLBACK (wp_tree_delete_event), data);
 
   data->wp_view = GTK_ICON_VIEW (glade_xml_get_widget (data->xml, "wp_view"));
