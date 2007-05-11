@@ -58,9 +58,7 @@ static GtkTargetEntry drop_types[] = {
   { "property/bgimage", 0, TARGET_BGIMAGE },
   /*  { "x-special/gnome-reset-background", 0, TARGET_BACKGROUND_RESET }*/
 };
-static GnomeWPItem *
-get_selected_item (AppearanceData *data,
-                   GtkTreeIter *iter);
+
 static void
 scroll_to_item (AppearanceData *data,
                 GnomeWPItem * item)
@@ -96,6 +94,9 @@ get_selected_item (AppearanceData *data,
     gtk_tree_model_get_iter (data->wp_model, &sel_iter,
                              selected->data);
 
+    g_list_foreach (selected, (GFunc) gtk_tree_path_free, NULL);
+    g_list_free (selected);
+
     if (iter)
       *iter = sel_iter;
 
@@ -104,9 +105,6 @@ get_selected_item (AppearanceData *data,
     item = g_hash_table_lookup (data->wp_hash, wpfile);
     g_free (wpfile);
   }
-
-  g_list_foreach (selected, (GFunc) gtk_tree_path_free, NULL);
-  g_list_free (selected);
 
   return item;
 }
@@ -688,6 +686,8 @@ wp_tree_delete_event (GtkWidget *widget,
 {
   gnome_wp_xml_save_list (data);
   g_object_unref (data->wp_thumbs);
+  g_object_ref_sink (data->wp_filesel);
+  g_object_unref (data->wp_filesel);
 }
 
 static void
@@ -784,6 +784,7 @@ wp_update_preview (GtkFileChooser *chooser,
       pixbuf = gnome_thumbnail_factory_generate_thumbnail (data->wp_thumbs,
                                                            uri,
                                                            mime_type);
+      g_free (mime_type);
     }
 
     if (pixbuf != NULL)
@@ -797,8 +798,6 @@ wp_update_preview (GtkFileChooser *chooser,
                                 "gtk-dialog-question",
                                 GTK_ICON_SIZE_DIALOG);
     }
-
-    g_free (mime_type);
   }
 
   gtk_file_chooser_set_preview_widget_active (chooser, TRUE);
@@ -971,20 +970,10 @@ desktop_init (AppearanceData *data)
 
   data->wp_style_menu = glade_xml_get_widget (data->xml, "wp_style_menu");
 
-  gtk_combo_box_append_text (GTK_COMBO_BOX (data->wp_style_menu), _("Centered"));
-  gtk_combo_box_append_text (GTK_COMBO_BOX (data->wp_style_menu), _("Fill screen"));
-  gtk_combo_box_append_text (GTK_COMBO_BOX (data->wp_style_menu), _("Scaled"));
-  gtk_combo_box_append_text (GTK_COMBO_BOX (data->wp_style_menu), _("Zoom"));
-  gtk_combo_box_append_text (GTK_COMBO_BOX (data->wp_style_menu), _("Tiled"));
-
   g_signal_connect (G_OBJECT (data->wp_style_menu), "changed",
                     G_CALLBACK (wp_scale_type_changed), data);
 
   data->wp_color_menu = glade_xml_get_widget (data->xml, "wp_color_menu");
-
-  gtk_combo_box_append_text (GTK_COMBO_BOX (data->wp_color_menu), _("Solid color"));
-  gtk_combo_box_append_text (GTK_COMBO_BOX (data->wp_color_menu), _("Horizontal gradient"));
-  gtk_combo_box_append_text (GTK_COMBO_BOX (data->wp_color_menu), _("Vertical gradient"));
 
   g_signal_connect (G_OBJECT (data->wp_color_menu), "changed",
                     G_CALLBACK (wp_shade_type_changed), data);
