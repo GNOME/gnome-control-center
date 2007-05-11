@@ -334,8 +334,10 @@ wp_scale_type_changed (GtkComboBox *combobox,
     item->options = g_strdup ("zoom");
     break;
   case GNOME_WP_SCALE_TYPE_TILED:
-  default:
     item->options = g_strdup ("wallpaper");
+    break;
+  default:
+    item->options = g_strdup ("none");
     break;
   }
 
@@ -412,7 +414,7 @@ wp_color_changed (AppearanceData *data,
 
   g_free (item->sec_color);
 
-  gtk_color_button_get_color (GTK_COLOR_BUTTON (data->wp_pcpicker), item->scolor);
+  gtk_color_button_get_color (GTK_COLOR_BUTTON (data->wp_scpicker), item->scolor);
 
   item->sec_color = g_strdup_printf ("#%02X%02X%02X",
                                      item->scolor->red >> 8,
@@ -586,46 +588,40 @@ wp_color2_changed (GConfClient *client, guint id,
 }
 
 static gboolean
-wp_props_wp_set (AppearanceData *data)
+wp_props_wp_set (AppearanceData *data, GnomeWPItem *item)
 {
-  GnomeWPItem *item;
   GConfChangeSet *cs;
 
-  item = get_selected_item (data, NULL);
+  cs = gconf_change_set_new ();
 
-  if (item != NULL)
+  if (!strcmp (item->filename, "(none)"))
   {
-    cs = gconf_change_set_new ();
-
-    if (!strcmp (item->filename, "(none)"))
-    {
-      gconf_change_set_set_string (cs, WP_OPTIONS_KEY, "none");
-      gconf_change_set_set_string (cs, WP_FILE_KEY, "");
-    }
-    else
-    {
-      gchar *uri;
-
-      if (g_utf8_validate (item->filename, -1, NULL))
-        uri = g_strdup (item->filename);
-      else
-        uri = g_filename_to_utf8 (item->filename, -1, NULL, NULL, NULL);
-
-      gconf_change_set_set_string (cs, WP_FILE_KEY, uri);
-      g_free (uri);
-
-      gconf_change_set_set_string (cs, WP_OPTIONS_KEY, item->options);
-    }
-
-    gconf_change_set_set_string (cs, WP_SHADING_KEY, item->shade_type);
-
-    gconf_change_set_set_string (cs, WP_PCOLOR_KEY, item->pri_color);
-    gconf_change_set_set_string (cs, WP_SCOLOR_KEY, item->sec_color);
-
-    gconf_client_commit_change_set (data->client, cs, TRUE, NULL);
-
-    gconf_change_set_unref (cs);
+    gconf_change_set_set_string (cs, WP_OPTIONS_KEY, "none");
+    gconf_change_set_set_string (cs, WP_FILE_KEY, "");
   }
+  else
+  {
+    gchar *uri;
+
+    if (g_utf8_validate (item->filename, -1, NULL))
+      uri = g_strdup (item->filename);
+    else
+      uri = g_filename_to_utf8 (item->filename, -1, NULL, NULL, NULL);
+
+    gconf_change_set_set_string (cs, WP_FILE_KEY, uri);
+    g_free (uri);
+
+    gconf_change_set_set_string (cs, WP_OPTIONS_KEY, item->options);
+  }
+
+  gconf_change_set_set_string (cs, WP_SHADING_KEY, item->shade_type);
+
+  gconf_change_set_set_string (cs, WP_PCOLOR_KEY, item->pri_color);
+  gconf_change_set_set_string (cs, WP_SCOLOR_KEY, item->sec_color);
+
+  gconf_client_commit_change_set (data->client, cs, TRUE, NULL);
+
+  gconf_change_set_unref (cs);
 
   return FALSE;
 }
@@ -651,14 +647,14 @@ wp_props_wp_selected (GtkTreeSelection *selection,
                                 item->pcolor);
     gtk_color_button_set_color (GTK_COLOR_BUTTON (data->wp_scpicker),
                                 item->scolor);
+
+    if (data->wp_update_gconf)
+      wp_props_wp_set (data, item);
   }
   else
   {
     gtk_widget_set_sensitive (data->wp_rem_button, FALSE);
   }
-
-  if (data->wp_update_gconf)
-    wp_props_wp_set (data);
 }
 
 static void
@@ -882,6 +878,7 @@ wp_load_stuffs (void *user_data)
     if (!strcmp (style, "none"))
     {
       scroll_to_item (data, item);
+      wp_option_menu_set (data, style, FALSE);
     }
 
   }
