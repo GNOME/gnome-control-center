@@ -60,8 +60,9 @@ static GtkTargetEntry drop_types[] = {
 };
 
 static void
-scroll_to_item (AppearanceData *data,
-                GnomeWPItem * item)
+select_item (AppearanceData *data,
+             GnomeWPItem * item,
+             gboolean scroll)
 {
   GtkTreePath *path;
 
@@ -73,7 +74,10 @@ scroll_to_item (AppearanceData *data,
   path = gtk_tree_row_reference_get_path (item->rowref);
 
   gtk_icon_view_select_path (data->wp_view, path);
-  gtk_icon_view_scroll_to_path (data->wp_view, path, TRUE, 0.5, 0.0);
+
+  if (scroll)
+    gtk_icon_view_scroll_to_path (data->wp_view, path, FALSE, 0.5, 0.0);
+
   gtk_tree_path_free (path);
 }
 
@@ -206,7 +210,7 @@ wp_add_images (AppearanceData *data,
 
   if (item != NULL)
   {
-    scroll_to_item (data, item);
+    select_item (data, item, TRUE);
   }
 }
 
@@ -477,7 +481,7 @@ wp_uri_changed (const gchar *uri,
     if (item == NULL)
       item = wp_add_image (data, uri);
 
-    scroll_to_item (data, item);
+    select_item (data, item, TRUE);
   }
 }
 
@@ -676,9 +680,9 @@ wp_file_open_dialog (GtkWidget *widget,
 }
 
 static void
-wp_tree_delete_event (GtkWidget *widget,
-                      gint response_id,
-                      AppearanceData *data)
+appearance_window_response (GtkWidget *widget,
+                            gint response_id,
+                            AppearanceData *data)
 {
   if (response_id == 0 || response_id == GTK_RESPONSE_DELETE_EVENT) /* 0 = Close */
   {
@@ -846,7 +850,7 @@ wp_load_stuffs (void *user_data)
       wp_props_load_wallpaper (item->filename, item, data);
     }
 
-    scroll_to_item (data, item);
+    select_item (data, item, FALSE);
 
     wp_option_menu_set (data, item->options, FALSE);
     wp_option_menu_set (data, item->shade_type, TRUE);
@@ -858,7 +862,7 @@ wp_load_stuffs (void *user_data)
   else if (strcmp (style, "none") != 0)
   {
     item = wp_add_image (data, imagepath);
-    scroll_to_item (data, item);
+    select_item (data, item, FALSE);
   }
 
   item = g_hash_table_lookup (data->wp_hash, "(none)");
@@ -880,7 +884,7 @@ wp_load_stuffs (void *user_data)
 
     if (!strcmp (style, "none"))
     {
-      scroll_to_item (data, item);
+      select_item (data, item, FALSE);
       wp_option_menu_set (data, style, FALSE);
     }
 
@@ -891,6 +895,13 @@ wp_load_stuffs (void *user_data)
   return FALSE;
 }
 
+static void
+wp_select_after_realize (GtkWidget *widget,
+                         AppearanceData *data)
+{
+  select_item (data, get_selected_item (data, NULL), TRUE);
+}
+
 void
 desktop_init (AppearanceData *data)
 {
@@ -898,6 +909,8 @@ desktop_init (AppearanceData *data)
   GValue val = {0,};
   GtkFileFilter *filter;
 
+  data->wp_update_gconf = TRUE;
+  
   data->wp_hash = g_hash_table_new (g_str_hash, g_str_equal);
 
   data->wp_thumbs = gnome_thumbnail_factory_new (GNOME_THUMBNAIL_SIZE_NORMAL);
@@ -933,10 +946,13 @@ desktop_init (AppearanceData *data)
                                                  G_TYPE_STRING));
 
   g_signal_connect_after (G_OBJECT (glade_xml_get_widget (data->xml, "appearance_window")), "response",
-                          G_CALLBACK (wp_tree_delete_event), data);
+                          G_CALLBACK (appearance_window_response), data);
 
   data->wp_view = GTK_ICON_VIEW (glade_xml_get_widget (data->xml, "wp_view"));
   gtk_icon_view_set_model (data->wp_view, GTK_TREE_MODEL (data->wp_model));
+
+  g_signal_connect_after (G_OBJECT (data->wp_view), "realize",
+                          G_CALLBACK (wp_select_after_realize), data);
 
   gtk_cell_layout_clear (GTK_CELL_LAYOUT (data->wp_view));
 
