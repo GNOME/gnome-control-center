@@ -458,7 +458,7 @@ wp_remove_wallpaper (GtkWidget *widget,
     else
       path = gtk_tree_path_new_first ();
 
-    gtk_icon_view_set_cursor (data->wp_view, path, NULL, FALSE);
+    gtk_icon_view_select_path (data->wp_view, path);
     gtk_tree_path_free (path);
   }
 }
