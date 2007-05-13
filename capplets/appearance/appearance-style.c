@@ -82,6 +82,7 @@ prepare_combo (AppearanceData *data, GtkWidget *combo, enum ThemeType type)
   GList *l, *list = NULL;
   GtkCellRenderer *renderer;
   GnomeThemeElement element = 0;
+  GtkTreeModel *sort_model;
 
   switch (type)
   {
@@ -126,7 +127,10 @@ prepare_combo (AppearanceData *data, GtkWidget *combo, enum ThemeType type)
 
   }
 
-  gtk_combo_box_set_model (GTK_COMBO_BOX (combo), GTK_TREE_MODEL (store));
+  sort_model = gtk_tree_model_sort_new_with_model (GTK_TREE_MODEL (store));
+  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (sort_model), 0, GTK_SORT_ASCENDING);
+
+  gtk_combo_box_set_model (GTK_COMBO_BOX (combo), GTK_TREE_MODEL (sort_model));
   gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combo), renderer, TRUE);
   gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (combo), renderer, "text", 0);
 
