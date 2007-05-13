@@ -25,18 +25,19 @@
 #include <libwindow-settings/gnome-wm-manager.h>
 
 enum {
-  THEME_NAME_COLUMN,
+  THEME_DISPLAY_NAME_COLUMN,
   THEME_PIXBUF_COLUMN,
+  THEME_NAME_COLUMN,
 };
 
 /* Theme functions */
-void theme_changed_func (gpointer uri, AppearanceData *data);
+static void theme_changed_func (gpointer uri, AppearanceData *data);
 
 /* GUI Callbacks */
-void theme_custom_cb (GtkWidget *button, AppearanceData *data);
-void theme_install_cb (GtkWidget *button, AppearanceData *data);
-void theme_delete_cb (GtkWidget *button, AppearanceData *data);
-void theme_activated_cb (GtkWidget *icon_view, GtkTreePath *path, AppearanceData *data);
+static void theme_custom_cb (GtkWidget *button, AppearanceData *data);
+static void theme_install_cb (GtkWidget *button, AppearanceData *data);
+static void theme_delete_cb (GtkWidget *button, AppearanceData *data);
+static void theme_selection_changed_cb (GtkWidget *icon_view, AppearanceData *data);
 
 void
 themes_init (AppearanceData *data)
@@ -55,10 +56,10 @@ themes_init (AppearanceData *data)
   g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "theme_delete")), "clicked", (GCallback) theme_delete_cb, data);
 
   /* connect theme list signals */
-  g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "theme_list")), "item-activated", (GCallback) theme_activated_cb, data);
+  g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "theme_list")), "selection-changed", (GCallback) theme_selection_changed_cb, data);
 
   /* set up theme list */
-  theme_store = gtk_list_store_new (2, G_TYPE_STRING, GDK_TYPE_PIXBUF);
+  theme_store = gtk_list_store_new (3, G_TYPE_STRING, GDK_TYPE_PIXBUF, G_TYPE_STRING);
 
   /* Temporary measure to fill the themes list.
    * This should be replace with asynchronous calls.
@@ -67,11 +68,13 @@ themes_init (AppearanceData *data)
   gnome_theme_info_register_theme_change ((GFunc)theme_changed_func, data);
   for (l = theme_list; l; l = g_list_next (l))
   {
-    gchar *name = ((GnomeThemeMetaInfo *)l->data)->readable_name;
+    gchar *name = ((GnomeThemeMetaInfo *)l->data)->name;
+    gchar *display_name = ((GnomeThemeMetaInfo *)l->data)->readable_name;
     if (name)
     {
       GdkPixbuf *pixbuf = generate_theme_thumbnail (l->data, TRUE);
       gtk_list_store_insert_with_values (theme_store, NULL, 0,
+          THEME_DISPLAY_NAME_COLUMN, display_name,
           THEME_NAME_COLUMN, name,
           THEME_PIXBUF_COLUMN, pixbuf,
           -1);
@@ -79,7 +82,9 @@ themes_init (AppearanceData *data)
   }
 
   w = glade_xml_get_widget (data->xml, "theme_list");
-  gtk_icon_view_set_model (GTK_ICON_VIEW (w), GTK_TREE_MODEL (theme_store));
+  GtkTreeModel *sort_model = gtk_tree_model_sort_new_with_model (GTK_TREE_MODEL (theme_store));
+  gtk_icon_view_set_model (GTK_ICON_VIEW (w), GTK_TREE_MODEL (sort_model));
+  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (sort_model), THEME_DISPLAY_NAME_COLUMN, GTK_SORT_ASCENDING);
 
   w = glade_xml_get_widget (data->xml, "theme_open");
   gtk_button_set_image (GTK_BUTTON (w),
@@ -88,7 +93,7 @@ themes_init (AppearanceData *data)
 
 /** Theme Callbacks **/
 
-void
+static void
 theme_changed_func (gpointer uri, AppearanceData *data)
 {
   /* TODO: add/change/remove themes from the model as appropriate */
@@ -97,26 +102,32 @@ theme_changed_func (gpointer uri, AppearanceData *data)
 
 /** GUI Callbacks **/
 
-void
-theme_activated_cb (GtkWidget *icon_view, GtkTreePath *path, AppearanceData *data)
+static void
+theme_selection_changed_cb (GtkWidget *icon_view, AppearanceData *data)
 {
   GtkTreeModel *model;
   GtkTreeIter iter;
   GnomeThemeMetaInfo *theme = NULL;
   gchar *name;
+  GList *selection;
+
+  selection = gtk_icon_view_get_selected_items (GTK_ICON_VIEW (icon_view));
 
   model = gtk_icon_view_get_model (GTK_ICON_VIEW (icon_view));
-  gtk_tree_model_get_iter (model, &iter, path);
+  gtk_tree_model_get_iter (model, &iter, selection->data);
   gtk_tree_model_get (model, &iter, THEME_NAME_COLUMN, &name, -1);
 
   theme = gnome_theme_meta_info_find (name);
   if (theme)
     gnome_meta_theme_set (theme);
+
   g_free (theme);
   g_free (name);
+  g_list_foreach (selection, (GFunc) gtk_tree_path_free, NULL);
+  g_list_free (selection);
 }
 
-void
+static void
 theme_custom_cb (GtkWidget *button, AppearanceData *data)
 {
   GtkWidget *w, *parent;
@@ -128,13 +139,13 @@ theme_custom_cb (GtkWidget *button, AppearanceData *data)
   gtk_widget_show_all (w);
 }
 
-void
+static void
 theme_install_cb (GtkWidget *button, AppearanceData *data)
 {
   /* TODO: Install a new theme */
 }
 
-void
+static void
 theme_delete_cb (GtkWidget *button, AppearanceData *data)
 {
   /* TODO: Delete the selected theme */
