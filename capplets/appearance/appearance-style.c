@@ -44,18 +44,27 @@ static const gchar *gconf_keys[] = {
 static void prepare_combo (AppearanceData *data, GtkWidget *combo, enum ThemeType type);
 static void update_color_buttons_from_string (gchar *color_scheme, AppearanceData *data);
 
+static void color_scheme_changed (GObject    *settings, GParamSpec *pspec, AppearanceData  *data);
+
 
 /* GUI Callbacks */
 
 static void color_button_clicked_cb (GtkWidget *colorbutton, AppearanceData *data);
 static GConfValue *conv_to_widget_cb (GConfPropertyEditor *peditor, GConfValue *value);
 static GConfValue *conv_from_widget_cb (GConfPropertyEditor *peditor, GConfValue *value);
+
+
 void
 style_init (AppearanceData *data)
 {
 
   GtkSettings *settings;
   gchar *colour_scheme;
+  GtkWidget *w;
+
+  w = glade_xml_get_widget (data->xml, "theme_details");
+  g_signal_connect_swapped (glade_xml_get_widget (data->xml, "theme_close_button"), "clicked", (GCallback) gtk_widget_hide, w);
+  gtk_widget_hide_on_delete (w);
 
   prepare_combo (data, glade_xml_get_widget (data->xml, "gtk_themes_combobox"), GTK_THEMES);
   prepare_combo (data, glade_xml_get_widget (data->xml, "window_themes_combobox"), METACITY_THEMES);
@@ -63,6 +72,7 @@ style_init (AppearanceData *data)
 
   settings = gtk_settings_get_default ();
   g_object_get (G_OBJECT (settings), "gtk-color-scheme", &colour_scheme, NULL);
+  g_signal_connect (G_OBJECT (settings), "notify::gtk-color-scheme", (GCallback) color_scheme_changed, data);
   update_color_buttons_from_string (colour_scheme, data);
   g_free (colour_scheme);
 
@@ -144,33 +154,72 @@ prepare_combo (AppearanceData *data, GtkWidget *combo, enum ThemeType type)
 
 /* Callbacks */
 
-static GConfValue *
-conv_to_widget_cb (GConfPropertyEditor *peditor, GConfValue *value)
+static int
+find_string_in_model (GtkTreeModel *model, const gchar *value, gint column)
 {
-  GtkListStore *store;
+  gint index = -1;
   GtkTreeIter iter;
-  gboolean valid;
+  gboolean found, valid;
   gchar *test = NULL;
-  GtkWidget *combo;
-  GConfValue *new_value;
-  gint index  = -1;
 
-  /* find value in model */
-  combo = GTK_WIDGET (gconf_property_editor_get_ui_control (peditor));
-  store = GTK_LIST_STORE (gtk_combo_box_get_model (GTK_COMBO_BOX (combo)));
-  valid = gtk_tree_model_get_iter_first (GTK_TREE_MODEL (store), &iter);
+  if (!value)
+    return -1;
+
+  valid = gtk_tree_model_get_iter_first (model, &iter);
+  found = FALSE;
   while (valid)
   {
     index++;
     g_free (test);
-    gtk_tree_model_get (GTK_TREE_MODEL (store), &iter, 0, &test, -1);
-    if (test && !strcmp (test, gconf_value_get_string (value)))
+    gtk_tree_model_get (model, &iter, column, &test, -1);
+    if (test && !strcmp (test, value))
+    {
+      found = TRUE;
       break;
-    valid = gtk_tree_model_iter_next (GTK_TREE_MODEL (store), &iter);
+    }
+    valid = gtk_tree_model_iter_next (model, &iter);
   }
   g_free (test);
 
-  /* FIXME: Add a temporary item if we can't find a match */
+  return (found) ? index : -1;
+
+}
+
+static GConfValue *
+conv_to_widget_cb (GConfPropertyEditor *peditor, GConfValue *value)
+{
+  GtkTreeModel *store;
+  GtkWidget *combo;
+  const gchar *curr_value;
+  GConfValue *new_value;
+  gint index  = -1;
+
+  /* find value in model */
+  curr_value = gconf_value_get_string (value);
+  combo = GTK_WIDGET (gconf_property_editor_get_ui_control (peditor));
+  store = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
+
+  index = find_string_in_model (store, curr_value, 0);
+
+
+  /* Add a temporary item if we can't find a match
+   * TODO: delete this item if it is no longer selected?
+   */
+  if (index == -1)
+  {
+    GtkListStore *list_store;
+
+    if (GTK_IS_TREE_MODEL_SORT (store))
+      list_store = GTK_LIST_STORE (gtk_tree_model_sort_get_model (GTK_TREE_MODEL_SORT (store)));
+    else
+      list_store = GTK_LIST_STORE (store);
+
+    gtk_list_store_insert_with_values (list_store, NULL, 0, 0, curr_value, -1);
+    /* if the model is sorted then it might not still be in the position we just
+     * placed it, so we have to search the model again... */
+    index = find_string_in_model (store, curr_value, 0);
+  }
+
 
   new_value = gconf_value_new (GCONF_VALUE_INT);
   gconf_value_set_int (new_value, index);

@@ -22,7 +22,9 @@
 #include "gnome-theme-info.h"
 #include "theme-thumbnail.h"
 #include "gnome-theme-apply.h"
+
 #include <libwindow-settings/gnome-wm-manager.h>
+#include <string.h>
 
 enum {
   THEME_DISPLAY_NAME_COLUMN,
@@ -199,7 +201,6 @@ theme_custom_cb (GtkWidget *button, AppearanceData *data)
   GtkWidget *w, *parent;
   w = glade_xml_get_widget (data->xml, "theme_details");
   parent = glade_xml_get_widget (data->xml, "appearance_window");
-  g_signal_connect_swapped (glade_xml_get_widget (data->xml, "theme_close_button"), "clicked", (GCallback) gtk_widget_hide, w);
 
   gtk_window_set_transient_for (GTK_WINDOW (w), GTK_WINDOW (parent));
   gtk_widget_show_all (w);
