@@ -48,7 +48,7 @@ init_appearance_data (int argc, char **argv)
 
   /* set up the data */
   gladefile = g_build_filename (GNOMECC_GLADE_DIR, "appearance.glade", NULL);
-  ui = glade_xml_new (gladefile, "appearance_window", NULL);
+  ui = glade_xml_new (gladefile, NULL, NULL);
   g_free (gladefile);
 
   if (ui) {

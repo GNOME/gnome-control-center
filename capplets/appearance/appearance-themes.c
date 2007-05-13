@@ -33,8 +33,8 @@ enum {
 void theme_changed_func (gpointer uri, AppearanceData *data);
 
 /* GUI Callbacks */
-void theme_save_cb (GtkWidget *button, AppearanceData *data);
-void theme_open_cb (GtkWidget *button, AppearanceData *data);
+void theme_custom_cb (GtkWidget *button, AppearanceData *data);
+void theme_install_cb (GtkWidget *button, AppearanceData *data);
 void theme_delete_cb (GtkWidget *button, AppearanceData *data);
 void theme_activated_cb (GtkWidget *icon_view, GtkTreePath *path, AppearanceData *data);
 
@@ -50,8 +50,8 @@ themes_init (AppearanceData *data)
   gnome_wm_manager_init ();
 
   /* connect button signals */
-  g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "theme_save")), "clicked", (GCallback) theme_save_cb, data);
-  g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "theme_open")), "clicked", (GCallback) theme_open_cb, data);
+  g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "theme_custom")), "clicked", (GCallback) theme_custom_cb, data);
+  g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "theme_install")), "clicked", (GCallback) theme_install_cb, data);
   g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "theme_delete")), "clicked", (GCallback) theme_delete_cb, data);
 
   /* connect theme list signals */
@@ -117,13 +117,19 @@ theme_activated_cb (GtkWidget *icon_view, GtkTreePath *path, AppearanceData *dat
 }
 
 void
-theme_save_cb (GtkWidget *button, AppearanceData *data)
+theme_custom_cb (GtkWidget *button, AppearanceData *data)
 {
-  /* TODO: Save the current settings as a new theme */
+  GtkWidget *w, *parent;
+  w = glade_xml_get_widget (data->xml, "theme_details");
+  parent = glade_xml_get_widget (data->xml, "appearance_window");
+  g_signal_connect_swapped (glade_xml_get_widget (data->xml, "theme_close_button"), "clicked", (GCallback) gtk_widget_hide, w);
+
+  gtk_window_set_transient_for (GTK_WINDOW (w), GTK_WINDOW (parent));
+  gtk_widget_show_all (w);
 }
 
 void
-theme_open_cb (GtkWidget *button, AppearanceData *data)
+theme_install_cb (GtkWidget *button, AppearanceData *data)
 {
   /* TODO: Install a new theme */
 }
