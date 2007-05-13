@@ -131,7 +131,7 @@ theme_thumbnail_func (GdkPixbuf *pixbuf, struct theme_thumbnail_func_data *data)
   GtkTreeModel *model = GTK_TREE_MODEL (data->store);
 
   /* find item in model and update thumbnail */
-  if (gtk_tree_model_get_iter_first (model, &iter)) {
+  if (pixbuf && gtk_tree_model_get_iter_first (model, &iter)) {
 
     do {
       gchar *name;
@@ -152,6 +152,9 @@ theme_thumbnail_func (GdkPixbuf *pixbuf, struct theme_thumbnail_func_data *data)
 
     } while (gtk_tree_model_iter_next (model, &iter));
   }
+
+  if (pixbuf)
+    g_object_unref (pixbuf);
 
   data->list = g_list_remove (data->list, info);
 
