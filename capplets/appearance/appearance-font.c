@@ -796,8 +796,7 @@ cb_details_response (GtkDialog *dialog, gint response_id)
     /* "Go to font folder" was clicked */
     g_spawn_command_line_async ("nautilus --no-desktop fonts:///", NULL);
   } else
-
-  gtk_widget_hide (GTK_WIDGET (dialog));
+    gtk_widget_hide (GTK_WIDGET (dialog));
 }
 
 static void
@@ -805,86 +804,77 @@ cb_show_details (GtkWidget *button,
 		 AppearanceData *data)
 {
   if (!data->font_details) {
-    GladeXML *dialog;
-    GtkWidget *dpi_spinner;
     GnomeVFSURI *uri;
     gint dpi;
     GtkAdjustment *adjustment;
-    gchar *gladefile;
+    GtkWidget *widget;
 
-    gladefile = g_build_filename (GNOMECC_GLADE_DIR, "appearance.glade", NULL);
-    dialog = glade_xml_new (gladefile, "render_details", NULL);
-    g_free (gladefile);
-
-    if (!dialog)
-      return;
-
-    data->font_details = WID ("render_details");
+    data->font_details = glade_xml_get_widget (data->xml, "render_details");
     uri = gnome_vfs_uri_new ("fonts:///");
+    widget = glade_xml_get_widget (data->xml, "go_to_font_button");
     if (uri == NULL) {
-      gtk_widget_hide (WID ("go_to_font_button"));
+      gtk_widget_hide (widget);
     } else {
       gnome_vfs_uri_unref (uri);
-      gtk_widget_show (WID ("go_to_font_button"));
+      gtk_widget_show (widget);
     }
 
     gtk_window_set_transient_for (GTK_WINDOW (data->font_details),
 				  GTK_WINDOW (glade_xml_get_widget (data->xml, "appearance_window")));
 
-    dpi_spinner = WID ("dpi_spinner");
+    widget = glade_xml_get_widget (data->xml, "dpi_spinner");
 
     /* pick a sensible maximum dpi */
     dpi = floor ((gdk_screen_width () / gdk_screen_width_mm () +
 		 gdk_screen_height () / gdk_screen_height_mm ()) * 25.4 / 2. + .5);
     if (dpi < DPI_LOW_REASONABLE_VALUE)
       dpi = DPI_LOW_REASONABLE_VALUE; /* be extra careful */
-    adjustment = gtk_spin_button_get_adjustment (GTK_SPIN_BUTTON (dpi_spinner));
+    adjustment = gtk_spin_button_get_adjustment (GTK_SPIN_BUTTON (widget));
     adjustment->upper = dpi * 3;
 
-    dpi_load (data->client, GTK_SPIN_BUTTON (dpi_spinner));
-    g_signal_connect (dpi_spinner, "value_changed",
+    dpi_load (data->client, GTK_SPIN_BUTTON (widget));
+    g_signal_connect (widget, "value_changed",
 		      G_CALLBACK (dpi_value_changed), data->client);
 
     gconf_client_notify_add (data->client, FONT_DPI_KEY,
-			     dpi_changed,
-			     dpi_spinner, NULL, NULL);
+			     dpi_changed, widget, NULL, NULL);
 
-    setup_font_sample (WID ("antialias_none_sample"),      ANTIALIAS_NONE,      HINT_FULL);
-    setup_font_sample (WID ("antialias_grayscale_sample"), ANTIALIAS_GRAYSCALE, HINT_FULL);
-    setup_font_sample (WID ("antialias_subpixel_sample"),  ANTIALIAS_RGBA,      HINT_FULL);
+    setup_font_sample (glade_xml_get_widget (data->xml, "antialias_none_sample"),      ANTIALIAS_NONE,      HINT_FULL);
+    setup_font_sample (glade_xml_get_widget (data->xml, "antialias_grayscale_sample"), ANTIALIAS_GRAYSCALE, HINT_FULL);
+    setup_font_sample (glade_xml_get_widget (data->xml, "antialias_subpixel_sample"),  ANTIALIAS_RGBA,      HINT_FULL);
 
     enum_group_create (FONT_ANTIALIASING_KEY, antialias_enums, ANTIALIAS_GRAYSCALE,
-		       WID ("antialias_none_radio"),      ANTIALIAS_NONE,
-		       WID ("antialias_grayscale_radio"), ANTIALIAS_GRAYSCALE,
-		       WID ("antialias_subpixel_radio"),  ANTIALIAS_RGBA,
+		       glade_xml_get_widget (data->xml, "antialias_none_radio"),      ANTIALIAS_NONE,
+		       glade_xml_get_widget (data->xml, "antialias_grayscale_radio"), ANTIALIAS_GRAYSCALE,
+		       glade_xml_get_widget (data->xml, "antialias_subpixel_radio"),  ANTIALIAS_RGBA,
 		       NULL);
 
-    setup_font_sample (WID ("hint_none_sample"),   ANTIALIAS_GRAYSCALE, HINT_NONE);
-    setup_font_sample (WID ("hint_slight_sample"), ANTIALIAS_GRAYSCALE, HINT_SLIGHT);
-    setup_font_sample (WID ("hint_medium_sample"), ANTIALIAS_GRAYSCALE, HINT_MEDIUM);
-    setup_font_sample (WID ("hint_full_sample"),   ANTIALIAS_GRAYSCALE, HINT_FULL);
+    setup_font_sample (glade_xml_get_widget (data->xml, "hint_none_sample"),   ANTIALIAS_GRAYSCALE, HINT_NONE);
+    setup_font_sample (glade_xml_get_widget (data->xml, "hint_slight_sample"), ANTIALIAS_GRAYSCALE, HINT_SLIGHT);
+    setup_font_sample (glade_xml_get_widget (data->xml, "hint_medium_sample"), ANTIALIAS_GRAYSCALE, HINT_MEDIUM);
+    setup_font_sample (glade_xml_get_widget (data->xml, "hint_full_sample"),   ANTIALIAS_GRAYSCALE, HINT_FULL);
 
     enum_group_create (FONT_HINTING_KEY, hint_enums, HINT_FULL,
-		       WID ("hint_none_radio"),   HINT_NONE,
-		       WID ("hint_slight_radio"), HINT_SLIGHT,
-		       WID ("hint_medium_radio"), HINT_MEDIUM,
-		       WID ("hint_full_radio"),   HINT_FULL,
+		       glade_xml_get_widget (data->xml, "hint_none_radio"),   HINT_NONE,
+		       glade_xml_get_widget (data->xml, "hint_slight_radio"), HINT_SLIGHT,
+		       glade_xml_get_widget (data->xml, "hint_medium_radio"), HINT_MEDIUM,
+		       glade_xml_get_widget (data->xml, "hint_full_radio"),   HINT_FULL,
 		       NULL);
 
-    gtk_image_set_from_file (GTK_IMAGE (WID ("subpixel_rgb_image")),
+    gtk_image_set_from_file (GTK_IMAGE (glade_xml_get_widget (data->xml, "subpixel_rgb_image")),
 			     GNOMECC_PIXMAP_DIR "/subpixel-rgb.png");
-    gtk_image_set_from_file (GTK_IMAGE (WID ("subpixel_bgr_image")),
+    gtk_image_set_from_file (GTK_IMAGE (glade_xml_get_widget (data->xml, "subpixel_bgr_image")),
 			     GNOMECC_PIXMAP_DIR "/subpixel-bgr.png");
-    gtk_image_set_from_file (GTK_IMAGE (WID ("subpixel_vrgb_image")),
+    gtk_image_set_from_file (GTK_IMAGE (glade_xml_get_widget (data->xml, "subpixel_vrgb_image")),
 			     GNOMECC_PIXMAP_DIR "/subpixel-vrgb.png");
-    gtk_image_set_from_file (GTK_IMAGE (WID ("subpixel_vbgr_image")),
+    gtk_image_set_from_file (GTK_IMAGE (glade_xml_get_widget (data->xml, "subpixel_vbgr_image")),
 			     GNOMECC_PIXMAP_DIR "/subpixel-vbgr.png");
 
     enum_group_create (FONT_RGBA_ORDER_KEY, rgba_order_enums, RGBA_RGB,
-		       WID ("subpixel_rgb_radio"),  RGBA_RGB,
-		       WID ("subpixel_bgr_radio"),  RGBA_BGR,
-		       WID ("subpixel_vrgb_radio"), RGBA_VRGB,
-		       WID ("subpixel_vbgr_radio"), RGBA_VBGR,
+		       glade_xml_get_widget (data->xml, "subpixel_rgb_radio"),  RGBA_RGB,
+		       glade_xml_get_widget (data->xml, "subpixel_bgr_radio"),  RGBA_BGR,
+		       glade_xml_get_widget (data->xml, "subpixel_vrgb_radio"), RGBA_VRGB,
+		       glade_xml_get_widget (data->xml, "subpixel_vbgr_radio"), RGBA_VBGR,
 		       NULL);
 
     g_signal_connect (G_OBJECT (data->font_details),
@@ -893,8 +883,6 @@ cb_show_details (GtkWidget *button,
     g_signal_connect (G_OBJECT (data->font_details),
 		      "delete_event",
 		      G_CALLBACK (gtk_true), NULL);
-
-    g_object_unref (dialog);
   }
 
   gtk_window_present (GTK_WINDOW (data->font_details));

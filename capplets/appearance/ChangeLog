@@ -1,5 +1,11 @@
 2007-05-13  Jens Granseuer  <jensgr@gmx.net>
 
+	* appearance-font.c: (cb_details_response), (cb_show_details):
+	now we parse the entire glade file at startup, there's no need to
+	reparse it for the font details dialog
+
+2007-05-13  Jens Granseuer  <jensgr@gmx.net>
+
 	* appearance-themes.c: (themes_init): update button name, declare
 	variables at beginning of block
 	* appearance.glade: fix button group assignment (again)
