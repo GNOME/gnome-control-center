@@ -1,3 +1,8 @@
+2007-05-13  Thomas Wood  <thos@gnome.org>
+
+	* appearance-themes.c: (theme_thumbnail_func): Don't free data we don't own.
+	Prevents crash when changing themes.
+
 2007-05-13  Jens Granseuer  <jensgr@gmx.net>
 
 	* appearance-themes.c: (themes_init), (theme_thumbnail_generate),

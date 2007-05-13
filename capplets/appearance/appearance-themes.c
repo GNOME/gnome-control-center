@@ -154,7 +154,6 @@ theme_thumbnail_func (GdkPixbuf *pixbuf, struct theme_thumbnail_func_data *data)
   }
 
   data->list = g_list_remove (data->list, info);
-  gnome_theme_meta_info_free (info);
 
   if (data->list)
     /* we can't call theme_thumbnail_generate directly since the thumbnail
