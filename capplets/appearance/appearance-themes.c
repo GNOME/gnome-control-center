@@ -90,7 +90,7 @@ themes_init (AppearanceData *data)
   gtk_icon_view_set_model (GTK_ICON_VIEW (w), GTK_TREE_MODEL (sort_model));
   gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (sort_model), THEME_DISPLAY_NAME_COLUMN, GTK_SORT_ASCENDING);
 
-  w = glade_xml_get_widget (data->xml, "theme_open");
+  w = glade_xml_get_widget (data->xml, "theme_install");
   gtk_button_set_image (GTK_BUTTON (w),
                         gtk_image_new_from_stock ("gtk-open", GTK_ICON_SIZE_BUTTON));
 }
