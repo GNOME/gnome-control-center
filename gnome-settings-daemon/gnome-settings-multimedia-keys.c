@@ -559,7 +559,7 @@ do_eject_action (Acme *acme)
 	if ((command != NULL) && (strcmp (command, "") != 0))
 		execute (acme, command, FALSE, FALSE);
 	else
-		execute (acme, "eject", FALSE, FALSE);
+		execute (acme, "eject -T", FALSE, FALSE);
 
 	g_free (command);
 }
