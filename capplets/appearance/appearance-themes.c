@@ -30,8 +30,14 @@ enum {
   THEME_NAME_COLUMN,
 };
 
+struct theme_thumbnail_func_data {
+  GnomeThemeMetaInfo *info;
+  GtkListStore *store;
+};
+
 /* Theme functions */
 static void theme_changed_func (gpointer uri, AppearanceData *data);
+static void theme_thumbnail_func (GdkPixbuf *pixbuf, struct theme_thumbnail_func_data *data);
 
 /* GUI Callbacks */
 static void theme_custom_cb (GtkWidget *button, AppearanceData *data);
@@ -45,7 +51,6 @@ themes_init (AppearanceData *data)
   GtkWidget *w;
   GList *theme_list, *l;
   GtkListStore *theme_store;
-  GtkTreeModel *sort_model;
 
   /* initialise some stuff */
   gnome_theme_init (NULL);
@@ -69,25 +74,22 @@ themes_init (AppearanceData *data)
   gnome_theme_info_register_theme_change ((GFunc)theme_changed_func, data);
   for (l = theme_list; l; l = g_list_next (l))
   {
-    gchar *name = ((GnomeThemeMetaInfo *)l->data)->name;
-    gchar *display_name = ((GnomeThemeMetaInfo *)l->data)->readable_name;
-    if (name)
-    {
-      GdkPixbuf *pixbuf = generate_theme_thumbnail (l->data, TRUE);
-      gtk_list_store_insert_with_values (theme_store, NULL, 0,
-          THEME_DISPLAY_NAME_COLUMN, display_name,
-          THEME_NAME_COLUMN, name,
-          THEME_PIXBUF_COLUMN, pixbuf,
-          -1);
-    }
+    struct theme_thumbnail_func_data *tdata;
+
+    tdata = g_new0 (struct theme_thumbnail_func_data, 1);
+    tdata->info = (GnomeThemeMetaInfo *)l->data;
+    tdata->store = theme_store;
+
+    generate_theme_thumbnail_async (tdata->info, (ThemeThumbnailFunc) theme_thumbnail_func, tdata, NULL);
   }
+  g_list_free (theme_list);
 
   w = glade_xml_get_widget (data->xml, "theme_list");
-  sort_model = gtk_tree_model_sort_new_with_model (GTK_TREE_MODEL (theme_store));
+  GtkTreeModel *sort_model = gtk_tree_model_sort_new_with_model (GTK_TREE_MODEL (theme_store));
   gtk_icon_view_set_model (GTK_ICON_VIEW (w), GTK_TREE_MODEL (sort_model));
   gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (sort_model), THEME_DISPLAY_NAME_COLUMN, GTK_SORT_ASCENDING);
 
-  w = glade_xml_get_widget (data->xml, "theme_install");
+  w = glade_xml_get_widget (data->xml, "theme_open");
   gtk_button_set_image (GTK_BUTTON (w),
                         gtk_image_new_from_stock ("gtk-open", GTK_ICON_SIZE_BUTTON));
 }
@@ -100,6 +102,21 @@ theme_changed_func (gpointer uri, AppearanceData *data)
   /* TODO: add/change/remove themes from the model as appropriate */
 }
 
+
+static void
+theme_thumbnail_func (GdkPixbuf *pixbuf, struct theme_thumbnail_func_data *data)
+{
+  /* TODO: we should probably have already added the item, and only be updating
+   * the thumbnail here */
+
+  gtk_list_store_insert_with_values (data->store, NULL, 0,
+      THEME_DISPLAY_NAME_COLUMN, data->info->readable_name,
+      THEME_NAME_COLUMN, data->info->name,
+      THEME_PIXBUF_COLUMN, pixbuf,
+      -1);
+  gnome_theme_meta_info_free (data->info);
+  g_free (data);
+}
 
 /** GUI Callbacks **/
 
