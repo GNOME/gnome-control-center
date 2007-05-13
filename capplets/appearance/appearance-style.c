@@ -28,15 +28,117 @@ enum ThemeType {
   GTK_THEMES,
   METACITY_THEMES,
   ICON_THEMES,
-  CURSOR_THEMES
+  CURSOR_THEMES,
+  COLOR_SCHEME
 };
 
 static const gchar *gconf_keys[] = {
   "/desktop/gnome/interface/gtk_theme",
   "/apps/metacity/general/theme",
   "/desktop/gnome/interface/icon_theme",
-  "/desktop/gnome/peripherals/mouse/cursor_theme"
+  "/desktop/gnome/peripherals/mouse/cursor_theme",
+  "/desktop/gnome/interface/gtk_color_scheme"
 };
+
+
+static void prepare_combo (AppearanceData *data, GtkWidget *combo, enum ThemeType type);
+static void update_color_buttons_from_string (gchar *color_scheme, AppearanceData *data);
+
+
+/* GUI Callbacks */
+
+static void color_button_clicked_cb (GtkWidget *colorbutton, AppearanceData *data);
+static GConfValue *conv_to_widget_cb (GConfPropertyEditor *peditor, GConfValue *value);
+static GConfValue *conv_from_widget_cb (GConfPropertyEditor *peditor, GConfValue *value);
+void
+style_init (AppearanceData *data)
+{
+
+  GtkSettings *settings;
+  gchar *colour_scheme;
+
+  prepare_combo (data, glade_xml_get_widget (data->xml, "gtk_themes_combobox"), GTK_THEMES);
+  prepare_combo (data, glade_xml_get_widget (data->xml, "window_themes_combobox"), METACITY_THEMES);
+  prepare_combo (data, glade_xml_get_widget (data->xml, "icon_themes_combobox"), ICON_THEMES);
+
+  settings = gtk_settings_get_default ();
+  g_object_get (G_OBJECT (settings), "gtk-color-scheme", &colour_scheme, NULL);
+  update_color_buttons_from_string (colour_scheme, data);
+  g_free (colour_scheme);
+
+  /* connect signals */
+  /* color buttons */
+  g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "bg_colorbutton")), "color-set", (GCallback) color_button_clicked_cb, data);
+  g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "base_colorbutton")), "color-set", (GCallback) color_button_clicked_cb, data);
+  g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "selected_bg_colorbutton")), "color-set", (GCallback) color_button_clicked_cb, data);
+
+
+}
+
+static void
+prepare_combo (AppearanceData *data, GtkWidget *combo, enum ThemeType type)
+{
+  GtkListStore *store;
+  GList *l, *list = NULL;
+  GtkCellRenderer *renderer;
+  GnomeThemeElement element = 0;
+
+  switch (type)
+  {
+    case GTK_THEMES:
+      element = GNOME_THEME_GTK_2;
+    case METACITY_THEMES:
+      if (!element) element = GNOME_THEME_METACITY;
+      list = gnome_theme_info_find_by_type (element);
+      break;
+
+    case ICON_THEMES:
+      list = gnome_theme_icon_info_find_all ();
+      break;
+
+    case CURSOR_THEMES:
+      list = NULL; /* don't know what to do yet */
+
+    default:
+      /* we don't deal with any other type of themes here */
+      return;
+  }
+  if (!list)
+    return;
+
+  renderer = gtk_cell_renderer_text_new ();
+  store = gtk_list_store_new (1, G_TYPE_STRING);
+
+  for (l = list; l; l = g_list_next (l))
+  {
+    gchar *name = NULL;
+    GtkTreeIter i;
+
+    if (type < ICON_THEMES)
+      name = ((GnomeThemeInfo*) l->data)->name;
+    else if (type == ICON_THEMES)
+      name = ((GnomeThemeIconInfo*) l->data)->name;
+
+    if (!name)
+      continue; /* just in case... */
+
+    gtk_list_store_insert_with_values (store, &i, 0, 0, name, -1);
+
+  }
+
+  gtk_combo_box_set_model (GTK_COMBO_BOX (combo), GTK_TREE_MODEL (store));
+  gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combo), renderer, TRUE);
+  gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (combo), renderer, "text", 0);
+
+  gconf_peditor_new_combo_box (NULL, gconf_keys[type], combo,
+    "conv-to-widget-cb", conv_to_widget_cb,
+    "conv-from-widget-cb", conv_from_widget_cb,
+    NULL);
+
+
+}
+
+/* Callbacks */
 
 static GConfValue *
 conv_to_widget_cb (GConfPropertyEditor *peditor, GConfValue *value)
@@ -94,69 +196,122 @@ conv_from_widget_cb (GConfPropertyEditor *peditor, GConfValue *value)
 }
 
 static void
-prepare_combo (AppearanceData *data, GtkWidget *combo, enum ThemeType type)
+update_color_buttons_from_string (gchar *color_scheme, AppearanceData *data)
 {
-  GtkListStore *store;
-  GList *l, *list = NULL;
-  GtkCellRenderer *renderer;
-  GnomeThemeElement element = 0;
+  GdkColor color_scheme_colors[6];
+  gchar **color_scheme_strings, **color_scheme_pair, *current_string;
+  gint i;
+  GtkWidget *widget;
 
-  switch (type)
+  if (!color_scheme) return;
+  if (!strcmp (color_scheme, "")) return;
+
+  /* The color scheme string consists of name:color pairs, seperated by
+   * newlines, so first we split the string up by new line */
+
+  color_scheme_strings = g_strsplit (color_scheme, "\n", 0);
+
+  /* loop through the name:color pairs, and save the colour if we recognise the name */
+  i = 0;
+  while ((current_string = color_scheme_strings[i++]))
   {
-    case GTK_THEMES:
-      element = GNOME_THEME_GTK_2;
-    case METACITY_THEMES:
-      if (!element) element = GNOME_THEME_METACITY;
-      list = gnome_theme_info_find_by_type (element);
-      break;
+    color_scheme_pair = g_strsplit (current_string, ":", 0);
 
-    case ICON_THEMES:
-      list = gnome_theme_icon_info_find_all ();
-      break;
+    if (color_scheme_pair[0] != NULL && color_scheme_pair[1] != NULL)
+    {
+      g_strstrip (color_scheme_pair[0]);
+      g_strstrip (color_scheme_pair[1]);
 
-    case CURSOR_THEMES:
-      list = NULL; /* don't know what to do yet */
-  }
-  if (!list)
-    return;
+      if (!strcmp ("fg_color", color_scheme_pair[0]))
+        gdk_color_parse (color_scheme_pair[1], &color_scheme_colors[0]);
+      else if (!strcmp ("bg_color", color_scheme_pair[0]))
+        gdk_color_parse (color_scheme_pair[1], &color_scheme_colors[1]);
+      else if (!strcmp ("text_color", color_scheme_pair[0]))
+        gdk_color_parse (color_scheme_pair[1], &color_scheme_colors[2]);
+      else if (!strcmp ("base_color", color_scheme_pair[0]))
+        gdk_color_parse (color_scheme_pair[1], &color_scheme_colors[3]);
+      else if (!strcmp ("selected_fg_color", color_scheme_pair[0]))
+        gdk_color_parse (color_scheme_pair[1], &color_scheme_colors[4]);
+      else if (!strcmp ("selected_bg_color", color_scheme_pair[0]))
+        gdk_color_parse (color_scheme_pair[1], &color_scheme_colors[5]);
+    }
 
-  renderer = gtk_cell_renderer_text_new ();
-  store = gtk_list_store_new (1, G_TYPE_STRING);
-
-  for (l = list; l; l = g_list_next (l))
-  {
-    gchar *name = NULL;
-    GtkTreeIter i;
-
-    if (type < ICON_THEMES)
-      name = ((GnomeThemeInfo*) l->data)->name;
-    else if (type == ICON_THEMES)
-      name = ((GnomeThemeIconInfo*) l->data)->name;
-
-    if (!name)
-      continue; /* just in case... */
-
-    gtk_list_store_insert_with_values (store, &i, 0, 0, name, -1);
-
+    g_strfreev (color_scheme_pair);
   }
 
-  gtk_combo_box_set_model (GTK_COMBO_BOX (combo), GTK_TREE_MODEL (store));
-  gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combo), renderer, TRUE);
-  gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (combo), renderer, "text", 0);
+  g_strfreev (color_scheme_strings);
 
-  gconf_peditor_new_combo_box (NULL, gconf_keys[type], combo,
-    "conv-to-widget-cb", conv_to_widget_cb,
-    "conv-from-widget-cb", conv_from_widget_cb,
-    NULL);
+  /* not sure whether we need to do this, but it can't hurt */
+  for (i = 0; i < 6; i++)
+    gdk_colormap_alloc_color (gdk_colormap_get_system (), &color_scheme_colors[i], FALSE, TRUE);
+
+  /* now set all the buttons to the correct settings */
+  widget = glade_xml_get_widget (data->xml, "bg_colorbutton");
+  gtk_color_button_set_color (GTK_COLOR_BUTTON (widget), &color_scheme_colors[1]);
+  widget = glade_xml_get_widget (data->xml, "base_colorbutton");
+  gtk_color_button_set_color (GTK_COLOR_BUTTON (widget), &color_scheme_colors[3]);
+  widget = glade_xml_get_widget (data->xml, "selected_bg_colorbutton");
+  gtk_color_button_set_color (GTK_COLOR_BUTTON (widget), &color_scheme_colors[5]);
 
 
 }
-void
-style_init (AppearanceData *data)
+
+static void
+color_scheme_changed (GObject    *settings,
+                      GParamSpec *pspec,
+                      AppearanceData  *data)
 {
+  gchar *theme;
 
-  prepare_combo (data, glade_xml_get_widget (data->xml, "gtk_themes_combobox"), GTK_THEMES);
-  prepare_combo (data, glade_xml_get_widget (data->xml, "window_themes_combobox"), METACITY_THEMES);
-  prepare_combo (data, glade_xml_get_widget (data->xml, "icon_themes_combobox"), ICON_THEMES);
+  theme = gconf_client_get_string (data->client, gconf_keys[COLOR_SCHEME], NULL);
+  if (theme == NULL || strcmp (theme, "") == 0)
+    g_object_get (settings, "gtk-color-scheme", &theme, NULL);
 
+  update_color_buttons_from_string (theme, data);
+  g_free (theme);
 }
+
+static void
+color_button_clicked_cb (GtkWidget *colorbutton, AppearanceData *data)
+{
+  gchar *new_scheme;
+  GdkColor colors[6];
+  gchar *bg, *fg, *text, *base, *selected_fg, *selected_bg;
+  GtkWidget *widget;
+
+  widget = glade_xml_get_widget (data->xml, "bg_colorbutton");
+  gtk_color_button_get_color (GTK_COLOR_BUTTON (widget), &colors[1]);
+  widget = glade_xml_get_widget (data->xml, "base_colorbutton");
+  gtk_color_button_get_color (GTK_COLOR_BUTTON (widget), &colors[3]);
+  widget = glade_xml_get_widget (data->xml, "selected_bg_colorbutton");
+  gtk_color_button_get_color (GTK_COLOR_BUTTON (widget), &colors[5]);
+
+  /* TODO: calculate proper colours here */
+  gdk_color_parse ("black", &colors[0]);
+  gdk_color_parse ("black", &colors[2]);
+  gdk_color_parse ("black", &colors[4]);
+
+  fg = g_strdup_printf ("fg_color:#%04x%04x%04x\n", colors[0].red, colors[0].green, colors[0].blue);
+  bg = g_strdup_printf ("bg_color:#%04x%04x%04x\n", colors[1].red, colors[1].green, colors[1].blue);
+  text = g_strdup_printf ("text_color:#%04x%04x%04x\n", colors[2].red, colors[2].green, colors[2].blue);
+  base = g_strdup_printf ("base_color:#%04x%04x%04x\n", colors[3].red, colors[3].green, colors[3].blue);
+  selected_fg = g_strdup_printf ("selected_fg_color:#%04x%04x%04x\n", colors[4].red, colors[4].green, colors[4].blue);
+  selected_bg = g_strdup_printf ("selected_bg_color:#%04x%04x%04x", colors[5].red, colors[5].green, colors[5].blue);
+
+  new_scheme = g_strconcat (fg, bg, text, base, selected_fg, selected_bg, NULL);
+
+  /* Currently we assume this has only been called when one of the colours has
+   * actually changed, so we don't check the original key first
+   */
+  gconf_client_set_string (data->client, gconf_keys[COLOR_SCHEME], new_scheme, NULL);
+
+  g_free (fg);
+  g_free (bg);
+  g_free (text);
+  g_free (base);
+  g_free (selected_fg);
+  g_free (selected_bg);
+  g_free (new_scheme);
+}
+
+
