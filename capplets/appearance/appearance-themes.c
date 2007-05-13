@@ -31,13 +31,14 @@ enum {
 };
 
 struct theme_thumbnail_func_data {
-  GnomeThemeMetaInfo *info;
+  GList *list;
   GtkListStore *store;
 };
 
 /* Theme functions */
 static void theme_changed_func (gpointer uri, AppearanceData *data);
 static void theme_thumbnail_func (GdkPixbuf *pixbuf, struct theme_thumbnail_func_data *data);
+static gboolean theme_thumbnail_generate (struct theme_thumbnail_func_data *data);
 
 /* GUI Callbacks */
 static void theme_custom_cb (GtkWidget *button, AppearanceData *data);
@@ -49,7 +50,7 @@ void
 themes_init (AppearanceData *data)
 {
   GtkWidget *w;
-  GList *theme_list, *l;
+  GList *theme_list;
   GtkListStore *theme_store;
   GtkTreeModel *sort_model;
 
@@ -68,22 +69,33 @@ themes_init (AppearanceData *data)
   /* set up theme list */
   theme_store = gtk_list_store_new (3, G_TYPE_STRING, GDK_TYPE_PIXBUF, G_TYPE_STRING);
 
-  /* Temporary measure to fill the themes list.
-   * This should be replace with asynchronous calls.
-   */
   theme_list = gnome_theme_meta_info_find_all ();
-  gnome_theme_info_register_theme_change ((GFunc)theme_changed_func, data);
-  for (l = theme_list; l; l = g_list_next (l))
-  {
+  gnome_theme_info_register_theme_change ((GFunc) theme_changed_func, data);
+  if (theme_list) {
     struct theme_thumbnail_func_data *tdata;
+    GdkPixbuf *temp;
+    GList *l;
 
-    tdata = g_new0 (struct theme_thumbnail_func_data, 1);
-    tdata->info = (GnomeThemeMetaInfo *)l->data;
+    tdata = g_new (struct theme_thumbnail_func_data, 1);
+    tdata->list = theme_list;
     tdata->store = theme_store;
 
-    generate_theme_thumbnail_async (tdata->info, (ThemeThumbnailFunc) theme_thumbnail_func, tdata, NULL);
+    temp = gdk_pixbuf_new_from_file (GNOMECC_PIXMAP_DIR "/theme-thumbnailing.png", NULL);
+
+    for (l = theme_list; l; l = l->next) {
+      GnomeThemeMetaInfo *info = l->data;
+
+      gtk_list_store_insert_with_values (theme_store, NULL, 0,
+          THEME_DISPLAY_NAME_COLUMN, info->readable_name,
+          THEME_NAME_COLUMN, info->name,
+          THEME_PIXBUF_COLUMN, temp,
+          -1);
+    }
+
+    if (temp)
+      g_object_unref (temp);
+    theme_thumbnail_generate (tdata);
   }
-  g_list_free (theme_list);
 
   w = glade_xml_get_widget (data->xml, "theme_list");
   sort_model = gtk_tree_model_sort_new_with_model (GTK_TREE_MODEL (theme_store));
@@ -93,6 +105,13 @@ themes_init (AppearanceData *data)
   w = glade_xml_get_widget (data->xml, "theme_install");
   gtk_button_set_image (GTK_BUTTON (w),
                         gtk_image_new_from_stock ("gtk-open", GTK_ICON_SIZE_BUTTON));
+}
+
+static gboolean
+theme_thumbnail_generate (struct theme_thumbnail_func_data *data)
+{
+    generate_theme_thumbnail_async (data->list->data, (ThemeThumbnailFunc) theme_thumbnail_func, data, NULL);
+    return FALSE;
 }
 
 /** Theme Callbacks **/
@@ -107,16 +126,42 @@ theme_changed_func (gpointer uri, AppearanceData *data)
 static void
 theme_thumbnail_func (GdkPixbuf *pixbuf, struct theme_thumbnail_func_data *data)
 {
-  /* TODO: we should probably have already added the item, and only be updating
-   * the thumbnail here */
+  GtkTreeIter iter;
+  GnomeThemeMetaInfo *info = data->list->data;
+  GtkTreeModel *model = GTK_TREE_MODEL (data->store);
 
-  gtk_list_store_insert_with_values (data->store, NULL, 0,
-      THEME_DISPLAY_NAME_COLUMN, data->info->readable_name,
-      THEME_NAME_COLUMN, data->info->name,
-      THEME_PIXBUF_COLUMN, pixbuf,
-      -1);
-  gnome_theme_meta_info_free (data->info);
-  g_free (data);
+  /* find item in model and update thumbnail */
+  if (gtk_tree_model_get_iter_first (model, &iter)) {
+
+    do {
+      gchar *name;
+      gint cmp;
+
+      gtk_tree_model_get (model, &iter,
+                          THEME_NAME_COLUMN, &name,
+                          -1);
+
+      cmp = strcmp (name, info->name);
+      g_free (name);
+
+      if (!cmp) {
+      	gtk_list_store_set (data->store, &iter,
+            THEME_PIXBUF_COLUMN, pixbuf, -1);
+        break;
+      }
+
+    } while (gtk_tree_model_iter_next (model, &iter));
+  }
+
+  data->list = g_list_remove (data->list, info);
+  gnome_theme_meta_info_free (info);
+
+  if (data->list)
+    /* we can't call theme_thumbnail_generate directly since the thumbnail
+     * factory hasn't yet cleaned up at this point */
+    g_idle_add ((GSourceFunc) theme_thumbnail_generate, data);
+  else
+    g_free (data);
 }
 
 /** GUI Callbacks **/
