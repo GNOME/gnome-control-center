@@ -107,7 +107,7 @@ void gnome_wp_item_free (GnomeWPItem * item) {
 
   gtk_tree_row_reference_free (item->rowref);
 
-  item = NULL;
+  g_free (item);
 }
 
 GnomeWPItem * gnome_wp_item_dup (GnomeWPItem * item) {
