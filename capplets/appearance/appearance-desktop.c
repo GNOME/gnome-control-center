@@ -684,7 +684,8 @@ appearance_window_response (GtkWidget *widget,
                             gint response_id,
                             AppearanceData *data)
 {
-  if (response_id == 0 || response_id == GTK_RESPONSE_DELETE_EVENT) /* 0 = Close */
+  if (response_id == GTK_RESPONSE_CLOSE ||
+      response_id == GTK_RESPONSE_DELETE_EVENT)
   {
     gnome_wp_xml_save_list (data);
     g_object_unref (data->wp_thumbs);
