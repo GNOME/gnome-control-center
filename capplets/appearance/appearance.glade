@@ -607,8 +607,7 @@
     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Appearance Preferences</property>
-    <property name="window_position">GTK_WIN_POS_CENTER_ON_PARENT</property>
-    <property name="type_hint">GDK_WINDOW_TYPE_HINT_NORMAL</property>
+    <property name="type_hint">GDK_WINDOW_TYPE_HINT_DIALOG</property>
     <property name="has_separator">False</property>
     <child internal-child="vbox">
       <widget class="GtkVBox" id="dialog-vbox2">
@@ -659,7 +658,6 @@
                       <widget class="GtkButton" id="theme_install">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                         <property name="label" translatable="yes">_Install...</property>
                         <property name="use_underline">True</property>
@@ -669,9 +667,8 @@
                       <widget class="GtkButton" id="theme_delete">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                        <property name="label" translatable="yes">gtk-delete</property>
+                        <property name="label">gtk-delete</property>
                         <property name="use_stock">True</property>
                       </widget>
                       <packing>
@@ -682,7 +679,6 @@
                       <widget class="GtkButton" id="theme_custom">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                         <property name="label" translatable="yes">C_ustom...</property>
                         <property name="use_underline">True</property>
@@ -835,7 +831,7 @@ Tiled</property>
                               <widget class="GtkButton" id="wp_rem_button">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="label" translatable="yes">gtk-remove</property>
+                                <property name="label">gtk-remove</property>
                                 <property name="use_stock">True</property>
                               </widget>
                               <packing>
@@ -1330,7 +1326,6 @@ Vertical gradient</property>
                       <widget class="GtkButton" id="details_button">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                         <property name="label" translatable="yes">D_etails...</property>
                         <property name="use_underline">True</property>
@@ -1763,14 +1758,13 @@ Text only</property>
           <widget class="GtkHButtonBox" id="dialog-action_area2">
             <property name="visible">True</property>
             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-            <property name="layout_style">GTK_BUTTONBOX_EDGE</property>
+            <property name="layout_style">GTK_BUTTONBOX_END</property>
             <child>
               <widget class="GtkButton" id="help_button">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                <property name="label" translatable="yes">gtk-help</property>
+                <property name="label">gtk-help</property>
                 <property name="use_stock">True</property>
                 <property name="response_id">-11</property>
               </widget>
@@ -1781,13 +1775,10 @@ Text only</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                <property name="label" translatable="yes">gtk-close</property>
+                <property name="label">gtk-close</property>
                 <property name="use_stock">True</property>
                 <property name="response_id">-7</property>
               </widget>
-              <packing>
-                <property name="position">1</property>
-              </packing>
             </child>
           </widget>
           <packing>
@@ -2001,7 +1992,6 @@ Text only</property>
                       <widget class="GtkColorButton" id="colorbutton">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
                         <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_MOTION_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                         <property name="color">#000000000000</property>
                       </widget>
@@ -2131,15 +2121,15 @@ Text only</property>
           <widget class="GtkHButtonBox" id="dialog-action_area4">
             <property name="visible">True</property>
             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-            <property name="layout_style">GTK_BUTTONBOX_EDGE</property>
+            <property name="layout_style">GTK_BUTTONBOX_END</property>
             <child>
               <widget class="GtkButton" id="button6">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                <property name="label" translatable="yes">gtk-help</property>
+                <property name="label">gtk-help</property>
                 <property name="use_stock">True</property>
+                <property name="response_id">-11</property>
               </widget>
             </child>
             <child>
@@ -2148,8 +2138,9 @@ Text only</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                <property name="label" translatable="yes">gtk-close</property>
+                <property name="label">gtk-close</property>
                 <property name="use_stock">True</property>
+                <property name="response_id">-7</property>
               </widget>
               <packing>
                 <property name="position">1</property>
