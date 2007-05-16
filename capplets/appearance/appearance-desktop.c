@@ -978,12 +978,12 @@ desktop_init (AppearanceData *data)
 
   gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (data->wp_model),
                                         2, GTK_SORT_ASCENDING);
-/*
-  gtk_drag_dest_set (GTK_WIDGET (data->wp_tree), GTK_DEST_DEFAULT_ALL, drop_types,
+
+  gtk_drag_dest_set (GTK_WIDGET (data->wp_view), GTK_DEST_DEFAULT_ALL, drop_types,
                      sizeof (drop_types) / sizeof (drop_types[0]),
                       GDK_ACTION_COPY | GDK_ACTION_MOVE);
-  g_signal_connect (G_OBJECT (data->wp_tree), "drag_data_received",
-                    G_CALLBACK (wp_dragged_image), data);*/
+  g_signal_connect (G_OBJECT (data->wp_view), "drag_data_received",
+                    G_CALLBACK (wp_dragged_image), data);
 
   data->wp_style_menu = glade_xml_get_widget (data->xml, "wp_style_menu");
 
