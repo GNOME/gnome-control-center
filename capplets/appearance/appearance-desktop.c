@@ -907,7 +907,6 @@ void
 desktop_init (AppearanceData *data)
 {
   GtkWidget *add_button;
-  GValue val = {0,};
   GtkFileFilter *filter;
 
   data->wp_update_gconf = TRUE;
@@ -959,12 +958,11 @@ desktop_init (AppearanceData *data)
 
   data->wp_cell = cell_renderer_wallpaper_new ();
 
-  g_value_init (&val, G_TYPE_UINT);
-  g_value_set_uint (&val, 5);
-
-  g_object_set_property (G_OBJECT (data->wp_cell), "xpad", &val);
-  g_object_set_property (G_OBJECT (data->wp_cell), "ypad", &val);
-
+  g_object_set (G_OBJECT (data->wp_cell),
+                "xpad", 5,
+                "ypad", 5,
+                NULL);
+  
   gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (data->wp_view),
                               data->wp_cell,
                               TRUE);
