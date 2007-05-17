@@ -50,12 +50,15 @@
 #include "gnome-settings-xrdb.h"
 #include "gnome-settings-typing-break.h"
 
-static GObjectClass *parent_class = NULL;
-
 struct _GnomeSettingsDaemonPrivate {
 	GHashTable *loaded_modules;
 };
 
+GType gnome_settings_module_background_get_type (void);
+GType gnome_settings_module_clipboard_get_type (void);
+GType gnome_settings_module_screensaver_get_type (void);
+
+static GObjectClass *parent_class = NULL;
 XSettingsManager **managers = NULL;
 
 static void
