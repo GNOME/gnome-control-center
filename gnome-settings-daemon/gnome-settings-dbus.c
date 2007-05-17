@@ -224,9 +224,13 @@ gnome_settings_server_init (GnomeSettingsServer * server)
 	if (!org_freedesktop_DBus_request_name
 	    (driver_proxy, "org.gnome.SettingsDaemon", 0, &request_ret,
 	     &error)) {
-		g_warning ("Unable to register service: %s",
-			   error->message);
-		g_error_free (error);
+		if (error) {
+			g_warning ("Unable to register service: %s",
+				   error->message);
+			g_error_free (error);
+		} else {
+			g_warning ("Unable to register service: Unknown DBUS error"); 
+		}
 	}
 
 	g_object_unref (driver_proxy);
