@@ -52,7 +52,7 @@ struct _GConfPropertyEditorClass
 {
 	GObjectClass g_object_class;
 
-	void (*value_changed) (GConfPropertyEditor *peditor, gchar *key, GConfValue *value);
+	void (*value_changed) (GConfPropertyEditor *peditor, gchar *key, const GConfValue *value);
 };
 
 GType gconf_property_editor_get_type    (void);
@@ -157,6 +157,12 @@ GObject *gconf_peditor_new_image	 (GConfChangeSet	  *changeset,
 					  GtkWidget		  *button,
 					  const gchar		  *first_property,
 					  ...);
+
+GObject *gconf_peditor_new_tree_view	(GConfChangeSet *changeset,
+					 const gchar 	*key,
+					 GtkWidget      *tree_view,
+					 const gchar    *first_property_name,
+					 ...);
 
 void gconf_peditor_widget_set_guard     (GConfPropertyEditor     *peditor,
 					 GtkWidget               *widget);

@@ -1,3 +1,19 @@
+2007-05-18  Jens Granseuer  <jensgr@gmx.net>
+
+	* gconf-property-editor.c: (peditor_boolean_value_changed),
+	(peditor_integer_value_changed), (peditor_string_value_changed),
+	(peditor_color_value_changed), (peditor_select_menu_value_changed),
+	(peditor_combo_box_value_changed),
+	(peditor_select_radio_value_changed),
+	(peditor_numeric_range_value_changed),
+	(peditor_font_value_changed), (peditor_image_value_changed),
+	(gconf_peditor_new_select_radio_with_enum),
+	(peditor_tree_view_value_changed),
+	(peditor_tree_view_widget_changed), (gconf_peditor_new_tree_view):
+	* gconf-property-editor.h: add a property editor for GtkTreeView
+	and fix crashes with all peditors if the requested key is not
+	available
+
 2007-05-09  Jens Granseuer  <jensgr@gmx.net>
 
 	* gnome-theme-info.c: (gnome_theme_read_meta_theme):

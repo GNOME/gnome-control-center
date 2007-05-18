@@ -440,9 +440,7 @@ peditor_boolean_value_changed (GConfClient         *client,
 	if (peditor->p->changeset != NULL)
 		gconf_change_set_remove (peditor->p->changeset, peditor->p->key);
 
-	value = gconf_entry_get_value (entry);
-
-	if (value != NULL) {
+	if (entry && (value = gconf_entry_get_value (entry))) {
 		value_wid = peditor->p->conv_to_widget_cb (peditor, value);
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (peditor->p->ui_control), gconf_value_get_bool (value_wid));
 		gconf_value_free (value_wid);
@@ -511,9 +509,7 @@ peditor_integer_value_changed (GConfClient         *client,
 	if (peditor->p->changeset != NULL)
 		gconf_change_set_remove (peditor->p->changeset, peditor->p->key);
 
-	value = gconf_entry_get_value (entry);
-
-	if (value != NULL) {
+	if (entry && (value = gconf_entry_get_value (entry))) {
 		value_wid = peditor->p->conv_to_widget_cb (peditor, value);
 		entry_current_text = gtk_entry_get_text (GTK_ENTRY (peditor->p->ui_control));
 		entry_current_integer = strtol (entry_current_text, NULL, 10);
@@ -606,9 +602,7 @@ peditor_string_value_changed (GConfClient         *client,
 	if (peditor->p->changeset != NULL)
 		gconf_change_set_remove (peditor->p->changeset, peditor->p->key);
 
-	value = gconf_entry_get_value (entry);
-
-	if (value != NULL) {
+	if (entry && (value = gconf_entry_get_value (entry))) {
 		value_wid = peditor->p->conv_to_widget_cb (peditor, value);
 		entry_current_text = gtk_entry_get_text (GTK_ENTRY (peditor->p->ui_control));
 		if (strcmp (entry_current_text, gconf_value_get_string (value)) != 0) {
@@ -724,9 +718,7 @@ peditor_color_value_changed (GConfClient         *client,
 	if (peditor->p->changeset != NULL)
 		gconf_change_set_remove (peditor->p->changeset, peditor->p->key);
 
-	value = gconf_entry_get_value (entry);
-
-	if (value != NULL) {
+	if (entry && (value = gconf_entry_get_value (entry))) {
 		value_wid = peditor->p->conv_to_widget_cb (peditor, value);
 		gdk_color_parse (gconf_value_get_string (value_wid), &color);
 		gtk_color_button_set_color (
@@ -890,9 +882,7 @@ peditor_select_menu_value_changed (GConfClient         *client,
 	if (peditor->p->changeset != NULL)
 		gconf_change_set_remove (peditor->p->changeset, peditor->p->key);
 
-	value = gconf_entry_get_value (entry);
-
-	if (value != NULL) {
+	if (entry && (value = gconf_entry_get_value (entry))) {
 		value_wid = peditor->p->conv_to_widget_cb (peditor, value);
 		gtk_option_menu_set_history (GTK_OPTION_MENU (peditor->p->ui_control), gconf_value_get_int (value_wid));
 		gconf_value_free (value_wid);
@@ -1008,9 +998,7 @@ peditor_combo_box_value_changed (GConfClient         *client,
 	if (peditor->p->changeset != NULL)
 		gconf_change_set_remove (peditor->p->changeset, peditor->p->key);
 
-	value = gconf_entry_get_value (entry);
-
-	if (value != NULL) {
+	if (entry && (value = gconf_entry_get_value (entry))) {
 		value_wid = peditor->p->conv_to_widget_cb (peditor, value);
 		gtk_combo_box_set_active (GTK_COMBO_BOX (peditor->p->ui_control), gconf_value_get_int (value_wid));
 		gconf_value_free (value_wid);
@@ -1128,9 +1116,7 @@ peditor_select_radio_value_changed (GConfClient         *client,
 	if (peditor->p->changeset != NULL)
 		gconf_change_set_remove (peditor->p->changeset, peditor->p->key);
 
-	value = gconf_entry_get_value (entry);
-
-	if (value != NULL) {
+	if (entry && (value = gconf_entry_get_value (entry))) {
 		value_wid = peditor->p->conv_to_widget_cb (peditor, value);
 		group = g_slist_copy (gtk_radio_button_get_group (GTK_RADIO_BUTTON (peditor->p->ui_control)));
 		group = g_slist_reverse (group);
@@ -1216,9 +1202,7 @@ peditor_numeric_range_value_changed (GConfClient         *client,
 	if (peditor->p->changeset != NULL)
 		gconf_change_set_remove (peditor->p->changeset, peditor->p->key);
 
-	value = gconf_entry_get_value (entry);
-
-	if (value != NULL) {
+	if (entry && (value = gconf_entry_get_value (entry))) {
 		value_wid = peditor->p->conv_to_widget_cb (peditor, value);
 
 		switch (value_wid->type) {
@@ -1406,8 +1390,7 @@ peditor_font_value_changed (GConfClient         *client,
 	if (peditor->p->changeset != NULL)
 		gconf_change_set_remove (peditor->p->changeset, peditor->p->key);
 
-	value = gconf_entry_get_value (entry);
-	if (value != NULL) {
+	if (entry && (value = gconf_entry_get_value (entry))) {
 		const gchar *font;
 
 		value_wid = peditor->p->conv_to_widget_cb (peditor, value);
@@ -1789,9 +1772,7 @@ peditor_image_value_changed (GConfClient         *client,
 	if (peditor->p->changeset != NULL)
 		gconf_change_set_remove (peditor->p->changeset, peditor->p->key);
 
-	value = gconf_entry_get_value (entry);
-
-	if (value != NULL) {
+	if (entry && (value = gconf_entry_get_value (entry))) {
 		const gchar *filename;
 
 		value_wid = peditor->p->conv_to_widget_cb (peditor, value);
@@ -1883,6 +1864,102 @@ gconf_peditor_new_select_radio_with_enum (GConfChangeSet *changeset,
 	for (item = radio_group; item != NULL; item = item->next)
 		g_signal_connect_swapped (G_OBJECT (item->data), "toggled",
 					  (GCallback) peditor_select_radio_widget_changed, peditor);
+
+	return peditor;
+}
+
+static void
+peditor_tree_view_value_changed (GConfClient         *client,
+				 guint                cnxn_id,
+				 GConfEntry          *entry,
+				 GConfPropertyEditor *peditor) 
+{
+	GConfValue *value;
+
+	if (peditor->p->changeset != NULL)
+		gconf_change_set_remove (peditor->p->changeset, peditor->p->key);
+
+	if (entry && (value = gconf_entry_get_value (entry))) {
+		GtkTreeSelection *selection;
+		GConfValue *value_wid;
+
+		selection = gtk_tree_view_get_selection (
+				GTK_TREE_VIEW  (peditor->p->ui_control));
+
+		value_wid = peditor->p->conv_to_widget_cb (peditor, value);
+
+		if (value_wid != NULL) {
+			GtkTreePath *path = gtk_tree_path_new_from_string (
+				gconf_value_get_string (value_wid));
+			gtk_tree_selection_select_path (selection, path);
+			gtk_tree_path_free (path);
+			gconf_value_free (value_wid);
+		} else {
+			gtk_tree_selection_unselect_all (selection);
+		}
+	}
+}
+
+static void
+peditor_tree_view_widget_changed (GConfPropertyEditor *peditor,
+				  GtkTreeView         *tree_view)
+{
+	GtkTreeSelection *selection;
+	GtkTreeModel *model;
+	GtkTreeIter iter;
+	GConfValue *value, *value_wid;
+
+	if (!peditor->p->inited) return;
+
+	selection = gtk_tree_view_get_selection (tree_view);
+
+	/* we don't support GTK_SELECTION_MULTIPLE */
+	if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
+		gchar *path;
+
+		path = gtk_tree_model_get_string_from_iter (model, &iter);
+		value_wid = gconf_value_new (GCONF_VALUE_STRING);
+		gconf_value_set_string (value_wid, path);
+		g_free (path);
+	} else
+		value_wid = NULL;
+
+	value = peditor->p->conv_from_widget_cb (peditor, value_wid);
+	peditor_set_gconf_value (peditor, peditor->p->key, value);
+	g_signal_emit (peditor, peditor_signals[VALUE_CHANGED], 0, peditor->p->key, value);
+	gconf_value_free (value_wid);
+	if (value)
+		gconf_value_free (value);
+}
+
+GObject *
+gconf_peditor_new_tree_view (GConfChangeSet *changeset,
+			     const gchar    *key,
+			     GtkWidget      *tree_view,
+			     const gchar    *first_property_name,
+			     ...)
+{
+	GObject *peditor;
+	va_list var_args;
+
+	g_return_val_if_fail (key != NULL, NULL);
+	g_return_val_if_fail (tree_view != NULL, NULL);
+	g_return_val_if_fail (GTK_IS_TREE_VIEW (tree_view), NULL);
+
+	va_start (var_args, first_property_name);
+
+	peditor = gconf_peditor_new
+		(key,
+		 (GConfClientNotifyFunc) peditor_tree_view_value_changed,
+		 changeset,
+		 G_OBJECT (tree_view),
+		 first_property_name,
+		 var_args, NULL);
+
+	va_end (var_args);
+
+	g_signal_connect_swapped (G_OBJECT (tree_view), "cursor-changed",
+				  (GCallback) peditor_tree_view_widget_changed, peditor);
 
 	return peditor;
 }
