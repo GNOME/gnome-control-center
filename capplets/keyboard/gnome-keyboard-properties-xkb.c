@@ -55,7 +55,7 @@ xci_desc_to_utf8 (XklConfigItem * ci)
 static void
 set_model_text (GtkWidget * entry, GConfValue * value)
 {
-	XklConfigItem ci;
+	XklConfigItem *ci = xkl_config_item_new ();
 	const char *model = NULL;
 
 	if (value != NULL && value->type == GCONF_VALUE_STRING) {
@@ -70,17 +70,18 @@ set_model_text (GtkWidget * entry, GConfValue * value)
 			model = "";
 	}
 
-	g_snprintf (ci.name, sizeof (ci.name), "%s", model);
+	g_snprintf (ci->name, sizeof (ci->name), "%s", model);
 
-	if (xkl_config_registry_find_model (config_registry, &ci)) {
+	if (xkl_config_registry_find_model (config_registry, ci)) {
 		char *d;
 
-		d = xci_desc_to_utf8 (&ci);
+		d = xci_desc_to_utf8 (ci);
 		gtk_entry_set_text (GTK_ENTRY (entry), d);
 		g_free (d);
 	} else {
 		gtk_entry_set_text (GTK_ENTRY (entry), _("Unknown"));
 	}
+	g_object_unref (G_OBJECT (ci));
 }
 
 static void
@@ -166,8 +167,7 @@ setup_xkb_tabs (GladeXML * dialog, GConfChangeSet * changeset)
 	    (changeset, (gchar *) GKBD_DESKTOP_CONFIG_KEY_GROUP_PER_WINDOW,
 	     WID ("chk_separate_group_per_window"), NULL);
 
-	g_signal_connect (peditor, "value-changed",
-			  (GCallback)
+	g_signal_connect (peditor, "value-changed", (GCallback)
 			  chk_separate_group_per_window_toggled, dialog);
 
 /* tab 2 */

@@ -41,6 +41,11 @@ static void fill_models_list (GladeXML * chooser_dialog);
 
 static gboolean fill_vendors_list (GladeXML * chooser_dialog);
 
+/* hack, till libxklavier 3.3 is released */
+#ifndef XCI_PROP_VENDOR
+  #define XCI_PROP_VENDOR "vendor"
+#endif
+
 static GtkTreePath *
 gtk_list_store_find_entry (GtkListStore * list_store,
 			   GtkTreeIter * iter, gchar * name, int column_id)
@@ -77,7 +82,8 @@ add_vendor_to_list (XklConfigRegistry * config_registry,
 
 	gchar *vendor_name =
 	    (gchar *) g_object_get_data (G_OBJECT (config_item),
-					 "vendor");
+					 XCI_PROP_VENDOR);
+
 	if (vendor_name == NULL)
 		return;
 
@@ -111,7 +117,7 @@ add_model_to_list (XklConfigRegistry * config_registry,
 	if (current_vendor_name != NULL) {
 		gchar *vendor_name =
 		    (gchar *) g_object_get_data (G_OBJECT (config_item),
-						 "vendor");
+						 XCI_PROP_VENDOR);
 		if (vendor_name == NULL)
 			return;
 

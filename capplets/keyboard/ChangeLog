@@ -2,6 +2,9 @@
 
 	* gnome-keyboard-properties-xkbmc.c: make things buildable with
 	libxklavier 3.2
+	* gnome-keyboard-properties-xkb.c,
+	gnome-keyboard-properties-xkbltadd.c: XklConfigItem is a GObject, so
+	it has to be properly built (not on the stack but in heap)
 
 2007-05-17  Sergey Udaltsov <svu@gnome.org>
 

@@ -294,13 +294,12 @@ xkl_layout_chooser_add_default_switcher_if_necessary (GSList *
 			option = option->next;
 		}
 		if (!any_switcher) {
-			XklConfigItem ci;
-			g_snprintf (ci.name,
+			XklConfigItem *ci = xkl_config_item_new ();
+			g_snprintf (ci->name,
 				    XKL_MAX_CI_NAME_LENGTH,
 				    DEFAULT_GROUP_SWITCH);
 			if (xkl_config_registry_find_option
-			    (config_registry,
-			     GROUP_SWITCHERS_GROUP, &ci)) {
+			    (config_registry, GROUP_SWITCHERS_GROUP, ci)) {
 				const gchar *id =
 				    gkbd_keyboard_config_merge_items
 				    (GROUP_SWITCHERS_GROUP,
@@ -311,6 +310,7 @@ xkl_layout_chooser_add_default_switcher_if_necessary (GSList *
 				xkb_options_set_selected_list
 				    (options_list);
 			}
+			g_object_unref (G_OBJECT (ci));
 		}
 		clear_xkb_elements_list (options_list);
 	}
