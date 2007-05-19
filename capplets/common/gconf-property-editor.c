@@ -1927,7 +1927,9 @@ peditor_tree_view_widget_changed (GConfPropertyEditor *peditor,
 	value = peditor->p->conv_from_widget_cb (peditor, value_wid);
 	peditor_set_gconf_value (peditor, peditor->p->key, value);
 	g_signal_emit (peditor, peditor_signals[VALUE_CHANGED], 0, peditor->p->key, value);
-	gconf_value_free (value_wid);
+
+	if (value_wid)
+		gconf_value_free (value_wid);
 	if (value)
 		gconf_value_free (value);
 }
