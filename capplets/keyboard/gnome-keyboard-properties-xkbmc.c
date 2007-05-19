@@ -77,7 +77,7 @@ add_vendor_to_list (XklConfigRegistry * config_registry,
 
 	gchar *vendor_name =
 	    (gchar *) g_object_get_data (G_OBJECT (config_item),
-					 XCI_PROP_VENDOR);
+					 "vendor");
 	if (vendor_name == NULL)
 		return;
 
@@ -111,7 +111,7 @@ add_model_to_list (XklConfigRegistry * config_registry,
 	if (current_vendor_name != NULL) {
 		gchar *vendor_name =
 		    (gchar *) g_object_get_data (G_OBJECT (config_item),
-						 XCI_PROP_VENDOR);
+						 "vendor");
 		if (vendor_name == NULL)
 			return;
 
