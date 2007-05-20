@@ -124,7 +124,7 @@ def_group_in_gconf_changed (GConfClient * client,
 			    GConfEntry * entry, GladeXML * dialog)
 {
 	GConfValue *value = gconf_entry_get_value (entry);
-	
+
 	if (!value)
 		return;
 
@@ -606,13 +606,14 @@ xkb_layout_chooser_response (GtkDialog * dialog,
 					option = option->next;
 				}
 				if (!any_switcher) {
-					XklConfigItem ci;
-					g_snprintf (ci.name,
+					XklConfigItem *ci =
+					    xkl_config_item_new ();
+					g_snprintf (ci->name,
 						    XKL_MAX_CI_NAME_LENGTH,
 						    DEFAULT_GROUP_SWITCH);
 					if (xkl_config_registry_find_option
 					    (config_registry,
-					     GROUP_SWITCHERS_GROUP, &ci)) {
+					     GROUP_SWITCHERS_GROUP, ci)) {
 						const gchar *id =
 						    gkbd_keyboard_config_merge_items
 						    (GROUP_SWITCHERS_GROUP,
@@ -624,6 +625,7 @@ xkb_layout_chooser_response (GtkDialog * dialog,
 						xkb_options_set_selected_list
 						    (options_list);
 					}
+					g_object_unref (G_OBJECT (ci));
 				}
 				clear_xkb_elements_list (options_list);
 			}
