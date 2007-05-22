@@ -155,10 +155,13 @@ get_current_resolution (struct ScreenInfo *screen_info)
   GtkTreeIter iter;
   int i = 0;
 
-  gtk_combo_box_get_active_iter (combo, &iter);
-  gtk_tree_model_get (gtk_combo_box_get_model (combo), &iter,
-		      COL_ID, &i,
-		      -1);
+  if (gtk_combo_box_get_active_iter (combo, &iter))
+  {
+    gtk_tree_model_get (gtk_combo_box_get_model (combo), &iter,
+			COL_ID, &i,
+			-1);
+  }
+
   return i;
 }
 

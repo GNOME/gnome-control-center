@@ -1,3 +1,10 @@
+2007-05-22  Jens Granseuer  <jensgr@gmx.net>
+
+	* main.c: (get_current_resolution): surivive XRandR returning weird
+	results for some dual-screen setups. This fixes the crash in bug
+	#356520, but a proper fix for handling this situation is still
+	necessary, unless this is just a driver/X bug...
+
 2007-04-27  Rodrigo Moya <rodrigo@gnome-db.org>
 
 	* display-properties.desktop.in.in: renamed Bugzilla product.
