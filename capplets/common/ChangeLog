@@ -1,3 +1,9 @@
+2007-05-23  Jens Granseuer  <jensgr@gmx.net>
+
+	* wm-common.c: (wm_common_get_current_window_manager): make sure we
+	always return a copy of the window manager name, not a static string
+	(fixes bug #439244)
+
 2007-05-19  Jens Granseuer  <jensgr@gmx.net>
 
 	* gconf-property-editor.c: (peditor_tree_view_widget_changed):

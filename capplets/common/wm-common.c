@@ -27,42 +27,35 @@ wm_common_get_current_window_manager (void)
   guchar *val;
 
   if (wm_window == None)
-      return WM_COMMON_UNKNOWN;
+    return g_strdup (WM_COMMON_UNKNOWN);
 
   utf8_string = XInternAtom (GDK_DISPLAY (), "UTF8_STRING", False);
   atom = XInternAtom (GDK_DISPLAY (), "_NET_WM_NAME", False);
 
   gdk_error_trap_push ();
 
+  val = NULL;
   result = XGetWindowProperty (GDK_DISPLAY (),
 		  	       wm_window,
 			       atom,
 			       0, G_MAXLONG,
 			       False, utf8_string,
 			       &type, &format, &nitems,
-			       &bytes_after, (guchar **)&val);
+			       &bytes_after, &val);
 
-  if (gdk_error_trap_pop () || result != Success)
-    return WM_COMMON_UNKNOWN;
-
-  if (type != utf8_string ||
-      format !=8 ||
-      nitems == 0)
+  if (gdk_error_trap_pop () || result != Success ||
+      type != utf8_string || format != 8 || nitems == 0 ||
+      !g_utf8_validate (val, nitems, NULL))
     {
-      if (val)
-        XFree (val);
-      return WM_COMMON_UNKNOWN;
+      retval = g_strdup (WM_COMMON_UNKNOWN);
+    }
+  else
+    {
+      retval = g_strndup (val, nitems);
     }
 
-  if (!g_utf8_validate (val, nitems, NULL))
-    {
-      XFree (val);
-      return WM_COMMON_UNKNOWN;
-    }
-
-  retval = g_strndup (val, nitems);
-
-  XFree (val);
+  if (val)
+    XFree (val);
 
   return retval;
 }
