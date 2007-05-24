@@ -1880,11 +1880,12 @@ peditor_tree_view_value_changed (GConfClient         *client,
 		gconf_change_set_remove (peditor->p->changeset, peditor->p->key);
 
 	if (entry && (value = gconf_entry_get_value (entry))) {
+		GtkTreeView *treeview;
 		GtkTreeSelection *selection;
 		GConfValue *value_wid;
 
-		selection = gtk_tree_view_get_selection (
-				GTK_TREE_VIEW  (peditor->p->ui_control));
+    treeview = GTK_TREE_VIEW (peditor->p->ui_control);
+		selection = gtk_tree_view_get_selection (treeview);
 
 		value_wid = peditor->p->conv_to_widget_cb (peditor, value);
 
@@ -1892,6 +1893,7 @@ peditor_tree_view_value_changed (GConfClient         *client,
 			GtkTreePath *path = gtk_tree_path_new_from_string (
 				gconf_value_get_string (value_wid));
 			gtk_tree_selection_select_path (selection, path);
+			gtk_tree_view_scroll_to_cell (treeview, path, NULL, FALSE, 0, 0);
 			gtk_tree_path_free (path);
 			gconf_value_free (value_wid);
 		} else {
