@@ -104,6 +104,77 @@ hbox_foreach (GtkWidget *widget,
   fake_expose_widget (widget, (GdkPixmap *) data, NULL);
 }
 
+static GdkPixbuf *
+create_folder_icon (char *icon_theme_name)
+{
+  GtkIconTheme *icon_theme;
+  GdkPixbuf *folder_icon = NULL, *retval;
+  GtkIconInfo *folder_icon_info;
+  const gchar *filename;
+  gchar *example_icon_name;
+  int width, height;
+  gdouble scale;
+
+  icon_theme = gtk_icon_theme_new ();
+  gtk_icon_theme_set_custom_theme (icon_theme, icon_theme_name);
+
+  folder_icon_info = NULL;
+  /* Get the Example icon name in the theme if specified */
+  example_icon_name = gtk_icon_theme_get_example_icon_name (icon_theme);
+  if (example_icon_name != NULL)
+    folder_icon_info = gtk_icon_theme_lookup_icon (icon_theme, example_icon_name, 48, GTK_ICON_LOOKUP_FORCE_SVG);
+  g_free (example_icon_name);
+
+  /* If an Example is not specified, fall back to using the folder icons in
+     the order of Icon Nameing Spec, "gnome-fs-directory", and "folder" */
+  if (folder_icon_info == NULL)
+    folder_icon_info = gtk_icon_theme_lookup_icon (icon_theme, "x-directory-normal", 48, GTK_ICON_LOOKUP_FORCE_SVG);
+  if (folder_icon_info == NULL)
+    folder_icon_info = gtk_icon_theme_lookup_icon (icon_theme, "gnome-fs-directory", 48, GTK_ICON_LOOKUP_FORCE_SVG);
+  if (folder_icon_info == NULL)
+    folder_icon_info = gtk_icon_theme_lookup_icon (icon_theme, "folder", 48, GTK_ICON_LOOKUP_FORCE_SVG);
+ 
+  g_object_unref (icon_theme);
+
+  if (folder_icon_info != NULL) 
+  {
+    filename = gtk_icon_info_get_filename (folder_icon_info);
+    
+    if (filename != NULL)
+    {
+      folder_icon = gdk_pixbuf_new_from_file (filename, NULL);
+    }
+
+    gtk_icon_info_free (folder_icon_info);
+  }
+
+  /* render the icon to the thumbnail */
+  if (folder_icon == NULL)
+  {
+    GtkWidget *dummy;
+    dummy = gtk_label_new ("");
+
+    folder_icon = gtk_widget_render_icon (dummy, 
+                                          GTK_STOCK_MISSING_IMAGE, 
+                                          GTK_ICON_SIZE_DIALOG,
+                                          NULL);
+
+    gtk_widget_destroy (dummy);
+  }
+  
+  /* Some icons don't come back at the requested dimensions, so we need to scale
+   * them. The width is usually the largest dimension for icons that come at
+   * irregular sizes, so use this to calculate the scale factor
+   */
+  scale = 48.0 / gdk_pixbuf_get_width (folder_icon);
+  width = 48;
+  height = scale * gdk_pixbuf_get_height (folder_icon);
+
+  retval = gdk_pixbuf_scale_simple (folder_icon, width, height, GDK_INTERP_BILINEAR);
+  g_object_unref (folder_icon);
+
+  return retval;
+}
 static void
 create_image (ThemeThumbnailData *theme_thumbnail_data,
 	      GdkPixbuf          *pixbuf)
@@ -120,13 +191,8 @@ create_image (ThemeThumbnailData *theme_thumbnail_data,
   MetaFrameFlags flags;
   MetaTheme *theme = NULL;
   GtkSettings *settings;
-  GtkIconTheme *icon_theme;
-  GdkPixbuf *folder_icon = NULL;
-  GtkIconInfo *folder_icon_info;
-  const gchar *filename;
-  gchar *example_icon_name;
+  GdkPixbuf *icon;
   int width, height;
-  double scale;
 
   settings = gtk_settings_get_default ();
   g_object_set (G_OBJECT (settings),
@@ -205,55 +271,11 @@ create_image (ThemeThumbnailData *theme_thumbnail_data,
   gdk_pixbuf_get_from_drawable (pixbuf, pixmap, NULL, 0, 0, 0, 0, ICON_SIZE_WIDTH, ICON_SIZE_HEIGHT);
 
   /* Handle the icon theme */
-  icon_theme = gtk_icon_theme_new ();
-  gtk_icon_theme_set_custom_theme (icon_theme, (char *) theme_thumbnail_data->icon_theme_name->data);
-
-  folder_icon_info = NULL;
-  /* Get the Example icon name in the theme if specified */
-  example_icon_name = gtk_icon_theme_get_example_icon_name (icon_theme);
-  if (example_icon_name != NULL)
-    folder_icon_info = gtk_icon_theme_lookup_icon (icon_theme, example_icon_name, 48, GTK_ICON_LOOKUP_FORCE_SVG);
-  g_free (example_icon_name);
-
-  /* If an Example is not specified, fall back to using the folder icons in
-     the order of Icon Nameing Spec, "gnome-fs-directory", and "folder" */
-  if (folder_icon_info == NULL)
-    folder_icon_info = gtk_icon_theme_lookup_icon (icon_theme, "x-directory-normal", 48, GTK_ICON_LOOKUP_FORCE_SVG);
-  if (folder_icon_info == NULL)
-    folder_icon_info = gtk_icon_theme_lookup_icon (icon_theme, "gnome-fs-directory", 48, GTK_ICON_LOOKUP_FORCE_SVG);
-  if (folder_icon_info == NULL)
-    folder_icon_info = gtk_icon_theme_lookup_icon (icon_theme, "folder", 48, GTK_ICON_LOOKUP_FORCE_SVG);
- 
-  g_object_unref (icon_theme);
-
-  if (folder_icon_info != NULL) 
-    {
-      filename = gtk_icon_info_get_filename (folder_icon_info);
-     
-      if (filename != NULL)
-	{
-	  folder_icon = gdk_pixbuf_new_from_file (filename, NULL);
-	}
-
-      gtk_icon_info_free (folder_icon_info);
-    }
-
-  /* render the icon to the thumbnail */
-  if (folder_icon == NULL)
-    folder_icon = gtk_widget_render_icon (window, 
-					  GTK_STOCK_MISSING_IMAGE, 
-					  GTK_ICON_SIZE_DIALOG,
-					  NULL);
-
-  /* Some icons don't come back at the requested dimensions, so we need to scale
-   * them. The width is usually the largest dimension for icons that come at
-   * irregular sizes, so use this to calculate the scale factor
-   */
-  scale = 48.0 / gdk_pixbuf_get_width (folder_icon);
-  width = 48;
-  height = scale * gdk_pixbuf_get_height (folder_icon);
-
-  gdk_pixbuf_composite (folder_icon,
+  icon = create_folder_icon ((char *) theme_thumbnail_data->icon_theme_name->data);
+  width = gdk_pixbuf_get_width (icon);
+  height = gdk_pixbuf_get_height (icon);
+  
+  gdk_pixbuf_composite (icon,
 			pixbuf,
 			align->allocation.x + align->allocation.width - width - 5,
 			align->allocation.y + align->allocation.height - height - 5,
@@ -261,10 +283,10 @@ create_image (ThemeThumbnailData *theme_thumbnail_data,
 			height,
 			align->allocation.x + align->allocation.width - width - 5,
 			align->allocation.y + align->allocation.height - height - 5,
-			scale,
-			scale,
+			1.0,
+			1.0,
 			GDK_INTERP_BILINEAR, 255);
-  g_object_unref (folder_icon);
+  g_object_unref (icon);
   gtk_widget_destroy (window);
 }
 
@@ -680,4 +702,172 @@ theme_thumbnail_factory_init (int argc, char *argv[])
   async_data.data = g_byte_array_new ();
 
   theme_hash = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_object_unref);
+}
+
+
+
+/* Functions for specific types of themes */
+
+GdkPixbuf *
+generate_gtk_theme_thumbnail (GnomeThemeInfo *info)
+{
+  GtkSettings *settings;
+  char *current_theme;
+  GtkWidget *window, *vbox, *hbox, *stock_button, *checkbox, *radio, *progress;
+  GtkRequisition requisition;
+  GtkAllocation allocation;
+  GdkVisual *visual;
+  GdkPixmap *pixmap;
+  GdkPixbuf *pixbuf, *ret;
+ 
+  settings = gtk_settings_get_default ();
+  g_object_get (G_OBJECT (settings), "gtk-theme-name", &current_theme, NULL);
+  g_object_set (G_OBJECT (settings), "gtk-theme-name", info->name, NULL);
+
+  window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+  gtk_window_set_default_size (GTK_WINDOW (window), ICON_SIZE_WIDTH, ICON_SIZE_HEIGHT + 20);
+
+  vbox = gtk_vbox_new (FALSE, 6);
+  gtk_container_set_border_width (GTK_CONTAINER (vbox), 6);
+  gtk_container_add (GTK_CONTAINER (window), vbox);
+  stock_button = gtk_button_new_from_stock (GTK_STOCK_OPEN);
+  gtk_box_pack_start (GTK_BOX (vbox), stock_button, FALSE, FALSE, 0);
+  hbox = gtk_hbox_new (FALSE, 6);
+  gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+  checkbox = gtk_check_button_new ();
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (checkbox), TRUE);
+  gtk_box_pack_start (GTK_BOX (hbox), checkbox, FALSE, FALSE, 0);
+  radio = gtk_radio_button_new_from_widget (NULL);
+  gtk_box_pack_start (GTK_BOX (hbox), radio, FALSE, FALSE, 0);
+  progress = gtk_progress_bar_new ();
+  gtk_box_pack_start (GTK_BOX (hbox), progress, TRUE, TRUE, 0);
+
+  gtk_widget_show_all (vbox);
+  gtk_widget_realize (stock_button);
+  gtk_widget_realize (GTK_BIN (stock_button)->child);
+  gtk_widget_realize (checkbox);
+  gtk_widget_realize (radio);
+  gtk_widget_realize (progress);
+  gtk_widget_map (stock_button);
+  gtk_widget_map (GTK_BIN (stock_button)->child);
+  gtk_widget_map (checkbox);
+  gtk_widget_map (radio);
+  gtk_widget_map (progress);
+
+  gtk_widget_size_request (window, &requisition);
+  allocation.x = 0;
+  allocation.y = 0;
+  allocation.width = ICON_SIZE_WIDTH;
+  allocation.height = ICON_SIZE_HEIGHT;
+  gtk_widget_size_allocate (window, &allocation);
+  gtk_widget_size_request (window, &requisition);
+
+  /* Draw the window */
+  gtk_widget_ensure_style (window);
+  g_assert (window->style);
+  g_assert (window->style->font_desc);
+
+  /* Create a pixmap */
+  visual = gtk_widget_get_visual (window);
+  pixmap = gdk_pixmap_new (NULL, ICON_SIZE_WIDTH, ICON_SIZE_HEIGHT, visual->depth);
+  gdk_drawable_set_colormap (GDK_DRAWABLE (pixmap), gtk_widget_get_colormap (window));
+
+  fake_expose_widget (window, pixmap, NULL);
+  fake_expose_widget (stock_button, pixmap, NULL);
+  gtk_container_foreach (GTK_CONTAINER (GTK_BIN (GTK_BIN (stock_button)->child)->child),
+			 hbox_foreach,
+			 pixmap);
+  fake_expose_widget (GTK_BIN (stock_button)->child, pixmap, NULL);
+  fake_expose_widget (checkbox, pixmap, NULL);
+  fake_expose_widget (radio, pixmap, NULL);
+
+
+  pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, ICON_SIZE_WIDTH, ICON_SIZE_WIDTH / 2);
+  gdk_pixbuf_get_from_drawable (pixbuf, pixmap, NULL, 0, 0, 0, 0, ICON_SIZE_WIDTH, ICON_SIZE_WIDTH / 2);
+
+  ret = gdk_pixbuf_scale_simple (pixbuf, 96, 48, GDK_INTERP_BILINEAR);
+  g_object_unref (pixbuf);
+
+  gtk_widget_destroy (window);
+  g_object_set (G_OBJECT (settings), "gtk-theme-name", current_theme, NULL);
+  return ret;
+}
+
+GdkPixbuf *
+generate_metacity_theme_thumbnail (GnomeThemeInfo *info)
+{
+  GtkWidget *window, *preview, *dummy;
+  MetaFrameFlags flags;
+  MetaTheme *theme;
+  GtkRequisition requisition;
+  GtkAllocation allocation;
+  GdkVisual *visual;
+  GdkPixmap *pixmap;
+  GdkPixbuf *pixbuf, *ret;
+ 
+  theme = meta_theme_load (info->name, NULL);
+
+  flags = META_FRAME_ALLOWS_DELETE |
+    META_FRAME_ALLOWS_MENU |
+    META_FRAME_ALLOWS_MINIMIZE |
+    META_FRAME_ALLOWS_MAXIMIZE |
+    META_FRAME_ALLOWS_VERTICAL_RESIZE |
+    META_FRAME_ALLOWS_HORIZONTAL_RESIZE |
+    META_FRAME_HAS_FOCUS |
+    META_FRAME_ALLOWS_SHADE |
+    META_FRAME_ALLOWS_MOVE;
+
+  window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+  gtk_window_set_default_size (GTK_WINDOW (window), ICON_SIZE_WIDTH, ICON_SIZE_WIDTH / 2);
+
+  preview = meta_preview_new ();
+  meta_preview_set_frame_flags (META_PREVIEW (preview), flags);
+  meta_preview_set_theme (META_PREVIEW (preview), theme);
+  meta_preview_set_title (META_PREVIEW (preview), "");
+  gtk_container_add (GTK_CONTAINER (window), preview);
+  
+  dummy = gtk_label_new ("");
+  gtk_container_add (GTK_CONTAINER (preview), dummy);
+  
+  gtk_widget_realize (window);
+  gtk_widget_realize (preview);
+  gtk_widget_realize (dummy);
+  gtk_widget_show_all (preview);
+  gtk_widget_map (dummy);
+
+  gtk_widget_size_request (window, &requisition);
+  allocation.x = 0;
+  allocation.y = 0;
+  allocation.width = ICON_SIZE_WIDTH;
+  allocation.height = ICON_SIZE_WIDTH / 2;
+  gtk_widget_size_allocate (window, &allocation);
+  gtk_widget_size_request (window, &requisition);
+
+  /* Draw the window */
+  gtk_widget_ensure_style (window);
+  g_assert (window->style);
+  g_assert (window->style->font_desc);
+
+  /* Create a pixmap */
+  visual = gtk_widget_get_visual (window);
+  pixmap = gdk_pixmap_new (NULL, ICON_SIZE_WIDTH, ICON_SIZE_WIDTH / 2, visual->depth);
+  gdk_drawable_set_colormap (GDK_DRAWABLE (pixmap), gtk_widget_get_colormap (window));
+
+  fake_expose_widget (window, pixmap, NULL);
+  fake_expose_widget (preview, pixmap, NULL);
+
+  pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, ICON_SIZE_WIDTH, ICON_SIZE_WIDTH / 2);
+  gdk_pixbuf_get_from_drawable (pixbuf, pixmap, NULL, 0, 0, 0, 0, ICON_SIZE_WIDTH, ICON_SIZE_WIDTH / 2);
+  
+  ret = gdk_pixbuf_scale_simple (pixbuf, 96, 48, GDK_INTERP_BILINEAR);
+  g_object_unref (pixbuf);
+  
+  gtk_widget_destroy (window);
+  return ret;
+}
+
+GdkPixbuf *
+generate_icon_theme_thumbnail (GnomeThemeIconInfo *info)
+{
+  return create_folder_icon (info->name);
 }
