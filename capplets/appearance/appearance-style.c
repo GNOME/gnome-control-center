@@ -34,6 +34,13 @@ enum ThemeType {
   COLOR_SCHEME
 };
 
+enum {
+  COL_THUMBNAIL,
+  COL_LABEL,
+  COL_NAME,
+  NUM_COLS
+};
+
 static const gchar *gconf_keys[] = {
   "/desktop/gnome/interface/gtk_theme",
   "/apps/metacity/general/theme",
@@ -46,7 +53,7 @@ static const gchar *gconf_keys[] = {
 static void prepare_list (AppearanceData *data, GtkWidget *list, enum ThemeType type);
 static void update_color_buttons_from_string (gchar *color_scheme, AppearanceData *data);
 
-static void color_scheme_changed (GObject    *settings, GParamSpec *pspec, AppearanceData  *data);
+static void color_scheme_changed (GObject *settings, GParamSpec *pspec, AppearanceData *data);
 
 
 /* GUI Callbacks */
@@ -120,18 +127,21 @@ prepare_list (AppearanceData *data, GtkWidget *list, enum ThemeType type)
   if (!list)
     return;
 
-  store = gtk_list_store_new (2, GDK_TYPE_PIXBUF, G_TYPE_STRING);
+  store = gtk_list_store_new (NUM_COLS, GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_STRING);
 
   for (l = themes; l; l = g_list_next (l))
   {
-    gchar *name = NULL;
+    const gchar *name = NULL;
+    const gchar *label = NULL;
     GdkPixbuf *thumbnail;
     GtkTreeIter i;
 
-    if (type < ICON_THEMES)
-      name = ((GnomeThemeInfo*) l->data)->name;
-    else if (type == ICON_THEMES)
-      name = ((GnomeThemeIconInfo*) l->data)->name;
+    if (type == GTK_THEMES || type == METACITY_THEMES) {
+      name = ((GnomeThemeInfo *) l->data)->name;
+    } else if (type == ICON_THEMES) {
+      name = ((GnomeThemeIconInfo *) l->data)->name;
+      label = ((GnomeThemeIconInfo *) l->data)->readable_name;
+    }
 
     if (!name)
       continue; /* just in case... */
@@ -139,27 +149,30 @@ prepare_list (AppearanceData *data, GtkWidget *list, enum ThemeType type)
     switch (type)
     {
       case GTK_THEMES:
-        thumbnail = generate_gtk_theme_thumbnail ((GnomeThemeInfo*) l->data);
+        thumbnail = generate_gtk_theme_thumbnail ((GnomeThemeInfo *) l->data);
         break;
 
       case ICON_THEMES:
-        thumbnail = generate_icon_theme_thumbnail ((GnomeThemeIconInfo*) l->data);
+        thumbnail = generate_icon_theme_thumbnail ((GnomeThemeIconInfo *) l->data);
         break;
       
       case METACITY_THEMES:
-        thumbnail = generate_metacity_theme_thumbnail ((GnomeThemeInfo*) l->data);
+        thumbnail = generate_metacity_theme_thumbnail ((GnomeThemeInfo *) l->data);
         break;
         
       default:
         thumbnail = NULL;
     } 
 
-    gtk_list_store_insert_with_values (store, &i, 0, 0, thumbnail, 1, name, -1);
-
+    gtk_list_store_insert_with_values (store, &i, 0,
+                                       COL_THUMBNAIL, thumbnail,
+                                       COL_LABEL, label ? label : name,
+                                       COL_NAME, name, -1);
   }
 
   sort_model = gtk_tree_model_sort_new_with_model (GTK_TREE_MODEL (store));
-  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (sort_model), 1, GTK_SORT_ASCENDING);
+  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (sort_model),
+                                        COL_LABEL, GTK_SORT_ASCENDING);
 
   gtk_tree_view_set_model (GTK_TREE_VIEW (list), GTK_TREE_MODEL (sort_model));
 
@@ -171,7 +184,7 @@ prepare_list (AppearanceData *data, GtkWidget *list, enum ThemeType type)
 
   column = gtk_tree_view_column_new ();
   gtk_tree_view_column_pack_start (column, renderer, FALSE);  
-  gtk_tree_view_column_add_attribute (column, renderer, "pixbuf", 0);
+  gtk_tree_view_column_add_attribute (column, renderer, "pixbuf", COL_THUMBNAIL);
   gtk_tree_view_append_column (GTK_TREE_VIEW (list), column);
 
   renderer = gtk_cell_renderer_text_new ();
@@ -182,7 +195,7 @@ prepare_list (AppearanceData *data, GtkWidget *list, enum ThemeType type)
 
   column = gtk_tree_view_column_new ();
   gtk_tree_view_column_pack_start (column, renderer, FALSE);  
-  gtk_tree_view_column_add_attribute (column, renderer, "text", 1);
+  gtk_tree_view_column_add_attribute (column, renderer, "text", COL_LABEL);
   gtk_tree_view_append_column (GTK_TREE_VIEW (list), column);
 
   gconf_peditor_new_tree_view (NULL, gconf_keys[type], list,
@@ -235,7 +248,7 @@ conv_to_widget_cb (GConfPropertyEditor *peditor, GConfValue *value)
   list = GTK_TREE_VIEW (gconf_property_editor_get_ui_control (peditor));
   store = gtk_tree_view_get_model (list);
 
-  path = find_string_in_model (store, curr_value, 1);
+  path = find_string_in_model (store, curr_value, COL_NAME);
 
   /* Add a temporary item if we can't find a match
    * TODO: delete this item if it is no longer selected?
@@ -249,10 +262,12 @@ conv_to_widget_cb (GConfPropertyEditor *peditor, GConfValue *value)
     else
       list_store = GTK_LIST_STORE (store);
 
-    gtk_list_store_insert_with_values (list_store, NULL, 0, 1, curr_value, -1);
+    gtk_list_store_insert_with_values (list_store, NULL, 0,
+                                       COL_LABEL, curr_value,
+                                       COL_NAME, curr_value, -1);
     /* if the model is sorted then it might not still be in the position we just
      * placed it, so we have to search the model again... */
-    path = find_string_in_model (store, curr_value, 1);
+    path = find_string_in_model (store, curr_value, COL_NAME);
   }
 
   new_value = gconf_value_new (GCONF_VALUE_STRING);
@@ -277,7 +292,7 @@ conv_from_widget_cb (GConfPropertyEditor *peditor, GConfValue *value)
 
   selection = gtk_tree_view_get_selection (list);
   gtk_tree_selection_get_selected (selection, NULL, &iter);
-  gtk_tree_model_get (model, &iter, 1, &list_value, -1);
+  gtk_tree_model_get (model, &iter, COL_NAME, &list_value, -1);
 
   new_value = gconf_value_new (GCONF_VALUE_STRING);
   gconf_value_set_string (new_value, list_value);
