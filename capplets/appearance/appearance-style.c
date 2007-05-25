@@ -20,9 +20,11 @@
 #include "appearance.h"
 
 #include <string.h>
+#include <pango/pango.h>
 
 #include "gnome-theme-info.h"
 #include "gconf-property-editor.h"
+#include "theme-thumbnail.h"
 
 enum ThemeType {
   GTK_THEMES,
@@ -41,7 +43,7 @@ static const gchar *gconf_keys[] = {
 };
 
 
-static void prepare_combo (AppearanceData *data, GtkWidget *combo, enum ThemeType type);
+static void prepare_list (AppearanceData *data, GtkWidget *list, enum ThemeType type);
 static void update_color_buttons_from_string (gchar *color_scheme, AppearanceData *data);
 
 static void color_scheme_changed (GObject    *settings, GParamSpec *pspec, AppearanceData  *data);
@@ -66,9 +68,9 @@ style_init (AppearanceData *data)
   g_signal_connect_swapped (glade_xml_get_widget (data->xml, "theme_close_button"), "clicked", (GCallback) gtk_widget_hide, w);
   gtk_widget_hide_on_delete (w);
 
-  prepare_combo (data, glade_xml_get_widget (data->xml, "gtk_themes_combobox"), GTK_THEMES);
-  prepare_combo (data, glade_xml_get_widget (data->xml, "window_themes_combobox"), METACITY_THEMES);
-  prepare_combo (data, glade_xml_get_widget (data->xml, "icon_themes_combobox"), ICON_THEMES);
+  prepare_list (data, glade_xml_get_widget (data->xml, "gtk_themes_list"), GTK_THEMES);
+  prepare_list (data, glade_xml_get_widget (data->xml, "window_themes_list"), METACITY_THEMES);
+  prepare_list (data, glade_xml_get_widget (data->xml, "icon_themes_list"), ICON_THEMES);
 
   settings = gtk_settings_get_default ();
   g_object_get (G_OBJECT (settings), "gtk-color-scheme", &colour_scheme, NULL);
@@ -86,29 +88,30 @@ style_init (AppearanceData *data)
 }
 
 static void
-prepare_combo (AppearanceData *data, GtkWidget *combo, enum ThemeType type)
+prepare_list (AppearanceData *data, GtkWidget *list, enum ThemeType type)
 {
   GtkListStore *store;
-  GList *l, *list = NULL;
+  GList *l, *themes = NULL;
   GtkCellRenderer *renderer;
+  GtkTreeViewColumn *column;
   GtkTreeModel *sort_model;
 
   switch (type)
   {
     case GTK_THEMES:
-      list = gnome_theme_info_find_by_type (GNOME_THEME_GTK_2);
+      themes = gnome_theme_info_find_by_type (GNOME_THEME_GTK_2);
       break;
 
     case METACITY_THEMES:
-      list = gnome_theme_info_find_by_type (GNOME_THEME_METACITY);
+      themes = gnome_theme_info_find_by_type (GNOME_THEME_METACITY);
       break;
 
     case ICON_THEMES:
-      list = gnome_theme_icon_info_find_all ();
+      themes = gnome_theme_icon_info_find_all ();
       break;
 
     case CURSOR_THEMES:
-      list = NULL; /* don't know what to do yet */
+      themes = NULL; /* don't know what to do yet */
 
     default:
       /* we don't deal with any other type of themes here */
@@ -117,11 +120,12 @@ prepare_combo (AppearanceData *data, GtkWidget *combo, enum ThemeType type)
   if (!list)
     return;
 
-  store = gtk_list_store_new (1, G_TYPE_STRING);
+  store = gtk_list_store_new (2, GDK_TYPE_PIXBUF, G_TYPE_STRING);
 
-  for (l = list; l; l = g_list_next (l))
+  for (l = themes; l; l = g_list_next (l))
   {
     gchar *name = NULL;
+    GdkPixbuf *thumbnail;
     GtkTreeIter i;
 
     if (type < ICON_THEMES)
@@ -132,20 +136,56 @@ prepare_combo (AppearanceData *data, GtkWidget *combo, enum ThemeType type)
     if (!name)
       continue; /* just in case... */
 
-    gtk_list_store_insert_with_values (store, &i, 0, 0, name, -1);
+    switch (type)
+    {
+      case GTK_THEMES:
+        thumbnail = generate_gtk_theme_thumbnail ((GnomeThemeInfo*) l->data);
+        break;
+
+      case ICON_THEMES:
+        thumbnail = generate_icon_theme_thumbnail ((GnomeThemeIconInfo*) l->data);
+        break;
+      
+      case METACITY_THEMES:
+        thumbnail = generate_metacity_theme_thumbnail ((GnomeThemeInfo*) l->data);
+        break;
+        
+      default:
+        thumbnail = NULL;
+    } 
+
+    gtk_list_store_insert_with_values (store, &i, 0, 0, thumbnail, 1, name, -1);
 
   }
 
   sort_model = gtk_tree_model_sort_new_with_model (GTK_TREE_MODEL (store));
-  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (sort_model), 0, GTK_SORT_ASCENDING);
+  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (sort_model), 1, GTK_SORT_ASCENDING);
 
-  gtk_combo_box_set_model (GTK_COMBO_BOX (combo), GTK_TREE_MODEL (sort_model));
+  gtk_tree_view_set_model (GTK_TREE_VIEW (list), GTK_TREE_MODEL (sort_model));
+
+  renderer = gtk_cell_renderer_pixbuf_new ();
+  g_object_set (G_OBJECT (renderer),
+    "xpad", 3,
+    "ypad", 3,
+    NULL);
+
+  column = gtk_tree_view_column_new ();
+  gtk_tree_view_column_pack_start (column, renderer, FALSE);  
+  gtk_tree_view_column_add_attribute (column, renderer, "pixbuf", 0);
+  gtk_tree_view_append_column (GTK_TREE_VIEW (list), column);
 
   renderer = gtk_cell_renderer_text_new ();
-  gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combo), renderer, TRUE);
-  gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (combo), renderer, "text", 0);
+  g_object_set (G_OBJECT (renderer),
+    "weight", PANGO_WEIGHT_BOLD,
+    "weight-set", TRUE,
+    NULL);
 
-  gconf_peditor_new_combo_box (NULL, gconf_keys[type], combo,
+  column = gtk_tree_view_column_new ();
+  gtk_tree_view_column_pack_start (column, renderer, FALSE);  
+  gtk_tree_view_column_add_attribute (column, renderer, "text", 1);
+  gtk_tree_view_append_column (GTK_TREE_VIEW (list), column);
+
+  gconf_peditor_new_tree_view (NULL, gconf_keys[type], list,
     "conv-to-widget-cb", conv_to_widget_cb,
     "conv-from-widget-cb", conv_from_widget_cb,
     NULL);
@@ -153,57 +193,54 @@ prepare_combo (AppearanceData *data, GtkWidget *combo, enum ThemeType type)
 
 /* Callbacks */
 
-static int
+static gchar *
 find_string_in_model (GtkTreeModel *model, const gchar *value, gint column)
 {
-  gint index = -1;
   GtkTreeIter iter;
-  gboolean found, valid;
-  gchar *test = NULL;
+  gboolean valid;
+  gchar *path = NULL, *test = NULL;
 
   if (!value)
-    return -1;
+    return NULL;
 
   valid = gtk_tree_model_get_iter_first (model, &iter);
-  found = FALSE;
+
   while (valid)
   {
-    index++;
     g_free (test);
     gtk_tree_model_get (model, &iter, column, &test, -1);
     if (test && !strcmp (test, value))
     {
-      found = TRUE;
+      path = gtk_tree_model_get_string_from_iter (model, &iter);
       break;
     }
     valid = gtk_tree_model_iter_next (model, &iter);
   }
   g_free (test);
 
-  return found ? index : -1;
+  return path;
 }
 
 static GConfValue *
 conv_to_widget_cb (GConfPropertyEditor *peditor, GConfValue *value)
 {
   GtkTreeModel *store;
-  GtkComboBox *combo;
+  GtkTreeView *list;
   const gchar *curr_value;
   GConfValue *new_value;
-  gint index;
+  gchar *path;
 
   /* find value in model */
   curr_value = gconf_value_get_string (value);
-  combo = GTK_COMBO_BOX (gconf_property_editor_get_ui_control (peditor));
-  store = gtk_combo_box_get_model (combo);
+  list = GTK_TREE_VIEW (gconf_property_editor_get_ui_control (peditor));
+  store = gtk_tree_view_get_model (list);
 
-  index = find_string_in_model (store, curr_value, 0);
-
+  path = find_string_in_model (store, curr_value, 1);
 
   /* Add a temporary item if we can't find a match
    * TODO: delete this item if it is no longer selected?
    */
-  if (index == -1)
+  if (!path)
   {
     GtkListStore *list_store;
 
@@ -212,15 +249,15 @@ conv_to_widget_cb (GConfPropertyEditor *peditor, GConfValue *value)
     else
       list_store = GTK_LIST_STORE (store);
 
-    gtk_list_store_insert_with_values (list_store, NULL, 0, 0, curr_value, -1);
+    gtk_list_store_insert_with_values (list_store, NULL, 0, 1, curr_value, -1);
     /* if the model is sorted then it might not still be in the position we just
      * placed it, so we have to search the model again... */
-    index = find_string_in_model (store, curr_value, 0);
+    path = find_string_in_model (store, curr_value, 1);
   }
 
-
-  new_value = gconf_value_new (GCONF_VALUE_INT);
-  gconf_value_set_int (new_value, index);
+  new_value = gconf_value_new (GCONF_VALUE_STRING);
+  gconf_value_set_string (new_value, path);
+  g_free (path);
 
   return new_value;
 }
@@ -229,19 +266,22 @@ static GConfValue *
 conv_from_widget_cb (GConfPropertyEditor *peditor, GConfValue *value)
 {
   GConfValue *new_value;
-  gchar *combo_value = NULL;
+  gchar *list_value = NULL;
   GtkTreeIter iter;
+  GtkTreeSelection *selection;
   GtkTreeModel *model;
-  GtkComboBox *combo;
+  GtkTreeView *list;
 
-  combo = GTK_COMBO_BOX (gconf_property_editor_get_ui_control (peditor));
-  model = gtk_combo_box_get_model (combo);
-  gtk_combo_box_get_active_iter (combo, &iter);
-  gtk_tree_model_get (model, &iter, 0, &combo_value, -1);
+  list = GTK_TREE_VIEW (gconf_property_editor_get_ui_control (peditor));
+  model = gtk_tree_view_get_model (list);
+
+  selection = gtk_tree_view_get_selection (list);
+  gtk_tree_selection_get_selected (selection, NULL, &iter);
+  gtk_tree_model_get (model, &iter, 1, &list_value, -1);
 
   new_value = gconf_value_new (GCONF_VALUE_STRING);
-  gconf_value_set_string (new_value, combo_value);
-  g_free (combo_value);
+  gconf_value_set_string (new_value, list_value);
+  g_free (list_value);
 
   return new_value;
 }
