@@ -421,7 +421,7 @@ read_icon_theme (GnomeVFSURI *icon_theme_uri)
 {
   GnomeThemeIconInfo *icon_theme_info;
   GnomeDesktopItem *icon_theme_ditem;
-  char *icon_theme_file;
+  gchar *icon_theme_file;
   const gchar *name;
   const gchar *hidden_theme_icon;
 
@@ -445,9 +445,13 @@ read_icon_theme (GnomeVFSURI *icon_theme_uri)
   if (hidden_theme_icon == NULL || 
       strcmp (hidden_theme_icon, "false") == 0) 
     {
+      gchar *dir_name;
       icon_theme_info = gnome_theme_icon_info_new ();
-      icon_theme_info->name = g_strdup (name);
+      icon_theme_info->readable_name = g_strdup (name);
       icon_theme_info->path = icon_theme_file;
+      dir_name = g_path_get_dirname (icon_theme_file);
+      icon_theme_info->name = g_path_get_basename (dir_name);
+      g_free (dir_name);
     }
   else 
     {

@@ -67,6 +67,7 @@ struct _GnomeThemeIconInfo
 {
   gchar *path;
   gchar *name;
+  gchar *readable_name;
   gint priority;
 };
 
