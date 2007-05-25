@@ -42,6 +42,7 @@ glade_DATA = appearance.glade
 
 pixmapdir = $(pkgdatadir)/pixmaps
 pixmap_DATA =             \
+        theme-thumbnailing.png  \        
         subpixel-bgr.png  \
         subpixel-rgb.png  \
         subpixel-vbgr.png \
