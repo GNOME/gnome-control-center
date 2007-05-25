@@ -713,46 +713,43 @@ generate_gtk_theme_thumbnail (GnomeThemeInfo *info)
 {
   GtkSettings *settings;
   char *current_theme;
-  GtkWidget *window, *vbox, *hbox, *stock_button, *checkbox, *radio, *progress;
+  GtkWidget *window, *vbox, *box, *stock_button, *checkbox, *radio;
   GtkRequisition requisition;
   GtkAllocation allocation;
   GdkVisual *visual;
   GdkPixmap *pixmap;
   GdkPixbuf *pixbuf, *ret;
- 
+  gint width, height;
+
   settings = gtk_settings_get_default ();
   g_object_get (G_OBJECT (settings), "gtk-theme-name", &current_theme, NULL);
   g_object_set (G_OBJECT (settings), "gtk-theme-name", info->name, NULL);
 
   window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-  gtk_window_set_default_size (GTK_WINDOW (window), ICON_SIZE_WIDTH, ICON_SIZE_HEIGHT + 20);
+  //gtk_window_set_default_size (GTK_WINDOW (window), ICON_SIZE_WIDTH, ICON_SIZE_HEIGHT);
 
-  vbox = gtk_vbox_new (FALSE, 6);
-  gtk_container_set_border_width (GTK_CONTAINER (vbox), 6);
+  vbox = gtk_vbox_new (FALSE, 0);
   gtk_container_add (GTK_CONTAINER (window), vbox);
+  box = gtk_hbox_new (FALSE, 6);
+  gtk_container_set_border_width (GTK_CONTAINER (box), 6);
+  gtk_box_pack_start (GTK_BOX (vbox), box, FALSE, FALSE, 0);
   stock_button = gtk_button_new_from_stock (GTK_STOCK_OPEN);
-  gtk_box_pack_start (GTK_BOX (vbox), stock_button, FALSE, FALSE, 0);
-  hbox = gtk_hbox_new (FALSE, 6);
-  gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (box), stock_button, FALSE, FALSE, 0);
   checkbox = gtk_check_button_new ();
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (checkbox), TRUE);
-  gtk_box_pack_start (GTK_BOX (hbox), checkbox, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (box), checkbox, FALSE, FALSE, 0);
   radio = gtk_radio_button_new_from_widget (NULL);
-  gtk_box_pack_start (GTK_BOX (hbox), radio, FALSE, FALSE, 0);
-  progress = gtk_progress_bar_new ();
-  gtk_box_pack_start (GTK_BOX (hbox), progress, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (box), radio, FALSE, FALSE, 0);
 
   gtk_widget_show_all (vbox);
   gtk_widget_realize (stock_button);
   gtk_widget_realize (GTK_BIN (stock_button)->child);
   gtk_widget_realize (checkbox);
   gtk_widget_realize (radio);
-  gtk_widget_realize (progress);
   gtk_widget_map (stock_button);
   gtk_widget_map (GTK_BIN (stock_button)->child);
   gtk_widget_map (checkbox);
   gtk_widget_map (radio);
-  gtk_widget_map (progress);
 
   gtk_widget_size_request (window, &requisition);
   allocation.x = 0;
@@ -768,8 +765,10 @@ generate_gtk_theme_thumbnail (GnomeThemeInfo *info)
   g_assert (window->style->font_desc);
 
   /* Create a pixmap */
+  gtk_window_get_size (GTK_WINDOW (window), &width, &height);
+
   visual = gtk_widget_get_visual (window);
-  pixmap = gdk_pixmap_new (NULL, ICON_SIZE_WIDTH, ICON_SIZE_HEIGHT, visual->depth);
+  pixmap = gdk_pixmap_new (NULL, width, height, visual->depth);
   gdk_drawable_set_colormap (GDK_DRAWABLE (pixmap), gtk_widget_get_colormap (window));
 
   fake_expose_widget (window, pixmap, NULL);
@@ -782,10 +781,13 @@ generate_gtk_theme_thumbnail (GnomeThemeInfo *info)
   fake_expose_widget (radio, pixmap, NULL);
 
 
-  pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, ICON_SIZE_WIDTH, ICON_SIZE_WIDTH / 2);
-  gdk_pixbuf_get_from_drawable (pixbuf, pixmap, NULL, 0, 0, 0, 0, ICON_SIZE_WIDTH, ICON_SIZE_WIDTH / 2);
+  pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, width, height);
+  gdk_pixbuf_get_from_drawable (pixbuf, pixmap, NULL, 0, 0, 0, 0, width, height);
 
-  ret = gdk_pixbuf_scale_simple (pixbuf, 96, 48, GDK_INTERP_BILINEAR);
+  ret = gdk_pixbuf_scale_simple (pixbuf,
+                                 96,
+                                 (int) 96.0 * (((double) height) / ((double) width)),
+                                 GDK_INTERP_BILINEAR);
   g_object_unref (pixbuf);
 
   gtk_widget_destroy (window);
