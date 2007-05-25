@@ -352,8 +352,11 @@ egg_accelerator_parse_virtual (const gchar            *accelerator,
 			bad_keyval = TRUE;
 		    }
 		}
-	    } else if (keycode != NULL)
+	    } else if (keycode != NULL) {
 		*keycode = XKeysymToKeycode (GDK_DISPLAY(), keyval);
+		if (*keycode == 0)
+		  bad_keyval = TRUE;
+	    }
 
           accelerator += len;
           len -= len;
