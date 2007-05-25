@@ -168,6 +168,8 @@ prepare_list (AppearanceData *data, GtkWidget *list, enum ThemeType type)
                                        COL_THUMBNAIL, thumbnail,
                                        COL_LABEL, label ? label : name,
                                        COL_NAME, name, -1);
+    if (thumbnail)
+      g_object_unref (thumbnail);
   }
 
   sort_model = gtk_tree_model_sort_new_with_model (GTK_TREE_MODEL (store));
