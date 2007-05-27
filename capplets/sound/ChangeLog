@@ -1,5 +1,10 @@
 2007-05-27  Jens Granseuer  <jensgr@gmx.net>
 
+	* pipeline-tests.c: (user_test_pipeline): and don't use
+	gtk_timeout_remove, either..
+
+2007-05-27  Jens Granseuer  <jensgr@gmx.net>
+
 	* pipeline-tests.c: (user_test_pipeline): use g_timeout_add() instead
 	of the deprecated gtk_timeout_add()
 	* sound-properties.glade: set non-0 pulse step for the progress bar to

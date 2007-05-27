@@ -166,7 +166,7 @@ user_test_pipeline (GladeXML * interface_xml,
           g_timeout_add (50, user_test_pipeline_timeout,
           WID ("test_pipeline_progress"));
       gtk_dialog_run (GTK_DIALOG (dialog));
-      gtk_timeout_remove (timeout_tag);
+      g_source_remove (timeout_tag);
       gtk_widget_hide (GTK_WIDGET (dialog));
     } else {
       gint secs;
