@@ -53,7 +53,7 @@ user_test_pipeline_response (GtkDialog * widget, gint response_id,
 }
 
 /* Timer timeout has been occurred */
-static gint
+static gboolean
 user_test_pipeline_timeout (gpointer data)
 {
   gtk_progress_bar_pulse (GTK_PROGRESS_BAR (data));
@@ -163,7 +163,7 @@ user_test_pipeline (GladeXML * interface_xml,
     if (dialog) {
       gtk_window_present (GTK_WINDOW (dialog));
       timeout_tag =
-          gtk_timeout_add (50, user_test_pipeline_timeout,
+          g_timeout_add (50, user_test_pipeline_timeout,
           WID ("test_pipeline_progress"));
       gtk_dialog_run (GTK_DIALOG (dialog));
       gtk_timeout_remove (timeout_tag);
