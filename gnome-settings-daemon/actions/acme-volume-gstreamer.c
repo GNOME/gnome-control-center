@@ -296,20 +296,19 @@ acme_volume_gstreamer_open (AcmeVolumeGStreamer *vol)
 		element = gst_element_factory_make (factory_and_device[0], NULL);
 
 		if (element != NULL) {
+			if (factory_and_device[1] != NULL && 
+					g_object_class_find_property (G_OBJECT_GET_CLASS (element), "device"))
+			{
+				g_object_set (G_OBJECT (element), "device", factory_and_device[1], NULL);
+			}
+
 			gst_element_set_state (element, GST_STATE_READY);
 
-			if (!GST_IS_MIXER (element))
-			{
+			if (GST_IS_MIXER (element)) {
+				self->_priv->mixer = GST_MIXER (element);
+			} else {
 				gst_element_set_state (element, GST_STATE_NULL);
 				gst_object_unref (element);
-			} else {
-				self->_priv->mixer = GST_MIXER (element);
-			
-				if (factory_and_device[1] != NULL && 
-						g_object_class_find_property (G_OBJECT_GET_CLASS (self->_priv->mixer), "device"))
-				{
-					g_object_set (G_OBJECT (self->_priv->mixer), "device", &factory_and_device[1], NULL);
-				}
 			}
 		}
 	}
