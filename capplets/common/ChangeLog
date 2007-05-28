@@ -1,5 +1,11 @@
 2007-05-28  Jens Granseuer  <jensgr@gmx.net>
 
+	* gconf-property-editor.c:
+	* gconf-property-editor.h: remove property editor for the deprecated
+	GtkOptionMenu, now that all users are upgraded to GtkComboBox
+
+2007-05-28  Jens Granseuer  <jensgr@gmx.net>
+
 	* theme-thumbnail.c: (generate_theme_thumbnail): drop unnecessary strlen
 	(generate_theme_thumbnail_async): save some casts
 	(generate_gtk_theme_thumbnail): don't leak the theme name

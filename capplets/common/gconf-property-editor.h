@@ -98,20 +98,6 @@ GObject *gconf_peditor_new_color        (GConfChangeSet          *changeset,
 					 const gchar             *first_property_name,
 					 ...);
 
-GObject *gconf_peditor_new_select_menu	(GConfChangeSet *changeset,
-					 const gchar    *key,
-					 GtkWidget      *option_menu,
-					 const gchar    *first_property_name,
-					 ...);
-
-GObject *gconf_peditor_new_select_menu_with_enum	(GConfChangeSet *changeset,
-							 const gchar    *key,
-							 GtkWidget      *option_menu,
-							 GType          enum_type,
-							 gboolean  	use_nick,
-							 const gchar    *first_property_name,
-							 ...);
-
 GObject *gconf_peditor_new_combo_box	(GConfChangeSet *changeset,
 					 const gchar 	*key,
 					 GtkWidget      *combo_box,
