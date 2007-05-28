@@ -51,7 +51,7 @@ static const gchar *gconf_keys[] = {
 
 
 static void prepare_list (AppearanceData *data, GtkWidget *list, enum ThemeType type);
-static void update_color_buttons_from_string (gchar *color_scheme, AppearanceData *data);
+static void update_color_buttons_from_string (const gchar *color_scheme, AppearanceData *data);
 
 static void color_scheme_changed (GObject *settings, GParamSpec *pspec, AppearanceData *data);
 
@@ -67,7 +67,7 @@ void
 style_init (AppearanceData *data)
 {
 
-  GtkSettings *settings;
+  GObject *settings;
   gchar *colour_scheme;
   GtkWidget *w;
 
@@ -79,9 +79,9 @@ style_init (AppearanceData *data)
   prepare_list (data, glade_xml_get_widget (data->xml, "window_themes_list"), METACITY_THEMES);
   prepare_list (data, glade_xml_get_widget (data->xml, "icon_themes_list"), ICON_THEMES);
 
-  settings = gtk_settings_get_default ();
-  g_object_get (G_OBJECT (settings), "gtk-color-scheme", &colour_scheme, NULL);
-  g_signal_connect (G_OBJECT (settings), "notify::gtk-color-scheme", (GCallback) color_scheme_changed, data);
+  settings = G_OBJECT (gtk_settings_get_default ());
+  g_object_get (settings, "gtk-color-scheme", &colour_scheme, NULL);
+  g_signal_connect (settings, "notify::gtk-color-scheme", (GCallback) color_scheme_changed, data);
   update_color_buttons_from_string (colour_scheme, data);
   g_free (colour_scheme);
 
@@ -213,25 +213,28 @@ find_string_in_model (GtkTreeModel *model, const gchar *value, gint column)
 {
   GtkTreeIter iter;
   gboolean valid;
-  gchar *path = NULL, *test = NULL;
+  gchar *path = NULL, *test;
 
   if (!value)
     return NULL;
 
-  valid = gtk_tree_model_get_iter_first (model, &iter);
-
-  while (valid)
+  for (valid = gtk_tree_model_get_iter_first (model, &iter); valid;
+       valid = gtk_tree_model_iter_next (model, &iter))
   {
-    g_free (test);
     gtk_tree_model_get (model, &iter, column, &test, -1);
-    if (test && !strcmp (test, value))
+
+    if (test)
     {
-      path = gtk_tree_model_get_string_from_iter (model, &iter);
-      break;
+      gint cmp = strcmp (test, value);
+      g_free (test);
+
+      if (!cmp)
+      {
+        path = gtk_tree_model_get_string_from_iter (model, &iter);
+        break;
+      }
     }
-    valid = gtk_tree_model_iter_next (model, &iter);
   }
-  g_free (test);
 
   return path;
 }
@@ -258,18 +261,17 @@ conv_to_widget_cb (GConfPropertyEditor *peditor, GConfValue *value)
   if (!path)
   {
     GtkListStore *list_store;
+    GtkTreeIter iter, sort_iter;
 
-    if (GTK_IS_TREE_MODEL_SORT (store))
-      list_store = GTK_LIST_STORE (gtk_tree_model_sort_get_model (GTK_TREE_MODEL_SORT (store)));
-    else
-      list_store = GTK_LIST_STORE (store);
+    list_store = GTK_LIST_STORE (gtk_tree_model_sort_get_model (GTK_TREE_MODEL_SORT (store)));
 
-    gtk_list_store_insert_with_values (list_store, NULL, 0,
+    gtk_list_store_insert_with_values (list_store, &iter, 0,
                                        COL_LABEL, curr_value,
                                        COL_NAME, curr_value, -1);
-    /* if the model is sorted then it might not still be in the position we just
-     * placed it, so we have to search the model again... */
-    path = find_string_in_model (store, curr_value, COL_NAME);
+    /* convert the tree store iter for use with the sort model */
+    gtk_tree_model_sort_convert_child_iter_to_iter (GTK_TREE_MODEL_SORT (store),
+                                                    &sort_iter, &iter);
+    path = gtk_tree_model_get_string_from_iter (store, &sort_iter);
   }
 
   new_value = gconf_value_new (GCONF_VALUE_STRING);
@@ -304,7 +306,7 @@ conv_from_widget_cb (GConfPropertyEditor *peditor, GConfValue *value)
 }
 
 static void
-update_color_buttons_from_string (gchar *color_scheme, AppearanceData *data)
+update_color_buttons_from_string (const gchar *color_scheme, AppearanceData *data)
 {
   GdkColor color_scheme_colors[6];
   gchar **color_scheme_strings, **color_scheme_pair, *current_string;
@@ -359,8 +361,6 @@ update_color_buttons_from_string (gchar *color_scheme, AppearanceData *data)
   gtk_color_button_set_color (GTK_COLOR_BUTTON (widget), &color_scheme_colors[3]);
   widget = glade_xml_get_widget (data->xml, "selected_bg_colorbutton");
   gtk_color_button_set_color (GTK_COLOR_BUTTON (widget), &color_scheme_colors[5]);
-
-
 }
 
 static void
