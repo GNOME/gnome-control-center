@@ -49,10 +49,6 @@ GNOME_DEBUG_CHECK
 GNOME_COMPILE_WARNINGS([maximum])
 GNOME_MAINTAINER_MODE_DEFINES
 
-AC_CHECK_FUNCS(usleep)
-AC_CHECK_FUNCS(putenv)
-AC_CHECK_FUNCS(setenv)
-
 AC_PATH_XTRA
 x_libs="$X_PRE_LIBS $X_LIBS -lX11 $X_EXTRA_LIBS"
 
@@ -124,7 +120,7 @@ dnl
 xft_modules=
 if $PKG_CONFIG --exists xft ; then
   xft_modules="xft"
-  AC_DEFINE(HAVE_XFT2,,[Build Xft functionality to the font capplet])
+  AC_DEFINE(HAVE_XFT2,,[Define if Xft functionality is available])
 fi
 
 dnl
@@ -136,7 +132,7 @@ AC_CHECK_LIB(Xi, XListInputDevices,
   [AC_CHECK_HEADER(X11/extensions/XInput.h,
      have_xinput=yes
      XINPUT_LIBS="-lXi"
-     AC_DEFINE(HAVE_XINPUT, 1, Have the XInput extension library),
+     AC_DEFINE(HAVE_XINPUT, 1, [Define if XInput extension is available]),
 	  :, [#include <X11/Xlib.h>])], : ,
        -lXi $x_libs)
 AM_CONDITIONAL(HAVE_XINPUT, [test $have_xinput = yes])
@@ -149,17 +145,17 @@ PKG_CHECK_MODULES(AT_CAPPLET, $COMMON_MODULES)
 dnl
 dnl Check for XRandR, needed for display capplet
 dnl		
-	
+
 have_randr=no
 AC_CHECK_LIB(Xrandr, XRRUpdateConfiguration,
   [AC_CHECK_HEADER(X11/extensions/Xrandr.h,
      have_randr=yes
      RANDR_LIBS="-lXrandr -lXrender"
-     AC_DEFINE(HAVE_RANDR, 1, Have the Xrandr extension library),
+     AC_DEFINE(HAVE_RANDR, 1, [Define if Xrandr extension is available]),
 	  :, [#include <X11/Xlib.h>])], : ,
        -lXrandr -lXrender $x_libs)
 AM_CONDITIONAL(HAVE_RANDR, [test $have_randr = yes])
-	
+
 PKG_CHECK_MODULES(DISPLAY_CAPPLET, $COMMON_MODULES)
 
 DISPLAY_CAPPLET_LIBS="$DISPLAY_CAPPLET_LIBS $RANDR_LIBS"
@@ -179,22 +175,11 @@ PKG_CHECK_MODULES(XCURSOR, [
 	xcursor
 	],
 	have_xcursor=yes
-	AC_DEFINE(HAVE_XCURSOR, 1, Have the Xcursor extension),
+	AC_DEFINE(HAVE_XCURSOR, 1, [Define if the Xcursor extension is available]),
 	have_xcursor=no)
 AM_CONDITIONAL(HAVE_XCURSOR, [test $have_xcursor=yes])
 
 CAPPLET_LIBS="$CAPPLET_LIBS $XCURSOR_LIBS"
-
-dnl
-dnl Check for gtk+ with multihead support
-dnl
-AC_MSG_CHECKING([for gtk+ multihead support])
-if $PKG_CONFIG --atleast-version 2.1.0 gtk+-2.0; then
-   AC_DEFINE(HAVE_GTK_MULTIHEAD,,[gtk+ with multihead support found])
-   AC_MSG_RESULT(yes)
-else
-   AC_MSG_RESULT(no)
-fi
 
 dnl ==============
 dnl gswitchit
@@ -208,12 +193,12 @@ AC_SUBST(LIBGNOMEKBDUI_CFLAGS)
 AC_SUBST(LIBGNOMEKBDUI_LIBS)
 
 dnl ==============================================
-dnl themus and fontilust dependencies
+dnl themus and fontilus dependencies
 dnl ==============================================
 
 AC_ARG_ENABLE(vfs-methods,
   AC_HELP_STRING([--disable-vfs-methods],
-                 [Do not build the fonts:/// and themes:/// uri schemes]),,
+                 [do not build the fonts:/// and themes:/// uri schemes]),,
   enable_vfs_methods=yes)
 
 if test x$enable_vfs_methods = xyes; then 
@@ -283,14 +268,14 @@ dnl ==============================================
 AC_MSG_CHECKING([whether to enable About Me])
 AC_ARG_ENABLE([aboutme],
    AC_HELP_STRING([--enable-aboutme],
-                  [Enable about-me capplet]),,
+                  [enable about-me capplet]),,
    [enable_aboutme=no])
 AC_MSG_RESULT([$enable_aboutme])
 
 if test "x$enable_aboutme" = "xyes"; then
   PKG_CHECK_MODULES(LIBEBOOK, [libebook-1.2 >= 1.7.90],
                     [AC_DEFINE([HAVE_LIBEBOOK], 1,
-                    [Define when evolution-data-server libebook-1.2 is available])])
+                    [Define if evolution-data-server libebook-1.2 is available])])
 fi
 
 AM_CONDITIONAL(BUILD_ABOUTME, test "x$enable_aboutme" = "xyes")
@@ -301,7 +286,7 @@ dnl ==============================================
 AC_ARG_ENABLE(hal, AC_HELP_STRING([--disable-hal],[build without hal support]))
 if test "x$enable_hal" != "xno"; then
 	PKG_CHECK_MODULES(HAL, [hal >= 0.5.6, dbus-1 >= 0.32, dbus-glib-1 >= 0.32],
-		[ AC_DEFINE(USE_HAL, 1, [defined if using libhal]) ],)
+		[ AC_DEFINE(USE_HAL, 1, [Define if libhal is available]) ],)
 	AC_SUBST(HAL_CFLAGS)
 	AC_SUBST(HAL_LIBS)
 fi
@@ -370,7 +355,7 @@ dnl ==============================================
 have_alsa=no
 AC_ARG_ENABLE(alsa,
   AC_HELP_STRING([--disable-alsa],
-                 [Turn off support for ALSA version 0.9 or higher]),
+                 [turn off ALSA audio support]),
        [case "${enableval}" in
                yes) WANT_ALSA=yes ;;
                no)  WANT_ALSA=no ;;
@@ -381,9 +366,7 @@ AC_ARG_ENABLE(alsa,
 if test x$WANT_ALSA = xyes ; then
        PKG_CHECK_MODULES(ALSA, alsa >= 0.9.0,
                have_alsa=yes,
-               AC_MSG_RESULT(*** All of ALSA dependent parts will be disabled ***))
-else
-       have_alsa=no
+               AC_MSG_RESULT([disabled]))
 fi
 
 AM_CONDITIONAL(HAVE_ALSA, test x"$have_alsa" = "xyes")
@@ -396,7 +379,7 @@ dnl ==============================================
 have_esd=no
 AC_ARG_ENABLE(esd,
   AC_HELP_STRING([--disable-esd],
-                 [Turn off support for ESD]),
+                 [turn off ESD audio support]),
        [case "${enableval}" in
                yes) WANT_ESD=yes ;;
                no)  WANT_ESD=no ;;
@@ -407,10 +390,8 @@ AC_ARG_ENABLE(esd,
 if test x$WANT_ESD = xyes ; then
        PKG_CHECK_MODULES(ESD, esound >= 0.2.28,
                have_esd=yes
-	       AC_DEFINE(HAVE_ESD, 1, Have ESD Sound Server),
-               AC_MSG_RESULT(*** All of ESD dependent parts will be disabled ***))
-else
-       have_esd=no
+	       AC_DEFINE(HAVE_ESD, 1, [Define if ESD sound server should be used]),
+               AC_MSG_RESULT([disabled]))
 fi
 
 AM_CONDITIONAL(HAVE_ESD, test x"$have_esd" = "xyes")
@@ -436,18 +417,17 @@ AC_HELP_STRING([--enable-gstreamer],[use gstreamer if available (and optionally 
 esac],
 [ENABLE_GSTREAMER=yes]) dnl Default value
 
+have_gstreamer=no
 if test "x$ENABLE_GSTREAMER" = "xyes"; then
-   have_gstreamer=no
    GST_REQS=0.10.1.2
    PKGS="gstreamer-0.10 >= $GST_REQS gstreamer-plugins-base-0.10 >= $GST_REQS"
 
    PKG_CHECK_MODULES(GST, $PKGS, have_gstreamer=yes,
-                     AC_MSG_RESULT([*** All GStreamer-dependent parts will be disabled ***]))
+                     AC_MSG_RESULT([no]))
 
    GST_LIBS="$GST_LIBS -lgstinterfaces-0.10 -lgstaudio-0.10"
 else
-   have_gstreamer=disabled
-   AC_MSG_RESULT(*** GStreamer has been explicitly disabled ***)
+   AC_MSG_NOTICE([*** GStreamer support disabled ***])
 fi
 AM_CONDITIONAL(HAVE_GSTREAMER, test x"$have_gstreamer" = "xyes")
 AC_SUBST(GST_LIBS)
@@ -472,24 +452,6 @@ AC_SUBST(GNOMECC_CAPPLETS_CLEANFILES)
 AC_SUBST(GNOMECC_CAPPLETS_CFLAGS)
 AC_SUBST(GNOMECC_CAPPLETS_LIBS)
 
-dnl ==============================================
-dnl End: Define the main variables
-dnl ==============================================
-
-dnl =======================================
-dnl Variables for config_archiverConf.sh.in
-dnl =======================================
-CONFIG_ARCHIVER_LIBDIR='-L${libdir}'
-CONFIG_ARCHIVER_LIBS="$CONFIG_ARCHIVER_LIBS -lconfig_archiver"
-CONFIG_ARCHIVER_INCLUDEDIR="$CONFIG_ARCHIVER_CFLAGS -I${includedir}"
-
-AC_SUBST(CONFIG_ARCHIVER_LIBDIR)
-AC_SUBST(CONFIG_ARCHIVER_LIBS)
-AC_SUBST(CONFIG_ARCHIVER_INCLUDEDIR)
-dnl =======================================
-dnl End: Variables for config_archiverConf.sh.in
-dnl =======================================
-
 dnl =======================================
 dnl Update Mime Database
 dnl =======================================
@@ -498,84 +460,68 @@ AC_PATH_PROG(UPDATE_MIME_DATABASE, update-mime-database, no)
 
 AC_ARG_ENABLE(update-mimedb,
    AC_HELP_STRING([--disable-update-mimedb],
-                   [disable the update-mime-database after install [default=no]]),,
-    enable_update_mimedb=yes)
+                   [do not update mime database after installation]),,
+                   enable_update_mimedb=yes)
 AM_CONDITIONAL(ENABLE_UPDATE_MIMEDB, test x$enable_update_mimedb = xyes)
 
 
 AC_CONFIG_FILES([
 Makefile
-po/Makefile.in
-libslab/Makefile
-libslab/libslab.pc
-gnome-settings-daemon/Makefile
-gnome-settings-daemon/xrdb/Makefile
-gnome-settings-daemon/actions/Makefile
-gnome-settings-daemon/gnome-settings-daemon.pc
-shell/Makefile
-shell/gnomecc.desktop.in
-libbackground/Makefile
-libwindow-settings/Makefile
-libwindow-settings/gnome-window-settings-2.0.pc
 capplets/Makefile
+capplets/about-me/Makefile
+capplets/about-me/gnome-about-me.desktop.in
+capplets/accessibility/Makefile
+capplets/accessibility/at-properties/at-properties.desktop.in
+capplets/accessibility/at-properties/Makefile
+capplets/accessibility/keyboard/Makefile
+capplets/accessibility/keyboard/accessibility-keyboard.desktop.in
 capplets/appearance/Makefile
+capplets/appearance/gnome-appearance-properties.desktop.in
 capplets/common/Makefile
 capplets/default-applications/Makefile
-capplets/background/Makefile
-capplets/display/Makefile
-capplets/font/Makefile
-capplets/keybindings/Makefile
-capplets/keyboard/Makefile
-capplets/mouse/Makefile
-capplets/sound/Makefile
-capplets/theme-switcher/Makefile
-capplets/ui-properties/Makefile
-capplets/accessibility/Makefile
-capplets/accessibility/keyboard/Makefile
-capplets/accessibility/at-properties/Makefile
-capplets/network/Makefile
-capplets/windows/Makefile
-capplets/about-me/Makefile
-help/Makefile
-typing-break/Makefile
-schemas/Makefile
-libsounds/Makefile
-vfs-methods/Makefile
-vfs-methods/themus/Makefile
-vfs-methods/fontilus/Makefile
-control-center.spec
-vfs-methods/fontilus/gnome-font-viewer.desktop.in
-vfs-methods/themus/themus-theme-applier.desktop.in
-capplets/appearance/gnome-appearance-properties.desktop.in
-capplets/font/font-properties.desktop.in
-capplets/keybindings/keybinding.desktop.in
-capplets/keybindings/gnome-keybindings.pc
-capplets/display/display-properties.desktop.in
-capplets/mouse/gnome-settings-mouse.desktop.in
-capplets/sound/gnome-settings-sound.desktop.in
-capplets/theme-switcher/gtk-theme-selector.desktop.in
-capplets/theme-switcher/gnome-theme-installer.desktop.in
 capplets/default-applications/default-applications.desktop.in
 capplets/default-applications/default-applications-accessibility.desktop.in
+capplets/default-applications/gnome-at-commandline.in
+capplets/default-applications/gnome-at-mobility.desktop.in
 capplets/default-applications/gnome-at-session.desktop.in
 capplets/default-applications/gnome-at-visual.desktop.in
-capplets/default-applications/gnome-at-mobility.desktop.in
-capplets/default-applications/gnome-at-commandline.in
-capplets/accessibility/at-properties/at-properties.desktop.in
-capplets/accessibility/keyboard/accessibility-keyboard.desktop.in
-capplets/background/background.desktop.in
-capplets/ui-properties/gnome-ui-properties.desktop.in
-capplets/network/gnome-network-preferences.desktop.in
-capplets/windows/window-properties.desktop.in
+capplets/display/Makefile
+capplets/display/display-properties.desktop.in
+capplets/keybindings/Makefile
+capplets/keybindings/gnome-keybindings.pc
+capplets/keybindings/keybinding.desktop.in
+capplets/keyboard/Makefile
 capplets/keyboard/keyboard.desktop.in
-capplets/about-me/gnome-about-me.desktop.in
+capplets/mouse/Makefile
+capplets/mouse/gnome-settings-mouse.desktop.in
+capplets/network/Makefile
+capplets/network/gnome-network-preferences.desktop.in
+capplets/sound/Makefile
+capplets/sound/gnome-settings-sound.desktop.in
+capplets/windows/Makefile
+capplets/windows/window-properties.desktop.in
+gnome-settings-daemon/Makefile
+gnome-settings-daemon/actions/Makefile
+gnome-settings-daemon/gnome-settings-daemon.pc
+gnome-settings-daemon/xrdb/Makefile
+help/Makefile
+libbackground/Makefile
+libslab/Makefile
+libslab/libslab.pc
+libsounds/Makefile
+libwindow-settings/Makefile
+libwindow-settings/gnome-window-settings-2.0.pc
+po/Makefile.in
+schemas/Makefile
+shell/Makefile
+shell/gnomecc.desktop.in
+typing-break/Makefile
+vfs-methods/Makefile
+vfs-methods/fontilus/Makefile
+vfs-methods/fontilus/gnome-font-viewer.desktop.in
+vfs-methods/themus/Makefile
+vfs-methods/themus/themus-theme-applier.desktop.in
 ])
-
-dnl *** the following desktop files don't seem to be included in "make dist"
-dnl capplets/url-properties/url-properties.desktop.in
-dnl capplets/file-types/file-types-capplet.desktop.in
-dnl capplets/file-types/file-types.desktop.in
-dnl capplets/localization/localization.desktop.in
 
 dnl due to a bug in intltool we need to expand something from the root last control-center.spec
 AC_OUTPUT

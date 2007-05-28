@@ -1,9 +1,14 @@
-always_built_SUBDIRS =					\
-	common accessibility appearance			\
-	default-applications font			\
-	background keyboard mouse sound			\
-	theme-switcher ui-properties			\
-	keybindings network windows
+always_built_SUBDIRS =		\
+	common			\
+	accessibility		\
+	appearance		\
+	default-applications	\
+	keyboard		\
+	mouse			\
+	sound			\
+	keybindings		\
+	network			\
+	windows
 
 SUBDIRS = $(always_built_SUBDIRS)
 
