@@ -175,6 +175,7 @@ create_folder_icon (char *icon_theme_name)
 
   return retval;
 }
+
 static void
 create_image (ThemeThumbnailData *theme_thumbnail_data,
 	      GdkPixbuf          *pixbuf)
@@ -552,7 +553,7 @@ generate_theme_thumbnail (GnomeThemeMetaInfo *meta_theme_info,
   if (meta_theme_info->gtk_color_scheme)
     write (pipe_to_factory_fd[1], meta_theme_info->gtk_color_scheme, strlen (meta_theme_info->gtk_color_scheme) + 1);
   else
-    write (pipe_to_factory_fd[1], "", strlen ("") + 1);
+    write (pipe_to_factory_fd[1], "", 1);
   write (pipe_to_factory_fd[1], meta_theme_info->metacity_theme_name, strlen (meta_theme_info->metacity_theme_name) + 1);
   write (pipe_to_factory_fd[1], meta_theme_info->icon_theme_name, strlen (meta_theme_info->icon_theme_name) + 1);
   if (meta_theme_info->application_font == NULL)
@@ -645,7 +646,7 @@ generate_theme_thumbnail_async (GnomeThemeMetaInfo *meta_theme_info,
   if (meta_theme_info->gtk_color_scheme)
     write (pipe_to_factory_fd[1], meta_theme_info->gtk_color_scheme, strlen (meta_theme_info->gtk_color_scheme) + 1);
   else
-    write (pipe_to_factory_fd[1], "", strlen ("") + 1);
+    write (pipe_to_factory_fd[1], "", 1);
   write (pipe_to_factory_fd[1], meta_theme_info->metacity_theme_name, strlen (meta_theme_info->metacity_theme_name) + 1);
   write (pipe_to_factory_fd[1], meta_theme_info->icon_theme_name, strlen (meta_theme_info->icon_theme_name) + 1);
   if (meta_theme_info->application_font == NULL)
@@ -711,7 +712,7 @@ theme_thumbnail_factory_init (int argc, char *argv[])
 GdkPixbuf *
 generate_gtk_theme_thumbnail (GnomeThemeInfo *info)
 {
-  GtkSettings *settings;
+  GObject *settings;
   char *current_theme;
   GtkWidget *window, *vbox, *box, *stock_button, *checkbox, *radio;
   GtkRequisition requisition;
@@ -721,9 +722,9 @@ generate_gtk_theme_thumbnail (GnomeThemeInfo *info)
   GdkPixbuf *pixbuf, *ret;
   gint width, height;
 
-  settings = gtk_settings_get_default ();
-  g_object_get (G_OBJECT (settings), "gtk-theme-name", &current_theme, NULL);
-  g_object_set (G_OBJECT (settings), "gtk-theme-name", info->name, NULL);
+  settings = G_OBJECT (gtk_settings_get_default ());
+  g_object_get (settings, "gtk-theme-name", &current_theme, NULL);
+  g_object_set (settings, "gtk-theme-name", info->name, NULL);
 
   window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   //gtk_window_set_default_size (GTK_WINDOW (window), ICON_SIZE_WIDTH, ICON_SIZE_HEIGHT);
@@ -791,7 +792,8 @@ generate_gtk_theme_thumbnail (GnomeThemeInfo *info)
   g_object_unref (pixbuf);
 
   gtk_widget_destroy (window);
-  g_object_set (G_OBJECT (settings), "gtk-theme-name", current_theme, NULL);
+  g_object_set (settings, "gtk-theme-name", current_theme, NULL);
+  g_free (current_theme);
   return ret;
 }
 
