@@ -1,3 +1,21 @@
+2007-05-30  Jens Granseuer  <jensgr@gmx.net>
+
+	* gnome-theme-info.c: (safe_strcmp), (add_data_to_hash_by_name),
+	(handle_change_signal), (update_common_theme_dir_index),
+	(gtk2_dir_changed), (keybinding_dir_changed),
+	(metacity_dir_changed), (common_theme_dir_changed),
+	(common_icon_theme_dir_changed), (top_theme_dir_changed),
+	(top_icon_theme_dir_changed), (real_add_top_theme_dir_monitor),
+	(gnome_theme_info_find_by_type_helper),
+	(gnome_theme_info_find_by_type),
+	(gnome_theme_icon_info_find_all_helper),
+	(gnome_theme_icon_info_find_all), (gnome_theme_icon_info_compare),
+	(gnome_theme_meta_info_new),
+	(gnome_theme_meta_info_find_all_helper),
+	(gnome_theme_meta_info_find_all), (gnome_theme_meta_info_compare),
+	(gnome_theme_info_register_theme_change): simplify, clean up, and fix
+	a few leaks
+
 2007-05-29  Jens Granseuer  <jensgr@gmx.net>
 
 	* gtkrc-utils.c: (gtkrc_get_color_scheme): recognize both
