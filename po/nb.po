@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.15.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-08 15:45+0200\n"
-"PO-Revision-Date: 2007-05-08 15:48+0200\n"
+"POT-Creation-Date: 2007-05-29 09:43+0200\n"
+"PO-Revision-Date: 2007-05-29 09:46+0200\n"
 "Last-Translator: Espen Stefansen <espenas@gmail.com>\n"
 "Language-Team: Norwegian Bokmal <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -458,7 +458,9 @@ msgstr "Brukervalg for hjelpeteknologi"
 msgid ""
 "Changes to enable assistive technologies will not take effect ntil your next "
 "log in."
-msgstr "Endring for å aktivere hjelpeteknologi vil ikke tre i kraft før du logger inn neste gang."
+msgstr ""
+"Endring for å aktivere hjelpeteknologi vil ikke tre i kraft før du logger "
+"inn neste gang."
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:6
 msgid "Close and _Log Out"
@@ -998,7 +1000,7 @@ msgstr ""
 "Tilbakekall som skal utstedes når objektdata for redigering av egenskaper "
 "skal frigis"
 
-#: ../capplets/common/gconf-property-editor.c:1595
+#: ../capplets/common/gconf-property-editor.c:1459
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -1011,7 +1013,7 @@ msgstr ""
 "Vennligst sjekk at denne eksisterer og prøv på nytt, eller velg et annet "
 "bakgrunnsbilde."
 
-#: ../capplets/common/gconf-property-editor.c:1603
+#: ../capplets/common/gconf-property-editor.c:1467
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -1024,11 +1026,11 @@ msgstr ""
 "\n"
 "Vennligst velg et annet bilde i stedet."
 
-#: ../capplets/common/gconf-property-editor.c:1722
+#: ../capplets/common/gconf-property-editor.c:1586
 msgid "Please select an image."
 msgstr "Vennligst velg et bilde."
 
-#: ../capplets/common/gconf-property-editor.c:1727
+#: ../capplets/common/gconf-property-editor.c:1591
 msgid "_Select"
 msgstr "_Velg"
 
@@ -1436,46 +1438,46 @@ msgstr "Omvendt"
 msgid "Right"
 msgstr "Høyre:"
 
-#: ../capplets/display/main.c:385
+#: ../capplets/display/main.c:388
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../capplets/display/main.c:531
+#: ../capplets/display/main.c:534
 msgid "_Resolution:"
 msgstr "_Oppløsning:"
 
-#: ../capplets/display/main.c:550
+#: ../capplets/display/main.c:553
 msgid "Re_fresh rate:"
 msgstr "Opp_friskingsrate:"
 
-#: ../capplets/display/main.c:570
+#: ../capplets/display/main.c:573
 msgid "R_otation:"
 msgstr "R_otasjon:"
 
-#: ../capplets/display/main.c:590
+#: ../capplets/display/main.c:593
 msgid "Default Settings"
 msgstr "Forvalgte innstillinger"
 
-#: ../capplets/display/main.c:592
+#: ../capplets/display/main.c:595
 #, c-format
 msgid "Screen %d Settings\n"
 msgstr "Innstillinger for skjerm %d\n"
 
-#: ../capplets/display/main.c:618
+#: ../capplets/display/main.c:621
 msgid "Screen Resolution Preferences"
 msgstr "Brukervalg skjermoppløsing"
 
-#: ../capplets/display/main.c:655
+#: ../capplets/display/main.c:658
 #, c-format
 msgid "_Make default for this computer (%s) only"
 msgstr "Gjør forvalgt _kun for denne datamaskinen (%s)"
 
-#: ../capplets/display/main.c:674
+#: ../capplets/display/main.c:677
 msgid "Options"
 msgstr "Alternativer"
 
-#: ../capplets/display/main.c:695
+#: ../capplets/display/main.c:698
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d second the previous "
@@ -1490,23 +1492,23 @@ msgstr[1] ""
 "Prøver de nye innstillingene. Hvis du ikke svarer innen %d sekunder vil de "
 "tidligere innstillingene bli gjenopprettet."
 
-#: ../capplets/display/main.c:741
+#: ../capplets/display/main.c:744
 msgid "Keep Resolution"
 msgstr "Behold oppløsning"
 
-#: ../capplets/display/main.c:745
+#: ../capplets/display/main.c:748
 msgid "Do you want to keep this resolution?"
 msgstr "Vil du beholde denne oppløsningen?"
 
-#: ../capplets/display/main.c:770
+#: ../capplets/display/main.c:773
 msgid "Use _previous resolution"
 msgstr "Bruk _forrige oppløsning"
 
-#: ../capplets/display/main.c:770
+#: ../capplets/display/main.c:773
 msgid "_Keep resolution"
 msgstr "_Behold oppløsning"
 
-#: ../capplets/display/main.c:920
+#: ../capplets/display/main.c:923
 msgid ""
 "The X Server does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
@@ -1514,7 +1516,7 @@ msgstr ""
 "X-tjeneren støtter ikke XRandR-utvidelsen. Endringer i oppløsning kan ikke "
 "utføres mens den kjører."
 
-#: ../capplets/display/main.c:928
+#: ../capplets/display/main.c:931
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
@@ -1982,10 +1984,14 @@ msgid "_Variants:"
 msgstr "_Varianter:"
 
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:41
+msgid "_Vendors:"
+msgstr ""
+
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:42
 msgid "_Work interval lasts:"
 msgstr "_Arbeidsintervallet varer:"
 
-#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:42
+#: ../capplets/keyboard/gnome-keyboard-properties.glade.h:43
 msgid "minutes"
 msgstr "minutter"
 
@@ -2003,7 +2009,11 @@ msgstr "Forvalg"
 msgid "Layout"
 msgstr "Utseende"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:73
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:174
+msgid "Vendors"
+msgstr ""
+
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:240
 msgid "Models"
 msgstr "Modeller"
 
@@ -3102,7 +3112,7 @@ msgstr "Behold innstillinger fra GNOME"
 msgid ""
 "Could not get default terminal. Verify that your default terminal command is "
 "set and points to a valid application."
-msgstr ""
+msgstr "Kunne ikke finne forvalgt terminal. Sjekk at kommando for forvalgt terminal er satt og peker til et gyldig program."
 
 #: ../gnome-settings-daemon/gnome-settings-multimedia-keys.c:155
 #, c-format
@@ -3121,7 +3131,7 @@ msgstr ""
 "Kunne ikke sette maskinen i hvilemodus.\n"
 "Sjekk at maskinen er korrekt konfigurert."
 
-#: ../gnome-settings-daemon/gnome-settings-screensaver.c:110
+#: ../gnome-settings-daemon/gnome-settings-screensaver.c:193
 #, c-format
 msgid ""
 "There was an error starting up the screensaver:\n"
@@ -3136,7 +3146,7 @@ msgstr ""
 "\n"
 "Skjermsparerfunksjonen vil ikke fungere i denne sesjonen."
 
-#: ../gnome-settings-daemon/gnome-settings-screensaver.c:120
+#: ../gnome-settings-daemon/gnome-settings-screensaver.c:202
 msgid "_Do not show this message again"
 msgstr "_Ikke vis denne meldingen igjen"
 
@@ -3345,7 +3355,7 @@ msgstr "Uventet attributt «%s» for element «%s»"
 #: ../libslab/libslab-bookmarkfile.c:798 ../libslab/libslab-bookmarkfile.c:914
 #, c-format
 msgid "Attribute '%s' of element '%s' not found"
-msgstr ""
+msgstr "Attributt «%s» i element «%s» ble ikke funnet"
 
 #: ../libslab/libslab-bookmarkfile.c:1087
 #: ../libslab/libslab-bookmarkfile.c:1152
@@ -3353,7 +3363,7 @@ msgstr ""
 #: ../libslab/libslab-bookmarkfile.c:1226
 #, c-format
 msgid "Unexpected tag '%s', tag '%s' expected"
-msgstr ""
+msgstr "Uventet tag «%s», tag «%s» forventet"
 
 #: ../libslab/libslab-bookmarkfile.c:1112
 #: ../libslab/libslab-bookmarkfile.c:1126
@@ -3361,16 +3371,16 @@ msgstr ""
 #: ../libslab/libslab-bookmarkfile.c:1246
 #, c-format
 msgid "Unexpected tag '%s' inside '%s'"
-msgstr ""
+msgstr "Uventet tag «%s» inne i «%s»"
 
 #: ../libslab/libslab-bookmarkfile.c:1929
 msgid "No valid bookmark file found in data dirs"
-msgstr ""
+msgstr "Ingen gyldig bokmerkefil funnet i datakatalogene"
 
 #: ../libslab/libslab-bookmarkfile.c:2130
 #, c-format
 msgid "A bookmark for URI '%s' already exists"
-msgstr ""
+msgstr "En bokmerke-URI for «%s» eksisterer allerede"
 
 #: ../libslab/libslab-bookmarkfile.c:2176
 #: ../libslab/libslab-bookmarkfile.c:2333
@@ -3396,12 +3406,12 @@ msgstr "Ingen bokmerker funnet for URI «%s»"
 #: ../libslab/libslab-bookmarkfile.c:2508
 #, c-format
 msgid "No MIME type defined in the bookmark for URI '%s'"
-msgstr ""
+msgstr "Ingen MIME-type definert i bokmerke for URI «%s»"
 
 #: ../libslab/libslab-bookmarkfile.c:2593
 #, c-format
 msgid "No private flag has been defined in bookmark for URI '%s'"
-msgstr ""
+msgstr "Privat flagg er ikke definert i bokmerke for URI «%s»"
 
 #: ../libslab/libslab-bookmarkfile.c:2972
 #, c-format
