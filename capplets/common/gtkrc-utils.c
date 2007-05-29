@@ -142,10 +142,11 @@ gtkrc_get_color_scheme (gchar *filename)
 	GSList *files = NULL;
 	GSList *read_files = NULL;
 	GTokenType token;
-	GScanner *scanner = g_scanner_new (NULL);
+	GScanner *scanner = gtk_rc_scanner_new ();
 
 	g_scanner_scope_add_symbol (scanner, 0, "include", INCLUDE_SYMBOL);
 	g_scanner_scope_add_symbol (scanner, 0, "gtk_color_scheme", COLOR_SCHEME_SYMBOL);
+	g_scanner_scope_add_symbol (scanner, 0, "gtk-color-scheme", COLOR_SCHEME_SYMBOL);
 
 	files = g_slist_prepend (files, g_strdup (filename));
 	while (files != NULL)
@@ -171,19 +172,14 @@ gtkrc_get_color_scheme (gchar *filename)
 			g_scanner_input_file (scanner, file);
 			while ((token = g_scanner_get_next_token (scanner)) != G_TOKEN_EOF)
 			{
-				GTokenType string_token;
-
-				if (token != G_TOKEN_SYMBOL)
-					continue;
-				if (scanner->value.v_symbol == COLOR_SCHEME_SYMBOL)
+				if (token == COLOR_SCHEME_SYMBOL)
 				{
 					if (g_scanner_get_next_token (scanner) != '=')
 						continue;
-					string_token = g_scanner_get_next_token (scanner);
-					if (string_token != G_TOKEN_STRING)
+					token = g_scanner_get_next_token (scanner);
+					if (token != G_TOKEN_STRING)
 						continue;
-					if (result)
-						g_free (result);
+					g_free (result);
 					result = g_strdup (scanner->value.v_string);
 				}
 			}
@@ -192,5 +188,3 @@ gtkrc_get_color_scheme (gchar *filename)
 	g_scanner_destroy (scanner);
 	return result;
 }
-
-
