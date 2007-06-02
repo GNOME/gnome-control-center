@@ -2,27 +2,17 @@ SUBDIRS = po libsounds libbackground libwindow-settings libslab gnome-settings-d
 
 ACLOCAL_AMFLAGS = -I m4
 
-#I removed the root-manager for now
-#
-# it generated this error :
-# root-manager.c:55:31: security/pam_appl.h: No such file or directory
-# while compiling. I guess we need to check for pam or something
-# in the configure.in file. Since we are not using it now, i will
-# remove it from the default build. Chema
-
 DISTCLEANFILES = \
-  intltool-extract \
-  intltool-merge \
-  intltool-update \
-  gnome-doc-utils.make
+	gnome-doc-utils.make \
+	intltool-extract \
+	intltool-merge \
+	intltool-update
 
 EXTRA_DIST = \
-	control-center.spec.in	\
-	control-center.spec \
+	MAINTAINERS \
+	gnome-doc-utils.make \
 	intltool-extract.in \
 	intltool-merge.in \
-	intltool-update.in \
-	gnome-doc-utils.make \
-	MAINTAINERS
+	intltool-update.in
 
 DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper --disable-update-mimedb
