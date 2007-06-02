@@ -6,12 +6,9 @@
 #include "capplet-util.h"
 #include "gconf-property-editor.h"
 #include "activate-settings-daemon.h"
-#include "at-startup-session.h"
 
 #define ACCESSIBILITY_KEY       "/desktop/gnome/interface/accessibility"
 #define ACCESSIBILITY_KEY_DIR   "/desktop/gnome/interface"
-
-static AtStartupState at_startup_state;
 
 static GladeXML *
 create_dialog (void)
@@ -104,7 +101,6 @@ at_enable_toggled (GtkToggleButton *toggle_button,
 	gconf_client_set_bool (client, ACCESSIBILITY_KEY,
 			       is_enabled,
 			       NULL);
-	at_startup_state.enabled.support = is_enabled;
 	g_object_unref (client);
 }
 
