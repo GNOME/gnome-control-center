@@ -1,3 +1,4 @@
+# translation of gnome-control-center.HEAD.es.po to Spanish
 # Spanish translation file for gnome-control-center
 # Copyright © 1999-2002, 2006, 2007 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gnome-control-center package.
@@ -15,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-18 03:20+0100\n"
-"PO-Revision-Date: 2007-05-22 19:10+0200\n"
+"POT-Creation-Date: 2007-06-04 03:39+0100\n"
+"PO-Revision-Date: 2007-06-04 15:38+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -64,13 +65,11 @@ msgid "No Image"
 msgstr "Sin imagen"
 
 #: ../capplets/about-me/gnome-about-me.c:666
-#: ../capplets/background/gnome-wp-capplet.c:1022
+#: ../capplets/appearance/appearance-desktop.c:1042
 msgid "Images"
 msgstr "Imágenes"
 
 #: ../capplets/about-me/gnome-about-me.c:670
-#: ../capplets/background/gnome-wp-capplet.c:1026
-#: ../capplets/theme-switcher/gnome-theme-installer.c:686
 msgid "All Files"
 msgstr "Todos los archivos"
 
@@ -113,9 +112,9 @@ msgstr " "
 
 #: ../capplets/about-me/gnome-about-me.glade.h:2
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
+#: ../capplets/appearance/appearance.glade.h:1
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:1
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:1
 msgid "    "
 msgstr "    "
 
@@ -724,100 +723,390 @@ msgstr "píxeles/segundo"
 msgid "seconds"
 msgstr "segundos"
 
-#: ../capplets/background/background.desktop.in.in.h:1
-msgid "Change your Desktop Background settings"
-msgstr "Cambia la configuración del fondo del escritorio"
+#: ../capplets/appearance/appearance.glade.h:2
+msgid "<b>C_olors</b>"
+msgstr "<b>C_olores</b>"
 
-#: ../capplets/background/background.desktop.in.in.h:2
-msgid "Desktop Background"
-msgstr "Fondo del escritorio"
+#: ../capplets/appearance/appearance.glade.h:3
+msgid "<b>Hinting</b>"
+msgstr "<b>Contorno</b>"
 
-#: ../capplets/background/gnome-background-properties.glade.h:1
-msgid "<b>Desktop _Wallpaper</b>"
-msgstr "<b>_Tapiz del escritorio</b>"
+#: ../capplets/appearance/appearance.glade.h:4
+msgid "<b>Menus and Toolbars</b>"
+msgstr "<b>Menús y barras de herramientas</b>"
 
-#: ../capplets/background/gnome-background-properties.glade.h:2
-msgid "<b>_Desktop Colors</b>"
-msgstr "<b>_Colores del escritorio</b>"
+#: ../capplets/appearance/appearance.glade.h:5
+msgid "<b>Preview</b>"
+msgstr "<b>Vista previa</b>"
 
-#: ../capplets/background/gnome-background-properties.glade.h:3
-msgid "Desktop Background Preferences"
-msgstr "Preferencias del fondo del escritorio"
+#: ../capplets/appearance/appearance.glade.h:6
+msgid "<b>Rendering</b>"
+msgstr "<b>Renderizado</b>"
 
-#: ../capplets/background/gnome-background-properties.glade.h:4
+#: ../capplets/appearance/appearance.glade.h:7
+msgid "<b>Smoothing</b>"
+msgstr "<b>Suavizado</b>"
+
+#: ../capplets/appearance/appearance.glade.h:8
+msgid "<b>Subpixel Order</b>"
+msgstr "<b>Orden del subpíxel</b>"
+
+#: ../capplets/appearance/appearance.glade.h:9
+msgid "<b>_Wallpaper</b>"
+msgstr "<b>_Fondo del escritorio</b>"
+
+#: ../capplets/appearance/appearance.glade.h:10
+msgid "Appearance Preferences"
+msgstr "Preferencias de la apariencia"
+
+#: ../capplets/appearance/appearance.glade.h:11
+msgid "Background"
+msgstr "Fondo"
+
+#: ../capplets/appearance/appearance.glade.h:12
+msgid "Best _shapes"
+msgstr "Mejores _formas"
+
+#: ../capplets/appearance/appearance.glade.h:13
+msgid "Best co_ntrast"
+msgstr "Mejor co_ntraste"
+
+#: ../capplets/appearance/appearance.glade.h:14
+msgid "C_ustom..."
+msgstr "_Personalizar…"
+
+#: ../capplets/appearance/appearance.glade.h:15
+msgid "C_ut"
+msgstr "Co_rtar"
+
+#: ../capplets/appearance/appearance.glade.h:16
+msgid ""
+"Centered\n"
+"Fill screen\n"
+"Scaled\n"
+"Zoom\n"
+"Tiled"
+msgstr ""
+"Centrado\n"
+"Rellenar la pantalla\n"
+"Escalado\n"
+"Ampliación\n"
+"Mosaico"
+
+#: ../capplets/appearance/appearance.glade.h:21
+msgid "Colors"
+msgstr "Colores"
+
+#: ../capplets/appearance/appearance.glade.h:22
+msgid "Controls"
+msgstr "Controles"
+
+#: ../capplets/appearance/appearance.glade.h:23
+msgid "D_etails..."
+msgstr "_Detalles…"
+
+#: ../capplets/appearance/appearance.glade.h:24
+msgid "Des_ktop font:"
+msgstr "Tipografía para el _escritorio:"
+
+#: ../capplets/appearance/appearance.glade.h:25
+msgid "Font Rendering Details"
+msgstr "Detalles del renderizado de la tipografía"
+
+#: ../capplets/appearance/appearance.glade.h:26
+msgid "Fonts"
+msgstr "Tipografías"
+
+#: ../capplets/appearance/appearance.glade.h:27
+msgid "Go _to Fonts Folder"
+msgstr "Ir _a la carpeta de las tipografías"
+
+#: ../capplets/appearance/appearance.glade.h:28
+msgid "Gra_yscale"
+msgstr "Escala de g_rises"
+
+#: ../capplets/appearance/appearance.glade.h:29
+msgid "Icons"
+msgstr "Iconos"
+
+#: ../capplets/appearance/appearance.glade.h:30
+msgid "Install..."
+msgstr "Instalar…"
+
+#: ../capplets/appearance/appearance.glade.h:31
+msgid "Interface"
+msgstr "Interfaz"
+
+#: ../capplets/appearance/appearance.glade.h:32
+msgid "N_one"
+msgstr "Ningun_o"
+
+#: ../capplets/appearance/appearance.glade.h:33
+msgid "New File"
+msgstr "Archivo nuevo"
+
+#: ../capplets/appearance/appearance.glade.h:34
+msgid "Open File"
+msgstr "Abrir archivo"
+
+#: ../capplets/appearance/appearance.glade.h:35
 msgid "Open a dialog to specify the color"
 msgstr "Abre un diálogo para especificar el color"
 
-#: ../capplets/background/gnome-background-properties.glade.h:5
-msgid "_Add Wallpaper"
-msgstr "_Añadir tapiz"
+#: ../capplets/appearance/appearance.glade.h:36
+msgid "Pointer"
+msgstr "Puntero"
 
-#: ../capplets/background/gnome-background-properties.glade.h:6
-msgid "_Finish"
-msgstr "_Terminar"
+#: ../capplets/appearance/appearance.glade.h:37
+msgid "R_esolution:"
+msgstr "R_esolución:"
 
-#: ../capplets/background/gnome-background-properties.glade.h:7
-#: ../capplets/theme-switcher/theme-properties.glade.h:26
-msgid "_Remove"
-msgstr "_Eliminar"
+#: ../capplets/appearance/appearance.glade.h:38
+msgid "Save File"
+msgstr "Guardar archivo"
 
-#: ../capplets/background/gnome-background-properties.glade.h:8
+#: ../capplets/appearance/appearance.glade.h:39
+msgid "Show _icons in menus"
+msgstr "Mostrar _iconos en los menús"
+
+#: ../capplets/appearance/appearance.glade.h:40
+msgid ""
+"Solid color\n"
+"Horizontal gradient\n"
+"Vertical gradient"
+msgstr ""
+"Color sólido\n"
+"Degradado horizontal\n"
+"Degradado vertical"
+
+#: ../capplets/appearance/appearance.glade.h:43
+msgid "Sub_pixel (LCDs)"
+msgstr "Sub_píxel (LCDs)"
+
+#: ../capplets/appearance/appearance.glade.h:44
+msgid "Sub_pixel smoothing (LCDs)"
+msgstr "Suavizado de sub_píxel (LCDs)"
+
+#: ../capplets/appearance/appearance.glade.h:45
+msgid ""
+"Text below items\n"
+"Text beside items\n"
+"Icons only\n"
+"Text only"
+msgstr ""
+"Texto debajo de los iconos\n"
+"Texto junto a los iconos\n"
+"Sólo iconos\n"
+"Sólo texto"
+
+#: ../capplets/appearance/appearance.glade.h:49
+#: ../vfs-methods/themus/themus-properties-main.c:92
+msgid "Theme"
+msgstr "Tema"
+
+#: ../capplets/appearance/appearance.glade.h:50
+msgid "Theme Details"
+msgstr "Detalles del tema"
+
+#: ../capplets/appearance/appearance.glade.h:51
+msgid "Toolbar _button labels:"
+msgstr "Etiquetas de los _botones de la barra de herramientas:"
+
+#: ../capplets/appearance/appearance.glade.h:52
+msgid "Tooltips:"
+msgstr "Consejos:"
+
+#: ../capplets/appearance/appearance.glade.h:53
+msgid "VB_GR"
+msgstr "VB_GR"
+
+#: ../capplets/appearance/appearance.glade.h:54
+msgid "Window Border"
+msgstr "Borde de la ventana"
+
+#: ../capplets/appearance/appearance.glade.h:55
+msgid "_Add..."
+msgstr "_Añadir..."
+
+#: ../capplets/appearance/appearance.glade.h:56
+msgid "_Application font:"
+msgstr "Tipografía para la _aplicación:"
+
+#: ../capplets/appearance/appearance.glade.h:57
+msgid "_BGR"
+msgstr "_BGR"
+
+#: ../capplets/appearance/appearance.glade.h:58
+msgid "_Copy"
+msgstr "_Copiar"
+
+#: ../capplets/appearance/appearance.glade.h:59
+msgid "_Document font:"
+msgstr "Tipografía para los _documentos:"
+
+#: ../capplets/appearance/appearance.glade.h:60
+msgid "_Edit"
+msgstr "_Editar"
+
+#: ../capplets/appearance/appearance.glade.h:61
+msgid "_Editable menu shortcut keys"
+msgstr "Aceleradores de menú _editables"
+
+#: ../capplets/appearance/appearance.glade.h:62
+msgid "_File"
+msgstr "_Archivo"
+
+#: ../capplets/appearance/appearance.glade.h:63
+msgid "_Fixed width font:"
+msgstr "Tipografía de ancho _fijo:"
+
+#: ../capplets/appearance/appearance.glade.h:64
+msgid "_Full"
+msgstr "C_ompleto"
+
+#: ../capplets/appearance/appearance.glade.h:65
+msgid "_Input boxes:"
+msgstr "Cajas de _entrada:"
+
+#: ../capplets/appearance/appearance.glade.h:66
+msgid "_Install..."
+msgstr "_Instalar…"
+
+#: ../capplets/appearance/appearance.glade.h:67
+msgid "_Medium"
+msgstr "_Medio"
+
+#: ../capplets/appearance/appearance.glade.h:68
+msgid "_Monochrome"
+msgstr "_Monocromo"
+
+#: ../capplets/appearance/appearance.glade.h:69
+msgid "_New"
+msgstr "_Nuevo"
+
+#: ../capplets/appearance/appearance.glade.h:70
+msgid "_None"
+msgstr "_Ninguno"
+
+#: ../capplets/appearance/appearance.glade.h:71
+msgid "_Open"
+msgstr "_Abrir"
+
+#: ../capplets/appearance/appearance.glade.h:72
+msgid "_Paste"
+msgstr "_Pegar"
+
+#: ../capplets/appearance/appearance.glade.h:73
+msgid "_Print"
+msgstr "Im_primir"
+
+#: ../capplets/appearance/appearance.glade.h:74
+msgid "_Quit"
+msgstr "_Salir"
+
+#: ../capplets/appearance/appearance.glade.h:75
+msgid "_RGB"
+msgstr "_RGB"
+
+#: ../capplets/appearance/appearance.glade.h:76
+msgid "_Save"
+msgstr "_Guardar"
+
+#: ../capplets/appearance/appearance.glade.h:77
+msgid "_Selected items:"
+msgstr "Elementos _seleccionados:"
+
+#: ../capplets/appearance/appearance.glade.h:78
+msgid "_Slight"
+msgstr "Le_ve"
+
+#: ../capplets/appearance/appearance.glade.h:79
 msgid "_Style:"
 msgstr "E_stilo:"
 
-#: ../capplets/background/gnome-wp-capplet.c:41
-msgid "[FILE...]"
-msgstr "[ARCHIVO…]"
+#: ../capplets/appearance/appearance.glade.h:80
+msgid "_VRGB"
+msgstr "_VRGB"
 
-#: ../capplets/background/gnome-wp-capplet.c:81
-#: ../capplets/common/capplet-util.c:344
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:333
-#, c-format
-msgid "There was an error displaying help: %s"
-msgstr "Ha ocurrido un error al mostrar la ayuda: %s"
+#: ../capplets/appearance/appearance.glade.h:81
+msgid "_Window title font:"
+msgstr "Tipografía del título de la _ventana:"
 
-#: ../capplets/background/gnome-wp-capplet.c:943
-msgid "Centered"
-msgstr "Centrado"
+#: ../capplets/appearance/appearance.glade.h:82
+msgid "_Windows:"
+msgstr "_Ventanas:"
 
-#: ../capplets/background/gnome-wp-capplet.c:944
-msgid "Fill Screen"
-msgstr "Rellenar la pantalla"
+#: ../capplets/appearance/appearance.glade.h:83
+msgid "dots per inch"
+msgstr "puntos por pulgada"
 
-#: ../capplets/background/gnome-wp-capplet.c:945
-msgid "Scaled"
-msgstr "Escalado"
+#: ../capplets/appearance/appearance.glade.h:84
+msgid "gtk-delete"
+msgstr "gtk-delete"
 
-#: ../capplets/background/gnome-wp-capplet.c:946
-msgid "Zoom"
-msgstr "Ampliación"
-
-#: ../capplets/background/gnome-wp-capplet.c:947
-msgid "Tiled"
-msgstr "Mosaico"
-
-#: ../capplets/background/gnome-wp-capplet.c:962
-msgid "Solid Color"
-msgstr "Color sólido"
-
-#: ../capplets/background/gnome-wp-capplet.c:963
-msgid "Horizontal Gradient"
-msgstr "Degradado horizontal"
-
-#: ../capplets/background/gnome-wp-capplet.c:964
-msgid "Vertical Gradient"
-msgstr "Degradado vertical"
-
-#. Create the file chooser dialog stuff here
-#: ../capplets/background/gnome-wp-capplet.c:1005
+#: ../capplets/appearance/appearance-desktop.c:1025
 msgid "Add Wallpaper"
 msgstr "Añadir tapiz"
 
-#: ../capplets/background/gnome-wp-capplet.c:1089
-msgid "- Desktop Background Preferences"
-msgstr "- Preferencias del fondo del escritorio"
+#: ../capplets/appearance/appearance-desktop.c:1046
+msgid "All files"
+msgstr "Todos los archivos"
 
-#: ../capplets/background/gnome-wp-info.c:45
+#: ../capplets/appearance/appearance-font.c:493
+msgid "Font may be too large"
+msgstr "La tipografía quizá sea demasiado grande"
+
+#: ../capplets/appearance/appearance-font.c:497
+#, c-format
+msgid ""
+"The font selected is %d point large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a size "
+"smaller than %d."
+msgid_plural ""
+"The font selected is %d points large, and may make it difficult to "
+"effectively use the computer. It is recommended that you select a size "
+"smaller than %d."
+msgstr[0] ""
+"La tipografía seleccionada es %d punto de grande, y puede hacer difícil usar "
+"el equipo. Se recomienda que seleccione un tamaño menor de %d."
+msgstr[1] ""
+"La tipografía seleccionada es %d puntos de grande, y puede hacer difícil "
+"usar el equipo. Se recomienda que seleccione un tamaño menor de %d."
+
+#: ../capplets/appearance/appearance-font.c:510
+#, c-format
+msgid ""
+"The font selected is %d point large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a smaller "
+"sized font."
+msgid_plural ""
+"The font selected is %d points large, and may make it difficult to "
+"effectively use the computer. It is recommended that you select a smaller "
+"sized font."
+msgstr[0] ""
+"La tipografía seleccionada es %d punto de grande, y puede hacer difícil usar "
+"el equipo. Se recomienda que seleccione una tipografía de tamaño menor."
+msgstr[1] ""
+"La tipografía seleccionada es %d puntos de grande, y puede hacer difícil "
+"usar el equipo. Se recomienda que seleccione una tipografía de tamaño menor."
+
+#: ../capplets/appearance/appearance-font.c:532
+msgid "Use previous font"
+msgstr "Usar la tipografía anterior"
+
+#: ../capplets/appearance/appearance-font.c:534
+msgid "Use selected font"
+msgstr "Usar la tipografía seleccionada"
+
+#: ../capplets/appearance/gnome-appearance-properties.desktop.in.in.h:1
+msgid "Appearance"
+msgstr "Apariencia"
+
+#: ../capplets/appearance/gnome-appearance-properties.desktop.in.in.h:2
+msgid "Customize the look of the desktop"
+msgstr "Personalizar la apariencia del escritorio"
+
+#: ../capplets/appearance/gnome-wp-info.c:45
 msgid "No Wallpaper"
 msgstr "Sin tapiz"
 
@@ -831,13 +1120,13 @@ msgstr "Sin tapiz"
 #. Do not translate the "background size|" type. Remove it from the
 #. translation.
 #.
-#: ../capplets/background/gnome-wp-item.c:371
+#: ../capplets/appearance/gnome-wp-item.c:371
 #, c-format
 msgid "background size|%s, %d %s x %d %s"
 msgstr "%s, %d %s x %d %s"
 
-#: ../capplets/background/gnome-wp-item.c:374
-#: ../capplets/background/gnome-wp-item.c:376
+#: ../capplets/appearance/gnome-wp-item.c:374
+#: ../capplets/appearance/gnome-wp-item.c:376
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "píxel"
@@ -872,6 +1161,12 @@ msgstr "Aplicar los cambios y salir"
 #: ../capplets/sound/sound-properties-capplet.c:1030
 msgid "Retrieve and store legacy settings"
 msgstr "Obtener y almacenar configuración heredada"
+
+#: ../capplets/common/capplet-util.c:344
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:333
+#, c-format
+msgid "There was an error displaying help: %s"
+msgstr "Ha ocurrido un error al mostrar la ayuda: %s"
 
 #: ../capplets/common/file-transfer-dialog.c:94
 #, c-format
@@ -1012,7 +1307,7 @@ msgstr ""
 "Retorno de llamada que se debe emitir cuando se vayan a liberar datos de "
 "objeto del editor de propiedades"
 
-#: ../capplets/common/gconf-property-editor.c:1592
+#: ../capplets/common/gconf-property-editor.c:1459
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -1025,7 +1320,7 @@ msgstr ""
 "Compruebe si existe y vuelva a intentarlo o elija una imagen de fondo "
 "distinta."
 
-#: ../capplets/common/gconf-property-editor.c:1600
+#: ../capplets/common/gconf-property-editor.c:1467
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -1038,11 +1333,11 @@ msgstr ""
 "\n"
 "Seleccione una imagen distinta."
 
-#: ../capplets/common/gconf-property-editor.c:1719
+#: ../capplets/common/gconf-property-editor.c:1586
 msgid "Please select an image."
 msgstr "Por favor seleccione una imagen."
 
-#: ../capplets/common/gconf-property-editor.c:1724
+#: ../capplets/common/gconf-property-editor.c:1591
 msgid "_Select"
 msgstr "_Seleccionar"
 
@@ -1450,46 +1745,46 @@ msgstr "Invertido"
 msgid "Right"
 msgstr "Derecho"
 
-#: ../capplets/display/main.c:385
+#: ../capplets/display/main.c:388
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: ../capplets/display/main.c:531
+#: ../capplets/display/main.c:534
 msgid "_Resolution:"
 msgstr "_Resolución:"
 
-#: ../capplets/display/main.c:550
+#: ../capplets/display/main.c:553
 msgid "Re_fresh rate:"
 msgstr "Tasa de re_fresco:"
 
-#: ../capplets/display/main.c:570
+#: ../capplets/display/main.c:573
 msgid "R_otation:"
 msgstr "R_otación:"
 
-#: ../capplets/display/main.c:590
+#: ../capplets/display/main.c:593
 msgid "Default Settings"
 msgstr "Configuración predeterminada"
 
-#: ../capplets/display/main.c:592
+#: ../capplets/display/main.c:595
 #, c-format
 msgid "Screen %d Settings\n"
 msgstr "Configuración de la pantalla %d\n"
 
-#: ../capplets/display/main.c:618
+#: ../capplets/display/main.c:621
 msgid "Screen Resolution Preferences"
 msgstr "Preferencias de la resolución de la pantalla"
 
-#: ../capplets/display/main.c:655
+#: ../capplets/display/main.c:658
 #, c-format
 msgid "_Make default for this computer (%s) only"
 msgstr "Utilizar como predeterminado sólo para este _equipo (%s)"
 
-#: ../capplets/display/main.c:674
+#: ../capplets/display/main.c:677
 msgid "Options"
 msgstr "Opciones"
 
-#: ../capplets/display/main.c:695
+#: ../capplets/display/main.c:698
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d second the previous "
@@ -1504,23 +1799,23 @@ msgstr[1] ""
 "Probando la configuración nueva. Si no responde en %d segundos se recuperará "
 "la configuración anterior."
 
-#: ../capplets/display/main.c:741
+#: ../capplets/display/main.c:744
 msgid "Keep Resolution"
 msgstr "Conservar resolución"
 
-#: ../capplets/display/main.c:745
+#: ../capplets/display/main.c:748
 msgid "Do you want to keep this resolution?"
 msgstr "¿Desea conservar esta resolución?"
 
-#: ../capplets/display/main.c:770
+#: ../capplets/display/main.c:773
 msgid "Use _previous resolution"
 msgstr "Usar la resolución _anterior"
 
-#: ../capplets/display/main.c:770
+#: ../capplets/display/main.c:773
 msgid "_Keep resolution"
 msgstr "C_onservar esta resolución"
 
-#: ../capplets/display/main.c:920
+#: ../capplets/display/main.c:923
 msgid ""
 "The X Server does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
@@ -1528,187 +1823,13 @@ msgstr ""
 "El servidor X no soporta la extensión XRandR. Los cambios de resolución de "
 "la pantalla durante la sesión no están disponibles."
 
-#: ../capplets/display/main.c:928
+#: ../capplets/display/main.c:931
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
 msgstr ""
 "La versión de la extensión XRandR es incompatible con este programa. Los "
 "cambios del tamaño de la pantalla durante la sesión no están disponibles."
-
-#: ../capplets/font/font-properties.desktop.in.in.h:1
-msgid "Font"
-msgstr "Tipografía"
-
-#: ../capplets/font/font-properties.desktop.in.in.h:2
-msgid "Select fonts for the desktop"
-msgstr "Seleccione la tipografía para el escritorio"
-
-#: ../capplets/font/font-properties.glade.h:1
-msgid "<b>Font Rendering</b>"
-msgstr "<b>Renderizado de la tipografía</b>"
-
-#: ../capplets/font/font-properties.glade.h:2
-msgid "<b>Hinting</b>:"
-msgstr "<b>Contorno</b>:"
-
-#: ../capplets/font/font-properties.glade.h:3
-msgid "<b>Smoothing</b>:"
-msgstr "<b>Suavizado</b>:"
-
-#: ../capplets/font/font-properties.glade.h:4
-msgid "<b>Subpixel order</b>:"
-msgstr "<b>Orden del subpíxel</b>:"
-
-#: ../capplets/font/font-properties.glade.h:5
-msgid "Best _shapes"
-msgstr "Mejores _formas"
-
-#: ../capplets/font/font-properties.glade.h:6
-msgid "Best co_ntrast"
-msgstr "Mejor co_ntraste"
-
-#: ../capplets/font/font-properties.glade.h:7
-msgid "D_etails..."
-msgstr "_Detalles…"
-
-#: ../capplets/font/font-properties.glade.h:8
-msgid "Des_ktop font:"
-msgstr "Tipografía para el _escritorio:"
-
-#: ../capplets/font/font-properties.glade.h:9
-msgid "Font Preferences"
-msgstr "Preferencias de la tipografía"
-
-#: ../capplets/font/font-properties.glade.h:10
-msgid "Font Rendering Details"
-msgstr "Detalles del renderizado de la tipografía"
-
-#: ../capplets/font/font-properties.glade.h:11
-msgid "Go _to font folder"
-msgstr "Ir _a la carpeta de las tipografías"
-
-#: ../capplets/font/font-properties.glade.h:12
-msgid "Gra_yscale"
-msgstr "Escala de g_rises"
-
-#: ../capplets/font/font-properties.glade.h:13
-msgid "N_one"
-msgstr "Ningun_o"
-
-#: ../capplets/font/font-properties.glade.h:14
-msgid "R_esolution:"
-msgstr "R_esolución:"
-
-#: ../capplets/font/font-properties.glade.h:15
-msgid "Sub_pixel (LCDs)"
-msgstr "Sub_píxel (LCDs)"
-
-#: ../capplets/font/font-properties.glade.h:16
-msgid "Sub_pixel smoothing (LCDs)"
-msgstr "Suavizado de sub_píxel (LCDs)"
-
-#: ../capplets/font/font-properties.glade.h:17
-msgid "VB_GR"
-msgstr "VB_GR"
-
-#: ../capplets/font/font-properties.glade.h:18
-msgid "_Application font:"
-msgstr "Tipografía para la _aplicación:"
-
-#: ../capplets/font/font-properties.glade.h:19
-msgid "_BGR"
-msgstr "_BGR"
-
-#: ../capplets/font/font-properties.glade.h:20
-msgid "_Document font:"
-msgstr "Tipografía para los _documentos:"
-
-#: ../capplets/font/font-properties.glade.h:21
-msgid "_Fixed width font:"
-msgstr "Tipografía de ancho _fijo:"
-
-#: ../capplets/font/font-properties.glade.h:22
-msgid "_Full"
-msgstr "C_ompleto"
-
-#: ../capplets/font/font-properties.glade.h:23
-msgid "_Medium"
-msgstr "_Medio"
-
-#: ../capplets/font/font-properties.glade.h:24
-msgid "_Monochrome"
-msgstr "_Monocromo"
-
-#: ../capplets/font/font-properties.glade.h:25
-msgid "_None"
-msgstr "_Ninguno"
-
-#: ../capplets/font/font-properties.glade.h:26
-msgid "_RGB"
-msgstr "_RGB"
-
-#: ../capplets/font/font-properties.glade.h:27
-msgid "_Slight"
-msgstr "Le_ve"
-
-#: ../capplets/font/font-properties.glade.h:28
-msgid "_VRGB"
-msgstr "_VRGB"
-
-#: ../capplets/font/font-properties.glade.h:29
-msgid "_Window title font:"
-msgstr "Tipografía del título de la _ventana:"
-
-#: ../capplets/font/font-properties.glade.h:30
-msgid "dots per inch"
-msgstr "puntos por pulgada"
-
-#: ../capplets/font/main.c:502
-msgid "Font may be too large"
-msgstr "La tipografía quizá sea demasiado grande"
-
-#: ../capplets/font/main.c:506
-#, c-format
-msgid ""
-"The font selected is %d point large, and may make it difficult to "
-"effectively use the computer.  It is recommended that you select a size "
-"smaller than %d."
-msgid_plural ""
-"The font selected is %d points large, and may make it difficult to "
-"effectively use the computer. It is recommended that you select a size "
-"smaller than %d."
-msgstr[0] ""
-"La tipografía seleccionada es %d punto de grande, y puede hacer difícil usar "
-"el equipo. Se recomienda que seleccione un tamaño menor de %d."
-msgstr[1] ""
-"La tipografía seleccionada es %d puntos de grande, y puede hacer difícil "
-"usar el equipo. Se recomienda que seleccione un tamaño menor de %d."
-
-#: ../capplets/font/main.c:519
-#, c-format
-msgid ""
-"The font selected is %d point large, and may make it difficult to "
-"effectively use the computer.  It is recommended that you select a smaller "
-"sized font."
-msgid_plural ""
-"The font selected is %d points large, and may make it difficult to "
-"effectively use the computer. It is recommended that you select a smaller "
-"sized font."
-msgstr[0] ""
-"La tipografía seleccionada es %d punto de grande, y puede hacer difícil usar "
-"el equipo. Se recomienda que seleccione una tipografía de tamaño menor."
-msgstr[1] ""
-"La tipografía seleccionada es %d puntos de grande, y puede hacer difícil "
-"usar el equipo. Se recomienda que seleccione una tipografía de tamaño menor."
-
-#: ../capplets/font/main.c:540
-msgid "Use previous font"
-msgstr "Usar la tipografía anterior"
-
-#: ../capplets/font/main.c:542
-msgid "Use selected font"
-msgstr "Usar la tipografía seleccionada"
 
 #: ../capplets/keybindings/00-multimedia-key.xml.in.h:1
 #: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
@@ -2024,11 +2145,11 @@ msgstr "Predeterminado"
 msgid "Layout"
 msgstr "Distribución"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:168
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:174
 msgid "Vendors"
 msgstr "Fabricantes"
 
-#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:234
+#: ../capplets/keyboard/gnome-keyboard-properties-xkbmc.c:240
 msgid "Models"
 msgstr "Modelos"
 
@@ -2454,406 +2575,6 @@ msgstr "Reproducción de _sonido:"
 #: ../capplets/sound/sound-properties.glade.h:24
 msgid "_Visual system beep"
 msgstr "Campana _visual del sistema"
-
-#: ../capplets/theme-switcher/gnome-theme-details.c:450
-msgid "Would you like to remove this theme?"
-msgstr "¿Quiere quitar este tema?"
-
-#: ../capplets/theme-switcher/gnome-theme-details.c:515
-msgid "Theme deleted succesfully. Please select another theme."
-msgstr "Tema borrado con éxito. Por favor, seleccione otro tema."
-
-#: ../capplets/theme-switcher/gnome-theme-details.c:524
-msgid "Theme can not be deleted"
-msgstr "El tema no se puede borrar"
-
-#: ../capplets/theme-switcher/gnome-theme-details.c:696
-msgid ""
-"No themes could be found on your system.  This probably means that your "
-"\"Theme Preferences\" dialog was improperly installed, or you haven't "
-"installed the \"gnome-themes\" package."
-msgstr ""
-"No se han podido encontrar temas en su sistema. Probablemente esto "
-"signifique que su diálogo de «Preferencias del tema» se instaló "
-"incorrectamente, o no se ha instalado el paquete «gnome-themes»."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:153
-#, c-format
-msgid ""
-"Can not install theme. \n"
-"The %s utility is not installed."
-msgstr ""
-"No es posible instalar el tema.\n"
-"La utilidad %s no está instalada."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:162
-msgid ""
-"Can not install theme. \n"
-"There was a problem while extracting the theme"
-msgstr ""
-"No es posible instalar el tema.\n"
-"Hubo un problema al extraer el tema"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:323
-msgid "This theme is not in a supported format."
-msgstr "Este tema no está en un formato soportado."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:334
-msgid "Failed to create temporary directory"
-msgstr "Se produjo un fallo al crear el directorio temporal"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:389
-#, c-format
-msgid "GNOME Theme %s correctly installed"
-msgstr "El tema de GNOME %s se instaló correctamente"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:399
-msgid "The theme is an engine. You need to compile the theme."
-msgstr "El tema es un motor. Necesita compilar el tema."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:410
-msgid "The file format is invalid"
-msgstr "El formato de archivo es inválido"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:449
-msgid "Installation Failed"
-msgstr "Ha fallado la instalación"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:462
-#, c-format
-msgid "The theme \"%s\" has been installed."
-msgstr "Se ha instalado el tema «%s»."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:468
-msgid "Would you like to apply it now, or keep your current theme?"
-msgstr "¿Quiere aplicarlo ahora o mantener el tema actual?"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:470
-msgid "Keep Current Theme"
-msgstr "Dejar el tema actual"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:472
-msgid "Apply New Theme"
-msgstr "Aplicar tema nuevo"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:528
-msgid "No theme file location specified to install"
-msgstr "No se ha especificado ninguna ubicación del archivo del tema para instalar"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:543
-msgid "The theme file location specified to install is invalid"
-msgstr "La ubicación del archivo del tema para instalar es inválida"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:569
-#, c-format
-msgid ""
-"Insufficient permissions to install the theme in:\n"
-"%s"
-msgstr ""
-"Permisos insuficientes para instalar el tema en:\n"
-"%s"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:589
-msgid "The file format is invalid."
-msgstr "El formato del archivo es inválido."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:616
-#, c-format
-msgid ""
-"%s is the path where the theme files will be installed. This can not be "
-"selected as the source location"
-msgstr ""
-"%s es la ruta donde se van a instalar los archivos del tema. Esto no puede "
-"seleccionarse como ubicación de origen"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:675
-msgid "Select Theme"
-msgstr "Seleccione el tema"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:678
-msgid "Theme Packages"
-msgstr "Paquetes de temas"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.desktop.in.in.h:1
-msgid "Installs themes packages for various parts of the desktop"
-msgstr "Instala paquetes de temas para varias partes del escritorio"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.desktop.in.in.h:2
-msgid "Theme Installer"
-msgstr "Instalador de temas"
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:734
-msgid "Custom theme"
-msgstr "Tema personalizado"
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:734
-msgid "You can save this theme by pressing the Save Theme button."
-msgstr "Puede guardar este tema pulsando el botón «Guardar tema»."
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1648
-msgid "Specify the filename of a theme to install"
-msgstr "Especifique el nombre del archivo del tema para instalar"
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1649
-msgid "filename"
-msgstr "nombre de archivo"
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1692
-msgid ""
-"The default theme schemas could not be found on your system.  This means "
-"that you probably don't have metacity installed, or that your gconf is "
-"configured incorrectly."
-msgstr ""
-"No se han podido encontrar los esquemas predeterminados de temas en su "
-"sistema. Esto significa que probablemente no tiene Metacity instalado, o que "
-"su gconf está configurado incorrectamente."
-
-#: ../capplets/theme-switcher/gnome-theme-package.xml.in.h:1
-msgid "Gnome Theme Package"
-msgstr "Paquete de tema de GNOME"
-
-#: ../capplets/theme-switcher/gnome-theme-save.c:73
-msgid "Theme name must be present"
-msgstr "El nombre del tema debe estar presente"
-
-#: ../capplets/theme-switcher/gnome-theme-save.c:144
-msgid "The theme already exists. Would you like to replace it?"
-msgstr "El tema ya existe. ¿Quiere reemplazarlo?"
-
-#: ../capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:1
-msgid "Select themes for various parts of the desktop"
-msgstr "Selecciona temas para varias partes del escritorio"
-
-#: ../capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:2
-#: ../vfs-methods/themus/themus-properties-main.c:92
-msgid "Theme"
-msgstr "Tema"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:1
-msgid "<b>You do not have permission to change theme settings</b>"
-msgstr "<b>No tiene permiso para cambiar los ajustes del tema</b>"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:2
-msgid "Apply _Background"
-msgstr "Aplicar f_ondo"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:3
-msgid "Apply _Font"
-msgstr "Aplicar tipogra_fía"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:4
-msgid "Background"
-msgstr "Fondo"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:5
-msgid "C_ustomize..."
-msgstr "_Personalizar…"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:6
-msgid "Colors"
-msgstr "Colores"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:7
-msgid "Controls"
-msgstr "Controles"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:8
-msgid "Icons"
-msgstr "Iconos"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:9
-msgid "Save Theme As..."
-msgstr "Guardar tema como…"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:10
-msgid "Save _Background Image"
-msgstr "Guardar imagen de _fondo"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:11
-msgid "Select theme for the desktop"
-msgstr "Seleccionar tema para el escritorio"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:12
-msgid "Text"
-msgstr "Texto"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:13
-msgid "The current controls theme does not support color schemes"
-msgstr "El tema de controles actual no soporta esquemas de colores"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:14
-msgid "Theme Details"
-msgstr "Detalles del tema"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:15
-msgid "Theme Preferences"
-msgstr "Preferencias del tema"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:16
-msgid "This theme does not suggest any particular font or background."
-msgstr "Este tema no recomienda ninguna tipografía o fondo en particular."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:17
-msgid "This theme suggests a background:"
-msgstr "Este tema recomienda un fondo:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:18
-msgid "This theme suggests a font and a background:"
-msgstr "Este tema recomienda una tipografía y un fondo:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:19
-msgid "This theme suggests a font:"
-msgstr "Este tema recomienda una tipografía:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:20
-msgid "Window Border"
-msgstr "Borde de la ventana"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:21
-msgid "_Description:"
-msgstr "_Descripción:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:22
-msgid "_Input boxes:"
-msgstr "Cajas de _entrada:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:23
-msgid "_Install Theme..."
-msgstr "_Instalar un tema…"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:24
-msgid "_Install..."
-msgstr "_Instalar…"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:25
-msgid "_Name:"
-msgstr "_Nombre:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:27
-msgid "_Revert"
-msgstr "_Revertir"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:28
-msgid "_Save Theme..."
-msgstr "_Guardar el tema…"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:29
-msgid "_Selected items:"
-msgstr "Elementos _seleccionados:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:30
-msgid "_Windows:"
-msgstr "_Ventanas:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:31
-msgid "theme selection tree"
-msgstr "árbol de selección de temas"
-
-#: ../capplets/ui-properties/gnome-ui-properties.desktop.in.in.h:1
-msgid "Customize the appearance of toolbars and menubars in applications"
-msgstr ""
-"Personaliza la apariencia de las barras de herramientas y de menús en las "
-"aplicaciones"
-
-#: ../capplets/ui-properties/gnome-ui-properties.desktop.in.in.h:2
-msgid "Menus & Toolbars"
-msgstr "Menús y barras de herramientas"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:2
-msgid "<b>Behavior and Appearance</b>"
-msgstr "<b>Comportamiento y apariencia</b>"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:3
-msgid "<b>Preview</b>"
-msgstr "<b>Vista previa</b>"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:4
-msgid "C_ut"
-msgstr "Co_rtar"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:5
-msgid "Icons only"
-msgstr "Sólo iconos"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:6
-msgid "Menu and Toolbar Preferences"
-msgstr "Preferencias de la barra de herramientas y del menú"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:7
-msgid "New File"
-msgstr "Archivo nuevo"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:8
-msgid "Open File"
-msgstr "Abrir archivo"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:9
-msgid "Save File"
-msgstr "Guardar archivo"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:10
-msgid "Show _icons in menus"
-msgstr "Mostrar _iconos en los menús"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:11
-msgid "Text below icons"
-msgstr "Texto debajo de los iconos"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:12
-msgid "Text beside icons"
-msgstr "Texto junto a los iconos"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:13
-msgid "Text only"
-msgstr "Sólo texto"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:14
-msgid "Toolbar _button labels:"
-msgstr "Etiquetas de los _botones de la barra de herramientas:"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:15
-msgid "_Copy"
-msgstr "_Copiar"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:16
-msgid "_Detachable toolbars"
-msgstr "Barras de herramientas _desprendibles"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:17
-msgid "_Edit"
-msgstr "_Editar"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:18
-msgid "_Editable menu shortcut keys"
-msgstr "Aceleradores de menú _editables"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:19
-msgid "_File"
-msgstr "_Archivo"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:20
-msgid "_New"
-msgstr "_Nuevo"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:21
-msgid "_Open"
-msgstr "_Abrir"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:22
-msgid "_Paste"
-msgstr "_Pegar"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:23
-msgid "_Print"
-msgstr "Im_primir"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:24
-msgid "_Quit"
-msgstr "_Salir"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:25
-msgid "_Save"
-msgstr "_Guardar"
 
 #: ../capplets/windows/gnome-window-properties.c:344
 msgid "Cannot start the preferences application for your window manager"
@@ -3887,7 +3608,8 @@ msgstr ""
 "Germán Poo Caamaño <gpoo@ubiobio.cl>, 2002 (Revisor).\n"
 "Lucas Di Pentima <lucas@lunix.com.ar>, 2002.\n"
 "Pablo Gonzalo del Campo <pablodc@bigfoot.com>, 2002,2003.\n"
-"Francisco Javier F. Serrador <serrador@cvs.gnome.org>, 2003, 2004, 2005, 2006.\n"
+"Francisco Javier F. Serrador <serrador@cvs.gnome.org>, 2003, 2004, 2005, "
+"2006.\n"
 "Claudio Saavedra <csaavedra@alumnos.utalca.cl>, 2007.\n"
 "Jorge González <jorgegonz@svn.gnome.org>, 2007."
 
