@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-30 14:11+0200\n"
-"PO-Revision-Date: 2007-05-30 14:11+0200\n"
+"POT-Creation-Date: 2007-06-04 18:02+0200\n"
+"PO-Revision-Date: 2007-06-04 18:03+0200\n"
 "Last-Translator: Jakub Friedl <jfriedl@suse.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -63,13 +63,11 @@ msgid "No Image"
 msgstr "Žádný obrázek"
 
 #: ../capplets/about-me/gnome-about-me.c:666
-#: ../capplets/background/gnome-wp-capplet.c:1022
+#: ../capplets/appearance/appearance-desktop.c:1042
 msgid "Images"
 msgstr "Obrázky"
 
 #: ../capplets/about-me/gnome-about-me.c:670
-#: ../capplets/background/gnome-wp-capplet.c:1026
-#: ../capplets/theme-switcher/gnome-theme-installer.c:686
 msgid "All Files"
 msgstr "Všechny soubory"
 
@@ -111,9 +109,9 @@ msgstr " "
 
 #: ../capplets/about-me/gnome-about-me.glade.h:2
 #: ../capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
+#: ../capplets/appearance/appearance.glade.h:1
 #: ../capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: ../capplets/mouse/gnome-mouse-properties.glade.h:1
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:1
 msgid "    "
 msgstr "    "
 
@@ -239,10 +237,8 @@ msgstr "Osobní informace"
 
 #: ../capplets/about-me/gnome-about-me.glade.h:34
 #: ../capplets/about-me/gnome-about-me-password.c:905
-msgid ""
-"Please type your password again in the <b>Retype new password</b> field."
-msgstr ""
-"Prosím, napište své heslo znovu do pole <b>Napište nové heslo znovu</b>."
+msgid "Please type your password again in the <b>Retype new password</b> field."
+msgstr "Prosím, napište své heslo znovu do pole <b>Napište nové heslo znovu</b>."
 
 #: ../capplets/about-me/gnome-about-me.glade.h:35
 msgid "State/Pro_vince:"
@@ -377,8 +373,7 @@ msgstr "Autentizováno!"
 msgid ""
 "Your password has been changed since you initially authenticated! Please re-"
 "authenticate."
-msgstr ""
-"Vaše heslo se od vaší autentizace změnilo! Prosím, autentizujte se znovu."
+msgstr "Vaše heslo se od vaší autentizace změnilo! Prosím, autentizujte se znovu."
 
 #: ../capplets/about-me/gnome-about-me-password.c:470
 msgid "That password was incorrect."
@@ -496,14 +491,12 @@ msgid "_Enable assistive technologies"
 msgstr "_Povolit technologie usnadnění"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:11
-#, fuzzy
 msgid "_Keyboard Accessibility"
-msgstr "Zpřístupnění klávesnice"
+msgstr "Zpřístupnění _klávesnice"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.glade.h:12
-#, fuzzy
 msgid "_Preferred Applications"
-msgstr "Preferované aplikace"
+msgstr "_Preferované aplikace"
 
 #: ../capplets/accessibility/at-properties/at-properties.desktop.in.in.h:2
 #: ../capplets/default-applications/default-applications-accessibility.desktop.in.in.h:1
@@ -725,100 +718,388 @@ msgstr "bodů/sekundu"
 msgid "seconds"
 msgstr "sekund"
 
-#: ../capplets/background/background.desktop.in.in.h:1
-msgid "Change your Desktop Background settings"
-msgstr "Změnit vaše nastavení pozadí pracovní plochy"
+#: ../capplets/appearance/appearance.glade.h:2
+msgid "<b>C_olors</b>"
+msgstr "<b>_Barvy</b>"
 
-#: ../capplets/background/background.desktop.in.in.h:2
-msgid "Desktop Background"
-msgstr "Pozadí pracovní plochy"
+#: ../capplets/appearance/appearance.glade.h:3
+#, fuzzy
+msgid "<b>Hinting</b>"
+msgstr "<b>Hinting</b>:"
 
-#: ../capplets/background/gnome-background-properties.glade.h:1
-msgid "<b>Desktop _Wallpaper</b>"
+#: ../capplets/appearance/appearance.glade.h:4
+msgid "<b>Menus and Toolbars</b>"
+msgstr "<b>Nabídky a lišty nástrojů</b>"
+
+#: ../capplets/appearance/appearance.glade.h:5
+msgid "<b>Preview</b>"
+msgstr "<b>Náhled</b>"
+
+#: ../capplets/appearance/appearance.glade.h:6
+msgid "<b>Rendering</b>"
+msgstr "<b>Vykreslování</b>"
+
+#: ../capplets/appearance/appearance.glade.h:7
+msgid "<b>Smoothing</b>"
+msgstr "<b>Vyhlazování</b>"
+
+#: ../capplets/appearance/appearance.glade.h:8
+msgid "<b>Subpixel Order</b>"
+msgstr "<b>Pořadí podpixelů</b>"
+
+#: ../capplets/appearance/appearance.glade.h:9
+#, fuzzy
+msgid "<b>_Wallpaper</b>"
 msgstr "<b>_Tapeta pracovní plochy</b>"
 
-#: ../capplets/background/gnome-background-properties.glade.h:2
-msgid "<b>_Desktop Colors</b>"
-msgstr "<b>_Barvy pracovní plochy</b>"
+#: ../capplets/appearance/appearance.glade.h:10
+msgid "Appearance Preferences"
+msgstr "Nastavení vzhledu"
 
-#: ../capplets/background/gnome-background-properties.glade.h:3
-msgid "Desktop Background Preferences"
-msgstr "Nastavení pozadí pracovní plochy"
+#: ../capplets/appearance/appearance.glade.h:11
+msgid "Background"
+msgstr "Pozadí"
 
-#: ../capplets/background/gnome-background-properties.glade.h:4
+#: ../capplets/appearance/appearance.glade.h:12
+msgid "Best _shapes"
+msgstr "_Nejlepší tvary"
+
+#: ../capplets/appearance/appearance.glade.h:13
+msgid "Best co_ntrast"
+msgstr "Nejlepší _kontrast"
+
+#: ../capplets/appearance/appearance.glade.h:14
+#, fuzzy
+msgid "C_ustom..."
+msgstr "_Upravit..."
+
+#: ../capplets/appearance/appearance.glade.h:15
+msgid "C_ut"
+msgstr "_Vyjmout"
+
+#: ../capplets/appearance/appearance.glade.h:16
+msgid ""
+"Centered\n"
+"Fill screen\n"
+"Scaled\n"
+"Zoom\n"
+"Tiled"
+msgstr ""
+
+#: ../capplets/appearance/appearance.glade.h:21
+msgid "Colors"
+msgstr "Barvy"
+
+#: ../capplets/appearance/appearance.glade.h:22
+msgid "Controls"
+msgstr "Ovládací prvky"
+
+#: ../capplets/appearance/appearance.glade.h:23
+msgid "D_etails..."
+msgstr "Podrobno_sti..."
+
+#: ../capplets/appearance/appearance.glade.h:24
+msgid "Des_ktop font:"
+msgstr "Písmo _plochy:"
+
+#: ../capplets/appearance/appearance.glade.h:25
+msgid "Font Rendering Details"
+msgstr "Podrobnosti vykreslování písma"
+
+#: ../capplets/appearance/appearance.glade.h:26
+msgid "Fonts"
+msgstr "Písma"
+
+#: ../capplets/appearance/appearance.glade.h:27
+msgid "Go _to Fonts Folder"
+msgstr "Přejít do _složky s písmy"
+
+#: ../capplets/appearance/appearance.glade.h:28
+msgid "Gra_yscale"
+msgstr "Stupně še_di"
+
+#: ../capplets/appearance/appearance.glade.h:29
+msgid "Icons"
+msgstr "Ikony"
+
+#: ../capplets/appearance/appearance.glade.h:30
+msgid "Install..."
+msgstr "Instalovat..."
+
+#: ../capplets/appearance/appearance.glade.h:31
+msgid "Interface"
+msgstr "Rozhraní"
+
+#: ../capplets/appearance/appearance.glade.h:32
+msgid "N_one"
+msgstr "_Žádný"
+
+#: ../capplets/appearance/appearance.glade.h:33
+msgid "New File"
+msgstr "Nový soubor"
+
+#: ../capplets/appearance/appearance.glade.h:34
+msgid "Open File"
+msgstr "Otevřít soubor"
+
+#: ../capplets/appearance/appearance.glade.h:35
 msgid "Open a dialog to specify the color"
 msgstr "Otevřít dialog pro určení barvy"
 
-#: ../capplets/background/gnome-background-properties.glade.h:5
-msgid "_Add Wallpaper"
-msgstr "_Přidat tapetu"
+#: ../capplets/appearance/appearance.glade.h:36
+msgid "Pointer"
+msgstr "Kurzor"
 
-#: ../capplets/background/gnome-background-properties.glade.h:6
-msgid "_Finish"
-msgstr "_Dokončit"
+#: ../capplets/appearance/appearance.glade.h:37
+msgid "R_esolution:"
+msgstr "_Rozlišení:"
 
-#: ../capplets/background/gnome-background-properties.glade.h:7
-#: ../capplets/theme-switcher/theme-properties.glade.h:26
-msgid "_Remove"
-msgstr "_Odstranit"
+#: ../capplets/appearance/appearance.glade.h:38
+msgid "Save File"
+msgstr "Uložit soubor"
 
-#: ../capplets/background/gnome-background-properties.glade.h:8
+#: ../capplets/appearance/appearance.glade.h:39
+msgid "Show _icons in menus"
+msgstr "Zobrazovat v nabídkách _ikony"
+
+#: ../capplets/appearance/appearance.glade.h:40
+msgid ""
+"Solid color\n"
+"Horizontal gradient\n"
+"Vertical gradient"
+msgstr ""
+
+#: ../capplets/appearance/appearance.glade.h:43
+msgid "Sub_pixel (LCDs)"
+msgstr "Pod_pixelové (LCD)"
+
+#: ../capplets/appearance/appearance.glade.h:44
+msgid "Sub_pixel smoothing (LCDs)"
+msgstr "Podpixelové _vyhlazování (LCD)"
+
+#: ../capplets/appearance/appearance.glade.h:45
+msgid ""
+"Text below items\n"
+"Text beside items\n"
+"Icons only\n"
+"Text only"
+msgstr ""
+
+#: ../capplets/appearance/appearance.glade.h:49
+#: ../vfs-methods/themus/themus-properties-main.c:92
+msgid "Theme"
+msgstr "Motiv"
+
+#: ../capplets/appearance/appearance.glade.h:50
+msgid "Theme Details"
+msgstr "Podrobnosti o motivu"
+
+#: ../capplets/appearance/appearance.glade.h:51
+msgid "Toolbar _button labels:"
+msgstr "_Popisy tlačítek lišty nástrojů:"
+
+#: ../capplets/appearance/appearance.glade.h:52
+msgid "Tooltips:"
+msgstr "Nástrojové tipy:"
+
+#: ../capplets/appearance/appearance.glade.h:53
+msgid "VB_GR"
+msgstr "VB_GR"
+
+#: ../capplets/appearance/appearance.glade.h:54
+msgid "Window Border"
+msgstr "Okraj okna"
+
+#: ../capplets/appearance/appearance.glade.h:55
+msgid "_Add..."
+msgstr "Přid_at:"
+
+#: ../capplets/appearance/appearance.glade.h:56
+msgid "_Application font:"
+msgstr "Písmo _aplikací:"
+
+#: ../capplets/appearance/appearance.glade.h:57
+msgid "_BGR"
+msgstr "_BGR"
+
+#: ../capplets/appearance/appearance.glade.h:58
+msgid "_Copy"
+msgstr "_Kopírovat"
+
+#: ../capplets/appearance/appearance.glade.h:59
+msgid "_Document font:"
+msgstr "Písmo _dokumentů:"
+
+#: ../capplets/appearance/appearance.glade.h:60
+msgid "_Edit"
+msgstr "Up_ravit"
+
+#: ../capplets/appearance/appearance.glade.h:61
+msgid "_Editable menu shortcut keys"
+msgstr "_Upravitelné klávesové zkratky v nabídce"
+
+#: ../capplets/appearance/appearance.glade.h:62
+msgid "_File"
+msgstr "_Soubor"
+
+#: ../capplets/appearance/appearance.glade.h:63
+msgid "_Fixed width font:"
+msgstr "Písmo s pevnou _šířkou:"
+
+#: ../capplets/appearance/appearance.glade.h:64
+msgid "_Full"
+msgstr "_Plný"
+
+#: ../capplets/appearance/appearance.glade.h:65
+msgid "_Input boxes:"
+msgstr "_Vstupní pole:"
+
+#: ../capplets/appearance/appearance.glade.h:66
+msgid "_Install..."
+msgstr "_Instalovat..."
+
+#: ../capplets/appearance/appearance.glade.h:67
+msgid "_Medium"
+msgstr "_Střední"
+
+#: ../capplets/appearance/appearance.glade.h:68
+msgid "_Monochrome"
+msgstr "_Monochromatické"
+
+#: ../capplets/appearance/appearance.glade.h:69
+msgid "_New"
+msgstr "_Nový"
+
+#: ../capplets/appearance/appearance.glade.h:70
+msgid "_None"
+msgstr "Žád_né"
+
+#: ../capplets/appearance/appearance.glade.h:71
+msgid "_Open"
+msgstr "_Otevřít"
+
+#: ../capplets/appearance/appearance.glade.h:72
+msgid "_Paste"
+msgstr "V_ložit"
+
+#: ../capplets/appearance/appearance.glade.h:73
+msgid "_Print"
+msgstr "_Tisk"
+
+#: ../capplets/appearance/appearance.glade.h:74
+msgid "_Quit"
+msgstr "U_končit"
+
+#: ../capplets/appearance/appearance.glade.h:75
+msgid "_RGB"
+msgstr "_RGB"
+
+#: ../capplets/appearance/appearance.glade.h:76
+msgid "_Save"
+msgstr "_Uložit"
+
+#: ../capplets/appearance/appearance.glade.h:77
+msgid "_Selected items:"
+msgstr "_Vybrané položky:"
+
+#: ../capplets/appearance/appearance.glade.h:78
+msgid "_Slight"
+msgstr "_Malý"
+
+#: ../capplets/appearance/appearance.glade.h:79
 msgid "_Style:"
 msgstr "_Styl:"
 
-#: ../capplets/background/gnome-wp-capplet.c:41
-msgid "[FILE...]"
-msgstr "[FILE...]"
+#: ../capplets/appearance/appearance.glade.h:80
+msgid "_VRGB"
+msgstr "_VRGB"
 
-#: ../capplets/background/gnome-wp-capplet.c:81
-#: ../capplets/common/capplet-util.c:344
-#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:333
-#, c-format
-msgid "There was an error displaying help: %s"
-msgstr "Při zobrazování nápovědy došlo k chybě: %s"
+#: ../capplets/appearance/appearance.glade.h:81
+msgid "_Window title font:"
+msgstr "Písmo titulku _okna:"
 
-#: ../capplets/background/gnome-wp-capplet.c:943
-msgid "Centered"
-msgstr "Na střed"
+#: ../capplets/appearance/appearance.glade.h:82
+msgid "_Windows:"
+msgstr "_Okna:"
 
-#: ../capplets/background/gnome-wp-capplet.c:944
-msgid "Fill Screen"
-msgstr "Vyplnit obrazovku"
+#: ../capplets/appearance/appearance.glade.h:83
+msgid "dots per inch"
+msgstr "bodů na palec"
 
-#: ../capplets/background/gnome-wp-capplet.c:945
-msgid "Scaled"
-msgstr "Přizpůsobená"
+#: ../capplets/appearance/appearance.glade.h:84
+msgid "gtk-delete"
+msgstr "gtk-delete"
 
-#: ../capplets/background/gnome-wp-capplet.c:946
-msgid "Zoom"
-msgstr "Zvětšení"
-
-#: ../capplets/background/gnome-wp-capplet.c:947
-msgid "Tiled"
-msgstr "Tapeta"
-
-#: ../capplets/background/gnome-wp-capplet.c:962
-msgid "Solid Color"
-msgstr "Plná barva"
-
-#: ../capplets/background/gnome-wp-capplet.c:963
-msgid "Horizontal Gradient"
-msgstr "Vodorovný přechod"
-
-#: ../capplets/background/gnome-wp-capplet.c:964
-msgid "Vertical Gradient"
-msgstr "Svislý přechod"
-
-#. Create the file chooser dialog stuff here
-#: ../capplets/background/gnome-wp-capplet.c:1005
+#: ../capplets/appearance/appearance-desktop.c:1025
 msgid "Add Wallpaper"
 msgstr "Přidat tapetu"
 
-#: ../capplets/background/gnome-wp-capplet.c:1089
-msgid "- Desktop Background Preferences"
-msgstr "- Předvolby pozadí pracovní plochy"
+#: ../capplets/appearance/appearance-desktop.c:1046
+msgid "All files"
+msgstr "Všechny soubory"
 
-#: ../capplets/background/gnome-wp-info.c:45
+#: ../capplets/appearance/appearance-font.c:493
+msgid "Font may be too large"
+msgstr "Písmo je možná příliš velké"
+
+#: ../capplets/appearance/appearance-font.c:497
+#, c-format
+msgid ""
+"The font selected is %d point large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a size "
+"smaller than %d."
+msgid_plural ""
+"The font selected is %d points large, and may make it difficult to "
+"effectively use the computer. It is recommended that you select a size "
+"smaller than %d."
+msgstr[0] ""
+"Vybrané písmo je velké %d bod, což může působit problémy při efektivní práci "
+"s počítačem. Doporučuje se vybrat velikost menší než %d."
+msgstr[1] ""
+"Vybrané písmo je velké %d body, což může působit problémy při efektivní "
+"práci s počítačem. Doporučuje se vybrat velikost menší než %d."
+msgstr[2] ""
+"Vybrané písmo je velké %d bodů, což může působit problémy při efektivní "
+"práci s počítačem. Doporučuje se vybrat velikost menší než %d."
+
+#: ../capplets/appearance/appearance-font.c:510
+#, c-format
+msgid ""
+"The font selected is %d point large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a smaller "
+"sized font."
+msgid_plural ""
+"The font selected is %d points large, and may make it difficult to "
+"effectively use the computer. It is recommended that you select a smaller "
+"sized font."
+msgstr[0] ""
+"Vybrané písmo je velké %d bod, což může působit problémy při efektivní práci "
+"s počítačem. Doporučuje se vybrat písmo menší velikosti."
+msgstr[1] ""
+"Vybrané písmo je velké %d body, což může působit problémy při efektivní "
+"práci s počítačem. Doporučuje se vybrat písmo menší velikosti."
+msgstr[2] ""
+"Vybrané písmo je velké %d bodů, což může působit problémy při efektivní "
+"práci s počítačem. Doporučuje se vybrat písmo menší velikosti."
+
+#: ../capplets/appearance/appearance-font.c:532
+msgid "Use previous font"
+msgstr "Použít předchozí písmo"
+
+#: ../capplets/appearance/appearance-font.c:534
+msgid "Use selected font"
+msgstr "Použít vybrané písmo"
+
+#: ../capplets/appearance/gnome-appearance-properties.desktop.in.in.h:1
+msgid "Appearance"
+msgstr "Vzhled"
+
+#: ../capplets/appearance/gnome-appearance-properties.desktop.in.in.h:2
+#, fuzzy
+msgid "Customize the look of the desktop"
+msgstr "Vyberte motiv prostředí pracovní plochy"
+
+#: ../capplets/appearance/gnome-wp-info.c:45
 msgid "No Wallpaper"
 msgstr "Žádná tapeta"
 
@@ -832,13 +1113,13 @@ msgstr "Žádná tapeta"
 #. Do not translate the "background size|" type. Remove it from the
 #. translation.
 #.
-#: ../capplets/background/gnome-wp-item.c:371
+#: ../capplets/appearance/gnome-wp-item.c:371
 #, c-format
 msgid "background size|%s, %d %s x %d %s"
 msgstr "%s, %d %s x %d %s"
 
-#: ../capplets/background/gnome-wp-item.c:374
-#: ../capplets/background/gnome-wp-item.c:376
+#: ../capplets/appearance/gnome-wp-item.c:374
+#: ../capplets/appearance/gnome-wp-item.c:376
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "pixel"
@@ -873,6 +1154,12 @@ msgstr "Pouze aplikovat nastavení a skončit"
 #: ../capplets/sound/sound-properties-capplet.c:1030
 msgid "Retrieve and store legacy settings"
 msgstr "Načíst a uložit zděděná nastavení"
+
+#: ../capplets/common/capplet-util.c:344
+#: ../gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:333
+#, c-format
+msgid "There was an error displaying help: %s"
+msgstr "Při zobrazování nápovědy došlo k chybě: %s"
 
 #: ../capplets/common/file-transfer-dialog.c:94
 #, c-format
@@ -962,8 +1249,7 @@ msgid "Change set"
 msgstr "Sada změn"
 
 #: ../capplets/common/gconf-property-editor.c:184
-msgid ""
-"GConf change set containing data to be forwarded to the gconf client on apply"
+msgid "GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr ""
 "Sada změn GConf obsahující data, která budou předána klientu GConf při "
 "použití"
@@ -973,8 +1259,7 @@ msgid "Conversion to widget callback"
 msgstr "Zpětné volání konverze na prvek"
 
 #: ../capplets/common/gconf-property-editor.c:190
-msgid ""
-"Callback to be issued when data are to be converted from GConf to the widget"
+msgid "Callback to be issued when data are to be converted from GConf to the widget"
 msgstr ""
 "Zpětné volání, které se provede, když má dojít ke konverzi dat systému GConf "
 "na prvek"
@@ -984,8 +1269,7 @@ msgid "Conversion from widget callback"
 msgstr "Zpětné volání konverze z prvku"
 
 #: ../capplets/common/gconf-property-editor.c:196
-msgid ""
-"Callback to be issued when data are to be converted to GConf from the widget"
+msgid "Callback to be issued when data are to be converted to GConf from the widget"
 msgstr ""
 "Zpětné volání, které se provede, když má dojít ke konverzi z prvku na data "
 "systému GConf"
@@ -1078,7 +1362,7 @@ msgstr ""
 
 #: ../capplets/default-applications/gnome-at-session.desktop.in.in.h:2
 msgid "Visual"
-msgstr ""
+msgstr "Vizuální"
 
 #: ../capplets/default-applications/gnome-at-visual.desktop.in.in.h:1
 msgid "Run the the preferred GNOME Visual Assistive Technology"
@@ -1152,9 +1436,8 @@ msgid "<b>Video Player</b>"
 msgstr "<b>Přehrávač videa</b>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:9
-#, fuzzy
 msgid "<b>Visual</b>"
-msgstr "<i>E-mail</i>"
+msgstr "<i>Vizuální</i>"
 
 #: ../capplets/default-applications/gnome-default-applications-properties.glade.h:10
 msgid "<b>Web Browser</b>"
@@ -1223,7 +1506,7 @@ msgstr "Claws Mail"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:4
 msgid "Dasher"
-msgstr ""
+msgstr "Dasher"
 
 #: ../capplets/default-applications/gnome-default-applications.xml.in.h:5
 msgid "Debian Sensible Browser"
@@ -1549,186 +1832,6 @@ msgstr ""
 "Verze rozšíření XRandR není kompatibilní s tímto programem, změny rozlišení "
 "za běhu nejsou možné."
 
-#: ../capplets/font/font-properties.desktop.in.in.h:1
-msgid "Font"
-msgstr "Písmo"
-
-#: ../capplets/font/font-properties.desktop.in.in.h:2
-msgid "Select fonts for the desktop"
-msgstr "Vyberte písmo pracovní plochy"
-
-#: ../capplets/font/font-properties.glade.h:1
-msgid "<b>Font Rendering</b>"
-msgstr "<b>Vykreslování písma</b>"
-
-#: ../capplets/font/font-properties.glade.h:2
-msgid "<b>Hinting</b>:"
-msgstr "<b>Hinting</b>:"
-
-#: ../capplets/font/font-properties.glade.h:3
-msgid "<b>Smoothing</b>:"
-msgstr "<b>Vyhlazování</b>:"
-
-#: ../capplets/font/font-properties.glade.h:4
-msgid "<b>Subpixel order</b>:"
-msgstr "<b>Pořadí podpixelů:</b>"
-
-#: ../capplets/font/font-properties.glade.h:5
-msgid "Best _shapes"
-msgstr "_Nejlepší tvary"
-
-#: ../capplets/font/font-properties.glade.h:6
-msgid "Best co_ntrast"
-msgstr "Nejlepší _kontrast"
-
-#: ../capplets/font/font-properties.glade.h:7
-msgid "D_etails..."
-msgstr "Podrobno_sti..."
-
-#: ../capplets/font/font-properties.glade.h:8
-msgid "Des_ktop font:"
-msgstr "Písmo _plochy:"
-
-#: ../capplets/font/font-properties.glade.h:9
-msgid "Font Preferences"
-msgstr "Nastavení písma"
-
-#: ../capplets/font/font-properties.glade.h:10
-msgid "Font Rendering Details"
-msgstr "Podrobnosti vykreslování písma"
-
-#: ../capplets/font/font-properties.glade.h:11
-msgid "Go _to font folder"
-msgstr "Přejít do _složky s písmy"
-
-#: ../capplets/font/font-properties.glade.h:12
-msgid "Gra_yscale"
-msgstr "Stupně še_di"
-
-#: ../capplets/font/font-properties.glade.h:13
-msgid "N_one"
-msgstr "_Žádný"
-
-#: ../capplets/font/font-properties.glade.h:14
-msgid "R_esolution:"
-msgstr "_Rozlišení:"
-
-#: ../capplets/font/font-properties.glade.h:15
-msgid "Sub_pixel (LCDs)"
-msgstr "Pod_pixelové (LCD)"
-
-#: ../capplets/font/font-properties.glade.h:16
-msgid "Sub_pixel smoothing (LCDs)"
-msgstr "Podpixelové _vyhlazování (LCD)"
-
-#: ../capplets/font/font-properties.glade.h:17
-msgid "VB_GR"
-msgstr "VB_GR"
-
-#: ../capplets/font/font-properties.glade.h:18
-msgid "_Application font:"
-msgstr "Písmo _aplikací:"
-
-#: ../capplets/font/font-properties.glade.h:19
-msgid "_BGR"
-msgstr "_BGR"
-
-#: ../capplets/font/font-properties.glade.h:20
-msgid "_Document font:"
-msgstr "Písmo _dokumentů:"
-
-#: ../capplets/font/font-properties.glade.h:21
-msgid "_Fixed width font:"
-msgstr "Písmo s pevnou _šířkou:"
-
-#: ../capplets/font/font-properties.glade.h:22
-msgid "_Full"
-msgstr "_Plný"
-
-#: ../capplets/font/font-properties.glade.h:23
-msgid "_Medium"
-msgstr "_Střední"
-
-#: ../capplets/font/font-properties.glade.h:24
-msgid "_Monochrome"
-msgstr "_Monochromatické"
-
-#: ../capplets/font/font-properties.glade.h:25
-msgid "_None"
-msgstr "Žád_né"
-
-#: ../capplets/font/font-properties.glade.h:26
-msgid "_RGB"
-msgstr "_RGB"
-
-#: ../capplets/font/font-properties.glade.h:27
-msgid "_Slight"
-msgstr "_Malý"
-
-#: ../capplets/font/font-properties.glade.h:28
-msgid "_VRGB"
-msgstr "_VRGB"
-
-#: ../capplets/font/font-properties.glade.h:29
-msgid "_Window title font:"
-msgstr "Písmo titulku _okna:"
-
-#: ../capplets/font/font-properties.glade.h:30
-msgid "dots per inch"
-msgstr "bodů na palec"
-
-#: ../capplets/font/main.c:502
-msgid "Font may be too large"
-msgstr "Písmo je možná příliš velké"
-
-#: ../capplets/font/main.c:506
-#, c-format
-msgid ""
-"The font selected is %d point large, and may make it difficult to "
-"effectively use the computer.  It is recommended that you select a size "
-"smaller than %d."
-msgid_plural ""
-"The font selected is %d points large, and may make it difficult to "
-"effectively use the computer. It is recommended that you select a size "
-"smaller than %d."
-msgstr[0] ""
-"Vybrané písmo je velké %d bod, což může působit problémy při efektivní práci "
-"s počítačem. Doporučuje se vybrat velikost menší než %d."
-msgstr[1] ""
-"Vybrané písmo je velké %d body, což může působit problémy při efektivní "
-"práci s počítačem. Doporučuje se vybrat velikost menší než %d."
-msgstr[2] ""
-"Vybrané písmo je velké %d bodů, což může působit problémy při efektivní "
-"práci s počítačem. Doporučuje se vybrat velikost menší než %d."
-
-#: ../capplets/font/main.c:519
-#, c-format
-msgid ""
-"The font selected is %d point large, and may make it difficult to "
-"effectively use the computer.  It is recommended that you select a smaller "
-"sized font."
-msgid_plural ""
-"The font selected is %d points large, and may make it difficult to "
-"effectively use the computer. It is recommended that you select a smaller "
-"sized font."
-msgstr[0] ""
-"Vybrané písmo je velké %d bod, což může působit problémy při efektivní práci "
-"s počítačem. Doporučuje se vybrat písmo menší velikosti."
-msgstr[1] ""
-"Vybrané písmo je velké %d body, což může působit problémy při efektivní "
-"práci s počítačem. Doporučuje se vybrat písmo menší velikosti."
-msgstr[2] ""
-"Vybrané písmo je velké %d bodů, což může působit problémy při efektivní "
-"práci s počítačem. Doporučuje se vybrat písmo menší velikosti."
-
-#: ../capplets/font/main.c:540
-msgid "Use previous font"
-msgstr "Použít předchozí písmo"
-
-#: ../capplets/font/main.c:542
-msgid "Use selected font"
-msgstr "Použít vybrané písmo"
-
 #: ../capplets/keybindings/00-multimedia-key.xml.in.h:1
 #: ../capplets/sound/gnome-settings-sound.desktop.in.in.h:2
 msgid "Sound"
@@ -1846,8 +1949,7 @@ msgstr "Zpříst_upnění"
 #: ../capplets/keyboard/gnome-keyboard-properties.c:234
 #: ../capplets/sound/sound-properties-capplet.c:1026
 #: ../capplets/sound/sound-properties-capplet.c:1028
-msgid ""
-"Just apply settings and quit (compatibility only; now handled by daemon)"
+msgid "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
 "Pouze aplikovat nastavení a skončit (pouze pro kompatibilitu; nyní "
 "zpracovává démon)"
@@ -2467,404 +2569,6 @@ msgstr "_Přehrávání zvuku"
 #: ../capplets/sound/sound-properties.glade.h:24
 msgid "_Visual system beep"
 msgstr "_Vizuální systémové pípnutí"
-
-#: ../capplets/theme-switcher/gnome-theme-details.c:450
-msgid "Would you like to remove this theme?"
-msgstr "Chcete odstranit tento motiv?"
-
-#: ../capplets/theme-switcher/gnome-theme-details.c:515
-msgid "Theme deleted succesfully. Please select another theme."
-msgstr "Motiv byl úspěšně odstraněn. Zvolte prosím jiný motiv."
-
-#: ../capplets/theme-switcher/gnome-theme-details.c:524
-msgid "Theme can not be deleted"
-msgstr "Motiv nelze odstranit"
-
-#: ../capplets/theme-switcher/gnome-theme-details.c:696
-msgid ""
-"No themes could be found on your system.  This probably means that your "
-"\"Theme Preferences\" dialog was improperly installed, or you haven't "
-"installed the \"gnome-themes\" package."
-msgstr ""
-"Na vašem systému nebyly nalezeny žádné motivy. To pravděpodobně znamená, že "
-"váš dialog \"Nastavení motivů\" byl nesprávně nainstalován nebo jste "
-"nenainstalovali balíček \"gnome-themes\"."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:153
-#, c-format
-msgid ""
-"Can not install theme. \n"
-"The %s utility is not installed."
-msgstr ""
-"Nelze nainstalovat motiv. \n"
-"Nástroj %s není nainstalován."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:162
-msgid ""
-"Can not install theme. \n"
-"There was a problem while extracting the theme"
-msgstr ""
-"Nelze nainstalovat motiv. \n"
-"Vyskytl se problém během rozbalování motivu"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:323
-msgid "This theme is not in a supported format."
-msgstr "Tento motiv není v podporovaném formátu."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:334
-msgid "Failed to create temporary directory"
-msgstr "Nemohu vytvořit dočasný adresář"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:389
-#, c-format
-msgid "GNOME Theme %s correctly installed"
-msgstr "Motiv GNOME %s byl správně nainstalován"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:399
-msgid "The theme is an engine. You need to compile the theme."
-msgstr "Tento motiv je engine. Musíte je zkompilovat."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:410
-msgid "The file format is invalid"
-msgstr "Formát souboru není platný"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:449
-msgid "Installation Failed"
-msgstr "Instalace selhala"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:462
-#, c-format
-msgid "The theme \"%s\" has been installed."
-msgstr "Motiv \"%s\" byl nainstalován."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:468
-msgid "Would you like to apply it now, or keep your current theme?"
-msgstr "Chcete motiv ihned použít nebo chcete ponechat aktuální motiv?"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:470
-msgid "Keep Current Theme"
-msgstr "Zachovat stávající motiv"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:472
-msgid "Apply New Theme"
-msgstr "Použít nový motiv"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:528
-msgid "No theme file location specified to install"
-msgstr "Neurčeno umístění souboru motivu pro instalaci"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:543
-msgid "The theme file location specified to install is invalid"
-msgstr "Určení umístění pro instalaci souboru motivu není platné"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:569
-#, c-format
-msgid ""
-"Insufficient permissions to install the theme in:\n"
-"%s"
-msgstr ""
-"Nedostatečná oprávnění pro instalaci motivu do:\n"
-"%s"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:589
-msgid "The file format is invalid."
-msgstr "Formát souboru není platný."
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:616
-#, c-format
-msgid ""
-"%s is the path where the theme files will be installed. This can not be "
-"selected as the source location"
-msgstr ""
-"%s je cesta, kam budou nainstalovány soubory motivu. Nemůže být zvolena jako "
-"zdrojové umístění"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:675
-msgid "Select Theme"
-msgstr "Zvolte motiv"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.c:678
-msgid "Theme Packages"
-msgstr "Balíky s motivy"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.desktop.in.in.h:1
-msgid "Installs themes packages for various parts of the desktop"
-msgstr "Instaluje balíky motivů pro různé části pracovního prostředí"
-
-#: ../capplets/theme-switcher/gnome-theme-installer.desktop.in.in.h:2
-msgid "Theme Installer"
-msgstr "Instalátor motivů"
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:734
-msgid "Custom theme"
-msgstr "Vlastní motiv"
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:734
-msgid "You can save this theme by pressing the Save Theme button."
-msgstr "Tento můžete uložit stisknutím tlačítka Uložit motiv."
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1648
-msgid "Specify the filename of a theme to install"
-msgstr "Zadejte jméno souboru motivu k instalaci"
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1649
-msgid "filename"
-msgstr "jméno souboru"
-
-#: ../capplets/theme-switcher/gnome-theme-manager.c:1692
-msgid ""
-"The default theme schemas could not be found on your system.  This means "
-"that you probably don't have metacity installed, or that your gconf is "
-"configured incorrectly."
-msgstr ""
-"Schémata implicitního motivu nebyla nalezena na vašem systému. To znamená, "
-"že pravděpodobně nemáte nainstalováno metacity nebo je nesprávně nastaven "
-"váš gconf."
-
-#: ../capplets/theme-switcher/gnome-theme-package.xml.in.h:1
-msgid "Gnome Theme Package"
-msgstr "Balík motivu GNOME"
-
-#: ../capplets/theme-switcher/gnome-theme-save.c:73
-msgid "Theme name must be present"
-msgstr "Musí být vyplněn název motivu"
-
-#: ../capplets/theme-switcher/gnome-theme-save.c:144
-msgid "The theme already exists. Would you like to replace it?"
-msgstr "Tento motiv již existuje. Chcete jej nahradit?"
-
-#: ../capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:1
-msgid "Select themes for various parts of the desktop"
-msgstr "Vybrat motiv pro různé části pracovní plochy"
-
-#: ../capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:2
-#: ../vfs-methods/themus/themus-properties-main.c:92
-msgid "Theme"
-msgstr "Motiv"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:1
-msgid "<b>You do not have permission to change theme settings</b>"
-msgstr "<b>Nemáte oprávnění pro změnu nastavení motivu</b>"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:2
-msgid "Apply _Background"
-msgstr "Použít po_zadí"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:3
-msgid "Apply _Font"
-msgstr "Použít _písmo"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:4
-msgid "Background"
-msgstr "Pozadí"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:5
-msgid "C_ustomize..."
-msgstr "_Upravit..."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:6
-msgid "Colors"
-msgstr "Barvy"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:7
-msgid "Controls"
-msgstr "Ovládací prvky"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:8
-msgid "Icons"
-msgstr "Ikony"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:9
-msgid "Save Theme As..."
-msgstr "Uložit motiv jako..."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:10
-msgid "Save _Background Image"
-msgstr "Uložit _obrázek na pozadí"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:11
-msgid "Select theme for the desktop"
-msgstr "Vyberte motiv prostředí pracovní plochy"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:12
-msgid "Text"
-msgstr "Text"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:13
-msgid "The current controls theme does not support color schemes"
-msgstr ""
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:14
-msgid "Theme Details"
-msgstr "Podrobnosti o motivu"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:15
-msgid "Theme Preferences"
-msgstr "Nastavení motivu"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:16
-msgid "This theme does not suggest any particular font or background."
-msgstr "Tento motiv nenavrhuje žádné konkrétní písmo nebo pozadí."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:17
-msgid "This theme suggests a background:"
-msgstr "Tento motiv navrhuje pozadí:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:18
-msgid "This theme suggests a font and a background:"
-msgstr "Tento motiv navrhuje písmo a pozadí:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:19
-msgid "This theme suggests a font:"
-msgstr "Tento motiv navrhuje písmo:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:20
-msgid "Window Border"
-msgstr "Okraj okna"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:21
-msgid "_Description:"
-msgstr "_Popis:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:22
-msgid "_Input boxes:"
-msgstr "_Vstupní pole:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:23
-msgid "_Install Theme..."
-msgstr "Na_instalovat motiv..."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:24
-msgid "_Install..."
-msgstr "_Instalovat..."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:25
-msgid "_Name:"
-msgstr "_Jméno:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:27
-msgid "_Revert"
-msgstr "_Vrátit"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:28
-msgid "_Save Theme..."
-msgstr "_Uložit motiv..."
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:29
-msgid "_Selected items:"
-msgstr "_Vybrané položky:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:30
-msgid "_Windows:"
-msgstr "_Okna:"
-
-#: ../capplets/theme-switcher/theme-properties.glade.h:31
-msgid "theme selection tree"
-msgstr "strom výběru motivu"
-
-#: ../capplets/ui-properties/gnome-ui-properties.desktop.in.in.h:1
-msgid "Customize the appearance of toolbars and menubars in applications"
-msgstr "Upravte vzhled lišt nástrojů a panelů nabídek v aplikacích"
-
-#: ../capplets/ui-properties/gnome-ui-properties.desktop.in.in.h:2
-msgid "Menus & Toolbars"
-msgstr "Lišty nástrojů a nabídky"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:2
-msgid "<b>Behavior and Appearance</b>"
-msgstr "<b>Chování a vzhled</b>"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:3
-msgid "<b>Preview</b>"
-msgstr "<b>Náhled</b>"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:4
-msgid "C_ut"
-msgstr "_Vyjmout"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:5
-msgid "Icons only"
-msgstr "Pouze ikony"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:6
-msgid "Menu and Toolbar Preferences"
-msgstr "Nastavení lišt nástrojů a nabídek"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:7
-msgid "New File"
-msgstr "Nový soubor"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:8
-msgid "Open File"
-msgstr "Otevřít soubor"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:9
-msgid "Save File"
-msgstr "Uložit soubor"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:10
-msgid "Show _icons in menus"
-msgstr "Zobrazovat v nabídkách _ikony"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:11
-msgid "Text below icons"
-msgstr "Text pod ikonami"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:12
-msgid "Text beside icons"
-msgstr "Text vedle ikon"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:13
-msgid "Text only"
-msgstr "Pouze text"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:14
-msgid "Toolbar _button labels:"
-msgstr "_Popisy tlačítek lišty nástrojů:"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:15
-msgid "_Copy"
-msgstr "_Kopírovat"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:16
-msgid "_Detachable toolbars"
-msgstr "Lišty nástrojů lze _odpojit"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:17
-msgid "_Edit"
-msgstr "Up_ravit"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:18
-msgid "_Editable menu shortcut keys"
-msgstr "_Upravitelné klávesové zkratky v nabídce"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:19
-msgid "_File"
-msgstr "_Soubor"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:20
-msgid "_New"
-msgstr "_Nový"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:21
-msgid "_Open"
-msgstr "_Otevřít"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:22
-msgid "_Paste"
-msgstr "V_ložit"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:23
-msgid "_Print"
-msgstr "_Tisk"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:24
-msgid "_Quit"
-msgstr "U_končit"
-
-#: ../capplets/ui-properties/gnome-ui-properties.glade.h:25
-msgid "_Save"
-msgstr "_Uložit"
 
 #: ../capplets/windows/gnome-window-properties.c:344
 msgid "Cannot start the preferences application for your window manager"
@@ -3540,8 +3244,7 @@ msgid "Roll up"
 msgstr "Zarolovat"
 
 #: ../schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:1
-msgid ""
-"If true, the mime handlers for text/plain and text/* will be kept in sync"
+msgid "If true, the mime handlers for text/plain and text/* will be kept in sync"
 msgstr ""
 "Je-li true, jsou obsluhy mime pro text/plain a text/* udržovány "
 "synchronizované"
@@ -3798,8 +3501,7 @@ msgstr ""
 
 #: ../shell/control-center.schemas.in.h:14
 #, fuzzy
-msgid ""
-"if true, the control-center will close when a \"Common Task\" is activated"
+msgid "if true, the control-center will close when a \"Common Task\" is activated"
 msgstr "Je-li pravdivé, "
 
 #: ../shell/gnomecc.desktop.in.in.h:2
@@ -3906,20 +3608,17 @@ msgid "If set to true, then Type1 fonts will be thumbnailed."
 msgstr "Je-li nastaveno na true, budou tvořeny náhledy písem Type1."
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:5
-msgid ""
-"Set this key to the command used to create thumbnails for OpenType fonts."
+msgid "Set this key to the command used to create thumbnails for OpenType fonts."
 msgstr ""
 "Nastavte tento klíč na příkaz používaný pro vytváření náhledů pro písma "
 "OpenType."
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:6
 msgid "Set this key to the command used to create thumbnails for PCF fonts."
-msgstr ""
-"Nastavte tento klíč na příkaz používaný pro vytváření náhledů pro písma PCF."
+msgstr "Nastavte tento klíč na příkaz používaný pro vytváření náhledů pro písma PCF."
 
 #: ../vfs-methods/fontilus/fontilus.schemas.in.h:7
-msgid ""
-"Set this key to the command used to create thumbnails for TrueType fonts."
+msgid "Set this key to the command used to create thumbnails for TrueType fonts."
 msgstr ""
 "Nastavte tento klíč na příkaz používaný pro vytváření náhledů pro písma "
 "TrueType."
@@ -4072,16 +3771,14 @@ msgstr "Motiv ikon"
 
 #: ../vfs-methods/themus/themus.schemas.in.h:1
 msgid "If set to true, then installed themes will be thumbnailed."
-msgstr ""
-"Je-li nastaveno na true, budou zobrazovány náhledy nainstalovaných motivů."
+msgstr "Je-li nastaveno na true, budou zobrazovány náhledy nainstalovaných motivů."
 
 #: ../vfs-methods/themus/themus.schemas.in.h:2
 msgid "If set to true, then themes will be thumbnailed."
 msgstr "Je-li nastaveno na true, budou zobrazovány náhledy motivů."
 
 #: ../vfs-methods/themus/themus.schemas.in.h:3
-msgid ""
-"Set this key to the command used to create thumbnails for installed themes."
+msgid "Set this key to the command used to create thumbnails for installed themes."
 msgstr ""
 "Nastavte tento klíč na příkaz používaný pro vytváření náhledů "
 "nainstalovaných motivů."
@@ -4122,3 +3819,4 @@ msgstr "Použít motiv"
 #: ../vfs-methods/themus/themus-theme-applier.desktop.in.in.h:2
 msgid "Sets the default theme"
 msgstr "Nastaví implicitní motiv"
+
