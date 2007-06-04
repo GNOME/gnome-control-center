@@ -1,3 +1,91 @@
+gnome-control-center 2.19.3
+
+about-me:
+- Use g_file_set_contents instead of a single fwrite (Bastien Nocera)
+- Set default permission of ~/.face to 0644 (Bastien Nocera)
+
+accessibility:
+- Set button images via code instead of relying on Glade, so they respect
+  the gtk-button-images xsetting (Jens Granseuer) (#362880)
+
+appearance:
+- New capplet to group appearance Settings (Thomas Wood, Jens Granseuer,
+  Denis Washington)
+
+at-properties:
+- Fix critical warning (Jens Granseuer)
+- Set button images via code instead of relying on Glade, so they respect
+  the gtk-button-images xsetting (Jens Granseuer) (#362880)
+
+background:
+- After removing a wallpaper, select the next one in the list instead of always
+  going to "No Wallpaper" (Jens Granseuer) (#432514)
+
+control center:
+- Removed superfluous X-SuSE translate tag (Stanislav Brabec)
+
+display:
+- Survive XRandR returning weird results for some dual-screen setups
+  (Jens Granseuer) (#356520)
+
+keybindings:
+- Add a noarch pkgconfig file to allow apps to know where to add their
+  keybindings (Bastien Nocera) (#434591)
+- Fix keysdir substitution (Bastien Nocera) (#434591)
+- Added g_thread_init as required by glib (Jens Granseuer)
+
+keyboard:
+- Set button images via code instead of relying on Glade, so they respect
+  the gtk-button-images xsetting (Jens Granseuer)
+- Added vendor list to the box, if any (Sergey Udaltsov)
+- Make buildable with libxklavier 3.2 (Sergey Udaltsov)
+
+mouse:
+- Port from deprecated GtkOptionMenu to GtkComboBox (Jens Granseuer)
+
+settings daemon:
+- More refactoring of loadable modules (Rodrigo Moya)
+- Use "eject -T" as the default eject command (Jens Granseuer) (#386297)
+- Double-check that DBUS really passed an error (Chad Miller) (#439208)
+- Sync libegg modules (Jens Granseuer) (#441042)
+- Set the device property to the correct value before opening the mixer
+  (Jan Arne Petersen) (#441552)
+
+sound:
+- Use g_timeout_add/remove instead of deprecated GTK versions (Jens Granseuer)
+- Set non-0 pulse step for the progress bar to actually make it move (Jens
+  Granseuer) (#441587)
+
+theme switcher:
+- Fix memory leaks (Jens Granseuer)
+
+themus:
+- Use OnlyShowIn property to not list Themus in the menu editor (Sebastien
+  Bacher) (#434956)
+
+general:
+- Add GConfPropertyEditor support for GtkComboBox (Jens Granseuer)
+- Add support for unsetting GConf values if the conversion handlers return null
+  (Jens Granseuer)
+- Constify a number of function arguments (Jens Granseuer)
+- Add a property editor for GtkTreeView and fix crashes with all peditors if the
+  requested key is not available (Jens Granseuer)
+- Don't call gconf_value_free with a NULL value (Jens Granseuer)
+- Recognize both "gtk-color-scheme" and "gtk_color_scheme" (Jens Granseuer)
+
+updated translations:
+- bg (Alexander Shopov)
+- cs (Jakub Friedl)
+- en_GB (David Lodge)
+- es (Jorge Gonzalez)
+- et (Priit Laes)
+- he (Yair Hershkovitz)
+- hu (Gabor Kelemen)
+- nb (Kjartan Maraas)
+- sv (Daniel Nylander)
+- th (Theppitak Karoonboonyanan)
+- zh_CN (Funda Wang)
+------------------------------------------------------------------------------
 gnome-control-center 2.19.1
 
 about-me:
