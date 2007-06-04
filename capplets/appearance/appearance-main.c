@@ -62,11 +62,30 @@ init_appearance_data (int argc, char **argv)
   return data;
 }
 
+static void
+main_window_response (GtkWidget *widget,
+                      gint response_id,
+                      AppearanceData *data)
+{
+  if (response_id == GTK_RESPONSE_CLOSE ||
+      response_id == GTK_RESPONSE_DELETE_EVENT)
+  {
+    gtk_main_quit ();
+
+    themes_shutdown (data);
+    desktop_shutdown (data);
+    font_shutdown (data);
+
+    g_object_unref (data->client);
+    g_object_unref (data->xml);
+  }
+}
+
 int
 main (int argc, char **argv)
 {
   AppearanceData *data;
-  GtkWidget *w;
+  GtkWidget *win;
   GnomeProgram *program;
 
   /* init */
@@ -91,20 +110,17 @@ main (int argc, char **argv)
   ui_init (data);
 
   /* prepare the main window */
-  w = glade_xml_get_widget (data->xml, "appearance_window");
-  capplet_set_icon (w, "gnome-settings-theme");
-  gtk_widget_show_all (w);
-  g_signal_connect (G_OBJECT (w), "delete-event", (GCallback) gtk_main_quit, NULL);
+  win = glade_xml_get_widget (data->xml, "appearance_window");
+  capplet_set_icon (win, "gnome-settings-theme");
+  gtk_widget_show_all (win);
 
-  w = glade_xml_get_widget (data->xml, "close_button");
-  g_signal_connect (G_OBJECT (w), "clicked", (GCallback) gtk_main_quit, NULL);
+  g_signal_connect_after (G_OBJECT (win), "response",
+                          G_CALLBACK (main_window_response), data);
 
   /* start the mainloop */
   gtk_main ();
 
   /* free stuff */
-  g_object_unref (data->client);
-  g_object_unref (data->xml);
   g_free (data);
   g_object_unref (program);
 

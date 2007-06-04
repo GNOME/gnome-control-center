@@ -19,3 +19,4 @@
  */
 
 void font_init (AppearanceData *data);
+void font_shutdown (AppearanceData *data);

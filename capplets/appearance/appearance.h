@@ -27,6 +27,8 @@
 #include <gconf/gconf-client.h>
 #include <libgnomeui/gnome-thumbnail.h>
 
+#include "gnome-theme-info.h"
+
 typedef struct {
   GConfClient *client;
   int argc;
@@ -50,4 +52,9 @@ typedef struct {
 
   /* font */
   GtkWidget *font_details;
+
+  /* themes */
+  GtkListStore *theme_store;
+  GSList *theme_queue;
+  GnomeThemeMetaInfo *theme_custom;
 } AppearanceData;

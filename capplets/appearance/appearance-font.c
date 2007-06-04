@@ -889,16 +889,6 @@ cb_show_details (GtkWidget *button,
 }
 #endif /* HAVE_XFT2 */
 
-static void
-cb_delete_event (GtkWidget *widget,
-		 GdkEvent  *event,
-		 gpointer  *user_data)
-{
-  g_slist_foreach (font_pairs, (GFunc) g_free, NULL);
-  g_slist_free (font_pairs);
-  g_free (old_font);
-}
-
 void
 font_init (AppearanceData *data)
 {
@@ -975,7 +965,12 @@ font_init (AppearanceData *data)
 #else /* !HAVE_XFT2 */
   gtk_widget_hide (glade_xml_get_widget (data->xml, "font_render_frame"));
 #endif /* HAVE_XFT2 */
+}
 
-  g_signal_connect_after (glade_xml_get_widget (data->xml, "appearance_window"),
-			  "delete-event", G_CALLBACK (cb_delete_event), NULL);
+void
+font_shutdown (AppearanceData *data)
+{
+  g_slist_foreach (font_pairs, (GFunc) g_free, NULL);
+  g_slist_free (font_pairs);
+  g_free (old_font);
 }

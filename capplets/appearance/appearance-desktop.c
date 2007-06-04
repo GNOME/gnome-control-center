@@ -680,21 +680,6 @@ wp_file_open_dialog (GtkWidget *widget,
 }
 
 static void
-appearance_window_response (GtkWidget *widget,
-                            gint response_id,
-                            AppearanceData *data)
-{
-  if (response_id == GTK_RESPONSE_CLOSE ||
-      response_id == GTK_RESPONSE_DELETE_EVENT)
-  {
-    gnome_wp_xml_save_list (data);
-    g_object_unref (data->wp_thumbs);
-    g_object_ref_sink (data->wp_filesel);
-    g_object_unref (data->wp_filesel);
-  }
-}
-
-static void
 wp_dragged_image (GtkWidget *widget,
                   GdkDragContext *context,
                   gint x, gint y,
@@ -945,9 +930,6 @@ desktop_init (AppearanceData *data)
                                                  G_TYPE_STRING,
                                                  G_TYPE_STRING));
 
-  g_signal_connect_after (G_OBJECT (glade_xml_get_widget (data->xml, "appearance_window")), "response",
-                          G_CALLBACK (appearance_window_response), data);
-
   data->wp_view = GTK_ICON_VIEW (glade_xml_get_widget (data->xml, "wp_view"));
   gtk_icon_view_set_model (data->wp_view, GTK_TREE_MODEL (data->wp_model));
 
@@ -1056,4 +1038,13 @@ desktop_init (AppearanceData *data)
 
   g_signal_connect (data->wp_filesel, "update-preview",
                     G_CALLBACK (wp_update_preview), data);
+}
+
+void
+desktop_shutdown (AppearanceData *data)
+{
+  gnome_wp_xml_save_list (data);
+  g_object_unref (data->wp_thumbs);
+  g_object_ref_sink (data->wp_filesel);
+  g_object_unref (data->wp_filesel);
 }

@@ -19,101 +19,72 @@
  */
 
 #include "appearance.h"
-#include "gnome-theme-info.h"
 #include "theme-thumbnail.h"
 #include "gnome-theme-apply.h"
 
 #include <libwindow-settings/gnome-wm-manager.h>
 #include <string.h>
 
+#define GTK_THEME_KEY "/desktop/gnome/interface/gtk_theme"
+#define METACITY_THEME_KEY "/apps/metacity/general/theme"
+#define ICON_THEME_KEY "/desktop/gnome/interface/icon_theme"
+#define COLOR_SCHEME_KEY "/desktop/gnome/interface/gtk_color_scheme"
+
+#define CUSTOM_THEME_NAME "__custom__"
+
 enum {
-  THEME_DISPLAY_NAME_COLUMN,
-  THEME_PIXBUF_COLUMN,
-  THEME_NAME_COLUMN,
+  COL_LABEL,
+  COL_THUMBNAIL,
+  COL_NAME,
+  NUM_COLS
 };
 
-struct theme_thumbnail_func_data {
-  GList *list;
-  GtkListStore *store;
-};
+static gboolean theme_thumbnail_generate (AppearanceData *data);
 
-/* Theme functions */
-static void theme_changed_func (gpointer uri, AppearanceData *data);
-static void theme_thumbnail_func (GdkPixbuf *pixbuf, struct theme_thumbnail_func_data *data);
-static gboolean theme_thumbnail_generate (struct theme_thumbnail_func_data *data);
-
-/* GUI Callbacks */
-static void theme_custom_cb (GtkWidget *button, AppearanceData *data);
-static void theme_install_cb (GtkWidget *button, AppearanceData *data);
-static void theme_delete_cb (GtkWidget *button, AppearanceData *data);
-static void theme_selection_changed_cb (GtkWidget *icon_view, AppearanceData *data);
-
-void
-themes_init (AppearanceData *data)
+static gchar *
+get_default_string_from_key (GConfClient *client, const char *key)
 {
-  GtkWidget *w;
-  GList *theme_list;
-  GtkListStore *theme_store;
-  GtkTreeModel *sort_model;
+  GConfValue *value;
+  gchar *str = NULL;
 
-  /* initialise some stuff */
-  gnome_theme_init (NULL);
-  gnome_wm_manager_init ();
+  value = gconf_client_get_default_from_schema (client, key, NULL);
 
-  /* connect button signals */
-  g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "theme_custom")), "clicked", (GCallback) theme_custom_cb, data);
-  g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "theme_install")), "clicked", (GCallback) theme_install_cb, data);
-  g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "theme_delete")), "clicked", (GCallback) theme_delete_cb, data);
-
-  /* connect theme list signals */
-  g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "theme_list")), "selection-changed", (GCallback) theme_selection_changed_cb, data);
-
-  /* set up theme list */
-  theme_store = gtk_list_store_new (3, G_TYPE_STRING, GDK_TYPE_PIXBUF, G_TYPE_STRING);
-
-  theme_list = gnome_theme_meta_info_find_all ();
-  gnome_theme_info_register_theme_change ((GFunc) theme_changed_func, data);
-  if (theme_list) {
-    struct theme_thumbnail_func_data *tdata;
-    GdkPixbuf *temp;
-    GList *l;
-
-    tdata = g_new (struct theme_thumbnail_func_data, 1);
-    tdata->list = theme_list;
-    tdata->store = theme_store;
-
-    temp = gdk_pixbuf_new_from_file (GNOMECC_PIXMAP_DIR "/theme-thumbnailing.png", NULL);
-
-    for (l = theme_list; l; l = l->next) {
-      GnomeThemeMetaInfo *info = l->data;
-
-      gtk_list_store_insert_with_values (theme_store, NULL, 0,
-          THEME_DISPLAY_NAME_COLUMN, info->readable_name,
-          THEME_NAME_COLUMN, info->name,
-          THEME_PIXBUF_COLUMN, temp,
-          -1);
-    }
-
-    if (temp)
-      g_object_unref (temp);
-    theme_thumbnail_generate (tdata);
+  if (value) {
+    if (value->type == GCONF_VALUE_STRING)
+      str = gconf_value_to_string (value);
+    gconf_value_free (value);
   }
 
-  w = glade_xml_get_widget (data->xml, "theme_list");
-  sort_model = gtk_tree_model_sort_new_with_model (GTK_TREE_MODEL (theme_store));
-  gtk_icon_view_set_model (GTK_ICON_VIEW (w), GTK_TREE_MODEL (sort_model));
-  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (sort_model), THEME_DISPLAY_NAME_COLUMN, GTK_SORT_ASCENDING);
-
-  w = glade_xml_get_widget (data->xml, "theme_install");
-  gtk_button_set_image (GTK_BUTTON (w),
-                        gtk_image_new_from_stock ("gtk-open", GTK_ICON_SIZE_BUTTON));
+  return str;
 }
 
 static gboolean
-theme_thumbnail_generate (struct theme_thumbnail_func_data *data)
+find_in_model (GtkTreeModel *model, const gchar *value, gint column, GtkTreeIter *hit)
 {
-    generate_theme_thumbnail_async (data->list->data, (ThemeThumbnailFunc) theme_thumbnail_func, data, NULL);
+  GtkTreeIter iter;
+  gboolean valid;
+  gchar *test;
+
+  if (!value)
     return FALSE;
+
+  for (valid = gtk_tree_model_get_iter_first (model, &iter); valid;
+       valid = gtk_tree_model_iter_next (model, &iter))
+  {
+    gtk_tree_model_get (model, &iter, column, &test, -1);
+
+    if (test) {
+      gint cmp = strcmp (test, value);
+      g_free (test);
+
+      if (!cmp) {
+        *hit = iter;
+        return TRUE;
+      }
+    }
+  }
+
+  return FALSE;
 }
 
 /** Theme Callbacks **/
@@ -124,48 +95,28 @@ theme_changed_func (gpointer uri, AppearanceData *data)
   /* TODO: add/change/remove themes from the model as appropriate */
 }
 
-
 static void
-theme_thumbnail_func (GdkPixbuf *pixbuf, struct theme_thumbnail_func_data *data)
+theme_thumbnail_func (GdkPixbuf *pixbuf, AppearanceData *data)
 {
-  GtkTreeIter iter;
-  GnomeThemeMetaInfo *info = data->list->data;
-  GtkTreeModel *model = GTK_TREE_MODEL (data->store);
+  GnomeThemeMetaInfo *info = data->theme_queue->data;
 
   /* find item in model and update thumbnail */
-  if (pixbuf && gtk_tree_model_get_iter_first (model, &iter)) {
+  if (pixbuf) {
+    GtkTreeIter iter;
+    GtkTreeModel *model = GTK_TREE_MODEL (data->theme_store);
 
-    do {
-      gchar *name;
-      gint cmp;
+    if (find_in_model (model, info->name, COL_NAME, &iter))
+      gtk_list_store_set (data->theme_store, &iter, COL_THUMBNAIL, pixbuf, -1);
 
-      gtk_tree_model_get (model, &iter,
-                          THEME_NAME_COLUMN, &name,
-                          -1);
-
-      cmp = strcmp (name, info->name);
-      g_free (name);
-
-      if (!cmp) {
-      	gtk_list_store_set (data->store, &iter,
-            THEME_PIXBUF_COLUMN, pixbuf, -1);
-        break;
-      }
-
-    } while (gtk_tree_model_iter_next (model, &iter));
+    g_object_unref (pixbuf);
   }
 
-  if (pixbuf)
-    g_object_unref (pixbuf);
+  data->theme_queue = g_slist_remove (data->theme_queue, info);
 
-  data->list = g_list_remove (data->list, info);
-
-  if (data->list)
+  if (data->theme_queue)
     /* we can't call theme_thumbnail_generate directly since the thumbnail
      * factory hasn't yet cleaned up at this point */
     g_idle_add ((GSourceFunc) theme_thumbnail_generate, data);
-  else
-    g_free (data);
 }
 
 /** GUI Callbacks **/
@@ -183,13 +134,16 @@ theme_selection_changed_cb (GtkWidget *icon_view, AppearanceData *data)
 
   model = gtk_icon_view_get_model (GTK_ICON_VIEW (icon_view));
   gtk_tree_model_get_iter (model, &iter, selection->data);
-  gtk_tree_model_get (model, &iter, THEME_NAME_COLUMN, &name, -1);
+  gtk_tree_model_get (model, &iter, COL_NAME, &name, -1);
 
-  theme = gnome_theme_meta_info_find (name);
+  if (!strcmp (name, CUSTOM_THEME_NAME))
+    theme = data->theme_custom;
+  else
+    theme = gnome_theme_meta_info_find (name);
+
   if (theme)
     gnome_meta_theme_set (theme);
 
-  g_free (theme);
   g_free (name);
   g_list_foreach (selection, (GFunc) gtk_tree_path_free, NULL);
   g_list_free (selection);
@@ -216,4 +170,208 @@ static void
 theme_delete_cb (GtkWidget *button, AppearanceData *data)
 {
   /* TODO: Delete the selected theme */
+}
+
+static void
+theme_select_after_realize (GtkIconView *icon_view,
+                            const gchar *theme)
+{
+  GtkTreeIter iter;
+  GtkTreeModel *model = gtk_icon_view_get_model (icon_view);
+
+  if (find_in_model (model, theme, COL_NAME, &iter)) {
+    GtkTreePath *path = gtk_tree_model_get_path (model, &iter);
+    gtk_icon_view_select_path (icon_view, path);
+    gtk_icon_view_scroll_to_path (icon_view, path, FALSE, 0.5, 0.0);
+    gtk_tree_path_free (path);
+  }
+}
+
+static gboolean
+theme_thumbnail_generate (AppearanceData *data)
+{
+  generate_theme_thumbnail_async (data->theme_queue->data, (ThemeThumbnailFunc) theme_thumbnail_func, data, NULL);
+  return FALSE;
+}
+
+static void
+theme_queue_for_thumbnail (GnomeThemeMetaInfo *theme, AppearanceData *data)
+{
+  if (data->theme_queue == NULL)
+    g_idle_add ((GSourceFunc) theme_thumbnail_generate, data);
+
+  data->theme_queue = g_slist_append (data->theme_queue, theme);
+}
+
+static void
+theme_add_custom (GtkIconView *icon_view, GnomeThemeMetaInfo *info, AppearanceData *data)
+{
+  GnomeThemeMetaInfo *custom = data->theme_custom;
+
+  /* if info is not NULL, we'll copy those theme settings over */
+  if (info != NULL) {
+    g_free (custom->gtk_theme_name);
+    g_free (custom->icon_theme_name);
+    g_free (custom->metacity_theme_name);
+    g_free (custom->gtk_color_scheme);
+    custom->gtk_theme_name = NULL;
+    custom->icon_theme_name = NULL;
+    custom->metacity_theme_name = NULL;
+    custom->gtk_color_scheme = NULL;
+
+    if (info->gtk_theme_name)
+      custom->gtk_theme_name = g_strdup (info->gtk_theme_name);
+    else
+      custom->gtk_theme_name = get_default_string_from_key (data->client, GTK_THEME_KEY);
+
+    if (info->icon_theme_name)
+      custom->icon_theme_name = g_strdup (info->icon_theme_name);
+    else
+      custom->icon_theme_name = get_default_string_from_key (data->client, ICON_THEME_KEY);
+
+    if (info->metacity_theme_name)
+      custom->metacity_theme_name = g_strdup (info->metacity_theme_name);
+    else
+      custom->metacity_theme_name = get_default_string_from_key (data->client, METACITY_THEME_KEY);
+
+    if (info->gtk_color_scheme)
+      custom->gtk_color_scheme = g_strdup (info->gtk_color_scheme);
+    else
+      custom->gtk_color_scheme = get_default_string_from_key (data->client, COLOR_SCHEME_KEY);
+  }
+
+  gtk_list_store_insert_with_values (data->theme_store, NULL, 0,
+      COL_LABEL, custom->readable_name,
+      COL_NAME, custom->name,
+      -1);
+
+  theme_queue_for_thumbnail (custom, data);
+}
+
+static void
+theme_remove_custom (GtkIconView *icon_view, AppearanceData *data)
+{
+  GtkTreeIter iter;
+
+  if (find_in_model (data->theme_store, CUSTOM_THEME_NAME, COL_NAME, &iter))
+    gtk_list_store_remove (data->theme_store, &iter);
+}
+
+static gboolean
+theme_is_equal (const GnomeThemeMetaInfo *a, const GnomeThemeMetaInfo *b)
+{
+  if (!(a->gtk_theme_name && b->gtk_theme_name) ||
+      strcmp (a->gtk_theme_name, b->gtk_theme_name))
+    return FALSE;
+
+  if (!(a->gtk_color_scheme && b->gtk_color_scheme) ||
+      strcmp (a->gtk_color_scheme, b->gtk_color_scheme))
+    return FALSE;
+
+  if (!(a->icon_theme_name && b->icon_theme_name) ||
+      strcmp (a->icon_theme_name, b->icon_theme_name))
+    return FALSE;
+
+  if (!(a->metacity_theme_name && b->metacity_theme_name) ||
+      strcmp (a->metacity_theme_name, b->metacity_theme_name))
+    return FALSE;
+
+  return TRUE;
+}
+
+void
+themes_init (AppearanceData *data)
+{
+  GtkWidget *w;
+  GList *theme_list, *l;
+  GtkListStore *theme_store;
+  GtkTreeModel *sort_model;
+  gchar *meta_theme = NULL;
+  GdkPixbuf *temp;
+
+  /* initialise some stuff */
+  gnome_theme_init (NULL);
+  gnome_wm_manager_init ();
+
+  data->theme_queue = NULL;
+  data->theme_custom = gnome_theme_meta_info_new ();
+
+  /* connect button signals */
+  g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "theme_custom")), "clicked", (GCallback) theme_custom_cb, data);
+  g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "theme_install")), "clicked", (GCallback) theme_install_cb, data);
+  g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "theme_delete")), "clicked", (GCallback) theme_delete_cb, data);
+
+  /* connect theme list signals */
+  g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "theme_list")), "selection-changed", (GCallback) theme_selection_changed_cb, data);
+
+  /* set up theme list */
+  data->theme_store = theme_store =
+      gtk_list_store_new (NUM_COLS, G_TYPE_STRING, GDK_TYPE_PIXBUF, G_TYPE_STRING);
+
+  theme_list = gnome_theme_meta_info_find_all ();
+  gnome_theme_info_register_theme_change ((GFunc) theme_changed_func, data);
+
+  data->theme_custom->name = g_strdup (CUSTOM_THEME_NAME);
+  data->theme_custom->readable_name = g_strdup ("Custom"); /* FIXME: translate */
+  data->theme_custom->gtk_theme_name =
+        gconf_client_get_string (data->client, GTK_THEME_KEY, NULL);
+  data->theme_custom->gtk_color_scheme =
+        gconf_client_get_string (data->client, COLOR_SCHEME_KEY, NULL);
+  data->theme_custom->metacity_theme_name =
+        gconf_client_get_string (data->client, METACITY_THEME_KEY, NULL);
+  data->theme_custom->icon_theme_name =
+        gconf_client_get_string (data->client, ICON_THEME_KEY, NULL);
+
+  temp = gdk_pixbuf_new_from_file (GNOMECC_PIXMAP_DIR "/theme-thumbnailing.png", NULL);
+
+  for (l = theme_list; l; l = l->next) {
+    GnomeThemeMetaInfo *info = l->data;
+
+    data->theme_queue = g_slist_prepend (data->theme_queue, info);
+
+    gtk_list_store_insert_with_values (theme_store, NULL, 0,
+        COL_LABEL, info->readable_name,
+        COL_NAME, info->name,
+        COL_THUMBNAIL, temp,
+        -1);
+
+    if (!meta_theme && theme_is_equal (data->theme_custom, info))
+      meta_theme = info->name;
+  }
+
+  if (!meta_theme) {
+    /* add custom theme */
+    meta_theme = data->theme_custom->name;
+    data->theme_queue = g_slist_prepend (data->theme_queue, data->theme_custom);
+
+    gtk_list_store_insert_with_values (theme_store, NULL, 0,
+        COL_LABEL, data->theme_custom->readable_name,
+        COL_NAME, meta_theme,
+        COL_THUMBNAIL, temp,
+        -1);
+  }
+
+  if (temp)
+    g_object_unref (temp);
+  
+  w = glade_xml_get_widget (data->xml, "theme_list");
+  sort_model = gtk_tree_model_sort_new_with_model (GTK_TREE_MODEL (theme_store));
+  gtk_icon_view_set_model (GTK_ICON_VIEW (w), GTK_TREE_MODEL (sort_model));
+  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (sort_model), COL_LABEL, GTK_SORT_ASCENDING);
+
+  g_signal_connect_after (G_OBJECT (w), "realize",
+                          G_CALLBACK (theme_select_after_realize), meta_theme);
+
+  w = glade_xml_get_widget (data->xml, "theme_install");
+  gtk_button_set_image (GTK_BUTTON (w),
+                        gtk_image_new_from_stock (GTK_STOCK_OPEN, GTK_ICON_SIZE_BUTTON));
+
+  theme_thumbnail_generate (data);
+}
+
+void
+themes_shutdown (AppearanceData *data)
+{
+  gnome_theme_meta_info_free (data->theme_custom);
+  g_slist_free (data->theme_queue);
 }

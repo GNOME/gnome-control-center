@@ -59,8 +59,8 @@ static void color_scheme_changed (GObject *settings, GParamSpec *pspec, Appearan
 /* GUI Callbacks */
 
 static void color_button_clicked_cb (GtkWidget *colorbutton, AppearanceData *data);
-static GConfValue *conv_to_widget_cb (GConfPropertyEditor *peditor, GConfValue *value);
-static GConfValue *conv_from_widget_cb (GConfPropertyEditor *peditor, GConfValue *value);
+static GConfValue *conv_to_widget_cb (GConfPropertyEditor *peditor, const GConfValue *value);
+static GConfValue *conv_from_widget_cb (GConfPropertyEditor *peditor, const GConfValue *value);
 
 
 void
@@ -90,8 +90,6 @@ style_init (AppearanceData *data)
   g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "bg_colorbutton")), "color-set", (GCallback) color_button_clicked_cb, data);
   g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "base_colorbutton")), "color-set", (GCallback) color_button_clicked_cb, data);
   g_signal_connect (G_OBJECT (glade_xml_get_widget (data->xml, "selected_bg_colorbutton")), "color-set", (GCallback) color_button_clicked_cb, data);
-
-
 }
 
 static void
@@ -159,7 +157,7 @@ prepare_list (AppearanceData *data, GtkWidget *list, enum ThemeType type)
       case METACITY_THEMES:
         thumbnail = generate_metacity_theme_thumbnail ((GnomeThemeInfo *) l->data);
         break;
-        
+
       default:
         thumbnail = NULL;
     } 
@@ -240,7 +238,7 @@ find_string_in_model (GtkTreeModel *model, const gchar *value, gint column)
 }
 
 static GConfValue *
-conv_to_widget_cb (GConfPropertyEditor *peditor, GConfValue *value)
+conv_to_widget_cb (GConfPropertyEditor *peditor, const GConfValue *value)
 {
   GtkTreeModel *store;
   GtkTreeView *list;
@@ -282,7 +280,7 @@ conv_to_widget_cb (GConfPropertyEditor *peditor, GConfValue *value)
 }
 
 static GConfValue *
-conv_from_widget_cb (GConfPropertyEditor *peditor, GConfValue *value)
+conv_from_widget_cb (GConfPropertyEditor *peditor, const GConfValue *value)
 {
   GConfValue *new_value;
   gchar *list_value = NULL;
