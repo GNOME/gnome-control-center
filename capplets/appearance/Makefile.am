@@ -28,41 +28,58 @@ gnome_appearance_properties_SOURCES = \
 	wp-cellrenderer.h
 
 gnome_appearance_properties_LDADD = \
-	$(GNOMECC_CAPPLETS_LIBS) 					\
-	$(FONT_CAPPLET_LIBS) 						\
-	$(METACITY_LIBS)						\
-	$(top_builddir)/libwindow-settings/libgnome-window-settings.la  \
+	$(GNOMECC_CAPPLETS_LIBS) \
+	$(FONT_CAPPLET_LIBS) \
+	$(METACITY_LIBS) \
+	$(top_builddir)/libwindow-settings/libgnome-window-settings.la \
 	$(top_builddir)/capplets/common/libcommon.la
 gnome_appearance_properties_LDFLAGS = -export-dynamic
 
-@INTLTOOL_DESKTOP_RULE@
-
 gladedir = $(pkgdatadir)/glade
-glade_DATA = appearance.glade
+dist_glade_DATA = appearance.glade
 
 pixmapdir = $(pkgdatadir)/pixmaps
-pixmap_DATA =             \
-        theme-thumbnailing.png  \        
-        subpixel-bgr.png  \
-        subpixel-rgb.png  \
+dist_pixmap_DATA = \
+        theme-thumbnailing.png \        
+        subpixel-bgr.png \
+        subpixel-rgb.png \
         subpixel-vbgr.png \
         subpixel-vrgb.png
 
 wallpaperdir = $(datadir)/gnome-background-properties
 
+@INTLTOOL_DESKTOP_RULE@
+
 desktopdir = $(datadir)/applications
 desktop_in_files = gnome-appearance-properties.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
-INCLUDES = 						\
-	$(METACITY_CFLAGS)				\
-	$(GNOMECC_CAPPLETS_CFLAGS)			\
+@INTLTOOL_XML_RULE@
+
+xml_in_files = gnome-theme-package.xml.in
+
+mimedir = $(datadir)/mime/packages
+mime_DATA = $(xml_in_files:.xml.in=.xml)
+
+INCLUDES = \
+	$(METACITY_CFLAGS) \
+	$(GNOMECC_CAPPLETS_CFLAGS) \
 	$(FONT_CAPPLET_CFLAGS) \
-	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
-	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
-	-DGNOMECC_GLADE_DIR="\"$(gladedir)\""		\
-	-DGNOMECC_PIXMAP_DIR="\"$(pixmapdir)\""		\
+	-DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
+	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\"" \
+	-DGNOMECC_GLADE_DIR="\"$(gladedir)\"" \
+	-DGNOMECC_PIXMAP_DIR="\"$(pixmapdir)\"" \
 	-DWALLPAPER_DATADIR="\"$(wallpaperdir)\""
 
-CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(desktop_in_files) $(desktop_DATA)
-EXTRA_DIST = $(glade_DATA) $(pixmap_DATA)
+CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(desktop_in_files) $(desktop_DATA) $(mime_DATA)
+EXTRA_DIST = $(xml_in_files)
+
+install-data-hook:
+if ENABLE_UPDATE_MIMEDB
+	$(UPDATE_MIME_DATABASE) "$(DESTDIR)$(datadir)/mime"
+endif
+
+uninstall-hook:
+if ENABLE_UPDATE_MIMEDB
+	$(UPDATE_MIME_DATABASE) "$(DESTDIR)$(datadir)/mime"
+endif

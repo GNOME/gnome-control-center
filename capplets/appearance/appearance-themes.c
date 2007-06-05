@@ -78,7 +78,8 @@ find_in_model (GtkTreeModel *model, const gchar *value, gint column, GtkTreeIter
       g_free (test);
 
       if (!cmp) {
-        *hit = iter;
+      	if (hit)
+          *hit = iter;
         return TRUE;
       }
     }
@@ -152,9 +153,13 @@ theme_selection_changed_cb (GtkWidget *icon_view, AppearanceData *data)
 static void
 theme_custom_cb (GtkWidget *button, AppearanceData *data)
 {
-  GtkWidget *w, *parent;
+  GtkWidget *w, *parent, *icon_view;
   w = glade_xml_get_widget (data->xml, "theme_details");
   parent = glade_xml_get_widget (data->xml, "appearance_window");
+  icon_view = glade_xml_get_widget (data->xml, "themes_list");
+
+  /* select the "custom" metatheme */
+  theme_set_custom_from_selected (icon_view, data);
 
   gtk_window_set_transient_for (GTK_WINDOW (w), GTK_WINDOW (parent));
   gtk_widget_show_all (w);
@@ -203,13 +208,33 @@ theme_queue_for_thumbnail (GnomeThemeMetaInfo *theme, AppearanceData *data)
   data->theme_queue = g_slist_append (data->theme_queue, theme);
 }
 
+static GnomeThemeMetaInfo *
+theme_get_selected (GtkIconView *icon_view)
+{
+  GnomeThemeMetaInfo *theme = NULL;
+  GList *selected = gtk_icon_view_get_selected_items (icon_view);
+
+  if (selected) {
+    theme = selected->data;
+
+    g_list_foreach (selected, gtk_tree_path_free, NULL);
+    g_list_free (selected);
+  }
+
+  return theme;
+}
+
 static void
-theme_add_custom (GtkIconView *icon_view, GnomeThemeMetaInfo *info, AppearanceData *data)
+theme_set_custom_from_selected (GtkIconView *icon_view, AppearanceData *data)
 {
   GnomeThemeMetaInfo *custom = data->theme_custom;
+  GnomeThemeMetaInfo *theme = theme_get_selected (icon_view);
+
+  if (theme == custom)
+    return;
 
   /* if info is not NULL, we'll copy those theme settings over */
-  if (info != NULL) {
+  if (theme != NULL) {
     g_free (custom->gtk_theme_name);
     g_free (custom->icon_theme_name);
     g_free (custom->metacity_theme_name);
@@ -240,11 +265,14 @@ theme_add_custom (GtkIconView *icon_view, GnomeThemeMetaInfo *info, AppearanceDa
       custom->gtk_color_scheme = get_default_string_from_key (data->client, COLOR_SCHEME_KEY);
   }
 
-  gtk_list_store_insert_with_values (data->theme_store, NULL, 0,
-      COL_LABEL, custom->readable_name,
-      COL_NAME, custom->name,
-      -1);
+  if (!find_in_model (data->theme_store, custom->name, COL_NAME, NULL)) {
+    gtk_list_store_insert_with_values (data->theme_store, NULL, 0,
+        COL_LABEL, custom->readable_name,
+        COL_NAME, custom->name,
+        -1);
+  }
 
+  /* update the theme thumbnail */
   theme_queue_for_thumbnail (custom, data);
 }
 
@@ -353,7 +381,7 @@ themes_init (AppearanceData *data)
 
   if (temp)
     g_object_unref (temp);
-  
+
   w = glade_xml_get_widget (data->xml, "theme_list");
   sort_model = gtk_tree_model_sort_new_with_model (GTK_TREE_MODEL (theme_store));
   gtk_icon_view_set_model (GTK_ICON_VIEW (w), GTK_TREE_MODEL (sort_model));
