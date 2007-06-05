@@ -112,6 +112,7 @@ PKG_CHECK_MODULES(SOUND_CAPPLET, esound gstreamer-0.10 gstreamer-plugins-base-0.
 SOUND_CAPPLET_LIBS="$SOUND_CAPPLET_LIBS -lgstaudio-0.10 -lgstinterfaces-0.10"
 AC_SUBST(SOUND_CAPPLET_LIBS)
 PKG_CHECK_MODULES(METACITY, libmetacity-private)
+PKG_CHECK_MODULES(TYPING, gconf-2.0 gtk+-2.0)
 
 dnl
 dnl Check for Xft version 2; we build in extra functionality to the font capplet

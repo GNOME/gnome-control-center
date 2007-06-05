@@ -18,20 +18,19 @@ gnome_typing_monitor_CPPFLAGS = \
 	-DIMAGEDIR=\"$(pkgdatadir)/pixmaps\"		\
 	$(AM_CPPFLAGS)
 gnome_typing_monitor_CFLAGS = \
-	@GNOME_CFLAGS@	\
+	@TYPING_CFLAGS@	\
 	$(AM_CFLAGS)
 
-gnome_typing_monitor_LDADD = @GNOME_LIBS@ @SCREENSAVER_LIBS@
-gnome_typing_monitor_LDFLAGS = -export-dynamic
+gnome_typing_monitor_LDADD = @TYPING_LIBS@ @SCREENSAVER_LIBS@
 
 imagedir = $(pkgdatadir)/pixmaps
-image_DATA = stop.png bar.png bar-red.png bar-green.png bar-disabled.png ocean-stripes.png
+dist_image_DATA = stop.png bar.png bar-red.png bar-green.png bar-disabled.png ocean-stripes.png
 
 # Themeable application icon
 icondir = $(datadir)/icons/hicolor/48x48/apps
-icon_DATA = typing-monitor.png
+dist_icon_DATA = typing-monitor.png
 svgicondir = $(datadir)/icons/hicolor/scalable/apps
-svgicon_DATA = typing-monitor.svg
+dist_svgicon_DATA = typing-monitor.svg
 gtk_update_icon_cache = gtk-update-icon-cache -f -t $(datadir)/icons/hicolor
 install-data-hook:
 	@-if test -z "$(DESTDIR)"; then \
@@ -41,7 +40,3 @@ install-data-hook:
 		echo "*** Icon cache not updated.  After install, run this:"; \
 		echo "***   $(gtk_update_icon_cache)"; \
 	fi
-
-EXTRA_DIST = $(image_DATA)   \
-             $(icon_DATA)    \
-             $(svgicon_DATA)

@@ -24,7 +24,6 @@
 #include <glib/gi18n.h>
 #include <gdk/gdkx.h>
 #include <gtk/gtk.h>
-#include <libgnomeui/libgnomeui.h>
 
 #include "drw-selection.h"
 #include "drwright.h"
@@ -62,6 +61,8 @@ main (int argc, char *argv[])
         bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 	
+	gtk_init (&argc, &argv);
+
 	i = 1;
 	while (i < argc) {
 		const gchar *arg = argv[i];
@@ -83,9 +84,6 @@ main (int argc, char *argv[])
 
 	g_set_application_name (_("Typing Monitor"));
 	gtk_window_set_default_icon_name ("typing-monitor");
-
-	gnome_program_init ("typing-break", VERSION, LIBGNOMEUI_MODULE, 
-			    argc, argv, NULL);
 
 	selection = drw_selection_start ();
 	if (!drw_selection_is_master (selection)) {
