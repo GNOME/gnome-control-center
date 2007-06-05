@@ -51,7 +51,7 @@ struct _DrwBreakWindowPrivate {
 
 #define DRW_BREAK_WINDOW_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), DRW_TYPE_BREAK_WINDOW, DrwBreakWindowPrivate))
 
-#define POSTPONE_CANCEL 30*1000
+#define POSTPONE_CANCEL 30
 
 /* Signals */
 enum {
@@ -483,7 +483,7 @@ postpone_entry_key_press_event_cb (GtkEntry       *entry,
 
 	g_source_remove (priv->postpone_timeout_id);
 
-	priv->postpone_timeout_id = g_timeout_add (POSTPONE_CANCEL, (GSourceFunc) postpone_cancel_cb, window);
+	priv->postpone_timeout_id = g_timeout_add_seconds (POSTPONE_CANCEL, (GSourceFunc) postpone_cancel_cb, window);
 
 	return FALSE;
 }
@@ -513,7 +513,7 @@ postpone_clicked_cb (GtkWidget *button,
 
 	gtk_widget_show (priv->postpone_entry);
 
-	priv->postpone_timeout_id = g_timeout_add (POSTPONE_CANCEL, (GSourceFunc) postpone_cancel_cb, bw);
+	priv->postpone_timeout_id = g_timeout_add_seconds (POSTPONE_CANCEL, (GSourceFunc) postpone_cancel_cb, bw);
 
 	grab_on_window (priv->postpone_entry->window,  gtk_get_current_event_time ());
 

@@ -823,13 +823,12 @@ drwright_new (void)
 
 	init_tray_icon (dr);
 	
-	g_timeout_add (10*1000,
+	g_timeout_add_seconds (12,
 		       (GSourceFunc) update_tooltip,
 		       dr);
-	g_timeout_add (500,
+	g_timeout_add_seconds (1,
 		       (GSourceFunc) maybe_change_state,
 		       dr);
 
 	return dr;
 }
-       

@@ -1,5 +1,13 @@
 2007-06-05  Ross Burton  <ross@openedhand.com>
 
+	* drw-monitor.c:
+	* drw-break-window.c:
+	* drwright.c:
+	Use the second-accurate timers instead of the millisecond timers,
+	in an attempt to use less processor time (#443547).
+
+2007-06-05  Ross Burton  <ross@openedhand.com>
+
 	* main.c:
 	* Makefile.am:
 	Don't use libgnome (#443554). Also clean up dist rules.

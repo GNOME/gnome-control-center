@@ -180,7 +180,7 @@ drw_monitor_setup (DrwMonitor *monitor)
 
 	priv->last_activity = time (NULL);
 	
-	priv->timeout_id = g_timeout_add (3000, (GSourceFunc) drw_monitor_timeout, monitor);
+	priv->timeout_id = g_timeout_add_seconds (3, (GSourceFunc) drw_monitor_timeout, monitor);
 	
 	return TRUE;
 }
