@@ -1,3 +1,17 @@
+2007-06-06  Jens Granseuer  <jensgr@gmx.net>
+
+	* appearance-style.c: (style_response_cb), (style_init): don't
+	destroy the window on "delete-event"
+
+	* appearance-themes.c: (theme_load_from_gconf),
+	(theme_thumbnail_generate), (theme_queue_for_thumbnail),
+	(theme_get_selected), (theme_set_custom_from_selected),
+	(theme_remove_custom), (theme_thumbnail_done_cb),
+	(theme_selection_changed_cb), (theme_custom_cb),
+	(theme_details_changed_cb), (themes_init): hook up more of the
+	customization functionality; don't unref generated thumbnails
+	because they are still held in a cache by the thumbnailer
+
 2007-06-05  Jens Granseuer  <jensgr@gmx.net>
 
 	* Makefile.am:

@@ -62,18 +62,26 @@ static void color_button_clicked_cb (GtkWidget *colorbutton, AppearanceData *dat
 static GConfValue *conv_to_widget_cb (GConfPropertyEditor *peditor, const GConfValue *value);
 static GConfValue *conv_from_widget_cb (GConfPropertyEditor *peditor, const GConfValue *value);
 
+static void
+style_response_cb (GtkDialog *dialog, gint response_id)
+{
+  if (response_id == GTK_RESPONSE_HELP) {
+    /* FIXME: help */
+  } else {
+    gtk_widget_hide (GTK_WIDGET (dialog));
+  }
+}
 
 void
 style_init (AppearanceData *data)
 {
-
   GObject *settings;
   gchar *colour_scheme;
   GtkWidget *w;
 
   w = glade_xml_get_widget (data->xml, "theme_details");
-  g_signal_connect_swapped (glade_xml_get_widget (data->xml, "theme_close_button"), "clicked", (GCallback) gtk_widget_hide, w);
-  gtk_widget_hide_on_delete (w);
+  g_signal_connect (w, "response", (GCallback) style_response_cb, NULL);
+  g_signal_connect (w, "delete_event", (GCallback) gtk_true, NULL);
 
   prepare_list (data, glade_xml_get_widget (data->xml, "gtk_themes_list"), GTK_THEMES);
   prepare_list (data, glade_xml_get_widget (data->xml, "window_themes_list"), METACITY_THEMES);
