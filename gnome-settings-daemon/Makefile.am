@@ -30,7 +30,6 @@ gnome_settings_daemon_SOURCES =	\
 	gnome-settings-dbus.h		\
 	gnome-settings-default-editor.c	\
 	gnome-settings-default-editor.h	\
-	gnome-settings-font.h		\
 	gnome-settings-font.c		\
 	gnome-settings-gtk1theme.c      \
 	gnome-settings-gtk1theme.h	\

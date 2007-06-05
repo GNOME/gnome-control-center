@@ -36,7 +36,6 @@
 #include "gnome-settings-xmodmap.h"
 
 /*#include "gnome-settings-disk.h"*/
-#include "gnome-settings-font.h"
 #include "gnome-settings-xsettings.h"
 #include "gnome-settings-mouse.h"
 #include "gnome-settings-keyboard-xkb.h"
@@ -56,6 +55,7 @@ struct _GnomeSettingsDaemonPrivate {
 
 GType gnome_settings_module_background_get_type (void);
 GType gnome_settings_module_clipboard_get_type (void);
+GType gnome_settings_module_font_get_type (void);
 GType gnome_settings_module_screensaver_get_type (void);
 
 static GObjectClass *parent_class = NULL;
@@ -186,6 +186,7 @@ gnome_settings_daemon_init (GnomeSettingsDaemon *settings)
 	/* register all internal modules types */
 	if (!gnome_settings_module_background_get_type ()
 	    || !gnome_settings_module_clipboard_get_type ()
+	    || !gnome_settings_module_font_get_type ()
 	    || !gnome_settings_module_screensaver_get_type ())
 		return;
 
@@ -270,7 +271,6 @@ gnome_settings_daemon_new (void)
 	client = gnome_settings_get_config_client ();
 
         /*  gnome_settings_disk_init (client);*/
-	gnome_settings_font_init (client);
 	gnome_settings_xsettings_init (client);
 	gnome_settings_mouse_init (client);
 	/* Essential - xkb initialization should happen before */
@@ -303,7 +303,6 @@ gnome_settings_daemon_new (void)
 	}
 
 	/*  gnome_settings_disk_load (client);*/
-	gnome_settings_font_load (client);
 	gnome_settings_xsettings_load (client);
 	gnome_settings_mouse_load (client);
 	/* Essential - xkb initialization should happen before */

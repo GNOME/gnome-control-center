@@ -47,9 +47,6 @@ typedef struct {
 	GnomeSettingsModuleClass parent_class;
 } GnomeSettingsModuleScreensaverClass;
 
-static void gnome_settings_module_screensaver_class_init (GnomeSettingsModuleScreensaverClass *klass);
-static void gnome_settings_module_screensaver_init (GnomeSettingsModuleScreensaver *module);
-
 static GnomeSettingsModuleRunlevel gnome_settings_module_screensaver_get_runlevel (GnomeSettingsModule *module);
 static gboolean gnome_settings_module_screensaver_initialize (GnomeSettingsModule *module, GConfClient *config_client);
 static gboolean gnome_settings_module_screensaver_start (GnomeSettingsModule *module);
